@@ -39,9 +39,9 @@ import org.eclipse.etrice.core.fsm.fSM.DetailCode;
  *   <li>{@link org.eclipse.etrice.core.room.DataClass#getUserCode1 <em>User Code1</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.DataClass#getUserCode2 <em>User Code2</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.DataClass#getUserCode3 <em>User Code3</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.room.DataClass#getAttributes <em>Attributes</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.room.DataClass#getStructors <em>Structors</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.DataClass#getOperations <em>Operations</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.DataClass#getStructors <em>Structors</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.DataClass#getAttributes <em>Attributes</em>}</li>
  * </ul>
  * </p>
  *
@@ -172,20 +172,20 @@ public interface DataClass extends ComplexType
   void setUserCode3(DetailCode value);
 
   /**
-   * Returns the value of the '<em><b>Attributes</b></em>' containment reference list.
-   * The list contents are of type {@link org.eclipse.etrice.core.room.Attribute}.
+   * Returns the value of the '<em><b>Operations</b></em>' containment reference list.
+   * The list contents are of type {@link org.eclipse.etrice.core.room.StandardOperation}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * <br>Attributes are the data members of the data class.
+   * <br>Operations are the methods of the data class.
    * 
    * <!-- end-model-doc -->
-   * @return the value of the '<em>Attributes</em>' containment reference list.
-   * @see org.eclipse.etrice.core.room.RoomPackage#getDataClass_Attributes()
+   * @return the value of the '<em>Operations</em>' containment reference list.
+   * @see org.eclipse.etrice.core.room.RoomPackage#getDataClass_Operations()
    * @model containment="true"
    * @generated
    */
-  EList<Attribute> getAttributes();
+  EList<StandardOperation> getOperations();
 
   /**
    * Returns the value of the '<em><b>Structors</b></em>' containment reference list.
@@ -204,19 +204,19 @@ public interface DataClass extends ComplexType
   EList<ClassStructor> getStructors();
 
   /**
-   * Returns the value of the '<em><b>Operations</b></em>' containment reference list.
-   * The list contents are of type {@link org.eclipse.etrice.core.room.StandardOperation}.
+   * Returns the value of the '<em><b>Attributes</b></em>' containment reference list.
+   * The list contents are of type {@link org.eclipse.etrice.core.room.Attribute}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * <br>Operations are the methods of the data class.
+   * <br>Attributes are the data members of the data class.
    * 
    * <!-- end-model-doc -->
-   * @return the value of the '<em>Operations</em>' containment reference list.
-   * @see org.eclipse.etrice.core.room.RoomPackage#getDataClass_Operations()
+   * @return the value of the '<em>Attributes</em>' containment reference list.
+   * @see org.eclipse.etrice.core.room.RoomPackage#getDataClass_Attributes()
    * @model containment="true"
    * @generated
    */
-  EList<StandardOperation> getOperations();
+  EList<Attribute> getAttributes();
 
 } // DataClass

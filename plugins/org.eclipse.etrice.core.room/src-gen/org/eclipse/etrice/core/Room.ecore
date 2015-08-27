@@ -98,16 +98,16 @@
         <details key="documentation" value="&lt;br>This is a list of structure class annotations.&#xD;&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="bindings" upperBound="-1"
-        eType="#//Binding" containment="true">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="&lt;br>This is a list of structure class bindings.&#xD;&#xA;"/>
-      </eAnnotations>
-    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="connections" upperBound="-1"
         eType="#//LayerConnection" containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;br>This is a list of structure class connections.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bindings" upperBound="-1"
+        eType="#//Binding" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is a list of structure class bindings.&#xD;&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
@@ -299,18 +299,18 @@
         <details key="documentation" value="&lt;br>The user code is treated in a generator dependent way.&#xD;&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
-        eType="#//Attribute" containment="true">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="&lt;br>Attributes are the data members of the data class.&#xD;&#xA;"/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="structors" upperBound="-1"
-        eType="#//ClassStructor" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="operations" upperBound="-1"
         eType="#//StandardOperation" containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;br>Operations are the methods of the data class.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="structors" upperBound="-1"
+        eType="#//ClassStructor" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
+        eType="#//Attribute" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>Attributes are the data members of the data class.&#xD;&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
@@ -552,10 +552,10 @@
         <details key="documentation" value="&lt;br>The user code is treated in a generator dependent way.&#xD;&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
-        eType="#//Attribute" containment="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="msgHandlers" upperBound="-1"
+        eType="#//MessageHandler" containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="&lt;br>This is a list of attributes of this nested class.&#xD;&#xA;"/>
+        <details key="documentation" value="&lt;br>This is a list of message handlers.&#xD;&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="operations" upperBound="-1"
@@ -564,10 +564,10 @@
         <details key="documentation" value="&lt;br>This is a list of operations of this nested class.&#xD;&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="msgHandlers" upperBound="-1"
-        eType="#//MessageHandler" containment="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
+        eType="#//Attribute" containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="&lt;br>This is a list of message handlers.&#xD;&#xA;"/>
+        <details key="documentation" value="&lt;br>This is a list of attributes of this nested class.&#xD;&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
@@ -648,6 +648,24 @@
         <details key="documentation" value="&lt;br>This is an optional documentation of the actor structure.&#xD;&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="serviceImplementations"
+        upperBound="-1" eType="#//ServiceImplementation" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is a list of all service implementations.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
+        eType="#//Attribute" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is a list of all actor class private attributes.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="serviceAccessPoints" upperBound="-1"
+        eType="#//SAP" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is a list of all SAPs.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="internalPorts" upperBound="-1"
         eType="#//Port" containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -658,24 +676,6 @@
         eType="#//ExternalPort" containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;br>This is a list containing all ports of the actor interface that are end ports.&#xD;&#xA;"/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="serviceAccessPoints" upperBound="-1"
-        eType="#//SAP" containment="true">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="&lt;br>This is a list of all SAPs.&#xD;&#xA;"/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
-        eType="#//Attribute" containment="true">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="&lt;br>This is a list of all actor class private attributes.&#xD;&#xA;"/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="serviceImplementations"
-        upperBound="-1" eType="#//ServiceImplementation" containment="true">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="&lt;br>This is a list of all service implementations.&#xD;&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="behaviorDocu" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.ecore#//Documentation"
@@ -691,14 +691,14 @@
         <details key="documentation" value="&lt;br>This is a list of annotations to the actor behavior.&#xD;&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="structors" upperBound="-1"
-        eType="#//ClassStructor" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="operations" upperBound="-1"
         eType="#//StandardOperation" containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;br>This is a list of all private operations of this actor class.&#xD;&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="structors" upperBound="-1"
+        eType="#//ClassStructor" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="InterfaceItem" eSuperTypes="platform:/resource/org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//AbstractInterfaceItem">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -848,10 +848,10 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="&lt;br>A sub system class corresponds to a process with a separate address space.&#xD;&#xA;It has no behavior of its own and is composed of {@link ActorClass}es.&#xD;&#xA;&#xD;&#xA;&lt;p>&#xD;&#xA;Sub systems can be connected using {@link Port}s and {@link Binding}s.&#xD;&#xA;All ports of a sub system are relay ports.&#xD;&#xA;&lt;/p>&#xD;&#xA;&#xD;&#xA;&lt;p>&#xD;&#xA;Sub systems can define an arbitrary number of logical threads onto which their actor&#xD;&#xA;instances are mapped.&#xD;&#xA;&lt;/p>&#xD;&#xA;"/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="relayPorts" upperBound="-1"
-        eType="#//Port" containment="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="actorInstanceMappings"
+        upperBound="-1" eType="#//ActorInstanceMapping" containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="&lt;br>This is a list of all relay ports of the sub system.&#xD;&#xA;"/>
+        <details key="documentation" value="&lt;br>This is a list of actor instance mappings.&#xD;&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="threads" upperBound="-1"
@@ -860,10 +860,10 @@
         <details key="documentation" value="&lt;br>This is a list of all actor instance mappings of the sub system.&#xD;&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="actorInstanceMappings"
-        upperBound="-1" eType="#//ActorInstanceMapping" containment="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="relayPorts" upperBound="-1"
+        eType="#//Port" containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="&lt;br>This is a list of actor instance mappings.&#xD;&#xA;"/>
+        <details key="documentation" value="&lt;br>This is a list of all relay ports of the sub system.&#xD;&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>

@@ -3058,14 +3058,14 @@ protected class ExternalType_DocuAssignment_5 extends AssignmentToken  {
  * // TODOHRR: define detail level language?
  * DataClass:
  * 	"DataClass" name=ID docu=Documentation? ("extends" base=[DataClass|FQN])? "{" annotations+=Annotation* ("usercode1"
- * 	userCode1=DetailCode)? ("usercode2" userCode2=DetailCode)? ("usercode3" userCode3=DetailCode)? (attributes+=Attribute
- * 	| structors+=ClassStructor | operations+=StandardOperation)* "}";
+ * 	userCode1=DetailCode)? ("usercode2" userCode2=DetailCode)? ("usercode3" userCode3=DetailCode)?
+ * 	(operations+=StandardOperation | structors+=ClassStructor | attributes+=Attribute)* "}";
  *
  **/
 
 // "DataClass" name=ID docu=Documentation? ("extends" base=[DataClass|FQN])? "{" annotations+=Annotation* ("usercode1"
-// userCode1=DetailCode)? ("usercode2" userCode2=DetailCode)? ("usercode3" userCode3=DetailCode)? (attributes+=Attribute
-// | structors+=ClassStructor | operations+=StandardOperation)* "}"
+// userCode1=DetailCode)? ("usercode2" userCode2=DetailCode)? ("usercode3" userCode3=DetailCode)?
+// (operations+=StandardOperation | structors+=ClassStructor | attributes+=Attribute)* "}"
 protected class DataClass_Group extends GroupToken {
 	
 	public DataClass_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3628,7 +3628,7 @@ protected class DataClass_UserCode3Assignment_8_1 extends AssignmentToken  {
 }
 
 
-// (attributes+=Attribute | structors+=ClassStructor | operations+=StandardOperation)*
+// (operations+=StandardOperation | structors+=ClassStructor | attributes+=Attribute)*
 protected class DataClass_Alternatives_9 extends AlternativesToken {
 
 	public DataClass_Alternatives_9(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3643,44 +3643,44 @@ protected class DataClass_Alternatives_9 extends AlternativesToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new DataClass_AttributesAssignment_9_0(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new DataClass_OperationsAssignment_9_0(lastRuleCallOrigin, this, 0, inst);
 			case 1: return new DataClass_StructorsAssignment_9_1(lastRuleCallOrigin, this, 1, inst);
-			case 2: return new DataClass_OperationsAssignment_9_2(lastRuleCallOrigin, this, 2, inst);
+			case 2: return new DataClass_AttributesAssignment_9_2(lastRuleCallOrigin, this, 2, inst);
 			default: return null;
 		}	
 	}
 
 }
 
-// attributes+=Attribute
-protected class DataClass_AttributesAssignment_9_0 extends AssignmentToken  {
+// operations+=StandardOperation
+protected class DataClass_OperationsAssignment_9_0 extends AssignmentToken  {
 	
-	public DataClass_AttributesAssignment_9_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public DataClass_OperationsAssignment_9_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getDataClassAccess().getAttributesAssignment_9_0();
+		return grammarAccess.getDataClassAccess().getOperationsAssignment_9_0();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Attribute_Group(this, this, 0, inst);
+			case 0: return new StandardOperation_Group(this, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("attributes",true)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("attributes");
+		if((value = eObjectConsumer.getConsumable("operations",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("operations");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getAttributeRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getStandardOperationRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getDataClassAccess().getAttributesAttributeParserRuleCall_9_0_0(); 
+				element = grammarAccess.getDataClassAccess().getOperationsStandardOperationParserRuleCall_9_0_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -3754,35 +3754,35 @@ protected class DataClass_StructorsAssignment_9_1 extends AssignmentToken  {
 	}	
 }
 
-// operations+=StandardOperation
-protected class DataClass_OperationsAssignment_9_2 extends AssignmentToken  {
+// attributes+=Attribute
+protected class DataClass_AttributesAssignment_9_2 extends AssignmentToken  {
 	
-	public DataClass_OperationsAssignment_9_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public DataClass_AttributesAssignment_9_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getDataClassAccess().getOperationsAssignment_9_2();
+		return grammarAccess.getDataClassAccess().getAttributesAssignment_9_2();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new StandardOperation_Group(this, this, 0, inst);
+			case 0: return new Attribute_Group(this, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("operations",true)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("operations");
+		if((value = eObjectConsumer.getConsumable("attributes",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("attributes");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getStandardOperationRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getAttributeRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getDataClassAccess().getOperationsStandardOperationParserRuleCall_9_2_0(); 
+				element = grammarAccess.getDataClassAccess().getAttributesAttributeParserRuleCall_9_2_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -7676,13 +7676,13 @@ protected class Message_DocuAssignment_6 extends AssignmentToken  {
 /************ begin Rule PortClass ****************
  *
  * PortClass:
- * 	{PortClass} "{" ("usercode" userCode=DetailCode)? (attributes+=Attribute | operations+=PortOperation |
- * 	msgHandlers+=MessageHandler)* "}";
+ * 	{PortClass} "{" ("usercode" userCode=DetailCode)? (msgHandlers+=MessageHandler | operations+=PortOperation |
+ * 	attributes+=Attribute)* "}";
  *
  **/
 
-// {PortClass} "{" ("usercode" userCode=DetailCode)? (attributes+=Attribute | operations+=PortOperation |
-// msgHandlers+=MessageHandler)* "}"
+// {PortClass} "{" ("usercode" userCode=DetailCode)? (msgHandlers+=MessageHandler | operations+=PortOperation |
+// attributes+=Attribute)* "}"
 protected class PortClass_Group extends GroupToken {
 	
 	public PortClass_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -7850,7 +7850,7 @@ protected class PortClass_UserCodeAssignment_2_1 extends AssignmentToken  {
 }
 
 
-// (attributes+=Attribute | operations+=PortOperation | msgHandlers+=MessageHandler)*
+// (msgHandlers+=MessageHandler | operations+=PortOperation | attributes+=Attribute)*
 protected class PortClass_Alternatives_3 extends AlternativesToken {
 
 	public PortClass_Alternatives_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -7865,44 +7865,44 @@ protected class PortClass_Alternatives_3 extends AlternativesToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new PortClass_AttributesAssignment_3_0(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new PortClass_MsgHandlersAssignment_3_0(lastRuleCallOrigin, this, 0, inst);
 			case 1: return new PortClass_OperationsAssignment_3_1(lastRuleCallOrigin, this, 1, inst);
-			case 2: return new PortClass_MsgHandlersAssignment_3_2(lastRuleCallOrigin, this, 2, inst);
+			case 2: return new PortClass_AttributesAssignment_3_2(lastRuleCallOrigin, this, 2, inst);
 			default: return null;
 		}	
 	}
 
 }
 
-// attributes+=Attribute
-protected class PortClass_AttributesAssignment_3_0 extends AssignmentToken  {
+// msgHandlers+=MessageHandler
+protected class PortClass_MsgHandlersAssignment_3_0 extends AssignmentToken  {
 	
-	public PortClass_AttributesAssignment_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public PortClass_MsgHandlersAssignment_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getPortClassAccess().getAttributesAssignment_3_0();
+		return grammarAccess.getPortClassAccess().getMsgHandlersAssignment_3_0();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Attribute_Group(this, this, 0, inst);
+			case 0: return new MessageHandler_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("attributes",true)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("attributes");
+		if((value = eObjectConsumer.getConsumable("msgHandlers",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("msgHandlers");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getAttributeRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getMessageHandlerRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getPortClassAccess().getAttributesAttributeParserRuleCall_3_0_0(); 
+				element = grammarAccess.getPortClassAccess().getMsgHandlersMessageHandlerParserRuleCall_3_0_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -7970,35 +7970,35 @@ protected class PortClass_OperationsAssignment_3_1 extends AssignmentToken  {
 	}	
 }
 
-// msgHandlers+=MessageHandler
-protected class PortClass_MsgHandlersAssignment_3_2 extends AssignmentToken  {
+// attributes+=Attribute
+protected class PortClass_AttributesAssignment_3_2 extends AssignmentToken  {
 	
-	public PortClass_MsgHandlersAssignment_3_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public PortClass_AttributesAssignment_3_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getPortClassAccess().getMsgHandlersAssignment_3_2();
+		return grammarAccess.getPortClassAccess().getAttributesAssignment_3_2();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new MessageHandler_Alternatives(this, this, 0, inst);
+			case 0: return new Attribute_Group(this, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("msgHandlers",true)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("msgHandlers");
+		if((value = eObjectConsumer.getConsumable("attributes",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("attributes");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getMessageHandlerRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getAttributeRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getPortClassAccess().getMsgHandlersMessageHandlerParserRuleCall_3_2_0(); 
+				element = grammarAccess.getPortClassAccess().getAttributesAttributeParserRuleCall_3_2_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -8552,24 +8552,24 @@ protected class ModelComponent_ActorClassParserRuleCall extends RuleCallToken {
  * // since double containment is not supported we decided to define external ports as reference to interface ports
  * ActorClass:
  * 	(abstract?="abstract"? & commType=ComponentCommunicationType?) "ActorClass" name=ID docu=Documentation? ("extends"
- * 	base=[ActorClass|FQN])? "{" annotations+=Annotation* ("Interface" "{" (interfacePorts+=Port |
- * 	serviceProvisionPoints+=SPP)* "}")? ("Structure" structureDocu=Documentation? "{" ("usercode1" userCode1=DetailCode)?
- * 	("usercode2" userCode2=DetailCode)? ("usercode3" userCode3=DetailCode)? (internalPorts+=Port |
- * 	externalPorts+=ExternalPort | serviceAccessPoints+=SAP | attributes+=Attribute | actorRefs+=ActorRef |
- * 	serviceImplementations+=ServiceImplementation | bindings+=Binding | connections+=LayerConnection)* "}")? ("Behavior"
- * 	behaviorDocu=Documentation? "{" behaviorAnnotations+=Annotation* (structors+=ClassStructor |
- * 	operations+=StandardOperation)* stateMachine=StateMachine? "}")? "}";
+ * 	base=[ActorClass|FQN])? "{" annotations+=Annotation* ("Interface" "{" (serviceProvisionPoints+=SPP |
+ * 	interfacePorts+=Port)* "}")? ("Structure" structureDocu=Documentation? "{" ("usercode1" userCode1=DetailCode)?
+ * 	("usercode2" userCode2=DetailCode)? ("usercode3" userCode3=DetailCode)? // workaround: reverse the order for serializer
+ * 	(connections+=LayerConnection | bindings+=Binding | serviceImplementations+=ServiceImplementation |
+ * 	attributes+=Attribute | actorRefs+=ActorRef | serviceAccessPoints+=SAP | internalPorts+=Port |
+ * 	externalPorts+=ExternalPort)* "}")? ("Behavior" behaviorDocu=Documentation? "{" behaviorAnnotations+=Annotation*
+ * 	(operations+=StandardOperation | structors+=ClassStructor)* stateMachine=StateMachine? "}")? "}";
  *
  **/
 
 // (abstract?="abstract"? & commType=ComponentCommunicationType?) "ActorClass" name=ID docu=Documentation? ("extends"
-// base=[ActorClass|FQN])? "{" annotations+=Annotation* ("Interface" "{" (interfacePorts+=Port |
-// serviceProvisionPoints+=SPP)* "}")? ("Structure" structureDocu=Documentation? "{" ("usercode1" userCode1=DetailCode)?
-// ("usercode2" userCode2=DetailCode)? ("usercode3" userCode3=DetailCode)? (internalPorts+=Port |
-// externalPorts+=ExternalPort | serviceAccessPoints+=SAP | attributes+=Attribute | actorRefs+=ActorRef |
-// serviceImplementations+=ServiceImplementation | bindings+=Binding | connections+=LayerConnection)* "}")? ("Behavior"
-// behaviorDocu=Documentation? "{" behaviorAnnotations+=Annotation* (structors+=ClassStructor |
-// operations+=StandardOperation)* stateMachine=StateMachine? "}")? "}"
+// base=[ActorClass|FQN])? "{" annotations+=Annotation* ("Interface" "{" (serviceProvisionPoints+=SPP |
+// interfacePorts+=Port)* "}")? ("Structure" structureDocu=Documentation? "{" ("usercode1" userCode1=DetailCode)?
+// ("usercode2" userCode2=DetailCode)? ("usercode3" userCode3=DetailCode)? // workaround: reverse the order for serializer
+// (connections+=LayerConnection | bindings+=Binding | serviceImplementations+=ServiceImplementation |
+// attributes+=Attribute | actorRefs+=ActorRef | serviceAccessPoints+=SAP | internalPorts+=Port |
+// externalPorts+=ExternalPort)* "}")? ("Behavior" behaviorDocu=Documentation? "{" behaviorAnnotations+=Annotation*
+// (operations+=StandardOperation | structors+=ClassStructor)* stateMachine=StateMachine? "}")? "}"
 protected class ActorClass_Group extends GroupToken {
 	
 	public ActorClass_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -8945,7 +8945,7 @@ protected class ActorClass_AnnotationsAssignment_6 extends AssignmentToken  {
 	}	
 }
 
-// ("Interface" "{" (interfacePorts+=Port | serviceProvisionPoints+=SPP)* "}")?
+// ("Interface" "{" (serviceProvisionPoints+=SPP | interfacePorts+=Port)* "}")?
 protected class ActorClass_Group_7 extends GroupToken {
 	
 	public ActorClass_Group_7(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -9012,7 +9012,7 @@ protected class ActorClass_LeftCurlyBracketKeyword_7_1 extends KeywordToken  {
 
 }
 
-// (interfacePorts+=Port | serviceProvisionPoints+=SPP)*
+// (serviceProvisionPoints+=SPP | interfacePorts+=Port)*
 protected class ActorClass_Alternatives_7_2 extends AlternativesToken {
 
 	public ActorClass_Alternatives_7_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -9027,71 +9027,24 @@ protected class ActorClass_Alternatives_7_2 extends AlternativesToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new ActorClass_InterfacePortsAssignment_7_2_0(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new ActorClass_ServiceProvisionPointsAssignment_7_2_1(lastRuleCallOrigin, this, 1, inst);
+			case 0: return new ActorClass_ServiceProvisionPointsAssignment_7_2_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new ActorClass_InterfacePortsAssignment_7_2_1(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
 
-}
-
-// interfacePorts+=Port
-protected class ActorClass_InterfacePortsAssignment_7_2_0 extends AssignmentToken  {
-	
-	public ActorClass_InterfacePortsAssignment_7_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
-		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
-	}
-	
-	@Override
-	public Assignment getGrammarElement() {
-		return grammarAccess.getActorClassAccess().getInterfacePortsAssignment_7_2_0();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
-		switch(index) {
-			case 0: return new Port_Group(this, this, 0, inst);
-			default: return null;
-		}	
-	}
-
-    @Override	
-	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("interfacePorts",true)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("interfacePorts");
-		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
-			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getPortRule().getType().getClassifier())) {
-				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getActorClassAccess().getInterfacePortsPortParserRuleCall_7_2_0_0(); 
-				consumed = obj;
-				return param;
-			}
-		}
-		return null;
-	}
-
-    @Override
-	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
-		if(value == inst.getEObject() && !inst.isConsumed()) return null;
-		switch(index) {
-			case 0: return new ActorClass_Alternatives_7_2(lastRuleCallOrigin, next, actIndex, consumed);
-			case 1: return new ActorClass_LeftCurlyBracketKeyword_7_1(lastRuleCallOrigin, next, actIndex, consumed);
-			default: return null;
-		}	
-	}	
 }
 
 // serviceProvisionPoints+=SPP
-protected class ActorClass_ServiceProvisionPointsAssignment_7_2_1 extends AssignmentToken  {
+protected class ActorClass_ServiceProvisionPointsAssignment_7_2_0 extends AssignmentToken  {
 	
-	public ActorClass_ServiceProvisionPointsAssignment_7_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public ActorClass_ServiceProvisionPointsAssignment_7_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getActorClassAccess().getServiceProvisionPointsAssignment_7_2_1();
+		return grammarAccess.getActorClassAccess().getServiceProvisionPointsAssignment_7_2_0();
 	}
 
     @Override
@@ -9110,7 +9063,54 @@ protected class ActorClass_ServiceProvisionPointsAssignment_7_2_1 extends Assign
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getSPPRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getActorClassAccess().getServiceProvisionPointsSPPParserRuleCall_7_2_1_0(); 
+				element = grammarAccess.getActorClassAccess().getServiceProvisionPointsSPPParserRuleCall_7_2_0_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
+		switch(index) {
+			case 0: return new ActorClass_Alternatives_7_2(lastRuleCallOrigin, next, actIndex, consumed);
+			case 1: return new ActorClass_LeftCurlyBracketKeyword_7_1(lastRuleCallOrigin, next, actIndex, consumed);
+			default: return null;
+		}	
+	}	
+}
+
+// interfacePorts+=Port
+protected class ActorClass_InterfacePortsAssignment_7_2_1 extends AssignmentToken  {
+	
+	public ActorClass_InterfacePortsAssignment_7_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getActorClassAccess().getInterfacePortsAssignment_7_2_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Port_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("interfacePorts",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("interfacePorts");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getPortRule().getType().getClassifier())) {
+				type = AssignmentType.PARSER_RULE_CALL;
+				element = grammarAccess.getActorClassAccess().getInterfacePortsPortParserRuleCall_7_2_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -9154,9 +9154,10 @@ protected class ActorClass_RightCurlyBracketKeyword_7_3 extends KeywordToken  {
 
 
 // ("Structure" structureDocu=Documentation? "{" ("usercode1" userCode1=DetailCode)? ("usercode2" userCode2=DetailCode)?
-// ("usercode3" userCode3=DetailCode)? (internalPorts+=Port | externalPorts+=ExternalPort | serviceAccessPoints+=SAP |
-// attributes+=Attribute | actorRefs+=ActorRef | serviceImplementations+=ServiceImplementation | bindings+=Binding |
-// connections+=LayerConnection)* "}")?
+// ("usercode3" userCode3=DetailCode)? // workaround: reverse the order for serializer
+// (connections+=LayerConnection | bindings+=Binding | serviceImplementations+=ServiceImplementation |
+// attributes+=Attribute | actorRefs+=ActorRef | serviceAccessPoints+=SAP | internalPorts+=Port |
+// externalPorts+=ExternalPort)* "}")?
 protected class ActorClass_Group_8 extends GroupToken {
 	
 	public ActorClass_Group_8(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -9547,9 +9548,10 @@ protected class ActorClass_UserCode3Assignment_8_5_1 extends AssignmentToken  {
 }
 
 
-// (internalPorts+=Port | externalPorts+=ExternalPort | serviceAccessPoints+=SAP | attributes+=Attribute |
-// actorRefs+=ActorRef | serviceImplementations+=ServiceImplementation | bindings+=Binding |
-// connections+=LayerConnection)*
+// // workaround: reverse the order for serializer
+// (connections+=LayerConnection | bindings+=Binding | serviceImplementations+=ServiceImplementation |
+// attributes+=Attribute | actorRefs+=ActorRef | serviceAccessPoints+=SAP | internalPorts+=Port |
+// externalPorts+=ExternalPort)*
 protected class ActorClass_Alternatives_8_6 extends AlternativesToken {
 
 	public ActorClass_Alternatives_8_6(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -9564,49 +9566,50 @@ protected class ActorClass_Alternatives_8_6 extends AlternativesToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new ActorClass_InternalPortsAssignment_8_6_0(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new ActorClass_ExternalPortsAssignment_8_6_1(lastRuleCallOrigin, this, 1, inst);
-			case 2: return new ActorClass_ServiceAccessPointsAssignment_8_6_2(lastRuleCallOrigin, this, 2, inst);
+			case 0: return new ActorClass_ConnectionsAssignment_8_6_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new ActorClass_BindingsAssignment_8_6_1(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new ActorClass_ServiceImplementationsAssignment_8_6_2(lastRuleCallOrigin, this, 2, inst);
 			case 3: return new ActorClass_AttributesAssignment_8_6_3(lastRuleCallOrigin, this, 3, inst);
 			case 4: return new ActorClass_ActorRefsAssignment_8_6_4(lastRuleCallOrigin, this, 4, inst);
-			case 5: return new ActorClass_ServiceImplementationsAssignment_8_6_5(lastRuleCallOrigin, this, 5, inst);
-			case 6: return new ActorClass_BindingsAssignment_8_6_6(lastRuleCallOrigin, this, 6, inst);
-			case 7: return new ActorClass_ConnectionsAssignment_8_6_7(lastRuleCallOrigin, this, 7, inst);
+			case 5: return new ActorClass_ServiceAccessPointsAssignment_8_6_5(lastRuleCallOrigin, this, 5, inst);
+			case 6: return new ActorClass_InternalPortsAssignment_8_6_6(lastRuleCallOrigin, this, 6, inst);
+			case 7: return new ActorClass_ExternalPortsAssignment_8_6_7(lastRuleCallOrigin, this, 7, inst);
 			default: return null;
 		}	
 	}
 
 }
 
-// internalPorts+=Port
-protected class ActorClass_InternalPortsAssignment_8_6_0 extends AssignmentToken  {
+// // workaround: reverse the order for serializer
+// connections+=LayerConnection
+protected class ActorClass_ConnectionsAssignment_8_6_0 extends AssignmentToken  {
 	
-	public ActorClass_InternalPortsAssignment_8_6_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public ActorClass_ConnectionsAssignment_8_6_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getActorClassAccess().getInternalPortsAssignment_8_6_0();
+		return grammarAccess.getActorClassAccess().getConnectionsAssignment_8_6_0();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Port_Group(this, this, 0, inst);
+			case 0: return new LayerConnection_Group(this, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("internalPorts",true)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("internalPorts");
+		if((value = eObjectConsumer.getConsumable("connections",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("connections");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getPortRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getLayerConnectionRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getActorClassAccess().getInternalPortsPortParserRuleCall_8_6_0_0(); 
+				element = grammarAccess.getActorClassAccess().getConnectionsLayerConnectionParserRuleCall_8_6_0_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -9628,35 +9631,35 @@ protected class ActorClass_InternalPortsAssignment_8_6_0 extends AssignmentToken
 	}	
 }
 
-// externalPorts+=ExternalPort
-protected class ActorClass_ExternalPortsAssignment_8_6_1 extends AssignmentToken  {
+// bindings+=Binding
+protected class ActorClass_BindingsAssignment_8_6_1 extends AssignmentToken  {
 	
-	public ActorClass_ExternalPortsAssignment_8_6_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public ActorClass_BindingsAssignment_8_6_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getActorClassAccess().getExternalPortsAssignment_8_6_1();
+		return grammarAccess.getActorClassAccess().getBindingsAssignment_8_6_1();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new ExternalPort_Group(this, this, 0, inst);
+			case 0: return new Binding_Group(this, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("externalPorts",true)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("externalPorts");
+		if((value = eObjectConsumer.getConsumable("bindings",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("bindings");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getExternalPortRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getBindingRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getActorClassAccess().getExternalPortsExternalPortParserRuleCall_8_6_1_0(); 
+				element = grammarAccess.getActorClassAccess().getBindingsBindingParserRuleCall_8_6_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -9678,35 +9681,35 @@ protected class ActorClass_ExternalPortsAssignment_8_6_1 extends AssignmentToken
 	}	
 }
 
-// serviceAccessPoints+=SAP
-protected class ActorClass_ServiceAccessPointsAssignment_8_6_2 extends AssignmentToken  {
+// serviceImplementations+=ServiceImplementation
+protected class ActorClass_ServiceImplementationsAssignment_8_6_2 extends AssignmentToken  {
 	
-	public ActorClass_ServiceAccessPointsAssignment_8_6_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public ActorClass_ServiceImplementationsAssignment_8_6_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getActorClassAccess().getServiceAccessPointsAssignment_8_6_2();
+		return grammarAccess.getActorClassAccess().getServiceImplementationsAssignment_8_6_2();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new SAP_Group(this, this, 0, inst);
+			case 0: return new ServiceImplementation_Group(this, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("serviceAccessPoints",true)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("serviceAccessPoints");
+		if((value = eObjectConsumer.getConsumable("serviceImplementations",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("serviceImplementations");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getSAPRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getServiceImplementationRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getActorClassAccess().getServiceAccessPointsSAPParserRuleCall_8_6_2_0(); 
+				element = grammarAccess.getActorClassAccess().getServiceImplementationsServiceImplementationParserRuleCall_8_6_2_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -9828,35 +9831,35 @@ protected class ActorClass_ActorRefsAssignment_8_6_4 extends AssignmentToken  {
 	}	
 }
 
-// serviceImplementations+=ServiceImplementation
-protected class ActorClass_ServiceImplementationsAssignment_8_6_5 extends AssignmentToken  {
+// serviceAccessPoints+=SAP
+protected class ActorClass_ServiceAccessPointsAssignment_8_6_5 extends AssignmentToken  {
 	
-	public ActorClass_ServiceImplementationsAssignment_8_6_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public ActorClass_ServiceAccessPointsAssignment_8_6_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getActorClassAccess().getServiceImplementationsAssignment_8_6_5();
+		return grammarAccess.getActorClassAccess().getServiceAccessPointsAssignment_8_6_5();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new ServiceImplementation_Group(this, this, 0, inst);
+			case 0: return new SAP_Group(this, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("serviceImplementations",true)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("serviceImplementations");
+		if((value = eObjectConsumer.getConsumable("serviceAccessPoints",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("serviceAccessPoints");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getServiceImplementationRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getSAPRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getActorClassAccess().getServiceImplementationsServiceImplementationParserRuleCall_8_6_5_0(); 
+				element = grammarAccess.getActorClassAccess().getServiceAccessPointsSAPParserRuleCall_8_6_5_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -9878,35 +9881,35 @@ protected class ActorClass_ServiceImplementationsAssignment_8_6_5 extends Assign
 	}	
 }
 
-// bindings+=Binding
-protected class ActorClass_BindingsAssignment_8_6_6 extends AssignmentToken  {
+// internalPorts+=Port
+protected class ActorClass_InternalPortsAssignment_8_6_6 extends AssignmentToken  {
 	
-	public ActorClass_BindingsAssignment_8_6_6(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public ActorClass_InternalPortsAssignment_8_6_6(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getActorClassAccess().getBindingsAssignment_8_6_6();
+		return grammarAccess.getActorClassAccess().getInternalPortsAssignment_8_6_6();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Binding_Group(this, this, 0, inst);
+			case 0: return new Port_Group(this, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("bindings",true)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("bindings");
+		if((value = eObjectConsumer.getConsumable("internalPorts",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("internalPorts");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getBindingRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getPortRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getActorClassAccess().getBindingsBindingParserRuleCall_8_6_6_0(); 
+				element = grammarAccess.getActorClassAccess().getInternalPortsPortParserRuleCall_8_6_6_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -9928,35 +9931,35 @@ protected class ActorClass_BindingsAssignment_8_6_6 extends AssignmentToken  {
 	}	
 }
 
-// connections+=LayerConnection
-protected class ActorClass_ConnectionsAssignment_8_6_7 extends AssignmentToken  {
+// externalPorts+=ExternalPort
+protected class ActorClass_ExternalPortsAssignment_8_6_7 extends AssignmentToken  {
 	
-	public ActorClass_ConnectionsAssignment_8_6_7(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public ActorClass_ExternalPortsAssignment_8_6_7(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getActorClassAccess().getConnectionsAssignment_8_6_7();
+		return grammarAccess.getActorClassAccess().getExternalPortsAssignment_8_6_7();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new LayerConnection_Group(this, this, 0, inst);
+			case 0: return new ExternalPort_Group(this, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("connections",true)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("connections");
+		if((value = eObjectConsumer.getConsumable("externalPorts",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("externalPorts");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getLayerConnectionRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getExternalPortRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getActorClassAccess().getConnectionsLayerConnectionParserRuleCall_8_6_7_0(); 
+				element = grammarAccess.getActorClassAccess().getExternalPortsExternalPortParserRuleCall_8_6_7_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -10006,8 +10009,8 @@ protected class ActorClass_RightCurlyBracketKeyword_8_7 extends KeywordToken  {
 }
 
 
-// ("Behavior" behaviorDocu=Documentation? "{" behaviorAnnotations+=Annotation* (structors+=ClassStructor |
-// operations+=StandardOperation)* stateMachine=StateMachine? "}")?
+// ("Behavior" behaviorDocu=Documentation? "{" behaviorAnnotations+=Annotation* (operations+=StandardOperation |
+// structors+=ClassStructor)* stateMachine=StateMachine? "}")?
 protected class ActorClass_Group_9 extends GroupToken {
 	
 	public ActorClass_Group_9(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -10170,7 +10173,7 @@ protected class ActorClass_BehaviorAnnotationsAssignment_9_3 extends AssignmentT
 	}	
 }
 
-// (structors+=ClassStructor | operations+=StandardOperation)*
+// (operations+=StandardOperation | structors+=ClassStructor)*
 protected class ActorClass_Alternatives_9_4 extends AlternativesToken {
 
 	public ActorClass_Alternatives_9_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -10185,43 +10188,43 @@ protected class ActorClass_Alternatives_9_4 extends AlternativesToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new ActorClass_StructorsAssignment_9_4_0(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new ActorClass_OperationsAssignment_9_4_1(lastRuleCallOrigin, this, 1, inst);
+			case 0: return new ActorClass_OperationsAssignment_9_4_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new ActorClass_StructorsAssignment_9_4_1(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
 
 }
 
-// structors+=ClassStructor
-protected class ActorClass_StructorsAssignment_9_4_0 extends AssignmentToken  {
+// operations+=StandardOperation
+protected class ActorClass_OperationsAssignment_9_4_0 extends AssignmentToken  {
 	
-	public ActorClass_StructorsAssignment_9_4_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public ActorClass_OperationsAssignment_9_4_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getActorClassAccess().getStructorsAssignment_9_4_0();
+		return grammarAccess.getActorClassAccess().getOperationsAssignment_9_4_0();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new ClassStructor_Group(this, this, 0, inst);
+			case 0: return new StandardOperation_Group(this, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("structors",true)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("structors");
+		if((value = eObjectConsumer.getConsumable("operations",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("operations");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getClassStructorRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getStandardOperationRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getActorClassAccess().getStructorsClassStructorParserRuleCall_9_4_0_0(); 
+				element = grammarAccess.getActorClassAccess().getOperationsStandardOperationParserRuleCall_9_4_0_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -10241,35 +10244,35 @@ protected class ActorClass_StructorsAssignment_9_4_0 extends AssignmentToken  {
 	}	
 }
 
-// operations+=StandardOperation
-protected class ActorClass_OperationsAssignment_9_4_1 extends AssignmentToken  {
+// structors+=ClassStructor
+protected class ActorClass_StructorsAssignment_9_4_1 extends AssignmentToken  {
 	
-	public ActorClass_OperationsAssignment_9_4_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public ActorClass_StructorsAssignment_9_4_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getActorClassAccess().getOperationsAssignment_9_4_1();
+		return grammarAccess.getActorClassAccess().getStructorsAssignment_9_4_1();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new StandardOperation_Group(this, this, 0, inst);
+			case 0: return new ClassStructor_Group(this, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("operations",true)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("operations");
+		if((value = eObjectConsumer.getConsumable("structors",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("structors");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getStandardOperationRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getClassStructorRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getActorClassAccess().getOperationsStandardOperationParserRuleCall_9_4_1_0(); 
+				element = grammarAccess.getActorClassAccess().getStructorsClassStructorParserRuleCall_9_4_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -11369,13 +11372,13 @@ protected class ServiceImplementation_SppAssignment_2 extends AssignmentToken  {
 /************ begin Rule LogicalSystem ****************
  *
  * LogicalSystem:
- * 	"LogicalSystem" name=ID docu=Documentation? "{" annotations+=Annotation* (subSystems+=SubSystemRef |
- * 	bindings+=Binding | connections+=LayerConnection)* "}";
+ * 	"LogicalSystem" name=ID docu=Documentation? "{" annotations+=Annotation* (connections+=LayerConnection |
+ * 	bindings+=Binding | subSystems+=SubSystemRef)* "}";
  *
  **/
 
-// "LogicalSystem" name=ID docu=Documentation? "{" annotations+=Annotation* (subSystems+=SubSystemRef | bindings+=Binding |
-// connections+=LayerConnection)* "}"
+// "LogicalSystem" name=ID docu=Documentation? "{" annotations+=Annotation* (connections+=LayerConnection |
+// bindings+=Binding | subSystems+=SubSystemRef)* "}"
 protected class LogicalSystem_Group extends GroupToken {
 	
 	public LogicalSystem_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -11575,7 +11578,7 @@ protected class LogicalSystem_AnnotationsAssignment_4 extends AssignmentToken  {
 	}	
 }
 
-// (subSystems+=SubSystemRef | bindings+=Binding | connections+=LayerConnection)*
+// (connections+=LayerConnection | bindings+=Binding | subSystems+=SubSystemRef)*
 protected class LogicalSystem_Alternatives_5 extends AlternativesToken {
 
 	public LogicalSystem_Alternatives_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -11590,44 +11593,44 @@ protected class LogicalSystem_Alternatives_5 extends AlternativesToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new LogicalSystem_SubSystemsAssignment_5_0(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new LogicalSystem_ConnectionsAssignment_5_0(lastRuleCallOrigin, this, 0, inst);
 			case 1: return new LogicalSystem_BindingsAssignment_5_1(lastRuleCallOrigin, this, 1, inst);
-			case 2: return new LogicalSystem_ConnectionsAssignment_5_2(lastRuleCallOrigin, this, 2, inst);
+			case 2: return new LogicalSystem_SubSystemsAssignment_5_2(lastRuleCallOrigin, this, 2, inst);
 			default: return null;
 		}	
 	}
 
 }
 
-// subSystems+=SubSystemRef
-protected class LogicalSystem_SubSystemsAssignment_5_0 extends AssignmentToken  {
+// connections+=LayerConnection
+protected class LogicalSystem_ConnectionsAssignment_5_0 extends AssignmentToken  {
 	
-	public LogicalSystem_SubSystemsAssignment_5_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public LogicalSystem_ConnectionsAssignment_5_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getLogicalSystemAccess().getSubSystemsAssignment_5_0();
+		return grammarAccess.getLogicalSystemAccess().getConnectionsAssignment_5_0();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new SubSystemRef_Group(this, this, 0, inst);
+			case 0: return new LayerConnection_Group(this, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("subSystems",true)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("subSystems");
+		if((value = eObjectConsumer.getConsumable("connections",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("connections");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getSubSystemRefRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getLayerConnectionRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getLogicalSystemAccess().getSubSystemsSubSystemRefParserRuleCall_5_0_0(); 
+				element = grammarAccess.getLogicalSystemAccess().getConnectionsLayerConnectionParserRuleCall_5_0_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -11695,35 +11698,35 @@ protected class LogicalSystem_BindingsAssignment_5_1 extends AssignmentToken  {
 	}	
 }
 
-// connections+=LayerConnection
-protected class LogicalSystem_ConnectionsAssignment_5_2 extends AssignmentToken  {
+// subSystems+=SubSystemRef
+protected class LogicalSystem_SubSystemsAssignment_5_2 extends AssignmentToken  {
 	
-	public LogicalSystem_ConnectionsAssignment_5_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public LogicalSystem_SubSystemsAssignment_5_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getLogicalSystemAccess().getConnectionsAssignment_5_2();
+		return grammarAccess.getLogicalSystemAccess().getSubSystemsAssignment_5_2();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new LayerConnection_Group(this, this, 0, inst);
+			case 0: return new SubSystemRef_Group(this, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("connections",true)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("connections");
+		if((value = eObjectConsumer.getConsumable("subSystems",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("subSystems");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getLayerConnectionRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getSubSystemRefRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getLogicalSystemAccess().getConnectionsLayerConnectionParserRuleCall_5_2_0(); 
+				element = grammarAccess.getLogicalSystemAccess().getSubSystemsSubSystemRefParserRuleCall_5_2_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -12091,16 +12094,16 @@ protected class SubSystemRef_DocuAssignment_4 extends AssignmentToken  {
  *
  * SubSystemClass:
  * 	"SubSystemClass" name=ID docu=Documentation? "{" annotations+=Annotation* ("usercode1" userCode1=DetailCode)?
- * 	("usercode2" userCode2=DetailCode)? ("usercode3" userCode3=DetailCode)? (relayPorts+=Port |
- * 	serviceProvisionPoints+=SPP | actorRefs+=ActorRef | bindings+=Binding | connections+=LayerConnection |
- * 	threads+=LogicalThread | actorInstanceMappings+=ActorInstanceMapping)* "}";
+ * 	("usercode2" userCode2=DetailCode)? ("usercode3" userCode3=DetailCode)? // workaround: reverse the order for serializer
+ * 	(actorInstanceMappings+=ActorInstanceMapping | threads+=LogicalThread | connections+=LayerConnection |
+ * 	bindings+=Binding | actorRefs+=ActorRef | serviceProvisionPoints+=SPP | relayPorts+=Port)* "}";
  *
  **/
 
 // "SubSystemClass" name=ID docu=Documentation? "{" annotations+=Annotation* ("usercode1" userCode1=DetailCode)?
-// ("usercode2" userCode2=DetailCode)? ("usercode3" userCode3=DetailCode)? (relayPorts+=Port |
-// serviceProvisionPoints+=SPP | actorRefs+=ActorRef | bindings+=Binding | connections+=LayerConnection |
-// threads+=LogicalThread | actorInstanceMappings+=ActorInstanceMapping)* "}"
+// ("usercode2" userCode2=DetailCode)? ("usercode3" userCode3=DetailCode)? // workaround: reverse the order for serializer
+// (actorInstanceMappings+=ActorInstanceMapping | threads+=LogicalThread | connections+=LayerConnection | bindings+=Binding
+// | actorRefs+=ActorRef | serviceProvisionPoints+=SPP | relayPorts+=Port)* "}"
 protected class SubSystemClass_Group extends GroupToken {
 	
 	public SubSystemClass_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -12579,8 +12582,9 @@ protected class SubSystemClass_UserCode3Assignment_7_1 extends AssignmentToken  
 }
 
 
-// (relayPorts+=Port | serviceProvisionPoints+=SPP | actorRefs+=ActorRef | bindings+=Binding | connections+=LayerConnection
-// | threads+=LogicalThread | actorInstanceMappings+=ActorInstanceMapping)*
+// // workaround: reverse the order for serializer
+// (actorInstanceMappings+=ActorInstanceMapping | threads+=LogicalThread | connections+=LayerConnection | bindings+=Binding
+// | actorRefs+=ActorRef | serviceProvisionPoints+=SPP | relayPorts+=Port)*
 protected class SubSystemClass_Alternatives_8 extends AlternativesToken {
 
 	public SubSystemClass_Alternatives_8(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -12595,48 +12599,49 @@ protected class SubSystemClass_Alternatives_8 extends AlternativesToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new SubSystemClass_RelayPortsAssignment_8_0(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new SubSystemClass_ServiceProvisionPointsAssignment_8_1(lastRuleCallOrigin, this, 1, inst);
-			case 2: return new SubSystemClass_ActorRefsAssignment_8_2(lastRuleCallOrigin, this, 2, inst);
+			case 0: return new SubSystemClass_ActorInstanceMappingsAssignment_8_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new SubSystemClass_ThreadsAssignment_8_1(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new SubSystemClass_ConnectionsAssignment_8_2(lastRuleCallOrigin, this, 2, inst);
 			case 3: return new SubSystemClass_BindingsAssignment_8_3(lastRuleCallOrigin, this, 3, inst);
-			case 4: return new SubSystemClass_ConnectionsAssignment_8_4(lastRuleCallOrigin, this, 4, inst);
-			case 5: return new SubSystemClass_ThreadsAssignment_8_5(lastRuleCallOrigin, this, 5, inst);
-			case 6: return new SubSystemClass_ActorInstanceMappingsAssignment_8_6(lastRuleCallOrigin, this, 6, inst);
+			case 4: return new SubSystemClass_ActorRefsAssignment_8_4(lastRuleCallOrigin, this, 4, inst);
+			case 5: return new SubSystemClass_ServiceProvisionPointsAssignment_8_5(lastRuleCallOrigin, this, 5, inst);
+			case 6: return new SubSystemClass_RelayPortsAssignment_8_6(lastRuleCallOrigin, this, 6, inst);
 			default: return null;
 		}	
 	}
 
 }
 
-// relayPorts+=Port
-protected class SubSystemClass_RelayPortsAssignment_8_0 extends AssignmentToken  {
+// // workaround: reverse the order for serializer
+// actorInstanceMappings+=ActorInstanceMapping
+protected class SubSystemClass_ActorInstanceMappingsAssignment_8_0 extends AssignmentToken  {
 	
-	public SubSystemClass_RelayPortsAssignment_8_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public SubSystemClass_ActorInstanceMappingsAssignment_8_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getSubSystemClassAccess().getRelayPortsAssignment_8_0();
+		return grammarAccess.getSubSystemClassAccess().getActorInstanceMappingsAssignment_8_0();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Port_Group(this, this, 0, inst);
+			case 0: return new ActorInstanceMapping_Group(this, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("relayPorts",true)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("relayPorts");
+		if((value = eObjectConsumer.getConsumable("actorInstanceMappings",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("actorInstanceMappings");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getPortRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getActorInstanceMappingRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getSubSystemClassAccess().getRelayPortsPortParserRuleCall_8_0_0(); 
+				element = grammarAccess.getSubSystemClassAccess().getActorInstanceMappingsActorInstanceMappingParserRuleCall_8_0_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -12659,35 +12664,35 @@ protected class SubSystemClass_RelayPortsAssignment_8_0 extends AssignmentToken 
 	}	
 }
 
-// serviceProvisionPoints+=SPP
-protected class SubSystemClass_ServiceProvisionPointsAssignment_8_1 extends AssignmentToken  {
+// threads+=LogicalThread
+protected class SubSystemClass_ThreadsAssignment_8_1 extends AssignmentToken  {
 	
-	public SubSystemClass_ServiceProvisionPointsAssignment_8_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public SubSystemClass_ThreadsAssignment_8_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getSubSystemClassAccess().getServiceProvisionPointsAssignment_8_1();
+		return grammarAccess.getSubSystemClassAccess().getThreadsAssignment_8_1();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new SPP_Group(this, this, 0, inst);
+			case 0: return new LogicalThread_Group(this, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("serviceProvisionPoints",true)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("serviceProvisionPoints");
+		if((value = eObjectConsumer.getConsumable("threads",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("threads");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getSPPRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getLogicalThreadRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getSubSystemClassAccess().getServiceProvisionPointsSPPParserRuleCall_8_1_0(); 
+				element = grammarAccess.getSubSystemClassAccess().getThreadsLogicalThreadParserRuleCall_8_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -12710,35 +12715,35 @@ protected class SubSystemClass_ServiceProvisionPointsAssignment_8_1 extends Assi
 	}	
 }
 
-// actorRefs+=ActorRef
-protected class SubSystemClass_ActorRefsAssignment_8_2 extends AssignmentToken  {
+// connections+=LayerConnection
+protected class SubSystemClass_ConnectionsAssignment_8_2 extends AssignmentToken  {
 	
-	public SubSystemClass_ActorRefsAssignment_8_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public SubSystemClass_ConnectionsAssignment_8_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getSubSystemClassAccess().getActorRefsAssignment_8_2();
+		return grammarAccess.getSubSystemClassAccess().getConnectionsAssignment_8_2();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new ActorRef_Group(this, this, 0, inst);
+			case 0: return new LayerConnection_Group(this, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("actorRefs",true)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("actorRefs");
+		if((value = eObjectConsumer.getConsumable("connections",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("connections");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getActorRefRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getLayerConnectionRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getSubSystemClassAccess().getActorRefsActorRefParserRuleCall_8_2_0(); 
+				element = grammarAccess.getSubSystemClassAccess().getConnectionsLayerConnectionParserRuleCall_8_2_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -12812,35 +12817,35 @@ protected class SubSystemClass_BindingsAssignment_8_3 extends AssignmentToken  {
 	}	
 }
 
-// connections+=LayerConnection
-protected class SubSystemClass_ConnectionsAssignment_8_4 extends AssignmentToken  {
+// actorRefs+=ActorRef
+protected class SubSystemClass_ActorRefsAssignment_8_4 extends AssignmentToken  {
 	
-	public SubSystemClass_ConnectionsAssignment_8_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public SubSystemClass_ActorRefsAssignment_8_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getSubSystemClassAccess().getConnectionsAssignment_8_4();
+		return grammarAccess.getSubSystemClassAccess().getActorRefsAssignment_8_4();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new LayerConnection_Group(this, this, 0, inst);
+			case 0: return new ActorRef_Group(this, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("connections",true)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("connections");
+		if((value = eObjectConsumer.getConsumable("actorRefs",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("actorRefs");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getLayerConnectionRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getActorRefRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getSubSystemClassAccess().getConnectionsLayerConnectionParserRuleCall_8_4_0(); 
+				element = grammarAccess.getSubSystemClassAccess().getActorRefsActorRefParserRuleCall_8_4_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -12863,35 +12868,35 @@ protected class SubSystemClass_ConnectionsAssignment_8_4 extends AssignmentToken
 	}	
 }
 
-// threads+=LogicalThread
-protected class SubSystemClass_ThreadsAssignment_8_5 extends AssignmentToken  {
+// serviceProvisionPoints+=SPP
+protected class SubSystemClass_ServiceProvisionPointsAssignment_8_5 extends AssignmentToken  {
 	
-	public SubSystemClass_ThreadsAssignment_8_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public SubSystemClass_ServiceProvisionPointsAssignment_8_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getSubSystemClassAccess().getThreadsAssignment_8_5();
+		return grammarAccess.getSubSystemClassAccess().getServiceProvisionPointsAssignment_8_5();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new LogicalThread_Group(this, this, 0, inst);
+			case 0: return new SPP_Group(this, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("threads",true)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("threads");
+		if((value = eObjectConsumer.getConsumable("serviceProvisionPoints",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("serviceProvisionPoints");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getLogicalThreadRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getSPPRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getSubSystemClassAccess().getThreadsLogicalThreadParserRuleCall_8_5_0(); 
+				element = grammarAccess.getSubSystemClassAccess().getServiceProvisionPointsSPPParserRuleCall_8_5_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -12914,35 +12919,35 @@ protected class SubSystemClass_ThreadsAssignment_8_5 extends AssignmentToken  {
 	}	
 }
 
-// actorInstanceMappings+=ActorInstanceMapping
-protected class SubSystemClass_ActorInstanceMappingsAssignment_8_6 extends AssignmentToken  {
+// relayPorts+=Port
+protected class SubSystemClass_RelayPortsAssignment_8_6 extends AssignmentToken  {
 	
-	public SubSystemClass_ActorInstanceMappingsAssignment_8_6(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public SubSystemClass_RelayPortsAssignment_8_6(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getSubSystemClassAccess().getActorInstanceMappingsAssignment_8_6();
+		return grammarAccess.getSubSystemClassAccess().getRelayPortsAssignment_8_6();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new ActorInstanceMapping_Group(this, this, 0, inst);
+			case 0: return new Port_Group(this, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("actorInstanceMappings",true)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("actorInstanceMappings");
+		if((value = eObjectConsumer.getConsumable("relayPorts",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("relayPorts");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getActorInstanceMappingRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getPortRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getSubSystemClassAccess().getActorInstanceMappingsActorInstanceMappingParserRuleCall_8_6_0(); 
+				element = grammarAccess.getSubSystemClassAccess().getRelayPortsPortParserRuleCall_8_6_0(); 
 				consumed = obj;
 				return param;
 			}

@@ -28,9 +28,9 @@ import org.eclipse.etrice.core.fsm.fSM.DetailCode;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.PortClass#getUserCode <em>User Code</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.room.PortClass#getAttributes <em>Attributes</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.room.PortClass#getOperations <em>Operations</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.PortClass#getMsgHandlers <em>Msg Handlers</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.PortClass#getOperations <em>Operations</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.PortClass#getAttributes <em>Attributes</em>}</li>
  * </ul>
  * </p>
  *
@@ -67,20 +67,20 @@ public interface PortClass extends EObject
   void setUserCode(DetailCode value);
 
   /**
-   * Returns the value of the '<em><b>Attributes</b></em>' containment reference list.
-   * The list contents are of type {@link org.eclipse.etrice.core.room.Attribute}.
+   * Returns the value of the '<em><b>Msg Handlers</b></em>' containment reference list.
+   * The list contents are of type {@link org.eclipse.etrice.core.room.MessageHandler}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * <br>This is a list of attributes of this nested class.
+   * <br>This is a list of message handlers.
    * 
    * <!-- end-model-doc -->
-   * @return the value of the '<em>Attributes</em>' containment reference list.
-   * @see org.eclipse.etrice.core.room.RoomPackage#getPortClass_Attributes()
+   * @return the value of the '<em>Msg Handlers</em>' containment reference list.
+   * @see org.eclipse.etrice.core.room.RoomPackage#getPortClass_MsgHandlers()
    * @model containment="true"
    * @generated
    */
-  EList<Attribute> getAttributes();
+  EList<MessageHandler> getMsgHandlers();
 
   /**
    * Returns the value of the '<em><b>Operations</b></em>' containment reference list.
@@ -99,19 +99,19 @@ public interface PortClass extends EObject
   EList<PortOperation> getOperations();
 
   /**
-   * Returns the value of the '<em><b>Msg Handlers</b></em>' containment reference list.
-   * The list contents are of type {@link org.eclipse.etrice.core.room.MessageHandler}.
+   * Returns the value of the '<em><b>Attributes</b></em>' containment reference list.
+   * The list contents are of type {@link org.eclipse.etrice.core.room.Attribute}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * <br>This is a list of message handlers.
+   * <br>This is a list of attributes of this nested class.
    * 
    * <!-- end-model-doc -->
-   * @return the value of the '<em>Msg Handlers</em>' containment reference list.
-   * @see org.eclipse.etrice.core.room.RoomPackage#getPortClass_MsgHandlers()
+   * @return the value of the '<em>Attributes</em>' containment reference list.
+   * @see org.eclipse.etrice.core.room.RoomPackage#getPortClass_Attributes()
    * @model containment="true"
    * @generated
    */
-  EList<MessageHandler> getMsgHandlers();
+  EList<Attribute> getAttributes();
 
 } // PortClass

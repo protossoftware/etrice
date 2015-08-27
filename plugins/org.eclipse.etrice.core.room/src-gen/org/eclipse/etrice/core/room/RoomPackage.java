@@ -261,22 +261,22 @@ public interface RoomPackage extends EPackage
   int STRUCTURE_CLASS__ANNOTATIONS = ROOM_CLASS_FEATURE_COUNT + 0;
 
   /**
-   * The feature id for the '<em><b>Bindings</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int STRUCTURE_CLASS__BINDINGS = ROOM_CLASS_FEATURE_COUNT + 1;
-
-  /**
    * The feature id for the '<em><b>Connections</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int STRUCTURE_CLASS__CONNECTIONS = ROOM_CLASS_FEATURE_COUNT + 2;
+  int STRUCTURE_CLASS__CONNECTIONS = ROOM_CLASS_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>Bindings</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int STRUCTURE_CLASS__BINDINGS = ROOM_CLASS_FEATURE_COUNT + 2;
 
   /**
    * The number of structural features of the '<em>Structure Class</em>' class.
@@ -325,15 +325,6 @@ public interface RoomPackage extends EPackage
   int ACTOR_CONTAINER_CLASS__ANNOTATIONS = STRUCTURE_CLASS__ANNOTATIONS;
 
   /**
-   * The feature id for the '<em><b>Bindings</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ACTOR_CONTAINER_CLASS__BINDINGS = STRUCTURE_CLASS__BINDINGS;
-
-  /**
    * The feature id for the '<em><b>Connections</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -341,6 +332,15 @@ public interface RoomPackage extends EPackage
    * @ordered
    */
   int ACTOR_CONTAINER_CLASS__CONNECTIONS = STRUCTURE_CLASS__CONNECTIONS;
+
+  /**
+   * The feature id for the '<em><b>Bindings</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTOR_CONTAINER_CLASS__BINDINGS = STRUCTURE_CLASS__BINDINGS;
 
   /**
    * The feature id for the '<em><b>Service Provision Points</b></em>' containment reference list.
@@ -838,13 +838,13 @@ public interface RoomPackage extends EPackage
   int DATA_CLASS__USER_CODE3 = COMPLEX_TYPE_FEATURE_COUNT + 4;
 
   /**
-   * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
+   * The feature id for the '<em><b>Operations</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int DATA_CLASS__ATTRIBUTES = COMPLEX_TYPE_FEATURE_COUNT + 5;
+  int DATA_CLASS__OPERATIONS = COMPLEX_TYPE_FEATURE_COUNT + 5;
 
   /**
    * The feature id for the '<em><b>Structors</b></em>' containment reference list.
@@ -856,13 +856,13 @@ public interface RoomPackage extends EPackage
   int DATA_CLASS__STRUCTORS = COMPLEX_TYPE_FEATURE_COUNT + 6;
 
   /**
-   * The feature id for the '<em><b>Operations</b></em>' containment reference list.
+   * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int DATA_CLASS__OPERATIONS = COMPLEX_TYPE_FEATURE_COUNT + 7;
+  int DATA_CLASS__ATTRIBUTES = COMPLEX_TYPE_FEATURE_COUNT + 7;
 
   /**
    * The number of structural features of the '<em>Data Class</em>' class.
@@ -1533,13 +1533,13 @@ public interface RoomPackage extends EPackage
   int PORT_CLASS__USER_CODE = 0;
 
   /**
-   * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
+   * The feature id for the '<em><b>Msg Handlers</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int PORT_CLASS__ATTRIBUTES = 1;
+  int PORT_CLASS__MSG_HANDLERS = 1;
 
   /**
    * The feature id for the '<em><b>Operations</b></em>' containment reference list.
@@ -1551,13 +1551,13 @@ public interface RoomPackage extends EPackage
   int PORT_CLASS__OPERATIONS = 2;
 
   /**
-   * The feature id for the '<em><b>Msg Handlers</b></em>' containment reference list.
+   * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int PORT_CLASS__MSG_HANDLERS = 3;
+  int PORT_CLASS__ATTRIBUTES = 3;
 
   /**
    * The number of structural features of the '<em>Port Class</em>' class.
@@ -1717,15 +1717,6 @@ public interface RoomPackage extends EPackage
   int ACTOR_CLASS__ANNOTATIONS = ACTOR_CONTAINER_CLASS__ANNOTATIONS;
 
   /**
-   * The feature id for the '<em><b>Bindings</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ACTOR_CLASS__BINDINGS = ACTOR_CONTAINER_CLASS__BINDINGS;
-
-  /**
    * The feature id for the '<em><b>Connections</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1733,6 +1724,15 @@ public interface RoomPackage extends EPackage
    * @ordered
    */
   int ACTOR_CLASS__CONNECTIONS = ACTOR_CONTAINER_CLASS__CONNECTIONS;
+
+  /**
+   * The feature id for the '<em><b>Bindings</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTOR_CLASS__BINDINGS = ACTOR_CONTAINER_CLASS__BINDINGS;
 
   /**
    * The feature id for the '<em><b>Service Provision Points</b></em>' containment reference list.
@@ -1843,22 +1843,22 @@ public interface RoomPackage extends EPackage
   int ACTOR_CLASS__STRUCTURE_DOCU = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 6;
 
   /**
-   * The feature id for the '<em><b>Internal Ports</b></em>' containment reference list.
+   * The feature id for the '<em><b>Service Implementations</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ACTOR_CLASS__INTERNAL_PORTS = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 7;
+  int ACTOR_CLASS__SERVICE_IMPLEMENTATIONS = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 7;
 
   /**
-   * The feature id for the '<em><b>External Ports</b></em>' containment reference list.
+   * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ACTOR_CLASS__EXTERNAL_PORTS = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 8;
+  int ACTOR_CLASS__ATTRIBUTES = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 8;
 
   /**
    * The feature id for the '<em><b>Service Access Points</b></em>' containment reference list.
@@ -1870,22 +1870,22 @@ public interface RoomPackage extends EPackage
   int ACTOR_CLASS__SERVICE_ACCESS_POINTS = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 9;
 
   /**
-   * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
+   * The feature id for the '<em><b>Internal Ports</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ACTOR_CLASS__ATTRIBUTES = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 10;
+  int ACTOR_CLASS__INTERNAL_PORTS = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 10;
 
   /**
-   * The feature id for the '<em><b>Service Implementations</b></em>' containment reference list.
+   * The feature id for the '<em><b>External Ports</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ACTOR_CLASS__SERVICE_IMPLEMENTATIONS = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 11;
+  int ACTOR_CLASS__EXTERNAL_PORTS = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 11;
 
   /**
    * The feature id for the '<em><b>Behavior Docu</b></em>' containment reference.
@@ -1906,22 +1906,22 @@ public interface RoomPackage extends EPackage
   int ACTOR_CLASS__BEHAVIOR_ANNOTATIONS = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 13;
 
   /**
-   * The feature id for the '<em><b>Structors</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ACTOR_CLASS__STRUCTORS = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 14;
-
-  /**
    * The feature id for the '<em><b>Operations</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ACTOR_CLASS__OPERATIONS = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 15;
+  int ACTOR_CLASS__OPERATIONS = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 14;
+
+  /**
+   * The feature id for the '<em><b>Structors</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTOR_CLASS__STRUCTORS = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 15;
 
   /**
    * The number of structural features of the '<em>Actor Class</em>' class.
@@ -2192,15 +2192,6 @@ public interface RoomPackage extends EPackage
   int LOGICAL_SYSTEM__ANNOTATIONS = STRUCTURE_CLASS__ANNOTATIONS;
 
   /**
-   * The feature id for the '<em><b>Bindings</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int LOGICAL_SYSTEM__BINDINGS = STRUCTURE_CLASS__BINDINGS;
-
-  /**
    * The feature id for the '<em><b>Connections</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2208,6 +2199,15 @@ public interface RoomPackage extends EPackage
    * @ordered
    */
   int LOGICAL_SYSTEM__CONNECTIONS = STRUCTURE_CLASS__CONNECTIONS;
+
+  /**
+   * The feature id for the '<em><b>Bindings</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LOGICAL_SYSTEM__BINDINGS = STRUCTURE_CLASS__BINDINGS;
 
   /**
    * The feature id for the '<em><b>Sub Systems</b></em>' containment reference list.
@@ -2348,15 +2348,6 @@ public interface RoomPackage extends EPackage
   int SUB_SYSTEM_CLASS__ANNOTATIONS = ACTOR_CONTAINER_CLASS__ANNOTATIONS;
 
   /**
-   * The feature id for the '<em><b>Bindings</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SUB_SYSTEM_CLASS__BINDINGS = ACTOR_CONTAINER_CLASS__BINDINGS;
-
-  /**
    * The feature id for the '<em><b>Connections</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2364,6 +2355,15 @@ public interface RoomPackage extends EPackage
    * @ordered
    */
   int SUB_SYSTEM_CLASS__CONNECTIONS = ACTOR_CONTAINER_CLASS__CONNECTIONS;
+
+  /**
+   * The feature id for the '<em><b>Bindings</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SUB_SYSTEM_CLASS__BINDINGS = ACTOR_CONTAINER_CLASS__BINDINGS;
 
   /**
    * The feature id for the '<em><b>Service Provision Points</b></em>' containment reference list.
@@ -2411,13 +2411,13 @@ public interface RoomPackage extends EPackage
   int SUB_SYSTEM_CLASS__ACTOR_REFS = ACTOR_CONTAINER_CLASS__ACTOR_REFS;
 
   /**
-   * The feature id for the '<em><b>Relay Ports</b></em>' containment reference list.
+   * The feature id for the '<em><b>Actor Instance Mappings</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int SUB_SYSTEM_CLASS__RELAY_PORTS = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 0;
+  int SUB_SYSTEM_CLASS__ACTOR_INSTANCE_MAPPINGS = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 0;
 
   /**
    * The feature id for the '<em><b>Threads</b></em>' containment reference list.
@@ -2429,13 +2429,13 @@ public interface RoomPackage extends EPackage
   int SUB_SYSTEM_CLASS__THREADS = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 1;
 
   /**
-   * The feature id for the '<em><b>Actor Instance Mappings</b></em>' containment reference list.
+   * The feature id for the '<em><b>Relay Ports</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int SUB_SYSTEM_CLASS__ACTOR_INSTANCE_MAPPINGS = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 2;
+  int SUB_SYSTEM_CLASS__RELAY_PORTS = ACTOR_CONTAINER_CLASS_FEATURE_COUNT + 2;
 
   /**
    * The number of structural features of the '<em>Sub System Class</em>' class.
@@ -3108,17 +3108,6 @@ public interface RoomPackage extends EPackage
   EReference getStructureClass_Annotations();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.StructureClass#getBindings <em>Bindings</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Bindings</em>'.
-   * @see org.eclipse.etrice.core.room.StructureClass#getBindings()
-   * @see #getStructureClass()
-   * @generated
-   */
-  EReference getStructureClass_Bindings();
-
-  /**
    * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.StructureClass#getConnections <em>Connections</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -3128,6 +3117,17 @@ public interface RoomPackage extends EPackage
    * @generated
    */
   EReference getStructureClass_Connections();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.StructureClass#getBindings <em>Bindings</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Bindings</em>'.
+   * @see org.eclipse.etrice.core.room.StructureClass#getBindings()
+   * @see #getStructureClass()
+   * @generated
+   */
+  EReference getStructureClass_Bindings();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.etrice.core.room.ActorContainerClass <em>Actor Container Class</em>}'.
@@ -3494,15 +3494,15 @@ public interface RoomPackage extends EPackage
   EReference getDataClass_UserCode3();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.DataClass#getAttributes <em>Attributes</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.DataClass#getOperations <em>Operations</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Attributes</em>'.
-   * @see org.eclipse.etrice.core.room.DataClass#getAttributes()
+   * @return the meta object for the containment reference list '<em>Operations</em>'.
+   * @see org.eclipse.etrice.core.room.DataClass#getOperations()
    * @see #getDataClass()
    * @generated
    */
-  EReference getDataClass_Attributes();
+  EReference getDataClass_Operations();
 
   /**
    * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.DataClass#getStructors <em>Structors</em>}'.
@@ -3516,15 +3516,15 @@ public interface RoomPackage extends EPackage
   EReference getDataClass_Structors();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.DataClass#getOperations <em>Operations</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.DataClass#getAttributes <em>Attributes</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Operations</em>'.
-   * @see org.eclipse.etrice.core.room.DataClass#getOperations()
+   * @return the meta object for the containment reference list '<em>Attributes</em>'.
+   * @see org.eclipse.etrice.core.room.DataClass#getAttributes()
    * @see #getDataClass()
    * @generated
    */
-  EReference getDataClass_Operations();
+  EReference getDataClass_Attributes();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.etrice.core.room.Attribute <em>Attribute</em>}'.
@@ -4000,15 +4000,15 @@ public interface RoomPackage extends EPackage
   EReference getPortClass_UserCode();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.PortClass#getAttributes <em>Attributes</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.PortClass#getMsgHandlers <em>Msg Handlers</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Attributes</em>'.
-   * @see org.eclipse.etrice.core.room.PortClass#getAttributes()
+   * @return the meta object for the containment reference list '<em>Msg Handlers</em>'.
+   * @see org.eclipse.etrice.core.room.PortClass#getMsgHandlers()
    * @see #getPortClass()
    * @generated
    */
-  EReference getPortClass_Attributes();
+  EReference getPortClass_MsgHandlers();
 
   /**
    * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.PortClass#getOperations <em>Operations</em>}'.
@@ -4022,15 +4022,15 @@ public interface RoomPackage extends EPackage
   EReference getPortClass_Operations();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.PortClass#getMsgHandlers <em>Msg Handlers</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.PortClass#getAttributes <em>Attributes</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Msg Handlers</em>'.
-   * @see org.eclipse.etrice.core.room.PortClass#getMsgHandlers()
+   * @return the meta object for the containment reference list '<em>Attributes</em>'.
+   * @see org.eclipse.etrice.core.room.PortClass#getAttributes()
    * @see #getPortClass()
    * @generated
    */
-  EReference getPortClass_MsgHandlers();
+  EReference getPortClass_Attributes();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.etrice.core.room.MessageHandler <em>Message Handler</em>}'.
@@ -4117,6 +4117,39 @@ public interface RoomPackage extends EPackage
   EReference getActorClass_StructureDocu();
 
   /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.ActorClass#getServiceImplementations <em>Service Implementations</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Service Implementations</em>'.
+   * @see org.eclipse.etrice.core.room.ActorClass#getServiceImplementations()
+   * @see #getActorClass()
+   * @generated
+   */
+  EReference getActorClass_ServiceImplementations();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.ActorClass#getAttributes <em>Attributes</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Attributes</em>'.
+   * @see org.eclipse.etrice.core.room.ActorClass#getAttributes()
+   * @see #getActorClass()
+   * @generated
+   */
+  EReference getActorClass_Attributes();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.ActorClass#getServiceAccessPoints <em>Service Access Points</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Service Access Points</em>'.
+   * @see org.eclipse.etrice.core.room.ActorClass#getServiceAccessPoints()
+   * @see #getActorClass()
+   * @generated
+   */
+  EReference getActorClass_ServiceAccessPoints();
+
+  /**
    * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.ActorClass#getInternalPorts <em>Internal Ports</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -4137,39 +4170,6 @@ public interface RoomPackage extends EPackage
    * @generated
    */
   EReference getActorClass_ExternalPorts();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.ActorClass#getServiceAccessPoints <em>Service Access Points</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Service Access Points</em>'.
-   * @see org.eclipse.etrice.core.room.ActorClass#getServiceAccessPoints()
-   * @see #getActorClass()
-   * @generated
-   */
-  EReference getActorClass_ServiceAccessPoints();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.ActorClass#getAttributes <em>Attributes</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Attributes</em>'.
-   * @see org.eclipse.etrice.core.room.ActorClass#getAttributes()
-   * @see #getActorClass()
-   * @generated
-   */
-  EReference getActorClass_Attributes();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.ActorClass#getServiceImplementations <em>Service Implementations</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Service Implementations</em>'.
-   * @see org.eclipse.etrice.core.room.ActorClass#getServiceImplementations()
-   * @see #getActorClass()
-   * @generated
-   */
-  EReference getActorClass_ServiceImplementations();
 
   /**
    * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.room.ActorClass#getBehaviorDocu <em>Behavior Docu</em>}'.
@@ -4194,17 +4194,6 @@ public interface RoomPackage extends EPackage
   EReference getActorClass_BehaviorAnnotations();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.ActorClass#getStructors <em>Structors</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Structors</em>'.
-   * @see org.eclipse.etrice.core.room.ActorClass#getStructors()
-   * @see #getActorClass()
-   * @generated
-   */
-  EReference getActorClass_Structors();
-
-  /**
    * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.ActorClass#getOperations <em>Operations</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -4214,6 +4203,17 @@ public interface RoomPackage extends EPackage
    * @generated
    */
   EReference getActorClass_Operations();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.ActorClass#getStructors <em>Structors</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Structors</em>'.
+   * @see org.eclipse.etrice.core.room.ActorClass#getStructors()
+   * @see #getActorClass()
+   * @generated
+   */
+  EReference getActorClass_Structors();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.etrice.core.room.InterfaceItem <em>Interface Item</em>}'.
@@ -4448,15 +4448,15 @@ public interface RoomPackage extends EPackage
   EClass getSubSystemClass();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.SubSystemClass#getRelayPorts <em>Relay Ports</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.SubSystemClass#getActorInstanceMappings <em>Actor Instance Mappings</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Relay Ports</em>'.
-   * @see org.eclipse.etrice.core.room.SubSystemClass#getRelayPorts()
+   * @return the meta object for the containment reference list '<em>Actor Instance Mappings</em>'.
+   * @see org.eclipse.etrice.core.room.SubSystemClass#getActorInstanceMappings()
    * @see #getSubSystemClass()
    * @generated
    */
-  EReference getSubSystemClass_RelayPorts();
+  EReference getSubSystemClass_ActorInstanceMappings();
 
   /**
    * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.SubSystemClass#getThreads <em>Threads</em>}'.
@@ -4470,15 +4470,15 @@ public interface RoomPackage extends EPackage
   EReference getSubSystemClass_Threads();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.SubSystemClass#getActorInstanceMappings <em>Actor Instance Mappings</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.SubSystemClass#getRelayPorts <em>Relay Ports</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Actor Instance Mappings</em>'.
-   * @see org.eclipse.etrice.core.room.SubSystemClass#getActorInstanceMappings()
+   * @return the meta object for the containment reference list '<em>Relay Ports</em>'.
+   * @see org.eclipse.etrice.core.room.SubSystemClass#getRelayPorts()
    * @see #getSubSystemClass()
    * @generated
    */
-  EReference getSubSystemClass_ActorInstanceMappings();
+  EReference getSubSystemClass_RelayPorts();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.etrice.core.room.LogicalThread <em>Logical Thread</em>}'.
@@ -5035,20 +5035,20 @@ public interface RoomPackage extends EPackage
     EReference STRUCTURE_CLASS__ANNOTATIONS = eINSTANCE.getStructureClass_Annotations();
 
     /**
-     * The meta object literal for the '<em><b>Bindings</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference STRUCTURE_CLASS__BINDINGS = eINSTANCE.getStructureClass_Bindings();
-
-    /**
      * The meta object literal for the '<em><b>Connections</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
     EReference STRUCTURE_CLASS__CONNECTIONS = eINSTANCE.getStructureClass_Connections();
+
+    /**
+     * The meta object literal for the '<em><b>Bindings</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference STRUCTURE_CLASS__BINDINGS = eINSTANCE.getStructureClass_Bindings();
 
     /**
      * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.ActorContainerClassImpl <em>Actor Container Class</em>}' class.
@@ -5343,12 +5343,12 @@ public interface RoomPackage extends EPackage
     EReference DATA_CLASS__USER_CODE3 = eINSTANCE.getDataClass_UserCode3();
 
     /**
-     * The meta object literal for the '<em><b>Attributes</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Operations</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference DATA_CLASS__ATTRIBUTES = eINSTANCE.getDataClass_Attributes();
+    EReference DATA_CLASS__OPERATIONS = eINSTANCE.getDataClass_Operations();
 
     /**
      * The meta object literal for the '<em><b>Structors</b></em>' containment reference list feature.
@@ -5359,12 +5359,12 @@ public interface RoomPackage extends EPackage
     EReference DATA_CLASS__STRUCTORS = eINSTANCE.getDataClass_Structors();
 
     /**
-     * The meta object literal for the '<em><b>Operations</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Attributes</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference DATA_CLASS__OPERATIONS = eINSTANCE.getDataClass_Operations();
+    EReference DATA_CLASS__ATTRIBUTES = eINSTANCE.getDataClass_Attributes();
 
     /**
      * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.AttributeImpl <em>Attribute</em>}' class.
@@ -5741,12 +5741,12 @@ public interface RoomPackage extends EPackage
     EReference PORT_CLASS__USER_CODE = eINSTANCE.getPortClass_UserCode();
 
     /**
-     * The meta object literal for the '<em><b>Attributes</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Msg Handlers</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference PORT_CLASS__ATTRIBUTES = eINSTANCE.getPortClass_Attributes();
+    EReference PORT_CLASS__MSG_HANDLERS = eINSTANCE.getPortClass_MsgHandlers();
 
     /**
      * The meta object literal for the '<em><b>Operations</b></em>' containment reference list feature.
@@ -5757,12 +5757,12 @@ public interface RoomPackage extends EPackage
     EReference PORT_CLASS__OPERATIONS = eINSTANCE.getPortClass_Operations();
 
     /**
-     * The meta object literal for the '<em><b>Msg Handlers</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Attributes</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference PORT_CLASS__MSG_HANDLERS = eINSTANCE.getPortClass_MsgHandlers();
+    EReference PORT_CLASS__ATTRIBUTES = eINSTANCE.getPortClass_Attributes();
 
     /**
      * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.MessageHandlerImpl <em>Message Handler</em>}' class.
@@ -5837,6 +5837,30 @@ public interface RoomPackage extends EPackage
     EReference ACTOR_CLASS__STRUCTURE_DOCU = eINSTANCE.getActorClass_StructureDocu();
 
     /**
+     * The meta object literal for the '<em><b>Service Implementations</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ACTOR_CLASS__SERVICE_IMPLEMENTATIONS = eINSTANCE.getActorClass_ServiceImplementations();
+
+    /**
+     * The meta object literal for the '<em><b>Attributes</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ACTOR_CLASS__ATTRIBUTES = eINSTANCE.getActorClass_Attributes();
+
+    /**
+     * The meta object literal for the '<em><b>Service Access Points</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ACTOR_CLASS__SERVICE_ACCESS_POINTS = eINSTANCE.getActorClass_ServiceAccessPoints();
+
+    /**
      * The meta object literal for the '<em><b>Internal Ports</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -5851,30 +5875,6 @@ public interface RoomPackage extends EPackage
      * @generated
      */
     EReference ACTOR_CLASS__EXTERNAL_PORTS = eINSTANCE.getActorClass_ExternalPorts();
-
-    /**
-     * The meta object literal for the '<em><b>Service Access Points</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference ACTOR_CLASS__SERVICE_ACCESS_POINTS = eINSTANCE.getActorClass_ServiceAccessPoints();
-
-    /**
-     * The meta object literal for the '<em><b>Attributes</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference ACTOR_CLASS__ATTRIBUTES = eINSTANCE.getActorClass_Attributes();
-
-    /**
-     * The meta object literal for the '<em><b>Service Implementations</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference ACTOR_CLASS__SERVICE_IMPLEMENTATIONS = eINSTANCE.getActorClass_ServiceImplementations();
 
     /**
      * The meta object literal for the '<em><b>Behavior Docu</b></em>' containment reference feature.
@@ -5893,20 +5893,20 @@ public interface RoomPackage extends EPackage
     EReference ACTOR_CLASS__BEHAVIOR_ANNOTATIONS = eINSTANCE.getActorClass_BehaviorAnnotations();
 
     /**
-     * The meta object literal for the '<em><b>Structors</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference ACTOR_CLASS__STRUCTORS = eINSTANCE.getActorClass_Structors();
-
-    /**
      * The meta object literal for the '<em><b>Operations</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
     EReference ACTOR_CLASS__OPERATIONS = eINSTANCE.getActorClass_Operations();
+
+    /**
+     * The meta object literal for the '<em><b>Structors</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ACTOR_CLASS__STRUCTORS = eINSTANCE.getActorClass_Structors();
 
     /**
      * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.InterfaceItemImpl <em>Interface Item</em>}' class.
@@ -6105,12 +6105,12 @@ public interface RoomPackage extends EPackage
     EClass SUB_SYSTEM_CLASS = eINSTANCE.getSubSystemClass();
 
     /**
-     * The meta object literal for the '<em><b>Relay Ports</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Actor Instance Mappings</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference SUB_SYSTEM_CLASS__RELAY_PORTS = eINSTANCE.getSubSystemClass_RelayPorts();
+    EReference SUB_SYSTEM_CLASS__ACTOR_INSTANCE_MAPPINGS = eINSTANCE.getSubSystemClass_ActorInstanceMappings();
 
     /**
      * The meta object literal for the '<em><b>Threads</b></em>' containment reference list feature.
@@ -6121,12 +6121,12 @@ public interface RoomPackage extends EPackage
     EReference SUB_SYSTEM_CLASS__THREADS = eINSTANCE.getSubSystemClass_Threads();
 
     /**
-     * The meta object literal for the '<em><b>Actor Instance Mappings</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Relay Ports</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference SUB_SYSTEM_CLASS__ACTOR_INSTANCE_MAPPINGS = eINSTANCE.getSubSystemClass_ActorInstanceMappings();
+    EReference SUB_SYSTEM_CLASS__RELAY_PORTS = eINSTANCE.getSubSystemClass_RelayPorts();
 
     /**
      * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.LogicalThreadImpl <em>Logical Thread</em>}' class.

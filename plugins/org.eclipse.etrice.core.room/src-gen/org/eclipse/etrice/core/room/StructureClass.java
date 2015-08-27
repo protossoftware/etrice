@@ -24,8 +24,8 @@ import org.eclipse.etrice.core.common.base.Annotation;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.StructureClass#getAnnotations <em>Annotations</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.room.StructureClass#getBindings <em>Bindings</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.StructureClass#getConnections <em>Connections</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.StructureClass#getBindings <em>Bindings</em>}</li>
  * </ul>
  * </p>
  *
@@ -52,22 +52,6 @@ public interface StructureClass extends RoomClass
   EList<Annotation> getAnnotations();
 
   /**
-   * Returns the value of the '<em><b>Bindings</b></em>' containment reference list.
-   * The list contents are of type {@link org.eclipse.etrice.core.room.Binding}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * <!-- begin-model-doc -->
-   * <br>This is a list of structure class bindings.
-   * 
-   * <!-- end-model-doc -->
-   * @return the value of the '<em>Bindings</em>' containment reference list.
-   * @see org.eclipse.etrice.core.room.RoomPackage#getStructureClass_Bindings()
-   * @model containment="true"
-   * @generated
-   */
-  EList<Binding> getBindings();
-
-  /**
    * Returns the value of the '<em><b>Connections</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.etrice.core.room.LayerConnection}.
    * <!-- begin-user-doc -->
@@ -82,5 +66,21 @@ public interface StructureClass extends RoomClass
    * @generated
    */
   EList<LayerConnection> getConnections();
+
+  /**
+   * Returns the value of the '<em><b>Bindings</b></em>' containment reference list.
+   * The list contents are of type {@link org.eclipse.etrice.core.room.Binding}.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * <br>This is a list of structure class bindings.
+   * 
+   * <!-- end-model-doc -->
+   * @return the value of the '<em>Bindings</em>' containment reference list.
+   * @see org.eclipse.etrice.core.room.RoomPackage#getStructureClass_Bindings()
+   * @model containment="true"
+   * @generated
+   */
+  EList<Binding> getBindings();
 
 } // StructureClass

@@ -9248,16 +9248,17 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__DataClass__Alternatives_9"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3357:1: rule__DataClass__Alternatives_9 : ( ( ( rule__DataClass__AttributesAssignment_9_0 ) ) | ( ( rule__DataClass__StructorsAssignment_9_1 ) ) | ( ( rule__DataClass__OperationsAssignment_9_2 ) ) );
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3357:1: rule__DataClass__Alternatives_9 : ( ( ( rule__DataClass__OperationsAssignment_9_0 ) ) | ( ( rule__DataClass__StructorsAssignment_9_1 ) ) | ( ( rule__DataClass__AttributesAssignment_9_2 ) ) );
     public final void rule__DataClass__Alternatives_9() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3361:1: ( ( ( rule__DataClass__AttributesAssignment_9_0 ) ) | ( ( rule__DataClass__StructorsAssignment_9_1 ) ) | ( ( rule__DataClass__OperationsAssignment_9_2 ) ) )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3361:1: ( ( ( rule__DataClass__OperationsAssignment_9_0 ) ) | ( ( rule__DataClass__StructorsAssignment_9_1 ) ) | ( ( rule__DataClass__AttributesAssignment_9_2 ) ) )
             int alt6=3;
             switch ( input.LA(1) ) {
-            case 57:
+            case 60:
+            case 126:
                 {
                 alt6=1;
                 }
@@ -9268,8 +9269,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
                 alt6=2;
                 }
                 break;
-            case 60:
-            case 126:
+            case 57:
                 {
                 alt6=3;
                 }
@@ -9283,24 +9283,24 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
 
             switch (alt6) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3362:1: ( ( rule__DataClass__AttributesAssignment_9_0 ) )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3362:1: ( ( rule__DataClass__OperationsAssignment_9_0 ) )
                     {
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3362:1: ( ( rule__DataClass__AttributesAssignment_9_0 ) )
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3363:1: ( rule__DataClass__AttributesAssignment_9_0 )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3362:1: ( ( rule__DataClass__OperationsAssignment_9_0 ) )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3363:1: ( rule__DataClass__OperationsAssignment_9_0 )
                     {
-                     before(grammarAccess.getDataClassAccess().getAttributesAssignment_9_0()); 
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3364:1: ( rule__DataClass__AttributesAssignment_9_0 )
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3364:2: rule__DataClass__AttributesAssignment_9_0
+                     before(grammarAccess.getDataClassAccess().getOperationsAssignment_9_0()); 
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3364:1: ( rule__DataClass__OperationsAssignment_9_0 )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3364:2: rule__DataClass__OperationsAssignment_9_0
                     {
-                    pushFollow(FOLLOW_rule__DataClass__AttributesAssignment_9_0_in_rule__DataClass__Alternatives_97095);
-                    rule__DataClass__AttributesAssignment_9_0();
+                    pushFollow(FOLLOW_rule__DataClass__OperationsAssignment_9_0_in_rule__DataClass__Alternatives_97095);
+                    rule__DataClass__OperationsAssignment_9_0();
 
                     state._fsp--;
 
 
                     }
 
-                     after(grammarAccess.getDataClassAccess().getAttributesAssignment_9_0()); 
+                     after(grammarAccess.getDataClassAccess().getOperationsAssignment_9_0()); 
 
                     }
 
@@ -9333,24 +9333,24 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 3 :
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3374:6: ( ( rule__DataClass__OperationsAssignment_9_2 ) )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3374:6: ( ( rule__DataClass__AttributesAssignment_9_2 ) )
                     {
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3374:6: ( ( rule__DataClass__OperationsAssignment_9_2 ) )
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3375:1: ( rule__DataClass__OperationsAssignment_9_2 )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3374:6: ( ( rule__DataClass__AttributesAssignment_9_2 ) )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3375:1: ( rule__DataClass__AttributesAssignment_9_2 )
                     {
-                     before(grammarAccess.getDataClassAccess().getOperationsAssignment_9_2()); 
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3376:1: ( rule__DataClass__OperationsAssignment_9_2 )
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3376:2: rule__DataClass__OperationsAssignment_9_2
+                     before(grammarAccess.getDataClassAccess().getAttributesAssignment_9_2()); 
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3376:1: ( rule__DataClass__AttributesAssignment_9_2 )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3376:2: rule__DataClass__AttributesAssignment_9_2
                     {
-                    pushFollow(FOLLOW_rule__DataClass__OperationsAssignment_9_2_in_rule__DataClass__Alternatives_97131);
-                    rule__DataClass__OperationsAssignment_9_2();
+                    pushFollow(FOLLOW_rule__DataClass__AttributesAssignment_9_2_in_rule__DataClass__Alternatives_97131);
+                    rule__DataClass__AttributesAssignment_9_2();
 
                     state._fsp--;
 
 
                     }
 
-                     after(grammarAccess.getDataClassAccess().getOperationsAssignment_9_2()); 
+                     after(grammarAccess.getDataClassAccess().getAttributesAssignment_9_2()); 
 
                     }
 
@@ -9778,16 +9778,16 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__PortClass__Alternatives_3"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3504:1: rule__PortClass__Alternatives_3 : ( ( ( rule__PortClass__AttributesAssignment_3_0 ) ) | ( ( rule__PortClass__OperationsAssignment_3_1 ) ) | ( ( rule__PortClass__MsgHandlersAssignment_3_2 ) ) );
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3504:1: rule__PortClass__Alternatives_3 : ( ( ( rule__PortClass__MsgHandlersAssignment_3_0 ) ) | ( ( rule__PortClass__OperationsAssignment_3_1 ) ) | ( ( rule__PortClass__AttributesAssignment_3_2 ) ) );
     public final void rule__PortClass__Alternatives_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3508:1: ( ( ( rule__PortClass__AttributesAssignment_3_0 ) ) | ( ( rule__PortClass__OperationsAssignment_3_1 ) ) | ( ( rule__PortClass__MsgHandlersAssignment_3_2 ) ) )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3508:1: ( ( ( rule__PortClass__MsgHandlersAssignment_3_0 ) ) | ( ( rule__PortClass__OperationsAssignment_3_1 ) ) | ( ( rule__PortClass__AttributesAssignment_3_2 ) ) )
             int alt12=3;
             switch ( input.LA(1) ) {
-            case 57:
+            case 70:
                 {
                 alt12=1;
                 }
@@ -9797,7 +9797,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
                 alt12=2;
                 }
                 break;
-            case 70:
+            case 57:
                 {
                 alt12=3;
                 }
@@ -9811,24 +9811,24 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
 
             switch (alt12) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3509:1: ( ( rule__PortClass__AttributesAssignment_3_0 ) )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3509:1: ( ( rule__PortClass__MsgHandlersAssignment_3_0 ) )
                     {
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3509:1: ( ( rule__PortClass__AttributesAssignment_3_0 ) )
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3510:1: ( rule__PortClass__AttributesAssignment_3_0 )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3509:1: ( ( rule__PortClass__MsgHandlersAssignment_3_0 ) )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3510:1: ( rule__PortClass__MsgHandlersAssignment_3_0 )
                     {
-                     before(grammarAccess.getPortClassAccess().getAttributesAssignment_3_0()); 
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3511:1: ( rule__PortClass__AttributesAssignment_3_0 )
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3511:2: rule__PortClass__AttributesAssignment_3_0
+                     before(grammarAccess.getPortClassAccess().getMsgHandlersAssignment_3_0()); 
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3511:1: ( rule__PortClass__MsgHandlersAssignment_3_0 )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3511:2: rule__PortClass__MsgHandlersAssignment_3_0
                     {
-                    pushFollow(FOLLOW_rule__PortClass__AttributesAssignment_3_0_in_rule__PortClass__Alternatives_37426);
-                    rule__PortClass__AttributesAssignment_3_0();
+                    pushFollow(FOLLOW_rule__PortClass__MsgHandlersAssignment_3_0_in_rule__PortClass__Alternatives_37426);
+                    rule__PortClass__MsgHandlersAssignment_3_0();
 
                     state._fsp--;
 
 
                     }
 
-                     after(grammarAccess.getPortClassAccess().getAttributesAssignment_3_0()); 
+                     after(grammarAccess.getPortClassAccess().getMsgHandlersAssignment_3_0()); 
 
                     }
 
@@ -9861,24 +9861,24 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 3 :
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3521:6: ( ( rule__PortClass__MsgHandlersAssignment_3_2 ) )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3521:6: ( ( rule__PortClass__AttributesAssignment_3_2 ) )
                     {
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3521:6: ( ( rule__PortClass__MsgHandlersAssignment_3_2 ) )
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3522:1: ( rule__PortClass__MsgHandlersAssignment_3_2 )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3521:6: ( ( rule__PortClass__AttributesAssignment_3_2 ) )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3522:1: ( rule__PortClass__AttributesAssignment_3_2 )
                     {
-                     before(grammarAccess.getPortClassAccess().getMsgHandlersAssignment_3_2()); 
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3523:1: ( rule__PortClass__MsgHandlersAssignment_3_2 )
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3523:2: rule__PortClass__MsgHandlersAssignment_3_2
+                     before(grammarAccess.getPortClassAccess().getAttributesAssignment_3_2()); 
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3523:1: ( rule__PortClass__AttributesAssignment_3_2 )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3523:2: rule__PortClass__AttributesAssignment_3_2
                     {
-                    pushFollow(FOLLOW_rule__PortClass__MsgHandlersAssignment_3_2_in_rule__PortClass__Alternatives_37462);
-                    rule__PortClass__MsgHandlersAssignment_3_2();
+                    pushFollow(FOLLOW_rule__PortClass__AttributesAssignment_3_2_in_rule__PortClass__Alternatives_37462);
+                    rule__PortClass__AttributesAssignment_3_2();
 
                     state._fsp--;
 
 
                     }
 
-                     after(grammarAccess.getPortClassAccess().getMsgHandlersAssignment_3_2()); 
+                     after(grammarAccess.getPortClassAccess().getAttributesAssignment_3_2()); 
 
                     }
 
@@ -9992,20 +9992,20 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ActorClass__Alternatives_7_2"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3554:1: rule__ActorClass__Alternatives_7_2 : ( ( ( rule__ActorClass__InterfacePortsAssignment_7_2_0 ) ) | ( ( rule__ActorClass__ServiceProvisionPointsAssignment_7_2_1 ) ) );
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3554:1: rule__ActorClass__Alternatives_7_2 : ( ( ( rule__ActorClass__ServiceProvisionPointsAssignment_7_2_0 ) ) | ( ( rule__ActorClass__InterfacePortsAssignment_7_2_1 ) ) );
     public final void rule__ActorClass__Alternatives_7_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3558:1: ( ( ( rule__ActorClass__InterfacePortsAssignment_7_2_0 ) ) | ( ( rule__ActorClass__ServiceProvisionPointsAssignment_7_2_1 ) ) )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3558:1: ( ( ( rule__ActorClass__ServiceProvisionPointsAssignment_7_2_0 ) ) | ( ( rule__ActorClass__InterfacePortsAssignment_7_2_1 ) ) )
             int alt14=2;
             int LA14_0 = input.LA(1);
 
-            if ( (LA14_0==66||LA14_0==74) ) {
+            if ( (LA14_0==77) ) {
                 alt14=1;
             }
-            else if ( (LA14_0==77) ) {
+            else if ( (LA14_0==66||LA14_0==74) ) {
                 alt14=2;
             }
             else {
@@ -10016,24 +10016,24 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             }
             switch (alt14) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3559:1: ( ( rule__ActorClass__InterfacePortsAssignment_7_2_0 ) )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3559:1: ( ( rule__ActorClass__ServiceProvisionPointsAssignment_7_2_0 ) )
                     {
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3559:1: ( ( rule__ActorClass__InterfacePortsAssignment_7_2_0 ) )
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3560:1: ( rule__ActorClass__InterfacePortsAssignment_7_2_0 )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3559:1: ( ( rule__ActorClass__ServiceProvisionPointsAssignment_7_2_0 ) )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3560:1: ( rule__ActorClass__ServiceProvisionPointsAssignment_7_2_0 )
                     {
-                     before(grammarAccess.getActorClassAccess().getInterfacePortsAssignment_7_2_0()); 
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3561:1: ( rule__ActorClass__InterfacePortsAssignment_7_2_0 )
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3561:2: rule__ActorClass__InterfacePortsAssignment_7_2_0
+                     before(grammarAccess.getActorClassAccess().getServiceProvisionPointsAssignment_7_2_0()); 
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3561:1: ( rule__ActorClass__ServiceProvisionPointsAssignment_7_2_0 )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3561:2: rule__ActorClass__ServiceProvisionPointsAssignment_7_2_0
                     {
-                    pushFollow(FOLLOW_rule__ActorClass__InterfacePortsAssignment_7_2_0_in_rule__ActorClass__Alternatives_7_27544);
-                    rule__ActorClass__InterfacePortsAssignment_7_2_0();
+                    pushFollow(FOLLOW_rule__ActorClass__ServiceProvisionPointsAssignment_7_2_0_in_rule__ActorClass__Alternatives_7_27544);
+                    rule__ActorClass__ServiceProvisionPointsAssignment_7_2_0();
 
                     state._fsp--;
 
 
                     }
 
-                     after(grammarAccess.getActorClassAccess().getInterfacePortsAssignment_7_2_0()); 
+                     after(grammarAccess.getActorClassAccess().getServiceProvisionPointsAssignment_7_2_0()); 
 
                     }
 
@@ -10041,24 +10041,24 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3565:6: ( ( rule__ActorClass__ServiceProvisionPointsAssignment_7_2_1 ) )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3565:6: ( ( rule__ActorClass__InterfacePortsAssignment_7_2_1 ) )
                     {
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3565:6: ( ( rule__ActorClass__ServiceProvisionPointsAssignment_7_2_1 ) )
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3566:1: ( rule__ActorClass__ServiceProvisionPointsAssignment_7_2_1 )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3565:6: ( ( rule__ActorClass__InterfacePortsAssignment_7_2_1 ) )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3566:1: ( rule__ActorClass__InterfacePortsAssignment_7_2_1 )
                     {
-                     before(grammarAccess.getActorClassAccess().getServiceProvisionPointsAssignment_7_2_1()); 
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3567:1: ( rule__ActorClass__ServiceProvisionPointsAssignment_7_2_1 )
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3567:2: rule__ActorClass__ServiceProvisionPointsAssignment_7_2_1
+                     before(grammarAccess.getActorClassAccess().getInterfacePortsAssignment_7_2_1()); 
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3567:1: ( rule__ActorClass__InterfacePortsAssignment_7_2_1 )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3567:2: rule__ActorClass__InterfacePortsAssignment_7_2_1
                     {
-                    pushFollow(FOLLOW_rule__ActorClass__ServiceProvisionPointsAssignment_7_2_1_in_rule__ActorClass__Alternatives_7_27562);
-                    rule__ActorClass__ServiceProvisionPointsAssignment_7_2_1();
+                    pushFollow(FOLLOW_rule__ActorClass__InterfacePortsAssignment_7_2_1_in_rule__ActorClass__Alternatives_7_27562);
+                    rule__ActorClass__InterfacePortsAssignment_7_2_1();
 
                     state._fsp--;
 
 
                     }
 
-                     after(grammarAccess.getActorClassAccess().getServiceProvisionPointsAssignment_7_2_1()); 
+                     after(grammarAccess.getActorClassAccess().getInterfacePortsAssignment_7_2_1()); 
 
                     }
 
@@ -10083,27 +10083,26 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ActorClass__Alternatives_8_6"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3576:1: rule__ActorClass__Alternatives_8_6 : ( ( ( rule__ActorClass__InternalPortsAssignment_8_6_0 ) ) | ( ( rule__ActorClass__ExternalPortsAssignment_8_6_1 ) ) | ( ( rule__ActorClass__ServiceAccessPointsAssignment_8_6_2 ) ) | ( ( rule__ActorClass__AttributesAssignment_8_6_3 ) ) | ( ( rule__ActorClass__ActorRefsAssignment_8_6_4 ) ) | ( ( rule__ActorClass__ServiceImplementationsAssignment_8_6_5 ) ) | ( ( rule__ActorClass__BindingsAssignment_8_6_6 ) ) | ( ( rule__ActorClass__ConnectionsAssignment_8_6_7 ) ) );
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3576:1: rule__ActorClass__Alternatives_8_6 : ( ( ( rule__ActorClass__ConnectionsAssignment_8_6_0 ) ) | ( ( rule__ActorClass__BindingsAssignment_8_6_1 ) ) | ( ( rule__ActorClass__ServiceImplementationsAssignment_8_6_2 ) ) | ( ( rule__ActorClass__AttributesAssignment_8_6_3 ) ) | ( ( rule__ActorClass__ActorRefsAssignment_8_6_4 ) ) | ( ( rule__ActorClass__ServiceAccessPointsAssignment_8_6_5 ) ) | ( ( rule__ActorClass__InternalPortsAssignment_8_6_6 ) ) | ( ( rule__ActorClass__ExternalPortsAssignment_8_6_7 ) ) );
     public final void rule__ActorClass__Alternatives_8_6() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3580:1: ( ( ( rule__ActorClass__InternalPortsAssignment_8_6_0 ) ) | ( ( rule__ActorClass__ExternalPortsAssignment_8_6_1 ) ) | ( ( rule__ActorClass__ServiceAccessPointsAssignment_8_6_2 ) ) | ( ( rule__ActorClass__AttributesAssignment_8_6_3 ) ) | ( ( rule__ActorClass__ActorRefsAssignment_8_6_4 ) ) | ( ( rule__ActorClass__ServiceImplementationsAssignment_8_6_5 ) ) | ( ( rule__ActorClass__BindingsAssignment_8_6_6 ) ) | ( ( rule__ActorClass__ConnectionsAssignment_8_6_7 ) ) )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3580:1: ( ( ( rule__ActorClass__ConnectionsAssignment_8_6_0 ) ) | ( ( rule__ActorClass__BindingsAssignment_8_6_1 ) ) | ( ( rule__ActorClass__ServiceImplementationsAssignment_8_6_2 ) ) | ( ( rule__ActorClass__AttributesAssignment_8_6_3 ) ) | ( ( rule__ActorClass__ActorRefsAssignment_8_6_4 ) ) | ( ( rule__ActorClass__ServiceAccessPointsAssignment_8_6_5 ) ) | ( ( rule__ActorClass__InternalPortsAssignment_8_6_6 ) ) | ( ( rule__ActorClass__ExternalPortsAssignment_8_6_7 ) ) )
             int alt15=8;
             switch ( input.LA(1) ) {
-            case 66:
-            case 74:
+            case 87:
                 {
                 alt15=1;
                 }
                 break;
-            case 75:
+            case 83:
                 {
                 alt15=2;
                 }
                 break;
-            case 76:
+            case 78:
                 {
                 alt15=3;
                 }
@@ -10120,17 +10119,18 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
                 alt15=5;
                 }
                 break;
-            case 78:
+            case 76:
                 {
                 alt15=6;
                 }
                 break;
-            case 83:
+            case 66:
+            case 74:
                 {
                 alt15=7;
                 }
                 break;
-            case 87:
+            case 75:
                 {
                 alt15=8;
                 }
@@ -10144,24 +10144,24 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
 
             switch (alt15) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3581:1: ( ( rule__ActorClass__InternalPortsAssignment_8_6_0 ) )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3581:1: ( ( rule__ActorClass__ConnectionsAssignment_8_6_0 ) )
                     {
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3581:1: ( ( rule__ActorClass__InternalPortsAssignment_8_6_0 ) )
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3582:1: ( rule__ActorClass__InternalPortsAssignment_8_6_0 )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3581:1: ( ( rule__ActorClass__ConnectionsAssignment_8_6_0 ) )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3582:1: ( rule__ActorClass__ConnectionsAssignment_8_6_0 )
                     {
-                     before(grammarAccess.getActorClassAccess().getInternalPortsAssignment_8_6_0()); 
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3583:1: ( rule__ActorClass__InternalPortsAssignment_8_6_0 )
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3583:2: rule__ActorClass__InternalPortsAssignment_8_6_0
+                     before(grammarAccess.getActorClassAccess().getConnectionsAssignment_8_6_0()); 
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3583:1: ( rule__ActorClass__ConnectionsAssignment_8_6_0 )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3583:2: rule__ActorClass__ConnectionsAssignment_8_6_0
                     {
-                    pushFollow(FOLLOW_rule__ActorClass__InternalPortsAssignment_8_6_0_in_rule__ActorClass__Alternatives_8_67595);
-                    rule__ActorClass__InternalPortsAssignment_8_6_0();
+                    pushFollow(FOLLOW_rule__ActorClass__ConnectionsAssignment_8_6_0_in_rule__ActorClass__Alternatives_8_67595);
+                    rule__ActorClass__ConnectionsAssignment_8_6_0();
 
                     state._fsp--;
 
 
                     }
 
-                     after(grammarAccess.getActorClassAccess().getInternalPortsAssignment_8_6_0()); 
+                     after(grammarAccess.getActorClassAccess().getConnectionsAssignment_8_6_0()); 
 
                     }
 
@@ -10169,24 +10169,24 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3587:6: ( ( rule__ActorClass__ExternalPortsAssignment_8_6_1 ) )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3587:6: ( ( rule__ActorClass__BindingsAssignment_8_6_1 ) )
                     {
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3587:6: ( ( rule__ActorClass__ExternalPortsAssignment_8_6_1 ) )
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3588:1: ( rule__ActorClass__ExternalPortsAssignment_8_6_1 )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3587:6: ( ( rule__ActorClass__BindingsAssignment_8_6_1 ) )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3588:1: ( rule__ActorClass__BindingsAssignment_8_6_1 )
                     {
-                     before(grammarAccess.getActorClassAccess().getExternalPortsAssignment_8_6_1()); 
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3589:1: ( rule__ActorClass__ExternalPortsAssignment_8_6_1 )
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3589:2: rule__ActorClass__ExternalPortsAssignment_8_6_1
+                     before(grammarAccess.getActorClassAccess().getBindingsAssignment_8_6_1()); 
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3589:1: ( rule__ActorClass__BindingsAssignment_8_6_1 )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3589:2: rule__ActorClass__BindingsAssignment_8_6_1
                     {
-                    pushFollow(FOLLOW_rule__ActorClass__ExternalPortsAssignment_8_6_1_in_rule__ActorClass__Alternatives_8_67613);
-                    rule__ActorClass__ExternalPortsAssignment_8_6_1();
+                    pushFollow(FOLLOW_rule__ActorClass__BindingsAssignment_8_6_1_in_rule__ActorClass__Alternatives_8_67613);
+                    rule__ActorClass__BindingsAssignment_8_6_1();
 
                     state._fsp--;
 
 
                     }
 
-                     after(grammarAccess.getActorClassAccess().getExternalPortsAssignment_8_6_1()); 
+                     after(grammarAccess.getActorClassAccess().getBindingsAssignment_8_6_1()); 
 
                     }
 
@@ -10194,24 +10194,24 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 3 :
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3593:6: ( ( rule__ActorClass__ServiceAccessPointsAssignment_8_6_2 ) )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3593:6: ( ( rule__ActorClass__ServiceImplementationsAssignment_8_6_2 ) )
                     {
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3593:6: ( ( rule__ActorClass__ServiceAccessPointsAssignment_8_6_2 ) )
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3594:1: ( rule__ActorClass__ServiceAccessPointsAssignment_8_6_2 )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3593:6: ( ( rule__ActorClass__ServiceImplementationsAssignment_8_6_2 ) )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3594:1: ( rule__ActorClass__ServiceImplementationsAssignment_8_6_2 )
                     {
-                     before(grammarAccess.getActorClassAccess().getServiceAccessPointsAssignment_8_6_2()); 
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3595:1: ( rule__ActorClass__ServiceAccessPointsAssignment_8_6_2 )
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3595:2: rule__ActorClass__ServiceAccessPointsAssignment_8_6_2
+                     before(grammarAccess.getActorClassAccess().getServiceImplementationsAssignment_8_6_2()); 
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3595:1: ( rule__ActorClass__ServiceImplementationsAssignment_8_6_2 )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3595:2: rule__ActorClass__ServiceImplementationsAssignment_8_6_2
                     {
-                    pushFollow(FOLLOW_rule__ActorClass__ServiceAccessPointsAssignment_8_6_2_in_rule__ActorClass__Alternatives_8_67631);
-                    rule__ActorClass__ServiceAccessPointsAssignment_8_6_2();
+                    pushFollow(FOLLOW_rule__ActorClass__ServiceImplementationsAssignment_8_6_2_in_rule__ActorClass__Alternatives_8_67631);
+                    rule__ActorClass__ServiceImplementationsAssignment_8_6_2();
 
                     state._fsp--;
 
 
                     }
 
-                     after(grammarAccess.getActorClassAccess().getServiceAccessPointsAssignment_8_6_2()); 
+                     after(grammarAccess.getActorClassAccess().getServiceImplementationsAssignment_8_6_2()); 
 
                     }
 
@@ -10269,24 +10269,24 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 6 :
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3611:6: ( ( rule__ActorClass__ServiceImplementationsAssignment_8_6_5 ) )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3611:6: ( ( rule__ActorClass__ServiceAccessPointsAssignment_8_6_5 ) )
                     {
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3611:6: ( ( rule__ActorClass__ServiceImplementationsAssignment_8_6_5 ) )
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3612:1: ( rule__ActorClass__ServiceImplementationsAssignment_8_6_5 )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3611:6: ( ( rule__ActorClass__ServiceAccessPointsAssignment_8_6_5 ) )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3612:1: ( rule__ActorClass__ServiceAccessPointsAssignment_8_6_5 )
                     {
-                     before(grammarAccess.getActorClassAccess().getServiceImplementationsAssignment_8_6_5()); 
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3613:1: ( rule__ActorClass__ServiceImplementationsAssignment_8_6_5 )
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3613:2: rule__ActorClass__ServiceImplementationsAssignment_8_6_5
+                     before(grammarAccess.getActorClassAccess().getServiceAccessPointsAssignment_8_6_5()); 
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3613:1: ( rule__ActorClass__ServiceAccessPointsAssignment_8_6_5 )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3613:2: rule__ActorClass__ServiceAccessPointsAssignment_8_6_5
                     {
-                    pushFollow(FOLLOW_rule__ActorClass__ServiceImplementationsAssignment_8_6_5_in_rule__ActorClass__Alternatives_8_67685);
-                    rule__ActorClass__ServiceImplementationsAssignment_8_6_5();
+                    pushFollow(FOLLOW_rule__ActorClass__ServiceAccessPointsAssignment_8_6_5_in_rule__ActorClass__Alternatives_8_67685);
+                    rule__ActorClass__ServiceAccessPointsAssignment_8_6_5();
 
                     state._fsp--;
 
 
                     }
 
-                     after(grammarAccess.getActorClassAccess().getServiceImplementationsAssignment_8_6_5()); 
+                     after(grammarAccess.getActorClassAccess().getServiceAccessPointsAssignment_8_6_5()); 
 
                     }
 
@@ -10294,24 +10294,24 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 7 :
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3617:6: ( ( rule__ActorClass__BindingsAssignment_8_6_6 ) )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3617:6: ( ( rule__ActorClass__InternalPortsAssignment_8_6_6 ) )
                     {
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3617:6: ( ( rule__ActorClass__BindingsAssignment_8_6_6 ) )
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3618:1: ( rule__ActorClass__BindingsAssignment_8_6_6 )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3617:6: ( ( rule__ActorClass__InternalPortsAssignment_8_6_6 ) )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3618:1: ( rule__ActorClass__InternalPortsAssignment_8_6_6 )
                     {
-                     before(grammarAccess.getActorClassAccess().getBindingsAssignment_8_6_6()); 
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3619:1: ( rule__ActorClass__BindingsAssignment_8_6_6 )
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3619:2: rule__ActorClass__BindingsAssignment_8_6_6
+                     before(grammarAccess.getActorClassAccess().getInternalPortsAssignment_8_6_6()); 
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3619:1: ( rule__ActorClass__InternalPortsAssignment_8_6_6 )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3619:2: rule__ActorClass__InternalPortsAssignment_8_6_6
                     {
-                    pushFollow(FOLLOW_rule__ActorClass__BindingsAssignment_8_6_6_in_rule__ActorClass__Alternatives_8_67703);
-                    rule__ActorClass__BindingsAssignment_8_6_6();
+                    pushFollow(FOLLOW_rule__ActorClass__InternalPortsAssignment_8_6_6_in_rule__ActorClass__Alternatives_8_67703);
+                    rule__ActorClass__InternalPortsAssignment_8_6_6();
 
                     state._fsp--;
 
 
                     }
 
-                     after(grammarAccess.getActorClassAccess().getBindingsAssignment_8_6_6()); 
+                     after(grammarAccess.getActorClassAccess().getInternalPortsAssignment_8_6_6()); 
 
                     }
 
@@ -10319,24 +10319,24 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 8 :
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3623:6: ( ( rule__ActorClass__ConnectionsAssignment_8_6_7 ) )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3623:6: ( ( rule__ActorClass__ExternalPortsAssignment_8_6_7 ) )
                     {
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3623:6: ( ( rule__ActorClass__ConnectionsAssignment_8_6_7 ) )
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3624:1: ( rule__ActorClass__ConnectionsAssignment_8_6_7 )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3623:6: ( ( rule__ActorClass__ExternalPortsAssignment_8_6_7 ) )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3624:1: ( rule__ActorClass__ExternalPortsAssignment_8_6_7 )
                     {
-                     before(grammarAccess.getActorClassAccess().getConnectionsAssignment_8_6_7()); 
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3625:1: ( rule__ActorClass__ConnectionsAssignment_8_6_7 )
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3625:2: rule__ActorClass__ConnectionsAssignment_8_6_7
+                     before(grammarAccess.getActorClassAccess().getExternalPortsAssignment_8_6_7()); 
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3625:1: ( rule__ActorClass__ExternalPortsAssignment_8_6_7 )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3625:2: rule__ActorClass__ExternalPortsAssignment_8_6_7
                     {
-                    pushFollow(FOLLOW_rule__ActorClass__ConnectionsAssignment_8_6_7_in_rule__ActorClass__Alternatives_8_67721);
-                    rule__ActorClass__ConnectionsAssignment_8_6_7();
+                    pushFollow(FOLLOW_rule__ActorClass__ExternalPortsAssignment_8_6_7_in_rule__ActorClass__Alternatives_8_67721);
+                    rule__ActorClass__ExternalPortsAssignment_8_6_7();
 
                     state._fsp--;
 
 
                     }
 
-                     after(grammarAccess.getActorClassAccess().getConnectionsAssignment_8_6_7()); 
+                     after(grammarAccess.getActorClassAccess().getExternalPortsAssignment_8_6_7()); 
 
                     }
 
@@ -10361,20 +10361,20 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ActorClass__Alternatives_9_4"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3634:1: rule__ActorClass__Alternatives_9_4 : ( ( ( rule__ActorClass__StructorsAssignment_9_4_0 ) ) | ( ( rule__ActorClass__OperationsAssignment_9_4_1 ) ) );
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3634:1: rule__ActorClass__Alternatives_9_4 : ( ( ( rule__ActorClass__OperationsAssignment_9_4_0 ) ) | ( ( rule__ActorClass__StructorsAssignment_9_4_1 ) ) );
     public final void rule__ActorClass__Alternatives_9_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3638:1: ( ( ( rule__ActorClass__StructorsAssignment_9_4_0 ) ) | ( ( rule__ActorClass__OperationsAssignment_9_4_1 ) ) )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3638:1: ( ( ( rule__ActorClass__OperationsAssignment_9_4_0 ) ) | ( ( rule__ActorClass__StructorsAssignment_9_4_1 ) ) )
             int alt16=2;
             int LA16_0 = input.LA(1);
 
-            if ( ((LA16_0>=14 && LA16_0<=15)) ) {
+            if ( (LA16_0==60||LA16_0==126) ) {
                 alt16=1;
             }
-            else if ( (LA16_0==60||LA16_0==126) ) {
+            else if ( ((LA16_0>=14 && LA16_0<=15)) ) {
                 alt16=2;
             }
             else {
@@ -10385,24 +10385,24 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             }
             switch (alt16) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3639:1: ( ( rule__ActorClass__StructorsAssignment_9_4_0 ) )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3639:1: ( ( rule__ActorClass__OperationsAssignment_9_4_0 ) )
                     {
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3639:1: ( ( rule__ActorClass__StructorsAssignment_9_4_0 ) )
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3640:1: ( rule__ActorClass__StructorsAssignment_9_4_0 )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3639:1: ( ( rule__ActorClass__OperationsAssignment_9_4_0 ) )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3640:1: ( rule__ActorClass__OperationsAssignment_9_4_0 )
                     {
-                     before(grammarAccess.getActorClassAccess().getStructorsAssignment_9_4_0()); 
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3641:1: ( rule__ActorClass__StructorsAssignment_9_4_0 )
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3641:2: rule__ActorClass__StructorsAssignment_9_4_0
+                     before(grammarAccess.getActorClassAccess().getOperationsAssignment_9_4_0()); 
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3641:1: ( rule__ActorClass__OperationsAssignment_9_4_0 )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3641:2: rule__ActorClass__OperationsAssignment_9_4_0
                     {
-                    pushFollow(FOLLOW_rule__ActorClass__StructorsAssignment_9_4_0_in_rule__ActorClass__Alternatives_9_47754);
-                    rule__ActorClass__StructorsAssignment_9_4_0();
+                    pushFollow(FOLLOW_rule__ActorClass__OperationsAssignment_9_4_0_in_rule__ActorClass__Alternatives_9_47754);
+                    rule__ActorClass__OperationsAssignment_9_4_0();
 
                     state._fsp--;
 
 
                     }
 
-                     after(grammarAccess.getActorClassAccess().getStructorsAssignment_9_4_0()); 
+                     after(grammarAccess.getActorClassAccess().getOperationsAssignment_9_4_0()); 
 
                     }
 
@@ -10410,24 +10410,24 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3645:6: ( ( rule__ActorClass__OperationsAssignment_9_4_1 ) )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3645:6: ( ( rule__ActorClass__StructorsAssignment_9_4_1 ) )
                     {
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3645:6: ( ( rule__ActorClass__OperationsAssignment_9_4_1 ) )
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3646:1: ( rule__ActorClass__OperationsAssignment_9_4_1 )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3645:6: ( ( rule__ActorClass__StructorsAssignment_9_4_1 ) )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3646:1: ( rule__ActorClass__StructorsAssignment_9_4_1 )
                     {
-                     before(grammarAccess.getActorClassAccess().getOperationsAssignment_9_4_1()); 
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3647:1: ( rule__ActorClass__OperationsAssignment_9_4_1 )
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3647:2: rule__ActorClass__OperationsAssignment_9_4_1
+                     before(grammarAccess.getActorClassAccess().getStructorsAssignment_9_4_1()); 
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3647:1: ( rule__ActorClass__StructorsAssignment_9_4_1 )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3647:2: rule__ActorClass__StructorsAssignment_9_4_1
                     {
-                    pushFollow(FOLLOW_rule__ActorClass__OperationsAssignment_9_4_1_in_rule__ActorClass__Alternatives_9_47772);
-                    rule__ActorClass__OperationsAssignment_9_4_1();
+                    pushFollow(FOLLOW_rule__ActorClass__StructorsAssignment_9_4_1_in_rule__ActorClass__Alternatives_9_47772);
+                    rule__ActorClass__StructorsAssignment_9_4_1();
 
                     state._fsp--;
 
 
                     }
 
-                     after(grammarAccess.getActorClassAccess().getOperationsAssignment_9_4_1()); 
+                     after(grammarAccess.getActorClassAccess().getStructorsAssignment_9_4_1()); 
 
                     }
 
@@ -10560,16 +10560,16 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__LogicalSystem__Alternatives_5"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3684:1: rule__LogicalSystem__Alternatives_5 : ( ( ( rule__LogicalSystem__SubSystemsAssignment_5_0 ) ) | ( ( rule__LogicalSystem__BindingsAssignment_5_1 ) ) | ( ( rule__LogicalSystem__ConnectionsAssignment_5_2 ) ) );
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3684:1: rule__LogicalSystem__Alternatives_5 : ( ( ( rule__LogicalSystem__ConnectionsAssignment_5_0 ) ) | ( ( rule__LogicalSystem__BindingsAssignment_5_1 ) ) | ( ( rule__LogicalSystem__SubSystemsAssignment_5_2 ) ) );
     public final void rule__LogicalSystem__Alternatives_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3688:1: ( ( ( rule__LogicalSystem__SubSystemsAssignment_5_0 ) ) | ( ( rule__LogicalSystem__BindingsAssignment_5_1 ) ) | ( ( rule__LogicalSystem__ConnectionsAssignment_5_2 ) ) )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3688:1: ( ( ( rule__LogicalSystem__ConnectionsAssignment_5_0 ) ) | ( ( rule__LogicalSystem__BindingsAssignment_5_1 ) ) | ( ( rule__LogicalSystem__SubSystemsAssignment_5_2 ) ) )
             int alt18=3;
             switch ( input.LA(1) ) {
-            case 79:
+            case 87:
                 {
                 alt18=1;
                 }
@@ -10579,7 +10579,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
                 alt18=2;
                 }
                 break;
-            case 87:
+            case 79:
                 {
                 alt18=3;
                 }
@@ -10593,24 +10593,24 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
 
             switch (alt18) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3689:1: ( ( rule__LogicalSystem__SubSystemsAssignment_5_0 ) )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3689:1: ( ( rule__LogicalSystem__ConnectionsAssignment_5_0 ) )
                     {
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3689:1: ( ( rule__LogicalSystem__SubSystemsAssignment_5_0 ) )
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3690:1: ( rule__LogicalSystem__SubSystemsAssignment_5_0 )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3689:1: ( ( rule__LogicalSystem__ConnectionsAssignment_5_0 ) )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3690:1: ( rule__LogicalSystem__ConnectionsAssignment_5_0 )
                     {
-                     before(grammarAccess.getLogicalSystemAccess().getSubSystemsAssignment_5_0()); 
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3691:1: ( rule__LogicalSystem__SubSystemsAssignment_5_0 )
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3691:2: rule__LogicalSystem__SubSystemsAssignment_5_0
+                     before(grammarAccess.getLogicalSystemAccess().getConnectionsAssignment_5_0()); 
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3691:1: ( rule__LogicalSystem__ConnectionsAssignment_5_0 )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3691:2: rule__LogicalSystem__ConnectionsAssignment_5_0
                     {
-                    pushFollow(FOLLOW_rule__LogicalSystem__SubSystemsAssignment_5_0_in_rule__LogicalSystem__Alternatives_57871);
-                    rule__LogicalSystem__SubSystemsAssignment_5_0();
+                    pushFollow(FOLLOW_rule__LogicalSystem__ConnectionsAssignment_5_0_in_rule__LogicalSystem__Alternatives_57871);
+                    rule__LogicalSystem__ConnectionsAssignment_5_0();
 
                     state._fsp--;
 
 
                     }
 
-                     after(grammarAccess.getLogicalSystemAccess().getSubSystemsAssignment_5_0()); 
+                     after(grammarAccess.getLogicalSystemAccess().getConnectionsAssignment_5_0()); 
 
                     }
 
@@ -10643,24 +10643,24 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 3 :
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3701:6: ( ( rule__LogicalSystem__ConnectionsAssignment_5_2 ) )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3701:6: ( ( rule__LogicalSystem__SubSystemsAssignment_5_2 ) )
                     {
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3701:6: ( ( rule__LogicalSystem__ConnectionsAssignment_5_2 ) )
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3702:1: ( rule__LogicalSystem__ConnectionsAssignment_5_2 )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3701:6: ( ( rule__LogicalSystem__SubSystemsAssignment_5_2 ) )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3702:1: ( rule__LogicalSystem__SubSystemsAssignment_5_2 )
                     {
-                     before(grammarAccess.getLogicalSystemAccess().getConnectionsAssignment_5_2()); 
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3703:1: ( rule__LogicalSystem__ConnectionsAssignment_5_2 )
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3703:2: rule__LogicalSystem__ConnectionsAssignment_5_2
+                     before(grammarAccess.getLogicalSystemAccess().getSubSystemsAssignment_5_2()); 
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3703:1: ( rule__LogicalSystem__SubSystemsAssignment_5_2 )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3703:2: rule__LogicalSystem__SubSystemsAssignment_5_2
                     {
-                    pushFollow(FOLLOW_rule__LogicalSystem__ConnectionsAssignment_5_2_in_rule__LogicalSystem__Alternatives_57907);
-                    rule__LogicalSystem__ConnectionsAssignment_5_2();
+                    pushFollow(FOLLOW_rule__LogicalSystem__SubSystemsAssignment_5_2_in_rule__LogicalSystem__Alternatives_57907);
+                    rule__LogicalSystem__SubSystemsAssignment_5_2();
 
                     state._fsp--;
 
 
                     }
 
-                     after(grammarAccess.getLogicalSystemAccess().getConnectionsAssignment_5_2()); 
+                     after(grammarAccess.getLogicalSystemAccess().getSubSystemsAssignment_5_2()); 
 
                     }
 
@@ -10685,29 +10685,26 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SubSystemClass__Alternatives_8"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3713:1: rule__SubSystemClass__Alternatives_8 : ( ( ( rule__SubSystemClass__RelayPortsAssignment_8_0 ) ) | ( ( rule__SubSystemClass__ServiceProvisionPointsAssignment_8_1 ) ) | ( ( rule__SubSystemClass__ActorRefsAssignment_8_2 ) ) | ( ( rule__SubSystemClass__BindingsAssignment_8_3 ) ) | ( ( rule__SubSystemClass__ConnectionsAssignment_8_4 ) ) | ( ( rule__SubSystemClass__ThreadsAssignment_8_5 ) ) | ( ( rule__SubSystemClass__ActorInstanceMappingsAssignment_8_6 ) ) );
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3713:1: rule__SubSystemClass__Alternatives_8 : ( ( ( rule__SubSystemClass__ActorInstanceMappingsAssignment_8_0 ) ) | ( ( rule__SubSystemClass__ThreadsAssignment_8_1 ) ) | ( ( rule__SubSystemClass__ConnectionsAssignment_8_2 ) ) | ( ( rule__SubSystemClass__BindingsAssignment_8_3 ) ) | ( ( rule__SubSystemClass__ActorRefsAssignment_8_4 ) ) | ( ( rule__SubSystemClass__ServiceProvisionPointsAssignment_8_5 ) ) | ( ( rule__SubSystemClass__RelayPortsAssignment_8_6 ) ) );
     public final void rule__SubSystemClass__Alternatives_8() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3717:1: ( ( ( rule__SubSystemClass__RelayPortsAssignment_8_0 ) ) | ( ( rule__SubSystemClass__ServiceProvisionPointsAssignment_8_1 ) ) | ( ( rule__SubSystemClass__ActorRefsAssignment_8_2 ) ) | ( ( rule__SubSystemClass__BindingsAssignment_8_3 ) ) | ( ( rule__SubSystemClass__ConnectionsAssignment_8_4 ) ) | ( ( rule__SubSystemClass__ThreadsAssignment_8_5 ) ) | ( ( rule__SubSystemClass__ActorInstanceMappingsAssignment_8_6 ) ) )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3717:1: ( ( ( rule__SubSystemClass__ActorInstanceMappingsAssignment_8_0 ) ) | ( ( rule__SubSystemClass__ThreadsAssignment_8_1 ) ) | ( ( rule__SubSystemClass__ConnectionsAssignment_8_2 ) ) | ( ( rule__SubSystemClass__BindingsAssignment_8_3 ) ) | ( ( rule__SubSystemClass__ActorRefsAssignment_8_4 ) ) | ( ( rule__SubSystemClass__ServiceProvisionPointsAssignment_8_5 ) ) | ( ( rule__SubSystemClass__RelayPortsAssignment_8_6 ) ) )
             int alt19=7;
             switch ( input.LA(1) ) {
-            case 66:
-            case 74:
+            case 81:
                 {
                 alt19=1;
                 }
                 break;
-            case 77:
+            case 80:
                 {
                 alt19=2;
                 }
                 break;
-            case 32:
-            case 33:
-            case 91:
+            case 87:
                 {
                 alt19=3;
                 }
@@ -10717,17 +10714,20 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
                 alt19=4;
                 }
                 break;
-            case 87:
+            case 32:
+            case 33:
+            case 91:
                 {
                 alt19=5;
                 }
                 break;
-            case 80:
+            case 77:
                 {
                 alt19=6;
                 }
                 break;
-            case 81:
+            case 66:
+            case 74:
                 {
                 alt19=7;
                 }
@@ -10741,24 +10741,24 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
 
             switch (alt19) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3718:1: ( ( rule__SubSystemClass__RelayPortsAssignment_8_0 ) )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3718:1: ( ( rule__SubSystemClass__ActorInstanceMappingsAssignment_8_0 ) )
                     {
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3718:1: ( ( rule__SubSystemClass__RelayPortsAssignment_8_0 ) )
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3719:1: ( rule__SubSystemClass__RelayPortsAssignment_8_0 )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3718:1: ( ( rule__SubSystemClass__ActorInstanceMappingsAssignment_8_0 ) )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3719:1: ( rule__SubSystemClass__ActorInstanceMappingsAssignment_8_0 )
                     {
-                     before(grammarAccess.getSubSystemClassAccess().getRelayPortsAssignment_8_0()); 
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3720:1: ( rule__SubSystemClass__RelayPortsAssignment_8_0 )
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3720:2: rule__SubSystemClass__RelayPortsAssignment_8_0
+                     before(grammarAccess.getSubSystemClassAccess().getActorInstanceMappingsAssignment_8_0()); 
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3720:1: ( rule__SubSystemClass__ActorInstanceMappingsAssignment_8_0 )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3720:2: rule__SubSystemClass__ActorInstanceMappingsAssignment_8_0
                     {
-                    pushFollow(FOLLOW_rule__SubSystemClass__RelayPortsAssignment_8_0_in_rule__SubSystemClass__Alternatives_87941);
-                    rule__SubSystemClass__RelayPortsAssignment_8_0();
+                    pushFollow(FOLLOW_rule__SubSystemClass__ActorInstanceMappingsAssignment_8_0_in_rule__SubSystemClass__Alternatives_87941);
+                    rule__SubSystemClass__ActorInstanceMappingsAssignment_8_0();
 
                     state._fsp--;
 
 
                     }
 
-                     after(grammarAccess.getSubSystemClassAccess().getRelayPortsAssignment_8_0()); 
+                     after(grammarAccess.getSubSystemClassAccess().getActorInstanceMappingsAssignment_8_0()); 
 
                     }
 
@@ -10766,24 +10766,24 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3724:6: ( ( rule__SubSystemClass__ServiceProvisionPointsAssignment_8_1 ) )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3724:6: ( ( rule__SubSystemClass__ThreadsAssignment_8_1 ) )
                     {
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3724:6: ( ( rule__SubSystemClass__ServiceProvisionPointsAssignment_8_1 ) )
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3725:1: ( rule__SubSystemClass__ServiceProvisionPointsAssignment_8_1 )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3724:6: ( ( rule__SubSystemClass__ThreadsAssignment_8_1 ) )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3725:1: ( rule__SubSystemClass__ThreadsAssignment_8_1 )
                     {
-                     before(grammarAccess.getSubSystemClassAccess().getServiceProvisionPointsAssignment_8_1()); 
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3726:1: ( rule__SubSystemClass__ServiceProvisionPointsAssignment_8_1 )
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3726:2: rule__SubSystemClass__ServiceProvisionPointsAssignment_8_1
+                     before(grammarAccess.getSubSystemClassAccess().getThreadsAssignment_8_1()); 
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3726:1: ( rule__SubSystemClass__ThreadsAssignment_8_1 )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3726:2: rule__SubSystemClass__ThreadsAssignment_8_1
                     {
-                    pushFollow(FOLLOW_rule__SubSystemClass__ServiceProvisionPointsAssignment_8_1_in_rule__SubSystemClass__Alternatives_87959);
-                    rule__SubSystemClass__ServiceProvisionPointsAssignment_8_1();
+                    pushFollow(FOLLOW_rule__SubSystemClass__ThreadsAssignment_8_1_in_rule__SubSystemClass__Alternatives_87959);
+                    rule__SubSystemClass__ThreadsAssignment_8_1();
 
                     state._fsp--;
 
 
                     }
 
-                     after(grammarAccess.getSubSystemClassAccess().getServiceProvisionPointsAssignment_8_1()); 
+                     after(grammarAccess.getSubSystemClassAccess().getThreadsAssignment_8_1()); 
 
                     }
 
@@ -10791,24 +10791,24 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 3 :
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3730:6: ( ( rule__SubSystemClass__ActorRefsAssignment_8_2 ) )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3730:6: ( ( rule__SubSystemClass__ConnectionsAssignment_8_2 ) )
                     {
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3730:6: ( ( rule__SubSystemClass__ActorRefsAssignment_8_2 ) )
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3731:1: ( rule__SubSystemClass__ActorRefsAssignment_8_2 )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3730:6: ( ( rule__SubSystemClass__ConnectionsAssignment_8_2 ) )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3731:1: ( rule__SubSystemClass__ConnectionsAssignment_8_2 )
                     {
-                     before(grammarAccess.getSubSystemClassAccess().getActorRefsAssignment_8_2()); 
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3732:1: ( rule__SubSystemClass__ActorRefsAssignment_8_2 )
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3732:2: rule__SubSystemClass__ActorRefsAssignment_8_2
+                     before(grammarAccess.getSubSystemClassAccess().getConnectionsAssignment_8_2()); 
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3732:1: ( rule__SubSystemClass__ConnectionsAssignment_8_2 )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3732:2: rule__SubSystemClass__ConnectionsAssignment_8_2
                     {
-                    pushFollow(FOLLOW_rule__SubSystemClass__ActorRefsAssignment_8_2_in_rule__SubSystemClass__Alternatives_87977);
-                    rule__SubSystemClass__ActorRefsAssignment_8_2();
+                    pushFollow(FOLLOW_rule__SubSystemClass__ConnectionsAssignment_8_2_in_rule__SubSystemClass__Alternatives_87977);
+                    rule__SubSystemClass__ConnectionsAssignment_8_2();
 
                     state._fsp--;
 
 
                     }
 
-                     after(grammarAccess.getSubSystemClassAccess().getActorRefsAssignment_8_2()); 
+                     after(grammarAccess.getSubSystemClassAccess().getConnectionsAssignment_8_2()); 
 
                     }
 
@@ -10841,24 +10841,24 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 5 :
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3742:6: ( ( rule__SubSystemClass__ConnectionsAssignment_8_4 ) )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3742:6: ( ( rule__SubSystemClass__ActorRefsAssignment_8_4 ) )
                     {
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3742:6: ( ( rule__SubSystemClass__ConnectionsAssignment_8_4 ) )
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3743:1: ( rule__SubSystemClass__ConnectionsAssignment_8_4 )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3742:6: ( ( rule__SubSystemClass__ActorRefsAssignment_8_4 ) )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3743:1: ( rule__SubSystemClass__ActorRefsAssignment_8_4 )
                     {
-                     before(grammarAccess.getSubSystemClassAccess().getConnectionsAssignment_8_4()); 
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3744:1: ( rule__SubSystemClass__ConnectionsAssignment_8_4 )
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3744:2: rule__SubSystemClass__ConnectionsAssignment_8_4
+                     before(grammarAccess.getSubSystemClassAccess().getActorRefsAssignment_8_4()); 
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3744:1: ( rule__SubSystemClass__ActorRefsAssignment_8_4 )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3744:2: rule__SubSystemClass__ActorRefsAssignment_8_4
                     {
-                    pushFollow(FOLLOW_rule__SubSystemClass__ConnectionsAssignment_8_4_in_rule__SubSystemClass__Alternatives_88013);
-                    rule__SubSystemClass__ConnectionsAssignment_8_4();
+                    pushFollow(FOLLOW_rule__SubSystemClass__ActorRefsAssignment_8_4_in_rule__SubSystemClass__Alternatives_88013);
+                    rule__SubSystemClass__ActorRefsAssignment_8_4();
 
                     state._fsp--;
 
 
                     }
 
-                     after(grammarAccess.getSubSystemClassAccess().getConnectionsAssignment_8_4()); 
+                     after(grammarAccess.getSubSystemClassAccess().getActorRefsAssignment_8_4()); 
 
                     }
 
@@ -10866,24 +10866,24 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 6 :
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3748:6: ( ( rule__SubSystemClass__ThreadsAssignment_8_5 ) )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3748:6: ( ( rule__SubSystemClass__ServiceProvisionPointsAssignment_8_5 ) )
                     {
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3748:6: ( ( rule__SubSystemClass__ThreadsAssignment_8_5 ) )
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3749:1: ( rule__SubSystemClass__ThreadsAssignment_8_5 )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3748:6: ( ( rule__SubSystemClass__ServiceProvisionPointsAssignment_8_5 ) )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3749:1: ( rule__SubSystemClass__ServiceProvisionPointsAssignment_8_5 )
                     {
-                     before(grammarAccess.getSubSystemClassAccess().getThreadsAssignment_8_5()); 
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3750:1: ( rule__SubSystemClass__ThreadsAssignment_8_5 )
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3750:2: rule__SubSystemClass__ThreadsAssignment_8_5
+                     before(grammarAccess.getSubSystemClassAccess().getServiceProvisionPointsAssignment_8_5()); 
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3750:1: ( rule__SubSystemClass__ServiceProvisionPointsAssignment_8_5 )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3750:2: rule__SubSystemClass__ServiceProvisionPointsAssignment_8_5
                     {
-                    pushFollow(FOLLOW_rule__SubSystemClass__ThreadsAssignment_8_5_in_rule__SubSystemClass__Alternatives_88031);
-                    rule__SubSystemClass__ThreadsAssignment_8_5();
+                    pushFollow(FOLLOW_rule__SubSystemClass__ServiceProvisionPointsAssignment_8_5_in_rule__SubSystemClass__Alternatives_88031);
+                    rule__SubSystemClass__ServiceProvisionPointsAssignment_8_5();
 
                     state._fsp--;
 
 
                     }
 
-                     after(grammarAccess.getSubSystemClassAccess().getThreadsAssignment_8_5()); 
+                     after(grammarAccess.getSubSystemClassAccess().getServiceProvisionPointsAssignment_8_5()); 
 
                     }
 
@@ -10891,24 +10891,24 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 7 :
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3754:6: ( ( rule__SubSystemClass__ActorInstanceMappingsAssignment_8_6 ) )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3754:6: ( ( rule__SubSystemClass__RelayPortsAssignment_8_6 ) )
                     {
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3754:6: ( ( rule__SubSystemClass__ActorInstanceMappingsAssignment_8_6 ) )
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3755:1: ( rule__SubSystemClass__ActorInstanceMappingsAssignment_8_6 )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3754:6: ( ( rule__SubSystemClass__RelayPortsAssignment_8_6 ) )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3755:1: ( rule__SubSystemClass__RelayPortsAssignment_8_6 )
                     {
-                     before(grammarAccess.getSubSystemClassAccess().getActorInstanceMappingsAssignment_8_6()); 
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3756:1: ( rule__SubSystemClass__ActorInstanceMappingsAssignment_8_6 )
-                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3756:2: rule__SubSystemClass__ActorInstanceMappingsAssignment_8_6
+                     before(grammarAccess.getSubSystemClassAccess().getRelayPortsAssignment_8_6()); 
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3756:1: ( rule__SubSystemClass__RelayPortsAssignment_8_6 )
+                    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:3756:2: rule__SubSystemClass__RelayPortsAssignment_8_6
                     {
-                    pushFollow(FOLLOW_rule__SubSystemClass__ActorInstanceMappingsAssignment_8_6_in_rule__SubSystemClass__Alternatives_88049);
-                    rule__SubSystemClass__ActorInstanceMappingsAssignment_8_6();
+                    pushFollow(FOLLOW_rule__SubSystemClass__RelayPortsAssignment_8_6_in_rule__SubSystemClass__Alternatives_88049);
+                    rule__SubSystemClass__RelayPortsAssignment_8_6();
 
                     state._fsp--;
 
 
                     }
 
-                     after(grammarAccess.getSubSystemClassAccess().getActorInstanceMappingsAssignment_8_6()); 
+                     after(grammarAccess.getSubSystemClassAccess().getRelayPortsAssignment_8_6()); 
 
                     }
 
@@ -65025,26 +65025,26 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__DataClass__UserCode3Assignment_8_1"
 
 
-    // $ANTLR start "rule__DataClass__AttributesAssignment_9_0"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:24108:1: rule__DataClass__AttributesAssignment_9_0 : ( ruleAttribute ) ;
-    public final void rule__DataClass__AttributesAssignment_9_0() throws RecognitionException {
+    // $ANTLR start "rule__DataClass__OperationsAssignment_9_0"
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:24108:1: rule__DataClass__OperationsAssignment_9_0 : ( ruleStandardOperation ) ;
+    public final void rule__DataClass__OperationsAssignment_9_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:24112:1: ( ( ruleAttribute ) )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:24113:1: ( ruleAttribute )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:24112:1: ( ( ruleStandardOperation ) )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:24113:1: ( ruleStandardOperation )
             {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:24113:1: ( ruleAttribute )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:24114:1: ruleAttribute
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:24113:1: ( ruleStandardOperation )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:24114:1: ruleStandardOperation
             {
-             before(grammarAccess.getDataClassAccess().getAttributesAttributeParserRuleCall_9_0_0()); 
-            pushFollow(FOLLOW_ruleAttribute_in_rule__DataClass__AttributesAssignment_9_048667);
-            ruleAttribute();
+             before(grammarAccess.getDataClassAccess().getOperationsStandardOperationParserRuleCall_9_0_0()); 
+            pushFollow(FOLLOW_ruleStandardOperation_in_rule__DataClass__OperationsAssignment_9_048667);
+            ruleStandardOperation();
 
             state._fsp--;
 
-             after(grammarAccess.getDataClassAccess().getAttributesAttributeParserRuleCall_9_0_0()); 
+             after(grammarAccess.getDataClassAccess().getOperationsStandardOperationParserRuleCall_9_0_0()); 
 
             }
 
@@ -65063,7 +65063,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__DataClass__AttributesAssignment_9_0"
+    // $ANTLR end "rule__DataClass__OperationsAssignment_9_0"
 
 
     // $ANTLR start "rule__DataClass__StructorsAssignment_9_1"
@@ -65107,26 +65107,26 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__DataClass__StructorsAssignment_9_1"
 
 
-    // $ANTLR start "rule__DataClass__OperationsAssignment_9_2"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:24138:1: rule__DataClass__OperationsAssignment_9_2 : ( ruleStandardOperation ) ;
-    public final void rule__DataClass__OperationsAssignment_9_2() throws RecognitionException {
+    // $ANTLR start "rule__DataClass__AttributesAssignment_9_2"
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:24138:1: rule__DataClass__AttributesAssignment_9_2 : ( ruleAttribute ) ;
+    public final void rule__DataClass__AttributesAssignment_9_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:24142:1: ( ( ruleStandardOperation ) )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:24143:1: ( ruleStandardOperation )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:24142:1: ( ( ruleAttribute ) )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:24143:1: ( ruleAttribute )
             {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:24143:1: ( ruleStandardOperation )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:24144:1: ruleStandardOperation
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:24143:1: ( ruleAttribute )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:24144:1: ruleAttribute
             {
-             before(grammarAccess.getDataClassAccess().getOperationsStandardOperationParserRuleCall_9_2_0()); 
-            pushFollow(FOLLOW_ruleStandardOperation_in_rule__DataClass__OperationsAssignment_9_248729);
-            ruleStandardOperation();
+             before(grammarAccess.getDataClassAccess().getAttributesAttributeParserRuleCall_9_2_0()); 
+            pushFollow(FOLLOW_ruleAttribute_in_rule__DataClass__AttributesAssignment_9_248729);
+            ruleAttribute();
 
             state._fsp--;
 
-             after(grammarAccess.getDataClassAccess().getOperationsStandardOperationParserRuleCall_9_2_0()); 
+             after(grammarAccess.getDataClassAccess().getAttributesAttributeParserRuleCall_9_2_0()); 
 
             }
 
@@ -65145,7 +65145,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__DataClass__OperationsAssignment_9_2"
+    // $ANTLR end "rule__DataClass__AttributesAssignment_9_2"
 
 
     // $ANTLR start "rule__Attribute__NameAssignment_1"
@@ -66991,26 +66991,26 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__PortClass__UserCodeAssignment_2_1"
 
 
-    // $ANTLR start "rule__PortClass__AttributesAssignment_3_0"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:24857:1: rule__PortClass__AttributesAssignment_3_0 : ( ruleAttribute ) ;
-    public final void rule__PortClass__AttributesAssignment_3_0() throws RecognitionException {
+    // $ANTLR start "rule__PortClass__MsgHandlersAssignment_3_0"
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:24857:1: rule__PortClass__MsgHandlersAssignment_3_0 : ( ruleMessageHandler ) ;
+    public final void rule__PortClass__MsgHandlersAssignment_3_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:24861:1: ( ( ruleAttribute ) )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:24862:1: ( ruleAttribute )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:24861:1: ( ( ruleMessageHandler ) )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:24862:1: ( ruleMessageHandler )
             {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:24862:1: ( ruleAttribute )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:24863:1: ruleAttribute
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:24862:1: ( ruleMessageHandler )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:24863:1: ruleMessageHandler
             {
-             before(grammarAccess.getPortClassAccess().getAttributesAttributeParserRuleCall_3_0_0()); 
-            pushFollow(FOLLOW_ruleAttribute_in_rule__PortClass__AttributesAssignment_3_050207);
-            ruleAttribute();
+             before(grammarAccess.getPortClassAccess().getMsgHandlersMessageHandlerParserRuleCall_3_0_0()); 
+            pushFollow(FOLLOW_ruleMessageHandler_in_rule__PortClass__MsgHandlersAssignment_3_050207);
+            ruleMessageHandler();
 
             state._fsp--;
 
-             after(grammarAccess.getPortClassAccess().getAttributesAttributeParserRuleCall_3_0_0()); 
+             after(grammarAccess.getPortClassAccess().getMsgHandlersMessageHandlerParserRuleCall_3_0_0()); 
 
             }
 
@@ -67029,7 +67029,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__PortClass__AttributesAssignment_3_0"
+    // $ANTLR end "rule__PortClass__MsgHandlersAssignment_3_0"
 
 
     // $ANTLR start "rule__PortClass__OperationsAssignment_3_1"
@@ -67073,26 +67073,26 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__PortClass__OperationsAssignment_3_1"
 
 
-    // $ANTLR start "rule__PortClass__MsgHandlersAssignment_3_2"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:24887:1: rule__PortClass__MsgHandlersAssignment_3_2 : ( ruleMessageHandler ) ;
-    public final void rule__PortClass__MsgHandlersAssignment_3_2() throws RecognitionException {
+    // $ANTLR start "rule__PortClass__AttributesAssignment_3_2"
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:24887:1: rule__PortClass__AttributesAssignment_3_2 : ( ruleAttribute ) ;
+    public final void rule__PortClass__AttributesAssignment_3_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:24891:1: ( ( ruleMessageHandler ) )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:24892:1: ( ruleMessageHandler )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:24891:1: ( ( ruleAttribute ) )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:24892:1: ( ruleAttribute )
             {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:24892:1: ( ruleMessageHandler )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:24893:1: ruleMessageHandler
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:24892:1: ( ruleAttribute )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:24893:1: ruleAttribute
             {
-             before(grammarAccess.getPortClassAccess().getMsgHandlersMessageHandlerParserRuleCall_3_2_0()); 
-            pushFollow(FOLLOW_ruleMessageHandler_in_rule__PortClass__MsgHandlersAssignment_3_250269);
-            ruleMessageHandler();
+             before(grammarAccess.getPortClassAccess().getAttributesAttributeParserRuleCall_3_2_0()); 
+            pushFollow(FOLLOW_ruleAttribute_in_rule__PortClass__AttributesAssignment_3_250269);
+            ruleAttribute();
 
             state._fsp--;
 
-             after(grammarAccess.getPortClassAccess().getMsgHandlersMessageHandlerParserRuleCall_3_2_0()); 
+             after(grammarAccess.getPortClassAccess().getAttributesAttributeParserRuleCall_3_2_0()); 
 
             }
 
@@ -67111,7 +67111,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__PortClass__MsgHandlersAssignment_3_2"
+    // $ANTLR end "rule__PortClass__AttributesAssignment_3_2"
 
 
     // $ANTLR start "rule__InMessageHandler__MsgAssignment_2"
@@ -67540,67 +67540,26 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__ActorClass__AnnotationsAssignment_6"
 
 
-    // $ANTLR start "rule__ActorClass__InterfacePortsAssignment_7_2_0"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25072:1: rule__ActorClass__InterfacePortsAssignment_7_2_0 : ( rulePort ) ;
-    public final void rule__ActorClass__InterfacePortsAssignment_7_2_0() throws RecognitionException {
+    // $ANTLR start "rule__ActorClass__ServiceProvisionPointsAssignment_7_2_0"
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25072:1: rule__ActorClass__ServiceProvisionPointsAssignment_7_2_0 : ( ruleSPP ) ;
+    public final void rule__ActorClass__ServiceProvisionPointsAssignment_7_2_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25076:1: ( ( rulePort ) )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25077:1: ( rulePort )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25076:1: ( ( ruleSPP ) )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25077:1: ( ruleSPP )
             {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25077:1: ( rulePort )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25078:1: rulePort
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25077:1: ( ruleSPP )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25078:1: ruleSPP
             {
-             before(grammarAccess.getActorClassAccess().getInterfacePortsPortParserRuleCall_7_2_0_0()); 
-            pushFollow(FOLLOW_rulePort_in_rule__ActorClass__InterfacePortsAssignment_7_2_050647);
-            rulePort();
-
-            state._fsp--;
-
-             after(grammarAccess.getActorClassAccess().getInterfacePortsPortParserRuleCall_7_2_0_0()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__ActorClass__InterfacePortsAssignment_7_2_0"
-
-
-    // $ANTLR start "rule__ActorClass__ServiceProvisionPointsAssignment_7_2_1"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25087:1: rule__ActorClass__ServiceProvisionPointsAssignment_7_2_1 : ( ruleSPP ) ;
-    public final void rule__ActorClass__ServiceProvisionPointsAssignment_7_2_1() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25091:1: ( ( ruleSPP ) )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25092:1: ( ruleSPP )
-            {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25092:1: ( ruleSPP )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25093:1: ruleSPP
-            {
-             before(grammarAccess.getActorClassAccess().getServiceProvisionPointsSPPParserRuleCall_7_2_1_0()); 
-            pushFollow(FOLLOW_ruleSPP_in_rule__ActorClass__ServiceProvisionPointsAssignment_7_2_150678);
+             before(grammarAccess.getActorClassAccess().getServiceProvisionPointsSPPParserRuleCall_7_2_0_0()); 
+            pushFollow(FOLLOW_ruleSPP_in_rule__ActorClass__ServiceProvisionPointsAssignment_7_2_050647);
             ruleSPP();
 
             state._fsp--;
 
-             after(grammarAccess.getActorClassAccess().getServiceProvisionPointsSPPParserRuleCall_7_2_1_0()); 
+             after(grammarAccess.getActorClassAccess().getServiceProvisionPointsSPPParserRuleCall_7_2_0_0()); 
 
             }
 
@@ -67619,7 +67578,48 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__ActorClass__ServiceProvisionPointsAssignment_7_2_1"
+    // $ANTLR end "rule__ActorClass__ServiceProvisionPointsAssignment_7_2_0"
+
+
+    // $ANTLR start "rule__ActorClass__InterfacePortsAssignment_7_2_1"
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25087:1: rule__ActorClass__InterfacePortsAssignment_7_2_1 : ( rulePort ) ;
+    public final void rule__ActorClass__InterfacePortsAssignment_7_2_1() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25091:1: ( ( rulePort ) )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25092:1: ( rulePort )
+            {
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25092:1: ( rulePort )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25093:1: rulePort
+            {
+             before(grammarAccess.getActorClassAccess().getInterfacePortsPortParserRuleCall_7_2_1_0()); 
+            pushFollow(FOLLOW_rulePort_in_rule__ActorClass__InterfacePortsAssignment_7_2_150678);
+            rulePort();
+
+            state._fsp--;
+
+             after(grammarAccess.getActorClassAccess().getInterfacePortsPortParserRuleCall_7_2_1_0()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__ActorClass__InterfacePortsAssignment_7_2_1"
 
 
     // $ANTLR start "rule__ActorClass__StructureDocuAssignment_8_1"
@@ -67786,26 +67786,26 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__ActorClass__UserCode3Assignment_8_5_1"
 
 
-    // $ANTLR start "rule__ActorClass__InternalPortsAssignment_8_6_0"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25162:1: rule__ActorClass__InternalPortsAssignment_8_6_0 : ( rulePort ) ;
-    public final void rule__ActorClass__InternalPortsAssignment_8_6_0() throws RecognitionException {
+    // $ANTLR start "rule__ActorClass__ConnectionsAssignment_8_6_0"
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25162:1: rule__ActorClass__ConnectionsAssignment_8_6_0 : ( ruleLayerConnection ) ;
+    public final void rule__ActorClass__ConnectionsAssignment_8_6_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25166:1: ( ( rulePort ) )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25167:1: ( rulePort )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25166:1: ( ( ruleLayerConnection ) )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25167:1: ( ruleLayerConnection )
             {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25167:1: ( rulePort )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25168:1: rulePort
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25167:1: ( ruleLayerConnection )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25168:1: ruleLayerConnection
             {
-             before(grammarAccess.getActorClassAccess().getInternalPortsPortParserRuleCall_8_6_0_0()); 
-            pushFollow(FOLLOW_rulePort_in_rule__ActorClass__InternalPortsAssignment_8_6_050833);
-            rulePort();
+             before(grammarAccess.getActorClassAccess().getConnectionsLayerConnectionParserRuleCall_8_6_0_0()); 
+            pushFollow(FOLLOW_ruleLayerConnection_in_rule__ActorClass__ConnectionsAssignment_8_6_050833);
+            ruleLayerConnection();
 
             state._fsp--;
 
-             after(grammarAccess.getActorClassAccess().getInternalPortsPortParserRuleCall_8_6_0_0()); 
+             after(grammarAccess.getActorClassAccess().getConnectionsLayerConnectionParserRuleCall_8_6_0_0()); 
 
             }
 
@@ -67824,29 +67824,29 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__ActorClass__InternalPortsAssignment_8_6_0"
+    // $ANTLR end "rule__ActorClass__ConnectionsAssignment_8_6_0"
 
 
-    // $ANTLR start "rule__ActorClass__ExternalPortsAssignment_8_6_1"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25177:1: rule__ActorClass__ExternalPortsAssignment_8_6_1 : ( ruleExternalPort ) ;
-    public final void rule__ActorClass__ExternalPortsAssignment_8_6_1() throws RecognitionException {
+    // $ANTLR start "rule__ActorClass__BindingsAssignment_8_6_1"
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25177:1: rule__ActorClass__BindingsAssignment_8_6_1 : ( ruleBinding ) ;
+    public final void rule__ActorClass__BindingsAssignment_8_6_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25181:1: ( ( ruleExternalPort ) )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25182:1: ( ruleExternalPort )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25181:1: ( ( ruleBinding ) )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25182:1: ( ruleBinding )
             {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25182:1: ( ruleExternalPort )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25183:1: ruleExternalPort
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25182:1: ( ruleBinding )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25183:1: ruleBinding
             {
-             before(grammarAccess.getActorClassAccess().getExternalPortsExternalPortParserRuleCall_8_6_1_0()); 
-            pushFollow(FOLLOW_ruleExternalPort_in_rule__ActorClass__ExternalPortsAssignment_8_6_150864);
-            ruleExternalPort();
+             before(grammarAccess.getActorClassAccess().getBindingsBindingParserRuleCall_8_6_1_0()); 
+            pushFollow(FOLLOW_ruleBinding_in_rule__ActorClass__BindingsAssignment_8_6_150864);
+            ruleBinding();
 
             state._fsp--;
 
-             after(grammarAccess.getActorClassAccess().getExternalPortsExternalPortParserRuleCall_8_6_1_0()); 
+             after(grammarAccess.getActorClassAccess().getBindingsBindingParserRuleCall_8_6_1_0()); 
 
             }
 
@@ -67865,29 +67865,29 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__ActorClass__ExternalPortsAssignment_8_6_1"
+    // $ANTLR end "rule__ActorClass__BindingsAssignment_8_6_1"
 
 
-    // $ANTLR start "rule__ActorClass__ServiceAccessPointsAssignment_8_6_2"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25192:1: rule__ActorClass__ServiceAccessPointsAssignment_8_6_2 : ( ruleSAP ) ;
-    public final void rule__ActorClass__ServiceAccessPointsAssignment_8_6_2() throws RecognitionException {
+    // $ANTLR start "rule__ActorClass__ServiceImplementationsAssignment_8_6_2"
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25192:1: rule__ActorClass__ServiceImplementationsAssignment_8_6_2 : ( ruleServiceImplementation ) ;
+    public final void rule__ActorClass__ServiceImplementationsAssignment_8_6_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25196:1: ( ( ruleSAP ) )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25197:1: ( ruleSAP )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25196:1: ( ( ruleServiceImplementation ) )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25197:1: ( ruleServiceImplementation )
             {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25197:1: ( ruleSAP )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25198:1: ruleSAP
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25197:1: ( ruleServiceImplementation )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25198:1: ruleServiceImplementation
             {
-             before(grammarAccess.getActorClassAccess().getServiceAccessPointsSAPParserRuleCall_8_6_2_0()); 
-            pushFollow(FOLLOW_ruleSAP_in_rule__ActorClass__ServiceAccessPointsAssignment_8_6_250895);
-            ruleSAP();
+             before(grammarAccess.getActorClassAccess().getServiceImplementationsServiceImplementationParserRuleCall_8_6_2_0()); 
+            pushFollow(FOLLOW_ruleServiceImplementation_in_rule__ActorClass__ServiceImplementationsAssignment_8_6_250895);
+            ruleServiceImplementation();
 
             state._fsp--;
 
-             after(grammarAccess.getActorClassAccess().getServiceAccessPointsSAPParserRuleCall_8_6_2_0()); 
+             after(grammarAccess.getActorClassAccess().getServiceImplementationsServiceImplementationParserRuleCall_8_6_2_0()); 
 
             }
 
@@ -67906,7 +67906,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__ActorClass__ServiceAccessPointsAssignment_8_6_2"
+    // $ANTLR end "rule__ActorClass__ServiceImplementationsAssignment_8_6_2"
 
 
     // $ANTLR start "rule__ActorClass__AttributesAssignment_8_6_3"
@@ -67991,26 +67991,26 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__ActorClass__ActorRefsAssignment_8_6_4"
 
 
-    // $ANTLR start "rule__ActorClass__ServiceImplementationsAssignment_8_6_5"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25237:1: rule__ActorClass__ServiceImplementationsAssignment_8_6_5 : ( ruleServiceImplementation ) ;
-    public final void rule__ActorClass__ServiceImplementationsAssignment_8_6_5() throws RecognitionException {
+    // $ANTLR start "rule__ActorClass__ServiceAccessPointsAssignment_8_6_5"
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25237:1: rule__ActorClass__ServiceAccessPointsAssignment_8_6_5 : ( ruleSAP ) ;
+    public final void rule__ActorClass__ServiceAccessPointsAssignment_8_6_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25241:1: ( ( ruleServiceImplementation ) )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25242:1: ( ruleServiceImplementation )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25241:1: ( ( ruleSAP ) )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25242:1: ( ruleSAP )
             {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25242:1: ( ruleServiceImplementation )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25243:1: ruleServiceImplementation
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25242:1: ( ruleSAP )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25243:1: ruleSAP
             {
-             before(grammarAccess.getActorClassAccess().getServiceImplementationsServiceImplementationParserRuleCall_8_6_5_0()); 
-            pushFollow(FOLLOW_ruleServiceImplementation_in_rule__ActorClass__ServiceImplementationsAssignment_8_6_550988);
-            ruleServiceImplementation();
+             before(grammarAccess.getActorClassAccess().getServiceAccessPointsSAPParserRuleCall_8_6_5_0()); 
+            pushFollow(FOLLOW_ruleSAP_in_rule__ActorClass__ServiceAccessPointsAssignment_8_6_550988);
+            ruleSAP();
 
             state._fsp--;
 
-             after(grammarAccess.getActorClassAccess().getServiceImplementationsServiceImplementationParserRuleCall_8_6_5_0()); 
+             after(grammarAccess.getActorClassAccess().getServiceAccessPointsSAPParserRuleCall_8_6_5_0()); 
 
             }
 
@@ -68029,29 +68029,29 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__ActorClass__ServiceImplementationsAssignment_8_6_5"
+    // $ANTLR end "rule__ActorClass__ServiceAccessPointsAssignment_8_6_5"
 
 
-    // $ANTLR start "rule__ActorClass__BindingsAssignment_8_6_6"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25252:1: rule__ActorClass__BindingsAssignment_8_6_6 : ( ruleBinding ) ;
-    public final void rule__ActorClass__BindingsAssignment_8_6_6() throws RecognitionException {
+    // $ANTLR start "rule__ActorClass__InternalPortsAssignment_8_6_6"
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25252:1: rule__ActorClass__InternalPortsAssignment_8_6_6 : ( rulePort ) ;
+    public final void rule__ActorClass__InternalPortsAssignment_8_6_6() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25256:1: ( ( ruleBinding ) )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25257:1: ( ruleBinding )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25256:1: ( ( rulePort ) )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25257:1: ( rulePort )
             {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25257:1: ( ruleBinding )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25258:1: ruleBinding
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25257:1: ( rulePort )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25258:1: rulePort
             {
-             before(grammarAccess.getActorClassAccess().getBindingsBindingParserRuleCall_8_6_6_0()); 
-            pushFollow(FOLLOW_ruleBinding_in_rule__ActorClass__BindingsAssignment_8_6_651019);
-            ruleBinding();
+             before(grammarAccess.getActorClassAccess().getInternalPortsPortParserRuleCall_8_6_6_0()); 
+            pushFollow(FOLLOW_rulePort_in_rule__ActorClass__InternalPortsAssignment_8_6_651019);
+            rulePort();
 
             state._fsp--;
 
-             after(grammarAccess.getActorClassAccess().getBindingsBindingParserRuleCall_8_6_6_0()); 
+             after(grammarAccess.getActorClassAccess().getInternalPortsPortParserRuleCall_8_6_6_0()); 
 
             }
 
@@ -68070,29 +68070,29 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__ActorClass__BindingsAssignment_8_6_6"
+    // $ANTLR end "rule__ActorClass__InternalPortsAssignment_8_6_6"
 
 
-    // $ANTLR start "rule__ActorClass__ConnectionsAssignment_8_6_7"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25267:1: rule__ActorClass__ConnectionsAssignment_8_6_7 : ( ruleLayerConnection ) ;
-    public final void rule__ActorClass__ConnectionsAssignment_8_6_7() throws RecognitionException {
+    // $ANTLR start "rule__ActorClass__ExternalPortsAssignment_8_6_7"
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25267:1: rule__ActorClass__ExternalPortsAssignment_8_6_7 : ( ruleExternalPort ) ;
+    public final void rule__ActorClass__ExternalPortsAssignment_8_6_7() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25271:1: ( ( ruleLayerConnection ) )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25272:1: ( ruleLayerConnection )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25271:1: ( ( ruleExternalPort ) )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25272:1: ( ruleExternalPort )
             {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25272:1: ( ruleLayerConnection )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25273:1: ruleLayerConnection
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25272:1: ( ruleExternalPort )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25273:1: ruleExternalPort
             {
-             before(grammarAccess.getActorClassAccess().getConnectionsLayerConnectionParserRuleCall_8_6_7_0()); 
-            pushFollow(FOLLOW_ruleLayerConnection_in_rule__ActorClass__ConnectionsAssignment_8_6_751050);
-            ruleLayerConnection();
+             before(grammarAccess.getActorClassAccess().getExternalPortsExternalPortParserRuleCall_8_6_7_0()); 
+            pushFollow(FOLLOW_ruleExternalPort_in_rule__ActorClass__ExternalPortsAssignment_8_6_751050);
+            ruleExternalPort();
 
             state._fsp--;
 
-             after(grammarAccess.getActorClassAccess().getConnectionsLayerConnectionParserRuleCall_8_6_7_0()); 
+             after(grammarAccess.getActorClassAccess().getExternalPortsExternalPortParserRuleCall_8_6_7_0()); 
 
             }
 
@@ -68111,7 +68111,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__ActorClass__ConnectionsAssignment_8_6_7"
+    // $ANTLR end "rule__ActorClass__ExternalPortsAssignment_8_6_7"
 
 
     // $ANTLR start "rule__ActorClass__BehaviorDocuAssignment_9_1"
@@ -68196,67 +68196,26 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__ActorClass__BehaviorAnnotationsAssignment_9_3"
 
 
-    // $ANTLR start "rule__ActorClass__StructorsAssignment_9_4_0"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25312:1: rule__ActorClass__StructorsAssignment_9_4_0 : ( ruleClassStructor ) ;
-    public final void rule__ActorClass__StructorsAssignment_9_4_0() throws RecognitionException {
+    // $ANTLR start "rule__ActorClass__OperationsAssignment_9_4_0"
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25312:1: rule__ActorClass__OperationsAssignment_9_4_0 : ( ruleStandardOperation ) ;
+    public final void rule__ActorClass__OperationsAssignment_9_4_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25316:1: ( ( ruleClassStructor ) )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25317:1: ( ruleClassStructor )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25316:1: ( ( ruleStandardOperation ) )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25317:1: ( ruleStandardOperation )
             {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25317:1: ( ruleClassStructor )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25318:1: ruleClassStructor
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25317:1: ( ruleStandardOperation )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25318:1: ruleStandardOperation
             {
-             before(grammarAccess.getActorClassAccess().getStructorsClassStructorParserRuleCall_9_4_0_0()); 
-            pushFollow(FOLLOW_ruleClassStructor_in_rule__ActorClass__StructorsAssignment_9_4_051143);
-            ruleClassStructor();
-
-            state._fsp--;
-
-             after(grammarAccess.getActorClassAccess().getStructorsClassStructorParserRuleCall_9_4_0_0()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__ActorClass__StructorsAssignment_9_4_0"
-
-
-    // $ANTLR start "rule__ActorClass__OperationsAssignment_9_4_1"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25327:1: rule__ActorClass__OperationsAssignment_9_4_1 : ( ruleStandardOperation ) ;
-    public final void rule__ActorClass__OperationsAssignment_9_4_1() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25331:1: ( ( ruleStandardOperation ) )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25332:1: ( ruleStandardOperation )
-            {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25332:1: ( ruleStandardOperation )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25333:1: ruleStandardOperation
-            {
-             before(grammarAccess.getActorClassAccess().getOperationsStandardOperationParserRuleCall_9_4_1_0()); 
-            pushFollow(FOLLOW_ruleStandardOperation_in_rule__ActorClass__OperationsAssignment_9_4_151174);
+             before(grammarAccess.getActorClassAccess().getOperationsStandardOperationParserRuleCall_9_4_0_0()); 
+            pushFollow(FOLLOW_ruleStandardOperation_in_rule__ActorClass__OperationsAssignment_9_4_051143);
             ruleStandardOperation();
 
             state._fsp--;
 
-             after(grammarAccess.getActorClassAccess().getOperationsStandardOperationParserRuleCall_9_4_1_0()); 
+             after(grammarAccess.getActorClassAccess().getOperationsStandardOperationParserRuleCall_9_4_0_0()); 
 
             }
 
@@ -68275,7 +68234,48 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__ActorClass__OperationsAssignment_9_4_1"
+    // $ANTLR end "rule__ActorClass__OperationsAssignment_9_4_0"
+
+
+    // $ANTLR start "rule__ActorClass__StructorsAssignment_9_4_1"
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25327:1: rule__ActorClass__StructorsAssignment_9_4_1 : ( ruleClassStructor ) ;
+    public final void rule__ActorClass__StructorsAssignment_9_4_1() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25331:1: ( ( ruleClassStructor ) )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25332:1: ( ruleClassStructor )
+            {
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25332:1: ( ruleClassStructor )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25333:1: ruleClassStructor
+            {
+             before(grammarAccess.getActorClassAccess().getStructorsClassStructorParserRuleCall_9_4_1_0()); 
+            pushFollow(FOLLOW_ruleClassStructor_in_rule__ActorClass__StructorsAssignment_9_4_151174);
+            ruleClassStructor();
+
+            state._fsp--;
+
+             after(grammarAccess.getActorClassAccess().getStructorsClassStructorParserRuleCall_9_4_1_0()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__ActorClass__StructorsAssignment_9_4_1"
 
 
     // $ANTLR start "rule__ActorClass__StateMachineAssignment_9_5"
@@ -68913,26 +68913,26 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__LogicalSystem__AnnotationsAssignment_4"
 
 
-    // $ANTLR start "rule__LogicalSystem__SubSystemsAssignment_5_0"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25595:1: rule__LogicalSystem__SubSystemsAssignment_5_0 : ( ruleSubSystemRef ) ;
-    public final void rule__LogicalSystem__SubSystemsAssignment_5_0() throws RecognitionException {
+    // $ANTLR start "rule__LogicalSystem__ConnectionsAssignment_5_0"
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25595:1: rule__LogicalSystem__ConnectionsAssignment_5_0 : ( ruleLayerConnection ) ;
+    public final void rule__LogicalSystem__ConnectionsAssignment_5_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25599:1: ( ( ruleSubSystemRef ) )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25600:1: ( ruleSubSystemRef )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25599:1: ( ( ruleLayerConnection ) )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25600:1: ( ruleLayerConnection )
             {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25600:1: ( ruleSubSystemRef )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25601:1: ruleSubSystemRef
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25600:1: ( ruleLayerConnection )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25601:1: ruleLayerConnection
             {
-             before(grammarAccess.getLogicalSystemAccess().getSubSystemsSubSystemRefParserRuleCall_5_0_0()); 
-            pushFollow(FOLLOW_ruleSubSystemRef_in_rule__LogicalSystem__SubSystemsAssignment_5_051723);
-            ruleSubSystemRef();
+             before(grammarAccess.getLogicalSystemAccess().getConnectionsLayerConnectionParserRuleCall_5_0_0()); 
+            pushFollow(FOLLOW_ruleLayerConnection_in_rule__LogicalSystem__ConnectionsAssignment_5_051723);
+            ruleLayerConnection();
 
             state._fsp--;
 
-             after(grammarAccess.getLogicalSystemAccess().getSubSystemsSubSystemRefParserRuleCall_5_0_0()); 
+             after(grammarAccess.getLogicalSystemAccess().getConnectionsLayerConnectionParserRuleCall_5_0_0()); 
 
             }
 
@@ -68951,7 +68951,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__LogicalSystem__SubSystemsAssignment_5_0"
+    // $ANTLR end "rule__LogicalSystem__ConnectionsAssignment_5_0"
 
 
     // $ANTLR start "rule__LogicalSystem__BindingsAssignment_5_1"
@@ -68995,26 +68995,26 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__LogicalSystem__BindingsAssignment_5_1"
 
 
-    // $ANTLR start "rule__LogicalSystem__ConnectionsAssignment_5_2"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25625:1: rule__LogicalSystem__ConnectionsAssignment_5_2 : ( ruleLayerConnection ) ;
-    public final void rule__LogicalSystem__ConnectionsAssignment_5_2() throws RecognitionException {
+    // $ANTLR start "rule__LogicalSystem__SubSystemsAssignment_5_2"
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25625:1: rule__LogicalSystem__SubSystemsAssignment_5_2 : ( ruleSubSystemRef ) ;
+    public final void rule__LogicalSystem__SubSystemsAssignment_5_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25629:1: ( ( ruleLayerConnection ) )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25630:1: ( ruleLayerConnection )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25629:1: ( ( ruleSubSystemRef ) )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25630:1: ( ruleSubSystemRef )
             {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25630:1: ( ruleLayerConnection )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25631:1: ruleLayerConnection
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25630:1: ( ruleSubSystemRef )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25631:1: ruleSubSystemRef
             {
-             before(grammarAccess.getLogicalSystemAccess().getConnectionsLayerConnectionParserRuleCall_5_2_0()); 
-            pushFollow(FOLLOW_ruleLayerConnection_in_rule__LogicalSystem__ConnectionsAssignment_5_251785);
-            ruleLayerConnection();
+             before(grammarAccess.getLogicalSystemAccess().getSubSystemsSubSystemRefParserRuleCall_5_2_0()); 
+            pushFollow(FOLLOW_ruleSubSystemRef_in_rule__LogicalSystem__SubSystemsAssignment_5_251785);
+            ruleSubSystemRef();
 
             state._fsp--;
 
-             after(grammarAccess.getLogicalSystemAccess().getConnectionsLayerConnectionParserRuleCall_5_2_0()); 
+             after(grammarAccess.getLogicalSystemAccess().getSubSystemsSubSystemRefParserRuleCall_5_2_0()); 
 
             }
 
@@ -69033,7 +69033,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__LogicalSystem__ConnectionsAssignment_5_2"
+    // $ANTLR end "rule__LogicalSystem__SubSystemsAssignment_5_2"
 
 
     // $ANTLR start "rule__SubSystemRef__NameAssignment_1"
@@ -69405,26 +69405,26 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__SubSystemClass__UserCode3Assignment_7_1"
 
 
-    // $ANTLR start "rule__SubSystemClass__RelayPortsAssignment_8_0"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25779:1: rule__SubSystemClass__RelayPortsAssignment_8_0 : ( rulePort ) ;
-    public final void rule__SubSystemClass__RelayPortsAssignment_8_0() throws RecognitionException {
+    // $ANTLR start "rule__SubSystemClass__ActorInstanceMappingsAssignment_8_0"
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25779:1: rule__SubSystemClass__ActorInstanceMappingsAssignment_8_0 : ( ruleActorInstanceMapping ) ;
+    public final void rule__SubSystemClass__ActorInstanceMappingsAssignment_8_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25783:1: ( ( rulePort ) )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25784:1: ( rulePort )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25783:1: ( ( ruleActorInstanceMapping ) )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25784:1: ( ruleActorInstanceMapping )
             {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25784:1: ( rulePort )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25785:1: rulePort
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25784:1: ( ruleActorInstanceMapping )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25785:1: ruleActorInstanceMapping
             {
-             before(grammarAccess.getSubSystemClassAccess().getRelayPortsPortParserRuleCall_8_0_0()); 
-            pushFollow(FOLLOW_rulePort_in_rule__SubSystemClass__RelayPortsAssignment_8_052103);
-            rulePort();
+             before(grammarAccess.getSubSystemClassAccess().getActorInstanceMappingsActorInstanceMappingParserRuleCall_8_0_0()); 
+            pushFollow(FOLLOW_ruleActorInstanceMapping_in_rule__SubSystemClass__ActorInstanceMappingsAssignment_8_052103);
+            ruleActorInstanceMapping();
 
             state._fsp--;
 
-             after(grammarAccess.getSubSystemClassAccess().getRelayPortsPortParserRuleCall_8_0_0()); 
+             after(grammarAccess.getSubSystemClassAccess().getActorInstanceMappingsActorInstanceMappingParserRuleCall_8_0_0()); 
 
             }
 
@@ -69443,29 +69443,29 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__SubSystemClass__RelayPortsAssignment_8_0"
+    // $ANTLR end "rule__SubSystemClass__ActorInstanceMappingsAssignment_8_0"
 
 
-    // $ANTLR start "rule__SubSystemClass__ServiceProvisionPointsAssignment_8_1"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25794:1: rule__SubSystemClass__ServiceProvisionPointsAssignment_8_1 : ( ruleSPP ) ;
-    public final void rule__SubSystemClass__ServiceProvisionPointsAssignment_8_1() throws RecognitionException {
+    // $ANTLR start "rule__SubSystemClass__ThreadsAssignment_8_1"
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25794:1: rule__SubSystemClass__ThreadsAssignment_8_1 : ( ruleLogicalThread ) ;
+    public final void rule__SubSystemClass__ThreadsAssignment_8_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25798:1: ( ( ruleSPP ) )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25799:1: ( ruleSPP )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25798:1: ( ( ruleLogicalThread ) )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25799:1: ( ruleLogicalThread )
             {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25799:1: ( ruleSPP )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25800:1: ruleSPP
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25799:1: ( ruleLogicalThread )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25800:1: ruleLogicalThread
             {
-             before(grammarAccess.getSubSystemClassAccess().getServiceProvisionPointsSPPParserRuleCall_8_1_0()); 
-            pushFollow(FOLLOW_ruleSPP_in_rule__SubSystemClass__ServiceProvisionPointsAssignment_8_152134);
-            ruleSPP();
+             before(grammarAccess.getSubSystemClassAccess().getThreadsLogicalThreadParserRuleCall_8_1_0()); 
+            pushFollow(FOLLOW_ruleLogicalThread_in_rule__SubSystemClass__ThreadsAssignment_8_152134);
+            ruleLogicalThread();
 
             state._fsp--;
 
-             after(grammarAccess.getSubSystemClassAccess().getServiceProvisionPointsSPPParserRuleCall_8_1_0()); 
+             after(grammarAccess.getSubSystemClassAccess().getThreadsLogicalThreadParserRuleCall_8_1_0()); 
 
             }
 
@@ -69484,29 +69484,29 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__SubSystemClass__ServiceProvisionPointsAssignment_8_1"
+    // $ANTLR end "rule__SubSystemClass__ThreadsAssignment_8_1"
 
 
-    // $ANTLR start "rule__SubSystemClass__ActorRefsAssignment_8_2"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25809:1: rule__SubSystemClass__ActorRefsAssignment_8_2 : ( ruleActorRef ) ;
-    public final void rule__SubSystemClass__ActorRefsAssignment_8_2() throws RecognitionException {
+    // $ANTLR start "rule__SubSystemClass__ConnectionsAssignment_8_2"
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25809:1: rule__SubSystemClass__ConnectionsAssignment_8_2 : ( ruleLayerConnection ) ;
+    public final void rule__SubSystemClass__ConnectionsAssignment_8_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25813:1: ( ( ruleActorRef ) )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25814:1: ( ruleActorRef )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25813:1: ( ( ruleLayerConnection ) )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25814:1: ( ruleLayerConnection )
             {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25814:1: ( ruleActorRef )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25815:1: ruleActorRef
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25814:1: ( ruleLayerConnection )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25815:1: ruleLayerConnection
             {
-             before(grammarAccess.getSubSystemClassAccess().getActorRefsActorRefParserRuleCall_8_2_0()); 
-            pushFollow(FOLLOW_ruleActorRef_in_rule__SubSystemClass__ActorRefsAssignment_8_252165);
-            ruleActorRef();
+             before(grammarAccess.getSubSystemClassAccess().getConnectionsLayerConnectionParserRuleCall_8_2_0()); 
+            pushFollow(FOLLOW_ruleLayerConnection_in_rule__SubSystemClass__ConnectionsAssignment_8_252165);
+            ruleLayerConnection();
 
             state._fsp--;
 
-             after(grammarAccess.getSubSystemClassAccess().getActorRefsActorRefParserRuleCall_8_2_0()); 
+             after(grammarAccess.getSubSystemClassAccess().getConnectionsLayerConnectionParserRuleCall_8_2_0()); 
 
             }
 
@@ -69525,7 +69525,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__SubSystemClass__ActorRefsAssignment_8_2"
+    // $ANTLR end "rule__SubSystemClass__ConnectionsAssignment_8_2"
 
 
     // $ANTLR start "rule__SubSystemClass__BindingsAssignment_8_3"
@@ -69569,26 +69569,26 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__SubSystemClass__BindingsAssignment_8_3"
 
 
-    // $ANTLR start "rule__SubSystemClass__ConnectionsAssignment_8_4"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25839:1: rule__SubSystemClass__ConnectionsAssignment_8_4 : ( ruleLayerConnection ) ;
-    public final void rule__SubSystemClass__ConnectionsAssignment_8_4() throws RecognitionException {
+    // $ANTLR start "rule__SubSystemClass__ActorRefsAssignment_8_4"
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25839:1: rule__SubSystemClass__ActorRefsAssignment_8_4 : ( ruleActorRef ) ;
+    public final void rule__SubSystemClass__ActorRefsAssignment_8_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25843:1: ( ( ruleLayerConnection ) )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25844:1: ( ruleLayerConnection )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25843:1: ( ( ruleActorRef ) )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25844:1: ( ruleActorRef )
             {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25844:1: ( ruleLayerConnection )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25845:1: ruleLayerConnection
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25844:1: ( ruleActorRef )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25845:1: ruleActorRef
             {
-             before(grammarAccess.getSubSystemClassAccess().getConnectionsLayerConnectionParserRuleCall_8_4_0()); 
-            pushFollow(FOLLOW_ruleLayerConnection_in_rule__SubSystemClass__ConnectionsAssignment_8_452227);
-            ruleLayerConnection();
+             before(grammarAccess.getSubSystemClassAccess().getActorRefsActorRefParserRuleCall_8_4_0()); 
+            pushFollow(FOLLOW_ruleActorRef_in_rule__SubSystemClass__ActorRefsAssignment_8_452227);
+            ruleActorRef();
 
             state._fsp--;
 
-             after(grammarAccess.getSubSystemClassAccess().getConnectionsLayerConnectionParserRuleCall_8_4_0()); 
+             after(grammarAccess.getSubSystemClassAccess().getActorRefsActorRefParserRuleCall_8_4_0()); 
 
             }
 
@@ -69607,29 +69607,29 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__SubSystemClass__ConnectionsAssignment_8_4"
+    // $ANTLR end "rule__SubSystemClass__ActorRefsAssignment_8_4"
 
 
-    // $ANTLR start "rule__SubSystemClass__ThreadsAssignment_8_5"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25854:1: rule__SubSystemClass__ThreadsAssignment_8_5 : ( ruleLogicalThread ) ;
-    public final void rule__SubSystemClass__ThreadsAssignment_8_5() throws RecognitionException {
+    // $ANTLR start "rule__SubSystemClass__ServiceProvisionPointsAssignment_8_5"
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25854:1: rule__SubSystemClass__ServiceProvisionPointsAssignment_8_5 : ( ruleSPP ) ;
+    public final void rule__SubSystemClass__ServiceProvisionPointsAssignment_8_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25858:1: ( ( ruleLogicalThread ) )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25859:1: ( ruleLogicalThread )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25858:1: ( ( ruleSPP ) )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25859:1: ( ruleSPP )
             {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25859:1: ( ruleLogicalThread )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25860:1: ruleLogicalThread
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25859:1: ( ruleSPP )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25860:1: ruleSPP
             {
-             before(grammarAccess.getSubSystemClassAccess().getThreadsLogicalThreadParserRuleCall_8_5_0()); 
-            pushFollow(FOLLOW_ruleLogicalThread_in_rule__SubSystemClass__ThreadsAssignment_8_552258);
-            ruleLogicalThread();
+             before(grammarAccess.getSubSystemClassAccess().getServiceProvisionPointsSPPParserRuleCall_8_5_0()); 
+            pushFollow(FOLLOW_ruleSPP_in_rule__SubSystemClass__ServiceProvisionPointsAssignment_8_552258);
+            ruleSPP();
 
             state._fsp--;
 
-             after(grammarAccess.getSubSystemClassAccess().getThreadsLogicalThreadParserRuleCall_8_5_0()); 
+             after(grammarAccess.getSubSystemClassAccess().getServiceProvisionPointsSPPParserRuleCall_8_5_0()); 
 
             }
 
@@ -69648,29 +69648,29 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__SubSystemClass__ThreadsAssignment_8_5"
+    // $ANTLR end "rule__SubSystemClass__ServiceProvisionPointsAssignment_8_5"
 
 
-    // $ANTLR start "rule__SubSystemClass__ActorInstanceMappingsAssignment_8_6"
-    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25869:1: rule__SubSystemClass__ActorInstanceMappingsAssignment_8_6 : ( ruleActorInstanceMapping ) ;
-    public final void rule__SubSystemClass__ActorInstanceMappingsAssignment_8_6() throws RecognitionException {
+    // $ANTLR start "rule__SubSystemClass__RelayPortsAssignment_8_6"
+    // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25869:1: rule__SubSystemClass__RelayPortsAssignment_8_6 : ( rulePort ) ;
+    public final void rule__SubSystemClass__RelayPortsAssignment_8_6() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25873:1: ( ( ruleActorInstanceMapping ) )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25874:1: ( ruleActorInstanceMapping )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25873:1: ( ( rulePort ) )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25874:1: ( rulePort )
             {
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25874:1: ( ruleActorInstanceMapping )
-            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25875:1: ruleActorInstanceMapping
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25874:1: ( rulePort )
+            // ../org.eclipse.etrice.core.room.ui/src-gen/org/eclipse/etrice/core/ui/contentassist/antlr/internal/InternalRoom.g:25875:1: rulePort
             {
-             before(grammarAccess.getSubSystemClassAccess().getActorInstanceMappingsActorInstanceMappingParserRuleCall_8_6_0()); 
-            pushFollow(FOLLOW_ruleActorInstanceMapping_in_rule__SubSystemClass__ActorInstanceMappingsAssignment_8_652289);
-            ruleActorInstanceMapping();
+             before(grammarAccess.getSubSystemClassAccess().getRelayPortsPortParserRuleCall_8_6_0()); 
+            pushFollow(FOLLOW_rulePort_in_rule__SubSystemClass__RelayPortsAssignment_8_652289);
+            rulePort();
 
             state._fsp--;
 
-             after(grammarAccess.getSubSystemClassAccess().getActorInstanceMappingsActorInstanceMappingParserRuleCall_8_6_0()); 
+             after(grammarAccess.getSubSystemClassAccess().getRelayPortsPortParserRuleCall_8_6_0()); 
 
             }
 
@@ -69689,7 +69689,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__SubSystemClass__ActorInstanceMappingsAssignment_8_6"
+    // $ANTLR end "rule__SubSystemClass__RelayPortsAssignment_8_6"
 
 
     // $ANTLR start "rule__LogicalThread__NameAssignment_1"
@@ -75677,9 +75677,9 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_ruleComplexType_in_rule__DataType__Alternatives7014 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleDataClass_in_rule__ComplexType__Alternatives7046 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleExternalType_in_rule__ComplexType__Alternatives7063 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__DataClass__AttributesAssignment_9_0_in_rule__DataClass__Alternatives_97095 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__DataClass__OperationsAssignment_9_0_in_rule__DataClass__Alternatives_97095 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__DataClass__StructorsAssignment_9_1_in_rule__DataClass__Alternatives_97113 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__DataClass__OperationsAssignment_9_2_in_rule__DataClass__Alternatives_97131 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__DataClass__AttributesAssignment_9_2_in_rule__DataClass__Alternatives_97131 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_13_in_rule__StandardOperation__Alternatives_6_17166 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__StandardOperation__ReturnTypeAssignment_6_1_1_in_rule__StandardOperation__Alternatives_6_17185 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__PortOperation__Group_5_0__0_in_rule__PortOperation__Alternatives_57218 = new BitSet(new long[]{0x0000000000000002L});
@@ -75690,36 +75690,36 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_15_in_rule__ClassStructor__NameAlternatives_0_07343 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleProtocolClass_in_rule__GeneralProtocolClass__Alternatives7377 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleCompoundProtocolClass_in_rule__GeneralProtocolClass__Alternatives7394 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PortClass__AttributesAssignment_3_0_in_rule__PortClass__Alternatives_37426 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__PortClass__MsgHandlersAssignment_3_0_in_rule__PortClass__Alternatives_37426 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__PortClass__OperationsAssignment_3_1_in_rule__PortClass__Alternatives_37444 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PortClass__MsgHandlersAssignment_3_2_in_rule__PortClass__Alternatives_37462 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__PortClass__AttributesAssignment_3_2_in_rule__PortClass__Alternatives_37462 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleInMessageHandler_in_rule__MessageHandler__Alternatives7495 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleOutMessageHandler_in_rule__MessageHandler__Alternatives7512 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ActorClass__InterfacePortsAssignment_7_2_0_in_rule__ActorClass__Alternatives_7_27544 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ActorClass__ServiceProvisionPointsAssignment_7_2_1_in_rule__ActorClass__Alternatives_7_27562 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ActorClass__InternalPortsAssignment_8_6_0_in_rule__ActorClass__Alternatives_8_67595 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ActorClass__ExternalPortsAssignment_8_6_1_in_rule__ActorClass__Alternatives_8_67613 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ActorClass__ServiceAccessPointsAssignment_8_6_2_in_rule__ActorClass__Alternatives_8_67631 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__ActorClass__ServiceProvisionPointsAssignment_7_2_0_in_rule__ActorClass__Alternatives_7_27544 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__ActorClass__InterfacePortsAssignment_7_2_1_in_rule__ActorClass__Alternatives_7_27562 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__ActorClass__ConnectionsAssignment_8_6_0_in_rule__ActorClass__Alternatives_8_67595 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__ActorClass__BindingsAssignment_8_6_1_in_rule__ActorClass__Alternatives_8_67613 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__ActorClass__ServiceImplementationsAssignment_8_6_2_in_rule__ActorClass__Alternatives_8_67631 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__ActorClass__AttributesAssignment_8_6_3_in_rule__ActorClass__Alternatives_8_67649 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__ActorClass__ActorRefsAssignment_8_6_4_in_rule__ActorClass__Alternatives_8_67667 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ActorClass__ServiceImplementationsAssignment_8_6_5_in_rule__ActorClass__Alternatives_8_67685 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ActorClass__BindingsAssignment_8_6_6_in_rule__ActorClass__Alternatives_8_67703 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ActorClass__ConnectionsAssignment_8_6_7_in_rule__ActorClass__Alternatives_8_67721 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ActorClass__StructorsAssignment_9_4_0_in_rule__ActorClass__Alternatives_9_47754 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ActorClass__OperationsAssignment_9_4_1_in_rule__ActorClass__Alternatives_9_47772 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__ActorClass__ServiceAccessPointsAssignment_8_6_5_in_rule__ActorClass__Alternatives_8_67685 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__ActorClass__InternalPortsAssignment_8_6_6_in_rule__ActorClass__Alternatives_8_67703 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__ActorClass__ExternalPortsAssignment_8_6_7_in_rule__ActorClass__Alternatives_8_67721 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__ActorClass__OperationsAssignment_9_4_0_in_rule__ActorClass__Alternatives_9_47754 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__ActorClass__StructorsAssignment_9_4_1_in_rule__ActorClass__Alternatives_9_47772 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rulePort_in_rule__InterfaceItem__Alternatives7805 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleSAP_in_rule__InterfaceItem__Alternatives7822 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleSPP_in_rule__InterfaceItem__Alternatives7839 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__LogicalSystem__SubSystemsAssignment_5_0_in_rule__LogicalSystem__Alternatives_57871 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__LogicalSystem__ConnectionsAssignment_5_0_in_rule__LogicalSystem__Alternatives_57871 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__LogicalSystem__BindingsAssignment_5_1_in_rule__LogicalSystem__Alternatives_57889 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__LogicalSystem__ConnectionsAssignment_5_2_in_rule__LogicalSystem__Alternatives_57907 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__SubSystemClass__RelayPortsAssignment_8_0_in_rule__SubSystemClass__Alternatives_87941 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__SubSystemClass__ServiceProvisionPointsAssignment_8_1_in_rule__SubSystemClass__Alternatives_87959 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__SubSystemClass__ActorRefsAssignment_8_2_in_rule__SubSystemClass__Alternatives_87977 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__LogicalSystem__SubSystemsAssignment_5_2_in_rule__LogicalSystem__Alternatives_57907 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__SubSystemClass__ActorInstanceMappingsAssignment_8_0_in_rule__SubSystemClass__Alternatives_87941 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__SubSystemClass__ThreadsAssignment_8_1_in_rule__SubSystemClass__Alternatives_87959 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__SubSystemClass__ConnectionsAssignment_8_2_in_rule__SubSystemClass__Alternatives_87977 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__SubSystemClass__BindingsAssignment_8_3_in_rule__SubSystemClass__Alternatives_87995 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__SubSystemClass__ConnectionsAssignment_8_4_in_rule__SubSystemClass__Alternatives_88013 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__SubSystemClass__ThreadsAssignment_8_5_in_rule__SubSystemClass__Alternatives_88031 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__SubSystemClass__ActorInstanceMappingsAssignment_8_6_in_rule__SubSystemClass__Alternatives_88049 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__SubSystemClass__ActorRefsAssignment_8_4_in_rule__SubSystemClass__Alternatives_88013 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__SubSystemClass__ServiceProvisionPointsAssignment_8_5_in_rule__SubSystemClass__Alternatives_88031 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__SubSystemClass__RelayPortsAssignment_8_6_in_rule__SubSystemClass__Alternatives_88049 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleRefSAPoint_in_rule__SAPoint__Alternatives8082 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleRelaySAPoint_in_rule__SAPoint__Alternatives8099 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_16_in_rule__MULTIPLICITY__Alternatives_18132 = new BitSet(new long[]{0x0000000000000002L});
@@ -76034,7 +76034,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_51_in_rule__Attribute__Group_5__0__Impl15247 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__Attribute__Group_5__1__Impl_in_rule__Attribute__Group_5__115278 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__Attribute__DefaultValueLiteralAssignment_5_1_in_rule__Attribute__Group_5__1__Impl15305 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__StandardOperation__Group__0__Impl_in_rule__StandardOperation__Group__015339 = new BitSet(new long[]{0x120000000000C000L,0x4000000000000000L});
+    public static final BitSet FOLLOW_rule__StandardOperation__Group__0__Impl_in_rule__StandardOperation__Group__015339 = new BitSet(new long[]{0x1000000000000000L,0x4000000000000000L});
     public static final BitSet FOLLOW_rule__StandardOperation__Group__1_in_rule__StandardOperation__Group__015342 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__StandardOperation__OverrideAssignment_0_in_rule__StandardOperation__Group__0__Impl15369 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__StandardOperation__Group__1__Impl_in_rule__StandardOperation__Group__115400 = new BitSet(new long[]{0x0000000000000080L});
@@ -76281,15 +76281,15 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rule__Message__DocuAssignment_6_in_rule__Message__Group__6__Impl20847 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__PortClass__Group__0__Impl_in_rule__PortClass__Group__020892 = new BitSet(new long[]{0x0000010000000000L});
     public static final BitSet FOLLOW_rule__PortClass__Group__1_in_rule__PortClass__Group__020895 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PortClass__Group__1__Impl_in_rule__PortClass__Group__120953 = new BitSet(new long[]{0x1200020000000000L,0x0000000000000060L});
+    public static final BitSet FOLLOW_rule__PortClass__Group__1__Impl_in_rule__PortClass__Group__120953 = new BitSet(new long[]{0x120002000000C000L,0x4000000000000060L});
     public static final BitSet FOLLOW_rule__PortClass__Group__2_in_rule__PortClass__Group__120956 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_40_in_rule__PortClass__Group__1__Impl20984 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PortClass__Group__2__Impl_in_rule__PortClass__Group__221015 = new BitSet(new long[]{0x1200020000000000L,0x0000000000000060L});
+    public static final BitSet FOLLOW_rule__PortClass__Group__2__Impl_in_rule__PortClass__Group__221015 = new BitSet(new long[]{0x120002000000C000L,0x4000000000000060L});
     public static final BitSet FOLLOW_rule__PortClass__Group__3_in_rule__PortClass__Group__221018 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__PortClass__Group_2__0_in_rule__PortClass__Group__2__Impl21045 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PortClass__Group__3__Impl_in_rule__PortClass__Group__321076 = new BitSet(new long[]{0x1200020000000000L,0x0000000000000060L});
+    public static final BitSet FOLLOW_rule__PortClass__Group__3__Impl_in_rule__PortClass__Group__321076 = new BitSet(new long[]{0x120002000000C000L,0x4000000000000060L});
     public static final BitSet FOLLOW_rule__PortClass__Group__4_in_rule__PortClass__Group__321079 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PortClass__Alternatives_3_in_rule__PortClass__Group__3__Impl21106 = new BitSet(new long[]{0x1200000000000002L,0x0000000000000040L});
+    public static final BitSet FOLLOW_rule__PortClass__Alternatives_3_in_rule__PortClass__Group__3__Impl21106 = new BitSet(new long[]{0x120000000000C002L,0x4000000000000040L});
     public static final BitSet FOLLOW_rule__PortClass__Group__4__Impl_in_rule__PortClass__Group__421137 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_41_in_rule__PortClass__Group__4__Impl21165 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__PortClass__Group_2__0__Impl_in_rule__PortClass__Group_2__021206 = new BitSet(new long[]{0x0000010000000000L});
@@ -76373,21 +76373,21 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rule__ActorClass__Group_8__1__Impl_in_rule__ActorClass__Group_8__122955 = new BitSet(new long[]{0x0400010000000000L});
     public static final BitSet FOLLOW_rule__ActorClass__Group_8__2_in_rule__ActorClass__Group_8__122958 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__ActorClass__StructureDocuAssignment_8_1_in_rule__ActorClass__Group_8__1__Impl22985 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ActorClass__Group_8__2__Impl_in_rule__ActorClass__Group_8__223016 = new BitSet(new long[]{0x03C0020300000000L,0x0000000008885C04L});
+    public static final BitSet FOLLOW_rule__ActorClass__Group_8__2__Impl_in_rule__ActorClass__Group_8__223016 = new BitSet(new long[]{0x13C002030000C000L,0x4000000008887C04L});
     public static final BitSet FOLLOW_rule__ActorClass__Group_8__3_in_rule__ActorClass__Group_8__223019 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_40_in_rule__ActorClass__Group_8__2__Impl23047 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ActorClass__Group_8__3__Impl_in_rule__ActorClass__Group_8__323078 = new BitSet(new long[]{0x03C0020300000000L,0x0000000008885C04L});
+    public static final BitSet FOLLOW_rule__ActorClass__Group_8__3__Impl_in_rule__ActorClass__Group_8__323078 = new BitSet(new long[]{0x13C002030000C000L,0x4000000008887C04L});
     public static final BitSet FOLLOW_rule__ActorClass__Group_8__4_in_rule__ActorClass__Group_8__323081 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__ActorClass__Group_8_3__0_in_rule__ActorClass__Group_8__3__Impl23108 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ActorClass__Group_8__4__Impl_in_rule__ActorClass__Group_8__423139 = new BitSet(new long[]{0x03C0020300000000L,0x0000000008885C04L});
+    public static final BitSet FOLLOW_rule__ActorClass__Group_8__4__Impl_in_rule__ActorClass__Group_8__423139 = new BitSet(new long[]{0x13C002030000C000L,0x4000000008887C04L});
     public static final BitSet FOLLOW_rule__ActorClass__Group_8__5_in_rule__ActorClass__Group_8__423142 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__ActorClass__Group_8_4__0_in_rule__ActorClass__Group_8__4__Impl23169 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ActorClass__Group_8__5__Impl_in_rule__ActorClass__Group_8__523200 = new BitSet(new long[]{0x03C0020300000000L,0x0000000008885C04L});
+    public static final BitSet FOLLOW_rule__ActorClass__Group_8__5__Impl_in_rule__ActorClass__Group_8__523200 = new BitSet(new long[]{0x13C002030000C000L,0x4000000008887C04L});
     public static final BitSet FOLLOW_rule__ActorClass__Group_8__6_in_rule__ActorClass__Group_8__523203 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__ActorClass__Group_8_5__0_in_rule__ActorClass__Group_8__5__Impl23230 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ActorClass__Group_8__6__Impl_in_rule__ActorClass__Group_8__623261 = new BitSet(new long[]{0x03C0020300000000L,0x0000000008885C04L});
+    public static final BitSet FOLLOW_rule__ActorClass__Group_8__6__Impl_in_rule__ActorClass__Group_8__623261 = new BitSet(new long[]{0x13C002030000C000L,0x4000000008887C04L});
     public static final BitSet FOLLOW_rule__ActorClass__Group_8__7_in_rule__ActorClass__Group_8__623264 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ActorClass__Alternatives_8_6_in_rule__ActorClass__Group_8__6__Impl23291 = new BitSet(new long[]{0x0200000300000002L,0x0000000008885C04L});
+    public static final BitSet FOLLOW_rule__ActorClass__Alternatives_8_6_in_rule__ActorClass__Group_8__6__Impl23291 = new BitSet(new long[]{0x120000030000C002L,0x4000000008887C04L});
     public static final BitSet FOLLOW_rule__ActorClass__Group_8__7__Impl_in_rule__ActorClass__Group_8__723322 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_41_in_rule__ActorClass__Group_8__7__Impl23350 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__ActorClass__Group_8_3__0__Impl_in_rule__ActorClass__Group_8_3__023397 = new BitSet(new long[]{0x0000010000000000L});
@@ -76411,21 +76411,21 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rule__ActorClass__Group_9__1__Impl_in_rule__ActorClass__Group_9__123828 = new BitSet(new long[]{0x0400010000000000L});
     public static final BitSet FOLLOW_rule__ActorClass__Group_9__2_in_rule__ActorClass__Group_9__123831 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__ActorClass__BehaviorDocuAssignment_9_1_in_rule__ActorClass__Group_9__1__Impl23858 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ActorClass__Group_9__2__Impl_in_rule__ActorClass__Group_9__223889 = new BitSet(new long[]{0x120002000000C000L,0x4080000010000000L});
+    public static final BitSet FOLLOW_rule__ActorClass__Group_9__2__Impl_in_rule__ActorClass__Group_9__223889 = new BitSet(new long[]{0x100002000000C000L,0x4080000010000000L});
     public static final BitSet FOLLOW_rule__ActorClass__Group_9__3_in_rule__ActorClass__Group_9__223892 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_40_in_rule__ActorClass__Group_9__2__Impl23920 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ActorClass__Group_9__3__Impl_in_rule__ActorClass__Group_9__323951 = new BitSet(new long[]{0x120002000000C000L,0x4080000010000000L});
+    public static final BitSet FOLLOW_rule__ActorClass__Group_9__3__Impl_in_rule__ActorClass__Group_9__323951 = new BitSet(new long[]{0x100002000000C000L,0x4080000010000000L});
     public static final BitSet FOLLOW_rule__ActorClass__Group_9__4_in_rule__ActorClass__Group_9__323954 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__ActorClass__BehaviorAnnotationsAssignment_9_3_in_rule__ActorClass__Group_9__3__Impl23981 = new BitSet(new long[]{0x0000000000000002L,0x0080000000000000L});
-    public static final BitSet FOLLOW_rule__ActorClass__Group_9__4__Impl_in_rule__ActorClass__Group_9__424012 = new BitSet(new long[]{0x120002000000C000L,0x4080000010000000L});
+    public static final BitSet FOLLOW_rule__ActorClass__Group_9__4__Impl_in_rule__ActorClass__Group_9__424012 = new BitSet(new long[]{0x100002000000C000L,0x4080000010000000L});
     public static final BitSet FOLLOW_rule__ActorClass__Group_9__5_in_rule__ActorClass__Group_9__424015 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ActorClass__Alternatives_9_4_in_rule__ActorClass__Group_9__4__Impl24042 = new BitSet(new long[]{0x120000000000C002L,0x4000000000000000L});
-    public static final BitSet FOLLOW_rule__ActorClass__Group_9__5__Impl_in_rule__ActorClass__Group_9__524073 = new BitSet(new long[]{0x120002000000C000L,0x4080000010000000L});
+    public static final BitSet FOLLOW_rule__ActorClass__Alternatives_9_4_in_rule__ActorClass__Group_9__4__Impl24042 = new BitSet(new long[]{0x100000000000C002L,0x4000000000000000L});
+    public static final BitSet FOLLOW_rule__ActorClass__Group_9__5__Impl_in_rule__ActorClass__Group_9__524073 = new BitSet(new long[]{0x100002000000C000L,0x4080000010000000L});
     public static final BitSet FOLLOW_rule__ActorClass__Group_9__6_in_rule__ActorClass__Group_9__524076 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__ActorClass__StateMachineAssignment_9_5_in_rule__ActorClass__Group_9__5__Impl24103 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__ActorClass__Group_9__6__Impl_in_rule__ActorClass__Group_9__624134 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_41_in_rule__ActorClass__Group_9__6__Impl24162 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Port__Group__0__Impl_in_rule__Port__Group__024207 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000404L});
+    public static final BitSet FOLLOW_rule__Port__Group__0__Impl_in_rule__Port__Group__024207 = new BitSet(new long[]{0x0000000000000000L,0x0000000000002404L});
     public static final BitSet FOLLOW_rule__Port__Group__1_in_rule__Port__Group__024210 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__Port__ConjugatedAssignment_0_in_rule__Port__Group__0__Impl24237 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__Port__Group__1__Impl_in_rule__Port__Group__124268 = new BitSet(new long[]{0x0000000000000080L});
@@ -76492,15 +76492,15 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rule__LogicalSystem__Group__2__Impl_in_rule__LogicalSystem__Group__225639 = new BitSet(new long[]{0x0400010000000000L});
     public static final BitSet FOLLOW_rule__LogicalSystem__Group__3_in_rule__LogicalSystem__Group__225642 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__LogicalSystem__DocuAssignment_2_in_rule__LogicalSystem__Group__2__Impl25669 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__LogicalSystem__Group__3__Impl_in_rule__LogicalSystem__Group__325700 = new BitSet(new long[]{0x0200020300000000L,0x008000000888DC04L});
+    public static final BitSet FOLLOW_rule__LogicalSystem__Group__3__Impl_in_rule__LogicalSystem__Group__325700 = new BitSet(new long[]{0x0000020000000000L,0x0080000000888000L});
     public static final BitSet FOLLOW_rule__LogicalSystem__Group__4_in_rule__LogicalSystem__Group__325703 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_40_in_rule__LogicalSystem__Group__3__Impl25731 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__LogicalSystem__Group__4__Impl_in_rule__LogicalSystem__Group__425762 = new BitSet(new long[]{0x0200020300000000L,0x008000000888DC04L});
+    public static final BitSet FOLLOW_rule__LogicalSystem__Group__4__Impl_in_rule__LogicalSystem__Group__425762 = new BitSet(new long[]{0x0000020000000000L,0x0080000000888000L});
     public static final BitSet FOLLOW_rule__LogicalSystem__Group__5_in_rule__LogicalSystem__Group__425765 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__LogicalSystem__AnnotationsAssignment_4_in_rule__LogicalSystem__Group__4__Impl25792 = new BitSet(new long[]{0x0000000000000002L,0x0080000000000000L});
-    public static final BitSet FOLLOW_rule__LogicalSystem__Group__5__Impl_in_rule__LogicalSystem__Group__525823 = new BitSet(new long[]{0x0200020300000000L,0x008000000888DC04L});
+    public static final BitSet FOLLOW_rule__LogicalSystem__Group__5__Impl_in_rule__LogicalSystem__Group__525823 = new BitSet(new long[]{0x0000020000000000L,0x0080000000888000L});
     public static final BitSet FOLLOW_rule__LogicalSystem__Group__6_in_rule__LogicalSystem__Group__525826 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__LogicalSystem__Alternatives_5_in_rule__LogicalSystem__Group__5__Impl25853 = new BitSet(new long[]{0x0200000300000002L,0x000000000888DC04L});
+    public static final BitSet FOLLOW_rule__LogicalSystem__Alternatives_5_in_rule__LogicalSystem__Group__5__Impl25853 = new BitSet(new long[]{0x0000000000000002L,0x0000000000888000L});
     public static final BitSet FOLLOW_rule__LogicalSystem__Group__6__Impl_in_rule__LogicalSystem__Group__625884 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_41_in_rule__LogicalSystem__Group__6__Impl25912 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__SubSystemRef__Group__0__Impl_in_rule__SubSystemRef__Group__025957 = new BitSet(new long[]{0x0000000000000080L});
@@ -76526,24 +76526,24 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rule__SubSystemClass__Group__2__Impl_in_rule__SubSystemClass__Group__226391 = new BitSet(new long[]{0x0400010000000000L});
     public static final BitSet FOLLOW_rule__SubSystemClass__Group__3_in_rule__SubSystemClass__Group__226394 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__SubSystemClass__DocuAssignment_2_in_rule__SubSystemClass__Group__2__Impl26421 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__SubSystemClass__Group__3__Impl_in_rule__SubSystemClass__Group__326452 = new BitSet(new long[]{0x03C0020300000000L,0x00800000088B7C04L});
+    public static final BitSet FOLLOW_rule__SubSystemClass__Group__3__Impl_in_rule__SubSystemClass__Group__326452 = new BitSet(new long[]{0x01C0020300000000L,0x00800000088B2404L});
     public static final BitSet FOLLOW_rule__SubSystemClass__Group__4_in_rule__SubSystemClass__Group__326455 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_40_in_rule__SubSystemClass__Group__3__Impl26483 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__SubSystemClass__Group__4__Impl_in_rule__SubSystemClass__Group__426514 = new BitSet(new long[]{0x03C0020300000000L,0x00800000088B7C04L});
+    public static final BitSet FOLLOW_rule__SubSystemClass__Group__4__Impl_in_rule__SubSystemClass__Group__426514 = new BitSet(new long[]{0x01C0020300000000L,0x00800000088B2404L});
     public static final BitSet FOLLOW_rule__SubSystemClass__Group__5_in_rule__SubSystemClass__Group__426517 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__SubSystemClass__AnnotationsAssignment_4_in_rule__SubSystemClass__Group__4__Impl26544 = new BitSet(new long[]{0x0000000000000002L,0x0080000000000000L});
-    public static final BitSet FOLLOW_rule__SubSystemClass__Group__5__Impl_in_rule__SubSystemClass__Group__526575 = new BitSet(new long[]{0x03C0020300000000L,0x00800000088B7C04L});
+    public static final BitSet FOLLOW_rule__SubSystemClass__Group__5__Impl_in_rule__SubSystemClass__Group__526575 = new BitSet(new long[]{0x01C0020300000000L,0x00800000088B2404L});
     public static final BitSet FOLLOW_rule__SubSystemClass__Group__6_in_rule__SubSystemClass__Group__526578 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__SubSystemClass__Group_5__0_in_rule__SubSystemClass__Group__5__Impl26605 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__SubSystemClass__Group__6__Impl_in_rule__SubSystemClass__Group__626636 = new BitSet(new long[]{0x03C0020300000000L,0x00800000088B7C04L});
+    public static final BitSet FOLLOW_rule__SubSystemClass__Group__6__Impl_in_rule__SubSystemClass__Group__626636 = new BitSet(new long[]{0x01C0020300000000L,0x00800000088B2404L});
     public static final BitSet FOLLOW_rule__SubSystemClass__Group__7_in_rule__SubSystemClass__Group__626639 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__SubSystemClass__Group_6__0_in_rule__SubSystemClass__Group__6__Impl26666 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__SubSystemClass__Group__7__Impl_in_rule__SubSystemClass__Group__726697 = new BitSet(new long[]{0x03C0020300000000L,0x00800000088B7C04L});
+    public static final BitSet FOLLOW_rule__SubSystemClass__Group__7__Impl_in_rule__SubSystemClass__Group__726697 = new BitSet(new long[]{0x01C0020300000000L,0x00800000088B2404L});
     public static final BitSet FOLLOW_rule__SubSystemClass__Group__8_in_rule__SubSystemClass__Group__726700 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__SubSystemClass__Group_7__0_in_rule__SubSystemClass__Group__7__Impl26727 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__SubSystemClass__Group__8__Impl_in_rule__SubSystemClass__Group__826758 = new BitSet(new long[]{0x03C0020300000000L,0x00800000088B7C04L});
+    public static final BitSet FOLLOW_rule__SubSystemClass__Group__8__Impl_in_rule__SubSystemClass__Group__826758 = new BitSet(new long[]{0x01C0020300000000L,0x00800000088B2404L});
     public static final BitSet FOLLOW_rule__SubSystemClass__Group__9_in_rule__SubSystemClass__Group__826761 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__SubSystemClass__Alternatives_8_in_rule__SubSystemClass__Group__8__Impl26788 = new BitSet(new long[]{0x0200000300000002L,0x00000000088B7C04L});
+    public static final BitSet FOLLOW_rule__SubSystemClass__Alternatives_8_in_rule__SubSystemClass__Group__8__Impl26788 = new BitSet(new long[]{0x0000000300000002L,0x00000000088B2404L});
     public static final BitSet FOLLOW_rule__SubSystemClass__Group__9__Impl_in_rule__SubSystemClass__Group__926819 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_41_in_rule__SubSystemClass__Group__9__Impl26847 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__SubSystemClass__Group_5__0__Impl_in_rule__SubSystemClass__Group_5__026898 = new BitSet(new long[]{0x0000010000000000L});
@@ -76580,12 +76580,12 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rule__ActorInstanceMapping__ThreadAssignment_3_in_rule__ActorInstanceMapping__Group__3__Impl27604 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__ActorInstanceMapping__Group__4__Impl_in_rule__ActorInstanceMapping__Group__427634 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__ActorInstanceMapping__Group_4__0_in_rule__ActorInstanceMapping__Group__4__Impl27661 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ActorInstanceMapping__Group_4__0__Impl_in_rule__ActorInstanceMapping__Group_4__027702 = new BitSet(new long[]{0x0200020300000000L,0x00000000088B7C04L});
+    public static final BitSet FOLLOW_rule__ActorInstanceMapping__Group_4__0__Impl_in_rule__ActorInstanceMapping__Group_4__027702 = new BitSet(new long[]{0x0000020000000000L,0x0000000000020000L});
     public static final BitSet FOLLOW_rule__ActorInstanceMapping__Group_4__1_in_rule__ActorInstanceMapping__Group_4__027705 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_40_in_rule__ActorInstanceMapping__Group_4__0__Impl27733 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ActorInstanceMapping__Group_4__1__Impl_in_rule__ActorInstanceMapping__Group_4__127764 = new BitSet(new long[]{0x0200020300000000L,0x00000000088B7C04L});
+    public static final BitSet FOLLOW_rule__ActorInstanceMapping__Group_4__1__Impl_in_rule__ActorInstanceMapping__Group_4__127764 = new BitSet(new long[]{0x0000020000000000L,0x0000000000020000L});
     public static final BitSet FOLLOW_rule__ActorInstanceMapping__Group_4__2_in_rule__ActorInstanceMapping__Group_4__127767 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ActorInstanceMapping__ActorInstanceMappingsAssignment_4_1_in_rule__ActorInstanceMapping__Group_4__1__Impl27794 = new BitSet(new long[]{0x0200000300000002L,0x00000000088B7C04L});
+    public static final BitSet FOLLOW_rule__ActorInstanceMapping__ActorInstanceMappingsAssignment_4_1_in_rule__ActorInstanceMapping__Group_4__1__Impl27794 = new BitSet(new long[]{0x0000000000000002L,0x0000000000020000L});
     public static final BitSet FOLLOW_rule__ActorInstanceMapping__Group_4__2__Impl_in_rule__ActorInstanceMapping__Group_4__227825 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_41_in_rule__ActorInstanceMapping__Group_4__2__Impl27853 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__RefPath__Group__0__Impl_in_rule__RefPath__Group__027890 = new BitSet(new long[]{0x0000000000000000L,0x0000000000040000L});
@@ -77464,9 +77464,9 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_ruleDetailCode_in_rule__DataClass__UserCode1Assignment_6_148574 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleDetailCode_in_rule__DataClass__UserCode2Assignment_7_148605 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleDetailCode_in_rule__DataClass__UserCode3Assignment_8_148636 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAttribute_in_rule__DataClass__AttributesAssignment_9_048667 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleStandardOperation_in_rule__DataClass__OperationsAssignment_9_048667 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleClassStructor_in_rule__DataClass__StructorsAssignment_9_148698 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleStandardOperation_in_rule__DataClass__OperationsAssignment_9_248729 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleAttribute_in_rule__DataClass__AttributesAssignment_9_248729 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_ID_in_rule__Attribute__NameAssignment_148760 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_INT_in_rule__Attribute__SizeAssignment_2_148791 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleRefableType_in_rule__Attribute__TypeAssignment_448822 = new BitSet(new long[]{0x0000000000000002L});
@@ -77512,9 +77512,9 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_ruleVarDecl_in_rule__Message__DataAssignment_450114 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleDocumentation_in_rule__Message__DocuAssignment_650145 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleDetailCode_in_rule__PortClass__UserCodeAssignment_2_150176 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAttribute_in_rule__PortClass__AttributesAssignment_3_050207 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleMessageHandler_in_rule__PortClass__MsgHandlersAssignment_3_050207 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rulePortOperation_in_rule__PortClass__OperationsAssignment_3_150238 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleMessageHandler_in_rule__PortClass__MsgHandlersAssignment_3_250269 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleAttribute_in_rule__PortClass__AttributesAssignment_3_250269 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_ID_in_rule__InMessageHandler__MsgAssignment_250304 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleDetailCode_in_rule__InMessageHandler__DetailCodeAssignment_350339 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_ID_in_rule__OutMessageHandler__MsgAssignment_250374 = new BitSet(new long[]{0x0000000000000002L});
@@ -77525,24 +77525,24 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_ruleDocumentation_in_rule__ActorClass__DocuAssignment_350546 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleFQN_in_rule__ActorClass__BaseAssignment_4_150581 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleAnnotation_in_rule__ActorClass__AnnotationsAssignment_650616 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulePort_in_rule__ActorClass__InterfacePortsAssignment_7_2_050647 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSPP_in_rule__ActorClass__ServiceProvisionPointsAssignment_7_2_150678 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSPP_in_rule__ActorClass__ServiceProvisionPointsAssignment_7_2_050647 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulePort_in_rule__ActorClass__InterfacePortsAssignment_7_2_150678 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleDocumentation_in_rule__ActorClass__StructureDocuAssignment_8_150709 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleDetailCode_in_rule__ActorClass__UserCode1Assignment_8_3_150740 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleDetailCode_in_rule__ActorClass__UserCode2Assignment_8_4_150771 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleDetailCode_in_rule__ActorClass__UserCode3Assignment_8_5_150802 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulePort_in_rule__ActorClass__InternalPortsAssignment_8_6_050833 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExternalPort_in_rule__ActorClass__ExternalPortsAssignment_8_6_150864 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSAP_in_rule__ActorClass__ServiceAccessPointsAssignment_8_6_250895 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleLayerConnection_in_rule__ActorClass__ConnectionsAssignment_8_6_050833 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleBinding_in_rule__ActorClass__BindingsAssignment_8_6_150864 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleServiceImplementation_in_rule__ActorClass__ServiceImplementationsAssignment_8_6_250895 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleAttribute_in_rule__ActorClass__AttributesAssignment_8_6_350926 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleActorRef_in_rule__ActorClass__ActorRefsAssignment_8_6_450957 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleServiceImplementation_in_rule__ActorClass__ServiceImplementationsAssignment_8_6_550988 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleBinding_in_rule__ActorClass__BindingsAssignment_8_6_651019 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleLayerConnection_in_rule__ActorClass__ConnectionsAssignment_8_6_751050 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSAP_in_rule__ActorClass__ServiceAccessPointsAssignment_8_6_550988 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulePort_in_rule__ActorClass__InternalPortsAssignment_8_6_651019 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExternalPort_in_rule__ActorClass__ExternalPortsAssignment_8_6_751050 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleDocumentation_in_rule__ActorClass__BehaviorDocuAssignment_9_151081 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleAnnotation_in_rule__ActorClass__BehaviorAnnotationsAssignment_9_351112 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleClassStructor_in_rule__ActorClass__StructorsAssignment_9_4_051143 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleStandardOperation_in_rule__ActorClass__OperationsAssignment_9_4_151174 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleStandardOperation_in_rule__ActorClass__OperationsAssignment_9_4_051143 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleClassStructor_in_rule__ActorClass__StructorsAssignment_9_4_151174 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleStateMachine_in_rule__ActorClass__StateMachineAssignment_9_551205 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_66_in_rule__Port__ConjugatedAssignment_051241 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_ID_in_rule__Port__NameAssignment_251280 = new BitSet(new long[]{0x0000000000000002L});
@@ -77558,9 +77558,9 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_RULE_ID_in_rule__LogicalSystem__NameAssignment_151630 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleDocumentation_in_rule__LogicalSystem__DocuAssignment_251661 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleAnnotation_in_rule__LogicalSystem__AnnotationsAssignment_451692 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSubSystemRef_in_rule__LogicalSystem__SubSystemsAssignment_5_051723 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleLayerConnection_in_rule__LogicalSystem__ConnectionsAssignment_5_051723 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleBinding_in_rule__LogicalSystem__BindingsAssignment_5_151754 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleLayerConnection_in_rule__LogicalSystem__ConnectionsAssignment_5_251785 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSubSystemRef_in_rule__LogicalSystem__SubSystemsAssignment_5_251785 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_ID_in_rule__SubSystemRef__NameAssignment_151816 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleFQN_in_rule__SubSystemRef__TypeAssignment_351851 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleDocumentation_in_rule__SubSystemRef__DocuAssignment_451886 = new BitSet(new long[]{0x0000000000000002L});
@@ -77570,13 +77570,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_ruleDetailCode_in_rule__SubSystemClass__UserCode1Assignment_5_152010 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleDetailCode_in_rule__SubSystemClass__UserCode2Assignment_6_152041 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleDetailCode_in_rule__SubSystemClass__UserCode3Assignment_7_152072 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulePort_in_rule__SubSystemClass__RelayPortsAssignment_8_052103 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSPP_in_rule__SubSystemClass__ServiceProvisionPointsAssignment_8_152134 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleActorRef_in_rule__SubSystemClass__ActorRefsAssignment_8_252165 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleActorInstanceMapping_in_rule__SubSystemClass__ActorInstanceMappingsAssignment_8_052103 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleLogicalThread_in_rule__SubSystemClass__ThreadsAssignment_8_152134 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleLayerConnection_in_rule__SubSystemClass__ConnectionsAssignment_8_252165 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleBinding_in_rule__SubSystemClass__BindingsAssignment_8_352196 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleLayerConnection_in_rule__SubSystemClass__ConnectionsAssignment_8_452227 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleLogicalThread_in_rule__SubSystemClass__ThreadsAssignment_8_552258 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleActorInstanceMapping_in_rule__SubSystemClass__ActorInstanceMappingsAssignment_8_652289 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleActorRef_in_rule__SubSystemClass__ActorRefsAssignment_8_452227 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSPP_in_rule__SubSystemClass__ServiceProvisionPointsAssignment_8_552258 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulePort_in_rule__SubSystemClass__RelayPortsAssignment_8_652289 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_ID_in_rule__LogicalThread__NameAssignment_152320 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleRefPath_in_rule__ActorInstanceMapping__PathAssignment_152351 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_ID_in_rule__ActorInstanceMapping__ThreadAssignment_352386 = new BitSet(new long[]{0x0000000000000002L});

@@ -45,8 +45,8 @@
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//StructureClass">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//StructureClass/annotations"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//StructureClass/bindings"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//StructureClass/connections"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//StructureClass/bindings"/>
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//ActorContainerClass">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ActorContainerClass/serviceProvisionPoints"/>
@@ -91,9 +91,9 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//DataClass/userCode1"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//DataClass/userCode2"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//DataClass/userCode3"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//DataClass/attributes"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//DataClass/structors"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//DataClass/operations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//DataClass/structors"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//DataClass/attributes"/>
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//Attribute">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//Attribute/name"/>
@@ -150,9 +150,9 @@
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//PortClass">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//PortClass/userCode"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//PortClass/attributes"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//PortClass/operations"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//PortClass/msgHandlers"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//PortClass/operations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//PortClass/attributes"/>
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//MessageHandler">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//MessageHandler/msg"/>
@@ -163,15 +163,15 @@
     <genClasses ecoreClass="Room.ecore#//ActorClass">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ActorClass/interfacePorts"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ActorClass/structureDocu"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ActorClass/serviceImplementations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ActorClass/attributes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ActorClass/serviceAccessPoints"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ActorClass/internalPorts"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ActorClass/externalPorts"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ActorClass/serviceAccessPoints"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ActorClass/attributes"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ActorClass/serviceImplementations"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ActorClass/behaviorDocu"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ActorClass/behaviorAnnotations"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ActorClass/structors"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ActorClass/operations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//ActorClass/structors"/>
       <genOperations ecoreOperation="Room.ecore#//ActorClass/getExternalEndPorts"/>
       <genOperations ecoreOperation="Room.ecore#//ActorClass/getRelayPorts"/>
       <genOperations ecoreOperation="Room.ecore#//ActorClass/getImplementedSPPs"/>
@@ -218,9 +218,9 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//SubSystemRef/type"/>
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//SubSystemClass">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//SubSystemClass/relayPorts"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//SubSystemClass/threads"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//SubSystemClass/actorInstanceMappings"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//SubSystemClass/threads"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//SubSystemClass/relayPorts"/>
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//LogicalThread">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//LogicalThread/name"/>

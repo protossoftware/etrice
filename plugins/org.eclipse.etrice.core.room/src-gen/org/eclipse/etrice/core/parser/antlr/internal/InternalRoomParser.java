@@ -2619,7 +2619,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleDataClass"
-    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1065:1: ruleDataClass returns [EObject current=null] : (otherlv_0= 'DataClass' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? (otherlv_3= 'extends' ( ( ruleFQN ) ) )? otherlv_5= '{' ( (lv_annotations_6_0= ruleAnnotation ) )* (otherlv_7= 'usercode1' ( (lv_userCode1_8_0= ruleDetailCode ) ) )? (otherlv_9= 'usercode2' ( (lv_userCode2_10_0= ruleDetailCode ) ) )? (otherlv_11= 'usercode3' ( (lv_userCode3_12_0= ruleDetailCode ) ) )? ( ( (lv_attributes_13_0= ruleAttribute ) ) | ( (lv_structors_14_0= ruleClassStructor ) ) | ( (lv_operations_15_0= ruleStandardOperation ) ) )* otherlv_16= '}' ) ;
+    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1065:1: ruleDataClass returns [EObject current=null] : (otherlv_0= 'DataClass' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? (otherlv_3= 'extends' ( ( ruleFQN ) ) )? otherlv_5= '{' ( (lv_annotations_6_0= ruleAnnotation ) )* (otherlv_7= 'usercode1' ( (lv_userCode1_8_0= ruleDetailCode ) ) )? (otherlv_9= 'usercode2' ( (lv_userCode2_10_0= ruleDetailCode ) ) )? (otherlv_11= 'usercode3' ( (lv_userCode3_12_0= ruleDetailCode ) ) )? ( ( (lv_operations_13_0= ruleStandardOperation ) ) | ( (lv_structors_14_0= ruleClassStructor ) ) | ( (lv_attributes_15_0= ruleAttribute ) ) )* otherlv_16= '}' ) ;
     public final EObject ruleDataClass() throws RecognitionException {
         EObject current = null;
 
@@ -2641,21 +2641,21 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
         EObject lv_userCode3_12_0 = null;
 
-        EObject lv_attributes_13_0 = null;
+        EObject lv_operations_13_0 = null;
 
         EObject lv_structors_14_0 = null;
 
-        EObject lv_operations_15_0 = null;
+        EObject lv_attributes_15_0 = null;
 
 
          enterRule(); 
             
         try {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1068:28: ( (otherlv_0= 'DataClass' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? (otherlv_3= 'extends' ( ( ruleFQN ) ) )? otherlv_5= '{' ( (lv_annotations_6_0= ruleAnnotation ) )* (otherlv_7= 'usercode1' ( (lv_userCode1_8_0= ruleDetailCode ) ) )? (otherlv_9= 'usercode2' ( (lv_userCode2_10_0= ruleDetailCode ) ) )? (otherlv_11= 'usercode3' ( (lv_userCode3_12_0= ruleDetailCode ) ) )? ( ( (lv_attributes_13_0= ruleAttribute ) ) | ( (lv_structors_14_0= ruleClassStructor ) ) | ( (lv_operations_15_0= ruleStandardOperation ) ) )* otherlv_16= '}' ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1069:1: (otherlv_0= 'DataClass' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? (otherlv_3= 'extends' ( ( ruleFQN ) ) )? otherlv_5= '{' ( (lv_annotations_6_0= ruleAnnotation ) )* (otherlv_7= 'usercode1' ( (lv_userCode1_8_0= ruleDetailCode ) ) )? (otherlv_9= 'usercode2' ( (lv_userCode2_10_0= ruleDetailCode ) ) )? (otherlv_11= 'usercode3' ( (lv_userCode3_12_0= ruleDetailCode ) ) )? ( ( (lv_attributes_13_0= ruleAttribute ) ) | ( (lv_structors_14_0= ruleClassStructor ) ) | ( (lv_operations_15_0= ruleStandardOperation ) ) )* otherlv_16= '}' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1068:28: ( (otherlv_0= 'DataClass' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? (otherlv_3= 'extends' ( ( ruleFQN ) ) )? otherlv_5= '{' ( (lv_annotations_6_0= ruleAnnotation ) )* (otherlv_7= 'usercode1' ( (lv_userCode1_8_0= ruleDetailCode ) ) )? (otherlv_9= 'usercode2' ( (lv_userCode2_10_0= ruleDetailCode ) ) )? (otherlv_11= 'usercode3' ( (lv_userCode3_12_0= ruleDetailCode ) ) )? ( ( (lv_operations_13_0= ruleStandardOperation ) ) | ( (lv_structors_14_0= ruleClassStructor ) ) | ( (lv_attributes_15_0= ruleAttribute ) ) )* otherlv_16= '}' ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1069:1: (otherlv_0= 'DataClass' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? (otherlv_3= 'extends' ( ( ruleFQN ) ) )? otherlv_5= '{' ( (lv_annotations_6_0= ruleAnnotation ) )* (otherlv_7= 'usercode1' ( (lv_userCode1_8_0= ruleDetailCode ) ) )? (otherlv_9= 'usercode2' ( (lv_userCode2_10_0= ruleDetailCode ) ) )? (otherlv_11= 'usercode3' ( (lv_userCode3_12_0= ruleDetailCode ) ) )? ( ( (lv_operations_13_0= ruleStandardOperation ) ) | ( (lv_structors_14_0= ruleClassStructor ) ) | ( (lv_attributes_15_0= ruleAttribute ) ) )* otherlv_16= '}' )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1069:1: (otherlv_0= 'DataClass' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? (otherlv_3= 'extends' ( ( ruleFQN ) ) )? otherlv_5= '{' ( (lv_annotations_6_0= ruleAnnotation ) )* (otherlv_7= 'usercode1' ( (lv_userCode1_8_0= ruleDetailCode ) ) )? (otherlv_9= 'usercode2' ( (lv_userCode2_10_0= ruleDetailCode ) ) )? (otherlv_11= 'usercode3' ( (lv_userCode3_12_0= ruleDetailCode ) ) )? ( ( (lv_attributes_13_0= ruleAttribute ) ) | ( (lv_structors_14_0= ruleClassStructor ) ) | ( (lv_operations_15_0= ruleStandardOperation ) ) )* otherlv_16= '}' )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1069:3: otherlv_0= 'DataClass' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? (otherlv_3= 'extends' ( ( ruleFQN ) ) )? otherlv_5= '{' ( (lv_annotations_6_0= ruleAnnotation ) )* (otherlv_7= 'usercode1' ( (lv_userCode1_8_0= ruleDetailCode ) ) )? (otherlv_9= 'usercode2' ( (lv_userCode2_10_0= ruleDetailCode ) ) )? (otherlv_11= 'usercode3' ( (lv_userCode3_12_0= ruleDetailCode ) ) )? ( ( (lv_attributes_13_0= ruleAttribute ) ) | ( (lv_structors_14_0= ruleClassStructor ) ) | ( (lv_operations_15_0= ruleStandardOperation ) ) )* otherlv_16= '}'
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1069:1: (otherlv_0= 'DataClass' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? (otherlv_3= 'extends' ( ( ruleFQN ) ) )? otherlv_5= '{' ( (lv_annotations_6_0= ruleAnnotation ) )* (otherlv_7= 'usercode1' ( (lv_userCode1_8_0= ruleDetailCode ) ) )? (otherlv_9= 'usercode2' ( (lv_userCode2_10_0= ruleDetailCode ) ) )? (otherlv_11= 'usercode3' ( (lv_userCode3_12_0= ruleDetailCode ) ) )? ( ( (lv_operations_13_0= ruleStandardOperation ) ) | ( (lv_structors_14_0= ruleClassStructor ) ) | ( (lv_attributes_15_0= ruleAttribute ) ) )* otherlv_16= '}' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1069:3: otherlv_0= 'DataClass' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? (otherlv_3= 'extends' ( ( ruleFQN ) ) )? otherlv_5= '{' ( (lv_annotations_6_0= ruleAnnotation ) )* (otherlv_7= 'usercode1' ( (lv_userCode1_8_0= ruleDetailCode ) ) )? (otherlv_9= 'usercode2' ( (lv_userCode2_10_0= ruleDetailCode ) ) )? (otherlv_11= 'usercode3' ( (lv_userCode3_12_0= ruleDetailCode ) ) )? ( ( (lv_operations_13_0= ruleStandardOperation ) ) | ( (lv_structors_14_0= ruleClassStructor ) ) | ( (lv_attributes_15_0= ruleAttribute ) ) )* otherlv_16= '}'
             {
             otherlv_0=(Token)match(input,28,FOLLOW_28_in_ruleDataClass2142); 
 
@@ -2987,12 +2987,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1216:4: ( ( (lv_attributes_13_0= ruleAttribute ) ) | ( (lv_structors_14_0= ruleClassStructor ) ) | ( (lv_operations_15_0= ruleStandardOperation ) ) )*
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1216:4: ( ( (lv_operations_13_0= ruleStandardOperation ) ) | ( (lv_structors_14_0= ruleClassStructor ) ) | ( (lv_attributes_15_0= ruleAttribute ) ) )*
             loop24:
             do {
                 int alt24=4;
                 switch ( input.LA(1) ) {
-                case 33:
+                case 36:
+                case 37:
                     {
                     alt24=1;
                     }
@@ -3003,8 +3004,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     alt24=2;
                     }
                     break;
-                case 36:
-                case 37:
+                case 33:
                     {
                     alt24=3;
                     }
@@ -3014,19 +3014,19 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
                 switch (alt24) {
             	case 1 :
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1216:5: ( (lv_attributes_13_0= ruleAttribute ) )
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1216:5: ( (lv_operations_13_0= ruleStandardOperation ) )
             	    {
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1216:5: ( (lv_attributes_13_0= ruleAttribute ) )
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1217:1: (lv_attributes_13_0= ruleAttribute )
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1216:5: ( (lv_operations_13_0= ruleStandardOperation ) )
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1217:1: (lv_operations_13_0= ruleStandardOperation )
             	    {
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1217:1: (lv_attributes_13_0= ruleAttribute )
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1218:3: lv_attributes_13_0= ruleAttribute
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1217:1: (lv_operations_13_0= ruleStandardOperation )
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1218:3: lv_operations_13_0= ruleStandardOperation
             	    {
             	     
-            	    	        newCompositeNode(grammarAccess.getDataClassAccess().getAttributesAttributeParserRuleCall_9_0_0()); 
+            	    	        newCompositeNode(grammarAccess.getDataClassAccess().getOperationsStandardOperationParserRuleCall_9_0_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleAttribute_in_ruleDataClass2388);
-            	    lv_attributes_13_0=ruleAttribute();
+            	    pushFollow(FOLLOW_ruleStandardOperation_in_ruleDataClass2388);
+            	    lv_operations_13_0=ruleStandardOperation();
 
             	    state._fsp--;
 
@@ -3036,9 +3036,9 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	    	        }
             	           		add(
             	           			current, 
-            	           			"attributes",
-            	            		lv_attributes_13_0, 
-            	            		"Attribute");
+            	           			"operations",
+            	            		lv_operations_13_0, 
+            	            		"StandardOperation");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -3088,19 +3088,19 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 3 :
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1254:6: ( (lv_operations_15_0= ruleStandardOperation ) )
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1254:6: ( (lv_attributes_15_0= ruleAttribute ) )
             	    {
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1254:6: ( (lv_operations_15_0= ruleStandardOperation ) )
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1255:1: (lv_operations_15_0= ruleStandardOperation )
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1254:6: ( (lv_attributes_15_0= ruleAttribute ) )
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1255:1: (lv_attributes_15_0= ruleAttribute )
             	    {
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1255:1: (lv_operations_15_0= ruleStandardOperation )
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1256:3: lv_operations_15_0= ruleStandardOperation
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1255:1: (lv_attributes_15_0= ruleAttribute )
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1256:3: lv_attributes_15_0= ruleAttribute
             	    {
             	     
-            	    	        newCompositeNode(grammarAccess.getDataClassAccess().getOperationsStandardOperationParserRuleCall_9_2_0()); 
+            	    	        newCompositeNode(grammarAccess.getDataClassAccess().getAttributesAttributeParserRuleCall_9_2_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleStandardOperation_in_ruleDataClass2442);
-            	    lv_operations_15_0=ruleStandardOperation();
+            	    pushFollow(FOLLOW_ruleAttribute_in_ruleDataClass2442);
+            	    lv_attributes_15_0=ruleAttribute();
 
             	    state._fsp--;
 
@@ -3110,9 +3110,9 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	    	        }
             	           		add(
             	           			current, 
-            	           			"operations",
-            	            		lv_operations_15_0, 
-            	            		"StandardOperation");
+            	           			"attributes",
+            	            		lv_attributes_15_0, 
+            	            		"Attribute");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -6071,7 +6071,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "rulePortClass"
-    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2465:1: rulePortClass returns [EObject current=null] : ( () otherlv_1= '{' (otherlv_2= 'usercode' ( (lv_userCode_3_0= ruleDetailCode ) ) )? ( ( (lv_attributes_4_0= ruleAttribute ) ) | ( (lv_operations_5_0= rulePortOperation ) ) | ( (lv_msgHandlers_6_0= ruleMessageHandler ) ) )* otherlv_7= '}' ) ;
+    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2465:1: rulePortClass returns [EObject current=null] : ( () otherlv_1= '{' (otherlv_2= 'usercode' ( (lv_userCode_3_0= ruleDetailCode ) ) )? ( ( (lv_msgHandlers_4_0= ruleMessageHandler ) ) | ( (lv_operations_5_0= rulePortOperation ) ) | ( (lv_attributes_6_0= ruleAttribute ) ) )* otherlv_7= '}' ) ;
     public final EObject rulePortClass() throws RecognitionException {
         EObject current = null;
 
@@ -6080,21 +6080,21 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
         Token otherlv_7=null;
         EObject lv_userCode_3_0 = null;
 
-        EObject lv_attributes_4_0 = null;
+        EObject lv_msgHandlers_4_0 = null;
 
         EObject lv_operations_5_0 = null;
 
-        EObject lv_msgHandlers_6_0 = null;
+        EObject lv_attributes_6_0 = null;
 
 
          enterRule(); 
             
         try {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2468:28: ( ( () otherlv_1= '{' (otherlv_2= 'usercode' ( (lv_userCode_3_0= ruleDetailCode ) ) )? ( ( (lv_attributes_4_0= ruleAttribute ) ) | ( (lv_operations_5_0= rulePortOperation ) ) | ( (lv_msgHandlers_6_0= ruleMessageHandler ) ) )* otherlv_7= '}' ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2469:1: ( () otherlv_1= '{' (otherlv_2= 'usercode' ( (lv_userCode_3_0= ruleDetailCode ) ) )? ( ( (lv_attributes_4_0= ruleAttribute ) ) | ( (lv_operations_5_0= rulePortOperation ) ) | ( (lv_msgHandlers_6_0= ruleMessageHandler ) ) )* otherlv_7= '}' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2468:28: ( ( () otherlv_1= '{' (otherlv_2= 'usercode' ( (lv_userCode_3_0= ruleDetailCode ) ) )? ( ( (lv_msgHandlers_4_0= ruleMessageHandler ) ) | ( (lv_operations_5_0= rulePortOperation ) ) | ( (lv_attributes_6_0= ruleAttribute ) ) )* otherlv_7= '}' ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2469:1: ( () otherlv_1= '{' (otherlv_2= 'usercode' ( (lv_userCode_3_0= ruleDetailCode ) ) )? ( ( (lv_msgHandlers_4_0= ruleMessageHandler ) ) | ( (lv_operations_5_0= rulePortOperation ) ) | ( (lv_attributes_6_0= ruleAttribute ) ) )* otherlv_7= '}' )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2469:1: ( () otherlv_1= '{' (otherlv_2= 'usercode' ( (lv_userCode_3_0= ruleDetailCode ) ) )? ( ( (lv_attributes_4_0= ruleAttribute ) ) | ( (lv_operations_5_0= rulePortOperation ) ) | ( (lv_msgHandlers_6_0= ruleMessageHandler ) ) )* otherlv_7= '}' )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2469:2: () otherlv_1= '{' (otherlv_2= 'usercode' ( (lv_userCode_3_0= ruleDetailCode ) ) )? ( ( (lv_attributes_4_0= ruleAttribute ) ) | ( (lv_operations_5_0= rulePortOperation ) ) | ( (lv_msgHandlers_6_0= ruleMessageHandler ) ) )* otherlv_7= '}'
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2469:1: ( () otherlv_1= '{' (otherlv_2= 'usercode' ( (lv_userCode_3_0= ruleDetailCode ) ) )? ( ( (lv_msgHandlers_4_0= ruleMessageHandler ) ) | ( (lv_operations_5_0= rulePortOperation ) ) | ( (lv_attributes_6_0= ruleAttribute ) ) )* otherlv_7= '}' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2469:2: () otherlv_1= '{' (otherlv_2= 'usercode' ( (lv_userCode_3_0= ruleDetailCode ) ) )? ( ( (lv_msgHandlers_4_0= ruleMessageHandler ) ) | ( (lv_operations_5_0= rulePortOperation ) ) | ( (lv_attributes_6_0= ruleAttribute ) ) )* otherlv_7= '}'
             {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2469:2: ()
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2470:5: 
@@ -6163,12 +6163,12 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2501:4: ( ( (lv_attributes_4_0= ruleAttribute ) ) | ( (lv_operations_5_0= rulePortOperation ) ) | ( (lv_msgHandlers_6_0= ruleMessageHandler ) ) )*
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2501:4: ( ( (lv_msgHandlers_4_0= ruleMessageHandler ) ) | ( (lv_operations_5_0= rulePortOperation ) ) | ( (lv_attributes_6_0= ruleAttribute ) ) )*
             loop62:
             do {
                 int alt62=4;
                 switch ( input.LA(1) ) {
-                case 33:
+                case 53:
                     {
                     alt62=1;
                     }
@@ -6178,7 +6178,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     alt62=2;
                     }
                     break;
-                case 53:
+                case 33:
                     {
                     alt62=3;
                     }
@@ -6188,19 +6188,19 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
                 switch (alt62) {
             	case 1 :
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2501:5: ( (lv_attributes_4_0= ruleAttribute ) )
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2501:5: ( (lv_msgHandlers_4_0= ruleMessageHandler ) )
             	    {
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2501:5: ( (lv_attributes_4_0= ruleAttribute ) )
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2502:1: (lv_attributes_4_0= ruleAttribute )
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2501:5: ( (lv_msgHandlers_4_0= ruleMessageHandler ) )
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2502:1: (lv_msgHandlers_4_0= ruleMessageHandler )
             	    {
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2502:1: (lv_attributes_4_0= ruleAttribute )
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2503:3: lv_attributes_4_0= ruleAttribute
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2502:1: (lv_msgHandlers_4_0= ruleMessageHandler )
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2503:3: lv_msgHandlers_4_0= ruleMessageHandler
             	    {
             	     
-            	    	        newCompositeNode(grammarAccess.getPortClassAccess().getAttributesAttributeParserRuleCall_3_0_0()); 
+            	    	        newCompositeNode(grammarAccess.getPortClassAccess().getMsgHandlersMessageHandlerParserRuleCall_3_0_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleAttribute_in_rulePortClass4901);
-            	    lv_attributes_4_0=ruleAttribute();
+            	    pushFollow(FOLLOW_ruleMessageHandler_in_rulePortClass4901);
+            	    lv_msgHandlers_4_0=ruleMessageHandler();
 
             	    state._fsp--;
 
@@ -6210,9 +6210,9 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	    	        }
             	           		add(
             	           			current, 
-            	           			"attributes",
-            	            		lv_attributes_4_0, 
-            	            		"Attribute");
+            	           			"msgHandlers",
+            	            		lv_msgHandlers_4_0, 
+            	            		"MessageHandler");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -6262,19 +6262,19 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 3 :
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2539:6: ( (lv_msgHandlers_6_0= ruleMessageHandler ) )
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2539:6: ( (lv_attributes_6_0= ruleAttribute ) )
             	    {
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2539:6: ( (lv_msgHandlers_6_0= ruleMessageHandler ) )
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2540:1: (lv_msgHandlers_6_0= ruleMessageHandler )
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2539:6: ( (lv_attributes_6_0= ruleAttribute ) )
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2540:1: (lv_attributes_6_0= ruleAttribute )
             	    {
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2540:1: (lv_msgHandlers_6_0= ruleMessageHandler )
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2541:3: lv_msgHandlers_6_0= ruleMessageHandler
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2540:1: (lv_attributes_6_0= ruleAttribute )
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2541:3: lv_attributes_6_0= ruleAttribute
             	    {
             	     
-            	    	        newCompositeNode(grammarAccess.getPortClassAccess().getMsgHandlersMessageHandlerParserRuleCall_3_2_0()); 
+            	    	        newCompositeNode(grammarAccess.getPortClassAccess().getAttributesAttributeParserRuleCall_3_2_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleMessageHandler_in_rulePortClass4955);
-            	    lv_msgHandlers_6_0=ruleMessageHandler();
+            	    pushFollow(FOLLOW_ruleAttribute_in_rulePortClass4955);
+            	    lv_attributes_6_0=ruleAttribute();
 
             	    state._fsp--;
 
@@ -6284,9 +6284,9 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	    	        }
             	           		add(
             	           			current, 
-            	           			"msgHandlers",
-            	            		lv_msgHandlers_6_0, 
-            	            		"MessageHandler");
+            	           			"attributes",
+            	            		lv_attributes_6_0, 
+            	            		"Attribute");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -6851,7 +6851,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleActorClass"
-    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2768:1: ruleActorClass returns [EObject current=null] : ( ( ( ( ( ({...}? => ( ({...}? => ( (lv_abstract_1_0= 'abstract' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_commType_2_0= ruleComponentCommunicationType ) ) ) ) ) )* ) ) ) otherlv_3= 'ActorClass' ( (lv_name_4_0= RULE_ID ) ) ( (lv_docu_5_0= ruleDocumentation ) )? (otherlv_6= 'extends' ( ( ruleFQN ) ) )? otherlv_8= '{' ( (lv_annotations_9_0= ruleAnnotation ) )* (otherlv_10= 'Interface' otherlv_11= '{' ( ( (lv_interfacePorts_12_0= rulePort ) ) | ( (lv_serviceProvisionPoints_13_0= ruleSPP ) ) )* otherlv_14= '}' )? (otherlv_15= 'Structure' ( (lv_structureDocu_16_0= ruleDocumentation ) )? otherlv_17= '{' (otherlv_18= 'usercode1' ( (lv_userCode1_19_0= ruleDetailCode ) ) )? (otherlv_20= 'usercode2' ( (lv_userCode2_21_0= ruleDetailCode ) ) )? (otherlv_22= 'usercode3' ( (lv_userCode3_23_0= ruleDetailCode ) ) )? ( ( (lv_internalPorts_24_0= rulePort ) ) | ( (lv_externalPorts_25_0= ruleExternalPort ) ) | ( (lv_serviceAccessPoints_26_0= ruleSAP ) ) | ( (lv_attributes_27_0= ruleAttribute ) ) | ( (lv_actorRefs_28_0= ruleActorRef ) ) | ( (lv_serviceImplementations_29_0= ruleServiceImplementation ) ) | ( (lv_bindings_30_0= ruleBinding ) ) | ( (lv_connections_31_0= ruleLayerConnection ) ) )* otherlv_32= '}' )? (otherlv_33= 'Behavior' ( (lv_behaviorDocu_34_0= ruleDocumentation ) )? otherlv_35= '{' ( (lv_behaviorAnnotations_36_0= ruleAnnotation ) )* ( ( (lv_structors_37_0= ruleClassStructor ) ) | ( (lv_operations_38_0= ruleStandardOperation ) ) )* ( (lv_stateMachine_39_0= ruleStateMachine ) )? otherlv_40= '}' )? otherlv_41= '}' ) ;
+    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2768:1: ruleActorClass returns [EObject current=null] : ( ( ( ( ( ({...}? => ( ({...}? => ( (lv_abstract_1_0= 'abstract' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_commType_2_0= ruleComponentCommunicationType ) ) ) ) ) )* ) ) ) otherlv_3= 'ActorClass' ( (lv_name_4_0= RULE_ID ) ) ( (lv_docu_5_0= ruleDocumentation ) )? (otherlv_6= 'extends' ( ( ruleFQN ) ) )? otherlv_8= '{' ( (lv_annotations_9_0= ruleAnnotation ) )* (otherlv_10= 'Interface' otherlv_11= '{' ( ( (lv_serviceProvisionPoints_12_0= ruleSPP ) ) | ( (lv_interfacePorts_13_0= rulePort ) ) )* otherlv_14= '}' )? (otherlv_15= 'Structure' ( (lv_structureDocu_16_0= ruleDocumentation ) )? otherlv_17= '{' (otherlv_18= 'usercode1' ( (lv_userCode1_19_0= ruleDetailCode ) ) )? (otherlv_20= 'usercode2' ( (lv_userCode2_21_0= ruleDetailCode ) ) )? (otherlv_22= 'usercode3' ( (lv_userCode3_23_0= ruleDetailCode ) ) )? ( ( (lv_connections_24_0= ruleLayerConnection ) ) | ( (lv_bindings_25_0= ruleBinding ) ) | ( (lv_serviceImplementations_26_0= ruleServiceImplementation ) ) | ( (lv_attributes_27_0= ruleAttribute ) ) | ( (lv_actorRefs_28_0= ruleActorRef ) ) | ( (lv_serviceAccessPoints_29_0= ruleSAP ) ) | ( (lv_internalPorts_30_0= rulePort ) ) | ( (lv_externalPorts_31_0= ruleExternalPort ) ) )* otherlv_32= '}' )? (otherlv_33= 'Behavior' ( (lv_behaviorDocu_34_0= ruleDocumentation ) )? otherlv_35= '{' ( (lv_behaviorAnnotations_36_0= ruleAnnotation ) )* ( ( (lv_operations_37_0= ruleStandardOperation ) ) | ( (lv_structors_38_0= ruleClassStructor ) ) )* ( (lv_stateMachine_39_0= ruleStateMachine ) )? otherlv_40= '}' )? otherlv_41= '}' ) ;
     public final EObject ruleActorClass() throws RecognitionException {
         EObject current = null;
 
@@ -6879,9 +6879,9 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
         EObject lv_annotations_9_0 = null;
 
-        EObject lv_interfacePorts_12_0 = null;
+        EObject lv_serviceProvisionPoints_12_0 = null;
 
-        EObject lv_serviceProvisionPoints_13_0 = null;
+        EObject lv_interfacePorts_13_0 = null;
 
         EObject lv_structureDocu_16_0 = null;
 
@@ -6891,29 +6891,29 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
         EObject lv_userCode3_23_0 = null;
 
-        EObject lv_internalPorts_24_0 = null;
+        EObject lv_connections_24_0 = null;
 
-        EObject lv_externalPorts_25_0 = null;
+        EObject lv_bindings_25_0 = null;
 
-        EObject lv_serviceAccessPoints_26_0 = null;
+        EObject lv_serviceImplementations_26_0 = null;
 
         EObject lv_attributes_27_0 = null;
 
         EObject lv_actorRefs_28_0 = null;
 
-        EObject lv_serviceImplementations_29_0 = null;
+        EObject lv_serviceAccessPoints_29_0 = null;
 
-        EObject lv_bindings_30_0 = null;
+        EObject lv_internalPorts_30_0 = null;
 
-        EObject lv_connections_31_0 = null;
+        EObject lv_externalPorts_31_0 = null;
 
         EObject lv_behaviorDocu_34_0 = null;
 
         EObject lv_behaviorAnnotations_36_0 = null;
 
-        EObject lv_structors_37_0 = null;
+        EObject lv_operations_37_0 = null;
 
-        EObject lv_operations_38_0 = null;
+        EObject lv_structors_38_0 = null;
 
         EObject lv_stateMachine_39_0 = null;
 
@@ -6921,11 +6921,11 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2771:28: ( ( ( ( ( ( ({...}? => ( ({...}? => ( (lv_abstract_1_0= 'abstract' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_commType_2_0= ruleComponentCommunicationType ) ) ) ) ) )* ) ) ) otherlv_3= 'ActorClass' ( (lv_name_4_0= RULE_ID ) ) ( (lv_docu_5_0= ruleDocumentation ) )? (otherlv_6= 'extends' ( ( ruleFQN ) ) )? otherlv_8= '{' ( (lv_annotations_9_0= ruleAnnotation ) )* (otherlv_10= 'Interface' otherlv_11= '{' ( ( (lv_interfacePorts_12_0= rulePort ) ) | ( (lv_serviceProvisionPoints_13_0= ruleSPP ) ) )* otherlv_14= '}' )? (otherlv_15= 'Structure' ( (lv_structureDocu_16_0= ruleDocumentation ) )? otherlv_17= '{' (otherlv_18= 'usercode1' ( (lv_userCode1_19_0= ruleDetailCode ) ) )? (otherlv_20= 'usercode2' ( (lv_userCode2_21_0= ruleDetailCode ) ) )? (otherlv_22= 'usercode3' ( (lv_userCode3_23_0= ruleDetailCode ) ) )? ( ( (lv_internalPorts_24_0= rulePort ) ) | ( (lv_externalPorts_25_0= ruleExternalPort ) ) | ( (lv_serviceAccessPoints_26_0= ruleSAP ) ) | ( (lv_attributes_27_0= ruleAttribute ) ) | ( (lv_actorRefs_28_0= ruleActorRef ) ) | ( (lv_serviceImplementations_29_0= ruleServiceImplementation ) ) | ( (lv_bindings_30_0= ruleBinding ) ) | ( (lv_connections_31_0= ruleLayerConnection ) ) )* otherlv_32= '}' )? (otherlv_33= 'Behavior' ( (lv_behaviorDocu_34_0= ruleDocumentation ) )? otherlv_35= '{' ( (lv_behaviorAnnotations_36_0= ruleAnnotation ) )* ( ( (lv_structors_37_0= ruleClassStructor ) ) | ( (lv_operations_38_0= ruleStandardOperation ) ) )* ( (lv_stateMachine_39_0= ruleStateMachine ) )? otherlv_40= '}' )? otherlv_41= '}' ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2772:1: ( ( ( ( ( ({...}? => ( ({...}? => ( (lv_abstract_1_0= 'abstract' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_commType_2_0= ruleComponentCommunicationType ) ) ) ) ) )* ) ) ) otherlv_3= 'ActorClass' ( (lv_name_4_0= RULE_ID ) ) ( (lv_docu_5_0= ruleDocumentation ) )? (otherlv_6= 'extends' ( ( ruleFQN ) ) )? otherlv_8= '{' ( (lv_annotations_9_0= ruleAnnotation ) )* (otherlv_10= 'Interface' otherlv_11= '{' ( ( (lv_interfacePorts_12_0= rulePort ) ) | ( (lv_serviceProvisionPoints_13_0= ruleSPP ) ) )* otherlv_14= '}' )? (otherlv_15= 'Structure' ( (lv_structureDocu_16_0= ruleDocumentation ) )? otherlv_17= '{' (otherlv_18= 'usercode1' ( (lv_userCode1_19_0= ruleDetailCode ) ) )? (otherlv_20= 'usercode2' ( (lv_userCode2_21_0= ruleDetailCode ) ) )? (otherlv_22= 'usercode3' ( (lv_userCode3_23_0= ruleDetailCode ) ) )? ( ( (lv_internalPorts_24_0= rulePort ) ) | ( (lv_externalPorts_25_0= ruleExternalPort ) ) | ( (lv_serviceAccessPoints_26_0= ruleSAP ) ) | ( (lv_attributes_27_0= ruleAttribute ) ) | ( (lv_actorRefs_28_0= ruleActorRef ) ) | ( (lv_serviceImplementations_29_0= ruleServiceImplementation ) ) | ( (lv_bindings_30_0= ruleBinding ) ) | ( (lv_connections_31_0= ruleLayerConnection ) ) )* otherlv_32= '}' )? (otherlv_33= 'Behavior' ( (lv_behaviorDocu_34_0= ruleDocumentation ) )? otherlv_35= '{' ( (lv_behaviorAnnotations_36_0= ruleAnnotation ) )* ( ( (lv_structors_37_0= ruleClassStructor ) ) | ( (lv_operations_38_0= ruleStandardOperation ) ) )* ( (lv_stateMachine_39_0= ruleStateMachine ) )? otherlv_40= '}' )? otherlv_41= '}' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2771:28: ( ( ( ( ( ( ({...}? => ( ({...}? => ( (lv_abstract_1_0= 'abstract' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_commType_2_0= ruleComponentCommunicationType ) ) ) ) ) )* ) ) ) otherlv_3= 'ActorClass' ( (lv_name_4_0= RULE_ID ) ) ( (lv_docu_5_0= ruleDocumentation ) )? (otherlv_6= 'extends' ( ( ruleFQN ) ) )? otherlv_8= '{' ( (lv_annotations_9_0= ruleAnnotation ) )* (otherlv_10= 'Interface' otherlv_11= '{' ( ( (lv_serviceProvisionPoints_12_0= ruleSPP ) ) | ( (lv_interfacePorts_13_0= rulePort ) ) )* otherlv_14= '}' )? (otherlv_15= 'Structure' ( (lv_structureDocu_16_0= ruleDocumentation ) )? otherlv_17= '{' (otherlv_18= 'usercode1' ( (lv_userCode1_19_0= ruleDetailCode ) ) )? (otherlv_20= 'usercode2' ( (lv_userCode2_21_0= ruleDetailCode ) ) )? (otherlv_22= 'usercode3' ( (lv_userCode3_23_0= ruleDetailCode ) ) )? ( ( (lv_connections_24_0= ruleLayerConnection ) ) | ( (lv_bindings_25_0= ruleBinding ) ) | ( (lv_serviceImplementations_26_0= ruleServiceImplementation ) ) | ( (lv_attributes_27_0= ruleAttribute ) ) | ( (lv_actorRefs_28_0= ruleActorRef ) ) | ( (lv_serviceAccessPoints_29_0= ruleSAP ) ) | ( (lv_internalPorts_30_0= rulePort ) ) | ( (lv_externalPorts_31_0= ruleExternalPort ) ) )* otherlv_32= '}' )? (otherlv_33= 'Behavior' ( (lv_behaviorDocu_34_0= ruleDocumentation ) )? otherlv_35= '{' ( (lv_behaviorAnnotations_36_0= ruleAnnotation ) )* ( ( (lv_operations_37_0= ruleStandardOperation ) ) | ( (lv_structors_38_0= ruleClassStructor ) ) )* ( (lv_stateMachine_39_0= ruleStateMachine ) )? otherlv_40= '}' )? otherlv_41= '}' ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2772:1: ( ( ( ( ( ({...}? => ( ({...}? => ( (lv_abstract_1_0= 'abstract' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_commType_2_0= ruleComponentCommunicationType ) ) ) ) ) )* ) ) ) otherlv_3= 'ActorClass' ( (lv_name_4_0= RULE_ID ) ) ( (lv_docu_5_0= ruleDocumentation ) )? (otherlv_6= 'extends' ( ( ruleFQN ) ) )? otherlv_8= '{' ( (lv_annotations_9_0= ruleAnnotation ) )* (otherlv_10= 'Interface' otherlv_11= '{' ( ( (lv_serviceProvisionPoints_12_0= ruleSPP ) ) | ( (lv_interfacePorts_13_0= rulePort ) ) )* otherlv_14= '}' )? (otherlv_15= 'Structure' ( (lv_structureDocu_16_0= ruleDocumentation ) )? otherlv_17= '{' (otherlv_18= 'usercode1' ( (lv_userCode1_19_0= ruleDetailCode ) ) )? (otherlv_20= 'usercode2' ( (lv_userCode2_21_0= ruleDetailCode ) ) )? (otherlv_22= 'usercode3' ( (lv_userCode3_23_0= ruleDetailCode ) ) )? ( ( (lv_connections_24_0= ruleLayerConnection ) ) | ( (lv_bindings_25_0= ruleBinding ) ) | ( (lv_serviceImplementations_26_0= ruleServiceImplementation ) ) | ( (lv_attributes_27_0= ruleAttribute ) ) | ( (lv_actorRefs_28_0= ruleActorRef ) ) | ( (lv_serviceAccessPoints_29_0= ruleSAP ) ) | ( (lv_internalPorts_30_0= rulePort ) ) | ( (lv_externalPorts_31_0= ruleExternalPort ) ) )* otherlv_32= '}' )? (otherlv_33= 'Behavior' ( (lv_behaviorDocu_34_0= ruleDocumentation ) )? otherlv_35= '{' ( (lv_behaviorAnnotations_36_0= ruleAnnotation ) )* ( ( (lv_operations_37_0= ruleStandardOperation ) ) | ( (lv_structors_38_0= ruleClassStructor ) ) )* ( (lv_stateMachine_39_0= ruleStateMachine ) )? otherlv_40= '}' )? otherlv_41= '}' )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2772:1: ( ( ( ( ( ({...}? => ( ({...}? => ( (lv_abstract_1_0= 'abstract' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_commType_2_0= ruleComponentCommunicationType ) ) ) ) ) )* ) ) ) otherlv_3= 'ActorClass' ( (lv_name_4_0= RULE_ID ) ) ( (lv_docu_5_0= ruleDocumentation ) )? (otherlv_6= 'extends' ( ( ruleFQN ) ) )? otherlv_8= '{' ( (lv_annotations_9_0= ruleAnnotation ) )* (otherlv_10= 'Interface' otherlv_11= '{' ( ( (lv_interfacePorts_12_0= rulePort ) ) | ( (lv_serviceProvisionPoints_13_0= ruleSPP ) ) )* otherlv_14= '}' )? (otherlv_15= 'Structure' ( (lv_structureDocu_16_0= ruleDocumentation ) )? otherlv_17= '{' (otherlv_18= 'usercode1' ( (lv_userCode1_19_0= ruleDetailCode ) ) )? (otherlv_20= 'usercode2' ( (lv_userCode2_21_0= ruleDetailCode ) ) )? (otherlv_22= 'usercode3' ( (lv_userCode3_23_0= ruleDetailCode ) ) )? ( ( (lv_internalPorts_24_0= rulePort ) ) | ( (lv_externalPorts_25_0= ruleExternalPort ) ) | ( (lv_serviceAccessPoints_26_0= ruleSAP ) ) | ( (lv_attributes_27_0= ruleAttribute ) ) | ( (lv_actorRefs_28_0= ruleActorRef ) ) | ( (lv_serviceImplementations_29_0= ruleServiceImplementation ) ) | ( (lv_bindings_30_0= ruleBinding ) ) | ( (lv_connections_31_0= ruleLayerConnection ) ) )* otherlv_32= '}' )? (otherlv_33= 'Behavior' ( (lv_behaviorDocu_34_0= ruleDocumentation ) )? otherlv_35= '{' ( (lv_behaviorAnnotations_36_0= ruleAnnotation ) )* ( ( (lv_structors_37_0= ruleClassStructor ) ) | ( (lv_operations_38_0= ruleStandardOperation ) ) )* ( (lv_stateMachine_39_0= ruleStateMachine ) )? otherlv_40= '}' )? otherlv_41= '}' )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2772:2: ( ( ( ( ({...}? => ( ({...}? => ( (lv_abstract_1_0= 'abstract' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_commType_2_0= ruleComponentCommunicationType ) ) ) ) ) )* ) ) ) otherlv_3= 'ActorClass' ( (lv_name_4_0= RULE_ID ) ) ( (lv_docu_5_0= ruleDocumentation ) )? (otherlv_6= 'extends' ( ( ruleFQN ) ) )? otherlv_8= '{' ( (lv_annotations_9_0= ruleAnnotation ) )* (otherlv_10= 'Interface' otherlv_11= '{' ( ( (lv_interfacePorts_12_0= rulePort ) ) | ( (lv_serviceProvisionPoints_13_0= ruleSPP ) ) )* otherlv_14= '}' )? (otherlv_15= 'Structure' ( (lv_structureDocu_16_0= ruleDocumentation ) )? otherlv_17= '{' (otherlv_18= 'usercode1' ( (lv_userCode1_19_0= ruleDetailCode ) ) )? (otherlv_20= 'usercode2' ( (lv_userCode2_21_0= ruleDetailCode ) ) )? (otherlv_22= 'usercode3' ( (lv_userCode3_23_0= ruleDetailCode ) ) )? ( ( (lv_internalPorts_24_0= rulePort ) ) | ( (lv_externalPorts_25_0= ruleExternalPort ) ) | ( (lv_serviceAccessPoints_26_0= ruleSAP ) ) | ( (lv_attributes_27_0= ruleAttribute ) ) | ( (lv_actorRefs_28_0= ruleActorRef ) ) | ( (lv_serviceImplementations_29_0= ruleServiceImplementation ) ) | ( (lv_bindings_30_0= ruleBinding ) ) | ( (lv_connections_31_0= ruleLayerConnection ) ) )* otherlv_32= '}' )? (otherlv_33= 'Behavior' ( (lv_behaviorDocu_34_0= ruleDocumentation ) )? otherlv_35= '{' ( (lv_behaviorAnnotations_36_0= ruleAnnotation ) )* ( ( (lv_structors_37_0= ruleClassStructor ) ) | ( (lv_operations_38_0= ruleStandardOperation ) ) )* ( (lv_stateMachine_39_0= ruleStateMachine ) )? otherlv_40= '}' )? otherlv_41= '}'
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2772:1: ( ( ( ( ( ({...}? => ( ({...}? => ( (lv_abstract_1_0= 'abstract' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_commType_2_0= ruleComponentCommunicationType ) ) ) ) ) )* ) ) ) otherlv_3= 'ActorClass' ( (lv_name_4_0= RULE_ID ) ) ( (lv_docu_5_0= ruleDocumentation ) )? (otherlv_6= 'extends' ( ( ruleFQN ) ) )? otherlv_8= '{' ( (lv_annotations_9_0= ruleAnnotation ) )* (otherlv_10= 'Interface' otherlv_11= '{' ( ( (lv_serviceProvisionPoints_12_0= ruleSPP ) ) | ( (lv_interfacePorts_13_0= rulePort ) ) )* otherlv_14= '}' )? (otherlv_15= 'Structure' ( (lv_structureDocu_16_0= ruleDocumentation ) )? otherlv_17= '{' (otherlv_18= 'usercode1' ( (lv_userCode1_19_0= ruleDetailCode ) ) )? (otherlv_20= 'usercode2' ( (lv_userCode2_21_0= ruleDetailCode ) ) )? (otherlv_22= 'usercode3' ( (lv_userCode3_23_0= ruleDetailCode ) ) )? ( ( (lv_connections_24_0= ruleLayerConnection ) ) | ( (lv_bindings_25_0= ruleBinding ) ) | ( (lv_serviceImplementations_26_0= ruleServiceImplementation ) ) | ( (lv_attributes_27_0= ruleAttribute ) ) | ( (lv_actorRefs_28_0= ruleActorRef ) ) | ( (lv_serviceAccessPoints_29_0= ruleSAP ) ) | ( (lv_internalPorts_30_0= rulePort ) ) | ( (lv_externalPorts_31_0= ruleExternalPort ) ) )* otherlv_32= '}' )? (otherlv_33= 'Behavior' ( (lv_behaviorDocu_34_0= ruleDocumentation ) )? otherlv_35= '{' ( (lv_behaviorAnnotations_36_0= ruleAnnotation ) )* ( ( (lv_operations_37_0= ruleStandardOperation ) ) | ( (lv_structors_38_0= ruleClassStructor ) ) )* ( (lv_stateMachine_39_0= ruleStateMachine ) )? otherlv_40= '}' )? otherlv_41= '}' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2772:2: ( ( ( ( ({...}? => ( ({...}? => ( (lv_abstract_1_0= 'abstract' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_commType_2_0= ruleComponentCommunicationType ) ) ) ) ) )* ) ) ) otherlv_3= 'ActorClass' ( (lv_name_4_0= RULE_ID ) ) ( (lv_docu_5_0= ruleDocumentation ) )? (otherlv_6= 'extends' ( ( ruleFQN ) ) )? otherlv_8= '{' ( (lv_annotations_9_0= ruleAnnotation ) )* (otherlv_10= 'Interface' otherlv_11= '{' ( ( (lv_serviceProvisionPoints_12_0= ruleSPP ) ) | ( (lv_interfacePorts_13_0= rulePort ) ) )* otherlv_14= '}' )? (otherlv_15= 'Structure' ( (lv_structureDocu_16_0= ruleDocumentation ) )? otherlv_17= '{' (otherlv_18= 'usercode1' ( (lv_userCode1_19_0= ruleDetailCode ) ) )? (otherlv_20= 'usercode2' ( (lv_userCode2_21_0= ruleDetailCode ) ) )? (otherlv_22= 'usercode3' ( (lv_userCode3_23_0= ruleDetailCode ) ) )? ( ( (lv_connections_24_0= ruleLayerConnection ) ) | ( (lv_bindings_25_0= ruleBinding ) ) | ( (lv_serviceImplementations_26_0= ruleServiceImplementation ) ) | ( (lv_attributes_27_0= ruleAttribute ) ) | ( (lv_actorRefs_28_0= ruleActorRef ) ) | ( (lv_serviceAccessPoints_29_0= ruleSAP ) ) | ( (lv_internalPorts_30_0= rulePort ) ) | ( (lv_externalPorts_31_0= ruleExternalPort ) ) )* otherlv_32= '}' )? (otherlv_33= 'Behavior' ( (lv_behaviorDocu_34_0= ruleDocumentation ) )? otherlv_35= '{' ( (lv_behaviorAnnotations_36_0= ruleAnnotation ) )* ( ( (lv_operations_37_0= ruleStandardOperation ) ) | ( (lv_structors_38_0= ruleClassStructor ) ) )* ( (lv_stateMachine_39_0= ruleStateMachine ) )? otherlv_40= '}' )? otherlv_41= '}'
             {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2772:2: ( ( ( ( ({...}? => ( ({...}? => ( (lv_abstract_1_0= 'abstract' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_commType_2_0= ruleComponentCommunicationType ) ) ) ) ) )* ) ) )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2774:1: ( ( ( ({...}? => ( ({...}? => ( (lv_abstract_1_0= 'abstract' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_commType_2_0= ruleComponentCommunicationType ) ) ) ) ) )* ) )
@@ -7271,7 +7271,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2926:3: (otherlv_10= 'Interface' otherlv_11= '{' ( ( (lv_interfacePorts_12_0= rulePort ) ) | ( (lv_serviceProvisionPoints_13_0= ruleSPP ) ) )* otherlv_14= '}' )?
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2926:3: (otherlv_10= 'Interface' otherlv_11= '{' ( ( (lv_serviceProvisionPoints_12_0= ruleSPP ) ) | ( (lv_interfacePorts_13_0= rulePort ) ) )* otherlv_14= '}' )?
             int alt69=2;
             int LA69_0 = input.LA(1);
 
@@ -7280,7 +7280,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             }
             switch (alt69) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2926:5: otherlv_10= 'Interface' otherlv_11= '{' ( ( (lv_interfacePorts_12_0= rulePort ) ) | ( (lv_serviceProvisionPoints_13_0= ruleSPP ) ) )* otherlv_14= '}'
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2926:5: otherlv_10= 'Interface' otherlv_11= '{' ( ( (lv_serviceProvisionPoints_12_0= ruleSPP ) ) | ( (lv_interfacePorts_13_0= rulePort ) ) )* otherlv_14= '}'
                     {
                     otherlv_10=(Token)match(input,56,FOLLOW_56_in_ruleActorClass5853); 
 
@@ -7290,35 +7290,35 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
                         	newLeafNode(otherlv_11, grammarAccess.getActorClassAccess().getLeftCurlyBracketKeyword_7_1());
                         
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2934:1: ( ( (lv_interfacePorts_12_0= rulePort ) ) | ( (lv_serviceProvisionPoints_13_0= ruleSPP ) ) )*
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2934:1: ( ( (lv_serviceProvisionPoints_12_0= ruleSPP ) ) | ( (lv_interfacePorts_13_0= rulePort ) ) )*
                     loop68:
                     do {
                         int alt68=3;
                         int LA68_0 = input.LA(1);
 
-                        if ( (LA68_0==47||LA68_0==59) ) {
+                        if ( (LA68_0==62) ) {
                             alt68=1;
                         }
-                        else if ( (LA68_0==62) ) {
+                        else if ( (LA68_0==47||LA68_0==59) ) {
                             alt68=2;
                         }
 
 
                         switch (alt68) {
                     	case 1 :
-                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2934:2: ( (lv_interfacePorts_12_0= rulePort ) )
+                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2934:2: ( (lv_serviceProvisionPoints_12_0= ruleSPP ) )
                     	    {
-                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2934:2: ( (lv_interfacePorts_12_0= rulePort ) )
-                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2935:1: (lv_interfacePorts_12_0= rulePort )
+                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2934:2: ( (lv_serviceProvisionPoints_12_0= ruleSPP ) )
+                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2935:1: (lv_serviceProvisionPoints_12_0= ruleSPP )
                     	    {
-                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2935:1: (lv_interfacePorts_12_0= rulePort )
-                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2936:3: lv_interfacePorts_12_0= rulePort
+                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2935:1: (lv_serviceProvisionPoints_12_0= ruleSPP )
+                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2936:3: lv_serviceProvisionPoints_12_0= ruleSPP
                     	    {
                     	     
-                    	    	        newCompositeNode(grammarAccess.getActorClassAccess().getInterfacePortsPortParserRuleCall_7_2_0_0()); 
+                    	    	        newCompositeNode(grammarAccess.getActorClassAccess().getServiceProvisionPointsSPPParserRuleCall_7_2_0_0()); 
                     	    	    
-                    	    pushFollow(FOLLOW_rulePort_in_ruleActorClass5887);
-                    	    lv_interfacePorts_12_0=rulePort();
+                    	    pushFollow(FOLLOW_ruleSPP_in_ruleActorClass5887);
+                    	    lv_serviceProvisionPoints_12_0=ruleSPP();
 
                     	    state._fsp--;
 
@@ -7328,9 +7328,9 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	    	        }
                     	           		add(
                     	           			current, 
-                    	           			"interfacePorts",
-                    	            		lv_interfacePorts_12_0, 
-                    	            		"Port");
+                    	           			"serviceProvisionPoints",
+                    	            		lv_serviceProvisionPoints_12_0, 
+                    	            		"SPP");
                     	    	        afterParserOrEnumRuleCall();
                     	    	    
 
@@ -7343,19 +7343,19 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2953:6: ( (lv_serviceProvisionPoints_13_0= ruleSPP ) )
+                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2953:6: ( (lv_interfacePorts_13_0= rulePort ) )
                     	    {
-                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2953:6: ( (lv_serviceProvisionPoints_13_0= ruleSPP ) )
-                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2954:1: (lv_serviceProvisionPoints_13_0= ruleSPP )
+                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2953:6: ( (lv_interfacePorts_13_0= rulePort ) )
+                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2954:1: (lv_interfacePorts_13_0= rulePort )
                     	    {
-                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2954:1: (lv_serviceProvisionPoints_13_0= ruleSPP )
-                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2955:3: lv_serviceProvisionPoints_13_0= ruleSPP
+                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2954:1: (lv_interfacePorts_13_0= rulePort )
+                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2955:3: lv_interfacePorts_13_0= rulePort
                     	    {
                     	     
-                    	    	        newCompositeNode(grammarAccess.getActorClassAccess().getServiceProvisionPointsSPPParserRuleCall_7_2_1_0()); 
+                    	    	        newCompositeNode(grammarAccess.getActorClassAccess().getInterfacePortsPortParserRuleCall_7_2_1_0()); 
                     	    	    
-                    	    pushFollow(FOLLOW_ruleSPP_in_ruleActorClass5914);
-                    	    lv_serviceProvisionPoints_13_0=ruleSPP();
+                    	    pushFollow(FOLLOW_rulePort_in_ruleActorClass5914);
+                    	    lv_interfacePorts_13_0=rulePort();
 
                     	    state._fsp--;
 
@@ -7365,9 +7365,9 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	    	        }
                     	           		add(
                     	           			current, 
-                    	           			"serviceProvisionPoints",
-                    	            		lv_serviceProvisionPoints_13_0, 
-                    	            		"SPP");
+                    	           			"interfacePorts",
+                    	            		lv_interfacePorts_13_0, 
+                    	            		"Port");
                     	    	        afterParserOrEnumRuleCall();
                     	    	    
 
@@ -7395,7 +7395,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2975:3: (otherlv_15= 'Structure' ( (lv_structureDocu_16_0= ruleDocumentation ) )? otherlv_17= '{' (otherlv_18= 'usercode1' ( (lv_userCode1_19_0= ruleDetailCode ) ) )? (otherlv_20= 'usercode2' ( (lv_userCode2_21_0= ruleDetailCode ) ) )? (otherlv_22= 'usercode3' ( (lv_userCode3_23_0= ruleDetailCode ) ) )? ( ( (lv_internalPorts_24_0= rulePort ) ) | ( (lv_externalPorts_25_0= ruleExternalPort ) ) | ( (lv_serviceAccessPoints_26_0= ruleSAP ) ) | ( (lv_attributes_27_0= ruleAttribute ) ) | ( (lv_actorRefs_28_0= ruleActorRef ) ) | ( (lv_serviceImplementations_29_0= ruleServiceImplementation ) ) | ( (lv_bindings_30_0= ruleBinding ) ) | ( (lv_connections_31_0= ruleLayerConnection ) ) )* otherlv_32= '}' )?
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2975:3: (otherlv_15= 'Structure' ( (lv_structureDocu_16_0= ruleDocumentation ) )? otherlv_17= '{' (otherlv_18= 'usercode1' ( (lv_userCode1_19_0= ruleDetailCode ) ) )? (otherlv_20= 'usercode2' ( (lv_userCode2_21_0= ruleDetailCode ) ) )? (otherlv_22= 'usercode3' ( (lv_userCode3_23_0= ruleDetailCode ) ) )? ( ( (lv_connections_24_0= ruleLayerConnection ) ) | ( (lv_bindings_25_0= ruleBinding ) ) | ( (lv_serviceImplementations_26_0= ruleServiceImplementation ) ) | ( (lv_attributes_27_0= ruleAttribute ) ) | ( (lv_actorRefs_28_0= ruleActorRef ) ) | ( (lv_serviceAccessPoints_29_0= ruleSAP ) ) | ( (lv_internalPorts_30_0= rulePort ) ) | ( (lv_externalPorts_31_0= ruleExternalPort ) ) )* otherlv_32= '}' )?
             int alt75=2;
             int LA75_0 = input.LA(1);
 
@@ -7404,7 +7404,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             }
             switch (alt75) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2975:5: otherlv_15= 'Structure' ( (lv_structureDocu_16_0= ruleDocumentation ) )? otherlv_17= '{' (otherlv_18= 'usercode1' ( (lv_userCode1_19_0= ruleDetailCode ) ) )? (otherlv_20= 'usercode2' ( (lv_userCode2_21_0= ruleDetailCode ) ) )? (otherlv_22= 'usercode3' ( (lv_userCode3_23_0= ruleDetailCode ) ) )? ( ( (lv_internalPorts_24_0= rulePort ) ) | ( (lv_externalPorts_25_0= ruleExternalPort ) ) | ( (lv_serviceAccessPoints_26_0= ruleSAP ) ) | ( (lv_attributes_27_0= ruleAttribute ) ) | ( (lv_actorRefs_28_0= ruleActorRef ) ) | ( (lv_serviceImplementations_29_0= ruleServiceImplementation ) ) | ( (lv_bindings_30_0= ruleBinding ) ) | ( (lv_connections_31_0= ruleLayerConnection ) ) )* otherlv_32= '}'
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2975:5: otherlv_15= 'Structure' ( (lv_structureDocu_16_0= ruleDocumentation ) )? otherlv_17= '{' (otherlv_18= 'usercode1' ( (lv_userCode1_19_0= ruleDetailCode ) ) )? (otherlv_20= 'usercode2' ( (lv_userCode2_21_0= ruleDetailCode ) ) )? (otherlv_22= 'usercode3' ( (lv_userCode3_23_0= ruleDetailCode ) ) )? ( ( (lv_connections_24_0= ruleLayerConnection ) ) | ( (lv_bindings_25_0= ruleBinding ) ) | ( (lv_serviceImplementations_26_0= ruleServiceImplementation ) ) | ( (lv_attributes_27_0= ruleAttribute ) ) | ( (lv_actorRefs_28_0= ruleActorRef ) ) | ( (lv_serviceAccessPoints_29_0= ruleSAP ) ) | ( (lv_internalPorts_30_0= rulePort ) ) | ( (lv_externalPorts_31_0= ruleExternalPort ) ) )* otherlv_32= '}'
                     {
                     otherlv_15=(Token)match(input,57,FOLLOW_57_in_ruleActorClass5943); 
 
@@ -7612,23 +7612,22 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3067:4: ( ( (lv_internalPorts_24_0= rulePort ) ) | ( (lv_externalPorts_25_0= ruleExternalPort ) ) | ( (lv_serviceAccessPoints_26_0= ruleSAP ) ) | ( (lv_attributes_27_0= ruleAttribute ) ) | ( (lv_actorRefs_28_0= ruleActorRef ) ) | ( (lv_serviceImplementations_29_0= ruleServiceImplementation ) ) | ( (lv_bindings_30_0= ruleBinding ) ) | ( (lv_connections_31_0= ruleLayerConnection ) ) )*
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3067:4: ( ( (lv_connections_24_0= ruleLayerConnection ) ) | ( (lv_bindings_25_0= ruleBinding ) ) | ( (lv_serviceImplementations_26_0= ruleServiceImplementation ) ) | ( (lv_attributes_27_0= ruleAttribute ) ) | ( (lv_actorRefs_28_0= ruleActorRef ) ) | ( (lv_serviceAccessPoints_29_0= ruleSAP ) ) | ( (lv_internalPorts_30_0= rulePort ) ) | ( (lv_externalPorts_31_0= ruleExternalPort ) ) )*
                     loop74:
                     do {
                         int alt74=9;
                         switch ( input.LA(1) ) {
-                        case 47:
-                        case 59:
+                        case 74:
                             {
                             alt74=1;
                             }
                             break;
-                        case 60:
+                        case 70:
                             {
                             alt74=2;
                             }
                             break;
-                        case 61:
+                        case 63:
                             {
                             alt74=3;
                             }
@@ -7645,17 +7644,18 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                             alt74=5;
                             }
                             break;
-                        case 63:
+                        case 61:
                             {
                             alt74=6;
                             }
                             break;
-                        case 70:
+                        case 47:
+                        case 59:
                             {
                             alt74=7;
                             }
                             break;
-                        case 74:
+                        case 60:
                             {
                             alt74=8;
                             }
@@ -7665,19 +7665,19 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
                         switch (alt74) {
                     	case 1 :
-                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3067:5: ( (lv_internalPorts_24_0= rulePort ) )
+                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3067:5: ( (lv_connections_24_0= ruleLayerConnection ) )
                     	    {
-                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3067:5: ( (lv_internalPorts_24_0= rulePort ) )
-                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3068:1: (lv_internalPorts_24_0= rulePort )
+                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3067:5: ( (lv_connections_24_0= ruleLayerConnection ) )
+                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3068:1: (lv_connections_24_0= ruleLayerConnection )
                     	    {
-                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3068:1: (lv_internalPorts_24_0= rulePort )
-                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3069:3: lv_internalPorts_24_0= rulePort
+                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3068:1: (lv_connections_24_0= ruleLayerConnection )
+                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3069:3: lv_connections_24_0= ruleLayerConnection
                     	    {
                     	     
-                    	    	        newCompositeNode(grammarAccess.getActorClassAccess().getInternalPortsPortParserRuleCall_8_6_0_0()); 
+                    	    	        newCompositeNode(grammarAccess.getActorClassAccess().getConnectionsLayerConnectionParserRuleCall_8_6_0_0()); 
                     	    	    
-                    	    pushFollow(FOLLOW_rulePort_in_ruleActorClass6107);
-                    	    lv_internalPorts_24_0=rulePort();
+                    	    pushFollow(FOLLOW_ruleLayerConnection_in_ruleActorClass6107);
+                    	    lv_connections_24_0=ruleLayerConnection();
 
                     	    state._fsp--;
 
@@ -7687,9 +7687,9 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	    	        }
                     	           		add(
                     	           			current, 
-                    	           			"internalPorts",
-                    	            		lv_internalPorts_24_0, 
-                    	            		"Port");
+                    	           			"connections",
+                    	            		lv_connections_24_0, 
+                    	            		"LayerConnection");
                     	    	        afterParserOrEnumRuleCall();
                     	    	    
 
@@ -7702,19 +7702,19 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3086:6: ( (lv_externalPorts_25_0= ruleExternalPort ) )
+                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3086:6: ( (lv_bindings_25_0= ruleBinding ) )
                     	    {
-                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3086:6: ( (lv_externalPorts_25_0= ruleExternalPort ) )
-                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3087:1: (lv_externalPorts_25_0= ruleExternalPort )
+                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3086:6: ( (lv_bindings_25_0= ruleBinding ) )
+                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3087:1: (lv_bindings_25_0= ruleBinding )
                     	    {
-                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3087:1: (lv_externalPorts_25_0= ruleExternalPort )
-                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3088:3: lv_externalPorts_25_0= ruleExternalPort
+                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3087:1: (lv_bindings_25_0= ruleBinding )
+                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3088:3: lv_bindings_25_0= ruleBinding
                     	    {
                     	     
-                    	    	        newCompositeNode(grammarAccess.getActorClassAccess().getExternalPortsExternalPortParserRuleCall_8_6_1_0()); 
+                    	    	        newCompositeNode(grammarAccess.getActorClassAccess().getBindingsBindingParserRuleCall_8_6_1_0()); 
                     	    	    
-                    	    pushFollow(FOLLOW_ruleExternalPort_in_ruleActorClass6134);
-                    	    lv_externalPorts_25_0=ruleExternalPort();
+                    	    pushFollow(FOLLOW_ruleBinding_in_ruleActorClass6134);
+                    	    lv_bindings_25_0=ruleBinding();
 
                     	    state._fsp--;
 
@@ -7724,9 +7724,9 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	    	        }
                     	           		add(
                     	           			current, 
-                    	           			"externalPorts",
-                    	            		lv_externalPorts_25_0, 
-                    	            		"ExternalPort");
+                    	           			"bindings",
+                    	            		lv_bindings_25_0, 
+                    	            		"Binding");
                     	    	        afterParserOrEnumRuleCall();
                     	    	    
 
@@ -7739,19 +7739,19 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	    }
                     	    break;
                     	case 3 :
-                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3105:6: ( (lv_serviceAccessPoints_26_0= ruleSAP ) )
+                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3105:6: ( (lv_serviceImplementations_26_0= ruleServiceImplementation ) )
                     	    {
-                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3105:6: ( (lv_serviceAccessPoints_26_0= ruleSAP ) )
-                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3106:1: (lv_serviceAccessPoints_26_0= ruleSAP )
+                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3105:6: ( (lv_serviceImplementations_26_0= ruleServiceImplementation ) )
+                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3106:1: (lv_serviceImplementations_26_0= ruleServiceImplementation )
                     	    {
-                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3106:1: (lv_serviceAccessPoints_26_0= ruleSAP )
-                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3107:3: lv_serviceAccessPoints_26_0= ruleSAP
+                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3106:1: (lv_serviceImplementations_26_0= ruleServiceImplementation )
+                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3107:3: lv_serviceImplementations_26_0= ruleServiceImplementation
                     	    {
                     	     
-                    	    	        newCompositeNode(grammarAccess.getActorClassAccess().getServiceAccessPointsSAPParserRuleCall_8_6_2_0()); 
+                    	    	        newCompositeNode(grammarAccess.getActorClassAccess().getServiceImplementationsServiceImplementationParserRuleCall_8_6_2_0()); 
                     	    	    
-                    	    pushFollow(FOLLOW_ruleSAP_in_ruleActorClass6161);
-                    	    lv_serviceAccessPoints_26_0=ruleSAP();
+                    	    pushFollow(FOLLOW_ruleServiceImplementation_in_ruleActorClass6161);
+                    	    lv_serviceImplementations_26_0=ruleServiceImplementation();
 
                     	    state._fsp--;
 
@@ -7761,9 +7761,9 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	    	        }
                     	           		add(
                     	           			current, 
-                    	           			"serviceAccessPoints",
-                    	            		lv_serviceAccessPoints_26_0, 
-                    	            		"SAP");
+                    	           			"serviceImplementations",
+                    	            		lv_serviceImplementations_26_0, 
+                    	            		"ServiceImplementation");
                     	    	        afterParserOrEnumRuleCall();
                     	    	    
 
@@ -7850,19 +7850,19 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	    }
                     	    break;
                     	case 6 :
-                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3162:6: ( (lv_serviceImplementations_29_0= ruleServiceImplementation ) )
+                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3162:6: ( (lv_serviceAccessPoints_29_0= ruleSAP ) )
                     	    {
-                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3162:6: ( (lv_serviceImplementations_29_0= ruleServiceImplementation ) )
-                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3163:1: (lv_serviceImplementations_29_0= ruleServiceImplementation )
+                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3162:6: ( (lv_serviceAccessPoints_29_0= ruleSAP ) )
+                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3163:1: (lv_serviceAccessPoints_29_0= ruleSAP )
                     	    {
-                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3163:1: (lv_serviceImplementations_29_0= ruleServiceImplementation )
-                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3164:3: lv_serviceImplementations_29_0= ruleServiceImplementation
+                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3163:1: (lv_serviceAccessPoints_29_0= ruleSAP )
+                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3164:3: lv_serviceAccessPoints_29_0= ruleSAP
                     	    {
                     	     
-                    	    	        newCompositeNode(grammarAccess.getActorClassAccess().getServiceImplementationsServiceImplementationParserRuleCall_8_6_5_0()); 
+                    	    	        newCompositeNode(grammarAccess.getActorClassAccess().getServiceAccessPointsSAPParserRuleCall_8_6_5_0()); 
                     	    	    
-                    	    pushFollow(FOLLOW_ruleServiceImplementation_in_ruleActorClass6242);
-                    	    lv_serviceImplementations_29_0=ruleServiceImplementation();
+                    	    pushFollow(FOLLOW_ruleSAP_in_ruleActorClass6242);
+                    	    lv_serviceAccessPoints_29_0=ruleSAP();
 
                     	    state._fsp--;
 
@@ -7872,9 +7872,9 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	    	        }
                     	           		add(
                     	           			current, 
-                    	           			"serviceImplementations",
-                    	            		lv_serviceImplementations_29_0, 
-                    	            		"ServiceImplementation");
+                    	           			"serviceAccessPoints",
+                    	            		lv_serviceAccessPoints_29_0, 
+                    	            		"SAP");
                     	    	        afterParserOrEnumRuleCall();
                     	    	    
 
@@ -7887,19 +7887,19 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	    }
                     	    break;
                     	case 7 :
-                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3181:6: ( (lv_bindings_30_0= ruleBinding ) )
+                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3181:6: ( (lv_internalPorts_30_0= rulePort ) )
                     	    {
-                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3181:6: ( (lv_bindings_30_0= ruleBinding ) )
-                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3182:1: (lv_bindings_30_0= ruleBinding )
+                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3181:6: ( (lv_internalPorts_30_0= rulePort ) )
+                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3182:1: (lv_internalPorts_30_0= rulePort )
                     	    {
-                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3182:1: (lv_bindings_30_0= ruleBinding )
-                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3183:3: lv_bindings_30_0= ruleBinding
+                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3182:1: (lv_internalPorts_30_0= rulePort )
+                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3183:3: lv_internalPorts_30_0= rulePort
                     	    {
                     	     
-                    	    	        newCompositeNode(grammarAccess.getActorClassAccess().getBindingsBindingParserRuleCall_8_6_6_0()); 
+                    	    	        newCompositeNode(grammarAccess.getActorClassAccess().getInternalPortsPortParserRuleCall_8_6_6_0()); 
                     	    	    
-                    	    pushFollow(FOLLOW_ruleBinding_in_ruleActorClass6269);
-                    	    lv_bindings_30_0=ruleBinding();
+                    	    pushFollow(FOLLOW_rulePort_in_ruleActorClass6269);
+                    	    lv_internalPorts_30_0=rulePort();
 
                     	    state._fsp--;
 
@@ -7909,9 +7909,9 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	    	        }
                     	           		add(
                     	           			current, 
-                    	           			"bindings",
-                    	            		lv_bindings_30_0, 
-                    	            		"Binding");
+                    	           			"internalPorts",
+                    	            		lv_internalPorts_30_0, 
+                    	            		"Port");
                     	    	        afterParserOrEnumRuleCall();
                     	    	    
 
@@ -7924,19 +7924,19 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	    }
                     	    break;
                     	case 8 :
-                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3200:6: ( (lv_connections_31_0= ruleLayerConnection ) )
+                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3200:6: ( (lv_externalPorts_31_0= ruleExternalPort ) )
                     	    {
-                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3200:6: ( (lv_connections_31_0= ruleLayerConnection ) )
-                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3201:1: (lv_connections_31_0= ruleLayerConnection )
+                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3200:6: ( (lv_externalPorts_31_0= ruleExternalPort ) )
+                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3201:1: (lv_externalPorts_31_0= ruleExternalPort )
                     	    {
-                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3201:1: (lv_connections_31_0= ruleLayerConnection )
-                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3202:3: lv_connections_31_0= ruleLayerConnection
+                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3201:1: (lv_externalPorts_31_0= ruleExternalPort )
+                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3202:3: lv_externalPorts_31_0= ruleExternalPort
                     	    {
                     	     
-                    	    	        newCompositeNode(grammarAccess.getActorClassAccess().getConnectionsLayerConnectionParserRuleCall_8_6_7_0()); 
+                    	    	        newCompositeNode(grammarAccess.getActorClassAccess().getExternalPortsExternalPortParserRuleCall_8_6_7_0()); 
                     	    	    
-                    	    pushFollow(FOLLOW_ruleLayerConnection_in_ruleActorClass6296);
-                    	    lv_connections_31_0=ruleLayerConnection();
+                    	    pushFollow(FOLLOW_ruleExternalPort_in_ruleActorClass6296);
+                    	    lv_externalPorts_31_0=ruleExternalPort();
 
                     	    state._fsp--;
 
@@ -7946,9 +7946,9 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	    	        }
                     	           		add(
                     	           			current, 
-                    	           			"connections",
-                    	            		lv_connections_31_0, 
-                    	            		"LayerConnection");
+                    	           			"externalPorts",
+                    	            		lv_externalPorts_31_0, 
+                    	            		"ExternalPort");
                     	    	        afterParserOrEnumRuleCall();
                     	    	    
 
@@ -7976,7 +7976,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3222:3: (otherlv_33= 'Behavior' ( (lv_behaviorDocu_34_0= ruleDocumentation ) )? otherlv_35= '{' ( (lv_behaviorAnnotations_36_0= ruleAnnotation ) )* ( ( (lv_structors_37_0= ruleClassStructor ) ) | ( (lv_operations_38_0= ruleStandardOperation ) ) )* ( (lv_stateMachine_39_0= ruleStateMachine ) )? otherlv_40= '}' )?
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3222:3: (otherlv_33= 'Behavior' ( (lv_behaviorDocu_34_0= ruleDocumentation ) )? otherlv_35= '{' ( (lv_behaviorAnnotations_36_0= ruleAnnotation ) )* ( ( (lv_operations_37_0= ruleStandardOperation ) ) | ( (lv_structors_38_0= ruleClassStructor ) ) )* ( (lv_stateMachine_39_0= ruleStateMachine ) )? otherlv_40= '}' )?
             int alt80=2;
             int LA80_0 = input.LA(1);
 
@@ -7985,7 +7985,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             }
             switch (alt80) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3222:5: otherlv_33= 'Behavior' ( (lv_behaviorDocu_34_0= ruleDocumentation ) )? otherlv_35= '{' ( (lv_behaviorAnnotations_36_0= ruleAnnotation ) )* ( ( (lv_structors_37_0= ruleClassStructor ) ) | ( (lv_operations_38_0= ruleStandardOperation ) ) )* ( (lv_stateMachine_39_0= ruleStateMachine ) )? otherlv_40= '}'
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3222:5: otherlv_33= 'Behavior' ( (lv_behaviorDocu_34_0= ruleDocumentation ) )? otherlv_35= '{' ( (lv_behaviorAnnotations_36_0= ruleAnnotation ) )* ( ( (lv_operations_37_0= ruleStandardOperation ) ) | ( (lv_structors_38_0= ruleClassStructor ) ) )* ( (lv_stateMachine_39_0= ruleStateMachine ) )? otherlv_40= '}'
                     {
                     otherlv_33=(Token)match(input,58,FOLLOW_58_in_ruleActorClass6325); 
 
@@ -8086,35 +8086,35 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                         }
                     } while (true);
 
-                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3266:3: ( ( (lv_structors_37_0= ruleClassStructor ) ) | ( (lv_operations_38_0= ruleStandardOperation ) ) )*
+                    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3266:3: ( ( (lv_operations_37_0= ruleStandardOperation ) ) | ( (lv_structors_38_0= ruleClassStructor ) ) )*
                     loop78:
                     do {
                         int alt78=3;
                         int LA78_0 = input.LA(1);
 
-                        if ( ((LA78_0>=40 && LA78_0<=41)) ) {
+                        if ( ((LA78_0>=36 && LA78_0<=37)) ) {
                             alt78=1;
                         }
-                        else if ( ((LA78_0>=36 && LA78_0<=37)) ) {
+                        else if ( ((LA78_0>=40 && LA78_0<=41)) ) {
                             alt78=2;
                         }
 
 
                         switch (alt78) {
                     	case 1 :
-                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3266:4: ( (lv_structors_37_0= ruleClassStructor ) )
+                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3266:4: ( (lv_operations_37_0= ruleStandardOperation ) )
                     	    {
-                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3266:4: ( (lv_structors_37_0= ruleClassStructor ) )
-                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3267:1: (lv_structors_37_0= ruleClassStructor )
+                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3266:4: ( (lv_operations_37_0= ruleStandardOperation ) )
+                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3267:1: (lv_operations_37_0= ruleStandardOperation )
                     	    {
-                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3267:1: (lv_structors_37_0= ruleClassStructor )
-                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3268:3: lv_structors_37_0= ruleClassStructor
+                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3267:1: (lv_operations_37_0= ruleStandardOperation )
+                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3268:3: lv_operations_37_0= ruleStandardOperation
                     	    {
                     	     
-                    	    	        newCompositeNode(grammarAccess.getActorClassAccess().getStructorsClassStructorParserRuleCall_9_4_0_0()); 
+                    	    	        newCompositeNode(grammarAccess.getActorClassAccess().getOperationsStandardOperationParserRuleCall_9_4_0_0()); 
                     	    	    
-                    	    pushFollow(FOLLOW_ruleClassStructor_in_ruleActorClass6403);
-                    	    lv_structors_37_0=ruleClassStructor();
+                    	    pushFollow(FOLLOW_ruleStandardOperation_in_ruleActorClass6403);
+                    	    lv_operations_37_0=ruleStandardOperation();
 
                     	    state._fsp--;
 
@@ -8124,9 +8124,9 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	    	        }
                     	           		add(
                     	           			current, 
-                    	           			"structors",
-                    	            		lv_structors_37_0, 
-                    	            		"ClassStructor");
+                    	           			"operations",
+                    	            		lv_operations_37_0, 
+                    	            		"StandardOperation");
                     	    	        afterParserOrEnumRuleCall();
                     	    	    
 
@@ -8139,19 +8139,19 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3285:6: ( (lv_operations_38_0= ruleStandardOperation ) )
+                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3285:6: ( (lv_structors_38_0= ruleClassStructor ) )
                     	    {
-                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3285:6: ( (lv_operations_38_0= ruleStandardOperation ) )
-                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3286:1: (lv_operations_38_0= ruleStandardOperation )
+                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3285:6: ( (lv_structors_38_0= ruleClassStructor ) )
+                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3286:1: (lv_structors_38_0= ruleClassStructor )
                     	    {
-                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3286:1: (lv_operations_38_0= ruleStandardOperation )
-                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3287:3: lv_operations_38_0= ruleStandardOperation
+                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3286:1: (lv_structors_38_0= ruleClassStructor )
+                    	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3287:3: lv_structors_38_0= ruleClassStructor
                     	    {
                     	     
-                    	    	        newCompositeNode(grammarAccess.getActorClassAccess().getOperationsStandardOperationParserRuleCall_9_4_1_0()); 
+                    	    	        newCompositeNode(grammarAccess.getActorClassAccess().getStructorsClassStructorParserRuleCall_9_4_1_0()); 
                     	    	    
-                    	    pushFollow(FOLLOW_ruleStandardOperation_in_ruleActorClass6430);
-                    	    lv_operations_38_0=ruleStandardOperation();
+                    	    pushFollow(FOLLOW_ruleClassStructor_in_ruleActorClass6430);
+                    	    lv_structors_38_0=ruleClassStructor();
 
                     	    state._fsp--;
 
@@ -8161,9 +8161,9 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	    	        }
                     	           		add(
                     	           			current, 
-                    	           			"operations",
-                    	            		lv_operations_38_0, 
-                    	            		"StandardOperation");
+                    	           			"structors",
+                    	            		lv_structors_38_0, 
+                    	            		"ClassStructor");
                     	    	        afterParserOrEnumRuleCall();
                     	    	    
 
@@ -9185,7 +9185,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleLogicalSystem"
-    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3717:1: ruleLogicalSystem returns [EObject current=null] : (otherlv_0= 'LogicalSystem' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? otherlv_3= '{' ( (lv_annotations_4_0= ruleAnnotation ) )* ( ( (lv_subSystems_5_0= ruleSubSystemRef ) ) | ( (lv_bindings_6_0= ruleBinding ) ) | ( (lv_connections_7_0= ruleLayerConnection ) ) )* otherlv_8= '}' ) ;
+    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3717:1: ruleLogicalSystem returns [EObject current=null] : (otherlv_0= 'LogicalSystem' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? otherlv_3= '{' ( (lv_annotations_4_0= ruleAnnotation ) )* ( ( (lv_connections_5_0= ruleLayerConnection ) ) | ( (lv_bindings_6_0= ruleBinding ) ) | ( (lv_subSystems_7_0= ruleSubSystemRef ) ) )* otherlv_8= '}' ) ;
     public final EObject ruleLogicalSystem() throws RecognitionException {
         EObject current = null;
 
@@ -9197,21 +9197,21 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
         EObject lv_annotations_4_0 = null;
 
-        EObject lv_subSystems_5_0 = null;
+        EObject lv_connections_5_0 = null;
 
         EObject lv_bindings_6_0 = null;
 
-        EObject lv_connections_7_0 = null;
+        EObject lv_subSystems_7_0 = null;
 
 
          enterRule(); 
             
         try {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3720:28: ( (otherlv_0= 'LogicalSystem' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? otherlv_3= '{' ( (lv_annotations_4_0= ruleAnnotation ) )* ( ( (lv_subSystems_5_0= ruleSubSystemRef ) ) | ( (lv_bindings_6_0= ruleBinding ) ) | ( (lv_connections_7_0= ruleLayerConnection ) ) )* otherlv_8= '}' ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3721:1: (otherlv_0= 'LogicalSystem' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? otherlv_3= '{' ( (lv_annotations_4_0= ruleAnnotation ) )* ( ( (lv_subSystems_5_0= ruleSubSystemRef ) ) | ( (lv_bindings_6_0= ruleBinding ) ) | ( (lv_connections_7_0= ruleLayerConnection ) ) )* otherlv_8= '}' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3720:28: ( (otherlv_0= 'LogicalSystem' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? otherlv_3= '{' ( (lv_annotations_4_0= ruleAnnotation ) )* ( ( (lv_connections_5_0= ruleLayerConnection ) ) | ( (lv_bindings_6_0= ruleBinding ) ) | ( (lv_subSystems_7_0= ruleSubSystemRef ) ) )* otherlv_8= '}' ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3721:1: (otherlv_0= 'LogicalSystem' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? otherlv_3= '{' ( (lv_annotations_4_0= ruleAnnotation ) )* ( ( (lv_connections_5_0= ruleLayerConnection ) ) | ( (lv_bindings_6_0= ruleBinding ) ) | ( (lv_subSystems_7_0= ruleSubSystemRef ) ) )* otherlv_8= '}' )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3721:1: (otherlv_0= 'LogicalSystem' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? otherlv_3= '{' ( (lv_annotations_4_0= ruleAnnotation ) )* ( ( (lv_subSystems_5_0= ruleSubSystemRef ) ) | ( (lv_bindings_6_0= ruleBinding ) ) | ( (lv_connections_7_0= ruleLayerConnection ) ) )* otherlv_8= '}' )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3721:3: otherlv_0= 'LogicalSystem' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? otherlv_3= '{' ( (lv_annotations_4_0= ruleAnnotation ) )* ( ( (lv_subSystems_5_0= ruleSubSystemRef ) ) | ( (lv_bindings_6_0= ruleBinding ) ) | ( (lv_connections_7_0= ruleLayerConnection ) ) )* otherlv_8= '}'
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3721:1: (otherlv_0= 'LogicalSystem' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? otherlv_3= '{' ( (lv_annotations_4_0= ruleAnnotation ) )* ( ( (lv_connections_5_0= ruleLayerConnection ) ) | ( (lv_bindings_6_0= ruleBinding ) ) | ( (lv_subSystems_7_0= ruleSubSystemRef ) ) )* otherlv_8= '}' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3721:3: otherlv_0= 'LogicalSystem' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? otherlv_3= '{' ( (lv_annotations_4_0= ruleAnnotation ) )* ( ( (lv_connections_5_0= ruleLayerConnection ) ) | ( (lv_bindings_6_0= ruleBinding ) ) | ( (lv_subSystems_7_0= ruleSubSystemRef ) ) )* otherlv_8= '}'
             {
             otherlv_0=(Token)match(input,64,FOLLOW_64_in_ruleLogicalSystem7435); 
 
@@ -9338,12 +9338,12 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3783:3: ( ( (lv_subSystems_5_0= ruleSubSystemRef ) ) | ( (lv_bindings_6_0= ruleBinding ) ) | ( (lv_connections_7_0= ruleLayerConnection ) ) )*
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3783:3: ( ( (lv_connections_5_0= ruleLayerConnection ) ) | ( (lv_bindings_6_0= ruleBinding ) ) | ( (lv_subSystems_7_0= ruleSubSystemRef ) ) )*
             loop87:
             do {
                 int alt87=4;
                 switch ( input.LA(1) ) {
-                case 65:
+                case 74:
                     {
                     alt87=1;
                     }
@@ -9353,7 +9353,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     alt87=2;
                     }
                     break;
-                case 74:
+                case 65:
                     {
                     alt87=3;
                     }
@@ -9363,19 +9363,19 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
                 switch (alt87) {
             	case 1 :
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3783:4: ( (lv_subSystems_5_0= ruleSubSystemRef ) )
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3783:4: ( (lv_connections_5_0= ruleLayerConnection ) )
             	    {
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3783:4: ( (lv_subSystems_5_0= ruleSubSystemRef ) )
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3784:1: (lv_subSystems_5_0= ruleSubSystemRef )
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3783:4: ( (lv_connections_5_0= ruleLayerConnection ) )
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3784:1: (lv_connections_5_0= ruleLayerConnection )
             	    {
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3784:1: (lv_subSystems_5_0= ruleSubSystemRef )
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3785:3: lv_subSystems_5_0= ruleSubSystemRef
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3784:1: (lv_connections_5_0= ruleLayerConnection )
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3785:3: lv_connections_5_0= ruleLayerConnection
             	    {
             	     
-            	    	        newCompositeNode(grammarAccess.getLogicalSystemAccess().getSubSystemsSubSystemRefParserRuleCall_5_0_0()); 
+            	    	        newCompositeNode(grammarAccess.getLogicalSystemAccess().getConnectionsLayerConnectionParserRuleCall_5_0_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleSubSystemRef_in_ruleLogicalSystem7535);
-            	    lv_subSystems_5_0=ruleSubSystemRef();
+            	    pushFollow(FOLLOW_ruleLayerConnection_in_ruleLogicalSystem7535);
+            	    lv_connections_5_0=ruleLayerConnection();
 
             	    state._fsp--;
 
@@ -9385,9 +9385,9 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	    	        }
             	           		add(
             	           			current, 
-            	           			"subSystems",
-            	            		lv_subSystems_5_0, 
-            	            		"SubSystemRef");
+            	           			"connections",
+            	            		lv_connections_5_0, 
+            	            		"LayerConnection");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -9437,19 +9437,19 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 3 :
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3821:6: ( (lv_connections_7_0= ruleLayerConnection ) )
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3821:6: ( (lv_subSystems_7_0= ruleSubSystemRef ) )
             	    {
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3821:6: ( (lv_connections_7_0= ruleLayerConnection ) )
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3822:1: (lv_connections_7_0= ruleLayerConnection )
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3821:6: ( (lv_subSystems_7_0= ruleSubSystemRef ) )
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3822:1: (lv_subSystems_7_0= ruleSubSystemRef )
             	    {
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3822:1: (lv_connections_7_0= ruleLayerConnection )
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3823:3: lv_connections_7_0= ruleLayerConnection
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3822:1: (lv_subSystems_7_0= ruleSubSystemRef )
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3823:3: lv_subSystems_7_0= ruleSubSystemRef
             	    {
             	     
-            	    	        newCompositeNode(grammarAccess.getLogicalSystemAccess().getConnectionsLayerConnectionParserRuleCall_5_2_0()); 
+            	    	        newCompositeNode(grammarAccess.getLogicalSystemAccess().getSubSystemsSubSystemRefParserRuleCall_5_2_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleLayerConnection_in_ruleLogicalSystem7589);
-            	    lv_connections_7_0=ruleLayerConnection();
+            	    pushFollow(FOLLOW_ruleSubSystemRef_in_ruleLogicalSystem7589);
+            	    lv_subSystems_7_0=ruleSubSystemRef();
 
             	    state._fsp--;
 
@@ -9459,9 +9459,9 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	    	        }
             	           		add(
             	           			current, 
-            	           			"connections",
-            	            		lv_connections_7_0, 
-            	            		"LayerConnection");
+            	           			"subSystems",
+            	            		lv_subSystems_7_0, 
+            	            		"SubSystemRef");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -9720,7 +9720,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleSubSystemClass"
-    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3942:1: ruleSubSystemClass returns [EObject current=null] : (otherlv_0= 'SubSystemClass' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? otherlv_3= '{' ( (lv_annotations_4_0= ruleAnnotation ) )* (otherlv_5= 'usercode1' ( (lv_userCode1_6_0= ruleDetailCode ) ) )? (otherlv_7= 'usercode2' ( (lv_userCode2_8_0= ruleDetailCode ) ) )? (otherlv_9= 'usercode3' ( (lv_userCode3_10_0= ruleDetailCode ) ) )? ( ( (lv_relayPorts_11_0= rulePort ) ) | ( (lv_serviceProvisionPoints_12_0= ruleSPP ) ) | ( (lv_actorRefs_13_0= ruleActorRef ) ) | ( (lv_bindings_14_0= ruleBinding ) ) | ( (lv_connections_15_0= ruleLayerConnection ) ) | ( (lv_threads_16_0= ruleLogicalThread ) ) | ( (lv_actorInstanceMappings_17_0= ruleActorInstanceMapping ) ) )* otherlv_18= '}' ) ;
+    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3942:1: ruleSubSystemClass returns [EObject current=null] : (otherlv_0= 'SubSystemClass' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? otherlv_3= '{' ( (lv_annotations_4_0= ruleAnnotation ) )* (otherlv_5= 'usercode1' ( (lv_userCode1_6_0= ruleDetailCode ) ) )? (otherlv_7= 'usercode2' ( (lv_userCode2_8_0= ruleDetailCode ) ) )? (otherlv_9= 'usercode3' ( (lv_userCode3_10_0= ruleDetailCode ) ) )? ( ( (lv_actorInstanceMappings_11_0= ruleActorInstanceMapping ) ) | ( (lv_threads_12_0= ruleLogicalThread ) ) | ( (lv_connections_13_0= ruleLayerConnection ) ) | ( (lv_bindings_14_0= ruleBinding ) ) | ( (lv_actorRefs_15_0= ruleActorRef ) ) | ( (lv_serviceProvisionPoints_16_0= ruleSPP ) ) | ( (lv_relayPorts_17_0= rulePort ) ) )* otherlv_18= '}' ) ;
     public final EObject ruleSubSystemClass() throws RecognitionException {
         EObject current = null;
 
@@ -9741,29 +9741,29 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
         EObject lv_userCode3_10_0 = null;
 
-        EObject lv_relayPorts_11_0 = null;
+        EObject lv_actorInstanceMappings_11_0 = null;
 
-        EObject lv_serviceProvisionPoints_12_0 = null;
+        EObject lv_threads_12_0 = null;
 
-        EObject lv_actorRefs_13_0 = null;
+        EObject lv_connections_13_0 = null;
 
         EObject lv_bindings_14_0 = null;
 
-        EObject lv_connections_15_0 = null;
+        EObject lv_actorRefs_15_0 = null;
 
-        EObject lv_threads_16_0 = null;
+        EObject lv_serviceProvisionPoints_16_0 = null;
 
-        EObject lv_actorInstanceMappings_17_0 = null;
+        EObject lv_relayPorts_17_0 = null;
 
 
          enterRule(); 
             
         try {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3945:28: ( (otherlv_0= 'SubSystemClass' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? otherlv_3= '{' ( (lv_annotations_4_0= ruleAnnotation ) )* (otherlv_5= 'usercode1' ( (lv_userCode1_6_0= ruleDetailCode ) ) )? (otherlv_7= 'usercode2' ( (lv_userCode2_8_0= ruleDetailCode ) ) )? (otherlv_9= 'usercode3' ( (lv_userCode3_10_0= ruleDetailCode ) ) )? ( ( (lv_relayPorts_11_0= rulePort ) ) | ( (lv_serviceProvisionPoints_12_0= ruleSPP ) ) | ( (lv_actorRefs_13_0= ruleActorRef ) ) | ( (lv_bindings_14_0= ruleBinding ) ) | ( (lv_connections_15_0= ruleLayerConnection ) ) | ( (lv_threads_16_0= ruleLogicalThread ) ) | ( (lv_actorInstanceMappings_17_0= ruleActorInstanceMapping ) ) )* otherlv_18= '}' ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3946:1: (otherlv_0= 'SubSystemClass' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? otherlv_3= '{' ( (lv_annotations_4_0= ruleAnnotation ) )* (otherlv_5= 'usercode1' ( (lv_userCode1_6_0= ruleDetailCode ) ) )? (otherlv_7= 'usercode2' ( (lv_userCode2_8_0= ruleDetailCode ) ) )? (otherlv_9= 'usercode3' ( (lv_userCode3_10_0= ruleDetailCode ) ) )? ( ( (lv_relayPorts_11_0= rulePort ) ) | ( (lv_serviceProvisionPoints_12_0= ruleSPP ) ) | ( (lv_actorRefs_13_0= ruleActorRef ) ) | ( (lv_bindings_14_0= ruleBinding ) ) | ( (lv_connections_15_0= ruleLayerConnection ) ) | ( (lv_threads_16_0= ruleLogicalThread ) ) | ( (lv_actorInstanceMappings_17_0= ruleActorInstanceMapping ) ) )* otherlv_18= '}' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3945:28: ( (otherlv_0= 'SubSystemClass' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? otherlv_3= '{' ( (lv_annotations_4_0= ruleAnnotation ) )* (otherlv_5= 'usercode1' ( (lv_userCode1_6_0= ruleDetailCode ) ) )? (otherlv_7= 'usercode2' ( (lv_userCode2_8_0= ruleDetailCode ) ) )? (otherlv_9= 'usercode3' ( (lv_userCode3_10_0= ruleDetailCode ) ) )? ( ( (lv_actorInstanceMappings_11_0= ruleActorInstanceMapping ) ) | ( (lv_threads_12_0= ruleLogicalThread ) ) | ( (lv_connections_13_0= ruleLayerConnection ) ) | ( (lv_bindings_14_0= ruleBinding ) ) | ( (lv_actorRefs_15_0= ruleActorRef ) ) | ( (lv_serviceProvisionPoints_16_0= ruleSPP ) ) | ( (lv_relayPorts_17_0= rulePort ) ) )* otherlv_18= '}' ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3946:1: (otherlv_0= 'SubSystemClass' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? otherlv_3= '{' ( (lv_annotations_4_0= ruleAnnotation ) )* (otherlv_5= 'usercode1' ( (lv_userCode1_6_0= ruleDetailCode ) ) )? (otherlv_7= 'usercode2' ( (lv_userCode2_8_0= ruleDetailCode ) ) )? (otherlv_9= 'usercode3' ( (lv_userCode3_10_0= ruleDetailCode ) ) )? ( ( (lv_actorInstanceMappings_11_0= ruleActorInstanceMapping ) ) | ( (lv_threads_12_0= ruleLogicalThread ) ) | ( (lv_connections_13_0= ruleLayerConnection ) ) | ( (lv_bindings_14_0= ruleBinding ) ) | ( (lv_actorRefs_15_0= ruleActorRef ) ) | ( (lv_serviceProvisionPoints_16_0= ruleSPP ) ) | ( (lv_relayPorts_17_0= rulePort ) ) )* otherlv_18= '}' )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3946:1: (otherlv_0= 'SubSystemClass' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? otherlv_3= '{' ( (lv_annotations_4_0= ruleAnnotation ) )* (otherlv_5= 'usercode1' ( (lv_userCode1_6_0= ruleDetailCode ) ) )? (otherlv_7= 'usercode2' ( (lv_userCode2_8_0= ruleDetailCode ) ) )? (otherlv_9= 'usercode3' ( (lv_userCode3_10_0= ruleDetailCode ) ) )? ( ( (lv_relayPorts_11_0= rulePort ) ) | ( (lv_serviceProvisionPoints_12_0= ruleSPP ) ) | ( (lv_actorRefs_13_0= ruleActorRef ) ) | ( (lv_bindings_14_0= ruleBinding ) ) | ( (lv_connections_15_0= ruleLayerConnection ) ) | ( (lv_threads_16_0= ruleLogicalThread ) ) | ( (lv_actorInstanceMappings_17_0= ruleActorInstanceMapping ) ) )* otherlv_18= '}' )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3946:3: otherlv_0= 'SubSystemClass' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? otherlv_3= '{' ( (lv_annotations_4_0= ruleAnnotation ) )* (otherlv_5= 'usercode1' ( (lv_userCode1_6_0= ruleDetailCode ) ) )? (otherlv_7= 'usercode2' ( (lv_userCode2_8_0= ruleDetailCode ) ) )? (otherlv_9= 'usercode3' ( (lv_userCode3_10_0= ruleDetailCode ) ) )? ( ( (lv_relayPorts_11_0= rulePort ) ) | ( (lv_serviceProvisionPoints_12_0= ruleSPP ) ) | ( (lv_actorRefs_13_0= ruleActorRef ) ) | ( (lv_bindings_14_0= ruleBinding ) ) | ( (lv_connections_15_0= ruleLayerConnection ) ) | ( (lv_threads_16_0= ruleLogicalThread ) ) | ( (lv_actorInstanceMappings_17_0= ruleActorInstanceMapping ) ) )* otherlv_18= '}'
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3946:1: (otherlv_0= 'SubSystemClass' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? otherlv_3= '{' ( (lv_annotations_4_0= ruleAnnotation ) )* (otherlv_5= 'usercode1' ( (lv_userCode1_6_0= ruleDetailCode ) ) )? (otherlv_7= 'usercode2' ( (lv_userCode2_8_0= ruleDetailCode ) ) )? (otherlv_9= 'usercode3' ( (lv_userCode3_10_0= ruleDetailCode ) ) )? ( ( (lv_actorInstanceMappings_11_0= ruleActorInstanceMapping ) ) | ( (lv_threads_12_0= ruleLogicalThread ) ) | ( (lv_connections_13_0= ruleLayerConnection ) ) | ( (lv_bindings_14_0= ruleBinding ) ) | ( (lv_actorRefs_15_0= ruleActorRef ) ) | ( (lv_serviceProvisionPoints_16_0= ruleSPP ) ) | ( (lv_relayPorts_17_0= rulePort ) ) )* otherlv_18= '}' )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3946:3: otherlv_0= 'SubSystemClass' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? otherlv_3= '{' ( (lv_annotations_4_0= ruleAnnotation ) )* (otherlv_5= 'usercode1' ( (lv_userCode1_6_0= ruleDetailCode ) ) )? (otherlv_7= 'usercode2' ( (lv_userCode2_8_0= ruleDetailCode ) ) )? (otherlv_9= 'usercode3' ( (lv_userCode3_10_0= ruleDetailCode ) ) )? ( ( (lv_actorInstanceMappings_11_0= ruleActorInstanceMapping ) ) | ( (lv_threads_12_0= ruleLogicalThread ) ) | ( (lv_connections_13_0= ruleLayerConnection ) ) | ( (lv_bindings_14_0= ruleBinding ) ) | ( (lv_actorRefs_15_0= ruleActorRef ) ) | ( (lv_serviceProvisionPoints_16_0= ruleSPP ) ) | ( (lv_relayPorts_17_0= rulePort ) ) )* otherlv_18= '}'
             {
             otherlv_0=(Token)match(input,66,FOLLOW_66_in_ruleSubSystemClass7850); 
 
@@ -10046,25 +10046,22 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4074:4: ( ( (lv_relayPorts_11_0= rulePort ) ) | ( (lv_serviceProvisionPoints_12_0= ruleSPP ) ) | ( (lv_actorRefs_13_0= ruleActorRef ) ) | ( (lv_bindings_14_0= ruleBinding ) ) | ( (lv_connections_15_0= ruleLayerConnection ) ) | ( (lv_threads_16_0= ruleLogicalThread ) ) | ( (lv_actorInstanceMappings_17_0= ruleActorInstanceMapping ) ) )*
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4074:4: ( ( (lv_actorInstanceMappings_11_0= ruleActorInstanceMapping ) ) | ( (lv_threads_12_0= ruleLogicalThread ) ) | ( (lv_connections_13_0= ruleLayerConnection ) ) | ( (lv_bindings_14_0= ruleBinding ) ) | ( (lv_actorRefs_15_0= ruleActorRef ) ) | ( (lv_serviceProvisionPoints_16_0= ruleSPP ) ) | ( (lv_relayPorts_17_0= rulePort ) ) )*
             loop94:
             do {
                 int alt94=8;
                 switch ( input.LA(1) ) {
-                case 47:
-                case 59:
+                case 68:
                     {
                     alt94=1;
                     }
                     break;
-                case 62:
+                case 67:
                     {
                     alt94=2;
                     }
                     break;
-                case 77:
-                case 111:
-                case 125:
+                case 74:
                     {
                     alt94=3;
                     }
@@ -10074,17 +10071,20 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     alt94=4;
                     }
                     break;
-                case 74:
+                case 77:
+                case 111:
+                case 125:
                     {
                     alt94=5;
                     }
                     break;
-                case 67:
+                case 62:
                     {
                     alt94=6;
                     }
                     break;
-                case 68:
+                case 47:
+                case 59:
                     {
                     alt94=7;
                     }
@@ -10094,19 +10094,19 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
                 switch (alt94) {
             	case 1 :
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4074:5: ( (lv_relayPorts_11_0= rulePort ) )
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4074:5: ( (lv_actorInstanceMappings_11_0= ruleActorInstanceMapping ) )
             	    {
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4074:5: ( (lv_relayPorts_11_0= rulePort ) )
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4075:1: (lv_relayPorts_11_0= rulePort )
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4074:5: ( (lv_actorInstanceMappings_11_0= ruleActorInstanceMapping ) )
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4075:1: (lv_actorInstanceMappings_11_0= ruleActorInstanceMapping )
             	    {
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4075:1: (lv_relayPorts_11_0= rulePort )
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4076:3: lv_relayPorts_11_0= rulePort
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4075:1: (lv_actorInstanceMappings_11_0= ruleActorInstanceMapping )
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4076:3: lv_actorInstanceMappings_11_0= ruleActorInstanceMapping
             	    {
             	     
-            	    	        newCompositeNode(grammarAccess.getSubSystemClassAccess().getRelayPortsPortParserRuleCall_8_0_0()); 
+            	    	        newCompositeNode(grammarAccess.getSubSystemClassAccess().getActorInstanceMappingsActorInstanceMappingParserRuleCall_8_0_0()); 
             	    	    
-            	    pushFollow(FOLLOW_rulePort_in_ruleSubSystemClass8058);
-            	    lv_relayPorts_11_0=rulePort();
+            	    pushFollow(FOLLOW_ruleActorInstanceMapping_in_ruleSubSystemClass8058);
+            	    lv_actorInstanceMappings_11_0=ruleActorInstanceMapping();
 
             	    state._fsp--;
 
@@ -10116,9 +10116,9 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	    	        }
             	           		add(
             	           			current, 
-            	           			"relayPorts",
-            	            		lv_relayPorts_11_0, 
-            	            		"Port");
+            	           			"actorInstanceMappings",
+            	            		lv_actorInstanceMappings_11_0, 
+            	            		"ActorInstanceMapping");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -10131,19 +10131,19 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 2 :
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4093:6: ( (lv_serviceProvisionPoints_12_0= ruleSPP ) )
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4093:6: ( (lv_threads_12_0= ruleLogicalThread ) )
             	    {
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4093:6: ( (lv_serviceProvisionPoints_12_0= ruleSPP ) )
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4094:1: (lv_serviceProvisionPoints_12_0= ruleSPP )
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4093:6: ( (lv_threads_12_0= ruleLogicalThread ) )
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4094:1: (lv_threads_12_0= ruleLogicalThread )
             	    {
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4094:1: (lv_serviceProvisionPoints_12_0= ruleSPP )
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4095:3: lv_serviceProvisionPoints_12_0= ruleSPP
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4094:1: (lv_threads_12_0= ruleLogicalThread )
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4095:3: lv_threads_12_0= ruleLogicalThread
             	    {
             	     
-            	    	        newCompositeNode(grammarAccess.getSubSystemClassAccess().getServiceProvisionPointsSPPParserRuleCall_8_1_0()); 
+            	    	        newCompositeNode(grammarAccess.getSubSystemClassAccess().getThreadsLogicalThreadParserRuleCall_8_1_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleSPP_in_ruleSubSystemClass8085);
-            	    lv_serviceProvisionPoints_12_0=ruleSPP();
+            	    pushFollow(FOLLOW_ruleLogicalThread_in_ruleSubSystemClass8085);
+            	    lv_threads_12_0=ruleLogicalThread();
 
             	    state._fsp--;
 
@@ -10153,9 +10153,9 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	    	        }
             	           		add(
             	           			current, 
-            	           			"serviceProvisionPoints",
-            	            		lv_serviceProvisionPoints_12_0, 
-            	            		"SPP");
+            	           			"threads",
+            	            		lv_threads_12_0, 
+            	            		"LogicalThread");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -10168,19 +10168,19 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 3 :
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4112:6: ( (lv_actorRefs_13_0= ruleActorRef ) )
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4112:6: ( (lv_connections_13_0= ruleLayerConnection ) )
             	    {
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4112:6: ( (lv_actorRefs_13_0= ruleActorRef ) )
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4113:1: (lv_actorRefs_13_0= ruleActorRef )
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4112:6: ( (lv_connections_13_0= ruleLayerConnection ) )
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4113:1: (lv_connections_13_0= ruleLayerConnection )
             	    {
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4113:1: (lv_actorRefs_13_0= ruleActorRef )
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4114:3: lv_actorRefs_13_0= ruleActorRef
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4113:1: (lv_connections_13_0= ruleLayerConnection )
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4114:3: lv_connections_13_0= ruleLayerConnection
             	    {
             	     
-            	    	        newCompositeNode(grammarAccess.getSubSystemClassAccess().getActorRefsActorRefParserRuleCall_8_2_0()); 
+            	    	        newCompositeNode(grammarAccess.getSubSystemClassAccess().getConnectionsLayerConnectionParserRuleCall_8_2_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleActorRef_in_ruleSubSystemClass8112);
-            	    lv_actorRefs_13_0=ruleActorRef();
+            	    pushFollow(FOLLOW_ruleLayerConnection_in_ruleSubSystemClass8112);
+            	    lv_connections_13_0=ruleLayerConnection();
 
             	    state._fsp--;
 
@@ -10190,9 +10190,9 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	    	        }
             	           		add(
             	           			current, 
-            	           			"actorRefs",
-            	            		lv_actorRefs_13_0, 
-            	            		"ActorRef");
+            	           			"connections",
+            	            		lv_connections_13_0, 
+            	            		"LayerConnection");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -10242,19 +10242,19 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 5 :
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4150:6: ( (lv_connections_15_0= ruleLayerConnection ) )
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4150:6: ( (lv_actorRefs_15_0= ruleActorRef ) )
             	    {
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4150:6: ( (lv_connections_15_0= ruleLayerConnection ) )
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4151:1: (lv_connections_15_0= ruleLayerConnection )
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4150:6: ( (lv_actorRefs_15_0= ruleActorRef ) )
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4151:1: (lv_actorRefs_15_0= ruleActorRef )
             	    {
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4151:1: (lv_connections_15_0= ruleLayerConnection )
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4152:3: lv_connections_15_0= ruleLayerConnection
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4151:1: (lv_actorRefs_15_0= ruleActorRef )
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4152:3: lv_actorRefs_15_0= ruleActorRef
             	    {
             	     
-            	    	        newCompositeNode(grammarAccess.getSubSystemClassAccess().getConnectionsLayerConnectionParserRuleCall_8_4_0()); 
+            	    	        newCompositeNode(grammarAccess.getSubSystemClassAccess().getActorRefsActorRefParserRuleCall_8_4_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleLayerConnection_in_ruleSubSystemClass8166);
-            	    lv_connections_15_0=ruleLayerConnection();
+            	    pushFollow(FOLLOW_ruleActorRef_in_ruleSubSystemClass8166);
+            	    lv_actorRefs_15_0=ruleActorRef();
 
             	    state._fsp--;
 
@@ -10264,9 +10264,9 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	    	        }
             	           		add(
             	           			current, 
-            	           			"connections",
-            	            		lv_connections_15_0, 
-            	            		"LayerConnection");
+            	           			"actorRefs",
+            	            		lv_actorRefs_15_0, 
+            	            		"ActorRef");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -10279,19 +10279,19 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 6 :
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4169:6: ( (lv_threads_16_0= ruleLogicalThread ) )
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4169:6: ( (lv_serviceProvisionPoints_16_0= ruleSPP ) )
             	    {
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4169:6: ( (lv_threads_16_0= ruleLogicalThread ) )
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4170:1: (lv_threads_16_0= ruleLogicalThread )
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4169:6: ( (lv_serviceProvisionPoints_16_0= ruleSPP ) )
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4170:1: (lv_serviceProvisionPoints_16_0= ruleSPP )
             	    {
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4170:1: (lv_threads_16_0= ruleLogicalThread )
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4171:3: lv_threads_16_0= ruleLogicalThread
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4170:1: (lv_serviceProvisionPoints_16_0= ruleSPP )
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4171:3: lv_serviceProvisionPoints_16_0= ruleSPP
             	    {
             	     
-            	    	        newCompositeNode(grammarAccess.getSubSystemClassAccess().getThreadsLogicalThreadParserRuleCall_8_5_0()); 
+            	    	        newCompositeNode(grammarAccess.getSubSystemClassAccess().getServiceProvisionPointsSPPParserRuleCall_8_5_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleLogicalThread_in_ruleSubSystemClass8193);
-            	    lv_threads_16_0=ruleLogicalThread();
+            	    pushFollow(FOLLOW_ruleSPP_in_ruleSubSystemClass8193);
+            	    lv_serviceProvisionPoints_16_0=ruleSPP();
 
             	    state._fsp--;
 
@@ -10301,9 +10301,9 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	    	        }
             	           		add(
             	           			current, 
-            	           			"threads",
-            	            		lv_threads_16_0, 
-            	            		"LogicalThread");
+            	           			"serviceProvisionPoints",
+            	            		lv_serviceProvisionPoints_16_0, 
+            	            		"SPP");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -10316,19 +10316,19 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 7 :
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4188:6: ( (lv_actorInstanceMappings_17_0= ruleActorInstanceMapping ) )
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4188:6: ( (lv_relayPorts_17_0= rulePort ) )
             	    {
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4188:6: ( (lv_actorInstanceMappings_17_0= ruleActorInstanceMapping ) )
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4189:1: (lv_actorInstanceMappings_17_0= ruleActorInstanceMapping )
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4188:6: ( (lv_relayPorts_17_0= rulePort ) )
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4189:1: (lv_relayPorts_17_0= rulePort )
             	    {
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4189:1: (lv_actorInstanceMappings_17_0= ruleActorInstanceMapping )
-            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4190:3: lv_actorInstanceMappings_17_0= ruleActorInstanceMapping
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4189:1: (lv_relayPorts_17_0= rulePort )
+            	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4190:3: lv_relayPorts_17_0= rulePort
             	    {
             	     
-            	    	        newCompositeNode(grammarAccess.getSubSystemClassAccess().getActorInstanceMappingsActorInstanceMappingParserRuleCall_8_6_0()); 
+            	    	        newCompositeNode(grammarAccess.getSubSystemClassAccess().getRelayPortsPortParserRuleCall_8_6_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleActorInstanceMapping_in_ruleSubSystemClass8220);
-            	    lv_actorInstanceMappings_17_0=ruleActorInstanceMapping();
+            	    pushFollow(FOLLOW_rulePort_in_ruleSubSystemClass8220);
+            	    lv_relayPorts_17_0=rulePort();
 
             	    state._fsp--;
 
@@ -10338,9 +10338,9 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	    	        }
             	           		add(
             	           			current, 
-            	           			"actorInstanceMappings",
-            	            		lv_actorInstanceMappings_17_0, 
-            	            		"ActorInstanceMapping");
+            	           			"relayPorts",
+            	            		lv_relayPorts_17_0, 
+            	            		"Port");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -23981,9 +23981,9 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_ruleDetailCode_in_ruleDataClass2328 = new BitSet(new long[]{0x0000033300008000L});
     public static final BitSet FOLLOW_32_in_ruleDataClass2343 = new BitSet(new long[]{0x0000000000004000L});
     public static final BitSet FOLLOW_ruleDetailCode_in_ruleDataClass2364 = new BitSet(new long[]{0x0000033200008000L});
-    public static final BitSet FOLLOW_ruleAttribute_in_ruleDataClass2388 = new BitSet(new long[]{0x0000033200008000L});
+    public static final BitSet FOLLOW_ruleStandardOperation_in_ruleDataClass2388 = new BitSet(new long[]{0x0000033200008000L});
     public static final BitSet FOLLOW_ruleClassStructor_in_ruleDataClass2415 = new BitSet(new long[]{0x0000033200008000L});
-    public static final BitSet FOLLOW_ruleStandardOperation_in_ruleDataClass2442 = new BitSet(new long[]{0x0000033200008000L});
+    public static final BitSet FOLLOW_ruleAttribute_in_ruleDataClass2442 = new BitSet(new long[]{0x0000033200008000L});
     public static final BitSet FOLLOW_15_in_ruleDataClass2456 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleAttribute_in_entryRuleAttribute2492 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleAttribute2502 = new BitSet(new long[]{0x0000000000000002L});
@@ -24095,12 +24095,12 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_ruleDocumentation_in_ruleMessage4750 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rulePortClass_in_entryRulePortClass4787 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRulePortClass4797 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_14_in_rulePortClass4843 = new BitSet(new long[]{0x0030002200008000L});
+    public static final BitSet FOLLOW_14_in_rulePortClass4843 = new BitSet(new long[]{0x0030033200008000L});
     public static final BitSet FOLLOW_52_in_rulePortClass4856 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_rulePortClass4877 = new BitSet(new long[]{0x0020002200008000L});
-    public static final BitSet FOLLOW_ruleAttribute_in_rulePortClass4901 = new BitSet(new long[]{0x0020002200008000L});
-    public static final BitSet FOLLOW_rulePortOperation_in_rulePortClass4928 = new BitSet(new long[]{0x0020002200008000L});
-    public static final BitSet FOLLOW_ruleMessageHandler_in_rulePortClass4955 = new BitSet(new long[]{0x0020002200008000L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_rulePortClass4877 = new BitSet(new long[]{0x0020033200008000L});
+    public static final BitSet FOLLOW_ruleMessageHandler_in_rulePortClass4901 = new BitSet(new long[]{0x0020033200008000L});
+    public static final BitSet FOLLOW_rulePortOperation_in_rulePortClass4928 = new BitSet(new long[]{0x0020033200008000L});
+    public static final BitSet FOLLOW_ruleAttribute_in_rulePortClass4955 = new BitSet(new long[]{0x0020033200008000L});
     public static final BitSet FOLLOW_15_in_rulePortClass4969 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleMessageHandler_in_entryRuleMessageHandler5005 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleMessageHandler5015 = new BitSet(new long[]{0x0000000000000002L});
@@ -24134,33 +24134,33 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_ruleAnnotation_in_ruleActorClass5839 = new BitSet(new long[]{0x0700000000008000L,0x0000100000000000L});
     public static final BitSet FOLLOW_56_in_ruleActorClass5853 = new BitSet(new long[]{0x0000000000004000L});
     public static final BitSet FOLLOW_14_in_ruleActorClass5865 = new BitSet(new long[]{0x4800800000008000L});
-    public static final BitSet FOLLOW_rulePort_in_ruleActorClass5887 = new BitSet(new long[]{0x4800800000008000L});
-    public static final BitSet FOLLOW_ruleSPP_in_ruleActorClass5914 = new BitSet(new long[]{0x4800800000008000L});
+    public static final BitSet FOLLOW_ruleSPP_in_ruleActorClass5887 = new BitSet(new long[]{0x4800800000008000L});
+    public static final BitSet FOLLOW_rulePort_in_ruleActorClass5914 = new BitSet(new long[]{0x4800800000008000L});
     public static final BitSet FOLLOW_15_in_ruleActorClass5928 = new BitSet(new long[]{0x0600000000008000L});
     public static final BitSet FOLLOW_57_in_ruleActorClass5943 = new BitSet(new long[]{0x0000000400004000L});
     public static final BitSet FOLLOW_ruleDocumentation_in_ruleActorClass5964 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_ruleActorClass5977 = new BitSet(new long[]{0xB8008003C0008000L,0x2000800000002440L});
+    public static final BitSet FOLLOW_14_in_ruleActorClass5977 = new BitSet(new long[]{0xF8008333C0008000L,0x2000800000002440L});
     public static final BitSet FOLLOW_30_in_ruleActorClass5990 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_ruleActorClass6011 = new BitSet(new long[]{0xB800800380008000L,0x2000800000002440L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_ruleActorClass6011 = new BitSet(new long[]{0xF800833380008000L,0x2000800000002440L});
     public static final BitSet FOLLOW_31_in_ruleActorClass6026 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_ruleActorClass6047 = new BitSet(new long[]{0xB800800300008000L,0x2000800000002440L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_ruleActorClass6047 = new BitSet(new long[]{0xF800833300008000L,0x2000800000002440L});
     public static final BitSet FOLLOW_32_in_ruleActorClass6062 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_ruleActorClass6083 = new BitSet(new long[]{0xB800800200008000L,0x2000800000002440L});
-    public static final BitSet FOLLOW_rulePort_in_ruleActorClass6107 = new BitSet(new long[]{0xB800800200008000L,0x2000800000002440L});
-    public static final BitSet FOLLOW_ruleExternalPort_in_ruleActorClass6134 = new BitSet(new long[]{0xB800800200008000L,0x2000800000002440L});
-    public static final BitSet FOLLOW_ruleSAP_in_ruleActorClass6161 = new BitSet(new long[]{0xB800800200008000L,0x2000800000002440L});
-    public static final BitSet FOLLOW_ruleAttribute_in_ruleActorClass6188 = new BitSet(new long[]{0xB800800200008000L,0x2000800000002440L});
-    public static final BitSet FOLLOW_ruleActorRef_in_ruleActorClass6215 = new BitSet(new long[]{0xB800800200008000L,0x2000800000002440L});
-    public static final BitSet FOLLOW_ruleServiceImplementation_in_ruleActorClass6242 = new BitSet(new long[]{0xB800800200008000L,0x2000800000002440L});
-    public static final BitSet FOLLOW_ruleBinding_in_ruleActorClass6269 = new BitSet(new long[]{0xB800800200008000L,0x2000800000002440L});
-    public static final BitSet FOLLOW_ruleLayerConnection_in_ruleActorClass6296 = new BitSet(new long[]{0xB800800200008000L,0x2000800000002440L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_ruleActorClass6083 = new BitSet(new long[]{0xF800833200008000L,0x2000800000002440L});
+    public static final BitSet FOLLOW_ruleLayerConnection_in_ruleActorClass6107 = new BitSet(new long[]{0xF800833200008000L,0x2000800000002440L});
+    public static final BitSet FOLLOW_ruleBinding_in_ruleActorClass6134 = new BitSet(new long[]{0xF800833200008000L,0x2000800000002440L});
+    public static final BitSet FOLLOW_ruleServiceImplementation_in_ruleActorClass6161 = new BitSet(new long[]{0xF800833200008000L,0x2000800000002440L});
+    public static final BitSet FOLLOW_ruleAttribute_in_ruleActorClass6188 = new BitSet(new long[]{0xF800833200008000L,0x2000800000002440L});
+    public static final BitSet FOLLOW_ruleActorRef_in_ruleActorClass6215 = new BitSet(new long[]{0xF800833200008000L,0x2000800000002440L});
+    public static final BitSet FOLLOW_ruleSAP_in_ruleActorClass6242 = new BitSet(new long[]{0xF800833200008000L,0x2000800000002440L});
+    public static final BitSet FOLLOW_rulePort_in_ruleActorClass6269 = new BitSet(new long[]{0xF800833200008000L,0x2000800000002440L});
+    public static final BitSet FOLLOW_ruleExternalPort_in_ruleActorClass6296 = new BitSet(new long[]{0xF800833200008000L,0x2000800000002440L});
     public static final BitSet FOLLOW_15_in_ruleActorClass6310 = new BitSet(new long[]{0x0400000000008000L});
     public static final BitSet FOLLOW_58_in_ruleActorClass6325 = new BitSet(new long[]{0x0000000400004000L});
     public static final BitSet FOLLOW_ruleDocumentation_in_ruleActorClass6346 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_ruleActorClass6359 = new BitSet(new long[]{0x0000033200008000L,0x0000100000010000L});
-    public static final BitSet FOLLOW_ruleAnnotation_in_ruleActorClass6380 = new BitSet(new long[]{0x0000033200008000L,0x0000100000010000L});
-    public static final BitSet FOLLOW_ruleClassStructor_in_ruleActorClass6403 = new BitSet(new long[]{0x0000033200008000L,0x0000000000010000L});
-    public static final BitSet FOLLOW_ruleStandardOperation_in_ruleActorClass6430 = new BitSet(new long[]{0x0000033200008000L,0x0000000000010000L});
+    public static final BitSet FOLLOW_14_in_ruleActorClass6359 = new BitSet(new long[]{0x0000033000008000L,0x0000100000010000L});
+    public static final BitSet FOLLOW_ruleAnnotation_in_ruleActorClass6380 = new BitSet(new long[]{0x0000033000008000L,0x0000100000010000L});
+    public static final BitSet FOLLOW_ruleStandardOperation_in_ruleActorClass6403 = new BitSet(new long[]{0x0000033000008000L,0x0000000000010000L});
+    public static final BitSet FOLLOW_ruleClassStructor_in_ruleActorClass6430 = new BitSet(new long[]{0x0000033000008000L,0x0000000000010000L});
     public static final BitSet FOLLOW_ruleStateMachine_in_ruleActorClass6453 = new BitSet(new long[]{0x0000000000008000L});
     public static final BitSet FOLLOW_15_in_ruleActorClass6466 = new BitSet(new long[]{0x0000000000008000L});
     public static final BitSet FOLLOW_15_in_ruleActorClass6480 = new BitSet(new long[]{0x0000000000000002L});
@@ -24205,11 +24205,11 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_64_in_ruleLogicalSystem7435 = new BitSet(new long[]{0x0000000000000010L});
     public static final BitSet FOLLOW_RULE_ID_in_ruleLogicalSystem7452 = new BitSet(new long[]{0x0000000400004000L});
     public static final BitSet FOLLOW_ruleDocumentation_in_ruleLogicalSystem7478 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_ruleLogicalSystem7491 = new BitSet(new long[]{0xB800800200008000L,0x2000900000002442L});
-    public static final BitSet FOLLOW_ruleAnnotation_in_ruleLogicalSystem7512 = new BitSet(new long[]{0xB800800200008000L,0x2000900000002442L});
-    public static final BitSet FOLLOW_ruleSubSystemRef_in_ruleLogicalSystem7535 = new BitSet(new long[]{0xB800800200008000L,0x2000800000002442L});
-    public static final BitSet FOLLOW_ruleBinding_in_ruleLogicalSystem7562 = new BitSet(new long[]{0xB800800200008000L,0x2000800000002442L});
-    public static final BitSet FOLLOW_ruleLayerConnection_in_ruleLogicalSystem7589 = new BitSet(new long[]{0xB800800200008000L,0x2000800000002442L});
+    public static final BitSet FOLLOW_14_in_ruleLogicalSystem7491 = new BitSet(new long[]{0x0000000000008000L,0x0000100000000442L});
+    public static final BitSet FOLLOW_ruleAnnotation_in_ruleLogicalSystem7512 = new BitSet(new long[]{0x0000000000008000L,0x0000100000000442L});
+    public static final BitSet FOLLOW_ruleLayerConnection_in_ruleLogicalSystem7535 = new BitSet(new long[]{0x0000000000008000L,0x0000000000000442L});
+    public static final BitSet FOLLOW_ruleBinding_in_ruleLogicalSystem7562 = new BitSet(new long[]{0x0000000000008000L,0x0000000000000442L});
+    public static final BitSet FOLLOW_ruleSubSystemRef_in_ruleLogicalSystem7589 = new BitSet(new long[]{0x0000000000008000L,0x0000000000000442L});
     public static final BitSet FOLLOW_15_in_ruleLogicalSystem7603 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleSubSystemRef_in_entryRuleSubSystemRef7641 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleSubSystemRef7651 = new BitSet(new long[]{0x0000000000000002L});
@@ -24223,21 +24223,21 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_66_in_ruleSubSystemClass7850 = new BitSet(new long[]{0x0000000000000010L});
     public static final BitSet FOLLOW_RULE_ID_in_ruleSubSystemClass7867 = new BitSet(new long[]{0x0000000400004000L});
     public static final BitSet FOLLOW_ruleDocumentation_in_ruleSubSystemClass7893 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_ruleSubSystemClass7906 = new BitSet(new long[]{0xF8008003C0008000L,0x2000900000002458L});
-    public static final BitSet FOLLOW_ruleAnnotation_in_ruleSubSystemClass7927 = new BitSet(new long[]{0xF8008003C0008000L,0x2000900000002458L});
+    public static final BitSet FOLLOW_14_in_ruleSubSystemClass7906 = new BitSet(new long[]{0x48008001C0008000L,0x2000900000002458L});
+    public static final BitSet FOLLOW_ruleAnnotation_in_ruleSubSystemClass7927 = new BitSet(new long[]{0x48008001C0008000L,0x2000900000002458L});
     public static final BitSet FOLLOW_30_in_ruleSubSystemClass7941 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_ruleSubSystemClass7962 = new BitSet(new long[]{0xF800800380008000L,0x2000800000002458L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_ruleSubSystemClass7962 = new BitSet(new long[]{0x4800800180008000L,0x2000800000002458L});
     public static final BitSet FOLLOW_31_in_ruleSubSystemClass7977 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_ruleSubSystemClass7998 = new BitSet(new long[]{0xF800800300008000L,0x2000800000002458L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_ruleSubSystemClass7998 = new BitSet(new long[]{0x4800800100008000L,0x2000800000002458L});
     public static final BitSet FOLLOW_32_in_ruleSubSystemClass8013 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_ruleSubSystemClass8034 = new BitSet(new long[]{0xF800800200008000L,0x2000800000002458L});
-    public static final BitSet FOLLOW_rulePort_in_ruleSubSystemClass8058 = new BitSet(new long[]{0xF800800200008000L,0x2000800000002458L});
-    public static final BitSet FOLLOW_ruleSPP_in_ruleSubSystemClass8085 = new BitSet(new long[]{0xF800800200008000L,0x2000800000002458L});
-    public static final BitSet FOLLOW_ruleActorRef_in_ruleSubSystemClass8112 = new BitSet(new long[]{0xF800800200008000L,0x2000800000002458L});
-    public static final BitSet FOLLOW_ruleBinding_in_ruleSubSystemClass8139 = new BitSet(new long[]{0xF800800200008000L,0x2000800000002458L});
-    public static final BitSet FOLLOW_ruleLayerConnection_in_ruleSubSystemClass8166 = new BitSet(new long[]{0xF800800200008000L,0x2000800000002458L});
-    public static final BitSet FOLLOW_ruleLogicalThread_in_ruleSubSystemClass8193 = new BitSet(new long[]{0xF800800200008000L,0x2000800000002458L});
-    public static final BitSet FOLLOW_ruleActorInstanceMapping_in_ruleSubSystemClass8220 = new BitSet(new long[]{0xF800800200008000L,0x2000800000002458L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_ruleSubSystemClass8034 = new BitSet(new long[]{0x4800800000008000L,0x2000800000002458L});
+    public static final BitSet FOLLOW_ruleActorInstanceMapping_in_ruleSubSystemClass8058 = new BitSet(new long[]{0x4800800000008000L,0x2000800000002458L});
+    public static final BitSet FOLLOW_ruleLogicalThread_in_ruleSubSystemClass8085 = new BitSet(new long[]{0x4800800000008000L,0x2000800000002458L});
+    public static final BitSet FOLLOW_ruleLayerConnection_in_ruleSubSystemClass8112 = new BitSet(new long[]{0x4800800000008000L,0x2000800000002458L});
+    public static final BitSet FOLLOW_ruleBinding_in_ruleSubSystemClass8139 = new BitSet(new long[]{0x4800800000008000L,0x2000800000002458L});
+    public static final BitSet FOLLOW_ruleActorRef_in_ruleSubSystemClass8166 = new BitSet(new long[]{0x4800800000008000L,0x2000800000002458L});
+    public static final BitSet FOLLOW_ruleSPP_in_ruleSubSystemClass8193 = new BitSet(new long[]{0x4800800000008000L,0x2000800000002458L});
+    public static final BitSet FOLLOW_rulePort_in_ruleSubSystemClass8220 = new BitSet(new long[]{0x4800800000008000L,0x2000800000002458L});
     public static final BitSet FOLLOW_15_in_ruleSubSystemClass8234 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleLogicalThread_in_entryRuleLogicalThread8270 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleLogicalThread8280 = new BitSet(new long[]{0x0000000000000002L});
@@ -24249,8 +24249,8 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_ruleRefPath_in_ruleActorInstanceMapping8443 = new BitSet(new long[]{0x0000000000080000L});
     public static final BitSet FOLLOW_19_in_ruleActorInstanceMapping8455 = new BitSet(new long[]{0x0000000000000010L});
     public static final BitSet FOLLOW_RULE_ID_in_ruleActorInstanceMapping8475 = new BitSet(new long[]{0x0000000000004002L});
-    public static final BitSet FOLLOW_14_in_ruleActorInstanceMapping8488 = new BitSet(new long[]{0xF800800200008000L,0x2000800000002458L});
-    public static final BitSet FOLLOW_ruleActorInstanceMapping_in_ruleActorInstanceMapping8509 = new BitSet(new long[]{0xF800800200008000L,0x2000800000002458L});
+    public static final BitSet FOLLOW_14_in_ruleActorInstanceMapping8488 = new BitSet(new long[]{0x0000000000008000L,0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleActorInstanceMapping_in_ruleActorInstanceMapping8509 = new BitSet(new long[]{0x0000000000008000L,0x0000000000000010L});
     public static final BitSet FOLLOW_15_in_ruleActorInstanceMapping8522 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleRefPath_in_entryRuleRefPath8560 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleRefPath8570 = new BitSet(new long[]{0x0000000000000002L});

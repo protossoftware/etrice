@@ -34,9 +34,9 @@ import org.eclipse.etrice.core.room.RoomPackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.impl.PortClassImpl#getUserCode <em>User Code</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.room.impl.PortClassImpl#getAttributes <em>Attributes</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.room.impl.PortClassImpl#getOperations <em>Operations</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.PortClassImpl#getMsgHandlers <em>Msg Handlers</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.PortClassImpl#getOperations <em>Operations</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.PortClassImpl#getAttributes <em>Attributes</em>}</li>
  * </ul>
  * </p>
  *
@@ -55,14 +55,14 @@ public class PortClassImpl extends MinimalEObjectImpl.Container implements PortC
   protected DetailCode userCode;
 
   /**
-   * The cached value of the '{@link #getAttributes() <em>Attributes</em>}' containment reference list.
+   * The cached value of the '{@link #getMsgHandlers() <em>Msg Handlers</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getAttributes()
+   * @see #getMsgHandlers()
    * @generated
    * @ordered
    */
-  protected EList<Attribute> attributes;
+  protected EList<MessageHandler> msgHandlers;
 
   /**
    * The cached value of the '{@link #getOperations() <em>Operations</em>}' containment reference list.
@@ -75,14 +75,14 @@ public class PortClassImpl extends MinimalEObjectImpl.Container implements PortC
   protected EList<PortOperation> operations;
 
   /**
-   * The cached value of the '{@link #getMsgHandlers() <em>Msg Handlers</em>}' containment reference list.
+   * The cached value of the '{@link #getAttributes() <em>Attributes</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getMsgHandlers()
+   * @see #getAttributes()
    * @generated
    * @ordered
    */
-  protected EList<MessageHandler> msgHandlers;
+  protected EList<Attribute> attributes;
 
   /**
    * <!-- begin-user-doc -->
@@ -158,13 +158,13 @@ public class PortClassImpl extends MinimalEObjectImpl.Container implements PortC
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Attribute> getAttributes()
+  public EList<MessageHandler> getMsgHandlers()
   {
-    if (attributes == null)
+    if (msgHandlers == null)
     {
-      attributes = new EObjectContainmentEList<Attribute>(Attribute.class, this, RoomPackage.PORT_CLASS__ATTRIBUTES);
+      msgHandlers = new EObjectContainmentEList<MessageHandler>(MessageHandler.class, this, RoomPackage.PORT_CLASS__MSG_HANDLERS);
     }
-    return attributes;
+    return msgHandlers;
   }
 
   /**
@@ -186,13 +186,13 @@ public class PortClassImpl extends MinimalEObjectImpl.Container implements PortC
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<MessageHandler> getMsgHandlers()
+  public EList<Attribute> getAttributes()
   {
-    if (msgHandlers == null)
+    if (attributes == null)
     {
-      msgHandlers = new EObjectContainmentEList<MessageHandler>(MessageHandler.class, this, RoomPackage.PORT_CLASS__MSG_HANDLERS);
+      attributes = new EObjectContainmentEList<Attribute>(Attribute.class, this, RoomPackage.PORT_CLASS__ATTRIBUTES);
     }
-    return msgHandlers;
+    return attributes;
   }
 
   /**
@@ -207,12 +207,12 @@ public class PortClassImpl extends MinimalEObjectImpl.Container implements PortC
     {
       case RoomPackage.PORT_CLASS__USER_CODE:
         return basicSetUserCode(null, msgs);
-      case RoomPackage.PORT_CLASS__ATTRIBUTES:
-        return ((InternalEList<?>)getAttributes()).basicRemove(otherEnd, msgs);
-      case RoomPackage.PORT_CLASS__OPERATIONS:
-        return ((InternalEList<?>)getOperations()).basicRemove(otherEnd, msgs);
       case RoomPackage.PORT_CLASS__MSG_HANDLERS:
         return ((InternalEList<?>)getMsgHandlers()).basicRemove(otherEnd, msgs);
+      case RoomPackage.PORT_CLASS__OPERATIONS:
+        return ((InternalEList<?>)getOperations()).basicRemove(otherEnd, msgs);
+      case RoomPackage.PORT_CLASS__ATTRIBUTES:
+        return ((InternalEList<?>)getAttributes()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -229,12 +229,12 @@ public class PortClassImpl extends MinimalEObjectImpl.Container implements PortC
     {
       case RoomPackage.PORT_CLASS__USER_CODE:
         return getUserCode();
-      case RoomPackage.PORT_CLASS__ATTRIBUTES:
-        return getAttributes();
-      case RoomPackage.PORT_CLASS__OPERATIONS:
-        return getOperations();
       case RoomPackage.PORT_CLASS__MSG_HANDLERS:
         return getMsgHandlers();
+      case RoomPackage.PORT_CLASS__OPERATIONS:
+        return getOperations();
+      case RoomPackage.PORT_CLASS__ATTRIBUTES:
+        return getAttributes();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -253,17 +253,17 @@ public class PortClassImpl extends MinimalEObjectImpl.Container implements PortC
       case RoomPackage.PORT_CLASS__USER_CODE:
         setUserCode((DetailCode)newValue);
         return;
-      case RoomPackage.PORT_CLASS__ATTRIBUTES:
-        getAttributes().clear();
-        getAttributes().addAll((Collection<? extends Attribute>)newValue);
+      case RoomPackage.PORT_CLASS__MSG_HANDLERS:
+        getMsgHandlers().clear();
+        getMsgHandlers().addAll((Collection<? extends MessageHandler>)newValue);
         return;
       case RoomPackage.PORT_CLASS__OPERATIONS:
         getOperations().clear();
         getOperations().addAll((Collection<? extends PortOperation>)newValue);
         return;
-      case RoomPackage.PORT_CLASS__MSG_HANDLERS:
-        getMsgHandlers().clear();
-        getMsgHandlers().addAll((Collection<? extends MessageHandler>)newValue);
+      case RoomPackage.PORT_CLASS__ATTRIBUTES:
+        getAttributes().clear();
+        getAttributes().addAll((Collection<? extends Attribute>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -282,14 +282,14 @@ public class PortClassImpl extends MinimalEObjectImpl.Container implements PortC
       case RoomPackage.PORT_CLASS__USER_CODE:
         setUserCode((DetailCode)null);
         return;
-      case RoomPackage.PORT_CLASS__ATTRIBUTES:
-        getAttributes().clear();
+      case RoomPackage.PORT_CLASS__MSG_HANDLERS:
+        getMsgHandlers().clear();
         return;
       case RoomPackage.PORT_CLASS__OPERATIONS:
         getOperations().clear();
         return;
-      case RoomPackage.PORT_CLASS__MSG_HANDLERS:
-        getMsgHandlers().clear();
+      case RoomPackage.PORT_CLASS__ATTRIBUTES:
+        getAttributes().clear();
         return;
     }
     super.eUnset(featureID);
@@ -307,12 +307,12 @@ public class PortClassImpl extends MinimalEObjectImpl.Container implements PortC
     {
       case RoomPackage.PORT_CLASS__USER_CODE:
         return userCode != null;
-      case RoomPackage.PORT_CLASS__ATTRIBUTES:
-        return attributes != null && !attributes.isEmpty();
-      case RoomPackage.PORT_CLASS__OPERATIONS:
-        return operations != null && !operations.isEmpty();
       case RoomPackage.PORT_CLASS__MSG_HANDLERS:
         return msgHandlers != null && !msgHandlers.isEmpty();
+      case RoomPackage.PORT_CLASS__OPERATIONS:
+        return operations != null && !operations.isEmpty();
+      case RoomPackage.PORT_CLASS__ATTRIBUTES:
+        return attributes != null && !attributes.isEmpty();
     }
     return super.eIsSet(featureID);
   }

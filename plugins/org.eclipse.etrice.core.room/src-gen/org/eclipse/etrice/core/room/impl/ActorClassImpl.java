@@ -55,15 +55,15 @@ import org.eclipse.etrice.core.room.util.RoomHelpers;
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getStateMachine <em>State Machine</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getInterfacePorts <em>Interface Ports</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getStructureDocu <em>Structure Docu</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getServiceImplementations <em>Service Implementations</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getAttributes <em>Attributes</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getServiceAccessPoints <em>Service Access Points</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getInternalPorts <em>Internal Ports</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getExternalPorts <em>External Ports</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getServiceAccessPoints <em>Service Access Points</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getAttributes <em>Attributes</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getServiceImplementations <em>Service Implementations</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getBehaviorDocu <em>Behavior Docu</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getBehaviorAnnotations <em>Behavior Annotations</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getStructors <em>Structors</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getOperations <em>Operations</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getStructors <em>Structors</em>}</li>
  * </ul>
  * </p>
  *
@@ -172,6 +172,36 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
   protected Documentation structureDocu;
 
   /**
+   * The cached value of the '{@link #getServiceImplementations() <em>Service Implementations</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getServiceImplementations()
+   * @generated
+   * @ordered
+   */
+  protected EList<ServiceImplementation> serviceImplementations;
+
+  /**
+   * The cached value of the '{@link #getAttributes() <em>Attributes</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getAttributes()
+   * @generated
+   * @ordered
+   */
+  protected EList<Attribute> attributes;
+
+  /**
+   * The cached value of the '{@link #getServiceAccessPoints() <em>Service Access Points</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getServiceAccessPoints()
+   * @generated
+   * @ordered
+   */
+  protected EList<SAP> serviceAccessPoints;
+
+  /**
    * The cached value of the '{@link #getInternalPorts() <em>Internal Ports</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -190,36 +220,6 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    * @ordered
    */
   protected EList<ExternalPort> externalPorts;
-
-  /**
-   * The cached value of the '{@link #getServiceAccessPoints() <em>Service Access Points</em>}' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getServiceAccessPoints()
-   * @generated
-   * @ordered
-   */
-  protected EList<SAP> serviceAccessPoints;
-
-  /**
-   * The cached value of the '{@link #getAttributes() <em>Attributes</em>}' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getAttributes()
-   * @generated
-   * @ordered
-   */
-  protected EList<Attribute> attributes;
-
-  /**
-   * The cached value of the '{@link #getServiceImplementations() <em>Service Implementations</em>}' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getServiceImplementations()
-   * @generated
-   * @ordered
-   */
-  protected EList<ServiceImplementation> serviceImplementations;
 
   /**
    * The cached value of the '{@link #getBehaviorDocu() <em>Behavior Docu</em>}' containment reference.
@@ -242,16 +242,6 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
   protected EList<Annotation> behaviorAnnotations;
 
   /**
-   * The cached value of the '{@link #getStructors() <em>Structors</em>}' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getStructors()
-   * @generated
-   * @ordered
-   */
-  protected EList<ClassStructor> structors;
-
-  /**
    * The cached value of the '{@link #getOperations() <em>Operations</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -260,6 +250,16 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    * @ordered
    */
   protected EList<StandardOperation> operations;
+
+  /**
+   * The cached value of the '{@link #getStructors() <em>Structors</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getStructors()
+   * @generated
+   * @ordered
+   */
+  protected EList<ClassStructor> structors;
 
   /**
    * <!-- begin-user-doc -->
@@ -509,41 +509,13 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Port> getInternalPorts()
+  public EList<ServiceImplementation> getServiceImplementations()
   {
-    if (internalPorts == null)
+    if (serviceImplementations == null)
     {
-      internalPorts = new EObjectContainmentEList<Port>(Port.class, this, RoomPackage.ACTOR_CLASS__INTERNAL_PORTS);
+      serviceImplementations = new EObjectContainmentEList<ServiceImplementation>(ServiceImplementation.class, this, RoomPackage.ACTOR_CLASS__SERVICE_IMPLEMENTATIONS);
     }
-    return internalPorts;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EList<ExternalPort> getExternalPorts()
-  {
-    if (externalPorts == null)
-    {
-      externalPorts = new EObjectContainmentEList<ExternalPort>(ExternalPort.class, this, RoomPackage.ACTOR_CLASS__EXTERNAL_PORTS);
-    }
-    return externalPorts;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EList<SAP> getServiceAccessPoints()
-  {
-    if (serviceAccessPoints == null)
-    {
-      serviceAccessPoints = new EObjectContainmentEList<SAP>(SAP.class, this, RoomPackage.ACTOR_CLASS__SERVICE_ACCESS_POINTS);
-    }
-    return serviceAccessPoints;
+    return serviceImplementations;
   }
 
   /**
@@ -565,13 +537,41 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<ServiceImplementation> getServiceImplementations()
+  public EList<SAP> getServiceAccessPoints()
   {
-    if (serviceImplementations == null)
+    if (serviceAccessPoints == null)
     {
-      serviceImplementations = new EObjectContainmentEList<ServiceImplementation>(ServiceImplementation.class, this, RoomPackage.ACTOR_CLASS__SERVICE_IMPLEMENTATIONS);
+      serviceAccessPoints = new EObjectContainmentEList<SAP>(SAP.class, this, RoomPackage.ACTOR_CLASS__SERVICE_ACCESS_POINTS);
     }
-    return serviceImplementations;
+    return serviceAccessPoints;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EList<Port> getInternalPorts()
+  {
+    if (internalPorts == null)
+    {
+      internalPorts = new EObjectContainmentEList<Port>(Port.class, this, RoomPackage.ACTOR_CLASS__INTERNAL_PORTS);
+    }
+    return internalPorts;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EList<ExternalPort> getExternalPorts()
+  {
+    if (externalPorts == null)
+    {
+      externalPorts = new EObjectContainmentEList<ExternalPort>(ExternalPort.class, this, RoomPackage.ACTOR_CLASS__EXTERNAL_PORTS);
+    }
+    return externalPorts;
   }
 
   /**
@@ -641,20 +641,6 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<ClassStructor> getStructors()
-  {
-    if (structors == null)
-    {
-      structors = new EObjectContainmentEList<ClassStructor>(ClassStructor.class, this, RoomPackage.ACTOR_CLASS__STRUCTORS);
-    }
-    return structors;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EList<StandardOperation> getOperations()
   {
     if (operations == null)
@@ -662,6 +648,20 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
       operations = new EObjectContainmentEList<StandardOperation>(StandardOperation.class, this, RoomPackage.ACTOR_CLASS__OPERATIONS);
     }
     return operations;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EList<ClassStructor> getStructors()
+  {
+    if (structors == null)
+    {
+      structors = new EObjectContainmentEList<ClassStructor>(ClassStructor.class, this, RoomPackage.ACTOR_CLASS__STRUCTORS);
+    }
+    return structors;
   }
 
   /**
@@ -769,24 +769,24 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
         return ((InternalEList<?>)getInterfacePorts()).basicRemove(otherEnd, msgs);
       case RoomPackage.ACTOR_CLASS__STRUCTURE_DOCU:
         return basicSetStructureDocu(null, msgs);
+      case RoomPackage.ACTOR_CLASS__SERVICE_IMPLEMENTATIONS:
+        return ((InternalEList<?>)getServiceImplementations()).basicRemove(otherEnd, msgs);
+      case RoomPackage.ACTOR_CLASS__ATTRIBUTES:
+        return ((InternalEList<?>)getAttributes()).basicRemove(otherEnd, msgs);
+      case RoomPackage.ACTOR_CLASS__SERVICE_ACCESS_POINTS:
+        return ((InternalEList<?>)getServiceAccessPoints()).basicRemove(otherEnd, msgs);
       case RoomPackage.ACTOR_CLASS__INTERNAL_PORTS:
         return ((InternalEList<?>)getInternalPorts()).basicRemove(otherEnd, msgs);
       case RoomPackage.ACTOR_CLASS__EXTERNAL_PORTS:
         return ((InternalEList<?>)getExternalPorts()).basicRemove(otherEnd, msgs);
-      case RoomPackage.ACTOR_CLASS__SERVICE_ACCESS_POINTS:
-        return ((InternalEList<?>)getServiceAccessPoints()).basicRemove(otherEnd, msgs);
-      case RoomPackage.ACTOR_CLASS__ATTRIBUTES:
-        return ((InternalEList<?>)getAttributes()).basicRemove(otherEnd, msgs);
-      case RoomPackage.ACTOR_CLASS__SERVICE_IMPLEMENTATIONS:
-        return ((InternalEList<?>)getServiceImplementations()).basicRemove(otherEnd, msgs);
       case RoomPackage.ACTOR_CLASS__BEHAVIOR_DOCU:
         return basicSetBehaviorDocu(null, msgs);
       case RoomPackage.ACTOR_CLASS__BEHAVIOR_ANNOTATIONS:
         return ((InternalEList<?>)getBehaviorAnnotations()).basicRemove(otherEnd, msgs);
-      case RoomPackage.ACTOR_CLASS__STRUCTORS:
-        return ((InternalEList<?>)getStructors()).basicRemove(otherEnd, msgs);
       case RoomPackage.ACTOR_CLASS__OPERATIONS:
         return ((InternalEList<?>)getOperations()).basicRemove(otherEnd, msgs);
+      case RoomPackage.ACTOR_CLASS__STRUCTORS:
+        return ((InternalEList<?>)getStructors()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -816,24 +816,24 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
         return getInterfacePorts();
       case RoomPackage.ACTOR_CLASS__STRUCTURE_DOCU:
         return getStructureDocu();
+      case RoomPackage.ACTOR_CLASS__SERVICE_IMPLEMENTATIONS:
+        return getServiceImplementations();
+      case RoomPackage.ACTOR_CLASS__ATTRIBUTES:
+        return getAttributes();
+      case RoomPackage.ACTOR_CLASS__SERVICE_ACCESS_POINTS:
+        return getServiceAccessPoints();
       case RoomPackage.ACTOR_CLASS__INTERNAL_PORTS:
         return getInternalPorts();
       case RoomPackage.ACTOR_CLASS__EXTERNAL_PORTS:
         return getExternalPorts();
-      case RoomPackage.ACTOR_CLASS__SERVICE_ACCESS_POINTS:
-        return getServiceAccessPoints();
-      case RoomPackage.ACTOR_CLASS__ATTRIBUTES:
-        return getAttributes();
-      case RoomPackage.ACTOR_CLASS__SERVICE_IMPLEMENTATIONS:
-        return getServiceImplementations();
       case RoomPackage.ACTOR_CLASS__BEHAVIOR_DOCU:
         return getBehaviorDocu();
       case RoomPackage.ACTOR_CLASS__BEHAVIOR_ANNOTATIONS:
         return getBehaviorAnnotations();
-      case RoomPackage.ACTOR_CLASS__STRUCTORS:
-        return getStructors();
       case RoomPackage.ACTOR_CLASS__OPERATIONS:
         return getOperations();
+      case RoomPackage.ACTOR_CLASS__STRUCTORS:
+        return getStructors();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -871,6 +871,18 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
       case RoomPackage.ACTOR_CLASS__STRUCTURE_DOCU:
         setStructureDocu((Documentation)newValue);
         return;
+      case RoomPackage.ACTOR_CLASS__SERVICE_IMPLEMENTATIONS:
+        getServiceImplementations().clear();
+        getServiceImplementations().addAll((Collection<? extends ServiceImplementation>)newValue);
+        return;
+      case RoomPackage.ACTOR_CLASS__ATTRIBUTES:
+        getAttributes().clear();
+        getAttributes().addAll((Collection<? extends Attribute>)newValue);
+        return;
+      case RoomPackage.ACTOR_CLASS__SERVICE_ACCESS_POINTS:
+        getServiceAccessPoints().clear();
+        getServiceAccessPoints().addAll((Collection<? extends SAP>)newValue);
+        return;
       case RoomPackage.ACTOR_CLASS__INTERNAL_PORTS:
         getInternalPorts().clear();
         getInternalPorts().addAll((Collection<? extends Port>)newValue);
@@ -879,18 +891,6 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
         getExternalPorts().clear();
         getExternalPorts().addAll((Collection<? extends ExternalPort>)newValue);
         return;
-      case RoomPackage.ACTOR_CLASS__SERVICE_ACCESS_POINTS:
-        getServiceAccessPoints().clear();
-        getServiceAccessPoints().addAll((Collection<? extends SAP>)newValue);
-        return;
-      case RoomPackage.ACTOR_CLASS__ATTRIBUTES:
-        getAttributes().clear();
-        getAttributes().addAll((Collection<? extends Attribute>)newValue);
-        return;
-      case RoomPackage.ACTOR_CLASS__SERVICE_IMPLEMENTATIONS:
-        getServiceImplementations().clear();
-        getServiceImplementations().addAll((Collection<? extends ServiceImplementation>)newValue);
-        return;
       case RoomPackage.ACTOR_CLASS__BEHAVIOR_DOCU:
         setBehaviorDocu((Documentation)newValue);
         return;
@@ -898,13 +898,13 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
         getBehaviorAnnotations().clear();
         getBehaviorAnnotations().addAll((Collection<? extends Annotation>)newValue);
         return;
-      case RoomPackage.ACTOR_CLASS__STRUCTORS:
-        getStructors().clear();
-        getStructors().addAll((Collection<? extends ClassStructor>)newValue);
-        return;
       case RoomPackage.ACTOR_CLASS__OPERATIONS:
         getOperations().clear();
         getOperations().addAll((Collection<? extends StandardOperation>)newValue);
+        return;
+      case RoomPackage.ACTOR_CLASS__STRUCTORS:
+        getStructors().clear();
+        getStructors().addAll((Collection<? extends ClassStructor>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -941,20 +941,20 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
       case RoomPackage.ACTOR_CLASS__STRUCTURE_DOCU:
         setStructureDocu((Documentation)null);
         return;
+      case RoomPackage.ACTOR_CLASS__SERVICE_IMPLEMENTATIONS:
+        getServiceImplementations().clear();
+        return;
+      case RoomPackage.ACTOR_CLASS__ATTRIBUTES:
+        getAttributes().clear();
+        return;
+      case RoomPackage.ACTOR_CLASS__SERVICE_ACCESS_POINTS:
+        getServiceAccessPoints().clear();
+        return;
       case RoomPackage.ACTOR_CLASS__INTERNAL_PORTS:
         getInternalPorts().clear();
         return;
       case RoomPackage.ACTOR_CLASS__EXTERNAL_PORTS:
         getExternalPorts().clear();
-        return;
-      case RoomPackage.ACTOR_CLASS__SERVICE_ACCESS_POINTS:
-        getServiceAccessPoints().clear();
-        return;
-      case RoomPackage.ACTOR_CLASS__ATTRIBUTES:
-        getAttributes().clear();
-        return;
-      case RoomPackage.ACTOR_CLASS__SERVICE_IMPLEMENTATIONS:
-        getServiceImplementations().clear();
         return;
       case RoomPackage.ACTOR_CLASS__BEHAVIOR_DOCU:
         setBehaviorDocu((Documentation)null);
@@ -962,11 +962,11 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
       case RoomPackage.ACTOR_CLASS__BEHAVIOR_ANNOTATIONS:
         getBehaviorAnnotations().clear();
         return;
-      case RoomPackage.ACTOR_CLASS__STRUCTORS:
-        getStructors().clear();
-        return;
       case RoomPackage.ACTOR_CLASS__OPERATIONS:
         getOperations().clear();
+        return;
+      case RoomPackage.ACTOR_CLASS__STRUCTORS:
+        getStructors().clear();
         return;
     }
     super.eUnset(featureID);
@@ -996,24 +996,24 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
         return interfacePorts != null && !interfacePorts.isEmpty();
       case RoomPackage.ACTOR_CLASS__STRUCTURE_DOCU:
         return structureDocu != null;
+      case RoomPackage.ACTOR_CLASS__SERVICE_IMPLEMENTATIONS:
+        return serviceImplementations != null && !serviceImplementations.isEmpty();
+      case RoomPackage.ACTOR_CLASS__ATTRIBUTES:
+        return attributes != null && !attributes.isEmpty();
+      case RoomPackage.ACTOR_CLASS__SERVICE_ACCESS_POINTS:
+        return serviceAccessPoints != null && !serviceAccessPoints.isEmpty();
       case RoomPackage.ACTOR_CLASS__INTERNAL_PORTS:
         return internalPorts != null && !internalPorts.isEmpty();
       case RoomPackage.ACTOR_CLASS__EXTERNAL_PORTS:
         return externalPorts != null && !externalPorts.isEmpty();
-      case RoomPackage.ACTOR_CLASS__SERVICE_ACCESS_POINTS:
-        return serviceAccessPoints != null && !serviceAccessPoints.isEmpty();
-      case RoomPackage.ACTOR_CLASS__ATTRIBUTES:
-        return attributes != null && !attributes.isEmpty();
-      case RoomPackage.ACTOR_CLASS__SERVICE_IMPLEMENTATIONS:
-        return serviceImplementations != null && !serviceImplementations.isEmpty();
       case RoomPackage.ACTOR_CLASS__BEHAVIOR_DOCU:
         return behaviorDocu != null;
       case RoomPackage.ACTOR_CLASS__BEHAVIOR_ANNOTATIONS:
         return behaviorAnnotations != null && !behaviorAnnotations.isEmpty();
-      case RoomPackage.ACTOR_CLASS__STRUCTORS:
-        return structors != null && !structors.isEmpty();
       case RoomPackage.ACTOR_CLASS__OPERATIONS:
         return operations != null && !operations.isEmpty();
+      case RoomPackage.ACTOR_CLASS__STRUCTORS:
+        return structors != null && !structors.isEmpty();
     }
     return super.eIsSet(featureID);
   }

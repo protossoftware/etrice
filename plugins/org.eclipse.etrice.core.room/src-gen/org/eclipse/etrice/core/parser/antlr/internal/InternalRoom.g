@@ -1216,17 +1216,17 @@ ruleDataClass returns [EObject current=null]
 ))?((
 (
 		{ 
-	        newCompositeNode(grammarAccess.getDataClassAccess().getAttributesAttributeParserRuleCall_9_0_0()); 
+	        newCompositeNode(grammarAccess.getDataClassAccess().getOperationsStandardOperationParserRuleCall_9_0_0()); 
 	    }
-		lv_attributes_13_0=ruleAttribute		{
+		lv_operations_13_0=ruleStandardOperation		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getDataClassRule());
 	        }
        		add(
        			$current, 
-       			"attributes",
-        		lv_attributes_13_0, 
-        		"Attribute");
+       			"operations",
+        		lv_operations_13_0, 
+        		"StandardOperation");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1254,17 +1254,17 @@ ruleDataClass returns [EObject current=null]
     |(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getDataClassAccess().getOperationsStandardOperationParserRuleCall_9_2_0()); 
+	        newCompositeNode(grammarAccess.getDataClassAccess().getAttributesAttributeParserRuleCall_9_2_0()); 
 	    }
-		lv_operations_15_0=ruleStandardOperation		{
+		lv_attributes_15_0=ruleAttribute		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getDataClassRule());
 	        }
        		add(
        			$current, 
-       			"operations",
-        		lv_operations_15_0, 
-        		"StandardOperation");
+       			"attributes",
+        		lv_attributes_15_0, 
+        		"Attribute");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -2501,17 +2501,17 @@ rulePortClass returns [EObject current=null]
 ))?((
 (
 		{ 
-	        newCompositeNode(grammarAccess.getPortClassAccess().getAttributesAttributeParserRuleCall_3_0_0()); 
+	        newCompositeNode(grammarAccess.getPortClassAccess().getMsgHandlersMessageHandlerParserRuleCall_3_0_0()); 
 	    }
-		lv_attributes_4_0=ruleAttribute		{
+		lv_msgHandlers_4_0=ruleMessageHandler		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getPortClassRule());
 	        }
        		add(
        			$current, 
-       			"attributes",
-        		lv_attributes_4_0, 
-        		"Attribute");
+       			"msgHandlers",
+        		lv_msgHandlers_4_0, 
+        		"MessageHandler");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -2539,17 +2539,17 @@ rulePortClass returns [EObject current=null]
     |(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getPortClassAccess().getMsgHandlersMessageHandlerParserRuleCall_3_2_0()); 
+	        newCompositeNode(grammarAccess.getPortClassAccess().getAttributesAttributeParserRuleCall_3_2_0()); 
 	    }
-		lv_msgHandlers_6_0=ruleMessageHandler		{
+		lv_attributes_6_0=ruleAttribute		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getPortClassRule());
 	        }
        		add(
        			$current, 
-       			"msgHandlers",
-        		lv_msgHandlers_6_0, 
-        		"MessageHandler");
+       			"attributes",
+        		lv_attributes_6_0, 
+        		"Attribute");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -2934,17 +2934,17 @@ ruleActorClass returns [EObject current=null]
 ((
 (
 		{ 
-	        newCompositeNode(grammarAccess.getActorClassAccess().getInterfacePortsPortParserRuleCall_7_2_0_0()); 
+	        newCompositeNode(grammarAccess.getActorClassAccess().getServiceProvisionPointsSPPParserRuleCall_7_2_0_0()); 
 	    }
-		lv_interfacePorts_12_0=rulePort		{
+		lv_serviceProvisionPoints_12_0=ruleSPP		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getActorClassRule());
 	        }
        		add(
        			$current, 
-       			"interfacePorts",
-        		lv_interfacePorts_12_0, 
-        		"Port");
+       			"serviceProvisionPoints",
+        		lv_serviceProvisionPoints_12_0, 
+        		"SPP");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -2953,17 +2953,17 @@ ruleActorClass returns [EObject current=null]
     |(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getActorClassAccess().getServiceProvisionPointsSPPParserRuleCall_7_2_1_0()); 
+	        newCompositeNode(grammarAccess.getActorClassAccess().getInterfacePortsPortParserRuleCall_7_2_1_0()); 
 	    }
-		lv_serviceProvisionPoints_13_0=ruleSPP		{
+		lv_interfacePorts_13_0=rulePort		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getActorClassRule());
 	        }
        		add(
        			$current, 
-       			"serviceProvisionPoints",
-        		lv_serviceProvisionPoints_13_0, 
-        		"SPP");
+       			"interfacePorts",
+        		lv_interfacePorts_13_0, 
+        		"Port");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -3067,17 +3067,17 @@ ruleActorClass returns [EObject current=null]
 ))?((
 (
 		{ 
-	        newCompositeNode(grammarAccess.getActorClassAccess().getInternalPortsPortParserRuleCall_8_6_0_0()); 
+	        newCompositeNode(grammarAccess.getActorClassAccess().getConnectionsLayerConnectionParserRuleCall_8_6_0_0()); 
 	    }
-		lv_internalPorts_24_0=rulePort		{
+		lv_connections_24_0=ruleLayerConnection		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getActorClassRule());
 	        }
        		add(
        			$current, 
-       			"internalPorts",
-        		lv_internalPorts_24_0, 
-        		"Port");
+       			"connections",
+        		lv_connections_24_0, 
+        		"LayerConnection");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -3086,17 +3086,17 @@ ruleActorClass returns [EObject current=null]
     |(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getActorClassAccess().getExternalPortsExternalPortParserRuleCall_8_6_1_0()); 
+	        newCompositeNode(grammarAccess.getActorClassAccess().getBindingsBindingParserRuleCall_8_6_1_0()); 
 	    }
-		lv_externalPorts_25_0=ruleExternalPort		{
+		lv_bindings_25_0=ruleBinding		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getActorClassRule());
 	        }
        		add(
        			$current, 
-       			"externalPorts",
-        		lv_externalPorts_25_0, 
-        		"ExternalPort");
+       			"bindings",
+        		lv_bindings_25_0, 
+        		"Binding");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -3105,17 +3105,17 @@ ruleActorClass returns [EObject current=null]
     |(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getActorClassAccess().getServiceAccessPointsSAPParserRuleCall_8_6_2_0()); 
+	        newCompositeNode(grammarAccess.getActorClassAccess().getServiceImplementationsServiceImplementationParserRuleCall_8_6_2_0()); 
 	    }
-		lv_serviceAccessPoints_26_0=ruleSAP		{
+		lv_serviceImplementations_26_0=ruleServiceImplementation		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getActorClassRule());
 	        }
        		add(
        			$current, 
-       			"serviceAccessPoints",
-        		lv_serviceAccessPoints_26_0, 
-        		"SAP");
+       			"serviceImplementations",
+        		lv_serviceImplementations_26_0, 
+        		"ServiceImplementation");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -3162,17 +3162,17 @@ ruleActorClass returns [EObject current=null]
     |(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getActorClassAccess().getServiceImplementationsServiceImplementationParserRuleCall_8_6_5_0()); 
+	        newCompositeNode(grammarAccess.getActorClassAccess().getServiceAccessPointsSAPParserRuleCall_8_6_5_0()); 
 	    }
-		lv_serviceImplementations_29_0=ruleServiceImplementation		{
+		lv_serviceAccessPoints_29_0=ruleSAP		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getActorClassRule());
 	        }
        		add(
        			$current, 
-       			"serviceImplementations",
-        		lv_serviceImplementations_29_0, 
-        		"ServiceImplementation");
+       			"serviceAccessPoints",
+        		lv_serviceAccessPoints_29_0, 
+        		"SAP");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -3181,17 +3181,17 @@ ruleActorClass returns [EObject current=null]
     |(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getActorClassAccess().getBindingsBindingParserRuleCall_8_6_6_0()); 
+	        newCompositeNode(grammarAccess.getActorClassAccess().getInternalPortsPortParserRuleCall_8_6_6_0()); 
 	    }
-		lv_bindings_30_0=ruleBinding		{
+		lv_internalPorts_30_0=rulePort		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getActorClassRule());
 	        }
        		add(
        			$current, 
-       			"bindings",
-        		lv_bindings_30_0, 
-        		"Binding");
+       			"internalPorts",
+        		lv_internalPorts_30_0, 
+        		"Port");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -3200,17 +3200,17 @@ ruleActorClass returns [EObject current=null]
     |(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getActorClassAccess().getConnectionsLayerConnectionParserRuleCall_8_6_7_0()); 
+	        newCompositeNode(grammarAccess.getActorClassAccess().getExternalPortsExternalPortParserRuleCall_8_6_7_0()); 
 	    }
-		lv_connections_31_0=ruleLayerConnection		{
+		lv_externalPorts_31_0=ruleExternalPort		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getActorClassRule());
 	        }
        		add(
        			$current, 
-       			"connections",
-        		lv_connections_31_0, 
-        		"LayerConnection");
+       			"externalPorts",
+        		lv_externalPorts_31_0, 
+        		"ExternalPort");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -3266,17 +3266,17 @@ ruleActorClass returns [EObject current=null]
 )*((
 (
 		{ 
-	        newCompositeNode(grammarAccess.getActorClassAccess().getStructorsClassStructorParserRuleCall_9_4_0_0()); 
+	        newCompositeNode(grammarAccess.getActorClassAccess().getOperationsStandardOperationParserRuleCall_9_4_0_0()); 
 	    }
-		lv_structors_37_0=ruleClassStructor		{
+		lv_operations_37_0=ruleStandardOperation		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getActorClassRule());
 	        }
        		add(
        			$current, 
-       			"structors",
-        		lv_structors_37_0, 
-        		"ClassStructor");
+       			"operations",
+        		lv_operations_37_0, 
+        		"StandardOperation");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -3285,17 +3285,17 @@ ruleActorClass returns [EObject current=null]
     |(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getActorClassAccess().getOperationsStandardOperationParserRuleCall_9_4_1_0()); 
+	        newCompositeNode(grammarAccess.getActorClassAccess().getStructorsClassStructorParserRuleCall_9_4_1_0()); 
 	    }
-		lv_operations_38_0=ruleStandardOperation		{
+		lv_structors_38_0=ruleClassStructor		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getActorClassRule());
 	        }
        		add(
        			$current, 
-       			"operations",
-        		lv_operations_38_0, 
-        		"StandardOperation");
+       			"structors",
+        		lv_structors_38_0, 
+        		"ClassStructor");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -3783,17 +3783,17 @@ ruleLogicalSystem returns [EObject current=null]
 )*((
 (
 		{ 
-	        newCompositeNode(grammarAccess.getLogicalSystemAccess().getSubSystemsSubSystemRefParserRuleCall_5_0_0()); 
+	        newCompositeNode(grammarAccess.getLogicalSystemAccess().getConnectionsLayerConnectionParserRuleCall_5_0_0()); 
 	    }
-		lv_subSystems_5_0=ruleSubSystemRef		{
+		lv_connections_5_0=ruleLayerConnection		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getLogicalSystemRule());
 	        }
        		add(
        			$current, 
-       			"subSystems",
-        		lv_subSystems_5_0, 
-        		"SubSystemRef");
+       			"connections",
+        		lv_connections_5_0, 
+        		"LayerConnection");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -3821,17 +3821,17 @@ ruleLogicalSystem returns [EObject current=null]
     |(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getLogicalSystemAccess().getConnectionsLayerConnectionParserRuleCall_5_2_0()); 
+	        newCompositeNode(grammarAccess.getLogicalSystemAccess().getSubSystemsSubSystemRefParserRuleCall_5_2_0()); 
 	    }
-		lv_connections_7_0=ruleLayerConnection		{
+		lv_subSystems_7_0=ruleSubSystemRef		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getLogicalSystemRule());
 	        }
        		add(
        			$current, 
-       			"connections",
-        		lv_connections_7_0, 
-        		"LayerConnection");
+       			"subSystems",
+        		lv_subSystems_7_0, 
+        		"SubSystemRef");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -4074,17 +4074,17 @@ ruleSubSystemClass returns [EObject current=null]
 ))?((
 (
 		{ 
-	        newCompositeNode(grammarAccess.getSubSystemClassAccess().getRelayPortsPortParserRuleCall_8_0_0()); 
+	        newCompositeNode(grammarAccess.getSubSystemClassAccess().getActorInstanceMappingsActorInstanceMappingParserRuleCall_8_0_0()); 
 	    }
-		lv_relayPorts_11_0=rulePort		{
+		lv_actorInstanceMappings_11_0=ruleActorInstanceMapping		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getSubSystemClassRule());
 	        }
        		add(
        			$current, 
-       			"relayPorts",
-        		lv_relayPorts_11_0, 
-        		"Port");
+       			"actorInstanceMappings",
+        		lv_actorInstanceMappings_11_0, 
+        		"ActorInstanceMapping");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -4093,17 +4093,17 @@ ruleSubSystemClass returns [EObject current=null]
     |(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getSubSystemClassAccess().getServiceProvisionPointsSPPParserRuleCall_8_1_0()); 
+	        newCompositeNode(grammarAccess.getSubSystemClassAccess().getThreadsLogicalThreadParserRuleCall_8_1_0()); 
 	    }
-		lv_serviceProvisionPoints_12_0=ruleSPP		{
+		lv_threads_12_0=ruleLogicalThread		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getSubSystemClassRule());
 	        }
        		add(
        			$current, 
-       			"serviceProvisionPoints",
-        		lv_serviceProvisionPoints_12_0, 
-        		"SPP");
+       			"threads",
+        		lv_threads_12_0, 
+        		"LogicalThread");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -4112,17 +4112,17 @@ ruleSubSystemClass returns [EObject current=null]
     |(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getSubSystemClassAccess().getActorRefsActorRefParserRuleCall_8_2_0()); 
+	        newCompositeNode(grammarAccess.getSubSystemClassAccess().getConnectionsLayerConnectionParserRuleCall_8_2_0()); 
 	    }
-		lv_actorRefs_13_0=ruleActorRef		{
+		lv_connections_13_0=ruleLayerConnection		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getSubSystemClassRule());
 	        }
        		add(
        			$current, 
-       			"actorRefs",
-        		lv_actorRefs_13_0, 
-        		"ActorRef");
+       			"connections",
+        		lv_connections_13_0, 
+        		"LayerConnection");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -4150,17 +4150,17 @@ ruleSubSystemClass returns [EObject current=null]
     |(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getSubSystemClassAccess().getConnectionsLayerConnectionParserRuleCall_8_4_0()); 
+	        newCompositeNode(grammarAccess.getSubSystemClassAccess().getActorRefsActorRefParserRuleCall_8_4_0()); 
 	    }
-		lv_connections_15_0=ruleLayerConnection		{
+		lv_actorRefs_15_0=ruleActorRef		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getSubSystemClassRule());
 	        }
        		add(
        			$current, 
-       			"connections",
-        		lv_connections_15_0, 
-        		"LayerConnection");
+       			"actorRefs",
+        		lv_actorRefs_15_0, 
+        		"ActorRef");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -4169,17 +4169,17 @@ ruleSubSystemClass returns [EObject current=null]
     |(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getSubSystemClassAccess().getThreadsLogicalThreadParserRuleCall_8_5_0()); 
+	        newCompositeNode(grammarAccess.getSubSystemClassAccess().getServiceProvisionPointsSPPParserRuleCall_8_5_0()); 
 	    }
-		lv_threads_16_0=ruleLogicalThread		{
+		lv_serviceProvisionPoints_16_0=ruleSPP		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getSubSystemClassRule());
 	        }
        		add(
        			$current, 
-       			"threads",
-        		lv_threads_16_0, 
-        		"LogicalThread");
+       			"serviceProvisionPoints",
+        		lv_serviceProvisionPoints_16_0, 
+        		"SPP");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -4188,17 +4188,17 @@ ruleSubSystemClass returns [EObject current=null]
     |(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getSubSystemClassAccess().getActorInstanceMappingsActorInstanceMappingParserRuleCall_8_6_0()); 
+	        newCompositeNode(grammarAccess.getSubSystemClassAccess().getRelayPortsPortParserRuleCall_8_6_0()); 
 	    }
-		lv_actorInstanceMappings_17_0=ruleActorInstanceMapping		{
+		lv_relayPorts_17_0=rulePort		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getSubSystemClassRule());
 	        }
        		add(
        			$current, 
-       			"actorInstanceMappings",
-        		lv_actorInstanceMappings_17_0, 
-        		"ActorInstanceMapping");
+       			"relayPorts",
+        		lv_relayPorts_17_0, 
+        		"Port");
 	        afterParserOrEnumRuleCall();
 	    }
 

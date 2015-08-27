@@ -80,9 +80,9 @@ DataClass:
 		('usercode2' userCode2=DetailCode)?
 		('usercode3' userCode3=DetailCode)?
 		(
-			attributes+=Attribute |
+			operations+=StandardOperation |
 			structors+=ClassStructor |
-			operations+=StandardOperation
+			attributes+=Attribute
 		)*
 	'}';
 	
@@ -151,9 +151,9 @@ PortClass:
 	'{'
 		('usercode' userCode=DetailCode)?
 		(
-			attributes+=Attribute |
+			msgHandlers+=MessageHandler |
 			operations+=PortOperation |
-			msgHandlers+=MessageHandler
+			attributes+=Attribute
 		)*
 	'}';
 
@@ -187,8 +187,8 @@ ActorClass:
 		annotations+=Annotation*
 		('Interface' '{'
 			(
-				interfacePorts+=Port |
-				serviceProvisionPoints+=SPP
+				serviceProvisionPoints+=SPP |
+				interfacePorts+=Port
 			)*
 		'}')?
 		('Structure' (structureDocu=Documentation)? '{'
@@ -196,21 +196,22 @@ ActorClass:
 			('usercode2' userCode2=DetailCode)?
 			('usercode3' userCode3=DetailCode)?
 			(
-				internalPorts+=Port |
-				externalPorts+=ExternalPort |
-				serviceAccessPoints+=SAP |
+				// workaround: reverse the order for serializer
+				connections+=LayerConnection |
+				bindings+=Binding |
+				serviceImplementations+=ServiceImplementation |
 				attributes+=Attribute |
 				actorRefs+=ActorRef |
-				serviceImplementations+=ServiceImplementation |
-				bindings+=Binding |
-				connections+=LayerConnection
+				serviceAccessPoints+=SAP |
+				internalPorts+=Port |
+				externalPorts+=ExternalPort
 			)*
 		'}')?
 		('Behavior' (behaviorDocu=Documentation)? '{'
 			behaviorAnnotations+=Annotation*
 			(
-				structors+=ClassStructor |
-				operations+=StandardOperation
+				operations+=StandardOperation |
+				structors+=ClassStructor
 			)*
 			(stateMachine=StateMachine)?
 		'}')?
@@ -235,9 +236,9 @@ LogicalSystem:
 	'LogicalSystem' name=ID (docu=Documentation)? '{'
 		annotations+=Annotation*
 		(
-			subSystems+=SubSystemRef |
+			connections+=LayerConnection |
 			bindings+=Binding |
-			connections+=LayerConnection
+			subSystems+=SubSystemRef
 		)*
 	'}';
 
@@ -253,13 +254,14 @@ SubSystemClass:
 		('usercode2' userCode2=DetailCode)?
 		('usercode3' userCode3=DetailCode)?
 		(
-			relayPorts+=Port |
-			serviceProvisionPoints+=SPP |
-			actorRefs+=ActorRef |
-			bindings+=Binding |
-			connections+=LayerConnection |
+			// workaround: reverse the order for serializer
+			actorInstanceMappings+=ActorInstanceMapping |
 			threads+=LogicalThread |
-			actorInstanceMappings+=ActorInstanceMapping
+			connections+=LayerConnection |
+			bindings+=Binding |
+			actorRefs+=ActorRef |
+			serviceProvisionPoints+=SPP |
+			relayPorts+=Port
 		)*
 	'}';
 

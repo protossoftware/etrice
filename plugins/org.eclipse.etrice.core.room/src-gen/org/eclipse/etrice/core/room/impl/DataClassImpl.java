@@ -39,9 +39,9 @@ import org.eclipse.etrice.core.room.StandardOperation;
  *   <li>{@link org.eclipse.etrice.core.room.impl.DataClassImpl#getUserCode1 <em>User Code1</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.DataClassImpl#getUserCode2 <em>User Code2</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.DataClassImpl#getUserCode3 <em>User Code3</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.room.impl.DataClassImpl#getAttributes <em>Attributes</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.room.impl.DataClassImpl#getStructors <em>Structors</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.DataClassImpl#getOperations <em>Operations</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.DataClassImpl#getStructors <em>Structors</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.DataClassImpl#getAttributes <em>Attributes</em>}</li>
  * </ul>
  * </p>
  *
@@ -100,14 +100,14 @@ public class DataClassImpl extends ComplexTypeImpl implements DataClass
   protected DetailCode userCode3;
 
   /**
-   * The cached value of the '{@link #getAttributes() <em>Attributes</em>}' containment reference list.
+   * The cached value of the '{@link #getOperations() <em>Operations</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getAttributes()
+   * @see #getOperations()
    * @generated
    * @ordered
    */
-  protected EList<Attribute> attributes;
+  protected EList<StandardOperation> operations;
 
   /**
    * The cached value of the '{@link #getStructors() <em>Structors</em>}' containment reference list.
@@ -120,14 +120,14 @@ public class DataClassImpl extends ComplexTypeImpl implements DataClass
   protected EList<ClassStructor> structors;
 
   /**
-   * The cached value of the '{@link #getOperations() <em>Operations</em>}' containment reference list.
+   * The cached value of the '{@link #getAttributes() <em>Attributes</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getOperations()
+   * @see #getAttributes()
    * @generated
    * @ordered
    */
-  protected EList<StandardOperation> operations;
+  protected EList<Attribute> attributes;
 
   /**
    * <!-- begin-user-doc -->
@@ -356,13 +356,13 @@ public class DataClassImpl extends ComplexTypeImpl implements DataClass
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Attribute> getAttributes()
+  public EList<StandardOperation> getOperations()
   {
-    if (attributes == null)
+    if (operations == null)
     {
-      attributes = new EObjectContainmentEList<Attribute>(Attribute.class, this, RoomPackage.DATA_CLASS__ATTRIBUTES);
+      operations = new EObjectContainmentEList<StandardOperation>(StandardOperation.class, this, RoomPackage.DATA_CLASS__OPERATIONS);
     }
-    return attributes;
+    return operations;
   }
 
   /**
@@ -384,13 +384,13 @@ public class DataClassImpl extends ComplexTypeImpl implements DataClass
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<StandardOperation> getOperations()
+  public EList<Attribute> getAttributes()
   {
-    if (operations == null)
+    if (attributes == null)
     {
-      operations = new EObjectContainmentEList<StandardOperation>(StandardOperation.class, this, RoomPackage.DATA_CLASS__OPERATIONS);
+      attributes = new EObjectContainmentEList<Attribute>(Attribute.class, this, RoomPackage.DATA_CLASS__ATTRIBUTES);
     }
-    return operations;
+    return attributes;
   }
 
   /**
@@ -411,12 +411,12 @@ public class DataClassImpl extends ComplexTypeImpl implements DataClass
         return basicSetUserCode2(null, msgs);
       case RoomPackage.DATA_CLASS__USER_CODE3:
         return basicSetUserCode3(null, msgs);
-      case RoomPackage.DATA_CLASS__ATTRIBUTES:
-        return ((InternalEList<?>)getAttributes()).basicRemove(otherEnd, msgs);
-      case RoomPackage.DATA_CLASS__STRUCTORS:
-        return ((InternalEList<?>)getStructors()).basicRemove(otherEnd, msgs);
       case RoomPackage.DATA_CLASS__OPERATIONS:
         return ((InternalEList<?>)getOperations()).basicRemove(otherEnd, msgs);
+      case RoomPackage.DATA_CLASS__STRUCTORS:
+        return ((InternalEList<?>)getStructors()).basicRemove(otherEnd, msgs);
+      case RoomPackage.DATA_CLASS__ATTRIBUTES:
+        return ((InternalEList<?>)getAttributes()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -442,12 +442,12 @@ public class DataClassImpl extends ComplexTypeImpl implements DataClass
         return getUserCode2();
       case RoomPackage.DATA_CLASS__USER_CODE3:
         return getUserCode3();
-      case RoomPackage.DATA_CLASS__ATTRIBUTES:
-        return getAttributes();
-      case RoomPackage.DATA_CLASS__STRUCTORS:
-        return getStructors();
       case RoomPackage.DATA_CLASS__OPERATIONS:
         return getOperations();
+      case RoomPackage.DATA_CLASS__STRUCTORS:
+        return getStructors();
+      case RoomPackage.DATA_CLASS__ATTRIBUTES:
+        return getAttributes();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -479,17 +479,17 @@ public class DataClassImpl extends ComplexTypeImpl implements DataClass
       case RoomPackage.DATA_CLASS__USER_CODE3:
         setUserCode3((DetailCode)newValue);
         return;
-      case RoomPackage.DATA_CLASS__ATTRIBUTES:
-        getAttributes().clear();
-        getAttributes().addAll((Collection<? extends Attribute>)newValue);
+      case RoomPackage.DATA_CLASS__OPERATIONS:
+        getOperations().clear();
+        getOperations().addAll((Collection<? extends StandardOperation>)newValue);
         return;
       case RoomPackage.DATA_CLASS__STRUCTORS:
         getStructors().clear();
         getStructors().addAll((Collection<? extends ClassStructor>)newValue);
         return;
-      case RoomPackage.DATA_CLASS__OPERATIONS:
-        getOperations().clear();
-        getOperations().addAll((Collection<? extends StandardOperation>)newValue);
+      case RoomPackage.DATA_CLASS__ATTRIBUTES:
+        getAttributes().clear();
+        getAttributes().addAll((Collection<? extends Attribute>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -520,14 +520,14 @@ public class DataClassImpl extends ComplexTypeImpl implements DataClass
       case RoomPackage.DATA_CLASS__USER_CODE3:
         setUserCode3((DetailCode)null);
         return;
-      case RoomPackage.DATA_CLASS__ATTRIBUTES:
-        getAttributes().clear();
+      case RoomPackage.DATA_CLASS__OPERATIONS:
+        getOperations().clear();
         return;
       case RoomPackage.DATA_CLASS__STRUCTORS:
         getStructors().clear();
         return;
-      case RoomPackage.DATA_CLASS__OPERATIONS:
-        getOperations().clear();
+      case RoomPackage.DATA_CLASS__ATTRIBUTES:
+        getAttributes().clear();
         return;
     }
     super.eUnset(featureID);
@@ -553,12 +553,12 @@ public class DataClassImpl extends ComplexTypeImpl implements DataClass
         return userCode2 != null;
       case RoomPackage.DATA_CLASS__USER_CODE3:
         return userCode3 != null;
-      case RoomPackage.DATA_CLASS__ATTRIBUTES:
-        return attributes != null && !attributes.isEmpty();
-      case RoomPackage.DATA_CLASS__STRUCTORS:
-        return structors != null && !structors.isEmpty();
       case RoomPackage.DATA_CLASS__OPERATIONS:
         return operations != null && !operations.isEmpty();
+      case RoomPackage.DATA_CLASS__STRUCTORS:
+        return structors != null && !structors.isEmpty();
+      case RoomPackage.DATA_CLASS__ATTRIBUTES:
+        return attributes != null && !attributes.isEmpty();
     }
     return super.eIsSet(featureID);
   }
