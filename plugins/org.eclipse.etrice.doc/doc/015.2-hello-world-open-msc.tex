@@ -1,16 +1,11 @@
 \subsection{Open the Message Sequence Chart}
 
-For debugging and learning purposes, the application produced a Message Sequence Chart and wrote it to a file. Open the file \emph{subSysRef1\_Async.seq} or \emph{msc.seq} in the folder \emph{HelloWorld/tmp/log/} using the tool Trace2UML. Create the path if not already there.
+After termination, we can inspect the behavior of our application. It is recorded in the form of a MSC (Message Sequence Chart) and can now be used for debugging or documentation purpose. Open \emph{msc.seq} or \emph{subSystemRef\_Async.seq} in the folder \emph{log} using the tool Trace2UML.
 
-Trace2UML is an open source MSC viewer and can be obtained here:
-\begin{itemize}
-\item \href{http://trace2uml.tigris.org/}{Trace2UML project home and download of windows version} 
-\item \href{http://apt.astade.de/}{download of the Linux package of the Astade UML tool which contains Trace2UML}
-\end{itemize}
-After opening the file, you should see something like this:
+\begin{quote}
+	If Trace2UML (Open Source tool) is not already installed, it can be obtained here: \href{http://trace2uml.tigris.org/servlets/ProjectDocumentList?folderID=6208}{Windows download site} or \href{http://apt.astade.de/}{Linux package of the Astade UML tool containing Trace2UML}
+\end{quote}
 
-\includegraphics[width=0.6\textwidth]{images/015-HelloWorld09.png}
-% !images/015-HelloWorld09.png!
 
-The Actor with the instance path \emph{/LogSys1/subSysRef1/actorRef1} is in the state \emph{state0}. 
-This is the simplest possible MSC. The MSCs for further tutorials will contain more information.
+Yet the MSC is nearly empty having not recorded any interaction between actors. It shows that  \emph{topActor} (full instance path \emph{/LogSys/subSystemRef/topActor}) has taken \emph{helloState}. In the next PingPong tutorial we are going to create a more sophisticated and vivid \eTrice application introducing actor building blocks and message protocols.
+

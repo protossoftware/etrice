@@ -89,7 +89,7 @@ Feature Inheritance
 		\begin{itemize}
 			\item early or late resolve - if element is overriden, which one should super class use by default - own or override ?
 			\item replacing or refinement - ignore inherited code or prepend inherited code automatically ?
-			\item (non_)accessible - if element is overriden, is super class' original accessible from sub class ? e.g. super.foo()
+			\item (non\_)accessible - if element is overriden, is super class' original accessible from sub class ? e.g. super.foo()
 			\item implict or explicit - does it use distinct model element / keyword?
 		\end{itemize}
 		
@@ -99,12 +99,12 @@ Feature Inheritance
 		c++ dtor <==> late refinement\\
 		
 		eTrice override of model elements:\\
-		Operations (C generation)  <==> non_accessible explicit late replacing\\
+		Operations (C generation)  <==> non\_accessible explicit late replacing\\
 		Operations (Java generation) <==> accessible explicit late replacing\\
-		State and Transitions <==> non_accessible explicit late refinement\\
-		ctor/dtor <==> non_accessible implicit late refinement\\
-		StateMachine <==> non_accessible implicit late refinement\\
-		UserCode <==> non_accessible implicit late refinement\\
+		State and Transitions <==> non\_accessible explicit late refinement\\
+		ctor/dtor <==> non\_accessible implicit late refinement\\
+		StateMachine <==> non\_accessible implicit late refinement\\
+		UserCode <==> non\_accessible implicit late refinement\\
 	'''
 	example '''
 		\begin{lstlisting}[language=ROOM]

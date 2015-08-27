@@ -8,6 +8,7 @@
 package org.eclipse.etrice.generator.ui.wizard;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
@@ -53,6 +54,7 @@ public class EmptyProjectWizard extends Wizard implements INewWizard {
 	protected IPath sourceGenPath;
 	protected IProject project;
 	protected IProject runtimeProject;
+	protected IProject modellibProject;
 	protected String initialProjectName;
 	protected URI modelURI;
 	protected RoomValidationHelper roomValidator;
@@ -69,6 +71,7 @@ public class EmptyProjectWizard extends Wizard implements INewWizard {
 
 		IWorkspace workspace = ResourcesPlugin.getWorkspace();
 		runtimeProject = workspace.getRoot().getProject("org.eclipse.etrice.runtime.java");
+		modellibProject = workspace.getRoot().getProject("org.eclipse.etrice.modellib.java");
 		
 		roomValidator = RoomValidationHelper.createInstance();
 	}
@@ -117,8 +120,13 @@ public class EmptyProjectWizard extends Wizard implements INewWizard {
 			@Override
 			protected void execute(IProgressMonitor progressMonitor) {
 				try {
-					if (!config.useJDTBuild())
-						runtimeProject = null;
+					List<IProject> referencedProjects = new ArrayList<IProject>();
+					if (config.useJDTBuild()){
+						if(runtimeProject != null)
+							referencedProjects.add(runtimeProject);
+						if(modellibProject != null)
+							referencedProjects.add(modellibProject);
+					}
 					
 					ArrayList<String> natures = new ArrayList<String>(ProjectCreator.getCommonNatureIDs());
 					if (config.useMVNBuild())
@@ -143,7 +151,7 @@ public class EmptyProjectWizard extends Wizard implements INewWizard {
 							new Path(sourcePath.toString()),
 							new Path(sourceGenPath.toString()),
 							modelProjectURI,
-							runtimeProject,
+							referencedProjects,
 							natures,
 							builders,
 							pathEntries,
@@ -160,15 +168,15 @@ public class EmptyProjectWizard extends Wizard implements INewWizard {
 					ProjectCreator.createModel(modelURI,
 							baseName);
 
-					URI physModelURI = URI.createPlatformResourceURI("/"
-							+ baseName
-							+ "/model/"+baseName+".etphys", true);
-					ProjectCreator.createPhysicalModel(physModelURI,
-							baseName);
+//					URI physModelURI = URI.createPlatformResourceURI("/"
+//							+ baseName
+//							+ "/model/"+baseName+".etphys", true);
+//					ProjectCreator.createPhysicalModel(physModelURI,
+//							baseName);
 
 					URI mapModelURI = URI.createPlatformResourceURI("/"
 							+ baseName
-							+ "/model/"+baseName+".etmap", true);
+							+ "/model/Mapping.etmap", true);
 					ProjectCreator.createMappingModel(mapModelURI,
 							baseName);
 					
@@ -177,7 +185,7 @@ public class EmptyProjectWizard extends Wizard implements INewWizard {
 							baseName);
 
 					ProjectCreator.createLaunchGeneratorConfig(URI.createPlatformResourceURI("/"
-							+baseName+"/gen_"+baseName+".launch", true),
+							+baseName+"/generate_"+baseName+".launch", true),
 							"java",
 							"/"+baseName+"/model",
 							baseName,
@@ -187,7 +195,7 @@ public class EmptyProjectWizard extends Wizard implements INewWizard {
 							+baseName+"/run_"+baseName+".launch", true),
 							baseName,
 							baseName,
-							"Node_nodeRef1_mainRunner");
+							"Node_node_subSystemRefRunner");
 
 					ProjectCreator.findOrCreateContainer(new Path("/"
 							+ baseName + "/log"),
@@ -198,7 +206,7 @@ public class EmptyProjectWizard extends Wizard implements INewWizard {
 								+baseName+"/pom.xml", true),
 								baseName,
 								baseName,
-								"Node_nodeRef1_subSysRef1Runner");
+								"Node_node_subSystemRefRunner");
 						ProjectCreator.createMavenBuilder(URI.createPlatformResourceURI("/"
 								+baseName+"/build_"+baseName+".launch", true),
 								baseName);

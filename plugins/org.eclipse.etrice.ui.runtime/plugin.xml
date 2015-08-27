@@ -242,13 +242,16 @@
 	
 	<!-- ========= org.eclipse.etrice.template.c ========= -->
 	<extension point="org.eclipse.ui.newWizards">
-		<wizard	id="org.eclipse.etrice.ui.runtime.TemplateCWizard" 
-			name="eTrice C Template Project" 
-			class="org.eclipse.etrice.ui.runtime.NonDeletingWizardInstaller" 
-			category="org.eclipse.etrice.core.ui.wizardCategory/org.eclipse.etrice.core.ui.wizardCCategory"
-			icon="icons/genproject.gif" 
-			project="true">
-			<description>eTrice C tutorials accompanying the online help</description>
+		<wizard
+        category="org.eclipse.etrice.core.ui.wizardCategory/org.eclipse.etrice.core.ui.wizardCCategory"
+        class="org.eclipse.etrice.ui.runtime.NonDeletingWizardInstaller"
+        finalPerspective="org.eclipse.cdt.ui.CPerspective"
+        icon="icons/genproject.gif"
+        id="org.eclipse.etrice.ui.runtime.TemplateCWizard"
+        name="eTrice C Template Project"
+        preferredPerspectives="org.eclipse.cdt.ui.CPerspective"
+        project="true">
+			<description>eTrice C template project</description>
 		</wizard>
 	</extension>
 	<extension point="org.eclipse.emf.common.ui.examples">
@@ -267,6 +270,9 @@
 				description="eTrice ModelLib for C"
 				name="org.eclipse.etrice.modellib.c">
 			</projectDescriptor>
+   <fileToOpen
+         location="org.eclipse.etrice.template.c/model/TemplateModel.room">
+   </fileToOpen>
 		</example>
 	</extension>			 
 </plugin>

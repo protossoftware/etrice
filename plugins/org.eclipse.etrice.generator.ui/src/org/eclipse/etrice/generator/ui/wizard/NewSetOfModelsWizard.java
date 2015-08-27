@@ -90,9 +90,9 @@ public class NewSetOfModelsWizard extends Wizard implements INewWizard {
 					modelURI = URI.createPlatformResourceURI(file.toString(), true);
 					ProjectCreator.createModel(modelURI, baseName);
 
-					file = page.getPath().append(baseName).addFileExtension("etphys");
-					URI physModelURI = URI.createPlatformResourceURI(file.toString(), true);
-					ProjectCreator.createPhysicalModel(physModelURI, baseName);
+//					file = page.getPath().append(baseName).addFileExtension("etphys");
+//					URI physModelURI = URI.createPlatformResourceURI(file.toString(), true);
+//					ProjectCreator.createPhysicalModel(physModelURI, baseName);
 
 					file = page.getPath().append(baseName).addFileExtension("etmap");
 					URI mapModelURI = URI.createPlatformResourceURI(file.toString(), true);

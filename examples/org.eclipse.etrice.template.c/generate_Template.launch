@@ -7,7 +7,7 @@
 <booleanAttribute key="Lib" value="false"/>
 <booleanAttribute key="MSC" value="true"/>
 <listAttribute key="ModelFiles">
-<listEntry value="${workspace_loc:/org.eclipse.etrice.template.c/model/PingPongMapping.etmap}"/>
+<listEntry value="${workspace_loc:/org.eclipse.etrice.template.c/model/Mapping.etmap}"/>
 </listAttribute>
 <booleanAttribute key="OverrideDirectories" value="false"/>
 <booleanAttribute key="SaveGenModel" value="false"/>

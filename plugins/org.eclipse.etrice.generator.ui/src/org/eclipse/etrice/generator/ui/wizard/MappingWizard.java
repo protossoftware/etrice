@@ -34,6 +34,7 @@ import org.eclipse.xtext.resource.XtextResource;
 
 import com.google.inject.Injector;
 
+@Deprecated
 public class MappingWizard extends Wizard implements INewWizard {
 
 	private static final String title = "Create a physical mapping for a ROOM model";
@@ -72,38 +73,38 @@ public class MappingWizard extends Wizard implements INewWizard {
 
 	@Override
 	public boolean performFinish() {
-		IFile mappingModelFile = savePage.getMappingFilePath();
-		IFile physModelFile = savePage.getPhysModelPath();
-
-		Resource etPhysRes = modelPage.getPhysModelResource();
-		URI etPhysURI = URI.createPlatformResourceURI(physModelFile.getFullPath().toString(), true);
-		etPhysRes.setURI(etPhysURI);
-
-		Resource etMapRes = (XtextResource) modelPage.getMappingModelResource(etPhysURI.toString());
-		etMapRes.setURI(URI.createPlatformResourceURI(mappingModelFile.getFullPath().toString(), true));
-
-		SaveOptions options = SaveOptions.newBuilder().format().noValidation().getOptions();
-		try {
-			etPhysRes.save(options.toOptionsMap());
-			etMapRes.save(options.toOptionsMap());
-		}
-		catch (IOException e) {
-			e.printStackTrace();
-			return true;
-		}
-
-		IWorkbenchWindow dw = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
-		try {
-			if (dw != null) {
-				IWorkbenchPage page = dw.getActivePage();
-				if (page != null) {
-					IDE.openEditor(page, physModelFile, true);
-					IDE.openEditor(page, mappingModelFile, true);
-				}
-			}
-		}
-		catch (PartInitException e) {
-		}
+//		IFile mappingModelFile = savePage.getMappingFilePath();
+//		IFile physModelFile = savePage.getPhysModelPath();
+//
+//		Resource etPhysRes = modelPage.getPhysModelResource();
+//		URI etPhysURI = URI.createPlatformResourceURI(physModelFile.getFullPath().toString(), true);
+//		etPhysRes.setURI(etPhysURI);
+//
+//		Resource etMapRes = (XtextResource) modelPage.getMappingModelResource(etPhysURI.toString());
+//		etMapRes.setURI(URI.createPlatformResourceURI(mappingModelFile.getFullPath().toString(), true));
+//
+//		SaveOptions options = SaveOptions.newBuilder().format().noValidation().getOptions();
+//		try {
+//			etPhysRes.save(options.toOptionsMap());
+//			etMapRes.save(options.toOptionsMap());
+//		}
+//		catch (IOException e) {
+//			e.printStackTrace();
+//			return true;
+//		}
+//
+//		IWorkbenchWindow dw = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
+//		try {
+//			if (dw != null) {
+//				IWorkbenchPage page = dw.getActivePage();
+//				if (page != null) {
+//					IDE.openEditor(page, physModelFile, true);
+//					IDE.openEditor(page, mappingModelFile, true);
+//				}
+//			}
+//		}
+//		catch (PartInitException e) {
+//		}
 
 		return true;
 	}

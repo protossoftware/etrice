@@ -11,44 +11,10 @@
  *******************************************************************************/
 package org.eclipse.etrice.generator.ui.wizard;
 
-import java.util.Map;
 
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.etrice.core.common.base.BaseFactory;
-import org.eclipse.etrice.core.common.base.Import;
-import org.eclipse.etrice.core.etmap.eTMap.ETMapFactory;
-import org.eclipse.etrice.core.etmap.eTMap.Mapping;
-import org.eclipse.etrice.core.etmap.eTMap.MappingModel;
-import org.eclipse.etrice.core.etmap.eTMap.SubSystemMapping;
-import org.eclipse.etrice.core.etmap.eTMap.ThreadMapping;
-import org.eclipse.etrice.core.etphys.eTPhys.ETPhysFactory;
-import org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage;
-import org.eclipse.etrice.core.etphys.eTPhys.ExecMode;
-import org.eclipse.etrice.core.etphys.eTPhys.NodeClass;
-import org.eclipse.etrice.core.etphys.eTPhys.NodeRef;
-import org.eclipse.etrice.core.etphys.eTPhys.PhysicalModel;
-import org.eclipse.etrice.core.etphys.eTPhys.PhysicalSystem;
-import org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread;
-import org.eclipse.etrice.core.etphys.eTPhys.RuntimeClass;
-import org.eclipse.etrice.core.etphys.util.ETPhysUtil;
-import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.fsm.fSM.ComponentCommunicationType;
-import org.eclipse.etrice.core.room.ActorContainerClass;
-import org.eclipse.etrice.core.room.ActorInstanceMapping;
-import org.eclipse.etrice.core.room.LogicalSystem;
-import org.eclipse.etrice.core.room.LogicalThread;
-import org.eclipse.etrice.core.room.RoomModel;
-import org.eclipse.etrice.core.room.SubSystemClass;
-import org.eclipse.etrice.core.room.SubSystemRef;
-import org.eclipse.etrice.core.room.util.RoomHelpers;
-import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.resource.XtextResourceSet;
-
-import com.google.common.collect.Maps;
-import com.google.inject.Injector;
-
+@Deprecated
 public class MappingBuilder {
-
+/*
 	private ETMapFactory mapFactory = ETMapFactory.eINSTANCE;
 	private ETPhysFactory physFactory = ETPhysFactory.eINSTANCE;
 	private BaseFactory baseFactory = BaseFactory.eINSTANCE;
@@ -62,6 +28,7 @@ public class MappingBuilder {
 	MappingModel mappingModel = null;
 	Import physModelImport = null;
 
+	
 	public MappingBuilder(RoomModel roomModel, Injector injector) {
 		MappingModel mapModel = mapFactory.createMappingModel();
 		mapModel.setName(roomModel.getName() + "_Mapping_Model");
@@ -176,4 +143,5 @@ public class MappingBuilder {
 
 		return ExecMode.MIXED;
 	}
+	*/
 }

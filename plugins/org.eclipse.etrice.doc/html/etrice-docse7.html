@@ -4,177 +4,115 @@
 <!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
 <html xmlns="http://www.w3.org/1999/xhtml"  
 > 
-<head><title>HelloWorld for C</title> 
+<head><title>Traffic Light</title> 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2015-07-09 13:04:00" /> 
+<meta name="date" content="2015-08-27 23:56:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
 <!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
-href="etrice-docse8.html" >next</a>] [<a 
+href="etrice-docch3.html" >next</a>] [<a 
 href="etrice-docse6.html" >prev</a>] [<a 
 href="etrice-docse6.html#tailetrice-docse6.html" >prev-tail</a>] [<a 
 href="#tailetrice-docse7.html">tail</a>] [<a 
 href="etrice-docch2.html#etrice-docse7.html" >up</a>] </p></div>
 <h3 class="sectionHead"><span class="titlemark">2.5   </span> <a 
- id="x11-370005"></a>HelloWorld for C</h3>
+ id="x11-370005"></a>Traffic Light</h3>
 <a 
  id="x11-37001r52"></a>
 <h4 class="subsectionHead"><span class="titlemark">2.5.1   </span> <a 
  id="x11-380001"></a>Scope</h4>
-<!--l. 5--><p class="noindent" >In this tutorial you will build your first very simple eTrice model. The goal is to learn the work flow of eTrice and to
-understand a few basic features of ROOM. There are some more steps to do in C compared to Java. You will perform the
-following steps:
+<!--l. 5--><p class="noindent" >In this tutorial you will build an example with a more advanced state machine. To make it more appealing we&#8217;ve added a little
+GUI with two traffic lights, one for the cars and one for pedestrians. The GUI also contains a button that can be used to
+request green for pedestrians.
 </p><!--l. 9--><p class="noindent" >You will perform the following steps:
      </p><ol  class="enumerate1" >
      <li 
   class="enumerate" id="x11-38002x1">create a new model from scratch
      </li>
      <li 
-  class="enumerate" id="x11-38004x2">add a very simple state machine to an actor
+  class="enumerate" id="x11-38004x2">create a pedestrian light actor
      </li>
      <li 
-  class="enumerate" id="x11-38006x3">create a launch configuration for the C code generator
+  class="enumerate" id="x11-38006x3">perform a first test
      </li>
      <li 
-  class="enumerate" id="x11-38008x4">setup the C environment
+  class="enumerate" id="x11-38008x4">implement the behavior
      </li>
      <li 
-  class="enumerate" id="x11-38010x5">generate the source code
-     </li>
-     <li 
-  class="enumerate" id="x11-38012x6">run the model
-     </li>
-     <li 
-  class="enumerate" id="x11-38014x7">open the message sequence chart</li></ol>
-<!--l. 21--><p class="noindent" >Make sure that you have set up the workspace as described in <span 
-class="ec-lmsso-10">Setting up the Workspace for C</span>.
+  class="enumerate" id="x11-38010x5">do some configuration</li></ol>
 <a 
- id="x11-38015r54"></a>
-</p>
+ id="x11-38011r54"></a>
 <h4 class="subsectionHead"><span class="titlemark">2.5.2   </span> <a 
  id="x11-390002"></a>Create a new model from scratch</h4>
-<!--l. 25--><p class="noindent" >Before you can create a new C-model, you have to create a new C project as described in <span 
-class="ec-lmsso-10">Setting up the Workspace for C</span>
+<!--l. 21--><p class="noindent" >The easiest way to create a new eTrice Project is to use the eclipse project wizard. From the eclipse file menu select
 <span 
-class="ec-lmsso-10">Projects</span>.
-     </p><ol  class="enumerate1" >
-     <li 
-  class="enumerate" id="x11-39002x1">select the <span 
-class="ec-lmsso-10">C/C++ </span>perspective
-     </li>
-     <li 
-  class="enumerate" id="x11-39004x2">select <span 
-class="ec-lmsso-10">File-&#x003E;New-&#x003E;C Project </span>from the main menue
-     </li>
-     <li 
-  class="enumerate" id="x11-39006x3">name the project <span 
-class="ec-lmsso-10">HelloWorldC</span>
-     </li>
-     <li 
-  class="enumerate" id="x11-39008x4">the project type is <span 
-class="ec-lmsso-10">Executable / Empty C Project</span>
-     </li>
-     <li 
-  class="enumerate" id="x11-39010x5">select the Toolchain for your platform (e.g. <span 
-class="ec-lmsso-10">MinGW GCC</span>)</li></ol>
-<!--l. 36--><p class="noindent" >Your project explorer should look like this:
-</p><!--l. 38--><p class="noindent" ><img 
-src="images/016-HelloWorldC01.png" alt="PIC"  
- />
-                                                                                            
-                                                                                            
-</p><!--l. 40--><p class="noindent" >The next step is to add the model folder: Right click on the new project. Select <span 
-class="ec-lmsso-10">New-&#x003E;Folder </span>and name it
-<span 
-class="ec-lmsso-10">model</span>.
-</p><!--l. 43--><p class="noindent" ><img 
-src="images/016-HelloWorldC02.png" alt="PIC"  
- />
-</p><!--l. 45--><p class="noindent" >Add the model file to the folder. Right click on the new folder. Select <span 
-class="ec-lmsso-10">New-&#x003E;file </span>and name it <span 
-class="ec-lmsso-10">HelloWorldC.room</span>.
-</p><!--l. 48--><p class="noindent" ><img 
-src="images/016-HelloWorldC03.png" alt="PIC"  
- />
-</p><!--l. 50--><p class="noindent" >Since the file extension <span 
-class="ec-lmsso-10">.room </span>is recognized as an Xtext based format, the tool will ask you to add the Xtext nature. Answer
-with <span 
-class="ec-lmsso-10">Yes</span>.
-</p><!--l. 52--><p class="noindent" ><img 
-src="images/016-HelloWorldC04.png" alt="PIC"  
- />
-</p><!--l. 54--><p class="noindent" >Open the <span 
-class="ec-lmsso-10">HelloWorld.room </span>file and invoke the content assist with &#x003C;Ctrl&#x003E;+&#x003C;Space&#x003E; and select <span 
-class="ec-lmsso-10">RoomModel - model</span>
-<span 
-class="ec-lmsso-10">skeleton</span>.
-</p><!--l. 56--><p class="noindent" ><img 
-src="images/016-HelloWorldC041.png" alt="PIC"  
- />
-</p><!--l. 58--><p class="noindent" >Edit the template parameters by typing the new names and jumping with &#x003C;Tab&#x003E; from name to name.
-</p><!--l. 60--><p class="noindent" >The resulting model code should look like this:
+class="ec-lmsso-10">File-&#x003E;New-&#x003E;Project </span>and create a new <span 
+class="ec-lmsso-10">Empty eTrice Java Project </span>and name it <span 
+class="ec-lmssbx-10">TrafficLight</span>.
+</p><!--l. 24--><p class="noindent" >In the model directory locate TrafficLight.room and edit it. We only rename a little. The model should look like
+this:
 </p>
-<!--l. 62-->
-<div class="lstlisting" id="listing-6"><span class="label"><a 
- id="x11-39011r1"></a></span><span 
+<!--l. 27-->
+<div class="lstlisting" id="listing-4"><span class="label"><a 
+ id="x11-39001r1"></a></span><span 
 class="ec-lmssbx-10x-x-90">RoomModel</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">HelloWorld_Model</span><span 
+class="ec-lmtt-9">TrafficLight</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-39012r2"></a></span><span 
+ id="x11-39002r2"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-39013r3"></a></span><span 
+ id="x11-39003r3"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmssbx-10x-x-90">LogicalSystem</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">LogSys1</span><span 
+class="ec-lmtt-9">TrafficLight</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-39014r4"></a></span><span 
+ id="x11-39004r4"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmssbx-10x-x-90">SubSystemRef</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">subSysRef1</span><span 
+class="ec-lmtt-9">main</span><span 
 class="ec-lmtt-9">:</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">SubSysClass1</span><span 
+class="ec-lmtt-9">Main</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-39015r5"></a></span><span 
+ id="x11-39005r5"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-39016r6"></a></span><span 
+ id="x11-39006r6"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-39017r7"></a></span><span 
+ id="x11-39007r7"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmssbx-10x-x-90">SubSystemClass</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">SubSysClass1</span><span 
+class="ec-lmtt-9">Main</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-39018r8"></a></span><span 
+ id="x11-39008r8"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmssbx-10x-x-90">ActorRef</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">actorRef1</span><span 
+class="ec-lmtt-9">pedLight</span><span 
 class="ec-lmtt-9">:</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">HelloWorldTop</span><span 
+class="ec-lmtt-9">PedestrianLight</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-39019r9"></a></span><span 
+ id="x11-39009r9"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -182,274 +120,73 @@ class="ec-lmssbx-10x-x-90">LogicalThread</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">defaultThread</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-39020r10"></a></span><span 
+ id="x11-39010r10"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-39021r11"></a></span><span 
+ id="x11-39011r11"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-39022r12"></a></span><span 
+ id="x11-39012r12"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmssbx-10x-x-90">ActorClass</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">HelloWorldTop</span><span 
+class="ec-lmtt-9">PedestrianLight</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-39023r13"></a></span><span 
+ id="x11-39013r13"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-39024r14"></a></span><span 
+ id="x11-39014r14"></a></span><span 
 class="ec-lmtt-9">}</span>
 </div>
-<!--l. 79--><p class="noindent" >Now create the file model/HelloWorldC.etphys for the physical model and insert (&#x003C;Ctrl&#x003E;+&#x003C;Space&#x003E;) the code template
-<span 
-class="ec-lmsso-10">PhysicalModel - model skeleton </span>without changes.
-</p><!--l. 81--><p class="noindent" >Listing for HelloWorldC.etphys :
+<!--l. 44--><p class="noindent" >Since the mapping model references our logical system and sub system we also need to adjust that:
 </p>
-<!--l. 83-->
-<div class="lstlisting" id="listing-7"><span class="label"><a 
- id="x11-39025r1"></a></span><span 
-class="ec-lmssbx-10x-x-90">PhysicalModel</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">PhysicalModel1</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-39026r2"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-39027r3"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">PhysicalSystem</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">PhysSys1</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-39028r4"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">NodeRef</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">nodeRef1</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">NodeClass1</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-39029r5"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-39030r6"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-39031r7"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">NodeClass</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">NodeClass1</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-39032r8"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">runtime</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">=</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">RuntimeClass1</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-39033r9"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">priomin</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">=</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">-10</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-39034r10"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">priomax</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">=</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">10</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-39035r11"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">DefaultThread</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">PhysicalThread1</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-39036r12"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">execmode</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">=</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">mixed</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-39037r13"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">interval</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">=</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">100</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">ms</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-39038r14"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">prio</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">=</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">0</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-39039r15"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">stacksize</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">=</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">1024</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-39040r16"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">msgblocksize</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">=</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">32</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-39041r17"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">msgpoolsize</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">=</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">10</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-39042r18"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-39043r19"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-39044r20"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-39045r21"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">RuntimeClass</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">RuntimeClass1</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-39046r22"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">model</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">=</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">multiThreaded</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-39047r23"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-39048r24"></a></span><span 
-class="ec-lmtt-9">}</span>
-</div>
-<!--l. 110--><p class="noindent" >The physical model defines the setup of your nodes with their attributes like threads and mode of execution. In this case we
-define one node with one thread.
-</p><!--l. 112--><p class="noindent" >The mapping model we will create now defines the mapping (deployment) of the logical elements in the .room model to the
-physical elements int the .etphys model. Now create the file model/HelloWorldC.etmap for the mapping model and insert
-(Ctrl+Space) the code template <span 
-class="ec-lmsso-10">MappingModel - model skeleton </span>with some changes (jump with &#x003C;Tab&#x003E; between the
-template variables):
-</p>
-<!--l. 114-->
-<div class="lstlisting" id="listing-8"><span class="label"><a 
- id="x11-39049r1"></a></span><span 
+<!--l. 46-->
+<div class="lstlisting" id="listing-5"><span class="label"><a 
+ id="x11-39015r1"></a></span><span 
 class="ec-lmssbx-10x-x-90">MappingModel</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">MappingModel1</span><span 
+class="ec-lmtt-9">TrafficLight</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-39050r2"></a></span><span 
+ id="x11-39016r2"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmssbx-10x-x-90">import</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">HelloWorld_Model</span><span 
+class="ec-lmtt-9">TrafficLight</span><span 
 class="ec-lmtt-9">.*</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmssbx-10x-x-90">from</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">HelloWorldC</span><span 
+class="ec-lmtt-9">TrafficLight</span><span 
 class="ec-lmtt-9">.</span><span 
 class="ec-lmtt-9">room</span><span 
 class="ec-lmtt-9">"</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-39051r3"></a></span><span 
+ id="x11-39017r3"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmssbx-10x-x-90">import</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">PhysicalModel1</span><span 
+class="ec-lmtt-9">TrafficLight</span><span 
 class="ec-lmtt-9">.*</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmssbx-10x-x-90">from</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">HelloWorldC</span><span 
+class="ec-lmtt-9">TrafficLight</span><span 
 class="ec-lmtt-9">.</span><span 
 class="ec-lmtt-9">etphys</span><span 
 class="ec-lmtt-9">"</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-39052r4"></a></span><span 
+ id="x11-39018r4"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmssbx-10x-x-90">Mapping</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">LogSys1</span><span 
+class="ec-lmtt-9">TrafficLight</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">-&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -457,13 +194,13 @@ class="ec-lmtt-9">PhysSys1</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-39053r5"></a></span><span 
+ id="x11-39019r5"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmssbx-10x-x-90">SubSystemMapping</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">subSysRef1</span><span 
+class="ec-lmtt-9">main</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">-&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -471,7 +208,7 @@ class="ec-lmtt-9">nodeRef1</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-39054r6"></a></span><span 
+ id="x11-39020r6"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -484,475 +221,1431 @@ class="ec-lmtt-9">-&#x003E;</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">PhysicalThread1</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-39055r7"></a></span><span 
+ id="x11-39021r7"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-39056r8"></a></span><span 
+ id="x11-39022r8"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-39057r9"></a></span><span 
+ id="x11-39023r9"></a></span><span 
 class="ec-lmtt-9">}</span>
 </div>
-<!--l. 126--><p class="noindent" >Now the workspace should look like this:
-</p><!--l. 128--><p class="noindent" ><img 
-src="images/016-HelloWorldC05.png" alt="PIC"  
- />
-</p><!--l. 1--><p class="noindent" >The ROOM model describes distributed systems on a logical level. In the current version not all elements will be used. But as
-prerequisite for further versions the following elements can be defined: </p>
-     <ul class="itemize1">
-     <li class="itemize">the <span 
-class="ec-lmsso-10">LogicalSystem </span>(currently optional)
-     </li>
-     <li class="itemize">at least one <span 
-class="ec-lmsso-10">SubSystemClass </span>(mandatory)
-     </li>
-     <li class="itemize">at least one <span 
-class="ec-lmsso-10">ActorClass </span>(mandatory)</li></ul>
-                                                                                            
-                                                                                            
-<!--l. 9--><p class="noindent" >The <span 
-class="ec-lmsso-10">LogicalSystem </span>represents the complete distributed system and contains at least one <span 
-class="ec-lmsso-10">SubSystemRef</span>. The
-<span 
-class="ec-lmsso-10">SubSystemClass </span>represents an address space (e.g. a Linux process or an image for a micro controller) and
-contains at least one <span 
-class="ec-lmsso-10">ActorRef</span>. The <span 
-class="ec-lmsso-10">ActorClass </span>is the building block for building the hierachical structure of an
-application. A good way to start is to define a top level actor that can be used as structural root within the
-subsystem.
-</p><!--l. 14--><p class="noindent" >The outline view of the textual ROOM editor shows the main modeling elements in a navigation tree. You can jump to an
-element in the textual editor by double clicking the element in the outline view (provided the outline is linked with the
-editor).
-</p><!--l. 18--><p class="noindent" ><img 
-src="images/015-HelloWorld02.png" alt="PIC"  
- />
-<a 
- id="x11-39058r55"></a>
+<!--l. 58--><p class="noindent" >Since we need a timer we have to include the TimingService from the modellib (see <a 
+href="etrice-docse6.html#x10-320004">2.4<!--tex4ht:ref: sec:ping_pong_tutorial --></a>). We have to add an import
+statement
 </p>
-<h4 class="subsectionHead"><span class="titlemark">2.5.3   </span> <a 
- id="x11-400003"></a>Create a state machine</h4>
-<!--l. 22--><p class="noindent" >We will implement the Hello World code on the initial transition of the <span 
-class="ec-lmsso-10">HelloWorldTop </span>actor. Therefore open the state
-machine editor by right clicking the <span 
-class="ec-lmsso-10">HelloWorldTop </span>actor in the outline view and select <span 
-class="ec-lmsso-10">Edit Behavior</span>.
-</p><!--l. 25--><p class="noindent" ><img 
-src="images/015-HelloWorld03.png" alt="PIC"  
- />
-</p><!--l. 27--><p class="noindent" >The state machine editor will be opened. Drag and drop an <span 
-class="ec-lmsso-10">Initial Point </span>from the tool box to the diagram into the top level
-state. Drag and drop a <span 
-class="ec-lmsso-10">State </span>from the tool box to the diagram. Confirm the dialog with <span 
-class="ec-lmsso-10">ok</span>. Select the <span 
-class="ec-lmsso-10">Transition </span>in the tool
-box and draw the transition from the <span 
-class="ec-lmsso-10">Initial Point </span>to the State. In the transition property dialog fill in the action code. Be
-aware of the different action code in Java and C.
-</p>
-<hr class="figure" /><div class="figure" 
->
-                                                                                            
-                                                                                            
-                                                                                            
-                                                                                            
-<div class="minipage">_________________________________________
-_________________________________________&#x00A0; &#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;     &#x00A0;    <!--l. 36--><p class="noindent" ><span 
-class="ec-lmssbx-10">action code for Java</span>
-</p>
-<div class="verbatim" id="verbatim-5">
-System.out.println("Hello&#x00A0;World");
-</div>
-<!--l. 39--><p class="nopar" >
-</p></div> &#x00A0;     <div class="minipage">_________________________________________________________________&#x00A0; &#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;     &#x00A0;    <!--l. 45--><p class="noindent" ><span 
-class="ec-lmssbx-10">action code for C</span>
-</p>
-<div class="verbatim" id="verbatim-6">
-printf("Hello&#x00A0;World\n");
-</div>
-<!--l. 48--><p class="nopar" >
-</p></div>
-                                                                                            
-                                                                                            
-</div><hr class="endfigure" />
-<!--l. 54--><p class="noindent" >The result should look like this:
-</p><!--l. 56--><p class="noindent" ><img 
-src="images/015-HelloWorld04.png" alt="PIC"  
- />
-</p><!--l. 58--><p class="noindent" >Save the diagram and inspect the model (HelloWorld.room) file. Note that the textual representation was changed after
-saving the diagram.
-</p>
-<hr class="figure" /><div class="figure" 
->
-                                                                                            
-                                                                                            
-                                                                                            
-                                                                                            
-<div class="minipage">
-______________________________________________
-______________________________________________&#x00A0; &#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;     &#x00A0;    <!--l. 64--><p class="noindent" ><span 
-class="ec-lmssbx-10">room model for Java </span><br 
-class="newline" /></p><!--l. 66-->
-<div class="lstlisting" id="listing-9"><span class="label"><a 
- id="x11-40001r1"></a></span><span 
-class="ec-lmssbx-10x-x-90">RoomModel</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">HelloWorld_Model</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-40002r2"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">LogicalSystem</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">LogSys1</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-40003r3"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">SubSystemRef</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">subSysRef1</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">SubSysClass1</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-40004r4"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-40005r5"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">SubSystemClass</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">SubSysClass1</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-40006r6"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">ActorRef</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">actorRef1</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">HelloWorldTop</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-40007r7"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">LogicalThread</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">defaultThread</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-40008r8"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-40009r9"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">ActorClass</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">HelloWorldTop</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-40010r10"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Structure</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-40011r11"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Behavior</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-40012r12"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">StateMachine</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-40013r13"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Transition</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">init</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">initial</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">-&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">state0</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-40014r14"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">action</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-40015r15"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
+<!--l. 61-->
+<div class="lstlisting" id="listing-6"><span class="label"><a 
+ id="x11-39024r1"></a></span><span 
+class="ec-lmssbx-10x-x-90">import</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">room</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">basic</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">service</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">timing</span><span 
+class="ec-lmtt-9">.*</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">from</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">System</span><span 
+class="ec-lmtt-9">../../</span><span 
+class="ec-lmtt-9">org</span><span 
 class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">out</span><span 
+class="ec-lmtt-9">eclipse</span><span 
 class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">println</span><span 
-class="ec-lmtt-9">(\"</span><span 
-class="ec-lmtt-9">Hello</span><span 
+class="ec-lmtt-9">etrice</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">modellib</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">java</span><span 
+class="ec-lmtt-9">/</span><span 
+class="ec-lmtt-9">model</span><span 
+class="ec-lmtt-9">/</span><span 
+class="ec-lmtt-9">TimingService</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">room</span><span 
+class="ec-lmtt-9">"</span>
+                                                                                            
+                                                                                            
+</div>
+<!--l. 65--><p class="noindent" >Then we open the structure of <span 
+class="ec-lmsso-10">Main </span>and add an actor reference <span 
+class="ec-lmsso-10">timingSvc </span>of type <span 
+class="ec-lmsso-10">ATimingService</span>. After that we create a
+layer connection from <span 
+class="ec-lmsso-10">pedLight </span>to <span 
+class="ec-lmsso-10">timingSvc</span>.
+</p><!--l. 68--><p class="noindent" ><img 
+src="images/018-timingSvc.png" alt="PIC"  
+ />
+</p><!--l. 70--><p class="noindent" >Now we are ready to
+<a 
+ id="x11-39025r55"></a>
+</p>
+<h4 class="subsectionHead"><span class="titlemark">2.5.3   </span> <a 
+ id="x11-400003"></a>Implement the <span 
+class="ec-lmsso-10">PedestrianLight </span>Actor</h4>
+<!--l. 74--><p class="noindent" >Since our GUI is connected using TCP/IP sockets we need to add an instance of the <span 
+class="ec-lmsso-10">ATcpClient</span>. We will explain the simple
+protocol used to control the GUI later as we go.
+</p><!--l. 77--><p class="noindent" >Again we first have to add an import statement.
+</p>
+<!--l. 79-->
+<div class="lstlisting" id="listing-7"><span class="label"><a 
+ id="x11-40001r1"></a></span><span 
+class="ec-lmssbx-10x-x-90">import</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">World</span><span 
-class="ec-lmtt-9">\")</span><span 
+class="ec-lmtt-9">room</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">basic</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">service</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">tcp</span><span 
+class="ec-lmtt-9">.*</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">from</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">../../</span><span 
+class="ec-lmtt-9">org</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">eclipse</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">etrice</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">modellib</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">java</span><span 
+class="ec-lmtt-9">/</span><span 
+class="ec-lmtt-9">model</span><span 
+class="ec-lmtt-9">/</span><span 
+class="ec-lmtt-9">TcpService</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">room</span><span 
+class="ec-lmtt-9">"</span>
+</div>
+<!--l. 83--><p class="noindent" >Then we can add the TCP client as <span 
+class="ec-lmsso-10">socketClient</span>. As we see the TCP client has two ports on its interface. One is for
+controlling the connection, the other one is used for the data. Therefore we add internal end ports to our actor and connect
+them (make sure to add the ports as conjugated):
+</p><!--l. 88--><p class="noindent" ><img 
+src="images/018-socketSvc.png" alt="PIC"  
+ />
+</p><!--l. 90--><p class="noindent" >Now we can begin to implement the behavior of our actor. In the initial state we try to connect our GUI application via a
+socket connection. So we create a State <span 
+class="ec-lmsso-10">OpenSocket </span>and an initial transition to it. In the entry code we use the <span 
+class="ec-lmsso-10">Messages</span>
+button and select <span 
+class="ec-lmsso-10">open </span>for the <span 
+class="ec-lmsso-10">tcpControl </span>port.
+</p><!--l. 95--><p class="noindent" >The code fragment </p><!--l. 96-->
+<div class="lstlisting" id="listing-8"><span class="label"><a 
+ id="x11-40002r1"></a></span><span 
+class="ec-lmtt-9">tcpControl</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">open</span><span 
+class="ec-lmtt-9">(</span><span 
+class="ec-lmtt-9">data</span><span 
+class="ec-lmtt-9">)</span><span 
+class="ec-lmtt-9">;</span>
+</div>
+<!--l. 99--><p class="noindent" >is inserted for us.
+</p><!--l. 101--><p class="noindent" >(We&#8217;ve already added a semi colon at the end of the statement.)
+</p><!--l. 103--><p class="noindent" >By inspecting the <span 
+class="ec-lmsso-10">PTcpControl </span>protocol we find that the <span 
+class="ec-lmsso-10">open </span>message takes an argument of type <span 
+class="ec-lmsso-10">DTcpControl </span>which in
+turn consists of a string - the IP address - and an integer for the port number.
+</p><!--l. 107--><p class="noindent" >So we complete the call to tcpControl.open() by inserting the connection data: </p><!--l. 108-->
+<div class="lstlisting" id="listing-9"><span class="label"><a 
+ id="x11-40003r1"></a></span><span 
+class="ec-lmtt-9">tcpControl</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">open</span><span 
+class="ec-lmtt-9">(</span><span 
+class="ec-lmssbx-10x-x-90">new</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">DTcpControl</span><span 
+class="ec-lmtt-9">(</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">localhost</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">,</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">4443)</span><span 
+class="ec-lmtt-9">)</span><span 
+class="ec-lmtt-9">;</span>
+</div>
+<!--l. 112--><p class="noindent" >At this point we can
+<a 
+ id="x11-40004r56"></a>
+</p>
+<h4 class="subsectionHead"><span class="titlemark">2.5.4   </span> <a 
+ id="x11-410004"></a>Perform a first test</h4>
+<!--l. 116--><p class="noindent" >First we generate code using the launch configuration <span 
+class="ec-lmsso-10">gen_TrafficLightJava.launch </span>the wizard created for us. We observe that
+the code doesn&#8217;t compile because we introduced a dependency to the <span 
+class="ec-lmsso-10">modellib.java</span>. So we add this project to our Java build
+path.
+</p><!--l. 120--><p class="noindent" >Now the build should be clean.
+</p><!--l. 122--><p class="noindent" >Prior to the generated application we have to launch the GUI with the expected socket 4443 that we&#8217;ve configured above. So
+we install the &#8217;eTrice Trafficlight for Tutorials&#8217; project in our work space using the New Wizard. Locate the launch
+configuration <span 
+class="ec-lmsso-10">trafficlight_port_4443.launch </span>and run it. A little Window pops up
+</p><!--l. 126--><p class="noindent" ><img 
+src="images/018-trafficlightGUI.png" alt="PIC"  
+ />
+</p><!--l. 128--><p class="noindent" >which tells us it is listening on socket 4443.
+</p><!--l. 130--><p class="noindent" >Then we launch our application using <span 
+class="ec-lmsso-10">run_TrafficLight.launch</span>. The console window shows
+                                                                                            
+                                                                                            
+</p>
+<div class="verbatim" id="verbatim-1">
+***&#x00A0;&#x00A0;&#x00A0;T&#x00A0;H&#x00A0;E&#x00A0;&#x00A0;&#x00A0;B&#x00A0;E&#x00A0;G&#x00A0;I&#x00A0;N&#x00A0;&#x00A0;&#x00A0;***
+&#x00A0;<br />***&#x00A0;MainComponent&#x00A0;/TrafficLight/main::init&#x00A0;***
+&#x00A0;<br />type&#x00A0;&#8217;quit&#8217;&#x00A0;to&#x00A0;exit
+&#x00A0;<br />Client&#x00A0;Init&#x00A0;!
+</div>
+<!--l. 138--><p class="nopar" >
+</p><!--l. 140--><p class="noindent" >and the GUI indicates that it is connected with a client:
+</p><!--l. 142--><p class="noindent" ><img 
+src="images/018-trafficlightGUI-connected.png" alt="PIC"  
+ />
+</p><!--l. 144--><p class="noindent" >After entering &#8217;quit&#8217; in the console window we turn back to the behavior of our <span 
+class="ec-lmsso-10">PedestrianLight </span>actor.
+<a 
+ id="x11-41001r57"></a>
+</p>
+<h4 class="subsectionHead"><span class="titlemark">2.5.5   </span> <a 
+ id="x11-420005"></a>Implement the <span 
+class="ec-lmsso-10">PedestrianLight </span>Behavior</h4>
+<!--l. 148--><p class="noindent" >The <span 
+class="ec-lmsso-10">ATcpClient </span>returns <span 
+class="ec-lmsso-10">established() </span>if the socket connection is created and ready to use. So we use this trigger to make a
+transition into the operational state.
+</p><!--l. 151--><p class="noindent" ><img 
+src="images/018-trans-to-operational.png" alt="PIC"  
+ />
+</p><!--l. 153--><p class="noindent" >The switching of the lights will be implemented in a sub graph of the <span 
+class="ec-lmsso-10">Operational </span>state.
+</p><!--l. 155--><p class="noindent" ><img 
+src="images/018-create-sub-graph.png" alt="PIC"  
+ />
+</p><!--l. 157--><p class="noindent" >Now we turn to the sub state machine of <span 
+class="ec-lmsso-10">Operational</span>. We need to cyclically loop through all phases of the traffic
+light.
+</p>
+<div class="tabular"> <table id="TBL-5" class="tabular" 
+cellspacing="0" cellpadding="0" rules="groups" 
+><colgroup id="TBL-5-1g"><col 
+id="TBL-5-1" /></colgroup><colgroup id="TBL-5-2g"><col 
+id="TBL-5-2" /></colgroup><colgroup id="TBL-5-3g"><col 
+id="TBL-5-3" /></colgroup><colgroup id="TBL-5-4g"><col 
+id="TBL-5-4" /></colgroup><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-5-1-"><td  style="white-space:nowrap; text-align:center;" id="TBL-5-1-1"  
+class="td11">   State    </td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-1-2"  
+class="td11"> Car Lights  </td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-1-3"  
+class="td11"> Ped Lights  </td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-1-4"  
+class="td11"> timeout [s]  </td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-5-2-"><td  style="white-space:nowrap; text-align:center;" id="TBL-5-2-1"  
+class="td11">  AllRed    </td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-2-2"  
+class="td11">    red      </td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-2-3"  
+class="td11">    red       </td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-2-4"  
+class="td11">     1        </td></tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-5-3-"><td  style="white-space:nowrap; text-align:center;" id="TBL-5-3-1"  
+class="td
+11"> CarGreen  </td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-3-2"  
+class="td11">   green     </td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-3-3"  
+class="td11">    red       </td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-3-4"  
+class="td11">    n/a      </td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-5-4-"><td  style="white-space:nowrap; text-align:center;" id="TBL-5-4-1"  
+class="td11"> CarYellow  </td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-4-2"  
+class="td11">   yellow    </td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-4-3"  
+class="td11">    red       </td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-4-4"  
+class="td11">     1        </td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-5-5-"><td  style="white-space:nowrap; text-align:center;" id="TBL-5-5-1"  
+class="td11">  CarRed   </td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-5-2"  
+class="td11">    red      </td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-5-3"  
+class="td11">    red       </td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-5-4"  
+class="td11">     1        </td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-5-6-"><td  style="white-space:nowrap; text-align:center;" id="TBL-5-6-1"  
+class="td11"> PedGreen  </td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-6-2"  
+class="td11">    red      </td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-6-3"  
+class="td11">   green     </td><td  style="white-space:nowrap; text-align:center;" id="TBL-5-6-4"  
+class="td11">     3        </td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-5-7-"><td  style="white-space:nowrap; text-align:center;" id="TBL-5-7-1"  
+class="td11">          </td>
+</tr></table></div>
+<!--l. 176--><p class="noindent" ><span 
+class="ec-lmsso-10">AllRed </span>will be the initial state. There we start a timeout after which we do the transition to <span 
+class="ec-lmsso-10">CarGreen</span>. We will stay in this
+state until the request button is pushed which means that we can trigger on <span 
+class="ec-lmsso-10">recive() </span>from the <span 
+class="ec-lmsso-10">tcpPayload </span>port. Since nothing
+else will be sent back from our GUI we don&#8217;t have to look at the contents of the payload. The transition ends in <span 
+class="ec-lmsso-10">CarYellow</span>
+where we again start a timeout which will take us to the next state and so on until we again reach <span 
+class="ec-lmsso-10">CarGreen </span>which completes
+the cycle.
+</p><!--l. 182--><p class="noindent" >The next thing we need is a <span 
+class="ec-lmsso-10">SAP </span>for our timeout. We will call it <span 
+class="ec-lmsso-10">&#8217;timeout&#8217;</span>. Then we can create the states and transitions in
+the sub state machine of <span 
+class="ec-lmsso-10">Operational</span>.
+</p><!--l. 185--><p class="noindent" ><img 
+src="images/018-operational.png" alt="PIC"  
+ />
+</p><!--l. 187--><p class="noindent" >The only thing that is left to be done is the actual switching of the lights in our GUI. We have to send the commands as
+strings terminated by new line characters. The GUI reacts on the following commands:
+</p>
+     <ul class="itemize1">
+     <li class="itemize">"pedLights=red\n"
+     </li>
+     <li class="itemize">"pedLights=green\n"
+     </li>
+     <li class="itemize">"carLights=red\n"
+     </li>
+     <li class="itemize">"carLights=yellow\n"
+     </li>
+     <li class="itemize">"carLights=green\n"</li></ul>
+<!--l. 199--><p class="noindent" >To simplify the code we have to add to the entry codes of the states we propose to add two methods:
+                                                                                            
+                                                                                            
+</p>
+<!--l. 201-->
+<div class="lstlisting" id="listing-10"><span class="label"><a 
+ id="x11-42001r1"></a></span><span 
+class="ec-lmssbx-10x-x-90">Operation</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">sendString</span><span 
+class="ec-lmtt-9">(</span><span 
+class="ec-lmtt-9">text</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">string</span><span 
+class="ec-lmtt-9">)</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-42002r2"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">tcpPayload</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">send</span><span 
+class="ec-lmtt-9">(</span><span 
+class="ec-lmtt-9">new</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">DTcpPayload</span><span 
+class="ec-lmtt-9">(1,</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">text</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">length</span><span 
+class="ec-lmtt-9">()</span><span 
+class="ec-lmtt-9">,</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">text</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">getBytes</span><span 
+class="ec-lmtt-9">()</span><span 
+class="ec-lmtt-9">)</span><span 
+class="ec-lmtt-9">)</span><span 
 class="ec-lmtt-9">;</span><span 
 class="ec-lmtt-9">"</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-40016r16"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
+ id="x11-42003r3"></a></span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-40017r17"></a></span><span 
+ id="x11-42004r4"></a></span><span 
+class="ec-lmssbx-10x-x-90">Operation</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-40018r18"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">State</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">state0</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-40019r19"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-40020r20"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-40021r21"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-40022r22"></a></span><span 
-class="ec-lmtt-9">}</span>
-</div>
-</div>  <div class="minipage">
-___________________________________________________&#x00A0; &#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;     &#x00A0;    <!--l. 95--><p class="noindent" ><span 
-class="ec-lmssbx-10">room model for C </span><br 
-class="newline" /></p><!--l. 97-->
-<div class="lstlisting" id="listing-10"><span class="label"><a 
- id="x11-40023r1"></a></span><span 
-class="ec-lmssbx-10x-x-90">RoomModel</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">HelloWorld_Model</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-40024r2"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">LogicalSystem</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">LogSys1</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-40025r3"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">SubSystemRef</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">subSysRef1</span><span 
+class="ec-lmtt-9">setLights</span><span 
+class="ec-lmtt-9">(</span><span 
+class="ec-lmtt-9">car</span><span 
 class="ec-lmtt-9">:</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">SubSysClass1</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-40026r4"></a></span><span 
+class="ec-lmtt-9">Light</span><span 
+class="ec-lmtt-9">,</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-40027r5"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">SubSystemClass</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">SubSysClass1</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-40028r6"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">ActorRef</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">actorRef1</span><span 
+class="ec-lmtt-9">ped</span><span 
 class="ec-lmtt-9">:</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">HelloWorldTop</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-40029r7"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">LogicalThread</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">defaultThread</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-40030r8"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-40031r9"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">ActorClass</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">HelloWorldTop</span><span 
+class="ec-lmtt-9">Light</span><span 
+class="ec-lmtt-9">)</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-40032r10"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Structure</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-40033r11"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Behavior</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-40034r12"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">StateMachine</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-40035r13"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Transition</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">init</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">initial</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">-&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">state0</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-40036r14"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">action</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-40037r15"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
+ id="x11-42005r5"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">printf</span><span 
+class="ec-lmtt-9">sendString</span><span 
 class="ec-lmtt-9">(\"</span><span 
-class="ec-lmtt-9">Hello</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">World</span><span 
-class="ec-lmtt-9">\\</span><span 
+class="ec-lmtt-9">carLights</span><span 
+class="ec-lmtt-9">=\"+</span><span 
+class="ec-lmtt-9">getCmd</span><span 
+class="ec-lmtt-9">(</span><span 
+class="ec-lmtt-9">car</span><span 
+class="ec-lmtt-9">)</span><span 
+class="ec-lmtt-9">+\"\\</span><span 
 class="ec-lmtt-9">n</span><span 
 class="ec-lmtt-9">\")</span><span 
 class="ec-lmtt-9">;</span><span 
 class="ec-lmtt-9">"</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-40038r16"></a></span><span 
+ id="x11-42006r6"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">sendString</span><span 
+class="ec-lmtt-9">(\"</span><span 
+class="ec-lmtt-9">pedLights</span><span 
+class="ec-lmtt-9">=\"+</span><span 
+class="ec-lmtt-9">getCmd</span><span 
+class="ec-lmtt-9">(</span><span 
+class="ec-lmtt-9">ped</span><span 
+class="ec-lmtt-9">)</span><span 
+class="ec-lmtt-9">+\"\\</span><span 
+class="ec-lmtt-9">n</span><span 
+class="ec-lmtt-9">\")</span><span 
+class="ec-lmtt-9">;</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-42007r7"></a></span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-42008r8"></a></span><span 
+class="ec-lmssbx-10x-x-90">Operation</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">getCmd</span><span 
+class="ec-lmtt-9">(</span><span 
+class="ec-lmtt-9">light</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">Light</span><span 
+class="ec-lmtt-9">)</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">string</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-42009r9"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">switch</span><span 
+class="ec-lmtt-9">(</span><span 
+class="ec-lmtt-9">light</span><span 
+class="ec-lmtt-9">)</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-42010r10"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">case</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">Light</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">RED</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">return</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">\"</span><span 
+class="ec-lmtt-9">red</span><span 
+class="ec-lmtt-9">\";</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-42011r11"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">case</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">Light</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">GREEN</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">return</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">\"</span><span 
+class="ec-lmtt-9">green</span><span 
+class="ec-lmtt-9">\";</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-42012r12"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">case</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">Light</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">YELLOW</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">return</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">\"</span><span 
+class="ec-lmtt-9">yellow</span><span 
+class="ec-lmtt-9">\";</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-42013r13"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">default</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">return</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">\"\";</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-42014r14"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-42015r15"></a></span><span 
+class="ec-lmtt-9">}</span>
+</div>
+<!--l. 219--><p class="noindent" >Since we use data types we also need to import the <span 
+class="ec-lmsso-10">Types.room </span>from the <span 
+class="ec-lmsso-10">modellib.java</span>:
+</p>
+<!--l. 221-->
+<div class="lstlisting" id="listing-11"><span class="label"><a 
+ id="x11-42016r1"></a></span><span 
+class="ec-lmssbx-10x-x-90">import</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">room</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">basic</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">types</span><span 
+class="ec-lmtt-9">.*</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">from</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">../../</span><span 
+class="ec-lmtt-9">org</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">eclipse</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">etrice</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">modellib</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">java</span><span 
+class="ec-lmtt-9">/</span><span 
+class="ec-lmtt-9">model</span><span 
+class="ec-lmtt-9">/</span><span 
+class="ec-lmtt-9">Types</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">room</span><span 
+class="ec-lmtt-9">"</span>
+</div>
+<!--l. 225--><p class="noindent" >Finally we add entry codes to the five states. For <span 
+class="ec-lmsso-10">AllRed </span>e.g. we have
+</p>
+<!--l. 227-->
+<div class="lstlisting" id="listing-12"><span class="label"><a 
+ id="x11-42017r1"></a></span><span 
+class="ec-lmssbx-10x-x-90">State</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">AllRed</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-42018r2"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">entry</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-42019r3"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">setLights</span><span 
+class="ec-lmtt-9">(</span><span 
+class="ec-lmtt-9">Light</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">RED</span><span 
+class="ec-lmtt-9">,</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">Light</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">RED</span><span 
+class="ec-lmtt-9">)</span><span 
+class="ec-lmtt-9">;</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-42020r4"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">timeout</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">startTimeout</span><span 
+class="ec-lmtt-9">(1000)</span><span 
+class="ec-lmtt-9">;</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-42021r5"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-42022r6"></a></span><span 
+class="ec-lmtt-9">}</span>
+</div>
+<!--l. 236--><p class="noindent" >And so on for all states corresponding to above table.
+</p><!--l. 238--><p class="noindent" >After generating and running the application we get an MSC like this:
+</p><!--l. 240--><p class="noindent" ><img 
+src="images/018-msc.png" alt="PIC"  
+ />
+<a 
+ id="x11-42023r58"></a>
+</p>
+<h4 class="subsectionHead"><span class="titlemark">2.5.6   </span> <a 
+ id="x11-430006"></a>Configuration</h4>
+<!--l. 244--><p class="noindent" >We want to use this example to illustrate how instance data can be configured using a configuration model. We hard wired IP
+address and port into our model which of course is not very nice.
+</p><!--l. 247--><p class="noindent" >To use configurable data for our purpose we have to add a new attribute to out <span 
+class="ec-lmsso-10">PedestrianLight </span>actor structure:
+</p>
+<!--l. 249-->
+<div class="lstlisting" id="listing-13"><span class="label"><a 
+ id="x11-43001r1"></a></span><span 
+class="ec-lmssbx-10x-x-90">Attribute</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">ipConfig</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">DTcpControl</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">[</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">configuration</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">of</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">the</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">IP</span><span 
+class="ec-lmtt-9">-</span><span 
+class="ec-lmtt-9">port</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">for</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">the</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">communication</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">with</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">the</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">Traffic</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">Light</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">GUI</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">]</span>
+</div>
+<!--l. 253--><p class="noindent" >Then we add a configuration model to our <span 
+class="ec-lmsso-10">model </span>folder. The contents of this model has to be
+</p>
+<!--l. 256-->
+<div class="lstlisting" id="listing-14"><span class="label"><a 
+ id="x11-43002r1"></a></span><span 
+class="ec-lmssbx-10x-x-90">ConfigModel</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">TrafficLight</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-43003r2"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">import</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">TrafficLight</span><span 
+class="ec-lmtt-9">.*</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">from</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">TrafficLight</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">room</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-43004r3"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-43005r4"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">ActorInstanceConfig</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">TrafficLight</span><span 
+class="ec-lmtt-9">/</span><span 
+class="ec-lmtt-9">main</span><span 
+class="ec-lmtt-9">/</span><span 
+class="ec-lmtt-9">pedLight</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-43006r5"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Attr</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">ipConfig</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-43007r6"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Attr</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">IPAddr</span><span 
+class="ec-lmtt-9">=</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">localhost</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-43008r7"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Attr</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">TcpPort</span><span 
+class="ec-lmtt-9">=4443</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-43009r8"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-43010r9"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-43011r10"></a></span><span 
+class="ec-lmtt-9">}</span>
+</div>
+<!--l. 269--><p class="noindent" >This way we can configure specific attributes of actor classes or instances.
+</p><!--l. 271--><p class="noindent" >Now we only have to add this model to our launch configuration for the generator, re-generate and we are
+done.
+</p><!--l. 273--><p class="noindent" >As an exercise to the reader we leave the following task. Add a second <span 
+class="ec-lmsso-10">PedestrianLight </span>to the application and connect it to a
+second GUI (listening on another port of course).
+<a 
+ id="x11-43012r59"></a>
+</p>
+<h4 class="subsectionHead"><span class="titlemark">2.5.7   </span> <a 
+ id="x11-440007"></a>The Complete Model</h4>
+<!--l. 278--><p class="noindent" >As a reference here is the complete model:
+</p>
+<!--l. 280-->
+                                                                                            
+                                                                                            
+<div class="lstlisting" id="listing-15"><span class="label"><a 
+ id="x11-44001r1"></a></span><span 
+class="ec-lmssbx-10x-x-90">RoomModel</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">TrafficLight</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44002r2"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44003r3"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">import</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">room</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">basic</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">service</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">timing</span><span 
+class="ec-lmtt-9">.*</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">from</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">../../</span><span 
+class="ec-lmtt-9">org</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">eclipse</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">etrice</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">modellib</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">java</span><span 
+class="ec-lmtt-9">/</span><span 
+class="ec-lmtt-9">model</span><span 
+class="ec-lmtt-9">/</span><span 
+class="ec-lmtt-9">TimingService</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">room</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44004r4"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">import</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">room</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">basic</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">service</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">tcp</span><span 
+class="ec-lmtt-9">.*</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">from</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">../../</span><span 
+class="ec-lmtt-9">org</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">eclipse</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">etrice</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">modellib</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">java</span><span 
+class="ec-lmtt-9">/</span><span 
+class="ec-lmtt-9">model</span><span 
+class="ec-lmtt-9">/</span><span 
+class="ec-lmtt-9">TcpService</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">room</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44005r5"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">import</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">room</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">basic</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">types</span><span 
+class="ec-lmtt-9">.*</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">from</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">../../</span><span 
+class="ec-lmtt-9">org</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">eclipse</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">etrice</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">modellib</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">java</span><span 
+class="ec-lmtt-9">/</span><span 
+class="ec-lmtt-9">model</span><span 
+class="ec-lmtt-9">/</span><span 
+class="ec-lmtt-9">Types</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">room</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44006r6"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44007r7"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">LogicalSystem</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">TrafficLight</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44008r8"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">SubSystemRef</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">main</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">Main</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44009r9"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44010r10"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44011r11"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">SubSystemClass</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">Main</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44012r12"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">ActorRef</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">pedLight</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">PedestrianLight</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44013r13"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">ActorRef</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">timingSvc</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">ATimingService</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44014r14"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">LayerConnection</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">ref</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">pedLight</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">satisfied_by</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">timingSvc</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">timer</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44015r15"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">LogicalThread</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">defaultThread</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44016r16"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44017r17"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44018r18"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">ActorClass</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">PedestrianLight</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44019r19"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Structure</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44020r20"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">conjugated</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Port</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">tcpControl</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">PTcpControl</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44021r21"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">conjugated</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Port</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">tcpPayload</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">PTcpPayload</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44022r22"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">ActorRef</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">socketClient</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">ATcpClient</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44023r23"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">SAP</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">timeout</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">PTimer</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44024r24"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Binding</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">tcpControl</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">and</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">socketClient</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">ControlPort</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44025r25"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Binding</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">tcpPayload</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">and</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">socketClient</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">PayloadPort</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44026r26"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Attribute</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">ipConfig</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">DTcpControl</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">[</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">configuration</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">of</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">the</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">IP</span><span 
+class="ec-lmtt-9">-</span><span 
+class="ec-lmtt-9">port</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">for</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">the</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">communication</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">with</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">the</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">Traffic</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">Light</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">GUI</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">]</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44027r27"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44028r28"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Behavior</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44029r29"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Operation</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">sendString</span><span 
+class="ec-lmtt-9">(</span><span 
+class="ec-lmtt-9">text</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">string</span><span 
+class="ec-lmtt-9">)</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44030r30"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">tcpPayload</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">send</span><span 
+class="ec-lmtt-9">(</span><span 
+class="ec-lmtt-9">new</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">DTcpPayload</span><span 
+class="ec-lmtt-9">(1,</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">text</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">length</span><span 
+class="ec-lmtt-9">()</span><span 
+class="ec-lmtt-9">,</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">text</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">getBytes</span><span 
+class="ec-lmtt-9">()</span><span 
+class="ec-lmtt-9">)</span><span 
+class="ec-lmtt-9">)</span><span 
+class="ec-lmtt-9">;</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44031r31"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44032r32"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Operation</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">setLights</span><span 
+class="ec-lmtt-9">(</span><span 
+class="ec-lmtt-9">car</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">Light</span><span 
+class="ec-lmtt-9">,</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">ped</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">Light</span><span 
+class="ec-lmtt-9">)</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44033r33"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">sendString</span><span 
+class="ec-lmtt-9">(\"</span><span 
+class="ec-lmtt-9">carLights</span><span 
+class="ec-lmtt-9">=\"+</span><span 
+class="ec-lmtt-9">getCmd</span><span 
+class="ec-lmtt-9">(</span><span 
+class="ec-lmtt-9">car</span><span 
+class="ec-lmtt-9">)</span><span 
+class="ec-lmtt-9">+\"\\</span><span 
+class="ec-lmtt-9">n</span><span 
+class="ec-lmtt-9">\")</span><span 
+class="ec-lmtt-9">;</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44034r34"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">sendString</span><span 
+class="ec-lmtt-9">(\"</span><span 
+class="ec-lmtt-9">pedLights</span><span 
+class="ec-lmtt-9">=\"+</span><span 
+class="ec-lmtt-9">getCmd</span><span 
+class="ec-lmtt-9">(</span><span 
+class="ec-lmtt-9">ped</span><span 
+class="ec-lmtt-9">)</span><span 
+class="ec-lmtt-9">+\"\\</span><span 
+class="ec-lmtt-9">n</span><span 
+class="ec-lmtt-9">\")</span><span 
+class="ec-lmtt-9">;</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44035r35"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44036r36"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Operation</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">getCmd</span><span 
+class="ec-lmtt-9">(</span><span 
+class="ec-lmtt-9">light</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">Light</span><span 
+class="ec-lmtt-9">)</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">string</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44037r37"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">switch</span><span 
+class="ec-lmtt-9">(</span><span 
+class="ec-lmtt-9">light</span><span 
+class="ec-lmtt-9">)</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44038r38"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">case</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">Light</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">RED</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">return</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">\"</span><span 
+class="ec-lmtt-9">red</span><span 
+class="ec-lmtt-9">\";</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44039r39"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">case</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">Light</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">GREEN</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">return</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">\"</span><span 
+class="ec-lmtt-9">green</span><span 
+class="ec-lmtt-9">\";</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44040r40"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">case</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">Light</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">YELLOW</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">return</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">\"</span><span 
+class="ec-lmtt-9">yellow</span><span 
+class="ec-lmtt-9">\";</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44041r41"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">default</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">return</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">\"\";</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44042r42"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44043r43"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44044r44"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">StateMachine</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44045r45"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Transition</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">init</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">initial</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">-&#x003E;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">OpenSocket</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44046r46"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">action</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44047r47"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">tcpControl</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">open</span><span 
+class="ec-lmtt-9">(</span><span 
+class="ec-lmtt-9">ipConfig</span><span 
+class="ec-lmtt-9">)</span><span 
+class="ec-lmtt-9">;</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44048r48"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -962,7 +1655,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-40039r17"></a></span><span 
+ id="x11-44049r49"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -971,7 +1664,75 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-40040r18"></a></span><span 
+ id="x11-44050r50"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Transition</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">tr0</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">OpenSocket</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">-&#x003E;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">Operational</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44051r51"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">triggers</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44052r52"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x003C;</span><span 
+class="ec-lmtt-9">established</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">tcpControl</span><span 
+class="ec-lmtt-9">&#x003E;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44053r53"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44054r54"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44055r55"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -980,185 +1741,1056 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmssbx-10x-x-90">State</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">state0</span><span 
+class="ec-lmtt-9">OpenSocket</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-40041r19"></a></span><span 
+ id="x11-44056r56"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">State</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">Operational</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44057r57"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">subgraph</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44058r58"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Transition</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">init</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">initial</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">-&#x003E;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">AllRed</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44059r59"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Transition</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">tr0</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">AllRed</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">-&#x003E;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">CarGreen</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44060r60"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">triggers</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44061r61"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x003C;</span><span 
+class="ec-lmtt-9">timeout</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">timeout</span><span 
+class="ec-lmtt-9">&#x003E;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44062r62"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-40042r20"></a></span><span 
+ id="x11-44063r63"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-40043r21"></a></span><span 
+ id="x11-44064r64"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Transition</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">tr1</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">CarGreen</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">-&#x003E;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">CarYellow</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44065r65"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">triggers</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44066r66"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x003C;</span><span 
+class="ec-lmtt-9">receive</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">tcpPayload</span><span 
+class="ec-lmtt-9">&#x003E;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44067r67"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x11-40044r22"></a></span><span 
+ id="x11-44068r68"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44069r69"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Transition</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">tr2</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">CarYellow</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">-&#x003E;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">CarRed</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44070r70"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">triggers</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44071r71"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x003C;</span><span 
+class="ec-lmtt-9">timeout</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">timeout</span><span 
+class="ec-lmtt-9">&#x003E;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44072r72"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44073r73"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44074r74"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Transition</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">tr3</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">CarRed</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">-&#x003E;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">PedGreen</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44075r75"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">triggers</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44076r76"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x003C;</span><span 
+class="ec-lmtt-9">timeout</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">timeout</span><span 
+class="ec-lmtt-9">&#x003E;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44077r77"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44078r78"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44079r79"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Transition</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">tr4</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">PedGreen</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">-&#x003E;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">AllRed</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44080r80"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">triggers</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44081r81"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x003C;</span><span 
+class="ec-lmtt-9">timeout</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">timeout</span><span 
+class="ec-lmtt-9">&#x003E;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44082r82"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44083r83"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44084r84"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">State</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">AllRed</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44085r85"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">entry</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44086r86"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">setLights</span><span 
+class="ec-lmtt-9">(</span><span 
+class="ec-lmtt-9">Light</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">RED</span><span 
+class="ec-lmtt-9">,</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">Light</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">RED</span><span 
+class="ec-lmtt-9">)</span><span 
+class="ec-lmtt-9">;</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44087r87"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">timeout</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">startTimeout</span><span 
+class="ec-lmtt-9">(1000)</span><span 
+class="ec-lmtt-9">;</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44088r88"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44089r89"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44090r90"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">State</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">CarGreen</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44091r91"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">entry</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44092r92"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">setLights</span><span 
+class="ec-lmtt-9">(</span><span 
+class="ec-lmtt-9">Light</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">GREEN</span><span 
+class="ec-lmtt-9">,</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">Light</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">RED</span><span 
+class="ec-lmtt-9">)</span><span 
+class="ec-lmtt-9">;</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44093r93"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44094r94"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44095r95"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">State</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">CarYellow</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44096r96"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">entry</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44097r97"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">setLights</span><span 
+class="ec-lmtt-9">(</span><span 
+class="ec-lmtt-9">Light</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">YELLOW</span><span 
+class="ec-lmtt-9">,</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">Light</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">RED</span><span 
+class="ec-lmtt-9">)</span><span 
+class="ec-lmtt-9">;</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44098r98"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">timeout</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">startTimeout</span><span 
+class="ec-lmtt-9">(1000)</span><span 
+class="ec-lmtt-9">;</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44099r99"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44100r100"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44101r101"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">State</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">CarRed</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44102r102"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">entry</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44103r103"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">setLights</span><span 
+class="ec-lmtt-9">(</span><span 
+class="ec-lmtt-9">Light</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">RED</span><span 
+class="ec-lmtt-9">,</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">Light</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">RED</span><span 
+class="ec-lmtt-9">)</span><span 
+class="ec-lmtt-9">;</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44104r104"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">timeout</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">startTimeout</span><span 
+class="ec-lmtt-9">(1000)</span><span 
+class="ec-lmtt-9">;</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44105r105"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44106r106"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44107r107"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">State</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">PedGreen</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44108r108"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">entry</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44109r109"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">setLights</span><span 
+class="ec-lmtt-9">(</span><span 
+class="ec-lmtt-9">Light</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">RED</span><span 
+class="ec-lmtt-9">,</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">Light</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">GREEN</span><span 
+class="ec-lmtt-9">)</span><span 
+class="ec-lmtt-9">;</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44110r110"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">timeout</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">startTimeout</span><span 
+class="ec-lmtt-9">(3000)</span><span 
+class="ec-lmtt-9">;</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44111r111"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44112r112"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44113r113"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44114r114"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44115r115"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44116r116"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44117r117"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44118r118"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44119r119"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Enumeration</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">Light</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44120r120"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">RED</span><span 
+class="ec-lmtt-9">,</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44121r121"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">GREEN</span><span 
+class="ec-lmtt-9">,</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44122r122"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">YELLOW</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44123r123"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44124r124"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-44125r125"></a></span><span 
 class="ec-lmtt-9">}</span>
 </div>
-</div>
                                                                                             
                                                                                             
-</div><hr class="endfigure" />
-<a 
- id="x11-40045r56"></a>
-<h4 class="subsectionHead"><span class="titlemark">2.5.4   </span> <a 
- id="x11-410004"></a>Create a launch configuration to start the C code generator</h4>
-<!--l. 134--><p class="noindent" >Unlike in Java (where the new wizard already created a launch configuration) a launch configuration for the C code generator
-must be created manually.
-</p><!--l. 137--><p class="noindent" >From the main menu <span 
-class="ec-lmsso-10">Run </span>or the context menu <span 
-class="ec-lmsso-10">Run As </span>in the <span 
-class="ec-lmsso-10">Project Explorer </span>select <span 
-class="ec-lmsso-10">Run Configurations</span>
-.
-</p><!--l. 139--><p class="noindent" ><img 
-src="images/016-HelloWorldC06.png" alt="PIC"  
- />
-</p><!--l. 141--><p class="noindent" >Within the dialog select <span 
-class="ec-lmsso-10">e</span><span 
-class="ec-lmsso-10">Trice</span> <span 
-class="ec-lmsso-10">C Generator </span>and click the <span 
-class="ec-lmsso-10">New </span>button to create a new launch configuration.
-</p><!--l. 144--><p class="noindent" ><img 
-src="images/016-HelloWorldC07.png" alt="PIC"  
- />
-</p><!--l. 146--><p class="noindent" >A new configuration should be created. Name it <span 
-class="ec-lmsso-10">gen_HelloWorld </span>and add the mapping model <span 
-class="ec-lmsso-10">HelloWorld.etmap </span>model via
-one of the <span 
-class="ec-lmsso-10">add </span>buttons.
-</p><!--l. 149--><p class="noindent" ><img 
-src="images/016-HelloWorldC08.png" alt="PIC"  
- />
-</p><!--l. 151--><p class="noindent" >The mapping model is the root model for the code generator.
-</p><!--l. 153--><p class="noindent" >To save your launch configuration, select <span 
-class="ec-lmsso-10">Shared file </span>in the tab <span 
-class="ec-lmsso-10">Common </span>and add the <span 
-class="ec-lmsso-10">HelloWorldC </span>project via the <span 
-class="ec-lmsso-10">Browse</span>
-button.
-</p><!--l. 156--><p class="noindent" ><img 
-src="images/016-HelloWorldC10.png" alt="PIC"  
- />
-</p><!--l. 158--><p class="noindent" >Apply your changes. The new configuration should now exist in your workspace.
-</p><!--l. 160--><p class="noindent" ><img 
-src="images/016-HelloWorldC11.png" alt="PIC"  
- />
-<a 
- id="x11-41001r57"></a>
-</p>
-<h4 class="subsectionHead"><span class="titlemark">2.5.5   </span> <a 
- id="x11-420005"></a>Generate the code</h4>
-<!--l. 165--><p class="noindent" >Now you can generate the code. Right click on the launch configuration and run it as <span 
-class="ec-lmsso-10">gen_HelloWorldC</span>.
-</p><!--l. 168--><p class="noindent" ><img 
-src="images/016-HelloWorldC12.png" alt="PIC"  
- />
-</p><!--l. 170--><p class="noindent" >The code should be generated and placed in the src-gen folder.
-</p><!--l. 172--><p class="noindent" ><img 
-src="images/016-HelloWorldC13.png" alt="PIC"  
- />
-<a 
- id="x11-42001r58"></a>
-</p>
-<h4 class="subsectionHead"><span class="titlemark">2.5.6   </span> <a 
- id="x11-430006"></a>Setup the C build</h4>
-<!--l. 176--><p class="noindent" >Before you can build the application you must setup the include and library paths for the runtime system.
-</p><!--l. 178--><p class="noindent" >Right click the project and select <span 
-class="ec-lmsso-10">Properties -&#x003E; C/C++ Build -&#x003E; Settings -&#x003E; Includes</span>. Add the include path for the current
-project <span 
-class="ec-lmsso-10">src-gen </span>and the runtime source folders <span 
-class="ec-lmsso-10">common</span>, <span 
-class="ec-lmsso-10">config </span>and the chosen platform (<span 
-class="ec-lmsso-10">MT_WIN_MinGW  </span>or
-<span 
-class="ec-lmsso-10">MT_POSIX_GENERIC_GCC</span>).
-</p><!--l. 181--><p class="noindent" ><img 
-src="images/016-HelloWorldC14.png" alt="PIC"  
- />
-</p><!--l. 183--><p class="noindent" >Add the runtime library: <span 
-class="ec-lmsso-10">Properties -&#x003E; C/C++ Build -&#x003E; Settings -&#x003E; Libraries </span>and the runtime library which is appropriate for
-your environment (e.g. <span 
-class="ec-lmtt-10">rt </span>for Linux).
-</p><!--l. 186--><p class="noindent" ><img 
-src="images/016-HelloWorldC15.png" alt="PIC"  
- />
-</p><!--l. 188--><p class="noindent" >The name of the library is <span 
-class="ec-lmsso-10">org.eclipse.etrice.runtime.c </span>but the actual file name for the library is <span 
-class="ec-lmsso-10">liborg.eclipse.etrice.runtime.c.a</span>
-.
-</p><!--l. 190--><p class="noindent" ><span 
-class="ec-lmssbx-10">Caution: </span>Exclude the folder <span 
-class="ec-lmsso-10">src-gen-info </span>from the build (this is done in the properties of this folder). This folder is used to
-store temporary files for the incremental code generation and must not be compiled in order to avoid multiple definition of
-symbols.
-</p><!--l. 193--><p class="noindent" ><img 
-src="images/016-HelloWorldC151.png" alt="PIC"  
- />
-<a 
- id="x11-43001r59"></a>
-</p>
-<h4 class="subsectionHead"><span class="titlemark">2.5.7   </span> <a 
- id="x11-440007"></a>Build and run the model</h4>
-<!--l. 197--><p class="noindent" >Now you can build the application. Click the build button (hammer symbol) to build the application. Run the application in
-the folder <span 
-class="ec-lmsso-10">Binary </span>as <span 
-class="ec-lmsso-10">Local C/C++ Application</span>. The output in the Console View should contain the message <span 
-class="ec-lmsso-10">Hello</span>
-                                                                                            
-                                                                                            
-<span 
-class="ec-lmsso-10">World</span>.
-</p><!--l. 201--><p class="noindent" ><img 
-src="images/016-HelloWorldC16.png" alt="PIC"  
- />
-<a 
- id="x11-44001r60"></a>
-</p>
-<h4 class="subsectionHead"><span class="titlemark">2.5.8   </span> <a 
- id="x11-450008"></a>Open the Message Sequence Chart</h4>
-<!--l. 3--><p class="noindent" >For debugging and learning purposes, the application produced a Message Sequence Chart and wrote it to a file. Open the file
-<span 
-class="ec-lmsso-10">subSysRef1_Async.seq </span>or <span 
-class="ec-lmsso-10">msc.seq </span>in the folder <span 
-class="ec-lmsso-10">HelloWorld/tmp/log/ </span>using the tool Trace2UML. Create the path if not
-already there.
-</p><!--l. 5--><p class="noindent" >Trace2UML is an open source MSC viewer and can be obtained here: </p>
-     <ul class="itemize1">
-     <li class="itemize"><a 
-href="http://trace2uml.tigris.org/" >Trace2UML project home and download of windows version</a>
-     </li>
-     <li class="itemize"><a 
-href="http://apt.astade.de/" >download of the Linux package of the Astade UML tool which contains Trace2UML</a></li></ul>
-<!--l. 10--><p class="noindent" >After opening the file, you should see something like this:
-</p><!--l. 12--><p class="noindent" ><img 
-src="images/015-HelloWorld09.png" alt="PIC"  
- />
-</p><!--l. 15--><p class="noindent" >The Actor with the instance path <span 
-class="ec-lmsso-10">/LogSys1/subSysRef1/actorRef1 </span>is in the state <span 
-class="ec-lmsso-10">state0</span>. This is the simplest possible MSC.
-The MSCs for further tutorials will contain more information.
-<a 
- id="x11-45001r61"></a>
-</p>
-<h4 class="subsectionHead"><span class="titlemark">2.5.9   </span> <a 
- id="x11-460009"></a>Summary</h4>
-<!--l. 207--><p class="noindent" >You are now familiar with all necessary steps to create, build and run an eTrice C model from scratch. You are able to create
-a launch configuration to start the code generator and to perform all necessary settings to compile and link the
-application.
-</p><!--l. 211--><p class="noindent" >The next tutorial provides an exercise to get more familiar with these working steps.
-                                                                                            
-                                                                                            
-</p>
 <!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
-href="etrice-docse8.html" >next</a>] [<a 
+href="etrice-docch3.html" >next</a>] [<a 
 href="etrice-docse6.html" >prev</a>] [<a 
 href="etrice-docse6.html#tailetrice-docse6.html" >prev-tail</a>] [<a 
 href="etrice-docse7.html" >front</a>] [<a 

@@ -35,6 +35,7 @@ import org.eclipse.xtext.ui.editor.embedded.IEditedResourceProvider;
 
 import com.google.inject.Injector;
 
+@Deprecated
 @SuppressWarnings("restriction")
 /**
  * according to eclipse forums xtext.ui.editor.embedded is save to use
@@ -126,33 +127,33 @@ public class MappingCreationPage extends WizardPage {
 		if (getControl() == null)
 			return;
 
-		builder = new MappingBuilder(roomModel, etMapInjector);
-		SaveOptions options = SaveOptions.newBuilder().noValidation().format().getOptions();
-
-		ISerializer serializer = builder.etMapRes.getSerializer();
-		StringBuffer mappings = new StringBuffer();
-		for (Mapping item : builder.mappingModel.getMappings())
-			mappings.append(serializer.serialize(item, options));
-		etMapEditor.createPartialEditor("", mappings.toString(), "", false);
-
-		serializer = builder.etPhysRes.getSerializer();
-		StringBuffer physEditorContent = new StringBuffer();
-		for (PhysicalSystem item : builder.physicalModel.getSystems())
-			physEditorContent.append(serializer.serialize(item, options));
-		for (NodeClass item : builder.physicalModel.getNodeClasses())
-			physEditorContent.append(serializer.serialize(item, options));
-		for (RuntimeClass item : builder.physicalModel.getRuntimeClasses())
-			physEditorContent.append(serializer.serialize(item, options));
-		etPhysEditor.createPartialEditor("", physEditorContent.toString(), "", false);
+//		builder = new MappingBuilder(roomModel, etMapInjector);
+//		SaveOptions options = SaveOptions.newBuilder().noValidation().format().getOptions();
+//
+//		ISerializer serializer = builder.etMapRes.getSerializer();
+//		StringBuffer mappings = new StringBuffer();
+//		for (Mapping item : builder.mappingModel.getMappings())
+//			mappings.append(serializer.serialize(item, options));
+//		etMapEditor.createPartialEditor("", mappings.toString(), "", false);
+//
+//		serializer = builder.etPhysRes.getSerializer();
+//		StringBuffer physEditorContent = new StringBuffer();
+//		for (PhysicalSystem item : builder.physicalModel.getSystems())
+//			physEditorContent.append(serializer.serialize(item, options));
+//		for (NodeClass item : builder.physicalModel.getNodeClasses())
+//			physEditorContent.append(serializer.serialize(item, options));
+//		for (RuntimeClass item : builder.physicalModel.getRuntimeClasses())
+//			physEditorContent.append(serializer.serialize(item, options));
+//		etPhysEditor.createPartialEditor("", physEditorContent.toString(), "", false);
 	}
 
-	public Resource getMappingModelResource(String setPhysModelImport) {
-		builder.setPhysImport(setPhysModelImport);
-		return builder.etMapRes;
-	}
-
-	public Resource getPhysModelResource() {
-		return builder.etPhysRes;
-	}
+//	public Resource getMappingModelResource(String setPhysModelImport) {
+//		builder.setPhysImport(setPhysModelImport);
+//		return builder.etMapRes;
+//	}
+//
+//	public Resource getPhysModelResource() {
+//		return builder.etPhysRes;
+//	}
 
 }

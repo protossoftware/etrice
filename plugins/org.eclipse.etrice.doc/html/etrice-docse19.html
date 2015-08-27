@@ -4,1996 +4,154 @@
 <!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
 <html xmlns="http://www.w3.org/1999/xhtml"  
 > 
-<head><title>eTrice Java Projects</title> 
+<head><title>Finite State Machines</title> 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2015-07-09 13:04:00" /> 
+<meta name="date" content="2015-08-26 15:05:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
-<!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
-href="etrice-docse20.html" >next</a>] [<a 
+<!--l. 606--><div class="crosslinks"><p class="noindent">[<a 
+href="etrice-docch6.html" >next</a>] [<a 
 href="etrice-docse18.html" >prev</a>] [<a 
 href="etrice-docse18.html#tailetrice-docse18.html" >prev-tail</a>] [<a 
 href="#tailetrice-docse19.html">tail</a>] [<a 
-href="etrice-docch6.html#etrice-docse19.html" >up</a>] </p></div>
-<h3 class="sectionHead"><span class="titlemark">6.2   </span> <a 
- id="x27-1650002"></a>eTrice Java Projects</h3>
-<!--l. 3--><p class="noindent" >There are two flavors of eTrice Java projects. The first one uses the Eclipse JDT build and the second one uses Maven to
-build and deploy an eTrice application.
-</p><!--l. 6--><p class="noindent" >The kind of build can be selected in the "Empty eTrice Java project" wizard.
+href="etrice-docch5.html#etrice-docse19.html" >up</a>] </p></div>
+<h3 class="sectionHead"><span class="titlemark">5.6   </span> <a 
+ id="x26-1560006"></a>Finite State Machines</h3>
 <a 
- id="x27-165001r218"></a>
+ id="x26-156001r200"></a>
+<h4 class="subsectionHead"><span class="titlemark">5.6.1   </span> <a 
+ id="x26-1570001"></a>Description</h4>
+<!--l. 610--><p class="noindent" >Definition from <a 
+href="http://en.wikipedia.org/wiki/Finite-state_machine" >Wikipedia</a>:
+     </p><div class="quote">
+     <!--l. 613--><p class="noindent" >A finite-state machine (FSM) or finite-state automaton (plural: automata), or simply a state machine,
+     is a mathematical model used to design computer programs and digital logic circuits. It is conceived as
+     an abstract machine that can be in one of a finite number of states. The machine is in only one state at
+     a time; the state it is in at any given time is called the current state. It can change from one state to
+     another when initiated by a triggering event or condition, this is called a transition. A particular FSM is
+     defined by a list of the possible states it can transition to from each state, and the triggering condition
+     for each transition.
+     </p><!--l. 621--><p class="noindent" >In ROOM each actor class can implement its behavior using a state machine. Events occurring at the
+     end ports of an actor will be forwarded to and processed by the state machine. Events possibly trigger
+     state transitions.</p></div>
+<a 
+ id="x26-157001r203"></a>
+<h4 class="subsectionHead"><span class="titlemark">5.6.2   </span> <a 
+ id="x26-1580002"></a>Motivation</h4>
+<!--l. 628--><p class="noindent" >For event driven systems a finite state machine is ideal for processing the stream of events. Typically during processing new
+events are produced which are sent to peer actors.
+</p><!--l. 631--><p class="noindent" >We distinguish flat and hierarchical state machines.
+<a 
+ id="x26-158001r204"></a>
 </p>
-<h4 class="subsectionHead"><span class="titlemark">6.2.1   </span> <a 
- id="x27-1660001"></a>Eclipse JDT Build</h4>
-<!--l. 10--><p class="noindent" >If this kind of build is chosen the eTrice new project wizard requires the <span 
-class="ec-lmtt-10">org.eclipse.etrice.runtime.java </span>project in the
-workspace and adds a dependency to it.
-</p><!--l. 13--><p class="noindent" >If the project uses other eTrice projects (e.g. the <span 
-class="ec-lmtt-10">org.eclipse.etrice.modellib.java</span>) they have to be added to the Java
-build path as well.
-</p><!--l. 16--><p class="noindent" >The eTrice new project wizard creates the following files for the JDT build </p>
-     <ul class="itemize1">
-     <li class="itemize">a ROOM model file with exemplary classes
-     </li>
-     <li class="itemize">a simple physical model
-     </li>
-     <li class="itemize">a model mapping the logical entities of the ROOM model to the physical entities
-     </li>
-     <li class="itemize">a launch configuration that invokes the eTrice Java code generator for the new models
-     </li>
-     <li class="itemize">a launch configuration that launches the main method of the generated code</li></ul>
-<!--l. 25--><p class="noindent" >If "build automatically" is chosen the newly created model can be generated and launched with just two clicks.
+<h4 class="subsectionHead"><span class="titlemark">5.6.3   </span> <a 
+ id="x26-1590003"></a>Notation</h4>
+<!--l. 635--><p class="noindent" >We distinguish flat finite state machines (with just one level of hierarchy) and hierarchical ones.
 <a 
- id="x27-166001r220"></a>
-</p>
-<h4 class="subsectionHead"><span class="titlemark">6.2.2   </span> <a 
- id="x27-1670002"></a>Maven Build</h4>
-<!--l. 29--><p class="noindent" >The Maven integration of eTrice requires the m2eclipse plug-in installed. The dependencies are then managed by the Maven
-pom.xml but the m2e builder maps them as JDT visible dependencies to the project class path.
-</p><!--l. 32--><p class="noindent" >The eTrice new project wizard creates the following files for the Maven build </p>
-     <ul class="itemize1">
-     <li class="itemize">a ROOM model file with exemplary classes
-     </li>
-     <li class="itemize">a simple physical model
-     </li>
-     <li class="itemize">a model mapping the logical entities of the ROOM model to the physical entities
-     </li>
-     <li class="itemize">a launch configuration that invokes the eTrice Java code generator for the new models
-     </li>
-     <li class="itemize">a launch configuration that builds and deploys the generated application
-                                                                                            
-                                                                                            
-     </li>
-     <li class="itemize">a launch configuration that launches the deployed jar file
-     </li>
-     <li class="itemize">a launch configuration that launches the main method of the generated code (for convenience or if the generated
-     code should be launched in debug mode)</li></ul>
-<!--l. 44--><p class="noindent" >After the new project is created the m2e builder creates the dependencies in the project class path. Therefore also JDT can
-compile and launch the application.
-<a 
- id="Q1-27-222"></a>
+ id="Q1-26-206"></a>
 </p>
 <h5 class="likesubsubsectionHead"><a 
- id="x27-1680002"></a>Example</h5>
-<!--l. 49--><p class="noindent" >As an example we want to use the <a 
-href="etrice-docse8.html#x12-470006">Ping Pong Tutorial (Java and C)<!--tex4ht:ref: sec:ping_pong_tutorial --></a>.
-</p><!--l. 51--><p class="noindent" >For this example we start with an empty workspace. We create a new eTrice project using the "Empty eTrice Java Project"
-wizard which results in a workspace looking like:
-</p><!--l. 55--><p class="noindent" ><img 
-src="images/042-after-project-creation.png" alt="PIC"  
- />
-</p><!--l. 57--><p class="noindent" >The only difference to the first version of this example is the resolution of the <span 
-class="ec-lmtt-10">TimingService </span>using a classpath
-scheme:
+ id="x26-1600003"></a>Flat Finite State Machine</h5>
+<!--l. 639--><p class="noindent" >The simpler flat finite state machines are composed of the elements shown in table <a 
+href="#x26-160001r6">5.6<!--tex4ht:ref: tab:flat_fsm_notation --></a>.
 </p>
-<!--l. 60-->
-<div class="lstlisting" id="listing-61"><span class="label"><a 
- id="x27-168001r1"></a></span><span 
-class="ec-lmssbx-10x-x-90">import</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">room</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">basic</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">service</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">timing</span><span 
-class="ec-lmtt-9">.*</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">from</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">classpath</span><span 
-class="ec-lmtt-9">:/</span><span 
-class="ec-lmtt-9">TimingService</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">room</span><span 
-class="ec-lmtt-9">"</span>
-</div>
-<!--l. 64--><p class="noindent" >It is possible to navigate to the imported model:
-</p><!--l. 66--><p class="noindent" ><img 
-src="images/042-navigate-import.png" alt="PIC"  
- />
-</p><!--l. 68--><p class="noindent" >but the model is read-only. It is found on the class path of the project which is derived from the project pom&#8217;s
-dependencies:
-</p>
-<!--l. 70-->
-<div class="lstlisting" id="listing-62"><span class="label"><a 
- id="x27-168002r1"></a></span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">dependency</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168003r2"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">groupId</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">org</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">eclipse</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">etrice</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">groupId</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168004r3"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">artifactId</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">org</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">eclipse</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">etrice</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">modellib</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">java</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">artifactId</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168005r4"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmssbx-10x-x-90">version</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">0.5.0-</span><span 
-class="ec-lmtt-9">SNAPSHOT</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmssbx-10x-x-90">version</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168006r5"></a></span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">dependency</span><span 
-class="ec-lmtt-9">&#x003E;</span>
-</div>
-<!--l. 78--><p class="noindent" >Since during the generate-sources life cycle phase the same dependency is needed we have to add it also to our eTrice
-generator plug-in:
-</p>
-<!--l. 81-->
-<div class="lstlisting" id="listing-63"><span class="label"><a 
- id="x27-168007r1"></a></span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">build</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168008r2"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">plugins</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168009r3"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">plugin</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168010r4"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">groupId</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">org</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">eclipse</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">etrice</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">groupId</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168011r5"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">artifactId</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">org</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">eclipse</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">etrice</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">generator</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">java</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">mvn</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">artifactId</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168012r6"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmssbx-10x-x-90">version</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">0.5.0-</span><span 
-class="ec-lmtt-9">SNAPSHOT</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmssbx-10x-x-90">version</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168013r7"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">!</span><span 
-class="ec-lmtt-9">--</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">[...]</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">--</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168014r8"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">dependencies</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168015r9"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">!</span><span 
-class="ec-lmtt-9">--</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">put</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">the</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">modellib</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">on</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">the</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">class</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">path</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">to</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">allow</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">resolution</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">of</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">models</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">by</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">the</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">generator</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">--</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168016r10"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">dependency</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168017r11"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">groupId</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">org</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">eclipse</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">etrice</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">groupId</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168018r12"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">artifactId</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">org</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">eclipse</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">etrice</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">modellib</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">java</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">artifactId</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168019r13"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmssbx-10x-x-90">version</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">0.5.0-</span><span 
-class="ec-lmtt-9">SNAPSHOT</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmssbx-10x-x-90">version</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168020r14"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">dependency</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168021r15"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">dependencies</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168022r16"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">plugin</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168023r17"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">plugins</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168024r18"></a></span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">build</span><span 
-class="ec-lmtt-9">&#x003E;</span>
-</div>
-<!--l. 102--><p class="noindent" >Now we start the build, e.g. by entering <span 
-class="ec-lmtt-10">mvn clean package </span>on the command line or by launching Maven using m2e.
-Maven will download all needed artifacts. The build should succeed and contain somewhere the generator
-output:
-</p>
-<!--l. 106-->
-<div class="lstlisting" id="listing-64"><span class="label"><a 
- id="x27-168025r1"></a></span><span 
-class="ec-lmtt-9">[</span><span 
-class="ec-lmtt-9">INFO</span><span 
-class="ec-lmtt-9">]</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Info</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">--</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">reading</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">models</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168026r2"></a></span><span 
-class="ec-lmtt-9">[</span><span 
-class="ec-lmtt-9">INFO</span><span 
-class="ec-lmtt-9">]</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Info</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">added</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">model</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">model</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">MavenPingPong</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">etmap</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168027r3"></a></span><span 
-class="ec-lmtt-9">[</span><span 
-class="ec-lmtt-9">INFO</span><span 
-class="ec-lmtt-9">]</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Info</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Loading</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">file</span><span 
-class="ec-lmtt-9">:/</span><span 
-class="ec-lmtt-9">C</span><span 
-class="ec-lmtt-9">:/</span><span 
-class="ec-lmtt-9">eTrice</span><span 
-class="ec-lmtt-9">-</span><span 
-class="ec-lmtt-9">mvn</span><span 
-class="ec-lmtt-9">-</span><span 
-class="ec-lmtt-9">tutorial</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">MavenPingPong</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">model</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">MavenPingPong</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">etmap</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168028r4"></a></span><span 
-class="ec-lmtt-9">[</span><span 
-class="ec-lmtt-9">INFO</span><span 
-class="ec-lmtt-9">]</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Info</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">added</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">referenced</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">model</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">file</span><span 
-class="ec-lmtt-9">:/</span><span 
-class="ec-lmtt-9">C</span><span 
-class="ec-lmtt-9">:/</span><span 
-class="ec-lmtt-9">eTrice</span><span 
-class="ec-lmtt-9">-</span><span 
-class="ec-lmtt-9">mvn</span><span 
-class="ec-lmtt-9">-</span><span 
-class="ec-lmtt-9">tutorial</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">MavenPingPong</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">model</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">MavenPingPong</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">room</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168029r5"></a></span><span 
-class="ec-lmtt-9">[</span><span 
-class="ec-lmtt-9">INFO</span><span 
-class="ec-lmtt-9">]</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Info</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">added</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">referenced</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">model</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">file</span><span 
-class="ec-lmtt-9">:/</span><span 
-class="ec-lmtt-9">C</span><span 
-class="ec-lmtt-9">:/</span><span 
-class="ec-lmtt-9">eTrice</span><span 
-class="ec-lmtt-9">-</span><span 
-class="ec-lmtt-9">mvn</span><span 
-class="ec-lmtt-9">-</span><span 
-class="ec-lmtt-9">tutorial</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">MavenPingPong</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">model</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">MavenPingPong</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">etphys</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168030r6"></a></span><span 
-class="ec-lmtt-9">[</span><span 
-class="ec-lmtt-9">INFO</span><span 
-class="ec-lmtt-9">]</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Info</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Loading</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">file</span><span 
-class="ec-lmtt-9">:/</span><span 
-class="ec-lmtt-9">C</span><span 
-class="ec-lmtt-9">:/</span><span 
-class="ec-lmtt-9">eTrice</span><span 
-class="ec-lmtt-9">-</span><span 
-class="ec-lmtt-9">mvn</span><span 
-class="ec-lmtt-9">-</span><span 
-class="ec-lmtt-9">tutorial</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">MavenPingPong</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">model</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">MavenPingPong</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">room</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168031r7"></a></span><span 
-class="ec-lmtt-9">[</span><span 
-class="ec-lmtt-9">INFO</span><span 
-class="ec-lmtt-9">]</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Info</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">added</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">referenced</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">model</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">classpath</span><span 
-class="ec-lmtt-9">:/</span><span 
-class="ec-lmtt-9">TimingService</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">room</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168032r8"></a></span><span 
-class="ec-lmtt-9">[</span><span 
-class="ec-lmtt-9">INFO</span><span 
-class="ec-lmtt-9">]</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Info</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Loading</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">jar</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">file</span><span 
-class="ec-lmtt-9">:/</span><span 
-class="ec-lmtt-9">C</span><span 
-class="ec-lmtt-9">:/</span><span 
-class="ec-lmtt-9">Users</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">hrentz</span><span 
-class="ec-lmtt-9">/.</span><span 
-class="ec-lmtt-9">m2</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">repository</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">org</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">eclipse</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">etrice</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">org</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">eclipse</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">etrice</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">modellib</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">java</span><span 
-class="ec-lmtt-9">/0.5.0-</span><span 
-class="ec-lmtt-9">SNAPSHOT</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">org</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">eclipse</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">etrice</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">modellib</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">java</span><span 
-class="ec-lmtt-9">-0.5.0-</span><span 
-class="ec-lmtt-9">SNAPSHOT</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">jar</span><span 
-class="ec-lmtt-9">!/</span><span 
-class="ec-lmtt-9">TimingService</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">room</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168033r9"></a></span><span 
-class="ec-lmtt-9">[</span><span 
-class="ec-lmtt-9">INFO</span><span 
-class="ec-lmtt-9">]</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Info</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Loading</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">file</span><span 
-class="ec-lmtt-9">:/</span><span 
-class="ec-lmtt-9">C</span><span 
-class="ec-lmtt-9">:/</span><span 
-class="ec-lmtt-9">eTrice</span><span 
-class="ec-lmtt-9">-</span><span 
-class="ec-lmtt-9">mvn</span><span 
-class="ec-lmtt-9">-</span><span 
-class="ec-lmtt-9">tutorial</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">MavenPingPong</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">model</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">MavenPingPong</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">etphys</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168034r10"></a></span><span 
-class="ec-lmtt-9">[</span><span 
-class="ec-lmtt-9">INFO</span><span 
-class="ec-lmtt-9">]</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Info</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">--</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">validating</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">models</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168035r11"></a></span><span 
-class="ec-lmtt-9">[</span><span 
-class="ec-lmtt-9">INFO</span><span 
-class="ec-lmtt-9">]</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Info</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">validation</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">finished</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">with</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">0</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">errors</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">and</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">0</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">warnings</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168036r12"></a></span><span 
-class="ec-lmtt-9">[</span><span 
-class="ec-lmtt-9">INFO</span><span 
-class="ec-lmtt-9">]</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Info</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">--</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">creating</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">generator</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">model</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168037r13"></a></span><span 
-class="ec-lmtt-9">[</span><span 
-class="ec-lmtt-9">INFO</span><span 
-class="ec-lmtt-9">]</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Info</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">GeneratorModelBuilder</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">creating</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">system</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">class</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">from</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">LogSys1</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168038r14"></a></span><span 
-class="ec-lmtt-9">[</span><span 
-class="ec-lmtt-9">INFO</span><span 
-class="ec-lmtt-9">]</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Info</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">GeneratorModelBuilder</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">creating</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">subsystem</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">instance</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">from</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">subSysRef1</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168039r15"></a></span><span 
-class="ec-lmtt-9">[</span><span 
-class="ec-lmtt-9">INFO</span><span 
-class="ec-lmtt-9">]</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Info</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">--</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">starting</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">code</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">generation</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168040r16"></a></span><span 
-class="ec-lmtt-9">[</span><span 
-class="ec-lmtt-9">INFO</span><span 
-class="ec-lmtt-9">]</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Info</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">clearing</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">C</span><span 
-class="ec-lmtt-9">:\</span><span 
-class="ec-lmtt-9">eTrice</span><span 
-class="ec-lmtt-9">-</span><span 
-class="ec-lmtt-9">mvn</span><span 
-class="ec-lmtt-9">-</span><span 
-class="ec-lmtt-9">tutorial</span><span 
-class="ec-lmtt-9">\</span><span 
-class="ec-lmtt-9">MavenPingPong</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">src</span><span 
-class="ec-lmtt-9">-</span><span 
-class="ec-lmtt-9">gen</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168041r17"></a></span><span 
-class="ec-lmtt-9">[</span><span 
-class="ec-lmtt-9">INFO</span><span 
-class="ec-lmtt-9">]</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Info</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">clearing</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">src</span><span 
-class="ec-lmtt-9">-</span><span 
-class="ec-lmtt-9">gen</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168042r18"></a></span><span 
-class="ec-lmtt-9">[</span><span 
-class="ec-lmtt-9">INFO</span><span 
-class="ec-lmtt-9">]</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Info</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">generating</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">ProtocolClass</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">implementation</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#8217;</span><span 
-class="ec-lmtt-9">PingPongProtocol</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">java</span><span 
-class="ec-lmtt-9">&#8217;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">in</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#8217;</span><span 
-class="ec-lmtt-9">C</span><span 
-class="ec-lmtt-9">:\</span><span 
-class="ec-lmtt-9">eTrice</span><span 
-class="ec-lmtt-9">-</span><span 
-class="ec-lmtt-9">mvn</span><span 
-class="ec-lmtt-9">-</span><span 
-class="ec-lmtt-9">tutorial</span><span 
-class="ec-lmtt-9">\</span><span 
-class="ec-lmtt-9">MavenPingPong</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">src</span><span 
-class="ec-lmtt-9">-</span><span 
-class="ec-lmtt-9">gen</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">MavenPingPong</span><span 
-class="ec-lmtt-9">/&#8217;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168043r19"></a></span><span 
-class="ec-lmtt-9">[</span><span 
-class="ec-lmtt-9">INFO</span><span 
-class="ec-lmtt-9">]</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Info</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">generating</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">ActorClass</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">implementation</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#8217;</span><span 
-class="ec-lmtt-9">PingPongTop</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">java</span><span 
-class="ec-lmtt-9">&#8217;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">in</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#8217;</span><span 
-class="ec-lmtt-9">C</span><span 
-class="ec-lmtt-9">:\</span><span 
-class="ec-lmtt-9">eTrice</span><span 
-class="ec-lmtt-9">-</span><span 
-class="ec-lmtt-9">mvn</span><span 
-class="ec-lmtt-9">-</span><span 
-class="ec-lmtt-9">tutorial</span><span 
-class="ec-lmtt-9">\</span><span 
-class="ec-lmtt-9">MavenPingPong</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">src</span><span 
-class="ec-lmtt-9">-</span><span 
-class="ec-lmtt-9">gen</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">MavenPingPong</span><span 
-class="ec-lmtt-9">/&#8217;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168044r20"></a></span><span 
-class="ec-lmtt-9">[</span><span 
-class="ec-lmtt-9">INFO</span><span 
-class="ec-lmtt-9">]</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Info</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">generating</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">ActorClass</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">implementation</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#8217;</span><span 
-class="ec-lmtt-9">Receiver</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">java</span><span 
-class="ec-lmtt-9">&#8217;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">in</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#8217;</span><span 
-class="ec-lmtt-9">C</span><span 
-class="ec-lmtt-9">:\</span><span 
-class="ec-lmtt-9">eTrice</span><span 
-class="ec-lmtt-9">-</span><span 
-class="ec-lmtt-9">mvn</span><span 
-class="ec-lmtt-9">-</span><span 
-class="ec-lmtt-9">tutorial</span><span 
-class="ec-lmtt-9">\</span><span 
-class="ec-lmtt-9">MavenPingPong</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">src</span><span 
-class="ec-lmtt-9">-</span><span 
-class="ec-lmtt-9">gen</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">MavenPingPong</span><span 
-class="ec-lmtt-9">/&#8217;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168045r21"></a></span><span 
-class="ec-lmtt-9">[</span><span 
-class="ec-lmtt-9">INFO</span><span 
-class="ec-lmtt-9">]</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Info</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">generating</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">ActorClass</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">implementation</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#8217;</span><span 
-class="ec-lmtt-9">Sender</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">java</span><span 
-class="ec-lmtt-9">&#8217;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">in</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#8217;</span><span 
-class="ec-lmtt-9">C</span><span 
-class="ec-lmtt-9">:\</span><span 
-class="ec-lmtt-9">eTrice</span><span 
-class="ec-lmtt-9">-</span><span 
-class="ec-lmtt-9">mvn</span><span 
-class="ec-lmtt-9">-</span><span 
-class="ec-lmtt-9">tutorial</span><span 
-class="ec-lmtt-9">\</span><span 
-class="ec-lmtt-9">MavenPingPong</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">src</span><span 
-class="ec-lmtt-9">-</span><span 
-class="ec-lmtt-9">gen</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">MavenPingPong</span><span 
-class="ec-lmtt-9">/&#8217;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168046r22"></a></span><span 
-class="ec-lmtt-9">[</span><span 
-class="ec-lmtt-9">INFO</span><span 
-class="ec-lmtt-9">]</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Info</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">generating</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Node</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">implementation</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#8217;</span><span 
-class="ec-lmtt-9">Node_nodeRef1_subSysRef1</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">java</span><span 
-class="ec-lmtt-9">&#8217;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">in</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#8217;</span><span 
-class="ec-lmtt-9">C</span><span 
-class="ec-lmtt-9">:\</span><span 
-class="ec-lmtt-9">eTrice</span><span 
-class="ec-lmtt-9">-</span><span 
-class="ec-lmtt-9">mvn</span><span 
-class="ec-lmtt-9">-</span><span 
-class="ec-lmtt-9">tutorial</span><span 
-class="ec-lmtt-9">\</span><span 
-class="ec-lmtt-9">MavenPingPong</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">src</span><span 
-class="ec-lmtt-9">-</span><span 
-class="ec-lmtt-9">gen</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">MavenPingPong</span><span 
-class="ec-lmtt-9">/&#8217;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168047r23"></a></span><span 
-class="ec-lmtt-9">[</span><span 
-class="ec-lmtt-9">INFO</span><span 
-class="ec-lmtt-9">]</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Info</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">generating</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">SubSystemRunner</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">implementation</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#8217;</span><span 
-class="ec-lmtt-9">Node_nodeRef1_subSysRef1Runner</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">java</span><span 
-class="ec-lmtt-9">&#8217;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">in</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#8217;</span><span 
-class="ec-lmtt-9">C</span><span 
-class="ec-lmtt-9">:\</span><span 
-class="ec-lmtt-9">eTrice</span><span 
-class="ec-lmtt-9">-</span><span 
-class="ec-lmtt-9">mvn</span><span 
-class="ec-lmtt-9">-</span><span 
-class="ec-lmtt-9">tutorial</span><span 
-class="ec-lmtt-9">\</span><span 
-class="ec-lmtt-9">MavenPingPong</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">src</span><span 
-class="ec-lmtt-9">-</span><span 
-class="ec-lmtt-9">gen</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">MavenPingPong</span><span 
-class="ec-lmtt-9">/&#8217;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168048r24"></a></span><span 
-class="ec-lmtt-9">[</span><span 
-class="ec-lmtt-9">INFO</span><span 
-class="ec-lmtt-9">]</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Info</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">--</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">finished</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">code</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">generation</span>
-</div>
-<!--l. 133--><p class="noindent" >When the packaging of the project succeeded two jar files have been created in the <span 
-class="ec-lmtt-10">target </span>folder. The larger one with
-"jar-with-dependencies" in its name also contains the referenced Maven components. It can be launched using the <span 
-class="ec-lmtt-10">runjar_*</span>
-launch configuration.
+<div class="table">
                                                                                             
                                                                                             
-</p><!--l. 137--><p class="noindent" >Finally we want to mention that the generator switches are passed as arguments to the plug-in. In the pom you can find the
-most commonly used ones in xml comments together with a comment:
-</p>
-<!--l. 140-->
-<div class="lstlisting" id="listing-65"><span class="label"><a 
- id="x27-168049r1"></a></span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">plugin</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168050r2"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">groupId</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">org</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">eclipse</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">etrice</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">groupId</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168051r3"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">artifactId</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">org</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">eclipse</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">etrice</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">generator</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">java</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">mvn</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">artifactId</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168052r4"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmssbx-10x-x-90">version</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">0.5.0-</span><span 
-class="ec-lmtt-9">SNAPSHOT</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmssbx-10x-x-90">version</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168053r5"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">executions</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168054r6"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">execution</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168055r7"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">goals</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168056r8"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">goal</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">eTriceJavaGenerator</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">goal</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168057r9"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">goals</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168058r10"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">configuration</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168059r11"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">arguments</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168060r12"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">!</span><span 
-class="ec-lmtt-9">--</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">allowed</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">switches</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">for</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">the</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">generator</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">(</span><span 
-class="ec-lmtt-9">not</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">complete</span><span 
-class="ec-lmtt-9">)</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">--</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168061r13"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">!</span><span 
-class="ec-lmtt-9">--</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">generate</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">the</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">store</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">restore</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">interface</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">using</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">POJO</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">data</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">objects</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168062r14"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">param</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">-</span><span 
-class="ec-lmtt-9">storeDataObj</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">param</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168063r15"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">--</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168064r16"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">!</span><span 
-class="ec-lmtt-9">--</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">generate</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">MSC</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">instrumentation</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168065r17"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">param</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">-</span><span 
-class="ec-lmtt-9">msc_instr</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">param</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168066r18"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">--</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168067r19"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">!</span><span 
-class="ec-lmtt-9">--</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">generate</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">the</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">persistence</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">interface</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">for</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">dynamic</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">actors</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168068r20"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">param</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">-</span><span 
-class="ec-lmtt-9">persistable</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">param</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168069r21"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">--</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168070r22"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">!</span><span 
-class="ec-lmtt-9">--</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">generate</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">all</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">ROOM</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">classes</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">as</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">library</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168071r23"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">param</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">-</span><span 
-class="ec-lmtt-9">lib</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">param</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168072r24"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">--</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168073r25"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">!</span><span 
-class="ec-lmtt-9">--</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">generate</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">documentation</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168074r26"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">param</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">-</span><span 
-class="ec-lmtt-9">genDocu</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">param</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168075r27"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">--</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168076r28"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">!</span><span 
-class="ec-lmtt-9">--</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">generate</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">files</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">incrementally</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">(</span><span 
-class="ec-lmtt-9">overwrite</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">only</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">if</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">contents</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">changed</span><span 
-class="ec-lmtt-9">)</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168077r29"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">param</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">-</span><span 
-class="ec-lmtt-9">inc</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">param</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168078r30"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">--</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168079r31"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">param</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">model</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">MavenPingPong</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">etmap</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">param</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168080r32"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">arguments</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168081r33"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">configuration</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168082r34"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">execution</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168083r35"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">executions</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168084r36"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">dependencies</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168085r37"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">!</span><span 
-class="ec-lmtt-9">--</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">[...]</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">--</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168086r38"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">dependencies</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168087r39"></a></span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">plugin</span><span 
-class="ec-lmtt-9">&#x003E;</span>
+<!--l. 642--><p class="noindent" ><a 
+ id="x26-160001r6"></a></p><hr class="float" /><div class="float" 
+>
+                                                                                            
+                                                                                            
+ <div class="caption" 
+><span class="id">Table&#x00A0;5.6: </span><span  
+class="content">Flat finite state machine notation</span></div><!--tex4ht:label?: x26-160001r6 -->
+<div class="tabular"> <table id="TBL-13" class="tabular" 
+cellspacing="0" cellpadding="0" rules="groups" 
+><colgroup id="TBL-13-1g"><col 
+id="TBL-13-1" /></colgroup><colgroup id="TBL-13-2g"><col 
+id="TBL-13-2" /></colgroup><colgroup id="TBL-13-3g"><col 
+id="TBL-13-3" /></colgroup><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-13-1-"><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-13-1-1"  
+class="td11"> <!--l. 646--><p class="noindent" ><span 
+class="ec-lmssbx-10">Description</span>           </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-13-1-2"  
+class="td11"> <span 
+class="ec-lmssbx-10">Graphical Notation  </span></td><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-13-1-3"  
+class="td11"> <!--l. 646--><p class="noindent" ><span 
+class="ec-lmssbx-10">Textual Notation</span>                                   </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-13-2-"><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-13-2-1"  
+class="td11"> <!--l. 648--><p class="noindent" >State                      </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-13-2-2"  
+class="td11">        <img 
+src="images/040-State.jpg" alt="PIC"  
+ />            </td><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-13-2-3"  
+class="td11"> <!--l. 649-->
+ <div class="lstlisting" id="listing-53"><span class="label"><a 
+ id="x26-160002r1"></a></span><span 
+class="ec-lmssbx-10x-x-90">State</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">SomeState</span>
+ 
 </div>
-<!--l. 182--><p class="noindent" >E.g. for our example you might want to use the <span 
-class="ec-lmtt-10">-msc_instr </span>switch to generate MSCs.
-</p><!--l. 184--><p class="noindent" >Finally for reference we show the complete ROOM model of this example:
-</p>
-<!--l. 186--><div class="lstinputlisting">
-<a 
- id="x27-168088r1"></a>
-<a 
- id="x27-168089"></a>
-<span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168090r1"></a></span><span 
-class="ec-lmssbx-10x-x-90">RoomModel</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">MavenPingPong</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168091r2"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168092r3"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">import</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">room</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">basic</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">service</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">timing</span><span 
-class="ec-lmtt-9">.*</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">from</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">classpath</span><span 
-class="ec-lmtt-9">:/</span><span 
-class="ec-lmtt-9">TimingService</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">room</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168093r4"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168094r5"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">LogicalSystem</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">LogSys1</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168095r6"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">SubSystemRef</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">subSysRef1</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">SubSysClass1</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168096r7"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168097r8"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168098r9"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">SubSystemClass</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">SubSysClass1</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168099r10"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">ActorRef</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">actorRef1</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">PingPongTop</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168100r11"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">ActorRef</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">timingService</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">ATimingService</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168101r12"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">LayerConnection</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">ref</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">actorRef1</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">satisfied_by</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">timingService</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">timer</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168102r13"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168103r14"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">LogicalThread</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">defaultThread</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168104r15"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168105r16"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168106r17"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">ActorClass</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">PingPongTop</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168107r18"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Structure</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168108r19"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">ActorRef</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">sender</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Sender</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168109r20"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">ActorRef</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">receiver</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Receiver</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168110r21"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Binding</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">sender</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">receiver</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">and</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">receiver</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">sender</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168111r22"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168112r23"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Behavior</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168113r24"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168114r25"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168115r26"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">ActorClass</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Sender</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168116r27"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Interface</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168117r28"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">conjugated</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Port</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">receiver</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">PingPongProtocol</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168118r29"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168119r30"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Structure</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168120r31"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">external</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Port</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">receiver</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168121r32"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168122r33"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Behavior</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168123r34"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">StateMachine</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168124r35"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
+<!--l. 654--><p class="noindent" >                                           </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-13-3-"><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-13-3-1"  
+class="td11"> <!--l. 655--><p class="noindent" >InitialPoint               </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-13-3-2"  
+class="td11">        <img 
+src="images/040-InitialPoint.jpg" alt="PIC"  
+ />            </td><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-13-3-3"  
+class="td11"> <!--l. 655--><p class="noindent" ><span 
+class="ec-lmsso-10">implicit</span>                                                    </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-13-4-"><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-13-4-1"  
+class="td11"> <!--l. 657--><p class="noindent" >TransitionPoint         </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-13-4-2"  
+class="td11">        <img 
+src="images/040-TransitionPoint.jpg" alt="PIC"  
+ />            </td><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-13-4-3"  
+class="td11"> <!--l. 658-->
+ <div class="lstlisting" id="listing-54"><span class="label"><a 
+ id="x26-160003r1"></a></span><span 
+class="ec-lmssbx-10x-x-90">TransitionPoint</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">tp</span>
+ 
+</div>
+<!--l. 663--><p class="noindent" >                                           </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-13-5-"><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-13-5-1"  
+class="td11"> <!--l. 664--><p class="noindent" >ChoicePoint             </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-13-5-2"  
+class="td11">        <img 
+src="images/040-ChoicePoint.jpg" alt="PIC"  
+ />            </td><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-13-5-3"  
+class="td11"> <!--l. 665-->
+ <div class="lstlisting" id="listing-55"><span class="label"><a 
+ id="x26-160004r1"></a></span><span 
+class="ec-lmssbx-10x-x-90">ChoicePoint</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">cp</span>
+  
+</div>
+<!--l. 670--><p class="noindent" >                                                              </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-13-6-"><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-13-6-1"  
+class="td11"> <!--l. 671--><p class="noindent" >Initial Transition        </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-13-6-2"  
+class="td11">        <img 
+src="images/040-InitialTransition.jpg" alt="PIC"  
+ />            </td><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-13-6-3"  
+class="td11"> <!--l. 672-->
+ <div class="lstlisting" id="listing-56"><span class="label"><a 
+ id="x26-160005r1"></a></span><span 
 class="ec-lmssbx-10x-x-90">Transition</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">init</span><span 
@@ -2003,651 +161,306 @@ class="ec-lmssbx-10x-x-90">initial</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">-&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">SendingPing</span><span 
+class="ec-lmtt-9">Initial</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168125r36"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Transition</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">tr0</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">SendingPing</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">-&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">ReceivedPong</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168126r37"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">triggers</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168127r38"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">pong</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">receiver</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168128r39"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168129r40"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168130r41"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">State</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">SendingPing</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168131r42"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">entry</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168132r43"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">receiver</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">ping</span><span 
-class="ec-lmtt-9">()</span><span 
-class="ec-lmtt-9">;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168133r44"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168134r45"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168135r46"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">State</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">ReceivedPong</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168136r47"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168137r48"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168138r49"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168139r50"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168140r51"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">ActorClass</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Receiver</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168141r52"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Interface</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168142r53"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Port</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">sender</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">PingPongProtocol</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168143r54"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168144r55"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Structure</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168145r56"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">external</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Port</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">sender</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168146r57"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">SAP</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">timing</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">PTimer</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168147r58"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168148r59"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Behavior</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168149r60"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">StateMachine</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168150r61"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Transition</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">init</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">initial</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">-&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">WaitingForPing</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168151r62"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Transition</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">tr0</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">WaitingForPing</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">-&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">WaitingForAWhile</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168152r63"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">triggers</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168153r64"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">ping</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">sender</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168154r65"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168155r66"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168156r67"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Transition</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">tr1</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">WaitingForAWhile</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">-&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">SentPong</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168157r68"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">triggers</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168158r69"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">timeout</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">timing</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168159r70"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168160r71"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168161r72"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">State</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">WaitingForPing</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168162r73"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">State</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">SentPong</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168163r74"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">entry</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168164r75"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">sender</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">pong</span><span 
-class="ec-lmtt-9">()</span><span 
-class="ec-lmtt-9">;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168165r76"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168166r77"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168167r78"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">State</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">WaitingForAWhile</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168168r79"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">entry</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168169r80"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">timing</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">startTimeout</span><span 
-class="ec-lmtt-9">(1000)</span><span 
-class="ec-lmtt-9">;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168170r81"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168171r82"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168172r83"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168173r84"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168174r85"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168175r86"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168176r87"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">ProtocolClass</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">PingPongProtocol</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168177r88"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">incoming</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168178r89"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Message</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">ping</span><span 
-class="ec-lmtt-9">()</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168179r90"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168180r91"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">outgoing</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168181r92"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Message</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">pong</span><span 
-class="ec-lmtt-9">()</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168182r93"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168183r94"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168184r95"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x27-168185r96"></a></span><span 
 class="ec-lmtt-9">}</span>
-<br />
-    <div class="caption" 
-><span class="id">Listing&#x00A0;6.1:
-    </span><span  
-class="content">ROOM
-    example
-    code</span></div><!--tex4ht:label?: x27-1680006 -->
+ 
 </div>
-<!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
-href="etrice-docse20.html" >next</a>] [<a 
+<!--l. 677--><p class="noindent" >                                           </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-13-7-"><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-13-7-1"  
+class="td11"> <!--l. 678--><p class="noindent" >Triggered Transition   </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-13-7-2"  
+class="td11">        <img 
+src="images/040-TriggeredTransition.jpg" alt="PIC"  
+ />            </td><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-13-7-3"  
+class="td11"> <!--l. 679-->
+ <div class="lstlisting" id="listing-57"><span class="label"><a 
+ id="x26-160006r1"></a></span><span 
+class="ec-lmssbx-10x-x-90">Transition</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">tr0</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">initial</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">-&#x003E;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">DoingThis</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x26-160007r2"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">triggers</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x26-160008r3"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x003C;</span><span 
+class="ec-lmtt-9">doThis</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">fct</span><span 
+class="ec-lmtt-9">&#x003E;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x26-160009r4"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x26-160010r5"></a></span><span 
+class="ec-lmtt-9">}</span>
+ 
+</div>
+<!--l. 688--><p class="noindent" >                                           </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-13-8-"><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-13-8-1"  
+class="td11">                   </td></tr></table></div>
+                                                                                            
+                                                                                            
+</div><hr class="endfloat" />
+</div>
+<a 
+ id="Q1-26-209"></a>
+<h5 class="likesubsubsectionHead"><a 
+ id="x26-1610003"></a>Hierarchical Finite State Machine</h5>
+<!--l. 695--><p class="noindent" >The hierarchical finite state machine adds the notion of a sub state machine nested in a state. A few modeling elements listed
+in table <a 
+href="#x26-161001r7">5.7<!--tex4ht:ref: tab:hier_fsm_notation --></a> are added to the set listed above.
+</p>
+<div class="table">
+                                                                                            
+                                                                                            
+<!--l. 699--><p class="noindent" ><a 
+ id="x26-161001r7"></a></p><hr class="float" /><div class="float" 
+>
+                                                                                            
+                                                                                            
+ <div class="caption" 
+><span class="id">Table&#x00A0;5.7: </span><span  
+class="content">Additional notation elements of hierarchical finite state machines</span></div><!--tex4ht:label?: x26-161001r7 -->
+<div class="tabular"> <table id="TBL-14" class="tabular" 
+cellspacing="0" cellpadding="0" rules="groups" 
+><colgroup id="TBL-14-1g"><col 
+id="TBL-14-1" /></colgroup><colgroup id="TBL-14-2g"><col 
+id="TBL-14-2" /></colgroup><colgroup id="TBL-14-3g"><col 
+id="TBL-14-3" /></colgroup><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-14-1-"><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-14-1-1"  
+class="td11"> <!--l. 703--><p class="noindent" ><span 
+class="ec-lmssbx-10">Description</span>           </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-14-1-2"  
+class="td11">                                       <span 
+class="ec-lmssbx-10">Graphical Notation                                                        </span></td><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-14-1-3"  
+class="td11"> <!--l. 703--><p class="noindent" ><span 
+class="ec-lmssbx-10">Textual Notation</span>                                   </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-14-2-"><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-14-2-1"  
+class="td11"> <!--l. 705--><p class="noindent" >State with sub state
+  machine                  </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-14-2-2"  
+class="td11"> <!--tex4ht:inline--><div class="tabular"> <table id="TBL-15" class="tabular" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-15-1g"><col 
+id="TBL-15-1" /></colgroup><tr  
+ style="vertical-align:baseline;" id="TBL-15-1-"><td  style="white-space:nowrap; text-align:center;" id="TBL-15-1-1"  
+class="td00">Parent State</td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-15-2-"><td  style="white-space:nowrap; text-align:center;" id="TBL-15-2-1"  
+class="td00"> <img 
+src="images/040-StateWithSubFSM.jpg" alt="PIC"  
+ /></td></tr></table>                                                                                                                             </div>  </td><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-14-2-3"  
+class="td11"> <div class="tabular"> <table id="TBL-16" class="tabular" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-16-1g"><col 
+id="TBL-16-1" /></colgroup><tr  
+ style="vertical-align:baseline;" id="TBL-16-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-16-1-1"  
+class="td11">Sub state machine                                </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-16-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-16-2-1"  
+class="td11"><!--l. 710-->    <!--l. 710--><p class="noindent" ><div class="lstlisting" id="listing-58"><span class="label"><a 
+ id="x26-161002r1"></a></span><span 
+class="ec-lmssbx-10x-x-90">State</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">Running</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x26-161003r2"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">subgraph</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x26-161004r3"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Transition</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">init</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">initial</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">-&#x003E;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">Process</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x26-161005r4"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">State</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">Process</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x26-161006r5"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x26-161007r6"></a></span><span 
+class="ec-lmtt-9">}</span>
+                                            </div> </p></td>
+</tr></table></div>
+ <!--l. 722--><p class="noindent" >                                           </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-14-3-"><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-14-3-1"  
+class="td11"> <!--l. 723--><p class="noindent" >Entry Point              </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-14-3-2"  
+class="td11"> <!--tex4ht:inline--><div class="tabular"> <table id="TBL-17" class="tabular" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-17-1g"><col 
+id="TBL-17-1" /></colgroup><tr  
+ style="vertical-align:baseline;" id="TBL-17-1-"><td  style="white-space:nowrap; text-align:center;" id="TBL-17-1-1"  
+class="td00">In sub state machine</td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-17-2-"><td  style="white-space:nowrap; text-align:center;" id="TBL-17-2-1"  
+class="td00"> <img 
+src="images/040-EntryPoint.jpg" alt="PIC"  
+ /></td></tr></table>                                                                                                                   </div>  </td><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-14-3-3"  
+class="td11"> <!--l. 726-->
+ <div class="lstlisting" id="listing-59"><span class="label"><a 
+ id="x26-161008r1"></a></span><span 
+class="ec-lmssbx-10x-x-90">EntryPoint</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">reInit</span>
+ 
+</div>
+<!--l. 730--><p class="noindent" >                                           </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-14-4-"><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-14-4-1"  
+class="td11"> <!--l. 731--><p class="noindent" >Exit Point                </p></td><td  style="white-space:nowrap; text-align:center;" id="TBL-14-4-2"  
+class="td11">                                              <img 
+src="images/040-ExitPoint.jpg" alt="PIC"  
+ />                                                                        </td><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-14-4-3"  
+class="td11"> <!--l. 733-->
+ <div class="lstlisting" id="listing-60"><span class="label"><a 
+ id="x26-161009r1"></a></span><span 
+class="ec-lmssbx-10x-x-90">ExitPoint</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">tp0</span>
+ 
+</div>
+<!--l. 736--><p class="noindent" >                                           </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-14-5-"><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-14-5-1"  
+class="td11">                   </td></tr></table>
+</div>
+                                                                                            
+                                                                                            
+</div><hr class="endfloat" />
+</div>
+<a 
+ id="x26-161010r205"></a>
+<h4 class="subsectionHead"><span class="titlemark">5.6.4   </span> <a 
+ id="x26-1620004"></a>Examples</h4>
+<hr class="figure" /><div class="figure" 
+>
+                                                                                            
+                                                                                            
+<a 
+ id="x26-162001r1"></a>
+                                                                                            
+                                                                                            
+<!--l. 743--><p class="noindent" ><img 
+src="images/040-FlatFSM.jpg" alt="PIC"  
+ />
+<br /> </p><div class="caption" 
+><span class="id">Figure&#x00A0;5.1: </span><span  
+class="content">Example of a flat finite state machine</span></div><!--tex4ht:label?: x26-162001r1 -->
+                                                                                            
+                                                                                            
+</div><hr class="endfigure" />
+<hr class="figure" /><div class="figure" 
+>
+                                                                                            
+                                                                                            
+<a 
+ id="x26-162002r2"></a>
+                                                                                            
+                                                                                            
+<!--l. 748--><p class="noindent" ><img 
+src="images/040-HierarchicalFSMTop.jpg" alt="PIC"  
+ />
+<br /> </p><div class="caption" 
+><span class="id">Figure&#x00A0;5.2: </span><span  
+class="content">Example of a hierarchical finite state machine &#8211; top level</span></div><!--tex4ht:label?: x26-162002r2 -->
+                                                                                            
+                                                                                            
+</div><hr class="endfigure" />
+<hr class="figure" /><div class="figure" 
+>
+                                                                                            
+                                                                                            
+<a 
+ id="x26-162003r3"></a>
+                                                                                            
+                                                                                            
+<!--l. 753--><p class="noindent" ><img 
+src="images/040-HierarchicalFSMInitializing.jpg" alt="PIC"  
+ />
+<br /> </p><div class="caption" 
+><span class="id">Figure&#x00A0;5.3: </span><span  
+class="content">Hierarchical finite state machine &#8211; sub state machine of <span 
+class="ec-lmsso-10">Initializing</span></span></div><!--tex4ht:label?: x26-162003r3 -->
+                                                                                            
+                                                                                            
+</div><hr class="endfigure" />
+<hr class="figure" /><div class="figure" 
+>
+                                                                                            
+                                                                                            
+<a 
+ id="x26-162004r4"></a><a 
+ id="x29-17200097"></a>
+                                                                                            
+                                                                                            
+<!--l. 758--><p class="noindent" ><img 
+src="images/040-HierarchicalFSMRunning.jpg" alt="PIC"  
+ />
+<br /> </p><div class="caption" 
+><span class="id">Figure&#x00A0;5.4: </span><span  
+class="content">Hierarchical finite state machine &#8211; sub state machine of <span 
+class="ec-lmsso-10">Running</span></span></div><!--tex4ht:label?: x26-162004r4 -->
+                                                                                            
+                                                                                            
+</div><hr class="endfigure" />
+                                                                                            
+                                                                                            
+<!--l. 107--><div class="crosslinks"><p class="noindent">[<a 
+href="etrice-docch6.html" >next</a>] [<a 
 href="etrice-docse18.html" >prev</a>] [<a 
 href="etrice-docse18.html#tailetrice-docse18.html" >prev-tail</a>] [<a 
 href="etrice-docse19.html" >front</a>] [<a 
-href="etrice-docch6.html#etrice-docse19.html" >up</a>] </p></div>
-<!--l. 1--><p class="noindent" ><a 
+href="etrice-docch5.html#etrice-docse19.html" >up</a>] </p></div>
+<!--l. 107--><p class="noindent" ><a 
  id="tailetrice-docse19.html"></a></p> 
 </body></html> 

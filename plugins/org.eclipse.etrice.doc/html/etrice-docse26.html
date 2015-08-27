@@ -4,605 +4,525 @@
 <!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
 <html xmlns="http://www.w3.org/1999/xhtml"  
 > 
-<head><title>CodeGenerators</title> 
+<head><title>Component Overview</title> 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2015-07-09 13:04:00" /> 
+<meta name="date" content="2015-08-27 23:56:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
-<!--l. 2029--><div class="crosslinks"><p class="noindent">[<a 
-href="etrice-docch8.html" >next</a>] [<a 
+<!--l. 201--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse25.html" >prev</a>] [<a 
 href="etrice-docse25.html#tailetrice-docse25.html" >prev-tail</a>] [<a 
 href="#tailetrice-docse26.html">tail</a>] [<a 
-href="etrice-docch7.html#etrice-docse26.html" >up</a>] </p></div>
-<h3 class="sectionHead"><span class="titlemark">7.3   </span> <a 
- id="x35-2340003"></a>CodeGenerators</h3>
-<!--l. 2030--><p class="noindent" ><a 
- id="ref:CodeGenerators"></a>
-</p><!--l. 2034--><p class="noindent" ><span 
-class="ec-lmssbx-10">Features:</span>
+href="etrice-docch8.html#etrice-docse26.html" >up</a>] </p></div>
+<h3 class="sectionHead"><span class="titlemark">8.2   </span> <a 
+ id="x36-2260002"></a>Component Overview</h3>
 <a 
- id="x35-234001r62"></a></p>
-<!--l. 2039--><div class="longtable"> <table id="TBL-78" class="longtable" 
-cellspacing="0" cellpadding="0" rules="groups" 
-><colgroup id="TBL-78-1g"><col 
-id="TBL-78-1" /></colgroup><colgroup id="TBL-78-2g"><col 
-id="TBL-78-2" /><col 
-id="TBL-78-3" /></colgroup>
-<tr 
-class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-78-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-78-1-1"  
-class="td11"> Contains:  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-78-1-2"  
-class="td11"> &#x00A0;&#x00A0;<span 
-class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
-href="#ref:CCodeGenerator">CCodeGenerator</a>      </td><td  style="white-space:wrap; text-align:left;" id="TBL-78-1-3"  
-class="td11">
- <!--l. 2040--><p class="noindent" >                                               </p></td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-78-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-78-2-1"  
-class="td11">          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-78-2-2"  
-class="td11"> &#x00A0;&#x00A0;<span 
-class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
-href="#ref:JavaCodeGenerator">JavaCodeGenerator</a>  </td><td  style="white-space:wrap; text-align:left;" id="TBL-78-2-3"  
-class="td11">
- <!--l. 2041--><p class="noindent" >                                               </p></td>
-</tr><tr 
-class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-78-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-78-3-1"  
-class="td11">          </td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-78-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-78-4-1"  
-class="td11">          </td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-78-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-78-5-1"  
-class="td11">          </td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-78-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-78-6-1"  
-class="td11">          </td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-78-7-"><td  style="white-space:nowrap; text-align:left;" id="TBL-78-7-1"  
-class="td11">          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-78-7-2"  
-class="td11">                     </td><td  style="white-space:wrap; text-align:left;" id="TBL-78-7-3"  
-class="td11">
-</td></tr>
-</table></div>
+ id="x36-226001r299"></a>
+<h4 class="subsectionHead"><span class="titlemark">8.2.1   </span> <a 
+ id="x36-2270001"></a>Room Language Overview</h4>
+<!--l. 205--><p class="noindent" >We assume that the reader is familiar with the Xtext concepts. So we concentrate on the details of our implementation that
+are worth to be pointed out.
 <a 
- id="x35-234002r309"></a>
-<h4 class="subsectionHead"><span class="titlemark">7.3.1   </span> <a 
- id="x35-2350001"></a>CCodeGenerator</h4>
-<!--l. 2046--><p class="noindent" ><a 
- id="ref:CCodeGenerator"></a>
-</p><!--l. 2051--><p class="noindent" ><span 
-class="ec-lmssbx-10">Features:</span>
-<a 
- id="x35-235001r63"></a></p>
-<!--l. 2056--><div class="longtable"> <table id="TBL-79" class="longtable" 
-cellspacing="0" cellpadding="0" rules="groups" 
-><colgroup id="TBL-79-1g"><col 
-id="TBL-79-1" /></colgroup><colgroup id="TBL-79-2g"><col 
-id="TBL-79-2" /><col 
-id="TBL-79-3" /></colgroup>
-<tr 
-class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-79-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-79-1-1"  
-class="td11"> Contains:  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-79-1-2"  
-class="td11"> &#x00A0;&#x00A0;<span 
-class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
-href="#ref:GenerationOptions">GenerationOptions</a>  </td><td  style="white-space:wrap; text-align:left;" id="TBL-79-1-3"  
-class="td11">
- <!--l. 2056--><p class="noindent" >Mechanism to adjust the generation.                            </p></td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-79-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-79-2-1"  
-class="td11">          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-79-2-2"  
-class="td11"> &#x00A0;&#x00A0;<span 
-class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
-href="#ref:MSCLogging">MSCLogging</a>         </td><td  style="white-space:wrap; text-align:left;" id="TBL-79-2-3"  
-class="td11">
- <!--l. 2057--><p class="noindent" >Runtime logger for event-driven Messages, represented as
-  a Message Sequence Chart.                                        </p></td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-79-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-79-3-1"  
-class="td11">          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-79-3-2"  
-class="td11"> &#x00A0;&#x00A0;<span 
-class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
-href="#ref:DataLogging">DataLogging</a>         </td><td  style="white-space:wrap; text-align:left;" id="TBL-79-3-3"  
-class="td11">
- <!--l. 2058--><p class="noindent" >Runtime  logger  for  data-driven  Messages  with  primtive
-  data.                                                                    </p></td>
-</tr><tr 
-class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-79-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-79-4-1"  
-class="td11">          </td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-79-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-79-5-1"  
-class="td11">          </td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-79-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-79-6-1"  
-class="td11">          </td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-79-7-"><td  style="white-space:nowrap; text-align:left;" id="TBL-79-7-1"  
-class="td11">          </td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-79-8-"><td  style="white-space:nowrap; text-align:left;" id="TBL-79-8-1"  
-class="td11">          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-79-8-2"  
-class="td11">                     </td><td  style="white-space:wrap; text-align:left;" id="TBL-79-8-3"  
-class="td11">
-</td></tr>
-</table></div>
-<a 
- id="x35-235002r310"></a>
-<h5 class="subsubsectionHead"><span class="titlemark">7.3.1.1   </span> <a 
- id="x35-2360001"></a>DataLogging</h5>
-<!--l. 2070--><p class="noindent" ><a 
- id="ref:DataLogging"></a> Runtime logger for data-driven Messages with primtive data.
+ id="Q1-36-302"></a>
 </p>
+<h5 class="likesubsubsectionHead"><a 
+ id="x36-2280001"></a>Model Tweaks</h5>
+<!--l. 210--><p class="noindent" >All language EMF models of eTrice are inferred from their respective grammar. However, this powerful mechanism has to be
+tweaked in some places.
+</p><!--l. 213--><p class="noindent" >In order to do so post processors are added that are invoked by the Xtext framework on language generation. This is done for
+the FSM language by <span 
+class="ec-lmsso-10">/org.eclipse.etrice.core.fsm/src/org/eclipse/etrice/core/fsm/postprocessing/ImplPostprocessor.xtend</span>.
+</p><!--l. 216--><p class="noindent" >The following parts of the model are changed or added: </p>
      <ul class="itemize1">
-     <li class="itemize">Annotation of one DataLogging per SubSystemClass
+     <li class="itemize">an operation <span 
+class="ec-lmtt-10">getName </span>is added to the <span 
+class="ec-lmtt-10">State </span>class
      </li>
-     <li class="itemize">Specifiy complete port instance path starting from LogicalSystem
+     <li class="itemize">an operation <span 
+class="ec-lmtt-10">getName </span>is added to the <span 
+class="ec-lmtt-10">StateGraphItem </span>class
      </li>
-     <li class="itemize">Port have to conjugated and data-driven
+     <li class="itemize">an operation <span 
+class="ec-lmtt-10">getSemantics </span>is added to the <span 
+class="ec-lmtt-10">AbstractInterfaceItem</span>
+     </li>
+     <li class="itemize">an operation <span 
+class="ec-lmtt-10">getAllIncomingAbstractMessages </span>is added to the <span 
+class="ec-lmtt-10">AbstractInterfaceItem</span>
+     </li>
+     <li class="itemize">an operation <span 
+class="ec-lmtt-10">getAllOutgoingAbstractMessages </span>is added to the <span 
+class="ec-lmtt-10">AbstractInterfaceItem</span>
+     </li>
+     <li class="itemize">an interface class <span 
+class="ec-lmtt-10">IInterfaceItemOwner </span>is added
+     </li>
+     <li class="itemize">an operation <span 
+class="ec-lmtt-10">getAbstractInterfaceItems </span>is added to the <span 
+class="ec-lmtt-10">AbstractInterfaceItem</span>
+     </li>
+     <li class="itemize">an operation <span 
+class="ec-lmtt-10">getAllAbstractInterfaceItems </span>is added to the <span 
+class="ec-lmtt-10">AbstractInterfaceItem</span>
+     </li>
+     <li class="itemize"><span 
+class="ec-lmtt-10">IInterfaceItemOwner </span>is made a super class of <span 
+class="ec-lmtt-10">ModelComponent</span></li></ul>
+<!--l. 228--><p class="noindent" >All but the first two items in the list are part of the abstract FSM definition and are used to interface to the model
+embedding the FSM language, e.g. ROOM.
+</p><!--l. 231--><p class="noindent" >For the ROOM language the post processor is <span 
+class="ec-lmsso-10">/org.eclipse.etrice.core.room/src/org/eclipse/etrice/core/RoomPostprocessor.ext</span>.
+</p><!--l. 234--><p class="noindent" >The following parts of the model are changed or added: </p>
+     <ul class="itemize1">
+     <li class="itemize">the default <span 
+class="ec-lmtt-10">multiplicity </span>of the <span 
+class="ec-lmtt-10">Port </span>is set to 1
+     </li>
+     <li class="itemize">the operation <span 
+class="ec-lmtt-10">isReplicated </span>is added to the <span 
+class="ec-lmtt-10">Port</span>
                                                                                             
                                                                                             
      </li>
-     <li class="itemize">Activates logging of all messages having primitive or enum typed data
+     <li class="itemize">the default <span 
+class="ec-lmtt-10">multiplicity </span>of the <span 
+class="ec-lmtt-10">ActorRef </span>is set to 1
      </li>
-     <li class="itemize">Seperate multiple port instance path through commas
+     <li class="itemize">an operation <span 
+class="ec-lmtt-10">getGeneralProtocol </span>is added to the <span 
+class="ec-lmtt-10">InterfaceItem</span>
      </li>
-     <li class="itemize">Within pathlist do NOT use any whitespace (e.g. space or newline)</li></ul>
-<!--l. 2084--><p class="noindent" ><span 
-class="ec-lmssbx-10">Features:</span>
+     <li class="itemize">an operation <span 
+class="ec-lmtt-10">getSemantics </span>is added to the <span 
+class="ec-lmtt-10">InterfaceItem</span>
+     </li>
+     <li class="itemize">an operation <span 
+class="ec-lmtt-10">getAllIncomingAbstractMessages </span>is added to the <span 
+class="ec-lmtt-10">InterfaceItem</span>
+     </li>
+     <li class="itemize">an operation <span 
+class="ec-lmtt-10">getAllOutgoingAbstractMessages </span>is added to the <span 
+class="ec-lmtt-10">InterfaceItem</span>
+     </li>
+     <li class="itemize">an operation <span 
+class="ec-lmtt-10">getExternalEndPorts </span>is added to the <span 
+class="ec-lmtt-10">ActorClass</span>
+     </li>
+     <li class="itemize">an operation <span 
+class="ec-lmtt-10">getRelayPorts </span>is added to the <span 
+class="ec-lmtt-10">ActorClass</span>
+     </li>
+     <li class="itemize">an operation <span 
+class="ec-lmtt-10">getImplementedSPPs </span>is added to the <span 
+class="ec-lmtt-10">ActorClass</span>
+     </li>
+     <li class="itemize">an operation <span 
+class="ec-lmtt-10">getActorBase </span>is added to the <span 
+class="ec-lmtt-10">ActorClass</span>
+     </li>
+     <li class="itemize">an operation <span 
+class="ec-lmtt-10">getComponentName </span>is added to the <span 
+class="ec-lmtt-10">ActorClass</span>
+     </li>
+     <li class="itemize">an operation <span 
+class="ec-lmtt-10">getAbstractInterfaceItems </span>is added to the <span 
+class="ec-lmtt-10">ActorClass</span>
+     </li>
+     <li class="itemize">an operation <span 
+class="ec-lmtt-10">getAllAbstractInterfaceItems </span>is added to the <span 
+class="ec-lmtt-10">ActorClass</span>
+     </li>
+     <li class="itemize">an operation <span 
+class="ec-lmtt-10">getStructureClass </span>is added to the <span 
+class="ec-lmtt-10">ActorContainerRef</span>
+     </li>
+     <li class="itemize">an operation <span 
+class="ec-lmtt-10">toString </span>is added to the <span 
+class="ec-lmtt-10">RefPath</span>
+     </li>
+     <li class="itemize">for attribute <span 
+class="ec-lmtt-10">idx </span>of <span 
+class="ec-lmtt-10">RefSegment </span>the default is changed to -1
+     </li>
+     <li class="itemize">an operation <span 
+class="ec-lmtt-10">toString </span>is added to the <span 
+class="ec-lmtt-10">RefSegment</span>
+     </li>
+     <li class="itemize">an operation <span 
+class="ec-lmtt-10">getLiteralValue </span>is added to the <span 
+class="ec-lmtt-10">EnumLiteral</span>
+     </li>
+     <li class="itemize">an operation <span 
+class="ec-lmtt-10">getFullName </span>is added to the <span 
+class="ec-lmtt-10">EnumLiteral</span></li></ul>
 <a 
- id="x35-236001r64"></a></p>
-<!--l. 2089--><div class="longtable"> <table id="TBL-80" class="longtable" 
-cellspacing="0" cellpadding="0" rules="groups" 
-><colgroup id="TBL-80-1g"><col 
-id="TBL-80-1" /></colgroup><colgroup id="TBL-80-2g"><col 
-id="TBL-80-2" /><col 
-id="TBL-80-3" /></colgroup>
-<tr 
-class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-80-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-80-1-1"  
-class="td11"> Uses:  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-80-1-2"  
-class="td11"> &#x00A0;&#x00A0;<span 
-class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
-href="etrice-docse24.html#ref:Annotation">Annotation</a>  </td><td  style="white-space:wrap; text-align:left;" id="TBL-80-1-3"  
-class="td11">
- <!--l. 2089--><p class="noindent" >An Annotation can be attached to a ROOM classes to
-  apply the properties of its AnnotationType.                    </p></td>
-</tr><tr 
-class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-80-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-80-2-1"  
-class="td11">      </td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-80-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-80-3-1"  
-class="td11">      </td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-80-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-80-4-1"  
-class="td11">      </td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-80-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-80-5-1"  
-class="td11">      </td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-80-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-80-6-1"  
-class="td11">      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-80-6-2"  
-class="td11">               </td><td  style="white-space:wrap; text-align:left;" id="TBL-80-6-3"  
-class="td11">
-</td></tr>
-</table></div>
-<!--l. 2095--><p class="noindent" ><span 
-class="ec-lmssbx-10">Feature Usage:</span>
+ id="Q1-36-304"></a>
+<h5 class="likesubsubsectionHead"><a 
+ id="x36-2290001"></a>Imports by URI Using Namespaces</h5>
+<!--l. 260--><p class="noindent" >The import mechanism employed is based on URIs. This is configured for one part in the GenerateRoom.mwe2 model
+workflow by setting the fragments ImportURIScopingFragment and ImportUriValidator). For the other part it is configured in
+the Guice modules by binding </p>
+     <ul class="itemize1">
+     <li class="itemize"><span 
+class="ec-lmtt-10">PlatformRelativeUriResolver </span>&#8211; this class tries to convert the import URI into a platform relative URI. It
+     also replaces environment variables written in $ with their respective values.
+     </li>
+     <li class="itemize"><span 
+class="ec-lmtt-10">ImportedNamespaceAwareLocalScopeProvider </span>&#8211;  this  is  a  standard  scope  provider  which  is  aware  of
+     namespaces
+                                                                                            
+                                                                                            
+     </li>
+     <li class="itemize"><span 
+class="ec-lmtt-10">GlobalNonPlatformURIEditorOpener </span>&#8211; this editor opener tries to convert general URIs into platform URIs
+     because editors can only open platform URIs
+     </li>
+     <li class="itemize"><span 
+class="ec-lmtt-10">ImportAwareHyperlinkHelper </span>&#8211; turns the URI part of an import into a navigatable hyper link</li></ul>
 <a 
- id="x35-236002r65"></a></p>
-<!--l. 2100--><div class="longtable"> <table id="TBL-81" class="longtable" 
-cellspacing="0" cellpadding="0" rules="groups" 
-><colgroup id="TBL-81-1g"><col 
-id="TBL-81-1" /></colgroup><colgroup id="TBL-81-2g"><col 
-id="TBL-81-2" /><col 
-id="TBL-81-3" /></colgroup>
-<tr 
-class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-81-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-81-1-1"  
-class="td11"> Is contained in:  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-81-1-2"  
-class="td11"> &#x00A0;&#x00A0;<span 
-class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
-href="#ref:CCodeGenerator">CCodeGenerator</a>  </td><td  style="white-space:wrap; text-align:left;" id="TBL-81-1-3"  
-class="td11">
- <!--l. 2101--><p class="noindent" >                                               </p></td>
-</tr><tr 
-class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-81-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-81-2-1"  
-class="td11">              </td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-81-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-81-3-1"  
-class="td11">              </td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-81-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-81-4-1"  
-class="td11">              </td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-81-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-81-5-1"  
-class="td11">              </td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-81-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-81-6-1"  
-class="td11">              </td><td  style="white-space:nowrap; text-align:left;" id="TBL-81-6-2"  
-class="td11">                   </td><td  style="white-space:wrap; text-align:left;" id="TBL-81-6-3"  
-class="td11">
-</td></tr>
-</table></div>
-<!--l. 2105--><p class="noindent" ><span 
-class="ec-lmssbx-10">Example:</span>
+ id="Q1-36-306"></a>
+<h5 class="likesubsubsectionHead"><a 
+ id="x36-2300001"></a>Naming</h5>
+<!--l. 275--><p class="noindent" >Two classes provide object names used for link resolution and for labels. The <span 
+class="ec-lmtt-10">RoomNameProvider </span>provides frequently used
+name strings, some of them are hierarchical like State paths. The <span 
+class="ec-lmtt-10">RoomFragmentProvider </span>serves a more formal purpose
+since it provides a link between EMF models (as used by the diagram editors) and the textual model representation used by
+Xtext.
+<a 
+ id="Q1-36-308"></a>
 </p>
-<!--l. 2107-->
-<div class="lstlisting" id="listing-93"><span class="label"><a 
- id="x35-236003r1"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">import</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">room</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">basic</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">annotations</span><span 
-class="ec-lmtt-9">.*</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">from</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">../../</span><span 
-class="ec-lmtt-9">org</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">eclipse</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">etrice</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">modellib</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">c</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">model</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">Annotations</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">room</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x35-236004r2"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x35-236005r3"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">LogicalSystem</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Logging</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x35-236006r4"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">SubSystemRef</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">main</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">MainSubSystem</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x35-236007r5"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x35-236008r6"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x35-236009r7"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">SubSystemClass</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">MainSubSystem</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x35-236010r8"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">@DataLogging</span><span 
-class="ec-lmtt-9">(</span><span 
-class="ec-lmtt-9">pathlist</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">=</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">Logging</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">main</span><span 
-class="ec-lmtt-9">/&#x003C;</span><span 
-class="ec-lmtt-9">actorRef</span><span 
-class="ec-lmtt-9">&#x003E;/&#x003C;</span><span 
-class="ec-lmtt-9">Port</span><span 
-class="ec-lmtt-9">&#x003E;,/</span><span 
-class="ec-lmtt-9">Logging</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">main</span><span 
-class="ec-lmtt-9">/&#x003C;</span><span 
-class="ec-lmtt-9">actorRef</span><span 
-class="ec-lmtt-9">&#x003E;/&#x003C;</span><span 
-class="ec-lmtt-9">Port</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">)</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x35-236011r9"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">...</span>
+<h5 class="likesubsubsectionHead"><a 
+ id="x36-2310001"></a>Helpers</h5>
+<!--l. 283--><p class="noindent" >The <span 
+class="ec-lmtt-10">RoomHelpers </span>class provides a great deal of static methods that help retrieve frequently used information from the
+model. Among many, many others </p>
+     <ul class="itemize1">
+     <li class="itemize"><span 
+class="ec-lmtt-10">getAllEndPorts(ActorClass) </span>- returns a list of all end ports of an actor class including inherited ones
+     </li>
+     <li class="itemize"><span 
+class="ec-lmtt-10">getInheritedActionCode(Transition, ActorClass) </span>- get the inherited part of a transition&#8217;s action code
+     </li>
+     <li class="itemize"><span 
+class="ec-lmtt-10">getSignature(Operation) </span>- returns a string representing the operation signature suited for a label</li></ul>
+<a 
+ id="Q1-36-310"></a>
+<h5 class="likesubsubsectionHead"><a 
+ id="x36-2320001"></a>Validation</h5>
+<!--l. 297--><p class="noindent" >Validation is used from various places. Therefore all validation code is accumulated in the @ValidationUtil@ class. All methods
+are static and many of them return a Result object which contains information about the problem detected as well as object
+and feature as suited for most validation purposes.
+<a 
+ id="x36-232001r301"></a>
+</p>
+<h4 class="subsectionHead"><span class="titlemark">8.2.2   </span> <a 
+ id="x36-2330002"></a>Config Language Overview</h4>
+<a 
+ id="Q1-36-313"></a>
+<h5 class="likesubsubsectionHead"><a 
+ id="x36-2340002"></a>Model Tweaks</h5>
+<!--l. 305--><p class="noindent" >A couple of operations are added to the ConfigModel </p>
+     <ul class="itemize1">
+     <li class="itemize"><span 
+class="ec-lmtt-10">getActorClassConfigs</span>
+     </li>
+     <li class="itemize"><span 
+class="ec-lmtt-10">getActorInstanceConfigs</span>
+     </li>
+     <li class="itemize"><span 
+class="ec-lmtt-10">getProtocolClassConfigs</span>
+     </li>
+     <li class="itemize"><span 
+class="ec-lmtt-10">getSubSystemConfigs</span></li></ul>
+<a 
+ id="Q1-36-315"></a>
+<h5 class="likesubsubsectionHead"><a 
+ id="x36-2350002"></a>Imports by URI Using Namespaces</h5>
+<!--l. 315--><p class="noindent" >Imports are treated like in Room language, section <span 
+class="ec-lmsso-10">Imports by URI Using Namespaces</span>.
+<a 
+ id="Q1-36-317"></a>
+</p>
+                                                                                            
+                                                                                            
+<h5 class="likesubsubsectionHead"><a 
+ id="x36-2360002"></a>Util</h5>
+<!--l. 319--><p class="noindent" >A set of static utility methods can be found in the <span 
+class="ec-lmtt-10">ConfigUtil </span>class.
+<a 
+ id="x36-236001r312"></a>
+</p>
+<h4 class="subsectionHead"><span class="titlemark">8.2.3   </span> <a 
+ id="x36-2370003"></a>Aggregation Layer Overview</h4>
+<!--l. 323--><p class="noindent" >The eTrice Generator Model (genmodel.fsm and genmodel) serves as an aggregation layer. Its purpose is to
+allow easy access to information which is implicitly contained in the Room model but not simple to retrieve.
+Examples of this are the state machine with inherited items or a list of all triggers active at a state in the
+order in which they will be evaluated or the actual peer port of an end port (following bindings through relay
+ports).
+</p><!--l. 329--><p class="noindent" >The lower level <span 
+class="ec-lmtt-10">FSMGeneratorModelBuilder </span>takes a <span 
+class="ec-lmtt-10">ModelComponent </span>and returns a <span 
+class="ec-lmtt-10">ExpandedModelComponent </span>which has
+the inheritance hierarchy of the state machine collapsed into one state machine. This lower level generator model only
+depends on general parts and doesn&#8217;t refer to the ROOM model.
+</p><!--l. 333--><p class="noindent" >The higher level Generator Model includes the FSM Generator Model. It is created from a list of Room models by a call of
+the
+                                                                                            
+                                                                                            
+</p>
+<div class="verbatim" id="verbatim-6">
+createGeneratorModel(List&#x003C;RoomModel&#x003E;,&#x00A0;boolean)
 </div>
-<a 
- id="x35-236012r312"></a>
-<h4 class="subsectionHead"><span class="titlemark">7.3.2   </span> <a 
- id="x35-2370002"></a>GenerationOptions</h4>
-<!--l. 2124--><p class="noindent" ><a 
- id="ref:GenerationOptions"></a> Mechanism to adjust the generation.
-</p><!--l. 2127--><p class="noindent" >Options for generation are configured in the launch configuration or in case of standalone generation via command line. A list
-of available options: </p>
+<!--l. 336--><p class="nopar" >
+</p><!--l. 338--><p class="noindent" >method of the <span 
+class="ec-lmtt-10">GeneratorModelBuilder </span>class.
+</p><!--l. 340--><p class="noindent" >The <span 
+class="ec-lmtt-10">Root </span>object of the resulting Generator Model provides chiefly two things: </p>
      <ul class="itemize1">
-     <li class="itemize">generate as library
+     <li class="itemize">a tree of instances starting at each <span 
+class="ec-lmtt-10">SubSystem </span>with representations of each <span 
+class="ec-lmtt-10">ActorInstance </span>and <span 
+class="ec-lmtt-10">PortInstance</span>
      </li>
-     <li class="itemize">generate documentation
+     <li class="itemize">for each <span 
+class="ec-lmtt-10">ActorClass </span>a corresponding <span 
+class="ec-lmtt-10">ExpandedActorClass </span>with an explicit state machine containing all
+     inherited state graph items</li></ul>
+<a 
+ id="Q1-36-320"></a>
+<h5 class="likesubsubsectionHead"><a 
+ id="x36-2380003"></a>The Instance Model</h5>
+<!--l. 350--><p class="noindent" >The instance model allows easy access to instances including their unique paths and object IDs. Also it is possible to
+get a list of all peer port instances for each port instance without having to bother about port and actor
+replication.
+<a 
+ id="Q1-36-322"></a>
+</p>
+<h5 class="likesubsubsectionHead"><a 
+ id="x36-2390003"></a>The Expanded Model Component</h5>
+<!--l. 356--><p class="noindent" >The expanded model component contains, as already mentioned, the complete state machine of the model component. This
+considerably simplifies the task of state machine generation. Note that the generated code always contains the complete state
+machine of an actor. I.e. no target language inheritance is used to implement the state machine inheritance. Furthermore the
+<span 
+class="ec-lmtt-10">ExpandedModelComponent </span>gives access to </p>
+     <ul class="itemize1">
+     <li class="itemize"><span 
+class="ec-lmtt-10">getIncomingTransitions(StateGraphNode) </span>&#8211; the set of incoming transition of a <span 
+class="ec-lmtt-10">StateGraphNode </span>(<span 
+class="ec-lmtt-10">State</span>,
+     <span 
+class="ec-lmtt-10">ChoicePoint </span>or <span 
+class="ec-lmtt-10">TransitionPoint</span>)
      </li>
-     <li class="itemize">generate instrumentation for MSC generation
+     <li class="itemize"><span 
+class="ec-lmtt-10">getOutgoingTransitions(StateGraphNode) </span>&#8211; the set of outgoing transition of a <span 
+class="ec-lmtt-10">StateGraphNode</span>
      </li>
-     <li class="itemize">override output directories
+     <li class="itemize"><span 
+class="ec-lmtt-10">getActiveTriggers(State) </span>&#8211; the triggers that are active in this <span 
+class="ec-lmtt-10">State </span>in the order they are evaluated</li></ul>
+<a 
+ id="Q1-36-324"></a>
+<h5 class="likesubsubsectionHead"><a 
+ id="x36-2400003"></a>The Expanded Actor Class</h5>
+<!--l. 372--><p class="noindent" >The <span 
+class="ec-lmtt-10">ExpandedActorClass </span>is derived from the <span 
+class="ec-lmtt-10">ExpandedModelComponent </span>and adds only minor new features.
+</p>
+     <ul class="itemize1">
+     <li class="itemize"><span 
+class="ec-lmtt-10">getActorClass() </span>&#8211; for convenience to avoid casts of the <span 
+class="ec-lmtt-10">ModelComponent </span>to an <span 
+class="ec-lmtt-10">ActorClass</span>
      </li>
-     <li class="itemize">some debug options</li></ul>
+     <li class="itemize"><span 
+class="ec-lmtt-10">getVarDeclData(Transition) </span>&#8211; for convenience to avoid casts to <span 
+class="ec-lmtt-10">VarDecl</span></li></ul>
+<a 
+ id="Q1-36-326"></a>
+<h5 class="likesubsubsectionHead"><a 
+ id="x36-2410003"></a>Transition Chains</h5>
+<!--l. 380--><p class="noindent" >By transition chains we denote a connected subset of the (hierarchical) state machine that starts with a transition starting at
+a state and continues over transitional state graph nodes (choice points and transition points) and continuation transitions
+until a state is reached. In general a transition chain starts at one state and ends in several states (the chain may branch in
+choice points). A <span 
+class="ec-lmtt-10">TransitionChain </span>of a transition is retrieved by a call of <span 
+class="ec-lmtt-10">getChain(Transition) </span>of the
+<span 
+class="ec-lmtt-10">ExpandedActorClass</span>. The <span 
+class="ec-lmtt-10">TransitionChain </span>accepts an <span 
+class="ec-lmtt-10">ITransitionChainVisitor </span>which is called along the chain to
+generate the action codes of involved transitions and the conditional statements arising from the involved choice
+points.
                                                                                             
                                                                                             
-<!--l. 2140--><p class="noindent" ><span 
-class="ec-lmssbx-10">Feature Usage:</span>
 <a 
- id="x35-237001r66"></a></p>
-<!--l. 2145--><div class="longtable"> <table id="TBL-82" class="longtable" 
-cellspacing="0" cellpadding="0" rules="groups" 
-><colgroup id="TBL-82-1g"><col 
-id="TBL-82-1" /></colgroup><colgroup id="TBL-82-2g"><col 
-id="TBL-82-2" /><col 
-id="TBL-82-3" /></colgroup>
-<tr 
-class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-82-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-82-1-1"  
-class="td11"> Is contained in:  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-82-1-2"  
-class="td11"> &#x00A0;&#x00A0;<span 
-class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
-href="#ref:CCodeGenerator">CCodeGenerator</a>             </td><td  style="white-space:wrap; text-align:left;" id="TBL-82-1-3"  
-class="td11">
- <!--l. 2146--><p class="noindent" >                                               </p></td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-82-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-82-2-1"  
-class="td11">              </td><td  style="white-space:nowrap; text-align:left;" id="TBL-82-2-2"  
-class="td11"> &#x00A0;&#x00A0;<span 
-class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
-href="#ref:JavaCodeGenerator">JavaCodeGenerator</a>         </td><td  style="white-space:wrap; text-align:left;" id="TBL-82-2-3"  
-class="td11">
- <!--l. 2147--><p class="noindent" >                                               </p></td>
-</tr><tr 
-class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-82-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-82-3-1"  
-class="td11"> Is used by:        </td><td  style="white-space:nowrap; text-align:left;" id="TBL-82-3-2"  
-class="td11"> &#x00A0;&#x00A0;<span 
-class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
-href="#ref:MSCLogging">MSCLogging</a>                 </td><td  style="white-space:wrap; text-align:left;" id="TBL-82-3-3"  
-class="td11">
- <!--l. 2148--><p class="noindent" >Runtime logger for event-driven Messages, represented as
-  a Message Sequence Chart.                                        </p></td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-82-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-82-4-1"  
-class="td11">              </td><td  style="white-space:nowrap; text-align:left;" id="TBL-82-4-2"  
-class="td11"> &#x00A0;&#x00A0;<span 
-class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
-href="#ref:DocumentationGenerator">DocumentationGenerator</a>  </td><td  style="white-space:wrap; text-align:left;" id="TBL-82-4-3"  
-class="td11">
- <!--l. 2149--><p class="noindent" >A LaTeX documentation generator from eTrice models.     </p></td>
-</tr><tr 
-class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-82-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-82-5-1"  
-class="td11">              </td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-82-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-82-6-1"  
-class="td11">              </td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-82-7-"><td  style="white-space:nowrap; text-align:left;" id="TBL-82-7-1"  
-class="td11">              </td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-82-8-"><td  style="white-space:nowrap; text-align:left;" id="TBL-82-8-1"  
-class="td11">              </td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-82-9-"><td  style="white-space:nowrap; text-align:left;" id="TBL-82-9-1"  
-class="td11">              </td><td  style="white-space:nowrap; text-align:left;" id="TBL-82-9-2"  
-class="td11">                          </td><td  style="white-space:wrap; text-align:left;" id="TBL-82-9-3"  
-class="td11">
-</td></tr>
-</table></div>
+ id="x36-241001r319"></a>
+</p>
+<h4 class="subsectionHead"><span class="titlemark">8.2.4   </span> <a 
+ id="x36-2420004"></a>Generator Overview</h4>
+<!--l. 392--><p class="noindent" >There is one plug-in that consists of base classes and some generic generator parts which are re-used by all language specific
+generators
 <a 
- id="x35-237002r314"></a>
-<h4 class="subsectionHead"><span class="titlemark">7.3.3   </span> <a 
- id="x35-2380003"></a>JavaCodeGenerator</h4>
-<!--l. 2160--><p class="noindent" ><a 
- id="ref:JavaCodeGenerator"></a>
-</p><!--l. 2165--><p class="noindent" ><span 
-class="ec-lmssbx-10">Features:</span>
+ id="Q1-36-329"></a>
+</p>
+<h5 class="likesubsubsectionHead"><a 
+ id="x36-2430004"></a>Base Classes and Interfaces</h5>
+<!--l. 397--><p class="noindent" >We just want to mention the most important classes and interfaces. Some of them can be found in the
+<span 
+class="ec-lmtt-10">org.eclipse.etrice.generator.fsm </span>and th rest in <span 
+class="ec-lmtt-10">org.eclipse.etrice.generator</span>.
+</p>
+     <ul class="itemize1">
+     <li class="itemize">
+     <div class="flushleft" 
+>
+<!--l. 402--><p class="noindent" >
+<span 
+class="ec-lmtt-10">ITranslationProvider </span>&#8212; this interface is used by the <span 
+class="ec-lmtt-10">DetailCodeTranslator </span>for the language dependent
+translation of e.g. port.message() notation in detail code</p></div>
+     </li>
+     <li class="itemize"><span 
+class="ec-lmtt-10">AbstractGenerator </span>&#8212; concrete language generators should derive from this base class
+     </li>
+     <li class="itemize">
+     <div class="flushleft" 
+>
+<!--l. 406--><p class="noindent" >
+<span 
+class="ec-lmtt-10">DefaultFSMTranslationProvider </span>and <span 
+class="ec-lmtt-10">DefaultTranslationProvider </span>&#8212; a stub implementation of
+<span 
+class="ec-lmtt-10">IFSMTranslationProvider </span>and <span 
+class="ec-lmtt-10">ITranslationProvider </span>from which clients may derive</p></div>
+     </li>
+     <li class="itemize"><span 
+class="ec-lmtt-10">Indexed </span>&#8212; provides an indexed iterable of a given iterable
+     </li>
+     <li class="itemize"><span 
+class="ec-lmtt-10">GeneratorBaseModule </span>&#8212; a Google Guice module that binds a couple of basic services. Concrete language generators
+     should use a module that derives from this</li></ul>
 <a 
- id="x35-238001r67"></a></p>
-<!--l. 2170--><div class="longtable"> <table id="TBL-83" class="longtable" 
-cellspacing="0" cellpadding="0" rules="groups" 
-><colgroup id="TBL-83-1g"><col 
-id="TBL-83-1" /></colgroup><colgroup id="TBL-83-2g"><col 
-id="TBL-83-2" /><col 
-id="TBL-83-3" /></colgroup>
-<tr 
-class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-83-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-83-1-1"  
-class="td11"> Contains:  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-83-1-2"  
-class="td11"> &#x00A0;&#x00A0;<span 
-class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
-href="#ref:GenerationOptions">GenerationOptions</a>  </td><td  style="white-space:wrap; text-align:left;" id="TBL-83-1-3"  
-class="td11">
- <!--l. 2170--><p class="noindent" >Mechanism to adjust the generation.                            </p></td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-83-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-83-2-1"  
-class="td11">          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-83-2-2"  
-class="td11"> &#x00A0;&#x00A0;<span 
-class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
-href="#ref:MSCLogging">MSCLogging</a>         </td><td  style="white-space:wrap; text-align:left;" id="TBL-83-2-3"  
-class="td11">
- <!--l. 2171--><p class="noindent" >Runtime logger for event-driven Messages, represented as
-  a Message Sequence Chart.                                        </p></td>
-</tr><tr 
-class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-83-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-83-3-1"  
-class="td11">          </td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-83-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-83-4-1"  
-class="td11">          </td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-83-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-83-5-1"  
-class="td11">          </td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-83-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-83-6-1"  
-class="td11">          </td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-83-7-"><td  style="white-space:nowrap; text-align:left;" id="TBL-83-7-1"  
-class="td11">          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-83-7-2"  
-class="td11">                     </td><td  style="white-space:wrap; text-align:left;" id="TBL-83-7-3"  
-class="td11">
-</td></tr>
-</table></div>
+ id="Q1-36-331"></a>
+<h5 class="likesubsubsectionHead"><a 
+ id="x36-2440004"></a>Generic Generator Parts</h5>
+<!--l. 415--><p class="noindent" >The generic generator parts provide code generation blocks on a medium granularity. The language dependent top level
+generators embed those blocks in a larger context (file, class, ...). Language dependent low level constructs are provided by
+means of an <span 
+class="ec-lmtt-10">ILanguageExtension</span>. This extension and other parts of the generator be configured using Google Guice
+dependency injection.
 <a 
- id="x35-238002r315"></a>
-<h4 class="subsectionHead"><span class="titlemark">7.3.4   </span> <a 
- id="x35-2390004"></a>MSCLogging</h4>
-<!--l. 2183--><p class="noindent" ><a 
- id="ref:MSCLogging"></a> Runtime logger for event-driven Messages, represented as a Message Sequence Chart.
-</p><!--l. 2186--><p class="noindent" >The MSCLogging is activated by default, but can be set manually in the GenerationOptions. The output file is created upon
-regular termination of the application. The resulting file can be found in the logging directory and has the name &#8217;msc.seq&#8217;,
-which can be open with the free open source tool Trace2UML (<a 
-href="http://trace2uml.stage.tigris.org/" class="url" ><span 
-class="ec-lmtt-10">http://trace2uml.stage.tigris.org/</span></a>)
-</p><!--l. 2190--><p class="noindent" ><img 
-src="images/300-MSCLogging.png" alt="PIC"  
- />
-</p><!--l. 2194--><p class="noindent" ><span 
-class="ec-lmssbx-10">Features:</span>
+ id="Q1-36-333"></a>
+<span 
+class="ec-lmssbx-10">GenericActorClassGenerator   </span>The <span 
+class="ec-lmtt-10">GenericActorClassGenerator </span>generates constants for the interface items of a actor.
+Those constants are used by the generated state machine.
 <a 
- id="x35-239001r68"></a></p>
-<!--l. 2199--><div class="longtable"> <table id="TBL-84" class="longtable" 
-cellspacing="0" cellpadding="0" rules="groups" 
-><colgroup id="TBL-84-1g"><col 
-id="TBL-84-1" /></colgroup><colgroup id="TBL-84-2g"><col 
-id="TBL-84-2" /><col 
-id="TBL-84-3" /></colgroup>
-<tr 
-class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-84-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-84-1-1"  
-class="td11"> Uses:  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-84-1-2"  
-class="td11"> &#x00A0;&#x00A0;<span 
-class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
-href="#ref:GenerationOptions">GenerationOptions</a>  </td><td  style="white-space:wrap; text-align:left;" id="TBL-84-1-3"  
-class="td11">
- <!--l. 2199--><p class="noindent" >Mechanism to adjust the generation.                            </p></td>
-</tr><tr 
-class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-84-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-84-2-1"  
-class="td11">      </td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-84-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-84-3-1"  
-class="td11">      </td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-84-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-84-4-1"  
-class="td11">      </td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-84-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-84-5-1"  
-class="td11">      </td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-84-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-84-6-1"  
-class="td11">      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-84-6-2"  
-class="td11">                     </td><td  style="white-space:wrap; text-align:left;" id="TBL-84-6-3"  
-class="td11">
-</td></tr>
-</table></div>
+ id="Q1-36-334"></a>
+<span 
+class="ec-lmssbx-10">GenericProtocolClassGenerator   </span>The <span 
+class="ec-lmtt-10">GenericProtocolClassGenerator </span>generates message ID constants for a
+protocol.
+<a 
+ id="Q1-36-335"></a>
+</p>
+<span 
+class="ec-lmssbx-10">GenericStateMachineGenerator</span>
+<div class="flushleft" 
+>
                                                                                             
                                                                                             
-<!--l. 2205--><p class="noindent" ><span 
-class="ec-lmssbx-10">Feature Usage:</span>
+<!--l. 431--><p class="noindent" >
+The <span 
+class="ec-lmtt-10">GenericStateMachineGenerator </span>generates the complete state machine implementation. The skeleton of the
+generated code is</p></div>
+     <ul class="itemize1">
+     <li class="itemize">definition state ID constants
+     </li>
+     <li class="itemize">definition of transition chain constants
+     </li>
+     <li class="itemize">definition of trigger constants
+     </li>
+     <li class="itemize">entry, exit and action code methods
+     </li>
+     <li class="itemize">the <span 
+class="ec-lmtt-10">exitTo </span>method
+     </li>
+     <li class="itemize">the <span 
+class="ec-lmtt-10">executeTransitionChain </span>method
+     </li>
+     <li class="itemize">the <span 
+class="ec-lmtt-10">enterHistory </span>method
+     </li>
+     <li class="itemize">the <span 
+class="ec-lmtt-10">executeInitTransition </span>method
+     </li>
+     <li class="itemize">the <span 
+class="ec-lmtt-10">receiveEvent </span>method</li></ul>
+<!--l. 446--><p class="noindent" >The state machine works as follows. The main entry method is the <br 
+class="newline" /><span 
+class="ec-lmtt-10">receiveEvent </span>method. This is the case for both, data driven (polled) and event driven state machines. Then a number of
+nested switch/case statements evaluates trigger conditions and derives the transition chain that is executed. If a
+trigger fires then the <span 
+class="ec-lmtt-10">exitTo </span>method is called to execute all exit codes involved. Then the transition chain
+action codes are executed and the choice point conditions are evaluated in the <span 
+class="ec-lmtt-10">executeTransitionChain</span>
+method. Finally the history of the state where the chain ends is entered and all entry codes are executed by
+<span 
+class="ec-lmtt-10">enterHistory</span>.
 <a 
- id="x35-239002r69"></a></p>
-<!--l. 2210--><div class="longtable"> <table id="TBL-85" class="longtable" 
-cellspacing="0" cellpadding="0" rules="groups" 
-><colgroup id="TBL-85-1g"><col 
-id="TBL-85-1" /></colgroup><colgroup id="TBL-85-2g"><col 
-id="TBL-85-2" /><col 
-id="TBL-85-3" /></colgroup>
-<tr 
-class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-85-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-85-1-1"  
-class="td11"> Is contained in:  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-85-1-2"  
-class="td11"> &#x00A0;&#x00A0;<span 
-class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
-href="#ref:CCodeGenerator">CCodeGenerator</a>      </td><td  style="white-space:wrap; text-align:left;" id="TBL-85-1-3"  
-class="td11">
- <!--l. 2211--><p class="noindent" >                                               </p></td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-85-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-85-2-1"  
-class="td11">              </td><td  style="white-space:nowrap; text-align:left;" id="TBL-85-2-2"  
-class="td11"> &#x00A0;&#x00A0;<span 
-class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
-href="#ref:JavaCodeGenerator">JavaCodeGenerator</a>  </td><td  style="white-space:wrap; text-align:left;" id="TBL-85-2-3"  
-class="td11">
- <!--l. 2212--><p class="noindent" >                                               </p></td>
-</tr><tr 
-class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-85-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-85-3-1"  
-class="td11">              </td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-85-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-85-4-1"  
-class="td11">              </td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-85-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-85-5-1"  
-class="td11">              </td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-85-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-85-6-1"  
-class="td11">              </td>
-</tr><tr  
- style="vertical-align:baseline;" id="TBL-85-7-"><td  style="white-space:nowrap; text-align:left;" id="TBL-85-7-1"  
-class="td11">              </td><td  style="white-space:nowrap; text-align:left;" id="TBL-85-7-2"  
-class="td11">                     </td><td  style="white-space:wrap; text-align:left;" id="TBL-85-7-3"  
-class="td11">
-</td></tr>
-</table></div>
+ id="Q1-36-336"></a>
+</p>
+<h5 class="likesubsubsectionHead"><a 
+ id="x36-2450004"></a>The Java Generator</h5>
+<!--l. 456--><p class="noindent" >The Java generator employs the generic parts of the generator. The <span 
+class="ec-lmtt-10">JavaTranslationProvider </span>is very simple and only
+handles the case of sending a message from a distinct replicated port: <span 
+class="ec-lmtt-10">replPort[2].message()</span>. Other cases are handled by
+the base class by returning the original text.
+</p><!--l. 460--><p class="noindent" >The <span 
+class="ec-lmtt-10">DataClassGen </span>uses Java inheritance for the generated data classes. Otherwise it is pretty much straight
+forward.
+</p><!--l. 463--><p class="noindent" >The <span 
+class="ec-lmtt-10">ProtocolClassGen </span>generates a class for the protocol with nested static classes for regular and conjugated ports and
+similar for replicated ports.
+</p><!--l. 466--><p class="noindent" >The <span 
+class="ec-lmtt-10">ActorClassGen </span>uses Java inheritance for the generated actor classes. So ports, SAPs and attributes and detail code
+methods are inherited. Not inherited is the state machine implementation.
+<a 
+ id="Q1-36-338"></a>
+</p>
+<h5 class="likesubsubsectionHead"><a 
+ id="x36-2460004"></a>The ANSI-C Generator</h5>
+<!--l. 471--><p class="noindent" >The C generator translates data, protocol and actor classes into structs together with a set of methods that operate on them
+and receive a pointer to those data (called <span 
+class="ec-lmtt-10">self </span>in analogy to the implicit C++ <span 
+class="ec-lmtt-10">this </span>pointer). No dynamic memory
+allocation is employed. All actor instances are statically initialized. One of the design goals for the generated C code was an
+optimized footprint in terms of memory and performance to be able to utilize modeling with ROOM also for tiny low end
+micro controllers.
                                                                                             
                                                                                             
-<!--l. 124--><div class="crosslinks"><p class="noindent">[<a 
-href="etrice-docch8.html" >next</a>] [<a 
+<a 
+ id="Q1-36-340"></a>
+</p>
+<h5 class="likesubsubsectionHead"><a 
+ id="x36-2470004"></a>The Documentation Generator</h5>
+<!--l. 480--><p class="noindent" >The documentation generator creates documentation in LaTex format which can be converted into PDF and many other
+formats.
+</p>
+<!--l. 126--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse25.html" >prev</a>] [<a 
 href="etrice-docse25.html#tailetrice-docse25.html" >prev-tail</a>] [<a 
 href="etrice-docse26.html" >front</a>] [<a 
-href="etrice-docch7.html#etrice-docse26.html" >up</a>] </p></div>
-<!--l. 124--><p class="noindent" ><a 
+href="etrice-docch8.html#etrice-docse26.html" >up</a>] </p></div>
+<!--l. 126--><p class="noindent" ><a 
  id="tailetrice-docse26.html"></a></p> 
 </body></html> 

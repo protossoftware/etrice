@@ -4,1587 +4,83 @@
 <!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
 <html xmlns="http://www.w3.org/1999/xhtml"  
 > 
-<head><title>Traffic Light</title> 
+<head><title>The Java examples project</title> 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2015-07-09 13:04:00" /> 
+<meta name="date" content="2015-08-27 23:56:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
-<!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
-href="etrice-docch3.html" >next</a>] [<a 
+<!--l. 251--><div class="crosslinks"><p class="noindent">[<a 
+href="etrice-docch5.html" >next</a>] [<a 
 href="etrice-docse8.html" >prev</a>] [<a 
 href="etrice-docse8.html#tailetrice-docse8.html" >prev-tail</a>] [<a 
 href="#tailetrice-docse9.html">tail</a>] [<a 
-href="etrice-docch2.html#etrice-docse9.html" >up</a>] </p></div>
-<h3 class="sectionHead"><span class="titlemark">2.7   </span> <a 
- id="x13-590007"></a>Traffic Light</h3>
+href="etrice-docch4.html#etrice-docse9.html" >up</a>] </p></div>
+<h3 class="sectionHead"><span class="titlemark">4.2   </span> <a 
+ id="x15-680002"></a>The Java examples project</h3>
+<!--l. 253--><p class="noindent" >The example project <span 
+class="ec-lmtt-10">org.eclipse.etrice.examples.java </span>currently contains a number of examples that are all related to
+dynamic actors.
+</p><!--l. 256--><p class="noindent" >The examples can be generated and executed one by one but not several at the same time. Inside the model folder there
+exists a sub folder for each example containing all models and launch configurations for code generation and to run the
+application.
 <a 
- id="x13-59001r79"></a>
-<h4 class="subsectionHead"><span class="titlemark">2.7.1   </span> <a 
- id="x13-600001"></a>Scope</h4>
-<!--l. 5--><p class="noindent" >In this tutorial you will build an example with a more advanced state machine. To make it more appealing we&#8217;ve added a little
-GUI with two traffic lights, one for the cars and one for pedestrians. The GUI also contains a button that can be used to
-request green for pedestrians.
-</p><!--l. 9--><p class="noindent" >You will perform the following steps:
-     </p><ol  class="enumerate1" >
-     <li 
-  class="enumerate" id="x13-60002x1">create a new model from scratch
-     </li>
-     <li 
-  class="enumerate" id="x13-60004x2">create a pedestrian light actor
-     </li>
-     <li 
-  class="enumerate" id="x13-60006x3">perform a first test
-     </li>
-     <li 
-  class="enumerate" id="x13-60008x4">implement the behavior
-     </li>
-     <li 
-  class="enumerate" id="x13-60010x5">do some configuration</li></ol>
+ id="x15-68001r80"></a>
+</p>
+<h4 class="subsectionHead"><span class="titlemark">4.2.1   </span> <a 
+ id="x15-690001"></a>Dynamic Actors 1</h4>
+<!--l. 263--><p class="noindent" >This example is contained in <span 
+class="ec-lmtt-10">model/dynamicactors1</span>.
 <a 
- id="x13-60011r81"></a>
-<h4 class="subsectionHead"><span class="titlemark">2.7.2   </span> <a 
- id="x13-610002"></a>Create a new model from scratch</h4>
-<!--l. 21--><p class="noindent" >The easiest way to create a new eTrice Project is to use the eclipse project wizard. From the eclipse file menu select
+ id="x15-69001r83"></a>
+</p>
+<h5 class="subsubsectionHead"><span class="titlemark">4.2.1.1   </span> <a 
+ id="x15-700001"></a>Purpose</h5>
+<!--l. 267--><p class="noindent" >The example demonstrates the usage of an optional actor. It is shown that several actor classes derived from the type of the
+optional actor reference can be optionally created in place of the optional actor reference. Optional actor instances can also
+be destroyed and another instance can be created in the free slot.
+<a 
+ id="x15-70001r86"></a>
+</p>
+<h5 class="subsubsectionHead"><span class="titlemark">4.2.1.2   </span> <a 
+ id="x15-710002"></a>Details</h5>
+<!--l. 274--><p class="noindent" >The structure of this system is simple.
+</p><!--l. 276--><p class="noindent" ><img 
+src="images/039-DynAct1-Main_instanceTree.jpg" alt="PIC"  
+ />
+</p><!--l. 278--><p class="noindent" >However, this is only the initial system structure. The leaf instance is just a place holder for an optional actor instance. In this
+place an instance of a compatible type can be created at run time. Compatible types are the type of the reference itself and
+all of its sub types as long as they are not abstract. Together with the instance all of its contained instances will be created
+and all ports are connected.
+</p><!--l. 284--><p class="noindent" >This example demonstrates how an optional actor is created and destroyed and another one of another type is created to hold
+the same place.
+</p><!--l. 287--><p class="noindent" ><img 
+src="images/039-DynAct1-Container_behavior.jpg" alt="PIC"  
+ />
+</p><!--l. 289--><p class="noindent" >When the example is executed the <span 
+class="ec-lmtt-10">Container </span>actor first dumps the instance tree to the console (line 56 of the listing below).
+Then it creates an instance of <span 
+class="ec-lmtt-10">Optional2 </span>(line 57). Now that the <span 
+class="ec-lmtt-10">p0 </span>port of the container is connected a message
 <span 
-class="ec-lmsso-10">File-&#x003E;New-&#x003E;Project </span>and create a new <span 
-class="ec-lmsso-10">Empty eTrice Java Project </span>and name it <span 
-class="ec-lmssbx-10">TrafficLight</span>.
-</p><!--l. 24--><p class="noindent" >In the model directory locate TrafficLight.room and edit it. We only rename a little. The model should look like
-this:
+class="ec-lmtt-10">sayHello() </span>is sent to the newly created actor instance and the instance tree is dumped a second time. As soon as it receives
+the answer it prints it to the console. Then the optional actor is destroyed again and another one, now of type <span 
+class="ec-lmtt-10">Optional1</span>, is
+created and once more <span 
+class="ec-lmtt-10">sayHello() </span>is sent.
 </p>
-<!--l. 27-->
-<div class="lstlisting" id="listing-18"><span class="label"><a 
- id="x13-61001r1"></a></span><span 
-class="ec-lmssbx-10x-x-90">RoomModel</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">TrafficLight</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-61002r2"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-61003r3"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">LogicalSystem</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">TrafficLight</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-61004r4"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">SubSystemRef</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">main</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Main</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-61005r5"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-61006r6"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-61007r7"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">SubSystemClass</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Main</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-61008r8"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">ActorRef</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">pedLight</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">PedestrianLight</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-61009r9"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">LogicalThread</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">defaultThread</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-61010r10"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-61011r11"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-61012r12"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">ActorClass</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">PedestrianLight</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-61013r13"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-61014r14"></a></span><span 
-class="ec-lmtt-9">}</span>
-</div>
-<!--l. 44--><p class="noindent" >Since the mapping model references our logical system and sub system we also need to adjust that:
-</p>
-<!--l. 46-->
-<div class="lstlisting" id="listing-19"><span class="label"><a 
- id="x13-61015r1"></a></span><span 
-class="ec-lmssbx-10x-x-90">MappingModel</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">TrafficLight</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-61016r2"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">import</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">TrafficLight</span><span 
-class="ec-lmtt-9">.*</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">from</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">TrafficLight</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">room</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-61017r3"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">import</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">TrafficLight</span><span 
-class="ec-lmtt-9">.*</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">from</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">TrafficLight</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">etphys</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-61018r4"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Mapping</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">TrafficLight</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">-&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">PhysSys1</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-61019r5"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">SubSystemMapping</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">main</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">-&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">nodeRef1</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-61020r6"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">ThreadMapping</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">defaultThread</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">-&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">PhysicalThread1</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-61021r7"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-61022r8"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-61023r9"></a></span><span 
-class="ec-lmtt-9">}</span>
-</div>
-<!--l. 58--><p class="noindent" >Since we need a timer we have to include the TimingService from the modellib (see <a 
-href="etrice-docse8.html#x12-470006">2.6<!--tex4ht:ref: sec:ping_pong_tutorial --></a>). We have to add an import
-statement
-</p>
-<!--l. 61-->
-<div class="lstlisting" id="listing-20"><span class="label"><a 
- id="x13-61024r1"></a></span><span 
-class="ec-lmssbx-10x-x-90">import</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">room</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">basic</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">service</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">timing</span><span 
-class="ec-lmtt-9">.*</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">from</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">../../</span><span 
-class="ec-lmtt-9">org</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">eclipse</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">etrice</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">modellib</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">java</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">model</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">TimingService</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">room</span><span 
-class="ec-lmtt-9">"</span>
-                                                                                            
-                                                                                            
-</div>
-<!--l. 65--><p class="noindent" >Then we open the structure of <span 
-class="ec-lmsso-10">Main </span>and add an actor reference <span 
-class="ec-lmsso-10">timingSvc </span>of type <span 
-class="ec-lmsso-10">ATimingService</span>. After that we create a
-layer connection from <span 
-class="ec-lmsso-10">pedLight </span>to <span 
-class="ec-lmsso-10">timingSvc</span>.
-</p><!--l. 68--><p class="noindent" ><img 
-src="images/018-timingSvc.png" alt="PIC"  
- />
-</p><!--l. 70--><p class="noindent" >Now we are ready to
+<!--l. 297--><div class="lstinputlisting">
 <a 
- id="x13-61025r82"></a>
-</p>
-<h4 class="subsectionHead"><span class="titlemark">2.7.3   </span> <a 
- id="x13-620003"></a>Implement the <span 
-class="ec-lmsso-10">PedestrianLight </span>Actor</h4>
-<!--l. 74--><p class="noindent" >Since our GUI is connected using TCP/IP sockets we need to add an instance of the <span 
-class="ec-lmsso-10">ATcpClient</span>. We will explain the simple
-protocol used to control the GUI later as we go.
-</p><!--l. 77--><p class="noindent" >Again we first have to add an import statement.
-</p>
-<!--l. 79-->
-<div class="lstlisting" id="listing-21"><span class="label"><a 
- id="x13-62001r1"></a></span><span 
-class="ec-lmssbx-10x-x-90">import</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">room</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">basic</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">service</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">tcp</span><span 
-class="ec-lmtt-9">.*</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">from</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">../../</span><span 
-class="ec-lmtt-9">org</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">eclipse</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">etrice</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">modellib</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">java</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">model</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">TcpService</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">room</span><span 
-class="ec-lmtt-9">"</span>
-</div>
-<!--l. 83--><p class="noindent" >Then we can add the TCP client as <span 
-class="ec-lmsso-10">socketClient</span>. As we see the TCP client has two ports on its interface. One is for
-controlling the connection, the other one is used for the data. Therefore we add internal end ports to our actor and connect
-them (make sure to add the ports as conjugated):
-</p><!--l. 88--><p class="noindent" ><img 
-src="images/018-socketSvc.png" alt="PIC"  
- />
-</p><!--l. 90--><p class="noindent" >Now we can begin to implement the behavior of our actor. In the initial state we try to connect our GUI application via a
-socket connection. So we create a State <span 
-class="ec-lmsso-10">OpenSocket </span>and an initial transition to it. In the entry code we use the <span 
-class="ec-lmsso-10">Messages</span>
-button and select <span 
-class="ec-lmsso-10">open </span>for the <span 
-class="ec-lmsso-10">tcpControl </span>port.
-</p><!--l. 95--><p class="noindent" >The code fragment </p><!--l. 96-->
-<div class="lstlisting" id="listing-22"><span class="label"><a 
- id="x13-62002r1"></a></span><span 
-class="ec-lmtt-9">tcpControl</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">open</span><span 
-class="ec-lmtt-9">(</span><span 
-class="ec-lmtt-9">data</span><span 
-class="ec-lmtt-9">)</span><span 
-class="ec-lmtt-9">;</span>
-</div>
-<!--l. 99--><p class="noindent" >is inserted for us.
-</p><!--l. 101--><p class="noindent" >(We&#8217;ve already added a semi colon at the end of the statement.)
-</p><!--l. 103--><p class="noindent" >By inspecting the <span 
-class="ec-lmsso-10">PTcpControl </span>protocol we find that the <span 
-class="ec-lmsso-10">open </span>message takes an argument of type <span 
-class="ec-lmsso-10">DTcpControl </span>which in
-turn consists of a string - the IP address - and an integer for the port number.
-</p><!--l. 107--><p class="noindent" >So we complete the call to tcpControl.open() by inserting the connection data: </p><!--l. 108-->
-<div class="lstlisting" id="listing-23"><span class="label"><a 
- id="x13-62003r1"></a></span><span 
-class="ec-lmtt-9">tcpControl</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">open</span><span 
-class="ec-lmtt-9">(</span><span 
-class="ec-lmssbx-10x-x-90">new</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">DTcpControl</span><span 
-class="ec-lmtt-9">(</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">localhost</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">,</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">4443)</span><span 
-class="ec-lmtt-9">)</span><span 
-class="ec-lmtt-9">;</span>
-</div>
-<!--l. 112--><p class="noindent" >At this point we can
+ id="x15-71001r1"></a>
 <a 
- id="x13-62004r83"></a>
-</p>
-<h4 class="subsectionHead"><span class="titlemark">2.7.4   </span> <a 
- id="x13-630004"></a>Perform a first test</h4>
-<!--l. 116--><p class="noindent" >First we generate code using the launch configuration <span 
-class="ec-lmsso-10">gen_TrafficLightJava.launch </span>the wizard created for us. We observe that
-the code doesn&#8217;t compile because we introduced a dependency to the <span 
-class="ec-lmsso-10">modellib.java</span>. So we add this project to our Java build
-path.
-</p><!--l. 120--><p class="noindent" >Now the build should be clean.
-</p><!--l. 122--><p class="noindent" >Prior to the generated application we have to launch the GUI with the expected socket 4443 that we&#8217;ve configured above. So
-we install the &#8217;eTrice Trafficlight for Tutorials&#8217; project in our work space using the New Wizard. Locate the launch
-configuration <span 
-class="ec-lmsso-10">trafficlight_port_4443.launch </span>and run it. A little Window pops up
-</p><!--l. 126--><p class="noindent" ><img 
-src="images/018-trafficlightGUI.png" alt="PIC"  
- />
-</p><!--l. 128--><p class="noindent" >which tells us it is listening on socket 4443.
-</p><!--l. 130--><p class="noindent" >Then we launch our application using <span 
-class="ec-lmsso-10">run_TrafficLight.launch</span>. The console window shows
-                                                                                            
-                                                                                            
-</p>
-<div class="verbatim" id="verbatim-9">
-***&#x00A0;&#x00A0;&#x00A0;T&#x00A0;H&#x00A0;E&#x00A0;&#x00A0;&#x00A0;B&#x00A0;E&#x00A0;G&#x00A0;I&#x00A0;N&#x00A0;&#x00A0;&#x00A0;***
-&#x00A0;<br />***&#x00A0;MainComponent&#x00A0;/TrafficLight/main::init&#x00A0;***
-&#x00A0;<br />type&#x00A0;&#8217;quit&#8217;&#x00A0;to&#x00A0;exit
-&#x00A0;<br />Client&#x00A0;Init&#x00A0;!
-</div>
-<!--l. 138--><p class="nopar" >
-</p><!--l. 140--><p class="noindent" >and the GUI indicates that it is connected with a client:
-</p><!--l. 142--><p class="noindent" ><img 
-src="images/018-trafficlightGUI-connected.png" alt="PIC"  
- />
-</p><!--l. 144--><p class="noindent" >After entering &#8217;quit&#8217; in the console window we turn back to the behavior of our <span 
-class="ec-lmsso-10">PedestrianLight </span>actor.
-<a 
- id="x13-63001r84"></a>
-</p>
-<h4 class="subsectionHead"><span class="titlemark">2.7.5   </span> <a 
- id="x13-640005"></a>Implement the <span 
-class="ec-lmsso-10">PedestrianLight </span>Behavior</h4>
-<!--l. 148--><p class="noindent" >The <span 
-class="ec-lmsso-10">ATcpClient </span>returns <span 
-class="ec-lmsso-10">established() </span>if the socket connection is created and ready to use. So we use this trigger to make a
-transition into the operational state.
-</p><!--l. 151--><p class="noindent" ><img 
-src="images/018-trans-to-operational.png" alt="PIC"  
- />
-</p><!--l. 153--><p class="noindent" >The switching of the lights will be implemented in a sub graph of the <span 
-class="ec-lmsso-10">Operational </span>state.
-</p><!--l. 155--><p class="noindent" ><img 
-src="images/018-create-sub-graph.png" alt="PIC"  
- />
-</p><!--l. 157--><p class="noindent" >Now we turn to the sub state machine of <span 
-class="ec-lmsso-10">Operational</span>. We need to cyclically loop through all phases of the traffic
-light.
-</p>
-<div class="tabular"> <table id="TBL-2" class="tabular" 
-cellspacing="0" cellpadding="0" rules="groups" 
-><colgroup id="TBL-2-1g"><col 
-id="TBL-2-1" /></colgroup><colgroup id="TBL-2-2g"><col 
-id="TBL-2-2" /></colgroup><colgroup id="TBL-2-3g"><col 
-id="TBL-2-3" /></colgroup><colgroup id="TBL-2-4g"><col 
-id="TBL-2-4" /></colgroup><tr 
-class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-2-1-"><td  style="white-space:nowrap; text-align:center;" id="TBL-2-1-1"  
-class="td11">   State    </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-1-2"  
-class="td11"> Car Lights  </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-1-3"  
-class="td11"> Ped Lights  </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-1-4"  
-class="td11"> timeout [s]  </td>
-</tr><tr 
-class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-2-2-"><td  style="white-space:nowrap; text-align:center;" id="TBL-2-2-1"  
-class="td11">  AllRed    </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-2-2"  
-class="td11">    red      </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-2-3"  
-class="td11">    red       </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-2-4"  
-class="td11">     1        </td></tr><tr 
-class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-2-3-"><td  style="white-space:nowrap; text-align:center;" id="TBL-2-3-1"  
-class="td
-11"> CarGreen  </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-3-2"  
-class="td11">   green     </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-3-3"  
-class="td11">    red       </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-3-4"  
-class="td11">    n/a      </td>
-</tr><tr 
-class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-2-4-"><td  style="white-space:nowrap; text-align:center;" id="TBL-2-4-1"  
-class="td11"> CarYellow  </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-4-2"  
-class="td11">   yellow    </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-4-3"  
-class="td11">    red       </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-4-4"  
-class="td11">     1        </td>
-</tr><tr 
-class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-2-5-"><td  style="white-space:nowrap; text-align:center;" id="TBL-2-5-1"  
-class="td11">  CarRed   </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-5-2"  
-class="td11">    red      </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-5-3"  
-class="td11">    red       </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-5-4"  
-class="td11">     1        </td>
-</tr><tr 
-class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-2-6-"><td  style="white-space:nowrap; text-align:center;" id="TBL-2-6-1"  
-class="td11"> PedGreen  </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-6-2"  
-class="td11">    red      </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-6-3"  
-class="td11">   green     </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-6-4"  
-class="td11">     3        </td>
-</tr><tr 
-class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
- style="vertical-align:baseline;" id="TBL-2-7-"><td  style="white-space:nowrap; text-align:center;" id="TBL-2-7-1"  
-class="td11">          </td>
-</tr></table></div>
-<!--l. 176--><p class="noindent" ><span 
-class="ec-lmsso-10">AllRed </span>will be the initial state. There we start a timeout after which we do the transition to <span 
-class="ec-lmsso-10">CarGreen</span>. We will stay in this
-state until the request button is pushed which means that we can trigger on <span 
-class="ec-lmsso-10">recive() </span>from the <span 
-class="ec-lmsso-10">tcpPayload </span>port. Since nothing
-else will be sent back from our GUI we don&#8217;t have to look at the contents of the payload. The transition ends in <span 
-class="ec-lmsso-10">CarYellow</span>
-where we again start a timeout which will take us to the next state and so on until we again reach <span 
-class="ec-lmsso-10">CarGreen </span>which completes
-the cycle.
-</p><!--l. 182--><p class="noindent" >The next thing we need is a <span 
-class="ec-lmsso-10">SAP </span>for our timeout. We will call it <span 
-class="ec-lmsso-10">&#8217;timeout&#8217;</span>. Then we can create the states and transitions in
-the sub state machine of <span 
-class="ec-lmsso-10">Operational</span>.
-</p><!--l. 185--><p class="noindent" ><img 
-src="images/018-operational.png" alt="PIC"  
- />
-</p><!--l. 187--><p class="noindent" >The only thing that is left to be done is the actual switching of the lights in our GUI. We have to send the commands as
-strings terminated by new line characters. The GUI reacts on the following commands:
-</p>
-     <ul class="itemize1">
-     <li class="itemize">"pedLights=red\n"
-     </li>
-     <li class="itemize">"pedLights=green\n"
-     </li>
-     <li class="itemize">"carLights=red\n"
-     </li>
-     <li class="itemize">"carLights=yellow\n"
-     </li>
-     <li class="itemize">"carLights=green\n"</li></ul>
-<!--l. 199--><p class="noindent" >To simplify the code we have to add to the entry codes of the states we propose to add two methods:
-                                                                                            
-                                                                                            
-</p>
-<!--l. 201-->
-<div class="lstlisting" id="listing-24"><span class="label"><a 
- id="x13-64001r1"></a></span><span 
-class="ec-lmssbx-10x-x-90">Operation</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">sendString</span><span 
-class="ec-lmtt-9">(</span><span 
-class="ec-lmtt-9">text</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">string</span><span 
-class="ec-lmtt-9">)</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
+ id="x15-71002"></a>
+<span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-64002r2"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">tcpPayload</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">send</span><span 
-class="ec-lmtt-9">(</span><span 
-class="ec-lmtt-9">new</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">DTcpPayload</span><span 
-class="ec-lmtt-9">(1,</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">text</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">length</span><span 
-class="ec-lmtt-9">()</span><span 
-class="ec-lmtt-9">,</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">text</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">getBytes</span><span 
-class="ec-lmtt-9">()</span><span 
-class="ec-lmtt-9">)</span><span 
-class="ec-lmtt-9">)</span><span 
-class="ec-lmtt-9">;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-64003r3"></a></span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-64004r4"></a></span><span 
-class="ec-lmssbx-10x-x-90">Operation</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">setLights</span><span 
-class="ec-lmtt-9">(</span><span 
-class="ec-lmtt-9">car</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Light</span><span 
-class="ec-lmtt-9">,</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">ped</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Light</span><span 
-class="ec-lmtt-9">)</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-64005r5"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">sendString</span><span 
-class="ec-lmtt-9">(\"</span><span 
-class="ec-lmtt-9">carLights</span><span 
-class="ec-lmtt-9">=\"+</span><span 
-class="ec-lmtt-9">getCmd</span><span 
-class="ec-lmtt-9">(</span><span 
-class="ec-lmtt-9">car</span><span 
-class="ec-lmtt-9">)</span><span 
-class="ec-lmtt-9">+\"\\</span><span 
-class="ec-lmtt-9">n</span><span 
-class="ec-lmtt-9">\")</span><span 
-class="ec-lmtt-9">;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-64006r6"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">sendString</span><span 
-class="ec-lmtt-9">(\"</span><span 
-class="ec-lmtt-9">pedLights</span><span 
-class="ec-lmtt-9">=\"+</span><span 
-class="ec-lmtt-9">getCmd</span><span 
-class="ec-lmtt-9">(</span><span 
-class="ec-lmtt-9">ped</span><span 
-class="ec-lmtt-9">)</span><span 
-class="ec-lmtt-9">+\"\\</span><span 
-class="ec-lmtt-9">n</span><span 
-class="ec-lmtt-9">\")</span><span 
-class="ec-lmtt-9">;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-64007r7"></a></span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-64008r8"></a></span><span 
-class="ec-lmssbx-10x-x-90">Operation</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">getCmd</span><span 
-class="ec-lmtt-9">(</span><span 
-class="ec-lmtt-9">light</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Light</span><span 
-class="ec-lmtt-9">)</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">string</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-64009r9"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">switch</span><span 
-class="ec-lmtt-9">(</span><span 
-class="ec-lmtt-9">light</span><span 
-class="ec-lmtt-9">)</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-64010r10"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">case</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Light</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">RED</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">return</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">\"</span><span 
-class="ec-lmtt-9">red</span><span 
-class="ec-lmtt-9">\";</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-64011r11"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">case</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Light</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">GREEN</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">return</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">\"</span><span 
-class="ec-lmtt-9">green</span><span 
-class="ec-lmtt-9">\";</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-64012r12"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">case</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Light</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">YELLOW</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">return</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">\"</span><span 
-class="ec-lmtt-9">yellow</span><span 
-class="ec-lmtt-9">\";</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-64013r13"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">default</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">return</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">\"\";</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-64014r14"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-64015r15"></a></span><span 
-class="ec-lmtt-9">}</span>
-</div>
-<!--l. 219--><p class="noindent" >Since we use data types we also need to import the <span 
-class="ec-lmsso-10">Types.room </span>from the <span 
-class="ec-lmsso-10">modellib.java</span>:
-</p>
-<!--l. 221-->
-<div class="lstlisting" id="listing-25"><span class="label"><a 
- id="x13-64016r1"></a></span><span 
-class="ec-lmssbx-10x-x-90">import</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">room</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">basic</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">types</span><span 
-class="ec-lmtt-9">.*</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">from</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">../../</span><span 
-class="ec-lmtt-9">org</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">eclipse</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">etrice</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">modellib</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">java</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">model</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">Types</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">room</span><span 
-class="ec-lmtt-9">"</span>
-</div>
-<!--l. 225--><p class="noindent" >Finally we add entry codes to the five states. For <span 
-class="ec-lmsso-10">AllRed </span>e.g. we have
-</p>
-<!--l. 227-->
-<div class="lstlisting" id="listing-26"><span class="label"><a 
- id="x13-64017r1"></a></span><span 
-class="ec-lmssbx-10x-x-90">State</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">AllRed</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-64018r2"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">entry</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-64019r3"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">setLights</span><span 
-class="ec-lmtt-9">(</span><span 
-class="ec-lmtt-9">Light</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">RED</span><span 
-class="ec-lmtt-9">,</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Light</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">RED</span><span 
-class="ec-lmtt-9">)</span><span 
-class="ec-lmtt-9">;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-64020r4"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">timeout</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">startTimeout</span><span 
-class="ec-lmtt-9">(1000)</span><span 
-class="ec-lmtt-9">;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-64021r5"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-64022r6"></a></span><span 
-class="ec-lmtt-9">}</span>
-</div>
-<!--l. 236--><p class="noindent" >And so on for all states corresponding to above table.
-</p><!--l. 238--><p class="noindent" >After generating and running the application we get an MSC like this:
-</p><!--l. 240--><p class="noindent" ><img 
-src="images/018-msc.png" alt="PIC"  
- />
-<a 
- id="x13-64023r85"></a>
-</p>
-<h4 class="subsectionHead"><span class="titlemark">2.7.6   </span> <a 
- id="x13-650006"></a>Configuration</h4>
-<!--l. 244--><p class="noindent" >We want to use this example to illustrate how instance data can be configured using a configuration model. We hard wired IP
-address and port into our model which of course is not very nice.
-</p><!--l. 247--><p class="noindent" >To use configurable data for our purpose we have to add a new attribute to out <span 
-class="ec-lmsso-10">PedestrianLight </span>actor structure:
-</p>
-<!--l. 249-->
-<div class="lstlisting" id="listing-27"><span class="label"><a 
- id="x13-65001r1"></a></span><span 
-class="ec-lmssbx-10x-x-90">Attribute</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">ipConfig</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">DTcpControl</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">[</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">configuration</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">of</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">the</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">IP</span><span 
-class="ec-lmtt-9">-</span><span 
-class="ec-lmtt-9">port</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">for</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">the</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">communication</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">with</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">the</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Traffic</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Light</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">GUI</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">]</span>
-</div>
-<!--l. 253--><p class="noindent" >Then we add a configuration model to our <span 
-class="ec-lmsso-10">model </span>folder. The contents of this model has to be
-</p>
-<!--l. 256-->
-<div class="lstlisting" id="listing-28"><span class="label"><a 
- id="x13-65002r1"></a></span><span 
-class="ec-lmssbx-10x-x-90">ConfigModel</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">TrafficLight</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-65003r2"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">import</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">TrafficLight</span><span 
-class="ec-lmtt-9">.*</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">from</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">TrafficLight</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">room</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-65004r3"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-65005r4"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">ActorInstanceConfig</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">TrafficLight</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">main</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">pedLight</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-65006r5"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Attr</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">ipConfig</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-65007r6"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Attr</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">IPAddr</span><span 
-class="ec-lmtt-9">=</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">localhost</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-65008r7"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Attr</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">TcpPort</span><span 
-class="ec-lmtt-9">=4443</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-65009r8"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-65010r9"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-65011r10"></a></span><span 
-class="ec-lmtt-9">}</span>
-</div>
-<!--l. 269--><p class="noindent" >This way we can configure specific attributes of actor classes or instances.
-</p><!--l. 271--><p class="noindent" >Now we only have to add this model to our launch configuration for the generator, re-generate and we are
-done.
-</p><!--l. 273--><p class="noindent" >As an exercise to the reader we leave the following task. Add a second <span 
-class="ec-lmsso-10">PedestrianLight </span>to the application and connect it to a
-second GUI (listening on another port of course).
-<a 
- id="x13-65012r86"></a>
-</p>
-<h4 class="subsectionHead"><span class="titlemark">2.7.7   </span> <a 
- id="x13-660007"></a>The Complete Model</h4>
-<!--l. 278--><p class="noindent" >As a reference here is the complete model:
-</p>
-<!--l. 280-->
-                                                                                            
-                                                                                            
-<div class="lstlisting" id="listing-29"><span class="label"><a 
- id="x13-66001r1"></a></span><span 
-class="ec-lmssbx-10x-x-90">RoomModel</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">TrafficLight</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66002r2"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66003r3"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">import</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">room</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">basic</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">service</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">timing</span><span 
-class="ec-lmtt-9">.*</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">from</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">../../</span><span 
-class="ec-lmtt-9">org</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">eclipse</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">etrice</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">modellib</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">java</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">model</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">TimingService</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">room</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66004r4"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">import</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">room</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">basic</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">service</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">tcp</span><span 
-class="ec-lmtt-9">.*</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">from</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">../../</span><span 
-class="ec-lmtt-9">org</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">eclipse</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">etrice</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">modellib</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">java</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">model</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">TcpService</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">room</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66005r5"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">import</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">room</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">basic</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">types</span><span 
-class="ec-lmtt-9">.*</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">from</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">../../</span><span 
-class="ec-lmtt-9">org</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">eclipse</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">etrice</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">modellib</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">java</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">model</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">Types</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">room</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66006r6"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66007r7"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">LogicalSystem</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">TrafficLight</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66008r8"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">SubSystemRef</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">main</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Main</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66009r9"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66010r10"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66011r11"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">SubSystemClass</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Main</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66012r12"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">ActorRef</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">pedLight</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">PedestrianLight</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66013r13"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">ActorRef</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">timingSvc</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">ATimingService</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66014r14"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">LayerConnection</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">ref</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">pedLight</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">satisfied_by</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">timingSvc</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">timer</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66015r15"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">LogicalThread</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">defaultThread</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66016r16"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66017r17"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66018r18"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">ActorClass</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">PedestrianLight</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66019r19"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Structure</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66020r20"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">conjugated</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Port</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">tcpControl</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">PTcpControl</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66021r21"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">conjugated</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Port</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">tcpPayload</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">PTcpPayload</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66022r22"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">ActorRef</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">socketClient</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">ATcpClient</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66023r23"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">SAP</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">timeout</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">PTimer</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66024r24"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Binding</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">tcpControl</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">and</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">socketClient</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">ControlPort</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66025r25"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Binding</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">tcpPayload</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">and</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">socketClient</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">PayloadPort</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66026r26"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Attribute</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">ipConfig</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">DTcpControl</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">[</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">configuration</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">of</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">the</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">IP</span><span 
-class="ec-lmtt-9">-</span><span 
-class="ec-lmtt-9">port</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">for</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">the</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">communication</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">with</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">the</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Traffic</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Light</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">GUI</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">]</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66027r27"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66028r28"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Behavior</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66029r29"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Operation</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">sendString</span><span 
-class="ec-lmtt-9">(</span><span 
-class="ec-lmtt-9">text</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">string</span><span 
-class="ec-lmtt-9">)</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66030r30"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">tcpPayload</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">send</span><span 
-class="ec-lmtt-9">(</span><span 
-class="ec-lmtt-9">new</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">DTcpPayload</span><span 
-class="ec-lmtt-9">(1,</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">text</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">length</span><span 
-class="ec-lmtt-9">()</span><span 
-class="ec-lmtt-9">,</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">text</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">getBytes</span><span 
-class="ec-lmtt-9">()</span><span 
-class="ec-lmtt-9">)</span><span 
-class="ec-lmtt-9">)</span><span 
-class="ec-lmtt-9">;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66031r31"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66032r32"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Operation</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">setLights</span><span 
-class="ec-lmtt-9">(</span><span 
-class="ec-lmtt-9">car</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Light</span><span 
-class="ec-lmtt-9">,</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">ped</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Light</span><span 
-class="ec-lmtt-9">)</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66033r33"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">sendString</span><span 
-class="ec-lmtt-9">(\"</span><span 
-class="ec-lmtt-9">carLights</span><span 
-class="ec-lmtt-9">=\"+</span><span 
-class="ec-lmtt-9">getCmd</span><span 
-class="ec-lmtt-9">(</span><span 
-class="ec-lmtt-9">car</span><span 
-class="ec-lmtt-9">)</span><span 
-class="ec-lmtt-9">+\"\\</span><span 
-class="ec-lmtt-9">n</span><span 
-class="ec-lmtt-9">\")</span><span 
-class="ec-lmtt-9">;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66034r34"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">sendString</span><span 
-class="ec-lmtt-9">(\"</span><span 
-class="ec-lmtt-9">pedLights</span><span 
-class="ec-lmtt-9">=\"+</span><span 
-class="ec-lmtt-9">getCmd</span><span 
-class="ec-lmtt-9">(</span><span 
-class="ec-lmtt-9">ped</span><span 
-class="ec-lmtt-9">)</span><span 
-class="ec-lmtt-9">+\"\\</span><span 
-class="ec-lmtt-9">n</span><span 
-class="ec-lmtt-9">\")</span><span 
-class="ec-lmtt-9">;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66035r35"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66036r36"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Operation</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">getCmd</span><span 
-class="ec-lmtt-9">(</span><span 
-class="ec-lmtt-9">light</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Light</span><span 
-class="ec-lmtt-9">)</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">string</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66037r37"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">switch</span><span 
-class="ec-lmtt-9">(</span><span 
-class="ec-lmtt-9">light</span><span 
-class="ec-lmtt-9">)</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66038r38"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">case</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Light</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">RED</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">return</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">\"</span><span 
-class="ec-lmtt-9">red</span><span 
-class="ec-lmtt-9">\";</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66039r39"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">case</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Light</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">GREEN</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">return</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">\"</span><span 
-class="ec-lmtt-9">green</span><span 
-class="ec-lmtt-9">\";</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66040r40"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">case</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Light</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">YELLOW</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">return</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">\"</span><span 
-class="ec-lmtt-9">yellow</span><span 
-class="ec-lmtt-9">\";</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66041r41"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">default</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">return</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">\"\";</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66042r42"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66043r43"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66044r44"></a></span><span 
+ id="x15-71003r36"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1593,7 +89,7 @@ class="ec-lmssbx-10x-x-90">StateMachine</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66045r45"></a></span><span 
+ id="x15-71004r37"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1609,11 +105,72 @@ class="ec-lmssbx-10x-x-90">initial</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">-&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">OpenSocket</span><span 
+class="ec-lmtt-9">CreateOptional2</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-71005r38"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">Transition</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">tr0</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">CreateOptional2</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">-&#x003E;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">CreateOptional1</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66046r46"></a></span><span 
+ id="x15-71006r39"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmssbx-10x-x-90">triggers</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-71007r40"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x003C;</span><span 
+class="ec-lmtt-9">hello</span><span 
+class="ec-lmtt-9">:</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">p0</span><span 
+class="ec-lmtt-9">&#x003E;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-71008r41"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-71009r42"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1625,7 +182,7 @@ class="ec-lmssbx-10x-x-90">action</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66047r47"></a></span><span 
+ id="x15-71010r43"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1636,16 +193,62 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">tcpControl</span><span 
+class="ec-lmtt-9">System</span><span 
 class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">open</span><span 
+class="ec-lmtt-9">out</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">println</span><span 
 class="ec-lmtt-9">(</span><span 
-class="ec-lmtt-9">ipConfig</span><span 
-class="ec-lmtt-9">)</span><span 
+class="ec-lmtt-9">txt</span><span 
+class="ec-lmtt-9">+\"\\</span><span 
+class="ec-lmtt-9">n</span><span 
+class="ec-lmtt-9">\")</span><span 
 class="ec-lmtt-9">;</span><span 
 class="ec-lmtt-9">"</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66048r48"></a></span><span 
+ id="x15-71011r44"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">opt</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">destroyOptionalActor</span><span 
+class="ec-lmtt-9">()</span><span 
+class="ec-lmtt-9">;</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-71012r45"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">dumpTree</span><span 
+class="ec-lmtt-9">(\"</span><span 
+class="ec-lmtt-9">after</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">deletion</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">of</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">Optional2</span><span 
+class="ec-lmtt-9">\")</span><span 
+class="ec-lmtt-9">;</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-71013r46"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1655,7 +258,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66049r49"></a></span><span 
+ id="x15-71014r47"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1664,305 +267,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66050r50"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Transition</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">tr0</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">OpenSocket</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">-&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Operational</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66051r51"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">triggers</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66052r52"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">established</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">tcpControl</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66053r53"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66054r54"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66055r55"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">State</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">OpenSocket</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66056r56"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">State</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Operational</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66057r57"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">subgraph</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66058r58"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Transition</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">init</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">initial</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">-&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">AllRed</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66059r59"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Transition</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">tr0</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">AllRed</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">-&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">CarGreen</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66060r60"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">triggers</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66061r61"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">timeout</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">timeout</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66062r62"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66063r63"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66064r64"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Transition</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">tr1</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">CarGreen</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">-&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">CarYellow</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66065r65"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">triggers</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66066r66"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">receive</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">tcpPayload</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66067r67"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66068r68"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66069r69"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
+ id="x15-71015r48"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1974,18 +279,15 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">tr2</span><span 
 class="ec-lmtt-9">:</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">CarYellow</span><span 
+class="ec-lmtt-9">CreateOptional1</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">-&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">CarRed</span><span 
+class="ec-lmtt-9">ReceivedHelloAgain</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66070r70"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
+ id="x15-71016r49"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -1997,93 +299,7 @@ class="ec-lmssbx-10x-x-90">triggers</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66071r71"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">timeout</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">timeout</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66072r72"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66073r73"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66074r74"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Transition</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">tr3</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">CarRed</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">-&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">PedGreen</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66075r75"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">triggers</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66076r76"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
+ id="x15-71017r50"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2094,28 +310,13 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">timeout</span><span 
+class="ec-lmtt-9">hello</span><span 
 class="ec-lmtt-9">:</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">timeout</span><span 
+class="ec-lmtt-9">p0</span><span 
 class="ec-lmtt-9">&#x003E;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66077r77"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66078r78"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
+ id="x15-71018r51"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2125,7 +326,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66079r79"></a></span><span 
+ id="x15-71019r52"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2133,22 +334,11 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Transition</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">tr4</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">PedGreen</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">-&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">AllRed</span><span 
+class="ec-lmssbx-10x-x-90">action</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66080r80"></a></span><span 
+ id="x15-71020r53"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2158,12 +348,21 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">triggers</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">System</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">out</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">println</span><span 
+class="ec-lmtt-9">(</span><span 
+class="ec-lmtt-9">txt</span><span 
+class="ec-lmtt-9">+\"\\</span><span 
+class="ec-lmtt-9">n</span><span 
+class="ec-lmtt-9">\")</span><span 
+class="ec-lmtt-9">;</span><span 
+class="ec-lmtt-9">"</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66081r81"></a></span><span 
+ id="x15-71021r54"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2173,20 +372,15 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">timeout</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">timeout</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">opt</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">destroyOptionalActor</span><span 
+class="ec-lmtt-9">()</span><span 
+class="ec-lmtt-9">;</span><span 
+class="ec-lmtt-9">"</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66082r82"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
+ id="x15-71022r55"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2196,10 +390,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66083r83"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
+ id="x15-71023r56"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2208,10 +399,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66084r84"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
+ id="x15-71024r57"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2220,14 +408,11 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmssbx-10x-x-90">State</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">AllRed</span><span 
+class="ec-lmtt-9">CreateOptional2</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66085r85"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
+ id="x15-71025r58"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2239,10 +424,7 @@ class="ec-lmssbx-10x-x-90">entry</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66086r86"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
+ id="x15-71026r59"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2253,24 +435,44 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">setLights</span><span 
-class="ec-lmtt-9">(</span><span 
-class="ec-lmtt-9">Light</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">RED</span><span 
-class="ec-lmtt-9">,</span><span 
+class="ec-lmtt-9">dumpTree</span><span 
+class="ec-lmtt-9">(\"</span><span 
+class="ec-lmtt-9">before</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Light</span><span 
+class="ec-lmtt-9">creation</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">of</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">Optional2</span><span 
+class="ec-lmtt-9">\")</span><span 
+class="ec-lmtt-9">;</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-71027r60"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">opt</span><span 
 class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">RED</span><span 
+class="ec-lmtt-9">createOptionalActor</span><span 
+class="ec-lmtt-9">(\"</span><span 
+class="ec-lmtt-9">Optional2</span><span 
+class="ec-lmtt-9">\",</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">getThread</span><span 
+class="ec-lmtt-9">()</span><span 
 class="ec-lmtt-9">)</span><span 
 class="ec-lmtt-9">;</span><span 
 class="ec-lmtt-9">"</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66087r87"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
+ id="x15-71028r61"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2281,17 +483,38 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">timeout</span><span 
+class="ec-lmtt-9">p0</span><span 
 class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">startTimeout</span><span 
-class="ec-lmtt-9">(1000)</span><span 
+class="ec-lmtt-9">sayHello</span><span 
+class="ec-lmtt-9">()</span><span 
 class="ec-lmtt-9">;</span><span 
 class="ec-lmtt-9">"</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66088r88"></a></span><span 
+ id="x15-71029r62"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">dumpTree</span><span 
+class="ec-lmtt-9">(\"</span><span 
+class="ec-lmtt-9">after</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">creation</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">of</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">Optional2</span><span 
+class="ec-lmtt-9">\")</span><span 
+class="ec-lmtt-9">;</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-71030r63"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2301,10 +524,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66089r89"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
+ id="x15-71031r64"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2313,10 +533,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66090r90"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
+ id="x15-71032r65"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2325,14 +542,11 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmssbx-10x-x-90">State</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">CarGreen</span><span 
+class="ec-lmtt-9">CreateOptional1</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66091r91"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
+ id="x15-71033r66"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2344,10 +558,7 @@ class="ec-lmssbx-10x-x-90">entry</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66092r92"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
+ id="x15-71034r67"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2358,24 +569,62 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">setLights</span><span 
-class="ec-lmtt-9">(</span><span 
-class="ec-lmtt-9">Light</span><span 
+class="ec-lmtt-9">opt</span><span 
 class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">GREEN</span><span 
-class="ec-lmtt-9">,</span><span 
+class="ec-lmtt-9">createOptionalActor</span><span 
+class="ec-lmtt-9">(\"</span><span 
+class="ec-lmtt-9">Optional1</span><span 
+class="ec-lmtt-9">\",</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Light</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">RED</span><span 
+class="ec-lmtt-9">getThread</span><span 
+class="ec-lmtt-9">()</span><span 
 class="ec-lmtt-9">)</span><span 
 class="ec-lmtt-9">;</span><span 
 class="ec-lmtt-9">"</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66093r93"></a></span><span 
+ id="x15-71035r68"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">p0</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">sayHello</span><span 
+class="ec-lmtt-9">()</span><span 
+class="ec-lmtt-9">;</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-71036r69"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">dumpTree</span><span 
+class="ec-lmtt-9">(\"</span><span 
+class="ec-lmtt-9">after</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">creation</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">of</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">Optional1</span><span 
+class="ec-lmtt-9">\")</span><span 
+class="ec-lmtt-9">;</span><span 
+class="ec-lmtt-9">"</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x15-71037r70"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2385,10 +634,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66094r94"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
+ id="x15-71038r71"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2397,10 +643,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66095r95"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
+ id="x15-71039r72"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2409,14 +652,11 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmssbx-10x-x-90">State</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">CarYellow</span><span 
+class="ec-lmtt-9">ReceivedHelloAgain</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66096r96"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
+ id="x15-71040r73"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -2426,375 +666,462 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmssbx-10x-x-90">entry</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66097r97"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">setLights</span><span 
-class="ec-lmtt-9">(</span><span 
-class="ec-lmtt-9">Light</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">YELLOW</span><span 
-class="ec-lmtt-9">,</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Light</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">RED</span><span 
-class="ec-lmtt-9">)</span><span 
-class="ec-lmtt-9">;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66098r98"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">timeout</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">startTimeout</span><span 
-class="ec-lmtt-9">(1000)</span><span 
-class="ec-lmtt-9">;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66099r99"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66100r100"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66101r101"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">State</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">CarRed</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66102r102"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">entry</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66103r103"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">setLights</span><span 
-class="ec-lmtt-9">(</span><span 
-class="ec-lmtt-9">Light</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">RED</span><span 
-class="ec-lmtt-9">,</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Light</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">RED</span><span 
-class="ec-lmtt-9">)</span><span 
-class="ec-lmtt-9">;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66104r104"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">timeout</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">startTimeout</span><span 
-class="ec-lmtt-9">(1000)</span><span 
-class="ec-lmtt-9">;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66105r105"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66106r106"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66107r107"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">State</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">PedGreen</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66108r108"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">entry</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66109r109"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">setLights</span><span 
-class="ec-lmtt-9">(</span><span 
-class="ec-lmtt-9">Light</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">RED</span><span 
-class="ec-lmtt-9">,</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Light</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">GREEN</span><span 
-class="ec-lmtt-9">)</span><span 
-class="ec-lmtt-9">;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66110r110"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">timeout</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">startTimeout</span><span 
-class="ec-lmtt-9">(3000)</span><span 
-class="ec-lmtt-9">;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66111r111"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66112r112"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66113r113"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66114r114"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66115r115"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66116r116"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66117r117"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66118r118"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66119r119"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Enumeration</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Light</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66120r120"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">RED</span><span 
-class="ec-lmtt-9">,</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66121r121"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">GREEN</span><span 
-class="ec-lmtt-9">,</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66122r122"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">YELLOW</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66123r123"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66124r124"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x13-66125r125"></a></span><span 
-class="ec-lmtt-9">}</span>
+class="ec-lmtt-9">{</span>
+<br />
+            <div class="caption" 
+><span class="id">Listing&#x00A0;4.1:
+            </span><span  
+class="content">Container
+            actor
+            state
+            machine</span></div><!--tex4ht:label?: x15-710004 -->
+                                                                                            
+                                                                                            
 </div>
+<!--l. 299--><p class="noindent" >The console output of the running application starts with
                                                                                             
                                                                                             
+</p>
+<div class="verbatim" id="verbatim-4">
+***&#x00A0;&#x00A0;&#x00A0;T&#x00A0;H&#x00A0;E&#x00A0;&#x00A0;&#x00A0;B&#x00A0;E&#x00A0;G&#x00A0;I&#x00A0;N&#x00A0;&#x00A0;&#x00A0;***
+&#x00A0;<br />***&#x00A0;MainComponent&#x00A0;/LS/main::init&#x00A0;***
+&#x00A0;<br />type&#x00A0;&#8217;quit&#8217;&#x00A0;to&#x00A0;exit
+&#x00A0;<br />before&#x00A0;creation&#x00A0;of&#x00A0;Optional2
+&#x00A0;<br />LS
+&#x00A0;<br />&#x00A0;&#x00A0;main
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;RTSystemPort
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;MessageService_MessageService_PhysicalThread1
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Dispatcher
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;Queue
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;ActorClass(className=Appl,&#x00A0;instancePath=/LS/main/appl)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;port&#x00A0;RTSystemPort
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;ActorClass(className=Container,&#x00A0;instancePath=/LS/main/appl/cont)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;port&#x00A0;RTSystemPort
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;port&#x00A0;p0
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;ScalarOptionalActorInterface(className=Optional,&#x00A0;instancePath=/LS/main/appl/cont/opt)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;RTSystemPort
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;port&#x00A0;p0
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;port&#x00A0;RTSystemPort0
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;port&#x00A0;RTSystemPort1
+</div>
+<!--l. 322--><p class="nopar" >
+</p><!--l. 324--><p class="noindent" >The <span 
+class="ec-lmtt-10">ScalarOptionalActorInterface(className=Optional, instancePath=/LS/main/appl/cont/opt) </span>is an object
+which is responsible for the life cycle of the dynamic actor (including its contained instances) and for the mediation of the
+port connections. It contains a replicated <span 
+class="ec-lmtt-10">RTSystemPort </span>which is used to trigger the initial transition and the port <span 
+class="ec-lmtt-10">p0 </span>of the
+interface of the <span 
+class="ec-lmtt-10">Optional </span>actor class.
+</p><!--l. 329--><p class="noindent" >After creation of <span 
+class="ec-lmtt-10">Optional2 </span>the interesting part of the dumped tree is
+                                                                                            
+                                                                                            
+</p>
+<div class="verbatim" id="verbatim-5">
+&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;ScalarOptionalActorInterface(className=Optional,&#x00A0;instancePath=/LS/main/appl/cont/opt)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;RTSystemPort
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;port&#x00A0;p0
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;ActorClass(className=Optional2,&#x00A0;instancePath=/LS/main/appl/cont/opt/opt)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;port&#x00A0;RTSystemPort
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;ActorClass(className=AC2,&#x00A0;instancePath=/LS/main/appl/cont/opt/opt/sub2)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;port&#x00A0;RTSystemPort
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;ActorClass(className=AC3,&#x00A0;instancePath=/LS/main/appl/cont/opt/opt/sub2/deep_sub)
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;port&#x00A0;RTSystemPort
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;port&#x00A0;p0
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;port&#x00A0;RTSystemPort0
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;port&#x00A0;RTSystemPort1
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;port&#x00A0;RTSystemPort2
+</div>
+<!--l. 345--><p class="nopar" >
+</p><!--l. 347--><p class="noindent" >It can be seen that the sub tree corresponding to <span 
+class="ec-lmtt-10">Optional2 </span>was inserted right below the <span 
+class="ec-lmtt-10">ScalarOptionalActorInterface</span>.
+</p><!--l. 350--><p class="noindent" >After deletion of the optional actor the dumped instance tree looks exactly as in the beginning.
+</p><!--l. 352--><p class="noindent" >To illustrate the dynamic behavior of the system we can finally have a look at the generated sequence diagram <a 
+href="#x15-71041r1">4.1<!--tex4ht:ref: fig:dynact1_msc --></a>.
+During the sub system initialization three actor instances are created. Then the system is started and the
+<span 
+class="ec-lmtt-10">Container </span>actor dynamically creates an instance of <span 
+class="ec-lmtt-10">Optional2</span>. This is indicated by the note on the life line of
+<span 
+class="ec-lmtt-10">/LS/main/appl/cont</span>. Then <span 
+class="ec-lmtt-10">sayHello() </span>is sent and the answer <span 
+class="ec-lmtt-10">hello() </span>is received and the optional actor is destroyed
+again.
+</p><!--l. 359--><p class="noindent" >The same is repeated with a new optional instance of <span 
+class="ec-lmtt-10">Optional1</span>.
+</p>
+<hr class="figure" /><div class="figure" 
+>
+                                                                                            
+                                                                                            
+<a 
+ id="x15-71041r1"></a>
+                                                                                            
+                                                                                            
+<!--l. 362--><p class="noindent" ><img 
+src="images/039-DynAct1-MSC.jpg" alt="PIC"  
+ />
+<br /> </p><div class="caption" 
+><span class="id">Figure&#x00A0;4.1: </span><span  
+class="content">Sequence diagram of Dynamic Actors Example 1</span></div><!--tex4ht:label?: x15-71041r1 -->
+                                                                                            
+                                                                                            
+</div><hr class="endfigure" />
+<a 
+ id="x15-71042r87"></a>
+<h5 class="subsubsectionHead"><span class="titlemark">4.2.1.3   </span> <a 
+ id="x15-720003"></a>Noteworthy</h5>
+     <ul class="itemize1">
+     <li class="itemize">To obtain an executable the launch configuration <span 
+class="ec-lmtt-10">gen_DynAct1_sys.launch </span>has to be executed. In this case
+     also the SubsystemClass <span 
+class="ec-lmtt-10">Node_nodeRef1_main </span>is generated as well as factory classes for the valid optional
+     actors. If <span 
+class="ec-lmtt-10">Optional </span>were not <span 
+class="ec-lmtt-10">abstract </span>then also for this class a factory is created. However, in this class the
+     relay port isn&#8217;t connected and a request <span 
+class="ec-lmtt-10">sayHello() </span>would be left without reply.
+     </li>
+     <li class="itemize">To generate a library the launch configuration <span 
+class="ec-lmtt-10">gen_DynAct1.launch </span>has to be executed. In this case no factory
+     classes are generated.</li></ul>
+<a 
+ id="x15-72001r85"></a>
+<h4 class="subsectionHead"><span class="titlemark">4.2.2   </span> <a 
+ id="x15-730002"></a>Dynamic Actors 2</h4>
+<!--l. 382--><p class="noindent" >This example is contained in <span 
+class="ec-lmtt-10">model/dynamicactors2</span>.
+<a 
+ id="x15-73001r90"></a>
+</p>
+<h5 class="subsubsectionHead"><span class="titlemark">4.2.2.1   </span> <a 
+ id="x15-740001"></a>Purpose</h5>
+<!--l. 386--><p class="noindent" >A modified version of <span 
+class="ec-lmtt-10">dynamicactors1 </span>is used to analyze eventual memory leaks of the application.
+<a 
+ id="x15-74001r92"></a>
+</p>
+<h5 class="subsubsectionHead"><span class="titlemark">4.2.2.2   </span> <a 
+ id="x15-750002"></a>Details</h5>
+<!--l. 390--><p class="noindent" >In this modified version creation and deletion of optional actors is looped. Each loop consists of 4 steps:
+     </p><ol  class="enumerate1" >
+     <li 
+  class="enumerate" id="x15-75002x1">create an instance of <span 
+class="ec-lmtt-10">Optional2</span>
+     </li>
+     <li 
+  class="enumerate" id="x15-75004x2">destroy the instance
+     </li>
+     <li 
+  class="enumerate" id="x15-75006x3">create an instance of <span 
+class="ec-lmtt-10">Optional1</span>
+     </li>
+     <li 
+  class="enumerate" id="x15-75008x4">destroy the instance</li></ol>
+<!--l. 400--><p class="noindent" >All together 600 steps are performed which corresponds to 300 creations and deletions.
+</p><!--l. 402--><p class="noindent" >The free memory is printed to the console. Also the overall execution time is measured. After the loop is finished the heap is
+analyzed using <span 
+class="ec-lmtt-10">JConsole </span>(which is a part of the Java6 distribution) to dump the heap and <a 
+href="http://www.eclipse.org/mat/" ><span 
+class="ec-lmtt-10">org.eclipse.mat</span></a> to analyze
+it.
+</p><!--l. 407--><p class="noindent" >The measured total execution time on a Intel Core 2 Duo at 2.66 GHz was 110 ms. This corresponds to about 370
+<span 
+class="lmmi-10">&#x03BC;</span>s.
+</p><!--l. 410--><p class="noindent" >The result of the heap analysis for <span 
+class="ec-lmtt-10">org.eclipse.etrice.* </span>objects is listed in figure <a 
+href="#x15-75009r2">4.2<!--tex4ht:ref: fig:dynact2_heap --></a>. The small numbers per object and
+the retained heap size indicate that the application has no memory leak.
+</p>
+<hr class="figure" /><div class="figure" 
+>
+                                                                                            
+                                                                                            
+<a 
+ id="x15-75009r2"></a>
+                                                                                            
+                                                                                            
+<!--l. 414--><p class="noindent" ><img 
+src="images/039-DynAct2-HeapAnalysis.jpg" alt="PIC"  
+ />
+<br /> </p><div class="caption" 
+><span class="id">Figure&#x00A0;4.2: </span><span  
+class="content">Heap analysis after 600 steps</span></div><!--tex4ht:label?: x15-75009r2 -->
+                                                                                            
+                                                                                            
+</div><hr class="endfigure" />
+<a 
+ id="x15-75010r93"></a>
+<h5 class="subsubsectionHead"><span class="titlemark">4.2.2.3   </span> <a 
+ id="x15-760003"></a>Noteworthy</h5>
+     <ul class="itemize1">
+     <li class="itemize">Calling the garbage collector every time before the free memory is dumped costs a significant amount of time
+     and the execution time is increased to the order of seconds.
+     </li>
+     <li class="itemize">The measured free memory is close to constant. Only a small step is observed which wasn&#8217;t analyzed further.</li></ul>
+<a 
+ id="x15-76001r91"></a>
+<h4 class="subsectionHead"><span class="titlemark">4.2.3   </span> <a 
+ id="x15-770003"></a>Dynamic Actors 3</h4>
+<!--l. 429--><p class="noindent" >This example is contained in <span 
+class="ec-lmtt-10">model/dynamicactors3</span>.
+<a 
+ id="x15-77001r95"></a>
+</p>
+<h5 class="subsubsectionHead"><span class="titlemark">4.2.3.1   </span> <a 
+ id="x15-780001"></a>Purpose</h5>
+<!--l. 433--><p class="noindent" >The example demonstrates the usage of an optional actor array. It is shown that several actor classes derived from the type of
+the optional actor reference can be created as array members. The array members can be destroyed in arbitrary order and the
+array size grows and shrinks as appropriate.
+<a 
+ id="x15-78001r97"></a>
+</p>
+<h5 class="subsubsectionHead"><span class="titlemark">4.2.3.2   </span> <a 
+ id="x15-790002"></a>Details</h5>
+<!--l. 439--><p class="noindent" >This example again is similar to example 1. One difference is that the (scalar) optional actor is replaced by a replicated
+optional actor (or array of optional actors if you wish). The port of the <span 
+class="ec-lmtt-10">Container </span>was also changed to a replicated port. All
+replication factors in this example are of arbitrary multiplicity (*). The sizes vary dynamically and are unbound as far as the
+model is concerned.
+</p><!--l. 444--><p class="noindent" >The behavior was changed to the following: Two instances of different classes are created as members of this array and both
+are deleted and one is created again. The replicated port is used to send (broadcast) messages to the optional
+actors.
+<a 
+ id="x15-79001r98"></a>
+</p>
+<h5 class="subsubsectionHead"><span class="titlemark">4.2.3.3   </span> <a 
+ id="x15-800003"></a>Noteworthy</h5>
+     <ul class="itemize1">
+     <li class="itemize">the generated MSC <span 
+class="ec-lmtt-10">main_Async.seq </span>is a good illustration of the dynamic changes in the system structure
+     </li>
+     <li class="itemize">careful inspection of the console output reveals that objects are created and destroyed as expected</li></ul>
+<a 
+ id="x15-80001r96"></a>
+<h4 class="subsectionHead"><span class="titlemark">4.2.4   </span> <a 
+ id="x15-810004"></a>Dynamic Actors 4</h4>
+<!--l. 457--><p class="noindent" >This example is contained in <span 
+class="ec-lmtt-10">model/dynamicactors4</span>.
+<a 
+ id="x15-81001r99"></a>
+</p>
+<h5 class="subsubsectionHead"><span class="titlemark">4.2.4.1   </span> <a 
+ id="x15-820001"></a>Purpose</h5>
+<!--l. 461--><p class="noindent" >The example demonstrates the usage of an optional actor. But here not the actor containing the optional reference is
+communicating with the optional actor but one level above.
+<a 
+ id="x15-82001r101"></a>
+</p>
+<h5 class="subsubsectionHead"><span class="titlemark">4.2.4.2   </span> <a 
+ id="x15-830002"></a>Details</h5>
+<!--l. 466--><p class="noindent" >The <span 
+class="ec-lmtt-10">Controller </span>which has a reference to the <span 
+class="ec-lmtt-10">Container </span>is asking the latter for the creation of the dynamic actor. When it
+receives <span 
+class="ec-lmtt-10">ok() </span>it is requesting <span 
+class="ec-lmtt-10">sayHello() </span>from the newly created actor.
+                                                                                            
+                                                                                            
+</p><!--l. 470--><p class="noindent" >After the <span 
+class="ec-lmtt-10">Controller </span>receives <span 
+class="ec-lmtt-10">hello() </span>it tells the <span 
+class="ec-lmtt-10">Container </span>to create another actor which fails because the old one is still
+in place.
+<a 
+ id="x15-83001r102"></a>
+</p>
+<h5 class="subsubsectionHead"><span class="titlemark">4.2.4.3   </span> <a 
+ id="x15-840003"></a>Noteworthy</h5>
+     <ul class="itemize1">
+     <li class="itemize">the generated MSC <span 
+class="ec-lmtt-10">main_Async.seq </span>is a good illustration of the dynamic changes in the system structure</li></ul>
+<a 
+ id="x15-84001r100"></a>
+<h4 class="subsectionHead"><span class="titlemark">4.2.5   </span> <a 
+ id="x15-850005"></a>Dynamic Actors 5</h4>
+<!--l. 481--><p class="noindent" >This example is contained in <span 
+class="ec-lmtt-10">model/dynamicactors5</span>.
+<a 
+ id="x15-85001r103"></a>
+</p>
+<h5 class="subsubsectionHead"><span class="titlemark">4.2.5.1   </span> <a 
+ id="x15-860001"></a>Purpose</h5>
+<!--l. 485--><p class="noindent" >The example shows that the optional actor can not only have relay ports but also external end ports.
+<a 
+ id="x15-86001r105"></a>
+</p>
+<h5 class="subsubsectionHead"><span class="titlemark">4.2.5.2   </span> <a 
+ id="x15-870002"></a>Details</h5>
+<!--l. 489--><p class="noindent" >This simple example just shows that the optional actor may directly handle inbound messages by using an external end port
+rather than the relay port of the previous examples.
+<a 
+ id="x15-87001r106"></a>
+</p>
+<h5 class="subsubsectionHead"><span class="titlemark">4.2.5.3   </span> <a 
+ id="x15-880003"></a>Noteworthy</h5>
+     <ul class="itemize1">
+     <li class="itemize">the generated MSC <span 
+class="ec-lmtt-10">main_Async.seq </span>is a good illustration of the dynamic changes in the system structure</li></ul>
+<a 
+ id="x15-88001r104"></a>
+<h4 class="subsectionHead"><span class="titlemark">4.2.6   </span> <a 
+ id="x15-890006"></a>Dynamic Actors 6</h4>
+<!--l. 500--><p class="noindent" >This example is contained in <span 
+class="ec-lmtt-10">model/dynamicactors6</span>.
+<a 
+ id="x15-89001r107"></a>
+</p>
+<h5 class="subsubsectionHead"><span class="titlemark">4.2.6.1   </span> <a 
+ id="x15-900001"></a>Purpose</h5>
+<!--l. 504--><p class="noindent" >The example demonstrates the use of nested dynamic actors.
+<a 
+ id="x15-90001r109"></a>
+</p>
+<h5 class="subsubsectionHead"><span class="titlemark">4.2.6.2   </span> <a 
+ id="x15-910002"></a>Details</h5>
+<!--l. 508--><p class="noindent" >In this example the dynamically created actor <span 
+class="ec-lmtt-10">Optional2 </span>has again an optional reference two levels down in its hierarchy. On
+creation it immediately creates a nested dynamic actor of class <span 
+class="ec-lmtt-10">Optional1 </span>which is sending <span 
+class="ec-lmtt-10">hello() </span>back to the outer
+<span 
+class="ec-lmtt-10">Container</span>.
+<a 
+ id="x15-91001r110"></a>
+</p>
+<h5 class="subsubsectionHead"><span class="titlemark">4.2.6.3   </span> <a 
+ id="x15-920003"></a>Noteworthy</h5>
+     <ul class="itemize1">
+     <li class="itemize">the generated MSC <span 
+class="ec-lmtt-10">main_Async.seq </span>is a good illustration of the dynamic changes in the system structure
+     </li>
+     <li class="itemize">when a dynamic actor is created its structure is there immediately and all ports are connected. But the initial
+     transition is executed asynchronously. So after the outer dynamic actor is created the port of the <span 
+class="ec-lmtt-10">Container</span>
+     is not yet connected because the initial transition which is responsible for the creation of the inner dynamic
+     actor wasn&#8217;t executed yet. So a message sent from this port directly after creation of the outer dynamic actor
+     would get lost.</li></ul>
+                                                                                            
+                                                                                            
+<a 
+ id="x15-92001r108"></a>
+<h4 class="subsectionHead"><span class="titlemark">4.2.7   </span> <a 
+ id="x15-930007"></a>Dynamic Actors 7</h4>
+<!--l. 524--><p class="noindent" >This example is contained in <span 
+class="ec-lmtt-10">model/dynamicactors7</span>.
+<a 
+ id="x15-93001r111"></a>
+</p>
+<h5 class="subsubsectionHead"><span class="titlemark">4.2.7.1   </span> <a 
+ id="x15-940001"></a>Purpose</h5>
+<!--l. 528--><p class="noindent" >The example demonstrates the use of communication between two optional actors.
+<a 
+ id="x15-94001r113"></a>
+</p>
+<h5 class="subsubsectionHead"><span class="titlemark">4.2.7.2   </span> <a 
+ id="x15-950002"></a>Details</h5>
+<!--l. 532--><p class="noindent" >In this example two sub trees of dynamic actors are created. The container is sending a message to one of them which is
+forwarding it to the other one which in turn is replying back to the container.
+<a 
+ id="x15-95001r114"></a>
+</p>
+<h5 class="subsubsectionHead"><span class="titlemark">4.2.7.3   </span> <a 
+ id="x15-960003"></a>Noteworthy</h5>
+     <ul class="itemize1">
+     <li class="itemize">the generated MSC <span 
+class="ec-lmtt-10">main_Async.seq </span>is a good illustration of the dynamic changes in the system structure</li></ul>
+<a 
+ id="x15-96001r112"></a>
+<h4 class="subsectionHead"><span class="titlemark">4.2.8   </span> <a 
+ id="x15-970008"></a>Dynamic Actors 8</h4>
+<!--l. 543--><p class="noindent" >This example is contained in <span 
+class="ec-lmtt-10">model/dynamicactors8</span>.
+<a 
+ id="x15-97001r115"></a>
+</p>
+<h5 class="subsubsectionHead"><span class="titlemark">4.2.8.1   </span> <a 
+ id="x15-980001"></a>Purpose</h5>
+<!--l. 547--><p class="noindent" >The example demonstrates the use of the persistence interface for dynamic actors.
+<a 
+ id="x15-98001r117"></a>
+</p>
+<h5 class="subsubsectionHead"><span class="titlemark">4.2.8.2   </span> <a 
+ id="x15-990002"></a>Details</h5>
+<!--l. 551--><p class="noindent" >Dynamic actors can be persisted and restored. To this end the user has to pass an <span 
+class="ec-lmtt-10">java.io.ObjectOutput </span>to
+the creation method (<span 
+class="ec-lmtt-10">createOptionalActor()</span>) and an <span 
+class="ec-lmtt-10">java.io.ObjectInput </span>to the deletion method
+(<span 
+class="ec-lmtt-10">destroyOptionalActor()</span>).
+</p><!--l. 554--><p class="noindent" >The code generation has to be invoked with the <span 
+class="ec-lmtt-10">-persistable </span>(e.g. by setting the &#8217;generate persistence interface&#8217; flag in the
+Java Generator tab of the launch configuration). This lets the generator implement the <span 
+class="ec-lmtt-10">IPersistable </span>interface for actor
+classes.
+</p><!--l. 557--><p class="noindent" >The example adds a manually coded very simple <span 
+class="ec-lmtt-10">FilePersistor </span>with four static methods for creation and deletion of scalar
+and replicated dynamic actors.
+</p><!--l. 560--><p class="noindent" >The <span 
+class="ec-lmtt-10">Container </span>class first creates an optional actor of type <span 
+class="ec-lmtt-10">Optional1 </span>in the scalar reference <span 
+class="ec-lmtt-10">opt</span>. Then messages are sent
+to this actor instance which lead to some state changes. Finally it is saved and destroyed. Now another actor class is
+instantiated in the same actor reference and also destroyed. Then the first instance is loaded from file. It directly starts in the
+state it had when it was saved. The second part of the example loads copies of the two instances created in the beginning
+into the <span 
+class="ec-lmtt-10">optarr </span>reference.
+<a 
+ id="x15-99001r118"></a>
+</p>
+<h5 class="subsubsectionHead"><span class="titlemark">4.2.8.3   </span> <a 
+ id="x15-1000003"></a>Noteworthy</h5>
+     <ul class="itemize1">
+     <li class="itemize">the generated MSC <span 
+class="ec-lmtt-10">main_Async.seq </span>is a good illustration of the dynamic changes in the system structure</li></ul>
+<a 
+ id="x15-100001r116"></a>
+<h4 class="subsectionHead"><span class="titlemark">4.2.9   </span> <a 
+ id="x15-1010009"></a>Dynamic Actors 9</h4>
+<!--l. 574--><p class="noindent" >This example is contained in <span 
+class="ec-lmtt-10">model/dynamicactors9</span>.
+                                                                                            
+                                                                                            
+<a 
+ id="x15-101001r119"></a>
+</p>
+<h5 class="subsubsectionHead"><span class="titlemark">4.2.9.1   </span> <a 
+ id="x15-1020001"></a>Purpose</h5>
+<!--l. 578--><p class="noindent" >The example demonstrates the use of SAPs in dynamic actors.
+<a 
+ id="x15-102001r121"></a>
+</p>
+<h5 class="subsubsectionHead"><span class="titlemark">4.2.9.2   </span> <a 
+ id="x15-1030002"></a>Details</h5>
+<!--l. 582--><p class="noindent" >This simple example re-uses the PingPong tutorial. The static part of the system introduces a <span 
+class="ec-lmtt-10">TimingService </span>as SPP and
+the <span 
+class="ec-lmtt-10">Receiver </span>embedded in the optional part uses a SAP of this protocol.
+</p><!--l. 585--><p class="noindent" >The sub system during initialization adds broker ports to the optional actor interface that are connected to all available
+services.
+</p><!--l. 588--><p class="noindent" >On the other hand the factory for the optional actor maps SAPs to those broker ports.
+<a 
+ id="x15-103001r122"></a>
+</p>
+<h5 class="subsubsectionHead"><span class="titlemark">4.2.9.3   </span> <a 
+ id="x15-1040003"></a>Noteworthy</h5>
+     <ul class="itemize1">
+     <li class="itemize"><span 
+class="ec-lmsso-10">Caution: </span>currently the generator informs about unsatisfied services in dynamic actors. But it is still possible to
+     create such an instance. The consequence is an unbound SAP</li></ul>
 <!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
-href="etrice-docch3.html" >next</a>] [<a 
+href="etrice-docch5.html" >next</a>] [<a 
 href="etrice-docse8.html" >prev</a>] [<a 
 href="etrice-docse8.html#tailetrice-docse8.html" >prev-tail</a>] [<a 
 href="etrice-docse9.html" >front</a>] [<a 
-href="etrice-docch2.html#etrice-docse9.html" >up</a>] </p></div>
+href="etrice-docch4.html#etrice-docse9.html" >up</a>] </p></div>
 <!--l. 1--><p class="noindent" ><a 
  id="tailetrice-docse9.html"></a></p> 
 </body></html> 

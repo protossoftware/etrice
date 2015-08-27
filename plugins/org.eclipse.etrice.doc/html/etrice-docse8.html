@@ -4,1287 +4,304 @@
 <!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
 <html xmlns="http://www.w3.org/1999/xhtml"  
 > 
-<head><title>Ping Pong Tutorial (Java and C)</title> 
+<head><title>The C examples project</title> 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2015-07-09 13:04:00" /> 
+<meta name="date" content="2015-08-27 23:56:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
-<!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 15--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse9.html" >next</a>] [<a 
-href="etrice-docse7.html" >prev</a>] [<a 
-href="etrice-docse7.html#tailetrice-docse7.html" >prev-tail</a>] [<a 
+href="etrice-docch4.html" >prev</a>] [<a 
+href="etrice-docch4.html#tailetrice-docch4.html" >prev-tail</a>] [<a 
 href="#tailetrice-docse8.html">tail</a>] [<a 
-href="etrice-docch2.html#etrice-docse8.html" >up</a>] </p></div>
-<h3 class="sectionHead"><span class="titlemark">2.6   </span> <a 
- id="x12-470006"></a>Ping Pong Tutorial (Java and C)</h3>
+href="etrice-docch4.html#etrice-docse8.html" >up</a>] </p></div>
+<h3 class="sectionHead"><span class="titlemark">4.1   </span> <a 
+ id="x14-470001"></a>The C examples project</h3>
+<!--l. 17--><p class="noindent" >This example project <span 
+class="ec-lmtt-10">org.eclipse.etrice.examples.c </span>illustrates a simplified traffic light control. It actually
+consists of four different steps of increasing complexity that can be generated and built one by one (but not in
+parallel).
+</p><!--l. 23--><p class="noindent" >Most of the classes are contained in a common ROOM model <span 
+class="ec-lmtt-10">model/TrafficLight/TrafficLight.room </span>that also shows
+how ROOM classes can form a library and used as building blocks for several systems. Also the physical model is shared by all
+steps of this example.
+</p><!--l. 28--><p class="noindent" >Contained in the example you will find a little Java GUI that some of the example use to simulate a real traffic light. The GUI
+is contacted using TCP/IP ports 4441 and subsequent. The protocol used on the TCP/IP socket connection is a simple text
+protocol with commands for the lights. Three of the example steps make use of this simulator GUI. They also contain a
+launch configuration for it.
+</p><!--l. 35--><p class="noindent" ><span 
+class="ec-lmssbx-10">Note: </span>Before compiling and linking a new step of the example the project should be cleaned to avoid duplicate symbols due
+to artifacts from the previous build.
 <a 
- id="x12-47001r62"></a>
-<h4 class="subsectionHead"><span class="titlemark">2.6.1   </span> <a 
- id="x12-480001"></a>Scope</h4>
-<!--l. 6--><p class="noindent" >This tutorial describes how to create a simple hierarchical actor system of actors communicating via ports and bindings.
-Additionally you will use the Timing Service from the eTrice model library. This tutorial can be done for the target languages
-Java or C. For the Ping Pong scenario we want to create a model with a sender and a reveiver of a message.
-The receiver has to wait for the ping message from the sender, wait for a second and respond with a pong
-message.
-</p><!--l. 11--><p class="noindent" >The resulting Message Sequence Chart (MSC) at the ende of this tutorial should look like this:
-</p><!--l. 13--><p class="noindent" ><img 
-src="images/017-01-MSC.png" alt="PIC"  
- />
-</p><!--l. 15--><p class="noindent" >We will take this MSC as specification for the desired behavior.
-</p><!--l. 17--><p class="noindent" >You will perform the following steps:
-     </p><ol  class="enumerate1" >
-     <li 
-  class="enumerate" id="x12-48002x1">create a new model from scratch
+ id="x14-47001r60"></a>
+</p>
+                                                                                            
+                                                                                            
+<h4 class="subsectionHead"><span class="titlemark">4.1.1   </span> <a 
+ id="x14-480001"></a>Traffic light - step 1</h4>
+<!--l. 41--><p class="noindent" >The main ROOM model and the mapping model of this example is contained in <span 
+class="ec-lmtt-10">org.eclipse.etrice.examples.c/model/TrafficLight_step1</span>.
+It also contains launch configurations for the code generation and for running the application.
+<a 
+ id="x14-48001r1"></a>
+</p>
+<h5 class="subsubsectionHead"><span class="titlemark">4.1.1.1   </span> <a 
+ id="x14-490001"></a>Purpose</h5>
+<!--l. 48--><p class="noindent" >This example illustrates how a single actor can be tested against a test harness.
+<a 
+ id="x14-49001r65"></a>
+</p>
+<h5 class="subsubsectionHead"><span class="titlemark">4.1.1.2   </span> <a 
+ id="x14-500002"></a>Details</h5>
+<!--l. 52--><p class="noindent" >A <span 
+class="ec-lmtt-10">PedestrianTrafficLightController </span>is an actor that controls a traffic light consisting of a traffic light with
+red, yellow and green for the cars, a second traffic light with just red and green and a request button for the
+pedestrians.
+</p><!--l. 56--><p class="noindent" >The controller has two ports, <span 
+class="ec-lmtt-10">fct </span>and <span 
+class="ec-lmtt-10">tlInterface</span>. The first one uses a protocol <span 
+class="ec-lmtt-10">PTrafficLightController </span>that offers
+the high level commands <span 
+class="ec-lmtt-10">standby</span>, <span 
+class="ec-lmtt-10">start </span>and <span 
+class="ec-lmtt-10">stop</span>. The second one uses a conjugated protocol <span 
+class="ec-lmtt-10">PTrafficLightInterface</span>
+which controls each of the lights separately.
+</p><!--l. 62--><p class="noindent" >The test harness <span 
+class="ec-lmtt-10">TrafficLightControllerTestHarness </span>is connected to both ports and drives the test in several
+steps.
+</p><!--l. 65--><p class="noindent" >To run the test first generate the code using <span 
+class="ec-lmtt-10">gen_TrafficLight_step1.launch</span>, then compile and link it (using the
+CDTbuild). Since this step doesn&#8217;t use a GUI you can just start the application using <span 
+class="ec-lmtt-10">run_TrafficLight_step1.launch</span>.
+<a 
+ id="x14-50001r66"></a>
+</p>
+<h5 class="subsubsectionHead"><span class="titlemark">4.1.1.3   </span> <a 
+ id="x14-510003"></a>Noteworthy</h5>
+     <ul class="itemize1">
+     <li class="itemize">usage of a ROOM model as library for several systems
      </li>
-     <li 
-  class="enumerate" id="x12-48004x2">define a protocol
+     <li class="itemize">creation of a test harness for an actor</li></ul>
+<a 
+ id="x14-51001r64"></a>
+<h4 class="subsectionHead"><span class="titlemark">4.1.2   </span> <a 
+ id="x14-520002"></a>Traffic light - step 2</h4>
+<!--l. 78--><p class="noindent" >The main ROOM model and the mapping model of this example is contained in <span 
+class="ec-lmtt-10">org.eclipse.etrice.examples.c/model/TrafficLight_step2</span>.
+It also contains launch configurations for the code generation, for launching the simulator GUI and for running the
+application.
+<a 
+ id="x14-52001r67"></a>
+</p>
+<h5 class="subsubsectionHead"><span class="titlemark">4.1.2.1   </span> <a 
+ id="x14-530001"></a>Purpose</h5>
+<!--l. 86--><p class="noindent" >This example shows the control of a single block of traffic lights containing a car light and a light for the pedestrians. It
+illustrates how a stack of abstraction levels is used to conveniently divide the problem into relatively simple
+parts.
+<a 
+ id="x14-53001r69"></a>
+</p>
+<h5 class="subsubsectionHead"><span class="titlemark">4.1.2.2   </span> <a 
+ id="x14-540002"></a>Details</h5>
+<!--l. 93--><p class="noindent" >The 4 levels of this application starts with a <span 
+class="ec-lmtt-10">TrafficLightHeadquarters </span>on the top. It controls the global operating mode
+of the traffic light block. The test harness <span 
+class="ec-lmtt-10">TrafficLightControllerTestHarness </span>is connected to both ports and drives the
+test in several steps.
+</p><!--l. 99--><p class="noindent" >On the next level we have a <span 
+class="ec-lmtt-10">PedestrianTrafficLightController </span>which offers some very general commands like <span 
+class="ec-lmtt-10">start</span>,
+<span 
+class="ec-lmtt-10">stop </span>and <span 
+class="ec-lmtt-10">standby</span>.
+</p><!--l. 102--><p class="noindent" >On the second level we find an actor <span 
+class="ec-lmtt-10">PTrafficLightInterface </span>that offers basic traffic light control in the form of switching
+the state of each single light separately.
+</p><!--l. 106--><p class="noindent" >On the base level we have an actor handling a TCP/IP socket connection with a general text protocol.
+                                                                                            
+                                                                                            
+</p><!--l. 109--><p class="noindent" >To run the test first generate the code using <span 
+class="ec-lmtt-10">gen_TrafficLight_step2.launch</span>, then compile and link it (using the
+CDTbuild). Since this step uses a GUI with a single block of lights you&#8217;ll have to launch the simulator using
+<span 
+class="ec-lmtt-10">run_simulator_1_block.launch</span>. Then you can just start the application using <span 
+class="ec-lmtt-10">run_TrafficLight_step2.launch</span>.
+</p><!--l. 115--><p class="noindent" >After going through a short initialization and standby phase the traffic light goes into a mode of permanent green for cars.
+After pressing the &#8217;request&#8217; button in the simulator GUI the light switches to red for cars and green for pedestrians and back
+to permanent green for cars.
+<a 
+ id="x14-54001r70"></a>
+</p>
+<h5 class="subsubsectionHead"><span class="titlemark">4.1.2.3   </span> <a 
+ id="x14-550003"></a>Noteworthy</h5>
+     <ul class="itemize1">
+     <li class="itemize">use abstraction levels to break a problem into smaller pieces.</li></ul>
+<a 
+ id="x14-55001r68"></a>
+<h4 class="subsectionHead"><span class="titlemark">4.1.3   </span> <a 
+ id="x14-560003"></a>Traffic light - step 3</h4>
+<!--l. 128--><p class="noindent" >The main ROOM model and the mapping model of this example is contained in <span 
+class="ec-lmtt-10">org.eclipse.etrice.examples.c/model/TrafficLight_step3</span>.
+It also contains launch configurations for the code generation, for launching the simulator GUI and for running the
+application.
+<a 
+ id="x14-56001r71"></a>
+</p>
+<h5 class="subsubsectionHead"><span class="titlemark">4.1.3.1   </span> <a 
+ id="x14-570001"></a>Purpose</h5>
+<!--l. 136--><p class="noindent" >This example shows the control of two blocks of traffic lights each containing a car light and a light for the pedestrians. It
+uses a replicated stack of actors as introduced in step 2.
+<a 
+ id="x14-57001r73"></a>
+</p>
+<h5 class="subsubsectionHead"><span class="titlemark">4.1.3.2   </span> <a 
+ id="x14-580002"></a>Details</h5>
+<!--l. 142--><p class="noindent" >The head quarters actor of this example controls two blocks of traffic lights. It already has a replicated port which is now
+connected to a doubled <span 
+class="ec-lmtt-10">PedestrianTrafficLightController</span>. Of course the replication then has also to be applied to the
+other levels of the stack introduced in step 2.
+</p><!--l. 148--><p class="noindent" >To run the test first generate the code using <span 
+class="ec-lmtt-10">gen_TrafficLight_step3.launch</span>, then compile and link it (using the
+CDTbuild). Since this step uses a GUI with a two blocks of lights you&#8217;ll have to launch the simulator using
+<span 
+class="ec-lmtt-10">run_simulator_2_blocks.launch</span>. Then you can just start the application using <span 
+class="ec-lmtt-10">run_TrafficLight_step3.launch</span>.
+<a 
+ id="x14-58001r74"></a>
+</p>
+<h5 class="subsubsectionHead"><span class="titlemark">4.1.3.3   </span> <a 
+ id="x14-590003"></a>Noteworthy</h5>
+     <ul class="itemize1">
+     <li class="itemize">use replication for multiple instances of the same.</li></ul>
+<a 
+ id="x14-59001r72"></a>
+<h4 class="subsectionHead"><span class="titlemark">4.1.4   </span> <a 
+ id="x14-600004"></a>Traffic light - step 4</h4>
+<!--l. 163--><p class="noindent" >The main ROOM model and the mapping model of this example is contained in <span 
+class="ec-lmtt-10">org.eclipse.etrice.examples.c/model/TrafficLight_step4</span>.
+It also contains launch configurations for the code generation, for launching the simulator GUI and for running the
+application.
+<a 
+ id="x14-60001r75"></a>
+</p>
+<h5 class="subsubsectionHead"><span class="titlemark">4.1.4.1   </span> <a 
+ id="x14-610001"></a>Purpose</h5>
+<!--l. 171--><p class="noindent" >This example shows the control of two blocks of traffic lights each containing a car light and a light for the pedestrians. It
+uses a container actor for the three lower levels of the stack introduced in step 2. Then replication has to applied only to the
+container actor which simplifies the task.
+<a 
+ id="x14-61001r77"></a>
+</p>
+                                                                                            
+                                                                                            
+<h5 class="subsubsectionHead"><span class="titlemark">4.1.4.2   </span> <a 
+ id="x14-620002"></a>Details</h5>
+<!--l. 179--><p class="noindent" >The head quarters actor of this example controls two blocks of traffic lights. It already has a replicated port which is now
+connected to a doubled <span 
+class="ec-lmtt-10">TrafficLightControllerWithInfrastructure</span>. The latter one
+<a 
+ id="x14-62001r78"></a>
+</p>
+<h5 class="subsubsectionHead"><span class="titlemark">4.1.4.3   </span> <a 
+ id="x14-630003"></a>Noteworthy</h5>
+     <ul class="itemize1">
+     <li class="itemize">use hierarchy to group levels functionality to reusable blocks.</li></ul>
+<a 
+ id="x14-63001r76"></a>
+<h4 class="subsectionHead"><span class="titlemark">4.1.5   </span> <a 
+ id="x14-640005"></a>Features</h4>
+<!--l. 192--><p class="noindent" >This project illustrates the various ways how replication can be exploited in ROOM. Replication can be chosen for ports and
+for actor references. The example enumerates a number of typical combinations of the two possibilities.
+<a 
+ id="x14-64001r79"></a>
+</p>
+<h5 class="subsubsectionHead"><span class="titlemark">4.1.5.1   </span> <a 
+ id="x14-650001"></a>Purpose</h5>
+<!--l. 199--><p class="noindent" >Five different ways to combine replicated ports and replicated actor references are shown in this example.
+</p><!--l. 202--><p class="noindent" >Each of these combination consists of one ore more receivers and one or more senders.
+</p><!--l. 205--><p class="noindent" >All five combinations are contained in the actor class <span 
+class="ec-lmtt-10">ExampleMultiplicity</span>.
+</p>
+     <ul class="itemize1">
+     <li class="itemize"><span 
+class="ec-lmtt-10">sender1 </span>and <span 
+class="ec-lmtt-10">receiver1 </span>- a single sender and a single receiver, both with plain ports, are connected.
      </li>
-     <li 
-  class="enumerate" id="x12-48006x3">create an actor structure
+     <li class="itemize"><span 
+class="ec-lmtt-10">multiSender2 </span>with a replication factor of 10 is connected to <span 
+class="ec-lmtt-10">multiReceiver2 </span>also with a replication factor
+     of 10 - this is equivalent to 10 single senders each of which is connected to one single out of 10 receivers
      </li>
-     <li 
-  class="enumerate" id="x12-48008x4">create finite state machines
+     <li class="itemize"><span 
+class="ec-lmtt-10">multiSender3 </span>with a replication factor of 2 is connected to <span 
+class="ec-lmtt-10">receiverMultiPort3 </span>which has a port with
+     replication factor 2
      </li>
-     <li 
-  class="enumerate" id="x12-48010x5">use the predefined <span 
-class="ec-lmsso-10">TimingService</span>
+     <li class="itemize"><span 
+class="ec-lmtt-10">multiSender4 </span>with a replication factor of 10 is connected to <span 
+class="ec-lmtt-10">multiReceiverMultiPort4 </span>with a replicated
+     port with cardinality 2 and replicated 5 times - this is equivalent to 5 receivers where each is connected to two
+     senders
      </li>
-     <li 
-  class="enumerate" id="x12-48012x6">build and run the model
-     </li>
-     <li 
-  class="enumerate" id="x12-48014x7">open the message sequence chart</li></ol>
+     <li class="itemize"><span 
+class="ec-lmtt-10">multiSender5 </span>is connected to
+         <ul class="itemize2">
+         <li class="itemize"><span 
+class="ec-lmtt-10">receiver5 </span>which is a simple receiver not using any replication
+         </li>
+         <li class="itemize"><span 
+class="ec-lmtt-10">multiReceiver5 </span>which is a replicated receiver
+         </li>
+         <li class="itemize"> which is not replicated but uses a replicated portreceiverMultiPort5
+         </li>
+         <li class="itemize"><span 
+class="ec-lmtt-10">multiReceiverMultiPort5 </span>which is replicated and has replicated ports</li></ul>
+     <!--l. 227--><p class="noindent" >So <span 
+class="ec-lmtt-10">multiSender5 </span>is connected </p>
+         <ul class="itemize2">
+         <li class="itemize">once to <span 
+class="ec-lmtt-10">receiver5</span>
+         </li>
+         <li class="itemize">three times to <span 
+class="ec-lmtt-10">multiReceiver5</span>
+         </li>
+         <li class="itemize">two times to <span 
+class="ec-lmtt-10">receiverMultiPort5 </span>and
+                                                                                            
+                                                                                            
+         </li>
+         <li class="itemize">four times to <span 
+class="ec-lmtt-10">multiReceiverMultiPort5</span></li></ul>
+     <!--l. 234--><p class="noindent" >which totals to 10 (implicit) connections and matches the replication factor of 10 of <span 
+class="ec-lmtt-10">multiSender5</span>.</p></li></ul>
 <a 
- id="x12-48015r64"></a>
-<h4 class="subsectionHead"><span class="titlemark">2.6.2   </span> <a 
- id="x12-490002"></a>Create a new model from scratch</h4>
-<!--l. 31--><p class="noindent" >Create a new eTrice project according to <span 
-class="ec-lmsso-10">HelloWorld for Java or C </span>and name it <span 
-class="ec-lmsso-10">PingPong</span>.
-</p><!--l. 33--><p class="noindent" >Your <span 
-class="ec-lmsso-10">ROOM </span>model should look like this:
-</p>
-<!--l. 35-->
-<div class="lstlisting" id="listing-11"><span class="label"><a 
- id="x12-49001r1"></a></span><span 
-class="ec-lmssbx-10x-x-90">RoomModel</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">PingPong_Model</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-49002r2"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">LogicalSystem</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">LogSys1</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-49003r3"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">SubSystemRef</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">subSysRef1</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">SubSysClass1</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-49004r4"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-49005r5"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">SubSystemClass</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">SubSysClass1</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-49006r6"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">ActorRef</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">actorRef1</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">PingPongTop</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-49007r7"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">LogicalThread</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">defaultThread</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-49008r8"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-49009r9"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">ActorClass</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">PingPongTop</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-49010r10"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-49011r11"></a></span><span 
-class="ec-lmtt-9">}</span>
-</div>
+ id="x14-65001r81"></a>
+<h5 class="subsubsectionHead"><span class="titlemark">4.1.5.2   </span> <a 
+ id="x14-660002"></a>Details</h5>
+<!--l. 240--><p class="noindent" >The head quarters actor of this example controls two blocks of traffic lights. It already has a replicated port which is now
+connected to a doubled <span 
+class="ec-lmtt-10">TrafficLightControllerWithInfrastructure</span>. The latter one
 <a 
- id="x12-49012r65"></a>
-<h4 class="subsectionHead"><span class="titlemark">2.6.3   </span> <a 
- id="x12-500003"></a>Create a new protocol</h4>
-<!--l. 51--><p class="noindent" >First we define a protocol for the communication between the Sender and the Receiver. From the specification MSC above
-we can derive that the Sender sends a <span 
-class="ec-lmsso-10">ping </span>message to the receiver and the receiver responds with a <span 
-class="ec-lmsso-10">pong</span>
-message.
-                                                                                            
-                                                                                            
-</p><!--l. 53--><p class="noindent" >In <span 
-class="ec-lmsso-10">ROOM </span>the <span 
-class="ec-lmsso-10">ProtocolClass </span>specifies interfaces. In this case we go for an asynchronous, bidirectional messaging interface
-(eventdriven) which is the standard communication type for a <span 
-class="ec-lmsso-10">ProtocolClass</span>. With the help of <span 
-class="ec-lmsso-10">Content Assist </span>(Ctrl+Space)
-we create a <span 
-class="ec-lmsso-10">ProtocolClass </span>and name it <span 
-class="ec-lmsso-10">PingPongProtocol</span>. Inside the brackets use the <span 
-class="ec-lmsso-10">Content Assist </span>to create two incoming
-messages called <span 
-class="ec-lmsso-10">ping </span>and <span 
-class="ec-lmsso-10">pong</span>.
-</p><!--l. 59--><p class="noindent" >The resulting code should look like this:
+ id="x14-66001r82"></a>
 </p>
-<!--l. 61-->
-<div class="lstlisting" id="listing-12"><span class="label"><a 
- id="x12-50001r1"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">ProtocolClass</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">PingPongProtocol</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-50002r2"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">incoming</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-50003r3"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Message</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">ping</span><span 
-class="ec-lmtt-9">()</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-50004r4"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-50005r5"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">outgoing</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-50006r6"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Message</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">pong</span><span 
-class="ec-lmtt-9">()</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-50007r7"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-50008r8"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span>
-</div>
-<!--l. 72--><p class="noindent" >With <span 
-class="ec-lmsso-10">Ctrl-Shift+F </span>or selecting <span 
-class="ec-lmsso-10">Format </span>from the context menu you can format the <span 
-class="ec-lmsso-10">ROOM </span>model. Note that the new
-<span 
-class="ec-lmsso-10">ProtocolClass </span>is displayed in the outline view.
-<a 
- id="x12-50009r66"></a>
-</p>
-<h4 class="subsectionHead"><span class="titlemark">2.6.4   </span> <a 
- id="x12-510004"></a>Create the Actor Structure</h4>
-<a 
- id="Q1-12-68"></a>
-<h5 class="likesubsubsectionHead"><a 
- id="x12-520004"></a>Add two additional actor classes</h5>
-<!--l. 78--><p class="noindent" >Position the cursor outside any class definition and call the <span 
-class="ec-lmsso-10">Content Assist </span>with <span 
-class="ec-lmsso-10">Ctrl+Space</span>. Select <span 
-class="ec-lmsso-10">ActorClass - actor class</span>
-<span 
-class="ec-lmsso-10">skeleton or ActorClass </span>and name the ActorClass <span 
-class="ec-lmsso-10">Sender</span>.
-</p><!--l. 81--><p class="noindent" ><img 
-src="images/017-02-content-assist.png" alt="PIC"  
- />
-</p><!--l. 84--><p class="noindent" >Repeat the described procedure and name the new actor <span 
-class="ec-lmsso-10">Receiver</span>.
-</p><!--l. 86--><p class="noindent" >With Ctrl+Shift+F you can format your textual model.
-</p><!--l. 88--><p class="noindent" >The Result:
-</p>
-<!--l. 90-->
-<div class="lstlisting" id="listing-13"><span class="label"><a 
- id="x12-52001r1"></a></span><span 
-class="ec-lmssbx-10x-x-90">RoomModel</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">PingPong_Model</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-52002r2"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-52003r3"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">LogicalSystem</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">LogSys1</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-52004r4"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">SubSystemRef</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">subSysRef1</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">SubSysClass1</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-52005r5"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-52006r6"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-52007r7"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">SubSystemClass</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">SubSysClass1</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-52008r8"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">ActorRef</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">actorRef1</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">PingPongTop</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-52009r9"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">LogicalThread</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">defaultThread</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-52010r10"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-52011r11"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-52012r12"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">ActorClass</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">PingPongTop</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-52013r13"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-52014r14"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">ActorClass</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Sender</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-52015r15"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-52016r16"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">ActorClass</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Receiver</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-52017r17"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-52018r18"></a></span><span 
-class="ec-lmtt-9">}</span>
-</div>
-<!--l. 111--><p class="noindent" >You can should also see the new <span 
-class="ec-lmsso-10">ActorClass</span>es in the outline view.
-<a 
- id="Q1-12-70"></a>
-</p>
-<h5 class="likesubsubsectionHead"><a 
- id="x12-530004"></a>Add ports to the actors</h5>
-<!--l. 115--><p class="noindent" >To open the graphical structure editor, right click <span 
-class="ec-lmsso-10">Receiver </span>in the Outline View and select <span 
-class="ec-lmsso-10">Edit Structure</span>. Drag and Drop an
-<span 
-class="ec-lmsso-10">Interface Port </span>from the <span 
-class="ec-lmsso-10">Palette </span>to the border of the <span 
-class="ec-lmsso-10">Receiver </span>actor. Note that an <span 
-class="ec-lmsso-10">Interface Port </span>can only be placed on the
-border of the actor. Name the port <span 
-class="ec-lmsso-10">sender </span>and select <span 
-class="ec-lmsso-10">PingPongProtocol </span>as Protocol from the drop down list. The
-checkboxes <span 
-class="ec-lmsso-10">Conjugated </span>and <span 
-class="ec-lmsso-10">Is Relay Port </span>stay unchecked. Click <span 
-class="ec-lmsso-10">ok</span>. The resulting structure should look like
-this:
-</p><!--l. 119--><p class="noindent" ><img 
-src="images/017-04-Port-for-Actor-Receiver.png" alt="PIC"  
- />
-</p><!--l. 122--><p class="noindent" >Repeat the steps above for the <span 
-class="ec-lmsso-10">sender</span>. Create a port named <span 
-class="ec-lmsso-10">receiver </span>with the same <span 
-class="ec-lmsso-10">Protocol </span>and make it
-<span 
-class="ec-lmsso-10">Conjugated</span>.
-</p><!--l. 124--><p class="noindent" >Keep in mind that the protocol defines <span 
-class="ec-lmsso-10">ping </span>as incoming message and <span 
-class="ec-lmsso-10">pong </span>as outgoing message. <span 
-class="ec-lmsso-10">Receiver </span>receives <span 
-class="ec-lmsso-10">ping </span>and
-sends <span 
-class="ec-lmsso-10">pong</span>. Therefore the <span 
-class="ec-lmsso-10">Receiver</span>s port must be a regular port. The <span 
-class="ec-lmsso-10">Sender </span>has to send <span 
-class="ec-lmsso-10">ping </span>and receive <span 
-class="ec-lmsso-10">pong</span>. Therefore
-the <span 
-class="ec-lmsso-10">Sender</span>s port must be a conjugated port.
-<a 
- id="Q1-12-72"></a>
-</p>
-<h5 class="likesubsubsectionHead"><a 
- id="x12-540004"></a>Build hierarchical actor structure</h5>
-<!--l. 130--><p class="noindent" >Now we want to add the new actors to the structure of <span 
-class="ec-lmsso-10">ActorClass PingPongTop</span>.
-</p><!--l. 132--><p class="noindent" >From the outline view right click <span 
-class="ec-lmsso-10">PingPongTop </span>and select <span 
-class="ec-lmsso-10">Edit Structure</span>. Remember that you can only see the outline view if
-the textual editor with the .room file is active.
+<h5 class="subsubsectionHead"><span class="titlemark">4.1.5.3   </span> <a 
+ id="x14-670003"></a>Noteworthy</h5>
+     <ul class="itemize1">
+     <li class="itemize">use hierarchy to group levels of functionality to reusable blocks.</li></ul>
                                                                                             
                                                                                             
-</p><!--l. 134--><p class="noindent" >Drag and Drop an <span 
-class="ec-lmsso-10">ActorRef  </span>inside the <span 
-class="ec-lmsso-10">PingPongTop </span>actor. Name it <span 
-class="ec-lmsso-10">sender</span>. From the actor class drop down list select
-<span 
-class="ec-lmsso-10">Sender</span>. Do the same for <span 
-class="ec-lmsso-10">Receiver</span>. Connect the ports via the binding tool int the <span 
-class="ec-lmsso-10">Palette</span>. The resulting structure should look
-like this:
-</p><!--l. 137--><p class="noindent" ><img 
-src="images/017-03-PingPongTop-Structure.png" alt="PIC"  
- />
-</p><!--l. 140--><p class="noindent" >We have build the structure of a hierarchical actor system with two actors that send each other messages.
-<a 
- id="Q1-12-74"></a>
-</p>
-<h5 class="likesubsubsectionHead"><a 
- id="x12-550004"></a>Import the Timing Service</h5>
-<!--l. 144--><p class="noindent" >In order to implement the waiting time of the <span 
-class="ec-lmsso-10">Receiver </span>we need a timing service. The timing service is provided by the model
-library and must be imported before it can be used in your model.
-</p>
-<hr class="figure" /><div class="figure" 
->
-                                                                                            
-                                                                                            
-                                                                                            
-                                                                                            
-<div class="minipage">
-______________________________________________
-______________________________________________&#x00A0; &#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;     &#x00A0;    <!--l. 149--><p class="noindent" ><span 
-class="ec-lmssbx-10">room model for Java </span><br 
-class="newline" /></p><!--l. 151-->
-<div class="lstlisting" id="listing-14"><span class="label"><a 
- id="x12-55001r1"></a></span><span 
-class="ec-lmssbx-10x-x-90">RoomModel</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">PingPong_Model</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-55002r2"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-55003r3"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">import</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">room</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">basic</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">service</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">timing</span><span 
-class="ec-lmtt-9">.*</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">from</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">../../</span><span 
-class="ec-lmtt-9">org</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">eclipse</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">etrice</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">modellib</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">java</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">model</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">TimingService</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">room</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-55004r4"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">(...)</span>
-</div>
-</div>  <div class="minipage">
-___________________________________________________&#x00A0; &#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;     &#x00A0;    <!--l. 162--><p class="noindent" ><span 
-class="ec-lmssbx-10">room model for C </span><br 
-class="newline" /></p><!--l. 164-->
-<div class="lstlisting" id="listing-15"><span class="label"><a 
- id="x12-55005r1"></a></span><span 
-class="ec-lmssbx-10x-x-90">RoomModel</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">PingPong_Model</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-55006r2"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-55007r3"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">import</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">room</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">basic</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">service</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">timing</span><span 
-class="ec-lmtt-9">.*</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">from</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">../../</span><span 
-class="ec-lmtt-9">org</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">eclipse</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">etrice</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">modellib</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">c</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">model</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">TimingService</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">room</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-55008r4"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">(...)</span>
-</div>
-</div>
-                                                                                            
-                                                                                            
-</div><hr class="endfigure" />
-<!--l. 174--><p class="noindent" >This is the first time you use an element from the modellib. Make sure that your Java Build Path or the settings for your C
-compiler are configured to use the modellib. Otherwise the generated code can not be built.
-</p>
-<hr class="figure" /><div class="figure" 
->
-                                                                                            
-                                                                                            
-<a 
- id="x17-9300074"></a>
-                                                                                            
-                                                                                            
-<div class="minipage">
-______________________________________________
-______________________________________________&#x00A0; &#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;     &#x00A0;    <!--l. 179--><p class="noindent" ><span 
-class="ec-lmssbx-10">build settings for Java </span><br 
-class="newline" />Right click the project <span 
-class="ec-lmsso-10">PingPong </span>and select <span 
-class="ec-lmsso-10">Properties</span>
-<span 
-class="ec-lmsso-10">-&#x003E; Java Build Path -&#x003E; Projects  </span>. Add the project
-<span 
-class="ec-lmsso-10">org.eclipse.etrice.modellib.java </span>.
-</p><!--l. 183--><p class="noindent" ><img 
-src="images/020-Blinky16.png" alt="PIC"  
- />
-</p></div>  <div class="minipage">
-________________________________________________________________________&#x00A0; &#x00A0;&#x00A0;&#x00A0;&#x00A0;&#x00A0;     &#x00A0;    <!--l. 191--><p class="noindent" ><span 
-class="ec-lmssbx-10">build settings for C </span><br 
-class="newline" />
-</p><!--l. 194--><p class="noindent" >Right click the project <span 
-class="ec-lmsso-10">PingPong </span>and select <span 
-class="ec-lmsso-10">Properties</span>
-<span 
-class="ec-lmsso-10">-&#x003E; C/C++ Build -&#x003E; Settings -&#x003E; Includes</span>. Add the
-include  path  <span 
-class="ec-lmsso-10">org.eclipse.etrice.modellib.c/src-gen  </span>to
-the list.
-</p><!--l. 196--><p class="noindent" ><img 
-src="images/017-06-Settings-for-C-Includes.png" alt="PIC"  
- />
-</p><!--l. 199--><p class="noindent" >Select <span 
-class="ec-lmsso-10">Properties -&#x003E; C/C++ Build -&#x003E; Settings -&#x003E;</span>
-<span 
-class="ec-lmsso-10">Libraries</span>. Add the library <span 
-class="ec-lmsso-10">org.eclipse.etrice.modellib.c</span>
-and                         the                         library
-path  <span 
-class="ec-lmsso-10">org.eclipse.etrice.modellib.c/MinGWDebug  </span>to
-the    lists.    For    Posix    the    path    will    be
-<span 
-class="ec-lmsso-10">org.eclipse.etrice.modellib.c/PosixDebug</span>.
-</p><!--l. 202--><p class="noindent" ><img 
-src="images/017-07-Settings-for-C-Libraries.png" alt="PIC"  
- />
-</p></div>
-                                                                                            
-                                                                                            
-</div><hr class="endfigure" />
-<!--l. 209--><p class="noindent" >Now the imported library can be used within your model and we will add the actor with the timing service to our
-model.
-</p><!--l. 211--><p class="noindent" >Right click the <span 
-class="ec-lmsso-10">SubSystemClass SubSysClass1 </span>in the outline view and select <span 
-class="ec-lmsso-10">Edit Structure</span>. The <span 
-class="ec-lmsso-10">ActorClass PingPongTop </span>is
-already referenced in the subsystem as <span 
-class="ec-lmsso-10">actorRef1</span>. Drag and Drop an <span 
-class="ec-lmsso-10">ActorRef  </span>into the structure of <span 
-class="ec-lmsso-10">SubSysClass1 </span>and name
-it <span 
-class="ec-lmsso-10">timingService</span>. From the actor class drop down list select <span 
-class="ec-lmsso-10">room.basic.service.timing.ATimingService</span>. Draw a
-<span 
-class="ec-lmsso-10">LayerConnection </span>from <span 
-class="ec-lmsso-10">actorRef1 </span>to the service provision point (<span 
-class="ec-lmsso-10">SPP</span>) of the <span 
-class="ec-lmsso-10">timingService</span>. The resulting structure should
-look like this:
-</p><!--l. 216--><p class="noindent" ><img 
-src="images/017-08-SubSystem-with-timing-service.png" alt="PIC"  
- />
-</p><!--l. 219--><p class="noindent" >The layer connection between an <span 
-class="ec-lmsso-10">ActorRef  </span>and a <span 
-class="ec-lmsso-10">SPP </span>enables the use of service access points (<span 
-class="ec-lmsso-10">SAP</span>) for the service provided
-by the <span 
-class="ec-lmsso-10">SPP</span>, in this case the timing service. <span 
-class="ec-lmsso-10">SAP</span>s and <span 
-class="ec-lmsso-10">SPP</span>s are ports with a different kind of connection. Every <span 
-class="ec-lmsso-10">SAP </span>of the
-type <span 
-class="ec-lmsso-10">PTimer </span>inside actorRef1 is now connected automatically by the code generator with the <span 
-class="ec-lmsso-10">SPP </span>of the
-<span 
-class="ec-lmsso-10">timingService</span>.
-</p><!--l. 221--><p class="noindent" >The current version of eTrice does not provide a graphical element for a service access point (SAP). Therefore the SAPs to
-access the timing service must be added in the .room file. Open the <span 
-class="ec-lmsso-10">PingPong.room </span>file and navigate to the <span 
-class="ec-lmsso-10">Receiver </span>actor.
-Add the SAP for the protocol <span 
-class="ec-lmsso-10">PTimer </span>to the structure of the actor:
-</p>
-<!--l. 225-->
-<div class="lstlisting" id="listing-16"><span class="label"><a 
- id="x12-55009r1"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">ActorClass</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Receiver</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-55010r2"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Interface</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-55011r3"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Port</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">sender</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">PingPongProtocol</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-55012r4"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-55013r5"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Structure</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-55014r6"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">external</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Port</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">sender</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-55015r7"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">SAP</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">timing</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">PTimer</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-55016r8"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-55017r9"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span>
-</div>
-<!--l. 237--><p class="noindent" >Now the <span 
-class="ec-lmsso-10">Receiver </span>can use the timing service.
-<a 
- id="Q1-12-76"></a>
-</p>
-<h5 class="likesubsubsectionHead"><a 
- id="x12-560004"></a>Inspect the Actor Structure</h5>
-<!--l. 240--><p class="noindent" >Before we start with the implementation of the behavior we will have a short look at the instance tree of the application we
-built so far:
-</p><!--l. 242--><p class="noindent" ><img 
-src="images/017-09-PingPong_InstanceTree.jpg" alt="PIC"  
- />
-</p><!--l. 245--><p class="noindent" >For each instance you can see the names of the <span 
-class="ec-lmsso-10">ActorRef </span>s and in brackets the names of the <span 
-class="ec-lmsso-10">ActorClass</span>es. Starting at the
-subsystem level this instance tree will be implemented by the code generator. The subsystem will be implemented as process
-in Linux or Windows.
-<a 
- id="x12-56001r67"></a>
-</p>
-<h4 class="subsectionHead"><span class="titlemark">2.6.5   </span> <a 
- id="x12-570005"></a>Implement the Behavior</h4>
-<!--l. 250--><p class="noindent" >We will implement two finite state machines (<span 
-class="ec-lmsso-10">FSM</span>s) to define the event driven behavior of the actors <span 
-class="ec-lmsso-10">Sender </span>and
-<span 
-class="ec-lmsso-10">Receiver</span>.
-</p><!--l. 252--><p class="noindent" >Before you start with the implementation, have a look at the MSC with the specification of the behavior.
-</p><!--l. 254--><p class="noindent" >Lets start with the <span 
-class="ec-lmsso-10">Sender</span>. Right click to <span 
-class="ec-lmsso-10">Sender </span>in the outline view or the structure editor and select <span 
-class="ec-lmsso-10">Edit Behavior</span>. Drag
-and Drop the <span 
-class="ec-lmsso-10">Initial Point </span>and two <span 
-class="ec-lmsso-10">States </span>into the top state. Name the states <span 
-class="ec-lmsso-10">SendingPing </span>and <span 
-class="ec-lmsso-10">ReceivedPong</span>. Use the
-<span 
-class="ec-lmsso-10">Transition </span>tool to draw transitions from <span 
-class="ec-lmsso-10">init </span>to <span 
-class="ec-lmsso-10">SendingPing </span>and from <span 
-class="ec-lmsso-10">SendingPing </span>to <span 
-class="ec-lmsso-10">ReceivedPong</span>. When you draw a
-transition, the Dialog <span 
-class="ec-lmsso-10">Edit Transition </span>opens. Here you can specify the trigger event and the action code for each transition.
-Note that the initial transition does not have a trigger event. The transition dialog for the Transition from <span 
-class="ec-lmsso-10">SendingPing </span>to
-<span 
-class="ec-lmsso-10">ReceivedPong </span>should look like this:
-</p><!--l. 261--><p class="noindent" ><img 
-src="images/017-10-Edit-Transition.png" alt="PIC"  
- />
-</p><!--l. 264--><p class="noindent" >The transition will now be triggered by an incoming message <span 
-class="ec-lmsso-10">ping </span>at the port <span 
-class="ec-lmsso-10">receiver</span>.
-</p><!--l. 266--><p class="noindent" >Now we open the dialog <span 
-class="ec-lmsso-10">Edit State </span>of the state <span 
-class="ec-lmsso-10">SendingPing </span>by right clicking the state and selecting <span 
-class="ec-lmsso-10">Edit</span>
-<span 
-class="ec-lmsso-10">State </span>from the menu. We want to send the message <span 
-class="ec-lmsso-10">ping </span>in the entry code of this state. The defined ports
-will be generated as a member attribute of the actor class from type of the attached protocol. To send a
-message you must state <span 
-class="ec-lmsso-10">port.message(param);</span>. In this example <span 
-class="ec-lmsso-10">receiver.ping(); </span>sends the <span 
-class="ec-lmsso-10">ping </span>message via the
-<span 
-class="ec-lmsso-10">receiver </span>port. You can also use the Button <span 
-class="ec-lmsso-10">Messages </span>to select the message from the list of available ports and
-their available messages. Assuming that the actor <span 
-class="ec-lmsso-10">Receiver </span>is connected to this port, the message will be sent
-there.
-                                                                                            
-                                                                                            
-</p><!--l. 273--><p class="noindent" >The FSM of <span 
-class="ec-lmsso-10">Sender </span>should now look like this:
-</p><!--l. 275--><p class="noindent" ><img 
-src="images/017-11-FSM-Sender.png" alt="PIC"  
- />
-</p><!--l. 278--><p class="noindent" >Now we implement the FSM of the <span 
-class="ec-lmsso-10">ActorClass Receiver</span>.
-</p><!--l. 280--><p class="noindent" ><img 
-src="images/017-12-FSM-Receiver.png" alt="PIC"  
- />
-</p><!--l. 283--><p class="noindent" >In the entry code of the state <span 
-class="ec-lmsso-10">WaitingForAWhile </span>we start the timeout:
-                                                                                            
-                                                                                            
-</p>
-<div class="verbatim" id="verbatim-7">
-timing.startTimeout(1000);
-</div>
-<!--l. 287--><p class="nopar" >
-</p><!--l. 289--><p class="noindent" >In the entry code of the state <span 
-class="ec-lmsso-10">SentPong </span>we send the message <span 
-class="ec-lmsso-10">pong </span>back to the <span 
-class="ec-lmsso-10">Sender</span>:
-                                                                                            
-                                                                                            
-</p>
-<div class="verbatim" id="verbatim-8">
-sender.pong();
-</div>
-<!--l. 293--><p class="nopar" >
-</p><!--l. 295--><p class="noindent" >Save the diagram and inspect the <span 
-class="ec-lmsso-10">PingPong.room </span>file. The <span 
-class="ec-lmsso-10">Receiver </span>should look like this:
-</p>
-<!--l. 297-->
-<div class="lstlisting" id="listing-17"><span class="label"><a 
- id="x12-57001r1"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">ActorClass</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Receiver</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-57002r2"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Interface</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-57003r3"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Port</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">sender</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">PingPongProtocol</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-57004r4"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-57005r5"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Structure</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-57006r6"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">external</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Port</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">sender</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-57007r7"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">SAP</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">timing</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">PTimer</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-57008r8"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-57009r9"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Behavior</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-57010r10"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">StateMachine</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-57011r11"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Transition</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">init</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">initial</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">-&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">WaitingForPing</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-57012r12"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Transition</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">tr0</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">WaitingForPing</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">-&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">WaitingForAWhile</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-57013r13"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">triggers</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-57014r14"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">ping</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">sender</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-57015r15"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-57016r16"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-57017r17"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Transition</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">tr1</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">WaitingForAWhile</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">-&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">SentPong</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-57018r18"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">triggers</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-57019r19"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x003C;</span><span 
-class="ec-lmtt-9">timeout</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">timing</span><span 
-class="ec-lmtt-9">&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-57020r20"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-57021r21"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-57022r22"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">State</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">WaitingForPing</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-57023r23"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">State</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">SentPong</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-57024r24"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">entry</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-57025r25"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">sender</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">pong</span><span 
-class="ec-lmtt-9">()</span><span 
-class="ec-lmtt-9">;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-57026r26"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-57027r27"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-57028r28"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">State</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">WaitingForAWhile</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-57029r29"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">entry</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-57030r30"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">timing</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">startTimeout</span><span 
-class="ec-lmtt-9">(1000)</span><span 
-class="ec-lmtt-9">;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-57031r31"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-57032r32"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-57033r33"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-57034r34"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x12-57035r35"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span>
-</div>
-<!--l. 335--><p class="noindent" >The PingPong model is done now. You can generate, compile and run it as described in <span 
-class="ec-lmsso-10">Hello World for C </span>or <span 
-class="ec-lmsso-10">Hello World for</span>
-<span 
-class="ec-lmsso-10">Java</span>. The generated MSC in tmp/log should show the same MSC we used to specify the behavior at the beginning of this
-tutorial.
-</p><!--l. 337--><p class="noindent" ><img 
-src="images/017-01-MSC.png" alt="PIC"  
- />
-</p><!--l. 340--><p class="noindent" >Please note that the timeout messages startTimeout and timeout might vary depending on the target language and are not
-displayed completely correct in the current version (red dot). The MSC logger will be extended to handle this correct in the
-next version.
-<a 
- id="x12-57036r78"></a>
-</p>
-<h4 class="subsectionHead"><span class="titlemark">2.6.6   </span> <a 
- id="x12-580006"></a>Summary</h4>
-<!--l. 344--><p class="noindent" >Within this tutorial you have learned how to create a FSM with transitions triggered by incoming messages. You
-have used entry code to send messages and have used the timing service from the model library. You are
-now familiar with the basic features of eTrice. Further tutorials and examples will take this knowledge as a
-precondition.
-                                                                                            
-                                                                                            
-</p>
-<!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 251--><div class="crosslinks"><p class="noindent">[<a 
 href="etrice-docse9.html" >next</a>] [<a 
-href="etrice-docse7.html" >prev</a>] [<a 
-href="etrice-docse7.html#tailetrice-docse7.html" >prev-tail</a>] [<a 
+href="etrice-docch4.html" >prev</a>] [<a 
+href="etrice-docch4.html#tailetrice-docch4.html" >prev-tail</a>] [<a 
 href="etrice-docse8.html" >front</a>] [<a 
-href="etrice-docch2.html#etrice-docse8.html" >up</a>] </p></div>
-<!--l. 1--><p class="noindent" ><a 
+href="etrice-docch4.html#etrice-docse8.html" >up</a>] </p></div>
+<!--l. 251--><p class="noindent" ><a 
  id="tailetrice-docse8.html"></a></p> 
 </body></html> 

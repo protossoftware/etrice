@@ -1,0 +1,114 @@
+/* 
+ * Shortkeys:
+ *	Ctrl+Space	- content assist
+ * 	F3			- open declaration of selected element
+ *	Alt+S 		- open structure diagram
+ *  Alt+B 		- open behavior diagram
+ *  Alt+M 		- open textual editor (in diagrams)
+ */
+RoomModel TemplateModel {
+
+	import room.basic.types.* from "../../org.eclipse.etrice.modellib.c/model/Types.room"
+	import room.basic.service.timing.* from "../../org.eclipse.etrice.modellib.c/model/TimingService.room"
+
+	LogicalSystem LogSys {
+		SubSystemRef subSystemRef: SubSysClass
+	}
+
+	SubSystemClass SubSysClass {
+		ActorRef topActor: TopActor
+		ActorRef timingService: ATimingService
+		LayerConnection ref topActor satisfied_by timingService.timer
+		LogicalThread defaultThread
+	}
+
+	// - build your application from here
+	ActorClass TopActor {
+		Structure {
+			
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> helloState
+				State helloState {
+					entry {
+						"printf(\"### Hello World! ###\\n\");"
+					}
+				}
+			}
+		}
+	}
+	
+	// - PingPong building kit
+
+	ActorClass Sender {
+		Interface {
+			conjugated Port sendPort: PingPongProtocol
+		}
+		Structure {
+			external Port sendPort
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> sendingPing
+				Transition tr0: sendingPing -> receivedPong {
+					triggers {
+						<pong: sendPort>
+					}
+				}
+				State sendingPing {
+					entry {
+						"sendPort.ping();"
+					}
+				}
+				State receivedPong
+			}
+		}
+	}
+
+	ActorClass Receiver {
+		Interface {
+			Port recvPort: PingPongProtocol
+		}
+		Structure {
+			external Port recvPort
+			SAP timingService: PTimer
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> waitingForPing
+				Transition tr0: waitingForPing -> receivedPing {
+					triggers {
+						<ping: recvPort>
+					}
+				}
+				Transition tr1: receivedPing -> sentPong {
+					triggers {
+						<timeout: timingService>
+					}
+				}
+				State waitingForPing
+				State receivedPing {
+					entry {
+						"timingService.startTimeout(500);"
+					}
+				}
+				State sentPong {
+					entry {
+						"recvPort.pong();"
+					}
+				}
+			}
+		}
+	}
+
+	ProtocolClass PingPongProtocol {
+		incoming {
+			Message ping()
+		}
+		outgoing {
+			Message pong()
+		}
+	}
+
+}

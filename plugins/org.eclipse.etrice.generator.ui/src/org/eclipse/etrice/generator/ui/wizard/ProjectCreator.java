@@ -12,7 +12,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -66,7 +65,7 @@ public class ProjectCreator {
 
 	public static IProject createETriceProject(IPath javaSource,
 			IPath javaSourceGen, URI projectLocationURI,
-			IProject runtimeProject, List<String> naturesToAdd,
+			List<IProject> referencedProjects, List<String> naturesToAdd,
 			List<String> buildersToAdd, List<IClasspathEntry> pathEntries, Monitor monitor) {
 		IProgressMonitor progressMonitor = BasicMonitor
 				.toIProgressMonitor(monitor);
@@ -124,9 +123,6 @@ public class ProjectCreator {
 			boolean isInitiallyEmpty = classpathEntries.isEmpty();
 
 			{
-				ArrayList<IProject> referencedProjects = new ArrayList<IProject>();
-				if (runtimeProject != null)
-					referencedProjects.add(runtimeProject);
 				if (!referencedProjects.isEmpty()) {
 					projectDescription.setReferencedProjects(referencedProjects
 							.toArray(new IProject[referencedProjects.size()]));
@@ -344,9 +340,9 @@ public class ProjectCreator {
 		writeFile(uri, ProjectFileFragments.getBasicRoomModel(baseName));
 	}
 
-	public static void createPhysicalModel(URI uri, String baseName) {
-		writeFile(uri, ProjectFileFragments.getBasicPhysicalModel(baseName));
-	}
+//	public static void createPhysicalModel(URI uri, String baseName) {
+//		writeFile(uri, ProjectFileFragments.getBasicPhysicalModel(baseName));
+//	}
 
 	public static void createMappingModel(URI uri, String baseName) {
 		writeFile(uri, ProjectFileFragments.getBasicMappingModel(baseName));

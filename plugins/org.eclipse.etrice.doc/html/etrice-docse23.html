@@ -4,1379 +4,543 @@
 <!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
 <html xmlns="http://www.w3.org/1999/xhtml"  
 > 
-<head><title>eTrice Models and Their Relations</title> 
+<head><title>ModelEditors</title> 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
 <meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2015-07-09 13:04:00" /> 
+<meta name="date" content="2015-08-27 23:56:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
-<!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
-href="etrice-docch7.html" >next</a>] [<a 
+<!--l. 1757--><div class="crosslinks"><p class="noindent">[<a 
+href="etrice-docse24.html" >next</a>] [<a 
 href="etrice-docse22.html" >prev</a>] [<a 
 href="etrice-docse22.html#tailetrice-docse22.html" >prev-tail</a>] [<a 
 href="#tailetrice-docse23.html">tail</a>] [<a 
-href="etrice-docch6.html#etrice-docse23.html" >up</a>] </p></div>
-<h3 class="sectionHead"><span class="titlemark">6.6   </span> <a 
- id="x31-1860006"></a>eTrice Models and Their Relations</h3>
-<!--l. 3--><p class="noindent" >eTrice comprises several models:
-</p>
-     <ul class="itemize1">
-     <li class="itemize">the ROOM model (*.room) &#8211; defines model classes and the logical structure of the model
-     </li>
-     <li class="itemize">the Config model (*.config) &#8211; defines configuration values for attributes
-     </li>
-     <li class="itemize">the Physical model (*.etphys) &#8211; defines the structure and properties of the physical system
-     </li>
-     <li class="itemize">the Mapping model (*.etmap) &#8211; defines a mapping from logical elements to physical elements</li></ul>
-<!--l. 12--><p class="noindent" >In the following diagram the models and their relations are depicted. The meaning of the arrows is: uses/references.
-</p><!--l. 15--><p class="noindent" ><img 
-src="images/080-models.jpg" alt="PIC"  
- />
-</p><!--l. 17--><p class="noindent" >In the following sections we will describe those models with emphasis of their cross relations.
+href="etrice-docch7.html#etrice-docse23.html" >up</a>] </p></div>
+<h3 class="sectionHead"><span class="titlemark">7.2   </span> <a 
+ id="x32-2030002"></a>ModelEditors</h3>
+<!--l. 1758--><p class="noindent" ><a 
+ id="ref:ModelEditors"></a> All aspects of the ROOMLanguage can be edited by full-blown textual editors. In addition, graphical editing is provided for
+the structural and behavioral part of ActorClasses.
+</p><!--l. 1763--><p class="noindent" ><span 
+class="ec-lmssbx-10">Features:</span>
 <a 
- id="x31-186001r249"></a>
-</p>
-<h4 class="subsectionHead"><span class="titlemark">6.6.1   </span> <a 
- id="x31-1870001"></a>The ROOM Model</h4>
-<!--l. 21--><p class="noindent" >The ROOM model defines <span id="textcolor52"><span 
-class="ec-lmssbx-10">DataClass</span></span>es, <span id="textcolor53"><span 
-class="ec-lmssbx-10">ProtocolClass</span></span>es, <span id="textcolor54"><span 
-class="ec-lmssbx-10">ActorClass</span></span>es, <span id="textcolor55"><span 
-class="ec-lmssbx-10">SubSystemClass</span></span>es and <span id="textcolor56"><span 
-class="ec-lmssbx-10">LogicalSystem</span></span>s. Thereby
-the three latter form a hierarchy. The <span id="textcolor57"><span 
-class="ec-lmssbx-10">LogicalSystem</span></span> is the top level element of the structure. It contains references to
-<span id="textcolor58"><span 
-class="ec-lmssbx-10">SubSystemClass</span></span> elements. The <span id="textcolor59"><span 
-class="ec-lmssbx-10">SubSystemClass</span></span> in turn contains references to <span id="textcolor60"><span 
-class="ec-lmssbx-10">ActorClass</span></span> elements which again
-contain (recursively) references to <span id="textcolor61"><span 
-class="ec-lmssbx-10">ActorClass</span></span> elements. The complete structural hierarchy implies a tree
-which has the <span id="textcolor62"><span 
-class="ec-lmssbx-10">LogicalSystem</span></span> as root and where each reference stands for a new node with possibly further
-branches.
-</p><!--l. 29--><p class="noindent" >Let&#8217;s consider a simple example. It doesn&#8217;t implement anything meaningful and completely omits behavioral and other
-aspects.
-</p>
-<!--l. 32--><div class="lstinputlisting">
+ id="x32-203001r50"></a></p>
+<!--l. 1768--><div class="longtable"> <table id="TBL-69" class="longtable" 
+cellspacing="0" cellpadding="0" rules="groups" 
+><colgroup id="TBL-69-1g"><col 
+id="TBL-69-1" /></colgroup><colgroup id="TBL-69-2g"><col 
+id="TBL-69-2" /><col 
+id="TBL-69-3" /></colgroup>
+<tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-69-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-69-1-1"  
+class="td11"> Contains:  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-69-1-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:TextualROOMEditor">TextualROOMEditor</a>       </td><td  style="white-space:wrap; text-align:left;" id="TBL-69-1-3"  
+class="td11">
+ <!--l. 1768--><p class="noindent" >Textual model editor                                                </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-69-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-69-2-1"  
+class="td11">          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-69-2-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:GraphicalStructureEditor">GraphicalStructureEditor</a>  </td><td  style="white-space:wrap; text-align:left;" id="TBL-69-2-3"  
+class="td11">
+ <!--l. 1769--><p class="noindent" >The  Structure  Editor  allows  to  edit  the  ActorClass&#8217;
+  Structure in a convenient way. It is possible to create and
+  arrange actor references and ports and to create bindings
+  and layer connections.                                               </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-69-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-69-3-1"  
+class="td11">          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-69-3-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:GraphicalBehaviorEditor">GraphicalBehaviorEditor</a>   </td><td  style="white-space:wrap; text-align:left;" id="TBL-69-3-3"  
+class="td11">
+ <!--l. 1770--><p class="noindent" >The GraphicalBehaviorEditor allows to edit the ActorClass&#8217;
+  StateMachine. It is possible to create (hierarchical) states
+  and transitions to model complex behavior in a convenient
+  way.                                                                     </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-69-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-69-4-1"  
+class="td11">          </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-69-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-69-5-1"  
+class="td11">          </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-69-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-69-6-1"  
+class="td11">          </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-69-7-"><td  style="white-space:nowrap; text-align:left;" id="TBL-69-7-1"  
+class="td11">          </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-69-8-"><td  style="white-space:nowrap; text-align:left;" id="TBL-69-8-1"  
+class="td11">          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-69-8-2"  
+class="td11">                         </td><td  style="white-space:wrap; text-align:left;" id="TBL-69-8-3"  
+class="td11">
+</td></tr>
+</table></div>
 <a 
- id="x31-187001r3"></a>
-<a 
- id="x31-187002"></a>
-<span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-187003r1"></a></span><span 
-class="ec-lmssbx-10x-x-90">RoomModel</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">test</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-187004r2"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">LogicalSystem</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Main</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-187005r3"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">SubSystemRef</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">subA</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">SubA</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-187006r4"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">SubSystemRef</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">subB</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">SubB</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-187007r5"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-187008r6"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-187009r7"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">SubSystemClass</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">SubA</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-187010r8"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">ActorRef</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">actA</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">ActA</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-187011r9"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">ActorRef</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">actB</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">ActB</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-187012r10"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-187013r11"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">LogicalThread</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">dflt</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-187014r12"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">LogicalThread</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">extra</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-187015r13"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">ActorInstanceMapping</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">actA</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">actB1</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">-&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">extra</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-187016r14"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">ActorInstanceMapping</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">actC1</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">-&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">dflt</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-187017r15"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-187018r16"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">ActorInstanceMapping</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">actA</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">actB2</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">-&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">extra</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-187019r17"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-187020r18"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-187021r19"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">SubSystemClass</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">SubB</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-187022r20"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">ActorRef</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">actA</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">ActA</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-187023r21"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">ActorRef</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">actB</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">ActB</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-187024r22"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-187025r23"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">LogicalThread</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">dflt</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-187026r24"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">LogicalThread</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">extra</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-187027r25"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">ActorInstanceMapping</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">actB</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">-&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">extra</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-187028r26"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-187029r27"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-187030r28"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">ActorClass</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">ActA</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-187031r29"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Structure</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-187032r30"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Attribute</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">val</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">int</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-187033r31"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">ActorRef</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">actB1</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">ActB</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-187034r32"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">ActorRef</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">actB2</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">ActB</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-187035r33"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-187036r34"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-187037r35"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-187038r36"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">ActorClass</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">ActB</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-187039r37"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Structure</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-187040r38"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Attribute</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">val</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">int</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-187041r39"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">ActorRef</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">actC1</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">ActC</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-187042r40"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">ActorRef</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">actC2</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">ActC</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-187043r41"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-187044r42"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-187045r43"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-187046r44"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">ActorClass</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">ActC</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-187047r45"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-187048r46"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">PrimitiveType</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">int</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">ptInteger</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">-&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">int</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">(</span><span 
-class="ec-lmtt-9">Integer</span><span 
-class="ec-lmtt-9">)</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">default</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">0</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-187049r47"></a></span><span 
-class="ec-lmtt-9">}</span>
-<br />
-    <div class="caption" 
-><span class="id">Listing&#x00A0;6.3:
-    </span><span  
-class="content">ROOM
-    example
-    code</span></div><!--tex4ht:label?: x31-1870006 -->
-</div>
-<!--l. 34--><p class="noindent" >When a <span id="textcolor63"><span 
-class="ec-lmssbx-10">LogicalSystem</span></span> is instantiated then recursively all of the contained referenced elements are instantiated as instances
-of the corresponding class. Thus the instance tree of the above example looks like in figure <a 
-href="#x31-187050r5">6.5<!--tex4ht:ref: fig:instance_tree --></a> (the third line in the white
-boxes shows some mapping information, see section <a 
-href="#x31-1900004">6.6.4<!--tex4ht:ref: sec:mapping_model --></a> <a 
-href="#x31-1900004">The Mapping Model<!--tex4ht:ref: sec:mapping_model --></a>):
+ id="x32-203002r274"></a>
+<h4 class="subsectionHead"><span class="titlemark">7.2.1   </span> <a 
+ id="x32-2040001"></a>GraphicalBehaviorEditor</h4>
+<!--l. 1776--><p class="noindent" ><a 
+ id="ref:GraphicalBehaviorEditor"></a> The GraphicalBehaviorEditor allows to edit the ActorClass&#8217; StateMachine. It is possible to create (hierarchical) states and
+transitions to model complex behavior in a convenient way.
 </p>
-<hr class="figure" /><div class="figure" 
+<div class="center" 
 >
-                                                                                            
-                                                                                            
+<!--l. 1779--><p class="noindent" >
+
+</p><!--l. 1780--><p class="noindent" ><img 
+src="images/300-GraphicalBehaviorEditor.png" alt="PIC"  
+ /></p></div>
+<!--l. 1785--><p class="noindent" ><span 
+class="ec-lmssbx-10">Features:</span>
 <a 
- id="x31-187050r5"></a><a 
- id="x31-18800025"></a><a 
- id="x31-18900011"></a><a 
- id="x31-18900046"></a><a 
- id="x31-19000017"></a>
-                                                                                            
-                                                                                            
-<!--l. 40--><p class="noindent" ><img 
-src="images/080-instances.jpg" alt="PIC"  
- />
-<br /> </p><div class="caption" 
-><span class="id">Figure&#x00A0;6.5: </span><span  
-class="content">Instances of a ROOM system</span></div><!--tex4ht:label?: x31-187050r5 -->
-                                                                                            
-                                                                                            
-</div><hr class="endfigure" />
+ id="x32-204001r51"></a></p>
+<!--l. 1790--><div class="longtable"> <table id="TBL-70" class="longtable" 
+cellspacing="0" cellpadding="0" rules="groups" 
+><colgroup id="TBL-70-1g"><col 
+id="TBL-70-1" /></colgroup><colgroup id="TBL-70-2g"><col 
+id="TBL-70-2" /><col 
+id="TBL-70-3" /></colgroup>
+<tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-70-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-70-1-1"  
+class="td11"> Edits:  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-70-1-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="etrice-docse22.html#ref:StateMachine">StateMachine</a>  </td><td  style="white-space:wrap; text-align:left;" id="TBL-70-1-3"  
+class="td11">
+ <!--l. 1790--><p class="noindent" >A StateMachine describes the state based, event driven
+  behavior of an ActorClass.                                         </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-70-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-70-2-1"  
+class="td11">       </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-70-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-70-3-1"  
+class="td11">       </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-70-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-70-4-1"  
+class="td11">       </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-70-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-70-5-1"  
+class="td11">       </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-70-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-70-6-1"  
+class="td11">       </td><td  style="white-space:nowrap; text-align:left;" id="TBL-70-6-2"  
+class="td11">                 </td><td  style="white-space:wrap; text-align:left;" id="TBL-70-6-3"  
+class="td11">
+</td></tr>
+</table></div>
 <a 
- id="x31-187051r257"></a>
-<h4 class="subsectionHead"><span class="titlemark">6.6.2   </span> <a 
- id="x31-1880002"></a>The Config Model</h4>
-<!--l. 47--><p class="noindent" >Once we have the ROOM class model we can configure values using the Config model. This can be done on the class level
-and/or on the instance level. Values defined for class attributes are used for all instances unless there is an instance value
-configured for the same attribute.
+ id="x32-204002r276"></a>
+                                                                                            
+                                                                                            
+<h4 class="subsectionHead"><span class="titlemark">7.2.2   </span> <a 
+ id="x32-2050002"></a>GraphicalStructureEditor</h4>
+<!--l. 1802--><p class="noindent" ><a 
+ id="ref:GraphicalStructureEditor"></a> The Structure Editor allows to edit the ActorClass&#8217; Structure in a convenient way. It is possible to create and arrange actor
+references and ports and to create bindings and layer connections.
 </p>
-<!--l. 51--><div class="lstinputlisting">
+<div class="center" 
+>
+<!--l. 1805--><p class="noindent" >
+
+</p><!--l. 1806--><p class="noindent" ><img 
+src="images/300-GraphicalStructureEditor.png" alt="PIC"  
+ /></p></div>
+<!--l. 1811--><p class="noindent" ><span 
+class="ec-lmssbx-10">Features:</span>
 <a 
- id="x31-188001r4"></a>
+ id="x32-205001r52"></a></p>
+<!--l. 1816--><div class="longtable"> <table id="TBL-71" class="longtable" 
+cellspacing="0" cellpadding="0" rules="groups" 
+><colgroup id="TBL-71-1g"><col 
+id="TBL-71-1" /></colgroup><colgroup id="TBL-71-2g"><col 
+id="TBL-71-2" /><col 
+id="TBL-71-3" /></colgroup>
+<tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-71-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-71-1-1"  
+class="td11"> Contains:  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-71-1-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:StructureEditorPalette">StructureEditorPalette</a>    </td><td  style="white-space:wrap; text-align:left;" id="TBL-71-1-3"  
+class="td11">
+ <!--l. 1816--><p class="noindent" >The  palette  creates  central  structural  elements  of  an
+  ActorClass.                                                            </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-71-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-71-2-1"  
+class="td11">          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-71-2-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:ActorRefPropertyDialog">ActorRefPropertyDialog</a>  </td><td  style="white-space:wrap; text-align:left;" id="TBL-71-2-3"  
+class="td11">
+ <!--l. 1817--><p class="noindent" >A dialog to edit properties of an ActorRef.                     </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-71-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-71-3-1"  
+class="td11">          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-71-3-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:PortPropertyDialog">PortPropertyDialog</a>       </td><td  style="white-space:wrap; text-align:left;" id="TBL-71-3-3"  
+class="td11">
+ <!--l. 1818--><p class="noindent" >A dialog to edit properties of an Port.                           </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-71-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-71-4-1"  
+class="td11">          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-71-4-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:SPPPropertyDialog">SPPPropertyDialog</a>       </td><td  style="white-space:wrap; text-align:left;" id="TBL-71-4-3"  
+class="td11">
+ <!--l. 1819--><p class="noindent" >A dialog to edit properties of a SPP.                            </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-71-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-71-5-1"  
+class="td11"> Edits:      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-71-5-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="etrice-docse22.html#ref:ActorClass">ActorClass</a>                  </td><td  style="white-space:wrap; text-align:left;" id="TBL-71-5-3"  
+class="td11">
+ <!--l. 1821--><p class="noindent" >An actor is the basic structural building block for building
+  systems with ROOM.                                                </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-71-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-71-6-1"  
+class="td11">          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-71-6-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="etrice-docse22.html#ref:ActorRef">ActorRef</a>                     </td><td  style="white-space:wrap; text-align:left;" id="TBL-71-6-3"  
+class="td11">
+ <!--l. 1822--><p class="noindent" >An ActorRef is an instance of an ActorClass.                  </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-71-7-"><td  style="white-space:nowrap; text-align:left;" id="TBL-71-7-1"  
+class="td11">          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-71-7-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="etrice-docse22.html#ref:Port">Port</a>                          </td><td  style="white-space:wrap; text-align:left;" id="TBL-71-7-3"  
+class="td11">
+ <!--l. 1823--><p class="noindent" >A Port is an instance of a ProtocolClass and the interface
+  for an ActorClass.                                                    </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-71-8-"><td  style="white-space:nowrap; text-align:left;" id="TBL-71-8-1"  
+class="td11">          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-71-8-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="etrice-docse22.html#ref:SAP">SAP</a>                          </td><td  style="white-space:wrap; text-align:left;" id="TBL-71-8-3"  
+class="td11">
+ <!--l. 1824--><p class="noindent" >A Service Access Point is similar to a Port, but uses a
+  LayerConnection for wiring.                                        </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-71-9-"><td  style="white-space:nowrap; text-align:left;" id="TBL-71-9-1"  
+class="td11">          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-71-9-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="etrice-docse22.html#ref:Binding">Binding</a>                      </td><td  style="white-space:wrap; text-align:left;" id="TBL-71-9-3"  
+class="td11">
+ <!--l. 1825--><p class="noindent" >A Binding connects two Ports with each other.                </p></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-71-10-"><td  style="white-space:nowrap; text-align:left;" id="TBL-71-10-1"  
+class="td11">          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-71-10-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="etrice-docse22.html#ref:LayerConnection">LayerConnection</a>           </td><td  style="white-space:wrap; text-align:left;" id="TBL-71-10-3"  
+class="td11">
+ <!--l. 1826--><p class="noindent" >A  LayerConnection  associates  a  SPP  to  an  ActorRef,
+  resulting  in  an  connection  of  all  SAPs  on  its  instance
+  hierarchy.                                                              </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-71-11-"><td  style="white-space:nowrap; text-align:left;" id="TBL-71-11-1"  
+class="td11">          </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-71-12-"><td  style="white-space:nowrap; text-align:left;" id="TBL-71-12-1"  
+class="td11">          </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-71-13-"><td  style="white-space:nowrap; text-align:left;" id="TBL-71-13-1"  
+class="td11">          </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-71-14-"><td  style="white-space:nowrap; text-align:left;" id="TBL-71-14-1"  
+class="td11">          </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-71-15-"><td  style="white-space:nowrap; text-align:left;" id="TBL-71-15-1"  
+class="td11">          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-71-15-2"  
+class="td11">                         </td><td  style="white-space:wrap; text-align:left;" id="TBL-71-15-3"  
+class="td11">
+</td></tr>
+</table></div>
 <a 
- id="x31-188002"></a>
-<span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-188003r1"></a></span><span 
-class="ec-lmssbx-10x-x-90">ConfigModel</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">test</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-188004r2"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-188005r3"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">import</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">test</span><span 
-class="ec-lmtt-9">.*</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">from</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">room</span><span 
-class="ec-lmtt-9">-</span><span 
-class="ec-lmtt-9">example</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">room</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-188006r4"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-188007r5"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">ActorClassConfig</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">ActA</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-188008r6"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Attr</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">val</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">=</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">1</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-188009r7"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-188010r8"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-188011r9"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">ActorClassConfig</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">ActB</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-188012r10"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Attr</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">val</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">=</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">2</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-188013r11"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-188014r12"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-188015r13"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">ActorInstanceConfig</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Main</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">subA</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">actA</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-188016r14"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Attr</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">val</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">=</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">12</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-188017r15"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-188018r16"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-188019r17"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">ActorInstanceConfig</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Main</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">subA</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">actB</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-188020r18"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Attr</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">val</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">=</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">13</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-188021r19"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-188022r20"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-188023r21"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">ActorInstanceConfig</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Main</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">subA</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">actA</span><span 
-class="ec-lmtt-9">/</span><span 
-class="ec-lmtt-9">actB2</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-188024r22"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Attr</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">val</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">=</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">14</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-188025r23"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-188026r24"></a></span><span 
-class="ec-lmtt-9">}</span>
-<br />
-    <div class="caption" 
-><span class="id">Listing&#x00A0;6.4:
-    </span><span  
-class="content">Config
-    example
-    code</span></div><!--tex4ht:label?: x31-1880006 -->
-</div>
-<a 
- id="x31-188027r260"></a>
-<h4 class="subsectionHead"><span class="titlemark">6.6.3   </span> <a 
- id="x31-1890003"></a>The Physical Model</h4>
-<!--l. 55--><p class="noindent" >The physical model defines the physical resources onto which the logical system will be deployed. It is possible to define
-runtime classes which (currently) only define the overall execution model of the platform.
+ id="x32-205002r272"></a>
+<h5 class="subsubsectionHead"><span class="titlemark">7.2.2.1   </span> <a 
+ id="x32-2060001"></a>ActorRefPropertyDialog</h5>
+<!--l. 1838--><p class="noindent" ><a 
+ id="ref:ActorRefPropertyDialog"></a> A dialog to edit properties of an ActorRef.
+</p><!--l. 1841--><p class="noindent" >The dialog is used to edit an existing ActorRef of an ActorClass. It is also shown when creating a new one.
 </p>
-<!--l. 59--><div class="lstinputlisting">
-<a 
- id="x31-189001r5"></a>
-<a 
- id="x31-189002"></a>
-<span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-189003r1"></a></span><span 
-class="ec-lmssbx-10x-x-90">PhysicalModel</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">runtimes</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-189004r2"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-189005r3"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">RuntimeClass</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">PCRuntime</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-189006r4"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">model</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">=</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">multiThreaded</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-189007r5"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-189008r6"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-189009r7"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">RuntimeClass</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">MSP430Runtime</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-189010r8"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">model</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">=</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">singleThreaded</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-189011r9"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-189012r10"></a></span><span 
-class="ec-lmtt-9">}</span>
-<br />
-    <div class="caption" 
-><span class="id">Listing&#x00A0;6.5:
-    </span><span  
-class="content">etPhys
-    runtime
-    definition</span></div><!--tex4ht:label?: x31-1890006 -->
-</div>
-<!--l. 61--><p class="noindent" >The <span id="textcolor64"><span 
-class="ec-lmssbx-10">PhysicalSystem</span></span> is composed of <span id="textcolor65"><span 
-class="ec-lmssbx-10">NodeRef</span></span>erences which are instances of <span id="textcolor66"><span 
-class="ec-lmssbx-10">NodeClass</span></span>es. Each <span id="textcolor67"><span 
-class="ec-lmssbx-10">NodeClass</span></span> is referencing
-a <span id="textcolor68"><span 
-class="ec-lmssbx-10">RuntimeClass</span></span> and is defining <span id="textcolor69"><span 
-class="ec-lmssbx-10">Threads</span></span>.
-</p>
-<!--l. 65--><div class="lstinputlisting">
-<a 
- id="x31-189013r6"></a>
-<a 
- id="x31-189014"></a>
-<span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-189015r1"></a></span><span 
-class="ec-lmssbx-10x-x-90">PhysicalModel</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">test</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-189016r2"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-189017r3"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">import</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">test</span><span 
-class="ec-lmtt-9">.*</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">from</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">etphys</span><span 
-class="ec-lmtt-9">-</span><span 
-class="ec-lmtt-9">runtimes</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">etphys</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-189018r4"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-189019r5"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">PhysicalSystem</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">MainPhys</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-189020r6"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">NodeRef</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">pc1</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">PC_Node</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-189021r7"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">NodeRef</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">pc2</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">PC_Node</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-189022r8"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">NodeRef</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">mc</span><span 
-class="ec-lmtt-9">:</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">MSP430_Node</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-189023r9"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-189024r10"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-189025r11"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">NodeClass</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">PC_Node</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-189026r12"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">runtime</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">=</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">runtimes</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">PCRuntime</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-189027r13"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">priomin</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">=</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">1</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-189028r14"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">priomax</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">=</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">10</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-189029r15"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">DefaultThread</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">thread1</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-189030r16"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">execmode</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">=</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">blocked</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-189031r17"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">prio</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">=</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">10</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-189032r18"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">stacksize</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">=</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">1024</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-189033r19"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">msgblocksize</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">=</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">64</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-189034r20"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">msgpoolsize</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">=</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">50</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-189035r21"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-189036r22"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Thread</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">thread2</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-189037r23"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">execmode</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">=</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">polled</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-189038r24"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">interval</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">=</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">1</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">ms</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-189039r25"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">prio</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">=</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">10</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-189040r26"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">stacksize</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">=</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">1024</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-189041r27"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">msgblocksize</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">=</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">64</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-189042r28"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">msgpoolsize</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">=</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">50</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-189043r29"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-189044r30"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-189045r31"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-189046r32"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">NodeClass</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">MSP430_Node</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-189047r33"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">runtime</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">=</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">runtimes</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">MSP430Runtime</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-189048r34"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">priomin</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">=</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">1</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-189049r35"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">priomax</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">=</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">10</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-189050r36"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">DefaultThread</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">main</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-189051r37"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">execmode</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">=</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">polled</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-189052r38"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">interval</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">=</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">10</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">us</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-189053r39"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">prio</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">=</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">10</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-189054r40"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">stacksize</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">=</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">256</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-189055r41"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">msgblocksize</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">=</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">64</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-189056r42"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">msgpoolsize</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">=</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">50</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-189057r43"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-189058r44"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-189059r45"></a></span><span 
-class="ec-lmtt-9">}</span>
-<br />
-    <div class="caption" 
-><span class="id">Listing&#x00A0;6.6:
-    </span><span  
-class="content">etPhys
-    example
-    code</span></div><!--tex4ht:label?: x31-1890006 -->
-</div>
-<a 
- id="x31-189060r262"></a>
+<div class="center" 
+>
+<!--l. 1842--><p class="noindent" >
+
+</p><!--l. 1843--><p class="noindent" ><img 
+src="images/300-ActorRefDialog.png" alt="PIC"  
+ /></p></div>
+<!--l. 1848--><p class="noindent" ><span 
+class="ec-lmssbx-10">Features:</span>
                                                                                             
                                                                                             
-<h4 class="subsectionHead"><span class="titlemark">6.6.4   </span> <a 
- id="x31-1900004"></a>The Mapping Model</h4>
-<!--l. 70--><p class="noindent" >The last model finally combines all this information by mapping logical to physical entities.
-</p>
-<!--l. 72--><div class="lstinputlisting">
 <a 
- id="x31-190001r7"></a>
+ id="x32-206001r53"></a></p><!--l. 1853--><div class="longtable"> <table id="TBL-72" class="longtable" 
+cellspacing="0" cellpadding="0" rules="groups" 
+><colgroup id="TBL-72-1g"><col 
+id="TBL-72-1" /></colgroup><colgroup id="TBL-72-2g"><col 
+id="TBL-72-2" /><col 
+id="TBL-72-3" /></colgroup>
+<tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-72-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-72-1-1"  
+class="td11"> Edits:  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-72-1-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="etrice-docse22.html#ref:ActorRef">ActorRef</a>  </td><td  style="white-space:wrap; text-align:left;" id="TBL-72-1-3"  
+class="td11">
+ <!--l. 1853--><p class="noindent" >An ActorRef is an instance of an ActorClass.                  </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-72-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-72-2-1"  
+class="td11">       </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-72-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-72-3-1"  
+class="td11">       </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-72-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-72-4-1"  
+class="td11">       </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-72-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-72-5-1"  
+class="td11">       </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-72-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-72-6-1"  
+class="td11">       </td><td  style="white-space:nowrap; text-align:left;" id="TBL-72-6-2"  
+class="td11">             </td><td  style="white-space:wrap; text-align:left;" id="TBL-72-6-3"  
+class="td11">
+</td></tr>
+</table></div>
 <a 
- id="x31-190002"></a>
-<span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-190003r1"></a></span><span 
-class="ec-lmssbx-10x-x-90">MappingModel</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">test</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-190004r2"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-190005r3"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">import</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">test</span><span 
-class="ec-lmtt-9">.*</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">from</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">etphys</span><span 
-class="ec-lmtt-9">-</span><span 
-class="ec-lmtt-9">example</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">etphys</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-190006r4"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">import</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">test</span><span 
-class="ec-lmtt-9">.*</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">from</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">room</span><span 
-class="ec-lmtt-9">-</span><span 
-class="ec-lmtt-9">example</span><span 
-class="ec-lmtt-9">.</span><span 
-class="ec-lmtt-9">room</span><span 
-class="ec-lmtt-9">"</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-190007r5"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-190008r6"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">Mapping</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">Main</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">-&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">MainPhys</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-190009r7"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">SubSystemMapping</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">subA</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">-&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">pc1</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-190010r8"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">ThreadMapping</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">dflt</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">-&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">thread1</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-190011r9"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">ThreadMapping</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">extra</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">-&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">thread2</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-190012r10"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-190013r11"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">SubSystemMapping</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">subB</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">-&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">mc</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">{</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-190014r12"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">ThreadMapping</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">dflt</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">-&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">main</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-190015r13"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmssbx-10x-x-90">ThreadMapping</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">extra</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">-&#x003E;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">main</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-190016r14"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-190017r15"></a></span><span 
-class="ec-lmtt-9">&#x00A0;</span><span 
-class="ec-lmtt-9">}</span><span 
-class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x31-190018r16"></a></span><span 
-class="ec-lmtt-9">}</span>
-<br />
-    <div class="caption" 
-><span class="id">Listing&#x00A0;6.7:
-    </span><span  
-class="content">etMap
-    example
-    code</span></div><!--tex4ht:label?: x31-1900006 -->
-</div>
-<!--l. 74--><p class="noindent" >The result of the mapping is also depicted in above tree diagram (figure <a 
-href="#x31-187050r5">6.5<!--tex4ht:ref: fig:instance_tree --></a>) of the instances. All actor instances (the white
-boxes) are mapped to a node and a thread running on this node (shown as @<span 
-class="ec-lmsso-10">node </span>: <span 
-class="ec-lmsso-10">thread</span>).
+ id="x32-206002r278"></a>
+<h5 class="subsubsectionHead"><span class="titlemark">7.2.2.2   </span> <a 
+ id="x32-2070002"></a>PortPropertyDialog</h5>
+<!--l. 1865--><p class="noindent" ><a 
+ id="ref:PortPropertyDialog"></a> A dialog to edit properties of an Port.
+</p><!--l. 1868--><p class="noindent" >The dialog is used to edit an existing Port of an ActorClass. It is also shown when creating a new one. </p>
+<div class="center" 
+>
+<!--l. 1869--><p class="noindent" >
+
+</p><!--l. 1870--><p class="noindent" ><img 
+src="images/300-PortDialog.png" alt="PIC"  
+ /></p></div>
+<!--l. 1875--><p class="noindent" ><span 
+class="ec-lmssbx-10">Features:</span>
+<a 
+ id="x32-207001r54"></a></p>
+<!--l. 1880--><div class="longtable"> <table id="TBL-73" class="longtable" 
+cellspacing="0" cellpadding="0" rules="groups" 
+><colgroup id="TBL-73-1g"><col 
+id="TBL-73-1" /></colgroup><colgroup id="TBL-73-2g"><col 
+id="TBL-73-2" /><col 
+id="TBL-73-3" /></colgroup>
+<tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-73-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-73-1-1"  
+class="td11"> Edits:  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-73-1-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="etrice-docse22.html#ref:Port">Port</a>  </td><td  style="white-space:wrap; text-align:left;" id="TBL-73-1-3"  
+class="td11">
+ <!--l. 1880--><p class="noindent" >A Port is an instance of a ProtocolClass and the interface
+  for an ActorClass.                                                    </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-73-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-73-2-1"  
+class="td11">       </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-73-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-73-3-1"  
+class="td11">       </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-73-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-73-4-1"  
+class="td11">       </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-73-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-73-5-1"  
+class="td11">       </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-73-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-73-6-1"  
+class="td11">       </td><td  style="white-space:nowrap; text-align:left;" id="TBL-73-6-2"  
+class="td11">         </td><td  style="white-space:wrap; text-align:left;" id="TBL-73-6-3"  
+class="td11">
+</td></tr>
+</table></div>
+<a 
+ id="x32-207002r279"></a>
+<h5 class="subsubsectionHead"><span class="titlemark">7.2.2.3   </span> <a 
+ id="x32-2080003"></a>SPPPropertyDialog</h5>
+<!--l. 1892--><p class="noindent" ><a 
+ id="ref:SPPPropertyDialog"></a> A dialog to edit properties of a SPP.
+</p><!--l. 1895--><p class="noindent" >The dialog is used to edit an existing SPP of an ActorClass. It is also shown when creating a new one. </p>
+<div class="center" 
+>
+<!--l. 1896--><p class="noindent" >
+
+</p><!--l. 1897--><p class="noindent" ><img 
+src="images/300-SPPDialog.png" alt="PIC"  
+ /></p></div>
+<!--l. 1902--><p class="noindent" ><span 
+class="ec-lmssbx-10">Features:</span>
+<a 
+ id="x32-208001r55"></a></p>
+<!--l. 1907--><div class="longtable"> <table id="TBL-74" class="longtable" 
+cellspacing="0" cellpadding="0" rules="groups" 
+><colgroup id="TBL-74-1g"><col 
+id="TBL-74-1" /></colgroup><colgroup id="TBL-74-2g"><col 
+id="TBL-74-2" /><col 
+id="TBL-74-3" /></colgroup>
+<tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-74-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-74-1-1"  
+class="td11"> Edits:  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-74-1-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="etrice-docse22.html#ref:SPP">SPP</a>  </td><td  style="white-space:wrap; text-align:left;" id="TBL-74-1-3"  
+class="td11">
+ <!--l. 1907--><p class="noindent" >A Service Provision Point is the counterpart of a SAP       </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-74-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-74-2-1"  
+class="td11">       </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-74-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-74-3-1"  
+class="td11">       </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-74-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-74-4-1"  
+class="td11">       </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-74-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-74-5-1"  
+class="td11">       </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-74-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-74-6-1"  
+class="td11">       </td><td  style="white-space:nowrap; text-align:left;" id="TBL-74-6-2"  
+class="td11">         </td><td  style="white-space:wrap; text-align:left;" id="TBL-74-6-3"  
+class="td11">
+</td></tr>
+</table></div>
                                                                                             
                                                                                             
+<a 
+ id="x32-208002r280"></a>
+<h5 class="subsubsectionHead"><span class="titlemark">7.2.2.4   </span> <a 
+ id="x32-2090004"></a>StructureEditorPalette</h5>
+<!--l. 1919--><p class="noindent" ><a 
+ id="ref:StructureEditorPalette"></a> The palette creates central structural elements of an ActorClass.
+</p><!--l. 1922--><p class="noindent" >Selecting an entry from the palette and clicking into the diagram, creates the element at the current position.
 </p>
-<!--l. 121--><div class="crosslinks"><p class="noindent">[<a 
-href="etrice-docch7.html" >next</a>] [<a 
+<div class="center" 
+>
+<!--l. 1923--><p class="noindent" >
+
+</p><!--l. 1924--><p class="noindent" ><img 
+src="images/300-StructurePalette.png" alt="PIC"  
+ /></p></div>
+<a 
+ id="x32-209001r277"></a>
+<h4 class="subsectionHead"><span class="titlemark">7.2.3   </span> <a 
+ id="x32-2100003"></a>TextualROOMEditor</h4>
+<!--l. 1936--><p class="noindent" ><a 
+ id="ref:TextualROOMEditor"></a> Textual model editor
+</p>
+<div class="center" 
+>
+<!--l. 1939--><p class="noindent" >
+
+</p><!--l. 1940--><p class="noindent" ><img 
+src="images/300-TextualROOMEditor.png" alt="PIC"  
+ /></p></div>
+<!--l. 1945--><p class="noindent" ><span 
+class="ec-lmssbx-10">Features:</span>
+<a 
+ id="x32-210001r56"></a></p>
+<!--l. 1950--><div class="longtable"> <table id="TBL-75" class="longtable" 
+cellspacing="0" cellpadding="0" rules="groups" 
+><colgroup id="TBL-75-1g"><col 
+id="TBL-75-1" /></colgroup><colgroup id="TBL-75-2g"><col 
+id="TBL-75-2" /><col 
+id="TBL-75-3" /></colgroup>
+<tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-75-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-75-1-1"  
+class="td11"> Contains:  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-75-1-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="#ref:OutlineView">OutlineView</a>        </td><td  style="white-space:wrap; text-align:left;" id="TBL-75-1-3"  
+class="td11">
+ <!--l. 1950--><p class="noindent" >Displays an overview of all elements in the textual editor.  </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-75-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-75-2-1"  
+class="td11"> Edits:      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-75-2-2"  
+class="td11"> &#x00A0;&#x00A0;<span 
+class="cmsy-10">&#x2219;</span>&#x00A0;&#x00A0;<a 
+href="etrice-docse22.html#ref:ROOMLanguage">ROOMLanguage</a>  </td><td  style="white-space:wrap; text-align:left;" id="TBL-75-2-3"  
+class="td11">
+ <!--l. 1952--><p class="noindent" >The Real Time Object Oriented Modeling (ROOM).         </p></td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-75-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-75-3-1"  
+class="td11">          </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-75-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-75-4-1"  
+class="td11">          </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-75-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-75-5-1"  
+class="td11">          </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-75-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-75-6-1"  
+class="td11">          </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-75-7-"><td  style="white-space:nowrap; text-align:left;" id="TBL-75-7-1"  
+class="td11">          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-75-7-2"  
+class="td11">                   </td><td  style="white-space:wrap; text-align:left;" id="TBL-75-7-3"  
+class="td11">
+</td></tr>
+</table></div>
+<a 
+ id="x32-210002r281"></a>
+<h5 class="subsubsectionHead"><span class="titlemark">7.2.3.1   </span> <a 
+ id="x32-2110001"></a>OutlineView</h5>
+<!--l. 1964--><p class="noindent" ><a 
+ id="ref:OutlineView"></a> Displays an overview of all elements in the textual editor.
+</p><!--l. 1967--><p class="noindent" >Shows the structure of the current opened model in the textual editor. Select the &#8217;Link with Editor&#8217; option to synchronize the
+selection of elements between editor and outline view. This enables a convenient navigation.
+</p>
+<div class="center" 
+>
+<!--l. 1969--><p class="noindent" >
+
+</p><!--l. 1970--><p class="noindent" ><img 
+src="images/300-OutlineView.png" alt="PIC"  
+ /></p></div>
+                                                                                            
+                                                                                            
+<!--l. 1981--><div class="crosslinks"><p class="noindent">[<a 
+href="etrice-docse24.html" >next</a>] [<a 
 href="etrice-docse22.html" >prev</a>] [<a 
 href="etrice-docse22.html#tailetrice-docse22.html" >prev-tail</a>] [<a 
 href="etrice-docse23.html" >front</a>] [<a 
-href="etrice-docch6.html#etrice-docse23.html" >up</a>] </p></div>
-<!--l. 121--><p class="noindent" ><a 
+href="etrice-docch7.html#etrice-docse23.html" >up</a>] </p></div>
+<!--l. 1981--><p class="noindent" ><a 
  id="tailetrice-docse23.html"></a></p> 
 </body></html> 
