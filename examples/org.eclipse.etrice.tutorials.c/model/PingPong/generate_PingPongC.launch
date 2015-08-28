@@ -7,7 +7,7 @@
 <booleanAttribute key="Lib" value="false"/>
 <booleanAttribute key="MSC" value="true"/>
 <listAttribute key="ModelFiles">
-<listEntry value="${workspace_loc:/org.eclipse.etrice.tutorials.c/model/PingPong/PingPong.etmap}"/>
+<listEntry value="${workspace_loc:/org.eclipse.etrice.tutorials.c/model/PingPong/Mapping.etmap}"/>
 </listAttribute>
 <booleanAttribute key="SaveGenModel" value="false"/>
 <booleanAttribute key="Verbose" value="false"/>

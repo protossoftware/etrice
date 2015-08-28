@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="ASCII"?>
-<pi:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:al="http://eclipse.org/graphiti/mm/algorithms" xmlns:pi="http://eclipse.org/graphiti/mm/pictograms" visible="true" gridUnit="10" diagramTypeId="room.structure" name="Structure of PingPongTop" pictogramLinks="//@link //@children.0/@link //@children.0/@children.0/@link //@children.0/@children.1/@link //@children.0/@children.0/@children.2/@link //@children.0/@children.1/@children.2/@link //@connections.0/@link" verticalGridUnit="10" version="0.11.0">
+<pi:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:al="http://eclipse.org/graphiti/mm/algorithms" xmlns:pi="http://eclipse.org/graphiti/mm/pictograms" visible="true" gridUnit="10" diagramTypeId="room.structure" name="Structure of TopActor" pictogramLinks="//@link //@children.0/@link //@children.0/@children.0/@link //@children.0/@children.1/@link //@children.0/@children.0/@children.2/@link //@children.0/@children.1/@children.2/@link //@connections.0/@link" verticalGridUnit="10" version="0.11.0">
   <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.1" foreground="//@colors.0" lineWidth="1" transparency="0.0" width="1000" height="1000"/>
   <link>
-    <businessObjects href="../SetupTest.room#ActorClass:PingPongTop"/>
+    <businessObjects href="../PingPong.room#ActorClass:TopActor"/>
   </link>
   <children xsi:type="pi:ContainerShape" visible="true" active="true">
     <properties key="obj-type" value="cls"/>
@@ -11,12 +11,12 @@
       <graphicsAlgorithmChildren xsi:type="al:Rectangle" foreground="//@colors.2" lineWidth="4" filled="false" transparency="0.0" width="800" height="500" x="40" y="40"/>
     </graphicsAlgorithm>
     <link>
-      <businessObjects href="../SetupTest.room#ActorClass:PingPongTop"/>
+      <businessObjects href="../PingPong.room#ActorClass:TopActor"/>
     </link>
     <children xsi:type="pi:ContainerShape" visible="true" active="true">
       <properties key="obj-type" value="ref"/>
       <properties key="actorref_version" value="2"/>
-      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="240" height="140" x="155" y="160">
+      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="240" height="140" x="174" y="90">
         <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="180" height="80" x="33" y="27">
           <properties key="actorref_graphic_element" value="replborder"/>
         </graphicsAlgorithmChildren>
@@ -119,7 +119,7 @@
         </graphicsAlgorithmChildren>
       </graphicsAlgorithm>
       <link>
-        <businessObjects href="../SetupTest.room#ActorRef:PingPongTop$sender"/>
+        <businessObjects href="../PingPong.room#ActorRef:TopActor$sender"/>
       </link>
       <anchors xsi:type="pi:ChopboxAnchor" referencedGraphicsAlgorithm="//@children.0/@children.0/@graphicsAlgorithm/@graphicsAlgorithmChildren.1">
         <properties key="actorref_graphic_element" value="layerconn_anchor"/>
@@ -134,23 +134,24 @@
       </children>
       <children xsi:type="pi:ContainerShape" visible="true" active="true">
         <properties key="obj-type" value="port"/>
+        <properties key="inherited" value="false"/>
         <properties key="item-kind" value="C"/>
-        <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="60" height="60" x="90">
+        <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="60" height="60" x="88" y="80">
           <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.1" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="18" height="18" x="21" y="21"/>
         </graphicsAlgorithm>
         <link>
-          <businessObjects href="../SetupTest.room#Port:Sender$receiver"/>
+          <businessObjects href="../PingPong.room#Port:Sender$sendPort"/>
         </link>
-        <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.0" referencedGraphicsAlgorithm="//@children.0/@children.0/@children.2/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
+        <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.0" referencedGraphicsAlgorithm="//@children.0/@children.0/@children.2/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
         <children visible="true">
-          <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="60" height="15" y="6" font="//@fonts.0" value="receiver"/>
+          <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="60" height="15" y="39" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="sendPort"/>
         </children>
       </children>
     </children>
     <children xsi:type="pi:ContainerShape" visible="true" active="true">
       <properties key="obj-type" value="ref"/>
       <properties key="actorref_version" value="2"/>
-      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="240" height="140" x="482" y="160">
+      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="240" height="140" x="309" y="308">
         <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="180" height="80" x="33" y="27">
           <properties key="actorref_graphic_element" value="replborder"/>
         </graphicsAlgorithmChildren>
@@ -253,7 +254,7 @@
         </graphicsAlgorithmChildren>
       </graphicsAlgorithm>
       <link>
-        <businessObjects href="../SetupTest.room#ActorRef:PingPongTop$receiver"/>
+        <businessObjects href="../PingPong.room#ActorRef:TopActor$receiver"/>
       </link>
       <anchors xsi:type="pi:ChopboxAnchor" referencedGraphicsAlgorithm="//@children.0/@children.1/@graphicsAlgorithm/@graphicsAlgorithmChildren.1">
         <properties key="actorref_graphic_element" value="layerconn_anchor"/>
@@ -268,25 +269,26 @@
       </children>
       <children xsi:type="pi:ContainerShape" visible="true" active="true">
         <properties key="obj-type" value="port"/>
+        <properties key="inherited" value="false"/>
         <properties key="item-kind" value=""/>
-        <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="60" height="60" x="90">
+        <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="60" height="60" x="89">
           <graphicsAlgorithmChildren xsi:type="al:Rectangle" background="//@colors.2" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="18" height="18" x="21" y="21"/>
         </graphicsAlgorithm>
         <link>
-          <businessObjects href="../SetupTest.room#Port:Receiver$sender"/>
+          <businessObjects href="../PingPong.room#Port:Receiver$recvPort"/>
         </link>
-        <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.0" referencedGraphicsAlgorithm="//@children.0/@children.1/@children.2/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
+        <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.0" referencedGraphicsAlgorithm="//@children.0/@children.1/@children.2/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
         <children visible="true">
-          <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="60" height="15" y="6" font="//@fonts.0" value="sender"/>
+          <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="60" height="15" y="6" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="recvPort"/>
         </children>
       </children>
     </children>
   </children>
-  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@children.1/@children.2/@anchors.0" end="//@children.0/@children.0/@children.2/@anchors.0">
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@children.0/@children.2/@anchors.0" end="//@children.0/@children.1/@children.2/@anchors.0">
     <properties key="obj-type" value="bind"/>
     <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0"/>
     <link>
-      <businessObjects href="../SetupTest.room#Binding:PingPongTop$sender!receiver-receiver!sender"/>
+      <businessObjects href="../PingPong.room#Binding:TopActor$sendPort!sender-recvPort!receiver"/>
     </link>
   </connections>
   <colors red="227" green="238" blue="249"/>

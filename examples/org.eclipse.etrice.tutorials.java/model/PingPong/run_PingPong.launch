@@ -6,6 +6,6 @@
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
 <listEntry value="1"/>
 </listAttribute>
-<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="PingPong_Model.Node_nodeRef1_subSysRef1Runner"/>
+<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="PingPongModel.Node_node_subSystemRefRunner"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="org.eclipse.etrice.tutorials.java"/>
 </launchConfiguration>

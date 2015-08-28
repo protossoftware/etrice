@@ -31,20 +31,20 @@
     </children>
     <children xsi:type="pi:ContainerShape" visible="true" active="true">
       <properties key="obj-type" value="state"/>
-      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="143" height="90" x="195" y="120">
-        <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="83" height="30" x="30" y="30" cornerHeight="20" cornerWidth="20">
-          <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="15" height="8" x="58" y="3" cornerHeight="5" cornerWidth="5"/>
-          <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="true" transparency="0.0" x="41" y="24">
+      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="128" height="90" x="202" y="120">
+        <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="68" height="30" x="30" y="30" cornerHeight="20" cornerWidth="20">
+          <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="15" height="8" x="43" y="3" cornerHeight="5" cornerWidth="5"/>
+          <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="true" transparency="0.0" x="34" y="24">
             <points x="-3" y="-3"/>
             <points x="-3" y="3"/>
             <points x="-11" y="3"/>
           </graphicsAlgorithmChildren>
-          <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" x="41" y="24">
+          <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" x="34" y="24">
             <points x="3" y="-3"/>
             <points x="3" y="3"/>
             <points x="11" y="3"/>
           </graphicsAlgorithmChildren>
-          <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" x="41" y="24">
+          <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" x="34" y="24">
             <points x="-2" y="-3"/>
             <points x="-2" y="3"/>
             <points x="2" y="3"/>
@@ -53,29 +53,29 @@
         </graphicsAlgorithmChildren>
       </graphicsAlgorithm>
       <link>
-        <businessObjects href="../PingPong.room#SimpleState:Sender$SendingPing"/>
+        <businessObjects href="../PingPong.room#SimpleState:Sender$sendingPing"/>
       </link>
       <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.1" incomingConnections="//@connections.0" referencedGraphicsAlgorithm="//@children.0/@children.2/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
       <children visible="true">
-        <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="83" height="30" x="30" y="30" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="SendingPing"/>
+        <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="68" height="30" x="30" y="30" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="sendingPing"/>
       </children>
     </children>
     <children xsi:type="pi:ContainerShape" visible="true" active="true">
       <properties key="obj-type" value="state"/>
-      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="152" height="90" x="456" y="120">
-        <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="92" height="30" x="30" y="30" cornerHeight="20" cornerWidth="20">
-          <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="15" height="8" x="67" y="3" cornerHeight="5" cornerWidth="5"/>
-          <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" x="46" y="24">
+      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="136" height="90" x="464" y="120">
+        <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="76" height="30" x="30" y="30" cornerHeight="20" cornerWidth="20">
+          <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="15" height="8" x="51" y="3" cornerHeight="5" cornerWidth="5"/>
+          <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" x="38" y="24">
             <points x="-3" y="-3"/>
             <points x="-3" y="3"/>
             <points x="-11" y="3"/>
           </graphicsAlgorithmChildren>
-          <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" x="46" y="24">
+          <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" x="38" y="24">
             <points x="3" y="-3"/>
             <points x="3" y="3"/>
             <points x="11" y="3"/>
           </graphicsAlgorithmChildren>
-          <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" x="46" y="24">
+          <graphicsAlgorithmChildren xsi:type="al:Polygon" foreground="//@colors.2" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" x="38" y="24">
             <points x="-2" y="-3"/>
             <points x="-2" y="3"/>
             <points x="2" y="3"/>
@@ -84,11 +84,11 @@
         </graphicsAlgorithmChildren>
       </graphicsAlgorithm>
       <link>
-        <businessObjects href="../PingPong.room#SimpleState:Sender$ReceivedPong"/>
+        <businessObjects href="../PingPong.room#SimpleState:Sender$receivedPong"/>
       </link>
       <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.1" referencedGraphicsAlgorithm="//@children.0/@children.3/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
       <children visible="true">
-        <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="92" height="30" x="30" y="30" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="ReceivedPong"/>
+        <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="76" height="30" x="30" y="30" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="receivedPong"/>
       </children>
     </children>
   </children>
@@ -123,7 +123,7 @@
       </graphicsAlgorithm>
     </connectionDecorators>
     <connectionDecorators visible="true" active="true" locationRelative="true" location="0.5">
-      <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" x="10" font="//@fonts.0" value="tr0: &lt;pong:receiver>"/>
+      <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" x="-48" y="1" font="//@fonts.0" value="tr0: &lt;pong:sendPort>"/>
     </connectionDecorators>
   </connections>
   <colors red="227" green="238" blue="249"/>

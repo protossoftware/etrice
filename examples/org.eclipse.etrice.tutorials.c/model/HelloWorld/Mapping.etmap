@@ -1,0 +1,17 @@
+/*
+ * This model defines a mapping between a logical ROOM model and a physical model (nodes and threads).
+ * 
+ * <p>Hint: Press F3 to open declaration of selected element or import</p>
+ */
+MappingModel TemplateMapping {
+	
+	import room.generic.physical.* from "../../../org.eclipse.etrice.modellib.c/model/GenericPhysical.etphys"
+	import HelloWorldModel.* from "HelloWorld.room"
+
+	Mapping LogSys -> GenericPhysicalSystem {
+		SubSystemMapping subSystemRef -> node {
+			ThreadMapping defaultThread -> DefaultPhysicalThread
+		}
+	}
+
+}
