@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<launchConfiguration type="org.eclipse.jdt.launching.localJavaApplication">
-<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="TrafficLight_Model.Node_trafficNode_mainSSRunner"/>
-<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="org.eclipse.etrice.tutorials.java"/>
-</launchConfiguration>

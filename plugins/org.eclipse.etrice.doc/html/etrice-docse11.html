@@ -10,7 +10,7 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2015-08-27 23:56:00" /> 
+<meta name="date" content="2015-08-28 18:10:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
@@ -21,48 +21,48 @@ href="etrice-docse10.html#tailetrice-docse10.html" >prev-tail</a>] [<a
 href="#tailetrice-docse11.html">tail</a>] [<a 
 href="etrice-docch5.html#etrice-docse11.html" >up</a>] </p></div>
 <h3 class="sectionHead"><span class="titlemark">5.2   </span> <a 
- id="x18-1140002"></a>Protocols</h3>
+ id="x18-1100002"></a>Protocols</h3>
 <a 
- id="x18-114001r130"></a>
+ id="x18-110001r129"></a>
 <h4 class="subsectionHead"><span class="titlemark">5.2.1   </span> <a 
- id="x18-1150001"></a>Description</h4>
+ id="x18-1110001"></a>Description</h4>
 <!--l. 171--><p class="noindent" >A <span id="textcolor40"><span 
 class="ec-lmssbx-10">ProtocolClass</span></span> defines a set of incoming and outgoing <span id="textcolor41"><span 
 class="ec-lmssbx-10">Message</span></span>s that can be exchanged between two ports. The exact
 semantics of a message is defined by the execution model.
 <a 
- id="x18-115001r139"></a>
+ id="x18-111001r138"></a>
 </p>
 <h4 class="subsectionHead"><span class="titlemark">5.2.2   </span> <a 
- id="x18-1160002"></a>Motivation</h4>
+ id="x18-1120002"></a>Motivation</h4>
      <ul class="itemize1">
      <li class="itemize">Protocol classes provide a reusable interface specification for ports
      </li>
      <li class="itemize">Protocol classes can optionally specify valid message exchange sequences</li></ul>
 <a 
- id="x18-116001r140"></a>
+ id="x18-112001r139"></a>
 <h4 class="subsectionHead"><span class="titlemark">5.2.3   </span> <a 
- id="x18-1170003"></a>Notation</h4>
+ id="x18-1130003"></a>Notation</h4>
 <!--l. 183--><p class="noindent" >Protocol classes have only textual notation. The example defines a protocol class with 2 incoming and two outgoing
 messages. Messages can have data attached. The data can be of a primitive type (e.g. int32, float64, ...) or a data
 class.
 </p>
 <!--l. 188-->
-<div class="lstlisting" id="listing-21"><span class="label"><a 
- id="x18-117001r1"></a></span><span 
+<div class="lstlisting" id="listing-9"><span class="label"><a 
+ id="x18-113001r1"></a></span><span 
 class="ec-lmssbx-10x-x-90">ProtocolClass</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">ProtocolClass1</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x18-117002r2"></a></span><span 
+ id="x18-113002r2"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmssbx-10x-x-90">incoming</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x18-117003r3"></a></span><span 
+ id="x18-113003r3"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -76,7 +76,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">int32</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x18-117004r4"></a></span><span 
+ id="x18-113004r4"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -85,17 +85,17 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">m2</span><span 
 class="ec-lmtt-9">()</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x18-117005r5"></a></span><span 
+ id="x18-113005r5"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x18-117006r6"></a></span><span 
+ id="x18-113006r6"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmssbx-10x-x-90">outgoing</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">{</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x18-117007r7"></a></span><span 
+ id="x18-113007r7"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -109,7 +109,7 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">DataClass1</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x18-117008r8"></a></span><span 
+ id="x18-113008r8"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
@@ -118,11 +118,11 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">m4</span><span 
 class="ec-lmtt-9">()</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x18-117009r9"></a></span><span 
+ id="x18-113009r9"></a></span><span 
 class="ec-lmtt-9">&#x00A0;</span><span 
 class="ec-lmtt-9">}</span><span 
 class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
- id="x18-117010r10"></a></span><span 
+ id="x18-113010r10"></a></span><span 
 class="ec-lmtt-9">}</span>
 </div>
                                                                                             

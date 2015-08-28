@@ -10,7 +10,7 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2015-08-27 23:56:00" /> 
+<meta name="date" content="2015-08-28 18:10:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
@@ -21,7 +21,7 @@ href="etrice-docch4.html#tailetrice-docch4.html" >prev-tail</a>] [<a
 href="#tailetrice-docse8.html">tail</a>] [<a 
 href="etrice-docch4.html#etrice-docse8.html" >up</a>] </p></div>
 <h3 class="sectionHead"><span class="titlemark">4.1   </span> <a 
- id="x14-470001"></a>The C examples project</h3>
+ id="x14-430001"></a>The C examples project</h3>
 <!--l. 17--><p class="noindent" >This example project <span 
 class="ec-lmtt-10">org.eclipse.etrice.examples.c </span>illustrates a simplified traffic light control. It actually
 consists of four different steps of increasing complexity that can be generated and built one by one (but not in
@@ -38,26 +38,26 @@ launch configuration for it.
 class="ec-lmssbx-10">Note: </span>Before compiling and linking a new step of the example the project should be cleaned to avoid duplicate symbols due
 to artifacts from the previous build.
 <a 
- id="x14-47001r60"></a>
+ id="x14-43001r52"></a>
 </p>
                                                                                             
                                                                                             
 <h4 class="subsectionHead"><span class="titlemark">4.1.1   </span> <a 
- id="x14-480001"></a>Traffic light - step 1</h4>
+ id="x14-440001"></a>Traffic light - step 1</h4>
 <!--l. 41--><p class="noindent" >The main ROOM model and the mapping model of this example is contained in <span 
 class="ec-lmtt-10">org.eclipse.etrice.examples.c/model/TrafficLight_step1</span>.
 It also contains launch configurations for the code generation and for running the application.
 <a 
- id="x14-48001r1"></a>
+ id="x14-44001r1"></a>
 </p>
 <h5 class="subsubsectionHead"><span class="titlemark">4.1.1.1   </span> <a 
- id="x14-490001"></a>Purpose</h5>
+ id="x14-450001"></a>Purpose</h5>
 <!--l. 48--><p class="noindent" >This example illustrates how a single actor can be tested against a test harness.
 <a 
- id="x14-49001r65"></a>
+ id="x14-45001r64"></a>
 </p>
 <h5 class="subsubsectionHead"><span class="titlemark">4.1.1.2   </span> <a 
- id="x14-500002"></a>Details</h5>
+ id="x14-460002"></a>Details</h5>
 <!--l. 52--><p class="noindent" >A <span 
 class="ec-lmtt-10">PedestrianTrafficLightController </span>is an actor that controls a traffic light consisting of a traffic light with
 red, yellow and green for the cars, a second traffic light with just red and green and a request button for the
@@ -80,35 +80,35 @@ class="ec-lmtt-10">gen_TrafficLight_step1.launch</span>, then compile and link i
 CDTbuild). Since this step doesn&#8217;t use a GUI you can just start the application using <span 
 class="ec-lmtt-10">run_TrafficLight_step1.launch</span>.
 <a 
- id="x14-50001r66"></a>
+ id="x14-46001r65"></a>
 </p>
 <h5 class="subsubsectionHead"><span class="titlemark">4.1.1.3   </span> <a 
- id="x14-510003"></a>Noteworthy</h5>
+ id="x14-470003"></a>Noteworthy</h5>
      <ul class="itemize1">
      <li class="itemize">usage of a ROOM model as library for several systems
      </li>
      <li class="itemize">creation of a test harness for an actor</li></ul>
 <a 
- id="x14-51001r64"></a>
+ id="x14-47001r63"></a>
 <h4 class="subsectionHead"><span class="titlemark">4.1.2   </span> <a 
- id="x14-520002"></a>Traffic light - step 2</h4>
+ id="x14-480002"></a>Traffic light - step 2</h4>
 <!--l. 78--><p class="noindent" >The main ROOM model and the mapping model of this example is contained in <span 
 class="ec-lmtt-10">org.eclipse.etrice.examples.c/model/TrafficLight_step2</span>.
 It also contains launch configurations for the code generation, for launching the simulator GUI and for running the
 application.
 <a 
- id="x14-52001r67"></a>
+ id="x14-48001r66"></a>
 </p>
 <h5 class="subsubsectionHead"><span class="titlemark">4.1.2.1   </span> <a 
- id="x14-530001"></a>Purpose</h5>
+ id="x14-490001"></a>Purpose</h5>
 <!--l. 86--><p class="noindent" >This example shows the control of a single block of traffic lights containing a car light and a light for the pedestrians. It
 illustrates how a stack of abstraction levels is used to conveniently divide the problem into relatively simple
 parts.
 <a 
- id="x14-53001r69"></a>
+ id="x14-49001r68"></a>
 </p>
 <h5 class="subsubsectionHead"><span class="titlemark">4.1.2.2   </span> <a 
- id="x14-540002"></a>Details</h5>
+ id="x14-500002"></a>Details</h5>
 <!--l. 93--><p class="noindent" >The 4 levels of this application starts with a <span 
 class="ec-lmtt-10">TrafficLightHeadquarters </span>on the top. It controls the global operating mode
 of the traffic light block. The test harness <span 
@@ -136,32 +136,32 @@ class="ec-lmtt-10">run_TrafficLight_step2.launch</span>.
 After pressing the &#8217;request&#8217; button in the simulator GUI the light switches to red for cars and green for pedestrians and back
 to permanent green for cars.
 <a 
- id="x14-54001r70"></a>
+ id="x14-50001r69"></a>
 </p>
 <h5 class="subsubsectionHead"><span class="titlemark">4.1.2.3   </span> <a 
- id="x14-550003"></a>Noteworthy</h5>
+ id="x14-510003"></a>Noteworthy</h5>
      <ul class="itemize1">
      <li class="itemize">use abstraction levels to break a problem into smaller pieces.</li></ul>
 <a 
- id="x14-55001r68"></a>
+ id="x14-51001r67"></a>
 <h4 class="subsectionHead"><span class="titlemark">4.1.3   </span> <a 
- id="x14-560003"></a>Traffic light - step 3</h4>
+ id="x14-520003"></a>Traffic light - step 3</h4>
 <!--l. 128--><p class="noindent" >The main ROOM model and the mapping model of this example is contained in <span 
 class="ec-lmtt-10">org.eclipse.etrice.examples.c/model/TrafficLight_step3</span>.
 It also contains launch configurations for the code generation, for launching the simulator GUI and for running the
 application.
 <a 
- id="x14-56001r71"></a>
+ id="x14-52001r70"></a>
 </p>
 <h5 class="subsubsectionHead"><span class="titlemark">4.1.3.1   </span> <a 
- id="x14-570001"></a>Purpose</h5>
+ id="x14-530001"></a>Purpose</h5>
 <!--l. 136--><p class="noindent" >This example shows the control of two blocks of traffic lights each containing a car light and a light for the pedestrians. It
 uses a replicated stack of actors as introduced in step 2.
 <a 
- id="x14-57001r73"></a>
+ id="x14-53001r72"></a>
 </p>
 <h5 class="subsubsectionHead"><span class="titlemark">4.1.3.2   </span> <a 
- id="x14-580002"></a>Details</h5>
+ id="x14-540002"></a>Details</h5>
 <!--l. 142--><p class="noindent" >The head quarters actor of this example controls two blocks of traffic lights. It already has a replicated port which is now
 connected to a doubled <span 
 class="ec-lmtt-10">PedestrianTrafficLightController</span>. Of course the replication then has also to be applied to the
@@ -173,56 +173,56 @@ CDTbuild). Since this step uses a GUI with a two blocks of lights you&#8217;ll h
 class="ec-lmtt-10">run_simulator_2_blocks.launch</span>. Then you can just start the application using <span 
 class="ec-lmtt-10">run_TrafficLight_step3.launch</span>.
 <a 
- id="x14-58001r74"></a>
+ id="x14-54001r73"></a>
 </p>
 <h5 class="subsubsectionHead"><span class="titlemark">4.1.3.3   </span> <a 
- id="x14-590003"></a>Noteworthy</h5>
+ id="x14-550003"></a>Noteworthy</h5>
      <ul class="itemize1">
      <li class="itemize">use replication for multiple instances of the same.</li></ul>
 <a 
- id="x14-59001r72"></a>
+ id="x14-55001r71"></a>
 <h4 class="subsectionHead"><span class="titlemark">4.1.4   </span> <a 
- id="x14-600004"></a>Traffic light - step 4</h4>
+ id="x14-560004"></a>Traffic light - step 4</h4>
 <!--l. 163--><p class="noindent" >The main ROOM model and the mapping model of this example is contained in <span 
 class="ec-lmtt-10">org.eclipse.etrice.examples.c/model/TrafficLight_step4</span>.
 It also contains launch configurations for the code generation, for launching the simulator GUI and for running the
 application.
 <a 
- id="x14-60001r75"></a>
+ id="x14-56001r74"></a>
 </p>
 <h5 class="subsubsectionHead"><span class="titlemark">4.1.4.1   </span> <a 
- id="x14-610001"></a>Purpose</h5>
+ id="x14-570001"></a>Purpose</h5>
 <!--l. 171--><p class="noindent" >This example shows the control of two blocks of traffic lights each containing a car light and a light for the pedestrians. It
 uses a container actor for the three lower levels of the stack introduced in step 2. Then replication has to applied only to the
 container actor which simplifies the task.
 <a 
- id="x14-61001r77"></a>
+ id="x14-57001r76"></a>
 </p>
                                                                                             
                                                                                             
 <h5 class="subsubsectionHead"><span class="titlemark">4.1.4.2   </span> <a 
- id="x14-620002"></a>Details</h5>
+ id="x14-580002"></a>Details</h5>
 <!--l. 179--><p class="noindent" >The head quarters actor of this example controls two blocks of traffic lights. It already has a replicated port which is now
 connected to a doubled <span 
 class="ec-lmtt-10">TrafficLightControllerWithInfrastructure</span>. The latter one
 <a 
- id="x14-62001r78"></a>
+ id="x14-58001r77"></a>
 </p>
 <h5 class="subsubsectionHead"><span class="titlemark">4.1.4.3   </span> <a 
- id="x14-630003"></a>Noteworthy</h5>
+ id="x14-590003"></a>Noteworthy</h5>
      <ul class="itemize1">
      <li class="itemize">use hierarchy to group levels functionality to reusable blocks.</li></ul>
 <a 
- id="x14-63001r76"></a>
+ id="x14-59001r75"></a>
 <h4 class="subsectionHead"><span class="titlemark">4.1.5   </span> <a 
- id="x14-640005"></a>Features</h4>
+ id="x14-600005"></a>Features</h4>
 <!--l. 192--><p class="noindent" >This project illustrates the various ways how replication can be exploited in ROOM. Replication can be chosen for ports and
 for actor references. The example enumerates a number of typical combinations of the two possibilities.
 <a 
- id="x14-64001r79"></a>
+ id="x14-60001r78"></a>
 </p>
 <h5 class="subsubsectionHead"><span class="titlemark">4.1.5.1   </span> <a 
- id="x14-650001"></a>Purpose</h5>
+ id="x14-610001"></a>Purpose</h5>
 <!--l. 199--><p class="noindent" >Five different ways to combine replicated ports and replicated actor references are shown in this example.
 </p><!--l. 202--><p class="noindent" >Each of these combination consists of one ore more receivers and one or more senders.
 </p><!--l. 205--><p class="noindent" >All five combinations are contained in the actor class <span 
@@ -281,17 +281,17 @@ class="ec-lmtt-10">multiReceiverMultiPort5</span></li></ul>
      <!--l. 234--><p class="noindent" >which totals to 10 (implicit) connections and matches the replication factor of 10 of <span 
 class="ec-lmtt-10">multiSender5</span>.</p></li></ul>
 <a 
- id="x14-65001r81"></a>
+ id="x14-61001r80"></a>
 <h5 class="subsubsectionHead"><span class="titlemark">4.1.5.2   </span> <a 
- id="x14-660002"></a>Details</h5>
+ id="x14-620002"></a>Details</h5>
 <!--l. 240--><p class="noindent" >The head quarters actor of this example controls two blocks of traffic lights. It already has a replicated port which is now
 connected to a doubled <span 
 class="ec-lmtt-10">TrafficLightControllerWithInfrastructure</span>. The latter one
 <a 
- id="x14-66001r82"></a>
+ id="x14-62001r81"></a>
 </p>
 <h5 class="subsubsectionHead"><span class="titlemark">4.1.5.3   </span> <a 
- id="x14-670003"></a>Noteworthy</h5>
+ id="x14-630003"></a>Noteworthy</h5>
      <ul class="itemize1">
      <li class="itemize">use hierarchy to group levels of functionality to reusable blocks.</li></ul>
                                                                                             

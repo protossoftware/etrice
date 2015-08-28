@@ -145,7 +145,7 @@
 </target>
  
 <!-- the actual HTML creation task -->
-<target name="createEtriceHTML" depends="init, checkHtmlCreationNeeded" unless="htmlCreation.notNeeded" 
+<target name="createEtriceHTML" depends="init, checkHtmlCreationNeeded" 
 	description="creates HTML files from TeX files for eTrice documentation">
 	<copy todir="${html.dir}/images">
 		<fileset dir="${image.dir}" />
@@ -190,7 +190,7 @@
 </target>
 
 <!-- the actual TOCs creation task --> 
-<target name="createEclipseTocFiles" depends="init, checkTocsCreationNeeded, createEtriceHTML, getSaxon" unless="tocsCreation.notNeeded" 
+<target name="createEclipseTocFiles" depends="init, checkTocsCreationNeeded, createEtriceHTML, getSaxon"
 		description="creates Eclipse Table of Content files from HTML file as part of the eTrice documentation">
    <!-- Transform one file into an HTML file -->
    <xslt basedir="html" destdir="."

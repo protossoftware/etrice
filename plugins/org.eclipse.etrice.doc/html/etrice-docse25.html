@@ -10,7 +10,7 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- xhtml,3,next,html --> 
 <meta name="src" content="etrice-doc.tex" /> 
-<meta name="date" content="2015-08-27 23:56:00" /> 
+<meta name="date" content="2015-08-28 18:10:00" /> 
 <link rel="stylesheet" type="text/css" href="etrice-doc.css" /> 
 </head><body 
 >
@@ -21,7 +21,7 @@ href="etrice-docch8.html#tailetrice-docch8.html" >prev-tail</a>] [<a
 href="#tailetrice-docse25.html">tail</a>] [<a 
 href="etrice-docch8.html#etrice-docse25.html" >up</a>] </p></div>
 <h3 class="sectionHead"><span class="titlemark">8.1   </span> <a 
- id="x35-2190001"></a>Architecture</h3>
+ id="x35-2150001"></a>Architecture</h3>
 <!--l. 3--><p class="noindent" >The basic components of eTrice are depicted in the following diagram.
 </p><!--l. 5--><p class="noindent" ><img 
 src="images/200-components.jpg" alt="PIC"  
@@ -29,10 +29,10 @@ src="images/200-components.jpg" alt="PIC"
 </p><!--l. 7--><p class="noindent" >Additional to that the eTrice project comprises runtime libraries and unit tests which are treated in subsequent
 sections.
 <a 
- id="x35-219001r289"></a>
+ id="x35-215001r288"></a>
 </p>
 <h4 class="subsectionHead"><span class="titlemark">8.1.1   </span> <a 
- id="x35-2200001"></a>Editor and Generator Components</h4>
+ id="x35-2160001"></a>Editor and Generator Components</h4>
      <ul class="itemize1">
      <li class="itemize">core
          <ul class="itemize2">
@@ -180,9 +180,9 @@ class="ec-lmtt-10">org.eclipse.etrice.generator.java</span>.
 class="ec-lmtt-10">org.eclipse.etrice.generator.doc</span>.</li></ul>
      </li></ul>
 <a 
- id="x35-220001r292"></a>
+ id="x35-216001r291"></a>
 <h4 class="subsectionHead"><span class="titlemark">8.1.2   </span> <a 
- id="x35-2210002"></a>The Abstract Finite State Machine Concept</h4>
+ id="x35-2170002"></a>The Abstract Finite State Machine Concept</h4>
 <!--l. 109--><p class="noindent" >eTrice comes with an easy to re-use concept of hierarchical finite state machines (FSM for short). A powerful inheritance
 concept is used and there is also state machine validation based on semantic rules for messages and abstract execution
 available.
@@ -230,10 +230,10 @@ class="ec-lmtt-10">org.eclipse.etrice.abstractexec.behavior</span></li></ul>
 <!--l. 144--><p class="noindent" >The first three parts have to be used by concrete implementations that implement the abstract interface. eTrice itself uses the
 abstract FSMs in exactly this way.
 <a 
- id="Q1-35-294"></a>
+ id="Q1-35-293"></a>
 </p>
 <h5 class="likesubsubsectionHead"><a 
- id="x35-2220002"></a>Extending the FSM Model</h5>
+ id="x35-2180002"></a>Extending the FSM Model</h5>
 <!--l. 149--><p class="noindent" >The eTrice FSM model has to be embedded in a model that introduces components, interfaces and messages. We
 recommend to use a new Xtext language with a grammar derived from the FSM grammar. This grammar has to specify a
 component derived from the <span 
@@ -272,9 +272,9 @@ class="ec-lmtt-10">EList&#x003C;AbstractInterfaceItem&#x003E; getAllAbstractInte
 class="ec-lmtt-10">String getComponentName() </span>&#8211; should return the name of the model component</li></ul>
      </li></ul>
 <a 
- id="Q1-35-296"></a>
+ id="Q1-35-295"></a>
 <h5 class="likesubsubsectionHead"><a 
- id="x35-2230002"></a>Extending the State Machine Editor</h5>
+ id="x35-2190002"></a>Extending the State Machine Editor</h5>
 <!--l. 176--><p class="noindent" >The concrete state machine editor minimally needs to define </p>
      <ul class="itemize1">
      <li class="itemize">the editor class itself by deriving it from the <span 
@@ -302,16 +302,16 @@ class="ec-lmtt-10">IResourceSetProvider</span></li></ul>
      <li class="itemize">concrete implementations of all property dialogs the <span 
 class="ec-lmtt-10">IFSMDialogFactory </span>produces</li></ul>
 <a 
- id="x35-223001r293"></a>
+ id="x35-219001r292"></a>
 <h4 class="subsectionHead"><span class="titlemark">8.1.3   </span> <a 
- id="x35-2240003"></a>Runtimes</h4>
+ id="x35-2200003"></a>Runtimes</h4>
 <!--l. 193--><p class="noindent" >Currently eTrice ships with a C and a Java runtime. The C++ runtime is still a prototype. The runtimes are libraries written
 in the target language against which the generated code is compiled.
 <a 
- id="x35-224001r298"></a>
+ id="x35-220001r297"></a>
 </p>
 <h4 class="subsectionHead"><span class="titlemark">8.1.4   </span> <a 
- id="x35-2250004"></a>Unit Tests</h4>
+ id="x35-2210004"></a>Unit Tests</h4>
 <!--l. 199--><p class="noindent" >Most plug-ins and other parts of the code have related unit tests.
                                                                                             
                                                                                             

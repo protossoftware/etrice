@@ -1,4 +1,44 @@
 <contexts>
+<context id="featureContextHelp_CCodeGenerator" title="CCodeGenerator">
+<description></description>
+<topic href="html/etrice-doc.html" label="CCodeGenerator"/>
+</context>
+
+<context id="featureContextHelp_JavaCodeGenerator" title="JavaCodeGenerator">
+<description></description>
+<topic href="html/etrice-doc.html" label="JavaCodeGenerator"/>
+</context>
+
+<context id="featureContextHelp_GenerationOptions" title="GenerationOptions">
+<description>Mechanism to adjust the generation.</description>
+<topic href="html/etrice-doc.html" label="GenerationOptions"/>
+<topic href="html/etrice-doc.html" label="CCodeGenerator"/>
+<topic href="html/etrice-doc.html" label="JavaCodeGenerator"/>
+<topic href="html/etrice-doc.html" label="MSCLogging"/>
+<topic href="html/etrice-doc.html" label="DocumentationGenerator"/>
+</context>
+
+<context id="featureContextHelp_MSCLogging" title="MSCLogging">
+<description>Runtime logger for event-driven Messages, represented as a Message Sequence Chart.</description>
+<topic href="html/etrice-doc.html" label="MSCLogging"/>
+<topic href="html/etrice-doc.html" label="GenerationOptions"/>
+<topic href="html/etrice-doc.html" label="CCodeGenerator"/>
+<topic href="html/etrice-doc.html" label="JavaCodeGenerator"/>
+</context>
+
+<context id="featureContextHelp_DataLogging" title="DataLogging">
+<description>Runtime logger for data-driven Messages with primtive data.</description>
+<topic href="html/etrice-doc.html" label="DataLogging"/>
+<topic href="html/etrice-doc.html" label="Annotation"/>
+<topic href="html/etrice-doc.html" label="CCodeGenerator"/>
+</context>
+
+<context id="featureContextHelp_DocumentationGenerator" title="DocumentationGenerator">
+<description>A LaTeX documentation generator from eTrice models.</description>
+<topic href="html/etrice-doc.html" label="DocumentationGenerator"/>
+<topic href="html/etrice-doc.html" label="GenerationOptions"/>
+</context>
+
 <context id="featureContextHelp_AnnotationType" title="AnnotationType">
 <description>AnnotationTypes can be used to tag ROOM classes for further custom processing.</description>
 <topic href="html/etrice-doc.html" label="AnnotationType"/>
@@ -10,6 +50,7 @@
 <description>An Annotation can be attached to a ROOM classes to apply the properties of its AnnotationType.</description>
 <topic href="html/etrice-doc.html" label="Annotation"/>
 <topic href="html/etrice-doc.html" label="AnnotationType"/>
+<topic href="html/etrice-doc.html" label="DataLogging"/>
 <topic href="html/etrice-doc.html" label="LogicalSystem"/>
 <topic href="html/etrice-doc.html" label="ActorClass"/>
 <topic href="html/etrice-doc.html" label="SubSystemClass"/>
@@ -64,6 +105,7 @@
 <topic href="html/etrice-doc.html" label="Inheritance"/>
 <topic href="html/etrice-doc.html" label="LogicalModel"/>
 <topic href="html/etrice-doc.html" label="ActorRef"/>
+<topic href="html/etrice-doc.html" label="GraphicalStructureEditor"/>
 </context>
 
 <context id="featureContextHelp_SubSystemClass" title="SubSystemClass">
@@ -78,6 +120,7 @@
 <topic href="html/etrice-doc.html" label="StateMachine"/>
 <topic href="html/etrice-doc.html" label="Inheritance"/>
 <topic href="html/etrice-doc.html" label="ActorClass"/>
+<topic href="html/etrice-doc.html" label="GraphicalBehaviorEditor"/>
 </context>
 
 <context id="featureContextHelp_SubSystemRef" title="SubSystemRef">
@@ -102,6 +145,8 @@
 <topic href="html/etrice-doc.html" label="Replication"/>
 <topic href="html/etrice-doc.html" label="ActorClass"/>
 <topic href="html/etrice-doc.html" label="SubSystemClass"/>
+<topic href="html/etrice-doc.html" label="GraphicalStructureEditor"/>
+<topic href="html/etrice-doc.html" label="ActorRefPropertyDialog"/>
 </context>
 
 <context id="featureContextHelp_Binding" title="Binding">
@@ -109,9 +154,9 @@
 <topic href="html/etrice-doc.html" label="Binding"/>
 <topic href="html/etrice-doc.html" label="Port"/>
 <topic href="html/etrice-doc.html" label="Port"/>
-<topic href="html/etrice-doc.html" label="LogicalSystem"/>
 <topic href="html/etrice-doc.html" label="ActorClass"/>
 <topic href="html/etrice-doc.html" label="SubSystemClass"/>
+<topic href="html/etrice-doc.html" label="GraphicalStructureEditor"/>
 </context>
 
 <context id="featureContextHelp_LayerConnection" title="LayerConnection">
@@ -119,9 +164,9 @@
 <topic href="html/etrice-doc.html" label="LayerConnection"/>
 <topic href="html/etrice-doc.html" label="SAP"/>
 <topic href="html/etrice-doc.html" label="SPP"/>
-<topic href="html/etrice-doc.html" label="LogicalSystem"/>
 <topic href="html/etrice-doc.html" label="ActorClass"/>
 <topic href="html/etrice-doc.html" label="SubSystemClass"/>
+<topic href="html/etrice-doc.html" label="GraphicalStructureEditor"/>
 </context>
 
 <context id="featureContextHelp_ExecutionType" title="ExecutionType">
@@ -215,6 +260,8 @@
 <topic href="html/etrice-doc.html" label="RelayPort"/>
 <topic href="html/etrice-doc.html" label="ExternalEndPort"/>
 <topic href="html/etrice-doc.html" label="InternalEndPort"/>
+<topic href="html/etrice-doc.html" label="GraphicalStructureEditor"/>
+<topic href="html/etrice-doc.html" label="PortPropertyDialog"/>
 </context>
 
 <context id="featureContextHelp_RelayPort" title="RelayPort">
@@ -241,6 +288,7 @@
 <topic href="html/etrice-doc.html" label="ProtocolClass"/>
 <topic href="html/etrice-doc.html" label="ActorClass"/>
 <topic href="html/etrice-doc.html" label="LayerConnection"/>
+<topic href="html/etrice-doc.html" label="GraphicalStructureEditor"/>
 </context>
 
 <context id="featureContextHelp_ServiceImplementation" title="ServiceImplementation">
@@ -256,5 +304,103 @@
 <topic href="html/etrice-doc.html" label="ActorClass"/>
 <topic href="html/etrice-doc.html" label="LayerConnection"/>
 <topic href="html/etrice-doc.html" label="ServiceImplementation"/>
+<topic href="html/etrice-doc.html" label="SPPPropertyDialog"/>
+</context>
+
+<context id="featureContextHelp_TemplateFeature" title="TemplateFeature">
+<description>Plain text: A ProtocolClass defines the Interface of a Port. It specifies the exchanged messages and data.</description>
+<topic href="html/etrice-doc.html" label="TemplateFeature"/>
+<topic href="html/etrice-doc.html" label="Feature123"/>
+<topic href="html/etrice-doc.html" label="Feature123"/>
+<topic href="html/etrice-doc.html" label="Feature123"/>
+<topic href="html/etrice-doc.html" label="Feature123"/>
+<topic href="html/etrice-doc.html" label="Feature123"/>
+</context>
+
+<context id="featureContextHelp_Feature123" title="Feature123">
+<description></description>
+<topic href="html/etrice-doc.html" label="Feature123"/>
+<topic href="html/etrice-doc.html" label="TemplateFeature"/>
+<topic href="html/etrice-doc.html" label="TemplateFeature"/>
+<topic href="html/etrice-doc.html" label="TemplateFeature"/>
+<topic href="html/etrice-doc.html" label="TemplateFeature"/>
+<topic href="html/etrice-doc.html" label="TemplateFeature"/>
+<topic href="html/etrice-doc.html" label="TemplateFeature"/>
+</context>
+
+<context id="featureContextHelp_LaTexExample" title="LaTexExample">
+<description></description>
+<topic href="html/etrice-doc.html" label="LaTexExample"/>
+</context>
+
+<context id="featureContextHelp_TextualROOMEditor" title="TextualROOMEditor">
+<description>Textual model editor</description>
+<topic href="html/etrice-doc.html" label="TextualROOMEditor"/>
+<topic href="html/etrice-doc.html" label="ROOMLanguage"/>
+</context>
+
+<context id="featureContextHelp_OutlineView" title="OutlineView">
+<description>Displays an overview of all elements in the textual editor.</description>
+<topic href="html/etrice-doc.html" label="OutlineView"/>
+<topic href="html/etrice-doc.html" label="TextualROOMEditor"/>
+</context>
+
+<context id="featureContextHelp_GraphicalBehaviorEditor" title="GraphicalBehaviorEditor">
+<description>The GraphicalBehaviorEditor allows to edit the ActorClass' StateMachine. It is possible to create (hierarchical) states and transitions to model complex behavior in a convenient way.</description>
+<topic href="html/etrice-doc.html" label="GraphicalBehaviorEditor"/>
+<topic href="html/etrice-doc.html" label="StateMachine"/>
+</context>
+
+<context id="featureContextHelp_GraphicalStructureEditor" title="GraphicalStructureEditor">
+<description>The Structure Editor allows to edit the ActorClass' Structure in a convenient way. It is possible to create and arrange actor references and ports and to create bindings and layer connections.</description>
+<topic href="html/etrice-doc.html" label="GraphicalStructureEditor"/>
+<topic href="html/etrice-doc.html" label="ActorClass"/>
+<topic href="html/etrice-doc.html" label="ActorRef"/>
+<topic href="html/etrice-doc.html" label="Port"/>
+<topic href="html/etrice-doc.html" label="SAP"/>
+<topic href="html/etrice-doc.html" label="Binding"/>
+<topic href="html/etrice-doc.html" label="LayerConnection"/>
+</context>
+
+<context id="featureContextHelp_StructureEditorPalette" title="StructureEditorPalette">
+<description>The palette creates central structural elements of an ActorClass.</description>
+<topic href="html/etrice-doc.html" label="StructureEditorPalette"/>
+<topic href="html/etrice-doc.html" label="GraphicalStructureEditor"/>
+</context>
+
+<context id="featureContextHelp_ActorRefPropertyDialog" title="ActorRefPropertyDialog">
+<description>A dialog to edit properties of an ActorRef.</description>
+<topic href="html/etrice-doc.html" label="ActorRefPropertyDialog"/>
+<topic href="html/etrice-doc.html" label="ActorRef"/>
+<topic href="html/etrice-doc.html" label="GraphicalStructureEditor"/>
+</context>
+
+<context id="featureContextHelp_PortPropertyDialog" title="PortPropertyDialog">
+<description>A dialog to edit properties of an Port.</description>
+<topic href="html/etrice-doc.html" label="PortPropertyDialog"/>
+<topic href="html/etrice-doc.html" label="Port"/>
+<topic href="html/etrice-doc.html" label="GraphicalStructureEditor"/>
+</context>
+
+<context id="featureContextHelp_SPPPropertyDialog" title="SPPPropertyDialog">
+<description>A dialog to edit properties of a SPP.</description>
+<topic href="html/etrice-doc.html" label="SPPPropertyDialog"/>
+<topic href="html/etrice-doc.html" label="SPP"/>
+<topic href="html/etrice-doc.html" label="GraphicalStructureEditor"/>
+</context>
+
+<context id="featureContextHelp_SynatxColoring" title="SynatxColoring">
+<description></description>
+<topic href="html/etrice-doc.html" label="SynatxColoring"/>
+</context>
+
+<context id="featureContextHelp_MarkdownCheatsheet" title="MarkdownCheatsheet">
+<description></description>
+<topic href="html/etrice-doc.html" label="MarkdownCheatsheet"/>
+</context>
+
+<context id="featureContextHelp_MarkdownExample" title="MarkdownExample">
+<description></description>
+<topic href="html/etrice-doc.html" label="MarkdownExample"/>
 </context>
 </contexts>

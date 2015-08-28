@@ -1,0 +1,176 @@
+<div class="fHeader"></div>
+<div class="fBody"><h2 id="room">room</h2>
+<pre><code class="lang-room"><span class="keyword">import</span> room.basic.types.* <span class="keyword">from</span> <span class="string">"../../../org.eclipse.etrice.modellib.c/model/Types.room"</span>
+
+<span class="keyword">ActorClass</span> InternalEndPortExample {
+    <span class="keyword">Structure</span> {
+        <span class="keyword">Port</span> internalEnd<span class="keyword">Port</span> : PSimpleProtocol
+        <span class="keyword">ActorRef</span> actorRef1 : SimpleActorClass1
+
+        <span class="comment">// internalEndPort lives 'local' 
+</span>        <span class="comment">// and thus needs a Binding to port of an ActorRef
+</span>        <span class="keyword">Binding</span> internalEnd<span class="keyword">Port</span> <span class="keyword">and</span> actorRef1.external<span class="keyword">Port</span>
+    }
+    <span class="keyword">Behavior</span> {
+        <span class="comment">// send/receive messages from internalEndPorts
+</span>    }
+}
+
+<span class="keyword">ActorClass</span> Receiver {
+        <span class="keyword">Interface</span> {
+            <span class="keyword">Port</span> sender: PingPongProtocol
+        }
+        <span class="keyword">Structure</span> {
+            <span class="keyword">external</span> <span class="keyword">Port</span> sender
+            <span class="keyword">SAP</span> timing : PTimer
+        }
+        <span class="keyword">Behavior</span> {
+            <span class="keyword">StateMachine</span> {
+                <span class="keyword">Transition</span> init: <span class="keyword">initial</span> -> WaitingForPing { }
+                <span class="keyword">Transition</span> tr0: WaitingForPing -> WaitingForAWhile {
+                    <span class="keyword">triggers</span> {
+                        <ping: sender>
+                    }
+                }
+                <span class="keyword">Transition</span> tr1: WaitingForAWhile -> SentPong {
+                    <span class="keyword">triggers</span> {
+                        <timeout: timing>
+                    }
+                }
+                <span class="keyword">State</span> WaitingForPing
+                <span class="keyword">State</span> SentPong {
+                    <span class="keyword">entry</span> {
+                        <span class="string">"sender.pong();"</span>
+                    }
+                }
+                <span class="keyword">State</span> WaitingForAWhile {
+                    <span class="keyword">entry</span> {
+                        <span class="string">"timing.startTimeout(1000);"</span>
+                    }
+                }
+            }
+        }
+    }
+
+<span class="comment">// eventdriven ProtocolClass (asynchronous message passing, bidirectional)
+</span><span class="keyword">eventdriven</span> <span class="keyword">ProtocolClass</span> ProtocolClassEvt {
+    <span class="comment">// ProtocolClass ProtocolClassEvt { // same like above because eventdriven is default 
+</span>    <span class="keyword">incoming</span> {
+        <span class="comment">// incoming means incoming for a regular port and outging for a conjugated port
+</span>        <span class="keyword">Message</span> message1() <span class="comment">// message without data
+</span>        <span class="keyword">Message</span> message2(data: int32) <span class="comment">// message with simple data
+</span>        <span class="keyword">Message</span> message3(data: DMessageData) <span class="comment">// message with complex data (DataClass)
+</span>
+    }
+    <span class="keyword">outgoing</span> {
+    <span class="comment">// outgoing means outging for a regular port and incoming for a conjugated port
+</span>        <span class="keyword">Message</span> message1(data: int32) <span class="comment">// incoming and outgoing Messages can have the same name to enable symmetric protocols
+</span>    }
+}
+
+<span class="comment">// DataClass for sending complex data via message
+</span><span class="keyword">DataClass</span> DMessageData {
+    <span class="keyword">Attribute</span> SomeData: int16
+    <span class="keyword">Attribute</span> SomeMoreData: int32
+}
+</code></pre>
+<h2 id="etmap">etMap</h2>
+<pre><code class="lang-etmap"><span class="keyword">MappingModel</span> PingPong<span class="keyword">Mapping</span> {
+    <span class="keyword">import</span> PingPong_Model.* <span class="keyword">from</span> <span class="string">"PingPong.room"</span>
+    <span class="keyword">import</span> GenericPhysicalModel.* <span class="keyword">from</span> <span class="string">"GenericPhysical.etphys"</span>
+
+    <span class="keyword">Mapping</span> LogSys -> PhysSys1 {
+        <span class="keyword">SubSystemMapping</span> subSystemRef -> nodeRef1 {
+            <span class="keyword">ThreadMapping</span> defaultThread -> PhysicalThread1
+        }
+    }
+
+}
+</code></pre>
+<h2 id="etphys">etPhys</h2>
+<pre><code class="lang-etphys"><span class="keyword">PhysicalModel</span> Generic<span class="keyword">PhysicalModel</span> {
+
+    <span class="keyword">PhysicalSystem</span> PhysSys1 {
+        <span class="keyword">NodeRef</span> nodeRef1 : NodeClass1
+    }
+
+    <span class="keyword">NodeClass</span> NodeClass1 {
+        <span class="keyword">runtime</span> = RuntimeClass1
+        <span class="keyword">priomin</span> = -10
+        <span class="keyword">priomax</span> = 10
+
+        <span class="keyword">DefaultThread</span> PhysicalThread1 {
+            <span class="keyword">execmode</span> = <span class="keyword">mixed</span>
+            <span class="keyword">interval</span> = 100<span class="keyword">ms</span>
+            <span class="keyword">prio</span> = 0
+            <span class="keyword">stacksize</span> = 1024
+            <span class="keyword">msgblocksize</span> = 64
+            <span class="keyword">msgpoolsize</span> = 100
+        }
+    }
+
+    <span class="keyword">RuntimeClass</span> RuntimeClass1 {
+        <span class="keyword">model</span> = <span class="keyword">multiThreaded</span>
+    } 
+
+}
+</code></pre>
+<h2 id="config">config</h2>
+<pre><code class="lang-config"><span class="comment">/*******************************************************************************
+ * Copyright (c) 2012 protos software gmbh (http://www.protos.de).
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * CONTRIBUTORS:
+ *         Thomas Schuetz (initial contribution)
+ * 
+ *******************************************************************************/</span>
+<span class="keyword">ConfigModel</span> trafficlight.example.config {
+
+    <span class="keyword">import</span> TrafficLight_Model.* <span class="keyword">from</span> <span class="string">"TrafficLight.room"</span>
+
+    <span class="keyword">ActorInstanceConfig</span> LSTraffic/mainSS/application/pedestrianLight {
+        <span class="keyword">Attr</span> ipConfig{
+            <span class="keyword">Attr</span> IPAddr=<span class="string">"localhost"</span>
+            <span class="keyword">Attr</span> TcpPort=4443
+        }
+    }    
+}
+</code></pre>
+<p><pre lang="no-highlight"><code> </p>
+<pre><code>&quot;no highlighting&quot;  /* comment */
+// nop
+</code></pre><pre><code class="lang-no-highlight">&quot;no highlighting&quot;  /* comment */
+// nop
+</code></pre>
+<p></code></pre></p>
+<pre><code>&quot;no highlighting&quot;  /* comment */
+// nop
+</code></pre><pre><code class="lang-no-highlight">&quot;no highlighting&quot;  /* comment */
+// nop
+</code></pre>
+<h2 id="todo">TODO</h2>
+<p>Syntax highlighting for other languages like c:        </p>
+<pre><code class="lang-c">void etMessageQueue_push(etMessageQueue* self, etMessage* msg){
+    <span class="comment">/* TODO: optimize queue for concurrent push / pop */</span>
+    ET_MSC_LOGGER_SYNC_ENTRY(<span class="string">"etMessageQueue"</span>, <span class="string">"push"</span>)
+    if (self->first == NULL) {
+        <span class="comment">/*no message in queue*/</span>
+        self->first = self->last = msg;
+    }
+    else {
+        <span class="comment">/*at least one message in queue*/</span>
+        self->last->next = msg;
+        self->last = msg;
+    }
+    msg->next = NULL; <span class="comment">/*TODO: optimization: this line could be removed if we assume that all messages are initialized*/</span>
+
+    if (++self->size > self->highWaterMark)
+        self->highWaterMark++;
+
+    ET_MSC_LOGGER_SYNC_EXIT
+}
+</code></pre>
+</div>

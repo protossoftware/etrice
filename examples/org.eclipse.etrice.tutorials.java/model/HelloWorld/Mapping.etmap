@@ -5,7 +5,7 @@
  */
 MappingModel TemplateMapping {
 	
-	import room.generic.physical.* from "../../../org.eclipse.etrice.modellib.c/model/GenericPhysical.etphys"
+	import room.generic.physical.* from "../../../org.eclipse.etrice.modellib.java/model/GenericPhysical.etphys"
 	import HelloWorldModel.* from "HelloWorld.room"
 
 	Mapping LogSys -> GenericPhysicalSystem {
