@@ -1,4 +1,4 @@
-package org.eclipse.etrice.generator.ui.wizard;
+package org.eclipse.etrice.generator.ui.wizard.deprecated;
 
 import java.io.Reader;
 import java.io.StringReader;

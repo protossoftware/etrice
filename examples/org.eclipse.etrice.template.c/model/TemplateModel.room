@@ -41,6 +41,15 @@ RoomModel TemplateModel {
 	
 	// - PingPong building kit
 
+	ProtocolClass PingPongProtocol {
+		incoming {
+			Message ping()
+		}
+		outgoing {
+			Message pong()
+		}
+	}
+
 	ActorClass Sender {
 		Interface {
 			conjugated Port sendPort: PingPongProtocol
@@ -49,20 +58,6 @@ RoomModel TemplateModel {
 			external Port sendPort
 		}
 		Behavior {
-			StateMachine {
-				Transition init: initial -> sendingPing
-				Transition tr0: sendingPing -> receivedPong {
-					triggers {
-						<pong: sendPort>
-					}
-				}
-				State sendingPing {
-					entry {
-						"sendPort.ping();"
-					}
-				}
-				State receivedPong
-			}
 		}
 	}
 
@@ -75,39 +70,6 @@ RoomModel TemplateModel {
 			SAP timingService: PTimer
 		}
 		Behavior {
-			StateMachine {
-				Transition init: initial -> waitingForPing
-				Transition tr0: waitingForPing -> receivedPing {
-					triggers {
-						<ping: recvPort>
-					}
-				}
-				Transition tr1: receivedPing -> sentPong {
-					triggers {
-						<timeout: timingService>
-					}
-				}
-				State waitingForPing
-				State receivedPing {
-					entry {
-						"timingService.startTimeout(500);"
-					}
-				}
-				State sentPong {
-					entry {
-						"recvPort.pong();"
-					}
-				}
-			}
-		}
-	}
-
-	ProtocolClass PingPongProtocol {
-		incoming {
-			Message ping()
-		}
-		outgoing {
-			Message pong()
 		}
 	}
 

@@ -9,7 +9,7 @@
  * 		Juergen Haug (initial contribution)
  * 
  *******************************************************************************/
-package org.eclipse.etrice.generator.ui.wizard;
+package org.eclipse.etrice.generator.ui.wizard.deprecated;
 
 
 @Deprecated

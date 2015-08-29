@@ -10,7 +10,7 @@
  * 
  *******************************************************************************/
 
-package org.eclipse.etrice.generator.ui.wizard;
+package org.eclipse.etrice.generator.ui.wizard.deprecated;
 
 import java.io.IOException;
 
@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.etrice.core.etmap.ui.internal.ETMapActivator;
 import org.eclipse.etrice.core.etphys.ui.internal.ETPhysActivator;
 import org.eclipse.etrice.core.ui.internal.RoomActivator;
+import org.eclipse.etrice.generator.ui.wizard.ProjectCreator;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.INewWizard;

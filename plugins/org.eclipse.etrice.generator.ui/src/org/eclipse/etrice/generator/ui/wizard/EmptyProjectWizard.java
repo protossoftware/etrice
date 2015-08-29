@@ -7,47 +7,63 @@
  *******************************************************************************/
 package org.eclipse.etrice.generator.ui.wizard;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.zip.ZipFile;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
-import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.emf.common.util.BasicMonitor;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.etrice.generator.ui.Activator;
 import org.eclipse.jdt.core.IAccessRule;
 import org.eclipse.jdt.core.IClasspathAttribute;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.JavaCore;
-import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.jface.wizard.IWizard;
 import org.eclipse.jface.wizard.Wizard;
-import org.eclipse.jface.wizard.WizardPage;
-import org.eclipse.ui.IFileEditorInput;
+import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPage;
-import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
+import org.eclipse.ui.dialogs.IOverwriteQuery;
 import org.eclipse.ui.dialogs.WizardNewProjectCreationPage;
 import org.eclipse.ui.part.FileEditorInput;
-import org.eclipse.ui.part.ISetSelectionTarget;
+import org.eclipse.ui.wizards.IWizardDescriptor;
+import org.eclipse.ui.wizards.datatransfer.ImportOperation;
+import org.eclipse.ui.wizards.datatransfer.ZipFileStructureProvider;
+import org.eclipse.ui.wizards.newresource.BasicNewProjectResourceWizard;
 
 /**
  * @author Henrik Rentz-Reichert (initial contribution and API)
  *
  */
 public class EmptyProjectWizard extends Wizard implements INewWizard {
+
+	final static String MODEL_NAME = "TemplateModel";
+	final static String PROJECT_CONTENT_ZIP = "/content/org.eclipse.etrice.template.java.zip";
+	
+	final static String ROOM_EDITOR_ID = "org.eclipse.etrice.core.Room";
+	final static String MODELLIB_WIZARD_ID = "org.eclipse.etrice.ui.runtime.NewJavaModelLibWizard";
+	
 	protected IWorkbench workbench;
 	protected IPath projectLocation;
 	protected IPath sourcePath;
@@ -56,63 +72,51 @@ public class EmptyProjectWizard extends Wizard implements INewWizard {
 	protected IProject runtimeProject;
 	protected IProject modellibProject;
 	protected String initialProjectName;
-	protected URI modelURI;
-	protected RoomValidationHelper roomValidator;
 	private EmptyProjectConfigPage config;
-	
-	private static final String[] additionalLaunchConfigLines = new String[] {
-		"<stringAttribute key=\"org.eclipse.debug.core.ATTR_REFRESH_SCOPE\" value=\"${workspace}\"/>"
-	};
+
+	private static final String[] additionalLaunchConfigLines = new String[] { "<stringAttribute key=\"org.eclipse.debug.core.ATTR_REFRESH_SCOPE\" value=\"${workspace}\"/>" };
 
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		this.workbench = workbench;
 		setDefaultPageImageDescriptor(ProjectCreator.getImageDescriptor("icons/NewETriceProjectWizban.gif"));
-		setWindowTitle("New Empty eTrice Project");
+		setWindowTitle("eTrice Java Template Project");
 
 		IWorkspace workspace = ResourcesPlugin.getWorkspace();
 		runtimeProject = workspace.getRoot().getProject("org.eclipse.etrice.runtime.java");
 		modellibProject = workspace.getRoot().getProject("org.eclipse.etrice.modellib.java");
-		
-		roomValidator = RoomValidationHelper.createInstance();
 	}
 
 	@Override
 	public void addPages() {
-		WizardNewProjectCreationPage newProjectCreationPage = new WizardNewProjectCreationPage(
-				"NewProjectCreationPage") {
+		WizardNewProjectCreationPage newProjectCreationPage = new WizardNewProjectCreationPage("NewProjectCreationPage") {
 			@Override
 			protected boolean validatePage() {
 				if (super.validatePage()) {
-					
-					String projectName = getProjectName();
-					if(!roomValidator.isValidFQN(projectName))
-						setMessage("RoomModel name will be invalid ("+roomValidator.getMessage()+")", WizardPage.WARNING);
-					
+
 					IPath locationPath = getLocationPath();
-					projectLocation = Platform.getLocation().equals(
-							locationPath) ? null : locationPath;
+					projectLocation = Platform.getLocation().equals(locationPath) ? null : locationPath;
 					IPath projectPath = getProjectHandle().getFullPath();
 					sourcePath = projectPath.append("src");
 					sourceGenPath = projectPath.append("src-gen");
 					return true;
-				} else {
+				}
+				else {
 					return false;
 				}
 			}
 		};
 
 		newProjectCreationPage.setInitialProjectName(initialProjectName);
-		newProjectCreationPage.setTitle("Empty eTrice Project");
-		newProjectCreationPage
-				.setDescription("Create an empty Java project with eTrice dependencies");
+		newProjectCreationPage.setTitle("Template eTrice Project");
+		newProjectCreationPage.setDescription("Create the template Java project with eTrice dependencies");
 		addPage(newProjectCreationPage);
-		
-		config = new EmptyProjectConfigPage("config", runtimeProject);
+
+		config = new EmptyProjectConfigPage("config");
 		config.setTitle("Project Configuration");
 		config.setDescription("Choose a build type for the project");
 		addPage(config);
 	}
-	
+
 	@Override
 	public boolean performFinish() {
 		WorkspaceModifyOperation operation = new WorkspaceModifyOperation() {
@@ -121,13 +125,13 @@ public class EmptyProjectWizard extends Wizard implements INewWizard {
 			protected void execute(IProgressMonitor progressMonitor) {
 				try {
 					List<IProject> referencedProjects = new ArrayList<IProject>();
-					if (config.useJDTBuild()){
-						if(runtimeProject != null)
+					if (config.useJDTBuild()) {
+						if (runtimeProject != null)
 							referencedProjects.add(runtimeProject);
-						if(modellibProject != null)
+						if (modellibProject != null)
 							referencedProjects.add(modellibProject);
 					}
-					
+
 					ArrayList<String> natures = new ArrayList<String>(ProjectCreator.getCommonNatureIDs());
 					if (config.useMVNBuild())
 						natures.add("org.eclipse.m2e.core.maven2Nature");
@@ -135,90 +139,46 @@ public class EmptyProjectWizard extends Wizard implements INewWizard {
 					ArrayList<String> builders = new ArrayList<String>(ProjectCreator.getCommonBuilderIDs());
 					if (config.useMVNBuild())
 						builders.add("org.eclipse.m2e.core.maven2Builder");
-					
+
 					ArrayList<IClasspathEntry> pathEntries = new ArrayList<IClasspathEntry>();
 					if (config.useMVNBuild()) {
-						IClasspathEntry mvnContainer = JavaCore.newContainerEntry(
-								new Path("org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER"),
-								new IAccessRule[] {},
-								new IClasspathAttribute[] {JavaCore.newClasspathAttribute("maven.pomderived", "true")},
-								false);
+						IClasspathEntry mvnContainer = JavaCore
+								.newContainerEntry(new Path("org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER"),
+										new IAccessRule[] {}, new IClasspathAttribute[] { JavaCore
+												.newClasspathAttribute("maven.pomderived", "true") }, false);
 						pathEntries.add(mvnContainer);
 					}
+
+					URI modelProjectURI = (projectLocation == null) ? null : URI.createFileURI(projectLocation
+							.toOSString());
+					project = ProjectCreator.createETriceProject(new Path(sourcePath.toString()), new Path(
+							sourceGenPath.toString()), modelProjectURI, referencedProjects, natures, builders,
+							pathEntries, BasicMonitor.toMonitor(progressMonitor));
+
+					String projectName = project.getName();
+					URI projectURI = URI.createPlatformResourceURI(projectName, true);
+					String modelName = MODEL_NAME;
 					
-					URI modelProjectURI = (projectLocation==null) ? null : URI.createFileURI(projectLocation.toOSString());
-					project = ProjectCreator.createETriceProject(
-							new Path(sourcePath.toString()),
-							new Path(sourceGenPath.toString()),
-							modelProjectURI,
-							referencedProjects,
-							natures,
-							builders,
-							pathEntries,
-							BasicMonitor.toMonitor(progressMonitor)
-						);
+					ProjectCreator.createBuildProperties(projectURI.appendSegment("build.properties"), modelName);
 
-					String baseName = sourcePath.segment(0);
-					ProjectCreator.findOrCreateContainer(new Path("/"
-							+ baseName + "/model"),
-							true, projectLocation, progressMonitor);
-					modelURI = URI.createPlatformResourceURI("/"
-							+ baseName
-							+ "/model/"+baseName+".room", true);
-					ProjectCreator.createModel(modelURI,
-							baseName);
+					ProjectCreator.createLaunchGeneratorConfig(projectURI.appendSegment("generate_" + modelName + ".launch"),
+							"java", "/" + projectName + "/model", modelName, additionalLaunchConfigLines);
 
-//					URI physModelURI = URI.createPlatformResourceURI("/"
-//							+ baseName
-//							+ "/model/"+baseName+".etphys", true);
-//					ProjectCreator.createPhysicalModel(physModelURI,
-//							baseName);
+					ProjectCreator.createLaunchJavaApplicationConfig(projectURI.appendSegment("run_" + modelName + ".launch"),
+							projectName, MODEL_NAME, "Node_node_subSystemRefRunner");
 
-					URI mapModelURI = URI.createPlatformResourceURI("/"
-							+ baseName
-							+ "/model/Mapping.etmap", true);
-					ProjectCreator.createMappingModel(mapModelURI,
-							baseName);
-					
-					ProjectCreator.createBuildProperties(URI.createPlatformResourceURI("/"
-							+baseName+"/build.properties", true),
-							baseName);
-
-					ProjectCreator.createLaunchGeneratorConfig(URI.createPlatformResourceURI("/"
-							+baseName+"/generate_"+baseName+".launch", true),
-							"java",
-							"/"+baseName+"/model",
-							baseName,
-							additionalLaunchConfigLines);
-
-					ProjectCreator.createLaunchJavaApplicationConfig(URI.createPlatformResourceURI("/"
-							+baseName+"/run_"+baseName+".launch", true),
-							baseName,
-							baseName,
-							"Node_node_subSystemRefRunner");
-
-					ProjectCreator.findOrCreateContainer(new Path("/"
-							+ baseName + "/log"),
-							true, projectLocation, progressMonitor);
-					
 					if (config.useMVNBuild()) {
-						ProjectCreator.createMavenPOM(URI.createPlatformResourceURI("/"
-								+baseName+"/pom.xml", true),
-								baseName,
-								baseName,
-								"Node_node_subSystemRefRunner");
-						ProjectCreator.createMavenBuilder(URI.createPlatformResourceURI("/"
-								+baseName+"/build_"+baseName+".launch", true),
-								baseName);
-						ProjectCreator.createMavenLauncher(URI.createPlatformResourceURI("/"
-								+baseName+"/runjar_"+baseName+".launch", true),
-								baseName,
-								baseName);
+						ProjectCreator.createMavenPOM(projectURI.appendSegment("pom.xml"), projectName, MODEL_NAME, "Node_node_subSystemRefRunner");
+						ProjectCreator.createMavenBuilder(projectURI.appendSegment("build_" + modelName + ".launch"), projectName);
+						ProjectCreator.createMavenLauncher(projectURI.appendSegment("runjar_" + modelName + ".launch"), projectName, MODEL_NAME);
 					}
 					
-				} catch (Exception e) {
+					importContent(project, progressMonitor);
+				}
+				catch (Exception e) {
 					Logger.getLogger(getClass()).error(e.getMessage(), e);
-				} finally {
+				}
+				finally {
 					progressMonitor.done();
 				}
 			}
@@ -226,30 +186,23 @@ public class EmptyProjectWizard extends Wizard implements INewWizard {
 
 		try {
 			getContainer().run(false, false, operation);
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			Logger.getLogger(getClass()).error(e.getMessage(), e);
 			return false;
 		}
+		
+		if (config.useJDTBuild())
+			invokeLibraryWizard();
 
-		if (project != null) {
-			IWorkbenchPage page = workbench.getActiveWorkbenchWindow()
-					.getActivePage();
-			final IWorkbenchPart activePart = page.getActivePart();
-			if (activePart instanceof ISetSelectionTarget) {
-				IWorkspaceRoot workspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
-				IFile model = workspaceRoot.getFile(new Path(modelURI.toPlatformString(true)));
-				final ISelection targetSelection = new StructuredSelection(model);
-				final IFileEditorInput input = new FileEditorInput(model);
-				getShell().getDisplay().asyncExec(new Runnable() {
-					public void run() {
-						((ISetSelectionTarget) activePart)
-								.selectReveal(targetSelection);
-						try {
-							PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().openEditor(input, "org.eclipse.etrice.core.Room");
-						} catch (PartInitException e) {
-						}
-					}
-				});
+		IWorkbenchWindow activeWindow = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
+		IFile roomFile = project.getFile("/model/" + MODEL_NAME + ".room");
+		if(roomFile != null && roomFile.exists()){
+			BasicNewProjectResourceWizard.selectAndReveal(roomFile, activeWindow);
+			try {
+				activeWindow.getActivePage().openEditor(new FileEditorInput(roomFile), ROOM_EDITOR_ID, true, IWorkbenchPage.MATCH_ID);
+			}
+			catch (PartInitException e) {
 			}
 		}
 
@@ -258,5 +211,62 @@ public class EmptyProjectWizard extends Wizard implements INewWizard {
 
 	public void setInitialProjectName(String value) {
 		initialProjectName = value;
+	}
+
+	private void invokeLibraryWizard() {
+		if(runtimeProject != null && runtimeProject.exists() && modellibProject != null && modellibProject.exists())
+			return;
+		
+		IWizardDescriptor descriptor = PlatformUI.getWorkbench().getNewWizardRegistry().findWizard(MODELLIB_WIZARD_ID);
+		if (descriptor == null)
+			return;
+
+		try {
+			IWizard wizard = descriptor.createWizard();
+			WizardDialog wd = new WizardDialog(getShell(), wizard);
+			wd.setTitle(wizard.getWindowTitle());
+			wd.open();	
+		} catch (CoreException e) {
+		}
+	}
+	
+	protected static final IOverwriteQuery OVERWRITE_ALL_QUERY = new IOverwriteQuery() {
+		public String queryOverwrite(String pathString) {
+			return IOverwriteQuery.ALL;
+		}
+	};
+
+	private void importContent(IProject project, IProgressMonitor progressMonitor) {
+		URL contentURL = Activator.getInstance().getBundle().getEntry(PROJECT_CONTENT_ZIP);
+		
+		ZipFile zipFile = null;
+		try {
+			ImportOperation importOperation = null;
+			File file = new File(FileLocator.resolve(contentURL).toURI());
+			if (file.isFile() && file.canRead()) {
+				zipFile = new ZipFile(file);
+				if (zipFile != null) {
+					ZipFileStructureProvider structureProvider = new ZipFileStructureProvider(zipFile);
+					importOperation = new ImportOperation(project.getFullPath(), structureProvider.getRoot(),
+							structureProvider, OVERWRITE_ALL_QUERY);
+				}
+			}
+			
+			if(importOperation != null){
+				importOperation.setContext(getShell());
+				importOperation.run(new SubProgressMonitor(progressMonitor, 1));
+			}
+		}
+		catch (Exception e) {
+		}
+		finally {
+			if (zipFile != null) {
+				try {
+					zipFile.close();
+				}
+				catch (IOException e) {
+				}
+			}
+		}
 	}
 }

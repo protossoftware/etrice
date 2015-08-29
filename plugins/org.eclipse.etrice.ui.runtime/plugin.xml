@@ -251,7 +251,7 @@
         name="eTrice C Template Project"
         preferredPerspectives="org.eclipse.cdt.ui.CPerspective"
         project="true">
-			<description>eTrice C template project</description>
+			<description>Create the template C project with eTrice dependencies</description>
 		</wizard>
 	</extension>
 	<extension point="org.eclipse.emf.common.ui.examples">

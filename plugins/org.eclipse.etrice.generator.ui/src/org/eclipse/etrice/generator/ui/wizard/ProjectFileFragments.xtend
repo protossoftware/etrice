@@ -22,143 +22,68 @@ import org.eclipse.ui.preferences.ScopedPreferenceStore
  */
 class ProjectFileFragments {
 	
-	def static String getBasicRoomModel(String baseName)'''
-		/* 
-		 * Shortkeys:
-		 *	Ctrl+Space	- content assist
-		 * 	F3			- open declaration of selected element
-		 *	Alt+S 		- open structure diagram
-		 *  Alt+B 		- open behavior diagram
-		 *  Alt+M 		- open textual editor (in diagrams)
-		 */
-		RoomModel «baseName» {
-		
-			import room.basic.types.* from "../../org.eclipse.etrice.modellib.java/model/Types.room"
-			import room.basic.service.timing.* from "../../org.eclipse.etrice.modellib.java/model/TimingService.room"
-		
-			LogicalSystem LogSys {
-				SubSystemRef subSystemRef: SubSysClass
-			}
-		
-			SubSystemClass SubSysClass {
-				ActorRef topActor: TopActor
-				ActorRef timingService: ATimingService
-				LayerConnection ref topActor satisfied_by timingService.timer
-				LogicalThread defaultThread
-			}
-		
-			// - build your application from here
-			ActorClass TopActor {
-				Structure {
-					
+	def static String getBasicRoomModel(String baseName) {
+		'''
+			RoomModel «baseName» {
+				LogicalSystem «baseName» {
+					SubSystemRef main: MainSubSystem
 				}
-				Behavior {
-					StateMachine {
-						Transition init: initial -> helloState
-						State helloState {
-							entry {
-								"System.out.println(\"### Hello World! ###\");"
-							}
-						}
-					}
+				SubSystemClass MainSubSystem {
+					ActorRef appl: Application
+					LogicalThread defaultThread
+				}
+				ActorClass Application {
 				}
 			}
-			
-			// - PingPong building kit
-		
-			ActorClass Sender {
-				Interface {
-					conjugated Port sendPort: PingPongProtocol
-				}
-				Structure {
-					external Port sendPort
-				}
-				Behavior {
-					StateMachine {
-						Transition init: initial -> sendingPing
-						Transition tr0: sendingPing -> receivedPong {
-							triggers {
-								<pong: sendPort>
-							}
-						}
-						State sendingPing {
-							entry {
-								"sendPort.ping();"
-							}
-						}
-						State receivedPong
-					}
-				}
-			}
-		
-			ActorClass Receiver {
-				Interface {
-					Port recvPort: PingPongProtocol
-				}
-				Structure {
-					external Port recvPort
-					SAP timingService: PTimer
-				}
-				Behavior {
-					StateMachine {
-						Transition init: initial -> waitingForPing
-						Transition tr0: waitingForPing -> receivedPing {
-							triggers {
-								<ping: recvPort>
-							}
-						}
-						Transition tr1: receivedPing -> sentPong {
-							triggers {
-								<timeout: timingService>
-							}
-						}
-						State waitingForPing
-						State receivedPing {
-							entry {
-								"timingService.startTimeout(500);"
-							}
-						}
-						State sentPong {
-							entry {
-								"recvPort.pong();"
-							}
-						}
-					}
-				}
-			}
-		
-			ProtocolClass PingPongProtocol {
-				incoming {
-					Message ping()
-				}
-				outgoing {
-					Message pong()
-				}
-			}
-		
-		}
-	'''
+		'''
+	}
 	
-	def static String getBasicMappingModel(String baseName)'''
-		/*
-		 * This model defines a mapping between a logical ROOM model and a physical model (nodes and threads).
-		 * 
-		 * <p>Hint: Press F3 to open declaration of selected element or import</p>
-		 */
-		MappingModel «baseName»Mapping {
+	/**
+	 * @see ETPhysUtil
+	 */
+	def static String getBasicPhysicalModel(String baseName) {
+		'''
+			PhysicalModel «baseName» {
+				
+				PhysicalSystem PhysSys1 {
+					NodeRef nodeRef1 : NodeClass1
+				}
+				
+				NodeClass NodeClass1 {
+					runtime = RuntimeClass1
+					priomin = -10
+					priomax = 10
+					
+					DefaultThread PhysicalThread1 {
+						execmode = mixed
+						interval = 100ms
+						prio = 0
+						stacksize = 1024
+						msgblocksize = 32
+						msgpoolsize = 10
+					}
+				}
 			
-			import room.generic.physical.* from "../../org.eclipse.etrice.modellib.java/model/GenericPhysical.etphys"
-			import «baseName».* from "«baseName».room"
-		
-			Mapping LogSys -> GenericPhysicalSystem {
-				SubSystemMapping subSystemRef -> node {
-					ThreadMapping defaultThread -> DefaultPhysicalThread
+				RuntimeClass RuntimeClass1 {
+					model = multiThreaded
+				} 
+			}
+		'''
+	}
+	
+	def static String getBasicMappingModel(String baseName) {
+		'''
+			MappingModel «baseName» {
+				import «baseName».* from "«baseName».room"
+				import «baseName».* from "«baseName».etphys"
+				Mapping «baseName» -> PhysSys1 {
+					SubSystemMapping main -> nodeRef1 {
+						ThreadMapping defaultThread -> PhysicalThread1
+					}
 				}
 			}
-		
-		}
-	'''
-
+		'''
+	}
 	
 	def static String getGeneratorLaunchConfig(String targetLanguage, String modelPath, String baseName, String[] addLines) {
 		val prefStore = new ScopedPreferenceStore(InstanceScope.INSTANCE, "org.eclipse.etrice.generator.ui");
@@ -169,7 +94,7 @@ class ProjectFileFragments {
 			<booleanAttribute key="MSC" value="true"/>
 			<booleanAttribute key="UseTranslation" value="«useTranslation»"/>
 			<listAttribute key="ModelFiles">
-			<listEntry value="${workspace_loc:«modelPath»/Mapping.etmap}"/>
+			<listEntry value="${workspace_loc:«modelPath»/«baseName».etmap}"/>
 			</listAttribute>
 			<listAttribute key="org.eclipse.debug.ui.favoriteGroups">
 			<listEntry value="org.eclipse.debug.ui.launchGroup.run"/>

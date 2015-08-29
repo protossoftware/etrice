@@ -23,6 +23,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.etrice.generator.ui.configurator.ProjectConfigurationDelegator;
+import org.eclipse.etrice.generator.ui.wizard.deprecated.ModelCreationPage;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.StructuredSelection;
@@ -90,9 +91,9 @@ public class NewSetOfModelsWizard extends Wizard implements INewWizard {
 					modelURI = URI.createPlatformResourceURI(file.toString(), true);
 					ProjectCreator.createModel(modelURI, baseName);
 
-//					file = page.getPath().append(baseName).addFileExtension("etphys");
-//					URI physModelURI = URI.createPlatformResourceURI(file.toString(), true);
-//					ProjectCreator.createPhysicalModel(physModelURI, baseName);
+					file = page.getPath().append(baseName).addFileExtension("etphys");
+					URI physModelURI = URI.createPlatformResourceURI(file.toString(), true);
+					ProjectCreator.createPhysicalModel(physModelURI, baseName);
 
 					file = page.getPath().append(baseName).addFileExtension("etmap");
 					URI mapModelURI = URI.createPlatformResourceURI(file.toString(), true);

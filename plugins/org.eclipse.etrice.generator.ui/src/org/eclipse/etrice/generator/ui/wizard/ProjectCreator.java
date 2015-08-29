@@ -340,9 +340,9 @@ public class ProjectCreator {
 		writeFile(uri, ProjectFileFragments.getBasicRoomModel(baseName));
 	}
 
-//	public static void createPhysicalModel(URI uri, String baseName) {
-//		writeFile(uri, ProjectFileFragments.getBasicPhysicalModel(baseName));
-//	}
+	public static void createPhysicalModel(URI uri, String baseName) {
+		writeFile(uri, ProjectFileFragments.getBasicPhysicalModel(baseName));
+	}
 
 	public static void createMappingModel(URI uri, String baseName) {
 		writeFile(uri, ProjectFileFragments.getBasicMappingModel(baseName));

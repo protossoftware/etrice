@@ -76,6 +76,8 @@ public class ProjectConfigurator implements IProjectConfigurator {
 			 * HOWTO: Find out reference project configuration: Use GUI "Reference" tab
 			 * at "Path and Symbols" and set breakpoint at {@link
 			 * org.eclipse.cdt.internal.core.settings.model.CConfigurationDescription#setReferenceInfo(Map)}
+			 * 
+			 * Add referenced projects in reverse library order
 			 */
 			if (toolChain == MINGW_TOOLCHAIN) {
 				Map<String, String> projectRefInfo = configDescription.getReferenceInfo();

@@ -62,9 +62,8 @@ public class NonDeletingWizardInstaller extends ExampleInstallerWizard {
 
 	@Override
 	public void addPages() {
-		projectPage = new CustomProjectPage("projectPage", CommonUIPlugin.INSTANCE.getString("_UI_ProjectPage_title"),
-				null);
-		projectPage.setDescription(CommonUIPlugin.INSTANCE.getString("_UI_ProjectPage_description"));
+		projectPage = new CustomProjectPage("projectPage", "New Projects", null);
+		projectPage.setDescription("Create example and required library projects listed below.");
 		addPage(projectPage);
 	}
 

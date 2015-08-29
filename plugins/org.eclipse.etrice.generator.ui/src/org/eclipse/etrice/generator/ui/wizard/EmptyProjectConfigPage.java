@@ -12,7 +12,6 @@
 
 package org.eclipse.etrice.generator.ui.wizard;
 
-import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.etrice.generator.ui.preferences.PreferenceConstants;
 import org.eclipse.jface.dialogs.Dialog;
@@ -32,7 +31,6 @@ import org.eclipse.ui.preferences.ScopedPreferenceStore;
  */
 class EmptyProjectConfigPage extends WizardPage {
 	
-	private IProject runtimeProject;
 	private Button jdtBuild;
 	private Button mvnBuild;
 	private boolean useJDTBuild;
@@ -40,9 +38,8 @@ class EmptyProjectConfigPage extends WizardPage {
 	/**
 	 * @param pageName
 	 */
-	EmptyProjectConfigPage(String pageName, IProject runtimeProject) {
+	EmptyProjectConfigPage(String pageName) {
 		super(pageName);
-		this.runtimeProject = runtimeProject;
 	}
 	
 	@Override
@@ -86,11 +83,6 @@ class EmptyProjectConfigPage extends WizardPage {
 	}
 	
 	protected boolean validatePage() {
-		if (jdtBuild.getSelection() && (runtimeProject==null || !runtimeProject.exists() || !runtimeProject.isAccessible())) {
-			setErrorMessage("for JDT build the project 'org.eclipse.etrice.runtime.java' must be in the workspace");
-			return false;
-		}
-		
 		useJDTBuild = jdtBuild==null || jdtBuild.getSelection();
 		
 		setErrorMessage(null);
