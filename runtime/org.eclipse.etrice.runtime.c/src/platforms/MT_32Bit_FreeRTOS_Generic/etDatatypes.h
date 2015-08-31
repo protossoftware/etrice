@@ -36,7 +36,7 @@
 
 /*--- Data types for runtime */
 
-#define ALIGNMENT		4	/* power of 2 and >= sizeof(int) ! */
+#define etALIGNMENT		4	/* power of 2 and >= sizeof(int) ! */
 
 typedef FILE* etFileHandle;
 

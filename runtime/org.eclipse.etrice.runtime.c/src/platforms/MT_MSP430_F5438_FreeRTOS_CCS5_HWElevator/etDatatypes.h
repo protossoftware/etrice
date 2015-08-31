@@ -67,7 +67,7 @@ typedef uint32 etUInt32;
 
 typedef bool etBool;
 
-#define ALIGNMENT		2	/* power of 2 and >= sizeof(int) ! */
+#define etALIGNMENT		2	/* power of 2 and >= sizeof(int) ! */
 
 typedef float32 etFloat32;
 typedef float32 etFloat64;
