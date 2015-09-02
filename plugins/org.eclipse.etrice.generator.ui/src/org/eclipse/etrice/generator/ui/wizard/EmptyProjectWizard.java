@@ -162,7 +162,7 @@ public class EmptyProjectWizard extends Wizard implements INewWizard {
 					ProjectCreator.createBuildProperties(projectURI.appendSegment("build.properties"), modelName);
 
 					ProjectCreator.createLaunchGeneratorConfig(projectURI.appendSegment("generate_" + modelName + ".launch"),
-							"java", "/" + projectName + "/model", modelName, additionalLaunchConfigLines);
+							"java", "/" + projectName + "/model", "Mapping", additionalLaunchConfigLines);
 
 					ProjectCreator.createLaunchJavaApplicationConfig(projectURI.appendSegment("run_" + modelName + ".launch"),
 							projectName, MODEL_NAME, "Node_node_subSystemRefRunner");
