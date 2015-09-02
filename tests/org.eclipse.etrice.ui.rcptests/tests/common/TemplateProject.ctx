@@ -1,0 +1,74 @@
+--- RCPTT testcase ---
+Format-Version: 1.0
+Context-Type: org.eclipse.rcptt.ctx.ecl
+Element-Name: TemplateProject
+Element-Type: context
+Element-Version: 2.0
+Id: _clrEQFGbEeWk3rbvuPRQHg
+Runtime-Version: 2.0.0.201506120617
+Save-Time: 9/3/15 12:58 AM
+
+------=_.ecl.context-718f04b4-ed39-33e3-af62-0995e4561998
+Content-Type: text/ecl
+Entry-Name: .ecl.context
+
+proc createTemplateProject {
+	get-menu "File/New/Other..." | click
+	with [get-window New] {
+		get-tree | select Class | select [concat "eTrice/" $targetLanguage "/eTrice " $targetLanguage
+			" Template Project"]
+		get-button "Next >" | click
+	}
+	if [$targetLanguage | equals Java] {
+		with [get-window "eTrice Java Template Project"] {
+			with [get-editbox -after [get-label "Project name:"]] {
+				set-text $projectName
+			}
+			get-button "Next >" | click
+			get-button "use Eclipse JDT build" | click
+			get-button Finish | click
+		}
+	}
+	get-window "New Example" | get-button Finish | click
+	if [$targetLanguage | equals C] {
+		get-window "Open Associated Perspective?" | get-button Yes | click
+	}
+}
+
+proc generateTemplateProject {
+	//get-menu "Window/Show View/Project Explorer" | click
+	get-view "Project Explorer" | get-tree | select [concat $projectName "/generate_Template.launch"] | get-menu
+		"Run As/1 generate_Template" | click
+	get-view Console | get-text-viewer | get-property text | contains "Info: -- finished code generation" | verify-true
+}
+
+proc runTemplateProject {
+	//get-menu "Window/Show View/Project Explorer" | click
+	if [$targetLanguage | equals C] {
+		get-view "Project Explorer" | get-tree | select [concat $projectName "/run_Template_" $targetOS ".launch"]
+			| get-menu [concat "Run As/1 run_Template_" $targetOS] | click
+	} -else {
+		get-view "Project Explorer" | get-tree | select [concat $projectName "/run_Template.launch"] | get-menu
+			"Run As/1 run_Template" | click
+	}
+	with [get-view Console] {
+		with [get-text-viewer] {
+			set-caret-pos 2 1
+			type-text quit
+			key-type Enter
+		}
+	}
+}
+
+proc openMSCTemplateProject {
+	//get-menu "Window/Show View/Project Explorer" | click
+	with [get-view "Project Explorer" | get-tree] {
+		select [concat $projectName "/log"] | get-menu Refresh | click
+		if [$targetLanguage | equals Java] {
+			select [concat $projectName "/log/subSystemRef_Async.seq"]
+		} -else {
+			select [concat $projectName "/log/msc.seq"]
+		} | get-menu "Open With/Text Editor" | click
+	}
+}
+------=_.ecl.context-718f04b4-ed39-33e3-af62-0995e4561998--

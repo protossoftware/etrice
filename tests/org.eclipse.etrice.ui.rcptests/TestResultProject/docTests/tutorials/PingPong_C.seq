@@ -1,0 +1,13 @@
+/LogSys/subSystemRef/topActor/sender >-- /LogSys/subSystemRef/topActor/receiver ping
+/LogSys/subSystemRef/topActor/sender >>> sendingPing
+/LogSys/subSystemRef/topActor/receiver >>> waitingForPing
+/LogSys/subSystemRef/timingService >>> Operational
+/LogSys/subSystemRef/topActor/sender --> /LogSys/subSystemRef/topActor/receiver ping
+/LogSys/subSystemRef/topActor/receiver >>> receivedPing
+/LogSys/subSystemRef/topActor/receiver --> /LogSys/subSystemRef/timingService startTimeout
+/LogSys/subSystemRef/timingService >>> Operational
+/LogSys/subSystemRef/timingService >-- /LogSys/subSystemRef/topActor/receiver timeout
+/LogSys/subSystemRef/topActor/receiver >-- /LogSys/subSystemRef/topActor/sender pong
+/LogSys/subSystemRef/topActor/receiver >>> sentPong
+/LogSys/subSystemRef/topActor/receiver --> /LogSys/subSystemRef/topActor/sender pong
+/LogSys/subSystemRef/topActor/sender >>> receivedPong

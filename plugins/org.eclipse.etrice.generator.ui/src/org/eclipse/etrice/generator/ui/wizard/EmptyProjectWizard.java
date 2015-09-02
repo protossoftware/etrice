@@ -9,7 +9,6 @@ package org.eclipse.etrice.generator.ui.wizard;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.ZipFile;
@@ -26,6 +25,8 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.SubProgressMonitor;
+import org.eclipse.emf.common.ui.dialogs.DiagnosticDialog;
+import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.BasicMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.etrice.generator.ui.Activator;
@@ -161,10 +162,10 @@ public class EmptyProjectWizard extends Wizard implements INewWizard {
 					
 					ProjectCreator.createBuildProperties(projectURI.appendSegment("build.properties"), modelName);
 
-					ProjectCreator.createLaunchGeneratorConfig(projectURI.appendSegment("generate_" + modelName + ".launch"),
+					ProjectCreator.createLaunchGeneratorConfig(projectURI.appendSegment("generate_Template.launch"),
 							"java", "/" + projectName + "/model", "Mapping", additionalLaunchConfigLines);
 
-					ProjectCreator.createLaunchJavaApplicationConfig(projectURI.appendSegment("run_" + modelName + ".launch"),
+					ProjectCreator.createLaunchJavaApplicationConfig(projectURI.appendSegment("run_Template.launch"),
 							projectName, MODEL_NAME, "Node_node_subSystemRefRunner");
 
 					if (config.useMVNBuild()) {
@@ -237,12 +238,17 @@ public class EmptyProjectWizard extends Wizard implements INewWizard {
 	};
 
 	private void importContent(IProject project, IProgressMonitor progressMonitor) {
-		URL contentURL = Activator.getInstance().getBundle().getEntry(PROJECT_CONTENT_ZIP);
+		java.net.URL contentURL = Activator.getInstance().getBundle().getEntry(PROJECT_CONTENT_ZIP);
 		
 		ZipFile zipFile = null;
 		try {
 			ImportOperation importOperation = null;
-			File file = new File(FileLocator.resolve(contentURL).toURI());
+			java.net.URL resolvedURL = FileLocator.toFileURL(contentURL);
+			// zip file is in jar, it gets temporary unpacked somehow
+			// We need to use the 3-arg constructor of URI in order to properly escape file system chars
+			java.net.URI resolvedURI = new java.net.URI(resolvedURL.getProtocol(), resolvedURL.getPath(), null);
+			
+			File file = new File(resolvedURI);
 			if (file.isFile() && file.canRead()) {
 				zipFile = new ZipFile(file);
 				if (zipFile != null) {
@@ -258,6 +264,7 @@ public class EmptyProjectWizard extends Wizard implements INewWizard {
 			}
 		}
 		catch (Exception e) {
+			DiagnosticDialog.open(getShell(), "EmptyProjectWizardError", contentURL.toString(), BasicDiagnostic.toDiagnostic(e));
 		}
 		finally {
 			if (zipFile != null) {
@@ -265,6 +272,7 @@ public class EmptyProjectWizard extends Wizard implements INewWizard {
 					zipFile.close();
 				}
 				catch (IOException e) {
+					DiagnosticDialog.open(getShell(), "EmptyProjectWizardError", "debug", BasicDiagnostic.toDiagnostic(e));
 				}
 			}
 		}

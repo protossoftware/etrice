@@ -1,0 +1,80 @@
+<project name="org.eclipse.etrice.ui.rcptests" basedir="." default="test">
+	<!-- May use external testContainer containing: AUT, runner + their workspaces -->
+	<property name="testContainer.path" location="C:/Users/Juergen/workspaces/rcpTests-headless" />
+
+	<property name="aut.path" location="${testContainer.path}/aut/eclipse" />
+	<property name="aut.workspace" location="${testContainer.path}/aut-workspace-" />
+	<property name="runner.path" location="${testContainer.path}/runner/eclipse" />
+	<property name="runner.workspace" location="${testContainer.path}/runner-workspace" />
+
+	<!-- private properties-->
+	<property name="output" value="./output" />
+
+	<!-- show ALL used variables -->
+	<target name="showVars">
+		<echo>    ant.project.name = ${ant.project.name}        	</echo>
+		<echo>        test.results = ${test.results}           		</echo>
+		<echo>        		output = ${output}          		 	</echo>
+		<echo>     		   basedir = ${basedir}        				</echo>
+		<echo>     		  aut.path = ${aut.path}       				</echo>
+		<echo>     	 aut.workspace = ${aut.workspace}  				</echo>
+		<echo>     	   runner.path = ${runner.path}    				</echo>
+		<echo>    runner.workspace = ${runner.workspace}  			</echo>
+	</target>
+
+	<target name="set_local_tr" unless="test.results">
+		<property name="test.results" value="./results" />
+	</target>
+
+	<target name="setVars" depends="set_local_tr,showVars" />
+
+	<target name="init" depends="setVars">
+		<delete dir="${output}" quiet="true" />
+		<delete dir="${test.results}" quiet="true" />
+		<mkdir dir="${output}" />
+		<mkdir dir="${test.results}" />
+	</target>
+
+
+	<target name="test" depends="init">
+		<java jar="${runner.path}/plugins/org.eclipse.equinox.launcher_1.3.100.v20150511-1540.jar" output="${output}/runner.txt" fork="true">
+			<arg value="-application" />
+			<arg value="org.eclipse.rcptt.runner.headless" />
+
+			<arg value="-data" />
+			<arg value="${runner.workspace}" />
+
+			<arg value="-aut" />
+			<arg value="${aut.path}" />
+
+			<arg value="-autWsPrefix" />
+			<arg value="${aut.workspace}" />
+
+			<arg value="-autConsolePrefix" />
+			<arg value="${output}/aut-out-" />
+
+			<arg value="-autVMArgs" />
+			<arg value="-Xmx1024m;-XX:MaxPermSize=512m" />
+
+			<!--
+			<arg value="-htmlReport" />
+			<arg value="${html-report}" />
+-->
+			<arg value="-junitReport" />
+			<arg value="${test.results}/ui.rcpTests.xml" />
+
+			<arg value="-import" />
+			<arg value="${basedir}" />
+
+			<arg value="-testOptions" />
+			<arg value="testExecTimeout=300;execTimeout=3600" />
+
+			<arg value="-suites" />
+			<arg value="AllTests" /><!-- <arg value="AllTests_Release" /> -->
+	<!--		
+			<arg value="-injection:site" />
+			<arg value="file:/C:/Users/Juergen/Desktop/update_site;eTrice" />
+	-->		 
+		</java>
+	</target>
+</project>

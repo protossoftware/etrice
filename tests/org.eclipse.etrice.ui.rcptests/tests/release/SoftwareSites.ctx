@@ -1,0 +1,27 @@
+--- RCPTT testcase ---
+Format-Version: 1.0
+Context-Type: org.eclipse.rcptt.ctx.parameters
+Element-Name: SoftwareSites
+Element-Type: context
+Element-Version: 2.0
+Id: _wjYe4FJWEeW6mYfJrKLXVg
+Runtime-Version: 2.0.0.201506120617
+Save-Time: 9/4/15 3:24 PM
+
+------=_.description-216f885c-d591-38ce-8ea2-e4f8cb4d6ffa
+Content-Type: text/plain
+Entry-Name: .description
+
+eTriceSite:
+	file:/C:/Users/Juergen/Desktop/update_site/
+	http://download.eclipse.org/etrice/updates/nightly
+------=_.description-216f885c-d591-38ce-8ea2-e4f8cb4d6ffa--
+------=_.parameters.context-2e023de5-3294-36a9-ac1d-6701f05a40ee
+Content-Type: text/properties
+Entry-Name: .parameters.context
+
+#Fri Sep 04 15:24:15 CEST 2015
+eclipseSite=http\://download.eclipse.org/releases/luna/
+eTriceSite=http\://download.eclipse.org/etrice/updates/nightly
+
+------=_.parameters.context-2e023de5-3294-36a9-ac1d-6701f05a40ee--

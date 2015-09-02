@@ -1,0 +1,17 @@
+--- RCPTT testcase ---
+Format-Version: 1.0
+Element-Name: DocuTestSuite
+Element-Type: testsuite
+Element-Version: 2.0
+Id: _BOu6YFFxEeWwuNzjicD2TQ
+Runtime-Version: 2.0.0.201506120617
+Save-Time: 9/2/15 9:23 PM
+
+------=_testcase-items-62c497da-4241-31f4-811a-6b453a3ecff8
+Content-Type: text/testcase
+Entry-Name: testcase-items
+
+_mf8ikFF7EeWk3rbvuPRQHg	// kind: 'test' name: 'GettingStarted' path: 'tutorials/GettingStarted.test'
+_oVpNAFGIEeWk3rbvuPRQHg	// kind: 'test' name: 'PingPong' path: 'tutorials/PingPong.test'
+
+------=_testcase-items-62c497da-4241-31f4-811a-6b453a3ecff8--

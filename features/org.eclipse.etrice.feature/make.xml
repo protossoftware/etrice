@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project default="feature_export" name="build">
+	<target name="feature_export">
+		<pde.exportFeatures destination="C:\Users\Juergen\Desktop\update site" exportSource="false" exportType="directory" features="org.eclipse.etrice.feature" qualifier="201509030042" useJARFormat="true"/>
+	</target>
+</project>

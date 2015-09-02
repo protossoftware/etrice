@@ -1,0 +1,17 @@
+--- RCPTT testcase ---
+Format-Version: 1.0
+Element-Name: AllTests_Release
+Element-Type: testsuite
+Element-Version: 2.0
+Id: _in-_MFJPEeW6mYfJrKLXVg
+Runtime-Version: 2.0.0.201506120617
+Save-Time: 9/3/15 5:22 PM
+
+------=_testcase-items-62c497da-4241-31f4-811a-6b453a3ecff8
+Content-Type: text/testcase
+Entry-Name: testcase-items
+
+_BOu6YFFxEeWwuNzjicD2TQ	// kind: 'suite' name: 'DocuTestSuite' path: 'docTests/DocuTestSuite.suite'
+_7i9L0FJLEeW6mYfJrKLXVg	// kind: 'test' name: 'InstallNewSoftwareETrice' path: 'release/InstallNewSoftwareETrice.test'
+
+------=_testcase-items-62c497da-4241-31f4-811a-6b453a3ecff8--

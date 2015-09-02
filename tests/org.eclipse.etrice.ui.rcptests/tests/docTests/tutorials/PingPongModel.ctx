@@ -1,0 +1,302 @@
+--- RCPTT testcase ---
+Format-Version: 1.0
+Context-Type: org.eclipse.rcptt.ctx.ecl
+Element-Name: PingPongModel
+Element-Type: context
+Element-Version: 2.0
+Id: _zARzoFGcEeWk3rbvuPRQHg
+Runtime-Version: 2.0.0.201506120617
+Save-Time: 9/3/15 10:51 AM
+
+------=_.ecl.context-718f04b4-ed39-33e3-af62-0995e4561998
+Content-Type: text/ecl
+Entry-Name: .ecl.context
+
+proc pingPongModel {
+	get-view Outline | get-tree | select "TemplateModel/TopActor" | select "TemplateModel/TopActor" | get-menu
+		"Edit Structure" | click
+	with [get-editor "Structure of TopActor"] {
+		with [get-palette | get-palette-entry ActorRef] {
+			mouse-move 62 8 button1 -height 23 -width 130
+			mouse-press 62 8 button1 -height 23 -width 130
+			mouse-release 62 8 button1 524288 -height 23 -width 130
+		}
+		with [get-diagram -index 1 | get-edit-part -name "Structure of TopActor" | get-edit-part -className "Containe" +
+			"rShapeEditPart"] {
+			mouse-move 152 149 button1 -height 580 -width 880
+			mouse-press 152 149 button1 -height 580 -width 880
+			mouse-release 152 149 button1 524288 -height 580 -width 880
+		}
+	}
+	with [get-window -class ActorContainerRefPropertyDialog] {
+		get-editbox -after [get-label "Name:"] | set-text sender
+		with [get-combo -after [get-label "Actor Class:"]] {
+			select Receiver
+			select Sender
+		}
+		get-button OK | click
+	}
+	with [get-editor "Structure of TopActor"] {
+		with [get-palette | get-palette-entry ActorRef] {
+			mouse-move 38 11 button1 -height 23 -width 130
+			mouse-press 38 11 button1 -height 23 -width 130
+			mouse-release 38 11 button1 524288 -height 23 -width 130
+		}
+		with [get-diagram -index 1 | get-edit-part -name "Structure of TopActor" | get-edit-part -className "Containe" +
+			"rShapeEditPart"] {
+			mouse-move 352 315 button1 -height 580 -width 880
+			mouse-press 352 315 button1 -height 580 -width 880
+			mouse-release 352 315 button1 524288 -height 580 -width 880
+		}
+	}
+	with [get-window -class ActorContainerRefPropertyDialog] {
+		get-editbox -after [get-label "Name:"] | set-text receiver
+		get-combo -after [get-label "Actor Class:"] | select Receiver
+		get-button OK | click
+	}
+	with [get-editor "Structure of TopActor"] {
+		with [get-palette | get-palette-entry Binding] {
+			mouse-move 57 13 button1 -height 23 -width 130
+			mouse-press 57 13 button1 -height 23 -width 130
+			mouse-release 57 13 button1 524288 -height 23 -width 130
+		}
+		with [get-diagram -index 1] {
+			with [get-edit-part -name "Structure of TopActor" | get-edit-part -className ContainerShapeEditPart] {
+				with [get-edit-part -text "sender\n(Sender)" | get-edit-part -text sendPort] {
+					mouse-move 28 31 button1 -height 60 -width 60
+					mouse-press 28 31 button1 -height 60 -width 60
+					mouse-release 28 31 button1 524288 -height 60 -width 60
+				}
+				with [get-edit-part -text "receiver\n(Receiver)" | get-edit-part -text recvPort] {
+					mouse-move 35 35 button1 -height 60 -width 60
+					mouse-press 35 35 button1 -height 60 -width 60
+					mouse-release 35 35 button1 524288 -height 60 -width 60
+				}
+			}
+			key-type ESC
+			with [get-edit-part -name "Structure of TopActor" | get-edit-part -className ContainerShapeEditPart] {
+				with [get-edit-part -text "receiver\n(Receiver)"] {
+					mouse-move 83 84 button3 -height 140 -width 240
+					mouse-press 83 84 button3 -height 140 -width 240
+					mouse-release 83 84 button3 2097152 -height 140 -width 240
+				}
+				with [get-edit-part -text "sender\n(Sender)"] {
+					mouse-press 150 61 button3 -height 140 -width 240
+					mouse-move 150 61 -mask 2097152 -height 140 -width 240
+				}
+				mouse-drag 182 140 button3 2097152 -height 580 -width 880
+				mouse-release 182 140 button3 2097152 -height 580 -width 880
+			}
+			get-menu "Open Ref Behavior" | click
+		}
+	}
+	with [get-editor "Behavior of Sender"] {
+		with [get-palette | get-palette-entry "Initial Point"] {
+			mouse-move 49 10 button1 -height 23 -width 130
+			mouse-press 49 10 button1 -height 23 -width 130
+			mouse-release 49 10 button1 524288 -height 23 -width 130
+		}
+		with [get-diagram -index 1 | get-edit-part -name "Behavior of Sender" | get-edit-part -text "/"] {
+			mouse-move 112 110 button1 -height 580 -width 880
+			mouse-press 112 110 button1 -height 580 -width 880
+			mouse-release 112 110 button1 524288 -height 580 -width 880
+		}
+		with [get-palette | get-palette-entry State] {
+			mouse-move 41 13 button1 -height 23 -width 130
+			mouse-press 41 13 button1 -height 23 -width 130
+			mouse-release 41 13 button1 524288 -height 23 -width 130
+		}
+		with [get-diagram -index 1 | get-edit-part -name "Behavior of Sender" | get-edit-part -text "/"] {
+			mouse-move 196 191 button1 -height 580 -width 880
+			mouse-press 196 191 button1 -height 580 -width 880
+			mouse-release 196 191 button1 524288 -height 580 -width 880
+		}
+	}
+	with [get-window -class StatePropertyDialog] {
+		get-editbox -after [get-label "Name:"] | set-text sendingPing
+		get-text-viewer -after [get-label "Entry Code:"] | type-text "sendPort.ping();"
+		get-button OK | click
+	}
+	with [get-editor "Behavior of Sender"] {
+		with [get-palette | get-palette-entry State] {
+			mouse-move 43 15 button1 -height 23 -width 130
+			mouse-press 43 15 button1 -height 23 -width 130
+			mouse-release 43 15 button1 524288 -height 23 -width 130
+		}
+		with [get-diagram -index 1 | get-edit-part -name "Behavior of Sender" | get-edit-part -text "/"] {
+			mouse-move 405 188 button1 -height 580 -width 880
+			mouse-press 405 188 button1 -height 580 -width 880
+			mouse-release 405 188 button1 524288 -height 580 -width 880
+		}
+	}
+	with [get-window -class StatePropertyDialog] {
+		get-editbox -after [get-label "Name:"] | set-text receivedPong
+		get-button OK | click
+	}
+	with [get-editor "Behavior of Sender"] {
+		with [get-palette | get-palette-entry Transition] {
+			mouse-move 59 5 button1 -height 23 -width 130
+			mouse-press 59 5 button1 -height 23 -width 130
+			mouse-release 59 5 button1 524288 -height 23 -width 130
+		}
+		with [get-diagram -index 1 | get-edit-part -name "Behavior of Sender" | get-edit-part -text "/"] {
+			with [get-edit-part -text I] {
+				mouse-move 22 17 button1 -height 40 -width 40
+				mouse-press 22 17 button1 -height 40 -width 40
+				mouse-release 22 17 button1 524288 -height 40 -width 40
+			}
+			with [get-edit-part -text sendingPing] {
+				mouse-move 66 40 button1 -height 90 -width 128
+				mouse-press 66 40 button1 -height 90 -width 128
+			}
+		}
+	}
+	get-window -class TransitionPropertyDialog | get-button OK | click
+	with [get-editor "Behavior of Sender" | get-diagram -index 1 | get-edit-part -name "Behavior of Sender"
+		| get-edit-part -text "/"] {
+		with [get-edit-part -text sendingPing] {
+			mouse-move 71 50 button1 -height 90 -width 128
+			mouse-press 71 50 button1 -height 90 -width 128
+			mouse-release 71 50 button1 524288 -height 90 -width 128
+		}
+		with [get-edit-part -text receivedPong] {
+			mouse-move 67 41 button1 -height 90 -width 136
+			mouse-press 67 41 button1 -height 90 -width 136
+		}
+	}
+	with [get-window -class TransitionPropertyDialog] {
+		get-editbox -after [get-label "Name:"] | set-focus
+		get-button OK | click
+	}
+	with [get-editor "Structure of TopActor" | get-diagram -index 1] {
+		with [get-edit-part -name "Structure of TopActor" | get-edit-part -className ContainerShapeEditPart
+			| get-edit-part -text "receiver\n(Receiver)"] {
+			mouse-move 110 66 button3 -height 140 -width 240
+			mouse-press 110 66 button3 -height 140 -width 240
+			mouse-release 110 66 button3 2097152 -height 140 -width 240
+		}
+		get-menu "Open Ref Behavior" | click
+	}
+
+	with [get-editor "Behavior of Receiver"] {
+		with [get-palette | get-palette-entry "Initial Point"] {
+			mouse-move 52 8 button1 -height 23 -width 130
+			mouse-press 52 8 button1 -height 23 -width 130
+			mouse-release 52 8 button1 524288 -height 23 -width 130
+		}
+		with [get-diagram -index 1 | get-edit-part -name "Behavior of Receiver" | get-edit-part -text "/"] {
+			mouse-move 95 96 button1 -height 580 -width 880
+			mouse-press 95 96 button1 -height 580 -width 880
+			mouse-release 95 96 button1 524288 -height 580 -width 880
+		}
+		with [get-palette | get-palette-entry State] {
+			mouse-move 48 17 button1 -height 23 -width 130
+			mouse-press 48 17 button1 -height 23 -width 130
+			mouse-release 48 17 button1 524288 -height 23 -width 130
+		}
+		with [get-diagram -index 1 | get-edit-part -name "Behavior of Receiver" | get-edit-part -text "/"] {
+			mouse-move 153 168 button1 -height 580 -width 880
+			mouse-press 153 168 button1 -height 580 -width 880
+			mouse-release 153 168 button1 524288 -height 580 -width 880
+		}
+	}
+	with [get-window -class StatePropertyDialog] {
+		with [get-editbox -after [get-label "Name:"]] {
+			set-text waitingForPing
+			set-focus
+		}
+		get-button OK | click
+	}
+	with [get-editor "Behavior of Receiver"] {
+		with [get-palette | get-palette-entry State] {
+			mouse-move 43 12 button1 -height 23 -width 130
+			mouse-press 43 12 button1 -height 23 -width 130
+			mouse-release 43 12 button1 524288 -height 23 -width 130
+		}
+		with [get-diagram -index 1 | get-edit-part -name "Behavior of Receiver" | get-edit-part -text "/"] {
+			mouse-move 360 172 button1 -height 580 -width 880
+			mouse-press 360 172 button1 -height 580 -width 880
+			mouse-release 360 172 button1 524288 -height 580 -width 880
+		}
+	}
+	with [get-window -class StatePropertyDialog] {
+		get-editbox -after [get-label "Name:"] | set-text receivedPing
+		get-text-viewer -after [get-label "Entry Code:"] | type-text "timingService.startTimeout(500);"
+		get-button OK | click
+	}
+	with [get-editor "Behavior of Receiver"] {
+		with [get-palette | get-palette-entry State] {
+			mouse-move 48 16 button1 -height 23 -width 130
+			mouse-press 48 16 button1 -height 23 -width 130
+			mouse-release 48 16 button1 524288 -height 23 -width 130
+		}
+		with [get-diagram -index 1 | get-edit-part -name "Behavior of Receiver" | get-edit-part -text "/"] {
+			mouse-move 363 300 button1 -height 580 -width 880
+			mouse-press 363 300 button1 -height 580 -width 880
+			mouse-release 363 300 button1 524288 -height 580 -width 880
+		}
+	}
+	with [get-window -class StatePropertyDialog] {
+		get-editbox -after [get-label "Name:"] | set-text sentPong
+		get-text-viewer -after [get-label "Entry Code:"] | type-text "recvPort.pong();"
+		get-button OK | click
+	}
+	with [get-editor "Behavior of Receiver"] {
+		with [get-palette | get-palette-entry Transition] {
+			mouse-move 39 14 button1 -height 23 -width 130
+			mouse-press 39 14 button1 -height 23 -width 130
+			mouse-release 39 14 button1 524288 -height 23 -width 130
+		}
+		with [get-diagram -index 1 | get-edit-part -name "Behavior of Receiver" | get-edit-part -text "/"] {
+			with [get-edit-part -text I] {
+				mouse-move 20 20 button1 -height 40 -width 40
+				mouse-press 20 20 button1 -height 40 -width 40
+				mouse-release 20 20 button1 524288 -height 40 -width 40
+			}
+			with [get-edit-part -text waitingForPing] {
+				mouse-move 55 42 button1 -height 90 -width 141
+				mouse-press 55 42 button1 -height 90 -width 141
+			}
+		}
+	}
+	get-window -class TransitionPropertyDialog | get-button OK | click
+	with [get-editor "Behavior of Receiver" | get-diagram -index 1 | get-edit-part -name "Behavior of Receiver"
+		| get-edit-part -text "/"] {
+		with [get-edit-part -text waitingForPing] {
+			mouse-move 86 41 button1 -height 90 -width 141
+			mouse-press 86 41 button1 -height 90 -width 141
+			mouse-release 86 41 button1 524288 -height 90 -width 141
+		}
+		with [get-edit-part -text receivedPing] {
+			mouse-move 68 50 button1 -height 90 -width 132
+			mouse-press 68 50 button1 -height 90 -width 132
+		}
+	}
+	with [get-window -class TransitionPropertyDialog] {
+		get-editbox -after [get-label "Name:"] | set-focus
+		get-combo -after [get-label "Interface Item:"] | select recvPort
+		get-combo -after [get-label "Message:"] | select ping
+		get-button OK | click
+	}
+	with [get-editor "Behavior of Receiver" | get-diagram -index 1 | get-edit-part -name "Behavior of Receiver"
+		| get-edit-part -text "/"] {
+		with [get-edit-part -text receivedPing] {
+			mouse-move 91 46 button1 -height 90 -width 132
+			mouse-press 91 46 button1 -height 90 -width 132
+			mouse-release 91 46 button1 524288 -height 90 -width 132
+		}
+		with [get-edit-part -text sentPong] {
+			mouse-move 61 43 button1 -height 90 -width 120
+			mouse-press 61 43 button1 -height 90 -width 120
+		}
+	}
+	with [get-window -class TransitionPropertyDialog] {
+		get-editbox -after [get-label "Name:"] | set-focus
+		get-combo -after [get-label "Interface Item:"] | select timingService
+		get-combo -after [get-label "Message:"] | select timeout
+		get-button OK | click
+	}
+
+	get-button "Save (M1+S)" | click
+}
+------=_.ecl.context-718f04b4-ed39-33e3-af62-0995e4561998--

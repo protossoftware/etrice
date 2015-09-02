@@ -1,0 +1,39 @@
+--- RCPTT testcase ---
+Format-Version: 1.0
+Contexts: _bjDf8FG3EeWk3rbvuPRQHg,_3Cyp0FF7EeWk3rbvuPRQHg,_clrEQFGbEeWk3rbvuPRQHg,_zARzoFGcEeWk3rbvuPRQHg,_0hYOcFGmEeWk3rbvuPRQHg
+Element-Name: PingPong
+Element-Type: testcase
+Element-Version: 3.0
+External-Reference: 
+Id: _oVpNAFGIEeWk3rbvuPRQHg
+Runtime-Version: 2.0.0.201506120617
+Save-Time: 9/3/15 5:17 PM
+Testcase-Type: ecl
+
+------=_.content-0a7243a0-75d3-3d5f-9791-539de0e5b7ac
+Content-Type: text/ecl
+Entry-Name: .content
+
+createTemplateProject
+
+pingPongModel
+
+generateTemplateProject
+
+runTemplateProject
+
+openMSCTemplateProject
+
+// supported in nightly (2.1.x)
+//if [$targetLanguage | equals Java] {
+//	get-file [concat "workspace:/" $projectName "/log/subSystemRef_Async.seq"] | get exists | verify-true
+//	get-file "workspace:/TestResultProject/docuTests/tutorials/PingPong_Java.seq" | get exists | verify-true
+//	read-file [concat "workspace:/" $projectName "/log/subSystemRef_Async.seq"] | equals [read-file "workspace:/TestRes" +
+//		"ultProject/docTests/tutorials/PingPong_Java.seq"] | verify-true
+//} -else {
+//	get-file [concat "workspace:/" $projectName "/log/msc.seq"] | get exists | verify-true
+//	get-file "workspace:/TestResultProject/docuTests/tutorials/PingPong_C.seq" | get exists | verify-true
+//	read-file [concat "workspace:/" $projectName "/log/msc.seq"] | equals [read-file "workspace:/TestResultProject/doc" +
+//		"Tests/tutorials/PingPong_C.seq"] | verify-true
+//}
+------=_.content-0a7243a0-75d3-3d5f-9791-539de0e5b7ac--
