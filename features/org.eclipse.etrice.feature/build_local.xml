@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project default="export" basedir="." name="org.eclipse.etrice.feature">
+	<target name="export">
+		<delete dir="./export" quiet="true" />
+		<mkdir dir="./export" />
+		<!-- is asynchronous and requires eclipse UI, thus cannot be integrated in other ant jobs (https://bugs.eclipse.org/bugs/show_bug.cgi?id=58413) -->
+		<pde.exportFeatures destination="./export" useworkspacecompiledclasses="true" exportSource="false" exportType="directory" features="org.eclipse.etrice.feature" useJARFormat="true" />
+	</target>
+</project>

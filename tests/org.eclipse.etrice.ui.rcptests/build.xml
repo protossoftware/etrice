@@ -1,13 +1,34 @@
-<project name="org.eclipse.etrice.ui.rcptests" basedir="." default="test">
-	<!-- May use external testContainer containing: AUT, runner + their workspaces -->
-	<property name="testContainer.path" location="C:/Users/Juergen/workspaces/rcpTests-headless" />
+<!--
+	Copyright (c) 2015 protos software gmbh (http://www.protos.de).
+	All rights reserved. This program and the accompanying materials
+	are made available under the terms of the Eclipse Public License v1.0
+	which accompanies this distribution, and is available at
+	http://www.eclipse.org/legal/epl-v10.html
+	 
+	CONTRIBUTORS:
+			Juergen Haug (initial contribution)
+			
+	Local UI unit/release tests based on Eclipse RCPTT
+-->
 
-	<property name="aut.path" location="${testContainer.path}/aut/eclipse" />
-	<property name="aut.workspace" location="${testContainer.path}/aut-workspace-" />
-	<property name="runner.path" location="${testContainer.path}/runner/eclipse" />
-	<property name="runner.workspace" location="${testContainer.path}/runner-workspace" />
+<project name="org.eclipse.etrice.ui.rcptests" basedir="." default="run_unitTests_local">
+
+	<!--Prerequisite: download rcptt runner 2.0.0 https://www.eclipse.org/rcptt/download/ -->
+	<property name="rcpttRunner.path" location="C:\Users\Juergen\Eclipse\rcpttRunner" />
+
+	<!--Prerequisite: test container == "workspace" for test execution -->
+	<property name="testContainer.path" location="C:\Users\Juergen\workspaces\rcpTests-headless" />
+
+	<!-- AUT == application under Test == eclipse installation without eTrice -->
+	<property name="autLocal.path" location="${eclipse.home}" />
+	<property name="autRelease.path" location="C:\Users\Juergen\Eclipse\eTrice" />
+
+	<!-- local exported eTrice feature: use org.eclipse.etrice.feature/build_local.xml-->
+	<property name="eTriceExport.path" location="../../features/org.eclipse.etrice.feature/export" />
 
 	<!-- private properties-->
+	<property name="aut.workspace" location="${testContainer.path}/aut-workspace-" />
+	<property name="runner.workspace" location="${testContainer.path}/runner-workspace" />
 	<property name="output" value="./output" />
 
 	<!-- show ALL used variables -->
@@ -16,10 +37,9 @@
 		<echo>        test.results = ${test.results}           		</echo>
 		<echo>        		output = ${output}          		 	</echo>
 		<echo>     		   basedir = ${basedir}        				</echo>
-		<echo>     		  aut.path = ${aut.path}       				</echo>
-		<echo>     	 aut.workspace = ${aut.workspace}  				</echo>
-		<echo>     	   runner.path = ${runner.path}    				</echo>
-		<echo>    runner.workspace = ${runner.workspace}  			</echo>
+		<echo>       autBasis.path = ${autBasis.path}       		</echo>
+		<echo>    rcpttRunner.path = ${rcpttRunner.path}    		</echo>
+		<echo>  testContainer.path = ${testContainer.path}    		</echo>
 	</target>
 
 	<target name="set_local_tr" unless="test.results">
@@ -31,50 +51,81 @@
 	<target name="init" depends="setVars">
 		<delete dir="${output}" quiet="true" />
 		<delete dir="${test.results}" quiet="true" />
+
 		<mkdir dir="${output}" />
 		<mkdir dir="${test.results}" />
+		<mkdir dir="${testContainer.path}" />
 	</target>
 
-
-	<target name="test" depends="init">
-		<java jar="${runner.path}/plugins/org.eclipse.equinox.launcher_1.3.100.v20150511-1540.jar" output="${output}/runner.txt" fork="true">
-			<arg value="-application" />
-			<arg value="org.eclipse.rcptt.runner.headless" />
-
-			<arg value="-data" />
-			<arg value="${runner.workspace}" />
-
-			<arg value="-aut" />
-			<arg value="${aut.path}" />
-
-			<arg value="-autWsPrefix" />
-			<arg value="${aut.workspace}" />
-
-			<arg value="-autConsolePrefix" />
-			<arg value="${output}/aut-out-" />
-
-			<arg value="-autVMArgs" />
-			<arg value="-Xmx1024m;-XX:MaxPermSize=512m" />
-
-			<!--
-			<arg value="-htmlReport" />
-			<arg value="${html-report}" />
--->
-			<arg value="-junitReport" />
-			<arg value="${test.results}/ui.rcpTests.xml" />
-
-			<arg value="-import" />
-			<arg value="${basedir}" />
-
-			<arg value="-testOptions" />
-			<arg value="testExecTimeout=300;execTimeout=3600" />
-
+	<!--
+		Release tests of nightly: performing installation from nightly update site + unit tests
+		Use appropriate eclipse installation
+	-->
+	<target name="run_releaseTestsNightly" depends="init">
+		<echo>AUT should match END-USER eclipse installation</echo>
+		<delete dir="${testContainer.path}" quiet="true" />
+		<mkdir dir="${testContainer.path}" />
+		<runTest autPath="${autRelease.path}">
 			<arg value="-suites" />
-			<arg value="AllTests" /><!-- <arg value="AllTests_Release" /> -->
-	<!--		
-			<arg value="-injection:site" />
-			<arg value="file:/C:/Users/Juergen/Desktop/update_site;eTrice" />
-	-->		 
-		</java>
+			<arg value="ReleaseTests_nightly" />
+		</runTest>
 	</target>
+
+	<!--
+		Prerequisite:
+			1. exported eTrice feature: executed org.eclipse.etrice.feature/build_local.xml
+			2. AUT == eclipse installation containing eTrice dependencies
+	-->
+	<target name="run_unitTests_local" depends="init">
+		<echo>expecting exported eTrice feature</echo>
+		<echo>expecting AUT with all eTrice dependencies</echo>
+		<runTest autPath="${autLocal.path}">
+			<arg value="-suites" />
+			<arg value="UnitTests" />
+			<arg value="-injection:dir" />
+			<arg value="${eTriceExport.path}" />
+		</runTest>
+	</target>
+
+	<macrodef name="runTest">
+		<attribute name="autPath" />
+		<element name="argElements" implicit="yes" />
+		<sequential>
+			<echo>starting runner</echo>
+			<!-- https://www.eclipse.org/rcptt/documentation/userguide/runner/arguments/ -->
+			<java jar="${rcpttRunner.path}/plugins/org.eclipse.equinox.launcher_1.3.100.v20150511-1540.jar" output="${output}/runner.txt" failonerror="true" fork="true">
+				<arg value="-application" />
+				<arg value="org.eclipse.rcptt.runner.headless" />
+
+				<arg value="-data" />
+				<arg value="${runner.workspace}" />
+
+				<arg value="-aut" />
+				<arg value="@{autPath}" />
+
+				<arg value="-autWsPrefix" />
+				<arg value="${aut.workspace}" />
+
+				<arg value="-autConsolePrefix" />
+				<arg value="${output}/aut-out-" />
+
+				<arg value="-autVMArgs" />
+				<arg value="-Xms40m;-Xmx512m;-XX:MaxPermSize=256m;-ea" /><!--<arg value="-Xmx1024m;-XX:MaxPermSize=512m" />-->
+
+				<arg value="-htmlReport" />
+				<arg value="${test.results}/uiTests.html" />
+
+				<arg value="-junitReport" />
+				<arg value="${test.results}/uiTests.xml" />
+
+				<arg value="-import" />
+				<arg value="${basedir}" />
+
+				<arg value="-testOptions" />
+				<arg value="testExecTimeout=300;execTimeout=3600" />
+
+				<argElements />
+			</java>
+		</sequential>
+	</macrodef>
 </project>

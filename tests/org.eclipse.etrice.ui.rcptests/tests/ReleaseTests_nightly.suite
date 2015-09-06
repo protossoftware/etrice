@@ -1,16 +1,17 @@
 --- RCPTT testcase ---
 Format-Version: 1.0
-Element-Name: AllTests
+Element-Name: ReleaseTests_nightly
 Element-Type: testsuite
 Element-Version: 2.0
-Id: _x63CsFGnEeWk3rbvuPRQHg
+Id: _in-_MFJPEeW6mYfJrKLXVg
 Runtime-Version: 2.0.0.201506120617
-Save-Time: 9/2/15 9:22 PM
+Save-Time: 9/6/15 10:58 AM
 
 ------=_testcase-items-62c497da-4241-31f4-811a-6b453a3ecff8
 Content-Type: text/testcase
 Entry-Name: testcase-items
 
-_BOu6YFFxEeWwuNzjicD2TQ	// kind: 'suite' name: 'DocuTestSuite' path: 'docu/DocuTestSuite.suite'
+_BOu6YFFxEeWwuNzjicD2TQ	//
+_7i9L0FJLEeW6mYfJrKLXVg	//
 
 ------=_testcase-items-62c497da-4241-31f4-811a-6b453a3ecff8--

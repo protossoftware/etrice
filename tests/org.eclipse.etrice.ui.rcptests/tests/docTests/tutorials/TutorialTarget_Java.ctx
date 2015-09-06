@@ -1,20 +1,19 @@
 --- RCPTT testcase ---
 Format-Version: 1.0
 Context-Type: org.eclipse.rcptt.ctx.parameters
-Element-Name: Target_Java
+Element-Name: TutorialTarget_Java
 Element-Type: context
 Element-Version: 2.0
 Id: _2K8qwFGaEeWk3rbvuPRQHg
 Runtime-Version: 2.0.0.201506120617
-Save-Time: 9/2/15 9:07 PM
+Save-Time: 9/6/15 1:24 PM
 
 ------=_.parameters.context-2e023de5-3294-36a9-ac1d-6701f05a40ee
 Content-Type: text/properties
 Entry-Name: .parameters.context
 
-#Wed Sep 02 21:07:39 CEST 2015
+#Sun Sep 06 13:24:16 CEST 2015
 projectName=TemplateModel
 targetLanguage=Java
-targetOS=
 
 ------=_.parameters.context-2e023de5-3294-36a9-ac1d-6701f05a40ee--

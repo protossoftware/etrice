@@ -1,26 +1,25 @@
 --- RCPTT testcase ---
 Format-Version: 1.0
 Context-Type: org.eclipse.rcptt.ctx.parameters
-Element-Name: Target_C
+Element-Name: TutorialTarget_C
 Element-Type: context
 Element-Version: 2.0
 Id: _j2uz4FGXEeWk3rbvuPRQHg
 Runtime-Version: 2.0.0.201506120617
-Save-Time: 9/2/15 8:43 PM
+Save-Time: 9/6/15 1:24 PM
 
 ------=_.description-216f885c-d591-38ce-8ea2-e4f8cb4d6ffa
 Content-Type: text/plain
 Entry-Name: .description
 
-targetOS = 'Windows' or 'Linux'
+targetOS: see EnvironmentScript
 ------=_.description-216f885c-d591-38ce-8ea2-e4f8cb4d6ffa--
 ------=_.parameters.context-2e023de5-3294-36a9-ac1d-6701f05a40ee
 Content-Type: text/properties
 Entry-Name: .parameters.context
 
-#Wed Sep 02 20:43:26 CEST 2015
+#Sun Sep 06 13:24:21 CEST 2015
 projectName=org.eclipse.etrice.template.c
 targetLanguage=C
-targetOS=Windows
 
 ------=_.parameters.context-2e023de5-3294-36a9-ac1d-6701f05a40ee--
