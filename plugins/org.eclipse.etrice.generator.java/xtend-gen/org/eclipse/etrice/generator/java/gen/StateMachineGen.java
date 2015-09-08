@@ -45,13 +45,13 @@ public class StateMachineGen extends GenericStateMachineGenerator {
       {
         boolean _or = false;
         GlobalSettings _settings = Main.getSettings();
-        boolean _generateMSCInstrumentation = _settings.generateMSCInstrumentation();
-        if (_generateMSCInstrumentation) {
+        boolean _isGenerateMSCInstrumentation = _settings.isGenerateMSCInstrumentation();
+        if (_isGenerateMSCInstrumentation) {
           _or = true;
         } else {
           GlobalSettings _settings_1 = Main.getSettings();
-          boolean _generateWithVerboseOutput = _settings_1.generateWithVerboseOutput();
-          _or = _generateWithVerboseOutput;
+          boolean _isGenerateWithVerboseOutput = _settings_1.isGenerateWithVerboseOutput();
+          _or = _isGenerateWithVerboseOutput;
         }
         if (_or) {
           _builder.append("// state names");
@@ -101,8 +101,8 @@ public class StateMachineGen extends GenericStateMachineGenerator {
       _builder.newLine();
       {
         GlobalSettings _settings_2 = Main.getSettings();
-        boolean _generateMSCInstrumentation_1 = _settings_2.generateMSCInstrumentation();
-        if (_generateMSCInstrumentation_1) {
+        boolean _isGenerateMSCInstrumentation_1 = _settings_2.isGenerateMSCInstrumentation();
+        if (_isGenerateMSCInstrumentation_1) {
           _builder.append("\t");
           _builder.append("DebuggingService.getInstance().addActorState(this,stateStrings[new_state]);");
           _builder.newLine();
@@ -110,8 +110,8 @@ public class StateMachineGen extends GenericStateMachineGenerator {
       }
       {
         GlobalSettings _settings_3 = Main.getSettings();
-        boolean _generateWithVerboseOutput_1 = _settings_3.generateWithVerboseOutput();
-        if (_generateWithVerboseOutput_1) {
+        boolean _isGenerateWithVerboseOutput_1 = _settings_3.isGenerateWithVerboseOutput();
+        if (_isGenerateWithVerboseOutput_1) {
           _builder.append("\t");
           _builder.append("if (stateStrings[new_state]!=\"Idle\") {");
           _builder.newLine();

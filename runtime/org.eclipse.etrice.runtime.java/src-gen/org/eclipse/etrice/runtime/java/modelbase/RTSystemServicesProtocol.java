@@ -1,13 +1,6 @@
 package org.eclipse.etrice.runtime.java.modelbase;
 
 import org.eclipse.etrice.runtime.java.messaging.Message;
-import org.eclipse.etrice.runtime.java.modelbase.EventMessage;
-import org.eclipse.etrice.runtime.java.modelbase.EventWithDataMessage;
-import org.eclipse.etrice.runtime.java.modelbase.IInterfaceItemOwner;
-import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;
-import org.eclipse.etrice.runtime.java.modelbase.PortBase;
-import org.eclipse.etrice.runtime.java.modelbase.ReplicatedPortBase;
-import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;
 
 
 

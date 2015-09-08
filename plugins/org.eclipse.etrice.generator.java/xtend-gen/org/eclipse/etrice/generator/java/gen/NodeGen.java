@@ -229,8 +229,8 @@ public class NodeGen {
       _builder.newLine();
       {
         GlobalSettings _settings = Main.getSettings();
-        boolean _generateMSCInstrumentation = _settings.generateMSCInstrumentation();
-        if (_generateMSCInstrumentation) {
+        boolean _isGenerateMSCInstrumentation = _settings.isGenerateMSCInstrumentation();
+        if (_isGenerateMSCInstrumentation) {
           _builder.append("import org.eclipse.etrice.runtime.java.debugging.DebuggingService;");
           _builder.newLine();
         }
@@ -453,8 +453,8 @@ public class NodeGen {
               _builder.newLineIfNotEmpty();
               {
                 GlobalSettings _settings_1 = Main.getSettings();
-                boolean _generateMSCInstrumentation_1 = _settings_1.generateMSCInstrumentation();
-                if (_generateMSCInstrumentation_1) {
+                boolean _isGenerateMSCInstrumentation_1 = _settings_1.isGenerateMSCInstrumentation();
+                if (_isGenerateMSCInstrumentation_1) {
                   _builder.append("\t\t");
                   _builder.append("\t");
                   _builder.append("DebuggingService.getInstance().addMessageActorCreate(this, \"");
@@ -481,8 +481,8 @@ public class NodeGen {
             } else {
               {
                 GlobalSettings _settings_2 = Main.getSettings();
-                boolean _generateMSCInstrumentation_2 = _settings_2.generateMSCInstrumentation();
-                if (_generateMSCInstrumentation_2) {
+                boolean _isGenerateMSCInstrumentation_2 = _settings_2.isGenerateMSCInstrumentation();
+                if (_isGenerateMSCInstrumentation_2) {
                   _builder.append("\t\t");
                   _builder.append("DebuggingService.getInstance().addMessageActorCreate(this, \"");
                   String _name_8 = sub.getName();
@@ -660,8 +660,8 @@ public class NodeGen {
       _builder.newLine();
       {
         GlobalSettings _settings_3 = Main.getSettings();
-        boolean _generateMSCInstrumentation_3 = _settings_3.generateMSCInstrumentation();
-        if (_generateMSCInstrumentation_3) {
+        boolean _isGenerateMSCInstrumentation_3 = _settings_3.isGenerateMSCInstrumentation();
+        if (_isGenerateMSCInstrumentation_3) {
           _builder.append("\t\t");
           _builder.append("DebuggingService.getInstance().addVisibleComment(\"begin sub system initialization\");");
           _builder.newLine();
@@ -690,8 +690,8 @@ public class NodeGen {
       }
       {
         GlobalSettings _settings_4 = Main.getSettings();
-        boolean _generateMSCInstrumentation_4 = _settings_4.generateMSCInstrumentation();
-        if (_generateMSCInstrumentation_4) {
+        boolean _isGenerateMSCInstrumentation_4 = _settings_4.isGenerateMSCInstrumentation();
+        if (_isGenerateMSCInstrumentation_4) {
           _builder.append("\t\t");
           _builder.append("DebuggingService.getInstance().addVisibleComment(\"done sub system initialization\");");
           _builder.newLine();
@@ -724,8 +724,8 @@ public class NodeGen {
       _builder.newLine();
       {
         GlobalSettings _settings_5 = Main.getSettings();
-        boolean _generateMSCInstrumentation_5 = _settings_5.generateMSCInstrumentation();
-        if (_generateMSCInstrumentation_5) {
+        boolean _isGenerateMSCInstrumentation_5 = _settings_5.isGenerateMSCInstrumentation();
+        if (_isGenerateMSCInstrumentation_5) {
           _builder.append("\t");
           _builder.newLine();
           _builder.append("\t");

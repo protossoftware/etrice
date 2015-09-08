@@ -6,6 +6,7 @@
 <stringAttribute key="GenModelPath" value=""/>
 <booleanAttribute key="Lib" value="false"/>
 <booleanAttribute key="MSC" value="true"/>
+<booleanAttribute key="DataLogging" value="true"/>
 <listAttribute key="ModelFiles">
 <listEntry value="${workspace_loc:/org.eclipse.etrice.tutorials.c/model/HelloWorld/Mapping.etmap}"/>
 </listAttribute>

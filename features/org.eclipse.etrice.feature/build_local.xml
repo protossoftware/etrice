@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+	Prerequiste: Install org.eclipse.license
+		http://download.eclipse.org/cbi/updates/license
+-->
 <project default="export" basedir="." name="org.eclipse.etrice.feature">
 	<target name="export">
 		<delete dir="./export" quiet="true" />

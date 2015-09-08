@@ -190,8 +190,11 @@ public abstract class GeneratorLaunchConfigurationDelegate extends AbstractJavaL
 		if (configuration.getAttribute(GeneratorConfigTab.DEBUG, false)) {
 			argString.append(" "+AbstractGenerator.OPTION_DEBUG);
 		}
-		if (configuration.getAttribute(GeneratorConfigTab.MSC, false)) {
-			argString.append(" "+AbstractGenerator.OPTION_MSC);
+		if (configuration.getAttribute(GeneratorConfigTab.MSC_INSTR, false)) {
+			argString.append(" "+AbstractGenerator.OPTION_MSC_INSTR);
+		}
+		if (configuration.getAttribute(GeneratorConfigTab.DATA_INSTR, false)) {
+			argString.append(" "+AbstractGenerator.OPTION_DATA_INSTR);
 		}
 		if (configuration.getAttribute(GeneratorConfigTab.VERBOSE, false)) {
 			argString.append(" "+AbstractGenerator.OPTION_VERBOSE_RT);

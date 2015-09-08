@@ -21,25 +21,6 @@ IN_INCDIRS 			+= ./src-gen ./src
 IN_SRCDIRS_REC 		+= ./src-gen ./src
 #---
 
-# Do NOT set IN_XX as make paramater or environment variable,
-# instead make variables from outside explicit:
-# IN_TARGET 		:= ${APP_TARGET}
-# IN_INCDIRS 		+= ${APP_INCDIRS}
-# IN_SRCDIRS_REC 	+= ${APP_SRCDIRS_REC}
-
-# All options:
-#IN_TARGET 
-#IN_TARGET_DIR
-#IN_BUILD_DIR
-#IN_TARGET_PLATFORM
-#IN_INCDIRS
-#IN_SRCDIRS_REC
-#IN_SOURCES
-#IN_CFLAGS
-#IN_DEFS
-#IN_LDFLAGS
-#IN_LDLIBS
-#IN_PREREQS
 
 # Create rules
 include ${RUNTIME_ROOTDIR}/buildTools/Makefile.mk

@@ -194,6 +194,8 @@ public class ProjectFileFragments {
       _builder.newLineIfNotEmpty();
       _builder.append("<booleanAttribute key=\"MSC\" value=\"true\"/>");
       _builder.newLine();
+      _builder.append("<booleanAttribute key=\"DataLogging\" value=\"true\"/>");
+      _builder.newLine();
       _builder.append("<booleanAttribute key=\"UseTranslation\" value=\"");
       _builder.append(useTranslation, "");
       _builder.append("\"/>");

@@ -93,8 +93,8 @@ public class OptionalActorInterfaceGen extends GenericActorClassGenerator {
       _builder.newLine();
       {
         GlobalSettings _settings = Main.getSettings();
-        boolean _generateMSCInstrumentation = _settings.generateMSCInstrumentation();
-        if (_generateMSCInstrumentation) {
+        boolean _isGenerateMSCInstrumentation = _settings.isGenerateMSCInstrumentation();
+        if (_isGenerateMSCInstrumentation) {
           _builder.append("import org.eclipse.etrice.runtime.java.debugging.DebuggingService;");
           _builder.newLine();
         }
@@ -194,8 +194,8 @@ public class OptionalActorInterfaceGen extends GenericActorClassGenerator {
       _builder.newLine();
       {
         GlobalSettings _settings_1 = Main.getSettings();
-        boolean _generateMSCInstrumentation_1 = _settings_1.generateMSCInstrumentation();
-        if (_generateMSCInstrumentation_1) {
+        boolean _isGenerateMSCInstrumentation_1 = _settings_1.isGenerateMSCInstrumentation();
+        if (_isGenerateMSCInstrumentation_1) {
           _builder.append("\t");
           _builder.newLine();
           _builder.append("\t");

@@ -1,0 +1,166 @@
+/* 
+ * Example of DataLogging Feature in conjunction with the Gnuplot Generator
+ * 
+ * Prerequisite: gnuplot resides in PATH of environment (http://www.gnuplot.info/)
+ * Set physical thread interval = 20ms
+ */
+RoomModel DataLoggingExample {
+
+	import room.basic.types.* from "../../../org.eclipse.etrice.modellib.c/model/Types.room"
+	import room.basic.service.timing.* from "../../../org.eclipse.etrice.modellib.c/model/TimingService.room"
+	import room.basic.annotations.* from "../../../org.eclipse.etrice.modellib.c/model/Annotations.room"
+	import room.basic.etunit.* from "../../../org.eclipse.etrice.modellib.c/model/Tests.room"
+
+	LogicalSystem LogSys {
+		SubSystemRef subSystemRef : SubSysClass
+	}
+
+	SubSystemClass SubSysClass {
+		@DataLogging(pathlist="/LogSys/subSystemRef/rootActor/serverInst/output,/LogSys/subSystemRef/rootActor/clientInst/output")
+		@Gnuplot(format="pngcairo", outputfile="main.data.png", width=1800, height=600, fontsize=10)
+		@GnuplotGraph(
+			paths="/LogSys/subSystemRef/rootActor/serverInst/output",
+			xtics=100, mxtics=4, ymin=-1.2, ymax=1.2
+		)
+		@GnuplotGraph(
+			paths="/LogSys/subSystemRef/rootActor/clientInst/output",
+			xtics=100, mxtics=4, ymin=0, ymax=7
+		)
+		
+		ActorRef rootActor: LoggerExampleTop
+		ActorRef timerService: ATimingService
+		LayerConnection ref rootActor satisfied_by timerService.timer
+	
+		LogicalThread defaultThread
+	}
+	
+	ActorClass LoggerExampleTop {
+		Structure {
+			ActorRef serverInst: Server
+			ActorRef clientInst: Client
+			SAP timer: PTimer
+			Binding clientInst.input and serverInst.output
+			Binding clientInst.output and serverInst.input
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> Running {
+					action {
+						"timer.startTimer(10*1000);"
+					}
+				}
+				Transition tr0: Running -> Done {
+					triggers {
+						<timeout: timer>
+					}
+				}
+				State Running
+				State Done {
+					entry {
+						"etSema_wakeup(etRuntime_getTerminateSemaphore());"
+					}
+				}
+			}
+		}
+	}
+	
+	datadriven ActorClass Server {
+		Interface {
+			Port input: SingleValueProtocol
+			conjugated Port output: SingleValueProtocol
+		}
+		Structure {
+			usercode3 {
+				"#include \"math.h\""
+				"#include \"osal/etSema.h\""
+				"#include \"runtime/etRuntime.h\""
+			}
+			external Port output
+			external Port input
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> Working
+				State Working {
+					do {
+						"float32 i = input.data;"
+						"output.data(sinf(i));"
+					}
+				}
+			}
+		}
+	}
+	
+	datadriven ActorClass Client {
+		Interface {
+			Port input: SingleValueProtocol
+			conjugated Port output: SingleValueProtocol
+		}
+		Structure {
+			usercode3 {
+				"#include \"math.h\""
+			}
+			external Port output
+			external Port input
+			Attribute workingData: float32
+			Attribute maximum: float32
+			Attribute cycles: int8
+			Attribute maxCycles: int8
+			Attribute scale: float32
+		}
+		Behavior {
+			Operation incAndWrap(value:float32, inc:float32, max:float32) : float32 
+			{
+				"float32 result = value + inc;"
+				"if(result > max) result -= max;"
+				"return result;"
+			}
+			StateMachine {
+				Transition init: initial -> Up {
+					action {
+						"cycles = 0;"
+						"maxCycles = 16;"
+						"maximum = 2*M_PI;"
+						"workingData = 0.0F;"
+						"output.data(0.0F);"
+					}
+				}
+				Transition tr0: Up -> Down {
+					guard {
+						"input.data < 0"
+					}
+				}
+				Transition tr1: Down -> Up {
+					guard {
+						"input.data >= 0"
+					}
+				}
+				State Up {
+					entry {
+						"cycles++;"
+						"printf(\"cycles: %d \\n\", cycles);"
+						"//if(cycles >= maxCycles) etSema_wakeup(etRuntime_getTerminateSemaphore());"
+					}
+					
+					do {
+						"workingData = incAndWrap(workingData, 0.1, maximum);"
+						"output.data(workingData);"
+					}
+				}
+				State Down {
+					do {
+						"workingData = incAndWrap(workingData, 0.3, maximum);"
+						"output.data(workingData);"
+					}
+				}
+			}
+		}
+	}
+	
+	datadriven ProtocolClass SingleValueProtocol {
+		incoming {
+			Message data(value : float32)
+		}
+	} 
+
+}

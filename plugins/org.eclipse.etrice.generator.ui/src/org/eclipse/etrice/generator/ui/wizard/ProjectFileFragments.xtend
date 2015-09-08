@@ -92,6 +92,7 @@ class ProjectFileFragments {
 			<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 			<launchConfiguration type="org.eclipse.etrice.generator.launch.«targetLanguage».launchConfigurationType">
 			<booleanAttribute key="MSC" value="true"/>
+			<booleanAttribute key="DataLogging" value="true"/>
 			<booleanAttribute key="UseTranslation" value="«useTranslation»"/>
 			<listAttribute key="ModelFiles">
 			<listEntry value="${workspace_loc:«modelPath»/«baseName».etmap}"/>

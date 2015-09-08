@@ -279,8 +279,17 @@ public class NodeGen {
         }
       };
       final Iterable<PhysicalThread> threads = IterableExtensions.<PhysicalThread>filter(_threads, _function);
-      EList<Annotation> _annotations = ssc.getAnnotations();
-      final boolean logData = this._roomHelpers.isAnnotationPresent(_annotations, "DataLogging");
+      boolean _and = false;
+      GlobalGeneratorSettings _settings = Main.getSettings();
+      boolean _isGenerateDataInstrumentation = _settings.isGenerateDataInstrumentation();
+      if (!_isGenerateDataInstrumentation) {
+        _and = false;
+      } else {
+        EList<Annotation> _annotations = ssc.getAnnotations();
+        boolean _isAnnotationPresent = this._roomHelpers.isAnnotationPresent(_annotations, "DataLogging");
+        _and = _isAnnotationPresent;
+      }
+      final boolean logData = _and;
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("/**");
       _builder.newLine();
@@ -1225,8 +1234,8 @@ public class NodeGen {
           {
             boolean _and = false;
             GlobalGeneratorSettings _settings = Main.getSettings();
-            boolean _generateMSCInstrumentation = _settings.generateMSCInstrumentation();
-            boolean _not = (!_generateMSCInstrumentation);
+            boolean _isGenerateMSCInstrumentation = _settings.isGenerateMSCInstrumentation();
+            boolean _not = (!_isGenerateMSCInstrumentation);
             if (!_not) {
               _and = false;
             } else {
@@ -1397,15 +1406,15 @@ public class NodeGen {
         _or = true;
       } else {
         GlobalGeneratorSettings _settings = Main.getSettings();
-        boolean _generateMSCInstrumentation = _settings.generateMSCInstrumentation();
-        _or = _generateMSCInstrumentation;
+        boolean _isGenerateMSCInstrumentation = _settings.isGenerateMSCInstrumentation();
+        _or = _isGenerateMSCInstrumentation;
       }
       final boolean haveConstData = _or;
       final IntelligentSeparator sep = new IntelligentSeparator(",");
       String _xifexpression_1 = null;
       GlobalGeneratorSettings _settings_1 = Main.getSettings();
-      boolean _generateMSCInstrumentation_1 = _settings_1.generateMSCInstrumentation();
-      if (_generateMSCInstrumentation_1) {
+      boolean _isGenerateMSCInstrumentation_1 = _settings_1.isGenerateMSCInstrumentation();
+      if (_isGenerateMSCInstrumentation_1) {
         _xifexpression_1 = "/*const*/";
       } else {
         _xifexpression_1 = "const";
@@ -1414,8 +1423,8 @@ public class NodeGen {
       StringConcatenation _builder = new StringConcatenation();
       {
         GlobalGeneratorSettings _settings_2 = Main.getSettings();
-        boolean _generateMSCInstrumentation_2 = _settings_2.generateMSCInstrumentation();
-        if (_generateMSCInstrumentation_2) {
+        boolean _isGenerateMSCInstrumentation_2 = _settings_2.isGenerateMSCInstrumentation();
+        if (_isGenerateMSCInstrumentation_2) {
           CharSequence _genPeerPortArrays = this.genPeerPortArrays(root, ai);
           _builder.append(_genPeerPortArrays, "");
           _builder.newLineIfNotEmpty();
@@ -1472,8 +1481,8 @@ public class NodeGen {
           _builder.newLineIfNotEmpty();
           {
             GlobalGeneratorSettings _settings_3 = Main.getSettings();
-            boolean _generateMSCInstrumentation_3 = _settings_3.generateMSCInstrumentation();
-            if (_generateMSCInstrumentation_3) {
+            boolean _isGenerateMSCInstrumentation_3 = _settings_3.isGenerateMSCInstrumentation();
+            if (_isGenerateMSCInstrumentation_3) {
               _builder.append("\t");
               _builder.append(sep, "\t");
               _builder.append("\"");
@@ -1791,8 +1800,8 @@ public class NodeGen {
       String myInst = "";
       String peerInst = "";
       GlobalGeneratorSettings _settings = Main.getSettings();
-      boolean _generateMSCInstrumentation = _settings.generateMSCInstrumentation();
-      if (_generateMSCInstrumentation) {
+      boolean _isGenerateMSCInstrumentation = _settings.isGenerateMSCInstrumentation();
+      if (_isGenerateMSCInstrumentation) {
         EObject _eContainer_1 = pi.eContainer();
         String _path = ((ActorInstance) _eContainer_1).getPath();
         String _plus = ("\n#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE\n,\"" + _path);
@@ -1870,8 +1879,8 @@ public class NodeGen {
       final Iterable<Message> boolMsgs = IterableExtensions.<Message>filter(messages, _function_2);
       boolean _and = false;
       GlobalGeneratorSettings _settings = Main.getSettings();
-      boolean _generateMSCInstrumentation = _settings.generateMSCInstrumentation();
-      if (!_generateMSCInstrumentation) {
+      boolean _isGenerateMSCInstrumentation = _settings.isGenerateMSCInstrumentation();
+      if (!_isGenerateMSCInstrumentation) {
         _and = false;
       } else {
         boolean _and_1 = false;
@@ -1997,8 +2006,8 @@ public class NodeGen {
       final Iterable<Message> boolMsgs = IterableExtensions.<Message>filter(sentMsgs, _function_2);
       boolean _and = false;
       GlobalGeneratorSettings _settings = Main.getSettings();
-      boolean _generateMSCInstrumentation = _settings.generateMSCInstrumentation();
-      if (!_generateMSCInstrumentation) {
+      boolean _isGenerateMSCInstrumentation = _settings.isGenerateMSCInstrumentation();
+      if (!_isGenerateMSCInstrumentation) {
         _and = false;
       } else {
         boolean _and_1 = false;
@@ -2062,8 +2071,8 @@ public class NodeGen {
     String result = "";
     String _xifexpression = null;
     GlobalGeneratorSettings _settings = Main.getSettings();
-    boolean _generateMSCInstrumentation = _settings.generateMSCInstrumentation();
-    if (_generateMSCInstrumentation) {
+    boolean _isGenerateMSCInstrumentation = _settings.isGenerateMSCInstrumentation();
+    if (_isGenerateMSCInstrumentation) {
       EObject _eContainer = pi.eContainer();
       String _path = ((ActorInstance) _eContainer).getPath();
       String _plus = ("\n#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE\n,\"" + _path);
@@ -2095,8 +2104,8 @@ public class NodeGen {
         String iiiD = this.getInterfaceItemInstanceData(pi);
         String _xifexpression_2 = null;
         GlobalGeneratorSettings _settings_1 = Main.getSettings();
-        boolean _generateMSCInstrumentation_1 = _settings_1.generateMSCInstrumentation();
-        if (_generateMSCInstrumentation_1) {
+        boolean _isGenerateMSCInstrumentation_1 = _settings_1.isGenerateMSCInstrumentation();
+        if (_isGenerateMSCInstrumentation_1) {
           EObject _eContainer_2 = p.eContainer();
           String _path_1 = ((ActorInstance) _eContainer_2).getPath();
           String _plus_1 = (",\"" + _path_1);
@@ -2144,10 +2153,25 @@ public class NodeGen {
     CharSequence _xblockexpression = null;
     {
       final NodeRef nr = ETMapUtil.getNodeRef(ssi);
-      final ArrayList<PortInstance> loggedPorts = this.loggedPorts(ssi);
-      SubSystemClass _subSystemClass = ssi.getSubSystemClass();
-      EList<Annotation> _annotations = _subSystemClass.getAnnotations();
-      final boolean logData = this._roomHelpers.isAnnotationPresent(_annotations, "DataLogging");
+      boolean _and = false;
+      GlobalGeneratorSettings _settings = Main.getSettings();
+      boolean _isGenerateDataInstrumentation = _settings.isGenerateDataInstrumentation();
+      if (!_isGenerateDataInstrumentation) {
+        _and = false;
+      } else {
+        SubSystemClass _subSystemClass = ssi.getSubSystemClass();
+        EList<Annotation> _annotations = _subSystemClass.getAnnotations();
+        boolean _isAnnotationPresent = this._roomHelpers.isAnnotationPresent(_annotations, "DataLogging");
+        _and = _isAnnotationPresent;
+      }
+      final boolean logData = _and;
+      ArrayList<PortInstance> _xifexpression = null;
+      if (logData) {
+        _xifexpression = this.loggedPorts(ssi);
+      } else {
+        _xifexpression = CollectionLiterals.<PortInstance>newArrayList();
+      }
+      final ArrayList<PortInstance> loggedPorts = _xifexpression;
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("/**");
       _builder.newLine();
@@ -2542,9 +2566,9 @@ public class NodeGen {
                               _builder.newLine();
                             } else {
                               {
-                                GlobalGeneratorSettings _settings = Main.getSettings();
-                                boolean _generateMSCInstrumentation = _settings.generateMSCInstrumentation();
-                                if (_generateMSCInstrumentation) {
+                                GlobalGeneratorSettings _settings_1 = Main.getSettings();
+                                boolean _isGenerateMSCInstrumentation = _settings_1.isGenerateMSCInstrumentation();
+                                if (_isGenerateMSCInstrumentation) {
                                   _builder.append("\t\t");
                                   _builder.append("\t");
                                   _builder.append("ET_MSC_LOGGER_ASYNC_IN(");
@@ -2725,9 +2749,9 @@ public class NodeGen {
                           _builder.newLine();
                         } else {
                           {
-                            GlobalGeneratorSettings _settings_1 = Main.getSettings();
-                            boolean _generateMSCInstrumentation_1 = _settings_1.generateMSCInstrumentation();
-                            if (_generateMSCInstrumentation_1) {
+                            GlobalGeneratorSettings _settings_2 = Main.getSettings();
+                            boolean _isGenerateMSCInstrumentation_1 = _settings_2.isGenerateMSCInstrumentation();
+                            if (_isGenerateMSCInstrumentation_1) {
                               _builder.append("\t\t");
                               _builder.append("\t");
                               _builder.append("ET_MSC_LOGGER_ASYNC_IN(");

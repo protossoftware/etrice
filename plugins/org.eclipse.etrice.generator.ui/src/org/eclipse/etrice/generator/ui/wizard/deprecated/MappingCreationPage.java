@@ -13,11 +13,6 @@
 package org.eclipse.etrice.generator.ui.wizard.deprecated;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.etrice.core.etmap.eTMap.Mapping;
-import org.eclipse.etrice.core.etphys.eTPhys.NodeClass;
-import org.eclipse.etrice.core.etphys.eTPhys.PhysicalSystem;
-import org.eclipse.etrice.core.etphys.eTPhys.RuntimeClass;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
@@ -26,9 +21,7 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.xtext.resource.IResourceFactory;
-import org.eclipse.xtext.resource.SaveOptions;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.serializer.ISerializer;
 import org.eclipse.xtext.ui.editor.embedded.EmbeddedEditor;
 import org.eclipse.xtext.ui.editor.embedded.EmbeddedEditorFactory;
 import org.eclipse.xtext.ui.editor.embedded.IEditedResourceProvider;
@@ -47,6 +40,7 @@ public class MappingCreationPage extends WizardPage {
 	private Injector etPhysInjector;
 	private EmbeddedEditor etPhysEditor;
 
+	@SuppressWarnings("unused")
 	private MappingBuilder builder = null;
 
 	public MappingCreationPage(Injector etMapInjector, Injector etPhysInjector) {

@@ -79,7 +79,8 @@ public abstract class AbstractGenerator implements IDetailCodeTranslator {
 	public static final String OPTION_GEN_DIR = "-genDir";
 	public static final String OPTION_GEN_INFO_DIR = "-genInfoDir";
 	public static final String OPTION_GEN_DOC_DIR = "-genDocDir";
-	public static final String OPTION_MSC = "-msc_instr";
+	public static final String OPTION_MSC_INSTR = "-msc_instr";
+	public static final String OPTION_DATA_INSTR = "-data_instr";
 	public static final String OPTION_VERBOSE_RT = "-gen_as_verbose";
 	public static final String OPTION_DEBUG = "-debug";
 	public static final String OPTION_NOTRANSLATE = "-notranslate";
@@ -217,7 +218,7 @@ public abstract class AbstractGenerator implements IDetailCodeTranslator {
 	 * <li>{@value #OPTION_GEN_INCREMENTAL}</li>
 	 * <li>{@value #OPTION_GEN_INFO_DIR}</li>
 	 * <li>{@value #OPTION_LIB}</li>
-	 * <li>{@value #OPTION_MSC}</li>
+	 * <li>{@value #OPTION_MSC_INSTR}</li>
 	 * <li>{@value #OPTION_NOEXIT}</li>
 	 * <li>{@value #OPTION_SAVE_GEN_MODEL}</li>
 	 * <li>{@value #OPTION_VERBOSE_RT}</li>
@@ -274,8 +275,11 @@ public abstract class AbstractGenerator implements IDetailCodeTranslator {
 		else if (arg.equals(OPTION_NOEXIT)) {
 			setTerminateOnError(false);
 		}
-		else if (arg.equals(OPTION_MSC)) {
+		else if (arg.equals(OPTION_MSC_INSTR)) {
 			generatorSettings.setGenerateMSCInstrumentation(true);
+		}
+		else if (arg.equals(OPTION_DATA_INSTR)) {
+			generatorSettings.setGenerateDataInstrumentation(true);
 		}
 		else if (arg.equals(OPTION_NOTRANSLATE)) {
 			generatorSettings.setNoTranslation(true);
@@ -330,7 +334,7 @@ public abstract class AbstractGenerator implements IDetailCodeTranslator {
 				+" ["+OPTION_GEN_INFO_DIR+" <generation info directory>]"
 				+" ["+OPTION_GEN_DOC_DIR+" <gen documentation directory>]"
 				+" ["+OPTION_DEBUG+"]"
-				+" ["+OPTION_MSC+"]"
+				+" ["+OPTION_MSC_INSTR+"]"
 				+" ["+OPTION_VERBOSE_RT+"]"
 				+" ["+OPTION_HELP+"]"
 				;

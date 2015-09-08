@@ -69,7 +69,8 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 	public static final String SAVE_GEN_MODEL = "SaveGenModel";
 	public static final String LIB = "Lib";
 	public static final String DEBUG = "Debug";
-	public static final String MSC = "MSC";
+	public static final String MSC_INSTR = "MSC";
+	public static final String DATA_INSTR = "DataLogging";
 	public static final String VERBOSE = "Verbose";
 	public static final String USE_TRAANSLATION = "UseTranslation";
 	public static final String OVERRIDE_DIRECTORIES = "OverrideDirectories";
@@ -90,6 +91,7 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 	private Text srcgenPath;
 	private Text infoPath;
 	private Text docPath;
+	protected Button dataButton;
 
 	/* (non-Javadoc)
 	 * @see org.eclipse.debug.ui.ILaunchConfigurationTab#createControl(org.eclipse.swt.widgets.Composite)
@@ -157,9 +159,13 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 		debugButton.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 2, 1));
 		debugButton.addSelectionListener(new UpdateConfig());
 
-		mscButton = createCheckButton(mainComposite, "generate instrumentation for MSC generation");
+		mscButton = createCheckButton(mainComposite, "generate instrumentation for MSC logging");
 		mscButton.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 2, 1));
 		mscButton.addSelectionListener(new UpdateConfig());
+		
+		dataButton = createCheckButton(mainComposite, "generate instrumentation for data logging");
+		dataButton.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 2, 1));
+		dataButton.addSelectionListener(new UpdateConfig());
 
 		verboseButton = createCheckButton(mainComposite, "generate instrumentation for verbose output");
 		verboseButton.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 2, 1));
@@ -302,6 +308,7 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 	@Override
 	public void initializeFrom(ILaunchConfiguration configuration) {
 		try {
+			// defaults: org.eclipse.etrice.generator.base.GlobalGeneratorSettings
 			libButton.setSelection(configuration.getAttribute(LIB, false));
 			boolean save = configuration.getAttribute(SAVE_GEN_MODEL, false);
 			saveGenModel.setSelection(save);
@@ -313,7 +320,8 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 				genDocu = true;
 			documentationButton.setSelection(genDocu);
 			debugButton.setSelection(configuration.getAttribute(DEBUG, false));
-			mscButton.setSelection(configuration.getAttribute(MSC, true));
+			mscButton.setSelection(configuration.getAttribute(MSC_INSTR, false));
+			dataButton.setSelection(configuration.getAttribute(DATA_INSTR, false));
 			verboseButton.setSelection(configuration.getAttribute(VERBOSE, false));
 			
 			ScopedPreferenceStore prefStore = new ScopedPreferenceStore(InstanceScope.INSTANCE, "org.eclipse.etrice.generator.ui");
@@ -355,7 +363,8 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 		configuration.setAttribute(GEN_INSTANCE_DIAGRAM, documentationButton.getSelection());
 		configuration.setAttribute(GEN_DOCUMENTATION, documentationButton.getSelection());
 		configuration.setAttribute(DEBUG, debugButton.getSelection());
-		configuration.setAttribute(MSC, mscButton.getSelection());
+		configuration.setAttribute(MSC_INSTR, mscButton.getSelection());
+		configuration.setAttribute(DATA_INSTR, dataButton.getSelection());
 		configuration.setAttribute(VERBOSE, verboseButton.getSelection());
 		configuration.setAttribute(USE_TRAANSLATION, useTranslationButton.getSelection());
 		

@@ -124,8 +124,8 @@ public class StateMachineGen extends GenericStateMachineGenerator {
       StringConcatenation _builder = new StringConcatenation();
       {
         GlobalGeneratorSettings _settings = Main.getSettings();
-        boolean _generateMSCInstrumentation = _settings.generateMSCInstrumentation();
-        if (_generateMSCInstrumentation) {
+        boolean _isGenerateMSCInstrumentation = _settings.isGenerateMSCInstrumentation();
+        if (_isGenerateMSCInstrumentation) {
           _builder.append("/* state names */");
           _builder.newLine();
           _builder.append("static char* stateStrings[] = {\"<no state>\",\"<top>\",");
@@ -164,8 +164,8 @@ public class StateMachineGen extends GenericStateMachineGenerator {
       _builder.newLine();
       {
         GlobalGeneratorSettings _settings_1 = Main.getSettings();
-        boolean _generateMSCInstrumentation_1 = _settings_1.generateMSCInstrumentation();
-        if (_generateMSCInstrumentation_1) {
+        boolean _isGenerateMSCInstrumentation_1 = _settings_1.isGenerateMSCInstrumentation();
+        if (_isGenerateMSCInstrumentation_1) {
           _builder.append("\t");
           _builder.append("ET_MSC_LOGGER_CHANGE_STATE(self->constData->instName, stateStrings[new_state])");
           _builder.newLine();

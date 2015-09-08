@@ -87,6 +87,9 @@ public class Main extends AbstractGenerator {
 	protected org.eclipse.etrice.generator.doc.gen.MainGen mainDocGenerator; 
 	
 	@Inject
+	protected org.eclipse.etrice.generator.gnuplot.GnuplotScriptGenerator gnuPlotGenerator; 
+	
+	@Inject
 	private Validator validator;
 	
 	@Inject
@@ -173,6 +176,10 @@ public class Main extends AbstractGenerator {
 			
 			if (getSettings().isGenerateDocumentation()) {
 				mainDocGenerator.doGenerate(genModel.eResource());
+			}
+			
+			if(getSettings().isGenerateDataInstrumentation()){
+				gnuPlotGenerator.doGenerate(genModel);
 			}
 			
 			if (diagnostician.isFailed()) {

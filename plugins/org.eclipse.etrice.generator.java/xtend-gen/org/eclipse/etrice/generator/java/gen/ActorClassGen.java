@@ -656,8 +656,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
                 _builder.newLineIfNotEmpty();
                 {
                   GlobalSettings _settings_4 = Main.getSettings();
-                  boolean _generateMSCInstrumentation = _settings_4.generateMSCInstrumentation();
-                  if (_generateMSCInstrumentation) {
+                  boolean _isGenerateMSCInstrumentation = _settings_4.isGenerateMSCInstrumentation();
+                  if (_isGenerateMSCInstrumentation) {
                     _builder.append("\t\t");
                     _builder.append("\t");
                     _builder.append("DebuggingService.getInstance().addMessageActorCreate(this, \"");
@@ -686,8 +686,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
               } else {
                 {
                   GlobalSettings _settings_5 = Main.getSettings();
-                  boolean _generateMSCInstrumentation_1 = _settings_5.generateMSCInstrumentation();
-                  if (_generateMSCInstrumentation_1) {
+                  boolean _isGenerateMSCInstrumentation_1 = _settings_5.isGenerateMSCInstrumentation();
+                  if (_isGenerateMSCInstrumentation_1) {
                     _builder.append("\t\t");
                     _builder.append("DebuggingService.getInstance().addMessageActorCreate(this, \"");
                     String _name_26 = sub_2.getName();
@@ -930,8 +930,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
           _builder.newLine();
           {
             GlobalSettings _settings_6 = Main.getSettings();
-            boolean _generateMSCInstrumentation_2 = _settings_6.generateMSCInstrumentation();
-            if (_generateMSCInstrumentation_2) {
+            boolean _isGenerateMSCInstrumentation_2 = _settings_6.isGenerateMSCInstrumentation();
+            if (_isGenerateMSCInstrumentation_2) {
               _builder.append("\t");
               _builder.append("\t");
               _builder.append("DebuggingService.getInstance().addMessageActorDestroy(this);");

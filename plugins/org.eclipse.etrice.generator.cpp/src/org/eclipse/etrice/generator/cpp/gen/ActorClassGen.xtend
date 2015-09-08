@@ -16,11 +16,10 @@ import com.google.inject.Inject
 import com.google.inject.Singleton
 import java.util.ArrayList
 import org.eclipse.etrice.core.fsm.fSM.ComponentCommunicationType
-import org.eclipse.etrice.core.genmodel.fsm.base.ILogger
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass
 import org.eclipse.etrice.core.genmodel.etricegen.Root
+import org.eclipse.etrice.core.genmodel.fsm.base.ILogger
 import org.eclipse.etrice.core.room.ActorClass
-import org.eclipse.etrice.generator.base.AbstractGenerator
 import org.eclipse.etrice.generator.cpp.Main
 import org.eclipse.etrice.generator.generic.GenericActorClassGenerator
 import org.eclipse.etrice.generator.generic.ProcedureHelpers

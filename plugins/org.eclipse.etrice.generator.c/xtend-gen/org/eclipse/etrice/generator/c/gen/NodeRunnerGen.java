@@ -25,6 +25,8 @@ import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.core.genmodel.etricegen.StructureInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance;
 import org.eclipse.etrice.core.room.SubSystemClass;
+import org.eclipse.etrice.generator.base.GlobalGeneratorSettings;
+import org.eclipse.etrice.generator.c.Main;
 import org.eclipse.etrice.generator.c.gen.CExtensions;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -88,9 +90,18 @@ public class NodeRunnerGen {
       String _plus = (_name + "_");
       String _name_1 = ssi.getName();
       final String clsname = (_plus + _name_1);
-      SubSystemClass _subSystemClass = ssi.getSubSystemClass();
-      EList<Annotation> _annotations = _subSystemClass.getAnnotations();
-      final boolean logData = this._baseHelpers.isAnnotationPresent(_annotations, "DataLogging");
+      boolean _and = false;
+      GlobalGeneratorSettings _settings = Main.getSettings();
+      boolean _isGenerateDataInstrumentation = _settings.isGenerateDataInstrumentation();
+      if (!_isGenerateDataInstrumentation) {
+        _and = false;
+      } else {
+        SubSystemClass _subSystemClass = ssi.getSubSystemClass();
+        EList<Annotation> _annotations = _subSystemClass.getAnnotations();
+        boolean _isAnnotationPresent = this._baseHelpers.isAnnotationPresent(_annotations, "DataLogging");
+        _and = _isAnnotationPresent;
+      }
+      final boolean logData = _and;
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("/**");
       _builder.newLine();

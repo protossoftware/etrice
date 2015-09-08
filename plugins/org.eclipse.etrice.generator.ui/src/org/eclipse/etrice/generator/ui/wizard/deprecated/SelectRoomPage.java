@@ -202,6 +202,7 @@ public class SelectRoomPage extends WizardPage implements SelectionListener {
 		setErrorMessage(null);
 	}
 
+	@SuppressWarnings("deprecation")
 	protected void setPageComplete() {
 		setPageComplete(selectedRoomModel != null);
 		

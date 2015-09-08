@@ -73,7 +73,7 @@ ${cursor}</template>
 }&#13;
 ${cursor}</template>
 
-	<template autoinsert="true" context="org.eclipse.etrice.core.Room.kw_State"
+	<template autoinsert="true" context="org.eclipse.etrice.core.fsm.FSM.kw_State"
 		deleted="false" description="State with entry code, exit code and sub graph"
 		enabled="true" id="state" name="State">State ${name} {&#13;
 	entry {&#13;
@@ -87,7 +87,7 @@ ${cursor}</template>
 }
 ${cursor}</template>
 
-	<template autoinsert="true" context="org.eclipse.etrice.core.Room.DetailCode"
+	<template autoinsert="true" context="org.eclipse.etrice.core.fsm.FSM.DetailCode"
 		deleted="false" description="detail code" enabled="true" id="detail_code"
 		name="detail code">{&#13;
 	"${cursor}"&#13;
@@ -99,7 +99,7 @@ ${cursor}</template>
 ${cursor}</template>
 
 	<template autoinsert="true"
-		context="org.eclipse.etrice.core.Room.kw_RefinedState" deleted="false"
+		context="org.eclipse.etrice.core.fsm.FSM.kw_RefinedState" deleted="false"
 		description="RefinedState" enabled="true" id="refined_state"
 		name="RefinedState">RefinedState ${base:CrossReference('RefinedState.base')} {&#13;
 	${cursor}&#13;
@@ -126,4 +126,14 @@ ${cursor}</template>
 		id="primitiveType" name="PrimitiveType">PrimitiveType ${name} -&gt; ${typeName} (${typeCastName}) default "${defaultValueLiteral}"&#13;
 ${cursor}</template>
 
+	<template autoinsert="true"
+		context="org.eclipse.etrice.core.common.Base.kw_@" deleted="false"
+		description="insert DataLogging with Gnuplot" enabled="true" id="annotation_dataLoggingGnuplot"
+		name="DataLogging">@DataLogging(pathlist="/${cursor}fullInstancePath1, /fullInstancePath2")&#13;
+@Gnuplot(format="pngcairo", outputfile="main.data.png", width=1800, height=600, fontsize=10)&#13;
+@GnuplotGraph(&#13;
+	paths="/fullInstancePath",&#13;
+	xtics=100, mxtics=4, ymin=-1.2, ymax=1.2&#13;
+)</template>
 </templates>
+

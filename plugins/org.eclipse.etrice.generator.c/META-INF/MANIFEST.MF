@@ -19,7 +19,8 @@ Require-Bundle: org.eclipse.etrice.core.room.ui;bundle-version="0.5.0",
  org.eclipse.ui.ide;bundle-version="3.7.0",
  org.eclipse.xtend.lib;bundle-version="2.6.0",
  org.eclipse.xtext.generator;bundle-version="2.6.0",
- org.eclipse.xtext.util;bundle-version="2.6.0"
+ org.eclipse.xtext.util;bundle-version="2.6.0",
+ org.eclipse.etrice.generator.gnuplot
 Import-Package: org.apache.log4j
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.etrice.generator.c

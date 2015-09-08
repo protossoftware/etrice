@@ -1,9 +1,29 @@
-# CANONICAL_PATH - Given one or more paths, converts the paths to the canonical
-#   form. The canonical form is the path, relative to the project's top-level
-#   directory (the directory from which "make" is run), and without
-#   any "./" or "../" sequences. For paths that are not  located below the
-#   top-level directory, the canonical form is the absolute path (i.e. from
-#   the root of the filesystem) also without "./" or "../" sequences.
+#-----------------------------------------------------------------------------------------------
+# Generic makefile for executable/library
+
+# All options:
+# IN_TARGET 
+# IN_TARGET_DIR
+# IN_BUILD_DIR
+# IN_TARGET_PLATFORM
+# IN_INCDIRS
+# IN_SRCDIRS_REC
+# IN_SOURCES
+# IN_CFLAGS
+# IN_DEFS
+# IN_LDFLAGS
+# IN_LDLIBS
+# IN_PREREQS
+
+# Do NOT set IN_XX as make paramater or environment variable,
+# instead set variables from outside explicit:
+# IN_TARGET 		:= ${APP_TARGET}
+# IN_INCDIRS 		+= ${APP_INCDIRS}
+# IN_SRCDIRS_REC 	+= ${APP_SRCDIRS_REC}
+
+#-----------------------------------------------------------------------------------------------
+
+# relative to basedir or absolute if not possible
 define CANONICAL_PATH
 $(patsubst ${CURDIR}/%,%,$(abspath ${1}))
 endef
@@ -22,6 +42,7 @@ define TARGET_RULE
 	    $$(strip $${CC} -o $${M_TARGET_DIR}/$$@ $${M_LDFLAGS} $${M_OBJS} $${M_LDLIBS} )
     endif
 endef
+
 
 ifeq ($(strip ${IN_BUILD_DIR}),)
 	IN_BUILD_DIR := ${TARGET_BUILD_DIR}

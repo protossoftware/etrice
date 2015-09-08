@@ -209,8 +209,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
         _or = true;
       } else {
         GlobalGeneratorSettings _settings = Main.getSettings();
-        boolean _generateMSCInstrumentation = _settings.generateMSCInstrumentation();
-        _or = _generateMSCInstrumentation;
+        boolean _isGenerateMSCInstrumentation = _settings.isGenerateMSCInstrumentation();
+        _or = _isGenerateMSCInstrumentation;
       }
       final boolean hasConstData = _or;
       boolean _and_3 = false;
@@ -319,8 +319,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
           _builder.newLineIfNotEmpty();
           {
             GlobalGeneratorSettings _settings_1 = Main.getSettings();
-            boolean _generateMSCInstrumentation_1 = _settings_1.generateMSCInstrumentation();
-            if (_generateMSCInstrumentation_1) {
+            boolean _isGenerateMSCInstrumentation_1 = _settings_1.isGenerateMSCInstrumentation();
+            if (_isGenerateMSCInstrumentation_1) {
               _builder.append("\t");
               _builder.append("const char* instName;");
               _builder.newLine();

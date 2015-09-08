@@ -202,8 +202,8 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     _builder.newLine();
     {
       GlobalGeneratorSettings _settings = Main.getSettings();
-      boolean _generateMSCInstrumentation = _settings.generateMSCInstrumentation();
-      if (_generateMSCInstrumentation) {
+      boolean _isGenerateMSCInstrumentation = _settings.isGenerateMSCInstrumentation();
+      if (_isGenerateMSCInstrumentation) {
         _builder.append("/*--------------------- debug helpers */");
         _builder.newLine();
         _builder.newLine();
@@ -440,8 +440,8 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
         _builder.newLine();
         {
           GlobalGeneratorSettings _settings = Main.getSettings();
-          boolean _generateMSCInstrumentation = _settings.generateMSCInstrumentation();
-          if (_generateMSCInstrumentation) {
+          boolean _isGenerateMSCInstrumentation = _settings.isGenerateMSCInstrumentation();
+          if (_isGenerateMSCInstrumentation) {
             _builder.append("/*--------------------- debug helpers */");
             _builder.newLine();
             CharSequence _generateDebugHelpersImplementation = this.generateDebugHelpersImplementation(root, pc);
@@ -687,8 +687,8 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       final Iterable<Message> boolMsgs = IterableExtensions.<Message>filter(sentMsgs, _function_2);
       boolean _and = false;
       GlobalGeneratorSettings _settings = Main.getSettings();
-      boolean _generateMSCInstrumentation = _settings.generateMSCInstrumentation();
-      if (!_generateMSCInstrumentation) {
+      boolean _isGenerateMSCInstrumentation = _settings.isGenerateMSCInstrumentation();
+      if (!_isGenerateMSCInstrumentation) {
         _and = false;
       } else {
         boolean _and_1 = false;
@@ -960,8 +960,8 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       final Iterable<Message> boolMsgs = IterableExtensions.<Message>filter(messages, _function_2);
       boolean _and = false;
       GlobalGeneratorSettings _settings = Main.getSettings();
-      boolean _generateMSCInstrumentation = _settings.generateMSCInstrumentation();
-      if (!_generateMSCInstrumentation) {
+      boolean _isGenerateMSCInstrumentation = _settings.isGenerateMSCInstrumentation();
+      if (!_isGenerateMSCInstrumentation) {
         _and = false;
       } else {
         boolean _and_1 = false;
@@ -1313,8 +1313,8 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
               _builder.newLineIfNotEmpty();
               {
                 GlobalGeneratorSettings _settings = Main.getSettings();
-                boolean _generateMSCInstrumentation = _settings.generateMSCInstrumentation();
-                if (_generateMSCInstrumentation) {
+                boolean _isGenerateMSCInstrumentation = _settings.isGenerateMSCInstrumentation();
+                if (_isGenerateMSCInstrumentation) {
                   _builder.append("\t");
                   _builder.append("\t");
                   _builder.append("ET_MSC_LOGGER_ASYNC_OUT(self->myInstName, \"");
@@ -1385,8 +1385,8 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
               _builder.newLineIfNotEmpty();
               {
                 GlobalGeneratorSettings _settings_1 = Main.getSettings();
-                boolean _generateMSCInstrumentation_1 = _settings_1.generateMSCInstrumentation();
-                if (_generateMSCInstrumentation_1) {
+                boolean _isGenerateMSCInstrumentation_1 = _settings_1.isGenerateMSCInstrumentation();
+                if (_isGenerateMSCInstrumentation_1) {
                   _builder.append("\t");
                   _builder.append("\t");
                   _builder.append("ET_MSC_LOGGER_ASYNC_OUT(((etReplPort*)self)->ports[i].port.myInstName, \"");
@@ -1447,8 +1447,8 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
               _builder.newLineIfNotEmpty();
               {
                 GlobalGeneratorSettings _settings_2 = Main.getSettings();
-                boolean _generateMSCInstrumentation_2 = _settings_2.generateMSCInstrumentation();
-                if (_generateMSCInstrumentation_2) {
+                boolean _isGenerateMSCInstrumentation_2 = _settings_2.isGenerateMSCInstrumentation();
+                if (_isGenerateMSCInstrumentation_2) {
                   _builder.append("\t");
                   _builder.append("\t");
                   _builder.append("ET_MSC_LOGGER_ASYNC_OUT(((etReplPort*)self)->ports[idx__et].port.myInstName, \"");
