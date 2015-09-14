@@ -48,6 +48,7 @@
             <fileset dir="${repo_loc}/plugins/org.eclipse.etrice.generator.config/bin"/>
             <fileset dir="${repo_loc}/plugins/org.eclipse.etrice.core.config/bin"/>
             <fileset dir="${repo_loc}/plugins/org.eclipse.etrice.generator.c/bin"/>
+        	<fileset dir="${repo_loc}/plugins/org.eclipse.etrice.generator.gnuplot.c/bin"/>
         </jar>
         <delete dir="${export_destination}/org.eclipse.etrice.generator.c_lib"/>
         <mkdir dir="${export_destination}/org.eclipse.etrice.generator.c_lib"/>

@@ -23,7 +23,9 @@ import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance
 import org.eclipse.etrice.generator.fsm.base.IGeneratorFileIo
 import org.eclipse.etrice.generator.generic.RoomExtensions
+import com.google.inject.Singleton
 
+@Singleton
 class GnuplotScriptGenerator { 
 	@Inject
 	IGeneratorFileIo fileIo

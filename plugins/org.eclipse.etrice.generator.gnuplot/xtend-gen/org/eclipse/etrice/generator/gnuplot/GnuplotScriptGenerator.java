@@ -13,6 +13,7 @@ package org.eclipse.etrice.generator.gnuplot;
 
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.core.common.base.Annotation;
@@ -33,6 +34,7 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
+@Singleton
 @SuppressWarnings("all")
 public class GnuplotScriptGenerator {
   @Inject

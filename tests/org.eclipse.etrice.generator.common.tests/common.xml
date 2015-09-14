@@ -77,6 +77,7 @@
 			<pathelement location="../../plugins/org.eclipse.etrice.generator.doc/bin"/>
 			<pathelement location="../../plugins/org.eclipse.etrice.generator.fsm/bin" />
 			<pathelement location="../../plugins/org.eclipse.etrice.generator/bin"/>
+			<pathelement location="../../plugins/org.eclipse.etrice.generator.gnuplot/bin"/>
 			<pathelement location="../../plugins/org.eclipse.etrice.core.common/bin"/>
 			<pathelement location="../../plugins/org.eclipse.etrice.core.fsm/bin" />
 			<pathelement location="../../plugins/org.eclipse.etrice.core.room/bin"/>
