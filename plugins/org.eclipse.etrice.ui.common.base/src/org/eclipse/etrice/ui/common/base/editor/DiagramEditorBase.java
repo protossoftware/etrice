@@ -21,6 +21,7 @@ import java.util.Map;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
@@ -205,7 +206,10 @@ public abstract class DiagramEditorBase extends DiagramEditor implements IInputU
 							}
 						}
 						if (error) {
-							MessageDialog.openError(Display.getDefault().getActiveShell(), "ERROR", "Internal error: model is invalid, can't save");
+							StringBuilder messges = new StringBuilder();
+							for(IStatus status : ms.getChildren())
+								messges.append(status.getMessage()+"\n");
+							MessageDialog.openError(Display.getDefault().getActiveShell(), "ERROR", "Internal error: model is invalid, can't save:\n\n"+messges);
 							UIBaseActivator.getDefault().getLog().log(ms);
 							return false;
 						}
