@@ -53,9 +53,23 @@ public class GnuplotScriptGenerator {
     EList<SubSystemInstance> _subSystemInstances_1 = root.getSubSystemInstances();
     final SubSystemInstance ssi = IterableExtensions.<SubSystemInstance>head(_subSystemInstances_1);
     SubSystemClass _subSystemClass = ssi.getSubSystemClass();
-    final String path = this.roomExtensions.getGenerationTargetPath(_subSystemClass);
+    EList<Annotation> _annotations = _subSystemClass.getAnnotations();
+    final Function1<Annotation, Boolean> _function = new Function1<Annotation, Boolean>() {
+      public Boolean apply(final Annotation a) {
+        AnnotationType _type = a.getType();
+        String _name = _type.getName();
+        return Boolean.valueOf(Objects.equal(_name, "Gnuplot"));
+      }
+    };
+    boolean _exists = IterableExtensions.<Annotation>exists(_annotations, _function);
+    boolean _not = (!_exists);
+    if (_not) {
+      return;
+    }
     SubSystemClass _subSystemClass_1 = ssi.getSubSystemClass();
-    final String infoPath = this.roomExtensions.getGenerationInfoPath(_subSystemClass_1);
+    final String path = this.roomExtensions.getGenerationTargetPath(_subSystemClass_1);
+    SubSystemClass _subSystemClass_2 = ssi.getSubSystemClass();
+    final String infoPath = this.roomExtensions.getGenerationInfoPath(_subSystemClass_2);
     try {
       String _name = ssi.getName();
       String _plus = ("Generating gnuplot script for subsystem " + _name);

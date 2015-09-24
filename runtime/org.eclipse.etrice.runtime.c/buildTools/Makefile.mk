@@ -15,17 +15,22 @@
 # IN_LDLIBS
 # IN_PREREQS
 
-# Do NOT set IN_XX as make paramater or environment variable,
-# instead set variables from outside explicit:
-# IN_TARGET 		:= ${APP_TARGET}
-# IN_INCDIRS 		+= ${APP_INCDIRS}
+# Note: Variables set from environment or make parameter are unmodifiable.
+# E.g. use additional variables:
 # IN_SRCDIRS_REC 	+= ${APP_SRCDIRS_REC}
+# IN_SRCDIRS_REC 	+= ...
 
 #-----------------------------------------------------------------------------------------------
 
 # relative to basedir or absolute if not possible
 define CANONICAL_PATH
 $(patsubst ${CURDIR}/%,%,$(abspath ${1}))
+endef
+
+# $1 = path, should end with '/' to avoid wildcard matching of directories
+# $2 = file (extension)
+define REC_FILE_SEARCH
+$(wildcard $(addsuffix $2, $1)) $(foreach d,$(wildcard $(addsuffix *, $1)),$(call REC_FILE_SEARCH,$d/,$2))
 endef
 
 #   USE WITH EVAL
@@ -52,7 +57,7 @@ ifeq ($(strip ${IN_TARGET_DIR}),)
 	IN_TARGET_DIR := ${IN_BUILD_DIR}
 endif
 
-# Locals, no override
+# Locals, no override from 'outside'
 M_TARGET 			:= ${IN_TARGET}
 M_TARGET_DIR		:= ${IN_TARGET_DIR}
 M_BUILD_DIR			:= ${IN_BUILD_DIR}
@@ -66,18 +71,14 @@ M_LDLIBS    		:= ${IN_LDLIBS}
 M_PREREQS 			:= ${IN_PREREQS}
 M_OBJS 				:=
 
-
-# add sources from M_SRCDIRS_REC
-_TRAVERSECHILDREN = ${1} $(foreach CHILD,$(filter-out ${1}/,$(sort $(dir $(wildcard ${1}/*/)))),$(call ${0},$(patsubst %/,%,${CHILD})))
-_RECDIRS := $(foreach BASEDIR, ${M_SRCDIRS_REC}, $(call _TRAVERSECHILDREN, $(patsubst %/,%,${BASEDIR})))
-M_SOURCES += $(foreach DIR, ${_RECDIRS}, $(wildcard ${DIR}/*.c))
+M_SOURCES 	:= $(call CANONICAL_PATH, ${M_SOURCES})
+M_SOURCES 	+= $(call CANONICAL_PATH,$(foreach DIR,${IN_SRCDIRS_REC},$(call REC_FILE_SEARCH,${DIR}/,*.c)))
+M_OBJS 		+= $(addprefix ${M_BUILD_DIR}/,$(addsuffix .o,$(basename ${M_SOURCES})))
 
 M_DEFS := $(addprefix -D,${M_DEFS})
 M_INCDIRS := $(addprefix -I,$(call CANONICAL_PATH,${M_INCDIRS}))  
-M_SOURCES	:= $(call CANONICAL_PATH,${M_SOURCES})
 
-# Convert the source file names to their corresponding object file names.
-M_OBJS := $(addprefix ${M_BUILD_DIR}/,$(addsuffix .o,$(basename ${M_SOURCES})))
+#-----------------------------------------------------------------------------------------------
 
 ${M_BUILD_DIR}/%.o: %.c
 		@mkdir -p $(dir $@)

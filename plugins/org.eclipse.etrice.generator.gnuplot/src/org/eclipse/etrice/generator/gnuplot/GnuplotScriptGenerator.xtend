@@ -39,6 +39,9 @@ class GnuplotScriptGenerator {
 
 		// TODO: warning more than one ssi
 		val ssi = root.subSystemInstances.head
+		if(!ssi.subSystemClass.annotations.exists[a |a.type.name == "Gnuplot"])
+			return;
+		
 		val path = ssi.subSystemClass.getGenerationTargetPath
 		val infoPath = ssi.subSystemClass.generationInfoPath
 		try {
