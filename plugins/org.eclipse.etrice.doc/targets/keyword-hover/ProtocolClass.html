@@ -1,0 +1,27 @@
+<p>A ProtocolClass defines messages and is the interface specification for a Port</p>
+<pre><code class=room customHighlighted><span class=comment>// prefixes: (eventdriven, datadriven, sync)
+</span><span class=keyword>ProtocolClass</span> ProtocolName [<span class=string>"An eventdriven ProtocolClass by default"</span>] {
+	<span class=keyword>usercode1</span> { <span class=string>""</span> }
+	<span class=keyword>usercode2</span> { <span class=string>""</span> }
+	<span class=keyword>usercode3</span> { <span class=string>""</span> } 
+	<span class=keyword>incoming</span> {
+		<span class=keyword>Message</span> messageName()
+		<span class=keyword>Message</span> messageName(data: int32)
+	}
+	<span class=keyword>outgoing</span> {
+		<span class=keyword>Message</span> ...
+	}
+	<span class=keyword>regular</span> <span class=keyword>PortClass</span> {
+		<span class=keyword>usercode1</span> { <span class=string>""</span> }
+		<span class=keyword>Attribute</span> ...
+		<span class=keyword>Operation</span> ...
+	}
+	<span class=keyword>conjugated</span> <span class=keyword>PortClass</span> {
+		...
+	}
+}
+
+<span class=keyword>ProtocolClass</span> ProtocolName <span class=keyword>extends</span> ProtocolSuperClassName {
+	<span class=comment>// inherits all elements from super class
+</span>}
+</code></pre>

@@ -46,7 +46,7 @@ class GnuplotScriptGenerator {
 		val infoPath = ssi.subSystemClass.generationInfoPath
 		try {
 			fileIo.generateFile("Generating gnuplot script for subsystem " + ssi.name, path, infoPath,
-				"/gnuplot/log_main.data.csv-Script.plt", ssi.generatePlotScript)
+				"/gnuplot/main.data.csv-script.plt", ssi.generatePlotScript)
 			fileIo.generateFile("Generating gnuplot launch configuration", path, infoPath,
 				"/gnuplot/create_gnuplot.launch", gnuPlotLaunchFile)
 		} catch (Exception e) {
@@ -60,7 +60,7 @@ class GnuplotScriptGenerator {
 		<launchConfiguration type="org.eclipse.ui.externaltools.ProgramLaunchConfigurationType">
 		<stringAttribute key="org.eclipse.ui.externaltools.ATTR_LAUNCH_CONFIGURATION_BUILD_SCOPE" value="${none}"/>
 		<stringAttribute key="org.eclipse.ui.externaltools.ATTR_LOCATION" value="${system_path:gnuplot}"/>
-		<stringAttribute key="org.eclipse.ui.externaltools.ATTR_TOOL_ARGUMENTS" value="${project_loc}/src-gen/gnuplot/log_main.data.csv-Script.plt"/>
+		<stringAttribute key="org.eclipse.ui.externaltools.ATTR_TOOL_ARGUMENTS" value="${project_loc}/src-gen/gnuplot/main.data.csv-script.plt"/>
 		<stringAttribute key="org.eclipse.ui.externaltools.ATTR_WORKING_DIRECTORY" value="${project_loc}"/>
 		</launchConfiguration>
 

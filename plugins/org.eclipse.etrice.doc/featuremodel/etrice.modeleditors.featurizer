@@ -13,9 +13,7 @@ Feature TextualROOMEditor
 	shortName '''Textual ROOM Editor'''
 	description '''Textual model editor'''
 	text'''
-		\begin{center}
-			\includegraphics[width=0.7\textwidth]{images/300-TextualROOMEditor.png}
-		\end{center}
+		![TextualROOMEditor](images/300-TextualROOMEditor.png)
 	'''
 	contains OutlineView
 	edits ROOMLanguage
@@ -27,9 +25,8 @@ description '''Displays an overview of all elements in the textual editor.'''
 text '''
 	Shows the structure of the current opened model in the textual editor. Select the 'Link with Editor' option to synchronize the selection of elements between editor and outline view. This enables a convenient navigation.
 
-	\begin{center}
-	\includegraphics[width=0.7\textwidth]{images/300-OutlineView.png}
-	\end{center}
+	![OutlineView](images/300-OutlineView.png)
+	
 '''
 stable
 ;
@@ -38,9 +35,7 @@ Feature GraphicalBehaviorEditor
 	shortName '''Behavior Diagram Editor'''
 	description '''The GraphicalBehaviorEditor allows to edit the ActorClass' StateMachine. It is possible to create (hierarchical) states and transitions to model complex behavior in a convenient way.'''
 	text '''
-		\begin{center}
-			\includegraphics[width=0.7\textwidth]{images/300-GraphicalBehaviorEditor.png}
-		\end{center}
+		![GraphicalBehaviorEditor](images/300-GraphicalBehaviorEditor.png)
 	'''
 	edits StateMachine
 	stable
@@ -50,9 +45,7 @@ Feature GraphicalStructureEditor
 	shortName '''Structural Diagram Editor'''
 	description '''The Structure Editor allows to edit the ActorClass' Structure in a convenient way. It is possible to create and arrange actor references and ports and to create bindings and layer connections.'''
 	text '''
-		\begin{center}
-			\includegraphics[width=0.7\textwidth]{images/300-GraphicalStructureEditor.png}
-		\end{center}
+		![GraphicalStructureEditor](images/300-GraphicalStructureEditor.png)
 	'''
 	contains StructureEditorPalette
 	contains ActorRefPropertyDialog
@@ -73,9 +66,9 @@ Feature StructureEditorPalette
 	description '''The palette creates central structural elements of an ActorClass.'''
 	text '''
 		Selecting an entry from the palette and clicking into the diagram, creates the element at the current position.
-		\begin{center}
-		\includegraphics[width=0.7\textwidth]{images/300-StructurePalette.png}
-		\end{center}
+		
+		![StructurePalette](images/300-StructurePalette.png)
+		
 	'''
 	stable
 ;
@@ -84,9 +77,9 @@ Feature ActorRefPropertyDialog
 	description '''A dialog to edit properties of an ActorRef.'''
 	text '''
 		The dialog is used to edit an existing ActorRef of an ActorClass. It is also shown when creating a new one.
-		\begin{center}
-		\includegraphics[width=0.7\textwidth]{images/300-ActorRefDialog.png}
-		\end{center}
+		
+		![ActorRefDialog](images/300-ActorRefDialog.png)
+		
 	'''
 //	help '''
 //		**ActorClass**: The type of the ActorRef
@@ -101,9 +94,9 @@ Feature PortPropertyDialog
 	description '''A dialog to edit properties of an Port.'''
 	text '''
 		The dialog is used to edit an existing Port of an ActorClass. It is also shown when creating a new one.
-		\begin{center}
-		\includegraphics[width=0.7\textwidth]{images/300-PortDialog.png}
-		\end{center}
+		
+		![PortDialog](images/300-PortDialog.png)
+		
 	'''
 	edits Port
 	stable
@@ -113,9 +106,9 @@ Feature SPPPropertyDialog
 	description '''A dialog to edit properties of a SPP.'''
 	text '''
 		The dialog is used to edit an existing SPP of an ActorClass. It is also shown when creating a new one.
-		\begin{center}
-		\includegraphics[width=0.7\textwidth]{images/300-SPPDialog.png}
-		\end{center}
+		
+		![SPPDialog](images/300-SPPDialog.png)
+		
 	'''
 	edits SPP
 	stable

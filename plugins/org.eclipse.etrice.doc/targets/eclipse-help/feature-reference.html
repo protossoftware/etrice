@@ -1,0 +1,2271 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>eTrice Documentation</title>
+
+<link rel="stylesheet" type="text/css" href="css/book.css"/>
+<link rel="stylesheet" type="text/css" href="css/custom-common.css"/>
+
+</head>
+<body>
+
+
+
+	
+
+<html><head></head><body><h1><a href="#roomlanguage" name="roomlanguage"></a>ROOMLanguage</h1>
+<p>The Real Time Object Oriented Modeling (ROOM)</p>
+<p>eTrice comprises several models:</p>
+<ul>
+  <li>the ROOM model (*.room) – defines model classes and the logical structure of the model</li>
+  <li>the Config model (*.config) – defines configuration values for attributes</li>
+  <li>the Physical model (*.etphys) – defines the structure and properties of the physical system</li>
+  <li>the Mapping model (*.etmap) – defines a mapping from logical elements to physical elements</li>
+</ul>
+<p>In the following diagram the models and their relations are depicted. The meaning of the arrows is: uses/references.</p>
+<p><img src="images/080-models.jpg" alt="Model overview"></p>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3"><p>Features</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="4" style="white-space: nowrap;"><p>Contains:</p></td>
+	<td><p><a href="#logicalmodel">LogicalModel</a></p></td>
+	<td><p>The LogicalModel describes the logical structure and behavior of a ROOM application</p></td>
+</tr>
+<tr>
+	<td><p><a href="#physicalmodel">PhysicalModel</a></p></td>
+	<td><p>The PhysicalModel defines the setup of your nodes with their attributes like threads and mode of execution</p></td>
+</tr>
+<tr>
+	<td><p><a href="#mappingmodel">MappingModel</a></p></td>
+	<td><p>The MappingModel describes the mapping of elements of the LogicalModel to elements of the PhysicalModel</p></td>
+</tr>
+<tr>
+	<td><p><a href="#configmodel">ConfigModel</a></p></td>
+	<td><p>The ConfigModel describes the Attribute configuration of ActorInstances and PortInstances. </p></td>
+</tr>
+</tbody>
+</table>
+<h2><a href="#configmodel" name="configmodel"></a>ConfigModel</h2>
+<p>The ConfigModel describes the Attribute configuration of ActorInstances and PortInstances. </p>
+<p>The scope of this model is the configuration of Attributes of the LogicalModel.<br>Thus it provides enhanced capabilities for assigning default values to Attributes, which are:</p>
+<ul>
+  <li>type safe value assignment</li>
+  <li>setting on class level</li>
+  <li>setting on instance level</li>
+</ul>
+<p>Values defined for class attributes are used for all instances unless there is an instance value configured for the same attribute.<br>The configuration is available for actors and ports, thus ActorClasses/ActorRefs and ProtocolClasses/Ports.</p>
+<pre><code class="etconfig customHighlighted"><span class="keyword">ConfigModel</span> ExampleConfig {
+	<span class="keyword">import</span> Example.* <span class="keyword">from</span> <span class="string">"Example.room"</span>
+
+	<span class="keyword">ActorClassConfig</span> ActorClass1 {
+		<span class="keyword">Attr</span> attribute1 = 4
+	}
+
+	<span class="keyword">ActorInstanceConfig</span> LogSys/subsysRef/actor1 {
+		<span class="keyword">Attr</span> attribute1 = 7
+	}
+}
+</code></pre>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3"><p>Features</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Uses:</p></td>
+	<td><p><a href="#attribute">Attribute</a></p></td>
+	<td><p>An Attribute is a member variable of a class</p></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2><a href="#logicalmodel" name="logicalmodel"></a>LogicalModel</h2>
+<p>The LogicalModel describes the logical structure and behavior of a ROOM application</p>
+<p>The ROOM model defines DataTypes, ProtocolClasses, ActorClasses, SubSystemClasses and LogicalSystems.<br>Thereby the three latter form a hierarchy. The LogicalSystem is the top level element of the structure.<br>It contains references to SubSystemClass elements. The SubSystemClass in turn contains<br>references to ActorClass elements which again contain (recursively) references to<br>ActorClass elements. The complete structural hierarchy implies a tree which has the<br>LogicalSystem as root and where each reference stands for a new node with possibly further<br>branches.</p>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3"><p>Features</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="6" style="white-space: nowrap;"><p>Contains:</p></td>
+	<td><p><a href="#logicalsystem">LogicalSystem</a></p></td>
+	<td><p>The LogicalSystem is the topmost structural class. It assembles a distributed system by means of sub systems</p></td>
+</tr>
+<tr>
+	<td><p><a href="#subsystemclass">SubSystemClass</a></p></td>
+	<td><p>A SubSystem is the topmost building block of the executable part of an system</p></td>
+</tr>
+<tr>
+	<td><p><a href="#actorclass">ActorClass</a></p></td>
+	<td><p>An actor is the basic structural building block for building systems with ROOM</p></td>
+</tr>
+<tr>
+	<td><p><a href="#protocolclass">ProtocolClass</a></p></td>
+	<td><p>A ProtocolClass defines messages and is the interface specification for a Port</p></td>
+</tr>
+<tr>
+	<td><p><a href="#datatype">DataType</a></p></td>
+	<td><p>A DataType can take 4 forms and types data elements like an Attribute or Operation argument</p></td>
+</tr>
+<tr>
+	<td><p><a href="#annotationtype">AnnotationType</a></p></td>
+	<td><p>AnnotationTypes can be used to tag ROOM classes for further custom processing</p></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><a href="#actorclass" name="actorclass"></a>ActorClass</h3>
+<p>An actor is the basic structural building block for building systems with ROOM</p>
+<p>An ActorClass consists of three main parts:</p>
+<ul>
+  <li><strong>Interface</strong> (external interface) specifies the communication to ‘outside’ actors and consists of Ports.</li>
+  <li><strong>Structure</strong> (internal interface) contains Ports, Attributes and ActorRefs. These elements are accessible from the Behavior part of the actor (in contrary to the external interface above). An ActorClass can be composed of other actors again by declaring ActorRefs. Also this part declares the connection of ports in form of Bindings and LayerConnections.</li>
+  <li><strong>Behavior</strong> is described by the StateMachine. It can receive and send messages from the ports, declared in the Structure above. The Attributes can be used to store data during an state transition. Furthermore it is possible to declare Operations. They can be used to define reusable logic, that is invoked during a state transition.</li>
+</ul>
+<p><img src="images/040-ActorClass.png" alt="ActorClass"></p>
+<pre><code class="room customHighlighted"> <span class="keyword">ActorClass</span> ExampleActorClass {
+	 <span class="keyword">Interface</span> {
+		 <span class="keyword">Port</span> port1: ProtocolClass1
+		 <span class="keyword">Port</span> port4: ProtocolClass1
+	 }
+	 <span class="keyword">Structure</span> {
+		 <span class="keyword">external</span> <span class="keyword">Port</span> port1
+		 <span class="keyword">conjugated</span> <span class="keyword">Port</span> port2: ProtocolClass1
+		 <span class="keyword">conjugated</span> <span class="keyword">Port</span> port3: ProtocolClass1
+		 
+		 <span class="keyword">ActorRef</span> ActorRef_A: ActorClass2
+		 <span class="keyword">ActorRef</span> ActorRef_B: ActorClass3
+		 
+		 <span class="keyword">Binding</span> port2 <span class="keyword">and</span> ActorRef_A.port5
+		 <span class="comment">// ...
+</span>	 }
+	 <span class="keyword">Behavior</span> {
+		 <span class="comment">// ...
+</span>	 }
+ }
+</code></pre>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3"><p>Features</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="11" style="white-space: nowrap;"><p>Contains:</p></td>
+	<td><p><a href="#executiontype">ExecutionType</a></p></td>
+	<td><p>Determines the execution type of an actor</p></td>
+</tr>
+<tr>
+	<td><p><a href="#actorref">ActorRef</a></p></td>
+	<td><p>An ActorRef is an instance of an ActorClass</p></td>
+</tr>
+<tr>
+	<td><p><a href="#port">Port</a></p></td>
+	<td><p>A Port is an instance of a ProtocolClass and the interface for an ActorClass</p></td>
+</tr>
+<tr>
+	<td><p><a href="#sap">SAP</a></p></td>
+	<td><p>A Service Access Point is similar to a Port, but uses a LayerConnection for wiring</p></td>
+</tr>
+<tr>
+	<td><p><a href="#spp">SPP</a></p></td>
+	<td><p>A Service Provision Point is the counterpart of a SAP</p></td>
+</tr>
+<tr>
+	<td><p><a href="#binding">Binding</a></p></td>
+	<td><p>A Binding connects two Ports with each other</p></td>
+</tr>
+<tr>
+	<td><p><a href="#layerconnection">LayerConnection</a></p></td>
+	<td><p>A LayerConnection associates a SPP to an ActorRef, resulting in an connection of all SAPs on its instance hierarchy</p></td>
+</tr>
+<tr>
+	<td><p><a href="#attribute">Attribute</a></p></td>
+	<td><p>An Attribute is a member variable of a class</p></td>
+</tr>
+<tr>
+	<td><p><a href="#operation">Operation</a></p></td>
+	<td><p>An Operation is a member function of a class</p></td>
+</tr>
+<tr>
+	<td><p><a href="#statemachine">StateMachine</a></p></td>
+	<td><p>A StateMachine describes the state based, event driven behavior of an ActorClass</p></td>
+</tr>
+<tr>
+	<td><p><a href="#annotation">Annotation</a></p></td>
+	<td><p>An Annotation can be attached to a ROOM classes to apply the properties of its AnnotationType</p></td>
+</tr>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Uses:</p></td>
+	<td><p><a href="#inheritance">Inheritance</a></p></td>
+	<td><p>A class can specify a super class and inherits elements from the super class hierarchy</p></td>
+</tr>
+</tbody>
+</table>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3"><p>Feature Usage</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Typecasts:</p></td>
+	<td><p><a href="#actorref">ActorRef</a></p></td>
+	<td><p>An ActorRef is an instance of an ActorClass</p></td>
+</tr>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Is contained in:</p></td>
+	<td><p><a href="#logicalmodel">LogicalModel</a></p></td>
+	<td><p>The LogicalModel describes the logical structure and behavior of a ROOM application</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example</strong>:</p>
+<hr>
+<h3><a href="#actorref" name="actorref"></a>ActorRef</h3>
+<p>An ActorRef is an instance of an ActorClass</p>
+<ul>
+  <li>ActorClass: The type of the ActorRef</li>
+  <li>Multiplicity: The number of instances. A number greater than one can be seen as an array of instances</li>
+  <li>Reference Type: Can be fixed or optional. Fixed requires an integer multiplicity and results in an static instantiation with an fixed number of instances during runtime . Optional denotes an dynamic instantiation, where ActorRefs can be created in arbitrary number during runtime. In this case, the multiplicity has to be set to ’*’
+</li>
+</ul>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th><p>Properties</p></th>
+	<th><p>Values</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td><p>multiplicity</p></td>
+	<td><p><em>1..n</em>, <em>*</em></p></td>
+</tr>
+</tbody>
+</table>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3"><p>Features</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Is of type:</p></td>
+	<td><p><a href="#actorclass">ActorClass</a></p></td>
+	<td><p>An actor is the basic structural building block for building systems with ROOM</p></td>
+</tr>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Uses:</p></td>
+	<td><p><a href="#replication">Replication</a></p></td>
+	<td><p>Replication is mechanism for multi-instantiation for ActorRefs and Ports</p></td>
+</tr>
+</tbody>
+</table>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3"><p>Feature Usage</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="2" style="white-space: nowrap;"><p>Is contained in:</p></td>
+	<td><p><a href="#actorclass">ActorClass</a></p></td>
+	<td><p>An actor is the basic structural building block for building systems with ROOM</p></td>
+</tr>
+<tr>
+	<td><p><a href="#subsystemclass">SubSystemClass</a></p></td>
+	<td><p>A SubSystem is the topmost building block of the executable part of an system</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example</strong>:</p>
+<pre><code class="room customHighlighted"><span class="keyword">SubSystemClass</span> SubSystemExample {
+	<span class="keyword">ActorRef</span> mainActor : ActorClassExample
+	
+	<span class="keyword">LogicalThread</span> default_thread
+}
+
+<span class="keyword">ActorClass</span> ActorClassExample {
+	<span class="keyword">Structure</span> {
+		<span class="keyword">ActorRef</span> sender : Sender
+		<span class="keyword">ActorRef</span> receiver : Receiver
+		
+		<span class="keyword">Binding</span> receiver.port <span class="keyword">and</span> sender.port
+	}
+}
+
+<span class="keyword">ActorClass</span> ActorClassExampleReplicated {
+	<span class="keyword">Structure</span> {
+		<span class="keyword">ActorRef</span> sender[3]: Sender
+		<span class="keyword">ActorRef</span> receiver[3] : Receiver
+		
+		<span class="keyword">Binding</span> receiver.port <span class="keyword">and</span> sender.port
+		<span class="comment">/* Equivalent to:
+		 *  Binding receiver[1].port and sender[1].port
+		 *  Binding receiver[2].port and sender[2].port
+		 * ....
+		 */</span>		
+	}
+}
+</code></pre>
+<p><img src="images/300-ActorRefInstanceDiagram.jpg" alt="ActorRef instance diagram"></p>
+<p>Instance hierarchy of ActorRef Example (*System(System)* not shown in code snippet)</p>
+<hr>
+<h3><a href="#annotation" name="annotation"></a>Annotation</h3>
+<p>An Annotation can be attached to a ROOM classes to apply the properties of its AnnotationType</p>
+<p>It refers to an AnnotationType and may have to pass key value pairs. Its notation is similar to Java:</p>
+<pre><code class="room customHighlighted">@AnnotationType1
+@AnnotationType2(key1=<span class="string">"STRING"</span>, key2=3, ...)
+</code></pre>
+<p>See section Annotations for further reading.</p>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3"><p>Features</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Is of type:</p></td>
+	<td><p><a href="#annotationtype">AnnotationType</a></p></td>
+	<td><p>AnnotationTypes can be used to tag ROOM classes for further custom processing</p></td>
+</tr>
+</tbody>
+</table>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3"><p>Feature Usage</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="5" style="white-space: nowrap;"><p>Is contained in:</p></td>
+	<td><p><a href="#logicalsystem">LogicalSystem</a></p></td>
+	<td><p>The LogicalSystem is the topmost structural class. It assembles a distributed system by means of sub systems</p></td>
+</tr>
+<tr>
+	<td><p><a href="#actorclass">ActorClass</a></p></td>
+	<td><p>An actor is the basic structural building block for building systems with ROOM</p></td>
+</tr>
+<tr>
+	<td><p><a href="#subsystemclass">SubSystemClass</a></p></td>
+	<td><p>A SubSystem is the topmost building block of the executable part of an system</p></td>
+</tr>
+<tr>
+	<td><p><a href="#protocolclass">ProtocolClass</a></p></td>
+	<td><p>A ProtocolClass defines messages and is the interface specification for a Port</p></td>
+</tr>
+<tr>
+	<td><p><a href="#dataclass">DataClass</a></p></td>
+	<td><p>A DataClass is a composition of Attributes</p></td>
+</tr>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Is used by:</p></td>
+	<td><p><a href="#datalogging">DataLogging</a></p></td>
+	<td><p>Runtime logger for data-driven Messages with primitive data.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example</strong>:</p>
+<pre><code class="room customHighlighted"><span class="keyword">import</span> room.basic.annotations.* <span class="keyword">from</span> <span class="string">"../../org.eclipse.etrice.modellib.c/model/Annotations.room"</span>
+
+<span class="keyword">ActorClass</span> ComponentAbstraction {
+	<span class="keyword">Interface</span> {
+		<span class="keyword">conjugated</span> <span class="keyword">Port</span> port1: Protocol1
+	}
+	<span class="keyword">Structure</span> {
+		<span class="keyword">external</span> <span class="keyword">Port</span> port1
+	}
+	<span class="keyword">Behavior</span> {
+		<span class="comment">// custom/external state machine implementation
+</span>		@BehaviorManual
+	}
+}
+</code></pre>
+<hr>
+<h3><a href="#annotationtype" name="annotationtype"></a>AnnotationType</h3>
+<p>AnnotationTypes can be used to tag ROOM classes for further custom processing</p>
+<p>They provide the ability to associate custom properties to ROOM classes, that adjust or toogle features, like generation or the runtime behavior.<br>eTrice has some built-in annotations, which can be found in Annotations.room within the eTrice modellib.</p>
+<p>See section Annotations for further reading.</p>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3"><p>Feature Usage</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Typecasts:</p></td>
+	<td><p><a href="#annotation">Annotation</a></p></td>
+	<td><p>An Annotation can be attached to a ROOM classes to apply the properties of its AnnotationType</p></td>
+</tr>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Is contained in:</p></td>
+	<td><p><a href="#logicalmodel">LogicalModel</a></p></td>
+	<td><p>The LogicalModel describes the logical structure and behavior of a ROOM application</p></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><a href="#attribute" name="attribute"></a>Attribute</h3>
+<p>An Attribute is a member variable of a class</p>
+<p>An Attribute can be be used to store arbitrary data. There are two common conceptual purpose of use:</p>
+<ul>
+  <li>model current system state (state machine variable)</li>
+  <li>store reference to more fine-grained components (e.g. c pointer to handle)</li>
+</ul>
+<p>Attributes can be defined in several ROOM classes.</p>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th><p>Properties</p></th>
+	<th><p>Values</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td><p>defaultValueLiteral</p></td>
+	<td><em><target code></target></em></td>
+</tr>
+<tr>
+	<td><p>multiplicity</p></td>
+	<td><em>1..n</em></td>
+</tr>
+<tr>
+	<td><p>ref</p></td>
+	<td></td>
+</tr>
+</tbody>
+</table>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3"><p>Features</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Is of type:</p></td>
+	<td><p><a href="#datatype">DataType</a></p></td>
+	<td><p>A DataType can take 4 forms and types data elements like an Attribute or Operation argument</p></td>
+</tr>
+</tbody>
+</table>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3"><p>Feature Usage</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="3" style="white-space: nowrap;"><p>Is contained in:</p></td>
+	<td><p><a href="#actorclass">ActorClass</a></p></td>
+	<td><p>An actor is the basic structural building block for building systems with ROOM</p></td>
+</tr>
+<tr>
+	<td><p><a href="#protocolclass">ProtocolClass</a></p></td>
+	<td><p>A ProtocolClass defines messages and is the interface specification for a Port</p></td>
+</tr>
+<tr>
+	<td><p><a href="#dataclass">DataClass</a></p></td>
+	<td><p>A DataClass is a composition of Attributes</p></td>
+</tr>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Is used by:</p></td>
+	<td><p><a href="#configmodel">ConfigModel</a></p></td>
+	<td><p>The ConfigModel describes the Attribute configuration of ActorInstances and PortInstances. </p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example</strong>:</p>
+<pre><code class="room customHighlighted"><span class="keyword">import</span> room.basic.types.* <span class="keyword">from</span> <span class="string">"../../../org.eclipse.etrice.modellib.c/model/Types.room"</span>
+
+<span class="keyword">DataClass</span> SimpleDataClass {
+	<span class="keyword">Attribute</span> attribute1: int16
+	<span class="keyword">Attribute</span> attribute2: uint32
+}
+
+<span class="keyword">ActorClass</span> ActorClassWithAttributes {
+	<span class="keyword">Structure</span> {
+		<span class="keyword">Attribute</span> attribute1: int32 			[<span class="string">"attribute of a PrimitiveType"</span> ]
+		<span class="keyword">Attribute</span> attribute2: SimpleDataClass 	[ <span class="string">"attribute of a DataClass"</span> ]
+	}
+}
+
+<span class="keyword">ActorClass</span> ActorClassWithAttributes2 {
+	<span class="keyword">Structure</span> {
+		<span class="keyword">Attribute</span> arrayAttribute[8] : uint32 [ <span class="string">"attribute with multiplicity"</span>]
+		<span class="keyword">Attribute</span> refAttribue : voidType <span class="keyword">ref</span> [ <span class="string">"attribute as a reference (void pointer)"</span>]
+	}
+}
+
+<span class="keyword">ActorClass</span> ActorClassWithAttributeInitialization {
+	<span class="keyword">Structure</span> {
+		<span class="keyword">Attribute</span> attribute1: uint32 = <span class="string">"3"</span>
+		<span class="keyword">Attribute</span> attribute2: SimpleDataClass = <span class="string">"{1, 2}"</span>
+		<span class="keyword">Attribute</span> arrayAttribute[8] : uint32 = <span class="string">"0"</span> <span class="comment">// or {0,0,0, ...}
+</span>		<span class="keyword">Attribute</span> refAttribue : voidType <span class="keyword">ref</span> = <span class="string">"NULL"</span> <span class="comment">// set reference in constructor or in state machine
+</span>	}
+}
+</code></pre>
+<hr>
+<h3><a href="#binding" name="binding"></a>Binding</h3>
+<p>A Binding connects two Ports with each other</p>
+<p>In essence, a binding is a abstraction for an underlying communication channel whose function is to convey messages from one port to the other.<br>The precise semantics of these channels are not defined in the Binding. Instead, they are determined by the ProtocolClasses that are associated with the Ports at the end of the Binding.</p>
+<pre><code class="room customHighlighted"><span class="keyword">ActorClass</span> ExampleActorClass {
+	<span class="keyword">Structure</span> {
+		<span class="keyword">conjugated</span> <span class="keyword">Port</span> sender: ProtocolClass1
+		<span class="keyword">ActorRef</span> actorRef: ActorClass2
+		
+		<span class="keyword">Binding</span> sender <span class="keyword">and</span> actorRef.receiver
+	}
+}
+</code></pre>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3"><p>Features</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="2" style="white-space: nowrap;"><p>Uses:</p></td>
+	<td><p><a href="#port">Port</a><br> : endpoint1</p></td>
+	<td><p>A Port is an instance of a ProtocolClass and the interface for an ActorClass</p></td>
+</tr>
+<tr>
+	<td><p><a href="#port">Port</a><br> : endpoint2</p></td>
+	<td><p>A Port is an instance of a ProtocolClass and the interface for an ActorClass</p></td>
+</tr>
+</tbody>
+</table>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3"><p>Feature Usage</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="2" style="white-space: nowrap;"><p>Is contained in:</p></td>
+	<td><p><a href="#actorclass">ActorClass</a></p></td>
+	<td><p>An actor is the basic structural building block for building systems with ROOM</p></td>
+</tr>
+<tr>
+	<td><p><a href="#subsystemclass">SubSystemClass</a></p></td>
+	<td><p>A SubSystem is the topmost building block of the executable part of an system</p></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><a href="#communicationtype" name="communicationtype"></a>CommunicationType</h3>
+<p>The CommunicationType defines the communication semantics of a ProtocolClass</p>
+<p>Since from ROOM models executable code can be generated, it is important to define the way the actors are executed and communicate with each other.<br>The combination of communication and execution is called the <em>execution model</em>. Therefore the ExecutionType of an actor and the CommunicationType of the ports has to be considered.</p>
+<p>The CommunicationType of a ProtocolClass (and thus of a Port) specifies in which way the communication should happen:</p>
+<ul>
+  <li><strong>message driven</strong> – asynchronous, non blocking, no return value: Usually the message driven communication is implemented with message queues. Message queues are inherently asynchronous and enable a very good decoupling of the communicating parties.</li>
+  <li><strong>data driven</strong> – asynchronous, non blocking, no return value: In data driven communication sender and receiver often have a shared block of data. The sender writes the data and the receiver polls the data.</li>
+  <li><em><strong>function call</strong> – synchronous, blocking, return value: Regular function call as known in most programming languages.</em> (not supported yet)</li>
+</ul>
+<p>CommunicationType relates with the <a href="#executiontype">ExecutionType</a> of an ActorClass, e.g. a data-driven port needs a cyclic thread, that polls the shared data.</p>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th><p>Properties</p></th>
+	<th><p>Values</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td><p>type</p></td>
+	<td><p><em>eventdriven</em>, <em>datadriven</em>, <em>sync</em></p></td>
+</tr>
+</tbody>
+</table>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3"><p>Feature Usage</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Is contained in:</p></td>
+	<td><p><a href="#protocolclass">ProtocolClass</a></p></td>
+	<td><p>A ProtocolClass defines messages and is the interface specification for a Port</p></td>
+</tr>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Is used by:</p></td>
+	<td><p><a href="#executiontype">ExecutionType</a></p></td>
+	<td><p>Determines the execution type of an actor</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example</strong>:</p>
+<pre><code class="room customHighlighted">
+<span class="keyword">import</span> room.basic.types.* <span class="keyword">from</span> <span class="string">"../../../org.eclipse.etrice.modellib.c/model/Types.room"</span>
+
+<span class="keyword">ProtocolClass</span> EventdrivenProtocolClass1 [ <span class="string">"default is eventdriven"</span> ] {
+	<span class="comment">// explicit: eventdriven ProtocolClass EventdrivenProtocolClass {
+</span>	<span class="keyword">incoming</span> {
+		<span class="keyword">Message</span> msg1() [<span class="string">"message without data"</span>]
+		<span class="keyword">Message</span> msg2(data: int32) [<span class="string">"message with data"</span>]
+	}
+	<span class="keyword">outgoing</span> {
+		<span class="keyword">Message</span> msg4()  [<span class="string">"eventdriven ProtocolClass can have message into two directions"</span>]
+	}
+}
+
+<span class="keyword">datadriven</span> <span class="keyword">ProtocolClass</span> DatadrivenProtocolClass {
+	<span class="keyword">incoming</span> {
+		<span class="keyword">Message</span> signal1 (data: int32) [<span class="string">"a datadriven message needs data"</span>]
+	}
+	<span class="comment">// datadriven ProtocolClass can only have incoming messages (signals)
+</span>}
+
+<span class="comment">//  sync is not supported yet
+</span><span class="comment">//	sync ProtocolClass SyncProtcolClass { 
+</span><span class="comment">//		
+</span><span class="comment">//	}
+</span></code></pre>
+<hr>
+<h3><a href="#dataclass" name="dataclass"></a>DataClass</h3>
+<p>A DataClass is a composition of Attributes</p>
+<p>Intended to model a type that primarily consists of data, which is usually grouped together in some manner. DataClasses roughly translate to Java classes without interaction or C <em>struct</em>s.</p>
+<pre><code class="room		">DataClass TCPConnectionData {
+	Attribute IPAddr: string
+	Attribute TcpPort: int32
+}
+</code></pre>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3"><p>Features</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Is a:</p></td>
+	<td><p><a href="#datatype">DataType</a></p></td>
+	<td><p>A DataType can take 4 forms and types data elements like an Attribute or Operation argument</p></td>
+</tr>
+<tr>
+	<td rowspan="3" style="white-space: nowrap;"><p>Contains:</p></td>
+	<td><p><a href="#attribute">Attribute</a></p></td>
+	<td><p>An Attribute is a member variable of a class</p></td>
+</tr>
+<tr>
+	<td><p><a href="#operation">Operation</a></p></td>
+	<td><p>An Operation is a member function of a class</p></td>
+</tr>
+<tr>
+	<td><p><a href="#annotation">Annotation</a></p></td>
+	<td><p>An Annotation can be attached to a ROOM classes to apply the properties of its AnnotationType</p></td>
+</tr>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Uses:</p></td>
+	<td><p><a href="#inheritance">Inheritance</a></p></td>
+	<td><p>A class can specify a super class and inherits elements from the super class hierarchy</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example</strong>:</p>
+<pre><code class="room customHighlighted"><span class="keyword">DataClass</span> SimpleDataClass {
+	<span class="keyword">Attribute</span> attribute1: uint16
+	<span class="keyword">Attribute</span> attribute2: uint32
+}
+
+<span class="keyword">DataClass</span> DataClassExample {
+	<span class="keyword">Attribute</span> attribute1: uint32
+	<span class="keyword">Attribute</span> attribute2: SimpleDataClass
+	<span class="keyword">Attribute</span> attribute3: voidType <span class="keyword">ref</span>
+	
+	<span class="keyword">Operation</span> operation1(param1: uint32, param2: uint16): boolean {
+		<span class="string">"return true;"</span>
+	}
+}
+</code></pre>
+<hr>
+<h3><a href="#datatype" name="datatype"></a>DataType</h3>
+<p>A DataType can take 4 forms and types data elements like an Attribute or Operation argument</p>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3"><p>Feature Usage</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="4" style="white-space: nowrap;"><p>Inheriting features:</p></td>
+	<td><p><a href="#primitivetype">PrimitiveType</a></p></td>
+	<td><p>A PrimitiveType is an abstraction of a target language’s basic type (e.g. integer or boolean)</p></td>
+</tr>
+<tr>
+	<td><p><a href="#enumeration">Enumeration</a></p></td>
+	<td><p>An EnumerationType declares an enumeration similar to most well-known languages</p></td>
+</tr>
+<tr>
+	<td><p><a href="#dataclass">DataClass</a></p></td>
+	<td><p>A DataClass is a composition of Attributes</p></td>
+</tr>
+<tr>
+	<td><p><a href="#externaltype">ExternalType</a></p></td>
+	<td><p>An ExternalType is used to make an target language type accessible in ROOM</p></td>
+</tr>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Typecasts:</p></td>
+	<td><p><a href="#attribute">Attribute</a></p></td>
+	<td><p>An Attribute is a member variable of a class</p></td>
+</tr>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Is contained in:</p></td>
+	<td><p><a href="#logicalmodel">LogicalModel</a></p></td>
+	<td><p>The LogicalModel describes the logical structure and behavior of a ROOM application</p></td>
+</tr>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Is used by:</p></td>
+	<td><p><a href="#operation">Operation</a></p></td>
+	<td><p>An Operation is a member function of a class</p></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><a href="#enumeration" name="enumeration"></a>Enumeration</h3>
+<p>An EnumerationType declares an enumeration similar to most well-known languages</p>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th><p>Properties</p></th>
+	<th><p>Values</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td><p>literals</p></td>
+	<td><em><name></name></em></td>
+</tr>
+</tbody>
+</table>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3"><p>Features</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Is a:</p></td>
+	<td><p><a href="#datatype">DataType</a></p></td>
+	<td><p>A DataType can take 4 forms and types data elements like an Attribute or Operation argument</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example</strong>:</p>
+<pre><code class="room customHighlighted"><span class="keyword">Enumeration</span> EOnOff {
+	Off = 0, <span class="comment">// explicit value=0
+</span>	On = 1 <span class="comment">// explicit value=1 
+</span>}
+
+<span class="keyword">Enumeration</span> EDay {
+	SUN,
+	MON,
+	TUE,
+	WED,
+	THU,
+	FRI,
+	SAT <span class="comment">// implicit enumeration 0..6
+</span>}
+</code></pre>
+<hr>
+<h3><a href="#executiontype" name="executiontype"></a>ExecutionType</h3>
+<p>Determines the execution type of an actor</p>
+<p>Since from ROOM models executable code can be generated, it is important to define the way the actors are<br>executed and communicate with each other. The combination of communication and execution is called the<br><em>execution model</em>. Therefore the ExecutionType of an actor and the CommunicationType of the ports has to be considered.</p>
+<p>The ExecutionType of an ActorClass specifies in which way its instance (ActorRef) should be executed:</p>
+<ul>
+  <li><strong>execution by receive event</strong>: The message queue or the event dispatcher calls a <strong>receive event</strong> function of the message receiver and thereby executes the processing of the event.</li>
+  <li><strong>polled execution</strong>: The objects are processed by a cyclic <strong>execute</strong> call</li>
+  <li><em><strong>execution by function call</strong>: The caller executes the called object via function call</em> (not supported yet)</li>
+  <li><strong>mixture</strong>: An asynchronous execution combines an event dispatcher and a polled execution.</li>
+</ul>
+<p>Thereby the ExecutionType determines the execution mode of the actor’s logical thread:</p>
+<p><img src="images/010-RoomIntroduction03.png" alt="Thread of Control"></p>
+<p>The actual execution of the underlying physical thread can be specified in the PhysicalModel in conjunction with the MappingModel.</p>
+<p>ExecutionType relates to the <a href="#communicationtype">CommunicationType</a>, e.g. if an actor uses data-driven ports, it should support an polled execution.</p>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th><p>Properties</p></th>
+	<th><p>Values</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td><p>mode</p></td>
+	<td><p><em>eventdriven</em>, <em>datadriven</em>, <em>async</em>, <em>sync</em></p></td>
+</tr>
+</tbody>
+</table>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3"><p>Features</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Uses:</p></td>
+	<td><p><a href="#communicationtype">CommunicationType</a></p></td>
+	<td><p>The CommunicationType defines the communication semantics of a ProtocolClass</p></td>
+</tr>
+</tbody>
+</table>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3"><p>Feature Usage</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Is contained in:</p></td>
+	<td><p><a href="#actorclass">ActorClass</a></p></td>
+	<td><p>An actor is the basic structural building block for building systems with ROOM</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example</strong>:</p>
+<pre><code class="room customHighlighted"><span class="keyword">eventdriven</span> <span class="keyword">ActorClass</span> EventdrivenActor [<span class="string">"default is eventdriven"</span>] {
+	<span class="comment">// only event-driven Ports and ActorRefs allowed
+</span>}
+
+<span class="keyword">datadriven</span> <span class="keyword">ActorClass</span> DatadrivenActor {
+	<span class="comment">// only data-driven Ports and ActorRefs allowed
+</span>}
+
+<span class="keyword">async</span> <span class="keyword">ActorClass</span> MixedActor{
+	<span class="comment">// both data/event-driven Ports and ActorRefs allowed
+</span>}
+</code></pre>
+<hr>
+<h3><a href="#externalendport" name="externalendport"></a>ExternalEndPort</h3>
+<p>A ExternalEndPort is an interface Port, that is made accessible to the internal interface of an ActorClass</p>
+<pre><code class="room customHighlighted"><span class="keyword">ActorClass</span> ExternalEndPortExample {
+	<span class="keyword">Interface</span> {
+		<span class="comment">// externalEndPort is connect from 'outside' and thus needs a Binding from containing ActorClass
+</span>		<span class="keyword">Port</span> externalEndPort : PSimpleProtocol
+	}
+	<span class="keyword">Structure</span> {
+		<span class="keyword">external</span> <span class="keyword">Port</span> externalEndPort
+	}
+	<span class="keyword">Behavior</span> {
+		<span class="comment">// send/receive messages from externalEndPort
+</span>	}
+}
+</code></pre>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3"><p>Features</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Is a:</p></td>
+	<td><p><a href="#port">Port</a></p></td>
+	<td><p>A Port is an instance of a ProtocolClass and the interface for an ActorClass</p></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><a href="#externaltype" name="externaltype"></a>ExternalType</h3>
+<p>An ExternalType is used to make an target language type accessible in ROOM</p>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th><p>Properties</p></th>
+	<th><p>Values</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td><p>targetName</p></td>
+	<td><em><identifier name></identifier></em></td>
+</tr>
+</tbody>
+</table>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3"><p>Features</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Is a:</p></td>
+	<td><p><a href="#datatype">DataType</a></p></td>
+	<td><p>A DataType can take 4 forms and types data elements like an Attribute or Operation argument</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example</strong>:</p>
+<pre><code class="room customHighlighted"><span class="comment">// Include is needed when used (e.g. in ActorClassWithExternalType)
+</span><span class="keyword">ExternalType</span> someStructType -&gt; <span class="string">"struct FILE_HANDLE"</span>
+
+<span class="keyword">ActorClass</span> ActorClassWithExternalType{
+	<span class="keyword">Structure</span> {
+		<span class="keyword">usercode1</span> {
+			<span class="string">"// #include &lt;___.h&gt; /* User includes here*/"</span>
+		}
+		<span class="keyword">Attribute</span> someHandle : someStructType <span class="keyword">ref</span> <span class="comment">// needs include
+</span>	}
+	<span class="keyword">Behavior</span> {
+		<span class="keyword">Operation</span> operation1(param1: charPtr) {
+			<span class="comment">// external calls or casts may need includes
+</span>			<span class="string">"write(someHandle, param1);"</span>
+		}
+	}
+}
+</code></pre>
+<hr>
+<h3><a href="#inheritance" name="inheritance"></a>Inheritance</h3>
+<p>A class can specify a super class and inherits elements from the super class hierarchy</p>
+<p>When a ROOM class specifies a super class, it generally inherits all elements and properties.<br>In several cases, it is possible, to override these inherited elements. Generally, eTrice has two semantics of overriding: refinement and replacement.<br>Refinement is used in most cases (e.g. StateMachine) and realizes an extension of the overridden elements.<br>In this case, if a sub class overrides a piece of logic from a super class, it will always be executed subsequently to the inherited.<br>Contrary to this, replacement is applied to overridden Operations, similar to programming languages C++ and Java.</p>
+<p>A formal definition of overriding is given below:</p>
+<ul>
+  <li>early or late resolve - if element is overridden, which one should super class use by default - own or override ?</li>
+  <li>replacing or refinement - ignore inherited code or prepend inherited code automatically ?</li>
+  <li>(non-)accessible - if element is overridden, is super class’ original accessible from sub class ? e.g. super.foo()</li>
+  <li>implicit or explicit - does it use distinct model element / keyword?</li>
+</ul>
+<p>Examples programming languages:<br>c++ virtual function and java override &lt;==&gt; accessible explicit late replacing<br>c++ function redefine &lt;==&gt; accessible implicit early replacing<br>c++ dtor &lt;==&gt; late refinement\</p>
+<p>eTrice override of model elements:<br>Operations (C generation) &lt;==&gt; non_accessible explicit late replacing<br>Operations (Java generation) &lt;==&gt; accessible explicit late replacing<br>State and Transitions &lt;==&gt; non-accessible explicit late refinement<br>ctor/dtor &lt;==&gt; non_accessible implicit late refinement<br>StateMachine &lt;==&gt; non-accessible implicit late refinement<br>UserCode &lt;==&gt; non-accessible implicit late refinement</p>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3"><p>Feature Usage</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="4" style="white-space: nowrap;"><p>Is used by:</p></td>
+	<td><p><a href="#actorclass">ActorClass</a></p></td>
+	<td><p>An actor is the basic structural building block for building systems with ROOM</p></td>
+</tr>
+<tr>
+	<td><p><a href="#statemachine">StateMachine</a></p></td>
+	<td><p>A StateMachine describes the state based, event driven behavior of an ActorClass</p></td>
+</tr>
+<tr>
+	<td><p><a href="#protocolclass">ProtocolClass</a></p></td>
+	<td><p>A ProtocolClass defines messages and is the interface specification for a Port</p></td>
+</tr>
+<tr>
+	<td><p><a href="#dataclass">DataClass</a></p></td>
+	<td><p>A DataClass is a composition of Attributes</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example</strong>:</p>
+<pre><code class="room customHighlighted"><span class="keyword">ActorClass</span> ActorSubClass <span class="keyword">extends</span> ActorBaseClass {
+	<span class="comment">// inherits all elements from super type hierarchy
+</span>}
+
+<span class="keyword">ActorClass</span> ActorBaseClass {
+	<span class="keyword">Interface</span> {
+		<span class="keyword">Port</span> port1 : ProtocolBaseClass
+	}
+	<span class="keyword">Structure</span> {
+		<span class="keyword">Attribute</span> attribute1 : uint32
+	}
+	<span class="keyword">Behavior</span> {
+		<span class="keyword">Operation</span> operation1(){
+			<span class="string">"return;"</span>
+		}
+	}
+}
+
+<span class="keyword">ProtocolClass</span> ProtocolSubClass <span class="keyword">extends</span> ProtocolBaseClass {
+	<span class="comment">// inherits all elements from super type hierarchy
+</span>}
+
+<span class="keyword">ProtocolClass</span> ProtocolBaseClass {
+	<span class="keyword">incoming</span> {
+		<span class="keyword">Message</span> message1()
+	}
+}
+
+<span class="keyword">DataClass</span> DataSubClass <span class="keyword">extends</span> DataBaseClass {
+	<span class="comment">// inherits all elements from super type hierarchy
+</span>}
+
+<span class="keyword">DataClass</span> DataBaseClass {
+	<span class="keyword">Attribute</span> attribute1 : uint32
+}
+</code></pre>
+<hr>
+<h3><a href="#internalendport" name="internalendport"></a>InternalEndPort</h3>
+<p>A InternalEndPort is an local Port, that is declared in the internal interface of an ActorClass</p>
+<pre><code class="room customHighlighted"><span class="keyword">ActorClass</span> InternalEndPortExample {
+	<span class="keyword">Structure</span> {
+		<span class="keyword">Port</span> internalEndPort : PSimpleProtocol
+		<span class="keyword">ActorRef</span> actorRef1 : SimpleActorClass
+		
+		<span class="comment">// internalEndPort lives 'local' and
+</span>		<span class="comment">// thus needs a Binding to port of a ActorRef
+</span>		<span class="keyword">Binding</span> internalEndPort <span class="keyword">and</span> actorRef1.externalPort2 
+	}
+	<span class="keyword">Behavior</span> {
+		<span class="comment">// send/receive messages from internalEndPorts
+</span>	}
+}
+</code></pre>
+<p><img src="images/300-InternalEndPort.png" alt="InternalEndPort"></p>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3"><p>Features</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Is a:</p></td>
+	<td><p><a href="#port">Port</a></p></td>
+	<td><p>A Port is an instance of a ProtocolClass and the interface for an ActorClass</p></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><a href="#layerconnection" name="layerconnection"></a>LayerConnection</h3>
+<p>A LayerConnection associates a SPP to an ActorRef, resulting in an connection of all SAPs on its instance hierarchy</p>
+<ul>
+  <li>An actor class can define a Service Provision Point (SPP) to publish a specific service, defined by a protocol class</li>
+  <li>An actor class can define a Service Access Point (SAP) if it needs a service, defined by a protocol class</li>
+  <li>For a given actor hierarchy, a LayerConnection defines which SAP will be satisfied by (connected to) which SPP</li>
+</ul>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3"><p>Features</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="2" style="white-space: nowrap;"><p>Uses:</p></td>
+	<td><p><a href="#sap">SAP</a><br> : SAPoint</p></td>
+	<td><p>A Service Access Point is similar to a Port, but uses a LayerConnection for wiring</p></td>
+</tr>
+<tr>
+	<td><p><a href="#spp">SPP</a><br> : SPPoint</p></td>
+	<td><p>A Service Provision Point is the counterpart of a SAP</p></td>
+</tr>
+</tbody>
+</table>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3"><p>Feature Usage</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="2" style="white-space: nowrap;"><p>Is contained in:</p></td>
+	<td><p><a href="#actorclass">ActorClass</a></p></td>
+	<td><p>An actor is the basic structural building block for building systems with ROOM</p></td>
+</tr>
+<tr>
+	<td><p><a href="#subsystemclass">SubSystemClass</a></p></td>
+	<td><p>A SubSystem is the topmost building block of the executable part of an system</p></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><a href="#logicalsystem" name="logicalsystem"></a>LogicalSystem</h3>
+<p>The LogicalSystem is the topmost structural class. It assembles a distributed system by means of sub systems</p>
+<p>It describes the logical topology of your distributed system and is composed of sub systems (SubSystemRefs). Thus it is the notationally root of every instance path or actor hierarchy.</p>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3"><p>Features</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="2" style="white-space: nowrap;"><p>Contains:</p></td>
+	<td><p><a href="#subsystemref">SubSystemRef</a></p></td>
+	<td><p>A Sub System Reference is an instance of an SubSystemClass</p></td>
+</tr>
+<tr>
+	<td><p><a href="#annotation">Annotation</a></p></td>
+	<td><p>An Annotation can be attached to a ROOM classes to apply the properties of its AnnotationType</p></td>
+</tr>
+</tbody>
+</table>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3"><p>Feature Usage</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Is contained in:</p></td>
+	<td><p><a href="#logicalmodel">LogicalModel</a></p></td>
+	<td><p>The LogicalModel describes the logical structure and behavior of a ROOM application</p></td>
+</tr>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Is used by:</p></td>
+	<td><p><a href="#mappingmodel">MappingModel</a></p></td>
+	<td><p>The MappingModel describes the mapping of elements of the LogicalModel to elements of the PhysicalModel</p></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><a href="#operation" name="operation"></a>Operation</h3>
+<p>An Operation is a member function of a class</p>
+<p>Operations can be used to define a piece of reusable logic. The definition consists of:</p>
+<ul>
+  <li>Arbitrary amount of arguments</li>
+  <li>Return type</li>
+  <li>User code body, which can access the structural part of the containing class (e.g. attributes)</li>
+  <li>‘override’ keyword, replaces the logic of the inherited operation having the same signature</li>
+</ul>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th><p>Properties</p></th>
+	<th><p>Values</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td><p>returnType</p></td>
+	<td><em><datatype></datatype></em></td>
+</tr>
+<tr>
+	<td><p>arguments</p></td>
+	<td><em><name> : <datatype></datatype></name></em></td>
+</tr>
+</tbody>
+</table>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3"><p>Features</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Uses:</p></td>
+	<td><p><a href="#datatype">DataType</a></p></td>
+	<td><p>A DataType can take 4 forms and types data elements like an Attribute or Operation argument</p></td>
+</tr>
+</tbody>
+</table>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3"><p>Feature Usage</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="3" style="white-space: nowrap;"><p>Is contained in:</p></td>
+	<td><p><a href="#actorclass">ActorClass</a></p></td>
+	<td><p>An actor is the basic structural building block for building systems with ROOM</p></td>
+</tr>
+<tr>
+	<td><p><a href="#protocolclass">ProtocolClass</a></p></td>
+	<td><p>A ProtocolClass defines messages and is the interface specification for a Port</p></td>
+</tr>
+<tr>
+	<td><p><a href="#dataclass">DataClass</a></p></td>
+	<td><p>A DataClass is a composition of Attributes</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example</strong>:</p>
+<pre><code class="room customHighlighted"><span class="keyword">import</span> room.basic.types.* <span class="keyword">from</span> <span class="string">"../../../org.eclipse.etrice.modellib.c/model/Types.room"</span>
+
+<span class="keyword">DataClass</span> DataClassWithOperation {
+	<span class="keyword">Attribute</span> attribute1 : uint32
+	
+	<span class="keyword">Operation</span> operation1(param1: uint32, param2: int32): boolean {
+		<span class="string">"return attribute1 &gt; (param1 - param2);"</span>
+	}
+}
+
+<span class="keyword">ActorClass</span> ActorClassWithOperation {
+	<span class="keyword">Structure</span> {
+		<span class="keyword">Attribute</span> attribute1 : uint32
+	}
+	<span class="keyword">Behavior</span> {
+		<span class="keyword">Operation</span> operation1(param1: uint32, param2: int32): boolean {
+			<span class="string">"return attribute1 &gt; (param1 - param2);"</span>
+		}
+	}
+}
+
+<span class="keyword">ActorClass</span> ActorClassWithOperation2 {
+	<span class="keyword">Structure</span> {
+		<span class="keyword">usercode1</span> {
+			<span class="string">"// #include &lt;___.h&gt; /* User includes here*/"</span>
+		}
+		<span class="keyword">Attribute</span> someHandle : voidType <span class="keyword">ref</span>
+	}
+	<span class="keyword">Behavior</span> {
+		<span class="keyword">Operation</span> operation1(param1: charPtr) {
+			<span class="comment">// external calls or casts may need includes
+</span>			<span class="string">"write(someHandle, param1);"</span>
+		}
+	}
+}
+</code></pre>
+<hr>
+<h3><a href="#port" name="port"></a>Port</h3>
+<p>A Port is an instance of a ProtocolClass and the interface for an ActorClass</p>
+<p>Once a ProtocolClass has been created, it can be used to define actor interfaces. This is accomplished by means of Ports.<br>A Port is a declaration that the set of messages defined by its ProtocolClass is now part of the actor’s interface.<br>It provides strong decoupling of ActorClasses from each other, thus enabling easy testability, reusability and deployment of actors to different threads or nodes.</p>
+<pre><code class="room customHighlighted"><span class="keyword">ActorClass</span> Example {
+	Structure{
+		<span class="keyword">Port</span> port0 : ProtocolClass1
+	}
+	<span class="keyword">Behavior</span> {
+		<span class="comment">// send/receive message from port0
+</span>	}
+}
+</code></pre>
+<p>For communication between two actors to take place, a connection must be established between a port on one of the actors and a port on the other.<br>One condition is, that both Ports have compatible ProtocolClasses. In most cases the Ports simply refer to the same protocol.<br>In addition, a ProtocolClass has an imposed directionality - it defines one subset of messages as incoming and the complementary subset as outgoing.<br>Which subset is labeled as incoming and outgoing is arbitrary, it simply depends on the point of view, that was taken when defining.<br>Therefore Ports can be ‘regular’ and ‘conjugated’. When two actors communicate by a connected pair of Ports, one Port has to be regular and the other conjugated.<br>The ProtocolClass’ incoming messages are on one side received by the regular Port and on the other sent by the conjugated Port (outgoing message vice versa).</p>
+<p>A connection of Ports is denoted by a Binding. </p>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th><p>Properties</p></th>
+	<th><p>Values</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td><p>conjugated</p></td>
+	<td><p><em>regular</em>, <em>conjugated</em></p></td>
+</tr>
+<tr>
+	<td><p>multiplicity</p></td>
+	<td><p><em>1..n</em>, <em>*</em></p></td>
+</tr>
+</tbody>
+</table>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3"><p>Features</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Is of type:</p></td>
+	<td><p><a href="#protocolclass">ProtocolClass</a></p></td>
+	<td><p>A ProtocolClass defines messages and is the interface specification for a Port</p></td>
+</tr>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Uses:</p></td>
+	<td><p><a href="#replication">Replication</a></p></td>
+	<td><p>Replication is mechanism for multi-instantiation for ActorRefs and Ports</p></td>
+</tr>
+</tbody>
+</table>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3"><p>Feature Usage</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="3" style="white-space: nowrap;"><p>Inheriting features:</p></td>
+	<td><p><a href="#relayport">RelayPort</a></p></td>
+	<td><p>A RelayPort forwards its messages without exposing them to the internal interface of the ActorClass</p></td>
+</tr>
+<tr>
+	<td><p><a href="#externalendport">ExternalEndPort</a></p></td>
+	<td><p>A ExternalEndPort is an interface Port, that is made accessible to the internal interface of an ActorClass</p></td>
+</tr>
+<tr>
+	<td><p><a href="#internalendport">InternalEndPort</a></p></td>
+	<td><p>A InternalEndPort is an local Port, that is declared in the internal interface of an ActorClass</p></td>
+</tr>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Is contained in:</p></td>
+	<td><p><a href="#actorclass">ActorClass</a></p></td>
+	<td><p>An actor is the basic structural building block for building systems with ROOM</p></td>
+</tr>
+<tr>
+	<td rowspan="2" style="white-space: nowrap;"><p>Is used by:</p></td>
+	<td><p><a href="#binding">Binding</a><br> : endpoint1</p></td>
+	<td><p>A Binding connects two Ports with each other</p></td>
+</tr>
+<tr>
+	<td><p><a href="#binding">Binding</a><br> : endpoint2</p></td>
+	<td><p>A Binding connects two Ports with each other</p></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><a href="#primitivetype" name="primitivetype"></a>PrimitiveType</h3>
+<p>A PrimitiveType is an abstraction of a target language’s basic type (e.g. integer or boolean)</p>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th><p>Properties</p></th>
+	<th><p>Values</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td><p>targetName</p></td>
+	<td><em><identifer name></identifer></em></td>
+</tr>
+</tbody>
+</table>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3"><p>Features</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Is a:</p></td>
+	<td><p><a href="#datatype">DataType</a></p></td>
+	<td><p>A DataType can take 4 forms and types data elements like an Attribute or Operation argument</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example</strong>:</p>
+<p>The eTrice built-in types can be found in the <em>org.eclipse.etrice.modellib</em> project. In most cases the <em>Types.room</em> is already included:</p>
+<pre><code class="room customHighlighted"><span class="comment">// Follow import by Open Declaration (F3)
+</span><span class="keyword">import</span> room.basic.types.* <span class="keyword">from</span> <span class="string">"../../../org.eclipse.etrice.modellib.c/model/Types.room"</span>
+</code></pre>
+<hr>
+<h3><a href="#protocolclass" name="protocolclass"></a>ProtocolClass</h3>
+<p>A ProtocolClass defines messages and is the interface specification for a Port</p>
+<p>A ProtocolClass provides a reusable interface specification for ports. It defines a set of incoming and outgoing Messages that can be exchanged between two ports.<br>The exact semantics of a message is defined by the CommunicationType.<br>Protocol classes have only textual notation.</p>
+<pre><code class="room customHighlighted"><span class="keyword">ProtocolClass</span> SimpleProtocolClass {
+	<span class="keyword">incoming</span> {
+		<span class="keyword">Message</span> msg1(data: int32}
+		<span class="keyword">Message</span> msg2()
+	}
+	<span class="keyword">outgoing</span> {
+		<span class="keyword">Message</span> msg3(data: DataClass1}
+		<span class="keyword">Message</span> msg4()
+	}
+}
+</code></pre>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3"><p>Features</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="4" style="white-space: nowrap;"><p>Contains:</p></td>
+	<td><p><a href="#communicationtype">CommunicationType</a></p></td>
+	<td><p>The CommunicationType defines the communication semantics of a ProtocolClass</p></td>
+</tr>
+<tr>
+	<td><p><a href="#attribute">Attribute</a></p></td>
+	<td><p>An Attribute is a member variable of a class</p></td>
+</tr>
+<tr>
+	<td><p><a href="#operation">Operation</a></p></td>
+	<td><p>An Operation is a member function of a class</p></td>
+</tr>
+<tr>
+	<td><p><a href="#annotation">Annotation</a></p></td>
+	<td><p>An Annotation can be attached to a ROOM classes to apply the properties of its AnnotationType</p></td>
+</tr>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Uses:</p></td>
+	<td><p><a href="#inheritance">Inheritance</a></p></td>
+	<td><p>A class can specify a super class and inherits elements from the super class hierarchy</p></td>
+</tr>
+</tbody>
+</table>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3"><p>Feature Usage</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="3" style="white-space: nowrap;"><p>Typecasts:</p></td>
+	<td><p><a href="#port">Port</a></p></td>
+	<td><p>A Port is an instance of a ProtocolClass and the interface for an ActorClass</p></td>
+</tr>
+<tr>
+	<td><p><a href="#sap">SAP</a></p></td>
+	<td><p>A Service Access Point is similar to a Port, but uses a LayerConnection for wiring</p></td>
+</tr>
+<tr>
+	<td><p><a href="#spp">SPP</a></p></td>
+	<td><p>A Service Provision Point is the counterpart of a SAP</p></td>
+</tr>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Is contained in:</p></td>
+	<td><p><a href="#logicalmodel">LogicalModel</a></p></td>
+	<td><p>The LogicalModel describes the logical structure and behavior of a ROOM application</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example</strong>:</p>
+<pre><code class="room customHighlighted"><span class="keyword">import</span> room.basic.types.* <span class="keyword">from</span> <span class="string">"../../../org.eclipse.etrice.modellib.c/model/Types.room"</span>
+
+<span class="comment">// eventdriven ProtocolClass (asynchronous message passing, bidirectional)
+</span><span class="keyword">eventdriven</span> <span class="keyword">ProtocolClass</span> ProtocolClassEvt {
+	<span class="comment">// ProtocolClass ProtocolClassEvt { // same like above because eventdriven is default 
+</span>	<span class="keyword">incoming</span> {
+		<span class="comment">// incoming means incoming for a regular port and outgoing for a conjugated port
+</span>		<span class="keyword">Message</span> message1() <span class="comment">// message without data
+</span>		<span class="keyword">Message</span> message2(data: int32) <span class="comment">// message with simple data
+</span>		<span class="keyword">Message</span> message3(data: DMessageData) <span class="comment">// message with complex data (DataClass)
+</span>
+	}
+	<span class="keyword">outgoing</span> {
+	<span class="comment">// outgoing means outgoing for a regular port and incoming for a conjugated port
+</span>		<span class="keyword">Message</span> message1(data: int32) <span class="comment">// incoming and outgoing Messages can have the same name to enable symmetric protocols
+</span>	}
+}
+
+<span class="comment">// DataClass for sending complex data via message
+</span><span class="keyword">DataClass</span> DMessageData {
+	<span class="keyword">Attribute</span> SomeData: int16
+	<span class="keyword">Attribute</span> SomeMoreData: int32
+}
+
+<span class="comment">// datadriven ProtocolClass (asynchronous data flow, unidirectional)
+</span><span class="keyword">datadriven</span> <span class="keyword">ProtocolClass</span> ProtocolClassData {
+	<span class="keyword">incoming</span> {
+		<span class="comment">// incoming means incoming for a regular port and outgoing for a conjugated port
+</span>		<span class="keyword">Message</span> value1(value: int32) <span class="comment">// a datadriven message (signal) always needs data
+</span>		<span class="keyword">Message</span> value2(value: int16) <span class="comment">// datadriven message with simple data
+</span>		<span class="keyword">Message</span> value3(value: DMessageData) <span class="comment">// datadriven message with complex data (DataClass)
+</span>
+	}
+	<span class="comment">// no outgoing messages for datadriven ports allowed 
+</span>}
+</code></pre>
+<hr>
+<h3><a href="#relayport" name="relayport"></a>RelayPort</h3>
+<p>A RelayPort forwards its messages without exposing them to the internal interface of the ActorClass</p>
+<pre><code class="room customHighlighted"><span class="keyword">ActorClass</span> RelayPortExample{
+	<span class="keyword">Interface</span> {
+		<span class="keyword">Port</span> relayPort : PSimpleProtocol
+	}
+	<span class="keyword">Structure</span> {
+		<span class="keyword">ActorRef</span> actorRef1 : SimpleActorClass2
+		
+		<span class="comment">// relayPort can be directed to port of an ActorRef
+</span>		<span class="keyword">Binding</span> relayPort <span class="keyword">and</span> actorRef1.externalPort
+	}
+	<span class="keyword">Behavior</span> {
+		<span class="comment">// relayPort not available !
+</span>	}
+}
+</code></pre>
+<p><img src="images/300-RelayPort.png" alt="RelayPort"></p>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3"><p>Features</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Is a:</p></td>
+	<td><p><a href="#port">Port</a></p></td>
+	<td><p>A Port is an instance of a ProtocolClass and the interface for an ActorClass</p></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><a href="#replication" name="replication"></a>Replication</h3>
+<p>Replication is mechanism for multi-instantiation for ActorRefs and Ports</p>
+<p>ActorRefs and Ports can be instantiated several times under the same name. The notation is similar to arrays in programming languages.</p>
+<p>This possibility provides an elegant way of scaling of your system without redundancy.</p>
+<pre><code class="room customHighlighted"><span class="keyword">ActorRef</span> sensor : Sensor 			<span class="comment">// one instance
+</span><span class="keyword">ActorRef</span> sensor[1] : Sensor			<span class="comment">// one instance
+</span><span class="keyword">ActorRef</span> sensorArray[5] : Sensor	<span class="comment">// five instances  
+</span></code></pre>
+<p>Replication can also applied to Ports. One use case is to establish a communication with multiple actors through one port interface.</p>
+<pre><code class="room customHighlighted"><span class="keyword">Port</span> service[5] : TimingService 	<span class="comment">// five instances
+</span><span class="keyword">Port</span> service[*] : TimingService		<span class="comment">// automatic, as many as needed
+</span></code></pre>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3"><p>Feature Usage</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="2" style="white-space: nowrap;"><p>Is used by:</p></td>
+	<td><p><a href="#actorref">ActorRef</a></p></td>
+	<td><p>An ActorRef is an instance of an ActorClass</p></td>
+</tr>
+<tr>
+	<td><p><a href="#port">Port</a></p></td>
+	<td><p>A Port is an instance of a ProtocolClass and the interface for an ActorClass</p></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><a href="#sap" name="sap"></a>SAP</h3>
+<p>A Service Access Point is similar to a Port, but uses a LayerConnection for wiring</p>
+<ul>
+  <li>An actor class can define a Service Provision Point (SPP) to publish a specific service, defined by a protocol class</li>
+  <li>An actor class can define a Service Access Point (SAP) if it needs a service, defined by a protocol class</li>
+  <li>For a given actor hierarchy, a LayerConnection defines which SAP will be satisfied by (connected to) which SPP</li>
+</ul>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3"><p>Features</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Is of type:</p></td>
+	<td><p><a href="#protocolclass">ProtocolClass</a></p></td>
+	<td><p>A ProtocolClass defines messages and is the interface specification for a Port</p></td>
+</tr>
+</tbody>
+</table>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3"><p>Feature Usage</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Is contained in:</p></td>
+	<td><p><a href="#actorclass">ActorClass</a></p></td>
+	<td><p>An actor is the basic structural building block for building systems with ROOM</p></td>
+</tr>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Is used by:</p></td>
+	<td><p><a href="#layerconnection">LayerConnection</a><br> : SAPoint</p></td>
+	<td><p>A LayerConnection associates a SPP to an ActorRef, resulting in an connection of all SAPs on its instance hierarchy</p></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><a href="#spp" name="spp"></a>SPP</h3>
+<p>A Service Provision Point is the counterpart of a SAP</p>
+<ul>
+  <li>An actor class can define a Service Provision Point (SPP) to publish a specific service, defined by a protocol class</li>
+  <li>An actor class can define a Service Access Point (SAP) if it needs a service, defined by a protocol class</li>
+  <li>For a given actor hierarchy, a LayerConnection defines which SAP will be satisfied by (connected to) which SPP</li>
+</ul>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3"><p>Features</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Is of type:</p></td>
+	<td><p><a href="#protocolclass">ProtocolClass</a></p></td>
+	<td><p>A ProtocolClass defines messages and is the interface specification for a Port</p></td>
+</tr>
+</tbody>
+</table>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3"><p>Feature Usage</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Is contained in:</p></td>
+	<td><p><a href="#actorclass">ActorClass</a></p></td>
+	<td><p>An actor is the basic structural building block for building systems with ROOM</p></td>
+</tr>
+<tr>
+	<td rowspan="2" style="white-space: nowrap;"><p>Is used by:</p></td>
+	<td><p><a href="#layerconnection">LayerConnection</a><br> : SPPoint</p></td>
+	<td><p>A LayerConnection associates a SPP to an ActorRef, resulting in an connection of all SAPs on its instance hierarchy</p></td>
+</tr>
+<tr>
+	<td><p><a href="#serviceimplementation">ServiceImplementation</a></p></td>
+	<td><p>The implementation of an Service Provision Point (SPP)</p></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><a href="#statemachine" name="statemachine"></a>StateMachine</h3>
+<p>A StateMachine describes the state based, event driven behavior of an ActorClass</p>
+<p>In ROOM each actor class can implement its behavior using a state machine. Events occurring at the end ports of an actor will be forwarded to and processed by the state machine. Events possibly trigger state transitions.</p>
+<p><img src="images/300-PingPongReceiverFSM.png" alt="PingPongReceiverFSM"></p>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3"><p>Features</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Uses:</p></td>
+	<td><p><a href="#inheritance">Inheritance</a></p></td>
+	<td><p>A class can specify a super class and inherits elements from the super class hierarchy</p></td>
+</tr>
+</tbody>
+</table>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3"><p>Feature Usage</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Is contained in:</p></td>
+	<td><p><a href="#actorclass">ActorClass</a></p></td>
+	<td><p>An actor is the basic structural building block for building systems with ROOM</p></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><a href="#subsystemclass" name="subsystemclass"></a>SubSystemClass</h3>
+<p>A SubSystem is the topmost building block of the executable part of an system</p>
+<p>It represents a class for an logical node in a distributed system. An instantiation translates to an executable application, that runs on a node or process.<br>A SubSystemClass is the structural starting point of an ROOM application. Thus it declares the topmost actor instances (ActorRefs).</p>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3"><p>Features</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="4" style="white-space: nowrap;"><p>Contains:</p></td>
+	<td><p><a href="#actorref">ActorRef</a></p></td>
+	<td><p>An ActorRef is an instance of an ActorClass</p></td>
+</tr>
+<tr>
+	<td><p><a href="#binding">Binding</a></p></td>
+	<td><p>A Binding connects two Ports with each other</p></td>
+</tr>
+<tr>
+	<td><p><a href="#layerconnection">LayerConnection</a></p></td>
+	<td><p>A LayerConnection associates a SPP to an ActorRef, resulting in an connection of all SAPs on its instance hierarchy</p></td>
+</tr>
+<tr>
+	<td><p><a href="#annotation">Annotation</a></p></td>
+	<td><p>An Annotation can be attached to a ROOM classes to apply the properties of its AnnotationType</p></td>
+</tr>
+</tbody>
+</table>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3"><p>Feature Usage</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Typecasts:</p></td>
+	<td><p><a href="#subsystemref">SubSystemRef</a></p></td>
+	<td><p>A Sub System Reference is an instance of an SubSystemClass</p></td>
+</tr>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Is contained in:</p></td>
+	<td><p><a href="#logicalmodel">LogicalModel</a></p></td>
+	<td><p>The LogicalModel describes the logical structure and behavior of a ROOM application</p></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><a href="#subsystemref" name="subsystemref"></a>SubSystemRef</h3>
+<p>A Sub System Reference is an instance of an SubSystemClass</p>
+<p>It represent a logical node in the structural view of a distributed system. An instantiation translates to an executable application, that runs on a node or process.</p>
+<p>To be executable, a SubSystemRef has first to be mapped to a physical node, which defines the executional properties.<br>A physical node is denoted by a NodeClass and NodeRef in the PhysicalModel. The mapping is defined in the MappingModel.</p>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3"><p>Features</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Is of type:</p></td>
+	<td><p><a href="#subsystemclass">SubSystemClass</a></p></td>
+	<td><p>A SubSystem is the topmost building block of the executable part of an system</p></td>
+</tr>
+</tbody>
+</table>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3"><p>Feature Usage</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Is contained in:</p></td>
+	<td><p><a href="#logicalsystem">LogicalSystem</a></p></td>
+	<td><p>The LogicalSystem is the topmost structural class. It assembles a distributed system by means of sub systems</p></td>
+</tr>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Is used by:</p></td>
+	<td><p><a href="#mappingmodel">MappingModel</a></p></td>
+	<td><p>The MappingModel describes the mapping of elements of the LogicalModel to elements of the PhysicalModel</p></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2><a href="#mappingmodel" name="mappingmodel"></a>MappingModel</h2>
+<p>The MappingModel describes the mapping of elements of the LogicalModel to elements of the PhysicalModel</p>
+<p>It enables the complete decoupling of the LogicalModel and the PhysicalModel, thus providing a maximum flexibility and reuse for the models.</p>
+<p>The model starts with an import part, where you can import .room and .etphys models. They must contain at least one LogicalSystem and one PhysicalSystem.<br>A Mapping entry puts both in relation, meaning that all sub systems of the LogicalSystem will be distributed to the nodes of the PhysicalSystem.<br>This is carried out by a SubSystemMapping, that maps a SubSystemRef (logical node) to a NodeRef (physical node).<br>In the next step, ThreadMappings provide the same action for the logical and physical threads.</p>
+<pre><code class="etmap customHighlighted"><span class="keyword">MappingModel</span> PingPongMapping {
+	<span class="keyword">import</span> PingPong_Model.* <span class="keyword">from</span> <span class="string">"PingPong.room"</span>
+	<span class="keyword">import</span> GenericPhysicalModel.* <span class="keyword">from</span> <span class="string">"GenericPhysical.etphys"</span>
+
+	<span class="keyword">Mapping</span> LogSys -&gt; PhysSys1 {
+		<span class="keyword">SubSystemMapping</span> subSystemRef -&gt; nodeRef1 {
+			<span class="keyword">ThreadMapping</span> defaultThread -&gt; PhysicalThread1
+		}
+	}
+
+}
+</code></pre>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3"><p>Features</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="3" style="white-space: nowrap;"><p>Uses:</p></td>
+	<td><p><a href="#logicalsystem">LogicalSystem</a></p></td>
+	<td><p>The LogicalSystem is the topmost structural class. It assembles a distributed system by means of sub systems</p></td>
+</tr>
+<tr>
+	<td><p><a href="#subsystemref">SubSystemRef</a></p></td>
+	<td><p>A Sub System Reference is an instance of an SubSystemClass</p></td>
+</tr>
+<tr>
+	<td><p><a href="#physicalmodel">PhysicalModel</a></p></td>
+	<td><p>The PhysicalModel defines the setup of your nodes with their attributes like threads and mode of execution</p></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2><a href="#physicalmodel" name="physicalmodel"></a>PhysicalModel</h2>
+<p>The PhysicalModel defines the setup of your nodes with their attributes like threads and mode of execution</p>
+<p>The model describes the physical view of your system:</p>
+<pre><code class="etphys customHighlighted"><span class="keyword">PhysicalSystem</span> PhysSys1 {
+	<span class="keyword">NodeRef</span> nodeRef1 : NodeClass1
+	<span class="keyword">NodeRef</span> nodeRef2 : NodeClass2
+}
+</code></pre>
+<p>The central element is a NodeClass, that models the executional aspects of a device (node).<br>At first, it can be associated with a RuntimeClass, which specifies if your device supports multiple threads.<br>‘priomin’ and ‘priomax’ define the range of priorities, that can be assigned to threads.</p>
+<pre><code class="etphys customHighlighted"><span class="keyword">NodeClass</span> NodeClass1 {
+	<span class="keyword">runtime</span> = RuntimeClass1
+	<span class="keyword">priomin</span> = -10
+	<span class="keyword">priomax</span> = 10
+
+	<span class="comment">// Thread definitions ...
+</span>}
+
+<span class="keyword">RuntimeClass</span> RuntimeClass1 {
+	<span class="keyword">model</span> = <span class="keyword">multiThreaded</span> <span class="comment">// or singleThreaded
+</span>}
+</code></pre>
+<p>A thread has to specify the following properties:</p>
+<ul>
+  <li>
+    <p><strong>execmode</strong>: defines the execution type, see more at ExecutionType</p>
+    <ul>
+      <li>blocked: message-driven only, thread wakes up if message arrives and is put to sleep after all action is done</li>
+      <li>polled: data-driven only, thread is executed cyclic. The ‘interval’ property is mandatory in this case.</li>
+      <li>mixed: combines both execution types</li>
+    </ul>
+  </li>
+  <li>
+  <p><strong>msgblocksize</strong>: the size in bytes of a message</p></li>
+  <li><strong>msgpoolsize</strong>: the amount of messages, that the thread’s message queue can store</li>
+</ul>
+<p>Note: ‘msgblocksize’ and ‘msgpoolsize’ also apply to the polled execution due the internal implementation via message passing.<br> The size of the message queue can be calculated as follows: msgpoolsize * msgblocksize bytes </p>
+<pre><code class="etphys customHighlighted"><span class="keyword">DefaultThread</span> ThreadMessaging {
+	<span class="keyword">execmode</span> = <span class="keyword">polled</span>
+	<span class="keyword">prio</span> = 0
+	<span class="keyword">stacksize</span> = 1024
+	<span class="keyword">msgblocksize</span> = 32
+	<span class="keyword">msgpoolsize</span> = 10
+}
+
+<span class="keyword">Thread</span> ThreadPolled {
+	<span class="keyword">execmode</span> = <span class="keyword">polled</span>
+	<span class="keyword">prio</span> = 0
+	<span class="keyword">interval</span> = 100ms
+	<span class="keyword">stacksize</span> = 1024
+	<span class="keyword">msgblocksize</span> = 32
+	<span class="keyword">msgpoolsize</span> = 10
+}
+</code></pre>
+<p><img src="images/300-PhysicalModelOverview.png" alt="Overview of PhysicalModel"></p>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3"><p>Feature Usage</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Is used by:</p></td>
+	<td><p><a href="#mappingmodel">MappingModel</a></p></td>
+	<td><p>The MappingModel describes the mapping of elements of the LogicalModel to elements of the PhysicalModel</p></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h1><a href="#modeleditors" name="modeleditors"></a>ModelEditors</h1>
+<p>All aspects of the ROOMLanguage can be edited by full-blown textual editors. In addition, graphical editing is provided for the structural and behavioral part of ActorClasses.</p>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3"><p>Features</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="3" style="white-space: nowrap;"><p>Contains:</p></td>
+	<td><p><a href="#textualroomeditor">TextualROOMEditor</a></p></td>
+	<td><p>Textual model editor</p></td>
+</tr>
+<tr>
+	<td><p><a href="#graphicalstructureeditor">GraphicalStructureEditor</a></p></td>
+	<td><p>The Structure Editor allows to edit the ActorClass’ Structure in a convenient way. It is possible to create and arrange actor references and ports and to create bindings and layer connections.</p></td>
+</tr>
+<tr>
+	<td><p><a href="#graphicalbehavioreditor">GraphicalBehaviorEditor</a></p></td>
+	<td><p>The GraphicalBehaviorEditor allows to edit the ActorClass’ StateMachine. It is possible to create (hierarchical) states and transitions to model complex behavior in a convenient way.</p></td>
+</tr>
+</tbody>
+</table>
+<h2><a href="#graphicalbehavioreditor" name="graphicalbehavioreditor"></a>GraphicalBehaviorEditor</h2>
+<p>The GraphicalBehaviorEditor allows to edit the ActorClass’ StateMachine. It is possible to create (hierarchical) states and transitions to model complex behavior in a convenient way.</p>
+<p><img src="images/300-GraphicalBehaviorEditor.png" alt="GraphicalBehaviorEditor"></p>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3"><p>Features</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Edits:</p></td>
+	<td><p><a href="#statemachine">StateMachine</a></p></td>
+	<td><p>A StateMachine describes the state based, event driven behavior of an ActorClass</p></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2><a href="#graphicalstructureeditor" name="graphicalstructureeditor"></a>GraphicalStructureEditor</h2>
+<p>The Structure Editor allows to edit the ActorClass’ Structure in a convenient way. It is possible to create and arrange actor references and ports and to create bindings and layer connections.</p>
+<p><img src="images/300-GraphicalStructureEditor.png" alt="GraphicalStructureEditor"></p>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3"><p>Features</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="4" style="white-space: nowrap;"><p>Contains:</p></td>
+	<td><p><a href="#structureeditorpalette">StructureEditorPalette</a></p></td>
+	<td><p>The palette creates central structural elements of an ActorClass.</p></td>
+</tr>
+<tr>
+	<td><p><a href="#actorrefpropertydialog">ActorRefPropertyDialog</a></p></td>
+	<td><p>A dialog to edit properties of an ActorRef.</p></td>
+</tr>
+<tr>
+	<td><p><a href="#portpropertydialog">PortPropertyDialog</a></p></td>
+	<td><p>A dialog to edit properties of an Port.</p></td>
+</tr>
+<tr>
+	<td><p><a href="#spppropertydialog">SPPPropertyDialog</a></p></td>
+	<td><p>A dialog to edit properties of a SPP.</p></td>
+</tr>
+<tr>
+	<td rowspan="6" style="white-space: nowrap;"><p>Edits:</p></td>
+	<td><p><a href="#actorclass">ActorClass</a></p></td>
+	<td><p>An actor is the basic structural building block for building systems with ROOM</p></td>
+</tr>
+<tr>
+	<td><p><a href="#actorref">ActorRef</a></p></td>
+	<td><p>An ActorRef is an instance of an ActorClass</p></td>
+</tr>
+<tr>
+	<td><p><a href="#port">Port</a></p></td>
+	<td><p>A Port is an instance of a ProtocolClass and the interface for an ActorClass</p></td>
+</tr>
+<tr>
+	<td><p><a href="#sap">SAP</a></p></td>
+	<td><p>A Service Access Point is similar to a Port, but uses a LayerConnection for wiring</p></td>
+</tr>
+<tr>
+	<td><p><a href="#binding">Binding</a></p></td>
+	<td><p>A Binding connects two Ports with each other</p></td>
+</tr>
+<tr>
+	<td><p><a href="#layerconnection">LayerConnection</a></p></td>
+	<td><p>A LayerConnection associates a SPP to an ActorRef, resulting in an connection of all SAPs on its instance hierarchy</p></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><a href="#actorrefpropertydialog" name="actorrefpropertydialog"></a>ActorRefPropertyDialog</h3>
+<p>A dialog to edit properties of an ActorRef.</p>
+<p>The dialog is used to edit an existing ActorRef of an ActorClass. It is also shown when creating a new one.</p>
+<p><img src="images/300-ActorRefDialog.png" alt="ActorRefDialog"></p>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3"><p>Features</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Edits:</p></td>
+	<td><p><a href="#actorref">ActorRef</a></p></td>
+	<td><p>An ActorRef is an instance of an ActorClass</p></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><a href="#portpropertydialog" name="portpropertydialog"></a>PortPropertyDialog</h3>
+<p>A dialog to edit properties of an Port.</p>
+<p>The dialog is used to edit an existing Port of an ActorClass. It is also shown when creating a new one.</p>
+<p><img src="images/300-PortDialog.png" alt="PortDialog"></p>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3"><p>Features</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Edits:</p></td>
+	<td><p><a href="#port">Port</a></p></td>
+	<td><p>A Port is an instance of a ProtocolClass and the interface for an ActorClass</p></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><a href="#spppropertydialog" name="spppropertydialog"></a>SPPPropertyDialog</h3>
+<p>A dialog to edit properties of a SPP.</p>
+<p>The dialog is used to edit an existing SPP of an ActorClass. It is also shown when creating a new one.</p>
+<p><img src="images/300-SPPDialog.png" alt="SPPDialog"></p>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3"><p>Features</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Edits:</p></td>
+	<td><p><a href="#spp">SPP</a></p></td>
+	<td><p>A Service Provision Point is the counterpart of a SAP</p></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><a href="#structureeditorpalette" name="structureeditorpalette"></a>StructureEditorPalette</h3>
+<p>The palette creates central structural elements of an ActorClass.</p>
+<p>Selecting an entry from the palette and clicking into the diagram, creates the element at the current position.</p>
+<p><img src="images/300-StructurePalette.png" alt="StructurePalette"></p>
+<hr>
+<h2><a href="#textualroomeditor" name="textualroomeditor"></a>TextualROOMEditor</h2>
+<p>Textual model editor</p>
+<p><img src="images/300-TextualROOMEditor.png" alt="TextualROOMEditor"></p>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3"><p>Features</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Contains:</p></td>
+	<td><p><a href="#outlineview">OutlineView</a></p></td>
+	<td><p>Displays an overview of all elements in the textual editor.</p></td>
+</tr>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Edits:</p></td>
+	<td><p><a href="#roomlanguage">ROOMLanguage</a></p></td>
+	<td><p>The Real Time Object Oriented Modeling (ROOM)</p></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><a href="#outlineview" name="outlineview"></a>OutlineView</h3>
+<p>Displays an overview of all elements in the textual editor.</p>
+<p>Shows the structure of the current opened model in the textual editor. Select the ‘Link with Editor’ option to synchronize the selection of elements between editor and outline view. This enables a convenient navigation.</p>
+<p><img src="images/300-OutlineView.png" alt="OutlineView"></p>
+<hr>
+<h1><a href="#codegenerators" name="codegenerators"></a>CodeGenerators</h1>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3"><p>Features</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="2" style="white-space: nowrap;"><p>Contains:</p></td>
+	<td><p><a href="#ccodegenerator">CCodeGenerator</a></p></td>
+	<td></td>
+</tr>
+<tr>
+	<td><p><a href="#javacodegenerator">JavaCodeGenerator</a></p></td>
+	<td></td>
+</tr>
+</tbody>
+</table>
+<h2><a href="#ccodegenerator" name="ccodegenerator"></a>CCodeGenerator</h2>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3"><p>Features</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="3" style="white-space: nowrap;"><p>Contains:</p></td>
+	<td><p><a href="#generationoptions">GenerationOptions</a></p></td>
+	<td><p>Mechanism to adjust the generation.</p></td>
+</tr>
+<tr>
+	<td><p><a href="#msclogging">MSCLogging</a></p></td>
+	<td><p>Runtime logger for event-driven Messages, represented as a Message Sequence Chart.</p></td>
+</tr>
+<tr>
+	<td><p><a href="#datalogging">DataLogging</a></p></td>
+	<td><p>Runtime logger for data-driven Messages with primitive data.</p></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><a href="#datalogging" name="datalogging"></a>DataLogging</h3>
+<p>Runtime logger for data-driven Messages with primitive data.</p>
+<p>The DataLogging uses an annotation to configure the generated instrumentation:</p>
+<pre><code class="room customHighlighted">@DataLogging(pathlist = <span class="string">"/portInstancePath,/portInstancePath,.."</span>)
+</code></pre>
+<p>Where <code>pathlist</code> is a string specifying a list of port instances which should be instrumented for data logging:</p>
+<ul>
+  <li>the path of a port instance starts with the name of the <a href="#logicalsystem">LogicalSystem</a> and thus consists of at least 4 following segments<br><code>/portInstancePath</code> = <code>/LogicalSystem/SubSystemRef/ActorRef/Port</code></li>
+  <li>multiple paths are separated through comma (<code>,</code>), but avoid any whitespace</li>
+  <li>the <a href="#port">Port</a> must be conjugated and it´s <a href="#protocolclass">ProtocolClass</a> has to be data-driven</li>
+  <li>only the first Message having primitive or enum typed data is considered</li>
+</ul>
+<p>The logging status can be verified in the generation console. It will output an overview of all accepted ports. In the <a href="#generationoptions">GenerationOptions</a> is possible to (de)activate the data logging and thus ignoring the presence of the annotation.</p>
+<p>At runtime the data values will then be logged </p>
+<ul>
+  <li>into a file <em>log/SubSystemRef.data.csv</em></li>
+  <li>it contains one column for each port instance</li>
+  <li>and a new row for every polling cycle, containing all readout data values</li>
+  <li>the first column is used to number the cycles</li>
+</ul>
+<p>Multi-Threading is not supported, the system must have not more than one polled/async physical thread.</p>
+<p>The built-in <strong>Gnuplot script generator</strong> provides a convenient way to visualize the logged data. It generates a gnuplot script that can be used to create graphs from the logged data values.</p>
+<ul>
+  <li>Download Gnuplot from <a href="http://www.gnuplot.info/">www.gnuplot.info</a> and add it to the environment variable <em>PATH</em> (e.g. <code>C:\Program Files\gnuplot\bin;</code>)</li>
+  <li>Use the <code>@Gnuplot</code> and <code>@GnuplotGraph</code> to configure the script generation (see example)</li>
+  <li>The generated artifacts can be found in <em>src-gen/gnuplot</em>:
+    <ul>
+      <li><em>xxx.csv-script.plt</em> - the gnuplot script, the resulting images are place in folder <em>log/</em></li>
+      <li><em>create_gnuplot.launch</em> - a launch configuration to call gnuplot executable with above script</li>
+    </ul>
+  </li>
+</ul>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3"><p>Features</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Uses:</p></td>
+	<td><p><a href="#annotation">Annotation</a></p></td>
+	<td><p>An Annotation can be attached to a ROOM classes to apply the properties of its AnnotationType</p></td>
+</tr>
+</tbody>
+</table>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3"><p>Feature Usage</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Is contained in:</p></td>
+	<td><p><a href="#ccodegenerator">CCodeGenerator</a></p></td>
+	<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example</strong>:</p>
+<pre><code class="room customHighlighted"><span class="keyword">import</span> room.basic.annotations.* <span class="keyword">from</span> <span class="string">"../../org.eclipse.etrice.modellib.c/model/Annotations.room"</span>
+
+<span class="keyword">LogicalSystem</span> Logging {
+ 	<span class="keyword">SubSystemRef</span> main: MainSubSystem
+}
+
+<span class="keyword">SubSystemClass</span> MainSubSystem {
+ 	@DataLogging(pathlist = <span class="string">"/Logging/main/actorRef1/port1"</span>)
+ 	@Gnuplot(format=<span class="string">"pngcairo"</span>, outputfile=<span class="string">"main.data.png"</span>, width=1800, height=600, fontsize=10)
+	@GnuplotGraph(
+		paths=<span class="string">"/Logging/main/actorRef1/port1"</span>,
+		xtics=100, mxtics=4, ymin=-1.2, ymax=1.2
+	)
+</code></pre>
+<p>Logged data values in .csv format:</p>
+<pre><code> , /LogSys/subSystemRef/rootActor/serverInst/output, /LogSys/subSystemRef/rootActor/clientInst/output
+0, 0.000000											,0.000000
+1, 0.000000											,0.100000
+2, 0.099833											,0.200000
+3, 0.198669											,0.300000
+4, 0.295520											,0.400000
+5, 0.389418											,0.500000
+[...]
+</code></pre>
+<p>Resulting graph created from generated gnuplot script:<br><img src="images/300-Gnuplot.png" alt="Gnuplot example"></p>
+<hr>
+<h2><a href="#generationoptions" name="generationoptions"></a>GenerationOptions</h2>
+<p>Mechanism to adjust the generation.</p>
+<p>Options for generation are configured in the launch configuration or in case of standalone generation via command line.<br>A list of available options:</p>
+<ul>
+  <li>generate as library</li>
+  <li>generate documentation</li>
+  <li>generate instrumentation for MSC generation</li>
+  <li>generate instrumentation for data logging</li>
+  <li>override output directories</li>
+  <li>debug options</li>
+</ul>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3"><p>Feature Usage</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="2" style="white-space: nowrap;"><p>Is contained in:</p></td>
+	<td><p><a href="#ccodegenerator">CCodeGenerator</a></p></td>
+	<td></td>
+</tr>
+<tr>
+	<td><p><a href="#javacodegenerator">JavaCodeGenerator</a></p></td>
+	<td></td>
+</tr>
+<tr>
+	<td rowspan="2" style="white-space: nowrap;"><p>Is used by:</p></td>
+	<td><p><a href="#msclogging">MSCLogging</a></p></td>
+	<td><p>Runtime logger for event-driven Messages, represented as a Message Sequence Chart.</p></td>
+</tr>
+<tr>
+	<td><p><a href="#documentationgenerator">DocumentationGenerator</a></p></td>
+	<td><p>A LaTeX documentation generator from eTrice models.</p></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2><a href="#javacodegenerator" name="javacodegenerator"></a>JavaCodeGenerator</h2>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3"><p>Features</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="2" style="white-space: nowrap;"><p>Contains:</p></td>
+	<td><p><a href="#generationoptions">GenerationOptions</a></p></td>
+	<td><p>Mechanism to adjust the generation.</p></td>
+</tr>
+<tr>
+	<td><p><a href="#msclogging">MSCLogging</a></p></td>
+	<td><p>Runtime logger for event-driven Messages, represented as a Message Sequence Chart.</p></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2><a href="#msclogging" name="msclogging"></a>MSCLogging</h2>
+<p>Runtime logger for event-driven Messages, represented as a Message Sequence Chart.</p>
+<p>The MSCLogging is activated by default, but can be set manually in the <a href="#generationoptions">GenerationOptions</a>. The output file is created upon regular termination of the application. The resulting file can be found in the logging directory and has the name <em>msc.seq</em>, which can be open with the free open source tool <a href="http://trace2uml.stage.tigris.org/">Trace2UML</a>.</p>
+<p><img src="images/300-MSCLogging.png" alt="MSCLogging"></p>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3"><p>Features</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Uses:</p></td>
+	<td><p><a href="#generationoptions">GenerationOptions</a></p></td>
+	<td><p>Mechanism to adjust the generation.</p></td>
+</tr>
+</tbody>
+</table>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3"><p>Feature Usage</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="2" style="white-space: nowrap;"><p>Is contained in:</p></td>
+	<td><p><a href="#ccodegenerator">CCodeGenerator</a></p></td>
+	<td></td>
+</tr>
+<tr>
+	<td><p><a href="#javacodegenerator">JavaCodeGenerator</a></p></td>
+	<td></td>
+</tr>
+</tbody>
+</table>
+<hr></body></html>
+
+</body>
+</html>
+
+

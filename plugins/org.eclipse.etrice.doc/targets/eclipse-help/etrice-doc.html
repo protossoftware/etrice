@@ -1,0 +1,1244 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>eTrice Documentation</title>
+
+<link rel="stylesheet" type="text/css" href="css/book.css"/>
+<link rel="stylesheet" type="text/css" href="css/custom-common.css"/>
+
+</head>
+<body>
+
+
+
+	
+
+<html><head></head><body><!-- front page: template etrice-doc.st appends toc --->
+<div style="text-align:center;">
+<img src="images/logo/eTRICE-logo.png">
+<h1>eTrice Documentation</h1>
+</div></body></html>
+
+<ul>
+<li><a href="introduction.html">Introduction</a>
+<ul>
+<li><a href="introduction.html#etrice-overview">eTrice Overview</a>
+<ul>
+<li><a href="introduction.html#what-is-etrice-">What is eTrice?</a></li>
+
+
+
+
+
+
+
+
+<li><a href="introduction.html#reduction-of-complexity">Reduction of Complexity</a></li>
+
+
+
+
+
+
+
+
+</ul>
+</li>
+
+
+
+
+
+
+
+<li><a href="introduction.html#introduction-room-language">Introduction ROOM Language</a>
+<ul>
+<li><a href="introduction.html#scope-of-room">Scope of ROOM</a></li>
+
+
+
+
+
+
+
+
+<li><a href="introduction.html#basic-concepts">Basic Concepts</a></li>
+
+
+
+
+
+
+
+
+<li><a href="introduction.html#execution-models">Execution Models</a></li>
+
+
+
+
+
+
+
+
+</ul>
+</li>
+
+
+
+
+
+
+
+</ul>
+</li>
+
+
+
+
+
+
+
+<li><a href="tutorials.html">Tutorials</a>
+<ul>
+<li><a href="tutorials.html#working-with-the-tutorials">Working with the tutorials</a></li>
+
+
+
+
+
+
+
+
+<li><a href="tutorials.html#getting-started-c">Getting Started C</a></li>
+
+
+
+
+
+
+
+
+<li><a href="tutorials.html#getting-started-java">Getting Started Java</a></li>
+
+
+
+
+
+
+
+
+<li><a href="tutorials.html#tutorial-ping-pong-for-java-and-c">Tutorial Ping Pong for Java and C</a>
+<ul>
+<li><a href="tutorials.html#scope">Scope</a></li>
+
+
+
+
+
+
+
+
+<li><a href="tutorials.html#create-the-structure">Create the structure</a></li>
+
+
+
+
+
+
+
+
+<li><a href="tutorials.html#implement-the-behavior">Implement the Behavior</a></li>
+
+
+
+
+
+
+
+
+<li><a href="tutorials.html#summary">Summary</a></li>
+
+
+
+
+
+
+
+
+</ul>
+</li>
+
+
+
+
+
+
+
+<li><a href="tutorials.html#troubleshooting">Troubleshooting</a></li>
+
+
+
+
+
+
+
+
+</ul>
+</li>
+
+
+
+
+
+
+
+<li><a href="standalone-generators.html">Standalone Generators</a></li>
+
+
+
+
+
+
+
+
+<li><a href="examples.html">Examples</a>
+<ul>
+<li><a href="examples.html#the-c-examples-project">The C examples project</a>
+<ul>
+<li><a href="examples.html#traffic-light-step-1">Traffic light - step 1</a></li>
+
+
+
+
+
+
+
+
+<li><a href="examples.html#traffic-light-step-2">Traffic light - step 2</a></li>
+
+
+
+
+
+
+
+
+<li><a href="examples.html#traffic-light-step-3">Traffic light - step 3</a></li>
+
+
+
+
+
+
+
+
+<li><a href="examples.html#traffic-light-step-4">Traffic light - step 4</a></li>
+
+
+
+
+
+
+
+
+<li><a href="examples.html#features">Features</a></li>
+
+
+
+
+
+
+
+
+</ul>
+</li>
+
+
+
+
+
+
+
+<li><a href="examples.html#the-java-examples-project">The Java examples project</a>
+<ul>
+<li><a href="examples.html#dynamic-actors-1">Dynamic Actors 1</a></li>
+
+
+
+
+
+
+
+
+<li><a href="examples.html#dynamic-actors-2">Dynamic Actors 2</a></li>
+
+
+
+
+
+
+
+
+<li><a href="examples.html#dynamic-actors-3">Dynamic Actors 3</a></li>
+
+
+
+
+
+
+
+
+<li><a href="examples.html#dynamic-actors-4">Dynamic Actors 4</a></li>
+
+
+
+
+
+
+
+
+<li><a href="examples.html#dynamic-actors-5">Dynamic Actors 5</a></li>
+
+
+
+
+
+
+
+
+<li><a href="examples.html#dynamic-actors-6">Dynamic Actors 6</a></li>
+
+
+
+
+
+
+
+
+<li><a href="examples.html#dynamic-actors-7">Dynamic Actors 7</a></li>
+
+
+
+
+
+
+
+
+<li><a href="examples.html#dynamic-actors-8">Dynamic Actors 8</a></li>
+
+
+
+
+
+
+
+
+<li><a href="examples.html#dynamic-actors-9">Dynamic Actors 9</a></li>
+
+
+
+
+
+
+
+
+</ul>
+</li>
+
+
+
+
+
+
+
+</ul>
+</li>
+
+
+
+
+
+
+
+<li><a href="room-concepts.html">ROOM Concepts</a>
+<ul>
+<li><a href="room-concepts.html#actors">Actors</a></li>
+
+
+
+
+
+
+
+
+<li><a href="room-concepts.html#protocols">Protocols</a></li>
+
+
+
+
+
+
+
+
+<li><a href="room-concepts.html#ports">Ports</a></li>
+
+
+
+
+
+
+
+
+<li><a href="room-concepts.html#dataclass">DataClass</a></li>
+
+
+
+
+
+
+
+
+<li><a href="room-concepts.html#layering">Layering</a></li>
+
+
+
+
+
+
+
+
+<li><a href="room-concepts.html#finite-state-machines">Finite State Machines</a></li>
+
+
+
+
+
+
+
+
+</ul>
+</li>
+
+
+
+
+
+
+
+<li><a href="etrice-features.html">eTrice Features</a>
+<ul>
+<li><a href="etrice-features.html#model-navigation">Model Navigation</a>
+<ul>
+<li><a href="etrice-features.html#from-model-to-behavior-to-structure">From Model to Behavior to Structure</a></li>
+
+
+
+
+
+
+
+
+<li><a href="etrice-features.html#model-navigation">Model Navigation</a></li>
+
+
+
+
+
+
+
+
+<li><a href="etrice-features.html#navigating-behavior-diagrams">Navigating Behavior Diagrams</a></li>
+
+
+
+
+
+
+
+
+<li><a href="etrice-features.html#navigating-structure-diagrams">Navigating Structure Diagrams</a></li>
+
+
+
+
+
+
+
+
+</ul>
+</li>
+
+
+
+
+
+
+
+<li><a href="etrice-features.html#etrice-java-projects">eTrice Java Projects</a>
+<ul>
+<li><a href="etrice-features.html#eclipse-jdt-build">Eclipse JDT Build</a></li>
+
+
+
+
+
+
+
+
+<li><a href="etrice-features.html#maven-build">Maven Build</a></li>
+
+
+
+
+
+
+
+
+</ul>
+</li>
+
+
+
+
+
+
+
+<li><a href="etrice-features.html#automatic-diagram-layout-with-kieler">Automatic Diagram Layout with KIELER</a>
+<ul>
+<li><a href="etrice-features.html#overview">Overview</a></li>
+
+
+
+
+
+
+
+
+<li><a href="etrice-features.html#performing-automatic-layout">Performing Automatic Layout</a></li>
+
+
+
+
+
+
+
+
+<li><a href="etrice-features.html#layout-options">Layout Options</a></li>
+
+
+
+
+
+
+
+
+<li><a href="etrice-features.html#configuring-layout-options">Configuring Layout Options</a></li>
+
+
+
+
+
+
+
+
+<li><a href="etrice-features.html#special-layout-options">Special Layout Options</a></li>
+
+
+
+
+
+
+
+
+<li><a href="etrice-features.html#further-references">Further References</a></li>
+
+
+
+
+
+
+
+
+</ul>
+</li>
+
+
+
+
+
+
+
+<li><a href="etrice-features.html#annotations">Annotations</a>
+<ul>
+<li><a href="etrice-features.html#annotation-type-definitions">Annotation Type Definitions</a></li>
+
+
+
+
+
+
+
+
+<li><a href="etrice-features.html#usage-and-effect-of-the-pre-defined-annotations">Usage and Effect of the Pre-defined Annotations</a></li>
+
+
+
+
+
+
+
+
+</ul>
+</li>
+
+
+
+
+
+
+
+<li><a href="etrice-features.html#enumerations">Enumerations</a></li>
+
+
+
+
+
+
+
+
+<li><a href="etrice-features.html#etrice-models-and-their-relations">eTrice Models and Their Relations</a>
+<ul>
+<li><a href="etrice-features.html#the-room-model">The ROOM Model</a></li>
+
+
+
+
+
+
+
+
+<li><a href="etrice-features.html#the-config-model">The Config Model</a></li>
+
+
+
+
+
+
+
+
+<li><a href="etrice-features.html#the-physical-model">The Physical Model</a></li>
+
+
+
+
+
+
+
+
+<li><a href="etrice-features.html#the-mapping-model">The Mapping Model</a></li>
+
+
+
+
+
+
+
+
+</ul>
+</li>
+
+
+
+
+
+
+
+</ul>
+</li>
+
+
+
+
+
+
+
+<li><a href="feature-reference.html">Feature Reference</a>
+<ul>
+<li><a href="feature-reference.html#roomlanguage">ROOMLanguage</a>
+<ul>
+<li><a href="feature-reference.html#configmodel">ConfigModel</a></li>
+
+
+
+
+
+
+
+
+<li><a href="feature-reference.html#logicalmodel">LogicalModel</a>
+<ul>
+<li><a href="feature-reference.html#actorclass">ActorClass</a></li>
+
+
+
+
+
+
+
+
+<li><a href="feature-reference.html#actorref">ActorRef</a></li>
+
+
+
+
+
+
+
+
+<li><a href="feature-reference.html#annotation">Annotation</a></li>
+
+
+
+
+
+
+
+
+<li><a href="feature-reference.html#annotationtype">AnnotationType</a></li>
+
+
+
+
+
+
+
+
+<li><a href="feature-reference.html#attribute">Attribute</a></li>
+
+
+
+
+
+
+
+
+<li><a href="feature-reference.html#binding">Binding</a></li>
+
+
+
+
+
+
+
+
+<li><a href="feature-reference.html#communicationtype">CommunicationType</a></li>
+
+
+
+
+
+
+
+
+<li><a href="feature-reference.html#dataclass">DataClass</a></li>
+
+
+
+
+
+
+
+
+<li><a href="feature-reference.html#datatype">DataType</a></li>
+
+
+
+
+
+
+
+
+<li><a href="feature-reference.html#enumeration">Enumeration</a></li>
+
+
+
+
+
+
+
+
+<li><a href="feature-reference.html#executiontype">ExecutionType</a></li>
+
+
+
+
+
+
+
+
+<li><a href="feature-reference.html#externalendport">ExternalEndPort</a></li>
+
+
+
+
+
+
+
+
+<li><a href="feature-reference.html#externaltype">ExternalType</a></li>
+
+
+
+
+
+
+
+
+<li><a href="feature-reference.html#inheritance">Inheritance</a></li>
+
+
+
+
+
+
+
+
+<li><a href="feature-reference.html#internalendport">InternalEndPort</a></li>
+
+
+
+
+
+
+
+
+<li><a href="feature-reference.html#layerconnection">LayerConnection</a></li>
+
+
+
+
+
+
+
+
+<li><a href="feature-reference.html#logicalsystem">LogicalSystem</a></li>
+
+
+
+
+
+
+
+
+<li><a href="feature-reference.html#operation">Operation</a></li>
+
+
+
+
+
+
+
+
+<li><a href="feature-reference.html#port">Port</a></li>
+
+
+
+
+
+
+
+
+<li><a href="feature-reference.html#primitivetype">PrimitiveType</a></li>
+
+
+
+
+
+
+
+
+<li><a href="feature-reference.html#protocolclass">ProtocolClass</a></li>
+
+
+
+
+
+
+
+
+<li><a href="feature-reference.html#relayport">RelayPort</a></li>
+
+
+
+
+
+
+
+
+<li><a href="feature-reference.html#replication">Replication</a></li>
+
+
+
+
+
+
+
+
+<li><a href="feature-reference.html#sap">SAP</a></li>
+
+
+
+
+
+
+
+
+<li><a href="feature-reference.html#spp">SPP</a></li>
+
+
+
+
+
+
+
+
+<li><a href="feature-reference.html#statemachine">StateMachine</a></li>
+
+
+
+
+
+
+
+
+<li><a href="feature-reference.html#subsystemclass">SubSystemClass</a></li>
+
+
+
+
+
+
+
+
+<li><a href="feature-reference.html#subsystemref">SubSystemRef</a></li>
+
+
+
+
+
+
+
+
+</ul>
+</li>
+
+
+
+
+
+
+
+<li><a href="feature-reference.html#mappingmodel">MappingModel</a></li>
+
+
+
+
+
+
+
+
+<li><a href="feature-reference.html#physicalmodel">PhysicalModel</a></li>
+
+
+
+
+
+
+
+
+</ul>
+</li>
+
+
+
+
+
+
+
+<li><a href="feature-reference.html#modeleditors">ModelEditors</a>
+<ul>
+<li><a href="feature-reference.html#graphicalbehavioreditor">GraphicalBehaviorEditor</a></li>
+
+
+
+
+
+
+
+
+<li><a href="feature-reference.html#graphicalstructureeditor">GraphicalStructureEditor</a>
+<ul>
+<li><a href="feature-reference.html#actorrefpropertydialog">ActorRefPropertyDialog</a></li>
+
+
+
+
+
+
+
+
+<li><a href="feature-reference.html#portpropertydialog">PortPropertyDialog</a></li>
+
+
+
+
+
+
+
+
+<li><a href="feature-reference.html#spppropertydialog">SPPPropertyDialog</a></li>
+
+
+
+
+
+
+
+
+<li><a href="feature-reference.html#structureeditorpalette">StructureEditorPalette</a></li>
+
+
+
+
+
+
+
+
+</ul>
+</li>
+
+
+
+
+
+
+
+<li><a href="feature-reference.html#textualroomeditor">TextualROOMEditor</a>
+<ul>
+<li><a href="feature-reference.html#outlineview">OutlineView</a></li>
+
+
+
+
+
+
+
+
+</ul>
+</li>
+
+
+
+
+
+
+
+</ul>
+</li>
+
+
+
+
+
+
+
+<li><a href="feature-reference.html#codegenerators">CodeGenerators</a>
+<ul>
+<li><a href="feature-reference.html#ccodegenerator">CCodeGenerator</a>
+<ul>
+<li><a href="feature-reference.html#datalogging">DataLogging</a></li>
+
+
+
+
+
+
+
+
+</ul>
+</li>
+
+
+
+
+
+
+
+<li><a href="feature-reference.html#generationoptions">GenerationOptions</a></li>
+
+
+
+
+
+
+
+
+<li><a href="feature-reference.html#javacodegenerator">JavaCodeGenerator</a></li>
+
+
+
+
+
+
+
+
+<li><a href="feature-reference.html#msclogging">MSCLogging</a></li>
+
+
+
+
+
+
+
+
+</ul>
+</li>
+
+
+
+
+
+
+
+</ul>
+</li>
+
+
+
+
+
+
+
+<li><a href="developers-reference.html">Developer's Reference</a>
+<ul>
+<li><a href="developers-reference.html#etrice-tool-developer-s-reference">eTrice Tool Developer’s Reference</a>
+<ul>
+<li><a href="developers-reference.html#architecture">Architecture</a>
+<ul>
+<li><a href="developers-reference.html#editor-and-generator-components">Editor and Generator Components</a></li>
+
+
+
+
+
+
+
+
+<li><a href="developers-reference.html#the-abstract-finite-state-machine-concept">The Abstract Finite State Machine Concept</a></li>
+
+
+
+
+
+
+
+
+<li><a href="developers-reference.html#runtimes">Runtimes</a></li>
+
+
+
+
+
+
+
+
+<li><a href="developers-reference.html#unit-tests">Unit Tests</a></li>
+
+
+
+
+
+
+
+
+</ul>
+</li>
+
+
+
+
+
+
+
+<li><a href="developers-reference.html#component-overview">Component Overview</a>
+<ul>
+<li><a href="developers-reference.html#room-language-overview">Room Language Overview</a></li>
+
+
+
+
+
+
+
+
+<li><a href="developers-reference.html#config-language-overview">Config Language Overview</a></li>
+
+
+
+
+
+
+
+
+<li><a href="developers-reference.html#aggregation-layer-overview">Aggregation Layer Overview</a></li>
+
+
+
+
+
+
+
+
+<li><a href="developers-reference.html#generator-overview">Generator Overview</a></li>
+
+
+
+
+
+
+
+
+</ul>
+</li>
+
+
+
+
+
+
+
+</ul>
+</li>
+
+
+
+
+
+
+
+</ul>
+</li>
+
+
+
+
+
+
+ 
+</ul>
+
+</body>
+</html>
+
+

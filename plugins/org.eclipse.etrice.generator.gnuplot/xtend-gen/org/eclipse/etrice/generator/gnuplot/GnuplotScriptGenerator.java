@@ -75,7 +75,7 @@ public class GnuplotScriptGenerator {
       String _plus = ("Generating gnuplot script for subsystem " + _name);
       CharSequence _generatePlotScript = this.generatePlotScript(ssi);
       this.fileIo.generateFile(_plus, path, infoPath, 
-        "/gnuplot/log_main.data.csv-Script.plt", _generatePlotScript);
+        "/gnuplot/main.data.csv-script.plt", _generatePlotScript);
       CharSequence _gnuPlotLaunchFile = this.gnuPlotLaunchFile();
       this.fileIo.generateFile("Generating gnuplot launch configuration", path, infoPath, 
         "/gnuplot/create_gnuplot.launch", _gnuPlotLaunchFile);
@@ -98,7 +98,7 @@ public class GnuplotScriptGenerator {
     _builder.newLine();
     _builder.append("<stringAttribute key=\"org.eclipse.ui.externaltools.ATTR_LOCATION\" value=\"${system_path:gnuplot}\"/>");
     _builder.newLine();
-    _builder.append("<stringAttribute key=\"org.eclipse.ui.externaltools.ATTR_TOOL_ARGUMENTS\" value=\"${project_loc}/src-gen/gnuplot/log_main.data.csv-Script.plt\"/>");
+    _builder.append("<stringAttribute key=\"org.eclipse.ui.externaltools.ATTR_TOOL_ARGUMENTS\" value=\"${project_loc}/src-gen/gnuplot/main.data.csv-script.plt\"/>");
     _builder.newLine();
     _builder.append("<stringAttribute key=\"org.eclipse.ui.externaltools.ATTR_WORKING_DIRECTORY\" value=\"${project_loc}\"/>");
     _builder.newLine();

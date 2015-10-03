@@ -3,11 +3,7 @@
 p { margin-top: 0em; margin-bottom: 0.25em; }
 pre         { margin-left: 0.3em; }
 
-.fHeader {
-	margin-bottom: 0.5em;
-}
-
-.keyword {
+.keyword , .keyword > a {
 	font-weight: bold;
 	color: #7F0055;
 }
@@ -25,6 +21,9 @@ pre         { margin-left: 0.3em; }
 pre, code 
 	{
 	background-color: #fdf7ee;
+	-moz-tab-size: 4;
+    	-o-tab-size:   4;
+    	tab-size:      4;
 	/* BEGIN word wrap */
 	/* Need all the following to word wrap instead of scroll box */
 	/* This will override the overflow:auto if present */

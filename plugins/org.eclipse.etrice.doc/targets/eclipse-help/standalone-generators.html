@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>eTrice Documentation</title>
+
+<link rel="stylesheet" type="text/css" href="css/book.css"/>
+<link rel="stylesheet" type="text/css" href="css/custom-common.css"/>
+
+</head>
+<body>
+
+
+
+	
+
+<html><head></head><body><h1><a href="#standalone-generators" name="standalone-generators"></a>Standalone Generators</h1>
+<p>The eTrice generators can be called from the command line. This is useful e.g. if they should participate in a build process driven by command line tools like make.</p>
+<p>The generators are distributed as self contained jars and can be called using</p>
+<p><code>jave -jar &lt;the generator.jar&gt; [arguments]</code>.</p>
+<p>The options for the Java generator are</p>
+<pre><code>org.eclipse.etrice.generator.java.Main [-saveGenModel &lt;genmodel path&gt;] [-genDocu] [-lib]
+[-noexit] [-saveGenModel &lt;genmodel path&gt;] [-inc] [-genDir &lt;generation directory&gt;]
+[-genInfoDir &lt;generation info directory&gt;] [-genDocDir &lt;gen documentation directory&gt;]
+[-debug] [-msc_instr] [-gen_as_verbose] [-help] [-persistable]
+[-storeDataObj] &lt;list of model file paths&gt;
+
+      &lt;list of model file paths&gt;         # model file paths may be specified as
+                                         # e.g. C:\path\to\model\mymodel.room
+      -genDocu                           # if specified documentation is created
+      -lib                               # if specified all classes are generated
+                                         # and no instances
+      -noexit                            # if specified the JVM is not exited
+      -saveGenModel &lt;genmodel path&gt;      # if specified the generator model will
+                                         # be saved to this location
+      -inc                               # if specified the generation is incremental
+      -genDir &lt;generation directory&gt;     # the directory for generated files
+      -genInfoDir &lt;generation info dir&gt;  # the directory for generated info files
+      -genDocDir &lt;gen documentation dir&gt; # the directory for generated documentation files
+      -debug                             # if specified create debug output
+      -msc_instr                         # generate instrumentation for MSC generation
+      -gen_as_verbose                    # generate instrumentation for verbose console output
+      -help                              # display this help text
+
+      -persistable                       # if specified make actor classes persistable
+      -storeDataObj                      # if specified equip actor classes with
+                                         # store/restore using POJOs
+</code></pre>
+<p>The options for the C generator are</p>
+<pre><code>org.eclipse.etrice.generator.c.Main [-saveGenModel &lt;genmodel path&gt;] [-genDocu] [-lib]
+[-noexit] [-saveGenModel &lt;genmodel path&gt;] [-inc] [-genDir &lt;generation directory&gt;]
+[-genInfoDir &lt;generation info directory&gt;] [-genDocDir &lt;gen documentation directory&gt;]
+[-debug] [-msc_instr] [-gen_as_verbose] [-help] [-persistable]
+[-storeDataObj] &lt;list of model file paths&gt;
+
+      &lt;list of model file paths&gt;         # model file paths may be specified as
+                                         # e.g. C:\path\to\model\mymodel.room
+      -genDocu                           # if specified documentation is created
+      -lib                               # if specified all classes are generated
+                                         # and no instances
+      -noexit                            # if specified the JVM is not exited
+      -saveGenModel &lt;genmodel path&gt;      # if specified the generator model will
+                                         # be saved to this location
+      -inc                               # if specified the generation is incremental
+      -genDir &lt;generation directory&gt;     # the directory for generated files
+      -genInfoDir &lt;generation info dir&gt;  # the directory for generated info files
+      -genDocDir &lt;gen documentation dir&gt; # the directory for generated documentation files
+      -debug                             # if specified create debug output
+      -msc_instr                         # generate instrumentation for MSC generation
+      -gen_as_verbose                    # generate instrumentation for verbose console output
+      -help                              # display this help text
+</code></pre></body></html>
+
+</body>
+</html>
+
+

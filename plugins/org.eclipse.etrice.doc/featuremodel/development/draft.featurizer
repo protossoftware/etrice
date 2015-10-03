@@ -9,7 +9,7 @@ Feature TemplateFeature
 	//shortName '''not important for now'''
 	description '''Plain text: A ProtocolClass defines the Interface of a Port. It specifies the exchanged messages and data.'''
 	text '''
-		LaTex: It can provide one of three different CommunicationTypes (eventdriven, datadriven, sync).
+		md/html: It can provide one of three different CommunicationTypes (eventdriven, datadriven, sync).
 		Long explanation here
 	'''
 	example '''
@@ -36,21 +36,6 @@ Feature TemplateFeature
 
 Feature Feature123
 	description ''''''
-	stable
-;
-
-Feature LaTexExample
-	description ''''''
-	text '''
-		\begin{lstlisting}[language=ROOM]
-			// .room
-		\end{lstlisting}
-
-		images path = images/
-		naming convention = 300-xxxx
-		\includegraphics[width=\textwidth]{images/300-Test.png}
-		\includegraphics[width=0.7*\textwidth]{images/300-Test.png}
-	'''
 	stable
 ;
 

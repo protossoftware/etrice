@@ -1,0 +1,317 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>eTrice Documentation</title>
+
+<link rel="stylesheet" type="text/css" href="css/book.css"/>
+<link rel="stylesheet" type="text/css" href="css/custom-common.css"/>
+
+</head>
+<body>
+
+
+
+	
+
+<html><head></head><body><h1><a href="#tutorials" name="tutorials"></a>Tutorials</h1>
+<h2><a href="#working-with-the-tutorials" name="working-with-the-tutorials"></a>Working with the tutorials</h2>
+<p>The eTrice tutorials will help you to learn and understand the eTrice tool and its concepts. eTrice supports several target languages.</p>
+<p>The Hello World tutorial is target language specific. The other tutorials work for all target languages. Target language specific aspects are explained for all languages. Currently eTrice supports Java and C. C++ generator and runtime are currently prototypes with no tutorials. You should decide for which target language you want to work through the tutorials.</p>
+<ul>
+  <li>
+  <p>Hello World - Getting Started C</p></li>
+  <li>
+  <p>Hello World - Getting Started Java</p></li>
+  <li>
+  <p>Ping Pong</p></li>
+  <li>
+  <p>Traffic Light (Example)</p></li>
+</ul>
+<p>The tutorials are also available in their finished version and can be added to the workspace via the Eclipse New Wizard ( <em>File -&gt; New -&gt; Other: eTrice C/Java Tutorials</em> ).</p>
+<p>The <em>Traffic Light Example</em> in not yet available but will be provided with the next eTrice milestone.</p>
+<p>eTrice generates code out of ROOM models. The generated code relies on the services of a runtime framework (Runtime):</p>
+<ul>
+  <li>execution</li>
+  <li>communication (e.g. messaging)</li>
+  <li>logging</li>
+  <li>operating system abstraction (osal)</li>
+</ul>
+<p>Additional functionality is provided as model library (Modellib):</p>
+<ul>
+  <li>socket server and client</li>
+  <li>timing service</li>
+  <li>standard types</li>
+</ul>
+<h2><a href="#getting-started-c" name="getting-started-c"></a>Getting Started C</h2>
+<p>In this tutorial you will get a first look at a very simple eTrice model. The goal is to learn the work flow of eTrice and to understand a few basic features of ROOM.</p>
+<p><strong>Preconditions</strong>:</p>
+<ul>
+  <li>
+    <p>Working C development environment with CDT Eclipse</p>
+    <ul>
+      <li>C compiler: MinGW/GCC (Windows) or Posix/GCC (Linux)</li>
+      <li>Installed C/C++ Development Tools (CDT) in Eclipse</li>
+    </ul>
+  </li>
+  <li>
+  <p>Activated <em>Build Automatically</em> option in Eclipse: <em>Project -&gt; Build Automatically</em></p></li>
+  <li>
+    <p>Recommended: Activate automatic resource refresh in Eclipse: <em>Window -&gt; Preferences -&gt; General -&gt; Workspace</em></p>
+    <ul>
+      <li><em>Refresh using native hooks or polling</em></li>
+      <li><em>Refresh on access</em></li>
+    </ul>
+  </li>
+  <li>
+    <p>Optional: Install <a href="http://trace2uml.stage.tigris.org/">Trace2UML</a>, a Open Source MSC viewer</p>
+    <ul>
+      <li><a href="http://trace2uml.tigris.org/servlets/ProjectDocumentList?folderID=6208">Windows download site</a></li>
+      <li><a href="http://apt.astade.de/">Linux package</a></li>
+    </ul>
+  </li>
+</ul>
+<h4><a href="#create-template-project" name="create-template-project"></a>Create template project</h4>
+<p>After installation of eTrice in Eclipse, we can use the wizard to create the <em>template.c</em> project, which is good starting point for new ROOM applications. Select the menu <em>File -&gt; New -&gt; Other</em> (Ctrl+N) and choose <em>eTrice C Template Project</em>. To complete the wizard press <em>Next</em> and on the next page <em>Finish</em>.</p>
+<p><img src="images/013-wizard.png" alt="image"></p>
+<p>This will add three projects into your workspace:</p>
+<ul>
+  <li>the library projects <em>runtime.c</em> and <em>modellib.c</em></li>
+  <li>our application project <em>template.c</em>.</li>
+</ul>
+<p>Now open the <em>TemplateModel.room</em> in the model folder of <em>template.c</em>.</p>
+<p><img src="images/013-after-wizard.png" alt="image"></p>
+<p>The model contains an ActorClass <em>TopActor</em>, which is currently the only active actor. TopActor has a state machine that is intended to output a simple HelloWorld statement. To inspect its behavior graphically, we can open the behavior diagram by right click on <em>Outline View -&gt; TopActor -&gt; Edit Behavior</em>. Alternatively we can place the cursor within the textual notation and press Alt+B.</p>
+<p><img src="images/013-open-hello-fsm.png" alt="image"></p>
+<p>The state machine has an initial transition that leads to <em>helloState</em>. The state defines an entry code, which is executed during the transition. We can view the details by hovering over the state and edit the code with a double-click or right click and <em>Edit State</em>.</p>
+<p><img src="images/013-hello-fsm.png" alt="image"></p>
+<h4><a href="#generate-and-run-application" name="generate-and-run-application"></a>Generate and run application</h4>
+<p>Now we are ready to translate the model into an executable application. The first step is to generate source files from the model. Therefore we run the eTrice model generator by right click on file</p>
+<span class="uiElement"><img src="icons/obj16/file_obj.gif"> generate_Template.launch → Run As → generate_TemplateModel.</span>
+<p>After that we can build and run the application by right click on file</p>
+<span class="uiElement"><img src="icons/obj16/file_obj.gif"> run_Template_Windows.launch → Run As → run_Template_Windows.</span>
+<p>This will trigger the build process, carried out by CDT Eclipse and then subsequently start our application.</p>
+<table>
+  <thead>
+    <tr>
+      <th align="center"></th>
+      <th align="center"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="center"><img src="images/014-generate.png" alt="image"></td>
+      <td align="center"><img src="images/014-build_run.png" alt="image"></td>
+    </tr>
+    <tr>
+      <td align="center"><ol>
+  <li>Invoke generator</li>
+</ol></td>
+      <td align="center"><ol>
+  <li>Build and run application</li>
+</ol></td>
+    </tr>
+  </tbody>
+</table>
+<p>The output of our application is logged in the Console View and it shows the “Hello World”. By typing “quit”, as prompt, and pressing enter, the application terminates regularly.</p>
+<p><img src="images/013-quit-hello-msc.png" alt="image"></p>
+<h4><a href="#open-the-message-sequence-chart" name="open-the-message-sequence-chart"></a>Open the Message Sequence Chart</h4>
+<p>After termination, we can inspect the behavior of our application. It is recorded in the form of a MSC (Message Sequence Chart) and can now be used for debugging or documentation purpose. Open <em>msc.seq</em> or <em>subSystemRef_Async.seq</em> in the folder <em>log</em> using the tool Trace2UML (if the file is not present, try to refresh (F5) the folder <em>log</em>).</p>
+<p><span class="label label-info">Note:</span> The Trace2UML (Open Source tool) download links can be found in the Preconditions of <a href="#getting-started-c">Getting Started</a>.</p>
+<p>Yet the MSC is nearly empty having not recorded any interaction between actors. It shows that <em>topActor</em> (full instance path <em>/LogSys/subSystemRef/topActor</em>) has taken <em>helloState</em>. In the next PingPong tutorial we are going to create a more sophisticated and vivid eTrice application introducing actor building blocks and message protocols.</p>
+<p><img src="images/013-hello-msc.png" alt="image"></p>
+<h2><a href="#getting-started-java" name="getting-started-java"></a>Getting Started Java</h2>
+<p>In this tutorial you will get a first look at a very simple eTrice model. The goal is to learn the work flow of eTrice and to understand a few basic features of ROOM.</p>
+<p><strong>Preconditions</strong>:</p>
+<ul>
+  <li>
+  <p>Installed JDT Eclipse</p></li>
+  <li>
+  <p>Activated <em>Build Automatically</em> option in Eclipse: <em>Project -&gt; Build Automatically</em></p></li>
+  <li>
+    <p>Recommended: Activate automatic resource refresh in Eclipse: <em>Window -&gt; Preferences -&gt; General -&gt; Workspace</em></p>
+    <ul>
+      <li><em>Refresh using native hooks or polling</em></li>
+      <li><em>Refresh on access</em></li>
+    </ul>
+  </li>
+  <li>
+    <p>Optional: Install <a href="http://trace2uml.stage.tigris.org/">Trace2UML</a>, a Open Source MSC viewer</p>
+    <ul>
+      <li><a href="http://trace2uml.tigris.org/servlets/ProjectDocumentList?folderID=6208">Windows download site</a></li>
+      <li><a href="http://apt.astade.de/">Linux package</a></li>
+    </ul>
+  </li>
+</ul>
+<h4><a href="#create-template-project" name="create-template-project"></a>Create template project</h4>
+<p>After installation of eTrice in Eclipse, we can use the wizard to create the template project, which is good starting point for new ROOM applications. Select the menu <em>File -&gt; New -&gt; Other</em> (Ctrl+N) and choose <em>eTrice Java Template Project</em>. Name the project <em>TemplateModel</em> and press <em>Next</em>. On the next page select <em>use Eclipse JDT build</em> and press <em>Finish</em>.</p>
+<p><img src="images/014-wizard.png" alt="image"></p>
+<p>This will add three projects into your workspace, the library projects <em>runtime.java</em> and <em>modellib.java</em> and our application project <em>TemplateModel</em>. Now open the <em>TemplateModel.room</em> in the model folder of our project.</p>
+<p><img src="images/014-after-wizard.png" alt="image"></p>
+<p>The model contains an ActorClass <em>TopActor</em>, which is currently the only active actor. TopActor has a state machine that is intended to output a simple HelloWorld statement. To inspect its behavior graphically, we can open the behavior diagram by right click on <em>Outline View -&gt; TopActor -&gt; Edit Behavior</em>. Alternatively we can place the cursor within the textual notation and press Alt+B.</p>
+<p><img src="images/014-open-hello-fsm.png" alt="image"></p>
+<p>The state machine has an initial transition that leads to <em>helloState</em>. The state defines an entry code, which is executed during the transition. We can view the details by hovering over the state and edit the code with a double-click or right click and <em>Edit State</em>.</p>
+<p><img src="images/014-hello-fsm.png" alt="image"></p>
+<h4><a href="#generate-and-run-application" name="generate-and-run-application"></a>Generate and run application</h4>
+<p>Now we are ready to translate the model into an executable application. The first step is to generate source files from the model. Therefore we run the eTrice model generator by right click on file</p>
+<span class="uiElement"><img src="icons/obj16/file_obj.gif"> generate_Template.launch → Run As → generate_TemplateModel</span>
+<p>After that we can build and run the application by right click on file</p>
+<span class="uiElement"><img src="icons/obj16/file_obj.gif"> run_TemplateModel.launch → Run As → run_TemplateModell</span>
+<p>This will trigger the build process, carried out by JDT Eclipse and then subsequently start our application.</p>
+<table>
+  <thead>
+    <tr>
+      <th align="center"></th>
+      <th align="center"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="center"><img src="images/014-generate.png" alt="image"></td>
+      <td align="center"><img src="images/014-build_run.png" alt="image"></td>
+    </tr>
+    <tr>
+      <td align="center"><ol>
+  <li>Invoke generator</li>
+</ol></td>
+      <td align="center"><ol>
+  <li>Build and run application</li>
+</ol></td>
+    </tr>
+  </tbody>
+</table>
+<p>The output of our application is logged in the Console View and it shows the “Hello World”. By typing “quit”, as prompt, and pressing enter, the application terminates regularly.</p>
+<p><img src="images/014-quit-hello-msc.png" alt="image"></p>
+<h4><a href="#open-the-message-sequence-chart" name="open-the-message-sequence-chart"></a>Open the Message Sequence Chart</h4>
+<p>After termination, we can inspect the behavior of our application. It is recorded in the form of a MSC (Message Sequence Chart) and can now be used for debugging or documentation purpose. Open <em>msc.seq</em> or <em>subSystemRef_Async.seq</em> in the folder <em>log</em> using the tool Trace2UML (if the file is not present, try to refresh (F5) the folder <em>log</em>).</p>
+<p><span class="label label-info">Note:</span> The Trace2UML (Open Source tool) download links can be found in the Preconditions of <a href="#getting-started-java">Getting Started</a>.</p>
+<p>Yet the MSC is nearly empty having not recorded any interaction between actors. It shows that <em>topActor</em> (full instance path <em>/LogSys/subSystemRef/topActor</em>) has taken <em>helloState</em>. In the next PingPong tutorial we are going to create a more sophisticated and vivid eTrice application introducing actor building blocks and message protocols.</p>
+<p><img src="images/014-hello-msc.png" alt="image"></p>
+<h2><a href="#tutorial-ping-pong-for-java-and-c" name="tutorial-ping-pong-for-java-and-c"></a>Tutorial Ping Pong for Java and C</h2>
+<h3><a href="#scope" name="scope"></a>Scope</h3>
+<p>This tutorial describes how to create a simple hierarchical actor system of actors communicating via ports and bindings. Additionally you will use the Timing Service from the eTrice model library. This tutorial can be done for the target languages Java or C. For the Ping Pong scenario we want to create a model with a sender and a reveiver of a message. The receiver has to wait for the ping message from the sender, wait for a second and respond with a pong message.</p>
+<p>The resulting Message Sequence Chart (MSC) at the end of this tutorial should look like this:</p>
+<p><img src="images/015-msc.png" alt="image"></p>
+<p>We will take this MSC as specification for the desired behavior.</p>
+<h3><a href="#create-the-structure" name="create-the-structure"></a>Create the structure</h3>
+<p>We start by opening the <em>TemplateModel.room</em> from the template project as presented in Getting Started. As described previously <em>topActor</em> is currently the only active actor. Furthermore the model provides a building kit for this tutorial, consisting of</p>
+<ul>
+  <li>
+  <p>ProtocolClass <em>PingPongProtocol</em>: Defining the incoming message <em>ping</em> and outgoing <em>pong</em> according the specification</p></li>
+  <li>
+  <p>ActorClass <em>Receiver</em>: Defining a (regular) Port of type PingPongProtocol, which receives the incoming messages and sends the outgoing message. Additionally it has a reference to the <em>TimingService</em>.</p></li>
+  <li>
+  <p>ActorClass <em>Sender</em>: Defining the <strong>conjugated</strong> Port of type PingPongProtocol, which handles the messages vice-versa</p></li>
+</ul>
+<pre><code class="room customHighlighted"><span class="keyword">ProtocolClass</span> PingPongProtocol {
+	<span class="keyword">incoming</span> {
+		<span class="keyword">Message</span> ping()
+	}
+	<span class="keyword">outgoing</span> {
+		<span class="keyword">Message</span> pong()
+	}
+}
+</code></pre>
+<pre><code class="room customHighlighted"><span class="keyword">ActorClass</span> Receiver {
+	<span class="keyword">Interface</span> {
+		<span class="keyword">Port</span> recvPort: PingPongProtocol
+	}
+	<span class="keyword">Structure</span> {
+		<span class="keyword">external</span> <span class="keyword">Port</span> recvPort
+		<span class="keyword">SAP</span> timingService: PTimer
+	}
+	<span class="comment">// ...
+</span>}
+</code></pre>
+<pre><code class="room customHighlighted"><span class="keyword">ActorClass</span> Sender {
+	<span class="keyword">Interface</span> {
+		<span class="keyword">conjugated</span> <span class="keyword">Port</span> sendPort: 
+			PingPongProtocol
+	}
+	<span class="keyword">Structure</span> {
+		<span class="keyword">external</span> <span class="keyword">Port</span> sendPort
+	}
+	<span class="comment">// ...
+</span>}
+</code></pre>
+<p><span class="label label-info">Note:</span> The naming <em>Sender</em> <em>Receiver</em> is based on the first message exchange. <em>Sender</em> is the first actor supposed to send a message (*ping*) and <em>Receiver</em> is the first actor to receive this message. Afterwards they change their roles and it is vice-versa for message <em>pong</em>.</p>
+<p>Remaining tasks:</p>
+<ul>
+  <li>
+  <p>creating actor hierarchic actor structure by using classes <em>Sender</em> <em>Receiver</em></p></li>
+  <li>
+  <p>establish port binding</p></li>
+  <li>
+  <p>define the behavior of both actors</p></li>
+  <li>
+  <p>use the <em>TimingService</em></p></li>
+  <li>
+  <p>generate and run application, then verify resulting MSC</p></li>
+</ul>
+<p>We are going to create hierarchic actor structure and <em>TopActor</em> will functions as a pure container actor. Thus its current state machine is obsolete, we can ignore or delete it.</p>
+<p>We continue to add the actors graphically and open the structure diagram of <em>TopActor</em> by right-click in the Outline View on <em>TopActor -&gt; Edit Structure</em>.</p>
+<p><img src="images/015-edit-structure-top.png" alt="image"></p>
+<p>Drag and Drop an <em>ActorRef</em> from the <em>Palette</em> within the borders and name the new actor reference <em>sender</em> and set the type to ActorClass <em>Sender</em>. Repeat the step for the <em>receiver</em>.</p>
+<p><img src="images/015-add-sender.png" alt="image"></p>
+<p>Finally we connect the ports of both actors using the <em>Binding</em> tool in the <em>Palette</em>. Drag a connection between the two port to establish a Binding.</p>
+<p><img src="images/015-add-binding.png" alt="image"></p>
+<h3><a href="#implement-the-behavior" name="implement-the-behavior"></a>Implement the Behavior</h3>
+<p>We will implement two finite state machines (*FSM*s) to define the event driven behavior of the actors <em>Sender</em> and <em>Receiver</em>.</p>
+<p>Before you start with the implementation, have a look at the MSC with the specification of the behavior.</p>
+<p>Lets start with the <em>Sender</em>. Right click to <em>sender</em> <em>Open Ref Behavior</em> and in the structure diagram of <em>TopActor</em>.</p>
+<p><img src="images/015-open-behavior-sender.png" alt="image"></p>
+<p>According to our specification:</p>
+<blockquote>
+  <p><em>Sender</em> initially should send the message <em>ping</em> and then take a state named <em>sendingPing</em>. After receiving the message <em>pong</em> it should remain in a state named <em>receivedPong</em>.</p>
+</blockquote>
+<p>Drag and Drop the <em>Initial Point</em> and a <em>State</em> into the diagram. The latter causes the opening of the dialog <em>Edit State</em>, in which we type the name <em>sendingPing</em> and specify the entry code <code>senderPort.ping();</code>. Note the content assist is activated by pressing CTRL+Space.</p>
+<p><img src="images/015-edit-sending.png" alt="image"></p>
+<p>In the same manner we create a second <em>State</em> named <em>receivedPong</em> but without any action.</p>
+<p>Use the <em>Transition</em> tool to draw the initial transition to <em>sendingPing</em>. The dialog <em>Edit Transition</em> will open and we just click <em>OK</em> as no action is required. Note that initial transitions do not have any trigger events.</p>
+<p>Again draw a transition from <em>sendingPing</em> to <em>receivedPong</em>. In the dialog for this transition we set the trigger event to message <em>pong</em> of port <em>sendPort</em> in the top right corner.</p>
+<p><img src="images/015-edit-transition-pinger.png" alt="image"></p>
+<p>At this point the behavior of <em>Sender</em> is complete and should look like this:</p>
+<p><img src="images/015-sending-ping-fsm.png" alt="image"></p>
+<p>We turn our attention to actor <em>Receiver</em> and open its state machine diagram.</p>
+<p>According to the specification:</p>
+<blockquote>
+  <p><em>Receiver</em> initially should wait for the message <em>ping</em>. After a short time the message <em>pong</em> should be sent back.</p>
+</blockquote>
+<p>We create the states <em>waitingForPing</em>, <em>receivedPing</em> and <em>sendingPong</em> plus the initial transition.</p>
+<p>We draw a transition from <em>waitingForPing</em> to <em>receivedPing</em> and select as trigger event the message <em>ping</em> of port <em>recvPort</em>.</p>
+<p><img src="images/015-transition-ping.png" alt="image"></p>
+<p>In the entry code of the state <em>receivedPing</em> we start the timeout by sending the message <em>startTimeout(500)</em> (time unit is ms) to the <em>timingService</em> port:</p>
+<blockquote>
+  <p><code>timingService.startTimeout(500);</code></p>
+</blockquote>
+<p>We draw a transition from <em>receivedPing</em> to <em>sentPong</em>. The event trigger is the respond <em>timeout</em> of the timing service.</p>
+<p><img src="images/015-transition-timeout.png" alt="image"></p>
+<p>In the entry code of the state <em>sentPong</em> we send the message <em>pong</em> back to the <em>Sender</em>: <code>recvPort.pong();</code></p>
+<p>Now the behavior of <em>Receiver</em> is complete, too. It should look like this:</p>
+<p><img src="images/015-sending-pong-fsm.png" alt="image"></p>
+<p>The PingPong model is done now. You can generate, compile and run it as described in <em>Hello World for C</em> or <em>Hello World for Java</em>. The generated MSC in folder <em>log</em> should show the same MSC we used to specify the behavior at the beginning of this tutorial.</p>
+<p><img src="images/015-msc.png" alt="image"></p>
+<h3><a href="#summary" name="summary"></a>Summary</h3>
+<p>Within this tutorial you have learned how to create a FSM with transitions triggered by incoming messages. You have used entry code to send messages and have used the timing service from the model library. You are now familiar with the basic features of eTrice. Further tutorials and examples will take this knowledge as a precondition.</p>
+<h2><a href="#troubleshooting" name="troubleshooting"></a>Troubleshooting</h2>
+<p>If the application fails to start, the cause mainly is located in the generation or build process. Check the respective console for potential errors:</p>
+<h4><a href="#generation-error" name="generation-error"></a>Generation error</h4>
+<p>The <em>eTrice C/Java Generator Console</em> outputs any errors, that were detected during generation, like model validation errors or missing imports/references.</p>
+<p><img src="images/020-gen-console.png" alt="image"></p>
+<h4><a href="#build-error" name="build-error"></a>Build error</h4>
+<p>The CDT Build Console outputs errors that occurred during the build process.</p>
+<p>Common issues:</p>
+<ul>
+  <li>
+  <p><em>multiple main functions</em>: More than one executable application was built within a single project. Try a complete clean before rebuild of the project.</p></li>
+  <li>
+  <p>compile error in generated user code: Check if the user code, that was generated out of the model causes compiler errors (e.g. state/transition action code or operation detail code). The default location for the generated code is the folder <em>src-gen</em>.</p></li>
+</ul>
+<p><img src="images/020-build-console.png" alt="image"></p>
+<h4><a href="#missing-msc" name="missing-msc"></a>Missing MSC</h4>
+<p>The MSC is created when the application has been shutdown in proper form, thus has been terminated by typing <em>quit</em> in the Console of the application. Depending on the Eclipse workspace settings, it might be necessary to refresh (F5) the <em>log</em> folder manually.</p></body></html>
+
+</body>
+</html>
+
+

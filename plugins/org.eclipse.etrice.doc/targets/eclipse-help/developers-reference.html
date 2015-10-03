@@ -1,0 +1,407 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>eTrice Documentation</title>
+
+<link rel="stylesheet" type="text/css" href="css/book.css"/>
+<link rel="stylesheet" type="text/css" href="css/custom-common.css"/>
+
+</head>
+<body>
+
+
+
+	
+
+<html><head></head><body><h1><a href="#etrice-tool-developer-s-reference" name="etrice-tool-developer-s-reference"></a>eTrice Tool Developer’s Reference</h1>
+<h2><a href="#architecture" name="architecture"></a>Architecture</h2>
+<p>The basic components of eTrice are depicted in the following diagram.</p>
+<p><img src="images/200-components.jpg" alt="image"></p>
+<p>Additional to that the eTrice project comprises runtime libraries and unit tests which are treated in subsequent sections.</p>
+<h3><a href="#editor-and-generator-components" name="editor-and-generator-components"></a>Editor and Generator Components</h3>
+<ul>
+  <li>
+    <p>core</p>
+    <ul>
+      <li>
+      <p>core.common is an Xtext based language which serves as a base for other eTrice languages. It consists of the plug-ins <code>org.eclipse.etrice.core.common</code> and <code>org.eclipse.etrice.core.common.ui</code>. The base grammar defines recurring items like numbers with literals, annotations and the like.</p></li>
+      <li>
+      <p>core.fsm is an Xtext based language that defines state machines in an abstract way. It consists of the plug-ins <code>org.eclipse.etrice.core.fsm</code> and <code>org.eclipse.etrice.core.fsm.ui</code>. The FSM language is abstract and has to be embedded in a model that defines containers for the state machine with interface items (e.g. ROOM ports or Franca interfaces) and messages. The ROOM grammar of eTrice is derived from this grammar.</p></li>
+      <li>
+      <p>core.room is an Xtext based language called ROOM. It consists of the plug-ins <code>org.eclipse.etrice.core.room</code> and <code>org.eclipse.etrice.core.room.ui</code>. ROOM is the basic modeling language of eTrice.</p></li>
+      <li>
+      <p>core.config is an Xtext based language called Config. It consists of the plug-ins <code>org.eclipse.etrice.core.config</code> and <code>org.eclipse.etrice.core.config.ui</code>. Config is a language designed for the data configuration of model</p></li>
+      <li>
+      <p>core.etphys is an Xtext based language called etPhys. It consists of the plug-ins <code>org.eclipse.etrice.core.etphys</code> and <code>org.eclipse.etrice.core.etphys.ui</code>. etPhys is a language designed for the description of physical systems onto which the logical ROOM systems are deployed.</p></li>
+      <li>
+      <p>core.etmap is an Xtext based language called etMap. It consists of the plug-ins <code>org.eclipse.etrice.core.etmap</code> and <code>org.eclipse.etrice.core.etmap.ui</code>. etMap is a language designed for the mapping of logical to physical systems.</p></li>
+      <li>
+      <p>core.genmodel.fsm is an EMF based aggregation layer for finite state machines. It consists of the plugin <code>org.eclipse.etrice.core.genmodel.fsm</code>. A <code>ModelComponent</code> can be transformed into a <code>ExpandedModelComponent</code> which is an explicit version of the state machine with all the inherited items contained.</p></li>
+      <li>
+      <p>core.genmodel is an EMF based aggregation layer for Room models. It consists of the plugin <code>org.eclipse.etrice.core.genmodel</code>. A Room model can be transformed into a genmodel which allows easy access to implicit relations of the Room model.</p></li>
+    </ul>
+  </li>
+  <li>
+    <p>ui</p>
+    <ul>
+      <li>
+        <p>textual</p>
+        <ul>
+          <li>
+          <p>fsm.ui is the ui counterpart of core.fsm. It consists of the plug-in <code>org.eclipse.etrice.core.fsm.ui</code>. This plug-in realizes IDE concepts like content assist, error markers and navigation by hyper links for the FSM language.</p></li>
+          <li>
+          <p>room.ui is the ui counterpart of core.room. It consists of the plug-in <code>org.eclipse.etrice.core.room.ui</code>. This plug-in realizes IDE concepts like content assist, error markers and navigation by hyper links for the Room language.</p></li>
+          <li>
+          <p>config.ui is the ui counterpart of core.config. It consists of the plug-in <code>org.eclipse.etrice.core.config.ui</code>. This plug-in realizes IDE concepts like content assist, error markers and navigation by hyper links for the Config language.</p></li>
+          <li>
+          <p>etphys.ui is the ui counterpart of core.etphys. It consists of the plug-in <code>org.eclipse.etrice.core.etphys.ui</code>. This plug-in realizes IDE concepts like content assist, error markers and navigation by hyper links for the etPhys language.</p></li>
+          <li>
+          <p>etmap.ui is the ui counterpart of core.etmap. It consists of the plug-in <code>org.eclipse.etrice.core.etmap.ui</code>. This plug-in realizes IDE concepts like content assist, error markers and navigation by hyper links for the etPhys language.</p></li>
+        </ul>
+      </li>
+      <li>
+        <p>graphical</p>
+        <ul>
+          <li>
+          <p>ui.common.base is a set of common code for the diagram editors. It consists of the plug-in <code>org.eclipse.etrice.ui.common.base</code>. It depends only on the FSM part but not on ROOM.</p></li>
+          <li>
+          <p>ui.common is a set of common code for the two diagram editors. It consists of the plug-in <code>org.eclipse.etrice.ui.common</code>.</p></li>
+          <li>
+          <p>ui.commands encapsulates some commands related to the navigation between eTrice editors. It consists of the plug-in <code>org.eclipse.etrice.ui.commands</code>.</p></li>
+          <li>
+          <p>ui.structure is the Graphiti based editor for the Actor structure. It consists of the plug-in <code>org.eclipse.etrice.ui.structure</code>.</p></li>
+          <li>
+          <p>ui.behavior.fsm is implementing the major part for the graphical state machine editor. It consists of the plug-in <code>org.eclipse.etrice.ui.behavior.fsm</code>. All property dialogs are handled in an abstract way using a factory.</p></li>
+          <li>
+          <p>ui.behavior is the Graphiti based editor for the Actor behavior. It consists of the plug-in <code>org.eclipse.etrice.ui.behavior</code>. It utilizes the ui.behavior.fsm and provides concrete property dialogs.</p></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>generators</p>
+    <ul>
+      <li>
+      <p>generator.fsm is a set of general classes and language independent parts of all generators. It consists of the plug-in <em>org.eclipse.etrice.generator.fsm</em>. It depends only on FSM but not on ROOM.</p></li>
+      <li>
+      <p>generator is a set of general classes and language independent parts of all generators. It consists of the plug-in <em>org.eclipse.etrice.generator</em>.</p></li>
+      <li>
+      <p>generator.c is the generator for the ANSI-C target language. It consists of the plug-in <code>org.eclipse.etrice.generator.c</code>.</p></li>
+      <li>
+      <p>generator.cpp is the generator for the C++ target language. It consists of the plug-in <code>org.eclipse.etrice.generator.cpp</code>.</p></li>
+      <li>
+      <p>generator.java is the generator for the Java target language. It consists of the plug-in <code>org.eclipse.etrice.generator.java</code>.</p></li>
+      <li>
+      <p>generator.doc is the generator for the model documentation. It consists of the plug-in <code>org.eclipse.etrice.generator.doc</code>.</p></li>
+    </ul>
+  </li>
+</ul>
+<h3><a href="#the-abstract-finite-state-machine-concept" name="the-abstract-finite-state-machine-concept"></a>The Abstract Finite State Machine Concept</h3>
+<p>eTrice comes with an easy to re-use concept of hierarchical finite state machines (FSM for short). A powerful inheritance concept is used and there is also state machine validation based on semantic rules for messages and abstract execution available.</p>
+<p>State machines are an integral part of the ROOM language. But they can also be used independently from that using</p>
+<ul>
+  <li>
+    <p>for the model part</p>
+    <ul>
+      <li>
+      <p><code>org.eclipse.etrice.core.common</code></p></li>
+      <li>
+      <p><code>org.eclipse.etrice.core.fsm</code></p></li>
+      <li>
+      <p><code>org.eclipse.etrice.core.genmodel.fsm</code></p></li>
+    </ul>
+  </li>
+  <li>
+    <p>graphical state machine editor</p>
+    <ul>
+      <li>
+      <p><code>org.eclipse.etrice.core.common.ui</code></p></li>
+      <li>
+      <p><code>org.eclipse.etrice.core.fsm.ui</code></p></li>
+      <li>
+      <p><code>org.eclipse.etrice.core.ui.common.base</code></p></li>
+      <li>
+      <p><code>org.eclipse.etrice.core.ui.common</code></p></li>
+    </ul>
+  </li>
+  <li>
+    <p>base classes for code generation</p>
+    <ul>
+      <li>
+      <p><code>org.eclipse.etrice.generator.fsm</code></p></li>
+    </ul>
+  </li>
+  <li>
+    <p>validation by abstract execution</p>
+    <ul>
+      <li>
+      <p><code>org.eclipse.etrice.abstractexec.behavior</code></p></li>
+    </ul>
+  </li>
+</ul>
+<p>The first three parts have to be used by concrete implementations that implement the abstract interface. eTrice itself uses the abstract FSMs in exactly this way.</p>
+<h4><a href="#extending-the-fsm-model" name="extending-the-fsm-model"></a>Extending the FSM Model</h4>
+<p>The eTrice FSM model has to be embedded in a model that introduces components, interfaces and messages. We recommend to use a new Xtext language with a grammar derived from the FSM grammar. This grammar has to specify a component derived from the <code>ModelComponent</code> of the FSM model. It further has to introduce concrete realizations of interface items derived from <code>AbstractInterfaceItem</code>. The interface item is an object contained in a component that has a name (role) and holds a reference to some kind of interface of the component (like a Franca interface or a ROOM protocol). Finally a concrete message type derived from an <code>EObject</code> has to be defined. The minimal requirement is that this concrete message has an attribute called ’name’ of type String.</p>
+<p>The minimal interface to be implemented consists of</p>
+<ul>
+  <li>
+    <p>for the concrete interface item</p>
+    <ul>
+      <li>
+      <p><code>EList&lt;EObject&gt; getAllIncomingAbstractMessages()</code></p></li>
+      <li>
+      <p><code>EList&lt;EObject&gt; getAllOutgoingAbstractMessages()</code></p></li>
+      <li>
+      <p><code>ProtocolSemantics getSemantics()</code></p></li>
+    </ul>
+  </li>
+  <li>
+    <p>for the concrete model component</p>
+    <ul>
+      <li>
+      <p><code>EList&lt;AbstractInterfaceItem&gt; getAbstractInterfaceItems</code> – the interface items contained in this model component</p></li>
+      <li>
+      <p><code>EList&lt;AbstractInterfaceItem&gt; getAllAbstractInterfaceItems</code> – all interface items including inherited ones</p></li>
+      <li>
+      <p><code>String getComponentName()</code> – should return the name of the model component</p></li>
+    </ul>
+  </li>
+</ul>
+<h4><a href="#extending-the-state-machine-editor" name="extending-the-state-machine-editor"></a>Extending the State Machine Editor</h4>
+<p>The concrete state machine editor minimally needs to define</p>
+<ul>
+  <li>
+  <p>the editor class itself by deriving it from the <code>AbstractFSMEditor</code></p></li>
+  <li>
+  <p>a diagram type provider (which may derive from <code>AbstractDiagramTypeProvider</code>)</p></li>
+  <li>
+    <p>a Google Guice module with bindings for</p>
+    <ul>
+      <li>
+      <p><code>IFSMDialogFactory</code></p></li>
+      <li>
+      <p><code>DiagramAccessBase</code></p></li>
+      <li>
+      <p><code>IBehaviorQuickfixProvider</code></p></li>
+      <li>
+      <p><code>IResourceSetProvider</code></p></li>
+    </ul>
+  </li>
+  <li>
+  <p>concrete implementations of all property dialogs the <code>IFSMDialogFactory</code> produces</p></li>
+</ul>
+<h3><a href="#runtimes" name="runtimes"></a>Runtimes</h3>
+<p>Currently eTrice ships with a C and a Java runtime. The C++ runtime is still a prototype. The runtimes are libraries written in the target language against which the generated code is compiled.</p>
+<h3><a href="#unit-tests" name="unit-tests"></a>Unit Tests</h3>
+<p>Most plug-ins and other parts of the code have related unit tests.</p>
+<h2><a href="#component-overview" name="component-overview"></a>Component Overview</h2>
+<h3><a href="#room-language-overview" name="room-language-overview"></a>Room Language Overview</h3>
+<p>We assume that the reader is familiar with the Xtext concepts. So we concentrate on the details of our implementation that are worth to be pointed out.</p>
+<h4><a href="#model-tweaks" name="model-tweaks"></a>Model Tweaks</h4>
+<p>All language EMF models of eTrice are inferred from their respective grammar. However, this powerful mechanism has to be tweaked in some places.</p>
+<p>In order to do so post processors are added that are invoked by the Xtext framework on language generation. This is done for the FSM language by <em>/org.eclipse.etrice.core.fsm/src/org/eclipse/etrice/core/fsm/postprocessing/ImplPostprocessor.xtend</em>.</p>
+<p>The following parts of the model are changed or added:</p>
+<ul>
+  <li>
+  <p>an operation <code>getName</code> is added to the <code>State</code> class</p></li>
+  <li>
+  <p>an operation <code>getName</code> is added to the <code>StateGraphItem</code> class</p></li>
+  <li>
+  <p>an operation <code>getSemantics</code> is added to the <code>AbstractInterfaceItem</code></p></li>
+  <li>
+  <p>an operation <code>getAllIncomingAbstractMessages</code> is added to the <code>AbstractInterfaceItem</code></p></li>
+  <li>
+  <p>an operation <code>getAllOutgoingAbstractMessages</code> is added to the <code>AbstractInterfaceItem</code></p></li>
+  <li>
+  <p>an interface class <code>IInterfaceItemOwner</code> is added</p></li>
+  <li>
+  <p>an operation <code>getAbstractInterfaceItems</code> is added to the <code>AbstractInterfaceItem</code></p></li>
+  <li>
+  <p>an operation <code>getAllAbstractInterfaceItems</code> is added to the <code>AbstractInterfaceItem</code></p></li>
+  <li>
+  <p><code>IInterfaceItemOwner</code> is made a super class of <code>ModelComponent</code></p></li>
+</ul>
+<p>All but the first two items in the list are part of the abstract FSM definition and are used to interface to the model embedding the FSM language, e.g. ROOM.</p>
+<p>For the ROOM language the post processor is <em>/org.eclipse.etrice.core.room/src/org/eclipse/etrice/core/RoomPostprocessor.ext</em>.</p>
+<p>The following parts of the model are changed or added:</p>
+<ul>
+  <li>
+  <p>the default <code>multiplicity</code> of the <code>Port</code> is set to 1</p></li>
+  <li>
+  <p>the operation <code>isReplicated</code> is added to the <code>Port</code></p></li>
+  <li>
+  <p>the default <code>multiplicity</code> of the <code>ActorRef</code> is set to 1</p></li>
+  <li>
+  <p>an operation <code>getGeneralProtocol</code> is added to the <code>InterfaceItem</code></p></li>
+  <li>
+  <p>an operation <code>getSemantics</code> is added to the <code>InterfaceItem</code></p></li>
+  <li>
+  <p>an operation <code>getAllIncomingAbstractMessages</code> is added to the <code>InterfaceItem</code></p></li>
+  <li>
+  <p>an operation <code>getAllOutgoingAbstractMessages</code> is added to the <code>InterfaceItem</code></p></li>
+  <li>
+  <p>an operation <code>getExternalEndPorts</code> is added to the <code>ActorClass</code></p></li>
+  <li>
+  <p>an operation <code>getRelayPorts</code> is added to the <code>ActorClass</code></p></li>
+  <li>
+  <p>an operation <code>getImplementedSPPs</code> is added to the <code>ActorClass</code></p></li>
+  <li>
+  <p>an operation <code>getActorBase</code> is added to the <code>ActorClass</code></p></li>
+  <li>
+  <p>an operation <code>getComponentName</code> is added to the <code>ActorClass</code></p></li>
+  <li>
+  <p>an operation <code>getAbstractInterfaceItems</code> is added to the <code>ActorClass</code></p></li>
+  <li>
+  <p>an operation <code>getAllAbstractInterfaceItems</code> is added to the <code>ActorClass</code></p></li>
+  <li>
+  <p>an operation <code>getStructureClass</code> is added to the <code>ActorContainerRef</code></p></li>
+  <li>
+  <p>an operation <code>toString</code> is added to the <code>RefPath</code></p></li>
+  <li>
+  <p>for attribute <code>idx</code> of <code>RefSegment</code> the default is changed to -1</p></li>
+  <li>
+  <p>an operation <code>toString</code> is added to the <code>RefSegment</code></p></li>
+  <li>
+  <p>an operation <code>getLiteralValue</code> is added to the <code>EnumLiteral</code></p></li>
+  <li>
+  <p>an operation <code>getFullName</code> is added to the <code>EnumLiteral</code></p></li>
+</ul>
+<h4><a href="#imports-by-uri-using-namespaces" name="imports-by-uri-using-namespaces"></a>Imports by URI Using Namespaces</h4>
+<p>The import mechanism employed is based on URIs. This is configured for one part in the GenerateRoom.mwe2 model workflow by setting the fragments ImportURIScopingFragment and ImportUriValidator). For the other part it is configured in the Guice modules by binding</p>
+<ul>
+  <li>
+  <p><code>PlatformRelativeUriResolver</code> – this class tries to convert the import URI into a platform relative URI. It also replaces environment variables written in $ with their respective values.</p></li>
+  <li>
+  <p><code>ImportedNamespaceAwareLocalScopeProvider</code> – this is a standard scope provider which is aware of namespaces</p></li>
+  <li>
+  <p><code>GlobalNonPlatformURIEditorOpener</code> – this editor opener tries to convert general URIs into platform URIs because editors can only open platform URIs</p></li>
+  <li>
+  <p><code>ImportAwareHyperlinkHelper</code> – turns the URI part of an import into a navigatable hyper link</p></li>
+</ul>
+<h4><a href="#naming" name="naming"></a>Naming</h4>
+<p>Two classes provide object names used for link resolution and for labels. The <code>RoomNameProvider</code> provides frequently used name strings, some of them are hierarchical like State paths. The <code>RoomFragmentProvider</code> serves a more formal purpose since it provides a link between EMF models (as used by the diagram editors) and the textual model representation used by Xtext.</p>
+<h4><a href="#helpers" name="helpers"></a>Helpers</h4>
+<p>The <code>RoomHelpers</code> class provides a great deal of static methods that help retrieve frequently used information from the model. Among many, many others</p>
+<ul>
+  <li>
+  <p><code>getAllEndPorts(ActorClass)</code> - returns a list of all end ports of an actor class including inherited ones</p></li>
+  <li>
+  <p><code>getInheritedActionCode(Transition, ActorClass)</code> - get the inherited part of a transition’s action code</p></li>
+  <li>
+  <p><code>getSignature(Operation)</code> - returns a string representing the operation signature suited for a label</p></li>
+</ul>
+<h4><a href="#validation" name="validation"></a>Validation</h4>
+<p>Validation is used from various places. Therefore all validation code is accumulated in the @ValidationUtil@ class. All methods are static and many of them return a Result object which contains information about the problem detected as well as object and feature as suited for most validation purposes.</p>
+<h3><a href="#config-language-overview" name="config-language-overview"></a>Config Language Overview</h3>
+<h4><a href="#model-tweaks" name="model-tweaks"></a>Model Tweaks</h4>
+<p>A couple of operations are added to the ConfigModel</p>
+<ul>
+  <li>
+  <p><code>getActorClassConfigs</code></p></li>
+  <li>
+  <p><code>getActorInstanceConfigs</code></p></li>
+  <li>
+  <p><code>getProtocolClassConfigs</code></p></li>
+  <li>
+  <p><code>getSubSystemConfigs</code></p></li>
+</ul>
+<h4><a href="#imports-by-uri-using-namespaces" name="imports-by-uri-using-namespaces"></a>Imports by URI Using Namespaces</h4>
+<p>Imports are treated like in Room language, section <em>Imports by URI Using Namespaces</em>.</p>
+<h4><a href="#util" name="util"></a>Util</h4>
+<p>A set of static utility methods can be found in the <code>ConfigUtil</code> class.</p>
+<h3><a href="#aggregation-layer-overview" name="aggregation-layer-overview"></a>Aggregation Layer Overview</h3>
+<p>The eTrice Generator Model (genmodel.fsm and genmodel) serves as an aggregation layer. Its purpose is to allow easy access to information which is implicitly contained in the Room model but not simple to retrieve. Examples of this are the state machine with inherited items or a list of all triggers active at a state in the order in which they will be evaluated or the actual peer port of an end port (following bindings through relay ports).</p>
+<p>The lower level <code>FSMGeneratorModelBuilder</code> takes a <code>ModelComponent</code> and returns a <code>ExpandedModelComponent</code> which has the inheritance hierarchy of the state machine collapsed into one state machine. This lower level generator model only depends on general parts and doesn’t refer to the ROOM model.</p>
+<p>The higher level Generator Model includes the FSM Generator Model. It is created from a list of Room models by a call of the</p>
+<pre><code>createGeneratorModel(List&lt;RoomModel&gt;, boolean)
+</code></pre>
+<p>method of the <code>GeneratorModelBuilder</code> class.</p>
+<p>The <code>Root</code> object of the resulting Generator Model provides chiefly two things:</p>
+<ul>
+  <li>
+  <p>a tree of instances starting at each <code>SubSystem</code> with representations of each <code>ActorInstance</code> and <code>PortInstance</code></p></li>
+  <li>
+  <p>for each <code>ActorClass</code> a corresponding <code>ExpandedActorClass</code> with an explicit state machine containing all inherited state graph items</p></li>
+</ul>
+<h4><a href="#the-instance-model" name="the-instance-model"></a>The Instance Model</h4>
+<p>The instance model allows easy access to instances including their unique paths and object IDs. Also it is possible to get a list of all peer port instances for each port instance without having to bother about port and actor replication.</p>
+<h4><a href="#the-expanded-model-component" name="the-expanded-model-component"></a>The Expanded Model Component</h4>
+<p>The expanded model component contains, as already mentioned, the complete state machine of the model component. This considerably simplifies the task of state machine generation. Note that the generated code always contains the complete state machine of an actor. I.e. no target language inheritance is used to implement the state machine inheritance. Furthermore the <code>ExpandedModelComponent</code> gives access to</p>
+<ul>
+  <li>
+  <p><code>getIncomingTransitions(StateGraphNode)</code> – the set of incoming transition of a <code>StateGraphNode</code> (<code>State</code>, <code>ChoicePoint</code> or <code>TransitionPoint</code>)</p></li>
+  <li>
+  <p><code>getOutgoingTransitions(StateGraphNode)</code> – the set of outgoing transition of a <code>StateGraphNode</code></p></li>
+  <li>
+  <p><code>getActiveTriggers(State)</code> – the triggers that are active in this <code>State</code> in the order they are evaluated</p></li>
+</ul>
+<h4><a href="#the-expanded-actor-class" name="the-expanded-actor-class"></a>The Expanded Actor Class</h4>
+<p>The <code>ExpandedActorClass</code> is derived from the <code>ExpandedModelComponent</code> and adds only minor new features.</p>
+<ul>
+  <li>
+  <p><code>getActorClass()</code> – for convenience to avoid casts of the <code>ModelComponent</code> to an <code>ActorClass</code></p></li>
+  <li>
+  <p><code>getVarDeclData(Transition)</code> – for convenience to avoid casts to <code>VarDecl</code></p></li>
+</ul>
+<h4><a href="#transition-chains" name="transition-chains"></a>Transition Chains</h4>
+<p>By transition chains we denote a connected subset of the (hierarchical) state machine that starts with a transition starting at a state and continues over transitional state graph nodes (choice points and transition points) and continuation transitions until a state is reached. In general a transition chain starts at one state and ends in several states (the chain may branch in choice points). A <code>TransitionChain</code> of a transition is retrieved by a call of <code>getChain(Transition)</code> of the <code>ExpandedActorClass</code>. The <code>TransitionChain</code> accepts an <code>ITransitionChainVisitor</code> which is called along the chain to generate the action codes of involved transitions and the conditional statements arising from the involved choice points.</p>
+<h3><a href="#generator-overview" name="generator-overview"></a>Generator Overview</h3>
+<p>There is one plug-in that consists of base classes and some generic generator parts which are re-used by all language specific generators</p>
+<h4><a href="#base-classes-and-interfaces" name="base-classes-and-interfaces"></a>Base Classes and Interfaces</h4>
+<p>We just want to mention the most important classes and interfaces. Some of them can be found in the <code>org.eclipse.etrice.generator.fsm</code> and th rest in <code>org.eclipse.etrice.generator</code>.</p>
+<ul>
+  <li>
+  <p><code>ITranslationProvider</code> — this interface is used by the <code>DetailCodeTranslator</code> for the language dependent translation of e.g. port.message() notation in detail code</p></li>
+  <li>
+  <p><code>AbstractGenerator</code> — concrete language generators should derive from this base class</p></li>
+  <li>
+  <p><code>DefaultFSMTranslationProvider</code> and <code>DefaultTranslationProvider</code> — a stub implementation of <code>IFSMTranslationProvider</code> and <code>ITranslationProvider</code> from which clients may derive</p></li>
+  <li>
+  <p><code>Indexed</code> — provides an indexed iterable of a given iterable</p></li>
+  <li>
+  <p><code>GeneratorBaseModule</code> — a Google Guice module that binds a couple of basic services. Concrete language generators should use a module that derives from this</p></li>
+</ul>
+<h4><a href="#generic-generator-parts" name="generic-generator-parts"></a>Generic Generator Parts</h4>
+<p>The generic generator parts provide code generation blocks on a medium granularity. The language dependent top level generators embed those blocks in a larger context (file, class, …). Language dependent low level constructs are provided by means of an <code>ILanguageExtension</code>. This extension and other parts of the generator be configured using Google Guice dependency injection.</p>
+<h5><a href="#genericactorclassgenerator" name="genericactorclassgenerator"></a>GenericActorClassGenerator</h5>
+<p>The <code>GenericActorClassGenerator</code> generates constants for the interface items of a actor. Those constants are used by the generated state machine.</p>
+<h5><a href="#genericprotocolclassgenerator" name="genericprotocolclassgenerator"></a>GenericProtocolClassGenerator</h5>
+<p>The <code>GenericProtocolClassGenerator</code> generates message ID constants for a protocol.</p>
+<h5><a href="#genericstatemachinegenerator" name="genericstatemachinegenerator"></a>GenericStateMachineGenerator</h5>
+<p>The <code>GenericStateMachineGenerator</code> generates the complete state machine implementation. The skeleton of the generated code is</p>
+<ul>
+  <li>
+  <p>definition state ID constants</p></li>
+  <li>
+  <p>definition of transition chain constants</p></li>
+  <li>
+  <p>definition of trigger constants</p></li>
+  <li>
+  <p>entry, exit and action code methods</p></li>
+  <li>
+  <p>the <code>exitTo</code> method</p></li>
+  <li>
+  <p>the <code>executeTransitionChain</code> method</p></li>
+  <li>
+  <p>the <code>enterHistory</code> method</p></li>
+  <li>
+  <p>the <code>executeInitTransition</code> method</p></li>
+  <li>
+  <p>the <code>receiveEvent</code> method</p></li>
+</ul>
+<p>The state machine works as follows. The main entry method is the<br><code>receiveEvent</code> method. This is the case for both, data driven (polled) and event driven state machines. Then a number of nested switch/case statements evaluates trigger conditions and derives the transition chain that is executed. If a trigger fires then the <code>exitTo</code> method is called to execute all exit codes involved. Then the transition chain action codes are executed and the choice point conditions are evaluated in the <code>executeTransitionChain</code> method. Finally the history of the state where the chain ends is entered and all entry codes are executed by <code>enterHistory</code>.</p>
+<h4><a href="#the-java-generator" name="the-java-generator"></a>The Java Generator</h4>
+<p>The Java generator employs the generic parts of the generator. The <code>JavaTranslationProvider</code> is very simple and only handles the case of sending a message from a distinct replicated port: <code>replPort[2].message()</code>. Other cases are handled by the base class by returning the original text.</p>
+<p>The <code>DataClassGen</code> uses Java inheritance for the generated data classes. Otherwise it is pretty much straight forward.</p>
+<p>The <code>ProtocolClassGen</code> generates a class for the protocol with nested static classes for regular and conjugated ports and similar for replicated ports.</p>
+<p>The <code>ActorClassGen</code> uses Java inheritance for the generated actor classes. So ports, SAPs and attributes and detail code methods are inherited. Not inherited is the state machine implementation.</p>
+<h4><a href="#the-ansi-c-generator" name="the-ansi-c-generator"></a>The ANSI-C Generator</h4>
+<p>The C generator translates data, protocol and actor classes into structs together with a set of methods that operate on them and receive a pointer to those data (called <code>self</code> in analogy to the implicit C++ <code>this</code> pointer). No dynamic memory allocation is employed. All actor instances are statically initialized. One of the design goals for the generated C code was an optimized footprint in terms of memory and performance to be able to utilize modeling with ROOM also for tiny low end micro controllers.</p>
+<h4><a href="#the-documentation-generator" name="the-documentation-generator"></a>The Documentation Generator</h4>
+<p>The documentation generator creates documentation in LaTex format which can be converted into PDF and many other formats.</p></body></html>
+
+</body>
+</html>
+
+

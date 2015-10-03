@@ -1,0 +1,304 @@
+<contexts>
+<context id="featureContextHelp_CCodeGenerator" title="CCodeGenerator">
+<description></description>
+<topic href="targets/eclipse-help/feature-reference.html#ccodegenerator" label="CCodeGenerator"/>
+</context>
+
+<context id="featureContextHelp_JavaCodeGenerator" title="JavaCodeGenerator">
+<description></description>
+<topic href="targets/eclipse-help/feature-reference.html#javacodegenerator" label="JavaCodeGenerator"/>
+</context>
+
+<context id="featureContextHelp_CPPCodeGenerator" title="CPPCodeGenerator">
+<description></description>
+<topic href="targets/eclipse-help/feature-reference.html#cppcodegenerator" label="CPPCodeGenerator"/>
+</context>
+
+<context id="featureContextHelp_GenerationOptions" title="GenerationOptions">
+<description>Mechanism to adjust the generation.</description>
+<topic href="targets/eclipse-help/feature-reference.html#generationoptions" label="GenerationOptions"/>
+<topic href="targets/eclipse-help/feature-reference.html#generationoptions" label="CCodeGenerator"/>
+<topic href="targets/eclipse-help/feature-reference.html#generationoptions" label="JavaCodeGenerator"/>
+<topic href="targets/eclipse-help/feature-reference.html#generationoptions" label="MSCLogging"/>
+<topic href="targets/eclipse-help/feature-reference.html#generationoptions" label="DocumentationGenerator"/>
+</context>
+
+<context id="featureContextHelp_MSCLogging" title="MSCLogging">
+<description>Runtime logger for event-driven Messages, represented as a Message Sequence Chart.</description>
+<topic href="targets/eclipse-help/feature-reference.html#msclogging" label="MSCLogging"/>
+<topic href="targets/eclipse-help/feature-reference.html#msclogging" label="GenerationOptions"/>
+<topic href="targets/eclipse-help/feature-reference.html#msclogging" label="CCodeGenerator"/>
+<topic href="targets/eclipse-help/feature-reference.html#msclogging" label="JavaCodeGenerator"/>
+</context>
+
+<context id="featureContextHelp_DataLogging" title="DataLogging">
+<description>Runtime logger for data-driven Messages with primitive data.</description>
+<topic href="targets/eclipse-help/feature-reference.html#datalogging" label="DataLogging"/>
+<topic href="targets/eclipse-help/feature-reference.html#datalogging" label="Annotation"/>
+<topic href="targets/eclipse-help/feature-reference.html#datalogging" label="CCodeGenerator"/>
+</context>
+
+<context id="featureContextHelp_DocumentationGenerator" title="DocumentationGenerator">
+<description>A LaTeX documentation generator from eTrice models.</description>
+<topic href="targets/eclipse-help/feature-reference.html#documentationgenerator" label="DocumentationGenerator"/>
+<topic href="targets/eclipse-help/feature-reference.html#documentationgenerator" label="GenerationOptions"/>
+</context>
+
+<context id="featureContextHelp_AnnotationType" title="AnnotationType">
+<description>AnnotationTypes can be used to tag ROOM classes for further custom processing</description>
+<topic href="targets/eclipse-help/feature-reference.html#annotationtype" label="AnnotationType"/>
+<topic href="targets/eclipse-help/feature-reference.html#annotationtype" label="Annotation"/>
+<topic href="targets/eclipse-help/feature-reference.html#annotationtype" label="LogicalModel"/>
+</context>
+
+<context id="featureContextHelp_Annotation" title="Annotation">
+<description>An Annotation can be attached to a ROOM classes to apply the properties of its AnnotationType</description>
+<topic href="targets/eclipse-help/feature-reference.html#annotation" label="Annotation"/>
+<topic href="targets/eclipse-help/feature-reference.html#annotation" label="AnnotationType"/>
+<topic href="targets/eclipse-help/feature-reference.html#annotation" label="DataLogging"/>
+<topic href="targets/eclipse-help/feature-reference.html#annotation" label="LogicalSystem"/>
+<topic href="targets/eclipse-help/feature-reference.html#annotation" label="ActorClass"/>
+<topic href="targets/eclipse-help/feature-reference.html#annotation" label="SubSystemClass"/>
+<topic href="targets/eclipse-help/feature-reference.html#annotation" label="ProtocolClass"/>
+<topic href="targets/eclipse-help/feature-reference.html#annotation" label="DataClass"/>
+</context>
+
+<context id="featureContextHelp_Inheritance" title="Inheritance">
+<description>A class can specify a super class and inherits elements from the super class hierarchy</description>
+<topic href="targets/eclipse-help/feature-reference.html#inheritance" label="Inheritance"/>
+<topic href="targets/eclipse-help/feature-reference.html#inheritance" label="ActorClass"/>
+<topic href="targets/eclipse-help/feature-reference.html#inheritance" label="StateMachine"/>
+<topic href="targets/eclipse-help/feature-reference.html#inheritance" label="ProtocolClass"/>
+<topic href="targets/eclipse-help/feature-reference.html#inheritance" label="DataClass"/>
+</context>
+
+<context id="featureContextHelp_PhysicalModel" title="PhysicalModel">
+<description>The PhysicalModel defines the setup of your nodes with their attributes like threads and mode of execution</description>
+<topic href="targets/eclipse-help/feature-reference.html#physicalmodel" label="PhysicalModel"/>
+<topic href="targets/eclipse-help/feature-reference.html#physicalmodel" label="MappingModel"/>
+</context>
+
+<context id="featureContextHelp_MappingModel" title="MappingModel">
+<description>The MappingModel describes the mapping of elements of the LogicalModel to elements of the PhysicalModel</description>
+<topic href="targets/eclipse-help/feature-reference.html#mappingmodel" label="MappingModel"/>
+<topic href="targets/eclipse-help/feature-reference.html#mappingmodel" label="LogicalSystem"/>
+<topic href="targets/eclipse-help/feature-reference.html#mappingmodel" label="SubSystemRef"/>
+<topic href="targets/eclipse-help/feature-reference.html#mappingmodel" label="PhysicalModel"/>
+</context>
+
+<context id="featureContextHelp_ConfigModel" title="ConfigModel">
+<description>The ConfigModel describes the Attribute configuration of ActorInstances and PortInstances. </description>
+<topic href="targets/eclipse-help/feature-reference.html#configmodel" label="ConfigModel"/>
+<topic href="targets/eclipse-help/feature-reference.html#configmodel" label="Attribute"/>
+</context>
+
+<context id="featureContextHelp_LogicalModel" title="LogicalModel">
+<description>The LogicalModel describes the logical structure and behavior of a ROOM application</description>
+<topic href="targets/eclipse-help/feature-reference.html#logicalmodel" label="LogicalModel"/>
+</context>
+
+<context id="featureContextHelp_LogicalSystem" title="LogicalSystem">
+<description>The LogicalSystem is the topmost structural class. It assembles a distributed system by means of sub systems</description>
+<topic href="targets/eclipse-help/feature-reference.html#logicalsystem" label="LogicalSystem"/>
+<topic href="targets/eclipse-help/feature-reference.html#logicalsystem" label="MappingModel"/>
+<topic href="targets/eclipse-help/feature-reference.html#logicalsystem" label="LogicalModel"/>
+</context>
+
+<context id="featureContextHelp_ActorClass" title="ActorClass">
+<description>An actor is the basic structural building block for building systems with ROOM</description>
+<topic href="targets/eclipse-help/feature-reference.html#actorclass" label="ActorClass"/>
+<topic href="targets/eclipse-help/feature-reference.html#actorclass" label="Inheritance"/>
+<topic href="targets/eclipse-help/feature-reference.html#actorclass" label="LogicalModel"/>
+<topic href="targets/eclipse-help/feature-reference.html#actorclass" label="ActorRef"/>
+</context>
+
+<context id="featureContextHelp_SubSystemClass" title="SubSystemClass">
+<description>A SubSystem is the topmost building block of the executable part of an system</description>
+<topic href="targets/eclipse-help/feature-reference.html#subsystemclass" label="SubSystemClass"/>
+<topic href="targets/eclipse-help/feature-reference.html#subsystemclass" label="LogicalModel"/>
+<topic href="targets/eclipse-help/feature-reference.html#subsystemclass" label="SubSystemRef"/>
+</context>
+
+<context id="featureContextHelp_StateMachine" title="StateMachine">
+<description>A StateMachine describes the state based, event driven behavior of an ActorClass</description>
+<topic href="targets/eclipse-help/feature-reference.html#statemachine" label="StateMachine"/>
+<topic href="targets/eclipse-help/feature-reference.html#statemachine" label="Inheritance"/>
+<topic href="targets/eclipse-help/feature-reference.html#statemachine" label="ActorClass"/>
+</context>
+
+<context id="featureContextHelp_SubSystemRef" title="SubSystemRef">
+<description>A Sub System Reference is an instance of an SubSystemClass</description>
+<topic href="targets/eclipse-help/feature-reference.html#subsystemref" label="SubSystemRef"/>
+<topic href="targets/eclipse-help/feature-reference.html#subsystemref" label="SubSystemClass"/>
+<topic href="targets/eclipse-help/feature-reference.html#subsystemref" label="MappingModel"/>
+<topic href="targets/eclipse-help/feature-reference.html#subsystemref" label="LogicalSystem"/>
+</context>
+
+<context id="featureContextHelp_Replication" title="Replication">
+<description>Replication is mechanism for multi-instantiation for ActorRefs and Ports</description>
+<topic href="targets/eclipse-help/feature-reference.html#replication" label="Replication"/>
+<topic href="targets/eclipse-help/feature-reference.html#replication" label="ActorRef"/>
+<topic href="targets/eclipse-help/feature-reference.html#replication" label="Port"/>
+</context>
+
+<context id="featureContextHelp_ActorRef" title="ActorRef">
+<description>An ActorRef is an instance of an ActorClass</description>
+<topic href="targets/eclipse-help/feature-reference.html#actorref" label="ActorRef"/>
+<topic href="targets/eclipse-help/feature-reference.html#actorref" label="ActorClass"/>
+<topic href="targets/eclipse-help/feature-reference.html#actorref" label="Replication"/>
+<topic href="targets/eclipse-help/feature-reference.html#actorref" label="ActorClass"/>
+<topic href="targets/eclipse-help/feature-reference.html#actorref" label="SubSystemClass"/>
+</context>
+
+<context id="featureContextHelp_Binding" title="Binding">
+<description>A Binding connects two Ports with each other</description>
+<topic href="targets/eclipse-help/feature-reference.html#binding" label="Binding"/>
+<topic href="targets/eclipse-help/feature-reference.html#binding" label="Port"/>
+<topic href="targets/eclipse-help/feature-reference.html#binding" label="Port"/>
+<topic href="targets/eclipse-help/feature-reference.html#binding" label="ActorClass"/>
+<topic href="targets/eclipse-help/feature-reference.html#binding" label="SubSystemClass"/>
+</context>
+
+<context id="featureContextHelp_LayerConnection" title="LayerConnection">
+<description>A LayerConnection associates a SPP to an ActorRef, resulting in an connection of all SAPs on its instance hierarchy</description>
+<topic href="targets/eclipse-help/feature-reference.html#layerconnection" label="LayerConnection"/>
+<topic href="targets/eclipse-help/feature-reference.html#layerconnection" label="SAP"/>
+<topic href="targets/eclipse-help/feature-reference.html#layerconnection" label="SPP"/>
+<topic href="targets/eclipse-help/feature-reference.html#layerconnection" label="ActorClass"/>
+<topic href="targets/eclipse-help/feature-reference.html#layerconnection" label="SubSystemClass"/>
+</context>
+
+<context id="featureContextHelp_ExecutionType" title="ExecutionType">
+<description>Determines the execution type of an actor</description>
+<topic href="targets/eclipse-help/feature-reference.html#executiontype" label="ExecutionType"/>
+<topic href="targets/eclipse-help/feature-reference.html#executiontype" label="CommunicationType"/>
+<topic href="targets/eclipse-help/feature-reference.html#executiontype" label="ActorClass"/>
+</context>
+
+<context id="featureContextHelp_CommunicationType" title="CommunicationType">
+<description>The CommunicationType defines the communication semantics of a ProtocolClass</description>
+<topic href="targets/eclipse-help/feature-reference.html#communicationtype" label="CommunicationType"/>
+<topic href="targets/eclipse-help/feature-reference.html#communicationtype" label="ExecutionType"/>
+<topic href="targets/eclipse-help/feature-reference.html#communicationtype" label="ProtocolClass"/>
+</context>
+
+<context id="featureContextHelp_ProtocolClass" title="ProtocolClass">
+<description>A ProtocolClass defines messages and is the interface specification for a Port</description>
+<topic href="targets/eclipse-help/feature-reference.html#protocolclass" label="ProtocolClass"/>
+<topic href="targets/eclipse-help/feature-reference.html#protocolclass" label="Inheritance"/>
+<topic href="targets/eclipse-help/feature-reference.html#protocolclass" label="LogicalModel"/>
+<topic href="targets/eclipse-help/feature-reference.html#protocolclass" label="Port"/>
+<topic href="targets/eclipse-help/feature-reference.html#protocolclass" label="SAP"/>
+<topic href="targets/eclipse-help/feature-reference.html#protocolclass" label="SPP"/>
+</context>
+
+<context id="featureContextHelp_DataType" title="DataType">
+<description>A DataType can take 4 forms and types data elements like an Attribute or Operation argument</description>
+<topic href="targets/eclipse-help/feature-reference.html#datatype" label="DataType"/>
+<topic href="targets/eclipse-help/feature-reference.html#datatype" label="LogicalModel"/>
+<topic href="targets/eclipse-help/feature-reference.html#datatype" label="PrimitiveType"/>
+<topic href="targets/eclipse-help/feature-reference.html#datatype" label="Enumeration"/>
+<topic href="targets/eclipse-help/feature-reference.html#datatype" label="DataClass"/>
+<topic href="targets/eclipse-help/feature-reference.html#datatype" label="ExternalType"/>
+<topic href="targets/eclipse-help/feature-reference.html#datatype" label="Attribute"/>
+<topic href="targets/eclipse-help/feature-reference.html#datatype" label="Operation"/>
+</context>
+
+<context id="featureContextHelp_PrimitiveType" title="PrimitiveType">
+<description>A PrimitiveType is an abstraction of a target language's basic type (e.g. integer or boolean)</description>
+<topic href="targets/eclipse-help/feature-reference.html#primitivetype" label="PrimitiveType"/>
+<topic href="targets/eclipse-help/feature-reference.html#primitivetype" label="DataType"/>
+</context>
+
+<context id="featureContextHelp_Enumeration" title="Enumeration">
+<description>An EnumerationType declares an enumeration similar to most well-known languages</description>
+<topic href="targets/eclipse-help/feature-reference.html#enumeration" label="Enumeration"/>
+<topic href="targets/eclipse-help/feature-reference.html#enumeration" label="DataType"/>
+</context>
+
+<context id="featureContextHelp_DataClass" title="DataClass">
+<description>A DataClass is a composition of Attributes</description>
+<topic href="targets/eclipse-help/feature-reference.html#dataclass" label="DataClass"/>
+<topic href="targets/eclipse-help/feature-reference.html#dataclass" label="DataType"/>
+<topic href="targets/eclipse-help/feature-reference.html#dataclass" label="Inheritance"/>
+</context>
+
+<context id="featureContextHelp_ExternalType" title="ExternalType">
+<description>An ExternalType is used to make an target language type accessible in ROOM</description>
+<topic href="targets/eclipse-help/feature-reference.html#externaltype" label="ExternalType"/>
+<topic href="targets/eclipse-help/feature-reference.html#externaltype" label="DataType"/>
+</context>
+
+<context id="featureContextHelp_Attribute" title="Attribute">
+<description>An Attribute is a member variable of a class</description>
+<topic href="targets/eclipse-help/feature-reference.html#attribute" label="Attribute"/>
+<topic href="targets/eclipse-help/feature-reference.html#attribute" label="DataType"/>
+<topic href="targets/eclipse-help/feature-reference.html#attribute" label="ConfigModel"/>
+<topic href="targets/eclipse-help/feature-reference.html#attribute" label="ActorClass"/>
+<topic href="targets/eclipse-help/feature-reference.html#attribute" label="ProtocolClass"/>
+<topic href="targets/eclipse-help/feature-reference.html#attribute" label="DataClass"/>
+</context>
+
+<context id="featureContextHelp_Operation" title="Operation">
+<description>An Operation is a member function of a class</description>
+<topic href="targets/eclipse-help/feature-reference.html#operation" label="Operation"/>
+<topic href="targets/eclipse-help/feature-reference.html#operation" label="DataType"/>
+<topic href="targets/eclipse-help/feature-reference.html#operation" label="ActorClass"/>
+<topic href="targets/eclipse-help/feature-reference.html#operation" label="ProtocolClass"/>
+<topic href="targets/eclipse-help/feature-reference.html#operation" label="DataClass"/>
+</context>
+
+<context id="featureContextHelp_Port" title="Port">
+<description>A Port is an instance of a ProtocolClass and the interface for an ActorClass</description>
+<topic href="targets/eclipse-help/feature-reference.html#port" label="Port"/>
+<topic href="targets/eclipse-help/feature-reference.html#port" label="ProtocolClass"/>
+<topic href="targets/eclipse-help/feature-reference.html#port" label="Replication"/>
+<topic href="targets/eclipse-help/feature-reference.html#port" label="ActorClass"/>
+<topic href="targets/eclipse-help/feature-reference.html#port" label="Binding"/>
+<topic href="targets/eclipse-help/feature-reference.html#port" label="Binding"/>
+<topic href="targets/eclipse-help/feature-reference.html#port" label="RelayPort"/>
+<topic href="targets/eclipse-help/feature-reference.html#port" label="ExternalEndPort"/>
+<topic href="targets/eclipse-help/feature-reference.html#port" label="InternalEndPort"/>
+</context>
+
+<context id="featureContextHelp_RelayPort" title="RelayPort">
+<description>A RelayPort forwards its messages without exposing them to the internal interface of the ActorClass</description>
+<topic href="targets/eclipse-help/feature-reference.html#relayport" label="RelayPort"/>
+<topic href="targets/eclipse-help/feature-reference.html#relayport" label="Port"/>
+</context>
+
+<context id="featureContextHelp_ExternalEndPort" title="ExternalEndPort">
+<description>A ExternalEndPort is an interface Port, that is made accessible to the internal interface of an ActorClass</description>
+<topic href="targets/eclipse-help/feature-reference.html#externalendport" label="ExternalEndPort"/>
+<topic href="targets/eclipse-help/feature-reference.html#externalendport" label="Port"/>
+</context>
+
+<context id="featureContextHelp_InternalEndPort" title="InternalEndPort">
+<description>A InternalEndPort is an local Port, that is declared in the internal interface of an ActorClass</description>
+<topic href="targets/eclipse-help/feature-reference.html#internalendport" label="InternalEndPort"/>
+<topic href="targets/eclipse-help/feature-reference.html#internalendport" label="Port"/>
+</context>
+
+<context id="featureContextHelp_SAP" title="SAP">
+<description>A Service Access Point is similar to a Port, but uses a LayerConnection for wiring</description>
+<topic href="targets/eclipse-help/feature-reference.html#sap" label="SAP"/>
+<topic href="targets/eclipse-help/feature-reference.html#sap" label="ProtocolClass"/>
+<topic href="targets/eclipse-help/feature-reference.html#sap" label="ActorClass"/>
+<topic href="targets/eclipse-help/feature-reference.html#sap" label="LayerConnection"/>
+</context>
+
+<context id="featureContextHelp_ServiceImplementation" title="ServiceImplementation">
+<description>The implementation of an Service Provision Point (SPP)</description>
+<topic href="targets/eclipse-help/feature-reference.html#serviceimplementation" label="ServiceImplementation"/>
+<topic href="targets/eclipse-help/feature-reference.html#serviceimplementation" label="SPP"/>
+</context>
+
+<context id="featureContextHelp_SPP" title="SPP">
+<description>A Service Provision Point is the counterpart of a SAP</description>
+<topic href="targets/eclipse-help/feature-reference.html#spp" label="SPP"/>
+<topic href="targets/eclipse-help/feature-reference.html#spp" label="ProtocolClass"/>
+<topic href="targets/eclipse-help/feature-reference.html#spp" label="ActorClass"/>
+<topic href="targets/eclipse-help/feature-reference.html#spp" label="LayerConnection"/>
+<topic href="targets/eclipse-help/feature-reference.html#spp" label="ServiceImplementation"/>
+</context>
+</contexts>

@@ -1,0 +1,36 @@
+/* bootstrap nestd list fix */
+ol ol, ol ul, ul ol, ul ul {
+	margin-bottom: 10px;
+}
+
+#sidebar a.active-item {
+	font-weight: bold;
+}
+
+#sidebar a .arrow {
+  opacity: 0.5;
+}
+
+#sidebar ul ul a {
+	padding-left:30px;
+	font-size: 13px;
+}
+
+#sidebar ul ul ul a {
+	padding: 8px 8px;
+	padding-left:60px;
+	font-size: 12px;
+}
+
+#sidebar ul ul ul ul a {
+	padding: 5px 5px;
+	padding-left:90px;
+	font-size: 12px;
+}
+
+@media (max-width: 767px) {
+    #sidebar {
+        display:none !important;
+    }
+}
+

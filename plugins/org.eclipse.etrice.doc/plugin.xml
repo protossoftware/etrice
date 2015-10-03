@@ -1,29 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
-
    <extension
          point="org.eclipse.help.toc">
       <toc
-            file="top-toc.xml"
+            file="targets/eclipse-help/toc-topics.xml.html"
             primary="true">
-      </toc>
-      <toc
-            file="toc.xml"
-            primary="false">
-      </toc>
-      <toc
-            file="reference-toc.xml"
-            primary="false">
       </toc>
    </extension>
    <extension
          point="org.eclipse.help.contexts">
       <contexts
-            file="help/contextHelp.xml"
+            file="targets/contextHelp.xml"
             plugin="org.eclipse.etrice.doc">
       </contexts>
    </extension>
-   
 
 </plugin>

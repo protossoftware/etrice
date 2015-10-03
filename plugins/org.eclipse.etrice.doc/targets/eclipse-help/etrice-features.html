@@ -1,0 +1,350 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>eTrice Documentation</title>
+
+<link rel="stylesheet" type="text/css" href="css/book.css"/>
+<link rel="stylesheet" type="text/css" href="css/custom-common.css"/>
+
+</head>
+<body>
+
+
+
+	
+
+<html><head></head><body><h1><a href="#etrice-features" name="etrice-features"></a>eTrice Features</h1>
+<h2><a href="#model-navigation" name="model-navigation"></a>Model Navigation</h2>
+<p>In eTrice the primary source of the models is text based. However, for convenience the structure and the behavior of structure classes can be edited with graphical editors using the standard ROOM notation. Further. the textual models can be structured hierarchically using the import statement.</p>
+<p>So jumping between textual models and switching to and between diagrams and back to the textual representation is a frequent task. Therefore in this chapter we want to show the various possibilities to navigate the models.</p>
+<h3><a href="#from-model-to-behavior-to-structure" name="from-model-to-behavior-to-structure"></a>From Model to Behavior to Structure</h3>
+<p>There are three global key bindings (cf. the eTrice main menu item):</p>
+<ul>
+  <li>
+  <p>Alt+M – jump to the textual model</p></li>
+  <li>
+  <p>Alt+B – jump to the behavior diagram of the current actor class (determined by the cursor or selection position)</p></li>
+  <li>
+  <p>Alt+S – jump to the structure of the current structure class (determined by the cursor or selection position)</p></li>
+</ul>
+<p>Jumping from a diagram to the textual model using Alt+M will open (or bring to the front) an editor with the ROOM file and will select the structure class of the diagram in the text.</p>
+<p>The other way round, the position of the cursor or selection in the ROOM file is relevant. If it is enclosed by an actor class then for Alt+B a state machine editor is opened. If it is a structure class and Alt+S is pressed then the structure editor is opened for this class.</p>
+<p>As an alternative the context menu of an actor class can be used to open the associated structure or behavior diagram.</p>
+<p>Switching from the behavior to the structure is performed on Alt+S and vice versa on Alt+B.</p>
+<h3><a href="#model-navigation" name="model-navigation"></a>Model Navigation</h3>
+<p>Model file paths in import statements are hyper links that can be clicked with the Ctrl key pressed.</p>
+<p><img src="images/041-open-declaration.jpg" alt="image"></p>
+<p>An alternative is to use F3 (open declaration) with the cursor inside the file name.</p>
+<p>In a similar way references to model elements can be navigated using F3 or Ctrl-Click, e.g. the protocol class of a port or the actor class of an actor reference or the data class of an attribute and many more.</p>
+<p>The “quick outline” is a means that allows fast navigation in a single model. Ctrl-O opens a window similar to the outline view. Typing text (with possible wild cards * and ?) filters the view and selecting an element and pressing return locates the element in the editor.</p>
+<p>Ctrl-Shift-G searches references to model elements. E.g. “Find references” for a selected actor class lists all locations in ROOM models and diagrams that refer to this actor class.</p>
+<p>Using the outline, also imported elements can be browsed and navigated.</p>
+<h3><a href="#navigating-behavior-diagrams" name="navigating-behavior-diagrams"></a>Navigating Behavior Diagrams</h3>
+<p>The behavior editor displays a hierarchical state machine. States can have a sub state graph and thus the hierarchy of states and state graphs forms a tree like structure. The eTrice behavior editor always shows only one level of the hierarchy. The editor switches to the sub state graph of a state by double clicking it. The path of the currently displayed state graph is indicated in the upper right corner using state names separated by slashes (/). A single slash indicates the top level. Double click into the empty space of a state graph will switch to the state graph one level up.</p>
+<p>A double click on a transition (or its label), a transition point or a choice point opens their property dialog. A double click on a state opens its property dialog if it has no sub state graph or it switches to its sub state graph.</p>
+<h3><a href="#navigating-structure-diagrams" name="navigating-structure-diagrams"></a>Navigating Structure Diagrams</h3>
+<p>The context menu of a structure diagram (invoked in the empty space inside the bounding rectangle) contains an entry “Open Class Behavior” which opens the behavior diagram (same as Alt+B).</p>
+<p>The context menu of an actor reference contains entries: “Open Ref Structure” and “Open Ref Behavior” that allow to open the associated diagrams of the referenced actor class.</p>
+<h2><a href="#etrice-java-projects" name="etrice-java-projects"></a>eTrice Java Projects</h2>
+<p>There are two flavors of eTrice Java projects. The first one uses the Eclipse JDT build and the second one uses Maven to build and deploy an eTrice application.</p>
+<p>The kind of build can be selected in the “Empty eTrice Java project” wizard.</p>
+<h3><a href="#eclipse-jdt-build" name="eclipse-jdt-build"></a>Eclipse JDT Build</h3>
+<p>If this kind of build is chosen the eTrice new project wizard requires the <code>org.eclipse.etrice.runtime.java</code> project in the workspace and adds a dependency to it.</p>
+<p>If the project uses other eTrice projects (e.g. the <code>org.eclipse.etrice.modellib.java</code>) they have to be added to the Java build path as well.</p>
+<p>The eTrice new project wizard creates the following files for the JDT build</p>
+<ul>
+  <li>
+  <p>a ROOM model file with exemplary classes</p></li>
+  <li>
+  <p>a simple physical model</p></li>
+  <li>
+  <p>a model mapping the logical entities of the ROOM model to the physical entities</p></li>
+  <li>
+  <p>a launch configuration that invokes the eTrice Java code generator for the new models</p></li>
+  <li>
+  <p>a launch configuration that launches the main method of the generated code</p></li>
+</ul>
+<p>If “build automatically” is chosen the newly created model can be generated and launched with just two clicks.</p>
+<h3><a href="#maven-build" name="maven-build"></a>Maven Build</h3>
+<p>The Maven integration of eTrice requires the m2eclipse plug-in installed. The dependencies are then managed by the Maven pom.xml but the m2e builder maps them as JDT visible dependencies to the project class path.</p>
+<p>The eTrice new project wizard creates the following files for the Maven build</p>
+<ul>
+  <li>
+  <p>a ROOM model file with exemplary classes</p></li>
+  <li>
+  <p>a simple physical model</p></li>
+  <li>
+  <p>a model mapping the logical entities of the ROOM model to the physical entities</p></li>
+  <li>
+  <p>a launch configuration that invokes the eTrice Java code generator for the new models</p></li>
+  <li>
+  <p>a launch configuration that builds and deploys the generated application</p></li>
+  <li>
+  <p>a launch configuration that launches the deployed jar file</p></li>
+  <li>
+  <p>a launch configuration that launches the main method of the generated code (for convenience or if the generated code should be launched in debug mode)</p></li>
+</ul>
+<p>After the new project is created the m2e builder creates the dependencies in the project class path. Therefore also JDT can compile and launch the application.</p>
+<h4><a href="#example" name="example"></a>Example</h4>
+<p>As an example we want to use the .</p>
+<p>For this example we start with an empty workspace. We create a new eTrice project using the “Empty eTrice Java Project” wizard which results in a workspace looking like:</p>
+<p><img src="images/042-after-project-creation.png" alt="image"></p>
+<p>The only difference to the first version of this example is the resolution of the <code>TimingService</code> using a classpath scheme:</p>
+<pre><code class="room customHighlighted"><span class="keyword">import</span> room.basic.service.timing.* <span class="keyword">from</span> <span class="string">"classpath:/TimingService.room"</span>
+</code></pre>
+<p>It is possible to navigate to the imported model:</p>
+<p><img src="images/042-navigate-import.png" alt="image"></p>
+<p>but the model is read-only. It is found on the class path of the project which is derived from the project pom’s dependencies:</p>
+<pre><code class="lang-xml prettyprint">&lt;dependency&gt;
+	&lt;groupId&gt;org.eclipse.etrice&lt;/groupId&gt;
+	&lt;artifactId&gt;org.eclipse.etrice.modellib.java&lt;/artifactId&gt;
+	&lt;version&gt;0.5.0-SNAPSHOT&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+<p>Since during the generate-sources life cycle phase the same dependency is needed we have to add it also to our eTrice generator plug-in:</p>
+<pre><code class="lang-xml">&lt;build&gt;
+	&lt;plugins&gt;
+		&lt;plugin&gt;
+			&lt;groupId&gt;org.eclipse.etrice&lt;/groupId&gt;
+			&lt;artifactId&gt;org.eclipse.etrice.generator.java.mvn&lt;/artifactId&gt;
+			&lt;version&gt;0.5.0-SNAPSHOT&lt;/version&gt;
+			&lt;!-- [...] --&gt;
+			&lt;dependencies&gt;
+				&lt;!-- put the modellib on the class path to allow resolution of models by the generator --&gt;
+				&lt;dependency&gt;
+					&lt;groupId&gt;org.eclipse.etrice&lt;/groupId&gt;
+					&lt;artifactId&gt;org.eclipse.etrice.modellib.java&lt;/artifactId&gt;
+					&lt;version&gt;0.5.0-SNAPSHOT&lt;/version&gt;
+				&lt;/dependency&gt;
+			&lt;/dependencies&gt;
+		&lt;/plugin&gt;
+	&lt;/plugins&gt;
+&lt;/build&gt;
+</code></pre>
+<p>Now we start the build, e.g. by entering <code>mvn clean package</code> on the command line or by launching Maven using m2e. Maven will download all needed artifacts. The build should succeed and contain somewhere the generator output:</p>
+<pre><code>[INFO] Info: -- reading models
+[INFO] Info: added model model/MavenPingPong.etmap
+[INFO] Info: Loading file:/C:/eTrice-mvn-tutorial/MavenPingPong/model/MavenPingPong.etmap
+[INFO] Info: added referenced model file:/C:/eTrice-mvn-tutorial/MavenPingPong/model/MavenPingPong.room
+[INFO] Info: added referenced model file:/C:/eTrice-mvn-tutorial/MavenPingPong/model/MavenPingPong.etphys
+[INFO] Info: Loading file:/C:/eTrice-mvn-tutorial/MavenPingPong/model/MavenPingPong.room
+[INFO] Info: added referenced model classpath:/TimingService.room
+[INFO] Info: Loading jar:file:/C:/Users/hrentz/.m2/repository/org/eclipse/etrice/org.eclipse.etrice.modellib.java/0.5.0-SNAPSHOT/org.eclipse.etrice.modellib.java-0.5.0-SNAPSHOT.jar!/TimingService.room
+[INFO] Info: Loading file:/C:/eTrice-mvn-tutorial/MavenPingPong/model/MavenPingPong.etphys
+[INFO] Info: -- validating models
+[INFO] Info: validation finished with 0 errors and 0 warnings
+[INFO] Info: -- creating generator model
+[INFO] Info: GeneratorModelBuilder: creating system class from LogSys1
+[INFO] Info: GeneratorModelBuilder: creating subsystem instance from subSysRef1
+[INFO] Info: -- starting code generation
+[INFO] Info: clearing C:\eTrice-mvn-tutorial\MavenPingPong/src-gen/
+[INFO] Info: clearing /src-gen/
+[INFO] Info: generating ProtocolClass implementation 'PingPongProtocol.java' in 'C:\eTrice-mvn-tutorial\MavenPingPong/src-gen/MavenPingPong/'
+[INFO] Info: generating ActorClass implementation 'PingPongTop.java' in 'C:\eTrice-mvn-tutorial\MavenPingPong/src-gen/MavenPingPong/'
+[INFO] Info: generating ActorClass implementation 'Receiver.java' in 'C:\eTrice-mvn-tutorial\MavenPingPong/src-gen/MavenPingPong/'
+[INFO] Info: generating ActorClass implementation 'Sender.java' in 'C:\eTrice-mvn-tutorial\MavenPingPong/src-gen/MavenPingPong/'
+[INFO] Info: generating Node implementation 'Node_nodeRef1_subSysRef1.java' in 'C:\eTrice-mvn-tutorial\MavenPingPong/src-gen/MavenPingPong/'
+[INFO] Info: generating SubSystemRunner implementation 'Node_nodeRef1_subSysRef1Runner.java' in 'C:\eTrice-mvn-tutorial\MavenPingPong/src-gen/MavenPingPong/'
+[INFO] Info: -- finished code generation
+</code></pre>
+<p>When the packaging of the project succeeded two jar files have been created in the <code>target</code> folder. The larger one with “jar-with-dependencies” in its name also contains the referenced Maven components. It can be launched using the <code>runjar_</code> launch configuration.</p>
+<p>Finally we want to mention that the generator switches are passed as arguments to the plug-in. In the pom you can find the most commonly used ones in xml comments together with a comment:</p>
+<pre><code class="xml">&lt;plugin&gt;
+	&lt;groupId&gt;org.eclipse.etrice&lt;/groupId&gt;
+	&lt;artifactId&gt;org.eclipse.etrice.generator.java.mvn&lt;/artifactId&gt;
+	&lt;version&gt;0.5.0-SNAPSHOT&lt;/version&gt;
+	&lt;executions&gt;
+		&lt;execution&gt;
+			&lt;goals&gt;
+				&lt;goal&gt;eTriceJavaGenerator&lt;/goal&gt;
+			&lt;/goals&gt;
+			&lt;configuration&gt;
+				&lt;arguments&gt;
+					&lt;!-- allowed switches for the generator (not complete) --&gt;
+					&lt;!-- generate the store/restore interface using POJO data objects
+					&lt;param&gt;-storeDataObj&lt;/param&gt;
+					--&gt;
+					&lt;!-- generate MSC instrumentation
+					&lt;param&gt;-msc_instr&lt;/param&gt;
+					--&gt;
+					&lt;!-- generate the persistence interface for dynamic actors
+					&lt;param&gt;-persistable&lt;/param&gt;
+					--&gt;
+					&lt;!-- generate all ROOM classes as library
+					&lt;param&gt;-lib&lt;/param&gt;
+					--&gt;
+					&lt;!-- generate documentation
+					&lt;param&gt;-genDocu&lt;/param&gt;
+					--&gt;
+					&lt;!-- generate files incrementally (overwrite only if contents changed)
+					&lt;param&gt;-inc&lt;/param&gt;
+					--&gt;
+					&lt;param&gt;model/MavenPingPong.etmap&lt;/param&gt;
+				&lt;/arguments&gt;
+			&lt;/configuration&gt;
+		&lt;/execution&gt;
+	&lt;/executions&gt;
+	&lt;dependencies&gt;
+		&lt;!-- [...] --&gt;
+	&lt;/dependencies&gt;
+&lt;/plugin&gt;
+</code></pre>
+<p>E.g. for our example you might want to use the <code>-msc_instr</code> switch to generate MSCs.</p>
+<p>Finally for reference we show the complete ROOM model of this example:</p>
+<h2><a href="#automatic-diagram-layout-with-kieler" name="automatic-diagram-layout-with-kieler"></a>Automatic Diagram Layout with KIELER</h2>
+<h3><a href="#overview" name="overview"></a>Overview</h3>
+<p>eTrice provides as a feature the automatic layout of the ROOM diagrams in its graphical editors. This helps in improving the pragmatics of the diagrams and frees the user from the burden of manually lay-outing the diagrams on the canvas.</p>
+<p>The automatic lay-outing has been provided with the help of the well known KIELER framework, which focuses on the pragmatics of model-based system design, which can improve comprehensibility of diagrams, improve development and maintenance time, and improve the analysis of dynamic behavior.</p>
+<p>This chapter will answer the following questions</p>
+<hr>
+<p>Moreover, some will also be discussed.</p>
+<h3><a href="#performing-automatic-layout" name="performing-automatic-layout"></a>Performing Automatic Layout</h3>
+<p>Automatic layout could be performed in eTrice graphical editors using the command to layout the current diagram.</p>
+<p>This command is available in</p>
+<ul>
+  <li>
+  <p>The context menu of the diagrams</p></li>
+  <li>
+  <p>Using the <em>Ctrl+R L</em> shortcut.</p></li>
+</ul>
+<p>Additionally, an entry in the context menu allows to layout only a selected part of the diagram.</p>
+<h3><a href="#layout-options" name="layout-options"></a>Layout Options</h3>
+<p>A layout option is a customization point for the layout algorithms, with a specific data type and optionally a default value, used to affect how the active layout algorithm computes concrete coordinates for the graph elements.</p>
+<p>User-configurable layout options for a particular diagram object can be viewed and configured through the Layout View.The Layout View can be opened from the context menu of a selected diagram object by clicking the <em>Show Layout View</em> entry.</p>
+<p>On opening the layout view, and selecting any layout option, a description of the layout option is available in the footer of eclipse SDK:</p>
+<p><img src="images/043-LayoutOptionDescription.png" alt="Layout options"></p>
+<h3><a href="#configuring-layout-options" name="configuring-layout-options"></a>Configuring Layout Options</h3>
+<p>The values of the layout options for a particular diagram object (in the visible diagram) can be changed using the Layout View of that diagram object. The initial values are the predefined <em>default</em> values. These defaults can be changed using the context menu in Layout View as well as the Layout preference pages provided by eTrice.</p>
+<h4><a href="#the-layout-view" name="the-layout-view"></a>The Layout View</h4>
+<p><img src="images/043-LayoutView.png" alt="Layout view"></p>
+<p>The Layout view allows flexible customization of layout options for the selected objects in the eTrice diagram. If no object is selected, the view shows the options for the top-level container of the diagram. Options are stored persistently in diagram file (*.structure file /* .behavior file) of the eTricediagram, so that they are still available after the next Eclipse restart. Of course this requires the diagram to be saved after an option was changed.</p>
+<p>The options are grouped according to the function of the selected objects. The group Nodes (respectively Edges, Ports, or Labels) contains options related to the object itself, such as its size or priority, while the group Parents contains options for the elements contained in the selected objects, such as the applied layout algorithm or the spacing between elements. Which layout options are displayed depends on the types of selected objects and the active layout algorithm, since each algorithm supports only a subset of the available options. Furthermore, some options are only visible if the <em>Show Advanced Properties</em> button in the view toolbar is activated. The group types can be hidden using the Show Categories button.</p>
+<p>An option can be changed by selecting or entering a new value in the corresponding cell of the Value column.</p>
+<p>The most important option is Layout Algorithm, which is used to determine the layout algorithm for the contents of the selected element. Here either a specific layout algorithm or a layout type can be chosen; in the latter case, the most suitable layout algorithm of the given type is taken. By changing the active layout algorithm, the content of the layout view is updated to display only those options that are supported by the new layout algorithm.</p>
+<p>Selecting <em>Restore Default Value</em> in the context menu or the view toolbar removes any value for the currently selected option that is stored in the current model file, thus resetting the option to its default value. The view menu has an entry Remove all Layout Options which resets all options of the current model by removing persistent data in the model file.</p>
+<p><img src="images/043-ContextMenu.png" alt="Layout in context menu"></p>
+<p>The context menu for a specific layout option has different alternatives to set the currently active value as <em>default</em> value:</p>
+<ul>
+  <li>
+  <p><em>Set as Default for this Diagram</em>: Changes the open diagram file so that the same value is applied to all similar objects (edit parts) of that diagram.</p></li>
+  <li>
+  <p><em>Set as Default for … in this Context</em>: Applies the value to all similar objects that are displayed with the any of the eTrice editors (the option is linked to the edit part class of the selected object).</p></li>
+  <li>
+  <p><em>Set as Default for all …</em>: Links the option value with the domain model element or the diagram type of the selected object (see the context menu depicted above).</p></li>
+</ul>
+<p>These four alternatives have different priorities: if present, the default value for the current diagram is taken first, then the default value for the edit part is checked, then the default value for the domain model element, and then the default value for the diagram type.</p>
+<p>Tips:</p>
+<ul>
+  <li>
+  <p>The information button of the view toolbar can be used to display some useful details on the current selection, such as the edit part and domain model classes.</p></li>
+  <li>
+  <p>Default values for layout options can most easily be manipulated based on the eTrice domain model elements.</p></li>
+</ul>
+<h4><a href="#preference-page" name="preference-page"></a>Preference Page</h4>
+<p>The user-defined <em>default</em> values for layout options can also be set using the preference pages provided in eTrice. Three preference pages have been provided for this purpose</p>
+<ul>
+  <li>
+  <p><em>Layout</em>: for general preferences regarding layout</p></li>
+  <li>
+  <p><em>Behavior</em>: for setting default values of layout options for eTrice behavior diagrams</p></li>
+  <li>
+  <p><em>Structure</em>: for setting default values of layout options for eTrice structure diagrams</p></li>
+</ul>
+<p>These preference pages can be accessed via <em>Windows &gt; Preferences &gt; eTrice &gt; Layout</em>.</p>
+<p>Note that the contents of these preference pages are in sync with the <em>KIELER &gt; Layout</em> preference page provided by the KIELER. Relevant entries in the <em>KIELER &gt; Layout</em> page are shown in the above preference pages.</p>
+<h5><a href="#layout-preference-page" name="layout-preference-page"></a><em>Layout</em> Preference Page</h5>
+<p>The <em>Layout</em> preference page is meant to configure general options regarding the layout.</p>
+<p>If <em>Set routing style of all edges to oblique</em> is active, all routing styles and smoothness settings of edges are removed when automatic layout is performed. Since most layouters compute the routing of edges as part of their algorithm, these styles usually do not yield the expected results.</p>
+<h5><a href="#behavior-and-structure-preference-page" name="behavior-and-structure-preference-page"></a><em>Behavior</em> and <em>Structure</em> Preference Page</h5>
+<p>The <em>Behavior</em> and <em>Structure</em> sub-preference pages help in setting up the default values of layout options in behavior and structure diagrams respectively.</p>
+<p>The <em>Default Layout Option Values</em> table is used to manage the default setting for layout options, which can also be modified with the context menu of the layout view (see above). All user-defined settings are displayed here, and the buttons on the right of the table serve to create, edit, and remove entries. The Type column shows the type of element the option is linked with: either edit part, model element, or diagram type. The Element column shows the class name for options that relate to edit parts or domain model elements, and the diagram type name for options that relate to diagram types. Option is the name of the layout option, and Value is the currently set value of the option.</p>
+<p>Creating a new entry requires the selection of the type of related element and entering its class name or identifier. Class names of edit parts can be explored using the information button of the layout view, while the class names for the domain model elements and the diagram type identifiers for the diagram types can be selected with the Browse button. After that, a layout option has to be selected from the list using the corresponding Browse button. Hitting OK creates an entry, and its value can then be set using the Edit button.</p>
+<p><img src="images/043-PreferencePage.png" alt="Layout preference page"></p>
+<p>Note that the <em>Behavior</em> preference page will show only those entries which hold for the behavior diagrams. Moreover, it will allow setting default values of layout options for only those domain model elements and diagram types which could be present in the behavior editor diagrams. Similar thing holds for the <em>Structure</em> preference page.</p>
+<h3><a href="#special-layout-options" name="special-layout-options"></a>Special Layout Options</h3>
+<p>While most layout options are used to affect how the active layout algorithm computes concrete coordinates for the graph elements, there are some layout options that have a special role.</p>
+<h4><a href="#layout-algorithm" name="layout-algorithm"></a>Layout Algorithm</h4>
+<p>The option with identifier de.cau.cs.kieler.algorithm specifies which layout algorithm to use for the content of a composite node. The value can be either the identifier of a layout algorithm or the identifier of a layout type. In the latter case the algorithm with highest priority of that type is applied.</p>
+<p>For the purpose of automatic diagram layout in eTrice, we use the <em>Layered</em> algorithms which are meant for lay-outing hierarchical diagrams and are best suited for behavior and structure diagrams in eTrice. For the behavior diagrams we have used the <em>Graphviz Dot</em> algorithm whereas for the structure diagrams we have used the <em>KLay Layered</em> algorithm. Though the layout algorithm being used for performing layout can be changed at ones own will, it is recommended to use the defaults.</p>
+<h4><a href="#diagram-type" name="diagram-type"></a>Diagram Type</h4>
+<p>Diagram types are used to classify graphical diagrams for setting default layout option values for a set of similar diagrams. The diagram type of an element is specified with the layout option <code>de.cau.cs.kieler.diagramType</code>. Thus, these help in</p>
+<p>The following diagram types have been defined and used in eTrice:</p>
+<ul>
+  <li>
+  <p><em>General</em> - This type is automatically assigned to all diagrams for which no specific type is declared. (Predefined in KIELER)</p></li>
+  <li>
+  <p><em>eTrice Behavior Diagrams</em> - This type has been assigned to the diagram objects in eTrice Behavior Diagrams.</p></li>
+  <li>
+  <p><em>eTrice Structure Diagrams</em> - This type has been assigned to the diagram objects in eTrice Structure Diagrams.</p></li>
+</ul>
+<p>Note that not all diagrams objects in the behavior and structure diagrams are assigned the last two diagram types. Only the top-level container and the visible bounding box has been assigned these diagram types in respective editors.</p>
+<h3><a href="#further-references" name="further-references"></a>Further References</h3>
+<p>Most parts of the above documentation have been taken from the “KIML wiki” (<a href="http://rtsys.informatik.uni-kiel.de/confluence/pages/viewpage.action?pageId=328078">http://rtsys.informatik.uni-kiel.de/confluence/pages/viewpage.action?pageId=328078</a> and have been modified for automatic layout in eTrice. A more detailed description about the layout algorithms, predefined diagram types and the internal structure of KIELER Infrastructure for Meta-Layout (KIML) can be found there.</p>
+<h2><a href="#annotations" name="annotations"></a>Annotations</h2>
+<p>In eTrice it is possible to use annotations similar to Java annotations. Annotation types can be defined together with their targets and other properties and later they can be used.</p>
+<p>Annotations can be processed by the code generator to influence its behavior.</p>
+<h3><a href="#annotation-type-definitions" name="annotation-type-definitions"></a>Annotation Type Definitions</h3>
+<p>Examples of such definitions can be found in the files <code>Annotations.room</code> which are part of the modellibs. They contain definitions of annotations that are recognized by the generator of the associated language.</p>
+<p>Consider e.g. the annotations definitions for Java</p>
+<p>Here we find two definitions. The meaning of those annotations will be explained later in section <a href="#usage-and-effect-of-the-pre-45-defined-annotations">Usage and Effect of the Pre-defined Annotations</a>.</p>
+<p>The annotation type definition defines a target where the annotation is allowed to be used. This can be one of</p>
+<ul>
+  <li>DataClass</li>
+  <li>ActorClass</li>
+  <li>ActorBehavior</li>
+  <li>ProtocolClass</li>
+  <li>CompoundProtocolClass</li>
+  <li>SubSystemClass</li>
+  <li>LogicalSystem</li>
+</ul>
+<p>Attributes can be added as needed and qualified as mandatory or optional. Attributes have a type (similar as the PrimitiveType but with the understanding that ptChar is a string). Another attribute type is enum with an explicit list of allowed enum literals.</p>
+<h3><a href="#usage-and-effect-of-the-pre-45-defined-annotations" name="usage-and-effect-of-the-pre-45-defined-annotations"></a>Usage and Effect of the Pre-defined Annotations</h3>
+<p>The eTrice generators currently implement two annotations.</p>
+<h4><a href="#behaviormanual" name="behaviormanual"></a>BehaviorManual</h4>
+<p>This annotation has no attribute. If specified the code generator won’t generate a state machine but part of the interface and methods of an actor class.</p>
+<p><strong>Java</strong></p>
+<p>An abstract base class <code>Abstract&lt;ActorClassName&gt;</code> is generated which contains ports, SAPs and attributes as members. The <code>receiveEvent()</code> method is dispatching to distinct methods per pair of interface item (port or SAP) and message coming in from this interface item. The user has to sub class the abstract base class and may override the generated methods as needed.</p>
+<p><strong>C</strong></p>
+<p>The generator is only generating a public header file and is leaving its implementation to the user.</p>
+<h4><a href="#actorbaseclass" name="actorbaseclass"></a>ActorBaseClass</h4>
+<p>This annotation is defined for Java only. It tells the generator that the generated actor class should inherit from the specified base class (mandatory string parameters class and package).</p>
+<p>If the actor class is modeled as having another actor base class then the annotation has no effect.</p>
+<h2><a href="#enumerations" name="enumerations"></a>Enumerations</h2>
+<p>Another top level type that eTrice introduces is the <code>Enumeration</code>. Enumerations are well known from many programming languages. They basically are a lists of literals, each of which is a pair consisting of a name and an integer constant.</p>
+<p>The assignment of integer constants is optional in eTrice. If no value is specified then the value is that of the predecessor plus one or 0 if there is no predecessor.</p>
+<p>The default type of the enumeration is an <code>int</code> and depends on the target platform. But it is also possible to explicitly associate a <code>PrimitiveType</code> (of integer type of course) with the enumeration.</p>
+<p>In the following listing we show a couple of examples for enumerations.</p>
+<h2><a href="#etrice-models-and-their-relations" name="etrice-models-and-their-relations"></a>eTrice Models and Their Relations</h2>
+<p>eTrice comprises several models:</p>
+<ul>
+  <li>
+  <p>the ROOM model (*.room) – defines model classes and the logical structure of the model</p></li>
+  <li>
+  <p>the Config model (*.config) – defines configuration values for attributes</p></li>
+  <li>
+  <p>the Physical model (*.etphys) – defines the structure and properties of the physical system</p></li>
+  <li>
+  <p>the Mapping model (*.etmap) – defines a mapping from logical elements to physical elements</p></li>
+</ul>
+<p>In the following diagram the models and their relations are depicted. The meaning of the arrows is: uses/references.</p>
+<p><img src="images/080-models.jpg" alt="image"></p>
+<p>In the following sections we will describe those models with emphasis of their cross relations.</p>
+<h3><a href="#the-room-model" name="the-room-model"></a>The ROOM Model</h3>
+<p>The ROOM model defines [DataClass][]es, [ProtocolClass][]es, [ActorClass][]es, [SubSystemClass][]es and [LogicalSystem][]s. Thereby the three latter form a hierarchy. The [LogicalSystem][] is the top level element of the structure. It contains references to [SubSystemClass][] elements. The [SubSystemClass][] in turn contains references to [ActorClass][] elements which again contain (recursively) references to [ActorClass][] elements. The complete structural hierarchy implies a tree which has the [LogicalSystem][] as root and where each reference stands for a new node with possibly further branches.</p>
+<p>Let’s consider a simple example. It doesn’t implement anything meaningful and completely omits behavioral and other aspects.</p>
+<p>When a [LogicalSystem][] is instantiated then recursively all of the contained referenced elements are instantiated as instances of the corresponding class. Thus the instance tree of the above example looks like in figure below (the third line in the white boxes shows some mapping information, see <a href="#the-mapping-model">MappingModel</a> ):</p>
+<a name="room-instance-diagram"><img src="images/080-instances.jpg" alt="Instances of a ROOM system"></a>
+<h3><a href="#the-config-model" name="the-config-model"></a>The Config Model</h3>
+<p>Once we have the ROOM class model we can configure values using the Config model. This can be done on the class level and/or on the instance level. Values defined for class attributes are used for all instances unless there is an instance value configured for the same attribute.</p>
+<h3><a href="#the-physical-model" name="the-physical-model"></a>The Physical Model</h3>
+<p>The physical model defines the physical resources onto which the logical system will be deployed. It is possible to define runtime classes which (currently) only define the overall execution model of the platform.</p>
+<p>The [PhysicalSystem][] is composed of [NodeRef][]erences which are instances of [NodeClass][]es. Each [NodeClass][] is referencing a [RuntimeClass][] and is defining [Threads][].</p>
+<h3><a href="#the-mapping-model" name="the-mapping-model"></a>The Mapping Model</h3>
+<p>The last model finally combines all this information by mapping logical to physical entities.</p>
+<p>The result of the mapping is also depicted in above <a href="#room-instance-diagram">instance tree diagram</a> of the instances. All actor instances (the white boxes) are mapped to a node and a thread running on this node (shown as @*node* : <em>thread</em>).</p></body></html>
+
+</body>
+</html>
+
+

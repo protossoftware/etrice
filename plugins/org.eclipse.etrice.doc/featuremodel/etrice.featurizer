@@ -1,22 +1,24 @@
 /*
- * Root model
- */
+ * Root model   
+ */ 
 FeaturizerModel eTrice
 	imports "etrice.roomlanguage.featurizer", "etrice.modeleditors.featurizer", "etrice.codegenerators.featurizer"
 	 
 	// Generator settings 
-	texDocGenerator {    
-		filePathName "300-eTrice-reference"    
+	DocumentationGenerator {    
+		filePathName "feature-reference"
 	}
 	HTMLHelpGenerator {   
-		filePath "html"    
+		filePath "keyword-hover"  
+		docHref "#"   // not needed yet, check xtext hover link capability
 	} 
-	eclipseContextHelpGenerator {
+	eclipseContextHelpGenerator { 
 		filePathName "contextHelp"
+		docHref "targets/eclipse-help/feature-reference.html" 
 	}
 	
 	contains ROOMLanguage 
 	contains ModelEditors
-	contains CodeGenerators 
+	contains CodeGenerators
 
 

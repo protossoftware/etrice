@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<project name="org.eclipse.etrice.doc" basedir="." default="onlineDoc">
+
+	<target name="copy_featureReference">
+		<copy file="feature-gen/feature-reference.md" todir="online-doc/content" />
+	</target>
+
+	<target name="onlineDoc">
+		<java jar="xternalLibs/stagen.jar" dir="online-doc" fork="true" failonerror="true" >
+			<arg value="run" />
+		</java>
+	</target>
+	
+</project>

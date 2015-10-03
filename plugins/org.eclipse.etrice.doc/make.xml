@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<project name="org.eclipse.etrice.doc" basedir="." default="all">
+
+	<property name="output" value="./targets" />
+
+	<target name="all">
+		<parallel threadCount="4">
+			<antcall target="copy_keywordHover-contextHelp" />
+			<antcall target="onlineDoc" />
+			<antcall target="eclipseHelp" />
+		</parallel>
+	</target>
+
+	<target name="copy_featureReference">
+		<copy file="feature-gen/feature-reference.md" todir="online-doc/content" />
+	</target>
+
+	<target name="copy_keywordHover-contextHelp">
+		<delete dir="${output}/keyword-hover" />
+		<delete file="${output}/contextHelp.xml" />
+		<copy todir="${output}/keyword-hover">
+			<fileset dir="feature-gen/keyword-hover" />
+		</copy>
+		<copy file="feature-gen/contextHelp.xml" todir="${output}" />
+	</target>
+
+	<target name="eclipseHelp" depends="copy_featureReference">
+		<delete dir="${output}/eclipse-help"/>
+		<delete dir="tmp/eclipse-help"/>
+		<copy todir="tmp/eclipse-help">
+			<fileset dir="online-doc">
+				<include name="config/" />
+				<include name="static/icons/" />
+				<include name="static/images/" />
+				<include name="content/" />
+			</fileset>
+		</copy>
+		<copy todir="tmp/eclipse-help">
+			<fileset dir="eclipse-help" />
+		</copy>
+		<java jar="xternalLibs/stagen.jar" dir="tmp/eclipse-help" fork="true" failonerror="true" output="tmp/stagen_eclipseHelp">
+			<arg value="gen" />
+		</java>
+		<copy todir="${output}/eclipse-help">
+			<fileset dir="tmp/eclipse-help/target/" />
+		</copy>
+		<delete dir="tmp/eclipse-help" />
+	</target>
+
+	<target name="onlineDoc" depends="copy_featureReference">
+		<java jar="xternalLibs/stagen.jar" dir="online-doc" fork="true" failonerror="true" output="tmp/stagen_onlineDoc">
+			<arg value="gen" />
+		</java>
+	</target>
+</project>

@@ -1,0 +1,11 @@
+<p>A PrimitiveType is an abstraction of a target language&rsquo;s basic type (e.g. integer or boolean)</p>
+<pre><code class=room customHighlighted><span class=comment>// java
+</span><span class=keyword>PrimitiveType</span> boolean: <span class=keyword>ptBoolean</span> -> boolean (Boolean) <span class=keyword>default</span> <span class=string>"false"</span>
+<span class=keyword>PrimitiveType</span> int16: <span class=keyword>ptInteger</span> -> short (Short) <span class=keyword>default</span> <span class=string>"0"</span>
+
+<span class=comment>// c
+</span><span class=keyword>PrimitiveType</span> boolean: <span class=keyword>ptBoolean</span> -> boolean <span class=keyword>default</span> <span class=string>"false"</span>
+<span class=keyword>PrimitiveType</span> int16: <span class=keyword>ptInteger</span> -> int16 <span class=keyword>default</span> <span class=string>"0"</span>
+
+<span class=keyword>PrimitiveType</span> name: literalType -> targetName (castName) <span class=keyword>default</span> <span class=string>"value"</span> [<span class=string>"Documentation"</span>]
+</code></pre>

@@ -1,23 +1,21 @@
-FeaturizerModel eTriceROOMLanguage
+FeaturizerModel eTriceROOMLanguage 
 	imports "etrice.featurizer"
 
 
-Package ROOMLanguage 
-	description '''The Real Time Object Oriented Modeling (ROOM).'''
+Package ROOMLanguage
+	description '''The Real Time Object Oriented Modeling (ROOM)'''
 	text '''
 		eTrice comprises several models:
 
-		\begin{itemize}
-		\item the ROOM model (*.room) -- defines model classes and the logical structure of the model
-		\item the Config model (*.config) -- defines configuration values for attributes
-		\item the Physical model (*.etphys) -- defines the structure and properties of the physical system
-		\item the Mapping model (*.etmap) -- defines a mapping from logical elements to physical elements
-		\end{itemize}
+		- the ROOM model (*.room) -- defines model classes and the logical structure of the model
+		- the Config model (*.config) -- defines configuration values for attributes
+		- the Physical model (*.etphys) -- defines the structure and properties of the physical system
+		- the Mapping model (*.etmap) -- defines a mapping from logical elements to physical elements
+		
 		
 		In the following diagram the models and their relations are depicted. The meaning of the arrows is: uses/references.
-		\begin{center}
-			\includegraphics[width=.5\textwidth]{images/080-models.jpg}
-		\end{center}
+
+		![Model overview](images/080-models.jpg)
 	'''
 	contains LogicalModel 
 	contains PhysicalModel 
@@ -26,13 +24,13 @@ Package ROOMLanguage
 ;
 
 Feature AnnotationType
-description '''AnnotationTypes can be used to tag ROOM classes for further custom processing.'''
+description '''AnnotationTypes can be used to tag ROOM classes for further custom processing'''
 text '''
 	They provide the ability to associate custom properties to ROOM classes, that adjust or toogle features, like generation or the runtime behavior.
 	eTrice has some built-in annotations, which can be found in Annotations.room within the eTrice modellib.
 
 	See section Annotations for further reading.
-'''
+''' 
 help '''
 	```room
 	AnnotationType AnnotationName ["documentation"] {
@@ -46,17 +44,19 @@ stable
 ;
 
 Feature Annotation
-description '''An Annotation can be attached to a ROOM classes to apply the properties of its AnnotationType.'''
+description '''An Annotation can be attached to a ROOM classes to apply the properties of its AnnotationType'''
 text '''
 	It refers to an AnnotationType and may have to pass key value pairs. Its notation is similar to Java:
-	\begin{lstlisting}
-		@AnnotationType1
-		@AnnotationType2(key1="STRING", key2=3, ...)
-	\end{lstlisting}
+
+	```room
+	@AnnotationType1
+	@AnnotationType2(key1="STRING", key2=3, ...)
+	```
 
 	See section Annotations for further reading.
 '''
 example '''
+	```room
 	import room.basic.annotations.* from "../../org.eclipse.etrice.modellib.c/model/Annotations.room"
 
 	ActorClass ComponentAbstraction {
@@ -71,13 +71,14 @@ example '''
 			@BehaviorManual
 		}
 	}
+	```
 '''
 isOfType AnnotationType
 stable
 ;
 
 Feature Inheritance
-	description '''A class can specify a super class and inherits elements from the super class hierarchy.'''
+	description '''A class can specify a super class and inherits elements from the super class hierarchy'''
 	text '''
 		When a ROOM class specifies a super class, it generally inherits all elements and properties.
 		In several cases, it is possible, to override these inherited elements. Generally, eTrice has two semantics of overriding: refinement and replacement.
@@ -86,28 +87,28 @@ Feature Inheritance
 		Contrary to this, replacement is applied to overridden Operations, similar to programming languages C++ and Java.
 
 		A formal definition of overriding is given below:
-		\begin{itemize}
-			\item early or late resolve - if element is overriden, which one should super class use by default - own or override ?
-			\item replacing or refinement - ignore inherited code or prepend inherited code automatically ?
-			\item (non\_)accessible - if element is overriden, is super class' original accessible from sub class ? e.g. super.foo()
-			\item implict or explicit - does it use distinct model element / keyword?
-		\end{itemize}
 		
-		Examples programming languages:\\
-		c++ virtual function and java override  <==> accessible explicit late replacing\\
-		c++ function redefine <==> accessible implict early replacing\\
+		- early or late resolve - if element is overridden, which one should super class use by default - own or override ?
+		- replacing or refinement - ignore inherited code or prepend inherited code automatically ?
+		- (non-)accessible - if element is overridden, is super class' original accessible from sub class ? e.g. super.foo()
+		- implicit or explicit - does it use distinct model element / keyword?
+		
+		
+		Examples programming languages:
+		c++ virtual function and java override  <==> accessible explicit late replacing
+		c++ function redefine <==> accessible implicit early replacing
 		c++ dtor <==> late refinement\\
 		
-		eTrice override of model elements:\\
-		Operations (C generation)  <==> non\_accessible explicit late replacing\\
-		Operations (Java generation) <==> accessible explicit late replacing\\
-		State and Transitions <==> non\_accessible explicit late refinement\\
-		ctor/dtor <==> non\_accessible implicit late refinement\\
-		StateMachine <==> non\_accessible implicit late refinement\\
-		UserCode <==> non\_accessible implicit late refinement\\
+		eTrice override of model elements:
+		Operations (C generation)  <==> non\_accessible explicit late replacing
+		Operations (Java generation) <==> accessible explicit late replacing
+		State and Transitions <==> non-accessible explicit late refinement
+		ctor/dtor <==> non\_accessible implicit late refinement
+		StateMachine <==> non-accessible implicit late refinement
+		UserCode <==> non-accessible implicit late refinement
 	'''
 	example '''
-		\begin{lstlisting}[language=ROOM]
+		```room
 		ActorClass ActorSubClass extends ActorBaseClass {
 			// inherits all elements from super type hierarchy
 		}
@@ -143,27 +144,28 @@ Feature Inheritance
 		DataClass DataBaseClass {
 			Attribute attribute1 : uint32
 		}
-	\end{lstlisting}
-	'''
+		```
+		'''
 	prototype	
 ;
 
 Feature PhysicalModel
-	description '''The PhysicalModel defines the setup of your nodes with their attributes like threads and mode of execution.'''
+	description '''The PhysicalModel defines the setup of your nodes with their attributes like threads and mode of execution'''
 	text '''
 		The model describes the physical view of your system:
-		\begin{lstlisting}[language=etPhys]
+
+		```etphys
 		PhysicalSystem PhysSys1 {
 			NodeRef nodeRef1 : NodeClass1
 			NodeRef nodeRef2 : NodeClass2
 		}
-		\end{lstlisting}
+		```
 
 		The central element is a NodeClass, that models the executional aspects of a device (node).
 		At first, it can be associated with a RuntimeClass, which specifies if your device supports multiple threads.
 		'priomin' and 'priomax' define the range of priorities, that can be assigned to threads.
 
-		\begin{lstlisting}[language=etPhys]
+		```etphys
 		NodeClass NodeClass1 {
 			runtime = RuntimeClass1
 			priomin = -10
@@ -175,23 +177,22 @@ Feature PhysicalModel
 		RuntimeClass RuntimeClass1 {
 			model = multiThreaded // or singleThreaded
 		}
-		\end{lstlisting}
+		```
 
 		A thread has to specify the following properties:
-		\begin{itemize}
-			\item \textbf{execmode}: defines the execution type, see more at ExecutionType
-			\begin{itemize}
-				\item blocked: message-driven only, thread wakes up if message arrives and is put to sleep after all action is done
-				\item polled: data-driven only, thread is executed cyclic. The 'interval' property is mandatory in this case.
-				\item mixed: combines both execution types
-			\end{itemize}
-			\item \textbf{msgblocksize}: the size in bytes of a message
-			\item \textbf{msgpoolsize}:  the amount of messages, that the thread's message queue can store
-		\end{itemize}
+		
+		- **execmode**: defines the execution type, see more at ExecutionType
+			- blocked: message-driven only, thread wakes up if message arrives and is put to sleep after all action is done
+			- polled: data-driven only, thread is executed cyclic. The 'interval' property is mandatory in this case.
+			- mixed: combines both execution types
+
+		- **msgblocksize**: the size in bytes of a message
+		- **msgpoolsize**:  the amount of messages, that the thread's message queue can store
+		
 		Note: 'msgblocksize' and 'msgpoolsize' also apply to the polled execution due the internal implementation via message passing.
 		 The size of the message queue can be calculated as follows: msgpoolsize * msgblocksize bytes 
 
-		\begin{lstlisting}[language=etPhys]
+		```etphys
 		DefaultThread ThreadMessaging {
 			execmode = polled
 			prio = 0
@@ -208,16 +209,15 @@ Feature PhysicalModel
 			msgblocksize = 32
 			msgpoolsize = 10
 		}
-		\end{lstlisting}
-		\begin{center}
-		\includegraphics{images/300-PhysicalModelOverview.png}
-		\end{center}
+		```
+		
+		![Overview of PhysicalModel](images/300-PhysicalModelOverview.png)
 	'''
 	stable
 ;
 
 Feature MappingModel
-	description '''The MappingModel describes the mapping of elements of the LogicalModel to elements of the PhysicalModel.'''
+	description '''The MappingModel describes the mapping of elements of the LogicalModel to elements of the PhysicalModel'''
 	text '''
 		It enables the complete decoupling of the LogicalModel and the PhysicalModel, thus providing a maximum flexibility and reuse for the models.
 		
@@ -225,7 +225,8 @@ Feature MappingModel
 		A Mapping entry puts both in relation, meaning that all sub systems of the LogicalSystem will be distributed to the nodes of the PhysicalSystem.
 		This is carried out by a SubSystemMapping, that maps a SubSystemRef (logical node) to a NodeRef (physical node).
 		In the next step, ThreadMappings provide the same action for the logical and physical threads.
-		\begin{lstlisting}[language=etMap]
+
+		```etmap
 		MappingModel PingPongMapping {
 			import PingPong_Model.* from "PingPong.room"
 			import GenericPhysicalModel.* from "GenericPhysical.etphys"
@@ -237,7 +238,7 @@ Feature MappingModel
 			}
 		
 		}
-		\end{lstlisting}
+		```
 	'''
 	uses LogicalSystem
 	uses SubSystemRef
@@ -250,15 +251,15 @@ Feature ConfigModel
 	text '''
 		The scope of this model is the configuration of Attributes of the LogicalModel.
 		Thus it provides enhanced capabilities for assigning default values to Attributes, which are:
-		\begin{itemize}
-			\item type safe value assignment
-			\item setting on class level
-			\item setting on instance level
-		\end{itemize}
+		
+		- type safe value assignment
+		- setting on class level
+		- setting on instance level
+		
 		Values defined for class attributes are used for all instances unless there is an instance value configured for the same attribute.
 		The configuration is available for actors and ports, thus ActorClasses/ActorRefs and ProtocolClasses/Ports.
 
-		\begin{lstlisting}[language=Config]
+		```etconfig
 		ConfigModel ExampleConfig {
 			import Example.* from "Example.room"
 
@@ -270,14 +271,14 @@ Feature ConfigModel
 				Attr attribute1 = 7
 			}
 		}
-		\end{lstlisting}
+		```
 	'''
 	uses Attribute
 	stable
 ;
 
 Feature LogicalModel
-	description '''The LogicalModel describes the logical structure and behavior of a ROOM application.'''
+	description '''The LogicalModel describes the logical structure and behavior of a ROOM application'''
 	text '''
 		The ROOM model defines DataTypes, ProtocolClasses, ActorClasses, SubSystemClasses and LogicalSystems.
 		Thereby the three latter form a hierarchy. The LogicalSystem is the top level element of the structure. 
@@ -298,16 +299,16 @@ Feature LogicalModel
 	;
 
 Feature LogicalSystem
-	description '''The LogicalSystem is the topmost structural class. It assembles a distributed system by means of sub systems.'''
+	description '''The LogicalSystem is the topmost structural class. It assembles a distributed system by means of sub systems'''
 	text '''
 		It describes the logical topology of your distributed system and is composed of sub systems (SubSystemRefs). Thus it is the notationally root of every instance path or actor hierarchy.
 	'''
 	help '''
-	```room
-	LogicalSystem systemName ["Documentation"] {
-		SubSystemRef ...
-	}
-	```
+		```room
+		LogicalSystem systemName ["Documentation"] {
+			SubSystemRef ...
+		}
+		```
 	'''
 	contains SubSystemRef
 	contains Annotation
@@ -315,18 +316,19 @@ Feature LogicalSystem
 ;
 
 Feature ActorClass
-	description '''An actor is the basic structural building block for building systems with ROOM.'''
+	description '''An actor is the basic structural building block for building systems with ROOM'''
 	
 	text '''
 		An ActorClass consists of three main parts:
-		\begin{itemize}
-		\item \textbf{Interface} (external interface) specifies the communication to 'outside' actors and consists of Ports.
-		\item \textbf{Structure} (internal interface) contains Ports, Attributes and ActorRefs. These elements are accessible from the Behavior part of the actor (in contrary to the external interface above). An ActorClass can be composed of other actors again by declaring ActorRefs. Also this part declares the connection of ports in form of Bindings and LayerConnections.
-		\item \textbf{Behavior} is described by the StateMachine. It can receive and send messages from the ports, declared in the Structure above. The Attributes can be used to store data during an state transition. Furthermore it is possible to declare Operations. They can be used to define reusable logic, that is invoked during a state transition.
-		\end{itemize}	
 		
-		\includegraphics[scale=0.7]{images/040-ActorClass.png}
-		\begin{lstlisting}
+		- **Interface** (external interface) specifies the communication to 'outside' actors and consists of Ports.
+		- **Structure** (internal interface) contains Ports, Attributes and ActorRefs. These elements are accessible from the Behavior part of the actor (in contrary to the external interface above). An ActorClass can be composed of other actors again by declaring ActorRefs. Also this part declares the connection of ports in form of Bindings and LayerConnections.
+		- **Behavior** is described by the StateMachine. It can receive and send messages from the ports, declared in the Structure above. The Attributes can be used to store data during an state transition. Furthermore it is possible to declare Operations. They can be used to define reusable logic, that is invoked during a state transition.
+		
+		
+		![ActorClass](images/040-ActorClass.png)
+
+		```room
 		 ActorClass ExampleActorClass {
 			 Interface {
 				 Port port1: ProtocolClass1
@@ -347,7 +349,7 @@ Feature ActorClass
 				 // ...
 			 }
 		 }
-		 \end{lstlisting}
+		```
 	'''
 	
 	example '''
@@ -380,6 +382,7 @@ Feature ActorClass
 				Operation ...
 				StateMachine ...
 			}
+		}
 		```
 	'''
 	
@@ -399,22 +402,22 @@ Feature ActorClass
 ;
 
 Feature SubSystemClass
-	description '''A SubSystem is the topmost building block of the executable part of an system.'''
+	description '''A SubSystem is the topmost building block of the executable part of an system'''
 	text '''
 		It represents a class for an logical node in a distributed system. An instantiation translates to an executable application, that runs on a node or process.
 		A SubSystemClass is the structural starting point of an ROOM application. Thus it declares the topmost actor instances (ActorRefs).
 	'''
 	help '''
-	```room
-	SubSystemClass SubSystemName ["Documentation"]{
-		ActorRef ...
-		Binding ...
-		LayerConnection ...
-
-		LogicalThread threadName
-		ActorInstanceMapping ...
-	}
-	```
+		```room
+		SubSystemClass SubSystemName ["Documentation"]{
+			ActorRef ...
+			Binding ...
+			LayerConnection ...
+		
+			LogicalThread threadName
+			ActorInstanceMapping ...
+		}
+		```
 	'''
 	contains ActorRef
 	contains Binding
@@ -426,24 +429,24 @@ Feature SubSystemClass
 
 
 Feature StateMachine
-	description '''A StateMachine describes the state based, event driven behavior of an ActorClass.'''
+	description '''A StateMachine describes the state based, event driven behavior of an ActorClass'''
 	text '''
 		In ROOM each actor class can implement its behavior using a state machine. Events occurring at the end ports of an actor will be forwarded to and processed by the state machine. Events possibly trigger state transitions.
-		\begin{center}
-		\includegraphics[scale=.7]{images/300-PingPongReceiverFSM.png}
-		\end{center}
+		
+		![PingPongReceiverFSM](images/300-PingPongReceiverFSM.png)
+		
 	'''
 	help '''
-	Open the **graphical diagram editor**:
-	
-	* Press `ALT+B` (having focus on an *ActorClass*)
-	* Outline view -> Right click on an *ActorClass* -> Edit Behavior
-
-	```room
-	StateMachine ["Documentation"] {
-		...
-	}
-	```
+		Open the **graphical diagram editor**:
+		
+		* Press `ALT+B` (having focus on an *ActorClass*)
+		* Outline view -> Right click on an *ActorClass* -> Edit Behavior
+		
+		```room
+		StateMachine ["Documentation"] {
+			...
+		}
+		```
 	'''
 	uses Inheritance
 	stable
@@ -456,51 +459,48 @@ Feature SubSystemRef
 			
 		To be executable, a SubSystemRef has first to be mapped to a physical node, which defines the executional properties.
 		A physical node is denoted by a NodeClass and NodeRef in the PhysicalModel. The mapping is defined in the MappingModel.
-		\begin{center}
-		\includegraphics{images/300-SubSystemRefOverview.png}
-		\end{center}
+
 	'''
  	help '''
-	```room
-	SubSystemRef subSystemName: SubSystemClass1 ["Documentation"]
-	```
+		```room
+		SubSystemRef subSystemName: SubSystemClass1 ["Documentation"]
+		```
 	'''
  	isOfType SubSystemClass
  	stable
 ;
 
 abstract Feature Replication
-	description '''Replication is mechanism for multi instantiation for ActorRefs and Ports.'''
+	description '''Replication is mechanism for multi-instantiation for ActorRefs and Ports'''
 	text '''
 		ActorRefs and Ports can be instantiated several times under the same name. The notation is similar to arrays in programming languages.
-	
+		
 		This possibility provides an elegant way of scaling of your system without redundancy.
-		\begin{lstlisting}[language=ROOM]
-			ActorRef sensor : Sensor 			// one instance
-			ActorRef sensor[1] : Sensor			// one instance
-			ActorRef sensorArray[5] : Sensor	// five instances  
-		\end{lstlisting}
+
+		```room
+		ActorRef sensor : Sensor 			// one instance
+		ActorRef sensor[1] : Sensor			// one instance
+		ActorRef sensorArray[5] : Sensor	// five instances  
+		```
 		
 		Replication can also applied to Ports. One use case is to establish a communication with multiple actors through one port interface.
-		\begin{lstlisting}[language=ROOM]
-			Port service[5] : TimingService 	// five instances
-			Port service[*]: TimingService		// automatic, as many as needed
-		\end{lstlisting}
+		```room
+		Port service[5] : TimingService 	// five instances
+		Port service[*] : TimingService		// automatic, as many as needed
+		```
 	'''
 stable
 ;
 
 Feature ActorRef
-	description '''An ActorRef is an instance of an ActorClass.'''
+	description '''An ActorRef is an instance of an ActorClass'''
 	text '''
-	\begin{itemize}
-		\item ActorClass: The type of the ActorRef
-		\item Multiplicity: The number of instances. A number greater than one can be seen as an array of instances
-		\item Reference Type: Can be fixed or optional. Fixed requires an integer multiplicity and results in an static instantiation with an fixed number of instances during runtime . Optional denotes an dynamic instantiation, where ActorRefs can be created in arbitrary number during runtime. In this case, the multiplicity has to be set to '*'
-	\end{itemize}
+		- ActorClass: The type of the ActorRef
+		- Multiplicity: The number of instances. A number greater than one can be seen as an array of instances
+		- Reference Type: Can be fixed or optional. Fixed requires an integer multiplicity and results in an static instantiation with an fixed number of instances during runtime . Optional denotes an dynamic instantiation, where ActorRefs can be created in arbitrary number during runtime. In this case, the multiplicity has to be set to '*'
 	'''
 	example '''
-		\begin{lstlisting}[language=ROOM]
+		```room
 		SubSystemClass SubSystemExample {
 			ActorRef mainActor : ActorClassExample
 			
@@ -529,18 +529,19 @@ Feature ActorRef
 				 */		
 			}
 		}
-		\end{lstlisting}
-		\begin{figure}[H]
-		\includegraphics[width=.7\textwidth]{images/300-ActorRefInstanceDiagram.jpg}
-		\caption*{Instance hierarchy of ActorRef Example (\textsf{System(System)} not shown in code snippet)}
-		\end{figure}
-	'''
+		```
+		
+		![ActorRef instance diagram](images/300-ActorRefInstanceDiagram.jpg)
+
+		Instance hierarchy of ActorRef Example (*System(System)* not shown in code snippet)
+		
+	''' 
 	help '''
-	```room
-	ActorRef actorName: ActorClass1 ["Documentation"]
-	ActorRef actorName[4]: ActorClass1 ["A replicated actor of size 4"]
-	optional ActorRef actorName[*]: ActorClass1 ["A dynamic actor"]
-	```
+		```room
+		ActorRef actorName: ActorClass1 ["Documentation"]
+		ActorRef actorName[4]: ActorClass1 ["A replicated actor of size 4"]
+		optional ActorRef actorName[*]: ActorClass1 ["A dynamic actor"]
+		```
 	'''
 	isOfType ActorClass
 	uses Replication
@@ -549,27 +550,27 @@ Feature ActorRef
 ;
 
 Feature Binding
-	description '''A Binding connects two Ports with each other.'''
+	description '''A Binding connects two Ports with each other'''
 	text '''
 		In essence, a binding is a abstraction for an underlying communication channel whose function is to convey messages from one port to the other.
 		The precise semantics of these channels are not defined in the Binding. Instead, they are determined by the ProtocolClasses that are associated with the Ports at the end of the Binding.
-	
-		\begin{lstlisting}
-		 ActorClass ExampleActorClass {
+		
+		```room
+		ActorClass ExampleActorClass {
 			Structure {
-				 conjugated Port sender: ProtocolClass1
-				 ActorRef actorRef: ActorClass2
-				 
-				 Binding sender and actorRef.receiver
-			 }
-		 }
-		 \end{lstlisting}
+				conjugated Port sender: ProtocolClass1
+				ActorRef actorRef: ActorClass2
+				
+				Binding sender and actorRef.receiver
+			}
+		}
+		```
 	'''
 	help '''
-	```room
-	Binding port1 and actorRef.port2
-	Binding actorRef1.port1 and actorRef2.port2
-	```
+		```room
+		Binding port1 and actorRef.port2
+		Binding actorRef1.port1 and actorRef2.port2
+		```
 	'''
 	uses Port endpoint1
 	uses Port endpoint2
@@ -577,19 +578,19 @@ Feature Binding
 ;
 
 Feature LayerConnection
-	description '''A LayerConnection associates a SPP to an ActorRef, resulting in an connection of all SAPs on its instance hierarchy.'''
+	description '''A LayerConnection associates a SPP to an ActorRef, resulting in an connection of all SAPs on its instance hierarchy'''
 	text '''
-		\begin{itemize}
-		\item An actor class can define a Service Provision Point (SPP) to publish a specific service, defined by a protocol class
-		\item An actor class can define a Service Access Point (SAP) if it needs a service, defined by a protocol class
-		\item For a given actor hierarchy, a LayerConnection defines which SAP will be satisfied by (connected to) which SPP
-		\end{itemize}
+		
+		- An actor class can define a Service Provision Point (SPP) to publish a specific service, defined by a protocol class
+		- An actor class can define a Service Access Point (SAP) if it needs a service, defined by a protocol class
+		- For a given actor hierarchy, a LayerConnection defines which SAP will be satisfied by (connected to) which SPP
+		
 	'''
 	help '''
-	```room
-	LayerConnection ref actorRef1 satisfied_by actorRef2.spp2
-	LayerConnection relay_sap spp1 satisfied_by actorRef2.spp2
-	```
+		```room
+		LayerConnection ref actorRef1 satisfied_by actorRef2.spp2
+		LayerConnection relay_sap spp1 satisfied_by actorRef2.spp2
+		```
 	'''
 	uses SAP SAPoint
 	uses SPP SPPoint
@@ -597,30 +598,30 @@ Feature LayerConnection
 ;
 
 Feature ExecutionType
-	description '''Determines the execution type of an actor.'''
+	description '''Determines the execution type of an actor'''
 	text '''
 		Since from ROOM models executable code can be generated, it is important to define the way the actors are 
 		executed and communicate with each other. The combination of communication and execution is called the 
-		\emph{execution model}. Therefore the ExecutionType of an actor and the CommunicationType of the ports has to be considered.
+		*execution model*. Therefore the ExecutionType of an actor and the CommunicationType of the ports has to be considered.
 
 		The ExecutionType of an ActorClass specifies in which way its instance (ActorRef) should be executed:
-		\begin{itemize}
-		\item \textbf{execution by receive event}: The message queue or the event dispatcher calls a 
-		\textbf{receive event} function of the message receiver and thereby executes the processing of the event.
-		\item \textbf{polled execution}: The objects are processed by a cyclic \textbf{execute} call
-		\item \textit{\textbf{execution by function call}: The caller executes the called object via function call} (not supported yet)
-		\item \textbf{mixture}: An asynchronous execution combines an event dispachter and a polled execution.
-		\end{itemize}
+		
+		- **execution by receive event**: The message queue or the event dispatcher calls a **receive event** function of the message receiver and thereby executes the processing of the event.
+		- **polled execution**: The objects are processed by a cyclic **execute** call
+		- _**execution by function call**: The caller executes the called object via function call_ (not supported yet)
+		- **mixture**: An asynchronous execution combines an event dispatcher and a polled execution.
+		
 
 		Thereby the ExecutionType determines the execution mode of the actor's logical thread:
-		\includegraphics[width=.7\textwidth]{images/010-RoomIntroduction03.png}
+
+		![Thread of Control](images/010-RoomIntroduction03.png)
 				
 		The actual execution of the underlying physical thread can be specified in the PhysicalModel in conjunction with the MappingModel.
 
-		ExecutionType relates to the \hyperlink{ref:CommunicationType}{CommunicationType}, e.g. if an actor uses data-driven ports, it should support an polled execution.
+		ExecutionType relates to the [CommunicationType][], e.g. if an actor uses data-driven ports, it should support an polled execution.
 	'''
 	example '''
-		\begin{lstlisting}
+		```room
 		eventdriven ActorClass EventdrivenActor ["default is eventdriven"] {
 			// only event-driven Ports and ActorRefs allowed
 		}
@@ -632,8 +633,8 @@ Feature ExecutionType
 		async ActorClass MixedActor{
 			// both data/event-driven Ports and ActorRefs allowed
 		}
-		\end{lstlisting}
-	'''
+		```
+	''' 
 	uses CommunicationType
 	property mode values { "eventdriven", "datadriven", "async", "sync" }
 	
@@ -641,30 +642,24 @@ Feature ExecutionType
 ;
 
 Feature CommunicationType 
-	description '''The CommunicationType defines the communication semantics of a ProtocolClass.'''
+	description '''The CommunicationType defines the communication semantics of a ProtocolClass'''
 	text '''
-		Since from ROOM models executable code can be generated, it is important to define the way the actors are 
-		executed and communicate with each other. The combination of communication and execution is called the 
-		\emph{execution model}. Therefore the ExecutionType of an actor and the CommunicationType of the ports has to be considered.
+		Since from ROOM models executable code can be generated, it is important to define the way the actors are executed and communicate with each other.
+		The combination of communication and execution is called the *execution model*. Therefore the ExecutionType of an actor and the CommunicationType of the ports has to be considered.
 
 		The CommunicationType of a ProtocolClass (and thus of a Port) specifies in which way the communication should happen:
+		
+		- **message driven** -- asynchronous, non blocking, no return value: Usually the message driven communication is implemented with message queues. Message queues are inherently asynchronous and enable a very good decoupling of the communicating parties.
+		- **data driven** -- asynchronous, non blocking, no return value: In data driven communication sender and receiver often have a shared block of data. The sender writes the data and the receiver polls the data.
+		- _**function call** -- synchronous, blocking, return value: Regular function call as known in most programming languages._ (not supported yet)
 
-		\begin{itemize}
-		\item \textbf{message driven} -- asynchronous, non blocking, no return value:\\
-		Usually the message driven communication is implemented with message queues. Message queues are inherently asynchronous and enable a very good decoupling of the communicating parties.
-		\item \textbf{data driven} -- asynchronous, non blocking, no return value:\\
-		In data driven communication sender and receiver often have a shared block of data. The sender writes the data and the receiver polls the data.
-		\item \textit{\textbf{function call} -- synchronous, blocking, return value:\\
-		Regular function call as known in most programming languages.} (not supported yet)
-		\end{itemize}
-
-		CommunicationType relates with the \hyperlink{ref:ExecutionType}{ExecutionType} of an ActorClass, e.g. a data-driven port needs a cyclic thread, that polls the shared data.
-	'''
+		CommunicationType relates with the [ExecutionType][] of an ActorClass, e.g. a data-driven port needs a cyclic thread, that polls the shared data.
+	''' 
 	example '''
-		\begin{lstlisting}[language=ROOM]
-	
+		```room
+		
 		import room.basic.types.* from "../../../org.eclipse.etrice.modellib.c/model/Types.room"
-	
+		
 		ProtocolClass EventdrivenProtocolClass1 [ "default is eventdriven" ] {
 			// explicit: eventdriven ProtocolClass EventdrivenProtocolClass {
 			incoming {
@@ -675,7 +670,7 @@ Feature CommunicationType
 				Message msg4()  ["eventdriven ProtocolClass can have message into two directions"]
 			}
 		}
-	
+		
 		datadriven ProtocolClass DatadrivenProtocolClass {
 			incoming {
 				Message signal1 (data: int32) ["a datadriven message needs data"]
@@ -687,7 +682,7 @@ Feature CommunicationType
 		//	sync ProtocolClass SyncProtcolClass { 
 		//		
 		//	}
-		\end{lstlisting}
+		```
 	'''
 	property type values {"eventdriven", "datadriven", "sync"}
 	stable
@@ -700,7 +695,7 @@ Feature ProtocolClass
 		The exact semantics of a message is defined by the CommunicationType.
 		Protocol classes have only textual notation.
 
-		\begin{lstlisting}
+		```room
 		ProtocolClass SimpleProtocolClass {
 			incoming {
 				Message msg1(data: int32}
@@ -711,75 +706,75 @@ Feature ProtocolClass
 				Message msg4()
 			}
 		}
-		\end{lstlisting}
+		```
 	'''
 	example '''
-	\begin{lstlisting}
-	import room.basic.types.* from "../../../org.eclipse.etrice.modellib.c/model/Types.room"
-
-	// eventdriven ProtocolClass (asynchronous message passing, bidirectional)
-	eventdriven ProtocolClass ProtocolClassEvt {
-		// ProtocolClass ProtocolClassEvt { // same like above because eventdriven is default 
-		incoming {
-			// incoming means incoming for a regular port and outgoing for a conjugated port
-			Message message1() // message without data
-			Message message2(data: int32) // message with simple data
-			Message message3(data: DMessageData) // message with complex data (DataClass)
-
+		```room
+		import room.basic.types.* from "../../../org.eclipse.etrice.modellib.c/model/Types.room"
+		
+		// eventdriven ProtocolClass (asynchronous message passing, bidirectional)
+		eventdriven ProtocolClass ProtocolClassEvt {
+			// ProtocolClass ProtocolClassEvt { // same like above because eventdriven is default 
+			incoming {
+				// incoming means incoming for a regular port and outgoing for a conjugated port
+				Message message1() // message without data
+				Message message2(data: int32) // message with simple data
+				Message message3(data: DMessageData) // message with complex data (DataClass)
+		
+			}
+			outgoing {
+			// outgoing means outgoing for a regular port and incoming for a conjugated port
+				Message message1(data: int32) // incoming and outgoing Messages can have the same name to enable symmetric protocols
+			}
 		}
-		outgoing {
-		// outgoing means outgoing for a regular port and incoming for a conjugated port
-			Message message1(data: int32) // incoming and outgoing Messages can have the same name to enable symmetric protocols
+		
+		// DataClass for sending complex data via message
+		DataClass DMessageData {
+			Attribute SomeData: int16
+			Attribute SomeMoreData: int32
 		}
-	}
-
-	// DataClass for sending complex data via message
-	DataClass DMessageData {
-		Attribute SomeData: int16
-		Attribute SomeMoreData: int32
-	}
-
-	// datadriven ProtocolClass (asynchronous data flow, unidirectional)
-	datadriven ProtocolClass ProtocolClassData {
-		incoming {
-			// incoming means incoming for a regular port and outgoing for a conjugated port
-			Message value1(value: int32) // a datadriven message (signal) always needs data
-			Message value2(value: int16) // datadriven message with simple data
-			Message value3(value: DMessageData) // datadriven message with complex data (DataClass)
-
+		
+		// datadriven ProtocolClass (asynchronous data flow, unidirectional)
+		datadriven ProtocolClass ProtocolClassData {
+			incoming {
+				// incoming means incoming for a regular port and outgoing for a conjugated port
+				Message value1(value: int32) // a datadriven message (signal) always needs data
+				Message value2(value: int16) // datadriven message with simple data
+				Message value3(value: DMessageData) // datadriven message with complex data (DataClass)
+		
+			}
+			// no outgoing messages for datadriven ports allowed 
 		}
-		// no outgoing messages for datadriven ports allowed 
-	}
-	\end{lstlisting}
+		```
 	'''
 	help '''
-	```room
-	// prefixes: (eventdriven, datadriven, sync)
-	ProtocolClass ProtocolName ["An eventdriven ProtocolClass by default"] {
-		usercode1 { "" }
-		usercode2 { "" }
-		usercode3 { "" } 
-		incoming {
-			Message messageName()
-			Message messageName(data: int32)
-		}
-		outgoing {
-			Message ...
-		}
-		regular PortClass {
+		```room
+		// prefixes: (eventdriven, datadriven, sync)
+		ProtocolClass ProtocolName ["An eventdriven ProtocolClass by default"] {
 			usercode1 { "" }
-			Attribute ...
-			Operation ...
+			usercode2 { "" }
+			usercode3 { "" } 
+			incoming {
+				Message messageName()
+				Message messageName(data: int32)
+			}
+			outgoing {
+				Message ...
+			}
+			regular PortClass {
+				usercode1 { "" }
+				Attribute ...
+				Operation ...
+			}
+			conjugated PortClass {
+				...
+			}
 		}
-		conjugated PortClass {
-			...
+		
+		ProtocolClass ProtocolName extends ProtocolSuperClassName {
+			// inherits all elements from super class
 		}
-	}
-	
-	ProtocolClass ProtocolName extends ProtocolSuperClassName {
-		// inherits all elements from super class
-	}
-	```
+		```
 	'''
 	contains CommunicationType
 	contains Attribute
@@ -791,18 +786,19 @@ Feature ProtocolClass
 	;
 
 abstract Feature DataType
-	description '''A DataType can take 4 forms and types data elements like an Attribute or Operation argument.'''
+	description '''A DataType can take 4 forms and types data elements like an Attribute or Operation argument'''
 	stable
 ;
 
 Feature PrimitiveType
-	description '''A PrimitiveType is an abstraction of a target language's basic type (e.g. integer or boolean).'''
+	description '''A PrimitiveType is an abstraction of a target language's basic type (e.g. integer or boolean)'''
 	example '''
-		The eTrice built-in types can be found in the \textsf{org.eclipse.etrice.modellib} project. In most cases the \textsf{Types.room} is already included:
-		\begin{lstlisting}[language=ROOM]
+		The eTrice built-in types can be found in the _org.eclipse.etrice.modellib_ project. In most cases the _Types.room_ is already included:
+
+		```room
 		// Follow import by Open Declaration (F3)
 		import room.basic.types.* from "../../../org.eclipse.etrice.modellib.c/model/Types.room"
-		\end{lstlisting}
+		```
 	'''
 	help '''
 	```room
@@ -823,60 +819,60 @@ Feature PrimitiveType
 	;
 	
 Feature Enumeration
-	description '''An EnumerationType declares an enumeration similar to most well-known languages.'''
+	description '''An EnumerationType declares an enumeration similar to most well-known languages'''
 	example '''
-	\begin{lstlisting}[language=ROOM]
-	Enumeration EOnOff {
-		Off = 0, // explicit value=0
-		On = 1 // explicit value=1 
-	}
-
-	Enumeration EDay {
-		SUN,
-		MON,
-		TUE,
-		WED,
-		THU,
-		FRI,
-		SAT // implicit enumeration 0..6
-	}
-	\end{lstlisting}
+		```room
+		Enumeration EOnOff {
+			Off = 0, // explicit value=0
+			On = 1 // explicit value=1 
+		}
+		
+		Enumeration EDay {
+			SUN,
+			MON,
+			TUE,
+			WED,
+			THU,
+			FRI,
+			SAT // implicit enumeration 0..6
+		}
+		```
 	'''
 	help '''
-	```room
-	Enumeration EOnOff {
-		Off,
-		On
-	}
-	Enumeration EOnOff of int8 {
-		Off = 0,
-		On = 1
-	}
-
-	Enumeration EnumName ["Documentation"] of PrimitiveType1 {
-		// name1 = int
-		// ...
-	}
-	```
+		```room
+		Enumeration EOnOff {
+			Off,
+			On
+		}
+		Enumeration EOnOff of int8 {
+			Off = 0,
+			On = 1
+		}
+		
+		Enumeration EnumName ["Documentation"] of PrimitiveType1 {
+			// name1 = int
+			// ...
+		}
+		```
 	'''
 	isA DataType
 	property literals values {"<name>"}
 	stable;
 
 Feature DataClass 
-	description '''A DataClass is a composition of Attributes.'''
+	description '''A DataClass is a composition of Attributes'''
 	text '''
-		Intended to model a type that primarily consists of data, which is usually grouped together in some manner. DataClasses roughly translate to Java classes without interaction or C \textsf{struct}s.
+		Intended to model a type that primarily consists of data, which is usually grouped together in some manner. DataClasses roughly translate to Java classes without interaction or C <em>struct</em>s.
 		
-		\begin{lstlisting}[language=ROOM]		
+		```room		
 		DataClass TCPConnectionData {
 			Attribute IPAddr: string
 			Attribute TcpPort: int32
 		}
-		\end{lstlisting}
+		```
 	'''
 	example '''
-		\begin{lstlisting}[language=ROOM]
+		```room
 		DataClass SimpleDataClass {
 			Attribute attribute1: uint16
 			Attribute attribute2: uint32
@@ -891,22 +887,22 @@ Feature DataClass
 				"return true;"
 			}
 		}
-		\end{lstlisting}
+		```
 	'''
 	help '''
-	```room
-	DataClass DataClassName ["Documentation"] {
-		Attribute ... // nested DataClasses possible
-		ctor { /* constructor */ }
-		dtor { /* destructor */ }
-		Operation ...
-	}
-
-	DataClass DataClassName extends DataSuperClassName [""] {
-		// inherits all elements from super class
-		...
-	}
-	```
+		```room
+		DataClass DataClassName ["Documentation"] {
+			Attribute ... // nested DataClasses possible
+			ctor { /* constructor */ }
+			dtor { /* destructor */ }
+			Operation ...
+		}
+		
+		DataClass DataClassName extends DataSuperClassName [""] {
+			// inherits all elements from super class
+			...
+		}
+		```
 	'''
 	isA DataType
 	contains Attribute
@@ -916,9 +912,9 @@ Feature DataClass
 	stable;
 
 Feature ExternalType 
-	description '''An ExternalType is used to make an target language type accessible in ROOM.'''
+	description '''An ExternalType is used to make an target language type accessible in ROOM'''
 	example '''
-		\begin{lstlisting}[language=ROOM]
+		```room
 		// Include is needed when used (e.g. in ActorClassWithExternalType)
 		ExternalType someStructType -> "struct FILE_HANDLE"
 		
@@ -936,14 +932,14 @@ Feature ExternalType
 				}
 			}
 		}
-		\end{lstlisting}
+		```
 	'''
 	help '''
-	```room
-	ExternalType voidType -> "void" default "NULL"
-
-	ExternalType typeName -> "targetName" default "value" ["Documentation"]
-	```
+		```room
+		ExternalType voidType -> "void" default "NULL"
+		
+		ExternalType typeName -> "targetName" default "value" ["Documentation"]
+		```
 	'''
 	isA DataType
 	property targetName values {"<identifier name>"}
@@ -954,35 +950,35 @@ Feature Attribute
 	text '''
 		An Attribute can be be used to store arbitrary data. There are two common conceptual purpose of use:
 
-		\begin{itemize}
-			\item model current system state (state machine variable)
-			\item store reference to more fine-grained components (e.g. c pointer to handle)
-		\end{itemize}
+		
+		- model current system state (state machine variable)
+		- store reference to more fine-grained components (e.g. c pointer to handle)
+		
 		Attributes can be defined in several ROOM classes.
 	'''
 	example '''
-		\begin{lstlisting}[language=ROOM]
+		```room
 		import room.basic.types.* from "../../../org.eclipse.etrice.modellib.c/model/Types.room"
 		
 		DataClass SimpleDataClass {
 			Attribute attribute1: int16
 			Attribute attribute2: uint32
 		}
-
+		
 		ActorClass ActorClassWithAttributes {
 			Structure {
 				Attribute attribute1: int32 			["attribute of a PrimitiveType" ]
 				Attribute attribute2: SimpleDataClass 	[ "attribute of a DataClass" ]
 			}
 		}
-
+		
 		ActorClass ActorClassWithAttributes2 {
 			Structure {
 				Attribute arrayAttribute[8] : uint32 [ "attribute with multiplicity"]
 				Attribute refAttribue : voidType ref [ "attribute as a reference (void pointer)"]
 			}
 		}
-	
+		
 		ActorClass ActorClassWithAttributeInitialization {
 			Structure {
 				Attribute attribute1: uint32 = "3"
@@ -991,7 +987,7 @@ Feature Attribute
 				Attribute refAttribue : voidType ref = "NULL" // set reference in constructor or in state machine
 			}
 		}
-		\end{lstlisting}
+		```
 	'''
 	help '''
 		```room
@@ -1010,20 +1006,20 @@ Feature Attribute
 ;
 
 Feature Operation
-	description '''An Operation is a member function of a class.'''
+	description '''An Operation is a member function of a class'''
 	text '''
 		Operations can be used to define a piece of reusable logic. The definition consists of:
-		\begin{itemize}
-			\item Arbitrary amount of arguments
-			\item Return type
-			\item User code body, which can access the structural part of the containing class (e.g. attributes)
-			\item 'override' keyword, replaces the logic of the inherited operation having the same signature
-		\end{itemize}
+		
+		- Arbitrary amount of arguments
+		- Return type
+		- User code body, which can access the structural part of the containing class (e.g. attributes)
+		- 'override' keyword, replaces the logic of the inherited operation having the same signature
+		
 	'''
 	example '''
-		\begin{lstlisting}[language=ROOM]
+		```room
 		import room.basic.types.* from "../../../org.eclipse.etrice.modellib.c/model/Types.room"
-	
+		
 		DataClass DataClassWithOperation {
 			Attribute attribute1 : uint32
 			
@@ -1057,7 +1053,7 @@ Feature Operation
 				}
 			}
 		}
-		\end{lstlisting}
+		```
 	'''
 	help '''
 		```room
@@ -1084,13 +1080,13 @@ Feature Operation
 ;
 
 abstract Feature Port
-	description '''A Port is an instance of a ProtocolClass and the interface for an ActorClass.'''
+	description '''A Port is an instance of a ProtocolClass and the interface for an ActorClass'''
 	text '''
 		Once a ProtocolClass has been created, it can be used to define actor interfaces. This is accomplished by means of Ports. 
 		A Port is a declaration that the set of messages defined by its ProtocolClass is now part of the actor's interface.
 		It provides strong decoupling of ActorClasses from each other, thus enabling easy testability, reusability and deployment of actors to different threads or nodes.
 
-		\begin{lstlisting}[language=ROOM]
+		```room
 		ActorClass Example {
 			Structure{
 				Port port0 : ProtocolClass1
@@ -1099,12 +1095,12 @@ abstract Feature Port
 				// send/receive message from port0
 			}
 		}
-		\end{lstlisting}
+		```
 		
 		For communication between two actors to take place, a connection must be established between a port on one of the actors and a port on the other.
 		One condition is, that both Ports have compatible ProtocolClasses. In most cases the Ports simply refer to the same protocol.
 		In addition, a ProtocolClass has an imposed directionality - it defines one subset of messages as incoming and the complementary subset as outgoing.
-		Which subset is labelled as incoming and outgoing is arbitray, it simply depends on the point of view, that was taken when defining.
+		Which subset is labeled as incoming and outgoing is arbitrary, it simply depends on the point of view, that was taken when defining.
 		Therefore Ports can be 'regular' and 'conjugated'. When two actors communicate by a connected pair of Ports, one Port has to be regular and the other conjugated.
 		The ProtocolClass' incoming messages are on one side received by the regular Port and on the other sent by the conjugated Port (outgoing message vice versa).
 
@@ -1125,9 +1121,9 @@ abstract Feature Port
 ;
 
 Feature RelayPort
-	description '''A RelayPort forwards its messages without exposing them to the internal interface of the ActorClass.'''
+	description '''A RelayPort forwards its messages without exposing them to the internal interface of the ActorClass'''
 	text '''
-		\begin{lstlisting}[language=ROOM]
+		```room
 		ActorClass RelayPortExample{
 			Interface {
 				Port relayPort : PSimpleProtocol
@@ -1142,8 +1138,8 @@ Feature RelayPort
 				// relayPort not available !
 			}
 		}
-		\end{lstlisting}
-		\includegraphics[scale=.7]{images/300-RelayPort.png}
+		```
+		![RelayPort](images/300-RelayPort.png)
 	'''
 	isA Port
 	stable
@@ -1151,9 +1147,9 @@ Feature RelayPort
 
 
 Feature ExternalEndPort 
-	description '''A ExternalEndPort is an interface Port, that is made accessible to the internal interface of an ActorClass.'''
+	description '''A ExternalEndPort is an interface Port, that is made accessible to the internal interface of an ActorClass'''
 	text '''
-		\begin{lstlisting}[language=ROOM]
+		```room
 		ActorClass ExternalEndPortExample {
 			Interface {
 				// externalEndPort is connect from 'outside' and thus needs a Binding from containing ActorClass
@@ -1166,16 +1162,16 @@ Feature ExternalEndPort
 				// send/receive messages from externalEndPort
 			}
 		}
-		\end{lstlisting}
+		```
 	'''
 	isA Port
 	stable
 ;
 
 Feature InternalEndPort
-	description '''A InternalEndPort is an local Port, that is declared in the internal interface of an ActorClass.'''
+	description '''A InternalEndPort is an local Port, that is declared in the internal interface of an ActorClass'''
 	text '''
-		\begin{lstlisting}[language=ROOM]
+		```room
 		ActorClass InternalEndPortExample {
 			Structure {
 				Port internalEndPort : PSimpleProtocol
@@ -1189,44 +1185,44 @@ Feature InternalEndPort
 				// send/receive messages from internalEndPorts
 			}
 		}
-		\end{lstlisting}
-		\includegraphics[scale=.7]{images/300-InternalEndPort.png}
+		```
+		![InternalEndPort](images/300-InternalEndPort.png)
 	'''
 	isA Port
 	stable
 ;
 
 Feature SAP
-	description '''A Service Access Point is similar to a Port, but uses a LayerConnection for wiring.'''
+	description '''A Service Access Point is similar to a Port, but uses a LayerConnection for wiring'''
 	text '''
-		\begin{itemize}
-		\item An actor class can define a Service Provision Point (SPP) to publish a specific service, defined by a protocol class
-		\item An actor class can define a Service Access Point (SAP) if it needs a service, defined by a protocol class
-		\item For a given actor hierarchy, a LayerConnection defines which SAP will be satisfied by (connected to) which SPP
-		\end{itemize}
+		
+		- An actor class can define a Service Provision Point (SPP) to publish a specific service, defined by a protocol class
+		- An actor class can define a Service Access Point (SAP) if it needs a service, defined by a protocol class
+		- For a given actor hierarchy, a LayerConnection defines which SAP will be satisfied by (connected to) which SPP
+		
 	'''
 	help '''
-	```room
-	SAP sapName: ProtocolClass1
-	```
+		```room
+		SAP sapName: ProtocolClass1
+		```
 	'''
 	isOfType ProtocolClass
 	stable
 ; 
 
 Feature ServiceImplementation
-	description '''The implementation of an Service Provision Point (SPP).'''
+	description '''The implementation of an Service Provision Point (SPP)'''
 	text '''
 	'''
 	help '''
-	```room
-	Interface {
-		SPP sppName: ProtocolClass1
-	}
-	Structure {
-		ServiceImplementation of sppName
-	}
-	```
+		```room
+		Interface {
+			SPP sppName: ProtocolClass1
+		}
+		Structure {
+			ServiceImplementation of sppName
+		}
+		```
 	'''
 	uses SPP
 	stable
@@ -1235,16 +1231,14 @@ Feature ServiceImplementation
 Feature SPP
 	description '''A Service Provision Point is the counterpart of a SAP'''
 	text '''
-		\begin{itemize}
-		\item An actor class can define a Service Provision Point (SPP) to publish a specific service, defined by a protocol class
-		\item An actor class can define a Service Access Point (SAP) if it needs a service, defined by a protocol class
-		\item For a given actor hierarchy, a LayerConnection defines which SAP will be satisfied by (connected to) which SPP
-		\end{itemize}
+		- An actor class can define a Service Provision Point (SPP) to publish a specific service, defined by a protocol class
+		- An actor class can define a Service Access Point (SAP) if it needs a service, defined by a protocol class
+		- For a given actor hierarchy, a LayerConnection defines which SAP will be satisfied by (connected to) which SPP
 	'''
 	help '''
-	```room
-	SPP sppName: ProtocolClass1
-	```
+		```room
+		SPP sppName: ProtocolClass1
+		```
 	'''
 	isOfType ProtocolClass
 	stable

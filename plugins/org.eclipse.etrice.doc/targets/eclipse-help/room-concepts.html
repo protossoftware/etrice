@@ -1,0 +1,607 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>eTrice Documentation</title>
+
+<link rel="stylesheet" type="text/css" href="css/book.css"/>
+<link rel="stylesheet" type="text/css" href="css/custom-common.css"/>
+
+</head>
+<body>
+
+
+
+	
+
+<html><head></head><body><h1><a href="#room-concepts" name="room-concepts"></a>ROOM Concepts</h1>
+<p>This chapter gives an overview over the ROOM language elements and their textual and graphical notation. The formal ROOM grammar based on Xtext (EBNF) you can find in the eTrice repository:<br><a href="http://git.eclipse.org/c/etrice/org.eclipse.etrice.git/plain/plugins/org.eclipse.etrice.core.room/src/org/eclipse/etrice/core/Room.xtext">http://git.eclipse.org/c/etrice/org.eclipse.etrice.git/plain/plugins/org.eclipse.etrice.core.room/src/org/eclipse/etrice/core/Room.xtext</a></p>
+<h2><a href="#actors" name="actors"></a>Actors</h2>
+<h3><a href="#description" name="description"></a>Description</h3>
+<p>The actor is the basic structural building block for building systems with ROOM. An actor can be refined hierarchically and thus can be of arbitrarily large scope. Ports define the interface of an actor. An actor can also have a behavior usually defined by a finite state machine.</p>
+<h3><a href="#motivation" name="motivation"></a>Motivation</h3>
+<ul>
+  <li>
+  <p>Actors enable the construction of hierarchical structures by composition and layering</p></li>
+  <li>
+  <p>Actors have their own logical thread of execution</p></li>
+  <li>
+  <p>Actors can be freely deployed</p></li>
+  <li>
+  <p>Actors define potentially re-usable blocks</p></li>
+</ul>
+<h3><a href="#notation" name="notation"></a>Notation</h3>
+<table style="vertical-align: middle;text-align: center;" class="table">
+  <thead style="text-align: center;">
+    <tr>
+      <th><strong>Element</strong></th>
+      <th><strong>Graphical Notation</strong></th>
+      <th><strong>Textual Notation</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><p>ActorClass </p></td>
+      <td><img src="images/040-ActorClassNotation.png" alt="image"></td>
+      <td><pre><code class="room customHighlighted"><span class="keyword">ActorClass</span> ActorClass2 {}
+</code></pre></td>
+    </tr>
+	 <tr>
+      <td><p>ActorRef</p></td>
+      <td><img src="images/040-ActorReferenceNotation.png" alt="image"></td>
+      <td><pre><code class="room customHighlighted"><span class="keyword">ActorClass</span> ActorClass1 {
+	<span class="keyword">Structure</span> {
+		<span class="keyword">ActorRef</span> ActorReference: ActorClass2
+	}
+}
+</code></pre></td>
+    </tr>
+  </tbody>
+</table>
+<h3><a href="#details" name="details"></a>Details</h3>
+<h4><a href="#actor-classes-actor-references-ports-and-bindings" name="actor-classes-actor-references-ports-and-bindings"></a>Actor Classes, Actor References, Ports and Bindings</h4>
+<p>An ActorClass defines the type (or blueprint) of an actor. Hierarchies are built by ActorClasses that contain ActorReferences which have another ActorClass as type. The interface of an ActorClass is always defined by Ports. The ActorClass can also contain Attributes, Operations and a finite StateMachine. </p>
+<p>External Ports define the external interface of an actor and are defined in the Interface section of the ActorClass.</p>
+<p>Internal Ports define the internal interface of an actor and are defined in the Structure section of the ActorClass.</p>
+<p>Bindings connect Ports inside an ActorClass.</p>
+<p>Let us have a look at example:</p>
+<table style="vertical-align: middle;text-align: center;" class="table">
+  <thead style="text-align: center;">
+    <tr>
+      <th><strong>Graphical Notation</strong></th>
+      <th><strong>Textual Notation</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><p><img src="images/040-ActorClass.png" alt="image"></p></td>
+      <td><pre><code class="room customHighlighted"><span class="keyword">ActorClass</span> ActorClass1 {
+	<span class="keyword">Interface</span> {
+		<span class="keyword">Port</span> port1: ProtocolClass1
+		<span class="keyword">Port</span> port4: ProtocolClass1
+	}
+	<span class="keyword">Structure</span> {
+		<span class="keyword">external</span> <span class="keyword">Port</span> port1
+		<span class="keyword">conjugated</span> <span class="keyword">Port</span> port2: ProtocolClass1
+		<span class="keyword">conjugated</span> <span class="keyword">Port</span> port3: ProtocolClass1
+		<span class="keyword">ActorRef</span> ActorRef_A: ActorClass2
+		<span class="keyword">ActorRef</span> ActorRef_B: ActorClass3
+		<span class="keyword">Binding</span> port2 <span class="keyword">and</span> ActorRef_A.port5
+		<span class="keyword">Binding</span> port3 <span class="keyword">and</span> ActorRef_B.port6
+		<span class="keyword">Binding</span> ActorRef_B.port7 <span class="keyword">and</span> port4
+		<span class="keyword">Binding</span> ActorRef_A.port8 <span class="keyword">and</span> ActorRef_B.port9
+	}
+}
+</code></pre></td>
+    </tr>
+  </tbody>
+</table>
+<ul>
+  <li><em>ActorClass1</em> contains two ActorReferences (of ActorClass2 and ActorClass3)</li>
+  <li><em>port1</em> is an <em>external end port</em>. Since it connects external actors with the behavior of the ActorClass, it is defined in theInterface section and the Structure section of the ActorClass.</li>
+  <li><em>port2</em> and <em>port3</em> are <em>internal end ports</em> and can only be connected to the ports of contained ActorReferences. Internal end ports connect the behavior of an ActorClass with its contained ActorReferences.</li>
+  <li><em>port4</em> is a relay port and connects external Actors to contained ActorReferences. This port can not be accessed by the behavior of the ActorClass.</li>
+  <li><em>port5</em> through <em>port9</em> are ports of contained actor references. port8 and port9 can communicate without interference with the containing actor class.</li>
+  <li>Bindings can connect ports of the actor class and its contained actor references.</li>
+</ul>
+<h4><a href="#attributes" name="attributes"></a>Attributes</h4>
+<p>Attributes are part of the Structure of an actor class.<br>They can be of a PrimitiveType or a DataClass.</p>
+<p>Example:</p>
+<pre><code class="room customHighlighted"><span class="keyword">ActorClass</span> ActorClass3 {
+	<span class="keyword">Structure</span> {
+		<span class="keyword">Attribute</span> attribute1: int32       <span class="comment">// attribute of primitive type
+</span>		<span class="keyword">Attribute</span> attribute2: DataClass1  <span class="comment">// attribute of DataClass type
+</span>	}
+}
+</code></pre>
+<h4><a href="#operations" name="operations"></a>Operations</h4>
+<p>Operations are part of the Behavior of an actor class. Arguments and return values can be of a PrimitiveType or a DataClass. Data classes can be passed by value (implicit) or by reference (<span class="keyword">ref</span>).</p>
+<p>Example:</p>
+<pre><code class="room customHighlighted"><span class="keyword">ActorClass</span> ActorClass4 {
+	<span class="keyword">Behavior</span> {
+		<span class="comment">// no arguments, no return value
+</span>		<span class="keyword">Operation</span> operation1(): <span class="keyword">void</span> {
+			<span class="string">"UserCodeLine1"</span>
+		}
+		<span class="comment">// argument of primitive type, return value of primitive type
+</span>		<span class="keyword">Operation</span> operation2(Param1: int32, Param2: float64): uint16 {
+			<span class="string">"UserCodeLine1"</span>
+		}
+		<span class="comment">// arguments and return value by value
+</span>		<span class="keyword">Operation</span> operation3(Param1: int32, Param2: DataClass1): DataClass1 {
+			<span class="string">"UserCodeLine1"</span>
+		}
+		<span class="comment">// arguments and return value by reference except for primitive types
+</span>		<span class="keyword">Operation</span> operation4(Param1: int32, Param2: DataClass1 ref): DataClass1 <span class="keyword">ref</span> {
+			<span class="string">"UserCodeLine1"</span>
+		}
+	}
+}
+</code></pre>
+<h2><a href="#protocols" name="protocols"></a>Protocols</h2>
+<h3><a href="#description" name="description"></a>Description</h3>
+<p>A ProtocolClass defines a set of incoming and outgoing Messages that can be exchanged between two ports. The exact semantics of a message is defined by the execution model.</p>
+<h3><a href="#motivation" name="motivation"></a>Motivation</h3>
+<ul>
+  <li>
+  <p>Protocol classes provide a reusable interface specification for ports</p></li>
+  <li>
+  <p>Protocol classes can optionally specify valid message exchange sequences</p></li>
+</ul>
+<h3><a href="#notation" name="notation"></a>Notation</h3>
+<p>Protocol classes have only textual notation. The example defines a protocol class with 2 incoming and two outgoing messages. Messages can have data attached. The data can be of a primitive type (e.g. int32, float64, …) or a data class.</p>
+<pre><code class="room customHighlighted"><span class="keyword">ProtocolClass</span> ProtocolClass1 {
+	<span class="keyword">incoming</span> {
+		<span class="keyword">Message</span> m1(data: int32}
+		<span class="keyword">Message</span> m2()
+	}
+	<span class="keyword">outgoing</span> {
+		<span class="keyword">Message</span> m3(data: DataClass1}
+		<span class="keyword">Message</span> m4()
+	}
+}
+</code></pre>
+<h2><a href="#ports" name="ports"></a>Ports</h2>
+<h3><a href="#description" name="description"></a>Description</h3>
+<p>Ports are the only interfaces of actors. A port has always a protocol assigned. Service Access Points (<abbr title="Service Access Point">SAP</abbr>) and Service Provision Points (<abbr title="Service Provising Point">SPP</abbr>) are specialized ports that are used to define layering.</p>
+<h3><a href="#motivation" name="motivation"></a>Motivation</h3>
+<ul>
+  <li>
+  <p>Ports decouple interface definition (protocols) from interface usage</p></li>
+  <li>
+  <p>Ports decouple the logical interface from the transport</p></li>
+</ul>
+<h3><a href="#notation" name="notation"></a>Notation</h3>
+<h4><a href="#class-ports" name="class-ports"></a>Class Ports</h4>
+<p>These symbols can only appear on the border of an actor class symbol.</p>
+<p>Ports that define an external interface of the actor class, are defined in the Interface. Ports that define an internal interface are defined in the Structure (e.g. internal ports).</p>
+<ul>
+  <li>
+  <p><em>External end ports</em> are defined in the Interface and the Structure</p></li>
+  <li>
+  <p><em>Internal end ports</em> are only defined in the Structure</p></li>
+  <li>
+  <p><em>Relay ports</em> are only defined in the Interface</p></li>
+  <li>
+  <p><em>End ports</em> are always connected to the internal behavior of the ActorClass</p></li>
+  <li>
+  <p><em>Replicated ports</em> can be defined with a fixed replication factor, e.g.<br><span><code>Port port18 [5]: ProtocolClass1</code></span><br>or a variable replication factor, e.g.<br><span><code>Port port18[*]: ProtocolClass1</code></span></p></li>
+</ul>
+<p>The table below shows all kinds of class ports with textual and graphical notation:</p>
+<table style="vertical-align: middle;text-align: center;" class="table">
+  <thead style="text-align: center;">
+    <tr>
+      <th><strong>Element</strong></th>
+      <th><strong>Graphical Notation</strong></th>
+      <th><strong>Textual Notation</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><p>Class End Port </p></td>
+      <td><p><img src="images/040-ClassEndPort.png" alt="image"> </p></td>
+      <td><p><em>External Class End Port:</em></p>
+<pre><code class="room customHighlighted"><span class="keyword">ActorClass</span> ActorClass6 {
+	<span class="keyword">Interface</span> {
+		<span class="keyword">Port</span> port12: ProtocolClass1
+	}
+	<span class="keyword">Structure</span> {
+		<span class="keyword">external</span> <span class="keyword">Port</span> port12
+	}
+}
+</code></pre>
+<p><em>Internal Class End Port:</em></p>
+<pre><code class="room customHighlighted"><span class="keyword">ActorClass</span> ActorClass6 {
+	<span class="keyword">Interface</span> { }
+	<span class="keyword">Structure</span> {
+		<span class="keyword">Port</span> port20
+	}
+}
+</code></pre></td>
+    </tr>
+	 <tr>
+		<td><p>Conjugated Class End Port </p></td>
+		<td><p><img src="images/040-ConjugatedClassEndPort.png" alt="image"> </p></td>
+		<td><p><em>External Conjugated Class End Port:</em></p>
+<pre><code class="room customHighlighted"><span class="keyword">ActorClass</span> ActorClass6 {
+	<span class="keyword">Interface</span> {
+		<span class="keyword">conjugated</span> <span class="keyword">Port</span> port13: ProtocolClass1
+	}
+	<span class="keyword">Structure</span> {
+		<span class="keyword">external</span> <span class="keyword">Port</span> port13
+	}
+}
+</code></pre>
+<p><em>Internal Conjugated Class End Port:</em></p>
+<pre><code class="room customHighlighted"><span class="keyword">ActorClass</span> ActorClass6 {
+	<span class="keyword">Interface</span> {}
+	<span class="keyword">Structure</span> {
+		<span class="keyword">conjugated</span> <span class="keyword">Port</span> port21: ProtocolClass1
+	}
+}
+</code></pre></td>
+    </tr>
+	 <tr>
+		<td><p>Class Relay Port </p></td>
+		<td><p><img src="images/040-ClassRelayPort.png" alt="image"> </p></td>
+		<td><pre><code class="room customHighlighted"><span class="keyword">ActorClass</span> ActorClass6 {
+	<span class="keyword">Interface</span> {
+		<span class="keyword">Port</span> port10: ProtocolClass1
+	}
+	<span class="keyword">Structure</span> { }
+}
+</code></pre></td>
+    </tr>
+	 <tr>
+		<td><p>Conjugated Class Relay Port </p></td>
+		<td><p><img src="images/040-ConjugatedClassRelayPort.png" alt="image"> </p></td>
+		<td><pre><code class="room customHighlighted"><span class="keyword">ActorClass</span> ActorClass6 {
+	<span class="keyword">Interface</span> {
+		<span class="keyword">conjugated</span> <span class="keyword">Port</span> port10: ProtocolClass1
+	}
+	<span class="keyword">Structure</span> {}
+}
+</code></pre></td>
+    </tr>
+	 <tr>
+		<td><p>Replicated Class End Port </p></td>
+		<td><p><img src="images/040-ReplicatedClassEndPort.png" alt="image"> </p></td>
+		<td><p><em>External Replicated Class End Port:</em></p>
+<pre><code class="room customHighlighted"><span class="keyword">ActorClass</span> ActorClass6 {
+	<span class="keyword">Interface</span> {
+		<span class="keyword">Port</span> port16[3]: ProtocolClass1
+	}
+	<span class="keyword">Structure</span> {
+		<span class="keyword">external</span> <span class="keyword">Port</span> port16
+	}
+}
+</code></pre>
+<p><em>Internal Replicated Class End Port:</em></p>
+<pre><code class="room customHighlighted"><span class="keyword">ActorClass</span> ActorClass6 {
+	<span class="keyword">Interface</span> {}
+	<span class="keyword">Structure</span> {
+		<span class="keyword">Port</span> port16[3]: ProtocolClass1
+	}
+}
+</code></pre></td>
+    </tr>
+	 <tr>
+		<td><p>Conjugated Replicated Class End Port </p></td>
+		<td><p><img src="images/040-ConjugatedReplicatedClassEndPort.png" alt="image"> </p></td>
+		<td><p><em>External Conjugated Replicated Class End Port:</em></p>
+<pre><code class="room customHighlighted"><span class="keyword">ActorClass</span> ActorClass6 {
+	<span class="keyword">Interface</span> {
+		<span class="keyword">conjugated</span> <span class="keyword">Port</span> port17[3]: ProtocolClass1
+	}
+	<span class="keyword">Structure</span> {
+		<span class="keyword">external</span> <span class="keyword">Port</span> port17
+	}
+}
+</code></pre>
+<p><em>Internal Conjugated Replicated Class End Port:</em></p>
+<pre><code class="room customHighlighted"><span class="keyword">ActorClass</span> ActorClass6 {
+	<span class="keyword">Interface</span> { }
+	<span class="keyword">Structure</span> {
+		<span class="keyword">conjugated</span> <span class="keyword">Port</span> port23[3]: ProtocolClass1
+	}
+}
+</code></pre></td>
+    </tr>
+	 <tr>
+		<td><p>Replicated Class Relay Port </p></td>
+		<td><p><img src="images/040-ReplicatedClassRelayPort.png" alt="image"> </p></td>
+		<td><pre><code class="room customHighlighted"><span class="keyword">ActorClass</span> ActorClass6 {
+	<span class="keyword">Interface</span> {
+		<span class="keyword">Port</span> port18[3]: ProtocolClass1
+	}
+	<span class="keyword">Structure</span> { }
+}
+</code></pre></td>
+    </tr>
+	 <tr>
+		<td><p>Conjugated Replicated Class Relay Port </p></td>
+		<td><p><img src="images/040-ConjugatedReplicatedClassRelayPort.png" alt="image"> </p></td>
+		<td><pre><code class="room customHighlighted"><span class="keyword">ActorClass</span> ActorClass6 {
+	<span class="keyword">Interface</span> {
+		<span class="keyword">conjugated</span> <span class="keyword">Port</span> port19[3]: ProtocolClass1
+	}
+	<span class="keyword">Structure</span> { }
+}
+</code></pre></td>
+    </tr>
+  </tbody>
+</table>
+<h4><a href="#reference-ports" name="reference-ports"></a>Reference Ports</h4>
+<p>These symbols can only appear on the border of an actor class. Since the type of port is defined in the actor class, no textual notation for the Reference Ports exists.</p>
+<p>The table below shows all kinds of reference ports with textual and graphical notation:</p>
+<table>
+  <thead>
+    <tr>
+      <th align="center"><strong>Element</strong></th>
+      <th align="center"><strong>Graphical Notation</strong></th>
+      <th align="center"><strong>Textual Notation</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="center"><p>Reference Port </p></td>
+      <td align="center"><img src="images/040-ReferencePort.png" alt="image"></td>
+      <td align="center"><em>implicit</em></td>
+    </tr>
+    <tr>
+      <td align="center"><p>Conjugated Reference Port </p></td>
+      <td align="center"><img src="images/040-ConjugatedReferencePort.png" alt="image"></td>
+      <td align="center"><em>implicit</em></td>
+    </tr>
+    <tr>
+      <td align="center"><p>Replicated Reference Port </p></td>
+      <td align="center"><img src="images/040-ReplicatedReferencePort.png" alt="image"></td>
+      <td align="center"><em>implicit</em></td>
+    </tr>
+    <tr>
+      <td align="center"><p>Conjugated Replicated Reference Port </p></td>
+      <td align="center"><img src="images/040-ConjugatedReplicatedReferencePort.png" alt="image"></td>
+      <td align="center"><em>implicit</em></td>
+    </tr>
+  </tbody>
+</table>
+<h2><a href="#dataclass" name="dataclass"></a>DataClass</h2>
+<h3><a href="#description" name="description"></a>Description</h3>
+<p>The DataClass enables the modeling of hierarchical complex data types and operations on them. The data class is the equivalent to a class in languages like Java or C++, but has less features. The content of a data class can always be sent via message between actors (defined as message data in a ProtocolClass).</p>
+<h3><a href="#notation" name="notation"></a>Notation</h3>
+<p>Example: DataClass using PrimitiveTypes</p>
+<pre><code class="room customHighlighted"><span class="keyword">DataClass</span> DataClass1 {
+	<span class="keyword">Attribute</span> attribute1: int32    <span class="comment">// attribute of primitive type
+</span>	<span class="keyword">Attribute</span> attribute2: float32  <span class="comment">// attribute of another primitive type
+</span>
+	<span class="comment">// no arguments, no return value
+</span>	<span class="keyword">Operation</span> operation1(): <span class="keyword">void</span> {
+		<span class="string">"UserCodeLine1"</span>
+	}
+	<span class="comment">// argument of primitive type, no return value
+</span>	<span class="keyword">Operation</span> operation2(Param1: int32): <span class="keyword">void</span> {
+		<span class="string">"UserCodeLine1"</span>
+	}
+	<span class="comment">// argument of primitive type, return value of primitive type
+</span>	<span class="keyword">Operation</span> operation3(Param1: int32): float64 {
+		<span class="string">"UserCodeLine1"</span>
+	}
+}
+</code></pre>
+<p>Example: DataClass using other DataClasses:</p>
+<pre><code class="room customHighlighted"><span class="keyword">DataClass</span> DataClass2 {
+	<span class="keyword">Attribute</span> attribute1: int32      <span class="comment">// attribute of primitive type
+</span>	<span class="keyword">Attribute</span> attribute2: DataClass1 <span class="comment">// attribute of DataClass
+</span>
+	<span class="comment">// arguments and return value by value
+</span>	<span class="keyword">Operation</span> operation1(Param1: int32, Param2: DataClass1): DataClass1 {
+		<span class="string">"UserCodeLine1"</span>
+	}
+	<span class="comment">// arguments and return value by reference except for primitive types
+</span>	<span class="keyword">Operation</span> operation2(Param1: int32, Param2: DataClass1 ref): DataClass1 <span class="keyword">ref</span> {
+		<span class="string">"UserCodeLine1"</span>
+	}
+}
+</code></pre>
+<h2><a href="#layering" name="layering"></a>Layering</h2>
+<h3><a href="#description" name="description"></a>Description</h3>
+<p>In addition to the actor containment hierarchies, layering provides another method to hierarchically structure a software system. Layering and actor hierarchies with port to port connections can be mixed on every level of granularity.</p>
+<ol>
+  <li>
+  <p>an actor class can define a Service Provision Point (<abbr title="Service Provising Point">SPP</abbr>) to publish a specific service, defined by a protocol class</p></li>
+  <li>
+  <p>an actor class can define a Service Access Point (<abbr title="Service Access Point">SAP</abbr>) if it needs a service, defined by a protocol class</p></li>
+  <li>
+  <p>for a given actor hierarchy, a LayerConnection defines which <abbr title="Service Access Point">SAP</abbr> will be satisfied by (connected to) which <abbr title="Service Provising Point">SPP</abbr></p></li>
+</ol>
+<h3><a href="#notation" name="notation"></a>Notation</h3>
+<p>For the graphical and textual notation refer to following table:</p>
+<table style="vertical-align: middle;text-align: center;caption-side: bottom;" class="table">
+  <thead style="text-align: center;">
+    <tr>
+      <th><strong>Graphical Notation</strong></th>
+      <th><strong>Textual Notation</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+		<td><p><img src="images/040-LayeringModel.png" alt="image"></p></td>
+		<td><pre><code class="room customHighlighted"><span class="keyword">ActorClass</span> Mode1 {
+	<span class="keyword">Structure</span> {
+		<span class="keyword">ActorRef</span> Services: ServiceLayer
+		<span class="keyword">ActorRef</span> Application: ApplicationLayer
+		
+		<span class="keyword">LayerConnection</span> <span class="keyword">ref</span> Application <span class="keyword">satisfied_by</span> Services.timer
+		<span class="keyword">LayerConnection</span> <span class="keyword">ref</span> Application <span class="keyword">satisfied_by</span> Services.digitalIO
+	}
+}
+</code></pre></td>
+	</tr>
+	</tbody>
+	<caption>The layer connections in this model define which services are provided by the *ServiceLayer* (*digitalIO* and *timer*)</caption>
+</table>
+<table style="vertical-align: middle;text-align: center;caption-side: bottom;" class="table">
+	<tbody>
+	<tr>
+		<td><p><img src="images/040-LayeringServiceLayer.png" alt="image"></p></td>
+		<td><pre><code class="room customHighlighted"><span class="keyword">ActorClass</span> ServiceLayer {
+	<span class="keyword">Interface</span> {
+		<span class="keyword">SPP</span> timer: TimerProtocol
+		<span class="keyword">SPP</span> digitalIO: DigitalIOProtocol
+	}
+	<span class="keyword">Structure</span> {
+		<span class="keyword">ActorRef</span> Timer: TimerService
+		<span class="keyword">ActorRef</span> DigIO: DifitalIOService
+		<span class="keyword">LayerConnection</span> <span class="keyword">relay_sap</span> timer <span class="keyword">satisfied_by</span> Timer.timer
+		<span class="keyword">LayerConnection</span> <span class="keyword">relay_sap</span> digitalIO <span class="keyword">satisfied_by</span> DigIO.digitalIO
+	}
+}
+</code></pre></td>
+	</tr>
+	</tbody>
+	<caption>The implementation of the services (SPPs) can be delegated to sub actors. In this case the actor *ServiceLayer* relays (delegates) the implementation services *digitalIO* and *timer* to sub actors</caption>
+</table>
+<table style="vertical-align: middle;text-align: center;caption-side: bottom;" class="table">
+	<tbody>
+	<tr>
+		<td><p><img src="images/040-LayeringApplicationLayer.png" alt="image"></p></td>
+		<td><pre><code class="room customHighlighted"><span class="keyword">ActorClass</span> ApplicationLayer {
+	<span class="keyword">Structure</span> {
+		<span class="keyword">ActorRef</span> function1: A
+		<span class="keyword">ActorRef</span> function2: B
+		<span class="keyword">ActorRef</span> function3: C
+		<span class="keyword">ActorRef</span> function4: D
+	}
+}
+
+<span class="keyword">ActorClass</span> A {
+	<span class="keyword">Structure</span> {
+		<span class="keyword">SAP</span> timerSAP: TimerProtocol
+	}
+}
+
+<span class="keyword">ActorClass</span> B {
+	<span class="keyword">Structure</span> {
+		<span class="keyword">SAP</span> timerSAP: TimerProtocol
+		<span class="keyword">SAP</span> digitalSAP: DigitalIOProtocol
+	}
+}
+</code></pre></td>
+	</tr>
+  </tbody>
+  <caption>Every Actor inside the *ApplicationLayer* that contains an SAP with the same protocol as *timer* or *digitalIO* will be connected to the specified SPP</caption>
+</table>
+<h2><a href="#finite-state-machines" name="finite-state-machines"></a>Finite State Machines</h2>
+<h3><a href="#description" name="description"></a>Description</h3>
+<p>Definition from <a href="http://en.wikipedia.org/wiki/Finite-state_machine" title="Finite-state machine">Wikipedia</a>:</p>
+<blockquote>
+  <p>A finite-state machine (FSM) or finite-state automaton (plural: automata), or simply a state machine, is a mathematical model used to design computer programs and digital logic circuits. It is conceived as an abstract machine that can be in one of a finite number of states. The machine is in only one state at a time; the state it is in at any given time is called the current state. It can change from one state to another when initiated by a triggering event or condition, this is called a transition. A particular FSM is defined by a list of the possible states it can transition to from each state, and the triggering condition for each transition.</p>
+  <p>In ROOM each actor class can implement its behavior using a state machine. Events occurring at the end ports of an actor will be forwarded to and processed by the state machine. Events possibly trigger state transitions.</p>
+</blockquote>
+<h3><a href="#motivation" name="motivation"></a>Motivation</h3>
+<p>For event driven systems a finite state machine is ideal for processing the stream of events. Typically during processing new events are produced which are sent to peer actors.</p>
+<p>We distinguish flat and hierarchical state machines.</p>
+<h3><a href="#notation" name="notation"></a>Notation</h3>
+<p>We distinguish flat finite state machines (with just one level of hierarchy) and hierarchical ones.</p>
+<h4><a href="#flat-finite-state-machine" name="flat-finite-state-machine"></a>Flat Finite State Machine</h4>
+<p>The simpler flat finite state machines are composed of the elements shown following table:</p>
+<table style="vertical-align: middle;text-align: center;" class="table">
+  <thead style="text-align: center;">
+    <tr>
+      <th><strong>Element</strong></th>
+      <th><strong>Graphical Notation</strong></th>
+      <th><strong>Textual Notation</strong></th>
+    </tr>
+  </thead>
+	<tbody>
+		<tr>
+			<td><p>State</p></td>
+			<td><p><img src="images/040-State.jpg" alt="image"></p></td>
+			<td><pre><code class="room customHighlighted"><span class="keyword">State</span> SomeState
+</code></pre></td>
+		</tr>
+		<tr>
+			<td><p>InitialPoint</p></td>
+			<td><p><img src="images/040-InitialPoint.jpg" alt="image"></p></td>
+			<td><p><em>implicit</em></p></td>
+		</tr>
+		<tr>
+			<td><p>TransitionPoint</p></td>
+			<td><p><img src="images/040-TransitionPoint.jpg" alt="image"></p></td>
+			<td><pre><code class="room customHighlighted"><span class="keyword">TransitionPoint</span> tp
+</code></pre></td>
+		</tr>
+		<tr>
+			<td><p>ChoicePoint</p></td>
+			<td><p><img src="images/040-ChoicePoint.jpg" alt="image"></p></td>
+			<td><pre><code class="room customHighlighted"><span class="keyword">ChoicePoint</span> <span class="keyword">cp</span>
+</code></pre></td>
+		</tr>
+		<tr>
+			<td><p>Initial Transition</p></td>
+			<td><p><img src="images/040-InitialTransition.jpg" alt="image"></p></td>
+			<td><pre><code class="room customHighlighted"><span class="keyword">Transition</span> init: <span class="keyword">initial</span> -&gt; Initial { }
+</code></pre></td>
+		</tr>
+		<tr>
+			<td><p>Triggered Transition</p></td>
+			<td><p><img src="images/040-TriggeredTransition.jpg" alt="image"></p></td>
+			<td><pre><code class="room customHighlighted"><span class="keyword">Transition</span> tr0: <span class="keyword">initial</span> -&gt; DoingThis {
+	<span class="keyword">triggers</span> {
+		<dothis: fct>
+	}
+}
+</dothis:></code></pre>
+<pre><code>       &lt;/dothis:&gt;
+</code></pre></td>
+		</tr>
+	</tbody>
+</table>
+<h4><a href="#hierarchical-finite-state-machine" name="hierarchical-finite-state-machine"></a>Hierarchical Finite State Machine</h4>
+<p>The hierarchical finite state machine adds the notion of a sub state machine nested in a state. A few modeling elements listed in table below are added to the set listed above.</p>
+<table style="vertical-align: middle;text-align: center;" class="table">
+  <thead style="text-align: center;">
+    <tr>
+      <th><strong>Element</strong></th>
+      <th><strong>Graphical Notation</strong></th>
+      <th><strong>Textual Notation</strong></th>
+    </tr>
+  </thead>
+	<tbody>
+		<tr>
+			<td><p>State with sub state machine</p></td>
+			<td><p>Parent State<br> <img src="images/040-StateWithSubFSM.jpg" alt="image"></p></td>
+			<td><p><em>Sub state machine</em></p>
+<pre><code class="room customHighlighted"><span class="keyword">State</span> Running {
+	<span class="keyword">subgraph</span> {
+		<span class="keyword">Transition</span> init: <span class="keyword">initial</span> -&gt; Process {}
+		<span class="keyword">State</span> Process
+	}
+}
+</code></pre></td>
+		</tr>
+		<tr>
+			<td><p>Entry Point</p></td>
+			<td><p>In sub state machine<br> <img src="images/040-EntryPoint.jpg" alt="image"></p></td>
+			<td><pre><code class="room customHighlighted"><span class="keyword">EntryPoint</span> reInit
+</code></pre></td>
+		</tr>
+		<tr>
+			<td><p>Exit Point</p></td>
+			<td><p><img src="images/040-ExitPoint.jpg" alt="image"></p></td>
+			<td><pre><code class="room customHighlighted"><span class="keyword">ExitPoint</span> tp0
+</code></pre></td>
+		</tr>
+	</tbody>
+</table>
+<h3><a href="#examples" name="examples"></a>Examples</h3>
+<p><img src="images/040-FlatFSM.jpg" alt="Example of a flat finite state machine"></p>
+<p><img src="images/040-HierarchicalFSMTop.jpg" alt="Example of a hierarchical finite state machine – top level"></p>
+<p><img src="images/040-HierarchicalFSMInitializing.jpg" alt="Hierarchical finite state machine – sub state machine of <em>Initializing</em>"></p>
+<p><img src="images/040-HierarchicalFSMRunning.jpg" alt="Hierarchical finite state machine – sub state machine of <em>Running</em>"></p>
+<!-- Abbreviations -------></body></html>
+
+</body>
+</html>
+
+
