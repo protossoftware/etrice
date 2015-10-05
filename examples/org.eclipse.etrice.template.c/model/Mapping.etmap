@@ -5,10 +5,10 @@
  */
 MappingModel TemplateMapping {
 	
-	import room.generic.physical.* from "../../org.eclipse.etrice.modellib.c/model/GenericPhysical.etphys"
+	import TemplatePhysical.* from "Physical.etphys"
 	import TemplateModel.* from "TemplateModel.room"
 
-	Mapping LogSys -> GenericPhysicalSystem {
+	Mapping LogSys -> TemplatePhysicalSystem {
 		SubSystemMapping subSystemRef -> node {
 			ThreadMapping defaultThread -> DefaultPhysicalThread
 		}
