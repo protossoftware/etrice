@@ -195,7 +195,7 @@ An ActorClass consists of three main parts:
 </thead>
 <tbody>
 <tr>
-	<td rowspan="11" style="white-space: nowrap;">Contains:</td>
+	<td rowspan="12" style="white-space: nowrap;">Contains:</td>
 	<td>[ExecutionType](#executiontype)
 	 </td>
 	<td>Determines the execution type of an actor</td>
@@ -219,6 +219,11 @@ An ActorClass consists of three main parts:
 	<td>[SPP](#spp)
 	 </td>
 	<td>A Service Provision Point is the counterpart of a SAP</td>
+</tr>
+<tr>
+	<td>[ServiceImplementation](#serviceimplementation)
+	 </td>
+	<td>The implementation of an Service Provision Point (SPP)</td>
 </tr>
 <tr>
 	<td>[Binding](#binding)
@@ -544,7 +549,7 @@ Attributes can be defined in several ROOM classes.
 <tbody>
 <tr>
 	<td>defaultValueLiteral</td>
-	<td><em><target code></em></td>
+	<td><em>target code</em></td>
 </tr>
 <tr>
 	<td>multiplicity</td>
@@ -938,7 +943,7 @@ An EnumerationType declares an enumeration similar to most well-known languages
 <tbody>
 <tr>
 	<td>literals</td>
-	<td><em><name></em></td>
+	<td><em>name</em></td>
 </tr>
 </tbody>
 </table>
@@ -1125,7 +1130,7 @@ An ExternalType is used to make an target language type accessible in ROOM
 <tbody>
 <tr>
 	<td>targetName</td>
-	<td><em><identifier name></em></td>
+	<td><em>identifier name</em></td>
 </tr>
 </tbody>
 </table>
@@ -1450,11 +1455,11 @@ Operations can be used to define a piece of reusable logic. The definition consi
 <tbody>
 <tr>
 	<td>returnType</td>
-	<td><em><DataType></em></td>
+	<td><em>DataType</em></td>
 </tr>
 <tr>
 	<td>arguments</td>
-	<td><em><name> : <DataType></em></td>
+	<td><em>name : DataType</em></td>
 </tr>
 </tbody>
 </table>
@@ -1673,7 +1678,7 @@ A PrimitiveType is an abstraction of a target language's basic type (e.g. intege
 <tbody>
 <tr>
 	<td>targetName</td>
-	<td><em><identifer name></em></td>
+	<td><em>identifier name</em></td>
 </tr>
 </tbody>
 </table>
@@ -2028,6 +2033,47 @@ A Service Provision Point is the counterpart of a SAP
 	<td>[ServiceImplementation](#serviceimplementation)
 	 </td>
 	<td>The implementation of an Service Provision Point (SPP)</td>
+</tr>
+</tbody>
+</table>
+
+
+---
+
+
+### ServiceImplementation
+The implementation of an Service Provision Point (SPP)
+
+
+
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3">Features</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;">Uses:</td>
+	<td>[SPP](#spp)
+	 </td>
+	<td>A Service Provision Point is the counterpart of a SAP</td>
+</tr>
+</tbody>
+</table>
+
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3">Feature Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;">Is contained in:</td>
+	<td>[ActorClass](#actorclass)
+	 </td>
+	<td>An actor is the basic structural building block for building systems with ROOM</td>
 </tr>
 </tbody>
 </table>
@@ -2821,15 +2867,10 @@ A list of available options:
 	<td></td>
 </tr>
 <tr>
-	<td rowspan="2" style="white-space: nowrap;">Is used by:</td>
+	<td rowspan="1" style="white-space: nowrap;">Is used by:</td>
 	<td>[MSCLogging](#msclogging)
 	 </td>
 	<td>Runtime logger for event-driven Messages, represented as a Message Sequence Chart.</td>
-</tr>
-<tr>
-	<td>[DocumentationGenerator](#documentationgenerator)
-	 </td>
-	<td>A LaTeX documentation generator from eTrice models.</td>
 </tr>
 </tbody>
 </table>
@@ -2924,7 +2965,6 @@ The MSCLogging is activated by default, but can be set manually in the [Generati
 [GenerationOptions]: #generationoptions
 [MSCLogging]: #msclogging
 [DataLogging]: #datalogging
-[DocumentationGenerator]: #documentationgenerator
 [AnnotationType]: #annotationtype
 [Annotation]: #annotation
 [Inheritance]: #inheritance

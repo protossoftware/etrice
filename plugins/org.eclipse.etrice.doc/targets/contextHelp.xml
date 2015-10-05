@@ -20,7 +20,6 @@
 <topic href="targets/eclipse-help/feature-reference.html#generationoptions" label="CCodeGenerator"/>
 <topic href="targets/eclipse-help/feature-reference.html#generationoptions" label="JavaCodeGenerator"/>
 <topic href="targets/eclipse-help/feature-reference.html#generationoptions" label="MSCLogging"/>
-<topic href="targets/eclipse-help/feature-reference.html#generationoptions" label="DocumentationGenerator"/>
 </context>
 
 <context id="featureContextHelp_MSCLogging" title="MSCLogging">
@@ -36,12 +35,6 @@
 <topic href="targets/eclipse-help/feature-reference.html#datalogging" label="DataLogging"/>
 <topic href="targets/eclipse-help/feature-reference.html#datalogging" label="Annotation"/>
 <topic href="targets/eclipse-help/feature-reference.html#datalogging" label="CCodeGenerator"/>
-</context>
-
-<context id="featureContextHelp_DocumentationGenerator" title="DocumentationGenerator">
-<description>A LaTeX documentation generator from eTrice models.</description>
-<topic href="targets/eclipse-help/feature-reference.html#documentationgenerator" label="DocumentationGenerator"/>
-<topic href="targets/eclipse-help/feature-reference.html#documentationgenerator" label="GenerationOptions"/>
 </context>
 
 <context id="featureContextHelp_AnnotationType" title="AnnotationType">
@@ -291,6 +284,7 @@
 <description>The implementation of an Service Provision Point (SPP)</description>
 <topic href="targets/eclipse-help/feature-reference.html#serviceimplementation" label="ServiceImplementation"/>
 <topic href="targets/eclipse-help/feature-reference.html#serviceimplementation" label="SPP"/>
+<topic href="targets/eclipse-help/feature-reference.html#serviceimplementation" label="ActorClass"/>
 </context>
 
 <context id="featureContextHelp_SPP" title="SPP">

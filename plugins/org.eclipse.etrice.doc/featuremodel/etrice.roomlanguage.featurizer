@@ -391,6 +391,7 @@ Feature ActorClass
 	contains Port
 	contains SAP
 	contains SPP
+	contains ServiceImplementation
 	contains Binding
 	contains LayerConnection
 	contains Attribute
@@ -814,7 +815,7 @@ Feature PrimitiveType
 	```
 	'''
 	isA DataType
-	property targetName values {"<identifer name>"}
+	property targetName values {"identifier name"}
 	stable
 	;
 	
@@ -856,7 +857,7 @@ Feature Enumeration
 		```
 	'''
 	isA DataType
-	property literals values {"<name>"}
+	property literals values {"name"}
 	stable;
 
 Feature DataClass 
@@ -942,7 +943,7 @@ Feature ExternalType
 		```
 	'''
 	isA DataType
-	property targetName values {"<identifier name>"}
+	property targetName values {"identifier name"}
 	stable;
 
 Feature Attribute
@@ -997,7 +998,7 @@ Feature Attribute
 		```
 	'''
 	isOfType DataType
-	property defaultValueLiteral values { "<target code>"}
+	property defaultValueLiteral values { "target code"}
 	property multiplicity values {"1..n"}
 	property ref
 	stable
@@ -1073,8 +1074,8 @@ Feature Operation
 		```
 	'''
 	uses DataType
-	property returnType values { "<DataType>" }
-	property arguments values { "<name> : <DataType>" }
+	property returnType values { "DataType" }
+	property arguments values { "name : DataType" }
 	
 	stable
 ;

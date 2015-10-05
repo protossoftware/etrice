@@ -24,7 +24,7 @@ The actor is the basic structural building block for building systems with ROOM.
 ### Notation
 
 <table style="vertical-align: middle;text-align: center;" class="table">
-  <thead style="text-align: center;">
+  <thead>
     <tr>
       <th><strong>Element</strong></th>
       <th><strong>Graphical Notation</strong></th>
@@ -72,7 +72,7 @@ Bindings connect Ports inside an ActorClass.
 Let us have a look at example:
 
 <table style="vertical-align: middle;text-align: center;" class="table">
-  <thead style="text-align: center;">
+  <thead>
     <tr>
       <th><strong>Graphical Notation</strong></th>
       <th><strong>Textual Notation</strong></th>
@@ -226,7 +226,7 @@ Ports that define an external interface of the actor class, are defined in the I
 The table below shows all kinds of class ports with textual and graphical notation:
 
 <table style="vertical-align: middle;text-align: center;" class="table">
-  <thead style="text-align: center;">
+  <thead>
     <tr>
       <th><strong>Element</strong></th>
       <th><strong>Graphical Notation</strong></th>
@@ -485,7 +485,7 @@ In addition to the actor containment hierarchies, layering provides another meth
 For the graphical and textual notation refer to following table:
 		
 <table style="vertical-align: middle;text-align: center;caption-side: bottom;" class="table">
-  <thead style="text-align: center;">
+  <thead>
     <tr>
       <th><strong>Graphical Notation</strong></th>
       <th><strong>Textual Notation</strong></th>
@@ -602,7 +602,7 @@ We distinguish flat finite state machines (with just one level of hierarchy) and
 The simpler flat finite state machines are composed of the elements shown following table:
 
 <table style="vertical-align: middle;text-align: center;" class="table">
-  <thead style="text-align: center;">
+  <thead>
     <tr>
       <th><strong>Element</strong></th>
       <th><strong>Graphical Notation</strong></th>
@@ -671,13 +671,12 @@ Transition tr0: initial -> DoingThis {
 </table>
 
 
-
 #### Hierarchical Finite State Machine
 
 The hierarchical finite state machine adds the notion of a sub state machine nested in a state. A few modeling elements listed in table below are added to the set listed above.
 
 <table style="vertical-align: middle;text-align: center;" class="table">
-  <thead style="text-align: center;">
+  <thead>
     <tr>
       <th><strong>Element</strong></th>
       <th><strong>Graphical Notation</strong></th>
@@ -735,7 +734,8 @@ ExitPoint tp0
 ![Hierarchical finite state machine – sub state machine of *Running*](images/040-HierarchicalFSMRunning.jpg)
 
 
-<!-- Abbreviations -------> 
+<!-- Abbreviations ---> 
 *[SPP]: Service Provising Point
 *[SAP]: Service Access Point
+*[FSM]: finite-state machine
 

@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
 <title>eTrice Documentation</title>
 
 <link rel="stylesheet" type="text/css" href="css/book.css"/>
@@ -14,7 +14,7 @@
 
 	
 
-<html><head></head><body><h1><a href="#room-concepts" name="room-concepts"></a>ROOM Concepts</h1>
+<h1><a href="#room-concepts" name="room-concepts"></a>ROOM Concepts</h1>
 <p>This chapter gives an overview over the ROOM language elements and their textual and graphical notation. The formal ROOM grammar based on Xtext (EBNF) you can find in the eTrice repository:<br><a href="http://git.eclipse.org/c/etrice/org.eclipse.etrice.git/plain/plugins/org.eclipse.etrice.core.room/src/org/eclipse/etrice/core/Room.xtext">http://git.eclipse.org/c/etrice/org.eclipse.etrice.git/plain/plugins/org.eclipse.etrice.core.room/src/org/eclipse/etrice/core/Room.xtext</a></p>
 <h2><a href="#actors" name="actors"></a>Actors</h2>
 <h3><a href="#description" name="description"></a>Description</h3>
@@ -32,7 +32,7 @@
 </ul>
 <h3><a href="#notation" name="notation"></a>Notation</h3>
 <table style="vertical-align: middle;text-align: center;" class="table">
-  <thead style="text-align: center;">
+  <thead>
     <tr>
       <th><strong>Element</strong></th>
       <th><strong>Graphical Notation</strong></th>
@@ -66,7 +66,7 @@
 <p>Bindings connect Ports inside an ActorClass.</p>
 <p>Let us have a look at example:</p>
 <table style="vertical-align: middle;text-align: center;" class="table">
-  <thead style="text-align: center;">
+  <thead>
     <tr>
       <th><strong>Graphical Notation</strong></th>
       <th><strong>Textual Notation</strong></th>
@@ -189,7 +189,7 @@
 </ul>
 <p>The table below shows all kinds of class ports with textual and graphical notation:</p>
 <table style="vertical-align: middle;text-align: center;" class="table">
-  <thead style="text-align: center;">
+  <thead>
     <tr>
       <th><strong>Element</strong></th>
       <th><strong>Graphical Notation</strong></th>
@@ -337,9 +337,9 @@
 <table>
   <thead>
     <tr>
-      <th align="center"><strong>Element</strong></th>
-      <th align="center"><strong>Graphical Notation</strong></th>
-      <th align="center"><strong>Textual Notation</strong></th>
+      <th align="center"><strong>Element</strong> </th>
+      <th align="center"><strong>Graphical Notation</strong> </th>
+      <th align="center"><strong>Textual Notation</strong> </th>
     </tr>
   </thead>
   <tbody>
@@ -417,7 +417,7 @@
 <h3><a href="#notation" name="notation"></a>Notation</h3>
 <p>For the graphical and textual notation refer to following table:</p>
 <table style="vertical-align: middle;text-align: center;caption-side: bottom;" class="table">
-  <thead style="text-align: center;">
+  <thead>
     <tr>
       <th><strong>Graphical Notation</strong></th>
       <th><strong>Textual Notation</strong></th>
@@ -495,7 +495,7 @@
 <h3><a href="#description" name="description"></a>Description</h3>
 <p>Definition from <a href="http://en.wikipedia.org/wiki/Finite-state_machine" title="Finite-state machine">Wikipedia</a>:</p>
 <blockquote>
-  <p>A finite-state machine (FSM) or finite-state automaton (plural: automata), or simply a state machine, is a mathematical model used to design computer programs and digital logic circuits. It is conceived as an abstract machine that can be in one of a finite number of states. The machine is in only one state at a time; the state it is in at any given time is called the current state. It can change from one state to another when initiated by a triggering event or condition, this is called a transition. A particular FSM is defined by a list of the possible states it can transition to from each state, and the triggering condition for each transition.</p>
+  <p>A finite-state machine (<abbr title="finite-state machine">FSM</abbr>) or finite-state automaton (plural: automata), or simply a state machine, is a mathematical model used to design computer programs and digital logic circuits. It is conceived as an abstract machine that can be in one of a finite number of states. The machine is in only one state at a time; the state it is in at any given time is called the current state. It can change from one state to another when initiated by a triggering event or condition, this is called a transition. A particular <abbr title="finite-state machine">FSM</abbr> is defined by a list of the possible states it can transition to from each state, and the triggering condition for each transition.</p>
   <p>In ROOM each actor class can implement its behavior using a state machine. Events occurring at the end ports of an actor will be forwarded to and processed by the state machine. Events possibly trigger state transitions.</p>
 </blockquote>
 <h3><a href="#motivation" name="motivation"></a>Motivation</h3>
@@ -506,7 +506,7 @@
 <h4><a href="#flat-finite-state-machine" name="flat-finite-state-machine"></a>Flat Finite State Machine</h4>
 <p>The simpler flat finite state machines are composed of the elements shown following table:</p>
 <table style="vertical-align: middle;text-align: center;" class="table">
-  <thead style="text-align: center;">
+  <thead>
     <tr>
       <th><strong>Element</strong></th>
       <th><strong>Graphical Notation</strong></th>
@@ -548,11 +548,9 @@
 			<td><p><img src="images/040-TriggeredTransition.jpg" alt="image"></p></td>
 			<td><pre><code class="room customHighlighted"><span class="keyword">Transition</span> tr0: <span class="keyword">initial</span> -&gt; DoingThis {
 	<span class="keyword">triggers</span> {
-		<dothis: fct>
+		&lt;doThis: fct&gt;
 	}
 }
-</dothis:></code></pre>
-<pre><code>       &lt;/dothis:&gt;
 </code></pre></td>
 		</tr>
 	</tbody>
@@ -560,7 +558,7 @@
 <h4><a href="#hierarchical-finite-state-machine" name="hierarchical-finite-state-machine"></a>Hierarchical Finite State Machine</h4>
 <p>The hierarchical finite state machine adds the notion of a sub state machine nested in a state. A few modeling elements listed in table below are added to the set listed above.</p>
 <table style="vertical-align: middle;text-align: center;" class="table">
-  <thead style="text-align: center;">
+  <thead>
     <tr>
       <th><strong>Element</strong></th>
       <th><strong>Graphical Notation</strong></th>
@@ -599,7 +597,7 @@
 <p><img src="images/040-HierarchicalFSMTop.jpg" alt="Example of a hierarchical finite state machine – top level"></p>
 <p><img src="images/040-HierarchicalFSMInitializing.jpg" alt="Hierarchical finite state machine – sub state machine of <em>Initializing</em>"></p>
 <p><img src="images/040-HierarchicalFSMRunning.jpg" alt="Hierarchical finite state machine – sub state machine of <em>Running</em>"></p>
-<!-- Abbreviations -------></body></html>
+<!-- Abbreviations --->
 
 </body>
 </html>

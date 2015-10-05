@@ -379,7 +379,7 @@ Examples of such definitions can be found in the files `Annotations.room` which 
 
 Consider e.g. the annotations definitions for Java
 
-Here we find two definitions. The meaning of those annotations will be explained later in section [Usage and Effect of the Pre&#45;defined Annotations](#usage-and-effect-of-the-pre-45-defined-annotations).
+Here we find two definitions. The meaning of those annotations will be explained later in section [Usage and Effect of the Pre-defined Annotations](#usage-and-effect-of-the-pre-defined-annotations).
 
 The annotation type definition defines a target where the annotation is allowed to be used. This can be one of
 
@@ -393,7 +393,7 @@ The annotation type definition defines a target where the annotation is allowed 
 
 Attributes can be added as needed and qualified as mandatory or optional. Attributes have a type (similar as the PrimitiveType but with the understanding that ptChar is a string). Another attribute type is enum with an explicit list of allowed enum literals.
 
-### Usage and Effect of the Pre&#45;defined Annotations
+### Usage and Effect of the Pre-defined Annotations
 
 The eTrice generators currently implement two annotations.
 
@@ -447,11 +447,11 @@ In the following sections we will describe those models with emphasis of their c
 
 ### The ROOM Model
 
-The ROOM model defines [DataClass][]es, [ProtocolClass][]es, [ActorClass][]es, [SubSystemClass][]es and [LogicalSystem][]s. Thereby the three latter form a hierarchy. The [LogicalSystem][] is the top level element of the structure. It contains references to [SubSystemClass][] elements. The [SubSystemClass][] in turn contains references to [ActorClass][] elements which again contain (recursively) references to [ActorClass][] elements. The complete structural hierarchy implies a tree which has the [LogicalSystem][] as root and where each reference stands for a new node with possibly further branches.
+The ROOM model defines DataClasses, ProtocolClasses, ActorClasses, SubSystemClasses and LogicalSystems. Thereby the three latter form a hierarchy. The LogicalSystem is the top level element of the structure. It contains references to SubSystemClass elements. The SubSystemClass in turn contains references to ActorClass elements which again contain (recursively) references to ActorClass elements. The complete structural hierarchy implies a tree which has the LogicalSystem as root and where each reference stands for a new node with possibly further branches.
 
 Let’s consider a simple example. It doesn’t implement anything meaningful and completely omits behavioral and other aspects.
 
-When a [LogicalSystem][] is instantiated then recursively all of the contained referenced elements are instantiated as instances of the corresponding class. Thus the instance tree of the above example looks like in figure below (the third line in the white boxes shows some mapping information, see [MappingModel](#the-mapping-model) ):
+When a LogicalSystem is instantiated then recursively all of the contained referenced elements are instantiated as instances of the corresponding class. Thus the instance tree of the above example looks like in figure below (the third line in the white boxes shows some mapping information, see [MappingModel](#the-mapping-model) ):
 
 <a name="room-instance-diagram"><img src="images/080-instances.jpg" alt="Instances of a ROOM system"></a>
 
@@ -463,7 +463,7 @@ Once we have the ROOM class model we can configure values using the Config model
 
 The physical model defines the physical resources onto which the logical system will be deployed. It is possible to define runtime classes which (currently) only define the overall execution model of the platform.
 
-The [PhysicalSystem][] is composed of [NodeRef][]erences which are instances of [NodeClass][]es. Each [NodeClass][] is referencing a [RuntimeClass][] and is defining [Threads][].
+The PhysicalSystem is composed of NodeReferences which are instances of NodeClasses. Each NodeClass is referencing a RuntimeClass and is defining Threads.
 
 ### The Mapping Model
 

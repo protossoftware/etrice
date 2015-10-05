@@ -48,6 +48,7 @@
 	</target>
 
 	<target name="onlineDoc" depends="copy_featureReference">
+		<delete dir="online-doc/target" />
 		<java jar="xternalLibs/stagen.jar" dir="online-doc" fork="true" failonerror="true" output="tmp/stagen_onlineDoc">
 			<arg value="gen" />
 		</java>

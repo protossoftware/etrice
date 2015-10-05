@@ -181,7 +181,7 @@ Yet the MSC is nearly empty having not recorded any interaction between actors. 
 
 ![image](images/014-hello-msc.png)
 
-Tutorial Ping Pong for Java and C
+Tutorial Ping Pong Java and C
 -------------------------------
 
 ### Scope

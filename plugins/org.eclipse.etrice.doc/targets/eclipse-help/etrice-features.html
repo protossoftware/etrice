@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
 <title>eTrice Documentation</title>
 
 <link rel="stylesheet" type="text/css" href="css/book.css"/>
@@ -14,7 +14,7 @@
 
 	
 
-<html><head></head><body><h1><a href="#etrice-features" name="etrice-features"></a>eTrice Features</h1>
+<h1><a href="#etrice-features" name="etrice-features"></a>eTrice Features</h1>
 <h2><a href="#model-navigation" name="model-navigation"></a>Model Navigation</h2>
 <p>In eTrice the primary source of the models is text based. However, for convenience the structure and the behavior of structure classes can be edited with graphical editors using the standard ROOM notation. Further. the textual models can be structured hierarchically using the import statement.</p>
 <p>So jumping between textual models and switching to and between diagrams and back to the textual representation is a frequent task. Therefore in this chapter we want to show the various possibilities to navigate the models.</p>
@@ -287,7 +287,7 @@
 <h3><a href="#annotation-type-definitions" name="annotation-type-definitions"></a>Annotation Type Definitions</h3>
 <p>Examples of such definitions can be found in the files <code>Annotations.room</code> which are part of the modellibs. They contain definitions of annotations that are recognized by the generator of the associated language.</p>
 <p>Consider e.g. the annotations definitions for Java</p>
-<p>Here we find two definitions. The meaning of those annotations will be explained later in section <a href="#usage-and-effect-of-the-pre-45-defined-annotations">Usage and Effect of the Pre-defined Annotations</a>.</p>
+<p>Here we find two definitions. The meaning of those annotations will be explained later in section <a href="#usage-and-effect-of-the-pre-defined-annotations">Usage and Effect of the Pre-defined Annotations</a>.</p>
 <p>The annotation type definition defines a target where the annotation is allowed to be used. This can be one of</p>
 <ul>
   <li>DataClass</li>
@@ -299,7 +299,7 @@
   <li>LogicalSystem</li>
 </ul>
 <p>Attributes can be added as needed and qualified as mandatory or optional. Attributes have a type (similar as the PrimitiveType but with the understanding that ptChar is a string). Another attribute type is enum with an explicit list of allowed enum literals.</p>
-<h3><a href="#usage-and-effect-of-the-pre-45-defined-annotations" name="usage-and-effect-of-the-pre-45-defined-annotations"></a>Usage and Effect of the Pre-defined Annotations</h3>
+<h3><a href="#usage-and-effect-of-the-pre-defined-annotations" name="usage-and-effect-of-the-pre-defined-annotations"></a>Usage and Effect of the Pre-defined Annotations</h3>
 <p>The eTrice generators currently implement two annotations.</p>
 <h4><a href="#behaviormanual" name="behaviormanual"></a>BehaviorManual</h4>
 <p>This annotation has no attribute. If specified the code generator won’t generate a state machine but part of the interface and methods of an actor class.</p>
@@ -331,18 +331,18 @@
 <p><img src="images/080-models.jpg" alt="image"></p>
 <p>In the following sections we will describe those models with emphasis of their cross relations.</p>
 <h3><a href="#the-room-model" name="the-room-model"></a>The ROOM Model</h3>
-<p>The ROOM model defines [DataClass][]es, [ProtocolClass][]es, [ActorClass][]es, [SubSystemClass][]es and [LogicalSystem][]s. Thereby the three latter form a hierarchy. The [LogicalSystem][] is the top level element of the structure. It contains references to [SubSystemClass][] elements. The [SubSystemClass][] in turn contains references to [ActorClass][] elements which again contain (recursively) references to [ActorClass][] elements. The complete structural hierarchy implies a tree which has the [LogicalSystem][] as root and where each reference stands for a new node with possibly further branches.</p>
+<p>The ROOM model defines DataClasses, ProtocolClasses, ActorClasses, SubSystemClasses and LogicalSystems. Thereby the three latter form a hierarchy. The LogicalSystem is the top level element of the structure. It contains references to SubSystemClass elements. The SubSystemClass in turn contains references to ActorClass elements which again contain (recursively) references to ActorClass elements. The complete structural hierarchy implies a tree which has the LogicalSystem as root and where each reference stands for a new node with possibly further branches.</p>
 <p>Let’s consider a simple example. It doesn’t implement anything meaningful and completely omits behavioral and other aspects.</p>
-<p>When a [LogicalSystem][] is instantiated then recursively all of the contained referenced elements are instantiated as instances of the corresponding class. Thus the instance tree of the above example looks like in figure below (the third line in the white boxes shows some mapping information, see <a href="#the-mapping-model">MappingModel</a> ):</p>
+<p>When a LogicalSystem is instantiated then recursively all of the contained referenced elements are instantiated as instances of the corresponding class. Thus the instance tree of the above example looks like in figure below (the third line in the white boxes shows some mapping information, see <a href="#the-mapping-model">MappingModel</a> ):</p>
 <a name="room-instance-diagram"><img src="images/080-instances.jpg" alt="Instances of a ROOM system"></a>
 <h3><a href="#the-config-model" name="the-config-model"></a>The Config Model</h3>
 <p>Once we have the ROOM class model we can configure values using the Config model. This can be done on the class level and/or on the instance level. Values defined for class attributes are used for all instances unless there is an instance value configured for the same attribute.</p>
 <h3><a href="#the-physical-model" name="the-physical-model"></a>The Physical Model</h3>
 <p>The physical model defines the physical resources onto which the logical system will be deployed. It is possible to define runtime classes which (currently) only define the overall execution model of the platform.</p>
-<p>The [PhysicalSystem][] is composed of [NodeRef][]erences which are instances of [NodeClass][]es. Each [NodeClass][] is referencing a [RuntimeClass][] and is defining [Threads][].</p>
+<p>The PhysicalSystem is composed of NodeReferences which are instances of NodeClasses. Each NodeClass is referencing a RuntimeClass and is defining Threads.</p>
 <h3><a href="#the-mapping-model" name="the-mapping-model"></a>The Mapping Model</h3>
 <p>The last model finally combines all this information by mapping logical to physical entities.</p>
-<p>The result of the mapping is also depicted in above <a href="#room-instance-diagram">instance tree diagram</a> of the instances. All actor instances (the white boxes) are mapped to a node and a thread running on this node (shown as @*node* : <em>thread</em>).</p></body></html>
+<p>The result of the mapping is also depicted in above <a href="#room-instance-diagram">instance tree diagram</a> of the instances. All actor instances (the white boxes) are mapped to a node and a thread running on this node (shown as @*node* : <em>thread</em>).</p>
 
 </body>
 </html>

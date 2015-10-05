@@ -136,8 +136,8 @@ Feature DataLogging
 	prototype
 ;
 
-Feature ^DocumentationGenerator
-	description '''A LaTeX documentation generator from eTrice models.'''
-	uses GenerationOptions
-	prototype
-;
+//Feature ^DocumentationGenerator
+//	description '''A LaTeX documentation generator from eTrice models.'''
+//	uses GenerationOptions
+//	prototype
+//;
