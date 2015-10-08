@@ -1,4 +1,5 @@
 <?xml version="1.0"?>
+<!-- Build complete documentation and help -->
 <project name="org.eclipse.etrice.doc" basedir="." default="all">
 
 	<property name="output" value="./targets" />
