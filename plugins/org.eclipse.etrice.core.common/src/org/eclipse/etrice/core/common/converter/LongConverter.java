@@ -14,38 +14,42 @@
 package org.eclipse.etrice.core.common.converter;
 
 import org.eclipse.xtext.conversion.ValueConverterException;
-import org.eclipse.xtext.conversion.impl.AbstractLexerBasedConverter;
+import org.eclipse.xtext.conversion.impl.AbstractValueConverter;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.util.Strings;
 
-public class LongConverter extends AbstractLexerBasedConverter<Long> {
+public class LongConverter extends AbstractValueConverter<Long> {
 
 	@Override
-	public Long toValue(String string, INode node)
-			throws ValueConverterException {
+	public Long toValue(String string, INode node) throws ValueConverterException {
 		if (Strings.isEmpty(string))
-			throw new ValueConverterException(
-					"Couldn't convert empty string to integer.", node, null);
+			throw new ValueConverterException("Couldn't convert empty string to integer.", node, null);
 		if (string.startsWith("0x") || string.startsWith("0X")) {
 			try {
 				long value = Long.parseLong(string.substring(2), 16);
 				return value;
-			} catch (NumberFormatException e) {
-				throw new ValueConverterException("Couldn't convert '"
-						+ string + "' to hex.", node, e);
 			}
-		} else {
+			catch (NumberFormatException e) {
+				throw new ValueConverterException("Couldn't convert '" + string + "' to hex.", node, e);
+			}
+		}
+		else {
 			try {
 				String tmp = string;
-				if(string.charAt(0) == '+'){
+				if (string.charAt(0) == '+') {
 					tmp = string.substring(1, string.length());
 				}
 				long value = Long.parseLong(tmp);
 				return value;
-			} catch (NumberFormatException e) {
-				throw new ValueConverterException("Couldn't convert '"
-						+ string + "' to integer.", node, e);
+			}
+			catch (NumberFormatException e) {
+				throw new ValueConverterException("Couldn't convert '" + string + "' to integer.", node, e);
 			}
 		}
+	}
+
+	@Override
+	public String toString(Long value) throws ValueConverterException {
+		return value.toString();
 	}
 }

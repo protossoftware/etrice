@@ -13,7 +13,7 @@
 package org.eclipse.etrice.core.common.converter;
 
 import org.eclipse.xtext.conversion.ValueConverterException;
-import org.eclipse.xtext.conversion.impl.AbstractLexerBasedConverter;
+import org.eclipse.xtext.conversion.impl.AbstractValueConverter;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.util.Strings;
 
@@ -21,20 +21,13 @@ import org.eclipse.xtext.util.Strings;
  * @author Henrik Rentz-Reichert
  * 
  */
-public class TimeConverter extends AbstractLexerBasedConverter<Long> {
+public class TimeConverter extends AbstractValueConverter<Long> {
 
 	public static final String SEC = "s";
 	public static final String MILLI_SEC = "ms";
 	public static final String MICRO_SEC = "us";
 	public static final String NANO_SEC = "ns";
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.xtext.conversion.IValueConverter#toValue(java.lang.String,
-	 * org.eclipse.xtext.nodemodel.INode)
-	 */
 	@Override
 	public Long toValue(String string, INode node) throws ValueConverterException {
 		if (Strings.isEmpty(string)) {
@@ -77,16 +70,9 @@ public class TimeConverter extends AbstractLexerBasedConverter<Long> {
 			}
 		}
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.xtext.conversion.impl.AbstractLexerBasedConverter#toEscapedString
-	 * (java.lang.Object)
-	 */
+	
 	@Override
-	protected String toEscapedString(Long value) {
+	public String toString(Long value) throws ValueConverterException {
 		if (value % 1000 == 0) {
 			if (value % 1000000 == 0) {
 				if (value % 1000000000 == 0) {
@@ -104,6 +90,7 @@ public class TimeConverter extends AbstractLexerBasedConverter<Long> {
 			return value + NANO_SEC;
 		}
 	}
+
 
 	/**
 	 * Returns the part of <b>nanoSeconds</b>, that is descriped by <b>unit</b>
