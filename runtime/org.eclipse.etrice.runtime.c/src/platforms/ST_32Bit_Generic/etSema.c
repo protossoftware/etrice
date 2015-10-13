@@ -49,3 +49,10 @@ void etSema_waitForWakeup(etSema* self){
 	}
 	ET_MSC_LOGGER_SYNC_EXIT
 }
+
+void etSema_wakeupFromISR(etSema* self){
+   ET_MSC_LOGGER_SYNC_ENTRY("etSema", "wakeupFromISR")
+
+   ET_MSC_LOGGER_SYNC_EXIT
+}
+
