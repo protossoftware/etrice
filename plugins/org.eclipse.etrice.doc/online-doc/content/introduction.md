@@ -87,15 +87,15 @@ But as the figure illustrates, the classical object paradigm does not care about
 
 ![image](images/010-RoomIntroduction02.png)
 
-ROOM provides the concept of a logical machine (called actor) with its own thread of control. It provides some kind of cooperative communication infrastructure with *run to completion* semantics. That makes developing of business logic easy and safe (see [Basic Concepts](#basic-concepts) ). The logical machine provides an encapsulation shell including concurrency issues (see [Run to completion](#run-to-completion) ).
+ROOM provides the concept of a logical machine (called actor) with its own thread of control. It provides some kind of cooperative communication infrastructure with *run to completion* semantics. That makes developing of business logic easy and safe (see [Basic Concepts](#basic-concepts)). The logical machine provides an encapsulation shell including concurrency issues (see [Run to completion](#run-to-completion)).
 
 ![image](images/010-RoomIntroduction03.png)
 
-This thinking of an object is much more general than the classic one.
+This concept of an object is much more general than the classic one.
 
 #### What are the benefits of ROOM?
 
-ROOM has a lot of benefits and it depends on the users point of view which is the most important one. From a general point of view the most important benefit is, that ROOM allows to create SW systems very efficient, robust and safe due to the fact that it provides some abstract, high level modeling concepts combined with code generation and a small efficient runtime environment.
+ROOM has a lot of benefits and it depends on the user's point of view which is the most important one. From a general point of view the most important benefit is, that ROOM allows to create SW systems very efficient, robust and safe due to the fact that it provides some abstract, high level modeling concepts combined with code generation and a small efficient runtime environment.
 
 In detail:
 
@@ -169,7 +169,7 @@ From an abstract point of view there is a state *blinking*. But a simple LED is 
 
 This simple example might give an idea how powerful this mechanisms is.
 
-The hierarchical FSM provides a rich tool box to describe real world problems (see [Room Concepts](room-concepts.html) ).
+The hierarchical FSM provides a rich tool box to describe real world problems (see [Room Concepts](room-concepts.html)).
 
 #### Layering
 
@@ -179,7 +179,7 @@ The actor that provides a service implements an SPP and the client of that servi
 
 ![image](images/010-LayerExample.png)
 
-The example shows a layered model. The layer connections define e.g. that the *ApplicationLayer* can only use the services of the *ServiceLayer* and the *CommunicationLayer*. Actors inside the *ApplicationLayer* that implement an SAP for those services are connected directly to the implementation of the services. Layering and actor hierarchies with port to port connections can be mixed on every level of granularity.
+The example shows a layered model. The layer connections define e.g. that the *ApplicationLayer* uses the services of the *ServiceLayer* and the *CommunicationLayer*. Actors inside the *ApplicationLayer* that use an SAP for those services are connected directly to the implementation of the services. Layering and actor hierarchies with port to port connections can be mixed on every level of granularity.
 
 #### Run to Completion
 

@@ -12,9 +12,9 @@ The C examples project
 
 This example project `org.eclipse.etrice.examples.c` illustrates a simplified traffic light control. It actually consists of four different steps of increasing complexity that can be generated and built one by one (but not in parallel).
 
-Most of the classes are contained in a common ROOM model `model/TrafficLight/TrafficLight.room` that also shows how ROOM classes can form a library and used as building blocks for several systems. Also the physical model is shared by all steps of this example.
+Most of the classes are contained in a common ROOM model `model/TrafficLight/TrafficLight.room` that also shows how ROOM classes can form a library and be used as building blocks for several systems. Also the physical model is shared by all steps of this example.
 
-Contained in the example you will find a little Java GUI that some of the example use to simulate a real traffic light. The GUI is contacted using TCP/IP ports 4441 and subsequent. The protocol used on the TCP/IP socket connection is a simple text protocol with commands for the lights. Three of the example steps make use of this simulator GUI. They also contain a launch configuration for it.
+Contained in the example you will find a little Java GUI that some of the examples use to simulate a real traffic light. The GUI is contacted using TCP/IP ports 4441 and subsequent. The protocol used on the TCP/IP socket connection is a simple text protocol with commands for the lights. Three of the example steps make use of this simulator GUI. They also contain a launch configuration for it.
 
 **Note:** Before compiling and linking a new step of the example the project should be cleaned to avoid duplicate symbols due to artifacts from the previous build.
 

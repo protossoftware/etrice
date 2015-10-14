@@ -107,9 +107,9 @@ ActorClass ActorClass1 {
 </table>
 
 - *ActorClass1* contains two ActorReferences (of ActorClass2 and ActorClass3) 
-- *port1* is an *external end port*. Since it connects external actors with the behavior of the ActorClass, it is defined in theInterface section and the Structure section of the ActorClass.
+- *port1* is an *external end port*. Since it connects external actors with the behavior of the ActorClass, it is defined in the Interface section as well as in the Structure section of the ActorClass.
 - *port2* and *port3* are *internal end ports* and can only be connected to the ports of contained ActorReferences. Internal end ports connect the behavior of an ActorClass with its contained ActorReferences.
-- *port4* is a relay port and connects external Actors to contained ActorReferences. This port can not be accessed by the behavior of the ActorClass.
+- *port4* is a *relay port* and connects external Actors to contained ActorReferences. This port can not be accessed by the behavior of the ActorClass.
 - *port5* through *port9* are ports of contained actor references. port8 and port9 can communicate without interference with the containing actor class.
 - Bindings can connect ports of the actor class and its contained actor references. 
 
@@ -206,11 +206,9 @@ Ports are the only interfaces of actors. A port has always a protocol assigned. 
 
 #### Class Ports
 
-These symbols can only appear on the border of an actor class symbol.
-
 Ports that define an external interface of the actor class, are defined in the Interface. Ports that define an internal interface are defined in the Structure (e.g. internal ports).
 
--   *External end ports* are defined in the Interface and the Structure
+-   *External end ports* are defined in the Interface and in the Structure
 
 -   *Internal end ports* are only defined in the Structure
 
@@ -222,6 +220,8 @@ Ports that define an external interface of the actor class, are defined in the I
 	<span>```Port port18 [5]: ProtocolClass1```</span>
     or a variable replication factor, e.g.
 	<span>```Port port18[*]: ProtocolClass1```</span>
+
+-   The graphical symbols of Interface ports are drawn on the border of the actor class. The graphical symbols of Structure ports are drawn inside the border of an actor class.
 
 The table below shows all kinds of class ports with textual and graphical notation:
 
@@ -408,7 +408,7 @@ ActorClass ActorClass6 {
 
 #### Reference Ports
 
-These symbols can only appear on the border of an actor class. Since the type of port is defined in the actor class, no textual notation for the Reference Ports exists.
+These symbols can only appear on the border of an actor class reference. Since the type of port is defined in the respective actor class, no textual notation for the Reference Ports exists.
 
 The table below shows all kinds of reference ports with textual and graphical notation:
 
@@ -424,7 +424,7 @@ DataClass
 
 ### Description
 
-The DataClass enables the modeling of hierarchical complex data types and operations on them. The data class is the equivalent to a class in languages like Java or C++, but has less features. The content of a data class can always be sent via message between actors (defined as message data in a ProtocolClass).
+The DataClass allows the modeling of hierarchical complex data types and operations on them. The data class is the equivalent to a class in languages like Java or C++, but has less features. The content of a data class can always be sent via message between actors (defined as message data in a ProtocolClass).
 
 ### Notation
 
@@ -482,7 +482,7 @@ In addition to the actor containment hierarchies, layering provides another meth
 
 ### Notation
 
-For the graphical and textual notation refer to following table:
+For the graphical and textual notation refer to the following table:
 		
 <table style="vertical-align: middle;text-align: center;caption-side: bottom;" class="table">
   <thead>
@@ -509,7 +509,7 @@ ActorClass Mode1 {
 		</td>
 	</tr>
 	</tbody>
-	<caption>The layer connections in this model define which services are provided by the *ServiceLayer* (*digitalIO* and *timer*)</caption>
+	<caption>The layer connections in this model define which services are provided by the <i>ServiceLayer</i> (<i>digitalIO</i> and <i>timer</i>)</caption>
 </table>
 	
 <table style="vertical-align: middle;text-align: center;caption-side: bottom;" class="table">
@@ -534,7 +534,7 @@ ActorClass ServiceLayer {
 		</td>
 	</tr>
 	</tbody>
-	<caption>The implementation of the services (SPPs) can be delegated to sub actors. In this case the actor *ServiceLayer* relays (delegates) the implementation services *digitalIO* and *timer* to sub actors</caption>
+	<caption>The implementation of the services (SPPs) can be delegated to sub actors. In this case the actor *ServiceLayer* relays (delegates) the implementation services <i>digitalIO<Ii> and <i>timer</i> to sub actors</caption>
 </table>
 <table style="vertical-align: middle;text-align: center;caption-side: bottom;" class="table">
 	<tbody>
@@ -567,7 +567,7 @@ ActorClass B {
 		</td>
 	</tr>
   </tbody>
-  <caption>Every Actor inside the *ApplicationLayer* that contains an SAP with the same protocol as *timer* or *digitalIO* will be connected to the specified SPP</caption>
+  <caption>Every Actor inside the <i>ApplicationLayer</i> that contains an SAP with the same protocol as <i>timer</i> or <i>digitalIO</i> will be connected to the specified SPP</caption>
 </table>
 
 

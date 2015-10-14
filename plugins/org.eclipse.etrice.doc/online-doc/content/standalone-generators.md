@@ -5,7 +5,7 @@ The eTrice generators can be called from the command line. This is useful e.g. i
 
 The generators are distributed as self contained jars and can be called using
 
-`jave -jar <the generator.jar> [arguments]`.
+`java -jar <the generator.jar> [arguments]`.
 
 The options for the Java generator are
 
