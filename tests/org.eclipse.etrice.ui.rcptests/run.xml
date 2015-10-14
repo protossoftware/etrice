@@ -9,21 +9,30 @@
 			Juergen Haug (initial contribution)
 			
 	Local UI unit/release tests based on Eclipse RCPTT
+		Release tests == installation + unit tests
+		AUT == application under Test == eclipse installation
 -->
 
 <project name="org.eclipse.etrice.ui.rcptests" basedir="." default="run_unitTests_local">
 
-	<!--Prerequisite: download rcptt runner 2.0.0 https://www.eclipse.org/rcptt/download/ -->
+	<!-- Prerequisite: download rcptt runner 2.0.0 https://www.eclipse.org/rcptt/download/ -->
 	<property name="rcpttRunner.path" location="C:\Users\Juergen\Eclipse\rcpttRunner" />
 
-	<!--Prerequisite: test container == "workspace" for test execution -->
+	<!-- Prerequisite: test container == "workspace" for test execution -->
 	<property name="testContainer.path" location="C:\Users\Juergen\workspaces\rcpTests-headless" />
 
-	<!-- AUT == application under Test == eclipse installation without eTrice -->
-	<property name="autLocal.path" location="${eclipse.home}" />
-	<property name="autRelease.path" location="C:\Users\Juergen\Eclipse\eTrice" />
+	<!-- Release tests: -->
+	<!-- AUT == end-user eclipse installation without eTrice -->
+	<property name="autRelease.path" location="C:\Users\Juergen\Downloads/eclipse-cpp" />
+	<!-- eTrice is installed during test, the update site is defined in tests/release/SoftwareSites.ctx -> eTriceSite=XXX -->
 
-	<!-- local exported eTrice feature: use org.eclipse.etrice.feature/build_local.xml-->
+	<!-- Unit tests: -->
+	<!-- AUT == eclipse installation containing all dependencies (e.g. current host)-->
+	<property name="autUnit.path" location="${eclipse.home}" />
+	<!-- eTrice install via plugin injection:
+			a) create local version of etrice.feature: org.eclipse.etrice.feature/build_local.xml 
+			b) path to unzipped update site
+	-->
 	<property name="eTriceExport.path" location="../../features/org.eclipse.etrice.feature/export" />
 
 	<!-- private properties-->
@@ -37,7 +46,6 @@
 		<echo>        test.results = ${test.results}           		</echo>
 		<echo>        		output = ${output}          		 	</echo>
 		<echo>     		   basedir = ${basedir}        				</echo>
-		<echo>       autBasis.path = ${autBasis.path}       		</echo>
 		<echo>    rcpttRunner.path = ${rcpttRunner.path}    		</echo>
 		<echo>  testContainer.path = ${testContainer.path}    		</echo>
 	</target>
@@ -58,28 +66,23 @@
 	</target>
 
 	<!--
-		Release tests of nightly: performing installation from nightly update site + unit tests
+		Release tests: performing installation from update site + unit tests
 		Use appropriate eclipse installation
 	-->
-	<target name="run_releaseTestsNightly" depends="init">
-		<echo>AUT should match END-USER eclipse installation</echo>
+	<target name="run_releaseTests" depends="init">
 		<delete dir="${testContainer.path}" quiet="true" />
 		<mkdir dir="${testContainer.path}" />
 		<runTest autPath="${autRelease.path}">
 			<arg value="-suites" />
-			<arg value="ReleaseTests_nightly" />
+			<arg value="ReleaseTests" />
 		</runTest>
 	</target>
 
 	<!--
-		Prerequisite:
-			1. exported eTrice feature: executed org.eclipse.etrice.feature/build_local.xml
-			2. AUT == eclipse installation containing eTrice dependencies
+		Unit tests
 	-->
 	<target name="run_unitTests_local" depends="init">
-		<echo>expecting exported eTrice feature</echo>
-		<echo>expecting AUT with all eTrice dependencies</echo>
-		<runTest autPath="${autLocal.path}">
+		<runTest autPath="${autUnit.path}">
 			<arg value="-suites" />
 			<arg value="UnitTests" />
 			<arg value="-injection:dir" />
@@ -108,9 +111,9 @@
 
 				<arg value="-autConsolePrefix" />
 				<arg value="${output}/aut-out-" />
-
+				<!--
 				<arg value="-autVMArgs" />
-				<arg value="-Xms40m;-Xmx512m;-XX:MaxPermSize=256m;-ea" /><!--<arg value="-Xmx1024m;-XX:MaxPermSize=512m" />-->
+				<arg value="-Xms40m;-Xmx1g;-XX:MaxPermSize=256m;" />--><!-- -ea -->
 
 				<arg value="-htmlReport" />
 				<arg value="${test.results}/uiTests.html" />
@@ -122,7 +125,8 @@
 				<arg value="${basedir}" />
 
 				<arg value="-testOptions" />
-				<arg value="testExecTimeout=300;execTimeout=3600" />
+				<arg value="testExecTimeout=600;execTimeout=3600" />
+				
 
 				<argElements />
 			</java>

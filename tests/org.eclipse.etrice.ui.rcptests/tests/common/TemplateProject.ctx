@@ -6,7 +6,7 @@ Element-Type: context
 Element-Version: 2.0
 Id: _clrEQFGbEeWk3rbvuPRQHg
 Runtime-Version: 2.0.0.201506120617
-Save-Time: 9/3/15 12:58 AM
+Save-Time: 10/9/15 6:09 PM
 
 ------=_.ecl.context-718f04b4-ed39-33e3-af62-0995e4561998
 Content-Type: text/ecl
@@ -15,7 +15,8 @@ Entry-Name: .ecl.context
 proc createTemplateProject {
 	get-menu "File/New/Other..." | click
 	with [get-window New] {
-		get-tree | select Class | select [concat "eTrice/" $targetLanguage "/eTrice " $targetLanguage
+		get-editbox -after [get-label "Wizards:"] | set-text etrice
+		get-tree | select [concat "eTrice/" $targetLanguage "/eTrice " $targetLanguage
 			" Template Project"]
 		get-button "Next >" | click
 	}

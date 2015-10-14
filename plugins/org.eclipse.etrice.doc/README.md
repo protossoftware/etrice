@@ -5,7 +5,7 @@ eTrice documentation + help
 **Prerequistes**:
 
 - Featurizer (Download from Bitbucket and install)
-- Stagen (Download .jar from Bitbucket and put it to folder */xternalLibs*
+- Stagen (Download .jar from Bitbucket and put it to folder */xternalLibs*, **Java 8 **)
 
 ## Project Structure
 
@@ -43,7 +43,7 @@ The documentation content resides in folder */content* (exception *feature-refer
 
 A static site generator, readme can be found in the repository. A modified version is used, that supports
 
-- xtext highlighting
+- xtext syntax highlighting
 - toc generation
 - markdown within tables (every table cell is generated isolated)
 
