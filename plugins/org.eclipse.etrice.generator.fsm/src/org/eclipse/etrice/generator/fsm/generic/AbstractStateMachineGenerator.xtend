@@ -186,11 +186,11 @@ abstract class AbstractStateMachineGenerator {
      */
     def public String genEntryAndExitCodes(ExpandedModelComponent xpmc, boolean generateImplementation, boolean omitBase) {
         '''
-        «FOR state : xpmc.stateMachine.getStateList()»
-            «IF !omitBase || xpmc.isOwnObject(state)»
-                «xpmc.genActionCodeMethods(state, generateImplementation)»
-            «ENDIF»
-        «ENDFOR»
+        Â«FOR state : xpmc.stateMachine.getStateList()Â»
+            Â«IF !omitBase || xpmc.isOwnObject(state)Â»
+                Â«xpmc.genActionCodeMethods(state, generateImplementation)Â»
+            Â«ENDIFÂ»
+        Â«ENDFORÂ»
         '''
     }
     
@@ -217,11 +217,11 @@ abstract class AbstractStateMachineGenerator {
      */
     def public String genActionCodes(ExpandedModelComponent xpmc, boolean generateImplementation, boolean omitBase) {
         '''
-        «FOR tr : xpmc.stateMachine.allTransitionsRecursive»
-            «IF (!omitBase || xpmc.isOwnObject(tr)) && tr.action.hasDetailCode»
-                «xpmc.genActionCodeMethod(tr, generateImplementation)»
-            «ENDIF»
-        «ENDFOR»
+        Â«FOR tr : xpmc.stateMachine.allTransitionsRecursiveÂ»
+            Â«IF (!omitBase || xpmc.isOwnObject(tr)) && tr.action.hasDetailCodeÂ»
+                Â«xpmc.genActionCodeMethod(tr, generateImplementation)Â»
+            Â«ENDIFÂ»
+        Â«ENDFORÂ»
         '''
     }
     
@@ -262,30 +262,30 @@ abstract class AbstractStateMachineGenerator {
 		 * parent states while remembering the history
 		 * @param current__et - the current state
 		 * @param to - the final parent state
-		«IF usesHdlr»
+		Â«IF usesHdlrÂ»
 			 * @param handler__et - entry and exit codes are called only if not handler (for handler TransitionPoints)
-		«ENDIF»
+		Â«ENDIFÂ»
 		 */
-		«IF generateImplementation»
-			«privAccess»void «opScopePriv»exitTo(«selfPtr»«stateType» current__et, «stateType» to«IF usesHdlr», «boolType» handler__et«ENDIF») {
+		Â«IF generateImplementationÂ»
+			Â«privAccessÂ»void Â«opScopePrivÂ»exitTo(Â«selfPtrÂ»Â«stateTypeÂ» current__et, Â«stateTypeÂ» toÂ«IF usesHdlrÂ», Â«boolTypeÂ» handler__etÂ«ENDIFÂ») {
 				while (current__et!=to) {
 					switch (current__et) {
-						«FOR state : xpmc.stateMachine.getBaseStateList()»
-							case «state.getGenStateId()»:
-								«IF state.hasExitCode(true)»«IF usesHdlr»if (!handler__et) «ENDIF»«state.getExitCodeOperationName()»(«langExt.selfPointer(false)»);«ENDIF»
-								«setHistory(state.getParentStateId(), state.getGenStateId())»;
-								current__et = «state.getParentStateId()»;
+						Â«FOR state : xpmc.stateMachine.getBaseStateList()Â»
+							case Â«state.getGenStateId()Â»:
+								Â«IF state.hasExitCode(true)Â»Â«IF usesHdlrÂ»if (!handler__et) Â«ENDIFÂ»Â«state.getExitCodeOperationName()Â»(Â«langExt.selfPointer(false)Â»);Â«ENDIFÂ»
+								Â«setHistory(state.getParentStateId(), state.getGenStateId())Â»;
+								current__et = Â«state.getParentStateId()Â»;
 								break;
-						«ENDFOR»
+						Â«ENDFORÂ»
 						default:
 							/* should not occur */
 							break;
 					}
 				}
 			}
-		«ELSE»
-			void exitTo(«selfPtr»«stateType» current__et, «stateType» to«IF usesHdlr», «boolType» handler__et«ENDIF»);
-		«ENDIF»
+		Â«ELSEÂ»
+			void exitTo(Â«selfPtrÂ»Â«stateTypeÂ» current__et, Â«stateTypeÂ» toÂ«IF usesHdlrÂ», Â«boolTypeÂ» handler__etÂ«ENDIFÂ»);
+		Â«ENDIFÂ»
 		
 		/**
 		 * calls action, entry and exit codes along a transition chain. The generic data are cast to typed data
@@ -294,149 +294,149 @@ abstract class AbstractStateMachineGenerator {
 		 * @param generic_data__et - the generic data pointer
 		 * @return the +/- ID of the final state either with a positive sign, that indicates to execute the state's entry code, or a negative sign vice versa
 		 */
-		«IF generateImplementation»
-			«privAccess»«stateType» «opScopePriv»executeTransitionChain(«selfPtr»int chain__et«IF handleEvents», «constIfItemPtr» ifitem, «langExt.voidPointer» generic_data__et«ENDIF») {
+		Â«IF generateImplementationÂ»
+			Â«privAccessÂ»Â«stateTypeÂ» Â«opScopePrivÂ»executeTransitionChain(Â«selfPtrÂ»int chain__etÂ«IF handleEventsÂ», Â«constIfItemPtrÂ» ifitem, Â«langExt.voidPointerÂ» generic_data__etÂ«ENDIFÂ») {
 				switch (chain__et) {
-					«var allchains = xpmc.getTransitionChains()»
-					«FOR tc : allchains»
-						case «tc.genChainId»:
+					Â«var allchains = xpmc.getTransitionChains()Â»
+					Â«FOR tc : allchainsÂ»
+						case Â«tc.genChainIdÂ»:
 						{
-							«transitionChainGenerator.generateExecuteChain(xpmc, tc)»
+							Â«transitionChainGenerator.generateExecuteChain(xpmc, tc)Â»
 						}
-					«ENDFOR»
+					Â«ENDFORÂ»
 						default:
 							/* should not occur */
 							break;
 				}
 				return NO_STATE;
 			}
-		«ELSE»
-			«stateType» executeTransitionChain(«selfPtr»int chain__et«IF handleEvents», «constIfItemPtr» ifitem, «langExt.voidPointer» generic_data__et«ENDIF»);
-		«ENDIF»
+		Â«ELSEÂ»
+			Â«stateTypeÂ» executeTransitionChain(Â«selfPtrÂ»int chain__etÂ«IF handleEventsÂ», Â«constIfItemPtrÂ» ifitem, Â«langExt.voidPointerÂ» generic_data__etÂ«ENDIFÂ»);
+		Â«ENDIFÂ»
 		
 		/**
 		 * calls entry codes while entering a state's history. The ID of the final leaf state is returned
 		 * @param state__et - the state which is entered
-		«IF usesHdlr»
+		Â«IF usesHdlrÂ»
 			 * @param handler__et - entry code is executed if not handler
-		«ENDIF»
+		Â«ENDIFÂ»
 		 * @return - the ID of the final leaf state
 		 */
-		«IF generateImplementation»
-			«privAccess»«stateType» «opScopePriv»enterHistory(«selfPtr»«stateType» state__et«IF usesHdlr», «boolType» handler__et«ENDIF») {
-				«val baseStateList = xpmc.stateMachine.baseStateList»
-				«val needsSkipVar = !baseStateList.filter(s|s.hasEntryCode(true)).empty»
-				«IF needsSkipVar»
-					«boolType» skip_entry__et = «langExt.booleanConstant(false)»;
-				«ENDIF»
+		Â«IF generateImplementationÂ»
+			Â«privAccessÂ»Â«stateTypeÂ» Â«opScopePrivÂ»enterHistory(Â«selfPtrÂ»Â«stateTypeÂ» state__etÂ«IF usesHdlrÂ», Â«boolTypeÂ» handler__etÂ«ENDIFÂ») {
+				Â«val baseStateList = xpmc.stateMachine.baseStateListÂ»
+				Â«val needsSkipVar = !baseStateList.filter(s|s.hasEntryCode(true)).emptyÂ»
+				Â«IF needsSkipVarÂ»
+					Â«boolTypeÂ» skip_entry__et = Â«langExt.booleanConstant(false)Â»;
+				Â«ENDIFÂ»
 				if (state__et >= STATE_MAX) {
-					state__et = «IF !langExt.usesInheritance»(«stateType»)«ENDIF» (state__et - STATE_MAX);
-					«IF needsSkipVar»
-						skip_entry__et = «langExt.booleanConstant(true)»;
-					«ENDIF»
+					state__et = Â«IF !langExt.usesInheritanceÂ»(Â«stateTypeÂ»)Â«ENDIFÂ» (state__et - STATE_MAX);
+					Â«IF needsSkipVarÂ»
+						skip_entry__et = Â«langExt.booleanConstant(true)Â»;
+					Â«ENDIFÂ»
 				}
-				while («langExt.booleanConstant(true)») {
+				while (Â«langExt.booleanConstant(true)Â») {
 					switch (state__et) {
-						«FOR state : baseStateList»
-						case «state.getGenStateId()»:
-							«IF state.hasEntryCode(true)»if (!(skip_entry__et«IF usesHdlr» || handler__et«ENDIF»)) «state.getEntryCodeOperationName()»(«langExt.selfPointer(false)»);«ENDIF»
-							«IF state.isLeaf()»
+						Â«FOR state : baseStateListÂ»
+						case Â«state.getGenStateId()Â»:
+							Â«IF state.hasEntryCode(true)Â»if (!(skip_entry__etÂ«IF usesHdlrÂ» || handler__etÂ«ENDIFÂ»)) Â«state.getEntryCodeOperationName()Â»(Â«langExt.selfPointer(false)Â»);Â«ENDIFÂ»
+							Â«IF state.isLeaf()Â»
 								/* in leaf state: return state id */
-								return «state.getGenStateId()»;
-							«ELSE»
+								return Â«state.getGenStateId()Â»;
+							Â«ELSEÂ»
 								/* state has a sub graph */
-								«IF state.subgraph.hasInitTransition()»
+								Â«IF state.subgraph.hasInitTransition()Â»
 									/* with init transition */
-									if («getHistory(state.getGenStateId())»==NO_STATE) {
-										«var sub_initt = state.subgraph.getInitTransition()»
-										state__et = executeTransitionChain(«langExt.selfPointer(true)»«xpmc.getChain(sub_initt).genChainId»«IF handleEvents», «langExt.nullPointer», «langExt.nullPointer»«ENDIF»);
+									if (Â«getHistory(state.getGenStateId())Â»==NO_STATE) {
+										Â«var sub_initt = state.subgraph.getInitTransition()Â»
+										state__et = executeTransitionChain(Â«langExt.selfPointer(true)Â»Â«xpmc.getChain(sub_initt).genChainIdÂ»Â«IF handleEventsÂ», Â«langExt.nullPointerÂ», Â«langExt.nullPointerÂ»Â«ENDIFÂ»);
 									}
 									else {
-										state__et = «getHistory(state.getGenStateId())»;
+										state__et = Â«getHistory(state.getGenStateId())Â»;
 									}
-								«ELSE»
+								Â«ELSEÂ»
 									/* without init transition */
-									state__et = «getHistory(state.getGenStateId())»;
-								«ENDIF»
+									state__et = Â«getHistory(state.getGenStateId())Â»;
+								Â«ENDIFÂ»
 								break;
-							«ENDIF»
-						«ENDFOR»
+							Â«ENDIFÂ»
+						Â«ENDFORÂ»
 						case STATE_TOP:
-							state__et = «getHistory("STATE_TOP")»;
+							state__et = Â«getHistory("STATE_TOP")Â»;
 							break;
 						default:
 							/* should not occur */
 							break;
 					}
-					«IF needsSkipVar»
-						skip_entry__et = «langExt.booleanConstant(false)»;
-					«ENDIF»
+					Â«IF needsSkipVarÂ»
+						skip_entry__et = Â«langExt.booleanConstant(false)Â»;
+					Â«ENDIFÂ»
 				}
-				«unreachableReturn»
+				Â«unreachableReturnÂ»
 			}
-		«ELSE»
-			«stateType» enterHistory(«selfPtr»«stateType» state__et«IF usesHdlr», «boolType» handler__et«ENDIF»);
-		«ENDIF»
+		Â«ELSEÂ»
+			Â«stateTypeÂ» enterHistory(Â«selfPtrÂ»Â«stateTypeÂ» state__etÂ«IF usesHdlrÂ», Â«boolTypeÂ» handler__etÂ«ENDIFÂ»);
+		Â«ENDIFÂ»
 		
-		«IF generateImplementation»
-			«publicIf»void «opScope»executeInitTransition(«selfOnly») {
-				«var initt = xpmc.stateMachine.getInitTransition()»
-				int chain__et = «xpmc.getChain(initt).genChainId»;
-				«stateType» next__et = «opScopePriv»executeTransitionChain(«langExt.selfPointer(true)»chain__et«IF handleEvents», «langExt.nullPointer», «langExt.nullPointer»«ENDIF»);
-				next__et = «opScopePriv»enterHistory(«langExt.selfPointer(true)»next__et«IF usesHdlr», «langExt.booleanConstant(false)»«ENDIF»);
-				setState(«langExt.selfPointer(true)»next__et);
+		Â«IF generateImplementationÂ»
+			Â«publicIfÂ»void Â«opScopeÂ»executeInitTransition(Â«selfOnlyÂ») {
+				Â«var initt = xpmc.stateMachine.getInitTransition()Â»
+				int chain__et = Â«xpmc.getChain(initt).genChainIdÂ»;
+				Â«stateTypeÂ» next__et = Â«opScopePrivÂ»executeTransitionChain(Â«langExt.selfPointer(true)Â»chain__etÂ«IF handleEventsÂ», Â«langExt.nullPointerÂ», Â«langExt.nullPointerÂ»Â«ENDIFÂ»);
+				next__et = Â«opScopePrivÂ»enterHistory(Â«langExt.selfPointer(true)Â»next__etÂ«IF usesHdlrÂ», Â«langExt.booleanConstant(false)Â»Â«ENDIFÂ»);
+				setState(Â«langExt.selfPointer(true)Â»next__et);
 			}
-		«ELSE»
-			void «opScope»executeInitTransition(«selfOnly»);
-		«ENDIF»
+		Â«ELSEÂ»
+			void Â«opScopeÂ»executeInitTransition(Â«selfOnlyÂ»);
+		Â«ENDIFÂ»
 		
 		/* receiveEvent contains the main implementation of the FSM */
-		«IF generateImplementation»
-			«publicIf»void «opScope»receiveEventInternal(«langExt.selfPointer(mc.className, handleEvents)»«IF handleEvents»«ifItemPtr» ifitem, int localId, int evt, «langExt.voidPointer» generic_data__et«ENDIF») {
-				«IF async»
-					int trigger__et = (ifitem==«langExt.nullPointer»)? POLLING : localId + EVT_SHIFT*evt;
-				«ELSEIF eventDriven»
+		Â«IF generateImplementationÂ»
+			Â«publicIfÂ»void Â«opScopeÂ»receiveEventInternal(Â«langExt.selfPointer(mc.className, handleEvents)Â»Â«IF handleEventsÂ»Â«ifItemPtrÂ» ifitem, int localId, int evt, Â«langExt.voidPointerÂ» generic_data__etÂ«ENDIFÂ») {
+				Â«IF asyncÂ»
+					int trigger__et = (ifitem==Â«langExt.nullPointerÂ»)? POLLING : localId + EVT_SHIFT*evt;
+				Â«ELSEIF eventDrivenÂ»
 					int trigger__et = localId + EVT_SHIFT*evt;
-				«ENDIF»
+				Â«ENDIFÂ»
 				int chain__et = NOT_CAUGHT;
-				«stateType» catching_state__et = NO_STATE;
-				«IF usesHdlr»
-				«boolType» is_handler__et = «langExt.booleanConstant(false)»;
-				«ENDIF»
-				«IF async || eventDriven»
-					«markVariableUsed("trigger__et")»
-				«ENDIF»
+				Â«stateTypeÂ» catching_state__et = NO_STATE;
+				Â«IF usesHdlrÂ»
+				Â«boolTypeÂ» is_handler__et = Â«langExt.booleanConstant(false)Â»;
+				Â«ENDIFÂ»
+				Â«IF async || eventDrivenÂ»
+					Â«markVariableUsed("trigger__et")Â»
+				Â«ENDIFÂ»
 				
-				«IF handleEvents»
+				Â«IF handleEventsÂ»
 					if (!handleSystemEvent(ifitem, evt, generic_data__et)) {
-						«genStateSwitch(xpmc, usesHdlr)»
+						Â«genStateSwitch(xpmc, usesHdlr)Â»
 					}
-				«ELSE»
-					«genStateSwitch(xpmc, usesHdlr)»
-				«ENDIF»
+				Â«ELSEÂ»
+					Â«genStateSwitch(xpmc, usesHdlr)Â»
+				Â«ENDIFÂ»
 				if (chain__et != NOT_CAUGHT) {
-					«opScopePriv»exitTo(«langExt.selfPointer(true)»getState(«langExt.selfPointer(false)»), catching_state__et«IF usesHdlr», is_handler__et«ENDIF»);
+					Â«opScopePrivÂ»exitTo(Â«langExt.selfPointer(true)Â»getState(Â«langExt.selfPointer(false)Â»), catching_state__etÂ«IF usesHdlrÂ», is_handler__etÂ«ENDIFÂ»);
 					{
-						«stateType» next__et = «opScopePriv»executeTransitionChain(«langExt.selfPointer(true)»chain__et«IF handleEvents», ifitem, generic_data__et«ENDIF»);
-						next__et = «opScopePriv»enterHistory(«langExt.selfPointer(true)»next__et«IF usesHdlr», is_handler__et«ENDIF»);
-						setState(«langExt.selfPointer(true)»next__et);
-						«finalAction()»
+						Â«stateTypeÂ» next__et = Â«opScopePrivÂ»executeTransitionChain(Â«langExt.selfPointer(true)Â»chain__etÂ«IF handleEventsÂ», ifitem, generic_data__etÂ«ENDIFÂ»);
+						next__et = Â«opScopePrivÂ»enterHistory(Â«langExt.selfPointer(true)Â»next__etÂ«IF usesHdlrÂ», is_handler__etÂ«ENDIFÂ»);
+						setState(Â«langExt.selfPointer(true)Â»next__et);
+						Â«finalAction()Â»
 					}
 				}
 			}
-		«ELSE»
-			void «opScope»receiveEventInternal(«langExt.selfPointer(mc.className, handleEvents)»«IF handleEvents»«ifItemPtr» ifitem, int localId, int evt, «langExt.voidPointer» generic_data__et«ENDIF»);
-		«ENDIF»
-		«IF handleEvents»
-			«IF generateImplementation»
-				«publicIf»void «opScope»receiveEvent(«langExt.selfPointer(mc.className, true)»«ifItemPtr» ifitem, int evt, «langExt.voidPointer» generic_data__et) {
-					int localId = (ifitem==«langExt.nullPointer»)? 0 : ifitem«getLocalId»;
-					«opScope»receiveEventInternal(«langExt.selfPointer(true)»ifitem, localId, evt, generic_data__et);
+		Â«ELSEÂ»
+			void Â«opScopeÂ»receiveEventInternal(Â«langExt.selfPointer(mc.className, handleEvents)Â»Â«IF handleEventsÂ»Â«ifItemPtrÂ» ifitem, int localId, int evt, Â«langExt.voidPointerÂ» generic_data__etÂ«ENDIFÂ»);
+		Â«ENDIFÂ»
+		Â«IF handleEventsÂ»
+			Â«IF generateImplementationÂ»
+				Â«publicIfÂ»void Â«opScopeÂ»receiveEvent(Â«langExt.selfPointer(mc.className, true)Â»Â«ifItemPtrÂ» ifitem, int evt, Â«langExt.voidPointerÂ» generic_data__et) {
+					int localId = (ifitem==Â«langExt.nullPointerÂ»)? 0 : ifitemÂ«getLocalIdÂ»;
+					Â«opScopeÂ»receiveEventInternal(Â«langExt.selfPointer(true)Â»ifitem, localId, evt, generic_data__et);
 				}
-			«ELSE»
-				void «opScope»receiveEvent(«langExt.selfPointer(true)»«ifItemPtr» ifitem, int evt, «langExt.voidPointer» generic_data__et);
-			«ENDIF»
-		«ENDIF»
+			Â«ELSEÂ»
+				void Â«opScopeÂ»receiveEvent(Â«langExt.selfPointer(true)Â»Â«ifItemPtrÂ» ifitem, int evt, Â«langExt.voidPointerÂ» generic_data__et);
+			Â«ENDIFÂ»
+		Â«ENDIFÂ»
         '''
     }
     
@@ -447,12 +447,12 @@ abstract class AbstractStateMachineGenerator {
      * @return the generated code
      */
     def public String genDoCodes(State state) {'''
-        «IF state.hasDoCode(true)»
-            «state.getDoCodeOperationName()»(«langExt.selfPointer(false)»);
-        «ENDIF»
-        «IF state.eContainer.eContainer instanceof State»
-            «genDoCodes(state.eContainer.eContainer as State)»
-        «ENDIF»
+        Â«IF state.hasDoCode(true)Â»
+            Â«state.getDoCodeOperationName()Â»(Â«langExt.selfPointer(false)Â»);
+        Â«ENDIFÂ»
+        Â«IF state.eContainer.eContainer instanceof StateÂ»
+            Â«genDoCodes(state.eContainer.eContainer as State)Â»
+        Â«ENDIFÂ»
     '''}
     
     /**
@@ -469,33 +469,33 @@ abstract class AbstractStateMachineGenerator {
         var eventDriven = xpmc.modelComponent.commType==ComponentCommunicationType::EVENT_DRIVEN
         var dataDriven = xpmc.modelComponent.commType==ComponentCommunicationType::DATA_DRIVEN
         '''
-            switch (getState(«langExt.selfPointer(false)»)) {
-                «FOR state : xpmc.stateMachine.getLeafStateList()»
-                case «state.getGenStateId()»:
-                    «IF async»
-                        «var atlist =  xpmc.getActiveTriggers(state)»
-                        «IF !atlist.isEmpty»
+            switch (getState(Â«langExt.selfPointer(false)Â»)) {
+                Â«FOR state : xpmc.stateMachine.getLeafStateList()Â»
+                case Â«state.getGenStateId()Â»:
+                    Â«IF asyncÂ»
+                        Â«var atlist =  xpmc.getActiveTriggers(state)Â»
+                        Â«IF !atlist.isEmptyÂ»
                             switch(trigger__et) {
                                 case POLLING:
-                                    «genDataDrivenTriggers(xpmc, state, usesHdlr)»
+                                    Â«genDataDrivenTriggers(xpmc, state, usesHdlr)Â»
                                     break;
-                                «genEventDrivenTriggers(xpmc, state, atlist, usesHdlr)»
+                                Â«genEventDrivenTriggers(xpmc, state, atlist, usesHdlr)Â»
                             }
-                        «ELSE»
-                                «genDataDrivenTriggers(xpmc, state, usesHdlr)»
-                        «ENDIF»
-                    «ELSEIF dataDriven»
-                            «genDataDrivenTriggers(xpmc, state, usesHdlr)»
-                    «ELSEIF eventDriven»
-                        «var atlist =  xpmc.getActiveTriggers(state)»
-                        «IF !atlist.isEmpty»
+                        Â«ELSEÂ»
+                                Â«genDataDrivenTriggers(xpmc, state, usesHdlr)Â»
+                        Â«ENDIFÂ»
+                    Â«ELSEIF dataDrivenÂ»
+                            Â«genDataDrivenTriggers(xpmc, state, usesHdlr)Â»
+                    Â«ELSEIF eventDrivenÂ»
+                        Â«var atlist =  xpmc.getActiveTriggers(state)Â»
+                        Â«IF !atlist.isEmptyÂ»
                             switch(trigger__et) {
-                                    «genEventDrivenTriggers(xpmc, state, atlist, usesHdlr)»
+                                    Â«genEventDrivenTriggers(xpmc, state, atlist, usesHdlr)Â»
                             }
-                        «ENDIF»
-                    «ENDIF»
+                        Â«ENDIFÂ»
+                    Â«ENDIFÂ»
                     break;
-                «ENDFOR»
+                Â«ENDFORÂ»
                 default:
                     /* should not occur */
                     break;
@@ -514,22 +514,22 @@ abstract class AbstractStateMachineGenerator {
      */
     def public genDataDrivenTriggers(ExpandedModelComponent xpmc, State state, boolean usesHdlr) {
         '''
-            «genDoCodes(state)»
-            «var transitions = xpmc.getOutgoingTransitionsHierarchical(state).filter(t|t instanceof GuardedTransition)»
-            «FOR tr : transitions»
-                if («guard((tr as GuardedTransition), "", xpmc)»)
+            Â«genDoCodes(state)Â»
+            Â«var transitions = xpmc.getOutgoingTransitionsHierarchical(state).filter(t|t instanceof GuardedTransition)Â»
+            Â«FOR tr : transitionsÂ»
+                if (Â«guard((tr as GuardedTransition), "", xpmc)Â»)
                 {
-                    «var chain = xpmc.getChain(tr)»
-                    chain__et = «chain.genChainId»;
-                    catching_state__et = «chain.stateContext.genStateId»;
-                    «IF chain.isHandler() && usesHdlr»
+                    Â«var chain = xpmc.getChain(tr)Â»
+                    chain__et = Â«chain.genChainIdÂ»;
+                    catching_state__et = Â«chain.stateContext.genStateIdÂ»;
+                    Â«IF chain.isHandler() && usesHdlrÂ»
                         is_handler__et = TRUE;
-                    «ENDIF»
+                    Â«ENDIFÂ»
                 }
-                «IF tr!=transitions.last»
+                Â«IF tr!=transitions.lastÂ»
                     else 
-                «ENDIF»
-            «ENDFOR»
+                Â«ENDIFÂ»
+            Â«ENDFORÂ»
         '''
     }
     
@@ -545,24 +545,24 @@ abstract class AbstractStateMachineGenerator {
      */
     def public genEventDrivenTriggers(ExpandedModelComponent xpmc, State state, List<ActiveTrigger> atlist, boolean usesHdlr) {
         '''
-            «FOR at : atlist»
-                case «xpmc.getTriggerCodeName(at)»:
-                    «var needData = at.hasGuard»
-                    «IF needData»{ «langExt.getTypedDataDefinition(at.msg)»«ENDIF»
-                    «FOR tt : at.transitions SEPARATOR " else "»
-                        «var chain = xpmc.getChain(tt)»
-                        «guard(chain.getTransition as TriggeredTransition, at.trigger, xpmc)»
+            Â«FOR at : atlistÂ»
+                case Â«xpmc.getTriggerCodeName(at)Â»:
+                    Â«var needData = at.hasGuardÂ»
+                    Â«IF needDataÂ»{ Â«langExt.getTypedDataDefinition(at.msg)Â»Â«ENDIFÂ»
+                    Â«FOR tt : at.transitions SEPARATOR " else "Â»
+                        Â«var chain = xpmc.getChain(tt)Â»
+                        Â«guard(chain.getTransition as TriggeredTransition, at.trigger, xpmc)Â»
                         {
-                            chain__et = «chain.genChainId»;
-                            catching_state__et = «chain.stateContext.genStateId»;
-                            «IF chain.isHandler() && usesHdlr»
-                                is_handler__et = «langExt.booleanConstant(true)»;
-                            «ENDIF»
+                            chain__et = Â«chain.genChainIdÂ»;
+                            catching_state__et = Â«chain.stateContext.genStateIdÂ»;
+                            Â«IF chain.isHandler() && usesHdlrÂ»
+                                is_handler__et = Â«langExt.booleanConstant(true)Â»;
+                            Â«ENDIFÂ»
                         }
-                    «ENDFOR»
-                    «IF needData»}«ENDIF»
+                    Â«ENDFORÂ»
+                    Â«IF needDataÂ»}Â«ENDIFÂ»
                 break;
-            «ENDFOR»
+            Â«ENDFORÂ»
             default:
                 /* should not occur */
                 break;
