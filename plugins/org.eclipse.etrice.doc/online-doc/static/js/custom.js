@@ -2,6 +2,7 @@ $(function() {
 
 	var path = lastSegment(window.location.href);
 
+	// set menu expansion on site load (= remember last selection)
 	$("#sidebarMenu a[href='" + path + "']").each(function() {
 		$(this).addClass('active-item');
 		$(this).parents().each(function() {
@@ -22,12 +23,15 @@ $(function() {
 
 	});
 
+	// activate menu script (github.com/onokumus/metisMenu)
 	$('#sidebarMenu').metisMenu({ doubleTapToGo: true });
+
+	// set menu expansion on anchor navigation
 	$(window).on('hashchange', function() {
 		var path = lastSegment(window.location.href);
 		$('#sidebarMenu a').removeClass('active-item');
 		$("#sidebarMenu a[href='" + path + "']").addClass('active-item');
-		
+
 	});
 
 });
@@ -45,7 +49,7 @@ $('table').addClass('table');
 
 /*
  * window.onscroll = function() {myFunction()};
- * 
+ *
  * function myFunction() { var x = $('#sidebarMenu').height(); var y =
  * screen.height; if($('#sidebarMenu').height() < screen.height){
  * $('#sidebar').addClass('affix'); //$('#sidebar').affix({ // offset: { // top:

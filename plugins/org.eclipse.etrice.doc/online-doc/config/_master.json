@@ -1,5 +1,6 @@
 {
     "title": "eTrice Documentation",
+    "version": "0.5",
 	"xtext-langs" : {
 		"room" : "xtext_keyword_files/InternalRoom.tokens",
 		"etconfig" : "xtext_keyword_files/InternalConfig.tokens",
@@ -8,34 +9,34 @@
 	},
 	"toc" : [{
 		"name" : "Introduction",
-		"url"  : "introduction.html"	
+		"url"  : "introduction.html"
 	},
 	{
 		"name" : "Tutorials",
-		"url"  : "tutorials.html"	
+		"url"  : "tutorials.html"
 	},
 	{
 		"name" : "Standalone Generators",
-		"url"  : "standalone-generators.html"	
+		"url"  : "standalone-generators.html"
 	},
 	{
 		"name" : "Examples",
-		"url"  : "examples.html"	
+		"url"  : "examples.html"
 	},
 	{
 		"name" : "ROOM Concepts",
-		"url"  : "room-concepts.html"	
+		"url"  : "room-concepts.html"
 	},
 	{
 		"name" : "eTrice Features",
-		"url"  : "etrice-features.html"	
+		"url"  : "etrice-features.html"
 	},
 	{
 		"name" : "Feature Reference",
-		"url"  : "feature-reference.html"	
+		"url"  : "feature-reference.html"
 	},
 	{
 		"name" : "Developer's Reference",
-		"url"  : "developers-reference.html"	
+		"url"  : "developers-reference.html"
 	}]
 }

@@ -98,9 +98,9 @@
 </table>
 <ul>
   <li><em>ActorClass1</em> contains two ActorReferences (of ActorClass2 and ActorClass3)</li>
-  <li><em>port1</em> is an <em>external end port</em>. Since it connects external actors with the behavior of the ActorClass, it is defined in theInterface section and the Structure section of the ActorClass.</li>
+  <li><em>port1</em> is an <em>external end port</em>. Since it connects external actors with the behavior of the ActorClass, it is defined in the Interface section as well as in the Structure section of the ActorClass.</li>
   <li><em>port2</em> and <em>port3</em> are <em>internal end ports</em> and can only be connected to the ports of contained ActorReferences. Internal end ports connect the behavior of an ActorClass with its contained ActorReferences.</li>
-  <li><em>port4</em> is a relay port and connects external Actors to contained ActorReferences. This port can not be accessed by the behavior of the ActorClass.</li>
+  <li><em>port4</em> is a <em>relay port</em> and connects external Actors to contained ActorReferences. This port can not be accessed by the behavior of the ActorClass.</li>
   <li><em>port5</em> through <em>port9</em> are ports of contained actor references. port8 and port9 can communicate without interference with the containing actor class.</li>
   <li>Bindings can connect ports of the actor class and its contained actor references.</li>
 </ul>
@@ -173,11 +173,10 @@
 </ul>
 <h3><a href="#notation" name="notation"></a>Notation</h3>
 <h4><a href="#class-ports" name="class-ports"></a>Class Ports</h4>
-<p>These symbols can only appear on the border of an actor class symbol.</p>
 <p>Ports that define an external interface of the actor class, are defined in the Interface. Ports that define an internal interface are defined in the Structure (e.g. internal ports).</p>
 <ul>
   <li>
-  <p><em>External end ports</em> are defined in the Interface and the Structure</p></li>
+  <p><em>External end ports</em> are defined in the Interface and in the Structure</p></li>
   <li>
   <p><em>Internal end ports</em> are only defined in the Structure</p></li>
   <li>
@@ -186,6 +185,8 @@
   <p><em>End ports</em> are always connected to the internal behavior of the ActorClass</p></li>
   <li>
   <p><em>Replicated ports</em> can be defined with a fixed replication factor, e.g.<br><span><code>Port port18 [5]: ProtocolClass1</code></span><br>or a variable replication factor, e.g.<br><span><code>Port port18[*]: ProtocolClass1</code></span></p></li>
+  <li>
+  <p>The graphical symbols of Interface ports are drawn on the border of the actor class. The graphical symbols of Structure ports are drawn inside the border of an actor class.</p></li>
 </ul>
 <p>The table below shows all kinds of class ports with textual and graphical notation:</p>
 <table style="vertical-align: middle;text-align: center;" class="table">
@@ -332,7 +333,7 @@
   </tbody>
 </table>
 <h4><a href="#reference-ports" name="reference-ports"></a>Reference Ports</h4>
-<p>These symbols can only appear on the border of an actor class. Since the type of port is defined in the actor class, no textual notation for the Reference Ports exists.</p>
+<p>These symbols can only appear on the border of an actor class reference. Since the type of port is defined in the respective actor class, no textual notation for the Reference Ports exists.</p>
 <p>The table below shows all kinds of reference ports with textual and graphical notation:</p>
 <table>
   <thead>
@@ -367,7 +368,7 @@
 </table>
 <h2><a href="#dataclass" name="dataclass"></a>DataClass</h2>
 <h3><a href="#description" name="description"></a>Description</h3>
-<p>The DataClass enables the modeling of hierarchical complex data types and operations on them. The data class is the equivalent to a class in languages like Java or C++, but has less features. The content of a data class can always be sent via message between actors (defined as message data in a ProtocolClass).</p>
+<p>The DataClass allows the modeling of hierarchical complex data types and operations on them. The data class is the equivalent to a class in languages like Java or C++, but has less features. The content of a data class can always be sent via message between actors (defined as message data in a ProtocolClass).</p>
 <h3><a href="#notation" name="notation"></a>Notation</h3>
 <p>Example: DataClass using PrimitiveTypes</p>
 <pre><code class="room customHighlighted"><span class="keyword">DataClass</span> DataClass1 {
@@ -415,7 +416,7 @@
   <p>for a given actor hierarchy, a LayerConnection defines which <abbr title="Service Access Point">SAP</abbr> will be satisfied by (connected to) which <abbr title="Service Provising Point">SPP</abbr></p></li>
 </ol>
 <h3><a href="#notation" name="notation"></a>Notation</h3>
-<p>For the graphical and textual notation refer to following table:</p>
+<p>For the graphical and textual notation refer to the following table:</p>
 <table style="vertical-align: middle;text-align: center;caption-side: bottom;" class="table">
   <thead>
     <tr>
@@ -438,7 +439,7 @@
 </code></pre></td>
 	</tr>
 	</tbody>
-	<caption>The layer connections in this model define which services are provided by the *ServiceLayer* (*digitalIO* and *timer*)</caption>
+	<caption>The layer connections in this model define which services are provided by the <i>ServiceLayer</i> (<i>digitalIO</i> and <i>timer</i>)</caption>
 </table>
 <table style="vertical-align: middle;text-align: center;caption-side: bottom;" class="table">
 	<tbody>
@@ -459,7 +460,7 @@
 </code></pre></td>
 	</tr>
 	</tbody>
-	<caption>The implementation of the services (SPPs) can be delegated to sub actors. In this case the actor *ServiceLayer* relays (delegates) the implementation services *digitalIO* and *timer* to sub actors</caption>
+	<caption>The implementation of the services (SPPs) can be delegated to sub actors. In this case the actor *ServiceLayer* relays (delegates) the implementation services <i>digitalIO<ii> and <i>timer</i> to sub actors</ii></i></caption>
 </table>
 <table style="vertical-align: middle;text-align: center;caption-side: bottom;" class="table">
 	<tbody>
@@ -489,7 +490,7 @@
 </code></pre></td>
 	</tr>
   </tbody>
-  <caption>Every Actor inside the *ApplicationLayer* that contains an SAP with the same protocol as *timer* or *digitalIO* will be connected to the specified SPP</caption>
+  <caption>Every Actor inside the <i>ApplicationLayer</i> that contains an SAP with the same protocol as <i>timer</i> or <i>digitalIO</i> will be connected to the specified SPP</caption>
 </table>
 <h2><a href="#finite-state-machines" name="finite-state-machines"></a>Finite State Machines</h2>
 <h3><a href="#description" name="description"></a>Description</h3>
