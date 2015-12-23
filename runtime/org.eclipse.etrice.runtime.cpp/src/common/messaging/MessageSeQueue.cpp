@@ -14,19 +14,18 @@
 
 namespace etRuntime {
 
-
-MessageSeQueue::~MessageSeQueue() {
-	m_first = 0;
-	m_last = 0;
-}
-
-MessageSeQueue::MessageSeQueue(IRTObject* parent, std::string name)
+MessageSeQueue::MessageSeQueue(IRTObject* parent, const std::string& name)
 	: 	RTObject(parent, name),
 		m_first(0),
 		m_last(0),
 		m_highWaterMark(0),
 		m_size(0)
 {
+}
+
+MessageSeQueue::~MessageSeQueue() {
+	m_first = 0;
+	m_last = 0;
 }
 
 void MessageSeQueue::push(Message* msg) {
@@ -42,7 +41,7 @@ void MessageSeQueue::push(Message* msg) {
 
 }
 
-Message* MessageSeQueue::pop() {
+const Message* MessageSeQueue::pop() {
 	// TODO: optimize queue for concurrent push / pop
 	Message* pop_msg = m_first;
 	if (m_first == 0) {

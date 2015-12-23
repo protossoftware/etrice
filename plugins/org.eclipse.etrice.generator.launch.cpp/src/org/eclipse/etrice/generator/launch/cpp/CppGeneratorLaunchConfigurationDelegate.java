@@ -4,14 +4,15 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * CONTRIBUTORS:
  * 		Thomas Schuetz and Henrik Rentz-Reichert (initial contribution)
- * 
+ *
  *******************************************************************************/
 
 package org.eclipse.etrice.generator.launch.cpp;
 
+import org.eclipse.etrice.generator.cpp.Main;
 import org.eclipse.etrice.generator.fsm.base.ILineOutput;
 import org.eclipse.etrice.generator.launch.GeneratorLaunchConfigurationDelegate;
 
@@ -26,9 +27,9 @@ public class CppGeneratorLaunchConfigurationDelegate extends GeneratorLaunchConf
 	 */
 	@Override
 	protected void runGenerator(String[] args, ILineOutput out) {
-		org.eclipse.etrice.generator.cpp.Main.setOutput(out);
-		org.eclipse.etrice.generator.cpp.Main.setTerminateOnError(false);
-		org.eclipse.etrice.generator.cpp.Main.main(args);
+		Main.setOutput(out);
+		Main.setTerminateOnError(false);
+		Main.main(args);
 	}
 
 	/* (non-Javadoc)

@@ -15,10 +15,8 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.core.room.Attribute;
-import org.eclipse.etrice.core.room.ClassStructor;
 import org.eclipse.etrice.core.room.ComplexType;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DataType;
@@ -26,7 +24,6 @@ import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
-import org.eclipse.etrice.generator.base.AbstractGenerator;
 import org.eclipse.etrice.generator.fsm.base.FileSystemHelpers;
 import org.eclipse.etrice.generator.fsm.base.IGeneratorFileIo;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
@@ -91,271 +88,196 @@ public class DataClassGen {
   }
   
   public CharSequence generate(final Root root, final DataClass dc) {
-    CharSequence _xblockexpression = null;
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package ");
+    String _package = this._roomExtensions.getPackage(dc);
+    _builder.append(_package, "");
+    _builder.append(";");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;");
+    _builder.newLine();
+    _builder.append("import java.io.Serializable;");
+    _builder.newLine();
+    _builder.newLine();
+    EList<RoomModel> models = root.getReferencedModels(dc);
+    _builder.newLineIfNotEmpty();
     {
-      EList<ClassStructor> _structors = dc.getStructors();
-      final Function1<ClassStructor, Boolean> _function = new Function1<ClassStructor, Boolean>() {
-        public Boolean apply(final ClassStructor it) {
-          return Boolean.valueOf(it.isConstructor());
-        }
-      };
-      final ClassStructor ctor = IterableExtensions.<ClassStructor>findFirst(_structors, _function);
-      EList<ClassStructor> _structors_1 = dc.getStructors();
-      final Function1<ClassStructor, Boolean> _function_1 = new Function1<ClassStructor, Boolean>() {
-        public Boolean apply(final ClassStructor it) {
-          boolean _isConstructor = it.isConstructor();
-          return Boolean.valueOf((!_isConstructor));
-        }
-      };
-      final ClassStructor dtor = IterableExtensions.<ClassStructor>findFirst(_structors_1, _function_1);
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("package ");
-      String _package = this._roomExtensions.getPackage(dc);
-      _builder.append(_package, "");
-      _builder.append(";");
-      _builder.newLineIfNotEmpty();
-      _builder.newLine();
-      _builder.append("import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;");
-      _builder.newLine();
-      _builder.append("import java.io.Serializable;");
-      _builder.newLine();
-      _builder.newLine();
-      EList<RoomModel> models = root.getReferencedModels(dc);
-      _builder.newLineIfNotEmpty();
-      {
-        for(final RoomModel model : models) {
-          _builder.append("import ");
-          String _name = model.getName();
-          _builder.append(_name, "");
-          _builder.append(".*;");
-          _builder.newLineIfNotEmpty();
-        }
+      for(final RoomModel model : models) {
+        _builder.append("import ");
+        String _name = model.getName();
+        _builder.append(_name, "");
+        _builder.append(".*;");
+        _builder.newLineIfNotEmpty();
       }
-      _builder.newLine();
-      CharSequence _userCode = this._procedureHelpers.userCode(dc, 1);
-      _builder.append(_userCode, "");
-      _builder.newLineIfNotEmpty();
-      _builder.newLine();
-      _builder.newLine();
-      _builder.append("public class ");
-      String _name_1 = dc.getName();
-      _builder.append(_name_1, "");
-      {
-        DataClass _base = dc.getBase();
-        boolean _notEquals = (!Objects.equal(_base, null));
-        if (_notEquals) {
-          _builder.append(" extends ");
-          DataClass _base_1 = dc.getBase();
-          String _name_2 = _base_1.getName();
-          _builder.append(_name_2, "");
-        }
-      }
-      _builder.append(" implements Serializable {");
-      _builder.newLineIfNotEmpty();
-      _builder.append("\t");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("private static final long serialVersionUID = ");
-      String _package_1 = this._roomExtensions.getPackage(dc);
-      String _name_3 = dc.getName();
-      String _plus = (_package_1 + _name_3);
-      int _hashCode = _plus.hashCode();
-      _builder.append(_hashCode, "\t");
-      _builder.append("L;");
-      _builder.newLineIfNotEmpty();
-      _builder.append("\t");
-      _builder.newLine();
-      _builder.append("\t");
-      CharSequence _userCode_1 = this._procedureHelpers.userCode(dc, 2);
-      _builder.append(_userCode_1, "\t");
-      _builder.newLineIfNotEmpty();
-      _builder.append("\t");
-      _builder.newLine();
-      _builder.append("\t");
-      EList<Attribute> _attributes = dc.getAttributes();
-      CharSequence _attributes_1 = this._procedureHelpers.attributes(_attributes);
-      _builder.append(_attributes_1, "\t");
-      _builder.newLineIfNotEmpty();
-      _builder.append("\t");
-      _builder.newLine();
-      _builder.append("\t");
-      EList<Attribute> _attributes_2 = dc.getAttributes();
-      String _name_4 = dc.getName();
-      CharSequence _attributeSettersGettersImplementation = this._procedureHelpers.attributeSettersGettersImplementation(_attributes_2, _name_4);
-      _builder.append(_attributeSettersGettersImplementation, "\t");
-      _builder.newLineIfNotEmpty();
-      _builder.append("\t");
-      _builder.newLine();
-      _builder.append("\t");
-      EList<StandardOperation> _operations = dc.getOperations();
-      String _name_5 = dc.getName();
-      CharSequence _operationsImplementation = this._procedureHelpers.operationsImplementation(_operations, _name_5);
-      _builder.append(_operationsImplementation, "\t");
-      _builder.newLineIfNotEmpty();
-      _builder.append("\t");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("//--------------------- destruction");
-      _builder.newLine();
-      _builder.append("\t");
-      String _name_6 = dc.getName();
-      CharSequence _destructorSignature = this._procedureHelpers.getDestructorSignature(_name_6);
-      _builder.append(_destructorSignature, "\t");
-      _builder.append(" {");
-      _builder.newLineIfNotEmpty();
-      _builder.append("\t\t");
-      {
-        DataClass _base_2 = dc.getBase();
-        boolean _notEquals_1 = (!Objects.equal(_base_2, null));
-        if (_notEquals_1) {
-          _builder.append("super.dtor();");
-        }
-      }
-      _builder.newLineIfNotEmpty();
-      _builder.append("\t\t");
-      {
-        boolean _notEquals_2 = (!Objects.equal(dtor, null));
-        if (_notEquals_2) {
-          AbstractGenerator _instance = AbstractGenerator.getInstance();
-          DetailCode _detailCode = dtor.getDetailCode();
-          String _translatedCode = _instance.getTranslatedCode(_detailCode);
-          _builder.append(_translatedCode, "\t\t");
-        }
-      }
-      _builder.newLineIfNotEmpty();
-      _builder.append("\t");
-      _builder.append("}");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("// default constructor");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("public ");
-      String _name_7 = dc.getName();
-      _builder.append(_name_7, "\t");
-      _builder.append("() {");
-      _builder.newLineIfNotEmpty();
-      _builder.append("\t\t");
-      _builder.append("super();");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.newLine();
-      _builder.append("\t\t");
-      EList<Attribute> _attributes_3 = dc.getAttributes();
-      CharSequence _attributeInitialization = this._initialization.attributeInitialization(_attributes_3, dc, true);
-      _builder.append(_attributeInitialization, "\t\t");
-      _builder.newLineIfNotEmpty();
-      {
-        boolean _notEquals_3 = (!Objects.equal(ctor, null));
-        if (_notEquals_3) {
-          _builder.append("\t\t");
-          _builder.append("{");
-          _builder.newLine();
-          _builder.append("\t\t");
-          _builder.append("\t");
-          _builder.append("// user defined constructor body");
-          _builder.newLine();
-          _builder.append("\t\t");
-          _builder.append("\t");
-          AbstractGenerator _instance_1 = AbstractGenerator.getInstance();
-          DetailCode _detailCode_1 = ctor.getDetailCode();
-          String _translatedCode_1 = _instance_1.getTranslatedCode(_detailCode_1);
-          _builder.append(_translatedCode_1, "\t\t\t");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t\t");
-          _builder.append("}");
-          _builder.newLine();
-        }
-      }
-      _builder.append("\t");
-      _builder.append("}");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("// constructor using fields");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("public ");
-      String _name_8 = dc.getName();
-      _builder.append(_name_8, "\t");
-      _builder.append("(");
-      CharSequence _argList = this.argList(dc);
-      _builder.append(_argList, "\t");
-      _builder.append(") {");
-      _builder.newLineIfNotEmpty();
-      {
-        DataClass _base_3 = dc.getBase();
-        boolean _notEquals_4 = (!Objects.equal(_base_3, null));
-        if (_notEquals_4) {
-          _builder.append("\t\t");
-          _builder.append("super(");
-          DataClass _base_4 = dc.getBase();
-          String _paramList = this.paramList(_base_4);
-          _builder.append(_paramList, "\t\t");
-          _builder.append(");");
-          _builder.newLineIfNotEmpty();
-        } else {
-          _builder.append("\t\t");
-          _builder.append("super();");
-          _builder.newLine();
-        }
-      }
-      _builder.append("\t\t");
-      _builder.newLine();
-      {
-        EList<Attribute> _attributes_4 = dc.getAttributes();
-        for(final Attribute a : _attributes_4) {
-          _builder.append("\t\t");
-          _builder.append("this.");
-          String _name_9 = a.getName();
-          _builder.append(_name_9, "\t\t");
-          _builder.append(" = ");
-          String _name_10 = a.getName();
-          _builder.append(_name_10, "\t\t");
-          _builder.append(";");
-          _builder.newLineIfNotEmpty();
-        }
-      }
-      _builder.append("\t");
-      _builder.append("}");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("// deep copy");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("public ");
-      String _name_11 = dc.getName();
-      _builder.append(_name_11, "\t");
-      _builder.append(" deepCopy() {");
-      _builder.newLineIfNotEmpty();
-      _builder.append("\t\t");
-      String _name_12 = dc.getName();
-      _builder.append(_name_12, "\t\t");
-      _builder.append(" copy = new ");
-      String _name_13 = dc.getName();
-      _builder.append(_name_13, "\t\t");
-      _builder.append("();");
-      _builder.newLineIfNotEmpty();
-      _builder.append("\t\t");
-      String _deepCopy = this.deepCopy(dc);
-      _builder.append(_deepCopy, "\t\t");
-      _builder.newLineIfNotEmpty();
-      _builder.append("\t\t");
-      _builder.append("return copy;");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("}");
-      _builder.newLine();
-      _builder.append("};");
-      _builder.newLine();
-      _xblockexpression = _builder;
     }
-    return _xblockexpression;
+    _builder.newLine();
+    CharSequence _userCode = this._procedureHelpers.userCode(dc, 1);
+    _builder.append(_userCode, "");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("public class ");
+    String _name_1 = dc.getName();
+    _builder.append(_name_1, "");
+    {
+      DataClass _base = dc.getBase();
+      boolean _notEquals = (!Objects.equal(_base, null));
+      if (_notEquals) {
+        _builder.append(" extends ");
+        DataClass _base_1 = dc.getBase();
+        String _name_2 = _base_1.getName();
+        _builder.append(_name_2, "");
+      }
+    }
+    _builder.append(" implements Serializable {");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("private static final long serialVersionUID = ");
+    String _package_1 = this._roomExtensions.getPackage(dc);
+    String _name_3 = dc.getName();
+    String _plus = (_package_1 + _name_3);
+    int _hashCode = _plus.hashCode();
+    _builder.append(_hashCode, "\t");
+    _builder.append("L;");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("\t");
+    CharSequence _userCode_1 = this._procedureHelpers.userCode(dc, 2);
+    _builder.append(_userCode_1, "\t");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("\t");
+    EList<Attribute> _attributes = dc.getAttributes();
+    CharSequence _attributes_1 = this._procedureHelpers.attributes(_attributes);
+    _builder.append(_attributes_1, "\t");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("\t");
+    EList<Attribute> _attributes_2 = dc.getAttributes();
+    String _name_4 = dc.getName();
+    CharSequence _attributeSettersGettersImplementation = this._procedureHelpers.attributeSettersGettersImplementation(_attributes_2, _name_4);
+    _builder.append(_attributeSettersGettersImplementation, "\t");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("\t");
+    EList<StandardOperation> _operations = dc.getOperations();
+    String _name_5 = dc.getName();
+    CharSequence _operationsImplementation = this._procedureHelpers.operationsImplementation(_operations, _name_5);
+    _builder.append(_operationsImplementation, "\t");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("// default constructor");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("public ");
+    String _name_6 = dc.getName();
+    _builder.append(_name_6, "\t");
+    _builder.append("() {");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t");
+    _builder.append("super();");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t\t");
+    EList<Attribute> _attributes_3 = dc.getAttributes();
+    CharSequence _attributeInitialization = this._initialization.attributeInitialization(_attributes_3, dc, true);
+    _builder.append(_attributeInitialization, "\t\t");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("\t\t");
+    String _userStructorBody = this._procedureHelpers.userStructorBody(dc, true);
+    _builder.append(_userStructorBody, "\t\t");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("// constructor using fields");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("public ");
+    String _name_7 = dc.getName();
+    _builder.append(_name_7, "\t");
+    _builder.append("(");
+    CharSequence _argList = this.argList(dc);
+    _builder.append(_argList, "\t");
+    _builder.append(") {");
+    _builder.newLineIfNotEmpty();
+    {
+      DataClass _base_2 = dc.getBase();
+      boolean _notEquals_1 = (!Objects.equal(_base_2, null));
+      if (_notEquals_1) {
+        _builder.append("\t\t");
+        _builder.append("super(");
+        DataClass _base_3 = dc.getBase();
+        String _paramList = this.paramList(_base_3);
+        _builder.append(_paramList, "\t\t");
+        _builder.append(");");
+        _builder.newLineIfNotEmpty();
+      } else {
+        _builder.append("\t\t");
+        _builder.append("super();");
+        _builder.newLine();
+      }
+    }
+    _builder.newLine();
+    {
+      EList<Attribute> _attributes_4 = dc.getAttributes();
+      for(final Attribute a : _attributes_4) {
+        _builder.append("\t\t");
+        _builder.append("this.");
+        String _name_8 = a.getName();
+        _builder.append(_name_8, "\t\t");
+        _builder.append(" = ");
+        String _name_9 = a.getName();
+        _builder.append(_name_9, "\t\t");
+        _builder.append(";");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    _builder.newLine();
+    _builder.append("\t\t");
+    String _userStructorBody_1 = this._procedureHelpers.userStructorBody(dc, true);
+    _builder.append(_userStructorBody_1, "\t\t");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("// deep copy");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("public ");
+    String _name_10 = dc.getName();
+    _builder.append(_name_10, "\t");
+    _builder.append(" deepCopy() {");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t");
+    String _name_11 = dc.getName();
+    _builder.append(_name_11, "\t\t");
+    _builder.append(" copy = new ");
+    String _name_12 = dc.getName();
+    _builder.append(_name_12, "\t\t");
+    _builder.append("();");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t");
+    String _deepCopy = this.deepCopy(dc);
+    _builder.append(_deepCopy, "\t\t");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t");
+    _builder.append("return copy;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("};");
+    _builder.newLine();
+    return _builder;
   }
   
   public String paramList(final DataClass _dc) {

@@ -1,26 +1,26 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: C++ Generator
-Bundle-SymbolicName: org.eclipse.etrice.generator.cpp
-Require-Bundle: org.eclipse.etrice.core.room.ui;bundle-version="0.5.0",
- org.eclipse.etrice.generator;bundle-version="0.5.0",
- org.eclipse.etrice.core.config;bundle-version="0.5.0",
- org.eclipse.etrice.generator.doc;bundle-version="0.5.0",
+Bundle-Name: eTrice C++ Generator
+Bundle-Vendor: Eclipse eTrice (Incubation)
+Bundle-Version: 0.5.0.qualifier
+Bundle-SymbolicName: org.eclipse.etrice.generator.cpp;singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.eclipse.etrice.core.genmodel;bundle-version="0.5.0",
+ org.eclipse.etrice.core.etphys;bundle-version="0.5.0",
+ org.eclipse.etrice.core.etmap;bundle-version="0.5.0",
  org.eclipse.etrice.generator.fsm;bundle-version="0.5.0",
- org.eclipse.etrice.core.genmodel;bundle-version="0.5.0",
+ org.eclipse.etrice.generator;bundle-version="0.5.0",
+ org.eclipse.etrice.generator.config;bundle-version="0.5.0",
+ org.eclipse.etrice.generator.doc;bundle-version="0.5.0",
  org.eclipse.core.resources;bundle-version="3.6.0",
  org.eclipse.core.runtime;bundle-version="3.6.0",
  org.eclipse.ui;bundle-version="3.7.0",
  org.eclipse.ui.ide;bundle-version="3.7.0",
- org.eclipse.xtext;bundle-version="2.6.0",
  org.eclipse.xtend.lib;bundle-version="2.6.0",
- com.google.guava,
- org.eclipse.xtext.xbase.lib;bundle-version="2.6.0",
- org.eclipse.etrice.core.etmap,
- org.eclipse.etrice.core.etphys,
- org.eclipse.etrice.generator.config
-Bundle-Version: 0.5.0.qualifier
-Bundle-Vendor: Eclipse eTrice (Incubation)
+ org.eclipse.xtext.generator;bundle-version="2.6.0",
+ org.eclipse.xtext.util;bundle-version="2.6.0"
+Import-Package: org.apache.log4j
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: org.eclipse.etrice.generator.cpp
-
+Export-Package: org.eclipse.etrice.generator.cpp,
+ org.eclipse.etrice.generator.cpp.gen,
+ org.eclipse.etrice.generator.cpp.setup

@@ -23,26 +23,38 @@ namespace etRuntime {
 class AbstractMessageReceiver: public RTObject, public virtual IMessageReceiver {
 
 public:
-	Address getAddress() const {
+
+	virtual ~AbstractMessageReceiver() {}
+
+	virtual const Address& getAddress() const {
 		return m_address;
 	}
-	virtual ~AbstractMessageReceiver() {};
 
 protected:
-	AbstractMessageReceiver(IRTObject* parent, Address address, std::string name)
-	: IMessageReceiver(),
-	  RTObject(parent, name),
-	  m_address(address)
-	{
+	AbstractMessageReceiver(IRTObject* parent, const std::string& name) :
+			RTObject(parent, name),
+			m_address(Address::EMPTY) {
+	}
 
+	AbstractMessageReceiver(IRTObject* parent, const Address& address, const std::string& name) :
+			RTObject(parent, name),
+			m_address(address) {
+	}
+
+	void setAddress(const Address& address) {
+		m_address = address;
+	}
+
+	virtual std::string toString() const {
+		return getName() + " " + m_address.toID();
 	}
 
 private:
 	Address m_address;
 
-	AbstractMessageReceiver();
+	AbstractMessageReceiver(AbstractMessageReceiver const&);
+	AbstractMessageReceiver& operator=(AbstractMessageReceiver const&);
 };
-
 
 }
 #endif /* ABSTRACTMESSAGERECEIVER_H_ */

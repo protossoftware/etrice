@@ -18,6 +18,10 @@
  * \author Thomas Schuetz
  */
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #ifndef _ETTIME_H_
 #define _ETTIME_H_
 
@@ -43,3 +47,7 @@ typedef struct etTime {
 void getTimeFromTarget(etTime *t);
 
 #endif /* _ETTIME_H_ */
+
+#ifdef __cplusplus
+}
+#endif

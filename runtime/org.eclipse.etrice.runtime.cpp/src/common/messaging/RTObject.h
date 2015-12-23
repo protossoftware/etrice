@@ -13,36 +13,64 @@
 #ifndef RTOBJECT_H_
 #define RTOBJECT_H_
 
-#include <string>
 #include "common/messaging/IRTObject.h"
+#include <string>
+#include <vector>
 
 namespace etRuntime {
 
-class RTObject :  public virtual IRTObject{
+class RTObject: public virtual IRTObject {
 public:
-	RTObject();
-	RTObject(IRTObject* parent, std::string name);
-	RTObject(const RTObject & right);
-	RTObject & operator = (RTObject right);
+	RTObject(IRTObject* parent, const std::string& name);
 
 	virtual ~RTObject();
 
-	IRTObject* getParent() const { return m_parent; };
-	const std::string& getName() const { return m_name; };
+	virtual const std::string& getName() const {
+		return m_name;
+	}
+	virtual const std::string& getInstancePath() const {
+		return m_instancePath;
+	}
+	virtual const std::string& getInstancePathName() const {
+		return m_instancePathName;
+	}
 
-	virtual const std::string& getInstancePath() const;
-	virtual const std::string& getInstancePathName() const;
+	virtual std::vector<IRTObject*>& getChildren() {
+		return m_children;
+	}
+
+	virtual IRTObject* getParent() const {
+		return m_parent;
+	}
+
+	virtual IRTObject* getRoot() const;
+
+	virtual IRTObject* getChild(const std::string& name) const;
+
+	virtual IRTObject* getObject(const std::string& path) const;
+
+	virtual int getThreadForPath(const std::string& path) const;
+
+protected:
+	virtual void destroy();
+
+	std::string toStringRecursive(const std::string& indent) const;
+	std::string toStringRecursive() const;
+	virtual std::string toString() const;
 
 private:
-	void setPathNames();
 
-	IRTObject* m_parent;
 	std::string m_name;
 	// for speed optimization the instance paths are created at instantiation
 	// and used as const ref parameters in the logging methods to avoid copying
 	std::string m_instancePath;
 	std::string m_instancePathName;
+	IRTObject* m_parent;
+	std::vector<IRTObject*> m_children;
 
+	RTObject();
+	RTObject(RTObject const&);
+	RTObject& operator=(RTObject const&);
 };
 
 } /* namespace etRuntime */

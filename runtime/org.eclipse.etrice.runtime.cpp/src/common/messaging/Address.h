@@ -13,39 +13,43 @@
 #ifndef ADDRESS_H_
 #define ADDRESS_H_
 
+#include "etDatatypes.h"
 #include <string>
-#include <vector>
 
 namespace etRuntime {
 
 class Address {
-	public:
-		explicit Address(int nodeID=0, int threadID=0, int objectID=0);
-		Address(const Address & right);
-		~Address();
+public:
 
-		Address & operator = (const Address& right);
-		bool operator< (const Address& right) const;
+	static const Address EMPTY;
 
-		std::string toString() const;
-		std::string toID()const;
+	Address(int nodeID, int threadID, int objectID);
+	Address(const Address& right);
+	~Address();
 
-		Address createInc(int i);
-		bool isValid() const {
-			return (m_nodeID != 0) || (m_threadID != 0) || (m_objectID != 0);
-		};
+	Address& operator =(const Address& right);
+	bool operator==(const Address& other) const;
+	bool operator!=(const Address& other) const;
+	bool operator< (const Address& right) const;
 
-		int m_nodeID;
-		int m_threadID;
-		int m_objectID;
+	std::string toString() const;
+	std::string toID() const;
 
-		//debug helper function
-		static void printAddrVector(const std::vector<std::vector<etRuntime::Address> >& addresses);
+	Address createInc() const;
 
-	private:
+	inline etBool isValid() const {
+		return *this != EMPTY;
+	}
+
+	int m_nodeID;
+	int m_threadID;
+	int m_objectID;
+
+private:
+	Address();
+
 };
 
 } /* namespace etRuntime */
 #endif /* ADDRESS_H_ */
-
 

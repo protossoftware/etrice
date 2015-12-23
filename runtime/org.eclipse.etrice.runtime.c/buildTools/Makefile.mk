@@ -15,7 +15,9 @@
 # IN_LDLIBS
 # IN_PREREQS
 
-# Note: Variables set from environment or make parameter are unmodifiable.
+# Note: avoid trailing spaces !
+
+# Note: Variables from environment or cmd are unmodifiable.
 # E.g. use additional variables:
 # IN_SRCDIRS_REC 	+= ${APP_SRCDIRS_REC}
 # IN_SRCDIRS_REC 	+= ...
@@ -50,6 +52,7 @@ endef
 
 
 ifeq ($(strip ${IN_BUILD_DIR}),)
+# TODO: TARGET_BUILD_DIR should not be here
 	IN_BUILD_DIR := ${TARGET_BUILD_DIR}
 endif
 
@@ -73,6 +76,7 @@ M_OBJS 				:=
 
 M_SOURCES 	:= $(call CANONICAL_PATH, ${M_SOURCES})
 M_SOURCES 	+= $(call CANONICAL_PATH,$(foreach DIR,${IN_SRCDIRS_REC},$(call REC_FILE_SEARCH,${DIR}/,*.c)))
+M_SOURCES 	+= $(call CANONICAL_PATH,$(foreach DIR,${IN_SRCDIRS_REC},$(call REC_FILE_SEARCH,${DIR}/,*.cpp)))
 M_OBJS 		+= $(addprefix ${M_BUILD_DIR}/,$(addsuffix .o,$(basename ${M_SOURCES})))
 
 M_DEFS := $(addprefix -D,${M_DEFS})
@@ -85,6 +89,10 @@ ${M_BUILD_DIR}/%.o: %.c
 		$(strip ${CC} -o $@ -c ${M_CFLAGS} ${M_SRC_CFLAGS} ${M_INCDIRS} \
 		    ${M_SRC_INCDIRS} ${M_SRC_DEFS} ${M_DEFS} $<)
 
+${M_BUILD_DIR}/%.o: %.cpp
+		@mkdir -p $(dir $@)
+		$(strip ${CXX} -o $@ -c ${M_CFLAGS} ${M_SRC_CFLAGS} ${M_INCDIRS} \
+		    ${M_SRC_INCDIRS} ${M_SRC_DEFS} ${M_DEFS} $<)
 
 .PHONY: build clean-all
 

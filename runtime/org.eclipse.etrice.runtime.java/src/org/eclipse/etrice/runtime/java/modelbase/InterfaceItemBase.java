@@ -18,11 +18,11 @@ import org.eclipse.etrice.runtime.java.messaging.RTServices;
 /**
  * The abstract base class for actor class interface items like {@link PortBase}
  * and {@link InterfaceItemBroker}s.
- * 
+ *
  * @author Henrik Rentz-Reichert
  */
 public abstract class InterfaceItemBase extends AbstractMessageReceiver implements IInterfaceItem {
-	
+
 	/**
 	 * If this is part of an {@link IReplicatedInterfaceItem} then the
 	 * owner of this item is stored in this field.
@@ -30,18 +30,18 @@ public abstract class InterfaceItemBase extends AbstractMessageReceiver implemen
 	 * disconnected then it is also removed from its parent and destroyed.
 	 */
 	private IReplicatedInterfaceItem replicator = null;
-	
-	protected IMessageService ownMsgReceiver;
-	protected IMessageReceiver peerMsgReceiver;
+
+	private IMessageService ownMsgReceiver;
+	private IMessageReceiver peerMsgReceiver;
 	private int localId;
 	private int idx;
-	protected Address peerAddress = null;
+	private Address peerAddress = null;
 	private IInterfaceItem peer;
 
 
 	/**
 	 * The constructor determines the thread of its {@link IEventReceiver}
-	 * 
+	 *
 	 * @param owner
 	 * @param name
 	 * @param localId
@@ -49,20 +49,20 @@ public abstract class InterfaceItemBase extends AbstractMessageReceiver implemen
 	 */
 	public InterfaceItemBase (IInterfaceItemOwner owner, String name, int localId, int idx) {
 		super(owner.getEventReceiver(), name);
-		
+
 		this.localId = localId;
 		this.idx = idx;
-		
+
 		if (owner instanceof IReplicatedInterfaceItem)
 			replicator = (IReplicatedInterfaceItem) owner;
-		
+
 		int thread = owner.getEventReceiver().getThread();
 		if (thread>=0) {
 			IMessageService msgSvc = RTServices.getInstance().getMsgSvcCtrl().getMsgSvc(thread);
 			Address addr = msgSvc.getFreeAddress();
 			setAddress(addr);
 			msgSvc.addMessageReceiver(this);
-			
+
 			this.ownMsgReceiver = msgSvc;
 		}
 	}
@@ -70,30 +70,30 @@ public abstract class InterfaceItemBase extends AbstractMessageReceiver implemen
 	public synchronized IInterfaceItem connectWith(IInterfaceItem peer) {
 		if (peer!=null) {
 			this.peer = peer;
-			
+
 			if (peer instanceof IInterfaceItemBroker) {
 				this.peer = peer.connectWith(this);
 				return this.peer;
 			}
-			
+
 			if (peer instanceof IReplicatedInterfaceItem)
 				peer = ((IReplicatedInterfaceItem) peer).createSubInterfaceItem();
-			
+
 			if (peer instanceof InterfaceItemBase) {
 				InterfaceItemBase thePeer = (InterfaceItemBase) peer;
-				
+
 				// connect with each other
 				peerAddress = thePeer.getAddress();
 				thePeer.peerAddress = getAddress();
 				this.peerMsgReceiver = thePeer.ownMsgReceiver;
 				thePeer.peerMsgReceiver = ownMsgReceiver;
 			}
-			
+
 		}
-		
+
 		return peer;
 	}
-	
+
 	protected synchronized void disconnect() {
 		disconnectInternal();
 		if (peer!=null) {
@@ -106,11 +106,12 @@ public abstract class InterfaceItemBase extends AbstractMessageReceiver implemen
 	private void disconnectInternal() {
 		peerAddress = null;
 		peerMsgReceiver = null;
-		
+
 		if (replicator!=null)
 			destroy();
 	}
-	
+
+
 	protected IMessageReceiver getMsgReceiver() {
 		return ownMsgReceiver;
 	}
@@ -122,7 +123,7 @@ public abstract class InterfaceItemBase extends AbstractMessageReceiver implemen
 	protected synchronized IMessageReceiver getPeerMsgReceiver() {
 		return peerMsgReceiver;
 	}
-	
+
 	public IEventReceiver getActor() {
 		return (IEventReceiver) getParent();
 	}
@@ -134,7 +135,7 @@ public abstract class InterfaceItemBase extends AbstractMessageReceiver implemen
 	public int getIdx() {
 		return idx;
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see org.eclipse.etrice.runtime.java.messaging.RTObject#destroy()
 	 */
@@ -143,26 +144,26 @@ public abstract class InterfaceItemBase extends AbstractMessageReceiver implemen
 		if (peerAddress!=null) {
 			disconnect();
 		}
-		
+
 		if (replicator!=null) {
 			replicator.removeItem(this);
 		}
-		
+
 		ownMsgReceiver.removeMessageReceiver(this);
 		ownMsgReceiver.freeAddress(getAddress());
-		
+
 		super.destroy();
 	}
-	
+
 	@Override
 	public String toString() {
 		return ((replicator!=null)?"sub ":"")+"port "+getName()+" "+getAddress()+" <-> "+getPeerAddress();
 	}
-	
+
 	public static void connect(IRTObject obj, String path1, String path2) {
 		IRTObject obj1 = obj.getObject(path1);
 		IRTObject obj2 = obj.getObject(path2);
-		
+
 		if (obj1 instanceof IInterfaceItem && obj2 instanceof IInterfaceItem) {
 			((IInterfaceItem)obj1).connectWith((IInterfaceItem) obj2);
 		}

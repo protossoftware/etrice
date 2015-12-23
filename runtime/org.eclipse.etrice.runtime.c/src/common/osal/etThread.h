@@ -18,6 +18,10 @@
  * \author Thomas Schuetz, Thomas Jung
  *
  */
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #ifndef _ETTHREAD_H_
 #define _ETTHREAD_H_
 
@@ -97,3 +101,7 @@ etOSThreadId etThread_self_id(void);
 
 
 #endif /* _ETTHREAD_H_ */
+
+#ifdef __cplusplus
+}
+#endif

@@ -10,114 +10,82 @@
  *
  *******************************************************************************/
 
-#include "common/modelbase/SubSystemRunnerBase.h"
+#include "SubSystemRunnerBase.h"
+
 #include "common/modelbase/SubSystemClassBase.h"
-#include "common/platform/etTimer.h"
-#include <unistd.h>
+#include "runtime/etRuntime.h"
+#include "etUnit/etUnit.h"
 #include <iostream>
 #include <sstream>
+#include <cstring>
 
 namespace etRuntime {
 
 const std::string SubSystemRunnerBase::OPTION_RUN_AS_TEST = "-run_as_test";
-const std::string SubSystemRunnerBase::OPTION_RUN_AS_TEST_SINGLETHREADED = "-run_as_test_single_threaded";
-const std::string SubSystemRunnerBase::OPTION_RUN_SINGLETHREADED = "-run_single_threaded";
+const std::string SubSystemRunnerBase::OPTION_RUN_HEADLESS = "-headless";
 
-TestSemaphore SubSystemRunnerBase::s_testSem;
-
-SubSystemRunnerBase::SubSystemRunnerBase() {
-}
-
-SubSystemRunnerBase::~SubSystemRunnerBase() {
-}
-
-void SubSystemRunnerBase::run(SubSystemClassBase& mainComponent, int argc, char* argv[] ) {
-
-	//etUserEntry(); /* platform specific */
+void SubSystemRunnerBase::run(SubSystemClassBase& main_component, int argc, char* argv[]) {
 
 	std::cout << "***   T H E   B E G I N   ***" << std::endl;
 
-	bool test = false;
-	bool singleThreaded = false;
-	int cycles = 100;
-
-	for (int i=1; i<argc; ++i) { // omit first argument, which is the program name
-		if (SubSystemRunnerBase::OPTION_RUN_AS_TEST.compare(argv[i]) == 0) {
+	etBool headless = false;
+	for (int i = 1; i < argc; ++i) { // omit first argument, which is the program name
+		if (OPTION_RUN_AS_TEST.compare(argv[i]) == 0) {
 			std::cout << "*** running as test" << std::endl;
-			test = true;
-		}
-		else if (SubSystemRunnerBase::OPTION_RUN_AS_TEST_SINGLETHREADED.compare(argv[i]) == 0) {
-
-			singleThreaded = true;
-			i++;
-			if (i < argc) {
-				std::stringstream sstr(argv[i]);
-			    sstr >> cycles;
-			}
-			std::cout << "*** running as test singlethreaded " << cycles << " cycles" << std::endl;
-		}
-		else if (SubSystemRunnerBase::OPTION_RUN_SINGLETHREADED.compare(argv[i]) == 0) {
-
-			singleThreaded = true;
-			i++;
-			if (i < argc) {
-				std::stringstream sstr(argv[i]);
-			    sstr >> cycles;
-			}
-			std::cout << "*** running singlethreaded " << cycles << " cycles" << std::endl;
-		}
-		else {
-			std::cout << "*** running multithreaded" << std::endl;
+			headless = true;
+		} else if (OPTION_RUN_HEADLESS.compare(argv[i]) == 0) {
+			std::cout << "*** running headless" << std::endl;
+			headless = true;
 		}
 	}
 
-	if (test)
-		mainComponent.setTestSemaphore(s_testSem);
-
-	mainComponent.init(); // lifecycle init
-	mainComponent.start(singleThreaded); // lifecycle start
+	main_component.init(); // lifecycle init
+	main_component.start(); // lifecycle start
 
 	// application runs until quit
-	if (test) {
-		waitForTestcase();
-	}
-	else if (singleThreaded){
-		waitAndPollSingleThreaded(mainComponent, cycles);
-	}
-	else {
-		waitForQuitMultiThreaded();
-	}
+	if (headless)
+		waitForTerminate();
+	else
+		waitForQuit();
+
 	// end the lifecycle
-	mainComponent.stop(singleThreaded); // lifecycle stop
-	mainComponent.destroy(); // lifecycle destroy
+	main_component.stop(); // lifecycle stop
+	main_component.destroy(); // lifecycle destroy
 
 	std::cout << "***   T H E   E N D   ***" << std::endl;
 
-	//etUserExit(); /* platform specific */
 }
 
-void SubSystemRunnerBase::waitForTestcase() {
-	//std::cout << "=== waitForTestcase: before acq. semaphore, thread " << Thread.currentThread().getName() << std::endl;
-	s_testSem.take();
-	//std::cout << "=== waitForTestcase: after acq. semaphore, thread " << Thread.currentThread().getName() << std::endl;
-}
-
-void SubSystemRunnerBase::waitForQuitMultiThreaded() {
+void SubSystemRunnerBase::waitForQuit() {
 	// waiting for command line input
-	std::string token = "";
-	std::cout << "type 'quit' to exit" << std::endl;
-	while (token != "quit") {
-		std::getline(std::cin, token);
-		std::cout << "echo: " << token << std::endl;
+//	std::cout << "waitForQuit 30sec" << std::endl;
+//	Sleep(30000);
+//	std::cout << "return from waitForQuit" << std::endl;
+
+	printf("type quit to exit\n");
+	fflush(stdout);
+	while (ET_TRUE) {
+		char line[64];
+
+		if (fgets(line, 64, stdin) != NULL) {
+			if (strncmp(line, "quit", 4)==0)
+				break;
+		}
 	}
+
+	// not thread safe ??
+//	std::string token;
+//	std::cout << "type 'quit' to exit" << std::endl;
+//	while (token != "quit") {
+//		std::getline(std::cin, token);
+//		//std::cout << "echo: " << token << std::endl;
+//	}
 }
 
-void SubSystemRunnerBase::waitAndPollSingleThreaded(SubSystemClassBase& mainComponent, int cycles) {
-	for (int i=0; i< cycles; ++i) {
-		if (etTimer_executeNeeded()) {
-			mainComponent.runOnce();
-		}
-		usleep(100000);
-	}
+void SubSystemRunnerBase::waitForTerminate() {
+	std::cout << "=== waitForTestcase: before acq. semaphore" << std::endl;
+	etSema_waitForWakeup(etRuntime_getTerminateSemaphore());
+	std::cout << "=== waitForTestcase: after acq. semaphore" << std::endl;
 }
+
 } /* namespace etRuntime */

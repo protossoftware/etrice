@@ -26,13 +26,16 @@ junit -l org.eclipse.etrice.ui.structure.tests/org.eclipse.etrice.ui.structure.t
 junit -l org.eclipse.etrice.abstractexec.behavior.tests/org.eclipse.etrice.abstractexec.behavior.tests.launch -o ${WORKSPACE}/buildroot/test.results/org.eclipse.etrice.abstractexec.behavior.tests.xml --terseXML --flatXML --stderr ${WORKSPACE}/buildroot/test.results/org.eclipse.etrice.abstractexec.behavior.tests.launch-err.log --stdout ${WORKSPACE}/buildroot/test.results/org.eclipse.etrice.abstractexec.behavior.tests.launch-out.log
 
 perform -D WORKSPACE=${WORKSPACE} -P "${WORKSPACE}/buildroot/build.properties" org.eclipse.etrice.runtime.c.tests#run_tests
-perform -D WORKSPACE=${WORKSPACE} -P "${WORKSPACE}/buildroot/build.properties" org.eclipse.etrice.generator.java.tests#run_tests
+perform -D WORKSPACE=${WORKSPACE} -P "${WORKSPACE}/buildroot/build.properties" org.eclipse.etrice.runtime.cpp.tests#run_tests
+
 perform -D WORKSPACE=${WORKSPACE} -P "${WORKSPACE}/buildroot/build.properties" org.eclipse.etrice.generator.c.tests#run_tests
-#perform -D WORKSPACE=${WORKSPACE} -P "${WORKSPACE}/buildroot/build.properties" org.eclipse.etrice.generator.cpp.tests#run_tests
+perform -D WORKSPACE=${WORKSPACE} -P "${WORKSPACE}/buildroot/build.properties" org.eclipse.etrice.generator.cpp.tests#run_tests
+perform -D WORKSPACE=${WORKSPACE} -P "${WORKSPACE}/buildroot/build.properties" org.eclipse.etrice.generator.java.tests#run_tests
 
 perform -D WORKSPACE=${WORKSPACE} -P "${WORKSPACE}/buildroot/build.properties" org.eclipse.etrice.ui.runtime#create.contents
 
 perform -D WORKSPACE=${WORKSPACE} -P "${WORKSPACE}/buildroot/build.properties" org.eclipse.etrice.releng#export.c.generator
+#perform -D WORKSPACE=${WORKSPACE} -P "${WORKSPACE}/buildroot/build.properties" org.eclipse.etrice.releng#export.cpp.generator
 perform -D WORKSPACE=${WORKSPACE} -P "${WORKSPACE}/buildroot/build.properties" org.eclipse.etrice.releng#export.java.generator
 perform -D WORKSPACE=${WORKSPACE} -P "${WORKSPACE}/buildroot/build.properties" org.eclipse.etrice.releng#copy.deliveries
 

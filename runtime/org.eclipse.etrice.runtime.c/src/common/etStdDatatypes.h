@@ -13,6 +13,9 @@
 /*
  *  Generic version for most platforms based on std.
  */
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #ifndef _ETSTDDATATYPES_H_
 #define _ETSTDDATATYPES_H_
@@ -30,7 +33,7 @@
 
 /* --- Data types for room.basic.types */
 
-// bool already defined
+/* bool already defined */
 typedef uint8_t uint8;
 typedef uint16_t uint16;
 typedef uint32_t uint32;
@@ -58,11 +61,11 @@ typedef char* charPtr;
 /*--- Cross language support (e.g. Java,C/C++) */
 
 #define null NULL
-// typedef x boolean
+/* typedef x boolean */
 
 /*-----------------------------------------------------------*/
 
-//--- Required types of runtime
+/*--- Required types of runtime */
 typedef bool etBool;
 #define ET_TRUE true
 #define ET_FALSE false
@@ -115,3 +118,7 @@ typedef etInt16 etAddressId;
 /*-----------------------------------------------------------*/
 
 #endif /* _ETSTDDATATYPES_H_ */
+
+#ifdef __cplusplus
+}
+#endif

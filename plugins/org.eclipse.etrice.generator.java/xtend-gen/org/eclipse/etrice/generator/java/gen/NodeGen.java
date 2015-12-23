@@ -32,6 +32,7 @@ import org.eclipse.etrice.core.etphys.eTPhys.ExecMode;
 import org.eclipse.etrice.core.etphys.eTPhys.NodeClass;
 import org.eclipse.etrice.core.etphys.eTPhys.NodeRef;
 import org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread;
+import org.eclipse.etrice.core.genmodel.builder.GenmodelConstants;
 import org.eclipse.etrice.core.genmodel.etricegen.AbstractInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInterfaceInstance;
@@ -278,7 +279,6 @@ public class NodeGen {
       _builder.append(clsname, "");
       _builder.append(" extends SubSystemClassBase {");
       _builder.newLineIfNotEmpty();
-      _builder.append("\t");
       _builder.newLine();
       {
         Iterable<Indexed<PhysicalThread>> _indexed = Indexed.<PhysicalThread>indexed(threads);
@@ -300,7 +300,6 @@ public class NodeGen {
       CharSequence _userCode_1 = this._procedureHelpers.userCode(cc, 2, false);
       _builder.append(_userCode_1, "\t");
       _builder.newLineIfNotEmpty();
-      _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("public ");
@@ -313,7 +312,6 @@ public class NodeGen {
       _builder.append("\t");
       _builder.append("}");
       _builder.newLine();
-      _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("@Override");
@@ -324,15 +322,13 @@ public class NodeGen {
       _builder.append("\t");
       _builder.append("}");
       _builder.newLine();
-      _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("@Override\t");
+      _builder.append("@Override");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("public void instantiateMessageServices() {");
       _builder.newLine();
-      _builder.append("\t");
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append("IMessageService msgService;");
@@ -398,7 +394,6 @@ public class NodeGen {
       _builder.append("\t");
       _builder.append("public void instantiateActors() {");
       _builder.newLine();
-      _builder.append("\t\t");
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append("// thread mappings");
@@ -460,7 +455,8 @@ public class NodeGen {
                   _builder.append("DebuggingService.getInstance().addMessageActorCreate(this, \"");
                   String _name_5 = sub.getName();
                   _builder.append(_name_5, "\t\t\t");
-                  _builder.append("_\"+i);");
+                  _builder.append(GenmodelConstants.INDEX_SEP, "\t\t\t");
+                  _builder.append("\"+i);");
                   _builder.newLineIfNotEmpty();
                 }
               }
@@ -473,7 +469,8 @@ public class NodeGen {
               _builder.append("(this, \"");
               String _name_7 = sub.getName();
               _builder.append(_name_7, "\t\t\t");
-              _builder.append("_\"+i);");
+              _builder.append(GenmodelConstants.INDEX_SEP, "\t\t\t");
+              _builder.append("\"+i);");
               _builder.newLineIfNotEmpty();
               _builder.append("\t\t");
               _builder.append("}");
@@ -499,13 +496,12 @@ public class NodeGen {
               _builder.append("(this, \"");
               String _name_10 = sub.getName();
               _builder.append(_name_10, "\t\t");
-              _builder.append("\"); ");
+              _builder.append("\");");
               _builder.newLineIfNotEmpty();
             }
           }
         }
       }
-      _builder.append("\t\t");
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append("// create service brokers in optional actor interfaces");
@@ -567,7 +563,6 @@ public class NodeGen {
           _builder.newLine();
         }
       }
-      _builder.append("\t\t");
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append("// wiring");
@@ -596,7 +591,6 @@ public class NodeGen {
           _builder.newLineIfNotEmpty();
         }
       }
-      _builder.append("\t\t");
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append("// apply instance attribute configurations");
@@ -650,7 +644,6 @@ public class NodeGen {
       _builder.append("\t");
       _builder.append("}");
       _builder.newLine();
-      _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("@Override");
@@ -700,7 +693,6 @@ public class NodeGen {
       _builder.append("\t");
       _builder.append("}");
       _builder.newLine();
-      _builder.append("\t\t");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("@Override");
@@ -726,7 +718,6 @@ public class NodeGen {
         GlobalSettings _settings_5 = Main.getSettings();
         boolean _isGenerateMSCInstrumentation_5 = _settings_5.isGenerateMSCInstrumentation();
         if (_isGenerateMSCInstrumentation_5) {
-          _builder.append("\t");
           _builder.newLine();
           _builder.append("\t");
           _builder.append("@Override");
@@ -741,7 +732,6 @@ public class NodeGen {
           _builder.append("\t");
           _builder.append("}");
           _builder.newLine();
-          _builder.append("\t");
           _builder.newLine();
           _builder.append("\t");
           _builder.append("@Override");
@@ -766,7 +756,6 @@ public class NodeGen {
           _builder.newLine();
         }
       }
-      _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("public IOptionalActorFactory getFactory(String optionalActorClass, String actorClass) {");
@@ -825,7 +814,6 @@ public class NodeGen {
           _builder.newLine();
         }
       }
-      _builder.append("\t\t");
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append("return null;");

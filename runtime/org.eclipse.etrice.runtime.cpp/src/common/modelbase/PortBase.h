@@ -13,29 +13,30 @@
 #ifndef PORTBASE_H_
 #define PORTBASE_H_
 
+#include "common/modelbase/IInterfaceItemOwner.h"
 #include "common/modelbase/InterfaceItemBase.h"
-#include "common/messaging/Address.h"
 #include <string>
 
 namespace etRuntime {
-class IEventReceiver;
 
-class PortBase : public InterfaceItemBase{
+class PortBase: public InterfaceItemBase {
+
 public:
-	PortBase (IEventReceiver& actor, IRTObject* parent, std::string name, int localId, int idx, Address address, Address peerAddress)
-		: InterfaceItemBase(actor, parent, name, localId, idx, address, peerAddress){};
-	PortBase(const PortBase & right)
-		: InterfaceItemBase(right) {};
+	virtual ~PortBase() {}
 
+protected:
+	PortBase(IInterfaceItemOwner* owner, const std::string& name, int localId) :
+			InterfaceItemBase(owner, name, localId, 0) {
+	}
 
-	virtual ~PortBase();
-
-	virtual void send(int evtID);
-
+	PortBase(IInterfaceItemOwner* owner, const std::string& name, int localId, int idx) :
+			InterfaceItemBase(owner, name, localId, idx) {
+	}
 
 private:
-	PortBase();
-	PortBase & operator = (const PortBase& right);
+
+	PortBase(PortBase const&);
+	PortBase & operator =(PortBase const&);
 
 };
 

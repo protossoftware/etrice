@@ -12,39 +12,48 @@
 
 #ifndef RTSERVICES_H_
 #define RTSERVICES_H_
+
 #include "common/messaging/MessageServiceController.h"
 
 namespace etRuntime {
 
 class SubSystemClassBase;
-class MessageServiceController;
-
 
 class RTServices {
 public:
-	virtual ~RTServices();
-
 	static RTServices& getInstance() {
-		if (s_instance == 0) {
-			s_instance = new RTServices();
-		}
-		return *s_instance;
+		static RTServices s_instance;
+
+		return s_instance;
 	}
 
-	void destroy();
-	MessageServiceController& getMsgSvcCtrl();
-	SubSystemClassBase* getSubSystem() {	return m_subSystem;	};
-	void setSubSystem(SubSystemClassBase* subSystem) { m_subSystem = subSystem;	};
+	virtual ~RTServices() {
+		m_subSystem = 0;
+	}
+
+	void destroy() {
+
+	}
+	MessageServiceController& getMsgSvcCtrl() {
+		return m_messageServiceController;
+	}
+	SubSystemClassBase* getSubSystem() const {
+		return m_subSystem;
+	}
+	void setSubSystem(SubSystemClassBase* subSystem) {
+		m_subSystem = subSystem;
+	}
 
 private:
-	static RTServices* s_instance;
-
 	SubSystemClassBase* m_subSystem;
-	MessageServiceController* m_messageServiceController;
+	MessageServiceController m_messageServiceController;
 
-	RTServices();
-	RTServices(const RTServices & right);
-	RTServices & operator = (const RTServices& right);
+	RTServices() :
+			m_subSystem(0),
+			m_messageServiceController() {
+	}
+	RTServices(RTServices const&);
+	void operator=(RTServices const&);
 
 };
 

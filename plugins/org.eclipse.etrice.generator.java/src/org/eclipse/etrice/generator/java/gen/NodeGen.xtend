@@ -4,10 +4,10 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * CONTRIBUTORS:
  * 		Henrik Rentz-Reichert (initial contribution)
- * 
+ *
  *******************************************************************************/
 
 package org.eclipse.etrice.generator.java.gen
@@ -42,10 +42,11 @@ import org.eclipse.etrice.generator.java.Main
 import static extension org.eclipse.etrice.generator.fsm.base.Indexed.*
 import com.google.common.collect.Lists
 import com.google.common.collect.Sets
+import org.eclipse.etrice.core.genmodel.builder.GenmodelConstants
 
 @Singleton
 class NodeGen {
-	
+
 	@Inject extension JavaExtensions
 	@Inject extension RoomExtensions
 	@Inject IDataConfiguration dataConfigExt
@@ -56,7 +57,7 @@ class NodeGen {
 	@Inject IGeneratorFileIo fileIO
 	@Inject VariableServiceGen varService
 	@Inject IDiagnostician diagnostician
-	
+
 	def doGenerate(Root root) {
 		val HashMap<SubSystemClass, WiredSubSystemClass> sscc2wired = new HashMap<SubSystemClass, WiredSubSystemClass>
 		root.wiredInstances.filter(w|w instanceof WiredSubSystemClass).forEach[w|sscc2wired.put((w as WiredSubSystemClass).subSystemClass, w as WiredSubSystemClass)]
@@ -68,11 +69,11 @@ class NodeGen {
 					val path = ssi.subSystemClass.generationTargetPath+ssi.subSystemClass.getPath
 					val infopath = ssi.subSystemClass.generationInfoPath+ssi.subSystemClass.getPath
 					val file = nr.getJavaFileName(ssi)
-					
+
 					checkDataPorts(ssi)
-					
+
 					val usedThreads = ETMapUtil::getUsedThreads(nr, ssi)
-					
+
 					fileIO.generateFile("generating Node implementation", path, infopath, file, root.generate(ssi, wired, usedThreads))
 					if (dataConfigExt.hasVariableService(ssi))
 						varService.doGenerate(root, ssi);
@@ -80,7 +81,7 @@ class NodeGen {
 			}
 		}
 	}
-	
+
 	/**
 	 * Recursively collect all possible interface instances below a given structure instance.
 	 */
@@ -92,10 +93,10 @@ class NodeGen {
 				result.addAll(root.getOptionalActorClasses(oi))
 			}
 		}
-		
+
 		return result
 	}
-	
+
 	def generate(Root root, SubSystemInstance comp, WiredSubSystemClass wired, Collection<PhysicalThread> usedThreads) {
 		val cc = comp.subSystemClass
 		val models = root.getReferencedModels(cc)
@@ -103,10 +104,10 @@ class NodeGen {
 		val clsname = nr.getJavaClassName(comp)
 		val threads = nr.type.threads.filter(t|usedThreads.contains(t))
 		val opt = root.getOptionalActorClasses(comp)
-		
+
 	'''
 		package «cc.getPackage()»;
-		
+
 		import org.eclipse.etrice.runtime.java.config.IVariableService;
 		«IF Main::settings.generateMSCInstrumentation»
 			import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
@@ -123,32 +124,32 @@ class NodeGen {
 		import org.eclipse.etrice.runtime.java.modelbase.SubSystemClassBase;
 		import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;
 		import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBroker;
-		
+
 		«FOR model : models»
 			import «model.name».*;
 		«ENDFOR»
-		
+
 		«cc.userCode(1, false)»
-		
+
 		public class «clsname» extends SubSystemClassBase {
-			
+
 			«FOR thread : threads.indexed»
 				public static final int «thread.value.threadId» = «thread.index0»;
 			«ENDFOR»
-		
+
 			«cc.userCode(2, false)»
-			
+
 			public «clsname»(IRTObject parent, String name) {
 				super(parent, name);
 			}
-			
+
 			@Override
 			public void receiveEvent(InterfaceItemBase ifitem, int evt, Object data){
 			}
-			
-			@Override	
+
+			@Override
 			public void instantiateMessageServices() {
-			
+
 				IMessageService msgService;
 				«FOR thread: threads»
 					«IF thread.execmode==ExecMode::POLLED || thread.execmode==ExecMode::MIXED»
@@ -159,10 +160,10 @@ class NodeGen {
 					RTServices.getInstance().getMsgSvcCtrl().addMsgSvc(msgService);
 				«ENDFOR»
 			}
-		
+
 			@Override
 			public void instantiateActors() {
-				
+
 				// thread mappings
 				«FOR ai : comp.allContainedInstances»
 					«val mapped = ETMapUtil::getMappedThread(ai)»
@@ -170,24 +171,24 @@ class NodeGen {
 						addPathToThread("«ai.path»", «mapped.thread.threadId»);
 					«ENDIF»
 				«ENDFOR»
-		
+
 				// sub actors
 				«FOR sub : cc.actorRefs»
 					«IF sub.multiplicity>1»
 						for (int i=0; i<«sub.multiplicity»; ++i) {
 							«IF Main::settings.generateMSCInstrumentation»
-								DebuggingService.getInstance().addMessageActorCreate(this, "«sub.name»_"+i);
+								DebuggingService.getInstance().addMessageActorCreate(this, "«sub.name»«GenmodelConstants::INDEX_SEP»"+i);
 							«ENDIF»
-							new «sub.type.name»(this, "«sub.name»_"+i);
+							new «sub.type.name»(this, "«sub.name»«GenmodelConstants::INDEX_SEP»"+i);
 						}
 					«ELSE»
 						«IF Main::settings.generateMSCInstrumentation»
 							DebuggingService.getInstance().addMessageActorCreate(this, "«sub.name»");
 						«ENDIF»
-						new «sub.type.name»(this, "«sub.name»"); 
+						new «sub.type.name»(this, "«sub.name»");
 					«ENDIF»
 				«ENDFOR»
-				
+
 				// create service brokers in optional actor interfaces
 				«FOR aii: comp.allSubInstances.filter(inst|inst instanceof ActorInterfaceInstance).map(inst|inst as ActorInterfaceInstance)»
 					{
@@ -198,12 +199,12 @@ class NodeGen {
 						«ENDFOR»
 					}
 				«ENDFOR»
-				
+
 				// wiring
 				«FOR wire: wired.wires»
 					«if (wire.dataDriven) "DataPortBase" else "InterfaceItemBase"».connect(this, "«wire.path1.join('/')»", "«wire.path2.join('/')»");
 				«ENDFOR»
-				
+
 				// apply instance attribute configurations
 				«FOR ai: comp.allContainedInstances»
 					«val cfg = configGenAddon.genActorInstanceConfig(ai, "inst")»
@@ -217,7 +218,7 @@ class NodeGen {
 					«ENDIF»
 				«ENDFOR»
 			}
-			
+
 			@Override
 			public void init(){
 				«IF Main::settings.generateMSCInstrumentation»
@@ -234,7 +235,7 @@ class NodeGen {
 					DebuggingService.getInstance().addVisibleComment("done sub system initialization");
 				«ENDIF»
 			}
-				
+
 			@Override
 			public void stop(){
 				super.stop();
@@ -243,12 +244,12 @@ class NodeGen {
 				«ENDIF»
 			}
 			«IF Main::settings.generateMSCInstrumentation»
-				
+
 				@Override
 				public boolean hasGeneratedMSCInstrumentation() {
 					return true;
 				}
-				
+
 				@Override
 				public void destroy() {
 					DebuggingService.getInstance().addVisibleComment("begin sub system destruction");
@@ -256,7 +257,7 @@ class NodeGen {
 					DebuggingService.getInstance().addVisibleComment("done sub system destruction");
 				}
 			«ENDIF»
-			
+
 			public IOptionalActorFactory getFactory(String optionalActorClass, String actorClass) {
 				«val else1 = new IntelligentSeparator("else ")»
 				«FOR oa : opt»
@@ -269,7 +270,7 @@ class NodeGen {
 						«ENDFOR»
 					}
 				«ENDFOR»
-				
+
 				return null;
 			}
 		};
@@ -279,7 +280,7 @@ class NodeGen {
 	def private getThreadId(PhysicalThread thread) {
 		"THREAD_"+thread.name.toUpperCase
 	}
-	
+
 	def private checkDataPorts(SubSystemInstance comp) {
 		val found = new HashSet<String>()
 		for (ai: comp.allContainedInstances) {

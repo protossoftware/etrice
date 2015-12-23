@@ -1119,7 +1119,6 @@ public abstract class AbstractStateMachineGenerator {
               _builder.newLineIfNotEmpty();
             }
           }
-          _builder.append("\t");
           _builder.newLine();
           {
             if (handleEvents) {
@@ -1531,7 +1530,7 @@ public abstract class AbstractStateMachineGenerator {
           Transition _last = IterableExtensions.<Transition>last(transitions);
           boolean _notEquals = (!Objects.equal(tr, _last));
           if (_notEquals) {
-            _builder.append("else ");
+            _builder.append("else");
             _builder.newLine();
           }
         }
@@ -1734,28 +1733,6 @@ public abstract class AbstractStateMachineGenerator {
    * empty, but may be overridden
    */
   public CharSequence markVariableUsed(final String varname) {
-    StringConcatenation _builder = new StringConcatenation();
-    return _builder;
-  }
-  
-  /**
-   * let derived class add extra code after definition of constants
-   * 
-   * @param xpmc an expanded actor class
-   * @return the generated code
-   */
-  public CharSequence genExtra(final ExpandedModelComponent xpmc) {
-    StringConcatenation _builder = new StringConcatenation();
-    return _builder;
-  }
-  
-  /**
-   * let derived class add extra code after definition of constants in header (if applicable)
-   * 
-   * @param xpmc an expanded actor class
-   * @return the generated code
-   */
-  public CharSequence genExtraDecl(final ExpandedModelComponent xpmc) {
     StringConcatenation _builder = new StringConcatenation();
     return _builder;
   }

@@ -13,60 +13,74 @@
 #ifndef SUBSYSTEMCLASSBASE_H_
 #define SUBSYSTEMCLASSBASE_H_
 
-#include "common/messaging/RTSystemServicesProtocol.h"
-#include "common/messaging/IRTObject.h"
-#include "common/debugging/MSCLogger.h"
-#include "common/modelbase/TestSemaphore.h"
+#include "common/modelbase/IEventReceiver.h"
+#include "common/modelbase/IInterfaceItemOwner.h"
+#include "common/modelbase/IReplicatedInterfaceItem.h"
+#include "common/modelbase/RTSystemProtocol.h"
+#include "etDatatypes.h"
+#include <map>
 #include <string>
-#include <vector>
-#include <iostream>
+
 
 namespace etRuntime {
 
-class MessageService;
 class ActorClassBase;
 
-class SubSystemClassBase: public RTObject, public IEventReceiver {
+class SubSystemClassBase: public RTObject, public virtual IEventReceiver, public virtual IInterfaceItemOwner {
 public:
-	SubSystemClassBase(IRTObject* parent, std::string name);
-	virtual ~SubSystemClassBase();
+	virtual ~SubSystemClassBase() {}
 
-	void init();
+	virtual void init();
 	virtual void instantiateMessageServices() = 0;
 	virtual void instantiateActors() = 0;
 
-	void start(bool singlethreaded);
-	void stop(bool singlethreaded);
-	void runOnce();
+	void start();
+	void stop();
+	virtual void destroy();
 
-	void destroy();
+	IMessageService* getMsgService(int idx) const;
+	Address getFreeAddress(int msgSvcId) const;
 
-	MessageService* getMsgService(int idx) const;
+	ActorClassBase* getInstance(const std::string& path) const;
 
-	ActorClassBase* getInstance(unsigned int i);
-	ActorClassBase* getInstance(std::string path);
+	void addPathToThread(const std::string& path, int thread);
+	int getThreadForPath(const std::string& path) const;
 
-	//---------------------------------------------
-	// this is to run integration tests
-	//---------------------------------------------
-	// TODO synchronized
-	void setTestSemaphore(TestSemaphore& sem);
-	//TODO synchronized
-	int getTestErrorCode() const;
-	void testFinished(int errorCode);
+	void resetAll();
+
+	virtual IEventReceiver* getEventReceiver() const {
+		return const_cast<SubSystemClassBase*>(this);
+	}
+
+	virtual int getThread() {
+		return 0;
+	}
+
+	virtual IReplicatedInterfaceItem* getSystemPort() const {
+		return const_cast<RTSystemConjPort*>(&m_RTSystemPort);
+	}
+
+	virtual etBool hasGeneratedMSCInstrumentation() const {
+		return false;
+	}
 
 protected:
-	RTSystemServicesProtocolConjPortRepl* m_RTSystemPort;
+
+	SubSystemClassBase(IRTObject* parent, std::string name);
+
+	//--------------------- ports
+	RTSystemConjPort m_RTSystemPort;
+
 	//--------------------- interface item IDs
 	static const int IFITEM_RTSystemPort = 0;
-	std::vector<ActorClassBase*> m_instances;
+
 private:
-	TestSemaphore* m_testSem;
-	int m_testErrorCode;
+
+	std::map<std::string, int> m_path2thread;
 
 	SubSystemClassBase();
-	SubSystemClassBase(const SubSystemClassBase& right);
-	SubSystemClassBase& operator=(const SubSystemClassBase& right);
+	SubSystemClassBase(SubSystemClassBase const&);
+	SubSystemClassBase& operator=(SubSystemClassBase const&);
 };
 
 } /* namespace etRuntime */

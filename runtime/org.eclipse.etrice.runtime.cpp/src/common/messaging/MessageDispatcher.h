@@ -13,33 +13,46 @@
 #ifndef MESSAGEDISPATCHER_H_
 #define MESSAGEDISPATCHER_H_
 
+#include "common/messaging/Address.h"
 #include "common/messaging/IMessageReceiver.h"
-#include "common/messaging/IRTObject.h"
 #include "common/messaging/RTObject.h"
 #include <map>
+#include <queue>
+#include <set>
 #include <string>
+
+
 
 namespace etRuntime {
 
-class MessageDispatcher : public RTObject, public IMessageReceiver {
+class MessageDispatcher : public RTObject, public virtual IMessageReceiver {
 	public:
-		MessageDispatcher(IRTObject* parent, Address addr, std::string name);
-		virtual ~MessageDispatcher();
+		MessageDispatcher(IRTObject* parent, const Address& addr, const std::string& name);
+		virtual ~MessageDispatcher() {}
 
+		Address getFreeAddress();
+		void freeAddress(const Address& addr);
 		void addMessageReceiver(IMessageReceiver& receiver);
-		void receive(Message* msg);
+		void removeMessageReceiver(IMessageReceiver& receiver);
+		void addPollingMessageReceiver(IMessageReceiver& receiver);
+		void removePollingMessageReceiver(IMessageReceiver& receiver);
+		void receive(const Message* msg);
 
-		Address getAddress() const { return m_address; };
+		const Address& getAddress() const { return m_address; };
+
+	protected:
+		std::string toString() const;
 
 	private:
 		std::map<int, IMessageReceiver*> m_local_map;
-		std::map<int, IMessageReceiver*> m_thread_map;
-		std::map<int, IMessageReceiver*> m_node_map;
+		std::queue<Address> m_freeAdresses;
+		std::set<IMessageReceiver*> m_pollingMessageReceiver;
 		Address m_address;
+		int m_nextFreeObjId;
 
 		MessageDispatcher();
-		MessageDispatcher(const MessageDispatcher& right);
-		MessageDispatcher& operator=(const MessageDispatcher& right);
+		MessageDispatcher(MessageDispatcher const&);
+		MessageDispatcher& operator=(MessageDispatcher const&);
 };
 
 } /* namespace etRuntime */

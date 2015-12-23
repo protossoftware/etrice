@@ -27,7 +27,10 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 @Singleton
 @SuppressWarnings("all")
 public class StateMachineGen extends GenericStateMachineGenerator {
-  public CharSequence genExtra(final ExpandedModelComponent xpac) {
+  /**
+   * @param generateImplementation NOT used
+   */
+  public CharSequence genExtra(final ExpandedModelComponent xpac, final boolean generateImplementation) {
     CharSequence _xblockexpression = null;
     {
       final ArrayList<State> states = new ArrayList<State>();
@@ -82,7 +85,6 @@ public class StateMachineGen extends GenericStateMachineGenerator {
           }
           _builder.append("};");
           _builder.newLine();
-          _builder.append("\t");
           _builder.newLine();
         }
       }
@@ -124,7 +126,7 @@ public class StateMachineGen extends GenericStateMachineGenerator {
           _builder.append("+ stateStrings[this.state] + \" -> \" + stateStrings[new_state]);");
           _builder.newLine();
           _builder.append("\t");
-          _builder.append("}\t");
+          _builder.append("}");
           _builder.newLine();
         }
       }

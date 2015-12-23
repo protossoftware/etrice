@@ -114,7 +114,10 @@ public class StateMachineGen extends GenericStateMachineGenerator {
     return _xblockexpression;
   }
   
-  public CharSequence genExtra(final ExpandedModelComponent xpmc) {
+  /**
+   * @param generateImplementation NOT used
+   */
+  public CharSequence genExtra(final ExpandedModelComponent xpmc, final boolean generateImplementation) {
     CharSequence _xblockexpression = null;
     {
       final ModelComponent mc = xpmc.getModelComponent();

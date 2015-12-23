@@ -14,20 +14,35 @@
 #define IRTOBJECT_H_
 
 #include <string>
+#include <vector>
 
 namespace etRuntime {
 
 class IRTObject {
 
 public:
-	virtual ~IRTObject() {};
+	virtual ~IRTObject() {
+	}
 
 	static const char PATH_DELIM = '/';
 	static const char PATHNAME_DELIM = '_';
 	static const std::string NO_NAME;
 
+	virtual const std::string& getName() const = 0;
 	virtual const std::string& getInstancePath() const = 0;
 	virtual const std::string& getInstancePathName() const = 0;
+
+	virtual std::vector<IRTObject*>& getChildren() = 0;
+
+	virtual IRTObject* getParent() const = 0;
+
+	virtual IRTObject* getRoot() const = 0;
+
+	virtual IRTObject* getChild(const std::string& name) const = 0;
+
+	virtual IRTObject* getObject(const std::string& path) const = 0;
+
+	virtual int getThreadForPath(const std::string& path) const = 0;
 };
 
 }

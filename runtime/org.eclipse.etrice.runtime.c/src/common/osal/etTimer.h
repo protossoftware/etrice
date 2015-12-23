@@ -17,6 +17,10 @@
  *
  * \author Thomas Jung
  */
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #ifndef _ETTIMER_H_
 #define _ETTIMER_H_
 
@@ -70,3 +74,7 @@ void etTimer_destruct(etTimer* self);
 
 
 #endif /* __ETTIMER_H__ */
+
+#ifdef __cplusplus
+}
+#endif

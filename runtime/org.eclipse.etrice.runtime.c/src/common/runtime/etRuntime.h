@@ -10,6 +10,10 @@
  *
  *******************************************************************************/
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #ifndef _ETRUNTIME_H_
 #define _ETRUNTIME_H_
 
@@ -31,3 +35,7 @@
 etSema* etRuntime_getTerminateSemaphore();
 
 #endif /* _ETRUNTIME_H_ */
+
+#ifdef __cplusplus
+}
+#endif

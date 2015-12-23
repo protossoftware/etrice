@@ -2,10 +2,6 @@
 	color: #888;
 }
 
-.pull-right {
-	float: right;
-}
-
 /* bootstrap nestd list fix */
 ol ol, ol ul, ul ol, ul ul {
 	margin-bottom: 10px;

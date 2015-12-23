@@ -4,11 +4,11 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * CONTRIBUTORS:
  * 		Thomas Schuetz and Henrik Rentz-Reichert (initial contribution)
  * 		Peter Karlitschek
- * 
+ *
  *******************************************************************************/
 
 /*
@@ -21,105 +21,109 @@ package org.eclipse.etrice.generator.cpp.gen
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import java.util.List
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.etrice.core.etphys.eTPhys.NodeRef
+import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.IDiagnostician
+import org.eclipse.etrice.core.room.DataClass
 import org.eclipse.etrice.core.room.DataType
+import org.eclipse.etrice.core.room.EnumLiteral
+import org.eclipse.etrice.core.room.EnumerationType
 import org.eclipse.etrice.core.room.ExternalType
 import org.eclipse.etrice.core.room.Message
 import org.eclipse.etrice.core.room.PrimitiveType
 import org.eclipse.etrice.core.room.RoomClass
 import org.eclipse.etrice.core.room.VarDecl
-import org.eclipse.etrice.core.room.DataClass
 import org.eclipse.etrice.generator.generic.ILanguageExtension
 import org.eclipse.etrice.generator.generic.TypeHelpers
 import org.eclipse.xtext.util.Pair
-import org.eclipse.etrice.core.room.EnumerationType
-
-import org.eclipse.etrice.core.room.EnumLiteral
-import org.eclipse.emf.ecore.EObject
 
 @Singleton
 class CppExtensions implements ILanguageExtension {
 
 	@Inject IDiagnostician diagnostician
 	@Inject extension TypeHelpers
-	
+
 
 	override String getTypedDataDefinition(EObject msg) {
 		generateArglistAndTypedData((msg as Message).data).get(1)
 	}
 
+	def String getCppHeaderFileName(RoomClass rc) { rc.name + ".h" }
 
-	def String getCppHeaderFileName(RoomClass rc) {rc.name+".h"}
-	def String getCppSourceFileName(RoomClass rc) {rc.name+".cpp"}
-	def String getInstSourceFileName(RoomClass rc) {rc.name+"_Inst.h"}
-	def String getDispSourceFileName(RoomClass rc) {rc.name+"_Disp.h"}
-	
+	def String getCppSourceFileName(RoomClass rc) { rc.name + ".cpp" }
+
+	def String getCppClassName(NodeRef nr, SubSystemInstance ssi) {
+		"Node_" + nr.name + "_" + ssi.name;
+	}
+
+	def String getCppHeaderFileName(NodeRef nr, SubSystemInstance ssi) {
+		nr.getCppClassName(ssi) + ".h";
+	}
+
+	def String getCppSourceFileName(NodeRef nr, SubSystemInstance ssi) {
+		nr.getCppClassName(ssi) + ".cpp";
+	}
+
 	override String accessLevelPrivate() {""}
 	override String accessLevelProtected() {""}
 	override String accessLevelPublic() {""}
-	
-	override String memberAccess() {"this->"} 	 
+
+	override String memberAccess() {"this->"}
 	override String selfPointer(String classname, boolean hasArgs) {""}
 	override String selfPointer(boolean hasArgs) { "" }
-	
+
 	override String operationScope(String classname, boolean isDeclaration) {
 		if (isDeclaration)
 			""
 		else
 			classname+"::"
 	}
-	
+
 
 	override String memberInDeclaration(String namespace, String member) {
 		return member
 	}
-	
+
 	override String memberInUse(String namespace, String member) {
 		return namespace+"."+member
 	}
-	
+
 	override boolean usesInheritance() {
 		return true
 	}
-	
+
 	override boolean usesPointers() {
 		return true
 	}
-	
-	override String genEnumeration(String name, List<Pair<String, String>> entries) {
+
+	override String genEnumeration(String name, List<Pair<String, String>> entries){ 
+		if(entries.empty)
+			return ''
+		
 		'''
-		typedef enum {
-		«FOR entry: entries»
-			«entry.first» = «entry.second»,
-		«ENDFOR» 
-		} «name»;'''.toString
+			typedef enum {
+				«FOR entry : entries SEPARATOR ','»
+					«entry.first» = «entry.second»
+				«ENDFOR»
+			} «name»;
+		'''
 	}
+
 
 	override String booleanConstant(boolean b) {
 		b.toString
 	}
-	
+
 	override String pointerLiteral() { "*" }
 	override String nullPointer() { "0" }
 	override String voidPointer() { "void*" }
+	override String typeArrayModifier() { pointerLiteral }
 
-	override String arrayDeclaration(String type, int size, String name, boolean isRef) {
-		type+" "+name+"["+size+"]";
-	}
-	
-	override String constructorName(String cls) {
-		cls
-	}
-	override String destructorName(String cls) {
-		cls+"_dtor"
-	}
-	override String constructorReturnType() {
-		""
-	}
-	override String destructorReturnType() {
-		"void"
-	}
-	
+	override String arrayDeclaration(String type, int size, String name, boolean isRef)'''
+		«type»«IF isRef»*«ENDIF» «name»[«size»]
+	'''
+
 	def getIncludeGuardString(String filename){
 		'''_«filename.replaceAll("\\/.", "_").toUpperCase»_H_'''
 	}
@@ -134,18 +138,18 @@ class CppExtensions implements ILanguageExtension {
 		#endif /* «filename.getIncludeGuardString» */
 		'''
 	}
-	
-	
+
+
 
 	override superCall(String baseClassName, String method, String arguments) {
 		baseClassName+"::"+method+"("+arguments+");"
 	}
-	
+
 
 	override String toValueLiteral(PrimitiveType type, String value){
 		throw new UnsupportedOperationException("TODO Config for Cpp");
 	}
-	
+
 	override toEnumLiteral(EnumerationType type, String value) {
 		throw new UnsupportedOperationException("TODO Config for Cpp")
 	}
@@ -163,7 +167,7 @@ class CppExtensions implements ILanguageExtension {
 		}
 		else {
 			val dc = dt as DataClass
-			
+
 			'''
 				{
 					«FOR att : dc.attributes SEPARATOR ","»
@@ -173,14 +177,14 @@ class CppExtensions implements ILanguageExtension {
 			'''
 		}
 	}
-	
+
 	def String getDefaultValue(EnumerationType type) {
 		if (type.getLiterals().isEmpty())
 			""
 		else
 			getCastedValue(type.getLiterals().get(0))
 	}
-	
+
 	override initializationWithDefaultValues(DataType dt, int size) {
 		val dv = dt.defaultValue
 		if (size>1) {
@@ -197,20 +201,24 @@ class CppExtensions implements ILanguageExtension {
 		else
 			dv
 	}
-	
+
 	override generateArglistAndTypedData(EObject d) {
-	    val data = d as VarDecl
-		var deref = "*"
+		if (d==null || !(d instanceof VarDecl))
+			return newArrayList("", "", "")
+
+		val data = d as VarDecl
 		if (data==null)
 			return newArrayList("", "", "")
-			
+
 		var typeName = if (data.getRefType().getType() instanceof PrimitiveType)
-			(data.getRefType().getType() as PrimitiveType).getTargetName()
+			(data.getRefType().getType() as PrimitiveType).targetName
 		else if (data.getRefType().getType() instanceof EnumerationType)
 			(data.getRefType().getType() as EnumerationType).targetType
+		else if (data.getRefType().getType() instanceof ExternalType)
+			(data.getRefType().getType() as ExternalType).targetName
 		else
 			data.getRefType().getType().getName()
-			
+
 		var castTypeName = if (data.getRefType().getType() instanceof PrimitiveType) {
 			val ct = (data.getRefType().getType() as PrimitiveType).getCastName()
 			if (ct!=null && !ct.isEmpty())
@@ -223,51 +231,44 @@ class CppExtensions implements ILanguageExtension {
 		}
 		else
 			typeName
-		castTypeName = castTypeName+"*"
-		
+		castTypeName += '*'
+		var deRef = '*' 
+ 
 		if (data.getRefType().isRef()) {
 			typeName = typeName+"*"
-			castTypeName = castTypeName+"*"
+			deRef = '' 
 		}
-		else if (!(data.getRefType().getType() instanceof PrimitiveType)) {
-			typeName = typeName+"*"
-			castTypeName = castTypeName+"*"
-		}
-		else {
-			castTypeName = typeName
-			deref = ""
-		}
-			
-		val typedData = typeName+" "+data.getName() + " = " + deref + "(("+castTypeName+") generic_data);\n"
+
+		val typedData = typeName+" "+data.getName() + " = "+deRef+"(static_cast<"+castTypeName+">(generic_data__et));\n"
 
 		val dataArg = ", "+data.getName()
 		val typedArgList = ", "+typeName+" "+data.getName()
-		
+
 		return newArrayList(dataArg, typedData, typedArgList);
 	}
-	
+
 	override getTargetType(EnumerationType type) {
 		if (type.getPrimitiveType()!=null)
 			type.getPrimitiveType().getTargetName()
 		else
 			type.getName()
 	}
-	
+
 	override getCastedValue(EnumLiteral literal) {
 		val type = literal.eContainer() as EnumerationType
 		val cast = type.targetType
-		
+
 		if (type.primitiveType!=null)
 			Long.toString(literal.getLiteralValue())
 		else
 			"(("+cast+")"+Long.toString(literal.getLiteralValue())+")"
 	}
-	
+
 	override getCastType(EnumerationType type) {
 		if (type.getPrimitiveType()!=null)
 			type.getPrimitiveType().getCastName()
 		else
 			type.getName()
 	}
-	
+
 }

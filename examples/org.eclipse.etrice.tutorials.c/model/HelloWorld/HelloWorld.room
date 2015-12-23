@@ -1,4 +1,4 @@
-/* 
+/*
  * Shortkeys:
  *	Ctrl+Space	- content assist
  * 	F3			- open declaration of selected element
@@ -25,7 +25,7 @@ RoomModel HelloWorldModel {
 	// - build your application from here
 	ActorClass TopActor {
 		Structure {
-			
+
 		}
 		Behavior {
 			StateMachine {

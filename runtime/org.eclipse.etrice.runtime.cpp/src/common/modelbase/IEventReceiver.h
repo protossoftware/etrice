@@ -16,15 +16,15 @@
 #include "common/messaging/IRTObject.h"
 
 namespace etRuntime {
-	class InterfaceItemBase;
 
-class IEventReceiver {
+class InterfaceItemBase;
+
+class IEventReceiver: public virtual IRTObject {
 public:
-	IEventReceiver();
-	virtual ~IEventReceiver();
+	virtual ~IEventReceiver() {}
 
 	virtual void receiveEvent(InterfaceItemBase* ifitem, int evt, void* data) = 0;
-
+	virtual int getThread() = 0;
 };
 
 } /* namespace etRuntime */

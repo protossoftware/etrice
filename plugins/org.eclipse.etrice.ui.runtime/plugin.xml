@@ -12,6 +12,11 @@
 			parentCategory="org.eclipse.etrice.core.ui.wizardCategory">
 		</category>
 		<category
+			id="org.eclipse.etrice.core.ui.wizardCppCategory"
+			name="C++"
+			parentCategory="org.eclipse.etrice.core.ui.wizardCategory">
+		</category>
+		<category
 			id="org.eclipse.etrice.core.ui.wizardJavaCategory"
 			name="Java"
 			parentCategory="org.eclipse.etrice.core.ui.wizardCategory">
@@ -22,6 +27,11 @@
 			parentCategory="org.eclipse.etrice.core.ui.wizardCategory/org.eclipse.etrice.core.ui.wizardCCategory">
 		</category>
 		<category
+			id="org.eclipse.etrice.core.ui.libraryCppCategory"
+			name="Libraries"
+			parentCategory="org.eclipse.etrice.core.ui.wizardCategory/org.eclipse.etrice.core.ui.wizardCppCategory">
+		</category>
+		<category
 			id="org.eclipse.etrice.core.ui.libraryJavaCategory"
 			name="Libraries"
 			parentCategory="org.eclipse.etrice.core.ui.wizardCategory/org.eclipse.etrice.core.ui.wizardJavaCategory">
@@ -30,11 +40,11 @@
 
 	<!-- ========= org.eclipse.etrice.runtime.c ========= -->
 	<extension point="org.eclipse.ui.newWizards">
-		<wizard	id="org.eclipse.etrice.ui.runtime.NewCRuntimeWizard" 
-			name="eTrice C Runtime" 
-			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
+		<wizard	id="org.eclipse.etrice.ui.runtime.NewCRuntimeWizard"
+			name="eTrice C Runtime"
+			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard"
 			category="org.eclipse.etrice.core.ui.wizardCategory/org.eclipse.etrice.core.ui.wizardCCategory/org.eclipse.etrice.core.ui.libraryCCategory"
-			icon="icons/genproject.gif" 
+			icon="icons/genproject.gif"
 			project="true">
 			<description>The C Runtime required by eTrice C projects</description>
 		</wizard>
@@ -46,15 +56,15 @@
 				contentURI="contents/org.eclipse.etrice.runtime.c.zip"
 				description="eTrice Runtime for C"/>
 	</example>
-	</extension>	
+	</extension>
 
 	<!-- ========= org.eclipse.etrice.modellib.c ========= -->
 	<extension point="org.eclipse.ui.newWizards">
-		<wizard	id="org.eclipse.etrice.ui.runtime.NewCModelLibWizard" 
-			name="eTrice C ModelLib" 
-			class="org.eclipse.etrice.ui.runtime.NonDeletingWizardInstaller" 
+		<wizard	id="org.eclipse.etrice.ui.runtime.NewCModelLibWizard"
+			name="eTrice C ModelLib"
+			class="org.eclipse.etrice.ui.runtime.NonDeletingWizardInstaller"
 			category="org.eclipse.etrice.core.ui.wizardCategory/org.eclipse.etrice.core.ui.wizardCCategory/org.eclipse.etrice.core.ui.libraryCCategory"
-			icon="icons/genproject.gif" 
+			icon="icons/genproject.gif"
 			project="true">
 			<description>A ROOM Model Library for C with useful services</description>
 		</wizard>
@@ -68,18 +78,69 @@
 			<projectDescriptor
 				contentURI="contents/org.eclipse.etrice.runtime.c.zip"
 				description="eTrice Runtime for C"
-				name="org.eclipse.etrice.runtime.c">
-			</projectDescriptor>
+				name="org.eclipse.etrice.runtime.c"/>
 		</example>
-	</extension>	
+	</extension>
+
+	<!-- ========= org.eclipse.etrice.runtime.cpp ========= -->
+	<extension point="org.eclipse.ui.newWizards">
+		<wizard	id="org.eclipse.etrice.ui.runtime.NewCppRuntimeWizard"
+			name="eTrice C++ Runtime"
+			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard"
+			category="org.eclipse.etrice.core.ui.wizardCategory/org.eclipse.etrice.core.ui.wizardCppCategory/org.eclipse.etrice.core.ui.libraryCppCategory"
+			icon="icons/genproject.gif"
+			project="true">
+			<description>The C Runtime required by eTrice C++ projects</description>
+		</wizard>
+	</extension>
+	<extension point="org.eclipse.emf.common.ui.examples">
+		<example wizardID="org.eclipse.etrice.ui.runtime.NewCppRuntimeWizard" pageImage="icons/genproject.gif">
+			<projectDescriptor
+				name="org.eclipse.etrice.runtime.c++"
+				contentURI="contents/org.eclipse.etrice.runtime.c++.zip"
+				description="eTrice Runtime for Cpp"/>
+			<projectDescriptor
+				contentURI="contents/org.eclipse.etrice.runtime.c.zip"
+				description="eTrice Runtime for C"
+				name="org.eclipse.etrice.runtime.c"/>
+	</example>
+	</extension>
+
+	<!-- ========= org.eclipse.etrice.modellib.cpp ========= -->
+	<extension point="org.eclipse.ui.newWizards">
+		<wizard	id="org.eclipse.etrice.ui.runtime.NewCppModelLibWizard"
+			name="eTrice C++ ModelLib"
+			class="org.eclipse.etrice.ui.runtime.NonDeletingWizardInstaller"
+			category="org.eclipse.etrice.core.ui.wizardCategory/org.eclipse.etrice.core.ui.wizardCppCategory/org.eclipse.etrice.core.ui.libraryCppCategory"
+			icon="icons/genproject.gif"
+			project="true">
+			<description>A ROOM Model Library for C++ with useful services</description>
+		</wizard>
+	</extension>
+	<extension point="org.eclipse.emf.common.ui.examples">
+		<example wizardID="org.eclipse.etrice.ui.runtime.NewCppModelLibWizard" pageImage="icons/genproject.gif">
+			<projectDescriptor
+				name="org.eclipse.etrice.modellib.cpp"
+				contentURI="contents/org.eclipse.etrice.modellib.cpp.zip"
+				description="eTrice ModelLib for C++"/>
+			<projectDescriptor
+				contentURI="contents/org.eclipse.etrice.runtime.cpp.zip"
+				description="eTrice Runtime for C++"
+				name="org.eclipse.etrice.runtime.cpp"/>
+			<projectDescriptor
+				contentURI="contents/org.eclipse.etrice.runtime.c.zip"
+				description="eTrice Runtime for C"
+				name="org.eclipse.etrice.runtime.c"/>
+		</example>
+	</extension>
 
 	<!-- ========= org.eclipse.etrice.runtime.java ========= -->
 	<extension point="org.eclipse.ui.newWizards">
-		<wizard	id="org.eclipse.etrice.ui.runtime.NewJavaRuntimeWizard" 
-			name="eTrice Java Runtime" 
-			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
+		<wizard	id="org.eclipse.etrice.ui.runtime.NewJavaRuntimeWizard"
+			name="eTrice Java Runtime"
+			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard"
 			category="org.eclipse.etrice.core.ui.wizardCategory/org.eclipse.etrice.core.ui.wizardJavaCategory/org.eclipse.etrice.core.ui.libraryJavaCategory"
-			icon="icons/genproject.gif" 
+			icon="icons/genproject.gif"
 			project="true">
 			<description>The Java Runtime required by eTrice Java projects</description>
 		</wizard>
@@ -91,15 +152,15 @@
 				contentURI="contents/org.eclipse.etrice.runtime.java.zip"
 				description="eTrice Runtime for Java"/>
 		</example>
-	</extension>	
+	</extension>
 
 	<!-- ========= org.eclipse.etrice.modellib.java ========= -->
 	<extension point="org.eclipse.ui.newWizards">
-		<wizard	id="org.eclipse.etrice.ui.runtime.NewJavaModelLibWizard" 
-			name="eTrice Java ModelLib" 
-			class="org.eclipse.etrice.ui.runtime.NonDeletingWizardInstaller" 
+		<wizard	id="org.eclipse.etrice.ui.runtime.NewJavaModelLibWizard"
+			name="eTrice Java ModelLib"
+			class="org.eclipse.etrice.ui.runtime.NonDeletingWizardInstaller"
 			category="org.eclipse.etrice.core.ui.wizardCategory/org.eclipse.etrice.core.ui.wizardJavaCategory/org.eclipse.etrice.core.ui.libraryJavaCategory"
-			icon="icons/genproject.gif" 
+			icon="icons/genproject.gif"
 			project="true">
 			<description>A ROOM Model Library for Java with useful services</description>
 		</wizard>
@@ -116,16 +177,16 @@
 				name="org.eclipse.etrice.runtime.java">
 			</projectDescriptor>
 		</example>
-	</extension>	
+	</extension>
 
 
 	<!-- ========= org.eclipse.etrice.tutorials.java ========= -->
 	<extension point="org.eclipse.ui.newWizards">
-		<wizard	id="org.eclipse.etrice.ui.runtime.NewJavaTutorialWizard" 
-			name="eTrice Java Tutorials" 
-			class="org.eclipse.etrice.ui.runtime.NonDeletingWizardInstaller" 
+		<wizard	id="org.eclipse.etrice.ui.runtime.NewJavaTutorialWizard"
+			name="eTrice Java Tutorials"
+			class="org.eclipse.etrice.ui.runtime.NonDeletingWizardInstaller"
 			category="org.eclipse.etrice.core.ui.wizardCategory/org.eclipse.etrice.core.ui.wizardJavaCategory"
-			icon="icons/genproject.gif" 
+			icon="icons/genproject.gif"
 			project="true">
 			<description>eTrice Java tutorials accompanying the online help</description>
 		</wizard>
@@ -147,15 +208,15 @@
 				name="org.eclipse.etrice.runtime.java">
 			</projectDescriptor>
 		</example>
-	</extension>	
-	
+	</extension>
+
 	<!-- ========= org.eclipse.etrice.examples.java ========= -->
 	<extension point="org.eclipse.ui.newWizards">
-		<wizard	id="org.eclipse.etrice.ui.runtime.NewJavaExamplesWizard" 
-			name="eTrice Java Examples" 
-			class="org.eclipse.etrice.ui.runtime.NonDeletingWizardInstaller" 
+		<wizard	id="org.eclipse.etrice.ui.runtime.NewJavaExamplesWizard"
+			name="eTrice Java Examples"
+			class="org.eclipse.etrice.ui.runtime.NonDeletingWizardInstaller"
 			category="org.eclipse.etrice.core.ui.wizardCategory/org.eclipse.etrice.core.ui.wizardJavaCategory"
-			icon="icons/genproject.gif" 
+			icon="icons/genproject.gif"
 			project="true">
 			<description>eTrice Java examples</description>
 		</wizard>
@@ -178,15 +239,15 @@
 				name="org.eclipse.etrice.examples.java">
 			</projectDescriptor>
 		</example>
-	</extension>	
+	</extension>
 
 	<!-- ========= org.eclipse.etrice.tutorials.c ========= -->
 	<extension point="org.eclipse.ui.newWizards">
-		<wizard	id="org.eclipse.etrice.ui.runtime.NewCTutorialWizard" 
-			name="eTrice C Tutorials" 
-			class="org.eclipse.etrice.ui.runtime.NonDeletingWizardInstaller" 
+		<wizard	id="org.eclipse.etrice.ui.runtime.NewCTutorialWizard"
+			name="eTrice C Tutorials"
+			class="org.eclipse.etrice.ui.runtime.NonDeletingWizardInstaller"
 			category="org.eclipse.etrice.core.ui.wizardCategory/org.eclipse.etrice.core.ui.wizardCCategory"
-			icon="icons/genproject.gif" 
+			icon="icons/genproject.gif"
 			project="true">
 			<description>eTrice C tutorials accompanying the online help</description>
 		</wizard>
@@ -208,15 +269,15 @@
 				name="org.eclipse.etrice.modellib.c">
 			</projectDescriptor>
 		</example>
-	</extension> 
-	
+	</extension>
+
 	<!-- ========= org.eclipse.etrice.examples.c ========= -->
 	<extension point="org.eclipse.ui.newWizards">
-		<wizard	id="org.eclipse.etrice.ui.runtime.ExamplesCWizard" 
-			name="eTrice C Examples" 
-			class="org.eclipse.etrice.ui.runtime.NonDeletingWizardInstaller" 
+		<wizard	id="org.eclipse.etrice.ui.runtime.ExamplesCWizard"
+			name="eTrice C Examples"
+			class="org.eclipse.etrice.ui.runtime.NonDeletingWizardInstaller"
 			category="org.eclipse.etrice.core.ui.wizardCategory/org.eclipse.etrice.core.ui.wizardCCategory"
-			icon="icons/genproject.gif" 
+			icon="icons/genproject.gif"
 			project="true">
 			<description>eTrice C tutorials accompanying the online help</description>
 		</wizard>
@@ -239,7 +300,7 @@
 			</projectDescriptor>
 		</example>
 	</extension>
-	
+
 	<!-- ========= org.eclipse.etrice.template.c ========= -->
 	<extension point="org.eclipse.ui.newWizards">
 		<wizard
@@ -270,9 +331,79 @@
 				description="eTrice ModelLib for C"
 				name="org.eclipse.etrice.modellib.c">
 			</projectDescriptor>
-   <fileToOpen
-         location="org.eclipse.etrice.template.c/model/TemplateModel.room">
-   </fileToOpen>
+	   <fileToOpen
+	         location="org.eclipse.etrice.template.c/model/TemplateModel.room">
+	   </fileToOpen>
 		</example>
-	</extension>			 
+	</extension>
+
+	<!-- ========= org.eclipse.etrice.tutorials.cpp ========= -->
+	<extension point="org.eclipse.ui.newWizards">
+		<wizard	id="org.eclipse.etrice.ui.runtime.NewCppTutorialWizard"
+			name="eTrice C++ Tutorials"
+			class="org.eclipse.etrice.ui.runtime.NonDeletingWizardInstaller"
+			category="org.eclipse.etrice.core.ui.wizardCategory/org.eclipse.etrice.core.ui.wizardCppCategory"
+			icon="icons/genproject.gif"
+			project="true">
+			<description>eTrice C++ tutorials accompanying the online help</description>
+		</wizard>
+	</extension>
+	<extension point="org.eclipse.emf.common.ui.examples">
+		<example wizardID="org.eclipse.etrice.ui.runtime.NewCppTutorialWizard" pageImage="icons/genproject.gif">
+			<projectDescriptor
+				name="org.eclipse.etrice.tutorials.cpp"
+				contentURI="contents/org.eclipse.etrice.tutorials.cpp.zip"
+				description="eTrice C++ Tutorials"/>
+			<projectDescriptor
+				contentURI="contents/org.eclipse.etrice.runtime.cpp.zip"
+				description="eTrice Runtime for C++"
+				name="org.eclipse.etrice.runtime.cpp"/>
+			<projectDescriptor
+				contentURI="contents/org.eclipse.etrice.modellib.cpp.zip"
+				description="eTrice ModelLib for C++"
+				name="org.eclipse.etrice.modellib.cpp"/>
+			<projectDescriptor
+				contentURI="contents/org.eclipse.etrice.runtime.c.zip"
+				description="eTrice Runtime for C"
+				name="org.eclipse.etrice.runtime.c"/>
+		</example>
+	</extension>
+
+	<!-- ========= org.eclipse.etrice.template.cpp ========= -->
+	<extension point="org.eclipse.ui.newWizards">
+		<wizard
+        category="org.eclipse.etrice.core.ui.wizardCategory/org.eclipse.etrice.core.ui.wizardCppCategory"
+        class="org.eclipse.etrice.ui.runtime.NonDeletingWizardInstaller"
+        finalPerspective="org.eclipse.cdt.ui.CPerspective"
+        icon="icons/genproject.gif"
+        id="org.eclipse.etrice.ui.runtime.TemplateCppWizard"
+        name="eTrice C++ Template Project"
+        preferredPerspectives="org.eclipse.cdt.ui.CPerspective"
+        project="true">
+			<description>Create the template C++ project with eTrice dependencies</description>
+		</wizard>
+	</extension>
+	<extension point="org.eclipse.emf.common.ui.examples">
+		<example wizardID="org.eclipse.etrice.ui.runtime.TemplateCppWizard" pageImage="icons/genproject.gif">
+			<projectDescriptor
+				name="org.eclipse.etrice.template.cpp"
+				contentURI="contents/org.eclipse.etrice.template.cpp.zip"
+				description="eTrice C++ Template Project"/>
+			<projectDescriptor
+				contentURI="contents/org.eclipse.etrice.runtime.cpp.zip"
+				description="eTrice Runtime for C++"
+				name="org.eclipse.etrice.runtime.cpp"/>
+			<projectDescriptor
+				contentURI="contents/org.eclipse.etrice.modellib.cpp.zip"
+				description="eTrice ModelLib for C++"
+				name="org.eclipse.etrice.modellib.cpp"/>
+			<projectDescriptor
+				contentURI="contents/org.eclipse.etrice.runtime.c.zip"
+				description="eTrice Runtime for C"
+				name="org.eclipse.etrice.runtime.c"/>
+	   <fileToOpen
+	         location="org.eclipse.etrice.template.cpp/model/TemplateModel.room">
+	   </fileToOpen>
+		</example>
+	</extension>
 </plugin>

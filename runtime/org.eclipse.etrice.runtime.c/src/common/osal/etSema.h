@@ -9,6 +9,9 @@
  * 		Thomas Schuetz (initial contribution)
  *
  *******************************************************************************/
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #ifndef _ETSEMA_H_
 #define _ETSEMA_H_
@@ -57,3 +60,7 @@ void etSema_waitForWakeup(etSema* self);
 
 
 #endif /* _ETSEMA_H_ */
+
+#ifdef __cplusplus
+}
+#endif

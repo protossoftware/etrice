@@ -10,9 +10,7 @@
  */
 package org.eclipse.etrice.generator.generic;
 
-import com.google.common.base.Objects;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.etrice.core.fsm.fSM.ComponentCommunicationType;
 import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.etrice.core.fsm.fSM.Guard;
 import org.eclipse.etrice.core.fsm.fSM.GuardedTransition;
@@ -31,75 +29,81 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 /**
- * A target language independent generator of the state machine implementation-
+ * A target language independent generator of the state machine implementation
  */
 @SuppressWarnings("all")
 public class GenericStateMachineGenerator extends AbstractStateMachineGenerator {
   /**
-   * generates the code of the whole state machine
+   * generates the code of the whole state machine, consisting of constants + methods
    * 
    * @param xpmc the {@link ExpandedModelComponent}
    * @return the generated code
-   * 
-   * @see #genStateMachine
    */
   public CharSequence genStateMachine(final ExpandedModelComponent xpmc) {
-    return this.genStateMachine(xpmc, true);
+    StringConcatenation _builder = new StringConcatenation();
+    CharSequence _genStateMachineConstants = this.genStateMachineConstants(xpmc);
+    _builder.append(_genStateMachineConstants, "");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    CharSequence _genStateMachineMethods = this.genStateMachineMethods(xpmc, true);
+    _builder.append(_genStateMachineMethods, "");
+    _builder.newLineIfNotEmpty();
+    return _builder;
   }
   
   /**
-   * generates the code of the whole state machine
+   * generates the constants for the state machine
+   */
+  public CharSequence genStateMachineConstants(final ExpandedModelComponent xpmc) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("/* state IDs */");
+    _builder.newLine();
+    String _genStateIdConstants = this.genStateIdConstants(xpmc);
+    _builder.append(_genStateIdConstants, "");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("/* transition chains */");
+    _builder.newLine();
+    String _genTransitionChainConstants = this.genTransitionChainConstants(xpmc);
+    _builder.append(_genTransitionChainConstants, "");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("/* triggers */");
+    _builder.newLine();
+    String _genTriggerConstants = this.genTriggerConstants(xpmc);
+    _builder.append(_genTriggerConstants, "");
+    _builder.newLineIfNotEmpty();
+    return _builder;
+  }
+  
+  /**
+   * generates the methods for the state machine codes and state switching
    * 
    * @param xpmc the {@link ExpandedModelComponent}
-   * @param shallGenerateOneFile if <code>true</code> the generation of state IDs and
-   * 		other constants is skipped (and left for the header file)
+   * @param generateImplemenation or declaration only
    * @return the generated code
    */
-  public CharSequence genStateMachine(final ExpandedModelComponent xpmc, final boolean shallGenerateOneFile) {
+  public CharSequence genStateMachineMethods(final ExpandedModelComponent xpmc, final boolean generateImplementation) {
     StringConcatenation _builder = new StringConcatenation();
-    {
-      if (shallGenerateOneFile) {
-        _builder.append("/* state IDs */");
-        _builder.newLine();
-        String _genStateIdConstants = this.genStateIdConstants(xpmc);
-        _builder.append(_genStateIdConstants, "");
-        _builder.newLineIfNotEmpty();
-        _builder.newLine();
-        _builder.append("/* transition chains */");
-        _builder.newLine();
-        String _genTransitionChainConstants = this.genTransitionChainConstants(xpmc);
-        _builder.append(_genTransitionChainConstants, "");
-        _builder.newLineIfNotEmpty();
-        _builder.newLine();
-        _builder.append("/* triggers */");
-        _builder.newLine();
-        String _genTriggerConstants = this.genTriggerConstants(xpmc);
-        _builder.append(_genTriggerConstants, "");
-        _builder.newLineIfNotEmpty();
-      }
-    }
-    _builder.newLine();
-    CharSequence _genExtra = this.genExtra(xpmc);
+    CharSequence _genExtra = this.genExtra(xpmc, generateImplementation);
     _builder.append(_genExtra, "");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("/* Entry and Exit Codes */");
     _builder.newLine();
-    _builder.append("        ");
-    String _genEntryAndExitCodes = this.genEntryAndExitCodes(xpmc, true);
-    _builder.append(_genEntryAndExitCodes, "        ");
+    String _genEntryAndExitCodes = this.genEntryAndExitCodes(xpmc, generateImplementation);
+    _builder.append(_genEntryAndExitCodes, "");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("/* Action Codes */");
     _builder.newLine();
-    _builder.append("        ");
-    String _genActionCodes = this.genActionCodes(xpmc, true);
-    _builder.append(_genActionCodes, "        ");
+    String _genActionCodes = this.genActionCodes(xpmc, generateImplementation);
+    _builder.append(_genActionCodes, "");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("/* State Switch Methods */");
     _builder.newLine();
-    String _genStateSwitchMethods = this.genStateSwitchMethods(xpmc, true);
+    String _genStateSwitchMethods = this.genStateSwitchMethods(xpmc, generateImplementation);
     _builder.append(_genStateSwitchMethods, "");
     _builder.newLineIfNotEmpty();
     return _builder;
@@ -433,227 +437,14 @@ public class GenericStateMachineGenerator extends AbstractStateMachineGenerator 
   }
   
   /**
-   * @param classname the name of the type
-   * @return the type name for a constant pointer
-   */
-  public String constPointer(final String classname) {
-    return classname;
-  }
-  
-  /**
-   * generate all method declarations
+   * let derived class add extra code after definition of constants
    * 
-   * @param xpax the {@link ExpandedModelComponent}
+   * @param xpmc an expanded actor class
+   * @param generateImplementation or declaration only
    * @return the generated code
    */
-  public CharSequence genStateMachineMethodDeclarations(final ExpandedModelComponent xpmc) {
-    CharSequence _xblockexpression = null;
-    {
-      final ModelComponent mc = xpmc.getModelComponent();
-      ComponentCommunicationType _commType = mc.getCommType();
-      final boolean async = Objects.equal(_commType, ComponentCommunicationType.ASYNCHRONOUS);
-      ComponentCommunicationType _commType_1 = mc.getCommType();
-      final boolean eventDriven = Objects.equal(_commType_1, ComponentCommunicationType.EVENT_DRIVEN);
-      boolean _or = false;
-      if (async) {
-        _or = true;
-      } else {
-        _or = eventDriven;
-      }
-      final boolean handleEvents = _or;
-      String _className = this.getClassName(mc);
-      final String selfPtr = this.langExt.selfPointer(_className, true);
-      final boolean usesHdlr = this.usesHandlerTrPoints(xpmc);
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.newLine();
-      _builder.append("/* state IDs */");
-      _builder.newLine();
-      String _genStateIdConstants = this.genStateIdConstants(xpmc);
-      _builder.append(_genStateIdConstants, "");
-      _builder.newLineIfNotEmpty();
-      _builder.newLine();
-      _builder.append("/* transition chains */");
-      _builder.newLine();
-      String _genTransitionChainConstants = this.genTransitionChainConstants(xpmc);
-      _builder.append(_genTransitionChainConstants, "");
-      _builder.newLineIfNotEmpty();
-      _builder.newLine();
-      _builder.append("/* triggers */");
-      _builder.newLine();
-      String _genTriggerConstants = this.genTriggerConstants(xpmc);
-      _builder.append(_genTriggerConstants, "");
-      _builder.newLineIfNotEmpty();
-      _builder.newLine();
-      CharSequence _genExtraDecl = this.genExtraDecl(xpmc);
-      _builder.append(_genExtraDecl, "");
-      _builder.newLineIfNotEmpty();
-      _builder.newLine();
-      _builder.append("/* Entry and Exit Codes */");
-      _builder.newLine();
-      _builder.append("        ");
-      String _genEntryAndExitCodes = this.genEntryAndExitCodes(xpmc, false);
-      _builder.append(_genEntryAndExitCodes, "        ");
-      _builder.newLineIfNotEmpty();
-      _builder.newLine();
-      _builder.append("/* Action Codes */");
-      _builder.newLine();
-      _builder.append("        ");
-      String _genActionCodes = this.genActionCodes(xpmc, false);
-      _builder.append(_genActionCodes, "        ");
-      _builder.newLineIfNotEmpty();
-      _builder.newLine();
-      _builder.append("private:");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("/**");
-      _builder.newLine();
-      _builder.append("\t ");
-      _builder.append("* calls exit codes while exiting from the current state to one of its");
-      _builder.newLine();
-      _builder.append("\t ");
-      _builder.append("* parent states while remembering the history");
-      _builder.newLine();
-      _builder.append("\t ");
-      _builder.append("* @param current - the current state");
-      _builder.newLine();
-      _builder.append("\t ");
-      _builder.append("* @param to - the final parent state");
-      _builder.newLine();
-      {
-        if (usesHdlr) {
-          _builder.append("\t ");
-          _builder.append("* @param handler - entry and exit codes are called only if not handler (for handler TransitionPoints)");
-          _builder.newLine();
-        }
-      }
-      _builder.append("\t ");
-      _builder.append("*/");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("void exitTo(");
-      _builder.append(selfPtr, "\t");
-      _builder.append("int current, int to");
-      {
-        if (usesHdlr) {
-          _builder.append(", ");
-          String _boolType = this.boolType();
-          _builder.append(_boolType, "\t");
-          _builder.append(" handler");
-        }
-      }
-      _builder.append(");");
-      _builder.newLineIfNotEmpty();
-      _builder.append("\t");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("/**");
-      _builder.newLine();
-      _builder.append("\t ");
-      _builder.append("* calls action, entry and exit codes along a transition chain. The generic data are cast to typed data");
-      _builder.newLine();
-      _builder.append("\t ");
-      _builder.append("* matching the trigger of this chain. The ID of the final state is returned");
-      _builder.newLine();
-      _builder.append("\t ");
-      _builder.append("* @param chain - the chain ID");
-      _builder.newLine();
-      _builder.append("\t ");
-      _builder.append("* @param generic_data__et - the generic data pointer");
-      _builder.newLine();
-      _builder.append("\t ");
-      _builder.append("* @return the ID of the final state");
-      _builder.newLine();
-      _builder.append("\t ");
-      _builder.append("*/");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("int executeTransitionChain(");
-      _builder.append(selfPtr, "\t");
-      _builder.append("int chain");
-      {
-        if (handleEvents) {
-          _builder.append(", ");
-          String _constPointer = this.constPointer("etRuntime::InterfaceItemBase");
-          _builder.append(_constPointer, "\t");
-          _builder.append(" ifitem, ");
-          String _voidPointer = this.langExt.voidPointer();
-          _builder.append(_voidPointer, "\t");
-          _builder.append(" generic_data__et");
-        }
-      }
-      _builder.append(");");
-      _builder.newLineIfNotEmpty();
-      _builder.append("\t");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("/**");
-      _builder.newLine();
-      _builder.append("\t ");
-      _builder.append("* calls entry codes while entering a state\'s history. The ID of the final leaf state is returned");
-      _builder.newLine();
-      _builder.append("\t ");
-      _builder.append("* @param state - the state which is entered");
-      _builder.newLine();
-      {
-        if (usesHdlr) {
-          _builder.append("\t ");
-          _builder.append("* @param handler - entry code is executed if not handler");
-          _builder.newLine();
-        }
-      }
-      _builder.append("\t ");
-      _builder.append("* @return - the ID of the final leaf state");
-      _builder.newLine();
-      _builder.append("\t ");
-      _builder.append("*/");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("int enterHistory(");
-      _builder.append(selfPtr, "\t");
-      _builder.append("int state");
-      {
-        if (usesHdlr) {
-          _builder.append(", ");
-          String _boolType_1 = this.boolType();
-          _builder.append(_boolType_1, "\t");
-          _builder.append(" handler");
-        }
-      }
-      _builder.append(");");
-      _builder.newLineIfNotEmpty();
-      _builder.newLine();
-      _builder.append("public:");
-      _builder.newLine();
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("void executeInitTransition(");
-      String _className_1 = this.getClassName(mc);
-      String _selfPointer = this.langExt.selfPointer(_className_1, false);
-      _builder.append(_selfPointer, "\t");
-      _builder.append(");");
-      _builder.newLineIfNotEmpty();
-      _builder.append("\t");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("/* receiveEvent contains the main implementation of the FSM */");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("void receiveEvent(");
-      String _className_2 = this.getClassName(mc);
-      String _selfPointer_1 = this.langExt.selfPointer(_className_2, handleEvents);
-      _builder.append(_selfPointer_1, "\t");
-      {
-        if (handleEvents) {
-          _builder.append("etRuntime::InterfaceItemBase* ifitem, int evt, ");
-          String _voidPointer_1 = this.langExt.voidPointer();
-          _builder.append(_voidPointer_1, "\t");
-          _builder.append(" generic_data__et");
-        }
-      }
-      _builder.append(");");
-      _builder.newLineIfNotEmpty();
-      _xblockexpression = _builder;
-    }
-    return _xblockexpression;
+  public CharSequence genExtra(final ExpandedModelComponent xpmc, final boolean generateImplementation) {
+    StringConcatenation _builder = new StringConcatenation();
+    return _builder;
   }
 }

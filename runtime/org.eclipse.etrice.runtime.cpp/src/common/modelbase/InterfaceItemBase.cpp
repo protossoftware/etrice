@@ -10,51 +10,137 @@
  *
  *******************************************************************************/
 
-#include "InterfaceItemBase.h"
-#include "common/messaging/AbstractMessageReceiver.h"
+#include "common/messaging/MessageServiceController.h"
+#include "common/messaging/RTObject.h"
 #include "common/messaging/RTServices.h"
+#include "common/modelbase/IEventReceiver.h"
+#include "common/modelbase/IInterfaceItemOwner.h"
+#include "common/modelbase/InterfaceItemBase.h"
+#include "common/modelbase/IReplicatedInterfaceItem.h"
+#include <string>
 
 namespace etRuntime {
 
-InterfaceItemBase::InterfaceItemBase (IEventReceiver& evtReceiver, IRTObject* parent, std::string name, int localId, int idx, Address ownAddress, Address peerAddress)
-: AbstractMessageReceiver(parent, ownAddress, name),
-  m_idx(idx),
-  m_localId(localId),
-  m_actorPath(name),
-  m_peerAddress(peerAddress),
-  m_ownMsgReceiver(RTServices::getInstance().getMsgSvcCtrl().getMsgSvc(ownAddress.m_threadID)),
-  m_peerMsgReceiver(peerAddress.isValid()? RTServices::getInstance().getMsgSvcCtrl().getMsgSvc(peerAddress.m_threadID): 0),
-  m_eventReceiver(&evtReceiver)
-{
-	if (getAddress().isValid() && m_ownMsgReceiver->isMsgService()) {
-		MessageService* ms = static_cast<MessageService*>(m_ownMsgReceiver);
-		// register at the own dispatcher to receive messages
-		ms->getMessageDispatcher().addMessageReceiver(*this);
-	}
-	if (parent) {
-		m_actorPath = parent->getInstancePath();
+void InterfaceItemBase::connect(IRTObject* obj, const std::string& path1, const std::string& path2) {
+	IRTObject* obj1 = obj->getObject(path1);
+	IRTObject* obj2 = obj->getObject(path2);
+
+	IInterfaceItem* ifItem1 = dynamic_cast<IInterfaceItem*>(obj1);
+	IInterfaceItem* ifItem2 = dynamic_cast<IInterfaceItem*>(obj2);
+
+	if (ifItem1 != 0 && ifItem2 != 0) {
+		ifItem1->connectWith(ifItem2);
 	}
 }
 
-InterfaceItemBase::InterfaceItemBase(const InterfaceItemBase & right)
-: AbstractMessageReceiver(right),
-  m_idx(right.m_idx),
-  m_localId(right.m_localId),
-  m_actorPath(right.m_actorPath),
-  m_peerAddress(right.m_peerAddress),
-  m_ownMsgReceiver(right.m_ownMsgReceiver),
-  m_peerMsgReceiver(right.m_peerMsgReceiver),
-  m_eventReceiver(right.m_eventReceiver)
-{
+InterfaceItemBase::InterfaceItemBase(IInterfaceItemOwner* owner, const std::string& name, int localId, int idx) :
+		AbstractMessageReceiver(owner->getEventReceiver(), name),
+		m_localId(localId),
+		m_idx(idx),
+		m_peerAddress(Address::EMPTY),
+		m_peer(0),
+		m_ownMsgReceiver(0),
+		m_peerMsgReceiver(0),
+		m_replicator(0) {
 
+	m_replicator = dynamic_cast<IReplicatedInterfaceItem*>(owner);
+
+	int thread = owner->getEventReceiver()->getThread();
+	if (thread >= 0) {
+		IMessageService* msgSvc = RTServices::getInstance().getMsgSvcCtrl().getMsgSvc(thread);
+		Address addr = msgSvc->getFreeAddress();
+		setAddress(addr);
+		msgSvc->addMessageReceiver(*this);
+
+		m_ownMsgReceiver = msgSvc;
+	}
 }
-
 
 InterfaceItemBase::~InterfaceItemBase() {
+	m_peerAddress = Address::EMPTY;
 	m_ownMsgReceiver = 0;
 	m_peerMsgReceiver = 0;
-	m_eventReceiver = 0;
+}
 
+IInterfaceItem* InterfaceItemBase::connectWith(IInterfaceItem* peer) {
+	if (peer != 0) {
+		m_peer = peer;
+
+//			if (peer instanceof IInterfaceItemBroker) {
+//				this.peer = peer.connectWith(this);
+//				return this.peer;
+//			}
+
+		IReplicatedInterfaceItem* replPeer = dynamic_cast<IReplicatedInterfaceItem*>(m_peer);
+		if (replPeer != 0) {
+			m_peer = replPeer->createSubInterfaceItem();
+		}
+
+		InterfaceItemBase* ifItemPeer = dynamic_cast<InterfaceItemBase*>(m_peer);
+		if (ifItemPeer != 0) {
+			// connect with each other
+			m_peerAddress = ifItemPeer->getAddress();
+			ifItemPeer->m_peerAddress = getAddress();
+			m_peerMsgReceiver = ifItemPeer->m_ownMsgReceiver;
+			ifItemPeer->m_peerMsgReceiver = m_ownMsgReceiver;
+		}
+
+	}
+
+	return peer;
+}
+
+void InterfaceItemBase::disconnect() {
+	disconnectInternal();
+	if (m_peer != 0) {
+		InterfaceItemBase* peer = dynamic_cast<InterfaceItemBase*>(m_peer);
+		if (peer != 0)
+			peer->disconnectInternal();
+		m_peer = 0;
+	}
+}
+
+void InterfaceItemBase::disconnectInternal() {
+	m_peerAddress = Address::EMPTY;
+	m_peerMsgReceiver = 0;
+
+	if (m_replicator != 0)
+		destroy();
+}
+
+IEventReceiver* InterfaceItemBase::getActor() const {
+	return dynamic_cast<IEventReceiver*>(getParent());
+}
+
+void InterfaceItemBase::destroy() {
+	if (m_peerAddress.isValid()) {
+		disconnect();
+	}
+
+	if (m_replicator != 0) {
+		m_replicator->removeItem(*this);
+	}
+
+	m_ownMsgReceiver->removeMessageReceiver(*this);
+	m_ownMsgReceiver->freeAddress(getAddress());
+
+	AbstractMessageReceiver::destroy();
+}
+
+std::string InterfaceItemBase::toString() const {
+	std::stringstream result;
+
+	result << ((m_replicator != 0) ? "sub " : "");
+	result << "port " + getName() << " " << getAddress().toID() << " ";
+	if(m_peerMsgReceiver == 0)
+		result << "UNCONNECTED";
+	else {
+		result << " -> ";
+		result << ((m_peer != 0) ? m_peer->getName() : "?");
+		result << " " << m_peerAddress.toID();
+	}
+
+	return result.str();
 }
 
 } /* namespace etRuntime */

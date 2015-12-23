@@ -18,14 +18,12 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.fsm.fSM.ComponentCommunicationType;
-import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.etrice.core.fsm.fSM.StateGraph;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.core.genmodel.fsm.base.ILogger;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Attribute;
-import org.eclipse.etrice.core.room.ClassStructor;
 import org.eclipse.etrice.core.room.CommunicationType;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.EnumerationType;
@@ -252,7 +250,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append(_name, " ");
       _builder.newLineIfNotEmpty();
       _builder.append(" ");
-      _builder.append("* ");
+      _builder.append("*");
       _builder.newLine();
       _builder.append(" ");
       _builder.append("*/");
@@ -324,7 +322,6 @@ public class ActorClassGen extends GenericActorClassGenerator {
               _builder.append("\t");
               _builder.append("const char* instName;");
               _builder.newLine();
-              _builder.append("\t");
               _builder.newLine();
             }
           }
@@ -350,7 +347,6 @@ public class ActorClassGen extends GenericActorClassGenerator {
               }
             }
           }
-          _builder.append("\t");
           _builder.newLine();
           _builder.append("\t");
           _builder.append("/* data receive ports */");
@@ -392,7 +388,6 @@ public class ActorClassGen extends GenericActorClassGenerator {
               _builder.newLineIfNotEmpty();
             }
           }
-          _builder.append("\t");
           _builder.newLine();
           _builder.append("\t");
           _builder.append("/* replicated ports */");
@@ -414,7 +409,6 @@ public class ActorClassGen extends GenericActorClassGenerator {
               }
             }
           }
-          _builder.append("\t");
           _builder.newLine();
           _builder.append("\t");
           _builder.append("/* services */");
@@ -471,7 +465,6 @@ public class ActorClassGen extends GenericActorClassGenerator {
               _builder.append(_name_11, "\t");
               _builder.append("_const* const constData;");
               _builder.newLineIfNotEmpty();
-              _builder.append("\t");
               _builder.newLine();
             }
           }
@@ -496,21 +489,18 @@ public class ActorClassGen extends GenericActorClassGenerator {
               }
             }
           }
-          _builder.append("\t");
           _builder.newLine();
           _builder.append("\t");
           List<Attribute> _allAttributes_1 = this._roomHelpers.getAllAttributes(ac);
           CharSequence _attributes = this._procedureHelpers.attributes(_allAttributes_1);
           _builder.append(_attributes, "\t");
           _builder.newLineIfNotEmpty();
-          _builder.append("\t");
           _builder.newLine();
           {
             StateGraph _stateMachine_2 = xpac.getStateMachine();
             boolean _isEmpty_8 = this._roomHelpers.isEmpty(_stateMachine_2);
             boolean _not_2 = (!_isEmpty_8);
             if (_not_2) {
-              _builder.append("\t");
               _builder.newLine();
               _builder.append("\t");
               CharSequence _genDataMembers = this._stateMachineGen.genDataMembers(xpac);
@@ -580,43 +570,13 @@ public class ActorClassGen extends GenericActorClassGenerator {
         }
       }
       _builder.newLine();
-      {
-        List<ClassStructor> _allStructors = this._roomHelpers.getAllStructors(ac);
-        final Function1<ClassStructor, Boolean> _function_3 = new Function1<ClassStructor, Boolean>() {
-          public Boolean apply(final ClassStructor it) {
-            return Boolean.valueOf(it.isConstructor());
-          }
-        };
-        boolean _exists = IterableExtensions.<ClassStructor>exists(_allStructors, _function_3);
-        if (_exists) {
-          String _name_19 = ac.getName();
-          CharSequence _constructorSignature = this._procedureHelpers.getConstructorSignature(_name_19);
-          _builder.append(_constructorSignature, "");
-          _builder.append(";");
-        }
-      }
-      _builder.newLineIfNotEmpty();
-      {
-        List<ClassStructor> _allStructors_1 = this._roomHelpers.getAllStructors(ac);
-        final Function1<ClassStructor, Boolean> _function_4 = new Function1<ClassStructor, Boolean>() {
-          public Boolean apply(final ClassStructor it) {
-            boolean _isConstructor = it.isConstructor();
-            return Boolean.valueOf((!_isConstructor));
-          }
-        };
-        boolean _exists_1 = IterableExtensions.<ClassStructor>exists(_allStructors_1, _function_4);
-        if (_exists_1) {
-          String _name_20 = ac.getName();
-          CharSequence _destructorSignature = this._procedureHelpers.getDestructorSignature(_name_20);
-          _builder.append(_destructorSignature, "");
-          _builder.append(";");
-        }
-      }
+      String _userStructorsDeclaration = this._procedureHelpers.userStructorsDeclaration(ac);
+      _builder.append(_userStructorsDeclaration, "");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
       List<StandardOperation> _latestOperations = this._roomHelpers.getLatestOperations(ac);
-      String _name_21 = ac.getName();
-      CharSequence _operationsDeclaration = this._procedureHelpers.operationsDeclaration(_latestOperations, _name_21);
+      String _name_19 = ac.getName();
+      CharSequence _operationsDeclaration = this._procedureHelpers.operationsDeclaration(_latestOperations, _name_19);
       _builder.append(_operationsDeclaration, "");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
@@ -745,7 +705,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append(_name_2, " ");
       _builder.newLineIfNotEmpty();
       _builder.append(" ");
-      _builder.append("* ");
+      _builder.append("*");
       _builder.newLine();
       _builder.append(" ");
       _builder.append("*/");
@@ -1277,7 +1237,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append(_name, " ");
       _builder.newLineIfNotEmpty();
       _builder.append(" ");
-      _builder.append("* ");
+      _builder.append("*");
       _builder.newLine();
       _builder.append(" ");
       _builder.append("*/");
@@ -1404,7 +1364,6 @@ public class ActorClassGen extends GenericActorClassGenerator {
           }
         }
       }
-      _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("ET_MSC_LOGGER_SYNC_EXIT");
@@ -1439,7 +1398,6 @@ public class ActorClassGen extends GenericActorClassGenerator {
             boolean _isEmpty_3 = this._roomHelpers.isEmpty(_stateMachine_3);
             boolean _not_3 = (!_isEmpty_3);
             if (_not_3) {
-              _builder.append("\t");
               _builder.newLine();
               {
                 if (handleEvents) {
@@ -1460,7 +1418,6 @@ public class ActorClassGen extends GenericActorClassGenerator {
               }
             }
           }
-          _builder.append("\t");
           _builder.newLine();
           _builder.append("\t");
           _builder.append("ET_MSC_LOGGER_SYNC_EXIT");
@@ -1470,8 +1427,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
         }
       }
       _builder.newLine();
-      CharSequence _classStructors = this.classStructors(ac);
-      _builder.append(_classStructors, "");
+      String _userStructorsImplementation = this._procedureHelpers.userStructorsImplementation(ac);
+      _builder.append(_userStructorsImplementation, "");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
       List<StandardOperation> _latestOperations = this._roomHelpers.getLatestOperations(ac);
@@ -1480,80 +1437,6 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append(_operationsImplementation, "");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
-      _xblockexpression = _builder;
-    }
-    return _xblockexpression;
-  }
-  
-  protected CharSequence classStructors(final ActorClass ac) {
-    CharSequence _xblockexpression = null;
-    {
-      List<ClassStructor> _allStructors = this._roomHelpers.getAllStructors(ac);
-      final Function1<ClassStructor, Boolean> _function = new Function1<ClassStructor, Boolean>() {
-        public Boolean apply(final ClassStructor it) {
-          return Boolean.valueOf(it.isConstructor());
-        }
-      };
-      final Iterable<ClassStructor> ctors = IterableExtensions.<ClassStructor>filter(_allStructors, _function);
-      List<ClassStructor> _allStructors_1 = this._roomHelpers.getAllStructors(ac);
-      final Function1<ClassStructor, Boolean> _function_1 = new Function1<ClassStructor, Boolean>() {
-        public Boolean apply(final ClassStructor it) {
-          boolean _isConstructor = it.isConstructor();
-          return Boolean.valueOf((!_isConstructor));
-        }
-      };
-      final Iterable<ClassStructor> dtors = IterableExtensions.<ClassStructor>filter(_allStructors_1, _function_1);
-      StringConcatenation _builder = new StringConcatenation();
-      {
-        boolean _isEmpty = IterableExtensions.isEmpty(ctors);
-        boolean _not = (!_isEmpty);
-        if (_not) {
-          String _name = ac.getName();
-          CharSequence _constructorSignature = this._procedureHelpers.getConstructorSignature(_name);
-          _builder.append(_constructorSignature, "");
-          _builder.append("{");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t");
-          final Function1<ClassStructor, CharSequence> _function_2 = new Function1<ClassStructor, CharSequence>() {
-            public CharSequence apply(final ClassStructor it) {
-              DetailCode _detailCode = it.getDetailCode();
-              String _translatedCode = ActorClassGen.this._stateMachineGen.translator.getTranslatedCode(_detailCode);
-              return ActorClassGen.this._procedureHelpers.asBlock(_translatedCode);
-            }
-          };
-          Iterable<CharSequence> _map = IterableExtensions.<ClassStructor, CharSequence>map(ctors, _function_2);
-          String _join = IterableExtensions.join(_map);
-          _builder.append(_join, "\t");
-          _builder.newLineIfNotEmpty();
-          _builder.append("}");
-          _builder.newLine();
-        }
-      }
-      {
-        boolean _isEmpty_1 = IterableExtensions.isEmpty(dtors);
-        boolean _not_1 = (!_isEmpty_1);
-        if (_not_1) {
-          String _name_1 = ac.getName();
-          CharSequence _destructorSignature = this._procedureHelpers.getDestructorSignature(_name_1);
-          _builder.append(_destructorSignature, "");
-          _builder.append("{");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t");
-          final Function1<ClassStructor, CharSequence> _function_3 = new Function1<ClassStructor, CharSequence>() {
-            public CharSequence apply(final ClassStructor it) {
-              DetailCode _detailCode = it.getDetailCode();
-              String _translatedCode = ActorClassGen.this._stateMachineGen.translator.getTranslatedCode(_detailCode);
-              return ActorClassGen.this._procedureHelpers.asBlock(_translatedCode);
-            }
-          };
-          Iterable<CharSequence> _map_1 = IterableExtensions.<ClassStructor, CharSequence>map(dtors, _function_3);
-          String _join_1 = IterableExtensions.join(_map_1);
-          _builder.append(_join_1, "\t");
-          _builder.newLineIfNotEmpty();
-          _builder.append("}");
-          _builder.newLine();
-        }
-      }
       _xblockexpression = _builder;
     }
     return _xblockexpression;

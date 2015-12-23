@@ -14,34 +14,49 @@
 #define MESSAGE_H_
 
 #include "common/messaging/Address.h"
-#include "etDatatypes.h"
+#include "stddef.h"
+#include <iostream>
+#include <sstream>
 #include <string>
 
 namespace etRuntime {
 
 class Message {
+
 public:
-	Message(Address addr, int evtId, void* data, size_t dataSize) :
-			m_address(addr), m_evtId(evtId), m_next(0),
-			m_dataSize(dataSize), m_data(data), m_logFlag(true)
-	{}
-	Message(Address addr, int evtId) :
-			m_address(addr), m_evtId(evtId), m_next(0),
-			m_dataSize(0), m_data(0), m_logFlag(true)
-	{}
-	virtual ~Message();
 
-	void setNext(Message* msg){m_next = msg;}
-	Message* getNext() const {return m_next;}
+	// Messages with data TODO MessageBuffer
+	Message(const Address& addr, int evtId, const void* dataToCopy, std::size_t dataSize);
+	Message(const Address& addr, int evtId, void* dataPtr);
 
-	void setAddress(Address address){m_address = address;	}
-	Address getAddress() const { return m_address; };
+	Message(const Address& addr, int evtId);
+	~Message();
 
-	int getEvtId() const {	return m_evtId; 	}
-	void* getData() const {	return m_data;	}
-	bool hasDebugFlagSet() const { return m_logFlag; };
+	const Address& getAddress() const {
+		return m_address;
+	}
 
-	std::string toString();
+	int getEvtId() const {
+		return m_evtId;
+	}
+
+	/** Pointer to data */
+	void* getData() const {
+		return m_data;
+	}
+
+	std::string toString() const;
+
+protected:
+	friend class MessageSeQueue;
+
+	void setNext(Message* msg) {
+		m_next = msg;
+	}
+
+	Message* getNext() const {
+		return m_next;
+	}
 
 private:
 	Address m_address;
@@ -50,11 +65,10 @@ private:
 	Message* m_next;
 	size_t m_dataSize;
 	void* m_data;
-	bool m_logFlag;
 
 	Message();
-	Message(const Message & right);
-	Message & operator = (const Message& right);
+	Message(Message const&);
+	Message& operator =(Message const&);
 
 };
 

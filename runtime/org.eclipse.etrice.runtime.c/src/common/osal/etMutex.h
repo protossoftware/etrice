@@ -18,6 +18,9 @@
  *
  * \author Thomas Schuetz, Thomas Jung
  */
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #ifndef _ETMUTEX_H_
 #define _ETMUTEX_H_
@@ -56,3 +59,7 @@ void etMutex_enter(etMutex* self);
 void etMutex_leave(etMutex* self);
 
 #endif /* _ETMUTEX_H_ */
+
+#ifdef __cplusplus
+}
+#endif

@@ -17,6 +17,9 @@
  *
  * \author: tschuetz
  */
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #ifndef _ETLOGGER_H_
 #define _ETLOGGER_H_
@@ -93,3 +96,7 @@ void etLogger_logInfoF(const char* format, ... );
 void etLogger_fprintf(etFileHandle file, const char* format, ... );
 
 #endif /* _ETLOGGER_H_ */
+
+#ifdef __cplusplus
+}
+#endif

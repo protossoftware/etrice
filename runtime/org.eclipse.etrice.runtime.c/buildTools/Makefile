@@ -1,9 +1,12 @@
+## Example Makefile
+
 # environment variables: RUNTIME_ROOTDIR, MODELLIB_ROOTDIR, TARGET_PLATFORM, TARGET_BUILD_DIR, ECLIPSE_MODE
 # default is windows mingw
 
-# CDT Environment:
+# examples CDT Environment:
 # RUNTIME_ROOTDIR: ${workspace_loc:org.eclipse.etrice.runtime.c}
 # MODELLIB_ROOTDIR: ${workspace_loc:org.eclipse.etrice.modellib.c}
+# ECLIPSE_MODE (no value)
 
 ifeq ($(strip ${RUNTIME_ROOTDIR}),)
 	RUNTIME_ROOTDIR := ../org.eclipse.etrice.runtime.c

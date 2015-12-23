@@ -11,28 +11,22 @@
  */
 package org.eclipse.etrice.generator.cpp.gen;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem;
-import org.eclipse.etrice.core.fsm.fSM.MessageFromIf;
 import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
 import org.eclipse.etrice.core.fsm.fSM.State;
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ExpandedModelComponent;
-import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.generator.cpp.gen.ProtocolClassGen;
+import org.eclipse.etrice.generator.base.GlobalGeneratorSettings;
+import org.eclipse.etrice.generator.cpp.Main;
 import org.eclipse.etrice.generator.generic.GenericStateMachineGenerator;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.util.Pair;
-import org.eclipse.xtext.util.Tuples;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
 
-/**
- * @author Peter Karlitschek
- */
 @Singleton
 @SuppressWarnings("all")
 public class StateMachineGen extends GenericStateMachineGenerator {
@@ -40,125 +34,155 @@ public class StateMachineGen extends GenericStateMachineGenerator {
   @Extension
   private RoomExtensions _roomExtensions;
   
-  @Inject
-  private ProtocolClassGen cppProtGen;
-  
-  public CharSequence genExtraDecl(final ExpandedModelComponent xpac) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("protected:");
-    _builder.newLine();
-    _builder.append(" \t");
-    _builder.append("static std::string s_stateStrings[];");
-    _builder.newLine();
-    _builder.append(" \t");
-    _builder.append("static const int s_numberOfStates;");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("private:");
-    _builder.newLine();
-    _builder.append("\t ");
-    _builder.append("void setState(int new_state);");
-    _builder.newLine();
-    return _builder;
-  }
-  
-  public CharSequence genExtra(final ExpandedModelComponent xpac) {
+  public CharSequence genExtra(final ExpandedModelComponent xpac, final boolean generateImplementation) {
     CharSequence _xblockexpression = null;
     {
+      final ArrayList<State> states = CollectionLiterals.<State>newArrayList();
+      ModelComponent ac = xpac.getModelComponent();
       ModelComponent _modelComponent = xpac.getModelComponent();
-      final ActorClass ac = ((ActorClass) _modelComponent);
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("std::string ");
-      String _name = ac.getName();
-      _builder.append(_name, "");
-      _builder.append("::s_stateStrings[] = {\"<no state>\",\"<top>\",");
-      {
-        List<State> _allBaseStatesLeavesLast = this._roomExtensions.getAllBaseStatesLeavesLast(ac);
-        boolean _hasElements = false;
-        for(final State state : _allBaseStatesLeavesLast) {
-          if (!_hasElements) {
-            _hasElements = true;
-          } else {
-            _builder.appendImmediate(",", "");
-          }
-          _builder.append("\"");
-          String _genStatePathName = this._codegenHelpers.getGenStatePathName(state);
-          _builder.append(_genStatePathName, "");
-          _builder.append("\"");
-          _builder.newLineIfNotEmpty();
+      final String clsName = _modelComponent.getComponentName();
+      while ((!Objects.equal(ac, null))) {
+        {
+          List<State> _allBaseStates = this._fSMHelpers.getAllBaseStates(ac);
+          List<State> _leafStatesLast = this._roomExtensions.getLeafStatesLast(_allBaseStates);
+          states.addAll(0, _leafStatesLast);
+          ModelComponent _base = ac.getBase();
+          ac = _base;
         }
       }
-      _builder.append("};");
-      _builder.newLineIfNotEmpty();
-      _builder.append("const int ");
-      String _name_1 = ac.getName();
-      _builder.append(_name_1, "");
-      _builder.append("::s_numberOfStates = ");
-      List<State> _allBaseStatesLeavesLast_1 = this._roomExtensions.getAllBaseStatesLeavesLast(ac);
-      int _size = _allBaseStatesLeavesLast_1.size();
-      int _plus = (_size + 2);
-      _builder.append(_plus, "");
-      _builder.append(";");
-      _builder.newLineIfNotEmpty();
-      _builder.newLine();
-      _builder.append("void ");
-      String _name_2 = ac.getName();
-      _builder.append(_name_2, "");
-      _builder.append("::setState(int new_state) {");
-      _builder.newLineIfNotEmpty();
-      _builder.append("\t");
-      _builder.append("DebuggingService::getInstance().addActorState(*this, s_stateStrings[new_state]);");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("if (s_stateStrings[new_state]!=\"Idle\") {");
-      _builder.newLine();
-      _builder.append("\t\t");
-      _builder.append("std::cout << getInstancePath() << \" -> \" << s_stateStrings[new_state] << std::endl;");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("}\t");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("m_state = new_state;");
-      _builder.newLine();
-      _builder.append("}");
-      _builder.newLine();
-      _xblockexpression = _builder;
+      CharSequence _xifexpression = null;
+      if (generateImplementation) {
+        StringConcatenation _builder = new StringConcatenation();
+        {
+          boolean _or = false;
+          GlobalGeneratorSettings _settings = Main.getSettings();
+          boolean _isGenerateMSCInstrumentation = _settings.isGenerateMSCInstrumentation();
+          if (_isGenerateMSCInstrumentation) {
+            _or = true;
+          } else {
+            GlobalGeneratorSettings _settings_1 = Main.getSettings();
+            boolean _isGenerateWithVerboseOutput = _settings_1.isGenerateWithVerboseOutput();
+            _or = _isGenerateWithVerboseOutput;
+          }
+          if (_or) {
+            _builder.append("// state names");
+            _builder.newLine();
+            _builder.append("const std::string ");
+            _builder.append(clsName, "");
+            _builder.append("::s_stateStrings[] = {");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t");
+            _builder.append("\"<no state>\",");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("\"<top>\",");
+            _builder.newLine();
+            {
+              boolean _hasElements = false;
+              for(final State state : states) {
+                if (!_hasElements) {
+                  _hasElements = true;
+                } else {
+                  _builder.appendImmediate(",", "\t");
+                }
+                _builder.append("\t");
+                _builder.append("\"");
+                String _genStatePathName = this._codegenHelpers.getGenStatePathName(state);
+                _builder.append(_genStatePathName, "\t");
+                _builder.append("\"");
+                _builder.newLineIfNotEmpty();
+              }
+            }
+            _builder.append("};");
+            _builder.newLine();
+          }
+        }
+        _builder.append("const int ");
+        _builder.append(clsName, "");
+        _builder.append("::s_numberOfStates = ");
+        int _size = states.size();
+        int _plus = (2 + _size);
+        _builder.append(_plus, "");
+        _builder.append(";");
+        _builder.newLineIfNotEmpty();
+        _builder.newLine();
+        _builder.append("void ");
+        _builder.append(clsName, "");
+        _builder.append("::setState(int new_state) {");
+        _builder.newLineIfNotEmpty();
+        {
+          GlobalGeneratorSettings _settings_2 = Main.getSettings();
+          boolean _isGenerateMSCInstrumentation_1 = _settings_2.isGenerateMSCInstrumentation();
+          if (_isGenerateMSCInstrumentation_1) {
+            _builder.append("\t");
+            _builder.append("DebuggingService::getInstance().addActorState(*this, s_stateStrings[new_state]);");
+            _builder.newLine();
+          }
+        }
+        {
+          GlobalGeneratorSettings _settings_3 = Main.getSettings();
+          boolean _isGenerateWithVerboseOutput_1 = _settings_3.isGenerateWithVerboseOutput();
+          if (_isGenerateWithVerboseOutput_1) {
+            _builder.append("\t");
+            _builder.append("if (s_stateStrings[new_state] != \"Idle\") {");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("\t");
+            _builder.append("std::cout << getInstancePath() << \" -> \" << s_stateStrings[new_state] << std::endl;");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("}");
+            _builder.newLine();
+          }
+        }
+        _builder.append("\t");
+        _builder.append("m_state = new_state;");
+        _builder.newLine();
+        _builder.append("}");
+        _builder.newLine();
+        _xifexpression = _builder;
+      } else {
+        StringConcatenation _builder_1 = new StringConcatenation();
+        {
+          boolean _or_1 = false;
+          GlobalGeneratorSettings _settings_4 = Main.getSettings();
+          boolean _isGenerateMSCInstrumentation_2 = _settings_4.isGenerateMSCInstrumentation();
+          if (_isGenerateMSCInstrumentation_2) {
+            _or_1 = true;
+          } else {
+            GlobalGeneratorSettings _settings_5 = Main.getSettings();
+            boolean _isGenerateWithVerboseOutput_2 = _settings_5.isGenerateWithVerboseOutput();
+            _or_1 = _isGenerateWithVerboseOutput_2;
+          }
+          if (_or_1) {
+            _builder_1.append("static const std::string s_stateStrings[];");
+            _builder_1.newLine();
+          }
+        }
+        _builder_1.append("static const int s_numberOfStates;");
+        _builder_1.newLine();
+        _builder_1.newLine();
+        _builder_1.append("int history[");
+        int _size_1 = states.size();
+        int _plus_1 = (2 + _size_1);
+        _builder_1.append(_plus_1, "");
+        _builder_1.append("];");
+        _builder_1.newLineIfNotEmpty();
+        _builder_1.newLine();
+        _builder_1.append("void setState(int new_state);");
+        _builder_1.newLine();
+        _xifexpression = _builder_1;
+      }
+      _xblockexpression = _xifexpression;
     }
     return _xblockexpression;
   }
   
-  public String genTriggerConstants(final ExpandedModelComponent xpac) {
-    EList<MessageFromIf> _xifexpression = null;
-    boolean _usesInheritance = this.langExt.usesInheritance();
-    if (_usesInheritance) {
-      _xifexpression = xpac.getOwnTriggers();
-    } else {
-      _xifexpression = xpac.getTriggers();
-    }
-    final EList<MessageFromIf> triggers = _xifexpression;
-    final ArrayList<Pair<String, String>> list = new ArrayList<Pair<String, String>>();
-    Pair<String, String> _pair = Tuples.<String, String>pair("POLLING", "0");
-    list.add(_pair);
-    for (final MessageFromIf mif : triggers) {
-      String _triggerCodeName = xpac.getTriggerCodeName(mif);
-      AbstractInterfaceItem _from = mif.getFrom();
-      String _name = _from.getName();
-      String _plus = ("IFITEM_" + _name);
-      String _plus_1 = (_plus + " + EVT_SHIFT*");
-      String _messageID = this.cppProtGen.getMessageID(mif);
-      String _plus_2 = (_plus_1 + _messageID);
-      Pair<String, String> _pair_1 = Tuples.<String, String>pair(_triggerCodeName, _plus_2);
-      list.add(_pair_1);
-    }
-    return this.langExt.genEnumeration("triggers", list);
-  }
-  
-  public String constPointer(final String classname) {
-    return (("const " + classname) + "*");
+  public String stateType() {
+    return "etInt16";
   }
   
   public String boolType() {
-    return "bool";
+    return "etBool";
   }
 }

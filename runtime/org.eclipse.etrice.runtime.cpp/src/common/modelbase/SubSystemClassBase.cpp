@@ -10,31 +10,28 @@
  *
  *******************************************************************************/
 
-#include "SubSystemClassBase.h"
-#include "common/messaging/MessageService.h"
-#include "common/messaging/RTServices.h"
-#include "ActorClassBase.h"
+#include "common/modelbase/SubSystemClassBase.h"
 #include "common/debugging/DebuggingService.h"
+#include "common/debugging/MSCLogger.h"
+#include "common/messaging/MessageServiceController.h"
+#include "common/messaging/RTServices.h"
+#include "common/modelbase/ActorClassBase.h"
+#include <iostream>
+#include <iterator>
+#include <map>
+#include <string>
+#include <vector>
+
+
 
 namespace etRuntime {
 
-
-SubSystemClassBase::~SubSystemClassBase() {
-	m_testSem = 0;
-	m_RTSystemPort = 0;
-}
-
-SubSystemClassBase::SubSystemClassBase(IRTObject* parent, std::string name)
-	: 	RTObject(parent, name),
-		IEventReceiver(),
-		m_RTSystemPort(0),
-		m_instances(),
-		m_testSem(0),
-		m_testErrorCode(0)
-{
-	DebuggingService::getInstance().getAsyncLogger().setMSC(name + "_Async", "");
+SubSystemClassBase::SubSystemClassBase(IRTObject* parent, std::string name) :
+		RTObject(parent, name),
+		m_RTSystemPort(this, IFITEM_RTSystemPort) {
+	DebuggingService::getInstance().getAsyncLogger().setMSC(name + "_Async", "log/");
 	DebuggingService::getInstance().getAsyncLogger().open();
-	DebuggingService::getInstance().getSyncLogger().setMSC(name + "_Sync", "");
+	DebuggingService::getInstance().getSyncLogger().setMSC(name + "_Sync", "log/");
 	DebuggingService::getInstance().getSyncLogger().open();
 
 	RTServices::getInstance().setSubSystem(this);
@@ -53,46 +50,44 @@ void SubSystemClassBase::init() {
 	// RTServices::getInstance().getMsgSvcCtrl().connectAll();
 
 	instantiateActors();
+	std::cout << toStringRecursive() << std::endl;
 
-	// initialize all actor m_instances
-	for (unsigned int i = 0; i < m_instances.size(); i++) {
-		m_instances[i]->init();
+	// initialize all actor instances
+	for (std::vector<IRTObject*>::iterator it = getChildren().begin(); it != getChildren().end(); ++it) {
+		ActorClassBase* child = dynamic_cast<ActorClassBase*>(*it);
+		if (child != 0)
+			child->init();
 	}
 }
 
-void SubSystemClassBase::start(bool singlethreaded) {
+void SubSystemClassBase::start() {
 	// start all actors instances
-	m_RTSystemPort->executeInitialTransition();
+	m_RTSystemPort.executeInitialTransition();
 
 	// start all message services
-	RTServices::getInstance().getMsgSvcCtrl().start(singlethreaded);
+	RTServices::getInstance().getMsgSvcCtrl().start();
 
 }
 
-void SubSystemClassBase::stop(bool singlethreaded) {
-	std::cout << "*** MainComponent " << this->getInstancePath() << "::stop ***" << std::endl;
+void SubSystemClassBase::stop() {
+	std::cout << "*** MainComponent " << getInstancePath() << "::stop ***" << std::endl;
 
-	RTServices::getInstance().getMsgSvcCtrl().stop(singlethreaded);
+	RTServices::getInstance().getMsgSvcCtrl().stop();
 	std::cout << "=== done stop MsgSvcCtrl" << std::endl;
 
 	// stop all actor instances
-	for (unsigned int i = 0; i < m_instances.size(); i++) {
-		m_instances[i]->stop();
+	for (std::vector<IRTObject*>::iterator it = getChildren().begin(); it != getChildren().end(); ++it) {
+		ActorClassBase* child = dynamic_cast<ActorClassBase*>(*it);
+		if (child != 0)
+			child->stop();
 	}
 	std::cout << "=== done stop actor instances" << std::endl;
 }
 
-void SubSystemClassBase::runOnce() {
-	// run all message services one time
-	RTServices::getInstance().getMsgSvcCtrl().runOnce();
-
-}
-
 void SubSystemClassBase::destroy() {
 	std::cout << "*** MainComponent " << this->getInstancePath() << "::destroy ***" << std::endl;
-	for (unsigned int i = 0; i < m_instances.size(); i++) {
-		m_instances[i]->destroy();
-	}
+	RTObject::destroy();
+	std::cout << toStringRecursive() << std::endl;
 	std::cout << "=== done destroy actor instances" << std::endl;
 
 	DebuggingService::getInstance().getAsyncLogger().close();
@@ -103,57 +98,31 @@ void SubSystemClassBase::destroy() {
 	std::cout << "=== done destroy RTServices\n\n\n" << std::endl;
 }
 
-MessageService* SubSystemClassBase::getMsgService(int idx) const {
+IMessageService* SubSystemClassBase::getMsgService(int idx) const {
 	return RTServices::getInstance().getMsgSvcCtrl().getMsgSvc(idx);
 }
 
-ActorClassBase* SubSystemClassBase::getInstance(unsigned int i) {
-	if (i < 0 || i >= m_instances.size())
-		return 0;
+ActorClassBase* SubSystemClassBase::getInstance(const std::string& path) const {
+	IRTObject* object = getObject(path);
 
-	return m_instances[i];
+	return dynamic_cast<ActorClassBase*>(object);
 }
 
-ActorClassBase* SubSystemClassBase::getInstance(std::string path) {
-	for (unsigned int i = 0; i < m_instances.size(); i++) {
-		if (m_instances[i]->getInstancePath() == path)
-			return m_instances[i];
-	}
-
-	return 0;
+void SubSystemClassBase::addPathToThread(const std::string& path, int thread) {
+	m_path2thread[path] = thread;
 }
 
-// this is to run integration tests
-// TODO synchronized
-void SubSystemClassBase::setTestSemaphore(TestSemaphore& sem) {
-	m_testErrorCode = -1;
-	m_testSem = &sem;
+int SubSystemClassBase::getThreadForPath(const std::string& path) const {
+	std::map<std::string, int> ::const_iterator it = m_path2thread.find(path);
+	if (it == m_path2thread.end())
+		return -1;
+
+	return it->second;
 }
 
-//TODO synchronized
-int SubSystemClassBase::getTestErrorCode() const {
-	return m_testErrorCode;
+void SubSystemClassBase::resetAll() {
+	m_path2thread.clear();
 }
-
-void SubSystemClassBase::testFinished(int errorCode) {
-	if (m_testSem != 0) {
-		std::cout
-			<< "org.eclipse.etrice.runtime.cpp.modelbase.SubSystemClassBase.testFinished(int): before releasing semaphore"
-			<< std::endl;
-		//m_testSem.printWaitingThreads();
-		//TODO synchronized (this) {
-		m_testErrorCode = errorCode;
-		m_testSem->give();
-		//}
-		std::cout
-			<< "org.eclipse.etrice.runtime.cpp.modelbase.SubSystemClassBase.testFinished(int): semaphore released"
-			<< std::endl;
-		//m_testSem.printWaitingThreads();
-		//TODO
-		//Thread.yield();
-	}
-}
-
 
 } /* namespace etRuntime */
 

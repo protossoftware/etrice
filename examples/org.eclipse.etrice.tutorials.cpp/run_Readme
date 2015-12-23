@@ -1,0 +1,4 @@
+Perform a clean of the project whenever you run another generated model. (Menu: Project -> Clean)
+
+Switching from HelloWorld to PingPong application requires a complete clean before run.
+Otherwise there might be more than one main function in the binary folder.

@@ -1,2 +1,4 @@
+WindowsMinGW
+LinuxPosix
 bin
-Debug
+src-gen-info

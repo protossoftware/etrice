@@ -13,42 +13,36 @@
 #ifndef MESSAGESERVICECONTROLLER_H_
 #define MESSAGESERVICECONTROLLER_H_
 
-#include "common/messaging/MessageService.h"
-#include "common/messaging/RTServices.h"
-#include <vector>
+#include "common/messaging/IMessageService.h"
+#include "osal/etMutex.h"
+#include "osal/etSema.h"
+#include <map>
+#include <queue>
 #include <string>
-#include <iostream>
-#include <algorithm>
 
 namespace etRuntime {
 
 class MessageServiceController {
 public:
-	MessageServiceController(/*IRTObject parent*/);
-	virtual ~MessageServiceController();
+	MessageServiceController();
+	virtual ~MessageServiceController() {}
 
-	void addMsgSvc(MessageService& msgSvc);
-	//raises an exception if the service does not exist for this threadID
-	MessageService* getMsgSvc(int threadID);
-
-	void addAsyncActor(IEventReceiver& evtReceiver);
-	void pollAsyncActors();
-
-	//the connectAll method connects all messageServices
-	//it is included for test purposes
-	//currently it is not called
-	void connectAll();
-	void start(bool singlethreaded);
-	void stop(bool singlethreaded);
-
-	//TODO: this is only for single threaded configurations
-	void runOnce();
+	int getNewID();
+	void freeID(int id);
+	void addMsgSvc(IMessageService& msgSvc);
+	void removeMsgSvc(IMessageService& msgSvc);
+	IMessageService* getMsgSvc(int threadID);
+	void start();
+	void stop();
+	void resetAll();
 
 	/**
 	 * waitTerminate waits blocking for all MessageServices to terminate
-	 * ! not threadsafe !
+	 * ! not thread safe !
 	 */
 	void waitTerminate();
+
+	void setMsgSvcTerminated(const IMessageService& msgSvc);
 
 protected:
 	void dumpThreads(std::string msg);
@@ -56,14 +50,17 @@ protected:
 private:
 	void terminate();
 
-	MessageServiceController(const MessageServiceController& right);
-	MessageServiceController& operator=(const MessageServiceController& right);
+	std::map<int, IMessageService*> m_messageServices;
+	std::queue<int> m_freeIDs;
+	etBool m_running;
+	int m_nextFreeID;
 
+	etMutex m_mutex;
+	etSema m_terminateSema;
+	std::map<int, IMessageService*> m_terminateServices;
 
-	std::vector<MessageService*> m_messageServiceList;
-	//	 IRTObject parent = null;
-	bool m_running;
-
+	MessageServiceController(MessageServiceController const&);
+	MessageServiceController& operator=(MessageServiceController const&);
 };
 
 } /* namespace etRuntime */

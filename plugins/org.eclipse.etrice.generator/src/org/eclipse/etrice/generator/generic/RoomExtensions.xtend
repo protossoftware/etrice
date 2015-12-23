@@ -4,10 +4,10 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * CONTRIBUTORS:
  * 		Thomas Schuetz and Henrik Rentz-Reichert (initial contribution)
- * 
+ *
  *******************************************************************************/
 
 package org.eclipse.etrice.generator.generic
@@ -47,12 +47,14 @@ import org.eclipse.etrice.generator.fsm.generic.FSMExtensions
 @Singleton
 class RoomExtensions extends FSMExtensions {
 
+	public val NEWLINE = System.getProperty("line.separator")
+
 	private static String genDir = "/src-gen/"
 	private static String genInfoDir = "/src-gen-info/"
 	private static String genDocDir = "/doc-gen/"
-	
+
 	@Inject protected extension RoomHelpers
-	
+
 	def static setDefaultGenDir() {
 		genDir = "/src-gen/"
 	}
@@ -71,10 +73,10 @@ class RoomExtensions extends FSMExtensions {
 	def static setGenDocDir(String dir) {
 		genDocDir = "/"+dir+"/"
 	}
-	
+
 	//-------------------------------------------------------
 	// union methods
-    
+
 	/**
 	 * a specialized version of {@link #union(Iterable, Iterable)}
 	 * @param in1 an iterable of type T
@@ -87,17 +89,17 @@ class RoomExtensions extends FSMExtensions {
 		ret.addAll(in1)
 		return ret
 	}
-	
+
 	//-------------------------------------------------------
 	// path related methods
-	
+
 	/**
 	 * @return the relative path to the destination folder for the generated code
 	 */
 	def String getGenerationPathSegment() {
 		genDir
 	}
-	
+
 	/**
 	 * @return the relative path to the destination folder for the generated code
 	 */
@@ -130,7 +132,7 @@ class RoomExtensions extends FSMExtensions {
 
 	//-------------------------------------------------------
 	// packages and paths
-	
+
 	/**
 	 * @param rc a {@link RoomClass}
 	 * @return the name of the room model which also serves as a package name
@@ -138,7 +140,7 @@ class RoomExtensions extends FSMExtensions {
 	def String getPackage(RoomClass rc) {
 		return (rc.eContainer as RoomModel).name
 	}
-	
+
 	/**
 	 * @param rc a {@link RoomClass}
 	 * @return the name of the room model followed by the class name and all . replaced with _
@@ -146,7 +148,7 @@ class RoomExtensions extends FSMExtensions {
 	def String getFullyQualifiedName(RoomClass rc) {
 		rc.package.replace(".", "_")+"_"+rc.name
 	}
-	
+
 	/**
 	 * @param packageName a dot (.) separated package anem
 	 * @return the input with dots replaced with slashes (/)
@@ -154,7 +156,7 @@ class RoomExtensions extends FSMExtensions {
 	def String getPathFromPackage(String packageName) {
 		return packageName.replaceAll("\\.", "/") + "/"
 	}
-	
+
 	/**
 	 * @param rc a {@link RoomClass}
 	 * @return the relative folder path of the package
@@ -163,7 +165,7 @@ class RoomExtensions extends FSMExtensions {
 	def String getPath(RoomClass rc) {
 		getPathFromPackage(getPackage(rc))
 	}
-	
+
 	// a directory is a eclipse project if it contains a ".project" file
 	/**
 	 * @param e an {@link EObject}
@@ -177,7 +179,7 @@ class RoomExtensions extends FSMExtensions {
 
 		return res.toFileString
 	}
-	
+
 	/**
 	 * @param e an {@link EObject}
 	 * @return the concatenation of the object's project path
@@ -186,7 +188,7 @@ class RoomExtensions extends FSMExtensions {
 	def String getGenerationTargetPath(EObject e){
 		return getProjectPath(e)+getGenerationPathSegment()
 	}
-	
+
 	/**
 	 * @param e an {@link EObject}
 	 * @return the concatenation of the object's project path
@@ -204,7 +206,7 @@ class RoomExtensions extends FSMExtensions {
 	def String getDocGenerationTargetPath(EObject e){
 		return getProjectPath(e)+getDocGenerationPathSegment()
 	}
-	
+
 	/**
 	 * makes a valid identifier from a path string
 	 * @param path a slash (/) separated path
@@ -216,7 +218,7 @@ class RoomExtensions extends FSMExtensions {
 
 	//-------------------------------------------------------
 	// protocol related methods
-	
+
 	/**
 	 * @param p a {@link Port}
 	 * @return a name for the associated port class
@@ -235,7 +237,7 @@ class RoomExtensions extends FSMExtensions {
 	def dispatch String getPortClassName(ExternalPort p){
 		return p.interfacePort.getPortClassName()
 	}
-	
+
 	/**
 	 * @param sap a {@link SAP}
 	 * @return a name for the associated port class
@@ -259,7 +261,7 @@ class RoomExtensions extends FSMExtensions {
 	def dispatch String getPortClassName(ServiceImplementation svc) {
 		return svc.spp.protocol.getPortClassName(false, true)
 	}
-	
+
 	/**
 	 * @param p a {@link ProtocolClass}
 	 * @param conj if <code>true</code> consider conjugate port, else regular
@@ -268,7 +270,7 @@ class RoomExtensions extends FSMExtensions {
 	def String getPortClassName(ProtocolClass p, boolean conj) {
 		getPortClassName(p, conj, false)
 	}
-	
+
 	/**
 	 * @param p a {@link ProtocolClass}
 	 * @param conj if <code>true</code> consider conjugate port, else regular
@@ -291,7 +293,7 @@ class RoomExtensions extends FSMExtensions {
 		else
 			return pc.regular
 	}
-	
+
 	/**
 	 * @param pc a {@link ProtocolClass}
 	 * @param conj flag indicating the desired communication direction
@@ -307,7 +309,7 @@ class RoomExtensions extends FSMExtensions {
 		}
 		return false;
 	}
-	
+
 	/**
 	 * @param pc a {@link ProtocolClass}
 	 * @param conj flag indicating the desired communication direction
@@ -343,7 +345,7 @@ class RoomExtensions extends FSMExtensions {
 			return false
 		}
 	}
-	
+
 	/**
 	 * @param pc a {@link ProtocolClass}
 	 * @param conj flag indicating the desired communication direction
@@ -379,7 +381,7 @@ class RoomExtensions extends FSMExtensions {
 			return res
 		}
 	}
-	
+
 	/**
 	 * @param m a {@link Message}
 	 * @param conj flag indicating the desired communication direction
@@ -388,7 +390,7 @@ class RoomExtensions extends FSMExtensions {
 	def MessageHandler getSendHandler(Message m, boolean conj) {
 		return (m.eContainer as ProtocolClass).getSendHandlers(conj).findFirst(e|e.msg==m)
 	}
-	
+
 	/**
 	 * @param m a {@link Message}
 	 * @return <code>true</code> if this message is an incoming message
@@ -396,7 +398,7 @@ class RoomExtensions extends FSMExtensions {
 	def boolean isIncoming(Message m) {
 		return (m.eContainer as ProtocolClass).allIncomingMessages.contains(m)
 	}
-	
+
 	/*
 	 * @param m a {@link Message}
 	 * @return a string that can be used as identifier for the message. It is prefixed with IN_ or OUT_
@@ -418,7 +420,7 @@ class RoomExtensions extends FSMExtensions {
 		ac.operations.exists(e|e.name=="stop" && e.arguments.isEmpty && e.returnType==null)
 			|| (ac.actorBase!=null && ac.actorBase.overridesStop())
 	}
-	
+
 	def getAllSubInstances(StructureInstance ssi) {
 		val BasicEList<AbstractInstance> result = new BasicEList<AbstractInstance>();
 		val TreeIterator<EObject> it = ssi.eAllContents();
@@ -429,7 +431,7 @@ class RoomExtensions extends FSMExtensions {
 		}
 		return result;
 	}
-	
-	
-	
+
+
+
 }

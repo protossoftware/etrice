@@ -19,6 +19,9 @@
  *
  * \author Thomas Schuetz
  */
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #ifndef _ETUNIT_H_
 #define _ETUNIT_H_
@@ -387,4 +390,7 @@ void expectOrderEnd(etInt16 id, const char* msg, etInt16 identifier, const char*
 
 #endif /* _ETUNIT_H_ */
 
+#ifdef __cplusplus
+}
+#endif
 

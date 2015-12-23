@@ -13,7 +13,7 @@ import java.util.ArrayList;
 /**
  * An implementation of the IRTObject interface using a hierarchical structure
  * to assemble paths.
- * 
+ *
  * @author Henrik Rentz-Reichert
  *
  */
@@ -22,23 +22,26 @@ public class RTObject implements IRTObject	{
 	private String name = NO_NAME;
 	private IRTObject parent = null;
 	ArrayList<IRTObject> children = new ArrayList<IRTObject>();
-	
+
 	protected RTObject(IRTObject parent, String name){
 		this.parent = parent;
 		this.name = name;
-		
+
 		if (parent!=null)
 			parent.getChildren().add(this);
 	}
 
+	@Override
 	public String getName() {
 		return name;
 	}
-	
+
+	@Override
 	public IRTObject getParent() {
 		return parent;
 	}
 
+	@Override
 	public ArrayList<IRTObject> getChildren() {
 		return children;
 	}
@@ -55,37 +58,40 @@ public class RTObject implements IRTObject	{
 			parent = null;
 		}
 	}
-	
+
+	@Override
 	public IRTObject getRoot() {
 		IRTObject root = this;
 		while (root.getParent()!=null)
 			root = root.getParent();
-		
+
 		return root;
 	}
-	
+
+	@Override
 	public IRTObject getChild(String name) {
 		for (IRTObject child : children) {
 			if (child.getName().equals(name))
 				return child;
 		}
-		
+
 		return null;
 	}
-	
+
+	@Override
 	public IRTObject getObject(String path) {
 		boolean isAbsolute = path.charAt(0)==PATH_DELIM;
 		if (isAbsolute && getParent()!=null)
 			return getParent().getObject(path);
-		
+
 		if (isAbsolute)
 			path = path.substring(1);
-		
+
 		String[] segments = path.split(Character.toString(PATH_DELIM));
 
 		if (segments.length>0) {
 			IRTObject current = this;
-			
+
 			String first = segments[0];
 			for (String segment : segments) {
 				if (isAbsolute && segment==first) {
@@ -100,23 +106,26 @@ public class RTObject implements IRTObject	{
 			}
 			return current;
 		}
-		
+
 		return null;
 	}
-	
+
+	@Override
 	public String getInstancePath(char delim) {
 		String path = delim + name;
-		
+
 		if (parent!=null)
 			path = parent.getInstancePath(delim)+path;
-		
+
 		return path;
 	}
-	
+
+	@Override
 	public String getInstancePath() {
 		return getInstancePath(PATH_DELIM);
 	}
 
+	@Override
 	public String getInstancePathName() {
 		return getInstancePath(PATHNAME_DELIM);
 	}
@@ -130,10 +139,10 @@ public class RTObject implements IRTObject	{
 			return parent.getThreadForPath(path);
 		return -1;
 	}
-	
+
 	private String toStringRecursive(String indent) {
 		StringBuilder result = new StringBuilder(indent+toString()+"\n");
-		
+
 		indent = "  "+indent;
 		for (IRTObject child : getChildren()) {
 			if (child instanceof RTObject)
@@ -143,11 +152,11 @@ public class RTObject implements IRTObject	{
 		}
 		return result.toString();
 	}
-	
+
 	public String toStringRecursive() {
 		return toStringRecursive("");
 	}
-	
+
 	@Override
 	public String toString() {
 		return getName();

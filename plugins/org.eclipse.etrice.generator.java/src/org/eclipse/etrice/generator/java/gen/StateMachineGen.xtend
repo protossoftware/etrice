@@ -4,10 +4,10 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * CONTRIBUTORS:
  * 		Henrik Rentz-Reichert (initial contribution)
- * 
+ *
  *******************************************************************************/
 
 package org.eclipse.etrice.generator.java.gen
@@ -22,11 +22,14 @@ import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ExpandedModelComponent
 
 @Singleton
 class StateMachineGen extends GenericStateMachineGenerator {
-	
-	override genExtra(ExpandedModelComponent xpac) {
+
+	/**
+	 * @param generateImplementation NOT used
+	 */
+	override genExtra(ExpandedModelComponent xpac, boolean generateImplementation) {
 		val states = new ArrayList<State>()
 		var ac = xpac.modelComponent
-		
+
 //		it is crucial that we obey the order that is used for state IDs
 //		that means we have to collect base classes first and each base class list with leaf states last
 		while (ac!=null) {
@@ -43,7 +46,7 @@ class StateMachineGen extends GenericStateMachineGenerator {
 					"«state.genStatePathName»"
 				«ENDFOR»
 			};
-				
+
 		«ENDIF»
 «««	 	TODOHRR: history defined in ActorClassBase, init in constructor
 «««			history = new int[5];
@@ -52,7 +55,7 @@ class StateMachineGen extends GenericStateMachineGenerator {
 «««			}
 		// history
 		protected int history[] = {NO_STATE, NO_STATE«FOR state : states», NO_STATE«ENDFOR»};
-		
+
 		private void setState(int new_state) {
 			«IF Main::settings.generateMSCInstrumentation»
 				DebuggingService.getInstance().addActorState(this,stateStrings[new_state]);
@@ -61,12 +64,12 @@ class StateMachineGen extends GenericStateMachineGenerator {
 				if (stateStrings[new_state]!="Idle") {
 					System.out.println("state switch of "+getInstancePath() + ": "
 							+ stateStrings[this.state] + " -> " + stateStrings[new_state]);
-				}	
+				}
 			«ENDIF»
 			this.state = new_state;
 		}
 	'''}
-	
+
 	/**
 	 * if {@code -storeDataObj} is set then a call to {@code finalAction()} is generated
 	 */
@@ -77,7 +80,7 @@ class StateMachineGen extends GenericStateMachineGenerator {
 			«ENDIF»
 		'''
 	}
-	
+
 	def getHistorySize(ExpandedActorClass xpac) {
 		xpac.actorClass.getAllBaseStates().size+2
 	}

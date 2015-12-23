@@ -1,0 +1,9 @@
+RoomModel common.modelbase {
+	ProtocolClass RTSystemServicesProtocol {
+		incoming {
+			Message executeInitialTransition()
+			Message startDebugging()
+			Message stopDebugging()
+		}
+	}
+}

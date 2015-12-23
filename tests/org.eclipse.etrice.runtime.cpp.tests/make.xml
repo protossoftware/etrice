@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<!--
+	Ant makefile for building and running of tests.
+	This includes conversion of the etunit
+	results into xunit xml.
+
+	@author Henrik Rentz-Reichert
+-->
+<project name="org.eclipse.etrice.runtime.cpp.tests" basedir="." default="all">
+
+	<import file="../org.eclipse.etrice.generator.common.tests/common.xml" as="common"/>
+
+	<property name="runtime.path" value="../../runtime/org.eclipse.etrice.runtime.c" />
+	<property name="cpp-runtime.path" value="../../runtime/org.eclipse.etrice.runtime.cpp" />
+
+	<target name="set_local_rt" unless="runtime.platform">
+		<!-- <property name="runtime.platform" value="MT_POSIX_GENERIC_GCC"/> -->
+		<property name="runtime.platform" value="MT_WIN_MinGW"/>
+		<echo>    runtime.platform = ${runtime.platform}        	</echo>
+	</target>
+	<target name="setVars" depends="set_local_rt,common.setVars"/>
+
+	<!--
+		all: compiles, runs, converts and copies the results
+	-->
+	<target name="all" depends="convert,copy_results">
+		<echo>done with ${ant.project.name}</echo>
+	</target>
+
+	<!--
+		build: compiles and link everything
+	-->
+	<target name="build" depends="setVars,clean">
+		<mkdir dir="${output}"/>
+		<mkdir dir="${bin.path}"/>
+		<exec executable="make" failonerror="true" output="${output}/build.txt">
+			<arg line="all"/>
+			<arg line="RUNTIME_ROOTDIR=${runtime.path}"/>
+			<arg line="TARGET_PLATFORM=${runtime.platform}"/>
+			<arg line="CPP_RUNTIME_ROOTDIR=${cpp-runtime.path}"/>
+		</exec>
+	</target>
+
+	<!--
+		run: runs all executables
+	-->
+	<target name="run" depends="build">
+		<mkdir dir="${testlog.path}"/>
+		<echo>start RuntimeTest</echo>
+		<exec resolveexecutable="true" executable="${bin.path}/${ant.project.name}.exe" output="${output}/run.txt" />
+		<echo>end   RuntimeTest</echo>
+	</target>
+
+	<!--
+		convert: converts etu- into xunit xml-format
+	-->
+	<target name="convert" depends="run">
+		<convert testId="TestCppRuntime"/>
+	</target>
+
+	<!--
+		copy_results: copies the *.xml results to their final destination
+	-->
+	<target name="copy_results" depends="setVars">
+		<copyResult testId="TestCppRuntime" targetid="${runtime.platform}_"/>
+	</target>
+
+</project>

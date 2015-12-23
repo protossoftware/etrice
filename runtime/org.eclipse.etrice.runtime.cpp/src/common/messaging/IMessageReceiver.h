@@ -19,14 +19,12 @@
 
 namespace etRuntime {
 
-class IMessageReceiver{
+class IMessageReceiver : public virtual IRTObject{
 public:
-	IMessageReceiver();
-	virtual ~IMessageReceiver();
+	virtual ~IMessageReceiver() {}
 
-	virtual void receive(Message* msg) = 0;
-	virtual Address getAddress() const = 0;
-	virtual bool isMsgService() const { return false;};
+	virtual void receive(const Message* msg) = 0;
+	virtual const Address& getAddress() const = 0;
 
 };
 

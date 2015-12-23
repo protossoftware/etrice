@@ -14,25 +14,32 @@ package org.eclipse.etrice.generator.generic;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.etrice.core.genmodel.fsm.base.ILogger;
+import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.Attribute;
+import org.eclipse.etrice.core.room.ClassStructor;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefableType;
+import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.base.AbstractGenerator;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
 import org.eclipse.etrice.generator.generic.TypeHelpers;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 /**
@@ -42,6 +49,8 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 @Singleton
 @SuppressWarnings("all")
 public class ProcedureHelpers {
+  protected final String NEWLINE = System.getProperty("line.separator");
+  
   @Inject
   @Extension
   protected RoomHelpers _roomHelpers;
@@ -187,13 +196,13 @@ public class ProcedureHelpers {
    * @param EnumTest a list of {@link Attribute}s
    * @return code declaring the attributes
    */
-  public CharSequence attributes(final List<Attribute> EnumTest) {
+  public CharSequence attributes(final List<Attribute> attributes) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/*--------------------- attributes ---------------------*/");
     _builder.newLine();
     {
-      for(final Attribute attribute : EnumTest) {
-        CharSequence _attributeDeclaration = this.attributeDeclaration(attribute);
+      for(final Attribute it : attributes) {
+        CharSequence _attributeDeclaration = this.attributeDeclaration(it);
         _builder.append(_attributeDeclaration, "");
         _builder.newLineIfNotEmpty();
       }
@@ -202,54 +211,18 @@ public class ProcedureHelpers {
   }
   
   /**
-   * Attributes will be public. Should be protected, but not supported in C.
-   * 
    * @param attribute an {@link Attribute}
    * @return the code declaring the attribute
    */
   public CharSequence attributeDeclaration(final Attribute attribute) {
     StringConcatenation _builder = new StringConcatenation();
-    {
-      int _size = attribute.getSize();
-      boolean _equals = (_size == 0);
-      if (_equals) {
-        String _accessLevelPublic = this.languageExt.accessLevelPublic();
-        _builder.append(_accessLevelPublic, "");
-        _builder.append(" ");
-        RefableType _type = attribute.getType();
-        DataType _type_1 = _type.getType();
-        String _typeName = this._typeHelpers.typeName(_type_1);
-        _builder.append(_typeName, "");
-        {
-          RefableType _type_2 = attribute.getType();
-          boolean _isRef = _type_2.isRef();
-          if (_isRef) {
-            String _pointerLiteral = this.languageExt.pointerLiteral();
-            _builder.append(_pointerLiteral, "");
-          }
-        }
-        _builder.append(" ");
-        String _name = attribute.getName();
-        _builder.append(_name, "");
-        _builder.append(";");
-        _builder.newLineIfNotEmpty();
-      } else {
-        String _accessLevelPublic_1 = this.languageExt.accessLevelPublic();
-        _builder.append(_accessLevelPublic_1, "");
-        _builder.append(" ");
-        RefableType _type_3 = attribute.getType();
-        DataType _type_4 = _type_3.getType();
-        String _typeName_1 = this._typeHelpers.typeName(_type_4);
-        int _size_1 = attribute.getSize();
-        String _name_1 = attribute.getName();
-        RefableType _type_5 = attribute.getType();
-        boolean _isRef_1 = _type_5.isRef();
-        String _arrayDeclaration = this.languageExt.arrayDeclaration(_typeName_1, _size_1, _name_1, _isRef_1);
-        _builder.append(_arrayDeclaration, "");
-        _builder.append(";");
-        _builder.newLineIfNotEmpty();
-      }
-    }
+    String _accessLevelPublic = this.languageExt.accessLevelPublic();
+    _builder.append(_accessLevelPublic, "");
+    _builder.append(" ");
+    String _declarationString = this.declarationString(attribute);
+    _builder.append(_declarationString, "");
+    _builder.append(";");
+    _builder.newLineIfNotEmpty();
     return _builder;
   }
   
@@ -309,12 +282,12 @@ public class ProcedureHelpers {
    * @param classname the name of the defining class
    * @return code declaring setters and getters for the attributes
    */
-  public CharSequence attributeSettersGettersDeclaration(final List<Attribute> EnumTest, final String classname) {
+  public CharSequence attributeSettersGettersDeclaration(final List<Attribute> attributes, final String classname) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/* --------------------- attribute setters and getters */");
     _builder.newLine();
     {
-      for(final Attribute attribute : EnumTest) {
+      for(final Attribute attribute : attributes) {
         CharSequence _setterHeader = this.setterHeader(attribute, classname);
         _builder.append(_setterHeader, "");
         _builder.append(";");
@@ -333,12 +306,12 @@ public class ProcedureHelpers {
    * @param classname the name of the defining class
    * @return code defining setters and getters for the attributes
    */
-  public CharSequence attributeSettersGettersImplementation(final List<Attribute> EnumTest, final String classname) {
+  public CharSequence attributeSettersGettersImplementation(final List<Attribute> attributes, final String classname) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/* --------------------- attribute setters and getters */");
     _builder.newLine();
     {
-      for(final Attribute attribute : EnumTest) {
+      for(final Attribute attribute : attributes) {
         CharSequence _setterHeader = this.setterHeader(attribute, classname);
         _builder.append(_setterHeader, "");
         _builder.append(" {");
@@ -387,23 +360,11 @@ public class ProcedureHelpers {
     String _name = attribute.getName();
     String _firstUpper = StringExtensions.toFirstUpper(_name);
     _builder.append(_firstUpper, "");
-    _builder.append(" (");
+    _builder.append("(");
     String _selfPointer = this.languageExt.selfPointer(classname, true);
     _builder.append(_selfPointer, "");
-    RefableType _type = attribute.getType();
-    DataType _type_1 = _type.getType();
-    String _typeName = this._typeHelpers.typeName(_type_1);
-    _builder.append(_typeName, "");
-    {
-      int _size = attribute.getSize();
-      boolean _notEquals = (_size != 0);
-      if (_notEquals) {
-        _builder.append("[]");
-      }
-    }
-    _builder.append(" ");
-    String _name_1 = attribute.getName();
-    _builder.append(_name_1, "");
+    String _declarationString = this.declarationString(attribute);
+    _builder.append(_declarationString, "");
     _builder.append(")");
     return _builder;
   }
@@ -417,22 +378,13 @@ public class ProcedureHelpers {
     StringConcatenation _builder = new StringConcatenation();
     String _accessLevelPublic = this.languageExt.accessLevelPublic();
     _builder.append(_accessLevelPublic, "");
-    RefableType _type = attribute.getType();
-    DataType _type_1 = _type.getType();
-    String _typeName = this._typeHelpers.typeName(_type_1);
-    _builder.append(_typeName, "");
-    {
-      int _size = attribute.getSize();
-      boolean _notEquals = (_size != 0);
-      if (_notEquals) {
-        _builder.append("[]");
-      }
-    }
+    String _signatureReturnString = this.signatureReturnString(attribute);
+    _builder.append(_signatureReturnString, "");
     _builder.append(" get");
     String _name = attribute.getName();
     String _firstUpper = StringExtensions.toFirstUpper(_name);
     _builder.append(_firstUpper, "");
-    _builder.append(" (");
+    _builder.append("(");
     String _selfPointer = this.languageExt.selfPointer(classname, false);
     _builder.append(_selfPointer, "");
     _builder.append(")");
@@ -453,20 +405,8 @@ public class ProcedureHelpers {
         } else {
           _builder.appendImmediate(", ", "");
         }
-        RefableType _type = a.getType();
-        DataType _type_1 = _type.getType();
-        String _typeName = this._typeHelpers.typeName(_type_1);
-        _builder.append(_typeName, "");
-        {
-          int _size = a.getSize();
-          boolean _greaterThan = (_size > 0);
-          if (_greaterThan) {
-            _builder.append("[]");
-          }
-        }
-        _builder.append(" ");
-        String _name = a.getName();
-        _builder.append(_name, "");
+        String _declarationString = this.declarationString(a);
+        _builder.append(_declarationString, "");
       }
     }
     return _builder;
@@ -573,7 +513,7 @@ public class ProcedureHelpers {
     _builder.newLine();
     {
       for(final Operation operation : operations) {
-        CharSequence _operationSignature = this.operationSignature(operation, classname);
+        CharSequence _operationSignature = this.operationSignature(operation, classname, true);
         _builder.append(_operationSignature, "");
         _builder.append(";");
         _builder.newLineIfNotEmpty();
@@ -593,7 +533,7 @@ public class ProcedureHelpers {
     _builder.newLine();
     {
       for(final Operation operation : operations) {
-        CharSequence _operationSignature = this.operationSignature(operation, classname);
+        CharSequence _operationSignature = this.operationSignature(operation, classname, false);
         _builder.append(_operationSignature, "");
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
@@ -622,25 +562,246 @@ public class ProcedureHelpers {
     return _builder;
   }
   
-  public CharSequence getConstructorSignature(final String classname) {
-    String _constructorName = this.languageExt.constructorName(classname);
-    String _constructorReturnType = this.languageExt.constructorReturnType();
-    return this.classOperationSignature(classname, _constructorName, "", _constructorReturnType);
-  }
-  
-  public CharSequence getDestructorSignature(final String classname) {
-    String _destructorName = this.languageExt.destructorName(classname);
-    String _destructorReturnType = this.languageExt.destructorReturnType();
-    return this.classOperationSignature(classname, _destructorName, "", _destructorReturnType);
+  /**
+   * invoke user structor, if (inherited) present - <b>C only</b>
+   * 
+   * @param cls {@link ActorClass} or {@link DataClass}
+   * @param args self pointer to instance
+   */
+  public String invokeUserStructor(final RoomClass cls, final String args, final boolean ctor) {
+    boolean _usesInheritance = this.languageExt.usesInheritance();
+    boolean _not = (!_usesInheritance);
+    List<ClassStructor> _structors = this.getStructors(cls, _not);
+    final Function1<ClassStructor, Boolean> _function = new Function1<ClassStructor, Boolean>() {
+      public Boolean apply(final ClassStructor it) {
+        boolean _isConstructor = it.isConstructor();
+        return Boolean.valueOf((_isConstructor == ctor));
+      }
+    };
+    boolean _exists = IterableExtensions.<ClassStructor>exists(_structors, _function);
+    if (_exists) {
+      StringConcatenation _builder = new StringConcatenation();
+      String _name = cls.getName();
+      String _xifexpression = null;
+      if (ctor) {
+        _xifexpression = "ctor";
+      } else {
+        _xifexpression = "dtor";
+      }
+      String _memberInDeclaration = this.languageExt.memberInDeclaration(_name, _xifexpression);
+      _builder.append(_memberInDeclaration, "");
+      _builder.append("(");
+      _builder.append(args, "");
+      _builder.append(");");
+      return _builder.toString();
+    }
+    return "";
   }
   
   /**
-   * @param classname the name of a class
-   * @return code calling the destructor of the class
+   * declaration of user constructor + destructor, if (inherited) present - <b>C only</b>
+   * 
+   * @param cls {@link ActorClass} or {@link DataClass}
    */
-  public String destructorCall(final String classname) {
-    String _destructorName = this.languageExt.destructorName(classname);
-    return (_destructorName + "()");
+  public String userStructorsDeclaration(final RoomClass cls) {
+    String _xblockexpression = null;
+    {
+      String _name = cls.getName();
+      final String namePrefix = this.languageExt.operationScope(_name, true);
+      final ArrayList<String> declBlock = CollectionLiterals.<String>newArrayList();
+      declBlock.add("/*--------------------- user constructor/destructor ---------------------*/");
+      boolean _usesInheritance = this.languageExt.usesInheritance();
+      boolean _not = (!_usesInheritance);
+      List<ClassStructor> _structors = this.getStructors(cls, _not);
+      final Function1<ClassStructor, Boolean> _function = new Function1<ClassStructor, Boolean>() {
+        public Boolean apply(final ClassStructor it) {
+          return Boolean.valueOf(it.isConstructor());
+        }
+      };
+      boolean _exists = IterableExtensions.<ClassStructor>exists(_structors, _function);
+      if (_exists) {
+        String _name_1 = cls.getName();
+        CharSequence _functionSignature = this.functionSignature(_name_1, (namePrefix + "ctor"), "void", "");
+        String _plus = (_functionSignature + ";");
+        declBlock.add(_plus);
+      }
+      boolean _usesInheritance_1 = this.languageExt.usesInheritance();
+      boolean _not_1 = (!_usesInheritance_1);
+      List<ClassStructor> _structors_1 = this.getStructors(cls, _not_1);
+      final Function1<ClassStructor, Boolean> _function_1 = new Function1<ClassStructor, Boolean>() {
+        public Boolean apply(final ClassStructor it) {
+          boolean _isConstructor = it.isConstructor();
+          return Boolean.valueOf((!_isConstructor));
+        }
+      };
+      boolean _exists_1 = IterableExtensions.<ClassStructor>exists(_structors_1, _function_1);
+      if (_exists_1) {
+        String _name_2 = cls.getName();
+        CharSequence _functionSignature_1 = this.functionSignature(_name_2, (namePrefix + "dtor"), "void", "");
+        String _plus_1 = (_functionSignature_1 + ";");
+        declBlock.add(_plus_1);
+      }
+      _xblockexpression = IterableExtensions.join(declBlock, this.NEWLINE);
+    }
+    return _xblockexpression;
+  }
+  
+  /**
+   * implementation of user constructor + destructor, if (inherited) present - <b>C only</b>
+   * 
+   * @param cls {@link ActorClass} or {@link DataClass}
+   */
+  public String userStructorsImplementation(final RoomClass cls) {
+    String _xblockexpression = null;
+    {
+      final ArrayList<String> declBlock = CollectionLiterals.<String>newArrayList();
+      declBlock.add("/*--------------------- user constructor/destructor ---------------------*/");
+      String _userStuctorImplementation = this.userStuctorImplementation(cls, true);
+      declBlock.add(_userStuctorImplementation);
+      String _userStuctorImplementation_1 = this.userStuctorImplementation(cls, false);
+      declBlock.add(_userStuctorImplementation_1);
+      Iterable<String> _filterNull = IterableExtensions.<String>filterNull(declBlock);
+      _xblockexpression = IterableExtensions.join(_filterNull, this.NEWLINE);
+    }
+    return _xblockexpression;
+  }
+  
+  private String userStuctorImplementation(final RoomClass cls, final boolean ctor) {
+    String _xblockexpression = null;
+    {
+      String _name = cls.getName();
+      final String namePrefix = this.languageExt.operationScope(_name, false);
+      boolean _usesInheritance = this.languageExt.usesInheritance();
+      boolean _not = (!_usesInheritance);
+      List<ClassStructor> _structors = this.getStructors(cls, _not);
+      final Function1<ClassStructor, Boolean> _function = new Function1<ClassStructor, Boolean>() {
+        public Boolean apply(final ClassStructor it) {
+          boolean _isConstructor = it.isConstructor();
+          return Boolean.valueOf((_isConstructor == ctor));
+        }
+      };
+      boolean _exists = IterableExtensions.<ClassStructor>exists(_structors, _function);
+      boolean _not_1 = (!_exists);
+      if (_not_1) {
+        return null;
+      }
+      StringConcatenation _builder = new StringConcatenation();
+      String _name_1 = cls.getName();
+      String _xifexpression = null;
+      if (ctor) {
+        _xifexpression = "ctor";
+      } else {
+        _xifexpression = "dtor";
+      }
+      String _plus = (namePrefix + _xifexpression);
+      CharSequence _functionSignature = this.functionSignature(_name_1, _plus, "void", "");
+      _builder.append(_functionSignature, "");
+      _builder.append("{");
+      _builder.newLineIfNotEmpty();
+      _builder.append("\t");
+      String _userStructorBody = this.userStructorBody(cls, ctor);
+      _builder.append(_userStructorBody, "\t");
+      _builder.newLineIfNotEmpty();
+      _builder.append("}");
+      _builder.newLine();
+      _xblockexpression = _builder.toString();
+    }
+    return _xblockexpression;
+  }
+  
+  /**
+   * implementation of user structor, if (inherited) present
+   */
+  public String userStructorBody(final RoomClass cls, final boolean ctor) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("// user defined ");
+    {
+      if (ctor) {
+        _builder.append("con");
+      } else {
+        _builder.append("de");
+      }
+    }
+    _builder.append("structor body");
+    final String comment = _builder.toString();
+    boolean _usesInheritance = this.languageExt.usesInheritance();
+    boolean _not = (!_usesInheritance);
+    List<ClassStructor> _structors = this.getStructors(cls, _not);
+    final Function1<ClassStructor, Boolean> _function = new Function1<ClassStructor, Boolean>() {
+      public Boolean apply(final ClassStructor it) {
+        boolean _isConstructor = it.isConstructor();
+        return Boolean.valueOf((_isConstructor == ctor));
+      }
+    };
+    final Iterable<ClassStructor> implementedStructors = IterableExtensions.<ClassStructor>filter(_structors, _function);
+    final Function1<ClassStructor, DetailCode> _function_1 = new Function1<ClassStructor, DetailCode>() {
+      public DetailCode apply(final ClassStructor it) {
+        return it.getDetailCode();
+      }
+    };
+    Iterable<DetailCode> _map = IterableExtensions.<ClassStructor, DetailCode>map(implementedStructors, _function_1);
+    final Function1<DetailCode, String> _function_2 = new Function1<DetailCode, String>() {
+      public String apply(final DetailCode it) {
+        AbstractGenerator _instance = AbstractGenerator.getInstance();
+        return _instance.getTranslatedCode(it);
+      }
+    };
+    final Iterable<String> translatedCodes = IterableExtensions.<DetailCode, String>map(_map, _function_2);
+    final Function1<String, CharSequence> _function_3 = new Function1<String, CharSequence>() {
+      public CharSequence apply(final String it) {
+        CharSequence _xifexpression = null;
+        int _size = IterableExtensions.size(translatedCodes);
+        boolean _greaterThan = (_size > 1);
+        if (_greaterThan) {
+          _xifexpression = ProcedureHelpers.this.asBlock(it);
+        } else {
+          _xifexpression = it;
+        }
+        return _xifexpression;
+      }
+    };
+    Iterable<CharSequence> _map_1 = IterableExtensions.<String, CharSequence>map(translatedCodes, _function_3);
+    String _join = IterableExtensions.join(_map_1);
+    return ((comment + this.NEWLINE) + _join);
+  }
+  
+  private List<ClassStructor> getStructors(final RoomClass cls, final boolean inherited) {
+    List<ClassStructor> _switchResult = null;
+    final RoomClass it = cls;
+    boolean _matched = false;
+    if (!_matched) {
+      if (it instanceof ActorClass) {
+        if ((!inherited)) {
+          _matched=true;
+          _switchResult = ((ActorClass)it).getStructors();
+        }
+      }
+    }
+    if (!_matched) {
+      if (it instanceof DataClass) {
+        if ((!inherited)) {
+          _matched=true;
+          _switchResult = ((DataClass)it).getStructors();
+        }
+      }
+    }
+    if (!_matched) {
+      if (it instanceof ActorClass) {
+        if (inherited) {
+          _matched=true;
+          _switchResult = this._roomHelpers.getAllStructors(((ActorClass)it));
+        }
+      }
+    }
+    if (!_matched) {
+      if (it instanceof DataClass) {
+        if (inherited) {
+          _matched=true;
+          _switchResult = this._roomHelpers.getAllStructors(((DataClass)it));
+        }
+      }
+    }
+    return _switchResult;
   }
   
   /**
@@ -648,89 +809,138 @@ public class ProcedureHelpers {
    * @return the operation signature (with special care for
    * 		constructor and destructor
    */
-  private CharSequence operationSignature(final Operation operation, final String classname) {
-    String _name = operation.getName();
-    EList<VarDecl> _arguments = operation.getArguments();
-    CharSequence _BuildArgumentList = this.BuildArgumentList(_arguments);
-    String _string = _BuildArgumentList.toString();
-    RefableType _returnType = operation.getReturnType();
-    String _dataTypeToString = this.dataTypeToString(_returnType);
-    return this.classOperationSignature(classname, _name, _string, _dataTypeToString);
+  private CharSequence operationSignature(final Operation operation, final String classname, final boolean isDeclaration) {
+    CharSequence _xblockexpression = null;
+    {
+      StringConcatenation _builder = new StringConcatenation();
+      {
+        EList<VarDecl> _arguments = operation.getArguments();
+        boolean _hasElements = false;
+        for(final VarDecl argument : _arguments) {
+          if (!_hasElements) {
+            _hasElements = true;
+          } else {
+            _builder.appendImmediate(", ", "");
+          }
+          RefableType _refType = argument.getRefType();
+          String _signatureString = this.signatureString(_refType);
+          _builder.append(_signatureString, "");
+          _builder.append(" ");
+          String _name = argument.getName();
+          _builder.append(_name, "");
+        }
+      }
+      final String arguments = _builder.toString();
+      RefableType _returnType = operation.getReturnType();
+      final String returnType = this.signatureString(_returnType);
+      String _operationScope = this.languageExt.operationScope(classname, isDeclaration);
+      String _name_1 = operation.getName();
+      String _plus = (_operationScope + _name_1);
+      _xblockexpression = this.functionSignature(classname, _plus, returnType, arguments);
+    }
+    return _xblockexpression;
   }
   
   /**
    * @param type a {@link RefableType}
    * @return a string for the type (also for pointers)
    */
-  private String dataTypeToString(final RefableType type) {
-    String _xifexpression = null;
-    boolean _equals = Objects.equal(type, null);
-    if (_equals) {
-      _xifexpression = "void";
-    } else {
-      String _xifexpression_1 = null;
-      boolean _isRef = type.isRef();
+  private String signatureString(final RefableType type) {
+    String _switchResult = null;
+    final RefableType it = type;
+    boolean _matched = false;
+    if (!_matched) {
+      if (Objects.equal(it, null)) {
+        _matched=true;
+        _switchResult = "void";
+      }
+    }
+    if (!_matched) {
+      boolean _isRef = it.isRef();
       if (_isRef) {
+        _matched=true;
         DataType _type = type.getType();
         String _typeName = this._typeHelpers.typeName(_type);
         String _pointerLiteral = this.languageExt.pointerLiteral();
-        _xifexpression_1 = (_typeName + _pointerLiteral);
-      } else {
-        DataType _type_1 = type.getType();
-        _xifexpression_1 = this._typeHelpers.typeName(_type_1);
+        _switchResult = (_typeName + _pointerLiteral);
       }
-      _xifexpression = _xifexpression_1;
     }
-    return _xifexpression;
+    if (!_matched) {
+      DataType _type_1 = type.getType();
+      _switchResult = this._typeHelpers.typeName(_type_1);
+    }
+    return _switchResult;
+  }
+  
+  private String signatureReturnString(final Attribute attribute) {
+    String _switchResult = null;
+    final Attribute it = attribute;
+    boolean _matched = false;
+    if (!_matched) {
+      int _size = it.getSize();
+      boolean _greaterThan = (_size > 0);
+      if (_greaterThan) {
+        _matched=true;
+        RefableType _type = it.getType();
+        String _signatureString = this.signatureString(_type);
+        String _typeArrayModifier = this.languageExt.typeArrayModifier();
+        _switchResult = (_signatureString + _typeArrayModifier);
+      }
+    }
+    if (!_matched) {
+      RefableType _type_1 = it.getType();
+      _switchResult = this.signatureString(_type_1);
+    }
+    return _switchResult;
   }
   
   /**
-   * builds comma separated argument list as string from EList<VarDecl> arguments
+   * @param attribute a {@link Attribute}
+   * @return a string for <code>type name</code>
    */
-  private CharSequence BuildArgumentList(final EList<VarDecl> arguments) {
-    StringConcatenation _builder = new StringConcatenation();
-    {
-      boolean _hasElements = false;
-      for(final VarDecl argument : arguments) {
-        if (!_hasElements) {
-          _hasElements = true;
-        } else {
-          _builder.appendImmediate(", ", "");
-        }
-        RefableType _refType = argument.getRefType();
-        DataType _type = _refType.getType();
-        String _typeName = this._typeHelpers.typeName(_type);
-        _builder.append(_typeName, "");
-        {
-          RefableType _refType_1 = argument.getRefType();
-          boolean _isRef = _refType_1.isRef();
-          if (_isRef) {
-            String _pointerLiteral = this.languageExt.pointerLiteral();
-            _builder.append(_pointerLiteral, "");
-          }
-        }
-        _builder.append(" ");
-        String _name = argument.getName();
-        _builder.append(_name, "");
+  private String declarationString(final Attribute attribute) {
+    String _switchResult = null;
+    final Attribute it = attribute;
+    boolean _matched = false;
+    if (!_matched) {
+      int _size = it.getSize();
+      boolean _greaterThan = (_size > 0);
+      if (_greaterThan) {
+        _matched=true;
+        RefableType _type = it.getType();
+        DataType _type_1 = _type.getType();
+        String _typeName = this._typeHelpers.typeName(_type_1);
+        int _size_1 = it.getSize();
+        String _name = it.getName();
+        RefableType _type_2 = it.getType();
+        boolean _isRef = _type_2.isRef();
+        _switchResult = this.languageExt.arrayDeclaration(_typeName, _size_1, _name, _isRef);
       }
     }
-    return _builder;
+    if (!_matched) {
+      RefableType _type_3 = it.getType();
+      String _signatureString = this.signatureString(_type_3);
+      String _plus = (_signatureString + " ");
+      String _name_1 = it.getName();
+      _switchResult = (_plus + _name_1);
+    }
+    return _switchResult;
   }
   
-  private CharSequence classOperationSignature(final String classname, final String operationname, final String argumentList, final String returnType) {
+  private CharSequence functionSignature(final String className, final String fullFctName, final String returnType, final String arguments) {
     StringConcatenation _builder = new StringConcatenation();
     String _accessLevelPublic = this.languageExt.accessLevelPublic();
     _builder.append(_accessLevelPublic, "");
+    _builder.append(" ");
     _builder.append(returnType, "");
     _builder.append(" ");
-    String _memberInDeclaration = this.languageExt.memberInDeclaration(classname, operationname);
-    _builder.append(_memberInDeclaration, "");
+    _builder.append(fullFctName, "");
     _builder.append("(");
-    boolean _isEmpty = argumentList.isEmpty();
+    boolean _isEmpty = arguments.isEmpty();
     boolean _not = (!_isEmpty);
-    String _selfPointer = this.languageExt.selfPointer(classname, _not);
+    String _selfPointer = this.languageExt.selfPointer(className, _not);
     _builder.append(_selfPointer, "");
-    _builder.append(argumentList, "");
+    _builder.append(arguments, "");
     _builder.append(")");
     return _builder;
   }

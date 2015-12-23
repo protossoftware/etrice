@@ -59,6 +59,8 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 @Singleton
 @SuppressWarnings("all")
 public class RoomExtensions extends FSMExtensions {
+  public final String NEWLINE = System.getProperty("line.separator");
+  
   private static String genDir = "/src-gen/";
   
   private static String genInfoDir = "/src-gen-info/";

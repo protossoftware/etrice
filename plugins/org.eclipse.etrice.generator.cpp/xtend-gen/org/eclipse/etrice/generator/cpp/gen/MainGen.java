@@ -19,9 +19,9 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.generator.cpp.gen.ActorClassGen;
 import org.eclipse.etrice.generator.cpp.gen.DataClassGen;
+import org.eclipse.etrice.generator.cpp.gen.NodeGen;
+import org.eclipse.etrice.generator.cpp.gen.NodeRunnerGen;
 import org.eclipse.etrice.generator.cpp.gen.ProtocolClassGen;
-import org.eclipse.etrice.generator.cpp.gen.SubSystemClassGen;
-import org.eclipse.etrice.generator.cpp.gen.SubSystemRunnerGen;
 import org.eclipse.etrice.generator.generic.PrepareFileSystem;
 
 @Singleton
@@ -37,10 +37,10 @@ public class MainGen {
   private ActorClassGen actorClassGen;
   
   @Inject
-  private SubSystemClassGen subsystemClassGen;
+  private NodeGen subsystemClassGen;
   
   @Inject
-  private SubSystemRunnerGen subsystemRunnerGen;
+  private NodeRunnerGen subsystemRunnerGen;
   
   @Inject
   private PrepareFileSystem prepFS;

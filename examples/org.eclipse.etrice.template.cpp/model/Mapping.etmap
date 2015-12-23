@@ -1,0 +1,17 @@
+/*
+ * This model defines a mapping between a logical ROOM model and a physical model (nodes and threads).
+ * 
+ * <p>Hint: Press F3 to open declaration of selected element or import</p>
+ */
+MappingModel TemplateMapping {
+	
+	import TemplatePhysical.* from "Physical.etphys"
+	import TemplateModel.* from "TemplateModel.room"
+
+	Mapping LogSys -> TemplatePhysicalSystem {
+		SubSystemMapping subSystemRef -> node {
+			ThreadMapping defaultThread -> DefaultPhysicalThread
+		}
+	}
+
+}

@@ -25,8 +25,8 @@ class MainGen {
 	@Inject DataClassGen dataClassGen
 	@Inject ProtocolClassGen protocolClassGen
 	@Inject ActorClassGen actorClassGen
-	@Inject SubSystemClassGen subsystemClassGen
-	@Inject SubSystemRunnerGen subsystemRunnerGen
+	@Inject NodeGen subsystemClassGen
+	@Inject NodeRunnerGen subsystemRunnerGen
 	@Inject PrepareFileSystem prepFS
 	
 	def void doGenerate(Resource resource) {

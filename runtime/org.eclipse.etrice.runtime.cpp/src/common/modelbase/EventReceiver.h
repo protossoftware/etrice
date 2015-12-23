@@ -19,18 +19,22 @@
 
 namespace etRuntime {
 
-class EventReceiver : public RTObject, public IEventReceiver{
+class EventReceiver : public RTObject, public virtual IEventReceiver{
 public:
-	EventReceiver(IRTObject* parent, std::string name)
-	: RTObject(parent, name),
-	  IEventReceiver()
-	{};
-	virtual ~EventReceiver();
+
+	virtual ~EventReceiver() {}
+
+	virtual int getThread();
+
+protected:
+	EventReceiver(IRTObject* parent, const std::string& name);
 
 private:
-	EventReceiver();
-	EventReceiver(const EventReceiver& right);
-	EventReceiver& operator=(const EventReceiver& right);
+
+	int m_thread;
+
+	EventReceiver(EventReceiver const&);
+	EventReceiver& operator=(EventReceiver const&);
 
 };
 

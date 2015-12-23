@@ -1,0 +1,16 @@
+RoomModel room.basic.etunit {
+
+	import room.basic.types.* from "Types.room"
+
+	/**
+	 * A SubSystemClass or ActorClass having this annotation is construed as an instance.<br>
+	 * During generation the necessary instantiation (LogicalSystem, SubSystemRef etc.) and mapping will be created.
+	 * <p>
+	 * Must not have LogicalThreads. Globally only once allowed. Runtime execution on DefaultThread of given PhysicalSystem.
+	 * </p>
+	 */
+	AnnotationType TestInstance {
+		target = { SubSystemClass, ActorClass }
+	}
+
+}

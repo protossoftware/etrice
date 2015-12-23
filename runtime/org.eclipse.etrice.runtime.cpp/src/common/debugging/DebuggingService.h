@@ -13,55 +13,54 @@
 #ifndef DEBUGGINGSERVICE_H_
 #define DEBUGGINGSERVICE_H_
 
-#include "common/messaging/Address.h"
 #include "common/debugging/MSCLogger.h"
-#include "common/modelbase/PortBase.h"
+#include "common/messaging/Address.h"
+#include "etDatatypes.h"
 #include <string>
 #include <map>
 
 namespace etRuntime {
-	class ActorClassBase;
 
+class ActorClassBase;
+class SubSystemClassBase;
+class PortBase;
 
 class DebuggingService {
-private:
-	static DebuggingService* s_instance;
 
 public:
-	virtual ~DebuggingService();
+	virtual ~DebuggingService() {}
 
-	static DebuggingService& getInstance() {
-		if (s_instance == 0) {
-			s_instance = new DebuggingService();
-		}
-		return *s_instance;
-	}
+	static DebuggingService& getInstance();
 
-	void addMessageAsyncOut(Address source, Address target, const std::string& msg);
-	void addMessageAsyncIn(Address source, Address target, const std::string& msg);
-	void addMessageSyncCall(Address source, Address target, const std::string& msg);
-	void addMessageSyncReturn(Address source, Address target, const std::string& msg);
+	void addMessageAsyncOut(const Address& source, const Address& target, const std::string& msg);
+	void addMessageAsyncIn(const Address& source, const Address& target, const std::string& msg);
+	void addMessageSyncCall(const Address& source, const Address& target, const std::string& msg);
+	void addMessageSyncReturn(const Address& source, const Address& target, const std::string& msg);
 	void addActorState(const ActorClassBase& actor, const std::string& state);
-	void addPortInstance(PortBase& port);
-	MSCLogger& getSyncLogger();
-	MSCLogger& getAsyncLogger();
+	void addMessageActorCreate(const SubSystemClassBase& parent, const std::string& refName);
+	void addMessageActorCreate(const ActorClassBase& parent, const std::string& refName);
+	void addMessageActorDestroy(const ActorClassBase& inst);
+	void addVisibleComment(const std::string& comment);
+	void addPortInstance(const PortBase& port);
+	void removePortInstance(const PortBase& port);
+
+	MSCLogger& getSyncLogger() { return m_syncLogger; }
+	MSCLogger& getAsyncLogger() { return m_asyncLogger; }
 
 private:
 
-	MSCLogger asyncLogger;
-	MSCLogger syncLogger;
-	std::map<Address, PortBase*> portInstances;
+	MSCLogger m_asyncLogger;
+	MSCLogger m_syncLogger;
+	std::map<Address, const PortBase*> m_portInstances;
+
+	const PortBase* getPort(const Address& address) const;
 
 	DebuggingService();
-	DebuggingService(const DebuggingService& right);
-	DebuggingService& operator=(const DebuggingService& right);
+	DebuggingService(DebuggingService const&);
+	DebuggingService& operator=(DebuggingService const&);
 
 };
 
 } /* namespace etRuntime */
 #endif /* DEBUGGINGSERVICE_H_ */
-
-
-
-
 

@@ -13,9 +13,7 @@
 #ifndef SUBSYSTEMRUNNERBASE_H_
 #define SUBSYSTEMRUNNERBASE_H_
 
-#include <iostream>
 #include <string>
-#include "common/modelbase/TestSemaphore.h"
 
 namespace etRuntime {
 
@@ -24,22 +22,22 @@ class SubSystemClassBase;
 class SubSystemRunnerBase {
 public:
 	SubSystemRunnerBase();
-	~SubSystemRunnerBase();
-	static void run(SubSystemClassBase& mainComponent, int argc, char* argv[] );
+	virtual ~SubSystemRunnerBase() {}
+	static void run(SubSystemClassBase& mainComponent, int argc, char* argv[]);
+	static void waitForTerminate();
 
 protected:
 	/**
 	 * blocks until the String "quit" is entered on the console
 	 */
-	static void waitForTestcase();
-	static TestSemaphore s_testSem;
+	static void waitForQuit();
 
 private:
 	static const std::string OPTION_RUN_AS_TEST;
-	static const std::string OPTION_RUN_AS_TEST_SINGLETHREADED;
-	static const std::string OPTION_RUN_SINGLETHREADED;
-	static void waitForQuitMultiThreaded();
-	static void waitAndPollSingleThreaded(SubSystemClassBase& mainComponent, int cycles);
+	static const std::string OPTION_RUN_HEADLESS;
+
+	SubSystemRunnerBase(SubSystemRunnerBase const&);
+	SubSystemRunnerBase& operator=(SubSystemRunnerBase const&);
 };
 
 } /* namespace etRuntime */

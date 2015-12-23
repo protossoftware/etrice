@@ -4,10 +4,10 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * CONTRIBUTORS:
  * 		Henrik Rentz-Reichert (initial contribution)
- * 
+ *
  *******************************************************************************/
 
 package org.eclipse.etrice.generator.base;
@@ -31,23 +31,23 @@ import com.google.inject.Inject;
 
 /**
  * A default implementation of an {@link ITranslationProvider}.
- * 
+ *
  * @author Henrik Rentz-Reichert
  *
  */
 public class DefaultTranslationProvider extends DefaultFSMTranslationProvider implements ITranslationProvider {
-	
+
 	/**
 	 * the name provider for model objects
 	 */
 	@Inject
-	RoomNameProvider roomNameProvider;
-	
+	protected RoomNameProvider roomNameProvider;
+
 	/**
 	 * utility methods
 	 */
 	@Inject
-	RoomHelpers roomHelpers;
+	protected RoomHelpers roomHelpers;
 
 	/**
 	 * @return the original String
@@ -93,11 +93,11 @@ public class DefaultTranslationProvider extends DefaultFSMTranslationProvider im
 		if (tag.equals("MODEL_LOCATION")) {
 			return roomNameProvider.getDetailCodeLocation(code);
 		}
-		
+
 		logger.logInfo("unrecognized tag '"+tag+"' in "
 				+roomNameProvider.getDetailCodeLocation(code)+" of "
 				+roomNameProvider.getClassLocation(roomHelpers.getRoomClass(code)));
-		
+
 		return super.translateTag(tag, code);
 	}
 	/* (non-Javadoc)
@@ -125,5 +125,5 @@ public class DefaultTranslationProvider extends DefaultFSMTranslationProvider im
 			PortOperation op, ArrayList<String> args, String orig) {
 		return orig;
 	}
-	
+
 }

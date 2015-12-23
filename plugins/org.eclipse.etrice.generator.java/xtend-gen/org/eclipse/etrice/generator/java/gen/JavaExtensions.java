@@ -247,24 +247,12 @@ public class JavaExtensions implements ILanguageExtension {
     return "Object";
   }
   
+  public String typeArrayModifier() {
+    return "[]";
+  }
+  
   public String arrayDeclaration(final String type, final int size, final String name, final boolean isRef) {
     return (((type + " ") + name) + "[]");
-  }
-  
-  public String constructorName(final String cls) {
-    return cls;
-  }
-  
-  public String destructorName(final String cls) {
-    return "dtor";
-  }
-  
-  public String constructorReturnType() {
-    return "void";
-  }
-  
-  public String destructorReturnType() {
-    return "void";
   }
   
   public String superCall(final String baseClassName, final String method, final String args) {

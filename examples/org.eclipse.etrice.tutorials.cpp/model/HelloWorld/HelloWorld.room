@@ -1,0 +1,42 @@
+/*
+ * Shortkeys:
+ *	Ctrl+Space	- content assist
+ * 	F3			- open declaration of selected element
+ *	Alt+S 		- open structure diagram
+ *  Alt+B 		- open behavior diagram
+ *  Alt+M 		- open textual editor (in diagrams)
+ */
+RoomModel HelloWorldModel {
+
+	import room.basic.types.* from "../../../org.eclipse.etrice.modellib.cpp/model/Types.room"
+	import room.basic.service.timing.* from "../../../org.eclipse.etrice.modellib.cpp/model/TimingService.room"
+
+	LogicalSystem LogSys {
+		SubSystemRef subSystemRef: SubSysClass
+	}
+
+	SubSystemClass SubSysClass {
+		ActorRef topActor: TopActor
+		ActorRef timingService: ATimingService
+		LayerConnection ref topActor satisfied_by timingService.timer
+		LogicalThread defaultThread
+	}
+
+	// - build your application from here
+	ActorClass TopActor {
+		Structure {
+
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> helloState
+				State helloState {
+					entry {
+						"printf(\"### Hello World! ###\\n\");"
+					}
+				}
+			}
+		}
+	}
+
+}

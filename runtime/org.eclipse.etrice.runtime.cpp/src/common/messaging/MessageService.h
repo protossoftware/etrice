@@ -13,70 +13,80 @@
 #ifndef MESSAGESERVICE_H_
 #define MESSAGESERVICE_H_
 
+#include "common/messaging/AbstractMessageService.h"
+
+#include "common/messaging/IMessageService.h"
+#include "common/messaging/Message.h"
+#include "etDatatypes.h"
+#include "osal/etMutex.h"
+#include "osal/etSema.h"
+#include "osal/etThread.h"
+#include "osal/etTimer.h"
 #include <string>
-#include <vector>
-#include <pthread.h>
-#include "common/messaging/MessageDispatcher.h"
-#include "common/messaging/Address.h"
-#include "common/modelbase/IEventReceiver.h"
-#include "MessageSeQueue.h"
 
 namespace etRuntime {
 
-//TODO: abstraction from posix threads missing
+class MessageService: public AbstractMessageService {
 
-class MessageService: public IMessageReceiver, public RTObject {
 public:
-	MessageService(IRTObject* parent, Address addr, std::string name, int priority = 0);
+
+	enum ExecMode {
+		POLLED, BLOCKED, MIXED
+	};
+
+	MessageService(IRTObject* parent, IMessageService::ExecMode mode, int node, int thread, const std::string& name, int priority = 0);
+	MessageService(IRTObject* parent, IMessageService::ExecMode mode, etTime interval, int node, int thread, const std::string& name, int priority = 0);
 	virtual ~MessageService();
 
-	Address getAddress() const {	return m_address; }	;
-
-	void start(bool singlethreaded);
 	void run();
-	// for single threaded configuration only
-	void runOnce();
 
-	void join();
-	void terminate();
-	void receive(Message* msg);
+	virtual void start();
+	virtual void terminate();
 
-	virtual MessageDispatcher& getMessageDispatcher() {	return m_messageDispatcher; }
-	virtual bool isMsgService() const { return true;};
+	virtual Address getFreeAddress();
 
-	void addAsyncActor(IEventReceiver& evtReceiver);
-	void pollAsyncActors();
+	virtual void freeAddress(const Address& addr);
 
+	virtual void addMessageReceiver(IMessageReceiver& receiver);
+	virtual void removeMessageReceiver(IMessageReceiver& receiver);
 
-	// protected methods for sole use by test cases
+	virtual void addPollingMessageReceiver(IMessageReceiver& receiver);
+	virtual void removePollingMessageReceiver(IMessageReceiver& receiver);
+	virtual void receive(const Message* msg);
+
 protected:
-	MessageSeQueue& getMessageQueue() {	return m_messageQueue;	}
-	long getLastMessageTimestamp() const { return m_lastMessageTimestamp;	}
+
+	long getLastMessageTimestamp() const {
+		return m_lastMessageTimestamp;
+	}
+
+	void pollingTask();
 
 private:
-	//TODO: synchronized
-	void pollOneMessage();
+	// static functions for c calls
+	static void run(void* self) {
+		static_cast<MessageService*>(self)->run();
+	}
 
-	bool m_running;
-	pthread_t m_thread;
-	pthread_mutex_t m_mutex;
-	pthread_mutexattr_t m_mutexAttr;
-	pthread_cond_t m_conditionVar;
-	pthread_attr_t m_threadAttr;
+	static void pollingTask(void* self) {
+		static_cast<MessageService*>(self)->pollingTask();
+	}
 
-	// TODO: add internal message queue for less locks (faster thread internal
-	// messaging)
-	MessageSeQueue m_messageQueue;
-	MessageDispatcher m_messageDispatcher;
-	Address m_address;
+	etBool m_running;
+	IMessageService::ExecMode m_execMode;
 	long m_lastMessageTimestamp;
+	Message m_pollingMessage;
 
-	std::vector<IEventReceiver*> m_asyncActors;
+	etMutex m_mutex;
+	etSema m_executionSemaphore;
+	etThread m_thread;
+	etTimer m_timer;
+
+	void MessageService_init(etTime interval, int priority); // common ctor
 
 	MessageService();
-	MessageService(const MessageService& right);
-	MessageService& operator=(const MessageService& right);
-
+	MessageService(MessageService const&);
+	MessageService& operator=(MessageService const&);
 };
 
 } /* namespace etRuntime */

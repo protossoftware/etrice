@@ -46,7 +46,6 @@ import org.eclipse.etrice.core.genmodel.fsm.base.ILogger;
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.IDiagnostician;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Attribute;
-import org.eclipse.etrice.core.room.ClassStructor;
 import org.eclipse.etrice.core.room.CommunicationType;
 import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.EnumerationType;
@@ -191,7 +190,7 @@ public class NodeGen {
       _builder.append(_name_3, " ");
       _builder.newLineIfNotEmpty();
       _builder.append(" ");
-      _builder.append("* ");
+      _builder.append("*");
       _builder.newLine();
       _builder.append(" ");
       _builder.append("*/");
@@ -308,7 +307,7 @@ public class NodeGen {
       _builder.append(_name_3, " ");
       _builder.newLineIfNotEmpty();
       _builder.append(" ");
-      _builder.append("* ");
+      _builder.append("*");
       _builder.newLine();
       _builder.append(" ");
       _builder.append("*/");
@@ -417,7 +416,6 @@ public class NodeGen {
       _builder.append("\t\t");
       _builder.append("etTime interval;");
       _builder.newLine();
-      _builder.append("\t\t");
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append("/* initialization of all message services */");
@@ -515,15 +513,12 @@ public class NodeGen {
           _builder.append(_upperCase_2, "\t\t\t");
           _builder.append(");");
           _builder.newLineIfNotEmpty();
-          _builder.append("\t\t");
-          _builder.append("\t");
           _builder.newLine();
         }
       }
       _builder.append("\t");
       _builder.append("}");
       _builder.newLine();
-      _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("ET_MSC_LOGGER_SYNC_EXIT");
@@ -540,7 +535,6 @@ public class NodeGen {
       _builder.append(clsname, "\t");
       _builder.append("\", \"startMessageServices\")");
       _builder.newLineIfNotEmpty();
-      _builder.append("\t");
       _builder.newLine();
       {
         final Function1<PhysicalThread, Integer> _function_1 = new Function1<PhysicalThread, Integer>() {
@@ -559,7 +553,6 @@ public class NodeGen {
           _builder.newLineIfNotEmpty();
         }
       }
-      _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("ET_MSC_LOGGER_SYNC_EXIT");
@@ -576,7 +569,6 @@ public class NodeGen {
       _builder.append(clsname, "\t");
       _builder.append("\", \"stopMessageServices\")");
       _builder.newLineIfNotEmpty();
-      _builder.append("\t");
       _builder.newLine();
       {
         for(final PhysicalThread thread_2 : threads) {
@@ -588,7 +580,6 @@ public class NodeGen {
           _builder.newLineIfNotEmpty();
         }
       }
-      _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("ET_MSC_LOGGER_SYNC_EXIT");
@@ -605,7 +596,6 @@ public class NodeGen {
       _builder.append(clsname, "\t");
       _builder.append("\", \"destroyMessageServices\")");
       _builder.newLineIfNotEmpty();
-      _builder.append("\t");
       _builder.newLine();
       {
         for(final PhysicalThread thread_3 : threads) {
@@ -617,7 +607,6 @@ public class NodeGen {
           _builder.newLineIfNotEmpty();
         }
       }
-      _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("ET_MSC_LOGGER_SYNC_EXIT");
@@ -639,7 +628,6 @@ public class NodeGen {
       _builder.append(clsname, "\t");
       _builder.append("Inst.name);");
       _builder.newLineIfNotEmpty();
-      _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("/* construct all actors */");
@@ -648,7 +636,6 @@ public class NodeGen {
       _builder.append(clsname, "\t");
       _builder.append("_constructActorInstances();");
       _builder.newLineIfNotEmpty();
-      _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("/* initialization of all message services */");
@@ -657,7 +644,6 @@ public class NodeGen {
       _builder.append(clsname, "\t");
       _builder.append("_initMessageServices();");
       _builder.newLineIfNotEmpty();
-      _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("/* init all actors */");
@@ -666,7 +652,6 @@ public class NodeGen {
       _builder.append(clsname, "\t");
       _builder.append("_initActorInstances();");
       _builder.newLineIfNotEmpty();
-      _builder.append("\t");
       _builder.newLine();
       {
         if (logData) {
@@ -692,7 +677,6 @@ public class NodeGen {
           }
         }
       }
-      _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("ET_MSC_LOGGER_SYNC_EXIT");
@@ -728,14 +712,13 @@ public class NodeGen {
       _builder.append(clsname, "");
       _builder.append("_run(etBool runAsTest) {");
       _builder.newLineIfNotEmpty();
-      _builder.append("#ifdef ET_RUNNER_ACTIVATE ");
+      _builder.append("#ifdef ET_RUNNER_ACTIVATE");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("ET_MSC_LOGGER_SYNC_ENTRY(\"");
       _builder.append(clsname, "\t");
       _builder.append("\", \"run\")");
       _builder.newLineIfNotEmpty();
-      _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("if (runAsTest) {");
@@ -780,12 +763,11 @@ public class NodeGen {
       _builder.append("\t");
       _builder.append("}");
       _builder.newLine();
-      _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("ET_MSC_LOGGER_SYNC_EXIT");
       _builder.newLine();
-      _builder.append("#endif\t");
+      _builder.append("#endif");
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
@@ -809,7 +791,6 @@ public class NodeGen {
       _builder.append(clsname, "\t");
       _builder.append("_stopMessageServices();");
       _builder.newLineIfNotEmpty();
-      _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("ET_MSC_LOGGER_SYNC_EXIT");
@@ -831,46 +812,25 @@ public class NodeGen {
       _builder.append(clsname, "\t");
       _builder.append("Inst.name);");
       _builder.newLineIfNotEmpty();
+      _builder.newLine();
       {
         EList<ActorInstance> _allContainedInstances = ssi.getAllContainedInstances();
-        List<ActorInstance> _reverseView = ListExtensions.<ActorInstance>reverseView(_allContainedInstances);
-        for(final ActorInstance ai : _reverseView) {
-          {
-            ActorClass _actorClass = ai.getActorClass();
-            List<ClassStructor> _allStructors = this._roomHelpers.getAllStructors(_actorClass);
-            final Function1<ClassStructor, Boolean> _function_2 = new Function1<ClassStructor, Boolean>() {
-              public Boolean apply(final ClassStructor it) {
-                boolean _isConstructor = it.isConstructor();
-                return Boolean.valueOf((!_isConstructor));
-              }
-            };
-            boolean _exists = IterableExtensions.<ClassStructor>exists(_allStructors, _function_2);
-            if (_exists) {
-              _builder.append("\t");
-              ActorClass _actorClass_1 = ai.getActorClass();
-              String _name_16 = _actorClass_1.getName();
-              ActorClass _actorClass_2 = ai.getActorClass();
-              String _name_17 = _actorClass_2.getName();
-              String _destructorName = this.languageExt.destructorName(_name_17);
-              String _memberInUse = this.languageExt.memberInUse(_name_16, _destructorName);
-              _builder.append(_memberInUse, "\t");
-              _builder.append("(&");
-              String _path = ai.getPath();
-              String _pathName = this._roomExtensions.getPathName(_path);
-              _builder.append(_pathName, "\t");
-              _builder.append(");");
-              _builder.newLineIfNotEmpty();
-            }
-          }
+        for(final ActorInstance ai : _allContainedInstances) {
+          _builder.append("\t");
+          ActorClass _actorClass = ai.getActorClass();
+          String _path = ai.getPath();
+          String _pathName = this._roomExtensions.getPathName(_path);
+          String _plus_1 = ("&" + _pathName);
+          String _invokeUserStructor = this.helpers.invokeUserStructor(_actorClass, _plus_1, false);
+          _builder.append(_invokeUserStructor, "\t");
+          _builder.newLineIfNotEmpty();
         }
       }
-      _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
       _builder.append(clsname, "\t");
       _builder.append("_destroyMessageServices();");
       _builder.newLineIfNotEmpty();
-      _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("ET_MSC_LOGGER_SYNC_EXIT");
@@ -892,13 +852,11 @@ public class NodeGen {
       _builder.append(clsname, "\t");
       _builder.append("Inst.name);");
       _builder.newLineIfNotEmpty();
-      _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
       _builder.append(clsname, "\t");
       _builder.append("Inst.shutdownRequest = 1;");
       _builder.newLineIfNotEmpty();
-      _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("ET_MSC_LOGGER_SYNC_EXIT");
@@ -916,40 +874,20 @@ public class NodeGen {
       _builder.append(clsname, "\t");
       _builder.append("\", \"constructActorInstances\")");
       _builder.newLineIfNotEmpty();
-      _builder.append("\t");
       _builder.newLine();
       {
         EList<ActorInstance> _allContainedInstances_1 = ssi.getAllContainedInstances();
         for(final ActorInstance ai_1 : _allContainedInstances_1) {
-          {
-            ActorClass _actorClass_3 = ai_1.getActorClass();
-            List<ClassStructor> _allStructors_1 = this._roomHelpers.getAllStructors(_actorClass_3);
-            final Function1<ClassStructor, Boolean> _function_3 = new Function1<ClassStructor, Boolean>() {
-              public Boolean apply(final ClassStructor it) {
-                return Boolean.valueOf(it.isConstructor());
-              }
-            };
-            boolean _exists_1 = IterableExtensions.<ClassStructor>exists(_allStructors_1, _function_3);
-            if (_exists_1) {
-              _builder.append("\t");
-              ActorClass _actorClass_4 = ai_1.getActorClass();
-              String _name_18 = _actorClass_4.getName();
-              ActorClass _actorClass_5 = ai_1.getActorClass();
-              String _name_19 = _actorClass_5.getName();
-              String _constructorName = this.languageExt.constructorName(_name_19);
-              String _memberInUse_1 = this.languageExt.memberInUse(_name_18, _constructorName);
-              _builder.append(_memberInUse_1, "\t");
-              _builder.append("(&");
-              String _path_1 = ai_1.getPath();
-              String _pathName_1 = this._roomExtensions.getPathName(_path_1);
-              _builder.append(_pathName_1, "\t");
-              _builder.append(");");
-              _builder.newLineIfNotEmpty();
-            }
-          }
+          _builder.append("\t");
+          ActorClass _actorClass_1 = ai_1.getActorClass();
+          String _path_1 = ai_1.getPath();
+          String _pathName_1 = this._roomExtensions.getPathName(_path_1);
+          String _plus_2 = ("&" + _pathName_1);
+          String _invokeUserStructor_1 = this.helpers.invokeUserStructor(_actorClass_1, _plus_2, true);
+          _builder.append(_invokeUserStructor_1, "\t");
+          _builder.newLineIfNotEmpty();
         }
       }
-      _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("ET_MSC_LOGGER_SYNC_EXIT");
@@ -966,15 +904,14 @@ public class NodeGen {
       _builder.append(clsname, "\t");
       _builder.append("\", \"initActorInstances\")");
       _builder.newLineIfNotEmpty();
-      _builder.append("\t");
       _builder.newLine();
       {
         EList<ActorInstance> _allContainedInstances_2 = ssi.getAllContainedInstances();
         for(final ActorInstance ai_2 : _allContainedInstances_2) {
           _builder.append("\t");
-          ActorClass _actorClass_6 = ai_2.getActorClass();
-          String _name_20 = _actorClass_6.getName();
-          _builder.append(_name_20, "\t");
+          ActorClass _actorClass_2 = ai_2.getActorClass();
+          String _name_16 = _actorClass_2.getName();
+          _builder.append(_name_16, "\t");
           _builder.append("_init(&");
           String _path_2 = ai_2.getPath();
           String _pathName_2 = this._roomExtensions.getPathName(_path_2);
@@ -983,7 +920,6 @@ public class NodeGen {
           _builder.newLineIfNotEmpty();
         }
       }
-      _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("ET_MSC_LOGGER_SYNC_EXIT");
@@ -1099,7 +1035,7 @@ public class NodeGen {
           String _name_7 = thread.getName();
           String _upperCase_3 = _name_7.toUpperCase();
           _builder.append(_upperCase_3, "");
-          _builder.append("_BLOCK_SIZE]; ");
+          _builder.append("_BLOCK_SIZE];");
           _builder.newLineIfNotEmpty();
           _builder.append("static etMessageService msgService_");
           String _name_8 = thread.getName();
@@ -1490,7 +1426,6 @@ public class NodeGen {
               _builder.append(_path_1, "\t");
               _builder.append("\"");
               _builder.newLineIfNotEmpty();
-              _builder.append("\t");
               _builder.newLine();
             }
           }
@@ -1509,7 +1444,6 @@ public class NodeGen {
               _builder.newLineIfNotEmpty();
             }
           }
-          _builder.append("\t");
           _builder.newLine();
           _builder.append("\t");
           _builder.append("/* data receive ports */");
@@ -1523,7 +1457,6 @@ public class NodeGen {
               _builder.newLineIfNotEmpty();
             }
           }
-          _builder.append("\t");
           _builder.newLine();
           _builder.append("\t");
           _builder.append("/* saps */");
@@ -1537,7 +1470,6 @@ public class NodeGen {
               _builder.newLineIfNotEmpty();
             }
           }
-          _builder.append("\t");
           _builder.newLine();
           _builder.append("\t");
           _builder.append("/* replicated ports */");
@@ -1559,7 +1491,6 @@ public class NodeGen {
               _builder.newLineIfNotEmpty();
             }
           }
-          _builder.append("\t");
           _builder.newLine();
           _builder.append("\t");
           _builder.append("/* services */");
@@ -1600,7 +1531,6 @@ public class NodeGen {
           _builder.append(instName, "\t");
           _builder.append("_const,");
           _builder.newLineIfNotEmpty();
-          _builder.append("\t");
           _builder.newLine();
         }
       }
@@ -1616,7 +1546,6 @@ public class NodeGen {
           _builder.newLineIfNotEmpty();
         }
       }
-      _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("/* attributes */");
@@ -1627,7 +1556,6 @@ public class NodeGen {
       CharSequence _generateAttributeInit = this.attrInitGenAddon.generateAttributeInit(ai, _allAttributes);
       _builder.append(_generateAttributeInit, "\t");
       _builder.newLineIfNotEmpty();
-      _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("/* state and history are initialized in init function */");
@@ -2380,7 +2308,6 @@ public class NodeGen {
           _builder.append("\t");
           _builder.append("switch(msg->address){");
           _builder.newLine();
-          _builder.append("\t");
           _builder.newLine();
           _builder.append("\t\t");
           _builder.append("case MESSAGESERVICE_ADDRESS:");
@@ -2429,7 +2356,6 @@ public class NodeGen {
           _builder.newLine();
           {
             for(final ActorInstance ai_1 : dispatchedInstances) {
-              _builder.append("\t\t");
               _builder.newLine();
               _builder.append("\t\t");
               _builder.append("/* interface items of ");
@@ -2562,7 +2488,7 @@ public class NodeGen {
                               _builder.append("\t\t");
                               _builder.append("\t");
                               _builder.append("\t");
-                              _builder.append("}\t\t\t\t\t\t\t\t\t\t");
+                              _builder.append("}");
                               _builder.newLine();
                             } else {
                               {
@@ -2825,7 +2751,6 @@ public class NodeGen {
               }
             }
           }
-          _builder.append("\t\t");
           _builder.newLine();
           _builder.append("\t\t");
           _builder.append("default:");

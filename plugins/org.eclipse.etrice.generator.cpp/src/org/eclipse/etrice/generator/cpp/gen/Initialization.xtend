@@ -4,11 +4,11 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * CONTRIBUTORS:
  * 		Henrik Rentz-Reichert (initial contribution)
  * 		Peter Karlitschek
- * 
+ *
  *******************************************************************************/
 
 package org.eclipse.etrice.generator.cpp.gen
@@ -29,7 +29,7 @@ class Initialization {
 	@Inject ILanguageExtension languageExt
 //	@Inject IDataConfiguration dataConfigExt
 //	@Inject ProcedureHelpers procedureHelpers
-	
+
 	def attributeInitialization(List<Attribute> attribs, boolean useClassDefaultsOnly) {
 		'''
 			// initialize attributes
@@ -58,7 +58,7 @@ class Initialization {
 			«ENDFOR»
 		'''
 	}
-	
+
 	def initializeArrayWithValues(String varName, String[] values) {
 		'''
 		«var i = -1»
@@ -73,7 +73,7 @@ class Initialization {
 		var value = a.defaultValueLiteral
 		if (value != null) {
 				if (a.size == 0 || aType.characterType) {
-					if (a.type.isRef) 
+					if (a.type.isRef)
 						'''«a.name»(new «aType.name»(«value»))'''
 					else
 						'''«a.name»(«value»)'''
@@ -84,7 +84,7 @@ class Initialization {
 				else {
 					'''«a.name»()'''
 				}
-		} 
+		}
 		else if (aType instanceof ComplexType || a.size>1 || !useClassDefaultsOnly) {
 			if (a.size==0) {
 				if (a.type.isRef)
@@ -92,10 +92,10 @@ class Initialization {
 				else
 					'''«a.name»(«languageExt.defaultValue(aType)»)'''
 			}
-			else 
+			else
 				'''«a.name»()'''
 		}
 	}
-	
-	
+
+
 }

@@ -10,6 +10,10 @@
  *
  *******************************************************************************/
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #ifndef _ETDATATYPES_H_
 #define _ETDATATYPES_H_
 
@@ -50,3 +54,7 @@ typedef DWORD etOSTimerId;
 /*-----------------------------------------------------------*/
 
 #endif /* _DATATYPES_H_ */
+
+#ifdef __cplusplus
+}
+#endif

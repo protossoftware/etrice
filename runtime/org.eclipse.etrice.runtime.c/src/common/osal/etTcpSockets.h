@@ -17,6 +17,9 @@
  *
  * \author Henrik Rentz-Reichert
  */
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #ifndef _ETTCPSOCKETS_H_
 #define _ETTCPSOCKETS_H_
@@ -173,3 +176,7 @@ etSocketError etWriteSocket(etSocketConnectionData* self, int size, const int8* 
 etSocketError etCloseSocket(etSocketConnectionData* self);
 
 #endif /* _ETTCPSOCKETS_H_ */
+
+#ifdef __cplusplus
+}
+#endif

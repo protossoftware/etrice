@@ -10,12 +10,29 @@
  *
  *******************************************************************************/
 
-#include "EventReceiver.h"
+#include "common/modelbase/EventReceiver.h"
+#include <string>
 
 namespace etRuntime {
 
+EventReceiver::EventReceiver(IRTObject* parent, const std::string& name) :
+		RTObject(parent, name),
+		m_thread(-1) {
+}
 
-EventReceiver::~EventReceiver() {
+int EventReceiver::getThread() {
+	if (m_thread < 0) {
+		m_thread = getThreadForPath(getInstancePath());
+		if (m_thread < 0) {
+			IEventReceiver* parent = dynamic_cast<IEventReceiver*>(getParent());
+			if (parent != 0)
+				m_thread = parent->getThread();
+			else
+				m_thread = 0;
+		}
+	}
+
+	return m_thread;
 }
 
 } /* namespace etRuntime */

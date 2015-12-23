@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <project name="org.eclipse.etrice.generator.common.tests">
-	
+
 	<target name="testing" depends="copyModels">
-			
+
 		<!-- add test here, testid==testSuiteFileName -->
 		<test testid="ActorCommunicationTest" models="${models.path}/ActorCommunicationTest.room ${models.path}/GenericPhysical.etphys" />
 		<test testid="ChoicePointTest" models="${models.path}/ChoicePointTest.room ${models.path}/GenericPhysical.etphys" />
@@ -14,11 +14,11 @@
 		<test testid="OperationInheritanceTest" models="${models.path}/OperationInheritanceTest.room ${models.path}/GenericPhysical.etphys" />
 		<test testid="PingPongThreadTest" models="${models.path}/PingPongThreadTest.etmap" />
 		<test testid="PingPongThreadReplPortTest" models="${models.path}/PingPongThreadReplPortTest.etmap" />
-		
-		
+
+
 		<echo>done with ${ant.project.name}</echo>
 	</target>
-	
+
 	<target name="copyModels" depends="setVars">
 		<copy todir="${models.path}">
 			<fileset dir="../org.eclipse.etrice.generator.common.tests/models"/>
@@ -30,20 +30,20 @@
 			</fileset>
 		</copy>
 	</target>
-	
+
 	<!-- ################################################################ -->
-	
+
 	<!-- global properties -->
 	<!-- test.results, target.platform -->
-	
+
 	<!-- private properties-->
 	<property name="models.path" value="./models"/>
 	<property name="testlog.path" value="./log/testlog"/>
 	<property name="output" value="./output"/>
 	<property name="bin.path" value="./bin"/>
-	
+
 	<property name="run.msTimout" value="5000"/>
-	
+
 	<!-- show ALL used variables -->
 	<target name="showVars">
 	<echo>    ant.project.name = ${ant.project.name}        	</echo>
@@ -55,9 +55,9 @@
 	<echo>     target.platform = ${target.platform}           	</echo>
 	<echo>       modellib.path = ${modellib.path}           	</echo>
 	<echo>         models.path = ${models.path}           		</echo>
-	<echo>     		   basedir = ${basedir}        				</echo>	
+	<echo>     		   basedir = ${basedir}        				</echo>
 	</target>
-	
+
 	<!-- set global properties if not set-->
 	<target name="set_local_tr" unless="test.results">
 		<property name="test.results" value="./results"/>
@@ -65,13 +65,14 @@
 	<target name="set_local_tp" unless="target.platform">
 		<property name="target.platform" value="${eclipse.home}"/>
 	</target>
-	
+
 	<target name="setVars" depends="set_local_tp,set_local_tr,set_etrice_clspath,showVars"/>
-	
+
 	<target name="set_etrice_clspath">
 		<path id="etrice.clspath">
 			<pathelement location="../../plugins/org.eclipse.etrice.generator.c/bin"/>
 			<pathelement location="../../plugins/org.eclipse.etrice.generator.java/bin"/>
+			<pathelement location="../../plugins/org.eclipse.etrice.generator.cpp/bin"/>
 			<pathelement location="../../plugins/org.eclipse.etrice.etunit.converter/bin"/>
 			<pathelement location="../../plugins/org.eclipse.etrice.generator.config/bin"/>
 			<pathelement location="../../plugins/org.eclipse.etrice.generator.doc/bin"/>
@@ -93,35 +94,35 @@
 				<include name="com.google.inject_*.jar" />
 				<include name="com.google.guava_1*.jar" />
 				<include name="org.eclipse.equinox.common_3.6.*.jar" />
-				
+
 				<!-- Xtext 2.6 -->
 				<include name="org.eclipse.xtext_2.6*.jar" />
 				<include name="org.eclipse.xtext.util_2.6*.jar" />
 				<include name="org.eclipse.xtext.common.types_2.6*.jar" />
 				<include name="org.eclipse.xtend.lib_2.6*.jar" />
 				<include name="org.eclipse.xtext.xbase.lib_2.6*.jar" />
-				
+
 				<!-- Xtext 2.7 -->
 				<include name="org.eclipse.xtext_2.7*.jar" />
 				<include name="org.eclipse.xtext.util_2.7*.jar" />
 				<include name="org.eclipse.xtext.common.types_2.7*.jar" />
 				<include name="org.eclipse.xtend.lib_2.7*.jar" />
 				<include name="org.eclipse.xtext.xbase.lib_2.7*.jar" />
-				
+
 				<!-- Xtext 2.8 -->
 				<include name="org.eclipse.xtext_2.8*.jar" />
 				<include name="org.eclipse.xtext.util_2.8*.jar" />
 				<include name="org.eclipse.xtext.common.types_2.8*.jar" />
 				<include name="org.eclipse.xtend.lib_2.8*.jar" />
 				<include name="org.eclipse.xtext.xbase.lib_2.8*.jar" />
-				
+
 				<include name="org.apache.log4j_1.2*.jar" />
 				<include name="org.antlr.runtime_3.2*.jar" />
 				<include name="javax.inject_1.0*.jar" />
 			</fileset>
-		</path>	
+		</path>
 	</target>
-	
+
 	<!--
 		clean: deletes all folders created by this script
 	-->
@@ -134,7 +135,7 @@
 		<delete dir="log"/>
 		<delete dir="src-gen"/>
 	</target>
-	
+
 	<macrodef name="convert">
 		<attribute name="testId"/>
 		<sequential>
@@ -146,7 +147,7 @@
 			</java>
 		</sequential>
 	</macrodef>
-	
+
 	<!--
 		copy_results: copies the *.xml results to their final destination
 	-->
@@ -158,5 +159,5 @@
 			<move file="${testlog.path}/@{testId}.xml" tofile="${test.results}/@{targetId}@{testId}.xml"/>
 		</sequential>
 	</macrodef>
-	
+
 </project>

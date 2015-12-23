@@ -4,10 +4,10 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * CONTRIBUTORS:
  * 		Thomas Schuetz and Henrik Rentz-Reichert (initial contribution)
- * 
+ *
  *******************************************************************************/
 
 
@@ -22,7 +22,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * The MessageService is the backbone of the asynchronous communication inside a SubSystem
  * It usually contains a thread a message queue and a dispatcher
- * 
+ *
  * @author Thomas Schuetz (initial contribution)
  * @author Henrik Rentz-Reichert (extending RTObject, implementing Runnable)
  *
@@ -30,22 +30,22 @@ import java.util.concurrent.TimeUnit;
 public class MessageService extends AbstractMessageService {
 
 	private boolean running = false;
-	
+
 	private Thread thread;
 	private int priority;
 	private long lastMessageTimestamp;
-	
+
 	private long pollingInterval = -1;
 	private ScheduledExecutorService pollingScheduler = null;
 
 	public MessageService(IRTObject parent, ExecMode mode, int node, int thread, String name) {
 		this(parent, mode, 0, node, thread, name, Thread.NORM_PRIORITY);
 	}
-	
+
 	public MessageService(IRTObject parent, ExecMode mode, long nsec, int node, int thread, String name) {
 		this(parent, mode, nsec, node, thread, name, Thread.NORM_PRIORITY);
 	}
-	
+
 	public MessageService(IRTObject parent, ExecMode mode, long nsec, int node, int thread, String name, int priority) {
 		super(parent, "MessageService_"+name, node, thread);
 
@@ -54,31 +54,31 @@ public class MessageService extends AbstractMessageService {
 		// priority = Thread.NORM_PRIORITY generated fixed
 		this.priority = priority;
 
-		assert priority >= Thread.MIN_PRIORITY : ("priority smaller than Thread.MIN_PRIORITY (" + "Thread.MIN_PRIORITY" + ")"); 
-		assert priority <= Thread.MAX_PRIORITY : ("priority bigger than Thread.MAX_PRIORITY (" + "Thread.MAX_PRIORITY" + ")"); 
-		
+		assert priority >= Thread.MIN_PRIORITY : ("priority smaller than Thread.MIN_PRIORITY (" + "Thread.MIN_PRIORITY" + ")");
+		assert priority <= Thread.MAX_PRIORITY : ("priority bigger than Thread.MAX_PRIORITY (" + "Thread.MAX_PRIORITY" + ")");
+
 		if(mode == ExecMode.MIXED || mode == ExecMode.POLLED){
 			pollingInterval = nsec;
 			pollingScheduler = Executors.newScheduledThreadPool(1, new PollingThreadFactory());
-			
+
 			assert pollingInterval > 0 : ("polling interval is 0 or negative");
 		}
 	}
 
 	public void run() {
 		running = true;
-		
+
 		if(pollingScheduler != null)
 			pollingScheduler.scheduleAtFixedRate(new PollingTask(), pollingInterval, pollingInterval, TimeUnit.NANOSECONDS);
-		
+
 		while (running) {
 			Message msg = null;
-			
+
 			// get next Message from Queue
 			synchronized(this) {
 				msg = getMessageQueue().pop();
 			}
-			
+
 			if (msg == null) {
 				// no message in queue -> wait until Thread is notified
 				try {
@@ -105,11 +105,11 @@ public class MessageService extends AbstractMessageService {
 	@Override
 	public synchronized void receive(Message msg) {
 		super.receive(msg);
-		
+
 		// wake up thread to process message
 		notifyAll();
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see org.eclipse.etrice.runtime.java.messaging.AbstractMessageService#getFreeAddress()
 	 */
@@ -117,7 +117,7 @@ public class MessageService extends AbstractMessageService {
 	public synchronized Address getFreeAddress() {
 		return super.getFreeAddress();
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see org.eclipse.etrice.runtime.java.messaging.AbstractMessageService#addMessageReceiver(org.eclipse.etrice.runtime.java.messaging.IMessageReceiver)
 	 */
@@ -133,17 +133,17 @@ public class MessageService extends AbstractMessageService {
 	public synchronized void removeMessageReceiver(IMessageReceiver receiver) {
 		super.removeMessageReceiver(receiver);
 	}
-	
+
 	@Override
 	public synchronized void addPollingMessageReceiver(IMessageReceiver receiver) {
 		super.addPollingMessageReceiver(receiver);
 	}
-	
+
 	@Override
 	public synchronized void removePollingMessageReceiver(IMessageReceiver receiver) {
 		super.removePollingMessageReceiver(receiver);
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see org.eclipse.etrice.runtime.java.messaging.AbstractMessageService#freeAddress(org.eclipse.etrice.runtime.java.messaging.Address)
 	 */
@@ -151,15 +151,15 @@ public class MessageService extends AbstractMessageService {
 	public synchronized void freeAddress(Address addr) {
 		super.freeAddress(addr);
 	}
-	
+
 	public synchronized void terminate() {
+		if(pollingScheduler != null)
+			pollingScheduler.shutdown();
+
 		if (running) {
 			running = false;
 			notifyAll();
 		}
-		
-		if(pollingScheduler != null)
-			pollingScheduler.shutdown();
 	}
 
 	/* (non-Javadoc)
@@ -167,7 +167,7 @@ public class MessageService extends AbstractMessageService {
 	 */
 	public void setThread(Thread thread) {
 		this.thread = thread;
-		
+
 		thread.setPriority(priority);
 	}
 
@@ -181,29 +181,29 @@ public class MessageService extends AbstractMessageService {
 	protected long getLastMessageTimestamp() {
 		return lastMessageTimestamp;
 	}
-	
+
 	private class PollingTask implements Runnable{
-		
+
 		@Override
 		public void run() {
 			if(running){
 				Message msg = new Message(getMessageDispatcher().getAddress());
 				receive(msg);
-			} 
+			}
 		}
-		
+
 	}
-	
+
 	private class PollingThreadFactory implements ThreadFactory{
 
 		@Override
 		public Thread newThread(Runnable arg0) {
 			Thread thread = new Thread(arg0, getName()+"_PollingThread");
 			thread.setPriority(priority);
-			
+
 			return thread;
 		}
-		
+
 	}
 
 }

@@ -13,6 +13,7 @@
 #ifndef MSCFILTER_H_
 #define MSCFILTER_H_
 
+#include "etStdDatatypes.h"
 #include <list>
 #include <string>
 
@@ -20,23 +21,24 @@ namespace etRuntime {
 
 class MSCFilter {
 public:
-	class FilterItem{
+	class FilterItem {
 	public:
-		FilterItem(const std::string& filter_, bool exclude_)
-		: exclude(exclude_),
-		  filter(filter_)
-		{};
-		bool exclude;
+		FilterItem(const std::string& filter_, etBool exclude_) :
+				exclude(exclude_),
+				filter(filter_) {
+		}
+		etBool exclude;
 		std::string filter;
 	private:
 		FilterItem();
 	};
 
 	MSCFilter();
-	virtual ~MSCFilter();
+	virtual ~MSCFilter() {
+	}
 
 	void addFilter(FilterItem filter);
-	bool applyTo(const std::string& text);
+	etBool applyTo(const std::string& text);
 	std::string reduceString(const std::string& string);
 
 private:

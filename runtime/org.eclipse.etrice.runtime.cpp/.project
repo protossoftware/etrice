@@ -3,6 +3,7 @@
 	<name>org.eclipse.etrice.runtime.cpp</name>
 	<comment></comment>
 	<projects>
+		<project>org.eclipse.etrice.runtime.c</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

@@ -14,68 +14,85 @@
 
 namespace etRuntime {
 
-
-MessageServiceController::~MessageServiceController() {
-	// TODO Auto-generated destructor stub
+MessageServiceController::MessageServiceController() :
+		m_messageServices(),
+		m_freeIDs(),
+		m_running(false),
+		m_nextFreeID(0),
+		m_terminateServices(){
+	etMutex_construct(&m_mutex);
+	etSema_construct(&m_terminateSema);
 }
 
-MessageServiceController::MessageServiceController(/*IRTObject parent*/)
-	: 	m_messageServiceList(),
-		m_running(false) {
-	// TODO: Who is parent of MessageServices and Controller?
-	// this.parent = parent;
-}
-
-void MessageServiceController::addMsgSvc(MessageService& msgSvc) {
-	// TODO TS: Who is parent of MessageServices ?
-	//TODO assert
-	//assert(msgSvc.getAddress().m_threadID == m_messageServiceList.size());
-	m_messageServiceList.push_back(&msgSvc);
-}
-
-MessageService* MessageServiceController::getMsgSvc(int threadID) {
-	return m_messageServiceList.at(threadID);
-}
-
-void MessageServiceController::connectAll() {
-	for (size_t i = 0; i < m_messageServiceList.size(); i++) {
-		MessageDispatcher& dispatcher = getMsgSvc(i)->getMessageDispatcher();
-		for (size_t j = 0; j < m_messageServiceList.size(); j++) {
-			if (i != j) {
-				dispatcher.addMessageReceiver(*RTServices::getInstance().getMsgSvcCtrl().getMsgSvc(j));
-			}
-		}
+int MessageServiceController::getNewID() {
+	etMutex_enter(&m_mutex);
+	int newID;
+	if (m_freeIDs.empty())
+		newID = m_nextFreeID++;
+	else {
+		newID = m_freeIDs.back();
+		m_freeIDs.pop();
 	}
+	etMutex_leave(&m_mutex);
+
+	return newID;
 }
 
-void MessageServiceController::start(bool singlethreaded) {
+void MessageServiceController::freeID(int id) {
+	etMutex_enter(&m_mutex);
+	m_freeIDs.push(id);
+	etMutex_leave(&m_mutex);
+}
+
+void MessageServiceController::addMsgSvc(IMessageService& msgSvc) {
+	etMutex_enter(&m_mutex);
+	if (m_nextFreeID <= msgSvc.getAddress().m_threadID)
+		m_nextFreeID = msgSvc.getAddress().m_threadID + 1;
+
+	m_messageServices[msgSvc.getAddress().m_threadID] = &msgSvc;
+	etMutex_leave(&m_mutex);
+}
+
+void MessageServiceController::removeMsgSvc(IMessageService& msgSvc) {
+	etMutex_enter(&m_mutex);
+	m_messageServices.erase(msgSvc.getAddress().m_threadID);
+	etMutex_leave(&m_mutex);
+}
+
+IMessageService* MessageServiceController::getMsgSvc(int id) {
+	IMessageService* msgSvc = 0;
+	etMutex_enter(&m_mutex);
+	std::map<int, IMessageService*>::iterator it = m_messageServices.find(id);
+	if(it != m_messageServices.end())
+		msgSvc = it->second;
+	etMutex_leave(&m_mutex);
+
+	return msgSvc;
+}
+
+void MessageServiceController::start() {
 	// start all message services
-	for (std::vector<MessageService*>::iterator it = m_messageServiceList.begin();
-			it != m_messageServiceList.end(); ++it) {
-		(*it)->start(singlethreaded);
+	for (std::map<int, IMessageService*>::iterator it = m_messageServices.begin(); it != m_messageServices.end(); ++it) {
+		(it->second)->start();
 		// TODO TS: start in order of priorities
 	}
 	m_running = true;
 }
 
-void MessageServiceController::stop(bool singlethreaded) {
-	//dumpThreads("org.eclipse.etrice.runtime.java.messaging.MessageServiceController.stop()");
-	if (! singlethreaded) {
-		terminate();
-		waitTerminate();
-	}
-}
+void MessageServiceController::stop() {
+	if (!m_running)
+		return;
 
-void MessageServiceController::waitTerminate() {
-	for (std::vector<MessageService*>::iterator it = m_messageServiceList.begin();
-			it != m_messageServiceList.end(); ++it) {
-		(*it)->join();
-	}
+	//dumpThreads("org.eclipse.etrice.runtime.java.messaging.MessageServiceController.stop()");
+	terminate();
+	waitTerminate();
+
+	m_running = false;
 }
 
 void MessageServiceController::dumpThreads(std::string msg) {
-	std::cout << "<<< begin dump threads <<<" << std::endl;
-	std::cout << "=== "  << msg << std::endl;
+//	std::cout << "<<< begin dump threads <<<" << std::endl;
+//	std::cout << "=== "  << msg << std::endl;
 	//TODO dump stack traces
 //		Map<Thread, StackTraceElement[]> traces = Thread.getAllStackTraces();
 //		for (Thread thread : traces.keySet()) {
@@ -88,32 +105,51 @@ void MessageServiceController::dumpThreads(std::string msg) {
 //				std::cout << " " << elements[i].toString() << std::endl;
 //			}
 //		}
-	std::cout <<(">>> end dump threads >>>");
+//	std::cout <<(">>> end dump threads >>>");
 }
 
 void MessageServiceController::terminate() {
-	if (!m_running) {
-		return;
-	}
-	m_running = false;
-
 	// terminate all message services
-	for (std::vector<MessageService*>::iterator it = m_messageServiceList.begin();
-			it != m_messageServiceList.end(); ++it) {
-		(*it)->terminate();
+	etMutex_enter(&m_mutex);
+	m_terminateServices = m_messageServices;
+	etMutex_leave(&m_mutex);
+
+	std::map<int, IMessageService*>::iterator it = m_terminateServices.begin();
+	for (; it != m_terminateServices.end(); ++it) {
+		(it->second)->terminate();
 		//TODO TS: stop in order of priorities
 	}
 }
 
-void MessageServiceController::runOnce() {
-	if (!m_running) {
-		return;
-	}
+void MessageServiceController::waitTerminate() {
+	etBool wait = true;
 
-	for (std::vector<MessageService*>::iterator it = m_messageServiceList.begin();
-			it != m_messageServiceList.end(); ++it) {
-		(*it)->runOnce();
+	while(wait){
+		etMutex_enter(&m_mutex);
+		wait = !m_terminateServices.empty();
+		etMutex_leave(&m_mutex);
+
+		if(wait)
+			etSema_waitForWakeup(&m_terminateSema);
 	}
+}
+
+void MessageServiceController::resetAll() {
+	stop();
+	etMutex_enter(&m_mutex);
+	m_messageServices.clear();
+	while (!m_freeIDs.empty()) {
+		m_freeIDs.pop();
+	}
+	m_nextFreeID = 0;
+	etMutex_leave(&m_mutex);
+}
+
+void MessageServiceController::setMsgSvcTerminated(const IMessageService& msgSvc){
+	etMutex_enter(&m_mutex);
+	m_terminateServices.erase(msgSvc.getAddress().m_threadID);
+	etSema_wakeup(&m_terminateSema);
+	etMutex_leave(&m_mutex);
 }
 
 } /* namespace etRuntime */

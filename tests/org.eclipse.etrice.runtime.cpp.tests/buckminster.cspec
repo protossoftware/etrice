@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?><cs:cspec xmlns:cs="http://www.eclipse.org/buckminster/CSpec-1.0" name="org.eclipse.etrice.runtime.cpp.tests" componentType="buckminster" version="0.5.0.qualifier">
+    <cs:actions>
+        <cs:public name="run_tests" actor="ant">
+            <cs:actorProperties>
+                <cs:property key="buildFile" value="make.xml"/>
+                <cs:property key="targets" value="all"/>
+            </cs:actorProperties>
+        </cs:public>
+    </cs:actions>
+</cs:cspec>

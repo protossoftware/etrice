@@ -4,11 +4,11 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * CONTRIBUTORS:
  * 		Thomas Schuetz and Henrik Rentz-Reichert (initial contribution)
  * 		Thomas Schuetz (changed for C code generator)
- * 
+ *
  *******************************************************************************/
 
 /*
@@ -61,7 +61,7 @@ class CExtensions implements ILanguageExtension {
 	override String accessLevelPrivate(){"static "}
 	override String accessLevelProtected(){"static "}
 	override String accessLevelPublic(){""}
-	
+
 	override String memberAccess(){"self->"}
 	override String selfPointer(String classname, boolean hasArgs){
 		classname+
@@ -70,7 +70,7 @@ class CExtensions implements ILanguageExtension {
 		else
 			"* self"
 	}
-	
+
 	override String selfPointer(boolean hasArgs) { if (hasArgs) "self, " else "self" }
 
 	override String operationScope(String classname, boolean isDeclaration){classname+"_"}
@@ -78,14 +78,14 @@ class CExtensions implements ILanguageExtension {
 	override String memberInDeclaration(String namespace, String member) {
 		return namespace+"_"+member
 	}
-	
+
 	override String memberInUse(String namespace, String member) {
 		return namespace+"_"+member
 	}
 
 
 	//****  C-Specific
-	/* TODO: move specific code elsewhere */	
+	/* TODO: move specific code elsewhere */
 	// used
 	def String getCHeaderFileName(RoomClass rc) {
 		return rc.name+".h";
@@ -108,7 +108,7 @@ class CExtensions implements ILanguageExtension {
 	def String getDispSourceFileName(RoomClass rc) {
 		return rc.name+"_Disp.h";
 	}
-	
+
 	// used
 	def String getCHeaderFileName(NodeRef nr, SubSystemInstance ssi) {
 		return nr.name+"_"+ssi.name+".h";
@@ -152,19 +152,19 @@ class CExtensions implements ILanguageExtension {
 		#endif /* «filename.getIncludeGuardString» */
 		'''
 	}
-	
+
 	override boolean usesInheritance() {
 		return false
 	}
-	
+
 	override boolean usesPointers() {
 		return true
 	}
-	
+
 	override String genEnumeration(String name, List<Pair<String, String>> entries) {
 		if (entries.empty)
 			return "/* empty enum not generated */"
-			
+
 		'''
 		enum «name» {
 			«FOR entry: entries SEPARATOR ","»
@@ -177,32 +177,16 @@ class CExtensions implements ILanguageExtension {
 	override String booleanConstant(boolean b) {
 		if (b) "ET_TRUE" else "ET_FALSE"
 	}
-	
+
 	override String pointerLiteral() { "*" }
 	override String nullPointer() { "NULL" }
 	override String voidPointer() { "void*" }
-	
-	override String arrayDeclaration(String type, int size, String name, boolean isRef) {
-		if (isRef){
-			type+"* "+name+"["+size+"]";
-		}else {
-			type+" "+name+"["+size+"]";
-		}
-	}
-	
-	override String constructorName(String cls) {
-		"ctor"
-	}
-	override String destructorName(String cls) {
-		"dtor"
-	}
-	override String constructorReturnType() {
-		"void"
-	}
-	override String destructorReturnType() {
-		"void"
-	}
-	
+	override String typeArrayModifier() { pointerLiteral }
+
+	override String arrayDeclaration(String type, int size, String name, boolean isRef)'''
+		«type»«IF isRef»*«ENDIF» «name»[«size»]
+	'''
+
 	override String superCall(String baseClassName, String method, String args) {
 		""
 	}
@@ -220,10 +204,10 @@ class CExtensions implements ILanguageExtension {
 			case "boolean":
 				if (value.equals("true")) "ET_TRUE" else "ET_FALSE"
 			default:
-				value	
+				value
 		}
 	}
-	
+
 	override toEnumLiteral(EnumerationType type, String value) {
 		if(value.contains(',') || value.contains('{')){
 			var singleValues = value.replace('{', '').replace('}', '').trim.split(',')
@@ -231,7 +215,7 @@ class CExtensions implements ILanguageExtension {
 		} else
 			convertStringEnumLiteral(type, value)
 	}
-	
+
 	def private convertStringEnumLiteral(EnumerationType type, String value){
 		var v = value
 		if (v.startsWith(type.name))
@@ -253,7 +237,7 @@ class CExtensions implements ILanguageExtension {
 				diagnostician.error("external type "+dt.name + "has no default initialization", dt.eContainer, dt.eContainingFeature)
 				""
 			}
-			DataClass:			
+			DataClass:
 			'''
 				{
 					«FOR att : dt.allAttributes SEPARATOR ","»
@@ -263,14 +247,14 @@ class CExtensions implements ILanguageExtension {
 			'''
 		}
 	}
-	
+
 	def String getDefaultValue(EnumerationType type) {
 		if (type.getLiterals().isEmpty())
 			""
 		else
 			getCastedValue(type.getLiterals().get(0))
 	}
-	
+
 	override initializationWithDefaultValues(DataType dt, int size) {
 		val dv = dt.defaultValue
 		dv.initializer(size)
@@ -291,7 +275,7 @@ class CExtensions implements ILanguageExtension {
 		else
 			dv
 	}
-	
+
 	def initializationWithDefaultValues(Attribute att) {
 		val dv = att.defaultValueLiteral
 		if (dv!=null) {
@@ -306,15 +290,15 @@ class CExtensions implements ILanguageExtension {
 		else
 			att.type.type.initializationWithDefaultValues(att.size)
 	}
-	
+
 	override generateArglistAndTypedData(EObject d) {
 		if (d==null || !(d instanceof VarDecl))
 			return newArrayList("", "", "")
-			
+
 		val data = d as VarDecl
 		if (data==null)
 			return newArrayList("", "", "")
-			
+
 		var typeName = if (data.getRefType().getType() instanceof PrimitiveType)
 			(data.getRefType().getType() as PrimitiveType).targetName
 		else if (data.getRefType().getType() instanceof EnumerationType)
@@ -323,7 +307,7 @@ class CExtensions implements ILanguageExtension {
 			(data.getRefType().getType() as ExternalType).targetName
 		else
 			data.getRefType().getType().getName()
-			
+
 		var castTypeName = if (data.getRefType().getType() instanceof PrimitiveType) {
 			val ct = (data.getRefType().getType() as PrimitiveType).getCastName()
 			if (ct!=null && !ct.isEmpty())
@@ -338,7 +322,7 @@ class CExtensions implements ILanguageExtension {
 			typeName
 		castTypeName = castTypeName+"*"
 		var deRef = "*"
-		
+
 		val isRef = data.getRefType().isRef()
 		val isPrim = (data.getRefType().getType() instanceof PrimitiveType || data.getRefType().getType() instanceof EnumerationType)
 		if (isRef) {
@@ -351,41 +335,41 @@ class CExtensions implements ILanguageExtension {
 				deRef = ""
 			}
 		}
-			
+
 		val typedData = typeName+" "+data.getName() + " = "+deRef+"(("+castTypeName+") generic_data__et);\n"
 
 		val dataArg = ", "+data.getName()
 		val typedArgList = ", "+typeName+" "+data.getName()
-		
+
 		return newArrayList(dataArg, typedData, typedArgList);
 	}
-	
+
 	def getIncludePath(RoomClass rc) {
 		"\""+(rc.eContainer as RoomModel).name.replaceAll("\\.","/")+"/"+rc.getCHeaderFileName+"\""
 	}
-	
+
 	override getTargetType(EnumerationType type) {
 		if (type.getPrimitiveType()!=null)
 			type.getPrimitiveType().getTargetName()
 		else
 			type.getName()
 	}
-	
+
 	override getCastedValue(EnumLiteral literal) {
 		val type = literal.eContainer() as EnumerationType
 		val cast = type.targetType
-		
+
 		if (type.primitiveType==null)
 			Long.toString(literal.getLiteralValue())
 		else
 			"(("+cast+")"+Long.toString(literal.getLiteralValue())+")"
 	}
-	
+
 	override getCastType(EnumerationType type) {
 		if (type.getPrimitiveType()!=null)
 			type.getPrimitiveType().getCastName()
 		else
 			type.getName()
 	}
-	
+
 }

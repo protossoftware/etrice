@@ -11,32 +11,68 @@
  *******************************************************************************/
 
 #include "ActorClassBase.h"
+#include "common/modelbase/InterfaceItemBase.h"
+#include "common/modelbase/RTSystemServicesProtocol.h"
+#include "common/modelbase/SystemPortOwner.h"
+#include "etDatatypes.h"
+#include <iterator>
+#include <string>
+#include <vector>
+
 
 namespace etRuntime {
 
-ActorClassBase::ActorClassBase(IRTObject* parent, std::string name, Address ownAddr, Address systemPortPeerAddr)
-	: 	EventReceiver(parent, name),
-		IMessageReceiver(),
+ActorClassBase::ActorClassBase(IRTObject* parent, const std::string& name) :
+		SystemPortOwner(parent, name),
 		m_state(0),
-		history(0), //to be instantiated by derived class
-		m_RTSystemPort(0),
-		m_className("noname"),
-		m_ownAddr(ownAddr),
-		m_ownMsgsvc(RTServices::getInstance().getMsgSvcCtrl().getMsgSvc(ownAddr.m_threadID)) {
-
-	// own ports
-	m_RTSystemPort = new RTSystemServicesProtocolPort(*this, this, "RTSystemPort", 0, 0, ownAddr,
-		systemPortPeerAddr);
+		m_RTSystemPort(this, IFITEM_RTSystemPort),
+		m_className("noname") {
 }
 
 ActorClassBase::~ActorClassBase() {
-	delete m_RTSystemPort;
-	m_RTSystemPort = 0;
-	delete history;
-	history = 0;
+	m_state = 0;
 }
 
-bool ActorClassBase::handleSystemEvent(InterfaceItemBase* ifitem, int evt, void* generic_data) {
+//SubSystemClassBase* ActorClassBase::getSubSystem() const {
+//	return 0; // TODO JH
+//}
+
+//--------------------- life cycle functions
+void ActorClassBase::init() {
+	ActorClassBase* child = 0;
+	for (std::vector<IRTObject*>::iterator it = getChildren().begin(); it != getChildren().end(); ++it) {
+		if ((child = dynamic_cast<ActorClassBase*>(*it)) != 0)
+			child->init();
+	}
+
+	initUser();
+}
+
+void ActorClassBase::start() {
+	ActorClassBase* child = 0;
+	for (std::vector<IRTObject*>::iterator it = getChildren().begin(); it != getChildren().end(); ++it) {
+		if ((child = dynamic_cast<ActorClassBase*>(*it)) != 0)
+			child->start();
+	}
+
+	startUser();
+}
+
+void ActorClassBase::stop() {
+	stopUser();
+
+	ActorClassBase* child = 0;
+	for (std::vector<IRTObject*>::iterator it = getChildren().begin(); it != getChildren().end(); ++it) {
+		if ((child = dynamic_cast<ActorClassBase*>(*it)) != 0)
+			child->stop();
+	}
+}
+
+void ActorClassBase::destroy() {
+	SystemPortOwner::destroy();
+}
+
+etBool ActorClassBase::handleSystemEvent(InterfaceItemBase* ifitem, int evt, void* generic_data) {
 	if ((ifitem != 0) && (ifitem->getLocalId() != 0)) {
 		return false;
 	}
@@ -55,8 +91,12 @@ bool ActorClassBase::handleSystemEvent(InterfaceItemBase* ifitem, int evt, void*
 	return true;
 }
 
-std::string ActorClassBase::toString() {
-	return "ActorClass(className=" + m_className + ", instancePath=" + getInstancePath() + ")";
+std::string ActorClassBase::toString() const {
+	ActorClassBase* thisPtr = const_cast<ActorClassBase*>(this);
+	char buffer[10];
+	sprintf(buffer, "%i", thisPtr->getThread());
+
+	return getName() + " : " + getClassName() + " thread:" + buffer;
 }
 
 } /* namespace etRuntime */

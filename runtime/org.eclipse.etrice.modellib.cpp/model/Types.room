@@ -17,5 +17,7 @@ RoomModel room.basic.types {
 
 	// TODO: define strings for C
 	PrimitiveType charPtr:ptCharacter -> charPtr default "0"
-	PrimitiveType string:ptCharacter -> charPtr default "0"  
+	PrimitiveType string:ptCharacter -> string default "0"
+
+	ExternalType voidType -> "void" default "NULL"
 }

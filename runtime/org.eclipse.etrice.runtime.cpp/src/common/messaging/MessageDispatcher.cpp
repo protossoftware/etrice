@@ -10,68 +10,85 @@
  *
  *******************************************************************************/
 
-#include "MessageDispatcher.h"
+#include "common/messaging/Message.h"
+#include "common/messaging/MessageDispatcher.h"
 
 namespace etRuntime {
 
-
-MessageDispatcher::~MessageDispatcher() {
+MessageDispatcher::MessageDispatcher(IRTObject* parent, const Address& addr, const std::string& name) :
+		RTObject(parent, name),
+		m_local_map(),
+		m_freeAdresses(),
+		m_pollingMessageReceiver(),
+		m_address(addr),
+		m_nextFreeObjId(addr.m_objectID + 1) {
+	m_local_map[addr.m_objectID] = this;
 }
 
-MessageDispatcher::MessageDispatcher(IRTObject* parent, Address addr, std::string name)
-: RTObject(parent, name) ,
-  IMessageReceiver(),
-  m_local_map(),
-  m_thread_map(),
-  m_node_map(),
-  m_address(addr)
-{};
+Address MessageDispatcher::getFreeAddress() {
+	if (m_freeAdresses.empty()) {
+		return Address(getAddress().m_nodeID, getAddress().m_threadID, m_nextFreeObjId++);
+	} else {
+		Address address = m_freeAdresses.front();
+		m_freeAdresses.pop();
 
-void MessageDispatcher::addMessageReceiver(IMessageReceiver& receiver){
-if (! receiver.getAddress().isValid() )
-	return;
-
-// TODO: does only work same thread (else)
-if (receiver.getAddress().m_nodeID != m_address.m_nodeID){
-	m_node_map[receiver.getAddress().m_objectID] = &receiver;
-}
-else if(receiver.getAddress().m_threadID != m_address.m_threadID){
-	m_thread_map[receiver.getAddress().m_threadID] = &receiver;
-}
-else {
-	m_local_map[receiver.getAddress().m_objectID] = &receiver;
-}
-};
-
-void MessageDispatcher::receive(Message* msg) {
-// TODO: does only work same thread (else)
-	//TODO: assert msg != 0
-IMessageReceiver* receiver = 0;
-std::map<int, IMessageReceiver*>::iterator it;
-if (msg->getAddress().m_nodeID != m_address.m_nodeID){
-	it = m_node_map.find(msg->getAddress().m_objectID);
-	if (it != m_node_map.end() ) {
-		receiver = (*it).second;
+		return address;
 	}
 }
-else if(msg->getAddress().m_threadID != m_address.m_threadID){
-	it = m_thread_map.find(msg->getAddress().m_objectID);
-	if (it != m_thread_map.end() ) {
-		receiver = (*it).second;
+void MessageDispatcher::freeAddress(const Address& addr) {
+	m_freeAdresses.push(addr);
+}
+void MessageDispatcher::addMessageReceiver(IMessageReceiver& receiver) {
+	if (!receiver.getAddress().isValid())
+		return;
+
+	if (receiver.getAddress().m_nodeID == m_address.m_nodeID
+			&& receiver.getAddress().m_threadID == m_address.m_threadID) {
+
+		m_local_map[receiver.getAddress().m_objectID] = &receiver;
+	}
+
+}
+
+void MessageDispatcher::removeMessageReceiver(IMessageReceiver& receiver) {
+	if (!receiver.getAddress().isValid())
+		return;
+
+	m_local_map.erase(receiver.getAddress().m_objectID);
+}
+
+void MessageDispatcher::addPollingMessageReceiver(IMessageReceiver& receiver) {
+	m_pollingMessageReceiver.insert(&receiver);
+}
+void MessageDispatcher::removePollingMessageReceiver(IMessageReceiver& receiver) {
+	m_pollingMessageReceiver.erase(&receiver);
+}
+
+void MessageDispatcher::receive(const Message* msg) {
+
+	IMessageReceiver* receiver = 0;
+	if (msg->getAddress().m_nodeID == m_address.m_nodeID && msg->getAddress().m_threadID == m_address.m_threadID) {
+		std::map<int, IMessageReceiver*>::iterator it;
+		it = m_local_map.find(msg->getAddress().m_objectID);
+		if (it != m_local_map.end()) {
+			receiver = it->second;
+		}
+	}
+	if (receiver == this) {
+		for (std::set<IMessageReceiver*>::iterator it = m_pollingMessageReceiver.begin();
+				it != m_pollingMessageReceiver.end(); ++it) {
+			(*it)->receive(msg);
+		}
+	} else if (receiver != 0) {
+		receiver->receive(msg);
+		// TODO: error handling for not found addresses
+
+		delete msg;
 	}
 }
-else {
-	// Same node, same thread -> local call Dispatch Map
-	it = m_local_map.find(msg->getAddress().m_objectID);
-	if (it != m_local_map.end() ) {
-		receiver = (*it).second;
-	}
-}
-if (receiver!=0)
-{
-	receiver->receive(msg);
-	// TODO: error handling for not found addresses
-}
+
+std::string MessageDispatcher::toString() const {
+	return getName() + " " + getAddress().toID();
 }
 
 } /* namespace etRuntime */

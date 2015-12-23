@@ -10,24 +10,58 @@
  *
  *******************************************************************************/
 
-#include "Message.h"
-
-#include <sstream>
+#include "common/messaging/Message.h"
+#include <iostream>
+#include <string>
+#include <cstring>
+#include <cstdlib>
 
 namespace etRuntime {
 
-
+Message::Message(const Address& addr, int evtId, const void* dataToCopy, std::size_t dataSize) :
+		m_address(addr),
+		m_evtId(evtId),
+		m_next(0),
+		m_dataSize(0),
+		m_data(0){
+	if(dataToCopy != 0 && dataSize > 0){
+		m_data = std::malloc(dataSize);
+		if(m_data != 0){
+			m_dataSize = dataSize;
+			std::memcpy(m_data, dataToCopy, dataSize);
+		}
+	}
+}
+Message::Message(const Address& addr, int evtId, void* dataPtr) :
+		m_address(addr),
+		m_evtId(evtId),
+		m_next(0),
+		m_dataSize(0),
+		m_data(dataPtr) {
+}
+Message::Message(const Address& addr, int evtId) :
+		m_address(addr),
+		m_evtId(evtId),
+		m_next(0),
+		m_dataSize(0),
+		m_data(0) {
+}
 Message::~Message() {
+	m_evtId = 0;
 	m_next = 0;
+	if(m_dataSize > 0)
+		std::free(m_data);
+	m_data = 0;
+	m_dataSize = 0;
 }
 
-std::string Message::toString(){
-   std::stringstream strm;
-   strm << "EventMessage(" << m_address.toString() << ", evt=" << m_evtId << ")";
-   if (m_data) {
-	   strm << std::showbase << std::hex << m_data;
-   }
-   return strm.str();
+std::string Message::toString() const {
+	std::stringstream strm;
+	strm << "Message(" << m_address.toID() << ", evt=" << m_evtId << ")";
+	if (m_data) {
+		strm << std::showbase << std::hex << m_data;
+	}
+	return strm.str();
 }
 
 } /* namespace etRuntime */

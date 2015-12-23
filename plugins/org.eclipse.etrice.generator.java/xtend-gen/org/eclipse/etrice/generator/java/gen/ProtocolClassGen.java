@@ -249,11 +249,11 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     _builder.newLine();
     _builder.newLine();
     _builder.append("\t");
-    CharSequence _portClass = this.portClass(pc, Boolean.valueOf(false));
+    CharSequence _portClass = this.portClass(pc, false);
     _builder.append(_portClass, "\t");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
-    CharSequence _portClass_1 = this.portClass(pc, Boolean.valueOf(true));
+    CharSequence _portClass_1 = this.portClass(pc, true);
     _builder.append(_portClass_1, "\t");
     _builder.newLineIfNotEmpty();
     _builder.append("}");
@@ -261,12 +261,12 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     return _builder;
   }
   
-  public CharSequence portClass(final ProtocolClass pc, final Boolean conj) {
+  public CharSequence portClass(final ProtocolClass pc, final boolean conj) {
     CharSequence _xblockexpression = null;
     {
-      PortClass pclass = this._roomExtensions.getPortClass(pc, (conj).booleanValue());
-      String portClassName = this._roomExtensions.getPortClassName(pc, (conj).booleanValue());
-      String replPortClassName = this._roomExtensions.getPortClassName(pc, (conj).booleanValue(), true);
+      PortClass pclass = this._roomExtensions.getPortClass(pc, conj);
+      String portClassName = this._roomExtensions.getPortClassName(pc, conj);
+      String replPortClassName = this._roomExtensions.getPortClassName(pc, conj, true);
       StringConcatenation _builder = new StringConcatenation();
       _builder.newLine();
       _builder.append("// port class");
@@ -333,7 +333,6 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
         GlobalSettings _settings_1 = Main.getSettings();
         boolean _isGenerateMSCInstrumentation_1 = _settings_1.isGenerateMSCInstrumentation();
         if (_isGenerateMSCInstrumentation_1) {
-          _builder.append("\t");
           _builder.newLine();
           _builder.append("\t");
           _builder.append("public void destroy() {");
@@ -380,13 +379,13 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
         }
       }
       {
-        boolean _handlesReceive = this._roomExtensions.handlesReceive(pc, (conj).booleanValue());
+        boolean _handlesReceive = this._roomExtensions.handlesReceive(pc, conj);
         if (_handlesReceive) {
           _builder.append("\t\t\t");
           _builder.append("switch (msg.getEvtId()) {");
           _builder.newLine();
           {
-            List<MessageHandler> _receiveHandlers = this._roomExtensions.getReceiveHandlers(pc, (conj).booleanValue());
+            List<MessageHandler> _receiveHandlers = this._roomExtensions.getReceiveHandlers(pc, conj);
             for(final MessageHandler hdlr : _receiveHandlers) {
               _builder.append("\t\t\t");
               _builder.append("\t");
@@ -440,7 +439,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.append("getActor().receiveEvent(this, msg.getEvtId(), null);");
       _builder.newLine();
       {
-        boolean _handlesReceive_1 = this._roomExtensions.handlesReceive(pc, (conj).booleanValue());
+        boolean _handlesReceive_1 = this._roomExtensions.handlesReceive(pc, conj);
         if (_handlesReceive_1) {
           _builder.append("\t\t\t");
           _builder.append("}");
@@ -473,16 +472,15 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
           _builder.newLineIfNotEmpty();
         }
       }
-      _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("// sent messages");
       _builder.newLine();
       {
-        List<Message> _allMessages = this._roomHelpers.getAllMessages(pc, (conj).booleanValue());
+        List<Message> _allMessages = this._roomHelpers.getAllMessages(pc, conj);
         for(final Message m : _allMessages) {
           _builder.append("\t");
-          CharSequence _sendMessage = this.sendMessage(m, (conj).booleanValue());
+          CharSequence _sendMessage = this.sendMessage(m, conj);
           _builder.append(_sendMessage, "\t");
           _builder.newLineIfNotEmpty();
         }
@@ -508,7 +506,6 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.append("\t");
       _builder.append("}");
       _builder.newLine();
-      _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("public int getReplication() {");
@@ -519,7 +516,6 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.append("\t");
       _builder.append("}");
       _builder.newLine();
-      _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("public int getIndexOf(InterfaceItemBase ifitem){");
@@ -527,10 +523,9 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.append("\t\t\t");
       _builder.append("return ifitem.getIdx();");
       _builder.newLine();
-      _builder.append("\t\t");
+      _builder.append("\t");
       _builder.append("}");
       _builder.newLine();
-      _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("public ");
@@ -545,7 +540,6 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.append("\t");
       _builder.append("}");
       _builder.newLine();
-      _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("protected InterfaceItemBase createInterfaceItem(IInterfaceItemOwner rcv, String name, int lid, int idx) {");
@@ -558,10 +552,9 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.append("\t");
       _builder.append("}");
       _builder.newLine();
-      _builder.append("\t");
       _builder.newLine();
       {
-        if ((conj).booleanValue()) {
+        if (conj) {
           _builder.append("\t");
           _builder.append("// incoming messages");
           _builder.newLine();
@@ -901,13 +894,11 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.append(_name_1, "");
       _builder.append(" {");
       _builder.newLineIfNotEmpty();
-      _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
       CharSequence _userCode_1 = this._procedureHelpers.userCode(pc, 2);
       _builder.append(_userCode_1, "\t");
       _builder.newLineIfNotEmpty();
-      _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("// send port holds data");
@@ -934,7 +925,6 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
           _builder.newLineIfNotEmpty();
         }
       }
-      _builder.append("\t\t");
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append("// constructor");
@@ -951,7 +941,6 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.append("\t\t");
       _builder.append("}");
       _builder.newLine();
-      _builder.append("\t\t");
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append("// getters and setters");
@@ -1013,7 +1002,6 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.append("\t");
       _builder.append("}");
       _builder.newLine();
-      _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("// receive port accesses send port");
@@ -1030,7 +1018,6 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.append(_portClassName_3, "\t\t");
       _builder.append(" peer;");
       _builder.newLineIfNotEmpty();
-      _builder.append("\t\t");
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append("// constructor");
@@ -1047,7 +1034,6 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.append("\t\t");
       _builder.append("}");
       _builder.newLine();
-      _builder.append("\t\t");
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append("// getters");
@@ -1092,7 +1078,6 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
           _builder.newLine();
         }
       }
-      _builder.append("\t\t");
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append("protected void connect(DataSendPort dataSendPort) {");

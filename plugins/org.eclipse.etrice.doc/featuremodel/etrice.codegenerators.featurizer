@@ -6,30 +6,51 @@ Package CodeGenerators
 	description ''''''
 	contains CCodeGenerator
 	contains JavaCodeGenerator
+	contains CPPCodeGenerator
 ;
 
 Feature CCodeGenerator
 	shortName '''C Code Generator'''
 	description ''''''
-	
+
 	contains GenerationOptions
 	contains MSCLogging
 	contains DataLogging
-	
+
 	stable
 ;
 Feature JavaCodeGenerator
 	shortName '''Java Code Generator'''
 	description ''''''
-	
+
 	contains GenerationOptions
 	contains MSCLogging
-	
+
 	stable
 ;
 Feature CPPCodeGenerator
 	shortName '''C++ Code Generator'''
-	description ''''''
+	description '''
+		Missing Features:
+
+		- memory management of messages (pool + free memory)
+
+		- Inheritance
+		- Enums, non-primtive datatypes e.g. string, DataClass ...
+		- Wait on 'quit' in cmd (atm wait 30sec)
+		- getter/setter attributes
+
+		TODO:
+		- fix free memory on exit (delete of instance tree in runner)
+		- remove streams
+		- find compiler flags for deactivating exceptions, streams ...
+		- includes to generated files
+
+		Optimization:
+		- for C11 use unordered map
+		- reduce use of dynamic_cast and rtti
+
+	'''
 	prototype
 ;
 
@@ -38,7 +59,7 @@ Feature GenerationOptions
 	text '''
 		Options for generation are configured in the launch configuration or in case of standalone generation via command line.
 		A list of available options:
-		
+
 		- generate as library
 		- generate documentation
 		- generate instrumentation for MSC generation
@@ -53,10 +74,10 @@ Feature MSCLogging
 	description '''Runtime logger for event-driven Messages, represented as a Message Sequence Chart.'''
 	text '''
 		The MSCLogging is activated by default, but can be set manually in the [GenerationOptions][]. The output file is created upon regular termination of the application. The resulting file can be found in the logging directory and has the name *msc.seq*, which can be open with the free open source tool [Trace2UML](http://trace2uml.stage.tigris.org/).
-		
+
 		![MSCLogging](images/300-MSCLogging.png)
 	'''
-	
+
 	uses GenerationOptions
 	stable
 ;
@@ -68,25 +89,25 @@ Feature DataLogging
 
 		```room
 		@DataLogging(pathlist = "/portInstancePath,/portInstancePath,..")
-		``` 
-		  
+		```
+
 		Where `pathlist` is a string specifying a list of port instances which should be instrumented for data logging:
-		
+
 		- the path of a port instance starts with the name of the [LogicalSystem][] and thus consists of at least 4 following segments
-		`/portInstancePath` = `/LogicalSystem/SubSystemRef/ActorRef/Port` 
+		`/portInstancePath` = `/LogicalSystem/SubSystemRef/ActorRef/Port`
 		- multiple paths are separated through comma (`,`), but avoid any whitespace
 		- the [Port][] must be conjugated and it´s [ProtocolClass][] has to be data-driven
 		- only the first Message having primitive or enum typed data is considered
-		
+
 		The logging status can be verified in the generation console. It will output an overview of all accepted ports. In the [GenerationOptions][] is possible to (de)activate the data logging and thus ignoring the presence of the annotation.
-		
-		At runtime the data values will then be logged 
-		
+
+		At runtime the data values will then be logged
+
 		- into a file *log/SubSystemRef.data.csv*
 		- it contains one column for each port instance
 		- and a new row for every polling cycle, containing all readout data values
 		- the first column is used to number the cycles
-		
+
 		Multi-Threading is not supported, the system must have not more than one polled/async physical thread.
 
 
@@ -102,11 +123,11 @@ Feature DataLogging
 	example '''
 		```room
 		import room.basic.annotations.* from "../../org.eclipse.etrice.modellib.c/model/Annotations.room"
-		
+
 		LogicalSystem Logging {
 		 	SubSystemRef main: MainSubSystem
 		}
-		
+
 		SubSystemClass MainSubSystem {
 		 	@DataLogging(pathlist = "/Logging/main/actorRef1/port1")
 		 	@Gnuplot(format="pngcairo", outputfile="main.data.png", width=1800, height=600, fontsize=10)
@@ -127,11 +148,11 @@ Feature DataLogging
 		5, 0.389418											,0.500000
 		[...]
 		```
-		
-		Resulting graph created from generated gnuplot script:  
+
+		Resulting graph created from generated gnuplot script:
 		![Gnuplot example](images/300-Gnuplot.png)
 	'''
-	
+
 	uses Annotation
 	prototype
 ;

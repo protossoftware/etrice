@@ -1,0 +1,43 @@
+PhysicalModel TemplatePhysical {
+	
+	PhysicalSystem TemplatePhysicalSystem {
+		NodeRef node : DefaultNodeClass
+	}
+	
+	NodeClass DefaultNodeClass {
+		runtime = DefaultRuntimeClass
+		priomin = -10
+		priomax = 10
+		
+		DefaultThread DefaultPhysicalThread {
+			execmode = mixed
+			interval = 100ms
+			prio = 0
+			stacksize = 1024
+			msgblocksize = 64
+			msgpoolsize = 100
+		}
+		
+		Thread BlockedThread {
+			execmode = blocked
+			prio = 0
+			stacksize = 1024
+			msgblocksize = 64
+			msgpoolsize = 100
+		}
+		
+		Thread PolledThread {
+			execmode = polled
+			interval = 100ms
+			prio = 0
+			stacksize = 1024
+			msgblocksize = 64
+			msgpoolsize = 100
+		}
+	}
+
+	RuntimeClass DefaultRuntimeClass {
+		model = multiThreaded
+	} 
+	
+}

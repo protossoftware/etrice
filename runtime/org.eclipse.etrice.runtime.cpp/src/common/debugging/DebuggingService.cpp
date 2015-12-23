@@ -10,67 +10,97 @@
  *
  *******************************************************************************/
 
-
 #include "DebuggingService.h"
+
 #include "common/modelbase/ActorClassBase.h"
+#include "common/modelbase/SubSystemClassBase.h"
+#include "common/modelbase/PortBase.h"
 #include <iostream>
 
 namespace etRuntime {
 
-DebuggingService* DebuggingService::s_instance = 0;
+DebuggingService& DebuggingService::getInstance() {
+	static DebuggingService instance;
 
-DebuggingService::DebuggingService()
-: asyncLogger() ,
-  syncLogger(),
-  portInstances()
-{
+	return instance;
 }
 
-DebuggingService::~DebuggingService() {
+DebuggingService::DebuggingService() :
+		m_asyncLogger(),
+		m_syncLogger(),
+		m_portInstances() {
 }
 
+const PortBase* DebuggingService::getPort(const Address& address) const {
+	std::map<Address, const PortBase*>::const_iterator it = m_portInstances.find(address);
+	if (it != m_portInstances.end())
+		return it->second;
 
-void DebuggingService::addMessageAsyncOut(Address source, Address target,
-		const std::string& msg) {
-	asyncLogger.addMessageAsyncOut(portInstances.at(source)->getActorPath(),
-								   portInstances.at(target)->getActorPath(), msg);
+	return 0;
 }
 
-void DebuggingService::addMessageAsyncIn(Address source, Address target,
-		const std::string& msg) {
-	asyncLogger.addMessageAsyncIn(portInstances.at(source)->getActorPath(),
-								  portInstances.at(target)->getActorPath(), msg);
+void DebuggingService::addMessageAsyncOut(const Address& source, const Address& target, const std::string& msg) {
+	const PortBase* srcPort = getPort(source);
+	const PortBase* tgtPort = getPort(target);
+	if (srcPort != 0 && tgtPort != 0)
+		m_asyncLogger.addMessageAsyncOut(srcPort->getActor()->getInstancePath(), tgtPort->getActor()->getInstancePath(),
+				msg);
+
 }
 
-void DebuggingService::addMessageSyncCall(Address source, Address target,
-		const std::string& msg) {
-	asyncLogger.addMessageSyncCall(portInstances.at(source)->getActorPath(),
-								   portInstances.at(target)->getActorPath(), msg);
+void DebuggingService::addMessageAsyncIn(const Address& source, const Address& target, const std::string& msg) {
+	const PortBase* srcPort = getPort(source);
+	const PortBase* tgtPort = getPort(target);
+	if (srcPort != 0 && tgtPort != 0)
+		m_asyncLogger.addMessageAsyncIn(srcPort->getActor()->getInstancePath(), tgtPort->getActor()->getInstancePath(),
+				msg);
 }
 
-void DebuggingService::addMessageSyncReturn(Address source, Address target,
-		const std::string& msg) {
-	asyncLogger.addMessageSyncReturn(portInstances.at(source)->getActorPath(),
-		                             portInstances.at(target)->getActorPath(), msg);
+void DebuggingService::addMessageSyncCall(const Address& source, const Address& target, const std::string& msg) {
+	const PortBase* srcPort = getPort(source);
+	const PortBase* tgtPort = getPort(target);
+	if (srcPort != 0 && tgtPort != 0)
+		m_asyncLogger.addMessageSyncCall(srcPort->getActor()->getInstancePath(), tgtPort->getActor()->getInstancePath(),
+				msg);
 }
 
-void DebuggingService::addActorState(const ActorClassBase& actor,
-		const std::string& state) {
-	asyncLogger.addActorState(actor.getInstancePath(), state);
+void DebuggingService::addMessageSyncReturn(const Address& source, const Address& target, const std::string& msg) {
+	const PortBase* srcPort = getPort(source);
+	const PortBase* tgtPort = getPort(target);
+	if (srcPort != 0 && tgtPort != 0)
+		m_asyncLogger.addMessageSyncReturn(srcPort->getActor()->getInstancePath(),
+				tgtPort->getActor()->getInstancePath(), msg);
 }
 
-void DebuggingService::addPortInstance(PortBase& port) {
-	portInstances[port.getAddress()] = &port;
-	std::cout << "adding " << port.getAddress().toID() << " " << &port << " " << port.getParent()->getInstancePathName()<< std::endl;
+void DebuggingService::addActorState(const ActorClassBase& actor, const std::string& state) {
+	m_asyncLogger.addActorState(actor.getInstancePath(), state);
 }
 
-MSCLogger& DebuggingService::getSyncLogger() {
-	return syncLogger;
+void DebuggingService::addMessageActorCreate(const SubSystemClassBase& parent, const std::string& refName) {
+	m_asyncLogger.addMessageActorCreate(parent.getInstancePath(),
+			parent.getInstancePath() + IRTObject::PATH_DELIM + refName);
 }
 
-MSCLogger& DebuggingService::getAsyncLogger() {
-	return asyncLogger;
+void DebuggingService::addMessageActorCreate(const ActorClassBase& parent, const std::string& refName) {
+	m_asyncLogger.addMessageActorCreate(parent.getInstancePath(),
+			parent.getInstancePath() + IRTObject::PATH_DELIM + refName);
 }
 
+void DebuggingService::addMessageActorDestroy(const ActorClassBase& inst) {
+	//if (!(inst.getParent() instanceof OptionalActorInterfaceBase))
+	m_asyncLogger.addMessageActorDestroy(inst.getParent()->getInstancePath(), inst.getInstancePath());
+}
+
+void DebuggingService::addVisibleComment(const std::string& comment) {
+	m_asyncLogger.addVisibleComment(comment);
+}
+
+void DebuggingService::addPortInstance(const PortBase& port) {
+	m_portInstances[port.getAddress()] = &port;
+}
+
+void DebuggingService::removePortInstance(const PortBase& port) {
+	m_portInstances.erase(port.getAddress());
+}
 
 } /* namespace etRuntime */

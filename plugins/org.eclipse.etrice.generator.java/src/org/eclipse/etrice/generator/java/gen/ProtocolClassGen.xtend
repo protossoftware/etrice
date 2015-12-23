@@ -4,10 +4,10 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * CONTRIBUTORS:
  * 		Henrik Rentz-Reichert (initial contribution)
- * 
+ *
  *******************************************************************************/
 
 package org.eclipse.etrice.generator.java.gen
@@ -40,7 +40,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 	@Inject extension DataClassGen
 	@Inject extension FileSystemHelpers
 	@Inject ILogger logger
-	
+
 	def doGenerate(Root root) {
 		for (pc: root.usedProtocolClasses.filter(cl|cl.isValidGenerationLocation)) {
 			val path = pc.generationTargetPath+pc.getPath
@@ -61,10 +61,10 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 				fileIO.generateFile("generating ProtocolClass implementation", path, infopath, file, contents)
 		}
 	}
-	
+
 	def generate(Root root, ProtocolClass pc) {'''
 		package «pc.getPackage()»;
-		
+
 		import org.eclipse.etrice.runtime.java.messaging.Message;
 		import org.eclipse.etrice.runtime.java.modelbase.EventMessage;
 		import org.eclipse.etrice.runtime.java.modelbase.EventWithDataMessage;
@@ -76,22 +76,22 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 			import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
 		«ENDIF»
 		import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;
-		
+
 		«pc.userCode(1)»
-		
+
 		«var models = root.getReferencedModels(pc)»
 		«FOR model : models»
 			import «model.name».*;
 		«ENDFOR»
-		
+
 		public class «pc.name» {
 			// message IDs
 			«genMessageIDs(pc)»
-		
+
 			«pc.userCode(2)»
-		
+
 			private static String messageStrings[] = {"MIN", «FOR m : pc.getAllOutgoingMessages()»"«m.name»",«ENDFOR» «FOR m : pc.getAllIncomingMessages()»"«m.name»",«ENDFOR»"MAX"};
-		
+
 			public String getMessageString(int msg_id) {
 				if (msg_id<MSG_MIN || msg_id>MSG_MAX+1){
 					// id out of range
@@ -101,19 +101,19 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 					return messageStrings[msg_id];
 				}
 			}
-		
+
 			«portClass(pc, false)»
 			«portClass(pc, true)»
 		}
 	'''
 	}
-	
-	def portClass(ProtocolClass pc, Boolean conj) {
+
+	def portClass(ProtocolClass pc, boolean conj) {
 		var pclass = pc.getPortClass(conj)
 		var portClassName = pc.getPortClassName(conj)
 		var replPortClassName = pc.getPortClassName(conj, true)
 	'''
-		
+
 		// port class
 		static public class «portClassName» extends PortBase {
 			«IF pclass!=null»
@@ -133,13 +133,13 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 				«ENDIF»
 			}
 			«IF Main::settings.generateMSCInstrumentation»
-				
+
 				public void destroy() {
 					DebuggingService.getInstance().removePortInstance(this);
 					super.destroy();
 				}
 			«ENDIF»
-		
+
 			@Override
 			public void receive(Message m) {
 				if (!(m instanceof EventMessage))
@@ -171,43 +171,43 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 					«ENDIF»
 				}
 		}
-		
+
 			«IF pclass!=null»
 				«pclass.attributes.attributes»
 «««				// TODO JH: Avoid collision attr getters/setter <-> user operations
 				«attributeSettersGettersImplementation(pclass.attributes, null)»
 				«pclass.operations.operationsImplementation(portClassName)»
 			«ENDIF»
-			
+
 			// sent messages
 			«FOR m : pc.getAllMessages(conj)»
 				«sendMessage(m, conj)»
 			«ENDFOR»
 		}
-		
+
 		// replicated port class
 		static public class «replPortClassName» extends ReplicatedPortBase {
-		
+
 			public «replPortClassName»(IInterfaceItemOwner actor, String name, int localId) {
 				super(actor, name, localId);
 			}
-			
+
 			public int getReplication() {
 				return getNInterfaceItems();
 			}
-			
+
 			public int getIndexOf(InterfaceItemBase ifitem){
 					return ifitem.getIdx();
-				}
-			
+			}
+
 			public «portClassName» get(int idx) {
 				return («portClassName») getInterfaceItem(idx);
 			}
-			
+
 			protected InterfaceItemBase createInterfaceItem(IInterfaceItemOwner rcv, String name, int lid, int idx) {
 				return new «portClassName»(rcv, name, lid, idx);
 			}
-			
+
 			«IF conj»
 				// incoming messages
 				«FOR m : pc.getAllIncomingMessages()»
@@ -228,7 +228,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 				«ENDFOR»
 			«ENDIF»
 		}
-		
+
 «««		// interface for port class
 «««		public interface I«name»{
 «««			«IF conj»
@@ -256,7 +256,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 	def messageCall(Message m) {
 		'''«m.name»(«IF m.data!=null» «m.data.name»«ENDIF»)'''
 	}
-	
+
 	def sendMessage(Message m, boolean conj) {
 		var dir = if (conj) "IN" else "OUT"
 		var hdlr = m.getSendHandler(conj)
@@ -284,39 +284,39 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 			«ENDIF»
 		'''
 	}
-	
+
 	def generateDataDriven(Root root, ProtocolClass pc) {
 		val sentMsgs = pc.allIncomingMessages.filter(m|m.data!=null)
 		val models = root.getReferencedModels(pc)
 		'''
 			package «pc.getPackage()»;
-			
+
 			import org.eclipse.etrice.runtime.java.messaging.IRTObject;
 			import org.eclipse.etrice.runtime.java.modelbase.DataReceivePort;
 			import org.eclipse.etrice.runtime.java.modelbase.DataSendPort;
 			import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;
-			
+
 			«pc.userCode(1)»
-			
+
 			«FOR model : models»
 				import «model.name».*;
 			«ENDFOR»
-			
+
 			public class «pc.name» {
-				
+
 				«pc.userCode(2)»
-				
+
 				// send port holds data
 				static public class «pc.getPortClassName(true)» extends DataSendPort {
 					«FOR msg : sentMsgs»
 						private «msg.data.refType.type.typeName» «msg.name»;
 					«ENDFOR»
-					
+
 					// constructor
 					public «pc.getPortClassName(true)»(IRTObject parent, String name, int localId) {
 						super(parent, name, localId);
 					}
-					
+
 					// getters and setters
 					«FOR msg : sentMsgs»
 						public void «msg.name»(«msg.data.refType.type.typeName» «msg.name») {
@@ -327,16 +327,16 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 						}
 					«ENDFOR»
 				}
-				
+
 				// receive port accesses send port
 				static public class «pc.getPortClassName(false)» extends DataReceivePort {
 					private «pc.getPortClassName(true)» peer;
-					
+
 					// constructor
 					public «pc.getPortClassName(false)»(IRTObject parent, String name, int localId) {
 						super(parent, name, localId);
 					}
-					
+
 					// getters
 					«FOR msg : sentMsgs»
 						public «msg.data.refType.type.typeName» «msg.name»() {
@@ -345,7 +345,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 							return peer.«msg.name»();
 						}
 					«ENDFOR»
-					
+
 					protected void connect(DataSendPort dataSendPort) {
 						if (dataSendPort instanceof «pc.getPortClassName(true)»)
 							peer = («pc.getPortClassName(true)»)dataSendPort;

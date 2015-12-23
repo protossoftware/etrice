@@ -13,48 +13,72 @@
 #ifndef INTERFACEITEMBASE_H_
 #define INTERFACEITEMBASE_H_
 
-#include "common/messaging/Address.h"
-#include "common/messaging/IMessageReceiver.h"
-#include "common/modelbase/IEventReceiver.h"
 #include "common/messaging/AbstractMessageReceiver.h"
+#include "common/messaging/Address.h"
+#include "common/messaging/IMessageService.h"
+#include "common/modelbase/IInterfaceItem.h"
 #include <string>
 
 namespace etRuntime {
+
+class IReplicatedInterfaceItem;
+class IInterfaceItemOwner;
 class IEventReceiver;
+class IMessageService;
 
-
-class InterfaceItemBase : public AbstractMessageReceiver{
+class InterfaceItemBase: public AbstractMessageReceiver, public virtual IInterfaceItem {
 public:
-	InterfaceItemBase (IEventReceiver& evtReceiver, IRTObject* parentActor, std::string name, int localId, int idx, Address ownAddress, Address peerAddress);
-	InterfaceItemBase(const InterfaceItemBase & right);
+	static void connect(IRTObject* obj, const std::string& path1, const std::string& path2);
+
 	virtual ~InterfaceItemBase();
 
-	int getIdx() const  { return m_idx; } ;
-	IEventReceiver& getEventReceiver() {	return *m_eventReceiver; };
-	std::string& getActorPath() {	return m_actorPath; };
-	int getLocalId() const {return m_localId; };
+	// TODO JH sync on several member functions needed
+	IInterfaceItem* connectWith(IInterfaceItem* peer);
+	void disconnect();
+	int getLocalId() const {
+		return m_localId;
+	}
 
-	void setMsgReceiver(IMessageReceiver& msgReceiver) {	m_ownMsgReceiver = &msgReceiver; };
+	int getIdx() const {
+		return m_idx;
+	}
 
+	IEventReceiver* getActor() const;
+
+	virtual std::string toString() const;
 protected:
-	IMessageReceiver* getMsgReceiver() const{ return m_ownMsgReceiver; };
-	IMessageReceiver* getPeerMsgReceiver() const { return m_peerMsgReceiver;	};
-	Address getPeerAddress() const { return m_peerAddress; };
+	InterfaceItemBase(IInterfaceItemOwner* owner, const std::string& name, int localId, int idx);
+
+	IMessageReceiver* getMsgReceiver() const {
+		return m_ownMsgReceiver;
+	}
+
+	const Address& getPeerAddress() const {
+		return m_peerAddress;
+	}
+
+	IMessageReceiver* getPeerMsgReceiver() const {
+		return m_peerMsgReceiver;
+	}
+
+	virtual void destroy();
+
 
 private:
-
-	int m_idx;
 	int m_localId;
-
-	std::string m_actorPath;
-
+	int m_idx;
 	Address m_peerAddress;
-	IMessageReceiver* m_ownMsgReceiver;
+	IInterfaceItem* m_peer;
+	IMessageService* m_ownMsgReceiver;
 	IMessageReceiver* m_peerMsgReceiver;
-	IEventReceiver* m_eventReceiver;
+
+	IReplicatedInterfaceItem* m_replicator;
+
+	void disconnectInternal();
 
 	InterfaceItemBase();
-	InterfaceItemBase & operator = (const InterfaceItemBase& right);
+	InterfaceItemBase(InterfaceItemBase const&);
+	InterfaceItemBase& operator =(InterfaceItemBase const&);
 
 };
 

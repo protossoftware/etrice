@@ -298,30 +298,25 @@ public class CExtensions implements ILanguageExtension {
     return "void*";
   }
   
+  public String typeArrayModifier() {
+    return this.pointerLiteral();
+  }
+  
   public String arrayDeclaration(final String type, final int size, final String name, final boolean isRef) {
-    String _xifexpression = null;
-    if (isRef) {
-      _xifexpression = (((((type + "* ") + name) + "[") + Integer.valueOf(size)) + "]");
-    } else {
-      _xifexpression = (((((type + " ") + name) + "[") + Integer.valueOf(size)) + "]");
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append(type, "");
+    {
+      if (isRef) {
+        _builder.append("*");
+      }
     }
-    return _xifexpression;
-  }
-  
-  public String constructorName(final String cls) {
-    return "ctor";
-  }
-  
-  public String destructorName(final String cls) {
-    return "dtor";
-  }
-  
-  public String constructorReturnType() {
-    return "void";
-  }
-  
-  public String destructorReturnType() {
-    return "void";
+    _builder.append(" ");
+    _builder.append(name, "");
+    _builder.append("[");
+    _builder.append(size, "");
+    _builder.append("]");
+    _builder.newLineIfNotEmpty();
+    return _builder.toString();
   }
   
   public String superCall(final String baseClassName, final String method, final String args) {

@@ -4,11 +4,11 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * CONTRIBUTORS:
  * 		Henrik Rentz-Reichert (initial contribution)
  * 		Thomas Schuetz (refactoring, adapted for other target languages)
- * 
+ *
  *******************************************************************************/
 
 package org.eclipse.etrice.generator.generic
@@ -16,16 +16,16 @@ package org.eclipse.etrice.generator.generic
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import java.util.List
-import org.eclipse.emf.common.util.EList
 import org.eclipse.etrice.core.fsm.fSM.DetailCode
 import org.eclipse.etrice.core.genmodel.fsm.base.ILogger
+import org.eclipse.etrice.core.room.ActorClass
 import org.eclipse.etrice.core.room.ActorContainerClass
 import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.core.room.DataClass
 import org.eclipse.etrice.core.room.Operation
 import org.eclipse.etrice.core.room.ProtocolClass
 import org.eclipse.etrice.core.room.RefableType
-import org.eclipse.etrice.core.room.VarDecl
+import org.eclipse.etrice.core.room.RoomClass
 import org.eclipse.etrice.core.room.util.RoomHelpers
 import org.eclipse.etrice.generator.base.AbstractGenerator
 
@@ -35,6 +35,8 @@ import org.eclipse.etrice.generator.base.AbstractGenerator
  */
 @Singleton
 class ProcedureHelpers {
+
+	protected val NEWLINE = System.getProperty("line.separator")
 
 	@Inject protected extension RoomHelpers
 	@Inject protected extension TypeHelpers
@@ -86,7 +88,7 @@ class ProcedureHelpers {
 				case 3: userCode(ac.userCode3)
 			}
 	}
-	
+
 	/**
 	 * @param dc some {@link DetailCode}
 	 * @return a string containing the expanded code surrounded by
@@ -95,7 +97,7 @@ class ProcedureHelpers {
 	def userCode(DetailCode dc) {
 		userCode(getDetailCode(dc))
 	}
-	
+
 	def private userCode(String code) {
 	'''
 		«IF code!=null && !code.empty»
@@ -105,37 +107,29 @@ class ProcedureHelpers {
 		«ENDIF»
 	'''
 	}
-	
+
 	// Attributes
-	
+
 	/**
 	 * @param EnumTest a list of {@link Attribute}s
 	 * @return code declaring the attributes
 	 */
-	def attributes(List<Attribute> EnumTest) {
+	def attributes(List<Attribute> attributes) {
 	'''
 		/*--------------------- attributes ---------------------*/
-		«FOR attribute : EnumTest»
-			«attributeDeclaration(attribute)»
+		«FOR it : attributes»
+			«attributeDeclaration»
 		«ENDFOR»
 	'''
 	}
-	
+
 	/**
-	 * Attributes will be public. Should be protected, but not supported in C.
-	 * 
 	 * @param attribute an {@link Attribute}
 	 * @return the code declaring the attribute
 	 */
-	def attributeDeclaration(Attribute attribute){
+	def attributeDeclaration(Attribute attribute) '''
+		«languageExt.accessLevelPublic» «attribute.declarationString»;
 	'''
-		«IF attribute.size==0»
-			«languageExt.accessLevelPublic» «attribute.type.type.typeName»«IF attribute.type.ref»«languageExt.pointerLiteral()»«ENDIF» «attribute.name»;
-		«ELSE»
-			«languageExt.accessLevelPublic» «languageExt.arrayDeclaration(attribute.type.type.typeName, attribute.size, attribute.name, attribute.type.ref)»;
-		«ENDIF» 	
-	'''	
-	}
 
 	/**
 	 * @param attribute an {@link Attribute}
@@ -147,7 +141,7 @@ class ProcedureHelpers {
 		if (dflt.startsWith("{")) {
 			if (dflt.split(",").size!=att.size)
 				logger.logInfo("WARNING: array size determined by initializer differs from attribute size ("+att.name+"["+att.size+"] <-> "+dflt+")")
-				
+
 			return dflt
 		}
 
@@ -161,18 +155,18 @@ class ProcedureHelpers {
 		}
 		return result+"}"
 	}
-	
+
 	// Attribute setters & getters
-	
+
 	/**
 	 * @param EnumTest a list of {@link Attribute}s
 	 * @param classname the name of the defining class
 	 * @return code declaring setters and getters for the attributes
-	 */	
-	def attributeSettersGettersDeclaration(List<Attribute> EnumTest, String classname) {
+	 */
+	def attributeSettersGettersDeclaration(List<Attribute> attributes, String classname) {
 	'''
 		/* --------------------- attribute setters and getters */
-		«FOR attribute : EnumTest»
+		«FOR attribute : attributes»
 			«setterHeader(attribute, classname)»;
 			«getterHeader(attribute, classname)»;
 		«ENDFOR»
@@ -183,11 +177,11 @@ class ProcedureHelpers {
 	 * @param EnumTest a list of {@link Attribute}s
 	 * @param classname the name of the defining class
 	 * @return code defining setters and getters for the attributes
-	 */	
-	def attributeSettersGettersImplementation(List<Attribute> EnumTest, String classname) {
+	 */
+	def attributeSettersGettersImplementation(List<Attribute> attributes, String classname) {
 	'''
 		/* --------------------- attribute setters and getters */
-		«FOR attribute : EnumTest»«setterHeader(attribute, classname)» {
+		«FOR attribute : attributes»«setterHeader(attribute, classname)» {
 			 «languageExt.memberAccess()»«attribute.name» = «attribute.name»;
 		}
 		«getterHeader(attribute, classname)» {
@@ -196,44 +190,46 @@ class ProcedureHelpers {
 		«ENDFOR»
 	'''
 	}
-	
+
 	/**
 	 * @param attribute an {@link Attribute}
 	 * @param classname the name of the defining class
 	 * @return code for the attribute setter declaration
-	 */	
+	 */
 	def private setterHeader(Attribute attribute, String classname){
-		'''«languageExt.accessLevelPublic()»void set«attribute.name.toFirstUpper()» («languageExt.selfPointer(classname, true)»«attribute.type.type.typeName»«IF attribute.size!=0»[]«ENDIF» «attribute.name»)'''
+		'''«languageExt.accessLevelPublic()»void set«attribute.name.toFirstUpper()»(«languageExt.selfPointer(classname, true)»«attribute.declarationString»)'''
 	}
-	
+
 	/**
 	 * @param attribute an {@link Attribute}
 	 * @param classname the name of the defining class
 	 * @return code for the attribute getter declaration
-	 */	
+	 */
 	def private getterHeader(Attribute attribute, String classname){
-		'''«languageExt.accessLevelPublic()»«attribute.type.type.typeName»«IF attribute.size!=0»[]«ENDIF» get«attribute.name.toFirstUpper()» («languageExt.selfPointer(classname, false)»)'''
+		'''«languageExt.accessLevelPublic()»«attribute.signatureReturnString» get«attribute.name.toFirstUpper()»(«languageExt.selfPointer(classname, false)»)'''
 	}
-	
+
+
+
 	/**
 	 * @param attributes a list of {@link Attribute}s
 	 * @return an argument list for the attributes
 	 */
 	def argList(List<Attribute> attributes) {
-		'''«FOR a : attributes SEPARATOR ", "»«a.type.type.typeName»«IF a.size>0»[]«ENDIF» «a.name»«ENDFOR»'''
+		'''«FOR a : attributes SEPARATOR ", "»«a.declarationString»«ENDFOR»'''
 	}
-	
+
 	/**
 	 * @param EnumTest an iterable of {@link Attribute}s representing a path
 	 * @param classname the name of the defining class
 	 * @return the invocation code for the call of a setter
-	 */	
+	 */
 	def invokeGetters(Iterable<Attribute> path, String classname){
 		'''«FOR a : path SEPARATOR '.'»«invokeGetter(a.name, classname)»«ENDFOR»'''
 	}
 
 	// generic setters & getters
-	
+
 	/**
 	 * @param typeName the type name of the attribute
 	 * @param name the name of the attribute
@@ -247,7 +243,7 @@ class ProcedureHelpers {
 		}
 	'''
 	}
-	
+
 	/**
 	 * @param name the name of the attribute
 	 * @param classname the name of the type defining the getter
@@ -256,7 +252,7 @@ class ProcedureHelpers {
 	def invokeGetter(String name, String classname){
 		'''get«name.toFirstUpper»(«languageExt.selfPointer(classname, true)»)'''
 	}
-	
+
 	/**
 	 * @param name the name of the attribute
 	 * @param classname the name of the type defining the getter
@@ -266,9 +262,9 @@ class ProcedureHelpers {
 	def invokeSetter(String name, String classname, String value){
 		'''set«name.toFirstUpper»(«languageExt.selfPointer(classname, true)»«value»)'''
 	}
-	
+
 	// Operations
-	
+
 	/**
 	 * @param operations a list of {@link Operation}s
 	 * @param classname the name of the type defining the getter
@@ -277,10 +273,10 @@ class ProcedureHelpers {
 	def operationsDeclaration(List<? extends Operation> operations, String classname) '''
 		/*--------------------- operations ---------------------*/
 		«FOR operation : operations»
-			«operationSignature(operation, classname)»;
+			«operationSignature(operation, classname, true)»;
 		«ENDFOR»
 	'''
-	
+
 
 	/**
 	 * @param operations a list of {@link Operation}s
@@ -290,67 +286,142 @@ class ProcedureHelpers {
 	def operationsImplementation(List<? extends Operation> operations, String classname) '''
 		/*--------------------- operations ---------------------*/
 		«FOR operation : operations»
-			«operationSignature(operation, classname)» {
+			«operationSignature(operation, classname, false)» {
 				«AbstractGenerator::getInstance().getTranslatedCode(operation.detailCode)»
 			}
 		«ENDFOR»
 	'''
-	
+
 	def asBlock(CharSequence str)'''
 		{
 			«str»
 		}
 	'''
-	
-	def getConstructorSignature(String classname){
-		classOperationSignature(classname, languageExt.constructorName(classname), "", languageExt.constructorReturnType)
-	}
-	
-	def getDestructorSignature(String classname){
-		classOperationSignature(classname, languageExt.destructorName(classname), "", languageExt.destructorReturnType)
-	}
-	
+
 	/**
-	 * @param classname the name of a class
-	 * @return code calling the destructor of the class
+	 * invoke user structor, if (inherited) present - <b>C only</b>
+	 *
+	 * @param cls {@link ActorClass} or {@link DataClass}
+	 * @param args self pointer to instance
 	 */
-	def destructorCall(String classname) {
-		languageExt.destructorName(classname)+"()"
+	def invokeUserStructor(RoomClass cls, String args, boolean ctor) {
+		if (cls.getStructors(!languageExt.usesInheritance).exists[isConstructor == ctor])
+			return '''«languageExt.memberInDeclaration(cls.name, if(ctor) 'ctor' else 'dtor')»(«args»);'''
+
+		return ''
 	}
-	
+
+
+	/**
+	 * declaration of user constructor + destructor, if (inherited) present - <b>C only</b>
+	 *
+	 * @param cls {@link ActorClass} or {@link DataClass}
+	 */
+	def userStructorsDeclaration(RoomClass cls) {
+		val namePrefix = languageExt.operationScope(cls.name, true)
+		val declBlock = newArrayList
+
+		declBlock += '/*--------------------- user constructor/destructor ---------------------*/'
+		if (cls.getStructors(!languageExt.usesInheritance).exists[constructor])
+			declBlock += functionSignature(cls.name, namePrefix + 'ctor', 'void', '') + ';'
+		if (cls.getStructors(!languageExt.usesInheritance).exists[!constructor])
+			declBlock += functionSignature(cls.name, namePrefix + 'dtor', 'void', '') + ';'
+
+		declBlock.join(NEWLINE)
+	}
+
+	/**
+	 * implementation of user constructor + destructor, if (inherited) present - <b>C only</b>
+	 *
+	 * @param cls {@link ActorClass} or {@link DataClass}
+	 */
+	def userStructorsImplementation(RoomClass cls){
+		val declBlock = newArrayList
+
+		declBlock += '/*--------------------- user constructor/destructor ---------------------*/'
+		declBlock += cls.userStuctorImplementation(true)
+		declBlock += cls.userStuctorImplementation(false)
+
+		declBlock.filterNull.join(NEWLINE)
+	}
+
+	def private String userStuctorImplementation(RoomClass cls, boolean ctor) {
+		val namePrefix = languageExt.operationScope(cls.name, false)
+		if(!cls.getStructors(!languageExt.usesInheritance).exists[isConstructor == ctor])
+			return null
+
+		'''
+			«functionSignature(cls.name, namePrefix + if(ctor) 'ctor' else 'dtor', 'void', '')»{
+				«cls.userStructorBody(ctor)»
+			}
+		'''
+	}
+
+	/**
+	 *  implementation of user structor, if (inherited) present
+	 */
+	def userStructorBody(RoomClass cls, boolean ctor){
+		val comment = '''// user defined «IF ctor»con«ELSE»de«ENDIF»structor body'''
+
+		val implementedStructors = cls.getStructors(!languageExt.usesInheritance).filter[isConstructor == ctor]
+		val translatedCodes = implementedStructors.map[detailCode].map[
+			AbstractGenerator::getInstance().getTranslatedCode(it)]
+
+		return comment + NEWLINE + translatedCodes.map[if(translatedCodes.size > 1) asBlock else it].join
+	}
+
+	def private getStructors(RoomClass cls, boolean inherited) {
+		switch it : cls {
+			ActorClass case !inherited: structors
+			DataClass case !inherited: structors
+			ActorClass case inherited: allStructors
+			DataClass case inherited: allStructors
+		}
+	}
+
 	/**
 	 * @param operation an {@link Operation}
 	 * @return the operation signature (with special care for
 	 * 		constructor and destructor
 	 */
-	def private operationSignature(Operation operation, String classname) {
-		classOperationSignature(classname, operation.name, BuildArgumentList(operation.arguments).toString, dataTypeToString(operation.returnType))
+	def private operationSignature(Operation operation, String classname, boolean isDeclaration) {
+		val arguments = '''«FOR argument : operation.arguments SEPARATOR ", "»«argument.refType.signatureString» «argument.name»«ENDFOR»'''
+		val returnType = operation.returnType.signatureString
+		functionSignature(classname, languageExt.operationScope(classname, isDeclaration)+operation.name, returnType, arguments)
 	}
 
 	/**
 	 * @param type a {@link RefableType}
 	 * @return a string for the type (also for pointers)
 	 */
-	def private dataTypeToString(RefableType type) {
-		return if (type==null)
-			"void"
-		else 
-			if (type.isRef){
-				type.type.typeName+languageExt.pointerLiteral();
-			}else{
-				type.type.typeName
-			}
+	def private String signatureString(RefableType type) {
+		switch it : type {
+			case null: 'void'
+			case isRef: type.type.typeName + languageExt.pointerLiteral
+			default: type.type.typeName
+		}
 	}
-	
-	/*
-	 * builds comma separated argument list as string from EList<VarDecl> arguments
+
+	def private String signatureReturnString(Attribute attribute){
+		switch it : attribute {
+			case size > 0: type.signatureString + languageExt.typeArrayModifier
+			default: type.signatureString
+		}
+	}
+
+	/**
+	 * @param attribute a {@link Attribute}
+	 * @return a string for <code>type name</code>
 	 */
-	def private BuildArgumentList(EList<VarDecl> arguments){
-		'''«FOR argument : arguments SEPARATOR ", "»«argument.refType.type.typeName»«IF argument.refType.ref»«languageExt.pointerLiteral()»«ENDIF» «argument.name»«ENDFOR»'''
+	def private String declarationString(Attribute attribute){
+		switch it : attribute {
+			case size > 0: languageExt.arrayDeclaration(type.type.typeName, size, name, type.isRef)
+			default: type.signatureString + ' ' + name
+		}
 	}
-	
-	def private classOperationSignature(String classname, String operationname, String argumentList, String returnType){
-		'''«languageExt.accessLevelPublic()»«returnType» «languageExt.memberInDeclaration(classname, operationname)»(«languageExt.selfPointer(classname, !argumentList.empty)»«argumentList»)'''
+
+	def private functionSignature(String className, String fullFctName, String returnType, String arguments){
+		'''«languageExt.accessLevelPublic()» «returnType» «fullFctName»(«languageExt.selfPointer(className, !arguments.empty)»«arguments»)'''
 	}
-	
+
 }

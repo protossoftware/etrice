@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- ====================================================================== 
-	 This ant script creates a zip file for each of eTrice's runtime projects. 
-	 If the projects would not be zipped the resulting file namens would be too long to be 
+<!-- ======================================================================
+	 This ant script creates a zip file for each of eTrice's runtime projects.
+	 If the projects would not be zipped the resulting file namens would be too long to be
 	 handled my MS Windows. See https://bugs.eclipse.org/bugs/show_bug.cgi?id=301858
-                   
-     Henrik Rentz-Reichert (original by Moritz Eysholdt)                                                                
+
+     Henrik Rentz-Reichert (original by Moritz Eysholdt)
      ====================================================================== -->
 <project name="project" default="zip_all_projects">
 
@@ -26,12 +26,17 @@
 		<zip_project source="../../examples" name="org.eclipse.etrice.tutorials.c" />
 		<zip_project source="../../examples" name="org.eclipse.etrice.examples.c" />
 		<zip_project source="../../examples" name="org.eclipse.etrice.template.c" />
-		
+
 		<zip_project source="../../runtime" name="org.eclipse.etrice.runtime.java" />
 		<zip_project source="../../runtime" name="org.eclipse.etrice.modellib.java" />
 		<zip_project source="../../examples" name="org.eclipse.etrice.tutorials.java" />
 		<zip_project source="../../examples" name="org.eclipse.etrice.examples.java" />
-		
+
+		<zip_project source="../../runtime" name="org.eclipse.etrice.runtime.cpp" />
+		<zip_project source="../../runtime" name="org.eclipse.etrice.modellib.cpp" />
+		<zip_project source="../../examples" name="org.eclipse.etrice.tutorials.cpp" />
+		<zip_project source="../../examples" name="org.eclipse.etrice.template.cpp" />
+
 		<echo message="done zipping wizard contents" />
 	</target>
 

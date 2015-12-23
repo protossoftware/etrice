@@ -4,10 +4,10 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * CONTRIBUTORS:
  * 		Henrik Rentz-Reichert (initial contribution)
- * 
+ *
  *******************************************************************************/
 
 package org.eclipse.etrice.generator.java.gen
@@ -15,18 +15,17 @@ package org.eclipse.etrice.generator.java.gen
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import java.util.HashMap
+import org.eclipse.etrice.core.fsm.fSM.ComponentCommunicationType
 import org.eclipse.etrice.core.genmodel.builder.GenmodelConstants
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass
 import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.etrice.core.genmodel.etricegen.WiredActorClass
 import org.eclipse.etrice.core.room.ActorClass
-import org.eclipse.etrice.core.fsm.fSM.ComponentCommunicationType
 import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.core.room.EnumerationType
 import org.eclipse.etrice.core.room.ReferenceType
-import org.eclipse.etrice.generator.base.AbstractGenerator
-import org.eclipse.etrice.generator.fsm.base.FileSystemHelpers
 import org.eclipse.etrice.generator.base.IDataConfiguration
+import org.eclipse.etrice.generator.fsm.base.FileSystemHelpers
 import org.eclipse.etrice.generator.fsm.base.IGeneratorFileIo
 import org.eclipse.etrice.generator.generic.GenericActorClassGenerator
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
@@ -36,24 +35,24 @@ import org.eclipse.etrice.generator.java.Main
 
 @Singleton
 class ActorClassGen extends GenericActorClassGenerator {
-	
+
 	@Inject IGeneratorFileIo fileIO
 	@Inject extension JavaExtensions
 	@Inject extension RoomExtensions
 	@Inject IDataConfiguration dataConfigExt
 	final ConfigGenAddon configGenAddon
-	
+
 	@Inject extension ProcedureHelpers
 	@Inject extension Initialization
 	@Inject extension StateMachineGen
 	@Inject extension TypeHelpers
 	@Inject extension FileSystemHelpers
-	
+
 	@Inject
 	new (ConfigGenAddon configGenAddon) {
 		this.configGenAddon = configGenAddon
 	}
-	
+
 	def doGenerate(Root root) {
 		val HashMap<ActorClass, WiredActorClass> ac2wired = new HashMap<ActorClass, WiredActorClass>
 		root.wiredInstances.filter(w|w instanceof WiredActorClass).forEach[w|ac2wired.put((w as WiredActorClass).actorClass, w as WiredActorClass)]
@@ -68,12 +67,10 @@ class ActorClassGen extends GenericActorClassGenerator {
 			fileIO.generateFile("generating ActorClass implementation", path, infopath, file, root.generate(xpac, wired, manualBehavior))
 		}
 	}
-	
+
 	def generate(Root root, ExpandedActorClass xpac, WiredActorClass wired, boolean manualBehavior) {
 		val ac = xpac.actorClass
 		val clsname = if (manualBehavior) "Abstract"+ac.name else ac.name
-		val ctor = ac.structors.findFirst[isConstructor]
-		val dtor = ac.structors.findFirst[!isConstructor]
 		val models = root.getReferencedModels(ac)
 		val impPersist = if (Main::settings.generatePersistenceInterface) "implements IPersistable " else ""
 		val dataObjClass = ac.name+"_DataObject"
@@ -81,10 +78,10 @@ class ActorClassGen extends GenericActorClassGenerator {
 			else if (!ac.getAttribute("ActorBaseClass", "class").empty) ac.getAttribute("ActorBaseClass", "class")
 			else if (Main::settings.generateStoreDataObj) "ActorClassFinalActionBase"
 			else "ActorClassBase"
-		
+
 	'''
 		package «ac.getPackage»;
-		
+
 		«IF !dataConfigExt.getDynConfigReadAttributes(ac).empty»
 			import org.eclipse.etrice.runtime.java.config.DynConfigLock;
 		«ENDIF»
@@ -100,9 +97,9 @@ class ActorClassGen extends GenericActorClassGenerator {
 		import org.eclipse.etrice.runtime.java.messaging.*;
 		import org.eclipse.etrice.runtime.java.modelbase.*;
 		import org.eclipse.etrice.runtime.java.debugging.*;
-		
+
 		import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;
-		
+
 		«FOR model : models»
 			import «model.name».*;
 		«ENDFOR»
@@ -112,72 +109,68 @@ class ActorClassGen extends GenericActorClassGenerator {
 		«FOR sub : ac.actorRefs.filter(r|r.refType==ReferenceType.OPTIONAL)»
 			import «sub.type.package».«sub.type.name»Interface;
 		«ENDFOR»
-		
+
 		«ac.userCode(1, true)»
-		
-		
+
+
 		public «IF manualBehavior || ac.^abstract»abstract «ENDIF»class «clsname» extends «baseClass» «impPersist»{
-		
+
 			«ac.userCode(2, false)»
-			
+
 			//--------------------- ports
 			«FOR ep : ac.getEndPorts()»
 				protected «ep.getPortClassName()» «ep.name» = null;
 			«ENDFOR»
-			
+
 			//--------------------- saps
 			«FOR sap : ac.serviceAccessPoints»
 				protected «sap.getPortClassName()» «sap.name» = null;
 			«ENDFOR»
-			
+
 			//--------------------- services
 			«FOR svc : ac.serviceImplementations»
 				protected «svc.getPortClassName()» «svc.spp.name» = null;
 			«ENDFOR»
-			
+
 			//--------------------- optional actors
 			«FOR sub : ac.actorRefs.filter(r|r.refType==ReferenceType.OPTIONAL)»
 				protected «sub.type.name»«IF sub.multiplicity!=1»Replicated«ENDIF»Interface «sub.name» = null;
 			«ENDFOR»
-			
+
 			//--------------------- interface item IDs
 			«xpac.genInterfaceItemConstants»
-			
+
 			«configGenAddon.genMinMaxConstants(ac)»
 			«ac.attributes.attributes»
 			«FOR a : dataConfigExt.getDynConfigReadAttributes(ac)»
 				private DynConfigLock lock_«a.name»;
 			«ENDFOR»
+
 			«operationsImplementation(ac.operations, ac.name)»
-			
-			// user defined destructor
-			«getDestructorSignature(ac.name)»{
-				«IF ac.base != null»super.dtor();«ENDIF»
-				«IF dtor != null»«AbstractGenerator::getInstance().getTranslatedCode(dtor.detailCode)»«ENDIF»
-			}
-		
+
+
 			//--------------------- construction
 			public «clsname»(IRTObject parent, String name) {
 				super(parent, name);
 				setClassName("«ac.name»");
-				
+
 				«ac.attributes.attributeInitialization(ac, false)»
-		
+
 				// own ports
 				«FOR ep : ac.getEndPorts()»
 					«ep.name» = new «ep.getPortClassName()»(this, "«ep.name»", «ep.ifItemId»);
 				«ENDFOR»
-				
+
 				// own saps
 				«FOR sap : ac.serviceAccessPoints»
 					«sap.name» = new «sap.getPortClassName()»(this, "«sap.name»", «sap.ifItemId», 0);
 				«ENDFOR»
-				
+
 				// own service implementations
 				«FOR svc : ac.serviceImplementations»
 					«svc.spp.name» = new «svc.getPortClassName()»(this, "«svc.spp.name»", «svc.spp.ifItemId»);
 				«ENDFOR»
-				
+
 				// sub actors
 				«FOR sub : ac.actorRefs»
 					«IF sub.refType==ReferenceType.OPTIONAL»
@@ -196,23 +189,18 @@ class ActorClassGen extends GenericActorClassGenerator {
 						new «sub.type.name»(this, "«sub.name»");
 					«ENDIF»
 				«ENDFOR»
-				
+
 				// wiring
 				«FOR wire: wired.wires»
 					«if (wire.dataDriven) "DataPortBase" else "InterfaceItemBase"».connect(this, "«wire.path1.join('/')»", "«wire.path2.join('/')»");
 				«ENDFOR»
-				
+
 				«IF ac.commType == ComponentCommunicationType::ASYNCHRONOUS || ac.commType == ComponentCommunicationType::DATA_DRIVEN»
 					// activate polling for data-driven communication
 					RTServices.getInstance().getMsgSvcCtrl().getMsgSvc(getThread()).addPollingMessageReceiver(this);
 				«ENDIF»
-				
-				«IF ctor!=null»
-					{
-						// user defined constructor body
-						«AbstractGenerator::getInstance().getTranslatedCode(ctor.detailCode)»
-					}
-				«ENDIF»
+
+				«ac.userStructorBody(true)»
 
 				«IF !dataConfigExt.getDynConfigReadAttributes(ac).empty || !dataConfigExt.getDynConfigWriteAttributes(ac).empty»
 					«FOR a : dataConfigExt.getDynConfigReadAttributes(ac)»
@@ -220,11 +208,11 @@ class ActorClassGen extends GenericActorClassGenerator {
 					«ENDFOR»
 				«ENDIF»
 			}
-			
+
 			«attributeSettersGettersImplementation(ac.attributes.minus(dataConfigExt.getDynConfigReadAttributes(ac)), ac.name)»
-			
+
 			«configGenAddon.genDynConfigGetterSetter(ac)»
-			
+
 			//--------------------- port getters
 			«FOR ep : ac.getEndPorts()»
 				«ep.portClassName.getterImplementation(ep.name, ac.name)»
@@ -235,7 +223,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 			«FOR svc : ac.serviceImplementations»
 				«svc.portClassName.getterImplementation(svc.spp.name, ac.name)»
 			«ENDFOR»
-		
+
 			//--------------------- lifecycle functions
 			«IF !ac.overridesStop()»
 				«IF manualBehavior»
@@ -247,13 +235,12 @@ class ActorClassGen extends GenericActorClassGenerator {
 					}
 				«ENDIF»
 			«ENDIF»
-			
+
 			«IF manualBehavior»
 				public abstract void destroy();
 			«ELSE»
 				public void destroy(){
-					if(this.getClass() == «clsname».class)
-						dtor();
+					«ac.userStructorBody(false)»
 					«IF Main::settings.generateMSCInstrumentation»
 						DebuggingService.getInstance().addMessageActorDestroy(this);
 					«ENDIF»
@@ -263,7 +250,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 					super.destroy();
 				}
 			«ENDIF»
-		
+
 			«IF manualBehavior»
 				public void receiveEvent(InterfaceItemBase ifitem, int evt, Object generic_data) {
 					«FOR ifitem : ac.allInterfaceItems SEPARATOR "else "»
@@ -289,7 +276,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 						protected void on_«ifitem.name»_«msg.name»(InterfaceItemBase ifitem«IF msg.data!=null»«msg.data.generateArglistAndTypedData.get(2)»«ENDIF») {}
 					«ENDFOR»
 				«ENDFOR»
-				
+
 				public abstract void executeInitTransition();
 			«ELSE»
 				«IF ac.hasNonEmptyStateMachine»
@@ -310,66 +297,66 @@ class ActorClassGen extends GenericActorClassGenerator {
 						}
 					«ENDIF»
 				«ELSEIF xpac.stateMachine.empty»
-«««					no state machine in the super classes 
+«««					no state machine in the super classes
 					//--------------------- no state machine
 					public void receiveEvent(InterfaceItemBase ifitem, int evt, Object data) {
 						handleSystemEvent(ifitem, evt, data);
 					}
-					
+
 					public void executeInitTransition() {}
 				«ENDIF»
 			«ENDIF»
-			
+
 			«IF Main::settings.generatePersistenceInterface»
-				
+
 				@Override
 				public void saveObject(ObjectOutput output) throws IOException {
 					«IF xpac.hasStateMachine()»
 						// state and history
 						output.writeInt(getState());
 						for (int h: history) output.writeInt(h);
-						
+
 					«ENDIF»
 					saveAttributes(output);
 				}
-				
+
 				protected void saveAttributes(ObjectOutput output) throws IOException {
 					«xpac.genSaveImpl»
 				}
-				
+
 				@Override
 				public void loadObject(ObjectInput input) throws IOException, ClassNotFoundException {
 					«IF xpac.hasStateMachine()»
 						// state and history
 						setState(input.readInt());
 						for (int i=0; i<history.length; ++i) history[i] = input.readInt();
-						
+
 					«ENDIF»
 					loadAttributes(input);
 				}
-				
+
 				protected void loadAttributes(ObjectInput input) throws IOException, ClassNotFoundException {
 					«xpac.genLoadImpl»
 				}
 			«ENDIF»
 			«IF Main::settings.isGenerateStoreDataObj»
-				
+
 				protected void store(IActorClassDataObject obj) {
 					if (!(obj instanceof «dataObjClass»))
 						return;
-					
+
 					«dataObjClass» dataObject = («dataObjClass») obj;
 					«IF ac.actorBase!=null»
-						
+
 						super.store(dataObject);
 					«ENDIF»
 					«IF ac.hasNonEmptyStateMachine»
-						
+
 						dataObject.setState(getState());
 						dataObject.setHistory(Arrays.copyOf(history, history.length));
 					«ENDIF»
 					«IF !ac.attributes.empty»
-						
+
 						«FOR att : ac.attributes»
 							«IF att.type.type.enumerationOrPrimitive»
 								«IF att.size>1»
@@ -392,23 +379,23 @@ class ActorClassGen extends GenericActorClassGenerator {
 						«ENDFOR»
 					«ENDIF»
 				}
-				
+
 				protected void restore(IActorClassDataObject obj) {
 					if (!(obj instanceof «dataObjClass»))
 						return;
-					
+
 					«dataObjClass» dataObject = («dataObjClass») obj;
 					«IF ac.actorBase!=null»
-						
+
 						super.restore(dataObject);
 					«ENDIF»
 					«IF ac.hasNonEmptyStateMachine»
-						
+
 						setState(dataObject.getState());
 						history = Arrays.copyOf(dataObject.getHistory(), dataObject.getHistory().length);
 					«ENDIF»
 					«IF !ac.attributes.empty»
-						
+
 						«FOR att : ac.attributes»
 							«IF att.type.type.enumerationOrPrimitive»
 								«IF att.size>1»
@@ -431,7 +418,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 						«ENDFOR»
 					«ENDIF»
 				}
-				
+
 				protected «dataObjClass» newDataObject() {
 					return new «dataObjClass»();
 				}
@@ -439,13 +426,13 @@ class ActorClassGen extends GenericActorClassGenerator {
 		};
 	'''
 	}
-	
+
 	private def genSaveImpl(ExpandedActorClass xpac) {
 		val ac = xpac.actorClass
 		'''
 			«IF ac.actorBase!=null»
 				super.saveAttributes(output);
-				
+
 			«ENDIF»
 			«IF !ac.attributes.empty»
 				«FOR att : ac.attributes»
@@ -463,13 +450,13 @@ class ActorClassGen extends GenericActorClassGenerator {
 			«ENDIF»
 		'''
 	}
-	
+
 	private def genLoadImpl(ExpandedActorClass xpac) {
 		val ac = xpac.actorClass
 		'''
 			«IF ac.actorBase!=null»
 				super.loadAttributes(input);
-				
+
 			«ENDIF»
 			«IF !ac.attributes.empty»
 				«FOR att : ac.attributes»
@@ -494,13 +481,13 @@ class ActorClassGen extends GenericActorClassGenerator {
 		else
 			att.type.type.typeName
 		val method = type.saveMethod
-		
+
 		if (att.size>0)
 			"for ("+type+" v: "+att.name+") output."+method+"(v);"
 		else
 			"output."+method+"("+att.name+");"
-	}	
-	
+	}
+
 	private def getSaveMethod(String type) {
 		switch (type) {
 			case "boolean": "writeBoolean"
@@ -521,13 +508,13 @@ class ActorClassGen extends GenericActorClassGenerator {
 		else
 			att.type.type.typeName
 		val method = type.loadMethod
-		
+
 		if (att.size>0)
 			"for (int i=0; i<"+att.name+".length; ++i) "+att.name+"[i] = input."+method+"();"
 		else
 			att.name+" = input."+method+"();"
-	}	
-	
+	}
+
 	private def getLoadMethod(String type) {
 		switch (type) {
 			case "boolean": "readBoolean"

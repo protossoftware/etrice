@@ -1,4 +1,4 @@
-/* 
+/*
  * Shortkeys:
  *	Ctrl+Space	- content assist
  * 	F3			- open declaration of selected element
@@ -30,10 +30,10 @@ RoomModel PingPongModel {
 			Binding sender.sendPort and receiver.recvPort
 		}
 		Behavior {
-			
+
 		}
 	}
-	
+
 	// - PingPong building kit
 
 	ActorClass Sender {
