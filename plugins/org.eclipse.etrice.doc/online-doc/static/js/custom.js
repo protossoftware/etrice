@@ -45,7 +45,7 @@ function lastSegment(str) {
 	return base;
 }
 
-$('table').addClass('table');
+$('table').addClass('table').addClass('table-condensed');
 
 /*
  * window.onscroll = function() {myFunction()};

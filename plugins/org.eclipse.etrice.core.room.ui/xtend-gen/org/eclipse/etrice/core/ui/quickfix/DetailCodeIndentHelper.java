@@ -37,6 +37,11 @@ public class DetailCodeIndentHelper {
       final String mark = Character.valueOf(_charAt).toString();
       String _newLine = Strings.newLine();
       final List<String> editorLines = Strings.split(editorString, _newLine);
+      int _size = editorLines.size();
+      boolean _lessEqualsThan = (_size <= 1);
+      if (_lessEqualsThan) {
+        return editorString;
+      }
       Iterable<String> _tail = IterableExtensions.<String>tail(editorLines);
       final Function1<String, Integer> _function = new Function1<String, Integer>() {
         public Integer apply(final String it) {

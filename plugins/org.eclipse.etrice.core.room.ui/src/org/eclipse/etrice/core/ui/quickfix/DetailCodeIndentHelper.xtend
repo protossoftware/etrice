@@ -12,17 +12,20 @@ class DetailCodeIndentHelper {
 	 * - line with least indentation is adjusted to first line
 	 * - lines are enclosed with " or '
 	 * - lines get editor indentation of first line
-	 * - 
+	 * -
 	 */
 	def static convertToSingleLines(IXtextDocument document, Issue issue) {
 		val issuedRegion = document.getLineInformationOfOffset(issue.getOffset()) // note: other methods return wrong line
-		
+
 		val firstEditorLine = document.get(issuedRegion.getOffset(), issuedRegion.getLength())
 		val editorIndent = Strings.getLeadingWhiteSpace(firstEditorLine)
-		
+
 		val editorString = document.get(issue.getOffset(), issue.getLength())
 		val mark = editorString.charAt(0).toString // " or '
 		val editorLines = Strings::split(editorString, Strings.newLine())
+
+		if(editorLines.size <= 1)
+			return editorString
 
 		//val initialIndent = editorLines.head.countIndent
 		val minIndent = editorLines.tail.sortBy[countIndent()].head.countIndent
@@ -45,6 +48,6 @@ class DetailCodeIndentHelper {
 		// simplistic whitespace handling, drop spaces etc.
 		// first convert 4x spaces to 1 indent, after that remove everything else
 		Strings::getLeadingWhiteSpace(line).replace("\t", "    ").replace("    ", "\t").replaceAll("!\\t","").length
-		
+
 	}
 }

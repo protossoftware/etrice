@@ -4,10 +4,10 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * CONTRIBUTORS:
  * 		Juergen Haug (initial contribution)
- * 
+ *
  *******************************************************************************/
 
 package org.eclipse.etrice.core.common.converter;
@@ -15,12 +15,18 @@ package org.eclipse.etrice.core.common.converter;
 import org.eclipse.xtext.common.services.DefaultTerminalConverters;
 import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.conversion.ValueConverter;
+import org.eclipse.xtext.conversion.impl.QualifiedNameValueConverter;
+
+import com.google.inject.Inject;
 
 public class BaseConverterService extends DefaultTerminalConverters {
 
 	private TimeConverter timeConverter = new TimeConverter();
 	private LongConverter longConverter = new LongConverter();
 	private DoubleConverter doubleConverter = new DoubleConverter();
+
+	@Inject
+	private QualifiedNameValueConverter fqnConverter;
 
 	@ValueConverter(rule = "TIME")
 	public IValueConverter<Long> getTimeConverter() {
@@ -35,5 +41,10 @@ public class BaseConverterService extends DefaultTerminalConverters {
 	@ValueConverter(rule = "Real")
 	public IValueConverter<Double> getRealConverter() {
 		return doubleConverter;
+	}
+
+	@ValueConverter(rule = "FQN")
+	public IValueConverter<String> FQN() {
+		return fqnConverter;
 	}
 }
