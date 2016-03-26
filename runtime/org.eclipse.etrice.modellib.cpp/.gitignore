@@ -12,3 +12,4 @@ src-gen-info/*
 *.toc
 *.log
 /MinGWDebug/
+/Debug/

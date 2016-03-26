@@ -44,8 +44,8 @@ public class CustomCompletionProposal implements ICompletionProposal {
     this.selection = selection;
   }
   
-  public void apply(final IDocument document) {
-    this.delegate.apply(document);
+  public void apply(final IDocument arg0) {
+    this.delegate.apply(arg0);
   }
   
   public String getAdditionalProposalInfo() {

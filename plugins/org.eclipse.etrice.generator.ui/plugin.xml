@@ -34,6 +34,13 @@
             id="org.eclipse.etrice.generator.ui.wizard.NewSetOfModelsWizardC"
             name="New Set of eTrice Models">
       </wizard>
+      <wizard
+            category="org.eclipse.etrice.core.ui.wizardCategory/org.eclipse.etrice.core.ui.wizardCppCategory"
+            class="org.eclipse.etrice.generator.ui.wizard.NewSetOfModelsWizard"
+            icon="icons/NewETriceProject.gif"
+            id="org.eclipse.etrice.generator.ui.wizard.NewSetOfModelsWizardCPP"
+            name="New Set of eTrice Models">
+      </wizard>
    </extension>
 
    <extension point="org.eclipse.ui.newWizards">

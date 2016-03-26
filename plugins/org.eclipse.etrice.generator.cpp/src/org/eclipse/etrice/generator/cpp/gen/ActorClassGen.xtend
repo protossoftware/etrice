@@ -28,7 +28,6 @@ import org.eclipse.etrice.generator.fsm.base.IGeneratorFileIo
 import org.eclipse.etrice.generator.generic.GenericActorClassGenerator
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
-import org.eclipse.etrice.generator.generic.TypeHelpers
 
 @Singleton
 class ActorClassGen extends GenericActorClassGenerator {
@@ -40,7 +39,6 @@ class ActorClassGen extends GenericActorClassGenerator {
 	@Inject extension ProcedureHelpers
 	@Inject extension Initialization
 	@Inject extension StateMachineGen
-	@Inject extension TypeHelpers
 	@Inject extension FileSystemHelpers
 
 	def doGenerate(Root root) {
@@ -77,7 +75,6 @@ class ActorClassGen extends GenericActorClassGenerator {
 		#include "common/messaging/IRTObject.h"
 		#include "common/modelbase/PortBase.h"
 		#include "common/modelbase/InterfaceItemBase.h"
-		#include "common/modelbase/ActorClassBase.h"
 		#include "common/modelbase/SubSystemClassBase.h"
 		#include "common/messaging/Address.h"
 		#include "common/messaging/IMessageReceiver.h"
@@ -91,6 +88,12 @@ class ActorClassGen extends GenericActorClassGenerator {
 		«FOR dc : root.getReferencedDataClasses(ac)»
 			#include "«dc.path»«dc.name».h"
 		«ENDFOR»
+		
+		«IF ac.actorBase==null»
+			#include "common/modelbase/ActorClassBase.h"
+		«ELSE»
+			#include "«ac.actorBase.name».h"
+		«ENDIF»
 
 		using namespace etRuntime; //TODO JH remove
 

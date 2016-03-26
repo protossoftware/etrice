@@ -19,6 +19,7 @@ import java.util.Map.Entry;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.etrice.generator.ui.wizard.NewSetOfModelsWizard;
 
@@ -84,16 +85,17 @@ public class ProjectConfigurationDelegator implements IProjectConfigurator {
 
 	/**
 	 * This method applies all configurators configured with the {@link #ICONFIGURATOR_ID} extension point.
+	 * @param progressMonitor 
 	 * 
 	 * @see org.eclipse.etrice.generator.ui.configurator.IProjectConfigurator#configure(org.eclipse.core.resources.IProject)
 	 */
 	@Override
-	public void configure(IProject project) {
+	public void configure(IProject project, IProgressMonitor progressMonitor) {
 		for (Entry<String, ArrayList<IProjectConfigurator>> entry : nature2configurators.entrySet()) {
 			try {
 				if (project.hasNature(entry.getKey())) {
 					for (IProjectConfigurator configurator : entry.getValue()) {
-						configurator.configure(project);
+						configurator.configure(project, progressMonitor);
 					}
 				}
 			} catch (CoreException e) {

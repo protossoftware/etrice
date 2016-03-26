@@ -5,7 +5,14 @@
          point="org.eclipse.etrice.generator.ui.project_configurator">
       <project_configurator
             appliesToNature="org.eclipse.cdt.core.cnature"
-            class="org.eclipse.etrice.generator.ui.cdt.ProjectConfigurator">
+            class="org.eclipse.etrice.generator.ui.cdt.CProjectConfigurator">
+      </project_configurator>
+   </extension>
+   <extension
+         point="org.eclipse.etrice.generator.ui.project_configurator">
+      <project_configurator
+            appliesToNature="org.eclipse.cdt.core.ccnature"
+            class="org.eclipse.etrice.generator.ui.cdt.CPPProjectConfigurator">
       </project_configurator>
    </extension>
 

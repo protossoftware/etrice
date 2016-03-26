@@ -107,7 +107,7 @@ public class NewSetOfModelsWizard extends Wizard implements INewWizard {
 					ProjectCreator.createRunAndLaunchConfigurations(baseName, project, page.getPath().toString(), additionalLaunchConfigLines);
 					ProjectCreator.addXtextNature(project, progressMonitor);
 					
-					ProjectConfigurationDelegator.getInstance().configure(project);
+					ProjectConfigurationDelegator.getInstance().configure(project, progressMonitor);
 					
 				} catch (Exception e) {
 					Logger.getLogger(getClass()).error(e.getMessage(), e);

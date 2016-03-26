@@ -46,7 +46,6 @@ import org.eclipse.etrice.generator.fsm.base.IGeneratorFileIo;
 import org.eclipse.etrice.generator.generic.GenericActorClassGenerator;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
-import org.eclipse.etrice.generator.generic.TypeHelpers;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -80,10 +79,6 @@ public class ActorClassGen extends GenericActorClassGenerator {
   @Inject
   @Extension
   private StateMachineGen _stateMachineGen;
-  
-  @Inject
-  @Extension
-  private TypeHelpers _typeHelpers;
   
   @Inject
   @Extension
@@ -201,8 +196,6 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.newLine();
       _builder.append("#include \"common/modelbase/InterfaceItemBase.h\"");
       _builder.newLine();
-      _builder.append("#include \"common/modelbase/ActorClassBase.h\"");
-      _builder.newLine();
       _builder.append("#include \"common/modelbase/SubSystemClassBase.h\"");
       _builder.newLine();
       _builder.append("#include \"common/messaging/Address.h\"");
@@ -241,6 +234,22 @@ public class ActorClassGen extends GenericActorClassGenerator {
         }
       }
       _builder.newLine();
+      {
+        ActorClass _actorBase_1 = ac.getActorBase();
+        boolean _equals = Objects.equal(_actorBase_1, null);
+        if (_equals) {
+          _builder.append("#include \"common/modelbase/ActorClassBase.h\"");
+          _builder.newLine();
+        } else {
+          _builder.append("#include \"");
+          ActorClass _actorBase_2 = ac.getActorBase();
+          String _name_4 = _actorBase_2.getName();
+          _builder.append(_name_4, "");
+          _builder.append(".h\"");
+          _builder.newLineIfNotEmpty();
+        }
+      }
+      _builder.newLine();
       _builder.append("using namespace etRuntime; //TODO JH remove");
       _builder.newLine();
       _builder.newLine();
@@ -269,8 +278,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
           String _portClassName = this._roomExtensions.getPortClassName(ep);
           _builder.append(_portClassName, "\t\t");
           _builder.append(" ");
-          String _name_4 = ep.getName();
-          _builder.append(_name_4, "\t\t");
+          String _name_5 = ep.getName();
+          _builder.append(_name_5, "\t\t");
           _builder.append(";");
           _builder.newLineIfNotEmpty();
         }
@@ -286,8 +295,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
           String _portClassName_1 = this._roomExtensions.getPortClassName(sap);
           _builder.append(_portClassName_1, "\t\t");
           _builder.append(" ");
-          String _name_5 = sap.getName();
-          _builder.append(_name_5, "\t\t");
+          String _name_6 = sap.getName();
+          _builder.append(_name_6, "\t\t");
           _builder.append(";");
           _builder.newLineIfNotEmpty();
         }
@@ -304,8 +313,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
           _builder.append(_portClassName_2, "\t\t");
           _builder.append(" ");
           SPP _spp = svc.getSpp();
-          String _name_6 = _spp.getName();
-          _builder.append(_name_6, "\t\t");
+          String _name_7 = _spp.getName();
+          _builder.append(_name_7, "\t\t");
           _builder.append(";");
           _builder.newLineIfNotEmpty();
         }
@@ -327,8 +336,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.newLine();
       _builder.append("\t\t");
       EList<StandardOperation> _operations = ac.getOperations();
-      String _name_7 = ac.getName();
-      CharSequence _operationsDeclaration = this._procedureHelpers.operationsDeclaration(_operations, _name_7);
+      String _name_8 = ac.getName();
+      CharSequence _operationsDeclaration = this._procedureHelpers.operationsDeclaration(_operations, _name_8);
       _builder.append(_operationsDeclaration, "\t\t");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
@@ -339,8 +348,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append("//--------------------- construction");
       _builder.newLine();
       _builder.append("\t\t");
-      String _name_8 = ac.getName();
-      _builder.append(_name_8, "\t\t");
+      String _name_9 = ac.getName();
+      _builder.append(_name_9, "\t\t");
       _builder.append("(etRuntime::IRTObject* parent, const std::string& name);");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
@@ -414,8 +423,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
           _builder.newLineIfNotEmpty();
           {
             ComponentCommunicationType _commType = ac.getCommType();
-            boolean _equals = Objects.equal(_commType, ComponentCommunicationType.DATA_DRIVEN);
-            if (_equals) {
+            boolean _equals_1 = Objects.equal(_commType, ComponentCommunicationType.DATA_DRIVEN);
+            if (_equals_1) {
               _builder.append("\t\t");
               _builder.append("void receiveEvent(etRuntime::InterfaceItemBase* ifitem, int evt, void* generic_data);");
               _builder.newLine();
@@ -424,13 +433,13 @@ public class ActorClassGen extends GenericActorClassGenerator {
           {
             boolean _or = false;
             ComponentCommunicationType _commType_1 = ac.getCommType();
-            boolean _equals_1 = Objects.equal(_commType_1, ComponentCommunicationType.ASYNCHRONOUS);
-            if (_equals_1) {
+            boolean _equals_2 = Objects.equal(_commType_1, ComponentCommunicationType.ASYNCHRONOUS);
+            if (_equals_2) {
               _or = true;
             } else {
               ComponentCommunicationType _commType_2 = ac.getCommType();
-              boolean _equals_2 = Objects.equal(_commType_2, ComponentCommunicationType.DATA_DRIVEN);
-              _or = _equals_2;
+              boolean _equals_3 = Objects.equal(_commType_2, ComponentCommunicationType.DATA_DRIVEN);
+              _or = _equals_3;
             }
             if (_or) {
               _builder.append("\t\t");
@@ -464,8 +473,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.newLine();
       _builder.newLine();
       _builder.newLine();
-      String _name_9 = ac.getName();
-      CharSequence _generateIncludeGuardEnd = this._cppExtensions.generateIncludeGuardEnd(_name_9);
+      String _name_10 = ac.getName();
+      CharSequence _generateIncludeGuardEnd = this._cppExtensions.generateIncludeGuardEnd(_name_10);
       _builder.append(_generateIncludeGuardEnd, "");
       _builder.newLineIfNotEmpty();
       _xblockexpression = _builder;

@@ -2,3 +2,4 @@ WindowsMinGW
 LinuxPosix
 bin
 src-gen-info
+/Debug/

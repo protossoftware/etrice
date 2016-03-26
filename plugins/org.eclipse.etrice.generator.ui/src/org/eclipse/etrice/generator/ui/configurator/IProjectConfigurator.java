@@ -13,6 +13,7 @@
 package org.eclipse.etrice.generator.ui.configurator;
 
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.etrice.generator.ui.wizard.NewSetOfModelsWizard;
 
 /**
@@ -27,5 +28,5 @@ public interface IProjectConfigurator {
 	/**
 	 * @param project the project to be configured
 	 */
-	void configure(IProject project);
+	void configure(IProject project, IProgressMonitor progressMonitor);
 }

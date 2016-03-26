@@ -15,10 +15,17 @@ import org.eclipse.cdt.core.settings.model.ICLanguageSettingEntry;
 import org.eclipse.cdt.core.settings.model.ICProjectDescription;
 import org.eclipse.cdt.core.settings.model.ICSettingEntry;
 import org.eclipse.cdt.managedbuilder.core.IConfiguration;
+import org.eclipse.cdt.managedbuilder.core.IFolderInfo;
 import org.eclipse.cdt.managedbuilder.core.ManagedBuildManager;
+import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.etrice.generator.ui.configurator.IProjectConfigurator;
+import org.eclipse.etrice.generator.ui.preferences.PreferenceConstants;
+import org.eclipse.ui.preferences.ScopedPreferenceStore;
 
 /*
  * Docs:
@@ -26,7 +33,7 @@ import org.eclipse.etrice.generator.ui.configurator.IProjectConfigurator;
  * 
  * CDataUtil.addExcludePaths(entry, paths, removePrefix)
  */
-public class ProjectConfigurator implements IProjectConfigurator {
+public abstract class ProjectConfigurator implements IProjectConfigurator {
 
 	final static String MINGW_TOOLCHAIN = "MinGW GCC";
 	final static String POSIX_TOOLCHAIN = "Linux GCC";
@@ -34,32 +41,38 @@ public class ProjectConfigurator implements IProjectConfigurator {
 	public ProjectConfigurator() {
 	}
 
+	public abstract boolean isApplicable(IProject project);
+	public abstract String getCompilerId();
+	public abstract List<CIncludePathEntry> getIncludePaths();
+	public abstract Map<String, String> getProjectRefInfo(ICConfigurationDescription configDescription, String toolChain);
+	
 	@Override
-	public void configure(IProject project) {
+	public void configure(IProject project, IProgressMonitor progressMonitor) {
 		try {
-			if (!CoreModel.hasCNature(project))
+			if (!isApplicable(project))
 				return;
 			
-			configureIncludesAndLibraries(project);
+			configureIncludesAndLibraries(project, progressMonitor);
 		}
 		catch (CoreException e) {
 			e.printStackTrace();
 		}
 	}
-
-	public void configureIncludesAndLibraries(IProject project) throws CoreException {
+	
+	public void configureIncludesAndLibraries(IProject project, IProgressMonitor progressMonitor) throws CoreException {
 		
-		List<CIncludePathEntry> srcIncludes = new ArrayList<CIncludePathEntry>();
-		srcIncludes.add(new CIncludePathEntry("/${ProjName}/src-gen", ICSettingEntry.LOCAL));
-
-		List<CLibraryFileEntry> posixLibraries = new ArrayList<CLibraryFileEntry>();
-		posixLibraries.add(new CLibraryFileEntry("pthread", ICSettingEntry.LOCAL));
-		posixLibraries.add(new CLibraryFileEntry("rt", ICSettingEntry.LOCAL));
-		
-		List<CLibraryFileEntry> mingwLibraries = new ArrayList<CLibraryFileEntry>();
-		mingwLibraries.add(new CLibraryFileEntry("ws2_32", ICSettingEntry.LOCAL));
-
 		ICProjectDescription projectDescription = CoreModel.getDefault().getProjectDescription(project, true);
+		
+		ScopedPreferenceStore prefStore = new ScopedPreferenceStore(InstanceScope.INSTANCE, "org.eclipse.etrice.generator.ui");
+		String infoDir = prefStore.getString(PreferenceConstants.GEN_INFO_DIR);
+		IFolder srcGenInfoFolder = project.getFolder(infoDir);
+		
+		// it is not necessary to actually create this folder here
+//		srcGenInfoFolder.create(false, true, new SubProgressMonitor(progressMonitor, 1));
+		
+		IPath srcGenInfoPath = srcGenInfoFolder.getFullPath();
+		srcGenInfoPath = srcGenInfoPath.removeFirstSegments(1);
+		
 		// all build configurations e.g. Debug, Release
 		for (ICConfigurationDescription configDescription : projectDescription.getConfigurations()) {
 			if (configDescription.getId() == null)
@@ -71,6 +84,12 @@ public class ProjectConfigurator implements IProjectConfigurator {
 				toolChain = MINGW_TOOLCHAIN;
 			else if (POSIX_TOOLCHAIN.equals(buildConfig.getToolChain().getName()))
 				toolChain = POSIX_TOOLCHAIN;
+
+			IFolderInfo folderInfo = buildConfig.createFolderInfo(srcGenInfoPath);
+			if (folderInfo!=null) {
+				folderInfo.setExclude(true);
+			}
+			
 			// set project references
 			/*
 			 * HOWTO: Find out reference project configuration: Use GUI "Reference" tab
@@ -79,36 +98,29 @@ public class ProjectConfigurator implements IProjectConfigurator {
 			 * 
 			 * Add referenced projects in reverse library order
 			 */
-			if (toolChain == MINGW_TOOLCHAIN) {
-				Map<String, String> projectRefInfo = configDescription.getReferenceInfo();
-				projectRefInfo.put("org.eclipse.etrice.runtime.c", "cdt.managedbuild.config.gnu.mingw.lib.debug.1978608919");
-				projectRefInfo.put("org.eclipse.etrice.modellib.c", "cdt.managedbuild.config.gnu.mingw.lib.debug.847049798");
-				configDescription.setReferenceInfo(projectRefInfo);
-			}
-			else if (toolChain == POSIX_TOOLCHAIN) {
-				Map<String, String> projectRefInfo = configDescription.getReferenceInfo();
-				projectRefInfo.put("org.eclipse.etrice.runtime.c", "cdt.managedbuild.config.gnu.mingw.lib.debug.1978608919.294295052");
-				projectRefInfo.put("org.eclipse.etrice.modellib.c", "cdt.managedbuild.config.gnu.mingw.lib.debug.847049798.58778989");
-				configDescription.setReferenceInfo(projectRefInfo);
-			}
+			configDescription.setReferenceInfo(getProjectRefInfo(configDescription, toolChain));
 
 			// setting for compiler, linker, assembler (see id)
 			for (ICLanguageSetting setting : configDescription.getRootFolderDescription().getLanguageSettings()) {
-				if(setting.getId() == null)
+				if (setting.getId() == null)
 					continue;
 				
 				// set source includes
-				if (setting.getId().startsWith("cdt.managedbuild.tool.gnu.c.compiler"))
-					addSettings(setting, ICSettingEntry.INCLUDE_PATH, srcIncludes);
+				if (setting.getId().startsWith(getCompilerId())) {
+					addSettings(setting, ICSettingEntry.INCLUDE_PATH, getIncludePaths());
+				}
 
 				// set additional libraries (order!)
-				if (toolChain == POSIX_TOOLCHAIN) {
-					if (setting.getId().startsWith("cdt.managedbuild.tool.gnu.c.linker"))
-						addSettings(setting, ICSettingEntry.LIBRARY_FILE, posixLibraries);
-				}
-				if(toolChain == MINGW_TOOLCHAIN){
-					if (setting.getId().startsWith("cdt.managedbuild.tool.gnu.c.linker"))
-						addSettings(setting, ICSettingEntry.LIBRARY_FILE, mingwLibraries);
+				if (setting.getId().startsWith("cdt.managedbuild.tool.gnu.c.linker")) {
+					List<CLibraryFileEntry> libraries = new ArrayList<CLibraryFileEntry>();
+					if (toolChain == POSIX_TOOLCHAIN) {
+						libraries.add(new CLibraryFileEntry("pthread", ICSettingEntry.LOCAL));
+						libraries.add(new CLibraryFileEntry("rt", ICSettingEntry.LOCAL));
+					}
+					else if(toolChain == MINGW_TOOLCHAIN){
+						libraries.add(new CLibraryFileEntry("ws2_32", ICSettingEntry.LOCAL));
+					}
+					addSettings(setting, ICSettingEntry.LIBRARY_FILE, libraries);
 				}
 			}
 		}
