@@ -4,10 +4,10 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * CONTRIBUTORS:
  * 		Thomas Schuetz and Henrik Rentz-Reichert (initial contribution)
- * 
+ *
  *******************************************************************************/
 
 package org.eclipse.etrice.ui.structure.support;
@@ -69,9 +69,9 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 
 public class StructureClassSupport {
-	
+
 	public static final int MARGIN = 40;
-	
+
 	private static final int LINE_WIDTH = 4;
 	public static final int DEFAULT_SIZE_X = 800;
 	public static final int DEFAULT_SIZE_Y = 500;
@@ -79,13 +79,13 @@ public class StructureClassSupport {
 	private static final IColorConstant BACKGROUND = new ColorConstant(255, 255, 255);
 
 	private class FeatureProvider extends DefaultFeatureProvider {
-	
+
 		private class AddFeature extends AbstractAddFeature {
-	
+
 			public AddFeature(IFeatureProvider fp) {
 				super(fp);
 			}
-	
+
 			@Override
 			public boolean canAdd(IAddContext context) {
 				if (context.getNewObject() instanceof StructureClass) {
@@ -95,24 +95,24 @@ public class StructureClassSupport {
 				}
 				return false;
 			}
-	
+
 			@Override
 			public PictogramElement add(IAddContext context) {
 				StructureClass ac = (StructureClass) context.getNewObject();
 				Diagram diag = (Diagram) context.getTargetContainer();
-	
+
 				// CONTAINER SHAPE WITH RECTANGLE
 				IPeCreateService peCreateService = Graphiti.getPeCreateService();
 				ContainerShape containerShape =
 					peCreateService.createContainerShape(diag, true);
-				
+
 				Graphiti.getPeService().setPropertyValue(containerShape, Constants.TYPE_KEY, Constants.CLS_TYPE);
 
 				// check whether the context has a size (e.g. from a create feature)
 				// otherwise define a default size for the shape
 				int width = context.getWidth() <= 0 ? DEFAULT_SIZE_X : context.getWidth();
 				int height = context.getHeight() <= 0 ? DEFAULT_SIZE_Y : context.getHeight();
-	
+
 				{
 					IGaService gaService = Graphiti.getGaService();
 
@@ -120,10 +120,10 @@ public class StructureClassSupport {
 					// the width needed for the ports
 					Rectangle invisibleRectangle =
 						gaService.createInvisibleRectangle(containerShape);
-	
+
 					gaService.setLocationAndSize(invisibleRectangle,
 							context.getX(), context.getY(), width + 2*MARGIN, height + 2*MARGIN);
-	
+
 					// create and set visible rectangle inside invisible rectangle
 					// transparent first
 					Rectangle rect = gaService.createRectangle(invisibleRectangle);
@@ -138,65 +138,65 @@ public class StructureClassSupport {
 					rect.setFilled(false);
 					rect.setLineWidth(LINE_WIDTH);
 					gaService.setLocationAndSize(rect, MARGIN, MARGIN, width, height);
-	
+
 					// create link and wire it
 					link(containerShape, ac);
 					link(getDiagram(), ac);
 				}
-	
+
 				// call the layout feature
 				layoutPictogramElement(containerShape);
-	
+
 				return containerShape;
-	
+
 			}
-	
+
 		}
-	
+
 		private class LayoutFeature extends AbstractLayoutFeature {
-	
+
 			private static final int MIN_HEIGHT = 100;
 			private static final int MIN_WIDTH = 250;
-	
+
 			public LayoutFeature(IFeatureProvider fp) {
 				super(fp);
 			}
-	
+
 			@Override
 			public boolean canLayout(ILayoutContext context) {
 				// return true, if pictogram element is linked to an ActorClass
 				PictogramElement pe = context.getPictogramElement();
 				if (!(pe instanceof ContainerShape))
 					return false;
-	
+
 				EList<EObject> businessObjects = pe.getLink().getBusinessObjects();
 				return businessObjects.size() == 1
 						&& businessObjects.get(0) instanceof StructureClass;
 			}
-	
+
 			@Override
 			public boolean layout(ILayoutContext context) {
 				boolean anythingChanged = false;
 				ContainerShape containerShape = (ContainerShape) context
 						.getPictogramElement();
-	
+
 				GraphicsAlgorithm containerGa = containerShape.getGraphicsAlgorithm();
-	
+
 				// height
 				if (containerGa.getHeight() < MIN_HEIGHT) {
 					containerGa.setHeight(MIN_HEIGHT);
 					anythingChanged = true;
 				}
-	
+
 				// width
 				if (containerGa.getWidth() < MIN_WIDTH) {
 					containerGa.setWidth(MIN_WIDTH);
 					anythingChanged = true;
 				}
-	
+
 				int w = containerGa.getWidth();
 				int h = containerGa.getHeight();
-	
+
 				if (containerGa.getGraphicsAlgorithmChildren().size()==2) {
 					GraphicsAlgorithm ga = containerGa.getGraphicsAlgorithmChildren().get(0);
 					ga.setWidth(w-2*MARGIN);
@@ -206,12 +206,12 @@ public class StructureClassSupport {
 					ga.setHeight(h-2*MARGIN);
 					anythingChanged = true;
 				}
-	
+
 				return anythingChanged;
 			}
-	
+
 		}
-		
+
 		private class OpenBehaviorDiagram extends AbstractCustomFeature {
 
 			public OpenBehaviorDiagram(IFeatureProvider fp) {
@@ -222,7 +222,7 @@ public class StructureClassSupport {
 			public String getName() {
 				return "Open Class Behavior";
 			}
-			
+
 			@Override
 			public boolean canExecute(ICustomContext context) {
 				PictogramElement[] pes = context.getPictogramElements();
@@ -256,13 +256,13 @@ public class StructureClassSupport {
 					}
 				}
 			}
-			
+
 			@Override
 			public boolean hasDoneChanges() {
 				return false;
 			}
 		}
-		
+
 		private class ReconnectToModel extends AbstractCustomFeature {
 
 			public ReconnectToModel(IFeatureProvider fp) {
@@ -272,43 +272,43 @@ public class StructureClassSupport {
 			@Override
 			public void execute(ICustomContext context) {
 				DiagramEditorBase editor = (DiagramEditorBase) getDiagramBehavior().getDiagramContainer();
-				
-				Job job = new ChangeDiagramInputJob("blub", editor);
+
+				Job job = new ChangeDiagramInputJob("Change input for " + getDiagram().getName(), editor);
 				job.setUser(true);
 				job.schedule();
 			}
-			
+
 			@Override
 			public boolean canExecute(ICustomContext context) {
 				return true;
 			}
-			
+
 			@Override
 			public String getName() {
 				return "Reconnect Diagram to Model";
 			}
-			
-			
-			
+
+
+
 			@Override
 			public boolean hasDoneChanges() {
 				return false;
 			}
-			
+
 			@Override
 			public boolean isAvailable(IContext context) {
 				Object bo = fp.getBusinessObjectForPictogramElement(getDiagram());
-				
+
 				return bo instanceof EObject && ((EObject)bo).eIsProxy();
 			}
 		}
-		
+
 		private class ResizeFeature extends DefaultResizeShapeFeature{
 
 			public ResizeFeature(IFeatureProvider fp) {
 				super(fp);
 			}
-			
+
 			@Override
 			public boolean canResizeShape(IResizeShapeContext context) {
 				if (!super.canResizeShape(context))
@@ -323,7 +323,7 @@ public class StructureClassSupport {
 				for (Shape childShape : containerShape.getChildren()) {
 					if (isOnInterface(sc, getBusinessObjectForPictogramElement(childShape)))
 						continue;
-					
+
 					GraphicsAlgorithm ga = childShape.getGraphicsAlgorithm();
 					int x = ga.getX()+ga.getWidth()-ActorContainerRefSupport.MARGIN;
 					int y = ga.getY()+ga.getHeight()-ActorContainerRefSupport.MARGIN;
@@ -336,15 +336,15 @@ public class StructureClassSupport {
 					return false;
 				if (height>0 && height<ymax)
 					return false;
-				
+
 				return true;
 			}
-			
+
 			@Override
 			public void resizeShape(IResizeShapeContext context) {
 				ContainerShape containerShape = (ContainerShape) context.getShape();
 				StructureClass sc = (StructureClass) getBusinessObjectForPictogramElement(containerShape);
-				
+
 				if (containerShape.getGraphicsAlgorithm()!=null) {
 					GraphicsAlgorithm containerGa = containerShape.getGraphicsAlgorithm();
 					if (containerGa.getGraphicsAlgorithmChildren().size()==2) {
@@ -354,7 +354,7 @@ public class StructureClassSupport {
 						GraphicsAlgorithm ga = containerGa.getGraphicsAlgorithmChildren().get(0);
 						double sx = (context.getWidth()-2*MARGIN)/(double)ga.getWidth();
 						double sy = (context.getHeight()-2*MARGIN)/(double)ga.getHeight();
-						
+
 						for (Shape childShape : containerShape.getChildren()) {
 							if (isOnInterface(sc, getBusinessObjectForPictogramElement(childShape))) {
 								ga = childShape.getGraphicsAlgorithm();
@@ -372,7 +372,7 @@ public class StructureClassSupport {
 				if (childBo instanceof InterfaceItem) {
 					// in general InterfaceItem sit on the interface...
 					onInterface = true;
-					
+
 					// ...with the exception of internal end ports
 					if (childBo instanceof Port) {
 						if (sc instanceof ActorClass) {
@@ -384,58 +384,58 @@ public class StructureClassSupport {
 				return onInterface;
 			}
 		}
-		
+
 		private class DeleteFeature extends DeleteWithoutConfirmFeature {
 
 			public DeleteFeature(IFeatureProvider fp) {
 				super(fp);
 			}
-			
+
 			@Override
 			public boolean canDelete(IDeleteContext context) {
 				return false;
 			}
 		}
-		
+
 		private IFeatureProvider fp;
-	
+
 		public FeatureProvider(IDiagramTypeProvider dtp, IFeatureProvider fp) {
 			super(dtp);
 			this.fp = fp;
 		}
-		
+
 		@Override
 		public IAddFeature getAddFeature(IAddContext context) {
 			return new AddFeature(fp);
 		}
-		
+
 		@Override
 		public ILayoutFeature getLayoutFeature(ILayoutContext context) {
 			return new LayoutFeature(fp);
 		}
-		
+
 		@Override
 		public IUpdateFeature getUpdateFeature(IUpdateContext context) {
 			return new StructureClassUpdate(fp);
 		}
-		
+
 		@Override
 		public ICustomFeature[] getCustomFeatures(ICustomContext context) {
 			return new ICustomFeature[] {
 					new OpenBehaviorDiagram(fp), new ReconnectToModel(fp)};
 		}
-		
+
 		@Override
 		public IResizeShapeFeature getResizeShapeFeature(
 				IResizeShapeContext context) {
 			return new ResizeFeature(fp);
 		}
-		
+
 		@Override
 		public IRemoveFeature getRemoveFeature(IRemoveContext context) {
 			return new CantRemoveFeature(fp);
 		}
-		
+
 		@Override
 		public IDeleteFeature getDeleteFeature(IDeleteContext context) {
 			return new DeleteFeature(fp);
@@ -447,7 +447,7 @@ public class StructureClassSupport {
 		public BehaviorProvider(IDiagramTypeProvider dtp) {
 			super(dtp);
 		}
-		
+
 		@Override
 		public GraphicsAlgorithm[] getClickArea(PictogramElement pe) {
             GraphicsAlgorithm invisible = pe.getGraphicsAlgorithm();
@@ -455,7 +455,7 @@ public class StructureClassSupport {
                             invisible.getGraphicsAlgorithmChildren().get(0);
             return new GraphicsAlgorithm[] { rectangle };
 		}
-		
+
 		@Override
 		public GraphicsAlgorithm getSelectionBorder(PictogramElement pe) {
             GraphicsAlgorithm invisible = pe.getGraphicsAlgorithm();
@@ -464,12 +464,12 @@ public class StructureClassSupport {
                 invisible.getGraphicsAlgorithmChildren().get(1);
             return rectangle;
 		}
-		
+
 		@Override
 		public IContextButtonPadData getContextButtonPad(
 				IPictogramElementContext context) {
 			IContextButtonPadData data = super.getContextButtonPad(context);
-			
+
 			ICustomContext customContext = new CustomContext();
 			ICustomFeature reconnectToModel = afp.getCustomFeatures(customContext)[1];
 			if(reconnectToModel.isAvailable(customContext)){
@@ -477,23 +477,23 @@ public class StructureClassSupport {
 				entry.setIconId(IPlatformImageConstants.IMG_ECLIPSE_QUICKASSIST);
 				data.getDomainSpecificContextButtons().add(entry);
 			}
-			
+
 			return data;
 		}
 	}
 
 	private FeatureProvider afp;
 	private BehaviorProvider tbp;
-		
+
 	public StructureClassSupport(IDiagramTypeProvider dtp, IFeatureProvider fp) {
 		afp = new FeatureProvider(dtp, fp);
 		tbp = new BehaviorProvider(dtp);
 	}
-	
+
 	public IFeatureProvider getFeatureProvider() {
 		return afp;
 	}
-	
+
 	public IToolBehaviorProvider getToolBehaviorProvider() {
 		return tbp;
 	}
