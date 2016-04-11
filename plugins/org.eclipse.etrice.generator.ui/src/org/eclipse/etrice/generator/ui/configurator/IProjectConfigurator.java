@@ -13,6 +13,7 @@
 package org.eclipse.etrice.generator.ui.configurator;
 
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.etrice.generator.ui.wizard.NewSetOfModelsWizard;
 
@@ -27,6 +28,10 @@ public interface IProjectConfigurator {
 
 	/**
 	 * @param project the project to be configured
+	 * @param path the selected path inside the project (the model folder)
+	 * @param copyRuntime <code>true</code> if runtime should be copied into the project
+	 * @param platform the name of the chosen platform (others will be excluded from the build)
+	 * @param progressMonitor the progress monitor
 	 */
-	void configure(IProject project, IProgressMonitor progressMonitor);
+	void configure(IProject project, IPath path, boolean copyRuntime, String platform, IProgressMonitor progressMonitor);
 }

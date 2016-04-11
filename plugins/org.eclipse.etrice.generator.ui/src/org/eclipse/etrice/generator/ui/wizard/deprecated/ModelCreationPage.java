@@ -20,6 +20,7 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.etrice.generator.ui.wizard.internal.IProjectPathProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
@@ -35,7 +36,7 @@ import org.eclipse.ui.internal.ide.misc.ResourceAndContainerGroup;
  *
  */
 @SuppressWarnings("restriction")
-public class ModelCreationPage extends WizardPage implements Listener {
+public class ModelCreationPage extends WizardPage implements Listener, IProjectPathProvider {
 	private static final int SIZING_CONTAINER_GROUP_HEIGHT = 250;
 
 	protected RoomValidationHelper roomValidator;
@@ -124,34 +125,37 @@ public class ModelCreationPage extends WizardPage implements Listener {
 			valid = false;
 		}
 
-		String resourceName = resourceGroup.getResource();
-		IWorkspace workspace = ResourcesPlugin.getWorkspace();
-		IStatus result = workspace.validateName(resourceName, IResource.FILE);
-		if (!result.isOK()) {
-			setErrorMessage(result.getMessage());
-			return false;
+		if (valid) {
+			String resourceName = resourceGroup.getResource();
+			IWorkspace workspace = ResourcesPlugin.getWorkspace();
+			IStatus result = workspace.validateName(resourceName, IResource.FILE);
+			if (!result.isOK()) {
+				setErrorMessage(result.getMessage());
+				return false;
+			}
+			
+			IPath folder = resourceGroup.getContainerFullPath();
+			IPath file = folder.append(resourceName).addFileExtension("etmap");
+			if (workspace.getRoot().exists(file)) {
+				setErrorMessage("file '"+file+"' already exists in the workspace");
+				return false;
+			}
+			file = folder.append(resourceName).addFileExtension("etphys");
+			if (workspace.getRoot().exists(file)) {
+				setErrorMessage("file '"+file+"' already exists in the workspace");
+				return false;
+			}
+			file = folder.append(resourceName).addFileExtension("room");
+			if (workspace.getRoot().exists(file)) {
+				setErrorMessage("file '"+file+"' already exists in the workspace");
+				return false;
+			}
+			if(!roomValidator.isValidFQN(getBaseName())){
+				setErrorMessage("Invalid roomModel name ("+roomValidator.getMessage()+")");
+				return false;
+			}
 		}
 		
-		IPath folder = resourceGroup.getContainerFullPath();
-		IPath file = folder.append(resourceName).addFileExtension("etmap");
-		if (workspace.getRoot().exists(file)) {
-			setErrorMessage("file '"+file+"' already exists in the workspace");
-			return false;
-		}
-		file = folder.append(resourceName).addFileExtension("etphys");
-		if (workspace.getRoot().exists(file)) {
-			setErrorMessage("file '"+file+"' already exists in the workspace");
-			return false;
-		}
-		file = folder.append(resourceName).addFileExtension("room");
-		if (workspace.getRoot().exists(file)) {
-			setErrorMessage("file '"+file+"' already exists in the workspace");
-			return false;
-		}
-		if(!roomValidator.isValidFQN(getBaseName())){
-			setErrorMessage("Invalid roomModel name ("+roomValidator.getMessage()+")");
-			return false;
-		}
 		if (valid) {
 			setErrorMessage(null);
 			setMessage(null);
