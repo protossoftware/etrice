@@ -45,12 +45,17 @@ public abstract class ProjectConfigurator implements IProjectConfigurator {
 	public abstract String getCompilerId();
 	public abstract List<CIncludePathEntry> getIncludePaths();
 	public abstract Map<String, String> getProjectRefInfo(ICConfigurationDescription configDescription, String toolChain);
+	public abstract void copyRuntime(IProject project, IProgressMonitor progressMonitor, String platform);
 	
 	@Override
-	public void configure(IProject project, IProgressMonitor progressMonitor) {
+	public void configure(IProject project, IProgressMonitor progressMonitor, boolean copyRuntime, String platform) {
 		try {
 			if (!isApplicable(project))
 				return;
+			
+			if (copyRuntime) {
+				copyRuntime(project, progressMonitor, platform);
+			}
 			
 			configureIncludesAndLibraries(project, progressMonitor);
 		}

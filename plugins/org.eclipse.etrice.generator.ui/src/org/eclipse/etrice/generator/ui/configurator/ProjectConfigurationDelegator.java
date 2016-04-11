@@ -90,12 +90,12 @@ public class ProjectConfigurationDelegator implements IProjectConfigurator {
 	 * @see org.eclipse.etrice.generator.ui.configurator.IProjectConfigurator#configure(org.eclipse.core.resources.IProject)
 	 */
 	@Override
-	public void configure(IProject project, IProgressMonitor progressMonitor) {
+	public void configure(IProject project, IProgressMonitor progressMonitor, boolean copyRuntime, String platform) {
 		for (Entry<String, ArrayList<IProjectConfigurator>> entry : nature2configurators.entrySet()) {
 			try {
 				if (project.hasNature(entry.getKey())) {
 					for (IProjectConfigurator configurator : entry.getValue()) {
-						configurator.configure(project, progressMonitor);
+						configurator.configure(project, progressMonitor, copyRuntime, platform);
 					}
 				}
 			} catch (CoreException e) {

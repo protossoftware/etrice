@@ -27,6 +27,9 @@ public interface IProjectConfigurator {
 
 	/**
 	 * @param project the project to be configured
+	 * @param progressMonitor the progress monitor
+	 * @param copyRuntime <code>true</code> if runtime should be copied into the project
+	 * @param platform the name of the chosen platform (others will be excluded from the build)
 	 */
-	void configure(IProject project, IProgressMonitor progressMonitor);
+	void configure(IProject project, IProgressMonitor progressMonitor, boolean copyRuntime, String platform);
 }

@@ -28,4 +28,5 @@ Require-Bundle: org.eclipse.etrice.core.etmap;bundle-version="0.5.0",
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: org.eclipse.etrice.generator.ui.Activator
 Export-Package: org.eclipse.etrice.generator.ui.configurator,
- org.eclipse.etrice.generator.ui.preferences
+ org.eclipse.etrice.generator.ui.preferences,
+ org.eclipse.etrice.generator.ui.wizard

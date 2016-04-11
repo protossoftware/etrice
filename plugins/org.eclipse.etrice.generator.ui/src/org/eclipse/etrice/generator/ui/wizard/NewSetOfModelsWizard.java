@@ -24,6 +24,7 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.etrice.generator.ui.configurator.ProjectConfigurationDelegator;
 import org.eclipse.etrice.generator.ui.wizard.deprecated.ModelCreationPage;
+import org.eclipse.etrice.generator.ui.wizard.internal.COptionsPage;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.StructuredSelection;
@@ -51,7 +52,8 @@ public class NewSetOfModelsWizard extends Wizard implements INewWizard {
 
 	private IWorkbench workbench;
 	private IStructuredSelection selection;
-	private ModelCreationPage page;
+	private ModelCreationPage modelPage;
+	private COptionsPage optionsPage;
 	private URI modelURI = null;
 
 	/* (non-Javadoc)
@@ -71,9 +73,13 @@ public class NewSetOfModelsWizard extends Wizard implements INewWizard {
 	 */
 	@Override
 	public void addPages() {
-		page = new ModelCreationPage("Create new set of models", selection);
-		page.setTitle("Create a new set of eTrice models");
-		addPage(page);
+		modelPage = new ModelCreationPage("Create new set of models", selection);
+		modelPage.setTitle("Create a new set of eTrice models");
+		addPage(modelPage);
+		
+		optionsPage = new COptionsPage("Options", modelPage);
+		optionsPage.setTitle("Options");
+		addPage(optionsPage);
 	}
 	
 	/* (non-Javadoc)
@@ -86,28 +92,32 @@ public class NewSetOfModelsWizard extends Wizard implements INewWizard {
 			@Override
 			protected void execute(IProgressMonitor progressMonitor) {
 				try {
-					String baseName = page.getBaseName();
-					IPath file = page.getPath().append(baseName).addFileExtension("room");
+					String baseName = modelPage.getBaseName();
+					IPath file = modelPage.getPath().append(baseName).addFileExtension("room");
 					modelURI = URI.createPlatformResourceURI(file.toString(), true);
 					ProjectCreator.createModel(modelURI, baseName);
 
-					file = page.getPath().append(baseName).addFileExtension("etphys");
+					file = modelPage.getPath().append(baseName).addFileExtension("etphys");
 					URI physModelURI = URI.createPlatformResourceURI(file.toString(), true);
 					ProjectCreator.createPhysicalModel(physModelURI, baseName);
 
-					file = page.getPath().append(baseName).addFileExtension("etmap");
+					file = modelPage.getPath().append(baseName).addFileExtension("etmap");
 					URI mapModelURI = URI.createPlatformResourceURI(file.toString(), true);
 					ProjectCreator.createMappingModel(mapModelURI, baseName);
 					
 					IWorkspace workspace = ResourcesPlugin.getWorkspace();
-					IProject project = (page.getPath().segmentCount()==1)?
-							workspace.getRoot().getProject(page.getPath().lastSegment())
-							: workspace.getRoot().getFolder(page.getPath()).getProject();
+					IProject project = (modelPage.getPath().segmentCount()==1)?
+							workspace.getRoot().getProject(modelPage.getPath().lastSegment())
+							: workspace.getRoot().getFolder(modelPage.getPath()).getProject();
 					
-					ProjectCreator.createRunAndLaunchConfigurations(baseName, project, page.getPath().toString(), additionalLaunchConfigLines);
+					ProjectCreator.createRunAndLaunchConfigurations(baseName, project, modelPage.getPath().toString(), additionalLaunchConfigLines);
 					ProjectCreator.addXtextNature(project, progressMonitor);
 					
-					ProjectConfigurationDelegator.getInstance().configure(project, progressMonitor);
+					ProjectConfigurationDelegator.getInstance().configure(
+							project,
+							progressMonitor,
+							optionsPage.getCopyRuntime(),
+							optionsPage.getPlatform());
 					
 				} catch (Exception e) {
 					Logger.getLogger(getClass()).error(e.getMessage(), e);

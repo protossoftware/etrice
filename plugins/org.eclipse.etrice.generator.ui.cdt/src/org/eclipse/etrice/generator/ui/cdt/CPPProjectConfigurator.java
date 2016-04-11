@@ -21,6 +21,7 @@ import org.eclipse.cdt.core.settings.model.CIncludePathEntry;
 import org.eclipse.cdt.core.settings.model.ICConfigurationDescription;
 import org.eclipse.cdt.core.settings.model.ICSettingEntry;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.runtime.IProgressMonitor;
 
 /**
  * @author Henrik Rentz-Reichert
@@ -72,6 +73,16 @@ public class CPPProjectConfigurator extends ProjectConfigurator {
 			projectRefInfo.put("org.eclipse.etrice.runtime.cpp", "cdt.managedbuild.config.gnu.mingw.lib.debug.878140176.190433079");
 		}
 		return projectRefInfo;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.eclipse.etrice.generator.ui.cdt.ProjectConfigurator#copyRuntime(org.eclipse.core.resources.IProject, org.eclipse.core.runtime.IProgressMonitor, java.lang.String)
+	 */
+	@Override
+	public void copyRuntime(IProject project, IProgressMonitor progressMonitor,
+			String platform) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
