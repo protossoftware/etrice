@@ -37,29 +37,62 @@ public abstract class ProjectConfigurator implements IProjectConfigurator {
 
 	final static String MINGW_TOOLCHAIN = "MinGW GCC";
 	final static String POSIX_TOOLCHAIN = "Linux GCC";
+	private boolean copyRuntime;
+	private String platform;
+	private IPath path;
 
 	public ProjectConfigurator() {
 	}
 
-	public abstract boolean isApplicable(IProject project);
-	public abstract String getCompilerId();
-	public abstract List<CIncludePathEntry> getIncludePaths();
-	public abstract Map<String, String> getProjectRefInfo(ICConfigurationDescription configDescription, String toolChain);
+	protected abstract boolean isApplicable(IProject project);
+	protected abstract boolean isIncludePathId(String id);
+	protected abstract List<CIncludePathEntry> getIncludePaths();
+	protected abstract Map<String, String> getProjectRefInfo(ICConfigurationDescription configDescription, String toolChain);
+	protected abstract void copyRuntime(IProject project, IProgressMonitor progressMonitor, String platform);
+	protected abstract void customizeBuildConfig(IProject project, IConfiguration buildConfig);
 	
 	@Override
-	public void configure(IProject project, IProgressMonitor progressMonitor) {
+	public void configure(IProject project, IPath path, boolean copyRuntime, String platform, IProgressMonitor progressMonitor) {
+		this.copyRuntime = copyRuntime;
+		this.platform = platform;
+		this.path = path;
+		
 		try {
-			if (!isApplicable(project))
-				return;
-			
-			configureIncludesAndLibraries(project, progressMonitor);
+			if (isApplicable(project)) {
+				if (copyRuntime) {
+					copyRuntime(project, progressMonitor, platform);
+				}
+				
+				configureIncludesAndLibraries(project, progressMonitor);
+			}
 		}
 		catch (CoreException e) {
 			e.printStackTrace();
 		}
 	}
 	
-	public void configureIncludesAndLibraries(IProject project, IProgressMonitor progressMonitor) throws CoreException {
+	/**
+	 * @return the path
+	 */
+	protected IPath getPath() {
+		return path;
+	}
+
+	/**
+	 * @return the platform
+	 */
+	protected String getPlatform() {
+		return platform;
+	}
+
+	/**
+	 * @return the copyRuntime
+	 */
+	protected boolean isCopyRuntime() {
+		return copyRuntime;
+	}
+
+	protected void configureIncludesAndLibraries(IProject project, IProgressMonitor progressMonitor) throws CoreException {
 		
 		ICProjectDescription projectDescription = CoreModel.getDefault().getProjectDescription(project, true);
 		
@@ -77,7 +110,7 @@ public abstract class ProjectConfigurator implements IProjectConfigurator {
 		for (ICConfigurationDescription configDescription : projectDescription.getConfigurations()) {
 			if (configDescription.getId() == null)
 				continue;
-
+			
 			IConfiguration buildConfig = ManagedBuildManager.getConfigurationForDescription(configDescription);
 			String toolChain = "";
 			if (MINGW_TOOLCHAIN.equals(buildConfig.getToolChain().getName()))
@@ -89,6 +122,8 @@ public abstract class ProjectConfigurator implements IProjectConfigurator {
 			if (folderInfo!=null) {
 				folderInfo.setExclude(true);
 			}
+
+			customizeBuildConfig(project, buildConfig);
 			
 			// set project references
 			/*
@@ -106,7 +141,7 @@ public abstract class ProjectConfigurator implements IProjectConfigurator {
 					continue;
 				
 				// set source includes
-				if (setting.getId().startsWith(getCompilerId())) {
+				if (isIncludePathId(setting.getId())) {
 					addSettings(setting, ICSettingEntry.INCLUDE_PATH, getIncludePaths());
 				}
 
@@ -128,93 +163,6 @@ public abstract class ProjectConfigurator implements IProjectConfigurator {
 		CoreModel.getDefault().setProjectDescription(project, projectDescription);
 	}
 
-	// public static void addIncludePathsAndLibraries(IProject project)
-	// throws CoreException {
-	// if (!project.hasNature("org.eclipse.cdt.core.cnature"))
-	// return;
-	//
-	// IWorkspace workspace = ResourcesPlugin.getWorkspace();
-	// IProject runtime = workspace.getRoot().getProject(
-	// "org.eclipse.etrice.runtime.c");
-	// IFolder common = runtime.getFolder("src/common");
-	// IFolder config = runtime.getFolder("src/config");
-	// IFolder posix = runtime.getFolder("src/platforms/MT_POSIX_GENERIC_GCC");
-	// IFolder mingw = runtime.getFolder("src/platforms/MT_WIN_MinGW");
-	// IFolder src_gen = project.getFolder("src-gen");
-	// IFolder mingw_debug = project.getFolder("MinGWDebug");
-	// IFolder mingw_release = project.getFolder("MinGWRelease");
-	// IFolder posix_debug = project.getFolder("PosixDebug");
-	// IFolder posix_release = project.getFolder("PosixRelease");
-	//
-	// ICProjectDescription projectDescription = CoreModel.getDefault()
-	// .getProjectDescription(project, true);
-	// ICConfigurationDescription configDecriptions[] = projectDescription
-	// .getConfigurations();
-	//
-	// for (ICConfigurationDescription configDescription : configDecriptions) {
-	// ICFolderDescription projectRoot = configDescription
-	// .getRootFolderDescription();
-	// ICLanguageSetting[] settings = projectRoot.getLanguageSettings();
-	// for (ICLanguageSetting setting : settings) {
-	// if (!"org.eclipse.cdt.core.gcc".equals(setting.getLanguageId())) {
-	// continue;
-	// }
-	//
-	// ICTargetPlatformSetting tgt = configDescription
-	// .getTargetPlatformSetting();
-	// String id = tgt.getId();
-	//
-	// ArrayList<ICLanguageSettingEntry> includes = new
-	// ArrayList<ICLanguageSettingEntry>();
-	// includes.add(new CIncludePathEntry(src_gen,
-	// ICSettingEntry.LOCAL));
-	// includes.add(new CIncludePathEntry(common, ICSettingEntry.LOCAL));
-	// includes.add(new CIncludePathEntry(config, ICSettingEntry.LOCAL));
-	// if (id.startsWith("cdt.managedbuild.target.gnu.platform.mingw.exe")) {
-	// includes.add(new CIncludePathEntry(mingw,
-	// ICSettingEntry.LOCAL));
-	// } else if (id
-	// .startsWith("cdt.managedbuild.target.gnu.platform.posix.exe")) {
-	// includes.add(new CIncludePathEntry(posix,
-	// ICSettingEntry.LOCAL));
-	// }
-	// addSettings(setting, ICSettingEntry.INCLUDE_PATH, includes);
-	//
-	// List<? extends ICLanguageSettingEntry> libPaths = null;
-	// if
-	// (id.startsWith("cdt.managedbuild.target.gnu.platform.mingw.exe.debug")) {
-	// libPaths = Collections.singletonList(new CLibraryPathEntry(
-	// mingw_debug, ICSettingEntry.LOCAL));
-	// } else if (id
-	// .startsWith("cdt.managedbuild.target.gnu.platform.mingw.exe.release")) {
-	// libPaths = Collections.singletonList(new CLibraryPathEntry(
-	// mingw_release, ICSettingEntry.LOCAL));
-	// } else if (id
-	// .startsWith("cdt.managedbuild.target.gnu.platform.posix.exe.debug")) {
-	// libPaths = Collections.singletonList(new CLibraryPathEntry(
-	// posix_debug, ICSettingEntry.LOCAL));
-	// } else if (id
-	// .startsWith("cdt.managedbuild.target.gnu.platform.posix.exe.release")) {
-	// libPaths = Collections.singletonList(new CLibraryPathEntry(
-	// posix_release, ICSettingEntry.LOCAL));
-	// }
-	// if (libPaths != null)
-	// addSettings(setting, ICSettingEntry.LIBRARY_PATH, libPaths);
-	//
-	// List<? extends ICLanguageSettingEntry> libs = Collections
-	// .singletonList(new CLibraryFileEntry(
-	// "org.eclipse.etrice.runtime.c", 0));
-	// addSettings(setting, ICSettingEntry.LIBRARY_FILE, libs);
-	// }
-	// }
-	// try {
-	// CoreModel.getDefault().setProjectDescription(project,
-	// projectDescription);
-	// } catch (CoreException e) {
-	// e.printStackTrace();
-	// }
-	// }
-	
 	/**
 	 *  Appends entries at the end, preserves order, prevents new duplicates.
 	 */
