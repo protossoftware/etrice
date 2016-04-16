@@ -19,6 +19,7 @@ import java.util.Map.Entry;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.etrice.generator.ui.wizard.NewSetOfModelsWizard;
@@ -90,12 +91,12 @@ public class ProjectConfigurationDelegator implements IProjectConfigurator {
 	 * @see org.eclipse.etrice.generator.ui.configurator.IProjectConfigurator#configure(org.eclipse.core.resources.IProject)
 	 */
 	@Override
-	public void configure(IProject project, IProgressMonitor progressMonitor, boolean copyRuntime, String platform) {
+	public void configure(IProject project, IPath path, boolean copyRuntime, String platform, IProgressMonitor progressMonitor) {
 		for (Entry<String, ArrayList<IProjectConfigurator>> entry : nature2configurators.entrySet()) {
 			try {
 				if (project.hasNature(entry.getKey())) {
 					for (IProjectConfigurator configurator : entry.getValue()) {
-						configurator.configure(project, progressMonitor, copyRuntime, platform);
+						configurator.configure(project, path, copyRuntime, platform, progressMonitor);
 					}
 				}
 			} catch (CoreException e) {

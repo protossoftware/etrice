@@ -64,7 +64,7 @@ public class COptionsPage extends WizardPage {
 		buttonComposite.setLayout(new GridLayout(2, false));
 		
 		copyRuntimeButton = new Button(buttonComposite, SWT.CHECK);
-		copyRuntimeButton.setText("Copy C-Runtime into project");
+		copyRuntimeButton.setText("&Copy C-Runtime into project");
 		copyRuntimeButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -130,7 +130,7 @@ public class COptionsPage extends WizardPage {
 	private List<String> getPlatformNames() {
 		List<String> result = new ArrayList<String>();
 
-		ZipFile zipFile = WizardHelpers.getRuntimeZip();
+		ZipFile zipFile = WizardHelpers.getCRuntimeZip();
 		if (zipFile != null) {
 			ZipFileStructureProvider structureProvider = new ZipFileStructureProvider(zipFile);
 			List<?> children = structureProvider.getChildren(structureProvider.getRoot());

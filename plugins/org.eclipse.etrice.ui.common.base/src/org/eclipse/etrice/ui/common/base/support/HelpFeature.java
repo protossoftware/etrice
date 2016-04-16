@@ -4,14 +4,17 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * CONTRIBUTORS:
  * 		Juergen Haug (initial contribution)
- * 
+ *
  *******************************************************************************/
 
 package org.eclipse.etrice.ui.common.base.support;
 
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.doc.ContextHelpProvider;
 import org.eclipse.etrice.ui.common.base.BaseImageProvider;
@@ -19,6 +22,7 @@ import org.eclipse.graphiti.features.IFeatureProvider;
 import org.eclipse.graphiti.features.context.ICustomContext;
 import org.eclipse.graphiti.features.custom.AbstractCustomFeature;
 import org.eclipse.graphiti.mm.pictograms.PictogramElement;
+import org.eclipse.ui.progress.UIJob;
 
 public class HelpFeature extends AbstractCustomFeature {
 
@@ -59,8 +63,17 @@ public class HelpFeature extends AbstractCustomFeature {
 	}
 
 	@Override
-	public void execute(ICustomContext context) {
-		ContextHelpProvider.showHelp(getBoClassName(((ICustomContext) context).getPictogramElements()[0]));
+	public void execute(final ICustomContext context) {
+		UIJob job = new UIJob("Show Context Help"){
+
+			@Override
+			public IStatus runInUIThread(IProgressMonitor monitor) {
+				ContextHelpProvider.showHelp(getBoClassName(((ICustomContext) context).getPictogramElements()[0]));
+				return Status.OK_STATUS;
+			}
+
+		};
+		job.schedule();
 	}
 
 	@Override

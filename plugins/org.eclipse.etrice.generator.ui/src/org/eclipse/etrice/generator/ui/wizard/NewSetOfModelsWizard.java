@@ -115,9 +115,10 @@ public class NewSetOfModelsWizard extends Wizard implements INewWizard {
 					
 					ProjectConfigurationDelegator.getInstance().configure(
 							project,
-							progressMonitor,
+							modelPage.getPath(),
 							optionsPage.getCopyRuntime(),
-							optionsPage.getPlatform());
+							optionsPage.getPlatform(),
+							progressMonitor);
 					
 				} catch (Exception e) {
 					Logger.getLogger(getClass()).error(e.getMessage(), e);

@@ -27,7 +27,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
  * @author Henrik Rentz-Reichert
  *
  */
-public class CPPProjectConfigurator extends ProjectConfigurator {
+public class CPPProjectConfigurator extends CProjectConfigurator {
 
 	/* (non-Javadoc)
 	 * @see org.eclipse.etrice.generator.ui.cdt.ProjectConfigurator#isApplicable(org.eclipse.core.resources.IProject)
@@ -41,9 +41,9 @@ public class CPPProjectConfigurator extends ProjectConfigurator {
 	 * @see org.eclipse.etrice.generator.ui.cdt.ProjectConfigurator#getCompilerId()
 	 */
 	@Override
-	public String getCompilerId() {
+	public boolean isIncludePathId(String id) {
 		// NOTE: for some reason the "${workspace_loc:/${ProjName}/src-gen}" include path has to be added for the C compiler!
-		return "cdt.managedbuild.tool.gnu.c.compiler";
+		return super.isIncludePathId(id);
 	}
 
 	/* (non-Javadoc)

@@ -30,7 +30,15 @@ import org.eclipse.emf.common.util.URI;
  */
 public class WizardHelpers {
 
-	public static ZipFile getRuntimeZip() {
+	public static ZipFile getCRuntimeZip() {
+		return getExampleZip("org.eclipse.etrice.runtime.c");
+	}
+	
+	public static ZipFile getCModellibZip() {
+		return getExampleZip("org.eclipse.etrice.modellib.c");
+	}
+	
+	private static ZipFile getExampleZip(String name) {
 		ZipFile zipFile = null;
 
 		IExtensionPoint extensionPoint = Platform.getExtensionRegistry()
@@ -46,7 +54,7 @@ public class WizardHelpers {
 				String projectName = projectDescriptorElement
 						.getAttribute("name");
 				if (projectName != null
-						&& projectName.equals("org.eclipse.etrice.runtime.c")) {
+						&& projectName.equals(name)) {
 					String contentURI = projectDescriptorElement
 							.getAttribute("contentURI");
 					if (contentURI != null) {
