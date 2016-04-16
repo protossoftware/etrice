@@ -72,6 +72,10 @@ public class CProjectConfigurator extends ProjectConfigurator {
 			return true;
 		if (id.startsWith("cdt.managedbuild.tool.gnu.c.compiler.input"))
 			return true;
+		if (id.startsWith("com.ifx.xmc4000.compiler.option.include.paths"))
+			return true;
+		if (id.startsWith("com.ifx.xmc4000.cppcompiler.option.include.paths"))
+			return true;
 		
 		return false;
 	}
