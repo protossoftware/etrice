@@ -22,6 +22,7 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.etrice.generator.ui.configurator.IProjectConfigurator;
 import org.eclipse.etrice.generator.ui.preferences.PreferenceConstants;
@@ -34,6 +35,19 @@ import org.eclipse.ui.preferences.ScopedPreferenceStore;
  * CDataUtil.addExcludePaths(entry, paths, removePrefix)
  */
 public abstract class ProjectConfigurator implements IProjectConfigurator {
+	
+	private static boolean traceIncludeIds = false;
+
+	static {
+		
+		if (Activator.getDefault() != null && Activator.getDefault().isDebugging()) {
+			String value = Platform
+					.getDebugOption("org.eclipse.etrice.generator.ui.cdt/trace/includeIDs");
+			if (value != null && value.equalsIgnoreCase(Boolean.toString(true))) {
+				traceIncludeIds  = true;
+			}
+		}
+	}
 
 	final static String MINGW_TOOLCHAIN = "MinGW GCC";
 	final static String POSIX_TOOLCHAIN = "Linux GCC";
@@ -93,6 +107,9 @@ public abstract class ProjectConfigurator implements IProjectConfigurator {
 	}
 
 	protected void configureIncludesAndLibraries(IProject project, IProgressMonitor progressMonitor) throws CoreException {
+		if (traceIncludeIds) {
+			System.out.println("org.eclipse.etrice.generator.ui.cdt.ProjectConfigurator.configureIncludesAndLibraries(IProject, IProgressMonitor)");
+		}
 		
 		ICProjectDescription projectDescription = CoreModel.getDefault().getProjectDescription(project, true);
 		
@@ -113,9 +130,10 @@ public abstract class ProjectConfigurator implements IProjectConfigurator {
 			
 			IConfiguration buildConfig = ManagedBuildManager.getConfigurationForDescription(configDescription);
 			String toolChain = "";
-			if (MINGW_TOOLCHAIN.equals(buildConfig.getToolChain().getName()))
+			String toolChainName = buildConfig.getToolChain().getName();
+			if (MINGW_TOOLCHAIN.equals(toolChainName))
 				toolChain = MINGW_TOOLCHAIN;
-			else if (POSIX_TOOLCHAIN.equals(buildConfig.getToolChain().getName()))
+			else if (POSIX_TOOLCHAIN.equals(toolChainName))
 				toolChain = POSIX_TOOLCHAIN;
 
 			IFolderInfo folderInfo = buildConfig.createFolderInfo(srcGenInfoPath);
@@ -139,6 +157,10 @@ public abstract class ProjectConfigurator implements IProjectConfigurator {
 			for (ICLanguageSetting setting : configDescription.getRootFolderDescription().getLanguageSettings()) {
 				if (setting.getId() == null)
 					continue;
+				
+				if (traceIncludeIds) {
+					System.out.println("  config '"+buildConfig.getName()+"', toolchain '"+toolChainName+"', settingID '"+setting.getId()+"'");
+				}
 				
 				// set source includes
 				if (isIncludePathId(setting.getId())) {

@@ -1,0 +1,2 @@
+org.eclipse.etrice.generator.ui.cdt/debug=true
+org.eclipse.etrice.generator.ui.cdt/trace/includeIDs=true
