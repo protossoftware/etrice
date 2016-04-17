@@ -76,7 +76,9 @@ public class CProjectConfigurator extends ProjectConfigurator {
 			return true;
 		if (id.startsWith("com.ifx.xmc4000.cppcompiler.option.include.paths"))
 			return true;
-		if (id.startsWith("org.eclipse.cdt.cross.arm.gnu.sourcery.windows.c.compiler.base.inputs"))
+		if (id.startsWith("org.eclipse.cdt.cross.arm.gnu.sourcery.windows.c.compiler.base.input"))
+			return true;
+		if (id.startsWith("org.eclipse.cdt.cross.arm.gnu.sourcery.linux.c.compiler.base.input"))
 			return true;
 		
 		return false;
