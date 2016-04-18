@@ -364,8 +364,8 @@ public class ProjectCreator {
 	}
 
 	public static void createLaunchGeneratorConfig(URI uri,
-			String targetLanguage, String modelPath, String baseName, String[] addLines) {
-		writeFile(uri, ProjectFileFragments.getGeneratorLaunchConfig(targetLanguage, modelPath, baseName, addLines));
+			String targetLanguage, String modelPath, String baseName, String mainMethodName, String[] addLines) {
+		writeFile(uri, ProjectFileFragments.getGeneratorLaunchConfig(targetLanguage, modelPath, baseName, mainMethodName, addLines));
 	}
 
 	public static void createLaunchJavaApplicationConfig(URI uri,
@@ -378,14 +378,14 @@ public class ProjectCreator {
 	}
 
 	public static void createRunAndLaunchConfigurations(String baseName,
-			IProject project, String mdlPath,
+			IProject project, String mdlPath, String mainMethodName,
 			String[] additionalLaunchConfigLines) throws CoreException {
 
 		if (project.hasNature(JavaCore.NATURE_ID)) {
 			ProjectCreator.createLaunchGeneratorConfig(
 					URI.createPlatformResourceURI("/" + project.getName()
 							+ "/gen_" + baseName + ".launch", true), "java",
-					mdlPath, baseName, additionalLaunchConfigLines);
+					mdlPath, baseName, mainMethodName, additionalLaunchConfigLines);
 			ProjectCreator.createLaunchJavaApplicationConfig(
 					URI.createPlatformResourceURI("/" + project.getName()
 							+ "/run_" + baseName + ".launch", true),
@@ -395,7 +395,7 @@ public class ProjectCreator {
 			ProjectCreator.createLaunchGeneratorConfig(
 					URI.createPlatformResourceURI("/" + project.getName()
 							+ "/gen_" + baseName + ".launch", true), "c",
-					mdlPath, baseName, additionalLaunchConfigLines);
+					mdlPath, baseName, mainMethodName, additionalLaunchConfigLines);
 			ProjectCreator.createLaunchCApplicationConfig(
 					URI.createPlatformResourceURI("/" + project.getName()
 							+ "/run_" + baseName + ".launch", true),

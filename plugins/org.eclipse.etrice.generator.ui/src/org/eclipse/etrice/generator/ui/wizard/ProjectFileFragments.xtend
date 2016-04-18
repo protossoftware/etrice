@@ -85,7 +85,7 @@ class ProjectFileFragments {
 		'''
 	}
 	
-	def static String getGeneratorLaunchConfig(String targetLanguage, String modelPath, String baseName, String[] addLines) {
+	def static String getGeneratorLaunchConfig(String targetLanguage, String modelPath, String baseName, String mainMethodName, String[] addLines) {
 		val prefStore = new ScopedPreferenceStore(InstanceScope.INSTANCE, "org.eclipse.etrice.generator.ui");
 		val useTranslation = prefStore.getBoolean(PreferenceConstants::GEN_USE_TRANSLATION)
 		'''
@@ -94,6 +94,7 @@ class ProjectFileFragments {
 			<booleanAttribute key="MSC" value="true"/>
 			<booleanAttribute key="DataLogging" value="true"/>
 			<booleanAttribute key="UseTranslation" value="«useTranslation»"/>
+			<stringAttribute key="MainMethodName" value="«mainMethodName»"/>
 			<listAttribute key="ModelFiles">
 			<listEntry value="${workspace_loc:«modelPath»/«baseName».etmap}"/>
 			</listAttribute>

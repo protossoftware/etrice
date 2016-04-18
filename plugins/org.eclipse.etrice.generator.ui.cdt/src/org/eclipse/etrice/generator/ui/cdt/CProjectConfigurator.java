@@ -51,7 +51,8 @@ import org.eclipse.ui.wizards.datatransfer.ZipFileStructureProvider;
  */
 public class CProjectConfigurator extends ProjectConfigurator {
 
-	private static final String C_RUNTIME_FOLDER_NAME = "c-runtime";
+	private static final String C_MODELLIB_NAME = "etrice-c-modellib";
+	private static final String C_RUNTIME_FOLDER_NAME = "etrice-c-runtime";
 
 	/* (non-Javadoc)
 	 * @see org.eclipse.etrice.generator.ui.cdt.ProjectConfigurator#isApplicable(org.eclipse.core.resources.IProject)
@@ -238,7 +239,7 @@ public class CProjectConfigurator extends ProjectConfigurator {
 					}
 			        IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
 			        final IContainer modelFolder = root.getFolder(modelFolderPath.append("model"));
-			        final IPath newPath = modelFolder.getFullPath().removeLastSegments(1).append("c-modellib");
+			        final IPath newPath = modelFolder.getFullPath().removeLastSegments(1).append(C_MODELLIB_NAME);
 			        
 			        ISchedulingRule rule = ResourcesPlugin.getWorkspace().getRuleFactory().createRule(modelFolder);
 			        WorkspaceModifyOperation operation = new WorkspaceModifyOperation(rule) {

@@ -23,6 +23,7 @@ import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.etrice.generator.base.AbstractGenerator;
 import org.eclipse.etrice.generator.ui.wizard.WizardHelpers;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
@@ -34,6 +35,7 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.wizards.datatransfer.ZipFileStructureProvider;
 
 /**
@@ -45,6 +47,7 @@ public class COptionsPage extends WizardPage {
 	private IProjectPathProvider projectPathProvider;
 	private Button copyRuntimeButton = null;
 	private Combo platformCombo = null;
+	private Text mainMethodName = null;
 
 	public COptionsPage(String title, IProjectPathProvider projectPathProvider) {
 		super(title);
@@ -83,6 +86,14 @@ public class COptionsPage extends WizardPage {
 		gd.widthHint = 200;
 		platformCombo.setLayoutData(gd);
 		platformCombo.setVisibleItemCount(10);
+		
+		l = new Label(buttonComposite, SWT.NONE);
+		l.setText("Main method name:");
+		l.setLayoutData(new GridData(SWT.NONE));
+		
+		mainMethodName = new Text(buttonComposite, SWT.SINGLE | SWT.BORDER);
+		mainMethodName.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		mainMethodName.setText(AbstractGenerator.DEFAULT_MAIN_NAME);
 		
 		setErrorMessage(null);
 		setMessage(null);
@@ -192,5 +203,13 @@ public class COptionsPage extends WizardPage {
 		}
 		
 		return "";
+	}
+	
+	public String getMainMethodName() {
+		if (mainMethodName!=null && !mainMethodName.isDisposed()) {
+			return mainMethodName.getText();
+		}
+		
+		return AbstractGenerator.DEFAULT_MAIN_NAME;
 	}
 }

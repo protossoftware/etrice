@@ -29,6 +29,7 @@ import org.eclipse.emf.common.ui.dialogs.DiagnosticDialog;
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.BasicMonitor;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.etrice.generator.base.AbstractGenerator;
 import org.eclipse.etrice.generator.ui.Activator;
 import org.eclipse.jdt.core.IAccessRule;
 import org.eclipse.jdt.core.IClasspathAttribute;
@@ -163,7 +164,7 @@ public class EmptyProjectWizard extends Wizard implements INewWizard {
 					ProjectCreator.createBuildProperties(projectURI.appendSegment("build.properties"), modelName);
 
 					ProjectCreator.createLaunchGeneratorConfig(projectURI.appendSegment("generate_Template.launch"),
-							"java", "/" + projectName + "/model", "Mapping", additionalLaunchConfigLines);
+							"java", "/" + projectName + "/model", "Mapping", AbstractGenerator.DEFAULT_MAIN_NAME, additionalLaunchConfigLines);
 
 					ProjectCreator.createLaunchJavaApplicationConfig(projectURI.appendSegment("run_Template.launch"),
 							projectName, MODEL_NAME, "Node_node_subSystemRefRunner");

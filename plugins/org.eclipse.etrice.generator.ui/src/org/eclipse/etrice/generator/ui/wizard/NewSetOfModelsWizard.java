@@ -110,7 +110,7 @@ public class NewSetOfModelsWizard extends Wizard implements INewWizard {
 							workspace.getRoot().getProject(modelPage.getPath().lastSegment())
 							: workspace.getRoot().getFolder(modelPage.getPath()).getProject();
 					
-					ProjectCreator.createRunAndLaunchConfigurations(baseName, project, modelPage.getPath().toString(), additionalLaunchConfigLines);
+					ProjectCreator.createRunAndLaunchConfigurations(baseName, project, modelPage.getPath().toString(), optionsPage.getMainMethodName(), additionalLaunchConfigLines);
 					ProjectCreator.addXtextNature(project, progressMonitor);
 					
 					ProjectConfigurationDelegator.getInstance().configure(

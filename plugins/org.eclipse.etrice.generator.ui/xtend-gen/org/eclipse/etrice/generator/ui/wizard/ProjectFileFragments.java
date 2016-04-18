@@ -180,7 +180,7 @@ public class ProjectFileFragments {
     return _builder.toString();
   }
   
-  public static String getGeneratorLaunchConfig(final String targetLanguage, final String modelPath, final String baseName, final String[] addLines) {
+  public static String getGeneratorLaunchConfig(final String targetLanguage, final String modelPath, final String baseName, final String mainMethodName, final String[] addLines) {
     String _xblockexpression = null;
     {
       final ScopedPreferenceStore prefStore = new ScopedPreferenceStore(InstanceScope.INSTANCE, "org.eclipse.etrice.generator.ui");
@@ -198,6 +198,10 @@ public class ProjectFileFragments {
       _builder.newLine();
       _builder.append("<booleanAttribute key=\"UseTranslation\" value=\"");
       _builder.append(useTranslation, "");
+      _builder.append("\"/>");
+      _builder.newLineIfNotEmpty();
+      _builder.append("<stringAttribute key=\"MainMethodName\" value=\"");
+      _builder.append(mainMethodName, "");
       _builder.append("\"/>");
       _builder.newLineIfNotEmpty();
       _builder.append("<listAttribute key=\"ModelFiles\">");
