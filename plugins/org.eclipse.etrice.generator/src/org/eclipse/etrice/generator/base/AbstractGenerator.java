@@ -75,6 +75,8 @@ public abstract class AbstractGenerator implements IDetailCodeTranslator {
 	public static final String OPTION_NOEXIT = "-noexit";
 	public static final String OPTION_DOCUMENTATION = "-genDocu";
 	public static final String OPTION_SAVE_GEN_MODEL = "-saveGenModel";
+	public static final String OPTION_MAIN_NAME = "-mainName";
+	public static final String DEFAULT_MAIN_NAME = "main";
 	public static final String OPTION_GEN_INCREMENTAL = "-inc";
 	public static final String OPTION_GEN_DIR = "-genDir";
 	public static final String OPTION_GEN_INFO_DIR = "-genInfoDir";
@@ -221,6 +223,7 @@ public abstract class AbstractGenerator implements IDetailCodeTranslator {
 	 * <li>{@value #OPTION_MSC_INSTR}</li>
 	 * <li>{@value #OPTION_NOEXIT}</li>
 	 * <li>{@value #OPTION_SAVE_GEN_MODEL}</li>
+	 * <li>{@value #OPTION_MAIN_NAME}</li>
 	 * <li>{@value #OPTION_VERBOSE_RT}</li>
 	 * <li>{@value #OPTION_HELP}</li>
 	 * </ul>
@@ -237,6 +240,14 @@ public abstract class AbstractGenerator implements IDetailCodeTranslator {
 			}
 			else {
 				return usageError(OPTION_SAVE_GEN_MODEL+" needs path");
+			}
+		}
+		else if (arg.equals(OPTION_MAIN_NAME)) {
+			if (it.hasNext()) {
+				generatorSettings.setMainMethodName(it.next());
+			}
+			else {
+				return usageError(OPTION_MAIN_NAME+" needs a name for the main method");
 			}
 		}
 		else if (arg.equals(OPTION_GEN_DIR)) {

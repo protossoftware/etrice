@@ -17,10 +17,10 @@ import org.eclipse.etrice.core.etmap.util.ETMapUtil
 import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance
 import org.eclipse.etrice.core.genmodel.etricegen.SystemInstance
+import org.eclipse.etrice.generator.cpp.Main
 import org.eclipse.etrice.generator.fsm.base.FileSystemHelpers
 import org.eclipse.etrice.generator.fsm.base.IGeneratorFileIo
 import org.eclipse.etrice.generator.generic.RoomExtensions
-
 
 @Singleton
 class NodeRunnerGen {
@@ -90,10 +90,10 @@ class NodeRunnerGen {
 			using namespace etRuntime;
 
 			/**
-			 * main function
-			 * creates component and starts and stops the lifecycle
+			 * «Main.getSettings.mainMethodName» function
+			 * creates components and starts and stops the lifecycle
 			 */
-			int main(int argc, char* argv[]) {
+			int «Main.getSettings.mainMethodName»(int argc, char* argv[]) {
 				// instantiate the main component
 				RTSystem* sys = «IF ssc.eContainer instanceof SystemInstance»new RTSystem("«(ssc.eContainer as SystemInstance).name»")«ELSE»0«ENDIF»;
 				«clsname»* main_component = new «clsname»(sys, "«ssc.name»");

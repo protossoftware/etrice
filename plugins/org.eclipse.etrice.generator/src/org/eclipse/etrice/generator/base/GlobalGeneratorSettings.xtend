@@ -27,6 +27,7 @@ class GlobalGeneratorSettings {
 	boolean generateMSCInstrumentation = false
 	boolean generateDataInstrumentation = false
 	boolean noTranslation = false
+	String mainMethodName = "main"
 	
 	// extra generators
 	String generatorModelPath = null

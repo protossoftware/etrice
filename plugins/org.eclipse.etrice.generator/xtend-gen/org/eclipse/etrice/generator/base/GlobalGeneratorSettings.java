@@ -29,6 +29,8 @@ public class GlobalGeneratorSettings {
   
   private boolean noTranslation = false;
   
+  private String mainMethodName = "main";
+  
   private String generatorModelPath = null;
   
   private boolean generateDocumentation = false;
@@ -76,6 +78,15 @@ public class GlobalGeneratorSettings {
   
   public void setNoTranslation(final boolean noTranslation) {
     this.noTranslation = noTranslation;
+  }
+  
+  @Pure
+  public String getMainMethodName() {
+    return this.mainMethodName;
+  }
+  
+  public void setMainMethodName(final String mainMethodName) {
+    this.mainMethodName = mainMethodName;
   }
   
   @Pure

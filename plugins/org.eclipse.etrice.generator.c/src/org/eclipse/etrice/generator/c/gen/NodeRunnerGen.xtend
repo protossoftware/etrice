@@ -69,11 +69,11 @@ class NodeRunnerGen {
 		#include "osal/etPlatformLifecycle.h"
 		
 		/**
-		 * main function
-		 * creates component and starts and stops the lifecycle
+		 * «Main.getSettings.mainMethodName» function
+		 * creates components and starts and stops the lifecycle
 		 */
 		
-		int main(int argc, char** argv) {
+		int «Main.getSettings.mainMethodName»(int argc, char** argv) {
 			etBool runAsTest = ET_FALSE;
 		
 		#ifdef ET_DO_NOT_USE_ARGC_ARGV

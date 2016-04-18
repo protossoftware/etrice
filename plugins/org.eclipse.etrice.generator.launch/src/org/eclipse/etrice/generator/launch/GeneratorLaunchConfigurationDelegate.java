@@ -184,6 +184,10 @@ public abstract class GeneratorLaunchConfigurationDelegate extends AbstractJavaL
 			argString.append(" "+AbstractGenerator.OPTION_SAVE_GEN_MODEL);
 			argString.append(" "+configuration.getAttribute(GeneratorConfigTab.GEN_MODEL_PATH, "?"));
 		}
+		if (!configuration.getAttribute(GeneratorConfigTab.MAIN_METHOD_NAME, AbstractGenerator.DEFAULT_MAIN_NAME).equals(AbstractGenerator.DEFAULT_MAIN_NAME)) {
+			argString.append(" "+AbstractGenerator.OPTION_MAIN_NAME);
+			argString.append(" "+configuration.getAttribute(GeneratorConfigTab.MAIN_METHOD_NAME, AbstractGenerator.DEFAULT_MAIN_NAME));
+		}
 		if (configuration.getAttribute(GeneratorConfigTab.GEN_DOCUMENTATION, false)
 				|| configuration.getAttribute(GeneratorConfigTab.GEN_INSTANCE_DIAGRAM, false))
 			argString.append(" "+AbstractGenerator.OPTION_DOCUMENTATION);

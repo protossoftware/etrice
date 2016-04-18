@@ -20,6 +20,7 @@ import org.eclipse.core.variables.VariablesPlugin;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.debug.ui.AbstractLaunchConfigurationTab;
+import org.eclipse.etrice.generator.base.AbstractGenerator;
 import org.eclipse.etrice.generator.ui.preferences.PreferenceConstants;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
@@ -67,6 +68,7 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 	
 	public static final String GEN_MODEL_PATH = "GenModelPath";
 	public static final String SAVE_GEN_MODEL = "SaveGenModel";
+	public static final String MAIN_METHOD_NAME = "MainMethodName";
 	public static final String LIB = "Lib";
 	public static final String DEBUG = "Debug";
 	public static final String MSC_INSTR = "MSC";
@@ -92,6 +94,7 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 	private Text infoPath;
 	private Text docPath;
 	protected Button dataButton;
+	private Text mainMethodName;
 
 	/* (non-Javadoc)
 	 * @see org.eclipse.debug.ui.ILaunchConfigurationTab#createControl(org.eclipse.swt.widgets.Composite)
@@ -170,6 +173,19 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 		verboseButton = createCheckButton(mainComposite, "generate instrumentation for verbose output");
 		verboseButton.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 2, 1));
 		verboseButton.addSelectionListener(new UpdateConfig());
+		
+		Label label = new Label(mainComposite, SWT.NONE);
+		label.setText("The main method name:");
+		mainMethodName = new Text(mainComposite, SWT.SINGLE | SWT.BORDER);
+		mainMethodName.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		mainMethodName.addModifyListener(new ModifyListener() {
+			@Override
+			public void modifyText(ModifyEvent e) {
+				validate();
+				setDirty(true);
+				updateLaunchConfigurationDialog();
+			}
+		});
 
 		createSeparator(mainComposite, 2);
 		
@@ -187,7 +203,7 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 			
 		});
 		
-		Label label = new Label(mainComposite, SWT.NONE);
+		label = new Label(mainComposite, SWT.NONE);
 		label.setText("The directory for &generated code:");
 		srcgenPath = new Text(mainComposite, SWT.SINGLE | SWT.BORDER);
 		srcgenPath.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
@@ -315,6 +331,7 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 			genModelPath.setEnabled(save);
 			browsePath.setEnabled(save);
 			genModelPath.setText(configuration.getAttribute(GEN_MODEL_PATH, ""));
+			mainMethodName.setText(configuration.getAttribute(MAIN_METHOD_NAME, AbstractGenerator.DEFAULT_MAIN_NAME));
 			boolean genDocu = configuration.getAttribute(GEN_DOCUMENTATION, false);
 			if (configuration.getAttribute(GEN_INSTANCE_DIAGRAM, false))
 				genDocu = true;
@@ -360,6 +377,7 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 		configuration.setAttribute(LIB, libButton.getSelection());
 		configuration.setAttribute(SAVE_GEN_MODEL, saveGenModel.getSelection());
 		configuration.setAttribute(GEN_MODEL_PATH, genModelPath.getText());
+		configuration.setAttribute(MAIN_METHOD_NAME, mainMethodName.getText());
 		configuration.setAttribute(GEN_INSTANCE_DIAGRAM, documentationButton.getSelection());
 		configuration.setAttribute(GEN_DOCUMENTATION, documentationButton.getSelection());
 		configuration.setAttribute(DEBUG, debugButton.getSelection());
