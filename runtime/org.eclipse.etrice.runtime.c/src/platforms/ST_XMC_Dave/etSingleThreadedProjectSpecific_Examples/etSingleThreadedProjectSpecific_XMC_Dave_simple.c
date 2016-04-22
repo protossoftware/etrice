@@ -28,6 +28,7 @@
 #include "Dave.h"
 #include "helpers/etTimeHelpers.h"
 #include "etRuntimeConfig.h"
+#include "etPlatform.h"
 
 extern etTime etTargetTime;
 void DAVE_InstallTickHandler(void);
