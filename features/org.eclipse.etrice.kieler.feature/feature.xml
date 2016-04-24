@@ -2,7 +2,7 @@
 <feature
       id="org.eclipse.etrice.kieler.feature"
       label="KIELER"
-      version="0.5.0.qualifier"
+      version="1.0.0.qualifier"
       provider-name="eTrice (Incubation)">
 
    <description>

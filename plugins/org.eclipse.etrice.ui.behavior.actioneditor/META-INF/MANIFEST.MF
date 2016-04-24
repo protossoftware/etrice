@@ -2,12 +2,12 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: ROOM Action Code Editor
 Bundle-SymbolicName: org.eclipse.etrice.ui.behavior.actioneditor;singleton:=true
-Bundle-Version: 0.5.0.qualifier
+Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: org.eclipse.etrice.ui.behavior.actioneditor.Activator
-Require-Bundle: org.eclipse.etrice.core.fsm;bundle-version="0.5.0",
- org.eclipse.etrice.core.room;bundle-version="0.5.0",
- org.eclipse.etrice.ui.behavior;bundle-version="0.5.0",
- org.eclipse.etrice.ui.behavior.fsm;bundle-version="0.5.0",
+Require-Bundle: org.eclipse.etrice.core.fsm;bundle-version="1.0.0",
+ org.eclipse.etrice.core.room;bundle-version="1.0.0",
+ org.eclipse.etrice.ui.behavior;bundle-version="1.0.0",
+ org.eclipse.etrice.ui.behavior.fsm;bundle-version="1.0.0",
  org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.emf.common,
