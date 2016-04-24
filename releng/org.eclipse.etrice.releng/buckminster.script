@@ -35,7 +35,7 @@ perform -D WORKSPACE=${WORKSPACE} -P "${WORKSPACE}/buildroot/build.properties" o
 perform -D WORKSPACE=${WORKSPACE} -P "${WORKSPACE}/buildroot/build.properties" org.eclipse.etrice.ui.runtime#create.contents
 
 perform -D WORKSPACE=${WORKSPACE} -P "${WORKSPACE}/buildroot/build.properties" org.eclipse.etrice.releng#export.c.generator
-#perform -D WORKSPACE=${WORKSPACE} -P "${WORKSPACE}/buildroot/build.properties" org.eclipse.etrice.releng#export.cpp.generator
+perform -D WORKSPACE=${WORKSPACE} -P "${WORKSPACE}/buildroot/build.properties" org.eclipse.etrice.releng#export.cpp.generator
 perform -D WORKSPACE=${WORKSPACE} -P "${WORKSPACE}/buildroot/build.properties" org.eclipse.etrice.releng#export.java.generator
 perform -D WORKSPACE=${WORKSPACE} -P "${WORKSPACE}/buildroot/build.properties" org.eclipse.etrice.releng#copy.deliveries
 

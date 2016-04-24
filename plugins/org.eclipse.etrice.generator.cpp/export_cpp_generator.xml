@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="create_run_jar" name="Create Runnable Jar for Project org.eclipse.etrice.generator.cpp with libraries in sub-folder">
+	
+	<!--
+		don't forget to add
+		<zip destfile="${zip_destination}/eTrice-C-generator.zip" basedir="${export_destination}" />
+		as last command
+		
+		<copy failonerror="false" file="
+	-->
+	
+	<property environment="env"/>
+	<property name="zip_destination" location="${env.ZIP_DESTINATION}"/>
+	<property name="eclipse_home" location="${env.ECLIPSE_HOME}"/>
+	<property name="repo_loc" location="${env.REPO_LOC}"/>
+	
+	<property name="export_destination" location="${zip_destination}/C-generator"/>
+	
+	<target name="testProps">
+		<echo message="zip_destination = ${zip_destination}"/>
+		<echo message="export_destination = ${export_destination}"/>
+		<echo message="eclipse_home = ${eclipse_home}"/>
+		<echo message="repo_loc = ${repo_loc}"/>
+	</target>
+
+	<!--this file was created by Eclipse Runnable JAR Export Wizard-->
+    <!--ANT 1.7 is required                                        -->
+    <target name="create_run_jar">
+        <jar destfile="${export_destination}/org.eclipse.etrice.generator.cpp.jar">
+            <manifest>
+                <attribute name="Main-Class" value="org.eclipse.etrice.generator.cpp.Main"/>
+                <attribute name="Class-Path" value=". org.eclipse.etrice.generator.cpp_lib/org.eclipse.xtext_2.7.3.v201411190455.jar org.eclipse.etrice.generator.cpp_lib/org.eclipse.emf.ecore.xmi_2.10.2.v20150123-0348.jar org.eclipse.etrice.generator.cpp_lib/org.eclipse.emf.ecore_2.10.2.v20150123-0348.jar org.eclipse.etrice.generator.cpp_lib/org.eclipse.emf.common_2.10.1.v20150123-0348.jar org.eclipse.etrice.generator.cpp_lib/org.antlr.runtime_3.2.0.v201101311130.jar org.eclipse.etrice.generator.cpp_lib/com.google.inject_3.0.0.v201312141243.jar org.eclipse.etrice.generator.cpp_lib/org.eclipse.emf.mwe.core_1.3.4.v201409021027.jar org.eclipse.etrice.generator.cpp_lib/org.apache.commons.cli_1.2.0.v201404270220.jar org.eclipse.etrice.generator.cpp_lib/org.eclipse.emf.mwe2.runtime_2.7.0.v201409021027.jar org.eclipse.etrice.generator.cpp_lib/org.eclipse.emf.mwe.utils_1.3.4.v201409021027.jar org.eclipse.etrice.generator.cpp_lib/org.eclipse.xtext.util_2.7.3.v201411190455.jar org.eclipse.etrice.generator.cpp_lib/com.google.guava_15.0.0.v201403281430.jar org.eclipse.etrice.generator.cpp_lib/javax.inject_1.0.0.v20091030.jar org.eclipse.etrice.generator.cpp_lib/org.eclipse.xtext.xbase_2.7.3.v201411190455.jar org.eclipse.etrice.generator.cpp_lib/org.eclipse.xtext.common.types_2.7.3.v201411190455.jar org.eclipse.etrice.generator.cpp_lib/org.eclipse.xtend.lib_2.7.3.v201411190455.jar org.eclipse.etrice.generator.cpp_lib/org.eclipse.xtext.xbase.lib_2.7.3.v201411190455.jar org.eclipse.etrice.generator.cpp_lib/org.eclipse.xtend.lib.macro_2.7.3.v201411190455.jar org.eclipse.etrice.generator.cpp_lib/org.eclipse.xtext.generator_2.7.3.v201411190455.jar org.eclipse.etrice.generator.cpp_lib/org.eclipse.xtend_2.0.0.v201406030414.jar org.eclipse.etrice.generator.cpp_lib/com.ibm.icu_52.1.1.v201501240615.jar org.eclipse.etrice.generator.cpp_lib/org.eclipse.xpand_2.0.0.v201406030414.jar org.eclipse.etrice.generator.cpp_lib/org.eclipse.xtend.typesystem.emf_2.0.0.v201406030414.jar org.eclipse.etrice.generator.cpp_lib/org.eclipse.emf.codegen.ecore_2.10.2.v20150123-0452.jar org.eclipse.etrice.generator.cpp_lib/org.eclipse.emf.codegen_2.10.0.v20150123-0452.jar org.eclipse.etrice.generator.cpp_lib/org.eclipse.emf.mwe2.lib_2.7.0.v201409021027.jar org.eclipse.etrice.generator.cpp_lib/org.apache.commons.logging_1.1.1.v201101211721.jar org.eclipse.etrice.generator.cpp_lib/org.eclipse.emf.mwe2.launch_2.7.0.v201409021051.jar org.eclipse.etrice.generator.cpp_lib/org.eclipse.emf.mwe2.language_2.7.0.v201409021051.jar org.eclipse.etrice.generator.cpp_lib/org.eclipse.core.runtime_3.10.0.v20140318-2214.jar org.eclipse.etrice.generator.cpp_lib/javax.annotation_1.2.0.v201401042248.jar org.eclipse.etrice.generator.cpp_lib/org.eclipse.osgi_3.10.2.v20150203-1939.jar org.eclipse.etrice.generator.cpp_lib/org.eclipse.osgi.compatibility.state_1.0.1.v20140709-1414.jar org.eclipse.etrice.generator.cpp_lib/org.eclipse.equinox.common_3.6.200.v20130402-1505.jar org.eclipse.etrice.generator.cpp_lib/org.eclipse.core.jobs_3.6.1.v20141014-1248.jar org.eclipse.etrice.generator.cpp_lib/runtime_registry_compatibility.jar org.eclipse.etrice.generator.cpp_lib/org.eclipse.equinox.registry_3.5.400.v20140428-1507.jar org.eclipse.etrice.generator.cpp_lib/org.eclipse.equinox.preferences_3.5.200.v20140224-1527.jar org.eclipse.etrice.generator.cpp_lib/org.eclipse.core.contenttype_3.4.200.v20140207-1251.jar org.eclipse.etrice.generator.cpp_lib/org.eclipse.equinox.app_1.3.200.v20130910-1609.jar org.eclipse.etrice.generator.cpp_lib/org.eclipse.core.resources_3.9.1.v20140825-1431.jar org.eclipse.etrice.generator.cpp_lib/org.apache.log4j_1.2.15.v201012070815.jar org.eclipse.etrice.generator.cpp_lib/org.objectweb.asm_5.0.1.v201404251740.jar org.eclipse.etrice.generator.cpp_lib/org.eclipse.emf_2.6.0.v20150123-0452.jar org.eclipse.etrice.generator.cpp_lib/org.apache.commons.io_2.0.1.v201105210651.jar org.eclipse.etrice.generator.cpp_lib/org.eclipse.ui.ide_3.10.2.v20141118-1227.jar org.eclipse.etrice.generator.cpp_lib/org.eclipse.ui.views_3.7.0.v20140408-0703.jar org.eclipse.etrice.generator.cpp_lib/org.eclipse.ui.workbench_3.106.2.v20150204-1030.jar org.eclipse.etrice.generator.cpp_lib/org.eclipse.ui_3.106.1.v20141002-1150.jar org.eclipse.etrice.generator.cpp_lib/org.eclipse.swt_3.103.2.v20150203-1313.jar org.eclipse.etrice.generator.cpp_lib/org.eclipse.swt.win32.win32.x86_64_3.103.2.v20150203-1351.jar org.eclipse.etrice.generator.cpp_lib/org.eclipse.jface_3.10.2.v20141021-1035.jar org.eclipse.etrice.generator.cpp_lib/org.eclipse.core.commands_3.6.100.v20140528-1422.jar org.eclipse.etrice.generator.cpp_lib/org.eclipse.e4.ui.workbench3_0.12.0.v20140227-2118.jar"/>
+            </manifest>
+            <fileset dir="${repo_loc}/plugins/org.eclipse.etrice.generator.cpp/bin"/>
+            <fileset dir="${repo_loc}/plugins/org.eclipse.etrice.core.genmodel/bin"/>
+            <fileset dir="${repo_loc}/plugins/org.eclipse.etrice.core.common/bin"/>
+            <fileset dir="${repo_loc}/plugins/org.eclipse.etrice.core.fsm/bin"/>
+            <fileset dir="${repo_loc}/plugins/org.eclipse.etrice.core.room/bin"/>
+            <fileset dir="${repo_loc}/plugins/org.eclipse.etrice.core.genmodel.fsm/bin"/>
+            <fileset dir="${repo_loc}/plugins/org.eclipse.etrice.core.etphys/bin"/>
+            <fileset dir="${repo_loc}/plugins/org.eclipse.etrice.core.etmap/bin"/>
+            <fileset dir="${repo_loc}/plugins/org.eclipse.etrice.generator.fsm/bin"/>
+            <fileset dir="${repo_loc}/plugins/org.eclipse.etrice.generator/bin"/>
+            <fileset dir="${repo_loc}/plugins/org.eclipse.etrice.generator.config/bin"/>
+            <fileset dir="${repo_loc}/plugins/org.eclipse.etrice.core.config/bin"/>
+            <fileset dir="${repo_loc}/plugins/org.eclipse.etrice.generator.doc/bin"/>
+        </jar>
+        <delete dir="${export_destination}/org.eclipse.etrice.generator.cpp_lib"/>
+        <mkdir dir="${export_destination}/org.eclipse.etrice.generator.cpp_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.xtext_2.7.3.v201411190455.jar" todir="${export_destination}/org.eclipse.etrice.generator.cpp_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.emf.ecore.xmi_2.10.2.v20150123-0348.jar" todir="${export_destination}/org.eclipse.etrice.generator.cpp_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.emf.ecore_2.10.2.v20150123-0348.jar" todir="${export_destination}/org.eclipse.etrice.generator.cpp_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.emf.common_2.10.1.v20150123-0348.jar" todir="${export_destination}/org.eclipse.etrice.generator.cpp_lib"/>
+        <copy file="${eclipse_home}/plugins/org.antlr.runtime_3.2.0.v201101311130.jar" todir="${export_destination}/org.eclipse.etrice.generator.cpp_lib"/>
+        <copy file="${eclipse_home}/plugins/com.google.inject_3.0.0.v201312141243.jar" todir="${export_destination}/org.eclipse.etrice.generator.cpp_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.emf.mwe.core_1.3.4.v201409021027.jar" todir="${export_destination}/org.eclipse.etrice.generator.cpp_lib"/>
+        <copy file="${eclipse_home}/plugins/org.apache.commons.cli_1.2.0.v201404270220.jar" todir="${export_destination}/org.eclipse.etrice.generator.cpp_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.emf.mwe2.runtime_2.7.0.v201409021027.jar" todir="${export_destination}/org.eclipse.etrice.generator.cpp_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.emf.mwe.utils_1.3.4.v201409021027.jar" todir="${export_destination}/org.eclipse.etrice.generator.cpp_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.xtext.util_2.7.3.v201411190455.jar" todir="${export_destination}/org.eclipse.etrice.generator.cpp_lib"/>
+        <copy file="${eclipse_home}/plugins/com.google.guava_15.0.0.v201403281430.jar" todir="${export_destination}/org.eclipse.etrice.generator.cpp_lib"/>
+        <copy file="${eclipse_home}/plugins/javax.inject_1.0.0.v20091030.jar" todir="${export_destination}/org.eclipse.etrice.generator.cpp_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.xtext.xbase_2.7.3.v201411190455.jar" todir="${export_destination}/org.eclipse.etrice.generator.cpp_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.xtext.common.types_2.7.3.v201411190455.jar" todir="${export_destination}/org.eclipse.etrice.generator.cpp_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.xtend.lib_2.7.3.v201411190455.jar" todir="${export_destination}/org.eclipse.etrice.generator.cpp_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.xtext.xbase.lib_2.7.3.v201411190455.jar" todir="${export_destination}/org.eclipse.etrice.generator.cpp_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.xtend.lib.macro_2.7.3.v201411190455.jar" todir="${export_destination}/org.eclipse.etrice.generator.cpp_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.xtext.generator_2.7.3.v201411190455.jar" todir="${export_destination}/org.eclipse.etrice.generator.cpp_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.xtend_2.0.0.v201406030414.jar" todir="${export_destination}/org.eclipse.etrice.generator.cpp_lib"/>
+        <copy file="${eclipse_home}/plugins/com.ibm.icu_52.1.1.v201501240615.jar" todir="${export_destination}/org.eclipse.etrice.generator.cpp_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.xpand_2.0.0.v201406030414.jar" todir="${export_destination}/org.eclipse.etrice.generator.cpp_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.xtend.typesystem.emf_2.0.0.v201406030414.jar" todir="${export_destination}/org.eclipse.etrice.generator.cpp_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.emf.codegen.ecore_2.10.2.v20150123-0452.jar" todir="${export_destination}/org.eclipse.etrice.generator.cpp_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.emf.codegen_2.10.0.v20150123-0452.jar" todir="${export_destination}/org.eclipse.etrice.generator.cpp_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.emf.mwe2.lib_2.7.0.v201409021027.jar" todir="${export_destination}/org.eclipse.etrice.generator.cpp_lib"/>
+        <copy file="${eclipse_home}/plugins/org.apache.commons.logging_1.1.1.v201101211721.jar" todir="${export_destination}/org.eclipse.etrice.generator.cpp_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.emf.mwe2.launch_2.7.0.v201409021051.jar" todir="${export_destination}/org.eclipse.etrice.generator.cpp_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.emf.mwe2.language_2.7.0.v201409021051.jar" todir="${export_destination}/org.eclipse.etrice.generator.cpp_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.core.runtime_3.10.0.v20140318-2214.jar" todir="${export_destination}/org.eclipse.etrice.generator.cpp_lib"/>
+        <copy file="${eclipse_home}/plugins/javax.annotation_1.2.0.v201401042248.jar" todir="${export_destination}/org.eclipse.etrice.generator.cpp_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.osgi_3.10.2.v20150203-1939.jar" todir="${export_destination}/org.eclipse.etrice.generator.cpp_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.osgi.compatibility.state_1.0.1.v20140709-1414.jar" todir="${export_destination}/org.eclipse.etrice.generator.cpp_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.equinox.common_3.6.200.v20130402-1505.jar" todir="${export_destination}/org.eclipse.etrice.generator.cpp_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.core.jobs_3.6.1.v20141014-1248.jar" todir="${export_destination}/org.eclipse.etrice.generator.cpp_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.core.runtime.compatibility.registry_3.5.300.v20140128-0851/runtime_registry_compatibility.jar" todir="${export_destination}/org.eclipse.etrice.generator.cpp_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.equinox.registry_3.5.400.v20140428-1507.jar" todir="${export_destination}/org.eclipse.etrice.generator.cpp_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.equinox.preferences_3.5.200.v20140224-1527.jar" todir="${export_destination}/org.eclipse.etrice.generator.cpp_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.core.contenttype_3.4.200.v20140207-1251.jar" todir="${export_destination}/org.eclipse.etrice.generator.cpp_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.equinox.app_1.3.200.v20130910-1609.jar" todir="${export_destination}/org.eclipse.etrice.generator.cpp_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.core.resources_3.9.1.v20140825-1431.jar" todir="${export_destination}/org.eclipse.etrice.generator.cpp_lib"/>
+        <copy file="${eclipse_home}/plugins/org.apache.log4j_1.2.15.v201012070815.jar" todir="${export_destination}/org.eclipse.etrice.generator.cpp_lib"/>
+        <copy file="${eclipse_home}/plugins/org.objectweb.asm_5.0.1.v201404251740.jar" todir="${export_destination}/org.eclipse.etrice.generator.cpp_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.emf_2.6.0.v20150123-0452.jar" todir="${export_destination}/org.eclipse.etrice.generator.cpp_lib"/>
+        <copy file="${eclipse_home}/plugins/org.apache.commons.io_2.0.1.v201105210651.jar" todir="${export_destination}/org.eclipse.etrice.generator.cpp_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.ui.ide_3.10.2.v20141118-1227.jar" todir="${export_destination}/org.eclipse.etrice.generator.cpp_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.ui.views_3.7.0.v20140408-0703.jar" todir="${export_destination}/org.eclipse.etrice.generator.cpp_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.ui.workbench_3.106.2.v20150204-1030.jar" todir="${export_destination}/org.eclipse.etrice.generator.cpp_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.ui_3.106.1.v20141002-1150.jar" todir="${export_destination}/org.eclipse.etrice.generator.cpp_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.swt_3.103.2.v20150203-1313.jar" todir="${export_destination}/org.eclipse.etrice.generator.cpp_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.swt.win32.win32.x86_64_3.103.2.v20150203-1351.jar" todir="${export_destination}/org.eclipse.etrice.generator.cpp_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.jface_3.10.2.v20141021-1035.jar" todir="${export_destination}/org.eclipse.etrice.generator.cpp_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.core.commands_3.6.100.v20140528-1422.jar" todir="${export_destination}/org.eclipse.etrice.generator.cpp_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.e4.ui.workbench3_0.12.0.v20140227-2118.jar" todir="${export_destination}/org.eclipse.etrice.generator.cpp_lib"/>
+		<zip destfile="${zip_destination}/eTrice-CPP-generator.zip" basedir="${export_destination}" />
+    	<echo message="created ${zip_destination}/eTrice-CPP-generator.zip" />
+    </target>
+</project>

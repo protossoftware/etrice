@@ -3,27 +3,21 @@
         <cs:dependency name="org.eclipse.emf.mwe.utils" componentType="osgi.bundle"/>
         <cs:dependency name="org.eclipse.etrice.cdt-integration.feature" componentType="eclipse.feature"/>
         <cs:dependency name="org.eclipse.etrice.feature" componentType="eclipse.feature"/>
-
-        <cs:dependency name="org.eclipse.etrice.generator.common.tests" componentType="buckminster"/>
         <cs:dependency name="org.eclipse.etrice.generator.c.tests" componentType="buckminster"/>
+        <cs:dependency name="org.eclipse.etrice.generator.common.tests" componentType="buckminster"/>
         <cs:dependency name="org.eclipse.etrice.generator.cpp.tests" componentType="buckminster"/>
         <cs:dependency name="org.eclipse.etrice.generator.java.tests" componentType="buckminster"/>
-
         <cs:dependency name="org.eclipse.etrice.kieler.feature" componentType="eclipse.feature"/>
         <cs:dependency name="org.eclipse.etrice.layout.feature" componentType="eclipse.feature"/>
-
         <cs:dependency name="org.eclipse.etrice.modellib.c" componentType="buckminster"/>
         <cs:dependency name="org.eclipse.etrice.modellib.cpp" componentType="buckminster"/>
         <cs:dependency name="org.eclipse.etrice.modellib.java" componentType="buckminster"/>
-
         <cs:dependency name="org.eclipse.etrice.runtime.c" componentType="buckminster"/>
-        <cs:dependency name="org.eclipse.etrice.runtime.cpp" componentType="buckminster"/>
-        <cs:dependency name="org.eclipse.etrice.runtime.java" componentType="buckminster"/>
-
         <cs:dependency name="org.eclipse.etrice.runtime.c.tests" componentType="buckminster"/>
+        <cs:dependency name="org.eclipse.etrice.runtime.cpp" componentType="buckminster"/>
         <cs:dependency name="org.eclipse.etrice.runtime.cpp.tests" componentType="buckminster"/>
+        <cs:dependency name="org.eclipse.etrice.runtime.java" componentType="buckminster"/>
         <cs:dependency name="org.eclipse.etrice.runtime.java.tests" componentType="buckminster"/>
-
         <cs:dependency name="org.eclipse.etrice.site" componentType="eclipse.feature"/>
         <cs:dependency name="org.eclipse.etrice.tests.feature" componentType="eclipse.feature"/>
         <cs:dependency name="org.eclipse.etrice.tutorials.java" componentType="buckminster"/>
@@ -83,6 +77,17 @@
         <cs:public name="export.c.generator" actor="ant">
             <cs:actorProperties>
                 <cs:property key="buildFile" value="../../plugins/org.eclipse.etrice.generator.c/export_c_generator.xml"/>
+                <cs:property key="targets" value="create_run_jar"/>
+            </cs:actorProperties>
+            <cs:properties>
+                <cs:property key="eclipse_home" value="${WORKSPACE}/buildroot/target.platform"/>
+                <cs:property key="repo_loc" value="${WORKSPACE}/etrice_local_repo"/>
+                <cs:property key="zip_destination" value="${WORKSPACE}/buildroot/deliveries"/>
+            </cs:properties>
+        </cs:public>
+        <cs:public name="export.cpp.generator" actor="ant">
+            <cs:actorProperties>
+                <cs:property key="buildFile" value="../../plugins/org.eclipse.etrice.generator.cpp/export_cpp_generator.xml"/>
                 <cs:property key="targets" value="create_run_jar"/>
             </cs:actorProperties>
             <cs:properties>
