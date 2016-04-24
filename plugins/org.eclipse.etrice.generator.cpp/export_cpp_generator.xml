@@ -14,7 +14,7 @@
 	<property name="eclipse_home" location="${env.ECLIPSE_HOME}"/>
 	<property name="repo_loc" location="${env.REPO_LOC}"/>
 	
-	<property name="export_destination" location="${zip_destination}/C-generator"/>
+	<property name="export_destination" location="${zip_destination}/CPP-generator"/>
 	
 	<target name="testProps">
 		<echo message="zip_destination = ${zip_destination}"/>
