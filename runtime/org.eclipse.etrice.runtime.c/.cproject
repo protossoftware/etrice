@@ -52,7 +52,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="src/platforms/MT_32Bit_FreeRTOS_Generic|src/platforms/ST_XMC4500_DaveCE_Generic|src/platforms/ST_MSP430_G2553_CCS5_LaunchPad|src/platforms/MT_POSIX_GENERIC_GCC|src/platforms/ST_MSP430_F5438_CCS5_HWElevator|src/platforms/ST_MSP430_F5438_CCS5_EXP430F5438|src/platforms/MT_MSP430_F5438_FreeRTOS_CCS5_HWElevator|src/platforms/ST_CoretexM3_Euros_GCCELF_SK_FM3_176PMC_Ethernet|src/platforms/ST_32Bit_Generic" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="src/platforms/MT_XMC_FreeRTOS_Dave|src/platforms/ST_XMC_Dave|src/platforms/MT_32Bit_FreeRTOS_Generic|src/platforms/ST_XMC4500_DaveCE_Generic|src/platforms/ST_MSP430_G2553_CCS5_LaunchPad|src/platforms/MT_POSIX_GENERIC_GCC|src/platforms/ST_MSP430_F5438_CCS5_HWElevator|src/platforms/ST_MSP430_F5438_CCS5_EXP430F5438|src/platforms/MT_MSP430_F5438_FreeRTOS_CCS5_HWElevator|src/platforms/ST_CoretexM3_Euros_GCCELF_SK_FM3_176PMC_Ethernet|src/platforms/ST_32Bit_Generic" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -111,7 +111,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="src/platforms/MT_32Bit_FreeRTOS_Generic|src/platforms/ST_XMC4500_DaveCE_Generic|src/platforms/ST_MSP430_G2553_CCS5_LaunchPad|src/platforms/MT_WIN_MinGW|src/platforms/ST_MSP430_F5438_CCS5_HWElevator|src/platforms/ST_MSP430_F5438_CCS5_EXP430F5438|src/platforms/MT_MSP430_F5438_FreeRTOS_CCS5_HWElevator|src/platforms/ST_CoretexM3_Euros_GCCELF_SK_FM3_176PMC_Ethernet|src/platforms/ST_32Bit_Generic" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="src/platforms/MT_XMC_FreeRTOS_Dave|src/platforms/ST_XMC_Dave|src/platforms/MT_32Bit_FreeRTOS_Generic|src/platforms/ST_XMC4500_DaveCE_Generic|src/platforms/ST_MSP430_G2553_CCS5_LaunchPad|src/platforms/MT_WIN_MinGW|src/platforms/ST_MSP430_F5438_CCS5_HWElevator|src/platforms/ST_MSP430_F5438_CCS5_EXP430F5438|src/platforms/MT_MSP430_F5438_FreeRTOS_CCS5_HWElevator|src/platforms/ST_CoretexM3_Euros_GCCELF_SK_FM3_176PMC_Ethernet|src/platforms/ST_32Bit_Generic" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -170,7 +170,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="src/platforms/MT_32Bit_FreeRTOS_Generic|src/platforms/ST_XMC4500_DaveCE_Generic|src/platforms/ST_MSP430_G2553_CCS5_LaunchPad|src/platforms/MT_POSIX_GENERIC_GCC|src/platforms/ST_MSP430_F5438_CCS5_HWElevator|src/platforms/ST_MSP430_F5438_CCS5_EXP430F5438|src/platforms/MT_MSP430_F5438_FreeRTOS_CCS5_HWElevator|src/platforms/ST_CoretexM3_Euros_GCCELF_SK_FM3_176PMC_Ethernet|src/platforms/ST_32Bit_Generic" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="src/platforms/MT_XMC_FreeRTOS_Dave|src/platforms/ST_XMC_Dave|src/platforms/MT_32Bit_FreeRTOS_Generic|src/platforms/ST_XMC4500_DaveCE_Generic|src/platforms/ST_MSP430_G2553_CCS5_LaunchPad|src/platforms/MT_POSIX_GENERIC_GCC|src/platforms/ST_MSP430_F5438_CCS5_HWElevator|src/platforms/ST_MSP430_F5438_CCS5_EXP430F5438|src/platforms/MT_MSP430_F5438_FreeRTOS_CCS5_HWElevator|src/platforms/ST_CoretexM3_Euros_GCCELF_SK_FM3_176PMC_Ethernet|src/platforms/ST_32Bit_Generic" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -197,13 +197,10 @@
 	<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
 	<storageModule moduleId="scannerConfiguration">
 		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
-		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.mingw.lib.debug.1978608919.294295052;cdt.managedbuild.config.gnu.mingw.lib.debug.1978608919.294295052.;cdt.managedbuild.tool.gnu.c.compiler.base.183127152;cdt.managedbuild.tool.gnu.c.compiler.input.2145340965">
-			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
-		</scannerConfigBuildInfo>
 		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.mingw.lib.debug.1978608919;cdt.managedbuild.config.gnu.mingw.lib.debug.1978608919.;cdt.managedbuild.tool.gnu.c.compiler.mingw.lib.debug.62527096;cdt.managedbuild.tool.gnu.c.compiler.input.316560634">
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
 		</scannerConfigBuildInfo>
-		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.mingw.lib.debug.1978608919.18376023;cdt.managedbuild.config.gnu.mingw.lib.debug.1978608919.18376023.;cdt.managedbuild.tool.gnu.c.compiler.mingw.lib.debug.354393464;cdt.managedbuild.tool.gnu.c.compiler.input.1429574570">
+		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.mingw.lib.debug.1978608919.294295052;cdt.managedbuild.config.gnu.mingw.lib.debug.1978608919.294295052.;cdt.managedbuild.tool.gnu.c.compiler.base.183127152;cdt.managedbuild.tool.gnu.c.compiler.input.2145340965">
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
 		</scannerConfigBuildInfo>
 	</storageModule>
