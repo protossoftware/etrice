@@ -29,13 +29,11 @@ static etInt32 counter;
 static etBool timerIsInvalidated;
 
 static void TestEtTimer_TimerCallback1(void* data){
-	printf("TestEtTimer_TimerCallback1\n"); fflush(stdout); // TODO: remove debug output
 	if(!timerIsInvalidated)
 		etSema_wakeup(&GlobalSema);
 }
 
 static void TestEtTimer_TimerCallback2(void* data){
-	printf("TestEtTimer_TimerCallback2\n"); fflush(stdout); // TODO: remove debug output
 	if(!timerIsInvalidated)
 		counter++;
 }
