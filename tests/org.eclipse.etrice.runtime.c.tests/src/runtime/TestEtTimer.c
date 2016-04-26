@@ -58,7 +58,6 @@ static void TestEtTimer_lifecycle (etInt16 id) {
 	getTimeFromTarget(&startTime);
 	printf("TestEtTimer_lifecycle: start timer\n"); fflush(stdout); // TODO: remove debug output
 	etTimer_start(&timer1);
-	printf("TestEtTimer_lifecycle: wait for timer %ld\n", etThread_self_id()); fflush(stdout); // TODO: remove debug output
 	etSema_waitForWakeup(&GlobalSema); /* wait until callback function releases timer the first time (fires immediately) */
 	printf("TestEtTimer_lifecycle: wait again\n"); fflush(stdout); // TODO: remove debug output
 	etSema_waitForWakeup(&GlobalSema); /* wait until callback function releases timer the second time (fires after first interval)*/
