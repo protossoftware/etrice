@@ -27,7 +27,6 @@ import org.eclipse.cdt.core.settings.model.CIncludePathEntry;
 import org.eclipse.cdt.core.settings.model.ICConfigurationDescription;
 import org.eclipse.cdt.core.settings.model.ICSettingEntry;
 import org.eclipse.cdt.managedbuilder.core.IConfiguration;
-import org.eclipse.cdt.managedbuilder.core.IFolderInfo;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
@@ -51,8 +50,8 @@ import org.eclipse.ui.wizards.datatransfer.ZipFileStructureProvider;
  */
 public class CProjectConfigurator extends ProjectConfigurator {
 
-	private static final String C_MODELLIB_NAME = "etrice-c-modellib";
-	private static final String C_RUNTIME_FOLDER_NAME = "etrice-c-runtime";
+	private static final String C_MODELLIB_NAME = "etrice_c_modellib";
+	private static final String C_RUNTIME_FOLDER_NAME = "etrice_c_runtime";
 
 	/* (non-Javadoc)
 	 * @see org.eclipse.etrice.generator.ui.cdt.ProjectConfigurator#isApplicable(org.eclipse.core.resources.IProject)
@@ -176,6 +175,15 @@ public class CProjectConfigurator extends ProjectConfigurator {
 			if (importOperation != null) {
 				importOperation.setContext(null);
 				importOperation.run(new SubProgressMonitor(progressMonitor, 1));
+				
+				IFolder folder = project.getFolder(C_RUNTIME_FOLDER_NAME);
+				folder = folder.getFolder("src");
+				folder = folder.getFolder("platforms");
+				for (IResource platform : folder.members()) {
+					if (platform.getType()==IResource.FOLDER && !platform.getName().equals(getPlatform())) {
+						removeUnusedPlatform(platform, progressMonitor);
+					}
+				}
 			}
 			else {
 				throw new Exception("File error during runtime import");
@@ -199,6 +207,31 @@ public class CProjectConfigurator extends ProjectConfigurator {
 				}
 			}
 		}
+	}
+
+	/**
+	 * @param platform
+	 */
+	private void removeUnusedPlatform(final IResource platform, IProgressMonitor progressMonitor) {
+        
+        ISchedulingRule rule = ResourcesPlugin.getWorkspace().getRuleFactory().createRule(platform);
+        WorkspaceModifyOperation operation = new WorkspaceModifyOperation(rule) {
+
+            @Override
+            protected void execute(IProgressMonitor monitor) throws CoreException, InvocationTargetException, InterruptedException {
+
+            	platform.delete(true, monitor);
+            }
+
+        };
+
+        try {
+        	operation.run(progressMonitor);
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 	}
 
 	/**
@@ -298,25 +331,26 @@ public class CProjectConfigurator extends ProjectConfigurator {
 	 */
 	@Override
 	protected void customizeBuildConfig(IProject project, IConfiguration buildConfig) {
-		if (isCopyRuntime()) {
-			IFolder folder = project.getFolder(C_RUNTIME_FOLDER_NAME);
-			folder = folder.getFolder("src");
-			folder = folder.getFolder("platforms");
-			try {
-				// exclude from the build if this is a folder and not the selected platform
-				for (IResource member : folder.members()) {
-					if (member.getType()==IResource.FOLDER && !member.getName().equals(getPlatform())) {
-						IPath path = member.getProjectRelativePath();
-						IFolderInfo folderInfo = buildConfig.createFolderInfo(path);
-						if (folderInfo!=null) {
-							folderInfo.setExclude(true);
-						}
-					}
-				}
-			}
-			catch (CoreException e) {
-				e.printStackTrace();
-			}
-		}
+		// this is not needed since we remove unused platforms from the file system
+//		if (isCopyRuntime()) {
+//			IFolder folder = project.getFolder(C_RUNTIME_FOLDER_NAME);
+//			folder = folder.getFolder("src");
+//			folder = folder.getFolder("platforms");
+//			try {
+//				// exclude from the build if this is a folder and not the selected platform
+//				for (IResource member : folder.members()) {
+//					if (member.getType()==IResource.FOLDER && !member.getName().equals(getPlatform())) {
+//						IPath path = member.getProjectRelativePath();
+//						IFolderInfo folderInfo = buildConfig.createFolderInfo(path);
+//						if (folderInfo!=null) {
+//							folderInfo.setExclude(true);
+//						}
+//					}
+//				}
+//			}
+//			catch (CoreException e) {
+//				e.printStackTrace();
+//			}
+//		}
 	}
 }
