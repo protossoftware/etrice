@@ -50,7 +50,7 @@ void SubSystemClassBase::init() {
 	// RTServices::getInstance().getMsgSvcCtrl().connectAll();
 
 	instantiateActors();
-	std::cout << toStringRecursive() << std::endl;
+//	std::cout << toStringRecursive() << std::endl;
 
 	// initialize all actor instances
 	for (std::vector<IRTObject*>::iterator it = getChildren().begin(); it != getChildren().end(); ++it) {
@@ -87,7 +87,7 @@ void SubSystemClassBase::stop() {
 void SubSystemClassBase::destroy() {
 	std::cout << "*** MainComponent " << this->getInstancePath() << "::destroy ***" << std::endl;
 	RTObject::destroy();
-	std::cout << toStringRecursive() << std::endl;
+//	std::cout << toStringRecursive() << std::endl;
 	std::cout << "=== done destroy actor instances" << std::endl;
 
 	DebuggingService::getInstance().getAsyncLogger().close();
