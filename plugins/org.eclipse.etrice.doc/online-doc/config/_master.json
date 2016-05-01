@@ -35,6 +35,15 @@
 		"name" : "Feature Reference",
 		"url"  : "feature-reference.html"
 	},
+		{
+		"name" : "Dave Integration",
+		"url"  : "Dave-Integration.html"
+	},
+	
+		{
+		"name" : "Resource Requirements",
+		"url"  : "ResourceRequirements.html"
+	},	
 	{
 		"name" : "Developer's Reference",
 		"url"  : "developers-reference.html"
