@@ -15,20 +15,20 @@
 	
 
 <h1><a href="#dave-etrice-toolchain-tutorial" name="dave-etrice-toolchain-tutorial"></a>Dave-eTrice Toolchain Tutorial</h1>
-<h2><a href="#intruduction" name="intruduction"></a>Intruduction</h2>
-<p>As you already know, eTrice is a ROOM-Tool that provides a high level modeling language for embedded systems. It is perfectly suited for event driven, real time systems. However, each embedded SW relies on an underlying HW, with components like digital I/Os, Sensors, ADCs, DACs, PWMs and so on to connect the real world. Therefore some driver SW is required to control all this HW components and to provide easy access for the higher level SW. To develop the HW-drivers as well as your application logic without changing the development environment, you need a tool chain that provides both, driver development and high level application development. For Infineon´s XMC™ ARM Cortex M0/M4 devices special support is provided to combine the Dave™ tool for driver development with eTrice for application development. This tutorials will guide you through the first steps.</p>
+<h2><a href="#introduction" name="introduction"></a>Introduction</h2>
+<p>As you already know, eTrice is a ROOM-Tool that provides a high level modeling language for embedded systems. It is perfectly suited for event driven, real time systems. However, each embedded SW relies on an underlying HW, with components like digital I/Os, Sensors, ADCs, DACs, PWMs and so on to connect the real world. Therefore some driver SW is required to control all this HW components and to provide easy access for the higher level SW. To develop the HW-drivers as well as your application logic without changing the development environment, you need a tool chain that provides both, driver development and high level application development. For Infineon’s XMC™ ARM Cortex M0/M4 devices special support is provided to combine the Dave™ tool for driver development with eTrice for application development. This tutorials will guide you through the first steps.</p>
 <p>The tutorials relies on the XMC4700 Relax Lite Kit. As a precondition you should be familiar with Dave™. It is very easy to adapt the tutorials to any other development board or to your own HW. </p>
 <h2><a href="#getting-started-without-operating-system" name="getting-started-without-operating-system"></a>Getting Started without Operating System</h2>
 <p>Within this tutorial you will perform the following steps:</p>
 <ul>
   <li>create a Dave™ basic model</li>
-  <li>run the <em>New Set of eTrice Models</em> wizzard</li>
+  <li>run the <em>New Set of eTrice Models</em> wizard</li>
   <li>create a simple blinky model</li>
   <li>generate, build and run the application</li>
   <li>optionally extend the blinky state machine and create a button controller to switch blinky on and off</li>
 </ul>
 <h3><a href="#step-1-" name="step-1-"></a>Step 1:</h3>
-<p>As a starting point you should create a Dave™ project for the target HW. Let´s call the project <em>BlinkyTutorial_RelaxKit4700_ST</em>, where <em>ST</em> stands for <em>Single Threaded</em>. The following APPs should be included:</p>
+<p>As a starting point you should create a Dave™ project for the target HW. Let’s call the project <em>BlinkyTutorial_RelaxKit4700_ST</em>, where <em>ST</em> stands for <em>Single Threaded</em>. The following APPs should be included:</p>
 <ul>
   <li>Systimer</li>
   <li>2 * Digital outputs for the two LEDs.</li>
@@ -38,11 +38,11 @@
 <p><img src="images/400-DaveBasicProject.png" alt="image"></p>
 <p>Make sure that the pins are configured correctly. It is a good idea to run it on the real HW to verify that everything is configured correctly.</p>
 <h3><a href="#step-2-" name="step-2-"></a>Step 2:</h3>
-<p>Run the *New Set of new eTrice Models" wizzard.</p>
-<p>Before you can run the wizzard you have to create a folder called <em>model</em>.<br><em>right click on the project -&gt; new -&gt; other</em></p>
+<p>Run the *New Set of new eTrice Models" wizard.</p>
+<p>Before you can run the wizard you have to create a folder called <em>model</em>.<br><em>right click on the project -&gt; new -&gt; other</em></p>
 <p><img src="images/400-DaveCreateFolder.png" alt="image"></p>
 <p>Name the folder <em>model</em></p>
-<p>Run the *New Set of new eTrice Models" wizzard.<br><em>right click on the newly created folder -&gt; new -&gt; other</em><br>Select <em>eTrice/C/New Set of eTrice Models</em></p>
+<p>Run the *New Set of eTrice Models" wizard.<br><em>Right click on the newly created folder -&gt; new -&gt; other</em><br>Select <em>eTrice/C/New Set of eTrice Models</em></p>
 <p><img src="images/400-RunNewModelWizzard.png" alt="image"></p>
 <p>Click <em>Next</em><br>Name the model <em>BlinkyTutorial</em></p>
 <p>Click <em>Next</em><br>Enable the check box <em>Copy C-Runtime into project</em><br>Select <em>ST_XMC_Dave</em> as active platform.<br>Rename main to <em>etStart</em>.</p>
@@ -50,7 +50,7 @@
 <p>Click <em>Finish</em></p>
 <p>The resulting project should look like this:</p>
 <p><img src="images/400-FirstEtriceModel.png" alt="image"></p>
-<p>The following files/folders should be created:</p>
+<p>The following files/folders should have been created:</p>
 <ul>
   <li><em>etrice_c_runtime</em></li>
   <li><em>etrice_c_modellib</em> within the <em>model</em> folder</li>
@@ -201,7 +201,7 @@
     }
 }
 </code></pre>
-<p>The last step is to build up the application containing the actor classes <em>ABlinky</em> and <em>AHWAbstractin</em>.<br>In the outline view right click to <em>application -&gt; Edit Structure</em><br>Add <em>ActorRef</em> blinky of ActorClass <em>ABlinky</em>. The same for the <em>AHWAbstraction</em>.<br>Draw the binding between the ports. The resulting system should look like this:</p>
+<p>The last step is to build up the application containing the actor classes <em>ABlinky</em> and <em>AHWAbstraction</em>.<br>In the outline view right click to <em>application -&gt; Edit Structure</em><br>Add <em>ActorRef</em> blinky of ActorClass <em>ABlinky</em>. The same for the <em>AHWAbstraction</em>.<br>Draw the binding between the ports. The resulting system should look like this:</p>
 <p><img src="images/400-ApplicationABlinkyHW.png" alt="image"></p>
 <p>The resulting representation of the complete model should look like this:</p>
 <pre><code class="room customHighlighted"><span class="keyword">RoomModel</span> BlinkyTutorial {
@@ -313,7 +313,7 @@
 <h3><a href="#step-4-" name="step-4-"></a>Step 4:</h3>
 <p>Generate, build and run the application.</p>
 <p>Generate the application as you did it in step1. Build the generated code and download it to the target as you normally do it.<br>The LED1 should blink in a 300ms interval.</p>
-<p>Congratulations, you have build you first eTrice Application on top of the Dave™ drivers!!!</p>
+<p>Congratulations, you have built you first eTrice Application on top of the Dave™ drivers!!!</p>
 <h3><a href="#step-5-" name="step-5-"></a>Step 5:</h3>
 <p>As further exercise you can extend the model in the following way:</p>
 <ul>
@@ -571,7 +571,7 @@
 <p>To start with an operating system the steps are almost the same.</p>
 <ul>
   <li>create the Dave™ project and add the FreeRTOS APP and all other required components</li>
-  <li>run the "New Set of eTrice models* wizzard and select the appropriate runtime library</li>
+  <li>run the "New Set of eTrice models* wizard and select the appropriate runtime library</li>
   <li>model your application (or make a copy from the <em>ST</em>-Tutorial)</li>
   <li>adapt the thread deployment to your needs</li>
 </ul>
@@ -665,7 +665,7 @@
         <span class="keyword">ActorInstanceMapping</span> appl/button1-&gt;lowPrioThread
     }
 </code></pre>
-<p>We created three logical threads and deloyed the timing service to the <em>highPrioThread</em>, <em>blinky1</em> and <em>button1</em> to the <em>lowPrioThread</em>. All other actors are automatically deployed to the default thread.<br>Please recognize that you deploy actor instances and not actor classes.</p>
+<p>We created three logical threads and deployed the timing service to the <em>highPrioThread</em>, <em>blinky1</em> and <em>button1</em> to the <em>lowPrioThread</em>. All other actors are automatically deployed to the default thread.<br>Please recognize that you deploy actor instances and not actor classes.</p>
 <p>The last step is the mapping of the logical threads to physical threads. Open <em>BlinkyTutorial.etmap</em> and do your mapping:</p>
 <pre><code class="etmap customHighlighted"><span class="keyword">MappingModel</span> BlinkyTutorial {
 	<span class="keyword">import</span> BlinkyTutorial.* <span class="keyword">from</span> <span class="string">"BlinkyTutorial.room"</span>
