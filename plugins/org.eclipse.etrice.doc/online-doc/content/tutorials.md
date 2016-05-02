@@ -141,7 +141,7 @@ which is a good starting point for new ROOM applications.
 Select the menu *File -&gt; New -&gt; Other* (Ctrl+N) and choose *eTrice C++ Template Project*.
 To complete the wizard press *Next* and on the next page *Finish*.
 
-![image](images/013-wizard.png)
+![image](images/013-wizard-cpp.png)
 
 This will add four projects into your workspace:
 
@@ -198,7 +198,7 @@ By typing “quit” on the prompt and pressing enter the application terminates
 
 After termination, we can inspect the behavior of our application. It is recorded in the form of a
 MSC (Message Sequence Chart) and can now be used for debugging or documentation purposes.
-Open *msc.seq* or *subSystemRef_Async.seq* in the folder *log* using the tool Trace2UML
+Open *subSystemRef_Async.seq* in the folder *log* using the tool Trace2UML
 (if the file is not present, try to refresh (F5) the folder *log*).
 
 <span class="label label-info">Note:</span> The Trace2UML (Open Source tool) download links can be found in the Preconditions of [Getting Started](#getting-started-c).

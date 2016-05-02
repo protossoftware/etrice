@@ -1,0 +1,687 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+<title>eTrice Documentation</title>
+
+<link rel="stylesheet" type="text/css" href="css/book.css"/>
+<link rel="stylesheet" type="text/css" href="css/custom-common.css"/>
+
+</head>
+<body>
+
+
+
+	
+
+<h1><a href="#dave-etrice-toolchain-tutorial" name="dave-etrice-toolchain-tutorial"></a>Dave-eTrice Toolchain Tutorial</h1>
+<h2><a href="#intruduction" name="intruduction"></a>Intruduction</h2>
+<p>As you already know, eTrice is a ROOM-Tool that provides a high level modeling language for embedded systems. It is perfectly suited for event driven, real time systems. However, each embedded SW relies on an underlying HW, with components like digital I/Os, Sensors, ADCs, DACs, PWMs and so on to connect the real world. Therefore some driver SW is required to control all this HW components and to provide easy access for the higher level SW. To develop the HW-drivers as well as your application logic without changing the development environment, you need a tool chain that provides both, driver development and high level application development. For Infineon´s XMC™ ARM Cortex M0/M4 devices special support is provided to combine the Dave™ tool for driver development with eTrice for application development. This tutorials will guide you through the first steps.</p>
+<p>The tutorials relies on the XMC4700 Relax Lite Kit. As a precondition you should be familiar with Dave™. It is very easy to adapt the tutorials to any other development board or to your own HW. </p>
+<h2><a href="#getting-started-without-operating-system" name="getting-started-without-operating-system"></a>Getting Started without Operating System</h2>
+<p>Within this tutorial you will perform the following steps:</p>
+<ul>
+  <li>create a Dave™ basic model</li>
+  <li>run the <em>New Set of eTrice Models</em> wizzard</li>
+  <li>create a simple blinky model</li>
+  <li>generate, build and run the application</li>
+  <li>optionally extend the blinky state machine and create a button controller to switch blinky on and off</li>
+</ul>
+<h3><a href="#step-1-" name="step-1-"></a>Step 1:</h3>
+<p>As a starting point you should create a Dave™ project for the target HW. Let´s call the project <em>BlinkyTutorial_RelaxKit4700_ST</em>, where <em>ST</em> stands for <em>Single Threaded</em>. The following APPs should be included:</p>
+<ul>
+  <li>Systimer</li>
+  <li>2 * Digital outputs for the two LEDs.</li>
+  <li>2 * Digital inputs for the buttons.</li>
+</ul>
+<p>The resulting project should look like this:</p>
+<p><img src="images/400-DaveBasicProject.png" alt="image"></p>
+<p>Make sure that the pins are configured correctly. It is a good idea to run it on the real HW to verify that everything is configured correctly.</p>
+<h3><a href="#step-2-" name="step-2-"></a>Step 2:</h3>
+<p>Run the *New Set of new eTrice Models" wizzard.</p>
+<p>Before you can run the wizzard you have to create a folder called <em>model</em>.<br><em>right click on the project -&gt; new -&gt; other</em></p>
+<p><img src="images/400-DaveCreateFolder.png" alt="image"></p>
+<p>Name the folder <em>model</em></p>
+<p>Run the *New Set of new eTrice Models" wizzard.<br><em>right click on the newly created folder -&gt; new -&gt; other</em><br>Select <em>eTrice/C/New Set of eTrice Models</em></p>
+<p><img src="images/400-RunNewModelWizzard.png" alt="image"></p>
+<p>Click <em>Next</em><br>Name the model <em>BlinkyTutorial</em></p>
+<p>Click <em>Next</em><br>Enable the check box <em>Copy C-Runtime into project</em><br>Select <em>ST_XMC_Dave</em> as active platform.<br>Rename main to <em>etStart</em>.</p>
+<p><img src="images/400-SelectRuntime.png" alt="image"></p>
+<p>Click <em>Finish</em></p>
+<p>The resulting project should look like this:</p>
+<p><img src="images/400-FirstEtriceModel.png" alt="image"></p>
+<p>The following files/folders should be created:</p>
+<ul>
+  <li><em>etrice_c_runtime</em></li>
+  <li><em>etrice_c_modellib</em> within the <em>model</em> folder</li>
+  <li><em>BlinkyTutorial.etmap</em></li>
+  <li><em>BlinkyTutorial.etphys</em></li>
+  <li><em>BlinkyTutorial.room</em></li>
+  <li><em>gen_BlinkyTutorial.launch</em></li>
+  <li><em>run_BlinkyTutorial.launch</em></li>
+</ul>
+<p>Now you have successfully created your first eTrice model. To complete the step you should generate C-Code out of the model.<br>Right click on <em>gen_BlinkyTutorial.launch -&gt; Run As -&gt; gen_BlinkyTutorial</em></p>
+<p><img src="images/400-RunGenerator.png" alt="image"></p>
+<p>Make sure that your outline view is activated. <em>Window -&gt; Show View -&gt; Outline</em>.</p>
+<p>Once the code is generated you should build the application. After the first build two additional folders are created:<br>- <em>src-gen</em><br>- <em>src-gen-info</em></p>
+<p>To start the model, you should call etStart from the Dave™ generated main function.</p>
+<p><img src="images/400-DaveMain.png" alt="image"></p>
+<h3><a href="#step-3-" name="step-3-"></a>Step 3:</h3>
+<p>Now everything is arranged to start modeling with eTrice. </p>
+<p>The first step is to import some predefined services. Open the <em>BlinkyTutorial.room</em> and add the two import statements:</p>
+<pre><code class="room customHighlighted"><span class="keyword">RoomModel</span> BlinkyTutorial {
+
+    <span class="keyword">import</span> room.basic.types.* <span class="keyword">from</span> <span class="string">"etrice_c_modellib/Types.room"</span>
+
+    <span class="keyword">import</span> room.basic.service.timing.* <span class="keyword">from</span> <span class="string">"etrice_c_modellib/TimingService.room"</span>
+
+    <span class="keyword">LogicalSystem</span> BlinkyTutorial {
+        <span class="keyword">SubSystemRef</span> main: MainSubSystem
+    }
+</code></pre>
+<p>In the outline view right click the SubSystem and opne the structure editor:</p>
+<p><img src="images/400-OpenStructureEditorSubsystem.png" alt="image"></p>
+<p>Drag and Drop an <em>ActorRef</em> into the subsystem.</p>
+<p><img src="images/400-AddActorRefDragAndDrop.png" alt="image"></p>
+<p>Select the ActorClass <em>ATimingService</em> and name the reference <em>timing</em>.</p>
+<p>Draw a connection from <em>application</em> to <em>timing</em>.</p>
+<p><img src="images/400-SubSystemWithTimingService.png" alt="image"></p>
+<p>Open <em>BlinkyTutorial.room</em> and create a new Actor called AHWAbstraction by adding the following text:</p>
+<pre><code class="room customHighlighted"><span class="keyword">ActorClass</span> AHWAbstraction {
+    <span class="keyword">Structure</span> {
+        <span class="keyword">usercode1</span> {
+            <span class="string">"#include \"</span>Dave.h\<span class="string">""</span>
+        }
+    }
+}
+</code></pre>
+<p>Check the outline view to verify that the actor was created.</p>
+<p>Create a new protocol class by adding the following:</p>
+<pre><code class="room customHighlighted"><span class="keyword">ProtocolClass</span> POnOff {
+    <span class="keyword">incoming</span> {
+        <span class="keyword">Message</span> on()
+        <span class="keyword">Message</span> off()
+    }
+    <span class="keyword">outgoing</span> { }
+}
+</code></pre>
+<p>Check the outline view to see that the protocol was created.</p>
+<p>In the outline view right click on <em>AHWAbstraction -&gt; Edit Structure</em> to open the structure editor of the actor. </p>
+<p><img src="images/400-OpenStructureEditor.png" alt="image"></p>
+<p>Within the structure editor create a new <em>Interface Port</em></p>
+<p><img src="images/400-CreateInterfacePort.png" alt="image"></p>
+<p>Name the port <em>LED1</em>, the port must be from the newly created protocol type <em>POnOff</em>.</p>
+<p><img src="images/400-NewInterfacePort.png" alt="image"></p>
+<p>Create the state machine of the <em>AHWAbstraction</em> actor:<br>Inside the structure editor, right click on the actor.<br>Select <em>Open Class Behavior</em></p>
+<p><img src="images/400-OpenClassBehaviour.png" alt="image"></p>
+<p>The resulting FSM should look like this:</p>
+<p><img src="images/400-HWActorFSM.png" alt="image"></p>
+<p>It is just one state with two transitions. Each transition carries one action to switch a digital IO. Here we have the interface to the Dave™ generated code. The transitions will be triggered from the <em>POnOff</em> protocol.</p>
+<p>The resulting textual representation should look like this:</p>
+<pre><code class="room customHighlighted"><span class="keyword">ActorClass</span> AHWAbstraction {
+    <span class="keyword">Interface</span> {
+        <span class="keyword">Port</span> LED1: POnOff
+    }
+    <span class="keyword">Structure</span> {
+        <span class="keyword">usercode1</span> {
+            <span class="string">"#include \"</span>Dave.h\<span class="string">""</span>
+        }
+        <span class="keyword">external</span> <span class="keyword">Port</span> LED1
+    }
+    <span class="keyword">Behavior</span> {
+        <span class="keyword">StateMachine</span> {
+            <span class="keyword">State</span> state0
+            <span class="keyword">Transition</span> init: <span class="keyword">initial</span> -&gt; state0
+            <span class="keyword">Transition</span> tr0: state0 -&gt; state0 {
+                <span class="keyword">triggers</span> {
+                    &lt;on: LED1&gt;
+                }
+                <span class="keyword">action</span> {
+                    <span class="string">"DIGITAL_IO_SetOutputHigh(&amp;LED1_P5_9);"</span>
+                }
+            }
+            <span class="keyword">Transition</span> tr1: state0 -&gt; state0 {
+                <span class="keyword">triggers</span> {
+                    &lt;off: LED1&gt;
+                }
+                <span class="keyword">action</span> {
+                    <span class="string">"DIGITAL_IO_SetOutputLow(&amp;LED1_P5_9);"</span>
+                }
+            }
+        }
+    }
+}
+</code></pre>
+<p>Now create an ActorClass called <em>ABlinky</em> by adding the following text:</p>
+<pre><code class="room customHighlighted"><span class="keyword">ActorClass</span> ABlinky {
+    <span class="keyword">Structure</span> {
+        <span class="keyword">SAP</span> timer: PTimer
+    }
+}
+</code></pre>
+<p>Recognize that the structure contains a Service Access Point (SAP) which allows you to use the timing service.</p>
+<p>Now, add an additional interface port called <em>out</em> as you did it before and make it a <em>conjugated</em> port. Create the following state machine:</p>
+<p><img src="images/400-BlinkyFSM.png" alt="image"></p>
+<p>On the initial transition the timer will be started. On the transitions between the states a message <em>on</em> or <em>off</em> will be sent via the <em>out</em> port.</p>
+<p>The resulting textual representation looks like this:</p>
+<pre><code class="room customHighlighted"><span class="keyword">ActorClass</span> ABlinky {
+    <span class="keyword">Interface</span> {
+        <span class="keyword">conjugated</span> <span class="keyword">Port</span> ^out: POnOff
+    }
+    <span class="keyword">Structure</span> {
+        <span class="keyword">SAP</span> timer: PTimer
+        <span class="keyword">external</span> <span class="keyword">Port</span> ^<span class="keyword">out</span>
+    }
+    <span class="keyword">Behavior</span> {
+        <span class="keyword">StateMachine</span> {
+            <span class="keyword">State</span> state0
+            <span class="keyword">State</span> state1
+            <span class="keyword">Transition</span> init: <span class="keyword">initial</span> -&gt; state0 {
+                <span class="keyword">action</span> {
+                    <span class="string">"timer.startTimer(300);"</span>
+                }
+            }
+            <span class="keyword">Transition</span> tr0: state0 -&gt; state1 {
+                <span class="keyword">triggers</span> {
+                    &lt;timeout: timer&gt;
+                }
+                <span class="keyword">action</span> {
+                    <span class="string">"out.on();"</span>
+                }
+            }
+            <span class="keyword">Transition</span> tr1: state1 -&gt; state0 {
+                <span class="keyword">triggers</span> {
+                    &lt;timeout: timer&gt;
+                }
+                <span class="keyword">action</span> {
+                    <span class="string">"out.off();"</span>
+                }
+            }
+        }
+    }
+}
+</code></pre>
+<p>The last step is to build up the application containing the actor classes <em>ABlinky</em> and <em>AHWAbstractin</em>.<br>In the outline view right click to <em>application -&gt; Edit Structure</em><br>Add <em>ActorRef</em> blinky of ActorClass <em>ABlinky</em>. The same for the <em>AHWAbstraction</em>.<br>Draw the binding between the ports. The resulting system should look like this:</p>
+<p><img src="images/400-ApplicationABlinkyHW.png" alt="image"></p>
+<p>The resulting representation of the complete model should look like this:</p>
+<pre><code class="room customHighlighted"><span class="keyword">RoomModel</span> BlinkyTutorial {
+
+    <span class="keyword">import</span> room.basic.types.* <span class="keyword">from</span> <span class="string">"etrice_c_modellib/Types.room"</span>
+
+    <span class="keyword">import</span> room.basic.service.timing.* <span class="keyword">from</span> <span class="string">"etrice_c_modellib/TimingService.room"</span>
+
+    <span class="keyword">LogicalSystem</span> BlinkyTutorial {
+        <span class="keyword">SubSystemRef</span> main: MainSubSystem
+    }
+
+    <span class="keyword">SubSystemClass</span> MainSubSystem {
+        <span class="keyword">ActorRef</span> appl: Application
+        <span class="keyword">LogicalThread</span> defaultThread
+        <span class="keyword">LayerConnection</span> <span class="keyword">ref</span> appl <span class="keyword">satisfied_by</span> timing.timer
+        <span class="keyword">ActorRef</span> timing: ATimingService
+    }
+
+    <span class="keyword">ActorClass</span> ABlinky {
+        <span class="keyword">Interface</span> {
+            <span class="keyword">conjugated</span> <span class="keyword">Port</span> ^out: POnOff
+        }
+        <span class="keyword">Structure</span> {
+            <span class="keyword">SAP</span> timer: PTimer
+            <span class="keyword">external</span> <span class="keyword">Port</span> ^<span class="keyword">out</span>
+        }
+        <span class="keyword">Behavior</span> {
+            <span class="keyword">StateMachine</span> {
+                <span class="keyword">State</span> state0
+                <span class="keyword">State</span> state1
+                <span class="keyword">Transition</span> init: <span class="keyword">initial</span> -&gt; state0 {
+                    <span class="keyword">action</span> {
+                        <span class="string">"timer.startTimer(300);"</span>
+                    }
+                }
+                <span class="keyword">Transition</span> tr0: state0 -&gt; state1 {
+                    <span class="keyword">triggers</span> {
+                        &lt;timeout: timer&gt;
+                    }
+                    <span class="keyword">action</span> {
+                        <span class="string">"out.on();"</span>
+                    }
+                }
+                <span class="keyword">Transition</span> tr1: state1 -&gt; state0 {
+                    <span class="keyword">triggers</span> {
+                        &lt;timeout: timer&gt;
+                    }
+                    <span class="keyword">action</span> {
+                        <span class="string">"out.off();"</span>
+                    }
+                }
+            }
+        }
+    }
+
+    <span class="keyword">ActorClass</span> AHWAbstraction {
+        <span class="keyword">Interface</span> {
+            <span class="keyword">Port</span> LED1: POnOff
+        }
+        <span class="keyword">Structure</span> {
+            <span class="keyword">usercode1</span> {
+                <span class="string">"#include \"</span>Dave.h\<span class="string">""</span>
+            }
+            <span class="keyword">external</span> <span class="keyword">Port</span> LED1
+        }
+        <span class="keyword">Behavior</span> {
+            <span class="keyword">StateMachine</span> {
+                <span class="keyword">State</span> state0
+                <span class="keyword">Transition</span> init: <span class="keyword">initial</span> -&gt; state0
+                <span class="keyword">Transition</span> tr0: state0 -&gt; state0 {
+                    <span class="keyword">triggers</span> {
+                        &lt;on: LED1&gt;
+                    }
+                    <span class="keyword">action</span> {
+                        <span class="string">"DIGITAL_IO_SetOutputHigh(&amp;LED1_P5_9);"</span>
+                    }
+                }
+                <span class="keyword">Transition</span> tr1: state0 -&gt; state0 {
+                    <span class="keyword">triggers</span> {
+                        &lt;off: LED1&gt;
+                    }
+                    <span class="keyword">action</span> {
+                        <span class="string">"DIGITAL_IO_SetOutputLow(&amp;LED1_P5_9);"</span>
+                    }
+                }
+            }
+        }
+    }
+
+    <span class="keyword">ProtocolClass</span> POnOff {
+        <span class="keyword">incoming</span> {
+            <span class="keyword">Message</span> on()
+            <span class="keyword">Message</span> off()
+        }
+        <span class="keyword">outgoing</span> { }
+    }
+
+    <span class="keyword">ActorClass</span> Application {
+        <span class="keyword">Structure</span> {
+            <span class="keyword">ActorRef</span> hw: AHWAbstraction
+            <span class="keyword">ActorRef</span> blinky: ABlinky
+            <span class="keyword">Binding</span> blinky.^<span class="keyword">out</span> <span class="keyword">and</span> hw.LED1
+        }
+    }
+}
+</code></pre>
+<p>The model is finished know.<br>If you missed some steps in between, you also can copy the complete model to your .room file.</p>
+<h3><a href="#step-4-" name="step-4-"></a>Step 4:</h3>
+<p>Generate, build and run the application.</p>
+<p>Generate the application as you did it in step1. Build the generated code and download it to the target as you normally do it.<br>The LED1 should blink in a 300ms interval.</p>
+<p>Congratulations, you have build you first eTrice Application on top of the Dave™ drivers!!!</p>
+<h3><a href="#step-5-" name="step-5-"></a>Step 5:</h3>
+<p>As further exercise you can extend the model in the following way:</p>
+<ul>
+  <li>add a control port to <em>ABlinky</em> from type <em>POnOff</em></li>
+  <li>extend the behavior so that you can switch off and on the blink light</li>
+  <li>create a button controller, that recognizes button presses</li>
+  <li>do it for both buttons and LEDs</li>
+  <li>put everything together to create the complete application</li>
+</ul>
+<p>There are many solutions. Here is one of the possible solutions:</p>
+<p><img src="images/400-DualBlinkyStruct.png" alt="image"></p>
+<p>and the complete textual model:</p>
+<pre><code class="room customHighlighted"><span class="keyword">RoomModel</span> BlinkyTutorial {
+
+    <span class="keyword">import</span> room.basic.types.* <span class="keyword">from</span> <span class="string">"etrice_c_modellib/Types.room"</span>
+
+    <span class="keyword">import</span> room.basic.service.timing.* <span class="keyword">from</span> <span class="string">"etrice_c_modellib/TimingService.room"</span>
+
+    <span class="keyword">LogicalSystem</span> BlinkyTutorial {
+        <span class="keyword">SubSystemRef</span> main: MainSubSystem
+    }
+
+    <span class="keyword">SubSystemClass</span> MainSubSystem {
+        <span class="keyword">ActorRef</span> appl: Application
+        <span class="keyword">LogicalThread</span> defaultThread
+        <span class="keyword">LayerConnection</span> <span class="keyword">ref</span> appl <span class="keyword">satisfied_by</span> timing.timer
+        <span class="keyword">ActorRef</span> timing: ATimingService
+    }
+
+    <span class="keyword">ActorClass</span> ABlinky {
+        <span class="keyword">Interface</span> {
+            <span class="keyword">conjugated</span> <span class="keyword">Port</span> ^out: POnOff
+            <span class="keyword">Port</span> ctrl: POnOff
+        }
+        <span class="keyword">Structure</span> {
+            <span class="keyword">SAP</span> timer: PTimer
+            <span class="keyword">external</span> <span class="keyword">Port</span> ^<span class="keyword">out</span>
+        <span class="keyword">external</span> <span class="keyword">Port</span> ctrl
+        }
+        <span class="keyword">Behavior</span> {
+            <span class="keyword">StateMachine</span> {
+                <span class="keyword">State</span> off
+                
+                <span class="keyword">State</span> blinking {
+                    <span class="keyword">subgraph</span> {
+                        <span class="keyword">State</span> on {
+                            <span class="keyword">entry</span> {
+                                <span class="string">"out.on();"</span>
+                            }
+                        }
+                        <span class="keyword">State</span> off {
+                            <span class="keyword">entry</span> {
+                                <span class="string">"out.off();"</span>
+                            }
+                        }
+                        <span class="keyword">EntryPoint</span> tp0
+                        <span class="keyword">Transition</span> tr0: on -&gt; off {
+                            <span class="keyword">triggers</span> {
+                                &lt;timeout: timer&gt;
+                            }
+                        }
+                        <span class="keyword">Transition</span> tr1: off -&gt; on {
+                            <span class="keyword">triggers</span> {
+                                &lt;timeout: timer&gt;
+                            }
+                        }
+                        <span class="keyword">Transition</span> tr2: <span class="keyword">my</span> tp0 -&gt; on {
+                            <span class="keyword">action</span> {
+                                <span class="string">"timer.startTimer(300);"</span>
+                            }
+                        }
+                    }
+                }
+                <span class="keyword">Transition</span> init: <span class="keyword">initial</span> -&gt; off {
+                    }
+                
+                <span class="keyword">Transition</span> tr0: off -&gt; tp0 <span class="keyword">of</span> blinking {
+                    <span class="keyword">triggers</span> {
+                        &lt;on: ctrl&gt;
+                    }
+                }
+            <span class="keyword">Transition</span> tr1: blinking -&gt; off {
+                    <span class="keyword">triggers</span> {
+                        &lt;off: ctrl&gt;
+                    }
+                    <span class="keyword">action</span> {
+                        <span class="string">"timer.kill();"</span>
+                        <span class="string">"out.off();"</span>
+                    }
+                }
+            }
+        }
+    }
+
+    <span class="keyword">ActorClass</span> AHWAbstraction {
+        <span class="keyword">Interface</span> {
+            <span class="keyword">Port</span> LED1: POnOff
+            <span class="keyword">Port</span> LED2: POnOff
+            <span class="keyword">conjugated</span> <span class="keyword">Port</span> BUTTON1: POnOff
+            <span class="keyword">conjugated</span> <span class="keyword">Port</span> BUTTON2: POnOff
+        }
+        <span class="keyword">Structure</span> {
+            <span class="keyword">usercode1</span> {
+                <span class="string">"#include \"</span>Dave.h\<span class="string">""</span>
+            }
+            <span class="keyword">SAP</span> timer: PTimer
+            <span class="keyword">external</span> <span class="keyword">Port</span> LED1
+            <span class="keyword">external</span> <span class="keyword">Port</span> LED2
+            <span class="keyword">external</span> <span class="keyword">Port</span> BUTTON1
+            <span class="keyword">external</span> <span class="keyword">Port</span> BUTTON2
+            <span class="keyword">Attribute</span> b1Status: int8
+            <span class="keyword">Attribute</span> b2Status: int8
+        }
+        <span class="keyword">Behavior</span> {
+            <span class="keyword">StateMachine</span> {
+                <span class="keyword">State</span> state0
+                <span class="keyword">Transition</span> init: <span class="keyword">initial</span> -&gt; state0 {
+                    <span class="keyword">action</span> {
+                        <span class="string">"timer.startTimer(50);"</span>
+                    }
+                }
+                <span class="keyword">Transition</span> tr0: state0 -&gt; state0 {
+                    <span class="keyword">triggers</span> {
+                        &lt;on: LED1&gt;
+                    }
+                    <span class="keyword">action</span> {
+                        <span class="string">"DIGITAL_IO_SetOutputHigh(&amp;LED1_P5_9);"</span>
+                    }
+                }
+                <span class="keyword">Transition</span> tr1: state0 -&gt; state0 {
+                    <span class="keyword">triggers</span> {
+                        &lt;off: LED1&gt;
+                    }
+                    <span class="keyword">action</span> {
+                        <span class="string">"DIGITAL_IO_SetOutputLow(&amp;LED1_P5_9);"</span>
+                    }
+                }
+                <span class="keyword">Transition</span> tr2: state0 -&gt; state0 {
+                    <span class="keyword">triggers</span> {
+                        &lt;on: LED2&gt;
+                    }
+                    <span class="keyword">action</span> {
+                        <span class="string">"DIGITAL_IO_SetOutputHigh(&amp;LED2_P5_8);"</span>
+                    }
+                }
+                <span class="keyword">Transition</span> tr3: state0 -&gt; state0 {
+                    <span class="keyword">triggers</span> {
+                        &lt;off: LED2&gt;
+                    }
+                    <span class="keyword">action</span> {
+                        <span class="string">"DIGITAL_IO_SetOutputLow(&amp;LED2_P5_8);"</span>
+                    }
+                }
+                <span class="keyword">Transition</span> tr4: state0 -&gt; state0 {
+                    <span class="keyword">triggers</span> {
+                        &lt;timeout: timer&gt;
+                    }
+                    <span class="keyword">action</span> 
+                {
+                        <span class="string">"if (DIGITAL_IO_GetInput(&amp;BUTTON1_P15_13) == 0){"</span>
+                        <span class="string">"  if (b1Status == 0){"</span>
+                        <span class="string">"\t// input changed"</span>
+                        <span class="string">"\tb1Status = 1;"</span>
+                        <span class="string">"\tBUTTON1.on();"</span>
+                        <span class="string">"  }"</span>
+                        <span class="string">"}"</span>
+                        <span class="string">"else{"</span>
+                        <span class="string">"  if (b1Status == 1){"</span>
+                        <span class="string">"\t// input changed"</span>
+                        <span class="string">"\tb1Status = 0;"</span>
+                        <span class="string">"\tBUTTON1.off();"</span>
+                        <span class="string">"  }"</span>
+                        <span class="string">"}"</span>
+                        <span class="string">""</span>
+                        <span class="string">"if (DIGITAL_IO_GetInput(&amp;BUTTON2_P15_12) == 0){"</span>
+                        <span class="string">"  if (b2Status == 0){"</span>
+                        <span class="string">"\t// input changed"</span>
+                        <span class="string">"\tb2Status = 1;"</span>
+                        <span class="string">"\tBUTTON2.on();"</span>
+                        <span class="string">"  }"</span>
+                        <span class="string">"}"</span>
+                        <span class="string">"else{"</span>
+                        <span class="string">"  if (b2Status == 1){"</span>
+                        <span class="string">"\t// input changed"</span>
+                        <span class="string">"\tb2Status = 0;"</span>
+                        <span class="string">"\tBUTTON2.off();"</span>
+                        <span class="string">"  }"</span>
+                        <span class="string">"}"</span>
+                    }
+                }
+            }
+        }
+    }
+
+    <span class="keyword">ProtocolClass</span> POnOff {
+        <span class="keyword">incoming</span> {
+            <span class="keyword">Message</span> on()
+            <span class="keyword">Message</span> off()
+        }
+        <span class="keyword">outgoing</span> { }
+    }
+    <span class="keyword">ActorClass</span> AButtonController {
+        <span class="keyword">Interface</span> {
+            <span class="keyword">Port</span> ctrl: POnOff
+            <span class="keyword">conjugated</span> <span class="keyword">Port</span> ^out: POnOff
+        }
+        <span class="keyword">Structure</span> {
+            <span class="keyword">external</span> <span class="keyword">Port</span> ctrl
+            <span class="keyword">external</span> <span class="keyword">Port</span> ^<span class="keyword">out</span>
+        }
+    <span class="keyword">Behavior</span> {
+            <span class="keyword">StateMachine</span> {
+                <span class="keyword">State</span> off
+                <span class="keyword">State</span> on
+                <span class="keyword">Transition</span> init: <span class="keyword">initial</span> -&gt; off
+                <span class="keyword">Transition</span> tr0: off -&gt; on {
+                    <span class="keyword">triggers</span> {
+                        &lt;on: ctrl&gt;
+                    }
+                    <span class="keyword">action</span> {
+                        <span class="string">"out.on();"</span>
+                    }
+                }
+                <span class="keyword">Transition</span> tr1: on -&gt; off {
+                    <span class="keyword">triggers</span> {
+                        &lt;on: ctrl&gt;
+                    }
+                    <span class="keyword">action</span> {
+                        <span class="string">"out.off();"</span>
+                    }
+                }
+            }
+        }
+    }
+    <span class="keyword">ActorClass</span> Application {
+        <span class="keyword">Structure</span> {
+            <span class="keyword">ActorRef</span> hw: AHWAbstraction
+            <span class="keyword">ActorRef</span> blinky1: ABlinky
+            <span class="keyword">Binding</span> blinky1.^<span class="keyword">out</span> <span class="keyword">and</span> hw.LED1
+        <span class="keyword">Binding</span> blinky2.^<span class="keyword">out</span> <span class="keyword">and</span> hw.LED2
+            <span class="keyword">ActorRef</span> blinky2: ABlinky
+        <span class="keyword">Binding</span> hw.BUTTON1 <span class="keyword">and</span> button1.ctrl
+            <span class="keyword">Binding</span> button2.ctrl <span class="keyword">and</span> hw.BUTTON2
+            <span class="keyword">Binding</span> button2.^<span class="keyword">out</span> <span class="keyword">and</span> blinky2.ctrl
+            <span class="keyword">Binding</span> blinky1.ctrl <span class="keyword">and</span> button1.^<span class="keyword">out</span>
+            <span class="keyword">ActorRef</span> button1: AButtonController
+            <span class="keyword">ActorRef</span> button2: AButtonController
+        }
+    }
+
+}
+</code></pre>
+<p>In the tutorial we used the Systimer APP as timing base for the model. It is also possible to run the model without the Systimer APP. Please open <em>etrice-c-runtime/src/platforms/ST_XMC_Dave/etPlatform.h</em>. To work without Systimer APP you just need to undef <em>ET_USE_DAVE_SYSTIMER_APP</em>. In this case you have to remove the Systimer APP from the Dave™ model.</p>
+<h2><a href="#getting-started-with-freertos" name="getting-started-with-freertos"></a>Getting Started with FreeRTOS</h2>
+<p>To start with an operating system the steps are almost the same.</p>
+<ul>
+  <li>create the Dave™ project and add the FreeRTOS APP and all other required components</li>
+  <li>run the "New Set of eTrice models* wizzard and select the appropriate runtime library</li>
+  <li>model your application (or make a copy from the <em>ST</em>-Tutorial)</li>
+  <li>adapt the thread deployment to your needs</li>
+</ul>
+<h3><a href="#step-1-" name="step-1-"></a>Step 1:</h3>
+<p>Create the Dave™ project and add the necessary components. For the <em>BlinkyTutorial</em> we need again two LEDs, two buttons and the FreeRTOS APP.</p>
+<p><img src="images/500-DaveProjectFreeRTOS.png" alt="image"></p>
+<p>Configure the FreeRTOS APP. Set the Tick rate to 1000.<br><img src="images/500-FreeRtosConfig1.png" alt="image"></p>
+<p>Increase the heap size to 8192 bytes and enable <em>Use tick hook</em><br><img src="images/500-FreeRtosConfig2.png" alt="image"></p>
+<p>Start the Dave™ code generator, compile and debug the application. Make sure that the Dave™ settings are complete. </p>
+<h3><a href="#step-2-" name="step-2-"></a>Step 2:</h3>
+<p>Create a new folder called <em>model</em>, right click on the folder <em>New -&gt; Other</em> select <em>Other/eTrice/C/New Set of eTrice Models</em></p>
+<p>Name the model <em>BlinkyTutorial</em>, enable <em>Copy C-runtime into project</em>, select <em>MT_XMC_Dave_FreeRTOS</em> and rename main to <em>etStart</em>.</p>
+<p><img src="images/500-NewModelWizzardFreeRTOS.png" alt="image"></p>
+<p>Click <em>Finish</em></p>
+<p>Run the code generator as you did it in the ST-Tutorial. Compile your project.</p>
+<p>Open <em>main.c</em> and call <em>etStart</em> as you did it in the ST-Tutorial.</p>
+<h3><a href="#step-3-" name="step-3-"></a>Step 3:</h3>
+<p>From now on you can create your model or you can copy the <em>BlinkyTutorial.room</em> file from the ST-Tutorial to the new project.</p>
+<p>Generate the code, compile and debug.</p>
+<h3><a href="#step-4-" name="step-4-"></a>Step 4:</h3>
+<p>In the ST-Tutorial you have created an application that runs without operating system. That means, everything runs in a single main loop. Now we have an underlying preemtive operating system and we can deploy SW-Components to different threads. With eTrice 3 simple steps are necessary:</p>
+<ul>
+  <li>create physical threads</li>
+  <li>create logical threads and map actors to logical threads</li>
+  <li>map logical threads to physical threads</li>
+</ul>
+<p>Physical thread creation must be done in <em>BlinkyTutorial.etphys</em>. Open the file, create 2 additional physical threads:</p>
+<pre><code class="etphys customHighlighted"><span class="keyword">PhysicalModel</span> BlinkyTutorial {
+
+    <span class="keyword">PhysicalSystem</span> PhysSys1 {
+        <span class="keyword">NodeRef</span> nodeRef1 : NodeClass1
+    }
+
+    <span class="keyword">NodeClass</span> NodeClass1 {
+        <span class="keyword">runtime</span> = RuntimeClass1
+        <span class="keyword">priomin</span> = -10
+        <span class="keyword">priomax</span> = 10
+        <span class="keyword">DefaultThread</span> PhysicalThread1 {
+            <span class="keyword">execmode</span> = <span class="keyword">mixed</span>
+            <span class="keyword">interval</span> = 100ms
+            <span class="keyword">prio</span> = 2
+            <span class="keyword">stacksize</span> = 128
+            <span class="keyword">msgblocksize</span> = 32
+            <span class="keyword">msgpoolsize</span> = 10
+        }
+        <span class="keyword">Thread</span> HighPrioThread {
+            <span class="keyword">execmode</span> = <span class="keyword">mixed</span>
+            <span class="keyword">interval</span> = 10ms
+            <span class="keyword">prio</span> = 3
+            <span class="keyword">stacksize</span> = 128
+            <span class="keyword">msgblocksize</span> = 32
+            <span class="keyword">msgpoolsize</span> = 10
+        }
+        
+        <span class="keyword">Thread</span> LowPrioThread {
+            <span class="keyword">execmode</span> = <span class="keyword">mixed</span>
+            <span class="keyword">interval</span> = 200ms
+            <span class="keyword">prio</span> = 3
+            <span class="keyword">stacksize</span> = 128
+            <span class="keyword">msgblocksize</span> = 32
+            <span class="keyword">msgpoolsize</span> = 10
+        }
+    }
+
+    <span class="keyword">RuntimeClass</span> RuntimeClass1 {
+        <span class="keyword">model</span> = <span class="keyword">multiThreaded</span>
+    }
+}
+</code></pre>
+<p>Adapt priorities and stack sizes to your needs. Keep in mind to reserve memory in the FREERTOS APP configuration.</p>
+<p>Logical thread creation must be done in the logical model <em>BlinkyTutorial.room</em>. Open the file and add two threads and map actor instances to the newly created threads.</p>
+<pre><code class="room customHighlighted"><span class="keyword">RoomModel</span> BlinkyTutorial {
+
+    <span class="keyword">import</span> room.basic.types.* <span class="keyword">from</span> <span class="string">"etrice_c_modellib/Types.room"</span>
+
+    <span class="keyword">import</span> room.basic.service.timing.* <span class="keyword">from</span> <span class="string">"etrice_c_modellib/TimingService.room"</span>
+
+    <span class="keyword">LogicalSystem</span> BlinkyTutorial {
+        <span class="keyword">SubSystemRef</span> main: MainSubSystem
+    }
+
+    <span class="keyword">SubSystemClass</span> MainSubSystem {
+        <span class="keyword">ActorRef</span> appl: Application
+        <span class="keyword">LogicalThread</span> defaultThread
+        <span class="keyword">LogicalThread</span> highPrioThread
+        <span class="keyword">LogicalThread</span> lowPrioThread
+        <span class="keyword">LayerConnection</span> <span class="keyword">ref</span> appl <span class="keyword">satisfied_by</span> timing.timer
+        <span class="keyword">ActorRef</span> timing: ATimingService
+        <span class="keyword">ActorInstanceMapping</span> timing -&gt; highPrioThread
+        <span class="keyword">ActorInstanceMapping</span> appl/blinky1-&gt;lowPrioThread
+        <span class="keyword">ActorInstanceMapping</span> appl/button1-&gt;lowPrioThread
+    }
+</code></pre>
+<p>We created three logical threads and deloyed the timing service to the <em>highPrioThread</em>, <em>blinky1</em> and <em>button1</em> to the <em>lowPrioThread</em>. All other actors are automatically deployed to the default thread.<br>Please recognize that you deploy actor instances and not actor classes.</p>
+<p>The last step is the mapping of the logical threads to physical threads. Open <em>BlinkyTutorial.etmap</em> and do your mapping:</p>
+<pre><code class="etmap customHighlighted"><span class="keyword">MappingModel</span> BlinkyTutorial {
+	<span class="keyword">import</span> BlinkyTutorial.* <span class="keyword">from</span> <span class="string">"BlinkyTutorial.room"</span>
+	<span class="keyword">import</span> BlinkyTutorial.* <span class="keyword">from</span> <span class="string">"BlinkyTutorial.etphys"</span>
+	<span class="keyword">Mapping</span> BlinkyTutorial -&gt; PhysSys1 {
+		<span class="keyword">SubSystemMapping</span> main -&gt; nodeRef1 {
+			<span class="keyword">ThreadMapping</span> defaultThread -&gt; PhysicalThread1
+			<span class="keyword">ThreadMapping</span> highPrioThread -&gt; HighPrioThread
+			<span class="keyword">ThreadMapping</span> lowPrioThread -&gt; LowPrioThread
+		}
+	}
+}
+</code></pre>
+<p>Generate your code, compile and debug the application.<br>Have fun.</p>
+
+</body>
+</html>
+
+
