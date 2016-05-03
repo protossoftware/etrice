@@ -56,24 +56,19 @@ static void TestEtTimer_lifecycle (etInt16 id) {
 	timerIsInvalidated = false;
 
 	getTimeFromTarget(&startTime);
-	printf("TestEtTimer_lifecycle: start timer\n"); fflush(stdout); // TODO: remove debug output
 	etTimer_start(&timer1);
 	etSema_waitForWakeup(&GlobalSema); /* wait until callback function releases timer the first time (fires immediately) */
-	printf("TestEtTimer_lifecycle: wait again\n"); fflush(stdout); // TODO: remove debug output
 	etSema_waitForWakeup(&GlobalSema); /* wait until callback function releases timer the second time (fires after first interval)*/
 	timerIsInvalidated = true;
 	etTimer_stop(&timer1);
 	getTimeFromTarget(&endTime);
 
-	printf("TestEtTimer_lifecycle: timer stopped\n"); fflush(stdout); // TODO: remove debug output
 
 	{
 		etInt32 elapsed = etTimeHelpers_convertToMSec(&endTime) - etTimeHelpers_convertToMSec(&startTime);
 		char buffer[64];
-		sprintf(buffer, "elapsed time %d expected to be in [2100, 2200]", (int)elapsed);
 		EXPECT_TRUE(id, buffer, (elapsed >= 2100) && (elapsed <= 2200));
 
-		printf("TestEtTimer_lifecycle: elapsed %d\n", (int)elapsed); fflush(stdout); // TODO: remove debug output
 	}
 
 	/* release resources */
@@ -98,17 +93,12 @@ static void TestEtTimer_multiTimer (etInt16 id) {
 	interval.nSec = 50000000; /* = 50 milliseconds */
 	etTimer_construct(&timer2, &interval, TestEtTimer_TimerCallback2, NULL);
 
-	printf("TestEtTimer_multiTimer: start timer1\n"); fflush(stdout); // TODO: remove debug output
 	etTimer_start(&timer1);
-	printf("TestEtTimer_multiTimer: start timer2\n"); fflush(stdout); // TODO: remove debug output
 	etTimer_start(&timer2);
 
-	printf("TestEtTimer_multiTimer: wait for timer (sema %p, thread %ld)\n", (void*)&GlobalSema, etThread_self_id()); fflush(stdout); // TODO: remove debug output
 	etSema_waitForWakeup(&GlobalSema); /* wait until callback function releases timer the first time (fires immediately) */
-	printf("TestEtTimer_multiTimer: wait again for timer (thread %ld)\n", etThread_self_id()); fflush(stdout); // TODO: remove debug output
 	etSema_waitForWakeup(&GlobalSema); /* wait until callback function releases timer the second time (fires after first interval)*/
 
-	printf("TestEtTimer_multiTimer: stop timers %ld\n", etThread_self_id()); fflush(stdout); // TODO: remove debug output
 
 	//sleep(10);
 
@@ -116,7 +106,6 @@ static void TestEtTimer_multiTimer (etInt16 id) {
 	etTimer_stop(&timer2);
 	etTimer_stop(&timer1);
 
-	printf("TestEtTimer_multiTimer: counter %d\n", (int)counter); fflush(stdout); // TODO: remove debug output
 
 	EXPECT_TRUE(id, "counter wrong", (counter > 25) && (counter < 45));
 	etTimer_destruct(&timer2);
