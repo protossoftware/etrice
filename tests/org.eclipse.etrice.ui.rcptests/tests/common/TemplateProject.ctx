@@ -6,7 +6,7 @@ Element-Type: context
 Element-Version: 2.0
 Id: _clrEQFGbEeWk3rbvuPRQHg
 Runtime-Version: 2.0.0.201506120617
-Save-Time: 10/9/15 6:09 PM
+Save-Time: 5/5/16 12:04 PM
 
 ------=_.ecl.context-718f04b4-ed39-33e3-af62-0995e4561998
 Content-Type: text/ecl
@@ -15,10 +15,10 @@ Entry-Name: .ecl.context
 proc createTemplateProject {
 	get-menu "File/New/Other..." | click
 	with [get-window New] {
-		get-editbox -after [get-label "Wizards:"] | set-text etrice
-		get-tree | select [concat "eTrice/" $targetLanguage "/eTrice " $targetLanguage
-			" Template Project"]
-		get-button "Next >" | click
+		get-tree | select "eTrice" | 
+		select [concat "eTrice/" $targetLanguage] |
+		select [concat "eTrice/" $targetLanguage "/eTrice " $targetLanguage " Template Project"] |
+		double-click
 	}
 	if [$targetLanguage | equals Java] {
 		with [get-window "eTrice Java Template Project"] {
@@ -31,7 +31,7 @@ proc createTemplateProject {
 		}
 	}
 	get-window "New Example" | get-button Finish | click
-	if [$targetLanguage | equals C] {
+	if [$targetLanguage | matches "C.*"] {
 		get-window "Open Associated Perspective?" | get-button Yes | click
 	}
 }
@@ -40,14 +40,20 @@ proc generateTemplateProject {
 	//get-menu "Window/Show View/Project Explorer" | click
 	get-view "Project Explorer" | get-tree | select [concat $projectName "/generate_Template.launch"] | get-menu
 		"Run As/1 generate_Template" | click
-	get-view Console | get-text-viewer | get-property text | contains "Info: -- finished code generation" | verify-true
+	with [get-view Console] {
+		get-button "Pin Console" | click
+    	get-button "Display Selected Console" | click -arrow
+		get-menu [concat "\d eTrice " $targetLanguage " Generator Console"] | click
+		get-text-viewer | get-property text | contains "Info: -- finished code generation" | verify-true
+		get-button "Pin Console" | click
+	}
 }
 
 proc runTemplateProject {
 	//get-menu "Window/Show View/Project Explorer" | click
-	if [$targetLanguage | equals C] {
-		get-view "Project Explorer" | get-tree | select [concat $projectName "/run_Template_" $targetOS ".launch"]
-			| get-menu [concat "Run As/1 run_Template_" $targetOS] | click
+	if [$targetLanguage | matches "C.*"] {
+		get-view "Project Explorer" | get-tree | select [concat $projectName "/run_Template_" $targetOS ".*"]
+			| get-menu [concat "Run As/1 run_Template_" $targetOS ".*"] | click
 	} -else {
 		get-view "Project Explorer" | get-tree | select [concat $projectName "/run_Template.launch"] | get-menu
 			"Run As/1 run_Template" | click

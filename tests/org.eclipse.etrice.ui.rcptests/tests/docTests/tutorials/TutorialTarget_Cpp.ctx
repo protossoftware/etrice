@@ -1,0 +1,19 @@
+--- RCPTT testcase ---
+Format-Version: 1.0
+Context-Type: org.eclipse.rcptt.ctx.parameters
+Element-Name: TutorialTarget_Cpp
+Element-Type: context
+Element-Version: 2.0
+Id: _0KvCgBKlEeaQ3qT9AS1cNw
+Runtime-Version: 2.0.0.201506120617
+Save-Time: 5/5/16 11:49 AM
+
+------=_.parameters.context-2e023de5-3294-36a9-ac1d-6701f05a40ee
+Content-Type: text/properties
+Entry-Name: .parameters.context
+
+#Thu May 05 11:49:15 CEST 2016
+projectName=org.eclipse.etrice.template.cpp
+targetLanguage=C\\+\\+
+
+------=_.parameters.context-2e023de5-3294-36a9-ac1d-6701f05a40ee--
