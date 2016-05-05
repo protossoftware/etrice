@@ -676,7 +676,9 @@ Configure the FreeRTOS APP. Set the Tick rate to 1000.
 Increase the heap size to 8192 bytes and enable *Use tick hook*
 ![image](images/500-FreeRtosConfig2.png)
 
-Start the Dave&trade; code generator, compile and debug the application. Make sure that the Dave&trade; settings are complete.  
+Start the Dave&trade; code generator, compile and debug the application. Make sure that the Dave&trade; settings are complete.
+Hint: The *vApplicationTickHook* is implemented in the eTrice runtime system. For this test you need to stub this function. 
+  
 ###Step 2:###
 Create a new folder called *model*, right click on the folder *New -> Other* select *Other/eTrice/C/New Set of eTrice Models*
 
@@ -687,6 +689,7 @@ Name the model *BlinkyTutorial*, enable *Copy C-runtime into project*, select *M
 Click *Finish*
 
 Run the code generator as you did it in the ST-Tutorial. Compile your project.
+Hint: Remove the *vApplicationTickHook* stub from step 1.
 
 Open *main.c* and call *etStart* as you did it in the ST-Tutorial.
 
