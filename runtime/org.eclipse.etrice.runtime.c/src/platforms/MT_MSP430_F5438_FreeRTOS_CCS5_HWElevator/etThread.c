@@ -21,7 +21,7 @@
 #include "debugging/etLogger.h"
 #include "debugging/etMSCLogger.h"
 
-// #include <process.h>
+/* #include <process.h> */
 
 void etThread_execute(etThread* self);
 

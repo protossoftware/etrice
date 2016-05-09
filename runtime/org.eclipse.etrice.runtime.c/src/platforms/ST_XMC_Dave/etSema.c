@@ -40,11 +40,11 @@ void etSema_waitForWakeup(etSema* self){
 	static etTime nextTime = {0,0};
 	etTime actualTime;
 	ET_MSC_LOGGER_SYNC_ENTRY("etSema", "waitForWakeup")
-	// busy wait as specified in etphys
+	/* busy wait as specified in etphys */
 	getTimeFromTarget(&actualTime);
 	if (etTimeHelpers_isGreater(&actualTime, &nextTime)){
 		etTimeHelpers_add(&nextTime,&(singleThreadedTimer->timerInterval));
-		// call the do actions for the single thread
+		/* call the do actions for the single thread */
 		singleThreadedTimer->timerFunction(singleThreadedTimer->timerFunctionData);
 	}
 	ET_MSC_LOGGER_SYNC_EXIT

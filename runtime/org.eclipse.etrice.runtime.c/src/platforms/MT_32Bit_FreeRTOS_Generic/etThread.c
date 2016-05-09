@@ -43,7 +43,7 @@ void etThread_construct(
 	if (xTaskCreate( threadFunction, ( signed char * ) threadName, stacksize, self->threadFunctionData, priority, &(self->osData)) != pdPASS){
 		while(1){};
 	}
-//	xTaskCreate( threadFunction, ( signed char * ) threadName, stacksize, self->threadFunctionData, priority, &(self->osData) );
+/*	xTaskCreate( threadFunction, ( signed char * ) threadName, stacksize, self->threadFunctionData, priority, &(self->osData) ); */
 
 	ET_MSC_LOGGER_SYNC_EXIT
 }

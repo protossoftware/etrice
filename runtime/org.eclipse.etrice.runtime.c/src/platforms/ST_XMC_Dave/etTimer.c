@@ -27,7 +27,7 @@ void etTimer_construct(etTimer* self, etTime* timerInterval, etTimerFunction tim
 		self->timerFunction = timerFunction;
 		self->timerFunctionData = timerFunctionData;
 	}
-	// store the timer, it will be needed to call the do actions
+	/* store the timer, it will be needed to call the do actions */
 	singleThreadedTimer = self;
 
 	ET_MSC_LOGGER_SYNC_EXIT

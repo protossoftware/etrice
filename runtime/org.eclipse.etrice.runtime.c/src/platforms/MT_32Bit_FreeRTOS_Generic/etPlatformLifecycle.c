@@ -18,7 +18,7 @@
 
 /* implemenatation for eTrice interfaces*/
 
-// must be implemented projectspecific
+/* must be implemented projectspecific */
 extern void etMultiThreadedFreeRTOSProjectSpecificUserEntry();
 void etTimeInit(void);
 

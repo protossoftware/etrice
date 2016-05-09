@@ -23,16 +23,16 @@
 
 void etMultiThreadedFreeRTOSProjectSpecificUserEntry();
 
-// this function will be called during initialization
-// and must be implemented project spezific
+/* this function will be called during initialization */
+/* and must be implemented project specific */
 void etMultiThreadedFreeRTOSProjectSpecificUserEntry(){
 	if (DAVE_Init() == DAVE_STATUS_FAILURE){
 		while(1);
 	}
 }
 
-// the FreeRTOS Hooks must be implemented depending on
-// your FreeRTOS configuration
+/* the FreeRTOS Hooks must be implemented depending on */
+/* your FreeRTOS configuration */
 void vApplicationMallocFailedHook(void){
 	while (1);
 }

@@ -41,8 +41,8 @@ void etThread_construct(
 	self->threadName = threadName;
 	self->threadFunction = threadFunction;
 	self->threadFunctionData = threadFunctionData;
-	// for the single threaded port stacksize and prio is not needed
-	// save the Threadpointer as singleton
+	/* for the single threaded port stacksize and prio is not needed */
+	/* save the Threadpointer as singleton */
 	if(noThread==0){
 		noThread=self;
 		}else{

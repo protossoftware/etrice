@@ -23,7 +23,7 @@
 
 void etMultiThreadedFreeRTOSProjectSpecificUserEntry();
 
-// this function will be called during initialization
-// and must be implemented project spezific
+/* this function will be called during initialization */
+/* and must be implemented project spezific */
 void etMultiThreadedFreeRTOSProjectSpecificUserEntry(){
 }

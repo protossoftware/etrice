@@ -19,12 +19,12 @@
 
 /* implemenatation for eTrice interfaces*/
 
-// noThread contains the pointer to the one and only execute function
-// in the single threaded environment
+/* noThread contains the pointer to the one and only execute function */
+/* in the single threaded environment */
 extern etThread * noThread;
 void etThread_execute(etThread* self);
 
-// must be implemented projectspecific
+/* must be implemented projectspecific */
 extern void etSingleThreadedProjectSpecificUserEntry();
 
 void etUserEntry(void){
@@ -34,7 +34,7 @@ void etUserEntry(void){
 }
 
 void etUserPreRun(void){
-//	__enable_irq();
+/*	__enable_irq(); */
 	etThread_execute(noThread);
 }
 

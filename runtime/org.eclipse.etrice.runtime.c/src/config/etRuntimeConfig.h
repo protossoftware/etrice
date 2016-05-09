@@ -46,9 +46,9 @@
 #define ET_DATA_LOGGER_ACTIVATE
 
 /* timing and scheduling */
-//#define FREQUENCY 10L
-//#define ET_RUNTIME_MAXLOOP 100
-/*#define ET_RUNTIME_ENDLESS*/
+/* #define FREQUENCY 10L */
+/* #define ET_RUNTIME_MAXLOOP 100 */
+/* #define ET_RUNTIME_ENDLESS */
 
 /** enable multi threading (e.g. for protection of message queues) */
 #define ET_MULTI_THREADING

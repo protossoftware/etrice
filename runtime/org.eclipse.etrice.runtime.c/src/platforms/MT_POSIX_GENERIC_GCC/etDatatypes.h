@@ -25,11 +25,14 @@
 
 #include "etStdDatatypes.h"
 
+#include <sys/types.h>
+#include <unistd.h>
+#include <signal.h>
+#include <bits/siginfo.h>
+#include <time.h>
 #include <stdio.h>
 #include <pthread.h>
 #include <semaphore.h>
-#include <signal.h>
-#include <sys/types.h>
 
 /*--- Data types for room.basic.types */
 

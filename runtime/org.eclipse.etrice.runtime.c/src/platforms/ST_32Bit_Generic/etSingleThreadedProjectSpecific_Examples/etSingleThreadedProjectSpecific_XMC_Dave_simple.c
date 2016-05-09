@@ -32,17 +32,17 @@ extern etTime etTargetTime;
 void DAVE_InstallTickHandler(void);
 
 void getTimeFromTarget(etTime *t) {
-// return the time
-// make sure that reading the time is an atomic opration
-// => the timer interrupt should not interrupt this operation
+/* return the time */
+/* make sure that reading the time is an atomic opration */
+/* => the timer interrupt should not interrupt this operation */
 	__disable_irq();
 	*t = etTargetTime;
 	__enable_irq();
 }
 
-// the timer interrupt
+/* the timer interrupt */
 void etTick_Handler(void *nanoSecPerTick) {
-// this interrupt will be called every 1ms
+/* this interrupt will be called every 1ms */
 
 	etTargetTime.nSec += (uint32_t)nanoSecPerTick;
 
@@ -52,13 +52,13 @@ void etTick_Handler(void *nanoSecPerTick) {
 	}
 }
 
-// this function will be called during initialization
+/* this function will be called during initialization */
 void etSingleThreadedProjectSpecificUserEntry(void){
 	DAVE_Init();
 	DAVE_InstallTickHandler();
 }
 
-// The SYSTIMER App from DAVE must be available
+/* The SYSTIMER App from DAVE must be available */
 void DAVE_InstallTickHandler(void){
 uint32_t timerId;
 	  timerId = SYSTIMER_CreateTimer(1000,SYSTIMER_PERIODIC,etTick_Handler,(void*) 1000000);

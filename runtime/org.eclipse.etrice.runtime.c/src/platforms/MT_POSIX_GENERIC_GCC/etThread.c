@@ -90,11 +90,11 @@ void etThread_destruct(etThread* self){
 void etThread_sleep(etInt32 millis){
 	ET_MSC_LOGGER_SYNC_ENTRY("etThread", "sleep")
 	{
-		// TODO: nanosleep doesn't work at all
-//		struct timespec time;
-//		time.tv_nsec = 1000*1000*millis;
-//		time.tv_sec = 0;
-//		nanosleep(&time, NULL);
+		/* TODO: nanosleep doesn't work at all */
+/*		struct timespec time; */
+/*		time.tv_nsec = 1000*1000*millis; */
+/*		time.tv_sec = 0; */
+/*		nanosleep(&time, NULL); */
 		if (millis<1000)
 			millis = 1000;
 		sleep(millis/1000);

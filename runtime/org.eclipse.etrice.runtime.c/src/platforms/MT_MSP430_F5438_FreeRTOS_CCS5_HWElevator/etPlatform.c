@@ -11,7 +11,7 @@
  *******************************************************************************/
 
 #include "msp430f5438a.h"
-//#include "platform/etTimer.h"
+/*#include "platform/etTimer.h" */
 #include "hal_pmm.h"
 #include "etPlatform.h"
 #include "etDatatypes.h"
@@ -53,8 +53,8 @@ void initHw(void) {
 volatile unsigned int i=0;
 volatile unsigned char j,m;
 
-//	WDTCTL = WDTPW + 0x36; //WDT as Timer;
-	WDTCTL = WDTPW + 0x80; //disable WDT;
+//	WDTCTL = WDTPW + 0x36; /*WDT as Timer; */
+	WDTCTL = WDTPW + 0x80; /*disable WDT; */
 
 	SetVCore(PMMCOREV_3);
 	initClockSystem();
@@ -70,7 +70,7 @@ void vApplicationMallocFailedHook(void){
 }
 
 void enableInterrupt(void){
-	// SFRIE1|=WDTIE;
+	/* SFRIE1|=WDTIE; */
 	_enable_interrupt();
 }
 void initPortsForElevator(void){
@@ -86,7 +86,7 @@ void initPortsForElevator(void){
 	P8OUT = 0x00;
 	P8DIR = 0x00;
 	P8REN = 0xE0;
-// for time measurement
+/* for time measurement */
 	P10OUT = 0xC0;
 	P10DIR = 0xC0;
 }
@@ -223,12 +223,12 @@ unsigned int data;
 }
 
 void writeToDoor(unsigned char floor, unsigned char data){
-	// clear door bits
-	// avoid array out of bound access
+	/* clear door bits */
+	/* avoid array out of bound access */
 	if (data > 11)return;
 	if(floor > 5)return;
 	floorLatchShadow[floor] &= ~0x03FF;
-	// set door bits according data
+	/* set door bits according data */
 	floorLatchShadow[floor] |= (doorPattern3[data] & 0x3FF);
 	updateFloorLatch(floor);
 }
@@ -258,25 +258,25 @@ unsigned char mask = 0x01;
 }
 
 void initClockSystem(void){
-	//Select DCO range 4..60Mhz
+	/*Select DCO range 4..60Mhz */
 	UCSCTL1=DCORSEL_6;
-	//enable XT1
+	/*enable XT1 */
 	P7SEL|=0x01;
 	UCSCTL6=0x01CC;
-	// wait until Clock is ok
+	/* wait until Clock is ok */
 	while(UCSCTL7&0x0002){UCSCTL7=0;}
 
-	// DCO => appr. 50Mhz
-	// SMCLK MCLK => 25Mhz
+	/* DCO => appr. 50Mhz */
+	/* SMCLK MCLK => 25Mhz */
 	UCSCTL2 = FLLD_1 + 0x2f8;
 
-	// Loop until XT1,XT2 & DCO fault flag is cleared
+	/* Loop until XT1,XT2 & DCO fault flag is cleared */
 	do
   	{
     	UCSCTL7 &= ~(XT2OFFG + XT1LFOFFG + XT1HFOFFG + DCOFFG);
-    	                                        // Clear XT2,XT1,DCO fault flags
-    	SFRIFG1 &= ~OFIFG;                      // Clear fault flags
-  	}while (SFRIFG1&OFIFG);                   // Test oscillator fault flag
+    	                                        /* Clear XT2,XT1,DCO fault flags */
+    	SFRIFG1 &= ~OFIFG;                      /* Clear fault flags */
+  	}while (SFRIFG1&OFIFG);                   /* Test oscillator fault flag */
 
 }
 
@@ -330,23 +330,23 @@ const unsigned short usACLK_Frequency_Hz = 32768;
 void executeModel(void);
 
 void initUART1(void){
-	// set IO Pins to Peripheral
+	/* set IO Pins to Peripheral */
 
-	UCA1CTL1 |= 0x01; // hold the UART in Reset during initialization
-	UCA1CTL1 |= 0x80; //CLK = SMCLK
+	UCA1CTL1 |= 0x01; /* hold the UART in Reset during initialization */
+	UCA1CTL1 |= 0x80; /*CLK = SMCLK */
 
 	P5SEL |= 0xC0;
 
-	UCA1CTL0 = 0x00; //8N1 LSB first
-	UCA1BR0 = 6;		//Baudrate 0
-	UCA1BR1 = 0;		//Baudrate 1
+	UCA1CTL0 = 0x00; /*8N1 LSB first */
+	UCA1BR0 = 6;		/*Baudrate 0 */
+	UCA1BR1 = 0;		/*Baudrate 1 */
 	UCA1MCTL = 0x81;
-	UCA1STAT = 0;	//clear all flags
-	UCA1IRTCTL = 0;	//IrDA Tx disabled
-	UCA1IRRCTL = 0;	//IrDA Rx disabled
-	UCA1ABCTL = 0;	//Autobaud disabled
+	UCA1STAT = 0;	/*clear all flags */
+	UCA1IRTCTL = 0;	/*IrDA Tx disabled */
+	UCA1IRRCTL = 0;	/*IrDA Rx disabled */
+	UCA1ABCTL = 0;	/*Autobaud disabled */
 
-	UCA1CTL1 &= ~0x01; //release the reset for operation
+	UCA1CTL1 &= ~0x01; /*release the reset for operation */
 
 	UCA1IE = 0x01;
 }
@@ -387,7 +387,7 @@ unsigned char cs;
 	UCA1TXBUF = chnl;
 
 	for (i=0;i<len-1;i++){
-		// wait until TX Buffer is empty
+		/* wait until TX Buffer is empty */
 		while ((UCA1IFG & 0x02) == 0);
 		UCA1TXBUF = *data;
 		cs ^= *data++;
@@ -404,17 +404,17 @@ unsigned char cChar;
 
 switch (UCA1IV){
 	case 2:
-		//receive interrupt
+		/*receive interrupt */
 		cChar = UCA1RXBUF;
 		switch (etSerialState){
 		case 0:
-			// synch pattern => 0x2d,0xD4
+			/* synch pattern => 0x2d,0xD4 */
 			if (cChar==0x2D){
 				etSerialState++;
 			}
 			break;
 		case 1:
-			// second byte of synch pattern
+			/* second byte of synch pattern */
 			if (cChar==0xD4){
 				etSerialState++;
 				etSerialRxBufferWritePointer=etSerialRxBuffer;
@@ -424,7 +424,7 @@ switch (UCA1IV){
 			}
 			break;
 		case 2:
-			// first byte is the len
+			/* first byte is the len */
 			if ((etSerialLen=cChar) <= ET_SERIAL_RXBUFFER_LEN){
 				*etSerialRxBufferWritePointer++=cChar;
 				etSerialCS^=cChar;
@@ -432,21 +432,21 @@ switch (UCA1IV){
 			}else{etSerialState=0;}
 			break;
 		case 3:
-			// receive the data
+			/* receive the data */
 			*etSerialRxBufferWritePointer++=cChar;
 			etSerialCS^=cChar;
 			etSerialLen--;
 			if(etSerialLen==0){etSerialState++;}
 			break;
 		case 4:
-			// receive the CS
-			//if (etSerialCS != cChar){etSerialState=0;}
-			//else{
-				// command received OK
+			/* receive the CS */
+			/*if (etSerialCS != cChar){etSerialState=0;} */
+			/*else{ */
+				/* command received OK */
 				etSerialState=0;
 				etSerialDataReceived=1;
 				executeModel();
-			//}
+			/*} */
 			break;
 
 		default:etSerialState=0; break;
@@ -454,9 +454,9 @@ switch (UCA1IV){
 
 		break;
 	case 4:
-		//transmit interrupt
-			//UCA1TXBUF = cChar;
-			//UCA1IE &= ~UCTXIE;
+		/*transmit interrupt */
+			/*UCA1TXBUF = cChar; */
+			/*UCA1IE &= ~UCTXIE; */
 		break;
 	default:;
 	}

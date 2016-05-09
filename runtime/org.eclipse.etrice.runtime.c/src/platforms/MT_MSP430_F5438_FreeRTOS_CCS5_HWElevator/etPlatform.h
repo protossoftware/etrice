@@ -37,7 +37,7 @@ void initHw(void);
 void enableInterrupt(void);
 void getTimeFromTarget(etTime *t);
 
-//serial
+/*serial */
 void etSendSerialData(unsigned char len, unsigned char chnl, unsigned char * data);
 extern unsigned char etSerialDataReceived;
 extern unsigned char etSerialRxBuffer[];

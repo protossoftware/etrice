@@ -20,7 +20,7 @@
 
 #define ET_INT64
 #define ET_FLOAT32
-//#define ET_FLOAT64 /* not available on this platform */
+/*#define ET_FLOAT64 /* not available on this platform */ */
 
 
 #include "etStdDatatypes.h"
