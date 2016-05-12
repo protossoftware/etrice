@@ -31,8 +31,9 @@ void etLogger_logInfo(const char* message){
 }
 
 void etLogger_logErrorF(const char* format, ... ){
-	printf("ERROR:   ");
 	va_list arglist;
+
+	printf("ERROR:   ");
 	va_start( arglist, format );
 	vprintf( format, arglist );
 	va_end( arglist );
@@ -41,8 +42,9 @@ void etLogger_logErrorF(const char* format, ... ){
 }
 
 void etLogger_logWarningF(const char* format, ... ){
-	printf("WARNING: ");
 	va_list arglist;
+	printf("WARNING: ");
+
 	va_start( arglist, format );
 	vprintf( format, arglist );
 	va_end( arglist );
@@ -51,8 +53,9 @@ void etLogger_logWarningF(const char* format, ... ){
 }
 
 void etLogger_logInfoF(const char* format, ... ){
-	printf("INFO:    ");
 	va_list arglist;
+
+	printf("INFO:    ");
 	va_start( arglist, format );
 	vprintf( format, arglist );
 	va_end( arglist );

@@ -54,7 +54,7 @@ static void readThreadFunc(void* threadData) {
 	int8* buffer = (self->data.bufferProvider)(self->data.userData, &len);
 
 	while (ET_TRUE) {
-		retval = recv(self->socket, buffer, len, 0);
+		retval = recv(self->socket, (char*)buffer, len, 0);
 		if (retval<=0) {
 			/* TODO: call  WSAGetLastError and do error handling
 			int err = WSAGetLastError();
@@ -217,7 +217,7 @@ etSocketError etWriteServerSocket(etSocketServerData* dat, int connection, int s
 	 */
 
 	while (size>0) {
-		int sent = send(self->connections[connection].socket, ((int8*)data)+offset, size, 0);
+		int sent = send(self->connections[connection].socket, (char*)(((int8*)data)+offset), size, 0);
 
 		if (sent<=0)
 			return ETSOCKET_ERROR;
@@ -317,7 +317,7 @@ etSocketError etWriteSocket(etSocketConnectionData* dat, int size, const int8* d
 	int offset = 0;
 
 	while (size>0) {
-		int sent = send(self->socket, ((int8*)data)+offset, size, 0);
+		int sent = send(self->socket, (char*)(((int8*)data)+offset), size, 0);
 
 		if (sent<=0)
 			return ETSOCKET_ERROR;

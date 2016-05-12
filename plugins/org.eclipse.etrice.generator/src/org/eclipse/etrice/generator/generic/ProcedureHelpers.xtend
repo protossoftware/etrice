@@ -361,7 +361,7 @@ class ProcedureHelpers {
 	 *  implementation of user structor, if (inherited) present
 	 */
 	def userStructorBody(RoomClass cls, boolean ctor){
-		val comment = '''// user defined «IF ctor»con«ELSE»de«ENDIF»structor body'''
+		val comment = '''/* user defined «IF ctor»con«ELSE»de«ENDIF»structor body */'''
 
 		val implementedStructors = cls.getStructors(!languageExt.usesInheritance).filter[isConstructor == ctor]
 		val translatedCodes = implementedStructors.map[detailCode].map[

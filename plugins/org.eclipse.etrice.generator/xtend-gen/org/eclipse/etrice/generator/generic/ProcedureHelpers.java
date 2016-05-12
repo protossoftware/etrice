@@ -714,7 +714,7 @@ public class ProcedureHelpers {
    */
   public String userStructorBody(final RoomClass cls, final boolean ctor) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("// user defined ");
+    _builder.append("/* user defined ");
     {
       if (ctor) {
         _builder.append("con");
@@ -722,7 +722,7 @@ public class ProcedureHelpers {
         _builder.append("de");
       }
     }
-    _builder.append("structor body");
+    _builder.append("structor body */");
     final String comment = _builder.toString();
     boolean _usesInheritance = this.languageExt.usesInheritance();
     boolean _not = (!_usesInheritance);

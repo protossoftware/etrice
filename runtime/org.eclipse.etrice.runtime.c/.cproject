@@ -43,7 +43,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/util}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/platforms/MT_WIN_MinGW}&quot;"/>
 								</option>
-								<option id="gnu.c.compiler.option.dialect.std.1095860550" name="Language standard" superClass="gnu.c.compiler.option.dialect.std" value="gnu.c.compiler.dialect.c99" valueType="enumerated"/>
+								<option id="gnu.c.compiler.option.dialect.std.1095860550" name="Language standard" superClass="gnu.c.compiler.option.dialect.std" value="gnu.c.compiler.dialect.default" valueType="enumerated"/>
 								<option id="gnu.c.compiler.option.warnings.pedantic.1900907598" name="Pedantic (-pedantic)" superClass="gnu.c.compiler.option.warnings.pedantic" value="true" valueType="boolean"/>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.316560634" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 							</tool>

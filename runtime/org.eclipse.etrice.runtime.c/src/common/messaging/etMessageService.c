@@ -78,6 +78,7 @@ void etMessageService_start(etMessageService* self){
 }
 
 void etMessageService_stop(etMessageService* self){
+	etSystemProtocolConjPort port;
 	ET_MSC_LOGGER_SYNC_ENTRY("etMessageService", "stop")
 
 	if (self->execmode==EXECMODE_POLLED || self->execmode==EXECMODE_MIXED) {
@@ -85,7 +86,6 @@ void etMessageService_stop(etMessageService* self){
 	}
 
 	/* create a temporary port struct and send the terminate message */
-	etSystemProtocolConjPort port;
 	port.localId = 0;
 	port.msgService = self;
 	port.peerAddress = MESSAGESERVICE_ADDRESS;
@@ -129,9 +129,11 @@ void etMessageService_pushMessage(etMessageService* self, etMessage* msg){
 }
 
 etMessage* etMessageService_popMessage(etMessageService* self){
+	etMessage* msg;
+
 	ET_MSC_LOGGER_SYNC_ENTRY("etMessageService", "popMessage")
 	etMutex_enter(&self->queueMutex);
-	etMessage* msg = etMessageQueue_pop(&self->messageQueue);
+	msg = etMessageQueue_pop(&self->messageQueue);
 	etMutex_leave(&self->queueMutex);
 	ET_MSC_LOGGER_SYNC_EXIT
 	return msg;

@@ -284,7 +284,7 @@ RoomModel room.basic.service.tcp {
 		}
 		
 		Operation setAsString(value : charPtr){
-			"// used macros: data, length"
+			"/* used macros: data, length */"
 			"int valLength = (strlen(value)+1 > 32)? 32 : strlen(value) + 1;"
 			"memcpy(data, value, valLength);"
 			"data[31] = '\\0';"
@@ -292,13 +292,13 @@ RoomModel room.basic.service.tcp {
 		}
 		
 		Operation setData(value : int8 ref, size : int32){
-			"// used macros: data, length"
+			"/* used macros: data, length */"
 			"strncpy(data, value, ((size>32)?32:size));"
 			"length = size;"
 		}
 		
 		Operation getAsString() : charPtr{
-			"// used macros: data"
+			"/* used macros: data */"
 			"data[31] = '\\0';"
 			"return data;"
 		}
