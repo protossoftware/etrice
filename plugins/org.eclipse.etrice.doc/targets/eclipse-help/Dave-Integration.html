@@ -580,13 +580,13 @@
 <p><img src="images/500-DaveProjectFreeRTOS.png" alt="image"></p>
 <p>Configure the FreeRTOS APP. Set the Tick rate to 1000.<br><img src="images/500-FreeRtosConfig1.png" alt="image"></p>
 <p>Increase the heap size to 8192 bytes and enable <em>Use tick hook</em><br><img src="images/500-FreeRtosConfig2.png" alt="image"></p>
-<p>Start the Dave™ code generator, compile and debug the application. Make sure that the Dave™ settings are complete. </p>
+<p>Start the Dave™ code generator, compile and debug the application. Make sure that the Dave™ settings are complete.<br>Hint: The <em>vApplicationTickHook</em> is implemented in the eTrice runtime system. For this test you need to stub this function. </p>
 <h3><a href="#step-2-" name="step-2-"></a>Step 2:</h3>
 <p>Create a new folder called <em>model</em>, right click on the folder <em>New -&gt; Other</em> select <em>Other/eTrice/C/New Set of eTrice Models</em></p>
 <p>Name the model <em>BlinkyTutorial</em>, enable <em>Copy C-runtime into project</em>, select <em>MT_XMC_Dave_FreeRTOS</em> and rename main to <em>etStart</em>.</p>
 <p><img src="images/500-NewModelWizzardFreeRTOS.png" alt="image"></p>
 <p>Click <em>Finish</em></p>
-<p>Run the code generator as you did it in the ST-Tutorial. Compile your project.</p>
+<p>Run the code generator as you did it in the ST-Tutorial. Compile your project.<br>Hint: Remove the <em>vApplicationTickHook</em> stub from step 1.</p>
 <p>Open <em>main.c</em> and call <em>etStart</em> as you did it in the ST-Tutorial.</p>
 <h3><a href="#step-3-" name="step-3-"></a>Step 3:</h3>
 <p>From now on you can create your model or you can copy the <em>BlinkyTutorial.room</em> file from the ST-Tutorial to the new project.</p>
