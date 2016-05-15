@@ -4,7 +4,7 @@ Bundle-Name: Abstract FSM Diagram Editor
 Bundle-SymbolicName: org.eclipse.etrice.ui.behavior.fsm;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: org.eclipse.etrice.ui.behavior.fsm.Activator
-Bundle-Vendor: eTrice (Incubation)
+Bundle-Vendor: eTrice
 Require-Bundle: org.eclipse.etrice.core.common.ui;bundle-version="1.0.0",
  org.eclipse.etrice.ui.common.base;bundle-version="1.0.0",
  org.eclipse.etrice.core.fsm;bundle-version="1.0.0",

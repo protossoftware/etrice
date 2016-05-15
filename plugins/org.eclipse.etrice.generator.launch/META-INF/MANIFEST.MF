@@ -18,5 +18,5 @@ Require-Bundle: org.eclipse.etrice.generator;bundle-version="1.0.0",
  org.eclipse.ui.ide
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Bundle-Vendor: Eclipse eTrice (Incubation)
+Bundle-Vendor: Eclipse eTrice
 Export-Package: org.eclipse.etrice.generator.launch

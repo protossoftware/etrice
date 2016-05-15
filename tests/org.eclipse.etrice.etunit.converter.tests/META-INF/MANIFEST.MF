@@ -4,7 +4,7 @@ Bundle-Name: etUnit Converter Tests
 Bundle-SymbolicName: org.eclipse.etrice.etunit.converter.tests
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: org.eclipse.etrice.etunit.converter.tests.Activator
-Bundle-Vendor: Eclipse eTrice (Incubation)
+Bundle-Vendor: Eclipse eTrice
 Require-Bundle: org.eclipse.etrice.etunit.converter;bundle-version="1.0.0",
  org.eclipse.core.runtime,
  org.junit;bundle-version="4.8.2"

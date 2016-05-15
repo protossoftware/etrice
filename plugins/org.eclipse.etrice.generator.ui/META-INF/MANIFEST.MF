@@ -4,7 +4,7 @@ Bundle-Name: Generator UI
 Bundle-SymbolicName: org.eclipse.etrice.generator.ui;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Bundle-Vendor: Eclipse eTrice (Incubation)
+Bundle-Vendor: Eclipse eTrice
 Require-Bundle: org.eclipse.etrice.core.etmap;bundle-version="1.0.0",
  org.eclipse.etrice.core.etmap.ui;bundle-version="1.0.0",
  org.eclipse.etrice.core.etphys;bundle-version="1.0.0",

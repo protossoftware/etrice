@@ -25,5 +25,5 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Export-Package: org.eclipse.etrice.ui.behavior.actioneditor,
  org.eclipse.etrice.ui.behavior.actioneditor.sourceviewer
-Bundle-Vendor: eTrice (Incubation)
+Bundle-Vendor: eTrice
 

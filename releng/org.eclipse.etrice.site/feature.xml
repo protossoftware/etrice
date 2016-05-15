@@ -11,7 +11,7 @@
 -->
 <feature
       id="org.eclipse.etrice.site"
-      label="eTrice (Incubation) 1.0.0 Update Site"
+      label="eTrice 1.0.0 Update Site"
       version="1.0.0.qualifier"
       provider-name="%providerName"
       image="eclipse_update_120.jpg">

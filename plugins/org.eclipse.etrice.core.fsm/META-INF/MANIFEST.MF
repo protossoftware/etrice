@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: FSM DSL
-Bundle-Vendor: Eclipse eTrice (Incubation)
+Bundle-Vendor: Eclipse eTrice
 Bundle-Version: 1.0.0.qualifier
 Bundle-SymbolicName: org.eclipse.etrice.core.fsm; singleton:=true
 Bundle-ActivationPolicy: lazy

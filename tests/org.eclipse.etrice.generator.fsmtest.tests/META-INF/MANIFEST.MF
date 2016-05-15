@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: org.eclipse.etrice.generator.fsmtest.tests
-Bundle-Vendor: Eclipse eTrice (Incubation)
+Bundle-Vendor: Eclipse eTrice
 Bundle-Version: 1.0.0.qualifier
 Bundle-SymbolicName: org.eclipse.etrice.generator.fsmtest.tests; singleton:=true
 Bundle-ActivationPolicy: lazy

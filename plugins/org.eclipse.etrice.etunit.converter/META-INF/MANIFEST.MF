@@ -4,7 +4,7 @@ Bundle-Name: etUnit File Converter
 Bundle-SymbolicName: org.eclipse.etrice.etunit.converter;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-ClassPath: .
-Bundle-Vendor: Eclipse eTrice (Incubation)
+Bundle-Vendor: Eclipse eTrice
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.etrice.etunit.converter,

@@ -4,7 +4,7 @@ Bundle-Name: eTrice Generator Model Tests
 Bundle-SymbolicName: org.eclipse.etrice.generator.tests
 Bundle-Version: 1.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Bundle-Vendor: Eclipse eTrice (Incubation)
+Bundle-Vendor: Eclipse eTrice
 Require-Bundle: org.eclipse.etrice.core.common;bundle-version="1.0.0",
  org.eclipse.etrice.core.fsm;bundle-version="1.0.0",
  org.eclipse.etrice.core.room;bundle-version="1.0.0",

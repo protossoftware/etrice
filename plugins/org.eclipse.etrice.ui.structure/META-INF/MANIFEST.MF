@@ -4,7 +4,7 @@ Bundle-Name: Actor Structure Diagram Editor
 Bundle-SymbolicName: org.eclipse.etrice.ui.structure;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: org.eclipse.etrice.ui.structure.Activator
-Bundle-Vendor: Eclipse eTrice (Incubation)
+Bundle-Vendor: Eclipse eTrice
 Require-Bundle: org.eclipse.etrice.core.fsm;bundle-version="1.0.0",
  org.eclipse.etrice.core.room.ui;bundle-version="1.0.0",
  org.eclipse.etrice.core.common.ui;bundle-version="1.0.0",

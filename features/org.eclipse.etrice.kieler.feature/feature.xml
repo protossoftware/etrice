@@ -3,7 +3,7 @@
       id="org.eclipse.etrice.kieler.feature"
       label="KIELER"
       version="1.0.0.qualifier"
-      provider-name="eTrice (Incubation)">
+      provider-name="eTrice">
 
    <description>
       %description
