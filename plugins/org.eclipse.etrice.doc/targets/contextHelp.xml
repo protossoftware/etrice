@@ -12,26 +12,7 @@
 </context>
 
 <context id="featureContextHelp_CPPCodeGenerator" title="CPPCodeGenerator">
-<description>Missing Features:
-
-- memory management of messages (pool + free memory)
-
-- Inheritance
-- Enums, non-primtive datatypes e.g. string, DataClass ...
-- Wait on 'quit' in cmd (atm wait 30sec)
-- getter/setter attributes
-
-TODO:
-- fix free memory on exit (delete of instance tree in runner)
-- remove streams
-- find compiler flags for deactivating exceptions, streams ...
-- includes to generated files
-
-Optimization:
-- for C11 use unordered map
-- reduce use of dynamic_cast and rtti
-
-</description>
+<description></description>
 <topic href="targets/eclipse-help/feature-reference.html#cppcodegenerator" label="CPPCodeGenerator"/>
 </context>
 
@@ -56,98 +37,6 @@ Optimization:
 <topic href="targets/eclipse-help/feature-reference.html#datalogging" label="DataLogging"/>
 <topic href="targets/eclipse-help/feature-reference.html#datalogging" label="Annotation"/>
 <topic href="targets/eclipse-help/feature-reference.html#datalogging" label="CCodeGenerator"/>
-</context>
-
-<context id="featureContextHelp_SynatxColoring" title="SynatxColoring">
-<description></description>
-<topic href="targets/eclipse-help/feature-reference.html#synatxcoloring" label="SynatxColoring"/>
-</context>
-
-<context id="featureContextHelp_MarkdownCheatsheet" title="MarkdownCheatsheet">
-<description></description>
-<topic href="targets/eclipse-help/feature-reference.html#markdowncheatsheet" label="MarkdownCheatsheet"/>
-</context>
-
-<context id="featureContextHelp_MarkdownExample" title="MarkdownExample">
-<description></description>
-<topic href="targets/eclipse-help/feature-reference.html#markdownexample" label="MarkdownExample"/>
-</context>
-
-<context id="featureContextHelp_TemplateFeature" title="TemplateFeature">
-<description>Plain text: A ProtocolClass defines the Interface of a Port. It specifies the exchanged messages and data.</description>
-<topic href="targets/eclipse-help/feature-reference.html#templatefeature" label="TemplateFeature"/>
-<topic href="targets/eclipse-help/feature-reference.html#templatefeature" label="Feature123"/>
-<topic href="targets/eclipse-help/feature-reference.html#templatefeature" label="Feature123"/>
-<topic href="targets/eclipse-help/feature-reference.html#templatefeature" label="Feature123"/>
-<topic href="targets/eclipse-help/feature-reference.html#templatefeature" label="Feature123"/>
-<topic href="targets/eclipse-help/feature-reference.html#templatefeature" label="Feature123"/>
-</context>
-
-<context id="featureContextHelp_Feature123" title="Feature123">
-<description></description>
-<topic href="targets/eclipse-help/feature-reference.html#feature123" label="Feature123"/>
-<topic href="targets/eclipse-help/feature-reference.html#feature123" label="TemplateFeature"/>
-<topic href="targets/eclipse-help/feature-reference.html#feature123" label="TemplateFeature"/>
-<topic href="targets/eclipse-help/feature-reference.html#feature123" label="TemplateFeature"/>
-<topic href="targets/eclipse-help/feature-reference.html#feature123" label="TemplateFeature"/>
-<topic href="targets/eclipse-help/feature-reference.html#feature123" label="TemplateFeature"/>
-<topic href="targets/eclipse-help/feature-reference.html#feature123" label="TemplateFeature"/>
-</context>
-
-<context id="featureContextHelp_TextualROOMEditor" title="TextualROOMEditor">
-<description>Textual model editor</description>
-<topic href="targets/eclipse-help/feature-reference.html#textualroomeditor" label="TextualROOMEditor"/>
-<topic href="targets/eclipse-help/feature-reference.html#textualroomeditor" label="ROOMLanguage"/>
-</context>
-
-<context id="featureContextHelp_OutlineView" title="OutlineView">
-<description>Displays an overview of all elements in the textual editor.</description>
-<topic href="targets/eclipse-help/feature-reference.html#outlineview" label="OutlineView"/>
-<topic href="targets/eclipse-help/feature-reference.html#outlineview" label="TextualROOMEditor"/>
-</context>
-
-<context id="featureContextHelp_GraphicalBehaviorEditor" title="GraphicalBehaviorEditor">
-<description>The GraphicalBehaviorEditor allows to edit the ActorClass' StateMachine. It is possible to create (hierarchical) states and transitions to model complex behavior in a convenient way.</description>
-<topic href="targets/eclipse-help/feature-reference.html#graphicalbehavioreditor" label="GraphicalBehaviorEditor"/>
-<topic href="targets/eclipse-help/feature-reference.html#graphicalbehavioreditor" label="StateMachine"/>
-</context>
-
-<context id="featureContextHelp_GraphicalStructureEditor" title="GraphicalStructureEditor">
-<description>The Structure Editor allows to edit the ActorClass' Structure in a convenient way. It is possible to create and arrange actor references and ports and to create bindings and layer connections.</description>
-<topic href="targets/eclipse-help/feature-reference.html#graphicalstructureeditor" label="GraphicalStructureEditor"/>
-<topic href="targets/eclipse-help/feature-reference.html#graphicalstructureeditor" label="ActorClass"/>
-<topic href="targets/eclipse-help/feature-reference.html#graphicalstructureeditor" label="ActorRef"/>
-<topic href="targets/eclipse-help/feature-reference.html#graphicalstructureeditor" label="Port"/>
-<topic href="targets/eclipse-help/feature-reference.html#graphicalstructureeditor" label="SAP"/>
-<topic href="targets/eclipse-help/feature-reference.html#graphicalstructureeditor" label="Binding"/>
-<topic href="targets/eclipse-help/feature-reference.html#graphicalstructureeditor" label="LayerConnection"/>
-</context>
-
-<context id="featureContextHelp_StructureEditorPalette" title="StructureEditorPalette">
-<description>The palette creates central structural elements of an ActorClass.</description>
-<topic href="targets/eclipse-help/feature-reference.html#structureeditorpalette" label="StructureEditorPalette"/>
-<topic href="targets/eclipse-help/feature-reference.html#structureeditorpalette" label="GraphicalStructureEditor"/>
-</context>
-
-<context id="featureContextHelp_ActorRefPropertyDialog" title="ActorRefPropertyDialog">
-<description>A dialog to edit properties of an ActorRef.</description>
-<topic href="targets/eclipse-help/feature-reference.html#actorrefpropertydialog" label="ActorRefPropertyDialog"/>
-<topic href="targets/eclipse-help/feature-reference.html#actorrefpropertydialog" label="ActorRef"/>
-<topic href="targets/eclipse-help/feature-reference.html#actorrefpropertydialog" label="GraphicalStructureEditor"/>
-</context>
-
-<context id="featureContextHelp_PortPropertyDialog" title="PortPropertyDialog">
-<description>A dialog to edit properties of an Port.</description>
-<topic href="targets/eclipse-help/feature-reference.html#portpropertydialog" label="PortPropertyDialog"/>
-<topic href="targets/eclipse-help/feature-reference.html#portpropertydialog" label="Port"/>
-<topic href="targets/eclipse-help/feature-reference.html#portpropertydialog" label="GraphicalStructureEditor"/>
-</context>
-
-<context id="featureContextHelp_SPPPropertyDialog" title="SPPPropertyDialog">
-<description>A dialog to edit properties of a SPP.</description>
-<topic href="targets/eclipse-help/feature-reference.html#spppropertydialog" label="SPPPropertyDialog"/>
-<topic href="targets/eclipse-help/feature-reference.html#spppropertydialog" label="SPP"/>
-<topic href="targets/eclipse-help/feature-reference.html#spppropertydialog" label="GraphicalStructureEditor"/>
 </context>
 
 <context id="featureContextHelp_AnnotationType" title="AnnotationType">
@@ -214,7 +103,6 @@ Optimization:
 <description>An actor is the basic structural building block for building systems with ROOM</description>
 <topic href="targets/eclipse-help/feature-reference.html#actorclass" label="ActorClass"/>
 <topic href="targets/eclipse-help/feature-reference.html#actorclass" label="Inheritance"/>
-<topic href="targets/eclipse-help/feature-reference.html#actorclass" label="GraphicalStructureEditor"/>
 <topic href="targets/eclipse-help/feature-reference.html#actorclass" label="LogicalModel"/>
 <topic href="targets/eclipse-help/feature-reference.html#actorclass" label="ActorRef"/>
 </context>
@@ -230,7 +118,6 @@ Optimization:
 <description>A StateMachine describes the state based, event driven behavior of an ActorClass</description>
 <topic href="targets/eclipse-help/feature-reference.html#statemachine" label="StateMachine"/>
 <topic href="targets/eclipse-help/feature-reference.html#statemachine" label="Inheritance"/>
-<topic href="targets/eclipse-help/feature-reference.html#statemachine" label="GraphicalBehaviorEditor"/>
 <topic href="targets/eclipse-help/feature-reference.html#statemachine" label="ActorClass"/>
 </context>
 
@@ -254,8 +141,6 @@ Optimization:
 <topic href="targets/eclipse-help/feature-reference.html#actorref" label="ActorRef"/>
 <topic href="targets/eclipse-help/feature-reference.html#actorref" label="ActorClass"/>
 <topic href="targets/eclipse-help/feature-reference.html#actorref" label="Replication"/>
-<topic href="targets/eclipse-help/feature-reference.html#actorref" label="GraphicalStructureEditor"/>
-<topic href="targets/eclipse-help/feature-reference.html#actorref" label="ActorRefPropertyDialog"/>
 <topic href="targets/eclipse-help/feature-reference.html#actorref" label="ActorClass"/>
 <topic href="targets/eclipse-help/feature-reference.html#actorref" label="SubSystemClass"/>
 </context>
@@ -265,7 +150,6 @@ Optimization:
 <topic href="targets/eclipse-help/feature-reference.html#binding" label="Binding"/>
 <topic href="targets/eclipse-help/feature-reference.html#binding" label="Port"/>
 <topic href="targets/eclipse-help/feature-reference.html#binding" label="Port"/>
-<topic href="targets/eclipse-help/feature-reference.html#binding" label="GraphicalStructureEditor"/>
 <topic href="targets/eclipse-help/feature-reference.html#binding" label="ActorClass"/>
 <topic href="targets/eclipse-help/feature-reference.html#binding" label="SubSystemClass"/>
 </context>
@@ -275,7 +159,6 @@ Optimization:
 <topic href="targets/eclipse-help/feature-reference.html#layerconnection" label="LayerConnection"/>
 <topic href="targets/eclipse-help/feature-reference.html#layerconnection" label="SAP"/>
 <topic href="targets/eclipse-help/feature-reference.html#layerconnection" label="SPP"/>
-<topic href="targets/eclipse-help/feature-reference.html#layerconnection" label="GraphicalStructureEditor"/>
 <topic href="targets/eclipse-help/feature-reference.html#layerconnection" label="ActorClass"/>
 <topic href="targets/eclipse-help/feature-reference.html#layerconnection" label="SubSystemClass"/>
 </context>
@@ -365,8 +248,6 @@ Optimization:
 <topic href="targets/eclipse-help/feature-reference.html#port" label="Port"/>
 <topic href="targets/eclipse-help/feature-reference.html#port" label="ProtocolClass"/>
 <topic href="targets/eclipse-help/feature-reference.html#port" label="Replication"/>
-<topic href="targets/eclipse-help/feature-reference.html#port" label="GraphicalStructureEditor"/>
-<topic href="targets/eclipse-help/feature-reference.html#port" label="PortPropertyDialog"/>
 <topic href="targets/eclipse-help/feature-reference.html#port" label="ActorClass"/>
 <topic href="targets/eclipse-help/feature-reference.html#port" label="Binding"/>
 <topic href="targets/eclipse-help/feature-reference.html#port" label="Binding"/>
@@ -397,7 +278,6 @@ Optimization:
 <description>A Service Access Point is similar to a Port, but uses a LayerConnection for wiring</description>
 <topic href="targets/eclipse-help/feature-reference.html#sap" label="SAP"/>
 <topic href="targets/eclipse-help/feature-reference.html#sap" label="ProtocolClass"/>
-<topic href="targets/eclipse-help/feature-reference.html#sap" label="GraphicalStructureEditor"/>
 <topic href="targets/eclipse-help/feature-reference.html#sap" label="ActorClass"/>
 <topic href="targets/eclipse-help/feature-reference.html#sap" label="LayerConnection"/>
 </context>
@@ -413,7 +293,6 @@ Optimization:
 <description>A Service Provision Point is the counterpart of a SAP</description>
 <topic href="targets/eclipse-help/feature-reference.html#spp" label="SPP"/>
 <topic href="targets/eclipse-help/feature-reference.html#spp" label="ProtocolClass"/>
-<topic href="targets/eclipse-help/feature-reference.html#spp" label="SPPPropertyDialog"/>
 <topic href="targets/eclipse-help/feature-reference.html#spp" label="ActorClass"/>
 <topic href="targets/eclipse-help/feature-reference.html#spp" label="LayerConnection"/>
 <topic href="targets/eclipse-help/feature-reference.html#spp" label="ServiceImplementation"/>

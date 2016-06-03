@@ -5,7 +5,7 @@
 		<div class="col-sm-3">
 			<div id="sidebar" role="navigation">
 				<ul class="nav metismenu" id="sidebarMenu">
-					$toc:{e | $include/toc_menu(name=e.name, url=e.url, entries=e.entries)$}$
+					$toc:{e | $include/toc_menu1(name=e.name, url=e.url)$}$
 				</ul>
 			</div>
 		</div>

@@ -9,7 +9,7 @@
 $_content$
 
 <ul>
-	$toc:{e | $include/front_toc(name=e.name, url=e.url, entries=e.entries)$}$
+	$toc:{e | $include/front_toc1(name=e.name, url=e.url)$}$
 </ul>
 
 $include/footer()$

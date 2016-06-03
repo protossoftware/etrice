@@ -30,27 +30,8 @@ Feature JavaCodeGenerator
 ;
 Feature CPPCodeGenerator
 	shortName '''C++ Code Generator'''
-	description '''
-		Missing Features:
+	description ''''''
 
-		- memory management of messages (pool + free memory)
-
-		- Inheritance
-		- Enums, non-primtive datatypes e.g. string, DataClass ...
-		- Wait on 'quit' in cmd (atm wait 30sec)
-		- getter/setter attributes
-
-		TODO:
-		- fix free memory on exit (delete of instance tree in runner)
-		- remove streams
-		- find compiler flags for deactivating exceptions, streams ...
-		- includes to generated files
-
-		Optimization:
-		- for C11 use unordered map
-		- reduce use of dynamic_cast and rtti
-
-	'''
 	prototype
 ;
 

@@ -12,7 +12,7 @@ The Hello World tutorial is target language specific. The other tutorials work f
 -   Hello World - Getting Started C
 
 -   Hello World - Getting Started Java
- 
+
 -   Ping Pong
 
 -   Traffic Light (Example)
@@ -51,7 +51,7 @@ In this tutorial you will have a first look at a very simple eTrice model. The g
 - Recommended: Activate automatic resource refresh in Eclipse: *Window -&gt; Preferences -&gt; General -&gt; Workspace*
 	- *Refresh using native hooks or polling*
 	- *Refresh on access*
-	
+
 - Optional: Install [Trace2UML](http://trace2uml.stage.tigris.org/), an Open Source MSC viewer
 	- [Windows download site](http://trace2uml.tigris.org/servlets/ProjectDocumentList?folderID=6208)
 	- [Linux package](http://apt.astade.de/)
@@ -68,7 +68,7 @@ This will add three projects into your workspace:
 - our application project *template.c*.
 
 Now open the *TemplateModel.room* in the model folder of *template.c*.
-	
+
 ![image](images/013-after-wizard.png)
 
 The model contains an ActorClass *TopActor*, which is currently the only active actor. TopActor has a state machine that is intended to output a simple HelloWorld statement. To inspect its behavior graphically, we can open the behavior diagram by right click on *Outline View -&gt; TopActor -&gt; Edit Behavior*. Alternatively we can place the cursor within the textual notation and press Alt+B.
@@ -91,10 +91,10 @@ After that we can build and run the application by right click on file
 
 This will trigger the build process, carried out by Eclipse CDT and then subsequently start our application.
 
-|                                   |                                    |
-|:---------------------------------:|:----------------------------------:|
-| ![image](images/014-generate.png) | ![image](images/014-build_run.png) |
-|        1. Invoke generator        |    2. Build and run application    |
+|                                      |                                               |
+|:------------------------------------:|:---------------------------------------------:|
+| ![image](images/014-generate.png)    | ![image](images/014-build_run.png)    		   |
+| <center>1. Invoke generator</center> | <center>2. Build and run application</center> |
 
 
 The output of our application is logged in the Console View and it shows the “Hello World”. By typing “quit” on the prompt and pressing enter the application terminates regularly.
@@ -129,7 +129,7 @@ The goal is to learn the work flow of eTrice and to understand a few basic featu
 - Recommended: Activate automatic resource refresh in Eclipse: *Window -&gt; Preferences -&gt; General -&gt; Workspace*
 	- *Refresh using native hooks or polling*
 	- *Refresh on access*
-	
+
 - Optional: Install [Trace2UML](http://trace2uml.stage.tigris.org/), an Open Source MSC viewer
 	- [Windows download site](http://trace2uml.tigris.org/servlets/ProjectDocumentList?folderID=6208)
 	- [Linux package](http://apt.astade.de/)
@@ -149,7 +149,7 @@ This will add four projects into your workspace:
 - our application project *template.cpp*.
 
 Now open the *TemplateModel.room* in the model folder of *template.c*.
-	
+
 ![image](images/013-after-wizard-cpp.png)
 
 The model contains an ActorClass *TopActor*, which is currently the only active actor.
@@ -183,10 +183,10 @@ After that we can build and run the application by right click on file (dependin
 
 This will trigger the build process, carried out by Eclipse CDT and then subsequently start our application.
 
-|                                       |                                        |
-|:-------------------------------------:|:--------------------------------------:|
-| ![image](images/014-generate-cpp.png) | ![image](images/014-build_run-cpp.png) |
-|        1. Invoke generator            |    2. Build and run application        |
+|                                       |                                                |
+|:-------------------------------------:|:----------------------------------------------:|
+| ![image](images/014-generate-cpp.png) | ![image](images/014-build_run-cpp.png)         |
+| <center>1. Invoke generator</center>  | <center>2. Build and run application</center>  |
 
 
 The output of our application is logged in the Console View and it shows the “Hello World”.
@@ -260,10 +260,10 @@ After that we can build and run the application by right click on file
 
 This will trigger the build process, carried out by Eclipse JDT and then subsequently start our application.
 
-|                                   |                                    |
-|:---------------------------------:|:----------------------------------:|
-| ![image](images/014-generate.png) | ![image](images/014-build_run.png) |
-|        1. Invoke generator        |    2. Build and run application    |
+|                                      |                                      		   |
+|:------------------------------------:|:---------------------------------------------:|
+| ![image](images/014-generate.png)    | ![image](images/014-build_run.png)   		   |
+| <center>1. Invoke generator</center> | <center>2. Build and run application</center> |
 
 The output of our application is logged in the Console View and it shows the “Hello World”. By typing “quit” on the prompt and pressing enter the application terminates regularly.
 
@@ -334,7 +334,7 @@ ActorClass Receiver {
 ```room
 ActorClass Sender {
 	Interface {
-		conjugated Port sendPort: 
+		conjugated Port sendPort:
 			PingPongProtocol
 	}
 	Structure {
@@ -346,7 +346,7 @@ ActorClass Sender {
 
 
 <span class="label label-info">Note:</span> The naming *Sender* *Receiver* is based on the first message exchange.
-*Sender* is the first actor supposed to send a message (*ping*) and *Receiver* is the first actor to receive this message. 
+*Sender* is the first actor supposed to send a message (*ping*) and *Receiver* is the first actor to receive this message.
 Afterwards they change their roles and it is vice-versa for message *pong*.
 
 
