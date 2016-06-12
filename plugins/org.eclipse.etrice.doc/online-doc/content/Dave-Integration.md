@@ -1,20 +1,20 @@
 
-Dave-eTrice Toolchain Tutorial
+DAVE-eTrice Toolchain Tutorial
 ==============================
 
 Introduction
 ------------
 
-As you already know, eTrice is a ROOM-Tool that provides a high level modeling language for embedded systems. It is perfectly suited for event driven, real time systems. However, each embedded SW relies on an underlying HW, with components like digital I/Os, Sensors, ADCs, DACs, PWMs and so on to connect the real world. Therefore some driver SW is required to control all this HW components and to provide easy access for the higher level SW. To develop the HW-drivers as well as your application logic without changing the development environment, you need a tool chain that provides both, driver development and high level application development. For Infineon's XMC&trade; ARM Cortex M0/M4 devices special support is provided to combine the Dave&trade; tool for driver development with eTrice for application development. This tutorials will guide you through the first steps.
+As you already know, eTrice is a ROOM-Tool that provides a high level modeling language for embedded systems. It is perfectly suited for event driven, real time systems. However, each embedded SW relies on an underlying HW, with components like digital I/Os, Sensors, ADCs, DACs, PWMs and so on to connect the real world. Therefore some driver SW is required to control all this HW components and to provide easy access for the higher level SW. To develop the HW-drivers as well as your application logic without changing the development environment, you need a tool chain that provides both, driver development and high level application development. For Infineon's XMC&trade; ARM Cortex M0/M4 devices special support is provided to combine the DAVE&trade; tool for driver development with eTrice for application development. This tutorials will guide you through the first steps.
 
-The tutorials relies on the XMC4700 Relax Lite Kit. As a precondition you should be familiar with Dave&trade;. It is very easy to adapt the tutorials to any other development board or to your own HW.           
+The tutorials relies on the XMC4700 Relax Lite Kit. As a precondition you should be familiar with DAVE&trade;. It is very easy to adapt the tutorials to any other development board or to your own HW.           
 
 Getting Started without Operating System
 ----------------------------------------
 
 Within this tutorial you will perform the following steps:
 
--   create a Dave&trade; basic model
+-   create a DAVE CE&trade; basic model
 -   run the *New Set of eTrice Models* wizard
 -   create a simple blinky model
 -   generate, build and run the application
@@ -22,11 +22,18 @@ Within this tutorial you will perform the following steps:
 
 
 ###Step 1:###
-As a starting point you should create a Dave&trade; project for the target HW. Let's call the project *BlinkyTutorial_RelaxKit4700_ST*, where *ST* stands for *Single Threaded*. The following APPs should be included:
+As a starting point you should create a DAVE CE&trade; project for the target HW. Let's call the project *BlinkyTutorial_RelaxKit4700_ST*, where *ST* stands for *Single Threaded*. The following APPs should be included:
 
--   Systimer
--   2 * Digital outputs for the two LEDs.
--   2 * Digital inputs for the buttons.
+-   SYSTIMER
+-   2 * DIGITAL_IO configured as outputs for the two LEDs.
+-   2 * DIGITAL_IO configured as inputs for the buttons.
+
+Hint: For the basic setup and to reduce the initial effort it is sufficient to create just
+  
+-	SYSTMIER
+-	1 * DIGITAL_IO configured as output for LED1 "LED1_P5_9"
+
+For STEP 5 and following you will need the full set of IO Pins.
 
 The resulting project should look like this:
 
@@ -37,7 +44,7 @@ Make sure that the pins are configured correctly. It is a good idea to run it on
 ###Step 2:###
 Run the *New Set of new eTrice Models" wizard.
 
-Before you can run the wizard you have to create a folder called *model*.
+To keep an adequate project structure you should create a new folder called *model*.
 *right click on the project -> new -> other*
 
 ![image](images/400-DaveCreateFolder.png)
@@ -87,14 +94,15 @@ Once the code is generated you should build the application. After the first bui
 -   *src-gen*
 -   *src-gen-info*
 
-To start the model, you should call etStart from the Dave&trade; generated main function.
+To start the model, you should call etStart from the DAVE&trade; generated main function.
 
 ![image](images/400-DaveMain.png)
 
 ###Step 3:###
 Now everything is arranged to start modeling with eTrice. 
 
-The first step is to import some predefined services. Open the *BlinkyTutorial.room* and add the two import statements:
+One of the benefits of a modeling language like ROOM is, that it is very easy to build model based libraries either domain specific or for common use. Some common services are part of the eTrice distribution so that we can use it out of the box. The first application we want to create is a blinking LED, therefore we use the eTrice timing service. We just have to import the libraries.
+Open the *BlinkyTutorial.room* and add the two import statements:
  
 ```room
 RoomModel BlinkyTutorial {
@@ -107,7 +115,8 @@ RoomModel BlinkyTutorial {
         SubSystemRef main: MainSubSystem
     }
 ```
-In the outline view right click the SubSystem and opne the structure editor:
+Now we can use the timing service within our application. We just need to connect the application and the service. 
+In the outline view right click the SubSystem and open the structure editor:
 
 ![image](images/400-OpenStructureEditorSubsystem.png)
 
@@ -120,6 +129,8 @@ Select the ActorClass *ATimingService* and name the reference *timing*.
 Draw a connection from *application* to *timing*.
 
 ![image](images/400-SubSystemWithTimingService.png)
+
+Now we can use the timing service inside our application. We will see it later on. Our application should consist of two new actors and a protocol for communication. One actor should represent the HW, the other actor should implement the blinky behavior which is in fact very simple.Creating new elements like actors or protocols are done in the .room file.  
 
 Open *BlinkyTutorial.room* and create a new Actor called AHWAbstraction by adding the following text:
 
@@ -147,6 +158,7 @@ ProtocolClass POnOff {
 ```
 Check the outline view to see that the protocol was created.
 
+The *AHWAbstarction* should be controlled via the *POnOff* protocol. That means, whenever we send an *on* message, the LED should be switched on, whenever we send an *off* message, the LED should be switched off. Therefore we add an *Interface Port* from type *POnOff* to the *AHWAbstraction* actor.
 In the outline view right click on *AHWAbstraction -> Edit Structure* to open the structure editor of the actor.    
 
 ![image](images/400-OpenStructureEditor.png)
@@ -159,6 +171,7 @@ Name the port *LED1*, the port must be from the newly created protocol type *POn
 
 ![image](images/400-NewInterfacePort.png)
 
+Now we need a state machine which is able to handle the defined messages and to perform the required actions.
 Create the state machine of the *AHWAbstraction* actor:
 Inside the structure editor, right click on the actor.
 Select *Open Class Behavior*
@@ -169,7 +182,7 @@ The resulting FSM should look like this:
 
 ![image](images/400-HWActorFSM.png)
 
-It is just one state with two transitions. Each transition carries one action to switch a digital IO. Here we have the interface to the Dave&trade; generated code. The transitions will be triggered from the *POnOff* protocol.
+It is just one state with two transitions. Each transition carries one action to switch a digital IO. Here we have the interface to the DAVE&trade; generated code. The transitions will be triggered from the *POnOff* protocol.
 
 The resulting textual representation should look like this:
 
@@ -208,8 +221,10 @@ ActorClass AHWAbstraction {
     }
 }
 ```
+Please notice that the *off* message switches the LED off and vice versa.
 
-Now create an ActorClass called *ABlinky* by adding the following text:
+To implement the behavior of the *ABlinky* actor, we just need to create a new actor, add a port for communication and implement the behavior by adding a state machine with appropriate triggers and actions.
+Create an ActorClass called *ABlinky* by adding the following text:
 
 ```room
 ActorClass ABlinky {
@@ -220,7 +235,9 @@ ActorClass ABlinky {
 ```
 Recognize that the structure contains a Service Access Point (SAP) which allows you to use the timing service.
 
-Now, add an additional interface port called *out* as you did it before and make it a *conjugated* port. Create the following state machine:
+Now, add an additional interface port called *out* as you did it before and make it a *conjugated* port. We need to declare the type of the interface (protocol) just once. To define the direction (in or out messages) we need one *normal* port (*AHWAbstraction*) and one *conjugated* port (*ABlinky*).
+    
+To define the behavior, create the following state machine:
 
 ![image](images/400-BlinkyFSM.png)
 
@@ -389,7 +406,11 @@ If you missed some steps in between, you also can copy the complete model to you
 ###Step 4:###
 Generate, build and run the application.
 
-Generate the application as you did it in step1. Build the generated code and download it to the target as you normally do it.
+Generate the application as you did it in step2 (Right click on *gen_BlinkyTutorial.launch -> Run As -> gen_BlinkyTutorial*). Once the code is generated, you are back in your  normal C-Development and you can compile and debug your code as usual. Build the generated code and download it to the target as you normally do it.
+
+Right click on the project -> Build Project
+Right click on the project -> Debug As -> DAVE C/C++ Application
+
 The LED1 should blink in a 300ms interval.
 
 Congratulations, you have built you first eTrice Application on top of the Dave&trade; drivers!!!
