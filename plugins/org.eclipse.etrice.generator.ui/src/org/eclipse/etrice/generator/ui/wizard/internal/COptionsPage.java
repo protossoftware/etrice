@@ -78,7 +78,7 @@ public class COptionsPage extends WizardPage {
 		copyRuntimeButton.setLayoutData(gd);
 		
 		Label l = new Label(buttonComposite, SWT.NONE);
-		l.setText("Select active platform:");
+		l.setText("Select active &platform:");
 		l.setLayoutData(new GridData(SWT.NONE));
 		
 		platformCombo = new Combo(buttonComposite, SWT.READ_ONLY);
@@ -88,7 +88,7 @@ public class COptionsPage extends WizardPage {
 		platformCombo.setVisibleItemCount(10);
 		
 		l = new Label(buttonComposite, SWT.NONE);
-		l.setText("Main method name:");
+		l.setText("eTrice &entry function:");
 		l.setLayoutData(new GridData(SWT.NONE));
 		
 		mainMethodName = new Text(buttonComposite, SWT.SINGLE | SWT.BORDER);
