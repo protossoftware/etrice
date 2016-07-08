@@ -729,6 +729,14 @@ public class GeneratorModelBuilder {
 		if (debug)
 			logger.logInfo("GeneratorModelBuilder: creating actor instance "+name+" from "+aref.getType().getName());
 
+		if (aref.getType().isAbstract()) {
+			ActorContainerClass parent = (ActorContainerClass)aref.eContainer();
+			int offset = parent.getActorRefs().indexOf(aref);
+			diagnostician.error("Cannot instantiate abstract actor class '"+aref.getType().getName()+
+					"' as reference '"+aref.getName()+"' in '"+parent.getName()+"'",
+					aref.eContainer(), aref.eContainingFeature(), offset);
+		}
+		
 		ActorInstance ai = ETriceGenFactory.eINSTANCE.createActorInstance();
 		return recursivelyCreateActorInstances(ai, aref.getType(), name, idx);
 	}

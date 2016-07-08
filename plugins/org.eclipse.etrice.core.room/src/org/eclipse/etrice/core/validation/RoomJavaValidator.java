@@ -196,6 +196,11 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 			}
 		}
 		
+		// actor ref must not be of abstract type
+		if (ar.getType().isAbstract()) {
+			error("Actor reference must not be of an abstract type", null);
+		}
+		
 		// check actor ref array upper bound
 		if (ar.getMultiplicity()<0) {
 			// multiplicity * requires optional
