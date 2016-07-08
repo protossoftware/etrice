@@ -196,9 +196,9 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 			}
 		}
 		
-		// actor ref must not be of abstract type
-		if (ar.getType().isAbstract()) {
-			error("Actor reference must not be of an abstract type", null);
+		// fixed actor ref must NOT be of abstract type
+		if (ar.getRefType()==ReferenceType.FIXED && ar.getType().isAbstract()) {
+			error("A (fixed) actor reference must not be of an abstract type", null);
 		}
 		
 		// check actor ref array upper bound
