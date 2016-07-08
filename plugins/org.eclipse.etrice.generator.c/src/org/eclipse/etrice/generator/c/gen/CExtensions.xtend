@@ -371,5 +371,10 @@ class CExtensions implements ILanguageExtension {
 		else
 			type.getName()
 	}
+	
+	override makeOverridable() {
+		// not possible for C: empty string
+		""
+	}
 
 }

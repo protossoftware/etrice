@@ -333,12 +333,9 @@ public class NodeGen {
         for(final ActorInstance ai : _actorInstances) {
           _builder.append("#include \"");
           ActorClass _actorClass = ai.getActorClass();
-          String _path = this._roomExtensions.getPath(_actorClass);
-          _builder.append(_path, "");
-          ActorClass _actorClass_1 = ai.getActorClass();
-          String _name = _actorClass_1.getName();
-          _builder.append(_name, "");
-          _builder.append(".h\"");
+          String _actorIncludePath = this._cppExtensions.getActorIncludePath(_actorClass);
+          _builder.append(_actorIncludePath, "");
+          _builder.append("\"");
           _builder.newLineIfNotEmpty();
         }
       }
@@ -435,14 +432,14 @@ public class NodeGen {
               _builder.append("\t");
               _builder.append("msgService = new MessageService(this, IMessageService::");
               ExecMode _execmode_2 = thread_1.getExecmode();
-              String _name_1 = _execmode_2.getName();
-              _builder.append(_name_1, "\t\t");
+              String _name = _execmode_2.getName();
+              _builder.append(_name, "\t\t");
               _builder.append(", interval, 0, ");
               String _threadId_1 = this.getThreadId(thread_1);
               _builder.append(_threadId_1, "\t\t");
               _builder.append(", \"MessageService_");
-              String _name_2 = thread_1.getName();
-              _builder.append(_name_2, "\t\t");
+              String _name_1 = thread_1.getName();
+              _builder.append(_name_1, "\t\t");
               _builder.append("\", ");
               int _prio = thread_1.getPrio();
               _builder.append(_prio, "\t\t");
@@ -453,14 +450,14 @@ public class NodeGen {
               _builder.append("\t");
               _builder.append("msgService = new MessageService(this, IMessageService::");
               ExecMode _execmode_3 = thread_1.getExecmode();
-              String _name_3 = _execmode_3.getName();
-              _builder.append(_name_3, "\t\t");
+              String _name_2 = _execmode_3.getName();
+              _builder.append(_name_2, "\t\t");
               _builder.append(", 0, ");
               String _threadId_2 = this.getThreadId(thread_1);
               _builder.append(_threadId_2, "\t\t");
               _builder.append(", \"MessageService_");
-              String _name_4 = thread_1.getName();
-              _builder.append(_name_4, "\t\t");
+              String _name_3 = thread_1.getName();
+              _builder.append(_name_3, "\t\t");
               _builder.append("\", ");
               int _prio_1 = thread_1.getPrio();
               _builder.append(_prio_1, "\t\t");
@@ -507,8 +504,8 @@ public class NodeGen {
             if (_not) {
               _builder.append("\t");
               _builder.append("addPathToThread(\"");
-              String _path_1 = ai_1.getPath();
-              _builder.append(_path_1, "\t");
+              String _path = ai_1.getPath();
+              _builder.append(_path, "\t");
               _builder.append("\", ");
               PhysicalThread _thread = mapped.getThread();
               String _threadId_3 = this.getThreadId(_thread);
@@ -543,8 +540,8 @@ public class NodeGen {
                   _builder.append("\t");
                   _builder.append("\t");
                   _builder.append("DebuggingService::getInstance().addMessageActorCreate(*this, \"");
-                  String _name_5 = sub.getName();
-                  _builder.append(_name_5, "\t\t");
+                  String _name_4 = sub.getName();
+                  _builder.append(_name_4, "\t\t");
                   _builder.append(GenmodelConstants.INDEX_SEP, "\t\t");
                   _builder.append("\"+i);");
                   _builder.newLineIfNotEmpty();
@@ -554,11 +551,11 @@ public class NodeGen {
               _builder.append("\t");
               _builder.append("new ");
               ActorClass _type_1 = sub.getType();
-              String _name_6 = _type_1.getName();
-              _builder.append(_name_6, "\t\t");
+              String _implementationClassName = this._cppExtensions.getImplementationClassName(_type_1);
+              _builder.append(_implementationClassName, "\t\t");
               _builder.append("(this, \"");
-              String _name_7 = sub.getName();
-              _builder.append(_name_7, "\t\t");
+              String _name_5 = sub.getName();
+              _builder.append(_name_5, "\t\t");
               _builder.append(GenmodelConstants.INDEX_SEP, "\t\t");
               _builder.append("\"+i);");
               _builder.newLineIfNotEmpty();
@@ -572,8 +569,8 @@ public class NodeGen {
                 if (_isGenerateMSCInstrumentation_1) {
                   _builder.append("\t");
                   _builder.append("DebuggingService::getInstance().addMessageActorCreate(*this, \"");
-                  String _name_8 = sub.getName();
-                  _builder.append(_name_8, "\t");
+                  String _name_6 = sub.getName();
+                  _builder.append(_name_6, "\t");
                   _builder.append("\");");
                   _builder.newLineIfNotEmpty();
                 }
@@ -581,11 +578,11 @@ public class NodeGen {
               _builder.append("\t");
               _builder.append("new ");
               ActorClass _type_2 = sub.getType();
-              String _name_9 = _type_2.getName();
-              _builder.append(_name_9, "\t");
+              String _implementationClassName_1 = this._cppExtensions.getImplementationClassName(_type_2);
+              _builder.append(_implementationClassName_1, "\t");
               _builder.append("(this, \"");
-              String _name_10 = sub.getName();
-              _builder.append(_name_10, "\t");
+              String _name_7 = sub.getName();
+              _builder.append(_name_7, "\t");
               _builder.append("\");");
               _builder.newLineIfNotEmpty();
             }

@@ -1,0 +1,8 @@
+RoomModel room.basic.annotations {
+	
+	AnnotationType ImplementationSubclass {
+        target = ActorClass
+        mandatory attribute fqnClassName: ptCharacter
+        optional attribute includePath: ptCharacter
+	}
+}

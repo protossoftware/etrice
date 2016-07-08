@@ -18,9 +18,12 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.etrice.core.common.base.KeyValue;
+import org.eclipse.etrice.core.common.base.Literal;
 import org.eclipse.etrice.core.etphys.eTPhys.NodeRef;
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance;
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.IDiagnostician;
+import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DataType;
@@ -32,13 +35,17 @@ import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.VarDecl;
+import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
+import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.etrice.generator.generic.TypeHelpers;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 @Singleton
 @SuppressWarnings("all")
@@ -49,6 +56,14 @@ public class CppExtensions implements ILanguageExtension {
   @Inject
   @Extension
   private TypeHelpers _typeHelpers;
+  
+  @Inject
+  @Extension
+  private RoomHelpers _roomHelpers;
+  
+  @Inject
+  @Extension
+  private RoomExtensions _roomExtensions;
   
   public String getTypedDataDefinition(final EObject msg) {
     VarDecl _data = ((Message) msg).getData();
@@ -512,5 +527,97 @@ public class CppExtensions implements ILanguageExtension {
       _xifexpression = type.getName();
     }
     return _xifexpression;
+  }
+  
+  public String makeOverridable() {
+    return "virtual ";
+  }
+  
+  /**
+   * check if there is an ImplementationSubclass annotation and return its fully qualified name or the actor class name
+   */
+  public String getImplementationClassName(final ActorClass ac) {
+    String _xblockexpression = null;
+    {
+      final List<KeyValue> attributes = this._roomHelpers.getAttributes(ac, "ImplementationSubclass");
+      String _xifexpression = null;
+      boolean _isEmpty = attributes.isEmpty();
+      if (_isEmpty) {
+        _xifexpression = ac.getName();
+      } else {
+        final Function1<KeyValue, Boolean> _function = new Function1<KeyValue, Boolean>() {
+          public Boolean apply(final KeyValue it) {
+            String _key = it.getKey();
+            return Boolean.valueOf(Objects.equal(_key, "fqnClassName"));
+          }
+        };
+        Iterable<KeyValue> _filter = IterableExtensions.<KeyValue>filter(attributes, _function);
+        KeyValue _head = IterableExtensions.<KeyValue>head(_filter);
+        Literal _value = _head.getValue();
+        _xifexpression = this._roomHelpers.literalToString(_value);
+      }
+      _xblockexpression = _xifexpression;
+    }
+    return _xblockexpression;
+  }
+  
+  /**
+   * check if there is an ImplementationSubclass annotation. If it also has an includePath use it.
+   * If there is not includePath, use the class name as base file name.
+   * If there is no annotation use the default path.
+   */
+  public String getActorIncludePath(final ActorClass ac) {
+    String _xblockexpression = null;
+    {
+      final List<KeyValue> attributes = this._roomHelpers.getAttributes(ac, "ImplementationSubclass");
+      String _xifexpression = null;
+      boolean _isEmpty = attributes.isEmpty();
+      if (_isEmpty) {
+        String _path = this._roomExtensions.getPath(ac);
+        String _name = ac.getName();
+        String _plus = (_path + _name);
+        _xifexpression = (_plus + ".h");
+      } else {
+        String _xblockexpression_1 = null;
+        {
+          final Function1<KeyValue, Boolean> _function = new Function1<KeyValue, Boolean>() {
+            public Boolean apply(final KeyValue it) {
+              String _key = it.getKey();
+              return Boolean.valueOf(Objects.equal(_key, "includePath"));
+            }
+          };
+          final Iterable<KeyValue> path = IterableExtensions.<KeyValue>filter(attributes, _function);
+          String _xifexpression_1 = null;
+          boolean _isEmpty_1 = IterableExtensions.isEmpty(path);
+          if (_isEmpty_1) {
+            String _xblockexpression_2 = null;
+            {
+              final Function1<KeyValue, Boolean> _function_1 = new Function1<KeyValue, Boolean>() {
+                public Boolean apply(final KeyValue it) {
+                  String _key = it.getKey();
+                  return Boolean.valueOf(Objects.equal(_key, "fqnClassName"));
+                }
+              };
+              Iterable<KeyValue> _filter = IterableExtensions.<KeyValue>filter(attributes, _function_1);
+              KeyValue _head = IterableExtensions.<KeyValue>head(_filter);
+              Literal _value = _head.getValue();
+              String _literalToString = this._roomHelpers.literalToString(_value);
+              String[] _split = _literalToString.split("::");
+              final String baseName = IterableExtensions.<String>last(((Iterable<String>)Conversions.doWrapArray(_split)));
+              _xblockexpression_2 = (baseName + ".h");
+            }
+            _xifexpression_1 = _xblockexpression_2;
+          } else {
+            KeyValue _head = IterableExtensions.<KeyValue>head(path);
+            Literal _value = _head.getValue();
+            _xifexpression_1 = this._roomHelpers.literalToString(_value);
+          }
+          _xblockexpression_1 = _xifexpression_1;
+        }
+        _xifexpression = _xblockexpression_1;
+      }
+      _xblockexpression = _xifexpression;
+    }
+    return _xblockexpression;
   }
 }

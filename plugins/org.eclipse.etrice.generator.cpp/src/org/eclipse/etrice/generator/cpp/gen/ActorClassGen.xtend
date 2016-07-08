@@ -215,7 +215,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 		#include <string>
 
 		«FOR ar : ac.actorRefs»
-			#include "«ar.type.path»«ar.type.name».h"
+			#include "«ar.type.actorIncludePath»"
 		«ENDFOR»
 
 		using namespace etRuntime;
@@ -239,13 +239,13 @@ class ActorClassGen extends GenericActorClassGenerator {
 						«IF Main::settings.generateMSCInstrumentation»
 							DebuggingService::getInstance().addMessageActorCreate(*this, "«sub.name»«GenmodelConstants::INDEX_SEP»"+i);
 						«ENDIF»
-						new «sub.type.name»(this, "«sub.name»«GenmodelConstants::INDEX_SEP»"+i);
+						new «sub.type.implementationClassName»(this, "«sub.name»«GenmodelConstants::INDEX_SEP»"+i);
 					}
 				«ELSE»
 					«IF Main::settings.generateMSCInstrumentation»
 						DebuggingService::getInstance().addMessageActorCreate(*this, "«sub.name»");
 					«ENDIF»
-					new «sub.type.name»(this, "«sub.name»");
+					new «sub.type.implementationClassName»(this, "«sub.name»");
 				«ENDIF»
 			«ENDFOR»
 
@@ -300,6 +300,4 @@ class ActorClassGen extends GenericActorClassGenerator {
 		«ENDIF»
 		'''
 	}
-
-
 }

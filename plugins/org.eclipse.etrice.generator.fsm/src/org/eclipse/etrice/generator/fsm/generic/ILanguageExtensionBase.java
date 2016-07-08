@@ -114,6 +114,11 @@ public interface ILanguageExtensionBase {
 	boolean usesInheritance();
 
 	/**
+	 * produces the "virtual" keyword for C++ and the empty string else
+	 */
+	String makeOverridable();
+	
+	/**
 	 * does the target language use pointers
 	 *
 	 * @return true for C++ and C, false for Java

@@ -652,4 +652,8 @@ public class JavaExtensions implements ILanguageExtension {
     }
     return _xifexpression;
   }
+  
+  public String makeOverridable() {
+    return "";
+  }
 }

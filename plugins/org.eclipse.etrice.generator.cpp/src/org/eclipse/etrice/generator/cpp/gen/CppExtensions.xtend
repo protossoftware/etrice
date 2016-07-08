@@ -37,13 +37,17 @@ import org.eclipse.etrice.core.room.VarDecl
 import org.eclipse.etrice.generator.generic.ILanguageExtension
 import org.eclipse.etrice.generator.generic.TypeHelpers
 import org.eclipse.xtext.util.Pair
+import org.eclipse.etrice.core.room.ActorClass
+import org.eclipse.etrice.core.room.util.RoomHelpers
+import org.eclipse.etrice.generator.generic.RoomExtensions
 
 @Singleton
 class CppExtensions implements ILanguageExtension {
 
 	@Inject IDiagnostician diagnostician
 	@Inject extension TypeHelpers
-
+	@Inject extension RoomHelpers
+	@Inject extension RoomExtensions
 
 	override String getTypedDataDefinition(EObject msg) {
 		generateArglistAndTypedData((msg as Message).data).get(1)
@@ -269,6 +273,45 @@ class CppExtensions implements ILanguageExtension {
 			type.getPrimitiveType().getCastName()
 		else
 			type.getName()
+	}
+	
+	override makeOverridable() {
+		"virtual "
+	}
+
+	/**
+	 * check if there is an ImplementationSubclass annotation and return its fully qualified name or the actor class name
+	 */
+	def getImplementationClassName(ActorClass ac) {
+	    val attributes = ac.getAttributes("ImplementationSubclass")
+	    if (attributes.empty) {
+	        ac.name
+	    }
+	    else {
+	        attributes.filter[it.key=="fqnClassName"].head.value.literalToString
+	    }
+	}
+
+	/**
+	 * check if there is an ImplementationSubclass annotation. If it also has an includePath use it.
+	 * If there is not includePath, use the class name as base file name.
+	 * If there is no annotation use the default path.
+	 */
+	def getActorIncludePath(ActorClass ac) {
+	    val attributes = ac.getAttributes("ImplementationSubclass")
+	    if (attributes.empty) {
+		    ac.path+ac.name+".h"
+	    }
+	    else {
+	        val path = attributes.filter[it.key=="includePath"]
+	        if (path.empty) {
+		        val baseName = attributes.filter[it.key=="fqnClassName"].head.value.literalToString.split("::").last
+			    baseName+".h"
+	        }
+	        else {
+	            path.head.value.literalToString
+	        }
+	    }
 	}
 
 }

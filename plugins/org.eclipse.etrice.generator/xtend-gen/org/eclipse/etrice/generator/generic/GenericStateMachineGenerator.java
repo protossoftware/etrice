@@ -235,6 +235,8 @@ public class GenericStateMachineGenerator extends AbstractStateMachineGenerator 
         StringConcatenation _builder_1 = new StringConcatenation();
         String _accessLevelProtected_1 = this.langExt.accessLevelProtected();
         _builder_1.append(_accessLevelProtected_1, "");
+        String _makeOverridable = this.langExt.makeOverridable();
+        _builder_1.append(_makeOverridable, "");
         _builder_1.append("void ");
         String _actionCodeOperationName_1 = this._codegenHelpers.getActionCodeOperationName(tr);
         _builder_1.append(_actionCodeOperationName_1, "");
@@ -355,6 +357,8 @@ public class GenericStateMachineGenerator extends AbstractStateMachineGenerator 
             } else {
               String _accessLevelProtected_1 = this.langExt.accessLevelProtected();
               _builder.append(_accessLevelProtected_1, "");
+              String _makeOverridable = this.langExt.makeOverridable();
+              _builder.append(_makeOverridable, "");
               _builder.append("void ");
               _builder.append(entryOp, "");
               _builder.append("(");
@@ -388,6 +392,8 @@ public class GenericStateMachineGenerator extends AbstractStateMachineGenerator 
             } else {
               String _accessLevelProtected_3 = this.langExt.accessLevelProtected();
               _builder.append(_accessLevelProtected_3, "");
+              String _makeOverridable_1 = this.langExt.makeOverridable();
+              _builder.append(_makeOverridable_1, "");
               _builder.append("void ");
               _builder.append(exitOp, "");
               _builder.append("(");
@@ -421,6 +427,8 @@ public class GenericStateMachineGenerator extends AbstractStateMachineGenerator 
             } else {
               String _accessLevelProtected_5 = this.langExt.accessLevelProtected();
               _builder.append(_accessLevelProtected_5, "");
+              String _makeOverridable_2 = this.langExt.makeOverridable();
+              _builder.append(_makeOverridable_2, "");
               _builder.append("void ");
               _builder.append(doOp, "");
               _builder.append("(");

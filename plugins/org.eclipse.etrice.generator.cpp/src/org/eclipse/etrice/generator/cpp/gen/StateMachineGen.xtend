@@ -16,13 +16,11 @@ package org.eclipse.etrice.generator.cpp.gen
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ExpandedModelComponent
+import org.eclipse.etrice.generator.cpp.Main
 import org.eclipse.etrice.generator.generic.GenericStateMachineGenerator
 import org.eclipse.etrice.generator.generic.RoomExtensions
-import org.eclipse.etrice.generator.cpp.Main
-import org.eclipse.etrice.core.room.ActorClass
 
-
- @Singleton
+@Singleton
 class StateMachineGen extends GenericStateMachineGenerator {
 
 	@Inject extension RoomExtensions

@@ -27,12 +27,10 @@ import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.StandardOperation;
-import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.cpp.gen.CppExtensions;
 import org.eclipse.etrice.generator.cpp.gen.Initialization;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
-import org.eclipse.etrice.generator.generic.TypeHelpers;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -62,15 +60,7 @@ public class DataClassGen {
   
   @Inject
   @Extension
-  private TypeHelpers typeHelpers;
-  
-  @Inject
-  @Extension
   private Initialization _initialization;
-  
-  @Inject
-  @Extension
-  private RoomHelpers _roomHelpers;
   
   @Inject
   private ILogger logger;

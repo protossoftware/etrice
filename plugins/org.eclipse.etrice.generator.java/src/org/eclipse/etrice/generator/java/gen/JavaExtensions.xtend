@@ -285,5 +285,10 @@ class JavaExtensions implements ILanguageExtension {
 		else
 			"int"
 	}
+	
+	override makeOverridable() {
+		// not needed for Java: empty string
+		""
+	}
 
 }

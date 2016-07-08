@@ -115,7 +115,7 @@ class GenericStateMachineGenerator extends AbstractStateMachineGenerator {
         }
         else {
             '''
-                «langExt.accessLevelProtected»void «tr.getActionCodeOperationName()»(«langExt.selfPointer(xpmc.className, hasArgs)»«IF hasArgs»«constIfItemPtr» ifitem«transitionChainGenerator.generateArgumentList(xpmc, tr)»«ENDIF»);
+                «langExt.accessLevelProtected»«langExt.makeOverridable»void «tr.getActionCodeOperationName()»(«langExt.selfPointer(xpmc.className, hasArgs)»«IF hasArgs»«constIfItemPtr» ifitem«transitionChainGenerator.generateArgumentList(xpmc, tr)»«ENDIF»);
             '''
         }
 	}
@@ -171,7 +171,7 @@ class GenericStateMachineGenerator extends AbstractStateMachineGenerator {
 					«entry»
 				}
 			«ELSE»
-				«langExt.accessLevelProtected»void «entryOp»(«selfPtr»);
+				«langExt.accessLevelProtected»«langExt.makeOverridable»void «entryOp»(«selfPtr»);
 			«ENDIF»
 		«ENDIF»
 		«IF !exit.empty»
@@ -180,7 +180,7 @@ class GenericStateMachineGenerator extends AbstractStateMachineGenerator {
 					«exit»
 				}
 			«ELSE»
-				«langExt.accessLevelProtected»void «exitOp»(«selfPtr»);
+				«langExt.accessLevelProtected»«langExt.makeOverridable»void «exitOp»(«selfPtr»);
 			«ENDIF»
 		«ENDIF»
 		«IF !docode.empty»
@@ -189,7 +189,7 @@ class GenericStateMachineGenerator extends AbstractStateMachineGenerator {
 					«docode»
 				}
 			«ELSE»
-				«langExt.accessLevelProtected»void «doOp»(«selfPtr»);
+				«langExt.accessLevelProtected»«langExt.makeOverridable»void «doOp»(«selfPtr»);
 			«ENDIF»
 		«ENDIF»
 		'''

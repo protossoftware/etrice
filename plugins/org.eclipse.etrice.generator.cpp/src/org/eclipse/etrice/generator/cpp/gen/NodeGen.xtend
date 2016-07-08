@@ -155,7 +155,7 @@ class NodeGen {
 		#include "common/modelbase/InterfaceItemBase.h"
 
 		«FOR ai : comp.actorInstances»
-			#include "«ai.actorClass.path»«ai.actorClass.name».h"
+			#include "«ai.actorClass.actorIncludePath»"
 		«ENDFOR»
 		#include <iostream>
 
@@ -209,13 +209,13 @@ class NodeGen {
 						«IF Main::settings.generateMSCInstrumentation»
 							DebuggingService::getInstance().addMessageActorCreate(*this, "«sub.name»«GenmodelConstants::INDEX_SEP»"+i);
 						«ENDIF»
-						new «sub.type.name»(this, "«sub.name»«GenmodelConstants::INDEX_SEP»"+i);
+						new «sub.type.implementationClassName»(this, "«sub.name»«GenmodelConstants::INDEX_SEP»"+i);
 					}
 				«ELSE»
 					«IF Main::settings.generateMSCInstrumentation»
 						DebuggingService::getInstance().addMessageActorCreate(*this, "«sub.name»");
 					«ENDIF»
-					new «sub.type.name»(this, "«sub.name»");
+					new «sub.type.implementationClassName»(this, "«sub.name»");
 				«ENDIF»
 			«ENDFOR»
 
