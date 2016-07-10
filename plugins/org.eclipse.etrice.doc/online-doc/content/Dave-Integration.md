@@ -39,7 +39,7 @@ The resulting project should look like this:
 
 ![image](images/400-DaveBasicProject.png)
 
-Make sure that the pins are configured correctly. It is a good idea to run it on the real HW to verify that everything is configured correctly.
+Make sure that the pins are configured correctly. It is a good idea to run it on the real HW to verify that everything is configured correctly. To setup a debug configuration see also *Step 4*.
 
 ###Step 2:###
 Run the *New Set of new eTrice Models" wizard.
@@ -63,7 +63,7 @@ Name the model *BlinkyTutorial*
 Click *Next*
 Enable the check box *Copy C-Runtime into project*
 Select *ST_XMC_Dave* as active platform.
-Rename main to *etStart*.
+Rename the eTrice entry function to *etStart*.
 
 ![image](images/400-SelectRuntime.png)
 
@@ -414,6 +414,25 @@ Right click on the project -> Debug As -> DAVE C/C++ Application
 The LED1 should blink in a 300ms interval.
 
 Congratulations, you have built you first eTrice Application on top of the Dave&trade; drivers!!!
+
+Hint: If you start the debugger the first time (for a new project) it might be necessary to setup the debug configuration:
+
+Right click on the project -> Debug As -> Debug Configurations...
+
+![image](images/400-CreateDebugConfig.png)
+
+Select the *GDB Segger J_link Debugging* and press the *New* button to create a new debug configuration.
+![image](images/400-SeggerDebugConfig.png)
+
+Keep all default settings and press *Debug* 
+![image](images/400-SeggerDebugConfigTutorial.png)
+
+Once the debug configuration is created you can start the debugger either with:
+Right click on the project -> Debug As -> DAVE C/C++ Application
+or via the Debug Button: 
+
+![image](images/400-StartDebugWithIcon.png)
+
 
 ###Step 5:###
 As further exercise you can extend the model in the following way:
