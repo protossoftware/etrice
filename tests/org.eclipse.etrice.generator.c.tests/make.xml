@@ -1,31 +1,31 @@
 <?xml version="1.0"?>
 <!--
 	Ant makefile for building and running of tests.
-	
+
 	Includes common.xml from org.eclipse.etrice.generator.common.tests
 -->
 <project name="org.eclipse.etrice.generator.c.tests" basedir="." default="all">
-	
+
 	<target name="testing" depends="setVars,common.testing">
-			
+
 		<!-- add test here, testid==testSuiteFileName -->
 		<test testid="StaticConfigTest" models="${models.path}/staticConfig/StaticConfigTest.etmap ${models.path}/staticConfig/StaticConfigTest.config" />
-				
-		<!--<test testid="SendingDataTestC" models="${models.path}/sendingData/SendingDataTestC.room ${models.path}/GenericPhysical.etphys" />-->
+
+		<test testid="SendingDataTestC" models="${models.path}/sendingData/SendingDataTestC.room ${models.path}/GenericPhysical.etphys" />
 		<echo>done with ${ant.project.name}</echo>
 	</target>
-	
+
 	<target name="copyModels" depends="common.copyModels">
 		<copy todir="${models.path}">
 			<fileset dir="./targetModels"/>
 		</copy>
 		<move file="${models.path}/staticConfig/StaticConfigTest_C.room" toFile="${models.path}/staticConfig//StaticConfigTest.room" />
 	</target>
-	
+
 	<!-- ################################################################ -->
-	
+
 	<import file="../org.eclipse.etrice.generator.common.tests/common.xml" as="common"/>
-			
+
 	<property name="modellib.path" value="../../runtime/org.eclipse.etrice.modellib.c" />
 	<property name="runtime.path" value="../../runtime/org.eclipse.etrice.runtime.c" />
 
@@ -34,10 +34,10 @@
 		<property name="runtime.platform" value="MT_WIN_MinGW"/>
 		<echo>    runtime.platform = ${runtime.platform}        	</echo>
 	</target>
-	<target name="setVars" depends="set_local_rt,common.setVars"/>	
-	
+	<target name="setVars" depends="set_local_rt,common.setVars"/>
+
 	<target name="all" depends="clean,copyModels,testing"></target>
-	
+
 	<!-- test := generate 1 executable, build, run, process results -->
 	<macrodef name="test">
 		<attribute name="testId"/>
@@ -50,7 +50,7 @@
 			<copyResult testId="@{testId}" targetId="${runtime.platform}_"/>
 		</sequential>
 	</macrodef>
-	
+
 	<macrodef name="standaloneGenerator">
 		<attribute name="testId"/>
 		<attribute name="models"/>
@@ -61,10 +61,10 @@
 				<arg value="-genDir"/><arg value="src-gen/@{testId}"/>
 				<arg value="-msc_instr"/>
 				<classpath refid="etrice.clspath"/>
-			</java>	
+			</java>
 		</sequential>
 	</macrodef>
-	
+
 	<!--
 		build: compiles and links the generated C sources
 	-->
@@ -84,7 +84,7 @@
 			</exec>
 		</sequential>
 	</macrodef>
-	
+
 	<macrodef name="run">
 		<attribute name="testId"/>
 		<sequential>
@@ -95,5 +95,5 @@
 			</exec>
 		</sequential>
 	</macrodef>
-	
+
 </project>

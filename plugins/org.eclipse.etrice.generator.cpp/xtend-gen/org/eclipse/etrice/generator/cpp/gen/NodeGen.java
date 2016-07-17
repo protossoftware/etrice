@@ -25,6 +25,7 @@ import org.eclipse.etrice.core.etphys.eTPhys.ExecMode;
 import org.eclipse.etrice.core.etphys.eTPhys.NodeClass;
 import org.eclipse.etrice.core.etphys.eTPhys.NodeRef;
 import org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread;
+import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.etrice.core.genmodel.builder.GenmodelConstants;
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
@@ -166,15 +167,20 @@ public class NodeGen {
       _builder.append("*/");
       _builder.newLine();
       _builder.newLine();
-      CharSequence _generateIncludeGuardBegin = this._cppExtensions.generateIncludeGuardBegin(clsname);
+      CharSequence _generateIncludeGuardBegin = this._cppExtensions.generateIncludeGuardBegin(cc, "");
       _builder.append(_generateIncludeGuardBegin, "");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
       _builder.append("#include \"common/modelbase/SubSystemClassBase.h\"");
       _builder.newLine();
       _builder.newLine();
-      CharSequence _userCode = this._procedureHelpers.userCode(cc, 1, false);
+      DetailCode _userCode1 = cc.getUserCode1();
+      CharSequence _userCode = this._procedureHelpers.userCode(_userCode1);
       _builder.append(_userCode, "");
+      _builder.newLineIfNotEmpty();
+      _builder.newLine();
+      String _generateNamespaceBegin = this._cppExtensions.generateNamespaceBegin(cc);
+      _builder.append(_generateNamespaceBegin, "");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
       _builder.append("class ");
@@ -183,7 +189,8 @@ public class NodeGen {
       _builder.newLineIfNotEmpty();
       _builder.newLine();
       _builder.append("\t");
-      CharSequence _userCode_1 = this._procedureHelpers.userCode(cc, 2, false);
+      DetailCode _userCode2 = cc.getUserCode2();
+      CharSequence _userCode_1 = this._procedureHelpers.userCode(_userCode2);
       _builder.append(_userCode_1, "\t");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
@@ -259,8 +266,11 @@ public class NodeGen {
       _builder.append("};");
       _builder.newLine();
       _builder.newLine();
-      String _name = cc.getName();
-      CharSequence _generateIncludeGuardEnd = this._cppExtensions.generateIncludeGuardEnd(_name);
+      String _generateNamespaceEnd = this._cppExtensions.generateNamespaceEnd(cc);
+      _builder.append(_generateNamespaceEnd, "");
+      _builder.newLineIfNotEmpty();
+      _builder.newLine();
+      CharSequence _generateIncludeGuardEnd = this._cppExtensions.generateIncludeGuardEnd(cc, "");
       _builder.append(_generateIncludeGuardEnd, "");
       _builder.newLineIfNotEmpty();
       _xblockexpression = _builder;
@@ -339,11 +349,13 @@ public class NodeGen {
           _builder.newLineIfNotEmpty();
         }
       }
-      _builder.append("#include <iostream>");
-      _builder.newLine();
       _builder.newLine();
       _builder.append("using namespace etRuntime;");
       _builder.newLine();
+      _builder.newLine();
+      String _generateNamespaceBegin = this._cppExtensions.generateNamespaceBegin(cc);
+      _builder.append(_generateNamespaceBegin, "");
+      _builder.newLineIfNotEmpty();
       _builder.newLine();
       {
         Iterable<Indexed<PhysicalThread>> _indexed = Indexed.<PhysicalThread>indexed(threads);
@@ -669,6 +681,10 @@ public class NodeGen {
           _builder.newLine();
         }
       }
+      _builder.newLine();
+      String _generateNamespaceEnd = this._cppExtensions.generateNamespaceEnd(cc);
+      _builder.append(_generateNamespaceEnd, "");
+      _builder.newLineIfNotEmpty();
       _builder.newLine();
       _xblockexpression = _builder;
     }

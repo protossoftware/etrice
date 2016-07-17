@@ -46,7 +46,7 @@ class NodeRunnerGen {
 	}
 
 	def generateHeaderFile(Root root, SubSystemInstance ssc) {
-		//val cc = ssc.subSystemClass
+		val cc = ssc.subSystemClass
 		val nr = ETMapUtil::getNodeRef(ssc)
 		val clsname = nr.getCppClassName(ssc)
 		'''
@@ -57,7 +57,9 @@ class NodeRunnerGen {
 			 * it instantiates «ssc.name» and starts and ends the lifecycle
 			 */
 
-			«generateIncludeGuardBegin(clsname+"Runner")»
+			«generateIncludeGuardBegin(cc, 'Runner')»
+
+			«cc.generateNamespaceBegin»
 
 			#include "common/modelbase/SubSystemRunnerBase.h"
 
@@ -65,12 +67,14 @@ class NodeRunnerGen {
 
 			};
 
-			«generateIncludeGuardEnd(clsname+"Runner")»
+			«cc.generateNamespaceEnd»
+
+			«generateIncludeGuardEnd(cc, 'Runner')»
 		'''
 	}
 
 	def generateSourceFile(Root root, SubSystemInstance ssc) {
-		//val cc = ssc.subSystemClass
+		val cc = ssc.subSystemClass
 		val nr = ETMapUtil::getNodeRef(ssc)
 		val clsname = nr.getCppClassName(ssc)
 		'''
@@ -89,6 +93,8 @@ class NodeRunnerGen {
 
 			using namespace etRuntime;
 
+			«cc.generateNamespaceBegin»
+
 			/**
 			 * «Main.getSettings.mainMethodName» function
 			 * creates components and starts and stops the lifecycle
@@ -100,12 +106,13 @@ class NodeRunnerGen {
 
 				«clsname»Runner::run(*main_component, argc, argv);
 
-				// TODO JH crash
+«««				// TODO JH crash
 				//delete sys;
 
 				return 0;
 			}
 
+			«cc.generateNamespaceEnd»
 
 		'''
 	}

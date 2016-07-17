@@ -15,6 +15,7 @@ import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.core.fsm.fSM.DetailCode;
@@ -40,6 +41,7 @@ import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 /**
@@ -352,7 +354,7 @@ public class ProcedureHelpers {
    * @param classname the name of the defining class
    * @return code for the attribute setter declaration
    */
-  private CharSequence setterHeader(final Attribute attribute, final String classname) {
+  protected CharSequence setterHeader(final Attribute attribute, final String classname) {
     StringConcatenation _builder = new StringConcatenation();
     String _accessLevelPublic = this.languageExt.accessLevelPublic();
     _builder.append(_accessLevelPublic, "");
@@ -363,8 +365,8 @@ public class ProcedureHelpers {
     _builder.append("(");
     String _selfPointer = this.languageExt.selfPointer(classname, true);
     _builder.append(_selfPointer, "");
-    String _declarationString = this.declarationString(attribute);
-    _builder.append(_declarationString, "");
+    String _argList = this.argList(Collections.<Attribute>unmodifiableList(CollectionLiterals.<Attribute>newArrayList(attribute)));
+    _builder.append(_argList, "");
     _builder.append(")");
     return _builder;
   }
@@ -374,12 +376,12 @@ public class ProcedureHelpers {
    * @param classname the name of the defining class
    * @return code for the attribute getter declaration
    */
-  private CharSequence getterHeader(final Attribute attribute, final String classname) {
+  protected CharSequence getterHeader(final Attribute attribute, final String classname) {
     StringConcatenation _builder = new StringConcatenation();
     String _accessLevelPublic = this.languageExt.accessLevelPublic();
     _builder.append(_accessLevelPublic, "");
-    String _signatureReturnString = this.signatureReturnString(attribute);
-    _builder.append(_signatureReturnString, "");
+    String _signatureString = this.signatureString(attribute);
+    _builder.append(_signatureString, "");
     _builder.append(" get");
     String _name = attribute.getName();
     String _firstUpper = StringExtensions.toFirstUpper(_name);
@@ -395,21 +397,17 @@ public class ProcedureHelpers {
    * @param attributes a list of {@link Attribute}s
    * @return an argument list for the attributes
    */
-  public CharSequence argList(final List<Attribute> attributes) {
-    StringConcatenation _builder = new StringConcatenation();
-    {
-      boolean _hasElements = false;
-      for(final Attribute a : attributes) {
-        if (!_hasElements) {
-          _hasElements = true;
-        } else {
-          _builder.appendImmediate(", ", "");
-        }
-        String _declarationString = this.declarationString(a);
-        _builder.append(_declarationString, "");
+  public String argList(final List<Attribute> attributes) {
+    final Function1<Attribute, String> _function = new Function1<Attribute, String>() {
+      public String apply(final Attribute it) {
+        String _signatureString = ProcedureHelpers.this.signatureString(it);
+        String _plus = (_signatureString + " ");
+        String _name = it.getName();
+        return (_plus + _name);
       }
-    }
-    return _builder;
+    };
+    List<String> _map = ListExtensions.<Attribute, String>map(attributes, _function);
+    return IterableExtensions.join(_map, ", ");
   }
   
   /**
@@ -666,7 +664,7 @@ public class ProcedureHelpers {
     return _xblockexpression;
   }
   
-  private String userStuctorImplementation(final RoomClass cls, final boolean ctor) {
+  protected String userStuctorImplementation(final RoomClass cls, final boolean ctor) {
     String _xblockexpression = null;
     {
       String _name = cls.getName();
@@ -765,7 +763,7 @@ public class ProcedureHelpers {
     return ((comment + this.NEWLINE) + _join);
   }
   
-  private List<ClassStructor> getStructors(final RoomClass cls, final boolean inherited) {
+  protected List<ClassStructor> getStructors(final RoomClass cls, final boolean inherited) {
     List<ClassStructor> _switchResult = null;
     final RoomClass it = cls;
     boolean _matched = false;
@@ -809,7 +807,7 @@ public class ProcedureHelpers {
    * @return the operation signature (with special care for
    * 		constructor and destructor
    */
-  private CharSequence operationSignature(final Operation operation, final String classname, final boolean isDeclaration) {
+  protected CharSequence operationSignature(final Operation operation, final String classname, final boolean isDeclaration) {
     CharSequence _xblockexpression = null;
     {
       StringConcatenation _builder = new StringConcatenation();
@@ -845,7 +843,7 @@ public class ProcedureHelpers {
    * @param type a {@link RefableType}
    * @return a string for the type (also for pointers)
    */
-  private String signatureString(final RefableType type) {
+  public String signatureString(final RefableType type) {
     String _switchResult = null;
     final RefableType it = type;
     boolean _matched = false;
@@ -872,33 +870,7 @@ public class ProcedureHelpers {
     return _switchResult;
   }
   
-  private String signatureReturnString(final Attribute attribute) {
-    String _switchResult = null;
-    final Attribute it = attribute;
-    boolean _matched = false;
-    if (!_matched) {
-      int _size = it.getSize();
-      boolean _greaterThan = (_size > 0);
-      if (_greaterThan) {
-        _matched=true;
-        RefableType _type = it.getType();
-        String _signatureString = this.signatureString(_type);
-        String _typeArrayModifier = this.languageExt.typeArrayModifier();
-        _switchResult = (_signatureString + _typeArrayModifier);
-      }
-    }
-    if (!_matched) {
-      RefableType _type_1 = it.getType();
-      _switchResult = this.signatureString(_type_1);
-    }
-    return _switchResult;
-  }
-  
-  /**
-   * @param attribute a {@link Attribute}
-   * @return a string for <code>type name</code>
-   */
-  private String declarationString(final Attribute attribute) {
+  public String signatureString(final Attribute attribute) {
     String _switchResult = null;
     final Attribute it = attribute;
     boolean _matched = false;
@@ -911,10 +883,39 @@ public class ProcedureHelpers {
         DataType _type_1 = _type.getType();
         String _typeName = this._typeHelpers.typeName(_type_1);
         int _size_1 = it.getSize();
-        String _name = it.getName();
         RefableType _type_2 = it.getType();
         boolean _isRef = _type_2.isRef();
-        _switchResult = this.languageExt.arrayDeclaration(_typeName, _size_1, _name, _isRef);
+        _switchResult = this.languageExt.arrayType(_typeName, _size_1, _isRef);
+      }
+    }
+    if (!_matched) {
+      RefableType _type_3 = it.getType();
+      _switchResult = this.signatureString(_type_3);
+    }
+    return _switchResult;
+  }
+  
+  /**
+   * @param attribute a {@link Attribute}
+   * @return a string for <code>type name</code>
+   */
+  public String declarationString(final Attribute attribute) {
+    String _switchResult = null;
+    final Attribute it = attribute;
+    boolean _matched = false;
+    if (!_matched) {
+      int _size = it.getSize();
+      boolean _greaterThan = (_size > 0);
+      if (_greaterThan) {
+        _matched=true;
+        RefableType _type = it.getType();
+        DataType _type_1 = _type.getType();
+        String _typeName = this._typeHelpers.typeName(_type_1);
+        int _size_1 = it.getSize();
+        RefableType _type_2 = it.getType();
+        boolean _isRef = _type_2.isRef();
+        String _name = it.getName();
+        _switchResult = this.languageExt.arrayDeclaration(_typeName, _size_1, _isRef, _name);
       }
     }
     if (!_matched) {
@@ -927,7 +928,7 @@ public class ProcedureHelpers {
     return _switchResult;
   }
   
-  private CharSequence functionSignature(final String className, final String fullFctName, final String returnType, final String arguments) {
+  protected CharSequence functionSignature(final String className, final String fullFctName, final String returnType, final String arguments) {
     StringConcatenation _builder = new StringConcatenation();
     String _accessLevelPublic = this.languageExt.accessLevelPublic();
     _builder.append(_accessLevelPublic, "");

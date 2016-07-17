@@ -4,10 +4,10 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * CONTRIBUTORS:
  * 		Thomas Schuetz and Henrik Rentz-Reichert (initial contribution)
- * 
+ *
  *******************************************************************************/
 
 package org.eclipse.etrice.core.naming;
@@ -57,40 +57,40 @@ import org.eclipse.etrice.core.room.util.RoomSwitch;
 public class RoomFragmentProvider extends FSMFragmentProvider {
 
 	protected class RoomPathProvider extends RoomSwitch<String> {
-		
+
 		private Switch<String> topSwitch;
 
 		public RoomPathProvider(Switch<String> topSwitch) {
 			this.topSwitch = topSwitch;
 		}
-		
+
 		@Override
 		public String caseRoomClass(RoomClass rc) {
 			return rc.getName();
 		}
-		
+
 		@Override
 		public String casePort(Port port) {
 			return topSwitch.doSwitch(port.eContainer())+SEP+port.getName();
 		}
-		
+
 		@Override
 		public String caseSPP(SPP spp) {
 			return topSwitch.doSwitch(spp.eContainer())+SEP+spp.getName();
 		}
-		
+
 		@Override
 		public String caseActorContainerRef(ActorContainerRef acr) {
 			return topSwitch.doSwitch(acr.eContainer())+SEP+acr.getName();
 		}
-		
+
 		@Override
 		public String caseBinding(Binding bi) {
 			return topSwitch.doSwitch(bi.eContainer())+SEP
 			+caseBindingEndPointShort(bi.getEndpoint1())+BIND_SEP
 			+caseBindingEndPointShort(bi.getEndpoint2());
 		}
-		
+
 		private String caseBindingEndPointShort(BindingEndPoint ep) {
 			String loc = ep.getActorRef()==null? LOCAL:ep.getActorRef().getName();
 			if (ep.getSub()!=null)
@@ -98,14 +98,14 @@ public class RoomFragmentProvider extends FSMFragmentProvider {
 			else
 				return ep.getPort().getName()+EP_SEP+loc;
 		}
-		
+
 		@Override
 		public String caseLayerConnection(LayerConnection bi) {
 			return topSwitch.doSwitch(bi.eContainer())+SEP
 			+caseSAPointShort(bi.getFrom())+CONN_SEP
 			+caseSPPointShort(bi.getTo());
 		}
-		
+
 		private String caseSAPointShort(SAPoint sapt) {
 			if (sapt==null)
 				return "null";
@@ -113,16 +113,16 @@ public class RoomFragmentProvider extends FSMFragmentProvider {
 				return ((RefSAPoint) sapt).getRef().getName();
 			else if (sapt instanceof RelaySAPoint)
 				return ((RelaySAPoint) sapt).getRelay().getName();
-			
+
 			assert(false): "unexpectd sub type";
 			return null;
 		}
-		
+
 		private String caseSPPointShort(SPPoint sppt) {
 			return sppt.getRef().getName()+EP_SEP+sppt.getService().getName();
 		}
 	}
-	
+
 	private class CombinedPathProvider extends ComposedSwitch<String> {
 		public CombinedPathProvider() {
 			this.addSwitch(new BasePathProvider());
@@ -130,7 +130,7 @@ public class RoomFragmentProvider extends FSMFragmentProvider {
 			this.addSwitch(new RoomPathProvider(this));
 		}
 	}
-	
+
 	private static final char BIND_SEP = '-';
 	private static final char SUB_SEP = '/';
 	private static final char CONN_SEP = '-';
@@ -138,13 +138,13 @@ public class RoomFragmentProvider extends FSMFragmentProvider {
 	private static final String LOCAL = ".";
 
 	private CombinedPathProvider roomPathProvider = new CombinedPathProvider();
-	
+
 	@Override
 	public String getFragment(EObject obj, Fallback fallback) {
 		String path = roomPathProvider.doSwitch(obj);
 		if (path!=null)
 			return obj.eClass().getName()+TYPE_SEP+path;
-		
+
 		return fallback.getFragment(obj);
 	}
 
@@ -158,14 +158,14 @@ public class RoomFragmentProvider extends FSMFragmentProvider {
 			if (result!=null)
 				return result;
 		}
-		
+
 		return fallback.getEObject(fragment);
 	}
 
 	public static boolean isActorClass(String fragment) {
 		if (fragment.startsWith(RoomPackage.eINSTANCE.getActorClass().getName()))
 			return true;
-		
+
 		return false;
 	}
 
@@ -176,7 +176,7 @@ public class RoomFragmentProvider extends FSMFragmentProvider {
 			return true;
 		if (fragment.startsWith(RoomPackage.eINSTANCE.getLogicalSystem().getName()))
 			return true;
-		
+
 		return false;
 	}
 
@@ -187,7 +187,7 @@ public class RoomFragmentProvider extends FSMFragmentProvider {
 		}
 		return false;
 	}
-	
+
 	public static boolean isPort(EObject obj) {
 		URI uri = EcoreUtil.getURI(obj);
 		return uri!=null && uri.fragment()!=null && uri.fragment().startsWith(RoomPackage.eINSTANCE.getPort().getName());
@@ -231,11 +231,11 @@ public class RoomFragmentProvider extends FSMFragmentProvider {
 		if (end<0)
 			end = fragment.length();
 		String className = fragment.substring(begin, end);
-		
+
 		if(type.equals(BasePackage.eINSTANCE.getAnnotationType().getName())) {
 			return getAnnotationType(model, className);
 		}
-		
+
 		RoomClass rc = getRoomClass(model, className);
 		if (type.equals(RoomPackage.eINSTANCE.getDataClass().getName())) {
 			return rc;
@@ -264,10 +264,10 @@ public class RoomFragmentProvider extends FSMFragmentProvider {
 		else if (type.equals(RoomPackage.eINSTANCE.getLogicalSystem().getName())) {
 			return rc;
 		}
-		
+
 		if (end<fragment.length()) {
 			String remainder = fragment.substring(end+1, fragment.length());
-			
+
 			if (type.equals(RoomPackage.eINSTANCE.getPort().getName())) {
 				return getPort(rc, remainder);
 			}
@@ -284,10 +284,10 @@ public class RoomFragmentProvider extends FSMFragmentProvider {
 			else if (type.equals(RoomPackage.eINSTANCE.getLayerConnection().getName())) {
 				return getLayerConnection(rc, remainder);
 			}
-			
+
 			if (rc instanceof ModelComponent) {
 				ModelComponent mc = (ModelComponent) rc;
-				
+
 				if (type.equals("BaseState")
 						|| type.equals(FSMPackage.eINSTANCE.getSimpleState().getName())
 						|| type.equals(FSMPackage.eINSTANCE.getRefinedState().getName())) {
@@ -319,7 +319,7 @@ public class RoomFragmentProvider extends FSMFragmentProvider {
 				}
 			}
 		}
-		
+
 		return null;
 	}
 
@@ -327,7 +327,7 @@ public class RoomFragmentProvider extends FSMFragmentProvider {
 		int pos = name.indexOf(BIND_SEP);
 		if (pos<0)
 			return null;
-		
+
 		if (rc instanceof StructureClass) {
 			String ep1name = name.substring(0, pos);
 			String ep2name = name.substring(pos+1, name.length());
@@ -361,12 +361,12 @@ public class RoomFragmentProvider extends FSMFragmentProvider {
 		}
 		return false;
 	}
-	
+
 	private BindingEndPoint getEndpoint(StructureClass sc, String name) {
 		int pos = name.indexOf(EP_SEP);
 		if (pos<0)
 			return null;
-		
+
 		String portName = name.substring(0, pos);
 		String refName = name.substring(pos+1);
 		String sub = null;
@@ -396,7 +396,7 @@ public class RoomFragmentProvider extends FSMFragmentProvider {
 	private SubProtocol getSubProtocol(String sub, Port port) {
 		if (port==null)
 			return null;
-		
+
 		if (port.getProtocol() instanceof CompoundProtocolClass) {
 			CompoundProtocolClass cpc = (CompoundProtocolClass) port.getProtocol();
 			for (SubProtocol sp : cpc.getSubProtocols()) {
@@ -404,7 +404,7 @@ public class RoomFragmentProvider extends FSMFragmentProvider {
 					return sp;
 			}
 		}
-		
+
 		return null;
 	}
 
@@ -412,7 +412,7 @@ public class RoomFragmentProvider extends FSMFragmentProvider {
 		int pos = name.indexOf(CONN_SEP);
 		if (pos<0)
 			return null;
-		
+
 		if (rc instanceof StructureClass) {
 			String saptname = name.substring(0, pos);
 			String spptname = name.substring(pos+1, name.length());
@@ -460,7 +460,7 @@ public class RoomFragmentProvider extends FSMFragmentProvider {
 				}
 			}
 		}
-		
+
 		return null;
 	}
 
@@ -505,7 +505,7 @@ public class RoomFragmentProvider extends FSMFragmentProvider {
 		}
 		return null;
 	}
-	
+
 	private boolean isSAPoint(SAPoint a, SAPoint b) {
 		if (a instanceof RefSAPoint && b instanceof RefSAPoint) {
 			return ((RefSAPoint)a).getRef().getName().equals(((RefSAPoint)b).getRef().getName());
@@ -519,13 +519,13 @@ public class RoomFragmentProvider extends FSMFragmentProvider {
 	private boolean isSPPoint(SPPoint a, SPPoint b) {
 		if (!a.getRef().getName().equals(b.getRef().getName()))
 			return false;
-		
+
 		if (!a.getService().getName().equals(b.getService().getName()))
 			return false;
-		
+
 		return true;
 	}
-	
+
 	private ActorContainerRef getActorContainerRef(RoomClass rc, String name) {
 		if (rc instanceof ActorContainerClass) {
 			for (ActorRef ar : ((ActorContainerClass) rc).getActorRefs()) {
@@ -533,7 +533,7 @@ public class RoomFragmentProvider extends FSMFragmentProvider {
 					return ar;
 			}
 			if (rc instanceof ActorClass)
-				if (((ActorClass) rc).getBase()!=null)
+				if (((ActorClass) rc).getActorBase()!=null)
 					return getActorContainerRef(((ActorClass) rc).getActorBase(), name);
 		}
 		else if (rc instanceof LogicalSystem) {
@@ -555,7 +555,7 @@ public class RoomFragmentProvider extends FSMFragmentProvider {
 				if (p.getName().equals(name))
 					return p;
 			}
-			if (((ActorClass) rc).getBase()!=null)
+			if (((ActorClass) rc).getActorBase()!=null)
 				return getPort(((ActorClass) rc).getActorBase(), name);
 		}
 		else if (rc instanceof SubSystemClass) {
@@ -574,12 +574,12 @@ public class RoomFragmentProvider extends FSMFragmentProvider {
 					return spp;
 			}
 			if (rc instanceof ActorClass)
-				if (((ActorClass)rc).getBase()!=null)
+				if (((ActorClass)rc).getActorBase()!=null)
 					return getSPP(((ActorClass)rc).getActorBase(), name);
 		}
 		return null;
 	}
-	
+
 	protected AnnotationType getAnnotationType(RoomModel model, String name) {
 		for(AnnotationType at : model.getAnnotationTypes()) {
 			if(at.getName().equals(name)) {
@@ -588,7 +588,7 @@ public class RoomFragmentProvider extends FSMFragmentProvider {
 		}
 		return null;
 	}
-	
+
 	private RoomClass getRoomClass(RoomModel model, String className) {
 		for (DataClass dc : model.getDataClasses()) {
 			if (dc.getName() != null && dc.getName().equals(className))

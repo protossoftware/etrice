@@ -23773,8 +23773,8 @@ rule__PrimitiveType__TargetNameAssignment_5
     }
 :
 (
-{ before(grammarAccess.getPrimitiveTypeAccess().getTargetNameFQNParserRuleCall_5_0()); }
-	ruleFQN{ after(grammarAccess.getPrimitiveTypeAccess().getTargetNameFQNParserRuleCall_5_0()); }
+{ before(grammarAccess.getPrimitiveTypeAccess().getTargetNameSTRINGTerminalRuleCall_5_0()); }
+	RULE_STRING{ after(grammarAccess.getPrimitiveTypeAccess().getTargetNameSTRINGTerminalRuleCall_5_0()); }
 )
 
 ;

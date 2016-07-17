@@ -1604,7 +1604,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "rulePrimitiveType"
-    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:618:1: rulePrimitiveType returns [EObject current=null] : (otherlv_0= 'PrimitiveType' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ':' ( (lv_type_3_0= ruleLiteralType ) ) otherlv_4= '->' ( (lv_targetName_5_0= ruleFQN ) ) (otherlv_6= '(' ( (lv_castName_7_0= ruleFQN ) ) otherlv_8= ')' )? otherlv_9= 'default' ( (lv_defaultValueLiteral_10_0= RULE_STRING ) ) ( (lv_docu_11_0= ruleDocumentation ) )? ) ;
+    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:618:1: rulePrimitiveType returns [EObject current=null] : (otherlv_0= 'PrimitiveType' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ':' ( (lv_type_3_0= ruleLiteralType ) ) otherlv_4= '->' ( (lv_targetName_5_0= RULE_STRING ) ) (otherlv_6= '(' ( (lv_castName_7_0= ruleFQN ) ) otherlv_8= ')' )? otherlv_9= 'default' ( (lv_defaultValueLiteral_10_0= RULE_STRING ) ) ( (lv_docu_11_0= ruleDocumentation ) )? ) ;
     public final EObject rulePrimitiveType() throws RecognitionException {
         EObject current = null;
 
@@ -1612,13 +1612,12 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
         Token lv_name_1_0=null;
         Token otherlv_2=null;
         Token otherlv_4=null;
+        Token lv_targetName_5_0=null;
         Token otherlv_6=null;
         Token otherlv_8=null;
         Token otherlv_9=null;
         Token lv_defaultValueLiteral_10_0=null;
         Enumerator lv_type_3_0 = null;
-
-        AntlrDatatypeRuleToken lv_targetName_5_0 = null;
 
         AntlrDatatypeRuleToken lv_castName_7_0 = null;
 
@@ -1628,11 +1627,11 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:621:28: ( (otherlv_0= 'PrimitiveType' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ':' ( (lv_type_3_0= ruleLiteralType ) ) otherlv_4= '->' ( (lv_targetName_5_0= ruleFQN ) ) (otherlv_6= '(' ( (lv_castName_7_0= ruleFQN ) ) otherlv_8= ')' )? otherlv_9= 'default' ( (lv_defaultValueLiteral_10_0= RULE_STRING ) ) ( (lv_docu_11_0= ruleDocumentation ) )? ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:622:1: (otherlv_0= 'PrimitiveType' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ':' ( (lv_type_3_0= ruleLiteralType ) ) otherlv_4= '->' ( (lv_targetName_5_0= ruleFQN ) ) (otherlv_6= '(' ( (lv_castName_7_0= ruleFQN ) ) otherlv_8= ')' )? otherlv_9= 'default' ( (lv_defaultValueLiteral_10_0= RULE_STRING ) ) ( (lv_docu_11_0= ruleDocumentation ) )? )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:621:28: ( (otherlv_0= 'PrimitiveType' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ':' ( (lv_type_3_0= ruleLiteralType ) ) otherlv_4= '->' ( (lv_targetName_5_0= RULE_STRING ) ) (otherlv_6= '(' ( (lv_castName_7_0= ruleFQN ) ) otherlv_8= ')' )? otherlv_9= 'default' ( (lv_defaultValueLiteral_10_0= RULE_STRING ) ) ( (lv_docu_11_0= ruleDocumentation ) )? ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:622:1: (otherlv_0= 'PrimitiveType' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ':' ( (lv_type_3_0= ruleLiteralType ) ) otherlv_4= '->' ( (lv_targetName_5_0= RULE_STRING ) ) (otherlv_6= '(' ( (lv_castName_7_0= ruleFQN ) ) otherlv_8= ')' )? otherlv_9= 'default' ( (lv_defaultValueLiteral_10_0= RULE_STRING ) ) ( (lv_docu_11_0= ruleDocumentation ) )? )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:622:1: (otherlv_0= 'PrimitiveType' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ':' ( (lv_type_3_0= ruleLiteralType ) ) otherlv_4= '->' ( (lv_targetName_5_0= ruleFQN ) ) (otherlv_6= '(' ( (lv_castName_7_0= ruleFQN ) ) otherlv_8= ')' )? otherlv_9= 'default' ( (lv_defaultValueLiteral_10_0= RULE_STRING ) ) ( (lv_docu_11_0= ruleDocumentation ) )? )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:622:3: otherlv_0= 'PrimitiveType' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ':' ( (lv_type_3_0= ruleLiteralType ) ) otherlv_4= '->' ( (lv_targetName_5_0= ruleFQN ) ) (otherlv_6= '(' ( (lv_castName_7_0= ruleFQN ) ) otherlv_8= ')' )? otherlv_9= 'default' ( (lv_defaultValueLiteral_10_0= RULE_STRING ) ) ( (lv_docu_11_0= ruleDocumentation ) )?
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:622:1: (otherlv_0= 'PrimitiveType' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ':' ( (lv_type_3_0= ruleLiteralType ) ) otherlv_4= '->' ( (lv_targetName_5_0= RULE_STRING ) ) (otherlv_6= '(' ( (lv_castName_7_0= ruleFQN ) ) otherlv_8= ')' )? otherlv_9= 'default' ( (lv_defaultValueLiteral_10_0= RULE_STRING ) ) ( (lv_docu_11_0= ruleDocumentation ) )? )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:622:3: otherlv_0= 'PrimitiveType' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ':' ( (lv_type_3_0= ruleLiteralType ) ) otherlv_4= '->' ( (lv_targetName_5_0= RULE_STRING ) ) (otherlv_6= '(' ( (lv_castName_7_0= ruleFQN ) ) otherlv_8= ')' )? otherlv_9= 'default' ( (lv_defaultValueLiteral_10_0= RULE_STRING ) ) ( (lv_docu_11_0= ruleDocumentation ) )?
             {
             otherlv_0=(Token)match(input,18,FOLLOW_18_in_rulePrimitiveType1291); 
 
@@ -1703,30 +1702,25 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
                 	newLeafNode(otherlv_4, grammarAccess.getPrimitiveTypeAccess().getHyphenMinusGreaterThanSignKeyword_4());
                 
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:670:1: ( (lv_targetName_5_0= ruleFQN ) )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:671:1: (lv_targetName_5_0= ruleFQN )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:670:1: ( (lv_targetName_5_0= RULE_STRING ) )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:671:1: (lv_targetName_5_0= RULE_STRING )
             {
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:671:1: (lv_targetName_5_0= ruleFQN )
-            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:672:3: lv_targetName_5_0= ruleFQN
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:671:1: (lv_targetName_5_0= RULE_STRING )
+            // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:672:3: lv_targetName_5_0= RULE_STRING
             {
-             
-            	        newCompositeNode(grammarAccess.getPrimitiveTypeAccess().getTargetNameFQNParserRuleCall_5_0()); 
-            	    
-            pushFollow(FOLLOW_ruleFQN_in_rulePrimitiveType1379);
-            lv_targetName_5_0=ruleFQN();
+            lv_targetName_5_0=(Token)match(input,RULE_STRING,FOLLOW_RULE_STRING_in_rulePrimitiveType1375); 
 
-            state._fsp--;
-
+            			newLeafNode(lv_targetName_5_0, grammarAccess.getPrimitiveTypeAccess().getTargetNameSTRINGTerminalRuleCall_5_0()); 
+            		
 
             	        if (current==null) {
-            	            current = createModelElementForParent(grammarAccess.getPrimitiveTypeRule());
+            	            current = createModelElement(grammarAccess.getPrimitiveTypeRule());
             	        }
-                   		set(
+                   		setWithLastConsumed(
                    			current, 
                    			"targetName",
                     		lv_targetName_5_0, 
-                    		"FQN");
-            	        afterParserOrEnumRuleCall();
+                    		"STRING");
             	    
 
             }
@@ -1745,7 +1739,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:688:4: otherlv_6= '(' ( (lv_castName_7_0= ruleFQN ) ) otherlv_8= ')'
                     {
-                    otherlv_6=(Token)match(input,20,FOLLOW_20_in_rulePrimitiveType1392); 
+                    otherlv_6=(Token)match(input,20,FOLLOW_20_in_rulePrimitiveType1393); 
 
                         	newLeafNode(otherlv_6, grammarAccess.getPrimitiveTypeAccess().getLeftParenthesisKeyword_6_0());
                         
@@ -1758,7 +1752,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getPrimitiveTypeAccess().getCastNameFQNParserRuleCall_6_1_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleFQN_in_rulePrimitiveType1413);
+                    pushFollow(FOLLOW_ruleFQN_in_rulePrimitiveType1414);
                     lv_castName_7_0=ruleFQN();
 
                     state._fsp--;
@@ -1780,7 +1774,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    otherlv_8=(Token)match(input,21,FOLLOW_21_in_rulePrimitiveType1425); 
+                    otherlv_8=(Token)match(input,21,FOLLOW_21_in_rulePrimitiveType1426); 
 
                         	newLeafNode(otherlv_8, grammarAccess.getPrimitiveTypeAccess().getRightParenthesisKeyword_6_2());
                         
@@ -1790,7 +1784,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_9=(Token)match(input,22,FOLLOW_22_in_rulePrimitiveType1439); 
+            otherlv_9=(Token)match(input,22,FOLLOW_22_in_rulePrimitiveType1440); 
 
                 	newLeafNode(otherlv_9, grammarAccess.getPrimitiveTypeAccess().getDefaultKeyword_7());
                 
@@ -1800,7 +1794,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:719:1: (lv_defaultValueLiteral_10_0= RULE_STRING )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:720:3: lv_defaultValueLiteral_10_0= RULE_STRING
             {
-            lv_defaultValueLiteral_10_0=(Token)match(input,RULE_STRING,FOLLOW_RULE_STRING_in_rulePrimitiveType1456); 
+            lv_defaultValueLiteral_10_0=(Token)match(input,RULE_STRING,FOLLOW_RULE_STRING_in_rulePrimitiveType1457); 
 
             			newLeafNode(lv_defaultValueLiteral_10_0, grammarAccess.getPrimitiveTypeAccess().getDefaultValueLiteralSTRINGTerminalRuleCall_8_0()); 
             		
@@ -1837,7 +1831,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getPrimitiveTypeAccess().getDocuDocumentationParserRuleCall_9_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleDocumentation_in_rulePrimitiveType1482);
+                    pushFollow(FOLLOW_ruleDocumentation_in_rulePrimitiveType1483);
                     lv_docu_11_0=ruleDocumentation();
 
                     state._fsp--;
@@ -1895,13 +1889,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:764:2: iv_ruleEnumerationType= ruleEnumerationType EOF
             {
              newCompositeNode(grammarAccess.getEnumerationTypeRule()); 
-            pushFollow(FOLLOW_ruleEnumerationType_in_entryRuleEnumerationType1519);
+            pushFollow(FOLLOW_ruleEnumerationType_in_entryRuleEnumerationType1520);
             iv_ruleEnumerationType=ruleEnumerationType();
 
             state._fsp--;
 
              current =iv_ruleEnumerationType; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleEnumerationType1529); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleEnumerationType1530); 
 
             }
 
@@ -1945,7 +1939,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:775:1: (otherlv_0= 'Enumeration' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? (otherlv_3= 'of' ( ( ruleFQN ) ) )? otherlv_5= '{' ( ( (lv_literals_6_0= ruleEnumLiteral ) ) (otherlv_7= ',' ( (lv_literals_8_0= ruleEnumLiteral ) ) )* )? otherlv_9= '}' )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:775:3: otherlv_0= 'Enumeration' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? (otherlv_3= 'of' ( ( ruleFQN ) ) )? otherlv_5= '{' ( ( (lv_literals_6_0= ruleEnumLiteral ) ) (otherlv_7= ',' ( (lv_literals_8_0= ruleEnumLiteral ) ) )* )? otherlv_9= '}'
             {
-            otherlv_0=(Token)match(input,23,FOLLOW_23_in_ruleEnumerationType1566); 
+            otherlv_0=(Token)match(input,23,FOLLOW_23_in_ruleEnumerationType1567); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getEnumerationTypeAccess().getEnumerationKeyword_0());
                 
@@ -1955,7 +1949,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:780:1: (lv_name_1_0= RULE_ID )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:781:3: lv_name_1_0= RULE_ID
             {
-            lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEnumerationType1583); 
+            lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEnumerationType1584); 
 
             			newLeafNode(lv_name_1_0, grammarAccess.getEnumerationTypeAccess().getNameIDTerminalRuleCall_1_0()); 
             		
@@ -1992,7 +1986,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getEnumerationTypeAccess().getDocuDocumentationParserRuleCall_2_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleDocumentation_in_ruleEnumerationType1609);
+                    pushFollow(FOLLOW_ruleDocumentation_in_ruleEnumerationType1610);
                     lv_docu_2_0=ruleDocumentation();
 
                     state._fsp--;
@@ -2028,7 +2022,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:815:5: otherlv_3= 'of' ( ( ruleFQN ) )
                     {
-                    otherlv_3=(Token)match(input,24,FOLLOW_24_in_ruleEnumerationType1623); 
+                    otherlv_3=(Token)match(input,24,FOLLOW_24_in_ruleEnumerationType1624); 
 
                         	newLeafNode(otherlv_3, grammarAccess.getEnumerationTypeAccess().getOfKeyword_3_0());
                         
@@ -2046,7 +2040,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getEnumerationTypeAccess().getPrimitiveTypePrimitiveTypeCrossReference_3_1_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleFQN_in_ruleEnumerationType1646);
+                    pushFollow(FOLLOW_ruleFQN_in_ruleEnumerationType1647);
                     ruleFQN();
 
                     state._fsp--;
@@ -2066,7 +2060,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_5=(Token)match(input,14,FOLLOW_14_in_ruleEnumerationType1660); 
+            otherlv_5=(Token)match(input,14,FOLLOW_14_in_ruleEnumerationType1661); 
 
                 	newLeafNode(otherlv_5, grammarAccess.getEnumerationTypeAccess().getLeftCurlyBracketKeyword_4());
                 
@@ -2090,7 +2084,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getEnumerationTypeAccess().getLiteralsEnumLiteralParserRuleCall_5_0_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleEnumLiteral_in_ruleEnumerationType1682);
+                    pushFollow(FOLLOW_ruleEnumLiteral_in_ruleEnumerationType1683);
                     lv_literals_6_0=ruleEnumLiteral();
 
                     state._fsp--;
@@ -2127,7 +2121,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	case 1 :
                     	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:856:4: otherlv_7= ',' ( (lv_literals_8_0= ruleEnumLiteral ) )
                     	    {
-                    	    otherlv_7=(Token)match(input,25,FOLLOW_25_in_ruleEnumerationType1695); 
+                    	    otherlv_7=(Token)match(input,25,FOLLOW_25_in_ruleEnumerationType1696); 
 
                     	        	newLeafNode(otherlv_7, grammarAccess.getEnumerationTypeAccess().getCommaKeyword_5_1_0());
                     	        
@@ -2140,7 +2134,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	     
                     	    	        newCompositeNode(grammarAccess.getEnumerationTypeAccess().getLiteralsEnumLiteralParserRuleCall_5_1_1_0()); 
                     	    	    
-                    	    pushFollow(FOLLOW_ruleEnumLiteral_in_ruleEnumerationType1716);
+                    	    pushFollow(FOLLOW_ruleEnumLiteral_in_ruleEnumerationType1717);
                     	    lv_literals_8_0=ruleEnumLiteral();
 
                     	    state._fsp--;
@@ -2177,7 +2171,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_9=(Token)match(input,15,FOLLOW_15_in_ruleEnumerationType1732); 
+            otherlv_9=(Token)match(input,15,FOLLOW_15_in_ruleEnumerationType1733); 
 
                 	newLeafNode(otherlv_9, grammarAccess.getEnumerationTypeAccess().getRightCurlyBracketKeyword_6());
                 
@@ -2214,13 +2208,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:892:2: iv_ruleEnumLiteral= ruleEnumLiteral EOF
             {
              newCompositeNode(grammarAccess.getEnumLiteralRule()); 
-            pushFollow(FOLLOW_ruleEnumLiteral_in_entryRuleEnumLiteral1768);
+            pushFollow(FOLLOW_ruleEnumLiteral_in_entryRuleEnumLiteral1769);
             iv_ruleEnumLiteral=ruleEnumLiteral();
 
             state._fsp--;
 
              current =iv_ruleEnumLiteral; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleEnumLiteral1778); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleEnumLiteral1779); 
 
             }
 
@@ -2262,7 +2256,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:904:1: (lv_name_0_0= RULE_ID )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:905:3: lv_name_0_0= RULE_ID
             {
-            lv_name_0_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEnumLiteral1820); 
+            lv_name_0_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEnumLiteral1821); 
 
             			newLeafNode(lv_name_0_0, grammarAccess.getEnumLiteralAccess().getNameIDTerminalRuleCall_0_0()); 
             		
@@ -2293,7 +2287,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:921:4: otherlv_1= '=' ( (lv_literal_2_0= ruleIntLiteral ) )
                     {
-                    otherlv_1=(Token)match(input,26,FOLLOW_26_in_ruleEnumLiteral1838); 
+                    otherlv_1=(Token)match(input,26,FOLLOW_26_in_ruleEnumLiteral1839); 
 
                         	newLeafNode(otherlv_1, grammarAccess.getEnumLiteralAccess().getEqualsSignKeyword_1_0());
                         
@@ -2306,7 +2300,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getEnumLiteralAccess().getLiteralIntLiteralParserRuleCall_1_1_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleIntLiteral_in_ruleEnumLiteral1859);
+                    pushFollow(FOLLOW_ruleIntLiteral_in_ruleEnumLiteral1860);
                     lv_literal_2_0=ruleIntLiteral();
 
                     state._fsp--;
@@ -2367,13 +2361,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:953:2: iv_ruleExternalType= ruleExternalType EOF
             {
              newCompositeNode(grammarAccess.getExternalTypeRule()); 
-            pushFollow(FOLLOW_ruleExternalType_in_entryRuleExternalType1897);
+            pushFollow(FOLLOW_ruleExternalType_in_entryRuleExternalType1898);
             iv_ruleExternalType=ruleExternalType();
 
             state._fsp--;
 
              current =iv_ruleExternalType; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleExternalType1907); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleExternalType1908); 
 
             }
 
@@ -2413,7 +2407,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:964:1: (otherlv_0= 'ExternalType' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '->' ( (lv_targetName_3_0= RULE_STRING ) ) (otherlv_4= 'default' ( (lv_defaultValueLiteral_5_0= RULE_STRING ) ) )? ( (lv_docu_6_0= ruleDocumentation ) )? )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:964:3: otherlv_0= 'ExternalType' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '->' ( (lv_targetName_3_0= RULE_STRING ) ) (otherlv_4= 'default' ( (lv_defaultValueLiteral_5_0= RULE_STRING ) ) )? ( (lv_docu_6_0= ruleDocumentation ) )?
             {
-            otherlv_0=(Token)match(input,27,FOLLOW_27_in_ruleExternalType1944); 
+            otherlv_0=(Token)match(input,27,FOLLOW_27_in_ruleExternalType1945); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getExternalTypeAccess().getExternalTypeKeyword_0());
                 
@@ -2423,7 +2417,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:969:1: (lv_name_1_0= RULE_ID )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:970:3: lv_name_1_0= RULE_ID
             {
-            lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleExternalType1961); 
+            lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleExternalType1962); 
 
             			newLeafNode(lv_name_1_0, grammarAccess.getExternalTypeAccess().getNameIDTerminalRuleCall_1_0()); 
             		
@@ -2443,7 +2437,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_2=(Token)match(input,19,FOLLOW_19_in_ruleExternalType1978); 
+            otherlv_2=(Token)match(input,19,FOLLOW_19_in_ruleExternalType1979); 
 
                 	newLeafNode(otherlv_2, grammarAccess.getExternalTypeAccess().getHyphenMinusGreaterThanSignKeyword_2());
                 
@@ -2453,7 +2447,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:991:1: (lv_targetName_3_0= RULE_STRING )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:992:3: lv_targetName_3_0= RULE_STRING
             {
-            lv_targetName_3_0=(Token)match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleExternalType1995); 
+            lv_targetName_3_0=(Token)match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleExternalType1996); 
 
             			newLeafNode(lv_targetName_3_0, grammarAccess.getExternalTypeAccess().getTargetNameSTRINGTerminalRuleCall_3_0()); 
             		
@@ -2484,7 +2478,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1008:4: otherlv_4= 'default' ( (lv_defaultValueLiteral_5_0= RULE_STRING ) )
                     {
-                    otherlv_4=(Token)match(input,22,FOLLOW_22_in_ruleExternalType2013); 
+                    otherlv_4=(Token)match(input,22,FOLLOW_22_in_ruleExternalType2014); 
 
                         	newLeafNode(otherlv_4, grammarAccess.getExternalTypeAccess().getDefaultKeyword_4_0());
                         
@@ -2494,7 +2488,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1013:1: (lv_defaultValueLiteral_5_0= RULE_STRING )
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1014:3: lv_defaultValueLiteral_5_0= RULE_STRING
                     {
-                    lv_defaultValueLiteral_5_0=(Token)match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleExternalType2030); 
+                    lv_defaultValueLiteral_5_0=(Token)match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleExternalType2031); 
 
                     			newLeafNode(lv_defaultValueLiteral_5_0, grammarAccess.getExternalTypeAccess().getDefaultValueLiteralSTRINGTerminalRuleCall_4_1_0()); 
                     		
@@ -2537,7 +2531,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getExternalTypeAccess().getDocuDocumentationParserRuleCall_5_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleDocumentation_in_ruleExternalType2058);
+                    pushFollow(FOLLOW_ruleDocumentation_in_ruleExternalType2059);
                     lv_docu_6_0=ruleDocumentation();
 
                     state._fsp--;
@@ -2595,13 +2589,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1058:2: iv_ruleDataClass= ruleDataClass EOF
             {
              newCompositeNode(grammarAccess.getDataClassRule()); 
-            pushFollow(FOLLOW_ruleDataClass_in_entryRuleDataClass2095);
+            pushFollow(FOLLOW_ruleDataClass_in_entryRuleDataClass2096);
             iv_ruleDataClass=ruleDataClass();
 
             state._fsp--;
 
              current =iv_ruleDataClass; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleDataClass2105); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleDataClass2106); 
 
             }
 
@@ -2657,7 +2651,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1069:1: (otherlv_0= 'DataClass' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? (otherlv_3= 'extends' ( ( ruleFQN ) ) )? otherlv_5= '{' ( (lv_annotations_6_0= ruleAnnotation ) )* (otherlv_7= 'usercode1' ( (lv_userCode1_8_0= ruleDetailCode ) ) )? (otherlv_9= 'usercode2' ( (lv_userCode2_10_0= ruleDetailCode ) ) )? (otherlv_11= 'usercode3' ( (lv_userCode3_12_0= ruleDetailCode ) ) )? ( ( (lv_operations_13_0= ruleStandardOperation ) ) | ( (lv_structors_14_0= ruleClassStructor ) ) | ( (lv_attributes_15_0= ruleAttribute ) ) )* otherlv_16= '}' )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1069:3: otherlv_0= 'DataClass' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? (otherlv_3= 'extends' ( ( ruleFQN ) ) )? otherlv_5= '{' ( (lv_annotations_6_0= ruleAnnotation ) )* (otherlv_7= 'usercode1' ( (lv_userCode1_8_0= ruleDetailCode ) ) )? (otherlv_9= 'usercode2' ( (lv_userCode2_10_0= ruleDetailCode ) ) )? (otherlv_11= 'usercode3' ( (lv_userCode3_12_0= ruleDetailCode ) ) )? ( ( (lv_operations_13_0= ruleStandardOperation ) ) | ( (lv_structors_14_0= ruleClassStructor ) ) | ( (lv_attributes_15_0= ruleAttribute ) ) )* otherlv_16= '}'
             {
-            otherlv_0=(Token)match(input,28,FOLLOW_28_in_ruleDataClass2142); 
+            otherlv_0=(Token)match(input,28,FOLLOW_28_in_ruleDataClass2143); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getDataClassAccess().getDataClassKeyword_0());
                 
@@ -2667,7 +2661,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1074:1: (lv_name_1_0= RULE_ID )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1075:3: lv_name_1_0= RULE_ID
             {
-            lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleDataClass2159); 
+            lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleDataClass2160); 
 
             			newLeafNode(lv_name_1_0, grammarAccess.getDataClassAccess().getNameIDTerminalRuleCall_1_0()); 
             		
@@ -2704,7 +2698,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getDataClassAccess().getDocuDocumentationParserRuleCall_2_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleDocumentation_in_ruleDataClass2185);
+                    pushFollow(FOLLOW_ruleDocumentation_in_ruleDataClass2186);
                     lv_docu_2_0=ruleDocumentation();
 
                     state._fsp--;
@@ -2740,7 +2734,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1109:5: otherlv_3= 'extends' ( ( ruleFQN ) )
                     {
-                    otherlv_3=(Token)match(input,29,FOLLOW_29_in_ruleDataClass2199); 
+                    otherlv_3=(Token)match(input,29,FOLLOW_29_in_ruleDataClass2200); 
 
                         	newLeafNode(otherlv_3, grammarAccess.getDataClassAccess().getExtendsKeyword_3_0());
                         
@@ -2758,7 +2752,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getDataClassAccess().getBaseDataClassCrossReference_3_1_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleFQN_in_ruleDataClass2222);
+                    pushFollow(FOLLOW_ruleFQN_in_ruleDataClass2223);
                     ruleFQN();
 
                     state._fsp--;
@@ -2778,7 +2772,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_5=(Token)match(input,14,FOLLOW_14_in_ruleDataClass2236); 
+            otherlv_5=(Token)match(input,14,FOLLOW_14_in_ruleDataClass2237); 
 
                 	newLeafNode(otherlv_5, grammarAccess.getDataClassAccess().getLeftCurlyBracketKeyword_4());
                 
@@ -2803,7 +2797,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getDataClassAccess().getAnnotationsAnnotationParserRuleCall_5_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleAnnotation_in_ruleDataClass2257);
+            	    pushFollow(FOLLOW_ruleAnnotation_in_ruleDataClass2258);
             	    lv_annotations_6_0=ruleAnnotation();
 
             	    state._fsp--;
@@ -2842,7 +2836,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1150:5: otherlv_7= 'usercode1' ( (lv_userCode1_8_0= ruleDetailCode ) )
                     {
-                    otherlv_7=(Token)match(input,30,FOLLOW_30_in_ruleDataClass2271); 
+                    otherlv_7=(Token)match(input,30,FOLLOW_30_in_ruleDataClass2272); 
 
                         	newLeafNode(otherlv_7, grammarAccess.getDataClassAccess().getUsercode1Keyword_6_0());
                         
@@ -2855,7 +2849,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getDataClassAccess().getUserCode1DetailCodeParserRuleCall_6_1_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleDetailCode_in_ruleDataClass2292);
+                    pushFollow(FOLLOW_ruleDetailCode_in_ruleDataClass2293);
                     lv_userCode1_8_0=ruleDetailCode();
 
                     state._fsp--;
@@ -2894,7 +2888,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1172:6: otherlv_9= 'usercode2' ( (lv_userCode2_10_0= ruleDetailCode ) )
                     {
-                    otherlv_9=(Token)match(input,31,FOLLOW_31_in_ruleDataClass2307); 
+                    otherlv_9=(Token)match(input,31,FOLLOW_31_in_ruleDataClass2308); 
 
                         	newLeafNode(otherlv_9, grammarAccess.getDataClassAccess().getUsercode2Keyword_7_0());
                         
@@ -2907,7 +2901,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getDataClassAccess().getUserCode2DetailCodeParserRuleCall_7_1_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleDetailCode_in_ruleDataClass2328);
+                    pushFollow(FOLLOW_ruleDetailCode_in_ruleDataClass2329);
                     lv_userCode2_10_0=ruleDetailCode();
 
                     state._fsp--;
@@ -2946,7 +2940,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1194:6: otherlv_11= 'usercode3' ( (lv_userCode3_12_0= ruleDetailCode ) )
                     {
-                    otherlv_11=(Token)match(input,32,FOLLOW_32_in_ruleDataClass2343); 
+                    otherlv_11=(Token)match(input,32,FOLLOW_32_in_ruleDataClass2344); 
 
                         	newLeafNode(otherlv_11, grammarAccess.getDataClassAccess().getUsercode3Keyword_8_0());
                         
@@ -2959,7 +2953,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getDataClassAccess().getUserCode3DetailCodeParserRuleCall_8_1_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleDetailCode_in_ruleDataClass2364);
+                    pushFollow(FOLLOW_ruleDetailCode_in_ruleDataClass2365);
                     lv_userCode3_12_0=ruleDetailCode();
 
                     state._fsp--;
@@ -3025,7 +3019,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getDataClassAccess().getOperationsStandardOperationParserRuleCall_9_0_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleStandardOperation_in_ruleDataClass2388);
+            	    pushFollow(FOLLOW_ruleStandardOperation_in_ruleDataClass2389);
             	    lv_operations_13_0=ruleStandardOperation();
 
             	    state._fsp--;
@@ -3062,7 +3056,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getDataClassAccess().getStructorsClassStructorParserRuleCall_9_1_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleClassStructor_in_ruleDataClass2415);
+            	    pushFollow(FOLLOW_ruleClassStructor_in_ruleDataClass2416);
             	    lv_structors_14_0=ruleClassStructor();
 
             	    state._fsp--;
@@ -3099,7 +3093,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getDataClassAccess().getAttributesAttributeParserRuleCall_9_2_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleAttribute_in_ruleDataClass2442);
+            	    pushFollow(FOLLOW_ruleAttribute_in_ruleDataClass2443);
             	    lv_attributes_15_0=ruleAttribute();
 
             	    state._fsp--;
@@ -3130,7 +3124,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            otherlv_16=(Token)match(input,15,FOLLOW_15_in_ruleDataClass2456); 
+            otherlv_16=(Token)match(input,15,FOLLOW_15_in_ruleDataClass2457); 
 
                 	newLeafNode(otherlv_16, grammarAccess.getDataClassAccess().getRightCurlyBracketKeyword_10());
                 
@@ -3167,13 +3161,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1286:2: iv_ruleAttribute= ruleAttribute EOF
             {
              newCompositeNode(grammarAccess.getAttributeRule()); 
-            pushFollow(FOLLOW_ruleAttribute_in_entryRuleAttribute2492);
+            pushFollow(FOLLOW_ruleAttribute_in_entryRuleAttribute2493);
             iv_ruleAttribute=ruleAttribute();
 
             state._fsp--;
 
              current =iv_ruleAttribute; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleAttribute2502); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleAttribute2503); 
 
             }
 
@@ -3217,7 +3211,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1297:1: (otherlv_0= 'Attribute' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '[' ( (lv_size_3_0= RULE_INT ) ) otherlv_4= ']' )? otherlv_5= ':' ( (lv_type_6_0= ruleRefableType ) ) (otherlv_7= '=' ( (lv_defaultValueLiteral_8_0= RULE_STRING ) ) )? ( (lv_docu_9_0= ruleDocumentation ) )? )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1297:3: otherlv_0= 'Attribute' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '[' ( (lv_size_3_0= RULE_INT ) ) otherlv_4= ']' )? otherlv_5= ':' ( (lv_type_6_0= ruleRefableType ) ) (otherlv_7= '=' ( (lv_defaultValueLiteral_8_0= RULE_STRING ) ) )? ( (lv_docu_9_0= ruleDocumentation ) )?
             {
-            otherlv_0=(Token)match(input,33,FOLLOW_33_in_ruleAttribute2539); 
+            otherlv_0=(Token)match(input,33,FOLLOW_33_in_ruleAttribute2540); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getAttributeAccess().getAttributeKeyword_0());
                 
@@ -3227,7 +3221,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1302:1: (lv_name_1_0= RULE_ID )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1303:3: lv_name_1_0= RULE_ID
             {
-            lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleAttribute2556); 
+            lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleAttribute2557); 
 
             			newLeafNode(lv_name_1_0, grammarAccess.getAttributeAccess().getNameIDTerminalRuleCall_1_0()); 
             		
@@ -3258,7 +3252,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1319:4: otherlv_2= '[' ( (lv_size_3_0= RULE_INT ) ) otherlv_4= ']'
                     {
-                    otherlv_2=(Token)match(input,34,FOLLOW_34_in_ruleAttribute2574); 
+                    otherlv_2=(Token)match(input,34,FOLLOW_34_in_ruleAttribute2575); 
 
                         	newLeafNode(otherlv_2, grammarAccess.getAttributeAccess().getLeftSquareBracketKeyword_2_0());
                         
@@ -3268,7 +3262,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1324:1: (lv_size_3_0= RULE_INT )
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1325:3: lv_size_3_0= RULE_INT
                     {
-                    lv_size_3_0=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleAttribute2591); 
+                    lv_size_3_0=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleAttribute2592); 
 
                     			newLeafNode(lv_size_3_0, grammarAccess.getAttributeAccess().getSizeINTTerminalRuleCall_2_1_0()); 
                     		
@@ -3288,7 +3282,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    otherlv_4=(Token)match(input,35,FOLLOW_35_in_ruleAttribute2608); 
+                    otherlv_4=(Token)match(input,35,FOLLOW_35_in_ruleAttribute2609); 
 
                         	newLeafNode(otherlv_4, grammarAccess.getAttributeAccess().getRightSquareBracketKeyword_2_2());
                         
@@ -3298,7 +3292,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_5=(Token)match(input,16,FOLLOW_16_in_ruleAttribute2622); 
+            otherlv_5=(Token)match(input,16,FOLLOW_16_in_ruleAttribute2623); 
 
                 	newLeafNode(otherlv_5, grammarAccess.getAttributeAccess().getColonKeyword_3());
                 
@@ -3311,7 +3305,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
              
             	        newCompositeNode(grammarAccess.getAttributeAccess().getTypeRefableTypeParserRuleCall_4_0()); 
             	    
-            pushFollow(FOLLOW_ruleRefableType_in_ruleAttribute2643);
+            pushFollow(FOLLOW_ruleRefableType_in_ruleAttribute2644);
             lv_type_6_0=ruleRefableType();
 
             state._fsp--;
@@ -3344,7 +3338,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1367:4: otherlv_7= '=' ( (lv_defaultValueLiteral_8_0= RULE_STRING ) )
                     {
-                    otherlv_7=(Token)match(input,26,FOLLOW_26_in_ruleAttribute2656); 
+                    otherlv_7=(Token)match(input,26,FOLLOW_26_in_ruleAttribute2657); 
 
                         	newLeafNode(otherlv_7, grammarAccess.getAttributeAccess().getEqualsSignKeyword_5_0());
                         
@@ -3354,7 +3348,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1372:1: (lv_defaultValueLiteral_8_0= RULE_STRING )
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1373:3: lv_defaultValueLiteral_8_0= RULE_STRING
                     {
-                    lv_defaultValueLiteral_8_0=(Token)match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleAttribute2673); 
+                    lv_defaultValueLiteral_8_0=(Token)match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleAttribute2674); 
 
                     			newLeafNode(lv_defaultValueLiteral_8_0, grammarAccess.getAttributeAccess().getDefaultValueLiteralSTRINGTerminalRuleCall_5_1_0()); 
                     		
@@ -3397,7 +3391,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getAttributeAccess().getDocuDocumentationParserRuleCall_6_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleDocumentation_in_ruleAttribute2701);
+                    pushFollow(FOLLOW_ruleDocumentation_in_ruleAttribute2702);
                     lv_docu_9_0=ruleDocumentation();
 
                     state._fsp--;
@@ -3455,13 +3449,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1419:2: iv_ruleStandardOperation= ruleStandardOperation EOF
             {
              newCompositeNode(grammarAccess.getStandardOperationRule()); 
-            pushFollow(FOLLOW_ruleStandardOperation_in_entryRuleStandardOperation2740);
+            pushFollow(FOLLOW_ruleStandardOperation_in_entryRuleStandardOperation2741);
             iv_ruleStandardOperation=ruleStandardOperation();
 
             state._fsp--;
 
              current =iv_ruleStandardOperation; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleStandardOperation2750); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleStandardOperation2751); 
 
             }
 
@@ -3525,7 +3519,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1431:1: (lv_override_0_0= 'override' )
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1432:3: lv_override_0_0= 'override'
                     {
-                    lv_override_0_0=(Token)match(input,36,FOLLOW_36_in_ruleStandardOperation2793); 
+                    lv_override_0_0=(Token)match(input,36,FOLLOW_36_in_ruleStandardOperation2794); 
 
                             newLeafNode(lv_override_0_0, grammarAccess.getStandardOperationAccess().getOverrideOverrideKeyword_0_0());
                         
@@ -3544,7 +3538,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,37,FOLLOW_37_in_ruleStandardOperation2819); 
+            otherlv_1=(Token)match(input,37,FOLLOW_37_in_ruleStandardOperation2820); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getStandardOperationAccess().getOperationKeyword_1());
                 
@@ -3554,7 +3548,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1450:1: (lv_name_2_0= RULE_ID )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1451:3: lv_name_2_0= RULE_ID
             {
-            lv_name_2_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleStandardOperation2836); 
+            lv_name_2_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleStandardOperation2837); 
 
             			newLeafNode(lv_name_2_0, grammarAccess.getStandardOperationAccess().getNameIDTerminalRuleCall_2_0()); 
             		
@@ -3574,7 +3568,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_3=(Token)match(input,20,FOLLOW_20_in_ruleStandardOperation2853); 
+            otherlv_3=(Token)match(input,20,FOLLOW_20_in_ruleStandardOperation2854); 
 
                 	newLeafNode(otherlv_3, grammarAccess.getStandardOperationAccess().getLeftParenthesisKeyword_3());
                 
@@ -3598,7 +3592,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getStandardOperationAccess().getArgumentsVarDeclParserRuleCall_4_0_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleVarDecl_in_ruleStandardOperation2875);
+                    pushFollow(FOLLOW_ruleVarDecl_in_ruleStandardOperation2876);
                     lv_arguments_4_0=ruleVarDecl();
 
                     state._fsp--;
@@ -3635,7 +3629,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	case 1 :
                     	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1489:4: otherlv_5= ',' ( (lv_arguments_6_0= ruleVarDecl ) )
                     	    {
-                    	    otherlv_5=(Token)match(input,25,FOLLOW_25_in_ruleStandardOperation2888); 
+                    	    otherlv_5=(Token)match(input,25,FOLLOW_25_in_ruleStandardOperation2889); 
 
                     	        	newLeafNode(otherlv_5, grammarAccess.getStandardOperationAccess().getCommaKeyword_4_1_0());
                     	        
@@ -3648,7 +3642,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	     
                     	    	        newCompositeNode(grammarAccess.getStandardOperationAccess().getArgumentsVarDeclParserRuleCall_4_1_1_0()); 
                     	    	    
-                    	    pushFollow(FOLLOW_ruleVarDecl_in_ruleStandardOperation2909);
+                    	    pushFollow(FOLLOW_ruleVarDecl_in_ruleStandardOperation2910);
                     	    lv_arguments_6_0=ruleVarDecl();
 
                     	    state._fsp--;
@@ -3685,7 +3679,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_7=(Token)match(input,21,FOLLOW_21_in_ruleStandardOperation2925); 
+            otherlv_7=(Token)match(input,21,FOLLOW_21_in_ruleStandardOperation2926); 
 
                 	newLeafNode(otherlv_7, grammarAccess.getStandardOperationAccess().getRightParenthesisKeyword_5());
                 
@@ -3700,7 +3694,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1515:3: otherlv_8= ':' (otherlv_9= 'void' | ( (lv_returnType_10_0= ruleRefableType ) ) )
                     {
-                    otherlv_8=(Token)match(input,16,FOLLOW_16_in_ruleStandardOperation2938); 
+                    otherlv_8=(Token)match(input,16,FOLLOW_16_in_ruleStandardOperation2939); 
 
                         	newLeafNode(otherlv_8, grammarAccess.getStandardOperationAccess().getColonKeyword_6_0());
                         
@@ -3724,7 +3718,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                         case 1 :
                             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1519:3: otherlv_9= 'void'
                             {
-                            otherlv_9=(Token)match(input,38,FOLLOW_38_in_ruleStandardOperation2951); 
+                            otherlv_9=(Token)match(input,38,FOLLOW_38_in_ruleStandardOperation2952); 
 
                                 	newLeafNode(otherlv_9, grammarAccess.getStandardOperationAccess().getVoidKeyword_6_1_0());
                                 
@@ -3743,7 +3737,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                              
                             	        newCompositeNode(grammarAccess.getStandardOperationAccess().getReturnTypeRefableTypeParserRuleCall_6_1_1_0()); 
                             	    
-                            pushFollow(FOLLOW_ruleRefableType_in_ruleStandardOperation2978);
+                            pushFollow(FOLLOW_ruleRefableType_in_ruleStandardOperation2979);
                             lv_returnType_10_0=ruleRefableType();
 
                             state._fsp--;
@@ -3794,7 +3788,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getStandardOperationAccess().getDocuDocumentationParserRuleCall_7_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleDocumentation_in_ruleStandardOperation3002);
+                    pushFollow(FOLLOW_ruleDocumentation_in_ruleStandardOperation3003);
                     lv_docu_11_0=ruleDocumentation();
 
                     state._fsp--;
@@ -3828,7 +3822,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
              
             	        newCompositeNode(grammarAccess.getStandardOperationAccess().getDetailCodeDetailCodeParserRuleCall_8_0()); 
             	    
-            pushFollow(FOLLOW_ruleDetailCode_in_ruleStandardOperation3024);
+            pushFollow(FOLLOW_ruleDetailCode_in_ruleStandardOperation3025);
             lv_detailCode_12_0=ruleDetailCode();
 
             state._fsp--;
@@ -3883,13 +3877,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1588:2: iv_rulePortOperation= rulePortOperation EOF
             {
              newCompositeNode(grammarAccess.getPortOperationRule()); 
-            pushFollow(FOLLOW_rulePortOperation_in_entryRulePortOperation3060);
+            pushFollow(FOLLOW_rulePortOperation_in_entryRulePortOperation3061);
             iv_rulePortOperation=rulePortOperation();
 
             state._fsp--;
 
              current =iv_rulePortOperation; 
-            match(input,EOF,FOLLOW_EOF_in_entryRulePortOperation3070); 
+            match(input,EOF,FOLLOW_EOF_in_entryRulePortOperation3071); 
 
             }
 
@@ -3940,7 +3934,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1599:1: (otherlv_0= 'Operation' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '(' ( ( (lv_arguments_3_0= ruleVarDecl ) ) (otherlv_4= ',' ( (lv_arguments_5_0= ruleVarDecl ) ) )* )? otherlv_6= ')' ( (otherlv_7= ':' (otherlv_8= 'void' | ( (lv_returnType_9_0= ruleRefableType ) ) ) ) | (otherlv_10= 'sends' ( (otherlv_11= RULE_ID ) ) ) )? ( (lv_docu_12_0= ruleDocumentation ) )? ( (lv_detailCode_13_0= ruleDetailCode ) ) )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1599:3: otherlv_0= 'Operation' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '(' ( ( (lv_arguments_3_0= ruleVarDecl ) ) (otherlv_4= ',' ( (lv_arguments_5_0= ruleVarDecl ) ) )* )? otherlv_6= ')' ( (otherlv_7= ':' (otherlv_8= 'void' | ( (lv_returnType_9_0= ruleRefableType ) ) ) ) | (otherlv_10= 'sends' ( (otherlv_11= RULE_ID ) ) ) )? ( (lv_docu_12_0= ruleDocumentation ) )? ( (lv_detailCode_13_0= ruleDetailCode ) )
             {
-            otherlv_0=(Token)match(input,37,FOLLOW_37_in_rulePortOperation3107); 
+            otherlv_0=(Token)match(input,37,FOLLOW_37_in_rulePortOperation3108); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getPortOperationAccess().getOperationKeyword_0());
                 
@@ -3950,7 +3944,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1604:1: (lv_name_1_0= RULE_ID )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1605:3: lv_name_1_0= RULE_ID
             {
-            lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_rulePortOperation3124); 
+            lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_rulePortOperation3125); 
 
             			newLeafNode(lv_name_1_0, grammarAccess.getPortOperationAccess().getNameIDTerminalRuleCall_1_0()); 
             		
@@ -3970,7 +3964,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_2=(Token)match(input,20,FOLLOW_20_in_rulePortOperation3141); 
+            otherlv_2=(Token)match(input,20,FOLLOW_20_in_rulePortOperation3142); 
 
                 	newLeafNode(otherlv_2, grammarAccess.getPortOperationAccess().getLeftParenthesisKeyword_2());
                 
@@ -3994,7 +3988,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getPortOperationAccess().getArgumentsVarDeclParserRuleCall_3_0_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleVarDecl_in_rulePortOperation3163);
+                    pushFollow(FOLLOW_ruleVarDecl_in_rulePortOperation3164);
                     lv_arguments_3_0=ruleVarDecl();
 
                     state._fsp--;
@@ -4031,7 +4025,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	case 1 :
                     	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1643:4: otherlv_4= ',' ( (lv_arguments_5_0= ruleVarDecl ) )
                     	    {
-                    	    otherlv_4=(Token)match(input,25,FOLLOW_25_in_rulePortOperation3176); 
+                    	    otherlv_4=(Token)match(input,25,FOLLOW_25_in_rulePortOperation3177); 
 
                     	        	newLeafNode(otherlv_4, grammarAccess.getPortOperationAccess().getCommaKeyword_3_1_0());
                     	        
@@ -4044,7 +4038,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	     
                     	    	        newCompositeNode(grammarAccess.getPortOperationAccess().getArgumentsVarDeclParserRuleCall_3_1_1_0()); 
                     	    	    
-                    	    pushFollow(FOLLOW_ruleVarDecl_in_rulePortOperation3197);
+                    	    pushFollow(FOLLOW_ruleVarDecl_in_rulePortOperation3198);
                     	    lv_arguments_5_0=ruleVarDecl();
 
                     	    state._fsp--;
@@ -4081,7 +4075,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_6=(Token)match(input,21,FOLLOW_21_in_rulePortOperation3213); 
+            otherlv_6=(Token)match(input,21,FOLLOW_21_in_rulePortOperation3214); 
 
                 	newLeafNode(otherlv_6, grammarAccess.getPortOperationAccess().getRightParenthesisKeyword_4());
                 
@@ -4102,7 +4096,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1669:2: (otherlv_7= ':' (otherlv_8= 'void' | ( (lv_returnType_9_0= ruleRefableType ) ) ) )
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1669:4: otherlv_7= ':' (otherlv_8= 'void' | ( (lv_returnType_9_0= ruleRefableType ) ) )
                     {
-                    otherlv_7=(Token)match(input,16,FOLLOW_16_in_rulePortOperation3227); 
+                    otherlv_7=(Token)match(input,16,FOLLOW_16_in_rulePortOperation3228); 
 
                         	newLeafNode(otherlv_7, grammarAccess.getPortOperationAccess().getColonKeyword_5_0_0());
                         
@@ -4126,7 +4120,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                         case 1 :
                             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1673:3: otherlv_8= 'void'
                             {
-                            otherlv_8=(Token)match(input,38,FOLLOW_38_in_rulePortOperation3240); 
+                            otherlv_8=(Token)match(input,38,FOLLOW_38_in_rulePortOperation3241); 
 
                                 	newLeafNode(otherlv_8, grammarAccess.getPortOperationAccess().getVoidKeyword_5_0_1_0());
                                 
@@ -4145,7 +4139,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                              
                             	        newCompositeNode(grammarAccess.getPortOperationAccess().getReturnTypeRefableTypeParserRuleCall_5_0_1_1_0()); 
                             	    
-                            pushFollow(FOLLOW_ruleRefableType_in_rulePortOperation3267);
+                            pushFollow(FOLLOW_ruleRefableType_in_rulePortOperation3268);
                             lv_returnType_9_0=ruleRefableType();
 
                             state._fsp--;
@@ -4185,7 +4179,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1697:6: (otherlv_10= 'sends' ( (otherlv_11= RULE_ID ) ) )
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1697:8: otherlv_10= 'sends' ( (otherlv_11= RULE_ID ) )
                     {
-                    otherlv_10=(Token)match(input,39,FOLLOW_39_in_rulePortOperation3288); 
+                    otherlv_10=(Token)match(input,39,FOLLOW_39_in_rulePortOperation3289); 
 
                         	newLeafNode(otherlv_10, grammarAccess.getPortOperationAccess().getSendsKeyword_5_1_0());
                         
@@ -4200,7 +4194,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	            current = createModelElement(grammarAccess.getPortOperationRule());
                     	        }
                             
-                    otherlv_11=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_rulePortOperation3308); 
+                    otherlv_11=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_rulePortOperation3309); 
 
                     		newLeafNode(otherlv_11, grammarAccess.getPortOperationAccess().getSendsMsgMessageCrossReference_5_1_1_0()); 
                     	
@@ -4236,7 +4230,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getPortOperationAccess().getDocuDocumentationParserRuleCall_6_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleDocumentation_in_rulePortOperation3332);
+                    pushFollow(FOLLOW_ruleDocumentation_in_rulePortOperation3333);
                     lv_docu_12_0=ruleDocumentation();
 
                     state._fsp--;
@@ -4270,7 +4264,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
              
             	        newCompositeNode(grammarAccess.getPortOperationAccess().getDetailCodeDetailCodeParserRuleCall_7_0()); 
             	    
-            pushFollow(FOLLOW_ruleDetailCode_in_rulePortOperation3354);
+            pushFollow(FOLLOW_ruleDetailCode_in_rulePortOperation3355);
             lv_detailCode_13_0=ruleDetailCode();
 
             state._fsp--;
@@ -4325,13 +4319,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1760:2: iv_ruleClassStructor= ruleClassStructor EOF
             {
              newCompositeNode(grammarAccess.getClassStructorRule()); 
-            pushFollow(FOLLOW_ruleClassStructor_in_entryRuleClassStructor3390);
+            pushFollow(FOLLOW_ruleClassStructor_in_entryRuleClassStructor3391);
             iv_ruleClassStructor=ruleClassStructor();
 
             state._fsp--;
 
              current =iv_ruleClassStructor; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleClassStructor3400); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleClassStructor3401); 
 
             }
 
@@ -4393,7 +4387,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1774:3: lv_name_0_1= 'ctor'
                     {
-                    lv_name_0_1=(Token)match(input,40,FOLLOW_40_in_ruleClassStructor3445); 
+                    lv_name_0_1=(Token)match(input,40,FOLLOW_40_in_ruleClassStructor3446); 
 
                             newLeafNode(lv_name_0_1, grammarAccess.getClassStructorAccess().getNameCtorKeyword_0_0_0());
                         
@@ -4409,7 +4403,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 2 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1786:8: lv_name_0_2= 'dtor'
                     {
-                    lv_name_0_2=(Token)match(input,41,FOLLOW_41_in_ruleClassStructor3474); 
+                    lv_name_0_2=(Token)match(input,41,FOLLOW_41_in_ruleClassStructor3475); 
 
                             newLeafNode(lv_name_0_2, grammarAccess.getClassStructorAccess().getNameDtorKeyword_0_0_1());
                         
@@ -4440,7 +4434,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
              
             	        newCompositeNode(grammarAccess.getClassStructorAccess().getDetailCodeDetailCodeParserRuleCall_1_0()); 
             	    
-            pushFollow(FOLLOW_ruleDetailCode_in_ruleClassStructor3511);
+            pushFollow(FOLLOW_ruleDetailCode_in_ruleClassStructor3512);
             lv_detailCode_1_0=ruleDetailCode();
 
             state._fsp--;
@@ -4495,13 +4489,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1829:2: iv_ruleGeneralProtocolClass= ruleGeneralProtocolClass EOF
             {
              newCompositeNode(grammarAccess.getGeneralProtocolClassRule()); 
-            pushFollow(FOLLOW_ruleGeneralProtocolClass_in_entryRuleGeneralProtocolClass3547);
+            pushFollow(FOLLOW_ruleGeneralProtocolClass_in_entryRuleGeneralProtocolClass3548);
             iv_ruleGeneralProtocolClass=ruleGeneralProtocolClass();
 
             state._fsp--;
 
              current =iv_ruleGeneralProtocolClass; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleGeneralProtocolClass3557); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleGeneralProtocolClass3558); 
 
             }
 
@@ -4557,7 +4551,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getGeneralProtocolClassAccess().getProtocolClassParserRuleCall_0()); 
                         
-                    pushFollow(FOLLOW_ruleProtocolClass_in_ruleGeneralProtocolClass3604);
+                    pushFollow(FOLLOW_ruleProtocolClass_in_ruleGeneralProtocolClass3605);
                     this_ProtocolClass_0=ruleProtocolClass();
 
                     state._fsp--;
@@ -4575,7 +4569,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getGeneralProtocolClassAccess().getCompoundProtocolClassParserRuleCall_1()); 
                         
-                    pushFollow(FOLLOW_ruleCompoundProtocolClass_in_ruleGeneralProtocolClass3631);
+                    pushFollow(FOLLOW_ruleCompoundProtocolClass_in_ruleGeneralProtocolClass3632);
                     this_CompoundProtocolClass_1=ruleCompoundProtocolClass();
 
                     state._fsp--;
@@ -4620,13 +4614,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1869:2: iv_ruleProtocolClass= ruleProtocolClass EOF
             {
              newCompositeNode(grammarAccess.getProtocolClassRule()); 
-            pushFollow(FOLLOW_ruleProtocolClass_in_entryRuleProtocolClass3666);
+            pushFollow(FOLLOW_ruleProtocolClass_in_entryRuleProtocolClass3667);
             iv_ruleProtocolClass=ruleProtocolClass();
 
             state._fsp--;
 
              current =iv_ruleProtocolClass; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleProtocolClass3676); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleProtocolClass3677); 
 
             }
 
@@ -4715,7 +4709,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getProtocolClassAccess().getCommTypeCommunicationTypeEnumRuleCall_0_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleCommunicationType_in_ruleProtocolClass3722);
+                    pushFollow(FOLLOW_ruleCommunicationType_in_ruleProtocolClass3723);
                     lv_commType_0_0=ruleCommunicationType();
 
                     state._fsp--;
@@ -4740,7 +4734,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,42,FOLLOW_42_in_ruleProtocolClass3735); 
+            otherlv_1=(Token)match(input,42,FOLLOW_42_in_ruleProtocolClass3736); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getProtocolClassAccess().getProtocolClassKeyword_1());
                 
@@ -4750,7 +4744,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1903:1: (lv_name_2_0= RULE_ID )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1904:3: lv_name_2_0= RULE_ID
             {
-            lv_name_2_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleProtocolClass3752); 
+            lv_name_2_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleProtocolClass3753); 
 
             			newLeafNode(lv_name_2_0, grammarAccess.getProtocolClassAccess().getNameIDTerminalRuleCall_2_0()); 
             		
@@ -4787,7 +4781,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getProtocolClassAccess().getDocuDocumentationParserRuleCall_3_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleDocumentation_in_ruleProtocolClass3778);
+                    pushFollow(FOLLOW_ruleDocumentation_in_ruleProtocolClass3779);
                     lv_docu_3_0=ruleDocumentation();
 
                     state._fsp--;
@@ -4823,7 +4817,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1938:5: otherlv_4= 'extends' ( ( ruleFQN ) )
                     {
-                    otherlv_4=(Token)match(input,29,FOLLOW_29_in_ruleProtocolClass3792); 
+                    otherlv_4=(Token)match(input,29,FOLLOW_29_in_ruleProtocolClass3793); 
 
                         	newLeafNode(otherlv_4, grammarAccess.getProtocolClassAccess().getExtendsKeyword_4_0());
                         
@@ -4841,7 +4835,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getProtocolClassAccess().getBaseProtocolClassCrossReference_4_1_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleFQN_in_ruleProtocolClass3815);
+                    pushFollow(FOLLOW_ruleFQN_in_ruleProtocolClass3816);
                     ruleFQN();
 
                     state._fsp--;
@@ -4861,7 +4855,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_6=(Token)match(input,14,FOLLOW_14_in_ruleProtocolClass3829); 
+            otherlv_6=(Token)match(input,14,FOLLOW_14_in_ruleProtocolClass3830); 
 
                 	newLeafNode(otherlv_6, grammarAccess.getProtocolClassAccess().getLeftCurlyBracketKeyword_5());
                 
@@ -4886,7 +4880,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getProtocolClassAccess().getAnnotationsAnnotationParserRuleCall_6_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleAnnotation_in_ruleProtocolClass3850);
+            	    pushFollow(FOLLOW_ruleAnnotation_in_ruleProtocolClass3851);
             	    lv_annotations_7_0=ruleAnnotation();
 
             	    state._fsp--;
@@ -4925,7 +4919,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:1979:5: otherlv_8= 'usercode1' ( (lv_userCode1_9_0= ruleDetailCode ) )
                     {
-                    otherlv_8=(Token)match(input,30,FOLLOW_30_in_ruleProtocolClass3864); 
+                    otherlv_8=(Token)match(input,30,FOLLOW_30_in_ruleProtocolClass3865); 
 
                         	newLeafNode(otherlv_8, grammarAccess.getProtocolClassAccess().getUsercode1Keyword_7_0());
                         
@@ -4938,7 +4932,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getProtocolClassAccess().getUserCode1DetailCodeParserRuleCall_7_1_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleDetailCode_in_ruleProtocolClass3885);
+                    pushFollow(FOLLOW_ruleDetailCode_in_ruleProtocolClass3886);
                     lv_userCode1_9_0=ruleDetailCode();
 
                     state._fsp--;
@@ -4977,7 +4971,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2001:6: otherlv_10= 'usercode2' ( (lv_userCode2_11_0= ruleDetailCode ) )
                     {
-                    otherlv_10=(Token)match(input,31,FOLLOW_31_in_ruleProtocolClass3900); 
+                    otherlv_10=(Token)match(input,31,FOLLOW_31_in_ruleProtocolClass3901); 
 
                         	newLeafNode(otherlv_10, grammarAccess.getProtocolClassAccess().getUsercode2Keyword_8_0());
                         
@@ -4990,7 +4984,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getProtocolClassAccess().getUserCode2DetailCodeParserRuleCall_8_1_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleDetailCode_in_ruleProtocolClass3921);
+                    pushFollow(FOLLOW_ruleDetailCode_in_ruleProtocolClass3922);
                     lv_userCode2_11_0=ruleDetailCode();
 
                     state._fsp--;
@@ -5029,7 +5023,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2023:6: otherlv_12= 'usercode3' ( (lv_userCode3_13_0= ruleDetailCode ) )
                     {
-                    otherlv_12=(Token)match(input,32,FOLLOW_32_in_ruleProtocolClass3936); 
+                    otherlv_12=(Token)match(input,32,FOLLOW_32_in_ruleProtocolClass3937); 
 
                         	newLeafNode(otherlv_12, grammarAccess.getProtocolClassAccess().getUsercode3Keyword_9_0());
                         
@@ -5042,7 +5036,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getProtocolClassAccess().getUserCode3DetailCodeParserRuleCall_9_1_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleDetailCode_in_ruleProtocolClass3957);
+                    pushFollow(FOLLOW_ruleDetailCode_in_ruleProtocolClass3958);
                     lv_userCode3_13_0=ruleDetailCode();
 
                     state._fsp--;
@@ -5081,11 +5075,11 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2045:6: otherlv_14= 'incoming' otherlv_15= '{' ( (lv_incomingMessages_16_0= ruleMessage ) )* otherlv_17= '}'
                     {
-                    otherlv_14=(Token)match(input,43,FOLLOW_43_in_ruleProtocolClass3972); 
+                    otherlv_14=(Token)match(input,43,FOLLOW_43_in_ruleProtocolClass3973); 
 
                         	newLeafNode(otherlv_14, grammarAccess.getProtocolClassAccess().getIncomingKeyword_10_0());
                         
-                    otherlv_15=(Token)match(input,14,FOLLOW_14_in_ruleProtocolClass3984); 
+                    otherlv_15=(Token)match(input,14,FOLLOW_14_in_ruleProtocolClass3985); 
 
                         	newLeafNode(otherlv_15, grammarAccess.getProtocolClassAccess().getLeftCurlyBracketKeyword_10_1());
                         
@@ -5110,7 +5104,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	     
                     	    	        newCompositeNode(grammarAccess.getProtocolClassAccess().getIncomingMessagesMessageParserRuleCall_10_2_0()); 
                     	    	    
-                    	    pushFollow(FOLLOW_ruleMessage_in_ruleProtocolClass4005);
+                    	    pushFollow(FOLLOW_ruleMessage_in_ruleProtocolClass4006);
                     	    lv_incomingMessages_16_0=ruleMessage();
 
                     	    state._fsp--;
@@ -5138,7 +5132,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                         }
                     } while (true);
 
-                    otherlv_17=(Token)match(input,15,FOLLOW_15_in_ruleProtocolClass4018); 
+                    otherlv_17=(Token)match(input,15,FOLLOW_15_in_ruleProtocolClass4019); 
 
                         	newLeafNode(otherlv_17, grammarAccess.getProtocolClassAccess().getRightCurlyBracketKeyword_10_3());
                         
@@ -5159,11 +5153,11 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2075:5: otherlv_18= 'outgoing' otherlv_19= '{' ( (lv_outgoingMessages_20_0= ruleMessage ) )* otherlv_21= '}'
                     {
-                    otherlv_18=(Token)match(input,44,FOLLOW_44_in_ruleProtocolClass4033); 
+                    otherlv_18=(Token)match(input,44,FOLLOW_44_in_ruleProtocolClass4034); 
 
                         	newLeafNode(otherlv_18, grammarAccess.getProtocolClassAccess().getOutgoingKeyword_11_0());
                         
-                    otherlv_19=(Token)match(input,14,FOLLOW_14_in_ruleProtocolClass4045); 
+                    otherlv_19=(Token)match(input,14,FOLLOW_14_in_ruleProtocolClass4046); 
 
                         	newLeafNode(otherlv_19, grammarAccess.getProtocolClassAccess().getLeftCurlyBracketKeyword_11_1());
                         
@@ -5188,7 +5182,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	     
                     	    	        newCompositeNode(grammarAccess.getProtocolClassAccess().getOutgoingMessagesMessageParserRuleCall_11_2_0()); 
                     	    	    
-                    	    pushFollow(FOLLOW_ruleMessage_in_ruleProtocolClass4066);
+                    	    pushFollow(FOLLOW_ruleMessage_in_ruleProtocolClass4067);
                     	    lv_outgoingMessages_20_0=ruleMessage();
 
                     	    state._fsp--;
@@ -5216,7 +5210,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                         }
                     } while (true);
 
-                    otherlv_21=(Token)match(input,15,FOLLOW_15_in_ruleProtocolClass4079); 
+                    otherlv_21=(Token)match(input,15,FOLLOW_15_in_ruleProtocolClass4080); 
 
                         	newLeafNode(otherlv_21, grammarAccess.getProtocolClassAccess().getRightCurlyBracketKeyword_11_3());
                         
@@ -5237,11 +5231,11 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2105:5: otherlv_22= 'regular' otherlv_23= 'PortClass' ( (lv_regular_24_0= rulePortClass ) )
                     {
-                    otherlv_22=(Token)match(input,45,FOLLOW_45_in_ruleProtocolClass4094); 
+                    otherlv_22=(Token)match(input,45,FOLLOW_45_in_ruleProtocolClass4095); 
 
                         	newLeafNode(otherlv_22, grammarAccess.getProtocolClassAccess().getRegularKeyword_12_0());
                         
-                    otherlv_23=(Token)match(input,46,FOLLOW_46_in_ruleProtocolClass4106); 
+                    otherlv_23=(Token)match(input,46,FOLLOW_46_in_ruleProtocolClass4107); 
 
                         	newLeafNode(otherlv_23, grammarAccess.getProtocolClassAccess().getPortClassKeyword_12_1());
                         
@@ -5254,7 +5248,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getProtocolClassAccess().getRegularPortClassParserRuleCall_12_2_0()); 
                     	    
-                    pushFollow(FOLLOW_rulePortClass_in_ruleProtocolClass4127);
+                    pushFollow(FOLLOW_rulePortClass_in_ruleProtocolClass4128);
                     lv_regular_24_0=rulePortClass();
 
                     state._fsp--;
@@ -5293,11 +5287,11 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2131:6: otherlv_25= 'conjugated' otherlv_26= 'PortClass' ( (lv_conjugated_27_0= rulePortClass ) )
                     {
-                    otherlv_25=(Token)match(input,47,FOLLOW_47_in_ruleProtocolClass4142); 
+                    otherlv_25=(Token)match(input,47,FOLLOW_47_in_ruleProtocolClass4143); 
 
                         	newLeafNode(otherlv_25, grammarAccess.getProtocolClassAccess().getConjugatedKeyword_13_0());
                         
-                    otherlv_26=(Token)match(input,46,FOLLOW_46_in_ruleProtocolClass4154); 
+                    otherlv_26=(Token)match(input,46,FOLLOW_46_in_ruleProtocolClass4155); 
 
                         	newLeafNode(otherlv_26, grammarAccess.getProtocolClassAccess().getPortClassKeyword_13_1());
                         
@@ -5310,7 +5304,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getProtocolClassAccess().getConjugatedPortClassParserRuleCall_13_2_0()); 
                     	    
-                    pushFollow(FOLLOW_rulePortClass_in_ruleProtocolClass4175);
+                    pushFollow(FOLLOW_rulePortClass_in_ruleProtocolClass4176);
                     lv_conjugated_27_0=rulePortClass();
 
                     state._fsp--;
@@ -5355,7 +5349,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getProtocolClassAccess().getSemanticsProtocolSemanticsParserRuleCall_14_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleProtocolSemantics_in_ruleProtocolClass4198);
+                    pushFollow(FOLLOW_ruleProtocolSemantics_in_ruleProtocolClass4199);
                     lv_semantics_28_0=ruleProtocolSemantics();
 
                     state._fsp--;
@@ -5380,7 +5374,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_29=(Token)match(input,15,FOLLOW_15_in_ruleProtocolClass4211); 
+            otherlv_29=(Token)match(input,15,FOLLOW_15_in_ruleProtocolClass4212); 
 
                 	newLeafNode(otherlv_29, grammarAccess.getProtocolClassAccess().getRightCurlyBracketKeyword_15());
                 
@@ -5417,13 +5411,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2189:2: iv_ruleCompoundProtocolClass= ruleCompoundProtocolClass EOF
             {
              newCompositeNode(grammarAccess.getCompoundProtocolClassRule()); 
-            pushFollow(FOLLOW_ruleCompoundProtocolClass_in_entryRuleCompoundProtocolClass4247);
+            pushFollow(FOLLOW_ruleCompoundProtocolClass_in_entryRuleCompoundProtocolClass4248);
             iv_ruleCompoundProtocolClass=ruleCompoundProtocolClass();
 
             state._fsp--;
 
              current =iv_ruleCompoundProtocolClass; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleCompoundProtocolClass4257); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleCompoundProtocolClass4258); 
 
             }
 
@@ -5465,7 +5459,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2200:1: (otherlv_0= 'CompoundProtocolClass' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? otherlv_3= '{' ( (lv_annotations_4_0= ruleAnnotation ) )* ( (lv_subProtocols_5_0= ruleSubProtocol ) )* otherlv_6= '}' )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2200:3: otherlv_0= 'CompoundProtocolClass' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? otherlv_3= '{' ( (lv_annotations_4_0= ruleAnnotation ) )* ( (lv_subProtocols_5_0= ruleSubProtocol ) )* otherlv_6= '}'
             {
-            otherlv_0=(Token)match(input,48,FOLLOW_48_in_ruleCompoundProtocolClass4294); 
+            otherlv_0=(Token)match(input,48,FOLLOW_48_in_ruleCompoundProtocolClass4295); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getCompoundProtocolClassAccess().getCompoundProtocolClassKeyword_0());
                 
@@ -5475,7 +5469,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2205:1: (lv_name_1_0= RULE_ID )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2206:3: lv_name_1_0= RULE_ID
             {
-            lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleCompoundProtocolClass4311); 
+            lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleCompoundProtocolClass4312); 
 
             			newLeafNode(lv_name_1_0, grammarAccess.getCompoundProtocolClassAccess().getNameIDTerminalRuleCall_1_0()); 
             		
@@ -5512,7 +5506,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getCompoundProtocolClassAccess().getDocuDocumentationParserRuleCall_2_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleDocumentation_in_ruleCompoundProtocolClass4337);
+                    pushFollow(FOLLOW_ruleDocumentation_in_ruleCompoundProtocolClass4338);
                     lv_docu_2_0=ruleDocumentation();
 
                     state._fsp--;
@@ -5537,7 +5531,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_3=(Token)match(input,14,FOLLOW_14_in_ruleCompoundProtocolClass4350); 
+            otherlv_3=(Token)match(input,14,FOLLOW_14_in_ruleCompoundProtocolClass4351); 
 
                 	newLeafNode(otherlv_3, grammarAccess.getCompoundProtocolClassAccess().getLeftCurlyBracketKeyword_3());
                 
@@ -5562,7 +5556,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getCompoundProtocolClassAccess().getAnnotationsAnnotationParserRuleCall_4_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleAnnotation_in_ruleCompoundProtocolClass4371);
+            	    pushFollow(FOLLOW_ruleAnnotation_in_ruleCompoundProtocolClass4372);
             	    lv_annotations_4_0=ruleAnnotation();
 
             	    state._fsp--;
@@ -5611,7 +5605,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getCompoundProtocolClassAccess().getSubProtocolsSubProtocolParserRuleCall_5_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleSubProtocol_in_ruleCompoundProtocolClass4393);
+            	    pushFollow(FOLLOW_ruleSubProtocol_in_ruleCompoundProtocolClass4394);
             	    lv_subProtocols_5_0=ruleSubProtocol();
 
             	    state._fsp--;
@@ -5639,7 +5633,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            otherlv_6=(Token)match(input,15,FOLLOW_15_in_ruleCompoundProtocolClass4406); 
+            otherlv_6=(Token)match(input,15,FOLLOW_15_in_ruleCompoundProtocolClass4407); 
 
                 	newLeafNode(otherlv_6, grammarAccess.getCompoundProtocolClassAccess().getRightCurlyBracketKeyword_6());
                 
@@ -5676,13 +5670,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2294:2: iv_ruleSubProtocol= ruleSubProtocol EOF
             {
              newCompositeNode(grammarAccess.getSubProtocolRule()); 
-            pushFollow(FOLLOW_ruleSubProtocol_in_entryRuleSubProtocol4442);
+            pushFollow(FOLLOW_ruleSubProtocol_in_entryRuleSubProtocol4443);
             iv_ruleSubProtocol=ruleSubProtocol();
 
             state._fsp--;
 
              current =iv_ruleSubProtocol; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleSubProtocol4452); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleSubProtocol4453); 
 
             }
 
@@ -5717,7 +5711,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2305:1: (otherlv_0= 'SubProtocol' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ':' ( ( ruleFQN ) ) )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2305:3: otherlv_0= 'SubProtocol' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ':' ( ( ruleFQN ) )
             {
-            otherlv_0=(Token)match(input,49,FOLLOW_49_in_ruleSubProtocol4489); 
+            otherlv_0=(Token)match(input,49,FOLLOW_49_in_ruleSubProtocol4490); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getSubProtocolAccess().getSubProtocolKeyword_0());
                 
@@ -5727,7 +5721,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2310:1: (lv_name_1_0= RULE_ID )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2311:3: lv_name_1_0= RULE_ID
             {
-            lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSubProtocol4506); 
+            lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSubProtocol4507); 
 
             			newLeafNode(lv_name_1_0, grammarAccess.getSubProtocolAccess().getNameIDTerminalRuleCall_1_0()); 
             		
@@ -5747,7 +5741,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_2=(Token)match(input,16,FOLLOW_16_in_ruleSubProtocol4523); 
+            otherlv_2=(Token)match(input,16,FOLLOW_16_in_ruleSubProtocol4524); 
 
                 	newLeafNode(otherlv_2, grammarAccess.getSubProtocolAccess().getColonKeyword_2());
                 
@@ -5765,7 +5759,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
              
             	        newCompositeNode(grammarAccess.getSubProtocolAccess().getProtocolGeneralProtocolClassCrossReference_3_0()); 
             	    
-            pushFollow(FOLLOW_ruleFQN_in_ruleSubProtocol4546);
+            pushFollow(FOLLOW_ruleFQN_in_ruleSubProtocol4547);
             ruleFQN();
 
             state._fsp--;
@@ -5812,13 +5806,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2356:2: iv_ruleMessage= ruleMessage EOF
             {
              newCompositeNode(grammarAccess.getMessageRule()); 
-            pushFollow(FOLLOW_ruleMessage_in_entryRuleMessage4582);
+            pushFollow(FOLLOW_ruleMessage_in_entryRuleMessage4583);
             iv_ruleMessage=ruleMessage();
 
             state._fsp--;
 
              current =iv_ruleMessage; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleMessage4592); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleMessage4593); 
 
             }
 
@@ -5873,7 +5867,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2368:1: (lv_priv_0_0= 'private' )
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2369:3: lv_priv_0_0= 'private'
                     {
-                    lv_priv_0_0=(Token)match(input,50,FOLLOW_50_in_ruleMessage4635); 
+                    lv_priv_0_0=(Token)match(input,50,FOLLOW_50_in_ruleMessage4636); 
 
                             newLeafNode(lv_priv_0_0, grammarAccess.getMessageAccess().getPrivPrivateKeyword_0_0());
                         
@@ -5892,7 +5886,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,51,FOLLOW_51_in_ruleMessage4661); 
+            otherlv_1=(Token)match(input,51,FOLLOW_51_in_ruleMessage4662); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getMessageAccess().getMessageKeyword_1());
                 
@@ -5902,7 +5896,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2387:1: (lv_name_2_0= RULE_ID )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2388:3: lv_name_2_0= RULE_ID
             {
-            lv_name_2_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleMessage4678); 
+            lv_name_2_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleMessage4679); 
 
             			newLeafNode(lv_name_2_0, grammarAccess.getMessageAccess().getNameIDTerminalRuleCall_2_0()); 
             		
@@ -5922,7 +5916,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_3=(Token)match(input,20,FOLLOW_20_in_ruleMessage4695); 
+            otherlv_3=(Token)match(input,20,FOLLOW_20_in_ruleMessage4696); 
 
                 	newLeafNode(otherlv_3, grammarAccess.getMessageAccess().getLeftParenthesisKeyword_3());
                 
@@ -5943,7 +5937,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getMessageAccess().getDataVarDeclParserRuleCall_4_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleVarDecl_in_ruleMessage4716);
+                    pushFollow(FOLLOW_ruleVarDecl_in_ruleMessage4717);
                     lv_data_4_0=ruleVarDecl();
 
                     state._fsp--;
@@ -5968,7 +5962,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_5=(Token)match(input,21,FOLLOW_21_in_ruleMessage4729); 
+            otherlv_5=(Token)match(input,21,FOLLOW_21_in_ruleMessage4730); 
 
                 	newLeafNode(otherlv_5, grammarAccess.getMessageAccess().getRightParenthesisKeyword_5());
                 
@@ -5989,7 +5983,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getMessageAccess().getDocuDocumentationParserRuleCall_6_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleDocumentation_in_ruleMessage4750);
+                    pushFollow(FOLLOW_ruleDocumentation_in_ruleMessage4751);
                     lv_docu_6_0=ruleDocumentation();
 
                     state._fsp--;
@@ -6047,13 +6041,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2458:2: iv_rulePortClass= rulePortClass EOF
             {
              newCompositeNode(grammarAccess.getPortClassRule()); 
-            pushFollow(FOLLOW_rulePortClass_in_entryRulePortClass4787);
+            pushFollow(FOLLOW_rulePortClass_in_entryRulePortClass4788);
             iv_rulePortClass=rulePortClass();
 
             state._fsp--;
 
              current =iv_rulePortClass; 
-            match(input,EOF,FOLLOW_EOF_in_entryRulePortClass4797); 
+            match(input,EOF,FOLLOW_EOF_in_entryRulePortClass4798); 
 
             }
 
@@ -6107,7 +6101,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,14,FOLLOW_14_in_rulePortClass4843); 
+            otherlv_1=(Token)match(input,14,FOLLOW_14_in_rulePortClass4844); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getPortClassAccess().getLeftCurlyBracketKeyword_1());
                 
@@ -6122,7 +6116,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2479:3: otherlv_2= 'usercode' ( (lv_userCode_3_0= ruleDetailCode ) )
                     {
-                    otherlv_2=(Token)match(input,52,FOLLOW_52_in_rulePortClass4856); 
+                    otherlv_2=(Token)match(input,52,FOLLOW_52_in_rulePortClass4857); 
 
                         	newLeafNode(otherlv_2, grammarAccess.getPortClassAccess().getUsercodeKeyword_2_0());
                         
@@ -6135,7 +6129,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getPortClassAccess().getUserCodeDetailCodeParserRuleCall_2_1_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleDetailCode_in_rulePortClass4877);
+                    pushFollow(FOLLOW_ruleDetailCode_in_rulePortClass4878);
                     lv_userCode_3_0=ruleDetailCode();
 
                     state._fsp--;
@@ -6199,7 +6193,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getPortClassAccess().getMsgHandlersMessageHandlerParserRuleCall_3_0_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleMessageHandler_in_rulePortClass4901);
+            	    pushFollow(FOLLOW_ruleMessageHandler_in_rulePortClass4902);
             	    lv_msgHandlers_4_0=ruleMessageHandler();
 
             	    state._fsp--;
@@ -6236,7 +6230,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getPortClassAccess().getOperationsPortOperationParserRuleCall_3_1_0()); 
             	    	    
-            	    pushFollow(FOLLOW_rulePortOperation_in_rulePortClass4928);
+            	    pushFollow(FOLLOW_rulePortOperation_in_rulePortClass4929);
             	    lv_operations_5_0=rulePortOperation();
 
             	    state._fsp--;
@@ -6273,7 +6267,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getPortClassAccess().getAttributesAttributeParserRuleCall_3_2_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleAttribute_in_rulePortClass4955);
+            	    pushFollow(FOLLOW_ruleAttribute_in_rulePortClass4956);
             	    lv_attributes_6_0=ruleAttribute();
 
             	    state._fsp--;
@@ -6304,7 +6298,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            otherlv_7=(Token)match(input,15,FOLLOW_15_in_rulePortClass4969); 
+            otherlv_7=(Token)match(input,15,FOLLOW_15_in_rulePortClass4970); 
 
                 	newLeafNode(otherlv_7, grammarAccess.getPortClassAccess().getRightCurlyBracketKeyword_4());
                 
@@ -6341,13 +6335,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2571:2: iv_ruleMessageHandler= ruleMessageHandler EOF
             {
              newCompositeNode(grammarAccess.getMessageHandlerRule()); 
-            pushFollow(FOLLOW_ruleMessageHandler_in_entryRuleMessageHandler5005);
+            pushFollow(FOLLOW_ruleMessageHandler_in_entryRuleMessageHandler5006);
             iv_ruleMessageHandler=ruleMessageHandler();
 
             state._fsp--;
 
              current =iv_ruleMessageHandler; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleMessageHandler5015); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleMessageHandler5016); 
 
             }
 
@@ -6413,7 +6407,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getMessageHandlerAccess().getInMessageHandlerParserRuleCall_0()); 
                         
-                    pushFollow(FOLLOW_ruleInMessageHandler_in_ruleMessageHandler5062);
+                    pushFollow(FOLLOW_ruleInMessageHandler_in_ruleMessageHandler5063);
                     this_InMessageHandler_0=ruleInMessageHandler();
 
                     state._fsp--;
@@ -6431,7 +6425,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getMessageHandlerAccess().getOutMessageHandlerParserRuleCall_1()); 
                         
-                    pushFollow(FOLLOW_ruleOutMessageHandler_in_ruleMessageHandler5089);
+                    pushFollow(FOLLOW_ruleOutMessageHandler_in_ruleMessageHandler5090);
                     this_OutMessageHandler_1=ruleOutMessageHandler();
 
                     state._fsp--;
@@ -6476,13 +6470,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2611:2: iv_ruleInMessageHandler= ruleInMessageHandler EOF
             {
              newCompositeNode(grammarAccess.getInMessageHandlerRule()); 
-            pushFollow(FOLLOW_ruleInMessageHandler_in_entryRuleInMessageHandler5124);
+            pushFollow(FOLLOW_ruleInMessageHandler_in_entryRuleInMessageHandler5125);
             iv_ruleInMessageHandler=ruleInMessageHandler();
 
             state._fsp--;
 
              current =iv_ruleInMessageHandler; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleInMessageHandler5134); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleInMessageHandler5135); 
 
             }
 
@@ -6519,11 +6513,11 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2622:1: (otherlv_0= 'handle' otherlv_1= 'incoming' ( (otherlv_2= RULE_ID ) ) ( (lv_detailCode_3_0= ruleDetailCode ) ) )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2622:3: otherlv_0= 'handle' otherlv_1= 'incoming' ( (otherlv_2= RULE_ID ) ) ( (lv_detailCode_3_0= ruleDetailCode ) )
             {
-            otherlv_0=(Token)match(input,53,FOLLOW_53_in_ruleInMessageHandler5171); 
+            otherlv_0=(Token)match(input,53,FOLLOW_53_in_ruleInMessageHandler5172); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getInMessageHandlerAccess().getHandleKeyword_0());
                 
-            otherlv_1=(Token)match(input,43,FOLLOW_43_in_ruleInMessageHandler5183); 
+            otherlv_1=(Token)match(input,43,FOLLOW_43_in_ruleInMessageHandler5184); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getInMessageHandlerAccess().getIncomingKeyword_1());
                 
@@ -6538,7 +6532,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	            current = createModelElement(grammarAccess.getInMessageHandlerRule());
             	        }
                     
-            otherlv_2=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleInMessageHandler5203); 
+            otherlv_2=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleInMessageHandler5204); 
 
             		newLeafNode(otherlv_2, grammarAccess.getInMessageHandlerAccess().getMsgMessageCrossReference_2_0()); 
             	
@@ -6557,7 +6551,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
              
             	        newCompositeNode(grammarAccess.getInMessageHandlerAccess().getDetailCodeDetailCodeParserRuleCall_3_0()); 
             	    
-            pushFollow(FOLLOW_ruleDetailCode_in_ruleInMessageHandler5224);
+            pushFollow(FOLLOW_ruleDetailCode_in_ruleInMessageHandler5225);
             lv_detailCode_3_0=ruleDetailCode();
 
             state._fsp--;
@@ -6612,13 +6606,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2671:2: iv_ruleOutMessageHandler= ruleOutMessageHandler EOF
             {
              newCompositeNode(grammarAccess.getOutMessageHandlerRule()); 
-            pushFollow(FOLLOW_ruleOutMessageHandler_in_entryRuleOutMessageHandler5260);
+            pushFollow(FOLLOW_ruleOutMessageHandler_in_entryRuleOutMessageHandler5261);
             iv_ruleOutMessageHandler=ruleOutMessageHandler();
 
             state._fsp--;
 
              current =iv_ruleOutMessageHandler; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleOutMessageHandler5270); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleOutMessageHandler5271); 
 
             }
 
@@ -6655,11 +6649,11 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2682:1: (otherlv_0= 'handle' otherlv_1= 'outgoing' ( (otherlv_2= RULE_ID ) ) ( (lv_detailCode_3_0= ruleDetailCode ) ) )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2682:3: otherlv_0= 'handle' otherlv_1= 'outgoing' ( (otherlv_2= RULE_ID ) ) ( (lv_detailCode_3_0= ruleDetailCode ) )
             {
-            otherlv_0=(Token)match(input,53,FOLLOW_53_in_ruleOutMessageHandler5307); 
+            otherlv_0=(Token)match(input,53,FOLLOW_53_in_ruleOutMessageHandler5308); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getOutMessageHandlerAccess().getHandleKeyword_0());
                 
-            otherlv_1=(Token)match(input,44,FOLLOW_44_in_ruleOutMessageHandler5319); 
+            otherlv_1=(Token)match(input,44,FOLLOW_44_in_ruleOutMessageHandler5320); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getOutMessageHandlerAccess().getOutgoingKeyword_1());
                 
@@ -6674,7 +6668,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	            current = createModelElement(grammarAccess.getOutMessageHandlerRule());
             	        }
                     
-            otherlv_2=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleOutMessageHandler5339); 
+            otherlv_2=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleOutMessageHandler5340); 
 
             		newLeafNode(otherlv_2, grammarAccess.getOutMessageHandlerAccess().getMsgMessageCrossReference_2_0()); 
             	
@@ -6693,7 +6687,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
              
             	        newCompositeNode(grammarAccess.getOutMessageHandlerAccess().getDetailCodeDetailCodeParserRuleCall_3_0()); 
             	    
-            pushFollow(FOLLOW_ruleDetailCode_in_ruleOutMessageHandler5360);
+            pushFollow(FOLLOW_ruleDetailCode_in_ruleOutMessageHandler5361);
             lv_detailCode_3_0=ruleDetailCode();
 
             state._fsp--;
@@ -6748,13 +6742,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2731:2: iv_ruleModelComponent= ruleModelComponent EOF
             {
              newCompositeNode(grammarAccess.getModelComponentRule()); 
-            pushFollow(FOLLOW_ruleModelComponent_in_entryRuleModelComponent5396);
+            pushFollow(FOLLOW_ruleModelComponent_in_entryRuleModelComponent5397);
             iv_ruleModelComponent=ruleModelComponent();
 
             state._fsp--;
 
              current =iv_ruleModelComponent; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleModelComponent5406); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleModelComponent5407); 
 
             }
 
@@ -6788,7 +6782,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
              
                     newCompositeNode(grammarAccess.getModelComponentAccess().getActorClassParserRuleCall()); 
                 
-            pushFollow(FOLLOW_ruleActorClass_in_ruleModelComponent5452);
+            pushFollow(FOLLOW_ruleActorClass_in_ruleModelComponent5453);
             this_ActorClass_0=ruleActorClass();
 
             state._fsp--;
@@ -6827,13 +6821,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2761:2: iv_ruleActorClass= ruleActorClass EOF
             {
              newCompositeNode(grammarAccess.getActorClassRule()); 
-            pushFollow(FOLLOW_ruleActorClass_in_entryRuleActorClass5486);
+            pushFollow(FOLLOW_ruleActorClass_in_entryRuleActorClass5487);
             iv_ruleActorClass=ruleActorClass();
 
             state._fsp--;
 
              current =iv_ruleActorClass; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleActorClass5496); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleActorClass5497); 
 
             }
 
@@ -6981,7 +6975,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2787:1: (lv_abstract_1_0= 'abstract' )
             	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2788:3: lv_abstract_1_0= 'abstract'
             	    {
-            	    lv_abstract_1_0=(Token)match(input,54,FOLLOW_54_in_ruleActorClass5584); 
+            	    lv_abstract_1_0=(Token)match(input,54,FOLLOW_54_in_ruleActorClass5585); 
 
             	            newLeafNode(lv_abstract_1_0, grammarAccess.getActorClassAccess().getAbstractAbstractKeyword_0_0_0());
             	        
@@ -7042,7 +7036,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getActorClassAccess().getCommTypeComponentCommunicationTypeEnumRuleCall_0_1_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleComponentCommunicationType_in_ruleActorClass5672);
+            	    pushFollow(FOLLOW_ruleComponentCommunicationType_in_ruleActorClass5673);
             	    lv_commType_2_0=ruleComponentCommunicationType();
 
             	    state._fsp--;
@@ -7097,7 +7091,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_3=(Token)match(input,55,FOLLOW_55_in_ruleActorClass5724); 
+            otherlv_3=(Token)match(input,55,FOLLOW_55_in_ruleActorClass5725); 
 
                 	newLeafNode(otherlv_3, grammarAccess.getActorClassAccess().getActorClassKeyword_1());
                 
@@ -7107,7 +7101,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2850:1: (lv_name_4_0= RULE_ID )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2851:3: lv_name_4_0= RULE_ID
             {
-            lv_name_4_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleActorClass5741); 
+            lv_name_4_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleActorClass5742); 
 
             			newLeafNode(lv_name_4_0, grammarAccess.getActorClassAccess().getNameIDTerminalRuleCall_2_0()); 
             		
@@ -7144,7 +7138,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getActorClassAccess().getDocuDocumentationParserRuleCall_3_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleDocumentation_in_ruleActorClass5767);
+                    pushFollow(FOLLOW_ruleDocumentation_in_ruleActorClass5768);
                     lv_docu_5_0=ruleDocumentation();
 
                     state._fsp--;
@@ -7180,7 +7174,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2885:5: otherlv_6= 'extends' ( ( ruleFQN ) )
                     {
-                    otherlv_6=(Token)match(input,29,FOLLOW_29_in_ruleActorClass5781); 
+                    otherlv_6=(Token)match(input,29,FOLLOW_29_in_ruleActorClass5782); 
 
                         	newLeafNode(otherlv_6, grammarAccess.getActorClassAccess().getExtendsKeyword_4_0());
                         
@@ -7198,7 +7192,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getActorClassAccess().getBaseActorClassCrossReference_4_1_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleFQN_in_ruleActorClass5804);
+                    pushFollow(FOLLOW_ruleFQN_in_ruleActorClass5805);
                     ruleFQN();
 
                     state._fsp--;
@@ -7218,7 +7212,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_8=(Token)match(input,14,FOLLOW_14_in_ruleActorClass5818); 
+            otherlv_8=(Token)match(input,14,FOLLOW_14_in_ruleActorClass5819); 
 
                 	newLeafNode(otherlv_8, grammarAccess.getActorClassAccess().getLeftCurlyBracketKeyword_5());
                 
@@ -7243,7 +7237,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getActorClassAccess().getAnnotationsAnnotationParserRuleCall_6_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleAnnotation_in_ruleActorClass5839);
+            	    pushFollow(FOLLOW_ruleAnnotation_in_ruleActorClass5840);
             	    lv_annotations_9_0=ruleAnnotation();
 
             	    state._fsp--;
@@ -7282,11 +7276,11 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2926:5: otherlv_10= 'Interface' otherlv_11= '{' ( ( (lv_serviceProvisionPoints_12_0= ruleSPP ) ) | ( (lv_interfacePorts_13_0= rulePort ) ) )* otherlv_14= '}'
                     {
-                    otherlv_10=(Token)match(input,56,FOLLOW_56_in_ruleActorClass5853); 
+                    otherlv_10=(Token)match(input,56,FOLLOW_56_in_ruleActorClass5854); 
 
                         	newLeafNode(otherlv_10, grammarAccess.getActorClassAccess().getInterfaceKeyword_7_0());
                         
-                    otherlv_11=(Token)match(input,14,FOLLOW_14_in_ruleActorClass5865); 
+                    otherlv_11=(Token)match(input,14,FOLLOW_14_in_ruleActorClass5866); 
 
                         	newLeafNode(otherlv_11, grammarAccess.getActorClassAccess().getLeftCurlyBracketKeyword_7_1());
                         
@@ -7317,7 +7311,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	     
                     	    	        newCompositeNode(grammarAccess.getActorClassAccess().getServiceProvisionPointsSPPParserRuleCall_7_2_0_0()); 
                     	    	    
-                    	    pushFollow(FOLLOW_ruleSPP_in_ruleActorClass5887);
+                    	    pushFollow(FOLLOW_ruleSPP_in_ruleActorClass5888);
                     	    lv_serviceProvisionPoints_12_0=ruleSPP();
 
                     	    state._fsp--;
@@ -7354,7 +7348,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	     
                     	    	        newCompositeNode(grammarAccess.getActorClassAccess().getInterfacePortsPortParserRuleCall_7_2_1_0()); 
                     	    	    
-                    	    pushFollow(FOLLOW_rulePort_in_ruleActorClass5914);
+                    	    pushFollow(FOLLOW_rulePort_in_ruleActorClass5915);
                     	    lv_interfacePorts_13_0=rulePort();
 
                     	    state._fsp--;
@@ -7385,7 +7379,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                         }
                     } while (true);
 
-                    otherlv_14=(Token)match(input,15,FOLLOW_15_in_ruleActorClass5928); 
+                    otherlv_14=(Token)match(input,15,FOLLOW_15_in_ruleActorClass5929); 
 
                         	newLeafNode(otherlv_14, grammarAccess.getActorClassAccess().getRightCurlyBracketKeyword_7_3());
                         
@@ -7406,7 +7400,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:2975:5: otherlv_15= 'Structure' ( (lv_structureDocu_16_0= ruleDocumentation ) )? otherlv_17= '{' (otherlv_18= 'usercode1' ( (lv_userCode1_19_0= ruleDetailCode ) ) )? (otherlv_20= 'usercode2' ( (lv_userCode2_21_0= ruleDetailCode ) ) )? (otherlv_22= 'usercode3' ( (lv_userCode3_23_0= ruleDetailCode ) ) )? ( ( (lv_connections_24_0= ruleLayerConnection ) ) | ( (lv_bindings_25_0= ruleBinding ) ) | ( (lv_serviceImplementations_26_0= ruleServiceImplementation ) ) | ( (lv_attributes_27_0= ruleAttribute ) ) | ( (lv_actorRefs_28_0= ruleActorRef ) ) | ( (lv_serviceAccessPoints_29_0= ruleSAP ) ) | ( (lv_internalPorts_30_0= rulePort ) ) | ( (lv_externalPorts_31_0= ruleExternalPort ) ) )* otherlv_32= '}'
                     {
-                    otherlv_15=(Token)match(input,57,FOLLOW_57_in_ruleActorClass5943); 
+                    otherlv_15=(Token)match(input,57,FOLLOW_57_in_ruleActorClass5944); 
 
                         	newLeafNode(otherlv_15, grammarAccess.getActorClassAccess().getStructureKeyword_8_0());
                         
@@ -7427,7 +7421,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                              
                             	        newCompositeNode(grammarAccess.getActorClassAccess().getStructureDocuDocumentationParserRuleCall_8_1_0()); 
                             	    
-                            pushFollow(FOLLOW_ruleDocumentation_in_ruleActorClass5964);
+                            pushFollow(FOLLOW_ruleDocumentation_in_ruleActorClass5965);
                             lv_structureDocu_16_0=ruleDocumentation();
 
                             state._fsp--;
@@ -7452,7 +7446,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    otherlv_17=(Token)match(input,14,FOLLOW_14_in_ruleActorClass5977); 
+                    otherlv_17=(Token)match(input,14,FOLLOW_14_in_ruleActorClass5978); 
 
                         	newLeafNode(otherlv_17, grammarAccess.getActorClassAccess().getLeftCurlyBracketKeyword_8_2());
                         
@@ -7467,7 +7461,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                         case 1 :
                             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3001:3: otherlv_18= 'usercode1' ( (lv_userCode1_19_0= ruleDetailCode ) )
                             {
-                            otherlv_18=(Token)match(input,30,FOLLOW_30_in_ruleActorClass5990); 
+                            otherlv_18=(Token)match(input,30,FOLLOW_30_in_ruleActorClass5991); 
 
                                 	newLeafNode(otherlv_18, grammarAccess.getActorClassAccess().getUsercode1Keyword_8_3_0());
                                 
@@ -7480,7 +7474,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                              
                             	        newCompositeNode(grammarAccess.getActorClassAccess().getUserCode1DetailCodeParserRuleCall_8_3_1_0()); 
                             	    
-                            pushFollow(FOLLOW_ruleDetailCode_in_ruleActorClass6011);
+                            pushFollow(FOLLOW_ruleDetailCode_in_ruleActorClass6012);
                             lv_userCode1_19_0=ruleDetailCode();
 
                             state._fsp--;
@@ -7519,7 +7513,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                         case 1 :
                             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3023:6: otherlv_20= 'usercode2' ( (lv_userCode2_21_0= ruleDetailCode ) )
                             {
-                            otherlv_20=(Token)match(input,31,FOLLOW_31_in_ruleActorClass6026); 
+                            otherlv_20=(Token)match(input,31,FOLLOW_31_in_ruleActorClass6027); 
 
                                 	newLeafNode(otherlv_20, grammarAccess.getActorClassAccess().getUsercode2Keyword_8_4_0());
                                 
@@ -7532,7 +7526,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                              
                             	        newCompositeNode(grammarAccess.getActorClassAccess().getUserCode2DetailCodeParserRuleCall_8_4_1_0()); 
                             	    
-                            pushFollow(FOLLOW_ruleDetailCode_in_ruleActorClass6047);
+                            pushFollow(FOLLOW_ruleDetailCode_in_ruleActorClass6048);
                             lv_userCode2_21_0=ruleDetailCode();
 
                             state._fsp--;
@@ -7571,7 +7565,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                         case 1 :
                             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3045:6: otherlv_22= 'usercode3' ( (lv_userCode3_23_0= ruleDetailCode ) )
                             {
-                            otherlv_22=(Token)match(input,32,FOLLOW_32_in_ruleActorClass6062); 
+                            otherlv_22=(Token)match(input,32,FOLLOW_32_in_ruleActorClass6063); 
 
                                 	newLeafNode(otherlv_22, grammarAccess.getActorClassAccess().getUsercode3Keyword_8_5_0());
                                 
@@ -7584,7 +7578,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                              
                             	        newCompositeNode(grammarAccess.getActorClassAccess().getUserCode3DetailCodeParserRuleCall_8_5_1_0()); 
                             	    
-                            pushFollow(FOLLOW_ruleDetailCode_in_ruleActorClass6083);
+                            pushFollow(FOLLOW_ruleDetailCode_in_ruleActorClass6084);
                             lv_userCode3_23_0=ruleDetailCode();
 
                             state._fsp--;
@@ -7676,7 +7670,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	     
                     	    	        newCompositeNode(grammarAccess.getActorClassAccess().getConnectionsLayerConnectionParserRuleCall_8_6_0_0()); 
                     	    	    
-                    	    pushFollow(FOLLOW_ruleLayerConnection_in_ruleActorClass6107);
+                    	    pushFollow(FOLLOW_ruleLayerConnection_in_ruleActorClass6108);
                     	    lv_connections_24_0=ruleLayerConnection();
 
                     	    state._fsp--;
@@ -7713,7 +7707,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	     
                     	    	        newCompositeNode(grammarAccess.getActorClassAccess().getBindingsBindingParserRuleCall_8_6_1_0()); 
                     	    	    
-                    	    pushFollow(FOLLOW_ruleBinding_in_ruleActorClass6134);
+                    	    pushFollow(FOLLOW_ruleBinding_in_ruleActorClass6135);
                     	    lv_bindings_25_0=ruleBinding();
 
                     	    state._fsp--;
@@ -7750,7 +7744,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	     
                     	    	        newCompositeNode(grammarAccess.getActorClassAccess().getServiceImplementationsServiceImplementationParserRuleCall_8_6_2_0()); 
                     	    	    
-                    	    pushFollow(FOLLOW_ruleServiceImplementation_in_ruleActorClass6161);
+                    	    pushFollow(FOLLOW_ruleServiceImplementation_in_ruleActorClass6162);
                     	    lv_serviceImplementations_26_0=ruleServiceImplementation();
 
                     	    state._fsp--;
@@ -7787,7 +7781,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	     
                     	    	        newCompositeNode(grammarAccess.getActorClassAccess().getAttributesAttributeParserRuleCall_8_6_3_0()); 
                     	    	    
-                    	    pushFollow(FOLLOW_ruleAttribute_in_ruleActorClass6188);
+                    	    pushFollow(FOLLOW_ruleAttribute_in_ruleActorClass6189);
                     	    lv_attributes_27_0=ruleAttribute();
 
                     	    state._fsp--;
@@ -7824,7 +7818,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	     
                     	    	        newCompositeNode(grammarAccess.getActorClassAccess().getActorRefsActorRefParserRuleCall_8_6_4_0()); 
                     	    	    
-                    	    pushFollow(FOLLOW_ruleActorRef_in_ruleActorClass6215);
+                    	    pushFollow(FOLLOW_ruleActorRef_in_ruleActorClass6216);
                     	    lv_actorRefs_28_0=ruleActorRef();
 
                     	    state._fsp--;
@@ -7861,7 +7855,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	     
                     	    	        newCompositeNode(grammarAccess.getActorClassAccess().getServiceAccessPointsSAPParserRuleCall_8_6_5_0()); 
                     	    	    
-                    	    pushFollow(FOLLOW_ruleSAP_in_ruleActorClass6242);
+                    	    pushFollow(FOLLOW_ruleSAP_in_ruleActorClass6243);
                     	    lv_serviceAccessPoints_29_0=ruleSAP();
 
                     	    state._fsp--;
@@ -7898,7 +7892,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	     
                     	    	        newCompositeNode(grammarAccess.getActorClassAccess().getInternalPortsPortParserRuleCall_8_6_6_0()); 
                     	    	    
-                    	    pushFollow(FOLLOW_rulePort_in_ruleActorClass6269);
+                    	    pushFollow(FOLLOW_rulePort_in_ruleActorClass6270);
                     	    lv_internalPorts_30_0=rulePort();
 
                     	    state._fsp--;
@@ -7935,7 +7929,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	     
                     	    	        newCompositeNode(grammarAccess.getActorClassAccess().getExternalPortsExternalPortParserRuleCall_8_6_7_0()); 
                     	    	    
-                    	    pushFollow(FOLLOW_ruleExternalPort_in_ruleActorClass6296);
+                    	    pushFollow(FOLLOW_ruleExternalPort_in_ruleActorClass6297);
                     	    lv_externalPorts_31_0=ruleExternalPort();
 
                     	    state._fsp--;
@@ -7966,7 +7960,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                         }
                     } while (true);
 
-                    otherlv_32=(Token)match(input,15,FOLLOW_15_in_ruleActorClass6310); 
+                    otherlv_32=(Token)match(input,15,FOLLOW_15_in_ruleActorClass6311); 
 
                         	newLeafNode(otherlv_32, grammarAccess.getActorClassAccess().getRightCurlyBracketKeyword_8_7());
                         
@@ -7987,7 +7981,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3222:5: otherlv_33= 'Behavior' ( (lv_behaviorDocu_34_0= ruleDocumentation ) )? otherlv_35= '{' ( (lv_behaviorAnnotations_36_0= ruleAnnotation ) )* ( ( (lv_operations_37_0= ruleStandardOperation ) ) | ( (lv_structors_38_0= ruleClassStructor ) ) )* ( (lv_stateMachine_39_0= ruleStateMachine ) )? otherlv_40= '}'
                     {
-                    otherlv_33=(Token)match(input,58,FOLLOW_58_in_ruleActorClass6325); 
+                    otherlv_33=(Token)match(input,58,FOLLOW_58_in_ruleActorClass6326); 
 
                         	newLeafNode(otherlv_33, grammarAccess.getActorClassAccess().getBehaviorKeyword_9_0());
                         
@@ -8008,7 +8002,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                              
                             	        newCompositeNode(grammarAccess.getActorClassAccess().getBehaviorDocuDocumentationParserRuleCall_9_1_0()); 
                             	    
-                            pushFollow(FOLLOW_ruleDocumentation_in_ruleActorClass6346);
+                            pushFollow(FOLLOW_ruleDocumentation_in_ruleActorClass6347);
                             lv_behaviorDocu_34_0=ruleDocumentation();
 
                             state._fsp--;
@@ -8033,7 +8027,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    otherlv_35=(Token)match(input,14,FOLLOW_14_in_ruleActorClass6359); 
+                    otherlv_35=(Token)match(input,14,FOLLOW_14_in_ruleActorClass6360); 
 
                         	newLeafNode(otherlv_35, grammarAccess.getActorClassAccess().getLeftCurlyBracketKeyword_9_2());
                         
@@ -8058,7 +8052,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	     
                     	    	        newCompositeNode(grammarAccess.getActorClassAccess().getBehaviorAnnotationsAnnotationParserRuleCall_9_3_0()); 
                     	    	    
-                    	    pushFollow(FOLLOW_ruleAnnotation_in_ruleActorClass6380);
+                    	    pushFollow(FOLLOW_ruleAnnotation_in_ruleActorClass6381);
                     	    lv_behaviorAnnotations_36_0=ruleAnnotation();
 
                     	    state._fsp--;
@@ -8113,7 +8107,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	     
                     	    	        newCompositeNode(grammarAccess.getActorClassAccess().getOperationsStandardOperationParserRuleCall_9_4_0_0()); 
                     	    	    
-                    	    pushFollow(FOLLOW_ruleStandardOperation_in_ruleActorClass6403);
+                    	    pushFollow(FOLLOW_ruleStandardOperation_in_ruleActorClass6404);
                     	    lv_operations_37_0=ruleStandardOperation();
 
                     	    state._fsp--;
@@ -8150,7 +8144,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	     
                     	    	        newCompositeNode(grammarAccess.getActorClassAccess().getStructorsClassStructorParserRuleCall_9_4_1_0()); 
                     	    	    
-                    	    pushFollow(FOLLOW_ruleClassStructor_in_ruleActorClass6430);
+                    	    pushFollow(FOLLOW_ruleClassStructor_in_ruleActorClass6431);
                     	    lv_structors_38_0=ruleClassStructor();
 
                     	    state._fsp--;
@@ -8198,7 +8192,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                              
                             	        newCompositeNode(grammarAccess.getActorClassAccess().getStateMachineStateMachineParserRuleCall_9_5_0()); 
                             	    
-                            pushFollow(FOLLOW_ruleStateMachine_in_ruleActorClass6453);
+                            pushFollow(FOLLOW_ruleStateMachine_in_ruleActorClass6454);
                             lv_stateMachine_39_0=ruleStateMachine();
 
                             state._fsp--;
@@ -8223,7 +8217,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    otherlv_40=(Token)match(input,15,FOLLOW_15_in_ruleActorClass6466); 
+                    otherlv_40=(Token)match(input,15,FOLLOW_15_in_ruleActorClass6467); 
 
                         	newLeafNode(otherlv_40, grammarAccess.getActorClassAccess().getRightCurlyBracketKeyword_9_6());
                         
@@ -8233,7 +8227,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_41=(Token)match(input,15,FOLLOW_15_in_ruleActorClass6480); 
+            otherlv_41=(Token)match(input,15,FOLLOW_15_in_ruleActorClass6481); 
 
                 	newLeafNode(otherlv_41, grammarAccess.getActorClassAccess().getRightCurlyBracketKeyword_10());
                 
@@ -8270,13 +8264,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3339:2: iv_ruleInterfaceItem= ruleInterfaceItem EOF
             {
              newCompositeNode(grammarAccess.getInterfaceItemRule()); 
-            pushFollow(FOLLOW_ruleInterfaceItem_in_entryRuleInterfaceItem6516);
+            pushFollow(FOLLOW_ruleInterfaceItem_in_entryRuleInterfaceItem6517);
             iv_ruleInterfaceItem=ruleInterfaceItem();
 
             state._fsp--;
 
              current =iv_ruleInterfaceItem; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleInterfaceItem6526); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleInterfaceItem6527); 
 
             }
 
@@ -8344,7 +8338,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getInterfaceItemAccess().getPortParserRuleCall_0()); 
                         
-                    pushFollow(FOLLOW_rulePort_in_ruleInterfaceItem6573);
+                    pushFollow(FOLLOW_rulePort_in_ruleInterfaceItem6574);
                     this_Port_0=rulePort();
 
                     state._fsp--;
@@ -8362,7 +8356,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getInterfaceItemAccess().getSAPParserRuleCall_1()); 
                         
-                    pushFollow(FOLLOW_ruleSAP_in_ruleInterfaceItem6600);
+                    pushFollow(FOLLOW_ruleSAP_in_ruleInterfaceItem6601);
                     this_SAP_1=ruleSAP();
 
                     state._fsp--;
@@ -8380,7 +8374,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getInterfaceItemAccess().getSPPParserRuleCall_2()); 
                         
-                    pushFollow(FOLLOW_ruleSPP_in_ruleInterfaceItem6627);
+                    pushFollow(FOLLOW_ruleSPP_in_ruleInterfaceItem6628);
                     this_SPP_2=ruleSPP();
 
                     state._fsp--;
@@ -8425,13 +8419,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3389:2: iv_rulePort= rulePort EOF
             {
              newCompositeNode(grammarAccess.getPortRule()); 
-            pushFollow(FOLLOW_rulePort_in_entryRulePort6662);
+            pushFollow(FOLLOW_rulePort_in_entryRulePort6663);
             iv_rulePort=rulePort();
 
             state._fsp--;
 
              current =iv_rulePort; 
-            match(input,EOF,FOLLOW_EOF_in_entryRulePort6672); 
+            match(input,EOF,FOLLOW_EOF_in_entryRulePort6673); 
 
             }
 
@@ -8485,7 +8479,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3401:1: (lv_conjugated_0_0= 'conjugated' )
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3402:3: lv_conjugated_0_0= 'conjugated'
                     {
-                    lv_conjugated_0_0=(Token)match(input,47,FOLLOW_47_in_rulePort6715); 
+                    lv_conjugated_0_0=(Token)match(input,47,FOLLOW_47_in_rulePort6716); 
 
                             newLeafNode(lv_conjugated_0_0, grammarAccess.getPortAccess().getConjugatedConjugatedKeyword_0_0());
                         
@@ -8504,7 +8498,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,59,FOLLOW_59_in_rulePort6741); 
+            otherlv_1=(Token)match(input,59,FOLLOW_59_in_rulePort6742); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getPortAccess().getPortKeyword_1());
                 
@@ -8514,7 +8508,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3420:1: (lv_name_2_0= RULE_ID )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3421:3: lv_name_2_0= RULE_ID
             {
-            lv_name_2_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_rulePort6758); 
+            lv_name_2_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_rulePort6759); 
 
             			newLeafNode(lv_name_2_0, grammarAccess.getPortAccess().getNameIDTerminalRuleCall_2_0()); 
             		
@@ -8551,7 +8545,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getPortAccess().getMultiplicityMULTIPLICITYParserRuleCall_3_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleMULTIPLICITY_in_rulePort6784);
+                    pushFollow(FOLLOW_ruleMULTIPLICITY_in_rulePort6785);
                     lv_multiplicity_3_0=ruleMULTIPLICITY();
 
                     state._fsp--;
@@ -8576,7 +8570,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_4=(Token)match(input,16,FOLLOW_16_in_rulePort6797); 
+            otherlv_4=(Token)match(input,16,FOLLOW_16_in_rulePort6798); 
 
                 	newLeafNode(otherlv_4, grammarAccess.getPortAccess().getColonKeyword_4());
                 
@@ -8594,7 +8588,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
              
             	        newCompositeNode(grammarAccess.getPortAccess().getProtocolGeneralProtocolClassCrossReference_5_0()); 
             	    
-            pushFollow(FOLLOW_ruleFQN_in_rulePort6820);
+            pushFollow(FOLLOW_ruleFQN_in_rulePort6821);
             ruleFQN();
 
             state._fsp--;
@@ -8625,7 +8619,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getPortAccess().getDocuDocumentationParserRuleCall_6_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleDocumentation_in_rulePort6841);
+                    pushFollow(FOLLOW_ruleDocumentation_in_rulePort6842);
                     lv_docu_6_0=ruleDocumentation();
 
                     state._fsp--;
@@ -8683,13 +8677,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3502:2: iv_ruleExternalPort= ruleExternalPort EOF
             {
              newCompositeNode(grammarAccess.getExternalPortRule()); 
-            pushFollow(FOLLOW_ruleExternalPort_in_entryRuleExternalPort6878);
+            pushFollow(FOLLOW_ruleExternalPort_in_entryRuleExternalPort6879);
             iv_ruleExternalPort=ruleExternalPort();
 
             state._fsp--;
 
              current =iv_ruleExternalPort; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleExternalPort6888); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleExternalPort6889); 
 
             }
 
@@ -8724,11 +8718,11 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3513:1: (otherlv_0= 'external' otherlv_1= 'Port' ( (otherlv_2= RULE_ID ) ) )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3513:3: otherlv_0= 'external' otherlv_1= 'Port' ( (otherlv_2= RULE_ID ) )
             {
-            otherlv_0=(Token)match(input,60,FOLLOW_60_in_ruleExternalPort6925); 
+            otherlv_0=(Token)match(input,60,FOLLOW_60_in_ruleExternalPort6926); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getExternalPortAccess().getExternalKeyword_0());
                 
-            otherlv_1=(Token)match(input,59,FOLLOW_59_in_ruleExternalPort6937); 
+            otherlv_1=(Token)match(input,59,FOLLOW_59_in_ruleExternalPort6938); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getExternalPortAccess().getPortKeyword_1());
                 
@@ -8743,7 +8737,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	            current = createModelElement(grammarAccess.getExternalPortRule());
             	        }
                     
-            otherlv_2=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleExternalPort6957); 
+            otherlv_2=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleExternalPort6958); 
 
             		newLeafNode(otherlv_2, grammarAccess.getExternalPortAccess().getInterfacePortPortCrossReference_2_0()); 
             	
@@ -8786,13 +8780,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3544:2: iv_ruleSAP= ruleSAP EOF
             {
              newCompositeNode(grammarAccess.getSAPRule()); 
-            pushFollow(FOLLOW_ruleSAP_in_entryRuleSAP6993);
+            pushFollow(FOLLOW_ruleSAP_in_entryRuleSAP6994);
             iv_ruleSAP=ruleSAP();
 
             state._fsp--;
 
              current =iv_ruleSAP; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleSAP7003); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleSAP7004); 
 
             }
 
@@ -8827,7 +8821,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3555:1: (otherlv_0= 'SAP' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ':' ( ( ruleFQN ) ) )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3555:3: otherlv_0= 'SAP' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ':' ( ( ruleFQN ) )
             {
-            otherlv_0=(Token)match(input,61,FOLLOW_61_in_ruleSAP7040); 
+            otherlv_0=(Token)match(input,61,FOLLOW_61_in_ruleSAP7041); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getSAPAccess().getSAPKeyword_0());
                 
@@ -8837,7 +8831,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3560:1: (lv_name_1_0= RULE_ID )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3561:3: lv_name_1_0= RULE_ID
             {
-            lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSAP7057); 
+            lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSAP7058); 
 
             			newLeafNode(lv_name_1_0, grammarAccess.getSAPAccess().getNameIDTerminalRuleCall_1_0()); 
             		
@@ -8857,7 +8851,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_2=(Token)match(input,16,FOLLOW_16_in_ruleSAP7074); 
+            otherlv_2=(Token)match(input,16,FOLLOW_16_in_ruleSAP7075); 
 
                 	newLeafNode(otherlv_2, grammarAccess.getSAPAccess().getColonKeyword_2());
                 
@@ -8875,7 +8869,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
              
             	        newCompositeNode(grammarAccess.getSAPAccess().getProtocolProtocolClassCrossReference_3_0()); 
             	    
-            pushFollow(FOLLOW_ruleFQN_in_ruleSAP7097);
+            pushFollow(FOLLOW_ruleFQN_in_ruleSAP7098);
             ruleFQN();
 
             state._fsp--;
@@ -8922,13 +8916,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3606:2: iv_ruleSPP= ruleSPP EOF
             {
              newCompositeNode(grammarAccess.getSPPRule()); 
-            pushFollow(FOLLOW_ruleSPP_in_entryRuleSPP7133);
+            pushFollow(FOLLOW_ruleSPP_in_entryRuleSPP7134);
             iv_ruleSPP=ruleSPP();
 
             state._fsp--;
 
              current =iv_ruleSPP; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleSPP7143); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleSPP7144); 
 
             }
 
@@ -8963,7 +8957,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3617:1: (otherlv_0= 'SPP' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ':' ( ( ruleFQN ) ) )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3617:3: otherlv_0= 'SPP' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ':' ( ( ruleFQN ) )
             {
-            otherlv_0=(Token)match(input,62,FOLLOW_62_in_ruleSPP7180); 
+            otherlv_0=(Token)match(input,62,FOLLOW_62_in_ruleSPP7181); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getSPPAccess().getSPPKeyword_0());
                 
@@ -8973,7 +8967,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3622:1: (lv_name_1_0= RULE_ID )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3623:3: lv_name_1_0= RULE_ID
             {
-            lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSPP7197); 
+            lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSPP7198); 
 
             			newLeafNode(lv_name_1_0, grammarAccess.getSPPAccess().getNameIDTerminalRuleCall_1_0()); 
             		
@@ -8993,7 +8987,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_2=(Token)match(input,16,FOLLOW_16_in_ruleSPP7214); 
+            otherlv_2=(Token)match(input,16,FOLLOW_16_in_ruleSPP7215); 
 
                 	newLeafNode(otherlv_2, grammarAccess.getSPPAccess().getColonKeyword_2());
                 
@@ -9011,7 +9005,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
              
             	        newCompositeNode(grammarAccess.getSPPAccess().getProtocolProtocolClassCrossReference_3_0()); 
             	    
-            pushFollow(FOLLOW_ruleFQN_in_ruleSPP7237);
+            pushFollow(FOLLOW_ruleFQN_in_ruleSPP7238);
             ruleFQN();
 
             state._fsp--;
@@ -9058,13 +9052,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3668:2: iv_ruleServiceImplementation= ruleServiceImplementation EOF
             {
              newCompositeNode(grammarAccess.getServiceImplementationRule()); 
-            pushFollow(FOLLOW_ruleServiceImplementation_in_entryRuleServiceImplementation7273);
+            pushFollow(FOLLOW_ruleServiceImplementation_in_entryRuleServiceImplementation7274);
             iv_ruleServiceImplementation=ruleServiceImplementation();
 
             state._fsp--;
 
              current =iv_ruleServiceImplementation; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleServiceImplementation7283); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleServiceImplementation7284); 
 
             }
 
@@ -9099,11 +9093,11 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3679:1: (otherlv_0= 'ServiceImplementation' otherlv_1= 'of' ( (otherlv_2= RULE_ID ) ) )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3679:3: otherlv_0= 'ServiceImplementation' otherlv_1= 'of' ( (otherlv_2= RULE_ID ) )
             {
-            otherlv_0=(Token)match(input,63,FOLLOW_63_in_ruleServiceImplementation7320); 
+            otherlv_0=(Token)match(input,63,FOLLOW_63_in_ruleServiceImplementation7321); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getServiceImplementationAccess().getServiceImplementationKeyword_0());
                 
-            otherlv_1=(Token)match(input,24,FOLLOW_24_in_ruleServiceImplementation7332); 
+            otherlv_1=(Token)match(input,24,FOLLOW_24_in_ruleServiceImplementation7333); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getServiceImplementationAccess().getOfKeyword_1());
                 
@@ -9118,7 +9112,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	            current = createModelElement(grammarAccess.getServiceImplementationRule());
             	        }
                     
-            otherlv_2=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleServiceImplementation7352); 
+            otherlv_2=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleServiceImplementation7353); 
 
             		newLeafNode(otherlv_2, grammarAccess.getServiceImplementationAccess().getSppSPPCrossReference_2_0()); 
             	
@@ -9161,13 +9155,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3710:2: iv_ruleLogicalSystem= ruleLogicalSystem EOF
             {
              newCompositeNode(grammarAccess.getLogicalSystemRule()); 
-            pushFollow(FOLLOW_ruleLogicalSystem_in_entryRuleLogicalSystem7388);
+            pushFollow(FOLLOW_ruleLogicalSystem_in_entryRuleLogicalSystem7389);
             iv_ruleLogicalSystem=ruleLogicalSystem();
 
             state._fsp--;
 
              current =iv_ruleLogicalSystem; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleLogicalSystem7398); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleLogicalSystem7399); 
 
             }
 
@@ -9213,7 +9207,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3721:1: (otherlv_0= 'LogicalSystem' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? otherlv_3= '{' ( (lv_annotations_4_0= ruleAnnotation ) )* ( ( (lv_connections_5_0= ruleLayerConnection ) ) | ( (lv_bindings_6_0= ruleBinding ) ) | ( (lv_subSystems_7_0= ruleSubSystemRef ) ) )* otherlv_8= '}' )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3721:3: otherlv_0= 'LogicalSystem' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? otherlv_3= '{' ( (lv_annotations_4_0= ruleAnnotation ) )* ( ( (lv_connections_5_0= ruleLayerConnection ) ) | ( (lv_bindings_6_0= ruleBinding ) ) | ( (lv_subSystems_7_0= ruleSubSystemRef ) ) )* otherlv_8= '}'
             {
-            otherlv_0=(Token)match(input,64,FOLLOW_64_in_ruleLogicalSystem7435); 
+            otherlv_0=(Token)match(input,64,FOLLOW_64_in_ruleLogicalSystem7436); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getLogicalSystemAccess().getLogicalSystemKeyword_0());
                 
@@ -9223,7 +9217,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3726:1: (lv_name_1_0= RULE_ID )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3727:3: lv_name_1_0= RULE_ID
             {
-            lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleLogicalSystem7452); 
+            lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleLogicalSystem7453); 
 
             			newLeafNode(lv_name_1_0, grammarAccess.getLogicalSystemAccess().getNameIDTerminalRuleCall_1_0()); 
             		
@@ -9260,7 +9254,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getLogicalSystemAccess().getDocuDocumentationParserRuleCall_2_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleDocumentation_in_ruleLogicalSystem7478);
+                    pushFollow(FOLLOW_ruleDocumentation_in_ruleLogicalSystem7479);
                     lv_docu_2_0=ruleDocumentation();
 
                     state._fsp--;
@@ -9285,7 +9279,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_3=(Token)match(input,14,FOLLOW_14_in_ruleLogicalSystem7491); 
+            otherlv_3=(Token)match(input,14,FOLLOW_14_in_ruleLogicalSystem7492); 
 
                 	newLeafNode(otherlv_3, grammarAccess.getLogicalSystemAccess().getLeftCurlyBracketKeyword_3());
                 
@@ -9310,7 +9304,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getLogicalSystemAccess().getAnnotationsAnnotationParserRuleCall_4_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleAnnotation_in_ruleLogicalSystem7512);
+            	    pushFollow(FOLLOW_ruleAnnotation_in_ruleLogicalSystem7513);
             	    lv_annotations_4_0=ruleAnnotation();
 
             	    state._fsp--;
@@ -9374,7 +9368,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getLogicalSystemAccess().getConnectionsLayerConnectionParserRuleCall_5_0_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleLayerConnection_in_ruleLogicalSystem7535);
+            	    pushFollow(FOLLOW_ruleLayerConnection_in_ruleLogicalSystem7536);
             	    lv_connections_5_0=ruleLayerConnection();
 
             	    state._fsp--;
@@ -9411,7 +9405,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getLogicalSystemAccess().getBindingsBindingParserRuleCall_5_1_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleBinding_in_ruleLogicalSystem7562);
+            	    pushFollow(FOLLOW_ruleBinding_in_ruleLogicalSystem7563);
             	    lv_bindings_6_0=ruleBinding();
 
             	    state._fsp--;
@@ -9448,7 +9442,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getLogicalSystemAccess().getSubSystemsSubSystemRefParserRuleCall_5_2_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleSubSystemRef_in_ruleLogicalSystem7589);
+            	    pushFollow(FOLLOW_ruleSubSystemRef_in_ruleLogicalSystem7590);
             	    lv_subSystems_7_0=ruleSubSystemRef();
 
             	    state._fsp--;
@@ -9479,7 +9473,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            otherlv_8=(Token)match(input,15,FOLLOW_15_in_ruleLogicalSystem7603); 
+            otherlv_8=(Token)match(input,15,FOLLOW_15_in_ruleLogicalSystem7604); 
 
                 	newLeafNode(otherlv_8, grammarAccess.getLogicalSystemAccess().getRightCurlyBracketKeyword_6());
                 
@@ -9516,13 +9510,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3855:2: iv_ruleSubSystemRef= ruleSubSystemRef EOF
             {
              newCompositeNode(grammarAccess.getSubSystemRefRule()); 
-            pushFollow(FOLLOW_ruleSubSystemRef_in_entryRuleSubSystemRef7641);
+            pushFollow(FOLLOW_ruleSubSystemRef_in_entryRuleSubSystemRef7642);
             iv_ruleSubSystemRef=ruleSubSystemRef();
 
             state._fsp--;
 
              current =iv_ruleSubSystemRef; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleSubSystemRef7651); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleSubSystemRef7652); 
 
             }
 
@@ -9559,7 +9553,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3866:1: (otherlv_0= 'SubSystemRef' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ':' ( ( ruleFQN ) ) ( (lv_docu_4_0= ruleDocumentation ) )? )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3866:3: otherlv_0= 'SubSystemRef' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ':' ( ( ruleFQN ) ) ( (lv_docu_4_0= ruleDocumentation ) )?
             {
-            otherlv_0=(Token)match(input,65,FOLLOW_65_in_ruleSubSystemRef7688); 
+            otherlv_0=(Token)match(input,65,FOLLOW_65_in_ruleSubSystemRef7689); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getSubSystemRefAccess().getSubSystemRefKeyword_0());
                 
@@ -9569,7 +9563,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3871:1: (lv_name_1_0= RULE_ID )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3872:3: lv_name_1_0= RULE_ID
             {
-            lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSubSystemRef7705); 
+            lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSubSystemRef7706); 
 
             			newLeafNode(lv_name_1_0, grammarAccess.getSubSystemRefAccess().getNameIDTerminalRuleCall_1_0()); 
             		
@@ -9589,7 +9583,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_2=(Token)match(input,16,FOLLOW_16_in_ruleSubSystemRef7722); 
+            otherlv_2=(Token)match(input,16,FOLLOW_16_in_ruleSubSystemRef7723); 
 
                 	newLeafNode(otherlv_2, grammarAccess.getSubSystemRefAccess().getColonKeyword_2());
                 
@@ -9607,7 +9601,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
              
             	        newCompositeNode(grammarAccess.getSubSystemRefAccess().getTypeSubSystemClassCrossReference_3_0()); 
             	    
-            pushFollow(FOLLOW_ruleFQN_in_ruleSubSystemRef7745);
+            pushFollow(FOLLOW_ruleFQN_in_ruleSubSystemRef7746);
             ruleFQN();
 
             state._fsp--;
@@ -9638,7 +9632,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getSubSystemRefAccess().getDocuDocumentationParserRuleCall_4_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleDocumentation_in_ruleSubSystemRef7766);
+                    pushFollow(FOLLOW_ruleDocumentation_in_ruleSubSystemRef7767);
                     lv_docu_4_0=ruleDocumentation();
 
                     state._fsp--;
@@ -9696,13 +9690,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3935:2: iv_ruleSubSystemClass= ruleSubSystemClass EOF
             {
              newCompositeNode(grammarAccess.getSubSystemClassRule()); 
-            pushFollow(FOLLOW_ruleSubSystemClass_in_entryRuleSubSystemClass7803);
+            pushFollow(FOLLOW_ruleSubSystemClass_in_entryRuleSubSystemClass7804);
             iv_ruleSubSystemClass=ruleSubSystemClass();
 
             state._fsp--;
 
              current =iv_ruleSubSystemClass; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleSubSystemClass7813); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleSubSystemClass7814); 
 
             }
 
@@ -9765,7 +9759,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3946:1: (otherlv_0= 'SubSystemClass' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? otherlv_3= '{' ( (lv_annotations_4_0= ruleAnnotation ) )* (otherlv_5= 'usercode1' ( (lv_userCode1_6_0= ruleDetailCode ) ) )? (otherlv_7= 'usercode2' ( (lv_userCode2_8_0= ruleDetailCode ) ) )? (otherlv_9= 'usercode3' ( (lv_userCode3_10_0= ruleDetailCode ) ) )? ( ( (lv_actorInstanceMappings_11_0= ruleActorInstanceMapping ) ) | ( (lv_threads_12_0= ruleLogicalThread ) ) | ( (lv_connections_13_0= ruleLayerConnection ) ) | ( (lv_bindings_14_0= ruleBinding ) ) | ( (lv_actorRefs_15_0= ruleActorRef ) ) | ( (lv_serviceProvisionPoints_16_0= ruleSPP ) ) | ( (lv_relayPorts_17_0= rulePort ) ) )* otherlv_18= '}' )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3946:3: otherlv_0= 'SubSystemClass' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? otherlv_3= '{' ( (lv_annotations_4_0= ruleAnnotation ) )* (otherlv_5= 'usercode1' ( (lv_userCode1_6_0= ruleDetailCode ) ) )? (otherlv_7= 'usercode2' ( (lv_userCode2_8_0= ruleDetailCode ) ) )? (otherlv_9= 'usercode3' ( (lv_userCode3_10_0= ruleDetailCode ) ) )? ( ( (lv_actorInstanceMappings_11_0= ruleActorInstanceMapping ) ) | ( (lv_threads_12_0= ruleLogicalThread ) ) | ( (lv_connections_13_0= ruleLayerConnection ) ) | ( (lv_bindings_14_0= ruleBinding ) ) | ( (lv_actorRefs_15_0= ruleActorRef ) ) | ( (lv_serviceProvisionPoints_16_0= ruleSPP ) ) | ( (lv_relayPorts_17_0= rulePort ) ) )* otherlv_18= '}'
             {
-            otherlv_0=(Token)match(input,66,FOLLOW_66_in_ruleSubSystemClass7850); 
+            otherlv_0=(Token)match(input,66,FOLLOW_66_in_ruleSubSystemClass7851); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getSubSystemClassAccess().getSubSystemClassKeyword_0());
                 
@@ -9775,7 +9769,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3951:1: (lv_name_1_0= RULE_ID )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:3952:3: lv_name_1_0= RULE_ID
             {
-            lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSubSystemClass7867); 
+            lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSubSystemClass7868); 
 
             			newLeafNode(lv_name_1_0, grammarAccess.getSubSystemClassAccess().getNameIDTerminalRuleCall_1_0()); 
             		
@@ -9812,7 +9806,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getSubSystemClassAccess().getDocuDocumentationParserRuleCall_2_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleDocumentation_in_ruleSubSystemClass7893);
+                    pushFollow(FOLLOW_ruleDocumentation_in_ruleSubSystemClass7894);
                     lv_docu_2_0=ruleDocumentation();
 
                     state._fsp--;
@@ -9837,7 +9831,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_3=(Token)match(input,14,FOLLOW_14_in_ruleSubSystemClass7906); 
+            otherlv_3=(Token)match(input,14,FOLLOW_14_in_ruleSubSystemClass7907); 
 
                 	newLeafNode(otherlv_3, grammarAccess.getSubSystemClassAccess().getLeftCurlyBracketKeyword_3());
                 
@@ -9862,7 +9856,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getSubSystemClassAccess().getAnnotationsAnnotationParserRuleCall_4_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleAnnotation_in_ruleSubSystemClass7927);
+            	    pushFollow(FOLLOW_ruleAnnotation_in_ruleSubSystemClass7928);
             	    lv_annotations_4_0=ruleAnnotation();
 
             	    state._fsp--;
@@ -9901,7 +9895,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4008:5: otherlv_5= 'usercode1' ( (lv_userCode1_6_0= ruleDetailCode ) )
                     {
-                    otherlv_5=(Token)match(input,30,FOLLOW_30_in_ruleSubSystemClass7941); 
+                    otherlv_5=(Token)match(input,30,FOLLOW_30_in_ruleSubSystemClass7942); 
 
                         	newLeafNode(otherlv_5, grammarAccess.getSubSystemClassAccess().getUsercode1Keyword_5_0());
                         
@@ -9914,7 +9908,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getSubSystemClassAccess().getUserCode1DetailCodeParserRuleCall_5_1_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleDetailCode_in_ruleSubSystemClass7962);
+                    pushFollow(FOLLOW_ruleDetailCode_in_ruleSubSystemClass7963);
                     lv_userCode1_6_0=ruleDetailCode();
 
                     state._fsp--;
@@ -9953,7 +9947,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4030:6: otherlv_7= 'usercode2' ( (lv_userCode2_8_0= ruleDetailCode ) )
                     {
-                    otherlv_7=(Token)match(input,31,FOLLOW_31_in_ruleSubSystemClass7977); 
+                    otherlv_7=(Token)match(input,31,FOLLOW_31_in_ruleSubSystemClass7978); 
 
                         	newLeafNode(otherlv_7, grammarAccess.getSubSystemClassAccess().getUsercode2Keyword_6_0());
                         
@@ -9966,7 +9960,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getSubSystemClassAccess().getUserCode2DetailCodeParserRuleCall_6_1_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleDetailCode_in_ruleSubSystemClass7998);
+                    pushFollow(FOLLOW_ruleDetailCode_in_ruleSubSystemClass7999);
                     lv_userCode2_8_0=ruleDetailCode();
 
                     state._fsp--;
@@ -10005,7 +9999,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4052:6: otherlv_9= 'usercode3' ( (lv_userCode3_10_0= ruleDetailCode ) )
                     {
-                    otherlv_9=(Token)match(input,32,FOLLOW_32_in_ruleSubSystemClass8013); 
+                    otherlv_9=(Token)match(input,32,FOLLOW_32_in_ruleSubSystemClass8014); 
 
                         	newLeafNode(otherlv_9, grammarAccess.getSubSystemClassAccess().getUsercode3Keyword_7_0());
                         
@@ -10018,7 +10012,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getSubSystemClassAccess().getUserCode3DetailCodeParserRuleCall_7_1_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleDetailCode_in_ruleSubSystemClass8034);
+                    pushFollow(FOLLOW_ruleDetailCode_in_ruleSubSystemClass8035);
                     lv_userCode3_10_0=ruleDetailCode();
 
                     state._fsp--;
@@ -10105,7 +10099,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getSubSystemClassAccess().getActorInstanceMappingsActorInstanceMappingParserRuleCall_8_0_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleActorInstanceMapping_in_ruleSubSystemClass8058);
+            	    pushFollow(FOLLOW_ruleActorInstanceMapping_in_ruleSubSystemClass8059);
             	    lv_actorInstanceMappings_11_0=ruleActorInstanceMapping();
 
             	    state._fsp--;
@@ -10142,7 +10136,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getSubSystemClassAccess().getThreadsLogicalThreadParserRuleCall_8_1_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleLogicalThread_in_ruleSubSystemClass8085);
+            	    pushFollow(FOLLOW_ruleLogicalThread_in_ruleSubSystemClass8086);
             	    lv_threads_12_0=ruleLogicalThread();
 
             	    state._fsp--;
@@ -10179,7 +10173,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getSubSystemClassAccess().getConnectionsLayerConnectionParserRuleCall_8_2_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleLayerConnection_in_ruleSubSystemClass8112);
+            	    pushFollow(FOLLOW_ruleLayerConnection_in_ruleSubSystemClass8113);
             	    lv_connections_13_0=ruleLayerConnection();
 
             	    state._fsp--;
@@ -10216,7 +10210,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getSubSystemClassAccess().getBindingsBindingParserRuleCall_8_3_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleBinding_in_ruleSubSystemClass8139);
+            	    pushFollow(FOLLOW_ruleBinding_in_ruleSubSystemClass8140);
             	    lv_bindings_14_0=ruleBinding();
 
             	    state._fsp--;
@@ -10253,7 +10247,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getSubSystemClassAccess().getActorRefsActorRefParserRuleCall_8_4_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleActorRef_in_ruleSubSystemClass8166);
+            	    pushFollow(FOLLOW_ruleActorRef_in_ruleSubSystemClass8167);
             	    lv_actorRefs_15_0=ruleActorRef();
 
             	    state._fsp--;
@@ -10290,7 +10284,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getSubSystemClassAccess().getServiceProvisionPointsSPPParserRuleCall_8_5_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleSPP_in_ruleSubSystemClass8193);
+            	    pushFollow(FOLLOW_ruleSPP_in_ruleSubSystemClass8194);
             	    lv_serviceProvisionPoints_16_0=ruleSPP();
 
             	    state._fsp--;
@@ -10327,7 +10321,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getSubSystemClassAccess().getRelayPortsPortParserRuleCall_8_6_0()); 
             	    	    
-            	    pushFollow(FOLLOW_rulePort_in_ruleSubSystemClass8220);
+            	    pushFollow(FOLLOW_rulePort_in_ruleSubSystemClass8221);
             	    lv_relayPorts_17_0=rulePort();
 
             	    state._fsp--;
@@ -10358,7 +10352,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            otherlv_18=(Token)match(input,15,FOLLOW_15_in_ruleSubSystemClass8234); 
+            otherlv_18=(Token)match(input,15,FOLLOW_15_in_ruleSubSystemClass8235); 
 
                 	newLeafNode(otherlv_18, grammarAccess.getSubSystemClassAccess().getRightCurlyBracketKeyword_9());
                 
@@ -10395,13 +10389,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4220:2: iv_ruleLogicalThread= ruleLogicalThread EOF
             {
              newCompositeNode(grammarAccess.getLogicalThreadRule()); 
-            pushFollow(FOLLOW_ruleLogicalThread_in_entryRuleLogicalThread8270);
+            pushFollow(FOLLOW_ruleLogicalThread_in_entryRuleLogicalThread8271);
             iv_ruleLogicalThread=ruleLogicalThread();
 
             state._fsp--;
 
              current =iv_ruleLogicalThread; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleLogicalThread8280); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleLogicalThread8281); 
 
             }
 
@@ -10435,7 +10429,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4231:1: (otherlv_0= 'LogicalThread' ( (lv_name_1_0= RULE_ID ) ) )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4231:3: otherlv_0= 'LogicalThread' ( (lv_name_1_0= RULE_ID ) )
             {
-            otherlv_0=(Token)match(input,67,FOLLOW_67_in_ruleLogicalThread8317); 
+            otherlv_0=(Token)match(input,67,FOLLOW_67_in_ruleLogicalThread8318); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getLogicalThreadAccess().getLogicalThreadKeyword_0());
                 
@@ -10445,7 +10439,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4236:1: (lv_name_1_0= RULE_ID )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4237:3: lv_name_1_0= RULE_ID
             {
-            lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleLogicalThread8334); 
+            lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleLogicalThread8335); 
 
             			newLeafNode(lv_name_1_0, grammarAccess.getLogicalThreadAccess().getNameIDTerminalRuleCall_1_0()); 
             		
@@ -10498,13 +10492,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4263:2: iv_ruleActorInstanceMapping= ruleActorInstanceMapping EOF
             {
              newCompositeNode(grammarAccess.getActorInstanceMappingRule()); 
-            pushFollow(FOLLOW_ruleActorInstanceMapping_in_entryRuleActorInstanceMapping8375);
+            pushFollow(FOLLOW_ruleActorInstanceMapping_in_entryRuleActorInstanceMapping8376);
             iv_ruleActorInstanceMapping=ruleActorInstanceMapping();
 
             state._fsp--;
 
              current =iv_ruleActorInstanceMapping; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleActorInstanceMapping8385); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleActorInstanceMapping8386); 
 
             }
 
@@ -10545,7 +10539,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4274:1: (otherlv_0= 'ActorInstanceMapping' ( (lv_path_1_0= ruleRefPath ) ) otherlv_2= '->' ( (otherlv_3= RULE_ID ) ) (otherlv_4= '{' ( (lv_actorInstanceMappings_5_0= ruleActorInstanceMapping ) )* otherlv_6= '}' )? )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4274:3: otherlv_0= 'ActorInstanceMapping' ( (lv_path_1_0= ruleRefPath ) ) otherlv_2= '->' ( (otherlv_3= RULE_ID ) ) (otherlv_4= '{' ( (lv_actorInstanceMappings_5_0= ruleActorInstanceMapping ) )* otherlv_6= '}' )?
             {
-            otherlv_0=(Token)match(input,68,FOLLOW_68_in_ruleActorInstanceMapping8422); 
+            otherlv_0=(Token)match(input,68,FOLLOW_68_in_ruleActorInstanceMapping8423); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getActorInstanceMappingAccess().getActorInstanceMappingKeyword_0());
                 
@@ -10558,7 +10552,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
              
             	        newCompositeNode(grammarAccess.getActorInstanceMappingAccess().getPathRefPathParserRuleCall_1_0()); 
             	    
-            pushFollow(FOLLOW_ruleRefPath_in_ruleActorInstanceMapping8443);
+            pushFollow(FOLLOW_ruleRefPath_in_ruleActorInstanceMapping8444);
             lv_path_1_0=ruleRefPath();
 
             state._fsp--;
@@ -10580,7 +10574,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_2=(Token)match(input,19,FOLLOW_19_in_ruleActorInstanceMapping8455); 
+            otherlv_2=(Token)match(input,19,FOLLOW_19_in_ruleActorInstanceMapping8456); 
 
                 	newLeafNode(otherlv_2, grammarAccess.getActorInstanceMappingAccess().getHyphenMinusGreaterThanSignKeyword_2());
                 
@@ -10595,7 +10589,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	            current = createModelElement(grammarAccess.getActorInstanceMappingRule());
             	        }
                     
-            otherlv_3=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleActorInstanceMapping8475); 
+            otherlv_3=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleActorInstanceMapping8476); 
 
             		newLeafNode(otherlv_3, grammarAccess.getActorInstanceMappingAccess().getThreadLogicalThreadCrossReference_3_0()); 
             	
@@ -10616,7 +10610,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4313:4: otherlv_4= '{' ( (lv_actorInstanceMappings_5_0= ruleActorInstanceMapping ) )* otherlv_6= '}'
                     {
-                    otherlv_4=(Token)match(input,14,FOLLOW_14_in_ruleActorInstanceMapping8488); 
+                    otherlv_4=(Token)match(input,14,FOLLOW_14_in_ruleActorInstanceMapping8489); 
 
                         	newLeafNode(otherlv_4, grammarAccess.getActorInstanceMappingAccess().getLeftCurlyBracketKeyword_4_0());
                         
@@ -10641,7 +10635,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	     
                     	    	        newCompositeNode(grammarAccess.getActorInstanceMappingAccess().getActorInstanceMappingsActorInstanceMappingParserRuleCall_4_1_0()); 
                     	    	    
-                    	    pushFollow(FOLLOW_ruleActorInstanceMapping_in_ruleActorInstanceMapping8509);
+                    	    pushFollow(FOLLOW_ruleActorInstanceMapping_in_ruleActorInstanceMapping8510);
                     	    lv_actorInstanceMappings_5_0=ruleActorInstanceMapping();
 
                     	    state._fsp--;
@@ -10669,7 +10663,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                         }
                     } while (true);
 
-                    otherlv_6=(Token)match(input,15,FOLLOW_15_in_ruleActorInstanceMapping8522); 
+                    otherlv_6=(Token)match(input,15,FOLLOW_15_in_ruleActorInstanceMapping8523); 
 
                         	newLeafNode(otherlv_6, grammarAccess.getActorInstanceMappingAccess().getRightCurlyBracketKeyword_4_2());
                         
@@ -10712,13 +10706,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4349:2: iv_ruleRefPath= ruleRefPath EOF
             {
              newCompositeNode(grammarAccess.getRefPathRule()); 
-            pushFollow(FOLLOW_ruleRefPath_in_entryRuleRefPath8560);
+            pushFollow(FOLLOW_ruleRefPath_in_entryRuleRefPath8561);
             iv_ruleRefPath=ruleRefPath();
 
             state._fsp--;
 
              current =iv_ruleRefPath; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleRefPath8570); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleRefPath8571); 
 
             }
 
@@ -10764,7 +10758,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
              
             	        newCompositeNode(grammarAccess.getRefPathAccess().getRefsRefSegmentParserRuleCall_0_0()); 
             	    
-            pushFollow(FOLLOW_ruleRefSegment_in_ruleRefPath8616);
+            pushFollow(FOLLOW_ruleRefSegment_in_ruleRefPath8617);
             lv_refs_0_0=ruleRefSegment();
 
             state._fsp--;
@@ -10801,7 +10795,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	case 1 :
             	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4378:4: otherlv_1= '/' ( (lv_refs_2_0= ruleRefSegment ) )
             	    {
-            	    otherlv_1=(Token)match(input,69,FOLLOW_69_in_ruleRefPath8629); 
+            	    otherlv_1=(Token)match(input,69,FOLLOW_69_in_ruleRefPath8630); 
 
             	        	newLeafNode(otherlv_1, grammarAccess.getRefPathAccess().getSolidusKeyword_1_0());
             	        
@@ -10814,7 +10808,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getRefPathAccess().getRefsRefSegmentParserRuleCall_1_1_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleRefSegment_in_ruleRefPath8650);
+            	    pushFollow(FOLLOW_ruleRefSegment_in_ruleRefPath8651);
             	    lv_refs_2_0=ruleRefSegment();
 
             	    state._fsp--;
@@ -10878,13 +10872,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4410:2: iv_ruleRefSegment= ruleRefSegment EOF
             {
              newCompositeNode(grammarAccess.getRefSegmentRule()); 
-            pushFollow(FOLLOW_ruleRefSegment_in_entryRuleRefSegment8688);
+            pushFollow(FOLLOW_ruleRefSegment_in_entryRuleRefSegment8689);
             iv_ruleRefSegment=ruleRefSegment();
 
             state._fsp--;
 
              current =iv_ruleRefSegment; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleRefSegment8698); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleRefSegment8699); 
 
             }
 
@@ -10925,7 +10919,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4422:1: (lv_ref_0_0= RULE_ID )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4423:3: lv_ref_0_0= RULE_ID
             {
-            lv_ref_0_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleRefSegment8740); 
+            lv_ref_0_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleRefSegment8741); 
 
             			newLeafNode(lv_ref_0_0, grammarAccess.getRefSegmentAccess().getRefIDTerminalRuleCall_0_0()); 
             		
@@ -10956,7 +10950,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4439:4: otherlv_1= ':' ( (lv_idx_2_0= RULE_INT ) )
                     {
-                    otherlv_1=(Token)match(input,16,FOLLOW_16_in_ruleRefSegment8758); 
+                    otherlv_1=(Token)match(input,16,FOLLOW_16_in_ruleRefSegment8759); 
 
                         	newLeafNode(otherlv_1, grammarAccess.getRefSegmentAccess().getColonKeyword_1_0());
                         
@@ -10966,7 +10960,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4444:1: (lv_idx_2_0= RULE_INT )
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4445:3: lv_idx_2_0= RULE_INT
                     {
-                    lv_idx_2_0=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleRefSegment8775); 
+                    lv_idx_2_0=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleRefSegment8776); 
 
                     			newLeafNode(lv_idx_2_0, grammarAccess.getRefSegmentAccess().getIdxINTTerminalRuleCall_1_1_0()); 
                     		
@@ -11025,13 +11019,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4471:2: iv_ruleBinding= ruleBinding EOF
             {
              newCompositeNode(grammarAccess.getBindingRule()); 
-            pushFollow(FOLLOW_ruleBinding_in_entryRuleBinding8818);
+            pushFollow(FOLLOW_ruleBinding_in_entryRuleBinding8819);
             iv_ruleBinding=ruleBinding();
 
             state._fsp--;
 
              current =iv_ruleBinding; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleBinding8828); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleBinding8829); 
 
             }
 
@@ -11069,7 +11063,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4482:1: (otherlv_0= 'Binding' ( (lv_endpoint1_1_0= ruleBindingEndPoint ) ) otherlv_2= 'and' ( (lv_endpoint2_3_0= ruleBindingEndPoint ) ) )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4482:3: otherlv_0= 'Binding' ( (lv_endpoint1_1_0= ruleBindingEndPoint ) ) otherlv_2= 'and' ( (lv_endpoint2_3_0= ruleBindingEndPoint ) )
             {
-            otherlv_0=(Token)match(input,70,FOLLOW_70_in_ruleBinding8865); 
+            otherlv_0=(Token)match(input,70,FOLLOW_70_in_ruleBinding8866); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getBindingAccess().getBindingKeyword_0());
                 
@@ -11082,7 +11076,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
              
             	        newCompositeNode(grammarAccess.getBindingAccess().getEndpoint1BindingEndPointParserRuleCall_1_0()); 
             	    
-            pushFollow(FOLLOW_ruleBindingEndPoint_in_ruleBinding8886);
+            pushFollow(FOLLOW_ruleBindingEndPoint_in_ruleBinding8887);
             lv_endpoint1_1_0=ruleBindingEndPoint();
 
             state._fsp--;
@@ -11104,7 +11098,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_2=(Token)match(input,71,FOLLOW_71_in_ruleBinding8898); 
+            otherlv_2=(Token)match(input,71,FOLLOW_71_in_ruleBinding8899); 
 
                 	newLeafNode(otherlv_2, grammarAccess.getBindingAccess().getAndKeyword_2());
                 
@@ -11117,7 +11111,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
              
             	        newCompositeNode(grammarAccess.getBindingAccess().getEndpoint2BindingEndPointParserRuleCall_3_0()); 
             	    
-            pushFollow(FOLLOW_ruleBindingEndPoint_in_ruleBinding8919);
+            pushFollow(FOLLOW_ruleBindingEndPoint_in_ruleBinding8920);
             lv_endpoint2_3_0=ruleBindingEndPoint();
 
             state._fsp--;
@@ -11172,13 +11166,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4536:2: iv_ruleBindingEndPoint= ruleBindingEndPoint EOF
             {
              newCompositeNode(grammarAccess.getBindingEndPointRule()); 
-            pushFollow(FOLLOW_ruleBindingEndPoint_in_entryRuleBindingEndPoint8955);
+            pushFollow(FOLLOW_ruleBindingEndPoint_in_entryRuleBindingEndPoint8956);
             iv_ruleBindingEndPoint=ruleBindingEndPoint();
 
             state._fsp--;
 
              current =iv_ruleBindingEndPoint; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleBindingEndPoint8965); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleBindingEndPoint8966); 
 
             }
 
@@ -11241,7 +11235,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	            current = createModelElement(grammarAccess.getBindingEndPointRule());
                     	        }
                             
-                    otherlv_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleBindingEndPoint9011); 
+                    otherlv_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleBindingEndPoint9012); 
 
                     		newLeafNode(otherlv_0, grammarAccess.getBindingEndPointAccess().getActorRefActorContainerRefCrossReference_0_0_0()); 
                     	
@@ -11251,7 +11245,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    otherlv_1=(Token)match(input,72,FOLLOW_72_in_ruleBindingEndPoint9023); 
+                    otherlv_1=(Token)match(input,72,FOLLOW_72_in_ruleBindingEndPoint9024); 
 
                         	newLeafNode(otherlv_1, grammarAccess.getBindingEndPointAccess().getFullStopKeyword_0_1());
                         
@@ -11272,7 +11266,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	            current = createModelElement(grammarAccess.getBindingEndPointRule());
             	        }
                     
-            otherlv_2=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleBindingEndPoint9045); 
+            otherlv_2=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleBindingEndPoint9046); 
 
             		newLeafNode(otherlv_2, grammarAccess.getBindingEndPointAccess().getPortPortCrossReference_1_0()); 
             	
@@ -11293,7 +11287,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4577:4: otherlv_3= 'sub' ( (otherlv_4= RULE_ID ) )
                     {
-                    otherlv_3=(Token)match(input,73,FOLLOW_73_in_ruleBindingEndPoint9058); 
+                    otherlv_3=(Token)match(input,73,FOLLOW_73_in_ruleBindingEndPoint9059); 
 
                         	newLeafNode(otherlv_3, grammarAccess.getBindingEndPointAccess().getSubKeyword_2_0());
                         
@@ -11308,7 +11302,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	            current = createModelElement(grammarAccess.getBindingEndPointRule());
                     	        }
                             
-                    otherlv_4=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleBindingEndPoint9078); 
+                    otherlv_4=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleBindingEndPoint9079); 
 
                     		newLeafNode(otherlv_4, grammarAccess.getBindingEndPointAccess().getSubSubProtocolCrossReference_2_1_0()); 
                     	
@@ -11357,13 +11351,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4604:2: iv_ruleLayerConnection= ruleLayerConnection EOF
             {
              newCompositeNode(grammarAccess.getLayerConnectionRule()); 
-            pushFollow(FOLLOW_ruleLayerConnection_in_entryRuleLayerConnection9116);
+            pushFollow(FOLLOW_ruleLayerConnection_in_entryRuleLayerConnection9117);
             iv_ruleLayerConnection=ruleLayerConnection();
 
             state._fsp--;
 
              current =iv_ruleLayerConnection; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleLayerConnection9126); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleLayerConnection9127); 
 
             }
 
@@ -11401,7 +11395,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4615:1: (otherlv_0= 'LayerConnection' ( (lv_from_1_0= ruleSAPoint ) ) otherlv_2= 'satisfied_by' ( (lv_to_3_0= ruleSPPoint ) ) )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4615:3: otherlv_0= 'LayerConnection' ( (lv_from_1_0= ruleSAPoint ) ) otherlv_2= 'satisfied_by' ( (lv_to_3_0= ruleSPPoint ) )
             {
-            otherlv_0=(Token)match(input,74,FOLLOW_74_in_ruleLayerConnection9163); 
+            otherlv_0=(Token)match(input,74,FOLLOW_74_in_ruleLayerConnection9164); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getLayerConnectionAccess().getLayerConnectionKeyword_0());
                 
@@ -11414,7 +11408,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
              
             	        newCompositeNode(grammarAccess.getLayerConnectionAccess().getFromSAPointParserRuleCall_1_0()); 
             	    
-            pushFollow(FOLLOW_ruleSAPoint_in_ruleLayerConnection9184);
+            pushFollow(FOLLOW_ruleSAPoint_in_ruleLayerConnection9185);
             lv_from_1_0=ruleSAPoint();
 
             state._fsp--;
@@ -11436,7 +11430,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_2=(Token)match(input,75,FOLLOW_75_in_ruleLayerConnection9196); 
+            otherlv_2=(Token)match(input,75,FOLLOW_75_in_ruleLayerConnection9197); 
 
                 	newLeafNode(otherlv_2, grammarAccess.getLayerConnectionAccess().getSatisfied_byKeyword_2());
                 
@@ -11449,7 +11443,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
              
             	        newCompositeNode(grammarAccess.getLayerConnectionAccess().getToSPPointParserRuleCall_3_0()); 
             	    
-            pushFollow(FOLLOW_ruleSPPoint_in_ruleLayerConnection9217);
+            pushFollow(FOLLOW_ruleSPPoint_in_ruleLayerConnection9218);
             lv_to_3_0=ruleSPPoint();
 
             state._fsp--;
@@ -11504,13 +11498,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4669:2: iv_ruleSAPoint= ruleSAPoint EOF
             {
              newCompositeNode(grammarAccess.getSAPointRule()); 
-            pushFollow(FOLLOW_ruleSAPoint_in_entryRuleSAPoint9253);
+            pushFollow(FOLLOW_ruleSAPoint_in_entryRuleSAPoint9254);
             iv_ruleSAPoint=ruleSAPoint();
 
             state._fsp--;
 
              current =iv_ruleSAPoint; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleSAPoint9263); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleSAPoint9264); 
 
             }
 
@@ -11566,7 +11560,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getSAPointAccess().getRefSAPointParserRuleCall_0()); 
                         
-                    pushFollow(FOLLOW_ruleRefSAPoint_in_ruleSAPoint9310);
+                    pushFollow(FOLLOW_ruleRefSAPoint_in_ruleSAPoint9311);
                     this_RefSAPoint_0=ruleRefSAPoint();
 
                     state._fsp--;
@@ -11584,7 +11578,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getSAPointAccess().getRelaySAPointParserRuleCall_1()); 
                         
-                    pushFollow(FOLLOW_ruleRelaySAPoint_in_ruleSAPoint9337);
+                    pushFollow(FOLLOW_ruleRelaySAPoint_in_ruleSAPoint9338);
                     this_RelaySAPoint_1=ruleRelaySAPoint();
 
                     state._fsp--;
@@ -11629,13 +11623,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4709:2: iv_ruleRefSAPoint= ruleRefSAPoint EOF
             {
              newCompositeNode(grammarAccess.getRefSAPointRule()); 
-            pushFollow(FOLLOW_ruleRefSAPoint_in_entryRuleRefSAPoint9372);
+            pushFollow(FOLLOW_ruleRefSAPoint_in_entryRuleRefSAPoint9373);
             iv_ruleRefSAPoint=ruleRefSAPoint();
 
             state._fsp--;
 
              current =iv_ruleRefSAPoint; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleRefSAPoint9382); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleRefSAPoint9383); 
 
             }
 
@@ -11669,7 +11663,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4720:1: (otherlv_0= 'ref' ( (otherlv_1= RULE_ID ) ) )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4720:3: otherlv_0= 'ref' ( (otherlv_1= RULE_ID ) )
             {
-            otherlv_0=(Token)match(input,17,FOLLOW_17_in_ruleRefSAPoint9419); 
+            otherlv_0=(Token)match(input,17,FOLLOW_17_in_ruleRefSAPoint9420); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getRefSAPointAccess().getRefKeyword_0());
                 
@@ -11684,7 +11678,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	            current = createModelElement(grammarAccess.getRefSAPointRule());
             	        }
                     
-            otherlv_1=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleRefSAPoint9439); 
+            otherlv_1=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleRefSAPoint9440); 
 
             		newLeafNode(otherlv_1, grammarAccess.getRefSAPointAccess().getRefActorContainerRefCrossReference_1_0()); 
             	
@@ -11727,13 +11721,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4747:2: iv_ruleRelaySAPoint= ruleRelaySAPoint EOF
             {
              newCompositeNode(grammarAccess.getRelaySAPointRule()); 
-            pushFollow(FOLLOW_ruleRelaySAPoint_in_entryRuleRelaySAPoint9475);
+            pushFollow(FOLLOW_ruleRelaySAPoint_in_entryRuleRelaySAPoint9476);
             iv_ruleRelaySAPoint=ruleRelaySAPoint();
 
             state._fsp--;
 
              current =iv_ruleRelaySAPoint; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleRelaySAPoint9485); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleRelaySAPoint9486); 
 
             }
 
@@ -11767,7 +11761,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4758:1: (otherlv_0= 'relay_sap' ( (otherlv_1= RULE_ID ) ) )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4758:3: otherlv_0= 'relay_sap' ( (otherlv_1= RULE_ID ) )
             {
-            otherlv_0=(Token)match(input,76,FOLLOW_76_in_ruleRelaySAPoint9522); 
+            otherlv_0=(Token)match(input,76,FOLLOW_76_in_ruleRelaySAPoint9523); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getRelaySAPointAccess().getRelay_sapKeyword_0());
                 
@@ -11782,7 +11776,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	            current = createModelElement(grammarAccess.getRelaySAPointRule());
             	        }
                     
-            otherlv_1=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleRelaySAPoint9542); 
+            otherlv_1=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleRelaySAPoint9543); 
 
             		newLeafNode(otherlv_1, grammarAccess.getRelaySAPointAccess().getRelaySPPCrossReference_1_0()); 
             	
@@ -11825,13 +11819,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4785:2: iv_ruleSPPoint= ruleSPPoint EOF
             {
              newCompositeNode(grammarAccess.getSPPointRule()); 
-            pushFollow(FOLLOW_ruleSPPoint_in_entryRuleSPPoint9578);
+            pushFollow(FOLLOW_ruleSPPoint_in_entryRuleSPPoint9579);
             iv_ruleSPPoint=ruleSPPoint();
 
             state._fsp--;
 
              current =iv_ruleSPPoint; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleSPPoint9588); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleSPPoint9589); 
 
             }
 
@@ -11877,7 +11871,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	            current = createModelElement(grammarAccess.getSPPointRule());
             	        }
                     
-            otherlv_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSPPoint9633); 
+            otherlv_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSPPoint9634); 
 
             		newLeafNode(otherlv_0, grammarAccess.getSPPointAccess().getRefActorContainerRefCrossReference_0_0()); 
             	
@@ -11887,7 +11881,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,72,FOLLOW_72_in_ruleSPPoint9645); 
+            otherlv_1=(Token)match(input,72,FOLLOW_72_in_ruleSPPoint9646); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getSPPointAccess().getFullStopKeyword_1());
                 
@@ -11902,7 +11896,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	            current = createModelElement(grammarAccess.getSPPointRule());
             	        }
                     
-            otherlv_2=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSPPoint9665); 
+            otherlv_2=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSPPoint9666); 
 
             		newLeafNode(otherlv_2, grammarAccess.getSPPointAccess().getServiceSPPCrossReference_2_0()); 
             	
@@ -11945,13 +11939,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4836:2: iv_ruleActorRef= ruleActorRef EOF
             {
              newCompositeNode(grammarAccess.getActorRefRule()); 
-            pushFollow(FOLLOW_ruleActorRef_in_entryRuleActorRef9701);
+            pushFollow(FOLLOW_ruleActorRef_in_entryRuleActorRef9702);
             iv_ruleActorRef=ruleActorRef();
 
             state._fsp--;
 
              current =iv_ruleActorRef; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleActorRef9711); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleActorRef9712); 
 
             }
 
@@ -12009,7 +12003,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getActorRefAccess().getRefTypeReferenceTypeEnumRuleCall_0_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleReferenceType_in_ruleActorRef9757);
+                    pushFollow(FOLLOW_ruleReferenceType_in_ruleActorRef9758);
                     lv_refType_0_0=ruleReferenceType();
 
                     state._fsp--;
@@ -12034,7 +12028,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,77,FOLLOW_77_in_ruleActorRef9770); 
+            otherlv_1=(Token)match(input,77,FOLLOW_77_in_ruleActorRef9771); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getActorRefAccess().getActorRefKeyword_1());
                 
@@ -12044,7 +12038,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4870:1: (lv_name_2_0= RULE_ID )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4871:3: lv_name_2_0= RULE_ID
             {
-            lv_name_2_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleActorRef9787); 
+            lv_name_2_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleActorRef9788); 
 
             			newLeafNode(lv_name_2_0, grammarAccess.getActorRefAccess().getNameIDTerminalRuleCall_2_0()); 
             		
@@ -12081,7 +12075,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getActorRefAccess().getMultiplicityMULTIPLICITYParserRuleCall_3_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleMULTIPLICITY_in_ruleActorRef9813);
+                    pushFollow(FOLLOW_ruleMULTIPLICITY_in_ruleActorRef9814);
                     lv_multiplicity_3_0=ruleMULTIPLICITY();
 
                     state._fsp--;
@@ -12106,7 +12100,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_4=(Token)match(input,16,FOLLOW_16_in_ruleActorRef9826); 
+            otherlv_4=(Token)match(input,16,FOLLOW_16_in_ruleActorRef9827); 
 
                 	newLeafNode(otherlv_4, grammarAccess.getActorRefAccess().getColonKeyword_4());
                 
@@ -12124,7 +12118,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
              
             	        newCompositeNode(grammarAccess.getActorRefAccess().getTypeActorClassCrossReference_5_0()); 
             	    
-            pushFollow(FOLLOW_ruleFQN_in_ruleActorRef9849);
+            pushFollow(FOLLOW_ruleFQN_in_ruleActorRef9850);
             ruleFQN();
 
             state._fsp--;
@@ -12155,7 +12149,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getActorRefAccess().getDocuDocumentationParserRuleCall_6_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleDocumentation_in_ruleActorRef9870);
+                    pushFollow(FOLLOW_ruleDocumentation_in_ruleActorRef9871);
                     lv_docu_6_0=ruleDocumentation();
 
                     state._fsp--;
@@ -12213,13 +12207,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4954:2: iv_ruleMULTIPLICITY= ruleMULTIPLICITY EOF
             {
              newCompositeNode(grammarAccess.getMULTIPLICITYRule()); 
-            pushFollow(FOLLOW_ruleMULTIPLICITY_in_entryRuleMULTIPLICITY9910);
+            pushFollow(FOLLOW_ruleMULTIPLICITY_in_entryRuleMULTIPLICITY9911);
             iv_ruleMULTIPLICITY=ruleMULTIPLICITY();
 
             state._fsp--;
 
              current =iv_ruleMULTIPLICITY.getText(); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleMULTIPLICITY9921); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleMULTIPLICITY9922); 
 
             }
 
@@ -12253,7 +12247,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4965:1: (kw= '[' (kw= '*' | this_INT_2= RULE_INT ) kw= ']' )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4966:2: kw= '[' (kw= '*' | this_INT_2= RULE_INT ) kw= ']'
             {
-            kw=(Token)match(input,34,FOLLOW_34_in_ruleMULTIPLICITY9959); 
+            kw=(Token)match(input,34,FOLLOW_34_in_ruleMULTIPLICITY9960); 
 
                     current.merge(kw);
                     newLeafNode(kw, grammarAccess.getMULTIPLICITYAccess().getLeftSquareBracketKeyword_0()); 
@@ -12278,7 +12272,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4972:2: kw= '*'
                     {
-                    kw=(Token)match(input,78,FOLLOW_78_in_ruleMULTIPLICITY9973); 
+                    kw=(Token)match(input,78,FOLLOW_78_in_ruleMULTIPLICITY9974); 
 
                             current.merge(kw);
                             newLeafNode(kw, grammarAccess.getMULTIPLICITYAccess().getAsteriskKeyword_1_0()); 
@@ -12289,7 +12283,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 2 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:4978:10: this_INT_2= RULE_INT
                     {
-                    this_INT_2=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleMULTIPLICITY9994); 
+                    this_INT_2=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleMULTIPLICITY9995); 
 
                     		current.merge(this_INT_2);
                         
@@ -12302,7 +12296,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            kw=(Token)match(input,35,FOLLOW_35_in_ruleMULTIPLICITY10013); 
+            kw=(Token)match(input,35,FOLLOW_35_in_ruleMULTIPLICITY10014); 
 
                     current.merge(kw);
                     newLeafNode(kw, grammarAccess.getMULTIPLICITYAccess().getRightSquareBracketKeyword_2()); 
@@ -12340,13 +12334,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5001:2: iv_ruleAnnotationTargetType= ruleAnnotationTargetType EOF
             {
              newCompositeNode(grammarAccess.getAnnotationTargetTypeRule()); 
-            pushFollow(FOLLOW_ruleAnnotationTargetType_in_entryRuleAnnotationTargetType10054);
+            pushFollow(FOLLOW_ruleAnnotationTargetType_in_entryRuleAnnotationTargetType10055);
             iv_ruleAnnotationTargetType=ruleAnnotationTargetType();
 
             state._fsp--;
 
              current =iv_ruleAnnotationTargetType.getText(); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleAnnotationTargetType10065); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleAnnotationTargetType10066); 
 
             }
 
@@ -12425,7 +12419,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5013:2: kw= 'DataClass'
                     {
-                    kw=(Token)match(input,28,FOLLOW_28_in_ruleAnnotationTargetType10103); 
+                    kw=(Token)match(input,28,FOLLOW_28_in_ruleAnnotationTargetType10104); 
 
                             current.merge(kw);
                             newLeafNode(kw, grammarAccess.getAnnotationTargetTypeAccess().getDataClassKeyword_0()); 
@@ -12436,7 +12430,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 2 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5020:2: kw= 'ActorClass'
                     {
-                    kw=(Token)match(input,55,FOLLOW_55_in_ruleAnnotationTargetType10122); 
+                    kw=(Token)match(input,55,FOLLOW_55_in_ruleAnnotationTargetType10123); 
 
                             current.merge(kw);
                             newLeafNode(kw, grammarAccess.getAnnotationTargetTypeAccess().getActorClassKeyword_1()); 
@@ -12447,7 +12441,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 3 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5027:2: kw= 'ActorBehavior'
                     {
-                    kw=(Token)match(input,79,FOLLOW_79_in_ruleAnnotationTargetType10141); 
+                    kw=(Token)match(input,79,FOLLOW_79_in_ruleAnnotationTargetType10142); 
 
                             current.merge(kw);
                             newLeafNode(kw, grammarAccess.getAnnotationTargetTypeAccess().getActorBehaviorKeyword_2()); 
@@ -12458,7 +12452,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 4 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5034:2: kw= 'ProtocolClass'
                     {
-                    kw=(Token)match(input,42,FOLLOW_42_in_ruleAnnotationTargetType10160); 
+                    kw=(Token)match(input,42,FOLLOW_42_in_ruleAnnotationTargetType10161); 
 
                             current.merge(kw);
                             newLeafNode(kw, grammarAccess.getAnnotationTargetTypeAccess().getProtocolClassKeyword_3()); 
@@ -12469,7 +12463,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 5 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5041:2: kw= 'CompoundProtocolClass'
                     {
-                    kw=(Token)match(input,48,FOLLOW_48_in_ruleAnnotationTargetType10179); 
+                    kw=(Token)match(input,48,FOLLOW_48_in_ruleAnnotationTargetType10180); 
 
                             current.merge(kw);
                             newLeafNode(kw, grammarAccess.getAnnotationTargetTypeAccess().getCompoundProtocolClassKeyword_4()); 
@@ -12480,7 +12474,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 6 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5048:2: kw= 'SubSystemClass'
                     {
-                    kw=(Token)match(input,66,FOLLOW_66_in_ruleAnnotationTargetType10198); 
+                    kw=(Token)match(input,66,FOLLOW_66_in_ruleAnnotationTargetType10199); 
 
                             current.merge(kw);
                             newLeafNode(kw, grammarAccess.getAnnotationTargetTypeAccess().getSubSystemClassKeyword_5()); 
@@ -12491,7 +12485,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 7 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5055:2: kw= 'LogicalSystem'
                     {
-                    kw=(Token)match(input,64,FOLLOW_64_in_ruleAnnotationTargetType10217); 
+                    kw=(Token)match(input,64,FOLLOW_64_in_ruleAnnotationTargetType10218); 
 
                             current.merge(kw);
                             newLeafNode(kw, grammarAccess.getAnnotationTargetTypeAccess().getLogicalSystemKeyword_6()); 
@@ -12532,13 +12526,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5072:2: iv_ruleStateGraphNode= ruleStateGraphNode EOF
             {
              newCompositeNode(grammarAccess.getStateGraphNodeRule()); 
-            pushFollow(FOLLOW_ruleStateGraphNode_in_entryRuleStateGraphNode10259);
+            pushFollow(FOLLOW_ruleStateGraphNode_in_entryRuleStateGraphNode10260);
             iv_ruleStateGraphNode=ruleStateGraphNode();
 
             state._fsp--;
 
              current =iv_ruleStateGraphNode; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleStateGraphNode10269); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleStateGraphNode10270); 
 
             }
 
@@ -12609,7 +12603,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getStateGraphNodeAccess().getStateParserRuleCall_0()); 
                         
-                    pushFollow(FOLLOW_ruleState_in_ruleStateGraphNode10316);
+                    pushFollow(FOLLOW_ruleState_in_ruleStateGraphNode10317);
                     this_State_0=ruleState();
 
                     state._fsp--;
@@ -12627,7 +12621,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getStateGraphNodeAccess().getChoicePointParserRuleCall_1()); 
                         
-                    pushFollow(FOLLOW_ruleChoicePoint_in_ruleStateGraphNode10343);
+                    pushFollow(FOLLOW_ruleChoicePoint_in_ruleStateGraphNode10344);
                     this_ChoicePoint_1=ruleChoicePoint();
 
                     state._fsp--;
@@ -12645,7 +12639,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getStateGraphNodeAccess().getTrPointParserRuleCall_2()); 
                         
-                    pushFollow(FOLLOW_ruleTrPoint_in_ruleStateGraphNode10370);
+                    pushFollow(FOLLOW_ruleTrPoint_in_ruleStateGraphNode10371);
                     this_TrPoint_2=ruleTrPoint();
 
                     state._fsp--;
@@ -12690,13 +12684,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5124:2: iv_ruleStateGraph= ruleStateGraph EOF
             {
              newCompositeNode(grammarAccess.getStateGraphRule()); 
-            pushFollow(FOLLOW_ruleStateGraph_in_entryRuleStateGraph10407);
+            pushFollow(FOLLOW_ruleStateGraph_in_entryRuleStateGraph10408);
             iv_ruleStateGraph=ruleStateGraph();
 
             state._fsp--;
 
              current =iv_ruleStateGraph; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleStateGraph10417); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleStateGraph10418); 
 
             }
 
@@ -12751,7 +12745,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,14,FOLLOW_14_in_ruleStateGraph10463); 
+            otherlv_1=(Token)match(input,14,FOLLOW_14_in_ruleStateGraph10464); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getStateGraphAccess().getLeftCurlyBracketKeyword_1());
                 
@@ -12805,7 +12799,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getStateGraphAccess().getStatesStateParserRuleCall_2_0_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleState_in_ruleStateGraph10485);
+            	    pushFollow(FOLLOW_ruleState_in_ruleStateGraph10486);
             	    lv_states_2_0=ruleState();
 
             	    state._fsp--;
@@ -12842,7 +12836,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getStateGraphAccess().getTrPointsTrPointParserRuleCall_2_1_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleTrPoint_in_ruleStateGraph10512);
+            	    pushFollow(FOLLOW_ruleTrPoint_in_ruleStateGraph10513);
             	    lv_trPoints_3_0=ruleTrPoint();
 
             	    state._fsp--;
@@ -12879,7 +12873,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getStateGraphAccess().getChPointsChoicePointParserRuleCall_2_2_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleChoicePoint_in_ruleStateGraph10539);
+            	    pushFollow(FOLLOW_ruleChoicePoint_in_ruleStateGraph10540);
             	    lv_chPoints_4_0=ruleChoicePoint();
 
             	    state._fsp--;
@@ -12916,7 +12910,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getStateGraphAccess().getTransitionsTransitionParserRuleCall_2_3_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleTransition_in_ruleStateGraph10566);
+            	    pushFollow(FOLLOW_ruleTransition_in_ruleStateGraph10567);
             	    lv_transitions_5_0=ruleTransition();
 
             	    state._fsp--;
@@ -12953,7 +12947,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getStateGraphAccess().getRefinedTransitionsRefinedTransitionParserRuleCall_2_4_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleRefinedTransition_in_ruleStateGraph10593);
+            	    pushFollow(FOLLOW_ruleRefinedTransition_in_ruleStateGraph10594);
             	    lv_refinedTransitions_6_0=ruleRefinedTransition();
 
             	    state._fsp--;
@@ -12984,7 +12978,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            otherlv_7=(Token)match(input,15,FOLLOW_15_in_ruleStateGraph10607); 
+            otherlv_7=(Token)match(input,15,FOLLOW_15_in_ruleStateGraph10608); 
 
                 	newLeafNode(otherlv_7, grammarAccess.getStateGraphAccess().getRightCurlyBracketKeyword_3());
                 
@@ -13021,13 +13015,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5253:2: iv_ruleStateMachine= ruleStateMachine EOF
             {
              newCompositeNode(grammarAccess.getStateMachineRule()); 
-            pushFollow(FOLLOW_ruleStateMachine_in_entryRuleStateMachine10643);
+            pushFollow(FOLLOW_ruleStateMachine_in_entryRuleStateMachine10644);
             iv_ruleStateMachine=ruleStateMachine();
 
             state._fsp--;
 
              current =iv_ruleStateMachine; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleStateMachine10653); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleStateMachine10654); 
 
             }
 
@@ -13083,11 +13077,11 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,80,FOLLOW_80_in_ruleStateMachine10699); 
+            otherlv_1=(Token)match(input,80,FOLLOW_80_in_ruleStateMachine10700); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getStateMachineAccess().getStateMachineKeyword_1());
                 
-            otherlv_2=(Token)match(input,14,FOLLOW_14_in_ruleStateMachine10711); 
+            otherlv_2=(Token)match(input,14,FOLLOW_14_in_ruleStateMachine10712); 
 
                 	newLeafNode(otherlv_2, grammarAccess.getStateMachineAccess().getLeftCurlyBracketKeyword_2());
                 
@@ -13141,7 +13135,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getStateMachineAccess().getStatesStateParserRuleCall_3_0_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleState_in_ruleStateMachine10733);
+            	    pushFollow(FOLLOW_ruleState_in_ruleStateMachine10734);
             	    lv_states_3_0=ruleState();
 
             	    state._fsp--;
@@ -13178,7 +13172,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getStateMachineAccess().getTrPointsTrPointParserRuleCall_3_1_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleTrPoint_in_ruleStateMachine10760);
+            	    pushFollow(FOLLOW_ruleTrPoint_in_ruleStateMachine10761);
             	    lv_trPoints_4_0=ruleTrPoint();
 
             	    state._fsp--;
@@ -13215,7 +13209,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getStateMachineAccess().getChPointsChoicePointParserRuleCall_3_2_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleChoicePoint_in_ruleStateMachine10787);
+            	    pushFollow(FOLLOW_ruleChoicePoint_in_ruleStateMachine10788);
             	    lv_chPoints_5_0=ruleChoicePoint();
 
             	    state._fsp--;
@@ -13252,7 +13246,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getStateMachineAccess().getTransitionsTransitionParserRuleCall_3_3_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleTransition_in_ruleStateMachine10814);
+            	    pushFollow(FOLLOW_ruleTransition_in_ruleStateMachine10815);
             	    lv_transitions_6_0=ruleTransition();
 
             	    state._fsp--;
@@ -13289,7 +13283,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getStateMachineAccess().getRefinedTransitionsRefinedTransitionParserRuleCall_3_4_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleRefinedTransition_in_ruleStateMachine10841);
+            	    pushFollow(FOLLOW_ruleRefinedTransition_in_ruleStateMachine10842);
             	    lv_refinedTransitions_7_0=ruleRefinedTransition();
 
             	    state._fsp--;
@@ -13320,7 +13314,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            otherlv_8=(Token)match(input,15,FOLLOW_15_in_ruleStateMachine10855); 
+            otherlv_8=(Token)match(input,15,FOLLOW_15_in_ruleStateMachine10856); 
 
                 	newLeafNode(otherlv_8, grammarAccess.getStateMachineAccess().getRightCurlyBracketKeyword_4());
                 
@@ -13357,13 +13351,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5386:2: iv_ruleState= ruleState EOF
             {
              newCompositeNode(grammarAccess.getStateRule()); 
-            pushFollow(FOLLOW_ruleState_in_entryRuleState10891);
+            pushFollow(FOLLOW_ruleState_in_entryRuleState10892);
             iv_ruleState=ruleState();
 
             state._fsp--;
 
              current =iv_ruleState; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleState10901); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleState10902); 
 
             }
 
@@ -13419,7 +13413,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getStateAccess().getSimpleStateParserRuleCall_0()); 
                         
-                    pushFollow(FOLLOW_ruleSimpleState_in_ruleState10948);
+                    pushFollow(FOLLOW_ruleSimpleState_in_ruleState10949);
                     this_SimpleState_0=ruleSimpleState();
 
                     state._fsp--;
@@ -13437,7 +13431,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getStateAccess().getRefinedStateParserRuleCall_1()); 
                         
-                    pushFollow(FOLLOW_ruleRefinedState_in_ruleState10975);
+                    pushFollow(FOLLOW_ruleRefinedState_in_ruleState10976);
                     this_RefinedState_1=ruleRefinedState();
 
                     state._fsp--;
@@ -13482,13 +13476,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5426:2: iv_ruleSimpleState= ruleSimpleState EOF
             {
              newCompositeNode(grammarAccess.getSimpleStateRule()); 
-            pushFollow(FOLLOW_ruleSimpleState_in_entryRuleSimpleState11010);
+            pushFollow(FOLLOW_ruleSimpleState_in_entryRuleSimpleState11011);
             iv_ruleSimpleState=ruleSimpleState();
 
             state._fsp--;
 
              current =iv_ruleSimpleState; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleSimpleState11020); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleSimpleState11021); 
 
             }
 
@@ -13538,7 +13532,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5437:1: (otherlv_0= 'State' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? (otherlv_3= '{' (otherlv_4= 'entry' ( (lv_entryCode_5_0= ruleDetailCode ) ) )? (otherlv_6= 'exit' ( (lv_exitCode_7_0= ruleDetailCode ) ) )? (otherlv_8= 'do' ( (lv_doCode_9_0= ruleDetailCode ) ) )? (otherlv_10= 'subgraph' ( (lv_subgraph_11_0= ruleStateGraph ) ) )? otherlv_12= '}' )? )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5437:3: otherlv_0= 'State' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? (otherlv_3= '{' (otherlv_4= 'entry' ( (lv_entryCode_5_0= ruleDetailCode ) ) )? (otherlv_6= 'exit' ( (lv_exitCode_7_0= ruleDetailCode ) ) )? (otherlv_8= 'do' ( (lv_doCode_9_0= ruleDetailCode ) ) )? (otherlv_10= 'subgraph' ( (lv_subgraph_11_0= ruleStateGraph ) ) )? otherlv_12= '}' )?
             {
-            otherlv_0=(Token)match(input,81,FOLLOW_81_in_ruleSimpleState11057); 
+            otherlv_0=(Token)match(input,81,FOLLOW_81_in_ruleSimpleState11058); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getSimpleStateAccess().getStateKeyword_0());
                 
@@ -13548,7 +13542,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5442:1: (lv_name_1_0= RULE_ID )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5443:3: lv_name_1_0= RULE_ID
             {
-            lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSimpleState11074); 
+            lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSimpleState11075); 
 
             			newLeafNode(lv_name_1_0, grammarAccess.getSimpleStateAccess().getNameIDTerminalRuleCall_1_0()); 
             		
@@ -13585,7 +13579,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getSimpleStateAccess().getDocuDocumentationParserRuleCall_2_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleDocumentation_in_ruleSimpleState11100);
+                    pushFollow(FOLLOW_ruleDocumentation_in_ruleSimpleState11101);
                     lv_docu_2_0=ruleDocumentation();
 
                     state._fsp--;
@@ -13621,7 +13615,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5477:5: otherlv_3= '{' (otherlv_4= 'entry' ( (lv_entryCode_5_0= ruleDetailCode ) ) )? (otherlv_6= 'exit' ( (lv_exitCode_7_0= ruleDetailCode ) ) )? (otherlv_8= 'do' ( (lv_doCode_9_0= ruleDetailCode ) ) )? (otherlv_10= 'subgraph' ( (lv_subgraph_11_0= ruleStateGraph ) ) )? otherlv_12= '}'
                     {
-                    otherlv_3=(Token)match(input,14,FOLLOW_14_in_ruleSimpleState11114); 
+                    otherlv_3=(Token)match(input,14,FOLLOW_14_in_ruleSimpleState11115); 
 
                         	newLeafNode(otherlv_3, grammarAccess.getSimpleStateAccess().getLeftCurlyBracketKeyword_3_0());
                         
@@ -13636,7 +13630,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                         case 1 :
                             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5481:3: otherlv_4= 'entry' ( (lv_entryCode_5_0= ruleDetailCode ) )
                             {
-                            otherlv_4=(Token)match(input,82,FOLLOW_82_in_ruleSimpleState11127); 
+                            otherlv_4=(Token)match(input,82,FOLLOW_82_in_ruleSimpleState11128); 
 
                                 	newLeafNode(otherlv_4, grammarAccess.getSimpleStateAccess().getEntryKeyword_3_1_0());
                                 
@@ -13649,7 +13643,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                              
                             	        newCompositeNode(grammarAccess.getSimpleStateAccess().getEntryCodeDetailCodeParserRuleCall_3_1_1_0()); 
                             	    
-                            pushFollow(FOLLOW_ruleDetailCode_in_ruleSimpleState11148);
+                            pushFollow(FOLLOW_ruleDetailCode_in_ruleSimpleState11149);
                             lv_entryCode_5_0=ruleDetailCode();
 
                             state._fsp--;
@@ -13688,7 +13682,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                         case 1 :
                             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5503:6: otherlv_6= 'exit' ( (lv_exitCode_7_0= ruleDetailCode ) )
                             {
-                            otherlv_6=(Token)match(input,83,FOLLOW_83_in_ruleSimpleState11163); 
+                            otherlv_6=(Token)match(input,83,FOLLOW_83_in_ruleSimpleState11164); 
 
                                 	newLeafNode(otherlv_6, grammarAccess.getSimpleStateAccess().getExitKeyword_3_2_0());
                                 
@@ -13701,7 +13695,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                              
                             	        newCompositeNode(grammarAccess.getSimpleStateAccess().getExitCodeDetailCodeParserRuleCall_3_2_1_0()); 
                             	    
-                            pushFollow(FOLLOW_ruleDetailCode_in_ruleSimpleState11184);
+                            pushFollow(FOLLOW_ruleDetailCode_in_ruleSimpleState11185);
                             lv_exitCode_7_0=ruleDetailCode();
 
                             state._fsp--;
@@ -13740,7 +13734,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                         case 1 :
                             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5525:6: otherlv_8= 'do' ( (lv_doCode_9_0= ruleDetailCode ) )
                             {
-                            otherlv_8=(Token)match(input,84,FOLLOW_84_in_ruleSimpleState11199); 
+                            otherlv_8=(Token)match(input,84,FOLLOW_84_in_ruleSimpleState11200); 
 
                                 	newLeafNode(otherlv_8, grammarAccess.getSimpleStateAccess().getDoKeyword_3_3_0());
                                 
@@ -13753,7 +13747,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                              
                             	        newCompositeNode(grammarAccess.getSimpleStateAccess().getDoCodeDetailCodeParserRuleCall_3_3_1_0()); 
                             	    
-                            pushFollow(FOLLOW_ruleDetailCode_in_ruleSimpleState11220);
+                            pushFollow(FOLLOW_ruleDetailCode_in_ruleSimpleState11221);
                             lv_doCode_9_0=ruleDetailCode();
 
                             state._fsp--;
@@ -13792,7 +13786,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                         case 1 :
                             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5547:6: otherlv_10= 'subgraph' ( (lv_subgraph_11_0= ruleStateGraph ) )
                             {
-                            otherlv_10=(Token)match(input,85,FOLLOW_85_in_ruleSimpleState11235); 
+                            otherlv_10=(Token)match(input,85,FOLLOW_85_in_ruleSimpleState11236); 
 
                                 	newLeafNode(otherlv_10, grammarAccess.getSimpleStateAccess().getSubgraphKeyword_3_4_0());
                                 
@@ -13805,7 +13799,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                              
                             	        newCompositeNode(grammarAccess.getSimpleStateAccess().getSubgraphStateGraphParserRuleCall_3_4_1_0()); 
                             	    
-                            pushFollow(FOLLOW_ruleStateGraph_in_ruleSimpleState11256);
+                            pushFollow(FOLLOW_ruleStateGraph_in_ruleSimpleState11257);
                             lv_subgraph_11_0=ruleStateGraph();
 
                             state._fsp--;
@@ -13833,7 +13827,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    otherlv_12=(Token)match(input,15,FOLLOW_15_in_ruleSimpleState11270); 
+                    otherlv_12=(Token)match(input,15,FOLLOW_15_in_ruleSimpleState11271); 
 
                         	newLeafNode(otherlv_12, grammarAccess.getSimpleStateAccess().getRightCurlyBracketKeyword_3_5());
                         
@@ -13876,13 +13870,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5583:2: iv_ruleRefinedState= ruleRefinedState EOF
             {
              newCompositeNode(grammarAccess.getRefinedStateRule()); 
-            pushFollow(FOLLOW_ruleRefinedState_in_entryRuleRefinedState11308);
+            pushFollow(FOLLOW_ruleRefinedState_in_entryRuleRefinedState11309);
             iv_ruleRefinedState=ruleRefinedState();
 
             state._fsp--;
 
              current =iv_ruleRefinedState; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleRefinedState11318); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleRefinedState11319); 
 
             }
 
@@ -13931,7 +13925,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5594:1: (otherlv_0= 'RefinedState' ( ( ruleFQN ) ) ( (lv_docu_2_0= ruleDocumentation ) )? otherlv_3= '{' (otherlv_4= 'entry' ( (lv_entryCode_5_0= ruleDetailCode ) ) )? (otherlv_6= 'exit' ( (lv_exitCode_7_0= ruleDetailCode ) ) )? (otherlv_8= 'do' ( (lv_doCode_9_0= ruleDetailCode ) ) )? (otherlv_10= 'subgraph' ( (lv_subgraph_11_0= ruleStateGraph ) ) )? otherlv_12= '}' )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5594:3: otherlv_0= 'RefinedState' ( ( ruleFQN ) ) ( (lv_docu_2_0= ruleDocumentation ) )? otherlv_3= '{' (otherlv_4= 'entry' ( (lv_entryCode_5_0= ruleDetailCode ) ) )? (otherlv_6= 'exit' ( (lv_exitCode_7_0= ruleDetailCode ) ) )? (otherlv_8= 'do' ( (lv_doCode_9_0= ruleDetailCode ) ) )? (otherlv_10= 'subgraph' ( (lv_subgraph_11_0= ruleStateGraph ) ) )? otherlv_12= '}'
             {
-            otherlv_0=(Token)match(input,86,FOLLOW_86_in_ruleRefinedState11355); 
+            otherlv_0=(Token)match(input,86,FOLLOW_86_in_ruleRefinedState11356); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getRefinedStateAccess().getRefinedStateKeyword_0());
                 
@@ -13949,7 +13943,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
              
             	        newCompositeNode(grammarAccess.getRefinedStateAccess().getTargetStateCrossReference_1_0()); 
             	    
-            pushFollow(FOLLOW_ruleFQN_in_ruleRefinedState11378);
+            pushFollow(FOLLOW_ruleFQN_in_ruleRefinedState11379);
             ruleFQN();
 
             state._fsp--;
@@ -13980,7 +13974,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getRefinedStateAccess().getDocuDocumentationParserRuleCall_2_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleDocumentation_in_ruleRefinedState11399);
+                    pushFollow(FOLLOW_ruleDocumentation_in_ruleRefinedState11400);
                     lv_docu_2_0=ruleDocumentation();
 
                     state._fsp--;
@@ -14005,7 +13999,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_3=(Token)match(input,14,FOLLOW_14_in_ruleRefinedState11412); 
+            otherlv_3=(Token)match(input,14,FOLLOW_14_in_ruleRefinedState11413); 
 
                 	newLeafNode(otherlv_3, grammarAccess.getRefinedStateAccess().getLeftCurlyBracketKeyword_3());
                 
@@ -14020,7 +14014,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5635:3: otherlv_4= 'entry' ( (lv_entryCode_5_0= ruleDetailCode ) )
                     {
-                    otherlv_4=(Token)match(input,82,FOLLOW_82_in_ruleRefinedState11425); 
+                    otherlv_4=(Token)match(input,82,FOLLOW_82_in_ruleRefinedState11426); 
 
                         	newLeafNode(otherlv_4, grammarAccess.getRefinedStateAccess().getEntryKeyword_4_0());
                         
@@ -14033,7 +14027,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getRefinedStateAccess().getEntryCodeDetailCodeParserRuleCall_4_1_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleDetailCode_in_ruleRefinedState11446);
+                    pushFollow(FOLLOW_ruleDetailCode_in_ruleRefinedState11447);
                     lv_entryCode_5_0=ruleDetailCode();
 
                     state._fsp--;
@@ -14072,7 +14066,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5657:6: otherlv_6= 'exit' ( (lv_exitCode_7_0= ruleDetailCode ) )
                     {
-                    otherlv_6=(Token)match(input,83,FOLLOW_83_in_ruleRefinedState11461); 
+                    otherlv_6=(Token)match(input,83,FOLLOW_83_in_ruleRefinedState11462); 
 
                         	newLeafNode(otherlv_6, grammarAccess.getRefinedStateAccess().getExitKeyword_5_0());
                         
@@ -14085,7 +14079,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getRefinedStateAccess().getExitCodeDetailCodeParserRuleCall_5_1_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleDetailCode_in_ruleRefinedState11482);
+                    pushFollow(FOLLOW_ruleDetailCode_in_ruleRefinedState11483);
                     lv_exitCode_7_0=ruleDetailCode();
 
                     state._fsp--;
@@ -14124,7 +14118,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5679:6: otherlv_8= 'do' ( (lv_doCode_9_0= ruleDetailCode ) )
                     {
-                    otherlv_8=(Token)match(input,84,FOLLOW_84_in_ruleRefinedState11497); 
+                    otherlv_8=(Token)match(input,84,FOLLOW_84_in_ruleRefinedState11498); 
 
                         	newLeafNode(otherlv_8, grammarAccess.getRefinedStateAccess().getDoKeyword_6_0());
                         
@@ -14137,7 +14131,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getRefinedStateAccess().getDoCodeDetailCodeParserRuleCall_6_1_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleDetailCode_in_ruleRefinedState11518);
+                    pushFollow(FOLLOW_ruleDetailCode_in_ruleRefinedState11519);
                     lv_doCode_9_0=ruleDetailCode();
 
                     state._fsp--;
@@ -14176,7 +14170,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5701:6: otherlv_10= 'subgraph' ( (lv_subgraph_11_0= ruleStateGraph ) )
                     {
-                    otherlv_10=(Token)match(input,85,FOLLOW_85_in_ruleRefinedState11533); 
+                    otherlv_10=(Token)match(input,85,FOLLOW_85_in_ruleRefinedState11534); 
 
                         	newLeafNode(otherlv_10, grammarAccess.getRefinedStateAccess().getSubgraphKeyword_7_0());
                         
@@ -14189,7 +14183,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getRefinedStateAccess().getSubgraphStateGraphParserRuleCall_7_1_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleStateGraph_in_ruleRefinedState11554);
+                    pushFollow(FOLLOW_ruleStateGraph_in_ruleRefinedState11555);
                     lv_subgraph_11_0=ruleStateGraph();
 
                     state._fsp--;
@@ -14217,7 +14211,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_12=(Token)match(input,15,FOLLOW_15_in_ruleRefinedState11568); 
+            otherlv_12=(Token)match(input,15,FOLLOW_15_in_ruleRefinedState11569); 
 
                 	newLeafNode(otherlv_12, grammarAccess.getRefinedStateAccess().getRightCurlyBracketKeyword_8());
                 
@@ -14254,13 +14248,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5737:2: iv_ruleDetailCode= ruleDetailCode EOF
             {
              newCompositeNode(grammarAccess.getDetailCodeRule()); 
-            pushFollow(FOLLOW_ruleDetailCode_in_entryRuleDetailCode11604);
+            pushFollow(FOLLOW_ruleDetailCode_in_entryRuleDetailCode11605);
             iv_ruleDetailCode=ruleDetailCode();
 
             state._fsp--;
 
              current =iv_ruleDetailCode; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleDetailCode11614); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleDetailCode11615); 
 
             }
 
@@ -14312,7 +14306,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5755:1: (lv_used_1_0= '{' )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5756:3: lv_used_1_0= '{'
             {
-            lv_used_1_0=(Token)match(input,14,FOLLOW_14_in_ruleDetailCode11666); 
+            lv_used_1_0=(Token)match(input,14,FOLLOW_14_in_ruleDetailCode11667); 
 
                     newLeafNode(lv_used_1_0, grammarAccess.getDetailCodeAccess().getUsedLeftCurlyBracketKeyword_1_0());
                 
@@ -14346,7 +14340,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5770:1: (lv_lines_2_0= RULE_STRING )
             	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5771:3: lv_lines_2_0= RULE_STRING
             	    {
-            	    lv_lines_2_0=(Token)match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleDetailCode11696); 
+            	    lv_lines_2_0=(Token)match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleDetailCode11697); 
 
             	    			newLeafNode(lv_lines_2_0, grammarAccess.getDetailCodeAccess().getLinesSTRINGTerminalRuleCall_2_0()); 
             	    		
@@ -14372,7 +14366,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            otherlv_3=(Token)match(input,15,FOLLOW_15_in_ruleDetailCode11714); 
+            otherlv_3=(Token)match(input,15,FOLLOW_15_in_ruleDetailCode11715); 
 
                 	newLeafNode(otherlv_3, grammarAccess.getDetailCodeAccess().getRightCurlyBracketKeyword_3());
                 
@@ -14409,13 +14403,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5801:2: iv_ruleTrPoint= ruleTrPoint EOF
             {
              newCompositeNode(grammarAccess.getTrPointRule()); 
-            pushFollow(FOLLOW_ruleTrPoint_in_entryRuleTrPoint11750);
+            pushFollow(FOLLOW_ruleTrPoint_in_entryRuleTrPoint11751);
             iv_ruleTrPoint=ruleTrPoint();
 
             state._fsp--;
 
              current =iv_ruleTrPoint; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleTrPoint11760); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleTrPoint11761); 
 
             }
 
@@ -14483,7 +14477,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getTrPointAccess().getTransitionPointParserRuleCall_0()); 
                         
-                    pushFollow(FOLLOW_ruleTransitionPoint_in_ruleTrPoint11807);
+                    pushFollow(FOLLOW_ruleTransitionPoint_in_ruleTrPoint11808);
                     this_TransitionPoint_0=ruleTransitionPoint();
 
                     state._fsp--;
@@ -14501,7 +14495,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getTrPointAccess().getEntryPointParserRuleCall_1()); 
                         
-                    pushFollow(FOLLOW_ruleEntryPoint_in_ruleTrPoint11834);
+                    pushFollow(FOLLOW_ruleEntryPoint_in_ruleTrPoint11835);
                     this_EntryPoint_1=ruleEntryPoint();
 
                     state._fsp--;
@@ -14519,7 +14513,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getTrPointAccess().getExitPointParserRuleCall_2()); 
                         
-                    pushFollow(FOLLOW_ruleExitPoint_in_ruleTrPoint11861);
+                    pushFollow(FOLLOW_ruleExitPoint_in_ruleTrPoint11862);
                     this_ExitPoint_2=ruleExitPoint();
 
                     state._fsp--;
@@ -14564,13 +14558,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5851:2: iv_ruleTransitionPoint= ruleTransitionPoint EOF
             {
              newCompositeNode(grammarAccess.getTransitionPointRule()); 
-            pushFollow(FOLLOW_ruleTransitionPoint_in_entryRuleTransitionPoint11896);
+            pushFollow(FOLLOW_ruleTransitionPoint_in_entryRuleTransitionPoint11897);
             iv_ruleTransitionPoint=ruleTransitionPoint();
 
             state._fsp--;
 
              current =iv_ruleTransitionPoint; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleTransitionPoint11906); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleTransitionPoint11907); 
 
             }
 
@@ -14619,7 +14613,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5863:1: (lv_handler_0_0= 'handler' )
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5864:3: lv_handler_0_0= 'handler'
                     {
-                    lv_handler_0_0=(Token)match(input,87,FOLLOW_87_in_ruleTransitionPoint11949); 
+                    lv_handler_0_0=(Token)match(input,87,FOLLOW_87_in_ruleTransitionPoint11950); 
 
                             newLeafNode(lv_handler_0_0, grammarAccess.getTransitionPointAccess().getHandlerHandlerKeyword_0_0());
                         
@@ -14638,7 +14632,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,88,FOLLOW_88_in_ruleTransitionPoint11975); 
+            otherlv_1=(Token)match(input,88,FOLLOW_88_in_ruleTransitionPoint11976); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getTransitionPointAccess().getTransitionPointKeyword_1());
                 
@@ -14648,7 +14642,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5882:1: (lv_name_2_0= RULE_ID )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5883:3: lv_name_2_0= RULE_ID
             {
-            lv_name_2_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleTransitionPoint11992); 
+            lv_name_2_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleTransitionPoint11993); 
 
             			newLeafNode(lv_name_2_0, grammarAccess.getTransitionPointAccess().getNameIDTerminalRuleCall_2_0()); 
             		
@@ -14701,13 +14695,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5909:2: iv_ruleEntryPoint= ruleEntryPoint EOF
             {
              newCompositeNode(grammarAccess.getEntryPointRule()); 
-            pushFollow(FOLLOW_ruleEntryPoint_in_entryRuleEntryPoint12033);
+            pushFollow(FOLLOW_ruleEntryPoint_in_entryRuleEntryPoint12034);
             iv_ruleEntryPoint=ruleEntryPoint();
 
             state._fsp--;
 
              current =iv_ruleEntryPoint; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleEntryPoint12043); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleEntryPoint12044); 
 
             }
 
@@ -14741,7 +14735,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5920:1: (otherlv_0= 'EntryPoint' ( (lv_name_1_0= RULE_ID ) ) )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5920:3: otherlv_0= 'EntryPoint' ( (lv_name_1_0= RULE_ID ) )
             {
-            otherlv_0=(Token)match(input,89,FOLLOW_89_in_ruleEntryPoint12080); 
+            otherlv_0=(Token)match(input,89,FOLLOW_89_in_ruleEntryPoint12081); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getEntryPointAccess().getEntryPointKeyword_0());
                 
@@ -14751,7 +14745,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5925:1: (lv_name_1_0= RULE_ID )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5926:3: lv_name_1_0= RULE_ID
             {
-            lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEntryPoint12097); 
+            lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEntryPoint12098); 
 
             			newLeafNode(lv_name_1_0, grammarAccess.getEntryPointAccess().getNameIDTerminalRuleCall_1_0()); 
             		
@@ -14804,13 +14798,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5952:2: iv_ruleExitPoint= ruleExitPoint EOF
             {
              newCompositeNode(grammarAccess.getExitPointRule()); 
-            pushFollow(FOLLOW_ruleExitPoint_in_entryRuleExitPoint12138);
+            pushFollow(FOLLOW_ruleExitPoint_in_entryRuleExitPoint12139);
             iv_ruleExitPoint=ruleExitPoint();
 
             state._fsp--;
 
              current =iv_ruleExitPoint; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleExitPoint12148); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleExitPoint12149); 
 
             }
 
@@ -14844,7 +14838,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5963:1: (otherlv_0= 'ExitPoint' ( (lv_name_1_0= RULE_ID ) ) )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5963:3: otherlv_0= 'ExitPoint' ( (lv_name_1_0= RULE_ID ) )
             {
-            otherlv_0=(Token)match(input,90,FOLLOW_90_in_ruleExitPoint12185); 
+            otherlv_0=(Token)match(input,90,FOLLOW_90_in_ruleExitPoint12186); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getExitPointAccess().getExitPointKeyword_0());
                 
@@ -14854,7 +14848,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5968:1: (lv_name_1_0= RULE_ID )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5969:3: lv_name_1_0= RULE_ID
             {
-            lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleExitPoint12202); 
+            lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleExitPoint12203); 
 
             			newLeafNode(lv_name_1_0, grammarAccess.getExitPointAccess().getNameIDTerminalRuleCall_1_0()); 
             		
@@ -14907,13 +14901,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:5995:2: iv_ruleChoicePoint= ruleChoicePoint EOF
             {
              newCompositeNode(grammarAccess.getChoicePointRule()); 
-            pushFollow(FOLLOW_ruleChoicePoint_in_entryRuleChoicePoint12243);
+            pushFollow(FOLLOW_ruleChoicePoint_in_entryRuleChoicePoint12244);
             iv_ruleChoicePoint=ruleChoicePoint();
 
             state._fsp--;
 
              current =iv_ruleChoicePoint; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleChoicePoint12253); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleChoicePoint12254); 
 
             }
 
@@ -14949,7 +14943,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6006:1: (otherlv_0= 'ChoicePoint' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6006:3: otherlv_0= 'ChoicePoint' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )?
             {
-            otherlv_0=(Token)match(input,91,FOLLOW_91_in_ruleChoicePoint12290); 
+            otherlv_0=(Token)match(input,91,FOLLOW_91_in_ruleChoicePoint12291); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getChoicePointAccess().getChoicePointKeyword_0());
                 
@@ -14959,7 +14953,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6011:1: (lv_name_1_0= RULE_ID )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6012:3: lv_name_1_0= RULE_ID
             {
-            lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleChoicePoint12307); 
+            lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleChoicePoint12308); 
 
             			newLeafNode(lv_name_1_0, grammarAccess.getChoicePointAccess().getNameIDTerminalRuleCall_1_0()); 
             		
@@ -14996,7 +14990,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getChoicePointAccess().getDocuDocumentationParserRuleCall_2_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleDocumentation_in_ruleChoicePoint12333);
+                    pushFollow(FOLLOW_ruleDocumentation_in_ruleChoicePoint12334);
                     lv_docu_2_0=ruleDocumentation();
 
                     state._fsp--;
@@ -15054,13 +15048,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6056:2: iv_ruleTransition= ruleTransition EOF
             {
              newCompositeNode(grammarAccess.getTransitionRule()); 
-            pushFollow(FOLLOW_ruleTransition_in_entryRuleTransition12370);
+            pushFollow(FOLLOW_ruleTransition_in_entryRuleTransition12371);
             iv_ruleTransition=ruleTransition();
 
             state._fsp--;
 
              current =iv_ruleTransition; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleTransition12380); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleTransition12381); 
 
             }
 
@@ -15106,11 +15100,11 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     if ( (LA126_2==16) ) {
                         int LA126_3 = input.LA(4);
 
-                        if ( (LA126_3==93) ) {
-                            alt126=1;
-                        }
-                        else if ( (LA126_3==RULE_ID||(LA126_3>=100 && LA126_3<=101)) ) {
+                        if ( (LA126_3==RULE_ID||(LA126_3>=100 && LA126_3<=101)) ) {
                             alt126=2;
+                        }
+                        else if ( (LA126_3==93) ) {
+                            alt126=1;
                         }
                         else {
                             NoViableAltException nvae =
@@ -15129,11 +15123,11 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 else if ( (LA126_1==16) ) {
                     int LA126_3 = input.LA(3);
 
-                    if ( (LA126_3==93) ) {
-                        alt126=1;
-                    }
-                    else if ( (LA126_3==RULE_ID||(LA126_3>=100 && LA126_3<=101)) ) {
+                    if ( (LA126_3==RULE_ID||(LA126_3>=100 && LA126_3<=101)) ) {
                         alt126=2;
+                    }
+                    else if ( (LA126_3==93) ) {
+                        alt126=1;
                     }
                     else {
                         NoViableAltException nvae =
@@ -15162,7 +15156,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getTransitionAccess().getInitialTransitionParserRuleCall_0()); 
                         
-                    pushFollow(FOLLOW_ruleInitialTransition_in_ruleTransition12427);
+                    pushFollow(FOLLOW_ruleInitialTransition_in_ruleTransition12428);
                     this_InitialTransition_0=ruleInitialTransition();
 
                     state._fsp--;
@@ -15180,7 +15174,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getTransitionAccess().getNonInitialTransitionParserRuleCall_1()); 
                         
-                    pushFollow(FOLLOW_ruleNonInitialTransition_in_ruleTransition12454);
+                    pushFollow(FOLLOW_ruleNonInitialTransition_in_ruleTransition12455);
                     this_NonInitialTransition_1=ruleNonInitialTransition();
 
                     state._fsp--;
@@ -15225,13 +15219,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6096:2: iv_ruleNonInitialTransition= ruleNonInitialTransition EOF
             {
              newCompositeNode(grammarAccess.getNonInitialTransitionRule()); 
-            pushFollow(FOLLOW_ruleNonInitialTransition_in_entryRuleNonInitialTransition12489);
+            pushFollow(FOLLOW_ruleNonInitialTransition_in_entryRuleNonInitialTransition12490);
             iv_ruleNonInitialTransition=ruleNonInitialTransition();
 
             state._fsp--;
 
              current =iv_ruleNonInitialTransition; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleNonInitialTransition12499); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleNonInitialTransition12500); 
 
             }
 
@@ -15276,7 +15270,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getNonInitialTransitionAccess().getTransitionChainStartTransitionParserRuleCall_0()); 
                         
-                    pushFollow(FOLLOW_ruleTransitionChainStartTransition_in_ruleNonInitialTransition12546);
+                    pushFollow(FOLLOW_ruleTransitionChainStartTransition_in_ruleNonInitialTransition12547);
                     this_TransitionChainStartTransition_0=ruleTransitionChainStartTransition();
 
                     state._fsp--;
@@ -15294,7 +15288,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getNonInitialTransitionAccess().getContinuationTransitionParserRuleCall_1()); 
                         
-                    pushFollow(FOLLOW_ruleContinuationTransition_in_ruleNonInitialTransition12573);
+                    pushFollow(FOLLOW_ruleContinuationTransition_in_ruleNonInitialTransition12574);
                     this_ContinuationTransition_1=ruleContinuationTransition();
 
                     state._fsp--;
@@ -15312,7 +15306,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getNonInitialTransitionAccess().getCPBranchTransitionParserRuleCall_2()); 
                         
-                    pushFollow(FOLLOW_ruleCPBranchTransition_in_ruleNonInitialTransition12600);
+                    pushFollow(FOLLOW_ruleCPBranchTransition_in_ruleNonInitialTransition12601);
                     this_CPBranchTransition_2=ruleCPBranchTransition();
 
                     state._fsp--;
@@ -15357,13 +15351,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6146:2: iv_ruleTransitionChainStartTransition= ruleTransitionChainStartTransition EOF
             {
              newCompositeNode(grammarAccess.getTransitionChainStartTransitionRule()); 
-            pushFollow(FOLLOW_ruleTransitionChainStartTransition_in_entryRuleTransitionChainStartTransition12635);
+            pushFollow(FOLLOW_ruleTransitionChainStartTransition_in_entryRuleTransitionChainStartTransition12636);
             iv_ruleTransitionChainStartTransition=ruleTransitionChainStartTransition();
 
             state._fsp--;
 
              current =iv_ruleTransitionChainStartTransition; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleTransitionChainStartTransition12645); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleTransitionChainStartTransition12646); 
 
             }
 
@@ -15406,7 +15400,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getTransitionChainStartTransitionAccess().getTriggeredTransitionParserRuleCall_0()); 
                         
-                    pushFollow(FOLLOW_ruleTriggeredTransition_in_ruleTransitionChainStartTransition12692);
+                    pushFollow(FOLLOW_ruleTriggeredTransition_in_ruleTransitionChainStartTransition12693);
                     this_TriggeredTransition_0=ruleTriggeredTransition();
 
                     state._fsp--;
@@ -15424,7 +15418,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getTransitionChainStartTransitionAccess().getGuardedTransitionParserRuleCall_1()); 
                         
-                    pushFollow(FOLLOW_ruleGuardedTransition_in_ruleTransitionChainStartTransition12719);
+                    pushFollow(FOLLOW_ruleGuardedTransition_in_ruleTransitionChainStartTransition12720);
                     this_GuardedTransition_1=ruleGuardedTransition();
 
                     state._fsp--;
@@ -15469,13 +15463,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6186:2: iv_ruleInitialTransition= ruleInitialTransition EOF
             {
              newCompositeNode(grammarAccess.getInitialTransitionRule()); 
-            pushFollow(FOLLOW_ruleInitialTransition_in_entryRuleInitialTransition12754);
+            pushFollow(FOLLOW_ruleInitialTransition_in_entryRuleInitialTransition12755);
             iv_ruleInitialTransition=ruleInitialTransition();
 
             state._fsp--;
 
              current =iv_ruleInitialTransition; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleInitialTransition12764); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleInitialTransition12765); 
 
             }
 
@@ -15521,7 +15515,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6197:1: (otherlv_0= 'Transition' ( (lv_name_1_0= RULE_ID ) )? otherlv_2= ':' otherlv_3= 'initial' otherlv_4= '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( (lv_docu_6_0= ruleDocumentation ) )? (otherlv_7= '{' (otherlv_8= 'action' ( (lv_action_9_0= ruleDetailCode ) ) )? otherlv_10= '}' )? )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6197:3: otherlv_0= 'Transition' ( (lv_name_1_0= RULE_ID ) )? otherlv_2= ':' otherlv_3= 'initial' otherlv_4= '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( (lv_docu_6_0= ruleDocumentation ) )? (otherlv_7= '{' (otherlv_8= 'action' ( (lv_action_9_0= ruleDetailCode ) ) )? otherlv_10= '}' )?
             {
-            otherlv_0=(Token)match(input,92,FOLLOW_92_in_ruleInitialTransition12801); 
+            otherlv_0=(Token)match(input,92,FOLLOW_92_in_ruleInitialTransition12802); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getInitialTransitionAccess().getTransitionKeyword_0());
                 
@@ -15539,7 +15533,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6202:1: (lv_name_1_0= RULE_ID )
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6203:3: lv_name_1_0= RULE_ID
                     {
-                    lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleInitialTransition12818); 
+                    lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleInitialTransition12819); 
 
                     			newLeafNode(lv_name_1_0, grammarAccess.getInitialTransitionAccess().getNameIDTerminalRuleCall_1_0()); 
                     		
@@ -15562,15 +15556,15 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_2=(Token)match(input,16,FOLLOW_16_in_ruleInitialTransition12836); 
+            otherlv_2=(Token)match(input,16,FOLLOW_16_in_ruleInitialTransition12837); 
 
                 	newLeafNode(otherlv_2, grammarAccess.getInitialTransitionAccess().getColonKeyword_2());
                 
-            otherlv_3=(Token)match(input,93,FOLLOW_93_in_ruleInitialTransition12848); 
+            otherlv_3=(Token)match(input,93,FOLLOW_93_in_ruleInitialTransition12849); 
 
                 	newLeafNode(otherlv_3, grammarAccess.getInitialTransitionAccess().getInitialKeyword_3());
                 
-            otherlv_4=(Token)match(input,19,FOLLOW_19_in_ruleInitialTransition12860); 
+            otherlv_4=(Token)match(input,19,FOLLOW_19_in_ruleInitialTransition12861); 
 
                 	newLeafNode(otherlv_4, grammarAccess.getInitialTransitionAccess().getHyphenMinusGreaterThanSignKeyword_4());
                 
@@ -15583,7 +15577,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
              
             	        newCompositeNode(grammarAccess.getInitialTransitionAccess().getToTransitionTerminalParserRuleCall_5_0()); 
             	    
-            pushFollow(FOLLOW_ruleTransitionTerminal_in_ruleInitialTransition12881);
+            pushFollow(FOLLOW_ruleTransitionTerminal_in_ruleInitialTransition12882);
             lv_to_5_0=ruleTransitionTerminal();
 
             state._fsp--;
@@ -15622,7 +15616,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getInitialTransitionAccess().getDocuDocumentationParserRuleCall_6_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleDocumentation_in_ruleInitialTransition12902);
+                    pushFollow(FOLLOW_ruleDocumentation_in_ruleInitialTransition12903);
                     lv_docu_6_0=ruleDocumentation();
 
                     state._fsp--;
@@ -15658,7 +15652,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6267:5: otherlv_7= '{' (otherlv_8= 'action' ( (lv_action_9_0= ruleDetailCode ) ) )? otherlv_10= '}'
                     {
-                    otherlv_7=(Token)match(input,14,FOLLOW_14_in_ruleInitialTransition12916); 
+                    otherlv_7=(Token)match(input,14,FOLLOW_14_in_ruleInitialTransition12917); 
 
                         	newLeafNode(otherlv_7, grammarAccess.getInitialTransitionAccess().getLeftCurlyBracketKeyword_7_0());
                         
@@ -15673,7 +15667,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                         case 1 :
                             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6271:3: otherlv_8= 'action' ( (lv_action_9_0= ruleDetailCode ) )
                             {
-                            otherlv_8=(Token)match(input,94,FOLLOW_94_in_ruleInitialTransition12929); 
+                            otherlv_8=(Token)match(input,94,FOLLOW_94_in_ruleInitialTransition12930); 
 
                                 	newLeafNode(otherlv_8, grammarAccess.getInitialTransitionAccess().getActionKeyword_7_1_0());
                                 
@@ -15686,7 +15680,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                              
                             	        newCompositeNode(grammarAccess.getInitialTransitionAccess().getActionDetailCodeParserRuleCall_7_1_1_0()); 
                             	    
-                            pushFollow(FOLLOW_ruleDetailCode_in_ruleInitialTransition12950);
+                            pushFollow(FOLLOW_ruleDetailCode_in_ruleInitialTransition12951);
                             lv_action_9_0=ruleDetailCode();
 
                             state._fsp--;
@@ -15714,7 +15708,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    otherlv_10=(Token)match(input,15,FOLLOW_15_in_ruleInitialTransition12964); 
+                    otherlv_10=(Token)match(input,15,FOLLOW_15_in_ruleInitialTransition12965); 
 
                         	newLeafNode(otherlv_10, grammarAccess.getInitialTransitionAccess().getRightCurlyBracketKeyword_7_2());
                         
@@ -15757,13 +15751,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6307:2: iv_ruleContinuationTransition= ruleContinuationTransition EOF
             {
              newCompositeNode(grammarAccess.getContinuationTransitionRule()); 
-            pushFollow(FOLLOW_ruleContinuationTransition_in_entryRuleContinuationTransition13002);
+            pushFollow(FOLLOW_ruleContinuationTransition_in_entryRuleContinuationTransition13003);
             iv_ruleContinuationTransition=ruleContinuationTransition();
 
             state._fsp--;
 
              current =iv_ruleContinuationTransition; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleContinuationTransition13012); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleContinuationTransition13013); 
 
             }
 
@@ -15810,7 +15804,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6318:1: (otherlv_0= 'Transition' ( (lv_name_1_0= RULE_ID ) )? otherlv_2= ':' ( (lv_from_3_0= ruleTransitionTerminal ) ) otherlv_4= '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( (lv_docu_6_0= ruleDocumentation ) )? (otherlv_7= '{' (otherlv_8= 'action' ( (lv_action_9_0= ruleDetailCode ) ) )? otherlv_10= '}' )? )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6318:3: otherlv_0= 'Transition' ( (lv_name_1_0= RULE_ID ) )? otherlv_2= ':' ( (lv_from_3_0= ruleTransitionTerminal ) ) otherlv_4= '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( (lv_docu_6_0= ruleDocumentation ) )? (otherlv_7= '{' (otherlv_8= 'action' ( (lv_action_9_0= ruleDetailCode ) ) )? otherlv_10= '}' )?
             {
-            otherlv_0=(Token)match(input,92,FOLLOW_92_in_ruleContinuationTransition13049); 
+            otherlv_0=(Token)match(input,92,FOLLOW_92_in_ruleContinuationTransition13050); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getContinuationTransitionAccess().getTransitionKeyword_0());
                 
@@ -15828,7 +15822,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6323:1: (lv_name_1_0= RULE_ID )
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6324:3: lv_name_1_0= RULE_ID
                     {
-                    lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleContinuationTransition13066); 
+                    lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleContinuationTransition13067); 
 
                     			newLeafNode(lv_name_1_0, grammarAccess.getContinuationTransitionAccess().getNameIDTerminalRuleCall_1_0()); 
                     		
@@ -15851,7 +15845,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_2=(Token)match(input,16,FOLLOW_16_in_ruleContinuationTransition13084); 
+            otherlv_2=(Token)match(input,16,FOLLOW_16_in_ruleContinuationTransition13085); 
 
                 	newLeafNode(otherlv_2, grammarAccess.getContinuationTransitionAccess().getColonKeyword_2());
                 
@@ -15864,7 +15858,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
              
             	        newCompositeNode(grammarAccess.getContinuationTransitionAccess().getFromTransitionTerminalParserRuleCall_3_0()); 
             	    
-            pushFollow(FOLLOW_ruleTransitionTerminal_in_ruleContinuationTransition13105);
+            pushFollow(FOLLOW_ruleTransitionTerminal_in_ruleContinuationTransition13106);
             lv_from_3_0=ruleTransitionTerminal();
 
             state._fsp--;
@@ -15886,7 +15880,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_4=(Token)match(input,19,FOLLOW_19_in_ruleContinuationTransition13117); 
+            otherlv_4=(Token)match(input,19,FOLLOW_19_in_ruleContinuationTransition13118); 
 
                 	newLeafNode(otherlv_4, grammarAccess.getContinuationTransitionAccess().getHyphenMinusGreaterThanSignKeyword_4());
                 
@@ -15899,7 +15893,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
              
             	        newCompositeNode(grammarAccess.getContinuationTransitionAccess().getToTransitionTerminalParserRuleCall_5_0()); 
             	    
-            pushFollow(FOLLOW_ruleTransitionTerminal_in_ruleContinuationTransition13138);
+            pushFollow(FOLLOW_ruleTransitionTerminal_in_ruleContinuationTransition13139);
             lv_to_5_0=ruleTransitionTerminal();
 
             state._fsp--;
@@ -15938,7 +15932,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getContinuationTransitionAccess().getDocuDocumentationParserRuleCall_6_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleDocumentation_in_ruleContinuationTransition13159);
+                    pushFollow(FOLLOW_ruleDocumentation_in_ruleContinuationTransition13160);
                     lv_docu_6_0=ruleDocumentation();
 
                     state._fsp--;
@@ -15974,7 +15968,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6402:5: otherlv_7= '{' (otherlv_8= 'action' ( (lv_action_9_0= ruleDetailCode ) ) )? otherlv_10= '}'
                     {
-                    otherlv_7=(Token)match(input,14,FOLLOW_14_in_ruleContinuationTransition13173); 
+                    otherlv_7=(Token)match(input,14,FOLLOW_14_in_ruleContinuationTransition13174); 
 
                         	newLeafNode(otherlv_7, grammarAccess.getContinuationTransitionAccess().getLeftCurlyBracketKeyword_7_0());
                         
@@ -15989,7 +15983,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                         case 1 :
                             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6406:3: otherlv_8= 'action' ( (lv_action_9_0= ruleDetailCode ) )
                             {
-                            otherlv_8=(Token)match(input,94,FOLLOW_94_in_ruleContinuationTransition13186); 
+                            otherlv_8=(Token)match(input,94,FOLLOW_94_in_ruleContinuationTransition13187); 
 
                                 	newLeafNode(otherlv_8, grammarAccess.getContinuationTransitionAccess().getActionKeyword_7_1_0());
                                 
@@ -16002,7 +15996,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                              
                             	        newCompositeNode(grammarAccess.getContinuationTransitionAccess().getActionDetailCodeParserRuleCall_7_1_1_0()); 
                             	    
-                            pushFollow(FOLLOW_ruleDetailCode_in_ruleContinuationTransition13207);
+                            pushFollow(FOLLOW_ruleDetailCode_in_ruleContinuationTransition13208);
                             lv_action_9_0=ruleDetailCode();
 
                             state._fsp--;
@@ -16030,7 +16024,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    otherlv_10=(Token)match(input,15,FOLLOW_15_in_ruleContinuationTransition13221); 
+                    otherlv_10=(Token)match(input,15,FOLLOW_15_in_ruleContinuationTransition13222); 
 
                         	newLeafNode(otherlv_10, grammarAccess.getContinuationTransitionAccess().getRightCurlyBracketKeyword_7_2());
                         
@@ -16073,13 +16067,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6442:2: iv_ruleTriggeredTransition= ruleTriggeredTransition EOF
             {
              newCompositeNode(grammarAccess.getTriggeredTransitionRule()); 
-            pushFollow(FOLLOW_ruleTriggeredTransition_in_entryRuleTriggeredTransition13259);
+            pushFollow(FOLLOW_ruleTriggeredTransition_in_entryRuleTriggeredTransition13260);
             iv_ruleTriggeredTransition=ruleTriggeredTransition();
 
             state._fsp--;
 
              current =iv_ruleTriggeredTransition; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleTriggeredTransition13269); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleTriggeredTransition13270); 
 
             }
 
@@ -16134,7 +16128,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6453:1: (otherlv_0= 'Transition' ( (lv_name_1_0= RULE_ID ) )? otherlv_2= ':' ( (lv_from_3_0= ruleTransitionTerminal ) ) otherlv_4= '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( (lv_docu_6_0= ruleDocumentation ) )? otherlv_7= '{' otherlv_8= 'triggers' otherlv_9= '{' ( (lv_triggers_10_0= ruleTrigger ) ) (otherlv_11= 'or' ( (lv_triggers_12_0= ruleTrigger ) ) )* otherlv_13= '}' (otherlv_14= 'action' ( (lv_action_15_0= ruleDetailCode ) ) )? otherlv_16= '}' )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6453:3: otherlv_0= 'Transition' ( (lv_name_1_0= RULE_ID ) )? otherlv_2= ':' ( (lv_from_3_0= ruleTransitionTerminal ) ) otherlv_4= '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( (lv_docu_6_0= ruleDocumentation ) )? otherlv_7= '{' otherlv_8= 'triggers' otherlv_9= '{' ( (lv_triggers_10_0= ruleTrigger ) ) (otherlv_11= 'or' ( (lv_triggers_12_0= ruleTrigger ) ) )* otherlv_13= '}' (otherlv_14= 'action' ( (lv_action_15_0= ruleDetailCode ) ) )? otherlv_16= '}'
             {
-            otherlv_0=(Token)match(input,92,FOLLOW_92_in_ruleTriggeredTransition13306); 
+            otherlv_0=(Token)match(input,92,FOLLOW_92_in_ruleTriggeredTransition13307); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getTriggeredTransitionAccess().getTransitionKeyword_0());
                 
@@ -16152,7 +16146,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6458:1: (lv_name_1_0= RULE_ID )
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6459:3: lv_name_1_0= RULE_ID
                     {
-                    lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleTriggeredTransition13323); 
+                    lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleTriggeredTransition13324); 
 
                     			newLeafNode(lv_name_1_0, grammarAccess.getTriggeredTransitionAccess().getNameIDTerminalRuleCall_1_0()); 
                     		
@@ -16175,7 +16169,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_2=(Token)match(input,16,FOLLOW_16_in_ruleTriggeredTransition13341); 
+            otherlv_2=(Token)match(input,16,FOLLOW_16_in_ruleTriggeredTransition13342); 
 
                 	newLeafNode(otherlv_2, grammarAccess.getTriggeredTransitionAccess().getColonKeyword_2());
                 
@@ -16188,7 +16182,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
              
             	        newCompositeNode(grammarAccess.getTriggeredTransitionAccess().getFromTransitionTerminalParserRuleCall_3_0()); 
             	    
-            pushFollow(FOLLOW_ruleTransitionTerminal_in_ruleTriggeredTransition13362);
+            pushFollow(FOLLOW_ruleTransitionTerminal_in_ruleTriggeredTransition13363);
             lv_from_3_0=ruleTransitionTerminal();
 
             state._fsp--;
@@ -16210,7 +16204,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_4=(Token)match(input,19,FOLLOW_19_in_ruleTriggeredTransition13374); 
+            otherlv_4=(Token)match(input,19,FOLLOW_19_in_ruleTriggeredTransition13375); 
 
                 	newLeafNode(otherlv_4, grammarAccess.getTriggeredTransitionAccess().getHyphenMinusGreaterThanSignKeyword_4());
                 
@@ -16223,7 +16217,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
              
             	        newCompositeNode(grammarAccess.getTriggeredTransitionAccess().getToTransitionTerminalParserRuleCall_5_0()); 
             	    
-            pushFollow(FOLLOW_ruleTransitionTerminal_in_ruleTriggeredTransition13395);
+            pushFollow(FOLLOW_ruleTransitionTerminal_in_ruleTriggeredTransition13396);
             lv_to_5_0=ruleTransitionTerminal();
 
             state._fsp--;
@@ -16262,7 +16256,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getTriggeredTransitionAccess().getDocuDocumentationParserRuleCall_6_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleDocumentation_in_ruleTriggeredTransition13416);
+                    pushFollow(FOLLOW_ruleDocumentation_in_ruleTriggeredTransition13417);
                     lv_docu_6_0=ruleDocumentation();
 
                     state._fsp--;
@@ -16287,15 +16281,15 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_7=(Token)match(input,14,FOLLOW_14_in_ruleTriggeredTransition13429); 
+            otherlv_7=(Token)match(input,14,FOLLOW_14_in_ruleTriggeredTransition13430); 
 
                 	newLeafNode(otherlv_7, grammarAccess.getTriggeredTransitionAccess().getLeftCurlyBracketKeyword_7());
                 
-            otherlv_8=(Token)match(input,95,FOLLOW_95_in_ruleTriggeredTransition13441); 
+            otherlv_8=(Token)match(input,95,FOLLOW_95_in_ruleTriggeredTransition13442); 
 
                 	newLeafNode(otherlv_8, grammarAccess.getTriggeredTransitionAccess().getTriggersKeyword_8());
                 
-            otherlv_9=(Token)match(input,14,FOLLOW_14_in_ruleTriggeredTransition13453); 
+            otherlv_9=(Token)match(input,14,FOLLOW_14_in_ruleTriggeredTransition13454); 
 
                 	newLeafNode(otherlv_9, grammarAccess.getTriggeredTransitionAccess().getLeftCurlyBracketKeyword_9());
                 
@@ -16308,7 +16302,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
              
             	        newCompositeNode(grammarAccess.getTriggeredTransitionAccess().getTriggersTriggerParserRuleCall_10_0()); 
             	    
-            pushFollow(FOLLOW_ruleTrigger_in_ruleTriggeredTransition13474);
+            pushFollow(FOLLOW_ruleTrigger_in_ruleTriggeredTransition13475);
             lv_triggers_10_0=ruleTrigger();
 
             state._fsp--;
@@ -16345,7 +16339,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	case 1 :
             	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6567:4: otherlv_11= 'or' ( (lv_triggers_12_0= ruleTrigger ) )
             	    {
-            	    otherlv_11=(Token)match(input,96,FOLLOW_96_in_ruleTriggeredTransition13487); 
+            	    otherlv_11=(Token)match(input,96,FOLLOW_96_in_ruleTriggeredTransition13488); 
 
             	        	newLeafNode(otherlv_11, grammarAccess.getTriggeredTransitionAccess().getOrKeyword_11_0());
             	        
@@ -16358,7 +16352,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getTriggeredTransitionAccess().getTriggersTriggerParserRuleCall_11_1_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleTrigger_in_ruleTriggeredTransition13508);
+            	    pushFollow(FOLLOW_ruleTrigger_in_ruleTriggeredTransition13509);
             	    lv_triggers_12_0=ruleTrigger();
 
             	    state._fsp--;
@@ -16389,7 +16383,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            otherlv_13=(Token)match(input,15,FOLLOW_15_in_ruleTriggeredTransition13522); 
+            otherlv_13=(Token)match(input,15,FOLLOW_15_in_ruleTriggeredTransition13523); 
 
                 	newLeafNode(otherlv_13, grammarAccess.getTriggeredTransitionAccess().getRightCurlyBracketKeyword_12());
                 
@@ -16404,7 +16398,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6593:3: otherlv_14= 'action' ( (lv_action_15_0= ruleDetailCode ) )
                     {
-                    otherlv_14=(Token)match(input,94,FOLLOW_94_in_ruleTriggeredTransition13535); 
+                    otherlv_14=(Token)match(input,94,FOLLOW_94_in_ruleTriggeredTransition13536); 
 
                         	newLeafNode(otherlv_14, grammarAccess.getTriggeredTransitionAccess().getActionKeyword_13_0());
                         
@@ -16417,7 +16411,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getTriggeredTransitionAccess().getActionDetailCodeParserRuleCall_13_1_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleDetailCode_in_ruleTriggeredTransition13556);
+                    pushFollow(FOLLOW_ruleDetailCode_in_ruleTriggeredTransition13557);
                     lv_action_15_0=ruleDetailCode();
 
                     state._fsp--;
@@ -16445,7 +16439,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_16=(Token)match(input,15,FOLLOW_15_in_ruleTriggeredTransition13570); 
+            otherlv_16=(Token)match(input,15,FOLLOW_15_in_ruleTriggeredTransition13571); 
 
                 	newLeafNode(otherlv_16, grammarAccess.getTriggeredTransitionAccess().getRightCurlyBracketKeyword_14());
                 
@@ -16482,13 +16476,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6629:2: iv_ruleGuardedTransition= ruleGuardedTransition EOF
             {
              newCompositeNode(grammarAccess.getGuardedTransitionRule()); 
-            pushFollow(FOLLOW_ruleGuardedTransition_in_entryRuleGuardedTransition13606);
+            pushFollow(FOLLOW_ruleGuardedTransition_in_entryRuleGuardedTransition13607);
             iv_ruleGuardedTransition=ruleGuardedTransition();
 
             state._fsp--;
 
              current =iv_ruleGuardedTransition; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleGuardedTransition13616); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleGuardedTransition13617); 
 
             }
 
@@ -16538,7 +16532,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6640:1: (otherlv_0= 'Transition' ( (lv_name_1_0= RULE_ID ) )? otherlv_2= ':' ( (lv_from_3_0= ruleTransitionTerminal ) ) otherlv_4= '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( (lv_docu_6_0= ruleDocumentation ) )? otherlv_7= '{' otherlv_8= 'guard' ( (lv_guard_9_0= ruleDetailCode ) ) (otherlv_10= 'action' ( (lv_action_11_0= ruleDetailCode ) ) )? otherlv_12= '}' )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6640:3: otherlv_0= 'Transition' ( (lv_name_1_0= RULE_ID ) )? otherlv_2= ':' ( (lv_from_3_0= ruleTransitionTerminal ) ) otherlv_4= '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( (lv_docu_6_0= ruleDocumentation ) )? otherlv_7= '{' otherlv_8= 'guard' ( (lv_guard_9_0= ruleDetailCode ) ) (otherlv_10= 'action' ( (lv_action_11_0= ruleDetailCode ) ) )? otherlv_12= '}'
             {
-            otherlv_0=(Token)match(input,92,FOLLOW_92_in_ruleGuardedTransition13653); 
+            otherlv_0=(Token)match(input,92,FOLLOW_92_in_ruleGuardedTransition13654); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getGuardedTransitionAccess().getTransitionKeyword_0());
                 
@@ -16556,7 +16550,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6645:1: (lv_name_1_0= RULE_ID )
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6646:3: lv_name_1_0= RULE_ID
                     {
-                    lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleGuardedTransition13670); 
+                    lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleGuardedTransition13671); 
 
                     			newLeafNode(lv_name_1_0, grammarAccess.getGuardedTransitionAccess().getNameIDTerminalRuleCall_1_0()); 
                     		
@@ -16579,7 +16573,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_2=(Token)match(input,16,FOLLOW_16_in_ruleGuardedTransition13688); 
+            otherlv_2=(Token)match(input,16,FOLLOW_16_in_ruleGuardedTransition13689); 
 
                 	newLeafNode(otherlv_2, grammarAccess.getGuardedTransitionAccess().getColonKeyword_2());
                 
@@ -16592,7 +16586,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
              
             	        newCompositeNode(grammarAccess.getGuardedTransitionAccess().getFromTransitionTerminalParserRuleCall_3_0()); 
             	    
-            pushFollow(FOLLOW_ruleTransitionTerminal_in_ruleGuardedTransition13709);
+            pushFollow(FOLLOW_ruleTransitionTerminal_in_ruleGuardedTransition13710);
             lv_from_3_0=ruleTransitionTerminal();
 
             state._fsp--;
@@ -16614,7 +16608,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_4=(Token)match(input,19,FOLLOW_19_in_ruleGuardedTransition13721); 
+            otherlv_4=(Token)match(input,19,FOLLOW_19_in_ruleGuardedTransition13722); 
 
                 	newLeafNode(otherlv_4, grammarAccess.getGuardedTransitionAccess().getHyphenMinusGreaterThanSignKeyword_4());
                 
@@ -16627,7 +16621,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
              
             	        newCompositeNode(grammarAccess.getGuardedTransitionAccess().getToTransitionTerminalParserRuleCall_5_0()); 
             	    
-            pushFollow(FOLLOW_ruleTransitionTerminal_in_ruleGuardedTransition13742);
+            pushFollow(FOLLOW_ruleTransitionTerminal_in_ruleGuardedTransition13743);
             lv_to_5_0=ruleTransitionTerminal();
 
             state._fsp--;
@@ -16666,7 +16660,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getGuardedTransitionAccess().getDocuDocumentationParserRuleCall_6_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleDocumentation_in_ruleGuardedTransition13763);
+                    pushFollow(FOLLOW_ruleDocumentation_in_ruleGuardedTransition13764);
                     lv_docu_6_0=ruleDocumentation();
 
                     state._fsp--;
@@ -16691,11 +16685,11 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_7=(Token)match(input,14,FOLLOW_14_in_ruleGuardedTransition13776); 
+            otherlv_7=(Token)match(input,14,FOLLOW_14_in_ruleGuardedTransition13777); 
 
                 	newLeafNode(otherlv_7, grammarAccess.getGuardedTransitionAccess().getLeftCurlyBracketKeyword_7());
                 
-            otherlv_8=(Token)match(input,97,FOLLOW_97_in_ruleGuardedTransition13788); 
+            otherlv_8=(Token)match(input,97,FOLLOW_97_in_ruleGuardedTransition13789); 
 
                 	newLeafNode(otherlv_8, grammarAccess.getGuardedTransitionAccess().getGuardKeyword_8());
                 
@@ -16708,7 +16702,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
              
             	        newCompositeNode(grammarAccess.getGuardedTransitionAccess().getGuardDetailCodeParserRuleCall_9_0()); 
             	    
-            pushFollow(FOLLOW_ruleDetailCode_in_ruleGuardedTransition13809);
+            pushFollow(FOLLOW_ruleDetailCode_in_ruleGuardedTransition13810);
             lv_guard_9_0=ruleDetailCode();
 
             state._fsp--;
@@ -16741,7 +16735,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6750:4: otherlv_10= 'action' ( (lv_action_11_0= ruleDetailCode ) )
                     {
-                    otherlv_10=(Token)match(input,94,FOLLOW_94_in_ruleGuardedTransition13822); 
+                    otherlv_10=(Token)match(input,94,FOLLOW_94_in_ruleGuardedTransition13823); 
 
                         	newLeafNode(otherlv_10, grammarAccess.getGuardedTransitionAccess().getActionKeyword_10_0());
                         
@@ -16754,7 +16748,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getGuardedTransitionAccess().getActionDetailCodeParserRuleCall_10_1_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleDetailCode_in_ruleGuardedTransition13843);
+                    pushFollow(FOLLOW_ruleDetailCode_in_ruleGuardedTransition13844);
                     lv_action_11_0=ruleDetailCode();
 
                     state._fsp--;
@@ -16782,7 +16776,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_12=(Token)match(input,15,FOLLOW_15_in_ruleGuardedTransition13857); 
+            otherlv_12=(Token)match(input,15,FOLLOW_15_in_ruleGuardedTransition13858); 
 
                 	newLeafNode(otherlv_12, grammarAccess.getGuardedTransitionAccess().getRightCurlyBracketKeyword_11());
                 
@@ -16819,13 +16813,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6786:2: iv_ruleCPBranchTransition= ruleCPBranchTransition EOF
             {
              newCompositeNode(grammarAccess.getCPBranchTransitionRule()); 
-            pushFollow(FOLLOW_ruleCPBranchTransition_in_entryRuleCPBranchTransition13893);
+            pushFollow(FOLLOW_ruleCPBranchTransition_in_entryRuleCPBranchTransition13894);
             iv_ruleCPBranchTransition=ruleCPBranchTransition();
 
             state._fsp--;
 
              current =iv_ruleCPBranchTransition; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleCPBranchTransition13903); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleCPBranchTransition13904); 
 
             }
 
@@ -16875,7 +16869,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6797:1: (otherlv_0= 'Transition' ( (lv_name_1_0= RULE_ID ) )? otherlv_2= ':' ( (lv_from_3_0= ruleTransitionTerminal ) ) otherlv_4= '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( (lv_docu_6_0= ruleDocumentation ) )? otherlv_7= '{' otherlv_8= 'cond' ( (lv_condition_9_0= ruleDetailCode ) ) (otherlv_10= 'action' ( (lv_action_11_0= ruleDetailCode ) ) )? otherlv_12= '}' )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6797:3: otherlv_0= 'Transition' ( (lv_name_1_0= RULE_ID ) )? otherlv_2= ':' ( (lv_from_3_0= ruleTransitionTerminal ) ) otherlv_4= '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( (lv_docu_6_0= ruleDocumentation ) )? otherlv_7= '{' otherlv_8= 'cond' ( (lv_condition_9_0= ruleDetailCode ) ) (otherlv_10= 'action' ( (lv_action_11_0= ruleDetailCode ) ) )? otherlv_12= '}'
             {
-            otherlv_0=(Token)match(input,92,FOLLOW_92_in_ruleCPBranchTransition13940); 
+            otherlv_0=(Token)match(input,92,FOLLOW_92_in_ruleCPBranchTransition13941); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getCPBranchTransitionAccess().getTransitionKeyword_0());
                 
@@ -16893,7 +16887,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6802:1: (lv_name_1_0= RULE_ID )
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6803:3: lv_name_1_0= RULE_ID
                     {
-                    lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleCPBranchTransition13957); 
+                    lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleCPBranchTransition13958); 
 
                     			newLeafNode(lv_name_1_0, grammarAccess.getCPBranchTransitionAccess().getNameIDTerminalRuleCall_1_0()); 
                     		
@@ -16916,7 +16910,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_2=(Token)match(input,16,FOLLOW_16_in_ruleCPBranchTransition13975); 
+            otherlv_2=(Token)match(input,16,FOLLOW_16_in_ruleCPBranchTransition13976); 
 
                 	newLeafNode(otherlv_2, grammarAccess.getCPBranchTransitionAccess().getColonKeyword_2());
                 
@@ -16929,7 +16923,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
              
             	        newCompositeNode(grammarAccess.getCPBranchTransitionAccess().getFromTransitionTerminalParserRuleCall_3_0()); 
             	    
-            pushFollow(FOLLOW_ruleTransitionTerminal_in_ruleCPBranchTransition13996);
+            pushFollow(FOLLOW_ruleTransitionTerminal_in_ruleCPBranchTransition13997);
             lv_from_3_0=ruleTransitionTerminal();
 
             state._fsp--;
@@ -16951,7 +16945,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_4=(Token)match(input,19,FOLLOW_19_in_ruleCPBranchTransition14008); 
+            otherlv_4=(Token)match(input,19,FOLLOW_19_in_ruleCPBranchTransition14009); 
 
                 	newLeafNode(otherlv_4, grammarAccess.getCPBranchTransitionAccess().getHyphenMinusGreaterThanSignKeyword_4());
                 
@@ -16964,7 +16958,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
              
             	        newCompositeNode(grammarAccess.getCPBranchTransitionAccess().getToTransitionTerminalParserRuleCall_5_0()); 
             	    
-            pushFollow(FOLLOW_ruleTransitionTerminal_in_ruleCPBranchTransition14029);
+            pushFollow(FOLLOW_ruleTransitionTerminal_in_ruleCPBranchTransition14030);
             lv_to_5_0=ruleTransitionTerminal();
 
             state._fsp--;
@@ -17003,7 +16997,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getCPBranchTransitionAccess().getDocuDocumentationParserRuleCall_6_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleDocumentation_in_ruleCPBranchTransition14050);
+                    pushFollow(FOLLOW_ruleDocumentation_in_ruleCPBranchTransition14051);
                     lv_docu_6_0=ruleDocumentation();
 
                     state._fsp--;
@@ -17028,11 +17022,11 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_7=(Token)match(input,14,FOLLOW_14_in_ruleCPBranchTransition14063); 
+            otherlv_7=(Token)match(input,14,FOLLOW_14_in_ruleCPBranchTransition14064); 
 
                 	newLeafNode(otherlv_7, grammarAccess.getCPBranchTransitionAccess().getLeftCurlyBracketKeyword_7());
                 
-            otherlv_8=(Token)match(input,98,FOLLOW_98_in_ruleCPBranchTransition14075); 
+            otherlv_8=(Token)match(input,98,FOLLOW_98_in_ruleCPBranchTransition14076); 
 
                 	newLeafNode(otherlv_8, grammarAccess.getCPBranchTransitionAccess().getCondKeyword_8());
                 
@@ -17045,7 +17039,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
              
             	        newCompositeNode(grammarAccess.getCPBranchTransitionAccess().getConditionDetailCodeParserRuleCall_9_0()); 
             	    
-            pushFollow(FOLLOW_ruleDetailCode_in_ruleCPBranchTransition14096);
+            pushFollow(FOLLOW_ruleDetailCode_in_ruleCPBranchTransition14097);
             lv_condition_9_0=ruleDetailCode();
 
             state._fsp--;
@@ -17078,7 +17072,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6907:4: otherlv_10= 'action' ( (lv_action_11_0= ruleDetailCode ) )
                     {
-                    otherlv_10=(Token)match(input,94,FOLLOW_94_in_ruleCPBranchTransition14109); 
+                    otherlv_10=(Token)match(input,94,FOLLOW_94_in_ruleCPBranchTransition14110); 
 
                         	newLeafNode(otherlv_10, grammarAccess.getCPBranchTransitionAccess().getActionKeyword_10_0());
                         
@@ -17091,7 +17085,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getCPBranchTransitionAccess().getActionDetailCodeParserRuleCall_10_1_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleDetailCode_in_ruleCPBranchTransition14130);
+                    pushFollow(FOLLOW_ruleDetailCode_in_ruleCPBranchTransition14131);
                     lv_action_11_0=ruleDetailCode();
 
                     state._fsp--;
@@ -17119,7 +17113,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_12=(Token)match(input,15,FOLLOW_15_in_ruleCPBranchTransition14144); 
+            otherlv_12=(Token)match(input,15,FOLLOW_15_in_ruleCPBranchTransition14145); 
 
                 	newLeafNode(otherlv_12, grammarAccess.getCPBranchTransitionAccess().getRightCurlyBracketKeyword_11());
                 
@@ -17156,13 +17150,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6943:2: iv_ruleRefinedTransition= ruleRefinedTransition EOF
             {
              newCompositeNode(grammarAccess.getRefinedTransitionRule()); 
-            pushFollow(FOLLOW_ruleRefinedTransition_in_entryRuleRefinedTransition14180);
+            pushFollow(FOLLOW_ruleRefinedTransition_in_entryRuleRefinedTransition14181);
             iv_ruleRefinedTransition=ruleRefinedTransition();
 
             state._fsp--;
 
              current =iv_ruleRefinedTransition; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleRefinedTransition14190); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleRefinedTransition14191); 
 
             }
 
@@ -17202,7 +17196,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6954:1: (otherlv_0= 'RefinedTransition' ( ( ruleFQN ) ) ( (lv_docu_2_0= ruleDocumentation ) )? otherlv_3= '{' otherlv_4= 'action' ( (lv_action_5_0= ruleDetailCode ) ) otherlv_6= '}' )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:6954:3: otherlv_0= 'RefinedTransition' ( ( ruleFQN ) ) ( (lv_docu_2_0= ruleDocumentation ) )? otherlv_3= '{' otherlv_4= 'action' ( (lv_action_5_0= ruleDetailCode ) ) otherlv_6= '}'
             {
-            otherlv_0=(Token)match(input,99,FOLLOW_99_in_ruleRefinedTransition14227); 
+            otherlv_0=(Token)match(input,99,FOLLOW_99_in_ruleRefinedTransition14228); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getRefinedTransitionAccess().getRefinedTransitionKeyword_0());
                 
@@ -17220,7 +17214,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
              
             	        newCompositeNode(grammarAccess.getRefinedTransitionAccess().getTargetTransitionCrossReference_1_0()); 
             	    
-            pushFollow(FOLLOW_ruleFQN_in_ruleRefinedTransition14250);
+            pushFollow(FOLLOW_ruleFQN_in_ruleRefinedTransition14251);
             ruleFQN();
 
             state._fsp--;
@@ -17251,7 +17245,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getRefinedTransitionAccess().getDocuDocumentationParserRuleCall_2_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleDocumentation_in_ruleRefinedTransition14271);
+                    pushFollow(FOLLOW_ruleDocumentation_in_ruleRefinedTransition14272);
                     lv_docu_2_0=ruleDocumentation();
 
                     state._fsp--;
@@ -17276,11 +17270,11 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_3=(Token)match(input,14,FOLLOW_14_in_ruleRefinedTransition14284); 
+            otherlv_3=(Token)match(input,14,FOLLOW_14_in_ruleRefinedTransition14285); 
 
                 	newLeafNode(otherlv_3, grammarAccess.getRefinedTransitionAccess().getLeftCurlyBracketKeyword_3());
                 
-            otherlv_4=(Token)match(input,94,FOLLOW_94_in_ruleRefinedTransition14296); 
+            otherlv_4=(Token)match(input,94,FOLLOW_94_in_ruleRefinedTransition14297); 
 
                 	newLeafNode(otherlv_4, grammarAccess.getRefinedTransitionAccess().getActionKeyword_4());
                 
@@ -17293,7 +17287,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
              
             	        newCompositeNode(grammarAccess.getRefinedTransitionAccess().getActionDetailCodeParserRuleCall_5_0()); 
             	    
-            pushFollow(FOLLOW_ruleDetailCode_in_ruleRefinedTransition14317);
+            pushFollow(FOLLOW_ruleDetailCode_in_ruleRefinedTransition14318);
             lv_action_5_0=ruleDetailCode();
 
             state._fsp--;
@@ -17315,7 +17309,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_6=(Token)match(input,15,FOLLOW_15_in_ruleRefinedTransition14329); 
+            otherlv_6=(Token)match(input,15,FOLLOW_15_in_ruleRefinedTransition14330); 
 
                 	newLeafNode(otherlv_6, grammarAccess.getRefinedTransitionAccess().getRightCurlyBracketKeyword_6());
                 
@@ -17352,13 +17346,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:7031:2: iv_ruleTransitionTerminal= ruleTransitionTerminal EOF
             {
              newCompositeNode(grammarAccess.getTransitionTerminalRule()); 
-            pushFollow(FOLLOW_ruleTransitionTerminal_in_entryRuleTransitionTerminal14365);
+            pushFollow(FOLLOW_ruleTransitionTerminal_in_entryRuleTransitionTerminal14366);
             iv_ruleTransitionTerminal=ruleTransitionTerminal();
 
             state._fsp--;
 
              current =iv_ruleTransitionTerminal; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleTransitionTerminal14375); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleTransitionTerminal14376); 
 
             }
 
@@ -17402,11 +17396,11 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 {
                 int LA148_1 = input.LA(2);
 
-                if ( (LA148_1==EOF||(LA148_1>=14 && LA148_1<=15)||LA148_1==19||LA148_1==34||LA148_1==81||(LA148_1>=86 && LA148_1<=92)||LA148_1==99) ) {
-                    alt148=1;
-                }
-                else if ( (LA148_1==24) ) {
+                if ( (LA148_1==24) ) {
                     alt148=3;
+                }
+                else if ( (LA148_1==EOF||(LA148_1>=14 && LA148_1<=15)||LA148_1==19||LA148_1==34||LA148_1==81||(LA148_1>=86 && LA148_1<=92)||LA148_1==99) ) {
+                    alt148=1;
                 }
                 else {
                     NoViableAltException nvae =
@@ -17440,7 +17434,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getTransitionTerminalAccess().getStateTerminalParserRuleCall_0()); 
                         
-                    pushFollow(FOLLOW_ruleStateTerminal_in_ruleTransitionTerminal14422);
+                    pushFollow(FOLLOW_ruleStateTerminal_in_ruleTransitionTerminal14423);
                     this_StateTerminal_0=ruleStateTerminal();
 
                     state._fsp--;
@@ -17458,7 +17452,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getTransitionTerminalAccess().getTrPointTerminalParserRuleCall_1()); 
                         
-                    pushFollow(FOLLOW_ruleTrPointTerminal_in_ruleTransitionTerminal14449);
+                    pushFollow(FOLLOW_ruleTrPointTerminal_in_ruleTransitionTerminal14450);
                     this_TrPointTerminal_1=ruleTrPointTerminal();
 
                     state._fsp--;
@@ -17476,7 +17470,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getTransitionTerminalAccess().getSubStateTrPointTerminalParserRuleCall_2()); 
                         
-                    pushFollow(FOLLOW_ruleSubStateTrPointTerminal_in_ruleTransitionTerminal14476);
+                    pushFollow(FOLLOW_ruleSubStateTrPointTerminal_in_ruleTransitionTerminal14477);
                     this_SubStateTrPointTerminal_2=ruleSubStateTrPointTerminal();
 
                     state._fsp--;
@@ -17494,7 +17488,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getTransitionTerminalAccess().getChoicepointTerminalParserRuleCall_3()); 
                         
-                    pushFollow(FOLLOW_ruleChoicepointTerminal_in_ruleTransitionTerminal14503);
+                    pushFollow(FOLLOW_ruleChoicepointTerminal_in_ruleTransitionTerminal14504);
                     this_ChoicepointTerminal_3=ruleChoicepointTerminal();
 
                     state._fsp--;
@@ -17539,13 +17533,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:7091:2: iv_ruleStateTerminal= ruleStateTerminal EOF
             {
              newCompositeNode(grammarAccess.getStateTerminalRule()); 
-            pushFollow(FOLLOW_ruleStateTerminal_in_entryRuleStateTerminal14538);
+            pushFollow(FOLLOW_ruleStateTerminal_in_entryRuleStateTerminal14539);
             iv_ruleStateTerminal=ruleStateTerminal();
 
             state._fsp--;
 
              current =iv_ruleStateTerminal; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleStateTerminal14548); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleStateTerminal14549); 
 
             }
 
@@ -17586,7 +17580,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	            current = createModelElement(grammarAccess.getStateTerminalRule());
             	        }
                     
-            otherlv_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleStateTerminal14592); 
+            otherlv_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleStateTerminal14593); 
 
             		newLeafNode(otherlv_0, grammarAccess.getStateTerminalAccess().getStateStateCrossReference_0()); 
             	
@@ -17626,13 +17620,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:7125:2: iv_ruleTrPointTerminal= ruleTrPointTerminal EOF
             {
              newCompositeNode(grammarAccess.getTrPointTerminalRule()); 
-            pushFollow(FOLLOW_ruleTrPointTerminal_in_entryRuleTrPointTerminal14627);
+            pushFollow(FOLLOW_ruleTrPointTerminal_in_entryRuleTrPointTerminal14628);
             iv_ruleTrPointTerminal=ruleTrPointTerminal();
 
             state._fsp--;
 
              current =iv_ruleTrPointTerminal; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleTrPointTerminal14637); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleTrPointTerminal14638); 
 
             }
 
@@ -17666,7 +17660,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:7136:1: (otherlv_0= 'my' ( (otherlv_1= RULE_ID ) ) )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:7136:3: otherlv_0= 'my' ( (otherlv_1= RULE_ID ) )
             {
-            otherlv_0=(Token)match(input,100,FOLLOW_100_in_ruleTrPointTerminal14674); 
+            otherlv_0=(Token)match(input,100,FOLLOW_100_in_ruleTrPointTerminal14675); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getTrPointTerminalAccess().getMyKeyword_0());
                 
@@ -17681,7 +17675,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	            current = createModelElement(grammarAccess.getTrPointTerminalRule());
             	        }
                     
-            otherlv_1=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleTrPointTerminal14694); 
+            otherlv_1=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleTrPointTerminal14695); 
 
             		newLeafNode(otherlv_1, grammarAccess.getTrPointTerminalAccess().getTrPointTrPointCrossReference_1_0()); 
             	
@@ -17724,13 +17718,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:7163:2: iv_ruleSubStateTrPointTerminal= ruleSubStateTrPointTerminal EOF
             {
              newCompositeNode(grammarAccess.getSubStateTrPointTerminalRule()); 
-            pushFollow(FOLLOW_ruleSubStateTrPointTerminal_in_entryRuleSubStateTrPointTerminal14730);
+            pushFollow(FOLLOW_ruleSubStateTrPointTerminal_in_entryRuleSubStateTrPointTerminal14731);
             iv_ruleSubStateTrPointTerminal=ruleSubStateTrPointTerminal();
 
             state._fsp--;
 
              current =iv_ruleSubStateTrPointTerminal; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleSubStateTrPointTerminal14740); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleSubStateTrPointTerminal14741); 
 
             }
 
@@ -17776,7 +17770,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	            current = createModelElement(grammarAccess.getSubStateTrPointTerminalRule());
             	        }
                     
-            otherlv_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSubStateTrPointTerminal14785); 
+            otherlv_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSubStateTrPointTerminal14786); 
 
             		newLeafNode(otherlv_0, grammarAccess.getSubStateTrPointTerminalAccess().getTrPointTrPointCrossReference_0_0()); 
             	
@@ -17786,7 +17780,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,24,FOLLOW_24_in_ruleSubStateTrPointTerminal14797); 
+            otherlv_1=(Token)match(input,24,FOLLOW_24_in_ruleSubStateTrPointTerminal14798); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getSubStateTrPointTerminalAccess().getOfKeyword_1());
                 
@@ -17801,7 +17795,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	            current = createModelElement(grammarAccess.getSubStateTrPointTerminalRule());
             	        }
                     
-            otherlv_2=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSubStateTrPointTerminal14817); 
+            otherlv_2=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSubStateTrPointTerminal14818); 
 
             		newLeafNode(otherlv_2, grammarAccess.getSubStateTrPointTerminalAccess().getStateStateCrossReference_2_0()); 
             	
@@ -17844,13 +17838,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:7214:2: iv_ruleChoicepointTerminal= ruleChoicepointTerminal EOF
             {
              newCompositeNode(grammarAccess.getChoicepointTerminalRule()); 
-            pushFollow(FOLLOW_ruleChoicepointTerminal_in_entryRuleChoicepointTerminal14853);
+            pushFollow(FOLLOW_ruleChoicepointTerminal_in_entryRuleChoicepointTerminal14854);
             iv_ruleChoicepointTerminal=ruleChoicepointTerminal();
 
             state._fsp--;
 
              current =iv_ruleChoicepointTerminal; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleChoicepointTerminal14863); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleChoicepointTerminal14864); 
 
             }
 
@@ -17884,7 +17878,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:7225:1: (otherlv_0= 'cp' ( (otherlv_1= RULE_ID ) ) )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:7225:3: otherlv_0= 'cp' ( (otherlv_1= RULE_ID ) )
             {
-            otherlv_0=(Token)match(input,101,FOLLOW_101_in_ruleChoicepointTerminal14900); 
+            otherlv_0=(Token)match(input,101,FOLLOW_101_in_ruleChoicepointTerminal14901); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getChoicepointTerminalAccess().getCpKeyword_0());
                 
@@ -17899,7 +17893,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	            current = createModelElement(grammarAccess.getChoicepointTerminalRule());
             	        }
                     
-            otherlv_1=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleChoicepointTerminal14920); 
+            otherlv_1=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleChoicepointTerminal14921); 
 
             		newLeafNode(otherlv_1, grammarAccess.getChoicepointTerminalAccess().getCpChoicePointCrossReference_1_0()); 
             	
@@ -17942,13 +17936,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:7252:2: iv_ruleTrigger= ruleTrigger EOF
             {
              newCompositeNode(grammarAccess.getTriggerRule()); 
-            pushFollow(FOLLOW_ruleTrigger_in_entryRuleTrigger14956);
+            pushFollow(FOLLOW_ruleTrigger_in_entryRuleTrigger14957);
             iv_ruleTrigger=ruleTrigger();
 
             state._fsp--;
 
              current =iv_ruleTrigger; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleTrigger14966); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleTrigger14967); 
 
             }
 
@@ -17989,7 +17983,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:7263:1: (otherlv_0= '<' ( (lv_msgFromIfPairs_1_0= ruleMessageFromIf ) ) (otherlv_2= '|' ( (lv_msgFromIfPairs_3_0= ruleMessageFromIf ) ) )* ( (lv_guard_4_0= ruleGuard ) )? otherlv_5= '>' )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:7263:3: otherlv_0= '<' ( (lv_msgFromIfPairs_1_0= ruleMessageFromIf ) ) (otherlv_2= '|' ( (lv_msgFromIfPairs_3_0= ruleMessageFromIf ) ) )* ( (lv_guard_4_0= ruleGuard ) )? otherlv_5= '>'
             {
-            otherlv_0=(Token)match(input,102,FOLLOW_102_in_ruleTrigger15003); 
+            otherlv_0=(Token)match(input,102,FOLLOW_102_in_ruleTrigger15004); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getTriggerAccess().getLessThanSignKeyword_0());
                 
@@ -18002,7 +17996,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
              
             	        newCompositeNode(grammarAccess.getTriggerAccess().getMsgFromIfPairsMessageFromIfParserRuleCall_1_0()); 
             	    
-            pushFollow(FOLLOW_ruleMessageFromIf_in_ruleTrigger15024);
+            pushFollow(FOLLOW_ruleMessageFromIf_in_ruleTrigger15025);
             lv_msgFromIfPairs_1_0=ruleMessageFromIf();
 
             state._fsp--;
@@ -18039,7 +18033,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	case 1 :
             	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:7285:4: otherlv_2= '|' ( (lv_msgFromIfPairs_3_0= ruleMessageFromIf ) )
             	    {
-            	    otherlv_2=(Token)match(input,103,FOLLOW_103_in_ruleTrigger15037); 
+            	    otherlv_2=(Token)match(input,103,FOLLOW_103_in_ruleTrigger15038); 
 
             	        	newLeafNode(otherlv_2, grammarAccess.getTriggerAccess().getVerticalLineKeyword_2_0());
             	        
@@ -18052,7 +18046,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getTriggerAccess().getMsgFromIfPairsMessageFromIfParserRuleCall_2_1_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleMessageFromIf_in_ruleTrigger15058);
+            	    pushFollow(FOLLOW_ruleMessageFromIf_in_ruleTrigger15059);
             	    lv_msgFromIfPairs_3_0=ruleMessageFromIf();
 
             	    state._fsp--;
@@ -18100,7 +18094,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getTriggerAccess().getGuardGuardParserRuleCall_3_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleGuard_in_ruleTrigger15081);
+                    pushFollow(FOLLOW_ruleGuard_in_ruleTrigger15082);
                     lv_guard_4_0=ruleGuard();
 
                     state._fsp--;
@@ -18125,7 +18119,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_5=(Token)match(input,104,FOLLOW_104_in_ruleTrigger15094); 
+            otherlv_5=(Token)match(input,104,FOLLOW_104_in_ruleTrigger15095); 
 
                 	newLeafNode(otherlv_5, grammarAccess.getTriggerAccess().getGreaterThanSignKeyword_4());
                 
@@ -18162,13 +18156,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:7339:2: iv_ruleMessageFromIf= ruleMessageFromIf EOF
             {
              newCompositeNode(grammarAccess.getMessageFromIfRule()); 
-            pushFollow(FOLLOW_ruleMessageFromIf_in_entryRuleMessageFromIf15130);
+            pushFollow(FOLLOW_ruleMessageFromIf_in_entryRuleMessageFromIf15131);
             iv_ruleMessageFromIf=ruleMessageFromIf();
 
             state._fsp--;
 
              current =iv_ruleMessageFromIf; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleMessageFromIf15140); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleMessageFromIf15141); 
 
             }
 
@@ -18214,7 +18208,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	            current = createModelElement(grammarAccess.getMessageFromIfRule());
             	        }
                     
-            otherlv_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleMessageFromIf15185); 
+            otherlv_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleMessageFromIf15186); 
 
             		newLeafNode(otherlv_0, grammarAccess.getMessageFromIfAccess().getMessageEObjectCrossReference_0_0()); 
             	
@@ -18224,7 +18218,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,16,FOLLOW_16_in_ruleMessageFromIf15197); 
+            otherlv_1=(Token)match(input,16,FOLLOW_16_in_ruleMessageFromIf15198); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getMessageFromIfAccess().getColonKeyword_1());
                 
@@ -18239,7 +18233,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	            current = createModelElement(grammarAccess.getMessageFromIfRule());
             	        }
                     
-            otherlv_2=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleMessageFromIf15217); 
+            otherlv_2=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleMessageFromIf15218); 
 
             		newLeafNode(otherlv_2, grammarAccess.getMessageFromIfAccess().getFromAbstractInterfaceItemCrossReference_2_0()); 
             	
@@ -18282,13 +18276,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:7390:2: iv_ruleGuard= ruleGuard EOF
             {
              newCompositeNode(grammarAccess.getGuardRule()); 
-            pushFollow(FOLLOW_ruleGuard_in_entryRuleGuard15253);
+            pushFollow(FOLLOW_ruleGuard_in_entryRuleGuard15254);
             iv_ruleGuard=ruleGuard();
 
             state._fsp--;
 
              current =iv_ruleGuard; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleGuard15263); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleGuard15264); 
 
             }
 
@@ -18323,7 +18317,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:7401:1: (otherlv_0= 'guard' ( (lv_guard_1_0= ruleDetailCode ) ) )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:7401:3: otherlv_0= 'guard' ( (lv_guard_1_0= ruleDetailCode ) )
             {
-            otherlv_0=(Token)match(input,97,FOLLOW_97_in_ruleGuard15300); 
+            otherlv_0=(Token)match(input,97,FOLLOW_97_in_ruleGuard15301); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getGuardAccess().getGuardKeyword_0());
                 
@@ -18336,7 +18330,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
              
             	        newCompositeNode(grammarAccess.getGuardAccess().getGuardDetailCodeParserRuleCall_1_0()); 
             	    
-            pushFollow(FOLLOW_ruleDetailCode_in_ruleGuard15321);
+            pushFollow(FOLLOW_ruleDetailCode_in_ruleGuard15322);
             lv_guard_1_0=ruleDetailCode();
 
             state._fsp--;
@@ -18391,13 +18385,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:7433:2: iv_ruleProtocolSemantics= ruleProtocolSemantics EOF
             {
              newCompositeNode(grammarAccess.getProtocolSemanticsRule()); 
-            pushFollow(FOLLOW_ruleProtocolSemantics_in_entryRuleProtocolSemantics15357);
+            pushFollow(FOLLOW_ruleProtocolSemantics_in_entryRuleProtocolSemantics15358);
             iv_ruleProtocolSemantics=ruleProtocolSemantics();
 
             state._fsp--;
 
              current =iv_ruleProtocolSemantics; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleProtocolSemantics15367); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleProtocolSemantics15368); 
 
             }
 
@@ -18445,11 +18439,11 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,105,FOLLOW_105_in_ruleProtocolSemantics15413); 
+            otherlv_1=(Token)match(input,105,FOLLOW_105_in_ruleProtocolSemantics15414); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getProtocolSemanticsAccess().getSemanticsKeyword_1());
                 
-            otherlv_2=(Token)match(input,14,FOLLOW_14_in_ruleProtocolSemantics15425); 
+            otherlv_2=(Token)match(input,14,FOLLOW_14_in_ruleProtocolSemantics15426); 
 
                 	newLeafNode(otherlv_2, grammarAccess.getProtocolSemanticsAccess().getLeftCurlyBracketKeyword_2());
                 
@@ -18474,7 +18468,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getProtocolSemanticsAccess().getRulesSemanticsRuleParserRuleCall_3_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleSemanticsRule_in_ruleProtocolSemantics15446);
+            	    pushFollow(FOLLOW_ruleSemanticsRule_in_ruleProtocolSemantics15447);
             	    lv_rules_3_0=ruleSemanticsRule();
 
             	    state._fsp--;
@@ -18502,7 +18496,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            otherlv_4=(Token)match(input,15,FOLLOW_15_in_ruleProtocolSemantics15459); 
+            otherlv_4=(Token)match(input,15,FOLLOW_15_in_ruleProtocolSemantics15460); 
 
                 	newLeafNode(otherlv_4, grammarAccess.getProtocolSemanticsAccess().getRightCurlyBracketKeyword_4());
                 
@@ -18539,13 +18533,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:7490:2: iv_ruleSemanticsRule= ruleSemanticsRule EOF
             {
              newCompositeNode(grammarAccess.getSemanticsRuleRule()); 
-            pushFollow(FOLLOW_ruleSemanticsRule_in_entryRuleSemanticsRule15495);
+            pushFollow(FOLLOW_ruleSemanticsRule_in_entryRuleSemanticsRule15496);
             iv_ruleSemanticsRule=ruleSemanticsRule();
 
             state._fsp--;
 
              current =iv_ruleSemanticsRule; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleSemanticsRule15505); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleSemanticsRule15506); 
 
             }
 
@@ -18601,7 +18595,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getSemanticsRuleAccess().getInSemanticsRuleParserRuleCall_0()); 
                         
-                    pushFollow(FOLLOW_ruleInSemanticsRule_in_ruleSemanticsRule15552);
+                    pushFollow(FOLLOW_ruleInSemanticsRule_in_ruleSemanticsRule15553);
                     this_InSemanticsRule_0=ruleInSemanticsRule();
 
                     state._fsp--;
@@ -18619,7 +18613,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getSemanticsRuleAccess().getOutSemanticsRuleParserRuleCall_1()); 
                         
-                    pushFollow(FOLLOW_ruleOutSemanticsRule_in_ruleSemanticsRule15579);
+                    pushFollow(FOLLOW_ruleOutSemanticsRule_in_ruleSemanticsRule15580);
                     this_OutSemanticsRule_1=ruleOutSemanticsRule();
 
                     state._fsp--;
@@ -18664,13 +18658,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:7530:2: iv_ruleInSemanticsRule= ruleInSemanticsRule EOF
             {
              newCompositeNode(grammarAccess.getInSemanticsRuleRule()); 
-            pushFollow(FOLLOW_ruleInSemanticsRule_in_entryRuleInSemanticsRule15614);
+            pushFollow(FOLLOW_ruleInSemanticsRule_in_entryRuleInSemanticsRule15615);
             iv_ruleInSemanticsRule=ruleInSemanticsRule();
 
             state._fsp--;
 
              current =iv_ruleInSemanticsRule; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleInSemanticsRule15624); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleInSemanticsRule15625); 
 
             }
 
@@ -18715,11 +18709,11 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:7541:1: (otherlv_0= 'in' otherlv_1= ':' ( (otherlv_2= RULE_ID ) ) (otherlv_3= '->' ( ( (lv_followUps_4_0= ruleSemanticsRule ) ) | (otherlv_5= '(' ( (lv_followUps_6_0= ruleSemanticsRule ) ) (otherlv_7= ',' ( (lv_followUps_8_0= ruleSemanticsRule ) ) )+ otherlv_9= ')' ) ) )? )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:7541:3: otherlv_0= 'in' otherlv_1= ':' ( (otherlv_2= RULE_ID ) ) (otherlv_3= '->' ( ( (lv_followUps_4_0= ruleSemanticsRule ) ) | (otherlv_5= '(' ( (lv_followUps_6_0= ruleSemanticsRule ) ) (otherlv_7= ',' ( (lv_followUps_8_0= ruleSemanticsRule ) ) )+ otherlv_9= ')' ) ) )?
             {
-            otherlv_0=(Token)match(input,106,FOLLOW_106_in_ruleInSemanticsRule15661); 
+            otherlv_0=(Token)match(input,106,FOLLOW_106_in_ruleInSemanticsRule15662); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getInSemanticsRuleAccess().getInKeyword_0());
                 
-            otherlv_1=(Token)match(input,16,FOLLOW_16_in_ruleInSemanticsRule15673); 
+            otherlv_1=(Token)match(input,16,FOLLOW_16_in_ruleInSemanticsRule15674); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getInSemanticsRuleAccess().getColonKeyword_1());
                 
@@ -18734,7 +18728,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	            current = createModelElement(grammarAccess.getInSemanticsRuleRule());
             	        }
                     
-            otherlv_2=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleInSemanticsRule15693); 
+            otherlv_2=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleInSemanticsRule15694); 
 
             		newLeafNode(otherlv_2, grammarAccess.getInSemanticsRuleAccess().getMsgEObjectCrossReference_2_0()); 
             	
@@ -18755,7 +18749,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:7562:4: otherlv_3= '->' ( ( (lv_followUps_4_0= ruleSemanticsRule ) ) | (otherlv_5= '(' ( (lv_followUps_6_0= ruleSemanticsRule ) ) (otherlv_7= ',' ( (lv_followUps_8_0= ruleSemanticsRule ) ) )+ otherlv_9= ')' ) )
                     {
-                    otherlv_3=(Token)match(input,19,FOLLOW_19_in_ruleInSemanticsRule15706); 
+                    otherlv_3=(Token)match(input,19,FOLLOW_19_in_ruleInSemanticsRule15707); 
 
                         	newLeafNode(otherlv_3, grammarAccess.getInSemanticsRuleAccess().getHyphenMinusGreaterThanSignKeyword_3_0());
                         
@@ -18788,7 +18782,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                              
                             	        newCompositeNode(grammarAccess.getInSemanticsRuleAccess().getFollowUpsSemanticsRuleParserRuleCall_3_1_0_0()); 
                             	    
-                            pushFollow(FOLLOW_ruleSemanticsRule_in_ruleInSemanticsRule15728);
+                            pushFollow(FOLLOW_ruleSemanticsRule_in_ruleInSemanticsRule15729);
                             lv_followUps_4_0=ruleSemanticsRule();
 
                             state._fsp--;
@@ -18819,7 +18813,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:7585:6: (otherlv_5= '(' ( (lv_followUps_6_0= ruleSemanticsRule ) ) (otherlv_7= ',' ( (lv_followUps_8_0= ruleSemanticsRule ) ) )+ otherlv_9= ')' )
                             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:7585:8: otherlv_5= '(' ( (lv_followUps_6_0= ruleSemanticsRule ) ) (otherlv_7= ',' ( (lv_followUps_8_0= ruleSemanticsRule ) ) )+ otherlv_9= ')'
                             {
-                            otherlv_5=(Token)match(input,20,FOLLOW_20_in_ruleInSemanticsRule15747); 
+                            otherlv_5=(Token)match(input,20,FOLLOW_20_in_ruleInSemanticsRule15748); 
 
                                 	newLeafNode(otherlv_5, grammarAccess.getInSemanticsRuleAccess().getLeftParenthesisKeyword_3_1_1_0());
                                 
@@ -18832,7 +18826,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                              
                             	        newCompositeNode(grammarAccess.getInSemanticsRuleAccess().getFollowUpsSemanticsRuleParserRuleCall_3_1_1_1_0()); 
                             	    
-                            pushFollow(FOLLOW_ruleSemanticsRule_in_ruleInSemanticsRule15768);
+                            pushFollow(FOLLOW_ruleSemanticsRule_in_ruleInSemanticsRule15769);
                             lv_followUps_6_0=ruleSemanticsRule();
 
                             state._fsp--;
@@ -18870,7 +18864,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                             	case 1 :
                             	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:7607:4: otherlv_7= ',' ( (lv_followUps_8_0= ruleSemanticsRule ) )
                             	    {
-                            	    otherlv_7=(Token)match(input,25,FOLLOW_25_in_ruleInSemanticsRule15781); 
+                            	    otherlv_7=(Token)match(input,25,FOLLOW_25_in_ruleInSemanticsRule15782); 
 
                             	        	newLeafNode(otherlv_7, grammarAccess.getInSemanticsRuleAccess().getCommaKeyword_3_1_1_2_0());
                             	        
@@ -18883,7 +18877,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                             	     
                             	    	        newCompositeNode(grammarAccess.getInSemanticsRuleAccess().getFollowUpsSemanticsRuleParserRuleCall_3_1_1_2_1_0()); 
                             	    	    
-                            	    pushFollow(FOLLOW_ruleSemanticsRule_in_ruleInSemanticsRule15802);
+                            	    pushFollow(FOLLOW_ruleSemanticsRule_in_ruleInSemanticsRule15803);
                             	    lv_followUps_8_0=ruleSemanticsRule();
 
                             	    state._fsp--;
@@ -18918,7 +18912,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                                 cnt153++;
                             } while (true);
 
-                            otherlv_9=(Token)match(input,21,FOLLOW_21_in_ruleInSemanticsRule15816); 
+                            otherlv_9=(Token)match(input,21,FOLLOW_21_in_ruleInSemanticsRule15817); 
 
                                 	newLeafNode(otherlv_9, grammarAccess.getInSemanticsRuleAccess().getRightParenthesisKeyword_3_1_1_3());
                                 
@@ -18970,13 +18964,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:7643:2: iv_ruleOutSemanticsRule= ruleOutSemanticsRule EOF
             {
              newCompositeNode(grammarAccess.getOutSemanticsRuleRule()); 
-            pushFollow(FOLLOW_ruleOutSemanticsRule_in_entryRuleOutSemanticsRule15856);
+            pushFollow(FOLLOW_ruleOutSemanticsRule_in_entryRuleOutSemanticsRule15857);
             iv_ruleOutSemanticsRule=ruleOutSemanticsRule();
 
             state._fsp--;
 
              current =iv_ruleOutSemanticsRule; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleOutSemanticsRule15866); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleOutSemanticsRule15867); 
 
             }
 
@@ -19021,11 +19015,11 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:7654:1: (otherlv_0= 'out' otherlv_1= ':' ( (otherlv_2= RULE_ID ) ) (otherlv_3= '->' ( ( (lv_followUps_4_0= ruleSemanticsRule ) ) | (otherlv_5= '(' ( (lv_followUps_6_0= ruleSemanticsRule ) ) (otherlv_7= ',' ( (lv_followUps_8_0= ruleSemanticsRule ) ) )+ otherlv_9= ')' ) ) )? )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:7654:3: otherlv_0= 'out' otherlv_1= ':' ( (otherlv_2= RULE_ID ) ) (otherlv_3= '->' ( ( (lv_followUps_4_0= ruleSemanticsRule ) ) | (otherlv_5= '(' ( (lv_followUps_6_0= ruleSemanticsRule ) ) (otherlv_7= ',' ( (lv_followUps_8_0= ruleSemanticsRule ) ) )+ otherlv_9= ')' ) ) )?
             {
-            otherlv_0=(Token)match(input,107,FOLLOW_107_in_ruleOutSemanticsRule15903); 
+            otherlv_0=(Token)match(input,107,FOLLOW_107_in_ruleOutSemanticsRule15904); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getOutSemanticsRuleAccess().getOutKeyword_0());
                 
-            otherlv_1=(Token)match(input,16,FOLLOW_16_in_ruleOutSemanticsRule15915); 
+            otherlv_1=(Token)match(input,16,FOLLOW_16_in_ruleOutSemanticsRule15916); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getOutSemanticsRuleAccess().getColonKeyword_1());
                 
@@ -19040,7 +19034,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	            current = createModelElement(grammarAccess.getOutSemanticsRuleRule());
             	        }
                     
-            otherlv_2=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleOutSemanticsRule15935); 
+            otherlv_2=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleOutSemanticsRule15936); 
 
             		newLeafNode(otherlv_2, grammarAccess.getOutSemanticsRuleAccess().getMsgEObjectCrossReference_2_0()); 
             	
@@ -19061,7 +19055,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:7675:4: otherlv_3= '->' ( ( (lv_followUps_4_0= ruleSemanticsRule ) ) | (otherlv_5= '(' ( (lv_followUps_6_0= ruleSemanticsRule ) ) (otherlv_7= ',' ( (lv_followUps_8_0= ruleSemanticsRule ) ) )+ otherlv_9= ')' ) )
                     {
-                    otherlv_3=(Token)match(input,19,FOLLOW_19_in_ruleOutSemanticsRule15948); 
+                    otherlv_3=(Token)match(input,19,FOLLOW_19_in_ruleOutSemanticsRule15949); 
 
                         	newLeafNode(otherlv_3, grammarAccess.getOutSemanticsRuleAccess().getHyphenMinusGreaterThanSignKeyword_3_0());
                         
@@ -19094,7 +19088,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                              
                             	        newCompositeNode(grammarAccess.getOutSemanticsRuleAccess().getFollowUpsSemanticsRuleParserRuleCall_3_1_0_0()); 
                             	    
-                            pushFollow(FOLLOW_ruleSemanticsRule_in_ruleOutSemanticsRule15970);
+                            pushFollow(FOLLOW_ruleSemanticsRule_in_ruleOutSemanticsRule15971);
                             lv_followUps_4_0=ruleSemanticsRule();
 
                             state._fsp--;
@@ -19125,7 +19119,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:7698:6: (otherlv_5= '(' ( (lv_followUps_6_0= ruleSemanticsRule ) ) (otherlv_7= ',' ( (lv_followUps_8_0= ruleSemanticsRule ) ) )+ otherlv_9= ')' )
                             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:7698:8: otherlv_5= '(' ( (lv_followUps_6_0= ruleSemanticsRule ) ) (otherlv_7= ',' ( (lv_followUps_8_0= ruleSemanticsRule ) ) )+ otherlv_9= ')'
                             {
-                            otherlv_5=(Token)match(input,20,FOLLOW_20_in_ruleOutSemanticsRule15989); 
+                            otherlv_5=(Token)match(input,20,FOLLOW_20_in_ruleOutSemanticsRule15990); 
 
                                 	newLeafNode(otherlv_5, grammarAccess.getOutSemanticsRuleAccess().getLeftParenthesisKeyword_3_1_1_0());
                                 
@@ -19138,7 +19132,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                              
                             	        newCompositeNode(grammarAccess.getOutSemanticsRuleAccess().getFollowUpsSemanticsRuleParserRuleCall_3_1_1_1_0()); 
                             	    
-                            pushFollow(FOLLOW_ruleSemanticsRule_in_ruleOutSemanticsRule16010);
+                            pushFollow(FOLLOW_ruleSemanticsRule_in_ruleOutSemanticsRule16011);
                             lv_followUps_6_0=ruleSemanticsRule();
 
                             state._fsp--;
@@ -19176,7 +19170,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                             	case 1 :
                             	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:7720:4: otherlv_7= ',' ( (lv_followUps_8_0= ruleSemanticsRule ) )
                             	    {
-                            	    otherlv_7=(Token)match(input,25,FOLLOW_25_in_ruleOutSemanticsRule16023); 
+                            	    otherlv_7=(Token)match(input,25,FOLLOW_25_in_ruleOutSemanticsRule16024); 
 
                             	        	newLeafNode(otherlv_7, grammarAccess.getOutSemanticsRuleAccess().getCommaKeyword_3_1_1_2_0());
                             	        
@@ -19189,7 +19183,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                             	     
                             	    	        newCompositeNode(grammarAccess.getOutSemanticsRuleAccess().getFollowUpsSemanticsRuleParserRuleCall_3_1_1_2_1_0()); 
                             	    	    
-                            	    pushFollow(FOLLOW_ruleSemanticsRule_in_ruleOutSemanticsRule16044);
+                            	    pushFollow(FOLLOW_ruleSemanticsRule_in_ruleOutSemanticsRule16045);
                             	    lv_followUps_8_0=ruleSemanticsRule();
 
                             	    state._fsp--;
@@ -19224,7 +19218,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                                 cnt156++;
                             } while (true);
 
-                            otherlv_9=(Token)match(input,21,FOLLOW_21_in_ruleOutSemanticsRule16058); 
+                            otherlv_9=(Token)match(input,21,FOLLOW_21_in_ruleOutSemanticsRule16059); 
 
                                 	newLeafNode(otherlv_9, grammarAccess.getOutSemanticsRuleAccess().getRightParenthesisKeyword_3_1_1_3());
                                 
@@ -19276,13 +19270,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:7756:2: iv_ruleAnnotation= ruleAnnotation EOF
             {
              newCompositeNode(grammarAccess.getAnnotationRule()); 
-            pushFollow(FOLLOW_ruleAnnotation_in_entryRuleAnnotation16098);
+            pushFollow(FOLLOW_ruleAnnotation_in_entryRuleAnnotation16099);
             iv_ruleAnnotation=ruleAnnotation();
 
             state._fsp--;
 
              current =iv_ruleAnnotation; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleAnnotation16108); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleAnnotation16109); 
 
             }
 
@@ -19322,7 +19316,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:7767:1: (otherlv_0= '@' ( ( ruleFQN ) ) (otherlv_2= '(' ( (lv_attributes_3_0= ruleKeyValue ) ) (otherlv_4= ',' ( (lv_attributes_5_0= ruleKeyValue ) ) )* otherlv_6= ')' )? )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:7767:3: otherlv_0= '@' ( ( ruleFQN ) ) (otherlv_2= '(' ( (lv_attributes_3_0= ruleKeyValue ) ) (otherlv_4= ',' ( (lv_attributes_5_0= ruleKeyValue ) ) )* otherlv_6= ')' )?
             {
-            otherlv_0=(Token)match(input,108,FOLLOW_108_in_ruleAnnotation16145); 
+            otherlv_0=(Token)match(input,108,FOLLOW_108_in_ruleAnnotation16146); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getAnnotationAccess().getCommercialAtKeyword_0());
                 
@@ -19340,7 +19334,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
              
             	        newCompositeNode(grammarAccess.getAnnotationAccess().getTypeAnnotationTypeCrossReference_1_0()); 
             	    
-            pushFollow(FOLLOW_ruleFQN_in_ruleAnnotation16168);
+            pushFollow(FOLLOW_ruleFQN_in_ruleAnnotation16169);
             ruleFQN();
 
             state._fsp--;
@@ -19365,7 +19359,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:7786:4: otherlv_2= '(' ( (lv_attributes_3_0= ruleKeyValue ) ) (otherlv_4= ',' ( (lv_attributes_5_0= ruleKeyValue ) ) )* otherlv_6= ')'
                     {
-                    otherlv_2=(Token)match(input,20,FOLLOW_20_in_ruleAnnotation16181); 
+                    otherlv_2=(Token)match(input,20,FOLLOW_20_in_ruleAnnotation16182); 
 
                         	newLeafNode(otherlv_2, grammarAccess.getAnnotationAccess().getLeftParenthesisKeyword_2_0());
                         
@@ -19378,7 +19372,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getAnnotationAccess().getAttributesKeyValueParserRuleCall_2_1_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleKeyValue_in_ruleAnnotation16202);
+                    pushFollow(FOLLOW_ruleKeyValue_in_ruleAnnotation16203);
                     lv_attributes_3_0=ruleKeyValue();
 
                     state._fsp--;
@@ -19415,7 +19409,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	case 1 :
                     	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:7808:4: otherlv_4= ',' ( (lv_attributes_5_0= ruleKeyValue ) )
                     	    {
-                    	    otherlv_4=(Token)match(input,25,FOLLOW_25_in_ruleAnnotation16215); 
+                    	    otherlv_4=(Token)match(input,25,FOLLOW_25_in_ruleAnnotation16216); 
 
                     	        	newLeafNode(otherlv_4, grammarAccess.getAnnotationAccess().getCommaKeyword_2_2_0());
                     	        
@@ -19428,7 +19422,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	     
                     	    	        newCompositeNode(grammarAccess.getAnnotationAccess().getAttributesKeyValueParserRuleCall_2_2_1_0()); 
                     	    	    
-                    	    pushFollow(FOLLOW_ruleKeyValue_in_ruleAnnotation16236);
+                    	    pushFollow(FOLLOW_ruleKeyValue_in_ruleAnnotation16237);
                     	    lv_attributes_5_0=ruleKeyValue();
 
                     	    state._fsp--;
@@ -19459,7 +19453,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                         }
                     } while (true);
 
-                    otherlv_6=(Token)match(input,21,FOLLOW_21_in_ruleAnnotation16250); 
+                    otherlv_6=(Token)match(input,21,FOLLOW_21_in_ruleAnnotation16251); 
 
                         	newLeafNode(otherlv_6, grammarAccess.getAnnotationAccess().getRightParenthesisKeyword_2_3());
                         
@@ -19502,13 +19496,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:7844:2: iv_ruleKeyValue= ruleKeyValue EOF
             {
              newCompositeNode(grammarAccess.getKeyValueRule()); 
-            pushFollow(FOLLOW_ruleKeyValue_in_entryRuleKeyValue16288);
+            pushFollow(FOLLOW_ruleKeyValue_in_entryRuleKeyValue16289);
             iv_ruleKeyValue=ruleKeyValue();
 
             state._fsp--;
 
              current =iv_ruleKeyValue; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleKeyValue16298); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleKeyValue16299); 
 
             }
 
@@ -19550,7 +19544,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:7856:1: (lv_key_0_0= RULE_ID )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:7857:3: lv_key_0_0= RULE_ID
             {
-            lv_key_0_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleKeyValue16340); 
+            lv_key_0_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleKeyValue16341); 
 
             			newLeafNode(lv_key_0_0, grammarAccess.getKeyValueAccess().getKeyIDTerminalRuleCall_0_0()); 
             		
@@ -19570,7 +19564,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,26,FOLLOW_26_in_ruleKeyValue16357); 
+            otherlv_1=(Token)match(input,26,FOLLOW_26_in_ruleKeyValue16358); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getKeyValueAccess().getEqualsSignKeyword_1());
                 
@@ -19583,7 +19577,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
              
             	        newCompositeNode(grammarAccess.getKeyValueAccess().getValueLiteralParserRuleCall_2_0()); 
             	    
-            pushFollow(FOLLOW_ruleLiteral_in_ruleKeyValue16378);
+            pushFollow(FOLLOW_ruleLiteral_in_ruleKeyValue16379);
             lv_value_2_0=ruleLiteral();
 
             state._fsp--;
@@ -19638,13 +19632,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:7905:2: iv_ruleAnnotationType= ruleAnnotationType EOF
             {
              newCompositeNode(grammarAccess.getAnnotationTypeRule()); 
-            pushFollow(FOLLOW_ruleAnnotationType_in_entryRuleAnnotationType16414);
+            pushFollow(FOLLOW_ruleAnnotationType_in_entryRuleAnnotationType16415);
             iv_ruleAnnotationType=ruleAnnotationType();
 
             state._fsp--;
 
              current =iv_ruleAnnotationType; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleAnnotationType16424); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleAnnotationType16425); 
 
             }
 
@@ -19695,7 +19689,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:7916:1: (otherlv_0= 'AnnotationType' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? otherlv_3= '{' otherlv_4= 'target' otherlv_5= '=' ( ( (lv_targets_6_0= ruleAnnotationTargetType ) ) | (otherlv_7= '{' ( (lv_targets_8_0= ruleAnnotationTargetType ) ) (otherlv_9= ',' ( (lv_targets_10_0= ruleAnnotationTargetType ) ) )* otherlv_11= '}' ) ) ( (lv_attributes_12_0= ruleAnnotationAttribute ) )* otherlv_13= '}' )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:7916:3: otherlv_0= 'AnnotationType' ( (lv_name_1_0= RULE_ID ) ) ( (lv_docu_2_0= ruleDocumentation ) )? otherlv_3= '{' otherlv_4= 'target' otherlv_5= '=' ( ( (lv_targets_6_0= ruleAnnotationTargetType ) ) | (otherlv_7= '{' ( (lv_targets_8_0= ruleAnnotationTargetType ) ) (otherlv_9= ',' ( (lv_targets_10_0= ruleAnnotationTargetType ) ) )* otherlv_11= '}' ) ) ( (lv_attributes_12_0= ruleAnnotationAttribute ) )* otherlv_13= '}'
             {
-            otherlv_0=(Token)match(input,109,FOLLOW_109_in_ruleAnnotationType16461); 
+            otherlv_0=(Token)match(input,109,FOLLOW_109_in_ruleAnnotationType16462); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getAnnotationTypeAccess().getAnnotationTypeKeyword_0());
                 
@@ -19705,7 +19699,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:7921:1: (lv_name_1_0= RULE_ID )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:7922:3: lv_name_1_0= RULE_ID
             {
-            lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleAnnotationType16478); 
+            lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleAnnotationType16479); 
 
             			newLeafNode(lv_name_1_0, grammarAccess.getAnnotationTypeAccess().getNameIDTerminalRuleCall_1_0()); 
             		
@@ -19742,7 +19736,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getAnnotationTypeAccess().getDocuDocumentationParserRuleCall_2_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleDocumentation_in_ruleAnnotationType16504);
+                    pushFollow(FOLLOW_ruleDocumentation_in_ruleAnnotationType16505);
                     lv_docu_2_0=ruleDocumentation();
 
                     state._fsp--;
@@ -19767,15 +19761,15 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_3=(Token)match(input,14,FOLLOW_14_in_ruleAnnotationType16517); 
+            otherlv_3=(Token)match(input,14,FOLLOW_14_in_ruleAnnotationType16518); 
 
                 	newLeafNode(otherlv_3, grammarAccess.getAnnotationTypeAccess().getLeftCurlyBracketKeyword_3());
                 
-            otherlv_4=(Token)match(input,110,FOLLOW_110_in_ruleAnnotationType16529); 
+            otherlv_4=(Token)match(input,110,FOLLOW_110_in_ruleAnnotationType16530); 
 
                 	newLeafNode(otherlv_4, grammarAccess.getAnnotationTypeAccess().getTargetKeyword_4());
                 
-            otherlv_5=(Token)match(input,26,FOLLOW_26_in_ruleAnnotationType16541); 
+            otherlv_5=(Token)match(input,26,FOLLOW_26_in_ruleAnnotationType16542); 
 
                 	newLeafNode(otherlv_5, grammarAccess.getAnnotationTypeAccess().getEqualsSignKeyword_5());
                 
@@ -19808,7 +19802,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getAnnotationTypeAccess().getTargetsAnnotationTargetTypeParserRuleCall_6_0_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleAnnotationTargetType_in_ruleAnnotationType16563);
+                    pushFollow(FOLLOW_ruleAnnotationTargetType_in_ruleAnnotationType16564);
                     lv_targets_6_0=ruleAnnotationTargetType();
 
                     state._fsp--;
@@ -19839,7 +19833,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:7987:6: (otherlv_7= '{' ( (lv_targets_8_0= ruleAnnotationTargetType ) ) (otherlv_9= ',' ( (lv_targets_10_0= ruleAnnotationTargetType ) ) )* otherlv_11= '}' )
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:7987:8: otherlv_7= '{' ( (lv_targets_8_0= ruleAnnotationTargetType ) ) (otherlv_9= ',' ( (lv_targets_10_0= ruleAnnotationTargetType ) ) )* otherlv_11= '}'
                     {
-                    otherlv_7=(Token)match(input,14,FOLLOW_14_in_ruleAnnotationType16582); 
+                    otherlv_7=(Token)match(input,14,FOLLOW_14_in_ruleAnnotationType16583); 
 
                         	newLeafNode(otherlv_7, grammarAccess.getAnnotationTypeAccess().getLeftCurlyBracketKeyword_6_1_0());
                         
@@ -19852,7 +19846,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getAnnotationTypeAccess().getTargetsAnnotationTargetTypeParserRuleCall_6_1_1_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleAnnotationTargetType_in_ruleAnnotationType16603);
+                    pushFollow(FOLLOW_ruleAnnotationTargetType_in_ruleAnnotationType16604);
                     lv_targets_8_0=ruleAnnotationTargetType();
 
                     state._fsp--;
@@ -19889,7 +19883,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	case 1 :
                     	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:8009:4: otherlv_9= ',' ( (lv_targets_10_0= ruleAnnotationTargetType ) )
                     	    {
-                    	    otherlv_9=(Token)match(input,25,FOLLOW_25_in_ruleAnnotationType16616); 
+                    	    otherlv_9=(Token)match(input,25,FOLLOW_25_in_ruleAnnotationType16617); 
 
                     	        	newLeafNode(otherlv_9, grammarAccess.getAnnotationTypeAccess().getCommaKeyword_6_1_2_0());
                     	        
@@ -19902,7 +19896,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	     
                     	    	        newCompositeNode(grammarAccess.getAnnotationTypeAccess().getTargetsAnnotationTargetTypeParserRuleCall_6_1_2_1_0()); 
                     	    	    
-                    	    pushFollow(FOLLOW_ruleAnnotationTargetType_in_ruleAnnotationType16637);
+                    	    pushFollow(FOLLOW_ruleAnnotationTargetType_in_ruleAnnotationType16638);
                     	    lv_targets_10_0=ruleAnnotationTargetType();
 
                     	    state._fsp--;
@@ -19933,7 +19927,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                         }
                     } while (true);
 
-                    otherlv_11=(Token)match(input,15,FOLLOW_15_in_ruleAnnotationType16651); 
+                    otherlv_11=(Token)match(input,15,FOLLOW_15_in_ruleAnnotationType16652); 
 
                         	newLeafNode(otherlv_11, grammarAccess.getAnnotationTypeAccess().getRightCurlyBracketKeyword_6_1_3());
                         
@@ -19967,7 +19961,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getAnnotationTypeAccess().getAttributesAnnotationAttributeParserRuleCall_7_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleAnnotationAttribute_in_ruleAnnotationType16674);
+            	    pushFollow(FOLLOW_ruleAnnotationAttribute_in_ruleAnnotationType16675);
             	    lv_attributes_12_0=ruleAnnotationAttribute();
 
             	    state._fsp--;
@@ -19995,7 +19989,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            otherlv_13=(Token)match(input,15,FOLLOW_15_in_ruleAnnotationType16687); 
+            otherlv_13=(Token)match(input,15,FOLLOW_15_in_ruleAnnotationType16688); 
 
                 	newLeafNode(otherlv_13, grammarAccess.getAnnotationTypeAccess().getRightCurlyBracketKeyword_8());
                 
@@ -20032,13 +20026,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:8067:2: iv_ruleAnnotationAttribute= ruleAnnotationAttribute EOF
             {
              newCompositeNode(grammarAccess.getAnnotationAttributeRule()); 
-            pushFollow(FOLLOW_ruleAnnotationAttribute_in_entryRuleAnnotationAttribute16723);
+            pushFollow(FOLLOW_ruleAnnotationAttribute_in_entryRuleAnnotationAttribute16724);
             iv_ruleAnnotationAttribute=ruleAnnotationAttribute();
 
             state._fsp--;
 
              current =iv_ruleAnnotationAttribute; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleAnnotationAttribute16733); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleAnnotationAttribute16734); 
 
             }
 
@@ -20180,7 +20174,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getAnnotationAttributeAccess().getSimpleAnnotationAttributeParserRuleCall_0()); 
                         
-                    pushFollow(FOLLOW_ruleSimpleAnnotationAttribute_in_ruleAnnotationAttribute16780);
+                    pushFollow(FOLLOW_ruleSimpleAnnotationAttribute_in_ruleAnnotationAttribute16781);
                     this_SimpleAnnotationAttribute_0=ruleSimpleAnnotationAttribute();
 
                     state._fsp--;
@@ -20198,7 +20192,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getAnnotationAttributeAccess().getEnumAnnotationAttributeParserRuleCall_1()); 
                         
-                    pushFollow(FOLLOW_ruleEnumAnnotationAttribute_in_ruleAnnotationAttribute16807);
+                    pushFollow(FOLLOW_ruleEnumAnnotationAttribute_in_ruleAnnotationAttribute16808);
                     this_EnumAnnotationAttribute_1=ruleEnumAnnotationAttribute();
 
                     state._fsp--;
@@ -20243,13 +20237,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:8107:2: iv_ruleSimpleAnnotationAttribute= ruleSimpleAnnotationAttribute EOF
             {
              newCompositeNode(grammarAccess.getSimpleAnnotationAttributeRule()); 
-            pushFollow(FOLLOW_ruleSimpleAnnotationAttribute_in_entryRuleSimpleAnnotationAttribute16842);
+            pushFollow(FOLLOW_ruleSimpleAnnotationAttribute_in_entryRuleSimpleAnnotationAttribute16843);
             iv_ruleSimpleAnnotationAttribute=ruleSimpleAnnotationAttribute();
 
             state._fsp--;
 
              current =iv_ruleSimpleAnnotationAttribute; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleSimpleAnnotationAttribute16852); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleSimpleAnnotationAttribute16853); 
 
             }
 
@@ -20314,7 +20308,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:8119:1: (lv_optional_0_0= 'optional' )
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:8120:3: lv_optional_0_0= 'optional'
                     {
-                    lv_optional_0_0=(Token)match(input,111,FOLLOW_111_in_ruleSimpleAnnotationAttribute16896); 
+                    lv_optional_0_0=(Token)match(input,111,FOLLOW_111_in_ruleSimpleAnnotationAttribute16897); 
 
                             newLeafNode(lv_optional_0_0, grammarAccess.getSimpleAnnotationAttributeAccess().getOptionalOptionalKeyword_0_0_0());
                         
@@ -20336,7 +20330,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 2 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:8134:7: otherlv_1= 'mandatory'
                     {
-                    otherlv_1=(Token)match(input,112,FOLLOW_112_in_ruleSimpleAnnotationAttribute16927); 
+                    otherlv_1=(Token)match(input,112,FOLLOW_112_in_ruleSimpleAnnotationAttribute16928); 
 
                         	newLeafNode(otherlv_1, grammarAccess.getSimpleAnnotationAttributeAccess().getMandatoryKeyword_0_1());
                         
@@ -20346,7 +20340,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_2=(Token)match(input,113,FOLLOW_113_in_ruleSimpleAnnotationAttribute16940); 
+            otherlv_2=(Token)match(input,113,FOLLOW_113_in_ruleSimpleAnnotationAttribute16941); 
 
                 	newLeafNode(otherlv_2, grammarAccess.getSimpleAnnotationAttributeAccess().getAttributeKeyword_1());
                 
@@ -20356,7 +20350,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:8143:1: (lv_name_3_0= RULE_ID )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:8144:3: lv_name_3_0= RULE_ID
             {
-            lv_name_3_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSimpleAnnotationAttribute16957); 
+            lv_name_3_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSimpleAnnotationAttribute16958); 
 
             			newLeafNode(lv_name_3_0, grammarAccess.getSimpleAnnotationAttributeAccess().getNameIDTerminalRuleCall_2_0()); 
             		
@@ -20376,7 +20370,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_4=(Token)match(input,16,FOLLOW_16_in_ruleSimpleAnnotationAttribute16974); 
+            otherlv_4=(Token)match(input,16,FOLLOW_16_in_ruleSimpleAnnotationAttribute16975); 
 
                 	newLeafNode(otherlv_4, grammarAccess.getSimpleAnnotationAttributeAccess().getColonKeyword_3());
                 
@@ -20389,7 +20383,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
              
             	        newCompositeNode(grammarAccess.getSimpleAnnotationAttributeAccess().getTypeLiteralTypeEnumRuleCall_4_0()); 
             	    
-            pushFollow(FOLLOW_ruleLiteralType_in_ruleSimpleAnnotationAttribute16995);
+            pushFollow(FOLLOW_ruleLiteralType_in_ruleSimpleAnnotationAttribute16996);
             lv_type_5_0=ruleLiteralType();
 
             state._fsp--;
@@ -20444,13 +20438,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:8192:2: iv_ruleEnumAnnotationAttribute= ruleEnumAnnotationAttribute EOF
             {
              newCompositeNode(grammarAccess.getEnumAnnotationAttributeRule()); 
-            pushFollow(FOLLOW_ruleEnumAnnotationAttribute_in_entryRuleEnumAnnotationAttribute17031);
+            pushFollow(FOLLOW_ruleEnumAnnotationAttribute_in_entryRuleEnumAnnotationAttribute17032);
             iv_ruleEnumAnnotationAttribute=ruleEnumAnnotationAttribute();
 
             state._fsp--;
 
              current =iv_ruleEnumAnnotationAttribute; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleEnumAnnotationAttribute17041); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleEnumAnnotationAttribute17042); 
 
             }
 
@@ -20518,7 +20512,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:8204:1: (lv_optional_0_0= 'optional' )
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:8205:3: lv_optional_0_0= 'optional'
                     {
-                    lv_optional_0_0=(Token)match(input,111,FOLLOW_111_in_ruleEnumAnnotationAttribute17085); 
+                    lv_optional_0_0=(Token)match(input,111,FOLLOW_111_in_ruleEnumAnnotationAttribute17086); 
 
                             newLeafNode(lv_optional_0_0, grammarAccess.getEnumAnnotationAttributeAccess().getOptionalOptionalKeyword_0_0_0());
                         
@@ -20540,7 +20534,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 2 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:8219:7: otherlv_1= 'mandatory'
                     {
-                    otherlv_1=(Token)match(input,112,FOLLOW_112_in_ruleEnumAnnotationAttribute17116); 
+                    otherlv_1=(Token)match(input,112,FOLLOW_112_in_ruleEnumAnnotationAttribute17117); 
 
                         	newLeafNode(otherlv_1, grammarAccess.getEnumAnnotationAttributeAccess().getMandatoryKeyword_0_1());
                         
@@ -20550,7 +20544,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_2=(Token)match(input,113,FOLLOW_113_in_ruleEnumAnnotationAttribute17129); 
+            otherlv_2=(Token)match(input,113,FOLLOW_113_in_ruleEnumAnnotationAttribute17130); 
 
                 	newLeafNode(otherlv_2, grammarAccess.getEnumAnnotationAttributeAccess().getAttributeKeyword_1());
                 
@@ -20560,7 +20554,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:8228:1: (lv_name_3_0= RULE_ID )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:8229:3: lv_name_3_0= RULE_ID
             {
-            lv_name_3_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEnumAnnotationAttribute17146); 
+            lv_name_3_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEnumAnnotationAttribute17147); 
 
             			newLeafNode(lv_name_3_0, grammarAccess.getEnumAnnotationAttributeAccess().getNameIDTerminalRuleCall_2_0()); 
             		
@@ -20580,11 +20574,11 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_4=(Token)match(input,16,FOLLOW_16_in_ruleEnumAnnotationAttribute17163); 
+            otherlv_4=(Token)match(input,16,FOLLOW_16_in_ruleEnumAnnotationAttribute17164); 
 
                 	newLeafNode(otherlv_4, grammarAccess.getEnumAnnotationAttributeAccess().getColonKeyword_3());
                 
-            otherlv_5=(Token)match(input,14,FOLLOW_14_in_ruleEnumAnnotationAttribute17175); 
+            otherlv_5=(Token)match(input,14,FOLLOW_14_in_ruleEnumAnnotationAttribute17176); 
 
                 	newLeafNode(otherlv_5, grammarAccess.getEnumAnnotationAttributeAccess().getLeftCurlyBracketKeyword_4());
                 
@@ -20594,7 +20588,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:8254:1: (lv_values_6_0= RULE_STRING )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:8255:3: lv_values_6_0= RULE_STRING
             {
-            lv_values_6_0=(Token)match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleEnumAnnotationAttribute17192); 
+            lv_values_6_0=(Token)match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleEnumAnnotationAttribute17193); 
 
             			newLeafNode(lv_values_6_0, grammarAccess.getEnumAnnotationAttributeAccess().getValuesSTRINGTerminalRuleCall_5_0()); 
             		
@@ -20629,7 +20623,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	case 1 :
             	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:8271:4: otherlv_7= ',' ( (lv_values_8_0= RULE_STRING ) )
             	    {
-            	    otherlv_7=(Token)match(input,25,FOLLOW_25_in_ruleEnumAnnotationAttribute17210); 
+            	    otherlv_7=(Token)match(input,25,FOLLOW_25_in_ruleEnumAnnotationAttribute17211); 
 
             	        	newLeafNode(otherlv_7, grammarAccess.getEnumAnnotationAttributeAccess().getCommaKeyword_6_0());
             	        
@@ -20639,7 +20633,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:8276:1: (lv_values_8_0= RULE_STRING )
             	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:8277:3: lv_values_8_0= RULE_STRING
             	    {
-            	    lv_values_8_0=(Token)match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleEnumAnnotationAttribute17227); 
+            	    lv_values_8_0=(Token)match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleEnumAnnotationAttribute17228); 
 
             	    			newLeafNode(lv_values_8_0, grammarAccess.getEnumAnnotationAttributeAccess().getValuesSTRINGTerminalRuleCall_6_1_0()); 
             	    		
@@ -20668,7 +20662,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            otherlv_9=(Token)match(input,15,FOLLOW_15_in_ruleEnumAnnotationAttribute17246); 
+            otherlv_9=(Token)match(input,15,FOLLOW_15_in_ruleEnumAnnotationAttribute17247); 
 
                 	newLeafNode(otherlv_9, grammarAccess.getEnumAnnotationAttributeAccess().getRightCurlyBracketKeyword_7());
                 
@@ -20705,13 +20699,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:8307:2: iv_ruleImport= ruleImport EOF
             {
              newCompositeNode(grammarAccess.getImportRule()); 
-            pushFollow(FOLLOW_ruleImport_in_entryRuleImport17282);
+            pushFollow(FOLLOW_ruleImport_in_entryRuleImport17283);
             iv_ruleImport=ruleImport();
 
             state._fsp--;
 
              current =iv_ruleImport; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleImport17292); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleImport17293); 
 
             }
 
@@ -20749,7 +20743,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:8318:1: (otherlv_0= 'import' ( ( ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) otherlv_2= 'from' ) | otherlv_3= 'model' ) ( (lv_importURI_4_0= RULE_STRING ) ) )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:8318:3: otherlv_0= 'import' ( ( ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) otherlv_2= 'from' ) | otherlv_3= 'model' ) ( (lv_importURI_4_0= RULE_STRING ) )
             {
-            otherlv_0=(Token)match(input,114,FOLLOW_114_in_ruleImport17329); 
+            otherlv_0=(Token)match(input,114,FOLLOW_114_in_ruleImport17330); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getImportAccess().getImportKeyword_0());
                 
@@ -20785,7 +20779,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getImportAccess().getImportedNamespaceImportedFQNParserRuleCall_1_0_0_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleImportedFQN_in_ruleImport17352);
+                    pushFollow(FOLLOW_ruleImportedFQN_in_ruleImport17353);
                     lv_importedNamespace_1_0=ruleImportedFQN();
 
                     state._fsp--;
@@ -20807,7 +20801,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    otherlv_2=(Token)match(input,115,FOLLOW_115_in_ruleImport17364); 
+                    otherlv_2=(Token)match(input,115,FOLLOW_115_in_ruleImport17365); 
 
                         	newLeafNode(otherlv_2, grammarAccess.getImportAccess().getFromKeyword_1_0_1());
                         
@@ -20820,7 +20814,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 2 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:8345:7: otherlv_3= 'model'
                     {
-                    otherlv_3=(Token)match(input,116,FOLLOW_116_in_ruleImport17383); 
+                    otherlv_3=(Token)match(input,116,FOLLOW_116_in_ruleImport17384); 
 
                         	newLeafNode(otherlv_3, grammarAccess.getImportAccess().getModelKeyword_1_1());
                         
@@ -20836,7 +20830,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:8350:1: (lv_importURI_4_0= RULE_STRING )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:8351:3: lv_importURI_4_0= RULE_STRING
             {
-            lv_importURI_4_0=(Token)match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleImport17401); 
+            lv_importURI_4_0=(Token)match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleImport17402); 
 
             			newLeafNode(lv_importURI_4_0, grammarAccess.getImportAccess().getImportURISTRINGTerminalRuleCall_2_0()); 
             		
@@ -20889,13 +20883,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:8377:2: iv_ruleImportedFQN= ruleImportedFQN EOF
             {
              newCompositeNode(grammarAccess.getImportedFQNRule()); 
-            pushFollow(FOLLOW_ruleImportedFQN_in_entryRuleImportedFQN17443);
+            pushFollow(FOLLOW_ruleImportedFQN_in_entryRuleImportedFQN17444);
             iv_ruleImportedFQN=ruleImportedFQN();
 
             state._fsp--;
 
              current =iv_ruleImportedFQN.getText(); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleImportedFQN17454); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleImportedFQN17455); 
 
             }
 
@@ -20933,7 +20927,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
              
                     newCompositeNode(grammarAccess.getImportedFQNAccess().getFQNParserRuleCall_0()); 
                 
-            pushFollow(FOLLOW_ruleFQN_in_ruleImportedFQN17501);
+            pushFollow(FOLLOW_ruleFQN_in_ruleImportedFQN17502);
             this_FQN_0=ruleFQN();
 
             state._fsp--;
@@ -20955,7 +20949,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:8400:2: kw= '.*'
                     {
-                    kw=(Token)match(input,117,FOLLOW_117_in_ruleImportedFQN17520); 
+                    kw=(Token)match(input,117,FOLLOW_117_in_ruleImportedFQN17521); 
 
                             current.merge(kw);
                             newLeafNode(kw, grammarAccess.getImportedFQNAccess().getFullStopAsteriskKeyword_1()); 
@@ -20999,13 +20993,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:8415:2: iv_ruleDocumentation= ruleDocumentation EOF
             {
              newCompositeNode(grammarAccess.getDocumentationRule()); 
-            pushFollow(FOLLOW_ruleDocumentation_in_entryRuleDocumentation17562);
+            pushFollow(FOLLOW_ruleDocumentation_in_entryRuleDocumentation17563);
             iv_ruleDocumentation=ruleDocumentation();
 
             state._fsp--;
 
              current =iv_ruleDocumentation; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleDocumentation17572); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleDocumentation17573); 
 
             }
 
@@ -21051,7 +21045,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,34,FOLLOW_34_in_ruleDocumentation17618); 
+            otherlv_1=(Token)match(input,34,FOLLOW_34_in_ruleDocumentation17619); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getDocumentationAccess().getLeftSquareBracketKeyword_1());
                 
@@ -21073,7 +21067,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:8437:1: (lv_lines_2_0= RULE_STRING )
             	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:8438:3: lv_lines_2_0= RULE_STRING
             	    {
-            	    lv_lines_2_0=(Token)match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleDocumentation17635); 
+            	    lv_lines_2_0=(Token)match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleDocumentation17636); 
 
             	    			newLeafNode(lv_lines_2_0, grammarAccess.getDocumentationAccess().getLinesSTRINGTerminalRuleCall_2_0()); 
             	    		
@@ -21099,7 +21093,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            otherlv_3=(Token)match(input,35,FOLLOW_35_in_ruleDocumentation17653); 
+            otherlv_3=(Token)match(input,35,FOLLOW_35_in_ruleDocumentation17654); 
 
                 	newLeafNode(otherlv_3, grammarAccess.getDocumentationAccess().getRightSquareBracketKeyword_3());
                 
@@ -21136,13 +21130,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:8472:2: iv_ruleLiteral= ruleLiteral EOF
             {
              newCompositeNode(grammarAccess.getLiteralRule()); 
-            pushFollow(FOLLOW_ruleLiteral_in_entryRuleLiteral17693);
+            pushFollow(FOLLOW_ruleLiteral_in_entryRuleLiteral17694);
             iv_ruleLiteral=ruleLiteral();
 
             state._fsp--;
 
              current =iv_ruleLiteral; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleLiteral17703); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleLiteral17704); 
 
             }
 
@@ -21214,7 +21208,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getLiteralAccess().getBooleanLiteralParserRuleCall_0()); 
                         
-                    pushFollow(FOLLOW_ruleBooleanLiteral_in_ruleLiteral17750);
+                    pushFollow(FOLLOW_ruleBooleanLiteral_in_ruleLiteral17751);
                     this_BooleanLiteral_0=ruleBooleanLiteral();
 
                     state._fsp--;
@@ -21232,7 +21226,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getLiteralAccess().getNumberLiteralParserRuleCall_1()); 
                         
-                    pushFollow(FOLLOW_ruleNumberLiteral_in_ruleLiteral17777);
+                    pushFollow(FOLLOW_ruleNumberLiteral_in_ruleLiteral17778);
                     this_NumberLiteral_1=ruleNumberLiteral();
 
                     state._fsp--;
@@ -21250,7 +21244,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getLiteralAccess().getStringLiteralParserRuleCall_2()); 
                         
-                    pushFollow(FOLLOW_ruleStringLiteral_in_ruleLiteral17804);
+                    pushFollow(FOLLOW_ruleStringLiteral_in_ruleLiteral17805);
                     this_StringLiteral_2=ruleStringLiteral();
 
                     state._fsp--;
@@ -21295,13 +21289,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:8522:2: iv_ruleBooleanLiteral= ruleBooleanLiteral EOF
             {
              newCompositeNode(grammarAccess.getBooleanLiteralRule()); 
-            pushFollow(FOLLOW_ruleBooleanLiteral_in_entryRuleBooleanLiteral17839);
+            pushFollow(FOLLOW_ruleBooleanLiteral_in_entryRuleBooleanLiteral17840);
             iv_ruleBooleanLiteral=ruleBooleanLiteral();
 
             state._fsp--;
 
              current =iv_ruleBooleanLiteral; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleBooleanLiteral17849); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleBooleanLiteral17850); 
 
             }
 
@@ -21366,7 +21360,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:8539:4: otherlv_1= 'false'
                     {
-                    otherlv_1=(Token)match(input,118,FOLLOW_118_in_ruleBooleanLiteral17896); 
+                    otherlv_1=(Token)match(input,118,FOLLOW_118_in_ruleBooleanLiteral17897); 
 
                         	newLeafNode(otherlv_1, grammarAccess.getBooleanLiteralAccess().getFalseKeyword_1_0());
                         
@@ -21382,7 +21376,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:8545:1: (lv_isTrue_2_0= 'true' )
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:8546:3: lv_isTrue_2_0= 'true'
                     {
-                    lv_isTrue_2_0=(Token)match(input,119,FOLLOW_119_in_ruleBooleanLiteral17920); 
+                    lv_isTrue_2_0=(Token)match(input,119,FOLLOW_119_in_ruleBooleanLiteral17921); 
 
                             newLeafNode(lv_isTrue_2_0, grammarAccess.getBooleanLiteralAccess().getIsTrueTrueKeyword_1_1_0());
                         
@@ -21437,13 +21431,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:8569:2: iv_ruleNumberLiteral= ruleNumberLiteral EOF
             {
              newCompositeNode(grammarAccess.getNumberLiteralRule()); 
-            pushFollow(FOLLOW_ruleNumberLiteral_in_entryRuleNumberLiteral17970);
+            pushFollow(FOLLOW_ruleNumberLiteral_in_entryRuleNumberLiteral17971);
             iv_ruleNumberLiteral=ruleNumberLiteral();
 
             state._fsp--;
 
              current =iv_ruleNumberLiteral; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleNumberLiteral17980); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleNumberLiteral17981); 
 
             }
 
@@ -21483,17 +21477,14 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 {
                 int LA174_1 = input.LA(2);
 
-                if ( (LA174_1==72) ) {
-                    alt174=2;
-                }
-                else if ( (LA174_1==RULE_INT) ) {
+                if ( (LA174_1==RULE_INT) ) {
                     int LA174_3 = input.LA(3);
 
-                    if ( (LA174_3==EOF||LA174_3==21||LA174_3==25) ) {
-                        alt174=1;
-                    }
-                    else if ( (LA174_3==72) ) {
+                    if ( (LA174_3==72) ) {
                         alt174=2;
+                    }
+                    else if ( (LA174_3==EOF||LA174_3==21||LA174_3==25) ) {
+                        alt174=1;
                     }
                     else {
                         NoViableAltException nvae =
@@ -21501,6 +21492,9 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
                         throw nvae;
                     }
+                }
+                else if ( (LA174_1==72) ) {
+                    alt174=2;
                 }
                 else {
                     NoViableAltException nvae =
@@ -21520,11 +21514,11 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 else if ( (LA174_2==RULE_INT) ) {
                     int LA174_3 = input.LA(3);
 
-                    if ( (LA174_3==EOF||LA174_3==21||LA174_3==25) ) {
-                        alt174=1;
-                    }
-                    else if ( (LA174_3==72) ) {
+                    if ( (LA174_3==72) ) {
                         alt174=2;
+                    }
+                    else if ( (LA174_3==EOF||LA174_3==21||LA174_3==25) ) {
+                        alt174=1;
                     }
                     else {
                         NoViableAltException nvae =
@@ -21545,11 +21539,11 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 {
                 int LA174_3 = input.LA(2);
 
-                if ( (LA174_3==EOF||LA174_3==21||LA174_3==25) ) {
-                    alt174=1;
-                }
-                else if ( (LA174_3==72) ) {
+                if ( (LA174_3==72) ) {
                     alt174=2;
+                }
+                else if ( (LA174_3==EOF||LA174_3==21||LA174_3==25) ) {
+                    alt174=1;
                 }
                 else {
                     NoViableAltException nvae =
@@ -21583,7 +21577,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getNumberLiteralAccess().getIntLiteralParserRuleCall_0()); 
                         
-                    pushFollow(FOLLOW_ruleIntLiteral_in_ruleNumberLiteral18027);
+                    pushFollow(FOLLOW_ruleIntLiteral_in_ruleNumberLiteral18028);
                     this_IntLiteral_0=ruleIntLiteral();
 
                     state._fsp--;
@@ -21601,7 +21595,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getNumberLiteralAccess().getRealLiteralParserRuleCall_1()); 
                         
-                    pushFollow(FOLLOW_ruleRealLiteral_in_ruleNumberLiteral18054);
+                    pushFollow(FOLLOW_ruleRealLiteral_in_ruleNumberLiteral18055);
                     this_RealLiteral_1=ruleRealLiteral();
 
                     state._fsp--;
@@ -21646,13 +21640,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:8609:2: iv_ruleRealLiteral= ruleRealLiteral EOF
             {
              newCompositeNode(grammarAccess.getRealLiteralRule()); 
-            pushFollow(FOLLOW_ruleRealLiteral_in_entryRuleRealLiteral18089);
+            pushFollow(FOLLOW_ruleRealLiteral_in_entryRuleRealLiteral18090);
             iv_ruleRealLiteral=ruleRealLiteral();
 
             state._fsp--;
 
              current =iv_ruleRealLiteral; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleRealLiteral18099); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleRealLiteral18100); 
 
             }
 
@@ -21706,7 +21700,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
              
             	        newCompositeNode(grammarAccess.getRealLiteralAccess().getValueRealParserRuleCall_1_0()); 
             	    
-            pushFollow(FOLLOW_ruleReal_in_ruleRealLiteral18154);
+            pushFollow(FOLLOW_ruleReal_in_ruleRealLiteral18155);
             lv_value_1_0=ruleReal();
 
             state._fsp--;
@@ -21761,13 +21755,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:8654:2: iv_ruleIntLiteral= ruleIntLiteral EOF
             {
              newCompositeNode(grammarAccess.getIntLiteralRule()); 
-            pushFollow(FOLLOW_ruleIntLiteral_in_entryRuleIntLiteral18190);
+            pushFollow(FOLLOW_ruleIntLiteral_in_entryRuleIntLiteral18191);
             iv_ruleIntLiteral=ruleIntLiteral();
 
             state._fsp--;
 
              current =iv_ruleIntLiteral; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleIntLiteral18200); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleIntLiteral18201); 
 
             }
 
@@ -21821,7 +21815,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
              
             	        newCompositeNode(grammarAccess.getIntLiteralAccess().getValueIntegerParserRuleCall_1_0()); 
             	    
-            pushFollow(FOLLOW_ruleInteger_in_ruleIntLiteral18255);
+            pushFollow(FOLLOW_ruleInteger_in_ruleIntLiteral18256);
             lv_value_1_0=ruleInteger();
 
             state._fsp--;
@@ -21876,13 +21870,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:8699:2: iv_ruleStringLiteral= ruleStringLiteral EOF
             {
              newCompositeNode(grammarAccess.getStringLiteralRule()); 
-            pushFollow(FOLLOW_ruleStringLiteral_in_entryRuleStringLiteral18291);
+            pushFollow(FOLLOW_ruleStringLiteral_in_entryRuleStringLiteral18292);
             iv_ruleStringLiteral=ruleStringLiteral();
 
             state._fsp--;
 
              current =iv_ruleStringLiteral; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleStringLiteral18301); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleStringLiteral18302); 
 
             }
 
@@ -21932,7 +21926,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:8717:1: (lv_value_1_0= RULE_STRING )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:8718:3: lv_value_1_0= RULE_STRING
             {
-            lv_value_1_0=(Token)match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleStringLiteral18352); 
+            lv_value_1_0=(Token)match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleStringLiteral18353); 
 
             			newLeafNode(lv_value_1_0, grammarAccess.getStringLiteralAccess().getValueSTRINGTerminalRuleCall_1_0()); 
             		
@@ -21985,13 +21979,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:8744:2: iv_ruleInteger= ruleInteger EOF
             {
              newCompositeNode(grammarAccess.getIntegerRule()); 
-            pushFollow(FOLLOW_ruleInteger_in_entryRuleInteger18394);
+            pushFollow(FOLLOW_ruleInteger_in_entryRuleInteger18395);
             iv_ruleInteger=ruleInteger();
 
             state._fsp--;
 
              current =iv_ruleInteger.getText(); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleInteger18405); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleInteger18406); 
 
             }
 
@@ -22047,7 +22041,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getIntegerAccess().getSignedIntegerParserRuleCall_0()); 
                         
-                    pushFollow(FOLLOW_ruleSignedInteger_in_ruleInteger18452);
+                    pushFollow(FOLLOW_ruleSignedInteger_in_ruleInteger18453);
                     this_SignedInteger_0=ruleSignedInteger();
 
                     state._fsp--;
@@ -22067,7 +22061,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getIntegerAccess().getHexadecimalParserRuleCall_1()); 
                         
-                    pushFollow(FOLLOW_ruleHexadecimal_in_ruleInteger18485);
+                    pushFollow(FOLLOW_ruleHexadecimal_in_ruleInteger18486);
                     this_Hexadecimal_1=ruleHexadecimal();
 
                     state._fsp--;
@@ -22117,13 +22111,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:8791:2: iv_ruleSignedInteger= ruleSignedInteger EOF
             {
              newCompositeNode(grammarAccess.getSignedIntegerRule()); 
-            pushFollow(FOLLOW_ruleSignedInteger_in_entryRuleSignedInteger18537);
+            pushFollow(FOLLOW_ruleSignedInteger_in_entryRuleSignedInteger18538);
             iv_ruleSignedInteger=ruleSignedInteger();
 
             state._fsp--;
 
              current =iv_ruleSignedInteger.getText(); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleSignedInteger18548); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleSignedInteger18549); 
 
             }
 
@@ -22175,7 +22169,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:8807:2: kw= '+'
                     {
-                    kw=(Token)match(input,120,FOLLOW_120_in_ruleSignedInteger18591); 
+                    kw=(Token)match(input,120,FOLLOW_120_in_ruleSignedInteger18592); 
 
                             current.merge(kw);
                             newLeafNode(kw, grammarAccess.getSignedIntegerAccess().getPlusSignKeyword_0_0()); 
@@ -22186,7 +22180,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 2 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:8814:2: kw= '-'
                     {
-                    kw=(Token)match(input,121,FOLLOW_121_in_ruleSignedInteger18610); 
+                    kw=(Token)match(input,121,FOLLOW_121_in_ruleSignedInteger18611); 
 
                             current.merge(kw);
                             newLeafNode(kw, grammarAccess.getSignedIntegerAccess().getHyphenMinusKeyword_0_1()); 
@@ -22197,7 +22191,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            this_INT_2=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleSignedInteger18627); 
+            this_INT_2=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleSignedInteger18628); 
 
             		current.merge(this_INT_2);
                 
@@ -22243,13 +22237,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:8842:2: iv_ruleHexadecimal= ruleHexadecimal EOF
             {
              newCompositeNode(grammarAccess.getHexadecimalRule()); 
-            pushFollow(FOLLOW_ruleHexadecimal_in_entryRuleHexadecimal18683);
+            pushFollow(FOLLOW_ruleHexadecimal_in_entryRuleHexadecimal18684);
             iv_ruleHexadecimal=ruleHexadecimal();
 
             state._fsp--;
 
              current =iv_ruleHexadecimal.getText(); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleHexadecimal18694); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleHexadecimal18695); 
 
             }
 
@@ -22283,7 +22277,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:8856:28: (this_HEX_0= RULE_HEX )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:8857:5: this_HEX_0= RULE_HEX
             {
-            this_HEX_0=(Token)match(input,RULE_HEX,FOLLOW_RULE_HEX_in_ruleHexadecimal18737); 
+            this_HEX_0=(Token)match(input,RULE_HEX,FOLLOW_RULE_HEX_in_ruleHexadecimal18738); 
 
             		current.merge(this_HEX_0);
                 
@@ -22323,13 +22317,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:8877:2: iv_ruleReal= ruleReal EOF
             {
              newCompositeNode(grammarAccess.getRealRule()); 
-            pushFollow(FOLLOW_ruleReal_in_entryRuleReal18786);
+            pushFollow(FOLLOW_ruleReal_in_entryRuleReal18787);
             iv_ruleReal=ruleReal();
 
             state._fsp--;
 
              current =iv_ruleReal.getText(); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleReal18797); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleReal18798); 
 
             }
 
@@ -22376,7 +22370,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getRealAccess().getDecimalParserRuleCall_0()); 
                         
-                    pushFollow(FOLLOW_ruleDecimal_in_ruleReal18844);
+                    pushFollow(FOLLOW_ruleDecimal_in_ruleReal18845);
                     this_Decimal_0=ruleDecimal();
 
                     state._fsp--;
@@ -22396,7 +22390,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getRealAccess().getDotDecimalParserRuleCall_1()); 
                         
-                    pushFollow(FOLLOW_ruleDotDecimal_in_ruleReal18877);
+                    pushFollow(FOLLOW_ruleDotDecimal_in_ruleReal18878);
                     this_DotDecimal_1=ruleDotDecimal();
 
                     state._fsp--;
@@ -22416,7 +22410,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getRealAccess().getDecimalDotParserRuleCall_2()); 
                         
-                    pushFollow(FOLLOW_ruleDecimalDot_in_ruleReal18910);
+                    pushFollow(FOLLOW_ruleDecimalDot_in_ruleReal18911);
                     this_DecimalDot_2=ruleDecimalDot();
 
                     state._fsp--;
@@ -22436,7 +22430,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getRealAccess().getDecimalExpParserRuleCall_3()); 
                         
-                    pushFollow(FOLLOW_ruleDecimalExp_in_ruleReal18943);
+                    pushFollow(FOLLOW_ruleDecimalExp_in_ruleReal18944);
                     this_DecimalExp_3=ruleDecimalExp();
 
                     state._fsp--;
@@ -22486,13 +22480,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:8948:2: iv_ruleDecimal= ruleDecimal EOF
             {
              newCompositeNode(grammarAccess.getDecimalRule()); 
-            pushFollow(FOLLOW_ruleDecimal_in_entryRuleDecimal18995);
+            pushFollow(FOLLOW_ruleDecimal_in_entryRuleDecimal18996);
             iv_ruleDecimal=ruleDecimal();
 
             state._fsp--;
 
              current =iv_ruleDecimal.getText(); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleDecimal19006); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleDecimal19007); 
 
             }
 
@@ -22545,7 +22539,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:8964:2: kw= '+'
                     {
-                    kw=(Token)match(input,120,FOLLOW_120_in_ruleDecimal19049); 
+                    kw=(Token)match(input,120,FOLLOW_120_in_ruleDecimal19050); 
 
                             current.merge(kw);
                             newLeafNode(kw, grammarAccess.getDecimalAccess().getPlusSignKeyword_0_0()); 
@@ -22556,7 +22550,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 2 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:8971:2: kw= '-'
                     {
-                    kw=(Token)match(input,121,FOLLOW_121_in_ruleDecimal19068); 
+                    kw=(Token)match(input,121,FOLLOW_121_in_ruleDecimal19069); 
 
                             current.merge(kw);
                             newLeafNode(kw, grammarAccess.getDecimalAccess().getHyphenMinusKeyword_0_1()); 
@@ -22567,19 +22561,19 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            this_INT_2=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleDecimal19085); 
+            this_INT_2=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleDecimal19086); 
 
             		current.merge(this_INT_2);
                 
              
                 newLeafNode(this_INT_2, grammarAccess.getDecimalAccess().getINTTerminalRuleCall_1()); 
                 
-            kw=(Token)match(input,72,FOLLOW_72_in_ruleDecimal19103); 
+            kw=(Token)match(input,72,FOLLOW_72_in_ruleDecimal19104); 
 
                     current.merge(kw);
                     newLeafNode(kw, grammarAccess.getDecimalAccess().getFullStopKeyword_2()); 
                 
-            this_INT_4=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleDecimal19118); 
+            this_INT_4=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleDecimal19119); 
 
             		current.merge(this_INT_4);
                 
@@ -22625,13 +22619,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9012:2: iv_ruleDotDecimal= ruleDotDecimal EOF
             {
              newCompositeNode(grammarAccess.getDotDecimalRule()); 
-            pushFollow(FOLLOW_ruleDotDecimal_in_entryRuleDotDecimal19174);
+            pushFollow(FOLLOW_ruleDotDecimal_in_entryRuleDotDecimal19175);
             iv_ruleDotDecimal=ruleDotDecimal();
 
             state._fsp--;
 
              current =iv_ruleDotDecimal.getText(); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleDotDecimal19185); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleDotDecimal19186); 
 
             }
 
@@ -22683,7 +22677,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9028:2: kw= '+'
                     {
-                    kw=(Token)match(input,120,FOLLOW_120_in_ruleDotDecimal19228); 
+                    kw=(Token)match(input,120,FOLLOW_120_in_ruleDotDecimal19229); 
 
                             current.merge(kw);
                             newLeafNode(kw, grammarAccess.getDotDecimalAccess().getPlusSignKeyword_0_0()); 
@@ -22694,7 +22688,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 2 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9035:2: kw= '-'
                     {
-                    kw=(Token)match(input,121,FOLLOW_121_in_ruleDotDecimal19247); 
+                    kw=(Token)match(input,121,FOLLOW_121_in_ruleDotDecimal19248); 
 
                             current.merge(kw);
                             newLeafNode(kw, grammarAccess.getDotDecimalAccess().getHyphenMinusKeyword_0_1()); 
@@ -22705,12 +22699,12 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            kw=(Token)match(input,72,FOLLOW_72_in_ruleDotDecimal19262); 
+            kw=(Token)match(input,72,FOLLOW_72_in_ruleDotDecimal19263); 
 
                     current.merge(kw);
                     newLeafNode(kw, grammarAccess.getDotDecimalAccess().getFullStopKeyword_1()); 
                 
-            this_INT_3=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleDotDecimal19277); 
+            this_INT_3=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleDotDecimal19278); 
 
             		current.merge(this_INT_3);
                 
@@ -22756,13 +22750,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9069:2: iv_ruleDecimalDot= ruleDecimalDot EOF
             {
              newCompositeNode(grammarAccess.getDecimalDotRule()); 
-            pushFollow(FOLLOW_ruleDecimalDot_in_entryRuleDecimalDot19333);
+            pushFollow(FOLLOW_ruleDecimalDot_in_entryRuleDecimalDot19334);
             iv_ruleDecimalDot=ruleDecimalDot();
 
             state._fsp--;
 
              current =iv_ruleDecimalDot.getText(); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleDecimalDot19344); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleDecimalDot19345); 
 
             }
 
@@ -22814,7 +22808,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9085:2: kw= '+'
                     {
-                    kw=(Token)match(input,120,FOLLOW_120_in_ruleDecimalDot19387); 
+                    kw=(Token)match(input,120,FOLLOW_120_in_ruleDecimalDot19388); 
 
                             current.merge(kw);
                             newLeafNode(kw, grammarAccess.getDecimalDotAccess().getPlusSignKeyword_0_0()); 
@@ -22825,7 +22819,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 2 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9092:2: kw= '-'
                     {
-                    kw=(Token)match(input,121,FOLLOW_121_in_ruleDecimalDot19406); 
+                    kw=(Token)match(input,121,FOLLOW_121_in_ruleDecimalDot19407); 
 
                             current.merge(kw);
                             newLeafNode(kw, grammarAccess.getDecimalDotAccess().getHyphenMinusKeyword_0_1()); 
@@ -22836,14 +22830,14 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            this_INT_2=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleDecimalDot19423); 
+            this_INT_2=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleDecimalDot19424); 
 
             		current.merge(this_INT_2);
                 
              
                 newLeafNode(this_INT_2, grammarAccess.getDecimalDotAccess().getINTTerminalRuleCall_1()); 
                 
-            kw=(Token)match(input,72,FOLLOW_72_in_ruleDecimalDot19441); 
+            kw=(Token)match(input,72,FOLLOW_72_in_ruleDecimalDot19442); 
 
                     current.merge(kw);
                     newLeafNode(kw, grammarAccess.getDecimalDotAccess().getFullStopKeyword_2()); 
@@ -22887,13 +22881,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9126:2: iv_ruleDecimalExp= ruleDecimalExp EOF
             {
              newCompositeNode(grammarAccess.getDecimalExpRule()); 
-            pushFollow(FOLLOW_ruleDecimalExp_in_entryRuleDecimalExp19492);
+            pushFollow(FOLLOW_ruleDecimalExp_in_entryRuleDecimalExp19493);
             iv_ruleDecimalExp=ruleDecimalExp();
 
             state._fsp--;
 
              current =iv_ruleDecimalExp.getText(); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleDecimalExp19503); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleDecimalExp19504); 
 
             }
 
@@ -22947,7 +22941,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9142:2: kw= '+'
                     {
-                    kw=(Token)match(input,120,FOLLOW_120_in_ruleDecimalExp19546); 
+                    kw=(Token)match(input,120,FOLLOW_120_in_ruleDecimalExp19547); 
 
                             current.merge(kw);
                             newLeafNode(kw, grammarAccess.getDecimalExpAccess().getPlusSignKeyword_0_0()); 
@@ -22958,7 +22952,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 2 :
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9149:2: kw= '-'
                     {
-                    kw=(Token)match(input,121,FOLLOW_121_in_ruleDecimalExp19565); 
+                    kw=(Token)match(input,121,FOLLOW_121_in_ruleDecimalExp19566); 
 
                             current.merge(kw);
                             newLeafNode(kw, grammarAccess.getDecimalExpAccess().getHyphenMinusKeyword_0_1()); 
@@ -22969,26 +22963,26 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            this_INT_2=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleDecimalExp19582); 
+            this_INT_2=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleDecimalExp19583); 
 
             		current.merge(this_INT_2);
                 
              
                 newLeafNode(this_INT_2, grammarAccess.getDecimalExpAccess().getINTTerminalRuleCall_1()); 
                 
-            kw=(Token)match(input,72,FOLLOW_72_in_ruleDecimalExp19600); 
+            kw=(Token)match(input,72,FOLLOW_72_in_ruleDecimalExp19601); 
 
                     current.merge(kw);
                     newLeafNode(kw, grammarAccess.getDecimalExpAccess().getFullStopKeyword_2()); 
                 
-            this_INT_4=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleDecimalExp19615); 
+            this_INT_4=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleDecimalExp19616); 
 
             		current.merge(this_INT_4);
                 
              
                 newLeafNode(this_INT_4, grammarAccess.getDecimalExpAccess().getINTTerminalRuleCall_3()); 
                 
-            this_EXP_5=(Token)match(input,RULE_EXP,FOLLOW_RULE_EXP_in_ruleDecimalExp19635); 
+            this_EXP_5=(Token)match(input,RULE_EXP,FOLLOW_RULE_EXP_in_ruleDecimalExp19636); 
 
             		current.merge(this_EXP_5);
                 
@@ -23031,13 +23025,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9194:2: iv_ruleFQN= ruleFQN EOF
             {
              newCompositeNode(grammarAccess.getFQNRule()); 
-            pushFollow(FOLLOW_ruleFQN_in_entryRuleFQN19685);
+            pushFollow(FOLLOW_ruleFQN_in_entryRuleFQN19686);
             iv_ruleFQN=ruleFQN();
 
             state._fsp--;
 
              current =iv_ruleFQN.getText(); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleFQN19696); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleFQN19697); 
 
             }
 
@@ -23072,7 +23066,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9205:1: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
             // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9205:6: this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )*
             {
-            this_ID_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFQN19736); 
+            this_ID_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFQN19737); 
 
             		current.merge(this_ID_0);
                 
@@ -23094,12 +23088,12 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	case 1 :
             	    // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9213:2: kw= '.' this_ID_2= RULE_ID
             	    {
-            	    kw=(Token)match(input,72,FOLLOW_72_in_ruleFQN19755); 
+            	    kw=(Token)match(input,72,FOLLOW_72_in_ruleFQN19756); 
 
             	            current.merge(kw);
             	            newLeafNode(kw, grammarAccess.getFQNAccess().getFullStopKeyword_1_0()); 
             	        
-            	    this_ID_2=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFQN19770); 
+            	    this_ID_2=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFQN19771); 
 
             	    		current.merge(this_ID_2);
             	        
@@ -23181,7 +23175,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9236:2: (enumLiteral_0= 'eventdriven' )
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9236:4: enumLiteral_0= 'eventdriven'
                     {
-                    enumLiteral_0=(Token)match(input,122,FOLLOW_122_in_ruleCommunicationType19831); 
+                    enumLiteral_0=(Token)match(input,122,FOLLOW_122_in_ruleCommunicationType19832); 
 
                             current = grammarAccess.getCommunicationTypeAccess().getEVENT_DRIVENEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
                             newLeafNode(enumLiteral_0, grammarAccess.getCommunicationTypeAccess().getEVENT_DRIVENEnumLiteralDeclaration_0()); 
@@ -23198,7 +23192,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9242:6: (enumLiteral_1= 'datadriven' )
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9242:8: enumLiteral_1= 'datadriven'
                     {
-                    enumLiteral_1=(Token)match(input,123,FOLLOW_123_in_ruleCommunicationType19848); 
+                    enumLiteral_1=(Token)match(input,123,FOLLOW_123_in_ruleCommunicationType19849); 
 
                             current = grammarAccess.getCommunicationTypeAccess().getDATA_DRIVENEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
                             newLeafNode(enumLiteral_1, grammarAccess.getCommunicationTypeAccess().getDATA_DRIVENEnumLiteralDeclaration_1()); 
@@ -23215,7 +23209,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9248:6: (enumLiteral_2= 'sync' )
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9248:8: enumLiteral_2= 'sync'
                     {
-                    enumLiteral_2=(Token)match(input,124,FOLLOW_124_in_ruleCommunicationType19865); 
+                    enumLiteral_2=(Token)match(input,124,FOLLOW_124_in_ruleCommunicationType19866); 
 
                             current = grammarAccess.getCommunicationTypeAccess().getSYNCHRONOUSEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
                             newLeafNode(enumLiteral_2, grammarAccess.getCommunicationTypeAccess().getSYNCHRONOUSEnumLiteralDeclaration_2()); 
@@ -23282,7 +23276,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9261:2: (enumLiteral_0= 'fixed' )
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9261:4: enumLiteral_0= 'fixed'
                     {
-                    enumLiteral_0=(Token)match(input,125,FOLLOW_125_in_ruleReferenceType19910); 
+                    enumLiteral_0=(Token)match(input,125,FOLLOW_125_in_ruleReferenceType19911); 
 
                             current = grammarAccess.getReferenceTypeAccess().getFIXEDEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
                             newLeafNode(enumLiteral_0, grammarAccess.getReferenceTypeAccess().getFIXEDEnumLiteralDeclaration_0()); 
@@ -23299,7 +23293,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9267:6: (enumLiteral_1= 'optional' )
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9267:8: enumLiteral_1= 'optional'
                     {
-                    enumLiteral_1=(Token)match(input,111,FOLLOW_111_in_ruleReferenceType19927); 
+                    enumLiteral_1=(Token)match(input,111,FOLLOW_111_in_ruleReferenceType19928); 
 
                             current = grammarAccess.getReferenceTypeAccess().getOPTIONALEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
                             newLeafNode(enumLiteral_1, grammarAccess.getReferenceTypeAccess().getOPTIONALEnumLiteralDeclaration_1()); 
@@ -23382,7 +23376,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9282:2: (enumLiteral_0= 'eventdriven' )
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9282:4: enumLiteral_0= 'eventdriven'
                     {
-                    enumLiteral_0=(Token)match(input,122,FOLLOW_122_in_ruleComponentCommunicationType19974); 
+                    enumLiteral_0=(Token)match(input,122,FOLLOW_122_in_ruleComponentCommunicationType19975); 
 
                             current = grammarAccess.getComponentCommunicationTypeAccess().getEVENT_DRIVENEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
                             newLeafNode(enumLiteral_0, grammarAccess.getComponentCommunicationTypeAccess().getEVENT_DRIVENEnumLiteralDeclaration_0()); 
@@ -23399,7 +23393,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9288:6: (enumLiteral_1= 'datadriven' )
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9288:8: enumLiteral_1= 'datadriven'
                     {
-                    enumLiteral_1=(Token)match(input,123,FOLLOW_123_in_ruleComponentCommunicationType19991); 
+                    enumLiteral_1=(Token)match(input,123,FOLLOW_123_in_ruleComponentCommunicationType19992); 
 
                             current = grammarAccess.getComponentCommunicationTypeAccess().getDATA_DRIVENEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
                             newLeafNode(enumLiteral_1, grammarAccess.getComponentCommunicationTypeAccess().getDATA_DRIVENEnumLiteralDeclaration_1()); 
@@ -23416,7 +23410,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9294:6: (enumLiteral_2= 'async' )
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9294:8: enumLiteral_2= 'async'
                     {
-                    enumLiteral_2=(Token)match(input,126,FOLLOW_126_in_ruleComponentCommunicationType20008); 
+                    enumLiteral_2=(Token)match(input,126,FOLLOW_126_in_ruleComponentCommunicationType20009); 
 
                             current = grammarAccess.getComponentCommunicationTypeAccess().getASYNCHRONOUSEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
                             newLeafNode(enumLiteral_2, grammarAccess.getComponentCommunicationTypeAccess().getASYNCHRONOUSEnumLiteralDeclaration_2()); 
@@ -23433,7 +23427,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9300:6: (enumLiteral_3= 'sync' )
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9300:8: enumLiteral_3= 'sync'
                     {
-                    enumLiteral_3=(Token)match(input,124,FOLLOW_124_in_ruleComponentCommunicationType20025); 
+                    enumLiteral_3=(Token)match(input,124,FOLLOW_124_in_ruleComponentCommunicationType20026); 
 
                             current = grammarAccess.getComponentCommunicationTypeAccess().getSYNCHRONOUSEnumLiteralDeclaration_3().getEnumLiteral().getInstance();
                             newLeafNode(enumLiteral_3, grammarAccess.getComponentCommunicationTypeAccess().getSYNCHRONOUSEnumLiteralDeclaration_3()); 
@@ -23516,7 +23510,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9313:2: (enumLiteral_0= 'ptBoolean' )
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9313:4: enumLiteral_0= 'ptBoolean'
                     {
-                    enumLiteral_0=(Token)match(input,127,FOLLOW_127_in_ruleLiteralType20070); 
+                    enumLiteral_0=(Token)match(input,127,FOLLOW_127_in_ruleLiteralType20071); 
 
                             current = grammarAccess.getLiteralTypeAccess().getBOOLEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
                             newLeafNode(enumLiteral_0, grammarAccess.getLiteralTypeAccess().getBOOLEnumLiteralDeclaration_0()); 
@@ -23533,7 +23527,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9319:6: (enumLiteral_1= 'ptInteger' )
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9319:8: enumLiteral_1= 'ptInteger'
                     {
-                    enumLiteral_1=(Token)match(input,128,FOLLOW_128_in_ruleLiteralType20087); 
+                    enumLiteral_1=(Token)match(input,128,FOLLOW_128_in_ruleLiteralType20088); 
 
                             current = grammarAccess.getLiteralTypeAccess().getINTEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
                             newLeafNode(enumLiteral_1, grammarAccess.getLiteralTypeAccess().getINTEnumLiteralDeclaration_1()); 
@@ -23550,7 +23544,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9325:6: (enumLiteral_2= 'ptReal' )
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9325:8: enumLiteral_2= 'ptReal'
                     {
-                    enumLiteral_2=(Token)match(input,129,FOLLOW_129_in_ruleLiteralType20104); 
+                    enumLiteral_2=(Token)match(input,129,FOLLOW_129_in_ruleLiteralType20105); 
 
                             current = grammarAccess.getLiteralTypeAccess().getREALEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
                             newLeafNode(enumLiteral_2, grammarAccess.getLiteralTypeAccess().getREALEnumLiteralDeclaration_2()); 
@@ -23567,7 +23561,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9331:6: (enumLiteral_3= 'ptCharacter' )
                     // ../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/parser/antlr/internal/InternalRoom.g:9331:8: enumLiteral_3= 'ptCharacter'
                     {
-                    enumLiteral_3=(Token)match(input,130,FOLLOW_130_in_ruleLiteralType20121); 
+                    enumLiteral_3=(Token)match(input,130,FOLLOW_130_in_ruleLiteralType20122); 
 
                             current = grammarAccess.getLiteralTypeAccess().getCHAREnumLiteralDeclaration_3().getEnumLiteral().getInstance();
                             newLeafNode(enumLiteral_3, grammarAccess.getLiteralTypeAccess().getCHAREnumLiteralDeclaration_3()); 
@@ -23671,15 +23665,15 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
     static final String DFA127_eotS =
         "\32\uffff";
     static final String DFA127_eofS =
-        "\14\uffff\1\21\6\uffff\2\21\1\uffff\1\21\2\uffff\1\21";
+        "\13\uffff\1\22\7\uffff\3\22\1\uffff\1\22\2\uffff";
     static final String DFA127_minS =
-        "\1\134\1\4\1\20\1\4\1\23\4\4\3\23\1\16\2\4\1\5\1\17\1\uffff\1\4"+
-        "\2\16\1\5\1\16\2\uffff\1\16";
+        "\1\134\1\4\1\20\1\4\1\23\4\4\2\23\1\16\2\4\1\23\1\4\1\5\1\17\1"+
+        "\uffff\3\16\1\5\1\16\2\uffff";
     static final String DFA127_maxS =
-        "\1\134\2\20\1\145\1\30\3\4\1\145\3\23\1\143\2\4\1\43\1\142\1\uffff"+
-        "\1\4\2\143\1\43\1\143\2\uffff\1\143";
+        "\1\134\2\20\1\145\1\30\2\4\1\145\1\4\2\23\1\143\2\4\1\23\1\4\1"+
+        "\43\1\142\1\uffff\3\143\1\43\1\143\2\uffff";
     static final String DFA127_acceptS =
-        "\21\uffff\1\2\5\uffff\1\1\1\3\1\uffff";
+        "\22\uffff\1\2\5\uffff\1\1\1\3";
     static final String DFA127_specialS =
         "\32\uffff}>";
     static final String[] DFA127_transitionS = {
@@ -23687,32 +23681,32 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             "\1\2\13\uffff\1\3",
             "\1\3",
             "\1\4\137\uffff\1\5\1\6",
-            "\1\10\4\uffff\1\7",
+            "\1\7\4\uffff\1\10",
             "\1\11",
             "\1\12",
-            "\1\13",
-            "\1\14\137\uffff\1\15\1\16",
-            "\1\10",
-            "\1\10",
-            "\1\10",
-            "\1\20\1\21\10\uffff\1\22\11\uffff\1\17\56\uffff\1\21\4\uffff"+
-            "\7\21\6\uffff\1\21",
+            "\1\13\137\uffff\1\14\1\15",
+            "\1\16",
+            "\1\7",
+            "\1\7",
+            "\1\21\1\22\10\uffff\1\17\11\uffff\1\20\56\uffff\1\22\4\uffff"+
+            "\7\22\6\uffff\1\22",
             "\1\23",
             "\1\24",
-            "\1\25\35\uffff\1\26",
-            "\1\21\116\uffff\1\21\1\27\1\uffff\1\27\1\30",
+            "\1\7",
+            "\1\25",
+            "\1\26\35\uffff\1\27",
+            "\1\22\116\uffff\1\22\1\30\1\uffff\1\30\1\31",
             "",
-            "\1\31",
-            "\1\20\1\21\22\uffff\1\17\56\uffff\1\21\4\uffff\7\21\6\uffff"+
-            "\1\21",
-            "\1\20\1\21\22\uffff\1\17\56\uffff\1\21\4\uffff\7\21\6\uffff"+
-            "\1\21",
-            "\1\25\35\uffff\1\26",
-            "\1\20\1\21\101\uffff\1\21\4\uffff\7\21\6\uffff\1\21",
+            "\1\21\1\22\22\uffff\1\20\56\uffff\1\22\4\uffff\7\22\6\uffff"+
+            "\1\22",
+            "\1\21\1\22\22\uffff\1\20\56\uffff\1\22\4\uffff\7\22\6\uffff"+
+            "\1\22",
+            "\1\21\1\22\22\uffff\1\20\56\uffff\1\22\4\uffff\7\22\6\uffff"+
+            "\1\22",
+            "\1\26\35\uffff\1\27",
+            "\1\21\1\22\101\uffff\1\22\4\uffff\7\22\6\uffff\1\22",
             "",
-            "",
-            "\1\20\1\21\22\uffff\1\17\56\uffff\1\21\4\uffff\7\21\6\uffff"+
-            "\1\21"
+            ""
     };
 
     static final short[] DFA127_eot = DFA.unpackEncodedString(DFA127_eotS);
@@ -23932,806 +23926,806 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_RULE_ID_in_rulePrimitiveType1308 = new BitSet(new long[]{0x0000000000010000L});
     public static final BitSet FOLLOW_16_in_rulePrimitiveType1325 = new BitSet(new long[]{0x0000000000000000L,0x8000000000000000L,0x0000000000000007L});
     public static final BitSet FOLLOW_ruleLiteralType_in_rulePrimitiveType1346 = new BitSet(new long[]{0x0000000000080000L});
-    public static final BitSet FOLLOW_19_in_rulePrimitiveType1358 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleFQN_in_rulePrimitiveType1379 = new BitSet(new long[]{0x0000000000500000L});
-    public static final BitSet FOLLOW_20_in_rulePrimitiveType1392 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleFQN_in_rulePrimitiveType1413 = new BitSet(new long[]{0x0000000000200000L});
-    public static final BitSet FOLLOW_21_in_rulePrimitiveType1425 = new BitSet(new long[]{0x0000000000400000L});
-    public static final BitSet FOLLOW_22_in_rulePrimitiveType1439 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_RULE_STRING_in_rulePrimitiveType1456 = new BitSet(new long[]{0x0000000400000002L});
-    public static final BitSet FOLLOW_ruleDocumentation_in_rulePrimitiveType1482 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEnumerationType_in_entryRuleEnumerationType1519 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleEnumerationType1529 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_23_in_ruleEnumerationType1566 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleEnumerationType1583 = new BitSet(new long[]{0x0000000401004000L});
-    public static final BitSet FOLLOW_ruleDocumentation_in_ruleEnumerationType1609 = new BitSet(new long[]{0x0000000001004000L});
-    public static final BitSet FOLLOW_24_in_ruleEnumerationType1623 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleFQN_in_ruleEnumerationType1646 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_ruleEnumerationType1660 = new BitSet(new long[]{0x0000000000008010L});
-    public static final BitSet FOLLOW_ruleEnumLiteral_in_ruleEnumerationType1682 = new BitSet(new long[]{0x0000000002008000L});
-    public static final BitSet FOLLOW_25_in_ruleEnumerationType1695 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleEnumLiteral_in_ruleEnumerationType1716 = new BitSet(new long[]{0x0000000002008000L});
-    public static final BitSet FOLLOW_15_in_ruleEnumerationType1732 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEnumLiteral_in_entryRuleEnumLiteral1768 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleEnumLiteral1778 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleEnumLiteral1820 = new BitSet(new long[]{0x0000000004000002L});
-    public static final BitSet FOLLOW_26_in_ruleEnumLiteral1838 = new BitSet(new long[]{0x00000000000000C0L,0x0300000000000000L});
-    public static final BitSet FOLLOW_ruleIntLiteral_in_ruleEnumLiteral1859 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExternalType_in_entryRuleExternalType1897 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleExternalType1907 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_27_in_ruleExternalType1944 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleExternalType1961 = new BitSet(new long[]{0x0000000000080000L});
-    public static final BitSet FOLLOW_19_in_ruleExternalType1978 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_RULE_STRING_in_ruleExternalType1995 = new BitSet(new long[]{0x0000000400400002L});
-    public static final BitSet FOLLOW_22_in_ruleExternalType2013 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_RULE_STRING_in_ruleExternalType2030 = new BitSet(new long[]{0x0000000400000002L});
-    public static final BitSet FOLLOW_ruleDocumentation_in_ruleExternalType2058 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDataClass_in_entryRuleDataClass2095 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleDataClass2105 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_28_in_ruleDataClass2142 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleDataClass2159 = new BitSet(new long[]{0x0000000420004000L});
-    public static final BitSet FOLLOW_ruleDocumentation_in_ruleDataClass2185 = new BitSet(new long[]{0x0000000020004000L});
-    public static final BitSet FOLLOW_29_in_ruleDataClass2199 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleFQN_in_ruleDataClass2222 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_ruleDataClass2236 = new BitSet(new long[]{0x00000333C0008000L,0x0000100000000000L});
-    public static final BitSet FOLLOW_ruleAnnotation_in_ruleDataClass2257 = new BitSet(new long[]{0x00000333C0008000L,0x0000100000000000L});
-    public static final BitSet FOLLOW_30_in_ruleDataClass2271 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_ruleDataClass2292 = new BitSet(new long[]{0x0000033380008000L});
-    public static final BitSet FOLLOW_31_in_ruleDataClass2307 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_ruleDataClass2328 = new BitSet(new long[]{0x0000033300008000L});
-    public static final BitSet FOLLOW_32_in_ruleDataClass2343 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_ruleDataClass2364 = new BitSet(new long[]{0x0000033200008000L});
-    public static final BitSet FOLLOW_ruleStandardOperation_in_ruleDataClass2388 = new BitSet(new long[]{0x0000033200008000L});
-    public static final BitSet FOLLOW_ruleClassStructor_in_ruleDataClass2415 = new BitSet(new long[]{0x0000033200008000L});
-    public static final BitSet FOLLOW_ruleAttribute_in_ruleDataClass2442 = new BitSet(new long[]{0x0000033200008000L});
-    public static final BitSet FOLLOW_15_in_ruleDataClass2456 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAttribute_in_entryRuleAttribute2492 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleAttribute2502 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_33_in_ruleAttribute2539 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleAttribute2556 = new BitSet(new long[]{0x0000000400010000L});
-    public static final BitSet FOLLOW_34_in_ruleAttribute2574 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleAttribute2591 = new BitSet(new long[]{0x0000000800000000L});
-    public static final BitSet FOLLOW_35_in_ruleAttribute2608 = new BitSet(new long[]{0x0000000000010000L});
-    public static final BitSet FOLLOW_16_in_ruleAttribute2622 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleRefableType_in_ruleAttribute2643 = new BitSet(new long[]{0x0000000404000002L});
-    public static final BitSet FOLLOW_26_in_ruleAttribute2656 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_RULE_STRING_in_ruleAttribute2673 = new BitSet(new long[]{0x0000000400000002L});
-    public static final BitSet FOLLOW_ruleDocumentation_in_ruleAttribute2701 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleStandardOperation_in_entryRuleStandardOperation2740 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleStandardOperation2750 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_36_in_ruleStandardOperation2793 = new BitSet(new long[]{0x0000002000000000L});
-    public static final BitSet FOLLOW_37_in_ruleStandardOperation2819 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleStandardOperation2836 = new BitSet(new long[]{0x0000000000100000L});
-    public static final BitSet FOLLOW_20_in_ruleStandardOperation2853 = new BitSet(new long[]{0x0000000000200010L});
-    public static final BitSet FOLLOW_ruleVarDecl_in_ruleStandardOperation2875 = new BitSet(new long[]{0x0000000002200000L});
-    public static final BitSet FOLLOW_25_in_ruleStandardOperation2888 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleVarDecl_in_ruleStandardOperation2909 = new BitSet(new long[]{0x0000000002200000L});
-    public static final BitSet FOLLOW_21_in_ruleStandardOperation2925 = new BitSet(new long[]{0x0000000400014000L});
-    public static final BitSet FOLLOW_16_in_ruleStandardOperation2938 = new BitSet(new long[]{0x0000004000000010L});
-    public static final BitSet FOLLOW_38_in_ruleStandardOperation2951 = new BitSet(new long[]{0x0000000400004000L});
-    public static final BitSet FOLLOW_ruleRefableType_in_ruleStandardOperation2978 = new BitSet(new long[]{0x0000000400004000L});
-    public static final BitSet FOLLOW_ruleDocumentation_in_ruleStandardOperation3002 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_ruleStandardOperation3024 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulePortOperation_in_entryRulePortOperation3060 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRulePortOperation3070 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_37_in_rulePortOperation3107 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_rulePortOperation3124 = new BitSet(new long[]{0x0000000000100000L});
-    public static final BitSet FOLLOW_20_in_rulePortOperation3141 = new BitSet(new long[]{0x0000000000200010L});
-    public static final BitSet FOLLOW_ruleVarDecl_in_rulePortOperation3163 = new BitSet(new long[]{0x0000000002200000L});
-    public static final BitSet FOLLOW_25_in_rulePortOperation3176 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleVarDecl_in_rulePortOperation3197 = new BitSet(new long[]{0x0000000002200000L});
-    public static final BitSet FOLLOW_21_in_rulePortOperation3213 = new BitSet(new long[]{0x0000008400014000L});
-    public static final BitSet FOLLOW_16_in_rulePortOperation3227 = new BitSet(new long[]{0x0000004000000010L});
-    public static final BitSet FOLLOW_38_in_rulePortOperation3240 = new BitSet(new long[]{0x0000000400004000L});
-    public static final BitSet FOLLOW_ruleRefableType_in_rulePortOperation3267 = new BitSet(new long[]{0x0000000400004000L});
-    public static final BitSet FOLLOW_39_in_rulePortOperation3288 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_rulePortOperation3308 = new BitSet(new long[]{0x0000000400004000L});
-    public static final BitSet FOLLOW_ruleDocumentation_in_rulePortOperation3332 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_rulePortOperation3354 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleClassStructor_in_entryRuleClassStructor3390 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleClassStructor3400 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_40_in_ruleClassStructor3445 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_41_in_ruleClassStructor3474 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_ruleClassStructor3511 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleGeneralProtocolClass_in_entryRuleGeneralProtocolClass3547 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleGeneralProtocolClass3557 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleProtocolClass_in_ruleGeneralProtocolClass3604 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleCompoundProtocolClass_in_ruleGeneralProtocolClass3631 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleProtocolClass_in_entryRuleProtocolClass3666 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleProtocolClass3676 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleCommunicationType_in_ruleProtocolClass3722 = new BitSet(new long[]{0x0000040000000000L});
-    public static final BitSet FOLLOW_42_in_ruleProtocolClass3735 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleProtocolClass3752 = new BitSet(new long[]{0x0000000420004000L});
-    public static final BitSet FOLLOW_ruleDocumentation_in_ruleProtocolClass3778 = new BitSet(new long[]{0x0000000020004000L});
-    public static final BitSet FOLLOW_29_in_ruleProtocolClass3792 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleFQN_in_ruleProtocolClass3815 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_ruleProtocolClass3829 = new BitSet(new long[]{0x0000B801C0008000L,0x0000120000000000L});
-    public static final BitSet FOLLOW_ruleAnnotation_in_ruleProtocolClass3850 = new BitSet(new long[]{0x0000B801C0008000L,0x0000120000000000L});
-    public static final BitSet FOLLOW_30_in_ruleProtocolClass3864 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_ruleProtocolClass3885 = new BitSet(new long[]{0x0000B80180008000L,0x0000020000000000L});
-    public static final BitSet FOLLOW_31_in_ruleProtocolClass3900 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_ruleProtocolClass3921 = new BitSet(new long[]{0x0000B80100008000L,0x0000020000000000L});
-    public static final BitSet FOLLOW_32_in_ruleProtocolClass3936 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_ruleProtocolClass3957 = new BitSet(new long[]{0x0000B80000008000L,0x0000020000000000L});
-    public static final BitSet FOLLOW_43_in_ruleProtocolClass3972 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_ruleProtocolClass3984 = new BitSet(new long[]{0x000C000000008000L});
-    public static final BitSet FOLLOW_ruleMessage_in_ruleProtocolClass4005 = new BitSet(new long[]{0x000C000000008000L});
-    public static final BitSet FOLLOW_15_in_ruleProtocolClass4018 = new BitSet(new long[]{0x0000B00000008000L,0x0000020000000000L});
-    public static final BitSet FOLLOW_44_in_ruleProtocolClass4033 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_ruleProtocolClass4045 = new BitSet(new long[]{0x000C000000008000L});
-    public static final BitSet FOLLOW_ruleMessage_in_ruleProtocolClass4066 = new BitSet(new long[]{0x000C000000008000L});
-    public static final BitSet FOLLOW_15_in_ruleProtocolClass4079 = new BitSet(new long[]{0x0000A00000008000L,0x0000020000000000L});
-    public static final BitSet FOLLOW_45_in_ruleProtocolClass4094 = new BitSet(new long[]{0x0000400000000000L});
-    public static final BitSet FOLLOW_46_in_ruleProtocolClass4106 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_rulePortClass_in_ruleProtocolClass4127 = new BitSet(new long[]{0x0000800000008000L,0x0000020000000000L});
-    public static final BitSet FOLLOW_47_in_ruleProtocolClass4142 = new BitSet(new long[]{0x0000400000000000L});
-    public static final BitSet FOLLOW_46_in_ruleProtocolClass4154 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_rulePortClass_in_ruleProtocolClass4175 = new BitSet(new long[]{0x0000000000008000L,0x0000020000000000L});
-    public static final BitSet FOLLOW_ruleProtocolSemantics_in_ruleProtocolClass4198 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_15_in_ruleProtocolClass4211 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleCompoundProtocolClass_in_entryRuleCompoundProtocolClass4247 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleCompoundProtocolClass4257 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_48_in_ruleCompoundProtocolClass4294 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleCompoundProtocolClass4311 = new BitSet(new long[]{0x0000000400004000L});
-    public static final BitSet FOLLOW_ruleDocumentation_in_ruleCompoundProtocolClass4337 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_ruleCompoundProtocolClass4350 = new BitSet(new long[]{0x0002000000008000L,0x0000100000000000L});
-    public static final BitSet FOLLOW_ruleAnnotation_in_ruleCompoundProtocolClass4371 = new BitSet(new long[]{0x0002000000008000L,0x0000100000000000L});
-    public static final BitSet FOLLOW_ruleSubProtocol_in_ruleCompoundProtocolClass4393 = new BitSet(new long[]{0x0002000000008000L});
-    public static final BitSet FOLLOW_15_in_ruleCompoundProtocolClass4406 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSubProtocol_in_entryRuleSubProtocol4442 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleSubProtocol4452 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_49_in_ruleSubProtocol4489 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleSubProtocol4506 = new BitSet(new long[]{0x0000000000010000L});
-    public static final BitSet FOLLOW_16_in_ruleSubProtocol4523 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleFQN_in_ruleSubProtocol4546 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleMessage_in_entryRuleMessage4582 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleMessage4592 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_50_in_ruleMessage4635 = new BitSet(new long[]{0x0008000000000000L});
-    public static final BitSet FOLLOW_51_in_ruleMessage4661 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleMessage4678 = new BitSet(new long[]{0x0000000000100000L});
-    public static final BitSet FOLLOW_20_in_ruleMessage4695 = new BitSet(new long[]{0x0000000000200010L});
-    public static final BitSet FOLLOW_ruleVarDecl_in_ruleMessage4716 = new BitSet(new long[]{0x0000000000200000L});
-    public static final BitSet FOLLOW_21_in_ruleMessage4729 = new BitSet(new long[]{0x0000000400000002L});
-    public static final BitSet FOLLOW_ruleDocumentation_in_ruleMessage4750 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulePortClass_in_entryRulePortClass4787 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRulePortClass4797 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_14_in_rulePortClass4843 = new BitSet(new long[]{0x0030033200008000L});
-    public static final BitSet FOLLOW_52_in_rulePortClass4856 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_rulePortClass4877 = new BitSet(new long[]{0x0020033200008000L});
-    public static final BitSet FOLLOW_ruleMessageHandler_in_rulePortClass4901 = new BitSet(new long[]{0x0020033200008000L});
-    public static final BitSet FOLLOW_rulePortOperation_in_rulePortClass4928 = new BitSet(new long[]{0x0020033200008000L});
-    public static final BitSet FOLLOW_ruleAttribute_in_rulePortClass4955 = new BitSet(new long[]{0x0020033200008000L});
-    public static final BitSet FOLLOW_15_in_rulePortClass4969 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleMessageHandler_in_entryRuleMessageHandler5005 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleMessageHandler5015 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInMessageHandler_in_ruleMessageHandler5062 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleOutMessageHandler_in_ruleMessageHandler5089 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInMessageHandler_in_entryRuleInMessageHandler5124 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleInMessageHandler5134 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_53_in_ruleInMessageHandler5171 = new BitSet(new long[]{0x0000080000000000L});
-    public static final BitSet FOLLOW_43_in_ruleInMessageHandler5183 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleInMessageHandler5203 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_ruleInMessageHandler5224 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleOutMessageHandler_in_entryRuleOutMessageHandler5260 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleOutMessageHandler5270 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_53_in_ruleOutMessageHandler5307 = new BitSet(new long[]{0x0000100000000000L});
-    public static final BitSet FOLLOW_44_in_ruleOutMessageHandler5319 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleOutMessageHandler5339 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_ruleOutMessageHandler5360 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleModelComponent_in_entryRuleModelComponent5396 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleModelComponent5406 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleActorClass_in_ruleModelComponent5452 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleActorClass_in_entryRuleActorClass5486 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleActorClass5496 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_54_in_ruleActorClass5584 = new BitSet(new long[]{0x00C0000000000000L,0x5C00000000000000L});
-    public static final BitSet FOLLOW_ruleComponentCommunicationType_in_ruleActorClass5672 = new BitSet(new long[]{0x00C0000000000000L,0x5C00000000000000L});
-    public static final BitSet FOLLOW_55_in_ruleActorClass5724 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleActorClass5741 = new BitSet(new long[]{0x0000000420004000L});
-    public static final BitSet FOLLOW_ruleDocumentation_in_ruleActorClass5767 = new BitSet(new long[]{0x0000000020004000L});
-    public static final BitSet FOLLOW_29_in_ruleActorClass5781 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleFQN_in_ruleActorClass5804 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_ruleActorClass5818 = new BitSet(new long[]{0x0700000000008000L,0x0000100000000000L});
-    public static final BitSet FOLLOW_ruleAnnotation_in_ruleActorClass5839 = new BitSet(new long[]{0x0700000000008000L,0x0000100000000000L});
-    public static final BitSet FOLLOW_56_in_ruleActorClass5853 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_ruleActorClass5865 = new BitSet(new long[]{0x4800800000008000L});
-    public static final BitSet FOLLOW_ruleSPP_in_ruleActorClass5887 = new BitSet(new long[]{0x4800800000008000L});
-    public static final BitSet FOLLOW_rulePort_in_ruleActorClass5914 = new BitSet(new long[]{0x4800800000008000L});
-    public static final BitSet FOLLOW_15_in_ruleActorClass5928 = new BitSet(new long[]{0x0600000000008000L});
-    public static final BitSet FOLLOW_57_in_ruleActorClass5943 = new BitSet(new long[]{0x0000000400004000L});
-    public static final BitSet FOLLOW_ruleDocumentation_in_ruleActorClass5964 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_ruleActorClass5977 = new BitSet(new long[]{0xF8008333C0008000L,0x2000800000002440L});
-    public static final BitSet FOLLOW_30_in_ruleActorClass5990 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_ruleActorClass6011 = new BitSet(new long[]{0xF800833380008000L,0x2000800000002440L});
-    public static final BitSet FOLLOW_31_in_ruleActorClass6026 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_ruleActorClass6047 = new BitSet(new long[]{0xF800833300008000L,0x2000800000002440L});
-    public static final BitSet FOLLOW_32_in_ruleActorClass6062 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_ruleActorClass6083 = new BitSet(new long[]{0xF800833200008000L,0x2000800000002440L});
-    public static final BitSet FOLLOW_ruleLayerConnection_in_ruleActorClass6107 = new BitSet(new long[]{0xF800833200008000L,0x2000800000002440L});
-    public static final BitSet FOLLOW_ruleBinding_in_ruleActorClass6134 = new BitSet(new long[]{0xF800833200008000L,0x2000800000002440L});
-    public static final BitSet FOLLOW_ruleServiceImplementation_in_ruleActorClass6161 = new BitSet(new long[]{0xF800833200008000L,0x2000800000002440L});
-    public static final BitSet FOLLOW_ruleAttribute_in_ruleActorClass6188 = new BitSet(new long[]{0xF800833200008000L,0x2000800000002440L});
-    public static final BitSet FOLLOW_ruleActorRef_in_ruleActorClass6215 = new BitSet(new long[]{0xF800833200008000L,0x2000800000002440L});
-    public static final BitSet FOLLOW_ruleSAP_in_ruleActorClass6242 = new BitSet(new long[]{0xF800833200008000L,0x2000800000002440L});
-    public static final BitSet FOLLOW_rulePort_in_ruleActorClass6269 = new BitSet(new long[]{0xF800833200008000L,0x2000800000002440L});
-    public static final BitSet FOLLOW_ruleExternalPort_in_ruleActorClass6296 = new BitSet(new long[]{0xF800833200008000L,0x2000800000002440L});
-    public static final BitSet FOLLOW_15_in_ruleActorClass6310 = new BitSet(new long[]{0x0400000000008000L});
-    public static final BitSet FOLLOW_58_in_ruleActorClass6325 = new BitSet(new long[]{0x0000000400004000L});
-    public static final BitSet FOLLOW_ruleDocumentation_in_ruleActorClass6346 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_ruleActorClass6359 = new BitSet(new long[]{0x0000033000008000L,0x0000100000010000L});
-    public static final BitSet FOLLOW_ruleAnnotation_in_ruleActorClass6380 = new BitSet(new long[]{0x0000033000008000L,0x0000100000010000L});
-    public static final BitSet FOLLOW_ruleStandardOperation_in_ruleActorClass6403 = new BitSet(new long[]{0x0000033000008000L,0x0000000000010000L});
-    public static final BitSet FOLLOW_ruleClassStructor_in_ruleActorClass6430 = new BitSet(new long[]{0x0000033000008000L,0x0000000000010000L});
-    public static final BitSet FOLLOW_ruleStateMachine_in_ruleActorClass6453 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_15_in_ruleActorClass6466 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_15_in_ruleActorClass6480 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInterfaceItem_in_entryRuleInterfaceItem6516 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleInterfaceItem6526 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulePort_in_ruleInterfaceItem6573 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSAP_in_ruleInterfaceItem6600 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSPP_in_ruleInterfaceItem6627 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulePort_in_entryRulePort6662 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRulePort6672 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_47_in_rulePort6715 = new BitSet(new long[]{0x0800000000000000L});
-    public static final BitSet FOLLOW_59_in_rulePort6741 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_rulePort6758 = new BitSet(new long[]{0x0000000400010000L});
-    public static final BitSet FOLLOW_ruleMULTIPLICITY_in_rulePort6784 = new BitSet(new long[]{0x0000000000010000L});
-    public static final BitSet FOLLOW_16_in_rulePort6797 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleFQN_in_rulePort6820 = new BitSet(new long[]{0x0000000400000002L});
-    public static final BitSet FOLLOW_ruleDocumentation_in_rulePort6841 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExternalPort_in_entryRuleExternalPort6878 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleExternalPort6888 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_60_in_ruleExternalPort6925 = new BitSet(new long[]{0x0800000000000000L});
-    public static final BitSet FOLLOW_59_in_ruleExternalPort6937 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleExternalPort6957 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSAP_in_entryRuleSAP6993 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleSAP7003 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_61_in_ruleSAP7040 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleSAP7057 = new BitSet(new long[]{0x0000000000010000L});
-    public static final BitSet FOLLOW_16_in_ruleSAP7074 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleFQN_in_ruleSAP7097 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSPP_in_entryRuleSPP7133 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleSPP7143 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_62_in_ruleSPP7180 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleSPP7197 = new BitSet(new long[]{0x0000000000010000L});
-    public static final BitSet FOLLOW_16_in_ruleSPP7214 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleFQN_in_ruleSPP7237 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleServiceImplementation_in_entryRuleServiceImplementation7273 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleServiceImplementation7283 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_63_in_ruleServiceImplementation7320 = new BitSet(new long[]{0x0000000001000000L});
-    public static final BitSet FOLLOW_24_in_ruleServiceImplementation7332 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleServiceImplementation7352 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleLogicalSystem_in_entryRuleLogicalSystem7388 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleLogicalSystem7398 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_64_in_ruleLogicalSystem7435 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleLogicalSystem7452 = new BitSet(new long[]{0x0000000400004000L});
-    public static final BitSet FOLLOW_ruleDocumentation_in_ruleLogicalSystem7478 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_ruleLogicalSystem7491 = new BitSet(new long[]{0x0000000000008000L,0x0000100000000442L});
-    public static final BitSet FOLLOW_ruleAnnotation_in_ruleLogicalSystem7512 = new BitSet(new long[]{0x0000000000008000L,0x0000100000000442L});
-    public static final BitSet FOLLOW_ruleLayerConnection_in_ruleLogicalSystem7535 = new BitSet(new long[]{0x0000000000008000L,0x0000000000000442L});
-    public static final BitSet FOLLOW_ruleBinding_in_ruleLogicalSystem7562 = new BitSet(new long[]{0x0000000000008000L,0x0000000000000442L});
-    public static final BitSet FOLLOW_ruleSubSystemRef_in_ruleLogicalSystem7589 = new BitSet(new long[]{0x0000000000008000L,0x0000000000000442L});
-    public static final BitSet FOLLOW_15_in_ruleLogicalSystem7603 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSubSystemRef_in_entryRuleSubSystemRef7641 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleSubSystemRef7651 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_65_in_ruleSubSystemRef7688 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleSubSystemRef7705 = new BitSet(new long[]{0x0000000000010000L});
-    public static final BitSet FOLLOW_16_in_ruleSubSystemRef7722 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleFQN_in_ruleSubSystemRef7745 = new BitSet(new long[]{0x0000000400000002L});
-    public static final BitSet FOLLOW_ruleDocumentation_in_ruleSubSystemRef7766 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSubSystemClass_in_entryRuleSubSystemClass7803 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleSubSystemClass7813 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_66_in_ruleSubSystemClass7850 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleSubSystemClass7867 = new BitSet(new long[]{0x0000000400004000L});
-    public static final BitSet FOLLOW_ruleDocumentation_in_ruleSubSystemClass7893 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_ruleSubSystemClass7906 = new BitSet(new long[]{0x48008001C0008000L,0x2000900000002458L});
-    public static final BitSet FOLLOW_ruleAnnotation_in_ruleSubSystemClass7927 = new BitSet(new long[]{0x48008001C0008000L,0x2000900000002458L});
-    public static final BitSet FOLLOW_30_in_ruleSubSystemClass7941 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_ruleSubSystemClass7962 = new BitSet(new long[]{0x4800800180008000L,0x2000800000002458L});
-    public static final BitSet FOLLOW_31_in_ruleSubSystemClass7977 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_ruleSubSystemClass7998 = new BitSet(new long[]{0x4800800100008000L,0x2000800000002458L});
-    public static final BitSet FOLLOW_32_in_ruleSubSystemClass8013 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_ruleSubSystemClass8034 = new BitSet(new long[]{0x4800800000008000L,0x2000800000002458L});
-    public static final BitSet FOLLOW_ruleActorInstanceMapping_in_ruleSubSystemClass8058 = new BitSet(new long[]{0x4800800000008000L,0x2000800000002458L});
-    public static final BitSet FOLLOW_ruleLogicalThread_in_ruleSubSystemClass8085 = new BitSet(new long[]{0x4800800000008000L,0x2000800000002458L});
-    public static final BitSet FOLLOW_ruleLayerConnection_in_ruleSubSystemClass8112 = new BitSet(new long[]{0x4800800000008000L,0x2000800000002458L});
-    public static final BitSet FOLLOW_ruleBinding_in_ruleSubSystemClass8139 = new BitSet(new long[]{0x4800800000008000L,0x2000800000002458L});
-    public static final BitSet FOLLOW_ruleActorRef_in_ruleSubSystemClass8166 = new BitSet(new long[]{0x4800800000008000L,0x2000800000002458L});
-    public static final BitSet FOLLOW_ruleSPP_in_ruleSubSystemClass8193 = new BitSet(new long[]{0x4800800000008000L,0x2000800000002458L});
-    public static final BitSet FOLLOW_rulePort_in_ruleSubSystemClass8220 = new BitSet(new long[]{0x4800800000008000L,0x2000800000002458L});
-    public static final BitSet FOLLOW_15_in_ruleSubSystemClass8234 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleLogicalThread_in_entryRuleLogicalThread8270 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleLogicalThread8280 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_67_in_ruleLogicalThread8317 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleLogicalThread8334 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleActorInstanceMapping_in_entryRuleActorInstanceMapping8375 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleActorInstanceMapping8385 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_68_in_ruleActorInstanceMapping8422 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleRefPath_in_ruleActorInstanceMapping8443 = new BitSet(new long[]{0x0000000000080000L});
-    public static final BitSet FOLLOW_19_in_ruleActorInstanceMapping8455 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleActorInstanceMapping8475 = new BitSet(new long[]{0x0000000000004002L});
-    public static final BitSet FOLLOW_14_in_ruleActorInstanceMapping8488 = new BitSet(new long[]{0x0000000000008000L,0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleActorInstanceMapping_in_ruleActorInstanceMapping8509 = new BitSet(new long[]{0x0000000000008000L,0x0000000000000010L});
-    public static final BitSet FOLLOW_15_in_ruleActorInstanceMapping8522 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleRefPath_in_entryRuleRefPath8560 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleRefPath8570 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleRefSegment_in_ruleRefPath8616 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000020L});
-    public static final BitSet FOLLOW_69_in_ruleRefPath8629 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleRefSegment_in_ruleRefPath8650 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000020L});
-    public static final BitSet FOLLOW_ruleRefSegment_in_entryRuleRefSegment8688 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleRefSegment8698 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleRefSegment8740 = new BitSet(new long[]{0x0000000000010002L});
-    public static final BitSet FOLLOW_16_in_ruleRefSegment8758 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleRefSegment8775 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleBinding_in_entryRuleBinding8818 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleBinding8828 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_70_in_ruleBinding8865 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleBindingEndPoint_in_ruleBinding8886 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000080L});
-    public static final BitSet FOLLOW_71_in_ruleBinding8898 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleBindingEndPoint_in_ruleBinding8919 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleBindingEndPoint_in_entryRuleBindingEndPoint8955 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleBindingEndPoint8965 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleBindingEndPoint9011 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000100L});
-    public static final BitSet FOLLOW_72_in_ruleBindingEndPoint9023 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleBindingEndPoint9045 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000200L});
-    public static final BitSet FOLLOW_73_in_ruleBindingEndPoint9058 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleBindingEndPoint9078 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleLayerConnection_in_entryRuleLayerConnection9116 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleLayerConnection9126 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_74_in_ruleLayerConnection9163 = new BitSet(new long[]{0x0000000000020000L,0x0000000000001000L});
-    public static final BitSet FOLLOW_ruleSAPoint_in_ruleLayerConnection9184 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000800L});
-    public static final BitSet FOLLOW_75_in_ruleLayerConnection9196 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleSPPoint_in_ruleLayerConnection9217 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSAPoint_in_entryRuleSAPoint9253 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleSAPoint9263 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleRefSAPoint_in_ruleSAPoint9310 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleRelaySAPoint_in_ruleSAPoint9337 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleRefSAPoint_in_entryRuleRefSAPoint9372 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleRefSAPoint9382 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_17_in_ruleRefSAPoint9419 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleRefSAPoint9439 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleRelaySAPoint_in_entryRuleRelaySAPoint9475 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleRelaySAPoint9485 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_76_in_ruleRelaySAPoint9522 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleRelaySAPoint9542 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSPPoint_in_entryRuleSPPoint9578 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleSPPoint9588 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleSPPoint9633 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000100L});
-    public static final BitSet FOLLOW_72_in_ruleSPPoint9645 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleSPPoint9665 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleActorRef_in_entryRuleActorRef9701 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleActorRef9711 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleReferenceType_in_ruleActorRef9757 = new BitSet(new long[]{0x0000000000000000L,0x0000000000002000L});
-    public static final BitSet FOLLOW_77_in_ruleActorRef9770 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleActorRef9787 = new BitSet(new long[]{0x0000000400010000L});
-    public static final BitSet FOLLOW_ruleMULTIPLICITY_in_ruleActorRef9813 = new BitSet(new long[]{0x0000000000010000L});
-    public static final BitSet FOLLOW_16_in_ruleActorRef9826 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleFQN_in_ruleActorRef9849 = new BitSet(new long[]{0x0000000400000002L});
-    public static final BitSet FOLLOW_ruleDocumentation_in_ruleActorRef9870 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleMULTIPLICITY_in_entryRuleMULTIPLICITY9910 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleMULTIPLICITY9921 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_34_in_ruleMULTIPLICITY9959 = new BitSet(new long[]{0x0000000000000040L,0x0000000000004000L});
-    public static final BitSet FOLLOW_78_in_ruleMULTIPLICITY9973 = new BitSet(new long[]{0x0000000800000000L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleMULTIPLICITY9994 = new BitSet(new long[]{0x0000000800000000L});
-    public static final BitSet FOLLOW_35_in_ruleMULTIPLICITY10013 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAnnotationTargetType_in_entryRuleAnnotationTargetType10054 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleAnnotationTargetType10065 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_28_in_ruleAnnotationTargetType10103 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_55_in_ruleAnnotationTargetType10122 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_79_in_ruleAnnotationTargetType10141 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_42_in_ruleAnnotationTargetType10160 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_48_in_ruleAnnotationTargetType10179 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_66_in_ruleAnnotationTargetType10198 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_64_in_ruleAnnotationTargetType10217 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleStateGraphNode_in_entryRuleStateGraphNode10259 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleStateGraphNode10269 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleState_in_ruleStateGraphNode10316 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleChoicePoint_in_ruleStateGraphNode10343 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTrPoint_in_ruleStateGraphNode10370 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleStateGraph_in_entryRuleStateGraph10407 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleStateGraph10417 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_14_in_ruleStateGraph10463 = new BitSet(new long[]{0x0000000000008000L,0x000000081FC20000L});
-    public static final BitSet FOLLOW_ruleState_in_ruleStateGraph10485 = new BitSet(new long[]{0x0000000000008000L,0x000000081FC20000L});
-    public static final BitSet FOLLOW_ruleTrPoint_in_ruleStateGraph10512 = new BitSet(new long[]{0x0000000000008000L,0x000000081FC20000L});
-    public static final BitSet FOLLOW_ruleChoicePoint_in_ruleStateGraph10539 = new BitSet(new long[]{0x0000000000008000L,0x000000081FC20000L});
-    public static final BitSet FOLLOW_ruleTransition_in_ruleStateGraph10566 = new BitSet(new long[]{0x0000000000008000L,0x000000081FC20000L});
-    public static final BitSet FOLLOW_ruleRefinedTransition_in_ruleStateGraph10593 = new BitSet(new long[]{0x0000000000008000L,0x000000081FC20000L});
-    public static final BitSet FOLLOW_15_in_ruleStateGraph10607 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleStateMachine_in_entryRuleStateMachine10643 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleStateMachine10653 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_80_in_ruleStateMachine10699 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_ruleStateMachine10711 = new BitSet(new long[]{0x0000000000008000L,0x000000081FC20000L});
-    public static final BitSet FOLLOW_ruleState_in_ruleStateMachine10733 = new BitSet(new long[]{0x0000000000008000L,0x000000081FC20000L});
-    public static final BitSet FOLLOW_ruleTrPoint_in_ruleStateMachine10760 = new BitSet(new long[]{0x0000000000008000L,0x000000081FC20000L});
-    public static final BitSet FOLLOW_ruleChoicePoint_in_ruleStateMachine10787 = new BitSet(new long[]{0x0000000000008000L,0x000000081FC20000L});
-    public static final BitSet FOLLOW_ruleTransition_in_ruleStateMachine10814 = new BitSet(new long[]{0x0000000000008000L,0x000000081FC20000L});
-    public static final BitSet FOLLOW_ruleRefinedTransition_in_ruleStateMachine10841 = new BitSet(new long[]{0x0000000000008000L,0x000000081FC20000L});
-    public static final BitSet FOLLOW_15_in_ruleStateMachine10855 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleState_in_entryRuleState10891 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleState10901 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSimpleState_in_ruleState10948 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleRefinedState_in_ruleState10975 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSimpleState_in_entryRuleSimpleState11010 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleSimpleState11020 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_81_in_ruleSimpleState11057 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleSimpleState11074 = new BitSet(new long[]{0x0000000400004002L});
-    public static final BitSet FOLLOW_ruleDocumentation_in_ruleSimpleState11100 = new BitSet(new long[]{0x0000000000004002L});
-    public static final BitSet FOLLOW_14_in_ruleSimpleState11114 = new BitSet(new long[]{0x0000000000008000L,0x00000000003C0000L});
-    public static final BitSet FOLLOW_82_in_ruleSimpleState11127 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_ruleSimpleState11148 = new BitSet(new long[]{0x0000000000008000L,0x0000000000380000L});
-    public static final BitSet FOLLOW_83_in_ruleSimpleState11163 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_ruleSimpleState11184 = new BitSet(new long[]{0x0000000000008000L,0x0000000000300000L});
-    public static final BitSet FOLLOW_84_in_ruleSimpleState11199 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_ruleSimpleState11220 = new BitSet(new long[]{0x0000000000008000L,0x0000000000200000L});
-    public static final BitSet FOLLOW_85_in_ruleSimpleState11235 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_ruleStateGraph_in_ruleSimpleState11256 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_15_in_ruleSimpleState11270 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleRefinedState_in_entryRuleRefinedState11308 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleRefinedState11318 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_86_in_ruleRefinedState11355 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleFQN_in_ruleRefinedState11378 = new BitSet(new long[]{0x0000000400004000L});
-    public static final BitSet FOLLOW_ruleDocumentation_in_ruleRefinedState11399 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_ruleRefinedState11412 = new BitSet(new long[]{0x0000000000008000L,0x00000000003C0000L});
-    public static final BitSet FOLLOW_82_in_ruleRefinedState11425 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_ruleRefinedState11446 = new BitSet(new long[]{0x0000000000008000L,0x0000000000380000L});
-    public static final BitSet FOLLOW_83_in_ruleRefinedState11461 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_ruleRefinedState11482 = new BitSet(new long[]{0x0000000000008000L,0x0000000000300000L});
-    public static final BitSet FOLLOW_84_in_ruleRefinedState11497 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_ruleRefinedState11518 = new BitSet(new long[]{0x0000000000008000L,0x0000000000200000L});
-    public static final BitSet FOLLOW_85_in_ruleRefinedState11533 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_ruleStateGraph_in_ruleRefinedState11554 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_15_in_ruleRefinedState11568 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_entryRuleDetailCode11604 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleDetailCode11614 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_14_in_ruleDetailCode11666 = new BitSet(new long[]{0x0000000000008020L});
-    public static final BitSet FOLLOW_RULE_STRING_in_ruleDetailCode11696 = new BitSet(new long[]{0x0000000000008020L});
-    public static final BitSet FOLLOW_15_in_ruleDetailCode11714 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTrPoint_in_entryRuleTrPoint11750 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleTrPoint11760 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTransitionPoint_in_ruleTrPoint11807 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEntryPoint_in_ruleTrPoint11834 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExitPoint_in_ruleTrPoint11861 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTransitionPoint_in_entryRuleTransitionPoint11896 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleTransitionPoint11906 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_87_in_ruleTransitionPoint11949 = new BitSet(new long[]{0x0000000000000000L,0x0000000001000000L});
-    public static final BitSet FOLLOW_88_in_ruleTransitionPoint11975 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleTransitionPoint11992 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEntryPoint_in_entryRuleEntryPoint12033 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleEntryPoint12043 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_89_in_ruleEntryPoint12080 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleEntryPoint12097 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExitPoint_in_entryRuleExitPoint12138 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleExitPoint12148 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_90_in_ruleExitPoint12185 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleExitPoint12202 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleChoicePoint_in_entryRuleChoicePoint12243 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleChoicePoint12253 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_91_in_ruleChoicePoint12290 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleChoicePoint12307 = new BitSet(new long[]{0x0000000400000002L});
-    public static final BitSet FOLLOW_ruleDocumentation_in_ruleChoicePoint12333 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTransition_in_entryRuleTransition12370 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleTransition12380 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInitialTransition_in_ruleTransition12427 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleNonInitialTransition_in_ruleTransition12454 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleNonInitialTransition_in_entryRuleNonInitialTransition12489 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleNonInitialTransition12499 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTransitionChainStartTransition_in_ruleNonInitialTransition12546 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleContinuationTransition_in_ruleNonInitialTransition12573 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleCPBranchTransition_in_ruleNonInitialTransition12600 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTransitionChainStartTransition_in_entryRuleTransitionChainStartTransition12635 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleTransitionChainStartTransition12645 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTriggeredTransition_in_ruleTransitionChainStartTransition12692 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleGuardedTransition_in_ruleTransitionChainStartTransition12719 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInitialTransition_in_entryRuleInitialTransition12754 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleInitialTransition12764 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_92_in_ruleInitialTransition12801 = new BitSet(new long[]{0x0000000000010010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleInitialTransition12818 = new BitSet(new long[]{0x0000000000010000L});
-    public static final BitSet FOLLOW_16_in_ruleInitialTransition12836 = new BitSet(new long[]{0x0000000000000000L,0x0000000020000000L});
-    public static final BitSet FOLLOW_93_in_ruleInitialTransition12848 = new BitSet(new long[]{0x0000000000080000L});
-    public static final BitSet FOLLOW_19_in_ruleInitialTransition12860 = new BitSet(new long[]{0x0000000000000010L,0x0000003000000000L});
-    public static final BitSet FOLLOW_ruleTransitionTerminal_in_ruleInitialTransition12881 = new BitSet(new long[]{0x0000000400004002L});
-    public static final BitSet FOLLOW_ruleDocumentation_in_ruleInitialTransition12902 = new BitSet(new long[]{0x0000000000004002L});
-    public static final BitSet FOLLOW_14_in_ruleInitialTransition12916 = new BitSet(new long[]{0x0000000000008000L,0x0000000040000000L});
-    public static final BitSet FOLLOW_94_in_ruleInitialTransition12929 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_ruleInitialTransition12950 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_15_in_ruleInitialTransition12964 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleContinuationTransition_in_entryRuleContinuationTransition13002 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleContinuationTransition13012 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_92_in_ruleContinuationTransition13049 = new BitSet(new long[]{0x0000000000010010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleContinuationTransition13066 = new BitSet(new long[]{0x0000000000010000L});
-    public static final BitSet FOLLOW_16_in_ruleContinuationTransition13084 = new BitSet(new long[]{0x0000000000000010L,0x0000003000000000L});
-    public static final BitSet FOLLOW_ruleTransitionTerminal_in_ruleContinuationTransition13105 = new BitSet(new long[]{0x0000000000080000L});
-    public static final BitSet FOLLOW_19_in_ruleContinuationTransition13117 = new BitSet(new long[]{0x0000000000000010L,0x0000003000000000L});
-    public static final BitSet FOLLOW_ruleTransitionTerminal_in_ruleContinuationTransition13138 = new BitSet(new long[]{0x0000000400004002L});
-    public static final BitSet FOLLOW_ruleDocumentation_in_ruleContinuationTransition13159 = new BitSet(new long[]{0x0000000000004002L});
-    public static final BitSet FOLLOW_14_in_ruleContinuationTransition13173 = new BitSet(new long[]{0x0000000000008000L,0x0000000040000000L});
-    public static final BitSet FOLLOW_94_in_ruleContinuationTransition13186 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_ruleContinuationTransition13207 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_15_in_ruleContinuationTransition13221 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTriggeredTransition_in_entryRuleTriggeredTransition13259 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleTriggeredTransition13269 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_92_in_ruleTriggeredTransition13306 = new BitSet(new long[]{0x0000000000010010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleTriggeredTransition13323 = new BitSet(new long[]{0x0000000000010000L});
-    public static final BitSet FOLLOW_16_in_ruleTriggeredTransition13341 = new BitSet(new long[]{0x0000000000000010L,0x0000003000000000L});
-    public static final BitSet FOLLOW_ruleTransitionTerminal_in_ruleTriggeredTransition13362 = new BitSet(new long[]{0x0000000000080000L});
-    public static final BitSet FOLLOW_19_in_ruleTriggeredTransition13374 = new BitSet(new long[]{0x0000000000000010L,0x0000003000000000L});
-    public static final BitSet FOLLOW_ruleTransitionTerminal_in_ruleTriggeredTransition13395 = new BitSet(new long[]{0x0000000400004000L});
-    public static final BitSet FOLLOW_ruleDocumentation_in_ruleTriggeredTransition13416 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_ruleTriggeredTransition13429 = new BitSet(new long[]{0x0000000000000000L,0x0000000080000000L});
-    public static final BitSet FOLLOW_95_in_ruleTriggeredTransition13441 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_ruleTriggeredTransition13453 = new BitSet(new long[]{0x0000000000000000L,0x0000004000000000L});
-    public static final BitSet FOLLOW_ruleTrigger_in_ruleTriggeredTransition13474 = new BitSet(new long[]{0x0000000000008000L,0x0000000100000000L});
-    public static final BitSet FOLLOW_96_in_ruleTriggeredTransition13487 = new BitSet(new long[]{0x0000000000000000L,0x0000004000000000L});
-    public static final BitSet FOLLOW_ruleTrigger_in_ruleTriggeredTransition13508 = new BitSet(new long[]{0x0000000000008000L,0x0000000100000000L});
-    public static final BitSet FOLLOW_15_in_ruleTriggeredTransition13522 = new BitSet(new long[]{0x0000000000008000L,0x0000000040000000L});
-    public static final BitSet FOLLOW_94_in_ruleTriggeredTransition13535 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_ruleTriggeredTransition13556 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_15_in_ruleTriggeredTransition13570 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleGuardedTransition_in_entryRuleGuardedTransition13606 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleGuardedTransition13616 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_92_in_ruleGuardedTransition13653 = new BitSet(new long[]{0x0000000000010010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleGuardedTransition13670 = new BitSet(new long[]{0x0000000000010000L});
-    public static final BitSet FOLLOW_16_in_ruleGuardedTransition13688 = new BitSet(new long[]{0x0000000000000010L,0x0000003000000000L});
-    public static final BitSet FOLLOW_ruleTransitionTerminal_in_ruleGuardedTransition13709 = new BitSet(new long[]{0x0000000000080000L});
-    public static final BitSet FOLLOW_19_in_ruleGuardedTransition13721 = new BitSet(new long[]{0x0000000000000010L,0x0000003000000000L});
-    public static final BitSet FOLLOW_ruleTransitionTerminal_in_ruleGuardedTransition13742 = new BitSet(new long[]{0x0000000400004000L});
-    public static final BitSet FOLLOW_ruleDocumentation_in_ruleGuardedTransition13763 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_ruleGuardedTransition13776 = new BitSet(new long[]{0x0000000000000000L,0x0000000200000000L});
-    public static final BitSet FOLLOW_97_in_ruleGuardedTransition13788 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_ruleGuardedTransition13809 = new BitSet(new long[]{0x0000000000008000L,0x0000000040000000L});
-    public static final BitSet FOLLOW_94_in_ruleGuardedTransition13822 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_ruleGuardedTransition13843 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_15_in_ruleGuardedTransition13857 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleCPBranchTransition_in_entryRuleCPBranchTransition13893 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleCPBranchTransition13903 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_92_in_ruleCPBranchTransition13940 = new BitSet(new long[]{0x0000000000010010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleCPBranchTransition13957 = new BitSet(new long[]{0x0000000000010000L});
-    public static final BitSet FOLLOW_16_in_ruleCPBranchTransition13975 = new BitSet(new long[]{0x0000000000000010L,0x0000003000000000L});
-    public static final BitSet FOLLOW_ruleTransitionTerminal_in_ruleCPBranchTransition13996 = new BitSet(new long[]{0x0000000000080000L});
-    public static final BitSet FOLLOW_19_in_ruleCPBranchTransition14008 = new BitSet(new long[]{0x0000000000000010L,0x0000003000000000L});
-    public static final BitSet FOLLOW_ruleTransitionTerminal_in_ruleCPBranchTransition14029 = new BitSet(new long[]{0x0000000400004000L});
-    public static final BitSet FOLLOW_ruleDocumentation_in_ruleCPBranchTransition14050 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_ruleCPBranchTransition14063 = new BitSet(new long[]{0x0000000000000000L,0x0000000400000000L});
-    public static final BitSet FOLLOW_98_in_ruleCPBranchTransition14075 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_ruleCPBranchTransition14096 = new BitSet(new long[]{0x0000000000008000L,0x0000000040000000L});
-    public static final BitSet FOLLOW_94_in_ruleCPBranchTransition14109 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_ruleCPBranchTransition14130 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_15_in_ruleCPBranchTransition14144 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleRefinedTransition_in_entryRuleRefinedTransition14180 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleRefinedTransition14190 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_99_in_ruleRefinedTransition14227 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleFQN_in_ruleRefinedTransition14250 = new BitSet(new long[]{0x0000000400004000L});
-    public static final BitSet FOLLOW_ruleDocumentation_in_ruleRefinedTransition14271 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_ruleRefinedTransition14284 = new BitSet(new long[]{0x0000000000000000L,0x0000000040000000L});
-    public static final BitSet FOLLOW_94_in_ruleRefinedTransition14296 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_ruleRefinedTransition14317 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_15_in_ruleRefinedTransition14329 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTransitionTerminal_in_entryRuleTransitionTerminal14365 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleTransitionTerminal14375 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleStateTerminal_in_ruleTransitionTerminal14422 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTrPointTerminal_in_ruleTransitionTerminal14449 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSubStateTrPointTerminal_in_ruleTransitionTerminal14476 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleChoicepointTerminal_in_ruleTransitionTerminal14503 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleStateTerminal_in_entryRuleStateTerminal14538 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleStateTerminal14548 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleStateTerminal14592 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTrPointTerminal_in_entryRuleTrPointTerminal14627 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleTrPointTerminal14637 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_100_in_ruleTrPointTerminal14674 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleTrPointTerminal14694 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSubStateTrPointTerminal_in_entryRuleSubStateTrPointTerminal14730 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleSubStateTrPointTerminal14740 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleSubStateTrPointTerminal14785 = new BitSet(new long[]{0x0000000001000000L});
-    public static final BitSet FOLLOW_24_in_ruleSubStateTrPointTerminal14797 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleSubStateTrPointTerminal14817 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleChoicepointTerminal_in_entryRuleChoicepointTerminal14853 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleChoicepointTerminal14863 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_101_in_ruleChoicepointTerminal14900 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleChoicepointTerminal14920 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTrigger_in_entryRuleTrigger14956 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleTrigger14966 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_102_in_ruleTrigger15003 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleMessageFromIf_in_ruleTrigger15024 = new BitSet(new long[]{0x0000000000000000L,0x0000018200000000L});
-    public static final BitSet FOLLOW_103_in_ruleTrigger15037 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleMessageFromIf_in_ruleTrigger15058 = new BitSet(new long[]{0x0000000000000000L,0x0000018200000000L});
-    public static final BitSet FOLLOW_ruleGuard_in_ruleTrigger15081 = new BitSet(new long[]{0x0000000000000000L,0x0000010000000000L});
-    public static final BitSet FOLLOW_104_in_ruleTrigger15094 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleMessageFromIf_in_entryRuleMessageFromIf15130 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleMessageFromIf15140 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleMessageFromIf15185 = new BitSet(new long[]{0x0000000000010000L});
-    public static final BitSet FOLLOW_16_in_ruleMessageFromIf15197 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleMessageFromIf15217 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleGuard_in_entryRuleGuard15253 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleGuard15263 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_97_in_ruleGuard15300 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_ruleDetailCode_in_ruleGuard15321 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleProtocolSemantics_in_entryRuleProtocolSemantics15357 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleProtocolSemantics15367 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_105_in_ruleProtocolSemantics15413 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_ruleProtocolSemantics15425 = new BitSet(new long[]{0x0000000000008000L,0x00000C0000000000L});
-    public static final BitSet FOLLOW_ruleSemanticsRule_in_ruleProtocolSemantics15446 = new BitSet(new long[]{0x0000000000008000L,0x00000C0000000000L});
-    public static final BitSet FOLLOW_15_in_ruleProtocolSemantics15459 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSemanticsRule_in_entryRuleSemanticsRule15495 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleSemanticsRule15505 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInSemanticsRule_in_ruleSemanticsRule15552 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleOutSemanticsRule_in_ruleSemanticsRule15579 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInSemanticsRule_in_entryRuleInSemanticsRule15614 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleInSemanticsRule15624 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_106_in_ruleInSemanticsRule15661 = new BitSet(new long[]{0x0000000000010000L});
-    public static final BitSet FOLLOW_16_in_ruleInSemanticsRule15673 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleInSemanticsRule15693 = new BitSet(new long[]{0x0000000000080002L});
-    public static final BitSet FOLLOW_19_in_ruleInSemanticsRule15706 = new BitSet(new long[]{0x0000000000100000L,0x00000C0000000000L});
-    public static final BitSet FOLLOW_ruleSemanticsRule_in_ruleInSemanticsRule15728 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_20_in_ruleInSemanticsRule15747 = new BitSet(new long[]{0x0000000000000000L,0x00000C0000000000L});
-    public static final BitSet FOLLOW_ruleSemanticsRule_in_ruleInSemanticsRule15768 = new BitSet(new long[]{0x0000000002000000L});
-    public static final BitSet FOLLOW_25_in_ruleInSemanticsRule15781 = new BitSet(new long[]{0x0000000000000000L,0x00000C0000000000L});
-    public static final BitSet FOLLOW_ruleSemanticsRule_in_ruleInSemanticsRule15802 = new BitSet(new long[]{0x0000000002200000L});
-    public static final BitSet FOLLOW_21_in_ruleInSemanticsRule15816 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleOutSemanticsRule_in_entryRuleOutSemanticsRule15856 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleOutSemanticsRule15866 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_107_in_ruleOutSemanticsRule15903 = new BitSet(new long[]{0x0000000000010000L});
-    public static final BitSet FOLLOW_16_in_ruleOutSemanticsRule15915 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleOutSemanticsRule15935 = new BitSet(new long[]{0x0000000000080002L});
-    public static final BitSet FOLLOW_19_in_ruleOutSemanticsRule15948 = new BitSet(new long[]{0x0000000000100000L,0x00000C0000000000L});
-    public static final BitSet FOLLOW_ruleSemanticsRule_in_ruleOutSemanticsRule15970 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_20_in_ruleOutSemanticsRule15989 = new BitSet(new long[]{0x0000000000000000L,0x00000C0000000000L});
-    public static final BitSet FOLLOW_ruleSemanticsRule_in_ruleOutSemanticsRule16010 = new BitSet(new long[]{0x0000000002000000L});
-    public static final BitSet FOLLOW_25_in_ruleOutSemanticsRule16023 = new BitSet(new long[]{0x0000000000000000L,0x00000C0000000000L});
-    public static final BitSet FOLLOW_ruleSemanticsRule_in_ruleOutSemanticsRule16044 = new BitSet(new long[]{0x0000000002200000L});
-    public static final BitSet FOLLOW_21_in_ruleOutSemanticsRule16058 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAnnotation_in_entryRuleAnnotation16098 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleAnnotation16108 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_108_in_ruleAnnotation16145 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleFQN_in_ruleAnnotation16168 = new BitSet(new long[]{0x0000000000100002L});
-    public static final BitSet FOLLOW_20_in_ruleAnnotation16181 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleKeyValue_in_ruleAnnotation16202 = new BitSet(new long[]{0x0000000002200000L});
-    public static final BitSet FOLLOW_25_in_ruleAnnotation16215 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleKeyValue_in_ruleAnnotation16236 = new BitSet(new long[]{0x0000000002200000L});
-    public static final BitSet FOLLOW_21_in_ruleAnnotation16250 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleKeyValue_in_entryRuleKeyValue16288 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleKeyValue16298 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleKeyValue16340 = new BitSet(new long[]{0x0000000004000000L});
-    public static final BitSet FOLLOW_26_in_ruleKeyValue16357 = new BitSet(new long[]{0x00000000000000E0L,0x03C0000000000100L});
-    public static final BitSet FOLLOW_ruleLiteral_in_ruleKeyValue16378 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAnnotationType_in_entryRuleAnnotationType16414 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleAnnotationType16424 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_109_in_ruleAnnotationType16461 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleAnnotationType16478 = new BitSet(new long[]{0x0000000400004000L});
-    public static final BitSet FOLLOW_ruleDocumentation_in_ruleAnnotationType16504 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_ruleAnnotationType16517 = new BitSet(new long[]{0x0000000000000000L,0x0000400000000000L});
-    public static final BitSet FOLLOW_110_in_ruleAnnotationType16529 = new BitSet(new long[]{0x0000000004000000L});
-    public static final BitSet FOLLOW_26_in_ruleAnnotationType16541 = new BitSet(new long[]{0x0081040010004000L,0x0000000000008005L});
-    public static final BitSet FOLLOW_ruleAnnotationTargetType_in_ruleAnnotationType16563 = new BitSet(new long[]{0x0000000000008000L,0x0001800000000000L});
-    public static final BitSet FOLLOW_14_in_ruleAnnotationType16582 = new BitSet(new long[]{0x0081040010000000L,0x0000000000008005L});
-    public static final BitSet FOLLOW_ruleAnnotationTargetType_in_ruleAnnotationType16603 = new BitSet(new long[]{0x0000000002008000L});
-    public static final BitSet FOLLOW_25_in_ruleAnnotationType16616 = new BitSet(new long[]{0x0081040010000000L,0x0000000000008005L});
-    public static final BitSet FOLLOW_ruleAnnotationTargetType_in_ruleAnnotationType16637 = new BitSet(new long[]{0x0000000002008000L});
-    public static final BitSet FOLLOW_15_in_ruleAnnotationType16651 = new BitSet(new long[]{0x0000000000008000L,0x0001800000000000L});
-    public static final BitSet FOLLOW_ruleAnnotationAttribute_in_ruleAnnotationType16674 = new BitSet(new long[]{0x0000000000008000L,0x0001800000000000L});
-    public static final BitSet FOLLOW_15_in_ruleAnnotationType16687 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAnnotationAttribute_in_entryRuleAnnotationAttribute16723 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleAnnotationAttribute16733 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSimpleAnnotationAttribute_in_ruleAnnotationAttribute16780 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEnumAnnotationAttribute_in_ruleAnnotationAttribute16807 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSimpleAnnotationAttribute_in_entryRuleSimpleAnnotationAttribute16842 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleSimpleAnnotationAttribute16852 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_111_in_ruleSimpleAnnotationAttribute16896 = new BitSet(new long[]{0x0000000000000000L,0x0002000000000000L});
-    public static final BitSet FOLLOW_112_in_ruleSimpleAnnotationAttribute16927 = new BitSet(new long[]{0x0000000000000000L,0x0002000000000000L});
-    public static final BitSet FOLLOW_113_in_ruleSimpleAnnotationAttribute16940 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleSimpleAnnotationAttribute16957 = new BitSet(new long[]{0x0000000000010000L});
-    public static final BitSet FOLLOW_16_in_ruleSimpleAnnotationAttribute16974 = new BitSet(new long[]{0x0000000000000000L,0x8000000000000000L,0x0000000000000007L});
-    public static final BitSet FOLLOW_ruleLiteralType_in_ruleSimpleAnnotationAttribute16995 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEnumAnnotationAttribute_in_entryRuleEnumAnnotationAttribute17031 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleEnumAnnotationAttribute17041 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_111_in_ruleEnumAnnotationAttribute17085 = new BitSet(new long[]{0x0000000000000000L,0x0002000000000000L});
-    public static final BitSet FOLLOW_112_in_ruleEnumAnnotationAttribute17116 = new BitSet(new long[]{0x0000000000000000L,0x0002000000000000L});
-    public static final BitSet FOLLOW_113_in_ruleEnumAnnotationAttribute17129 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleEnumAnnotationAttribute17146 = new BitSet(new long[]{0x0000000000010000L});
-    public static final BitSet FOLLOW_16_in_ruleEnumAnnotationAttribute17163 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_ruleEnumAnnotationAttribute17175 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_RULE_STRING_in_ruleEnumAnnotationAttribute17192 = new BitSet(new long[]{0x0000000002008000L});
-    public static final BitSet FOLLOW_25_in_ruleEnumAnnotationAttribute17210 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_RULE_STRING_in_ruleEnumAnnotationAttribute17227 = new BitSet(new long[]{0x0000000002008000L});
-    public static final BitSet FOLLOW_15_in_ruleEnumAnnotationAttribute17246 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleImport_in_entryRuleImport17282 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleImport17292 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_114_in_ruleImport17329 = new BitSet(new long[]{0x0000000000000010L,0x0010000000000000L});
-    public static final BitSet FOLLOW_ruleImportedFQN_in_ruleImport17352 = new BitSet(new long[]{0x0000000000000000L,0x0008000000000000L});
-    public static final BitSet FOLLOW_115_in_ruleImport17364 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_116_in_ruleImport17383 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_RULE_STRING_in_ruleImport17401 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleImportedFQN_in_entryRuleImportedFQN17443 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleImportedFQN17454 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleFQN_in_ruleImportedFQN17501 = new BitSet(new long[]{0x0000000000000002L,0x0020000000000000L});
-    public static final BitSet FOLLOW_117_in_ruleImportedFQN17520 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDocumentation_in_entryRuleDocumentation17562 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleDocumentation17572 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_34_in_ruleDocumentation17618 = new BitSet(new long[]{0x0000000800000020L});
-    public static final BitSet FOLLOW_RULE_STRING_in_ruleDocumentation17635 = new BitSet(new long[]{0x0000000800000020L});
-    public static final BitSet FOLLOW_35_in_ruleDocumentation17653 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleLiteral_in_entryRuleLiteral17693 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleLiteral17703 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleBooleanLiteral_in_ruleLiteral17750 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleNumberLiteral_in_ruleLiteral17777 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleStringLiteral_in_ruleLiteral17804 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleBooleanLiteral_in_entryRuleBooleanLiteral17839 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleBooleanLiteral17849 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_118_in_ruleBooleanLiteral17896 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_119_in_ruleBooleanLiteral17920 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleNumberLiteral_in_entryRuleNumberLiteral17970 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleNumberLiteral17980 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleIntLiteral_in_ruleNumberLiteral18027 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleRealLiteral_in_ruleNumberLiteral18054 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleRealLiteral_in_entryRuleRealLiteral18089 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleRealLiteral18099 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleReal_in_ruleRealLiteral18154 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleIntLiteral_in_entryRuleIntLiteral18190 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleIntLiteral18200 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInteger_in_ruleIntLiteral18255 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleStringLiteral_in_entryRuleStringLiteral18291 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleStringLiteral18301 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_STRING_in_ruleStringLiteral18352 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInteger_in_entryRuleInteger18394 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleInteger18405 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSignedInteger_in_ruleInteger18452 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleHexadecimal_in_ruleInteger18485 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSignedInteger_in_entryRuleSignedInteger18537 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleSignedInteger18548 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_120_in_ruleSignedInteger18591 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_121_in_ruleSignedInteger18610 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleSignedInteger18627 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleHexadecimal_in_entryRuleHexadecimal18683 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleHexadecimal18694 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_HEX_in_ruleHexadecimal18737 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleReal_in_entryRuleReal18786 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleReal18797 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDecimal_in_ruleReal18844 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDotDecimal_in_ruleReal18877 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDecimalDot_in_ruleReal18910 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDecimalExp_in_ruleReal18943 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDecimal_in_entryRuleDecimal18995 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleDecimal19006 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_120_in_ruleDecimal19049 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_121_in_ruleDecimal19068 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleDecimal19085 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000100L});
-    public static final BitSet FOLLOW_72_in_ruleDecimal19103 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleDecimal19118 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDotDecimal_in_entryRuleDotDecimal19174 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleDotDecimal19185 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_120_in_ruleDotDecimal19228 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000100L});
-    public static final BitSet FOLLOW_121_in_ruleDotDecimal19247 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000100L});
-    public static final BitSet FOLLOW_72_in_ruleDotDecimal19262 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleDotDecimal19277 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDecimalDot_in_entryRuleDecimalDot19333 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleDecimalDot19344 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_120_in_ruleDecimalDot19387 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_121_in_ruleDecimalDot19406 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleDecimalDot19423 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000100L});
-    public static final BitSet FOLLOW_72_in_ruleDecimalDot19441 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDecimalExp_in_entryRuleDecimalExp19492 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleDecimalExp19503 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_120_in_ruleDecimalExp19546 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_121_in_ruleDecimalExp19565 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleDecimalExp19582 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000100L});
-    public static final BitSet FOLLOW_72_in_ruleDecimalExp19600 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleDecimalExp19615 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_RULE_EXP_in_ruleDecimalExp19635 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleFQN_in_entryRuleFQN19685 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleFQN19696 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleFQN19736 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000100L});
-    public static final BitSet FOLLOW_72_in_ruleFQN19755 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleFQN19770 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000100L});
-    public static final BitSet FOLLOW_122_in_ruleCommunicationType19831 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_123_in_ruleCommunicationType19848 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_124_in_ruleCommunicationType19865 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_125_in_ruleReferenceType19910 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_111_in_ruleReferenceType19927 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_122_in_ruleComponentCommunicationType19974 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_123_in_ruleComponentCommunicationType19991 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_126_in_ruleComponentCommunicationType20008 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_124_in_ruleComponentCommunicationType20025 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_127_in_ruleLiteralType20070 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_128_in_ruleLiteralType20087 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_129_in_ruleLiteralType20104 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_130_in_ruleLiteralType20121 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_19_in_rulePrimitiveType1358 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_RULE_STRING_in_rulePrimitiveType1375 = new BitSet(new long[]{0x0000000000500000L});
+    public static final BitSet FOLLOW_20_in_rulePrimitiveType1393 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleFQN_in_rulePrimitiveType1414 = new BitSet(new long[]{0x0000000000200000L});
+    public static final BitSet FOLLOW_21_in_rulePrimitiveType1426 = new BitSet(new long[]{0x0000000000400000L});
+    public static final BitSet FOLLOW_22_in_rulePrimitiveType1440 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_RULE_STRING_in_rulePrimitiveType1457 = new BitSet(new long[]{0x0000000400000002L});
+    public static final BitSet FOLLOW_ruleDocumentation_in_rulePrimitiveType1483 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEnumerationType_in_entryRuleEnumerationType1520 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleEnumerationType1530 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_23_in_ruleEnumerationType1567 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleEnumerationType1584 = new BitSet(new long[]{0x0000000401004000L});
+    public static final BitSet FOLLOW_ruleDocumentation_in_ruleEnumerationType1610 = new BitSet(new long[]{0x0000000001004000L});
+    public static final BitSet FOLLOW_24_in_ruleEnumerationType1624 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleFQN_in_ruleEnumerationType1647 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_ruleEnumerationType1661 = new BitSet(new long[]{0x0000000000008010L});
+    public static final BitSet FOLLOW_ruleEnumLiteral_in_ruleEnumerationType1683 = new BitSet(new long[]{0x0000000002008000L});
+    public static final BitSet FOLLOW_25_in_ruleEnumerationType1696 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleEnumLiteral_in_ruleEnumerationType1717 = new BitSet(new long[]{0x0000000002008000L});
+    public static final BitSet FOLLOW_15_in_ruleEnumerationType1733 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEnumLiteral_in_entryRuleEnumLiteral1769 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleEnumLiteral1779 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleEnumLiteral1821 = new BitSet(new long[]{0x0000000004000002L});
+    public static final BitSet FOLLOW_26_in_ruleEnumLiteral1839 = new BitSet(new long[]{0x00000000000000C0L,0x0300000000000000L});
+    public static final BitSet FOLLOW_ruleIntLiteral_in_ruleEnumLiteral1860 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExternalType_in_entryRuleExternalType1898 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleExternalType1908 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_27_in_ruleExternalType1945 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleExternalType1962 = new BitSet(new long[]{0x0000000000080000L});
+    public static final BitSet FOLLOW_19_in_ruleExternalType1979 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_RULE_STRING_in_ruleExternalType1996 = new BitSet(new long[]{0x0000000400400002L});
+    public static final BitSet FOLLOW_22_in_ruleExternalType2014 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_RULE_STRING_in_ruleExternalType2031 = new BitSet(new long[]{0x0000000400000002L});
+    public static final BitSet FOLLOW_ruleDocumentation_in_ruleExternalType2059 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDataClass_in_entryRuleDataClass2096 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleDataClass2106 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_28_in_ruleDataClass2143 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleDataClass2160 = new BitSet(new long[]{0x0000000420004000L});
+    public static final BitSet FOLLOW_ruleDocumentation_in_ruleDataClass2186 = new BitSet(new long[]{0x0000000020004000L});
+    public static final BitSet FOLLOW_29_in_ruleDataClass2200 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleFQN_in_ruleDataClass2223 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_ruleDataClass2237 = new BitSet(new long[]{0x00000333C0008000L,0x0000100000000000L});
+    public static final BitSet FOLLOW_ruleAnnotation_in_ruleDataClass2258 = new BitSet(new long[]{0x00000333C0008000L,0x0000100000000000L});
+    public static final BitSet FOLLOW_30_in_ruleDataClass2272 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_ruleDataClass2293 = new BitSet(new long[]{0x0000033380008000L});
+    public static final BitSet FOLLOW_31_in_ruleDataClass2308 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_ruleDataClass2329 = new BitSet(new long[]{0x0000033300008000L});
+    public static final BitSet FOLLOW_32_in_ruleDataClass2344 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_ruleDataClass2365 = new BitSet(new long[]{0x0000033200008000L});
+    public static final BitSet FOLLOW_ruleStandardOperation_in_ruleDataClass2389 = new BitSet(new long[]{0x0000033200008000L});
+    public static final BitSet FOLLOW_ruleClassStructor_in_ruleDataClass2416 = new BitSet(new long[]{0x0000033200008000L});
+    public static final BitSet FOLLOW_ruleAttribute_in_ruleDataClass2443 = new BitSet(new long[]{0x0000033200008000L});
+    public static final BitSet FOLLOW_15_in_ruleDataClass2457 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleAttribute_in_entryRuleAttribute2493 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleAttribute2503 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_33_in_ruleAttribute2540 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleAttribute2557 = new BitSet(new long[]{0x0000000400010000L});
+    public static final BitSet FOLLOW_34_in_ruleAttribute2575 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleAttribute2592 = new BitSet(new long[]{0x0000000800000000L});
+    public static final BitSet FOLLOW_35_in_ruleAttribute2609 = new BitSet(new long[]{0x0000000000010000L});
+    public static final BitSet FOLLOW_16_in_ruleAttribute2623 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleRefableType_in_ruleAttribute2644 = new BitSet(new long[]{0x0000000404000002L});
+    public static final BitSet FOLLOW_26_in_ruleAttribute2657 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_RULE_STRING_in_ruleAttribute2674 = new BitSet(new long[]{0x0000000400000002L});
+    public static final BitSet FOLLOW_ruleDocumentation_in_ruleAttribute2702 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleStandardOperation_in_entryRuleStandardOperation2741 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleStandardOperation2751 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_36_in_ruleStandardOperation2794 = new BitSet(new long[]{0x0000002000000000L});
+    public static final BitSet FOLLOW_37_in_ruleStandardOperation2820 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleStandardOperation2837 = new BitSet(new long[]{0x0000000000100000L});
+    public static final BitSet FOLLOW_20_in_ruleStandardOperation2854 = new BitSet(new long[]{0x0000000000200010L});
+    public static final BitSet FOLLOW_ruleVarDecl_in_ruleStandardOperation2876 = new BitSet(new long[]{0x0000000002200000L});
+    public static final BitSet FOLLOW_25_in_ruleStandardOperation2889 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleVarDecl_in_ruleStandardOperation2910 = new BitSet(new long[]{0x0000000002200000L});
+    public static final BitSet FOLLOW_21_in_ruleStandardOperation2926 = new BitSet(new long[]{0x0000000400014000L});
+    public static final BitSet FOLLOW_16_in_ruleStandardOperation2939 = new BitSet(new long[]{0x0000004000000010L});
+    public static final BitSet FOLLOW_38_in_ruleStandardOperation2952 = new BitSet(new long[]{0x0000000400004000L});
+    public static final BitSet FOLLOW_ruleRefableType_in_ruleStandardOperation2979 = new BitSet(new long[]{0x0000000400004000L});
+    public static final BitSet FOLLOW_ruleDocumentation_in_ruleStandardOperation3003 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_ruleStandardOperation3025 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulePortOperation_in_entryRulePortOperation3061 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRulePortOperation3071 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_37_in_rulePortOperation3108 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_rulePortOperation3125 = new BitSet(new long[]{0x0000000000100000L});
+    public static final BitSet FOLLOW_20_in_rulePortOperation3142 = new BitSet(new long[]{0x0000000000200010L});
+    public static final BitSet FOLLOW_ruleVarDecl_in_rulePortOperation3164 = new BitSet(new long[]{0x0000000002200000L});
+    public static final BitSet FOLLOW_25_in_rulePortOperation3177 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleVarDecl_in_rulePortOperation3198 = new BitSet(new long[]{0x0000000002200000L});
+    public static final BitSet FOLLOW_21_in_rulePortOperation3214 = new BitSet(new long[]{0x0000008400014000L});
+    public static final BitSet FOLLOW_16_in_rulePortOperation3228 = new BitSet(new long[]{0x0000004000000010L});
+    public static final BitSet FOLLOW_38_in_rulePortOperation3241 = new BitSet(new long[]{0x0000000400004000L});
+    public static final BitSet FOLLOW_ruleRefableType_in_rulePortOperation3268 = new BitSet(new long[]{0x0000000400004000L});
+    public static final BitSet FOLLOW_39_in_rulePortOperation3289 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_rulePortOperation3309 = new BitSet(new long[]{0x0000000400004000L});
+    public static final BitSet FOLLOW_ruleDocumentation_in_rulePortOperation3333 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_rulePortOperation3355 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleClassStructor_in_entryRuleClassStructor3391 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleClassStructor3401 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_40_in_ruleClassStructor3446 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_41_in_ruleClassStructor3475 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_ruleClassStructor3512 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleGeneralProtocolClass_in_entryRuleGeneralProtocolClass3548 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleGeneralProtocolClass3558 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleProtocolClass_in_ruleGeneralProtocolClass3605 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleCompoundProtocolClass_in_ruleGeneralProtocolClass3632 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleProtocolClass_in_entryRuleProtocolClass3667 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleProtocolClass3677 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleCommunicationType_in_ruleProtocolClass3723 = new BitSet(new long[]{0x0000040000000000L});
+    public static final BitSet FOLLOW_42_in_ruleProtocolClass3736 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleProtocolClass3753 = new BitSet(new long[]{0x0000000420004000L});
+    public static final BitSet FOLLOW_ruleDocumentation_in_ruleProtocolClass3779 = new BitSet(new long[]{0x0000000020004000L});
+    public static final BitSet FOLLOW_29_in_ruleProtocolClass3793 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleFQN_in_ruleProtocolClass3816 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_ruleProtocolClass3830 = new BitSet(new long[]{0x0000B801C0008000L,0x0000120000000000L});
+    public static final BitSet FOLLOW_ruleAnnotation_in_ruleProtocolClass3851 = new BitSet(new long[]{0x0000B801C0008000L,0x0000120000000000L});
+    public static final BitSet FOLLOW_30_in_ruleProtocolClass3865 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_ruleProtocolClass3886 = new BitSet(new long[]{0x0000B80180008000L,0x0000020000000000L});
+    public static final BitSet FOLLOW_31_in_ruleProtocolClass3901 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_ruleProtocolClass3922 = new BitSet(new long[]{0x0000B80100008000L,0x0000020000000000L});
+    public static final BitSet FOLLOW_32_in_ruleProtocolClass3937 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_ruleProtocolClass3958 = new BitSet(new long[]{0x0000B80000008000L,0x0000020000000000L});
+    public static final BitSet FOLLOW_43_in_ruleProtocolClass3973 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_ruleProtocolClass3985 = new BitSet(new long[]{0x000C000000008000L});
+    public static final BitSet FOLLOW_ruleMessage_in_ruleProtocolClass4006 = new BitSet(new long[]{0x000C000000008000L});
+    public static final BitSet FOLLOW_15_in_ruleProtocolClass4019 = new BitSet(new long[]{0x0000B00000008000L,0x0000020000000000L});
+    public static final BitSet FOLLOW_44_in_ruleProtocolClass4034 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_ruleProtocolClass4046 = new BitSet(new long[]{0x000C000000008000L});
+    public static final BitSet FOLLOW_ruleMessage_in_ruleProtocolClass4067 = new BitSet(new long[]{0x000C000000008000L});
+    public static final BitSet FOLLOW_15_in_ruleProtocolClass4080 = new BitSet(new long[]{0x0000A00000008000L,0x0000020000000000L});
+    public static final BitSet FOLLOW_45_in_ruleProtocolClass4095 = new BitSet(new long[]{0x0000400000000000L});
+    public static final BitSet FOLLOW_46_in_ruleProtocolClass4107 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_rulePortClass_in_ruleProtocolClass4128 = new BitSet(new long[]{0x0000800000008000L,0x0000020000000000L});
+    public static final BitSet FOLLOW_47_in_ruleProtocolClass4143 = new BitSet(new long[]{0x0000400000000000L});
+    public static final BitSet FOLLOW_46_in_ruleProtocolClass4155 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_rulePortClass_in_ruleProtocolClass4176 = new BitSet(new long[]{0x0000000000008000L,0x0000020000000000L});
+    public static final BitSet FOLLOW_ruleProtocolSemantics_in_ruleProtocolClass4199 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_15_in_ruleProtocolClass4212 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleCompoundProtocolClass_in_entryRuleCompoundProtocolClass4248 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleCompoundProtocolClass4258 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_48_in_ruleCompoundProtocolClass4295 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleCompoundProtocolClass4312 = new BitSet(new long[]{0x0000000400004000L});
+    public static final BitSet FOLLOW_ruleDocumentation_in_ruleCompoundProtocolClass4338 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_ruleCompoundProtocolClass4351 = new BitSet(new long[]{0x0002000000008000L,0x0000100000000000L});
+    public static final BitSet FOLLOW_ruleAnnotation_in_ruleCompoundProtocolClass4372 = new BitSet(new long[]{0x0002000000008000L,0x0000100000000000L});
+    public static final BitSet FOLLOW_ruleSubProtocol_in_ruleCompoundProtocolClass4394 = new BitSet(new long[]{0x0002000000008000L});
+    public static final BitSet FOLLOW_15_in_ruleCompoundProtocolClass4407 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSubProtocol_in_entryRuleSubProtocol4443 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleSubProtocol4453 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_49_in_ruleSubProtocol4490 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleSubProtocol4507 = new BitSet(new long[]{0x0000000000010000L});
+    public static final BitSet FOLLOW_16_in_ruleSubProtocol4524 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleFQN_in_ruleSubProtocol4547 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleMessage_in_entryRuleMessage4583 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleMessage4593 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_50_in_ruleMessage4636 = new BitSet(new long[]{0x0008000000000000L});
+    public static final BitSet FOLLOW_51_in_ruleMessage4662 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleMessage4679 = new BitSet(new long[]{0x0000000000100000L});
+    public static final BitSet FOLLOW_20_in_ruleMessage4696 = new BitSet(new long[]{0x0000000000200010L});
+    public static final BitSet FOLLOW_ruleVarDecl_in_ruleMessage4717 = new BitSet(new long[]{0x0000000000200000L});
+    public static final BitSet FOLLOW_21_in_ruleMessage4730 = new BitSet(new long[]{0x0000000400000002L});
+    public static final BitSet FOLLOW_ruleDocumentation_in_ruleMessage4751 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulePortClass_in_entryRulePortClass4788 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRulePortClass4798 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_14_in_rulePortClass4844 = new BitSet(new long[]{0x0030033200008000L});
+    public static final BitSet FOLLOW_52_in_rulePortClass4857 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_rulePortClass4878 = new BitSet(new long[]{0x0020033200008000L});
+    public static final BitSet FOLLOW_ruleMessageHandler_in_rulePortClass4902 = new BitSet(new long[]{0x0020033200008000L});
+    public static final BitSet FOLLOW_rulePortOperation_in_rulePortClass4929 = new BitSet(new long[]{0x0020033200008000L});
+    public static final BitSet FOLLOW_ruleAttribute_in_rulePortClass4956 = new BitSet(new long[]{0x0020033200008000L});
+    public static final BitSet FOLLOW_15_in_rulePortClass4970 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleMessageHandler_in_entryRuleMessageHandler5006 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleMessageHandler5016 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleInMessageHandler_in_ruleMessageHandler5063 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleOutMessageHandler_in_ruleMessageHandler5090 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleInMessageHandler_in_entryRuleInMessageHandler5125 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleInMessageHandler5135 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_53_in_ruleInMessageHandler5172 = new BitSet(new long[]{0x0000080000000000L});
+    public static final BitSet FOLLOW_43_in_ruleInMessageHandler5184 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleInMessageHandler5204 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_ruleInMessageHandler5225 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleOutMessageHandler_in_entryRuleOutMessageHandler5261 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleOutMessageHandler5271 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_53_in_ruleOutMessageHandler5308 = new BitSet(new long[]{0x0000100000000000L});
+    public static final BitSet FOLLOW_44_in_ruleOutMessageHandler5320 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleOutMessageHandler5340 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_ruleOutMessageHandler5361 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleModelComponent_in_entryRuleModelComponent5397 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleModelComponent5407 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleActorClass_in_ruleModelComponent5453 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleActorClass_in_entryRuleActorClass5487 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleActorClass5497 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_54_in_ruleActorClass5585 = new BitSet(new long[]{0x00C0000000000000L,0x5C00000000000000L});
+    public static final BitSet FOLLOW_ruleComponentCommunicationType_in_ruleActorClass5673 = new BitSet(new long[]{0x00C0000000000000L,0x5C00000000000000L});
+    public static final BitSet FOLLOW_55_in_ruleActorClass5725 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleActorClass5742 = new BitSet(new long[]{0x0000000420004000L});
+    public static final BitSet FOLLOW_ruleDocumentation_in_ruleActorClass5768 = new BitSet(new long[]{0x0000000020004000L});
+    public static final BitSet FOLLOW_29_in_ruleActorClass5782 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleFQN_in_ruleActorClass5805 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_ruleActorClass5819 = new BitSet(new long[]{0x0700000000008000L,0x0000100000000000L});
+    public static final BitSet FOLLOW_ruleAnnotation_in_ruleActorClass5840 = new BitSet(new long[]{0x0700000000008000L,0x0000100000000000L});
+    public static final BitSet FOLLOW_56_in_ruleActorClass5854 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_ruleActorClass5866 = new BitSet(new long[]{0x4800800000008000L});
+    public static final BitSet FOLLOW_ruleSPP_in_ruleActorClass5888 = new BitSet(new long[]{0x4800800000008000L});
+    public static final BitSet FOLLOW_rulePort_in_ruleActorClass5915 = new BitSet(new long[]{0x4800800000008000L});
+    public static final BitSet FOLLOW_15_in_ruleActorClass5929 = new BitSet(new long[]{0x0600000000008000L});
+    public static final BitSet FOLLOW_57_in_ruleActorClass5944 = new BitSet(new long[]{0x0000000400004000L});
+    public static final BitSet FOLLOW_ruleDocumentation_in_ruleActorClass5965 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_ruleActorClass5978 = new BitSet(new long[]{0xF8008333C0008000L,0x2000800000002440L});
+    public static final BitSet FOLLOW_30_in_ruleActorClass5991 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_ruleActorClass6012 = new BitSet(new long[]{0xF800833380008000L,0x2000800000002440L});
+    public static final BitSet FOLLOW_31_in_ruleActorClass6027 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_ruleActorClass6048 = new BitSet(new long[]{0xF800833300008000L,0x2000800000002440L});
+    public static final BitSet FOLLOW_32_in_ruleActorClass6063 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_ruleActorClass6084 = new BitSet(new long[]{0xF800833200008000L,0x2000800000002440L});
+    public static final BitSet FOLLOW_ruleLayerConnection_in_ruleActorClass6108 = new BitSet(new long[]{0xF800833200008000L,0x2000800000002440L});
+    public static final BitSet FOLLOW_ruleBinding_in_ruleActorClass6135 = new BitSet(new long[]{0xF800833200008000L,0x2000800000002440L});
+    public static final BitSet FOLLOW_ruleServiceImplementation_in_ruleActorClass6162 = new BitSet(new long[]{0xF800833200008000L,0x2000800000002440L});
+    public static final BitSet FOLLOW_ruleAttribute_in_ruleActorClass6189 = new BitSet(new long[]{0xF800833200008000L,0x2000800000002440L});
+    public static final BitSet FOLLOW_ruleActorRef_in_ruleActorClass6216 = new BitSet(new long[]{0xF800833200008000L,0x2000800000002440L});
+    public static final BitSet FOLLOW_ruleSAP_in_ruleActorClass6243 = new BitSet(new long[]{0xF800833200008000L,0x2000800000002440L});
+    public static final BitSet FOLLOW_rulePort_in_ruleActorClass6270 = new BitSet(new long[]{0xF800833200008000L,0x2000800000002440L});
+    public static final BitSet FOLLOW_ruleExternalPort_in_ruleActorClass6297 = new BitSet(new long[]{0xF800833200008000L,0x2000800000002440L});
+    public static final BitSet FOLLOW_15_in_ruleActorClass6311 = new BitSet(new long[]{0x0400000000008000L});
+    public static final BitSet FOLLOW_58_in_ruleActorClass6326 = new BitSet(new long[]{0x0000000400004000L});
+    public static final BitSet FOLLOW_ruleDocumentation_in_ruleActorClass6347 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_ruleActorClass6360 = new BitSet(new long[]{0x0000033000008000L,0x0000100000010000L});
+    public static final BitSet FOLLOW_ruleAnnotation_in_ruleActorClass6381 = new BitSet(new long[]{0x0000033000008000L,0x0000100000010000L});
+    public static final BitSet FOLLOW_ruleStandardOperation_in_ruleActorClass6404 = new BitSet(new long[]{0x0000033000008000L,0x0000000000010000L});
+    public static final BitSet FOLLOW_ruleClassStructor_in_ruleActorClass6431 = new BitSet(new long[]{0x0000033000008000L,0x0000000000010000L});
+    public static final BitSet FOLLOW_ruleStateMachine_in_ruleActorClass6454 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_15_in_ruleActorClass6467 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_15_in_ruleActorClass6481 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleInterfaceItem_in_entryRuleInterfaceItem6517 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleInterfaceItem6527 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulePort_in_ruleInterfaceItem6574 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSAP_in_ruleInterfaceItem6601 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSPP_in_ruleInterfaceItem6628 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulePort_in_entryRulePort6663 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRulePort6673 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_47_in_rulePort6716 = new BitSet(new long[]{0x0800000000000000L});
+    public static final BitSet FOLLOW_59_in_rulePort6742 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_rulePort6759 = new BitSet(new long[]{0x0000000400010000L});
+    public static final BitSet FOLLOW_ruleMULTIPLICITY_in_rulePort6785 = new BitSet(new long[]{0x0000000000010000L});
+    public static final BitSet FOLLOW_16_in_rulePort6798 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleFQN_in_rulePort6821 = new BitSet(new long[]{0x0000000400000002L});
+    public static final BitSet FOLLOW_ruleDocumentation_in_rulePort6842 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExternalPort_in_entryRuleExternalPort6879 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleExternalPort6889 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_60_in_ruleExternalPort6926 = new BitSet(new long[]{0x0800000000000000L});
+    public static final BitSet FOLLOW_59_in_ruleExternalPort6938 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleExternalPort6958 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSAP_in_entryRuleSAP6994 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleSAP7004 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_61_in_ruleSAP7041 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleSAP7058 = new BitSet(new long[]{0x0000000000010000L});
+    public static final BitSet FOLLOW_16_in_ruleSAP7075 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleFQN_in_ruleSAP7098 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSPP_in_entryRuleSPP7134 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleSPP7144 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_62_in_ruleSPP7181 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleSPP7198 = new BitSet(new long[]{0x0000000000010000L});
+    public static final BitSet FOLLOW_16_in_ruleSPP7215 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleFQN_in_ruleSPP7238 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleServiceImplementation_in_entryRuleServiceImplementation7274 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleServiceImplementation7284 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_63_in_ruleServiceImplementation7321 = new BitSet(new long[]{0x0000000001000000L});
+    public static final BitSet FOLLOW_24_in_ruleServiceImplementation7333 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleServiceImplementation7353 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleLogicalSystem_in_entryRuleLogicalSystem7389 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleLogicalSystem7399 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_64_in_ruleLogicalSystem7436 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleLogicalSystem7453 = new BitSet(new long[]{0x0000000400004000L});
+    public static final BitSet FOLLOW_ruleDocumentation_in_ruleLogicalSystem7479 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_ruleLogicalSystem7492 = new BitSet(new long[]{0x0000000000008000L,0x0000100000000442L});
+    public static final BitSet FOLLOW_ruleAnnotation_in_ruleLogicalSystem7513 = new BitSet(new long[]{0x0000000000008000L,0x0000100000000442L});
+    public static final BitSet FOLLOW_ruleLayerConnection_in_ruleLogicalSystem7536 = new BitSet(new long[]{0x0000000000008000L,0x0000000000000442L});
+    public static final BitSet FOLLOW_ruleBinding_in_ruleLogicalSystem7563 = new BitSet(new long[]{0x0000000000008000L,0x0000000000000442L});
+    public static final BitSet FOLLOW_ruleSubSystemRef_in_ruleLogicalSystem7590 = new BitSet(new long[]{0x0000000000008000L,0x0000000000000442L});
+    public static final BitSet FOLLOW_15_in_ruleLogicalSystem7604 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSubSystemRef_in_entryRuleSubSystemRef7642 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleSubSystemRef7652 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_65_in_ruleSubSystemRef7689 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleSubSystemRef7706 = new BitSet(new long[]{0x0000000000010000L});
+    public static final BitSet FOLLOW_16_in_ruleSubSystemRef7723 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleFQN_in_ruleSubSystemRef7746 = new BitSet(new long[]{0x0000000400000002L});
+    public static final BitSet FOLLOW_ruleDocumentation_in_ruleSubSystemRef7767 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSubSystemClass_in_entryRuleSubSystemClass7804 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleSubSystemClass7814 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_66_in_ruleSubSystemClass7851 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleSubSystemClass7868 = new BitSet(new long[]{0x0000000400004000L});
+    public static final BitSet FOLLOW_ruleDocumentation_in_ruleSubSystemClass7894 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_ruleSubSystemClass7907 = new BitSet(new long[]{0x48008001C0008000L,0x2000900000002458L});
+    public static final BitSet FOLLOW_ruleAnnotation_in_ruleSubSystemClass7928 = new BitSet(new long[]{0x48008001C0008000L,0x2000900000002458L});
+    public static final BitSet FOLLOW_30_in_ruleSubSystemClass7942 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_ruleSubSystemClass7963 = new BitSet(new long[]{0x4800800180008000L,0x2000800000002458L});
+    public static final BitSet FOLLOW_31_in_ruleSubSystemClass7978 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_ruleSubSystemClass7999 = new BitSet(new long[]{0x4800800100008000L,0x2000800000002458L});
+    public static final BitSet FOLLOW_32_in_ruleSubSystemClass8014 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_ruleSubSystemClass8035 = new BitSet(new long[]{0x4800800000008000L,0x2000800000002458L});
+    public static final BitSet FOLLOW_ruleActorInstanceMapping_in_ruleSubSystemClass8059 = new BitSet(new long[]{0x4800800000008000L,0x2000800000002458L});
+    public static final BitSet FOLLOW_ruleLogicalThread_in_ruleSubSystemClass8086 = new BitSet(new long[]{0x4800800000008000L,0x2000800000002458L});
+    public static final BitSet FOLLOW_ruleLayerConnection_in_ruleSubSystemClass8113 = new BitSet(new long[]{0x4800800000008000L,0x2000800000002458L});
+    public static final BitSet FOLLOW_ruleBinding_in_ruleSubSystemClass8140 = new BitSet(new long[]{0x4800800000008000L,0x2000800000002458L});
+    public static final BitSet FOLLOW_ruleActorRef_in_ruleSubSystemClass8167 = new BitSet(new long[]{0x4800800000008000L,0x2000800000002458L});
+    public static final BitSet FOLLOW_ruleSPP_in_ruleSubSystemClass8194 = new BitSet(new long[]{0x4800800000008000L,0x2000800000002458L});
+    public static final BitSet FOLLOW_rulePort_in_ruleSubSystemClass8221 = new BitSet(new long[]{0x4800800000008000L,0x2000800000002458L});
+    public static final BitSet FOLLOW_15_in_ruleSubSystemClass8235 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleLogicalThread_in_entryRuleLogicalThread8271 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleLogicalThread8281 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_67_in_ruleLogicalThread8318 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleLogicalThread8335 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleActorInstanceMapping_in_entryRuleActorInstanceMapping8376 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleActorInstanceMapping8386 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_68_in_ruleActorInstanceMapping8423 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleRefPath_in_ruleActorInstanceMapping8444 = new BitSet(new long[]{0x0000000000080000L});
+    public static final BitSet FOLLOW_19_in_ruleActorInstanceMapping8456 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleActorInstanceMapping8476 = new BitSet(new long[]{0x0000000000004002L});
+    public static final BitSet FOLLOW_14_in_ruleActorInstanceMapping8489 = new BitSet(new long[]{0x0000000000008000L,0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleActorInstanceMapping_in_ruleActorInstanceMapping8510 = new BitSet(new long[]{0x0000000000008000L,0x0000000000000010L});
+    public static final BitSet FOLLOW_15_in_ruleActorInstanceMapping8523 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleRefPath_in_entryRuleRefPath8561 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleRefPath8571 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleRefSegment_in_ruleRefPath8617 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000020L});
+    public static final BitSet FOLLOW_69_in_ruleRefPath8630 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleRefSegment_in_ruleRefPath8651 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000020L});
+    public static final BitSet FOLLOW_ruleRefSegment_in_entryRuleRefSegment8689 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleRefSegment8699 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleRefSegment8741 = new BitSet(new long[]{0x0000000000010002L});
+    public static final BitSet FOLLOW_16_in_ruleRefSegment8759 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleRefSegment8776 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleBinding_in_entryRuleBinding8819 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleBinding8829 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_70_in_ruleBinding8866 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleBindingEndPoint_in_ruleBinding8887 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000080L});
+    public static final BitSet FOLLOW_71_in_ruleBinding8899 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleBindingEndPoint_in_ruleBinding8920 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleBindingEndPoint_in_entryRuleBindingEndPoint8956 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleBindingEndPoint8966 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleBindingEndPoint9012 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000100L});
+    public static final BitSet FOLLOW_72_in_ruleBindingEndPoint9024 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleBindingEndPoint9046 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000200L});
+    public static final BitSet FOLLOW_73_in_ruleBindingEndPoint9059 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleBindingEndPoint9079 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleLayerConnection_in_entryRuleLayerConnection9117 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleLayerConnection9127 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_74_in_ruleLayerConnection9164 = new BitSet(new long[]{0x0000000000020000L,0x0000000000001000L});
+    public static final BitSet FOLLOW_ruleSAPoint_in_ruleLayerConnection9185 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000800L});
+    public static final BitSet FOLLOW_75_in_ruleLayerConnection9197 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleSPPoint_in_ruleLayerConnection9218 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSAPoint_in_entryRuleSAPoint9254 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleSAPoint9264 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleRefSAPoint_in_ruleSAPoint9311 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleRelaySAPoint_in_ruleSAPoint9338 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleRefSAPoint_in_entryRuleRefSAPoint9373 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleRefSAPoint9383 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_17_in_ruleRefSAPoint9420 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleRefSAPoint9440 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleRelaySAPoint_in_entryRuleRelaySAPoint9476 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleRelaySAPoint9486 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_76_in_ruleRelaySAPoint9523 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleRelaySAPoint9543 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSPPoint_in_entryRuleSPPoint9579 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleSPPoint9589 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleSPPoint9634 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000100L});
+    public static final BitSet FOLLOW_72_in_ruleSPPoint9646 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleSPPoint9666 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleActorRef_in_entryRuleActorRef9702 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleActorRef9712 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleReferenceType_in_ruleActorRef9758 = new BitSet(new long[]{0x0000000000000000L,0x0000000000002000L});
+    public static final BitSet FOLLOW_77_in_ruleActorRef9771 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleActorRef9788 = new BitSet(new long[]{0x0000000400010000L});
+    public static final BitSet FOLLOW_ruleMULTIPLICITY_in_ruleActorRef9814 = new BitSet(new long[]{0x0000000000010000L});
+    public static final BitSet FOLLOW_16_in_ruleActorRef9827 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleFQN_in_ruleActorRef9850 = new BitSet(new long[]{0x0000000400000002L});
+    public static final BitSet FOLLOW_ruleDocumentation_in_ruleActorRef9871 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleMULTIPLICITY_in_entryRuleMULTIPLICITY9911 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleMULTIPLICITY9922 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_34_in_ruleMULTIPLICITY9960 = new BitSet(new long[]{0x0000000000000040L,0x0000000000004000L});
+    public static final BitSet FOLLOW_78_in_ruleMULTIPLICITY9974 = new BitSet(new long[]{0x0000000800000000L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleMULTIPLICITY9995 = new BitSet(new long[]{0x0000000800000000L});
+    public static final BitSet FOLLOW_35_in_ruleMULTIPLICITY10014 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleAnnotationTargetType_in_entryRuleAnnotationTargetType10055 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleAnnotationTargetType10066 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_28_in_ruleAnnotationTargetType10104 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_55_in_ruleAnnotationTargetType10123 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_79_in_ruleAnnotationTargetType10142 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_42_in_ruleAnnotationTargetType10161 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_48_in_ruleAnnotationTargetType10180 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_66_in_ruleAnnotationTargetType10199 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_64_in_ruleAnnotationTargetType10218 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleStateGraphNode_in_entryRuleStateGraphNode10260 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleStateGraphNode10270 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleState_in_ruleStateGraphNode10317 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleChoicePoint_in_ruleStateGraphNode10344 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTrPoint_in_ruleStateGraphNode10371 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleStateGraph_in_entryRuleStateGraph10408 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleStateGraph10418 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_14_in_ruleStateGraph10464 = new BitSet(new long[]{0x0000000000008000L,0x000000081FC20000L});
+    public static final BitSet FOLLOW_ruleState_in_ruleStateGraph10486 = new BitSet(new long[]{0x0000000000008000L,0x000000081FC20000L});
+    public static final BitSet FOLLOW_ruleTrPoint_in_ruleStateGraph10513 = new BitSet(new long[]{0x0000000000008000L,0x000000081FC20000L});
+    public static final BitSet FOLLOW_ruleChoicePoint_in_ruleStateGraph10540 = new BitSet(new long[]{0x0000000000008000L,0x000000081FC20000L});
+    public static final BitSet FOLLOW_ruleTransition_in_ruleStateGraph10567 = new BitSet(new long[]{0x0000000000008000L,0x000000081FC20000L});
+    public static final BitSet FOLLOW_ruleRefinedTransition_in_ruleStateGraph10594 = new BitSet(new long[]{0x0000000000008000L,0x000000081FC20000L});
+    public static final BitSet FOLLOW_15_in_ruleStateGraph10608 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleStateMachine_in_entryRuleStateMachine10644 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleStateMachine10654 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_80_in_ruleStateMachine10700 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_ruleStateMachine10712 = new BitSet(new long[]{0x0000000000008000L,0x000000081FC20000L});
+    public static final BitSet FOLLOW_ruleState_in_ruleStateMachine10734 = new BitSet(new long[]{0x0000000000008000L,0x000000081FC20000L});
+    public static final BitSet FOLLOW_ruleTrPoint_in_ruleStateMachine10761 = new BitSet(new long[]{0x0000000000008000L,0x000000081FC20000L});
+    public static final BitSet FOLLOW_ruleChoicePoint_in_ruleStateMachine10788 = new BitSet(new long[]{0x0000000000008000L,0x000000081FC20000L});
+    public static final BitSet FOLLOW_ruleTransition_in_ruleStateMachine10815 = new BitSet(new long[]{0x0000000000008000L,0x000000081FC20000L});
+    public static final BitSet FOLLOW_ruleRefinedTransition_in_ruleStateMachine10842 = new BitSet(new long[]{0x0000000000008000L,0x000000081FC20000L});
+    public static final BitSet FOLLOW_15_in_ruleStateMachine10856 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleState_in_entryRuleState10892 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleState10902 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSimpleState_in_ruleState10949 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleRefinedState_in_ruleState10976 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSimpleState_in_entryRuleSimpleState11011 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleSimpleState11021 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_81_in_ruleSimpleState11058 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleSimpleState11075 = new BitSet(new long[]{0x0000000400004002L});
+    public static final BitSet FOLLOW_ruleDocumentation_in_ruleSimpleState11101 = new BitSet(new long[]{0x0000000000004002L});
+    public static final BitSet FOLLOW_14_in_ruleSimpleState11115 = new BitSet(new long[]{0x0000000000008000L,0x00000000003C0000L});
+    public static final BitSet FOLLOW_82_in_ruleSimpleState11128 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_ruleSimpleState11149 = new BitSet(new long[]{0x0000000000008000L,0x0000000000380000L});
+    public static final BitSet FOLLOW_83_in_ruleSimpleState11164 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_ruleSimpleState11185 = new BitSet(new long[]{0x0000000000008000L,0x0000000000300000L});
+    public static final BitSet FOLLOW_84_in_ruleSimpleState11200 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_ruleSimpleState11221 = new BitSet(new long[]{0x0000000000008000L,0x0000000000200000L});
+    public static final BitSet FOLLOW_85_in_ruleSimpleState11236 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_ruleStateGraph_in_ruleSimpleState11257 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_15_in_ruleSimpleState11271 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleRefinedState_in_entryRuleRefinedState11309 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleRefinedState11319 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_86_in_ruleRefinedState11356 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleFQN_in_ruleRefinedState11379 = new BitSet(new long[]{0x0000000400004000L});
+    public static final BitSet FOLLOW_ruleDocumentation_in_ruleRefinedState11400 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_ruleRefinedState11413 = new BitSet(new long[]{0x0000000000008000L,0x00000000003C0000L});
+    public static final BitSet FOLLOW_82_in_ruleRefinedState11426 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_ruleRefinedState11447 = new BitSet(new long[]{0x0000000000008000L,0x0000000000380000L});
+    public static final BitSet FOLLOW_83_in_ruleRefinedState11462 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_ruleRefinedState11483 = new BitSet(new long[]{0x0000000000008000L,0x0000000000300000L});
+    public static final BitSet FOLLOW_84_in_ruleRefinedState11498 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_ruleRefinedState11519 = new BitSet(new long[]{0x0000000000008000L,0x0000000000200000L});
+    public static final BitSet FOLLOW_85_in_ruleRefinedState11534 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_ruleStateGraph_in_ruleRefinedState11555 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_15_in_ruleRefinedState11569 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_entryRuleDetailCode11605 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleDetailCode11615 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_14_in_ruleDetailCode11667 = new BitSet(new long[]{0x0000000000008020L});
+    public static final BitSet FOLLOW_RULE_STRING_in_ruleDetailCode11697 = new BitSet(new long[]{0x0000000000008020L});
+    public static final BitSet FOLLOW_15_in_ruleDetailCode11715 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTrPoint_in_entryRuleTrPoint11751 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleTrPoint11761 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTransitionPoint_in_ruleTrPoint11808 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEntryPoint_in_ruleTrPoint11835 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExitPoint_in_ruleTrPoint11862 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTransitionPoint_in_entryRuleTransitionPoint11897 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleTransitionPoint11907 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_87_in_ruleTransitionPoint11950 = new BitSet(new long[]{0x0000000000000000L,0x0000000001000000L});
+    public static final BitSet FOLLOW_88_in_ruleTransitionPoint11976 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleTransitionPoint11993 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEntryPoint_in_entryRuleEntryPoint12034 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleEntryPoint12044 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_89_in_ruleEntryPoint12081 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleEntryPoint12098 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExitPoint_in_entryRuleExitPoint12139 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleExitPoint12149 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_90_in_ruleExitPoint12186 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleExitPoint12203 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleChoicePoint_in_entryRuleChoicePoint12244 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleChoicePoint12254 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_91_in_ruleChoicePoint12291 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleChoicePoint12308 = new BitSet(new long[]{0x0000000400000002L});
+    public static final BitSet FOLLOW_ruleDocumentation_in_ruleChoicePoint12334 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTransition_in_entryRuleTransition12371 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleTransition12381 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleInitialTransition_in_ruleTransition12428 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleNonInitialTransition_in_ruleTransition12455 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleNonInitialTransition_in_entryRuleNonInitialTransition12490 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleNonInitialTransition12500 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTransitionChainStartTransition_in_ruleNonInitialTransition12547 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleContinuationTransition_in_ruleNonInitialTransition12574 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleCPBranchTransition_in_ruleNonInitialTransition12601 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTransitionChainStartTransition_in_entryRuleTransitionChainStartTransition12636 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleTransitionChainStartTransition12646 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTriggeredTransition_in_ruleTransitionChainStartTransition12693 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleGuardedTransition_in_ruleTransitionChainStartTransition12720 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleInitialTransition_in_entryRuleInitialTransition12755 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleInitialTransition12765 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_92_in_ruleInitialTransition12802 = new BitSet(new long[]{0x0000000000010010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleInitialTransition12819 = new BitSet(new long[]{0x0000000000010000L});
+    public static final BitSet FOLLOW_16_in_ruleInitialTransition12837 = new BitSet(new long[]{0x0000000000000000L,0x0000000020000000L});
+    public static final BitSet FOLLOW_93_in_ruleInitialTransition12849 = new BitSet(new long[]{0x0000000000080000L});
+    public static final BitSet FOLLOW_19_in_ruleInitialTransition12861 = new BitSet(new long[]{0x0000000000000010L,0x0000003000000000L});
+    public static final BitSet FOLLOW_ruleTransitionTerminal_in_ruleInitialTransition12882 = new BitSet(new long[]{0x0000000400004002L});
+    public static final BitSet FOLLOW_ruleDocumentation_in_ruleInitialTransition12903 = new BitSet(new long[]{0x0000000000004002L});
+    public static final BitSet FOLLOW_14_in_ruleInitialTransition12917 = new BitSet(new long[]{0x0000000000008000L,0x0000000040000000L});
+    public static final BitSet FOLLOW_94_in_ruleInitialTransition12930 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_ruleInitialTransition12951 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_15_in_ruleInitialTransition12965 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleContinuationTransition_in_entryRuleContinuationTransition13003 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleContinuationTransition13013 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_92_in_ruleContinuationTransition13050 = new BitSet(new long[]{0x0000000000010010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleContinuationTransition13067 = new BitSet(new long[]{0x0000000000010000L});
+    public static final BitSet FOLLOW_16_in_ruleContinuationTransition13085 = new BitSet(new long[]{0x0000000000000010L,0x0000003000000000L});
+    public static final BitSet FOLLOW_ruleTransitionTerminal_in_ruleContinuationTransition13106 = new BitSet(new long[]{0x0000000000080000L});
+    public static final BitSet FOLLOW_19_in_ruleContinuationTransition13118 = new BitSet(new long[]{0x0000000000000010L,0x0000003000000000L});
+    public static final BitSet FOLLOW_ruleTransitionTerminal_in_ruleContinuationTransition13139 = new BitSet(new long[]{0x0000000400004002L});
+    public static final BitSet FOLLOW_ruleDocumentation_in_ruleContinuationTransition13160 = new BitSet(new long[]{0x0000000000004002L});
+    public static final BitSet FOLLOW_14_in_ruleContinuationTransition13174 = new BitSet(new long[]{0x0000000000008000L,0x0000000040000000L});
+    public static final BitSet FOLLOW_94_in_ruleContinuationTransition13187 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_ruleContinuationTransition13208 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_15_in_ruleContinuationTransition13222 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTriggeredTransition_in_entryRuleTriggeredTransition13260 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleTriggeredTransition13270 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_92_in_ruleTriggeredTransition13307 = new BitSet(new long[]{0x0000000000010010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleTriggeredTransition13324 = new BitSet(new long[]{0x0000000000010000L});
+    public static final BitSet FOLLOW_16_in_ruleTriggeredTransition13342 = new BitSet(new long[]{0x0000000000000010L,0x0000003000000000L});
+    public static final BitSet FOLLOW_ruleTransitionTerminal_in_ruleTriggeredTransition13363 = new BitSet(new long[]{0x0000000000080000L});
+    public static final BitSet FOLLOW_19_in_ruleTriggeredTransition13375 = new BitSet(new long[]{0x0000000000000010L,0x0000003000000000L});
+    public static final BitSet FOLLOW_ruleTransitionTerminal_in_ruleTriggeredTransition13396 = new BitSet(new long[]{0x0000000400004000L});
+    public static final BitSet FOLLOW_ruleDocumentation_in_ruleTriggeredTransition13417 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_ruleTriggeredTransition13430 = new BitSet(new long[]{0x0000000000000000L,0x0000000080000000L});
+    public static final BitSet FOLLOW_95_in_ruleTriggeredTransition13442 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_ruleTriggeredTransition13454 = new BitSet(new long[]{0x0000000000000000L,0x0000004000000000L});
+    public static final BitSet FOLLOW_ruleTrigger_in_ruleTriggeredTransition13475 = new BitSet(new long[]{0x0000000000008000L,0x0000000100000000L});
+    public static final BitSet FOLLOW_96_in_ruleTriggeredTransition13488 = new BitSet(new long[]{0x0000000000000000L,0x0000004000000000L});
+    public static final BitSet FOLLOW_ruleTrigger_in_ruleTriggeredTransition13509 = new BitSet(new long[]{0x0000000000008000L,0x0000000100000000L});
+    public static final BitSet FOLLOW_15_in_ruleTriggeredTransition13523 = new BitSet(new long[]{0x0000000000008000L,0x0000000040000000L});
+    public static final BitSet FOLLOW_94_in_ruleTriggeredTransition13536 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_ruleTriggeredTransition13557 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_15_in_ruleTriggeredTransition13571 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleGuardedTransition_in_entryRuleGuardedTransition13607 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleGuardedTransition13617 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_92_in_ruleGuardedTransition13654 = new BitSet(new long[]{0x0000000000010010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleGuardedTransition13671 = new BitSet(new long[]{0x0000000000010000L});
+    public static final BitSet FOLLOW_16_in_ruleGuardedTransition13689 = new BitSet(new long[]{0x0000000000000010L,0x0000003000000000L});
+    public static final BitSet FOLLOW_ruleTransitionTerminal_in_ruleGuardedTransition13710 = new BitSet(new long[]{0x0000000000080000L});
+    public static final BitSet FOLLOW_19_in_ruleGuardedTransition13722 = new BitSet(new long[]{0x0000000000000010L,0x0000003000000000L});
+    public static final BitSet FOLLOW_ruleTransitionTerminal_in_ruleGuardedTransition13743 = new BitSet(new long[]{0x0000000400004000L});
+    public static final BitSet FOLLOW_ruleDocumentation_in_ruleGuardedTransition13764 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_ruleGuardedTransition13777 = new BitSet(new long[]{0x0000000000000000L,0x0000000200000000L});
+    public static final BitSet FOLLOW_97_in_ruleGuardedTransition13789 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_ruleGuardedTransition13810 = new BitSet(new long[]{0x0000000000008000L,0x0000000040000000L});
+    public static final BitSet FOLLOW_94_in_ruleGuardedTransition13823 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_ruleGuardedTransition13844 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_15_in_ruleGuardedTransition13858 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleCPBranchTransition_in_entryRuleCPBranchTransition13894 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleCPBranchTransition13904 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_92_in_ruleCPBranchTransition13941 = new BitSet(new long[]{0x0000000000010010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleCPBranchTransition13958 = new BitSet(new long[]{0x0000000000010000L});
+    public static final BitSet FOLLOW_16_in_ruleCPBranchTransition13976 = new BitSet(new long[]{0x0000000000000010L,0x0000003000000000L});
+    public static final BitSet FOLLOW_ruleTransitionTerminal_in_ruleCPBranchTransition13997 = new BitSet(new long[]{0x0000000000080000L});
+    public static final BitSet FOLLOW_19_in_ruleCPBranchTransition14009 = new BitSet(new long[]{0x0000000000000010L,0x0000003000000000L});
+    public static final BitSet FOLLOW_ruleTransitionTerminal_in_ruleCPBranchTransition14030 = new BitSet(new long[]{0x0000000400004000L});
+    public static final BitSet FOLLOW_ruleDocumentation_in_ruleCPBranchTransition14051 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_ruleCPBranchTransition14064 = new BitSet(new long[]{0x0000000000000000L,0x0000000400000000L});
+    public static final BitSet FOLLOW_98_in_ruleCPBranchTransition14076 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_ruleCPBranchTransition14097 = new BitSet(new long[]{0x0000000000008000L,0x0000000040000000L});
+    public static final BitSet FOLLOW_94_in_ruleCPBranchTransition14110 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_ruleCPBranchTransition14131 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_15_in_ruleCPBranchTransition14145 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleRefinedTransition_in_entryRuleRefinedTransition14181 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleRefinedTransition14191 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_99_in_ruleRefinedTransition14228 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleFQN_in_ruleRefinedTransition14251 = new BitSet(new long[]{0x0000000400004000L});
+    public static final BitSet FOLLOW_ruleDocumentation_in_ruleRefinedTransition14272 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_ruleRefinedTransition14285 = new BitSet(new long[]{0x0000000000000000L,0x0000000040000000L});
+    public static final BitSet FOLLOW_94_in_ruleRefinedTransition14297 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_ruleRefinedTransition14318 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_15_in_ruleRefinedTransition14330 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTransitionTerminal_in_entryRuleTransitionTerminal14366 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleTransitionTerminal14376 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleStateTerminal_in_ruleTransitionTerminal14423 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTrPointTerminal_in_ruleTransitionTerminal14450 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSubStateTrPointTerminal_in_ruleTransitionTerminal14477 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleChoicepointTerminal_in_ruleTransitionTerminal14504 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleStateTerminal_in_entryRuleStateTerminal14539 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleStateTerminal14549 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleStateTerminal14593 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTrPointTerminal_in_entryRuleTrPointTerminal14628 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleTrPointTerminal14638 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_100_in_ruleTrPointTerminal14675 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleTrPointTerminal14695 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSubStateTrPointTerminal_in_entryRuleSubStateTrPointTerminal14731 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleSubStateTrPointTerminal14741 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleSubStateTrPointTerminal14786 = new BitSet(new long[]{0x0000000001000000L});
+    public static final BitSet FOLLOW_24_in_ruleSubStateTrPointTerminal14798 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleSubStateTrPointTerminal14818 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleChoicepointTerminal_in_entryRuleChoicepointTerminal14854 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleChoicepointTerminal14864 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_101_in_ruleChoicepointTerminal14901 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleChoicepointTerminal14921 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTrigger_in_entryRuleTrigger14957 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleTrigger14967 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_102_in_ruleTrigger15004 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleMessageFromIf_in_ruleTrigger15025 = new BitSet(new long[]{0x0000000000000000L,0x0000018200000000L});
+    public static final BitSet FOLLOW_103_in_ruleTrigger15038 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleMessageFromIf_in_ruleTrigger15059 = new BitSet(new long[]{0x0000000000000000L,0x0000018200000000L});
+    public static final BitSet FOLLOW_ruleGuard_in_ruleTrigger15082 = new BitSet(new long[]{0x0000000000000000L,0x0000010000000000L});
+    public static final BitSet FOLLOW_104_in_ruleTrigger15095 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleMessageFromIf_in_entryRuleMessageFromIf15131 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleMessageFromIf15141 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleMessageFromIf15186 = new BitSet(new long[]{0x0000000000010000L});
+    public static final BitSet FOLLOW_16_in_ruleMessageFromIf15198 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleMessageFromIf15218 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleGuard_in_entryRuleGuard15254 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleGuard15264 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_97_in_ruleGuard15301 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_ruleDetailCode_in_ruleGuard15322 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleProtocolSemantics_in_entryRuleProtocolSemantics15358 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleProtocolSemantics15368 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_105_in_ruleProtocolSemantics15414 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_ruleProtocolSemantics15426 = new BitSet(new long[]{0x0000000000008000L,0x00000C0000000000L});
+    public static final BitSet FOLLOW_ruleSemanticsRule_in_ruleProtocolSemantics15447 = new BitSet(new long[]{0x0000000000008000L,0x00000C0000000000L});
+    public static final BitSet FOLLOW_15_in_ruleProtocolSemantics15460 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSemanticsRule_in_entryRuleSemanticsRule15496 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleSemanticsRule15506 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleInSemanticsRule_in_ruleSemanticsRule15553 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleOutSemanticsRule_in_ruleSemanticsRule15580 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleInSemanticsRule_in_entryRuleInSemanticsRule15615 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleInSemanticsRule15625 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_106_in_ruleInSemanticsRule15662 = new BitSet(new long[]{0x0000000000010000L});
+    public static final BitSet FOLLOW_16_in_ruleInSemanticsRule15674 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleInSemanticsRule15694 = new BitSet(new long[]{0x0000000000080002L});
+    public static final BitSet FOLLOW_19_in_ruleInSemanticsRule15707 = new BitSet(new long[]{0x0000000000100000L,0x00000C0000000000L});
+    public static final BitSet FOLLOW_ruleSemanticsRule_in_ruleInSemanticsRule15729 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_20_in_ruleInSemanticsRule15748 = new BitSet(new long[]{0x0000000000000000L,0x00000C0000000000L});
+    public static final BitSet FOLLOW_ruleSemanticsRule_in_ruleInSemanticsRule15769 = new BitSet(new long[]{0x0000000002000000L});
+    public static final BitSet FOLLOW_25_in_ruleInSemanticsRule15782 = new BitSet(new long[]{0x0000000000000000L,0x00000C0000000000L});
+    public static final BitSet FOLLOW_ruleSemanticsRule_in_ruleInSemanticsRule15803 = new BitSet(new long[]{0x0000000002200000L});
+    public static final BitSet FOLLOW_21_in_ruleInSemanticsRule15817 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleOutSemanticsRule_in_entryRuleOutSemanticsRule15857 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleOutSemanticsRule15867 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_107_in_ruleOutSemanticsRule15904 = new BitSet(new long[]{0x0000000000010000L});
+    public static final BitSet FOLLOW_16_in_ruleOutSemanticsRule15916 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleOutSemanticsRule15936 = new BitSet(new long[]{0x0000000000080002L});
+    public static final BitSet FOLLOW_19_in_ruleOutSemanticsRule15949 = new BitSet(new long[]{0x0000000000100000L,0x00000C0000000000L});
+    public static final BitSet FOLLOW_ruleSemanticsRule_in_ruleOutSemanticsRule15971 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_20_in_ruleOutSemanticsRule15990 = new BitSet(new long[]{0x0000000000000000L,0x00000C0000000000L});
+    public static final BitSet FOLLOW_ruleSemanticsRule_in_ruleOutSemanticsRule16011 = new BitSet(new long[]{0x0000000002000000L});
+    public static final BitSet FOLLOW_25_in_ruleOutSemanticsRule16024 = new BitSet(new long[]{0x0000000000000000L,0x00000C0000000000L});
+    public static final BitSet FOLLOW_ruleSemanticsRule_in_ruleOutSemanticsRule16045 = new BitSet(new long[]{0x0000000002200000L});
+    public static final BitSet FOLLOW_21_in_ruleOutSemanticsRule16059 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleAnnotation_in_entryRuleAnnotation16099 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleAnnotation16109 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_108_in_ruleAnnotation16146 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleFQN_in_ruleAnnotation16169 = new BitSet(new long[]{0x0000000000100002L});
+    public static final BitSet FOLLOW_20_in_ruleAnnotation16182 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleKeyValue_in_ruleAnnotation16203 = new BitSet(new long[]{0x0000000002200000L});
+    public static final BitSet FOLLOW_25_in_ruleAnnotation16216 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleKeyValue_in_ruleAnnotation16237 = new BitSet(new long[]{0x0000000002200000L});
+    public static final BitSet FOLLOW_21_in_ruleAnnotation16251 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleKeyValue_in_entryRuleKeyValue16289 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleKeyValue16299 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleKeyValue16341 = new BitSet(new long[]{0x0000000004000000L});
+    public static final BitSet FOLLOW_26_in_ruleKeyValue16358 = new BitSet(new long[]{0x00000000000000E0L,0x03C0000000000100L});
+    public static final BitSet FOLLOW_ruleLiteral_in_ruleKeyValue16379 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleAnnotationType_in_entryRuleAnnotationType16415 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleAnnotationType16425 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_109_in_ruleAnnotationType16462 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleAnnotationType16479 = new BitSet(new long[]{0x0000000400004000L});
+    public static final BitSet FOLLOW_ruleDocumentation_in_ruleAnnotationType16505 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_ruleAnnotationType16518 = new BitSet(new long[]{0x0000000000000000L,0x0000400000000000L});
+    public static final BitSet FOLLOW_110_in_ruleAnnotationType16530 = new BitSet(new long[]{0x0000000004000000L});
+    public static final BitSet FOLLOW_26_in_ruleAnnotationType16542 = new BitSet(new long[]{0x0081040010004000L,0x0000000000008005L});
+    public static final BitSet FOLLOW_ruleAnnotationTargetType_in_ruleAnnotationType16564 = new BitSet(new long[]{0x0000000000008000L,0x0001800000000000L});
+    public static final BitSet FOLLOW_14_in_ruleAnnotationType16583 = new BitSet(new long[]{0x0081040010000000L,0x0000000000008005L});
+    public static final BitSet FOLLOW_ruleAnnotationTargetType_in_ruleAnnotationType16604 = new BitSet(new long[]{0x0000000002008000L});
+    public static final BitSet FOLLOW_25_in_ruleAnnotationType16617 = new BitSet(new long[]{0x0081040010000000L,0x0000000000008005L});
+    public static final BitSet FOLLOW_ruleAnnotationTargetType_in_ruleAnnotationType16638 = new BitSet(new long[]{0x0000000002008000L});
+    public static final BitSet FOLLOW_15_in_ruleAnnotationType16652 = new BitSet(new long[]{0x0000000000008000L,0x0001800000000000L});
+    public static final BitSet FOLLOW_ruleAnnotationAttribute_in_ruleAnnotationType16675 = new BitSet(new long[]{0x0000000000008000L,0x0001800000000000L});
+    public static final BitSet FOLLOW_15_in_ruleAnnotationType16688 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleAnnotationAttribute_in_entryRuleAnnotationAttribute16724 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleAnnotationAttribute16734 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSimpleAnnotationAttribute_in_ruleAnnotationAttribute16781 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEnumAnnotationAttribute_in_ruleAnnotationAttribute16808 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSimpleAnnotationAttribute_in_entryRuleSimpleAnnotationAttribute16843 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleSimpleAnnotationAttribute16853 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_111_in_ruleSimpleAnnotationAttribute16897 = new BitSet(new long[]{0x0000000000000000L,0x0002000000000000L});
+    public static final BitSet FOLLOW_112_in_ruleSimpleAnnotationAttribute16928 = new BitSet(new long[]{0x0000000000000000L,0x0002000000000000L});
+    public static final BitSet FOLLOW_113_in_ruleSimpleAnnotationAttribute16941 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleSimpleAnnotationAttribute16958 = new BitSet(new long[]{0x0000000000010000L});
+    public static final BitSet FOLLOW_16_in_ruleSimpleAnnotationAttribute16975 = new BitSet(new long[]{0x0000000000000000L,0x8000000000000000L,0x0000000000000007L});
+    public static final BitSet FOLLOW_ruleLiteralType_in_ruleSimpleAnnotationAttribute16996 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEnumAnnotationAttribute_in_entryRuleEnumAnnotationAttribute17032 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleEnumAnnotationAttribute17042 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_111_in_ruleEnumAnnotationAttribute17086 = new BitSet(new long[]{0x0000000000000000L,0x0002000000000000L});
+    public static final BitSet FOLLOW_112_in_ruleEnumAnnotationAttribute17117 = new BitSet(new long[]{0x0000000000000000L,0x0002000000000000L});
+    public static final BitSet FOLLOW_113_in_ruleEnumAnnotationAttribute17130 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleEnumAnnotationAttribute17147 = new BitSet(new long[]{0x0000000000010000L});
+    public static final BitSet FOLLOW_16_in_ruleEnumAnnotationAttribute17164 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_ruleEnumAnnotationAttribute17176 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_RULE_STRING_in_ruleEnumAnnotationAttribute17193 = new BitSet(new long[]{0x0000000002008000L});
+    public static final BitSet FOLLOW_25_in_ruleEnumAnnotationAttribute17211 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_RULE_STRING_in_ruleEnumAnnotationAttribute17228 = new BitSet(new long[]{0x0000000002008000L});
+    public static final BitSet FOLLOW_15_in_ruleEnumAnnotationAttribute17247 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleImport_in_entryRuleImport17283 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleImport17293 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_114_in_ruleImport17330 = new BitSet(new long[]{0x0000000000000010L,0x0010000000000000L});
+    public static final BitSet FOLLOW_ruleImportedFQN_in_ruleImport17353 = new BitSet(new long[]{0x0000000000000000L,0x0008000000000000L});
+    public static final BitSet FOLLOW_115_in_ruleImport17365 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_116_in_ruleImport17384 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_RULE_STRING_in_ruleImport17402 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleImportedFQN_in_entryRuleImportedFQN17444 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleImportedFQN17455 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleFQN_in_ruleImportedFQN17502 = new BitSet(new long[]{0x0000000000000002L,0x0020000000000000L});
+    public static final BitSet FOLLOW_117_in_ruleImportedFQN17521 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDocumentation_in_entryRuleDocumentation17563 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleDocumentation17573 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_34_in_ruleDocumentation17619 = new BitSet(new long[]{0x0000000800000020L});
+    public static final BitSet FOLLOW_RULE_STRING_in_ruleDocumentation17636 = new BitSet(new long[]{0x0000000800000020L});
+    public static final BitSet FOLLOW_35_in_ruleDocumentation17654 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleLiteral_in_entryRuleLiteral17694 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleLiteral17704 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleBooleanLiteral_in_ruleLiteral17751 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleNumberLiteral_in_ruleLiteral17778 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleStringLiteral_in_ruleLiteral17805 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleBooleanLiteral_in_entryRuleBooleanLiteral17840 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleBooleanLiteral17850 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_118_in_ruleBooleanLiteral17897 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_119_in_ruleBooleanLiteral17921 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleNumberLiteral_in_entryRuleNumberLiteral17971 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleNumberLiteral17981 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleIntLiteral_in_ruleNumberLiteral18028 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleRealLiteral_in_ruleNumberLiteral18055 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleRealLiteral_in_entryRuleRealLiteral18090 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleRealLiteral18100 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleReal_in_ruleRealLiteral18155 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleIntLiteral_in_entryRuleIntLiteral18191 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleIntLiteral18201 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleInteger_in_ruleIntLiteral18256 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleStringLiteral_in_entryRuleStringLiteral18292 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleStringLiteral18302 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_STRING_in_ruleStringLiteral18353 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleInteger_in_entryRuleInteger18395 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleInteger18406 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSignedInteger_in_ruleInteger18453 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleHexadecimal_in_ruleInteger18486 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSignedInteger_in_entryRuleSignedInteger18538 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleSignedInteger18549 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_120_in_ruleSignedInteger18592 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_121_in_ruleSignedInteger18611 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleSignedInteger18628 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleHexadecimal_in_entryRuleHexadecimal18684 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleHexadecimal18695 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_HEX_in_ruleHexadecimal18738 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleReal_in_entryRuleReal18787 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleReal18798 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDecimal_in_ruleReal18845 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDotDecimal_in_ruleReal18878 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDecimalDot_in_ruleReal18911 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDecimalExp_in_ruleReal18944 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDecimal_in_entryRuleDecimal18996 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleDecimal19007 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_120_in_ruleDecimal19050 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_121_in_ruleDecimal19069 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleDecimal19086 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000100L});
+    public static final BitSet FOLLOW_72_in_ruleDecimal19104 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleDecimal19119 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDotDecimal_in_entryRuleDotDecimal19175 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleDotDecimal19186 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_120_in_ruleDotDecimal19229 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000100L});
+    public static final BitSet FOLLOW_121_in_ruleDotDecimal19248 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000100L});
+    public static final BitSet FOLLOW_72_in_ruleDotDecimal19263 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleDotDecimal19278 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDecimalDot_in_entryRuleDecimalDot19334 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleDecimalDot19345 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_120_in_ruleDecimalDot19388 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_121_in_ruleDecimalDot19407 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleDecimalDot19424 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000100L});
+    public static final BitSet FOLLOW_72_in_ruleDecimalDot19442 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDecimalExp_in_entryRuleDecimalExp19493 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleDecimalExp19504 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_120_in_ruleDecimalExp19547 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_121_in_ruleDecimalExp19566 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleDecimalExp19583 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000100L});
+    public static final BitSet FOLLOW_72_in_ruleDecimalExp19601 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleDecimalExp19616 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_RULE_EXP_in_ruleDecimalExp19636 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleFQN_in_entryRuleFQN19686 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleFQN19697 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleFQN19737 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000100L});
+    public static final BitSet FOLLOW_72_in_ruleFQN19756 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleFQN19771 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000100L});
+    public static final BitSet FOLLOW_122_in_ruleCommunicationType19832 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_123_in_ruleCommunicationType19849 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_124_in_ruleCommunicationType19866 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_125_in_ruleReferenceType19911 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_111_in_ruleReferenceType19928 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_122_in_ruleComponentCommunicationType19975 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_123_in_ruleComponentCommunicationType19992 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_126_in_ruleComponentCommunicationType20009 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_124_in_ruleComponentCommunicationType20026 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_127_in_ruleLiteralType20071 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_128_in_ruleLiteralType20088 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_129_in_ruleLiteralType20105 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_130_in_ruleLiteralType20122 = new BitSet(new long[]{0x0000000000000002L});
 
 }

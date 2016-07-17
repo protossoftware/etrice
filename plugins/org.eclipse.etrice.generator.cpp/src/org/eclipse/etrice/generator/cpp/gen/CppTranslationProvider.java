@@ -20,6 +20,7 @@ import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.generator.base.DefaultTranslationProvider;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 /**
  * @author hrentz
@@ -46,14 +47,8 @@ public class CppTranslationProvider extends DefaultTranslationProvider {
 			return "";
 
 		Message msg = (Message) abstractMsg;
-
-		StringBuilder argtext = new StringBuilder();
-		for (String arg : args) {
-			argtext.append(", "+arg);
-		}
-
 		// TODO: overload operator[] ???
-		return item.getName()+".get("+index+")."+msg.getName()+"("+argtext.toString()+")";
+		return item.getName()+".get("+index+")."+msg.getName()+"("+IterableExtensions.join(args, ", ")+")";
 	}
 
 	@Override

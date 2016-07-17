@@ -20,11 +20,13 @@ import org.eclipse.etrice.generator.base.ITranslationProvider;
 import org.eclipse.etrice.generator.cpp.Main;
 import org.eclipse.etrice.generator.cpp.gen.ActorClassGen;
 import org.eclipse.etrice.generator.cpp.gen.CppExtensions;
+import org.eclipse.etrice.generator.cpp.gen.CppProcedureHelpers;
 import org.eclipse.etrice.generator.cpp.gen.CppTranslationProvider;
 import org.eclipse.etrice.generator.cpp.gen.ProtocolClassGen;
 import org.eclipse.etrice.generator.generic.GenericActorClassGenerator;
 import org.eclipse.etrice.generator.generic.GenericProtocolClassGenerator;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
+import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.xtext.scoping.impl.ImportUriResolver;
 
 import com.google.inject.Binder;
@@ -36,6 +38,7 @@ public class GeneratorModule extends AbstractGeneratorBaseModule {
 		super.configure(binder);
 
 		binder.bind(AbstractGenerator.class).to(Main.class);
+		binder.bind(ProcedureHelpers.class).to(CppProcedureHelpers.class);
 		binder.bind(GenericProtocolClassGenerator.class).to(ProtocolClassGen.class);
 		binder.bind(GenericActorClassGenerator.class).to(ActorClassGen.class);
 

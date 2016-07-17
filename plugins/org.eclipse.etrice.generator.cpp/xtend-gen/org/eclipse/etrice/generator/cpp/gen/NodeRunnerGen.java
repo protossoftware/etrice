@@ -95,6 +95,7 @@ public class NodeRunnerGen {
   public CharSequence generateHeaderFile(final Root root, final SubSystemInstance ssc) {
     CharSequence _xblockexpression = null;
     {
+      final SubSystemClass cc = ssc.getSubSystemClass();
       final NodeRef nr = ETMapUtil.getNodeRef(ssc);
       final String clsname = this._cppExtensions.getCppClassName(nr, ssc);
       StringConcatenation _builder = new StringConcatenation();
@@ -121,8 +122,12 @@ public class NodeRunnerGen {
       _builder.append("*/");
       _builder.newLine();
       _builder.newLine();
-      CharSequence _generateIncludeGuardBegin = this._cppExtensions.generateIncludeGuardBegin((clsname + "Runner"));
+      CharSequence _generateIncludeGuardBegin = this._cppExtensions.generateIncludeGuardBegin(cc, "Runner");
       _builder.append(_generateIncludeGuardBegin, "");
+      _builder.newLineIfNotEmpty();
+      _builder.newLine();
+      String _generateNamespaceBegin = this._cppExtensions.generateNamespaceBegin(cc);
+      _builder.append(_generateNamespaceBegin, "");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
       _builder.append("#include \"common/modelbase/SubSystemRunnerBase.h\"");
@@ -136,7 +141,11 @@ public class NodeRunnerGen {
       _builder.append("};");
       _builder.newLine();
       _builder.newLine();
-      CharSequence _generateIncludeGuardEnd = this._cppExtensions.generateIncludeGuardEnd((clsname + "Runner"));
+      String _generateNamespaceEnd = this._cppExtensions.generateNamespaceEnd(cc);
+      _builder.append(_generateNamespaceEnd, "");
+      _builder.newLineIfNotEmpty();
+      _builder.newLine();
+      CharSequence _generateIncludeGuardEnd = this._cppExtensions.generateIncludeGuardEnd(cc, "Runner");
       _builder.append(_generateIncludeGuardEnd, "");
       _builder.newLineIfNotEmpty();
       _xblockexpression = _builder;
@@ -147,6 +156,7 @@ public class NodeRunnerGen {
   public CharSequence generateSourceFile(final Root root, final SubSystemInstance ssc) {
     CharSequence _xblockexpression = null;
     {
+      final SubSystemClass cc = ssc.getSubSystemClass();
       final NodeRef nr = ETMapUtil.getNodeRef(ssc);
       final String clsname = this._cppExtensions.getCppClassName(nr, ssc);
       StringConcatenation _builder = new StringConcatenation();
@@ -188,6 +198,10 @@ public class NodeRunnerGen {
       _builder.newLine();
       _builder.append("using namespace etRuntime;");
       _builder.newLine();
+      _builder.newLine();
+      String _generateNamespaceBegin = this._cppExtensions.generateNamespaceBegin(cc);
+      _builder.append(_generateNamespaceBegin, "");
+      _builder.newLineIfNotEmpty();
       _builder.newLine();
       _builder.append("/**");
       _builder.newLine();
@@ -245,9 +259,6 @@ public class NodeRunnerGen {
       _builder.newLineIfNotEmpty();
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("// TODO JH crash");
-      _builder.newLine();
-      _builder.append("\t");
       _builder.append("//delete sys;");
       _builder.newLine();
       _builder.newLine();
@@ -257,6 +268,9 @@ public class NodeRunnerGen {
       _builder.append("}");
       _builder.newLine();
       _builder.newLine();
+      String _generateNamespaceEnd = this._cppExtensions.generateNamespaceEnd(cc);
+      _builder.append(_generateNamespaceEnd, "");
+      _builder.newLineIfNotEmpty();
       _builder.newLine();
       _xblockexpression = _builder;
     }

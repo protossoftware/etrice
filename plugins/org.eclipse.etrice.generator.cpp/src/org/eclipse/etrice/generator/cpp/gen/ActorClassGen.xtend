@@ -14,7 +14,6 @@ package org.eclipse.etrice.generator.cpp.gen
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
-import java.util.ArrayList
 import java.util.Map
 import org.eclipse.etrice.core.fsm.fSM.ComponentCommunicationType
 import org.eclipse.etrice.core.genmodel.builder.GenmodelConstants
@@ -37,7 +36,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 	@Inject extension RoomExtensions
 
 	@Inject extension ProcedureHelpers
-	@Inject extension Initialization
+	@Inject Initialization initHelper
 	@Inject extension StateMachineGen
 	@Inject extension FileSystemHelpers
 
@@ -69,9 +68,9 @@ class ActorClassGen extends GenericActorClassGenerator {
 		 *
 		 */
 
-		«generateIncludeGuardBegin(clsname)»
+		«generateIncludeGuardBegin(ac, '')»
 
-		#include "etDatatypes.h"
+		#include "common/etDatatypesCpp.hpp"
 		#include "common/messaging/IRTObject.h"
 		#include "common/modelbase/PortBase.h"
 		#include "common/modelbase/InterfaceItemBase.h"
@@ -79,7 +78,6 @@ class ActorClassGen extends GenericActorClassGenerator {
 		#include "common/messaging/Address.h"
 		#include "common/messaging/IMessageReceiver.h"
 		#include "common/debugging/DebuggingService.h"
-		#include <string>
 		#include <vector>
 
 		«FOR pc : root.getReferencedProtocolClasses(ac)»
@@ -88,16 +86,18 @@ class ActorClassGen extends GenericActorClassGenerator {
 		«FOR dc : root.getReferencedDataClasses(ac)»
 			#include "«dc.path»«dc.name».h"
 		«ENDFOR»
-		
+
 		«IF ac.actorBase==null»
 			#include "common/modelbase/ActorClassBase.h"
 		«ELSE»
-			#include "«ac.actorBase.name».h"
+			#include "«ac.actorBase.path»«ac.actorBase.name».h"
 		«ENDIF»
+
+		«ac.userCode1.userCode»
 
 		using namespace etRuntime; //TODO JH remove
 
-		«ac.userCode(1, true)»
+		«ac.generateNamespaceBegin»
 
 		class «clsname» : public «rtBaseClassName» {
 
@@ -158,36 +158,32 @@ class ActorClassGen extends GenericActorClassGenerator {
 					virtual void executeInitTransition() {}
 				«ENDIF»
 
-				«ac.userCode(2, false)»
+				«ac.userCode2.userCode»
 
 		};
 
+		«ac.generateNamespaceEnd»
 
-		«generateIncludeGuardEnd(ac.name)»
+		«generateIncludeGuardEnd(ac, '')»
 	'''
 	}
 
 	def private generateConstructorInitalizerList(ActorClass ac) {
-		var initializerList = new ArrayList<CharSequence>();
-		initializerList.add('''«ac.actorBase?.name ?: 'ActorClassBase'»(parent, name)''')
+		val extension initHelper = initHelper
+		var initList = <CharSequence>newArrayList
 
+		// super class
+		initList += '''«ac.actorBase?.name ?: 'ActorClassBase'»(parent, name)'''
 	    // own ports
-		for ( ep : ac.getEndPorts() ) {
-			initializerList.add('''«ep.name»(this, "«ep.name»", IFITEM_«ep.name»)''');
-		}
+	    initList += ac.endPorts.map['''«name»(this, "«name»", IFITEM_«name»)''']
 		// own saps
-		for ( sap : ac.serviceAccessPoints ) {
-			initializerList.add('''«sap.name»(this, "«sap.name»", IFITEM_«sap.name»)''');
-		}
+		initList += ac.serviceAccessPoints.map['''«name»(this, "«name»", IFITEM_«name»)''']
 		// own service implementations
-		for (svc : ac.serviceImplementations) {
-			initializerList.add('''«svc.spp.name»(this, "«svc.spp.name»", IFITEM_«svc.spp.name»)''');
-		}
-		for (attrib: ac.attributes) {
-			initializerList.add(attrib.attributeInitialization(false))
-		}
+		initList += ac.serviceImplementations.map['''«spp.name»(this, "«spp.name»", IFITEM_«spp.name»)''']
+		// own attributes
+		initList += ac.attributes.map['''«name»(«initializerListValue»)''']
 
-		initializerList.join(',' + NEWLINE)
+		initList.generateCtorInitializerList
 	}
 
 
@@ -209,10 +205,6 @@ class ActorClassGen extends GenericActorClassGenerator {
 
 		#include "common/messaging/RTObject.h"
 		#include "common/messaging/RTServices.h"
-		#include "etDatatypes.h"
-		#include "etUnit/etUnit.h"
-		#include <iostream>
-		#include <string>
 
 		«FOR ar : ac.actorRefs»
 			#include "«ar.type.actorIncludePath»"
@@ -220,8 +212,9 @@ class ActorClassGen extends GenericActorClassGenerator {
 
 		using namespace etRuntime;
 
+		«ac.generateNamespaceBegin»
 
-		«clsname»::«clsname»(etRuntime::IRTObject* parent, const std::string& name) :
+		«clsname»::«clsname»(etRuntime::IRTObject* parent, const std::string& name)
 				«ac.generateConstructorInitalizerList»
 		{
 			«IF ac.hasNonEmptyStateMachine»
@@ -230,7 +223,6 @@ class ActorClassGen extends GenericActorClassGenerator {
 				}
 			«ENDIF»
 			setClassName("«ac.name»");
-			«ac.attributes.attributeInitialization(false)»
 
 			// sub actors
 			«FOR sub : ac.actorRefs»
@@ -259,6 +251,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 				RTServices::getInstance().getMsgSvcCtrl().getMsgSvc(getThread())->addPollingMessageReceiver(*this);
 			«ENDIF»
 
+			«initHelper.genArrayInitializers(ac.attributes)»
 			«ac.userStructorBody(true)»
 		}
 
@@ -298,6 +291,9 @@ class ActorClassGen extends GenericActorClassGenerator {
 				handleSystemEvent(ifitem, evt, data);
 			}
 		«ENDIF»
+
+		«ac.generateNamespaceEnd»
+
 		'''
 	}
 }

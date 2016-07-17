@@ -178,8 +178,7 @@ class ProcedureHelpers {
 	 * @param classname the name of the defining class
 	 * @return code defining setters and getters for the attributes
 	 */
-	def attributeSettersGettersImplementation(List<Attribute> attributes, String classname) {
-	'''
+	def attributeSettersGettersImplementation(List<Attribute> attributes, String classname){'''
 		/* --------------------- attribute setters and getters */
 		«FOR attribute : attributes»«setterHeader(attribute, classname)» {
 			 «languageExt.memberAccess()»«attribute.name» = «attribute.name»;
@@ -196,8 +195,8 @@ class ProcedureHelpers {
 	 * @param classname the name of the defining class
 	 * @return code for the attribute setter declaration
 	 */
-	def private setterHeader(Attribute attribute, String classname){
-		'''«languageExt.accessLevelPublic()»void set«attribute.name.toFirstUpper()»(«languageExt.selfPointer(classname, true)»«attribute.declarationString»)'''
+	def protected setterHeader(Attribute attribute, String classname){
+		'''«languageExt.accessLevelPublic()»void set«attribute.name.toFirstUpper()»(«languageExt.selfPointer(classname, true)»«argList(#[attribute])»)'''
 	}
 
 	/**
@@ -205,18 +204,16 @@ class ProcedureHelpers {
 	 * @param classname the name of the defining class
 	 * @return code for the attribute getter declaration
 	 */
-	def private getterHeader(Attribute attribute, String classname){
-		'''«languageExt.accessLevelPublic()»«attribute.signatureReturnString» get«attribute.name.toFirstUpper()»(«languageExt.selfPointer(classname, false)»)'''
+	def protected getterHeader(Attribute attribute, String classname){
+		'''«languageExt.accessLevelPublic()»«attribute.signatureString» get«attribute.name.toFirstUpper()»(«languageExt.selfPointer(classname, false)»)'''
 	}
-
-
 
 	/**
 	 * @param attributes a list of {@link Attribute}s
 	 * @return an argument list for the attributes
 	 */
 	def argList(List<Attribute> attributes) {
-		'''«FOR a : attributes SEPARATOR ", "»«a.declarationString»«ENDFOR»'''
+		attributes.map[signatureString + ' ' + name].join(', ')
 	}
 
 	/**
@@ -345,7 +342,7 @@ class ProcedureHelpers {
 		declBlock.filterNull.join(NEWLINE)
 	}
 
-	def private String userStuctorImplementation(RoomClass cls, boolean ctor) {
+	def protected String userStuctorImplementation(RoomClass cls, boolean ctor) {
 		val namePrefix = languageExt.operationScope(cls.name, false)
 		if(!cls.getStructors(!languageExt.usesInheritance).exists[isConstructor == ctor])
 			return null
@@ -370,7 +367,7 @@ class ProcedureHelpers {
 		return comment + NEWLINE + translatedCodes.map[if(translatedCodes.size > 1) asBlock else it].join
 	}
 
-	def private getStructors(RoomClass cls, boolean inherited) {
+	def protected getStructors(RoomClass cls, boolean inherited) {
 		switch it : cls {
 			ActorClass case !inherited: structors
 			DataClass case !inherited: structors
@@ -384,7 +381,7 @@ class ProcedureHelpers {
 	 * @return the operation signature (with special care for
 	 * 		constructor and destructor
 	 */
-	def private operationSignature(Operation operation, String classname, boolean isDeclaration) {
+	def protected operationSignature(Operation operation, String classname, boolean isDeclaration) {
 		val arguments = '''«FOR argument : operation.arguments SEPARATOR ", "»«argument.refType.signatureString» «argument.name»«ENDFOR»'''
 		val returnType = operation.returnType.signatureString
 		functionSignature(classname, languageExt.operationScope(classname, isDeclaration)+operation.name, returnType, arguments)
@@ -394,7 +391,7 @@ class ProcedureHelpers {
 	 * @param type a {@link RefableType}
 	 * @return a string for the type (also for pointers)
 	 */
-	def private String signatureString(RefableType type) {
+	def String signatureString(RefableType type) {
 		switch it : type {
 			case null: 'void'
 			case isRef: type.type.typeName + languageExt.pointerLiteral
@@ -402,9 +399,9 @@ class ProcedureHelpers {
 		}
 	}
 
-	def private String signatureReturnString(Attribute attribute){
+	def String signatureString(Attribute attribute){
 		switch it : attribute {
-			case size > 0: type.signatureString + languageExt.typeArrayModifier
+			case size > 0: languageExt.arrayType(type.type.typeName, size, type.ref)
 			default: type.signatureString
 		}
 	}
@@ -413,14 +410,14 @@ class ProcedureHelpers {
 	 * @param attribute a {@link Attribute}
 	 * @return a string for <code>type name</code>
 	 */
-	def private String declarationString(Attribute attribute){
+	def String declarationString(Attribute attribute){
 		switch it : attribute {
-			case size > 0: languageExt.arrayDeclaration(type.type.typeName, size, name, type.isRef)
+			case size > 0: languageExt.arrayDeclaration(type.type.typeName, size, type.isRef, name)
 			default: type.signatureString + ' ' + name
 		}
 	}
 
-	def private functionSignature(String className, String fullFctName, String returnType, String arguments){
+	def protected functionSignature(String className, String fullFctName, String returnType, String arguments){
 		'''«languageExt.accessLevelPublic()» «returnType» «fullFctName»(«languageExt.selfPointer(className, !arguments.empty)»«arguments»)'''
 	}
 

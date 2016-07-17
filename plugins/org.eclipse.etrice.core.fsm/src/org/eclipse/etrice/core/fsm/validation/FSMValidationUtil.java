@@ -4,10 +4,10 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * CONTRIBUTORS:
  * 		Henrik Rentz-Reichert (initial contribution)
- * 
+ *
  *******************************************************************************/
 
 package org.eclipse.etrice.core.fsm.validation;
@@ -51,22 +51,22 @@ import com.google.inject.Inject;
  *
  */
 public class FSMValidationUtil extends FSMValidationUtilXtend {
-	
+
 	@Inject
 	private FSMHelpers fsmHelpers;
-	
+
 	@Inject
 	private FSMNameProvider fsmNameProvider;
-	
+
 	public Result isConnectable(TransitionTerminal src, TransitionTerminal tgt, StateGraph sg) {
 		return isConnectable(src, tgt, null, sg);
 	}
-	
+
 	public Result isConnectable(TransitionTerminal src, TransitionTerminal tgt, Transition trans, StateGraph sg) {
 		Result result = isConnectableSrc(src, trans, sg);
 		if (!result.isOk())
 			return result;
-		
+
 		if (tgt instanceof TrPointTerminal) {
 			if (((TrPointTerminal) tgt).getTrPoint() instanceof EntryPoint)
 				return Result.error("entry point can not be transition target", tgt, FSMPackage.eINSTANCE.getTrPointTerminal_TrPoint(), 0);
@@ -117,11 +117,11 @@ public class FSMValidationUtil extends FSMValidationUtilXtend {
 
 		return Result.ok();
 	}
-	
+
 	public Result isConnectable(TransitionTerminal src, StateGraph sg) {
 		return isConnectableSrc(src, null, sg);
 	}
-	
+
 	public Result isConnectableSrc(TransitionTerminal src, Transition trans, StateGraph sg) {
 		if (src==null) {
 			for (Transition t : sg.getTransitions()) {
@@ -159,7 +159,7 @@ public class FSMValidationUtil extends FSMValidationUtilXtend {
 			for (Transition t : sg.getTransitions()) {
 				if (t==trans)
 					continue;
-				
+
 				if (t instanceof NonInitialTransition) {
 					if (((NonInitialTransition) t).getFrom() instanceof SubStateTrPointTerminal) {
 						SubStateTrPointTerminal tpt = (SubStateTrPointTerminal)((NonInitialTransition) t).getFrom();
@@ -169,30 +169,30 @@ public class FSMValidationUtil extends FSMValidationUtilXtend {
 				}
 			}
 		}
-		
+
 		return Result.ok();
 	}
 
 	public Result isValid(TrPoint tp) {
 //		if (!isUniqueName(tp, tp.getName()).isOk())
 //			return Result.error("name is not unique", tp, FSMPackage.Literals.TR_POINT__NAME);
-		
+
 		if (tp instanceof TransitionPoint)
 			return Result.ok();
-		
+
 		if (!(tp.eContainer().eContainer() instanceof State)) {
 			StateGraph sg = (StateGraph) tp.eContainer();
 			int idx = sg.getTrPoints().indexOf(tp);
 			return Result.error("entry and exit points forbidden on top level state graph", tp.eContainer(), FSMPackage.eINSTANCE.getStateGraph_TrPoints(), idx);
 		}
 		return Result.ok();
-		
+
 	}
-	
+
 	public boolean isConnectedOutside(TrPoint tp) {
 		if (tp instanceof TransitionPoint)
 			return false;
-		
+
 		StateGraph parentSG = (StateGraph) tp.eContainer().eContainer().eContainer();
 		for (Transition t : parentSG.getTransitions()) {
 			if (t.getTo() instanceof SubStateTrPointTerminal) {
@@ -208,7 +208,7 @@ public class FSMValidationUtil extends FSMValidationUtilXtend {
 				}
 			}
 		}
-		
+
 		return false;
 	}
 
@@ -267,7 +267,7 @@ public class FSMValidationUtil extends FSMValidationUtilXtend {
 		}
 		return Result.ok();
 	}
-	
+
 	public Result checkState(State state) {
 		if (state.getDoCode()!=null) {
 			ModelComponent mc = fsmHelpers.getModelComponent(state);
@@ -279,12 +279,12 @@ public class FSMValidationUtil extends FSMValidationUtilXtend {
 		}
 		return Result.ok();
 	}
-	
+
 	public List<Result> checkTopLevelRefinedStates(ModelComponent mc) {
 		ArrayList<Result> errors = new ArrayList<Result>();
 		if (mc.getStateMachine()==null)
 			return errors;
-		
+
 		Function<RefinedState, String> nameProvider = fsmNameProvider.getRefinedStateNameProvider();
 		Map<RefinedState, RefinedState> rs2parent = fsmHelpers.getRefinedStatesToRelocate(mc, nameProvider);
 		for (RefinedState rs : rs2parent.keySet()) {
@@ -297,26 +297,26 @@ public class FSMValidationUtil extends FSMValidationUtilXtend {
 					FSMPackage.Literals.STATE_GRAPH__STATES,
 					idx));
 		}
-		
+
 		return errors;
 	}
-	
+
 	public Result isUniqueName(StateGraphItem s, String name) {
 		if (name.trim().isEmpty())
 			return Result.error("name must not be empty");
-		
+
 		if (!isValidID(name))
 			return Result.error("name is no valid ID");
-		
+
 		StateGraph sg = (StateGraph) s.eContainer();
 		Set<String> names = fsmHelpers.getAllNames(sg, s);
-		
+
 		if (names.contains(name))
 			return Result.error("name already used");
-		
+
 		return Result.ok();
 	}
-	
+
 	public boolean isValidID(String name) {
 		return name.matches("\\^?[a-zA-Z_][a-zA-Z_0-9]*");
 	}

@@ -677,7 +677,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       String _name = m.getName();
       _builder.append(_name, "");
       _builder.append("(");
-      CharSequence _argList = this._dataClassGen.argList(dc);
+      String _argList = this._dataClassGen.argList(dc);
       _builder.append(_argList, "");
       _builder.append(")");
       _xblockexpression = _builder;

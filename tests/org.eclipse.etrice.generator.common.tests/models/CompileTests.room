@@ -4,16 +4,18 @@ RoomModel CompileTestsModel {
 	import room.basic.etunit.* from "Tests.room"
 	import DetailExpressionTestModel.DetailExpressionTest from "DetailExpressionTest.room"
 	import StatemachineInterfaceTestModel.StatemachineInterfaceTest from "StatemachineInterfaceTest.room"
-	import ContinuationTransitionTest.* from "ContinuationTransitionTest.room"
+	import StatemachineInterfaceTestInheritedModel.StatemachineInterfaceInheritedTest from "StatemachineInterfaceInheritedTest.room"
+	import ContinuationTransitionTest.ContinuationTransitionTest from "ContinuationTransitionTest.room"
 
 	ActorClass CompileTests {
 		@TestInstance
 		Structure {
 			Attribute caseId : int32
-			
+
 			// just compile
 			ActorRef detailExpressionTest: DetailExpressionTest
 			ActorRef statemachineInterfaceTest : StatemachineInterfaceTest
+			ActorRef statemachineInterfaceInheritedTest : StatemachineInterfaceInheritedTest
 			ActorRef continuationTransitionTest : ContinuationTransitionTest
 		}
 		Behavior {

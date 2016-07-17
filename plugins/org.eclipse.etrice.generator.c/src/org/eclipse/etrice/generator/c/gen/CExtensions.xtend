@@ -181,9 +181,12 @@ class CExtensions implements ILanguageExtension {
 	override String pointerLiteral() { "*" }
 	override String nullPointer() { "NULL" }
 	override String voidPointer() { "void*" }
-	override String typeArrayModifier() { pointerLiteral }
 
-	override String arrayDeclaration(String type, int size, String name, boolean isRef)'''
+	override String arrayType(String type, int size, boolean isRef)'''
+			«type»«IF isRef»*«ENDIF»
+		'''
+
+	override String arrayDeclaration(String type, int size, boolean isRef, String name)'''
 		«type»«IF isRef»*«ENDIF» «name»[«size»]
 	'''
 
@@ -371,7 +374,7 @@ class CExtensions implements ILanguageExtension {
 		else
 			type.getName()
 	}
-	
+
 	override makeOverridable() {
 		// not possible for C: empty string
 		""

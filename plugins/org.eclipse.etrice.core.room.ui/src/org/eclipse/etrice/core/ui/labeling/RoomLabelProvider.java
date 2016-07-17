@@ -4,10 +4,10 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * CONTRIBUTORS:
  * 		Thomas Schuetz and Henrik Rentz-Reichert (initial contribution)
- * 
+ *
  *******************************************************************************/
 
 package org.eclipse.etrice.core.ui.labeling;
@@ -55,7 +55,7 @@ import com.google.inject.Inject;
 
 /**
  * Provides labels for a EObjects.
- * 
+ *
  * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#labelProvider
  */
 public class RoomLabelProvider extends FSMLabelProvider {
@@ -65,35 +65,35 @@ public class RoomLabelProvider extends FSMLabelProvider {
 
 	@Inject
 	private RoomNameProvider roomNameProvider;
-	
+
 	@Inject
 	public RoomLabelProvider(AdapterFactoryLabelProvider delegate) {
 		super(delegate);
 	}
 
 	// custom images for ROOM classes
-	
+
 	String image(RoomModel rm) {
 		return "RoomModel.gif";
 	}
-	
+
 	@Override
 	public String image(Import im) {
 		return "RoomModelImport.gif";
 	}
-	
+
 	String image(DataClass dc) {
 		return "DataClass.gif";
 	}
-	
+
 	String image(PrimitiveType pt) {
 		return "PrimitiveType.gif";
 	}
-	
+
 	String image(ExternalType et) {
 		return "ExternalType.gif";
 	}
-	
+
 	String image(Attribute a) {
 		return "Attribute.gif";
 	}
@@ -137,7 +137,7 @@ public class RoomLabelProvider extends FSMLabelProvider {
 	String image(SubSystemRef ar) {
 		return "SubSystemRef.gif";
 	}
-	
+
 	String image(ServiceImplementation svc) {
 		return "ServiceImpl.gif";
 	}
@@ -155,13 +155,13 @@ public class RoomLabelProvider extends FSMLabelProvider {
 		else
 			return "Operation.gif";
 	}
-	
+
 	String image(ClassStructor structor){
 		if(structor.isConstructor())
 			return "ctor.png";
 		return "dtor.png";
 	}
-	
+
 	String image(Port p) {
 		boolean relay = roomHelpers.isRelay(p);
 		if (relay)
@@ -187,71 +187,71 @@ public class RoomLabelProvider extends FSMLabelProvider {
 				else
 					return "Port.gif";
 	}
-	
+
 	String image(ActorInstanceMapping aim) {
 		return "actorInstanceMapping.gif";
 	}
 	String image(LogicalThread lt) {
 		return "LogicalThread.png";
-	} 
-	
+	}
+
 	String image(AnnotationType at) {
 		return "annotation_obj.gif";
 	}
-	
+
 	String image(AnnotationAttribute aa) {
 		return "Attribute.gif";
 	}
-	
+
 	String image(EnumerationType et) {
 		return "EnumerationType.gif";
 	}
-	
+
 	String image(EnumLiteral lit) {
 		return "EnumLiteral.gif";
 	}
-	
+
 	String image(ProtocolSemantics ps) {
 		return "ProtocolSemantics.png";
 	}
-	
+
 	String image(SemanticsRule ps) {
 		return "SemanticsRule.png";
 	}
-	
+
 	// custom labels
-	
+
 	String text(DataClass dc) {
 		String base = dc.getBase()!=null? " extends "+dc.getBase().getName():"";
 		return dc.getName()+base;
 	}
-	
+
 	String text(PrimitiveType pt) {
 		return pt.getName()+" -> "+pt.getTargetName();
 	}
-	
+
 	String text(ExternalType et) {
 		return et.getName()+" -> "+et.getTargetName();
 	}
-	
+
 	String text(ProtocolClass pc) {
 		String base = pc.getBase()!=null? " extends "+pc.getBase().getName():"";
 		return pc.getName()+base;
 	}
-	
+
 	String text(SubProtocol pc) {
 		return pc.getName()+": "+pc.getProtocol().getName();
 	}
-	
+
 	StyledString text(ActorClass ac) {
-		String base = ac.getBase()!=null? " extends "+ac.getActorBase().getName():"";
+		String base = ac.getActorBase()!=null? " extends "+ac.getActorBase().getName():"";
 		StyledString result = new StyledString(ac.getName()+base);
 		int pos = result.toString().indexOf(" extends ");
 		if (pos>=0)
 			result.setStyle(pos+1, 7, getKeywordStyler());
 		return result;
 	}
-	
+
 	String text(Port p) {
 		String location = null;
 		if (roomHelpers.isInternal(p))
@@ -266,33 +266,33 @@ public class RoomLabelProvider extends FSMLabelProvider {
 		String protocol = p.getProtocol()!=null? (" : "+p.getProtocol().getName()):"";
 		return conjugated+" "+location+" Port "+p.getName()+multiplicity+protocol;
 	}
-	
+
 	String text(Binding bind) {
 		return roomNameProvider.getDisplayName(bind);
 	}
-	
+
 	String text(ExternalPort ep) {
 		return text(ep.getInterfacePort());
 	}
-	
+
 	String text(SAP sap) {
 		String protocol = sap.getProtocol()!=null? (" : "+sap.getProtocol().getName()):"";
 		return "SAP "+sap.getName()+protocol;
 	}
-	
+
 	String text(SPP spp) {
 		String protocol = spp.getProtocol()!=null? (" : "+spp.getProtocol().getName()):"";
 		return "SPP "+spp.getName()+protocol;
 	}
-	
+
 	String text(ServiceImplementation svc) {
 		if (svc.getSpp()==null)
 			return "Implementation";
-		
+
 		String protocol = svc.getSpp().getProtocol()!=null? (" : "+svc.getSpp().getProtocol().getName()):"";
 		return "Implementation of "+svc.getSpp().getName()+protocol;
 	}
-	
+
 	StyledString text(ActorRef ref) {
 		String cls = ref.getType()!=null? (" : "+ref.getType().getName()):"";
 		StyledString txt = new StyledString("ref "+ref.getName()+cls);
@@ -300,12 +300,12 @@ public class RoomLabelProvider extends FSMLabelProvider {
 			txt.setStyle(txt.length()-cls.length()+2, cls.length()-2, getTypeStyler());
 		return txt;
 	}
-	
+
 	String text(SubSystemRef ref) {
 		String cls = ref.getType()!=null? (" : "+ref.getType().getName()):"";
 		return "ref "+ref.getName()+cls;
 	}
-	
+
 	String text(Attribute attr) {
 		String type = attr.getType().getType()!=null? (" : "+attr.getType().getType().getName()):"";
 		String value = (attr.getDefaultValueLiteral()!=null && !attr.getDefaultValueLiteral().isEmpty())?
@@ -313,7 +313,7 @@ public class RoomLabelProvider extends FSMLabelProvider {
 		String mult = attr.getSize()>1? ("["+attr.getSize()+"]") : "";
 		return "Attr "+attr.getName()+mult+type+value;
 	}
-	
+
 	StyledString text(Operation op) {
 		/* TODO TS: create complete signature including return type and ref */
 
@@ -327,7 +327,7 @@ public class RoomLabelProvider extends FSMLabelProvider {
 
 		return result;
 	}
-	
+
 	String text(Message m) {
 		String signature = "";
 		if (m.getData()!=null)
@@ -339,31 +339,31 @@ public class RoomLabelProvider extends FSMLabelProvider {
 	String text(ActorInstanceMapping aim) {
 		return aim.getPath().toString()+" -> "+aim.getThread().getName();
 	}
-	
+
 	String text (LogicalThread lt ) {
-		return lt.getName();		
+		return lt.getName();
 	}
-	
+
 	StyledString text(EnumerationType et) {
 		StyledString txt = new StyledString("enum "+et.getName());
 		txt.setStyle(0, 4, getKeywordStyler());
 		return txt;
 	}
-	
+
 	String text (EnumLiteral lit) {
-		return lit.getName()+" = "+lit.getLiteralValue();		
+		return lit.getName()+" = "+lit.getLiteralValue();
 	}
-	
+
 	String text(ProtocolSemantics ps) {
 		return "ProtocolSemantics";
 	}
-	
+
 	String text(SemanticsRule rule) {
 		if (rule instanceof InSemanticsRule)
 			return "in: "+rule.getMsg();
 		else
 			return "out: "+rule.getMsg();
 	}
-	
-	
+
+
 }

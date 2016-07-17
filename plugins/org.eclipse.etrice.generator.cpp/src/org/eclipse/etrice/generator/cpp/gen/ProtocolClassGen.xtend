@@ -22,7 +22,6 @@ import org.eclipse.etrice.core.room.InterfaceItem
 import org.eclipse.etrice.core.room.Message
 import org.eclipse.etrice.core.room.Port
 import org.eclipse.etrice.core.room.PortClass
-import org.eclipse.etrice.core.room.PrimitiveType
 import org.eclipse.etrice.core.room.ProtocolClass
 import org.eclipse.etrice.core.room.SAP
 import org.eclipse.etrice.core.room.SPP
@@ -42,8 +41,8 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 	@Inject extension RoomExtensions roomExt
 	@Inject extension ProcedureHelpers helpers
 	@Inject extension TypeHelpers
-	@Inject extension Initialization
 	@Inject extension FileSystemHelpers
+	@Inject Initialization initHelper
 	@Inject ILogger logger
 
 	def doGenerate(Root root) {
@@ -76,20 +75,21 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		 *
 		 */
 
-		«generateIncludeGuardBegin(pc.name)»
+		«generateIncludeGuardBegin(pc, '')»
 
 		#include "common/modelbase/InterfaceItemBase.h"
 		#include "common/modelbase/PortBase.h"
 		#include "common/modelbase/ReplicatedInterfaceItemBase.h"
 		#include "common/modelbase/ReplicatedPortBase.h"
-		#include <etDatatypes.h>
-		#include <string>
-
-		«pc.userCode(1)»
+		#include "common/etDatatypesCpp.hpp"
 
 		«FOR dataClass : root.getReferencedDataClasses(pc)»
 			#include "«dataClass.path»«dataClass.name».h"
 		«ENDFOR»
+
+		«pc.userCode1.userCode»
+
+		«pc.generateNamespaceBegin»
 
 		class «pc.name» {
 		   public:
@@ -112,12 +112,14 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 			private:
 				static const std::string s_messageStrings[];
 
-
 		};
 
 		«portClassDeclaration(pc, false)»
 		«portClassDeclaration(pc, true)»
-		«generateIncludeGuardEnd(pc.name)»
+
+		«pc.generateNamespaceEnd»
+
+		«generateIncludeGuardEnd(pc, '')»
 	'''
 	}
 
@@ -202,13 +204,12 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		#include "common/messaging/Address.h"
 		#include "common/messaging/Message.h"
 		#include "common/modelbase/IEventReceiver.h"
-		#include <iostream>
 		#include <iterator>
-		#include <string>
 		#include <vector>
 
 		using namespace etRuntime;
 
+		«pc.generateNamespaceBegin»
 
 		«pc.userCode(3)»
 
@@ -228,6 +229,8 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		«portClassImplementation(pc, false)»
 		«portClassImplementation(pc, true)»
 
+		«pc.generateNamespaceEnd»
+
 	'''
 	}
 
@@ -241,19 +244,18 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 	// «IF conj»conjugated «ENDIF»port class
 	//------------------------------------------------------------------------------------------------------------
 
-	«portClassName»::«portClassName»(IInterfaceItemOwner* actor, const std::string& name, int localId) :
-			«pclass.generateConstructorInitalizerList('0')»
+	«portClassName»::«portClassName»(IInterfaceItemOwner* actor, const std::string& name, int localId)
+		«pclass.generateConstructorInitalizerList('0')»
 	{
-		«IF pclass!=null»«pclass.attributes.attributeInitialization(false)»«ENDIF»
 		«IF Main::settings.generateMSCInstrumentation»
 			DebuggingService::getInstance().addPortInstance(*this);
 		«ENDIF»
 	}
 
-	«portClassName»::«portClassName»(IInterfaceItemOwner* actor, const std::string& name, int localId, int idx) :
-			«pclass.generateConstructorInitalizerList('idx')»
+	«portClassName»::«portClassName»(IInterfaceItemOwner* actor, const std::string& name, int localId, int idx)
+		«pclass.generateConstructorInitalizerList('idx')»
 	{
-		«IF pclass!=null»«pclass.attributes.attributeInitialization(false)»«ENDIF»
+		«IF pclass != null»«initHelper.genArrayInitializers(pclass.attributes)»«ENDIF»
 		«IF Main::settings.generateMSCInstrumentation»
 			DebuggingService::getInstance().addPortInstance(*this);
 		«ENDIF»
@@ -336,12 +338,14 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 	}
 
 	def private generateConstructorInitalizerList(PortClass pc, String index) {
+		val extension initHelper = initHelper
 		val List<CharSequence> initList = newArrayList
+
 		initList += '''PortBase(actor, name, localId, «index»)'''
 		if(pc != null)
-			initList += pc.attributes.map[attributeInitialization(false)]
+			initList += pc.attributes.map['''«name»(«initializerListValue»)''']
 
-		return initList.join(','+NEWLINE)
+		initList.generateCtorInitializerList
 	}
 
 	def protected messageCall(Message m) {
@@ -350,11 +354,11 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 
 
 	def protected messageSignature(Message m) {
-		'''«IF m.priv»private:«ELSE»public:«ENDIF» void «m.name»(«IF m.data!=null»«m.data.refType.type.typeName» «m.data.name»«ENDIF»)'''
+		'''«IF m.priv»private:«ELSE»public:«ENDIF» void «m.name»(«IF m.data!=null»«m.data.refType.signatureString» «m.data.name»«ENDIF»)'''
 	}
 
 	def protected messageSignatureDefinition(Message m, String classPrefix) {
-		'''void «classPrefix»::«m.name»(«IF m.data!=null»«m.data.refType.type.typeName» «m.data.name»«ENDIF»)'''
+		'''void «classPrefix»::«m.name»(«IF m.data!=null»«m.data.refType.signatureString» «m.data.name»«ENDIF»)'''
 	}
 
 	def protected sendMessage(Message m, String portClassName, String classPrefix, boolean conj) {
@@ -377,7 +381,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 			}
 		'''
 	}
-	
+
 
 	def protected generateDataDrivenHeaderFile(Root root, ProtocolClass pc) {
 		val sentMsgs = pc.allIncomingMessages.filter(m|m.data!=null)
@@ -390,23 +394,21 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 			 *
 			 */
 
-			«generateIncludeGuardBegin(pc.name)»
+			«pc.generateIncludeGuardBegin('')»
 
-			#include "etDatatypes.h"
+			#include "common/etDatatypesCpp.hpp"
 			#include "common/modelbase/DataPort.h"
 			«FOR dataClass : root.getReferencedDataClasses(pc)»
 				#include "«dataClass.path»«dataClass.name».h"
 			«ENDFOR»
 
-			«pc.userCode(1)»
+			«pc.userCode1.userCode»
 
-«««			«FOR model : models»
-«««				import «model.name».*;
-«««			«ENDFOR»
+			«pc.generateNamespaceBegin»
 
 			class «pc.name» {
 
-				«pc.userCode(2)»
+				«pc.userCode2.userCode»
 
 			};
 
@@ -451,7 +453,9 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 
 			};
 
-			«generateIncludeGuardEnd(pc.name)»
+			«pc.generateNamespaceEnd»
+
+			«pc.generateIncludeGuardEnd('')»
 		'''
 	}
 
@@ -470,7 +474,9 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 
 			using namespace etRuntime;
 
-			«pc.userCode(3)»
+			«pc.generateNamespaceBegin»
+
+			«pc.userCode3.userCode»
 
 «««			«FOR model : models»
 «««				import «model.name».*;
@@ -508,6 +514,9 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 				if (peer != 0)
 					m_peer = peer;
 			}
+
+			«pc.generateNamespaceEnd»
+
 		'''
 	}
 

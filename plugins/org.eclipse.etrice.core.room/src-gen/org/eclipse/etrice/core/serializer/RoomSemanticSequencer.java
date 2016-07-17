@@ -950,7 +950,7 @@ public class RoomSemanticSequencer extends FSMSemanticSequencer {
 	 *     (
 	 *         name=ID 
 	 *         type=LiteralType 
-	 *         targetName=FQN 
+	 *         targetName=STRING 
 	 *         castName=FQN? 
 	 *         defaultValueLiteral=STRING 
 	 *         docu=Documentation?

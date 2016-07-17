@@ -336,7 +336,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cTypeLiteralTypeEnumRuleCall_3_0 = (RuleCall)cTypeAssignment_3.eContents().get(0);
 		private final Keyword cHyphenMinusGreaterThanSignKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		private final Assignment cTargetNameAssignment_5 = (Assignment)cGroup.eContents().get(5);
-		private final RuleCall cTargetNameFQNParserRuleCall_5_0 = (RuleCall)cTargetNameAssignment_5.eContents().get(0);
+		private final RuleCall cTargetNameSTRINGTerminalRuleCall_5_0 = (RuleCall)cTargetNameAssignment_5.eContents().get(0);
 		private final Group cGroup_6 = (Group)cGroup.eContents().get(6);
 		private final Keyword cLeftParenthesisKeyword_6_0 = (Keyword)cGroup_6.eContents().get(0);
 		private final Assignment cCastNameAssignment_6_1 = (Assignment)cGroup_6.eContents().get(1);
@@ -349,11 +349,11 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cDocuDocumentationParserRuleCall_9_0 = (RuleCall)cDocuAssignment_9.eContents().get(0);
 		
 		//PrimitiveType:
-		//	"PrimitiveType" name=ID ":" type=LiteralType "->" targetName=FQN ("(" castName=FQN ")")? "default"
+		//	"PrimitiveType" name=ID ":" type=LiteralType "->" targetName=STRING ("(" castName=FQN ")")? "default"
 		//	defaultValueLiteral=STRING docu=Documentation?;
 		public ParserRule getRule() { return rule; }
 
-		//"PrimitiveType" name=ID ":" type=LiteralType "->" targetName=FQN ("(" castName=FQN ")")? "default"
+		//"PrimitiveType" name=ID ":" type=LiteralType "->" targetName=STRING ("(" castName=FQN ")")? "default"
 		//defaultValueLiteral=STRING docu=Documentation?
 		public Group getGroup() { return cGroup; }
 
@@ -378,11 +378,11 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//"->"
 		public Keyword getHyphenMinusGreaterThanSignKeyword_4() { return cHyphenMinusGreaterThanSignKeyword_4; }
 
-		//targetName=FQN
+		//targetName=STRING
 		public Assignment getTargetNameAssignment_5() { return cTargetNameAssignment_5; }
 
-		//FQN
-		public RuleCall getTargetNameFQNParserRuleCall_5_0() { return cTargetNameFQNParserRuleCall_5_0; }
+		//STRING
+		public RuleCall getTargetNameSTRINGTerminalRuleCall_5_0() { return cTargetNameSTRINGTerminalRuleCall_5_0; }
 
 		//("(" castName=FQN ")")?
 		public Group getGroup_6() { return cGroup_6; }
@@ -3087,7 +3087,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cInterfaceItemParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
 		//// **************************************************************
-		//// concrete message and interface item for state machines 
+		//// concrete message and interface item for state machines
 		////AbstractMessage: Message;
 		//AbstractInterfaceItem:
 		//	InterfaceItem;
@@ -3554,7 +3554,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//PrimitiveType:
-	//	"PrimitiveType" name=ID ":" type=LiteralType "->" targetName=FQN ("(" castName=FQN ")")? "default"
+	//	"PrimitiveType" name=ID ":" type=LiteralType "->" targetName=STRING ("(" castName=FQN ")")? "default"
 	//	defaultValueLiteral=STRING docu=Documentation?;
 	public PrimitiveTypeElements getPrimitiveTypeAccess() {
 		return pPrimitiveType;
@@ -4041,7 +4041,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//// **************************************************************
-	//// concrete message and interface item for state machines 
+	//// concrete message and interface item for state machines
 	////AbstractMessage: Message;
 	//AbstractInterfaceItem:
 	//	InterfaceItem;

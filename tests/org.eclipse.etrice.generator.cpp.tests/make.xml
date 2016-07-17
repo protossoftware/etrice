@@ -14,10 +14,14 @@
 
 	<target name="testing" depends="copyModels">
 		<!-- modified target from common.xml because cpp is not complete yet -->
+		<test testid="SendingDataTestCpp" models="${models.path}/sendingData/SendingDataTestCpp.room ${models.path}/GenericPhysical.etphys" />
+		<test testid="CompileTests" models="${models.path}/CompileTests.room ${models.path}/GenericPhysical.etphys" />
 		<test testid="ActorCommunicationTest" models="${models.path}/ActorCommunicationTest.room ${models.path}/GenericPhysical.etphys" />
 		<test testid="ChoicePointTest" models="${models.path}/ChoicePointTest.room ${models.path}/GenericPhysical.etphys" />
+		<test testid="ChoicePointTestExtended" models="${models.path}/ChoicePointTestExtended.room ${models.path}/GenericPhysical.etphys" />
 		<test testid="DataDrivenTest" models="${models.path}/DataDrivenTest.room ${models.path}/GenericPhysical.etphys" />
 		<test testid="HandlerTest" models="${models.path}/HandlerTest.room ${models.path}/GenericPhysical.etphys" />
+		<test testid="OperationInheritanceTest" models="${models.path}/OperationInheritanceTest.room ${models.path}/GenericPhysical.etphys" />
 		<test testid="PingPongThreadTest" models="${models.path}/PingPongThreadTest.etmap" />
 		<test testid="PingPongThreadReplPortTest" models="${models.path}/PingPongThreadReplPortTest.etmap" />
 	</target>

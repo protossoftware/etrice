@@ -298,11 +298,19 @@ public class CExtensions implements ILanguageExtension {
     return "void*";
   }
   
-  public String typeArrayModifier() {
-    return this.pointerLiteral();
+  public String arrayType(final String type, final int size, final boolean isRef) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append(type, "");
+    {
+      if (isRef) {
+        _builder.append("*");
+      }
+    }
+    _builder.newLineIfNotEmpty();
+    return _builder.toString();
   }
   
-  public String arrayDeclaration(final String type, final int size, final String name, final boolean isRef) {
+  public String arrayDeclaration(final String type, final int size, final boolean isRef, final String name) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append(type, "");
     {

@@ -12,20 +12,19 @@
 package org.eclipse.etrice.generator.cpp.gen;
 
 import com.google.common.base.Objects;
+import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import java.util.Collections;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.etrice.core.common.base.KeyValue;
 import org.eclipse.etrice.core.common.base.Literal;
 import org.eclipse.etrice.core.etphys.eTPhys.NodeRef;
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance;
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.IDiagnostician;
 import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.Attribute;
-import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.EnumLiteral;
 import org.eclipse.etrice.core.room.EnumerationType;
@@ -41,6 +40,7 @@ import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.etrice.generator.generic.TypeHelpers;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.util.Pair;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -201,58 +201,75 @@ public class CppExtensions implements ILanguageExtension {
     return "void*";
   }
   
-  public String typeArrayModifier() {
-    return this.pointerLiteral();
-  }
-  
-  public String arrayDeclaration(final String type, final int size, final String name, final boolean isRef) {
+  public String arrayType(final String type, final int size, final boolean isRef) {
     StringConcatenation _builder = new StringConcatenation();
+    _builder.append("StaticArray<");
     _builder.append(type, "");
     {
       if (isRef) {
         _builder.append("*");
       }
     }
-    _builder.append(" ");
-    _builder.append(name, "");
-    _builder.append("[");
+    _builder.append(", ");
     _builder.append(size, "");
-    _builder.append("]");
-    _builder.newLineIfNotEmpty();
+    _builder.append(">");
     return _builder.toString();
   }
   
-  public CharSequence getIncludeGuardString(final String filename) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("_");
-    String _replaceAll = filename.replaceAll("\\/.", "_");
-    String _upperCase = _replaceAll.toUpperCase();
-    _builder.append(_upperCase, "");
-    _builder.append("_H_");
-    return _builder;
+  public String arrayDeclaration(final String type, final int size, final boolean isRef, final String name) {
+    String _arrayType = this.arrayType(type, size, isRef);
+    String _plus = (_arrayType + " ");
+    return (_plus + name);
   }
   
-  public CharSequence generateIncludeGuardBegin(final String filename) {
+  public String getIncludeGuardString(final RoomClass roomClass, final String appendSegments) {
+    String _package = this._roomExtensions.getPackage(roomClass);
+    String[] _split = _package.split("\\.");
+    String _name = roomClass.getName();
+    Iterable<String> _plus = Iterables.<String>concat(((Iterable<? extends String>)Conversions.doWrapArray(_split)), Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(_name)));
+    String[] _split_1 = appendSegments.split("\\.");
+    Iterable<String> _plus_1 = Iterables.<String>concat(_plus, ((Iterable<? extends String>)Conversions.doWrapArray(_split_1)));
+    final Function1<String, Boolean> _function = new Function1<String, Boolean>() {
+      public Boolean apply(final String it) {
+        boolean _isEmpty = it.isEmpty();
+        return Boolean.valueOf((!_isEmpty));
+      }
+    };
+    Iterable<String> _filter = IterableExtensions.<String>filter(_plus_1, _function);
+    String _join = IterableExtensions.join(_filter, "_");
+    String _upperCase = _join.toUpperCase();
+    String _plus_2 = ("_" + _upperCase);
+    return (_plus_2 + "_H_");
+  }
+  
+  public CharSequence generateIncludeGuardBegin(final RoomClass roomClass, final String appendSegments) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("#ifndef ");
-    CharSequence _includeGuardString = this.getIncludeGuardString(filename);
+    String _includeGuardString = this.getIncludeGuardString(roomClass, appendSegments);
     _builder.append(_includeGuardString, "");
     _builder.newLineIfNotEmpty();
     _builder.append("#define ");
-    CharSequence _includeGuardString_1 = this.getIncludeGuardString(filename);
+    String _includeGuardString_1 = this.getIncludeGuardString(roomClass, appendSegments);
     _builder.append(_includeGuardString_1, "");
     _builder.newLineIfNotEmpty();
     return _builder;
   }
   
-  public CharSequence generateIncludeGuardEnd(final String filename) {
+  public CharSequence generateIncludeGuardEnd(final RoomClass roomClass, final String appendSegments) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("#endif /* ");
-    CharSequence _includeGuardString = this.getIncludeGuardString(filename);
+    String _includeGuardString = this.getIncludeGuardString(roomClass, appendSegments);
     _builder.append(_includeGuardString, "");
     _builder.append(" */");
-    _builder.newLineIfNotEmpty();
     return _builder;
+  }
+  
+  public String generateNamespaceBegin(final RoomClass roomClass) {
+    return "";
+  }
+  
+  public String generateNamespaceEnd(final RoomClass roomClass) {
+    return "";
   }
   
   public String superCall(final String baseClassName, final String method, final String arguments) {
@@ -268,59 +285,33 @@ public class CppExtensions implements ILanguageExtension {
   }
   
   public String defaultValue(final DataType dt) {
-    String _xifexpression = null;
-    if ((dt instanceof PrimitiveType)) {
-      return ((PrimitiveType) dt).getDefaultValueLiteral();
-    } else {
-      String _xifexpression_1 = null;
-      if ((dt instanceof EnumerationType)) {
-        return this.getDefaultValue(((EnumerationType) dt));
-      } else {
-        String _xifexpression_2 = null;
-        if ((dt instanceof ExternalType)) {
-          String _name = ((ExternalType)dt).getName();
-          String _plus = ("initialize external type with default constructor" + _name);
-          EObject _eContainer = ((ExternalType)dt).eContainer();
-          EStructuralFeature _eContainingFeature = ((ExternalType)dt).eContainingFeature();
-          this.diagnostician.warning(_plus, _eContainer, _eContainingFeature);
-          String _typeName = this._typeHelpers.typeName(dt);
-          return (_typeName + "()");
-        } else {
-          String _xblockexpression = null;
-          {
-            final DataClass dc = ((DataClass) dt);
-            StringConcatenation _builder = new StringConcatenation();
-            _builder.append("{");
-            _builder.newLine();
-            {
-              EList<Attribute> _attributes = dc.getAttributes();
-              boolean _hasElements = false;
-              for(final Attribute att : _attributes) {
-                if (!_hasElements) {
-                  _hasElements = true;
-                } else {
-                  _builder.appendImmediate(",", "\t");
-                }
-                _builder.append("\t");
-                RefableType _type = att.getType();
-                DataType _type_1 = _type.getType();
-                int _size = att.getSize();
-                String _initializationWithDefaultValues = this.initializationWithDefaultValues(_type_1, _size);
-                _builder.append(_initializationWithDefaultValues, "\t");
-                _builder.newLineIfNotEmpty();
-              }
-            }
-            _builder.append("}");
-            _builder.newLine();
-            _xblockexpression = _builder.toString();
-          }
-          _xifexpression_2 = _xblockexpression;
-        }
-        _xifexpression_1 = _xifexpression_2;
+    String _switchResult = null;
+    final DataType it = dt;
+    boolean _matched = false;
+    if (!_matched) {
+      if (it instanceof PrimitiveType) {
+        _matched=true;
+        _switchResult = ((PrimitiveType)it).getDefaultValueLiteral();
       }
-      _xifexpression = _xifexpression_1;
     }
-    return _xifexpression;
+    if (!_matched) {
+      if (it instanceof EnumerationType) {
+        _matched=true;
+        String _xblockexpression = null;
+        {
+          this.diagnostician.error("Enumeration not supported", dt, null);
+          _xblockexpression = "/* TODO */";
+        }
+        _switchResult = _xblockexpression;
+      }
+    }
+    if (!_matched) {
+      if (it instanceof ExternalType) {
+        _matched=true;
+        _switchResult = ((ExternalType)it).getDefaultValueLiteral();
+      }
+    }
+    return _switchResult;
   }
   
   public String getDefaultValue(final EnumerationType type) {
@@ -379,105 +370,92 @@ public class CppExtensions implements ILanguageExtension {
       return ((String[])Conversions.unwrapArray(CollectionLiterals.<String>newArrayList("", "", ""), String.class));
     }
     final VarDecl data = ((VarDecl) d);
-    boolean _equals_1 = Objects.equal(data, null);
-    if (_equals_1) {
-      return ((String[])Conversions.unwrapArray(CollectionLiterals.<String>newArrayList("", "", ""), String.class));
-    }
-    String _xifexpression = null;
+    String _switchResult = null;
     RefableType _refType = data.getRefType();
     DataType _type = _refType.getType();
-    if ((_type instanceof PrimitiveType)) {
-      RefableType _refType_1 = data.getRefType();
-      DataType _type_1 = _refType_1.getType();
-      _xifexpression = ((PrimitiveType) _type_1).getTargetName();
+    final DataType it = _type;
+    boolean _matched = false;
+    if (!_matched) {
+      if (it instanceof PrimitiveType) {
+        String _castName = ((PrimitiveType)it).getCastName();
+        boolean _isEmpty = Strings.isEmpty(_castName);
+        boolean _not = (!_isEmpty);
+        if (_not) {
+          _matched=true;
+          _switchResult = ((PrimitiveType)it).getCastName();
+        }
+      }
+    }
+    if (!_matched) {
+      if (it instanceof EnumerationType) {
+        _matched=true;
+        _switchResult = this.getCastType(((EnumerationType)it));
+      }
+    }
+    if (!_matched) {
+      _switchResult = this._typeHelpers.typeName(it);
+    }
+    final String castExpr = (_switchResult + "*");
+    RefableType _refType_1 = data.getRefType();
+    DataType _type_1 = _refType_1.getType();
+    String _typeName = this._typeHelpers.typeName(_type_1);
+    String _switchResult_1 = null;
+    RefableType _refType_2 = data.getRefType();
+    final RefableType it_1 = _refType_2;
+    boolean _matched_1 = false;
+    if (!_matched_1) {
+      boolean _isRef = it_1.isRef();
+      if (_isRef) {
+        _matched_1=true;
+        _switchResult_1 = "*";
+      }
+    }
+    if (!_matched_1) {
+      DataType _type_2 = it_1.getType();
+      boolean _isPrimitive = this._typeHelpers.isPrimitive(_type_2);
+      if (_isPrimitive) {
+        _matched_1=true;
+        _switchResult_1 = "";
+      }
+    }
+    if (!_matched_1) {
+      _switchResult_1 = "&";
+    }
+    final String typeExpr = (_typeName + _switchResult_1);
+    String _xifexpression = null;
+    RefableType _refType_3 = data.getRefType();
+    boolean _isRef_1 = _refType_3.isRef();
+    boolean _not = (!_isRef_1);
+    if (_not) {
+      _xifexpression = "*";
     } else {
-      String _xifexpression_1 = null;
-      RefableType _refType_2 = data.getRefType();
-      DataType _type_2 = _refType_2.getType();
-      if ((_type_2 instanceof EnumerationType)) {
-        RefableType _refType_3 = data.getRefType();
-        DataType _type_3 = _refType_3.getType();
-        _xifexpression_1 = this.getTargetType(((EnumerationType) _type_3));
-      } else {
-        String _xifexpression_2 = null;
-        RefableType _refType_4 = data.getRefType();
-        DataType _type_4 = _refType_4.getType();
-        if ((_type_4 instanceof ExternalType)) {
-          RefableType _refType_5 = data.getRefType();
-          DataType _type_5 = _refType_5.getType();
-          _xifexpression_2 = ((ExternalType) _type_5).getTargetName();
-        } else {
-          RefableType _refType_6 = data.getRefType();
-          DataType _type_6 = _refType_6.getType();
-          _xifexpression_2 = _type_6.getName();
-        }
-        _xifexpression_1 = _xifexpression_2;
-      }
-      _xifexpression = _xifexpression_1;
+      _xifexpression = "";
     }
-    String typeName = _xifexpression;
-    String _xifexpression_3 = null;
-    RefableType _refType_7 = data.getRefType();
-    DataType _type_7 = _refType_7.getType();
-    if ((_type_7 instanceof PrimitiveType)) {
-      String _xblockexpression = null;
-      {
-        RefableType _refType_8 = data.getRefType();
-        DataType _type_8 = _refType_8.getType();
-        final String ct = ((PrimitiveType) _type_8).getCastName();
-        String _xifexpression_4 = null;
-        boolean _and = false;
-        boolean _notEquals = (!Objects.equal(ct, null));
-        if (!_notEquals) {
-          _and = false;
-        } else {
-          boolean _isEmpty = ct.isEmpty();
-          boolean _not = (!_isEmpty);
-          _and = _not;
-        }
-        if (_and) {
-          _xifexpression_4 = ct;
-        } else {
-          _xifexpression_4 = typeName;
-        }
-        _xblockexpression = _xifexpression_4;
-      }
-      _xifexpression_3 = _xblockexpression;
-    } else {
-      String _xifexpression_4 = null;
-      RefableType _refType_8 = data.getRefType();
-      DataType _type_8 = _refType_8.getType();
-      if ((_type_8 instanceof EnumerationType)) {
-        RefableType _refType_9 = data.getRefType();
-        DataType _type_9 = _refType_9.getType();
-        _xifexpression_4 = this.getCastType(((EnumerationType) _type_9));
-      } else {
-        _xifexpression_4 = typeName;
-      }
-      _xifexpression_3 = _xifexpression_4;
-    }
-    String castTypeName = _xifexpression_3;
-    String _castTypeName = castTypeName;
-    castTypeName = (_castTypeName + "*");
-    String deRef = "*";
-    RefableType _refType_10 = data.getRefType();
-    boolean _isRef = _refType_10.isRef();
-    if (_isRef) {
-      typeName = (typeName + "*");
-      deRef = "";
-    }
+    String deRef = _xifexpression;
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append(typeExpr, "");
+    _builder.append(" ");
     String _name = data.getName();
-    String _plus = ((typeName + " ") + _name);
-    String _plus_1 = (_plus + " = ");
-    String _plus_2 = (_plus_1 + deRef);
-    String _plus_3 = (_plus_2 + "(static_cast<");
-    String _plus_4 = (_plus_3 + castTypeName);
-    final String typedData = (_plus_4 + ">(generic_data__et));\n");
+    _builder.append(_name, "");
+    _builder.append(" = ");
+    _builder.append(deRef, "");
+    _builder.append("(static_cast<");
+    _builder.append(castExpr, "");
+    _builder.append(">(generic_data__et));");
+    final String typedData = (_builder.toString() + this._roomExtensions.NEWLINE);
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append(", ");
     String _name_1 = data.getName();
-    final String dataArg = (", " + _name_1);
+    _builder_1.append(_name_1, "");
+    final String dataArg = _builder_1.toString();
+    StringConcatenation _builder_2 = new StringConcatenation();
+    _builder_2.append(", ");
+    _builder_2.append(typeExpr, "");
+    _builder_2.append(" ");
     String _name_2 = data.getName();
-    final String typedArgList = (((", " + typeName) + " ") + _name_2);
-    return ((String[])Conversions.unwrapArray(CollectionLiterals.<String>newArrayList(dataArg, typedData, typedArgList), String.class));
+    _builder_2.append(_name_2, "");
+    final String typedArgList = _builder_2.toString();
+    return new String[] { dataArg, typedData, typedArgList };
   }
   
   public String getTargetType(final EnumerationType type) {

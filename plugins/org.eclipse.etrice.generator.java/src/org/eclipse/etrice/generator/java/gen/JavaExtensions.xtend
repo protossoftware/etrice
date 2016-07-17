@@ -135,9 +135,12 @@ class JavaExtensions implements ILanguageExtension {
 	override String pointerLiteral() { "" }
 	override String nullPointer() { "null" }
 	override String voidPointer() { "Object" }
-	override String typeArrayModifier() { "[]" }
 
-	override String arrayDeclaration(String type, int size, String name, boolean isRef) {
+	override String arrayType(String type, int size, boolean isRef) {
+		type+"[]"
+	}
+
+	override String arrayDeclaration(String type, int size, boolean isRef, String name) {
 		type+" "+name+"[]"
 	}
 
@@ -285,7 +288,7 @@ class JavaExtensions implements ILanguageExtension {
 		else
 			"int"
 	}
-	
+
 	override makeOverridable() {
 		// not needed for Java: empty string
 		""

@@ -158,7 +158,11 @@ void etUnit_closeAll(etInt16 id);
  * more specialized functions
  */
 /** calls \ref expectOrderStart() */
+#ifdef __cplusplus
+#define EXPECT_ORDER_START(id, list, size)		expectOrderStart(id, list.getData(), size, __FILE__, __LINE__)
+#else
 #define EXPECT_ORDER_START(id, list, size)		expectOrderStart(id, list, size, __FILE__, __LINE__)
+#endif
 /** calls \ref expectOrder() */
 #define EXPECT_ORDER(id, msg, val)				expectOrder(id, msg, val, __FILE__, __LINE__)
 /** calls \ref expectOrderEnd() */

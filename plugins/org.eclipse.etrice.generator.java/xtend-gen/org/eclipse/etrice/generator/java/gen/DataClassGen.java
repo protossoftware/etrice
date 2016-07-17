@@ -203,7 +203,7 @@ public class DataClassGen {
     String _name_7 = dc.getName();
     _builder.append(_name_7, "\t");
     _builder.append("(");
-    CharSequence _argList = this.argList(dc);
+    String _argList = this.argList(dc);
     _builder.append(_argList, "\t");
     _builder.append(") {");
     _builder.newLineIfNotEmpty();
@@ -318,7 +318,7 @@ public class DataClassGen {
     return _builder;
   }
   
-  public CharSequence argList(final DataClass dc) {
+  public String argList(final DataClass dc) {
     List<Attribute> _allAttributes = this.roomHelpers.getAllAttributes(dc);
     return this._procedureHelpers.argList(_allAttributes);
   }

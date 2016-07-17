@@ -4,11 +4,11 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * CONTRIBUTORS:
  * 		Thomas Schuetz and Henrik Rentz-Reichert (initial contribution)
  * 		Eyrak Paen
- * 
+ *
  *******************************************************************************/
 
 
@@ -84,21 +84,21 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
- 
+
 
 public class RoomJavaValidator extends AbstractRoomJavaValidator {
 
 	@Inject protected RoomHelpers roomHelpers;
 
 	@Inject protected ValidationUtil validationUtil;
-	
+
 	@Inject protected IQualifiedNameProvider fqnProvider;
-	
+
 	/* message strings */
 	public static final String OPTIONAL_REFS_HAVE_TO_HAVE_MULTIPLICITY_ANY = "optional refs have to have multiplicity any [*]";
 	public static final String MULTIPLICITY_ANY_REQUIRES_OPTIONAL = "multiplicity any [*] requires optional";
 	public static final String A_REPLICATED_PORT_MUST_HAVE_AT_MOST_ONE_REPLICATED_PEER = "a replicated port must have at most one replicated peer";
-	
+
 	/* tags for quick fixes */
 	public static final String THREAD_MISSING = "RoomJavaValidator.ThreadMissing";
 	public static final String DUPLICATE_ACTOR_INSTANCE_MAPPING = "RoomJavaValidator.DuplicateActorInstanceMapping";
@@ -111,14 +111,14 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	public static final String INVALID_ANNOTATION_TARGET = "RoomJavaValidator.InvalidAnnotationTarget";
 	public static final String OPERATION_MISSING_OVERRIDE = "RoomJavaValidator.OperationMissingOverride";
 	public static final String OPERATION_EXTRANEOUS_OVERRIDE = "RoomJavaValidator.OperationExtraneousOverride";
-	
+
 	@Inject ImportUriResolver importUriResolver;
-	
+
 	@Check
 	public void checkImportedNamespace(Import imp) {
 		if (imp.getImportURI()==null)
 			return;
-		
+
 		IQualifiedNameConverter nameConverter = new IQualifiedNameConverter.DefaultImpl();
 		QualifiedName importedFQN;
 		boolean isWildcard = false;
@@ -129,13 +129,13 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 		} catch(IllegalArgumentException e){
 			return;
 		}
-		
+
 		String uriString = importUriResolver.resolve(imp);
 		if(uriString == null) {
 			warning("could not load referenced model", BasePackage.Literals.IMPORT__IMPORT_URI);
 			return;
 		}
-		
+
 		URI uri = URI.createURI(uriString);
 		ResourceSet rs = imp.eResource().getResourceSet();
 
@@ -144,12 +144,12 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 			Resource res = rs.getResource(uri, true);
 			if (res==null)
 				return;
-			
+
 			if (res.getContents().isEmpty()) {
 				error("referenced model is empty", BasePackage.Literals.IMPORT__IMPORT_URI);
 				return;
 			}
-			
+
 			if (!(res.getContents().get(0) instanceof RoomModel)) {
 				if (uri.lastSegment().endsWith(".room"))
 					error("referenced model is no ROOM model (but has .room extension)", BasePackage.Literals.IMPORT__IMPORT_URI);
@@ -163,13 +163,13 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 			warning("could not load referenced model", BasePackage.Literals.IMPORT__IMPORT_URI);
 			return;
 		}
-		
+
 		final IResourceServiceProvider resourceServiceProvider = IResourceServiceProvider.Registry.INSTANCE.getResourceServiceProvider(uri);
 		if (resourceServiceProvider==null)
 			return;
 		IResourceDescription.Manager manager = resourceServiceProvider.getResourceDescriptionManager();
 		IResourceDescription description = manager.getResourceDescription(importedModel.eResource());
-		
+
 		// TODO check for empty namespace
 		boolean exportedNameMatch = false;
 		if (description != null) {
@@ -177,30 +177,30 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 			while(iter.hasNext()){
 				QualifiedName exportedFQN = iter.next().getQualifiedName();
 				if(exportedNameMatch |= importedFQN.equals(exportedFQN))
-					break;	
+					break;
 			}
 		}
 		if(!exportedNameMatch)
 			error("no match for imported namespace", BasePackage.Literals.IMPORT__IMPORTED_NAMESPACE, WRONG_NAMESPACE, importedModel.getName()+".*");
-			
-		
+
+
 	}
-	
+
 	@Check
 	public void checkActorRef(ActorRef ar) {
 		if (ar.eContainer() instanceof ActorClass) {
 			ActorClass ac = (ActorClass) ar.eContainer();
-			
+
 			if (roomHelpers.isReferencing(ar.getType(), ac)) {
 				error("Actor reference is circular", RoomPackage.eINSTANCE.getActorRef_Type());
 			}
 		}
-		
+
 		// fixed actor ref must NOT be of abstract type
 		if (ar.getRefType()==ReferenceType.FIXED && ar.getType().isAbstract()) {
 			error("A (fixed) actor reference must not be of an abstract type", null);
 		}
-		
+
 		// check actor ref array upper bound
 		if (ar.getMultiplicity()<0) {
 			// multiplicity * requires optional
@@ -214,7 +214,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 				error(OPTIONAL_REFS_HAVE_TO_HAVE_MULTIPLICITY_ANY,
 						RoomPackage.eINSTANCE.getActorRef_RefType(), ACTOR_REF_CHANGE_REF_TYPE_TO_FIXED_OR_MULT_TO_ANY, ar.getName());
 		}
-		
+
 		// check actor ref array has ports with fixed multiplicity
 		if (ar!=null) {
 			ActorClass ac = ar.getType();
@@ -232,15 +232,15 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	@Check
 	public void checkLayerConnectiontarget(LayerConnection lc) {
 		if (lc.getTo().getRef() instanceof ActorRef)
-			if (((ActorRef)lc.getTo().getRef()).getMultiplicity()>1) 
-				error("layer connection must not connect to replicated actor", null);		
+			if (((ActorRef)lc.getTo().getRef()).getMultiplicity()>1)
+				error("layer connection must not connect to replicated actor", null);
 	}
-	
+
 	@Check
 	public void checkBaseClassesNotCircular(DataClass dc) {
 		if (dc==null)
 			return;
-		
+
 		if (roomHelpers.isCircularClassHierarchy(dc))
 			error("Base classes are circular", RoomPackage.eINSTANCE.getDataClass_Base());
 	}
@@ -250,20 +250,20 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 		if (att.eContainer() instanceof ActorClass)
 			// no circle possible
 			return;
-		
+
 		if (att.eContainer() instanceof PortClass)
 			// no circle possible
 			return;
-		
+
 		if (!(att.eContainer() instanceof DataClass)) {
 			assert(false): "unexpected parent class";
 			return;
 		}
-		
+
 		DataClass dc = (DataClass) att.eContainer();
 		if (roomHelpers.isCircularClassHierarchy(dc))
 			return;
-		
+
 		while (dc!=null) {
 			if (att.getType().getType()==dc && !att.getType().isRef()) {
 				error(
@@ -274,11 +274,19 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 					);
 				break;
 			}
-			
+
 			dc = dc.getBase();
 		}
 	}
-	
+
+	@Check
+	public void checkAttribute(Attribute attr){
+		if(attr.getDefaultValueLiteral() != null)
+			warning("deprecated,  initialize in user code or .config instead", attr, RoomPackage.Literals.ATTRIBUTE__DEFAULT_VALUE_LITERAL);
+		if(!(attr.eContainer() instanceof DataClass) &&attr.getSize() > 0)
+			warning("deprecated, array types should be declared in data classes only", attr, RoomPackage.Literals.ATTRIBUTE__SIZE);
+	}
+
 	@Check
 	public void checkAttributeNoStringArray(Attribute att){
 		// TODO-Enum
@@ -288,12 +296,12 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 				error("string type must have multiplicity 0", RoomPackage.Literals.ATTRIBUTE__SIZE);
 		}
 	}
-	
+
 	@Check
 	public void checkBaseClassesNotCircular(ProtocolClass pc) {
 		if (pc==null)
 			return;
-		
+
 		if (roomHelpers.isCircularClassHierarchy(pc))
 			error("Base classes are circular", RoomPackage.eINSTANCE.getProtocolClass_Base());
 	}
@@ -302,18 +310,18 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	public void checkBaseClassesNotCircular(ActorClass ac) {
 		if (ac==null)
 			return;
-		
+
 		if (roomHelpers.isCircularClassHierarchy(ac))
 			error("Base classes are circular", FSMPackage.eINSTANCE.getModelComponent_Base());
 	}
-	
+
 	@Check
 	public void checkExecModelConsistent(ActorClass ac) {
 		if (roomHelpers.isCircularClassHierarchy(ac))
 			return;
-		
+
 		ComponentCommunicationType commType = ac.getCommType();
-		
+
 		switch (commType) {
 		case ASYNCHRONOUS:
 			break;
@@ -324,7 +332,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 		case SYNCHRONOUS:
 			error("synchronous communication type not supported yet", FSMPackage.eINSTANCE.getModelComponent_CommType());
 		}
-		
+
 		while (ac.getActorBase()!=null) {
 			ac = ac.getActorBase();
 
@@ -332,7 +340,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 				error("data_driven attribute not consistent in inheritance hierarchy", FSMPackage.eINSTANCE.getModelComponent_CommType());
 		}
 	}
-	
+
 	@Check
 	public void checkTopLevelRefinedStates(ActorClass ac) {
 		List<Result> errors = validationUtil.checkTopLevelRefinedStates(ac);
@@ -340,15 +348,15 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 			error(err);
 		}
 	}
-	
-	@Check  
+
+	@Check
 	public void checkSubSystem(SubSystemClass ssc){
 		if (ssc.getActorRefs().isEmpty())
 			warning("SubSystemClass must contain at least one ActorRef", RoomPackage.eINSTANCE.getActorContainerClass_ActorRefs());
 
 		if (ssc.getThreads().isEmpty())
 			warning("at least one thread has to be defined", RoomPackage.Literals.SUB_SYSTEM_CLASS__THREADS, THREAD_MISSING, "LogicalThread defaultThread");
-		
+
 		checkMappings(ssc.getActorInstanceMappings());
 	}
 
@@ -379,7 +387,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 		}
 		checkMappings(aim.getActorInstanceMappings());
 	}
-	
+
 	private void checkMappings(EList<ActorInstanceMapping> actorInstanceMappings) {
 		HashSet<String> paths = new HashSet<String>();
 		for (ActorInstanceMapping aim : actorInstanceMappings) {
@@ -401,21 +409,21 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 			error(result.getMsg(), sc, bind.eContainingFeature(), idx);
 		}
 	}
-	
+
 	@Check
 	public void checkServiceCompatibility(LayerConnection conn) {
 		Result result = validationUtil.isValid(conn);
 		if (!result.isOk())
 			error(result.getMsg(), RoomPackage.eINSTANCE.getLayerConnection_From());
 	}
-	
+
 	@Check
 	public void checkPortCommunicationCompatibility(ActorClass ac){
 		if(ac.getCommType() == ComponentCommunicationType.SYNCHRONOUS){
 			// not supported yet
 			return;
 		}
-		
+
 		// check external ports
 		List<InterfaceItem> extPorts = new ArrayList<InterfaceItem>();
 		for(ExternalPort exPort : ac.getExternalPorts())
@@ -431,13 +439,13 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 			serviceImpls.add(si.getSpp());
 		checkPortCommunicationCompatibility(ac, serviceImpls, RoomPackage.eINSTANCE.getActorClass_ServiceImplementations());
 	}
-	
+
 	private void checkPortCommunicationCompatibility(ActorClass ac, List<? extends InterfaceItem> items, EReference ref){
 		boolean datadriven = ac.getCommType() == ComponentCommunicationType.DATA_DRIVEN;
 		boolean eventdriven = ac.getCommType() == ComponentCommunicationType.EVENT_DRIVEN;
 		boolean async = ac.getCommType() == ComponentCommunicationType.ASYNCHRONOUS;
 		//boolean synchronous = ac.getCommType() == ComponentCommunicationType.SYNCHRONOUS;
-		
+
 		for(InterfaceItem item : items){
 			ProtocolClass pc = roomHelpers.getProtocol(item);
 			if (pc!=null)
@@ -455,7 +463,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 				}
 		}
 	}
-	
+
 	@Check
 	public void checkPort(Port port) {
 		if (port.getMultiplicity()==0)
@@ -466,12 +474,12 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 			if (((ProtocolClass)port.getProtocol()).getCommType()==CommunicationType.DATA_DRIVEN && port.getMultiplicity()!=1)
 			error("multiplicity must be 1 for data driven ports", RoomPackage.eINSTANCE.getPort_Multiplicity());
 	}
-	
+
 	@Check
 	public void checkProtocol(ProtocolClass pc) {
 		if (roomHelpers.isCircularClassHierarchy(pc))
 			return;
-		
+
 		switch (pc.getCommType()) {
 		case DATA_DRIVEN:
 			if (pc.getBase()!=null && pc.getBase().getCommType()!=CommunicationType.DATA_DRIVEN)
@@ -495,10 +503,10 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 			break;
 		default:
 		}
-		
+
 		checkDuplicates(pc, true);
 		checkDuplicates(pc, false);
-		
+
 		if (pc.getBase()!=null) {
 			// derived protocol
 			if (pc.getIncomingMessages().size()>0 && pc.getOutgoingMessages().size()>0) {
@@ -510,7 +518,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	/**
 	 * checks duplicates in the set of messages and operations including inherited items
 	 * per direction
-	 * 
+	 *
 	 * @param pc the protocol class
 	 * @param incoming a flag giving the direction to be checked
 	 */
@@ -523,7 +531,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 			error("duplicate message name", dupl.getObj(), dupl.getFeature());
 		}
 	}
-	
+
 	/**
 	 * {@link #checkInheritedNames(DataClass)}
 	 */
@@ -531,7 +539,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	public void checkInheritedNames(ActorClass ac){
 		final Set<? extends EStructuralFeature> overrideFeatures = Sets.newHashSet(
 				RoomPackage.Literals.ACTOR_CLASS__OPERATIONS, RoomPackage.Literals.ACTOR_CLASS__STRUCTORS, FSMPackage.Literals.MODEL_COMPONENT__STATE_MACHINE);
-		
+
 		final Map<String, EObject> superNames = Maps.newHashMap();
 		// gather all named elements of super classes
 		ValidationHelpers.saveRecursiveVisitor(ac.getActorBase(), new Function<ActorClass, ActorClass>(){
@@ -546,7 +554,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 				}
 				return input.getActorBase();
 			}});
-		
+
 		for(EObject containee : ac.eContents()){
 			QualifiedName qualifiedName = fqnProvider.apply(containee);
 			String name = (qualifiedName != null)?qualifiedName.getLastSegment():null;
@@ -561,8 +569,8 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 				issueInheritedNameError(containee, existing);
 		}
 	}
-	
-	
+
+
 	/**
 	 * Copy&Paste of {@link #checkInheritedNames(ActorClass)}
 	 */
@@ -570,7 +578,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	public void checkInheritedNames(DataClass dc){
 		final Set<? extends EStructuralFeature> overrideFeatures = Sets.newHashSet(
 				RoomPackage.Literals.DATA_CLASS__OPERATIONS, RoomPackage.Literals.DATA_CLASS__STRUCTORS);
-		
+
 		final Map<String, EObject> superNames = Maps.newHashMap();
 		// gather all named elements of super classes
 		ValidationHelpers.saveRecursiveVisitor(dc.getBase(), new Function<DataClass, DataClass>(){
@@ -585,7 +593,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 				}
 				return input.getBase();
 			}});
-		
+
 		for(EObject containee : dc.eContents()){
 			QualifiedName qualifiedName = fqnProvider.apply(containee);
 			String name = (qualifiedName != null)?qualifiedName.getLastSegment():null;
@@ -600,7 +608,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 				issueInheritedNameError(containee, existing);
 		}
 	}
-	
+
 	/**
 	 * Assuming target and source have the feature 'name', name not null, contained in a {@link RoomClass}
 	 */
@@ -611,7 +619,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 		String sourceOwner = roomHelpers.getRoomClass(source).getName();
 		error("name '" + targetName + "' is already assigned to " + sourceType + sourceOwner+"."+sourceName, target, target.eClass().getEStructuralFeature("name"));
 	}
-	
+
 	@Check
 	public void checkMessage(Message msg) {
 		ProtocolClass pc = (ProtocolClass) msg.eContainer();
@@ -619,7 +627,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 			if (msg.getData()==null)
 				error("Messages of data driven protocols must carry data", RoomPackage.Literals.MESSAGE__DATA);
 	}
-	
+
 	@Check
 	public void checkMessageFromIf(MessageFromIf mfi){
 		if(mfi.getFrom() != null){
@@ -627,13 +635,13 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 				error("port must have event driven protocol", mfi, FSMPackage.eINSTANCE.getMessageFromIf_From());
 		}
 	}
-	
+
 	@Check
 	public void checkDataClass(DataClass dc) {
 		if (dc.getAttributes().isEmpty() && dc.getBase()==null)
 			error("Non-derived data classes have to define at least one attribute", RoomPackage.Literals.DATA_CLASS__ATTRIBUTES);
 	}
-	
+
 	@Check
 	public void checkReplicatedPortBindingPatterns(StructureClass sc) {
 		HashSet<Port> haveReplPeer = new HashSet<Port>();
@@ -652,24 +660,24 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 			}
 		}
 	}
-	
+
 	@Check
 	public void checkPortClassContents(PortClass pc) {
 		if (pc.getAttributes().isEmpty() && pc.getMsgHandlers().isEmpty() && pc.getOperations().isEmpty())
 			error("port class must not be empty", pc, RoomPackage.Literals.PORT_CLASS__ATTRIBUTES);
 	}
-	
+
 	@Check
 	public void checkCompoundProtocolClass(CompoundProtocolClass cpc) {
 		if (cpc.getSubProtocols().isEmpty())
 			error("no sub protocols defined", cpc, RoomPackage.Literals.COMPOUND_PROTOCOL_CLASS__SUB_PROTOCOLS);
 	}
-	
+
 	@Check
 	public void checkAnnotationTarget(Annotation a) {
 		if(a.getType() == null || a.getType().eIsProxy())
 			return;
-		
+
 		EObject parent = a.eContainer();
 		EList<String> targetList = a.getType().getTargets();
 		RoomAnnotationTargetEnum invalidTargetType = null;
@@ -707,19 +715,19 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 					invalidTargetType.getLiteral());
 		}
 	}
-	
+
 	@Check
 	public void checkTestInstanceAnnotation(Annotation annotation){
 		if(annotation.getType() == null || !"TestInstance".equals(annotation.getType().getName()))
 				return;
-		
+
 		RoomClass roomClass = roomHelpers.getRoomClass(annotation);
 		if(roomClass instanceof SubSystemClass){
 			if(((SubSystemClass)roomClass).getThreads().size() > 0)
 				error("Annotation 'TestInstance' does not allow (explicit) LogicalThreads", annotation, null);
 		}
 	}
-	
+
 	@Check
 	public void checkEnumeration(EnumerationType et) {
 		if (et.getPrimitiveType()!=null) {
@@ -727,40 +735,40 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 				error("enumerations must be of integer type", RoomPackage.Literals.ENUMERATION_TYPE__PRIMITIVE_TYPE);
 			}
 		}
-		
+
 		if (et.getLiterals().isEmpty())
 			error("at least one literal has to be specified", RoomPackage.Literals.ENUMERATION_TYPE__LITERALS);
 	}
-	
-	
+
+
 	private void error(Result result) {
 		error(result.getMsg(), result.getSource(), result.getFeature(), result.getIndex());
 	}
-	
+
 	@Check
 	public void checkOperations(ActorClass ac){
 		if(roomHelpers.isCircularClassHierarchy(ac))
 			return;
-		
+
 		// issue warning for deprecated ctor/dtor operations
 		for(Operation op : ac.getOperations())
 			if(ac.getName().equals(op.getName()))
 				warning("Operation name is discouraged, may be mistaken for ctor/dtor", op, RoomPackage.Literals.OPERATION__NAME);
 		checkOperationsOverride(roomHelpers.getAllOperations(ac), ac.getOperations());
 	}
-	
+
 	@Check
 	public void checkOperations(DataClass dc){
 		if(roomHelpers.isCircularClassHierarchy(dc))
 			return;
-		
+
 		// issue warning for deprecated ctor/dtor operations
 		for(Operation op : dc.getOperations())
 			if(dc.getName().equals(op.getName()))
 				warning("Operation name is discouraged, may be mistaken for ctor/dtor", op, RoomPackage.Literals.OPERATION__NAME);
 		checkOperationsOverride(roomHelpers.getAllOperations(dc), dc.getOperations());
 	}
-	
+
 	/**
 	 * @param allOperations list of all operations ordered by base class first
 	 * @param toCheck
@@ -787,7 +795,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 			}
 			if(!roomHelpers.matchingArguments(baseOp, op))
 				error("Arguments must be identical to overriden operation in " +baseOpFQN, op, RoomPackage.Literals.OPERATION__ARGUMENTS);
-			
+
 			if(!roomHelpers.matchingReturnType(baseOp, op))
 				error("Return type  must be identical to overriden operation " +baseOpFQN, op, RoomPackage.Literals.OPERATION__RETURN_TYPE);
 		}

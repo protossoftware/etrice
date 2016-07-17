@@ -83,18 +83,20 @@ class NodeGen {
 		 *
 		 */
 
-		«generateIncludeGuardBegin(clsname)»
+		«generateIncludeGuardBegin(cc, '')»
 
 		#include "common/modelbase/SubSystemClassBase.h"
 
 «««		«FOR model : root.getReferencedModels(cc)»
 «««		«««			#include "«model.name».h"
 «««		«ENDFOR»
-		«cc.userCode(1, false)»
+		«cc.userCode1.userCode»
+
+		«cc.generateNamespaceBegin»
 
 		class «clsname» : public etRuntime::SubSystemClassBase{
 
-			«cc.userCode(2, false)»
+			«cc.userCode2.userCode»
 
 			public:
 
@@ -122,7 +124,9 @@ class NodeGen {
 				«clsname»& operator=(«clsname» const&);
 		};
 
-		«generateIncludeGuardEnd(cc.name)»
+		«cc.generateNamespaceEnd»
+
+		«generateIncludeGuardEnd(cc, '')»
 	'''
 	}
 
@@ -157,9 +161,10 @@ class NodeGen {
 		«FOR ai : comp.actorInstances»
 			#include "«ai.actorClass.actorIncludePath»"
 		«ENDFOR»
-		#include <iostream>
 
 		using namespace etRuntime;
+
+		«cc.generateNamespaceBegin»
 
 		«FOR thread : threads.indexed»
 			const int «clsname»::«thread.value.threadId» = «thread.index0»;
@@ -242,6 +247,8 @@ class NodeGen {
 				DebuggingService::getInstance().addVisibleComment("done sub system destruction");
 			}
 		«ENDIF»
+
+		«cc.generateNamespaceEnd»
 
 	'''
 	}

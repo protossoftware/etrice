@@ -25,7 +25,7 @@ import org.eclipse.emf.ecore.EObject
 import org.eclipse.etrice.core.etphys.eTPhys.NodeRef
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.IDiagnostician
-import org.eclipse.etrice.core.room.DataClass
+import org.eclipse.etrice.core.room.ActorClass
 import org.eclipse.etrice.core.room.DataType
 import org.eclipse.etrice.core.room.EnumLiteral
 import org.eclipse.etrice.core.room.EnumerationType
@@ -34,12 +34,12 @@ import org.eclipse.etrice.core.room.Message
 import org.eclipse.etrice.core.room.PrimitiveType
 import org.eclipse.etrice.core.room.RoomClass
 import org.eclipse.etrice.core.room.VarDecl
+import org.eclipse.etrice.core.room.util.RoomHelpers
 import org.eclipse.etrice.generator.generic.ILanguageExtension
+import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.TypeHelpers
 import org.eclipse.xtext.util.Pair
-import org.eclipse.etrice.core.room.ActorClass
-import org.eclipse.etrice.core.room.util.RoomHelpers
-import org.eclipse.etrice.generator.generic.RoomExtensions
+import org.eclipse.xtext.util.Strings
 
 @Singleton
 class CppExtensions implements ILanguageExtension {
@@ -101,10 +101,10 @@ class CppExtensions implements ILanguageExtension {
 		return true
 	}
 
-	override String genEnumeration(String name, List<Pair<String, String>> entries){ 
+	override String genEnumeration(String name, List<Pair<String, String>> entries){
 		if(entries.empty)
 			return ''
-		
+
 		'''
 			typedef enum {
 				«FOR entry : entries SEPARATOR ','»
@@ -122,33 +122,38 @@ class CppExtensions implements ILanguageExtension {
 	override String pointerLiteral() { "*" }
 	override String nullPointer() { "0" }
 	override String voidPointer() { "void*" }
-	override String typeArrayModifier() { pointerLiteral }
 
-	override String arrayDeclaration(String type, int size, String name, boolean isRef)'''
-		«type»«IF isRef»*«ENDIF» «name»[«size»]
+	override String arrayType(String type, int size, boolean isRef){
+		'''StaticArray<«type»«IF isRef»*«ENDIF», «size»>'''
+	}
+
+	override String arrayDeclaration(String type, int size, boolean isRef, String name){
+		arrayType(type, size, isRef) + ' ' + name
+	}
+
+	def getIncludeGuardString(RoomClass roomClass, String appendSegments){
+		'_' + (roomClass.package.split('\\.') + #[roomClass.name] + appendSegments.split('\\.')).filter[!empty].join('_').toUpperCase + '_H_'
+	}
+
+	def generateIncludeGuardBegin(RoomClass roomClass, String appendSegments)'''
+		#ifndef «roomClass.getIncludeGuardString(appendSegments)»
+		#define «roomClass.getIncludeGuardString(appendSegments)»
 	'''
 
-	def getIncludeGuardString(String filename){
-		'''_«filename.replaceAll("\\/.", "_").toUpperCase»_H_'''
+	def generateIncludeGuardEnd(RoomClass roomClass, String appendSegments)
+		'''#endif /* «roomClass.getIncludeGuardString(appendSegments)» */'''
+
+	def generateNamespaceBegin(RoomClass roomClass) {
+		''	// roomClass.package.split('\\.').map[pkg|'''namespace «pkg» {'''].join(NEWLINE)
 	}
 
-	def generateIncludeGuardBegin(String filename){'''
-		#ifndef «filename.getIncludeGuardString»
-		#define «filename.getIncludeGuardString»
-		'''
+	def generateNamespaceEnd(RoomClass roomClass) {
+		''	// roomClass.package.split('\\.').map[pkg|'''} // namespace «pkg»'''].join(NEWLINE)
 	}
-
-	def generateIncludeGuardEnd(String filename){'''
-		#endif /* «filename.getIncludeGuardString» */
-		'''
-	}
-
-
 
 	override superCall(String baseClassName, String method, String arguments) {
 		baseClassName+"::"+method+"("+arguments+");"
 	}
-
 
 	override String toValueLiteral(PrimitiveType type, String value){
 		throw new UnsupportedOperationException("TODO Config for Cpp");
@@ -159,29 +164,17 @@ class CppExtensions implements ILanguageExtension {
 	}
 
 	override String defaultValue(DataType dt) {
-		if (dt instanceof PrimitiveType) {
-			return (dt as PrimitiveType).getDefaultValueLiteral
-		}
-		else if (dt instanceof EnumerationType) {
-			return getDefaultValue(dt as EnumerationType)
-		}
-		else if (dt instanceof ExternalType) {
-			diagnostician.warning("initialize external type with default constructor"+dt.name, dt.eContainer, dt.eContainingFeature)
-			return dt.typeName + "()"
-		}
-		else {
-			val dc = dt as DataClass
-
-			'''
-				{
-					«FOR att : dc.attributes SEPARATOR ","»
-						«att.type.type.initializationWithDefaultValues(att.size)»
-					«ENDFOR»
+		switch it: dt {
+			PrimitiveType: defaultValueLiteral
+			EnumerationType: {
+				diagnostician.error('Enumeration not supported', dt, null)
+				'/* TODO */' // defaultValue
 				}
-			'''
+			ExternalType: defaultValueLiteral
 		}
 	}
 
+	// TODO move to defaultValue(DataType dt)
 	def String getDefaultValue(EnumerationType type) {
 		if (type.getLiterals().isEmpty())
 			""
@@ -211,44 +204,24 @@ class CppExtensions implements ILanguageExtension {
 			return newArrayList("", "", "")
 
 		val data = d as VarDecl
-		if (data==null)
-			return newArrayList("", "", "")
 
-		var typeName = if (data.getRefType().getType() instanceof PrimitiveType)
-			(data.getRefType().getType() as PrimitiveType).targetName
-		else if (data.getRefType().getType() instanceof EnumerationType)
-			(data.getRefType().getType() as EnumerationType).targetType
-		else if (data.getRefType().getType() instanceof ExternalType)
-			(data.getRefType().getType() as ExternalType).targetName
-		else
-			data.getRefType().getType().getName()
-
-		var castTypeName = if (data.getRefType().getType() instanceof PrimitiveType) {
-			val ct = (data.getRefType().getType() as PrimitiveType).getCastName()
-			if (ct!=null && !ct.isEmpty())
-				ct
-			else
-				typeName
+		val castExpr = switch it : data.refType.type {
+			PrimitiveType case !Strings.isEmpty(castName): castName
+			EnumerationType: castType
+			default: typeName
+		} + '*'
+		val typeExpr = data.refType.type.typeName + switch it : data.refType {
+			case ref : '*'
+			case type.isPrimitive: ''
+			default : '&'
 		}
-		else if (data.getRefType().getType() instanceof EnumerationType) {
-			(data.getRefType().getType() as EnumerationType).castType
-		}
-		else
-			typeName
-		castTypeName += '*'
-		var deRef = '*' 
- 
-		if (data.getRefType().isRef()) {
-			typeName = typeName+"*"
-			deRef = '' 
-		}
+		var deRef = if(!data.refType.ref) '*' else ''
 
-		val typedData = typeName+" "+data.getName() + " = "+deRef+"(static_cast<"+castTypeName+">(generic_data__et));\n"
+		val typedData = '''«typeExpr» «data.name» = «deRef»(static_cast<«castExpr»>(generic_data__et));''' + NEWLINE
+		val dataArg = ''', «data.name»'''
+		val typedArgList = ''', «typeExpr» «data.name»'''
 
-		val dataArg = ", "+data.getName()
-		val typedArgList = ", "+typeName+" "+data.getName()
-
-		return newArrayList(dataArg, typedData, typedArgList);
+		return #[dataArg, typedData, typedArgList]
 	}
 
 	override getTargetType(EnumerationType type) {
@@ -274,7 +247,7 @@ class CppExtensions implements ILanguageExtension {
 		else
 			type.getName()
 	}
-	
+
 	override makeOverridable() {
 		"virtual "
 	}
@@ -313,5 +286,13 @@ class CppExtensions implements ILanguageExtension {
 	        }
 	    }
 	}
+
+//	def targetFQN(RoomClass roomClass){
+//		roomClass.targetPkg + '::' + roomClass.name
+//	}
+//
+//	def targetPkg(RoomClass roomClass){
+//		roomClass.package.replace('.', '::')
+//	}
 
 }

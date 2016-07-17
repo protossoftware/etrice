@@ -54,6 +54,11 @@ public:
 		return *this;
 	}
 
+	StaticArray<Type, Size>& operator=(const Type data[Size]) {
+		memcpy(this->data, data, sizeof(this->data));
+		return *this;
+	}
+
 	// TODO: fix implementation of operator==
 //	bool operator==(const StaticArray<Type, Size> &rhs) const {
 //		if (memcmp(this->data, rhs.data, sizeof(data)) == 0) {

@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.core.fsm.fSM.ComponentCommunicationType;
+import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.etrice.core.fsm.fSM.StateGraph;
 import org.eclipse.etrice.core.genmodel.builder.GenmodelConstants;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
@@ -73,8 +74,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
   private ProcedureHelpers _procedureHelpers;
   
   @Inject
-  @Extension
-  private Initialization _initialization;
+  private Initialization initHelper;
   
   @Inject
   @Extension
@@ -184,11 +184,11 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append("*/");
       _builder.newLine();
       _builder.newLine();
-      CharSequence _generateIncludeGuardBegin = this._cppExtensions.generateIncludeGuardBegin(clsname);
+      CharSequence _generateIncludeGuardBegin = this._cppExtensions.generateIncludeGuardBegin(ac, "");
       _builder.append(_generateIncludeGuardBegin, "");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
-      _builder.append("#include \"etDatatypes.h\"");
+      _builder.append("#include \"common/etDatatypesCpp.hpp\"");
       _builder.newLine();
       _builder.append("#include \"common/messaging/IRTObject.h\"");
       _builder.newLine();
@@ -203,8 +203,6 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append("#include \"common/messaging/IMessageReceiver.h\"");
       _builder.newLine();
       _builder.append("#include \"common/debugging/DebuggingService.h\"");
-      _builder.newLine();
-      _builder.append("#include <string>");
       _builder.newLine();
       _builder.append("#include <vector>");
       _builder.newLine();
@@ -243,18 +241,26 @@ public class ActorClassGen extends GenericActorClassGenerator {
         } else {
           _builder.append("#include \"");
           ActorClass _actorBase_2 = ac.getActorBase();
-          String _name_4 = _actorBase_2.getName();
+          String _path_2 = this._roomExtensions.getPath(_actorBase_2);
+          _builder.append(_path_2, "");
+          ActorClass _actorBase_3 = ac.getActorBase();
+          String _name_4 = _actorBase_3.getName();
           _builder.append(_name_4, "");
           _builder.append(".h\"");
           _builder.newLineIfNotEmpty();
         }
       }
       _builder.newLine();
+      DetailCode _userCode1 = ac.getUserCode1();
+      CharSequence _userCode = this._procedureHelpers.userCode(_userCode1);
+      _builder.append(_userCode, "");
+      _builder.newLineIfNotEmpty();
+      _builder.newLine();
       _builder.append("using namespace etRuntime; //TODO JH remove");
       _builder.newLine();
       _builder.newLine();
-      CharSequence _userCode = this._procedureHelpers.userCode(ac, 1, true);
-      _builder.append(_userCode, "");
+      String _generateNamespaceBegin = this._cppExtensions.generateNamespaceBegin(ac);
+      _builder.append(_generateNamespaceBegin, "");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
       _builder.append("class ");
@@ -465,16 +471,19 @@ public class ActorClassGen extends GenericActorClassGenerator {
       }
       _builder.newLine();
       _builder.append("\t\t");
-      CharSequence _userCode_1 = this._procedureHelpers.userCode(ac, 2, false);
+      DetailCode _userCode2 = ac.getUserCode2();
+      CharSequence _userCode_1 = this._procedureHelpers.userCode(_userCode2);
       _builder.append(_userCode_1, "\t\t");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
       _builder.append("};");
       _builder.newLine();
       _builder.newLine();
+      String _generateNamespaceEnd = this._cppExtensions.generateNamespaceEnd(ac);
+      _builder.append(_generateNamespaceEnd, "");
+      _builder.newLineIfNotEmpty();
       _builder.newLine();
-      String _name_10 = ac.getName();
-      CharSequence _generateIncludeGuardEnd = this._cppExtensions.generateIncludeGuardEnd(_name_10);
+      CharSequence _generateIncludeGuardEnd = this._cppExtensions.generateIncludeGuardEnd(ac, "");
       _builder.append(_generateIncludeGuardEnd, "");
       _builder.newLineIfNotEmpty();
       _xblockexpression = _builder;
@@ -482,10 +491,12 @@ public class ActorClassGen extends GenericActorClassGenerator {
     return _xblockexpression;
   }
   
-  private String generateConstructorInitalizerList(final ActorClass ac) {
-    String _xblockexpression = null;
+  private CharSequence generateConstructorInitalizerList(final ActorClass ac) {
+    CharSequence _xblockexpression = null;
     {
-      ArrayList<CharSequence> initializerList = new ArrayList<CharSequence>();
+      @Extension
+      final Initialization initHelper = this.initHelper;
+      ArrayList<CharSequence> initList = CollectionLiterals.<CharSequence>newArrayList();
       StringConcatenation _builder = new StringConcatenation();
       String _elvis = null;
       ActorClass _actorBase = ac.getActorBase();
@@ -500,58 +511,80 @@ public class ActorClassGen extends GenericActorClassGenerator {
       }
       _builder.append(_elvis, "");
       _builder.append("(parent, name)");
-      initializerList.add(_builder);
+      initList.add(_builder.toString());
       List<Port> _endPorts = this._roomHelpers.getEndPorts(ac);
-      for (final Port ep : _endPorts) {
-        StringConcatenation _builder_1 = new StringConcatenation();
-        String _name_1 = ep.getName();
-        _builder_1.append(_name_1, "");
-        _builder_1.append("(this, \"");
-        String _name_2 = ep.getName();
-        _builder_1.append(_name_2, "");
-        _builder_1.append("\", IFITEM_");
-        String _name_3 = ep.getName();
-        _builder_1.append(_name_3, "");
-        _builder_1.append(")");
-        initializerList.add(_builder_1);
-      }
+      final Function1<Port, String> _function = new Function1<Port, String>() {
+        public String apply(final Port it) {
+          StringConcatenation _builder = new StringConcatenation();
+          String _name = it.getName();
+          _builder.append(_name, "");
+          _builder.append("(this, \"");
+          String _name_1 = it.getName();
+          _builder.append(_name_1, "");
+          _builder.append("\", IFITEM_");
+          String _name_2 = it.getName();
+          _builder.append(_name_2, "");
+          _builder.append(")");
+          return _builder.toString();
+        }
+      };
+      List<String> _map = ListExtensions.<Port, String>map(_endPorts, _function);
+      Iterables.<CharSequence>addAll(initList, _map);
       EList<SAP> _serviceAccessPoints = ac.getServiceAccessPoints();
-      for (final SAP sap : _serviceAccessPoints) {
-        StringConcatenation _builder_2 = new StringConcatenation();
-        String _name_4 = sap.getName();
-        _builder_2.append(_name_4, "");
-        _builder_2.append("(this, \"");
-        String _name_5 = sap.getName();
-        _builder_2.append(_name_5, "");
-        _builder_2.append("\", IFITEM_");
-        String _name_6 = sap.getName();
-        _builder_2.append(_name_6, "");
-        _builder_2.append(")");
-        initializerList.add(_builder_2);
-      }
+      final Function1<SAP, String> _function_1 = new Function1<SAP, String>() {
+        public String apply(final SAP it) {
+          StringConcatenation _builder = new StringConcatenation();
+          String _name = it.getName();
+          _builder.append(_name, "");
+          _builder.append("(this, \"");
+          String _name_1 = it.getName();
+          _builder.append(_name_1, "");
+          _builder.append("\", IFITEM_");
+          String _name_2 = it.getName();
+          _builder.append(_name_2, "");
+          _builder.append(")");
+          return _builder.toString();
+        }
+      };
+      List<String> _map_1 = ListExtensions.<SAP, String>map(_serviceAccessPoints, _function_1);
+      Iterables.<CharSequence>addAll(initList, _map_1);
       EList<ServiceImplementation> _serviceImplementations = ac.getServiceImplementations();
-      for (final ServiceImplementation svc : _serviceImplementations) {
-        StringConcatenation _builder_3 = new StringConcatenation();
-        SPP _spp = svc.getSpp();
-        String _name_7 = _spp.getName();
-        _builder_3.append(_name_7, "");
-        _builder_3.append("(this, \"");
-        SPP _spp_1 = svc.getSpp();
-        String _name_8 = _spp_1.getName();
-        _builder_3.append(_name_8, "");
-        _builder_3.append("\", IFITEM_");
-        SPP _spp_2 = svc.getSpp();
-        String _name_9 = _spp_2.getName();
-        _builder_3.append(_name_9, "");
-        _builder_3.append(")");
-        initializerList.add(_builder_3);
-      }
+      final Function1<ServiceImplementation, String> _function_2 = new Function1<ServiceImplementation, String>() {
+        public String apply(final ServiceImplementation it) {
+          StringConcatenation _builder = new StringConcatenation();
+          SPP _spp = it.getSpp();
+          String _name = _spp.getName();
+          _builder.append(_name, "");
+          _builder.append("(this, \"");
+          SPP _spp_1 = it.getSpp();
+          String _name_1 = _spp_1.getName();
+          _builder.append(_name_1, "");
+          _builder.append("\", IFITEM_");
+          SPP _spp_2 = it.getSpp();
+          String _name_2 = _spp_2.getName();
+          _builder.append(_name_2, "");
+          _builder.append(")");
+          return _builder.toString();
+        }
+      };
+      List<String> _map_2 = ListExtensions.<ServiceImplementation, String>map(_serviceImplementations, _function_2);
+      Iterables.<CharSequence>addAll(initList, _map_2);
       EList<Attribute> _attributes = ac.getAttributes();
-      for (final Attribute attrib : _attributes) {
-        CharSequence _attributeInitialization = this._initialization.attributeInitialization(attrib, false);
-        initializerList.add(_attributeInitialization);
-      }
-      _xblockexpression = IterableExtensions.join(initializerList, ("," + this._roomExtensions.NEWLINE));
+      final Function1<Attribute, String> _function_3 = new Function1<Attribute, String>() {
+        public String apply(final Attribute it) {
+          StringConcatenation _builder = new StringConcatenation();
+          String _name = it.getName();
+          _builder.append(_name, "");
+          _builder.append("(");
+          String _initializerListValue = initHelper.getInitializerListValue(it);
+          _builder.append(_initializerListValue, "");
+          _builder.append(")");
+          return _builder.toString();
+        }
+      };
+      List<String> _map_3 = ListExtensions.<Attribute, String>map(_attributes, _function_3);
+      Iterables.<CharSequence>addAll(initList, _map_3);
+      _xblockexpression = initHelper.generateCtorInitializerList(initList);
     }
     return _xblockexpression;
   }
@@ -611,14 +644,6 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.newLine();
       _builder.append("#include \"common/messaging/RTServices.h\"");
       _builder.newLine();
-      _builder.append("#include \"etDatatypes.h\"");
-      _builder.newLine();
-      _builder.append("#include \"etUnit/etUnit.h\"");
-      _builder.newLine();
-      _builder.append("#include <iostream>");
-      _builder.newLine();
-      _builder.append("#include <string>");
-      _builder.newLine();
       _builder.newLine();
       {
         EList<ActorRef> _actorRefs = ac.getActorRefs();
@@ -635,14 +660,17 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append("using namespace etRuntime;");
       _builder.newLine();
       _builder.newLine();
+      String _generateNamespaceBegin = this._cppExtensions.generateNamespaceBegin(ac);
+      _builder.append(_generateNamespaceBegin, "");
+      _builder.newLineIfNotEmpty();
       _builder.newLine();
       _builder.append(clsname, "");
       _builder.append("::");
       _builder.append(clsname, "");
-      _builder.append("(etRuntime::IRTObject* parent, const std::string& name) :");
+      _builder.append("(etRuntime::IRTObject* parent, const std::string& name)");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
-      String _generateConstructorInitalizerList = this.generateConstructorInitalizerList(ac);
+      CharSequence _generateConstructorInitalizerList = this.generateConstructorInitalizerList(ac);
       _builder.append(_generateConstructorInitalizerList, "\t\t");
       _builder.newLineIfNotEmpty();
       _builder.append("{");
@@ -667,11 +695,6 @@ public class ActorClassGen extends GenericActorClassGenerator {
       String _name_3 = ac.getName();
       _builder.append(_name_3, "\t");
       _builder.append("\");");
-      _builder.newLineIfNotEmpty();
-      _builder.append("\t");
-      EList<Attribute> _attributes = ac.getAttributes();
-      CharSequence _attributeInitialization = this._initialization.attributeInitialization(_attributes, false);
-      _builder.append(_attributeInitialization, "\t");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
       _builder.append("\t");
@@ -796,6 +819,11 @@ public class ActorClassGen extends GenericActorClassGenerator {
         }
       }
       _builder.newLine();
+      _builder.append("\t");
+      EList<Attribute> _attributes = ac.getAttributes();
+      CharSequence _genArrayInitializers = this.initHelper.genArrayInitializers(_attributes);
+      _builder.append(_genArrayInitializers, "\t");
+      _builder.newLineIfNotEmpty();
       _builder.append("\t");
       String _userStructorBody = this._procedureHelpers.userStructorBody(ac, true);
       _builder.append(_userStructorBody, "\t");
@@ -926,6 +954,11 @@ public class ActorClassGen extends GenericActorClassGenerator {
           }
         }
       }
+      _builder.newLine();
+      String _generateNamespaceEnd = this._cppExtensions.generateNamespaceEnd(ac);
+      _builder.append(_generateNamespaceEnd, "");
+      _builder.newLineIfNotEmpty();
+      _builder.newLine();
       _xblockexpression = _builder;
     }
     return _xblockexpression;

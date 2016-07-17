@@ -247,11 +247,11 @@ public class JavaExtensions implements ILanguageExtension {
     return "Object";
   }
   
-  public String typeArrayModifier() {
-    return "[]";
+  public String arrayType(final String type, final int size, final boolean isRef) {
+    return (type + "[]");
   }
   
-  public String arrayDeclaration(final String type, final int size, final String name, final boolean isRef) {
+  public String arrayDeclaration(final String type, final int size, final boolean isRef, final String name) {
     return (((type + " ") + name) + "[]");
   }
   

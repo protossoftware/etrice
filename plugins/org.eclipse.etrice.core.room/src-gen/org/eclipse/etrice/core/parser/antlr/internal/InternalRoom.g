@@ -669,19 +669,19 @@ rulePrimitiveType returns [EObject current=null]
     }
 (
 (
-		{ 
-	        newCompositeNode(grammarAccess.getPrimitiveTypeAccess().getTargetNameFQNParserRuleCall_5_0()); 
-	    }
-		lv_targetName_5_0=ruleFQN		{
+		lv_targetName_5_0=RULE_STRING
+		{
+			newLeafNode(lv_targetName_5_0, grammarAccess.getPrimitiveTypeAccess().getTargetNameSTRINGTerminalRuleCall_5_0()); 
+		}
+		{
 	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getPrimitiveTypeRule());
+	            $current = createModelElement(grammarAccess.getPrimitiveTypeRule());
 	        }
-       		set(
+       		setWithLastConsumed(
        			$current, 
        			"targetName",
         		lv_targetName_5_0, 
-        		"FQN");
-	        afterParserOrEnumRuleCall();
+        		"STRING");
 	    }
 
 )

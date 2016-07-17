@@ -1,0 +1,58 @@
+RoomModel StatemachineInterfaceTestInheritedModel {
+
+	import room.basic.types.* from "Types.room"
+	import StatemachineInterfaceTestModel.* from "StatemachineInterfaceTest.room"
+
+	ActorClass StatemachineInterfaceInheritedTest {
+		Structure {
+			ActorRef app1: AsyncAppExt
+			ActorRef app2: DataAppExt
+			ActorRef app3: EventAppExt
+			ActorRef app4: EmptyAsyncAppExt
+			ActorRef app5: EmptyDataAppExt
+			ActorRef app6: EmptyEventAppExt
+
+			// does not work
+			//ActorRef app7: EmptyAsyncAppManualExt
+			//ActorRef app8: EmptyDataAppManualExt
+			//ActorRef app9: EmptyEventAppManualExt
+		}
+	}
+
+	async ActorClass AsyncAppExt extends AsyncApp {
+
+	}
+
+	datadriven ActorClass DataAppExt extends DataApp {
+
+	}
+
+	ActorClass EventAppExt extends EventApp {
+
+	}
+
+	async ActorClass EmptyAsyncAppExt extends EmptyAsyncApp {
+
+	}
+
+	datadriven ActorClass EmptyDataAppExt extends EmptyDataApp {
+
+	}
+
+	ActorClass EmptyEventAppExt extends EmptyEventApp {
+
+	}
+
+	async ActorClass EmptyAsyncAppManualExt extends EmptyAsyncAppManual {
+
+	}
+
+	datadriven ActorClass EmptyDataAppManualExt extends EmptyDataAppManual {
+
+	}
+
+	ActorClass EmptyEventAppManualExt extends EmptyEventAppManual {
+
+	}
+
+}

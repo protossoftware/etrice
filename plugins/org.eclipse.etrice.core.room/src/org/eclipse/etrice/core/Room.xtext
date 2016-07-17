@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * CONTRIBUTORS:
  * 		Thomas Schuetz and Henrik Rentz-Reichert (initial contribution)
  * 		Eyrak Paen
@@ -14,9 +14,9 @@
 /**
  * @author Henrik Rentz-Reichert and Thomas Schuetz
  *
- * Xtext Grammar for ROOM models 
+ * Xtext Grammar for ROOM models
  * this grammar is the base for the ROOM tool eTrice
- * 
+ *
  */
 
 grammar org.eclipse.etrice.core.Room with org.eclipse.etrice.core.fsm.FSM
@@ -58,7 +58,7 @@ RefableType: type=[DataType|FQN] (ref?='ref')?;
 DataType: PrimitiveType | EnumerationType | ComplexType;
 ComplexType: DataClass | ExternalType;
 
-PrimitiveType: 'PrimitiveType' name=ID ':' type=LiteralType '->' targetName=FQN ('(' castName=FQN ')')? 'default' defaultValueLiteral=STRING (docu=Documentation)?;
+PrimitiveType: 'PrimitiveType' name=ID ':' type=LiteralType '->' targetName=STRING ('(' castName=FQN ')')? 'default' defaultValueLiteral=STRING (docu=Documentation)?;
 
 EnumerationType:
 	'Enumeration' name=ID (docu=Documentation)? ('of' primitiveType=[PrimitiveType|FQN])? '{'
@@ -85,12 +85,12 @@ DataClass:
 			attributes+=Attribute
 		)*
 	'}';
-	
-	
+
+
 Attribute:
 	'Attribute' name=ID ('[' size=INT ']')? ':' type=RefableType ('=' defaultValueLiteral=STRING)? (docu=Documentation)?;
 
-Operation: StandardOperation | PortOperation; 
+Operation: StandardOperation | PortOperation;
 
 StandardOperation:
 	(override?='override')? 'Operation' name=ID '(' (arguments+=VarDecl (',' arguments+=VarDecl)*)? ')' (':' ('void' | (returnType=RefableType)))?
@@ -102,7 +102,7 @@ PortOperation:
     'Operation' name=ID '(' (arguments+=VarDecl (',' arguments+=VarDecl)*)? ')' ( (':' ('void' | (returnType=RefableType))) | ('sends' sendsMsg=[Message|ID]) )?
             (docu=Documentation)?
             detailCode=DetailCode
-; 
+;
 
 ClassStructor:
 	name=('ctor'|'dtor') detailCode=DetailCode
@@ -132,7 +132,7 @@ ProtocolClass:
 		('conjugated' 'PortClass' conjugated=PortClass)?
 		(semantics=ProtocolSemantics)?
 	'}';
-	
+
 CompoundProtocolClass:
 	'CompoundProtocolClass' name=ID (docu=Documentation)? '{'
 		annotations+=Annotation*
@@ -281,15 +281,15 @@ RefPath:
 RefSegment:
 	ref=ID (':' idx=INT)?
 ;
-	
+
 Binding:
 	'Binding' endpoint1=BindingEndPoint 'and' endpoint2=BindingEndPoint ;
-	
+
 BindingEndPoint:
 	(actorRef=[ActorContainerRef|ID]'.')?  port=[Port|ID] ('sub' sub=[SubProtocol|ID])?;
 
 LayerConnection:
-	'LayerConnection' from=SAPoint 'satisfied_by' to=SPPoint 
+	'LayerConnection' from=SAPoint 'satisfied_by' to=SPPoint
 ;
 
 SAPoint: RefSAPoint | RelaySAPoint;
@@ -315,7 +315,7 @@ enum ReferenceType:
 ;
 
 // **************************************************************
-// concrete message and interface item for state machines 
+// concrete message and interface item for state machines
 
 //AbstractMessage: Message;
 AbstractInterfaceItem: InterfaceItem;
@@ -328,12 +328,12 @@ AbstractInterfaceItem: InterfaceItem;
 MULTIPLICITY returns ecore::EInt : '[' ('*'|INT) ']';
 
 AnnotationTargetType:
-	'DataClass' | 
-	'ActorClass' | 
-	'ActorBehavior' | 
-	'ProtocolClass' | 
-	'CompoundProtocolClass' | 
-	'SubSystemClass' | 
+	'DataClass' |
+	'ActorClass' |
+	'ActorBehavior' |
+	'ProtocolClass' |
+	'CompoundProtocolClass' |
+	'SubSystemClass' |
 	'LogicalSystem'
 ;
 

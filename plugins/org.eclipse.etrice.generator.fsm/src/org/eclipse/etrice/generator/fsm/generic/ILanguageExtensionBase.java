@@ -117,7 +117,7 @@ public interface ILanguageExtensionBase {
 	 * produces the "virtual" keyword for C++ and the empty string else
 	 */
 	String makeOverridable();
-	
+
 	/**
 	 * does the target language use pointers
 	 *
@@ -163,11 +163,13 @@ public interface ILanguageExtensionBase {
 	String voidPointer();
 
 	/**
-	 * a literal turn a type into an array
-	 *
-	 * @return * for C/C++, [] for Java
+	 * array type differ in Java and C/C++
+	 * @param type
+	 * @param size
+	 * @param name
+	 * @return a string that represents the type
 	 */
-	String typeArrayModifier();
+	String arrayType(String type, int size, boolean isRef);
 
 	/**
 	 * array declarations differ in Java and C/C++
@@ -176,7 +178,7 @@ public interface ILanguageExtensionBase {
 	 * @param name
 	 * @return a string that represents the declaration
 	 */
-	String arrayDeclaration(String type, int size, String name, boolean isRef);
+	String arrayDeclaration(String type, int size, boolean isRef, String name);
 
 	/**
 	 * @param baseClassName the name of the base class

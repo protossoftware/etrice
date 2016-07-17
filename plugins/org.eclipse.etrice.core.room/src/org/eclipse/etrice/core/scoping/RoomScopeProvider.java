@@ -4,10 +4,10 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * CONTRIBUTORS:
  * 		Thomas Schuetz and Henrik Rentz-Reichert (initial contribution)
- * 
+ *
  *******************************************************************************/
 
 package org.eclipse.etrice.core.scoping;
@@ -59,9 +59,9 @@ import com.google.inject.Inject;
 
 /**
  * This class contains custom scoping description.
- * 
+ *
  * see : http://www.eclipse.org/Xtext/documentation/latest/xtext.html#scoping
- * on how and when to use it 
+ * on how and when to use it
  *
  */
 public class RoomScopeProvider extends FSMScopeProvider {
@@ -80,10 +80,10 @@ public class RoomScopeProvider extends FSMScopeProvider {
 			ctx = ctx.eContainer();
 		if (ctx instanceof ActorClass)
 			return (ActorClass) ctx;
-		
+
 		return null;
 	}
-	
+
 	/**
 	 * first container of type {@link ActorClass}
 	 * @param obj
@@ -95,10 +95,10 @@ public class RoomScopeProvider extends FSMScopeProvider {
 			ctx = ctx.eContainer();
 		if (ctx instanceof ActorContainerClass)
 			return (ActorContainerClass) ctx;
-		
+
 		return null;
 	}
-	
+
 	/**
 	 * first container of type {@link StructureClass}
 	 * @param obj
@@ -110,10 +110,10 @@ public class RoomScopeProvider extends FSMScopeProvider {
 			ctx = ctx.eContainer();
 		if (ctx instanceof StructureClass)
 			return (StructureClass) ctx;
-		
+
 		return null;
 	}
-	
+
 	/**
 	 * return a list of base classes of an {@link ActorClass}, parent classes first.
 	 * The list includes the class itself
@@ -124,18 +124,18 @@ public class RoomScopeProvider extends FSMScopeProvider {
 		LinkedList<ActorClass> classes = new LinkedList<ActorClass>();
 		if (ac!=null) {
 			classes.addFirst(ac);
-			while (ac.getBase()!=null) {
+			while (ac.getActorBase()!=null) {
 				if (ac==ac.getBase())
 					// avoid endless loop - circularity in class hierarchy detected elsewhere
 					break;
 
 				ac = ac.getActorBase();
 				classes.addFirst(ac);
-			}	
+			}
 		}
 		return classes;
 	}
-	
+
 	/**
 	 * return a list of base classes of an {@link ProtocolClass}, parent classes first.
 	 * The list includes the class itself
@@ -160,7 +160,7 @@ public class RoomScopeProvider extends FSMScopeProvider {
 	 */
 	public IScope scope_MessageFromIf_message(MessageFromIf mfi, EReference ref) {
 		final List<IEObjectDescription> scopes = new ArrayList<IEObjectDescription>();
-		
+
 		InterfaceItem item = (InterfaceItem) mfi.getFrom();
 		if (item!=null) {
 			ProtocolClass protocol = null;
@@ -177,13 +177,13 @@ public class RoomScopeProvider extends FSMScopeProvider {
 				protocol = ((SPP)item).getProtocol();
 				conjugated = false;
 			}
-			
+
 			if (protocol!=null)
 				for (Message msg : conjugated?roomHelpers.getAllMessages(protocol,false):roomHelpers.getAllMessages(protocol,true)) {
 					scopes.add(EObjectDescription.create(msg.getName(), msg));
 				}
 		}
-		
+
 		return new SimpleScope(IScope.NULLSCOPE, scopes);
 	}
 
@@ -195,7 +195,7 @@ public class RoomScopeProvider extends FSMScopeProvider {
 	 */
 	public IScope scope_MessageFromIf_port(MessageFromIf mfi, EReference ref) {
 		final List<IEObjectDescription> scopes = new ArrayList<IEObjectDescription>();
-		
+
 		ActorClass ac = getActorClass(mfi);
 		for (Port p : ac.getInternalPorts()) {
 			scopes.add(EObjectDescription.create(p.getName(), p));
@@ -203,10 +203,10 @@ public class RoomScopeProvider extends FSMScopeProvider {
 		for (ExternalPort p : ac.getExternalPorts()) {
 			scopes.add(EObjectDescription.create(p.getInterfacePort().getName(), p.getInterfacePort()));
 		}
-		
+
 		return new SimpleScope(IScope.NULLSCOPE, scopes);
 	}
-	
+
 	/**
 	 * returns a flat list of InterfaceItem scopes for a {@link MessageFromIf}
 	 * @param mfi - the message from interface
@@ -215,14 +215,14 @@ public class RoomScopeProvider extends FSMScopeProvider {
 	 */
 	public IScope scope_MessageFromIf_from(MessageFromIf mfi, EReference ref) {
 		final List<IEObjectDescription> scopes = new ArrayList<IEObjectDescription>();
-		
+
 		ActorClass ac = getActorClass(mfi);
 		List<InterfaceItem> items = roomHelpers.getAllInterfaceItems(ac);
-		
+
 		for (InterfaceItem item : items) {
 			scopes.add(EObjectDescription.create(item.getName(), item));
 		}
-		
+
 		return new SimpleScope(IScope.NULLSCOPE, scopes);
 	}
 
@@ -234,7 +234,7 @@ public class RoomScopeProvider extends FSMScopeProvider {
 	 */
 	public IScope scope_BindingEndPoint_actorRef(BindingEndPoint ep, EReference ref) {
 		final List<IEObjectDescription> scopes = new ArrayList<IEObjectDescription>();
-		
+
 		StructureClass sc = getStructureClass(ep);
 		if (sc instanceof ActorClass) {
 			LinkedList<ActorClass> classes = getBaseClasses((ActorClass)sc);
@@ -255,10 +255,10 @@ public class RoomScopeProvider extends FSMScopeProvider {
 				scopes.add(EObjectDescription.create(ssr.getName(), ssr));
 			}
 		}
-		
+
 		return new SimpleScope(IScope.NULLSCOPE, scopes);
 	}
-	
+
 	/**
 	 * returns a flat list of Port scopes for a {@link BindingEndPoint}
 	 * @param ep - the endpoint
@@ -267,9 +267,9 @@ public class RoomScopeProvider extends FSMScopeProvider {
 	 */
 	public IScope scope_BindingEndPoint_port(BindingEndPoint ep, EReference ref) {
 		final List<IEObjectDescription> scopes = new ArrayList<IEObjectDescription>();
-		
+
 		StructureClass sc = getStructureClass(ep);
-		
+
 		if (ep.getActorRef() == null){
 			if (sc instanceof ActorClass) {
 				ActorClass ac = (ActorClass) sc;
@@ -323,7 +323,7 @@ public class RoomScopeProvider extends FSMScopeProvider {
 	 */
 	public IScope scope_BindingEndPoint_sub(BindingEndPoint ep, EReference ref) {
 		final List<IEObjectDescription> scopes = new ArrayList<IEObjectDescription>();
-		
+
 		if (ep.getPort()!=null) {
 			if (ep.getPort().getProtocol() instanceof CompoundProtocolClass) {
 				CompoundProtocolClass pc = (CompoundProtocolClass) ep.getPort().getProtocol();
@@ -333,10 +333,10 @@ public class RoomScopeProvider extends FSMScopeProvider {
 				}
 			}
 		}
-		
+
 		return new SimpleScope(IScope.NULLSCOPE, scopes);
 	}
-	
+
 	/**
 	 * returns a flat list of Message scopes for a {@link InSemanticsRule}
 	 * @param sr - the semantics rule for incoming messages
@@ -345,7 +345,7 @@ public class RoomScopeProvider extends FSMScopeProvider {
 	 */
 	public IScope scope_SemanticsRule_msg(SemanticsRule sr, EReference ref) {
 		final List<IEObjectDescription> scopes = new ArrayList<IEObjectDescription>();
-		
+
 		ProtocolClass pc = roomHelpers.getProtocolClass(sr);
 		LinkedList<ProtocolClass> classes = getBaseClasses(pc);
 		for (ProtocolClass bpc : classes) {
@@ -358,7 +358,7 @@ public class RoomScopeProvider extends FSMScopeProvider {
 					scopes.add(EObjectDescription.create(m.getName(), m));
 				}
 		}
-		
+
 		return new SimpleScope(IScope.NULLSCOPE, scopes);
 	}
 
@@ -370,7 +370,7 @@ public class RoomScopeProvider extends FSMScopeProvider {
 	 */
 	public IScope scope_RefSAPoint_ref(RefSAPoint pt, EReference ref) {
 		final List<IEObjectDescription> scopes = new ArrayList<IEObjectDescription>();
-		
+
 		ActorContainerClass acc = getActorContainerClass(pt);
 		if (acc instanceof ActorClass) {
 			LinkedList<ActorClass> classes = getBaseClasses((ActorClass) acc);
@@ -397,7 +397,7 @@ public class RoomScopeProvider extends FSMScopeProvider {
 	 */
 	public IScope scope_RelaySAPoint_relay(RelaySAPoint pt, EReference ref) {
 		final List<IEObjectDescription> scopes = new ArrayList<IEObjectDescription>();
-		
+
 		ActorClass ac = getActorClass(pt);
 		LinkedList<ActorClass> classes = getBaseClasses(ac);
 		for (ActorClass a : classes) {
@@ -417,7 +417,7 @@ public class RoomScopeProvider extends FSMScopeProvider {
 	 */
 	public IScope scope_SPPoint_actorRef(SPPoint pt, EReference ref) {
 		final List<IEObjectDescription> scopes = new ArrayList<IEObjectDescription>();
-		
+
 		ActorContainerClass acc = getActorContainerClass(pt);
 		if (acc instanceof ActorClass) {
 			LinkedList<ActorClass> classes = getBaseClasses((ActorClass)acc);
@@ -444,7 +444,7 @@ public class RoomScopeProvider extends FSMScopeProvider {
 	 */
 	public IScope scope_SPPoint_service(SPPoint pt, EReference ref) {
 		final List<IEObjectDescription> scopes = new ArrayList<IEObjectDescription>();
-		
+
 		if (pt.getRef()!=null) {
 			if (pt.getRef() instanceof ActorRef) {
 				ActorClass ac = ((ActorRef)pt.getRef()).getType();
@@ -468,7 +468,7 @@ public class RoomScopeProvider extends FSMScopeProvider {
 
 	public IScope scope_MessageHandler_msg(MessageHandler handler, EReference ref) {
 		final List<IEObjectDescription> scopes = new ArrayList<IEObjectDescription>();
-		
+
 		ProtocolClass pc = roomHelpers.getProtocolClass(handler);
 		if (pc!=null) {
 			if (handler instanceof InMessageHandler)
@@ -480,13 +480,13 @@ public class RoomScopeProvider extends FSMScopeProvider {
 					scopes.add(EObjectDescription.create(m.getName(), m));
 				}
 		}
-		
+
 		return new SimpleScope(IScope.NULLSCOPE, scopes);
 	}
 
 	public IScope scope_PortOperation_sendsMsg(PortOperation op, EReference ref) {
 		final List<IEObjectDescription> scopes = new ArrayList<IEObjectDescription>();
-		
+
 		PortClass pcls = (PortClass) op.eContainer();
 		ProtocolClass pc = roomHelpers.getProtocolClass(op);
 		if (pc!=null) {
@@ -499,13 +499,13 @@ public class RoomScopeProvider extends FSMScopeProvider {
 					scopes.add(EObjectDescription.create(m.getName(), m));
 				}
 		}
-		
+
 		return new SimpleScope(IScope.NULLSCOPE, scopes);
 	}
 
 	/*
 	 * we prefer loose scoping here and rely on validation for meaningful error messages
-	 * 
+	 *
 	 * returns a flat list of ActorClass scopes for a {@link ActorRef}
 	 * @param ar - the actor reference
 	 * @param ref - not used
@@ -530,7 +530,7 @@ public class RoomScopeProvider extends FSMScopeProvider {
 		for (Port ip : ac.getInterfacePorts()) {
 			scopes.add(EObjectDescription.create(ip.getName(), ip));
 		}
-		
+
 		return new SimpleScope(IScope.NULLSCOPE, scopes);
 	}
 	/**
@@ -541,7 +541,7 @@ public class RoomScopeProvider extends FSMScopeProvider {
 	 */
 //	public IScope scope_ActorInstance_segments(ActorInstance ai, EReference ref) {
 //		final List<IEObjectDescription> scopes = new ArrayList<IEObjectDescription>();
-//		
+//
 //		if (ai.getSegments().isEmpty()) {
 //			// context is my ActorContainerClass
 //			ActorContainerClass acc = getActorContainerClass(ai);
@@ -556,14 +556,14 @@ public class RoomScopeProvider extends FSMScopeProvider {
 //				scopes.add(EObjectDescription.create(ar.getName(), ar));
 //			}
 //		}
-//		
+//
 //		return new SimpleScope(IScope.NULLSCOPE, scopes);
 //	}
-	
+
 	/*
 	public IScope scope_ChoicePointCaseRef_case(ChoicePointCaseRef cr, EReference ref) {
 		final List<IEObjectDescription> scopes = new ArrayList<IEObjectDescription>();
-		
+
 		if (cr.getCp()!=null) {
 			for (ChoicePointCase cas : cr.getCp().getCases()) {
 				scopes.add(EObjectDescription.create(cas.getName(), cas));
