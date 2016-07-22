@@ -1,0 +1,132 @@
+RoomModel ReferenceCPP_ActorClasses {
+
+	import ReferenceCPP_DataClasses.* from "ReferenceCPP_DataClasses.room"
+
+	import ReferenceCPP_ProtocolClasses.* from "ReferenceCPP_ProtocolClasses.room"
+
+	import room.basic.annotations.* from "../../org.eclipse.etrice.modellib.cpp/model/Annotations.room"
+	import room.basic.types.* from "../../org.eclipse.etrice.modellib.cpp/model/Types.room"
+
+	ActorClass ActorToplevel [ "instantiate all element to enforce code generation" ] {
+		Structure {
+			ActorRef allDataClasses: ActorAllDataClasses
+			ActorRef actorWithImplementationSubclass: ActorWithImplementationSubclass
+			Binding mirrorDataClasses.portMirror and allDataClasses.portSend
+			ActorRef mirrorDataClasses: ActorAllDataClassesMirror
+		}
+	}
+
+	ActorClass ActorAllDataClasses {
+		Interface {
+			conjugated Port portSend: PAllDatatypes
+		}
+		Structure {
+			Attribute allDatatypes: DAllDatatypes
+			Attribute char1: char
+			Attribute char2: char
+			Attribute charArray[100]: char
+			external Port portSend
+		}
+		Behavior {
+			StateMachine {
+				State state0 {
+					entry 
+				
+				{
+						"sprintf(charArray, \"Hallo eTrice\");"
+						"DAllDatatypes data(-1, -2, -3, -4, 1,2,3,4, 123.456, -123.456, false, \'A\', charArray);"
+						"portSend.sendAllDatatypes(data);"
+					}
+				}
+			Transition init: initial -> state0
+			State state1
+				Transition tr0: state0 -> state1 {
+					triggers {
+						<mirrorAllDatatypes: portSend>
+					}
+					action 
+				
+				{
+						"//printf(\"%d, %ld, %f, %d, %c, %s\\n\", data.attribute_int8, data.attribute_uint64, data.attribute_float64, data.attribute_boolean, data.attribute_char, data.attribute_charPtr);"
+					}
+				}
+			}
+		}
+	}
+
+	ActorClass ActorAllDataClassesMirror {
+		Interface {
+			Port portMirror: PAllDatatypes
+		}
+		Structure {
+			Attribute allDatatypes: DAllDatatypes
+			external Port portMirror
+		}
+		Behavior {
+			StateMachine { State state0
+				State state1
+				Transition init: initial -> state0
+				Transition tr0: state0 -> state1 {
+					triggers {
+						<sendAllDatatypes: portMirror>
+					}
+					action {
+						"allDatatypes = data;"
+						"portMirror.mirrorAllDatatypes(allDatatypes);"
+					}
+				}
+			}
+		}
+	}
+
+	ProtocolClass PStartStop {
+		incoming {
+			Message start()
+			Message stop()
+		}
+		outgoing {
+			Message started()
+			Message stopped()
+		}
+	}
+
+	datadriven ActorClass ActorWithImplementationSubclass {
+		@ImplementationSubclass(fqnClassName = "ActorWithImplementationSubclass_Impl")
+		Behavior {
+			StateMachine {
+				State State1 {
+					entry {
+						"//"
+					}
+					exit {
+						"//"
+					}
+				}
+				State State2 {
+					entry {
+						"//"
+					}
+					exit {
+						"//"
+					} do {
+						"//"
+					}
+				}
+				Transition init: initial -> State1 {
+					action {
+						"//"
+					}
+				}
+				Transition tr0: State1 -> State2 {
+					guard {
+						"true"
+					}
+					action {
+						"//"
+					}
+				}
+			}
+		}
+	}
+
+}

@@ -1,0 +1,39 @@
+// 
+
+RoomModel ReferenceCPP_DataClasses {
+	import room.basic.types.* from "../../org.eclipse.etrice.modellib.cpp/model/Types.room"
+	import room.basic.annotations.* from "../../org.eclipse.etrice.modellib.cpp/model/Annotations.room"
+
+	DataClass DAllDatatypes {
+		// int
+		Attribute attribute_int8 : int8
+		Attribute attribute_int16 : int16
+		Attribute attribute_int32 : int32
+		Attribute attribute_int64 : int64
+
+		// uint
+		Attribute attribute_uint8 : uint8
+		Attribute attribute_uint16 : uint16
+		Attribute attribute_uint32 : uint32
+		Attribute attribute_uint64 : uint64
+		
+		// float
+		Attribute attribute_float32 : float32
+		Attribute attribute_float64 : float64
+
+		// others
+		Attribute attribute_boolean : boolean
+		Attribute attribute_char : char
+		Attribute attribute_charPtr : charPtr
+// TODO: string does not compile
+// 		Attribute attribute_string : string 
+//		Attribute attribute_voidTypeRef : voidType ref
+		
+		// arrays
+		// TODO: arrays for attributes do not compile
+//		Attribute attribute_char_array[4] : char
+//		Attribute attribute_int32_array[4] : int32
+		
+		
+	} 
+}

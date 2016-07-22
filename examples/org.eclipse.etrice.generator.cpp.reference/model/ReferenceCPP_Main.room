@@ -1,0 +1,27 @@
+/*
+ * Shortkeys:
+ *	Ctrl+Space	- content assist
+ * 	F3			- open declaration of selected element
+ *	Alt+S 		- open structure diagram
+ *  Alt+B 		- open behavior diagram
+ *  Alt+M 		- open textual editor (in diagrams)
+ */
+RoomModel ReferenceCPP_Main {
+
+	import room.basic.types.* from "../../org.eclipse.etrice.modellib.cpp/model/Types.room"
+	import room.basic.service.timing.* from "../../org.eclipse.etrice.modellib.cpp/model/TimingService.room"
+
+	import ReferenceCPP_ActorClasses.* from "ReferenceCPP_ActorClasses.room"
+	
+
+	LogicalSystem LogSys {
+		SubSystemRef subSystemRef: SubSysClass
+	}
+
+	SubSystemClass SubSysClass {
+		ActorRef topActor: ActorToplevel
+		ActorRef timingService: ATimingService
+		LayerConnection ref topActor satisfied_by timingService.timer
+		LogicalThread defaultThread
+	}
+}

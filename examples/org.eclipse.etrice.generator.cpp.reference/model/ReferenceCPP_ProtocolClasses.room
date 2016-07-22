@@ -1,0 +1,23 @@
+RoomModel ReferenceCPP_ProtocolClasses {
+
+	import room.basic.types.* from "../../org.eclipse.etrice.modellib.cpp/model/Types.room"
+
+	import ReferenceCPP_DataClasses.* from "ReferenceCPP_DataClasses.room"
+	
+	ProtocolClass PAllDatatypes {
+		incoming {
+			Message sendAllDatatypes(data: DAllDatatypes)
+			Message sendInt16(data: int16)
+			Message sendFloat(data: float32)
+			Message sendBoolean(data: boolean)
+			Message sendCharPtr(data: charPtr)
+		}
+		outgoing {
+			Message mirrorAllDatatypes(data: DAllDatatypes)
+			Message mirrorInt16(data: int16)
+			Message mirrorFloat(data: float64)
+			Message mirrorBoolean(data: boolean)
+			Message mirrorCharPtr(data: charPtr)
+		}
+	}
+}
