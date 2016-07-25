@@ -133,9 +133,8 @@ public class BaseJavaValidator extends org.eclipse.etrice.core.common.validation
 										values.toArray(new String[values.size()]));
 							}
 						}
-					}
-					else if (att instanceof SimpleAnnotationAttribute) {
-						switch (((SimpleAnnotationAttribute) att).getType()) {
+						else if (att instanceof SimpleAnnotationAttribute) {
+							switch (((SimpleAnnotationAttribute) att).getType()) {
 							case BOOL :
 								if (!(kv.getValue() instanceof BooleanLiteral))
 									error("boolean literal expected", kv, BasePackage.Literals.KEY_VALUE__VALUE);
@@ -154,6 +153,7 @@ public class BaseJavaValidator extends org.eclipse.etrice.core.common.validation
 								break;
 							default :
 								break;
+							}
 						}
 					}
 					break;
