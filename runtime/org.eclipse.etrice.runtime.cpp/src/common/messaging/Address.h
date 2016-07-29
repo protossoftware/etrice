@@ -23,6 +23,7 @@ public:
 
 	static const Address EMPTY;
 
+	Address();
 	Address(int nodeID, int threadID, int objectID);
 	Address(const Address& right);
 	~Address();
@@ -46,7 +47,6 @@ public:
 	int m_objectID;
 
 private:
-	Address();
 
 };
 
