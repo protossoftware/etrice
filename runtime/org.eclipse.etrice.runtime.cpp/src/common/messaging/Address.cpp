@@ -17,6 +17,12 @@ namespace etRuntime {
 
 const Address Address::EMPTY(0, 0, 0);
 
+Address::Address() :
+	m_nodeID(0),
+	m_threadID(0),
+	m_objectID(0) {
+}
+
 Address::Address(int nodeID, int threadID, int objectID) :
 		m_nodeID(nodeID),
 		m_threadID(threadID),

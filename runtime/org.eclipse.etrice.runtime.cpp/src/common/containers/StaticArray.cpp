@@ -1,32 +1,17 @@
 /*******************************************************************************
- * Copyright (c) 2013 protos software gmbh (http://www.protos.de).
+ * Copyright (c) 2016 protos software gmbh (http://www.protos.de).
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * CONTRIBUTORS:
- * 		Juergen Haug (initial contribution)
+ * 		Thomas Schuetz (initial contribution)
  *
  *******************************************************************************/
 
-#include "messaging/AddressTest.h"
-#include "containers/StaticArrayTest.h"
+#include "common/containers/StaticArray.h"
 
-#include "etUnit/etUnit.h"
+namespace etRuntime {
 
-int main(){
-
-	etUnit_open("log/testlog","TestCppRuntime");
-
-	AddressTest addressTest;
-	addressTest.run();
-
-	StaticArrayTest staticArrayTest;
-	staticArrayTest.run();
-
-	etUnit_close();
-
-	return 0;
-}
-
+} /* namespace etRuntime */
