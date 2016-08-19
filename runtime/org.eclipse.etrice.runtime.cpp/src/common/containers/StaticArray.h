@@ -92,14 +92,6 @@ public:
 		return *this;
 	}
 
-	// TODO: fix implementation of operator==
-//	bool operator==(const StaticArray<Type, Size> &rhs) const {
-//		if (memcmp(this->data, rhs.data, sizeof(data)) == 0) {
-//			return true;
-//		} else {
-//			return false;
-//		}
-//	}
 	/**
 	 * comparison operator based on memcmp()
 	 */
@@ -119,6 +111,8 @@ protected:
 	void deepCopy(const StaticArray<Type, Size> &rhs) {
 		std::memcpy(this->data, rhs.data, sizeof(data));
 	}
+
+	// TODO: use this to copy because it uses T::operator=() ?
 	void deepCopy2(const StaticArray<Type, Size> &rhs) {
 		for (int i=0; i<Size; ++i) {
 			data[i] = rhs.data[i];
