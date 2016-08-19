@@ -12,6 +12,7 @@
 
 #include "messaging/AddressTest.h"
 #include "containers/StaticArrayTest.h"
+#include "containers/StaticStringTest.h"
 
 #include "etUnit/etUnit.h"
 
@@ -24,6 +25,9 @@ int main(){
 
 	StaticArrayTest staticArrayTest;
 	staticArrayTest.run();
+
+	StaticStringTest staticStringTest;
+	staticStringTest.run();
 
 	etUnit_close();
 

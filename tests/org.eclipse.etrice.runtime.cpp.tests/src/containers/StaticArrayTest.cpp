@@ -125,14 +125,13 @@ void StaticArrayTest::testOperators(void) {
 	EXPECT_EQUAL_INT32(m_caseId, "copy operator wrong", 11, addressArray3[9].m_objectID);
 
 	// Compare Operator
-	// TODO: fix implementation of operator== and activate testcase
-//	EXPECT_TRUE(m_caseId, "compare operator wrong", intArray2 == intArray3);
-//	intArray2[4]=99;
-//	EXPECT_FALSE(m_caseId, "compare operator wrong", intArray2 == intArray3);
-//
-//	EXPECT_TRUE(m_caseId, "compare operator wrong", addressArray2 == addressArray3);
-//	addressArray2[9]=Address(99,88,77);
-//	EXPECT_FALSE(m_caseId, "compare operator wrong", addressArray2 == addressArray3);
+	EXPECT_TRUE(m_caseId, "compare operator wrong", intArray2 == intArray3);
+	intArray2[4] = 99;
+	EXPECT_FALSE(m_caseId, "compare operator wrong", intArray2 == intArray3);
+
+	EXPECT_TRUE(m_caseId, "compare operator wrong", addressArray2 == addressArray3);
+	addressArray2[9] = Address(99, 88, 77);
+	EXPECT_FALSE(m_caseId, "compare operator wrong", addressArray2 == addressArray3);
 
 }
 

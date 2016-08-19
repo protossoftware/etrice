@@ -10,8 +10,26 @@
  *
  *******************************************************************************/
 
-#include "common/containers/StaticArray.h"
+#ifndef SRC_CONTAINERS_STATICSTRINGTEST_H_
+#define SRC_CONTAINERS_STATICSTRINGTEST_H_
 
-namespace etRuntime {
+#include "etUnit/etUnit.h"
+#include "util/etTestSuite.h"
 
-} /* namespace etRuntime */
+class StaticStringTest : public etTestSuite {
+
+public:
+	StaticStringTest() :
+		etTestSuite("StaticStringTest"){
+	}
+
+protected:
+	void testConstructors(void);
+	void testSettersAndGetters(void);
+	void testOperators(void);
+
+	virtual void runAllTestCases();
+};
+
+
+#endif /* SRC_CONTAINERS_STATICSTRINGTEST_H_ */
