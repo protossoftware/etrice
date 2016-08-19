@@ -337,6 +337,12 @@ public class EtUnitReportConverter {
 			TestsuiteType currentSuite = null;
 			String line = bufRead.readLine();
 			++count;
+			if (line==null) {
+				System.err.println("Error: file "+report+", is empty - no etunit file");
+				bufRead.close();
+				input.close();
+				return null;
+			}
 			if (!line.equals("etUnit report")) {
 				System.err.println("Error: file "+report+", line "+line+" is missing header line - no etunit file");
 				bufRead.close();
