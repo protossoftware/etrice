@@ -55,10 +55,19 @@
 		<attribute name="testId"/>
 		<attribute name="models"/>
 		<sequential>
+			<echo>generating @{testId}</echo>
 			<standaloneGenerator testId="@{testId}" models="@{models}"/>
+			
+			<echo>building @{testId}</echo>
 			<build testId="@{testId}"/>
+			
+			<echo>running @{testId}</echo>
 			<run testId="@{testId}"/>
+			
+			<echo>converting @{testId}</echo>
 			<convert testId="@{testId}"/>
+			
+			<echo>copying result @{testId}</echo>
 			<copyResult testId="@{testId}" targetId="${runtime.platform}_"/>
 		</sequential>
 	</macrodef>
@@ -68,7 +77,7 @@
 		<attribute name="models"/>
 		<sequential>
 			<mkdir dir="${output}"/>
-			<java output="${output}/generate.txt" error="${output}/generate_err.txt" classname="org.eclipse.etrice.generator.cpp.Main" fork="true" failonerror="true">
+			<java output="${output}/@{testId}_generate.txt" error="${output}/@{testId}_generate_err.txt" classname="org.eclipse.etrice.generator.cpp.Main" fork="true" failonerror="true">
 				<arg line="@{models}"/>
 				<arg value="-genDir"/><arg value="src-gen/@{testId}"/>
 				<arg value="-msc_instr"/>
@@ -85,7 +94,7 @@
 		<sequential>
 			<mkdir dir="${bin.path}"/>
 			<mkdir dir="${output}"/>
-			<exec executable="make" failonerror="true" output="${output}/build.txt">
+			<exec executable="make" failonerror="true" output="${output}/@{testId}_build.txt">
 				<arg line="all"/>
 				<arg line="APP_TARGET=@{testId}.exe"/>
 				<arg line="APP_BUILD_DIR=${bin.path}"/>
@@ -103,7 +112,7 @@
 		<sequential>
 			<mkdir dir="${output}"/>
 			<mkdir dir="${testlog.path}"/>
-			<exec dir="./" output="${output}/run.txt" resolveexecutable="true" executable="${bin.path}/@{testId}.exe" timeout="${run.msTimout}">
+			<exec dir="./" output="${output}/@{testId}_run.txt" resolveexecutable="true" executable="${bin.path}/@{testId}.exe" timeout="${run.msTimout}">
 				<arg value="-run_as_test"/>
 			</exec>
 		</sequential>
