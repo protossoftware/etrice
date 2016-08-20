@@ -125,15 +125,15 @@
 	
 	<target name="create.site.index">
 		<echo message="Creating human readable index.html" />
-		<unzip src="${root}/buildroot/buckminster.build/org.eclipse.etrice.site_1.0.0-eclipse.feature/site.p2/content.jar"
-			dest="${root}/buildroot/buckminster.build/org.eclipse.etrice.site_1.0.0-eclipse.feature/site.p2" />
+		<unzip src="${root}/buildroot/buckminster.build/org.eclipse.etrice.site_1.0.1-eclipse.feature/site.p2/content.jar"
+			dest="${root}/buildroot/buckminster.build/org.eclipse.etrice.site_1.0.1-eclipse.feature/site.p2" />
 		<xslt style="xsl/content2html.xsl"
-			in="${root}/buildroot/buckminster.build/org.eclipse.etrice.site_1.0.0-eclipse.feature/site.p2/content.xml"
-			out="${root}/buildroot/buckminster.build/org.eclipse.etrice.site_1.0.0-eclipse.feature/site.p2/index.html" />
+			in="${root}/buildroot/buckminster.build/org.eclipse.etrice.site_1.0.1-eclipse.feature/site.p2/content.xml"
+			out="${root}/buildroot/buckminster.build/org.eclipse.etrice.site_1.0.1-eclipse.feature/site.p2/index.html" />
 		<xslt style="xsl/content2xml.xsl"
-			in="${root}/buildroot/buckminster.build/org.eclipse.etrice.site_1.0.0-eclipse.feature/site.p2/content.xml"
-			out="${root}/buildroot/buckminster.build/org.eclipse.etrice.site_1.0.0-eclipse.feature/site.p2/index.xml" />
-		<delete file="${root}/buildroot/buckminster.build/org.eclipse.etrice.site_1.0.0-eclipse.feature/site.p2/content.xml" />
+			in="${root}/buildroot/buckminster.build/org.eclipse.etrice.site_1.0.1-eclipse.feature/site.p2/content.xml"
+			out="${root}/buildroot/buckminster.build/org.eclipse.etrice.site_1.0.1-eclipse.feature/site.p2/index.xml" />
+		<delete file="${root}/buildroot/buckminster.build/org.eclipse.etrice.site_1.0.1-eclipse.feature/site.p2/content.xml" />
 	</target>
 
 	<target name="copy.sites" >
@@ -145,16 +145,16 @@
 		<delete dir="${root}/last_success/site.p2.zip/" failonerror="true" />
 
 		<echo message="Copying site.packed to last_success area" />
-		<copydir dest="${root}/last_success/site.packed/" src="${root}/buildroot/buckminster.build/org.eclipse.etrice.site_1.0.0-eclipse.feature/site.packed" />
+		<copydir dest="${root}/last_success/site.packed/" src="${root}/buildroot/buckminster.build/org.eclipse.etrice.site_1.0.1-eclipse.feature/site.packed" />
 
 		<echo message="Add update site stuff and user-readable description to site.packed folder (copy from site.p2 folder)" />
-		<copy todir="${root}/last_success/site.packed/" file="${root}/buildroot/buckminster.build/org.eclipse.etrice.site_1.0.0-eclipse.feature/site.p2/artifacts.jar" />
-		<copy todir="${root}/last_success/site.packed/" file="${root}/buildroot/buckminster.build/org.eclipse.etrice.site_1.0.0-eclipse.feature/site.p2/content.jar" />
-		<copy todir="${root}/last_success/site.packed/" file="${root}/buildroot/buckminster.build/org.eclipse.etrice.site_1.0.0-eclipse.feature/site.p2/index.html" />
-		<copy todir="${root}/last_success/site.packed/" file="${root}/buildroot/buckminster.build/org.eclipse.etrice.site_1.0.0-eclipse.feature/site.p2/index.xml" />
+		<copy todir="${root}/last_success/site.packed/" file="${root}/buildroot/buckminster.build/org.eclipse.etrice.site_1.0.1-eclipse.feature/site.p2/artifacts.jar" />
+		<copy todir="${root}/last_success/site.packed/" file="${root}/buildroot/buckminster.build/org.eclipse.etrice.site_1.0.1-eclipse.feature/site.p2/content.jar" />
+		<copy todir="${root}/last_success/site.packed/" file="${root}/buildroot/buckminster.build/org.eclipse.etrice.site_1.0.1-eclipse.feature/site.p2/index.html" />
+		<copy todir="${root}/last_success/site.packed/" file="${root}/buildroot/buckminster.build/org.eclipse.etrice.site_1.0.1-eclipse.feature/site.p2/index.xml" />
 
 		<echo message="Copying site.p2.zip to last_success area" />
-		<copydir dest="${root}/last_success/site.p2.zip/" src="${root}/buildroot/buckminster.build/org.eclipse.etrice.site_1.0.0-eclipse.feature/site.p2.zip" />
+		<copydir dest="${root}/last_success/site.p2.zip/" src="${root}/buildroot/buckminster.build/org.eclipse.etrice.site_1.0.1-eclipse.feature/site.p2.zip" />
 		<rename dest="${root}/last_success/site.p2.zip/org.eclipse.etrice.site_0.4.0.${build_id}.zip" 
 			src="${root}/last_success/site.p2.zip/org.eclipse.etrice.site_0.4.0.qualifier.zip"/>
 

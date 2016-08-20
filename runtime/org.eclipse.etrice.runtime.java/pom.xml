@@ -7,7 +7,7 @@
 	<parent>
 		<groupId>org.eclipse.etrice</groupId>
 		<artifactId>java-generator</artifactId>
-		<version>1.0.0-SNAPSHOT</version>
+		<version>1.0.1-SNAPSHOT</version>
 		<relativePath>../../releng/org.eclipse.etrice.parent</relativePath>
 	</parent>
 
@@ -41,7 +41,7 @@
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
 					<artifactId>lifecycle-mapping</artifactId>
-					<version>1.0.0</version>
+					<version>1.0.1</version>
 					<configuration>
 						<lifecycleMappingMetadata>
 							<pluginExecutions>
