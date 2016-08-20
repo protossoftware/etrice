@@ -29,6 +29,9 @@ RoomModel room.basic.service.timing {
 			ServiceImplementation of timer
 		}
 		Behavior {
+			ctor {
+				"memset(tcbs.getData(), sizeof(tcbs), 0);"
+			}
 			Operation getTcb(): tcb ref {
 				"etTimerControlBlock* temp = freeTcbsRoot;"
 				""
@@ -299,6 +302,6 @@ RoomModel room.basic.service.timing {
 		}
 	}
 
-	ExternalType tcb -> "etTimerControlBlock" default "{{0,0},{0,0},0,NULL}"
-	ExternalType targetTime -> "etTime" default "{0,0}"
+	ExternalType tcb -> "etTimerControlBlock"
+	ExternalType targetTime -> "etTime"
 }

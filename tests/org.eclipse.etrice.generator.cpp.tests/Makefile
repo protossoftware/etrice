@@ -9,8 +9,7 @@ IN_BUILD_DIR 	:= ${APP_BUILD_DIR}
 IN_INCDIRS 		+= ${APP_SRCDIRS_REC}
 IN_SRCDIRS_REC 	+= ${APP_SRCDIRS_REC}
 CC				= ${CXX}
-#IN_CFLAGS		+= -std=c++98 -O0 -g3 -pedantic -Wall
-IN_CFLAGS		+= -std=c++11 -O0 -g3 -pedantic -Wall
+IN_CFLAGS		+= -std=c++98 -O0 -g3 -pedantic -Wall
 #---
 
 # Create rules
