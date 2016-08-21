@@ -27,6 +27,7 @@ import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.StandardOperation;
+import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.cpp.gen.CppExtensions;
 import org.eclipse.etrice.generator.cpp.gen.Initialization;
 import org.eclipse.etrice.generator.generic.ProcedureHelpers;
@@ -36,6 +37,7 @@ import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 
 @Singleton
@@ -59,6 +61,10 @@ public class DataClassGen {
   
   @Inject
   private Initialization initHelper;
+  
+  @Inject
+  @Extension
+  private RoomHelpers _roomHelpers;
   
   @Inject
   private ILogger logger;
@@ -233,20 +239,16 @@ public class DataClassGen {
     _builder.append("// constructor using fields");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("// TODO");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("//");
     {
-      EList<Attribute> _attributes_3 = dc.getAttributes();
-      boolean _isEmpty = _attributes_3.isEmpty();
+      List<Attribute> _allAttributes = this._roomHelpers.getAllAttributes(dc);
+      boolean _isEmpty = _allAttributes.isEmpty();
       boolean _not = (!_isEmpty);
       if (_not) {
         String _name_12 = dc.getName();
         _builder.append(_name_12, "\t");
         _builder.append("(");
-        EList<Attribute> _attributes_4 = dc.getAttributes();
-        String _argList = this.helpers.argList(_attributes_4);
+        List<Attribute> _allAttributes_1 = this._roomHelpers.getAllAttributes(dc);
+        String _argList = this.helpers.argList(_allAttributes_1);
         _builder.append(_argList, "\t");
         _builder.append(");");
       }
@@ -320,8 +322,8 @@ public class DataClassGen {
     _builder.newLine();
     _builder.append("\t");
     EList<Attribute> _attributes = dc.getAttributes();
-    CharSequence _genArrayInitializers = this.initHelper.genArrayInitializers(_attributes);
-    _builder.append(_genArrayInitializers, "\t");
+    CharSequence _genExtraInitializers = this.initHelper.genExtraInitializers(_attributes);
+    _builder.append(_genExtraInitializers, "\t");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     String _userStructorBody = this.helpers.userStructorBody(dc, true);
@@ -355,17 +357,43 @@ public class DataClassGen {
     _builder.newLine();
     _builder.append("// TODO");
     _builder.newLine();
+    {
+      List<Attribute> _allAttributes = this._roomHelpers.getAllAttributes(dc);
+      boolean _isEmpty = _allAttributes.isEmpty();
+      boolean _not = (!_isEmpty);
+      if (_not) {
+        String _name_6 = dc.getName();
+        _builder.append(_name_6, "");
+        _builder.append("::");
+        String _name_7 = dc.getName();
+        _builder.append(_name_7, "");
+        _builder.append("(");
+        List<Attribute> _allAttributes_1 = this._roomHelpers.getAllAttributes(dc);
+        String _argList = this.helpers.argList(_allAttributes_1);
+        _builder.append(_argList, "");
+        _builder.append(")");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        CharSequence _generateFieldInitializerList = this.generateFieldInitializerList(dc);
+        _builder.append(_generateFieldInitializerList, "\t");
+        _builder.newLineIfNotEmpty();
+        _builder.append("{");
+        _builder.newLine();
+        _builder.append("}");
+        _builder.newLine();
+      }
+    }
     _builder.newLine();
     _builder.append("// assignment operator");
     _builder.newLine();
-    String _name_6 = dc.getName();
-    _builder.append(_name_6, "");
-    _builder.append("& ");
-    String _name_7 = dc.getName();
-    _builder.append(_name_7, "");
-    _builder.append("::operator=(const ");
     String _name_8 = dc.getName();
     _builder.append(_name_8, "");
+    _builder.append("& ");
+    String _name_9 = dc.getName();
+    _builder.append(_name_9, "");
+    _builder.append("::operator=(const ");
+    String _name_10 = dc.getName();
+    _builder.append(_name_10, "");
     _builder.append("& rhs)");
     _builder.newLineIfNotEmpty();
     _builder.append("{");
@@ -379,8 +407,8 @@ public class DataClassGen {
       boolean _notEquals = (!Objects.equal(_base, null));
       if (_notEquals) {
         DataClass _base_1 = dc.getBase();
-        String _name_9 = _base_1.getName();
-        _builder.append(_name_9, "\t");
+        String _name_11 = _base_1.getName();
+        _builder.append(_name_11, "\t");
         _builder.append("::operator=(rhs);");
       }
     }
@@ -390,11 +418,11 @@ public class DataClassGen {
       for(final Attribute attr : _attributes_1) {
         _builder.append("\t");
         _builder.append("this->");
-        String _name_10 = attr.getName();
-        _builder.append(_name_10, "\t");
+        String _name_12 = attr.getName();
+        _builder.append(_name_12, "\t");
         _builder.append(" = rhs.");
-        String _name_11 = attr.getName();
-        _builder.append(_name_11, "\t");
+        String _name_13 = attr.getName();
+        _builder.append(_name_13, "\t");
         _builder.append(";");
         _builder.newLineIfNotEmpty();
       }
@@ -406,8 +434,8 @@ public class DataClassGen {
     _builder.newLine();
     _builder.newLine();
     EList<StandardOperation> _operations = dc.getOperations();
-    String _name_12 = dc.getName();
-    CharSequence _operationsImplementation = this.helpers.operationsImplementation(_operations, _name_12);
+    String _name_14 = dc.getName();
+    CharSequence _operationsImplementation = this.helpers.operationsImplementation(_operations, _name_14);
     _builder.append(_operationsImplementation, "");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
@@ -481,6 +509,53 @@ public class DataClassGen {
       };
       List<String> _map = ListExtensions.<Attribute, String>map(_attributes, _function);
       Iterables.<CharSequence>addAll(initList, _map);
+      _xblockexpression = initHelper.generateCtorInitializerList(initList);
+    }
+    return _xblockexpression;
+  }
+  
+  private CharSequence generateFieldInitializerList(final DataClass dataClass) {
+    CharSequence _xblockexpression = null;
+    {
+      @Extension
+      final Initialization initHelper = this.initHelper;
+      ArrayList<CharSequence> initList = CollectionLiterals.<CharSequence>newArrayList();
+      DataClass _base = dataClass.getBase();
+      boolean _notEquals = (!Objects.equal(_base, null));
+      if (_notEquals) {
+        StringConcatenation _builder = new StringConcatenation();
+        DataClass _base_1 = dataClass.getBase();
+        String _name = _base_1.getName();
+        _builder.append(_name, "");
+        _builder.append("(");
+        DataClass _base_2 = dataClass.getBase();
+        List<Attribute> _allAttributes = this._roomHelpers.getAllAttributes(_base_2);
+        final Function1<Attribute, String> _function = new Function1<Attribute, String>() {
+          public String apply(final Attribute it) {
+            return it.getName();
+          }
+        };
+        List<String> _map = ListExtensions.<Attribute, String>map(_allAttributes, _function);
+        String _join = IterableExtensions.join(_map, ", ");
+        _builder.append(_join, "");
+        _builder.append(")");
+        initList.add(_builder.toString());
+      }
+      EList<Attribute> _attributes = dataClass.getAttributes();
+      final Function1<Attribute, String> _function_1 = new Function1<Attribute, String>() {
+        public String apply(final Attribute it) {
+          StringConcatenation _builder = new StringConcatenation();
+          String _name = it.getName();
+          _builder.append(_name, "");
+          _builder.append("(");
+          String _name_1 = it.getName();
+          _builder.append(_name_1, "");
+          _builder.append(")");
+          return _builder.toString();
+        }
+      };
+      List<String> _map_1 = ListExtensions.<Attribute, String>map(_attributes, _function_1);
+      Iterables.<CharSequence>addAll(initList, _map_1);
       _xblockexpression = initHelper.generateCtorInitializerList(initList);
     }
     return _xblockexpression;

@@ -251,7 +251,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 				RTServices::getInstance().getMsgSvcCtrl().getMsgSvc(getThread())->addPollingMessageReceiver(*this);
 			«ENDIF»
 
-			«initHelper.genArrayInitializers(ac.attributes)»
+			«initHelper.genExtraInitializers(ac.attributes)»
 			«ac.userStructorBody(true)»
 		}
 

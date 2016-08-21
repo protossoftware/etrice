@@ -24,6 +24,7 @@
 		<test testid="OperationInheritanceTest" models="${models.path}/OperationInheritanceTest.room ${models.path}/GenericPhysical.etphys" />
 		<test testid="PingPongThreadTest" models="${models.path}/PingPongThreadTest.etmap" />
 		<test testid="PingPongThreadReplPortTest" models="${models.path}/PingPongThreadReplPortTest.etmap" />
+		<test testid="InitializationTest" models="${models.path}/InitializationTest.room ${models.path}/GenericPhysical.etphys" />
 	</target>
 
 	<target name="copyModels" depends="common.copyModels">
@@ -57,16 +58,16 @@
 		<sequential>
 			<echo>generating @{testId}</echo>
 			<standaloneGenerator testId="@{testId}" models="@{models}"/>
-			
+
 			<echo>building @{testId}</echo>
 			<build testId="@{testId}"/>
-			
+
 			<echo>running @{testId}</echo>
 			<run testId="@{testId}"/>
-			
+
 			<echo>converting @{testId}</echo>
 			<convert testId="@{testId}"/>
-			
+
 			<echo>copying result @{testId}</echo>
 			<copyResult testId="@{testId}" targetId="${runtime.platform}_"/>
 		</sequential>

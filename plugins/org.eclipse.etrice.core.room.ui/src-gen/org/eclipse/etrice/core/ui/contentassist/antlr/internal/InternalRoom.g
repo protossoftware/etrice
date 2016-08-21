@@ -7028,7 +7028,7 @@ rule__Attribute__Group__4__Impl
 :
 (
 { before(grammarAccess.getAttributeAccess().getTypeAssignment_4()); }
-(rule__Attribute__TypeAssignment_4)
+(rule__Attribute__TypeAssignment_4)?
 { after(grammarAccess.getAttributeAccess().getTypeAssignment_4()); }
 )
 

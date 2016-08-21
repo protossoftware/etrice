@@ -23,6 +23,7 @@ import org.eclipse.etrice.core.room.DataClass
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
+import org.eclipse.etrice.core.room.util.RoomHelpers
 
 @Singleton
 class DataClassGen {
@@ -33,7 +34,7 @@ class DataClassGen {
 	@Inject extension ProcedureHelpers helpers
 //	@Inject extension TypeHelpers typeHelpers
 	@Inject Initialization initHelper
-//	@Inject extension RoomHelpers
+	@Inject extension RoomHelpers
 	@Inject ILogger logger
 
 	def doGenerate(Root root) {
@@ -94,8 +95,7 @@ class DataClassGen {
 			«dc.name»& operator=(const «dc.name»& rhs);
 
 			// constructor using fields
-			// TODO
-			//«IF !dc.attributes.empty»«dc.name»(«dc.attributes.argList»);«ENDIF»
+			«IF !dc.allAttributes.empty»«dc.name»(«dc.allAttributes.argList»);«ENDIF»
 		};
 
 		«dc.generateNamespaceEnd»
@@ -125,7 +125,7 @@ class DataClassGen {
 		«dc.name»::«dc.name»()
 			«dc.generateDefaultInitalizerList»
 		{
-			«initHelper.genArrayInitializers(dc.attributes)»
+			«initHelper.genExtraInitializers(dc.attributes)»
 			«dc.userStructorBody(true)»
 		}
 
@@ -137,13 +137,12 @@ class DataClassGen {
 
 		// constructor using fields
 		// TODO
-«««		«IF !dc.attributes.empty»
-«««			«dc.name»::«dc.name»(«dc.attributes.argList»)
-«««				«IF dc.base!=null»:«dc.base.name»()«ENDIF»
-«««			{
-«««				«dc.userStructorBody(true)»
-«««			}
-«««		«ENDIF»
+		«IF !dc.allAttributes.empty»
+			«dc.name»::«dc.name»(«dc.allAttributes.argList»)
+				«dc.generateFieldInitializerList»
+			{
+			}
+		«ENDIF»
 
 		// assignment operator
 		«dc.name»& «dc.name»::operator=(const «dc.name»& rhs)
@@ -178,6 +177,17 @@ class DataClassGen {
 
 		if(dataClass.base != null) initList += dataClass.base.name + '(rhs)'
 		initList += dataClass.attributes.map['''«name»(rhs.«name»)''']
+
+		initList.generateCtorInitializerList
+	}
+
+	def private generateFieldInitializerList(DataClass dataClass){
+		val extension initHelper = initHelper
+		var initList = <CharSequence>newArrayList
+
+		if(dataClass.base != null)
+			initList += '''«dataClass.base.name»(«dataClass.base.allAttributes.map[name].join(', ')»)'''
+		initList += dataClass.attributes.map['''«name»(«name»)''']
 
 		initList.generateCtorInitializerList
 	}

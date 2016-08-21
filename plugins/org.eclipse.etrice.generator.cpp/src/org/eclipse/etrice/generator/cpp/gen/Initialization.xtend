@@ -24,26 +24,43 @@ class Initialization {
 	@Inject ILanguageExtension languageExt
 	@Inject TypeHelpers typeHelpers
 
-	def generateCtorInitializerList(Iterable<? extends CharSequence> items) '''
-		«FOR s : items BEFORE ':' SEPARATOR ','»«s»
-		«ENDFOR»
-	'''
-
-	def genArrayInitializers(Iterable<Attribute> attributes) {
-		val arrayInitAttrs = attributes.filter[size > 0 && defaultValueLiteral != null && defaultValueLiteral.startsWith('{')]
-		if(arrayInitAttrs.empty) return ''
+	def generateCtorInitializerList(Iterable<? extends CharSequence> items){
+		if(items.empty) return ''
 		'''
-			// array initialization
-			«FOR it : arrayInitAttrs»
-				«typeHelpers.getTypeName(it)» «name»InitValues[«size»] = «defaultValueLiteral»;
+			: «items.head»
+			«FOR item : items.tail»
+				, «item»
+			«ENDFOR»
+		'''
+	}
+
+	/*
+	 *  Generate array and struct initialization
+	 */
+	def genExtraInitializers(Iterable<Attribute> attributes) {
+		val extraInitAttrs = attributes.filter[initializerListValue == null && initValue != null && initValue.startsWith('{')]
+		if(extraInitAttrs.empty) return ''
+		'''
+			// extra initialization
+			«FOR it : extraInitAttrs.filter[size > 0]»
+				«typeHelpers.getTypeName(it)» «name»InitValues[«size»] = «initValue»;
 				«name» = «name»InitValues;
+			«ENDFOR»
+			«FOR it : extraInitAttrs.filter[size == 0]»
+				«typeHelpers.getTypeName(it)» «name»InitValue = «initValue»;
+				«name» = «name»InitValue;
 			«ENDFOR»
 		'''
 	}
 
 	def String getInitializerListValue(Attribute attribute) {
+		val initValue = attribute.initValue
+		return if(initValue != null && initValue.startsWith('{')) null else initValue
+	}
+
+	def protected getInitValue(Attribute attribute) {
 		switch it : attribute {
-			case defaultValueLiteral != null: if(defaultValueLiteral.startsWith('{')) null else defaultValueLiteral
+			case defaultValueLiteral != null: defaultValueLiteral
 			case type.ref: languageExt.nullPointer
 			default: languageExt.defaultValue(type.type)
 		}

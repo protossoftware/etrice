@@ -212,7 +212,7 @@ class ProcedureHelpers {
 	 * @param attributes a list of {@link Attribute}s
 	 * @return an argument list for the attributes
 	 */
-	def argList(List<Attribute> attributes) {
+	def argList(Iterable<Attribute> attributes) {
 		attributes.map[signatureString + ' ' + name].join(', ')
 	}
 

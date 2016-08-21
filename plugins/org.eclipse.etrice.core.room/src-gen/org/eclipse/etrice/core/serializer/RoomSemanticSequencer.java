@@ -713,7 +713,7 @@ public class RoomSemanticSequencer extends FSMSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (name=ID size=INT? type=RefableType defaultValueLiteral=STRING? docu=Documentation?)
+	 *     (name=ID size=INT? type=RefableType? defaultValueLiteral=STRING? docu=Documentation?)
 	 */
 	protected void sequence_Attribute(EObject context, Attribute semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

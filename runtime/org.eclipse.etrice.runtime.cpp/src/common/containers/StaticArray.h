@@ -87,6 +87,9 @@ public:
 		return *this;
 	}
 
+	/**
+	 * copy assignment from c++ array
+	 */
 	StaticArray<Type, Size>& operator=(const Type data[Size]) {
 		memcpy(this->data, data, sizeof(this->data));
 		return *this;

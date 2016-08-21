@@ -88,7 +88,7 @@ DataClass:
 
 
 Attribute:
-	'Attribute' name=ID ('[' size=INT ']')? ':' type=RefableType ('=' defaultValueLiteral=STRING)? (docu=Documentation)?;
+	'Attribute' name=ID ('[' size=INT ']')? ':' (type=RefableType)? ('=' defaultValueLiteral=STRING)? (docu=Documentation)?;
 
 Operation: StandardOperation | PortOperation;
 

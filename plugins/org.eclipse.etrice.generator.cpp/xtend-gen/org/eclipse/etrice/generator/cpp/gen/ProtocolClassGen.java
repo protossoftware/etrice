@@ -666,8 +666,8 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
         boolean _notEquals = (!Objects.equal(pclass, null));
         if (_notEquals) {
           EList<Attribute> _attributes = pclass.getAttributes();
-          CharSequence _genArrayInitializers = this.initHelper.genArrayInitializers(_attributes);
-          _builder.append(_genArrayInitializers, "\t");
+          CharSequence _genExtraInitializers = this.initHelper.genExtraInitializers(_attributes);
+          _builder.append(_genExtraInitializers, "\t");
         }
       }
       _builder.newLineIfNotEmpty();

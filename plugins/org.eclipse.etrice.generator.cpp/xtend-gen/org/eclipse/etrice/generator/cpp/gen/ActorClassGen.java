@@ -821,8 +821,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.newLine();
       _builder.append("\t");
       EList<Attribute> _attributes = ac.getAttributes();
-      CharSequence _genArrayInitializers = this.initHelper.genArrayInitializers(_attributes);
-      _builder.append(_genArrayInitializers, "\t");
+      CharSequence _genExtraInitializers = this.initHelper.genExtraInitializers(_attributes);
+      _builder.append(_genExtraInitializers, "\t");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
       String _userStructorBody = this._procedureHelpers.userStructorBody(ac, true);

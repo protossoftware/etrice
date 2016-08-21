@@ -33,59 +33,76 @@ public class Initialization {
   private TypeHelpers typeHelpers;
   
   public CharSequence generateCtorInitializerList(final Iterable<? extends CharSequence> items) {
-    StringConcatenation _builder = new StringConcatenation();
+    CharSequence _xblockexpression = null;
     {
-      boolean _hasElements = false;
-      for(final CharSequence s : items) {
-        if (!_hasElements) {
-          _hasElements = true;
-          _builder.append(":", "");
-        } else {
-          _builder.appendImmediate(",", "");
-        }
-        _builder.append(s, "");
-        _builder.newLineIfNotEmpty();
+      boolean _isEmpty = IterableExtensions.isEmpty(items);
+      if (_isEmpty) {
+        return "";
       }
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append(": ");
+      CharSequence _head = IterableExtensions.head(items);
+      _builder.append(_head, "");
+      _builder.newLineIfNotEmpty();
+      {
+        Iterable<? extends CharSequence> _tail = IterableExtensions.tail(items);
+        for(final CharSequence item : _tail) {
+          _builder.append(", ");
+          _builder.append(item, "");
+          _builder.newLineIfNotEmpty();
+        }
+      }
+      _xblockexpression = _builder;
     }
-    return _builder;
+    return _xblockexpression;
   }
   
-  public CharSequence genArrayInitializers(final Iterable<Attribute> attributes) {
+  /**
+   * Generate array and struct initialization
+   */
+  public CharSequence genExtraInitializers(final Iterable<Attribute> attributes) {
     CharSequence _xblockexpression = null;
     {
       final Function1<Attribute, Boolean> _function = new Function1<Attribute, Boolean>() {
         public Boolean apply(final Attribute it) {
           boolean _and = false;
           boolean _and_1 = false;
-          int _size = it.getSize();
-          boolean _greaterThan = (_size > 0);
-          if (!_greaterThan) {
+          String _initializerListValue = Initialization.this.getInitializerListValue(it);
+          boolean _equals = Objects.equal(_initializerListValue, null);
+          if (!_equals) {
             _and_1 = false;
           } else {
-            String _defaultValueLiteral = it.getDefaultValueLiteral();
-            boolean _notEquals = (!Objects.equal(_defaultValueLiteral, null));
+            String _initValue = Initialization.this.getInitValue(it);
+            boolean _notEquals = (!Objects.equal(_initValue, null));
             _and_1 = _notEquals;
           }
           if (!_and_1) {
             _and = false;
           } else {
-            String _defaultValueLiteral_1 = it.getDefaultValueLiteral();
-            boolean _startsWith = _defaultValueLiteral_1.startsWith("{");
+            String _initValue_1 = Initialization.this.getInitValue(it);
+            boolean _startsWith = _initValue_1.startsWith("{");
             _and = _startsWith;
           }
           return Boolean.valueOf(_and);
         }
       };
-      final Iterable<Attribute> arrayInitAttrs = IterableExtensions.<Attribute>filter(attributes, _function);
-      boolean _isEmpty = IterableExtensions.isEmpty(arrayInitAttrs);
+      final Iterable<Attribute> extraInitAttrs = IterableExtensions.<Attribute>filter(attributes, _function);
+      boolean _isEmpty = IterableExtensions.isEmpty(extraInitAttrs);
       if (_isEmpty) {
         return "";
       }
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("// array initialization");
+      _builder.append("// extra initialization");
       _builder.newLine();
       {
-        for(final Attribute it : arrayInitAttrs) {
+        final Function1<Attribute, Boolean> _function_1 = new Function1<Attribute, Boolean>() {
+          public Boolean apply(final Attribute it) {
+            int _size = it.getSize();
+            return Boolean.valueOf((_size > 0));
+          }
+        };
+        Iterable<Attribute> _filter = IterableExtensions.<Attribute>filter(extraInitAttrs, _function_1);
+        for(final Attribute it : _filter) {
           String _typeName = this.typeHelpers.getTypeName(it);
           _builder.append(_typeName, "");
           _builder.append(" ");
@@ -95,8 +112,8 @@ public class Initialization {
           int _size = it.getSize();
           _builder.append(_size, "");
           _builder.append("] = ");
-          String _defaultValueLiteral = it.getDefaultValueLiteral();
-          _builder.append(_defaultValueLiteral, "");
+          String _initValue = this.getInitValue(it);
+          _builder.append(_initValue, "");
           _builder.append(";");
           _builder.newLineIfNotEmpty();
           String _name_1 = it.getName();
@@ -108,12 +125,59 @@ public class Initialization {
           _builder.newLineIfNotEmpty();
         }
       }
+      {
+        final Function1<Attribute, Boolean> _function_2 = new Function1<Attribute, Boolean>() {
+          public Boolean apply(final Attribute it) {
+            int _size = it.getSize();
+            return Boolean.valueOf((_size == 0));
+          }
+        };
+        Iterable<Attribute> _filter_1 = IterableExtensions.<Attribute>filter(extraInitAttrs, _function_2);
+        for(final Attribute it_1 : _filter_1) {
+          String _typeName_1 = this.typeHelpers.getTypeName(it_1);
+          _builder.append(_typeName_1, "");
+          _builder.append(" ");
+          String _name_3 = it_1.getName();
+          _builder.append(_name_3, "");
+          _builder.append("InitValue = ");
+          String _initValue_1 = this.getInitValue(it_1);
+          _builder.append(_initValue_1, "");
+          _builder.append(";");
+          _builder.newLineIfNotEmpty();
+          String _name_4 = it_1.getName();
+          _builder.append(_name_4, "");
+          _builder.append(" = ");
+          String _name_5 = it_1.getName();
+          _builder.append(_name_5, "");
+          _builder.append("InitValue;");
+          _builder.newLineIfNotEmpty();
+        }
+      }
       _xblockexpression = _builder;
     }
     return _xblockexpression;
   }
   
   public String getInitializerListValue(final Attribute attribute) {
+    final String initValue = this.getInitValue(attribute);
+    String _xifexpression = null;
+    boolean _and = false;
+    boolean _notEquals = (!Objects.equal(initValue, null));
+    if (!_notEquals) {
+      _and = false;
+    } else {
+      boolean _startsWith = initValue.startsWith("{");
+      _and = _startsWith;
+    }
+    if (_and) {
+      _xifexpression = null;
+    } else {
+      _xifexpression = initValue;
+    }
+    return _xifexpression;
+  }
+  
+  protected String getInitValue(final Attribute attribute) {
     String _switchResult = null;
     final Attribute it = attribute;
     boolean _matched = false;
@@ -122,15 +186,7 @@ public class Initialization {
       boolean _notEquals = (!Objects.equal(_defaultValueLiteral, null));
       if (_notEquals) {
         _matched=true;
-        String _xifexpression = null;
-        String _defaultValueLiteral_1 = it.getDefaultValueLiteral();
-        boolean _startsWith = _defaultValueLiteral_1.startsWith("{");
-        if (_startsWith) {
-          _xifexpression = null;
-        } else {
-          _xifexpression = it.getDefaultValueLiteral();
-        }
-        _switchResult = _xifexpression;
+        _switchResult = it.getDefaultValueLiteral();
       }
     }
     if (!_matched) {

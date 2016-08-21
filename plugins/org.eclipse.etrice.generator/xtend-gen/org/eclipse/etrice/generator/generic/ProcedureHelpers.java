@@ -41,7 +41,6 @@ import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 /**
@@ -397,7 +396,7 @@ public class ProcedureHelpers {
    * @param attributes a list of {@link Attribute}s
    * @return an argument list for the attributes
    */
-  public String argList(final List<Attribute> attributes) {
+  public String argList(final Iterable<Attribute> attributes) {
     final Function1<Attribute, String> _function = new Function1<Attribute, String>() {
       public String apply(final Attribute it) {
         String _signatureString = ProcedureHelpers.this.signatureString(it);
@@ -406,7 +405,7 @@ public class ProcedureHelpers {
         return (_plus + _name);
       }
     };
-    List<String> _map = ListExtensions.<Attribute, String>map(attributes, _function);
+    Iterable<String> _map = IterableExtensions.<Attribute, String>map(attributes, _function);
     return IterableExtensions.join(_map, ", ");
   }
   

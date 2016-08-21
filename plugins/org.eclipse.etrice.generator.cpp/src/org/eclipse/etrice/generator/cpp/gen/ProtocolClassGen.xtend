@@ -255,7 +255,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 	«portClassName»::«portClassName»(IInterfaceItemOwner* actor, const std::string& name, int localId, int idx)
 		«pclass.generateConstructorInitalizerList('idx')»
 	{
-		«IF pclass != null»«initHelper.genArrayInitializers(pclass.attributes)»«ENDIF»
+		«IF pclass != null»«initHelper.genExtraInitializers(pclass.attributes)»«ENDIF»
 		«IF Main::settings.generateMSCInstrumentation»
 			DebuggingService::getInstance().addPortInstance(*this);
 		«ENDIF»
