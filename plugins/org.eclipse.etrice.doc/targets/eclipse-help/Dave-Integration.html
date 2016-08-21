@@ -14,38 +14,44 @@
 
 	
 
-<h1><a href="#dave-etrice-toolchain-tutorial" name="dave-etrice-toolchain-tutorial"></a>Dave-eTrice Toolchain Tutorial</h1>
+<h1><a href="#dave-etrice-toolchain-tutorial" name="dave-etrice-toolchain-tutorial"></a>DAVE-eTrice Toolchain Tutorial</h1>
 <h2><a href="#introduction" name="introduction"></a>Introduction</h2>
-<p>As you already know, eTrice is a ROOM-Tool that provides a high level modeling language for embedded systems. It is perfectly suited for event driven, real time systems. However, each embedded SW relies on an underlying HW, with components like digital I/Os, Sensors, ADCs, DACs, PWMs and so on to connect the real world. Therefore some driver SW is required to control all this HW components and to provide easy access for the higher level SW. To develop the HW-drivers as well as your application logic without changing the development environment, you need a tool chain that provides both, driver development and high level application development. For Infineon’s XMC™ ARM Cortex M0/M4 devices special support is provided to combine the Dave™ tool for driver development with eTrice for application development. This tutorials will guide you through the first steps.</p>
-<p>The tutorials relies on the XMC4700 Relax Lite Kit. As a precondition you should be familiar with Dave™. It is very easy to adapt the tutorials to any other development board or to your own HW. </p>
+<p>As you already know, eTrice is a ROOM-Tool that provides a high level modeling language for embedded systems. It is perfectly suited for event driven, real time systems. However, each embedded SW relies on an underlying HW, with components like digital I/Os, Sensors, ADCs, DACs, PWMs and so on to connect the real world. Therefore some driver SW is required to control all this HW components and to provide easy access for the higher level SW. To develop the HW-drivers as well as your application logic without changing the development environment, you need a tool chain that provides both, driver development and high level application development. For Infineon’s XMC™ ARM Cortex M0/M4 devices special support is provided to combine the DAVE™ tool for driver development with eTrice for application development. This tutorials will guide you through the first steps.</p>
+<p>The tutorials relies on the XMC4700 Relax Lite Kit. As a precondition you should be familiar with DAVE™. It is very easy to adapt the tutorials to any other development board or to your own HW. </p>
 <h2><a href="#getting-started-without-operating-system" name="getting-started-without-operating-system"></a>Getting Started without Operating System</h2>
 <p>Within this tutorial you will perform the following steps:</p>
 <ul>
-  <li>create a Dave™ basic model</li>
+  <li>create a DAVE CE™ basic model</li>
   <li>run the <em>New Set of eTrice Models</em> wizard</li>
   <li>create a simple blinky model</li>
   <li>generate, build and run the application</li>
   <li>optionally extend the blinky state machine and create a button controller to switch blinky on and off</li>
 </ul>
 <h3><a href="#step-1-" name="step-1-"></a>Step 1:</h3>
-<p>As a starting point you should create a Dave™ project for the target HW. Let’s call the project <em>BlinkyTutorial_RelaxKit4700_ST</em>, where <em>ST</em> stands for <em>Single Threaded</em>. The following APPs should be included:</p>
+<p>As a starting point you should create a DAVE CE™ project for the target HW. Let’s call the project <em>BlinkyTutorial_RelaxKit4700_ST</em>, where <em>ST</em> stands for <em>Single Threaded</em>. The following APPs should be included:</p>
 <ul>
-  <li>Systimer</li>
-  <li>2 * Digital outputs for the two LEDs.</li>
-  <li>2 * Digital inputs for the buttons.</li>
+  <li>SYSTIMER</li>
+  <li>2 * DIGITAL_IO configured as outputs for the two LEDs.</li>
+  <li>2 * DIGITAL_IO configured as inputs for the buttons.</li>
 </ul>
+<p>Hint: For the basic setup and to reduce the initial effort it is sufficient to create just</p>
+<ul>
+  <li>SYSTMIER</li>
+  <li>1 * DIGITAL_IO configured as output for LED1 “LED1_P5_9”</li>
+</ul>
+<p>For STEP 5 and following you will need the full set of IO Pins.</p>
 <p>The resulting project should look like this:</p>
 <p><img src="images/400-DaveBasicProject.png" alt="image"></p>
-<p>Make sure that the pins are configured correctly. It is a good idea to run it on the real HW to verify that everything is configured correctly.</p>
+<p>Make sure that the pins are configured correctly. It is a good idea to run it on the real HW to verify that everything is configured correctly. To setup a debug configuration see also <em>Step 4</em>.</p>
 <h3><a href="#step-2-" name="step-2-"></a>Step 2:</h3>
 <p>Run the *New Set of new eTrice Models" wizard.</p>
-<p>Before you can run the wizard you have to create a folder called <em>model</em>.<br><em>right click on the project -&gt; new -&gt; other</em></p>
+<p>To keep an adequate project structure you should create a new folder called <em>model</em>.<br><em>right click on the project -&gt; new -&gt; other</em></p>
 <p><img src="images/400-DaveCreateFolder.png" alt="image"></p>
 <p>Name the folder <em>model</em></p>
 <p>Run the *New Set of eTrice Models" wizard.<br><em>Right click on the newly created folder -&gt; new -&gt; other</em><br>Select <em>eTrice/C/New Set of eTrice Models</em></p>
 <p><img src="images/400-RunNewModelWizzard.png" alt="image"></p>
 <p>Click <em>Next</em><br>Name the model <em>BlinkyTutorial</em></p>
-<p>Click <em>Next</em><br>Enable the check box <em>Copy C-Runtime into project</em><br>Select <em>ST_XMC_Dave</em> as active platform.<br>Rename main to <em>etStart</em>.</p>
+<p>Click <em>Next</em><br>Enable the check box <em>Copy C-Runtime into project</em><br>Select <em>ST_XMC_Dave</em> as active platform.<br>Rename the eTrice entry function to <em>etStart</em>.</p>
 <p><img src="images/400-SelectRuntime.png" alt="image"></p>
 <p>Click <em>Finish</em></p>
 <p>The resulting project should look like this:</p>
@@ -64,11 +70,11 @@
 <p><img src="images/400-RunGenerator.png" alt="image"></p>
 <p>Make sure that your outline view is activated. <em>Window -&gt; Show View -&gt; Outline</em>.</p>
 <p>Once the code is generated you should build the application. After the first build two additional folders are created:<br>- <em>src-gen</em><br>- <em>src-gen-info</em></p>
-<p>To start the model, you should call etStart from the Dave™ generated main function.</p>
+<p>To start the model, you should call etStart from the DAVE™ generated main function.</p>
 <p><img src="images/400-DaveMain.png" alt="image"></p>
 <h3><a href="#step-3-" name="step-3-"></a>Step 3:</h3>
 <p>Now everything is arranged to start modeling with eTrice. </p>
-<p>The first step is to import some predefined services. Open the <em>BlinkyTutorial.room</em> and add the two import statements:</p>
+<p>One of the benefits of a modeling language like ROOM is, that it is very easy to build model based libraries either domain specific or for common use. Some common services are part of the eTrice distribution so that we can use it out of the box. The first application we want to create is a blinking LED, therefore we use the eTrice timing service. We just have to import the libraries.<br>Open the <em>BlinkyTutorial.room</em> and add the two import statements:</p>
 <pre><code class="room customHighlighted"><span class="keyword">RoomModel</span> BlinkyTutorial {
 
     <span class="keyword">import</span> room.basic.types.* <span class="keyword">from</span> <span class="string">"etrice_c_modellib/Types.room"</span>
@@ -79,13 +85,14 @@
         <span class="keyword">SubSystemRef</span> main: MainSubSystem
     }
 </code></pre>
-<p>In the outline view right click the SubSystem and opne the structure editor:</p>
+<p>Now we can use the timing service within our application. We just need to connect the application and the service.<br>In the outline view right click the SubSystem and open the structure editor:</p>
 <p><img src="images/400-OpenStructureEditorSubsystem.png" alt="image"></p>
 <p>Drag and Drop an <em>ActorRef</em> into the subsystem.</p>
 <p><img src="images/400-AddActorRefDragAndDrop.png" alt="image"></p>
 <p>Select the ActorClass <em>ATimingService</em> and name the reference <em>timing</em>.</p>
 <p>Draw a connection from <em>application</em> to <em>timing</em>.</p>
 <p><img src="images/400-SubSystemWithTimingService.png" alt="image"></p>
+<p>Now we can use the timing service inside our application. We will see it later on. Our application should consist of two new actors and a protocol for communication. One actor should represent the HW, the other actor should implement the blinky behavior which is in fact very simple.Creating new elements like actors or protocols are done in the .room file. </p>
 <p>Open <em>BlinkyTutorial.room</em> and create a new Actor called AHWAbstraction by adding the following text:</p>
 <pre><code class="room customHighlighted"><span class="keyword">ActorClass</span> AHWAbstraction {
     <span class="keyword">Structure</span> {
@@ -106,17 +113,17 @@
 }
 </code></pre>
 <p>Check the outline view to see that the protocol was created.</p>
-<p>In the outline view right click on <em>AHWAbstraction -&gt; Edit Structure</em> to open the structure editor of the actor. </p>
+<p>The <em>AHWAbstarction</em> should be controlled via the <em>POnOff</em> protocol. That means, whenever we send an <em>on</em> message, the LED should be switched on, whenever we send an <em>off</em> message, the LED should be switched off. Therefore we add an <em>Interface Port</em> from type <em>POnOff</em> to the <em>AHWAbstraction</em> actor.<br>In the outline view right click on <em>AHWAbstraction -&gt; Edit Structure</em> to open the structure editor of the actor. </p>
 <p><img src="images/400-OpenStructureEditor.png" alt="image"></p>
 <p>Within the structure editor create a new <em>Interface Port</em></p>
 <p><img src="images/400-CreateInterfacePort.png" alt="image"></p>
 <p>Name the port <em>LED1</em>, the port must be from the newly created protocol type <em>POnOff</em>.</p>
 <p><img src="images/400-NewInterfacePort.png" alt="image"></p>
-<p>Create the state machine of the <em>AHWAbstraction</em> actor:<br>Inside the structure editor, right click on the actor.<br>Select <em>Open Class Behavior</em></p>
+<p>Now we need a state machine which is able to handle the defined messages and to perform the required actions.<br>Create the state machine of the <em>AHWAbstraction</em> actor:<br>Inside the structure editor, right click on the actor.<br>Select <em>Open Class Behavior</em></p>
 <p><img src="images/400-OpenClassBehaviour.png" alt="image"></p>
 <p>The resulting FSM should look like this:</p>
 <p><img src="images/400-HWActorFSM.png" alt="image"></p>
-<p>It is just one state with two transitions. Each transition carries one action to switch a digital IO. Here we have the interface to the Dave™ generated code. The transitions will be triggered from the <em>POnOff</em> protocol.</p>
+<p>It is just one state with two transitions. Each transition carries one action to switch a digital IO. Here we have the interface to the DAVE™ generated code. The transitions will be triggered from the <em>POnOff</em> protocol.</p>
 <p>The resulting textual representation should look like this:</p>
 <pre><code class="room customHighlighted"><span class="keyword">ActorClass</span> AHWAbstraction {
     <span class="keyword">Interface</span> {
@@ -152,7 +159,8 @@
     }
 }
 </code></pre>
-<p>Now create an ActorClass called <em>ABlinky</em> by adding the following text:</p>
+<p>Please notice that the <em>off</em> message switches the LED off and vice versa.</p>
+<p>To implement the behavior of the <em>ABlinky</em> actor, we just need to create a new actor, add a port for communication and implement the behavior by adding a state machine with appropriate triggers and actions.<br>Create an ActorClass called <em>ABlinky</em> by adding the following text:</p>
 <pre><code class="room customHighlighted"><span class="keyword">ActorClass</span> ABlinky {
     <span class="keyword">Structure</span> {
         <span class="keyword">SAP</span> timer: PTimer
@@ -160,7 +168,8 @@
 }
 </code></pre>
 <p>Recognize that the structure contains a Service Access Point (SAP) which allows you to use the timing service.</p>
-<p>Now, add an additional interface port called <em>out</em> as you did it before and make it a <em>conjugated</em> port. Create the following state machine:</p>
+<p>Now, add an additional interface port called <em>out</em> as you did it before and make it a <em>conjugated</em> port. We need to declare the type of the interface (protocol) just once. To define the direction (in or out messages) we need one <em>normal</em> port (*AHWAbstraction*) and one <em>conjugated</em> port (*ABlinky*).</p>
+<p>To define the behavior, create the following state machine:</p>
 <p><img src="images/400-BlinkyFSM.png" alt="image"></p>
 <p>On the initial transition the timer will be started. On the transitions between the states a message <em>on</em> or <em>off</em> will be sent via the <em>out</em> port.</p>
 <p>The resulting textual representation looks like this:</p>
@@ -312,8 +321,17 @@
 <p>The model is finished know.<br>If you missed some steps in between, you also can copy the complete model to your .room file.</p>
 <h3><a href="#step-4-" name="step-4-"></a>Step 4:</h3>
 <p>Generate, build and run the application.</p>
-<p>Generate the application as you did it in step1. Build the generated code and download it to the target as you normally do it.<br>The LED1 should blink in a 300ms interval.</p>
+<p>Generate the application as you did it in step2 (Right click on <em>gen_BlinkyTutorial.launch -&gt; Run As -&gt; gen_BlinkyTutorial</em>). Once the code is generated, you are back in your normal C-Development and you can compile and debug your code as usual. Build the generated code and download it to the target as you normally do it.</p>
+<p>Right click on the project -&gt; Build Project<br>Right click on the project -&gt; Debug As -&gt; DAVE C/C++ Application</p>
+<p>The LED1 should blink in a 300ms interval.</p>
 <p>Congratulations, you have built you first eTrice Application on top of the Dave™ drivers!!!</p>
+<p>Hint: If you start the debugger the first time (for a new project) it might be necessary to setup the debug configuration:</p>
+<p>Right click on the project -&gt; Debug As -&gt; Debug Configurations…</p>
+<p><img src="images/400-CreateDebugConfig.png" alt="image"></p>
+<p>Select the <em>GDB Segger J_link Debugging</em> and press the <em>New</em> button to create a new debug configuration.<br><img src="images/400-SeggerDebugConfig.png" alt="image"></p>
+<p>Keep all default settings and press <em>Debug</em><br><img src="images/400-SeggerDebugConfigTutorial.png" alt="image"></p>
+<p>Once the debug configuration is created you can start the debugger either with:<br>Right click on the project -&gt; Debug As -&gt; DAVE C/C++ Application<br>or via the Debug Button: </p>
+<p><img src="images/400-StartDebugWithIcon.png" alt="image"></p>
 <h3><a href="#step-5-" name="step-5-"></a>Step 5:</h3>
 <p>As further exercise you can extend the model in the following way:</p>
 <ul>

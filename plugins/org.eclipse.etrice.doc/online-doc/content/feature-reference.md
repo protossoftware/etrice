@@ -285,6 +285,12 @@ An ActorClass consists of three main parts:
 	 </td>
 	<td>The LogicalModel describes the logical structure and behavior of a ROOM application</td>
 </tr>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;">Is edited by:</td>
+	<td>[GraphicalStructureEditor](#graphicalstructureeditor)
+	 </td>
+	<td>The Structure Editor allows to edit the ActorClass' Structure in a convenient way. It is possible to create and arrange actor references and ports and to create bindings and layer connections.</td>
+</tr>
 </tbody>
 </table>
 
@@ -356,6 +362,17 @@ An ActorRef is an instance of an ActorClass
 	<td>[SubSystemClass](#subsystemclass)
 	 </td>
 	<td>A SubSystem is the topmost building block of the executable part of an system</td>
+</tr>
+<tr>
+	<td rowspan="2" style="white-space: nowrap;">Is edited by:</td>
+	<td>[GraphicalStructureEditor](#graphicalstructureeditor)
+	 </td>
+	<td>The Structure Editor allows to edit the ActorClass' Structure in a convenient way. It is possible to create and arrange actor references and ports and to create bindings and layer connections.</td>
+</tr>
+<tr>
+	<td>[ActorRefPropertyDialog](#actorrefpropertydialog)
+	 </td>
+	<td>A dialog to edit properties of an ActorRef.</td>
 </tr>
 </tbody>
 </table>
@@ -705,6 +722,12 @@ ActorClass ExampleActorClass {
 	<td>[SubSystemClass](#subsystemclass)
 	 </td>
 	<td>A SubSystem is the topmost building block of the executable part of an system</td>
+</tr>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;">Is edited by:</td>
+	<td>[GraphicalStructureEditor](#graphicalstructureeditor)
+	 </td>
+	<td>The Structure Editor allows to edit the ActorClass' Structure in a convenient way. It is possible to create and arrange actor references and ports and to create bindings and layer connections.</td>
 </tr>
 </tbody>
 </table>
@@ -1376,6 +1399,12 @@ A LayerConnection associates a SPP to an ActorRef, resulting in an connection of
 	 </td>
 	<td>A SubSystem is the topmost building block of the executable part of an system</td>
 </tr>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;">Is edited by:</td>
+	<td>[GraphicalStructureEditor](#graphicalstructureeditor)
+	 </td>
+	<td>The Structure Editor allows to edit the ActorClass' Structure in a convenient way. It is possible to create and arrange actor references and ports and to create bindings and layer connections.</td>
+</tr>
 </tbody>
 </table>
 
@@ -1647,6 +1676,17 @@ A connection of Ports is denoted by a Binding.
 	<td>[ActorClass](#actorclass)
 	 </td>
 	<td>An actor is the basic structural building block for building systems with ROOM</td>
+</tr>
+<tr>
+	<td rowspan="2" style="white-space: nowrap;">Is edited by:</td>
+	<td>[GraphicalStructureEditor](#graphicalstructureeditor)
+	 </td>
+	<td>The Structure Editor allows to edit the ActorClass' Structure in a convenient way. It is possible to create and arrange actor references and ports and to create bindings and layer connections.</td>
+</tr>
+<tr>
+	<td>[PortPropertyDialog](#portpropertydialog)
+	 </td>
+	<td>A dialog to edit properties of an Port.</td>
 </tr>
 <tr>
 	<td rowspan="2" style="white-space: nowrap;">Is used by:</td>
@@ -1976,6 +2016,12 @@ A Service Access Point is similar to a Port, but uses a LayerConnection for wiri
 	<td>An actor is the basic structural building block for building systems with ROOM</td>
 </tr>
 <tr>
+	<td rowspan="1" style="white-space: nowrap;">Is edited by:</td>
+	<td>[GraphicalStructureEditor](#graphicalstructureeditor)
+	 </td>
+	<td>The Structure Editor allows to edit the ActorClass' Structure in a convenient way. It is possible to create and arrange actor references and ports and to create bindings and layer connections.</td>
+</tr>
+<tr>
 	<td rowspan="1" style="white-space: nowrap;">Is used by:</td>
 	<td>[LayerConnection](#layerconnection)
 	 : SAPoint</td>
@@ -2024,6 +2070,12 @@ A Service Provision Point is the counterpart of a SAP
 	<td>[ActorClass](#actorclass)
 	 </td>
 	<td>An actor is the basic structural building block for building systems with ROOM</td>
+</tr>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;">Is edited by:</td>
+	<td>[SPPPropertyDialog](#spppropertydialog)
+	 </td>
+	<td>A dialog to edit properties of a SPP.</td>
 </tr>
 <tr>
 	<td rowspan="2" style="white-space: nowrap;">Is used by:</td>
@@ -2121,6 +2173,12 @@ In ROOM each actor class can implement its behavior using a state machine. Event
 	<td>[ActorClass](#actorclass)
 	 </td>
 	<td>An actor is the basic structural building block for building systems with ROOM</td>
+</tr>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;">Is edited by:</td>
+	<td>[GraphicalBehaviorEditor](#graphicalbehavioreditor)
+	 </td>
+	<td>The GraphicalBehaviorEditor allows to edit the ActorClass' StateMachine. It is possible to create (hierarchical) states and transitions to model complex behavior in a convenient way.</td>
 </tr>
 </tbody>
 </table>
@@ -2542,6 +2600,21 @@ The dialog is used to edit an existing ActorRef of an ActorClass. It is also sho
 </tbody>
 </table>
 
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3">Feature Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;">Is contained in:</td>
+	<td>[GraphicalStructureEditor](#graphicalstructureeditor)
+	 </td>
+	<td>The Structure Editor allows to edit the ActorClass' Structure in a convenient way. It is possible to create and arrange actor references and ports and to create bindings and layer connections.</td>
+</tr>
+</tbody>
+</table>
 
 
 ---
@@ -2572,6 +2645,21 @@ The dialog is used to edit an existing Port of an ActorClass. It is also shown w
 </tbody>
 </table>
 
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3">Feature Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;">Is contained in:</td>
+	<td>[GraphicalStructureEditor](#graphicalstructureeditor)
+	 </td>
+	<td>The Structure Editor allows to edit the ActorClass' Structure in a convenient way. It is possible to create and arrange actor references and ports and to create bindings and layer connections.</td>
+</tr>
+</tbody>
+</table>
 
 
 ---
@@ -2602,6 +2690,21 @@ The dialog is used to edit an existing SPP of an ActorClass. It is also shown wh
 </tbody>
 </table>
 
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3">Feature Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;">Is contained in:</td>
+	<td>[GraphicalStructureEditor](#graphicalstructureeditor)
+	 </td>
+	<td>The Structure Editor allows to edit the ActorClass' Structure in a convenient way. It is possible to create and arrange actor references and ports and to create bindings and layer connections.</td>
+</tr>
+</tbody>
+</table>
 
 
 ---
@@ -2617,6 +2720,21 @@ Selecting an entry from the palette and clicking into the diagram, creates the e
 
 
 
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3">Feature Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;">Is contained in:</td>
+	<td>[GraphicalStructureEditor](#graphicalstructureeditor)
+	 </td>
+	<td>The Structure Editor allows to edit the ActorClass' Structure in a convenient way. It is possible to create and arrange actor references and ports and to create bindings and layer connections.</td>
+</tr>
+</tbody>
+</table>
 
 
 ---
@@ -2664,6 +2782,21 @@ Shows the structure of the current opened model in the textual editor. Select th
 
 
 
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3">Feature Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;">Is contained in:</td>
+	<td>[TextualROOMEditor](#textualroomeditor)
+	 </td>
+	<td>Textual model editor</td>
+</tr>
+</tbody>
+</table>
 
 
 ---
@@ -2976,6 +3109,8 @@ The MSCLogging is activated by default, but can be set manually in the [Generati
 
 
 
+[TemplateFeature]: #templatefeature
+[Feature123]: #feature123
 [CCodeGenerator]: #ccodegenerator
 [JavaCodeGenerator]: #javacodegenerator
 [CPPCodeGenerator]: #cppcodegenerator
@@ -3015,3 +3150,14 @@ The MSCLogging is activated by default, but can be set manually in the [Generati
 [SAP]: #sap
 [ServiceImplementation]: #serviceimplementation
 [SPP]: #spp
+[TextualROOMEditor]: #textualroomeditor
+[OutlineView]: #outlineview
+[GraphicalBehaviorEditor]: #graphicalbehavioreditor
+[GraphicalStructureEditor]: #graphicalstructureeditor
+[StructureEditorPalette]: #structureeditorpalette
+[ActorRefPropertyDialog]: #actorrefpropertydialog
+[PortPropertyDialog]: #portpropertydialog
+[SPPPropertyDialog]: #spppropertydialog
+[SynatxColoring]: #synatxcoloring
+[MarkdownCheatsheet]: #markdowncheatsheet
+[MarkdownExample]: #markdownexample
