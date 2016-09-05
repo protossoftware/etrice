@@ -19,4 +19,6 @@ RoomModel room.basic.types {
 
 	ExternalType string -> 'std::string' default '""'
 	ExternalType voidType -> 'void' default 'NULL'
+	ExternalType string32 -> 'StaticString<32>' default '""'
+	
 }
