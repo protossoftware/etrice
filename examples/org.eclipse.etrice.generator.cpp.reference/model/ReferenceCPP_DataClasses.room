@@ -25,15 +25,17 @@ RoomModel ReferenceCPP_DataClasses {
 		Attribute attribute_boolean : boolean
 		Attribute attribute_char : char
 		Attribute attribute_charPtr : charPtr
-// TODO: string does not compile
-// 		Attribute attribute_string : string 
-//		Attribute attribute_voidTypeRef : voidType ref
+
+		// strings
+ 		Attribute attribute_string : string  		// maps to std::string attribute_string; (standard template library)
+ 		Attribute attribute_string32 : string32 	// maps to StaticString<32> attribute_string32; (in org.eclipse.etrice.runtime.cpp\src\common\containers)
+
+		// references 		 
+		Attribute attribute_voidTypeRef : voidType ref
 		
 		// arrays
-		// TODO: arrays for attributes do not compile
-//		Attribute attribute_char_array[4] : char
-//		Attribute attribute_int32_array[4] : int32
-		
-		
+		Attribute attribute_char_array[4] : char  	// maps to StaticArray<char, 4> attribute_char_array; (in org.eclipse.etrice.runtime.cpp\src\common\containers)
+		Attribute attribute_int32_array[4] : int32	// maps to StaticArray<int32, 4> attribute_int32_array; (in org.eclipse.etrice.runtime.cpp\src\common\containers)
 	} 
 }
+

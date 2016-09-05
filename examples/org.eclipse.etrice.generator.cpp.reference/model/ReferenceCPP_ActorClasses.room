@@ -5,6 +5,7 @@ RoomModel ReferenceCPP_ActorClasses {
 	import ReferenceCPP_ProtocolClasses.* from "ReferenceCPP_ProtocolClasses.room"
 
 	import room.basic.annotations.* from "../../org.eclipse.etrice.modellib.cpp/model/Annotations.room"
+
 	import room.basic.types.* from "../../org.eclipse.etrice.modellib.cpp/model/Types.room"
 
 	ActorClass ActorToplevel [ "instantiate all element to enforce code generation" ] {
@@ -24,22 +25,25 @@ RoomModel ReferenceCPP_ActorClasses {
 			Attribute allDatatypes: DAllDatatypes
 			Attribute char1: char
 			Attribute char2: char
-			Attribute charArray[100]: char
+			Attribute charArray [ 100 ]: char
 			external Port portSend
 		}
 		Behavior {
 			StateMachine {
 				State state0 {
 					entry 
-				
 				{
-						"sprintf(charArray, \"Hallo eTrice\");"
-						"DAllDatatypes data(-1, -2, -3, -4, 1,2,3,4, 123.456, -123.456, false, \'A\', charArray);"
-						"portSend.sendAllDatatypes(data);"
+						"\tsprintf(charArray.getData(), \"Hallo eTrice\"); // no very secure -> only for testcase"
+						"\t//DAllDatatypes data(-1, -2, -3, -4, 1,2,3,4, 123.456, -123.456, false, \'A\', charArray);"
+						"\tDAllDatatypes data;"
+						"\tdata.attribute_char_array[3]=65;"
+						"\tdata.attribute_string32 = \"Hallo\";"
+						"\tdata.attribute_charPtr = charArray.getData();"
+						"\tportSend.sendAllDatatypes(data);"
 					}
 				}
-			Transition init: initial -> state0
-			State state1
+				Transition init: initial -> state0
+				State state1
 				Transition tr0: state0 -> state1 {
 					triggers {
 						<mirrorAllDatatypes: portSend>
@@ -48,6 +52,8 @@ RoomModel ReferenceCPP_ActorClasses {
 				
 				{
 						"//printf(\"%d, %ld, %f, %d, %c, %s\\n\", data.attribute_int8, data.attribute_uint64, data.attribute_float64, data.attribute_boolean, data.attribute_char, data.attribute_charPtr);"
+						"// TODO: code proposals for data. do not work"
+						"printf(\"\\nReceived: (%c, %s, %s)\\n\", data.attribute_char_array[3], data.attribute_string32.getData(), data.attribute_charPtr);"
 					}
 				}
 			}
@@ -63,15 +69,27 @@ RoomModel ReferenceCPP_ActorClasses {
 			external Port portMirror
 		}
 		Behavior {
-			StateMachine { State state0
+			StateMachine {
+				State state0
 				State state1
 				Transition init: initial -> state0
 				Transition tr0: state0 -> state1 {
 					triggers {
 						<sendAllDatatypes: portMirror>
 					}
-					action {
+					action 
+				
+				
+				
+				{
 						"allDatatypes = data;"
+						"printf(\"\\nEmpfangen: (%c, %s, %s)\\n\", data.attribute_char_array[3], data.attribute_string32.getData(), data.attribute_charPtr);"
+						""
+						"allDatatypes.attribute_char_array[3]++;"
+						"allDatatypes.attribute_string32+=\"2\";"
+						"allDatatypes.attribute_charPtr[0]=\'X\';"
+						"printf(\"\\nGesendet: (%c, %s, %s)\\n\", allDatatypes.attribute_char_array[3], allDatatypes.attribute_string32.getData(), allDatatypes.attribute_charPtr);"
+						""
 						"portMirror.mirrorAllDatatypes(allDatatypes);"
 					}
 				}
