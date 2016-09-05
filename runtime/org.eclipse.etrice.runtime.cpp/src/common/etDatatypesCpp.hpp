@@ -16,6 +16,7 @@
 #include "etDatatypes.h"
 
 #include "common/containers/StaticArray.h"
+#include "common/containers/StaticString.h"
 #include "etUnit/etUnit.h" // TODO move to tests
 #include <string>
 
