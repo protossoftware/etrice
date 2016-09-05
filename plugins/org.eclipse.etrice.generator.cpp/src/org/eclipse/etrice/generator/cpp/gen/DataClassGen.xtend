@@ -151,7 +151,7 @@ class DataClassGen {
 			if (this == &rhs) { return *this; };
 			«IF dc.base!=null»«dc.base.name»::operator=(rhs);«ENDIF»
 			«FOR attr : dc.attributes»
-				this->«attr.name» = «attr.name»;
+				this->«attr.name» = rhs.«attr.name»;
 			«ENDFOR»
 			return *this;
 		}
