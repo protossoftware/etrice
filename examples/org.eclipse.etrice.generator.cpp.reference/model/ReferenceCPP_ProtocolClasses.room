@@ -20,4 +20,24 @@ RoomModel ReferenceCPP_ProtocolClasses {
 			Message mirrorCharPtr(data: charPtr)
 		}
 	}
+	ProtocolClass PNumberedMessages {
+		incoming {
+			Message message0()
+			Message message1()
+			Message message2()
+			Message message3()
+			Message message4()
+			Message message5()
+			Message message6()
+		}
+		outgoing {
+			Message reply0()
+			Message reply1()
+			Message reply2()
+			Message reply3()
+			Message reply4()
+			Message reply5()
+			Message reply6()
+		}
+	}
 }

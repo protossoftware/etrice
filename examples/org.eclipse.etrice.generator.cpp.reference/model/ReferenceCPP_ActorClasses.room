@@ -14,6 +14,9 @@ RoomModel ReferenceCPP_ActorClasses {
 			ActorRef actorWithImplementationSubclass: ActorWithImplementationSubclass
 			Binding mirrorDataClasses.portMirror and allDataClasses.portSend
 			ActorRef mirrorDataClasses: ActorAllDataClassesMirror
+			Binding derived.port and mirror.port
+			ActorRef mirror: GenericMirror
+			ActorRef derived: InheritanceDerivedClassSimple
 		}
 	}
 
@@ -31,8 +34,7 @@ RoomModel ReferenceCPP_ActorClasses {
 		Behavior {
 			StateMachine {
 				State state0 {
-					entry 
-				{
+					entry {
 						"\tsprintf(charArray.getData(), \"Hallo eTrice\"); // no very secure -> only for testcase"
 						"\t//DAllDatatypes data(-1, -2, -3, -4, 1,2,3,4, 123.456, -123.456, false, \'A\', charArray);"
 						"\tDAllDatatypes data;"
@@ -48,9 +50,7 @@ RoomModel ReferenceCPP_ActorClasses {
 					triggers {
 						<mirrorAllDatatypes: portSend>
 					}
-					action 
-				
-				{
+					action {
 						"//printf(\"%d, %ld, %f, %d, %c, %s\\n\", data.attribute_int8, data.attribute_uint64, data.attribute_float64, data.attribute_boolean, data.attribute_char, data.attribute_charPtr);"
 						"// TODO: code proposals for data. do not work"
 						"printf(\"\\nReceived: (%c, %s, %s)\\n\", data.attribute_char_array[3], data.attribute_string32.getData(), data.attribute_charPtr);"
@@ -77,11 +77,7 @@ RoomModel ReferenceCPP_ActorClasses {
 					triggers {
 						<sendAllDatatypes: portMirror>
 					}
-					action 
-				
-				
-				
-				{
+					action {
 						"allDatatypes = data;"
 						"printf(\"\\nEmpfangen: (%c, %s, %s)\\n\", data.attribute_char_array[3], data.attribute_string32.getData(), data.attribute_charPtr);"
 						""
@@ -141,6 +137,143 @@ RoomModel ReferenceCPP_ActorClasses {
 					}
 					action {
 						"//"
+					}
+				}
+			}
+		}
+	}
+
+	abstract ActorClass InheritanceBaseClassSimple {
+		Interface {
+			conjugated Port port: PNumberedMessages
+		}
+		Structure {
+			external Port port
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> state1
+				State state0 {
+					subgraph {
+						EntryPoint tp0
+						ExitPoint tp1
+					}
+				}
+				Transition tr0: tp1 of state0 -> tp0 of state2
+				State state1 {
+					entry {
+						"port.message2();"
+					}
+				}
+				Transition tr1: state1 -> tp0 of state0 {
+					triggers {
+						<reply2: port>
+					}
+				}
+				State state2 {
+					subgraph {
+						EntryPoint tp0
+						ExitPoint tp1
+					}
+				}
+				Transition tr2: tp1 of state2 -> Done
+				State Done
+			}
+		}
+	}
+
+	ActorClass InheritanceDerivedClassSimple extends InheritanceBaseClassSimple {
+		Behavior {
+			StateMachine { RefinedState state0 {
+					subgraph {
+						State state0
+					{
+							entry {
+								"port.message0();"
+							}
+						}
+						Transition tr0: my tp0 -> state0
+						Transition tr1: state0 -> my tp1 {
+							triggers {
+								<reply0: port>
+							}
+						}
+					}
+				}
+			RefinedState state2 {
+					subgraph {
+						Transition tr0: my tp0 -> my tp1
+					}
+				}
+			}
+		}
+	}
+
+	ActorClass GenericMirror {
+		Interface {
+			Port port: PNumberedMessages
+		}
+		Structure {
+			external Port port
+		}
+		Behavior {
+			StateMachine {
+				State Idle
+				Transition init: initial -> Idle
+				Transition tr0: Idle -> Idle {
+					triggers {
+						<message0: port>
+					}
+					action {
+						"port.reply0();"
+					}
+				}
+				Transition tr1: Idle -> Idle {
+					triggers {
+						<message1: port>
+					}
+					action {
+						"port.reply1();"
+					}
+				}
+				Transition tr2: Idle -> Idle {
+					triggers {
+						<message2: port>
+					}
+					action {
+						"port.reply2();"
+					}
+				}
+				Transition tr3: Idle -> Idle {
+					triggers {
+						<message3: port>
+					}
+					action {
+						"port.reply3();"
+					}
+				}
+				Transition tr4: Idle -> Idle {
+					triggers {
+						<message4: port>
+					}
+					action {
+						"port.reply4();"
+					}
+				}
+				Transition tr5: Idle -> Idle {
+					triggers {
+						<message5: port>
+					}
+					action {
+						"port.reply5();"
+					}
+				}
+				Transition tr6: Idle -> Idle {
+					triggers {
+						<message6: port>
+					}
+					action {
+						"port.reply6();"
 					}
 				}
 			}
