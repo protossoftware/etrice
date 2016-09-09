@@ -17,6 +17,9 @@
 
 #include "common/containers/StaticArray.h"
 #include "common/containers/StaticString.h"
+
+typedef etRuntime::StaticString<32> string32;
+
 #include "etUnit/etUnit.h" // TODO move to tests
 #include <string>
 

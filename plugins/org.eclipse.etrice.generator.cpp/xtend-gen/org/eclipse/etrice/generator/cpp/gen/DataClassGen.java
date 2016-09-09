@@ -29,8 +29,8 @@ import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.cpp.gen.CppExtensions;
+import org.eclipse.etrice.generator.cpp.gen.CppProcedureHelpers;
 import org.eclipse.etrice.generator.cpp.gen.Initialization;
-import org.eclipse.etrice.generator.generic.ProcedureHelpers;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
@@ -57,7 +57,7 @@ public class DataClassGen {
   
   @Inject
   @Extension
-  private ProcedureHelpers helpers;
+  private CppProcedureHelpers helpers;
   
   @Inject
   private Initialization initHelper;
@@ -227,15 +227,6 @@ public class DataClassGen {
     _builder.append("& rhs);");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
-    String _name_10 = dc.getName();
-    _builder.append(_name_10, "\t");
-    _builder.append("& operator=(const ");
-    String _name_11 = dc.getName();
-    _builder.append(_name_11, "\t");
-    _builder.append("& rhs);");
-    _builder.newLineIfNotEmpty();
-    _builder.newLine();
-    _builder.append("\t");
     _builder.append("// constructor using fields");
     _builder.newLine();
     _builder.append("\t");
@@ -244,16 +235,26 @@ public class DataClassGen {
       boolean _isEmpty = _allAttributes.isEmpty();
       boolean _not = (!_isEmpty);
       if (_not) {
-        String _name_12 = dc.getName();
-        _builder.append(_name_12, "\t");
+        String _name_10 = dc.getName();
+        _builder.append(_name_10, "\t");
         _builder.append("(");
         List<Attribute> _allAttributes_1 = this._roomHelpers.getAllAttributes(dc);
-        String _argList = this.helpers.argList(_allAttributes_1);
-        _builder.append(_argList, "\t");
+        String _constArgList = this.helpers.constArgList(_allAttributes_1);
+        _builder.append(_constArgList, "\t");
         _builder.append(");");
       }
     }
     _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("\t");
+    String _name_11 = dc.getName();
+    _builder.append(_name_11, "\t");
+    _builder.append("& operator=(const ");
+    String _name_12 = dc.getName();
+    _builder.append(_name_12, "\t");
+    _builder.append("& rhs);");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
     _builder.append("};");
     _builder.newLine();
     _builder.newLine();
@@ -369,8 +370,8 @@ public class DataClassGen {
         _builder.append(_name_7, "");
         _builder.append("(");
         List<Attribute> _allAttributes_1 = this._roomHelpers.getAllAttributes(dc);
-        String _argList = this.helpers.argList(_allAttributes_1);
-        _builder.append(_argList, "");
+        String _constArgList = this.helpers.constArgList(_allAttributes_1);
+        _builder.append(_constArgList, "");
         _builder.append(")");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");

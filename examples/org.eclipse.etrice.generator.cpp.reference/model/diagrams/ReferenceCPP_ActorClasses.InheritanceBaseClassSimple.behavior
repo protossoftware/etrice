@@ -4,7 +4,7 @@
   <link>
     <businessObjects href="../ReferenceCPP_ActorClasses.room#ActorClass:InheritanceBaseClassSimple"/>
   </link>
-  <children xsi:type="pi:ContainerShape" active="true">
+  <children xsi:type="pi:ContainerShape" visible="true" active="true">
     <properties key="obj-type" value="sg"/>
     <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="880" height="580" x="40" y="40">
       <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" background="//@colors.1" foreground="//@colors.2" lineWidth="4" transparency="0.5" width="800" height="500" x="40" y="40" cornerHeight="20" cornerWidth="20"/>
@@ -13,10 +13,10 @@
     <link>
       <businessObjects href="../ReferenceCPP_ActorClasses.room#StateGraph:InheritanceBaseClassSimple$sg"/>
     </link>
-    <children>
+    <children visible="true">
       <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="800" height="80" y="40" font="//@fonts.1" horizontalAlignment="ALIGNMENT_RIGHT" verticalAlignment="ALIGNMENT_TOP" value="/"/>
     </children>
-    <children xsi:type="pi:ContainerShape" active="true">
+    <children xsi:type="pi:ContainerShape" visible="true" active="true">
       <properties key="obj-type" value="trp"/>
       <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="40" height="40" x="100" y="100">
         <graphicsAlgorithmChildren xsi:type="al:Ellipse" background="//@colors.1" foreground="//@colors.2" lineWidth="2" transparency="0.0" width="20" height="20" x="10" y="10"/>
@@ -25,11 +25,11 @@
         <businessObjects href="../ReferenceCPP_ActorClasses.room#StateGraph:InheritanceBaseClassSimple$sg"/>
       </link>
       <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.0" referencedGraphicsAlgorithm="//@children.0/@children.1/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
-      <children>
+      <children visible="true">
         <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="40" height="20" y="10" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="I"/>
       </children>
     </children>
-    <children xsi:type="pi:ContainerShape" active="true">
+    <children xsi:type="pi:ContainerShape" visible="true" active="true">
       <properties key="obj-type" value="state"/>
       <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="208" height="123" x="216" y="227">
         <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="148" height="63" x="30" y="30" cornerHeight="20" cornerWidth="20">
@@ -56,10 +56,10 @@
         <businessObjects href="../ReferenceCPP_ActorClasses.room#SimpleState:InheritanceBaseClassSimple$state0"/>
       </link>
       <anchors xsi:type="pi:ChopboxAnchor" referencedGraphicsAlgorithm="//@children.0/@children.2/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
-      <children>
+      <children visible="true">
         <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="148" height="63" x="30" y="30" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="state0"/>
       </children>
-      <children xsi:type="pi:ContainerShape" active="true">
+      <children xsi:type="pi:ContainerShape" visible="true" active="true">
         <properties key="obj-type" value="trp"/>
         <properties key="item-kind" value="entp"/>
         <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="60" height="60" x="73">
@@ -77,11 +77,11 @@
           <businessObjects href="../ReferenceCPP_ActorClasses.room#EntryPoint:InheritanceBaseClassSimple$state0$tp0"/>
         </link>
         <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.2"/>
-        <children>
+        <children visible="true">
           <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="60" height="22" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" verticalAlignment="ALIGNMENT_BOTTOM" value="tp0"/>
         </children>
       </children>
-      <children xsi:type="pi:ContainerShape" active="true">
+      <children xsi:type="pi:ContainerShape" visible="true" active="true">
         <properties key="obj-type" value="trp"/>
         <properties key="item-kind" value="extp"/>
         <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="60" height="60" y="38">
@@ -97,12 +97,12 @@
           <businessObjects href="../ReferenceCPP_ActorClasses.room#ExitPoint:InheritanceBaseClassSimple$state0$tp1"/>
         </link>
         <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.1"/>
-        <children>
+        <children visible="true">
           <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="60" height="22" y="37" font="//@fonts.0" verticalAlignment="ALIGNMENT_TOP" value="tp1"/>
         </children>
       </children>
     </children>
-    <children xsi:type="pi:ContainerShape" active="true">
+    <children xsi:type="pi:ContainerShape" visible="true" active="true">
       <properties key="obj-type" value="state"/>
       <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="226" height="131" x="198" y="64">
         <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="166" height="71" x="30" y="30" cornerHeight="20" cornerWidth="20">
@@ -129,11 +129,11 @@
         <businessObjects href="../ReferenceCPP_ActorClasses.room#SimpleState:InheritanceBaseClassSimple$state1"/>
       </link>
       <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.2" incomingConnections="//@connections.0" referencedGraphicsAlgorithm="//@children.0/@children.3/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
-      <children>
+      <children visible="true">
         <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="166" height="71" x="30" y="30" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="state1"/>
       </children>
     </children>
-    <children xsi:type="pi:ContainerShape" active="true">
+    <children xsi:type="pi:ContainerShape" visible="true" active="true">
       <properties key="obj-type" value="state"/>
       <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="208" height="123" x="207" y="358">
         <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="148" height="63" x="30" y="30" cornerHeight="20" cornerWidth="20">
@@ -160,10 +160,10 @@
         <businessObjects href="../ReferenceCPP_ActorClasses.room#SimpleState:InheritanceBaseClassSimple$state2"/>
       </link>
       <anchors xsi:type="pi:ChopboxAnchor" referencedGraphicsAlgorithm="//@children.0/@children.4/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
-      <children>
+      <children visible="true">
         <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="148" height="63" x="30" y="30" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="state2"/>
       </children>
-      <children xsi:type="pi:ContainerShape" active="true">
+      <children xsi:type="pi:ContainerShape" visible="true" active="true">
         <properties key="obj-type" value="trp"/>
         <properties key="item-kind" value="entp"/>
         <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="60" height="60" x="60">
@@ -181,11 +181,11 @@
           <businessObjects href="../ReferenceCPP_ActorClasses.room#EntryPoint:InheritanceBaseClassSimple$state2$tp0"/>
         </link>
         <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.1"/>
-        <children>
+        <children visible="true">
           <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="60" height="22" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" verticalAlignment="ALIGNMENT_BOTTOM" value="tp0"/>
         </children>
       </children>
-      <children xsi:type="pi:ContainerShape" active="true">
+      <children xsi:type="pi:ContainerShape" visible="true" active="true">
         <properties key="obj-type" value="trp"/>
         <properties key="item-kind" value="extp"/>
         <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="60" height="60" x="148" y="29">
@@ -201,12 +201,12 @@
           <businessObjects href="../ReferenceCPP_ActorClasses.room#ExitPoint:InheritanceBaseClassSimple$state2$tp1"/>
         </link>
         <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.3"/>
-        <children>
+        <children visible="true">
           <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="60" height="22" font="//@fonts.0" horizontalAlignment="ALIGNMENT_RIGHT" verticalAlignment="ALIGNMENT_BOTTOM" value="tp1"/>
         </children>
       </children>
     </children>
-    <children xsi:type="pi:ContainerShape" active="true">
+    <children xsi:type="pi:ContainerShape" visible="true" active="true">
       <properties key="obj-type" value="state"/>
       <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="208" height="123" x="541" y="330">
         <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" background="//@colors.3" foreground="//@colors.2" lineWidth="1" transparency="0.0" width="148" height="63" x="30" y="30" cornerHeight="20" cornerWidth="20">
@@ -233,7 +233,7 @@
         <businessObjects href="../ReferenceCPP_ActorClasses.room#SimpleState:InheritanceBaseClassSimple$Done"/>
       </link>
       <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.3" referencedGraphicsAlgorithm="//@children.0/@children.5/@graphicsAlgorithm/@graphicsAlgorithmChildren.0"/>
-      <children>
+      <children visible="true">
         <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="148" height="63" x="30" y="30" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" value="Done"/>
       </children>
     </children>
@@ -293,7 +293,7 @@
       </children>
     </children>
   </children>
-  <children xsi:type="pi:ContainerShape" visible="true" active="true">
+  <children xsi:type="pi:ContainerShape" active="true">
     <properties key="obj-type" value="sg"/>
     <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="880" height="580" x="40" y="40">
       <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" background="//@colors.1" foreground="//@colors.2" lineWidth="4" transparency="0.5" width="800" height="500" x="40" y="40" cornerHeight="20" cornerWidth="20"/>
@@ -302,10 +302,10 @@
     <link>
       <businessObjects href="../ReferenceCPP_ActorClasses.room#StateGraph:InheritanceBaseClassSimple$state2$sg"/>
     </link>
-    <children visible="true">
+    <children>
       <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="800" height="80" y="40" font="//@fonts.1" horizontalAlignment="ALIGNMENT_RIGHT" verticalAlignment="ALIGNMENT_TOP" value="/state2"/>
     </children>
-    <children xsi:type="pi:ContainerShape" visible="true" active="true">
+    <children xsi:type="pi:ContainerShape" active="true">
       <properties key="obj-type" value="trp"/>
       <properties key="item-kind" value="entp"/>
       <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="80" height="80" x="226">
@@ -323,11 +323,11 @@
         <businessObjects href="../ReferenceCPP_ActorClasses.room#EntryPoint:InheritanceBaseClassSimple$state2$tp0"/>
       </link>
       <anchors xsi:type="pi:ChopboxAnchor"/>
-      <children visible="true">
+      <children>
         <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="80" height="30" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" verticalAlignment="ALIGNMENT_BOTTOM" value="tp0"/>
       </children>
     </children>
-    <children xsi:type="pi:ContainerShape" visible="true" active="true">
+    <children xsi:type="pi:ContainerShape" active="true">
       <properties key="obj-type" value="trp"/>
       <properties key="item-kind" value="extp"/>
       <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="80" height="80" x="492">
@@ -343,76 +343,76 @@
         <businessObjects href="../ReferenceCPP_ActorClasses.room#ExitPoint:InheritanceBaseClassSimple$state2$tp1"/>
       </link>
       <anchors xsi:type="pi:ChopboxAnchor"/>
-      <children visible="true">
+      <children>
         <graphicsAlgorithm xsi:type="al:Text" background="//@colors.2" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" width="80" height="30" font="//@fonts.0" horizontalAlignment="ALIGNMENT_CENTER" verticalAlignment="ALIGNMENT_BOTTOM" value="tp1"/>
       </children>
     </children>
   </children>
-  <connections xsi:type="pi:FreeFormConnection" active="true" start="//@children.0/@children.1/@anchors.0" end="//@children.0/@children.3/@anchors.0">
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@children.1/@anchors.0" end="//@children.0/@children.3/@anchors.0">
     <properties key="obj-type" value="trans"/>
     <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0"/>
     <link>
       <businessObjects href="../ReferenceCPP_ActorClasses.room#InitialTransition:InheritanceBaseClassSimple$initial"/>
     </link>
-    <connectionDecorators locationRelative="true" location="1.0">
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
       <graphicsAlgorithm xsi:type="al:Polygon" background="//@colors.1" foreground="//@colors.2" lineWidth="1" filled="true" transparency="0.0">
         <points x="-15" y="5"/>
         <points/>
         <points x="-15" y="-5"/>
       </graphicsAlgorithm>
     </connectionDecorators>
-    <connectionDecorators active="true" locationRelative="true" location="0.5">
+    <connectionDecorators visible="true" active="true" locationRelative="true" location="0.5">
       <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" x="10" font="//@fonts.0" value="init"/>
     </connectionDecorators>
   </connections>
-  <connections xsi:type="pi:FreeFormConnection" active="true" start="//@children.0/@children.2/@children.2/@anchors.0" end="//@children.0/@children.4/@children.1/@anchors.0">
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@children.2/@children.2/@anchors.0" end="//@children.0/@children.4/@children.1/@anchors.0">
     <properties key="obj-type" value="trans"/>
     <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0"/>
     <link>
       <businessObjects href="../ReferenceCPP_ActorClasses.room#ContinuationTransition:InheritanceBaseClassSimple$tr0"/>
     </link>
-    <connectionDecorators locationRelative="true" location="1.0">
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
       <graphicsAlgorithm xsi:type="al:Polygon" background="//@colors.1" foreground="//@colors.2" lineWidth="1" filled="true" transparency="0.0">
         <points x="-15" y="5"/>
         <points/>
         <points x="-15" y="-5"/>
       </graphicsAlgorithm>
     </connectionDecorators>
-    <connectionDecorators active="true" locationRelative="true" location="0.5">
+    <connectionDecorators visible="true" active="true" locationRelative="true" location="0.5">
       <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" x="10" font="//@fonts.0" value="tr0: "/>
     </connectionDecorators>
   </connections>
-  <connections xsi:type="pi:FreeFormConnection" active="true" start="//@children.0/@children.3/@anchors.0" end="//@children.0/@children.2/@children.1/@anchors.0">
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@children.3/@anchors.0" end="//@children.0/@children.2/@children.1/@anchors.0">
     <properties key="obj-type" value="trans"/>
     <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0"/>
     <link>
       <businessObjects href="../ReferenceCPP_ActorClasses.room#TriggeredTransition:InheritanceBaseClassSimple$tr1"/>
     </link>
-    <connectionDecorators locationRelative="true" location="1.0">
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
       <graphicsAlgorithm xsi:type="al:Polygon" background="//@colors.1" foreground="//@colors.2" lineWidth="1" filled="true" transparency="0.0">
         <points x="-15" y="5"/>
         <points/>
         <points x="-15" y="-5"/>
       </graphicsAlgorithm>
     </connectionDecorators>
-    <connectionDecorators active="true" locationRelative="true" location="0.5">
+    <connectionDecorators visible="true" active="true" locationRelative="true" location="0.5">
       <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" x="-67" y="-8" font="//@fonts.0" value="tr1: &lt;reply2:port>"/>
     </connectionDecorators>
   </connections>
-  <connections xsi:type="pi:FreeFormConnection" active="true" start="//@children.0/@children.4/@children.2/@anchors.0" end="//@children.0/@children.5/@anchors.0">
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.0/@children.4/@children.2/@anchors.0" end="//@children.0/@children.5/@anchors.0">
     <properties key="obj-type" value="trans"/>
     <graphicsAlgorithm xsi:type="al:Polyline" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0"/>
     <link>
       <businessObjects href="../ReferenceCPP_ActorClasses.room#ContinuationTransition:InheritanceBaseClassSimple$tr2"/>
     </link>
-    <connectionDecorators locationRelative="true" location="1.0">
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
       <graphicsAlgorithm xsi:type="al:Polygon" background="//@colors.1" foreground="//@colors.2" lineWidth="1" filled="true" transparency="0.0">
         <points x="-15" y="5"/>
         <points/>
         <points x="-15" y="-5"/>
       </graphicsAlgorithm>
     </connectionDecorators>
-    <connectionDecorators active="true" locationRelative="true" location="0.5">
+    <connectionDecorators visible="true" active="true" locationRelative="true" location="0.5">
       <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineWidth="1" filled="false" transparency="0.0" x="10" font="//@fonts.0" value="tr2: "/>
     </connectionDecorators>
   </connections>

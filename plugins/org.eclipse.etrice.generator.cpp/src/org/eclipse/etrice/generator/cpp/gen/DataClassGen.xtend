@@ -20,7 +20,6 @@ import org.eclipse.etrice.core.genmodel.fsm.base.ILogger
 import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.core.room.ComplexType
 import org.eclipse.etrice.core.room.DataClass
-import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 import org.eclipse.etrice.core.room.util.RoomHelpers
@@ -31,7 +30,7 @@ class DataClassGen {
 	@Inject extension JavaIoFileSystemAccess fileAccess
 	@Inject extension CppExtensions stdExt
 	@Inject extension RoomExtensions roomExt
-	@Inject extension ProcedureHelpers helpers
+	@Inject extension CppProcedureHelpers helpers
 //	@Inject extension TypeHelpers typeHelpers
 	@Inject Initialization initHelper
 	@Inject extension RoomHelpers
@@ -92,10 +91,11 @@ class DataClassGen {
 			// default constructor, copy constructor and assignment operator
 			«dc.name»();
 			«dc.name»(const «dc.name»& rhs);
+			// constructor using fields
+			«IF !dc.allAttributes.empty»«dc.name»(«dc.allAttributes.constArgList»);«ENDIF»
+
 			«dc.name»& operator=(const «dc.name»& rhs);
 
-			// constructor using fields
-			«IF !dc.allAttributes.empty»«dc.name»(«dc.allAttributes.argList»);«ENDIF»
 		};
 
 		«dc.generateNamespaceEnd»
@@ -138,7 +138,7 @@ class DataClassGen {
 		// constructor using fields
 		// TODO
 		«IF !dc.allAttributes.empty»
-			«dc.name»::«dc.name»(«dc.allAttributes.argList»)
+			«dc.name»::«dc.name»(«dc.allAttributes.constArgList»)
 				«dc.generateFieldInitializerList»
 			{
 			}

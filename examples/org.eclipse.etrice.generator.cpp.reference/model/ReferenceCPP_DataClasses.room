@@ -1,41 +1,82 @@
 // 
-
 RoomModel ReferenceCPP_DataClasses {
+
 	import room.basic.types.* from "../../org.eclipse.etrice.modellib.cpp/model/Types.room"
+
 	import room.basic.annotations.* from "../../org.eclipse.etrice.modellib.cpp/model/Annotations.room"
 
 	DataClass DAllDatatypes {
-		// int
-		Attribute attribute_int8 : int8
-		Attribute attribute_int16 : int16
-		Attribute attribute_int32 : int32
-		Attribute attribute_int64 : int64
+	// int
+		Attribute attribute_int8: int8
+		Attribute attribute_int16: int16
+		Attribute attribute_int32: int32
+		Attribute attribute_int64: int64
 
 		// uint
-		Attribute attribute_uint8 : uint8
-		Attribute attribute_uint16 : uint16
-		Attribute attribute_uint32 : uint32
-		Attribute attribute_uint64 : uint64
-		
+		Attribute attribute_uint8: uint8
+		Attribute attribute_uint16: uint16
+		Attribute attribute_uint32: uint32
+		Attribute attribute_uint64: uint64
+
 		// float
-		Attribute attribute_float32 : float32
-		Attribute attribute_float64 : float64
+		Attribute attribute_float32: float32
+		Attribute attribute_float64: float64
 
 		// others
-		Attribute attribute_boolean : boolean
-		Attribute attribute_char : char
-		Attribute attribute_charPtr : charPtr
+		Attribute attribute_boolean: boolean
+		Attribute attribute_char: char
+		Attribute attribute_charPtr: charPtr
 
 		// strings
- 		Attribute attribute_string : string  		// maps to std::string attribute_string; (standard template library)
- 		Attribute attribute_string32 : string32 	// maps to StaticString<32> attribute_string32; (in org.eclipse.etrice.runtime.cpp\src\common\containers)
+		Attribute attribute_string: string // maps to std::string attribute_string; (standard template library)
+		Attribute attribute_string32: string32 // maps to StaticString<32> attribute_string32; (in org.eclipse.etrice.runtime.cpp\src\common\containers)
 
 		// references 		 
-		Attribute attribute_voidTypeRef : voidType ref
-		
+		Attribute attribute_voidTypeRef: voidType ref
+
 		// arrays
-		Attribute attribute_char_array[4] : char  	// maps to StaticArray<char, 4> attribute_char_array; (in org.eclipse.etrice.runtime.cpp\src\common\containers)
-		Attribute attribute_int32_array[4] : int32	// maps to StaticArray<int32, 4> attribute_int32_array; (in org.eclipse.etrice.runtime.cpp\src\common\containers)
-	} 
+		Attribute attribute_char_array [ 4 ]: char // maps to StaticArray<char, 4> attribute_char_array; (in org.eclipse.etrice.runtime.cpp\src\common\containers)
+		Attribute attribute_int32_array [ 4 ]: int32 // maps to StaticArray<int32, 4> attribute_int32_array; (in org.eclipse.etrice.runtime.cpp\src\common\containers)
+		Operation printAll(text: charPtr) {
+			"// This operation is only for testing purposes - do not use printf in embedded systems"
+			"			"
+			"	printf(\"\\n%s -> DAllDatatypes=(\" , text);"
+			"	printf(\"%d, \", attribute_int8);"
+			"	printf(\"%d, \", attribute_int16);"
+			"	printf(\"%d, \", attribute_int32);"
+			""
+			"	printf(\"%d, \", attribute_uint8);"
+			"	printf(\"%d, \", attribute_uint16);"
+			"	printf(\"%d, \", attribute_uint32);"
+			""
+			"	printf(\"%f, \", attribute_float32);"
+			"	printf(\"%f, \", attribute_float64);"
+			""
+			"	printf(\"%s, \", attribute_boolean ? \"true\" : \"false\");"
+			"	printf(\"%c, \", attribute_char);"
+			"	printf(\"%s, \", attribute_charPtr);"
+			""
+			"	printf(\"%s, \", attribute_string.c_str());"
+			"	printf(\"%s, \", attribute_string32.c_str());"
+			""
+			"	printf(\"%.4x, \", (int32)attribute_voidTypeRef);"
+			""
+			"	printf(\"(\");"
+			"	for (int i=0; i<attribute_char_array.getSize(); i++){"
+			"		printf(\"%c\", attribute_char_array[i]);"
+			"	}"
+			"	printf(\"), \");"
+			""
+			"	printf(\"(\");"
+			"	for (int i=0; i<attribute_int32_array.getSize(); i++){"
+			"		printf(\"%d \", attribute_int32_array[i]);"
+			"	}"
+			"	printf(\") \");"
+			""
+			"	printf(\")\\n\" );"
+			""
+		}
+	}
+
 }
 

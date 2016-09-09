@@ -34,4 +34,15 @@ class CppProcedureHelpers extends ProcedureHelpers {
 		}
 	}
 
+	/**
+	 * @param attributes a list of {@link Attribute}s
+	 * @return an argument list for the attributes with const except for ref {@link Attribute}s
+	 */
+	def constArgList(Iterable<Attribute> attributes) {
+		attributes.map[(if(!type.ref) 'const ' else '' ) + signatureString + ' ' + name].join(', ')
+	}
+
+		
+
+
 }

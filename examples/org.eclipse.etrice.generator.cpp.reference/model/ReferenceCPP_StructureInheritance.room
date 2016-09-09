@@ -1,0 +1,14 @@
+RoomModel ReferenceCPP_ActorClasses {
+
+	import ReferenceCPP_DataClasses.* from "ReferenceCPP_DataClasses.room"
+
+	import ReferenceCPP_ProtocolClasses.* from "ReferenceCPP_ProtocolClasses.room"
+
+	import room.basic.annotations.* from "../../org.eclipse.etrice.modellib.cpp/model/Annotations.room"
+
+	import room.basic.types.* from "../../org.eclipse.etrice.modellib.cpp/model/Types.room"
+	
+	
+	
+//	ActorClass 
+}

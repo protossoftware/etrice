@@ -61,6 +61,14 @@ public:
 	}
 
 	/**
+	 * returns a const char * pointer to the data of this array
+	 */
+	const char* c_str(void) const {
+		return this->data;
+	}
+
+
+	/**
 	 * forwards to operator=(const char *rhs)
 	 */
 	template<int RhsSize> StaticString<Size>& operator=(const StaticString<RhsSize> &rhs) {
