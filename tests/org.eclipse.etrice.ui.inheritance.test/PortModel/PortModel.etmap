@@ -1,0 +1,9 @@
+MappingModel PortModel {
+	import PortModel.* from "PortModel.room"
+	import PortModel.* from "PortModel.etphys"
+	Mapping PortModel -> PhysSys1 {
+		SubSystemMapping main -> nodeRef1 {
+			ThreadMapping defaultThread -> PhysicalThread1
+		}
+	}
+}

@@ -1,0 +1,222 @@
+RoomModel Automat {
+	LogicalSystem Automat {
+		SubSystemRef main: MainSubSystem
+	}
+	SubSystemClass MainSubSystem {
+		ActorRef appl: Application
+		LogicalThread defaultThread
+	}
+	ActorClass Application {
+	Structure {
+			ActorRef a: A
+		
+			
+		ActorRef aa: AA
+		ActorRef b: B
+		ActorRef bb: BB
+		ActorRef c: C
+			ActorRef cc: CC
+		ActorRef d: D
+			ActorRef dd: DD
+		ActorRef e: E
+			ActorRef ee: EE
+		}
+	}
+	
+	ProtocolClass TestProtocol {
+		incoming {
+			Message incMsg1()
+			Message incMsg2()
+			Message incMsg3()
+			
+		}
+	}
+	
+	ActorClass TopActor {
+		Interface {
+			Port p0: TestProtocol
+		}
+		
+		Structure {
+			external Port p0
+		}
+	}
+	
+	ActorClass A extends TopActor {
+		
+		Behavior {
+			StateMachine {
+				State z1
+				Transition init: initial -> z1
+			State z2
+				State z3
+			Transition tr0: z1 -> z2 {
+					triggers {
+						<incMsg1: p0>
+					}
+				}
+				Transition tr1: z2 -> z3 {
+					triggers {
+						<incMsg1: p0>
+					}
+				}
+				Transition tr2: z3 -> z1 {
+					triggers {
+						<incMsg1: p0>
+					}
+				}
+			}
+		}
+	}
+	
+	ActorClass B extends TopActor {
+		
+	Behavior {
+			StateMachine {
+				State z1
+				State z2 {
+					subgraph {
+						State z1
+						State z2
+						Transition tr0: z1 -> z2 {
+							triggers {
+								<incMsg1: p0>
+							}
+						}
+						
+						Transition init: initial -> z1
+					}
+				}
+				Transition init: initial -> z1
+				Transition tr0: z1 -> z2 {
+					triggers {
+						<incMsg1: p0>
+					}
+				}
+				Transition tr1: z2 -> z1 {
+					triggers {
+						<incMsg2: p0>
+					}
+				}
+			}
+		}
+	}
+	
+	ActorClass C extends TopActor {
+		
+	Behavior {
+			StateMachine {
+				State z1 {
+					subgraph {
+						EntryPoint tp0
+						ExitPoint tp1
+						
+					Transition tr0: my tp0 -> z1
+						State z1
+						Transition tr1: z1 -> my tp1 {
+							triggers {
+								<incMsg1: p0>
+							}
+						}
+					}
+				}
+				State z2
+				Transition init: initial -> tp0 of z1
+				Transition tr0: tp1 of z1 -> z2
+			}
+		}
+	}
+	
+	ActorClass D extends TopActor {
+		
+	Behavior {
+			StateMachine {
+				State z1 {
+					subgraph {
+						State z1
+						TransitionPoint tp0
+						Transition init: initial -> z1
+						Transition tr0: my tp0 -> z1 {
+							triggers {
+								<incMsg1: p0>
+							}
+						}
+					}
+				}
+			Transition init: initial -> z1
+			}
+		}
+	}
+	
+	ActorClass E {
+		
+	Behavior {
+			StateMachine {
+				State z1
+				State z2
+				State z3
+				ChoicePoint cp0
+				Transition init: initial -> cp cp0
+				Transition tr0: cp cp0 -> z1
+				Transition tr1: cp cp0 -> z2 {
+					cond {
+						"true"
+					}
+				}
+				Transition tr2: cp cp0 -> z3 {
+					cond {
+						"false"
+					}
+				}
+			}
+		}
+	}
+	
+	ActorClass AA extends A {
+		
+	Behavior {
+			StateMachine { }
+		}
+	}
+	
+	ActorClass BB extends B {
+		
+	Behavior {
+			
+		StateMachine { RefinedState B.sm.z2 {
+					subgraph {
+						State z3
+						Transition tr1: z2 -> z3 {
+							triggers {
+								<incMsg1: p0>
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	ActorClass CC extends C {
+		
+	Behavior {
+			StateMachine { RefinedState C.sm.z1 {
+					subgraph {
+						State z2
+					}
+				}
+			}
+		}
+	}
+	
+	ActorClass DD extends D {
+		
+	}
+	
+	ActorClass EE extends E {
+		
+	Behavior {
+			StateMachine { }
+		}
+	}
+}

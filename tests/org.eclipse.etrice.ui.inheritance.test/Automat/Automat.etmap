@@ -1,0 +1,9 @@
+MappingModel Automat {
+	import Automat.* from "Automat.room"
+	import Automat.* from "Automat.etphys"
+	Mapping Automat -> PhysSys1 {
+		SubSystemMapping main -> nodeRef1 {
+			ThreadMapping defaultThread -> PhysicalThread1
+		}
+	}
+}

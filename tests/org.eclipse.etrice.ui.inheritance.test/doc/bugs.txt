@@ -1,0 +1,12 @@
+SPP Test:	(model/SPP.room)
+	- Connection of SPP Points in ActorClass EE and FF not possible in graphical editor (cannot save file)
+	- Validation error in ActorClass D (An SPP mus be connected by a layer connection or implemented by a ServiceImplementation!),
+	  but not in ActorClass B
+	- "E1" is not a valid name for an actor class in *.room files
+	
+Behavior: (Automat/Automat.room)
+	- can add transition point to initial point?
+	- it is possible to add a second transition to an inherited entry point in the graphical editor (ActorClass CC)
+	  (connect entry point to state in super class -> connect entry point to another state in inheriting class)
+	- adding a state to an inherited subgraph allows to modify the location of the containing state (ActorClass BB)
+	

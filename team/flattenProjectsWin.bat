@@ -11,6 +11,7 @@ mklink /J ..\..\FlatWorld\org.eclipse.etrice.tutorials.c ..\examples\org.eclipse
 mklink /J ..\..\FlatWorld\org.eclipse.etrice.examples.c ..\examples\org.eclipse.etrice.examples.c
 mklink /J ..\..\FlatWorld\org.eclipse.etrice.tutorials.java ..\examples\org.eclipse.etrice.tutorials.java
 mklink /J ..\..\FlatWorld\org.eclipse.etrice.generator.c.reference ..\examples\org.eclipse.etrice.generator.c.reference
+mklink /J ..\..\FlatWorld\org.eclipse.etrice.generator.cpp.reference ..\examples\org.eclipse.etrice.generator.cpp.reference
 
 mklink /J ..\..\FlatWorld\org.eclipse.etrice.examples.dynamicactors1 ..\examples\org.eclipse.etrice.examples.dynamicactors1
 mklink /J ..\..\FlatWorld\org.eclipse.etrice.examples.dynamicactors2 ..\examples\org.eclipse.etrice.examples.dynamicactors2
@@ -28,8 +29,10 @@ mklink /J ..\..\FlatWorld\org.eclipse.etrice.runtime.java.aspects ..\runtime\org
 REM runtime
 mklink /J ..\..\FlatWorld\org.eclipse.etrice.modellib.c ..\runtime\org.eclipse.etrice.modellib.c
 mklink /J ..\..\FlatWorld\org.eclipse.etrice.modellib.java ..\runtime\org.eclipse.etrice.modellib.java
+mklink /J ..\..\FlatWorld\org.eclipse.etrice.modellib.cpp ..\runtime\org.eclipse.etrice.modellib.cpp
 mklink /J ..\..\FlatWorld\org.eclipse.etrice.runtime.c ..\runtime\org.eclipse.etrice.runtime.c
 mklink /J ..\..\FlatWorld\org.eclipse.etrice.runtime.java ..\runtime\org.eclipse.etrice.runtime.java
+mklink /J ..\..\FlatWorld\org.eclipse.etrice.runtime.cpp ..\runtime\org.eclipse.etrice.runtime.cpp
 
 REM tests
 mklink /J ..\..\FlatWorld\org.eclipse.etrice.runtime.c.tests ..\tests\org.eclipse.etrice.runtime.c.tests

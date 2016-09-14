@@ -1,0 +1,17 @@
+WindowsMinGW
+LinuxPosix
+
+src-gen/*
+!src-gen/readme.txt
+src-gen-info/*
+!src-gen-info/readme.txt
+log/*
+!log/readme.txt
+
+*.aux
+*.lof
+*.gz
+*.toc
+*.log
+/MinGWDebug/
+/Debug/
