@@ -9,6 +9,7 @@
 RoomModel SPPTest {
 
 	import room.basic.types.* from "../../org.eclipse.etrice.modellib.cpp/model/Types.room"
+
 	import room.basic.service.timing.* from "../../org.eclipse.etrice.modellib.cpp/model/TimingService.room"
 
 	LogicalSystem LogSys {
@@ -20,149 +21,128 @@ RoomModel SPPTest {
 		ActorRef timingService: ATimingService
 		LayerConnection ref topActor satisfied_by timingService.timer
 		LogicalThread defaultThread
-		
 	}
-	
+
 	// - build your application from here
 	ActorClass TopActor {
 		Structure {
-			
-		ActorRef a: A
+			ActorRef a: A
 			ActorRef b: B
 			ActorRef c: C
-		ActorRef aa: AA
+			ActorRef aa: AA
 			ActorRef bb: BB
 			ActorRef cc: CC
-		ActorRef d: D
-		ActorRef dd: DD
-		ActorRef e: E
+			ActorRef d: D
+			ActorRef dd: DD
+			ActorRef e: E
 			ActorRef ee: EE
-		ActorRef f: F
+			ActorRef f: F
 			ActorRef ff: FF
 		}
 		Behavior {
 			StateMachine { }
 		}
 	}
-	
+
 	ActorClass A {
-		
-	Interface {
+		Interface {
 			SPP spp0: PTimer
-			
 		}
 		Structure {
 			ServiceImplementation of spp0
 		}
 	}
-	
+
 	ActorClass B {
 		Interface {
 			SPP spp0: PTimer
 		}
 	}
-	
+
 	ActorClass C {
-		
-	Interface {
+		Interface {
 			SPP spp0: PTimer
 		}
-	Structure {
+		Structure {
 			ActorRef c1: C1
-		LayerConnection relay_sap spp0 satisfied_by c1.spp0
+			LayerConnection relay_sap spp0 satisfied_by c1.spp0
 		}
 	}
-	
+
 	ActorClass C1 {
-		
-	Interface {
+		Interface {
 			SPP spp0: PTimer
 		}
 		Structure {
 			ServiceImplementation of spp0
 		}
 	}
-	
+
 	ActorClass D {
 		Interface {
-			SPP spp0 : PTimer
-		}
-		
-		Structure {
-			ActorRef ref0 : D1
-		LayerConnection relay_sap spp0 satisfied_by ref0.spp0
-		}
-	}
-	
-	ActorClass D1 {
-		
-	Interface {
 			SPP spp0: PTimer
 		}
 		Structure {
-			// ServiceImplementation of spp0
+			ActorRef ref0: D1
+			LayerConnection relay_sap spp0 satisfied_by ref0.spp0
 		}
 	}
-	
+
+	ActorClass D1 {
+		Interface {
+			SPP spp0: PTimer
+		}
+		Structure {
+		// ServiceImplementation of spp0
+
+		}
+	}
+
 	ActorClass E {
-		
-	Structure {
+		Structure {
 			ActorRef e1e: E1e
 		}
 	}
-	
+
 	ActorClass E1e {
-		
-	Interface {
+		Interface {
 			SPP spp0: PTimer
 		}
-		
 		Structure {
 			ServiceImplementation of spp0
 		}
 	}
-	
+
 	ActorClass F {
-		
-	Structure {
+		Structure {
 			ActorRef f1: F1
 		}
 	}
-	
+
 	ActorClass F1 {
-		
-	Interface {
+		Interface {
 			SPP spp0: PTimer
 		}
 	}
-	
-	ActorClass AA extends A {
-		
-	}
-	
-	ActorClass BB extends B {
-		
-	}
-	
-	ActorClass CC extends C {
-		
-	}
-	
-	ActorClass DD extends D {
-		
-	}
-	
+
+	ActorClass AA extends A { }
+
+	ActorClass BB extends B { }
+
+	ActorClass CC extends C { }
+
+	ActorClass DD extends D { }
+
 	ActorClass EE extends E {
-		
-	Interface {
+		Interface {
 			SPP spp0: PTimer
 		}
 	}
-	
+
 	ActorClass FF extends F {
-		
-	Interface {
+		Interface {
 			SPP spp0: PTimer
 		}
 	}
+
 }

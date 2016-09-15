@@ -1,13 +1,16 @@
 RoomModel PortModel {
+
 	LogicalSystem PortModel {
 		SubSystemRef main: MainSubSystem
 	}
+
 	SubSystemClass MainSubSystem {
 		ActorRef appl: Application
 		LogicalThread defaultThread
 	}
+
 	ActorClass Application {
-	Structure {
+		Structure {
 			ActorRef a: A
 			ActorRef aa: AA
 			ActorRef b: B
@@ -18,28 +21,26 @@ RoomModel PortModel {
 			ActorRef dd: DD
 			ActorRef e: E
 			ActorRef ee: EE
-		Binding aa.p0 and a.p1
+			Binding aa.p0 and a.p1
 			Binding aa.p1 and a.p0
 			Binding bb.p0 and b.p1
 			Binding bb.p1 and b.p0
-		Binding dd.p0 and d.p1
+			Binding dd.p0 and d.p1
 			Binding dd.p1 and d.p0
 		}
 	}
-	
+
 	ProtocolClass TestProtocol {
 		incoming {
 			Message incomingTest()
 		}
-		
 		outgoing {
 			Message outgoingTest()
 		}
 	}
-	
+
 	ActorClass A {
-		
-	Interface {
+		Interface {
 			Port p0: TestProtocol
 			conjugated Port p1: TestProtocol
 		}
@@ -48,38 +49,35 @@ RoomModel PortModel {
 			external Port p1
 		}
 	}
-	
+
 	ActorClass B {
-		
-	Interface {
+		Interface {
 			Port p0: TestProtocol
 			conjugated Port p1: TestProtocol
 		}
 	}
-	
+
 	ActorClass B1 {
 		Interface {
 			Port p0: TestProtocol
 		}
 	}
-	
+
 	ActorClass B2 {
 		Interface {
 			conjugated Port p0: TestProtocol
 		}
 	}
-	
+
 	ActorClass C {
-		
-	Structure {
+		Structure {
 			Port p0: TestProtocol
 			conjugated Port p1: TestProtocol
 		}
 	}
-	
+
 	ActorClass D {
-		
-	Interface {
+		Interface {
 			Port p0: TestProtocol
 			conjugated Port p1: TestProtocol
 		}
@@ -90,10 +88,9 @@ RoomModel PortModel {
 			ActorRef d2: B2
 		}
 	}
-	
+
 	ActorClass E {
-		
-	Structure {
+		Structure {
 			Binding e2e.p0 and p0
 			Binding e1e.p0 and p1
 			ActorRef e1e: B1
@@ -102,36 +99,29 @@ RoomModel PortModel {
 			conjugated Port p1: TestProtocol
 		}
 	}
-	
-	ActorClass AA extends A {
-		
-	}
-	
+
+	ActorClass AA extends A { }
+
 	ActorClass BB extends B {
-		
-	Structure {
+		Structure {
 			Binding bb2.p0 and p1
 			Binding p0 and bb1.p0
 			ActorRef bb1: B1
 			ActorRef bb2: B2
 		}
 	}
-	
+
 	ActorClass CC extends C {
-		
-	Structure {
+		Structure {
 			Binding cc2.p0 and p0
 			Binding cc1.p0 and p1
 			ActorRef cc1: B1
 			ActorRef cc2: B2
 		}
 	}
-	
-	ActorClass DD extends D {
-		
-	}
-	
-	ActorClass EE extends E {
-		
-	}
+
+	ActorClass DD extends D { }
+
+	ActorClass EE extends E { }
+
 }

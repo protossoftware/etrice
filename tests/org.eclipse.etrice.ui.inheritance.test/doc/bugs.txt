@@ -9,4 +9,8 @@ Behavior: (Automat/Automat.room)
 	- it is possible to add a second transition to an inherited entry point in the graphical editor (ActorClass CC)
 	  (connect entry point to state in super class -> connect entry point to another state in inheriting class)
 	- adding a state to an inherited subgraph allows to modify the location of the containing state (ActorClass BB)
-	
+	- TransitionPoint unreachable state of graph when connected to a state? (ActorClass D)
+	- resizing of subgraph is not working properly
+	- connection from handler to state possible? (Semantics have to be defined, suggestion by ts: only self-transitions) (ActorClass F)
+	- connection from choice point 1 to 0 in ActorClass E fails (Stack overflow)
+	  (connect two choice points cyclic with if-connections)
