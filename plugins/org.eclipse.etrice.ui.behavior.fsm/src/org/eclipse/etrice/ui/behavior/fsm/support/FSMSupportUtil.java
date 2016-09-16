@@ -34,6 +34,7 @@ import org.eclipse.etrice.core.fsm.fSM.InitialTransition;
 import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
 import org.eclipse.etrice.core.fsm.fSM.NonInitialTransition;
 import org.eclipse.etrice.core.fsm.fSM.RefinedState;
+import org.eclipse.etrice.core.fsm.fSM.RefinedTransition;
 import org.eclipse.etrice.core.fsm.fSM.State;
 import org.eclipse.etrice.core.fsm.fSM.StateGraph;
 import org.eclipse.etrice.core.fsm.fSM.StateGraphItem;
@@ -147,27 +148,11 @@ public class FSMSupportUtil {
 		return own;
 	}
 
-	public boolean isInherited(StateGraphItem item, ContainerShape cs) {
-		EObject container = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(cs);
-		if (container instanceof StateGraph) {
-			StateGraph sg = (StateGraph) container;
-			return item.eContainer()!=sg;
-		}
-		else if (container instanceof State) {
-			assert(item instanceof EntryPoint || item instanceof ExitPoint): "this MUST be an entry or exit point";
-			
-			// have to check whether the State is inherited
-			State s = (State) container;
-			ContainerShape sCont = cs.getContainer();
-			EObject cls = sCont.getLink().getBusinessObjects().get(0);
-			return s.eContainer()!=cls;
-		}
-	
-		return false;
-	}
-
 	public boolean isInherited(Diagram diag, EObject obj) {
-		return fsmHelpers.getModelComponent(obj)!=getModelComponent(diag);
+		if(obj instanceof StateGraph)
+			obj = obj.eContainer();
+		
+		return  obj instanceof RefinedState || obj instanceof RefinedTransition || !EcoreUtil.isAncestor(getModelComponent(diag), obj);
 	}
 
 	public boolean showAsInherited(Diagram diag, State obj) {

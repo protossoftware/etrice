@@ -27,27 +27,35 @@ import org.eclipse.etrice.core.fsm.naming.FSMFragmentProvider;
 import org.eclipse.etrice.ui.behavior.fsm.provider.IInjectorProvider;
 import org.eclipse.etrice.ui.common.base.support.CantDeleteFeature;
 import org.eclipse.etrice.ui.common.base.support.CantRemoveFeature;
-import org.eclipse.etrice.ui.common.base.support.RemoveBendpointsFeature;
 import org.eclipse.graphiti.dt.IDiagramTypeProvider;
+import org.eclipse.graphiti.features.IAddBendpointFeature;
 import org.eclipse.graphiti.features.IAddFeature;
 import org.eclipse.graphiti.features.ICreateConnectionFeature;
 import org.eclipse.graphiti.features.ICreateFeature;
 import org.eclipse.graphiti.features.IDeleteFeature;
 import org.eclipse.graphiti.features.IFeatureProvider;
 import org.eclipse.graphiti.features.ILayoutFeature;
+import org.eclipse.graphiti.features.IMoveBendpointFeature;
+import org.eclipse.graphiti.features.IMoveConnectionDecoratorFeature;
 import org.eclipse.graphiti.features.IMoveShapeFeature;
 import org.eclipse.graphiti.features.IReconnectionFeature;
+import org.eclipse.graphiti.features.IRemoveBendpointFeature;
 import org.eclipse.graphiti.features.IRemoveFeature;
 import org.eclipse.graphiti.features.IResizeShapeFeature;
 import org.eclipse.graphiti.features.IUpdateFeature;
+import org.eclipse.graphiti.features.context.IAddBendpointContext;
 import org.eclipse.graphiti.features.context.IAddContext;
+import org.eclipse.graphiti.features.context.IBendpointContext;
 import org.eclipse.graphiti.features.context.ICustomContext;
 import org.eclipse.graphiti.features.context.IDeleteContext;
 import org.eclipse.graphiti.features.context.IDoubleClickContext;
 import org.eclipse.graphiti.features.context.ILayoutContext;
+import org.eclipse.graphiti.features.context.IMoveBendpointContext;
+import org.eclipse.graphiti.features.context.IMoveConnectionDecoratorContext;
 import org.eclipse.graphiti.features.context.IMoveShapeContext;
 import org.eclipse.graphiti.features.context.IPictogramElementContext;
 import org.eclipse.graphiti.features.context.IReconnectionContext;
+import org.eclipse.graphiti.features.context.IRemoveBendpointContext;
 import org.eclipse.graphiti.features.context.IRemoveContext;
 import org.eclipse.graphiti.features.context.IResizeShapeContext;
 import org.eclipse.graphiti.features.context.IUpdateContext;
@@ -57,7 +65,6 @@ import org.eclipse.graphiti.mm.algorithms.styles.LineStyle;
 import org.eclipse.graphiti.mm.pictograms.ConnectionDecorator;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
-import org.eclipse.graphiti.mm.pictograms.FreeFormConnection;
 import org.eclipse.graphiti.mm.pictograms.PictogramElement;
 import org.eclipse.graphiti.mm.pictograms.Shape;
 import org.eclipse.graphiti.tb.DefaultToolBehaviorProvider;
@@ -328,6 +335,43 @@ public abstract class AbstractFSMProviderDispatcher implements IInjectorProvider
 		}
 		
 		@Override
+		public IAddBendpointFeature getAddBendpointFeature(IAddBendpointContext context) {
+			IFeatureProvider fp = getFeatureProvider(context);
+			if (fp!=null)
+				return fp.getAddBendpointFeature(context);
+			else
+				return super.getAddBendpointFeature(context);
+		}
+		
+		@Override
+		public IMoveBendpointFeature getMoveBendpointFeature(IMoveBendpointContext context) {
+			IFeatureProvider fp = getFeatureProvider(context);
+			if (fp!=null)
+				return fp.getMoveBendpointFeature(context);
+			else
+				return super.getMoveBendpointFeature(context);
+		}
+		
+		@Override
+		public IRemoveBendpointFeature getRemoveBendpointFeature(IRemoveBendpointContext context) {
+			IFeatureProvider fp = getFeatureProvider(context);
+			if (fp!=null)
+				return fp.getRemoveBendpointFeature(context);
+			else
+				return super.getRemoveBendpointFeature(context);
+		}
+		
+		@Override
+		public IMoveConnectionDecoratorFeature getMoveConnectionDecoratorFeature(IMoveConnectionDecoratorContext context) {
+			IFeatureProvider fp = getFeatureProvider(context);
+			if (fp!=null)
+				return fp.getMoveConnectionDecoratorFeature(context);
+			else
+				return super.getMoveConnectionDecoratorFeature(context);
+		}
+		
+		
+		@Override
 		public ICustomFeature[] getCustomFeatures(ICustomContext context) {
 			ArrayList<ICustomFeature> result = new ArrayList<ICustomFeature>();
 			
@@ -341,15 +385,6 @@ public abstract class AbstractFSMProviderDispatcher implements IInjectorProvider
 			for (ICustomFeature cust : custom) {
 				result.add(cust);
 			}
-			
-			boolean allFreeForm = true;
-			PictogramElement[] pes = context.getPictogramElements();
-			for (PictogramElement pe : pes) {
-				if (!(pe instanceof FreeFormConnection))
-					allFreeForm = false;
-			}
-			if (allFreeForm)
-				result.add(new RemoveBendpointsFeature(fp));
 			
 			ICustomFeature features[] = new ICustomFeature[result.size()];
 			return result.toArray(features);
@@ -387,6 +422,14 @@ public abstract class AbstractFSMProviderDispatcher implements IInjectorProvider
 		
 		private IFeatureProvider getFeatureProvider(IReconnectionContext context) {
 			return featureSwitch.doSwitch((EObject) getBusinessObjectForPictogramElement(context.getConnection()));
+		}
+		
+		private IFeatureProvider getFeatureProvider(IBendpointContext context) {
+			return featureSwitch.doSwitch((EObject) getBusinessObjectForPictogramElement(context.getConnection()));
+		}
+		
+		private IFeatureProvider getFeatureProvider(IMoveConnectionDecoratorContext context) {
+			return featureSwitch.doSwitch((EObject) getBusinessObjectForPictogramElement(context.getConnectionDecorator().getConnection()));
 		}
 
 		/* (non-Javadoc)

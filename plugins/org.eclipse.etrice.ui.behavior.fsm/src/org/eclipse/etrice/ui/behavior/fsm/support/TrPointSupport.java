@@ -226,7 +226,7 @@ public class TrPointSupport {
 				ContainerShape parentShape = context.getTargetContainer();
 				Object bo = getBusinessObjectForPictogramElement(parentShape);
 				boolean subtp = (bo instanceof State);
-				boolean inherited = subtp?FSMSupportUtil.getInstance().isInherited(getDiagram(), (State)bo):FSMSupportUtil.getInstance().isInherited(tp, parentShape);
+				boolean inherited = FSMSupportUtil.getInstance().isInherited(getDiagram(), tp);
 	
 				int margin = subtp?MARGIN_SMALL:MARGIN;
 				int size = subtp?ITEM_SIZE_SMALL:ITEM_SIZE;

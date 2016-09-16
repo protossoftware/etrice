@@ -47,23 +47,32 @@ import org.eclipse.etrice.ui.common.base.support.CantRemoveFeature;
 import org.eclipse.etrice.ui.common.base.support.ChangeAwareCreateConnectionFeature;
 import org.eclipse.etrice.ui.common.base.support.ChangeAwareCustomFeature;
 import org.eclipse.etrice.ui.common.base.support.DeleteWithoutConfirmFeature;
+import org.eclipse.etrice.ui.common.base.support.RemoveBendpointsFeature;
 import org.eclipse.graphiti.datatypes.ILocation;
 import org.eclipse.graphiti.dt.IDiagramTypeProvider;
+import org.eclipse.graphiti.features.IAddBendpointFeature;
 import org.eclipse.graphiti.features.IAddFeature;
 import org.eclipse.graphiti.features.ICreateConnectionFeature;
 import org.eclipse.graphiti.features.IDeleteFeature;
 import org.eclipse.graphiti.features.IFeatureProvider;
+import org.eclipse.graphiti.features.IMoveBendpointFeature;
+import org.eclipse.graphiti.features.IMoveConnectionDecoratorFeature;
 import org.eclipse.graphiti.features.IReason;
 import org.eclipse.graphiti.features.IReconnectionFeature;
+import org.eclipse.graphiti.features.IRemoveBendpointFeature;
 import org.eclipse.graphiti.features.IRemoveFeature;
 import org.eclipse.graphiti.features.IUpdateFeature;
+import org.eclipse.graphiti.features.context.IAddBendpointContext;
 import org.eclipse.graphiti.features.context.IAddConnectionContext;
 import org.eclipse.graphiti.features.context.IAddContext;
 import org.eclipse.graphiti.features.context.ICreateConnectionContext;
 import org.eclipse.graphiti.features.context.ICustomContext;
 import org.eclipse.graphiti.features.context.IDeleteContext;
 import org.eclipse.graphiti.features.context.IDoubleClickContext;
+import org.eclipse.graphiti.features.context.IMoveBendpointContext;
+import org.eclipse.graphiti.features.context.IMoveConnectionDecoratorContext;
 import org.eclipse.graphiti.features.context.IReconnectionContext;
+import org.eclipse.graphiti.features.context.IRemoveBendpointContext;
 import org.eclipse.graphiti.features.context.IRemoveContext;
 import org.eclipse.graphiti.features.context.IUpdateContext;
 import org.eclipse.graphiti.features.context.impl.AddConnectionContext;
@@ -73,7 +82,11 @@ import org.eclipse.graphiti.features.custom.AbstractCustomFeature;
 import org.eclipse.graphiti.features.custom.ICustomFeature;
 import org.eclipse.graphiti.features.impl.AbstractAddFeature;
 import org.eclipse.graphiti.features.impl.AbstractUpdateFeature;
+import org.eclipse.graphiti.features.impl.DefaultAddBendpointFeature;
+import org.eclipse.graphiti.features.impl.DefaultMoveBendpointFeature;
+import org.eclipse.graphiti.features.impl.DefaultMoveConnectionDecoratorFeature;
 import org.eclipse.graphiti.features.impl.DefaultReconnectionFeature;
+import org.eclipse.graphiti.features.impl.DefaultRemoveBendpointFeature;
 import org.eclipse.graphiti.features.impl.Reason;
 import org.eclipse.graphiti.mm.GraphicsAlgorithmContainer;
 import org.eclipse.graphiti.mm.algorithms.GraphicsAlgorithm;
@@ -301,7 +314,7 @@ public class TransitionSupport {
 				Object bo = getBusinessObjectForPictogramElement(container);
 				if (!(bo instanceof StateGraph))
 					container = container.getContainer();
-				boolean inherited = FSMSupportUtil.getInstance().isInherited(trans, container);
+				boolean inherited = FSMSupportUtil.getInstance().isInherited(getDiagram(), trans);
 				
 				IPeCreateService peCreateService = Graphiti.getPeCreateService();
 				FreeFormConnection connection = peCreateService.createFreeFormConnection(getDiagram());
@@ -825,6 +838,50 @@ public class TransitionSupport {
 		}
 		
 		@Override
+		public IAddBendpointFeature getAddBendpointFeature(IAddBendpointContext context) {
+			return new DefaultAddBendpointFeature(fp){
+				@Override
+				public boolean canAddBendpoint(IAddBendpointContext context) {
+					Transition trans = (Transition) getBusinessObjectForPictogramElement(context.getConnection());
+					return !FSMSupportUtil.getInstance().isInherited(getDiagram(), trans);
+				}
+			};
+		}
+		
+		@Override
+		public IRemoveBendpointFeature getRemoveBendpointFeature(IRemoveBendpointContext context) {
+			return new DefaultRemoveBendpointFeature(fp){
+				@Override
+				public boolean canRemoveBendpoint(IRemoveBendpointContext context) {
+					Transition trans = (Transition) getBusinessObjectForPictogramElement(context.getConnection());
+					return !FSMSupportUtil.getInstance().isInherited(getDiagram(), trans);
+				}
+			};
+		}
+		
+		@Override
+		public IMoveBendpointFeature getMoveBendpointFeature(IMoveBendpointContext context) {
+			return new DefaultMoveBendpointFeature(fp){				
+				@Override
+				public boolean canMoveBendpoint(IMoveBendpointContext context) {
+					Transition trans = (Transition) getBusinessObjectForPictogramElement(context.getConnection());
+					return !FSMSupportUtil.getInstance().isInherited(getDiagram(), trans);
+				}
+			};
+		}
+		
+		@Override
+		public IMoveConnectionDecoratorFeature getMoveConnectionDecoratorFeature(IMoveConnectionDecoratorContext context) {
+			return new DefaultMoveConnectionDecoratorFeature(fp){
+				@Override
+				public boolean canMoveConnectionDecorator(IMoveConnectionDecoratorContext context) {
+					Transition trans = (Transition) getBusinessObjectForPictogramElement(context.getConnectionDecorator().getConnection());
+					return !FSMSupportUtil.getInstance().isInherited(getDiagram(), trans);
+				}
+			};
+		}
+		
+		@Override
 		public ICustomFeature[] getCustomFeatures(ICustomContext context) {
 			PictogramElement pe = context.getPictogramElements()[0];
 			if (pe instanceof ConnectionDecorator)
@@ -852,6 +909,15 @@ public class TransitionSupport {
 				
 				if (!editable)
 					result.add(new RefineTransitionFeature(fp));
+				
+				RemoveBendpointsFeature removeAllBendpoints = new RemoveBendpointsFeature(fp){
+					@Override
+					public boolean canExecute(ICustomContext context) {
+						Object bo = getBusinessObjectForPictogramElement(context.getPictogramElements()[0]);
+						return !FSMSupportUtil.getInstance().isInherited(getDiagram(), (Transition) bo);
+					}
+				};
+				result.add(removeAllBendpoints);
 			}
 
 			// Provide quick fix feature only for those edit parts which have

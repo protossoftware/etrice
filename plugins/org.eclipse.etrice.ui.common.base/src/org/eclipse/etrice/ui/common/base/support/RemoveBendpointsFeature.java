@@ -13,6 +13,7 @@
 package org.eclipse.etrice.ui.common.base.support;
 
 import org.eclipse.graphiti.features.IFeatureProvider;
+import org.eclipse.graphiti.features.context.IContext;
 import org.eclipse.graphiti.features.context.ICustomContext;
 import org.eclipse.graphiti.features.custom.AbstractCustomFeature;
 import org.eclipse.graphiti.mm.pictograms.FreeFormConnection;
@@ -40,14 +41,22 @@ public class RemoveBendpointsFeature extends AbstractCustomFeature {
 	public String getDescription() {
 		return "remove all bend points of the selected connection(s)";
 	}
-
-	public boolean canExecute(ICustomContext context) {
-		return true;
+	
+	@Override
+	public boolean isAvailable(IContext context) {
+		if(!(context instanceof ICustomContext))
+			return false;
+		
+		boolean allFreeForm = true;
+		PictogramElement[] pes = ((ICustomContext)context).getPictogramElements();
+		for (PictogramElement pe : pes) {
+			if (!(pe instanceof FreeFormConnection))
+				allFreeForm = false;
+		}
+		
+		return allFreeForm;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.graphiti.features.custom.ICustomFeature#execute(org.eclipse.graphiti.features.context.ICustomContext)
-	 */
 	@Override
 	public void execute(ICustomContext context) {
 		for (PictogramElement pe : context.getPictogramElements()) {

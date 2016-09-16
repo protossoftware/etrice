@@ -182,7 +182,7 @@ public class ChoicePointSupport {
 			public PictogramElement add(IAddContext context) {
 				ChoicePoint cp = (ChoicePoint) context.getNewObject();
 				ContainerShape sgShape = context.getTargetContainer();
-				boolean inherited = FSMSupportUtil.getInstance().isInherited(cp, sgShape);
+				boolean inherited = FSMSupportUtil.getInstance().isInherited(getDiagram(), cp);
 	
 				// CONTAINER SHAPE WITH RECTANGLE
 				IPeCreateService peCreateService = Graphiti.getPeCreateService();
@@ -249,8 +249,7 @@ public class ChoicePointSupport {
 					if (bo instanceof ChoicePoint) {
 						ChoicePoint cp = (ChoicePoint) bo;
 						
-						ContainerShape acShape = context.getTargetContainer();
-						if (FSMSupportUtil.getInstance().isInherited(cp, acShape))
+						if (FSMSupportUtil.getInstance().isInherited(getDiagram(), cp))
 							return false;
 						
 						return true;
@@ -355,7 +354,7 @@ public class ChoicePointSupport {
 				}
 				ChoicePoint cp = (ChoicePoint) bo;
 				
-				boolean inherited = FSMSupportUtil.getInstance().isInherited(cp, (ContainerShape)containerShape.eContainer());
+				boolean inherited = FSMSupportUtil.getInstance().isInherited(getDiagram(), cp);
 				
 				Color dark = manageColor(inherited? INHERITED_COLOR:DARK_COLOR);
 				updateFigure(cp, containerShape, dark, manageColor(BRIGHT_COLOR));
