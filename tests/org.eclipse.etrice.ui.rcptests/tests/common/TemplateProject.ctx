@@ -5,8 +5,8 @@ Element-Name: TemplateProject
 Element-Type: context
 Element-Version: 2.0
 Id: _clrEQFGbEeWk3rbvuPRQHg
-Runtime-Version: 2.0.0.201506120617
-Save-Time: 5/5/16 12:04 PM
+Runtime-Version: 2.1.0.201606221726
+Save-Time: 9/16/16 9:46 AM
 
 ------=_.ecl.context-718f04b4-ed39-33e3-af62-0995e4561998
 Content-Type: text/ecl
@@ -71,10 +71,10 @@ proc openMSCTemplateProject {
 	//get-menu "Window/Show View/Project Explorer" | click
 	with [get-view "Project Explorer" | get-tree] {
 		select [concat $projectName "/log"] | get-menu Refresh | click
-		if [$targetLanguage | equals Java] {
-			select [concat $projectName "/log/subSystemRef_Async.seq"]
-		} -else {
+		if [$targetLanguage | equals C] {
 			select [concat $projectName "/log/msc.seq"]
+		} -else {
+			select [concat $projectName "/log/subSystemRef_Async.seq"]
 		} | get-menu "Open With/Text Editor" | click
 	}
 }
