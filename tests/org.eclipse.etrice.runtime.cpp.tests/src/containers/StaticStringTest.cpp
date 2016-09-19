@@ -84,7 +84,7 @@ void StaticStringTest::testOperators(void) {
 }
 
 void StaticStringTest::runAllTestCases() {
-	ADD_TESTCASE(testConstructors)
-	ADD_TESTCASE(testSettersAndGetters)
-	ADD_TESTCASE(testOperators)
+	ADD_TESTCASE_CPP(testConstructors)
+	ADD_TESTCASE_CPP(testSettersAndGetters)
+	ADD_TESTCASE_CPP(testOperators)
 }

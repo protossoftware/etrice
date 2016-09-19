@@ -9,25 +9,29 @@
  * 		Juergen Haug (initial contribution)
  *
  *******************************************************************************/
+
 #ifndef SRC_MESSAGING_ADDRESSTEST_H_
 #define SRC_MESSAGING_ADDRESSTEST_H_
 
 #include "util/etTestSuite.h"
 
-class AddressTest : public etTestSuite {
+
+class AddressTest: public etTestSuite {
 
 public:
-	AddressTest() :
-		etTestSuite("AddressTest"){
+	AddressTest(void) :
+			etTestSuite("AddressTest") {
 	}
 
 protected:
-	void testAddress();
-	void testToString();
+	void testConstructors(void);
+	void testOperators(void);
+	void testToString(void);
+	void testToID(void);
+	void testCreateInc(void);
+	void testIsValid(void);
 
-	virtual void runAllTestCases();
+	virtual void runAllTestCases(void);
 };
-
-
 
 #endif /* SRC_MESSAGING_ADDRESSTEST_H_ */

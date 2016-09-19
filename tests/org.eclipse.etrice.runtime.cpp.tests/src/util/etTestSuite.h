@@ -31,7 +31,7 @@ protected:
 	void assertEquals(const int arg1, const int arg2);
 
 	// infra
-#define ADD_TESTCASE(testcase) \
+#define ADD_TESTCASE_CPP(testcase) \
 	{openTestCase(#testcase); \
 	testcase(); \
 	closeTestCase(m_caseId);}
