@@ -151,6 +151,8 @@ public class FSMSupportUtil {
 	public boolean isInherited(Diagram diag, EObject obj) {
 		if(obj instanceof StateGraph)
 			obj = obj.eContainer();
+		else if (obj instanceof ModelComponent)
+			return ((ModelComponent) obj).getBase() != null;
 		
 		return  obj instanceof RefinedState || obj instanceof RefinedTransition || !EcoreUtil.isAncestor(getModelComponent(diag), obj);
 	}
@@ -826,8 +828,8 @@ public class FSMSupportUtil {
 							if (bo==node) {
 								// relocate and resize the invisible rectangle
 								GraphicsAlgorithm ga = shape.getGraphicsAlgorithm();
-			//					System.out.println(RoomNameProvider.getFullPath(node)+": "+ga.getX()+" "+ga.getY()+" "+ga.getWidth()+" "+ga.getHeight());
-			//					System.out.println("  -> "+ps.getX()+" "+ps.getY()+" "+ps.getWidth()+" "+ps.getHeight());
+//								System.out.println(node + ": "+ga.getX()+" "+ga.getY()+" "+ga.getWidth()+" "+ga.getHeight());
+//								System.out.println("  -> "+ps.getX()+" "+ps.getY()+" "+ps.getWidth()+" "+ps.getHeight());
 			
 								int margin = 0;
 								if (node instanceof State)
@@ -846,6 +848,20 @@ public class FSMSupportUtil {
 								// have to call the layout to adjust the visible border
 								LayoutContext lc = new LayoutContext(shape);
 								fp.layoutIfPossible(lc);
+								
+								// update position of sub items
+								if(shape instanceof ContainerShape){
+									ContainerShape container = (ContainerShape) shape;
+									for(Shape child : container.getChildren()){
+										EObject childBo = linkService.getBusinessObjectForLinkedPictogramElement(child);
+										if(!(childBo instanceof StateGraphNode))
+											continue;
+										
+										double[] relPos = positionProvider.getSubPosition((StateGraphNode) childBo);
+										gaService.setLocation(child.getGraphicsAlgorithm(), (int)(relPos[0] * ps.getWidth()), (int)(relPos[1]*ps.getHeight()));
+									}
+								}
+								
 								break;
 							}
 						}

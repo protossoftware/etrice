@@ -55,6 +55,7 @@ public class DefaultPositionProvider implements IPositionProvider {
 	}
 	
 	private HashMap<String, Position> obj2pos = new HashMap<String, Position>();
+	private HashMap<String, Position> subObj2pos = new HashMap<String, Position>();
 	private HashMap<String, ArrayList<Position>> trans2points = new HashMap<String, ArrayList<Position>>();
 	private HashMap<String, StateGraph> initialPointObj = new HashMap<String, StateGraph>();
 	private HashMap<String, PosAndSize> sg2sz = new HashMap<String, PosAndSize>();
@@ -229,7 +230,26 @@ public class DefaultPositionProvider implements IPositionProvider {
 					if (obj instanceof StateGraphNode) {
 						StateGraphNode node = (StateGraphNode)obj;
 						margin = getMargin(node);
-						path = fsmNameProvider.getFullPath((StateGraphItem) obj);						
+						path = fsmNameProvider.getFullPath((StateGraphItem) obj);
+						
+						if(sgItemShape instanceof ContainerShape){
+							// sub items
+							for(Shape childShape : ((ContainerShape)sgItemShape).getChildren()){
+								EObject childObj = linkService.getBusinessObjectForLinkedPictogramElement(childShape);
+								if(childObj instanceof StateGraphItem){
+									GraphicsAlgorithm childGa = childShape.getGraphicsAlgorithm();
+									String childPath = fsmNameProvider.getFullPath((StateGraphItem) childObj);
+									if (childPath != null) {
+										Position pos = new Position();
+										pos.x = childGa.getX() / (double) (ga.getWidth() - 2 * margin);
+										pos.y = childGa.getY() / (double) (ga.getHeight() - 2 * margin);
+										pos.sx = -1;
+										pos.sy = -1;
+										subObj2pos.put(childPath, pos);
+									}
+								}
+							}
+						}
 					} else if(obj instanceof StateGraph){
 						StateGraph graph = (StateGraph)obj;
 						margin = getMargin(graph);
@@ -316,5 +336,14 @@ public class DefaultPositionProvider implements IPositionProvider {
 	@Override
 	public PosAndSize getGraphPosAndSize(StateGraph sg) {
 		return sg2sz.get(FSMSupportUtil.getInstance().getFSMNameProvider().getFullPath(sg));
+	}
+
+	@Override
+	public double[] getSubPosition(StateGraphNode subNode) {
+		Position pos = subObj2pos.get(FSMSupportUtil.getInstance().getFSMNameProvider().getFullPath(subNode));
+		if (pos==null)
+			return null;
+		
+		return new double[]{pos.x, pos.y};
 	}
 }
