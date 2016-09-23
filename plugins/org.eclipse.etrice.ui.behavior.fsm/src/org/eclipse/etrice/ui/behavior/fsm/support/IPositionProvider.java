@@ -134,4 +134,10 @@ public interface IPositionProvider {
 	 * or given graph itself.
 	 */
 	public StateGraph getInitialPoint(StateGraph graph);
+	
+	/**
+	 * @param subNode sub level item of a StateGraphNode parent
+	 * @return relative position to parent (no size)
+	 */
+	public double[] getSubPosition(StateGraphNode subNode);
 }
