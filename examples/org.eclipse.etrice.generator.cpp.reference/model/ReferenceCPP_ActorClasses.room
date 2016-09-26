@@ -152,6 +152,8 @@ RoomModel ReferenceCPP_ActorClasses {
 					subgraph {
 						EntryPoint tp0
 						ExitPoint tp1
+					TransitionPoint tp2
+					ExitPoint tp3
 					}
 				}
 				Transition tr0: tp1 of state0 -> tp0 of state2
@@ -173,6 +175,30 @@ RoomModel ReferenceCPP_ActorClasses {
 				}
 				Transition tr2: tp1 of state2 -> Done
 				State Done
+			TransitionPoint tp0
+				Transition tr3: my tp0 -> state1 {
+					triggers {
+						<reply0: port>
+					}
+				}
+			ChoicePoint cp0
+				Transition tr4: state0 -> cp cp0 {
+					triggers {
+						<reply0: port>
+					}
+				}
+				Transition tr5: cp cp0 -> tp0 of state2
+				Transition tr6: cp cp0 -> state2 {
+					cond {
+						"true"
+					}
+				}
+				Transition tr7: cp cp0 -> tp0 of state0 {
+					cond {
+						"true"
+					}
+				}
+				Transition tr8: tp3 of state0 -> cp cp0
 			}
 		}
 	}
@@ -188,11 +214,6 @@ RoomModel ReferenceCPP_ActorClasses {
 							}
 						}
 						Transition tr0: my tp0 -> state0
-						Transition tr1: state0 -> my tp1 {
-							triggers {
-								<reply0: port>
-							}
-						}
 					}
 				}
 				RefinedState state2 {
