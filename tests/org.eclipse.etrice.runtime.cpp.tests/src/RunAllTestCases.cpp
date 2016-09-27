@@ -17,7 +17,7 @@
 //#include "debugging/DebuggingServiceTest.h"
 #include "messaging/AddressTest.h"
 #include "messaging/MessageTest.h"
-//#include "messaging/RTObjectTest.h"
+#include "messaging/RTObjectTest.h"
 //#include "messaging/MessageSeQueueTest.h"
 //#include "messaging/MessageDispatcherTest.h"
 //#include "messaging/MessageServiceTest.h"
@@ -53,8 +53,8 @@ int main() {
 	MessageTest messageTest;
 	messageTest.run();
 
-//	RTObjectTest rtobjectTest;
-//	 rtobjectTest.run();
+	RTObjectTest rtobjectTest;
+	rtobjectTest.run();
 //
 //	 MessageSeQueueTest msgQueueTest;
 //	 msgQueueTest.run();
