@@ -19,7 +19,7 @@
 #include "messaging/MessageTest.h"
 #include "messaging/RTObjectTest.h"
 #include "messaging/MessageSeQueueTest.h"
-//#include "messaging/MessageDispatcherTest.h"
+#include "messaging/MessageDispatcherTest.h"
 //#include "messaging/MessageServiceTest.h"
 //#include "messaging/MessageServiceControllerTest.h"
 
@@ -59,8 +59,8 @@ int main() {
 	MessageSeQueueTest msgQueueTest;
 	msgQueueTest.run();
 
-//	MessageDispatcherTest msgDispatcherTest;
-//	msgDispatcherTest.run();
+	MessageDispatcherTest msgDispatcherTest;
+	msgDispatcherTest.run();
 //
 //	MessageServiceTest msgServiceTest;
 //	msgServiceTest.run();
