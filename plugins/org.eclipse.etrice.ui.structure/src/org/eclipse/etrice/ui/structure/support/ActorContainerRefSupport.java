@@ -431,7 +431,7 @@ public class ActorContainerRefSupport {
 			        	newRef = ssr;
 			        }
 			        
-			        newRef.setName(SupportUtil.getInstance().getRoomUtil().getUniqueActorContainerRefName(sc));
+			        newRef.setName(SupportUtil.getInstance().getRoomUtil().getUniqueName("ref", sc));
 
 			        IScopeProvider scopeProvider = ((DiagramTypeProvider)getFeatureProvider().getDiagramTypeProvider()).getScopeProvider();
 			        EReference reference = (newRef instanceof ActorRef)?RoomPackage.eINSTANCE.getActorRef_Type():RoomPackage.eINSTANCE.getSubSystemRef_Type();

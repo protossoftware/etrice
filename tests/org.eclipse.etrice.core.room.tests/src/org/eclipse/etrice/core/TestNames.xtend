@@ -121,6 +121,6 @@ class TestNames extends TestBase {
 
 	protected def boolean isNameErrorMessage(Diagnostic diag) {
 		val message = diag.message
-		return diag.severity >= Diagnostic.ERROR && (message.contains("Duplicate name") || (message.contains("name") && message.contains("is already assigned to")));
+		return diag.severity >= Diagnostic.ERROR && (message.contains("Duplicate name") || (message.contains("Name") && message.contains("is already assigned to")));
 	}
 }

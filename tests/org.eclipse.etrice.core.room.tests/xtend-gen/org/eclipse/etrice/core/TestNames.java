@@ -215,7 +215,7 @@ public class TestNames extends TestBase {
         _or = true;
       } else {
         boolean _and_1 = false;
-        boolean _contains_1 = message.contains("name");
+        boolean _contains_1 = message.contains("Name");
         if (!_contains_1) {
           _and_1 = false;
         } else {

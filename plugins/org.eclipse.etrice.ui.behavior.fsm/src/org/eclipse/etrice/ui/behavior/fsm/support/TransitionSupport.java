@@ -260,10 +260,10 @@ public class TransitionSupport {
 					}
 
 					if (trans instanceof InitialTransition) {
-						trans.setName(FSMSupportUtil.getInstance().getFSMUtil().getUniqueInitialTransitionName(sg));
+						trans.setName(FSMSupportUtil.getInstance().getFSMNewNamingUtil().getUniqueName("init", sg));
 					}
 					else {
-						trans.setName(FSMSupportUtil.getInstance().getFSMUtil().getUniqueTransitionName(sg));
+						trans.setName(FSMSupportUtil.getInstance().getFSMNewNamingUtil().getUniqueName("tr", sg));
 					}
 
 					ContainerShape targetContainer = FSMSupportUtil.getInstance().getStateGraphContainer((ContainerShape) context.getSourcePictogramElement().eContainer());

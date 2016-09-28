@@ -114,8 +114,8 @@ public class BehaviorQuickfixProvider extends AbstractQuickfixProvider implement
 										// trigger and add it to the state graph
 										TriggeredTransition trans = FSMFactory.eINSTANCE
 												.createTriggeredTransition();
-										trans.setName(SupportUtil.getInstance().getFSMUtil()
-												.getUniqueTransitionName((StateGraph) state
+										trans.setName(SupportUtil.getInstance().getFSMNewNamingUtil()
+												.getUniqueName("tr", (StateGraph) state
 														.eContainer()));
 										Trigger tri = FSMFactory.eINSTANCE
 												.createTrigger();

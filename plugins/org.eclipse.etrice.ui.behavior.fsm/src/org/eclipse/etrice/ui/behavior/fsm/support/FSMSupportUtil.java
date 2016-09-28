@@ -48,7 +48,7 @@ import org.eclipse.etrice.core.fsm.fSM.TransitionTerminal;
 import org.eclipse.etrice.core.fsm.naming.FSMNameProvider;
 import org.eclipse.etrice.core.fsm.ui.FSMUiModule;
 import org.eclipse.etrice.core.fsm.util.FSMHelpers;
-import org.eclipse.etrice.core.fsm.util.FSMUtil;
+import org.eclipse.etrice.core.fsm.util.FSMNewNamingUtil;
 import org.eclipse.etrice.core.fsm.validation.FSMValidationUtil;
 import org.eclipse.etrice.ui.behavior.fsm.commands.StateGraphContext;
 import org.eclipse.etrice.ui.behavior.fsm.support.IPositionProvider.Pos;
@@ -111,7 +111,7 @@ public class FSMSupportUtil {
 	@Inject
 	private FSMNameProvider fsmNameProvider;
 	@Inject
-	private FSMUtil fsmUtil;
+	private FSMNewNamingUtil fsmNewNamingUtil;
 
 	/**
 	 * @return the roomHelpers
@@ -130,8 +130,8 @@ public class FSMSupportUtil {
 	/**
 	 * @return the roomUtil
 	 */
-	public FSMUtil getFSMUtil() {
-		return fsmUtil;
+	public FSMNewNamingUtil getFSMNewNamingUtil() {
+		return fsmNewNamingUtil;
 	}
 
 	/**

@@ -617,7 +617,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 		String sourceName = fqnProvider.apply(source).getLastSegment();
 		String sourceType = source.eClass().getName();
 		String sourceOwner = roomHelpers.getRoomClass(source).getName();
-		error("name '" + targetName + "' is already assigned to " + sourceType + sourceOwner+"."+sourceName, target, target.eClass().getEStructuralFeature("name"));
+		error("Name '" + targetName + "' is already assigned to " + sourceType + " " + sourceOwner+"."+sourceName, target, target.eClass().getEStructuralFeature("name"));
 	}
 
 	@Check

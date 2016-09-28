@@ -98,7 +98,7 @@ public class PortSupport extends InterfaceItemSupport {
 
 				// create Port
 		        Port port = RoomFactory.eINSTANCE.createPort();
-		        port.setName(SupportUtil.getInstance().getRoomUtil().getUniqueInterfaceItemName("p", acc));
+		        port.setName(SupportUtil.getInstance().getRoomUtil().getUniqueName("p", acc));
 		        ExternalPort xp = null;
 		        
 		        if (acc instanceof ActorClass) {

@@ -159,7 +159,7 @@ public class StateSupport {
 				
 				// create new State and add it
 				SimpleState s = FSMFactory.eINSTANCE.createSimpleState();
-				s.setName(FSMSupportUtil.getInstance().getFSMUtil().getUniqueStateName(sg));
+				s.setName(FSMSupportUtil.getInstance().getFSMNewNamingUtil().getUniqueName("state", sg));
 				sg.getStates().add(s);
 		        
 	        	Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();

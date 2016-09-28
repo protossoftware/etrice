@@ -128,7 +128,7 @@ public class ChoicePointSupport {
 
 				// create choice point and add it
 		    	ChoicePoint cp = FSMFactory.eINSTANCE.createChoicePoint();
-				cp.setName(FSMSupportUtil.getInstance().getFSMUtil().getUniqueChoicePointName(sg));
+				cp.setName(FSMSupportUtil.getInstance().getFSMNewNamingUtil().getUniqueName("cp", sg));
 				sg.getChPoints().add(cp);
 
 				Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();

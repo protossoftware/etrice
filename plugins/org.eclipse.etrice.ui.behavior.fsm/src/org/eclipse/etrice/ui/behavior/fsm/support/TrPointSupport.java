@@ -163,7 +163,7 @@ public class TrPointSupport {
 					tp = FSMFactory.eINSTANCE.createTransitionPoint();
 					break;
 				}
-		        tp.setName(FSMSupportUtil.getInstance().getFSMUtil().getUniqueTrPointName(sg));
+		        tp.setName(FSMSupportUtil.getInstance().getFSMNewNamingUtil().getUniqueName("tr", sg));
 				sg.getTrPoints().add(tp);
 		        
 		        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();

@@ -30,7 +30,7 @@ import org.eclipse.etrice.core.room.SPP;
 import org.eclipse.etrice.core.room.SPPoint;
 import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
-import org.eclipse.etrice.core.room.util.RoomUtil;
+import org.eclipse.etrice.core.room.util.RoomNewNamingUtil;
 import org.eclipse.etrice.core.ui.RoomUiModule;
 import org.eclipse.etrice.core.validation.ValidationUtil;
 import org.eclipse.graphiti.features.IFeatureProvider;
@@ -78,7 +78,7 @@ public class SupportUtil {
 	@Inject
 	private RoomNameProvider roomNameProvider;
 	@Inject
-	private RoomUtil roomUtil;
+	private RoomNewNamingUtil roomUtil;
 
 	/**
 	 * @return the roomHelpers
@@ -97,7 +97,7 @@ public class SupportUtil {
 	/**
 	 * @return the roomUtil
 	 */
-	public RoomUtil getRoomUtil() {
+	public RoomNewNamingUtil getRoomUtil() {
 		return roomUtil;
 	}
 

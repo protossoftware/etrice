@@ -97,7 +97,7 @@ public class SPPSupport extends InterfaceItemSupport {
 
 				// create SPP
 		        SPP spp = RoomFactory.eINSTANCE.createSPP();
-		        spp.setName(SupportUtil.getInstance().getRoomUtil().getUniqueInterfaceItemName("spp", acc));
+		        spp.setName(SupportUtil.getInstance().getRoomUtil().getUniqueName("spp", acc));
 				
 				acc.getServiceProvisionPoints().add(spp);
 		        

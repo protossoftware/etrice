@@ -130,46 +130,50 @@ public class FSMJavaValidator extends org.eclipse.etrice.core.fsm.validation.Abs
 	}
 	
 	@Check
-	public void checkUniqueNamesInStateGraph(StateGraph sg) {
+	public void checkUniqueNamesInStateGraph(final StateGraph sg) {
 	    Multimap<String, StateGraphItem> names2items = ArrayListMultimap.create();
 	    
 	    // fill the multimap with all objects
-        do {
-            for (org.eclipse.etrice.core.fsm.fSM.State st : sg.getStates()) {
+	    StateGraph stateGraph = sg;
+	    do {
+            for (org.eclipse.etrice.core.fsm.fSM.State st : stateGraph.getStates()) {
                 // the parent state of refined states is in this scope - so we don't add the name now 
                 if (!(st instanceof RefinedState)) {
                     names2items.put(st.getName(), st);
                 }
             }
-            for (TrPoint tp : sg.getTrPoints()) {
+            for (TrPoint tp : stateGraph.getTrPoints()) {
                 names2items.put(tp.getName(), tp);
             }
-            for (ChoicePoint cp : sg.getChPoints()) {
+            for (ChoicePoint cp : stateGraph.getChPoints()) {
                 names2items.put(cp.getName(), cp);
             }
-            for (Transition tr : sg.getTransitions()) {
+            for (Transition tr : stateGraph.getTransitions()) {
                 names2items.put(tr.getName(), tr);
             }
             
-            if (sg.eContainer() instanceof RefinedState) {
-                sg = ((RefinedState)sg.eContainer()).getTarget().getSubgraph();
+            if (stateGraph.eContainer() instanceof RefinedState) {
+            	stateGraph = ((RefinedState)stateGraph.eContainer()).getTarget().getSubgraph();
             }
             else if (sg.eContainer() instanceof ModelComponent) {
-                ModelComponent base = ((ModelComponent)sg.eContainer()).getBase();
-                sg = base!=null? base.getStateMachine():null;
+                ModelComponent base = ((ModelComponent)stateGraph.eContainer()).getBase();
+                stateGraph = base!=null? base.getStateMachine():null;
             }
             else {
                 break;
             }
         }
-        while (sg!=null);
+        while (stateGraph != null);
         
         // check for duplicates
         for (String key: names2items.keySet()) {
             Collection<StateGraphItem> list = names2items.get(key);
             if (list.size()>1) {
                 for (StateGraphItem item: list) {
-                    error("Name is not unique in state graph (including super graph)", item, getNameFeature(item));
+                	if(sg.eContents().contains(item))
+                		error("Name is not unique in state graph (including super graph)", item, getNameFeature(item));
+                	else if(sg.eResource() == item.eResource())
+                		warning("Name is also used in derived graph(s)", item, getNameFeature(item));
                 }
             }
         }

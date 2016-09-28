@@ -19,7 +19,7 @@ import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.fsm.fSM.State;
 import org.eclipse.etrice.core.fsm.fSM.StateGraph;
 import org.eclipse.etrice.core.fsm.fSM.Transition;
-import org.eclipse.etrice.core.room.util.RoomUtil;
+import org.eclipse.etrice.core.room.util.RoomNewNamingUtil;
 import org.eclipse.etrice.core.ui.RoomUiModule;
 import org.eclipse.etrice.ui.behavior.DiagramAccess;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -61,7 +61,7 @@ public class EditBehaviorHandler extends AbstractEditHandler {
 			public void process(XtextResource resource) throws Exception {
 				if (resource != null) {
 					Injector injector = RoomUiModule.getInjector();
-					RoomUtil util = injector.getInstance(RoomUtil.class);
+					RoomNewNamingUtil util = injector.getInstance(RoomNewNamingUtil.class);
 					
 					EObject object = resource.getEObject(fragment);
 					if (object instanceof ActorClass) {
@@ -70,13 +70,13 @@ public class EditBehaviorHandler extends AbstractEditHandler {
 				}
 			}
 
-			private void createTransitionNames(StateGraph sg, RoomUtil util) {
+			private void createTransitionNames(StateGraph sg, RoomNewNamingUtil util) {
 				if (sg==null)
 					return;
 				
 				for (Transition tr : sg.getTransitions()) {
 					if (tr.getName()==null || tr.getName().isEmpty()) {
-						tr.setName(util.getUniqueTransitionName(sg));
+						tr.setName(util.getUniqueName("tr", sg));
 					}
 				}
 				
