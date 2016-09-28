@@ -15,8 +15,8 @@ package org.eclipse.etrice.ui.common.base.editor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.etrice.ui.common.base.UIBaseActivator;
 import org.eclipse.etrice.ui.common.base.preferences.UIBasePreferenceConstants;
-import org.eclipse.graphiti.ui.editor.DiagramEditor;
 import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IPartListener;
 import org.eclipse.ui.IWorkbenchPart;
 
@@ -26,44 +26,38 @@ import org.eclipse.ui.IWorkbenchPart;
  */
 public class SaveOnFocusLostListener implements IPartListener/*, CommandStackListener*/ {
 
-	private DiagramEditor editor;
-	private IPreferenceStore store;
+	private final IEditorPart editor;
+	private final IPreferenceStore store;
 	
 	private boolean isActive = true;
 	
 	@SuppressWarnings("unused")
 	private boolean saveAfterCurrentCommand = false;
 
-	public SaveOnFocusLostListener(DiagramEditor editor) {
+	public SaveOnFocusLostListener(IEditorPart editor) {
 		this.editor = editor;
 		this.store = UIBaseActivator.getDefault().getPreferenceStore();
 		//editor.getEditingDomain().getCommandStack().addCommandStackListener(this);
+		editor.getSite().getPage().addPartListener(this);
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.ui.IPartListener#partActivated(org.eclipse.ui.IWorkbenchPart)
-	 */
 	@Override
 	public void partActivated(IWorkbenchPart part) {
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.ui.IPartListener#partBroughtToTop(org.eclipse.ui.IWorkbenchPart)
-	 */
 	@Override
 	public void partBroughtToTop(IWorkbenchPart part) {
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.ui.IPartListener#partClosed(org.eclipse.ui.IWorkbenchPart)
-	 */
 	@Override
 	public void partClosed(IWorkbenchPart part) {
+		if(part != editor)
+			return;
+		
+		setActive(false);
+		part.getSite().getPage().removePartListener(this);
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.ui.IPartListener#partDeactivated(org.eclipse.ui.IWorkbenchPart)
-	 */
 	@Override
 	public void partDeactivated(IWorkbenchPart part) {	
 		if(part != editor)
@@ -83,16 +77,10 @@ public class SaveOnFocusLostListener implements IPartListener/*, CommandStackLis
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.ui.IPartListener#partOpened(org.eclipse.ui.IWorkbenchPart)
-	 */
 	@Override
 	public void partOpened(IWorkbenchPart part) {
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.emf.common.command.CommandStackListener#commandStackChanged(java.util.EventObject)
-	 */
 //	@Override
 //	public void commandStackChanged(EventObject event) {
 //		

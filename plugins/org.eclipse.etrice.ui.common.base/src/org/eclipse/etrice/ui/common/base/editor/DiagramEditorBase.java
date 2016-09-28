@@ -12,31 +12,19 @@
 
 package org.eclipse.etrice.ui.common.base.editor;
 
-import java.io.IOException;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature.Setting;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.transaction.RunnableWithResult;
-import org.eclipse.emf.transaction.TransactionalEditingDomain;
-import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
 import org.eclipse.etrice.core.fsm.ui.FSMUiModule;
-import org.eclipse.etrice.ui.common.base.UIBaseActivator;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.graphiti.services.Graphiti;
 import org.eclipse.graphiti.ui.editor.DiagramBehavior;
@@ -44,26 +32,16 @@ import org.eclipse.graphiti.ui.editor.DiagramEditor;
 import org.eclipse.graphiti.ui.editor.EditorInputAdapter;
 import org.eclipse.graphiti.ui.editor.IDiagramEditorInput;
 import org.eclipse.help.IContextProvider;
-import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.dialogs.TrayDialog;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorSite;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
-import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.serializer.ISerializer;
 import org.eclipse.xtext.ui.editor.XtextEditor;
-import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
-import org.eclipse.xtext.validation.CheckMode;
-import org.eclipse.xtext.validation.IResourceValidator;
-import org.eclipse.xtext.validation.Issue;
 
-import com.google.common.collect.Lists;
-import com.google.inject.Inject;
 import com.google.inject.Injector;
 
 /**
@@ -72,14 +50,9 @@ import com.google.inject.Injector;
  */
 public abstract class DiagramEditorBase extends DiagramEditor implements IInputUriHolder {
 
-	@Inject
-	protected IResourceValidator resourceValidator;
-
 	protected ModificationTrackingEnabler mte = new ModificationTrackingEnabler();
 	protected URI inputUri;
 	private Object textEditorClass;
-
-	private SaveOnFocusLostListener saveOnFocusListener;
 	
 	private SuperClassListener superClassListener;
 
@@ -116,115 +89,7 @@ public abstract class DiagramEditorBase extends DiagramEditor implements IInputU
 			System.err.println("ERROR in diagram viewer: could not resolve all proxies!");
 	
 		mte.setTarget(getEditingDomain());
-	}
-
-	@Override
-	public void doSave(IProgressMonitor monitor) {
-		if(monitor == null)
-			monitor = new NullProgressMonitor();
-		
-		boolean isValid = validateResourcesBeforeSave(monitor);
-		if(isValid)
-			super.doSave(monitor);
-		
-		// deactivate saveOnFocus for better usability
-		// avoid retrigger loop from message box
-		saveOnFocusListener.setActive(isValid);
-	}
-	
-	protected boolean validateResourcesBeforeSave(final IProgressMonitor monitor){
-		final TransactionalEditingDomain editingDomain = getEditingDomain();
-		
-		final RunnableWithResult<Boolean> runnable = new RunnableWithResult.Impl<Boolean>() {
-
-			@Override
-			public void run() {
-				// copy list to avoid ConcurrentModification during serialize and validation
-				final List<Resource> resources = Lists.newArrayList(editingDomain.getResourceSet().getResources());
-				setResult(false);
-				for(Resource res : resources){
-					if(!validateResource(res, monitor))
-						return;
-				}
-				
-				setResult(true);
-			}
-			
-		};
-		
-		try {
-			return TransactionUtil.runExclusive(editingDomain, runnable);
-		}
-		catch (InterruptedException e) {
-			MessageDialog.openError(Display.getDefault().getActiveShell(), "ERROR", "Internal error: could not save model:\n\n"+e.getMessage());
-			UIBaseActivator.getDefault().getLog().log(new Status(Status.ERROR, UIBaseActivator.PLUGIN_ID, e.getMessage(), e));
-	
-			return false;
-		}
-	}
-	
-	protected boolean validateResource(Resource res, final IProgressMonitor monitor){
-		if (res instanceof XtextResource) {
-			if (!res.isLoaded()) {
-				try {
-					res.load(Collections.EMPTY_MAP);
-				} catch (IOException e) {
-					MessageDialog.openError(Display.getDefault().getActiveShell(), "ERROR", "Internal error: couldn't load referenced resource "+res.getURI());
-					return false;
-				}
-			}
-			if (res.isModified()) {
-
-				XtextResource xres = (XtextResource) res;
-				ISerializer serializer = xres.getSerializer();
-				
-				if (xres.getContents().isEmpty()) {
-					MessageDialog.openError(Display.getDefault().getActiveShell(), "ERROR", "Internal error: part of textual model is empty, can't save");
-					return false;
-				}
-
-				try {
-					// HOWTO: call serializer to validate the concrete syntax
-					// this throws an exception which is caught further up the stack
-					// and a dialog will be displayed
-					serializer.serialize(xres.getContents().get(0));
-					
-					List<Issue> result = resourceValidator.validate(res, CheckMode.NORMAL_AND_FAST, new CancelIndicator() {
-						public boolean isCanceled() {
-							if(monitor == null)
-								return false;
-							return monitor.isCanceled();
-						}
-					});
-					if (!result.isEmpty()) {
-						boolean error = false;
-						MultiStatus ms = new MultiStatus(UIBaseActivator.PLUGIN_ID, Status.ERROR, "validation errors during diagram save", null);
-						for (Issue issue : result) {
-							if (issue.isSyntaxError() || issue.getSeverity()==Severity.ERROR) {
-								ms.add(new Status(Status.ERROR, UIBaseActivator.PLUGIN_ID, issue.getMessage()));
-								error = true;
-							}
-						}
-						if (error) {
-							StringBuilder messges = new StringBuilder();
-							for(IStatus status : ms.getChildren())
-								messges.append(status.getMessage()+"\n");
-							MessageDialog.openError(Display.getDefault().getActiveShell(), "ERROR", "Internal error: model is invalid, can't save:\n\n"+messges);
-							UIBaseActivator.getDefault().getLog().log(ms);
-							return false;
-						}
-					}
-				}
-				catch (RuntimeException e) {
-					MessageDialog.openError(Display.getDefault().getActiveShell(), "ERROR", "Internal error: model is invalid, can't save:\n\n"+e.getMessage());
-					UIBaseActivator.getDefault().getLog().log(new Status(Status.ERROR, UIBaseActivator.PLUGIN_ID, e.getMessage(),e));
-					return false;
-				}
-			}
-		}
-		
-		return true;
-	}
+	}	
 	
 	/* (non-Javadoc)
 	 * @see org.eclipse.graphiti.ui.editor.DiagramEditor#setFocus()
@@ -261,7 +126,6 @@ public abstract class DiagramEditorBase extends DiagramEditor implements IInputU
 	public void dispose() {
 		mte.unsetTarget(getEditingDomain());
 	
-		getSite().getPage().removePartListener(saveOnFocusListener);
 		PlatformUI.getWorkbench().getActiveWorkbenchWindow().getPartService().removePartListener(superClassListener);
 		superClassListener.dispose();
 		
@@ -271,9 +135,6 @@ public abstract class DiagramEditorBase extends DiagramEditor implements IInputU
 	@Override
 	public void createPartControl(Composite parent) {
 		super.createPartControl(parent);
-
-		saveOnFocusListener = new SaveOnFocusLostListener(this);
-		getSite().getPage().addPartListener(saveOnFocusListener);
 		
 		superClassListener = new SuperClassListener(this, textEditorClass);
 		PlatformUI.getWorkbench().getActiveWorkbenchWindow().getPartService().addPartListener(superClassListener);

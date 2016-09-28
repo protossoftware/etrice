@@ -13,6 +13,7 @@
 package org.eclipse.etrice.ui.common.base.editor;
 
 import org.eclipse.gef.ContextMenuProvider;
+import org.eclipse.graphiti.ui.editor.DefaultPersistencyBehavior;
 import org.eclipse.graphiti.ui.editor.DefaultUpdateBehavior;
 import org.eclipse.graphiti.ui.editor.DiagramBehavior;
 import org.eclipse.graphiti.ui.editor.IDiagramContainerUI;
@@ -43,5 +44,10 @@ public class CustomDiagramBehavior extends DiagramBehavior {
 		return new CustomContextMenuProvider(getDiagramContainer().getGraphicalViewer(),
 				getDiagramContainer().getActionRegistry(),
 				getConfigurationProvider());
+	}
+	
+	@Override
+	protected DefaultPersistencyBehavior createPersistencyBehavior() {
+		return new CustomPersistencyBehavior(this);
 	}
 }
