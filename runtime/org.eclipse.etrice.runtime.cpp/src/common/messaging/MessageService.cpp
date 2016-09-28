@@ -67,7 +67,6 @@ void MessageService::MessageService_init(etTime interval, int priority) {
 }
 
 MessageService::~MessageService() {
-	std::cout << "~MessageService" << std::endl;
 	etMutex_destruct(&m_mutex);
 	etSema_destruct(&m_executionSemaphore);
 	etThread_destruct(&m_thread);
@@ -77,6 +76,7 @@ MessageService::~MessageService() {
 }
 
 void MessageService::start() {
+	m_running = true;
 	etThread_start(&m_thread);
 	if (m_execMode == IMessageService::POLLED || m_execMode == IMessageService::MIXED) {
 		etTimer_start(&m_timer);
@@ -84,7 +84,6 @@ void MessageService::start() {
 }
 
 void MessageService::run() {
-	m_running = true;
 	while (m_running) {
 		etMutex_enter(&m_mutex);
 		const Message* msg = getMessageQueue().pop(); // get next Message from Queue

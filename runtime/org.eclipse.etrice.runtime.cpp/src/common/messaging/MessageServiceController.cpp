@@ -112,13 +112,13 @@ void MessageServiceController::terminate() {
 	// terminate all message services
 	etMutex_enter(&m_mutex);
 	m_terminateServices = m_messageServices;
-	etMutex_leave(&m_mutex);
 
 	std::map<int, IMessageService*>::iterator it = m_terminateServices.begin();
 	for (; it != m_terminateServices.end(); ++it) {
 		(it->second)->terminate();
 		//TODO TS: stop in order of priorities
 	}
+	etMutex_leave(&m_mutex);
 }
 
 void MessageServiceController::waitTerminate() {

@@ -23,6 +23,7 @@
 
 #include <time.h>
 #include <sys/unistd.h>
+#include <errno.h>
 
 typedef void *(*threadFunc)(void *);
 void* etThread_execute(etThread* self);
@@ -91,13 +92,16 @@ void etThread_sleep(etInt32 millis){
 	ET_MSC_LOGGER_SYNC_ENTRY("etThread", "sleep")
 	{
 		/* TODO: nanosleep doesn't work at all */
-/*		struct timespec time; */
-/*		time.tv_nsec = 1000*1000*millis; */
-/*		time.tv_sec = 0; */
-/*		nanosleep(&time, NULL); */
-		if (millis<1000)
-			millis = 1000;
-		sleep(millis/1000);
+		struct timespec time;
+		time.tv_sec = millis / 1000;
+		time.tv_nsec = (millis - time.tv_sec * 1000) * 1000*1000;
+		while(nanosleep(&time, &time) != 0) {
+			if(errno != EINTR)
+				break;
+		}
+//		if (millis<1000)
+//			millis = 1000;
+//		sleep(millis/1000);
 	}
 	ET_MSC_LOGGER_SYNC_EXIT
 }

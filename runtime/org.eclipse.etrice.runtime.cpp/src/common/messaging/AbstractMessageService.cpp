@@ -18,8 +18,8 @@ namespace etRuntime {
 AbstractMessageService::AbstractMessageService(IRTObject* parent, const std::string& name, int node, int thread) :
 		RTObject(parent, name),
 		m_address(node, thread, 0),
-		m_messageQueue(this, "Queue"),
-		m_messageDispatcher(this, m_address.createInc(), "Dispatcher") {
+		m_messageQueue(NULL, "Queue"),
+		m_messageDispatcher(NULL, m_address.createInc(), "Dispatcher") {
 }
 
 Address AbstractMessageService::getFreeAddress() {
