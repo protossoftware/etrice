@@ -46,7 +46,7 @@ int main() {
 //	DebuggingServiceTest debugSvcTest;
 //	debugSvcTest.run();
 
-// Test messaging
+	// Test messaging
 	AddressTest addressTest;
 	addressTest.run();
 
@@ -55,20 +55,18 @@ int main() {
 
 	RTObjectTest rtobjectTest;
 	rtobjectTest.run();
-//
-//	 MessageSeQueueTest msgQueueTest;
-//	 msgQueueTest.run();
-//
-//	 MessageDispatcherTest msgDispatcherTest;
-//	 msgDispatcherTest.run();
-//
-//	 MessageServiceTest msgServiceTest;
-//	 msgServiceTest.run();
-//
-//	 MessageServiceControllerTest msgSvcCtrlTest;
-//	 msgSvcCtrlTest.run();
 
-// Test modelbase
+//	MessageSeQueueTest msgQueueTest;
+//	msgQueueTest.run();
+//
+//	MessageDispatcherTest msgDispatcherTest;
+//	msgDispatcherTest.run();
+//
+//	MessageServiceTest msgServiceTest;
+//	msgServiceTest.run();
+//
+//	MessageServiceControllerTest msgSvcCtrlTest;
+//	msgSvcCtrlTest.run();
 
 	etUnit_close();
 
