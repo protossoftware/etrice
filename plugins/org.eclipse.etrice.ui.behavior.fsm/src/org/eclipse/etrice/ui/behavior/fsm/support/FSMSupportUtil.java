@@ -858,7 +858,8 @@ public class FSMSupportUtil {
 											continue;
 										
 										double[] relPos = positionProvider.getSubPosition((StateGraphNode) childBo);
-										gaService.setLocation(child.getGraphicsAlgorithm(), (int)(relPos[0] * ps.getWidth()), (int)(relPos[1]*ps.getHeight()));
+										if(relPos != null)
+											gaService.setLocation(child.getGraphicsAlgorithm(), (int)(relPos[0] * ps.getWidth()), (int)(relPos[1]*ps.getHeight()));
 									}
 								}
 								

@@ -27,6 +27,9 @@ mklink /J %dest%\org.eclipse.etrice.tutorials.java %parent%..\examples\org.eclip
 mklink /J %dest%\org.eclipse.etrice.examples.c %parent%..\examples\org.eclipse.etrice.examples.c
 mklink /J %dest%\org.eclipse.etrice.examples.java %parent%..\examples\org.eclipse.etrice.examples.java
 
+mklink /J %dest%\org.eclipse.etrice.generator.c.reference %parent%..\examples\org.eclipse.etrice.generator.c.reference
+mklink /J %dest%\org.eclipse.etrice.generator.cpp.reference %parent%..\examples\org.eclipse.etrice.generator.cpp.reference
+
 REM runtime
 mklink /J %dest%\org.eclipse.etrice.modellib.c %parent%..\runtime\org.eclipse.etrice.modellib.c
 mklink /J %dest%\org.eclipse.etrice.modellib.java %parent%..\runtime\org.eclipse.etrice.modellib.java
@@ -39,3 +42,6 @@ REM tests
 mklink /J %dest%\org.eclipse.etrice.generator.common.tests %parent%..\tests\org.eclipse.etrice.generator.common.tests
 mklink /J %dest%\org.eclipse.etrice.runtime.c.tests %parent%..\tests\org.eclipse.etrice.runtime.c.tests
 mklink /J %dest%\org.eclipse.etrice.runtime.cpp.tests %parent%..\tests\org.eclipse.etrice.runtime.cpp.tests
+
+
+
