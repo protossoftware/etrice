@@ -1,5 +1,6 @@
 WindowsMinGW
 LinuxPosix
+WindowsMinGW_ST
 
 src-gen/*
 !src-gen/readme.txt

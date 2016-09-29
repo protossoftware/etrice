@@ -74,3 +74,7 @@ void etThread_sleep(etInt32 millis){
 
 	ET_MSC_LOGGER_SYNC_EXIT
 }
+
+etOSThreadId etThread_self_id(void){
+	return 0;
+}
