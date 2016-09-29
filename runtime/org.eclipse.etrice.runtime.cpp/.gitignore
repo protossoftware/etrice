@@ -1,5 +1,7 @@
 WindowsMinGW
 LinuxPosix
+WindowsMinGW_ST
+
 bin
 src-gen-info
 /Debug/

@@ -1,4 +1,15 @@
 eclipse.preferences.version=1
+environment/project/cdt.managedbuild.config.gnu.mingw.exe.debug.1749013372.103756044/CPP_MODELLIB_ROOTDIR/delimiter=;
+environment/project/cdt.managedbuild.config.gnu.mingw.exe.debug.1749013372.103756044/CPP_MODELLIB_ROOTDIR/operation=append
+environment/project/cdt.managedbuild.config.gnu.mingw.exe.debug.1749013372.103756044/CPP_MODELLIB_ROOTDIR/value=${workspace_loc\:org.eclipse.etrice.modellib.cpp}
+environment/project/cdt.managedbuild.config.gnu.mingw.exe.debug.1749013372.103756044/CPP_RUNTIME_ROOTDIR/delimiter=;
+environment/project/cdt.managedbuild.config.gnu.mingw.exe.debug.1749013372.103756044/CPP_RUNTIME_ROOTDIR/operation=append
+environment/project/cdt.managedbuild.config.gnu.mingw.exe.debug.1749013372.103756044/CPP_RUNTIME_ROOTDIR/value=${workspace_loc\:org.eclipse.etrice.runtime.cpp}
+environment/project/cdt.managedbuild.config.gnu.mingw.exe.debug.1749013372.103756044/RUNTIME_ROOTDIR/delimiter=;
+environment/project/cdt.managedbuild.config.gnu.mingw.exe.debug.1749013372.103756044/RUNTIME_ROOTDIR/operation=append
+environment/project/cdt.managedbuild.config.gnu.mingw.exe.debug.1749013372.103756044/RUNTIME_ROOTDIR/value=${workspace_loc\:org.eclipse.etrice.runtime.c}
+environment/project/cdt.managedbuild.config.gnu.mingw.exe.debug.1749013372.103756044/append=true
+environment/project/cdt.managedbuild.config.gnu.mingw.exe.debug.1749013372.103756044/appendContributed=true
 environment/project/cdt.managedbuild.config.gnu.mingw.exe.debug.1749013372.1242072675/CPP_MODELLIB_ROOTDIR/delimiter=;
 environment/project/cdt.managedbuild.config.gnu.mingw.exe.debug.1749013372.1242072675/CPP_MODELLIB_ROOTDIR/operation=append
 environment/project/cdt.managedbuild.config.gnu.mingw.exe.debug.1749013372.1242072675/CPP_MODELLIB_ROOTDIR/value=${workspace_loc\:org.eclipse.etrice.modellib.cpp}

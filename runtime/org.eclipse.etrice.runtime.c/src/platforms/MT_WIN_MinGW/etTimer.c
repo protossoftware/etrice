@@ -57,7 +57,8 @@ void etTimer_start(etTimer* self){
 			etLogger_logError("etTimer_start: no Timer Queue to create timer (NULL)");
 		}
 		else {
-				if (CreateTimerQueueTimer( &(self->osTimerData), hTimerQueue, etTimer_callback, self, elapse, elapse, 0) == ET_FALSE){
+		if (CreateTimerQueueTimer(&(self->osTimerData), hTimerQueue,
+				etTimer_callback, self, elapse, elapse, 0) == ET_FALSE) {
 				etLogger_logError("etTimer_start: Timer could not be created");
 			}
 		}

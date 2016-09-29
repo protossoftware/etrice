@@ -21,7 +21,7 @@
 #include "debugging/etLogger.h"
 
 #include <stdarg.h>
-
+#include "etRuntimeConfig.h"
 
 void etLogger_logError(const char* message){
 #ifdef ET_LOGGER_ACTIVATE

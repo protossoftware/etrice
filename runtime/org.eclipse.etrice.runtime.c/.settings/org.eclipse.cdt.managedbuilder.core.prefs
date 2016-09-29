@@ -1,4 +1,10 @@
 eclipse.preferences.version=1
+environment/buildEnvironmentInclude/cdt.managedbuild.config.gnu.mingw.lib.debug.1978608919.1205233327/CPATH/delimiter=;
+environment/buildEnvironmentInclude/cdt.managedbuild.config.gnu.mingw.lib.debug.1978608919.1205233327/CPATH/operation=remove
+environment/buildEnvironmentInclude/cdt.managedbuild.config.gnu.mingw.lib.debug.1978608919.1205233327/C_INCLUDE_PATH/delimiter=;
+environment/buildEnvironmentInclude/cdt.managedbuild.config.gnu.mingw.lib.debug.1978608919.1205233327/C_INCLUDE_PATH/operation=remove
+environment/buildEnvironmentInclude/cdt.managedbuild.config.gnu.mingw.lib.debug.1978608919.1205233327/append=true
+environment/buildEnvironmentInclude/cdt.managedbuild.config.gnu.mingw.lib.debug.1978608919.1205233327/appendContributed=true
 environment/buildEnvironmentInclude/cdt.managedbuild.config.gnu.mingw.lib.debug.1978608919/CPATH/delimiter=;
 environment/buildEnvironmentInclude/cdt.managedbuild.config.gnu.mingw.lib.debug.1978608919/CPATH/operation=remove
 environment/buildEnvironmentInclude/cdt.managedbuild.config.gnu.mingw.lib.debug.1978608919/C_INCLUDE_PATH/delimiter=;
