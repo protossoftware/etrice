@@ -86,6 +86,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
   public void doGenerate(final Root root) {
     EList<ProtocolClass> _usedProtocolClasses = root.getUsedProtocolClasses();
     final Function1<ProtocolClass, Boolean> _function = new Function1<ProtocolClass, Boolean>() {
+      @Override
       public Boolean apply(final ProtocolClass cl) {
         return Boolean.valueOf(ProtocolClassGen.this._fileSystemHelpers.isValidGenerationLocation(cl));
       }
@@ -777,22 +778,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
               String _name_3 = _data_1.getName();
               _builder.append(_name_3, "\t\t");
               {
-                boolean _and = false;
-                VarDecl _data_2 = m.getData();
-                RefableType _refType = _data_2.getRefType();
-                boolean _isRef = _refType.isRef();
-                boolean _not = (!_isRef);
-                if (!_not) {
-                  _and = false;
-                } else {
-                  VarDecl _data_3 = m.getData();
-                  RefableType _refType_1 = _data_3.getRefType();
-                  DataType _type = _refType_1.getType();
-                  boolean _isEnumerationOrPrimitive = this._typeHelpers.isEnumerationOrPrimitive(_type);
-                  boolean _not_1 = (!_isEnumerationOrPrimitive);
-                  _and = _not_1;
-                }
-                if (_and) {
+                if (((!m.getData().getRefType().isRef()) && (!this._typeHelpers.isEnumerationOrPrimitive(m.getData().getRefType().getType())))) {
                   _builder.append(".deepCopy()");
                 }
               }
@@ -805,18 +791,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.append("}");
       _builder.newLine();
       {
-        boolean _and_1 = false;
-        VarDecl _data_4 = m.getData();
-        boolean _notEquals_1 = (!Objects.equal(_data_4, null));
-        if (!_notEquals_1) {
-          _and_1 = false;
-        } else {
-          VarDecl _data_5 = m.getData();
-          RefableType _refType_2 = _data_5.getRefType();
-          DataType _type_1 = _refType_2.getType();
-          _and_1 = (_type_1 instanceof DataClass);
-        }
-        if (_and_1) {
+        if (((!Objects.equal(m.getData(), null)) && (m.getData().getRefType().getType() instanceof DataClass))) {
           CharSequence _messageSignatureExplicit = this.messageSignatureExplicit(m);
           _builder.append(_messageSignatureExplicit, "");
           _builder.append(" {");
@@ -825,16 +800,16 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
           String _name_4 = m.getName();
           _builder.append(_name_4, "\t");
           _builder.append("(new ");
-          VarDecl _data_6 = m.getData();
-          RefableType _refType_3 = _data_6.getRefType();
-          DataType _type_2 = _refType_3.getType();
-          String _name_5 = _type_2.getName();
+          VarDecl _data_2 = m.getData();
+          RefableType _refType = _data_2.getRefType();
+          DataType _type = _refType.getType();
+          String _name_5 = _type.getName();
           _builder.append(_name_5, "\t");
           _builder.append("(");
-          VarDecl _data_7 = m.getData();
-          RefableType _refType_4 = _data_7.getRefType();
-          DataType _type_3 = _refType_4.getType();
-          String _paramList = this._dataClassGen.paramList(((DataClass) _type_3));
+          VarDecl _data_3 = m.getData();
+          RefableType _refType_1 = _data_3.getRefType();
+          DataType _type_1 = _refType_1.getType();
+          String _paramList = this._dataClassGen.paramList(((DataClass) _type_1));
           _builder.append(_paramList, "\t");
           _builder.append("));");
           _builder.newLineIfNotEmpty();
@@ -852,6 +827,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     {
       List<Message> _allIncomingMessages = this._roomHelpers.getAllIncomingMessages(pc);
       final Function1<Message, Boolean> _function = new Function1<Message, Boolean>() {
+        @Override
         public Boolean apply(final Message m) {
           VarDecl _data = m.getData();
           return Boolean.valueOf((!Objects.equal(_data, null)));

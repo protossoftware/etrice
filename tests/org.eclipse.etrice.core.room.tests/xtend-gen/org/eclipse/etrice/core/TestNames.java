@@ -47,6 +47,7 @@ public class TestNames extends TestBase {
     final Diagnostic diag = this.getDiag(model);
     List<Diagnostic> _children = diag.getChildren();
     final Procedure1<Diagnostic> _function = new Procedure1<Diagnostic>() {
+      @Override
       public void apply(final Diagnostic it) {
         if ((it instanceof AbstractValidationDiagnostic)) {
           final EObject obj = ((AbstractValidationDiagnostic)it).getSourceEObject();
@@ -55,14 +56,7 @@ public class TestNames extends TestBase {
           if (_equals) {
             nameError = Boolean.valueOf(false);
           }
-          boolean _or = false;
-          if ((nameError).booleanValue()) {
-            _or = true;
-          } else {
-            boolean _isNameErrorMessage = TestNames.this.isNameErrorMessage(it);
-            _or = _isNameErrorMessage;
-          }
-          TestNames.this.nameErrorMap.put(obj, Boolean.valueOf(_or));
+          TestNames.this.nameErrorMap.put(obj, Boolean.valueOf(((nameError).booleanValue() || TestNames.this.isNameErrorMessage(it))));
         }
       }
     };
@@ -100,6 +94,7 @@ public class TestNames extends TestBase {
     int _size = items.size();
     Assert.assertEquals("Unexpected item count", 15, _size);
     final Procedure1<EObject> _function = new Procedure1<EObject>() {
+      @Override
       public void apply(final EObject it) {
         boolean _hasNameErrorMessage = TestNames.this.hasNameErrorMessage(it);
         Assert.assertFalse(("expected no name error: " + it), _hasNameErrorMessage);
@@ -120,6 +115,7 @@ public class TestNames extends TestBase {
     int _size = items.size();
     Assert.assertEquals("Unexpected item count", 9, _size);
     final Procedure1<EObject> _function = new Procedure1<EObject>() {
+      @Override
       public void apply(final EObject it) {
         boolean _hasNameErrorMessage = TestNames.this.hasNameErrorMessage(it);
         Assert.assertFalse(("expected no name error: " + it), _hasNameErrorMessage);
@@ -135,6 +131,7 @@ public class TestNames extends TestBase {
     final ArrayList<EObject> items = CollectionLiterals.<EObject>newArrayList();
     EList<EObject> _eContents = ac.eContents();
     final Function1<EObject, Boolean> _function = new Function1<EObject, Boolean>() {
+      @Override
       public Boolean apply(final EObject it) {
         return Boolean.valueOf((!(it instanceof ExternalPort)));
       }
@@ -146,6 +143,7 @@ public class TestNames extends TestBase {
     int _size = items.size();
     Assert.assertEquals("Unexpected item count", 13, _size);
     final Procedure1<EObject> _function_1 = new Procedure1<EObject>() {
+      @Override
       public void apply(final EObject it) {
         boolean _hasNameErrorMessage = TestNames.this.hasNameErrorMessage(it);
         Assert.assertTrue(("expected name error: " + it), _hasNameErrorMessage);
@@ -164,6 +162,7 @@ public class TestNames extends TestBase {
     final ArrayList<EObject> items = CollectionLiterals.<EObject>newArrayList();
     EList<EObject> _eContents = ac.eContents();
     final Function1<EObject, Boolean> _function = new Function1<EObject, Boolean>() {
+      @Override
       public Boolean apply(final EObject it) {
         return Boolean.valueOf((!(it instanceof ExternalPort)));
       }
@@ -181,6 +180,7 @@ public class TestNames extends TestBase {
     int _size = items.size();
     Assert.assertEquals("Unexpected item count", 16, _size);
     final Procedure1<EObject> _function_1 = new Procedure1<EObject>() {
+      @Override
       public void apply(final EObject it) {
         boolean _hasNameErrorMessage = TestNames.this.hasNameErrorMessage(it);
         Assert.assertTrue(("expected name error: " + it), _hasNameErrorMessage);
@@ -190,42 +190,11 @@ public class TestNames extends TestBase {
   }
   
   private boolean hasNameErrorMessage(final EObject obj) {
-    boolean _and = false;
-    boolean _containsKey = this.nameErrorMap.containsKey(obj);
-    if (!_containsKey) {
-      _and = false;
-    } else {
-      Boolean _get = this.nameErrorMap.get(obj);
-      _and = (_get).booleanValue();
-    }
-    return _and;
+    return (this.nameErrorMap.containsKey(obj) && (this.nameErrorMap.get(obj)).booleanValue());
   }
   
   protected boolean isNameErrorMessage(final Diagnostic diag) {
     final String message = diag.getMessage();
-    boolean _and = false;
-    int _severity = diag.getSeverity();
-    boolean _greaterEqualsThan = (_severity >= Diagnostic.ERROR);
-    if (!_greaterEqualsThan) {
-      _and = false;
-    } else {
-      boolean _or = false;
-      boolean _contains = message.contains("Duplicate name");
-      if (_contains) {
-        _or = true;
-      } else {
-        boolean _and_1 = false;
-        boolean _contains_1 = message.contains("Name");
-        if (!_contains_1) {
-          _and_1 = false;
-        } else {
-          boolean _contains_2 = message.contains("is already assigned to");
-          _and_1 = _contains_2;
-        }
-        _or = _and_1;
-      }
-      _and = _or;
-    }
-    return _and;
+    return ((diag.getSeverity() >= Diagnostic.ERROR) && (message.contains("Duplicate name") || (message.contains("Name") && message.contains("is already assigned to"))));
   }
 }

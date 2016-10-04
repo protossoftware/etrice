@@ -131,6 +131,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       final ActorClass ac = xpac.getActorClass();
       List<Port> _allEndPorts = this._roomHelpers.getAllEndPorts(ac);
       final Function1<Port, Boolean> _function = new Function1<Port, Boolean>() {
+        @Override
         public Boolean apply(final Port p) {
           GeneralProtocolClass _protocol = p.getProtocol();
           CommunicationType _commType = ((ProtocolClass) _protocol).getCommType();
@@ -140,36 +141,17 @@ public class ActorClassGen extends GenericActorClassGenerator {
       final Iterable<Port> eventPorts = IterableExtensions.<Port>filter(_allEndPorts, _function);
       List<Port> _allEndPorts_1 = this._roomHelpers.getAllEndPorts(ac);
       final Function1<Port, Boolean> _function_1 = new Function1<Port, Boolean>() {
+        @Override
         public Boolean apply(final Port p) {
-          boolean _and = false;
-          GeneralProtocolClass _protocol = p.getProtocol();
-          CommunicationType _commType = ((ProtocolClass) _protocol).getCommType();
-          boolean _equals = Objects.equal(_commType, CommunicationType.DATA_DRIVEN);
-          if (!_equals) {
-            _and = false;
-          } else {
-            boolean _isConjugated = p.isConjugated();
-            _and = _isConjugated;
-          }
-          return Boolean.valueOf(_and);
+          return Boolean.valueOf((Objects.equal(((ProtocolClass) p.getProtocol()).getCommType(), CommunicationType.DATA_DRIVEN) && p.isConjugated()));
         }
       };
       final Iterable<Port> sendPorts = IterableExtensions.<Port>filter(_allEndPorts_1, _function_1);
       List<Port> _allEndPorts_2 = this._roomHelpers.getAllEndPorts(ac);
       final Function1<Port, Boolean> _function_2 = new Function1<Port, Boolean>() {
+        @Override
         public Boolean apply(final Port p) {
-          boolean _and = false;
-          GeneralProtocolClass _protocol = p.getProtocol();
-          CommunicationType _commType = ((ProtocolClass) _protocol).getCommType();
-          boolean _equals = Objects.equal(_commType, CommunicationType.DATA_DRIVEN);
-          if (!_equals) {
-            _and = false;
-          } else {
-            boolean _isConjugated = p.isConjugated();
-            boolean _not = (!_isConjugated);
-            _and = _not;
-          }
-          return Boolean.valueOf(_and);
+          return Boolean.valueOf((Objects.equal(((ProtocolClass) p.getProtocol()).getCommType(), CommunicationType.DATA_DRIVEN) && (!p.isConjugated())));
         }
       };
       final Iterable<Port> recvPorts = IterableExtensions.<Port>filter(_allEndPorts_2, _function_2);
@@ -177,64 +159,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
       final boolean dataDriven = Objects.equal(_commType, ComponentCommunicationType.DATA_DRIVEN);
       ComponentCommunicationType _commType_1 = ac.getCommType();
       final boolean async = Objects.equal(_commType_1, ComponentCommunicationType.ASYNCHRONOUS);
-      boolean _or = false;
-      boolean _and = false;
-      boolean _and_1 = false;
-      boolean _and_2 = false;
-      boolean _isEmpty = IterableExtensions.isEmpty(eventPorts);
-      if (!_isEmpty) {
-        _and_2 = false;
-      } else {
-        boolean _isEmpty_1 = IterableExtensions.isEmpty(recvPorts);
-        _and_2 = _isEmpty_1;
-      }
-      if (!_and_2) {
-        _and_1 = false;
-      } else {
-        List<SAP> _allSAPs = this._roomHelpers.getAllSAPs(ac);
-        boolean _isEmpty_2 = _allSAPs.isEmpty();
-        _and_1 = _isEmpty_2;
-      }
-      if (!_and_1) {
-        _and = false;
-      } else {
-        List<ServiceImplementation> _allServiceImplementations = this._roomHelpers.getAllServiceImplementations(ac);
-        boolean _isEmpty_3 = _allServiceImplementations.isEmpty();
-        _and = _isEmpty_3;
-      }
-      boolean _not = (!_and);
-      if (_not) {
-        _or = true;
-      } else {
-        GlobalGeneratorSettings _settings = Main.getSettings();
-        boolean _isGenerateMSCInstrumentation = _settings.isGenerateMSCInstrumentation();
-        _or = _isGenerateMSCInstrumentation;
-      }
-      final boolean hasConstData = _or;
-      boolean _and_3 = false;
-      boolean _and_4 = false;
-      boolean _and_5 = false;
-      boolean _isEmpty_4 = IterableExtensions.isEmpty(sendPorts);
-      if (!_isEmpty_4) {
-        _and_5 = false;
-      } else {
-        List<Attribute> _allAttributes = this._roomHelpers.getAllAttributes(ac);
-        boolean _isEmpty_5 = _allAttributes.isEmpty();
-        _and_5 = _isEmpty_5;
-      }
-      if (!_and_5) {
-        _and_4 = false;
-      } else {
-        StateGraph _stateMachine = xpac.getStateMachine();
-        boolean _isEmpty_6 = this._roomHelpers.isEmpty(_stateMachine);
-        _and_4 = _isEmpty_6;
-      }
-      if (!_and_4) {
-        _and_3 = false;
-      } else {
-        _and_3 = (!hasConstData);
-      }
-      final boolean hasVarData = (!_and_3);
+      final boolean hasConstData = ((!(((IterableExtensions.isEmpty(eventPorts) && IterableExtensions.isEmpty(recvPorts)) && this._roomHelpers.getAllSAPs(ac).isEmpty()) && this._roomHelpers.getAllServiceImplementations(ac).isEmpty())) || Main.getSettings().isGenerateMSCInstrumentation());
+      final boolean hasVarData = (!(((IterableExtensions.isEmpty(sendPorts) && this._roomHelpers.getAllAttributes(ac).isEmpty()) && this._roomHelpers.isEmpty(xpac.getStateMachine())) && (!hasConstData)));
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("/**");
       _builder.newLine();
@@ -316,9 +242,9 @@ public class ActorClassGen extends GenericActorClassGenerator {
           _builder.append("_const {");
           _builder.newLineIfNotEmpty();
           {
-            GlobalGeneratorSettings _settings_1 = Main.getSettings();
-            boolean _isGenerateMSCInstrumentation_1 = _settings_1.isGenerateMSCInstrumentation();
-            if (_isGenerateMSCInstrumentation_1) {
+            GlobalGeneratorSettings _settings = Main.getSettings();
+            boolean _isGenerateMSCInstrumentation = _settings.isGenerateMSCInstrumentation();
+            if (_isGenerateMSCInstrumentation) {
               _builder.append("\t");
               _builder.append("const char* instName;");
               _builder.newLine();
@@ -375,8 +301,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
           _builder.append("/* saps */");
           _builder.newLine();
           {
-            List<SAP> _allSAPs_1 = this._roomHelpers.getAllSAPs(ac);
-            for(final SAP sap : _allSAPs_1) {
+            List<SAP> _allSAPs = this._roomHelpers.getAllSAPs(ac);
+            for(final SAP sap : _allSAPs) {
               _builder.append("\t");
               _builder.append("const ");
               String _portClassName_2 = this._roomExtensions.getPortClassName(sap);
@@ -414,8 +340,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
           _builder.append("/* services */");
           _builder.newLine();
           {
-            List<ServiceImplementation> _allServiceImplementations_1 = this._roomHelpers.getAllServiceImplementations(ac);
-            for(final ServiceImplementation svc : _allServiceImplementations_1) {
+            List<ServiceImplementation> _allServiceImplementations = this._roomHelpers.getAllServiceImplementations(ac);
+            for(final ServiceImplementation svc : _allServiceImplementations) {
               _builder.append("\t");
               _builder.append("const etReplPort ");
               SPP _spp = svc.getSpp();
@@ -437,10 +363,10 @@ public class ActorClassGen extends GenericActorClassGenerator {
       }
       _builder.newLine();
       {
-        StateGraph _stateMachine_1 = xpac.getStateMachine();
-        boolean _isEmpty_7 = this._roomHelpers.isEmpty(_stateMachine_1);
-        boolean _not_1 = (!_isEmpty_7);
-        if (_not_1) {
+        StateGraph _stateMachine = xpac.getStateMachine();
+        boolean _isEmpty = this._roomHelpers.isEmpty(_stateMachine);
+        boolean _not = (!_isEmpty);
+        if (_not) {
           _builder.newLine();
           CharSequence _genHeaderConstants = this._stateMachineGen.genHeaderConstants(xpac);
           _builder.append(_genHeaderConstants, "");
@@ -491,16 +417,16 @@ public class ActorClassGen extends GenericActorClassGenerator {
           }
           _builder.newLine();
           _builder.append("\t");
-          List<Attribute> _allAttributes_1 = this._roomHelpers.getAllAttributes(ac);
-          CharSequence _attributes = this._procedureHelpers.attributes(_allAttributes_1);
+          List<Attribute> _allAttributes = this._roomHelpers.getAllAttributes(ac);
+          CharSequence _attributes = this._procedureHelpers.attributes(_allAttributes);
           _builder.append(_attributes, "\t");
           _builder.newLineIfNotEmpty();
           _builder.newLine();
           {
-            StateGraph _stateMachine_2 = xpac.getStateMachine();
-            boolean _isEmpty_8 = this._roomHelpers.isEmpty(_stateMachine_2);
-            boolean _not_2 = (!_isEmpty_8);
-            if (_not_2) {
+            StateGraph _stateMachine_1 = xpac.getStateMachine();
+            boolean _isEmpty_1 = this._roomHelpers.isEmpty(_stateMachine_1);
+            boolean _not_1 = (!_isEmpty_1);
+            if (_not_1) {
               _builder.newLine();
               _builder.append("\t");
               CharSequence _genDataMembers = this._stateMachineGen.genDataMembers(xpac);
@@ -552,13 +478,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.newLineIfNotEmpty();
       _builder.newLine();
       {
-        boolean _or_1 = false;
-        if (dataDriven) {
-          _or_1 = true;
-        } else {
-          _or_1 = async;
-        }
-        if (_or_1) {
+        if ((dataDriven || async)) {
           _builder.append("void ");
           String _name_17 = ac.getName();
           _builder.append(_name_17, "");
@@ -599,6 +519,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       final ActorClass ac = xpac.getActorClass();
       List<Port> _allEndPorts = this._roomHelpers.getAllEndPorts(ac);
       final Function1<Port, Boolean> _function = new Function1<Port, Boolean>() {
+        @Override
         public Boolean apply(final Port p) {
           GeneralProtocolClass _protocol = p.getProtocol();
           CommunicationType _commType = ((ProtocolClass) _protocol).getCommType();
@@ -607,6 +528,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       };
       final Iterable<Port> eventPorts = IterableExtensions.<Port>filter(_allEndPorts, _function);
       final Function1<Port, Boolean> _function_1 = new Function1<Port, Boolean>() {
+        @Override
         public Boolean apply(final Port it) {
           int _multiplicity = it.getMultiplicity();
           return Boolean.valueOf((_multiplicity != 1));
@@ -615,71 +537,25 @@ public class ActorClassGen extends GenericActorClassGenerator {
       final Iterable<Port> replEventPorts = IterableExtensions.<Port>filter(eventPorts, _function_1);
       List<Port> _allEndPorts_1 = this._roomHelpers.getAllEndPorts(ac);
       final Function1<Port, Boolean> _function_2 = new Function1<Port, Boolean>() {
+        @Override
         public Boolean apply(final Port p) {
-          boolean _and = false;
-          boolean _and_1 = false;
-          GeneralProtocolClass _protocol = p.getProtocol();
-          CommunicationType _commType = ((ProtocolClass) _protocol).getCommType();
-          boolean _equals = Objects.equal(_commType, CommunicationType.DATA_DRIVEN);
-          if (!_equals) {
-            _and_1 = false;
-          } else {
-            boolean _isConjugated = p.isConjugated();
-            _and_1 = _isConjugated;
-          }
-          if (!_and_1) {
-            _and = false;
-          } else {
-            int _multiplicity = p.getMultiplicity();
-            boolean _equals_1 = (_multiplicity == 1);
-            _and = _equals_1;
-          }
-          return Boolean.valueOf(_and);
+          return Boolean.valueOf(((Objects.equal(((ProtocolClass) p.getProtocol()).getCommType(), CommunicationType.DATA_DRIVEN) && p.isConjugated()) && (p.getMultiplicity() == 1)));
         }
       };
       final Iterable<Port> sendPorts = IterableExtensions.<Port>filter(_allEndPorts_1, _function_2);
       List<Port> _allEndPorts_2 = this._roomHelpers.getAllEndPorts(ac);
       final Function1<Port, Boolean> _function_3 = new Function1<Port, Boolean>() {
+        @Override
         public Boolean apply(final Port p) {
-          boolean _and = false;
-          boolean _and_1 = false;
-          GeneralProtocolClass _protocol = p.getProtocol();
-          CommunicationType _commType = ((ProtocolClass) _protocol).getCommType();
-          boolean _equals = Objects.equal(_commType, CommunicationType.DATA_DRIVEN);
-          if (!_equals) {
-            _and_1 = false;
-          } else {
-            boolean _isConjugated = p.isConjugated();
-            boolean _not = (!_isConjugated);
-            _and_1 = _not;
-          }
-          if (!_and_1) {
-            _and = false;
-          } else {
-            int _multiplicity = p.getMultiplicity();
-            boolean _equals_1 = (_multiplicity == 1);
-            _and = _equals_1;
-          }
-          return Boolean.valueOf(_and);
+          return Boolean.valueOf(((Objects.equal(((ProtocolClass) p.getProtocol()).getCommType(), CommunicationType.DATA_DRIVEN) && (!p.isConjugated())) && (p.getMultiplicity() == 1)));
         }
       };
       final Iterable<Port> recvPorts = IterableExtensions.<Port>filter(_allEndPorts_2, _function_3);
       List<InterfaceItem> _allInterfaceItems = this._roomHelpers.getAllInterfaceItems(ac);
       final Function1<InterfaceItem, Boolean> _function_4 = new Function1<InterfaceItem, Boolean>() {
+        @Override
         public Boolean apply(final InterfaceItem p) {
-          boolean _and = false;
-          PortClass _portClass = ActorClassGen.this._roomHelpers.getPortClass(p);
-          boolean _notEquals = (!Objects.equal(_portClass, null));
-          if (!_notEquals) {
-            _and = false;
-          } else {
-            PortClass _portClass_1 = ActorClassGen.this._roomHelpers.getPortClass(p);
-            EList<PortOperation> _operations = _portClass_1.getOperations();
-            int _size = _operations.size();
-            boolean _greaterThan = (_size > 0);
-            _and = _greaterThan;
-          }
-          return Boolean.valueOf(_and);
+          return Boolean.valueOf(((!Objects.equal(ActorClassGen.this._roomHelpers.getPortClass(p), null)) && (ActorClassGen.this._roomHelpers.getPortClass(p).getOperations().size() > 0)));
         }
       };
       final Iterable<InterfaceItem> portsWithOperations = IterableExtensions.<InterfaceItem>filter(_allInterfaceItems, _function_4);
@@ -732,6 +608,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.newLine();
       {
         final Function1<Port, Boolean> _function_5 = new Function1<Port, Boolean>() {
+          @Override
           public Boolean apply(final Port it) {
             int _multiplicity = it.getMultiplicity();
             return Boolean.valueOf((_multiplicity == 1));
@@ -1215,13 +1092,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       final boolean eventDriven = Objects.equal(_commType_1, ComponentCommunicationType.EVENT_DRIVEN);
       ComponentCommunicationType _commType_2 = ac.getCommType();
       final boolean dataDriven = Objects.equal(_commType_2, ComponentCommunicationType.DATA_DRIVEN);
-      boolean _or = false;
-      if (async) {
-        _or = true;
-      } else {
-        _or = eventDriven;
-      }
-      final boolean handleEvents = _or;
+      final boolean handleEvents = (async || eventDriven);
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("/**");
       _builder.newLine();
@@ -1372,13 +1243,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.newLine();
       _builder.newLine();
       {
-        boolean _or_1 = false;
-        if (dataDriven) {
-          _or_1 = true;
-        } else {
-          _or_1 = async;
-        }
-        if (_or_1) {
+        if ((dataDriven || async)) {
           _builder.append("void ");
           String _name_8 = ac.getName();
           _builder.append(_name_8, "");

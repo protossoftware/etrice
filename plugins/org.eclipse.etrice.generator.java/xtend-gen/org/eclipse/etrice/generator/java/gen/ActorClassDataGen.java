@@ -60,12 +60,14 @@ public class ActorClassDataGen {
     final HashMap<ActorClass, WiredActorClass> ac2wired = new HashMap<ActorClass, WiredActorClass>();
     EList<WiredStructureClass> _wiredInstances = root.getWiredInstances();
     final Function1<WiredStructureClass, Boolean> _function = new Function1<WiredStructureClass, Boolean>() {
+      @Override
       public Boolean apply(final WiredStructureClass w) {
         return Boolean.valueOf((w instanceof WiredActorClass));
       }
     };
     Iterable<WiredStructureClass> _filter = IterableExtensions.<WiredStructureClass>filter(_wiredInstances, _function);
     final Procedure1<WiredStructureClass> _function_1 = new Procedure1<WiredStructureClass>() {
+      @Override
       public void apply(final WiredStructureClass w) {
         ActorClass _actorClass = ((WiredActorClass) w).getActorClass();
         ac2wired.put(_actorClass, ((WiredActorClass) w));
@@ -74,6 +76,7 @@ public class ActorClassDataGen {
     IterableExtensions.<WiredStructureClass>forEach(_filter, _function_1);
     EList<ExpandedActorClass> _xpActorClasses = root.getXpActorClasses();
     final Function1<ExpandedActorClass, Boolean> _function_2 = new Function1<ExpandedActorClass, Boolean>() {
+      @Override
       public Boolean apply(final ExpandedActorClass cl) {
         ActorClass _actorClass = cl.getActorClass();
         return Boolean.valueOf(ActorClassDataGen.this._fileSystemHelpers.isValidGenerationLocation(_actorClass));

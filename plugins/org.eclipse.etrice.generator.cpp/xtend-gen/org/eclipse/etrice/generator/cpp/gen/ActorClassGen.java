@@ -88,6 +88,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
     EList<WiredStructureClass> _wiredInstances = root.getWiredInstances();
     Iterable<WiredActorClass> _filter = Iterables.<WiredActorClass>filter(_wiredInstances, WiredActorClass.class);
     final Procedure1<WiredActorClass> _function = new Procedure1<WiredActorClass>() {
+      @Override
       public void apply(final WiredActorClass it) {
         ActorClass _actorClass = it.getActorClass();
         ac2wired.put(_actorClass, it);
@@ -96,6 +97,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
     IterableExtensions.<WiredActorClass>forEach(_filter, _function);
     EList<ExpandedActorClass> _xpActorClasses = root.getXpActorClasses();
     final Function1<ExpandedActorClass, Boolean> _function_1 = new Function1<ExpandedActorClass, Boolean>() {
+      @Override
       public Boolean apply(final ExpandedActorClass cl) {
         ActorClass _actorClass = cl.getActorClass();
         return Boolean.valueOf(ActorClassGen.this._fileSystemHelpers.isValidGenerationLocation(_actorClass));
@@ -424,6 +426,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append("\t\t");
       List<Port> _endPorts_1 = this._roomHelpers.getEndPorts(ac);
       final Function1<Port, CharSequence> _function = new Function1<Port, CharSequence>() {
+        @Override
         public CharSequence apply(final Port it) {
           String _portClassName = ActorClassGen.this._roomExtensions.getPortClassName(it);
           String _plus = (_portClassName + "&");
@@ -439,6 +442,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append("\t\t");
       EList<SAP> _serviceAccessPoints_1 = ac.getServiceAccessPoints();
       final Function1<SAP, CharSequence> _function_1 = new Function1<SAP, CharSequence>() {
+        @Override
         public CharSequence apply(final SAP it) {
           String _portClassName = ActorClassGen.this._roomExtensions.getPortClassName(it);
           String _plus = (_portClassName + "&");
@@ -454,6 +458,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append("\t\t");
       EList<ServiceImplementation> _serviceImplementations_1 = ac.getServiceImplementations();
       final Function1<ServiceImplementation, CharSequence> _function_2 = new Function1<ServiceImplementation, CharSequence>() {
+        @Override
         public CharSequence apply(final ServiceImplementation it) {
           String _portClassName = ActorClassGen.this._roomExtensions.getPortClassName(it);
           String _plus = (_portClassName + "&");
@@ -496,17 +501,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
             }
           }
           {
-            boolean _or = false;
-            ComponentCommunicationType _commType_1 = ac.getCommType();
-            boolean _equals_2 = Objects.equal(_commType_1, ComponentCommunicationType.ASYNCHRONOUS);
-            if (_equals_2) {
-              _or = true;
-            } else {
-              ComponentCommunicationType _commType_2 = ac.getCommType();
-              boolean _equals_3 = Objects.equal(_commType_2, ComponentCommunicationType.DATA_DRIVEN);
-              _or = _equals_3;
-            }
-            if (_or) {
+            if ((Objects.equal(ac.getCommType(), ComponentCommunicationType.ASYNCHRONOUS) || Objects.equal(ac.getCommType(), ComponentCommunicationType.DATA_DRIVEN))) {
               _builder.append("\t\t");
               _builder.append("virtual void receive(const etRuntime::Message* msg);");
               _builder.newLine();
@@ -605,6 +600,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       initList.add(_builder.toString());
       List<Port> _endPorts = this._roomHelpers.getEndPorts(ac);
       final Function1<Port, String> _function = new Function1<Port, String>() {
+        @Override
         public String apply(final Port it) {
           StringConcatenation _builder = new StringConcatenation();
           String _name = it.getName();
@@ -623,6 +619,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       Iterables.<CharSequence>addAll(initList, _map);
       EList<ActorRef> _actorRefs = ac.getActorRefs();
       final Function1<ActorRef, String> _function_1 = new Function1<ActorRef, String>() {
+        @Override
         public String apply(final ActorRef it) {
           StringConcatenation _builder = new StringConcatenation();
           String _name = it.getName();
@@ -638,6 +635,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       Iterables.<CharSequence>addAll(initList, _map_1);
       EList<SAP> _serviceAccessPoints = ac.getServiceAccessPoints();
       final Function1<SAP, String> _function_2 = new Function1<SAP, String>() {
+        @Override
         public String apply(final SAP it) {
           StringConcatenation _builder = new StringConcatenation();
           String _name = it.getName();
@@ -656,6 +654,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       Iterables.<CharSequence>addAll(initList, _map_2);
       EList<ServiceImplementation> _serviceImplementations = ac.getServiceImplementations();
       final Function1<ServiceImplementation, String> _function_3 = new Function1<ServiceImplementation, String>() {
+        @Override
         public String apply(final ServiceImplementation it) {
           StringConcatenation _builder = new StringConcatenation();
           SPP _spp = it.getSpp();
@@ -677,6 +676,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       Iterables.<CharSequence>addAll(initList, _map_3);
       EList<Attribute> _attributes = ac.getAttributes();
       final Function1<Attribute, String> _function_4 = new Function1<Attribute, String>() {
+        @Override
         public String apply(final Attribute it) {
           StringConcatenation _builder = new StringConcatenation();
           String _name = it.getName();
@@ -937,17 +937,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       }
       _builder.newLine();
       {
-        boolean _or = false;
-        ComponentCommunicationType _commType = ac.getCommType();
-        boolean _equals = Objects.equal(_commType, ComponentCommunicationType.ASYNCHRONOUS);
-        if (_equals) {
-          _or = true;
-        } else {
-          ComponentCommunicationType _commType_1 = ac.getCommType();
-          boolean _equals_1 = Objects.equal(_commType_1, ComponentCommunicationType.DATA_DRIVEN);
-          _or = _equals_1;
-        }
-        if (_or) {
+        if ((Objects.equal(ac.getCommType(), ComponentCommunicationType.ASYNCHRONOUS) || Objects.equal(ac.getCommType(), ComponentCommunicationType.DATA_DRIVEN))) {
           _builder.append("\t");
           _builder.append("// activate polling for data-driven communication");
           _builder.newLine();
@@ -1095,17 +1085,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
         }
       }
       {
-        boolean _or_1 = false;
-        ComponentCommunicationType _commType_2 = ac.getCommType();
-        boolean _equals_2 = Objects.equal(_commType_2, ComponentCommunicationType.ASYNCHRONOUS);
-        if (_equals_2) {
-          _or_1 = true;
-        } else {
-          ComponentCommunicationType _commType_3 = ac.getCommType();
-          boolean _equals_3 = Objects.equal(_commType_3, ComponentCommunicationType.DATA_DRIVEN);
-          _or_1 = _equals_3;
-        }
-        if (_or_1) {
+        if ((Objects.equal(ac.getCommType(), ComponentCommunicationType.ASYNCHRONOUS) || Objects.equal(ac.getCommType(), ComponentCommunicationType.DATA_DRIVEN))) {
           _builder.append("\t");
           _builder.append("RTServices::getInstance().getMsgSvcCtrl().getMsgSvc(getThread())->removePollingMessageReceiver(*this);");
           _builder.newLine();
@@ -1131,9 +1111,9 @@ public class ActorClassGen extends GenericActorClassGenerator {
           _builder.append(_genStateMachineMethods, "");
           _builder.newLineIfNotEmpty();
           {
-            ComponentCommunicationType _commType_4 = ac.getCommType();
-            boolean _equals_4 = Objects.equal(_commType_4, ComponentCommunicationType.DATA_DRIVEN);
-            if (_equals_4) {
+            ComponentCommunicationType _commType = ac.getCommType();
+            boolean _equals = Objects.equal(_commType, ComponentCommunicationType.DATA_DRIVEN);
+            if (_equals) {
               _builder.append("void ");
               String _name_19 = ac.getName();
               _builder.append(_name_19, "");
@@ -1147,26 +1127,16 @@ public class ActorClassGen extends GenericActorClassGenerator {
             }
           }
           {
-            boolean _or_2 = false;
-            ComponentCommunicationType _commType_5 = ac.getCommType();
-            boolean _equals_5 = Objects.equal(_commType_5, ComponentCommunicationType.ASYNCHRONOUS);
-            if (_equals_5) {
-              _or_2 = true;
-            } else {
-              ComponentCommunicationType _commType_6 = ac.getCommType();
-              boolean _equals_6 = Objects.equal(_commType_6, ComponentCommunicationType.DATA_DRIVEN);
-              _or_2 = _equals_6;
-            }
-            if (_or_2) {
+            if ((Objects.equal(ac.getCommType(), ComponentCommunicationType.ASYNCHRONOUS) || Objects.equal(ac.getCommType(), ComponentCommunicationType.DATA_DRIVEN))) {
               _builder.append("void ");
               String _name_20 = ac.getName();
               _builder.append(_name_20, "");
               _builder.append("::receive(const Message* msg) {");
               _builder.newLineIfNotEmpty();
               {
-                ComponentCommunicationType _commType_7 = ac.getCommType();
-                boolean _equals_7 = Objects.equal(_commType_7, ComponentCommunicationType.ASYNCHRONOUS);
-                if (_equals_7) {
+                ComponentCommunicationType _commType_1 = ac.getCommType();
+                boolean _equals_1 = Objects.equal(_commType_1, ComponentCommunicationType.ASYNCHRONOUS);
+                if (_equals_1) {
                   _builder.append("\t");
                   _builder.append("receiveEvent(0, -1, 0);");
                   _builder.newLine();

@@ -64,26 +64,9 @@ public class Initialization {
     CharSequence _xblockexpression = null;
     {
       final Function1<Attribute, Boolean> _function = new Function1<Attribute, Boolean>() {
+        @Override
         public Boolean apply(final Attribute it) {
-          boolean _and = false;
-          boolean _and_1 = false;
-          String _initializerListValue = Initialization.this.getInitializerListValue(it);
-          boolean _equals = Objects.equal(_initializerListValue, null);
-          if (!_equals) {
-            _and_1 = false;
-          } else {
-            String _initValue = Initialization.this.getInitValue(it);
-            boolean _notEquals = (!Objects.equal(_initValue, null));
-            _and_1 = _notEquals;
-          }
-          if (!_and_1) {
-            _and = false;
-          } else {
-            String _initValue_1 = Initialization.this.getInitValue(it);
-            boolean _startsWith = _initValue_1.startsWith("{");
-            _and = _startsWith;
-          }
-          return Boolean.valueOf(_and);
+          return Boolean.valueOf(((Objects.equal(Initialization.this.getInitializerListValue(it), null) && (!Objects.equal(Initialization.this.getInitValue(it), null))) && Initialization.this.getInitValue(it).startsWith("{")));
         }
       };
       final Iterable<Attribute> extraInitAttrs = IterableExtensions.<Attribute>filter(attributes, _function);
@@ -96,6 +79,7 @@ public class Initialization {
       _builder.newLine();
       {
         final Function1<Attribute, Boolean> _function_1 = new Function1<Attribute, Boolean>() {
+          @Override
           public Boolean apply(final Attribute it) {
             int _size = it.getSize();
             return Boolean.valueOf((_size > 0));
@@ -127,6 +111,7 @@ public class Initialization {
       }
       {
         final Function1<Attribute, Boolean> _function_2 = new Function1<Attribute, Boolean>() {
+          @Override
           public Boolean apply(final Attribute it) {
             int _size = it.getSize();
             return Boolean.valueOf((_size == 0));
@@ -161,15 +146,7 @@ public class Initialization {
   public String getInitializerListValue(final Attribute attribute) {
     final String initValue = this.getInitValue(attribute);
     String _xifexpression = null;
-    boolean _and = false;
-    boolean _notEquals = (!Objects.equal(initValue, null));
-    if (!_notEquals) {
-      _and = false;
-    } else {
-      boolean _startsWith = initValue.startsWith("{");
-      _and = _startsWith;
-    }
-    if (_and) {
+    if (((!Objects.equal(initValue, null)) && initValue.startsWith("{"))) {
       _xifexpression = null;
     } else {
       _xifexpression = initValue;
@@ -181,13 +158,11 @@ public class Initialization {
     String _switchResult = null;
     final Attribute it = attribute;
     boolean _matched = false;
-    if (!_matched) {
-      String _defaultValueLiteral = it.getDefaultValueLiteral();
-      boolean _notEquals = (!Objects.equal(_defaultValueLiteral, null));
-      if (_notEquals) {
-        _matched=true;
-        _switchResult = it.getDefaultValueLiteral();
-      }
+    String _defaultValueLiteral = it.getDefaultValueLiteral();
+    boolean _notEquals = (!Objects.equal(_defaultValueLiteral, null));
+    if (_notEquals) {
+      _matched=true;
+      _switchResult = it.getDefaultValueLiteral();
     }
     if (!_matched) {
       RefableType _type = it.getType();

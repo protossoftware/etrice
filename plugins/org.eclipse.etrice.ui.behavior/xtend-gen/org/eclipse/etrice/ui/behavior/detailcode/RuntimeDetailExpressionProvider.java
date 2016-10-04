@@ -24,33 +24,30 @@ public class RuntimeDetailExpressionProvider extends DefaultDetailExpressionProv
   
   public final static String RT_METHOD_GET_REPLICATION = "getReplication";
   
+  @Override
   public List<IDetailExpressionProvider.ExpressionFeature> getContextFeatures(final IDetailExpressionProvider.ExpressionFeature ctx) {
     final List<IDetailExpressionProvider.ExpressionFeature> scope = super.getContextFeatures(ctx);
     Object _data = ctx.getData();
     final Object obj = _data;
     boolean _matched = false;
-    if (!_matched) {
-      if (obj instanceof InterfaceItem) {
-        _matched=true;
-        IDetailExpressionProvider.ExpressionPostfix _postfix = ctx.getPostfix();
-        boolean _equals = Objects.equal(_postfix, IDetailExpressionProvider.ExpressionPostfix.NONE);
-        if (_equals) {
-          boolean _matched_1 = false;
-          if (!_matched_1) {
-            if (obj instanceof Port) {
-              boolean _isReplicated = ((Port)obj).isReplicated();
-              if (_isReplicated) {
-                _matched_1=true;
-              }
-            }
-            if (!_matched_1) {
-              if (obj instanceof SPP) {
-                _matched_1=true;
-              }
-            }
-            if (_matched_1) {
-            }
+    if (obj instanceof InterfaceItem) {
+      _matched=true;
+      IDetailExpressionProvider.ExpressionPostfix _postfix = ctx.getPostfix();
+      boolean _equals = Objects.equal(_postfix, IDetailExpressionProvider.ExpressionPostfix.NONE);
+      if (_equals) {
+        boolean _matched_1 = false;
+        if (obj instanceof Port) {
+          boolean _isReplicated = ((Port)obj).isReplicated();
+          if (_isReplicated) {
+            _matched_1=true;
           }
+        }
+        if (!_matched_1) {
+          if (obj instanceof SPP) {
+            _matched_1=true;
+          }
+        }
+        if (_matched_1) {
         }
       }
     }

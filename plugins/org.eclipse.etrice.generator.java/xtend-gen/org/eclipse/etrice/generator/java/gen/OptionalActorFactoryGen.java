@@ -51,12 +51,14 @@ public class OptionalActorFactoryGen {
     final HashMap<ActorClass, WiredActorClass> ac2wired = new HashMap<ActorClass, WiredActorClass>();
     EList<WiredStructureClass> _wiredInstances = root.getWiredInstances();
     final Function1<WiredStructureClass, Boolean> _function = new Function1<WiredStructureClass, Boolean>() {
+      @Override
       public Boolean apply(final WiredStructureClass w) {
         return Boolean.valueOf((w instanceof WiredActorClass));
       }
     };
     Iterable<WiredStructureClass> _filter = IterableExtensions.<WiredStructureClass>filter(_wiredInstances, _function);
     final Procedure1<WiredStructureClass> _function_1 = new Procedure1<WiredStructureClass>() {
+      @Override
       public void apply(final WiredStructureClass w) {
         ActorClass _actorClass = ((WiredActorClass) w).getActorClass();
         ac2wired.put(_actorClass, ((WiredActorClass) w));
@@ -65,6 +67,7 @@ public class OptionalActorFactoryGen {
     IterableExtensions.<WiredStructureClass>forEach(_filter, _function_1);
     EList<OptionalActorInstance> _optionalInstances = root.getOptionalInstances();
     final Function1<OptionalActorInstance, Boolean> _function_2 = new Function1<OptionalActorInstance, Boolean>() {
+      @Override
       public Boolean apply(final OptionalActorInstance cl) {
         ActorClass _actorClass = cl.getActorClass();
         return Boolean.valueOf(OptionalActorFactoryGen.this._fileSystemHelpers.isValidGenerationLocation(_actorClass));
@@ -146,6 +149,7 @@ public class OptionalActorFactoryGen {
       {
         List<Port> _allEndPorts = this._roomHelpers.getAllEndPorts(ac);
         final Function1<Port, Boolean> _function = new Function1<Port, Boolean>() {
+          @Override
           public Boolean apply(final Port p) {
             return Boolean.valueOf(OptionalActorFactoryGen.this._roomHelpers.isExternal(p));
           }

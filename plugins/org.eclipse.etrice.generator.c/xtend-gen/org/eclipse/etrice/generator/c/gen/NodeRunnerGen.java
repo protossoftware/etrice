@@ -16,8 +16,6 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.Collection;
 import java.util.List;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.etrice.core.common.base.Annotation;
 import org.eclipse.etrice.core.common.base.util.BaseHelpers;
 import org.eclipse.etrice.core.etmap.util.ETMapUtil;
 import org.eclipse.etrice.core.etphys.eTPhys.NodeRef;
@@ -90,18 +88,7 @@ public class NodeRunnerGen {
       String _plus = (_name + "_");
       String _name_1 = ssi.getName();
       final String clsname = (_plus + _name_1);
-      boolean _and = false;
-      GlobalGeneratorSettings _settings = Main.getSettings();
-      boolean _isGenerateDataInstrumentation = _settings.isGenerateDataInstrumentation();
-      if (!_isGenerateDataInstrumentation) {
-        _and = false;
-      } else {
-        SubSystemClass _subSystemClass = ssi.getSubSystemClass();
-        EList<Annotation> _annotations = _subSystemClass.getAnnotations();
-        boolean _isAnnotationPresent = this._baseHelpers.isAnnotationPresent(_annotations, "DataLogging");
-        _and = _isAnnotationPresent;
-      }
-      final boolean logData = _and;
+      final boolean logData = (Main.getSettings().isGenerateDataInstrumentation() && this._baseHelpers.isAnnotationPresent(ssi.getSubSystemClass().getAnnotations(), "DataLogging"));
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("/**");
       _builder.newLine();
@@ -155,8 +142,8 @@ public class NodeRunnerGen {
       _builder.newLine();
       _builder.append(" ");
       _builder.append("* ");
-      GlobalGeneratorSettings _settings_1 = Main.getSettings();
-      String _mainMethodName = _settings_1.getMainMethodName();
+      GlobalGeneratorSettings _settings = Main.getSettings();
+      String _mainMethodName = _settings.getMainMethodName();
       _builder.append(_mainMethodName, " ");
       _builder.append(" function");
       _builder.newLineIfNotEmpty();
@@ -168,8 +155,8 @@ public class NodeRunnerGen {
       _builder.newLine();
       _builder.newLine();
       _builder.append("int ");
-      GlobalGeneratorSettings _settings_2 = Main.getSettings();
-      String _mainMethodName_1 = _settings_2.getMainMethodName();
+      GlobalGeneratorSettings _settings_1 = Main.getSettings();
+      String _mainMethodName_1 = _settings_1.getMainMethodName();
       _builder.append(_mainMethodName_1, "");
       _builder.append("(int argc, char** argv) {");
       _builder.newLineIfNotEmpty();

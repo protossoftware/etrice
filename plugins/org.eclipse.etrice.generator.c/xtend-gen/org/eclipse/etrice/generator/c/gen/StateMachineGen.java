@@ -117,6 +117,7 @@ public class StateMachineGen extends GenericStateMachineGenerator {
   /**
    * @param generateImplementation NOT used
    */
+  @Override
   public CharSequence genExtra(final ExpandedModelComponent xpmc, final boolean generateImplementation) {
     CharSequence _xblockexpression = null;
     {
@@ -196,14 +197,17 @@ public class StateMachineGen extends GenericStateMachineGenerator {
     return _xblockexpression;
   }
   
+  @Override
   public String stateType() {
     return "etInt16";
   }
   
+  @Override
   public String boolType() {
     return "etBool";
   }
   
+  @Override
   public CharSequence markVariableUsed(final String varname) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("((void)trigger__et);\t/* avoids unused warning */");
@@ -211,6 +215,7 @@ public class StateMachineGen extends GenericStateMachineGenerator {
     return _builder;
   }
   
+  @Override
   public String unreachableReturn() {
     return "/* return NO_STATE; // required by CDT but detected as unreachable by JDT because of while (true) */";
   }

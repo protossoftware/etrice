@@ -33,7 +33,7 @@ public class DiagramRefreshBehavior extends DefaultRefreshBehavior {
 	}
 	
 	@Override
-	protected void handleAutoUpdateAtStartup() {
+	public void handleAutoUpdateAtStartup() {
 		IDiagramTypeProvider diagramTypeProvider = diagramBehavior.getDiagramTypeProvider();
 		if (diagramTypeProvider.isAutoUpdateAtStartup()) {
 			StructureClass sc = structureEditor.getStructureClass();
@@ -46,7 +46,7 @@ public class DiagramRefreshBehavior extends DefaultRefreshBehavior {
 	}
 	
 	@Override
-	protected void handleAutoUpdateAtReset() {	
+	public void handleAutoUpdateAtReset() {	
 		super.handleAutoUpdateAtReset();
 	}
 

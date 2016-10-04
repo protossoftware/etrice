@@ -172,16 +172,7 @@ public class ProcedureHelpers {
   private CharSequence userCode(final String code) {
     StringConcatenation _builder = new StringConcatenation();
     {
-      boolean _and = false;
-      boolean _notEquals = (!Objects.equal(code, null));
-      if (!_notEquals) {
-        _and = false;
-      } else {
-        boolean _isEmpty = code.isEmpty();
-        boolean _not = (!_isEmpty);
-        _and = _not;
-      }
-      if (_and) {
+      if (((!Objects.equal(code, null)) && (!code.isEmpty()))) {
         _builder.append("/*--------------------- begin user code ---------------------*/");
         _builder.newLine();
         _builder.append(code, "");
@@ -398,6 +389,7 @@ public class ProcedureHelpers {
    */
   public String argList(final Iterable<Attribute> attributes) {
     final Function1<Attribute, String> _function = new Function1<Attribute, String>() {
+      @Override
       public String apply(final Attribute it) {
         String _signatureString = ProcedureHelpers.this.signatureString(it);
         String _plus = (_signatureString + " ");
@@ -570,6 +562,7 @@ public class ProcedureHelpers {
     boolean _not = (!_usesInheritance);
     List<ClassStructor> _structors = this.getStructors(cls, _not);
     final Function1<ClassStructor, Boolean> _function = new Function1<ClassStructor, Boolean>() {
+      @Override
       public Boolean apply(final ClassStructor it) {
         boolean _isConstructor = it.isConstructor();
         return Boolean.valueOf((_isConstructor == ctor));
@@ -611,6 +604,7 @@ public class ProcedureHelpers {
       boolean _not = (!_usesInheritance);
       List<ClassStructor> _structors = this.getStructors(cls, _not);
       final Function1<ClassStructor, Boolean> _function = new Function1<ClassStructor, Boolean>() {
+        @Override
         public Boolean apply(final ClassStructor it) {
           return Boolean.valueOf(it.isConstructor());
         }
@@ -626,6 +620,7 @@ public class ProcedureHelpers {
       boolean _not_1 = (!_usesInheritance_1);
       List<ClassStructor> _structors_1 = this.getStructors(cls, _not_1);
       final Function1<ClassStructor, Boolean> _function_1 = new Function1<ClassStructor, Boolean>() {
+        @Override
         public Boolean apply(final ClassStructor it) {
           boolean _isConstructor = it.isConstructor();
           return Boolean.valueOf((!_isConstructor));
@@ -672,6 +667,7 @@ public class ProcedureHelpers {
       boolean _not = (!_usesInheritance);
       List<ClassStructor> _structors = this.getStructors(cls, _not);
       final Function1<ClassStructor, Boolean> _function = new Function1<ClassStructor, Boolean>() {
+        @Override
         public Boolean apply(final ClassStructor it) {
           boolean _isConstructor = it.isConstructor();
           return Boolean.valueOf((_isConstructor == ctor));
@@ -725,6 +721,7 @@ public class ProcedureHelpers {
     boolean _not = (!_usesInheritance);
     List<ClassStructor> _structors = this.getStructors(cls, _not);
     final Function1<ClassStructor, Boolean> _function = new Function1<ClassStructor, Boolean>() {
+      @Override
       public Boolean apply(final ClassStructor it) {
         boolean _isConstructor = it.isConstructor();
         return Boolean.valueOf((_isConstructor == ctor));
@@ -732,12 +729,14 @@ public class ProcedureHelpers {
     };
     final Iterable<ClassStructor> implementedStructors = IterableExtensions.<ClassStructor>filter(_structors, _function);
     final Function1<ClassStructor, DetailCode> _function_1 = new Function1<ClassStructor, DetailCode>() {
+      @Override
       public DetailCode apply(final ClassStructor it) {
         return it.getDetailCode();
       }
     };
     Iterable<DetailCode> _map = IterableExtensions.<ClassStructor, DetailCode>map(implementedStructors, _function_1);
     final Function1<DetailCode, String> _function_2 = new Function1<DetailCode, String>() {
+      @Override
       public String apply(final DetailCode it) {
         AbstractGenerator _instance = AbstractGenerator.getInstance();
         return _instance.getTranslatedCode(it);
@@ -745,6 +744,7 @@ public class ProcedureHelpers {
     };
     final Iterable<String> translatedCodes = IterableExtensions.<DetailCode, String>map(_map, _function_2);
     final Function1<String, CharSequence> _function_3 = new Function1<String, CharSequence>() {
+      @Override
       public CharSequence apply(final String it) {
         CharSequence _xifexpression = null;
         int _size = IterableExtensions.size(translatedCodes);
@@ -766,12 +766,10 @@ public class ProcedureHelpers {
     List<ClassStructor> _switchResult = null;
     final RoomClass it = cls;
     boolean _matched = false;
-    if (!_matched) {
-      if (it instanceof ActorClass) {
-        if ((!inherited)) {
-          _matched=true;
-          _switchResult = ((ActorClass)it).getStructors();
-        }
+    if (it instanceof ActorClass) {
+      if ((!inherited)) {
+        _matched=true;
+        _switchResult = ((ActorClass)it).getStructors();
       }
     }
     if (!_matched) {
@@ -846,11 +844,9 @@ public class ProcedureHelpers {
     String _switchResult = null;
     final RefableType it = type;
     boolean _matched = false;
-    if (!_matched) {
-      if (Objects.equal(it, null)) {
-        _matched=true;
-        _switchResult = "void";
-      }
+    if (Objects.equal(it, null)) {
+      _matched=true;
+      _switchResult = "void";
     }
     if (!_matched) {
       boolean _isRef = it.isRef();
@@ -873,19 +869,17 @@ public class ProcedureHelpers {
     String _switchResult = null;
     final Attribute it = attribute;
     boolean _matched = false;
-    if (!_matched) {
-      int _size = it.getSize();
-      boolean _greaterThan = (_size > 0);
-      if (_greaterThan) {
-        _matched=true;
-        RefableType _type = it.getType();
-        DataType _type_1 = _type.getType();
-        String _typeName = this._typeHelpers.typeName(_type_1);
-        int _size_1 = it.getSize();
-        RefableType _type_2 = it.getType();
-        boolean _isRef = _type_2.isRef();
-        _switchResult = this.languageExt.arrayType(_typeName, _size_1, _isRef);
-      }
+    int _size = it.getSize();
+    boolean _greaterThan = (_size > 0);
+    if (_greaterThan) {
+      _matched=true;
+      RefableType _type = it.getType();
+      DataType _type_1 = _type.getType();
+      String _typeName = this._typeHelpers.typeName(_type_1);
+      int _size_1 = it.getSize();
+      RefableType _type_2 = it.getType();
+      boolean _isRef = _type_2.isRef();
+      _switchResult = this.languageExt.arrayType(_typeName, _size_1, _isRef);
     }
     if (!_matched) {
       RefableType _type_3 = it.getType();
@@ -902,20 +896,18 @@ public class ProcedureHelpers {
     String _switchResult = null;
     final Attribute it = attribute;
     boolean _matched = false;
-    if (!_matched) {
-      int _size = it.getSize();
-      boolean _greaterThan = (_size > 0);
-      if (_greaterThan) {
-        _matched=true;
-        RefableType _type = it.getType();
-        DataType _type_1 = _type.getType();
-        String _typeName = this._typeHelpers.typeName(_type_1);
-        int _size_1 = it.getSize();
-        RefableType _type_2 = it.getType();
-        boolean _isRef = _type_2.isRef();
-        String _name = it.getName();
-        _switchResult = this.languageExt.arrayDeclaration(_typeName, _size_1, _isRef, _name);
-      }
+    int _size = it.getSize();
+    boolean _greaterThan = (_size > 0);
+    if (_greaterThan) {
+      _matched=true;
+      RefableType _type = it.getType();
+      DataType _type_1 = _type.getType();
+      String _typeName = this._typeHelpers.typeName(_type_1);
+      int _size_1 = it.getSize();
+      RefableType _type_2 = it.getType();
+      boolean _isRef = _type_2.isRef();
+      String _name = it.getName();
+      _switchResult = this.languageExt.arrayDeclaration(_typeName, _size_1, _isRef, _name);
     }
     if (!_matched) {
       RefableType _type_3 = it.getType();

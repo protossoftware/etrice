@@ -32,7 +32,6 @@ import org.eclipse.etrice.core.room.EnumerationType;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.core.room.Port;
-import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.ReferenceType;
@@ -110,12 +109,14 @@ public class ActorClassGen extends GenericActorClassGenerator {
     final HashMap<ActorClass, WiredActorClass> ac2wired = new HashMap<ActorClass, WiredActorClass>();
     EList<WiredStructureClass> _wiredInstances = root.getWiredInstances();
     final Function1<WiredStructureClass, Boolean> _function = new Function1<WiredStructureClass, Boolean>() {
+      @Override
       public Boolean apply(final WiredStructureClass w) {
         return Boolean.valueOf((w instanceof WiredActorClass));
       }
     };
     Iterable<WiredStructureClass> _filter = IterableExtensions.<WiredStructureClass>filter(_wiredInstances, _function);
     final Procedure1<WiredStructureClass> _function_1 = new Procedure1<WiredStructureClass>() {
+      @Override
       public void apply(final WiredStructureClass w) {
         ActorClass _actorClass = ((WiredActorClass) w).getActorClass();
         ac2wired.put(_actorClass, ((WiredActorClass) w));
@@ -124,6 +125,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
     IterableExtensions.<WiredStructureClass>forEach(_filter, _function_1);
     EList<ExpandedActorClass> _xpActorClasses = root.getXpActorClasses();
     final Function1<ExpandedActorClass, Boolean> _function_2 = new Function1<ExpandedActorClass, Boolean>() {
+      @Override
       public Boolean apply(final ExpandedActorClass cl) {
         ActorClass _actorClass = cl.getActorClass();
         return Boolean.valueOf(ActorClassGen.this._fileSystemHelpers.isValidGenerationLocation(_actorClass));
@@ -281,6 +283,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       {
         EList<ActorRef> _actorRefs = ac.getActorRefs();
         final Function1<ActorRef, Boolean> _function = new Function1<ActorRef, Boolean>() {
+          @Override
           public Boolean apply(final ActorRef r) {
             ReferenceType _refType = r.getRefType();
             return Boolean.valueOf(Objects.equal(_refType, ReferenceType.OPTIONAL));
@@ -308,14 +311,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.newLine();
       _builder.append("public ");
       {
-        boolean _or = false;
-        if (manualBehavior) {
-          _or = true;
-        } else {
-          boolean _isAbstract = ac.isAbstract();
-          _or = _isAbstract;
-        }
-        if (_or) {
+        if ((manualBehavior || ac.isAbstract())) {
           _builder.append("abstract ");
         }
       }
@@ -394,6 +390,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       {
         EList<ActorRef> _actorRefs_1 = ac.getActorRefs();
         final Function1<ActorRef, Boolean> _function_1 = new Function1<ActorRef, Boolean>() {
+          @Override
           public Boolean apply(final ActorRef r) {
             ReferenceType _refType = r.getRefType();
             return Boolean.valueOf(Objects.equal(_refType, ReferenceType.OPTIONAL));
@@ -680,17 +677,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       }
       _builder.newLine();
       {
-        boolean _or_1 = false;
-        ComponentCommunicationType _commType = ac.getCommType();
-        boolean _equals_1 = Objects.equal(_commType, ComponentCommunicationType.ASYNCHRONOUS);
-        if (_equals_1) {
-          _or_1 = true;
-        } else {
-          ComponentCommunicationType _commType_1 = ac.getCommType();
-          boolean _equals_2 = Objects.equal(_commType_1, ComponentCommunicationType.DATA_DRIVEN);
-          _or_1 = _equals_2;
-        }
-        if (_or_1) {
+        if ((Objects.equal(ac.getCommType(), ComponentCommunicationType.ASYNCHRONOUS) || Objects.equal(ac.getCommType(), ComponentCommunicationType.DATA_DRIVEN))) {
           _builder.append("\t\t");
           _builder.append("// activate polling for data-driven communication");
           _builder.newLine();
@@ -706,22 +693,10 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.newLineIfNotEmpty();
       _builder.newLine();
       {
-        boolean _or_2 = false;
-        List<Attribute> _dynConfigReadAttributes_2 = this.dataConfigExt.getDynConfigReadAttributes(ac);
-        boolean _isEmpty_2 = _dynConfigReadAttributes_2.isEmpty();
-        boolean _not_2 = (!_isEmpty_2);
-        if (_not_2) {
-          _or_2 = true;
-        } else {
-          List<Attribute> _dynConfigWriteAttributes = this.dataConfigExt.getDynConfigWriteAttributes(ac);
-          boolean _isEmpty_3 = _dynConfigWriteAttributes.isEmpty();
-          boolean _not_3 = (!_isEmpty_3);
-          _or_2 = _not_3;
-        }
-        if (_or_2) {
+        if (((!this.dataConfigExt.getDynConfigReadAttributes(ac).isEmpty()) || (!this.dataConfigExt.getDynConfigWriteAttributes(ac).isEmpty()))) {
           {
-            List<Attribute> _dynConfigReadAttributes_3 = this.dataConfigExt.getDynConfigReadAttributes(ac);
-            for(final Attribute a_1 : _dynConfigReadAttributes_3) {
+            List<Attribute> _dynConfigReadAttributes_2 = this.dataConfigExt.getDynConfigReadAttributes(ac);
+            for(final Attribute a_1 : _dynConfigReadAttributes_2) {
               _builder.append("\t\t");
               _builder.append("lock_");
               String _name_28 = a_1.getName();
@@ -738,8 +713,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.newLine();
       _builder.append("\t");
       EList<Attribute> _attributes_3 = ac.getAttributes();
-      List<Attribute> _dynConfigReadAttributes_4 = this.dataConfigExt.getDynConfigReadAttributes(ac);
-      List<Attribute> _minus = this._roomExtensions.<Attribute>minus(_attributes_3, _dynConfigReadAttributes_4);
+      List<Attribute> _dynConfigReadAttributes_3 = this.dataConfigExt.getDynConfigReadAttributes(ac);
+      List<Attribute> _minus = this._roomExtensions.<Attribute>minus(_attributes_3, _dynConfigReadAttributes_3);
       String _name_29 = ac.getName();
       CharSequence _attributeSettersGettersImplementation = this._procedureHelpers.attributeSettersGettersImplementation(_minus, _name_29);
       _builder.append(_attributeSettersGettersImplementation, "\t");
@@ -796,8 +771,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.newLine();
       {
         boolean _overridesStop = this._roomExtensions.overridesStop(ac);
-        boolean _not_4 = (!_overridesStop);
-        if (_not_4) {
+        boolean _not_2 = (!_overridesStop);
+        if (_not_2) {
           {
             if (manualBehavior) {
               _builder.append("\t");
@@ -848,17 +823,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
             }
           }
           {
-            boolean _or_3 = false;
-            ComponentCommunicationType _commType_2 = ac.getCommType();
-            boolean _equals_3 = Objects.equal(_commType_2, ComponentCommunicationType.ASYNCHRONOUS);
-            if (_equals_3) {
-              _or_3 = true;
-            } else {
-              ComponentCommunicationType _commType_3 = ac.getCommType();
-              boolean _equals_4 = Objects.equal(_commType_3, ComponentCommunicationType.DATA_DRIVEN);
-              _or_3 = _equals_4;
-            }
-            if (_or_3) {
+            if ((Objects.equal(ac.getCommType(), ComponentCommunicationType.ASYNCHRONOUS) || Objects.equal(ac.getCommType(), ComponentCommunicationType.DATA_DRIVEN))) {
               _builder.append("\t");
               _builder.append("\t");
               _builder.append("RTServices.getInstance().getMsgSvcCtrl().getMsgSvc(getThread()).removePollingMessageReceiver(this);");
@@ -1038,9 +1003,9 @@ public class ActorClassGen extends GenericActorClassGenerator {
               _builder.append(_genStateMachine, "\t");
               _builder.newLineIfNotEmpty();
               {
-                ComponentCommunicationType _commType_4 = ac.getCommType();
-                boolean _equals_5 = Objects.equal(_commType_4, ComponentCommunicationType.DATA_DRIVEN);
-                if (_equals_5) {
+                ComponentCommunicationType _commType = ac.getCommType();
+                boolean _equals_1 = Objects.equal(_commType, ComponentCommunicationType.DATA_DRIVEN);
+                if (_equals_1) {
                   _builder.append("\t");
                   _builder.append("public void receiveEvent(InterfaceItemBase ifitem, int evt, Object generic_data) {");
                   _builder.newLine();
@@ -1054,17 +1019,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
                 }
               }
               {
-                boolean _or_4 = false;
-                ComponentCommunicationType _commType_5 = ac.getCommType();
-                boolean _equals_6 = Objects.equal(_commType_5, ComponentCommunicationType.ASYNCHRONOUS);
-                if (_equals_6) {
-                  _or_4 = true;
-                } else {
-                  ComponentCommunicationType _commType_6 = ac.getCommType();
-                  boolean _equals_7 = Objects.equal(_commType_6, ComponentCommunicationType.DATA_DRIVEN);
-                  _or_4 = _equals_7;
-                }
-                if (_or_4) {
+                if ((Objects.equal(ac.getCommType(), ComponentCommunicationType.ASYNCHRONOUS) || Objects.equal(ac.getCommType(), ComponentCommunicationType.DATA_DRIVEN))) {
                   _builder.append("\t");
                   _builder.append("@Override");
                   _builder.newLine();
@@ -1072,9 +1027,9 @@ public class ActorClassGen extends GenericActorClassGenerator {
                   _builder.append("public void receive(Message msg) {");
                   _builder.newLine();
                   {
-                    ComponentCommunicationType _commType_7 = ac.getCommType();
-                    boolean _equals_8 = Objects.equal(_commType_7, ComponentCommunicationType.ASYNCHRONOUS);
-                    if (_equals_8) {
+                    ComponentCommunicationType _commType_1 = ac.getCommType();
+                    boolean _equals_2 = Objects.equal(_commType_1, ComponentCommunicationType.ASYNCHRONOUS);
+                    if (_equals_2) {
                       _builder.append("\t");
                       _builder.append("\t");
                       _builder.append("receiveEvent(null, -1, null);");
@@ -1093,8 +1048,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
               }
             } else {
               StateGraph _stateMachine = xpac.getStateMachine();
-              boolean _isEmpty_4 = this._roomHelpers.isEmpty(_stateMachine);
-              if (_isEmpty_4) {
+              boolean _isEmpty_2 = this._roomHelpers.isEmpty(_stateMachine);
+              if (_isEmpty_2) {
                 _builder.append("\t");
                 _builder.append("//--------------------- no state machine");
                 _builder.newLine();
@@ -1265,9 +1220,9 @@ public class ActorClassGen extends GenericActorClassGenerator {
           }
           {
             EList<Attribute> _attributes_4 = ac.getAttributes();
-            boolean _isEmpty_5 = _attributes_4.isEmpty();
-            boolean _not_5 = (!_isEmpty_5);
-            if (_not_5) {
+            boolean _isEmpty_3 = _attributes_4.isEmpty();
+            boolean _not_3 = (!_isEmpty_3);
+            if (_not_3) {
               _builder.newLine();
               {
                 EList<Attribute> _attributes_5 = ac.getAttributes();
@@ -1423,9 +1378,9 @@ public class ActorClassGen extends GenericActorClassGenerator {
           }
           {
             EList<Attribute> _attributes_6 = ac.getAttributes();
-            boolean _isEmpty_6 = _attributes_6.isEmpty();
-            boolean _not_6 = (!_isEmpty_6);
-            if (_not_6) {
+            boolean _isEmpty_4 = _attributes_6.isEmpty();
+            boolean _not_4 = (!_isEmpty_4);
+            if (_not_4) {
               _builder.newLine();
               {
                 EList<Attribute> _attributes_7 = ac.getAttributes();
@@ -1699,24 +1654,12 @@ public class ActorClassGen extends GenericActorClassGenerator {
     String _xblockexpression = null;
     {
       String _xifexpression = null;
-      boolean _and = false;
-      RefableType _type = att.getType();
-      DataType _type_1 = _type.getType();
-      if (!(_type_1 instanceof EnumerationType)) {
-        _and = false;
-      } else {
-        RefableType _type_2 = att.getType();
-        DataType _type_3 = _type_2.getType();
-        PrimitiveType _primitiveType = ((EnumerationType) _type_3).getPrimitiveType();
-        boolean _equals = Objects.equal(_primitiveType, null);
-        _and = _equals;
-      }
-      if (_and) {
+      if (((att.getType().getType() instanceof EnumerationType) && Objects.equal(((EnumerationType) att.getType().getType()).getPrimitiveType(), null))) {
         _xifexpression = "int";
       } else {
-        RefableType _type_4 = att.getType();
-        DataType _type_5 = _type_4.getType();
-        _xifexpression = this._typeHelpers.typeName(_type_5);
+        RefableType _type = att.getType();
+        DataType _type_1 = _type.getType();
+        _xifexpression = this._typeHelpers.typeName(_type_1);
       }
       final String type = _xifexpression;
       final String method = this.getSaveMethod(type);
@@ -1742,11 +1685,9 @@ public class ActorClassGen extends GenericActorClassGenerator {
   private String getSaveMethod(final String type) {
     String _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (Objects.equal(type, "boolean")) {
-        _matched=true;
-        _switchResult = "writeBoolean";
-      }
+    if (Objects.equal(type, "boolean")) {
+      _matched=true;
+      _switchResult = "writeBoolean";
     }
     if (!_matched) {
       if (Objects.equal(type, "char")) {
@@ -1803,24 +1744,12 @@ public class ActorClassGen extends GenericActorClassGenerator {
     String _xblockexpression = null;
     {
       String _xifexpression = null;
-      boolean _and = false;
-      RefableType _type = att.getType();
-      DataType _type_1 = _type.getType();
-      if (!(_type_1 instanceof EnumerationType)) {
-        _and = false;
-      } else {
-        RefableType _type_2 = att.getType();
-        DataType _type_3 = _type_2.getType();
-        PrimitiveType _primitiveType = ((EnumerationType) _type_3).getPrimitiveType();
-        boolean _equals = Objects.equal(_primitiveType, null);
-        _and = _equals;
-      }
-      if (_and) {
+      if (((att.getType().getType() instanceof EnumerationType) && Objects.equal(((EnumerationType) att.getType().getType()).getPrimitiveType(), null))) {
         _xifexpression = "int";
       } else {
-        RefableType _type_4 = att.getType();
-        DataType _type_5 = _type_4.getType();
-        _xifexpression = this._typeHelpers.typeName(_type_5);
+        RefableType _type = att.getType();
+        DataType _type_1 = _type.getType();
+        _xifexpression = this._typeHelpers.typeName(_type_1);
       }
       final String type = _xifexpression;
       final String method = this.getLoadMethod(type);
@@ -1850,11 +1779,9 @@ public class ActorClassGen extends GenericActorClassGenerator {
   private String getLoadMethod(final String type) {
     String _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (Objects.equal(type, "boolean")) {
-        _matched=true;
-        _switchResult = "readBoolean";
-      }
+    if (Objects.equal(type, "boolean")) {
+      _matched=true;
+      _switchResult = "readBoolean";
     }
     if (!_matched) {
       if (Objects.equal(type, "char")) {

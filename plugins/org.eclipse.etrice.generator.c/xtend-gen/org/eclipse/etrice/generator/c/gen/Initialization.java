@@ -95,35 +95,15 @@ public class Initialization {
       _builder.append(" */");
       String COMMENT = _builder.toString();
       String _xifexpression = null;
-      boolean _or = false;
-      int _size_2 = a.getSize();
-      boolean _equals = (_size_2 == 0);
-      if (_equals) {
-        _or = true;
-      } else {
-        boolean _and = false;
-        RefableType _type = a.getType();
-        boolean _isRef = _type.isRef();
-        boolean _not = (!_isRef);
-        if (!_not) {
-          _and = false;
-        } else {
-          RefableType _type_1 = a.getType();
-          DataType _type_2 = _type_1.getType();
-          boolean _isEnumerationOrPrimitive = this._typeHelpers.isEnumerationOrPrimitive(_type_2);
-          _and = _isEnumerationOrPrimitive;
-        }
-        _or = _and;
-      }
-      if (_or) {
+      if (((a.getSize() == 0) || ((!a.getType().isRef()) && this._typeHelpers.isEnumerationOrPrimitive(a.getType().getType())))) {
         CharSequence _initAttribute = this.initAttribute(instance, path);
         _xifexpression = (_initAttribute + COMMENT);
       } else {
         StringConcatenation _builder_1 = new StringConcatenation();
         _builder_1.append("{ ");
         {
-          int _size_3 = a.getSize();
-          IntegerRange _upTo = new IntegerRange(1, _size_3);
+          int _size_2 = a.getSize();
+          IntegerRange _upTo = new IntegerRange(1, _size_2);
           boolean _hasElements = false;
           for(final Integer i : _upTo) {
             if (!_hasElements) {
@@ -166,31 +146,29 @@ public class Initialization {
       }
       CharSequence _switchResult = null;
       boolean _matched = false;
-      if (!_matched) {
-        if (aType instanceof DataClass) {
-          _matched=true;
-          StringConcatenation _builder = new StringConcatenation();
-          _builder.append("{");
-          _builder.newLine();
-          {
-            List<Attribute> _allAttributes = this._roomHelpers.getAllAttributes(((DataClass) aType));
-            boolean _hasElements = false;
-            for(final Attribute subA : _allAttributes) {
-              if (!_hasElements) {
-                _hasElements = true;
-              } else {
-                _builder.appendImmediate(",", "\t");
-              }
-              _builder.append("\t");
-              List<Attribute> _union = this._roomExtensions.<Attribute>union(path, subA);
-              String _initAttributeArray = this.initAttributeArray(instance, _union);
-              _builder.append(_initAttributeArray, "\t");
-              _builder.newLineIfNotEmpty();
+      if (aType instanceof DataClass) {
+        _matched=true;
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("{");
+        _builder.newLine();
+        {
+          List<Attribute> _allAttributes = this._roomHelpers.getAllAttributes(((DataClass) aType));
+          boolean _hasElements = false;
+          for(final Attribute subA : _allAttributes) {
+            if (!_hasElements) {
+              _hasElements = true;
+            } else {
+              _builder.appendImmediate(",", "\t");
             }
+            _builder.append("\t");
+            List<Attribute> _union = this._roomExtensions.<Attribute>union(path, subA);
+            String _initAttributeArray = this.initAttributeArray(instance, _union);
+            _builder.append(_initAttributeArray, "\t");
+            _builder.newLineIfNotEmpty();
           }
-          _builder.append("}");
-          _switchResult = _builder;
         }
+        _builder.append("}");
+        _switchResult = _builder;
       }
       if (!_matched) {
         if (aType instanceof ExternalType) {
@@ -213,31 +191,12 @@ public class Initialization {
           {
             String value = this.getPrimitiveValue(instance, path);
             CharSequence _xifexpression_1 = null;
-            boolean _and = false;
-            boolean _and_1 = false;
-            int _size = a.getSize();
-            boolean _greaterThan = (_size > 0);
-            if (!_greaterThan) {
-              _and_1 = false;
-            } else {
-              boolean _isCharacterType = this._typeHelpers.isCharacterType(((PrimitiveType)aType));
-              boolean _not = (!_isCharacterType);
-              _and_1 = _not;
-            }
-            if (!_and_1) {
-              _and = false;
-            } else {
-              String _trim = value.trim();
-              boolean _startsWith = _trim.startsWith("{");
-              boolean _not_1 = (!_startsWith);
-              _and = _not_1;
-            }
-            if (_and) {
+            if ((((a.getSize() > 0) && (!this._typeHelpers.isCharacterType(((PrimitiveType)aType)))) && (!value.trim().startsWith("{")))) {
               StringConcatenation _builder = new StringConcatenation();
               _builder.append("{");
               {
-                int _size_1 = a.getSize();
-                IntegerRange _upTo = new IntegerRange(1, _size_1);
+                int _size = a.getSize();
+                IntegerRange _upTo = new IntegerRange(1, _size);
                 boolean _hasElements = false;
                 for(final Integer i : _upTo) {
                   if (!_hasElements) {
@@ -252,23 +211,7 @@ public class Initialization {
               _xifexpression_1 = _builder;
             } else {
               String _xifexpression_2 = null;
-              boolean _and_2 = false;
-              boolean _and_3 = false;
-              int _size_2 = a.getSize();
-              boolean _greaterThan_1 = (_size_2 > 0);
-              if (!_greaterThan_1) {
-                _and_3 = false;
-              } else {
-                boolean _isCharacterType_1 = this._typeHelpers.isCharacterType(((PrimitiveType)aType));
-                _and_3 = _isCharacterType_1;
-              }
-              if (!_and_3) {
-                _and_2 = false;
-              } else {
-                boolean _startsWith_1 = value.startsWith("\'");
-                _and_2 = _startsWith_1;
-              }
-              if (_and_2) {
+              if ((((a.getSize() > 0) && this._typeHelpers.isCharacterType(((PrimitiveType)aType))) && value.startsWith("\'"))) {
                 _xifexpression_2 = (("{" + value) + "}");
               } else {
                 _xifexpression_2 = value;
@@ -287,23 +230,12 @@ public class Initialization {
           {
             String value = this.getPrimitiveValue(instance, path);
             CharSequence _xifexpression_1 = null;
-            boolean _and = false;
-            int _size = a.getSize();
-            boolean _greaterThan = (_size > 0);
-            if (!_greaterThan) {
-              _and = false;
-            } else {
-              String _trim = value.trim();
-              boolean _startsWith = _trim.startsWith("{");
-              boolean _not = (!_startsWith);
-              _and = _not;
-            }
-            if (_and) {
+            if (((a.getSize() > 0) && (!value.trim().startsWith("{")))) {
               StringConcatenation _builder = new StringConcatenation();
               _builder.append("{");
               {
-                int _size_1 = a.getSize();
-                IntegerRange _upTo = new IntegerRange(1, _size_1);
+                int _size = a.getSize();
+                IntegerRange _upTo = new IntegerRange(1, _size);
                 boolean _hasElements = false;
                 for(final Integer i : _upTo) {
                   if (!_hasElements) {
@@ -335,12 +267,10 @@ public class Initialization {
     if (_equals) {
       String _switchResult = null;
       boolean _matched = false;
-      if (!_matched) {
-        if (instance instanceof ActorInstance) {
-          _matched=true;
-          ActorClass _actorClass = ((ActorInstance)instance).getActorClass();
-          _switchResult = this._typeHelpers.getAttrClassConfigValue(path, _actorClass, true);
-        }
+      if (instance instanceof ActorInstance) {
+        _matched=true;
+        ActorClass _actorClass = ((ActorInstance)instance).getActorClass();
+        _switchResult = this._typeHelpers.getAttrClassConfigValue(path, _actorClass, true);
       }
       if (!_matched) {
         if (instance instanceof InterfaceItemInstance) {
@@ -362,27 +292,11 @@ public class Initialization {
     RefableType _type = _last_1.getType();
     DataType type = _type.getType();
     String _xifexpression = null;
-    boolean _and = false;
-    boolean _notEquals = (!Objects.equal(value, null));
-    if (!_notEquals) {
-      _and = false;
-    } else {
-      boolean _isPrimitive = this._typeHelpers.isPrimitive(type);
-      _and = _isPrimitive;
-    }
-    if (_and) {
+    if (((!Objects.equal(value, null)) && this._typeHelpers.isPrimitive(type))) {
       _xifexpression = this.languageExt.toValueLiteral(((PrimitiveType) type), value);
     } else {
       String _xifexpression_1 = null;
-      boolean _and_1 = false;
-      boolean _notEquals_1 = (!Objects.equal(value, null));
-      if (!_notEquals_1) {
-        _and_1 = false;
-      } else {
-        boolean _isEnumeration = this._typeHelpers.isEnumeration(type);
-        _and_1 = _isEnumeration;
-      }
-      if (_and_1) {
+      if (((!Objects.equal(value, null)) && this._typeHelpers.isEnumeration(type))) {
         _xifexpression_1 = this.languageExt.toEnumLiteral(((EnumerationType) type), value);
       } else {
         _xifexpression_1 = this.languageExt.defaultValue(type);

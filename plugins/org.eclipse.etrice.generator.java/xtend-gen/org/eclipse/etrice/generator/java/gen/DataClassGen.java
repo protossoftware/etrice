@@ -67,6 +67,7 @@ public class DataClassGen {
   public void doGenerate(final Root root) {
     EList<DataClass> _usedDataClasses = root.getUsedDataClasses();
     final Function1<DataClass, Boolean> _function = new Function1<DataClass, Boolean>() {
+      @Override
       public Boolean apply(final DataClass cl) {
         return Boolean.valueOf(DataClassGen.this._fileSystemHelpers.isValidGenerationLocation(cl));
       }

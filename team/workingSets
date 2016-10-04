@@ -57,10 +57,8 @@
 </workingSet>
 <workingSet editPageId="org.eclipse.ui.resourceWorkingSetPage" id="1444835049188_14" label="features" name="features">
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.etrice.cdt-integration.feature" type="4"/>
-<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.etrice.layout.feature" type="4"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.etrice.fsm.feature" type="4"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.etrice.feature" type="4"/>
-<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.etrice.kieler.feature" type="4"/>
 </workingSet>
 <workingSet editPageId="org.eclipse.ui.resourceWorkingSetPage" id="1444834844450_12" label="releng" name="releng">
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.etrice.site" type="4"/>

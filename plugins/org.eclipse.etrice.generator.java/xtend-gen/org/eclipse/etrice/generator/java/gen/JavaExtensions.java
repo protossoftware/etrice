@@ -43,6 +43,7 @@ public class JavaExtensions implements ILanguageExtension {
   @Inject
   private TypeHelpers typeHelpers;
   
+  @Override
   public String getTypedDataDefinition(final EObject msg) {
     String _xifexpression = null;
     if ((msg instanceof Message)) {
@@ -126,11 +127,9 @@ public class JavaExtensions implements ILanguageExtension {
   public String toWrapper(final String type) {
     String _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (Objects.equal(type, "int")) {
-        _matched=true;
-        _switchResult = "Integer";
-      }
+    if (Objects.equal(type, "int")) {
+      _matched=true;
+      _switchResult = "Integer";
     }
     if (!_matched) {
       if (Objects.equal(type, "char")) {
@@ -145,79 +144,70 @@ public class JavaExtensions implements ILanguageExtension {
   }
   
   public boolean needsInitialization(final Attribute a) {
-    boolean _or = false;
-    boolean _or_1 = false;
-    int _size = a.getSize();
-    boolean _greaterThan = (_size > 0);
-    if (_greaterThan) {
-      _or_1 = true;
-    } else {
-      RefableType _type = a.getType();
-      DataType _type_1 = _type.getType();
-      boolean _isEnumerationOrPrimitive = this.typeHelpers.isEnumerationOrPrimitive(_type_1);
-      boolean _not = (!_isEnumerationOrPrimitive);
-      _or_1 = _not;
-    }
-    if (_or_1) {
-      _or = true;
-    } else {
-      RefableType _type_2 = a.getType();
-      DataType _type_3 = _type_2.getType();
-      String _typeName = this.typeHelpers.typeName(_type_3);
-      boolean _equals = _typeName.equals("String");
-      _or = _equals;
-    }
-    return _or;
+    return (((a.getSize() > 0) || (!this.typeHelpers.isEnumerationOrPrimitive(a.getType().getType()))) || this.typeHelpers.typeName(a.getType().getType()).equals("String"));
   }
   
+  @Override
   public String accessLevelPrivate() {
     return "private ";
   }
   
+  @Override
   public String accessLevelProtected() {
     return "protected ";
   }
   
+  @Override
   public String accessLevelPublic() {
     return "public ";
   }
   
+  @Override
   public String memberAccess() {
     return "this.";
   }
   
+  @Override
   public String selfPointer(final String classname, final boolean hasArgs) {
     return "";
   }
   
+  @Override
   public String selfPointer(final boolean hasArgs) {
     return "";
   }
   
+  @Override
   public String operationScope(final String classname, final boolean isDeclaration) {
     return "";
   }
   
+  @Override
   public String scopeSeparator() {
     return ".";
   }
   
+  @Override
   public String memberInDeclaration(final String namespace, final String member) {
     return member;
   }
   
+  @Override
   public String memberInUse(final String namespace, final String member) {
     return ((namespace + ".") + member);
   }
   
+  @Override
   public boolean usesInheritance() {
     return true;
   }
   
+  @Override
   public boolean usesPointers() {
     return false;
   }
   
+  @Override
   public String genEnumeration(final String name, final List<Pair<String, String>> entries) {
     StringConcatenation _builder = new StringConcatenation();
     {
@@ -235,53 +225,45 @@ public class JavaExtensions implements ILanguageExtension {
     return _builder.toString();
   }
   
+  @Override
   public String booleanConstant(final boolean b) {
     return Boolean.valueOf(b).toString();
   }
   
+  @Override
   public String pointerLiteral() {
     return "";
   }
   
+  @Override
   public String nullPointer() {
     return "null";
   }
   
+  @Override
   public String voidPointer() {
     return "Object";
   }
   
+  @Override
   public String arrayType(final String type, final int size, final boolean isRef) {
     return (type + "[]");
   }
   
+  @Override
   public String arrayDeclaration(final String type, final int size, final boolean isRef, final String name) {
     return (((type + " ") + name) + "[]");
   }
   
+  @Override
   public String superCall(final String baseClassName, final String method, final String args) {
     return (((("super." + method) + "(") + args) + ");");
   }
   
+  @Override
   public String toValueLiteral(final PrimitiveType type, final String value) {
     String _xifexpression = null;
-    boolean _and = false;
-    boolean _isCharacterType = this.typeHelpers.isCharacterType(type);
-    boolean _not = (!_isCharacterType);
-    if (!_not) {
-      _and = false;
-    } else {
-      boolean _or = false;
-      boolean _contains = value.contains(",");
-      if (_contains) {
-        _or = true;
-      } else {
-        boolean _contains_1 = value.contains("{");
-        _or = _contains_1;
-      }
-      _and = _or;
-    }
-    if (_and) {
+    if (((!this.typeHelpers.isCharacterType(type)) && (value.contains(",") || value.contains("{")))) {
       String _xblockexpression = null;
       {
         String _replace = value.replace("{", "");
@@ -313,17 +295,10 @@ public class JavaExtensions implements ILanguageExtension {
     return _xifexpression;
   }
   
+  @Override
   public String toEnumLiteral(final EnumerationType type, final String value) {
     String _xifexpression = null;
-    boolean _or = false;
-    boolean _contains = value.contains(",");
-    if (_contains) {
-      _or = true;
-    } else {
-      boolean _contains_1 = value.contains("{");
-      _or = _contains_1;
-    }
-    if (_or) {
+    if ((value.contains(",") || value.contains("{"))) {
       String _xblockexpression = null;
       {
         String _replace = value.replace("{", "");
@@ -384,11 +359,9 @@ public class JavaExtensions implements ILanguageExtension {
     String _switchResult = null;
     String _targetName = type.getTargetName();
     boolean _matched = false;
-    if (!_matched) {
-      if (Objects.equal(_targetName, "boolean")) {
-        _matched=true;
-        _switchResult = value.toLowerCase();
-      }
+    if (Objects.equal(_targetName, "boolean")) {
+      _matched=true;
+      _switchResult = value.toLowerCase();
     }
     if (!_matched) {
       if (Objects.equal(_targetName, "byte")) {
@@ -468,15 +441,14 @@ public class JavaExtensions implements ILanguageExtension {
     return _switchResult;
   }
   
+  @Override
   public String defaultValue(final DataType dt) {
     String _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (dt instanceof PrimitiveType) {
-        _matched=true;
-        String _defaultValueLiteral = ((PrimitiveType)dt).getDefaultValueLiteral();
-        _switchResult = this.toValueLiteral(((PrimitiveType)dt), _defaultValueLiteral);
-      }
+    if (dt instanceof PrimitiveType) {
+      _matched=true;
+      String _defaultValueLiteral = ((PrimitiveType)dt).getDefaultValueLiteral();
+      _switchResult = this.toValueLiteral(((PrimitiveType)dt), _defaultValueLiteral);
     }
     if (!_matched) {
       if (dt instanceof EnumerationType) {
@@ -514,6 +486,7 @@ public class JavaExtensions implements ILanguageExtension {
     return _xifexpression;
   }
   
+  @Override
   public String initializationWithDefaultValues(final DataType dt, final int size) {
     String _xblockexpression = null;
     {
@@ -544,15 +517,9 @@ public class JavaExtensions implements ILanguageExtension {
     return _xblockexpression;
   }
   
+  @Override
   public String[] generateArglistAndTypedData(final EObject d) {
-    boolean _or = false;
-    boolean _equals = Objects.equal(d, null);
-    if (_equals) {
-      _or = true;
-    } else {
-      _or = (!(d instanceof VarDecl));
-    }
-    if (_or) {
+    if ((Objects.equal(d, null) || (!(d instanceof VarDecl)))) {
       return ((String[])Conversions.unwrapArray(CollectionLiterals.<String>newArrayList("", "", ""), String.class));
     }
     final VarDecl data = ((VarDecl) d);
@@ -570,16 +537,7 @@ public class JavaExtensions implements ILanguageExtension {
       RefableType _refType_3 = data.getRefType();
       DataType _type_3 = _refType_3.getType();
       final String ct = ((PrimitiveType) _type_3).getCastName();
-      boolean _and = false;
-      boolean _notEquals = (!Objects.equal(ct, null));
-      if (!_notEquals) {
-        _and = false;
-      } else {
-        boolean _isEmpty = ct.isEmpty();
-        boolean _not = (!_isEmpty);
-        _and = _not;
-      }
-      if (_and) {
+      if (((!Objects.equal(ct, null)) && (!ct.isEmpty()))) {
         castTypeName = ct;
       }
     } else {
@@ -608,6 +566,7 @@ public class JavaExtensions implements ILanguageExtension {
     return ((String[])Conversions.unwrapArray(CollectionLiterals.<String>newArrayList(dataArg, typedData, typedArgList), String.class));
   }
   
+  @Override
   public String getTargetType(final EnumerationType type) {
     String _xifexpression = null;
     PrimitiveType _primitiveType = type.getPrimitiveType();
@@ -621,6 +580,7 @@ public class JavaExtensions implements ILanguageExtension {
     return _xifexpression;
   }
   
+  @Override
   public String getCastedValue(final EnumLiteral literal) {
     String _xblockexpression = null;
     {
@@ -644,6 +604,7 @@ public class JavaExtensions implements ILanguageExtension {
     return _xblockexpression;
   }
   
+  @Override
   public String getCastType(final EnumerationType type) {
     String _xifexpression = null;
     PrimitiveType _primitiveType = type.getPrimitiveType();
@@ -657,6 +618,7 @@ public class JavaExtensions implements ILanguageExtension {
     return _xifexpression;
   }
   
+  @Override
   public String makeOverridable() {
     return "";
   }

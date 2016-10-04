@@ -37,14 +37,12 @@ import org.eclipse.etrice.core.room.MessageHandler;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.PortClass;
 import org.eclipse.etrice.core.room.ProtocolClass;
-import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.SAP;
 import org.eclipse.etrice.core.room.SPP;
 import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.StandardOperation;
-import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.fsm.base.FileSystemHelpers;
 import org.eclipse.etrice.generator.fsm.generic.FSMExtensions;
@@ -104,6 +102,7 @@ public class RoomExtensions extends FSMExtensions {
   public List<Port> punion(final Iterable<Port> in1, final Iterable<ExternalPort> in2) {
     final ArrayList<Port> ret = new ArrayList<Port>();
     final Procedure1<ExternalPort> _function = new Procedure1<ExternalPort>() {
+      @Override
       public void apply(final ExternalPort e) {
         Port _interfacePort = e.getInterfacePort();
         ret.add(_interfacePort);
@@ -482,6 +481,7 @@ public class RoomExtensions extends FSMExtensions {
     EObject _eContainer = m.eContainer();
     List<MessageHandler> _sendHandlers = this.getSendHandlers(((ProtocolClass) _eContainer), conj);
     final Function1<MessageHandler, Boolean> _function = new Function1<MessageHandler, Boolean>() {
+      @Override
       public Boolean apply(final MessageHandler e) {
         Message _msg = e.getMsg();
         return Boolean.valueOf(Objects.equal(_msg, m));
@@ -522,48 +522,12 @@ public class RoomExtensions extends FSMExtensions {
    * 		void return type
    */
   public boolean overridesStop(final ActorClass ac) {
-    boolean _or = false;
-    EList<StandardOperation> _operations = ac.getOperations();
-    final Function1<StandardOperation, Boolean> _function = new Function1<StandardOperation, Boolean>() {
+    return (IterableExtensions.<StandardOperation>exists(ac.getOperations(), new Function1<StandardOperation, Boolean>() {
+      @Override
       public Boolean apply(final StandardOperation e) {
-        boolean _and = false;
-        boolean _and_1 = false;
-        String _name = e.getName();
-        boolean _equals = Objects.equal(_name, "stop");
-        if (!_equals) {
-          _and_1 = false;
-        } else {
-          EList<VarDecl> _arguments = e.getArguments();
-          boolean _isEmpty = _arguments.isEmpty();
-          _and_1 = _isEmpty;
-        }
-        if (!_and_1) {
-          _and = false;
-        } else {
-          RefableType _returnType = e.getReturnType();
-          boolean _equals_1 = Objects.equal(_returnType, null);
-          _and = _equals_1;
-        }
-        return Boolean.valueOf(_and);
+        return Boolean.valueOf(((Objects.equal(e.getName(), "stop") && e.getArguments().isEmpty()) && Objects.equal(e.getReturnType(), null)));
       }
-    };
-    boolean _exists = IterableExtensions.<StandardOperation>exists(_operations, _function);
-    if (_exists) {
-      _or = true;
-    } else {
-      boolean _and = false;
-      ActorClass _actorBase = ac.getActorBase();
-      boolean _notEquals = (!Objects.equal(_actorBase, null));
-      if (!_notEquals) {
-        _and = false;
-      } else {
-        ActorClass _actorBase_1 = ac.getActorBase();
-        boolean _overridesStop = this.overridesStop(_actorBase_1);
-        _and = _overridesStop;
-      }
-      _or = _and;
-    }
-    return _or;
+    }) || ((!Objects.equal(ac.getActorBase(), null)) && this.overridesStop(ac.getActorBase())));
   }
   
   public BasicEList<AbstractInstance> getAllSubInstances(final StructureInstance ssi) {

@@ -129,16 +129,7 @@ public class TypeHelpers {
   }
   
   public boolean isBoolean(final DataType type) {
-    boolean _and = false;
-    boolean _isPrimitive = this.isPrimitive(type);
-    if (!_isPrimitive) {
-      _and = false;
-    } else {
-      LiteralType _type = ((PrimitiveType) type).getType();
-      boolean _equals = Objects.equal(_type, LiteralType.BOOL);
-      _and = _equals;
-    }
-    return _and;
+    return (this.isPrimitive(type) && Objects.equal(((PrimitiveType) type).getType(), LiteralType.BOOL));
   }
   
   public boolean isEnumeration(final DataType type) {
@@ -146,13 +137,7 @@ public class TypeHelpers {
   }
   
   public boolean isEnumerationOrPrimitive(final DataType type) {
-    boolean _or = false;
-    if ((type instanceof EnumerationType)) {
-      _or = true;
-    } else {
-      _or = (type instanceof PrimitiveType);
-    }
-    return _or;
+    return ((type instanceof EnumerationType) || (type instanceof PrimitiveType));
   }
   
   public boolean isDataClass(final DataType type) {
@@ -165,25 +150,15 @@ public class TypeHelpers {
   }
   
   public boolean isCharacterType(final DataType type) {
-    boolean _and = false;
-    boolean _isPrimitive = this.isPrimitive(type);
-    if (!_isPrimitive) {
-      _and = false;
-    } else {
-      boolean _isCharacterType = this.isCharacterType(((PrimitiveType) type));
-      _and = _isCharacterType;
-    }
-    return _and;
+    return (this.isPrimitive(type) && this.isCharacterType(((PrimitiveType) type)));
   }
   
   public String getAttrInstanceConfigValue(final List<Attribute> attributePath, final InstanceBase instance) {
     String _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (instance instanceof ActorInstance) {
-        _matched=true;
-        _switchResult = this.dataConfigExt.getAttrInstanceConfigValue(((ActorInstance)instance), attributePath);
-      }
+    if (instance instanceof ActorInstance) {
+      _matched=true;
+      _switchResult = this.dataConfigExt.getAttrInstanceConfigValue(((ActorInstance)instance), attributePath);
     }
     if (!_matched) {
       if (instance instanceof InterfaceItemInstance) {
@@ -196,14 +171,7 @@ public class TypeHelpers {
   
   public String getAttrClassConfigValue(final List<Attribute> attributePath, final ActorClass actor, final boolean inherite) {
     String result = this.dataConfigExt.getAttrClassConfigValue(actor, attributePath);
-    boolean _and = false;
-    boolean _equals = Objects.equal(result, null);
-    if (!_equals) {
-      _and = false;
-    } else {
-      _and = inherite;
-    }
-    if (_and) {
+    if ((Objects.equal(result, null) && inherite)) {
       ActorClass base = actor.getActorBase();
       while (((!Objects.equal(base, null)) && Objects.equal(result, null))) {
         {

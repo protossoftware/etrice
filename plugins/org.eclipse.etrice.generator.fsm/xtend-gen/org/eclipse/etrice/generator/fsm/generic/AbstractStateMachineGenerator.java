@@ -18,7 +18,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem;
 import org.eclipse.etrice.core.fsm.fSM.ComponentCommunicationType;
-import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.etrice.core.fsm.fSM.GuardedTransition;
 import org.eclipse.etrice.core.fsm.fSM.MessageFromIf;
 import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
@@ -280,14 +279,7 @@ public abstract class AbstractStateMachineGenerator {
       List<State> _stateList = this._fSMHelpers.getStateList(_stateMachine);
       for(final State state : _stateList) {
         {
-          boolean _or = false;
-          if ((!omitBase)) {
-            _or = true;
-          } else {
-            boolean _isOwnObject = xpmc.isOwnObject(state);
-            _or = _isOwnObject;
-          }
-          if (_or) {
+          if (((!omitBase) || xpmc.isOwnObject(state))) {
             String _genActionCodeMethods = this.genActionCodeMethods(xpmc, state, generateImplementation);
             _builder.append(_genActionCodeMethods, "");
             _builder.newLineIfNotEmpty();
@@ -327,22 +319,7 @@ public abstract class AbstractStateMachineGenerator {
       List<Transition> _allTransitionsRecursive = this._fSMHelpers.getAllTransitionsRecursive(_stateMachine);
       for(final Transition tr : _allTransitionsRecursive) {
         {
-          boolean _and = false;
-          boolean _or = false;
-          if ((!omitBase)) {
-            _or = true;
-          } else {
-            boolean _isOwnObject = xpmc.isOwnObject(tr);
-            _or = _isOwnObject;
-          }
-          if (!_or) {
-            _and = false;
-          } else {
-            DetailCode _action = tr.getAction();
-            boolean _hasDetailCode = this._fSMHelpers.hasDetailCode(_action);
-            _and = _hasDetailCode;
-          }
-          if (_and) {
+          if ((((!omitBase) || xpmc.isOwnObject(tr)) && this._fSMHelpers.hasDetailCode(tr.getAction()))) {
             String _genActionCodeMethod = this.genActionCodeMethod(xpmc, tr, generateImplementation);
             _builder.append(_genActionCodeMethod, "");
             _builder.newLineIfNotEmpty();
@@ -364,13 +341,7 @@ public abstract class AbstractStateMachineGenerator {
       String _interfaceItemType = this.interfaceItemType();
       String _pointerLiteral = this.langExt.pointerLiteral();
       final String ifItemPtr = (_interfaceItemType + _pointerLiteral);
-      boolean _or = false;
-      if (async) {
-        _or = true;
-      } else {
-        _or = eventDriven;
-      }
-      final boolean handleEvents = _or;
+      final boolean handleEvents = (async || eventDriven);
       String _xifexpression = null;
       boolean _usesInheritance = this.langExt.usesInheritance();
       if (_usesInheritance) {
@@ -726,6 +697,7 @@ public abstract class AbstractStateMachineGenerator {
           _builder.newLineIfNotEmpty();
           _builder.append("\t");
           final Function1<State, Boolean> _function = new Function1<State, Boolean>() {
+            @Override
             public Boolean apply(final State s) {
               return Boolean.valueOf(AbstractStateMachineGenerator.this._fSMHelpers.hasEntryCode(s, true));
             }
@@ -1120,13 +1092,7 @@ public abstract class AbstractStateMachineGenerator {
             }
           }
           {
-            boolean _or_1 = false;
-            if (async) {
-              _or_1 = true;
-            } else {
-              _or_1 = eventDriven;
-            }
-            if (_or_1) {
+            if ((async || eventDriven)) {
               _builder.append("\t");
               CharSequence _markVariableUsed = this.markVariableUsed("trigger__et");
               _builder.append(_markVariableUsed, "\t");
@@ -1505,6 +1471,7 @@ public abstract class AbstractStateMachineGenerator {
       _builder.newLineIfNotEmpty();
       List<Transition> _outgoingTransitionsHierarchical = this._fSMExtensions.getOutgoingTransitionsHierarchical(xpmc, state);
       final Function1<Transition, Boolean> _function = new Function1<Transition, Boolean>() {
+        @Override
         public Boolean apply(final Transition t) {
           return Boolean.valueOf((t instanceof GuardedTransition));
         }
@@ -1538,14 +1505,7 @@ public abstract class AbstractStateMachineGenerator {
           _builder.append(";");
           _builder.newLineIfNotEmpty();
           {
-            boolean _and = false;
-            boolean _isHandler = chain.isHandler();
-            if (!_isHandler) {
-              _and = false;
-            } else {
-              _and = usesHdlr;
-            }
-            if (_and) {
+            if ((chain.isHandler() && usesHdlr)) {
               _builder.append("    ");
               _builder.append("is_handler__et = TRUE;");
               _builder.newLine();
@@ -1650,14 +1610,7 @@ public abstract class AbstractStateMachineGenerator {
               _builder.append(";");
               _builder.newLineIfNotEmpty();
               {
-                boolean _and = false;
-                boolean _isHandler = chain.isHandler();
-                if (!_isHandler) {
-                  _and = false;
-                } else {
-                  _and = usesHdlr;
-                }
-                if (_and) {
+                if ((chain.isHandler() && usesHdlr)) {
                   _builder.append("    ");
                   _builder.append("    ");
                   _builder.append("is_handler__et = ");
@@ -1799,15 +1752,9 @@ public abstract class AbstractStateMachineGenerator {
       StateGraph _stateMachine_1 = xpmc.getStateMachine();
       List<TrPoint> _allTrPointsRecursive = this._fSMHelpers.getAllTrPointsRecursive(_stateMachine_1);
       final Function1<TrPoint, Boolean> _function = new Function1<TrPoint, Boolean>() {
+        @Override
         public Boolean apply(final TrPoint t) {
-          boolean _and = false;
-          if (!(t instanceof TransitionPoint)) {
-            _and = false;
-          } else {
-            boolean _isHandler = ((TransitionPoint) t).isHandler();
-            _and = _isHandler;
-          }
-          return Boolean.valueOf(_and);
+          return Boolean.valueOf(((t instanceof TransitionPoint) && ((TransitionPoint) t).isHandler()));
         }
       };
       Iterable<TrPoint> _filter = IterableExtensions.<TrPoint>filter(_allTrPointsRecursive, _function);

@@ -103,6 +103,7 @@ public class GenericProtocolClassGenerator implements IMessageIdGenerator {
    * @param mif a {@link MessageFromIf}
    * @return an identifier for the message
    */
+  @Override
   public String getMessageID(final MessageFromIf mif) {
     EObject _message = mif.getMessage();
     AbstractInterfaceItem _from = mif.getFrom();

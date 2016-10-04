@@ -39,7 +39,7 @@ public class AbstractFSMDiagramBehavior extends CustomDiagramBehavior {
 	 * Add the DiagnosingModelObserver to the diagram business model when enabling adapters 
 	 */
 	@Override
-	protected void enableAdapters() {
+	public void enableAdapters() {
 		AbstractFSMEditor editor = (AbstractFSMEditor)getDiagramContainer();
 		DiagnosingModelObserver dmObserver = editor.getDiagnosingModelObserver();
 		if(dmObserver != null) dmObserver.enable();
@@ -51,7 +51,7 @@ public class AbstractFSMDiagramBehavior extends CustomDiagramBehavior {
 	 * disabling adapters 
 	 */
 	@Override
-	protected void disableAdapters() {
+	public void disableAdapters() {
 		AbstractFSMEditor editor = (AbstractFSMEditor)getDiagramContainer();
 		DiagnosingModelObserver dmObserver = editor.getDiagnosingModelObserver();
 		if(dmObserver != null) dmObserver.disable();

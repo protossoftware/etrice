@@ -56,27 +56,18 @@ public class NodeRunnerGen {
         {
           StructureInstance _instance = root.getInstance(instpath);
           final SubSystemInstance ssi = ((SubSystemInstance) _instance);
-          boolean _and = false;
-          boolean _notEquals = (!Objects.equal(ssi, null));
-          if (!_notEquals) {
-            _and = false;
-          } else {
-            SubSystemClass _subSystemClass = ssi.getSubSystemClass();
-            boolean _isValidGenerationLocation = this._fileSystemHelpers.isValidGenerationLocation(_subSystemClass);
-            _and = _isValidGenerationLocation;
-          }
-          if (_and) {
+          if (((!Objects.equal(ssi, null)) && this._fileSystemHelpers.isValidGenerationLocation(ssi.getSubSystemClass()))) {
             String _javaClassName = this._javaExtensions.getJavaClassName(nr, ssi);
             final String file = (_javaClassName + "Runner.java");
+            SubSystemClass _subSystemClass = ssi.getSubSystemClass();
+            String _generationTargetPath = this.roomExt.getGenerationTargetPath(_subSystemClass);
             SubSystemClass _subSystemClass_1 = ssi.getSubSystemClass();
-            String _generationTargetPath = this.roomExt.getGenerationTargetPath(_subSystemClass_1);
-            SubSystemClass _subSystemClass_2 = ssi.getSubSystemClass();
-            String _path = this.roomExt.getPath(_subSystemClass_2);
+            String _path = this.roomExt.getPath(_subSystemClass_1);
             final String filepath = (_generationTargetPath + _path);
+            SubSystemClass _subSystemClass_2 = ssi.getSubSystemClass();
+            String _generationInfoPath = this.roomExt.getGenerationInfoPath(_subSystemClass_2);
             SubSystemClass _subSystemClass_3 = ssi.getSubSystemClass();
-            String _generationInfoPath = this.roomExt.getGenerationInfoPath(_subSystemClass_3);
-            SubSystemClass _subSystemClass_4 = ssi.getSubSystemClass();
-            String _path_1 = this.roomExt.getPath(_subSystemClass_4);
+            String _path_1 = this.roomExt.getPath(_subSystemClass_3);
             final String infopath = (_generationInfoPath + _path_1);
             CharSequence _generate = this.generate(root, ssi);
             this.fileIO.generateFile("generating SubSystemRunner implementation", filepath, infopath, file, _generate);

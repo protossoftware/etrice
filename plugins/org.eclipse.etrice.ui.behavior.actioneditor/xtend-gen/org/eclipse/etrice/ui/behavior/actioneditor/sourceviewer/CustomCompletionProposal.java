@@ -27,6 +27,7 @@ public class CustomCompletionProposal implements ICompletionProposal {
   
   private final Point selection;
   
+  @Override
   public Point getSelection(final IDocument document) {
     Point _xifexpression = null;
     boolean _notEquals = (!Objects.equal(this.selection, null));

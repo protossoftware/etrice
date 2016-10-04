@@ -131,16 +131,7 @@ public class ConfigGenAddon {
             _xifexpression_1 = _builder.toString();
           } else {
             String _xifexpression_2 = null;
-            boolean _or = false;
-            int _size = a.getSize();
-            boolean _equals_1 = (_size == 0);
-            if (_equals_1) {
-              _or = true;
-            } else {
-              boolean _isCharacterType = this.typeHelpers.isCharacterType(aType);
-              _or = _isCharacterType;
-            }
-            if (_or) {
+            if (((a.getSize() == 0) || this.typeHelpers.isCharacterType(aType))) {
               StringConcatenation _builder_1 = new StringConcatenation();
               _builder_1.append(invokes, "");
               _builder_1.append(".");
@@ -152,11 +143,11 @@ public class ConfigGenAddon {
               _xifexpression_2 = _builder_1.toString();
             } else {
               String _xifexpression_3 = null;
-              int _size_1 = a.getSize();
+              int _size = a.getSize();
               String[] _split = value.split(",");
-              int _size_2 = ((List<String>)Conversions.doWrapArray(_split)).size();
-              boolean _equals_2 = (_size_1 == _size_2);
-              if (_equals_2) {
+              int _size_1 = ((List<String>)Conversions.doWrapArray(_split)).size();
+              boolean _equals_1 = (_size == _size_1);
+              if (_equals_1) {
                 String _xblockexpression_2 = null;
                 {
                   StringConcatenation _builder_2 = new StringConcatenation();
@@ -211,8 +202,8 @@ public class ConfigGenAddon {
                 _builder_2.newLineIfNotEmpty();
                 _builder_2.append("\t");
                 _builder_2.append("for (int i=0;i<");
-                int _size_3 = a.getSize();
-                _builder_2.append(_size_3, "\t");
+                int _size_2 = a.getSize();
+                _builder_2.append(_size_2, "\t");
                 _builder_2.append(";i++){");
                 _builder_2.newLineIfNotEmpty();
                 _builder_2.append("\t\t");
@@ -511,7 +502,9 @@ public class ConfigGenAddon {
               PrimitiveType aType = ((PrimitiveType) _type_9);
               StringConcatenation _builder_1 = new StringConcatenation();
               {
-                boolean _notEquals = (!Objects.equal((temp = this.dataConfigExt.getAttrClassConfigMinValue(ac, path)), null));
+                String _attrClassConfigMinValue = this.dataConfigExt.getAttrClassConfigMinValue(ac, path);
+                String _temp = (temp = _attrClassConfigMinValue);
+                boolean _notEquals = (!Objects.equal(_temp, null));
                 if (_notEquals) {
                   _builder_1.append("public static ");
                   String _minMaxType = this.getMinMaxType(aType);
@@ -526,7 +519,9 @@ public class ConfigGenAddon {
                 }
               }
               {
-                boolean _notEquals_1 = (!Objects.equal((temp = this.dataConfigExt.getAttrClassConfigMaxValue(ac, path)), null));
+                String _attrClassConfigMaxValue = this.dataConfigExt.getAttrClassConfigMaxValue(ac, path);
+                String _temp_1 = (temp = _attrClassConfigMaxValue);
+                boolean _notEquals_1 = (!Objects.equal(_temp_1, null));
                 if (_notEquals_1) {
                   _builder_1.append("public static ");
                   String _minMaxType_1 = this.getMinMaxType(aType);
@@ -557,11 +552,9 @@ public class ConfigGenAddon {
     String _switchResult = null;
     String _typeName = this.typeHelpers.typeName(type);
     boolean _matched = false;
-    if (!_matched) {
-      if (Objects.equal(_typeName, "byte")) {
-        _matched=true;
-        _switchResult = "int";
-      }
+    if (Objects.equal(_typeName, "byte")) {
+      _matched=true;
+      _switchResult = "int";
     }
     if (!_matched) {
       if (Objects.equal(_typeName, "short")) {

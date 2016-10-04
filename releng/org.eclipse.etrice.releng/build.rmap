@@ -4,7 +4,6 @@
   <rm:locator pattern="^org\.eclipse\.etrice\.releng.*" searchPathRef="releng"/>
   <rm:locator pattern="^org\.eclipse\.etrice\.site" searchPathRef="releng"/>
   <rm:locator pattern="^org\.eclipse\.etrice\.*" searchPathRef="sources"/>
-  <rm:locator pattern="^de\.cau\.cs\.kieler\.*" searchPathRef="kieler"/>
   <rm:locator pattern="^org\.eclipse\.license.*" searchPathRef="eclipse.license"/>
   <rm:locator searchPathRef="platform.binaries" failOnError="false"/>
   <rm:locator searchPathRef="orbit"/>
@@ -59,15 +58,6 @@
       <rm:property key="buckminster.source" value="false"/>
       <rm:property key="buckminster.mutable" value="false"/>
       <rm:uri format="{0}/releases/kepler">
-        <bc:propertyRef key="eclipse.downloads"/>
-      </rm:uri>
-    </rm:provider>
-  </rm:searchPath>
-  <rm:searchPath name="kieler">
-    <rm:provider componentTypes="eclipse.feature,osgi.bundle" readerType="p2" source="false" mutable="false">
-      <rm:property key="buckminster.source" value="false"/>
-      <rm:property key="buckminster.mutable" value="false"/>
-      <rm:uri format="{0}/etrice/KIELER/kieler-0.7.1">
         <bc:propertyRef key="eclipse.downloads"/>
       </rm:uri>
     </rm:provider>

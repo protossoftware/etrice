@@ -30,6 +30,7 @@ public class StateMachineGen extends GenericStateMachineGenerator {
   /**
    * @param generateImplementation NOT used
    */
+  @Override
   public CharSequence genExtra(final ExpandedModelComponent xpac, final boolean generateImplementation) {
     CharSequence _xblockexpression = null;
     {
@@ -46,17 +47,7 @@ public class StateMachineGen extends GenericStateMachineGenerator {
       }
       StringConcatenation _builder = new StringConcatenation();
       {
-        boolean _or = false;
-        GlobalSettings _settings = Main.getSettings();
-        boolean _isGenerateMSCInstrumentation = _settings.isGenerateMSCInstrumentation();
-        if (_isGenerateMSCInstrumentation) {
-          _or = true;
-        } else {
-          GlobalSettings _settings_1 = Main.getSettings();
-          boolean _isGenerateWithVerboseOutput = _settings_1.isGenerateWithVerboseOutput();
-          _or = _isGenerateWithVerboseOutput;
-        }
-        if (_or) {
+        if ((Main.getSettings().isGenerateMSCInstrumentation() || Main.getSettings().isGenerateWithVerboseOutput())) {
           _builder.append("// state names");
           _builder.newLine();
           _builder.append("protected static final String stateStrings[] = {");
@@ -102,18 +93,18 @@ public class StateMachineGen extends GenericStateMachineGenerator {
       _builder.append("private void setState(int new_state) {");
       _builder.newLine();
       {
-        GlobalSettings _settings_2 = Main.getSettings();
-        boolean _isGenerateMSCInstrumentation_1 = _settings_2.isGenerateMSCInstrumentation();
-        if (_isGenerateMSCInstrumentation_1) {
+        GlobalSettings _settings = Main.getSettings();
+        boolean _isGenerateMSCInstrumentation = _settings.isGenerateMSCInstrumentation();
+        if (_isGenerateMSCInstrumentation) {
           _builder.append("\t");
           _builder.append("DebuggingService.getInstance().addActorState(this,stateStrings[new_state]);");
           _builder.newLine();
         }
       }
       {
-        GlobalSettings _settings_3 = Main.getSettings();
-        boolean _isGenerateWithVerboseOutput_1 = _settings_3.isGenerateWithVerboseOutput();
-        if (_isGenerateWithVerboseOutput_1) {
+        GlobalSettings _settings_1 = Main.getSettings();
+        boolean _isGenerateWithVerboseOutput = _settings_1.isGenerateWithVerboseOutput();
+        if (_isGenerateWithVerboseOutput) {
           _builder.append("\t");
           _builder.append("if (stateStrings[new_state]!=\"Idle\") {");
           _builder.newLine();
@@ -143,6 +134,7 @@ public class StateMachineGen extends GenericStateMachineGenerator {
   /**
    * if {@code -storeDataObj} is set then a call to {@code finalAction()} is generated
    */
+  @Override
   public CharSequence finalAction() {
     StringConcatenation _builder = new StringConcatenation();
     {

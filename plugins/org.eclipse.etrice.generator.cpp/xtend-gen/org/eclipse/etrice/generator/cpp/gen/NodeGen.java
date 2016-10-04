@@ -85,6 +85,7 @@ public class NodeGen {
     EList<WiredStructureClass> _wiredInstances = root.getWiredInstances();
     Iterable<WiredSubSystemClass> _filter = Iterables.<WiredSubSystemClass>filter(_wiredInstances, WiredSubSystemClass.class);
     final Procedure1<WiredSubSystemClass> _function = new Procedure1<WiredSubSystemClass>() {
+      @Override
       public void apply(final WiredSubSystemClass it) {
         SubSystemClass _subSystemClass = it.getSubSystemClass();
         sscc2wired.put(_subSystemClass, it);
@@ -98,27 +99,18 @@ public class NodeGen {
         {
           StructureInstance _instance = root.getInstance(instpath);
           final SubSystemInstance ssi = ((SubSystemInstance) _instance);
-          boolean _and = false;
-          boolean _notEquals = (!Objects.equal(ssi, null));
-          if (!_notEquals) {
-            _and = false;
-          } else {
+          if (((!Objects.equal(ssi, null)) && this._fileSystemHelpers.isValidGenerationLocation(ssi.getSubSystemClass()))) {
             SubSystemClass _subSystemClass = ssi.getSubSystemClass();
-            boolean _isValidGenerationLocation = this._fileSystemHelpers.isValidGenerationLocation(_subSystemClass);
-            _and = _isValidGenerationLocation;
-          }
-          if (_and) {
+            final WiredSubSystemClass wired = sscc2wired.get(_subSystemClass);
             SubSystemClass _subSystemClass_1 = ssi.getSubSystemClass();
-            final WiredSubSystemClass wired = sscc2wired.get(_subSystemClass_1);
+            String _generationTargetPath = this._roomExtensions.getGenerationTargetPath(_subSystemClass_1);
             SubSystemClass _subSystemClass_2 = ssi.getSubSystemClass();
-            String _generationTargetPath = this._roomExtensions.getGenerationTargetPath(_subSystemClass_2);
-            SubSystemClass _subSystemClass_3 = ssi.getSubSystemClass();
-            String _path = this._roomExtensions.getPath(_subSystemClass_3);
+            String _path = this._roomExtensions.getPath(_subSystemClass_2);
             final String path = (_generationTargetPath + _path);
+            SubSystemClass _subSystemClass_3 = ssi.getSubSystemClass();
+            String _generationInfoPath = this._roomExtensions.getGenerationInfoPath(_subSystemClass_3);
             SubSystemClass _subSystemClass_4 = ssi.getSubSystemClass();
-            String _generationInfoPath = this._roomExtensions.getGenerationInfoPath(_subSystemClass_4);
-            SubSystemClass _subSystemClass_5 = ssi.getSubSystemClass();
-            String _path_1 = this._roomExtensions.getPath(_subSystemClass_5);
+            String _path_1 = this._roomExtensions.getPath(_subSystemClass_4);
             final String infopath = (_generationInfoPath + _path_1);
             final Set<PhysicalThread> usedThreads = ETMapUtil.getUsedThreads(nr, ssi);
             String _cppHeaderFileName = this._cppExtensions.getCppHeaderFileName(nr, ssi);
@@ -143,6 +135,7 @@ public class NodeGen {
       NodeClass _type = nr.getType();
       EList<PhysicalThread> _threads = _type.getThreads();
       final Function1<PhysicalThread, Boolean> _function = new Function1<PhysicalThread, Boolean>() {
+        @Override
         public Boolean apply(final PhysicalThread t) {
           return Boolean.valueOf(usedThreads.contains(t));
         }
@@ -359,6 +352,7 @@ public class NodeGen {
       initList.add(_builder.toString());
       EList<ActorRef> _actorRefs = cc.getActorRefs();
       final Function1<ActorRef, String> _function = new Function1<ActorRef, String>() {
+        @Override
         public String apply(final ActorRef it) {
           StringConcatenation _builder = new StringConcatenation();
           String _name = it.getName();
@@ -387,6 +381,7 @@ public class NodeGen {
       NodeClass _type = nr.getType();
       EList<PhysicalThread> _threads = _type.getThreads();
       final Function1<PhysicalThread, Boolean> _function = new Function1<PhysicalThread, Boolean>() {
+        @Override
         public Boolean apply(final PhysicalThread t) {
           return Boolean.valueOf(usedThreads.contains(t));
         }
@@ -547,17 +542,7 @@ public class NodeGen {
           _builder.append("{");
           _builder.newLine();
           {
-            boolean _or = false;
-            ExecMode _execmode = thread_1.getExecmode();
-            boolean _equals = Objects.equal(_execmode, ExecMode.POLLED);
-            if (_equals) {
-              _or = true;
-            } else {
-              ExecMode _execmode_1 = thread_1.getExecmode();
-              boolean _equals_1 = Objects.equal(_execmode_1, ExecMode.MIXED);
-              _or = _equals_1;
-            }
-            if (_or) {
+            if ((Objects.equal(thread_1.getExecmode(), ExecMode.POLLED) || Objects.equal(thread_1.getExecmode(), ExecMode.MIXED))) {
               _builder.append("\t");
               _builder.append("\t");
               _builder.append("etTime interval;");
@@ -582,8 +567,8 @@ public class NodeGen {
               _builder.append("\t");
               _builder.append("\t");
               _builder.append("msgService = new MessageService(this, IMessageService::");
-              ExecMode _execmode_2 = thread_1.getExecmode();
-              String _name_1 = _execmode_2.getName();
+              ExecMode _execmode = thread_1.getExecmode();
+              String _name_1 = _execmode.getName();
               _builder.append(_name_1, "\t\t");
               _builder.append(", interval, 0, ");
               String _threadId_1 = this.getThreadId(thread_1);
@@ -600,8 +585,8 @@ public class NodeGen {
               _builder.append("\t");
               _builder.append("\t");
               _builder.append("msgService = new MessageService(this, IMessageService::");
-              ExecMode _execmode_3 = thread_1.getExecmode();
-              String _name_3 = _execmode_3.getName();
+              ExecMode _execmode_1 = thread_1.getExecmode();
+              String _name_3 = _execmode_1.getName();
               _builder.append(_name_3, "\t\t");
               _builder.append(", 0, ");
               String _threadId_2 = this.getThreadId(thread_1);
@@ -642,15 +627,7 @@ public class NodeGen {
           final ETMapUtil.MappedThread mapped = ETMapUtil.getMappedThread(ai);
           _builder.newLineIfNotEmpty();
           {
-            boolean _or_1 = false;
-            boolean _isImplicit = mapped.isImplicit();
-            if (_isImplicit) {
-              _or_1 = true;
-            } else {
-              boolean _isAsParent = mapped.isAsParent();
-              _or_1 = _isAsParent;
-            }
-            boolean _not = (!_or_1);
+            boolean _not = (!(mapped.isImplicit() || mapped.isAsParent()));
             if (_not) {
               _builder.append("\t");
               _builder.append("addPathToThread(\"");

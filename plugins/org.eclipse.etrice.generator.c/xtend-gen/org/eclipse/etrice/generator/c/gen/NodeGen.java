@@ -273,22 +273,13 @@ public class NodeGen {
       NodeClass _type = nr.getType();
       EList<PhysicalThread> _threads = _type.getThreads();
       final Function1<PhysicalThread, Boolean> _function = new Function1<PhysicalThread, Boolean>() {
+        @Override
         public Boolean apply(final PhysicalThread t) {
           return Boolean.valueOf(usedThreads.contains(t));
         }
       };
       final Iterable<PhysicalThread> threads = IterableExtensions.<PhysicalThread>filter(_threads, _function);
-      boolean _and = false;
-      GlobalGeneratorSettings _settings = Main.getSettings();
-      boolean _isGenerateDataInstrumentation = _settings.isGenerateDataInstrumentation();
-      if (!_isGenerateDataInstrumentation) {
-        _and = false;
-      } else {
-        EList<Annotation> _annotations = ssc.getAnnotations();
-        boolean _isAnnotationPresent = this._roomHelpers.isAnnotationPresent(_annotations, "DataLogging");
-        _and = _isAnnotationPresent;
-      }
-      final boolean logData = _and;
+      final boolean logData = (Main.getSettings().isGenerateDataInstrumentation() && this._roomHelpers.isAnnotationPresent(ssc.getAnnotations(), "DataLogging"));
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("/**");
       _builder.newLine();
@@ -423,17 +414,7 @@ public class NodeGen {
       {
         for(final PhysicalThread thread : threads) {
           {
-            boolean _or = false;
-            ExecMode _execmode = thread.getExecmode();
-            boolean _equals = Objects.equal(_execmode, ExecMode.POLLED);
-            if (_equals) {
-              _or = true;
-            } else {
-              ExecMode _execmode_1 = thread.getExecmode();
-              boolean _equals_1 = Objects.equal(_execmode_1, ExecMode.MIXED);
-              _or = _equals_1;
-            }
-            if (_or) {
+            if ((Objects.equal(thread.getExecmode(), ExecMode.POLLED) || Objects.equal(thread.getExecmode(), ExecMode.MIXED))) {
               _builder.append("\t\t");
               _builder.append("interval.sec = ");
               long _time = thread.getTime();
@@ -507,8 +488,8 @@ public class NodeGen {
           _builder.append("\t\t");
           _builder.append("\t");
           _builder.append("EXECMODE_");
-          ExecMode _execmode_2 = thread.getExecmode();
-          String _string = _execmode_2.toString();
+          ExecMode _execmode = thread.getExecmode();
+          String _string = _execmode.toString();
           String _upperCase_2 = _string.toUpperCase();
           _builder.append(_upperCase_2, "\t\t\t");
           _builder.append(");");
@@ -538,6 +519,7 @@ public class NodeGen {
       _builder.newLine();
       {
         final Function1<PhysicalThread, Long> _function_1 = new Function1<PhysicalThread, Long>() {
+          @Override
           public Long apply(final PhysicalThread it) {
             return Long.valueOf(it.getPrio());
           }
@@ -997,6 +979,7 @@ public class NodeGen {
         NodeClass _type = nr.getType();
         EList<PhysicalThread> _threads = _type.getThreads();
         final Function1<PhysicalThread, Boolean> _function = new Function1<PhysicalThread, Boolean>() {
+          @Override
           public Boolean apply(final PhysicalThread t) {
             return Boolean.valueOf(usedThreads.contains(t));
           }
@@ -1168,18 +1151,7 @@ public class NodeGen {
           _builder.append(" */");
           _builder.newLineIfNotEmpty();
           {
-            boolean _and = false;
-            GlobalGeneratorSettings _settings = Main.getSettings();
-            boolean _isGenerateMSCInstrumentation = _settings.isGenerateMSCInstrumentation();
-            boolean _not = (!_isGenerateMSCInstrumentation);
-            if (!_not) {
-              _and = false;
-            } else {
-              EList<InterfaceItemInstance> _orderedIfItemInstances_2 = ai_2.getOrderedIfItemInstances();
-              boolean _isEmpty_1 = _orderedIfItemInstances_2.isEmpty();
-              _and = _isEmpty_1;
-            }
-            if (_and) {
+            if (((!Main.getSettings().isGenerateMSCInstrumentation()) && ai_2.getOrderedIfItemInstances().isEmpty())) {
               _builder.append("/* no ports/saps/services - nothing to initialize statically */");
               _builder.newLine();
             } else {
@@ -1204,6 +1176,7 @@ public class NodeGen {
       final ArrayList<InterfaceItemInstance> replEventItems = new ArrayList<InterfaceItemInstance>();
       EList<InterfaceItemInstance> _orderedIfItemInstances = ai.getOrderedIfItemInstances();
       final Function1<InterfaceItemInstance, Boolean> _function = new Function1<InterfaceItemInstance, Boolean>() {
+        @Override
         public Boolean apply(final InterfaceItemInstance e) {
           return Boolean.valueOf(e.isReplicated());
         }
@@ -1211,6 +1184,7 @@ public class NodeGen {
       Iterable<InterfaceItemInstance> _filter = IterableExtensions.<InterfaceItemInstance>filter(_orderedIfItemInstances, _function);
       Iterables.<InterfaceItemInstance>addAll(replEventItems, _filter);
       final Function1<InterfaceItemInstance, Boolean> _function_1 = new Function1<InterfaceItemInstance, Boolean>() {
+        @Override
         public Boolean apply(final InterfaceItemInstance e) {
           EList<InterfaceItemInstance> _peers = e.getPeers();
           boolean _isEmpty = _peers.isEmpty();
@@ -1220,6 +1194,7 @@ public class NodeGen {
       InterfaceItemInstance _findFirst = IterableExtensions.<InterfaceItemInstance>findFirst(replEventItems, _function_1);
       final boolean haveReplSubItems = (!Objects.equal(_findFirst, null));
       final Function1<InterfaceItemInstance, Boolean> _function_2 = new Function1<InterfaceItemInstance, Boolean>() {
+        @Override
         public Boolean apply(final InterfaceItemInstance i) {
           InterfaceItem _interfaceItem = i.getInterfaceItem();
           return Boolean.valueOf((_interfaceItem instanceof Port));
@@ -1227,6 +1202,7 @@ public class NodeGen {
       };
       final Iterable<InterfaceItemInstance> replEventPorts = IterableExtensions.<InterfaceItemInstance>filter(replEventItems, _function_2);
       final Function1<InterfaceItemInstance, Boolean> _function_3 = new Function1<InterfaceItemInstance, Boolean>() {
+        @Override
         public Boolean apply(final InterfaceItemInstance i) {
           InterfaceItem _interfaceItem = i.getInterfaceItem();
           return Boolean.valueOf((_interfaceItem instanceof SPP));
@@ -1235,6 +1211,7 @@ public class NodeGen {
       final Iterable<InterfaceItemInstance> replEventSPPs = IterableExtensions.<InterfaceItemInstance>filter(replEventItems, _function_3);
       EList<InterfaceItemInstance> _orderedIfItemInstances_1 = ai.getOrderedIfItemInstances();
       final Function1<InterfaceItemInstance, Boolean> _function_4 = new Function1<InterfaceItemInstance, Boolean>() {
+        @Override
         public Boolean apply(final InterfaceItemInstance e) {
           return Boolean.valueOf(e.isSimple());
         }
@@ -1242,6 +1219,7 @@ public class NodeGen {
       final Iterable<InterfaceItemInstance> simplePorts = IterableExtensions.<InterfaceItemInstance>filter(_orderedIfItemInstances_1, _function_4);
       final ArrayList<InterfaceItemInstance> simpleEventItems = new ArrayList<InterfaceItemInstance>();
       final Function1<InterfaceItemInstance, Boolean> _function_5 = new Function1<InterfaceItemInstance, Boolean>() {
+        @Override
         public Boolean apply(final InterfaceItemInstance p) {
           ProtocolClass _protocol = p.getProtocol();
           CommunicationType _commType = _protocol.getCommType();
@@ -1251,6 +1229,7 @@ public class NodeGen {
       Iterable<InterfaceItemInstance> _filter_1 = IterableExtensions.<InterfaceItemInstance>filter(simplePorts, _function_5);
       Iterables.<InterfaceItemInstance>addAll(simpleEventItems, _filter_1);
       final Function1<InterfaceItemInstance, Boolean> _function_6 = new Function1<InterfaceItemInstance, Boolean>() {
+        @Override
         public Boolean apply(final InterfaceItemInstance i) {
           InterfaceItem _interfaceItem = i.getInterfaceItem();
           return Boolean.valueOf((_interfaceItem instanceof Port));
@@ -1258,6 +1237,7 @@ public class NodeGen {
       };
       final Iterable<InterfaceItemInstance> simpleEventPorts = IterableExtensions.<InterfaceItemInstance>filter(simpleEventItems, _function_6);
       final Function1<InterfaceItemInstance, Boolean> _function_7 = new Function1<InterfaceItemInstance, Boolean>() {
+        @Override
         public Boolean apply(final InterfaceItemInstance i) {
           InterfaceItem _interfaceItem = i.getInterfaceItem();
           return Boolean.valueOf((_interfaceItem instanceof SAP));
@@ -1265,6 +1245,7 @@ public class NodeGen {
       };
       final Iterable<InterfaceItemInstance> simpleEventSAPs = IterableExtensions.<InterfaceItemInstance>filter(simpleEventItems, _function_7);
       final Function1<InterfaceItemInstance, Boolean> _function_8 = new Function1<InterfaceItemInstance, Boolean>() {
+        @Override
         public Boolean apply(final InterfaceItemInstance p) {
           ProtocolClass _protocol = p.getProtocol();
           CommunicationType _commType = _protocol.getCommType();
@@ -1273,31 +1254,16 @@ public class NodeGen {
       };
       final Iterable<InterfaceItemInstance> dataPorts = IterableExtensions.<InterfaceItemInstance>filter(simplePorts, _function_8);
       final Function1<InterfaceItemInstance, Boolean> _function_9 = new Function1<InterfaceItemInstance, Boolean>() {
+        @Override
         public Boolean apply(final InterfaceItemInstance p) {
-          boolean _and = false;
-          if (!(p instanceof PortInstance)) {
-            _and = false;
-          } else {
-            Port _port = ((PortInstance) p).getPort();
-            boolean _isConjugated = _port.isConjugated();
-            boolean _not = (!_isConjugated);
-            _and = _not;
-          }
-          return Boolean.valueOf(_and);
+          return Boolean.valueOf(((p instanceof PortInstance) && (!((PortInstance) p).getPort().isConjugated())));
         }
       };
       final Iterable<InterfaceItemInstance> recvPorts = IterableExtensions.<InterfaceItemInstance>filter(dataPorts, _function_9);
       final Function1<InterfaceItemInstance, Boolean> _function_10 = new Function1<InterfaceItemInstance, Boolean>() {
+        @Override
         public Boolean apply(final InterfaceItemInstance p) {
-          boolean _and = false;
-          if (!(p instanceof PortInstance)) {
-            _and = false;
-          } else {
-            Port _port = ((PortInstance) p).getPort();
-            boolean _isConjugated = _port.isConjugated();
-            _and = _isConjugated;
-          }
-          return Boolean.valueOf(_and);
+          return Boolean.valueOf(((p instanceof PortInstance) && ((PortInstance) p).getPort().isConjugated()));
         }
       };
       final Iterable<InterfaceItemInstance> sendPorts = IterableExtensions.<InterfaceItemInstance>filter(dataPorts, _function_10);
@@ -1319,38 +1285,12 @@ public class NodeGen {
         _xifexpression = "NULL";
       }
       String replSubPortsArray = _xifexpression;
-      boolean _or = false;
-      boolean _or_1 = false;
-      boolean _or_2 = false;
-      boolean _isEmpty = simpleEventItems.isEmpty();
-      boolean _not = (!_isEmpty);
-      if (_not) {
-        _or_2 = true;
-      } else {
-        boolean _isEmpty_1 = IterableExtensions.isEmpty(recvPorts);
-        boolean _not_1 = (!_isEmpty_1);
-        _or_2 = _not_1;
-      }
-      if (_or_2) {
-        _or_1 = true;
-      } else {
-        boolean _isEmpty_2 = replEventItems.isEmpty();
-        boolean _not_2 = (!_isEmpty_2);
-        _or_1 = _not_2;
-      }
-      if (_or_1) {
-        _or = true;
-      } else {
-        GlobalGeneratorSettings _settings = Main.getSettings();
-        boolean _isGenerateMSCInstrumentation = _settings.isGenerateMSCInstrumentation();
-        _or = _isGenerateMSCInstrumentation;
-      }
-      final boolean haveConstData = _or;
+      final boolean haveConstData = ((((!simpleEventItems.isEmpty()) || (!IterableExtensions.isEmpty(recvPorts))) || (!replEventItems.isEmpty())) || Main.getSettings().isGenerateMSCInstrumentation());
       final IntelligentSeparator sep = new IntelligentSeparator(",");
       String _xifexpression_1 = null;
-      GlobalGeneratorSettings _settings_1 = Main.getSettings();
-      boolean _isGenerateMSCInstrumentation_1 = _settings_1.isGenerateMSCInstrumentation();
-      if (_isGenerateMSCInstrumentation_1) {
+      GlobalGeneratorSettings _settings = Main.getSettings();
+      boolean _isGenerateMSCInstrumentation = _settings.isGenerateMSCInstrumentation();
+      if (_isGenerateMSCInstrumentation) {
         _xifexpression_1 = "/*const*/";
       } else {
         _xifexpression_1 = "const";
@@ -1358,9 +1298,9 @@ public class NodeGen {
       final String const_ = _xifexpression_1;
       StringConcatenation _builder = new StringConcatenation();
       {
-        GlobalGeneratorSettings _settings_2 = Main.getSettings();
-        boolean _isGenerateMSCInstrumentation_2 = _settings_2.isGenerateMSCInstrumentation();
-        if (_isGenerateMSCInstrumentation_2) {
+        GlobalGeneratorSettings _settings_1 = Main.getSettings();
+        boolean _isGenerateMSCInstrumentation_1 = _settings_1.isGenerateMSCInstrumentation();
+        if (_isGenerateMSCInstrumentation_1) {
           CharSequence _genPeerPortArrays = this.genPeerPortArrays(root, ai);
           _builder.append(_genPeerPortArrays, "");
           _builder.newLineIfNotEmpty();
@@ -1379,6 +1319,7 @@ public class NodeGen {
           _builder.newLine();
           {
             final Function1<InterfaceItemInstance, Boolean> _function_11 = new Function1<InterfaceItemInstance, Boolean>() {
+              @Override
               public Boolean apply(final InterfaceItemInstance e) {
                 EList<InterfaceItemInstance> _peers = e.getPeers();
                 boolean _isEmpty = _peers.isEmpty();
@@ -1416,9 +1357,9 @@ public class NodeGen {
           _builder.append("_const = {");
           _builder.newLineIfNotEmpty();
           {
-            GlobalGeneratorSettings _settings_3 = Main.getSettings();
-            boolean _isGenerateMSCInstrumentation_3 = _settings_3.isGenerateMSCInstrumentation();
-            if (_isGenerateMSCInstrumentation_3) {
+            GlobalGeneratorSettings _settings_2 = Main.getSettings();
+            boolean _isGenerateMSCInstrumentation_2 = _settings_2.isGenerateMSCInstrumentation();
+            if (_isGenerateMSCInstrumentation_2) {
               _builder.append("\t");
               _builder.append(sep, "\t");
               _builder.append("\"");
@@ -1572,62 +1513,35 @@ public class NodeGen {
     {
       EList<InterfaceItemInstance> _orderedIfItemInstances = ai.getOrderedIfItemInstances();
       final Function1<InterfaceItemInstance, Boolean> _function = new Function1<InterfaceItemInstance, Boolean>() {
+        @Override
         public Boolean apply(final InterfaceItemInstance e) {
-          boolean _and = false;
-          boolean _isSimple = e.isSimple();
-          if (!_isSimple) {
-            _and = false;
-          } else {
-            _and = (e instanceof PortInstance);
-          }
-          return Boolean.valueOf(_and);
+          return Boolean.valueOf((e.isSimple() && (e instanceof PortInstance)));
         }
       };
       Iterable<InterfaceItemInstance> _filter = IterableExtensions.<InterfaceItemInstance>filter(_orderedIfItemInstances, _function);
       final Function1<InterfaceItemInstance, PortInstance> _function_1 = new Function1<InterfaceItemInstance, PortInstance>() {
+        @Override
         public PortInstance apply(final InterfaceItemInstance inst) {
           return ((PortInstance) inst);
         }
       };
       final Iterable<PortInstance> simplePorts = IterableExtensions.<InterfaceItemInstance, PortInstance>map(_filter, _function_1);
       final Function1<PortInstance, Boolean> _function_2 = new Function1<PortInstance, Boolean>() {
+        @Override
         public Boolean apply(final PortInstance p) {
-          boolean _and = false;
-          Port _port = p.getPort();
-          boolean _isConjugated = _port.isConjugated();
-          if (!_isConjugated) {
-            _and = false;
-          } else {
-            ProtocolClass _protocol = p.getProtocol();
-            CommunicationType _commType = _protocol.getCommType();
-            boolean _equals = Objects.equal(_commType, CommunicationType.DATA_DRIVEN);
-            _and = _equals;
-          }
-          return Boolean.valueOf(_and);
+          return Boolean.valueOf((p.getPort().isConjugated() && Objects.equal(p.getProtocol().getCommType(), CommunicationType.DATA_DRIVEN)));
         }
       };
       final Iterable<PortInstance> sendPorts = IterableExtensions.<PortInstance>filter(simplePorts, _function_2);
       final Function1<PortInstance, Boolean> _function_3 = new Function1<PortInstance, Boolean>() {
+        @Override
         public Boolean apply(final PortInstance p) {
           Port _port = p.getPort();
           List<Message> _outgoing = NodeGen.this._roomHelpers.getOutgoing(_port);
           final Function1<Message, Boolean> _function = new Function1<Message, Boolean>() {
+            @Override
             public Boolean apply(final Message m) {
-              boolean _or = false;
-              VarDecl _data = m.getData();
-              RefableType _refType = _data.getRefType();
-              DataType _type = _refType.getType();
-              boolean _isEnumeration = NodeGen.this._typeHelpers.isEnumeration(_type);
-              if (_isEnumeration) {
-                _or = true;
-              } else {
-                VarDecl _data_1 = m.getData();
-                RefableType _refType_1 = _data_1.getRefType();
-                DataType _type_1 = _refType_1.getType();
-                boolean _isBoolean = NodeGen.this._typeHelpers.isBoolean(_type_1);
-                _or = _isBoolean;
-              }
-              return Boolean.valueOf(_or);
+              return Boolean.valueOf((NodeGen.this._typeHelpers.isEnumeration(m.getData().getRefType().getType()) || NodeGen.this._typeHelpers.isBoolean(m.getData().getRefType().getType())));
             }
           };
           Iterable<Message> _filter = IterableExtensions.<Message>filter(_outgoing, _function);
@@ -1781,6 +1695,7 @@ public class NodeGen {
       final ProtocolClass pc = ((ProtocolClass) _protocol);
       List<Message> _allIncomingMessages = this._roomHelpers.getAllIncomingMessages(pc);
       final Function1<Message, Boolean> _function = new Function1<Message, Boolean>() {
+        @Override
         public Boolean apply(final Message m) {
           VarDecl _data = m.getData();
           return Boolean.valueOf((!Objects.equal(_data, null)));
@@ -1788,6 +1703,7 @@ public class NodeGen {
       };
       Iterable<Message> messages = IterableExtensions.<Message>filter(_allIncomingMessages, _function);
       final Function1<Message, Boolean> _function_1 = new Function1<Message, Boolean>() {
+        @Override
         public Boolean apply(final Message m) {
           VarDecl _data = m.getData();
           RefableType _refType = _data.getRefType();
@@ -1797,6 +1713,7 @@ public class NodeGen {
       };
       final Iterable<Message> enumMsgs = IterableExtensions.<Message>filter(messages, _function_1);
       final Function1<Message, Boolean> _function_2 = new Function1<Message, Boolean>() {
+        @Override
         public Boolean apply(final Message m) {
           VarDecl _data = m.getData();
           RefableType _refType = _data.getRefType();
@@ -1805,24 +1722,7 @@ public class NodeGen {
         }
       };
       final Iterable<Message> boolMsgs = IterableExtensions.<Message>filter(messages, _function_2);
-      boolean _and = false;
-      GlobalGeneratorSettings _settings = Main.getSettings();
-      boolean _isGenerateMSCInstrumentation = _settings.isGenerateMSCInstrumentation();
-      if (!_isGenerateMSCInstrumentation) {
-        _and = false;
-      } else {
-        boolean _and_1 = false;
-        boolean _isEmpty = IterableExtensions.isEmpty(enumMsgs);
-        if (!_isEmpty) {
-          _and_1 = false;
-        } else {
-          boolean _isEmpty_1 = IterableExtensions.isEmpty(boolMsgs);
-          _and_1 = _isEmpty_1;
-        }
-        boolean _not = (!_and_1);
-        _and = _not;
-      }
-      final boolean usesMSC = _and;
+      final boolean usesMSC = (Main.getSettings().isGenerateMSCInstrumentation() && (!(IterableExtensions.isEmpty(enumMsgs) && IterableExtensions.isEmpty(boolMsgs))));
       EObject _eContainer = pi.eContainer();
       final String instName = ((ActorInstance) _eContainer).getPath();
       StringConcatenation _builder = new StringConcatenation();
@@ -1908,6 +1808,7 @@ public class NodeGen {
       InterfaceItem _interfaceItem = pi.getInterfaceItem();
       List<Message> _incoming = this._roomHelpers.getIncoming(_interfaceItem);
       final Function1<Message, Boolean> _function = new Function1<Message, Boolean>() {
+        @Override
         public Boolean apply(final Message m) {
           VarDecl _data = m.getData();
           return Boolean.valueOf((!Objects.equal(_data, null)));
@@ -1915,6 +1816,7 @@ public class NodeGen {
       };
       Iterable<Message> sentMsgs = IterableExtensions.<Message>filter(_incoming, _function);
       final Function1<Message, Boolean> _function_1 = new Function1<Message, Boolean>() {
+        @Override
         public Boolean apply(final Message m) {
           VarDecl _data = m.getData();
           RefableType _refType = _data.getRefType();
@@ -1924,6 +1826,7 @@ public class NodeGen {
       };
       final Iterable<Message> enumMsgs = IterableExtensions.<Message>filter(sentMsgs, _function_1);
       final Function1<Message, Boolean> _function_2 = new Function1<Message, Boolean>() {
+        @Override
         public Boolean apply(final Message m) {
           VarDecl _data = m.getData();
           RefableType _refType = _data.getRefType();
@@ -1932,24 +1835,7 @@ public class NodeGen {
         }
       };
       final Iterable<Message> boolMsgs = IterableExtensions.<Message>filter(sentMsgs, _function_2);
-      boolean _and = false;
-      GlobalGeneratorSettings _settings = Main.getSettings();
-      boolean _isGenerateMSCInstrumentation = _settings.isGenerateMSCInstrumentation();
-      if (!_isGenerateMSCInstrumentation) {
-        _and = false;
-      } else {
-        boolean _and_1 = false;
-        boolean _isEmpty = IterableExtensions.isEmpty(enumMsgs);
-        if (!_isEmpty) {
-          _and_1 = false;
-        } else {
-          boolean _isEmpty_1 = IterableExtensions.isEmpty(boolMsgs);
-          _and_1 = _isEmpty_1;
-        }
-        boolean _not = (!_and_1);
-        _and = _not;
-      }
-      final boolean usesMSC = _and;
+      final boolean usesMSC = (Main.getSettings().isGenerateMSCInstrumentation() && (!(IterableExtensions.isEmpty(enumMsgs) && IterableExtensions.isEmpty(boolMsgs))));
       String enumVal = "";
       if (usesMSC) {
         String _path = ai.getPath();
@@ -1975,8 +1861,8 @@ public class NodeGen {
         enumVal = (("\n#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE" + enumVal) + "\n#endif\n");
       }
       EList<InterfaceItemInstance> _peers = pi.getPeers();
-      boolean _isEmpty_2 = _peers.isEmpty();
-      if (_isEmpty_2) {
+      boolean _isEmpty = _peers.isEmpty();
+      if (_isEmpty) {
         return (("{NULL" + enumVal) + "}");
       }
       EList<InterfaceItemInstance> _peers_1 = pi.getPeers();
@@ -2081,18 +1967,7 @@ public class NodeGen {
     CharSequence _xblockexpression = null;
     {
       final NodeRef nr = ETMapUtil.getNodeRef(ssi);
-      boolean _and = false;
-      GlobalGeneratorSettings _settings = Main.getSettings();
-      boolean _isGenerateDataInstrumentation = _settings.isGenerateDataInstrumentation();
-      if (!_isGenerateDataInstrumentation) {
-        _and = false;
-      } else {
-        SubSystemClass _subSystemClass = ssi.getSubSystemClass();
-        EList<Annotation> _annotations = _subSystemClass.getAnnotations();
-        boolean _isAnnotationPresent = this._roomHelpers.isAnnotationPresent(_annotations, "DataLogging");
-        _and = _isAnnotationPresent;
-      }
-      final boolean logData = _and;
+      final boolean logData = (Main.getSettings().isGenerateDataInstrumentation() && this._roomHelpers.isAnnotationPresent(ssi.getSubSystemClass().getAnnotations(), "DataLogging"));
       ArrayList<PortInstance> _xifexpression = null;
       if (logData) {
         _xifexpression = this.loggedPorts(ssi);
@@ -2135,6 +2010,7 @@ public class NodeGen {
         NodeClass _type = nr.getType();
         EList<PhysicalThread> _threads = _type.getThreads();
         final Function1<PhysicalThread, Boolean> _function = new Function1<PhysicalThread, Boolean>() {
+          @Override
           public Boolean apply(final PhysicalThread t) {
             return Boolean.valueOf(usedThreads.contains(t));
           }
@@ -2149,6 +2025,7 @@ public class NodeGen {
           }
           EList<ActorInstance> _allContainedInstances = ssi.getAllContainedInstances();
           final Function1<ActorInstance, Boolean> _function_1 = new Function1<ActorInstance, Boolean>() {
+            @Override
             public Boolean apply(final ActorInstance ai) {
               ETMapUtil.MappedThread _mappedThread = ETMapUtil.getMappedThread(ai);
               PhysicalThread _thread = _mappedThread.getThread();
@@ -2158,39 +2035,17 @@ public class NodeGen {
           final Iterable<ActorInstance> instancesOnThread = IterableExtensions.<ActorInstance>filter(_allContainedInstances, _function_1);
           _builder.newLineIfNotEmpty();
           final Function1<ActorInstance, Boolean> _function_2 = new Function1<ActorInstance, Boolean>() {
+            @Override
             public Boolean apply(final ActorInstance ai) {
-              boolean _or = false;
-              ActorClass _actorClass = ai.getActorClass();
-              ComponentCommunicationType _commType = _actorClass.getCommType();
-              boolean _equals = Objects.equal(_commType, ComponentCommunicationType.EVENT_DRIVEN);
-              if (_equals) {
-                _or = true;
-              } else {
-                ActorClass _actorClass_1 = ai.getActorClass();
-                ComponentCommunicationType _commType_1 = _actorClass_1.getCommType();
-                boolean _equals_1 = Objects.equal(_commType_1, ComponentCommunicationType.ASYNCHRONOUS);
-                _or = _equals_1;
-              }
-              return Boolean.valueOf(_or);
+              return Boolean.valueOf((Objects.equal(ai.getActorClass().getCommType(), ComponentCommunicationType.EVENT_DRIVEN) || Objects.equal(ai.getActorClass().getCommType(), ComponentCommunicationType.ASYNCHRONOUS)));
             }
           };
           final Iterable<ActorInstance> dispatchedInstances = IterableExtensions.<ActorInstance>filter(instancesOnThread, _function_2);
           _builder.newLineIfNotEmpty();
           final Function1<ActorInstance, Boolean> _function_3 = new Function1<ActorInstance, Boolean>() {
+            @Override
             public Boolean apply(final ActorInstance ai) {
-              boolean _or = false;
-              ActorClass _actorClass = ai.getActorClass();
-              ComponentCommunicationType _commType = _actorClass.getCommType();
-              boolean _equals = Objects.equal(_commType, ComponentCommunicationType.DATA_DRIVEN);
-              if (_equals) {
-                _or = true;
-              } else {
-                ActorClass _actorClass_1 = ai.getActorClass();
-                ComponentCommunicationType _commType_1 = _actorClass_1.getCommType();
-                boolean _equals_1 = Objects.equal(_commType_1, ComponentCommunicationType.ASYNCHRONOUS);
-                _or = _equals_1;
-              }
-              return Boolean.valueOf(_or);
+              return Boolean.valueOf((Objects.equal(ai.getActorClass().getCommType(), ComponentCommunicationType.DATA_DRIVEN) || Objects.equal(ai.getActorClass().getCommType(), ComponentCommunicationType.ASYNCHRONOUS)));
             }
           };
           final Iterable<ActorInstance> executedInstances = IterableExtensions.<ActorInstance>filter(instancesOnThread, _function_3);
@@ -2366,6 +2221,7 @@ public class NodeGen {
               {
                 EList<InterfaceItemInstance> _orderedIfItemInstances = ai_1.getOrderedIfItemInstances();
                 final Function1<InterfaceItemInstance, Boolean> _function_4 = new Function1<InterfaceItemInstance, Boolean>() {
+                  @Override
                   public Boolean apply(final InterfaceItemInstance p) {
                     ProtocolClass _protocol = p.getProtocol();
                     CommunicationType _commType = _protocol.getCommType();
@@ -2492,8 +2348,8 @@ public class NodeGen {
                               _builder.newLine();
                             } else {
                               {
-                                GlobalGeneratorSettings _settings_1 = Main.getSettings();
-                                boolean _isGenerateMSCInstrumentation = _settings_1.isGenerateMSCInstrumentation();
+                                GlobalGeneratorSettings _settings = Main.getSettings();
+                                boolean _isGenerateMSCInstrumentation = _settings.isGenerateMSCInstrumentation();
                                 if (_isGenerateMSCInstrumentation) {
                                   _builder.append("\t\t");
                                   _builder.append("\t");
@@ -2675,8 +2531,8 @@ public class NodeGen {
                           _builder.newLine();
                         } else {
                           {
-                            GlobalGeneratorSettings _settings_2 = Main.getSettings();
-                            boolean _isGenerateMSCInstrumentation_1 = _settings_2.isGenerateMSCInstrumentation();
+                            GlobalGeneratorSettings _settings_1 = Main.getSettings();
+                            boolean _isGenerateMSCInstrumentation_1 = _settings_1.isGenerateMSCInstrumentation();
                             if (_isGenerateMSCInstrumentation_1) {
                               _builder.append("\t\t");
                               _builder.append("\t");
@@ -2788,20 +2644,9 @@ public class NodeGen {
       ProtocolClass _protocol = pi.getProtocol();
       EList<Message> _incomingMessages = _protocol.getIncomingMessages();
       final Function1<Message, Boolean> _function = new Function1<Message, Boolean>() {
+        @Override
         public Boolean apply(final Message m) {
-          boolean _and = false;
-          VarDecl _data = m.getData();
-          boolean _notEquals = (!Objects.equal(_data, null));
-          if (!_notEquals) {
-            _and = false;
-          } else {
-            VarDecl _data_1 = m.getData();
-            RefableType _refType = _data_1.getRefType();
-            DataType _type = _refType.getType();
-            boolean _isEnumerationOrPrimitive = NodeGen.this._typeHelpers.isEnumerationOrPrimitive(_type);
-            _and = _isEnumerationOrPrimitive;
-          }
-          return Boolean.valueOf(_and);
+          return Boolean.valueOf(((!Objects.equal(m.getData(), null)) && NodeGen.this._typeHelpers.isEnumerationOrPrimitive(m.getData().getRefType().getType())));
         }
       };
       Iterable<Message> _filter = IterableExtensions.<Message>filter(_incomingMessages, _function);
@@ -2899,20 +2744,9 @@ public class NodeGen {
                       ProtocolClass _protocol_1 = pi.getProtocol();
                       EList<Message> _incomingMessages = _protocol_1.getIncomingMessages();
                       final Function1<Message, Boolean> _function = new Function1<Message, Boolean>() {
+                        @Override
                         public Boolean apply(final Message m) {
-                          boolean _and = false;
-                          VarDecl _data = m.getData();
-                          boolean _notEquals = (!Objects.equal(_data, null));
-                          if (!_notEquals) {
-                            _and = false;
-                          } else {
-                            VarDecl _data_1 = m.getData();
-                            RefableType _refType = _data_1.getRefType();
-                            DataType _type = _refType.getType();
-                            boolean _isEnumerationOrPrimitive = NodeGen.this._typeHelpers.isEnumerationOrPrimitive(_type);
-                            _and = _isEnumerationOrPrimitive;
-                          }
-                          return Boolean.valueOf(_and);
+                          return Boolean.valueOf(((!Objects.equal(m.getData(), null)) && NodeGen.this._typeHelpers.isEnumerationOrPrimitive(m.getData().getRefType().getType())));
                         }
                       };
                       Iterable<Message> _filter = IterableExtensions.<Message>filter(_incomingMessages, _function);

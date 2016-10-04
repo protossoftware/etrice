@@ -87,18 +87,17 @@ public class DetailExpressionUIProvider implements IDetailExpressionProvider {
       Object _data = feature.getData();
       final Object data = _data;
       boolean _matched = false;
-      if (!_matched) {
-        if (data instanceof Operation) {
-          _matched=true;
-          EList<VarDecl> _arguments = ((Operation)data).getArguments();
-          final Function1<VarDecl, String> _function = new Function1<VarDecl, String>() {
-            public String apply(final VarDecl it) {
-              return it.getName();
-            }
-          };
-          List<String> _map = ListExtensions.<VarDecl, String>map(_arguments, _function);
-          _switchResult_1 = IterableExtensions.join(_map, ", ");
-        }
+      if (data instanceof Operation) {
+        _matched=true;
+        EList<VarDecl> _arguments = ((Operation)data).getArguments();
+        final Function1<VarDecl, String> _function = new Function1<VarDecl, String>() {
+          @Override
+          public String apply(final VarDecl it) {
+            return it.getName();
+          }
+        };
+        List<String> _map = ListExtensions.<VarDecl, String>map(_arguments, _function);
+        _switchResult_1 = IterableExtensions.join(_map, ", ");
       }
       if (!_matched) {
         if (data instanceof Message) {
@@ -173,11 +172,9 @@ public class DetailExpressionUIProvider implements IDetailExpressionProvider {
     Object _data = feature.getData();
     final Object data = _data;
     boolean _matched = false;
-    if (!_matched) {
-      if (data instanceof InterfaceItem) {
-        _matched=true;
-        _switchResult = ActionCodeColorManager.INTERFACE_ITEM;
-      }
+    if (data instanceof InterfaceItem) {
+      _matched=true;
+      _switchResult = ActionCodeColorManager.INTERFACE_ITEM;
     }
     if (!_matched) {
       if (data instanceof Attribute) {
@@ -227,14 +224,12 @@ public class DetailExpressionUIProvider implements IDetailExpressionProvider {
     }
     String classInfo = _xifexpression;
     boolean _matched = false;
-    if (!_matched) {
-      if (data instanceof Attribute) {
-        _matched=true;
-        RefableType _type = ((Attribute)data).getType();
-        DataType _type_1 = _type.getType();
-        String _name = _type_1.getName();
-        typedInfo = _name;
-      }
+    if (data instanceof Attribute) {
+      _matched=true;
+      RefableType _type = ((Attribute)data).getType();
+      DataType _type_1 = _type.getType();
+      String _name = _type_1.getName();
+      typedInfo = _name;
     }
     if (!_matched) {
       if (data instanceof InterfaceItem) {
@@ -279,31 +274,21 @@ public class DetailExpressionUIProvider implements IDetailExpressionProvider {
     boolean _equals = Objects.equal(_postfix, IDetailExpressionProvider.ExpressionPostfix.NONE);
     if (_equals) {
       boolean _matched_1 = false;
+      if (data instanceof SPP) {
+        boolean _isEventDriven = ((SPP)data).isEventDriven();
+        if (_isEventDriven) {
+          _matched_1=true;
+        }
+      }
       if (!_matched_1) {
-        if (data instanceof SPP) {
-          boolean _isEventDriven = ((SPP)data).isEventDriven();
-          if (_isEventDriven) {
+        if (data instanceof Port) {
+          if ((((Port)data).isReplicated() && ((Port)data).isEventDriven())) {
             _matched_1=true;
           }
         }
-        if (!_matched_1) {
-          if (data instanceof Port) {
-            boolean _and = false;
-            boolean _isReplicated = ((Port)data).isReplicated();
-            if (!_isReplicated) {
-              _and = false;
-            } else {
-              boolean _isEventDriven = ((Port)data).isEventDriven();
-              _and = _isEventDriven;
-            }
-            if (_and) {
-              _matched_1=true;
-            }
-          }
-        }
-        if (_matched_1) {
-          completionInfo = (completionInfo + " (broadcast)");
-        }
+      }
+      if (_matched_1) {
+        completionInfo = (completionInfo + " (broadcast)");
       }
     }
     boolean _isEmpty = typedInfo.isEmpty();
@@ -326,12 +311,10 @@ public class DetailExpressionUIProvider implements IDetailExpressionProvider {
       Image _switchResult = null;
       Object _data = feature.getData();
       boolean _matched = false;
-      if (!_matched) {
-        if (_data instanceof EObject) {
-          _matched=true;
-          Object _data_1 = feature.getData();
-          _switchResult = this.labelProvider.getImage(_data_1);
-        }
+      if (_data instanceof EObject) {
+        _matched=true;
+        Object _data_1 = feature.getData();
+        _switchResult = this.labelProvider.getImage(_data_1);
       }
       if (!_matched) {
         if (_data instanceof RuntimeDetailExpressionProvider.RuntimeMethodExpressionData) {
@@ -350,6 +333,7 @@ public class DetailExpressionUIProvider implements IDetailExpressionProvider {
   public Iterable<IDetailExpressionProvider.ExpressionFeature> getContextFeaturesWithPrefix(final IDetailExpressionProvider.ExpressionFeature ctx, final String prefix) {
     List<IDetailExpressionProvider.ExpressionFeature> _contextFeatures = this.delegate.getContextFeatures(ctx);
     final Function1<IDetailExpressionProvider.ExpressionFeature, Boolean> _function = new Function1<IDetailExpressionProvider.ExpressionFeature, Boolean>() {
+      @Override
       public Boolean apply(final IDetailExpressionProvider.ExpressionFeature it) {
         String _id = it.getId();
         return Boolean.valueOf(_id.startsWith(prefix));
@@ -364,6 +348,7 @@ public class DetailExpressionUIProvider implements IDetailExpressionProvider {
   public Iterable<IDetailExpressionProvider.ExpressionFeature> getInitialFeaturesWithPrefix(final String prefix) {
     List<IDetailExpressionProvider.ExpressionFeature> _initialFeatures = this.delegate.getInitialFeatures();
     final Function1<IDetailExpressionProvider.ExpressionFeature, Boolean> _function = new Function1<IDetailExpressionProvider.ExpressionFeature, Boolean>() {
+      @Override
       public Boolean apply(final IDetailExpressionProvider.ExpressionFeature it) {
         String _id = it.getId();
         return Boolean.valueOf(_id.startsWith(prefix));
@@ -388,11 +373,11 @@ public class DetailExpressionUIProvider implements IDetailExpressionProvider {
     this.delegate = delegate;
   }
   
-  public List<IDetailExpressionProvider.ExpressionFeature> getContextFeatures(final IDetailExpressionProvider.ExpressionFeature ctx) {
-    return this.delegate.getContextFeatures(ctx);
-  }
-  
   public List<IDetailExpressionProvider.ExpressionFeature> getInitialFeatures() {
     return this.delegate.getInitialFeatures();
+  }
+  
+  public List<IDetailExpressionProvider.ExpressionFeature> getContextFeatures(final IDetailExpressionProvider.ExpressionFeature ctx) {
+    return this.delegate.getContextFeatures(ctx);
   }
 }

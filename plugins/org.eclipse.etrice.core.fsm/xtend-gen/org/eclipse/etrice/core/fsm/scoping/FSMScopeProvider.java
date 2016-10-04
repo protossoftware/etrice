@@ -160,27 +160,17 @@ public class FSMScopeProvider extends AbstractDeclarativeScopeProvider {
     if ((_eContainer instanceof ModelComponent)) {
       EObject _eContainer_1 = sg.eContainer();
       ModelComponent comp = ((ModelComponent) _eContainer_1);
-      boolean _and = false;
-      ModelComponent _base = comp.getBase();
-      boolean _notEquals = (!Objects.equal(_base, null));
-      if (!_notEquals) {
-        _and = false;
-      } else {
-        boolean _isCircularClassHierarchy = this._fSMHelpers.isCircularClassHierarchy(comp);
-        boolean _not = (!_isCircularClassHierarchy);
-        _and = _not;
-      }
-      if (_and) {
-        ModelComponent _base_1 = comp.getBase();
-        comp = _base_1;
+      if (((!Objects.equal(comp.getBase(), null)) && (!this._fSMHelpers.isCircularClassHierarchy(comp)))) {
+        ModelComponent _base = comp.getBase();
+        comp = _base;
         final HashSet<State> covered = CollectionLiterals.<State>newHashSet();
         final ArrayList<State> states = CollectionLiterals.<State>newArrayList();
         while ((!Objects.equal(comp, null))) {
           {
             StateGraph _stateMachine = comp.getStateMachine();
             this.recursivelyAddStates(_stateMachine, covered, states);
-            ModelComponent _base_2 = comp.getBase();
-            comp = _base_2;
+            ModelComponent _base_1 = comp.getBase();
+            comp = _base_1;
           }
         }
         for (final State s : states) {
@@ -196,8 +186,8 @@ public class FSMScopeProvider extends AbstractDeclarativeScopeProvider {
         State _target = ((RefinedState) _eContainer_3).getTarget();
         StateGraph _subgraph = _target.getSubgraph();
         sg = _subgraph;
-        boolean _notEquals_1 = (!Objects.equal(sg, null));
-        if (_notEquals_1) {
+        boolean _notEquals = (!Objects.equal(sg, null));
+        if (_notEquals) {
           EList<State> _states = sg.getStates();
           for (final State s_1 : _states) {
             String _name = s_1.getName();
@@ -263,26 +253,10 @@ public class FSMScopeProvider extends AbstractDeclarativeScopeProvider {
   private void recursivelyAddStates(final StateGraph sg, final HashSet<State> covered, final ArrayList<State> states) {
     EList<State> _states = sg.getStates();
     for (final State s : _states) {
-      boolean _and = false;
-      if (!(s instanceof SimpleState)) {
-        _and = false;
-      } else {
-        boolean _contains = covered.contains(s);
-        boolean _not = (!_contains);
-        _and = _not;
-      }
-      if (_and) {
+      if (((s instanceof SimpleState) && (!covered.contains(s)))) {
         states.add(s);
       } else {
-        boolean _and_1 = false;
-        if (!(s instanceof RefinedState)) {
-          _and_1 = false;
-        } else {
-          boolean _contains_1 = covered.contains(s);
-          boolean _not_1 = (!_contains_1);
-          _and_1 = _not_1;
-        }
-        if (_and_1) {
+        if (((s instanceof RefinedState) && (!covered.contains(s)))) {
           states.add(s);
           State _target = ((RefinedState) s).getTarget();
           covered.add(_target);

@@ -54,16 +54,7 @@ public class PrepareFileSystem {
         for (final RoomModel mdl : _usedRoomModels) {
           {
             final String tgtpath = this._roomExtensions.getGenerationTargetPath(mdl);
-            boolean _and = false;
-            boolean _notEquals = (!Objects.equal(tgtpath, null));
-            if (!_notEquals) {
-              _and = false;
-            } else {
-              boolean _isEmpty = tgtpath.isEmpty();
-              boolean _not = (!_isEmpty);
-              _and = _not;
-            }
-            if (_and) {
+            if (((!Objects.equal(tgtpath, null)) && (!tgtpath.isEmpty()))) {
               pathes.add(tgtpath);
             }
           }
@@ -82,16 +73,7 @@ public class PrepareFileSystem {
         for (final RoomModel mdl : _usedRoomModels) {
           {
             final String tgtpath = this._roomExtensions.getDocGenerationTargetPath(mdl);
-            boolean _and = false;
-            boolean _notEquals = (!Objects.equal(tgtpath, null));
-            if (!_notEquals) {
-              _and = false;
-            } else {
-              boolean _isEmpty = tgtpath.isEmpty();
-              boolean _not = (!_isEmpty);
-              _and = _not;
-            }
-            if (_and) {
+            if (((!Objects.equal(tgtpath, null)) && (!tgtpath.isEmpty()))) {
               pathes.add(tgtpath);
             }
           }
@@ -127,16 +109,7 @@ public class PrepareFileSystem {
     if (_isDirectory) {
       File[] children = f.listFiles();
       for (final File child : children) {
-        boolean _and = false;
-        boolean _isDirectory_1 = child.isDirectory();
-        if (!_isDirectory_1) {
-          _and = false;
-        } else {
-          String _name = child.getName();
-          boolean _equals = _name.equals("images");
-          _and = _equals;
-        }
-        boolean _not = (!_and);
+        boolean _not = (!(child.isDirectory() && child.getName().equals("images")));
         if (_not) {
           this.eraseContents(child);
           child.delete();

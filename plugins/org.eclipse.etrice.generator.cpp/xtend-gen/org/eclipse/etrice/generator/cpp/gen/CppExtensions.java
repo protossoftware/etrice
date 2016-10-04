@@ -65,6 +65,7 @@ public class CppExtensions implements ILanguageExtension {
   @Extension
   private RoomExtensions _roomExtensions;
   
+  @Override
   public String getTypedDataDefinition(final EObject msg) {
     VarDecl _data = ((Message) msg).getData();
     String[] _generateArglistAndTypedData = this.generateArglistAndTypedData(_data);
@@ -99,34 +100,42 @@ public class CppExtensions implements ILanguageExtension {
     return (_cppClassName + ".cpp");
   }
   
+  @Override
   public String accessLevelPrivate() {
     return "";
   }
   
+  @Override
   public String accessLevelProtected() {
     return "";
   }
   
+  @Override
   public String accessLevelPublic() {
     return "";
   }
   
+  @Override
   public String memberAccess() {
     return "this->";
   }
   
+  @Override
   public String selfPointer(final String classname, final boolean hasArgs) {
     return "";
   }
   
+  @Override
   public String selfPointer(final boolean hasArgs) {
     return "";
   }
   
+  @Override
   public String scopeSeparator() {
     return "::";
   }
   
+  @Override
   public String operationScope(final String classname, final boolean isDeclaration) {
     String _xifexpression = null;
     if (isDeclaration) {
@@ -137,22 +146,27 @@ public class CppExtensions implements ILanguageExtension {
     return _xifexpression;
   }
   
+  @Override
   public String memberInDeclaration(final String namespace, final String member) {
     return member;
   }
   
+  @Override
   public String memberInUse(final String namespace, final String member) {
     return ((namespace + ".") + member);
   }
   
+  @Override
   public boolean usesInheritance() {
     return true;
   }
   
+  @Override
   public boolean usesPointers() {
     return true;
   }
   
+  @Override
   public String genEnumeration(final String name, final List<Pair<String, String>> entries) {
     String _xblockexpression = null;
     {
@@ -189,22 +203,27 @@ public class CppExtensions implements ILanguageExtension {
     return _xblockexpression;
   }
   
+  @Override
   public String booleanConstant(final boolean b) {
     return Boolean.valueOf(b).toString();
   }
   
+  @Override
   public String pointerLiteral() {
     return "*";
   }
   
+  @Override
   public String nullPointer() {
     return "0";
   }
   
+  @Override
   public String voidPointer() {
     return "void*";
   }
   
+  @Override
   public String arrayType(final String type, final int size, final boolean isRef) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("StaticArray<");
@@ -220,6 +239,7 @@ public class CppExtensions implements ILanguageExtension {
     return _builder.toString();
   }
   
+  @Override
   public String arrayDeclaration(final String type, final int size, final boolean isRef, final String name) {
     String _arrayType = this.arrayType(type, size, isRef);
     String _plus = (_arrayType + " ");
@@ -234,6 +254,7 @@ public class CppExtensions implements ILanguageExtension {
     String[] _split_1 = appendSegments.split("\\.");
     Iterable<String> _plus_1 = Iterables.<String>concat(_plus, ((Iterable<? extends String>)Conversions.doWrapArray(_split_1)));
     final Function1<String, Boolean> _function = new Function1<String, Boolean>() {
+      @Override
       public Boolean apply(final String it) {
         boolean _isEmpty = it.isEmpty();
         return Boolean.valueOf((!_isEmpty));
@@ -276,27 +297,29 @@ public class CppExtensions implements ILanguageExtension {
     return "";
   }
   
+  @Override
   public String superCall(final String baseClassName, final String method, final String arguments) {
     return (((((baseClassName + "::") + method) + "(") + arguments) + ");");
   }
   
+  @Override
   public String toValueLiteral(final PrimitiveType type, final String value) {
     throw new UnsupportedOperationException("TODO Config for Cpp");
   }
   
+  @Override
   public String toEnumLiteral(final EnumerationType type, final String value) {
     throw new UnsupportedOperationException("TODO Config for Cpp");
   }
   
+  @Override
   public String defaultValue(final DataType dt) {
     String _switchResult = null;
     final DataType it = dt;
     boolean _matched = false;
-    if (!_matched) {
-      if (it instanceof PrimitiveType) {
-        _matched=true;
-        _switchResult = ((PrimitiveType)it).getDefaultValueLiteral();
-      }
+    if (it instanceof PrimitiveType) {
+      _matched=true;
+      _switchResult = ((PrimitiveType)it).getDefaultValueLiteral();
     }
     if (!_matched) {
       if (it instanceof EnumerationType) {
@@ -332,6 +355,7 @@ public class CppExtensions implements ILanguageExtension {
     return _xifexpression;
   }
   
+  @Override
   public String initializationWithDefaultValues(final DataType dt, final int size) {
     String _xblockexpression = null;
     {
@@ -362,15 +386,9 @@ public class CppExtensions implements ILanguageExtension {
     return _xblockexpression;
   }
   
+  @Override
   public String[] generateArglistAndTypedData(final EObject d) {
-    boolean _or = false;
-    boolean _equals = Objects.equal(d, null);
-    if (_equals) {
-      _or = true;
-    } else {
-      _or = (!(d instanceof VarDecl));
-    }
-    if (_or) {
+    if ((Objects.equal(d, null) || (!(d instanceof VarDecl)))) {
       return ((String[])Conversions.unwrapArray(CollectionLiterals.<String>newArrayList("", "", ""), String.class));
     }
     final VarDecl data = ((VarDecl) d);
@@ -379,15 +397,13 @@ public class CppExtensions implements ILanguageExtension {
     DataType _type = _refType.getType();
     final DataType it = _type;
     boolean _matched = false;
-    if (!_matched) {
-      if (it instanceof PrimitiveType) {
-        String _castName = ((PrimitiveType)it).getCastName();
-        boolean _isEmpty = Strings.isEmpty(_castName);
-        boolean _not = (!_isEmpty);
-        if (_not) {
-          _matched=true;
-          _switchResult = ((PrimitiveType)it).getCastName();
-        }
+    if (it instanceof PrimitiveType) {
+      String _castName = ((PrimitiveType)it).getCastName();
+      boolean _isEmpty = Strings.isEmpty(_castName);
+      boolean _not = (!_isEmpty);
+      if (_not) {
+        _matched=true;
+        _switchResult = ((PrimitiveType)it).getCastName();
       }
     }
     if (!_matched) {
@@ -407,12 +423,10 @@ public class CppExtensions implements ILanguageExtension {
     RefableType _refType_2 = data.getRefType();
     final RefableType it_1 = _refType_2;
     boolean _matched_1 = false;
-    if (!_matched_1) {
-      boolean _isRef = it_1.isRef();
-      if (_isRef) {
-        _matched_1=true;
-        _switchResult_1 = "*";
-      }
+    boolean _isRef = it_1.isRef();
+    if (_isRef) {
+      _matched_1=true;
+      _switchResult_1 = "*";
     }
     if (!_matched_1) {
       DataType _type_2 = it_1.getType();
@@ -462,6 +476,7 @@ public class CppExtensions implements ILanguageExtension {
     return new String[] { dataArg, typedData, typedArgList };
   }
   
+  @Override
   public String getTargetType(final EnumerationType type) {
     String _xifexpression = null;
     PrimitiveType _primitiveType = type.getPrimitiveType();
@@ -475,6 +490,7 @@ public class CppExtensions implements ILanguageExtension {
     return _xifexpression;
   }
   
+  @Override
   public String getCastedValue(final EnumLiteral literal) {
     String _xblockexpression = null;
     {
@@ -498,6 +514,7 @@ public class CppExtensions implements ILanguageExtension {
     return _xblockexpression;
   }
   
+  @Override
   public String getCastType(final EnumerationType type) {
     String _xifexpression = null;
     PrimitiveType _primitiveType = type.getPrimitiveType();
@@ -511,6 +528,7 @@ public class CppExtensions implements ILanguageExtension {
     return _xifexpression;
   }
   
+  @Override
   public String makeOverridable() {
     return "virtual ";
   }
@@ -528,6 +546,7 @@ public class CppExtensions implements ILanguageExtension {
         _xifexpression = ac.getName();
       } else {
         final Function1<KeyValue, Boolean> _function = new Function1<KeyValue, Boolean>() {
+          @Override
           public Boolean apply(final KeyValue it) {
             String _key = it.getKey();
             return Boolean.valueOf(Objects.equal(_key, "fqnClassName"));
@@ -563,6 +582,7 @@ public class CppExtensions implements ILanguageExtension {
         String _xblockexpression_1 = null;
         {
           final Function1<KeyValue, Boolean> _function = new Function1<KeyValue, Boolean>() {
+            @Override
             public Boolean apply(final KeyValue it) {
               String _key = it.getKey();
               return Boolean.valueOf(Objects.equal(_key, "includePath"));
@@ -575,6 +595,7 @@ public class CppExtensions implements ILanguageExtension {
             String _xblockexpression_2 = null;
             {
               final Function1<KeyValue, Boolean> _function_1 = new Function1<KeyValue, Boolean>() {
+                @Override
                 public Boolean apply(final KeyValue it) {
                   String _key = it.getKey();
                   return Boolean.valueOf(Objects.equal(_key, "fqnClassName"));

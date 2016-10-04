@@ -52,6 +52,7 @@ public class CExtensions implements ILanguageExtension {
   @Extension
   protected RoomHelpers _roomHelpers;
   
+  @Override
   public String getTypedDataDefinition(final EObject msg) {
     String _xifexpression = null;
     if ((msg instanceof Message)) {
@@ -64,22 +65,27 @@ public class CExtensions implements ILanguageExtension {
     return _xifexpression;
   }
   
+  @Override
   public String accessLevelPrivate() {
     return "static ";
   }
   
+  @Override
   public String accessLevelProtected() {
     return "static ";
   }
   
+  @Override
   public String accessLevelPublic() {
     return "";
   }
   
+  @Override
   public String memberAccess() {
     return "self->";
   }
   
+  @Override
   public String selfPointer(final String classname, final boolean hasArgs) {
     String _xifexpression = null;
     if (hasArgs) {
@@ -90,6 +96,7 @@ public class CExtensions implements ILanguageExtension {
     return (classname + _xifexpression);
   }
   
+  @Override
   public String selfPointer(final boolean hasArgs) {
     String _xifexpression = null;
     if (hasArgs) {
@@ -100,18 +107,22 @@ public class CExtensions implements ILanguageExtension {
     return _xifexpression;
   }
   
+  @Override
   public String scopeSeparator() {
     return "";
   }
   
+  @Override
   public String operationScope(final String classname, final boolean isDeclaration) {
     return (classname + "_");
   }
   
+  @Override
   public String memberInDeclaration(final String namespace, final String member) {
     return ((namespace + "_") + member);
   }
   
+  @Override
   public String memberInUse(final String namespace, final String member) {
     return ((namespace + "_") + member);
   }
@@ -236,14 +247,17 @@ public class CExtensions implements ILanguageExtension {
     return _builder;
   }
   
+  @Override
   public boolean usesInheritance() {
     return false;
   }
   
+  @Override
   public boolean usesPointers() {
     return true;
   }
   
+  @Override
   public String genEnumeration(final String name, final List<Pair<String, String>> entries) {
     String _xblockexpression = null;
     {
@@ -280,6 +294,7 @@ public class CExtensions implements ILanguageExtension {
     return _xblockexpression;
   }
   
+  @Override
   public String booleanConstant(final boolean b) {
     String _xifexpression = null;
     if (b) {
@@ -290,18 +305,22 @@ public class CExtensions implements ILanguageExtension {
     return _xifexpression;
   }
   
+  @Override
   public String pointerLiteral() {
     return "*";
   }
   
+  @Override
   public String nullPointer() {
     return "NULL";
   }
   
+  @Override
   public String voidPointer() {
     return "void*";
   }
   
+  @Override
   public String arrayType(final String type, final int size, final boolean isRef) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append(type, "");
@@ -314,6 +333,7 @@ public class CExtensions implements ILanguageExtension {
     return _builder.toString();
   }
   
+  @Override
   public String arrayDeclaration(final String type, final int size, final boolean isRef, final String name) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append(type, "");
@@ -331,48 +351,30 @@ public class CExtensions implements ILanguageExtension {
     return _builder.toString();
   }
   
+  @Override
   public String superCall(final String baseClassName, final String method, final String args) {
     return "";
   }
   
+  @Override
   public String toValueLiteral(final PrimitiveType type, final String value) {
     String _switchResult = null;
     String _targetName = type.getTargetName();
     boolean _matched = false;
-    if (!_matched) {
-      boolean _and = false;
-      String _targetName_1 = type.getTargetName();
-      boolean _equals = _targetName_1.equals("char");
-      if (!_equals) {
-        _and = false;
-      } else {
-        int _length = value.length();
-        boolean _equals_1 = (_length == 1);
-        _and = _equals_1;
-      }
-      if (_and) {
-        _matched=true;
-        _switchResult = (("\'" + value) + "\'");
-      }
+    if ((type.getTargetName().equals("char") && (value.length() == 1))) {
+      _matched=true;
+      _switchResult = (("\'" + value) + "\'");
     }
     if (!_matched) {
       LiteralType _type = type.getType();
-      boolean _equals_2 = Objects.equal(_type, LiteralType.CHAR);
-      if (_equals_2) {
+      boolean _equals = Objects.equal(_type, LiteralType.CHAR);
+      if (_equals) {
         _matched=true;
         _switchResult = (("\"" + value) + "\"");
       }
     }
     if (!_matched) {
-      boolean _or = false;
-      boolean _contains = value.contains(",");
-      if (_contains) {
-        _or = true;
-      } else {
-        boolean _contains_1 = value.contains("{");
-        _or = _contains_1;
-      }
-      if (_or) {
+      if ((value.contains(",") || value.contains("{"))) {
         _matched=true;
         String _xblockexpression = null;
         {
@@ -405,8 +407,8 @@ public class CExtensions implements ILanguageExtension {
       if (Objects.equal(_targetName, "boolean")) {
         _matched=true;
         String _xifexpression = null;
-        boolean _equals_3 = value.equals("true");
-        if (_equals_3) {
+        boolean _equals_1 = value.equals("true");
+        if (_equals_1) {
           _xifexpression = "ET_TRUE";
         } else {
           _xifexpression = "ET_FALSE";
@@ -420,17 +422,10 @@ public class CExtensions implements ILanguageExtension {
     return _switchResult;
   }
   
+  @Override
   public String toEnumLiteral(final EnumerationType type, final String value) {
     String _xifexpression = null;
-    boolean _or = false;
-    boolean _contains = value.contains(",");
-    if (_contains) {
-      _or = true;
-    } else {
-      boolean _contains_1 = value.contains("{");
-      _or = _contains_1;
-    }
-    if (_or) {
+    if ((value.contains(",") || value.contains("{"))) {
       String _xblockexpression = null;
       {
         String _replace = value.replace("{", "");
@@ -487,15 +482,14 @@ public class CExtensions implements ILanguageExtension {
     return null;
   }
   
+  @Override
   public String defaultValue(final DataType dt) {
     String _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (dt instanceof PrimitiveType) {
-        _matched=true;
-        String _defaultValueLiteral = ((PrimitiveType)dt).getDefaultValueLiteral();
-        _switchResult = this.toValueLiteral(((PrimitiveType)dt), _defaultValueLiteral);
-      }
+    if (dt instanceof PrimitiveType) {
+      _matched=true;
+      String _defaultValueLiteral = ((PrimitiveType)dt).getDefaultValueLiteral();
+      _switchResult = this.toValueLiteral(((PrimitiveType)dt), _defaultValueLiteral);
     }
     if (!_matched) {
       if (dt instanceof EnumerationType) {
@@ -567,6 +561,7 @@ public class CExtensions implements ILanguageExtension {
     return _xifexpression;
   }
   
+  @Override
   public String initializationWithDefaultValues(final DataType dt, final int size) {
     String _xblockexpression = null;
     {
@@ -637,20 +632,14 @@ public class CExtensions implements ILanguageExtension {
     return _xblockexpression;
   }
   
+  @Override
   public String[] generateArglistAndTypedData(final EObject d) {
-    boolean _or = false;
-    boolean _equals = Objects.equal(d, null);
-    if (_equals) {
-      _or = true;
-    } else {
-      _or = (!(d instanceof VarDecl));
-    }
-    if (_or) {
+    if ((Objects.equal(d, null) || (!(d instanceof VarDecl)))) {
       return ((String[])Conversions.unwrapArray(CollectionLiterals.<String>newArrayList("", "", ""), String.class));
     }
     final VarDecl data = ((VarDecl) d);
-    boolean _equals_1 = Objects.equal(data, null);
-    if (_equals_1) {
+    boolean _equals = Objects.equal(data, null);
+    if (_equals) {
       return ((String[])Conversions.unwrapArray(CollectionLiterals.<String>newArrayList("", "", ""), String.class));
     }
     String _xifexpression = null;
@@ -696,16 +685,7 @@ public class CExtensions implements ILanguageExtension {
         DataType _type_8 = _refType_8.getType();
         final String ct = ((PrimitiveType) _type_8).getCastName();
         String _xifexpression_4 = null;
-        boolean _and = false;
-        boolean _notEquals = (!Objects.equal(ct, null));
-        if (!_notEquals) {
-          _and = false;
-        } else {
-          boolean _isEmpty = ct.isEmpty();
-          boolean _not = (!_isEmpty);
-          _and = _not;
-        }
-        if (_and) {
+        if (((!Objects.equal(ct, null)) && (!ct.isEmpty()))) {
           _xifexpression_4 = ct;
         } else {
           _xifexpression_4 = typeName;
@@ -731,17 +711,7 @@ public class CExtensions implements ILanguageExtension {
     String deRef = "*";
     RefableType _refType_10 = data.getRefType();
     final boolean isRef = _refType_10.isRef();
-    boolean _or_1 = false;
-    RefableType _refType_11 = data.getRefType();
-    DataType _type_10 = _refType_11.getType();
-    if ((_type_10 instanceof PrimitiveType)) {
-      _or_1 = true;
-    } else {
-      RefableType _refType_12 = data.getRefType();
-      DataType _type_11 = _refType_12.getType();
-      _or_1 = (_type_11 instanceof EnumerationType);
-    }
-    final boolean isPrim = _or_1;
+    final boolean isPrim = ((data.getRefType().getType() instanceof PrimitiveType) || (data.getRefType().getType() instanceof EnumerationType));
     if (isRef) {
       typeName = (typeName + "*");
       castTypeName = (castTypeName + "*");
@@ -776,6 +746,7 @@ public class CExtensions implements ILanguageExtension {
     return (_plus_2 + "\"");
   }
   
+  @Override
   public String getTargetType(final EnumerationType type) {
     String _xifexpression = null;
     PrimitiveType _primitiveType = type.getPrimitiveType();
@@ -789,6 +760,7 @@ public class CExtensions implements ILanguageExtension {
     return _xifexpression;
   }
   
+  @Override
   public String getCastedValue(final EnumLiteral literal) {
     String _xblockexpression = null;
     {
@@ -812,6 +784,7 @@ public class CExtensions implements ILanguageExtension {
     return _xblockexpression;
   }
   
+  @Override
   public String getCastType(final EnumerationType type) {
     String _xifexpression = null;
     PrimitiveType _primitiveType = type.getPrimitiveType();
@@ -825,6 +798,7 @@ public class CExtensions implements ILanguageExtension {
     return _xifexpression;
   }
   
+  @Override
   public String makeOverridable() {
     return "";
   }

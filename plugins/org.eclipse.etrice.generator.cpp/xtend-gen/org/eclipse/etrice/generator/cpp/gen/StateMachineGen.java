@@ -34,6 +34,7 @@ public class StateMachineGen extends GenericStateMachineGenerator {
   @Extension
   private RoomExtensions _roomExtensions;
   
+  @Override
   public CharSequence genExtra(final ExpandedModelComponent xpac, final boolean generateImplementation) {
     CharSequence _xblockexpression = null;
     {
@@ -54,17 +55,7 @@ public class StateMachineGen extends GenericStateMachineGenerator {
       if (generateImplementation) {
         StringConcatenation _builder = new StringConcatenation();
         {
-          boolean _or = false;
-          GlobalGeneratorSettings _settings = Main.getSettings();
-          boolean _isGenerateMSCInstrumentation = _settings.isGenerateMSCInstrumentation();
-          if (_isGenerateMSCInstrumentation) {
-            _or = true;
-          } else {
-            GlobalGeneratorSettings _settings_1 = Main.getSettings();
-            boolean _isGenerateWithVerboseOutput = _settings_1.isGenerateWithVerboseOutput();
-            _or = _isGenerateWithVerboseOutput;
-          }
-          if (_or) {
+          if ((Main.getSettings().isGenerateMSCInstrumentation() || Main.getSettings().isGenerateWithVerboseOutput())) {
             _builder.append("// state names");
             _builder.newLine();
             _builder.append("const std::string ");
@@ -111,18 +102,18 @@ public class StateMachineGen extends GenericStateMachineGenerator {
         _builder.append("::setState(int new_state) {");
         _builder.newLineIfNotEmpty();
         {
-          GlobalGeneratorSettings _settings_2 = Main.getSettings();
-          boolean _isGenerateMSCInstrumentation_1 = _settings_2.isGenerateMSCInstrumentation();
-          if (_isGenerateMSCInstrumentation_1) {
+          GlobalGeneratorSettings _settings = Main.getSettings();
+          boolean _isGenerateMSCInstrumentation = _settings.isGenerateMSCInstrumentation();
+          if (_isGenerateMSCInstrumentation) {
             _builder.append("\t");
             _builder.append("DebuggingService::getInstance().addActorState(*this, s_stateStrings[new_state]);");
             _builder.newLine();
           }
         }
         {
-          GlobalGeneratorSettings _settings_3 = Main.getSettings();
-          boolean _isGenerateWithVerboseOutput_1 = _settings_3.isGenerateWithVerboseOutput();
-          if (_isGenerateWithVerboseOutput_1) {
+          GlobalGeneratorSettings _settings_1 = Main.getSettings();
+          boolean _isGenerateWithVerboseOutput = _settings_1.isGenerateWithVerboseOutput();
+          if (_isGenerateWithVerboseOutput) {
             _builder.append("\t");
             _builder.append("if (s_stateStrings[new_state] != \"Idle\") {");
             _builder.newLine();
@@ -144,17 +135,7 @@ public class StateMachineGen extends GenericStateMachineGenerator {
       } else {
         StringConcatenation _builder_1 = new StringConcatenation();
         {
-          boolean _or_1 = false;
-          GlobalGeneratorSettings _settings_4 = Main.getSettings();
-          boolean _isGenerateMSCInstrumentation_2 = _settings_4.isGenerateMSCInstrumentation();
-          if (_isGenerateMSCInstrumentation_2) {
-            _or_1 = true;
-          } else {
-            GlobalGeneratorSettings _settings_5 = Main.getSettings();
-            boolean _isGenerateWithVerboseOutput_2 = _settings_5.isGenerateWithVerboseOutput();
-            _or_1 = _isGenerateWithVerboseOutput_2;
-          }
-          if (_or_1) {
+          if ((Main.getSettings().isGenerateMSCInstrumentation() || Main.getSettings().isGenerateWithVerboseOutput())) {
             _builder_1.append("static const std::string s_stateStrings[];");
             _builder_1.newLine();
           }
@@ -178,10 +159,12 @@ public class StateMachineGen extends GenericStateMachineGenerator {
     return _xblockexpression;
   }
   
+  @Override
   public String stateType() {
     return "etInt16";
   }
   
+  @Override
   public String boolType() {
     return "etBool";
   }

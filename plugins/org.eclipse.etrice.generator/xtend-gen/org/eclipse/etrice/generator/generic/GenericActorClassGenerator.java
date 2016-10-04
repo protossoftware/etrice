@@ -124,6 +124,7 @@ public class GenericActorClassGenerator implements IIfItemIdGenerator {
     return this.langExt.genEnumeration("interface_items", list);
   }
   
+  @Override
   public String getIfItemId(final AbstractInterfaceItem item) {
     String _name = item.getName();
     return ("IFITEM_" + _name);

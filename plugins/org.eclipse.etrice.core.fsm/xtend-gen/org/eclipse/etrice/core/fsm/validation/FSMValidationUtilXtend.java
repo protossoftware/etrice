@@ -25,7 +25,6 @@ import org.eclipse.etrice.core.fsm.fSM.State;
 import org.eclipse.etrice.core.fsm.fSM.StateGraph;
 import org.eclipse.etrice.core.fsm.fSM.StateTerminal;
 import org.eclipse.etrice.core.fsm.fSM.Transition;
-import org.eclipse.etrice.core.fsm.fSM.TransitionTerminal;
 import org.eclipse.etrice.core.fsm.fSM.Trigger;
 import org.eclipse.etrice.core.fsm.fSM.TriggeredTransition;
 import org.eclipse.etrice.core.fsm.naming.FSMNameProvider;
@@ -102,23 +101,16 @@ public class FSMValidationUtilXtend {
     final ArrayList<FSMValidationUtilXtend.Result> result = CollectionLiterals.<FSMValidationUtilXtend.Result>newArrayList();
     EList<Transition> _transitions = parent.getTransitions();
     final Function1<Transition, Boolean> _function = new Function1<Transition, Boolean>() {
+      @Override
       public Boolean apply(final Transition t) {
-        boolean _and = false;
-        if (!((t instanceof TriggeredTransition) && (((TriggeredTransition) t).getFrom() instanceof StateTerminal))) {
-          _and = false;
-        } else {
-          TransitionTerminal _from = ((TriggeredTransition) t).getFrom();
-          State _state = ((StateTerminal) _from).getState();
-          boolean _equals = Objects.equal(myState, _state);
-          _and = _equals;
-        }
-        return Boolean.valueOf(_and);
+        return Boolean.valueOf((((t instanceof TriggeredTransition) && (((TriggeredTransition) t).getFrom() instanceof StateTerminal)) && Objects.equal(myState, ((StateTerminal) ((TriggeredTransition) t).getFrom()).getState())));
       }
     };
     Iterable<Transition> _filter = IterableExtensions.<Transition>filter(_transitions, _function);
     for (final Transition t : _filter) {
       EList<Trigger> _triggers = ((TriggeredTransition) t).getTriggers();
       final Function1<Trigger, Boolean> _function_1 = new Function1<Trigger, Boolean>() {
+        @Override
         public Boolean apply(final Trigger k) {
           Guard _guard = k.getGuard();
           return Boolean.valueOf(Objects.equal(_guard, null));

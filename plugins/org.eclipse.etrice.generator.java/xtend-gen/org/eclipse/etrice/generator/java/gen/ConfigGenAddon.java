@@ -121,22 +121,20 @@ public class ConfigGenAddon {
       DataType aType = _type.getType();
       CharSequence _switchResult = null;
       boolean _matched = false;
-      if (!_matched) {
-        if (aType instanceof PrimitiveType) {
-          _matched=true;
-          CharSequence _xblockexpression_1 = null;
-          {
-            String value = this.typeHelpers.getAttrInstanceConfigValue(path, instance);
-            CharSequence _xifexpression = null;
-            boolean _notEquals = (!Objects.equal(value, null));
-            if (_notEquals) {
-              String _valueLiteral = this.stdExt.toValueLiteral(((PrimitiveType)aType), value);
-              _xifexpression = this.initGen.genAttributeInitializer(a, _valueLiteral, invokes);
-            }
-            _xblockexpression_1 = _xifexpression;
+      if (aType instanceof PrimitiveType) {
+        _matched=true;
+        CharSequence _xblockexpression_1 = null;
+        {
+          String value = this.typeHelpers.getAttrInstanceConfigValue(path, instance);
+          CharSequence _xifexpression = null;
+          boolean _notEquals = (!Objects.equal(value, null));
+          if (_notEquals) {
+            String _valueLiteral = this.stdExt.toValueLiteral(((PrimitiveType)aType), value);
+            _xifexpression = this.initGen.genAttributeInitializer(a, _valueLiteral, invokes);
           }
-          _switchResult = _xblockexpression_1;
+          _xblockexpression_1 = _xifexpression;
         }
+        _switchResult = _xblockexpression_1;
       }
       if (!_matched) {
         if (aType instanceof EnumerationType) {
@@ -391,23 +389,21 @@ public class ConfigGenAddon {
       DataType aType = _type.getType();
       CharSequence _switchResult = null;
       boolean _matched = false;
-      if (!_matched) {
-        if (aType instanceof DataClass) {
-          _matched=true;
-          StringConcatenation _builder = new StringConcatenation();
-          {
-            List<Attribute> _allAttributes = this._roomHelpers.getAllAttributes(((DataClass) aType));
-            for(final Attribute e : _allAttributes) {
-              String _name = e.getName();
-              String _plus = ((varNamePath + "_") + _name);
-              List<Attribute> _union = this._roomExtensions.<Attribute>union(path, e);
-              CharSequence _genMinMaxConstantsRec = this.genMinMaxConstantsRec(ac, _plus, _union);
-              _builder.append(_genMinMaxConstantsRec, "");
-              _builder.newLineIfNotEmpty();
-            }
+      if (aType instanceof DataClass) {
+        _matched=true;
+        StringConcatenation _builder = new StringConcatenation();
+        {
+          List<Attribute> _allAttributes = this._roomHelpers.getAllAttributes(((DataClass) aType));
+          for(final Attribute e : _allAttributes) {
+            String _name = e.getName();
+            String _plus = ((varNamePath + "_") + _name);
+            List<Attribute> _union = this._roomExtensions.<Attribute>union(path, e);
+            CharSequence _genMinMaxConstantsRec = this.genMinMaxConstantsRec(ac, _plus, _union);
+            _builder.append(_genMinMaxConstantsRec, "");
+            _builder.newLineIfNotEmpty();
           }
-          _switchResult = _builder;
         }
+        _switchResult = _builder;
       }
       if (!_matched) {
         if (aType instanceof PrimitiveType) {
@@ -417,7 +413,9 @@ public class ConfigGenAddon {
             String temp = ((String) null);
             StringConcatenation _builder = new StringConcatenation();
             {
-              boolean _notEquals = (!Objects.equal((temp = this.dataConfigExt.getAttrClassConfigMinValue(ac, path)), null));
+              String _attrClassConfigMinValue = this.dataConfigExt.getAttrClassConfigMinValue(ac, path);
+              String _temp = (temp = _attrClassConfigMinValue);
+              boolean _notEquals = (!Objects.equal(_temp, null));
               if (_notEquals) {
                 _builder.append("public static ");
                 String _minMaxType = this.getMinMaxType(((PrimitiveType)aType));
@@ -432,7 +430,9 @@ public class ConfigGenAddon {
               }
             }
             {
-              boolean _notEquals_1 = (!Objects.equal((temp = this.dataConfigExt.getAttrClassConfigMaxValue(ac, path)), null));
+              String _attrClassConfigMaxValue = this.dataConfigExt.getAttrClassConfigMaxValue(ac, path);
+              String _temp_1 = (temp = _attrClassConfigMaxValue);
+              boolean _notEquals_1 = (!Objects.equal(_temp_1, null));
               if (_notEquals_1) {
                 _builder.append("public static ");
                 String _minMaxType_1 = this.getMinMaxType(((PrimitiveType)aType));
@@ -460,11 +460,9 @@ public class ConfigGenAddon {
     String _switchResult = null;
     String _typeName = this.typeHelpers.typeName(type);
     boolean _matched = false;
-    if (!_matched) {
-      if (Objects.equal(_typeName, "byte")) {
-        _matched=true;
-        _switchResult = "int";
-      }
+    if (Objects.equal(_typeName, "byte")) {
+      _matched=true;
+      _switchResult = "int";
     }
     if (!_matched) {
       if (Objects.equal(_typeName, "short")) {

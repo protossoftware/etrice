@@ -70,7 +70,8 @@ import org.eclipse.ui.forms.widgets.Form;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.xtext.resource.IEObjectDescription;
 
-
+// note: the FormDialog of org.eclipse.ui.forms.source_3.7.0 requires JavaSE-1.8
+// therefore we need to set the BREE of this plug-in also to Java 8
 public abstract class AbstractPropertyDialog extends FormDialog {
 	
 	private class GlobalStatus extends ComputedValue {

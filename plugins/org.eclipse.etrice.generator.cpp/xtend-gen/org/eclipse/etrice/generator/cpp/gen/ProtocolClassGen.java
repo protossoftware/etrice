@@ -88,6 +88,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
   public void doGenerate(final Root root) {
     EList<ProtocolClass> _usedProtocolClasses = root.getUsedProtocolClasses();
     final Function1<ProtocolClass, Boolean> _function = new Function1<ProtocolClass, Boolean>() {
+      @Override
       public Boolean apply(final ProtocolClass cl) {
         return Boolean.valueOf(ProtocolClassGen.this._fileSystemHelpers.isValidGenerationLocation(cl));
       }
@@ -925,6 +926,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       if (_notEquals) {
         EList<Attribute> _attributes = pc.getAttributes();
         final Function1<Attribute, String> _function = new Function1<Attribute, String>() {
+          @Override
           public String apply(final Attribute it) {
             StringConcatenation _builder = new StringConcatenation();
             String _name = it.getName();
@@ -1146,6 +1148,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     {
       List<Message> _allIncomingMessages = this._roomHelpers.getAllIncomingMessages(pc);
       final Function1<Message, Boolean> _function = new Function1<Message, Boolean>() {
+        @Override
         public Boolean apply(final Message m) {
           VarDecl _data = m.getData();
           return Boolean.valueOf((!Objects.equal(_data, null)));
@@ -1381,6 +1384,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     {
       List<Message> _allIncomingMessages = this._roomHelpers.getAllIncomingMessages(pc);
       final Function1<Message, Boolean> _function = new Function1<Message, Boolean>() {
+        @Override
         public Boolean apply(final Message m) {
           VarDecl _data = m.getData();
           return Boolean.valueOf((!Objects.equal(_data, null)));
@@ -1545,6 +1549,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     return _xblockexpression;
   }
   
+  @Override
   public String getMessageID(final Message msg, final InterfaceItem item) {
     if ((item instanceof Port)) {
       Port p = ((Port) item);

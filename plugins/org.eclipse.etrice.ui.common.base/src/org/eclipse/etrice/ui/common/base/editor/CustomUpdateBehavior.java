@@ -24,10 +24,9 @@ import org.eclipse.emf.transaction.impl.TransactionalEditingDomainImpl;
 import org.eclipse.emf.workspace.IWorkspaceCommandStack;
 import org.eclipse.emf.workspace.WorkspaceEditingDomainFactory;
 import org.eclipse.etrice.core.fsm.ui.FSMUiModule;
-import org.eclipse.etrice.ui.common.base.editor.CustomResourceSetProvider;
-import org.eclipse.etrice.ui.common.base.editor.IInputUriHolder;
 import org.eclipse.graphiti.ui.editor.DefaultUpdateBehavior;
 import org.eclipse.graphiti.ui.editor.DiagramBehavior;
+import org.eclipse.graphiti.ui.editor.IDiagramEditorInput;
 import org.eclipse.graphiti.ui.internal.editor.GFWorkspaceCommandStackImpl;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
@@ -57,7 +56,7 @@ public class CustomUpdateBehavior extends DefaultUpdateBehavior {
 	 * @see org.eclipse.graphiti.ui.editor.DefaultUpdateBehavior#createEditingDomain()
 	 */
 	@Override
-	protected void createEditingDomain() {
+	protected void createEditingDomain(IDiagramEditorInput input) {
 		ResourceSet resourceSet;
 		if (diagramBehavior.getDiagramContainer() instanceof IInputUriHolder) {
 			URI uri = ((IInputUriHolder)diagramBehavior.getDiagramContainer()).getInputUri();

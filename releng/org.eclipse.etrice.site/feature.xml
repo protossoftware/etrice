@@ -39,14 +39,6 @@ http://www.eclipse.org/legal/epl-v10.html
          version="0.0.0"/>
 
    <includes
-         id="org.eclipse.etrice.layout.feature"
-         version="0.0.0"/>
-
-   <includes
-         id="org.eclipse.etrice.kieler.feature"
-         version="0.0.0"/>
-
-   <includes
          id="org.eclipse.etrice.cdt-integration.feature"
          version="0.0.0"/>
 

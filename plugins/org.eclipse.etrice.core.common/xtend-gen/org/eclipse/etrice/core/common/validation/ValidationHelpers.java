@@ -77,6 +77,7 @@ public class ValidationHelpers {
   public static class NamedObjectList extends ArrayList<ValidationHelpers.NamedObject> {
     public void addAll(final List<? extends EObject> items, final EStructuralFeature feature) {
       final Procedure1<EObject> _function = new Procedure1<EObject>() {
+        @Override
         public void apply(final EObject it) {
           Object _eGet = it.eGet(feature);
           ValidationHelpers.NamedObject _namedObject = new ValidationHelpers.NamedObject(((String) _eGet), it, feature);
@@ -104,6 +105,7 @@ public class ValidationHelpers {
         }
       }
       final Function1<ValidationHelpers.NamedObject, Boolean> _function = new Function1<ValidationHelpers.NamedObject, Boolean>() {
+        @Override
         public Boolean apply(final ValidationHelpers.NamedObject i) {
           String _name = i.getName();
           return Boolean.valueOf(duplicateNames.contains(_name));
@@ -116,6 +118,7 @@ public class ValidationHelpers {
   
   public static Iterable<ValidationHelpers.NamedObject> inSameResource(final Iterable<ValidationHelpers.NamedObject> items, final Resource resource) {
     final Function1<ValidationHelpers.NamedObject, Boolean> _function = new Function1<ValidationHelpers.NamedObject, Boolean>() {
+      @Override
       public Boolean apply(final ValidationHelpers.NamedObject i) {
         EObject _obj = i.getObj();
         Resource _eResource = _obj.eResource();

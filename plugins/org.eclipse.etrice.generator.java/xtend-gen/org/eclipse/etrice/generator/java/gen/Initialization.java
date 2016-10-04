@@ -89,28 +89,26 @@ public class Initialization {
       DataType aType = _type.getType();
       CharSequence _switchResult = null;
       boolean _matched = false;
-      if (!_matched) {
-        RefableType _type_1 = a.getType();
-        boolean _isRef = _type_1.isRef();
-        if (_isRef) {
-          _matched=true;
-          CharSequence _xifexpression = null;
-          String _defaultValueLiteral = a.getDefaultValueLiteral();
-          boolean _notEquals = (!Objects.equal(_defaultValueLiteral, null));
-          if (_notEquals) {
-            String _defaultValueLiteral_1 = a.getDefaultValueLiteral();
-            _xifexpression = this.attributeInit(a, _defaultValueLiteral_1);
-          } else {
-            CharSequence _xifexpression_1 = null;
-            boolean _needsInitialization = this.languageExt.needsInitialization(a);
-            if (_needsInitialization) {
-              String _nullPointer = this.languageExt.nullPointer();
-              _xifexpression_1 = this.attributeInit(a, _nullPointer);
-            }
-            _xifexpression = _xifexpression_1;
+      RefableType _type_1 = a.getType();
+      boolean _isRef = _type_1.isRef();
+      if (_isRef) {
+        _matched=true;
+        CharSequence _xifexpression = null;
+        String _defaultValueLiteral = a.getDefaultValueLiteral();
+        boolean _notEquals = (!Objects.equal(_defaultValueLiteral, null));
+        if (_notEquals) {
+          String _defaultValueLiteral_1 = a.getDefaultValueLiteral();
+          _xifexpression = this.attributeInit(a, _defaultValueLiteral_1);
+        } else {
+          CharSequence _xifexpression_1 = null;
+          boolean _needsInitialization = this.languageExt.needsInitialization(a);
+          if (_needsInitialization) {
+            String _nullPointer = this.languageExt.nullPointer();
+            _xifexpression_1 = this.attributeInit(a, _nullPointer);
           }
-          _switchResult = _xifexpression;
+          _xifexpression = _xifexpression_1;
         }
+        _switchResult = _xifexpression;
       }
       if (!_matched) {
         if (aType instanceof PrimitiveType) {
@@ -132,14 +130,8 @@ public class Initialization {
               _xifexpression_2 = this.attributeInit(a, _valueLiteral);
             } else {
               CharSequence _xifexpression_3 = null;
-              boolean _or = false;
-              if ((!useClassDefaultsOnly)) {
-                _or = true;
-              } else {
-                boolean _needsInitialization_1 = this.languageExt.needsInitialization(a);
-                _or = _needsInitialization_1;
-              }
-              if (_or) {
+              if (((!useClassDefaultsOnly) || 
+                this.languageExt.needsInitialization(a))) {
                 String _defaultValue = this.languageExt.defaultValue(aType);
                 _xifexpression_3 = this.attributeInit(a, _defaultValue);
               }
@@ -170,14 +162,8 @@ public class Initialization {
               _xifexpression_2 = this.attributeInit(a, _enumLiteral);
             } else {
               CharSequence _xifexpression_3 = null;
-              boolean _or = false;
-              if ((!useClassDefaultsOnly)) {
-                _or = true;
-              } else {
-                boolean _needsInitialization_1 = this.languageExt.needsInitialization(a);
-                _or = _needsInitialization_1;
-              }
-              if (_or) {
+              if (((!useClassDefaultsOnly) || 
+                this.languageExt.needsInitialization(a))) {
                 String _defaultValue = this.languageExt.defaultValue(aType);
                 _xifexpression_3 = this.attributeInit(a, _defaultValue);
               }
@@ -202,21 +188,19 @@ public class Initialization {
     RefableType _type = a.getType();
     DataType aType = _type.getType();
     boolean _matched = false;
-    if (!_matched) {
-      if (aType instanceof DataClass) {
-        _matched=true;
-        StringConcatenation _builder = new StringConcatenation();
-        {
-          List<Attribute> _allAttributes = this._roomHelpers.getAllAttributes(((DataClass) aType));
-          for(final Attribute e : _allAttributes) {
-            List<Attribute> _union = this._roomExtensions.<Attribute>union(path, e);
-            CharSequence _attributeInitPrimitiveRec = this.attributeInitPrimitiveRec(_union, roomClass);
-            _builder.append(_attributeInitPrimitiveRec, "");
-            _builder.newLineIfNotEmpty();
-          }
+    if (aType instanceof DataClass) {
+      _matched=true;
+      StringConcatenation _builder = new StringConcatenation();
+      {
+        List<Attribute> _allAttributes = this._roomHelpers.getAllAttributes(((DataClass) aType));
+        for(final Attribute e : _allAttributes) {
+          List<Attribute> _union = this._roomExtensions.<Attribute>union(path, e);
+          CharSequence _attributeInitPrimitiveRec = this.attributeInitPrimitiveRec(_union, roomClass);
+          _builder.append(_attributeInitPrimitiveRec, "");
+          _builder.newLineIfNotEmpty();
         }
-        return _builder;
       }
+      return _builder;
     }
     if (!_matched) {
       if (aType instanceof PrimitiveType) {
@@ -278,33 +262,7 @@ public class Initialization {
       DataType aType = _type.getType();
       StringConcatenation _builder = new StringConcatenation();
       {
-        boolean _or = false;
-        int _size = a.getSize();
-        boolean _equals = (_size == 0);
-        if (_equals) {
-          _or = true;
-        } else {
-          boolean _and = false;
-          boolean _and_1 = false;
-          int _size_1 = a.getSize();
-          boolean _greaterThan = (_size_1 > 0);
-          if (!_greaterThan) {
-            _and_1 = false;
-          } else {
-            String _typeName = this.typeHelpers.typeName(aType);
-            boolean _equals_1 = "char".equals(_typeName);
-            _and_1 = _equals_1;
-          }
-          if (!_and_1) {
-            _and = false;
-          } else {
-            boolean _matches = value.matches("\'.\'|\\(char\\).*");
-            boolean _not = (!_matches);
-            _and = _not;
-          }
-          _or = _and;
-        }
-        if (_or) {
+        if (((a.getSize() == 0) || (((a.getSize() > 0) && "char".equals(this.typeHelpers.typeName(aType))) && (!value.matches("\'.\'|\\(char\\).*"))))) {
           _builder.append(invokes, "");
           _builder.append(".");
           String _name = a.getName();
@@ -313,47 +271,27 @@ public class Initialization {
           _builder.append(";");
           _builder.newLineIfNotEmpty();
         } else {
-          boolean _or_1 = false;
-          String _trim = value.trim();
-          boolean _startsWith = _trim.startsWith("{");
-          boolean _not_1 = (!_startsWith);
-          if (_not_1) {
-            _or_1 = true;
-          } else {
-            String _typeName_1 = this.typeHelpers.typeName(aType);
-            boolean _equals_2 = "char".equals(_typeName_1);
-            _or_1 = _equals_2;
-          }
-          if (_or_1) {
+          if (((!value.trim().startsWith("{")) || "char".equals(this.typeHelpers.typeName(aType)))) {
             _builder.append("{");
             _builder.newLine();
             _builder.append("\t");
-            String _typeName_2 = this.typeHelpers.typeName(aType);
-            _builder.append(_typeName_2, "\t");
+            String _typeName = this.typeHelpers.typeName(aType);
+            _builder.append(_typeName, "\t");
             _builder.append("[] array = new ");
-            String _typeName_3 = this.typeHelpers.typeName(aType);
-            _builder.append(_typeName_3, "\t");
+            String _typeName_1 = this.typeHelpers.typeName(aType);
+            _builder.append(_typeName_1, "\t");
             _builder.append("[");
-            int _size_2 = a.getSize();
-            _builder.append(_size_2, "\t");
+            int _size = a.getSize();
+            _builder.append(_size, "\t");
             _builder.append("];");
             _builder.newLineIfNotEmpty();
             {
-              boolean _and_2 = false;
-              RefableType _type_1 = a.getType();
-              boolean _isRef = _type_1.isRef();
-              if (!_isRef) {
-                _and_2 = false;
-              } else {
-                boolean _isPrimitive = this.typeHelpers.isPrimitive(aType);
-                _and_2 = _isPrimitive;
-              }
-              boolean _not_2 = (!_and_2);
-              if (_not_2) {
+              boolean _not = (!(a.getType().isRef() && this.typeHelpers.isPrimitive(aType)));
+              if (_not) {
                 _builder.append("\t");
                 _builder.append("for (int i=0;i<");
-                int _size_3 = a.getSize();
-                _builder.append(_size_3, "\t");
+                int _size_1 = a.getSize();
+                _builder.append(_size_1, "\t");
                 _builder.append(";i++){");
                 _builder.newLineIfNotEmpty();
                 _builder.append("\t");
@@ -383,8 +321,8 @@ public class Initialization {
             String _name_2 = a.getName();
             StringConcatenation _builder_1 = new StringConcatenation();
             _builder_1.append("new ");
-            String _typeName_4 = this.typeHelpers.typeName(aType);
-            _builder_1.append(_typeName_4, "");
+            String _typeName_2 = this.typeHelpers.typeName(aType);
+            _builder_1.append(_typeName_2, "");
             _builder_1.append("[] ");
             _builder_1.append(value, "");
             CharSequence _invokeSetter_2 = this.procedureHelpers.invokeSetter(_name_2, null, _builder_1.toString());
@@ -402,11 +340,9 @@ public class Initialization {
   private String getDataConfigValue(final List<Attribute> path, final EObject roomClass) {
     String _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (roomClass instanceof ActorClass) {
-        _matched=true;
-        _switchResult = this.typeHelpers.getAttrClassConfigValue(path, ((ActorClass)roomClass), false);
-      }
+    if (roomClass instanceof ActorClass) {
+      _matched=true;
+      _switchResult = this.typeHelpers.getAttrClassConfigValue(path, ((ActorClass)roomClass), false);
     }
     if (!_matched) {
       if (roomClass instanceof PortClass) {

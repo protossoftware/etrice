@@ -61,16 +61,19 @@ public class DataConfiguration implements IDataConfiguration {
   @Inject
   protected ImportUriResolver uriResolver;
   
+  @Override
   public void doSetup() {
     if ((!EMFPlugin.IS_ECLIPSE_RUNNING)) {
       ConfigStandaloneSetup.doSetup();
     }
   }
   
+  @Override
   public boolean setResources(final ResourceSet resource, final ILogger logger) {
     return this._dataConfigurationHelper.setConfigModels(resource, logger);
   }
   
+  @Override
   public String getAttrClassConfigValue(final ActorClass actor, final List<Attribute> path) {
     AttrClassConfig _attrClassConfig = this.getAttrClassConfig(actor, path);
     ConfigValueArray _value = null;
@@ -84,6 +87,7 @@ public class DataConfiguration implements IDataConfiguration {
     return _stringExpr;
   }
   
+  @Override
   public String getAttrClassConfigMaxValue(final ActorClass actor, final List<Attribute> path) {
     AttrClassConfig _attrClassConfig = this.getAttrClassConfig(actor, path);
     NumberLiteral _max = null;
@@ -97,6 +101,7 @@ public class DataConfiguration implements IDataConfiguration {
     return _stringExpr;
   }
   
+  @Override
   public String getAttrClassConfigMinValue(final ActorClass actor, final List<Attribute> path) {
     AttrClassConfig _attrClassConfig = this.getAttrClassConfig(actor, path);
     NumberLiteral _min = null;
@@ -126,6 +131,7 @@ public class DataConfiguration implements IDataConfiguration {
     return _xblockexpression;
   }
   
+  @Override
   public String getAttrClassConfigValue(final ProtocolClass pc, final boolean regular, final List<Attribute> path) {
     String _xblockexpression = null;
     {
@@ -176,6 +182,7 @@ public class DataConfiguration implements IDataConfiguration {
     return _builder.toString();
   }
   
+  @Override
   public String getAttrInstanceConfigValue(final ActorInstance ai, final List<Attribute> path) {
     String _xblockexpression = null;
     {
@@ -197,6 +204,7 @@ public class DataConfiguration implements IDataConfiguration {
     return _xblockexpression;
   }
   
+  @Override
   public String getAttrInstanceConfigValue(final InterfaceItemInstance item, final List<Attribute> path) {
     String _path = item.getPath();
     String _plus = (_path + "/");
@@ -214,6 +222,7 @@ public class DataConfiguration implements IDataConfiguration {
     return _stringExpr;
   }
   
+  @Override
   public long getPollingTimerUser(final SubSystemInstance subsystem) {
     long _xblockexpression = (long) 0;
     {
@@ -235,6 +244,7 @@ public class DataConfiguration implements IDataConfiguration {
     return _xblockexpression;
   }
   
+  @Override
   public String getUserCode1(final SubSystemInstance subsystem) {
     SubSystemConfig _config = this.getConfig(subsystem);
     DynamicConfig _dynConfig = null;
@@ -260,6 +270,7 @@ public class DataConfiguration implements IDataConfiguration {
     return _xifexpression;
   }
   
+  @Override
   public String getUserCode2(final SubSystemInstance subsystem) {
     SubSystemConfig _config = this.getConfig(subsystem);
     DynamicConfig _dynConfig = null;
@@ -290,12 +301,14 @@ public class DataConfiguration implements IDataConfiguration {
     return _xifexpression;
   }
   
+  @Override
   public List<Attribute> getDynConfigReadAttributes(final ActorInstance ai) {
     final ArrayList<Attribute> result = new ArrayList<Attribute>();
     String _path = ai.getPath();
     List<AttrInstanceConfig> configs = this._dataConfigurationHelper.dynActorInstanceAttrMap.get(_path);
     if (configs!=null) {
       final Procedure1<AttrInstanceConfig> _function = new Procedure1<AttrInstanceConfig>() {
+        @Override
         public void apply(final AttrInstanceConfig c) {
           boolean _isReadOnly = c.isReadOnly();
           if (_isReadOnly) {
@@ -309,12 +322,14 @@ public class DataConfiguration implements IDataConfiguration {
     return result;
   }
   
+  @Override
   public List<Attribute> getDynConfigWriteAttributes(final ActorInstance ai) {
     final ArrayList<Attribute> result = new ArrayList<Attribute>();
     String _path = ai.getPath();
     List<AttrInstanceConfig> configs = this._dataConfigurationHelper.dynActorInstanceAttrMap.get(_path);
     if (configs!=null) {
       final Procedure1<AttrInstanceConfig> _function = new Procedure1<AttrInstanceConfig>() {
+        @Override
         public void apply(final AttrInstanceConfig c) {
           boolean _isReadOnly = c.isReadOnly();
           boolean _not = (!_isReadOnly);
@@ -329,6 +344,7 @@ public class DataConfiguration implements IDataConfiguration {
     return result;
   }
   
+  @Override
   public boolean hasVariableService(final SubSystemInstance subsystem) {
     SubSystemConfig _config = this.getConfig(subsystem);
     DynamicConfig _dynConfig = null;
@@ -359,12 +375,10 @@ public class DataConfiguration implements IDataConfiguration {
   private String toStringExpr(final ConfigValue configValue) {
     String _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (configValue instanceof LiteralConfigValue) {
-        _matched=true;
-        Literal _value = ((LiteralConfigValue)configValue).getValue();
-        _switchResult = this.toStringExpr(_value);
-      }
+    if (configValue instanceof LiteralConfigValue) {
+      _matched=true;
+      Literal _value = ((LiteralConfigValue)configValue).getValue();
+      _switchResult = this.toStringExpr(_value);
     }
     if (!_matched) {
       if (configValue instanceof EnumConfigValue) {
@@ -379,12 +393,10 @@ public class DataConfiguration implements IDataConfiguration {
   private String toStringExpr(final Literal literal) {
     String _switchResult = null;
     boolean _matched = false;
-    if (!_matched) {
-      if (literal instanceof BooleanLiteral) {
-        _matched=true;
-        boolean _isIsTrue = ((BooleanLiteral)literal).isIsTrue();
-        _switchResult = Boolean.valueOf(_isIsTrue).toString();
-      }
+    if (literal instanceof BooleanLiteral) {
+      _matched=true;
+      boolean _isIsTrue = ((BooleanLiteral)literal).isIsTrue();
+      _switchResult = Boolean.valueOf(_isIsTrue).toString();
     }
     if (!_matched) {
       if (literal instanceof IntLiteral) {
@@ -415,11 +427,13 @@ public class DataConfiguration implements IDataConfiguration {
     return this._dataConfigurationHelper.subSystemConfigMap.get(_path);
   }
   
+  @Override
   public List<Attribute> getDynConfigReadAttributes(final ActorClass actor) {
     final HashSet<Attribute> result = new HashSet<Attribute>();
     final List<AttrInstanceConfig> configs = this._dataConfigurationHelper.dynActorClassAttrMap.get(actor);
     if (configs!=null) {
       final Procedure1<AttrInstanceConfig> _function = new Procedure1<AttrInstanceConfig>() {
+        @Override
         public void apply(final AttrInstanceConfig c) {
           boolean _isReadOnly = c.isReadOnly();
           if (_isReadOnly) {
@@ -433,11 +447,13 @@ public class DataConfiguration implements IDataConfiguration {
     return IterableExtensions.<Attribute>toList(result);
   }
   
+  @Override
   public List<Attribute> getDynConfigWriteAttributes(final ActorClass actor) {
     final HashSet<Attribute> result = new HashSet<Attribute>();
     final List<AttrInstanceConfig> configs = this._dataConfigurationHelper.dynActorClassAttrMap.get(actor);
     if (configs!=null) {
       final Procedure1<AttrInstanceConfig> _function = new Procedure1<AttrInstanceConfig>() {
+        @Override
         public void apply(final AttrInstanceConfig c) {
           boolean _isReadOnly = c.isReadOnly();
           boolean _not = (!_isReadOnly);

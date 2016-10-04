@@ -117,11 +117,13 @@ public class GenericStateMachineGenerator extends AbstractStateMachineGenerator 
    * @param xpmc an expanded actor class
    * @return the generated code
    */
+  @Override
   public String guard(final TriggeredTransition tt, final String trigger, final ExpandedModelComponent mc) {
     String _xblockexpression = null;
     {
       EList<Trigger> _triggers = tt.getTriggers();
       final Function1<Trigger, Boolean> _function = new Function1<Trigger, Boolean>() {
+        @Override
         public Boolean apply(final Trigger e) {
           return Boolean.valueOf(mc.isMatching(e, trigger));
         }
@@ -145,6 +147,7 @@ public class GenericStateMachineGenerator extends AbstractStateMachineGenerator 
     return _xblockexpression;
   }
   
+  @Override
   public String guard(final GuardedTransition tt, final String trigger, final ExpandedModelComponent mc) {
     StringConcatenation _builder = new StringConcatenation();
     DetailCode _guard = tt.getGuard();
@@ -154,32 +157,17 @@ public class GenericStateMachineGenerator extends AbstractStateMachineGenerator 
     return _builder.toString();
   }
   
+  @Override
   public String genActionCodeMethod(final ExpandedModelComponent xpmc, final Transition tr, final boolean generateImplementation) {
     String _xblockexpression = null;
     {
       EList<TransitionChain> chain = xpmc.getChains(tr);
-      boolean _and = false;
-      boolean _isEmpty = chain.isEmpty();
-      boolean _not = (!_isEmpty);
-      if (!_not) {
-        _and = false;
-      } else {
-        final Function1<TransitionChain, Boolean> _function = new Function1<TransitionChain, Boolean>() {
-          public Boolean apply(final TransitionChain it) {
-            boolean _and = false;
-            Transition _transition = it.getTransition();
-            if (!(_transition instanceof NonInitialTransition)) {
-              _and = false;
-            } else {
-              _and = (!(it.getTransition() instanceof GuardedTransition));
-            }
-            return Boolean.valueOf(_and);
-          }
-        };
-        boolean _forall = IterableExtensions.<TransitionChain>forall(chain, _function);
-        _and = _forall;
-      }
-      boolean hasArgs = _and;
+      boolean hasArgs = ((!chain.isEmpty()) && IterableExtensions.<TransitionChain>forall(chain, new Function1<TransitionChain, Boolean>() {
+        @Override
+        public Boolean apply(final TransitionChain it) {
+          return Boolean.valueOf(((it.getTransition() instanceof NonInitialTransition) && (!(it.getTransition() instanceof GuardedTransition))));
+        }
+      }));
       String _className = this.getClassName(xpmc);
       final String opScope = this.langExt.operationScope(_className, false);
       String _xifexpression = null;
@@ -269,6 +257,7 @@ public class GenericStateMachineGenerator extends AbstractStateMachineGenerator 
    * @param generateImplementation if only declarations should be generated then <code>false</code> has to be passed
    * @return the generated code
    */
+  @Override
   public String genActionCodeMethods(final ExpandedModelComponent xpmc, final State state, final boolean generateImplementation) {
     String _xblockexpression = null;
     {

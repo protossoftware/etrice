@@ -560,27 +560,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
           String typeName = _xifexpression_1;
           _builder.newLineIfNotEmpty();
           String _xifexpression_2 = null;
-          boolean _and = false;
-          if (!hasData) {
-            _and = false;
-          } else {
-            boolean _or = false;
-            VarDecl _data_2 = message.getData();
-            RefableType _refType_1 = _data_2.getRefType();
-            DataType _type_1 = _refType_1.getType();
-            boolean _isEnumerationOrPrimitive = this._typeHelpers.isEnumerationOrPrimitive(_type_1);
-            boolean _not_1 = (!_isEnumerationOrPrimitive);
-            if (_not_1) {
-              _or = true;
-            } else {
-              VarDecl _data_3 = message.getData();
-              RefableType _refType_2 = _data_3.getRefType();
-              boolean _isRef = _refType_2.isRef();
-              _or = _isRef;
-            }
-            _and = _or;
-          }
-          if (_and) {
+          if ((hasData && ((!this._typeHelpers.isEnumerationOrPrimitive(message.getData().getRefType().getType())) || message.getData().getRefType().isRef()))) {
             _xifexpression_2 = "*";
           } else {
             _xifexpression_2 = "";
@@ -661,6 +641,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     {
       List<Message> _allIncomingMessages = this._roomHelpers.getAllIncomingMessages(pc);
       final Function1<Message, Boolean> _function = new Function1<Message, Boolean>() {
+        @Override
         public Boolean apply(final Message m) {
           VarDecl _data = m.getData();
           return Boolean.valueOf((!Objects.equal(_data, null)));
@@ -668,6 +649,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       };
       Iterable<Message> sentMsgs = IterableExtensions.<Message>filter(_allIncomingMessages, _function);
       final Function1<Message, Boolean> _function_1 = new Function1<Message, Boolean>() {
+        @Override
         public Boolean apply(final Message m) {
           VarDecl _data = m.getData();
           RefableType _refType = _data.getRefType();
@@ -677,6 +659,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       };
       final Iterable<Message> enumMsgs = IterableExtensions.<Message>filter(sentMsgs, _function_1);
       final Function1<Message, Boolean> _function_2 = new Function1<Message, Boolean>() {
+        @Override
         public Boolean apply(final Message m) {
           VarDecl _data = m.getData();
           RefableType _refType = _data.getRefType();
@@ -685,24 +668,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
         }
       };
       final Iterable<Message> boolMsgs = IterableExtensions.<Message>filter(sentMsgs, _function_2);
-      boolean _and = false;
-      GlobalGeneratorSettings _settings = Main.getSettings();
-      boolean _isGenerateMSCInstrumentation = _settings.isGenerateMSCInstrumentation();
-      if (!_isGenerateMSCInstrumentation) {
-        _and = false;
-      } else {
-        boolean _and_1 = false;
-        boolean _isEmpty = IterableExtensions.isEmpty(enumMsgs);
-        if (!_isEmpty) {
-          _and_1 = false;
-        } else {
-          boolean _isEmpty_1 = IterableExtensions.isEmpty(boolMsgs);
-          _and_1 = _isEmpty_1;
-        }
-        boolean _not = (!_and_1);
-        _and = _not;
-      }
-      final boolean usesMSC = _and;
+      final boolean usesMSC = (Main.getSettings().isGenerateMSCInstrumentation() && (!(IterableExtensions.isEmpty(enumMsgs) && IterableExtensions.isEmpty(boolMsgs))));
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("/* data driven send port (conjugated) */");
       _builder.newLine();
@@ -883,18 +849,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
           String typeName_3 = _xifexpression_3;
           _builder.newLineIfNotEmpty();
           String _xifexpression_4 = null;
-          boolean _and_2 = false;
-          if (!hasData) {
-            _and_2 = false;
-          } else {
-            VarDecl _data_8 = message.getData();
-            RefableType _refType_7 = _data_8.getRefType();
-            DataType _type_4 = _refType_7.getType();
-            boolean _isEnumerationOrPrimitive = this._typeHelpers.isEnumerationOrPrimitive(_type_4);
-            boolean _not_1 = (!_isEnumerationOrPrimitive);
-            _and_2 = _not_1;
-          }
-          if (_and_2) {
+          if ((hasData && (!this._typeHelpers.isEnumerationOrPrimitive(message.getData().getRefType().getType())))) {
             _xifexpression_4 = "*";
           } else {
             _xifexpression_4 = "";
@@ -934,6 +889,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     {
       List<Message> _allIncomingMessages = this._roomHelpers.getAllIncomingMessages(pc);
       final Function1<Message, Boolean> _function = new Function1<Message, Boolean>() {
+        @Override
         public Boolean apply(final Message m) {
           VarDecl _data = m.getData();
           return Boolean.valueOf((!Objects.equal(_data, null)));
@@ -941,6 +897,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       };
       Iterable<Message> messages = IterableExtensions.<Message>filter(_allIncomingMessages, _function);
       final Function1<Message, Boolean> _function_1 = new Function1<Message, Boolean>() {
+        @Override
         public Boolean apply(final Message m) {
           VarDecl _data = m.getData();
           RefableType _refType = _data.getRefType();
@@ -950,6 +907,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       };
       final Iterable<Message> enumMsgs = IterableExtensions.<Message>filter(messages, _function_1);
       final Function1<Message, Boolean> _function_2 = new Function1<Message, Boolean>() {
+        @Override
         public Boolean apply(final Message m) {
           VarDecl _data = m.getData();
           RefableType _refType = _data.getRefType();
@@ -958,24 +916,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
         }
       };
       final Iterable<Message> boolMsgs = IterableExtensions.<Message>filter(messages, _function_2);
-      boolean _and = false;
-      GlobalGeneratorSettings _settings = Main.getSettings();
-      boolean _isGenerateMSCInstrumentation = _settings.isGenerateMSCInstrumentation();
-      if (!_isGenerateMSCInstrumentation) {
-        _and = false;
-      } else {
-        boolean _and_1 = false;
-        boolean _isEmpty = IterableExtensions.isEmpty(enumMsgs);
-        if (!_isEmpty) {
-          _and_1 = false;
-        } else {
-          boolean _isEmpty_1 = IterableExtensions.isEmpty(boolMsgs);
-          _and_1 = _isEmpty_1;
-        }
-        boolean _not = (!_and_1);
-        _and = _not;
-      }
-      final boolean usesMSC = _and;
+      final boolean usesMSC = (Main.getSettings().isGenerateMSCInstrumentation() && (!(IterableExtensions.isEmpty(enumMsgs) && IterableExtensions.isEmpty(boolMsgs))));
       StringConcatenation _builder = new StringConcatenation();
       {
         for(final Message message : messages) {
@@ -989,8 +930,8 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
           RefableType _refType_1 = _data_1.getRefType();
           DataType _type_1 = _refType_1.getType();
           boolean _isEnumerationOrPrimitive = this._typeHelpers.isEnumerationOrPrimitive(_type_1);
-          boolean _not_1 = (!_isEnumerationOrPrimitive);
-          if (_not_1) {
+          boolean _not = (!_isEnumerationOrPrimitive);
+          if (_not) {
             _xifexpression = "*";
           } else {
             _xifexpression = "";
@@ -1006,19 +947,12 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
           _builder.append(" {");
           _builder.newLineIfNotEmpty();
           {
-            boolean _and_2 = false;
-            if (!usesMSC) {
-              _and_2 = false;
-            } else {
-              final Function1<Message, Boolean> _function_3 = new Function1<Message, Boolean>() {
-                public Boolean apply(final Message m) {
-                  return Boolean.valueOf(Objects.equal(m, message));
-                }
-              };
-              boolean _exists = IterableExtensions.<Message>exists(enumMsgs, _function_3);
-              _and_2 = _exists;
-            }
-            if (_and_2) {
+            if ((usesMSC && IterableExtensions.<Message>exists(enumMsgs, new Function1<Message, Boolean>() {
+              @Override
+              public Boolean apply(final Message m) {
+                return Boolean.valueOf(Objects.equal(m, message));
+              }
+            }))) {
               _builder.append("\t");
               _builder.append("#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE");
               _builder.newLine();
@@ -1068,19 +1002,12 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
             }
           }
           {
-            boolean _and_3 = false;
-            if (!usesMSC) {
-              _and_3 = false;
-            } else {
-              final Function1<Message, Boolean> _function_4 = new Function1<Message, Boolean>() {
-                public Boolean apply(final Message m) {
-                  return Boolean.valueOf(Objects.equal(m, message));
-                }
-              };
-              boolean _exists_1 = IterableExtensions.<Message>exists(boolMsgs, _function_4);
-              _and_3 = _exists_1;
-            }
-            if (_and_3) {
+            if ((usesMSC && IterableExtensions.<Message>exists(boolMsgs, new Function1<Message, Boolean>() {
+              @Override
+              public Boolean apply(final Message m) {
+                return Boolean.valueOf(Objects.equal(m, message));
+              }
+            }))) {
               _builder.append("\t");
               _builder.append("#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE");
               _builder.newLine();
@@ -1187,16 +1114,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
           String typeName = _xifexpression_2;
           _builder.newLineIfNotEmpty();
           String _xifexpression_3 = null;
-          boolean _and = false;
-          if (!hasData) {
-            _and = false;
-          } else {
-            VarDecl _data_2 = message.getData();
-            RefableType _refType_1 = _data_2.getRefType();
-            boolean _isRef = _refType_1.isRef();
-            _and = _isRef;
-          }
-          if (_and) {
+          if ((hasData && message.getData().getRefType().isRef())) {
             _xifexpression_3 = "*";
           } else {
             _xifexpression_3 = "";
@@ -1204,27 +1122,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
           String refp = _xifexpression_3;
           _builder.newLineIfNotEmpty();
           String _xifexpression_4 = null;
-          boolean _and_1 = false;
-          if (!hasData) {
-            _and_1 = false;
-          } else {
-            boolean _or = false;
-            VarDecl _data_3 = message.getData();
-            RefableType _refType_2 = _data_3.getRefType();
-            DataType _type_1 = _refType_2.getType();
-            boolean _isEnumerationOrPrimitive = this._typeHelpers.isEnumerationOrPrimitive(_type_1);
-            boolean _not = (!_isEnumerationOrPrimitive);
-            if (_not) {
-              _or = true;
-            } else {
-              VarDecl _data_4 = message.getData();
-              RefableType _refType_3 = _data_4.getRefType();
-              boolean _isRef_1 = _refType_3.isRef();
-              _or = _isRef_1;
-            }
-            _and_1 = _or;
-          }
-          if (_and_1) {
+          if ((hasData && ((!this._typeHelpers.isEnumerationOrPrimitive(message.getData().getRefType().getType())) || message.getData().getRefType().isRef()))) {
             _xifexpression_4 = "*";
           } else {
             _xifexpression_4 = "";
@@ -1232,28 +1130,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
           String refpd = _xifexpression_4;
           _builder.newLineIfNotEmpty();
           String _xifexpression_5 = null;
-          boolean _and_2 = false;
-          boolean _and_3 = false;
-          if (!hasData) {
-            _and_3 = false;
-          } else {
-            VarDecl _data_5 = message.getData();
-            RefableType _refType_4 = _data_5.getRefType();
-            DataType _type_2 = _refType_4.getType();
-            boolean _isEnumerationOrPrimitive_1 = this._typeHelpers.isEnumerationOrPrimitive(_type_2);
-            boolean _not_1 = (!_isEnumerationOrPrimitive_1);
-            _and_3 = _not_1;
-          }
-          if (!_and_3) {
-            _and_2 = false;
-          } else {
-            VarDecl _data_6 = message.getData();
-            RefableType _refType_5 = _data_6.getRefType();
-            boolean _isRef_2 = _refType_5.isRef();
-            boolean _not_2 = (!_isRef_2);
-            _and_2 = _not_2;
-          }
-          if (_and_2) {
+          if (((hasData && (!this._typeHelpers.isEnumerationOrPrimitive(message.getData().getRefType().getType()))) && (!message.getData().getRefType().isRef()))) {
             _xifexpression_5 = "";
           } else {
             _xifexpression_5 = "&";

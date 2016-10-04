@@ -34,10 +34,12 @@ public class DetailExpressionAssistParser {
   private final IDetailExpressionProvider provider;
   
   private final IWordDetector anyIdScanner = new IWordDetector() {
+    @Override
     public boolean isWordPart(final char c) {
       return Character.isJavaIdentifierPart(c);
     }
     
+    @Override
     public boolean isWordStart(final char c) {
       return Character.isJavaIdentifierStart(c);
     }
@@ -59,13 +61,11 @@ public class DetailExpressionAssistParser {
     char _char = this.document.getChar((offset - 1));
     String _string = Character.valueOf(_char).toString();
     boolean _matched = false;
-    if (!_matched) {
-      if (Objects.equal(_string, ")")) {
-        _matched=true;
-        postfixResult = IDetailExpressionProvider.ExpressionPostfix.PARENTHESES;
-        openingChar = '(';
-        closingChar = ')';
-      }
+    if (Objects.equal(_string, ")")) {
+      _matched=true;
+      postfixResult = IDetailExpressionProvider.ExpressionPostfix.PARENTHESES;
+      openingChar = '(';
+      closingChar = ')';
     }
     if (!_matched) {
       if (Objects.equal(_string, "]")) {
@@ -88,11 +88,9 @@ public class DetailExpressionAssistParser {
           start--;
           char _char_1 = this.document.getChar(start);
           boolean _matched_1 = false;
-          if (!_matched_1) {
-            if (Objects.equal(_char_1, openingChar)) {
-              _matched_1=true;
-              counter--;
-            }
+          if (Objects.equal(_char_1, openingChar)) {
+            _matched_1=true;
+            counter--;
           }
           if (!_matched_1) {
             if (Objects.equal(_char_1, closingChar)) {
@@ -174,6 +172,7 @@ public class DetailExpressionAssistParser {
     final IDetailExpressionProvider.ExpressionFeature firstParseResult = parsedFeatures.pop();
     List<IDetailExpressionProvider.ExpressionFeature> _initialFeatures = this.provider.getInitialFeatures();
     final Function1<IDetailExpressionProvider.ExpressionFeature, Boolean> _function = new Function1<IDetailExpressionProvider.ExpressionFeature, Boolean>() {
+      @Override
       public Boolean apply(final IDetailExpressionProvider.ExpressionFeature it) {
         return Boolean.valueOf(DetailExpressionAssistParser.this.matches(it, firstParseResult));
       }
@@ -184,6 +183,7 @@ public class DetailExpressionAssistParser {
         final IDetailExpressionProvider.ExpressionFeature nextParseResult = parsedFeatures.pop();
         List<IDetailExpressionProvider.ExpressionFeature> _contextFeatures = this.provider.getContextFeatures(lastMatch);
         final Function1<IDetailExpressionProvider.ExpressionFeature, Boolean> _function_1 = new Function1<IDetailExpressionProvider.ExpressionFeature, Boolean>() {
+          @Override
           public Boolean apply(final IDetailExpressionProvider.ExpressionFeature it) {
             return Boolean.valueOf(DetailExpressionAssistParser.this.matches(it, nextParseResult));
           }
@@ -199,34 +199,11 @@ public class DetailExpressionAssistParser {
    * non-empty id + not-null suffix
    */
   private boolean isValid(final IDetailExpressionProvider.ExpressionFeature feature) {
-    boolean _and = false;
-    String _id = feature.getId();
-    boolean _isEmpty = Strings.isEmpty(_id);
-    boolean _not = (!_isEmpty);
-    if (!_not) {
-      _and = false;
-    } else {
-      IDetailExpressionProvider.ExpressionPostfix _postfix = feature.getPostfix();
-      boolean _notEquals = (!Objects.equal(_postfix, null));
-      _and = _notEquals;
-    }
-    return _and;
+    return ((!Strings.isEmpty(feature.getId())) && (!Objects.equal(feature.getPostfix(), null)));
   }
   
   private boolean matches(final IDetailExpressionProvider.ExpressionFeature f1, final IDetailExpressionProvider.ExpressionFeature f2) {
-    boolean _and = false;
-    String _id = f1.getId();
-    String _id_1 = f2.getId();
-    boolean _equals = Objects.equal(_id, _id_1);
-    if (!_equals) {
-      _and = false;
-    } else {
-      IDetailExpressionProvider.ExpressionPostfix _postfix = f1.getPostfix();
-      IDetailExpressionProvider.ExpressionPostfix _postfix_1 = f2.getPostfix();
-      boolean _equals_1 = Objects.equal(_postfix, _postfix_1);
-      _and = _equals_1;
-    }
-    return _and;
+    return (Objects.equal(f1.getId(), f2.getId()) && Objects.equal(f1.getPostfix(), f2.getPostfix()));
   }
   
   public DetailExpressionAssistParser(final IDocument document, final int invocationOffset, final IDetailExpressionProvider provider) {

@@ -55,6 +55,7 @@ public class GnuplotScriptGenerator {
     SubSystemClass _subSystemClass = ssi.getSubSystemClass();
     EList<Annotation> _annotations = _subSystemClass.getAnnotations();
     final Function1<Annotation, Boolean> _function = new Function1<Annotation, Boolean>() {
+      @Override
       public Boolean apply(final Annotation a) {
         AnnotationType _type = a.getType();
         String _name = _type.getName();
@@ -111,6 +112,7 @@ public class GnuplotScriptGenerator {
   protected KeyValue getAttribute(final Annotation anno, final String name) {
     EList<KeyValue> _attributes = anno.getAttributes();
     final Function1<KeyValue, Boolean> _function = new Function1<KeyValue, Boolean>() {
+      @Override
       public Boolean apply(final KeyValue attr) {
         String _key = attr.getKey();
         return Boolean.valueOf(Objects.equal(_key, name));
@@ -170,6 +172,7 @@ public class GnuplotScriptGenerator {
       SubSystemClass _subSystemClass = ssi.getSubSystemClass();
       EList<Annotation> _annotations = _subSystemClass.getAnnotations();
       final Function1<Annotation, Boolean> _function = new Function1<Annotation, Boolean>() {
+        @Override
         public Boolean apply(final Annotation a) {
           AnnotationType _type = a.getType();
           String _name = _type.getName();
@@ -233,6 +236,7 @@ public class GnuplotScriptGenerator {
       SubSystemClass _subSystemClass_1 = ssi.getSubSystemClass();
       EList<Annotation> _annotations_1 = _subSystemClass_1.getAnnotations();
       final Function1<Annotation, Boolean> _function_1 = new Function1<Annotation, Boolean>() {
+        @Override
         public Boolean apply(final Annotation a) {
           AnnotationType _type = a.getType();
           String _name = _type.getName();

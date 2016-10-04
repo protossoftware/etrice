@@ -74,17 +74,17 @@ public class TestInstanceCreator {
       final ArrayList<PhysicalModel> physModels = CollectionLiterals.<PhysicalModel>newArrayList();
       EList<Resource> _resources = rs.getResources();
       final Procedure1<Resource> _function = new Procedure1<Resource>() {
+        @Override
         public void apply(final Resource it) {
           EList<EObject> _contents = it.getContents();
           final Function1<EObject, Boolean> _function = new Function1<EObject, Boolean>() {
+            @Override
             public Boolean apply(final EObject it) {
               boolean _switchResult = false;
               boolean _matched = false;
-              if (!_matched) {
-                if (it instanceof RoomModel) {
-                  _matched=true;
-                  _switchResult = roomModels.add(((RoomModel)it));
-                }
+              if (it instanceof RoomModel) {
+                _matched=true;
+                _switchResult = roomModels.add(((RoomModel)it));
               }
               if (!_matched) {
                 if (it instanceof PhysicalModel) {
@@ -101,9 +101,11 @@ public class TestInstanceCreator {
       IterableExtensions.<Resource>forEach(_resources, _function);
       ArrayList<SubSystemClass> _newArrayList = CollectionLiterals.<SubSystemClass>newArrayList();
       final Function2<ArrayList<SubSystemClass>, RoomModel, ArrayList<SubSystemClass>> _function_1 = new Function2<ArrayList<SubSystemClass>, RoomModel, ArrayList<SubSystemClass>>() {
+        @Override
         public ArrayList<SubSystemClass> apply(final ArrayList<SubSystemClass> list, final RoomModel model) {
           EList<SubSystemClass> _subSystemClasses = model.getSubSystemClasses();
           final Function1<SubSystemClass, Boolean> _function = new Function1<SubSystemClass, Boolean>() {
+            @Override
             public Boolean apply(final SubSystemClass it) {
               return Boolean.valueOf(TestInstanceCreator.this.hasTestAnnotation(it));
             }
@@ -118,28 +120,33 @@ public class TestInstanceCreator {
       {
         SubSystemClass _createSubSystemClass = this._roomFactory.createSubSystemClass();
         final Procedure1<SubSystemClass> _function_2 = new Procedure1<SubSystemClass>() {
+          @Override
           public void apply(final SubSystemClass it) {
             it.setName("DerivedTestSubSystem");
           }
         };
         final SubSystemClass derivedSubSystem = ObjectExtensions.<SubSystemClass>operator_doubleArrow(_createSubSystemClass, _function_2);
         final Procedure1<RoomModel> _function_3 = new Procedure1<RoomModel>() {
+          @Override
           public void apply(final RoomModel model) {
             EList<ActorRef> _actorRefs = derivedSubSystem.getActorRefs();
             EList<ActorClass> _actorClasses = model.getActorClasses();
             final Function1<ActorClass, Boolean> _function = new Function1<ActorClass, Boolean>() {
+              @Override
               public Boolean apply(final ActorClass it) {
                 return Boolean.valueOf(TestInstanceCreator.this.hasTestAnnotation(it));
               }
             };
             Iterable<ActorClass> _filter = IterableExtensions.<ActorClass>filter(_actorClasses, _function);
             final Function1<ActorClass, ActorRef> _function_1 = new Function1<ActorClass, ActorRef>() {
+              @Override
               public ActorRef apply(final ActorClass ac) {
                 ActorRef _xblockexpression = null;
                 {
                   allAnnotatedClasses.add(ac);
                   ActorRef _createActorRef = TestInstanceCreator.this._roomFactory.createActorRef();
                   final Procedure1<ActorRef> _function = new Procedure1<ActorRef>() {
+                    @Override
                     public void apply(final ActorRef it) {
                       String _name = ac.getName();
                       String _plus = ("ref_" + _name);
@@ -172,6 +179,7 @@ public class TestInstanceCreator {
       boolean _greaterThan = (_size > 1);
       if (_greaterThan) {
         final Procedure1<StructureClass> _function_2 = new Procedure1<StructureClass>() {
+          @Override
           public void apply(final StructureClass roomCls) {
             StringConcatenation _builder = new StringConcatenation();
             _builder.append("TestInstanceCreator: mapping failed, multiple test instances present");
@@ -183,6 +191,7 @@ public class TestInstanceCreator {
       }
       ArrayList<PhysicalSystem> _newArrayList_1 = CollectionLiterals.<PhysicalSystem>newArrayList();
       final Function2<ArrayList<PhysicalSystem>, PhysicalModel, ArrayList<PhysicalSystem>> _function_3 = new Function2<ArrayList<PhysicalSystem>, PhysicalModel, ArrayList<PhysicalSystem>>() {
+        @Override
         public ArrayList<PhysicalSystem> apply(final ArrayList<PhysicalSystem> list, final PhysicalModel model) {
           EList<PhysicalSystem> _systems = model.getSystems();
           Iterables.<PhysicalSystem>addAll(list, _systems);
@@ -216,6 +225,7 @@ public class TestInstanceCreator {
       final SubSystemClass testSubSystem = IterableExtensions.<SubSystemClass>head(allTestSubSystems);
       LogicalSystem _createLogicalSystem = this._roomFactory.createLogicalSystem();
       final Procedure1<LogicalSystem> _function_4 = new Procedure1<LogicalSystem>() {
+        @Override
         public void apply(final LogicalSystem it) {
           it.setName("DerivedTestSystem");
         }
@@ -224,6 +234,7 @@ public class TestInstanceCreator {
       EList<SubSystemRef> _subSystems = testSystem.getSubSystems();
       SubSystemRef _createSubSystemRef = this._roomFactory.createSubSystemRef();
       final Procedure1<SubSystemRef> _function_5 = new Procedure1<SubSystemRef>() {
+        @Override
         public void apply(final SubSystemRef it) {
           String _name = testSubSystem.getName();
           String _plus = ("ref_" + _name);
@@ -235,6 +246,7 @@ public class TestInstanceCreator {
       _subSystems.add(_doubleArrow);
       RoomModel _createRoomModel = this._roomFactory.createRoomModel();
       final Procedure1<RoomModel> _function_6 = new Procedure1<RoomModel>() {
+        @Override
         public void apply(final RoomModel it) {
           it.setName("DerivedTestRoomModel");
           EList<LogicalSystem> _systems = it.getSystems();
@@ -246,20 +258,24 @@ public class TestInstanceCreator {
       final RoomModel testRoomModel = ObjectExtensions.<RoomModel>operator_doubleArrow(_createRoomModel, _function_6);
       MappingModel _createMappingModel = this._eTMapFactory.createMappingModel();
       final Procedure1<MappingModel> _function_7 = new Procedure1<MappingModel>() {
+        @Override
         public void apply(final MappingModel it) {
           it.setName("DerivedTestMappingModel");
           EList<Mapping> _mappings = it.getMappings();
           Mapping _createMapping = TestInstanceCreator.this._eTMapFactory.createMapping();
           final Procedure1<Mapping> _function = new Procedure1<Mapping>() {
+            @Override
             public void apply(final Mapping it) {
               it.setLogicalSys(testSystem);
               it.setPhysicalSys(physSystem);
               EList<SubSystemMapping> _subsysMappings = it.getSubsysMappings();
               EList<SubSystemRef> _subSystems = testSystem.getSubSystems();
               final Function1<SubSystemRef, SubSystemMapping> _function = new Function1<SubSystemRef, SubSystemMapping>() {
+                @Override
                 public SubSystemMapping apply(final SubSystemRef subSysRef) {
                   SubSystemMapping _createSubSystemMapping = TestInstanceCreator.this._eTMapFactory.createSubSystemMapping();
                   final Procedure1<SubSystemMapping> _function = new Procedure1<SubSystemMapping>() {
+                    @Override
                     public void apply(final SubSystemMapping it) {
                       it.setLogicalSubSys(subSysRef);
                       EList<NodeRef> _nodeRefs = physSystem.getNodeRefs();
@@ -318,6 +334,7 @@ public class TestInstanceCreator {
   protected boolean hasTestAnnotation(final StructureClass cls) {
     EList<Annotation> _annotations = cls.getAnnotations();
     final Function1<Annotation, Boolean> _function = new Function1<Annotation, Boolean>() {
+      @Override
       public Boolean apply(final Annotation it) {
         AnnotationType _type = it.getType();
         String _name = _type.getName();

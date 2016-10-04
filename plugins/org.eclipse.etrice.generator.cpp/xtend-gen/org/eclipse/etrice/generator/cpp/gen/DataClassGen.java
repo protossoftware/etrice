@@ -463,6 +463,7 @@ public class DataClassGen {
       }
       EList<Attribute> _attributes = dataClass.getAttributes();
       final Function1<Attribute, String> _function = new Function1<Attribute, String>() {
+        @Override
         public String apply(final Attribute it) {
           StringConcatenation _builder = new StringConcatenation();
           String _name = it.getName();
@@ -497,6 +498,7 @@ public class DataClassGen {
       }
       EList<Attribute> _attributes = dataClass.getAttributes();
       final Function1<Attribute, String> _function = new Function1<Attribute, String>() {
+        @Override
         public String apply(final Attribute it) {
           StringConcatenation _builder = new StringConcatenation();
           String _name = it.getName();
@@ -532,6 +534,7 @@ public class DataClassGen {
         DataClass _base_2 = dataClass.getBase();
         List<Attribute> _allAttributes = this._roomHelpers.getAllAttributes(_base_2);
         final Function1<Attribute, String> _function = new Function1<Attribute, String>() {
+          @Override
           public String apply(final Attribute it) {
             return it.getName();
           }
@@ -544,6 +547,7 @@ public class DataClassGen {
       }
       EList<Attribute> _attributes = dataClass.getAttributes();
       final Function1<Attribute, String> _function_1 = new Function1<Attribute, String>() {
+        @Override
         public String apply(final Attribute it) {
           StringConcatenation _builder = new StringConcatenation();
           String _name = it.getName();

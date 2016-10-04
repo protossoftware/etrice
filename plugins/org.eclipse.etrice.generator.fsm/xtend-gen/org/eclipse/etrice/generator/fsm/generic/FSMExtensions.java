@@ -115,12 +115,14 @@ public class FSMExtensions {
     List<State> _xblockexpression = null;
     {
       final Function1<State, Boolean> _function = new Function1<State, Boolean>() {
+        @Override
         public Boolean apply(final State s) {
           return Boolean.valueOf(FSMExtensions.this._fSMHelpers.isLeaf(s));
         }
       };
       final Iterable<State> leaf = IterableExtensions.<State>filter(states, _function);
       final Function1<State, Boolean> _function_1 = new Function1<State, Boolean>() {
+        @Override
         public Boolean apply(final State s) {
           boolean _isLeaf = FSMExtensions.this._fSMHelpers.isLeaf(s);
           return Boolean.valueOf((!_isLeaf));
@@ -196,11 +198,9 @@ public class FSMExtensions {
       final EObject parent = dc.eContainer();
       boolean _switchResult = false;
       boolean _matched = false;
-      if (!_matched) {
-        if (parent instanceof Guard) {
-          _matched=true;
-          _switchResult = true;
-        }
+      if (parent instanceof Guard) {
+        _matched=true;
+        _switchResult = true;
       }
       if (!_matched) {
         if (parent instanceof CPBranchTransition) {
