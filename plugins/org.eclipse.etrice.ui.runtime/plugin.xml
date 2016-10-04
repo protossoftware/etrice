@@ -42,7 +42,7 @@
 	<extension point="org.eclipse.ui.newWizards">
 		<wizard	id="org.eclipse.etrice.ui.runtime.NewCRuntimeWizard"
 			name="eTrice C Runtime"
-			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard"
+			class="org.eclipse.etrice.ui.runtime.NonDeletingWizardInstaller"
 			category="org.eclipse.etrice.core.ui.wizardCategory/org.eclipse.etrice.core.ui.wizardCCategory/org.eclipse.etrice.core.ui.libraryCCategory"
 			icon="icons/genproject.gif"
 			project="true">
@@ -86,7 +86,7 @@
 	<extension point="org.eclipse.ui.newWizards">
 		<wizard	id="org.eclipse.etrice.ui.runtime.NewCppRuntimeWizard"
 			name="eTrice C++ Runtime"
-			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard"
+			class="org.eclipse.etrice.ui.runtime.NonDeletingWizardInstaller"
 			category="org.eclipse.etrice.core.ui.wizardCategory/org.eclipse.etrice.core.ui.wizardCppCategory/org.eclipse.etrice.core.ui.libraryCppCategory"
 			icon="icons/genproject.gif"
 			project="true">
@@ -96,8 +96,8 @@
 	<extension point="org.eclipse.emf.common.ui.examples">
 		<example wizardID="org.eclipse.etrice.ui.runtime.NewCppRuntimeWizard" pageImage="icons/genproject.gif">
 			<projectDescriptor
-				name="org.eclipse.etrice.runtime.c++"
-				contentURI="contents/org.eclipse.etrice.runtime.c++.zip"
+				name="org.eclipse.etrice.runtime.cpp"
+				contentURI="contents/org.eclipse.etrice.runtime.cpp.zip"
 				description="eTrice Runtime for Cpp"/>
 			<projectDescriptor
 				contentURI="contents/org.eclipse.etrice.runtime.c.zip"
@@ -138,7 +138,7 @@
 	<extension point="org.eclipse.ui.newWizards">
 		<wizard	id="org.eclipse.etrice.ui.runtime.NewJavaRuntimeWizard"
 			name="eTrice Java Runtime"
-			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard"
+			class="org.eclipse.etrice.ui.runtime.NonDeletingWizardInstaller"
 			category="org.eclipse.etrice.core.ui.wizardCategory/org.eclipse.etrice.core.ui.wizardJavaCategory/org.eclipse.etrice.core.ui.libraryJavaCategory"
 			icon="icons/genproject.gif"
 			project="true">
