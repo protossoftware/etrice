@@ -244,10 +244,11 @@
 							<tool id="cdt.managedbuild.tool.gnu.assembler.mingw.exe.debug.789259845" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.mingw.exe.debug">
 								<option id="gnu.both.asm.option.include.paths.1341683413" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/org.eclipse.etrice.runtime.cpp}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/org.eclipse.etrice.runtime.cpp/src/}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/org.eclipse.etrice.runtime.c/src/platforms/MT_WIN_MinGW}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/org.eclipse.etrice.runtime.c/src/common}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/org.eclipse.etrice.runtime.cpp/src-gen}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/org.eclipse.etrice.runtime.cpp/src}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/org.eclipse.etrice.runtime.c/src/platforms/MT_POSIX_GENERIC_GCC}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/org.eclipse.etrice.runtime.c/src/common}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/org.eclipse.etrice.runtime.c}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/org.eclipse.etrice.runtime.c/src/config}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/org.eclipse.etrice.runtime.c/src/util}&quot;"/>
@@ -260,10 +261,11 @@
 								<option id="gnu.cpp.compiler.mingw.exe.debug.option.debugging.level.1528455563" name="Debug Level" superClass="gnu.cpp.compiler.mingw.exe.debug.option.debugging.level" useByScannerDiscovery="false" value="gnu.cpp.compiler.debugging.level.max" valueType="enumerated"/>
 								<option id="gnu.cpp.compiler.option.include.paths.247464205" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/org.eclipse.etrice.runtime.cpp}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/org.eclipse.etrice.runtime.cpp/src/}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/org.eclipse.etrice.runtime.c/src/platforms/MT_WIN_MinGW}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/org.eclipse.etrice.runtime.c/src/common}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/org.eclipse.etrice.runtime.cpp/src-gen}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/org.eclipse.etrice.runtime.cpp/src}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/org.eclipse.etrice.runtime.c/src/platforms/MT_POSIX_GENERIC_GCC}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/org.eclipse.etrice.runtime.c/src/common}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/org.eclipse.etrice.runtime.c}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/org.eclipse.etrice.runtime.c/src/config}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/org.eclipse.etrice.runtime.c/src/util}&quot;"/>
@@ -278,10 +280,11 @@
 								<option id="gnu.c.compiler.mingw.exe.debug.option.debugging.level.1501583494" name="Debug Level" superClass="gnu.c.compiler.mingw.exe.debug.option.debugging.level" useByScannerDiscovery="false" value="gnu.c.debugging.level.max" valueType="enumerated"/>
 								<option id="gnu.c.compiler.option.include.paths.225039145" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/org.eclipse.etrice.runtime.cpp}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/org.eclipse.etrice.runtime.cpp/src/}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/org.eclipse.etrice.runtime.c/src/platforms/MT_WIN_MinGW}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/org.eclipse.etrice.runtime.c/src/common}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/org.eclipse.etrice.runtime.cpp/src-gen}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/org.eclipse.etrice.runtime.cpp/src}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/org.eclipse.etrice.runtime.c/src/platforms/MT_POSIX_GENERIC_GCC}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/org.eclipse.etrice.runtime.c/src/common}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/org.eclipse.etrice.runtime.c}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/org.eclipse.etrice.runtime.c/src/config}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/org.eclipse.etrice.runtime.c/src/util}&quot;"/>
@@ -291,8 +294,8 @@
 							<tool id="cdt.managedbuild.tool.gnu.c.linker.mingw.exe.debug.1858445743" name="MinGW C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.mingw.exe.debug"/>
 							<tool id="cdt.managedbuild.tool.gnu.cpp.linker.mingw.exe.debug.326802020" name="MinGW C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.mingw.exe.debug">
 								<option id="gnu.cpp.link.option.paths.1352233185" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/org.eclipse.etrice.runtime.cpp/LinuxPosix}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/org.eclipse.etrice.runtime.c/LinuxPosix}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/org.eclipse.etrice.runtime.cpp/WindowsMinGW}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/org.eclipse.etrice.runtime.c/WindowsMinGW}&quot;"/>
 								</option>
 								<option id="gnu.cpp.link.option.libs.1439602349" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs" valueType="libs">
 									<listOptionValue builtIn="false" srcPrefixMapping="" srcRootPath="" value="org.eclipse.etrice.runtime.cpp"/>
@@ -313,20 +316,21 @@
 						<entry flags="VALUE_WORKSPACE_PATH" kind="includePath" name="/org.eclipse.etrice.runtime.c"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="includePath" name="/org.eclipse.etrice.runtime.c/src/common"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="includePath" name="/org.eclipse.etrice.runtime.c/src/config"/>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="includePath" name="/org.eclipse.etrice.runtime.c/src/platforms/MT_POSIX_GENERIC_GCC"/>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="includePath" name="/org.eclipse.etrice.runtime.c/src/platforms/MT_WIN_MinGW"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="includePath" name="/org.eclipse.etrice.runtime.c/src/util"/>
-						<entry flags="VALUE_WORKSPACE_PATH" kind="libraryPath" name="/org.eclipse.etrice.runtime.c/LinuxPosix"/>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="libraryPath" name="/org.eclipse.etrice.runtime.c/WindowsMinGW"/>
 						<entry flags="RESOLVED" kind="libraryFile" name="org.eclipse.etrice.runtime.c" srcPrefixMapping="" srcRootPath=""/>
 					</externalSetting>
 				</externalSettings>
 				<externalSettings containerId="org.eclipse.etrice.runtime.cpp;" factoryId="org.eclipse.cdt.core.cfg.export.settings.sipplier">
 					<externalSetting>
 						<entry flags="VALUE_WORKSPACE_PATH" kind="includePath" name="/org.eclipse.etrice.runtime.cpp"/>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="includePath" name="/org.eclipse.etrice.runtime.cpp/src/"/>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="includePath" name="/org.eclipse.etrice.runtime.c/src/platforms/MT_WIN_MinGW"/>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="includePath" name="/org.eclipse.etrice.runtime.c/src/common"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="includePath" name="/org.eclipse.etrice.runtime.cpp/src-gen"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="includePath" name="/org.eclipse.etrice.runtime.cpp/src"/>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="includePath" name="/org.eclipse.etrice.runtime.c/src/platforms/MT_POSIX_GENERIC_GCC"/>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="includePath" name="/org.eclipse.etrice.runtime.c/src/common"/>
-						<entry flags="VALUE_WORKSPACE_PATH" kind="libraryPath" name="/org.eclipse.etrice.runtime.cpp/LinuxPosix"/>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="libraryPath" name="/org.eclipse.etrice.runtime.cpp/WindowsMinGW"/>
 						<entry flags="RESOLVED" kind="libraryFile" name="org.eclipse.etrice.runtime.cpp" srcPrefixMapping="" srcRootPath=""/>
 					</externalSetting>
 				</externalSettings>

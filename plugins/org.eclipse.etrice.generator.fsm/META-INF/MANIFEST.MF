@@ -2,13 +2,13 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Generator for Finite State Machines
 Bundle-SymbolicName: org.eclipse.etrice.generator.fsm
-Bundle-Version: 1.0.1.qualifier
+Bundle-Version: 1.1.0.qualifier
 Bundle-Vendor: eTrice
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.etrice.generator.fsm.base,
  org.eclipse.etrice.generator.fsm.generic
-Require-Bundle: org.eclipse.etrice.core.fsm;bundle-version="1.0.1",
- org.eclipse.etrice.core.genmodel.fsm;bundle-version="1.0.1",
+Require-Bundle: org.eclipse.etrice.core.fsm;bundle-version="1.1.0",
+ org.eclipse.etrice.core.genmodel.fsm;bundle-version="1.1.0",
  org.eclipse.emf;bundle-version="2.6.0",
  org.apache.commons.io;bundle-version="2.0.1",
  org.eclipse.core.resources;bundle-version="3.8.101",
