@@ -24,7 +24,8 @@ MSCLogger::MSCLogger() :
 		m_filter(0),
 		m_path(),
 		m_msc_name(),
-		m_is_open(false) {
+		m_is_open(false),
+		m_objectName() {
 	etMutex_construct(&m_mutex);
 }
 

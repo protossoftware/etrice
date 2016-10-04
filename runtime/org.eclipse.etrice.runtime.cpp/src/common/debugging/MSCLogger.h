@@ -44,6 +44,9 @@ public:
 	void close();
 	/* --- */
 
+	const std::string& getObjectName(void) { return m_objectName; }
+	void setObjectName(const std::string& name) { m_objectName = name; }
+
 	std::list<std::string>& getCommandList() {	return m_commandList; };
 	MSCFilter* getMSCFilter(){ return m_filter; };
 
@@ -60,6 +63,8 @@ private:
 	etBool m_is_open;
 
 	etMutex m_mutex;
+
+	std::string m_objectName;
 
 	MSCLogger(const MSCLogger& right);
 	MSCLogger& operator=(const MSCLogger& right);

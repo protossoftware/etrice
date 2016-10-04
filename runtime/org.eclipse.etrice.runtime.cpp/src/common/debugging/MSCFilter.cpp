@@ -37,11 +37,11 @@ etBool MSCFilter::applyTo(const std::string& text) {
 }
 
 std::string MSCFilter::reduceString(const std::string& string) {
-	if (filterList.size() == 1)
-		//TODO: filtering with regular expression
-		// return string.replaceFirst(filterList.front().filter, "");
-		return string;
-	else
+//	if (filterList.size() == 1)
+//		//TODO: filtering with regular expression
+//		// return string.replaceFirst(filterList.front().filter, "");
+//		return string;
+//	else
 		return string;
 }
 

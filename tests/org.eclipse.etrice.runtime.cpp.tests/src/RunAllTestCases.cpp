@@ -15,6 +15,7 @@
 //#include "debugging/MSCFilterTest.h"
 //#include "debugging/MSCLoggerTest.h"
 //#include "debugging/DebuggingServiceTest.h"
+#include "debugging/MSCFunctionObjectTest.h"
 #include "messaging/AddressTest.h"
 #include "messaging/MessageTest.h"
 #include "messaging/RTObjectTest.h"
@@ -45,6 +46,9 @@ int main() {
 //
 //	DebuggingServiceTest debugSvcTest;
 //	debugSvcTest.run();
+
+	MSCFunctionObjectTest mscFunctionObjTest;
+	mscFunctionObjTest.run();
 
 	// Test messaging
 	AddressTest addressTest;
