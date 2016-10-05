@@ -127,34 +127,25 @@ StringLiteral:
 	{StringLiteral} value=STRING;
 
 Integer returns ecore::ELong:
-	SignedInteger | Hexadecimal;
-
-SignedInteger hidden():
-	('+' | '-')? INT;
-
-Hexadecimal hidden():
-	HEX;
+	(('+' | '-')? INT) | HEX;
 
 Real returns ecore::EDouble:
-	Decimal | DotDecimal | DecimalDot | DecimalExp;
+	Decimal | /*DotDecimal | DecimalDot |*/ DecimalExp;
 
 Decimal hidden():
 	('+' | '-')? INT '.' INT;
 
-DotDecimal hidden():
-	('+' | '-')? '.' INT;
-
-DecimalDot hidden():
-	('+' | '-')? INT '.';
+//DotDecimal hidden():
+//	('+' | '-')? '.' INT;
+//
+//DecimalDot hidden():
+//	('+' | '-')? INT '.';
 
 DecimalExp hidden():
-	('+' | '-')? INT '.' INT EXP;
-
-terminal EXP:
-	('e' | 'E') ('+' | '-')? ('0'..'9')+;
-
-terminal HEX:
-	('0x' | '0X') ('0'..'9' | 'a'..'f' | 'A'..'F')+;
+	('+' | '-')? INT '.' INT ('e' | 'E') ('+' | '-')? INT;
 
 FQN:
 	ID ('.' ID)*;
+
+terminal HEX:
+	('0x' | '0X') ('0'..'9' | 'a'..'f' | 'A'..'F')+;

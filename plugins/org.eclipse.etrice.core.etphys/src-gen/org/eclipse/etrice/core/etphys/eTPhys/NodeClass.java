@@ -123,12 +123,12 @@ public interface NodeClass extends EObject
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Priomin</em>' attribute.
-   * @see #setPriomin(int)
+   * @see #setPriomin(long)
    * @see org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage#getNodeClass_Priomin()
    * @model
    * @generated
    */
-  int getPriomin();
+  long getPriomin();
 
   /**
    * Sets the value of the '{@link org.eclipse.etrice.core.etphys.eTPhys.NodeClass#getPriomin <em>Priomin</em>}' attribute.
@@ -138,7 +138,7 @@ public interface NodeClass extends EObject
    * @see #getPriomin()
    * @generated
    */
-  void setPriomin(int value);
+  void setPriomin(long value);
 
   /**
    * Returns the value of the '<em><b>Priomax</b></em>' attribute.
@@ -149,12 +149,12 @@ public interface NodeClass extends EObject
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Priomax</em>' attribute.
-   * @see #setPriomax(int)
+   * @see #setPriomax(long)
    * @see org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage#getNodeClass_Priomax()
    * @model
    * @generated
    */
-  int getPriomax();
+  long getPriomax();
 
   /**
    * Sets the value of the '{@link org.eclipse.etrice.core.etphys.eTPhys.NodeClass#getPriomax <em>Priomax</em>}' attribute.
@@ -164,7 +164,7 @@ public interface NodeClass extends EObject
    * @see #getPriomax()
    * @generated
    */
-  void setPriomax(int value);
+  void setPriomax(long value);
 
   /**
    * Returns the value of the '<em><b>Threads</b></em>' containment reference list.

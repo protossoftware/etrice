@@ -557,7 +557,7 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Integer returns ecore::ELong:
-	//	SignedInteger | Hexadecimal;
+	//	("+" | "-")? INT | HEX;
 	public BaseGrammarAccess.IntegerElements getIntegerAccess() {
 		return gaBase.getIntegerAccess();
 	}
@@ -566,28 +566,8 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 		return getIntegerAccess().getRule();
 	}
 
-	//SignedInteger hidden():
-	//	("+" | "-")? INT;
-	public BaseGrammarAccess.SignedIntegerElements getSignedIntegerAccess() {
-		return gaBase.getSignedIntegerAccess();
-	}
-	
-	public ParserRule getSignedIntegerRule() {
-		return getSignedIntegerAccess().getRule();
-	}
-
-	//Hexadecimal hidden():
-	//	HEX;
-	public BaseGrammarAccess.HexadecimalElements getHexadecimalAccess() {
-		return gaBase.getHexadecimalAccess();
-	}
-	
-	public ParserRule getHexadecimalRule() {
-		return getHexadecimalAccess().getRule();
-	}
-
 	//Real returns ecore::EDouble:
-	//	Decimal | DotDecimal | DecimalDot | DecimalExp;
+	//	Decimal | / *DotDecimal | DecimalDot |* / DecimalExp;
 	public BaseGrammarAccess.RealElements getRealAccess() {
 		return gaBase.getRealAccess();
 	}
@@ -606,28 +586,13 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 		return getDecimalAccess().getRule();
 	}
 
-	//DotDecimal hidden():
-	//	("+" | "-")? "." INT;
-	public BaseGrammarAccess.DotDecimalElements getDotDecimalAccess() {
-		return gaBase.getDotDecimalAccess();
-	}
-	
-	public ParserRule getDotDecimalRule() {
-		return getDotDecimalAccess().getRule();
-	}
-
-	//DecimalDot hidden():
-	//	("+" | "-")? INT ".";
-	public BaseGrammarAccess.DecimalDotElements getDecimalDotAccess() {
-		return gaBase.getDecimalDotAccess();
-	}
-	
-	public ParserRule getDecimalDotRule() {
-		return getDecimalDotAccess().getRule();
-	}
-
+	////DotDecimal hidden():
+	////	('+' | '-')? '.' INT;
+	////
+	////DecimalDot hidden():
+	////	('+' | '-')? INT '.';
 	//DecimalExp hidden():
-	//	("+" | "-")? INT "." INT EXP;
+	//	("+" | "-")? INT "." INT ("e" | "E") ("+" | "-")? INT;
 	public BaseGrammarAccess.DecimalExpElements getDecimalExpAccess() {
 		return gaBase.getDecimalExpAccess();
 	}
@@ -635,18 +600,6 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getDecimalExpRule() {
 		return getDecimalExpAccess().getRule();
 	}
-
-	//terminal EXP:
-	//	("e" | "E") ("+" | "-")? "0".."9"+;
-	public TerminalRule getEXPRule() {
-		return gaBase.getEXPRule();
-	} 
-
-	//terminal HEX:
-	//	("0x" | "0X") ("0".."9" | "a".."f" | "A".."F")+;
-	public TerminalRule getHEXRule() {
-		return gaBase.getHEXRule();
-	} 
 
 	//FQN:
 	//	ID ("." ID)*;
@@ -657,6 +610,12 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getFQNRule() {
 		return getFQNAccess().getRule();
 	}
+
+	//terminal HEX:
+	//	("0x" | "0X") ("0".."9" | "a".."f" | "A".."F")+;
+	public TerminalRule getHEXRule() {
+		return gaBase.getHEXRule();
+	} 
 
 	//terminal ID:
 	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;

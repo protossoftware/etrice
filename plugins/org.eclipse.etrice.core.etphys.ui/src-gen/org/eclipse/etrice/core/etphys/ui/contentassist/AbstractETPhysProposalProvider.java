@@ -125,7 +125,4 @@ public class AbstractETPhysProposalProvider extends org.eclipse.etrice.core.comm
 	public void complete_ThreadModel(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		// subclasses may override
 	}
-	public void complete_PRIO(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		// subclasses may override
-	}
 }

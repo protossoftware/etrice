@@ -41,8 +41,8 @@ NodeRef:
 NodeClass:
 	'NodeClass'name=ID (docu=Documentation)? '{'
 		('runtime' '=' runtime=[RuntimeClass|FQN] &
-		'priomin' '=' priomin=PRIO &
-		'priomax' '=' priomax=PRIO)
+		'priomin' '=' priomin=Integer &
+		'priomax' '=' priomax=Integer)
 		threads+=PhysicalThread*
 	'}'
 ;
@@ -51,7 +51,7 @@ PhysicalThread:
 	(default?='DefaultThread' | 'Thread') name=ID '{'
 		('execmode' '=' execmode=ExecMode &
 		('interval' '=' time=TIME)? &
-		'prio' '=' prio=PRIO &
+		'prio' '=' prio=Integer &
 		'stacksize' '=' stacksize=INT &
 		'msgblocksize' '=' msgblocksize=INT &
 		'msgpoolsize' '=' msgpoolsize=INT)
@@ -74,5 +74,3 @@ enum ThreadModel:
 	SINGLE_THREADED='singleThreaded' |
 	MULTI_THREADED='multiThreaded'
 ;
-
-PRIO returns ecore::EInt hidden(): ('+'|'-')? INT;

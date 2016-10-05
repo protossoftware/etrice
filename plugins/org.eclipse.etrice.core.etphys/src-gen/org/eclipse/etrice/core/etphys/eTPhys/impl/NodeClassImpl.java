@@ -93,7 +93,7 @@ public class NodeClassImpl extends MinimalEObjectImpl.Container implements NodeC
    * @generated
    * @ordered
    */
-  protected static final int PRIOMIN_EDEFAULT = 0;
+  protected static final long PRIOMIN_EDEFAULT = 0L;
 
   /**
    * The cached value of the '{@link #getPriomin() <em>Priomin</em>}' attribute.
@@ -103,7 +103,7 @@ public class NodeClassImpl extends MinimalEObjectImpl.Container implements NodeC
    * @generated
    * @ordered
    */
-  protected int priomin = PRIOMIN_EDEFAULT;
+  protected long priomin = PRIOMIN_EDEFAULT;
 
   /**
    * The default value of the '{@link #getPriomax() <em>Priomax</em>}' attribute.
@@ -113,7 +113,7 @@ public class NodeClassImpl extends MinimalEObjectImpl.Container implements NodeC
    * @generated
    * @ordered
    */
-  protected static final int PRIOMAX_EDEFAULT = 0;
+  protected static final long PRIOMAX_EDEFAULT = 0L;
 
   /**
    * The cached value of the '{@link #getPriomax() <em>Priomax</em>}' attribute.
@@ -123,7 +123,7 @@ public class NodeClassImpl extends MinimalEObjectImpl.Container implements NodeC
    * @generated
    * @ordered
    */
-  protected int priomax = PRIOMAX_EDEFAULT;
+  protected long priomax = PRIOMAX_EDEFAULT;
 
   /**
    * The cached value of the '{@link #getThreads() <em>Threads</em>}' containment reference list.
@@ -275,7 +275,7 @@ public class NodeClassImpl extends MinimalEObjectImpl.Container implements NodeC
    * <!-- end-user-doc -->
    * @generated
    */
-  public int getPriomin()
+  public long getPriomin()
   {
     return priomin;
   }
@@ -285,9 +285,9 @@ public class NodeClassImpl extends MinimalEObjectImpl.Container implements NodeC
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setPriomin(int newPriomin)
+  public void setPriomin(long newPriomin)
   {
-    int oldPriomin = priomin;
+    long oldPriomin = priomin;
     priomin = newPriomin;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, ETPhysPackage.NODE_CLASS__PRIOMIN, oldPriomin, priomin));
@@ -298,7 +298,7 @@ public class NodeClassImpl extends MinimalEObjectImpl.Container implements NodeC
    * <!-- end-user-doc -->
    * @generated
    */
-  public int getPriomax()
+  public long getPriomax()
   {
     return priomax;
   }
@@ -308,9 +308,9 @@ public class NodeClassImpl extends MinimalEObjectImpl.Container implements NodeC
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setPriomax(int newPriomax)
+  public void setPriomax(long newPriomax)
   {
-    int oldPriomax = priomax;
+    long oldPriomax = priomax;
     priomax = newPriomax;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, ETPhysPackage.NODE_CLASS__PRIOMAX, oldPriomax, priomax));
@@ -396,10 +396,10 @@ public class NodeClassImpl extends MinimalEObjectImpl.Container implements NodeC
         setRuntime((RuntimeClass)newValue);
         return;
       case ETPhysPackage.NODE_CLASS__PRIOMIN:
-        setPriomin((Integer)newValue);
+        setPriomin((Long)newValue);
         return;
       case ETPhysPackage.NODE_CLASS__PRIOMAX:
-        setPriomax((Integer)newValue);
+        setPriomax((Long)newValue);
         return;
       case ETPhysPackage.NODE_CLASS__THREADS:
         getThreads().clear();

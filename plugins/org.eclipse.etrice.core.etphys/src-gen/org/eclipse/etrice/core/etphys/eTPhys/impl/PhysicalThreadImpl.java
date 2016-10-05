@@ -123,7 +123,7 @@ public class PhysicalThreadImpl extends MinimalEObjectImpl.Container implements 
    * @generated
    * @ordered
    */
-  protected static final int PRIO_EDEFAULT = 0;
+  protected static final long PRIO_EDEFAULT = 0L;
 
   /**
    * The cached value of the '{@link #getPrio() <em>Prio</em>}' attribute.
@@ -133,7 +133,7 @@ public class PhysicalThreadImpl extends MinimalEObjectImpl.Container implements 
    * @generated
    * @ordered
    */
-  protected int prio = PRIO_EDEFAULT;
+  protected long prio = PRIO_EDEFAULT;
 
   /**
    * The default value of the '{@link #getStacksize() <em>Stacksize</em>}' attribute.
@@ -313,7 +313,7 @@ public class PhysicalThreadImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
-  public int getPrio()
+  public long getPrio()
   {
     return prio;
   }
@@ -323,9 +323,9 @@ public class PhysicalThreadImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setPrio(int newPrio)
+  public void setPrio(long newPrio)
   {
-    int oldPrio = prio;
+    long oldPrio = prio;
     prio = newPrio;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, ETPhysPackage.PHYSICAL_THREAD__PRIO, oldPrio, prio));
@@ -453,7 +453,7 @@ public class PhysicalThreadImpl extends MinimalEObjectImpl.Container implements 
         setTime((Long)newValue);
         return;
       case ETPhysPackage.PHYSICAL_THREAD__PRIO:
-        setPrio((Integer)newValue);
+        setPrio((Long)newValue);
         return;
       case ETPhysPackage.PHYSICAL_THREAD__STACKSIZE:
         setStacksize((Integer)newValue);

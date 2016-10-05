@@ -453,7 +453,7 @@ public class NodeGen {
               String _name_1 = thread_1.getName();
               _builder.append(_name_1, "\t\t");
               _builder.append("\", ");
-              int _prio = thread_1.getPrio();
+              long _prio = thread_1.getPrio();
               _builder.append(_prio, "\t\t");
               _builder.append(");");
               _builder.newLineIfNotEmpty();
@@ -471,7 +471,7 @@ public class NodeGen {
               String _name_3 = thread_1.getName();
               _builder.append(_name_3, "\t\t");
               _builder.append("\", ");
-              int _prio_1 = thread_1.getPrio();
+              long _prio_1 = thread_1.getPrio();
               _builder.append(_prio_1, "\t\t");
               _builder.append(");");
               _builder.newLineIfNotEmpty();

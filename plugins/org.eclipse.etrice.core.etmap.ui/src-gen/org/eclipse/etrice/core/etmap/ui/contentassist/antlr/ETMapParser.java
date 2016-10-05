@@ -47,12 +47,12 @@ public class ETMapParser extends AbstractContentAssistParser {
 					put(grammarAccess.getBooleanLiteralAccess().getAlternatives_1(), "rule__BooleanLiteral__Alternatives_1");
 					put(grammarAccess.getNumberLiteralAccess().getAlternatives(), "rule__NumberLiteral__Alternatives");
 					put(grammarAccess.getIntegerAccess().getAlternatives(), "rule__Integer__Alternatives");
-					put(grammarAccess.getSignedIntegerAccess().getAlternatives_0(), "rule__SignedInteger__Alternatives_0");
+					put(grammarAccess.getIntegerAccess().getAlternatives_0_0(), "rule__Integer__Alternatives_0_0");
 					put(grammarAccess.getRealAccess().getAlternatives(), "rule__Real__Alternatives");
 					put(grammarAccess.getDecimalAccess().getAlternatives_0(), "rule__Decimal__Alternatives_0");
-					put(grammarAccess.getDotDecimalAccess().getAlternatives_0(), "rule__DotDecimal__Alternatives_0");
-					put(grammarAccess.getDecimalDotAccess().getAlternatives_0(), "rule__DecimalDot__Alternatives_0");
 					put(grammarAccess.getDecimalExpAccess().getAlternatives_0(), "rule__DecimalExp__Alternatives_0");
+					put(grammarAccess.getDecimalExpAccess().getAlternatives_4(), "rule__DecimalExp__Alternatives_4");
+					put(grammarAccess.getDecimalExpAccess().getAlternatives_5(), "rule__DecimalExp__Alternatives_5");
 					put(grammarAccess.getLiteralTypeAccess().getAlternatives(), "rule__LiteralType__Alternatives");
 					put(grammarAccess.getMappingModelAccess().getGroup(), "rule__MappingModel__Group__0");
 					put(grammarAccess.getMappingAccess().getGroup(), "rule__Mapping__Group__0");
@@ -83,10 +83,8 @@ public class ETMapParser extends AbstractContentAssistParser {
 					put(grammarAccess.getRealLiteralAccess().getGroup(), "rule__RealLiteral__Group__0");
 					put(grammarAccess.getIntLiteralAccess().getGroup(), "rule__IntLiteral__Group__0");
 					put(grammarAccess.getStringLiteralAccess().getGroup(), "rule__StringLiteral__Group__0");
-					put(grammarAccess.getSignedIntegerAccess().getGroup(), "rule__SignedInteger__Group__0");
+					put(grammarAccess.getIntegerAccess().getGroup_0(), "rule__Integer__Group_0__0");
 					put(grammarAccess.getDecimalAccess().getGroup(), "rule__Decimal__Group__0");
-					put(grammarAccess.getDotDecimalAccess().getGroup(), "rule__DotDecimal__Group__0");
-					put(grammarAccess.getDecimalDotAccess().getGroup(), "rule__DecimalDot__Group__0");
 					put(grammarAccess.getDecimalExpAccess().getGroup(), "rule__DecimalExp__Group__0");
 					put(grammarAccess.getFQNAccess().getGroup(), "rule__FQN__Group__0");
 					put(grammarAccess.getFQNAccess().getGroup_1(), "rule__FQN__Group_1__0");

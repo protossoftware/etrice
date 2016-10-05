@@ -489,7 +489,7 @@ public class NodeGen {
           _builder.newLineIfNotEmpty();
           _builder.append("\t\t");
           _builder.append("\t");
-          int _prio = thread.getPrio();
+          long _prio = thread.getPrio();
           _builder.append(_prio, "\t\t\t");
           _builder.append(",");
           _builder.newLineIfNotEmpty();
@@ -537,12 +537,12 @@ public class NodeGen {
       _builder.newLineIfNotEmpty();
       _builder.newLine();
       {
-        final Function1<PhysicalThread, Integer> _function_1 = new Function1<PhysicalThread, Integer>() {
-          public Integer apply(final PhysicalThread it) {
-            return Integer.valueOf(it.getPrio());
+        final Function1<PhysicalThread, Long> _function_1 = new Function1<PhysicalThread, Long>() {
+          public Long apply(final PhysicalThread it) {
+            return Long.valueOf(it.getPrio());
           }
         };
-        List<PhysicalThread> _sortBy = IterableExtensions.<PhysicalThread, Integer>sortBy(threads, _function_1);
+        List<PhysicalThread> _sortBy = IterableExtensions.<PhysicalThread, Long>sortBy(threads, _function_1);
         List<PhysicalThread> _reverse = ListExtensions.<PhysicalThread>reverse(_sortBy);
         for(final PhysicalThread thread_1 : _reverse) {
           _builder.append("\t");

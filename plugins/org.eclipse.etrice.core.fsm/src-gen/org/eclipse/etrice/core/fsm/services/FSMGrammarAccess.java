@@ -249,8 +249,8 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//StateMachine returns StateGraph:
-		//	{StateGraph} "StateMachine" "{" (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition |
-		//	refinedTransitions+=RefinedTransition)* "}";
+		//	{StateGraph} "StateMachine" "{" (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition
+		//	| refinedTransitions+=RefinedTransition)* "}";
 		public ParserRule getRule() { return rule; }
 
 		//{StateGraph} "StateMachine" "{" (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition |
@@ -1897,54 +1897,92 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 		public Keyword getSYNCHRONOUSSyncKeyword_3_0() { return cSYNCHRONOUSSyncKeyword_3_0; }
 	}
 	
-	private FSMModelElements pFSMModel;
-	private ComponentCommunicationTypeElements unknownRuleComponentCommunicationType;
-	private ModelComponentElements pModelComponent;
-	private StateGraphNodeElements pStateGraphNode;
-	private StateGraphItemElements pStateGraphItem;
-	private StateGraphElements pStateGraph;
-	private StateMachineElements pStateMachine;
-	private StateElements pState;
-	private SimpleStateElements pSimpleState;
-	private RefinedStateElements pRefinedState;
-	private DetailCodeElements pDetailCode;
-	private TrPointElements pTrPoint;
-	private TransitionPointElements pTransitionPoint;
-	private EntryPointElements pEntryPoint;
-	private ExitPointElements pExitPoint;
-	private ChoicePointElements pChoicePoint;
-	private TransitionElements pTransition;
-	private NonInitialTransitionElements pNonInitialTransition;
-	private TransitionChainStartTransitionElements pTransitionChainStartTransition;
-	private InitialTransitionElements pInitialTransition;
-	private ContinuationTransitionElements pContinuationTransition;
-	private TriggeredTransitionElements pTriggeredTransition;
-	private GuardedTransitionElements pGuardedTransition;
-	private CPBranchTransitionElements pCPBranchTransition;
-	private RefinedTransitionElements pRefinedTransition;
-	private TransitionTerminalElements pTransitionTerminal;
-	private StateTerminalElements pStateTerminal;
-	private TrPointTerminalElements pTrPointTerminal;
-	private SubStateTrPointTerminalElements pSubStateTrPointTerminal;
-	private ChoicepointTerminalElements pChoicepointTerminal;
-	private TriggerElements pTrigger;
-	private MessageFromIfElements pMessageFromIf;
-	private AbstractInterfaceItemElements pAbstractInterfaceItem;
-	private GuardElements pGuard;
-	private ProtocolSemanticsElements pProtocolSemantics;
-	private SemanticsRuleElements pSemanticsRule;
-	private InSemanticsRuleElements pInSemanticsRule;
-	private OutSemanticsRuleElements pOutSemanticsRule;
+	private final FSMModelElements pFSMModel;
+	private final ComponentCommunicationTypeElements unknownRuleComponentCommunicationType;
+	private final ModelComponentElements pModelComponent;
+	private final StateGraphNodeElements pStateGraphNode;
+	private final StateGraphItemElements pStateGraphItem;
+	private final StateGraphElements pStateGraph;
+	private final StateMachineElements pStateMachine;
+	private final StateElements pState;
+	private final SimpleStateElements pSimpleState;
+	private final RefinedStateElements pRefinedState;
+	private final DetailCodeElements pDetailCode;
+	private final TrPointElements pTrPoint;
+	private final TransitionPointElements pTransitionPoint;
+	private final EntryPointElements pEntryPoint;
+	private final ExitPointElements pExitPoint;
+	private final ChoicePointElements pChoicePoint;
+	private final TransitionElements pTransition;
+	private final NonInitialTransitionElements pNonInitialTransition;
+	private final TransitionChainStartTransitionElements pTransitionChainStartTransition;
+	private final InitialTransitionElements pInitialTransition;
+	private final ContinuationTransitionElements pContinuationTransition;
+	private final TriggeredTransitionElements pTriggeredTransition;
+	private final GuardedTransitionElements pGuardedTransition;
+	private final CPBranchTransitionElements pCPBranchTransition;
+	private final RefinedTransitionElements pRefinedTransition;
+	private final TransitionTerminalElements pTransitionTerminal;
+	private final StateTerminalElements pStateTerminal;
+	private final TrPointTerminalElements pTrPointTerminal;
+	private final SubStateTrPointTerminalElements pSubStateTrPointTerminal;
+	private final ChoicepointTerminalElements pChoicepointTerminal;
+	private final TriggerElements pTrigger;
+	private final MessageFromIfElements pMessageFromIf;
+	private final AbstractInterfaceItemElements pAbstractInterfaceItem;
+	private final GuardElements pGuard;
+	private final ProtocolSemanticsElements pProtocolSemantics;
+	private final SemanticsRuleElements pSemanticsRule;
+	private final InSemanticsRuleElements pInSemanticsRule;
+	private final OutSemanticsRuleElements pOutSemanticsRule;
 	
 	private final Grammar grammar;
 
-	private BaseGrammarAccess gaBase;
+	private final BaseGrammarAccess gaBase;
 
 	@Inject
 	public FSMGrammarAccess(GrammarProvider grammarProvider,
 		BaseGrammarAccess gaBase) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaBase = gaBase;
+		this.pFSMModel = new FSMModelElements();
+		this.unknownRuleComponentCommunicationType = new ComponentCommunicationTypeElements();
+		this.pModelComponent = new ModelComponentElements();
+		this.pStateGraphNode = new StateGraphNodeElements();
+		this.pStateGraphItem = new StateGraphItemElements();
+		this.pStateGraph = new StateGraphElements();
+		this.pStateMachine = new StateMachineElements();
+		this.pState = new StateElements();
+		this.pSimpleState = new SimpleStateElements();
+		this.pRefinedState = new RefinedStateElements();
+		this.pDetailCode = new DetailCodeElements();
+		this.pTrPoint = new TrPointElements();
+		this.pTransitionPoint = new TransitionPointElements();
+		this.pEntryPoint = new EntryPointElements();
+		this.pExitPoint = new ExitPointElements();
+		this.pChoicePoint = new ChoicePointElements();
+		this.pTransition = new TransitionElements();
+		this.pNonInitialTransition = new NonInitialTransitionElements();
+		this.pTransitionChainStartTransition = new TransitionChainStartTransitionElements();
+		this.pInitialTransition = new InitialTransitionElements();
+		this.pContinuationTransition = new ContinuationTransitionElements();
+		this.pTriggeredTransition = new TriggeredTransitionElements();
+		this.pGuardedTransition = new GuardedTransitionElements();
+		this.pCPBranchTransition = new CPBranchTransitionElements();
+		this.pRefinedTransition = new RefinedTransitionElements();
+		this.pTransitionTerminal = new TransitionTerminalElements();
+		this.pStateTerminal = new StateTerminalElements();
+		this.pTrPointTerminal = new TrPointTerminalElements();
+		this.pSubStateTrPointTerminal = new SubStateTrPointTerminalElements();
+		this.pChoicepointTerminal = new ChoicepointTerminalElements();
+		this.pTrigger = new TriggerElements();
+		this.pMessageFromIf = new MessageFromIfElements();
+		this.pAbstractInterfaceItem = new AbstractInterfaceItemElements();
+		this.pGuard = new GuardElements();
+		this.pProtocolSemantics = new ProtocolSemanticsElements();
+		this.pSemanticsRule = new SemanticsRuleElements();
+		this.pInSemanticsRule = new InSemanticsRuleElements();
+		this.pOutSemanticsRule = new OutSemanticsRuleElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -1977,7 +2015,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	//FSMModel:
 	//	components+=ModelComponent*;
 	public FSMModelElements getFSMModelAccess() {
-		return (pFSMModel != null) ? pFSMModel : (pFSMModel = new FSMModelElements());
+		return pFSMModel;
 	}
 	
 	public ParserRule getFSMModelRule() {
@@ -1988,7 +2026,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	//enum ComponentCommunicationType:
 	//	EVENT_DRIVEN="eventdriven" | DATA_DRIVEN="datadriven" | ASYNCHRONOUS="async" | SYNCHRONOUS="sync";
 	public ComponentCommunicationTypeElements getComponentCommunicationTypeAccess() {
-		return (unknownRuleComponentCommunicationType != null) ? unknownRuleComponentCommunicationType : (unknownRuleComponentCommunicationType = new ComponentCommunicationTypeElements());
+		return unknownRuleComponentCommunicationType;
 	}
 	
 	public EnumRule getComponentCommunicationTypeRule() {
@@ -2000,7 +2038,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	//	(abstract?="abstract"? & commType=ComponentCommunicationType?) "ModelComponent" componentName=ID ("extends"
 	//	base=[ModelComponent|FQN])? stateMachine=StateMachine;
 	public ModelComponentElements getModelComponentAccess() {
-		return (pModelComponent != null) ? pModelComponent : (pModelComponent = new ModelComponentElements());
+		return pModelComponent;
 	}
 	
 	public ParserRule getModelComponentRule() {
@@ -2014,7 +2052,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	//StateGraphNode:
 	//	State | ChoicePoint | TrPoint;
 	public StateGraphNodeElements getStateGraphNodeAccess() {
-		return (pStateGraphNode != null) ? pStateGraphNode : (pStateGraphNode = new StateGraphNodeElements());
+		return pStateGraphNode;
 	}
 	
 	public ParserRule getStateGraphNodeRule() {
@@ -2024,7 +2062,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	//StateGraphItem:
 	//	StateGraphNode | Transition;
 	public StateGraphItemElements getStateGraphItemAccess() {
-		return (pStateGraphItem != null) ? pStateGraphItem : (pStateGraphItem = new StateGraphItemElements());
+		return pStateGraphItem;
 	}
 	
 	public ParserRule getStateGraphItemRule() {
@@ -2036,7 +2074,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	//	{StateGraph} "{" (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition |
 	//	refinedTransitions+=RefinedTransition)* "}";
 	public StateGraphElements getStateGraphAccess() {
-		return (pStateGraph != null) ? pStateGraph : (pStateGraph = new StateGraphElements());
+		return pStateGraph;
 	}
 	
 	public ParserRule getStateGraphRule() {
@@ -2044,10 +2082,10 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//StateMachine returns StateGraph:
-	//	{StateGraph} "StateMachine" "{" (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition |
-	//	refinedTransitions+=RefinedTransition)* "}";
+	//	{StateGraph} "StateMachine" "{" (states+=State | trPoints+=TrPoint | chPoints+=ChoicePoint | transitions+=Transition
+	//	| refinedTransitions+=RefinedTransition)* "}";
 	public StateMachineElements getStateMachineAccess() {
-		return (pStateMachine != null) ? pStateMachine : (pStateMachine = new StateMachineElements());
+		return pStateMachine;
 	}
 	
 	public ParserRule getStateMachineRule() {
@@ -2060,7 +2098,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	//State:
 	//	SimpleState | RefinedState;
 	public StateElements getStateAccess() {
-		return (pState != null) ? pState : (pState = new StateElements());
+		return pState;
 	}
 	
 	public ParserRule getStateRule() {
@@ -2071,7 +2109,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	//	"State" name=ID docu=Documentation? ("{" ("entry" entryCode=DetailCode)? ("exit" exitCode=DetailCode)? ("do"
 	//	doCode=DetailCode)? ("subgraph" subgraph=StateGraph)? "}")?;
 	public SimpleStateElements getSimpleStateAccess() {
-		return (pSimpleState != null) ? pSimpleState : (pSimpleState = new SimpleStateElements());
+		return pSimpleState;
 	}
 	
 	public ParserRule getSimpleStateRule() {
@@ -2082,7 +2120,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	//	"RefinedState" target=[State|FQN] docu=Documentation? "{" ("entry" entryCode=DetailCode)? ("exit"
 	//	exitCode=DetailCode)? ("do" doCode=DetailCode)? ("subgraph" subgraph=StateGraph)? "}";
 	public RefinedStateElements getRefinedStateAccess() {
-		return (pRefinedState != null) ? pRefinedState : (pRefinedState = new RefinedStateElements());
+		return pRefinedState;
 	}
 	
 	public ParserRule getRefinedStateRule() {
@@ -2094,7 +2132,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	//DetailCode:
 	//	{DetailCode} used?="{" lines+=STRING* "}";
 	public DetailCodeElements getDetailCodeAccess() {
-		return (pDetailCode != null) ? pDetailCode : (pDetailCode = new DetailCodeElements());
+		return pDetailCode;
 	}
 	
 	public ParserRule getDetailCodeRule() {
@@ -2107,7 +2145,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	//TrPoint:
 	//	TransitionPoint | EntryPoint | ExitPoint;
 	public TrPointElements getTrPointAccess() {
-		return (pTrPoint != null) ? pTrPoint : (pTrPoint = new TrPointElements());
+		return pTrPoint;
 	}
 	
 	public ParserRule getTrPointRule() {
@@ -2117,7 +2155,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	//TransitionPoint:
 	//	handler?="handler"? "TransitionPoint" name=ID;
 	public TransitionPointElements getTransitionPointAccess() {
-		return (pTransitionPoint != null) ? pTransitionPoint : (pTransitionPoint = new TransitionPointElements());
+		return pTransitionPoint;
 	}
 	
 	public ParserRule getTransitionPointRule() {
@@ -2127,7 +2165,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	//EntryPoint:
 	//	"EntryPoint" name=ID;
 	public EntryPointElements getEntryPointAccess() {
-		return (pEntryPoint != null) ? pEntryPoint : (pEntryPoint = new EntryPointElements());
+		return pEntryPoint;
 	}
 	
 	public ParserRule getEntryPointRule() {
@@ -2137,7 +2175,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	//ExitPoint:
 	//	"ExitPoint" name=ID;
 	public ExitPointElements getExitPointAccess() {
-		return (pExitPoint != null) ? pExitPoint : (pExitPoint = new ExitPointElements());
+		return pExitPoint;
 	}
 	
 	public ParserRule getExitPointRule() {
@@ -2150,7 +2188,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	//ChoicePoint:
 	//	"ChoicePoint" name=ID docu=Documentation?;
 	public ChoicePointElements getChoicePointAccess() {
-		return (pChoicePoint != null) ? pChoicePoint : (pChoicePoint = new ChoicePointElements());
+		return pChoicePoint;
 	}
 	
 	public ParserRule getChoicePointRule() {
@@ -2163,7 +2201,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	//Transition:
 	//	InitialTransition | NonInitialTransition;
 	public TransitionElements getTransitionAccess() {
-		return (pTransition != null) ? pTransition : (pTransition = new TransitionElements());
+		return pTransition;
 	}
 	
 	public ParserRule getTransitionRule() {
@@ -2173,7 +2211,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	//NonInitialTransition:
 	//	TransitionChainStartTransition | ContinuationTransition | CPBranchTransition;
 	public NonInitialTransitionElements getNonInitialTransitionAccess() {
-		return (pNonInitialTransition != null) ? pNonInitialTransition : (pNonInitialTransition = new NonInitialTransitionElements());
+		return pNonInitialTransition;
 	}
 	
 	public ParserRule getNonInitialTransitionRule() {
@@ -2183,7 +2221,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	//TransitionChainStartTransition:
 	//	TriggeredTransition | GuardedTransition;
 	public TransitionChainStartTransitionElements getTransitionChainStartTransitionAccess() {
-		return (pTransitionChainStartTransition != null) ? pTransitionChainStartTransition : (pTransitionChainStartTransition = new TransitionChainStartTransitionElements());
+		return pTransitionChainStartTransition;
 	}
 	
 	public ParserRule getTransitionChainStartTransitionRule() {
@@ -2194,7 +2232,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	//	"Transition" name=ID? ":" "initial" "->" to=TransitionTerminal docu=Documentation? ("{" ("action" action=DetailCode)?
 	//	"}")?;
 	public InitialTransitionElements getInitialTransitionAccess() {
-		return (pInitialTransition != null) ? pInitialTransition : (pInitialTransition = new InitialTransitionElements());
+		return pInitialTransition;
 	}
 	
 	public ParserRule getInitialTransitionRule() {
@@ -2205,7 +2243,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	//	"Transition" name=ID? ":" from=TransitionTerminal "->" to=TransitionTerminal docu=Documentation? ("{" ("action"
 	//	action=DetailCode)? "}")?;
 	public ContinuationTransitionElements getContinuationTransitionAccess() {
-		return (pContinuationTransition != null) ? pContinuationTransition : (pContinuationTransition = new ContinuationTransitionElements());
+		return pContinuationTransition;
 	}
 	
 	public ParserRule getContinuationTransitionRule() {
@@ -2216,7 +2254,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	//	"Transition" name=ID? ":" from=TransitionTerminal "->" to=TransitionTerminal docu=Documentation? "{" "triggers" "{"
 	//	triggers+=Trigger ("or" triggers+=Trigger)* "}" ("action" action=DetailCode)? "}";
 	public TriggeredTransitionElements getTriggeredTransitionAccess() {
-		return (pTriggeredTransition != null) ? pTriggeredTransition : (pTriggeredTransition = new TriggeredTransitionElements());
+		return pTriggeredTransition;
 	}
 	
 	public ParserRule getTriggeredTransitionRule() {
@@ -2227,7 +2265,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	//	"Transition" name=ID? ":" from=TransitionTerminal "->" to=TransitionTerminal docu=Documentation? "{" "guard"
 	//	guard=DetailCode ("action" action=DetailCode)? "}";
 	public GuardedTransitionElements getGuardedTransitionAccess() {
-		return (pGuardedTransition != null) ? pGuardedTransition : (pGuardedTransition = new GuardedTransitionElements());
+		return pGuardedTransition;
 	}
 	
 	public ParserRule getGuardedTransitionRule() {
@@ -2238,7 +2276,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	//	"Transition" name=ID? ":" from=TransitionTerminal "->" to=TransitionTerminal docu=Documentation? "{" "cond"
 	//	condition=DetailCode ("action" action=DetailCode)? "}";
 	public CPBranchTransitionElements getCPBranchTransitionAccess() {
-		return (pCPBranchTransition != null) ? pCPBranchTransition : (pCPBranchTransition = new CPBranchTransitionElements());
+		return pCPBranchTransition;
 	}
 	
 	public ParserRule getCPBranchTransitionRule() {
@@ -2249,7 +2287,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	//RefinedTransition:
 	//	"RefinedTransition" target=[Transition|FQN] docu=Documentation? "{" "action" action=DetailCode "}";
 	public RefinedTransitionElements getRefinedTransitionAccess() {
-		return (pRefinedTransition != null) ? pRefinedTransition : (pRefinedTransition = new RefinedTransitionElements());
+		return pRefinedTransition;
 	}
 	
 	public ParserRule getRefinedTransitionRule() {
@@ -2262,7 +2300,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	//TransitionTerminal:
 	//	StateTerminal | TrPointTerminal | SubStateTrPointTerminal | ChoicepointTerminal;
 	public TransitionTerminalElements getTransitionTerminalAccess() {
-		return (pTransitionTerminal != null) ? pTransitionTerminal : (pTransitionTerminal = new TransitionTerminalElements());
+		return pTransitionTerminal;
 	}
 	
 	public ParserRule getTransitionTerminalRule() {
@@ -2272,7 +2310,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	//StateTerminal:
 	//	state=[State];
 	public StateTerminalElements getStateTerminalAccess() {
-		return (pStateTerminal != null) ? pStateTerminal : (pStateTerminal = new StateTerminalElements());
+		return pStateTerminal;
 	}
 	
 	public ParserRule getStateTerminalRule() {
@@ -2282,7 +2320,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	//TrPointTerminal:
 	//	"my" trPoint=[TrPoint];
 	public TrPointTerminalElements getTrPointTerminalAccess() {
-		return (pTrPointTerminal != null) ? pTrPointTerminal : (pTrPointTerminal = new TrPointTerminalElements());
+		return pTrPointTerminal;
 	}
 	
 	public ParserRule getTrPointTerminalRule() {
@@ -2292,7 +2330,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	//SubStateTrPointTerminal:
 	//	trPoint=[TrPoint] "of" state=[State];
 	public SubStateTrPointTerminalElements getSubStateTrPointTerminalAccess() {
-		return (pSubStateTrPointTerminal != null) ? pSubStateTrPointTerminal : (pSubStateTrPointTerminal = new SubStateTrPointTerminalElements());
+		return pSubStateTrPointTerminal;
 	}
 	
 	public ParserRule getSubStateTrPointTerminalRule() {
@@ -2302,7 +2340,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	//ChoicepointTerminal:
 	//	"cp" cp=[ChoicePoint];
 	public ChoicepointTerminalElements getChoicepointTerminalAccess() {
-		return (pChoicepointTerminal != null) ? pChoicepointTerminal : (pChoicepointTerminal = new ChoicepointTerminalElements());
+		return pChoicepointTerminal;
 	}
 	
 	public ParserRule getChoicepointTerminalRule() {
@@ -2315,7 +2353,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	//Trigger:
 	//	"<" msgFromIfPairs+=MessageFromIf ("|" msgFromIfPairs+=MessageFromIf)* guard=Guard? ">";
 	public TriggerElements getTriggerAccess() {
-		return (pTrigger != null) ? pTrigger : (pTrigger = new TriggerElements());
+		return pTrigger;
 	}
 	
 	public ParserRule getTriggerRule() {
@@ -2328,7 +2366,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	//MessageFromIf:
 	//	message=[ecore::EObject] ":" from=[AbstractInterfaceItem];
 	public MessageFromIfElements getMessageFromIfAccess() {
-		return (pMessageFromIf != null) ? pMessageFromIf : (pMessageFromIf = new MessageFromIfElements());
+		return pMessageFromIf;
 	}
 	
 	public ParserRule getMessageFromIfRule() {
@@ -2339,7 +2377,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	//AbstractInterfaceItem:
 	//	name=ID;
 	public AbstractInterfaceItemElements getAbstractInterfaceItemAccess() {
-		return (pAbstractInterfaceItem != null) ? pAbstractInterfaceItem : (pAbstractInterfaceItem = new AbstractInterfaceItemElements());
+		return pAbstractInterfaceItem;
 	}
 	
 	public ParserRule getAbstractInterfaceItemRule() {
@@ -2349,7 +2387,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	//Guard:
 	//	"guard" guard=DetailCode;
 	public GuardElements getGuardAccess() {
-		return (pGuard != null) ? pGuard : (pGuard = new GuardElements());
+		return pGuard;
 	}
 	
 	public ParserRule getGuardRule() {
@@ -2362,7 +2400,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	//ProtocolSemantics:
 	//	{ProtocolSemantics} "semantics" "{" rules+=SemanticsRule* "}";
 	public ProtocolSemanticsElements getProtocolSemanticsAccess() {
-		return (pProtocolSemantics != null) ? pProtocolSemantics : (pProtocolSemantics = new ProtocolSemanticsElements());
+		return pProtocolSemantics;
 	}
 	
 	public ParserRule getProtocolSemanticsRule() {
@@ -2372,7 +2410,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	//SemanticsRule:
 	//	InSemanticsRule | OutSemanticsRule;
 	public SemanticsRuleElements getSemanticsRuleAccess() {
-		return (pSemanticsRule != null) ? pSemanticsRule : (pSemanticsRule = new SemanticsRuleElements());
+		return pSemanticsRule;
 	}
 	
 	public ParserRule getSemanticsRuleRule() {
@@ -2383,7 +2421,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	//	"in" ":" msg=[ecore::EObject] ("->" (followUps+=SemanticsRule | "(" followUps+=SemanticsRule (","
 	//	followUps+=SemanticsRule)+ ")"))?;
 	public InSemanticsRuleElements getInSemanticsRuleAccess() {
-		return (pInSemanticsRule != null) ? pInSemanticsRule : (pInSemanticsRule = new InSemanticsRuleElements());
+		return pInSemanticsRule;
 	}
 	
 	public ParserRule getInSemanticsRuleRule() {
@@ -2394,7 +2432,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	//	"out" ":" msg=[ecore::EObject] ("->" (followUps+=SemanticsRule | "(" followUps+=SemanticsRule (","
 	//	followUps+=SemanticsRule)+ ")"))?;
 	public OutSemanticsRuleElements getOutSemanticsRuleAccess() {
-		return (pOutSemanticsRule != null) ? pOutSemanticsRule : (pOutSemanticsRule = new OutSemanticsRuleElements());
+		return pOutSemanticsRule;
 	}
 	
 	public ParserRule getOutSemanticsRuleRule() {
@@ -2630,7 +2668,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Integer returns ecore::ELong:
-	//	SignedInteger | Hexadecimal;
+	//	("+" | "-")? INT | HEX;
 	public BaseGrammarAccess.IntegerElements getIntegerAccess() {
 		return gaBase.getIntegerAccess();
 	}
@@ -2639,28 +2677,8 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 		return getIntegerAccess().getRule();
 	}
 
-	//SignedInteger hidden():
-	//	("+" | "-")? INT;
-	public BaseGrammarAccess.SignedIntegerElements getSignedIntegerAccess() {
-		return gaBase.getSignedIntegerAccess();
-	}
-	
-	public ParserRule getSignedIntegerRule() {
-		return getSignedIntegerAccess().getRule();
-	}
-
-	//Hexadecimal hidden():
-	//	HEX;
-	public BaseGrammarAccess.HexadecimalElements getHexadecimalAccess() {
-		return gaBase.getHexadecimalAccess();
-	}
-	
-	public ParserRule getHexadecimalRule() {
-		return getHexadecimalAccess().getRule();
-	}
-
 	//Real returns ecore::EDouble:
-	//	Decimal | DotDecimal | DecimalDot | DecimalExp;
+	//	Decimal | / *DotDecimal | DecimalDot |* / DecimalExp;
 	public BaseGrammarAccess.RealElements getRealAccess() {
 		return gaBase.getRealAccess();
 	}
@@ -2679,28 +2697,13 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 		return getDecimalAccess().getRule();
 	}
 
-	//DotDecimal hidden():
-	//	("+" | "-")? "." INT;
-	public BaseGrammarAccess.DotDecimalElements getDotDecimalAccess() {
-		return gaBase.getDotDecimalAccess();
-	}
-	
-	public ParserRule getDotDecimalRule() {
-		return getDotDecimalAccess().getRule();
-	}
-
-	//DecimalDot hidden():
-	//	("+" | "-")? INT ".";
-	public BaseGrammarAccess.DecimalDotElements getDecimalDotAccess() {
-		return gaBase.getDecimalDotAccess();
-	}
-	
-	public ParserRule getDecimalDotRule() {
-		return getDecimalDotAccess().getRule();
-	}
-
+	////DotDecimal hidden():
+	////	('+' | '-')? '.' INT;
+	////
+	////DecimalDot hidden():
+	////	('+' | '-')? INT '.';
 	//DecimalExp hidden():
-	//	("+" | "-")? INT "." INT EXP;
+	//	("+" | "-")? INT "." INT ("e" | "E") ("+" | "-")? INT;
 	public BaseGrammarAccess.DecimalExpElements getDecimalExpAccess() {
 		return gaBase.getDecimalExpAccess();
 	}
@@ -2708,18 +2711,6 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getDecimalExpRule() {
 		return getDecimalExpAccess().getRule();
 	}
-
-	//terminal EXP:
-	//	("e" | "E") ("+" | "-")? "0".."9"+;
-	public TerminalRule getEXPRule() {
-		return gaBase.getEXPRule();
-	} 
-
-	//terminal HEX:
-	//	("0x" | "0X") ("0".."9" | "a".."f" | "A".."F")+;
-	public TerminalRule getHEXRule() {
-		return gaBase.getHEXRule();
-	} 
 
 	//FQN:
 	//	ID ("." ID)*;
@@ -2730,6 +2721,12 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getFQNRule() {
 		return getFQNAccess().getRule();
 	}
+
+	//terminal HEX:
+	//	("0x" | "0X") ("0".."9" | "a".."f" | "A".."F")+;
+	public TerminalRule getHEXRule() {
+		return gaBase.getHEXRule();
+	} 
 
 	//terminal ID:
 	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
@@ -2744,8 +2741,8 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "u" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" |
-	//	"n" | "f" | "r" | "u" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
+	//	"\"" ("\\" . / * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\""))* "\"" | "\'" ("\\" .
+	//	/ * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaBase.getSTRINGRule();
 	} 

@@ -40,6 +40,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ETPhys.ecore#//NodeClass/priomin"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ETPhys.ecore#//NodeClass/priomax"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ETPhys.ecore#//NodeClass/threads"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ETPhys.ecore#//NodeClass/re"/>
     </genClasses>
     <genClasses ecoreClass="ETPhys.ecore#//PhysicalThread">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ETPhys.ecore#//PhysicalThread/default"/>

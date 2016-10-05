@@ -150,12 +150,12 @@ public interface PhysicalThread extends EObject
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Prio</em>' attribute.
-   * @see #setPrio(int)
+   * @see #setPrio(long)
    * @see org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage#getPhysicalThread_Prio()
    * @model
    * @generated
    */
-  int getPrio();
+  long getPrio();
 
   /**
    * Sets the value of the '{@link org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread#getPrio <em>Prio</em>}' attribute.
@@ -165,7 +165,7 @@ public interface PhysicalThread extends EObject
    * @see #getPrio()
    * @generated
    */
-  void setPrio(int value);
+  void setPrio(long value);
 
   /**
    * Returns the value of the '<em><b>Stacksize</b></em>' attribute.

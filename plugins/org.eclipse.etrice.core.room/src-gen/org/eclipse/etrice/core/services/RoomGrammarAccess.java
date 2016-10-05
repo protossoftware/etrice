@@ -70,82 +70,84 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//name=FQN
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.0/@alternatives/@elements.1/@terminal'
+		//FQN
 		public RuleCall getNameFQNParserRuleCall_1_0() { return cNameFQNParserRuleCall_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.0/@alternatives/@elements.2'
+		//docu=Documentation?
 		public Assignment getDocuAssignment_2() { return cDocuAssignment_2; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.0/@alternatives/@elements.2/@terminal'
+		//Documentation
 		public RuleCall getDocuDocumentationParserRuleCall_2_0() { return cDocuDocumentationParserRuleCall_2_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.0/@alternatives/@elements.3'
+		//"{"
 		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.0/@alternatives/@elements.4'
+		//imports+=Import*
 		public Assignment getImportsAssignment_4() { return cImportsAssignment_4; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.0/@alternatives/@elements.4/@terminal'
+		//Import
 		public RuleCall getImportsImportParserRuleCall_4_0() { return cImportsImportParserRuleCall_4_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.0/@alternatives/@elements.5'
+		//(primitiveTypes+=PrimitiveType | enumerationTypes+=EnumerationType | externalTypes+=ExternalType |
+		//dataClasses+=DataClass | protocolClasses+=GeneralProtocolClass | actorClasses+=ActorClass |
+		//subSystemClasses+=SubSystemClass | systems+=LogicalSystem | annotationTypes+=AnnotationType)*
 		public Alternatives getAlternatives_5() { return cAlternatives_5; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.0/@alternatives/@elements.5/@elements.0'
+		//primitiveTypes+=PrimitiveType
 		public Assignment getPrimitiveTypesAssignment_5_0() { return cPrimitiveTypesAssignment_5_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.0/@alternatives/@elements.5/@elements.0/@terminal'
+		//PrimitiveType
 		public RuleCall getPrimitiveTypesPrimitiveTypeParserRuleCall_5_0_0() { return cPrimitiveTypesPrimitiveTypeParserRuleCall_5_0_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.0/@alternatives/@elements.5/@elements.1'
+		//enumerationTypes+=EnumerationType
 		public Assignment getEnumerationTypesAssignment_5_1() { return cEnumerationTypesAssignment_5_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.0/@alternatives/@elements.5/@elements.1/@terminal'
+		//EnumerationType
 		public RuleCall getEnumerationTypesEnumerationTypeParserRuleCall_5_1_0() { return cEnumerationTypesEnumerationTypeParserRuleCall_5_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.0/@alternatives/@elements.5/@elements.2'
+		//externalTypes+=ExternalType
 		public Assignment getExternalTypesAssignment_5_2() { return cExternalTypesAssignment_5_2; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.0/@alternatives/@elements.5/@elements.2/@terminal'
+		//ExternalType
 		public RuleCall getExternalTypesExternalTypeParserRuleCall_5_2_0() { return cExternalTypesExternalTypeParserRuleCall_5_2_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.0/@alternatives/@elements.5/@elements.3'
+		//dataClasses+=DataClass
 		public Assignment getDataClassesAssignment_5_3() { return cDataClassesAssignment_5_3; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.0/@alternatives/@elements.5/@elements.3/@terminal'
+		//DataClass
 		public RuleCall getDataClassesDataClassParserRuleCall_5_3_0() { return cDataClassesDataClassParserRuleCall_5_3_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.0/@alternatives/@elements.5/@elements.4'
+		//protocolClasses+=GeneralProtocolClass
 		public Assignment getProtocolClassesAssignment_5_4() { return cProtocolClassesAssignment_5_4; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.0/@alternatives/@elements.5/@elements.4/@terminal'
+		//GeneralProtocolClass
 		public RuleCall getProtocolClassesGeneralProtocolClassParserRuleCall_5_4_0() { return cProtocolClassesGeneralProtocolClassParserRuleCall_5_4_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.0/@alternatives/@elements.5/@elements.5'
+		//actorClasses+=ActorClass
 		public Assignment getActorClassesAssignment_5_5() { return cActorClassesAssignment_5_5; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.0/@alternatives/@elements.5/@elements.5/@terminal'
+		//ActorClass
 		public RuleCall getActorClassesActorClassParserRuleCall_5_5_0() { return cActorClassesActorClassParserRuleCall_5_5_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.0/@alternatives/@elements.5/@elements.6'
+		//subSystemClasses+=SubSystemClass
 		public Assignment getSubSystemClassesAssignment_5_6() { return cSubSystemClassesAssignment_5_6; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.0/@alternatives/@elements.5/@elements.6/@terminal'
+		//SubSystemClass
 		public RuleCall getSubSystemClassesSubSystemClassParserRuleCall_5_6_0() { return cSubSystemClassesSubSystemClassParserRuleCall_5_6_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.0/@alternatives/@elements.5/@elements.7'
+		//systems+=LogicalSystem
 		public Assignment getSystemsAssignment_5_7() { return cSystemsAssignment_5_7; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.0/@alternatives/@elements.5/@elements.7/@terminal'
+		//LogicalSystem
 		public RuleCall getSystemsLogicalSystemParserRuleCall_5_7_0() { return cSystemsLogicalSystemParserRuleCall_5_7_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.0/@alternatives/@elements.5/@elements.8'
+		//annotationTypes+=AnnotationType
 		public Assignment getAnnotationTypesAssignment_5_8() { return cAnnotationTypesAssignment_5_8; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.0/@alternatives/@elements.5/@elements.8/@terminal'
+		//AnnotationType
 		public RuleCall getAnnotationTypesAnnotationTypeParserRuleCall_5_8_0() { return cAnnotationTypesAnnotationTypeParserRuleCall_5_8_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.0/@alternatives/@elements.6'
+		//"}"
 		public Keyword getRightCurlyBracketKeyword_6() { return cRightCurlyBracketKeyword_6; }
 	}
 
@@ -156,19 +158,20 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cGeneralProtocolClassParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cStructureClassParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/RoomClass'
+		//RoomClass:
+		//	DataType | GeneralProtocolClass | StructureClass;
 		public ParserRule getRule() { return rule; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.1/@alternatives'
+		//DataType | GeneralProtocolClass | StructureClass
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.1/@alternatives/@elements.0'
+		//DataType
 		public RuleCall getDataTypeParserRuleCall_0() { return cDataTypeParserRuleCall_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.1/@alternatives/@elements.1'
+		//GeneralProtocolClass
 		public RuleCall getGeneralProtocolClassParserRuleCall_1() { return cGeneralProtocolClassParserRuleCall_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.1/@alternatives/@elements.2'
+		//StructureClass
 		public RuleCall getStructureClassParserRuleCall_2() { return cStructureClassParserRuleCall_2; }
 	}
 
@@ -178,16 +181,17 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cActorContainerClassParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cLogicalSystemParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/StructureClass'
+		//StructureClass:
+		//	ActorContainerClass | LogicalSystem;
 		public ParserRule getRule() { return rule; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.2/@alternatives'
+		//ActorContainerClass | LogicalSystem
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.2/@alternatives/@elements.0'
+		//ActorContainerClass
 		public RuleCall getActorContainerClassParserRuleCall_0() { return cActorContainerClassParserRuleCall_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.2/@alternatives/@elements.1'
+		//LogicalSystem
 		public RuleCall getLogicalSystemParserRuleCall_1() { return cLogicalSystemParserRuleCall_1; }
 	}
 
@@ -197,16 +201,17 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cActorClassParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cSubSystemClassParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/ActorContainerClass'
+		//ActorContainerClass:
+		//	ActorClass | SubSystemClass;
 		public ParserRule getRule() { return rule; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.3/@alternatives'
+		//ActorClass | SubSystemClass
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.3/@alternatives/@elements.0'
+		//ActorClass
 		public RuleCall getActorClassParserRuleCall_0() { return cActorClassParserRuleCall_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.3/@alternatives/@elements.1'
+		//SubSystemClass
 		public RuleCall getSubSystemClassParserRuleCall_1() { return cSubSystemClassParserRuleCall_1; }
 	}
 
@@ -219,25 +224,28 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cRefTypeAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cRefTypeRefableTypeParserRuleCall_2_0 = (RuleCall)cRefTypeAssignment_2.eContents().get(0);
 		
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/VarDecl'
+		//// **************************************************************
+		//// data class
+		//VarDecl:
+		//	name=ID ":" refType=RefableType;
 		public ParserRule getRule() { return rule; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.4/@alternatives'
+		//name=ID ":" refType=RefableType
 		public Group getGroup() { return cGroup; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.4/@alternatives/@elements.0'
+		//name=ID
 		public Assignment getNameAssignment_0() { return cNameAssignment_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.4/@alternatives/@elements.0/@terminal'
+		//ID
 		public RuleCall getNameIDTerminalRuleCall_0_0() { return cNameIDTerminalRuleCall_0_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.4/@alternatives/@elements.1'
+		//":"
 		public Keyword getColonKeyword_1() { return cColonKeyword_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.4/@alternatives/@elements.2'
+		//refType=RefableType
 		public Assignment getRefTypeAssignment_2() { return cRefTypeAssignment_2; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.4/@alternatives/@elements.2/@terminal'
+		//RefableType
 		public RuleCall getRefTypeRefableTypeParserRuleCall_2_0() { return cRefTypeRefableTypeParserRuleCall_2_0; }
 	}
 
@@ -250,25 +258,26 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cRefAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final Keyword cRefRefKeyword_1_0 = (Keyword)cRefAssignment_1.eContents().get(0);
 		
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/RefableType'
+		//RefableType:
+		//	type=[DataType|FQN] ref?="ref"?;
 		public ParserRule getRule() { return rule; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.5/@alternatives'
+		//type=[DataType|FQN] ref?="ref"?
 		public Group getGroup() { return cGroup; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.5/@alternatives/@elements.0'
+		//type=[DataType|FQN]
 		public Assignment getTypeAssignment_0() { return cTypeAssignment_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.5/@alternatives/@elements.0/@terminal'
+		//[DataType|FQN]
 		public CrossReference getTypeDataTypeCrossReference_0_0() { return cTypeDataTypeCrossReference_0_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.5/@alternatives/@elements.0/@terminal/@terminal'
+		//FQN
 		public RuleCall getTypeDataTypeFQNParserRuleCall_0_0_1() { return cTypeDataTypeFQNParserRuleCall_0_0_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.5/@alternatives/@elements.1'
+		//ref?="ref"?
 		public Assignment getRefAssignment_1() { return cRefAssignment_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.5/@alternatives/@elements.1/@terminal'
+		//"ref"
 		public Keyword getRefRefKeyword_1_0() { return cRefRefKeyword_1_0; }
 	}
 
@@ -279,19 +288,20 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cEnumerationTypeParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cComplexTypeParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/DataType'
+		//DataType:
+		//	PrimitiveType | EnumerationType | ComplexType;
 		public ParserRule getRule() { return rule; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.6/@alternatives'
+		//PrimitiveType | EnumerationType | ComplexType
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.6/@alternatives/@elements.0'
+		//PrimitiveType
 		public RuleCall getPrimitiveTypeParserRuleCall_0() { return cPrimitiveTypeParserRuleCall_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.6/@alternatives/@elements.1'
+		//EnumerationType
 		public RuleCall getEnumerationTypeParserRuleCall_1() { return cEnumerationTypeParserRuleCall_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.6/@alternatives/@elements.2'
+		//ComplexType
 		public RuleCall getComplexTypeParserRuleCall_2() { return cComplexTypeParserRuleCall_2; }
 	}
 
@@ -301,16 +311,17 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cDataClassParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cExternalTypeParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/ComplexType'
+		//ComplexType:
+		//	DataClass | ExternalType;
 		public ParserRule getRule() { return rule; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.7/@alternatives'
+		//DataClass | ExternalType
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.7/@alternatives/@elements.0'
+		//DataClass
 		public RuleCall getDataClassParserRuleCall_0() { return cDataClassParserRuleCall_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.7/@alternatives/@elements.1'
+		//ExternalType
 		public RuleCall getExternalTypeParserRuleCall_1() { return cExternalTypeParserRuleCall_1; }
 	}
 
@@ -337,67 +348,70 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cDocuAssignment_9 = (Assignment)cGroup.eContents().get(9);
 		private final RuleCall cDocuDocumentationParserRuleCall_9_0 = (RuleCall)cDocuAssignment_9.eContents().get(0);
 		
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/PrimitiveType'
+		//PrimitiveType:
+		//	"PrimitiveType" name=ID ":" type=LiteralType "->" targetName=STRING ("(" castName=FQN ")")? "default"
+		//	defaultValueLiteral=STRING docu=Documentation?;
 		public ParserRule getRule() { return rule; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.8/@alternatives'
+		//"PrimitiveType" name=ID ":" type=LiteralType "->" targetName=STRING ("(" castName=FQN ")")? "default"
+		//defaultValueLiteral=STRING docu=Documentation?
 		public Group getGroup() { return cGroup; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.8/@alternatives/@elements.0'
+		//"PrimitiveType"
 		public Keyword getPrimitiveTypeKeyword_0() { return cPrimitiveTypeKeyword_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.8/@alternatives/@elements.1'
+		//name=ID
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.8/@alternatives/@elements.1/@terminal'
+		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.8/@alternatives/@elements.2'
+		//":"
 		public Keyword getColonKeyword_2() { return cColonKeyword_2; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.8/@alternatives/@elements.3'
+		//type=LiteralType
 		public Assignment getTypeAssignment_3() { return cTypeAssignment_3; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.8/@alternatives/@elements.3/@terminal'
+		//LiteralType
 		public RuleCall getTypeLiteralTypeEnumRuleCall_3_0() { return cTypeLiteralTypeEnumRuleCall_3_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.8/@alternatives/@elements.4'
+		//"->"
 		public Keyword getHyphenMinusGreaterThanSignKeyword_4() { return cHyphenMinusGreaterThanSignKeyword_4; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.8/@alternatives/@elements.5'
+		//targetName=STRING
 		public Assignment getTargetNameAssignment_5() { return cTargetNameAssignment_5; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.8/@alternatives/@elements.5/@terminal'
+		//STRING
 		public RuleCall getTargetNameSTRINGTerminalRuleCall_5_0() { return cTargetNameSTRINGTerminalRuleCall_5_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.8/@alternatives/@elements.6'
+		//("(" castName=FQN ")")?
 		public Group getGroup_6() { return cGroup_6; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.8/@alternatives/@elements.6/@elements.0'
+		//"("
 		public Keyword getLeftParenthesisKeyword_6_0() { return cLeftParenthesisKeyword_6_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.8/@alternatives/@elements.6/@elements.1'
+		//castName=FQN
 		public Assignment getCastNameAssignment_6_1() { return cCastNameAssignment_6_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.8/@alternatives/@elements.6/@elements.1/@terminal'
+		//FQN
 		public RuleCall getCastNameFQNParserRuleCall_6_1_0() { return cCastNameFQNParserRuleCall_6_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.8/@alternatives/@elements.6/@elements.2'
+		//")"
 		public Keyword getRightParenthesisKeyword_6_2() { return cRightParenthesisKeyword_6_2; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.8/@alternatives/@elements.7'
+		//"default"
 		public Keyword getDefaultKeyword_7() { return cDefaultKeyword_7; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.8/@alternatives/@elements.8'
+		//defaultValueLiteral=STRING
 		public Assignment getDefaultValueLiteralAssignment_8() { return cDefaultValueLiteralAssignment_8; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.8/@alternatives/@elements.8/@terminal'
+		//STRING
 		public RuleCall getDefaultValueLiteralSTRINGTerminalRuleCall_8_0() { return cDefaultValueLiteralSTRINGTerminalRuleCall_8_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.8/@alternatives/@elements.9'
+		//docu=Documentation?
 		public Assignment getDocuAssignment_9() { return cDocuAssignment_9; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.8/@alternatives/@elements.9/@terminal'
+		//Documentation
 		public RuleCall getDocuDocumentationParserRuleCall_9_0() { return cDocuDocumentationParserRuleCall_9_0; }
 	}
 
@@ -424,67 +438,70 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cLiteralsEnumLiteralParserRuleCall_5_1_1_0 = (RuleCall)cLiteralsAssignment_5_1_1.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/EnumerationType'
+		//EnumerationType:
+		//	"Enumeration" name=ID docu=Documentation? ("of" primitiveType=[PrimitiveType|FQN])? "{" (literals+=EnumLiteral (","
+		//	literals+=EnumLiteral)*)? "}";
 		public ParserRule getRule() { return rule; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.9/@alternatives'
+		//"Enumeration" name=ID docu=Documentation? ("of" primitiveType=[PrimitiveType|FQN])? "{" (literals+=EnumLiteral (","
+		//literals+=EnumLiteral)*)? "}"
 		public Group getGroup() { return cGroup; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.9/@alternatives/@elements.0'
+		//"Enumeration"
 		public Keyword getEnumerationKeyword_0() { return cEnumerationKeyword_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.9/@alternatives/@elements.1'
+		//name=ID
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.9/@alternatives/@elements.1/@terminal'
+		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.9/@alternatives/@elements.2'
+		//docu=Documentation?
 		public Assignment getDocuAssignment_2() { return cDocuAssignment_2; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.9/@alternatives/@elements.2/@terminal'
+		//Documentation
 		public RuleCall getDocuDocumentationParserRuleCall_2_0() { return cDocuDocumentationParserRuleCall_2_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.9/@alternatives/@elements.3'
+		//("of" primitiveType=[PrimitiveType|FQN])?
 		public Group getGroup_3() { return cGroup_3; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.9/@alternatives/@elements.3/@elements.0'
+		//"of"
 		public Keyword getOfKeyword_3_0() { return cOfKeyword_3_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.9/@alternatives/@elements.3/@elements.1'
+		//primitiveType=[PrimitiveType|FQN]
 		public Assignment getPrimitiveTypeAssignment_3_1() { return cPrimitiveTypeAssignment_3_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.9/@alternatives/@elements.3/@elements.1/@terminal'
+		//[PrimitiveType|FQN]
 		public CrossReference getPrimitiveTypePrimitiveTypeCrossReference_3_1_0() { return cPrimitiveTypePrimitiveTypeCrossReference_3_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.9/@alternatives/@elements.3/@elements.1/@terminal/@terminal'
+		//FQN
 		public RuleCall getPrimitiveTypePrimitiveTypeFQNParserRuleCall_3_1_0_1() { return cPrimitiveTypePrimitiveTypeFQNParserRuleCall_3_1_0_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.9/@alternatives/@elements.4'
+		//"{"
 		public Keyword getLeftCurlyBracketKeyword_4() { return cLeftCurlyBracketKeyword_4; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.9/@alternatives/@elements.5'
+		//(literals+=EnumLiteral ("," literals+=EnumLiteral)*)?
 		public Group getGroup_5() { return cGroup_5; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.9/@alternatives/@elements.5/@elements.0'
+		//literals+=EnumLiteral
 		public Assignment getLiteralsAssignment_5_0() { return cLiteralsAssignment_5_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.9/@alternatives/@elements.5/@elements.0/@terminal'
+		//EnumLiteral
 		public RuleCall getLiteralsEnumLiteralParserRuleCall_5_0_0() { return cLiteralsEnumLiteralParserRuleCall_5_0_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.9/@alternatives/@elements.5/@elements.1'
+		//("," literals+=EnumLiteral)*
 		public Group getGroup_5_1() { return cGroup_5_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.9/@alternatives/@elements.5/@elements.1/@elements.0'
+		//","
 		public Keyword getCommaKeyword_5_1_0() { return cCommaKeyword_5_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.9/@alternatives/@elements.5/@elements.1/@elements.1'
+		//literals+=EnumLiteral
 		public Assignment getLiteralsAssignment_5_1_1() { return cLiteralsAssignment_5_1_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.9/@alternatives/@elements.5/@elements.1/@elements.1/@terminal'
+		//EnumLiteral
 		public RuleCall getLiteralsEnumLiteralParserRuleCall_5_1_1_0() { return cLiteralsEnumLiteralParserRuleCall_5_1_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.9/@alternatives/@elements.6'
+		//"}"
 		public Keyword getRightCurlyBracketKeyword_6() { return cRightCurlyBracketKeyword_6; }
 	}
 
@@ -498,28 +515,29 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cLiteralAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
 		private final RuleCall cLiteralIntLiteralParserRuleCall_1_1_0 = (RuleCall)cLiteralAssignment_1_1.eContents().get(0);
 		
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/EnumLiteral'
+		//EnumLiteral:
+		//	name=ID ("=" literal=IntLiteral)?;
 		public ParserRule getRule() { return rule; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.10/@alternatives'
+		//name=ID ("=" literal=IntLiteral)?
 		public Group getGroup() { return cGroup; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.10/@alternatives/@elements.0'
+		//name=ID
 		public Assignment getNameAssignment_0() { return cNameAssignment_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.10/@alternatives/@elements.0/@terminal'
+		//ID
 		public RuleCall getNameIDTerminalRuleCall_0_0() { return cNameIDTerminalRuleCall_0_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.10/@alternatives/@elements.1'
+		//("=" literal=IntLiteral)?
 		public Group getGroup_1() { return cGroup_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.10/@alternatives/@elements.1/@elements.0'
+		//"="
 		public Keyword getEqualsSignKeyword_1_0() { return cEqualsSignKeyword_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.10/@alternatives/@elements.1/@elements.1'
+		//literal=IntLiteral
 		public Assignment getLiteralAssignment_1_1() { return cLiteralAssignment_1_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.10/@alternatives/@elements.1/@elements.1/@terminal'
+		//IntLiteral
 		public RuleCall getLiteralIntLiteralParserRuleCall_1_1_0() { return cLiteralIntLiteralParserRuleCall_1_1_0; }
 	}
 
@@ -539,46 +557,47 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cDocuAssignment_5 = (Assignment)cGroup.eContents().get(5);
 		private final RuleCall cDocuDocumentationParserRuleCall_5_0 = (RuleCall)cDocuAssignment_5.eContents().get(0);
 		
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/ExternalType'
+		//ExternalType:
+		//	"ExternalType" name=ID "->" targetName=STRING ("default" defaultValueLiteral=STRING)? docu=Documentation?;
 		public ParserRule getRule() { return rule; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.11/@alternatives'
+		//"ExternalType" name=ID "->" targetName=STRING ("default" defaultValueLiteral=STRING)? docu=Documentation?
 		public Group getGroup() { return cGroup; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.11/@alternatives/@elements.0'
+		//"ExternalType"
 		public Keyword getExternalTypeKeyword_0() { return cExternalTypeKeyword_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.11/@alternatives/@elements.1'
+		//name=ID
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.11/@alternatives/@elements.1/@terminal'
+		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.11/@alternatives/@elements.2'
+		//"->"
 		public Keyword getHyphenMinusGreaterThanSignKeyword_2() { return cHyphenMinusGreaterThanSignKeyword_2; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.11/@alternatives/@elements.3'
+		//targetName=STRING
 		public Assignment getTargetNameAssignment_3() { return cTargetNameAssignment_3; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.11/@alternatives/@elements.3/@terminal'
+		//STRING
 		public RuleCall getTargetNameSTRINGTerminalRuleCall_3_0() { return cTargetNameSTRINGTerminalRuleCall_3_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.11/@alternatives/@elements.4'
+		//("default" defaultValueLiteral=STRING)?
 		public Group getGroup_4() { return cGroup_4; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.11/@alternatives/@elements.4/@elements.0'
+		//"default"
 		public Keyword getDefaultKeyword_4_0() { return cDefaultKeyword_4_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.11/@alternatives/@elements.4/@elements.1'
+		//defaultValueLiteral=STRING
 		public Assignment getDefaultValueLiteralAssignment_4_1() { return cDefaultValueLiteralAssignment_4_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.11/@alternatives/@elements.4/@elements.1/@terminal'
+		//STRING
 		public RuleCall getDefaultValueLiteralSTRINGTerminalRuleCall_4_1_0() { return cDefaultValueLiteralSTRINGTerminalRuleCall_4_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.11/@alternatives/@elements.5'
+		//docu=Documentation?
 		public Assignment getDocuAssignment_5() { return cDocuAssignment_5; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.11/@alternatives/@elements.5/@terminal'
+		//Documentation
 		public RuleCall getDocuDocumentationParserRuleCall_5_0() { return cDocuDocumentationParserRuleCall_5_0; }
 	}
 
@@ -619,109 +638,115 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cAttributesAttributeParserRuleCall_9_2_0 = (RuleCall)cAttributesAssignment_9_2.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_10 = (Keyword)cGroup.eContents().get(10);
 		
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/DataClass'
+		//// TODOHRR: define detail level language?
+		//DataClass:
+		//	"DataClass" name=ID docu=Documentation? ("extends" base=[DataClass|FQN])? "{" annotations+=Annotation* ("usercode1"
+		//	userCode1=DetailCode)? ("usercode2" userCode2=DetailCode)? ("usercode3" userCode3=DetailCode)?
+		//	(operations+=StandardOperation | structors+=ClassStructor | attributes+=Attribute)* "}";
 		public ParserRule getRule() { return rule; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.12/@alternatives'
+		//"DataClass" name=ID docu=Documentation? ("extends" base=[DataClass|FQN])? "{" annotations+=Annotation* ("usercode1"
+		//userCode1=DetailCode)? ("usercode2" userCode2=DetailCode)? ("usercode3" userCode3=DetailCode)?
+		//(operations+=StandardOperation | structors+=ClassStructor | attributes+=Attribute)* "}"
 		public Group getGroup() { return cGroup; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.12/@alternatives/@elements.0'
+		//"DataClass"
 		public Keyword getDataClassKeyword_0() { return cDataClassKeyword_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.12/@alternatives/@elements.1'
+		//name=ID
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.12/@alternatives/@elements.1/@terminal'
+		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.12/@alternatives/@elements.2'
+		//docu=Documentation?
 		public Assignment getDocuAssignment_2() { return cDocuAssignment_2; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.12/@alternatives/@elements.2/@terminal'
+		//Documentation
 		public RuleCall getDocuDocumentationParserRuleCall_2_0() { return cDocuDocumentationParserRuleCall_2_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.12/@alternatives/@elements.3'
+		//("extends" base=[DataClass|FQN])?
 		public Group getGroup_3() { return cGroup_3; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.12/@alternatives/@elements.3/@elements.0'
+		//"extends"
 		public Keyword getExtendsKeyword_3_0() { return cExtendsKeyword_3_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.12/@alternatives/@elements.3/@elements.1'
+		//base=[DataClass|FQN]
 		public Assignment getBaseAssignment_3_1() { return cBaseAssignment_3_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.12/@alternatives/@elements.3/@elements.1/@terminal'
+		//[DataClass|FQN]
 		public CrossReference getBaseDataClassCrossReference_3_1_0() { return cBaseDataClassCrossReference_3_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.12/@alternatives/@elements.3/@elements.1/@terminal/@terminal'
+		//FQN
 		public RuleCall getBaseDataClassFQNParserRuleCall_3_1_0_1() { return cBaseDataClassFQNParserRuleCall_3_1_0_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.12/@alternatives/@elements.4'
+		//"{"
 		public Keyword getLeftCurlyBracketKeyword_4() { return cLeftCurlyBracketKeyword_4; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.12/@alternatives/@elements.5'
+		//annotations+=Annotation*
 		public Assignment getAnnotationsAssignment_5() { return cAnnotationsAssignment_5; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.12/@alternatives/@elements.5/@terminal'
+		//Annotation
 		public RuleCall getAnnotationsAnnotationParserRuleCall_5_0() { return cAnnotationsAnnotationParserRuleCall_5_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.12/@alternatives/@elements.6'
+		//("usercode1" userCode1=DetailCode)?
 		public Group getGroup_6() { return cGroup_6; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.12/@alternatives/@elements.6/@elements.0'
+		//"usercode1"
 		public Keyword getUsercode1Keyword_6_0() { return cUsercode1Keyword_6_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.12/@alternatives/@elements.6/@elements.1'
+		//userCode1=DetailCode
 		public Assignment getUserCode1Assignment_6_1() { return cUserCode1Assignment_6_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.12/@alternatives/@elements.6/@elements.1/@terminal'
+		//DetailCode
 		public RuleCall getUserCode1DetailCodeParserRuleCall_6_1_0() { return cUserCode1DetailCodeParserRuleCall_6_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.12/@alternatives/@elements.7'
+		//("usercode2" userCode2=DetailCode)?
 		public Group getGroup_7() { return cGroup_7; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.12/@alternatives/@elements.7/@elements.0'
+		//"usercode2"
 		public Keyword getUsercode2Keyword_7_0() { return cUsercode2Keyword_7_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.12/@alternatives/@elements.7/@elements.1'
+		//userCode2=DetailCode
 		public Assignment getUserCode2Assignment_7_1() { return cUserCode2Assignment_7_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.12/@alternatives/@elements.7/@elements.1/@terminal'
+		//DetailCode
 		public RuleCall getUserCode2DetailCodeParserRuleCall_7_1_0() { return cUserCode2DetailCodeParserRuleCall_7_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.12/@alternatives/@elements.8'
+		//("usercode3" userCode3=DetailCode)?
 		public Group getGroup_8() { return cGroup_8; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.12/@alternatives/@elements.8/@elements.0'
+		//"usercode3"
 		public Keyword getUsercode3Keyword_8_0() { return cUsercode3Keyword_8_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.12/@alternatives/@elements.8/@elements.1'
+		//userCode3=DetailCode
 		public Assignment getUserCode3Assignment_8_1() { return cUserCode3Assignment_8_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.12/@alternatives/@elements.8/@elements.1/@terminal'
+		//DetailCode
 		public RuleCall getUserCode3DetailCodeParserRuleCall_8_1_0() { return cUserCode3DetailCodeParserRuleCall_8_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.12/@alternatives/@elements.9'
+		//(operations+=StandardOperation | structors+=ClassStructor | attributes+=Attribute)*
 		public Alternatives getAlternatives_9() { return cAlternatives_9; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.12/@alternatives/@elements.9/@elements.0'
+		//operations+=StandardOperation
 		public Assignment getOperationsAssignment_9_0() { return cOperationsAssignment_9_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.12/@alternatives/@elements.9/@elements.0/@terminal'
+		//StandardOperation
 		public RuleCall getOperationsStandardOperationParserRuleCall_9_0_0() { return cOperationsStandardOperationParserRuleCall_9_0_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.12/@alternatives/@elements.9/@elements.1'
+		//structors+=ClassStructor
 		public Assignment getStructorsAssignment_9_1() { return cStructorsAssignment_9_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.12/@alternatives/@elements.9/@elements.1/@terminal'
+		//ClassStructor
 		public RuleCall getStructorsClassStructorParserRuleCall_9_1_0() { return cStructorsClassStructorParserRuleCall_9_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.12/@alternatives/@elements.9/@elements.2'
+		//attributes+=Attribute
 		public Assignment getAttributesAssignment_9_2() { return cAttributesAssignment_9_2; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.12/@alternatives/@elements.9/@elements.2/@terminal'
+		//Attribute
 		public RuleCall getAttributesAttributeParserRuleCall_9_2_0() { return cAttributesAttributeParserRuleCall_9_2_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.12/@alternatives/@elements.10'
+		//"}"
 		public Keyword getRightCurlyBracketKeyword_10() { return cRightCurlyBracketKeyword_10; }
 	}
 
@@ -746,61 +771,62 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cDocuAssignment_6 = (Assignment)cGroup.eContents().get(6);
 		private final RuleCall cDocuDocumentationParserRuleCall_6_0 = (RuleCall)cDocuAssignment_6.eContents().get(0);
 		
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/Attribute'
+		//Attribute:
+		//	"Attribute" name=ID ("[" size=INT "]")? ":" type=RefableType? ("=" defaultValueLiteral=STRING)? docu=Documentation?;
 		public ParserRule getRule() { return rule; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.13/@alternatives'
+		//"Attribute" name=ID ("[" size=INT "]")? ":" type=RefableType? ("=" defaultValueLiteral=STRING)? docu=Documentation?
 		public Group getGroup() { return cGroup; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.13/@alternatives/@elements.0'
+		//"Attribute"
 		public Keyword getAttributeKeyword_0() { return cAttributeKeyword_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.13/@alternatives/@elements.1'
+		//name=ID
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.13/@alternatives/@elements.1/@terminal'
+		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.13/@alternatives/@elements.2'
+		//("[" size=INT "]")?
 		public Group getGroup_2() { return cGroup_2; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.13/@alternatives/@elements.2/@elements.0'
+		//"["
 		public Keyword getLeftSquareBracketKeyword_2_0() { return cLeftSquareBracketKeyword_2_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.13/@alternatives/@elements.2/@elements.1'
+		//size=INT
 		public Assignment getSizeAssignment_2_1() { return cSizeAssignment_2_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.13/@alternatives/@elements.2/@elements.1/@terminal'
+		//INT
 		public RuleCall getSizeINTTerminalRuleCall_2_1_0() { return cSizeINTTerminalRuleCall_2_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.13/@alternatives/@elements.2/@elements.2'
+		//"]"
 		public Keyword getRightSquareBracketKeyword_2_2() { return cRightSquareBracketKeyword_2_2; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.13/@alternatives/@elements.3'
+		//":"
 		public Keyword getColonKeyword_3() { return cColonKeyword_3; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.13/@alternatives/@elements.4'
+		//type=RefableType?
 		public Assignment getTypeAssignment_4() { return cTypeAssignment_4; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.13/@alternatives/@elements.4/@terminal'
+		//RefableType
 		public RuleCall getTypeRefableTypeParserRuleCall_4_0() { return cTypeRefableTypeParserRuleCall_4_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.13/@alternatives/@elements.5'
+		//("=" defaultValueLiteral=STRING)?
 		public Group getGroup_5() { return cGroup_5; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.13/@alternatives/@elements.5/@elements.0'
+		//"="
 		public Keyword getEqualsSignKeyword_5_0() { return cEqualsSignKeyword_5_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.13/@alternatives/@elements.5/@elements.1'
+		//defaultValueLiteral=STRING
 		public Assignment getDefaultValueLiteralAssignment_5_1() { return cDefaultValueLiteralAssignment_5_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.13/@alternatives/@elements.5/@elements.1/@terminal'
+		//STRING
 		public RuleCall getDefaultValueLiteralSTRINGTerminalRuleCall_5_1_0() { return cDefaultValueLiteralSTRINGTerminalRuleCall_5_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.13/@alternatives/@elements.6'
+		//docu=Documentation?
 		public Assignment getDocuAssignment_6() { return cDocuAssignment_6; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.13/@alternatives/@elements.6/@terminal'
+		//Documentation
 		public RuleCall getDocuDocumentationParserRuleCall_6_0() { return cDocuDocumentationParserRuleCall_6_0; }
 	}
 
@@ -810,16 +836,17 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cStandardOperationParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cPortOperationParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/Operation'
+		//Operation:
+		//	StandardOperation | PortOperation;
 		public ParserRule getRule() { return rule; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.14/@alternatives'
+		//StandardOperation | PortOperation
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.14/@alternatives/@elements.0'
+		//StandardOperation
 		public RuleCall getStandardOperationParserRuleCall_0() { return cStandardOperationParserRuleCall_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.14/@alternatives/@elements.1'
+		//PortOperation
 		public RuleCall getPortOperationParserRuleCall_1() { return cPortOperationParserRuleCall_1; }
 	}
 
@@ -851,82 +878,85 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cDetailCodeAssignment_8 = (Assignment)cGroup.eContents().get(8);
 		private final RuleCall cDetailCodeDetailCodeParserRuleCall_8_0 = (RuleCall)cDetailCodeAssignment_8.eContents().get(0);
 		
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/StandardOperation'
+		//StandardOperation:
+		//	override?="override"? "Operation" name=ID "(" (arguments+=VarDecl ("," arguments+=VarDecl)*)? ")" (":" ("void" |
+		//	returnType=RefableType))? docu=Documentation? detailCode=DetailCode;
 		public ParserRule getRule() { return rule; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.15/@alternatives'
+		//override?="override"? "Operation" name=ID "(" (arguments+=VarDecl ("," arguments+=VarDecl)*)? ")" (":" ("void" |
+		//returnType=RefableType))? docu=Documentation? detailCode=DetailCode
 		public Group getGroup() { return cGroup; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.15/@alternatives/@elements.0'
+		//override?="override"?
 		public Assignment getOverrideAssignment_0() { return cOverrideAssignment_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.15/@alternatives/@elements.0/@terminal'
+		//"override"
 		public Keyword getOverrideOverrideKeyword_0_0() { return cOverrideOverrideKeyword_0_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.15/@alternatives/@elements.1'
+		//"Operation"
 		public Keyword getOperationKeyword_1() { return cOperationKeyword_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.15/@alternatives/@elements.2'
+		//name=ID
 		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.15/@alternatives/@elements.2/@terminal'
+		//ID
 		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.15/@alternatives/@elements.3'
+		//"("
 		public Keyword getLeftParenthesisKeyword_3() { return cLeftParenthesisKeyword_3; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.15/@alternatives/@elements.4'
+		//(arguments+=VarDecl ("," arguments+=VarDecl)*)?
 		public Group getGroup_4() { return cGroup_4; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.15/@alternatives/@elements.4/@elements.0'
+		//arguments+=VarDecl
 		public Assignment getArgumentsAssignment_4_0() { return cArgumentsAssignment_4_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.15/@alternatives/@elements.4/@elements.0/@terminal'
+		//VarDecl
 		public RuleCall getArgumentsVarDeclParserRuleCall_4_0_0() { return cArgumentsVarDeclParserRuleCall_4_0_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.15/@alternatives/@elements.4/@elements.1'
+		//("," arguments+=VarDecl)*
 		public Group getGroup_4_1() { return cGroup_4_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.15/@alternatives/@elements.4/@elements.1/@elements.0'
+		//","
 		public Keyword getCommaKeyword_4_1_0() { return cCommaKeyword_4_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.15/@alternatives/@elements.4/@elements.1/@elements.1'
+		//arguments+=VarDecl
 		public Assignment getArgumentsAssignment_4_1_1() { return cArgumentsAssignment_4_1_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.15/@alternatives/@elements.4/@elements.1/@elements.1/@terminal'
+		//VarDecl
 		public RuleCall getArgumentsVarDeclParserRuleCall_4_1_1_0() { return cArgumentsVarDeclParserRuleCall_4_1_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.15/@alternatives/@elements.5'
+		//")"
 		public Keyword getRightParenthesisKeyword_5() { return cRightParenthesisKeyword_5; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.15/@alternatives/@elements.6'
+		//(":" ("void" | returnType=RefableType))?
 		public Group getGroup_6() { return cGroup_6; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.15/@alternatives/@elements.6/@elements.0'
+		//":"
 		public Keyword getColonKeyword_6_0() { return cColonKeyword_6_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.15/@alternatives/@elements.6/@elements.1'
+		//"void" | returnType=RefableType
 		public Alternatives getAlternatives_6_1() { return cAlternatives_6_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.15/@alternatives/@elements.6/@elements.1/@elements.0'
+		//"void"
 		public Keyword getVoidKeyword_6_1_0() { return cVoidKeyword_6_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.15/@alternatives/@elements.6/@elements.1/@elements.1'
+		//returnType=RefableType
 		public Assignment getReturnTypeAssignment_6_1_1() { return cReturnTypeAssignment_6_1_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.15/@alternatives/@elements.6/@elements.1/@elements.1/@terminal'
+		//RefableType
 		public RuleCall getReturnTypeRefableTypeParserRuleCall_6_1_1_0() { return cReturnTypeRefableTypeParserRuleCall_6_1_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.15/@alternatives/@elements.7'
+		//docu=Documentation?
 		public Assignment getDocuAssignment_7() { return cDocuAssignment_7; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.15/@alternatives/@elements.7/@terminal'
+		//Documentation
 		public RuleCall getDocuDocumentationParserRuleCall_7_0() { return cDocuDocumentationParserRuleCall_7_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.15/@alternatives/@elements.8'
+		//detailCode=DetailCode
 		public Assignment getDetailCodeAssignment_8() { return cDetailCodeAssignment_8; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.15/@alternatives/@elements.8/@terminal'
+		//DetailCode
 		public RuleCall getDetailCodeDetailCodeParserRuleCall_8_0() { return cDetailCodeDetailCodeParserRuleCall_8_0; }
 	}
 
@@ -962,94 +992,97 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cDetailCodeAssignment_7 = (Assignment)cGroup.eContents().get(7);
 		private final RuleCall cDetailCodeDetailCodeParserRuleCall_7_0 = (RuleCall)cDetailCodeAssignment_7.eContents().get(0);
 		
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/PortOperation'
+		//PortOperation:
+		//	"Operation" name=ID "(" (arguments+=VarDecl ("," arguments+=VarDecl)*)? ")" (":" ("void" | returnType=RefableType) |
+		//	"sends" sendsMsg=[Message])? docu=Documentation? detailCode=DetailCode;
 		public ParserRule getRule() { return rule; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.16/@alternatives'
+		//"Operation" name=ID "(" (arguments+=VarDecl ("," arguments+=VarDecl)*)? ")" (":" ("void" | returnType=RefableType) |
+		//"sends" sendsMsg=[Message])? docu=Documentation? detailCode=DetailCode
 		public Group getGroup() { return cGroup; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.16/@alternatives/@elements.0'
+		//"Operation"
 		public Keyword getOperationKeyword_0() { return cOperationKeyword_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.16/@alternatives/@elements.1'
+		//name=ID
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.16/@alternatives/@elements.1/@terminal'
+		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.16/@alternatives/@elements.2'
+		//"("
 		public Keyword getLeftParenthesisKeyword_2() { return cLeftParenthesisKeyword_2; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.16/@alternatives/@elements.3'
+		//(arguments+=VarDecl ("," arguments+=VarDecl)*)?
 		public Group getGroup_3() { return cGroup_3; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.16/@alternatives/@elements.3/@elements.0'
+		//arguments+=VarDecl
 		public Assignment getArgumentsAssignment_3_0() { return cArgumentsAssignment_3_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.16/@alternatives/@elements.3/@elements.0/@terminal'
+		//VarDecl
 		public RuleCall getArgumentsVarDeclParserRuleCall_3_0_0() { return cArgumentsVarDeclParserRuleCall_3_0_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.16/@alternatives/@elements.3/@elements.1'
+		//("," arguments+=VarDecl)*
 		public Group getGroup_3_1() { return cGroup_3_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.16/@alternatives/@elements.3/@elements.1/@elements.0'
+		//","
 		public Keyword getCommaKeyword_3_1_0() { return cCommaKeyword_3_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.16/@alternatives/@elements.3/@elements.1/@elements.1'
+		//arguments+=VarDecl
 		public Assignment getArgumentsAssignment_3_1_1() { return cArgumentsAssignment_3_1_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.16/@alternatives/@elements.3/@elements.1/@elements.1/@terminal'
+		//VarDecl
 		public RuleCall getArgumentsVarDeclParserRuleCall_3_1_1_0() { return cArgumentsVarDeclParserRuleCall_3_1_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.16/@alternatives/@elements.4'
+		//")"
 		public Keyword getRightParenthesisKeyword_4() { return cRightParenthesisKeyword_4; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.16/@alternatives/@elements.5'
+		//(":" ("void" | returnType=RefableType) | "sends" sendsMsg=[Message])?
 		public Alternatives getAlternatives_5() { return cAlternatives_5; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.16/@alternatives/@elements.5/@elements.0'
+		//":" ("void" | returnType=RefableType)
 		public Group getGroup_5_0() { return cGroup_5_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.16/@alternatives/@elements.5/@elements.0/@elements.0'
+		//":"
 		public Keyword getColonKeyword_5_0_0() { return cColonKeyword_5_0_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.16/@alternatives/@elements.5/@elements.0/@elements.1'
+		//"void" | returnType=RefableType
 		public Alternatives getAlternatives_5_0_1() { return cAlternatives_5_0_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.16/@alternatives/@elements.5/@elements.0/@elements.1/@elements.0'
+		//"void"
 		public Keyword getVoidKeyword_5_0_1_0() { return cVoidKeyword_5_0_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.16/@alternatives/@elements.5/@elements.0/@elements.1/@elements.1'
+		//returnType=RefableType
 		public Assignment getReturnTypeAssignment_5_0_1_1() { return cReturnTypeAssignment_5_0_1_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.16/@alternatives/@elements.5/@elements.0/@elements.1/@elements.1/@terminal'
+		//RefableType
 		public RuleCall getReturnTypeRefableTypeParserRuleCall_5_0_1_1_0() { return cReturnTypeRefableTypeParserRuleCall_5_0_1_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.16/@alternatives/@elements.5/@elements.1'
+		//"sends" sendsMsg=[Message]
 		public Group getGroup_5_1() { return cGroup_5_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.16/@alternatives/@elements.5/@elements.1/@elements.0'
+		//"sends"
 		public Keyword getSendsKeyword_5_1_0() { return cSendsKeyword_5_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.16/@alternatives/@elements.5/@elements.1/@elements.1'
+		//sendsMsg=[Message]
 		public Assignment getSendsMsgAssignment_5_1_1() { return cSendsMsgAssignment_5_1_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.16/@alternatives/@elements.5/@elements.1/@elements.1/@terminal'
+		//[Message]
 		public CrossReference getSendsMsgMessageCrossReference_5_1_1_0() { return cSendsMsgMessageCrossReference_5_1_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.16/@alternatives/@elements.5/@elements.1/@elements.1/@terminal/@terminal'
+		//ID
 		public RuleCall getSendsMsgMessageIDTerminalRuleCall_5_1_1_0_1() { return cSendsMsgMessageIDTerminalRuleCall_5_1_1_0_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.16/@alternatives/@elements.6'
+		//docu=Documentation?
 		public Assignment getDocuAssignment_6() { return cDocuAssignment_6; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.16/@alternatives/@elements.6/@terminal'
+		//Documentation
 		public RuleCall getDocuDocumentationParserRuleCall_6_0() { return cDocuDocumentationParserRuleCall_6_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.16/@alternatives/@elements.7'
+		//detailCode=DetailCode
 		public Assignment getDetailCodeAssignment_7() { return cDetailCodeAssignment_7; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.16/@alternatives/@elements.7/@terminal'
+		//DetailCode
 		public RuleCall getDetailCodeDetailCodeParserRuleCall_7_0() { return cDetailCodeDetailCodeParserRuleCall_7_0; }
 	}
 
@@ -1063,28 +1096,29 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cDetailCodeAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cDetailCodeDetailCodeParserRuleCall_1_0 = (RuleCall)cDetailCodeAssignment_1.eContents().get(0);
 		
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/ClassStructor'
+		//ClassStructor:
+		//	name=("ctor" | "dtor") detailCode=DetailCode;
 		public ParserRule getRule() { return rule; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.17/@alternatives'
+		//name=("ctor" | "dtor") detailCode=DetailCode
 		public Group getGroup() { return cGroup; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.17/@alternatives/@elements.0'
+		//name=("ctor" | "dtor")
 		public Assignment getNameAssignment_0() { return cNameAssignment_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.17/@alternatives/@elements.0/@terminal'
+		//"ctor" | "dtor"
 		public Alternatives getNameAlternatives_0_0() { return cNameAlternatives_0_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.17/@alternatives/@elements.0/@terminal/@elements.0'
+		//"ctor"
 		public Keyword getNameCtorKeyword_0_0_0() { return cNameCtorKeyword_0_0_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.17/@alternatives/@elements.0/@terminal/@elements.1'
+		//"dtor"
 		public Keyword getNameDtorKeyword_0_0_1() { return cNameDtorKeyword_0_0_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.17/@alternatives/@elements.1'
+		//detailCode=DetailCode
 		public Assignment getDetailCodeAssignment_1() { return cDetailCodeAssignment_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.17/@alternatives/@elements.1/@terminal'
+		//DetailCode
 		public RuleCall getDetailCodeDetailCodeParserRuleCall_1_0() { return cDetailCodeDetailCodeParserRuleCall_1_0; }
 	}
 
@@ -1094,16 +1128,17 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cProtocolClassParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cCompoundProtocolClassParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/GeneralProtocolClass'
+		//GeneralProtocolClass:
+		//	ProtocolClass | CompoundProtocolClass;
 		public ParserRule getRule() { return rule; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.19/@alternatives'
+		//ProtocolClass | CompoundProtocolClass
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.19/@alternatives/@elements.0'
+		//ProtocolClass
 		public RuleCall getProtocolClassParserRuleCall_0() { return cProtocolClassParserRuleCall_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.19/@alternatives/@elements.1'
+		//CompoundProtocolClass
 		public RuleCall getCompoundProtocolClassParserRuleCall_1() { return cCompoundProtocolClassParserRuleCall_1; }
 	}
 
@@ -1163,166 +1198,175 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cSemanticsProtocolSemanticsParserRuleCall_14_0 = (RuleCall)cSemanticsAssignment_14.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_15 = (Keyword)cGroup.eContents().get(15);
 		
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/ProtocolClass'
+		//ProtocolClass:
+		//	commType=CommunicationType? "ProtocolClass" name=ID docu=Documentation? ("extends" base=[ProtocolClass|FQN])? "{"
+		//	annotations+=Annotation* ("usercode1" userCode1=DetailCode)? ("usercode2" userCode2=DetailCode)? ("usercode3"
+		//	userCode3=DetailCode)? ("incoming" "{" incomingMessages+=Message* "}")? ("outgoing" "{" outgoingMessages+=Message*
+		//	"}")? ("regular" "PortClass" regular=PortClass)? ("conjugated" "PortClass" conjugated=PortClass)?
+		//	semantics=ProtocolSemantics? "}";
 		public ParserRule getRule() { return rule; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.20/@alternatives'
+		//commType=CommunicationType? "ProtocolClass" name=ID docu=Documentation? ("extends" base=[ProtocolClass|FQN])? "{"
+		//annotations+=Annotation* ("usercode1" userCode1=DetailCode)? ("usercode2" userCode2=DetailCode)? ("usercode3"
+		//userCode3=DetailCode)? ("incoming" "{" incomingMessages+=Message* "}")? ("outgoing" "{" outgoingMessages+=Message*
+		//"}")? ("regular" "PortClass" regular=PortClass)? ("conjugated" "PortClass" conjugated=PortClass)?
+		//semantics=ProtocolSemantics? "}"
 		public Group getGroup() { return cGroup; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.20/@alternatives/@elements.0'
+		//commType=CommunicationType?
 		public Assignment getCommTypeAssignment_0() { return cCommTypeAssignment_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.20/@alternatives/@elements.0/@terminal'
+		//CommunicationType
 		public RuleCall getCommTypeCommunicationTypeEnumRuleCall_0_0() { return cCommTypeCommunicationTypeEnumRuleCall_0_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.20/@alternatives/@elements.1'
+		//"ProtocolClass"
 		public Keyword getProtocolClassKeyword_1() { return cProtocolClassKeyword_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.20/@alternatives/@elements.2'
+		//name=ID
 		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.20/@alternatives/@elements.2/@terminal'
+		//ID
 		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.20/@alternatives/@elements.3'
+		//docu=Documentation?
 		public Assignment getDocuAssignment_3() { return cDocuAssignment_3; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.20/@alternatives/@elements.3/@terminal'
+		//Documentation
 		public RuleCall getDocuDocumentationParserRuleCall_3_0() { return cDocuDocumentationParserRuleCall_3_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.20/@alternatives/@elements.4'
+		//("extends" base=[ProtocolClass|FQN])?
 		public Group getGroup_4() { return cGroup_4; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.20/@alternatives/@elements.4/@elements.0'
+		//"extends"
 		public Keyword getExtendsKeyword_4_0() { return cExtendsKeyword_4_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.20/@alternatives/@elements.4/@elements.1'
+		//base=[ProtocolClass|FQN]
 		public Assignment getBaseAssignment_4_1() { return cBaseAssignment_4_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.20/@alternatives/@elements.4/@elements.1/@terminal'
+		//[ProtocolClass|FQN]
 		public CrossReference getBaseProtocolClassCrossReference_4_1_0() { return cBaseProtocolClassCrossReference_4_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.20/@alternatives/@elements.4/@elements.1/@terminal/@terminal'
+		//FQN
 		public RuleCall getBaseProtocolClassFQNParserRuleCall_4_1_0_1() { return cBaseProtocolClassFQNParserRuleCall_4_1_0_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.20/@alternatives/@elements.5'
+		//"{"
 		public Keyword getLeftCurlyBracketKeyword_5() { return cLeftCurlyBracketKeyword_5; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.20/@alternatives/@elements.6'
+		//annotations+=Annotation*
 		public Assignment getAnnotationsAssignment_6() { return cAnnotationsAssignment_6; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.20/@alternatives/@elements.6/@terminal'
+		//Annotation
 		public RuleCall getAnnotationsAnnotationParserRuleCall_6_0() { return cAnnotationsAnnotationParserRuleCall_6_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.20/@alternatives/@elements.7'
+		//("usercode1" userCode1=DetailCode)?
 		public Group getGroup_7() { return cGroup_7; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.20/@alternatives/@elements.7/@elements.0'
+		//"usercode1"
 		public Keyword getUsercode1Keyword_7_0() { return cUsercode1Keyword_7_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.20/@alternatives/@elements.7/@elements.1'
+		//userCode1=DetailCode
 		public Assignment getUserCode1Assignment_7_1() { return cUserCode1Assignment_7_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.20/@alternatives/@elements.7/@elements.1/@terminal'
+		//DetailCode
 		public RuleCall getUserCode1DetailCodeParserRuleCall_7_1_0() { return cUserCode1DetailCodeParserRuleCall_7_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.20/@alternatives/@elements.8'
+		//("usercode2" userCode2=DetailCode)?
 		public Group getGroup_8() { return cGroup_8; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.20/@alternatives/@elements.8/@elements.0'
+		//"usercode2"
 		public Keyword getUsercode2Keyword_8_0() { return cUsercode2Keyword_8_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.20/@alternatives/@elements.8/@elements.1'
+		//userCode2=DetailCode
 		public Assignment getUserCode2Assignment_8_1() { return cUserCode2Assignment_8_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.20/@alternatives/@elements.8/@elements.1/@terminal'
+		//DetailCode
 		public RuleCall getUserCode2DetailCodeParserRuleCall_8_1_0() { return cUserCode2DetailCodeParserRuleCall_8_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.20/@alternatives/@elements.9'
+		//("usercode3" userCode3=DetailCode)?
 		public Group getGroup_9() { return cGroup_9; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.20/@alternatives/@elements.9/@elements.0'
+		//"usercode3"
 		public Keyword getUsercode3Keyword_9_0() { return cUsercode3Keyword_9_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.20/@alternatives/@elements.9/@elements.1'
+		//userCode3=DetailCode
 		public Assignment getUserCode3Assignment_9_1() { return cUserCode3Assignment_9_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.20/@alternatives/@elements.9/@elements.1/@terminal'
+		//DetailCode
 		public RuleCall getUserCode3DetailCodeParserRuleCall_9_1_0() { return cUserCode3DetailCodeParserRuleCall_9_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.20/@alternatives/@elements.10'
+		//("incoming" "{" incomingMessages+=Message* "}")?
 		public Group getGroup_10() { return cGroup_10; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.20/@alternatives/@elements.10/@elements.0'
+		//"incoming"
 		public Keyword getIncomingKeyword_10_0() { return cIncomingKeyword_10_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.20/@alternatives/@elements.10/@elements.1'
+		//"{"
 		public Keyword getLeftCurlyBracketKeyword_10_1() { return cLeftCurlyBracketKeyword_10_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.20/@alternatives/@elements.10/@elements.2'
+		//incomingMessages+=Message*
 		public Assignment getIncomingMessagesAssignment_10_2() { return cIncomingMessagesAssignment_10_2; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.20/@alternatives/@elements.10/@elements.2/@terminal'
+		//Message
 		public RuleCall getIncomingMessagesMessageParserRuleCall_10_2_0() { return cIncomingMessagesMessageParserRuleCall_10_2_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.20/@alternatives/@elements.10/@elements.3'
+		//"}"
 		public Keyword getRightCurlyBracketKeyword_10_3() { return cRightCurlyBracketKeyword_10_3; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.20/@alternatives/@elements.11'
+		//("outgoing" "{" outgoingMessages+=Message* "}")?
 		public Group getGroup_11() { return cGroup_11; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.20/@alternatives/@elements.11/@elements.0'
+		//"outgoing"
 		public Keyword getOutgoingKeyword_11_0() { return cOutgoingKeyword_11_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.20/@alternatives/@elements.11/@elements.1'
+		//"{"
 		public Keyword getLeftCurlyBracketKeyword_11_1() { return cLeftCurlyBracketKeyword_11_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.20/@alternatives/@elements.11/@elements.2'
+		//outgoingMessages+=Message*
 		public Assignment getOutgoingMessagesAssignment_11_2() { return cOutgoingMessagesAssignment_11_2; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.20/@alternatives/@elements.11/@elements.2/@terminal'
+		//Message
 		public RuleCall getOutgoingMessagesMessageParserRuleCall_11_2_0() { return cOutgoingMessagesMessageParserRuleCall_11_2_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.20/@alternatives/@elements.11/@elements.3'
+		//"}"
 		public Keyword getRightCurlyBracketKeyword_11_3() { return cRightCurlyBracketKeyword_11_3; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.20/@alternatives/@elements.12'
+		//("regular" "PortClass" regular=PortClass)?
 		public Group getGroup_12() { return cGroup_12; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.20/@alternatives/@elements.12/@elements.0'
+		//"regular"
 		public Keyword getRegularKeyword_12_0() { return cRegularKeyword_12_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.20/@alternatives/@elements.12/@elements.1'
+		//"PortClass"
 		public Keyword getPortClassKeyword_12_1() { return cPortClassKeyword_12_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.20/@alternatives/@elements.12/@elements.2'
+		//regular=PortClass
 		public Assignment getRegularAssignment_12_2() { return cRegularAssignment_12_2; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.20/@alternatives/@elements.12/@elements.2/@terminal'
+		//PortClass
 		public RuleCall getRegularPortClassParserRuleCall_12_2_0() { return cRegularPortClassParserRuleCall_12_2_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.20/@alternatives/@elements.13'
+		//("conjugated" "PortClass" conjugated=PortClass)?
 		public Group getGroup_13() { return cGroup_13; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.20/@alternatives/@elements.13/@elements.0'
+		//"conjugated"
 		public Keyword getConjugatedKeyword_13_0() { return cConjugatedKeyword_13_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.20/@alternatives/@elements.13/@elements.1'
+		//"PortClass"
 		public Keyword getPortClassKeyword_13_1() { return cPortClassKeyword_13_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.20/@alternatives/@elements.13/@elements.2'
+		//conjugated=PortClass
 		public Assignment getConjugatedAssignment_13_2() { return cConjugatedAssignment_13_2; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.20/@alternatives/@elements.13/@elements.2/@terminal'
+		//PortClass
 		public RuleCall getConjugatedPortClassParserRuleCall_13_2_0() { return cConjugatedPortClassParserRuleCall_13_2_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.20/@alternatives/@elements.14'
+		//semantics=ProtocolSemantics?
 		public Assignment getSemanticsAssignment_14() { return cSemanticsAssignment_14; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.20/@alternatives/@elements.14/@terminal'
+		//ProtocolSemantics
 		public RuleCall getSemanticsProtocolSemanticsParserRuleCall_14_0() { return cSemanticsProtocolSemanticsParserRuleCall_14_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.20/@alternatives/@elements.15'
+		//"}"
 		public Keyword getRightCurlyBracketKeyword_15() { return cRightCurlyBracketKeyword_15; }
 	}
 
@@ -1341,43 +1385,44 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cSubProtocolsSubProtocolParserRuleCall_5_0 = (RuleCall)cSubProtocolsAssignment_5.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/CompoundProtocolClass'
+		//CompoundProtocolClass:
+		//	"CompoundProtocolClass" name=ID docu=Documentation? "{" annotations+=Annotation* subProtocols+=SubProtocol* "}";
 		public ParserRule getRule() { return rule; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.21/@alternatives'
+		//"CompoundProtocolClass" name=ID docu=Documentation? "{" annotations+=Annotation* subProtocols+=SubProtocol* "}"
 		public Group getGroup() { return cGroup; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.21/@alternatives/@elements.0'
+		//"CompoundProtocolClass"
 		public Keyword getCompoundProtocolClassKeyword_0() { return cCompoundProtocolClassKeyword_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.21/@alternatives/@elements.1'
+		//name=ID
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.21/@alternatives/@elements.1/@terminal'
+		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.21/@alternatives/@elements.2'
+		//docu=Documentation?
 		public Assignment getDocuAssignment_2() { return cDocuAssignment_2; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.21/@alternatives/@elements.2/@terminal'
+		//Documentation
 		public RuleCall getDocuDocumentationParserRuleCall_2_0() { return cDocuDocumentationParserRuleCall_2_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.21/@alternatives/@elements.3'
+		//"{"
 		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.21/@alternatives/@elements.4'
+		//annotations+=Annotation*
 		public Assignment getAnnotationsAssignment_4() { return cAnnotationsAssignment_4; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.21/@alternatives/@elements.4/@terminal'
+		//Annotation
 		public RuleCall getAnnotationsAnnotationParserRuleCall_4_0() { return cAnnotationsAnnotationParserRuleCall_4_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.21/@alternatives/@elements.5'
+		//subProtocols+=SubProtocol*
 		public Assignment getSubProtocolsAssignment_5() { return cSubProtocolsAssignment_5; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.21/@alternatives/@elements.5/@terminal'
+		//SubProtocol
 		public RuleCall getSubProtocolsSubProtocolParserRuleCall_5_0() { return cSubProtocolsSubProtocolParserRuleCall_5_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.21/@alternatives/@elements.6'
+		//"}"
 		public Keyword getRightCurlyBracketKeyword_6() { return cRightCurlyBracketKeyword_6; }
 	}
 
@@ -1392,31 +1437,32 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final CrossReference cProtocolGeneralProtocolClassCrossReference_3_0 = (CrossReference)cProtocolAssignment_3.eContents().get(0);
 		private final RuleCall cProtocolGeneralProtocolClassFQNParserRuleCall_3_0_1 = (RuleCall)cProtocolGeneralProtocolClassCrossReference_3_0.eContents().get(1);
 		
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/SubProtocol'
+		//SubProtocol:
+		//	"SubProtocol" name=ID ":" protocol=[GeneralProtocolClass|FQN];
 		public ParserRule getRule() { return rule; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.22/@alternatives'
+		//"SubProtocol" name=ID ":" protocol=[GeneralProtocolClass|FQN]
 		public Group getGroup() { return cGroup; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.22/@alternatives/@elements.0'
+		//"SubProtocol"
 		public Keyword getSubProtocolKeyword_0() { return cSubProtocolKeyword_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.22/@alternatives/@elements.1'
+		//name=ID
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.22/@alternatives/@elements.1/@terminal'
+		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.22/@alternatives/@elements.2'
+		//":"
 		public Keyword getColonKeyword_2() { return cColonKeyword_2; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.22/@alternatives/@elements.3'
+		//protocol=[GeneralProtocolClass|FQN]
 		public Assignment getProtocolAssignment_3() { return cProtocolAssignment_3; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.22/@alternatives/@elements.3/@terminal'
+		//[GeneralProtocolClass|FQN]
 		public CrossReference getProtocolGeneralProtocolClassCrossReference_3_0() { return cProtocolGeneralProtocolClassCrossReference_3_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.22/@alternatives/@elements.3/@terminal/@terminal'
+		//FQN
 		public RuleCall getProtocolGeneralProtocolClassFQNParserRuleCall_3_0_1() { return cProtocolGeneralProtocolClassFQNParserRuleCall_3_0_1; }
 	}
 
@@ -1435,43 +1481,44 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cDocuAssignment_6 = (Assignment)cGroup.eContents().get(6);
 		private final RuleCall cDocuDocumentationParserRuleCall_6_0 = (RuleCall)cDocuAssignment_6.eContents().get(0);
 		
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/Message'
+		//Message:
+		//	priv?="private"? "Message" name=ID "(" data=VarDecl? ")" docu=Documentation?;
 		public ParserRule getRule() { return rule; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.23/@alternatives'
+		//priv?="private"? "Message" name=ID "(" data=VarDecl? ")" docu=Documentation?
 		public Group getGroup() { return cGroup; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.23/@alternatives/@elements.0'
+		//priv?="private"?
 		public Assignment getPrivAssignment_0() { return cPrivAssignment_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.23/@alternatives/@elements.0/@terminal'
+		//"private"
 		public Keyword getPrivPrivateKeyword_0_0() { return cPrivPrivateKeyword_0_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.23/@alternatives/@elements.1'
+		//"Message"
 		public Keyword getMessageKeyword_1() { return cMessageKeyword_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.23/@alternatives/@elements.2'
+		//name=ID
 		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.23/@alternatives/@elements.2/@terminal'
+		//ID
 		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.23/@alternatives/@elements.3'
+		//"("
 		public Keyword getLeftParenthesisKeyword_3() { return cLeftParenthesisKeyword_3; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.23/@alternatives/@elements.4'
+		//data=VarDecl?
 		public Assignment getDataAssignment_4() { return cDataAssignment_4; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.23/@alternatives/@elements.4/@terminal'
+		//VarDecl
 		public RuleCall getDataVarDeclParserRuleCall_4_0() { return cDataVarDeclParserRuleCall_4_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.23/@alternatives/@elements.5'
+		//")"
 		public Keyword getRightParenthesisKeyword_5() { return cRightParenthesisKeyword_5; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.23/@alternatives/@elements.6'
+		//docu=Documentation?
 		public Assignment getDocuAssignment_6() { return cDocuAssignment_6; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.23/@alternatives/@elements.6/@terminal'
+		//Documentation
 		public RuleCall getDocuDocumentationParserRuleCall_6_0() { return cDocuDocumentationParserRuleCall_6_0; }
 	}
 
@@ -1493,52 +1540,55 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cAttributesAttributeParserRuleCall_3_2_0 = (RuleCall)cAttributesAssignment_3_2.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/PortClass'
+		//PortClass:
+		//	{PortClass} "{" ("usercode" userCode=DetailCode)? (msgHandlers+=MessageHandler | operations+=PortOperation |
+		//	attributes+=Attribute)* "}";
 		public ParserRule getRule() { return rule; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.24/@alternatives'
+		//{PortClass} "{" ("usercode" userCode=DetailCode)? (msgHandlers+=MessageHandler | operations+=PortOperation |
+		//attributes+=Attribute)* "}"
 		public Group getGroup() { return cGroup; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.24/@alternatives/@elements.0'
+		//{PortClass}
 		public Action getPortClassAction_0() { return cPortClassAction_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.24/@alternatives/@elements.1'
+		//"{"
 		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.24/@alternatives/@elements.2'
+		//("usercode" userCode=DetailCode)?
 		public Group getGroup_2() { return cGroup_2; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.24/@alternatives/@elements.2/@elements.0'
+		//"usercode"
 		public Keyword getUsercodeKeyword_2_0() { return cUsercodeKeyword_2_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.24/@alternatives/@elements.2/@elements.1'
+		//userCode=DetailCode
 		public Assignment getUserCodeAssignment_2_1() { return cUserCodeAssignment_2_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.24/@alternatives/@elements.2/@elements.1/@terminal'
+		//DetailCode
 		public RuleCall getUserCodeDetailCodeParserRuleCall_2_1_0() { return cUserCodeDetailCodeParserRuleCall_2_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.24/@alternatives/@elements.3'
+		//(msgHandlers+=MessageHandler | operations+=PortOperation | attributes+=Attribute)*
 		public Alternatives getAlternatives_3() { return cAlternatives_3; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.24/@alternatives/@elements.3/@elements.0'
+		//msgHandlers+=MessageHandler
 		public Assignment getMsgHandlersAssignment_3_0() { return cMsgHandlersAssignment_3_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.24/@alternatives/@elements.3/@elements.0/@terminal'
+		//MessageHandler
 		public RuleCall getMsgHandlersMessageHandlerParserRuleCall_3_0_0() { return cMsgHandlersMessageHandlerParserRuleCall_3_0_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.24/@alternatives/@elements.3/@elements.1'
+		//operations+=PortOperation
 		public Assignment getOperationsAssignment_3_1() { return cOperationsAssignment_3_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.24/@alternatives/@elements.3/@elements.1/@terminal'
+		//PortOperation
 		public RuleCall getOperationsPortOperationParserRuleCall_3_1_0() { return cOperationsPortOperationParserRuleCall_3_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.24/@alternatives/@elements.3/@elements.2'
+		//attributes+=Attribute
 		public Assignment getAttributesAssignment_3_2() { return cAttributesAssignment_3_2; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.24/@alternatives/@elements.3/@elements.2/@terminal'
+		//Attribute
 		public RuleCall getAttributesAttributeParserRuleCall_3_2_0() { return cAttributesAttributeParserRuleCall_3_2_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.24/@alternatives/@elements.4'
+		//"}"
 		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
 	}
 
@@ -1548,16 +1598,17 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cInMessageHandlerParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cOutMessageHandlerParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/MessageHandler'
+		//MessageHandler:
+		//	InMessageHandler | OutMessageHandler;
 		public ParserRule getRule() { return rule; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.25/@alternatives'
+		//InMessageHandler | OutMessageHandler
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.25/@alternatives/@elements.0'
+		//InMessageHandler
 		public RuleCall getInMessageHandlerParserRuleCall_0() { return cInMessageHandlerParserRuleCall_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.25/@alternatives/@elements.1'
+		//OutMessageHandler
 		public RuleCall getOutMessageHandlerParserRuleCall_1() { return cOutMessageHandlerParserRuleCall_1; }
 	}
 
@@ -1572,31 +1623,32 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cDetailCodeAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall cDetailCodeDetailCodeParserRuleCall_3_0 = (RuleCall)cDetailCodeAssignment_3.eContents().get(0);
 		
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/InMessageHandler'
+		//InMessageHandler:
+		//	"handle" "incoming" msg=[Message] detailCode=DetailCode;
 		public ParserRule getRule() { return rule; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.26/@alternatives'
+		//"handle" "incoming" msg=[Message] detailCode=DetailCode
 		public Group getGroup() { return cGroup; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.26/@alternatives/@elements.0'
+		//"handle"
 		public Keyword getHandleKeyword_0() { return cHandleKeyword_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.26/@alternatives/@elements.1'
+		//"incoming"
 		public Keyword getIncomingKeyword_1() { return cIncomingKeyword_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.26/@alternatives/@elements.2'
+		//msg=[Message]
 		public Assignment getMsgAssignment_2() { return cMsgAssignment_2; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.26/@alternatives/@elements.2/@terminal'
+		//[Message]
 		public CrossReference getMsgMessageCrossReference_2_0() { return cMsgMessageCrossReference_2_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.26/@alternatives/@elements.2/@terminal/@terminal'
+		//ID
 		public RuleCall getMsgMessageIDTerminalRuleCall_2_0_1() { return cMsgMessageIDTerminalRuleCall_2_0_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.26/@alternatives/@elements.3'
+		//detailCode=DetailCode
 		public Assignment getDetailCodeAssignment_3() { return cDetailCodeAssignment_3; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.26/@alternatives/@elements.3/@terminal'
+		//DetailCode
 		public RuleCall getDetailCodeDetailCodeParserRuleCall_3_0() { return cDetailCodeDetailCodeParserRuleCall_3_0; }
 	}
 
@@ -1611,31 +1663,32 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cDetailCodeAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall cDetailCodeDetailCodeParserRuleCall_3_0 = (RuleCall)cDetailCodeAssignment_3.eContents().get(0);
 		
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/OutMessageHandler'
+		//OutMessageHandler:
+		//	"handle" "outgoing" msg=[Message] detailCode=DetailCode;
 		public ParserRule getRule() { return rule; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.27/@alternatives'
+		//"handle" "outgoing" msg=[Message] detailCode=DetailCode
 		public Group getGroup() { return cGroup; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.27/@alternatives/@elements.0'
+		//"handle"
 		public Keyword getHandleKeyword_0() { return cHandleKeyword_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.27/@alternatives/@elements.1'
+		//"outgoing"
 		public Keyword getOutgoingKeyword_1() { return cOutgoingKeyword_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.27/@alternatives/@elements.2'
+		//msg=[Message]
 		public Assignment getMsgAssignment_2() { return cMsgAssignment_2; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.27/@alternatives/@elements.2/@terminal'
+		//[Message]
 		public CrossReference getMsgMessageCrossReference_2_0() { return cMsgMessageCrossReference_2_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.27/@alternatives/@elements.2/@terminal/@terminal'
+		//ID
 		public RuleCall getMsgMessageIDTerminalRuleCall_2_0_1() { return cMsgMessageIDTerminalRuleCall_2_0_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.27/@alternatives/@elements.3'
+		//detailCode=DetailCode
 		public Assignment getDetailCodeAssignment_3() { return cDetailCodeAssignment_3; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.27/@alternatives/@elements.3/@terminal'
+		//DetailCode
 		public RuleCall getDetailCodeDetailCodeParserRuleCall_3_0() { return cDetailCodeDetailCodeParserRuleCall_3_0; }
 	}
 
@@ -1643,10 +1696,13 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ModelComponent");
 		private final RuleCall cActorClassParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/ModelComponent'
+		//// **************************************************************
+		//// actor class
+		//ModelComponent:
+		//	ActorClass;
 		public ParserRule getRule() { return rule; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.28/@alternatives'
+		//ActorClass
 		public RuleCall getActorClassParserRuleCall() { return cActorClassParserRuleCall; }
 	}
 
@@ -1732,244 +1788,275 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_9_6 = (Keyword)cGroup_9.eContents().get(6);
 		private final Keyword cRightCurlyBracketKeyword_10 = (Keyword)cGroup.eContents().get(10);
 		
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/ActorClass'
+		//// some notes on ports
+		////
+		//// in ROOM ports can be contained in the structure and/or the interface
+		//// p in s ==> internal end port
+		//// p in i ==> relay port
+		//// p in i and p in s ==> external end port
+		//// since double containment is not supported we decided to define external ports as reference to interface ports
+		//ActorClass:
+		//	(abstract?="abstract"? & commType=ComponentCommunicationType?) "ActorClass" name=ID docu=Documentation? ("extends"
+		//	base=[ActorClass|FQN])? "{" annotations+=Annotation* ("Interface" "{" (serviceProvisionPoints+=SPP |
+		//	interfacePorts+=Port)* "}")? ("Structure" structureDocu=Documentation? "{" ("usercode1" userCode1=DetailCode)?
+		//	("usercode2" userCode2=DetailCode)? ("usercode3" userCode3=DetailCode)? // workaround: reverse the order for serializer
+		//	(connections+=LayerConnection | bindings+=Binding | serviceImplementations+=ServiceImplementation |
+		//	attributes+=Attribute | actorRefs+=ActorRef | serviceAccessPoints+=SAP | internalPorts+=Port |
+		//	externalPorts+=ExternalPort)* "}")? ("Behavior" behaviorDocu=Documentation? "{" behaviorAnnotations+=Annotation*
+		//	(operations+=StandardOperation | structors+=ClassStructor)* stateMachine=StateMachine? "}")? "}";
 		public ParserRule getRule() { return rule; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives'
+		//(abstract?="abstract"? & commType=ComponentCommunicationType?) "ActorClass" name=ID docu=Documentation? ("extends"
+		//base=[ActorClass|FQN])? "{" annotations+=Annotation* ("Interface" "{" (serviceProvisionPoints+=SPP |
+		//interfacePorts+=Port)* "}")? ("Structure" structureDocu=Documentation? "{" ("usercode1" userCode1=DetailCode)?
+		//("usercode2" userCode2=DetailCode)? ("usercode3" userCode3=DetailCode)? // workaround: reverse the order for serializer
+		//(connections+=LayerConnection | bindings+=Binding | serviceImplementations+=ServiceImplementation |
+		//attributes+=Attribute | actorRefs+=ActorRef | serviceAccessPoints+=SAP | internalPorts+=Port |
+		//externalPorts+=ExternalPort)* "}")? ("Behavior" behaviorDocu=Documentation? "{" behaviorAnnotations+=Annotation*
+		//(operations+=StandardOperation | structors+=ClassStructor)* stateMachine=StateMachine? "}")? "}"
 		public Group getGroup() { return cGroup; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.0'
+		//abstract?="abstract"? & commType=ComponentCommunicationType?
 		public UnorderedGroup getUnorderedGroup_0() { return cUnorderedGroup_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.0/@elements.0'
+		//abstract?="abstract"?
 		public Assignment getAbstractAssignment_0_0() { return cAbstractAssignment_0_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.0/@elements.0/@terminal'
+		//"abstract"
 		public Keyword getAbstractAbstractKeyword_0_0_0() { return cAbstractAbstractKeyword_0_0_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.0/@elements.1'
+		//commType=ComponentCommunicationType?
 		public Assignment getCommTypeAssignment_0_1() { return cCommTypeAssignment_0_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.0/@elements.1/@terminal'
+		//ComponentCommunicationType
 		public RuleCall getCommTypeComponentCommunicationTypeEnumRuleCall_0_1_0() { return cCommTypeComponentCommunicationTypeEnumRuleCall_0_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.1'
+		//"ActorClass"
 		public Keyword getActorClassKeyword_1() { return cActorClassKeyword_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.2'
+		//name=ID
 		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.2/@terminal'
+		//ID
 		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.3'
+		//docu=Documentation?
 		public Assignment getDocuAssignment_3() { return cDocuAssignment_3; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.3/@terminal'
+		//Documentation
 		public RuleCall getDocuDocumentationParserRuleCall_3_0() { return cDocuDocumentationParserRuleCall_3_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.4'
+		//("extends" base=[ActorClass|FQN])?
 		public Group getGroup_4() { return cGroup_4; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.4/@elements.0'
+		//"extends"
 		public Keyword getExtendsKeyword_4_0() { return cExtendsKeyword_4_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.4/@elements.1'
+		//base=[ActorClass|FQN]
 		public Assignment getBaseAssignment_4_1() { return cBaseAssignment_4_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.4/@elements.1/@terminal'
+		//[ActorClass|FQN]
 		public CrossReference getBaseActorClassCrossReference_4_1_0() { return cBaseActorClassCrossReference_4_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.4/@elements.1/@terminal/@terminal'
+		//FQN
 		public RuleCall getBaseActorClassFQNParserRuleCall_4_1_0_1() { return cBaseActorClassFQNParserRuleCall_4_1_0_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.5'
+		//"{"
 		public Keyword getLeftCurlyBracketKeyword_5() { return cLeftCurlyBracketKeyword_5; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.6'
+		//annotations+=Annotation*
 		public Assignment getAnnotationsAssignment_6() { return cAnnotationsAssignment_6; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.6/@terminal'
+		//Annotation
 		public RuleCall getAnnotationsAnnotationParserRuleCall_6_0() { return cAnnotationsAnnotationParserRuleCall_6_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.7'
+		//("Interface" "{" (serviceProvisionPoints+=SPP | interfacePorts+=Port)* "}")?
 		public Group getGroup_7() { return cGroup_7; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.7/@elements.0'
+		//"Interface"
 		public Keyword getInterfaceKeyword_7_0() { return cInterfaceKeyword_7_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.7/@elements.1'
+		//"{"
 		public Keyword getLeftCurlyBracketKeyword_7_1() { return cLeftCurlyBracketKeyword_7_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.7/@elements.2'
+		//(serviceProvisionPoints+=SPP | interfacePorts+=Port)*
 		public Alternatives getAlternatives_7_2() { return cAlternatives_7_2; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.7/@elements.2/@elements.0'
+		//serviceProvisionPoints+=SPP
 		public Assignment getServiceProvisionPointsAssignment_7_2_0() { return cServiceProvisionPointsAssignment_7_2_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.7/@elements.2/@elements.0/@terminal'
+		//SPP
 		public RuleCall getServiceProvisionPointsSPPParserRuleCall_7_2_0_0() { return cServiceProvisionPointsSPPParserRuleCall_7_2_0_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.7/@elements.2/@elements.1'
+		//interfacePorts+=Port
 		public Assignment getInterfacePortsAssignment_7_2_1() { return cInterfacePortsAssignment_7_2_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.7/@elements.2/@elements.1/@terminal'
+		//Port
 		public RuleCall getInterfacePortsPortParserRuleCall_7_2_1_0() { return cInterfacePortsPortParserRuleCall_7_2_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.7/@elements.3'
+		//"}"
 		public Keyword getRightCurlyBracketKeyword_7_3() { return cRightCurlyBracketKeyword_7_3; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.8'
+		//("Structure" structureDocu=Documentation? "{" ("usercode1" userCode1=DetailCode)? ("usercode2" userCode2=DetailCode)?
+		//("usercode3" userCode3=DetailCode)? // workaround: reverse the order for serializer
+		//(connections+=LayerConnection | bindings+=Binding | serviceImplementations+=ServiceImplementation |
+		//attributes+=Attribute | actorRefs+=ActorRef | serviceAccessPoints+=SAP | internalPorts+=Port |
+		//externalPorts+=ExternalPort)* "}")?
 		public Group getGroup_8() { return cGroup_8; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.8/@elements.0'
+		//"Structure"
 		public Keyword getStructureKeyword_8_0() { return cStructureKeyword_8_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.8/@elements.1'
+		//structureDocu=Documentation?
 		public Assignment getStructureDocuAssignment_8_1() { return cStructureDocuAssignment_8_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.8/@elements.1/@terminal'
+		//Documentation
 		public RuleCall getStructureDocuDocumentationParserRuleCall_8_1_0() { return cStructureDocuDocumentationParserRuleCall_8_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.8/@elements.2'
+		//"{"
 		public Keyword getLeftCurlyBracketKeyword_8_2() { return cLeftCurlyBracketKeyword_8_2; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.8/@elements.3'
+		//("usercode1" userCode1=DetailCode)?
 		public Group getGroup_8_3() { return cGroup_8_3; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.8/@elements.3/@elements.0'
+		//"usercode1"
 		public Keyword getUsercode1Keyword_8_3_0() { return cUsercode1Keyword_8_3_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.8/@elements.3/@elements.1'
+		//userCode1=DetailCode
 		public Assignment getUserCode1Assignment_8_3_1() { return cUserCode1Assignment_8_3_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.8/@elements.3/@elements.1/@terminal'
+		//DetailCode
 		public RuleCall getUserCode1DetailCodeParserRuleCall_8_3_1_0() { return cUserCode1DetailCodeParserRuleCall_8_3_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.8/@elements.4'
+		//("usercode2" userCode2=DetailCode)?
 		public Group getGroup_8_4() { return cGroup_8_4; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.8/@elements.4/@elements.0'
+		//"usercode2"
 		public Keyword getUsercode2Keyword_8_4_0() { return cUsercode2Keyword_8_4_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.8/@elements.4/@elements.1'
+		//userCode2=DetailCode
 		public Assignment getUserCode2Assignment_8_4_1() { return cUserCode2Assignment_8_4_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.8/@elements.4/@elements.1/@terminal'
+		//DetailCode
 		public RuleCall getUserCode2DetailCodeParserRuleCall_8_4_1_0() { return cUserCode2DetailCodeParserRuleCall_8_4_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.8/@elements.5'
+		//("usercode3" userCode3=DetailCode)?
 		public Group getGroup_8_5() { return cGroup_8_5; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.8/@elements.5/@elements.0'
+		//"usercode3"
 		public Keyword getUsercode3Keyword_8_5_0() { return cUsercode3Keyword_8_5_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.8/@elements.5/@elements.1'
+		//userCode3=DetailCode
 		public Assignment getUserCode3Assignment_8_5_1() { return cUserCode3Assignment_8_5_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.8/@elements.5/@elements.1/@terminal'
+		//DetailCode
 		public RuleCall getUserCode3DetailCodeParserRuleCall_8_5_1_0() { return cUserCode3DetailCodeParserRuleCall_8_5_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.8/@elements.6'
+		//// workaround: reverse the order for serializer
+		//(connections+=LayerConnection | bindings+=Binding | serviceImplementations+=ServiceImplementation |
+		//attributes+=Attribute | actorRefs+=ActorRef | serviceAccessPoints+=SAP | internalPorts+=Port |
+		//externalPorts+=ExternalPort)*
 		public Alternatives getAlternatives_8_6() { return cAlternatives_8_6; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.8/@elements.6/@elements.0'
+		//// workaround: reverse the order for serializer
+		//connections+=LayerConnection
 		public Assignment getConnectionsAssignment_8_6_0() { return cConnectionsAssignment_8_6_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.8/@elements.6/@elements.0/@terminal'
+		//LayerConnection
 		public RuleCall getConnectionsLayerConnectionParserRuleCall_8_6_0_0() { return cConnectionsLayerConnectionParserRuleCall_8_6_0_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.8/@elements.6/@elements.1'
+		//bindings+=Binding
 		public Assignment getBindingsAssignment_8_6_1() { return cBindingsAssignment_8_6_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.8/@elements.6/@elements.1/@terminal'
+		//Binding
 		public RuleCall getBindingsBindingParserRuleCall_8_6_1_0() { return cBindingsBindingParserRuleCall_8_6_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.8/@elements.6/@elements.2'
+		//serviceImplementations+=ServiceImplementation
 		public Assignment getServiceImplementationsAssignment_8_6_2() { return cServiceImplementationsAssignment_8_6_2; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.8/@elements.6/@elements.2/@terminal'
+		//ServiceImplementation
 		public RuleCall getServiceImplementationsServiceImplementationParserRuleCall_8_6_2_0() { return cServiceImplementationsServiceImplementationParserRuleCall_8_6_2_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.8/@elements.6/@elements.3'
+		//attributes+=Attribute
 		public Assignment getAttributesAssignment_8_6_3() { return cAttributesAssignment_8_6_3; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.8/@elements.6/@elements.3/@terminal'
+		//Attribute
 		public RuleCall getAttributesAttributeParserRuleCall_8_6_3_0() { return cAttributesAttributeParserRuleCall_8_6_3_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.8/@elements.6/@elements.4'
+		//actorRefs+=ActorRef
 		public Assignment getActorRefsAssignment_8_6_4() { return cActorRefsAssignment_8_6_4; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.8/@elements.6/@elements.4/@terminal'
+		//ActorRef
 		public RuleCall getActorRefsActorRefParserRuleCall_8_6_4_0() { return cActorRefsActorRefParserRuleCall_8_6_4_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.8/@elements.6/@elements.5'
+		//serviceAccessPoints+=SAP
 		public Assignment getServiceAccessPointsAssignment_8_6_5() { return cServiceAccessPointsAssignment_8_6_5; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.8/@elements.6/@elements.5/@terminal'
+		//SAP
 		public RuleCall getServiceAccessPointsSAPParserRuleCall_8_6_5_0() { return cServiceAccessPointsSAPParserRuleCall_8_6_5_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.8/@elements.6/@elements.6'
+		//internalPorts+=Port
 		public Assignment getInternalPortsAssignment_8_6_6() { return cInternalPortsAssignment_8_6_6; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.8/@elements.6/@elements.6/@terminal'
+		//Port
 		public RuleCall getInternalPortsPortParserRuleCall_8_6_6_0() { return cInternalPortsPortParserRuleCall_8_6_6_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.8/@elements.6/@elements.7'
+		//externalPorts+=ExternalPort
 		public Assignment getExternalPortsAssignment_8_6_7() { return cExternalPortsAssignment_8_6_7; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.8/@elements.6/@elements.7/@terminal'
+		//ExternalPort
 		public RuleCall getExternalPortsExternalPortParserRuleCall_8_6_7_0() { return cExternalPortsExternalPortParserRuleCall_8_6_7_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.8/@elements.7'
+		//"}"
 		public Keyword getRightCurlyBracketKeyword_8_7() { return cRightCurlyBracketKeyword_8_7; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.9'
+		//("Behavior" behaviorDocu=Documentation? "{" behaviorAnnotations+=Annotation* (operations+=StandardOperation |
+		//structors+=ClassStructor)* stateMachine=StateMachine? "}")?
 		public Group getGroup_9() { return cGroup_9; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.9/@elements.0'
+		//"Behavior"
 		public Keyword getBehaviorKeyword_9_0() { return cBehaviorKeyword_9_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.9/@elements.1'
+		//behaviorDocu=Documentation?
 		public Assignment getBehaviorDocuAssignment_9_1() { return cBehaviorDocuAssignment_9_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.9/@elements.1/@terminal'
+		//Documentation
 		public RuleCall getBehaviorDocuDocumentationParserRuleCall_9_1_0() { return cBehaviorDocuDocumentationParserRuleCall_9_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.9/@elements.2'
+		//"{"
 		public Keyword getLeftCurlyBracketKeyword_9_2() { return cLeftCurlyBracketKeyword_9_2; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.9/@elements.3'
+		//behaviorAnnotations+=Annotation*
 		public Assignment getBehaviorAnnotationsAssignment_9_3() { return cBehaviorAnnotationsAssignment_9_3; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.9/@elements.3/@terminal'
+		//Annotation
 		public RuleCall getBehaviorAnnotationsAnnotationParserRuleCall_9_3_0() { return cBehaviorAnnotationsAnnotationParserRuleCall_9_3_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.9/@elements.4'
+		//(operations+=StandardOperation | structors+=ClassStructor)*
 		public Alternatives getAlternatives_9_4() { return cAlternatives_9_4; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.9/@elements.4/@elements.0'
+		//operations+=StandardOperation
 		public Assignment getOperationsAssignment_9_4_0() { return cOperationsAssignment_9_4_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.9/@elements.4/@elements.0/@terminal'
+		//StandardOperation
 		public RuleCall getOperationsStandardOperationParserRuleCall_9_4_0_0() { return cOperationsStandardOperationParserRuleCall_9_4_0_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.9/@elements.4/@elements.1'
+		//structors+=ClassStructor
 		public Assignment getStructorsAssignment_9_4_1() { return cStructorsAssignment_9_4_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.9/@elements.4/@elements.1/@terminal'
+		//ClassStructor
 		public RuleCall getStructorsClassStructorParserRuleCall_9_4_1_0() { return cStructorsClassStructorParserRuleCall_9_4_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.9/@elements.5'
+		//stateMachine=StateMachine?
 		public Assignment getStateMachineAssignment_9_5() { return cStateMachineAssignment_9_5; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.9/@elements.5/@terminal'
+		//StateMachine
 		public RuleCall getStateMachineStateMachineParserRuleCall_9_5_0() { return cStateMachineStateMachineParserRuleCall_9_5_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.9/@elements.6'
+		//"}"
 		public Keyword getRightCurlyBracketKeyword_9_6() { return cRightCurlyBracketKeyword_9_6; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.29/@alternatives/@elements.10'
+		//"}"
 		public Keyword getRightCurlyBracketKeyword_10() { return cRightCurlyBracketKeyword_10; }
 	}
 
@@ -1980,19 +2067,20 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cSAPParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cSPPParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/InterfaceItem'
+		//InterfaceItem:
+		//	Port | SAP | SPP;
 		public ParserRule getRule() { return rule; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.30/@alternatives'
+		//Port | SAP | SPP
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.30/@alternatives/@elements.0'
+		//Port
 		public RuleCall getPortParserRuleCall_0() { return cPortParserRuleCall_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.30/@alternatives/@elements.1'
+		//SAP
 		public RuleCall getSAPParserRuleCall_1() { return cSAPParserRuleCall_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.30/@alternatives/@elements.2'
+		//SPP
 		public RuleCall getSPPParserRuleCall_2() { return cSPPParserRuleCall_2; }
 	}
 
@@ -2013,49 +2101,52 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cDocuAssignment_6 = (Assignment)cGroup.eContents().get(6);
 		private final RuleCall cDocuDocumentationParserRuleCall_6_0 = (RuleCall)cDocuAssignment_6.eContents().get(0);
 		
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/Port'
+		//Port:
+		//	conjugated?="conjugated"? "Port" name=ID multiplicity=MULTIPLICITY? ":" protocol=[GeneralProtocolClass|FQN]
+		//	docu=Documentation?;
 		public ParserRule getRule() { return rule; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.31/@alternatives'
+		//conjugated?="conjugated"? "Port" name=ID multiplicity=MULTIPLICITY? ":" protocol=[GeneralProtocolClass|FQN]
+		//docu=Documentation?
 		public Group getGroup() { return cGroup; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.31/@alternatives/@elements.0'
+		//conjugated?="conjugated"?
 		public Assignment getConjugatedAssignment_0() { return cConjugatedAssignment_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.31/@alternatives/@elements.0/@terminal'
+		//"conjugated"
 		public Keyword getConjugatedConjugatedKeyword_0_0() { return cConjugatedConjugatedKeyword_0_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.31/@alternatives/@elements.1'
+		//"Port"
 		public Keyword getPortKeyword_1() { return cPortKeyword_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.31/@alternatives/@elements.2'
+		//name=ID
 		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.31/@alternatives/@elements.2/@terminal'
+		//ID
 		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.31/@alternatives/@elements.3'
+		//multiplicity=MULTIPLICITY?
 		public Assignment getMultiplicityAssignment_3() { return cMultiplicityAssignment_3; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.31/@alternatives/@elements.3/@terminal'
+		//MULTIPLICITY
 		public RuleCall getMultiplicityMULTIPLICITYParserRuleCall_3_0() { return cMultiplicityMULTIPLICITYParserRuleCall_3_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.31/@alternatives/@elements.4'
+		//":"
 		public Keyword getColonKeyword_4() { return cColonKeyword_4; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.31/@alternatives/@elements.5'
+		//protocol=[GeneralProtocolClass|FQN]
 		public Assignment getProtocolAssignment_5() { return cProtocolAssignment_5; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.31/@alternatives/@elements.5/@terminal'
+		//[GeneralProtocolClass|FQN]
 		public CrossReference getProtocolGeneralProtocolClassCrossReference_5_0() { return cProtocolGeneralProtocolClassCrossReference_5_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.31/@alternatives/@elements.5/@terminal/@terminal'
+		//FQN
 		public RuleCall getProtocolGeneralProtocolClassFQNParserRuleCall_5_0_1() { return cProtocolGeneralProtocolClassFQNParserRuleCall_5_0_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.31/@alternatives/@elements.6'
+		//docu=Documentation?
 		public Assignment getDocuAssignment_6() { return cDocuAssignment_6; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.31/@alternatives/@elements.6/@terminal'
+		//Documentation
 		public RuleCall getDocuDocumentationParserRuleCall_6_0() { return cDocuDocumentationParserRuleCall_6_0; }
 	}
 
@@ -2068,25 +2159,26 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final CrossReference cInterfacePortPortCrossReference_2_0 = (CrossReference)cInterfacePortAssignment_2.eContents().get(0);
 		private final RuleCall cInterfacePortPortIDTerminalRuleCall_2_0_1 = (RuleCall)cInterfacePortPortCrossReference_2_0.eContents().get(1);
 		
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/ExternalPort'
+		//ExternalPort:
+		//	"external" "Port" interfacePort=[Port];
 		public ParserRule getRule() { return rule; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.32/@alternatives'
+		//"external" "Port" interfacePort=[Port]
 		public Group getGroup() { return cGroup; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.32/@alternatives/@elements.0'
+		//"external"
 		public Keyword getExternalKeyword_0() { return cExternalKeyword_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.32/@alternatives/@elements.1'
+		//"Port"
 		public Keyword getPortKeyword_1() { return cPortKeyword_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.32/@alternatives/@elements.2'
+		//interfacePort=[Port]
 		public Assignment getInterfacePortAssignment_2() { return cInterfacePortAssignment_2; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.32/@alternatives/@elements.2/@terminal'
+		//[Port]
 		public CrossReference getInterfacePortPortCrossReference_2_0() { return cInterfacePortPortCrossReference_2_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.32/@alternatives/@elements.2/@terminal/@terminal'
+		//ID
 		public RuleCall getInterfacePortPortIDTerminalRuleCall_2_0_1() { return cInterfacePortPortIDTerminalRuleCall_2_0_1; }
 	}
 
@@ -2101,31 +2193,32 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final CrossReference cProtocolProtocolClassCrossReference_3_0 = (CrossReference)cProtocolAssignment_3.eContents().get(0);
 		private final RuleCall cProtocolProtocolClassFQNParserRuleCall_3_0_1 = (RuleCall)cProtocolProtocolClassCrossReference_3_0.eContents().get(1);
 		
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/SAP'
+		//SAP:
+		//	"SAP" name=ID ":" protocol=[ProtocolClass|FQN];
 		public ParserRule getRule() { return rule; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.33/@alternatives'
+		//"SAP" name=ID ":" protocol=[ProtocolClass|FQN]
 		public Group getGroup() { return cGroup; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.33/@alternatives/@elements.0'
+		//"SAP"
 		public Keyword getSAPKeyword_0() { return cSAPKeyword_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.33/@alternatives/@elements.1'
+		//name=ID
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.33/@alternatives/@elements.1/@terminal'
+		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.33/@alternatives/@elements.2'
+		//":"
 		public Keyword getColonKeyword_2() { return cColonKeyword_2; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.33/@alternatives/@elements.3'
+		//protocol=[ProtocolClass|FQN]
 		public Assignment getProtocolAssignment_3() { return cProtocolAssignment_3; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.33/@alternatives/@elements.3/@terminal'
+		//[ProtocolClass|FQN]
 		public CrossReference getProtocolProtocolClassCrossReference_3_0() { return cProtocolProtocolClassCrossReference_3_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.33/@alternatives/@elements.3/@terminal/@terminal'
+		//FQN
 		public RuleCall getProtocolProtocolClassFQNParserRuleCall_3_0_1() { return cProtocolProtocolClassFQNParserRuleCall_3_0_1; }
 	}
 
@@ -2140,31 +2233,32 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final CrossReference cProtocolProtocolClassCrossReference_3_0 = (CrossReference)cProtocolAssignment_3.eContents().get(0);
 		private final RuleCall cProtocolProtocolClassFQNParserRuleCall_3_0_1 = (RuleCall)cProtocolProtocolClassCrossReference_3_0.eContents().get(1);
 		
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/SPP'
+		//SPP:
+		//	"SPP" name=ID ":" protocol=[ProtocolClass|FQN];
 		public ParserRule getRule() { return rule; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.34/@alternatives'
+		//"SPP" name=ID ":" protocol=[ProtocolClass|FQN]
 		public Group getGroup() { return cGroup; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.34/@alternatives/@elements.0'
+		//"SPP"
 		public Keyword getSPPKeyword_0() { return cSPPKeyword_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.34/@alternatives/@elements.1'
+		//name=ID
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.34/@alternatives/@elements.1/@terminal'
+		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.34/@alternatives/@elements.2'
+		//":"
 		public Keyword getColonKeyword_2() { return cColonKeyword_2; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.34/@alternatives/@elements.3'
+		//protocol=[ProtocolClass|FQN]
 		public Assignment getProtocolAssignment_3() { return cProtocolAssignment_3; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.34/@alternatives/@elements.3/@terminal'
+		//[ProtocolClass|FQN]
 		public CrossReference getProtocolProtocolClassCrossReference_3_0() { return cProtocolProtocolClassCrossReference_3_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.34/@alternatives/@elements.3/@terminal/@terminal'
+		//FQN
 		public RuleCall getProtocolProtocolClassFQNParserRuleCall_3_0_1() { return cProtocolProtocolClassFQNParserRuleCall_3_0_1; }
 	}
 
@@ -2177,25 +2271,26 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final CrossReference cSppSPPCrossReference_2_0 = (CrossReference)cSppAssignment_2.eContents().get(0);
 		private final RuleCall cSppSPPIDTerminalRuleCall_2_0_1 = (RuleCall)cSppSPPCrossReference_2_0.eContents().get(1);
 		
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/ServiceImplementation'
+		//ServiceImplementation:
+		//	"ServiceImplementation" "of" spp=[SPP];
 		public ParserRule getRule() { return rule; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.35/@alternatives'
+		//"ServiceImplementation" "of" spp=[SPP]
 		public Group getGroup() { return cGroup; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.35/@alternatives/@elements.0'
+		//"ServiceImplementation"
 		public Keyword getServiceImplementationKeyword_0() { return cServiceImplementationKeyword_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.35/@alternatives/@elements.1'
+		//"of"
 		public Keyword getOfKeyword_1() { return cOfKeyword_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.35/@alternatives/@elements.2'
+		//spp=[SPP]
 		public Assignment getSppAssignment_2() { return cSppAssignment_2; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.35/@alternatives/@elements.2/@terminal'
+		//[SPP]
 		public CrossReference getSppSPPCrossReference_2_0() { return cSppSPPCrossReference_2_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.35/@alternatives/@elements.2/@terminal/@terminal'
+		//ID
 		public RuleCall getSppSPPIDTerminalRuleCall_2_0_1() { return cSppSPPIDTerminalRuleCall_2_0_1; }
 	}
 
@@ -2219,58 +2314,61 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cSubSystemsSubSystemRefParserRuleCall_5_2_0 = (RuleCall)cSubSystemsAssignment_5_2.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/LogicalSystem'
+		//LogicalSystem:
+		//	"LogicalSystem" name=ID docu=Documentation? "{" annotations+=Annotation* (connections+=LayerConnection |
+		//	bindings+=Binding | subSystems+=SubSystemRef)* "}";
 		public ParserRule getRule() { return rule; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.36/@alternatives'
+		//"LogicalSystem" name=ID docu=Documentation? "{" annotations+=Annotation* (connections+=LayerConnection |
+		//bindings+=Binding | subSystems+=SubSystemRef)* "}"
 		public Group getGroup() { return cGroup; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.36/@alternatives/@elements.0'
+		//"LogicalSystem"
 		public Keyword getLogicalSystemKeyword_0() { return cLogicalSystemKeyword_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.36/@alternatives/@elements.1'
+		//name=ID
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.36/@alternatives/@elements.1/@terminal'
+		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.36/@alternatives/@elements.2'
+		//docu=Documentation?
 		public Assignment getDocuAssignment_2() { return cDocuAssignment_2; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.36/@alternatives/@elements.2/@terminal'
+		//Documentation
 		public RuleCall getDocuDocumentationParserRuleCall_2_0() { return cDocuDocumentationParserRuleCall_2_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.36/@alternatives/@elements.3'
+		//"{"
 		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.36/@alternatives/@elements.4'
+		//annotations+=Annotation*
 		public Assignment getAnnotationsAssignment_4() { return cAnnotationsAssignment_4; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.36/@alternatives/@elements.4/@terminal'
+		//Annotation
 		public RuleCall getAnnotationsAnnotationParserRuleCall_4_0() { return cAnnotationsAnnotationParserRuleCall_4_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.36/@alternatives/@elements.5'
+		//(connections+=LayerConnection | bindings+=Binding | subSystems+=SubSystemRef)*
 		public Alternatives getAlternatives_5() { return cAlternatives_5; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.36/@alternatives/@elements.5/@elements.0'
+		//connections+=LayerConnection
 		public Assignment getConnectionsAssignment_5_0() { return cConnectionsAssignment_5_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.36/@alternatives/@elements.5/@elements.0/@terminal'
+		//LayerConnection
 		public RuleCall getConnectionsLayerConnectionParserRuleCall_5_0_0() { return cConnectionsLayerConnectionParserRuleCall_5_0_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.36/@alternatives/@elements.5/@elements.1'
+		//bindings+=Binding
 		public Assignment getBindingsAssignment_5_1() { return cBindingsAssignment_5_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.36/@alternatives/@elements.5/@elements.1/@terminal'
+		//Binding
 		public RuleCall getBindingsBindingParserRuleCall_5_1_0() { return cBindingsBindingParserRuleCall_5_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.36/@alternatives/@elements.5/@elements.2'
+		//subSystems+=SubSystemRef
 		public Assignment getSubSystemsAssignment_5_2() { return cSubSystemsAssignment_5_2; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.36/@alternatives/@elements.5/@elements.2/@terminal'
+		//SubSystemRef
 		public RuleCall getSubSystemsSubSystemRefParserRuleCall_5_2_0() { return cSubSystemsSubSystemRefParserRuleCall_5_2_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.36/@alternatives/@elements.6'
+		//"}"
 		public Keyword getRightCurlyBracketKeyword_6() { return cRightCurlyBracketKeyword_6; }
 	}
 
@@ -2280,16 +2378,17 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cSubSystemRefParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cActorRefParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/ActorContainerRef'
+		//ActorContainerRef:
+		//	SubSystemRef | ActorRef;
 		public ParserRule getRule() { return rule; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.37/@alternatives'
+		//SubSystemRef | ActorRef
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.37/@alternatives/@elements.0'
+		//SubSystemRef
 		public RuleCall getSubSystemRefParserRuleCall_0() { return cSubSystemRefParserRuleCall_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.37/@alternatives/@elements.1'
+		//ActorRef
 		public RuleCall getActorRefParserRuleCall_1() { return cActorRefParserRuleCall_1; }
 	}
 
@@ -2306,37 +2405,38 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cDocuAssignment_4 = (Assignment)cGroup.eContents().get(4);
 		private final RuleCall cDocuDocumentationParserRuleCall_4_0 = (RuleCall)cDocuAssignment_4.eContents().get(0);
 		
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/SubSystemRef'
+		//SubSystemRef:
+		//	"SubSystemRef" name=ID ":" type=[SubSystemClass|FQN] docu=Documentation?;
 		public ParserRule getRule() { return rule; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.38/@alternatives'
+		//"SubSystemRef" name=ID ":" type=[SubSystemClass|FQN] docu=Documentation?
 		public Group getGroup() { return cGroup; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.38/@alternatives/@elements.0'
+		//"SubSystemRef"
 		public Keyword getSubSystemRefKeyword_0() { return cSubSystemRefKeyword_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.38/@alternatives/@elements.1'
+		//name=ID
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.38/@alternatives/@elements.1/@terminal'
+		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.38/@alternatives/@elements.2'
+		//":"
 		public Keyword getColonKeyword_2() { return cColonKeyword_2; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.38/@alternatives/@elements.3'
+		//type=[SubSystemClass|FQN]
 		public Assignment getTypeAssignment_3() { return cTypeAssignment_3; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.38/@alternatives/@elements.3/@terminal'
+		//[SubSystemClass|FQN]
 		public CrossReference getTypeSubSystemClassCrossReference_3_0() { return cTypeSubSystemClassCrossReference_3_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.38/@alternatives/@elements.3/@terminal/@terminal'
+		//FQN
 		public RuleCall getTypeSubSystemClassFQNParserRuleCall_3_0_1() { return cTypeSubSystemClassFQNParserRuleCall_3_0_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.38/@alternatives/@elements.4'
+		//docu=Documentation?
 		public Assignment getDocuAssignment_4() { return cDocuAssignment_4; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.38/@alternatives/@elements.4/@terminal'
+		//Documentation
 		public RuleCall getDocuDocumentationParserRuleCall_4_0() { return cDocuDocumentationParserRuleCall_4_0; }
 	}
 
@@ -2380,118 +2480,128 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cRelayPortsPortParserRuleCall_8_6_0 = (RuleCall)cRelayPortsAssignment_8_6.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_9 = (Keyword)cGroup.eContents().get(9);
 		
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/SubSystemClass'
+		//SubSystemClass:
+		//	"SubSystemClass" name=ID docu=Documentation? "{" annotations+=Annotation* ("usercode1" userCode1=DetailCode)?
+		//	("usercode2" userCode2=DetailCode)? ("usercode3" userCode3=DetailCode)? // workaround: reverse the order for serializer
+		//	(actorInstanceMappings+=ActorInstanceMapping | threads+=LogicalThread | connections+=LayerConnection |
+		//	bindings+=Binding | actorRefs+=ActorRef | serviceProvisionPoints+=SPP | relayPorts+=Port)* "}";
 		public ParserRule getRule() { return rule; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.39/@alternatives'
+		//"SubSystemClass" name=ID docu=Documentation? "{" annotations+=Annotation* ("usercode1" userCode1=DetailCode)?
+		//("usercode2" userCode2=DetailCode)? ("usercode3" userCode3=DetailCode)? // workaround: reverse the order for serializer
+		//(actorInstanceMappings+=ActorInstanceMapping | threads+=LogicalThread | connections+=LayerConnection | bindings+=Binding
+		//| actorRefs+=ActorRef | serviceProvisionPoints+=SPP | relayPorts+=Port)* "}"
 		public Group getGroup() { return cGroup; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.39/@alternatives/@elements.0'
+		//"SubSystemClass"
 		public Keyword getSubSystemClassKeyword_0() { return cSubSystemClassKeyword_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.39/@alternatives/@elements.1'
+		//name=ID
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.39/@alternatives/@elements.1/@terminal'
+		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.39/@alternatives/@elements.2'
+		//docu=Documentation?
 		public Assignment getDocuAssignment_2() { return cDocuAssignment_2; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.39/@alternatives/@elements.2/@terminal'
+		//Documentation
 		public RuleCall getDocuDocumentationParserRuleCall_2_0() { return cDocuDocumentationParserRuleCall_2_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.39/@alternatives/@elements.3'
+		//"{"
 		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.39/@alternatives/@elements.4'
+		//annotations+=Annotation*
 		public Assignment getAnnotationsAssignment_4() { return cAnnotationsAssignment_4; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.39/@alternatives/@elements.4/@terminal'
+		//Annotation
 		public RuleCall getAnnotationsAnnotationParserRuleCall_4_0() { return cAnnotationsAnnotationParserRuleCall_4_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.39/@alternatives/@elements.5'
+		//("usercode1" userCode1=DetailCode)?
 		public Group getGroup_5() { return cGroup_5; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.39/@alternatives/@elements.5/@elements.0'
+		//"usercode1"
 		public Keyword getUsercode1Keyword_5_0() { return cUsercode1Keyword_5_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.39/@alternatives/@elements.5/@elements.1'
+		//userCode1=DetailCode
 		public Assignment getUserCode1Assignment_5_1() { return cUserCode1Assignment_5_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.39/@alternatives/@elements.5/@elements.1/@terminal'
+		//DetailCode
 		public RuleCall getUserCode1DetailCodeParserRuleCall_5_1_0() { return cUserCode1DetailCodeParserRuleCall_5_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.39/@alternatives/@elements.6'
+		//("usercode2" userCode2=DetailCode)?
 		public Group getGroup_6() { return cGroup_6; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.39/@alternatives/@elements.6/@elements.0'
+		//"usercode2"
 		public Keyword getUsercode2Keyword_6_0() { return cUsercode2Keyword_6_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.39/@alternatives/@elements.6/@elements.1'
+		//userCode2=DetailCode
 		public Assignment getUserCode2Assignment_6_1() { return cUserCode2Assignment_6_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.39/@alternatives/@elements.6/@elements.1/@terminal'
+		//DetailCode
 		public RuleCall getUserCode2DetailCodeParserRuleCall_6_1_0() { return cUserCode2DetailCodeParserRuleCall_6_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.39/@alternatives/@elements.7'
+		//("usercode3" userCode3=DetailCode)?
 		public Group getGroup_7() { return cGroup_7; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.39/@alternatives/@elements.7/@elements.0'
+		//"usercode3"
 		public Keyword getUsercode3Keyword_7_0() { return cUsercode3Keyword_7_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.39/@alternatives/@elements.7/@elements.1'
+		//userCode3=DetailCode
 		public Assignment getUserCode3Assignment_7_1() { return cUserCode3Assignment_7_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.39/@alternatives/@elements.7/@elements.1/@terminal'
+		//DetailCode
 		public RuleCall getUserCode3DetailCodeParserRuleCall_7_1_0() { return cUserCode3DetailCodeParserRuleCall_7_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.39/@alternatives/@elements.8'
+		//// workaround: reverse the order for serializer
+		//(actorInstanceMappings+=ActorInstanceMapping | threads+=LogicalThread | connections+=LayerConnection | bindings+=Binding
+		//| actorRefs+=ActorRef | serviceProvisionPoints+=SPP | relayPorts+=Port)*
 		public Alternatives getAlternatives_8() { return cAlternatives_8; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.39/@alternatives/@elements.8/@elements.0'
+		//// workaround: reverse the order for serializer
+		//actorInstanceMappings+=ActorInstanceMapping
 		public Assignment getActorInstanceMappingsAssignment_8_0() { return cActorInstanceMappingsAssignment_8_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.39/@alternatives/@elements.8/@elements.0/@terminal'
+		//ActorInstanceMapping
 		public RuleCall getActorInstanceMappingsActorInstanceMappingParserRuleCall_8_0_0() { return cActorInstanceMappingsActorInstanceMappingParserRuleCall_8_0_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.39/@alternatives/@elements.8/@elements.1'
+		//threads+=LogicalThread
 		public Assignment getThreadsAssignment_8_1() { return cThreadsAssignment_8_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.39/@alternatives/@elements.8/@elements.1/@terminal'
+		//LogicalThread
 		public RuleCall getThreadsLogicalThreadParserRuleCall_8_1_0() { return cThreadsLogicalThreadParserRuleCall_8_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.39/@alternatives/@elements.8/@elements.2'
+		//connections+=LayerConnection
 		public Assignment getConnectionsAssignment_8_2() { return cConnectionsAssignment_8_2; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.39/@alternatives/@elements.8/@elements.2/@terminal'
+		//LayerConnection
 		public RuleCall getConnectionsLayerConnectionParserRuleCall_8_2_0() { return cConnectionsLayerConnectionParserRuleCall_8_2_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.39/@alternatives/@elements.8/@elements.3'
+		//bindings+=Binding
 		public Assignment getBindingsAssignment_8_3() { return cBindingsAssignment_8_3; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.39/@alternatives/@elements.8/@elements.3/@terminal'
+		//Binding
 		public RuleCall getBindingsBindingParserRuleCall_8_3_0() { return cBindingsBindingParserRuleCall_8_3_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.39/@alternatives/@elements.8/@elements.4'
+		//actorRefs+=ActorRef
 		public Assignment getActorRefsAssignment_8_4() { return cActorRefsAssignment_8_4; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.39/@alternatives/@elements.8/@elements.4/@terminal'
+		//ActorRef
 		public RuleCall getActorRefsActorRefParserRuleCall_8_4_0() { return cActorRefsActorRefParserRuleCall_8_4_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.39/@alternatives/@elements.8/@elements.5'
+		//serviceProvisionPoints+=SPP
 		public Assignment getServiceProvisionPointsAssignment_8_5() { return cServiceProvisionPointsAssignment_8_5; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.39/@alternatives/@elements.8/@elements.5/@terminal'
+		//SPP
 		public RuleCall getServiceProvisionPointsSPPParserRuleCall_8_5_0() { return cServiceProvisionPointsSPPParserRuleCall_8_5_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.39/@alternatives/@elements.8/@elements.6'
+		//relayPorts+=Port
 		public Assignment getRelayPortsAssignment_8_6() { return cRelayPortsAssignment_8_6; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.39/@alternatives/@elements.8/@elements.6/@terminal'
+		//Port
 		public RuleCall getRelayPortsPortParserRuleCall_8_6_0() { return cRelayPortsPortParserRuleCall_8_6_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.39/@alternatives/@elements.9'
+		//"}"
 		public Keyword getRightCurlyBracketKeyword_9() { return cRightCurlyBracketKeyword_9; }
 	}
 
@@ -2502,19 +2612,20 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/LogicalThread'
+		//LogicalThread:
+		//	"LogicalThread" name=ID;
 		public ParserRule getRule() { return rule; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.40/@alternatives'
+		//"LogicalThread" name=ID
 		public Group getGroup() { return cGroup; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.40/@alternatives/@elements.0'
+		//"LogicalThread"
 		public Keyword getLogicalThreadKeyword_0() { return cLogicalThreadKeyword_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.40/@alternatives/@elements.1'
+		//name=ID
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.40/@alternatives/@elements.1/@terminal'
+		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 	}
 
@@ -2534,46 +2645,48 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cActorInstanceMappingsActorInstanceMappingParserRuleCall_4_1_0 = (RuleCall)cActorInstanceMappingsAssignment_4_1.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_4_2 = (Keyword)cGroup_4.eContents().get(2);
 		
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/ActorInstanceMapping'
+		//ActorInstanceMapping:
+		//	"ActorInstanceMapping" path=RefPath "->" thread=[LogicalThread] ("{" actorInstanceMappings+=ActorInstanceMapping*
+		//	"}")?;
 		public ParserRule getRule() { return rule; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.41/@alternatives'
+		//"ActorInstanceMapping" path=RefPath "->" thread=[LogicalThread] ("{" actorInstanceMappings+=ActorInstanceMapping* "}")?
 		public Group getGroup() { return cGroup; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.41/@alternatives/@elements.0'
+		//"ActorInstanceMapping"
 		public Keyword getActorInstanceMappingKeyword_0() { return cActorInstanceMappingKeyword_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.41/@alternatives/@elements.1'
+		//path=RefPath
 		public Assignment getPathAssignment_1() { return cPathAssignment_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.41/@alternatives/@elements.1/@terminal'
+		//RefPath
 		public RuleCall getPathRefPathParserRuleCall_1_0() { return cPathRefPathParserRuleCall_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.41/@alternatives/@elements.2'
+		//"->"
 		public Keyword getHyphenMinusGreaterThanSignKeyword_2() { return cHyphenMinusGreaterThanSignKeyword_2; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.41/@alternatives/@elements.3'
+		//thread=[LogicalThread]
 		public Assignment getThreadAssignment_3() { return cThreadAssignment_3; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.41/@alternatives/@elements.3/@terminal'
+		//[LogicalThread]
 		public CrossReference getThreadLogicalThreadCrossReference_3_0() { return cThreadLogicalThreadCrossReference_3_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.41/@alternatives/@elements.3/@terminal/@terminal'
+		//ID
 		public RuleCall getThreadLogicalThreadIDTerminalRuleCall_3_0_1() { return cThreadLogicalThreadIDTerminalRuleCall_3_0_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.41/@alternatives/@elements.4'
+		//("{" actorInstanceMappings+=ActorInstanceMapping* "}")?
 		public Group getGroup_4() { return cGroup_4; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.41/@alternatives/@elements.4/@elements.0'
+		//"{"
 		public Keyword getLeftCurlyBracketKeyword_4_0() { return cLeftCurlyBracketKeyword_4_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.41/@alternatives/@elements.4/@elements.1'
+		//actorInstanceMappings+=ActorInstanceMapping*
 		public Assignment getActorInstanceMappingsAssignment_4_1() { return cActorInstanceMappingsAssignment_4_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.41/@alternatives/@elements.4/@elements.1/@terminal'
+		//ActorInstanceMapping
 		public RuleCall getActorInstanceMappingsActorInstanceMappingParserRuleCall_4_1_0() { return cActorInstanceMappingsActorInstanceMappingParserRuleCall_4_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.41/@alternatives/@elements.4/@elements.2'
+		//"}"
 		public Keyword getRightCurlyBracketKeyword_4_2() { return cRightCurlyBracketKeyword_4_2; }
 	}
 
@@ -2587,28 +2700,29 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cRefsAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
 		private final RuleCall cRefsRefSegmentParserRuleCall_1_1_0 = (RuleCall)cRefsAssignment_1_1.eContents().get(0);
 		
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/RefPath'
+		//RefPath:
+		//	refs+=RefSegment ("/" refs+=RefSegment)*;
 		public ParserRule getRule() { return rule; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.42/@alternatives'
+		//refs+=RefSegment ("/" refs+=RefSegment)*
 		public Group getGroup() { return cGroup; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.42/@alternatives/@elements.0'
+		//refs+=RefSegment
 		public Assignment getRefsAssignment_0() { return cRefsAssignment_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.42/@alternatives/@elements.0/@terminal'
+		//RefSegment
 		public RuleCall getRefsRefSegmentParserRuleCall_0_0() { return cRefsRefSegmentParserRuleCall_0_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.42/@alternatives/@elements.1'
+		//("/" refs+=RefSegment)*
 		public Group getGroup_1() { return cGroup_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.42/@alternatives/@elements.1/@elements.0'
+		//"/"
 		public Keyword getSolidusKeyword_1_0() { return cSolidusKeyword_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.42/@alternatives/@elements.1/@elements.1'
+		//refs+=RefSegment
 		public Assignment getRefsAssignment_1_1() { return cRefsAssignment_1_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.42/@alternatives/@elements.1/@elements.1/@terminal'
+		//RefSegment
 		public RuleCall getRefsRefSegmentParserRuleCall_1_1_0() { return cRefsRefSegmentParserRuleCall_1_1_0; }
 	}
 
@@ -2622,28 +2736,29 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cIdxAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
 		private final RuleCall cIdxINTTerminalRuleCall_1_1_0 = (RuleCall)cIdxAssignment_1_1.eContents().get(0);
 		
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/RefSegment'
+		//RefSegment:
+		//	ref=ID (":" idx=INT)?;
 		public ParserRule getRule() { return rule; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.43/@alternatives'
+		//ref=ID (":" idx=INT)?
 		public Group getGroup() { return cGroup; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.43/@alternatives/@elements.0'
+		//ref=ID
 		public Assignment getRefAssignment_0() { return cRefAssignment_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.43/@alternatives/@elements.0/@terminal'
+		//ID
 		public RuleCall getRefIDTerminalRuleCall_0_0() { return cRefIDTerminalRuleCall_0_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.43/@alternatives/@elements.1'
+		//(":" idx=INT)?
 		public Group getGroup_1() { return cGroup_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.43/@alternatives/@elements.1/@elements.0'
+		//":"
 		public Keyword getColonKeyword_1_0() { return cColonKeyword_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.43/@alternatives/@elements.1/@elements.1'
+		//idx=INT
 		public Assignment getIdxAssignment_1_1() { return cIdxAssignment_1_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.43/@alternatives/@elements.1/@elements.1/@terminal'
+		//INT
 		public RuleCall getIdxINTTerminalRuleCall_1_1_0() { return cIdxINTTerminalRuleCall_1_1_0; }
 	}
 
@@ -2657,28 +2772,29 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cEndpoint2Assignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall cEndpoint2BindingEndPointParserRuleCall_3_0 = (RuleCall)cEndpoint2Assignment_3.eContents().get(0);
 		
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/Binding'
+		//Binding:
+		//	"Binding" endpoint1=BindingEndPoint "and" endpoint2=BindingEndPoint;
 		public ParserRule getRule() { return rule; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.44/@alternatives'
+		//"Binding" endpoint1=BindingEndPoint "and" endpoint2=BindingEndPoint
 		public Group getGroup() { return cGroup; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.44/@alternatives/@elements.0'
+		//"Binding"
 		public Keyword getBindingKeyword_0() { return cBindingKeyword_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.44/@alternatives/@elements.1'
+		//endpoint1=BindingEndPoint
 		public Assignment getEndpoint1Assignment_1() { return cEndpoint1Assignment_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.44/@alternatives/@elements.1/@terminal'
+		//BindingEndPoint
 		public RuleCall getEndpoint1BindingEndPointParserRuleCall_1_0() { return cEndpoint1BindingEndPointParserRuleCall_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.44/@alternatives/@elements.2'
+		//"and"
 		public Keyword getAndKeyword_2() { return cAndKeyword_2; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.44/@alternatives/@elements.3'
+		//endpoint2=BindingEndPoint
 		public Assignment getEndpoint2Assignment_3() { return cEndpoint2Assignment_3; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.44/@alternatives/@elements.3/@terminal'
+		//BindingEndPoint
 		public RuleCall getEndpoint2BindingEndPointParserRuleCall_3_0() { return cEndpoint2BindingEndPointParserRuleCall_3_0; }
 	}
 
@@ -2699,49 +2815,50 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final CrossReference cSubSubProtocolCrossReference_2_1_0 = (CrossReference)cSubAssignment_2_1.eContents().get(0);
 		private final RuleCall cSubSubProtocolIDTerminalRuleCall_2_1_0_1 = (RuleCall)cSubSubProtocolCrossReference_2_1_0.eContents().get(1);
 		
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/BindingEndPoint'
+		//BindingEndPoint:
+		//	(actorRef=[ActorContainerRef] ".")? port=[Port] ("sub" sub=[SubProtocol])?;
 		public ParserRule getRule() { return rule; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.45/@alternatives'
+		//(actorRef=[ActorContainerRef] ".")? port=[Port] ("sub" sub=[SubProtocol])?
 		public Group getGroup() { return cGroup; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.45/@alternatives/@elements.0'
+		//(actorRef=[ActorContainerRef] ".")?
 		public Group getGroup_0() { return cGroup_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.45/@alternatives/@elements.0/@elements.0'
+		//actorRef=[ActorContainerRef]
 		public Assignment getActorRefAssignment_0_0() { return cActorRefAssignment_0_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.45/@alternatives/@elements.0/@elements.0/@terminal'
+		//[ActorContainerRef]
 		public CrossReference getActorRefActorContainerRefCrossReference_0_0_0() { return cActorRefActorContainerRefCrossReference_0_0_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.45/@alternatives/@elements.0/@elements.0/@terminal/@terminal'
+		//ID
 		public RuleCall getActorRefActorContainerRefIDTerminalRuleCall_0_0_0_1() { return cActorRefActorContainerRefIDTerminalRuleCall_0_0_0_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.45/@alternatives/@elements.0/@elements.1'
+		//"."
 		public Keyword getFullStopKeyword_0_1() { return cFullStopKeyword_0_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.45/@alternatives/@elements.1'
+		//port=[Port]
 		public Assignment getPortAssignment_1() { return cPortAssignment_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.45/@alternatives/@elements.1/@terminal'
+		//[Port]
 		public CrossReference getPortPortCrossReference_1_0() { return cPortPortCrossReference_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.45/@alternatives/@elements.1/@terminal/@terminal'
+		//ID
 		public RuleCall getPortPortIDTerminalRuleCall_1_0_1() { return cPortPortIDTerminalRuleCall_1_0_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.45/@alternatives/@elements.2'
+		//("sub" sub=[SubProtocol])?
 		public Group getGroup_2() { return cGroup_2; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.45/@alternatives/@elements.2/@elements.0'
+		//"sub"
 		public Keyword getSubKeyword_2_0() { return cSubKeyword_2_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.45/@alternatives/@elements.2/@elements.1'
+		//sub=[SubProtocol]
 		public Assignment getSubAssignment_2_1() { return cSubAssignment_2_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.45/@alternatives/@elements.2/@elements.1/@terminal'
+		//[SubProtocol]
 		public CrossReference getSubSubProtocolCrossReference_2_1_0() { return cSubSubProtocolCrossReference_2_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.45/@alternatives/@elements.2/@elements.1/@terminal/@terminal'
+		//ID
 		public RuleCall getSubSubProtocolIDTerminalRuleCall_2_1_0_1() { return cSubSubProtocolIDTerminalRuleCall_2_1_0_1; }
 	}
 
@@ -2755,28 +2872,29 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cToAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall cToSPPointParserRuleCall_3_0 = (RuleCall)cToAssignment_3.eContents().get(0);
 		
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/LayerConnection'
+		//LayerConnection:
+		//	"LayerConnection" from=SAPoint "satisfied_by" to=SPPoint;
 		public ParserRule getRule() { return rule; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.46/@alternatives'
+		//"LayerConnection" from=SAPoint "satisfied_by" to=SPPoint
 		public Group getGroup() { return cGroup; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.46/@alternatives/@elements.0'
+		//"LayerConnection"
 		public Keyword getLayerConnectionKeyword_0() { return cLayerConnectionKeyword_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.46/@alternatives/@elements.1'
+		//from=SAPoint
 		public Assignment getFromAssignment_1() { return cFromAssignment_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.46/@alternatives/@elements.1/@terminal'
+		//SAPoint
 		public RuleCall getFromSAPointParserRuleCall_1_0() { return cFromSAPointParserRuleCall_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.46/@alternatives/@elements.2'
+		//"satisfied_by"
 		public Keyword getSatisfied_byKeyword_2() { return cSatisfied_byKeyword_2; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.46/@alternatives/@elements.3'
+		//to=SPPoint
 		public Assignment getToAssignment_3() { return cToAssignment_3; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.46/@alternatives/@elements.3/@terminal'
+		//SPPoint
 		public RuleCall getToSPPointParserRuleCall_3_0() { return cToSPPointParserRuleCall_3_0; }
 	}
 
@@ -2786,16 +2904,17 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cRefSAPointParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cRelaySAPointParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/SAPoint'
+		//SAPoint:
+		//	RefSAPoint | RelaySAPoint;
 		public ParserRule getRule() { return rule; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.47/@alternatives'
+		//RefSAPoint | RelaySAPoint
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.47/@alternatives/@elements.0'
+		//RefSAPoint
 		public RuleCall getRefSAPointParserRuleCall_0() { return cRefSAPointParserRuleCall_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.47/@alternatives/@elements.1'
+		//RelaySAPoint
 		public RuleCall getRelaySAPointParserRuleCall_1() { return cRelaySAPointParserRuleCall_1; }
 	}
 
@@ -2807,22 +2926,25 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final CrossReference cRefActorContainerRefCrossReference_1_0 = (CrossReference)cRefAssignment_1.eContents().get(0);
 		private final RuleCall cRefActorContainerRefIDTerminalRuleCall_1_0_1 = (RuleCall)cRefActorContainerRefCrossReference_1_0.eContents().get(1);
 		
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/RefSAPoint'
+		//RefSAPoint: // satisfies a sub actor
+		//	"ref" ref=[ActorContainerRef];
 		public ParserRule getRule() { return rule; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.48/@alternatives'
+		//// satisfies a sub actor
+		//"ref" ref=[ActorContainerRef]
 		public Group getGroup() { return cGroup; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.48/@alternatives/@elements.0'
+		//// satisfies a sub actor
+		//"ref"
 		public Keyword getRefKeyword_0() { return cRefKeyword_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.48/@alternatives/@elements.1'
+		//ref=[ActorContainerRef]
 		public Assignment getRefAssignment_1() { return cRefAssignment_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.48/@alternatives/@elements.1/@terminal'
+		//[ActorContainerRef]
 		public CrossReference getRefActorContainerRefCrossReference_1_0() { return cRefActorContainerRefCrossReference_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.48/@alternatives/@elements.1/@terminal/@terminal'
+		//ID
 		public RuleCall getRefActorContainerRefIDTerminalRuleCall_1_0_1() { return cRefActorContainerRefIDTerminalRuleCall_1_0_1; }
 	}
 
@@ -2834,22 +2956,25 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final CrossReference cRelaySPPCrossReference_1_0 = (CrossReference)cRelayAssignment_1.eContents().get(0);
 		private final RuleCall cRelaySPPIDTerminalRuleCall_1_0_1 = (RuleCall)cRelaySPPCrossReference_1_0.eContents().get(1);
 		
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/RelaySAPoint'
+		//RelaySAPoint: // relays from own interface
+		//	"relay_sap" relay=[SPP];
 		public ParserRule getRule() { return rule; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.49/@alternatives'
+		//// relays from own interface
+		//"relay_sap" relay=[SPP]
 		public Group getGroup() { return cGroup; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.49/@alternatives/@elements.0'
+		//// relays from own interface
+		//"relay_sap"
 		public Keyword getRelay_sapKeyword_0() { return cRelay_sapKeyword_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.49/@alternatives/@elements.1'
+		//relay=[SPP]
 		public Assignment getRelayAssignment_1() { return cRelayAssignment_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.49/@alternatives/@elements.1/@terminal'
+		//[SPP]
 		public CrossReference getRelaySPPCrossReference_1_0() { return cRelaySPPCrossReference_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.49/@alternatives/@elements.1/@terminal/@terminal'
+		//ID
 		public RuleCall getRelaySPPIDTerminalRuleCall_1_0_1() { return cRelaySPPIDTerminalRuleCall_1_0_1; }
 	}
 
@@ -2864,31 +2989,32 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final CrossReference cServiceSPPCrossReference_2_0 = (CrossReference)cServiceAssignment_2.eContents().get(0);
 		private final RuleCall cServiceSPPIDTerminalRuleCall_2_0_1 = (RuleCall)cServiceSPPCrossReference_2_0.eContents().get(1);
 		
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/SPPoint'
+		//SPPoint:
+		//	ref=[ActorContainerRef] "." service=[SPP];
 		public ParserRule getRule() { return rule; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.50/@alternatives'
+		//ref=[ActorContainerRef] "." service=[SPP]
 		public Group getGroup() { return cGroup; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.50/@alternatives/@elements.0'
+		//ref=[ActorContainerRef]
 		public Assignment getRefAssignment_0() { return cRefAssignment_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.50/@alternatives/@elements.0/@terminal'
+		//[ActorContainerRef]
 		public CrossReference getRefActorContainerRefCrossReference_0_0() { return cRefActorContainerRefCrossReference_0_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.50/@alternatives/@elements.0/@terminal/@terminal'
+		//ID
 		public RuleCall getRefActorContainerRefIDTerminalRuleCall_0_0_1() { return cRefActorContainerRefIDTerminalRuleCall_0_0_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.50/@alternatives/@elements.1'
+		//"."
 		public Keyword getFullStopKeyword_1() { return cFullStopKeyword_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.50/@alternatives/@elements.2'
+		//service=[SPP]
 		public Assignment getServiceAssignment_2() { return cServiceAssignment_2; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.50/@alternatives/@elements.2/@terminal'
+		//[SPP]
 		public CrossReference getServiceSPPCrossReference_2_0() { return cServiceSPPCrossReference_2_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.50/@alternatives/@elements.2/@terminal/@terminal'
+		//ID
 		public RuleCall getServiceSPPIDTerminalRuleCall_2_0_1() { return cServiceSPPIDTerminalRuleCall_2_0_1; }
 	}
 
@@ -2909,49 +3035,50 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cDocuAssignment_6 = (Assignment)cGroup.eContents().get(6);
 		private final RuleCall cDocuDocumentationParserRuleCall_6_0 = (RuleCall)cDocuAssignment_6.eContents().get(0);
 		
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/ActorRef'
+		//ActorRef:
+		//	refType=ReferenceType? "ActorRef" name=ID multiplicity=MULTIPLICITY? ":" type=[ActorClass|FQN] docu=Documentation?;
 		public ParserRule getRule() { return rule; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.51/@alternatives'
+		//refType=ReferenceType? "ActorRef" name=ID multiplicity=MULTIPLICITY? ":" type=[ActorClass|FQN] docu=Documentation?
 		public Group getGroup() { return cGroup; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.51/@alternatives/@elements.0'
+		//refType=ReferenceType?
 		public Assignment getRefTypeAssignment_0() { return cRefTypeAssignment_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.51/@alternatives/@elements.0/@terminal'
+		//ReferenceType
 		public RuleCall getRefTypeReferenceTypeEnumRuleCall_0_0() { return cRefTypeReferenceTypeEnumRuleCall_0_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.51/@alternatives/@elements.1'
+		//"ActorRef"
 		public Keyword getActorRefKeyword_1() { return cActorRefKeyword_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.51/@alternatives/@elements.2'
+		//name=ID
 		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.51/@alternatives/@elements.2/@terminal'
+		//ID
 		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.51/@alternatives/@elements.3'
+		//multiplicity=MULTIPLICITY?
 		public Assignment getMultiplicityAssignment_3() { return cMultiplicityAssignment_3; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.51/@alternatives/@elements.3/@terminal'
+		//MULTIPLICITY
 		public RuleCall getMultiplicityMULTIPLICITYParserRuleCall_3_0() { return cMultiplicityMULTIPLICITYParserRuleCall_3_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.51/@alternatives/@elements.4'
+		//":"
 		public Keyword getColonKeyword_4() { return cColonKeyword_4; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.51/@alternatives/@elements.5'
+		//type=[ActorClass|FQN]
 		public Assignment getTypeAssignment_5() { return cTypeAssignment_5; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.51/@alternatives/@elements.5/@terminal'
+		//[ActorClass|FQN]
 		public CrossReference getTypeActorClassCrossReference_5_0() { return cTypeActorClassCrossReference_5_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.51/@alternatives/@elements.5/@terminal/@terminal'
+		//FQN
 		public RuleCall getTypeActorClassFQNParserRuleCall_5_0_1() { return cTypeActorClassFQNParserRuleCall_5_0_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.51/@alternatives/@elements.6'
+		//docu=Documentation?
 		public Assignment getDocuAssignment_6() { return cDocuAssignment_6; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.51/@alternatives/@elements.6/@terminal'
+		//Documentation
 		public RuleCall getDocuDocumentationParserRuleCall_6_0() { return cDocuDocumentationParserRuleCall_6_0; }
 	}
 
@@ -2959,10 +3086,14 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AbstractInterfaceItem");
 		private final RuleCall cInterfaceItemParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/AbstractInterfaceItem'
+		//// **************************************************************
+		//// concrete message and interface item for state machines
+		////AbstractMessage: Message;
+		//AbstractInterfaceItem:
+		//	InterfaceItem;
 		public ParserRule getRule() { return rule; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.53/@alternatives'
+		//InterfaceItem
 		public RuleCall getInterfaceItemParserRuleCall() { return cInterfaceItemParserRuleCall; }
 	}
 
@@ -2975,25 +3106,30 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cINTTerminalRuleCall_1_1 = (RuleCall)cAlternatives_1.eContents().get(1);
 		private final Keyword cRightSquareBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/MULTIPLICITY'
+		//// **************************************************************
+		//// general
+		//// the following is a data type rule (accompanied by a value converter) and must not be a terminal rule
+		//// (because then the lexer already would find this in places where it is not expected, e.g. in an Attribute)
+		//MULTIPLICITY returns ecore::EInt:
+		//	"[" ("*" | INT) "]";
 		public ParserRule getRule() { return rule; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.54/@alternatives'
+		//"[" ("*" | INT) "]"
 		public Group getGroup() { return cGroup; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.54/@alternatives/@elements.0'
+		//"["
 		public Keyword getLeftSquareBracketKeyword_0() { return cLeftSquareBracketKeyword_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.54/@alternatives/@elements.1'
+		//"*" | INT
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.54/@alternatives/@elements.1/@elements.0'
+		//"*"
 		public Keyword getAsteriskKeyword_1_0() { return cAsteriskKeyword_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.54/@alternatives/@elements.1/@elements.1'
+		//INT
 		public RuleCall getINTTerminalRuleCall_1_1() { return cINTTerminalRuleCall_1_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.54/@alternatives/@elements.2'
+		//"]"
 		public Keyword getRightSquareBracketKeyword_2() { return cRightSquareBracketKeyword_2; }
 	}
 
@@ -3008,31 +3144,34 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cSubSystemClassKeyword_5 = (Keyword)cAlternatives.eContents().get(5);
 		private final Keyword cLogicalSystemKeyword_6 = (Keyword)cAlternatives.eContents().get(6);
 		
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/AnnotationTargetType'
+		//AnnotationTargetType:
+		//	"DataClass" | "ActorClass" | "ActorBehavior" | "ProtocolClass" | "CompoundProtocolClass" | "SubSystemClass" |
+		//	"LogicalSystem";
 		public ParserRule getRule() { return rule; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.55/@alternatives'
+		//"DataClass" | "ActorClass" | "ActorBehavior" | "ProtocolClass" | "CompoundProtocolClass" | "SubSystemClass" |
+		//"LogicalSystem"
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.55/@alternatives/@elements.0'
+		//"DataClass"
 		public Keyword getDataClassKeyword_0() { return cDataClassKeyword_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.55/@alternatives/@elements.1'
+		//"ActorClass"
 		public Keyword getActorClassKeyword_1() { return cActorClassKeyword_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.55/@alternatives/@elements.2'
+		//"ActorBehavior"
 		public Keyword getActorBehaviorKeyword_2() { return cActorBehaviorKeyword_2; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.55/@alternatives/@elements.3'
+		//"ProtocolClass"
 		public Keyword getProtocolClassKeyword_3() { return cProtocolClassKeyword_3; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.55/@alternatives/@elements.4'
+		//"CompoundProtocolClass"
 		public Keyword getCompoundProtocolClassKeyword_4() { return cCompoundProtocolClassKeyword_4; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.55/@alternatives/@elements.5'
+		//"SubSystemClass"
 		public Keyword getSubSystemClassKeyword_5() { return cSubSystemClassKeyword_5; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.55/@alternatives/@elements.6'
+		//"LogicalSystem"
 		public Keyword getLogicalSystemKeyword_6() { return cLogicalSystemKeyword_6; }
 	}
 	
@@ -3047,28 +3186,31 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final EnumLiteralDeclaration cSYNCHRONOUSEnumLiteralDeclaration_2 = (EnumLiteralDeclaration)cAlternatives.eContents().get(2);
 		private final Keyword cSYNCHRONOUSSyncKeyword_2_0 = (Keyword)cSYNCHRONOUSEnumLiteralDeclaration_2.eContents().get(0);
 		
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/CommunicationType'
+		//// **************************************************************
+		//// protocol class
+		//enum CommunicationType:
+		//	EVENT_DRIVEN="eventdriven" | DATA_DRIVEN="datadriven" | SYNCHRONOUS="sync";
 		public EnumRule getRule() { return rule; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.18/@alternatives'
+		//EVENT_DRIVEN="eventdriven" | DATA_DRIVEN="datadriven" | SYNCHRONOUS="sync"
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.18/@alternatives/@elements.0'
+		//EVENT_DRIVEN="eventdriven"
 		public EnumLiteralDeclaration getEVENT_DRIVENEnumLiteralDeclaration_0() { return cEVENT_DRIVENEnumLiteralDeclaration_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.18/@alternatives/@elements.0/@literal'
+		//"eventdriven"
 		public Keyword getEVENT_DRIVENEventdrivenKeyword_0_0() { return cEVENT_DRIVENEventdrivenKeyword_0_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.18/@alternatives/@elements.1'
+		//DATA_DRIVEN="datadriven"
 		public EnumLiteralDeclaration getDATA_DRIVENEnumLiteralDeclaration_1() { return cDATA_DRIVENEnumLiteralDeclaration_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.18/@alternatives/@elements.1/@literal'
+		//"datadriven"
 		public Keyword getDATA_DRIVENDatadrivenKeyword_1_0() { return cDATA_DRIVENDatadrivenKeyword_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.18/@alternatives/@elements.2'
+		//SYNCHRONOUS="sync"
 		public EnumLiteralDeclaration getSYNCHRONOUSEnumLiteralDeclaration_2() { return cSYNCHRONOUSEnumLiteralDeclaration_2; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.18/@alternatives/@elements.2/@literal'
+		//"sync"
 		public Keyword getSYNCHRONOUSSyncKeyword_2_0() { return cSYNCHRONOUSSyncKeyword_2_0; }
 	}
 
@@ -3080,22 +3222,24 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final EnumLiteralDeclaration cOPTIONALEnumLiteralDeclaration_1 = (EnumLiteralDeclaration)cAlternatives.eContents().get(1);
 		private final Keyword cOPTIONALOptionalKeyword_1_0 = (Keyword)cOPTIONALEnumLiteralDeclaration_1.eContents().get(0);
 		
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/ReferenceType'
+		//// IMPORTED='imported'
+		//enum ReferenceType:
+		//	FIXED="fixed" | OPTIONAL="optional";
 		public EnumRule getRule() { return rule; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.52/@alternatives'
+		//FIXED="fixed" | OPTIONAL="optional"
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.52/@alternatives/@elements.0'
+		//FIXED="fixed"
 		public EnumLiteralDeclaration getFIXEDEnumLiteralDeclaration_0() { return cFIXEDEnumLiteralDeclaration_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.52/@alternatives/@elements.0/@literal'
+		//"fixed"
 		public Keyword getFIXEDFixedKeyword_0_0() { return cFIXEDFixedKeyword_0_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.52/@alternatives/@elements.1'
+		//OPTIONAL="optional"
 		public EnumLiteralDeclaration getOPTIONALEnumLiteralDeclaration_1() { return cOPTIONALEnumLiteralDeclaration_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.52/@alternatives/@elements.1/@literal'
+		//"optional"
 		public Keyword getOPTIONALOptionalKeyword_1_0() { return cOPTIONALOptionalKeyword_1_0; }
 	}
 
@@ -3117,52 +3261,57 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final EnumLiteralDeclaration cLOGICAL_SYSTEM_CLASSEnumLiteralDeclaration_6 = (EnumLiteralDeclaration)cAlternatives.eContents().get(6);
 		private final Keyword cLOGICAL_SYSTEM_CLASSLogicalSystemKeyword_6_0 = (Keyword)cLOGICAL_SYSTEM_CLASSEnumLiteralDeclaration_6.eContents().get(0);
 		
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/RoomAnnotationTargetEnum'
+		//enum RoomAnnotationTargetEnum:
+		//	DATA_CLASS="DataClass" | ACTOR_CLASS="ActorClass" | ACTOR_BEHAVIOR="ActorBehavior" | PROTOCOL_CLASS="ProtocolClass" |
+		//	COMPOUND_PROTOCOL_CLASS="CompoundProtocolClass" | SUBSYSTEM_CLASS="SubSystemClass" |
+		//	LOGICAL_SYSTEM_CLASS="LogicalSystem";
 		public EnumRule getRule() { return rule; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.56/@alternatives'
+		//DATA_CLASS="DataClass" | ACTOR_CLASS="ActorClass" | ACTOR_BEHAVIOR="ActorBehavior" | PROTOCOL_CLASS="ProtocolClass" |
+		//COMPOUND_PROTOCOL_CLASS="CompoundProtocolClass" | SUBSYSTEM_CLASS="SubSystemClass" |
+		//LOGICAL_SYSTEM_CLASS="LogicalSystem"
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.56/@alternatives/@elements.0'
+		//DATA_CLASS="DataClass"
 		public EnumLiteralDeclaration getDATA_CLASSEnumLiteralDeclaration_0() { return cDATA_CLASSEnumLiteralDeclaration_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.56/@alternatives/@elements.0/@literal'
+		//"DataClass"
 		public Keyword getDATA_CLASSDataClassKeyword_0_0() { return cDATA_CLASSDataClassKeyword_0_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.56/@alternatives/@elements.1'
+		//ACTOR_CLASS="ActorClass"
 		public EnumLiteralDeclaration getACTOR_CLASSEnumLiteralDeclaration_1() { return cACTOR_CLASSEnumLiteralDeclaration_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.56/@alternatives/@elements.1/@literal'
+		//"ActorClass"
 		public Keyword getACTOR_CLASSActorClassKeyword_1_0() { return cACTOR_CLASSActorClassKeyword_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.56/@alternatives/@elements.2'
+		//ACTOR_BEHAVIOR="ActorBehavior"
 		public EnumLiteralDeclaration getACTOR_BEHAVIOREnumLiteralDeclaration_2() { return cACTOR_BEHAVIOREnumLiteralDeclaration_2; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.56/@alternatives/@elements.2/@literal'
+		//"ActorBehavior"
 		public Keyword getACTOR_BEHAVIORActorBehaviorKeyword_2_0() { return cACTOR_BEHAVIORActorBehaviorKeyword_2_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.56/@alternatives/@elements.3'
+		//PROTOCOL_CLASS="ProtocolClass"
 		public EnumLiteralDeclaration getPROTOCOL_CLASSEnumLiteralDeclaration_3() { return cPROTOCOL_CLASSEnumLiteralDeclaration_3; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.56/@alternatives/@elements.3/@literal'
+		//"ProtocolClass"
 		public Keyword getPROTOCOL_CLASSProtocolClassKeyword_3_0() { return cPROTOCOL_CLASSProtocolClassKeyword_3_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.56/@alternatives/@elements.4'
+		//COMPOUND_PROTOCOL_CLASS="CompoundProtocolClass"
 		public EnumLiteralDeclaration getCOMPOUND_PROTOCOL_CLASSEnumLiteralDeclaration_4() { return cCOMPOUND_PROTOCOL_CLASSEnumLiteralDeclaration_4; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.56/@alternatives/@elements.4/@literal'
+		//"CompoundProtocolClass"
 		public Keyword getCOMPOUND_PROTOCOL_CLASSCompoundProtocolClassKeyword_4_0() { return cCOMPOUND_PROTOCOL_CLASSCompoundProtocolClassKeyword_4_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.56/@alternatives/@elements.5'
+		//SUBSYSTEM_CLASS="SubSystemClass"
 		public EnumLiteralDeclaration getSUBSYSTEM_CLASSEnumLiteralDeclaration_5() { return cSUBSYSTEM_CLASSEnumLiteralDeclaration_5; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.56/@alternatives/@elements.5/@literal'
+		//"SubSystemClass"
 		public Keyword getSUBSYSTEM_CLASSSubSystemClassKeyword_5_0() { return cSUBSYSTEM_CLASSSubSystemClassKeyword_5_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.56/@alternatives/@elements.6'
+		//LOGICAL_SYSTEM_CLASS="LogicalSystem"
 		public EnumLiteralDeclaration getLOGICAL_SYSTEM_CLASSEnumLiteralDeclaration_6() { return cLOGICAL_SYSTEM_CLASSEnumLiteralDeclaration_6; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#/0/@rules.56/@alternatives/@elements.6/@literal'
+		//"LogicalSystem"
 		public Keyword getLOGICAL_SYSTEM_CLASSLogicalSystemKeyword_6_0() { return cLOGICAL_SYSTEM_CLASSLogicalSystemKeyword_6_0; }
 	}
 	
@@ -3319,7 +3468,11 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	
-	//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/RoomModel'
+	//RoomModel:
+	//	"RoomModel" name=FQN docu=Documentation? "{" imports+=Import* (primitiveTypes+=PrimitiveType |
+	//	enumerationTypes+=EnumerationType | externalTypes+=ExternalType | dataClasses+=DataClass |
+	//	protocolClasses+=GeneralProtocolClass | actorClasses+=ActorClass | subSystemClasses+=SubSystemClass |
+	//	systems+=LogicalSystem | annotationTypes+=AnnotationType)* "}";
 	public RoomModelElements getRoomModelAccess() {
 		return pRoomModel;
 	}
@@ -3328,7 +3481,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getRoomModelAccess().getRule();
 	}
 
-	//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/RoomClass'
+	//RoomClass:
+	//	DataType | GeneralProtocolClass | StructureClass;
 	public RoomClassElements getRoomClassAccess() {
 		return pRoomClass;
 	}
@@ -3337,7 +3491,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getRoomClassAccess().getRule();
 	}
 
-	//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/StructureClass'
+	//StructureClass:
+	//	ActorContainerClass | LogicalSystem;
 	public StructureClassElements getStructureClassAccess() {
 		return pStructureClass;
 	}
@@ -3346,7 +3501,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getStructureClassAccess().getRule();
 	}
 
-	//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/ActorContainerClass'
+	//ActorContainerClass:
+	//	ActorClass | SubSystemClass;
 	public ActorContainerClassElements getActorContainerClassAccess() {
 		return pActorContainerClass;
 	}
@@ -3355,7 +3511,10 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getActorContainerClassAccess().getRule();
 	}
 
-	//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/VarDecl'
+	//// **************************************************************
+	//// data class
+	//VarDecl:
+	//	name=ID ":" refType=RefableType;
 	public VarDeclElements getVarDeclAccess() {
 		return pVarDecl;
 	}
@@ -3364,7 +3523,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getVarDeclAccess().getRule();
 	}
 
-	//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/RefableType'
+	//RefableType:
+	//	type=[DataType|FQN] ref?="ref"?;
 	public RefableTypeElements getRefableTypeAccess() {
 		return pRefableType;
 	}
@@ -3373,7 +3533,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getRefableTypeAccess().getRule();
 	}
 
-	//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/DataType'
+	//DataType:
+	//	PrimitiveType | EnumerationType | ComplexType;
 	public DataTypeElements getDataTypeAccess() {
 		return pDataType;
 	}
@@ -3382,7 +3543,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getDataTypeAccess().getRule();
 	}
 
-	//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/ComplexType'
+	//ComplexType:
+	//	DataClass | ExternalType;
 	public ComplexTypeElements getComplexTypeAccess() {
 		return pComplexType;
 	}
@@ -3391,7 +3553,9 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getComplexTypeAccess().getRule();
 	}
 
-	//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/PrimitiveType'
+	//PrimitiveType:
+	//	"PrimitiveType" name=ID ":" type=LiteralType "->" targetName=STRING ("(" castName=FQN ")")? "default"
+	//	defaultValueLiteral=STRING docu=Documentation?;
 	public PrimitiveTypeElements getPrimitiveTypeAccess() {
 		return pPrimitiveType;
 	}
@@ -3400,7 +3564,9 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getPrimitiveTypeAccess().getRule();
 	}
 
-	//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/EnumerationType'
+	//EnumerationType:
+	//	"Enumeration" name=ID docu=Documentation? ("of" primitiveType=[PrimitiveType|FQN])? "{" (literals+=EnumLiteral (","
+	//	literals+=EnumLiteral)*)? "}";
 	public EnumerationTypeElements getEnumerationTypeAccess() {
 		return pEnumerationType;
 	}
@@ -3409,7 +3575,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getEnumerationTypeAccess().getRule();
 	}
 
-	//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/EnumLiteral'
+	//EnumLiteral:
+	//	name=ID ("=" literal=IntLiteral)?;
 	public EnumLiteralElements getEnumLiteralAccess() {
 		return pEnumLiteral;
 	}
@@ -3418,7 +3585,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getEnumLiteralAccess().getRule();
 	}
 
-	//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/ExternalType'
+	//ExternalType:
+	//	"ExternalType" name=ID "->" targetName=STRING ("default" defaultValueLiteral=STRING)? docu=Documentation?;
 	public ExternalTypeElements getExternalTypeAccess() {
 		return pExternalType;
 	}
@@ -3427,7 +3595,11 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getExternalTypeAccess().getRule();
 	}
 
-	//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/DataClass'
+	//// TODOHRR: define detail level language?
+	//DataClass:
+	//	"DataClass" name=ID docu=Documentation? ("extends" base=[DataClass|FQN])? "{" annotations+=Annotation* ("usercode1"
+	//	userCode1=DetailCode)? ("usercode2" userCode2=DetailCode)? ("usercode3" userCode3=DetailCode)?
+	//	(operations+=StandardOperation | structors+=ClassStructor | attributes+=Attribute)* "}";
 	public DataClassElements getDataClassAccess() {
 		return pDataClass;
 	}
@@ -3436,7 +3608,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getDataClassAccess().getRule();
 	}
 
-	//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/Attribute'
+	//Attribute:
+	//	"Attribute" name=ID ("[" size=INT "]")? ":" type=RefableType? ("=" defaultValueLiteral=STRING)? docu=Documentation?;
 	public AttributeElements getAttributeAccess() {
 		return pAttribute;
 	}
@@ -3445,7 +3618,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getAttributeAccess().getRule();
 	}
 
-	//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/Operation'
+	//Operation:
+	//	StandardOperation | PortOperation;
 	public OperationElements getOperationAccess() {
 		return pOperation;
 	}
@@ -3454,7 +3628,9 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getOperationAccess().getRule();
 	}
 
-	//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/StandardOperation'
+	//StandardOperation:
+	//	override?="override"? "Operation" name=ID "(" (arguments+=VarDecl ("," arguments+=VarDecl)*)? ")" (":" ("void" |
+	//	returnType=RefableType))? docu=Documentation? detailCode=DetailCode;
 	public StandardOperationElements getStandardOperationAccess() {
 		return pStandardOperation;
 	}
@@ -3463,7 +3639,9 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getStandardOperationAccess().getRule();
 	}
 
-	//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/PortOperation'
+	//PortOperation:
+	//	"Operation" name=ID "(" (arguments+=VarDecl ("," arguments+=VarDecl)*)? ")" (":" ("void" | returnType=RefableType) |
+	//	"sends" sendsMsg=[Message])? docu=Documentation? detailCode=DetailCode;
 	public PortOperationElements getPortOperationAccess() {
 		return pPortOperation;
 	}
@@ -3472,7 +3650,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getPortOperationAccess().getRule();
 	}
 
-	//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/ClassStructor'
+	//ClassStructor:
+	//	name=("ctor" | "dtor") detailCode=DetailCode;
 	public ClassStructorElements getClassStructorAccess() {
 		return pClassStructor;
 	}
@@ -3481,7 +3660,10 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getClassStructorAccess().getRule();
 	}
 
-	//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/CommunicationType'
+	//// **************************************************************
+	//// protocol class
+	//enum CommunicationType:
+	//	EVENT_DRIVEN="eventdriven" | DATA_DRIVEN="datadriven" | SYNCHRONOUS="sync";
 	public CommunicationTypeElements getCommunicationTypeAccess() {
 		return unknownRuleCommunicationType;
 	}
@@ -3490,7 +3672,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getCommunicationTypeAccess().getRule();
 	}
 
-	//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/GeneralProtocolClass'
+	//GeneralProtocolClass:
+	//	ProtocolClass | CompoundProtocolClass;
 	public GeneralProtocolClassElements getGeneralProtocolClassAccess() {
 		return pGeneralProtocolClass;
 	}
@@ -3499,7 +3682,12 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getGeneralProtocolClassAccess().getRule();
 	}
 
-	//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/ProtocolClass'
+	//ProtocolClass:
+	//	commType=CommunicationType? "ProtocolClass" name=ID docu=Documentation? ("extends" base=[ProtocolClass|FQN])? "{"
+	//	annotations+=Annotation* ("usercode1" userCode1=DetailCode)? ("usercode2" userCode2=DetailCode)? ("usercode3"
+	//	userCode3=DetailCode)? ("incoming" "{" incomingMessages+=Message* "}")? ("outgoing" "{" outgoingMessages+=Message*
+	//	"}")? ("regular" "PortClass" regular=PortClass)? ("conjugated" "PortClass" conjugated=PortClass)?
+	//	semantics=ProtocolSemantics? "}";
 	public ProtocolClassElements getProtocolClassAccess() {
 		return pProtocolClass;
 	}
@@ -3508,7 +3696,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getProtocolClassAccess().getRule();
 	}
 
-	//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/CompoundProtocolClass'
+	//CompoundProtocolClass:
+	//	"CompoundProtocolClass" name=ID docu=Documentation? "{" annotations+=Annotation* subProtocols+=SubProtocol* "}";
 	public CompoundProtocolClassElements getCompoundProtocolClassAccess() {
 		return pCompoundProtocolClass;
 	}
@@ -3517,7 +3706,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getCompoundProtocolClassAccess().getRule();
 	}
 
-	//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/SubProtocol'
+	//SubProtocol:
+	//	"SubProtocol" name=ID ":" protocol=[GeneralProtocolClass|FQN];
 	public SubProtocolElements getSubProtocolAccess() {
 		return pSubProtocol;
 	}
@@ -3526,7 +3716,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getSubProtocolAccess().getRule();
 	}
 
-	//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/Message'
+	//Message:
+	//	priv?="private"? "Message" name=ID "(" data=VarDecl? ")" docu=Documentation?;
 	public MessageElements getMessageAccess() {
 		return pMessage;
 	}
@@ -3535,7 +3726,9 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getMessageAccess().getRule();
 	}
 
-	//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/PortClass'
+	//PortClass:
+	//	{PortClass} "{" ("usercode" userCode=DetailCode)? (msgHandlers+=MessageHandler | operations+=PortOperation |
+	//	attributes+=Attribute)* "}";
 	public PortClassElements getPortClassAccess() {
 		return pPortClass;
 	}
@@ -3544,7 +3737,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getPortClassAccess().getRule();
 	}
 
-	//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/MessageHandler'
+	//MessageHandler:
+	//	InMessageHandler | OutMessageHandler;
 	public MessageHandlerElements getMessageHandlerAccess() {
 		return pMessageHandler;
 	}
@@ -3553,7 +3747,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getMessageHandlerAccess().getRule();
 	}
 
-	//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/InMessageHandler'
+	//InMessageHandler:
+	//	"handle" "incoming" msg=[Message] detailCode=DetailCode;
 	public InMessageHandlerElements getInMessageHandlerAccess() {
 		return pInMessageHandler;
 	}
@@ -3562,7 +3757,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getInMessageHandlerAccess().getRule();
 	}
 
-	//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/OutMessageHandler'
+	//OutMessageHandler:
+	//	"handle" "outgoing" msg=[Message] detailCode=DetailCode;
 	public OutMessageHandlerElements getOutMessageHandlerAccess() {
 		return pOutMessageHandler;
 	}
@@ -3571,7 +3767,10 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getOutMessageHandlerAccess().getRule();
 	}
 
-	//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/ModelComponent'
+	//// **************************************************************
+	//// actor class
+	//ModelComponent:
+	//	ActorClass;
 	public ModelComponentElements getModelComponentAccess() {
 		return pModelComponent;
 	}
@@ -3580,7 +3779,22 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getModelComponentAccess().getRule();
 	}
 
-	//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/ActorClass'
+	//// some notes on ports
+	////
+	//// in ROOM ports can be contained in the structure and/or the interface
+	//// p in s ==> internal end port
+	//// p in i ==> relay port
+	//// p in i and p in s ==> external end port
+	//// since double containment is not supported we decided to define external ports as reference to interface ports
+	//ActorClass:
+	//	(abstract?="abstract"? & commType=ComponentCommunicationType?) "ActorClass" name=ID docu=Documentation? ("extends"
+	//	base=[ActorClass|FQN])? "{" annotations+=Annotation* ("Interface" "{" (serviceProvisionPoints+=SPP |
+	//	interfacePorts+=Port)* "}")? ("Structure" structureDocu=Documentation? "{" ("usercode1" userCode1=DetailCode)?
+	//	("usercode2" userCode2=DetailCode)? ("usercode3" userCode3=DetailCode)? // workaround: reverse the order for serializer
+	//	(connections+=LayerConnection | bindings+=Binding | serviceImplementations+=ServiceImplementation |
+	//	attributes+=Attribute | actorRefs+=ActorRef | serviceAccessPoints+=SAP | internalPorts+=Port |
+	//	externalPorts+=ExternalPort)* "}")? ("Behavior" behaviorDocu=Documentation? "{" behaviorAnnotations+=Annotation*
+	//	(operations+=StandardOperation | structors+=ClassStructor)* stateMachine=StateMachine? "}")? "}";
 	public ActorClassElements getActorClassAccess() {
 		return pActorClass;
 	}
@@ -3589,7 +3803,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getActorClassAccess().getRule();
 	}
 
-	//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/InterfaceItem'
+	//InterfaceItem:
+	//	Port | SAP | SPP;
 	public InterfaceItemElements getInterfaceItemAccess() {
 		return pInterfaceItem;
 	}
@@ -3598,7 +3813,9 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getInterfaceItemAccess().getRule();
 	}
 
-	//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/Port'
+	//Port:
+	//	conjugated?="conjugated"? "Port" name=ID multiplicity=MULTIPLICITY? ":" protocol=[GeneralProtocolClass|FQN]
+	//	docu=Documentation?;
 	public PortElements getPortAccess() {
 		return pPort;
 	}
@@ -3607,7 +3824,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getPortAccess().getRule();
 	}
 
-	//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/ExternalPort'
+	//ExternalPort:
+	//	"external" "Port" interfacePort=[Port];
 	public ExternalPortElements getExternalPortAccess() {
 		return pExternalPort;
 	}
@@ -3616,7 +3834,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getExternalPortAccess().getRule();
 	}
 
-	//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/SAP'
+	//SAP:
+	//	"SAP" name=ID ":" protocol=[ProtocolClass|FQN];
 	public SAPElements getSAPAccess() {
 		return pSAP;
 	}
@@ -3625,7 +3844,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getSAPAccess().getRule();
 	}
 
-	//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/SPP'
+	//SPP:
+	//	"SPP" name=ID ":" protocol=[ProtocolClass|FQN];
 	public SPPElements getSPPAccess() {
 		return pSPP;
 	}
@@ -3634,7 +3854,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getSPPAccess().getRule();
 	}
 
-	//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/ServiceImplementation'
+	//ServiceImplementation:
+	//	"ServiceImplementation" "of" spp=[SPP];
 	public ServiceImplementationElements getServiceImplementationAccess() {
 		return pServiceImplementation;
 	}
@@ -3643,7 +3864,9 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getServiceImplementationAccess().getRule();
 	}
 
-	//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/LogicalSystem'
+	//LogicalSystem:
+	//	"LogicalSystem" name=ID docu=Documentation? "{" annotations+=Annotation* (connections+=LayerConnection |
+	//	bindings+=Binding | subSystems+=SubSystemRef)* "}";
 	public LogicalSystemElements getLogicalSystemAccess() {
 		return pLogicalSystem;
 	}
@@ -3652,7 +3875,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getLogicalSystemAccess().getRule();
 	}
 
-	//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/ActorContainerRef'
+	//ActorContainerRef:
+	//	SubSystemRef | ActorRef;
 	public ActorContainerRefElements getActorContainerRefAccess() {
 		return pActorContainerRef;
 	}
@@ -3661,7 +3885,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getActorContainerRefAccess().getRule();
 	}
 
-	//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/SubSystemRef'
+	//SubSystemRef:
+	//	"SubSystemRef" name=ID ":" type=[SubSystemClass|FQN] docu=Documentation?;
 	public SubSystemRefElements getSubSystemRefAccess() {
 		return pSubSystemRef;
 	}
@@ -3670,7 +3895,11 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getSubSystemRefAccess().getRule();
 	}
 
-	//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/SubSystemClass'
+	//SubSystemClass:
+	//	"SubSystemClass" name=ID docu=Documentation? "{" annotations+=Annotation* ("usercode1" userCode1=DetailCode)?
+	//	("usercode2" userCode2=DetailCode)? ("usercode3" userCode3=DetailCode)? // workaround: reverse the order for serializer
+	//	(actorInstanceMappings+=ActorInstanceMapping | threads+=LogicalThread | connections+=LayerConnection |
+	//	bindings+=Binding | actorRefs+=ActorRef | serviceProvisionPoints+=SPP | relayPorts+=Port)* "}";
 	public SubSystemClassElements getSubSystemClassAccess() {
 		return pSubSystemClass;
 	}
@@ -3679,7 +3908,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getSubSystemClassAccess().getRule();
 	}
 
-	//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/LogicalThread'
+	//LogicalThread:
+	//	"LogicalThread" name=ID;
 	public LogicalThreadElements getLogicalThreadAccess() {
 		return pLogicalThread;
 	}
@@ -3688,7 +3918,9 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getLogicalThreadAccess().getRule();
 	}
 
-	//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/ActorInstanceMapping'
+	//ActorInstanceMapping:
+	//	"ActorInstanceMapping" path=RefPath "->" thread=[LogicalThread] ("{" actorInstanceMappings+=ActorInstanceMapping*
+	//	"}")?;
 	public ActorInstanceMappingElements getActorInstanceMappingAccess() {
 		return pActorInstanceMapping;
 	}
@@ -3697,7 +3929,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getActorInstanceMappingAccess().getRule();
 	}
 
-	//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/RefPath'
+	//RefPath:
+	//	refs+=RefSegment ("/" refs+=RefSegment)*;
 	public RefPathElements getRefPathAccess() {
 		return pRefPath;
 	}
@@ -3706,7 +3939,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getRefPathAccess().getRule();
 	}
 
-	//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/RefSegment'
+	//RefSegment:
+	//	ref=ID (":" idx=INT)?;
 	public RefSegmentElements getRefSegmentAccess() {
 		return pRefSegment;
 	}
@@ -3715,7 +3949,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getRefSegmentAccess().getRule();
 	}
 
-	//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/Binding'
+	//Binding:
+	//	"Binding" endpoint1=BindingEndPoint "and" endpoint2=BindingEndPoint;
 	public BindingElements getBindingAccess() {
 		return pBinding;
 	}
@@ -3724,7 +3959,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getBindingAccess().getRule();
 	}
 
-	//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/BindingEndPoint'
+	//BindingEndPoint:
+	//	(actorRef=[ActorContainerRef] ".")? port=[Port] ("sub" sub=[SubProtocol])?;
 	public BindingEndPointElements getBindingEndPointAccess() {
 		return pBindingEndPoint;
 	}
@@ -3733,7 +3969,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getBindingEndPointAccess().getRule();
 	}
 
-	//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/LayerConnection'
+	//LayerConnection:
+	//	"LayerConnection" from=SAPoint "satisfied_by" to=SPPoint;
 	public LayerConnectionElements getLayerConnectionAccess() {
 		return pLayerConnection;
 	}
@@ -3742,7 +3979,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getLayerConnectionAccess().getRule();
 	}
 
-	//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/SAPoint'
+	//SAPoint:
+	//	RefSAPoint | RelaySAPoint;
 	public SAPointElements getSAPointAccess() {
 		return pSAPoint;
 	}
@@ -3751,7 +3989,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getSAPointAccess().getRule();
 	}
 
-	//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/RefSAPoint'
+	//RefSAPoint: // satisfies a sub actor
+	//	"ref" ref=[ActorContainerRef];
 	public RefSAPointElements getRefSAPointAccess() {
 		return pRefSAPoint;
 	}
@@ -3760,7 +3999,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getRefSAPointAccess().getRule();
 	}
 
-	//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/RelaySAPoint'
+	//RelaySAPoint: // relays from own interface
+	//	"relay_sap" relay=[SPP];
 	public RelaySAPointElements getRelaySAPointAccess() {
 		return pRelaySAPoint;
 	}
@@ -3769,7 +4009,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getRelaySAPointAccess().getRule();
 	}
 
-	//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/SPPoint'
+	//SPPoint:
+	//	ref=[ActorContainerRef] "." service=[SPP];
 	public SPPointElements getSPPointAccess() {
 		return pSPPoint;
 	}
@@ -3778,7 +4019,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getSPPointAccess().getRule();
 	}
 
-	//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/ActorRef'
+	//ActorRef:
+	//	refType=ReferenceType? "ActorRef" name=ID multiplicity=MULTIPLICITY? ":" type=[ActorClass|FQN] docu=Documentation?;
 	public ActorRefElements getActorRefAccess() {
 		return pActorRef;
 	}
@@ -3787,7 +4029,9 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getActorRefAccess().getRule();
 	}
 
-	//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/ReferenceType'
+	//// IMPORTED='imported'
+	//enum ReferenceType:
+	//	FIXED="fixed" | OPTIONAL="optional";
 	public ReferenceTypeElements getReferenceTypeAccess() {
 		return unknownRuleReferenceType;
 	}
@@ -3796,7 +4040,11 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getReferenceTypeAccess().getRule();
 	}
 
-	//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/AbstractInterfaceItem'
+	//// **************************************************************
+	//// concrete message and interface item for state machines
+	////AbstractMessage: Message;
+	//AbstractInterfaceItem:
+	//	InterfaceItem;
 	public AbstractInterfaceItemElements getAbstractInterfaceItemAccess() {
 		return pAbstractInterfaceItem;
 	}
@@ -3805,7 +4053,12 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getAbstractInterfaceItemAccess().getRule();
 	}
 
-	//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/MULTIPLICITY'
+	//// **************************************************************
+	//// general
+	//// the following is a data type rule (accompanied by a value converter) and must not be a terminal rule
+	//// (because then the lexer already would find this in places where it is not expected, e.g. in an Attribute)
+	//MULTIPLICITY returns ecore::EInt:
+	//	"[" ("*" | INT) "]";
 	public MULTIPLICITYElements getMULTIPLICITYAccess() {
 		return pMULTIPLICITY;
 	}
@@ -3814,7 +4067,9 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getMULTIPLICITYAccess().getRule();
 	}
 
-	//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/AnnotationTargetType'
+	//AnnotationTargetType:
+	//	"DataClass" | "ActorClass" | "ActorBehavior" | "ProtocolClass" | "CompoundProtocolClass" | "SubSystemClass" |
+	//	"LogicalSystem";
 	public AnnotationTargetTypeElements getAnnotationTargetTypeAccess() {
 		return pAnnotationTargetType;
 	}
@@ -3823,7 +4078,10 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getAnnotationTargetTypeAccess().getRule();
 	}
 
-	//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/etrice/core/Room.xtext#XtextFragmentProvider_org.eclipse.etrice.core.Room/RoomAnnotationTargetEnum'
+	//enum RoomAnnotationTargetEnum:
+	//	DATA_CLASS="DataClass" | ACTOR_CLASS="ActorClass" | ACTOR_BEHAVIOR="ActorBehavior" | PROTOCOL_CLASS="ProtocolClass" |
+	//	COMPOUND_PROTOCOL_CLASS="CompoundProtocolClass" | SUBSYSTEM_CLASS="SubSystemClass" |
+	//	LOGICAL_SYSTEM_CLASS="LogicalSystem";
 	public RoomAnnotationTargetEnumElements getRoomAnnotationTargetEnumAccess() {
 		return unknownRuleRoomAnnotationTargetEnum;
 	}
@@ -4447,7 +4705,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Integer returns ecore::ELong:
-	//	SignedInteger | Hexadecimal;
+	//	("+" | "-")? INT | HEX;
 	public BaseGrammarAccess.IntegerElements getIntegerAccess() {
 		return gaFSM.getIntegerAccess();
 	}
@@ -4456,28 +4714,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getIntegerAccess().getRule();
 	}
 
-	//SignedInteger hidden():
-	//	("+" | "-")? INT;
-	public BaseGrammarAccess.SignedIntegerElements getSignedIntegerAccess() {
-		return gaFSM.getSignedIntegerAccess();
-	}
-	
-	public ParserRule getSignedIntegerRule() {
-		return getSignedIntegerAccess().getRule();
-	}
-
-	//Hexadecimal hidden():
-	//	HEX;
-	public BaseGrammarAccess.HexadecimalElements getHexadecimalAccess() {
-		return gaFSM.getHexadecimalAccess();
-	}
-	
-	public ParserRule getHexadecimalRule() {
-		return getHexadecimalAccess().getRule();
-	}
-
 	//Real returns ecore::EDouble:
-	//	Decimal | DotDecimal | DecimalDot | DecimalExp;
+	//	Decimal | / *DotDecimal | DecimalDot |* / DecimalExp;
 	public BaseGrammarAccess.RealElements getRealAccess() {
 		return gaFSM.getRealAccess();
 	}
@@ -4496,28 +4734,13 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getDecimalAccess().getRule();
 	}
 
-	//DotDecimal hidden():
-	//	("+" | "-")? "." INT;
-	public BaseGrammarAccess.DotDecimalElements getDotDecimalAccess() {
-		return gaFSM.getDotDecimalAccess();
-	}
-	
-	public ParserRule getDotDecimalRule() {
-		return getDotDecimalAccess().getRule();
-	}
-
-	//DecimalDot hidden():
-	//	("+" | "-")? INT ".";
-	public BaseGrammarAccess.DecimalDotElements getDecimalDotAccess() {
-		return gaFSM.getDecimalDotAccess();
-	}
-	
-	public ParserRule getDecimalDotRule() {
-		return getDecimalDotAccess().getRule();
-	}
-
+	////DotDecimal hidden():
+	////	('+' | '-')? '.' INT;
+	////
+	////DecimalDot hidden():
+	////	('+' | '-')? INT '.';
 	//DecimalExp hidden():
-	//	("+" | "-")? INT "." INT EXP;
+	//	("+" | "-")? INT "." INT ("e" | "E") ("+" | "-")? INT;
 	public BaseGrammarAccess.DecimalExpElements getDecimalExpAccess() {
 		return gaFSM.getDecimalExpAccess();
 	}
@@ -4525,18 +4748,6 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getDecimalExpRule() {
 		return getDecimalExpAccess().getRule();
 	}
-
-	//terminal EXP:
-	//	("e" | "E") ("+" | "-")? "0".."9"+;
-	public TerminalRule getEXPRule() {
-		return gaFSM.getEXPRule();
-	} 
-
-	//terminal HEX:
-	//	("0x" | "0X") ("0".."9" | "a".."f" | "A".."F")+;
-	public TerminalRule getHEXRule() {
-		return gaFSM.getHEXRule();
-	} 
 
 	//FQN:
 	//	ID ("." ID)*;
@@ -4547,6 +4758,12 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getFQNRule() {
 		return getFQNAccess().getRule();
 	}
+
+	//terminal HEX:
+	//	("0x" | "0X") ("0".."9" | "a".."f" | "A".."F")+;
+	public TerminalRule getHEXRule() {
+		return gaFSM.getHEXRule();
+	} 
 
 	//terminal ID:
 	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;

@@ -118,6 +118,7 @@
       <genOperations ecoreOperation="FSM.ecore#//AbstractInterfaceItem/getSemantics"/>
       <genOperations ecoreOperation="FSM.ecore#//AbstractInterfaceItem/getAllIncomingAbstractMessages"/>
       <genOperations ecoreOperation="FSM.ecore#//AbstractInterfaceItem/getAllOutgoingAbstractMessages"/>
+      <genOperations ecoreOperation="FSM.ecore#//AbstractInterfaceItem/isEventDriven"/>
     </genClasses>
     <genClasses ecoreClass="FSM.ecore#//Guard">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSM.ecore#//Guard/guard"/>

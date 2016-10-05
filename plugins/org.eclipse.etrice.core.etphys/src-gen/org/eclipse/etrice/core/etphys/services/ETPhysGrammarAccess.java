@@ -204,23 +204,23 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cPriominKeyword_4_1_0 = (Keyword)cGroup_4_1.eContents().get(0);
 		private final Keyword cEqualsSignKeyword_4_1_1 = (Keyword)cGroup_4_1.eContents().get(1);
 		private final Assignment cPriominAssignment_4_1_2 = (Assignment)cGroup_4_1.eContents().get(2);
-		private final RuleCall cPriominPRIOParserRuleCall_4_1_2_0 = (RuleCall)cPriominAssignment_4_1_2.eContents().get(0);
+		private final RuleCall cPriominIntegerParserRuleCall_4_1_2_0 = (RuleCall)cPriominAssignment_4_1_2.eContents().get(0);
 		private final Group cGroup_4_2 = (Group)cUnorderedGroup_4.eContents().get(2);
 		private final Keyword cPriomaxKeyword_4_2_0 = (Keyword)cGroup_4_2.eContents().get(0);
 		private final Keyword cEqualsSignKeyword_4_2_1 = (Keyword)cGroup_4_2.eContents().get(1);
 		private final Assignment cPriomaxAssignment_4_2_2 = (Assignment)cGroup_4_2.eContents().get(2);
-		private final RuleCall cPriomaxPRIOParserRuleCall_4_2_2_0 = (RuleCall)cPriomaxAssignment_4_2_2.eContents().get(0);
+		private final RuleCall cPriomaxIntegerParserRuleCall_4_2_2_0 = (RuleCall)cPriomaxAssignment_4_2_2.eContents().get(0);
 		private final Assignment cThreadsAssignment_5 = (Assignment)cGroup.eContents().get(5);
 		private final RuleCall cThreadsPhysicalThreadParserRuleCall_5_0 = (RuleCall)cThreadsAssignment_5.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
 		//NodeClass:
-		//	"NodeClass" name=ID docu=Documentation? "{" ("runtime" "=" runtime=[RuntimeClass|FQN] & "priomin" "=" priomin=PRIO &
-		//	"priomax" "=" priomax=PRIO) threads+=PhysicalThread* "}";
+		//	"NodeClass" name=ID docu=Documentation? "{" ("runtime" "=" runtime=[RuntimeClass|FQN] & "priomin" "=" priomin=Integer
+		//	& "priomax" "=" priomax=Integer) threads+=PhysicalThread* "}";
 		public ParserRule getRule() { return rule; }
 
-		//"NodeClass" name=ID docu=Documentation? "{" ("runtime" "=" runtime=[RuntimeClass|FQN] & "priomin" "=" priomin=PRIO &
-		//"priomax" "=" priomax=PRIO) threads+=PhysicalThread* "}"
+		//"NodeClass" name=ID docu=Documentation? "{" ("runtime" "=" runtime=[RuntimeClass|FQN] & "priomin" "=" priomin=Integer &
+		//"priomax" "=" priomax=Integer) threads+=PhysicalThread* "}"
 		public Group getGroup() { return cGroup; }
 
 		//"NodeClass"
@@ -241,7 +241,7 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
 
-		//"runtime" "=" runtime=[RuntimeClass|FQN] & "priomin" "=" priomin=PRIO & "priomax" "=" priomax=PRIO
+		//"runtime" "=" runtime=[RuntimeClass|FQN] & "priomin" "=" priomin=Integer & "priomax" "=" priomax=Integer
 		public UnorderedGroup getUnorderedGroup_4() { return cUnorderedGroup_4; }
 
 		//"runtime" "=" runtime=[RuntimeClass|FQN]
@@ -262,7 +262,7 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		//FQN
 		public RuleCall getRuntimeRuntimeClassFQNParserRuleCall_4_0_2_0_1() { return cRuntimeRuntimeClassFQNParserRuleCall_4_0_2_0_1; }
 
-		//"priomin" "=" priomin=PRIO
+		//"priomin" "=" priomin=Integer
 		public Group getGroup_4_1() { return cGroup_4_1; }
 
 		//"priomin"
@@ -271,13 +271,13 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		//"="
 		public Keyword getEqualsSignKeyword_4_1_1() { return cEqualsSignKeyword_4_1_1; }
 
-		//priomin=PRIO
+		//priomin=Integer
 		public Assignment getPriominAssignment_4_1_2() { return cPriominAssignment_4_1_2; }
 
-		//PRIO
-		public RuleCall getPriominPRIOParserRuleCall_4_1_2_0() { return cPriominPRIOParserRuleCall_4_1_2_0; }
+		//Integer
+		public RuleCall getPriominIntegerParserRuleCall_4_1_2_0() { return cPriominIntegerParserRuleCall_4_1_2_0; }
 
-		//"priomax" "=" priomax=PRIO
+		//"priomax" "=" priomax=Integer
 		public Group getGroup_4_2() { return cGroup_4_2; }
 
 		//"priomax"
@@ -286,11 +286,11 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		//"="
 		public Keyword getEqualsSignKeyword_4_2_1() { return cEqualsSignKeyword_4_2_1; }
 
-		//priomax=PRIO
+		//priomax=Integer
 		public Assignment getPriomaxAssignment_4_2_2() { return cPriomaxAssignment_4_2_2; }
 
-		//PRIO
-		public RuleCall getPriomaxPRIOParserRuleCall_4_2_2_0() { return cPriomaxPRIOParserRuleCall_4_2_2_0; }
+		//Integer
+		public RuleCall getPriomaxIntegerParserRuleCall_4_2_2_0() { return cPriomaxIntegerParserRuleCall_4_2_2_0; }
 
 		//threads+=PhysicalThread*
 		public Assignment getThreadsAssignment_5() { return cThreadsAssignment_5; }
@@ -327,7 +327,7 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cPrioKeyword_3_2_0 = (Keyword)cGroup_3_2.eContents().get(0);
 		private final Keyword cEqualsSignKeyword_3_2_1 = (Keyword)cGroup_3_2.eContents().get(1);
 		private final Assignment cPrioAssignment_3_2_2 = (Assignment)cGroup_3_2.eContents().get(2);
-		private final RuleCall cPrioPRIOParserRuleCall_3_2_2_0 = (RuleCall)cPrioAssignment_3_2_2.eContents().get(0);
+		private final RuleCall cPrioIntegerParserRuleCall_3_2_2_0 = (RuleCall)cPrioAssignment_3_2_2.eContents().get(0);
 		private final Group cGroup_3_3 = (Group)cUnorderedGroup_3.eContents().get(3);
 		private final Keyword cStacksizeKeyword_3_3_0 = (Keyword)cGroup_3_3.eContents().get(0);
 		private final Keyword cEqualsSignKeyword_3_3_1 = (Keyword)cGroup_3_3.eContents().get(1);
@@ -347,12 +347,12 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//PhysicalThread:
 		//	(default?="DefaultThread" | "Thread") name=ID "{" ("execmode" "=" execmode=ExecMode & ("interval" "=" time=TIME)? &
-		//	"prio" "=" prio=PRIO & "stacksize" "=" stacksize=INT & "msgblocksize" "=" msgblocksize=INT & "msgpoolsize" "="
+		//	"prio" "=" prio=Integer & "stacksize" "=" stacksize=INT & "msgblocksize" "=" msgblocksize=INT & "msgpoolsize" "="
 		//	msgpoolsize=INT) "}";
 		public ParserRule getRule() { return rule; }
 
 		//(default?="DefaultThread" | "Thread") name=ID "{" ("execmode" "=" execmode=ExecMode & ("interval" "=" time=TIME)? &
-		//"prio" "=" prio=PRIO & "stacksize" "=" stacksize=INT & "msgblocksize" "=" msgblocksize=INT & "msgpoolsize" "="
+		//"prio" "=" prio=Integer & "stacksize" "=" stacksize=INT & "msgblocksize" "=" msgblocksize=INT & "msgpoolsize" "="
 		//msgpoolsize=INT) "}"
 		public Group getGroup() { return cGroup; }
 
@@ -377,8 +377,8 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
 
-		//"execmode" "=" execmode=ExecMode & ("interval" "=" time=TIME)? & "prio" "=" prio=PRIO & "stacksize" "=" stacksize=INT &
-		//"msgblocksize" "=" msgblocksize=INT & "msgpoolsize" "=" msgpoolsize=INT
+		//"execmode" "=" execmode=ExecMode & ("interval" "=" time=TIME)? & "prio" "=" prio=Integer & "stacksize" "=" stacksize=INT
+		//& "msgblocksize" "=" msgblocksize=INT & "msgpoolsize" "=" msgpoolsize=INT
 		public UnorderedGroup getUnorderedGroup_3() { return cUnorderedGroup_3; }
 
 		//"execmode" "=" execmode=ExecMode
@@ -411,7 +411,7 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		//TIME
 		public RuleCall getTimeTIMEParserRuleCall_3_1_2_0() { return cTimeTIMEParserRuleCall_3_1_2_0; }
 
-		//"prio" "=" prio=PRIO
+		//"prio" "=" prio=Integer
 		public Group getGroup_3_2() { return cGroup_3_2; }
 
 		//"prio"
@@ -420,11 +420,11 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		//"="
 		public Keyword getEqualsSignKeyword_3_2_1() { return cEqualsSignKeyword_3_2_1; }
 
-		//prio=PRIO
+		//prio=Integer
 		public Assignment getPrioAssignment_3_2_2() { return cPrioAssignment_3_2_2; }
 
-		//PRIO
-		public RuleCall getPrioPRIOParserRuleCall_3_2_2_0() { return cPrioPRIOParserRuleCall_3_2_2_0; }
+		//Integer
+		public RuleCall getPrioIntegerParserRuleCall_3_2_2_0() { return cPrioIntegerParserRuleCall_3_2_2_0; }
 
 		//"stacksize" "=" stacksize=INT
 		public Group getGroup_3_3() { return cGroup_3_3; }
@@ -530,34 +530,6 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		//"}"
 		public Keyword getRightCurlyBracketKeyword_7() { return cRightCurlyBracketKeyword_7; }
 	}
-
-	public class PRIOElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "PRIO");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Alternatives cAlternatives_0 = (Alternatives)cGroup.eContents().get(0);
-		private final Keyword cPlusSignKeyword_0_0 = (Keyword)cAlternatives_0.eContents().get(0);
-		private final Keyword cHyphenMinusKeyword_0_1 = (Keyword)cAlternatives_0.eContents().get(1);
-		private final RuleCall cINTTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
-		
-		//PRIO returns ecore::EInt hidden():
-		//	("+" | "-")? INT;
-		public ParserRule getRule() { return rule; }
-
-		//("+" | "-")? INT
-		public Group getGroup() { return cGroup; }
-
-		//("+" | "-")?
-		public Alternatives getAlternatives_0() { return cAlternatives_0; }
-
-		//"+"
-		public Keyword getPlusSignKeyword_0_0() { return cPlusSignKeyword_0_0; }
-
-		//"-"
-		public Keyword getHyphenMinusKeyword_0_1() { return cHyphenMinusKeyword_0_1; }
-
-		//INT
-		public RuleCall getINTTerminalRuleCall_1() { return cINTTerminalRuleCall_1; }
-	}
 	
 	
 	public class ExecModeElements extends AbstractEnumRuleElementFinder {
@@ -632,7 +604,6 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 	private final ExecModeElements unknownRuleExecMode;
 	private final RuntimeClassElements pRuntimeClass;
 	private final ThreadModelElements unknownRuleThreadModel;
-	private final PRIOElements pPRIO;
 	
 	private final Grammar grammar;
 
@@ -651,7 +622,6 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		this.unknownRuleExecMode = new ExecModeElements();
 		this.pRuntimeClass = new RuntimeClassElements();
 		this.unknownRuleThreadModel = new ThreadModelElements();
-		this.pPRIO = new PRIOElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -713,8 +683,8 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//NodeClass:
-	//	"NodeClass" name=ID docu=Documentation? "{" ("runtime" "=" runtime=[RuntimeClass|FQN] & "priomin" "=" priomin=PRIO &
-	//	"priomax" "=" priomax=PRIO) threads+=PhysicalThread* "}";
+	//	"NodeClass" name=ID docu=Documentation? "{" ("runtime" "=" runtime=[RuntimeClass|FQN] & "priomin" "=" priomin=Integer
+	//	& "priomax" "=" priomax=Integer) threads+=PhysicalThread* "}";
 	public NodeClassElements getNodeClassAccess() {
 		return pNodeClass;
 	}
@@ -725,7 +695,7 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 
 	//PhysicalThread:
 	//	(default?="DefaultThread" | "Thread") name=ID "{" ("execmode" "=" execmode=ExecMode & ("interval" "=" time=TIME)? &
-	//	"prio" "=" prio=PRIO & "stacksize" "=" stacksize=INT & "msgblocksize" "=" msgblocksize=INT & "msgpoolsize" "="
+	//	"prio" "=" prio=Integer & "stacksize" "=" stacksize=INT & "msgblocksize" "=" msgblocksize=INT & "msgpoolsize" "="
 	//	msgpoolsize=INT) "}";
 	public PhysicalThreadElements getPhysicalThreadAccess() {
 		return pPhysicalThread;
@@ -763,16 +733,6 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public EnumRule getThreadModelRule() {
 		return getThreadModelAccess().getRule();
-	}
-
-	//PRIO returns ecore::EInt hidden():
-	//	("+" | "-")? INT;
-	public PRIOElements getPRIOAccess() {
-		return pPRIO;
-	}
-	
-	public ParserRule getPRIORule() {
-		return getPRIOAccess().getRule();
 	}
 
 	//// **************************************************************
@@ -1004,7 +964,7 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Integer returns ecore::ELong:
-	//	SignedInteger | Hexadecimal;
+	//	("+" | "-")? INT | HEX;
 	public BaseGrammarAccess.IntegerElements getIntegerAccess() {
 		return gaBase.getIntegerAccess();
 	}
@@ -1013,28 +973,8 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		return getIntegerAccess().getRule();
 	}
 
-	//SignedInteger hidden():
-	//	("+" | "-")? INT;
-	public BaseGrammarAccess.SignedIntegerElements getSignedIntegerAccess() {
-		return gaBase.getSignedIntegerAccess();
-	}
-	
-	public ParserRule getSignedIntegerRule() {
-		return getSignedIntegerAccess().getRule();
-	}
-
-	//Hexadecimal hidden():
-	//	HEX;
-	public BaseGrammarAccess.HexadecimalElements getHexadecimalAccess() {
-		return gaBase.getHexadecimalAccess();
-	}
-	
-	public ParserRule getHexadecimalRule() {
-		return getHexadecimalAccess().getRule();
-	}
-
 	//Real returns ecore::EDouble:
-	//	Decimal | DotDecimal | DecimalDot | DecimalExp;
+	//	Decimal | / *DotDecimal | DecimalDot |* / DecimalExp;
 	public BaseGrammarAccess.RealElements getRealAccess() {
 		return gaBase.getRealAccess();
 	}
@@ -1053,28 +993,13 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		return getDecimalAccess().getRule();
 	}
 
-	//DotDecimal hidden():
-	//	("+" | "-")? "." INT;
-	public BaseGrammarAccess.DotDecimalElements getDotDecimalAccess() {
-		return gaBase.getDotDecimalAccess();
-	}
-	
-	public ParserRule getDotDecimalRule() {
-		return getDotDecimalAccess().getRule();
-	}
-
-	//DecimalDot hidden():
-	//	("+" | "-")? INT ".";
-	public BaseGrammarAccess.DecimalDotElements getDecimalDotAccess() {
-		return gaBase.getDecimalDotAccess();
-	}
-	
-	public ParserRule getDecimalDotRule() {
-		return getDecimalDotAccess().getRule();
-	}
-
+	////DotDecimal hidden():
+	////	('+' | '-')? '.' INT;
+	////
+	////DecimalDot hidden():
+	////	('+' | '-')? INT '.';
 	//DecimalExp hidden():
-	//	("+" | "-")? INT "." INT EXP;
+	//	("+" | "-")? INT "." INT ("e" | "E") ("+" | "-")? -> INT;
 	public BaseGrammarAccess.DecimalExpElements getDecimalExpAccess() {
 		return gaBase.getDecimalExpAccess();
 	}
@@ -1082,18 +1007,6 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getDecimalExpRule() {
 		return getDecimalExpAccess().getRule();
 	}
-
-	//terminal EXP:
-	//	("e" | "E") ("+" | "-")? "0".."9"+;
-	public TerminalRule getEXPRule() {
-		return gaBase.getEXPRule();
-	} 
-
-	//terminal HEX:
-	//	("0x" | "0X") ("0".."9" | "a".."f" | "A".."F")+;
-	public TerminalRule getHEXRule() {
-		return gaBase.getHEXRule();
-	} 
 
 	//FQN:
 	//	ID ("." ID)*;
@@ -1104,6 +1017,12 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getFQNRule() {
 		return getFQNAccess().getRule();
 	}
+
+	//terminal HEX:
+	//	("0x" | "0X") ("0".."9" | "a".."f" | "A".."F")+;
+	public TerminalRule getHEXRule() {
+		return gaBase.getHEXRule();
+	} 
 
 	//terminal ID:
 	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;

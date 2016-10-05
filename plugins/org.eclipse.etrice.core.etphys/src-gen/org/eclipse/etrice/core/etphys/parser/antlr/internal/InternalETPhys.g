@@ -474,9 +474,9 @@ ruleNodeClass returns [EObject current=null]
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getNodeClassAccess().getPriominPRIOParserRuleCall_4_1_2_0()); 
+	        newCompositeNode(grammarAccess.getNodeClassAccess().getPriominIntegerParserRuleCall_4_1_2_0()); 
 	    }
-		lv_priomin_10_0=rulePRIO		{
+		lv_priomin_10_0=ruleInteger		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getNodeClassRule());
 	        }
@@ -484,7 +484,7 @@ ruleNodeClass returns [EObject current=null]
        			$current, 
        			"priomin",
         		lv_priomin_10_0, 
-        		"PRIO");
+        		"Integer");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -512,9 +512,9 @@ ruleNodeClass returns [EObject current=null]
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getNodeClassAccess().getPriomaxPRIOParserRuleCall_4_2_2_0()); 
+	        newCompositeNode(grammarAccess.getNodeClassAccess().getPriomaxIntegerParserRuleCall_4_2_2_0()); 
 	    }
-		lv_priomax_13_0=rulePRIO		{
+		lv_priomax_13_0=ruleInteger		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getNodeClassRule());
 	        }
@@ -522,7 +522,7 @@ ruleNodeClass returns [EObject current=null]
        			$current, 
        			"priomax",
         		lv_priomax_13_0, 
-        		"PRIO");
+        		"Integer");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -728,9 +728,9 @@ rulePhysicalThread returns [EObject current=null]
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getPhysicalThreadAccess().getPrioPRIOParserRuleCall_3_2_2_0()); 
+	        newCompositeNode(grammarAccess.getPhysicalThreadAccess().getPrioIntegerParserRuleCall_3_2_2_0()); 
 	    }
-		lv_prio_13_0=rulePRIO		{
+		lv_prio_13_0=ruleInteger		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getPhysicalThreadRule());
 	        }
@@ -738,7 +738,7 @@ rulePhysicalThread returns [EObject current=null]
        			$current, 
        			"prio",
         		lv_prio_13_0, 
-        		"PRIO");
+        		"Integer");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -973,57 +973,6 @@ ruleRuntimeClass returns [EObject current=null]
     }
 )
 ;
-
-
-
-
-
-// Entry rule entryRulePRIO
-entryRulePRIO returns [String current=null] 
-	@init { 
-		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
-	}
-	:
-	{ newCompositeNode(grammarAccess.getPRIORule()); } 
-	 iv_rulePRIO=rulePRIO 
-	 { $current=$iv_rulePRIO.current.getText(); }  
-	 EOF 
-;
-finally {
-	myHiddenTokenState.restore();
-}
-
-// Rule PRIO
-rulePRIO returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
-    @init { enterRule(); 
-		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
-    }
-    @after { leaveRule(); }:
-((
-	kw='+' 
-    {
-        $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getPRIOAccess().getPlusSignKeyword_0_0()); 
-    }
-
-    |
-	kw='-' 
-    {
-        $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getPRIOAccess().getHyphenMinusKeyword_0_1()); 
-    }
-)?    this_INT_2=RULE_INT    {
-		$current.merge(this_INT_2);
-    }
-
-    { 
-    newLeafNode(this_INT_2, grammarAccess.getPRIOAccess().getINTTerminalRuleCall_1()); 
-    }
-)
-    ;
-finally {
-	myHiddenTokenState.restore();
-}
 
 
 
@@ -1887,120 +1836,36 @@ ruleInteger returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
-(
-    { 
-        newCompositeNode(grammarAccess.getIntegerAccess().getSignedIntegerParserRuleCall_0()); 
-    }
-    this_SignedInteger_0=ruleSignedInteger    {
-		$current.merge(this_SignedInteger_0);
-    }
-
-    { 
-        afterParserOrEnumRuleCall();
-    }
-
-    |
-    { 
-        newCompositeNode(grammarAccess.getIntegerAccess().getHexadecimalParserRuleCall_1()); 
-    }
-    this_Hexadecimal_1=ruleHexadecimal    {
-		$current.merge(this_Hexadecimal_1);
-    }
-
-    { 
-        afterParserOrEnumRuleCall();
-    }
-)
-    ;
-
-
-
-
-
-// Entry rule entryRuleSignedInteger
-entryRuleSignedInteger returns [String current=null] 
-	@init { 
-		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
-	}
-	:
-	{ newCompositeNode(grammarAccess.getSignedIntegerRule()); } 
-	 iv_ruleSignedInteger=ruleSignedInteger 
-	 { $current=$iv_ruleSignedInteger.current.getText(); }  
-	 EOF 
-;
-finally {
-	myHiddenTokenState.restore();
-}
-
-// Rule SignedInteger
-ruleSignedInteger returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
-    @init { enterRule(); 
-		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
-    }
-    @after { leaveRule(); }:
-((
+(((
 	kw='+' 
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getSignedIntegerAccess().getPlusSignKeyword_0_0()); 
+        newLeafNode(kw, grammarAccess.getIntegerAccess().getPlusSignKeyword_0_0_0()); 
     }
 
     |
 	kw='-' 
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getSignedIntegerAccess().getHyphenMinusKeyword_0_1()); 
+        newLeafNode(kw, grammarAccess.getIntegerAccess().getHyphenMinusKeyword_0_0_1()); 
     }
 )?    this_INT_2=RULE_INT    {
 		$current.merge(this_INT_2);
     }
 
     { 
-    newLeafNode(this_INT_2, grammarAccess.getSignedIntegerAccess().getINTTerminalRuleCall_1()); 
+    newLeafNode(this_INT_2, grammarAccess.getIntegerAccess().getINTTerminalRuleCall_0_1()); 
     }
 )
-    ;
-finally {
-	myHiddenTokenState.restore();
-}
-
-
-
-
-
-// Entry rule entryRuleHexadecimal
-entryRuleHexadecimal returns [String current=null] 
-	@init { 
-		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
-	}
-	:
-	{ newCompositeNode(grammarAccess.getHexadecimalRule()); } 
-	 iv_ruleHexadecimal=ruleHexadecimal 
-	 { $current=$iv_ruleHexadecimal.current.getText(); }  
-	 EOF 
-;
-finally {
-	myHiddenTokenState.restore();
-}
-
-// Rule Hexadecimal
-ruleHexadecimal returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
-    @init { enterRule(); 
-		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
-    }
-    @after { leaveRule(); }:
-    this_HEX_0=RULE_HEX    {
-		$current.merge(this_HEX_0);
+    |    this_HEX_3=RULE_HEX    {
+		$current.merge(this_HEX_3);
     }
 
     { 
-    newLeafNode(this_HEX_0, grammarAccess.getHexadecimalAccess().getHEXTerminalRuleCall()); 
+    newLeafNode(this_HEX_3, grammarAccess.getIntegerAccess().getHEXTerminalRuleCall_1()); 
     }
-
+)
     ;
-finally {
-	myHiddenTokenState.restore();
-}
 
 
 
@@ -2034,34 +1899,10 @@ ruleReal returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
 
     |
     { 
-        newCompositeNode(grammarAccess.getRealAccess().getDotDecimalParserRuleCall_1()); 
+        newCompositeNode(grammarAccess.getRealAccess().getDecimalExpParserRuleCall_1()); 
     }
-    this_DotDecimal_1=ruleDotDecimal    {
-		$current.merge(this_DotDecimal_1);
-    }
-
-    { 
-        afterParserOrEnumRuleCall();
-    }
-
-    |
-    { 
-        newCompositeNode(grammarAccess.getRealAccess().getDecimalDotParserRuleCall_2()); 
-    }
-    this_DecimalDot_2=ruleDecimalDot    {
-		$current.merge(this_DecimalDot_2);
-    }
-
-    { 
-        afterParserOrEnumRuleCall();
-    }
-
-    |
-    { 
-        newCompositeNode(grammarAccess.getRealAccess().getDecimalExpParserRuleCall_3()); 
-    }
-    this_DecimalExp_3=ruleDecimalExp    {
-		$current.merge(this_DecimalExp_3);
+    this_DecimalExp_1=ruleDecimalExp    {
+		$current.merge(this_DecimalExp_1);
     }
 
     { 
@@ -2138,120 +1979,6 @@ finally {
 
 
 
-// Entry rule entryRuleDotDecimal
-entryRuleDotDecimal returns [String current=null] 
-	@init { 
-		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
-	}
-	:
-	{ newCompositeNode(grammarAccess.getDotDecimalRule()); } 
-	 iv_ruleDotDecimal=ruleDotDecimal 
-	 { $current=$iv_ruleDotDecimal.current.getText(); }  
-	 EOF 
-;
-finally {
-	myHiddenTokenState.restore();
-}
-
-// Rule DotDecimal
-ruleDotDecimal returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
-    @init { enterRule(); 
-		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
-    }
-    @after { leaveRule(); }:
-((
-	kw='+' 
-    {
-        $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getDotDecimalAccess().getPlusSignKeyword_0_0()); 
-    }
-
-    |
-	kw='-' 
-    {
-        $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getDotDecimalAccess().getHyphenMinusKeyword_0_1()); 
-    }
-)?
-	kw='.' 
-    {
-        $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getDotDecimalAccess().getFullStopKeyword_1()); 
-    }
-    this_INT_3=RULE_INT    {
-		$current.merge(this_INT_3);
-    }
-
-    { 
-    newLeafNode(this_INT_3, grammarAccess.getDotDecimalAccess().getINTTerminalRuleCall_2()); 
-    }
-)
-    ;
-finally {
-	myHiddenTokenState.restore();
-}
-
-
-
-
-
-// Entry rule entryRuleDecimalDot
-entryRuleDecimalDot returns [String current=null] 
-	@init { 
-		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
-	}
-	:
-	{ newCompositeNode(grammarAccess.getDecimalDotRule()); } 
-	 iv_ruleDecimalDot=ruleDecimalDot 
-	 { $current=$iv_ruleDecimalDot.current.getText(); }  
-	 EOF 
-;
-finally {
-	myHiddenTokenState.restore();
-}
-
-// Rule DecimalDot
-ruleDecimalDot returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
-    @init { enterRule(); 
-		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
-    }
-    @after { leaveRule(); }:
-((
-	kw='+' 
-    {
-        $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getDecimalDotAccess().getPlusSignKeyword_0_0()); 
-    }
-
-    |
-	kw='-' 
-    {
-        $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getDecimalDotAccess().getHyphenMinusKeyword_0_1()); 
-    }
-)?    this_INT_2=RULE_INT    {
-		$current.merge(this_INT_2);
-    }
-
-    { 
-    newLeafNode(this_INT_2, grammarAccess.getDecimalDotAccess().getINTTerminalRuleCall_1()); 
-    }
-
-	kw='.' 
-    {
-        $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getDecimalDotAccess().getFullStopKeyword_2()); 
-    }
-)
-    ;
-finally {
-	myHiddenTokenState.restore();
-}
-
-
-
-
-
 // Entry rule entryRuleDecimalExp
 entryRuleDecimalExp returns [String current=null] 
 	@init { 
@@ -2306,14 +2033,40 @@ ruleDecimalExp returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToke
     { 
     newLeafNode(this_INT_4, grammarAccess.getDecimalExpAccess().getINTTerminalRuleCall_3()); 
     }
-    this_EXP_5=RULE_EXP    {
-		$current.merge(this_EXP_5);
+(
+	kw='e' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getDecimalExpAccess().getEKeyword_4_0()); 
+    }
+
+    |
+	kw='E' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getDecimalExpAccess().getEKeyword_4_1()); 
+    }
+)(
+	kw='+' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getDecimalExpAccess().getPlusSignKeyword_5_0()); 
+    }
+
+    |
+	kw='-' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getDecimalExpAccess().getHyphenMinusKeyword_5_1()); 
+    }
+)?(( RULE_INT)=>    this_INT_9=RULE_INT    {
+		$current.merge(this_INT_9);
     }
 
     { 
-    newLeafNode(this_EXP_5, grammarAccess.getDecimalExpAccess().getEXPTerminalRuleCall_4()); 
+    newLeafNode(this_INT_9, grammarAccess.getDecimalExpAccess().getINTTerminalRuleCall_6()); 
     }
-)
+))
     ;
 finally {
 	myHiddenTokenState.restore();
@@ -2438,8 +2191,6 @@ ruleLiteralType returns [Enumerator current=null]
 ));
 
 
-
-RULE_EXP : ('e'|'E') ('+'|'-')? ('0'..'9')+;
 
 RULE_HEX : ('0x'|'0X') ('0'..'9'|'a'..'f'|'A'..'F')+;
 

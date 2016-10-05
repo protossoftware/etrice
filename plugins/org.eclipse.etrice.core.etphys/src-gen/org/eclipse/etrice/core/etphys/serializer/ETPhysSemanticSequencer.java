@@ -168,8 +168,8 @@ public class ETPhysSemanticSequencer extends BaseSemanticSequencer {
 	 *         name=ID 
 	 *         docu=Documentation? 
 	 *         runtime=[RuntimeClass|FQN] 
-	 *         priomin=PRIO 
-	 *         priomax=PRIO 
+	 *         priomin=Integer 
+	 *         priomax=Integer 
 	 *         threads+=PhysicalThread*
 	 *     )
 	 */
@@ -212,7 +212,7 @@ public class ETPhysSemanticSequencer extends BaseSemanticSequencer {
 	 *         name=ID 
 	 *         execmode=ExecMode 
 	 *         time=TIME? 
-	 *         prio=PRIO 
+	 *         prio=Integer 
 	 *         stacksize=INT 
 	 *         msgblocksize=INT 
 	 *         msgpoolsize=INT

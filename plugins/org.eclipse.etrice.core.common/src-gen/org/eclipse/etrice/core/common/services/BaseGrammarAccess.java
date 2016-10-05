@@ -762,89 +762,57 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 	public class IntegerElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Integer");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cSignedIntegerParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cHexadecimalParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
+		private final Alternatives cAlternatives_0_0 = (Alternatives)cGroup_0.eContents().get(0);
+		private final Keyword cPlusSignKeyword_0_0_0 = (Keyword)cAlternatives_0_0.eContents().get(0);
+		private final Keyword cHyphenMinusKeyword_0_0_1 = (Keyword)cAlternatives_0_0.eContents().get(1);
+		private final RuleCall cINTTerminalRuleCall_0_1 = (RuleCall)cGroup_0.eContents().get(1);
+		private final RuleCall cHEXTerminalRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//Integer returns ecore::ELong:
-		//	SignedInteger | Hexadecimal;
+		//	("+" | "-")? INT | HEX;
 		public ParserRule getRule() { return rule; }
 
-		//SignedInteger | Hexadecimal
+		//("+" | "-")? INT | HEX
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//SignedInteger
-		public RuleCall getSignedIntegerParserRuleCall_0() { return cSignedIntegerParserRuleCall_0; }
-
-		//Hexadecimal
-		public RuleCall getHexadecimalParserRuleCall_1() { return cHexadecimalParserRuleCall_1; }
-	}
-
-	public class SignedIntegerElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SignedInteger");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Alternatives cAlternatives_0 = (Alternatives)cGroup.eContents().get(0);
-		private final Keyword cPlusSignKeyword_0_0 = (Keyword)cAlternatives_0.eContents().get(0);
-		private final Keyword cHyphenMinusKeyword_0_1 = (Keyword)cAlternatives_0.eContents().get(1);
-		private final RuleCall cINTTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
-		
-		//SignedInteger hidden():
-		//	("+" | "-")? INT;
-		public ParserRule getRule() { return rule; }
-
 		//("+" | "-")? INT
-		public Group getGroup() { return cGroup; }
+		public Group getGroup_0() { return cGroup_0; }
 
 		//("+" | "-")?
-		public Alternatives getAlternatives_0() { return cAlternatives_0; }
+		public Alternatives getAlternatives_0_0() { return cAlternatives_0_0; }
 
 		//"+"
-		public Keyword getPlusSignKeyword_0_0() { return cPlusSignKeyword_0_0; }
+		public Keyword getPlusSignKeyword_0_0_0() { return cPlusSignKeyword_0_0_0; }
 
 		//"-"
-		public Keyword getHyphenMinusKeyword_0_1() { return cHyphenMinusKeyword_0_1; }
+		public Keyword getHyphenMinusKeyword_0_0_1() { return cHyphenMinusKeyword_0_0_1; }
 
 		//INT
-		public RuleCall getINTTerminalRuleCall_1() { return cINTTerminalRuleCall_1; }
-	}
-
-	public class HexadecimalElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Hexadecimal");
-		private final RuleCall cHEXTerminalRuleCall = (RuleCall)rule.eContents().get(1);
-		
-		//Hexadecimal hidden():
-		//	HEX;
-		public ParserRule getRule() { return rule; }
+		public RuleCall getINTTerminalRuleCall_0_1() { return cINTTerminalRuleCall_0_1; }
 
 		//HEX
-		public RuleCall getHEXTerminalRuleCall() { return cHEXTerminalRuleCall; }
+		public RuleCall getHEXTerminalRuleCall_1() { return cHEXTerminalRuleCall_1; }
 	}
 
 	public class RealElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Real");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cDecimalParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cDotDecimalParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		private final RuleCall cDecimalDotParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
-		private final RuleCall cDecimalExpParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
+		private final RuleCall cDecimalExpParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//Real returns ecore::EDouble:
-		//	Decimal | DotDecimal | DecimalDot | DecimalExp;
+		//	Decimal | / *DotDecimal | DecimalDot |* / DecimalExp;
 		public ParserRule getRule() { return rule; }
 
-		//Decimal | DotDecimal | DecimalDot | DecimalExp
+		//Decimal | / *DotDecimal | DecimalDot |* / DecimalExp
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//Decimal
 		public RuleCall getDecimalParserRuleCall_0() { return cDecimalParserRuleCall_0; }
 
-		//DotDecimal
-		public RuleCall getDotDecimalParserRuleCall_1() { return cDotDecimalParserRuleCall_1; }
-
-		//DecimalDot
-		public RuleCall getDecimalDotParserRuleCall_2() { return cDecimalDotParserRuleCall_2; }
-
-		//DecimalExp
-		public RuleCall getDecimalExpParserRuleCall_3() { return cDecimalExpParserRuleCall_3; }
+		/// *DotDecimal | DecimalDot |* / DecimalExp
+		public RuleCall getDecimalExpParserRuleCall_1() { return cDecimalExpParserRuleCall_1; }
 	}
 
 	public class DecimalElements extends AbstractParserRuleElementFinder {
@@ -883,70 +851,6 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 		public RuleCall getINTTerminalRuleCall_3() { return cINTTerminalRuleCall_3; }
 	}
 
-	public class DotDecimalElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "DotDecimal");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Alternatives cAlternatives_0 = (Alternatives)cGroup.eContents().get(0);
-		private final Keyword cPlusSignKeyword_0_0 = (Keyword)cAlternatives_0.eContents().get(0);
-		private final Keyword cHyphenMinusKeyword_0_1 = (Keyword)cAlternatives_0.eContents().get(1);
-		private final Keyword cFullStopKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final RuleCall cINTTerminalRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
-		
-		//DotDecimal hidden():
-		//	("+" | "-")? "." INT;
-		public ParserRule getRule() { return rule; }
-
-		//("+" | "-")? "." INT
-		public Group getGroup() { return cGroup; }
-
-		//("+" | "-")?
-		public Alternatives getAlternatives_0() { return cAlternatives_0; }
-
-		//"+"
-		public Keyword getPlusSignKeyword_0_0() { return cPlusSignKeyword_0_0; }
-
-		//"-"
-		public Keyword getHyphenMinusKeyword_0_1() { return cHyphenMinusKeyword_0_1; }
-
-		//"."
-		public Keyword getFullStopKeyword_1() { return cFullStopKeyword_1; }
-
-		//INT
-		public RuleCall getINTTerminalRuleCall_2() { return cINTTerminalRuleCall_2; }
-	}
-
-	public class DecimalDotElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "DecimalDot");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Alternatives cAlternatives_0 = (Alternatives)cGroup.eContents().get(0);
-		private final Keyword cPlusSignKeyword_0_0 = (Keyword)cAlternatives_0.eContents().get(0);
-		private final Keyword cHyphenMinusKeyword_0_1 = (Keyword)cAlternatives_0.eContents().get(1);
-		private final RuleCall cINTTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
-		private final Keyword cFullStopKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		
-		//DecimalDot hidden():
-		//	("+" | "-")? INT ".";
-		public ParserRule getRule() { return rule; }
-
-		//("+" | "-")? INT "."
-		public Group getGroup() { return cGroup; }
-
-		//("+" | "-")?
-		public Alternatives getAlternatives_0() { return cAlternatives_0; }
-
-		//"+"
-		public Keyword getPlusSignKeyword_0_0() { return cPlusSignKeyword_0_0; }
-
-		//"-"
-		public Keyword getHyphenMinusKeyword_0_1() { return cHyphenMinusKeyword_0_1; }
-
-		//INT
-		public RuleCall getINTTerminalRuleCall_1() { return cINTTerminalRuleCall_1; }
-
-		//"."
-		public Keyword getFullStopKeyword_2() { return cFullStopKeyword_2; }
-	}
-
 	public class DecimalExpElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "DecimalExp");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -956,13 +860,24 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cINTTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
 		private final Keyword cFullStopKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		private final RuleCall cINTTerminalRuleCall_3 = (RuleCall)cGroup.eContents().get(3);
-		private final RuleCall cEXPTerminalRuleCall_4 = (RuleCall)cGroup.eContents().get(4);
+		private final Alternatives cAlternatives_4 = (Alternatives)cGroup.eContents().get(4);
+		private final Keyword cEKeyword_4_0 = (Keyword)cAlternatives_4.eContents().get(0);
+		private final Keyword cEKeyword_4_1 = (Keyword)cAlternatives_4.eContents().get(1);
+		private final Alternatives cAlternatives_5 = (Alternatives)cGroup.eContents().get(5);
+		private final Keyword cPlusSignKeyword_5_0 = (Keyword)cAlternatives_5.eContents().get(0);
+		private final Keyword cHyphenMinusKeyword_5_1 = (Keyword)cAlternatives_5.eContents().get(1);
+		private final RuleCall cINTTerminalRuleCall_6 = (RuleCall)cGroup.eContents().get(6);
 		
+		////DotDecimal hidden():
+		////	('+' | '-')? '.' INT;
+		////
+		////DecimalDot hidden():
+		////	('+' | '-')? INT '.';
 		//DecimalExp hidden():
-		//	("+" | "-")? INT "." INT EXP;
+		//	("+" | "-")? INT "." INT ("e" | "E") ("+" | "-")? INT;
 		public ParserRule getRule() { return rule; }
 
-		//("+" | "-")? INT "." INT EXP
+		//("+" | "-")? INT "." INT ("e" | "E") ("+" | "-")? INT
 		public Group getGroup() { return cGroup; }
 
 		//("+" | "-")?
@@ -983,8 +898,26 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 		//INT
 		public RuleCall getINTTerminalRuleCall_3() { return cINTTerminalRuleCall_3; }
 
-		//EXP
-		public RuleCall getEXPTerminalRuleCall_4() { return cEXPTerminalRuleCall_4; }
+		//"e" | "E"
+		public Alternatives getAlternatives_4() { return cAlternatives_4; }
+
+		//"e"
+		public Keyword getEKeyword_4_0() { return cEKeyword_4_0; }
+
+		//"E"
+		public Keyword getEKeyword_4_1() { return cEKeyword_4_1; }
+
+		//("+" | "-")?
+		public Alternatives getAlternatives_5() { return cAlternatives_5; }
+
+		//"+"
+		public Keyword getPlusSignKeyword_5_0() { return cPlusSignKeyword_5_0; }
+
+		//"-"
+		public Keyword getHyphenMinusKeyword_5_1() { return cHyphenMinusKeyword_5_1; }
+
+		//INT
+		public RuleCall getINTTerminalRuleCall_6() { return cINTTerminalRuleCall_6; }
 	}
 
 	public class FQNElements extends AbstractParserRuleElementFinder {
@@ -1062,46 +995,66 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 		public Keyword getCHARPtCharacterKeyword_3_0() { return cCHARPtCharacterKeyword_3_0; }
 	}
 	
-	private AnnotationElements pAnnotation;
-	private KeyValueElements pKeyValue;
-	private AnnotationTypeElements pAnnotationType;
-	private AnnotationTargetTypeElements pAnnotationTargetType;
-	private AnnotationAttributeElements pAnnotationAttribute;
-	private SimpleAnnotationAttributeElements pSimpleAnnotationAttribute;
-	private EnumAnnotationAttributeElements pEnumAnnotationAttribute;
-	private ImportElements pImport;
-	private ImportedFQNElements pImportedFQN;
-	private DocumentationElements pDocumentation;
-	private TIMEElements pTIME;
-	private LiteralTypeElements unknownRuleLiteralType;
-	private LiteralArrayElements pLiteralArray;
-	private LiteralElements pLiteral;
-	private BooleanLiteralElements pBooleanLiteral;
-	private NumberLiteralElements pNumberLiteral;
-	private RealLiteralElements pRealLiteral;
-	private IntLiteralElements pIntLiteral;
-	private StringLiteralElements pStringLiteral;
-	private IntegerElements pInteger;
-	private SignedIntegerElements pSignedInteger;
-	private HexadecimalElements pHexadecimal;
-	private RealElements pReal;
-	private DecimalElements pDecimal;
-	private DotDecimalElements pDotDecimal;
-	private DecimalDotElements pDecimalDot;
-	private DecimalExpElements pDecimalExp;
-	private TerminalRule tEXP;
-	private TerminalRule tHEX;
-	private FQNElements pFQN;
+	private final AnnotationElements pAnnotation;
+	private final KeyValueElements pKeyValue;
+	private final AnnotationTypeElements pAnnotationType;
+	private final AnnotationTargetTypeElements pAnnotationTargetType;
+	private final AnnotationAttributeElements pAnnotationAttribute;
+	private final SimpleAnnotationAttributeElements pSimpleAnnotationAttribute;
+	private final EnumAnnotationAttributeElements pEnumAnnotationAttribute;
+	private final ImportElements pImport;
+	private final ImportedFQNElements pImportedFQN;
+	private final DocumentationElements pDocumentation;
+	private final TIMEElements pTIME;
+	private final LiteralTypeElements unknownRuleLiteralType;
+	private final LiteralArrayElements pLiteralArray;
+	private final LiteralElements pLiteral;
+	private final BooleanLiteralElements pBooleanLiteral;
+	private final NumberLiteralElements pNumberLiteral;
+	private final RealLiteralElements pRealLiteral;
+	private final IntLiteralElements pIntLiteral;
+	private final StringLiteralElements pStringLiteral;
+	private final IntegerElements pInteger;
+	private final RealElements pReal;
+	private final DecimalElements pDecimal;
+	private final DecimalExpElements pDecimalExp;
+	private final FQNElements pFQN;
+	private final TerminalRule tHEX;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public BaseGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pAnnotation = new AnnotationElements();
+		this.pKeyValue = new KeyValueElements();
+		this.pAnnotationType = new AnnotationTypeElements();
+		this.pAnnotationTargetType = new AnnotationTargetTypeElements();
+		this.pAnnotationAttribute = new AnnotationAttributeElements();
+		this.pSimpleAnnotationAttribute = new SimpleAnnotationAttributeElements();
+		this.pEnumAnnotationAttribute = new EnumAnnotationAttributeElements();
+		this.pImport = new ImportElements();
+		this.pImportedFQN = new ImportedFQNElements();
+		this.pDocumentation = new DocumentationElements();
+		this.pTIME = new TIMEElements();
+		this.unknownRuleLiteralType = new LiteralTypeElements();
+		this.pLiteralArray = new LiteralArrayElements();
+		this.pLiteral = new LiteralElements();
+		this.pBooleanLiteral = new BooleanLiteralElements();
+		this.pNumberLiteral = new NumberLiteralElements();
+		this.pRealLiteral = new RealLiteralElements();
+		this.pIntLiteral = new IntLiteralElements();
+		this.pStringLiteral = new StringLiteralElements();
+		this.pInteger = new IntegerElements();
+		this.pReal = new RealElements();
+		this.pDecimal = new DecimalElements();
+		this.pDecimalExp = new DecimalExpElements();
+		this.pFQN = new FQNElements();
+		this.tHEX = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "HEX");
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -1136,7 +1089,7 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 	//Annotation:
 	//	"@" type=[AnnotationType|FQN] ("(" attributes+=KeyValue ("," attributes+=KeyValue)* ")")?;
 	public AnnotationElements getAnnotationAccess() {
-		return (pAnnotation != null) ? pAnnotation : (pAnnotation = new AnnotationElements());
+		return pAnnotation;
 	}
 	
 	public ParserRule getAnnotationRule() {
@@ -1146,7 +1099,7 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 	//KeyValue:
 	//	key=ID "=" value=Literal;
 	public KeyValueElements getKeyValueAccess() {
-		return (pKeyValue != null) ? pKeyValue : (pKeyValue = new KeyValueElements());
+		return pKeyValue;
 	}
 	
 	public ParserRule getKeyValueRule() {
@@ -1157,7 +1110,7 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 	//	"AnnotationType" name=ID docu=Documentation? "{" "target" "=" (targets+=AnnotationTargetType | "{"
 	//	targets+=AnnotationTargetType ("," targets+=AnnotationTargetType)* "}") attributes+=AnnotationAttribute* "}";
 	public AnnotationTypeElements getAnnotationTypeAccess() {
-		return (pAnnotationType != null) ? pAnnotationType : (pAnnotationType = new AnnotationTypeElements());
+		return pAnnotationType;
 	}
 	
 	public ParserRule getAnnotationTypeRule() {
@@ -1175,7 +1128,7 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 	//AnnotationTargetType:
 	//	ID;
 	public AnnotationTargetTypeElements getAnnotationTargetTypeAccess() {
-		return (pAnnotationTargetType != null) ? pAnnotationTargetType : (pAnnotationTargetType = new AnnotationTargetTypeElements());
+		return pAnnotationTargetType;
 	}
 	
 	public ParserRule getAnnotationTargetTypeRule() {
@@ -1185,7 +1138,7 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 	//AnnotationAttribute:
 	//	SimpleAnnotationAttribute | EnumAnnotationAttribute;
 	public AnnotationAttributeElements getAnnotationAttributeAccess() {
-		return (pAnnotationAttribute != null) ? pAnnotationAttribute : (pAnnotationAttribute = new AnnotationAttributeElements());
+		return pAnnotationAttribute;
 	}
 	
 	public ParserRule getAnnotationAttributeRule() {
@@ -1195,7 +1148,7 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 	//SimpleAnnotationAttribute:
 	//	(optional?="optional" | "mandatory") "attribute" name=ID ":" type=LiteralType;
 	public SimpleAnnotationAttributeElements getSimpleAnnotationAttributeAccess() {
-		return (pSimpleAnnotationAttribute != null) ? pSimpleAnnotationAttribute : (pSimpleAnnotationAttribute = new SimpleAnnotationAttributeElements());
+		return pSimpleAnnotationAttribute;
 	}
 	
 	public ParserRule getSimpleAnnotationAttributeRule() {
@@ -1205,7 +1158,7 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 	//EnumAnnotationAttribute:
 	//	(optional?="optional" | "mandatory") "attribute" name=ID ":" "{" values+=STRING ("," values+=STRING)* "}";
 	public EnumAnnotationAttributeElements getEnumAnnotationAttributeAccess() {
-		return (pEnumAnnotationAttribute != null) ? pEnumAnnotationAttribute : (pEnumAnnotationAttribute = new EnumAnnotationAttributeElements());
+		return pEnumAnnotationAttribute;
 	}
 	
 	public ParserRule getEnumAnnotationAttributeRule() {
@@ -1235,7 +1188,7 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 	//Import:
 	//	"import" (importedNamespace=ImportedFQN "from" | "model") importURI=STRING;
 	public ImportElements getImportAccess() {
-		return (pImport != null) ? pImport : (pImport = new ImportElements());
+		return pImport;
 	}
 	
 	public ParserRule getImportRule() {
@@ -1245,7 +1198,7 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 	//ImportedFQN:
 	//	FQN ".*"?;
 	public ImportedFQNElements getImportedFQNAccess() {
-		return (pImportedFQN != null) ? pImportedFQN : (pImportedFQN = new ImportedFQNElements());
+		return pImportedFQN;
 	}
 	
 	public ParserRule getImportedFQNRule() {
@@ -1257,7 +1210,7 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 	//Documentation:
 	//	{Documentation} "[" lines+=STRING* "]";
 	public DocumentationElements getDocumentationAccess() {
-		return (pDocumentation != null) ? pDocumentation : (pDocumentation = new DocumentationElements());
+		return pDocumentation;
 	}
 	
 	public ParserRule getDocumentationRule() {
@@ -1269,7 +1222,7 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 	//TIME returns ecore::ELong:
 	//	INT "s" | INT "ms" | INT "us" | INT "ns";
 	public TIMEElements getTIMEAccess() {
-		return (pTIME != null) ? pTIME : (pTIME = new TIMEElements());
+		return pTIME;
 	}
 	
 	public ParserRule getTIMERule() {
@@ -1281,7 +1234,7 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 	//enum LiteralType:
 	//	BOOL="ptBoolean" | INT="ptInteger" | REAL="ptReal" | CHAR="ptCharacter";
 	public LiteralTypeElements getLiteralTypeAccess() {
-		return (unknownRuleLiteralType != null) ? unknownRuleLiteralType : (unknownRuleLiteralType = new LiteralTypeElements());
+		return unknownRuleLiteralType;
 	}
 	
 	public EnumRule getLiteralTypeRule() {
@@ -1291,7 +1244,7 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 	//LiteralArray:
 	//	literals+=Literal ("," literals+=Literal)*;
 	public LiteralArrayElements getLiteralArrayAccess() {
-		return (pLiteralArray != null) ? pLiteralArray : (pLiteralArray = new LiteralArrayElements());
+		return pLiteralArray;
 	}
 	
 	public ParserRule getLiteralArrayRule() {
@@ -1302,7 +1255,7 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 	//Literal:
 	//	BooleanLiteral | NumberLiteral | StringLiteral;
 	public LiteralElements getLiteralAccess() {
-		return (pLiteral != null) ? pLiteral : (pLiteral = new LiteralElements());
+		return pLiteral;
 	}
 	
 	public ParserRule getLiteralRule() {
@@ -1312,7 +1265,7 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 	//BooleanLiteral:
 	//	{BooleanLiteral} ("false" | isTrue?="true");
 	public BooleanLiteralElements getBooleanLiteralAccess() {
-		return (pBooleanLiteral != null) ? pBooleanLiteral : (pBooleanLiteral = new BooleanLiteralElements());
+		return pBooleanLiteral;
 	}
 	
 	public ParserRule getBooleanLiteralRule() {
@@ -1322,7 +1275,7 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 	//NumberLiteral:
 	//	IntLiteral | RealLiteral;
 	public NumberLiteralElements getNumberLiteralAccess() {
-		return (pNumberLiteral != null) ? pNumberLiteral : (pNumberLiteral = new NumberLiteralElements());
+		return pNumberLiteral;
 	}
 	
 	public ParserRule getNumberLiteralRule() {
@@ -1332,7 +1285,7 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 	//RealLiteral:
 	//	{RealLiteral} value=Real;
 	public RealLiteralElements getRealLiteralAccess() {
-		return (pRealLiteral != null) ? pRealLiteral : (pRealLiteral = new RealLiteralElements());
+		return pRealLiteral;
 	}
 	
 	public ParserRule getRealLiteralRule() {
@@ -1342,7 +1295,7 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 	//IntLiteral:
 	//	{IntLiteral} value=Integer;
 	public IntLiteralElements getIntLiteralAccess() {
-		return (pIntLiteral != null) ? pIntLiteral : (pIntLiteral = new IntLiteralElements());
+		return pIntLiteral;
 	}
 	
 	public ParserRule getIntLiteralRule() {
@@ -1352,7 +1305,7 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 	//StringLiteral:
 	//	{StringLiteral} value=STRING;
 	public StringLiteralElements getStringLiteralAccess() {
-		return (pStringLiteral != null) ? pStringLiteral : (pStringLiteral = new StringLiteralElements());
+		return pStringLiteral;
 	}
 	
 	public ParserRule getStringLiteralRule() {
@@ -1360,39 +1313,19 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Integer returns ecore::ELong:
-	//	SignedInteger | Hexadecimal;
+	//	("+" | "-")? INT | HEX;
 	public IntegerElements getIntegerAccess() {
-		return (pInteger != null) ? pInteger : (pInteger = new IntegerElements());
+		return pInteger;
 	}
 	
 	public ParserRule getIntegerRule() {
 		return getIntegerAccess().getRule();
 	}
 
-	//SignedInteger hidden():
-	//	("+" | "-")? INT;
-	public SignedIntegerElements getSignedIntegerAccess() {
-		return (pSignedInteger != null) ? pSignedInteger : (pSignedInteger = new SignedIntegerElements());
-	}
-	
-	public ParserRule getSignedIntegerRule() {
-		return getSignedIntegerAccess().getRule();
-	}
-
-	//Hexadecimal hidden():
-	//	HEX;
-	public HexadecimalElements getHexadecimalAccess() {
-		return (pHexadecimal != null) ? pHexadecimal : (pHexadecimal = new HexadecimalElements());
-	}
-	
-	public ParserRule getHexadecimalRule() {
-		return getHexadecimalAccess().getRule();
-	}
-
 	//Real returns ecore::EDouble:
-	//	Decimal | DotDecimal | DecimalDot | DecimalExp;
+	//	Decimal | / *DotDecimal | DecimalDot |* / DecimalExp;
 	public RealElements getRealAccess() {
-		return (pReal != null) ? pReal : (pReal = new RealElements());
+		return pReal;
 	}
 	
 	public ParserRule getRealRule() {
@@ -1402,64 +1335,43 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 	//Decimal hidden():
 	//	("+" | "-")? INT "." INT;
 	public DecimalElements getDecimalAccess() {
-		return (pDecimal != null) ? pDecimal : (pDecimal = new DecimalElements());
+		return pDecimal;
 	}
 	
 	public ParserRule getDecimalRule() {
 		return getDecimalAccess().getRule();
 	}
 
-	//DotDecimal hidden():
-	//	("+" | "-")? "." INT;
-	public DotDecimalElements getDotDecimalAccess() {
-		return (pDotDecimal != null) ? pDotDecimal : (pDotDecimal = new DotDecimalElements());
-	}
-	
-	public ParserRule getDotDecimalRule() {
-		return getDotDecimalAccess().getRule();
-	}
-
-	//DecimalDot hidden():
-	//	("+" | "-")? INT ".";
-	public DecimalDotElements getDecimalDotAccess() {
-		return (pDecimalDot != null) ? pDecimalDot : (pDecimalDot = new DecimalDotElements());
-	}
-	
-	public ParserRule getDecimalDotRule() {
-		return getDecimalDotAccess().getRule();
-	}
-
+	////DotDecimal hidden():
+	////	('+' | '-')? '.' INT;
+	////
+	////DecimalDot hidden():
+	////	('+' | '-')? INT '.';
 	//DecimalExp hidden():
-	//	("+" | "-")? INT "." INT EXP;
+	//	("+" | "-")? INT "." INT ("e" | "E") ("+" | "-")? INT;
 	public DecimalExpElements getDecimalExpAccess() {
-		return (pDecimalExp != null) ? pDecimalExp : (pDecimalExp = new DecimalExpElements());
+		return pDecimalExp;
 	}
 	
 	public ParserRule getDecimalExpRule() {
 		return getDecimalExpAccess().getRule();
 	}
 
-	//terminal EXP:
-	//	("e" | "E") ("+" | "-")? "0".."9"+;
-	public TerminalRule getEXPRule() {
-		return (tEXP != null) ? tEXP : (tEXP = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "EXP"));
-	} 
-
-	//terminal HEX:
-	//	("0x" | "0X") ("0".."9" | "a".."f" | "A".."F")+;
-	public TerminalRule getHEXRule() {
-		return (tHEX != null) ? tHEX : (tHEX = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "HEX"));
-	} 
-
 	//FQN:
 	//	ID ("." ID)*;
 	public FQNElements getFQNAccess() {
-		return (pFQN != null) ? pFQN : (pFQN = new FQNElements());
+		return pFQN;
 	}
 	
 	public ParserRule getFQNRule() {
 		return getFQNAccess().getRule();
 	}
+
+	//terminal HEX:
+	//	("0x" | "0X") ("0".."9" | "a".."f" | "A".."F")+;
+	public TerminalRule getHEXRule() {
+		return tHEX;
+	} 
 
 	//terminal ID:
 	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
@@ -1474,8 +1386,8 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "u" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" |
-	//	"n" | "f" | "r" | "u" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
+	//	"\"" ("\\" . / * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\""))* "\"" | "\'" ("\\" .
+	//	/ * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
