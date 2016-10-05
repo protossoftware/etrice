@@ -31,6 +31,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem;
@@ -209,7 +210,6 @@ public class ExpandedModelComponentImpl extends MinimalEObjectImpl.Container imp
 	private HashMap<StateGraphNode, NodeData> node2data = null;
 	private HashMap<State, LinkedList<ActiveTrigger>> state2triggers = null;
 	private HashMap<String, MessageFromIf> triggerstring2mif = null;
-	private LinkedList<TransitionChain> trchains = null;
 	private TransitionToChainBundleMap trans2chainBundle = null;
 	private HashMap<EObject, EObject> copy2orig = null;
 	private HashMap<EObject, EObject> orig2copy = null;
@@ -838,7 +838,6 @@ public class ExpandedModelComponentImpl extends MinimalEObjectImpl.Container imp
 		node2data = new HashMap<StateGraphNode, NodeData>();
 		state2triggers = new HashMap<State, LinkedList<ActiveTrigger>>();
 		triggerstring2mif = new HashMap<String, MessageFromIf>();
-		trchains = new LinkedList<TransitionChain>();
 		trans2chainBundle = new TransitionToChainBundleMap();
 		copy2orig = new HashMap<EObject, EObject>();
 		orig2copy = new HashMap<EObject, EObject>();
@@ -898,7 +897,6 @@ public class ExpandedModelComponentImpl extends MinimalEObjectImpl.Container imp
 		node2data = null;
 		state2triggers = null;
 		triggerstring2mif = null;
-		trchains = null;
 		trans2chainBundle = null;
 		copy2orig = null;
 	}
@@ -1156,7 +1154,7 @@ public class ExpandedModelComponentImpl extends MinimalEObjectImpl.Container imp
 		
 		collectChainTransitions(tc, t);
 		
-		trchains.add(tc);
+		getTransitionChains().add(tc);
 		
 		return tc;
 	}
@@ -1164,10 +1162,13 @@ public class ExpandedModelComponentImpl extends MinimalEObjectImpl.Container imp
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
 	 */
 	public EList<TransitionChain> getTransitionChains() {
-		return new BasicEList<TransitionChain>(trchains);
+		if (transitionChains == null) {
+			transitionChains = new EObjectContainmentEList<TransitionChain>(TransitionChain.class, this, FsmGenPackage.EXPANDED_MODEL_COMPONENT__TRANSITION_CHAINS);
+		}
+		return transitionChains;
 	}
 
 	/**
@@ -1178,7 +1179,7 @@ public class ExpandedModelComponentImpl extends MinimalEObjectImpl.Container imp
 	public EList<TransitionChain> getOwnTransitionChains() {
 		BasicEList<TransitionChain> result = new BasicEList<TransitionChain>();
 		
-		for (TransitionChain tc : trchains) {
+		for (TransitionChain tc : getTransitionChains()) {
 			if (!targetsOfRefinedTransitions.contains(tc.getTransition()) && isOwnObject(tc.getTransition()))
 				result.add(tc);
 		}
@@ -1213,12 +1214,19 @@ public class ExpandedModelComponentImpl extends MinimalEObjectImpl.Container imp
 		return getModelComponent().getAllAbstractInterfaceItems();
 	}
 
+	/*
+	 * In case of an abstract class we can have a transition to an EntryPoint
+	 * which is not connected inside its state.
+	 * For the TransitionChain handling during generation we need to replace
+	 * this terminal with a state terminal as if it where it a transition
+	 * to history.
+	 */
 	private StateGraphNode getAdjustedTargetNode(Transition t) {
 		StateGraphNode node = fsmHelpers.getNode(t.getTo());
 		if (node instanceof EntryPoint) {
-			NodeData data = node2data.get(node);
-			if (data==null || data.getOutTrans().isEmpty()) {
-				if (getModelComponent(node).isAbstract()) {
+			if (getModelComponent(node).isAbstract()) {
+				NodeData data = node2data.get(node);
+				if (data==null || data.getOutTrans().isEmpty()) {
 					if (node.eContainer().eContainer() instanceof State) {
 						// in this case 
 						State newTarget = (State) node.eContainer().eContainer();

@@ -198,6 +198,10 @@ public class JavaExtensions implements ILanguageExtension {
     return "";
   }
   
+  public String scopeSeparator() {
+    return ".";
+  }
+  
   public String memberInDeclaration(final String namespace, final String member) {
     return member;
   }

@@ -73,7 +73,9 @@ class CExtensions implements ILanguageExtension {
 
 	override String selfPointer(boolean hasArgs) { if (hasArgs) "self, " else "self" }
 
-	override String operationScope(String classname, boolean isDeclaration){classname+"_"}
+	override String scopeSeparator() {""}
+	
+	override String operationScope(String classname, boolean isDeclaration) {classname+"_"}
 
 	override String memberInDeclaration(String namespace, String member) {
 		return namespace+"_"+member

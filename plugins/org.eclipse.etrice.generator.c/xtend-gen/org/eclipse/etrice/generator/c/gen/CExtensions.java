@@ -100,6 +100,10 @@ public class CExtensions implements ILanguageExtension {
     return _xifexpression;
   }
   
+  public String scopeSeparator() {
+    return "";
+  }
+  
   public String operationScope(final String classname, final boolean isDeclaration) {
     return (classname + "_");
   }

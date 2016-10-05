@@ -103,6 +103,7 @@ class JavaExtensions implements ILanguageExtension {
 
 	override String operationScope(String classname, boolean isDeclaration) {""}
 
+	override String scopeSeparator() {"."}
 
 	override String memberInDeclaration(String namespace, String member) {
 		return member

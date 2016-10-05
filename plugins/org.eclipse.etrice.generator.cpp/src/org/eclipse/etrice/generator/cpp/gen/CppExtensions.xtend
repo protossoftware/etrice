@@ -76,6 +76,8 @@ class CppExtensions implements ILanguageExtension {
 	override String memberAccess() {"this->"}
 	override String selfPointer(String classname, boolean hasArgs) {""}
 	override String selfPointer(boolean hasArgs) { "" }
+	
+	override String scopeSeparator() {"::"}
 
 	override String operationScope(String classname, boolean isDeclaration) {
 		if (isDeclaration)

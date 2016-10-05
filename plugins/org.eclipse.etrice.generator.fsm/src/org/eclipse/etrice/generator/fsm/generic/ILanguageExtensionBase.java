@@ -80,6 +80,11 @@ public interface ILanguageExtensionBase {
 	String selfPointer(boolean hasArgs);
 
 	/**
+	 * @return the language specific scope separator, e.g. "::" for C++, "." for Java and "" for C
+	 */
+	String scopeSeparator();
+
+	/**
 	 * language specific scoping string for operations
 	 * e.g. nothing in Java (only inside class declaration), nothing and classname:: for C++ and classname_ for C
 	 * @param classname the class name
@@ -87,7 +92,7 @@ public interface ILanguageExtensionBase {
 	 * @return "classname_" for C / for Java and C++ nothing
 	 */
 	String operationScope(String classname, boolean isDeclaration);
-
+	
 	/**
 	 * member declaration
 	 *

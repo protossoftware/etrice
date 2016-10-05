@@ -199,20 +199,21 @@ public abstract class AbstractStateMachineGenerator {
   
   /**
    * generates transition chain ID constants.
-   * Inheritance (if available) is used for base class IDs.
+   * Inheritance can't be used used for base class IDs because of corner cases
+   * where base class and derived class chain IDs deviate (see bug 501354).
    * 
    * @param xpmc the {@link ExpandedModelComponent}
    * 
    * @return the generated code
    */
   public String genTransitionChainConstants(final ExpandedModelComponent xpmc) {
-    boolean _usesInheritance = this.langExt.usesInheritance();
-    return this.genTransitionChainConstants(xpmc, _usesInheritance);
+    return this.genTransitionChainConstants(xpmc, false);
   }
   
   /**
    * generates transition chain ID constants.
-   * Inheritance (if available) is used for base class IDs.
+   * Inheritance can't be used used for base class IDs because of corner cases
+   * where base class and derived class chain IDs deviate.
    * 
    * @param xpmc the {@link ExpandedModelComponent}
    * @param omitBase use <code>true</code> if no base class transition chain constants are needed
@@ -247,7 +248,7 @@ public abstract class AbstractStateMachineGenerator {
         list.add(_pair);
       }
     }
-    return this.langExt.genEnumeration("chain_ids", list);
+    return this.langExt.genEnumeration("ChainIDs", list);
   }
   
   /**
@@ -370,52 +371,62 @@ public abstract class AbstractStateMachineGenerator {
         _or = eventDriven;
       }
       final boolean handleEvents = _or;
-      String _className = this.getClassName(mc);
-      final String opScope = this.langExt.operationScope(_className, (!generateImplementation));
       String _xifexpression = null;
       boolean _usesInheritance = this.langExt.usesInheritance();
       if (_usesInheritance) {
-        _xifexpression = opScope;
+        String _className = this.getClassName(mc);
+        String _scopeSeparator = this.langExt.scopeSeparator();
+        _xifexpression = (_className + _scopeSeparator);
       } else {
         _xifexpression = "";
       }
-      final String opScopePriv = _xifexpression;
+      final String chainIDScope = _xifexpression;
+      String _className_1 = this.getClassName(mc);
+      final String opScope = this.langExt.operationScope(_className_1, (!generateImplementation));
       String _xifexpression_1 = null;
       boolean _usesInheritance_1 = this.langExt.usesInheritance();
       if (_usesInheritance_1) {
-        _xifexpression_1 = this.langExt.accessLevelPublic();
+        _xifexpression_1 = opScope;
       } else {
-        _xifexpression_1 = this.langExt.accessLevelPrivate();
+        _xifexpression_1 = "";
       }
-      final String publicIf = _xifexpression_1;
-      final String privAccess = this.langExt.accessLevelPrivate();
-      String _className_1 = this.getClassName(mc);
-      final String selfPtr = this.langExt.selfPointer(_className_1, true);
-      String _className_2 = this.getClassName(mc);
-      final String selfOnly = this.langExt.selfPointer(_className_2, false);
+      final String opScopePriv = _xifexpression_1;
       String _xifexpression_2 = null;
       boolean _usesInheritance_2 = this.langExt.usesInheritance();
       if (_usesInheritance_2) {
-        String _xifexpression_3 = null;
+        _xifexpression_2 = this.langExt.accessLevelPublic();
+      } else {
+        _xifexpression_2 = this.langExt.accessLevelPrivate();
+      }
+      final String publicIf = _xifexpression_2;
+      final String privAccess = this.langExt.accessLevelPrivate();
+      String _className_2 = this.getClassName(mc);
+      final String selfPtr = this.langExt.selfPointer(_className_2, true);
+      String _className_3 = this.getClassName(mc);
+      final String selfOnly = this.langExt.selfPointer(_className_3, false);
+      String _xifexpression_3 = null;
+      boolean _usesInheritance_3 = this.langExt.usesInheritance();
+      if (_usesInheritance_3) {
+        String _xifexpression_4 = null;
         boolean _usesPointers = this.langExt.usesPointers();
         if (_usesPointers) {
-          _xifexpression_3 = "->getLocalId()";
+          _xifexpression_4 = "->getLocalId()";
         } else {
-          _xifexpression_3 = ".getLocalId()";
+          _xifexpression_4 = ".getLocalId()";
         }
-        _xifexpression_2 = _xifexpression_3;
+        _xifexpression_3 = _xifexpression_4;
       } else {
-        _xifexpression_2 = "->localId";
+        _xifexpression_3 = "->localId";
       }
-      final String getLocalId = _xifexpression_2;
-      String _xifexpression_4 = null;
+      final String getLocalId = _xifexpression_3;
+      String _xifexpression_5 = null;
       boolean _usesPointers_1 = this.langExt.usesPointers();
       if (_usesPointers_1) {
-        _xifexpression_4 = ("const " + ifItemPtr);
+        _xifexpression_5 = ("const " + ifItemPtr);
       } else {
-        _xifexpression_4 = ifItemPtr;
+        _xifexpression_5 = ifItemPtr;
       }
-      final String constIfItemPtr = _xifexpression_4;
+      final String constIfItemPtr = _xifexpression_5;
       final boolean usesHdlr = this.usesHandlerTrPoints(xpmc);
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("/**");
@@ -611,6 +622,7 @@ public abstract class AbstractStateMachineGenerator {
             for(final TransitionChain tc : allchains) {
               _builder.append("\t\t");
               _builder.append("case ");
+              _builder.append(chainIDScope, "\t\t");
               String _genChainId = this._codegenHelpers.getGenChainId(tc);
               _builder.append(_genChainId, "\t\t");
               _builder.append(":");
@@ -740,8 +752,8 @@ public abstract class AbstractStateMachineGenerator {
           _builder.append("\t\t");
           _builder.append("state__et = ");
           {
-            boolean _usesInheritance_3 = this.langExt.usesInheritance();
-            boolean _not = (!_usesInheritance_3);
+            boolean _usesInheritance_4 = this.langExt.usesInheritance();
+            boolean _not = (!_usesInheritance_4);
             if (_not) {
               _builder.append("(");
               String _stateType_8 = this.stateType();
@@ -849,6 +861,7 @@ public abstract class AbstractStateMachineGenerator {
                       _builder.append("state__et = executeTransitionChain(");
                       String _selfPointer_2 = this.langExt.selfPointer(true);
                       _builder.append(_selfPointer_2, "\t\t\t\t\t");
+                      _builder.append(chainIDScope, "\t\t\t\t\t");
                       TransitionChain _chain = xpmc.getChain(sub_initt);
                       String _genChainId_1 = this._codegenHelpers.getGenChainId(_chain);
                       _builder.append(_genChainId_1, "\t\t\t\t\t");
@@ -987,6 +1000,7 @@ public abstract class AbstractStateMachineGenerator {
           _builder.newLineIfNotEmpty();
           _builder.append("\t");
           _builder.append("int chain__et = ");
+          _builder.append(chainIDScope, "\t");
           TransitionChain _chain_1 = xpmc.getChain(initt);
           String _genChainId_2 = this._codegenHelpers.getGenChainId(_chain_1);
           _builder.append(_genChainId_2, "\t");
@@ -1055,8 +1069,8 @@ public abstract class AbstractStateMachineGenerator {
           _builder.append("void ");
           _builder.append(opScope, "");
           _builder.append("receiveEventInternal(");
-          String _className_3 = this.getClassName(mc);
-          String _selfPointer_6 = this.langExt.selfPointer(_className_3, handleEvents);
+          String _className_4 = this.getClassName(mc);
+          String _selfPointer_6 = this.langExt.selfPointer(_className_4, handleEvents);
           _builder.append(_selfPointer_6, "");
           {
             if (handleEvents) {
@@ -1214,8 +1228,8 @@ public abstract class AbstractStateMachineGenerator {
           _builder.append("void ");
           _builder.append(opScope, "");
           _builder.append("receiveEventInternal(");
-          String _className_4 = this.getClassName(mc);
-          String _selfPointer_12 = this.langExt.selfPointer(_className_4, handleEvents);
+          String _className_5 = this.getClassName(mc);
+          String _selfPointer_12 = this.langExt.selfPointer(_className_5, handleEvents);
           _builder.append(_selfPointer_12, "");
           {
             if (handleEvents) {
@@ -1238,8 +1252,8 @@ public abstract class AbstractStateMachineGenerator {
               _builder.append("void ");
               _builder.append(opScope, "");
               _builder.append("receiveEvent(");
-              String _className_5 = this.getClassName(mc);
-              String _selfPointer_13 = this.langExt.selfPointer(_className_5, true);
+              String _className_6 = this.getClassName(mc);
+              String _selfPointer_13 = this.langExt.selfPointer(_className_6, true);
               _builder.append(_selfPointer_13, "");
               _builder.append(ifItemPtr, "");
               _builder.append(" ifitem, int evt, ");
@@ -1473,70 +1487,85 @@ public abstract class AbstractStateMachineGenerator {
    * @return the generated code
    */
   public CharSequence genDataDrivenTriggers(final ExpandedModelComponent xpmc, final State state, final boolean usesHdlr) {
-    StringConcatenation _builder = new StringConcatenation();
-    String _genDoCodes = this.genDoCodes(state);
-    _builder.append(_genDoCodes, "");
-    _builder.newLineIfNotEmpty();
-    List<Transition> _outgoingTransitionsHierarchical = this._fSMExtensions.getOutgoingTransitionsHierarchical(xpmc, state);
-    final Function1<Transition, Boolean> _function = new Function1<Transition, Boolean>() {
-      public Boolean apply(final Transition t) {
-        return Boolean.valueOf((t instanceof GuardedTransition));
-      }
-    };
-    Iterable<Transition> transitions = IterableExtensions.<Transition>filter(_outgoingTransitionsHierarchical, _function);
-    _builder.newLineIfNotEmpty();
+    CharSequence _xblockexpression = null;
     {
-      for(final Transition tr : transitions) {
-        _builder.append("if (");
-        String _guard = this.guard(((GuardedTransition) tr), "", xpmc);
-        _builder.append(_guard, "");
-        _builder.append(")");
-        _builder.newLineIfNotEmpty();
-        _builder.append("{");
-        _builder.newLine();
-        _builder.append("    ");
-        TransitionChain chain = xpmc.getChain(tr);
-        _builder.newLineIfNotEmpty();
-        _builder.append("    ");
-        _builder.append("chain__et = ");
-        String _genChainId = this._codegenHelpers.getGenChainId(chain);
-        _builder.append(_genChainId, "    ");
-        _builder.append(";");
-        _builder.newLineIfNotEmpty();
-        _builder.append("    ");
-        _builder.append("catching_state__et = ");
-        State _stateContext = chain.getStateContext();
-        String _genStateId = this._codegenHelpers.getGenStateId(_stateContext);
-        _builder.append(_genStateId, "    ");
-        _builder.append(";");
-        _builder.newLineIfNotEmpty();
-        {
-          boolean _and = false;
-          boolean _isHandler = chain.isHandler();
-          if (!_isHandler) {
-            _and = false;
-          } else {
-            _and = usesHdlr;
-          }
-          if (_and) {
-            _builder.append("    ");
-            _builder.append("is_handler__et = TRUE;");
-            _builder.newLine();
-          }
+      String _xifexpression = null;
+      boolean _usesInheritance = this.langExt.usesInheritance();
+      if (_usesInheritance) {
+        String _className = this.getClassName(xpmc);
+        String _scopeSeparator = this.langExt.scopeSeparator();
+        _xifexpression = (_className + _scopeSeparator);
+      } else {
+        _xifexpression = "";
+      }
+      final String chainIDScope = _xifexpression;
+      StringConcatenation _builder = new StringConcatenation();
+      String _genDoCodes = this.genDoCodes(state);
+      _builder.append(_genDoCodes, "");
+      _builder.newLineIfNotEmpty();
+      List<Transition> _outgoingTransitionsHierarchical = this._fSMExtensions.getOutgoingTransitionsHierarchical(xpmc, state);
+      final Function1<Transition, Boolean> _function = new Function1<Transition, Boolean>() {
+        public Boolean apply(final Transition t) {
+          return Boolean.valueOf((t instanceof GuardedTransition));
         }
-        _builder.append("}");
-        _builder.newLine();
-        {
-          Transition _last = IterableExtensions.<Transition>last(transitions);
-          boolean _notEquals = (!Objects.equal(tr, _last));
-          if (_notEquals) {
-            _builder.append("else");
-            _builder.newLine();
+      };
+      Iterable<Transition> transitions = IterableExtensions.<Transition>filter(_outgoingTransitionsHierarchical, _function);
+      _builder.newLineIfNotEmpty();
+      {
+        for(final Transition tr : transitions) {
+          _builder.append("if (");
+          String _guard = this.guard(((GuardedTransition) tr), "", xpmc);
+          _builder.append(_guard, "");
+          _builder.append(")");
+          _builder.newLineIfNotEmpty();
+          _builder.append("{");
+          _builder.newLine();
+          _builder.append("    ");
+          TransitionChain chain = xpmc.getChain(tr);
+          _builder.newLineIfNotEmpty();
+          _builder.append("    ");
+          _builder.append("chain__et = ");
+          _builder.append(chainIDScope, "    ");
+          String _genChainId = this._codegenHelpers.getGenChainId(chain);
+          _builder.append(_genChainId, "    ");
+          _builder.append(";");
+          _builder.newLineIfNotEmpty();
+          _builder.append("    ");
+          _builder.append("catching_state__et = ");
+          State _stateContext = chain.getStateContext();
+          String _genStateId = this._codegenHelpers.getGenStateId(_stateContext);
+          _builder.append(_genStateId, "    ");
+          _builder.append(";");
+          _builder.newLineIfNotEmpty();
+          {
+            boolean _and = false;
+            boolean _isHandler = chain.isHandler();
+            if (!_isHandler) {
+              _and = false;
+            } else {
+              _and = usesHdlr;
+            }
+            if (_and) {
+              _builder.append("    ");
+              _builder.append("is_handler__et = TRUE;");
+              _builder.newLine();
+            }
+          }
+          _builder.append("}");
+          _builder.newLine();
+          {
+            Transition _last = IterableExtensions.<Transition>last(transitions);
+            boolean _notEquals = (!Objects.equal(tr, _last));
+            if (_notEquals) {
+              _builder.append("else");
+              _builder.newLine();
+            }
           }
         }
       }
+      _xblockexpression = _builder;
     }
-    return _builder;
+    return _xblockexpression;
   }
   
   /**
@@ -1550,106 +1579,121 @@ public abstract class AbstractStateMachineGenerator {
    * @return the generated code
    */
   public CharSequence genEventDrivenTriggers(final ExpandedModelComponent xpmc, final State state, final List<ActiveTrigger> atlist, final boolean usesHdlr) {
-    StringConcatenation _builder = new StringConcatenation();
+    CharSequence _xblockexpression = null;
     {
-      for(final ActiveTrigger at : atlist) {
-        _builder.append("case ");
-        String _triggerCodeName = xpmc.getTriggerCodeName(at);
-        _builder.append(_triggerCodeName, "");
-        _builder.append(":");
-        _builder.newLineIfNotEmpty();
-        _builder.append("    ");
-        boolean needData = this._fsmGenUtil.hasGuard(at);
-        _builder.newLineIfNotEmpty();
-        _builder.append("    ");
-        {
-          if (needData) {
-            _builder.append("{ ");
-            EObject _msg = at.getMsg();
-            String _typedDataDefinition = this.langExt.getTypedDataDefinition(_msg);
-            _builder.append(_typedDataDefinition, "    ");
-          }
-        }
-        _builder.newLineIfNotEmpty();
-        {
-          EList<TriggeredTransition> _transitions = at.getTransitions();
-          boolean _hasElements = false;
-          for(final TriggeredTransition tt : _transitions) {
-            if (!_hasElements) {
-              _hasElements = true;
-            } else {
-              _builder.appendImmediate(" else ", "    ");
-            }
-            _builder.append("    ");
-            TransitionChain chain = xpmc.getChain(tt);
-            _builder.newLineIfNotEmpty();
-            _builder.append("    ");
-            Transition _transition = chain.getTransition();
-            String _trigger = at.getTrigger();
-            String _guard = this.guard(((TriggeredTransition) _transition), _trigger, xpmc);
-            _builder.append(_guard, "    ");
-            _builder.newLineIfNotEmpty();
-            _builder.append("    ");
-            _builder.append("{");
-            _builder.newLine();
-            _builder.append("    ");
-            _builder.append("    ");
-            _builder.append("chain__et = ");
-            String _genChainId = this._codegenHelpers.getGenChainId(chain);
-            _builder.append(_genChainId, "        ");
-            _builder.append(";");
-            _builder.newLineIfNotEmpty();
-            _builder.append("    ");
-            _builder.append("    ");
-            _builder.append("catching_state__et = ");
-            State _stateContext = chain.getStateContext();
-            String _genStateId = this._codegenHelpers.getGenStateId(_stateContext);
-            _builder.append(_genStateId, "        ");
-            _builder.append(";");
-            _builder.newLineIfNotEmpty();
-            {
-              boolean _and = false;
-              boolean _isHandler = chain.isHandler();
-              if (!_isHandler) {
-                _and = false;
-              } else {
-                _and = usesHdlr;
-              }
-              if (_and) {
-                _builder.append("    ");
-                _builder.append("    ");
-                _builder.append("is_handler__et = ");
-                String _booleanConstant = this.langExt.booleanConstant(true);
-                _builder.append(_booleanConstant, "        ");
-                _builder.append(";");
-                _builder.newLineIfNotEmpty();
-              }
-            }
-            _builder.append("    ");
-            _builder.append("}");
-            _builder.newLine();
-          }
-        }
-        _builder.append("    ");
-        {
-          if (needData) {
-            _builder.append("}");
-          }
-        }
-        _builder.newLineIfNotEmpty();
-        _builder.append("break;");
-        _builder.newLine();
+      String _xifexpression = null;
+      boolean _usesInheritance = this.langExt.usesInheritance();
+      if (_usesInheritance) {
+        String _className = this.getClassName(xpmc);
+        String _scopeSeparator = this.langExt.scopeSeparator();
+        _xifexpression = (_className + _scopeSeparator);
+      } else {
+        _xifexpression = "";
       }
+      final String chainIDScope = _xifexpression;
+      StringConcatenation _builder = new StringConcatenation();
+      {
+        for(final ActiveTrigger at : atlist) {
+          _builder.append("case ");
+          String _triggerCodeName = xpmc.getTriggerCodeName(at);
+          _builder.append(_triggerCodeName, "");
+          _builder.append(":");
+          _builder.newLineIfNotEmpty();
+          _builder.append("    ");
+          boolean needData = this._fsmGenUtil.hasGuard(at);
+          _builder.newLineIfNotEmpty();
+          _builder.append("    ");
+          {
+            if (needData) {
+              _builder.append("{ ");
+              EObject _msg = at.getMsg();
+              String _typedDataDefinition = this.langExt.getTypedDataDefinition(_msg);
+              _builder.append(_typedDataDefinition, "    ");
+            }
+          }
+          _builder.newLineIfNotEmpty();
+          {
+            EList<TriggeredTransition> _transitions = at.getTransitions();
+            boolean _hasElements = false;
+            for(final TriggeredTransition tt : _transitions) {
+              if (!_hasElements) {
+                _hasElements = true;
+              } else {
+                _builder.appendImmediate(" else ", "    ");
+              }
+              _builder.append("    ");
+              TransitionChain chain = xpmc.getChain(tt);
+              _builder.newLineIfNotEmpty();
+              _builder.append("    ");
+              Transition _transition = chain.getTransition();
+              String _trigger = at.getTrigger();
+              String _guard = this.guard(((TriggeredTransition) _transition), _trigger, xpmc);
+              _builder.append(_guard, "    ");
+              _builder.newLineIfNotEmpty();
+              _builder.append("    ");
+              _builder.append("{");
+              _builder.newLine();
+              _builder.append("    ");
+              _builder.append("    ");
+              _builder.append("chain__et = ");
+              _builder.append(chainIDScope, "        ");
+              String _genChainId = this._codegenHelpers.getGenChainId(chain);
+              _builder.append(_genChainId, "        ");
+              _builder.append(";");
+              _builder.newLineIfNotEmpty();
+              _builder.append("    ");
+              _builder.append("    ");
+              _builder.append("catching_state__et = ");
+              State _stateContext = chain.getStateContext();
+              String _genStateId = this._codegenHelpers.getGenStateId(_stateContext);
+              _builder.append(_genStateId, "        ");
+              _builder.append(";");
+              _builder.newLineIfNotEmpty();
+              {
+                boolean _and = false;
+                boolean _isHandler = chain.isHandler();
+                if (!_isHandler) {
+                  _and = false;
+                } else {
+                  _and = usesHdlr;
+                }
+                if (_and) {
+                  _builder.append("    ");
+                  _builder.append("    ");
+                  _builder.append("is_handler__et = ");
+                  String _booleanConstant = this.langExt.booleanConstant(true);
+                  _builder.append(_booleanConstant, "        ");
+                  _builder.append(";");
+                  _builder.newLineIfNotEmpty();
+                }
+              }
+              _builder.append("    ");
+              _builder.append("}");
+              _builder.newLine();
+            }
+          }
+          _builder.append("    ");
+          {
+            if (needData) {
+              _builder.append("}");
+            }
+          }
+          _builder.newLineIfNotEmpty();
+          _builder.append("break;");
+          _builder.newLine();
+        }
+      }
+      _builder.append("default:");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("/* should not occur */");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("break;");
+      _builder.newLine();
+      _xblockexpression = _builder;
     }
-    _builder.append("default:");
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("/* should not occur */");
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("break;");
-    _builder.newLine();
-    return _builder;
+    return _xblockexpression;
   }
   
   public String getClassName(final ExpandedModelComponent xpmc) {

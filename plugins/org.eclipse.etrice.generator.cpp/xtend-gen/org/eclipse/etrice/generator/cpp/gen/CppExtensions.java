@@ -123,6 +123,10 @@ public class CppExtensions implements ILanguageExtension {
     return "";
   }
   
+  public String scopeSeparator() {
+    return "::";
+  }
+  
   public String operationScope(final String classname, final boolean isDeclaration) {
     String _xifexpression = null;
     if (isDeclaration) {

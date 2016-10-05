@@ -129,19 +129,21 @@ abstract class AbstractStateMachineGenerator {
 
     /**
      * generates transition chain ID constants.
-     * Inheritance (if available) is used for base class IDs.
+     * Inheritance can't be used used for base class IDs because of corner cases
+     * where base class and derived class chain IDs deviate (see bug 501354).
      *
      * @param xpmc the {@link ExpandedModelComponent}
      *
      * @return the generated code
      */
     def public genTransitionChainConstants(ExpandedModelComponent xpmc) {
-        xpmc.genTransitionChainConstants(langExt.usesInheritance)
+        xpmc.genTransitionChainConstants(false/*langExt.usesInheritance*/)
     }
 
     /**
      * generates transition chain ID constants.
-     * Inheritance (if available) is used for base class IDs.
+     * Inheritance can't be used used for base class IDs because of corner cases
+     * where base class and derived class chain IDs deviate.
      *
      * @param xpmc the {@link ExpandedModelComponent}
      * @param omitBase use <code>true</code> if no base class transition chain constants are needed
@@ -160,7 +162,7 @@ abstract class AbstractStateMachineGenerator {
             list.add(pair(chain.genChainId, offset.toString))
         }
 
-        return langExt.genEnumeration("chain_ids", list)
+        return langExt.genEnumeration("ChainIDs", list)
     }
 
     /**
@@ -231,6 +233,7 @@ abstract class AbstractStateMachineGenerator {
 		val eventDriven = mc.commType==ComponentCommunicationType::EVENT_DRIVEN
 		val ifItemPtr = interfaceItemType()+langExt.pointerLiteral()
 		val handleEvents = async || eventDriven
+		val chainIDScope = if (langExt.usesInheritance) mc.className+langExt.scopeSeparator else ""
 		val opScope = langExt.operationScope(mc.className, !generateImplementation)
 		val opScopePriv = if (langExt.usesInheritance)
 							opScope
@@ -299,7 +302,7 @@ abstract class AbstractStateMachineGenerator {
 				switch (chain__et) {
 					«var allchains = xpmc.getTransitionChains()»
 					«FOR tc : allchains»
-						case «tc.genChainId»:
+						case «chainIDScope»«tc.genChainId»:
 						{
 							«transitionChainGenerator.generateExecuteChain(xpmc, tc)»
 						}
@@ -349,7 +352,7 @@ abstract class AbstractStateMachineGenerator {
 									/* with init transition */
 									if («getHistory(state.getGenStateId())»==NO_STATE) {
 										«var sub_initt = state.subgraph.getInitTransition()»
-										state__et = executeTransitionChain(«langExt.selfPointer(true)»«xpmc.getChain(sub_initt).genChainId»«IF handleEvents», «langExt.nullPointer», «langExt.nullPointer»«ENDIF»);
+										state__et = executeTransitionChain(«langExt.selfPointer(true)»«chainIDScope»«xpmc.getChain(sub_initt).genChainId»«IF handleEvents», «langExt.nullPointer», «langExt.nullPointer»«ENDIF»);
 									}
 									else {
 										state__et = «getHistory(state.getGenStateId())»;
@@ -381,7 +384,7 @@ abstract class AbstractStateMachineGenerator {
 		«IF generateImplementation»
 			«publicIf»void «opScope»executeInitTransition(«selfOnly») {
 				«var initt = xpmc.stateMachine.getInitTransition()»
-				int chain__et = «xpmc.getChain(initt).genChainId»;
+				int chain__et = «chainIDScope»«xpmc.getChain(initt).genChainId»;
 				«stateType» next__et = «opScopePriv»executeTransitionChain(«langExt.selfPointer(true)»chain__et«IF handleEvents», «langExt.nullPointer», «langExt.nullPointer»«ENDIF»);
 				next__et = «opScopePriv»enterHistory(«langExt.selfPointer(true)»next__et«IF usesHdlr», «langExt.booleanConstant(false)»«ENDIF»);
 				setState(«langExt.selfPointer(true)»next__et);
@@ -513,6 +516,7 @@ abstract class AbstractStateMachineGenerator {
      * @return the generated code
      */
     def public genDataDrivenTriggers(ExpandedModelComponent xpmc, State state, boolean usesHdlr) {
+		val chainIDScope = if (langExt.usesInheritance) xpmc.className+langExt.scopeSeparator else ""
         '''
             «genDoCodes(state)»
             «var transitions = xpmc.getOutgoingTransitionsHierarchical(state).filter(t|t instanceof GuardedTransition)»
@@ -520,7 +524,7 @@ abstract class AbstractStateMachineGenerator {
                 if («guard((tr as GuardedTransition), "", xpmc)»)
                 {
                     «var chain = xpmc.getChain(tr)»
-                    chain__et = «chain.genChainId»;
+                    chain__et = «chainIDScope»«chain.genChainId»;
                     catching_state__et = «chain.stateContext.genStateId»;
                     «IF chain.isHandler() && usesHdlr»
                         is_handler__et = TRUE;
@@ -544,6 +548,7 @@ abstract class AbstractStateMachineGenerator {
      * @return the generated code
      */
     def public genEventDrivenTriggers(ExpandedModelComponent xpmc, State state, List<ActiveTrigger> atlist, boolean usesHdlr) {
+		val chainIDScope = if (langExt.usesInheritance) xpmc.className+langExt.scopeSeparator else ""
         '''
             «FOR at : atlist»
                 case «xpmc.getTriggerCodeName(at)»:
@@ -553,7 +558,7 @@ abstract class AbstractStateMachineGenerator {
                         «var chain = xpmc.getChain(tt)»
                         «guard(chain.getTransition as TriggeredTransition, at.trigger, xpmc)»
                         {
-                            chain__et = «chain.genChainId»;
+                            chain__et = «chainIDScope»«chain.genChainId»;
                             catching_state__et = «chain.stateContext.genStateId»;
                             «IF chain.isHandler() && usesHdlr»
                                 is_handler__et = «langExt.booleanConstant(true)»;
