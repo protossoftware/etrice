@@ -21,7 +21,6 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
-import java.util.function.Consumer;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.common.converter.TimeConverter;
@@ -48,6 +47,7 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @Singleton
@@ -104,8 +104,8 @@ public class VariableServiceGen {
       final String clsname = this.stdExt.getJavaClassName(nr, comp);
       final HashMap<ActorInstance, List<Attribute>> aisAttrMap = new HashMap<ActorInstance, List<Attribute>>();
       EList<ActorInstance> _allContainedInstances = comp.getAllContainedInstances();
-      final Consumer<ActorInstance> _function = new Consumer<ActorInstance>() {
-        public void accept(final ActorInstance ai) {
+      final Procedure1<ActorInstance> _function = new Procedure1<ActorInstance>() {
+        public void apply(final ActorInstance ai) {
           List<Attribute> _dynConfigReadAttributes = VariableServiceGen.this.configExt.getDynConfigReadAttributes(ai);
           boolean _isEmpty = _dynConfigReadAttributes.isEmpty();
           boolean _not = (!_isEmpty);
@@ -115,7 +115,7 @@ public class VariableServiceGen {
           }
         }
       };
-      _allContainedInstances.forEach(_function);
+      IterableExtensions.<ActorInstance>forEach(_allContainedInstances, _function);
       StringConcatenation _builder = new StringConcatenation();
       _builder.newLine();
       _builder.append("package ");
@@ -562,11 +562,11 @@ public class VariableServiceGen {
   
   private HashSet<DataClass> getDynConfigDataClasses(final Iterable<ActorInstance> ais) {
     final HashSet<DataClass> result = new HashSet<DataClass>();
-    final Consumer<ActorInstance> _function = new Consumer<ActorInstance>() {
-      public void accept(final ActorInstance ai) {
+    final Procedure1<ActorInstance> _function = new Procedure1<ActorInstance>() {
+      public void apply(final ActorInstance ai) {
         List<Attribute> _dynConfigReadAttributes = VariableServiceGen.this.configExt.getDynConfigReadAttributes(ai);
-        final Consumer<Attribute> _function = new Consumer<Attribute>() {
-          public void accept(final Attribute a) {
+        final Procedure1<Attribute> _function = new Procedure1<Attribute>() {
+          public void apply(final Attribute a) {
             RefableType _type = a.getType();
             DataType _type_1 = _type.getType();
             boolean _isDataClass = VariableServiceGen.this._typeHelpers.isDataClass(_type_1);
@@ -577,10 +577,10 @@ public class VariableServiceGen {
             }
           }
         };
-        _dynConfigReadAttributes.forEach(_function);
+        IterableExtensions.<Attribute>forEach(_dynConfigReadAttributes, _function);
       }
     };
-    ais.forEach(_function);
+    IterableExtensions.<ActorInstance>forEach(ais, _function);
     return result;
   }
   
@@ -593,8 +593,8 @@ public class VariableServiceGen {
       {
         DataClass dc = visit.pop();
         List<Attribute> _allAttributes = this._roomHelpers.getAllAttributes(dc);
-        final Consumer<Attribute> _function = new Consumer<Attribute>() {
-          public void accept(final Attribute a) {
+        final Procedure1<Attribute> _function = new Procedure1<Attribute>() {
+          public void apply(final Attribute a) {
             RefableType _type = a.getType();
             DataType _type_1 = _type.getType();
             boolean _isDataClass = VariableServiceGen.this._typeHelpers.isDataClass(_type_1);
@@ -605,7 +605,7 @@ public class VariableServiceGen {
             }
           }
         };
-        _allAttributes.forEach(_function);
+        IterableExtensions.<Attribute>forEach(_allAttributes, _function);
       }
     }
     return result;
@@ -613,14 +613,14 @@ public class VariableServiceGen {
   
   private HashSet<RoomModel> getRoomModels(final Collection<ActorInstance> ais) {
     final HashSet<RoomModel> models = new HashSet<RoomModel>();
-    final Consumer<ActorInstance> _function = new Consumer<ActorInstance>() {
-      public void accept(final ActorInstance ai) {
+    final Procedure1<ActorInstance> _function = new Procedure1<ActorInstance>() {
+      public void apply(final ActorInstance ai) {
         ActorClass _actorClass = ai.getActorClass();
         EObject _eContainer = _actorClass.eContainer();
         models.add(((RoomModel) _eContainer));
       }
     };
-    ais.forEach(_function);
+    IterableExtensions.<ActorInstance>forEach(ais, _function);
     return models;
   }
   

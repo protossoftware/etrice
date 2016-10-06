@@ -5,15 +5,15 @@
  *
  */
 
-#ifndef _COMMON_MODELBASE_RTSYSTEMSERVICESPROTOCOL_H_
-#define _COMMON_MODELBASE_RTSYSTEMSERVICESPROTOCOL_H_
+#ifndef _RTSYSTEMSERVICESPROTOCOL_H_
+#define _RTSYSTEMSERVICESPROTOCOL_H_
 
-#include "common/modelbase/InterfaceItemBase.h"
-#include "common/modelbase/PortBase.h"
-#include "common/modelbase/ReplicatedInterfaceItemBase.h"
-#include "common/modelbase/ReplicatedPortBase.h"
-#include "common/etDatatypesCpp.hpp"
-
+#include <common/modelbase/InterfaceItemBase.h>
+#include <common/modelbase/PortBase.h>
+#include <common/modelbase/ReplicatedInterfaceItemBase.h>
+#include <common/modelbase/ReplicatedPortBase.h>
+#include <etDatatypes.h>
+#include <string>
 
 
 
@@ -42,6 +42,7 @@ class RTSystemServicesProtocol {
 
 	private:
 		static const std::string s_messageStrings[];
+
 
 };
 
@@ -123,6 +124,4 @@ class RTSystemServicesProtocolConjReplPort : public etRuntime::ReplicatedPortBas
 		}
 
 };
-
-
-#endif /* _COMMON_MODELBASE_RTSYSTEMSERVICESPROTOCOL_H_ */
+#endif /* _RTSYSTEMSERVICESPROTOCOL_H_ */

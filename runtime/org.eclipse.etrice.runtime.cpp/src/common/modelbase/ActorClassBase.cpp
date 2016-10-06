@@ -33,17 +33,6 @@ ActorClassBase::~ActorClassBase() {
 	m_state = 0;
 }
 
-void ActorClassBase::initialize() {
-	// since we have no mapping for the system ports we connect them directly here
-	IReplicatedInterfaceItem* systemPort = getSystemPort();
-	if (systemPort != 0) {
-		InterfaceItemBase* peer = systemPort->createSubInterfaceItem();
-		m_RTSystemPort.connectWith(peer);
-	}
-}
-
-
-
 //SubSystemClassBase* ActorClassBase::getSubSystem() const {
 //	return 0; // TODO JH
 //}

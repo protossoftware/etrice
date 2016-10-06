@@ -4,7 +4,6 @@ import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.HashMap;
 import java.util.List;
-import java.util.function.Consumer;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.core.genmodel.etricegen.OpenBinding;
 import org.eclipse.etrice.core.genmodel.etricegen.OpenServiceConnection;
@@ -25,6 +24,7 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
 public class OptionalActorFactoryGen {
@@ -56,13 +56,13 @@ public class OptionalActorFactoryGen {
       }
     };
     Iterable<WiredStructureClass> _filter = IterableExtensions.<WiredStructureClass>filter(_wiredInstances, _function);
-    final Consumer<WiredStructureClass> _function_1 = new Consumer<WiredStructureClass>() {
-      public void accept(final WiredStructureClass w) {
+    final Procedure1<WiredStructureClass> _function_1 = new Procedure1<WiredStructureClass>() {
+      public void apply(final WiredStructureClass w) {
         ActorClass _actorClass = ((WiredActorClass) w).getActorClass();
         ac2wired.put(_actorClass, ((WiredActorClass) w));
       }
     };
-    _filter.forEach(_function_1);
+    IterableExtensions.<WiredStructureClass>forEach(_filter, _function_1);
     EList<OptionalActorInstance> _optionalInstances = root.getOptionalInstances();
     final Function1<OptionalActorInstance, Boolean> _function_2 = new Function1<OptionalActorInstance, Boolean>() {
       public Boolean apply(final OptionalActorInstance cl) {

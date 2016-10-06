@@ -4,7 +4,6 @@ import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
@@ -74,8 +73,8 @@ public class TestInstanceCreator {
       final ArrayList<RoomModel> roomModels = CollectionLiterals.<RoomModel>newArrayList();
       final ArrayList<PhysicalModel> physModels = CollectionLiterals.<PhysicalModel>newArrayList();
       EList<Resource> _resources = rs.getResources();
-      final Consumer<Resource> _function = new Consumer<Resource>() {
-        public void accept(final Resource it) {
+      final Procedure1<Resource> _function = new Procedure1<Resource>() {
+        public void apply(final Resource it) {
           EList<EObject> _contents = it.getContents();
           final Function1<EObject, Boolean> _function = new Function1<EObject, Boolean>() {
             public Boolean apply(final EObject it) {
@@ -99,7 +98,7 @@ public class TestInstanceCreator {
           IterableExtensions.<EObject>forall(_contents, _function);
         }
       };
-      _resources.forEach(_function);
+      IterableExtensions.<Resource>forEach(_resources, _function);
       ArrayList<SubSystemClass> _newArrayList = CollectionLiterals.<SubSystemClass>newArrayList();
       final Function2<ArrayList<SubSystemClass>, RoomModel, ArrayList<SubSystemClass>> _function_1 = new Function2<ArrayList<SubSystemClass>, RoomModel, ArrayList<SubSystemClass>>() {
         public ArrayList<SubSystemClass> apply(final ArrayList<SubSystemClass> list, final RoomModel model) {
@@ -124,8 +123,8 @@ public class TestInstanceCreator {
           }
         };
         final SubSystemClass derivedSubSystem = ObjectExtensions.<SubSystemClass>operator_doubleArrow(_createSubSystemClass, _function_2);
-        final Consumer<RoomModel> _function_3 = new Consumer<RoomModel>() {
-          public void accept(final RoomModel model) {
+        final Procedure1<RoomModel> _function_3 = new Procedure1<RoomModel>() {
+          public void apply(final RoomModel model) {
             EList<ActorRef> _actorRefs = derivedSubSystem.getActorRefs();
             EList<ActorClass> _actorClasses = model.getActorClasses();
             final Function1<ActorClass, Boolean> _function = new Function1<ActorClass, Boolean>() {
@@ -157,7 +156,7 @@ public class TestInstanceCreator {
             Iterables.<ActorRef>addAll(_actorRefs, _map);
           }
         };
-        roomModels.forEach(_function_3);
+        IterableExtensions.<RoomModel>forEach(roomModels, _function_3);
         EList<ActorRef> _actorRefs = derivedSubSystem.getActorRefs();
         boolean _isEmpty = _actorRefs.isEmpty();
         boolean _not = (!_isEmpty);
@@ -172,14 +171,14 @@ public class TestInstanceCreator {
       int _size = allAnnotatedClasses.size();
       boolean _greaterThan = (_size > 1);
       if (_greaterThan) {
-        final Consumer<StructureClass> _function_2 = new Consumer<StructureClass>() {
-          public void accept(final StructureClass roomCls) {
+        final Procedure1<StructureClass> _function_2 = new Procedure1<StructureClass>() {
+          public void apply(final StructureClass roomCls) {
             StringConcatenation _builder = new StringConcatenation();
             _builder.append("TestInstanceCreator: mapping failed, multiple test instances present");
             TestInstanceCreator.this.logger.logError(_builder.toString(), roomCls);
           }
         };
-        allAnnotatedClasses.forEach(_function_2);
+        IterableExtensions.<StructureClass>forEach(allAnnotatedClasses, _function_2);
         return false;
       }
       ArrayList<PhysicalSystem> _newArrayList_1 = CollectionLiterals.<PhysicalSystem>newArrayList();

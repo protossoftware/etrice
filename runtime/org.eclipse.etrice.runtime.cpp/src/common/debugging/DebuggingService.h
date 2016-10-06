@@ -16,7 +16,6 @@
 #include "common/debugging/MSCLogger.h"
 #include "common/messaging/Address.h"
 #include "etDatatypes.h"
-#include "common/modelbase/InterfaceItemBase.h"
 #include <string>
 #include <map>
 
@@ -42,8 +41,8 @@ public:
 	void addMessageActorCreate(const ActorClassBase& parent, const std::string& refName);
 	void addMessageActorDestroy(const ActorClassBase& inst);
 	void addVisibleComment(const std::string& comment);
-	void addPortInstance(const InterfaceItemBase& port);
-	void removePortInstance(const InterfaceItemBase& port);
+	void addPortInstance(const PortBase& port);
+	void removePortInstance(const PortBase& port);
 
 	MSCLogger& getSyncLogger() { return m_syncLogger; }
 	MSCLogger& getAsyncLogger() { return m_asyncLogger; }
@@ -52,9 +51,9 @@ private:
 
 	MSCLogger m_asyncLogger;
 	MSCLogger m_syncLogger;
-	std::map<Address, const InterfaceItemBase*> m_portInstances;
+	std::map<Address, const PortBase*> m_portInstances;
 
-	const InterfaceItemBase* getPort(const Address& address) const;
+	const PortBase* getPort(const Address& address) const;
 
 	DebuggingService();
 	DebuggingService(DebuggingService const&);

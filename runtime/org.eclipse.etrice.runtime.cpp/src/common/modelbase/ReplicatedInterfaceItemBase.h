@@ -28,7 +28,7 @@ class ReplicatedInterfaceItemBase: public RTObject,
 public:
 	static const char SEP = ':';
 
-	virtual ~ReplicatedInterfaceItemBase();
+	virtual ~ReplicatedInterfaceItemBase(){}
 
 	virtual InterfaceItemBase* createSubInterfaceItem();
 	virtual void removeItem(InterfaceItemBase& item);

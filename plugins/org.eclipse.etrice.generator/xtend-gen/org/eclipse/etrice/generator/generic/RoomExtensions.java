@@ -16,7 +16,6 @@ import com.google.inject.Singleton;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Consumer;
 import javax.inject.Inject;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
@@ -52,6 +51,7 @@ import org.eclipse.etrice.generator.fsm.generic.FSMExtensions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
  * collection of convenience functions for code generation
@@ -103,13 +103,13 @@ public class RoomExtensions extends FSMExtensions {
    */
   public List<Port> punion(final Iterable<Port> in1, final Iterable<ExternalPort> in2) {
     final ArrayList<Port> ret = new ArrayList<Port>();
-    final Consumer<ExternalPort> _function = new Consumer<ExternalPort>() {
-      public void accept(final ExternalPort e) {
+    final Procedure1<ExternalPort> _function = new Procedure1<ExternalPort>() {
+      public void apply(final ExternalPort e) {
         Port _interfacePort = e.getInterfacePort();
         ret.add(_interfacePort);
       }
     };
-    in2.forEach(_function);
+    IterableExtensions.<ExternalPort>forEach(in2, _function);
     Iterables.<Port>addAll(ret, in1);
     return ret;
   }

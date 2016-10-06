@@ -33,6 +33,12 @@ RTObject::RTObject(IRTObject* parent, const std::string& name) :
 	}
 }
 
+RTObject::~RTObject() {
+	for (std::vector<IRTObject*>::iterator it = m_children.begin(); it != m_children.end(); ++it) {
+		delete *it;
+	}
+}
+
 void RTObject::destroy() {
 	for (std::vector<IRTObject*>::iterator it = m_children.begin(); it != m_children.end(); ++it) {
 		RTObject* child = dynamic_cast<RTObject*>(*it);

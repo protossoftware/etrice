@@ -20,6 +20,13 @@ const std::string RTSystemProtocol::RT_SYSTEM_PORT_NAME = "RTSystemPort";
 
 RTSystemPort::RTSystemPort(IInterfaceItemOwner* actor, int localId) :
 		RTSystemServicesProtocolPort(actor, RTSystemProtocol::RT_SYSTEM_PORT_NAME, localId) {
+
+	// since we have no mapping for the system ports we connect them directly here
+	IReplicatedInterfaceItem* systemPort = actor->getSystemPort();
+	if (systemPort != 0) {
+		InterfaceItemBase* peer = systemPort->createSubInterfaceItem();
+		connectWith(peer);
+	}
 }
 
 RTSystemConjPort::RTSystemConjPort(IInterfaceItemOwner* actor, int localId) :

@@ -32,9 +32,7 @@ public:
 
 	virtual void init();
 	virtual void instantiateMessageServices() = 0;
-	virtual void mapThreads(void) = 0;
-	virtual void initialize(void) = 0;
-	virtual void setProbesActive(bool recursive, bool active) {}
+	virtual void instantiateActors() = 0;
 
 	void start();
 	void stop();

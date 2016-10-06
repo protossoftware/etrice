@@ -22,7 +22,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-import java.util.function.Consumer;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -73,6 +72,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @Singleton
 @SuppressWarnings("all")
@@ -117,13 +117,13 @@ public class NodeGen {
       }
     };
     Iterable<WiredStructureClass> _filter = IterableExtensions.<WiredStructureClass>filter(_wiredInstances, _function);
-    final Consumer<WiredStructureClass> _function_1 = new Consumer<WiredStructureClass>() {
-      public void accept(final WiredStructureClass w) {
+    final Procedure1<WiredStructureClass> _function_1 = new Procedure1<WiredStructureClass>() {
+      public void apply(final WiredStructureClass w) {
         SubSystemClass _subSystemClass = ((WiredSubSystemClass) w).getSubSystemClass();
         sscc2wired.put(_subSystemClass, ((WiredSubSystemClass) w));
       }
     };
-    _filter.forEach(_function_1);
+    IterableExtensions.<WiredStructureClass>forEach(_filter, _function_1);
     Collection<NodeRef> _nodeRefs = ETMapUtil.getNodeRefs();
     for (final NodeRef nr : _nodeRefs) {
       List<String> _subSystemInstancePaths = ETMapUtil.getSubSystemInstancePaths(nr);

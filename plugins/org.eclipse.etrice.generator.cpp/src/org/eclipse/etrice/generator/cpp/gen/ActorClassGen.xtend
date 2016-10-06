@@ -73,7 +73,6 @@ class ActorClassGen extends GenericActorClassGenerator {
 		#include "common/etDatatypesCpp.hpp"
 		#include "common/messaging/IRTObject.h"
 		#include "common/modelbase/PortBase.h"
-		#include "common/modelbase/ReplicatedActorClassBase.h"
 		#include "common/modelbase/InterfaceItemBase.h"
 		#include "common/modelbase/SubSystemClassBase.h"
 		#include "common/messaging/Address.h"
@@ -93,9 +92,6 @@ class ActorClassGen extends GenericActorClassGenerator {
 		«ELSE»
 			#include "«ac.actorBase.path»«ac.actorBase.name».h"
 		«ENDIF»
-		«FOR ar : ac.actorRefs»
-			#include "«ar.type.actorIncludePath»"
-		«ENDFOR»
 
 		«ac.userCode1.userCode»
 
@@ -110,15 +106,6 @@ class ActorClassGen extends GenericActorClassGenerator {
 				//--------------------- ports
 				«FOR ep : ac.getEndPorts»
 					«ep.getPortClassName» «ep.name»;
-				«ENDFOR»
-
-				//--------------------- sub actors
-				«FOR sub : ac.actorRefs»
-					«IF sub.multiplicity > 1»
-						Replicated«sub.type.implementationClassName» «sub.name»;
-					«ELSE»
-						«sub.type.implementationClassName» «sub.name»;
-					«ENDIF»
 				«ENDFOR»
 
 				//--------------------- saps
@@ -141,10 +128,6 @@ class ActorClassGen extends GenericActorClassGenerator {
 			public:
 				//--------------------- construction
 				«ac.name»(etRuntime::IRTObject* parent, const std::string& name);
-				void initialize(void);
-				«IF Main::settings.generateMSCInstrumentation»
-					void setProbesActive(bool recursive, bool active);
-				«ENDIF»
 
 «««	TODO: check whether attribute setters/getters are necessary at all, if yes own cpp implementation is needed for *,[],& variables
 «««				«attributeSettersGettersImplementation(ac.attributes, ac.name)»
@@ -179,17 +162,6 @@ class ActorClassGen extends GenericActorClassGenerator {
 
 		};
 
-		class Replicated«clsname» : public ReplicatedActorClassBase {
-		public:
-			Replicated«clsname»(IRTObject* parent, const std::string& name) :
-				ReplicatedActorClassBase(parent, name) {}
-			
-		protected:
-			ActorClassBase* createActor(IRTObject* parent, const std::string& name) {
-				return new «clsname»(parent, name);
-			}
-		};
-
 		«ac.generateNamespaceEnd»
 
 		«generateIncludeGuardEnd(ac, '')»
@@ -204,8 +176,6 @@ class ActorClassGen extends GenericActorClassGenerator {
 		initList += '''«ac.actorBase?.name ?: 'ActorClassBase'»(parent, name)'''
 	    // own ports
 	    initList += ac.endPorts.map['''«name»(this, "«name»", IFITEM_«name»)''']
-	    // own sub actors
-	    initList += ac.actorRefs.map['''«name»(this, "«name»")''']
 		// own saps
 		initList += ac.serviceAccessPoints.map['''«name»(this, "«name»", IFITEM_«name»)''']
 		// own service implementations
@@ -235,8 +205,10 @@ class ActorClassGen extends GenericActorClassGenerator {
 
 		#include "common/messaging/RTObject.h"
 		#include "common/messaging/RTServices.h"
-		#include "common/debugging/DebuggingService.h"
-		#include "common/debugging/MSCFunctionObject.h"
+
+		«FOR ar : ac.actorRefs»
+			#include "«ar.type.actorIncludePath»"
+		«ENDFOR»
 
 		using namespace etRuntime;
 
@@ -245,10 +217,6 @@ class ActorClassGen extends GenericActorClassGenerator {
 		«clsname»::«clsname»(etRuntime::IRTObject* parent, const std::string& name)
 				«ac.generateConstructorInitalizerList»
 		{
-			«IF Main::settings.generateMSCInstrumentation»
-				MSCFunctionObject mscFunctionObject(getInstancePathName(), "Constructor");
-			«ENDIF»
-			
 			«IF ac.hasNonEmptyStateMachine»
 				for (int i = 0; i < s_numberOfStates; i++) {
 					history[i] = NO_STATE;
@@ -259,34 +227,20 @@ class ActorClassGen extends GenericActorClassGenerator {
 			// sub actors
 			«FOR sub : ac.actorRefs»
 				«IF sub.multiplicity>1»
-					«sub.name».createSubActors(«sub.multiplicity»);
+					for (int i=0; i<«sub.multiplicity»; ++i) {
+						«IF Main::settings.generateMSCInstrumentation»
+							DebuggingService::getInstance().addMessageActorCreate(*this, "«sub.name»«GenmodelConstants::INDEX_SEP»"+i);
+						«ENDIF»
+						new «sub.type.implementationClassName»(this, "«sub.name»«GenmodelConstants::INDEX_SEP»"+i);
+					}
+				«ELSE»
+					«IF Main::settings.generateMSCInstrumentation»
+						DebuggingService::getInstance().addMessageActorCreate(*this, "«sub.name»");
+					«ENDIF»
+					new «sub.type.implementationClassName»(this, "«sub.name»");
 				«ENDIF»
 			«ENDFOR»
 
-			«initHelper.genExtraInitializers(ac.attributes)»
-			«ac.userStructorBody(true)»
-		}
-		
-		void «ac.name»::initialize() {
-			«IF Main::settings.generateMSCInstrumentation»
-				MSCFunctionObject mscFunctionObject(getInstancePathName(), "initialize()");
-				«FOR sub : ac.actorRefs»
-					«IF sub.multiplicity > 1»
-						for (int i=0; i<«sub.multiplicity»; ++i) {
-							DebuggingService::getInstance().addMessageActorCreate(*this, «sub.name».getSubActor(i)->getName());
-						}
-					«ELSE»
-						DebuggingService::getInstance().addMessageActorCreate(*this, "«sub.name»");
-					«ENDIF»
-				«ENDFOR»
-			«ENDIF»
-			
-			ActorClassBase::initialize();
-			
-			«FOR sub : ac.actorRefs»
-				«sub.name».initialize();
-			«ENDFOR»
-			
 			// wiring
 			«FOR wire: wired.wires»
 				«if (wire.dataDriven) "DataPortBase" else "InterfaceItemBase"»::connect(this, "«wire.path1.join('/')»", "«wire.path2.join('/')»");
@@ -296,41 +250,12 @@ class ActorClassGen extends GenericActorClassGenerator {
 				// activate polling for data-driven communication
 				RTServices::getInstance().getMsgSvcCtrl().getMsgSvc(getThread())->addPollingMessageReceiver(*this);
 			«ENDIF»
+
+			«initHelper.genExtraInitializers(ac.attributes)»
+			«ac.userStructorBody(true)»
 		}
-		
-		«IF Main::settings.generateMSCInstrumentation»
-			void «ac.name»::setProbesActive(bool recursive, bool active) {
-				DebuggingService::getInstance().addPortInstance(m_RTSystemPort);
-				«IF ac.actorRefs.size > 0»
-					if(recursive) {
-						«FOR sub : ac.actorRefs»
-							«sub.name».setProbesActive(recursive, active);
-						«ENDFOR»
-					}
-				«ENDIF»
-				«FOR ep : ac.endPorts»
-					«IF ep.replicated»
-						for(int i = 0; i < «ep.name».getNInterfaceItems(); i++)
-							DebuggingService::getInstance().addPortInstance(*(«ep.name».getInterfaceItem(i)));
-					«ELSE»
-						DebuggingService::getInstance().addPortInstance(«ep.name»);
-					«ENDIF»
-				«ENDFOR»
-				«FOR sap : ac.serviceAccessPoints»
-					DebuggingService::getInstance().addPortInstance(«sap.name»);
-				«ENDFOR»
-				«FOR spp : ac.serviceProvisionPoints»
-					for(int i = 0; i < «spp.name».getNInterfaceItems(); i++)
-							DebuggingService::getInstance().addPortInstance(*(«spp.name».getInterfaceItem(i)));
-				«ENDFOR»
-			}
-		«ENDIF»
 
 		void «ac.name»::destroy(){
-			«IF Main::settings.generateMSCInstrumentation»
-				MSCFunctionObject mscFunctionObject(getInstancePathName(), "destroy()");
-			«ENDIF»
-			
 			«ac.userStructorBody(false)»
 			«IF Main::settings.generateMSCInstrumentation»
 				DebuggingService::getInstance().addMessageActorDestroy(*this);

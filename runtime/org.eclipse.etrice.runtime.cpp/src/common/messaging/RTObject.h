@@ -23,7 +23,7 @@ class RTObject: public virtual IRTObject {
 public:
 	RTObject(IRTObject* parent, const std::string& name);
 
-	virtual ~RTObject() {}
+	virtual ~RTObject();
 
 	virtual const std::string& getName() const {
 		return m_name;

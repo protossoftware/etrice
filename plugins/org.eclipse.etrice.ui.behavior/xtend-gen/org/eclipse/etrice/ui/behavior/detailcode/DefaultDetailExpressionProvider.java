@@ -13,7 +13,6 @@ package org.eclipse.etrice.ui.behavior.detailcode;
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.util.List;
-import java.util.function.Consumer;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.CommunicationType;
@@ -33,7 +32,9 @@ import org.eclipse.etrice.ui.behavior.fsm.detailcode.IDetailExpressionProvider;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
  * Defines expression for fsm detail code of an ActorClass
@@ -49,8 +50,8 @@ public class DefaultDetailExpressionProvider extends GuardDetailExpressionProvid
       scope.add(_createExprFeature);
     }
     List<InterfaceItem> _allInterfaceItems = this.roomHelpers.getAllInterfaceItems(this.actorClass);
-    final Consumer<InterfaceItem> _function = new Consumer<InterfaceItem>() {
-      public void accept(final InterfaceItem it) {
+    final Procedure1<InterfaceItem> _function = new Procedure1<InterfaceItem>() {
+      public void apply(final InterfaceItem it) {
         boolean _matched = false;
         if (!_matched) {
           if (it instanceof SPP) {
@@ -104,7 +105,7 @@ public class DefaultDetailExpressionProvider extends GuardDetailExpressionProvid
         }
       }
     };
-    _allInterfaceItems.forEach(_function);
+    IterableExtensions.<InterfaceItem>forEach(_allInterfaceItems, _function);
     List<StandardOperation> _latestOperations = this.roomHelpers.getLatestOperations(this.actorClass);
     final Function1<StandardOperation, IDetailExpressionProvider.ExpressionFeature> _function_1 = new Function1<StandardOperation, IDetailExpressionProvider.ExpressionFeature>() {
       public IDetailExpressionProvider.ExpressionFeature apply(final StandardOperation it) {
