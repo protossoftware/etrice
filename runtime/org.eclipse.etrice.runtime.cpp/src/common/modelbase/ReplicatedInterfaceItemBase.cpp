@@ -13,6 +13,7 @@
 #include "common/messaging/RTObject.h"
 #include "common/modelbase/IEventReceiver.h"
 #include "common/modelbase/ReplicatedInterfaceItemBase.h"
+#include "common/debugging/MSCFunctionObject.h"
 #include <iterator>
 #include <queue>
 #include <string>
@@ -25,7 +26,12 @@ ReplicatedInterfaceItemBase::ReplicatedInterfaceItemBase(IInterfaceItemOwner* ow
 		m_localId(localId),
 		m_items(),
 		m_releasedIndices() {
+}
 
+ReplicatedInterfaceItemBase::~ReplicatedInterfaceItemBase() {
+	for(std::vector<InterfaceItemBase*>::iterator it = m_items.begin(); it != m_items.end(); ++it) {
+		delete *it;
+	}
 }
 
 InterfaceItemBase* ReplicatedInterfaceItemBase::createSubInterfaceItem() {

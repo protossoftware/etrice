@@ -7,14 +7,13 @@
 
 #include "RTSystemServicesProtocol.h"
 
-#include <common/debugging/DebuggingService.h>
-#include <common/messaging/AbstractMessageReceiver.h>
-#include <common/messaging/Address.h>
-#include <common/messaging/Message.h>
-#include <common/modelbase/IEventReceiver.h>
-#include <iostream>
+#include "common/debugging/DebuggingService.h"
+#include "common/debugging/MSCFunctionObject.h"
+#include "common/messaging/AbstractMessageReceiver.h"
+#include "common/messaging/Address.h"
+#include "common/messaging/Message.h"
+#include "common/modelbase/IEventReceiver.h"
 #include <iterator>
-#include <string>
 #include <vector>
 
 using namespace etRuntime;
@@ -38,16 +37,14 @@ const std::string& RTSystemServicesProtocol::getMessageString(int msg_id) {
 // port class
 //------------------------------------------------------------------------------------------------------------
 
-RTSystemServicesProtocolPort::RTSystemServicesProtocolPort(IInterfaceItemOwner* actor, const std::string& name, int localId) :
-		PortBase(actor, name, localId, 0)
+RTSystemServicesProtocolPort::RTSystemServicesProtocolPort(IInterfaceItemOwner* actor, const std::string& name, int localId)
+	: PortBase(actor, name, localId, 0)
 {
-	DebuggingService::getInstance().addPortInstance(*this);
 }
 
-RTSystemServicesProtocolPort::RTSystemServicesProtocolPort(IInterfaceItemOwner* actor, const std::string& name, int localId, int idx) :
-		PortBase(actor, name, localId, idx)
+RTSystemServicesProtocolPort::RTSystemServicesProtocolPort(IInterfaceItemOwner* actor, const std::string& name, int localId, int idx)
+	: PortBase(actor, name, localId, idx)
 {
-	DebuggingService::getInstance().addPortInstance(*this);
 }
 
 void RTSystemServicesProtocolPort::destroy() {
@@ -82,16 +79,14 @@ RTSystemServicesProtocolReplPort::RTSystemServicesProtocolReplPort(IInterfaceIte
 // conjugated port class
 //------------------------------------------------------------------------------------------------------------
 
-RTSystemServicesProtocolConjPort::RTSystemServicesProtocolConjPort(IInterfaceItemOwner* actor, const std::string& name, int localId) :
-		PortBase(actor, name, localId, 0)
+RTSystemServicesProtocolConjPort::RTSystemServicesProtocolConjPort(IInterfaceItemOwner* actor, const std::string& name, int localId)
+	: PortBase(actor, name, localId, 0)
 {
-	DebuggingService::getInstance().addPortInstance(*this);
 }
 
-RTSystemServicesProtocolConjPort::RTSystemServicesProtocolConjPort(IInterfaceItemOwner* actor, const std::string& name, int localId, int idx) :
-		PortBase(actor, name, localId, idx)
+RTSystemServicesProtocolConjPort::RTSystemServicesProtocolConjPort(IInterfaceItemOwner* actor, const std::string& name, int localId, int idx)
+	: PortBase(actor, name, localId, idx)
 {
-	DebuggingService::getInstance().addPortInstance(*this);
 }
 
 void RTSystemServicesProtocolConjPort::destroy() {
@@ -158,4 +153,5 @@ void RTSystemServicesProtocolConjReplPort::stopDebugging(){
 		(dynamic_cast<RTSystemServicesProtocolConjPort*>(*it))->stopDebugging();
 	}
 }
+
 

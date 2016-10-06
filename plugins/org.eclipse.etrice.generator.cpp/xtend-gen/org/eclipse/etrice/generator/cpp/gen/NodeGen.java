@@ -14,10 +14,12 @@ import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Consumer;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.core.common.converter.TimeConverter;
 import org.eclipse.etrice.core.etmap.util.ETMapUtil;
@@ -26,7 +28,6 @@ import org.eclipse.etrice.core.etphys.eTPhys.NodeClass;
 import org.eclipse.etrice.core.etphys.eTPhys.NodeRef;
 import org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread;
 import org.eclipse.etrice.core.fsm.fSM.DetailCode;
-import org.eclipse.etrice.core.genmodel.builder.GenmodelConstants;
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.core.genmodel.etricegen.StructureInstance;
@@ -42,6 +43,7 @@ import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.generator.base.GlobalGeneratorSettings;
 import org.eclipse.etrice.generator.cpp.Main;
 import org.eclipse.etrice.generator.cpp.gen.CppExtensions;
+import org.eclipse.etrice.generator.cpp.gen.Initialization;
 import org.eclipse.etrice.generator.fsm.base.FileSystemHelpers;
 import org.eclipse.etrice.generator.fsm.base.IGeneratorFileIo;
 import org.eclipse.etrice.generator.fsm.base.Indexed;
@@ -52,7 +54,7 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
 
 @Singleton
 @SuppressWarnings("all")
@@ -79,17 +81,20 @@ public class NodeGen {
   @Inject
   private IDiagnostician diagnostician;
   
+  @Inject
+  private Initialization initHelper;
+  
   public void doGenerate(final Root root) {
     final Map<SubSystemClass, WiredSubSystemClass> sscc2wired = CollectionLiterals.<SubSystemClass, WiredSubSystemClass>newHashMap();
     EList<WiredStructureClass> _wiredInstances = root.getWiredInstances();
     Iterable<WiredSubSystemClass> _filter = Iterables.<WiredSubSystemClass>filter(_wiredInstances, WiredSubSystemClass.class);
-    final Procedure1<WiredSubSystemClass> _function = new Procedure1<WiredSubSystemClass>() {
-      public void apply(final WiredSubSystemClass it) {
+    final Consumer<WiredSubSystemClass> _function = new Consumer<WiredSubSystemClass>() {
+      public void accept(final WiredSubSystemClass it) {
         SubSystemClass _subSystemClass = it.getSubSystemClass();
         sscc2wired.put(_subSystemClass, it);
       }
     };
-    IterableExtensions.<WiredSubSystemClass>forEach(_filter, _function);
+    _filter.forEach(_function);
     Collection<NodeRef> _nodeRefs = ETMapUtil.getNodeRefs();
     for (final NodeRef nr : _nodeRefs) {
       List<String> _subSystemInstancePaths = ETMapUtil.getSubSystemInstancePaths(nr);
@@ -173,6 +178,17 @@ public class NodeGen {
       _builder.newLine();
       _builder.append("#include \"common/modelbase/SubSystemClassBase.h\"");
       _builder.newLine();
+      {
+        EList<ActorInstance> _actorInstances = comp.getActorInstances();
+        for(final ActorInstance ai : _actorInstances) {
+          _builder.append("#include \"");
+          ActorClass _actorClass = ai.getActorClass();
+          String _actorIncludePath = this._cppExtensions.getActorIncludePath(_actorClass);
+          _builder.append(_actorIncludePath, "");
+          _builder.append("\"");
+          _builder.newLineIfNotEmpty();
+        }
+      }
       _builder.newLine();
       DetailCode _userCode1 = cc.getUserCode1();
       CharSequence _userCode = this._procedureHelpers.userCode(_userCode1);
@@ -212,8 +228,48 @@ public class NodeGen {
       }
       _builder.newLine();
       _builder.append("\t\t");
+      _builder.append("// sub actors");
+      _builder.newLine();
+      {
+        EList<ActorRef> _actorRefs = cc.getActorRefs();
+        for(final ActorRef sub : _actorRefs) {
+          {
+            int _multiplicity = sub.getMultiplicity();
+            boolean _greaterThan = (_multiplicity > 1);
+            if (_greaterThan) {
+              _builder.append("\t\t");
+              _builder.append("Replicated");
+              ActorClass _type_1 = sub.getType();
+              String _implementationClassName = this._cppExtensions.getImplementationClassName(_type_1);
+              _builder.append(_implementationClassName, "\t\t");
+              _builder.append(" ");
+              String _name = sub.getName();
+              _builder.append(_name, "\t\t");
+              _builder.append(";");
+              _builder.newLineIfNotEmpty();
+            } else {
+              _builder.append("\t\t");
+              ActorClass _type_2 = sub.getType();
+              String _implementationClassName_1 = this._cppExtensions.getImplementationClassName(_type_2);
+              _builder.append(_implementationClassName_1, "\t\t");
+              _builder.append(" ");
+              String _name_1 = sub.getName();
+              _builder.append(_name_1, "\t\t");
+              _builder.append(";");
+              _builder.newLineIfNotEmpty();
+            }
+          }
+        }
+      }
+      _builder.newLine();
+      _builder.append("\t\t");
       _builder.append(clsname, "\t\t");
       _builder.append("(IRTObject* parent, const std::string& name);");
+      _builder.newLineIfNotEmpty();
+      _builder.append("\t\t");
+      _builder.append("~");
+      _builder.append(clsname, "\t\t");
+      _builder.append("();");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
       _builder.append("\t\t");
@@ -223,17 +279,29 @@ public class NodeGen {
       _builder.append("virtual void instantiateMessageServices();");
       _builder.newLine();
       _builder.append("\t\t");
-      _builder.append("virtual void instantiateActors();");
+      _builder.append("virtual void mapThreads(void);");
       _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("virtual void initialize(void);");
+      _builder.newLine();
+      {
+        GlobalGeneratorSettings _settings = Main.getSettings();
+        boolean _isGenerateMSCInstrumentation = _settings.isGenerateMSCInstrumentation();
+        if (_isGenerateMSCInstrumentation) {
+          _builder.append("\t\t");
+          _builder.append("virtual void setProbesActive(bool recursive, bool active);");
+          _builder.newLine();
+        }
+      }
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append("virtual void init();");
       _builder.newLine();
       _builder.newLine();
       {
-        GlobalGeneratorSettings _settings = Main.getSettings();
-        boolean _isGenerateMSCInstrumentation = _settings.isGenerateMSCInstrumentation();
-        if (_isGenerateMSCInstrumentation) {
+        GlobalGeneratorSettings _settings_1 = Main.getSettings();
+        boolean _isGenerateMSCInstrumentation_1 = _settings_1.isGenerateMSCInstrumentation();
+        if (_isGenerateMSCInstrumentation_1) {
           _builder.append("\t\t");
           _builder.append("etBool hasGeneratedMSCInstrumentation() const { return true; }");
           _builder.newLine();
@@ -284,6 +352,35 @@ public class NodeGen {
     return ("THREAD_" + _upperCase);
   }
   
+  private CharSequence generateConstructorInitalizerList(final SubSystemClass cc) {
+    CharSequence _xblockexpression = null;
+    {
+      @Extension
+      final Initialization initHelper = this.initHelper;
+      ArrayList<CharSequence> initList = CollectionLiterals.<CharSequence>newArrayList();
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("SubSystemClassBase(parent, name)");
+      initList.add(_builder.toString());
+      EList<ActorRef> _actorRefs = cc.getActorRefs();
+      final Function1<ActorRef, String> _function = new Function1<ActorRef, String>() {
+        public String apply(final ActorRef it) {
+          StringConcatenation _builder = new StringConcatenation();
+          String _name = it.getName();
+          _builder.append(_name, "");
+          _builder.append("(this, \"");
+          String _name_1 = it.getName();
+          _builder.append(_name_1, "");
+          _builder.append("\")");
+          return _builder.toString();
+        }
+      };
+      List<String> _map = ListExtensions.<ActorRef, String>map(_actorRefs, _function);
+      Iterables.<CharSequence>addAll(initList, _map);
+      _xblockexpression = initHelper.generateCtorInitializerList(initList);
+    }
+    return _xblockexpression;
+  }
+  
   public CharSequence generateSourceFile(final Root root, final SubSystemInstance comp, final WiredSubSystemClass wired, final Collection<PhysicalThread> usedThreads) {
     CharSequence _xblockexpression = null;
     {
@@ -327,6 +424,8 @@ public class NodeGen {
       _builder.newLine();
       _builder.append("#include \"common/debugging/DebuggingService.h\"");
       _builder.newLine();
+      _builder.append("#include \"common/debugging/MSCFunctionObject.h\"");
+      _builder.newLine();
       _builder.append("#include \"common/messaging/IMessageService.h\"");
       _builder.newLine();
       _builder.append("#include \"common/messaging/MessageService.h\"");
@@ -337,18 +436,6 @@ public class NodeGen {
       _builder.newLine();
       _builder.append("#include \"common/modelbase/InterfaceItemBase.h\"");
       _builder.newLine();
-      _builder.newLine();
-      {
-        EList<ActorInstance> _actorInstances = comp.getActorInstances();
-        for(final ActorInstance ai : _actorInstances) {
-          _builder.append("#include \"");
-          ActorClass _actorClass = ai.getActorClass();
-          String _actorIncludePath = this._cppExtensions.getActorIncludePath(_actorClass);
-          _builder.append(_actorIncludePath, "");
-          _builder.append("\"");
-          _builder.newLineIfNotEmpty();
-        }
-      }
       _builder.newLine();
       _builder.append("using namespace etRuntime;");
       _builder.newLine();
@@ -377,13 +464,59 @@ public class NodeGen {
       _builder.append(clsname, "");
       _builder.append("::");
       _builder.append(clsname, "");
-      _builder.append("(IRTObject* parent, const std::string& name) :");
+      _builder.append("(IRTObject* parent, const std::string& name)");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
-      _builder.append("SubSystemClassBase(parent, name)");
-      _builder.newLine();
+      CharSequence _generateConstructorInitalizerList = this.generateConstructorInitalizerList(cc);
+      _builder.append(_generateConstructorInitalizerList, "\t\t");
+      _builder.newLineIfNotEmpty();
       _builder.append("{");
       _builder.newLine();
+      {
+        GlobalGeneratorSettings _settings = Main.getSettings();
+        boolean _isGenerateMSCInstrumentation = _settings.isGenerateMSCInstrumentation();
+        if (_isGenerateMSCInstrumentation) {
+          _builder.append("\t");
+          _builder.append("MSCFunctionObject mscFunctionObject(getInstancePathName(), \"Constructor\");");
+          _builder.newLine();
+        }
+      }
+      {
+        EList<ActorRef> _actorRefs = cc.getActorRefs();
+        for(final ActorRef sub : _actorRefs) {
+          {
+            int _multiplicity = sub.getMultiplicity();
+            boolean _greaterThan = (_multiplicity > 1);
+            if (_greaterThan) {
+              _builder.append("\t");
+              String _name = sub.getName();
+              _builder.append(_name, "\t");
+              _builder.append(".createSubActors(");
+              int _multiplicity_1 = sub.getMultiplicity();
+              _builder.append(_multiplicity_1, "\t");
+              _builder.append(");");
+              _builder.newLineIfNotEmpty();
+            }
+          }
+        }
+      }
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append(clsname, "");
+      _builder.append("::~");
+      _builder.append(clsname, "");
+      _builder.append("() {");
+      _builder.newLineIfNotEmpty();
+      {
+        GlobalGeneratorSettings _settings_1 = Main.getSettings();
+        boolean _isGenerateMSCInstrumentation_1 = _settings_1.isGenerateMSCInstrumentation();
+        if (_isGenerateMSCInstrumentation_1) {
+          _builder.append("\t");
+          _builder.append("MSCFunctionObject mscFunctionObject(getInstancePathName(), \"Destructor\");");
+          _builder.newLine();
+        }
+      }
       _builder.append("}");
       _builder.newLine();
       _builder.newLine();
@@ -398,6 +531,16 @@ public class NodeGen {
       _builder.append(clsname, "");
       _builder.append("::instantiateMessageServices(){");
       _builder.newLineIfNotEmpty();
+      _builder.newLine();
+      {
+        GlobalGeneratorSettings _settings_2 = Main.getSettings();
+        boolean _isGenerateMSCInstrumentation_2 = _settings_2.isGenerateMSCInstrumentation();
+        if (_isGenerateMSCInstrumentation_2) {
+          _builder.append("\t");
+          _builder.append("MSCFunctionObject mscFunctionObject(getInstancePathName(), \"instantiateMessageServices()\");");
+          _builder.newLine();
+        }
+      }
       _builder.newLine();
       _builder.append("\t");
       _builder.append("IMessageService* msgService;");
@@ -444,14 +587,14 @@ public class NodeGen {
               _builder.append("\t");
               _builder.append("msgService = new MessageService(this, IMessageService::");
               ExecMode _execmode_2 = thread_1.getExecmode();
-              String _name = _execmode_2.getName();
-              _builder.append(_name, "\t\t");
+              String _name_1 = _execmode_2.getName();
+              _builder.append(_name_1, "\t\t");
               _builder.append(", interval, 0, ");
               String _threadId_1 = this.getThreadId(thread_1);
               _builder.append(_threadId_1, "\t\t");
               _builder.append(", \"MessageService_");
-              String _name_1 = thread_1.getName();
-              _builder.append(_name_1, "\t\t");
+              String _name_2 = thread_1.getName();
+              _builder.append(_name_2, "\t\t");
               _builder.append("\", ");
               long _prio = thread_1.getPrio();
               _builder.append(_prio, "\t\t");
@@ -462,14 +605,14 @@ public class NodeGen {
               _builder.append("\t");
               _builder.append("msgService = new MessageService(this, IMessageService::");
               ExecMode _execmode_3 = thread_1.getExecmode();
-              String _name_2 = _execmode_3.getName();
-              _builder.append(_name_2, "\t\t");
+              String _name_3 = _execmode_3.getName();
+              _builder.append(_name_3, "\t\t");
               _builder.append(", 0, ");
               String _threadId_2 = this.getThreadId(thread_1);
               _builder.append(_threadId_2, "\t\t");
               _builder.append(", \"MessageService_");
-              String _name_3 = thread_1.getName();
-              _builder.append(_name_3, "\t\t");
+              String _name_4 = thread_1.getName();
+              _builder.append(_name_4, "\t\t");
               _builder.append("\", ");
               long _prio_1 = thread_1.getPrio();
               _builder.append(_prio_1, "\t\t");
@@ -491,17 +634,16 @@ public class NodeGen {
       _builder.newLine();
       _builder.append("void ");
       _builder.append(clsname, "");
-      _builder.append("::instantiateActors(){");
+      _builder.append("::mapThreads() {");
       _builder.newLineIfNotEmpty();
-      _builder.newLine();
       _builder.append("\t");
       _builder.append("// thread mappings");
       _builder.newLine();
       {
         EList<ActorInstance> _allContainedInstances = comp.getAllContainedInstances();
-        for(final ActorInstance ai_1 : _allContainedInstances) {
+        for(final ActorInstance ai : _allContainedInstances) {
           _builder.append("\t");
-          final ETMapUtil.MappedThread mapped = ETMapUtil.getMappedThread(ai_1);
+          final ETMapUtil.MappedThread mapped = ETMapUtil.getMappedThread(ai);
           _builder.newLineIfNotEmpty();
           {
             boolean _or_1 = false;
@@ -516,7 +658,7 @@ public class NodeGen {
             if (_not) {
               _builder.append("\t");
               _builder.append("addPathToThread(\"");
-              String _path = ai_1.getPath();
+              String _path = ai.getPath();
               _builder.append(_path, "\t");
               _builder.append("\", ");
               PhysicalThread _thread = mapped.getThread();
@@ -528,79 +670,60 @@ public class NodeGen {
           }
         }
       }
+      _builder.append("}");
       _builder.newLine();
-      _builder.append("\t");
-      _builder.append("// sub actors");
       _builder.newLine();
+      _builder.append("void ");
+      _builder.append(clsname, "");
+      _builder.append("::initialize() {");
+      _builder.newLineIfNotEmpty();
       {
-        EList<ActorRef> _actorRefs = cc.getActorRefs();
-        for(final ActorRef sub : _actorRefs) {
+        GlobalGeneratorSettings _settings_3 = Main.getSettings();
+        boolean _isGenerateMSCInstrumentation_3 = _settings_3.isGenerateMSCInstrumentation();
+        if (_isGenerateMSCInstrumentation_3) {
+          _builder.append("\t");
+          _builder.append("DebuggingService::getInstance().getSyncLogger().addVisibleComment(\"starting initialization\");");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("MSCFunctionObject mscFunctionObject(getInstancePathName(), \"initialize()\");");
+          _builder.newLine();
           {
-            int _multiplicity = sub.getMultiplicity();
-            boolean _greaterThan = (_multiplicity > 1);
-            if (_greaterThan) {
-              _builder.append("\t");
-              _builder.append("for (int i=0; i<");
-              int _multiplicity_1 = sub.getMultiplicity();
-              _builder.append(_multiplicity_1, "\t");
-              _builder.append("; ++i) {");
-              _builder.newLineIfNotEmpty();
+            EList<ActorRef> _actorRefs_1 = cc.getActorRefs();
+            for(final ActorRef sub_1 : _actorRefs_1) {
               {
-                GlobalGeneratorSettings _settings = Main.getSettings();
-                boolean _isGenerateMSCInstrumentation = _settings.isGenerateMSCInstrumentation();
-                if (_isGenerateMSCInstrumentation) {
+                int _multiplicity_2 = sub_1.getMultiplicity();
+                boolean _greaterThan_1 = (_multiplicity_2 > 1);
+                if (_greaterThan_1) {
                   _builder.append("\t");
-                  _builder.append("\t");
-                  _builder.append("DebuggingService::getInstance().addMessageActorCreate(*this, \"");
-                  String _name_4 = sub.getName();
-                  _builder.append(_name_4, "\t\t");
-                  _builder.append(GenmodelConstants.INDEX_SEP, "\t\t");
-                  _builder.append("\"+i);");
+                  _builder.append("for (int i=0; i<");
+                  int _multiplicity_3 = sub_1.getMultiplicity();
+                  _builder.append(_multiplicity_3, "\t");
+                  _builder.append("; ++i) {");
                   _builder.newLineIfNotEmpty();
-                }
-              }
-              _builder.append("\t");
-              _builder.append("\t");
-              _builder.append("new ");
-              ActorClass _type_1 = sub.getType();
-              String _implementationClassName = this._cppExtensions.getImplementationClassName(_type_1);
-              _builder.append(_implementationClassName, "\t\t");
-              _builder.append("(this, \"");
-              String _name_5 = sub.getName();
-              _builder.append(_name_5, "\t\t");
-              _builder.append(GenmodelConstants.INDEX_SEP, "\t\t");
-              _builder.append("\"+i);");
-              _builder.newLineIfNotEmpty();
-              _builder.append("\t");
-              _builder.append("}");
-              _builder.newLine();
-            } else {
-              {
-                GlobalGeneratorSettings _settings_1 = Main.getSettings();
-                boolean _isGenerateMSCInstrumentation_1 = _settings_1.isGenerateMSCInstrumentation();
-                if (_isGenerateMSCInstrumentation_1) {
+                  _builder.append("\t");
+                  _builder.append("\t");
+                  _builder.append("DebuggingService::getInstance().addMessageActorCreate(*this, ");
+                  String _name_5 = sub_1.getName();
+                  _builder.append(_name_5, "\t\t");
+                  _builder.append(".getSubActor(i)->getName());");
+                  _builder.newLineIfNotEmpty();
+                  _builder.append("\t");
+                  _builder.append("}");
+                  _builder.newLine();
+                } else {
                   _builder.append("\t");
                   _builder.append("DebuggingService::getInstance().addMessageActorCreate(*this, \"");
-                  String _name_6 = sub.getName();
+                  String _name_6 = sub_1.getName();
                   _builder.append(_name_6, "\t");
                   _builder.append("\");");
                   _builder.newLineIfNotEmpty();
                 }
               }
-              _builder.append("\t");
-              _builder.append("new ");
-              ActorClass _type_2 = sub.getType();
-              String _implementationClassName_1 = this._cppExtensions.getImplementationClassName(_type_2);
-              _builder.append(_implementationClassName_1, "\t");
-              _builder.append("(this, \"");
-              String _name_7 = sub.getName();
-              _builder.append(_name_7, "\t");
-              _builder.append("\");");
-              _builder.newLineIfNotEmpty();
             }
           }
         }
       }
+      _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("// wiring");
@@ -629,29 +752,70 @@ public class NodeGen {
           _builder.newLineIfNotEmpty();
         }
       }
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("// call initialize of sub actors");
+      _builder.newLine();
+      {
+        EList<ActorRef> _actorRefs_2 = cc.getActorRefs();
+        for(final ActorRef sub_2 : _actorRefs_2) {
+          _builder.append("\t");
+          String _name_7 = sub_2.getName();
+          _builder.append(_name_7, "\t");
+          _builder.append(".initialize();");
+          _builder.newLineIfNotEmpty();
+        }
+      }
       _builder.append("}");
       _builder.newLine();
+      _builder.newLine();
+      {
+        GlobalGeneratorSettings _settings_4 = Main.getSettings();
+        boolean _isGenerateMSCInstrumentation_4 = _settings_4.isGenerateMSCInstrumentation();
+        if (_isGenerateMSCInstrumentation_4) {
+          _builder.append("void ");
+          _builder.append(clsname, "");
+          _builder.append("::setProbesActive(bool recursive, bool active) {");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.append("for(int i = 0; i < m_RTSystemPort.getNInterfaceItems(); i++)");
+          _builder.newLine();
+          _builder.append("\t\t");
+          _builder.append("DebuggingService::getInstance().addPortInstance(*(m_RTSystemPort.getInterfaceItem(i)));");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("if(recursive) {");
+          _builder.newLine();
+          {
+            EList<ActorRef> _actorRefs_3 = cc.getActorRefs();
+            for(final ActorRef sub_3 : _actorRefs_3) {
+              _builder.append("\t\t");
+              String _name_8 = sub_3.getName();
+              _builder.append(_name_8, "\t\t");
+              _builder.append(".setProbesActive(recursive, active);");
+              _builder.newLineIfNotEmpty();
+            }
+          }
+          _builder.append("\t");
+          _builder.append("}");
+          _builder.newLine();
+          _builder.append("}");
+          _builder.newLine();
+        }
+      }
       _builder.newLine();
       _builder.append("void ");
       _builder.append(clsname, "");
       _builder.append("::init(){");
       _builder.newLineIfNotEmpty();
-      {
-        GlobalGeneratorSettings _settings_2 = Main.getSettings();
-        boolean _isGenerateMSCInstrumentation_2 = _settings_2.isGenerateMSCInstrumentation();
-        if (_isGenerateMSCInstrumentation_2) {
-          _builder.append("\t");
-          _builder.append("DebuggingService::getInstance().addVisibleComment(\"begin sub system initialization\");");
-          _builder.newLine();
-        }
-      }
       _builder.append("\t");
       _builder.append("SubSystemClassBase::init();");
       _builder.newLine();
       {
-        GlobalGeneratorSettings _settings_3 = Main.getSettings();
-        boolean _isGenerateMSCInstrumentation_3 = _settings_3.isGenerateMSCInstrumentation();
-        if (_isGenerateMSCInstrumentation_3) {
+        GlobalGeneratorSettings _settings_5 = Main.getSettings();
+        boolean _isGenerateMSCInstrumentation_5 = _settings_5.isGenerateMSCInstrumentation();
+        if (_isGenerateMSCInstrumentation_5) {
           _builder.append("\t");
           _builder.append("DebuggingService::getInstance().addVisibleComment(\"done sub system initialization\");");
           _builder.newLine();
@@ -660,23 +824,41 @@ public class NodeGen {
       _builder.append("}");
       _builder.newLine();
       {
-        GlobalGeneratorSettings _settings_4 = Main.getSettings();
-        boolean _isGenerateMSCInstrumentation_4 = _settings_4.isGenerateMSCInstrumentation();
-        if (_isGenerateMSCInstrumentation_4) {
+        GlobalGeneratorSettings _settings_6 = Main.getSettings();
+        boolean _isGenerateMSCInstrumentation_6 = _settings_6.isGenerateMSCInstrumentation();
+        if (_isGenerateMSCInstrumentation_6) {
           _builder.newLine();
           _builder.append("void ");
           _builder.append(clsname, "");
           _builder.append("::destroy() {");
           _builder.newLineIfNotEmpty();
-          _builder.append("\t");
-          _builder.append("DebuggingService::getInstance().addVisibleComment(\"begin sub system destruction\");");
-          _builder.newLine();
+          {
+            GlobalGeneratorSettings _settings_7 = Main.getSettings();
+            boolean _isGenerateMSCInstrumentation_7 = _settings_7.isGenerateMSCInstrumentation();
+            if (_isGenerateMSCInstrumentation_7) {
+              _builder.append("\t");
+              _builder.append("DebuggingService::getInstance().getSyncLogger().addVisibleComment(\"starting destruction\");");
+              _builder.newLine();
+              _builder.append("\t");
+              _builder.append("MSCFunctionObject mscFunctionObject(getInstancePathName(), \"destroy()\");");
+              _builder.newLine();
+              _builder.append("\t");
+              _builder.append("DebuggingService::getInstance().addVisibleComment(\"begin sub system destruction\");");
+              _builder.newLine();
+            }
+          }
           _builder.append("\t");
           _builder.append("SubSystemClassBase::destroy();");
           _builder.newLine();
-          _builder.append("\t");
-          _builder.append("DebuggingService::getInstance().addVisibleComment(\"done sub system destruction\");");
-          _builder.newLine();
+          {
+            GlobalGeneratorSettings _settings_8 = Main.getSettings();
+            boolean _isGenerateMSCInstrumentation_8 = _settings_8.isGenerateMSCInstrumentation();
+            if (_isGenerateMSCInstrumentation_8) {
+              _builder.append("\t");
+              _builder.append("DebuggingService::getInstance().addVisibleComment(\"done sub system destruction\");");
+              _builder.newLine();
+            }
+          }
           _builder.append("}");
           _builder.newLine();
         }

@@ -14,7 +14,7 @@
 
 #include "common/modelbase/ActorClassBase.h"
 #include "common/modelbase/SubSystemClassBase.h"
-#include "common/modelbase/PortBase.h"
+#include "common/modelbase/InterfaceItemBase.h"
 #include <iostream>
 
 namespace etRuntime {
@@ -31,8 +31,8 @@ DebuggingService::DebuggingService() :
 		m_portInstances() {
 }
 
-const PortBase* DebuggingService::getPort(const Address& address) const {
-	std::map<Address, const PortBase*>::const_iterator it = m_portInstances.find(address);
+const InterfaceItemBase* DebuggingService::getPort(const Address& address) const {
+	std::map<Address, const InterfaceItemBase*>::const_iterator it = m_portInstances.find(address);
 	if (it != m_portInstances.end())
 		return it->second;
 
@@ -40,8 +40,8 @@ const PortBase* DebuggingService::getPort(const Address& address) const {
 }
 
 void DebuggingService::addMessageAsyncOut(const Address& source, const Address& target, const std::string& msg) {
-	const PortBase* srcPort = getPort(source);
-	const PortBase* tgtPort = getPort(target);
+	const InterfaceItemBase* srcPort = getPort(source);
+	const InterfaceItemBase* tgtPort = getPort(target);
 	if (srcPort != 0 && tgtPort != 0)
 		m_asyncLogger.addMessageAsyncOut(srcPort->getActor()->getInstancePath(), tgtPort->getActor()->getInstancePath(),
 				msg);
@@ -49,24 +49,24 @@ void DebuggingService::addMessageAsyncOut(const Address& source, const Address& 
 }
 
 void DebuggingService::addMessageAsyncIn(const Address& source, const Address& target, const std::string& msg) {
-	const PortBase* srcPort = getPort(source);
-	const PortBase* tgtPort = getPort(target);
+	const InterfaceItemBase* srcPort = getPort(source);
+	const InterfaceItemBase* tgtPort = getPort(target);
 	if (srcPort != 0 && tgtPort != 0)
 		m_asyncLogger.addMessageAsyncIn(srcPort->getActor()->getInstancePath(), tgtPort->getActor()->getInstancePath(),
 				msg);
 }
 
 void DebuggingService::addMessageSyncCall(const Address& source, const Address& target, const std::string& msg) {
-	const PortBase* srcPort = getPort(source);
-	const PortBase* tgtPort = getPort(target);
+	const InterfaceItemBase* srcPort = getPort(source);
+	const InterfaceItemBase* tgtPort = getPort(target);
 	if (srcPort != 0 && tgtPort != 0)
 		m_asyncLogger.addMessageSyncCall(srcPort->getActor()->getInstancePath(), tgtPort->getActor()->getInstancePath(),
 				msg);
 }
 
 void DebuggingService::addMessageSyncReturn(const Address& source, const Address& target, const std::string& msg) {
-	const PortBase* srcPort = getPort(source);
-	const PortBase* tgtPort = getPort(target);
+	const InterfaceItemBase* srcPort = getPort(source);
+	const InterfaceItemBase* tgtPort = getPort(target);
 	if (srcPort != 0 && tgtPort != 0)
 		m_asyncLogger.addMessageSyncReturn(srcPort->getActor()->getInstancePath(),
 				tgtPort->getActor()->getInstancePath(), msg);
@@ -95,11 +95,11 @@ void DebuggingService::addVisibleComment(const std::string& comment) {
 	m_asyncLogger.addVisibleComment(comment);
 }
 
-void DebuggingService::addPortInstance(const PortBase& port) {
+void DebuggingService::addPortInstance(const InterfaceItemBase& port) {
 	m_portInstances[port.getAddress()] = &port;
 }
 
-void DebuggingService::removePortInstance(const PortBase& port) {
+void DebuggingService::removePortInstance(const InterfaceItemBase& port) {
 	m_portInstances.erase(port.getAddress());
 }
 

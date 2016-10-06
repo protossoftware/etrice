@@ -15,6 +15,7 @@
 
 #include "common/modelbase/IInterfaceItemOwner.h"
 #include "common/modelbase/InterfaceItemBase.h"
+#include "common/debugging/DebuggingService.h"
 #include <string>
 
 namespace etRuntime {

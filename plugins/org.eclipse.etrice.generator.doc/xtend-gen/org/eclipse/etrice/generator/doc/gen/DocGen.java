@@ -17,6 +17,7 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Consumer;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.core.common.base.Documentation;
 import org.eclipse.etrice.core.common.base.util.RelativePathHelpers;
@@ -56,7 +57,6 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @Singleton
 @SuppressWarnings("all")
@@ -109,107 +109,107 @@ public class DocGen {
         String _plus = (path + _name_1);
         this.fileAccess.setOutputPath(_plus);
         EList<LogicalSystem> _systems = model.getSystems();
-        final Procedure1<LogicalSystem> _function = new Procedure1<LogicalSystem>() {
-          public void apply(final LogicalSystem it) {
+        final Consumer<LogicalSystem> _function = new Consumer<LogicalSystem>() {
+          public void accept(final LogicalSystem it) {
             CharSequence _generateDoc = DocGen.this.generateDoc(it, ctx);
             String _docFragmentName = DocGen.this.docFragmentName(it);
             DocGen.this.saveAs(_generateDoc, _docFragmentName);
           }
         };
-        IterableExtensions.<LogicalSystem>forEach(_systems, _function);
+        _systems.forEach(_function);
         EList<LogicalSystem> _systems_1 = model.getSystems();
-        final Procedure1<LogicalSystem> _function_1 = new Procedure1<LogicalSystem>() {
-          public void apply(final LogicalSystem it) {
+        final Consumer<LogicalSystem> _function_1 = new Consumer<LogicalSystem>() {
+          public void accept(final LogicalSystem it) {
             EList<RoomModel> _referencedModels = root.getReferencedModels(it);
             referencedModels.addAll(_referencedModels);
           }
         };
-        IterableExtensions.<LogicalSystem>forEach(_systems_1, _function_1);
+        _systems_1.forEach(_function_1);
         EList<SubSystemClass> _subSystemClasses = model.getSubSystemClasses();
-        final Procedure1<SubSystemClass> _function_2 = new Procedure1<SubSystemClass>() {
-          public void apply(final SubSystemClass it) {
+        final Consumer<SubSystemClass> _function_2 = new Consumer<SubSystemClass>() {
+          public void accept(final SubSystemClass it) {
             CharSequence _generateDoc = DocGen.this.generateDoc(it, ctx);
             String _docFragmentName = DocGen.this.docFragmentName(it);
             DocGen.this.saveAs(_generateDoc, _docFragmentName);
           }
         };
-        IterableExtensions.<SubSystemClass>forEach(_subSystemClasses, _function_2);
+        _subSystemClasses.forEach(_function_2);
         EList<SubSystemClass> _subSystemClasses_1 = model.getSubSystemClasses();
-        final Procedure1<SubSystemClass> _function_3 = new Procedure1<SubSystemClass>() {
-          public void apply(final SubSystemClass it) {
+        final Consumer<SubSystemClass> _function_3 = new Consumer<SubSystemClass>() {
+          public void accept(final SubSystemClass it) {
             EList<RoomModel> _referencedModels = root.getReferencedModels(it);
             referencedModels.addAll(_referencedModels);
           }
         };
-        IterableExtensions.<SubSystemClass>forEach(_subSystemClasses_1, _function_3);
+        _subSystemClasses_1.forEach(_function_3);
         EList<GeneralProtocolClass> _protocolClasses = model.getProtocolClasses();
-        final Procedure1<GeneralProtocolClass> _function_4 = new Procedure1<GeneralProtocolClass>() {
-          public void apply(final GeneralProtocolClass it) {
+        final Consumer<GeneralProtocolClass> _function_4 = new Consumer<GeneralProtocolClass>() {
+          public void accept(final GeneralProtocolClass it) {
             CharSequence _generateDoc = DocGen.this.generateDoc(it, ctx);
             String _docFragmentName = DocGen.this.docFragmentName(it);
             DocGen.this.saveAs(_generateDoc, _docFragmentName);
           }
         };
-        IterableExtensions.<GeneralProtocolClass>forEach(_protocolClasses, _function_4);
+        _protocolClasses.forEach(_function_4);
         EList<GeneralProtocolClass> _protocolClasses_1 = model.getProtocolClasses();
-        final Procedure1<GeneralProtocolClass> _function_5 = new Procedure1<GeneralProtocolClass>() {
-          public void apply(final GeneralProtocolClass it) {
+        final Consumer<GeneralProtocolClass> _function_5 = new Consumer<GeneralProtocolClass>() {
+          public void accept(final GeneralProtocolClass it) {
             EList<RoomModel> _referencedModels = root.getReferencedModels(it);
             referencedModels.addAll(_referencedModels);
           }
         };
-        IterableExtensions.<GeneralProtocolClass>forEach(_protocolClasses_1, _function_5);
+        _protocolClasses_1.forEach(_function_5);
         EList<EnumerationType> _enumerationTypes = model.getEnumerationTypes();
-        final Procedure1<EnumerationType> _function_6 = new Procedure1<EnumerationType>() {
-          public void apply(final EnumerationType it) {
+        final Consumer<EnumerationType> _function_6 = new Consumer<EnumerationType>() {
+          public void accept(final EnumerationType it) {
             CharSequence _generateDoc = DocGen.this.generateDoc(it, ctx);
             String _docFragmentName = DocGen.this.docFragmentName(it);
             DocGen.this.saveAs(_generateDoc, _docFragmentName);
           }
         };
-        IterableExtensions.<EnumerationType>forEach(_enumerationTypes, _function_6);
+        _enumerationTypes.forEach(_function_6);
         EList<EnumerationType> _enumerationTypes_1 = model.getEnumerationTypes();
-        final Procedure1<EnumerationType> _function_7 = new Procedure1<EnumerationType>() {
-          public void apply(final EnumerationType it) {
+        final Consumer<EnumerationType> _function_7 = new Consumer<EnumerationType>() {
+          public void accept(final EnumerationType it) {
             EList<RoomModel> _referencedModels = root.getReferencedModels(it);
             referencedModels.addAll(_referencedModels);
           }
         };
-        IterableExtensions.<EnumerationType>forEach(_enumerationTypes_1, _function_7);
+        _enumerationTypes_1.forEach(_function_7);
         EList<DataClass> _dataClasses = model.getDataClasses();
-        final Procedure1<DataClass> _function_8 = new Procedure1<DataClass>() {
-          public void apply(final DataClass it) {
+        final Consumer<DataClass> _function_8 = new Consumer<DataClass>() {
+          public void accept(final DataClass it) {
             CharSequence _generateDoc = DocGen.this.generateDoc(it, ctx);
             String _docFragmentName = DocGen.this.docFragmentName(it);
             DocGen.this.saveAs(_generateDoc, _docFragmentName);
           }
         };
-        IterableExtensions.<DataClass>forEach(_dataClasses, _function_8);
+        _dataClasses.forEach(_function_8);
         EList<DataClass> _dataClasses_1 = model.getDataClasses();
-        final Procedure1<DataClass> _function_9 = new Procedure1<DataClass>() {
-          public void apply(final DataClass it) {
+        final Consumer<DataClass> _function_9 = new Consumer<DataClass>() {
+          public void accept(final DataClass it) {
             EList<RoomModel> _referencedModels = root.getReferencedModels(it);
             referencedModels.addAll(_referencedModels);
           }
         };
-        IterableExtensions.<DataClass>forEach(_dataClasses_1, _function_9);
+        _dataClasses_1.forEach(_function_9);
         EList<ActorClass> _actorClasses = model.getActorClasses();
-        final Procedure1<ActorClass> _function_10 = new Procedure1<ActorClass>() {
-          public void apply(final ActorClass it) {
+        final Consumer<ActorClass> _function_10 = new Consumer<ActorClass>() {
+          public void accept(final ActorClass it) {
             CharSequence _generateDoc = DocGen.this.generateDoc(it, ctx);
             String _docFragmentName = DocGen.this.docFragmentName(it);
             DocGen.this.saveAs(_generateDoc, _docFragmentName);
           }
         };
-        IterableExtensions.<ActorClass>forEach(_actorClasses, _function_10);
+        _actorClasses.forEach(_function_10);
         EList<ActorClass> _actorClasses_1 = model.getActorClasses();
-        final Procedure1<ActorClass> _function_11 = new Procedure1<ActorClass>() {
-          public void apply(final ActorClass it) {
+        final Consumer<ActorClass> _function_11 = new Consumer<ActorClass>() {
+          public void accept(final ActorClass it) {
             EList<RoomModel> _referencedModels = root.getReferencedModels(it);
             referencedModels.addAll(_referencedModels);
           }
         };
-        IterableExtensions.<ActorClass>forEach(_actorClasses_1, _function_11);
+        _actorClasses_1.forEach(_function_11);
         this.fileAccess.setOutputPath(path);
         CharSequence _generateModelDoc = this.generateModelDoc(ctx, referencedModels);
         this.saveAs(_generateModelDoc, file);

@@ -17,6 +17,7 @@
 #include "common/modelbase/IInterfaceItemOwner.h"
 #include "common/modelbase/InterfaceItemBase.h"
 #include "common/modelbase/IReplicatedInterfaceItem.h"
+#include "common/debugging/DebuggingService.h"
 #include <string>
 
 namespace etRuntime {
@@ -44,8 +45,16 @@ InterfaceItemBase::InterfaceItemBase(IInterfaceItemOwner* owner, const std::stri
 		m_replicator(0) {
 
 	m_replicator = dynamic_cast<IReplicatedInterfaceItem*>(owner);
+}
 
-	int thread = owner->getEventReceiver()->getThread();
+InterfaceItemBase::~InterfaceItemBase() {
+	m_peerAddress = Address::EMPTY;
+	m_ownMsgReceiver = 0;
+	m_peerMsgReceiver = 0;
+}
+
+void InterfaceItemBase::init() {
+	int thread = dynamic_cast<IEventReceiver*> (getParent())->getThread();
 	if (thread >= 0) {
 		IMessageService* msgSvc = RTServices::getInstance().getMsgSvcCtrl().getMsgSvc(thread);
 		Address addr = msgSvc->getFreeAddress();
@@ -54,12 +63,6 @@ InterfaceItemBase::InterfaceItemBase(IInterfaceItemOwner* owner, const std::stri
 
 		m_ownMsgReceiver = msgSvc;
 	}
-}
-
-InterfaceItemBase::~InterfaceItemBase() {
-	m_peerAddress = Address::EMPTY;
-	m_ownMsgReceiver = 0;
-	m_peerMsgReceiver = 0;
 }
 
 IInterfaceItem* InterfaceItemBase::connectWith(IInterfaceItem* peer) {
@@ -78,6 +81,10 @@ IInterfaceItem* InterfaceItemBase::connectWith(IInterfaceItem* peer) {
 
 		InterfaceItemBase* ifItemPeer = dynamic_cast<InterfaceItemBase*>(m_peer);
 		if (ifItemPeer != 0) {
+			// initialize Ports
+			this->init();
+			ifItemPeer->init();
+
 			// connect with each other
 			m_peerAddress = ifItemPeer->getAddress();
 			ifItemPeer->m_peerAddress = getAddress();
@@ -121,8 +128,10 @@ void InterfaceItemBase::destroy() {
 		m_replicator->removeItem(*this);
 	}
 
-	m_ownMsgReceiver->removeMessageReceiver(*this);
-	m_ownMsgReceiver->freeAddress(getAddress());
+	if(m_ownMsgReceiver) {
+		m_ownMsgReceiver->removeMessageReceiver(*this);
+		m_ownMsgReceiver->freeAddress(getAddress());
+	}
 
 	AbstractMessageReceiver::destroy();
 }

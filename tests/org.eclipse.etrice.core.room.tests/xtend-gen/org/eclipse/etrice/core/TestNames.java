@@ -16,6 +16,7 @@ import com.google.common.collect.Maps;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -26,7 +27,6 @@ import org.eclipse.xtext.validation.AbstractValidationDiagnostic;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -46,8 +46,8 @@ public class TestNames extends TestBase {
     final EObject model = IterableExtensions.<EObject>head(_contents);
     final Diagnostic diag = this.getDiag(model);
     List<Diagnostic> _children = diag.getChildren();
-    final Procedure1<Diagnostic> _function = new Procedure1<Diagnostic>() {
-      public void apply(final Diagnostic it) {
+    final Consumer<Diagnostic> _function = new Consumer<Diagnostic>() {
+      public void accept(final Diagnostic it) {
         if ((it instanceof AbstractValidationDiagnostic)) {
           final EObject obj = ((AbstractValidationDiagnostic)it).getSourceEObject();
           Boolean nameError = TestNames.this.nameErrorMap.get(obj);
@@ -66,7 +66,7 @@ public class TestNames extends TestBase {
         }
       }
     };
-    IterableExtensions.<Diagnostic>forEach(_children, _function);
+    _children.forEach(_function);
   }
   
   @Test
@@ -99,13 +99,13 @@ public class TestNames extends TestBase {
     Iterables.<EObject>addAll(items, _eContents_1);
     int _size = items.size();
     Assert.assertEquals("Unexpected item count", 15, _size);
-    final Procedure1<EObject> _function = new Procedure1<EObject>() {
-      public void apply(final EObject it) {
+    final Consumer<EObject> _function = new Consumer<EObject>() {
+      public void accept(final EObject it) {
         boolean _hasNameErrorMessage = TestNames.this.hasNameErrorMessage(it);
         Assert.assertFalse(("expected no name error: " + it), _hasNameErrorMessage);
       }
     };
-    IterableExtensions.<EObject>forEach(items, _function);
+    items.forEach(_function);
   }
   
   @Test
@@ -119,13 +119,13 @@ public class TestNames extends TestBase {
     Iterables.<EObject>addAll(items, _eContents_1);
     int _size = items.size();
     Assert.assertEquals("Unexpected item count", 9, _size);
-    final Procedure1<EObject> _function = new Procedure1<EObject>() {
-      public void apply(final EObject it) {
+    final Consumer<EObject> _function = new Consumer<EObject>() {
+      public void accept(final EObject it) {
         boolean _hasNameErrorMessage = TestNames.this.hasNameErrorMessage(it);
         Assert.assertFalse(("expected no name error: " + it), _hasNameErrorMessage);
       }
     };
-    IterableExtensions.<EObject>forEach(items, _function);
+    items.forEach(_function);
   }
   
   @Test
@@ -145,13 +145,13 @@ public class TestNames extends TestBase {
     Iterables.<EObject>addAll(items, _eContents_1);
     int _size = items.size();
     Assert.assertEquals("Unexpected item count", 13, _size);
-    final Procedure1<EObject> _function_1 = new Procedure1<EObject>() {
-      public void apply(final EObject it) {
+    final Consumer<EObject> _function_1 = new Consumer<EObject>() {
+      public void accept(final EObject it) {
         boolean _hasNameErrorMessage = TestNames.this.hasNameErrorMessage(it);
         Assert.assertTrue(("expected name error: " + it), _hasNameErrorMessage);
       }
     };
-    IterableExtensions.<EObject>forEach(items, _function_1);
+    items.forEach(_function_1);
   }
   
   @Test
@@ -180,13 +180,13 @@ public class TestNames extends TestBase {
     Iterables.<EObject>addAll(items, _eContents_4);
     int _size = items.size();
     Assert.assertEquals("Unexpected item count", 16, _size);
-    final Procedure1<EObject> _function_1 = new Procedure1<EObject>() {
-      public void apply(final EObject it) {
+    final Consumer<EObject> _function_1 = new Consumer<EObject>() {
+      public void accept(final EObject it) {
         boolean _hasNameErrorMessage = TestNames.this.hasNameErrorMessage(it);
         Assert.assertTrue(("expected name error: " + it), _hasNameErrorMessage);
       }
     };
-    IterableExtensions.<EObject>forEach(items, _function_1);
+    items.forEach(_function_1);
   }
   
   private boolean hasNameErrorMessage(final EObject obj) {

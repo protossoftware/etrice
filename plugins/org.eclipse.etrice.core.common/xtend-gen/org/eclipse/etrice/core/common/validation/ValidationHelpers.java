@@ -15,6 +15,7 @@ import com.google.common.base.Objects;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Consumer;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -22,7 +23,6 @@ import org.eclipse.xtend.lib.Property;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 /**
@@ -76,14 +76,14 @@ public class ValidationHelpers {
   
   public static class NamedObjectList extends ArrayList<ValidationHelpers.NamedObject> {
     public void addAll(final List<? extends EObject> items, final EStructuralFeature feature) {
-      final Procedure1<EObject> _function = new Procedure1<EObject>() {
-        public void apply(final EObject it) {
+      final Consumer<EObject> _function = new Consumer<EObject>() {
+        public void accept(final EObject it) {
           Object _eGet = it.eGet(feature);
           ValidationHelpers.NamedObject _namedObject = new ValidationHelpers.NamedObject(((String) _eGet), it, feature);
           NamedObjectList.this.add(_namedObject);
         }
       };
-      IterableExtensions.forEach(items, _function);
+      items.forEach(_function);
     }
   }
   
