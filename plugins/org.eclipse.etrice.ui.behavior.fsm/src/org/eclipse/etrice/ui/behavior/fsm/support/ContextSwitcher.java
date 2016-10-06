@@ -113,12 +113,21 @@ public class ContextSwitcher {
 		for (Shape ctxShape : diagram.getChildren()) {
 			if (ctxShape instanceof ContainerShape && ctxShape.isVisible()) {
 				EObject bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(ctxShape);
-				assert(bo instanceof StateGraph): "expected state graph";
 				
 				if (bo instanceof StateGraph)
 					return (StateGraph) bo;
 			}
 		}
+		
+		// something seems to be wrong, switch to top
+		switchTop(diagram);
+		
+		// and return corresponding state graph
+		EObject bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(diagram);
+		if (bo instanceof ModelComponent) {
+			return ((ModelComponent) bo).getStateMachine();
+		}
+		
 		return null;
 	}
 	
