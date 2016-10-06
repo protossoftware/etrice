@@ -28,6 +28,8 @@ import org.eclipse.etrice.core.common.base.KeyValue;
 import org.eclipse.etrice.core.common.base.RealLiteral;
 import org.eclipse.etrice.core.common.base.SimpleAnnotationAttribute;
 import org.eclipse.etrice.core.common.base.StringLiteral;
+import org.eclipse.etrice.core.fsm.fSM.ComponentCommunicationType;
+import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.ReferenceType;
 import org.eclipse.etrice.core.room.StandardOperation;
@@ -327,6 +329,17 @@ public class RoomQuickfixProvider extends DefaultQuickfixProvider {
 			@Override
 			public void apply(EObject element, IModificationContext context) throws Exception {
 				((StandardOperation)element).setOverride(false);	
+			}
+		});
+	}
+	
+	@Fix(RoomJavaValidator.INCONSISTENT_COMMUNICATION_TYPE)
+	public void makeActorClassCommTypeLikeBaseClass(final Issue issue, IssueResolutionAcceptor acceptor) {
+		acceptor.accept(issue, "Set communication type as for base class.", issue.getData()[0]+" ActorClass "+issue.getData()[1]+" ...", "correction_change.gif", new ISemanticModification() {
+			@Override
+			public void apply(EObject element, IModificationContext context) throws Exception {
+				ActorClass ac = (ActorClass) element;
+				ac.setCommType(ComponentCommunicationType.get(issue.getData()[0]));
 			}
 		});
 	}

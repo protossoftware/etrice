@@ -111,6 +111,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	public static final String INVALID_ANNOTATION_TARGET = "RoomJavaValidator.InvalidAnnotationTarget";
 	public static final String OPERATION_MISSING_OVERRIDE = "RoomJavaValidator.OperationMissingOverride";
 	public static final String OPERATION_EXTRANEOUS_OVERRIDE = "RoomJavaValidator.OperationExtraneousOverride";
+	public static final String INCONSISTENT_COMMUNICATION_TYPE = "RoomJavaValidator.InconsistentCommType";
 
 	@Inject ImportUriResolver importUriResolver;
 
@@ -320,6 +321,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 			return;
 
 		ComponentCommunicationType commType = ac.getCommType();
+		String acName = ac.getName();
 
 		switch (commType) {
 		case ASYNCHRONOUS:
@@ -335,8 +337,17 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 		while (ac.getActorBase()!=null) {
 			ac = ac.getActorBase();
 
-			if (commType!=ac.getCommType())
-				error("data_driven attribute not consistent in inheritance hierarchy", FSMPackage.eINSTANCE.getModelComponent_CommType());
+			if (commType!=ac.getCommType()) {
+				error("Communication type '"+commType.getLiteral()+"' is not consistent with the "
+						+"base class '"+ac.getName()+"' which uses '"+ac.getCommType().getLiteral()
+						+"' (if not explicitly specified then 'eventdriven' is the default).",
+						FSMPackage.eINSTANCE.getModelComponent_CommType(),
+						
+						// remaining parameters for quick fix
+						INCONSISTENT_COMMUNICATION_TYPE,
+						ac.getCommType().getLiteral(),
+						acName);
+			}
 		}
 	}
 
