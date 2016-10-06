@@ -221,7 +221,6 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 			if (ar.getMultiplicity()>1) {
 				for (Port p : ac.getInterfacePorts()) {
 					if (p.getMultiplicity()<0) {
-						int idx = ((ActorContainerClass)ar.eContainer()).getActorRefs().indexOf(ar);
 						error("replicated actor must not have replicated port with arbitrary multiplicity", null);
 					}
 				}
@@ -231,7 +230,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 
 	@Check
 	public void checkLayerConnectiontarget(LayerConnection lc) {
-		if (lc.getTo().getRef() instanceof ActorRef)
+		if (lc!=null && lc.getTo()!=null && lc.getTo().getRef() instanceof ActorRef)
 			if (((ActorRef)lc.getTo().getRef()).getMultiplicity()>1)
 				error("layer connection must not connect to replicated actor", null);
 	}
@@ -414,7 +413,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	public void checkServiceCompatibility(LayerConnection conn) {
 		Result result = validationUtil.isValid(conn);
 		if (!result.isOk())
-			error(result.getMsg(), RoomPackage.eINSTANCE.getLayerConnection_From());
+			error(result.getMsg(), result.getSource(), result.getFeature());
 	}
 
 	@Check

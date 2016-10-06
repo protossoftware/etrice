@@ -26,10 +26,14 @@ import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.ActorInstanceMapping;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.DataClass;
+import org.eclipse.etrice.core.room.LayerConnection;
 import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.RefPath;
+import org.eclipse.etrice.core.room.RefSAPoint;
+import org.eclipse.etrice.core.room.RelaySAPoint;
 import org.eclipse.etrice.core.room.RoomAnnotationTargetEnum;
 import org.eclipse.etrice.core.room.RoomPackage;
+import org.eclipse.etrice.core.room.SPP;
 import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
@@ -37,7 +41,9 @@ import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 
@@ -116,6 +122,9 @@ public class RoomProposalProvider extends AbstractRoomProposalProvider {
 	
 	@Inject
 	protected RoomNameProvider roomNameProvider;
+	
+	@Inject
+	protected IQualifiedNameProvider fqnProvider;
 	
 	protected Function<IEObjectDescription, ICompletionProposal> getProposalFactory(String ruleName, ContentAssistContext contentAssistContext) {
 		if (contentAssistContext!=null && contentAssistContext.getCurrentModel().eClass()==RoomPackage.eINSTANCE.getActorRef())
@@ -219,6 +228,37 @@ public class RoomProposalProvider extends AbstractRoomProposalProvider {
 		return refs;
 	}
 
+	@Override
+	public void completeLayerConnection_To(EObject model,
+			Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		super.completeLayerConnection_To(model, assignment, context, acceptor);
+		
+		if (model instanceof LayerConnection) {
+			LayerConnection lc = (LayerConnection) model;
+			if (lc.getFrom() instanceof RefSAPoint) {
+				
+			}
+			else if (lc.getFrom() instanceof RelaySAPoint) {
+				SPP spp = ((RelaySAPoint)lc.getFrom()).getRelay();
+				List<ActorClass> classes = roomHelpers.getClassHierarchy((ActorClass) spp.eContainer());
+				for (ActorClass ac : classes) {
+					for (ActorRef ar : ac.getActorRefs()) {
+						StyledString displayString = getStyledDisplayString(ar, fqnProvider.apply(ar).toString(), ar.getName());
+						ICompletionProposal result = createCompletionProposal(ar.getName(), displayString, getImage(ar), getPriorityHelper().getDefaultPriority(),
+								context.getPrefix(), context);
+						if (result instanceof ConfigurableCompletionProposal) {
+							((ConfigurableCompletionProposal) result).setProposalContextResource(context.getResource());
+							((ConfigurableCompletionProposal) result).setAdditionalProposalInfo(ar);
+							((ConfigurableCompletionProposal) result).setHover(getHover());
+						}
+						acceptor.accept(result);
+					}
+				}
+			}
+		}
+	}
+	
 //	public void completeActorRef_Type(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 //		super.completeActorRef_Type(
 //			    model, 

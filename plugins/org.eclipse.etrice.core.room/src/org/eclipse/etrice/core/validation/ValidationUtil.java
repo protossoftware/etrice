@@ -41,6 +41,7 @@ import org.eclipse.etrice.core.room.RefSAPoint;
 import org.eclipse.etrice.core.room.ReferenceType;
 import org.eclipse.etrice.core.room.RelaySAPoint;
 import org.eclipse.etrice.core.room.RoomModel;
+import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.SPP;
 import org.eclipse.etrice.core.room.SPPoint;
 import org.eclipse.etrice.core.room.ServiceImplementation;
@@ -490,10 +491,18 @@ public class ValidationUtil extends FSMValidationUtil {
 	}
 	
 	public Result isValid(LayerConnection lc) {
-		if (lc.getFrom() instanceof RelaySAPoint)
-			return isConnectable(((RelaySAPoint)lc.getFrom()).getRelay(), null, lc.getTo().getService(), lc.getTo().getRef(), (StructureClass)lc.eContainer(), lc);
-		else if (lc.getFrom() instanceof RefSAPoint)
-			return isConnectable(null, ((RefSAPoint)lc.getFrom()).getRef(), lc.getTo().getService(), lc.getTo().getRef(), (StructureClass)lc.eContainer(), lc);
+		if (lc.getFrom() instanceof RelaySAPoint) {
+			if (((RelaySAPoint)lc.getFrom())!=null && lc.getTo()!=null && lc.getTo().getService()!=null)
+				return isConnectable(lc, ((RelaySAPoint)lc.getFrom()).getRelay(), null, lc.getTo().getService(), lc.getTo().getRef(), (StructureClass)lc.eContainer(), lc);
+			else
+				return Result.error("incomplete layer connection");
+		}
+		else if (lc.getFrom() instanceof RefSAPoint) {
+			if (((RefSAPoint)lc.getFrom())!=null && ((RefSAPoint)lc.getFrom()).getRef()!=null && lc.getTo()!=null && lc.getTo().getService()!=null && lc.getTo().getRef()!=null)
+				return isConnectable(lc, null, ((RefSAPoint)lc.getFrom()).getRef(), lc.getTo().getService(), lc.getTo().getRef(), (StructureClass)lc.eContainer(), lc);
+			else
+				return Result.error("incomplete layer connection");
+		}
 		else {
 			assert(false): "unexpected sub type";
 			return Result.error("internal error");
@@ -502,10 +511,10 @@ public class ValidationUtil extends FSMValidationUtil {
 	
 	public Result isConnectable(SPP src, ActorContainerRef srcRef,
 			SPP tgt, ActorContainerRef tgtRef, StructureClass ac) {
-		return isConnectable(src, srcRef, tgt, tgtRef, ac, null);
+		return isConnectable(null, src, srcRef, tgt, tgtRef, ac, null);
 	}
 	
-	public Result isConnectable(SPP src, ActorContainerRef srcRef,
+	public Result isConnectable(LayerConnection lc, SPP src, ActorContainerRef srcRef,
 			SPP dst, ActorContainerRef dstRef, StructureClass sc, LayerConnection exclude) {
 
 		if (sc==null) {
@@ -513,13 +522,13 @@ public class ValidationUtil extends FSMValidationUtil {
 		}
 		
 		if ((src==null && srcRef==null) || (src!=null && srcRef!=null))
-			return Result.error("source can be an own SPP _or_ a ref");
+			return Result.error("source can be an own SPP _or_ a ref", lc, RoomPackage.Literals.LAYER_CONNECTION__FROM);
 		
 		if (dst==null || dstRef==null)
-			return Result.error("destination must be an SPP on a ref");
+			return Result.error("destination must be an SPP on a ref", lc, RoomPackage.Literals.LAYER_CONNECTION__TO);
 
 		if (src!=null && isConnectedSrc(src, sc, exclude))
-			return Result.error("source SPP is already connected");
+			return Result.error("source SPP is already connected", lc, RoomPackage.Literals.LAYER_CONNECTION__FROM);
 		
 		// the destination may be connected several times, so don't check this
 		//		if (isConnectedDst(dst, dstRef, sc, exclude))
