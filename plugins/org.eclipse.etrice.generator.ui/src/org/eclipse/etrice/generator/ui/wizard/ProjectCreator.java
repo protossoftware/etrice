@@ -392,9 +392,15 @@ public class ProjectCreator {
 					project.getName(), baseName,
 					"Node_nodeRef1_mainRunner");
 		} else if (project.hasNature("org.eclipse.cdt.core.cnature")) {
+			String language = "c";
+			
+			// C++ projects have _both_ natures, so we also check for this one
+			if (project.hasNature("org.eclipse.cdt.core.ccnature"))
+				language = "cpp";
+			
 			ProjectCreator.createLaunchGeneratorConfig(
 					URI.createPlatformResourceURI("/" + project.getName()
-							+ "/gen_" + baseName + ".launch", true), "c",
+							+ "/gen_" + baseName + ".launch", true), language,
 					mdlPath, baseName, mainMethodName, additionalLaunchConfigLines);
 			ProjectCreator.createLaunchCApplicationConfig(
 					URI.createPlatformResourceURI("/" + project.getName()
