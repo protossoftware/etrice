@@ -19,9 +19,11 @@ RoomModel ReferenceCPP_Main {
 	}
 
 	SubSystemClass SubSysClass {
-		ActorRef topActor: ActorToplevel
+		
 		ActorRef timingService: ATimingService
-		LayerConnection ref topActor satisfied_by timingService.timer
+		
 		LogicalThread defaultThread
+	LayerConnection ref replTop satisfied_by timingService.timer
+		ActorRef replTop: ReplicationTop
 	}
 }

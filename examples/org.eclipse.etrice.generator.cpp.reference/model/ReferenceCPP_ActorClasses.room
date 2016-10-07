@@ -147,7 +147,7 @@ RoomModel ReferenceCPP_ActorClasses {
 		}
 		Behavior {
 			StateMachine {
-				Transition init: initial -> state1
+				Transition init: initial -> tp0 of state0
 				State state0 {
 					subgraph {
 						EntryPoint tp0
@@ -171,6 +171,7 @@ RoomModel ReferenceCPP_ActorClasses {
 					subgraph {
 						EntryPoint tp0
 						ExitPoint tp1
+					EntryPoint tr1
 					}
 				}
 				Transition tr2: tp1 of state2 -> Done
@@ -188,7 +189,7 @@ RoomModel ReferenceCPP_ActorClasses {
 					}
 				}
 				Transition tr5: cp cp0 -> tp0 of state2
-				Transition tr6: cp cp0 -> state2 {
+				Transition tr6:  cp cp0 -> tr1 of state2 {
 					cond {
 						"true"
 					}
@@ -214,11 +215,17 @@ RoomModel ReferenceCPP_ActorClasses {
 							}
 						}
 						Transition tr0: my tp0 -> state0
-					}
-				}
-				RefinedState state2 {
-					subgraph {
-						Transition tr0: my tp0 -> my tp1
+						Transition tr1: state0 -> my tp1 {
+							triggers {
+								<reply2:port>
+							}
+						}
+						Transition tr2: state0 -> my tp3 {
+							triggers {
+								<reply3:port>
+							}
+						}
+						
 					}
 				}
 			}
@@ -296,4 +303,82 @@ RoomModel ReferenceCPP_ActorClasses {
 		}
 	}
 
+	ActorClass ReplicationTop {
+		
+	Structure {
+			ActorRef replSub1 [3]: ReplicationSub1
+			ActorRef replSub2 [3]: ReplicationSub2
+		Binding replSub1.port and replSub2.port
+		ActorRef replSub3_1 [1]: ReplicationSub3
+		ActorRef replSub3_2: ReplicationSub3
+			conjugated Port replPort [8]: PStartStop
+		Binding replPort and replSub3_1.replPort
+			Binding replPort and replSub3_2.replPort
+		}
+	Behavior {
+			StateMachine {
+				State state0 {
+					entry {
+						"replPort.start();"
+					}
+				}
+				State DONE
+				State state1
+				Transition init0: initial -> state0
+				Transition tr0: state0 -> state1 {
+					triggers {
+						<started: replPort>
+					}
+				}
+				Transition tr1: state1 -> DONE {
+					triggers {
+						<started: replPort>
+					}
+				}
+			}
+		}
+	}
+	
+	ActorClass ReplicationSub1 {
+		
+	Interface {
+			conjugated Port port: PStartStop
+		}
+		Structure {
+			external Port port
+		}
+	}
+
+	ActorClass ReplicationSub2 {
+		
+	Interface {
+			Port port: PStartStop
+		}
+		Structure {
+			external Port port
+		}
+	}
+	ActorClass ReplicationSub3 {
+		
+	Interface {
+			Port replPort [1]: PStartStop
+		}
+		Structure {
+			external Port replPort
+		}
+		Behavior {
+			StateMachine { State state0
+				State state1
+				Transition init0: initial -> state0
+				Transition tr0: state0 -> state1 {
+					triggers {
+						<start: replPort>
+					}
+					action {
+						"replPort.started();"
+					}
+				}
+			}
+		}
+	}
 }
