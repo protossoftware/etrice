@@ -61,6 +61,7 @@ protected:
 		return m_peerMsgReceiver;
 	}
 
+	void init(void);
 	virtual void destroy();
 
 

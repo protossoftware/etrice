@@ -62,7 +62,6 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 				case CommunicationType::SYNCHRONOUS:
 					logger.logError("synchronous protocols not supported yet", pc)
 			}
-
 		}
 	}
 
@@ -200,6 +199,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		#include "«pc.getCppHeaderFileName»"
 
 		#include "common/debugging/DebuggingService.h"
+		#include "common/debugging/MSCFunctionObject.h"
 		#include "common/messaging/AbstractMessageReceiver.h"
 		#include "common/messaging/Address.h"
 		#include "common/messaging/Message.h"
@@ -247,18 +247,12 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 	«portClassName»::«portClassName»(IInterfaceItemOwner* actor, const std::string& name, int localId)
 		«pclass.generateConstructorInitalizerList('0')»
 	{
-		«IF Main::settings.generateMSCInstrumentation»
-			DebuggingService::getInstance().addPortInstance(*this);
-		«ENDIF»
 	}
 
 	«portClassName»::«portClassName»(IInterfaceItemOwner* actor, const std::string& name, int localId, int idx)
 		«pclass.generateConstructorInitalizerList('idx')»
 	{
 		«IF pclass != null»«initHelper.genExtraInitializers(pclass.attributes)»«ENDIF»
-		«IF Main::settings.generateMSCInstrumentation»
-			DebuggingService::getInstance().addPortInstance(*this);
-		«ENDIF»
 	}
 	«IF Main::settings.generateMSCInstrumentation»
 
@@ -372,8 +366,10 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 					«FOR command : hdlr.detailCode.lines»	«command»
 					«ENDFOR»
 				«ELSE»
-					DebuggingService::getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(),
-						«portClassName»::getMessageString(«portClassName»::«dir»_«m.name»));
+					«IF Main::settings.generateMSCInstrumentation»
+						DebuggingService::getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(),
+							«portClassName»::getMessageString(«portClassName»::«dir»_«m.name»));
+					«ENDIF»
 					if (getPeerAddress().isValid()){
 						getPeerMsgReceiver()->receive(«message»);
 					}

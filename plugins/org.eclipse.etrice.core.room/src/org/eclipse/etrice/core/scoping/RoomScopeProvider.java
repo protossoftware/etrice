@@ -415,7 +415,7 @@ public class RoomScopeProvider extends FSMScopeProvider {
 	 * @param ref
 	 * @return a list of scopes
 	 */
-	public IScope scope_SPPoint_ref(SPPoint pt, EReference ref) {
+	public IScope scope_SPPoint_actorRef(SPPoint pt, EReference ref) {
 		final List<IEObjectDescription> scopes = new ArrayList<IEObjectDescription>();
 
 		ActorContainerClass acc = getActorContainerClass(pt);
