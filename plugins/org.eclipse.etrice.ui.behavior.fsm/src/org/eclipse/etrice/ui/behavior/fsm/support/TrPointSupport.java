@@ -183,14 +183,31 @@ public class TrPointSupport {
 	
 			@Override
 			public boolean canCreate(ICreateContext context) {
+				if (context.getTargetConnection()!=null)
+					// we're hovering above a connection
+					return false;
+				
 				if (context.getTargetContainer().getLink()!=null)
 					if (context.getTargetContainer().getLink().getBusinessObjects().size()==1) {
 						EObject obj = context.getTargetContainer().getLink().getBusinessObjects().get(0);
 						if (obj instanceof StateGraph) {
 							StateGraph sg = (StateGraph) obj;
+							
+							// at this point the target container can be a state graph or an initial point
+							// - we need to sort out the latter one
+							if (context.getTargetContainer().getContainer().getLink().getBusinessObjects().size()==1) {
+								obj = context.getTargetContainer().getContainer().getLink().getBusinessObjects().get(0);
+								if (obj instanceof StateGraph) {
+									// the parent of the target is a state graph => target is an initial point
+									return false;
+								}
+							}
+							
 							if (sg.eContainer() instanceof ModelComponent)
+								// we are on the top level: no entry and exit points allowed
 								if (type!=Type.TRANS_POINT)
 									return false;
+							
 							return isValidPosition(context, context, StateGraphSupport.MARGIN);
 						}
 					}

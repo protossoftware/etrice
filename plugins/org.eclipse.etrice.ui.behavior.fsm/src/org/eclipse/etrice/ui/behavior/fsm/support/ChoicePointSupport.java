@@ -148,6 +148,10 @@ public class ChoicePointSupport {
 	
 			@Override
 			public boolean canCreate(ICreateContext context) {
+				if (context.getTargetConnection()!=null)
+					// we're hovering above a connection
+					return false;
+				
 				if (context.getTargetContainer().getLink()!=null)
 					if (context.getTargetContainer().getLink().getBusinessObjects().size()==1) {
 						EObject obj = context.getTargetContainer().getLink().getBusinessObjects().get(0);
