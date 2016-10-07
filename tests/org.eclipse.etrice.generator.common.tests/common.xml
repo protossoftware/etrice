@@ -147,6 +147,18 @@
 			</java>
 		</sequential>
 	</macrodef>
+	
+	<macrodef name="convertPre">
+		<attribute name="testId"/>
+		<sequential>
+			<java output="${output}/convert.txt" append="true" classname="org.eclipse.etrice.etunit.converter.EtUnitReportConverter" fork="true" failonerror="true">
+				<arg value="-presuite"/>
+				<arg value="${ant.project.name}."/>
+				<arg value="${testlog.path}/@{testId}.etu"/>
+				<classpath refid="etrice.clspath"/>
+			</java>
+		</sequential>
+	</macrodef>
 
 	<!--
 		copy_results: copies the *.xml results to their final destination

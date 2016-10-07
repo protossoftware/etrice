@@ -46,9 +46,11 @@ public class EtUnitReportConverter {
 	protected static class Options {
 		private boolean combinedResults = false;
 		private boolean replaceSuiteName = false;
+		private boolean prefixSuiteName = false;
 		private boolean onlyCombinedResults = false;
 		private String combinedFile = null;
 		private String suiteName = null;
+		private String suiteNamePrefix = null;
 		private ArrayList<String> files = new ArrayList<String>();
 		
 		public boolean isCombinedResults() {
@@ -65,6 +67,14 @@ public class EtUnitReportConverter {
 
 		public void setReplaceSuiteName(boolean replaceSuiteName) {
 			this.replaceSuiteName = replaceSuiteName;
+		}
+		
+		public boolean isPrefixSuiteName() {
+			return prefixSuiteName;
+		}
+		
+		public void setPrefixSuiteName(boolean appendSuiteName) {
+			this.prefixSuiteName = appendSuiteName;
 		}
 
 		public boolean isOnlyCombinedResults() {
@@ -89,6 +99,14 @@ public class EtUnitReportConverter {
 
 		public void setSuiteName(String suiteName) {
 			this.suiteName = suiteName;
+		}
+		
+		public String getSuiteNamePrefix() {
+			return suiteNamePrefix;
+		}
+		
+		public void setSuiteNamePrefix(String suiteNamePrefix) {
+			this.suiteNamePrefix = suiteNamePrefix;
 		}
 
 		public ArrayList<String> getFiles() {
@@ -122,6 +140,16 @@ public class EtUnitReportConverter {
 					}
 					else {
 						System.err.println("Error: "+OPTION_SUITE_NAME+" must be followed by a suite name");
+						return false;
+					}
+				}
+				else if(args[i].equals(OPTION_SUITE_NAME_PREFIX)) {
+					setPrefixSuiteName(true);
+					if(++i < args.length) {
+						setSuiteNamePrefix(args[i]);
+					}
+					else {
+						System.err.println("Error: " + OPTION_SUITE_NAME_PREFIX + "must be followed by a suite name prefix");
 						return false;
 					}
 				}
@@ -179,12 +207,14 @@ public class EtUnitReportConverter {
 	public static final String OPTION_COMBINED = "-combined";
 	public static final String OPTION_ONLY_COMBINED = "-only_combined";
 	public static final String OPTION_SUITE_NAME = "-suite";
+	public static final String OPTION_SUITE_NAME_PREFIX = "-presuite";
 
 	protected void printUsage() {
 		System.err.println("usage: EtUnitReportConverter [("+OPTION_COMBINED+"|"+OPTION_ONLY_COMBINED+") <combined file>] ["+OPTION_SUITE_NAME+" <name>] <*"+ETU_EXTENSION+" files>\n"
 				+"    "+OPTION_COMBINED+" <combined file>: also save a combined result for all tests to the specified file\n"
 				+"    "+OPTION_ONLY_COMBINED+" <combined file>: don't create reports for every single test, only combined one to the specified file\n"
 				+"    "+OPTION_SUITE_NAME+" <name>: replace the suite name in the result\n"
+				+"    "+OPTION_SUITE_NAME_PREFIX+" <prefix>: prefix the prefix to the suitename\n"
 			);
 	}
 	
@@ -271,6 +301,13 @@ public class EtUnitReportConverter {
 								suite.setName(options.getSuiteName()+i);
 								++i;
 							}
+						}
+					}
+				}
+				if(root != null && options.isPrefixSuiteName()) {
+					if(root.getTestsuites() != null) {
+						for(TestsuiteType suite : root.getTestsuites().getTestsuite()) {
+							suite.setName(options.getSuiteNamePrefix() + suite.getName());
 						}
 					}
 				}

@@ -55,7 +55,7 @@
 		convert: converts etu- into xunit xml-format
 	-->
 	<target name="convert" depends="run">
-		<convert testId="TestCppRuntime"/>
+		<convertPre testId="TestCppRuntime"/>
 	</target>
 
 	<!--

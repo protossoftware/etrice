@@ -53,8 +53,8 @@
 		convert: converts etu- into xunit xml-format
 	-->
 	<target name="convert" depends="run">
-		<convert testId="TestEtUnitSpecial"/>
-		<convert testId="TestCRuntime"/>
+		<convertPre testId="TestEtUnitSpecial"/>
+		<convertPre testId="TestCRuntime"/>
 	</target>
 	
 	<!--
