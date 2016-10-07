@@ -1,6 +1,7 @@
 package org.eclipse.etrice.core.genmodel;
 
 import org.eclipse.core.runtime.Plugin;
+import org.eclipse.etrice.core.RoomStandaloneSetup;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 
@@ -17,6 +18,8 @@ public class GenmodelTestsActivator extends Plugin implements BundleActivator {
 		super.start(context);
 		
 		instance = this;
+		
+		RoomStandaloneSetup.doSetup();
 	}
 
 }

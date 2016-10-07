@@ -12,11 +12,11 @@
 
 package org.eclipse.etrice.abstractexec.behavior;
 
-import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 
-public class Activator extends AbstractUIPlugin implements BundleActivator {
+public class Activator extends Plugin implements BundleActivator {
 
 	private static Activator instance = null;
 	

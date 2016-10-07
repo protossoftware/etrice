@@ -2,7 +2,7 @@ package org.eclipse.etrice.abstractexec.behavior.tests;
 
 import org.eclipse.core.runtime.Plugin;
 import org.eclipse.emf.ecore.util.Diagnostician;
-import org.eclipse.etrice.core.ui.RoomUiModule;
+import org.eclipse.etrice.core.RoomStandaloneSetup;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 
@@ -29,7 +29,7 @@ public class Activator extends Plugin implements BundleActivator {
 		
 		instance = this;
         
-		Injector injector = RoomUiModule.getInjector();
+		Injector injector = new RoomStandaloneSetup().createInjectorAndDoEMFRegistration();
         injector.injectMembers(this);
 	}
 
