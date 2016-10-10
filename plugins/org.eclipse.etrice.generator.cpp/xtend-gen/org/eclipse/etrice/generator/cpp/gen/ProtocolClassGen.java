@@ -512,6 +512,8 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     _builder.newLine();
     _builder.append("#include \"common/debugging/DebuggingService.h\"");
     _builder.newLine();
+    _builder.append("#include \"common/debugging/MSCFunctionObject.h\"");
+    _builder.newLine();
     _builder.append("#include \"common/messaging/AbstractMessageReceiver.h\"");
     _builder.newLine();
     _builder.append("#include \"common/messaging/Address.h\"");
@@ -638,15 +640,6 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.newLineIfNotEmpty();
       _builder.append("{");
       _builder.newLine();
-      {
-        GlobalGeneratorSettings _settings = Main.getSettings();
-        boolean _isGenerateMSCInstrumentation = _settings.isGenerateMSCInstrumentation();
-        if (_isGenerateMSCInstrumentation) {
-          _builder.append("\t");
-          _builder.append("DebuggingService::getInstance().addPortInstance(*this);");
-          _builder.newLine();
-        }
-      }
       _builder.append("}");
       _builder.newLine();
       _builder.newLine();
@@ -671,21 +664,12 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
         }
       }
       _builder.newLineIfNotEmpty();
-      {
-        GlobalGeneratorSettings _settings_1 = Main.getSettings();
-        boolean _isGenerateMSCInstrumentation_1 = _settings_1.isGenerateMSCInstrumentation();
-        if (_isGenerateMSCInstrumentation_1) {
-          _builder.append("\t");
-          _builder.append("DebuggingService::getInstance().addPortInstance(*this);");
-          _builder.newLine();
-        }
-      }
       _builder.append("}");
       _builder.newLine();
       {
-        GlobalGeneratorSettings _settings_2 = Main.getSettings();
-        boolean _isGenerateMSCInstrumentation_2 = _settings_2.isGenerateMSCInstrumentation();
-        if (_isGenerateMSCInstrumentation_2) {
+        GlobalGeneratorSettings _settings = Main.getSettings();
+        boolean _isGenerateMSCInstrumentation = _settings.isGenerateMSCInstrumentation();
+        if (_isGenerateMSCInstrumentation) {
           _builder.newLine();
           _builder.append("void ");
           _builder.append(portClassName, "");
@@ -731,9 +715,9 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.newLine();
       _builder.newLine();
       {
-        GlobalGeneratorSettings _settings_3 = Main.getSettings();
-        boolean _isGenerateMSCInstrumentation_3 = _settings_3.isGenerateMSCInstrumentation();
-        if (_isGenerateMSCInstrumentation_3) {
+        GlobalGeneratorSettings _settings_1 = Main.getSettings();
+        boolean _isGenerateMSCInstrumentation_1 = _settings_1.isGenerateMSCInstrumentation();
+        if (_isGenerateMSCInstrumentation_1) {
           _builder.append("\t");
           _builder.append("DebuggingService::getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), ");
           String _name_1 = pc.getName();
@@ -1115,21 +1099,27 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
             }
           }
         } else {
-          _builder_2.append("\t");
-          _builder_2.append("DebuggingService::getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(),");
-          _builder_2.newLine();
-          _builder_2.append("\t");
-          _builder_2.append("\t");
-          _builder_2.append(portClassName, "\t\t");
-          _builder_2.append("::getMessageString(");
-          _builder_2.append(portClassName, "\t\t");
-          _builder_2.append("::");
-          _builder_2.append(dir, "\t\t");
-          _builder_2.append("_");
-          String _name_3 = m.getName();
-          _builder_2.append(_name_3, "\t\t");
-          _builder_2.append("));");
-          _builder_2.newLineIfNotEmpty();
+          {
+            GlobalGeneratorSettings _settings = Main.getSettings();
+            boolean _isGenerateMSCInstrumentation = _settings.isGenerateMSCInstrumentation();
+            if (_isGenerateMSCInstrumentation) {
+              _builder_2.append("\t");
+              _builder_2.append("DebuggingService::getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(),");
+              _builder_2.newLine();
+              _builder_2.append("\t");
+              _builder_2.append("\t");
+              _builder_2.append(portClassName, "\t\t");
+              _builder_2.append("::getMessageString(");
+              _builder_2.append(portClassName, "\t\t");
+              _builder_2.append("::");
+              _builder_2.append(dir, "\t\t");
+              _builder_2.append("_");
+              String _name_3 = m.getName();
+              _builder_2.append(_name_3, "\t\t");
+              _builder_2.append("));");
+              _builder_2.newLineIfNotEmpty();
+            }
+          }
           _builder_2.append("\t");
           _builder_2.append("if (getPeerAddress().isValid()){");
           _builder_2.newLine();

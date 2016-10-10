@@ -33,6 +33,7 @@ SubSystemClassBase::SubSystemClassBase(IRTObject* parent, std::string name) :
 	DebuggingService::getInstance().getAsyncLogger().open();
 	DebuggingService::getInstance().getSyncLogger().setMSC(name + "_Sync", "log/");
 	DebuggingService::getInstance().getSyncLogger().open();
+	DebuggingService::getInstance().getSyncLogger().setObjectName("main");
 
 	RTServices::getInstance().setSubSystem(this);
 }
@@ -48,8 +49,9 @@ void SubSystemClassBase::init() {
 	// normaly the ports will address the correct target message service directly
 	// it is just for test purposes
 	// RTServices::getInstance().getMsgSvcCtrl().connectAll();
-
-	instantiateActors();
+	mapThreads();
+	initialize();
+	setProbesActive(true, true);
 //	std::cout << toStringRecursive() << std::endl;
 
 	// initialize all actor instances

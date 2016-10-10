@@ -16,14 +16,13 @@ import com.google.inject.Inject
 import com.google.inject.Singleton
 import java.util.Collection
 import java.util.Map
+import org.eclipse.etrice.core.common.converter.TimeConverter
 import org.eclipse.etrice.core.etmap.util.ETMapUtil
 import org.eclipse.etrice.core.etphys.eTPhys.ExecMode
 import org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread
-import org.eclipse.etrice.core.genmodel.builder.GenmodelConstants
 import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance
 import org.eclipse.etrice.core.genmodel.etricegen.WiredSubSystemClass
-import org.eclipse.etrice.core.genmodel.fsm.fsmgen.IDiagnostician
 import org.eclipse.etrice.core.room.SubSystemClass
 import org.eclipse.etrice.generator.cpp.Main
 import org.eclipse.etrice.generator.fsm.base.FileSystemHelpers
@@ -32,7 +31,6 @@ import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
 
 import static extension org.eclipse.etrice.generator.fsm.base.Indexed.*
-import org.eclipse.etrice.core.common.converter.TimeConverter
 
 @Singleton
 class NodeGen {
@@ -41,9 +39,9 @@ class NodeGen {
 	@Inject extension RoomExtensions
 	@Inject extension ProcedureHelpers
 	@Inject extension FileSystemHelpers
-
+	
 	@Inject IGeneratorFileIo fileIO
-	@Inject IDiagnostician diagnostician
+	@Inject Initialization initHelper
 
 	def doGenerate(Root root) {
 		val Map<SubSystemClass, WiredSubSystemClass> sscc2wired = newHashMap
@@ -86,6 +84,9 @@ class NodeGen {
 		«generateIncludeGuardBegin(cc, '')»
 
 		#include "common/modelbase/SubSystemClassBase.h"
+		«FOR ai : comp.actorInstances»
+			#include "«ai.actorClass.actorIncludePath»"
+		«ENDFOR»
 
 «««		«FOR model : root.getReferencedModels(cc)»
 «««		«««			#include "«model.name».h"
@@ -104,11 +105,25 @@ class NodeGen {
 					static const int «thread.value.threadId»;
 				«ENDFOR»
 
+				// sub actors
+				«FOR sub : cc.actorRefs»
+					«IF sub.multiplicity>1»
+						Replicated«sub.type.implementationClassName» «sub.name»;
+					«ELSE»
+						«sub.type.implementationClassName» «sub.name»;
+					«ENDIF»
+				«ENDFOR»
+
 				«clsname»(IRTObject* parent, const std::string& name);
+				~«clsname»();
 
 				virtual void receiveEvent(etRuntime::InterfaceItemBase* ifitem, int evt, void* data);
 				virtual void instantiateMessageServices();
-				virtual void instantiateActors();
+				virtual void mapThreads(void);
+				virtual void initialize(void);
+				«IF Main::settings.generateMSCInstrumentation»
+					virtual void setProbesActive(bool recursive, bool active);
+				«ENDIF»
 
 				virtual void init();
 
@@ -134,6 +149,18 @@ class NodeGen {
 		"THREAD_"+thread.name.toUpperCase
 	}
 
+	def private generateConstructorInitalizerList(SubSystemClass cc) {
+		val extension initHelper = initHelper
+		var initList = <CharSequence>newArrayList
+
+		// super class
+		initList += '''SubSystemClassBase(parent, name)'''
+	    // own sub actors
+	    initList += cc.actorRefs.map['''«name»(this, "«name»")''']
+
+		initList.generateCtorInitializerList
+	}
+
 	def generateSourceFile(Root root, SubSystemInstance comp, WiredSubSystemClass wired, Collection<PhysicalThread> usedThreads) {
 		val cc = comp.subSystemClass
 		val models = root.getReferencedModels(cc)
@@ -152,15 +179,12 @@ class NodeGen {
 		#include "«getCppHeaderFileName(nr, comp)»"
 
 		#include "common/debugging/DebuggingService.h"
+		#include "common/debugging/MSCFunctionObject.h"
 		#include "common/messaging/IMessageService.h"
 		#include "common/messaging/MessageService.h"
 		#include "common/messaging/MessageServiceController.h"
 		#include "common/messaging/RTServices.h"
 		#include "common/modelbase/InterfaceItemBase.h"
-
-		«FOR ai : comp.actorInstances»
-			#include "«ai.actorClass.actorIncludePath»"
-		«ENDFOR»
 
 		using namespace etRuntime;
 
@@ -170,15 +194,33 @@ class NodeGen {
 			const int «clsname»::«thread.value.threadId» = «thread.index0»;
 		«ENDFOR»
 
-		«clsname»::«clsname»(IRTObject* parent, const std::string& name) :
-				SubSystemClassBase(parent, name)
+		«clsname»::«clsname»(IRTObject* parent, const std::string& name)
+				«cc.generateConstructorInitalizerList»
 		{
+			«IF Main::settings.generateMSCInstrumentation»
+				MSCFunctionObject mscFunctionObject(getInstancePathName(), "Constructor");
+			«ENDIF»
+			«FOR sub : cc.actorRefs»
+				«IF sub.multiplicity>1»
+					«sub.name».createSubActors(«sub.multiplicity»);
+				«ENDIF»
+			«ENDFOR»
+		}
+		
+		«clsname»::~«clsname»() {
+			«IF Main::settings.generateMSCInstrumentation»
+				MSCFunctionObject mscFunctionObject(getInstancePathName(), "Destructor");
+			«ENDIF»
 		}
 
 		void «clsname»::receiveEvent(InterfaceItemBase* ifitem, int evt, void* data){
 		}
 
 		void «clsname»::instantiateMessageServices(){
+
+			«IF Main::settings.generateMSCInstrumentation»
+				MSCFunctionObject mscFunctionObject(getInstancePathName(), "instantiateMessageServices()");
+			«ENDIF»
 
 			IMessageService* msgService;
 			«FOR thread: threads»
@@ -197,8 +239,7 @@ class NodeGen {
 			«ENDFOR»
 		}
 
-		void «clsname»::instantiateActors(){
-
+		void «clsname»::mapThreads() {
 			// thread mappings
 			«FOR ai : comp.allContainedInstances»
 				«val mapped = ETMapUtil::getMappedThread(ai)»
@@ -206,34 +247,47 @@ class NodeGen {
 					addPathToThread("«ai.path»", «mapped.thread.threadId»);
 				«ENDIF»
 			«ENDFOR»
+		}
 
-			// sub actors
-			«FOR sub : cc.actorRefs»
-				«IF sub.multiplicity>1»
-					for (int i=0; i<«sub.multiplicity»; ++i) {
-						«IF Main::settings.generateMSCInstrumentation»
-							DebuggingService::getInstance().addMessageActorCreate(*this, "«sub.name»«GenmodelConstants::INDEX_SEP»"+i);
-						«ENDIF»
-						new «sub.type.implementationClassName»(this, "«sub.name»«GenmodelConstants::INDEX_SEP»"+i);
-					}
-				«ELSE»
-					«IF Main::settings.generateMSCInstrumentation»
+		void «clsname»::initialize() {
+			«IF Main::settings.generateMSCInstrumentation»
+				DebuggingService::getInstance().getSyncLogger().addVisibleComment("starting initialization");
+				MSCFunctionObject mscFunctionObject(getInstancePathName(), "initialize()");
+				«FOR sub : cc.actorRefs»
+					«IF sub.multiplicity>1»
+						for (int i=0; i<«sub.multiplicity»; ++i) {
+							DebuggingService::getInstance().addMessageActorCreate(*this, «sub.name».getSubActor(i)->getName());
+						}
+					«ELSE»
 						DebuggingService::getInstance().addMessageActorCreate(*this, "«sub.name»");
 					«ENDIF»
-					new «sub.type.implementationClassName»(this, "«sub.name»");
-				«ENDIF»
-			«ENDFOR»
-
+				«ENDFOR»			
+			«ENDIF»
+			
 			// wiring
 			«FOR wire: wired.wires»
 				«if (wire.dataDriven) "DataPortBase" else "InterfaceItemBase"»::connect(this, "«wire.path1.join('/')»", "«wire.path2.join('/')»");
 			«ENDFOR»
+			
+			// call initialize of sub actors
+			«FOR sub : cc.actorRefs»
+				«sub.name».initialize();
+			«ENDFOR»
 		}
+		
+		«IF Main::settings.generateMSCInstrumentation»
+			void «clsname»::setProbesActive(bool recursive, bool active) {
+				for(int i = 0; i < m_RTSystemPort.getNInterfaceItems(); i++)
+					DebuggingService::getInstance().addPortInstance(*(m_RTSystemPort.getInterfaceItem(i)));
+				if(recursive) {
+					«FOR sub : cc.actorRefs»
+						«sub.name».setProbesActive(recursive, active);
+					«ENDFOR»
+				}
+			}
+		«ENDIF»
 
 		void «clsname»::init(){
-			«IF Main::settings.generateMSCInstrumentation»
-				DebuggingService::getInstance().addVisibleComment("begin sub system initialization");
-			«ENDIF»
 			SubSystemClassBase::init();
 			«IF Main::settings.generateMSCInstrumentation»
 				DebuggingService::getInstance().addVisibleComment("done sub system initialization");
@@ -242,9 +296,15 @@ class NodeGen {
 		«IF Main::settings.generateMSCInstrumentation»
 
 			void «clsname»::destroy() {
-				DebuggingService::getInstance().addVisibleComment("begin sub system destruction");
+				«IF Main::settings.generateMSCInstrumentation»
+					DebuggingService::getInstance().getSyncLogger().addVisibleComment("starting destruction");
+					MSCFunctionObject mscFunctionObject(getInstancePathName(), "destroy()");
+					DebuggingService::getInstance().addVisibleComment("begin sub system destruction");
+				«ENDIF»
 				SubSystemClassBase::destroy();
-				DebuggingService::getInstance().addVisibleComment("done sub system destruction");
+				«IF Main::settings.generateMSCInstrumentation»
+					DebuggingService::getInstance().addVisibleComment("done sub system destruction");
+				«ENDIF»
 			}
 		«ENDIF»
 

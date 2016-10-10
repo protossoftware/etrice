@@ -23,7 +23,6 @@
 namespace etRuntime {
 
 
-
 class ActorClassBase: public SystemPortOwner, public virtual IMessageReceiver {
 public:
 
@@ -41,6 +40,9 @@ public:
 		// TODO: Actor should have its own address for services and debugging
 		return Address::EMPTY;
 	}
+
+	virtual void initialize(void);
+	virtual void setProbesActive(bool recursive, bool active) {}
 
 	//SubSystemClassBase* getSubSystem() const;
 

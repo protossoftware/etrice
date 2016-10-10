@@ -21,7 +21,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.core.fsm.fSM.ComponentCommunicationType;
 import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.etrice.core.fsm.fSM.StateGraph;
-import org.eclipse.etrice.core.genmodel.builder.GenmodelConstants;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.core.genmodel.etricegen.Wire;
@@ -194,6 +193,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.newLine();
       _builder.append("#include \"common/modelbase/PortBase.h\"");
       _builder.newLine();
+      _builder.append("#include \"common/modelbase/ReplicatedActorClassBase.h\"");
+      _builder.newLine();
       _builder.append("#include \"common/modelbase/InterfaceItemBase.h\"");
       _builder.newLine();
       _builder.append("#include \"common/modelbase/SubSystemClassBase.h\"");
@@ -250,6 +251,17 @@ public class ActorClassGen extends GenericActorClassGenerator {
           _builder.newLineIfNotEmpty();
         }
       }
+      {
+        EList<ActorRef> _actorRefs = ac.getActorRefs();
+        for(final ActorRef ar : _actorRefs) {
+          _builder.append("#include \"");
+          ActorClass _type = ar.getType();
+          String _actorIncludePath = this._cppExtensions.getActorIncludePath(_type);
+          _builder.append(_actorIncludePath, "");
+          _builder.append("\"");
+          _builder.newLineIfNotEmpty();
+        }
+      }
       _builder.newLine();
       DetailCode _userCode1 = ac.getUserCode1();
       CharSequence _userCode = this._procedureHelpers.userCode(_userCode1);
@@ -292,6 +304,41 @@ public class ActorClassGen extends GenericActorClassGenerator {
       }
       _builder.newLine();
       _builder.append("\t\t");
+      _builder.append("//--------------------- sub actors");
+      _builder.newLine();
+      {
+        EList<ActorRef> _actorRefs_1 = ac.getActorRefs();
+        for(final ActorRef sub : _actorRefs_1) {
+          {
+            int _multiplicity = sub.getMultiplicity();
+            boolean _greaterThan = (_multiplicity > 1);
+            if (_greaterThan) {
+              _builder.append("\t\t");
+              _builder.append("Replicated");
+              ActorClass _type_1 = sub.getType();
+              String _implementationClassName = this._cppExtensions.getImplementationClassName(_type_1);
+              _builder.append(_implementationClassName, "\t\t");
+              _builder.append(" ");
+              String _name_6 = sub.getName();
+              _builder.append(_name_6, "\t\t");
+              _builder.append(";");
+              _builder.newLineIfNotEmpty();
+            } else {
+              _builder.append("\t\t");
+              ActorClass _type_2 = sub.getType();
+              String _implementationClassName_1 = this._cppExtensions.getImplementationClassName(_type_2);
+              _builder.append(_implementationClassName_1, "\t\t");
+              _builder.append(" ");
+              String _name_7 = sub.getName();
+              _builder.append(_name_7, "\t\t");
+              _builder.append(";");
+              _builder.newLineIfNotEmpty();
+            }
+          }
+        }
+      }
+      _builder.newLine();
+      _builder.append("\t\t");
       _builder.append("//--------------------- saps");
       _builder.newLine();
       {
@@ -301,8 +348,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
           String _portClassName_1 = this._roomExtensions.getPortClassName(sap);
           _builder.append(_portClassName_1, "\t\t");
           _builder.append(" ");
-          String _name_6 = sap.getName();
-          _builder.append(_name_6, "\t\t");
+          String _name_8 = sap.getName();
+          _builder.append(_name_8, "\t\t");
           _builder.append(";");
           _builder.newLineIfNotEmpty();
         }
@@ -319,8 +366,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
           _builder.append(_portClassName_2, "\t\t");
           _builder.append(" ");
           SPP _spp = svc.getSpp();
-          String _name_7 = _spp.getName();
-          _builder.append(_name_7, "\t\t");
+          String _name_9 = _spp.getName();
+          _builder.append(_name_9, "\t\t");
           _builder.append(";");
           _builder.newLineIfNotEmpty();
         }
@@ -342,8 +389,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.newLine();
       _builder.append("\t\t");
       EList<StandardOperation> _operations = ac.getOperations();
-      String _name_8 = ac.getName();
-      CharSequence _operationsDeclaration = this._procedureHelpers.operationsDeclaration(_operations, _name_8);
+      String _name_10 = ac.getName();
+      CharSequence _operationsDeclaration = this._procedureHelpers.operationsDeclaration(_operations, _name_10);
       _builder.append(_operationsDeclaration, "\t\t");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
@@ -354,10 +401,22 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append("//--------------------- construction");
       _builder.newLine();
       _builder.append("\t\t");
-      String _name_9 = ac.getName();
-      _builder.append(_name_9, "\t\t");
+      String _name_11 = ac.getName();
+      _builder.append(_name_11, "\t\t");
       _builder.append("(etRuntime::IRTObject* parent, const std::string& name);");
       _builder.newLineIfNotEmpty();
+      _builder.append("\t\t");
+      _builder.append("void initialize(void);");
+      _builder.newLine();
+      {
+        GlobalGeneratorSettings _settings = Main.getSettings();
+        boolean _isGenerateMSCInstrumentation = _settings.isGenerateMSCInstrumentation();
+        if (_isGenerateMSCInstrumentation) {
+          _builder.append("\t\t");
+          _builder.append("void setProbesActive(bool recursive, bool active);");
+          _builder.newLine();
+        }
+      }
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append("//--------------------- port getters");
@@ -479,6 +538,38 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append("};");
       _builder.newLine();
       _builder.newLine();
+      _builder.append("class Replicated");
+      _builder.append(clsname, "");
+      _builder.append(" : public ReplicatedActorClassBase {");
+      _builder.newLineIfNotEmpty();
+      _builder.append("public:");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("Replicated");
+      _builder.append(clsname, "\t");
+      _builder.append("(IRTObject* parent, const std::string& name) :");
+      _builder.newLineIfNotEmpty();
+      _builder.append("\t\t");
+      _builder.append("ReplicatedActorClassBase(parent, name) {}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("protected:");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("ActorClassBase* createActor(IRTObject* parent, const std::string& name) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("return new ");
+      _builder.append(clsname, "\t\t");
+      _builder.append("(parent, name);");
+      _builder.newLineIfNotEmpty();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("};");
+      _builder.newLine();
+      _builder.newLine();
       String _generateNamespaceEnd = this._cppExtensions.generateNamespaceEnd(ac);
       _builder.append(_generateNamespaceEnd, "");
       _builder.newLineIfNotEmpty();
@@ -530,8 +621,23 @@ public class ActorClassGen extends GenericActorClassGenerator {
       };
       List<String> _map = ListExtensions.<Port, String>map(_endPorts, _function);
       Iterables.<CharSequence>addAll(initList, _map);
+      EList<ActorRef> _actorRefs = ac.getActorRefs();
+      final Function1<ActorRef, String> _function_1 = new Function1<ActorRef, String>() {
+        public String apply(final ActorRef it) {
+          StringConcatenation _builder = new StringConcatenation();
+          String _name = it.getName();
+          _builder.append(_name, "");
+          _builder.append("(this, \"");
+          String _name_1 = it.getName();
+          _builder.append(_name_1, "");
+          _builder.append("\")");
+          return _builder.toString();
+        }
+      };
+      List<String> _map_1 = ListExtensions.<ActorRef, String>map(_actorRefs, _function_1);
+      Iterables.<CharSequence>addAll(initList, _map_1);
       EList<SAP> _serviceAccessPoints = ac.getServiceAccessPoints();
-      final Function1<SAP, String> _function_1 = new Function1<SAP, String>() {
+      final Function1<SAP, String> _function_2 = new Function1<SAP, String>() {
         public String apply(final SAP it) {
           StringConcatenation _builder = new StringConcatenation();
           String _name = it.getName();
@@ -546,10 +652,10 @@ public class ActorClassGen extends GenericActorClassGenerator {
           return _builder.toString();
         }
       };
-      List<String> _map_1 = ListExtensions.<SAP, String>map(_serviceAccessPoints, _function_1);
-      Iterables.<CharSequence>addAll(initList, _map_1);
+      List<String> _map_2 = ListExtensions.<SAP, String>map(_serviceAccessPoints, _function_2);
+      Iterables.<CharSequence>addAll(initList, _map_2);
       EList<ServiceImplementation> _serviceImplementations = ac.getServiceImplementations();
-      final Function1<ServiceImplementation, String> _function_2 = new Function1<ServiceImplementation, String>() {
+      final Function1<ServiceImplementation, String> _function_3 = new Function1<ServiceImplementation, String>() {
         public String apply(final ServiceImplementation it) {
           StringConcatenation _builder = new StringConcatenation();
           SPP _spp = it.getSpp();
@@ -567,10 +673,10 @@ public class ActorClassGen extends GenericActorClassGenerator {
           return _builder.toString();
         }
       };
-      List<String> _map_2 = ListExtensions.<ServiceImplementation, String>map(_serviceImplementations, _function_2);
-      Iterables.<CharSequence>addAll(initList, _map_2);
+      List<String> _map_3 = ListExtensions.<ServiceImplementation, String>map(_serviceImplementations, _function_3);
+      Iterables.<CharSequence>addAll(initList, _map_3);
       EList<Attribute> _attributes = ac.getAttributes();
-      final Function1<Attribute, String> _function_3 = new Function1<Attribute, String>() {
+      final Function1<Attribute, String> _function_4 = new Function1<Attribute, String>() {
         public String apply(final Attribute it) {
           StringConcatenation _builder = new StringConcatenation();
           String _name = it.getName();
@@ -582,8 +688,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
           return _builder.toString();
         }
       };
-      List<String> _map_3 = ListExtensions.<Attribute, String>map(_attributes, _function_3);
-      Iterables.<CharSequence>addAll(initList, _map_3);
+      List<String> _map_4 = ListExtensions.<Attribute, String>map(_attributes, _function_4);
+      Iterables.<CharSequence>addAll(initList, _map_4);
       _xblockexpression = initHelper.generateCtorInitializerList(initList);
     }
     return _xblockexpression;
@@ -644,18 +750,10 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.newLine();
       _builder.append("#include \"common/messaging/RTServices.h\"");
       _builder.newLine();
+      _builder.append("#include \"common/debugging/DebuggingService.h\"");
       _builder.newLine();
-      {
-        EList<ActorRef> _actorRefs = ac.getActorRefs();
-        for(final ActorRef ar : _actorRefs) {
-          _builder.append("#include \"");
-          ActorClass _type = ar.getType();
-          String _actorIncludePath = this._cppExtensions.getActorIncludePath(_type);
-          _builder.append(_actorIncludePath, "");
-          _builder.append("\"");
-          _builder.newLineIfNotEmpty();
-        }
-      }
+      _builder.append("#include \"common/debugging/MSCFunctionObject.h\"");
+      _builder.newLine();
       _builder.newLine();
       _builder.append("using namespace etRuntime;");
       _builder.newLine();
@@ -674,6 +772,17 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append(_generateConstructorInitalizerList, "\t\t");
       _builder.newLineIfNotEmpty();
       _builder.append("{");
+      _builder.newLine();
+      {
+        GlobalGeneratorSettings _settings = Main.getSettings();
+        boolean _isGenerateMSCInstrumentation = _settings.isGenerateMSCInstrumentation();
+        if (_isGenerateMSCInstrumentation) {
+          _builder.append("\t");
+          _builder.append("MSCFunctionObject mscFunctionObject(getInstancePathName(), \"Constructor\");");
+          _builder.newLine();
+        }
+      }
+      _builder.append("\t");
       _builder.newLine();
       {
         boolean _hasNonEmptyStateMachine = this._roomHelpers.hasNonEmptyStateMachine(ac);
@@ -701,74 +810,103 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append("// sub actors");
       _builder.newLine();
       {
-        EList<ActorRef> _actorRefs_1 = ac.getActorRefs();
-        for(final ActorRef sub : _actorRefs_1) {
+        EList<ActorRef> _actorRefs = ac.getActorRefs();
+        for(final ActorRef sub : _actorRefs) {
           {
             int _multiplicity = sub.getMultiplicity();
             boolean _greaterThan = (_multiplicity > 1);
             if (_greaterThan) {
               _builder.append("\t");
-              _builder.append("for (int i=0; i<");
+              String _name_4 = sub.getName();
+              _builder.append(_name_4, "\t");
+              _builder.append(".createSubActors(");
               int _multiplicity_1 = sub.getMultiplicity();
               _builder.append(_multiplicity_1, "\t");
-              _builder.append("; ++i) {");
-              _builder.newLineIfNotEmpty();
-              {
-                GlobalGeneratorSettings _settings = Main.getSettings();
-                boolean _isGenerateMSCInstrumentation = _settings.isGenerateMSCInstrumentation();
-                if (_isGenerateMSCInstrumentation) {
-                  _builder.append("\t");
-                  _builder.append("\t");
-                  _builder.append("DebuggingService::getInstance().addMessageActorCreate(*this, \"");
-                  String _name_4 = sub.getName();
-                  _builder.append(_name_4, "\t\t");
-                  _builder.append(GenmodelConstants.INDEX_SEP, "\t\t");
-                  _builder.append("\"+i);");
-                  _builder.newLineIfNotEmpty();
-                }
-              }
-              _builder.append("\t");
-              _builder.append("\t");
-              _builder.append("new ");
-              ActorClass _type_1 = sub.getType();
-              String _implementationClassName = this._cppExtensions.getImplementationClassName(_type_1);
-              _builder.append(_implementationClassName, "\t\t");
-              _builder.append("(this, \"");
-              String _name_5 = sub.getName();
-              _builder.append(_name_5, "\t\t");
-              _builder.append(GenmodelConstants.INDEX_SEP, "\t\t");
-              _builder.append("\"+i);");
-              _builder.newLineIfNotEmpty();
-              _builder.append("\t");
-              _builder.append("}");
-              _builder.newLine();
-            } else {
-              {
-                GlobalGeneratorSettings _settings_1 = Main.getSettings();
-                boolean _isGenerateMSCInstrumentation_1 = _settings_1.isGenerateMSCInstrumentation();
-                if (_isGenerateMSCInstrumentation_1) {
-                  _builder.append("\t");
-                  _builder.append("DebuggingService::getInstance().addMessageActorCreate(*this, \"");
-                  String _name_6 = sub.getName();
-                  _builder.append(_name_6, "\t");
-                  _builder.append("\");");
-                  _builder.newLineIfNotEmpty();
-                }
-              }
-              _builder.append("\t");
-              _builder.append("new ");
-              ActorClass _type_2 = sub.getType();
-              String _implementationClassName_1 = this._cppExtensions.getImplementationClassName(_type_2);
-              _builder.append(_implementationClassName_1, "\t");
-              _builder.append("(this, \"");
-              String _name_7 = sub.getName();
-              _builder.append(_name_7, "\t");
-              _builder.append("\");");
+              _builder.append(");");
               _builder.newLineIfNotEmpty();
             }
           }
         }
       }
+      _builder.newLine();
+      _builder.append("\t");
+      EList<Attribute> _attributes = ac.getAttributes();
+      CharSequence _genExtraInitializers = this.initHelper.genExtraInitializers(_attributes);
+      _builder.append(_genExtraInitializers, "\t");
+      _builder.newLineIfNotEmpty();
+      _builder.append("\t");
+      String _userStructorBody = this._procedureHelpers.userStructorBody(ac, true);
+      _builder.append(_userStructorBody, "\t");
+      _builder.newLineIfNotEmpty();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("void ");
+      String _name_5 = ac.getName();
+      _builder.append(_name_5, "");
+      _builder.append("::initialize() {");
+      _builder.newLineIfNotEmpty();
+      {
+        GlobalGeneratorSettings _settings_1 = Main.getSettings();
+        boolean _isGenerateMSCInstrumentation_1 = _settings_1.isGenerateMSCInstrumentation();
+        if (_isGenerateMSCInstrumentation_1) {
+          _builder.append("\t");
+          _builder.append("MSCFunctionObject mscFunctionObject(getInstancePathName(), \"initialize()\");");
+          _builder.newLine();
+          {
+            EList<ActorRef> _actorRefs_1 = ac.getActorRefs();
+            for(final ActorRef sub_1 : _actorRefs_1) {
+              {
+                int _multiplicity_2 = sub_1.getMultiplicity();
+                boolean _greaterThan_1 = (_multiplicity_2 > 1);
+                if (_greaterThan_1) {
+                  _builder.append("\t");
+                  _builder.append("for (int i=0; i<");
+                  int _multiplicity_3 = sub_1.getMultiplicity();
+                  _builder.append(_multiplicity_3, "\t");
+                  _builder.append("; ++i) {");
+                  _builder.newLineIfNotEmpty();
+                  _builder.append("\t");
+                  _builder.append("\t");
+                  _builder.append("DebuggingService::getInstance().addMessageActorCreate(*this, ");
+                  String _name_6 = sub_1.getName();
+                  _builder.append(_name_6, "\t\t");
+                  _builder.append(".getSubActor(i)->getName());");
+                  _builder.newLineIfNotEmpty();
+                  _builder.append("\t");
+                  _builder.append("}");
+                  _builder.newLine();
+                } else {
+                  _builder.append("\t");
+                  _builder.append("DebuggingService::getInstance().addMessageActorCreate(*this, \"");
+                  String _name_7 = sub_1.getName();
+                  _builder.append(_name_7, "\t");
+                  _builder.append("\");");
+                  _builder.newLineIfNotEmpty();
+                }
+              }
+            }
+          }
+        }
+      }
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("ActorClassBase::initialize();");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      {
+        EList<ActorRef> _actorRefs_2 = ac.getActorRefs();
+        for(final ActorRef sub_2 : _actorRefs_2) {
+          _builder.append("\t");
+          String _name_8 = sub_2.getName();
+          _builder.append(_name_8, "\t");
+          _builder.append(".initialize();");
+          _builder.newLineIfNotEmpty();
+        }
+      }
+      _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("// wiring");
@@ -818,32 +956,139 @@ public class ActorClassGen extends GenericActorClassGenerator {
           _builder.newLine();
         }
       }
-      _builder.newLine();
-      _builder.append("\t");
-      EList<Attribute> _attributes = ac.getAttributes();
-      CharSequence _genExtraInitializers = this.initHelper.genExtraInitializers(_attributes);
-      _builder.append(_genExtraInitializers, "\t");
-      _builder.newLineIfNotEmpty();
-      _builder.append("\t");
-      String _userStructorBody = this._procedureHelpers.userStructorBody(ac, true);
-      _builder.append(_userStructorBody, "\t");
-      _builder.newLineIfNotEmpty();
       _builder.append("}");
       _builder.newLine();
       _builder.newLine();
+      {
+        GlobalGeneratorSettings _settings_2 = Main.getSettings();
+        boolean _isGenerateMSCInstrumentation_2 = _settings_2.isGenerateMSCInstrumentation();
+        if (_isGenerateMSCInstrumentation_2) {
+          _builder.append("void ");
+          String _name_9 = ac.getName();
+          _builder.append(_name_9, "");
+          _builder.append("::setProbesActive(bool recursive, bool active) {");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.append("DebuggingService::getInstance().addPortInstance(m_RTSystemPort);");
+          _builder.newLine();
+          {
+            EList<ActorRef> _actorRefs_3 = ac.getActorRefs();
+            int _size = _actorRefs_3.size();
+            boolean _greaterThan_2 = (_size > 0);
+            if (_greaterThan_2) {
+              _builder.append("\t");
+              _builder.append("if(recursive) {");
+              _builder.newLine();
+              {
+                EList<ActorRef> _actorRefs_4 = ac.getActorRefs();
+                for(final ActorRef sub_3 : _actorRefs_4) {
+                  _builder.append("\t");
+                  _builder.append("\t");
+                  String _name_10 = sub_3.getName();
+                  _builder.append(_name_10, "\t\t");
+                  _builder.append(".setProbesActive(recursive, active);");
+                  _builder.newLineIfNotEmpty();
+                }
+              }
+              _builder.append("\t");
+              _builder.append("}");
+              _builder.newLine();
+            }
+          }
+          {
+            List<Port> _endPorts = this._roomHelpers.getEndPorts(ac);
+            for(final Port ep : _endPorts) {
+              {
+                boolean _isDataDriven_1 = this._roomHelpers.isDataDriven(ep);
+                boolean _not = (!_isDataDriven_1);
+                if (_not) {
+                  {
+                    boolean _isReplicated = ep.isReplicated();
+                    if (_isReplicated) {
+                      _builder.append("\t");
+                      _builder.append("for(int i = 0; i < ");
+                      String _name_11 = ep.getName();
+                      _builder.append(_name_11, "\t");
+                      _builder.append(".getNInterfaceItems(); i++)");
+                      _builder.newLineIfNotEmpty();
+                      _builder.append("\t");
+                      _builder.append("\t");
+                      _builder.append("DebuggingService::getInstance().addPortInstance(*(");
+                      String _name_12 = ep.getName();
+                      _builder.append(_name_12, "\t\t");
+                      _builder.append(".getInterfaceItem(i)));");
+                      _builder.newLineIfNotEmpty();
+                    } else {
+                      _builder.append("\t");
+                      _builder.append("DebuggingService::getInstance().addPortInstance(");
+                      String _name_13 = ep.getName();
+                      _builder.append(_name_13, "\t");
+                      _builder.append(");");
+                      _builder.newLineIfNotEmpty();
+                    }
+                  }
+                }
+              }
+            }
+          }
+          {
+            EList<SAP> _serviceAccessPoints = ac.getServiceAccessPoints();
+            for(final SAP sap : _serviceAccessPoints) {
+              _builder.append("\t");
+              _builder.append("DebuggingService::getInstance().addPortInstance(");
+              String _name_14 = sap.getName();
+              _builder.append(_name_14, "\t");
+              _builder.append(");");
+              _builder.newLineIfNotEmpty();
+            }
+          }
+          {
+            EList<SPP> _serviceProvisionPoints = ac.getServiceProvisionPoints();
+            for(final SPP spp : _serviceProvisionPoints) {
+              _builder.append("\t");
+              _builder.append("for(int i = 0; i < ");
+              String _name_15 = spp.getName();
+              _builder.append(_name_15, "\t");
+              _builder.append(".getNInterfaceItems(); i++)");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t");
+              _builder.append("\t\t");
+              _builder.append("DebuggingService::getInstance().addPortInstance(*(");
+              String _name_16 = spp.getName();
+              _builder.append(_name_16, "\t\t\t");
+              _builder.append(".getInterfaceItem(i)));");
+              _builder.newLineIfNotEmpty();
+            }
+          }
+          _builder.append("}");
+          _builder.newLine();
+        }
+      }
+      _builder.newLine();
       _builder.append("void ");
-      String _name_8 = ac.getName();
-      _builder.append(_name_8, "");
+      String _name_17 = ac.getName();
+      _builder.append(_name_17, "");
       _builder.append("::destroy(){");
       _builder.newLineIfNotEmpty();
+      {
+        GlobalGeneratorSettings _settings_3 = Main.getSettings();
+        boolean _isGenerateMSCInstrumentation_3 = _settings_3.isGenerateMSCInstrumentation();
+        if (_isGenerateMSCInstrumentation_3) {
+          _builder.append("\t");
+          _builder.append("MSCFunctionObject mscFunctionObject(getInstancePathName(), \"destroy()\");");
+          _builder.newLine();
+        }
+      }
+      _builder.append("\t");
+      _builder.newLine();
       _builder.append("\t");
       String _userStructorBody_1 = this._procedureHelpers.userStructorBody(ac, false);
       _builder.append(_userStructorBody_1, "\t");
       _builder.newLineIfNotEmpty();
       {
-        GlobalGeneratorSettings _settings_2 = Main.getSettings();
-        boolean _isGenerateMSCInstrumentation_2 = _settings_2.isGenerateMSCInstrumentation();
-        if (_isGenerateMSCInstrumentation_2) {
+        GlobalGeneratorSettings _settings_4 = Main.getSettings();
+        boolean _isGenerateMSCInstrumentation_4 = _settings_4.isGenerateMSCInstrumentation();
+        if (_isGenerateMSCInstrumentation_4) {
           _builder.append("\t");
           _builder.append("DebuggingService::getInstance().addMessageActorDestroy(*this);");
           _builder.newLine();
@@ -874,8 +1119,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.newLine();
       _builder.newLine();
       EList<StandardOperation> _operations = ac.getOperations();
-      String _name_9 = ac.getName();
-      CharSequence _operationsImplementation = this._procedureHelpers.operationsImplementation(_operations, _name_9);
+      String _name_18 = ac.getName();
+      CharSequence _operationsImplementation = this._procedureHelpers.operationsImplementation(_operations, _name_18);
       _builder.append(_operationsImplementation, "");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
@@ -890,8 +1135,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
             boolean _equals_4 = Objects.equal(_commType_4, ComponentCommunicationType.DATA_DRIVEN);
             if (_equals_4) {
               _builder.append("void ");
-              String _name_10 = ac.getName();
-              _builder.append(_name_10, "");
+              String _name_19 = ac.getName();
+              _builder.append(_name_19, "");
               _builder.append("::receiveEvent(InterfaceItemBase* ifitem, int evt, void* generic_data) {");
               _builder.newLineIfNotEmpty();
               _builder.append("\t");
@@ -914,8 +1159,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
             }
             if (_or_2) {
               _builder.append("void ");
-              String _name_11 = ac.getName();
-              _builder.append(_name_11, "");
+              String _name_20 = ac.getName();
+              _builder.append(_name_20, "");
               _builder.append("::receive(const Message* msg) {");
               _builder.newLineIfNotEmpty();
               {
@@ -942,8 +1187,8 @@ public class ActorClassGen extends GenericActorClassGenerator {
             _builder.append("//--------------------- no state machine");
             _builder.newLine();
             _builder.append("void ");
-            String _name_12 = ac.getName();
-            _builder.append(_name_12, "");
+            String _name_21 = ac.getName();
+            _builder.append(_name_21, "");
             _builder.append("::receiveEvent(InterfaceItemBase* ifitem, int evt, void* data) {");
             _builder.newLineIfNotEmpty();
             _builder.append("\t");
