@@ -30,7 +30,8 @@ MSCLogger::MSCLogger() :
 }
 
 MSCLogger::~MSCLogger() {
-	delete m_filter;
+	if(m_filter != NULL)
+		delete m_filter;
 	m_filter = 0;
 	etMutex_destruct(&m_mutex);
 }
@@ -38,7 +39,8 @@ MSCLogger::~MSCLogger() {
 void MSCLogger::setMSC(const std::string& msc_name, const std::string& path) {
 	m_msc_name = msc_name;
 	m_path = path;
-	delete m_filter;
+	if(m_filter != NULL)
+		delete m_filter;
 	m_filter = new MSCFilter();
 }
 

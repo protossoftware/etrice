@@ -18,10 +18,12 @@
 using namespace etRuntime;
 
 void MSCFunctionObjectTest::test() {
-	DebuggingService::getInstance().getSyncLogger().setMSC("MSCFunctionObjectTest", "log/testlog/");
+	DebuggingService::getInstance().getSyncLogger().setMSC(
+			"MSCFunctionObjectTest", "log/testlog/");
 	DebuggingService::getInstance().getSyncLogger().open();
 	DebuggingService::getInstance().getSyncLogger().setObjectName("main");
-	MSCFunctionObject* obj = new MSCFunctionObject("MSCFunctionObjectTest", "test(void)");
+	MSCFunctionObject* obj = new MSCFunctionObject("MSCFunctionObjectTest",
+			"test(void)");
 	TestClassA* tca = new TestClassA();
 	tca->test();
 	delete tca;
@@ -34,8 +36,7 @@ void MSCFunctionObjectTest::runAllTestCases() {
 }
 
 TestClassA::TestClassA() :
-	tcb()
-{
+		tcb() {
 	MSCFunctionObject("TestClassA", "Constructor");
 }
 

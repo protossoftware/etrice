@@ -10,37 +10,21 @@
  *
  *******************************************************************************/
 
-#ifndef SRC_DEBUGGING_MSCFUNCTIONOBJECTTEST_H_
-#define SRC_DEBUGGING_MSCFUNCTIONOBJECTTEST_H_
+#ifndef SRC_MSCLOGGERTEST_H_
+#define SRC_MSCLOGGERTEST_H_
 
 #include "util/etTestSuite.h"
 
-class MSCFunctionObjectTest: public etTestSuite {
+class MSCLoggerTest: public etTestSuite {
 public:
-	MSCFunctionObjectTest() :
-			etTestSuite("MSFunctionObjectTest") {
+	MSCLoggerTest(void) :
+			etTestSuite("MSCLoggerTest") {
 	}
 
 protected:
-	void test(void);
+	void testLogger(void);
 
 	void runAllTestCases(void);
 };
 
-class TestClassB {
-public:
-	TestClassB(void);
-	void test(void);
-	~TestClassB(void);
-};
-
-class TestClassA {
-public:
-	TestClassA(void);
-	void test(void);
-	~TestClassA(void);
-private:
-	TestClassB tcb;
-};
-
-#endif /* SRC_DEBUGGING_MSCFUNCTIONOBJECTTEST_H_ */
+#endif /* SRC_MSCLOGGERTEST_H_ */

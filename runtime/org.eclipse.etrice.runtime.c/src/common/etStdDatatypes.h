@@ -20,6 +20,10 @@ extern "C" {
 #ifndef _ETSTDDATATYPES_H_
 #define _ETSTDDATATYPES_H_
 
+#ifndef _ETDATATYPES_H_
+#error etStdDatatypes must not be included before etDatatypes (include etDatatypes instead).
+#endif
+
 /*
  Define switches for additional data types:
  #define ET_INT64

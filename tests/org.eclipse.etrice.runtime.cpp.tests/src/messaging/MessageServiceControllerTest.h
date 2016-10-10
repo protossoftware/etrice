@@ -10,37 +10,30 @@
  *
  *******************************************************************************/
 
-#ifndef SRC_DEBUGGING_MSCFUNCTIONOBJECTTEST_H_
-#define SRC_DEBUGGING_MSCFUNCTIONOBJECTTEST_H_
+#ifndef SRC_MESSAGING_MESSAGESERVICECONTROLLERTEST_H_
+#define SRC_MESSAGING_MESSAGESERVICECONTROLLERTEST_H_
 
 #include "util/etTestSuite.h"
+#include "osal/etTimer.h"
 
-class MSCFunctionObjectTest: public etTestSuite {
+class MessageServiceControllerTest: public etTestSuite {
 public:
-	MSCFunctionObjectTest() :
-			etTestSuite("MSFunctionObjectTest") {
-	}
+	MessageServiceControllerTest();
+	~MessageServiceControllerTest();
 
 protected:
-	void test(void);
+	void testThreadIds(void);
+	void testMsgSvcManagement(void);
 
 	void runAllTestCases(void);
-};
 
-class TestClassB {
-public:
-	TestClassB(void);
-	void test(void);
-	~TestClassB(void);
-};
-
-class TestClassA {
-public:
-	TestClassA(void);
-	void test(void);
-	~TestClassA(void);
 private:
-	TestClassB tcb;
+	etTimer m_timer;
+
+	void timeout(void);
+	static void timeout(void* self) {
+		(static_cast<MessageServiceControllerTest*>(self))->timeout();
+	}
 };
 
-#endif /* SRC_DEBUGGING_MSCFUNCTIONOBJECTTEST_H_ */
+#endif /* SRC_MESSAGING_MESSAGESERVICECONTROLLERTEST_H_ */

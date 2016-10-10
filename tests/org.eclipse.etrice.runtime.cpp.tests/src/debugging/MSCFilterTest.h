@@ -10,37 +10,22 @@
  *
  *******************************************************************************/
 
-#ifndef SRC_DEBUGGING_MSCFUNCTIONOBJECTTEST_H_
-#define SRC_DEBUGGING_MSCFUNCTIONOBJECTTEST_H_
+#ifndef SRC_DEBUGGING_MSCFILTERTEST_H_
+#define SRC_DEBUGGING_MSCFILTERTEST_H_
 
 #include "util/etTestSuite.h"
 
-class MSCFunctionObjectTest: public etTestSuite {
+class MSCFilterTest: public etTestSuite {
 public:
-	MSCFunctionObjectTest() :
-			etTestSuite("MSFunctionObjectTest") {
+	MSCFilterTest() :
+			etTestSuite("MSCFilterTest") {
 	}
 
 protected:
-	void test(void);
+	void testFilter(void);
+	void testReduceString(void);
 
 	void runAllTestCases(void);
 };
 
-class TestClassB {
-public:
-	TestClassB(void);
-	void test(void);
-	~TestClassB(void);
-};
-
-class TestClassA {
-public:
-	TestClassA(void);
-	void test(void);
-	~TestClassA(void);
-private:
-	TestClassB tcb;
-};
-
-#endif /* SRC_DEBUGGING_MSCFUNCTIONOBJECTTEST_H_ */
+#endif /* SRC_DEBUGGING_MSCFILTERTEST_H_ */

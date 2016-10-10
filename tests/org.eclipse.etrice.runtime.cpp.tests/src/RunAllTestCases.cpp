@@ -12,17 +12,17 @@
 
 #include "containers/StaticArrayTest.h"
 #include "containers/StaticStringTest.h"
-//#include "debugging/MSCFilterTest.h"
-//#include "debugging/MSCLoggerTest.h"
-//#include "debugging/DebuggingServiceTest.h"
 #include "debugging/MSCFunctionObjectTest.h"
+#include "debugging/MSCFilterTest.h"
+#include "debugging/MSCLoggerTest.h"
+//#include "debugging/DebuggingServiceTest.h"
 #include "messaging/AddressTest.h"
 #include "messaging/MessageTest.h"
 #include "messaging/RTObjectTest.h"
 #include "messaging/MessageSeQueueTest.h"
 #include "messaging/MessageDispatcherTest.h"
 #include "messaging/MessageServiceTest.h"
-//#include "messaging/MessageServiceControllerTest.h"
+#include "messaging/MessageServiceControllerTest.h"
 
 #include "etUnit/etUnit.h"
 
@@ -38,12 +38,12 @@ int main() {
 	staticStringTest.run();
 
 	// Test debugging
-//	MSCFilterTest filterTest;
-//	filterTest.run();
-//
-//	MSCLoggerTest loggerTest;
-//	loggerTest.run();
-//
+	MSCFilterTest filterTest;
+	filterTest.run();
+
+	MSCLoggerTest loggerTest;
+	loggerTest.run();
+
 //	DebuggingServiceTest debugSvcTest;
 //	debugSvcTest.run();
 
@@ -68,9 +68,9 @@ int main() {
 
 	MessageServiceTest msgServiceTest;
 	msgServiceTest.run();
-//
-//	MessageServiceControllerTest msgSvcCtrlTest;
-//	msgSvcCtrlTest.run();
+
+	MessageServiceControllerTest msgSvcCtrlTest;
+	msgSvcCtrlTest.run();
 
 	etUnit_close();
 
