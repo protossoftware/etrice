@@ -23,6 +23,7 @@ void DebuggingServiceTest::testLogging() {
 	MessageService msgSvc(NULL, IMessageService::BLOCKED, 0, 0,
 			"TestMessageService");
 	RTServices::getInstance().getMsgSvcCtrl().addMsgSvc(msgSvc);
+	RTServices::getInstance().getMsgSvcCtrl().start();
 	SubSystemClass subSystem(NULL, "TestSubSystem");
 	ActorClass actor1(&subSystem, "TestActor1");
 	ActorClass actor2(&subSystem, "TestActor2");
@@ -56,6 +57,7 @@ void DebuggingServiceTest::testLogging() {
 	dbgSvc.removePortInstance(port2);
 
 	dbgSvc.getAsyncLogger().close();
+	RTServices::getInstance().getMsgSvcCtrl().stop();
 
 	const char* failMsg = "DebuggingServiceTest failed";
 	std::list<std::string>& result = dbgSvc.getAsyncLogger().getCommandList();
