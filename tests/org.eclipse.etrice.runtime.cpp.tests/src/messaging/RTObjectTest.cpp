@@ -103,6 +103,9 @@ void RTObjectTest::testConstructors() {
 	EXPECT_EQUAL_INT16(m_caseId, failMsg, -1,
 			rto4->getThreadForPath(rto4->getInstancePath()));
 
+	delete rto4;
+	delete rto3;
+	delete rto2;
 	delete rto1;
 }
 

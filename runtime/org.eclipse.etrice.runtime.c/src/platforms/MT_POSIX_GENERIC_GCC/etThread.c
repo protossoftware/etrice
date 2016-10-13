@@ -64,12 +64,13 @@ void etThread_start(etThread* self) {
 			self->priority = maxPriority;
 
 		param.sched_priority = self->priority;
+		pthread_attr_init(&attr);
 		pthread_attr_setschedparam(&attr, &param);
 		pthread_attr_setschedpolicy(&attr, policy);
 		pthread_attr_setstacksize(&attr, self->stacksize);
 
-		/* TODO: attr doesn't work */
-		pthread_create(&(self->osData), NULL/*&attr*/, (threadFunc) etThread_execute, self);
+		pthread_create(&(self->osData), &attr, (threadFunc) etThread_execute, self);
+		pthread_attr_destroy(&attr);
 	}
 	ET_MSC_LOGGER_SYNC_EXIT
 }
@@ -84,14 +85,13 @@ void* etThread_execute(etThread* self){
 
 void etThread_destruct(etThread* self){
 	ET_MSC_LOGGER_SYNC_ENTRY("etThread", "destruct")
-	pthread_cancel(self->osData);
+	pthread_detach(self->osData);
 	ET_MSC_LOGGER_SYNC_EXIT
 }
 
 void etThread_sleep(etInt32 millis){
 	ET_MSC_LOGGER_SYNC_ENTRY("etThread", "sleep")
 	{
-		/* TODO: nanosleep doesn't work at all */
 		struct timespec time;
 		time.tv_sec = millis / 1000;
 		time.tv_nsec = (millis - time.tv_sec * 1000) * 1000*1000;
@@ -99,9 +99,6 @@ void etThread_sleep(etInt32 millis){
 			if(errno != EINTR)
 				break;
 		}
-//		if (millis<1000)
-//			millis = 1000;
-//		sleep(millis/1000);
 	}
 	ET_MSC_LOGGER_SYNC_EXIT
 }

@@ -98,16 +98,16 @@ void MessageDispatcherTest::testDispatching() {
 	msgDisp.removeMessageReceiver(recv3);
 
 	// Test polling Messages
-	Message *pollMsg = new Message(Address(1, 2, 0), 0, NULL);
+	Message pollMsg(Address(1, 2, 0), 0, NULL);
 	msgDisp.addPollingMessageReceiver(recv1);
 	msgDisp.addPollingMessageReceiver(recv2);
 	msgDisp.addPollingMessageReceiver(recv3);
-	msgDisp.receive(pollMsg);
-	EXPECT_EQUAL_PTR(m_caseId, failMsg, pollMsg,
+	msgDisp.receive(&pollMsg);
+	EXPECT_EQUAL_PTR(m_caseId, failMsg, &pollMsg,
 			recv1.getLastReceivedMessagePtr());
-	EXPECT_EQUAL_PTR(m_caseId, failMsg, pollMsg,
+	EXPECT_EQUAL_PTR(m_caseId, failMsg, &pollMsg,
 			recv2.getLastReceivedMessagePtr());
-	EXPECT_EQUAL_PTR(m_caseId, failMsg, pollMsg,
+	EXPECT_EQUAL_PTR(m_caseId, failMsg, &pollMsg,
 			recv3.getLastReceivedMessagePtr());
 	msgDisp.removePollingMessageReceiver(recv1);
 	msgDisp.removePollingMessageReceiver(recv2);

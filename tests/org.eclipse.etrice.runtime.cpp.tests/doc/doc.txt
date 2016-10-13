@@ -1,0 +1,16 @@
+Gnu Coverage:
+	1. Install Linux tools in Eclipse
+	2. Add -ftest-coverage and -fprofile-arcs to the compiler and the linker flags (Properties -> C++ Build -> Settings -> Miscellaneous)
+	3. Compile and run the application
+	4. Open one of the generated .gcov files
+
+CppCheck:
+	1. Download, install, open CppCheck
+	2. Choose Check Directory and select the source-folder
+	
+Valgrind:
+	1. Valgrind only works on Linux
+	2. Download the Valgrind source files and install them on the system (http://valgrind.org/docs/manual/dist.install.html)
+	3. Install Linux tools in Eclipse
+	4. Create a new profile configuration and select the tab Profiler
+	5. Switch to memcheck and press the button Profile
