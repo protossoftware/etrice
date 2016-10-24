@@ -150,6 +150,21 @@ public class FSMValidationUtil extends FSMValidationUtilXtend {
 						}
 					}
 				}
+				
+				// in case this tp is inherited also check original state graph
+				StateGraph origSG = (StateGraph) srcTP.eContainer();
+				for (Transition t : origSG.getTransitions()) {
+					if (t==trans)
+						continue;
+
+					if (t instanceof NonInitialTransition) {
+						if (((NonInitialTransition) t).getFrom() instanceof TrPointTerminal) {
+							TrPointTerminal tpt = (TrPointTerminal)((NonInitialTransition) t).getFrom();
+							if (tpt.getTrPoint()==srcTP)
+								return Result.error("source transition point already is connected", src, FSMPackage.eINSTANCE.getTrPointTerminal_TrPoint(), 0);
+						}
+					}
+				}
 			}
 		}
 		else if (src instanceof SubStateTrPointTerminal) {

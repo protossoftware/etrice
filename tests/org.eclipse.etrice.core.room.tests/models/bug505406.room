@@ -1,0 +1,31 @@
+RoomModel bug505406 {
+
+	ActorClass Bug505406Base {
+		Behavior {
+			StateMachine {
+				State state0 {
+					subgraph {
+						State state0
+						EntryPoint tr0
+						Transition tr1: my tr0 -> state0
+					}
+				}
+				Transition init0: initial -> tr0 of state0
+			}
+		}
+	}
+
+	ActorClass Bug505406Derived extends Bug505406Base {
+		
+		Behavior {
+			StateMachine {
+				RefinedState state0 {
+					subgraph {
+						State state1
+						Transition tr2: my tr0 -> state1	// <<< second transition from entry point tr0 (first is inherited tr1)
+					}
+				}
+			}
+		}
+	}
+}
