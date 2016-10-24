@@ -97,8 +97,9 @@ class ActorClassGen extends GenericActorClassGenerator {
 		«ENDFOR»
 
 		«ac.userCode1.userCode»
-
-		using namespace etRuntime; //TODO JH remove
+		
+««« //TODO JH remove
+		using namespace etRuntime;
 
 		«ac.generateNamespaceBegin»
 
@@ -240,6 +241,8 @@ class ActorClassGen extends GenericActorClassGenerator {
 		using namespace etRuntime;
 
 		«ac.generateNamespaceBegin»
+
+		«ac.userCode3.userCode»
 
 		«clsname»::«clsname»(etRuntime::IRTObject* parent, const std::string& name)
 				«ac.generateConstructorInitalizerList»

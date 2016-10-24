@@ -270,7 +270,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append(_userCode, "");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
-      _builder.append("using namespace etRuntime; //TODO JH remove");
+      _builder.append("using namespace etRuntime;");
       _builder.newLine();
       _builder.newLine();
       String _generateNamespaceBegin = this._cppExtensions.generateNamespaceBegin(ac);
@@ -760,6 +760,11 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.newLine();
       String _generateNamespaceBegin = this._cppExtensions.generateNamespaceBegin(ac);
       _builder.append(_generateNamespaceBegin, "");
+      _builder.newLineIfNotEmpty();
+      _builder.newLine();
+      DetailCode _userCode3 = ac.getUserCode3();
+      CharSequence _userCode = this._procedureHelpers.userCode(_userCode3);
+      _builder.append(_userCode, "");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
       _builder.append(clsname, "");
