@@ -39,6 +39,9 @@ public:
 	virtual void addPollingMessageReceiver(IMessageReceiver& receiver) = 0;
 	virtual void removePollingMessageReceiver(IMessageReceiver& receiver) = 0;
 
+	virtual Message* getMessageBuffer(int size) = 0;
+	virtual void returnMessageBuffer(const Message* buffer) = 0;
+
 	// TODO Thread
 //		void setThread(Thread thread);
 //

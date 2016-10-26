@@ -248,13 +248,7 @@ RoomModel room.basic.service.timing {
 			incoming startTimer {
 			"if (status==0){
 				status=ET_TIMER_RUNNING | ET_TIMER_PERIODIC;
-				DebuggingService::getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(),
-												   PTimer::getMessageString(PTimer::IN_startTimer));
-				if (getPeerAddress().isValid()){
-					getPeerMsgReceiver()->receive(new Message(getPeerAddress(),PTimer::IN_startTimer,
-					                                                &time,
-					                                                sizeof(uint32)));
-				}
+				startTimer_impl(time);
 			}
 			"
 			}
@@ -262,13 +256,7 @@ RoomModel room.basic.service.timing {
 			incoming startTimeout {
 			"if (status==0){
 				status = ET_TIMER_RUNNING;
-				DebuggingService::getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(),
-												   PTimer::getMessageString(PTimer::IN_startTimeout));
-				if (getPeerAddress().isValid()){
-					getPeerMsgReceiver()->receive(new Message(getPeerAddress(),PTimer::IN_startTimeout,
-					                                                &time,
-					                                                sizeof(uint32)));
-				}
+				startTimeout_impl(time);
 			}
 			"
 			}
@@ -291,11 +279,7 @@ RoomModel room.basic.service.timing {
 			"
 			if (status!=0){
 				status=0;
-				DebuggingService::getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(),
-												   PTimer::getMessageString(PTimer::IN_kill));
-				if (getPeerAddress().isValid()){
-					getPeerMsgReceiver()->receive(new Message(getPeerAddress(),PTimer::IN_kill));
-				}
+				kill_impl();
 			}
 			"
 			}

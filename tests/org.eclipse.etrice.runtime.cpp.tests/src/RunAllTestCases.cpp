@@ -23,6 +23,7 @@
 #include "messaging/MessageDispatcherTest.h"
 #include "messaging/MessageServiceTest.h"
 #include "messaging/MessageServiceControllerTest.h"
+#include "messaging/StaticMessageMemoryTest.h"
 
 #include "etUnit/etUnit.h"
 
@@ -71,6 +72,9 @@ int main() {
 
 	MessageServiceControllerTest msgSvcCtrlTest;
 	msgSvcCtrlTest.run();
+
+	StaticMessageMemoryTest staticMsgMemTest;
+	staticMsgMemTest.run();
 
 	etUnit_close();
 

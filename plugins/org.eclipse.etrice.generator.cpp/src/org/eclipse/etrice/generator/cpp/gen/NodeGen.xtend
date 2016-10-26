@@ -83,6 +83,7 @@ class NodeGen {
 
 		«generateIncludeGuardBegin(cc, '')»
 
+		#include "common/messaging/IMessageService.h"
 		#include "common/modelbase/SubSystemClassBase.h"
 		«FOR ai : comp.actorInstances»
 			#include "«ai.actorClass.actorIncludePath»"
@@ -100,11 +101,10 @@ class NodeGen {
 			«cc.userCode2.userCode»
 
 			public:
-
 				«FOR thread : threads.indexed»
 					static const int «thread.value.threadId»;
 				«ENDFOR»
-
+				
 				// sub actors
 				«FOR sub : cc.actorRefs»
 					«IF sub.multiplicity>1»
@@ -133,6 +133,10 @@ class NodeGen {
 				«ENDIF»
 
 			private:
+				// MessageServices
+				«FOR thread : threads»
+					IMessageService* msgSvc_«thread.name»;
+				«ENDFOR»
 
 				«clsname»();
 				«clsname»(«clsname» const&);
@@ -152,7 +156,7 @@ class NodeGen {
 	def private generateConstructorInitalizerList(SubSystemClass cc) {
 		val extension initHelper = initHelper
 		var initList = <CharSequence>newArrayList
-
+		
 		// super class
 		initList += '''SubSystemClassBase(parent, name)'''
 	    // own sub actors
@@ -184,6 +188,7 @@ class NodeGen {
 		#include "common/messaging/MessageService.h"
 		#include "common/messaging/MessageServiceController.h"
 		#include "common/messaging/RTServices.h"
+		#include "common/messaging/StaticMessageMemory.h"
 		#include "common/modelbase/InterfaceItemBase.h"
 
 		using namespace etRuntime;
@@ -196,6 +201,9 @@ class NodeGen {
 
 		«clsname»::«clsname»(IRTObject* parent, const std::string& name)
 				«cc.generateConstructorInitalizerList»
+				«FOR thread : threads»
+					, msgSvc_«thread.name»(NULL)
+				«ENDFOR»
 		{
 			«IF Main::settings.generateMSCInstrumentation»
 				MSCFunctionObject mscFunctionObject(getInstancePathName(), "Constructor");
@@ -211,6 +219,9 @@ class NodeGen {
 			«IF Main::settings.generateMSCInstrumentation»
 				MSCFunctionObject mscFunctionObject(getInstancePathName(), "Destructor");
 			«ENDIF»
+			«FOR thread : threads»
+				delete msgSvc_«thread.name»;
+			«ENDFOR»
 		}
 
 		void «clsname»::receiveEvent(InterfaceItemBase* ifitem, int evt, void* data){
@@ -222,19 +233,20 @@ class NodeGen {
 				MSCFunctionObject mscFunctionObject(getInstancePathName(), "instantiateMessageServices()");
 			«ENDIF»
 
-			IMessageService* msgService;
+			IMessageMemory* msgMemory;
 			«FOR thread: threads»
 				{
+					msgMemory = new StaticMessageMemory(this, "MessageMemory_«thread.name»", «thread.msgblocksize», «thread.msgpoolsize»);
 					«IF thread.execmode==ExecMode::POLLED || thread.execmode==ExecMode::MIXED»
 						etTime interval;
 						interval.sec = «TimeConverter::split(thread.time, TimeConverter.SEC, true)»;
 						interval.nSec = «TimeConverter::split(thread.time, TimeConverter.MILLI_SEC, false)»L;
-
-						msgService = new MessageService(this, IMessageService::«thread.execmode.getName», interval, 0, «thread.threadId», "MessageService_«thread.name»", «thread.prio»);
+						
+						msgSvc_«thread.name» = new MessageService(this, IMessageService::«thread.execmode.getName», interval, 0, «thread.threadId», "MessageService_«thread.name»", msgMemory, «thread.prio»);
 					«ELSE»
-						msgService = new MessageService(this, IMessageService::«thread.execmode.getName», 0, «thread.threadId», "MessageService_«thread.name»", «thread.prio»);
+						msgSvc_«thread.name» = new MessageService(this, IMessageService::«thread.execmode.getName», 0, «thread.threadId», "MessageService_«thread.name»", msgMemory, «thread.prio»);
 					«ENDIF»
-					RTServices::getInstance().getMsgSvcCtrl().addMsgSvc(*msgService);
+					RTServices::getInstance().getMsgSvcCtrl().addMsgSvc(*msgSvc_«thread.name»);
 				}
 			«ENDFOR»
 		}

@@ -12,6 +12,7 @@
 
 #include "common/messaging/Message.h"
 #include "common/messaging/MessageDispatcher.h"
+#include "common/messaging/IMessageService.h"
 
 namespace etRuntime {
 
@@ -82,9 +83,10 @@ void MessageDispatcher::receive(const Message* msg) {
 	} else if (receiver != 0) {
 		receiver->receive(msg);
 		// TODO: error handling for not found addresses
-
-		delete msg;
 	}
+
+	msg->~Message();
+	dynamic_cast<IMessageService*>(getParent())->returnMessageBuffer(msg);
 }
 
 std::string MessageDispatcher::toString() const {

@@ -66,7 +66,7 @@ void MessageServiceTest::testBlocked() {
 	MessageServiceController& msgSvcCtrl =
 			RTServices::getInstance().getMsgSvcCtrl();
 	MessageService msgService(NULL, IMessageService::BLOCKED, 1, 2,
-			"Test MessageService");
+			"Test MessageService", new StaticMessageMemory(NULL, "TestMemory", sizeof(Message), 10000000));
 	msgSvcCtrl.addMsgSvc(msgService);
 	MessageCounter msgCounter(NULL, "MessageCounter", addr);
 	msgService.addMessageReceiver(msgCounter);
@@ -110,7 +110,7 @@ void MessageServiceTest::testPolled() {
 	MessageServiceController& msgSvcCtrl =
 			RTServices::getInstance().getMsgSvcCtrl();
 	MessageService msgService(NULL, IMessageService::POLLED, interval, 1, 2,
-			"Test MessageService");
+			"Test MessageService", new StaticMessageMemory(NULL, "TestMemory", 64, 100));
 	msgSvcCtrl.addMsgSvc(msgService);
 	MessageCounter msgCounter(NULL, "Message Counter",
 			msgService.getFreeAddress());
@@ -162,7 +162,9 @@ void Sender::terminate() {
 
 void Sender::run() {
 	while (m_running) {
-		m_msgService.receive(new Message(m_addr, 0));
+		Message* msg = m_msgService.getMessageBuffer(sizeof(Message));
+		msg = new (msg) Message(m_addr, 0);
+		m_msgService.receive(msg);
 		m_messagesSent++;
 	}
 

@@ -19,8 +19,9 @@ ReplicatedActorClassBase::ReplicatedActorClassBase(IRTObject* parent, const std:
 }
 
 ReplicatedActorClassBase::~ReplicatedActorClassBase() {
-	for(std::vector<ActorClassBase*>::iterator it = m_items.begin(); it != m_items.end(); it++)
+	for(std::vector<ActorClassBase*>::iterator it = m_items.begin(); it != m_items.end(); ++it) {
 		delete *it;
+	}
 }
 
 void ReplicatedActorClassBase::createSubActors(int number) {
@@ -33,12 +34,13 @@ void ReplicatedActorClassBase::createSubActors(int number) {
 }
 
 void ReplicatedActorClassBase::initialize() {
-	for(std::vector<ActorClassBase*>::iterator it = m_items.begin(); it != m_items.end(); it++)
+	for(std::vector<ActorClassBase*>::iterator it = m_items.begin(); it != m_items.end(); ++it) {
 		(*it)->initialize();
+	}
 }
 
 void ReplicatedActorClassBase::setProbesActive(bool recursive, bool active) {
-	for(std::vector<ActorClassBase*>::iterator it = m_items.begin(); it != m_items.end(); it++)
+	for(std::vector<ActorClassBase*>::iterator it = m_items.begin(); it != m_items.end(); ++it)
 			(*it)->setProbesActive(recursive, active);
 }
 

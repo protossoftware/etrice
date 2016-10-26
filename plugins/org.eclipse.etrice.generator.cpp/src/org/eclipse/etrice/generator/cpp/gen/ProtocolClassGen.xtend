@@ -151,7 +151,8 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 
 		 // sent messages
 		«FOR m : pc.getAllMessages(conj)»
-		  	«messageSignature(m)»;
+		  	«messageSignature(m, false)»;
+		  	«messageSignature(m, true)»;
 		«ENDFOR»
 	};
 
@@ -170,12 +171,12 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 			«IF conj»
 				// incoming messages
 				«FOR m : pc.getAllIncomingMessages()»
-					«messageSignature(m)»;
+					«messageSignature(m, false)»;
 				«ENDFOR»
 			«ELSE»
 				// outgoing messages
 				«FOR m : pc.getAllOutgoingMessages()»
-					«messageSignature(m)»;
+					«messageSignature(m, false)»;
 				«ENDFOR»
 			«ENDIF»
 
@@ -312,18 +313,18 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 	«IF conj»
 		// incoming messages
 		«FOR m : pc.getAllIncomingMessages()»
-			«messageSignatureDefinition(m, replPortClassName)»{
+			«messageSignatureDefinition(m, replPortClassName, false)»{
 				for (std::vector<etRuntime::InterfaceItemBase*>::iterator it = getItems().begin(); it != getItems().end(); ++it) {
-					(dynamic_cast<«portClassName»*>(*it))->«messageCall(m)»;
+					(dynamic_cast<«portClassName»*>(*it))->«messageCall(m, false)»;
 				}
 			}
 		«ENDFOR»
 	«ELSE»
 		// outgoing messages
 		«FOR m : pc.getAllOutgoingMessages()»
-			«messageSignatureDefinition(m, replPortClassName)»{
+			«messageSignatureDefinition(m, replPortClassName, false)»{
 				for (std::vector<etRuntime::InterfaceItemBase*>::iterator it = getItems().begin(); it != getItems().end(); ++it) {
-					(dynamic_cast<«portClassName»*>(*it))->«messageCall(m)»;
+					(dynamic_cast<«portClassName»*>(*it))->«messageCall(m, false)»;
 				}
 			}
 		«ENDFOR»
@@ -342,38 +343,48 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		initList.generateCtorInitializerList
 	}
 
-	def protected messageCall(Message m) {
-		'''«m.name»(«IF m.data!=null» «m.data.name»«ENDIF»)'''
+	def protected messageCall(Message m, boolean impl) {
+		'''«m.name»«IF impl»_impl«ENDIF»(«IF m.data!=null» «m.data.name»«ENDIF»)'''
 	}
 
 
-	def protected messageSignature(Message m) {
-		'''«IF m.priv»private:«ELSE»public:«ENDIF» void «m.name»(«IF m.data!=null»«m.data.refType.signatureString» «m.data.name»«ENDIF»)'''
+	def protected messageSignature(Message m, boolean impl) {
+		'''«IF m.priv||impl»private:«ELSE»public:«ENDIF» void «m.name»«IF impl»_impl«ENDIF»(«IF m.data!=null»«m.data.refType.signatureString» «m.data.name»«ENDIF»)'''
 	}
 
-	def protected messageSignatureDefinition(Message m, String classPrefix) {
-		'''void «classPrefix»::«m.name»(«IF m.data!=null»«m.data.refType.signatureString» «m.data.name»«ENDIF»)'''
+	def protected messageSignatureDefinition(Message m, String classPrefix, boolean impl) {
+		'''void «classPrefix»::«m.name»«IF impl»_impl«ENDIF»(«IF m.data!=null»«m.data.refType.signatureString» «m.data.name»«ENDIF»)'''
 	}
 
 	def protected sendMessage(Message m, String portClassName, String classPrefix, boolean conj) {
 		var dir = if (conj) "IN" else "OUT"
 		var hdlr = m.getSendHandler(conj)
-		val dataArg = if(m.data != null) ''', «IF m.data.refType.ref»«m.data.name»«ELSE»&«m.data.name», sizeof(«m.data.refType.type.typeName»)«ENDIF»'''
-		val message = '''new Message(getPeerAddress(), «portClassName»::«dir»_«m.name»«dataArg?:''»)'''
+		val dataArg = if(m.data != null) ''', «m.data.name»'''
+		val messageType = if(m.data != null && !m.data.refType.ref) '''DataMessage<«m.data.refType.type.typeName»>''' else '''Message'''
+		val message = '''new (buffer) «messageType»(getPeerAddress(), «portClassName»::«dir»_«m.name»«dataArg?:''»)'''
 		'''
-			«messageSignatureDefinition(m, classPrefix)» {
+			«messageSignatureDefinition(m, classPrefix, false)» {
 				«IF hdlr!=null»
 					«FOR command : hdlr.detailCode.lines»	«command»
 					«ENDFOR»
 				«ELSE»
-					«IF Main::settings.generateMSCInstrumentation»
-						DebuggingService::getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(),
-							«portClassName»::getMessageString(«portClassName»::«dir»_«m.name»));
-					«ENDIF»
-					if (getPeerAddress().isValid()){
+					«messageCall(m, true)»;
+				«ENDIF»
+			}
+			
+			«messageSignatureDefinition(m, classPrefix, true)» {
+				«IF Main::settings.generateMSCInstrumentation»
+					DebuggingService::getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(),
+					«portClassName»::getMessageString(«portClassName»::«dir»_«m.name»));
+				«ENDIF»
+				if (getPeerAddress().isValid()) {
+«««					we have to use a dynamic cast here because we have a virtual base class
+					Message* buffer = dynamic_cast<IMessageService*>(getPeerMsgReceiver())->getMessageBuffer(sizeof(«messageType»));
+					if (buffer) {
 						getPeerMsgReceiver()->receive(«message»);
 					}
-				«ENDIF»
+«««					// TODO JB: Handle buffer == NULL
+				}
 			}
 		'''
 	}
@@ -381,7 +392,6 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 
 	def protected generateDataDrivenHeaderFile(Root root, ProtocolClass pc) {
 		val sentMsgs = pc.allIncomingMessages.filter(m|m.data!=null)
-		val models = root.getReferencedModels(pc)
 		'''
 			/**
 			 * @author generated by eTrice
@@ -457,7 +467,6 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 
 	def protected generateDataDrivenSourceFile(Root root, ProtocolClass pc) {
 		val sentMsgs = pc.allIncomingMessages.filter(m|m.data!=null)
-		val models = root.getReferencedModels(pc)
 		'''
 			/**
 			 * @author generated by eTrice

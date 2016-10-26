@@ -165,6 +165,8 @@ public class NodeGen {
       _builder.append(_generateIncludeGuardBegin, "");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
+      _builder.append("#include \"common/messaging/IMessageService.h\"");
+      _builder.newLine();
       _builder.append("#include \"common/modelbase/SubSystemClassBase.h\"");
       _builder.newLine();
       {
@@ -202,7 +204,6 @@ public class NodeGen {
       _builder.append("\t");
       _builder.append("public:");
       _builder.newLine();
-      _builder.newLine();
       {
         Iterable<Indexed<PhysicalThread>> _indexed = Indexed.<PhysicalThread>indexed(threads);
         for(final Indexed<PhysicalThread> thread : _indexed) {
@@ -215,6 +216,7 @@ public class NodeGen {
           _builder.newLineIfNotEmpty();
         }
       }
+      _builder.append("\t\t");
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append("// sub actors");
@@ -303,6 +305,19 @@ public class NodeGen {
       _builder.append("\t");
       _builder.append("private:");
       _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("// MessageServices");
+      _builder.newLine();
+      {
+        for(final PhysicalThread thread_1 : threads) {
+          _builder.append("\t\t");
+          _builder.append("IMessageService* msgSvc_");
+          String _name_2 = thread_1.getName();
+          _builder.append(_name_2, "\t\t");
+          _builder.append(";");
+          _builder.newLineIfNotEmpty();
+        }
+      }
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append(clsname, "\t\t");
@@ -425,6 +440,8 @@ public class NodeGen {
       _builder.newLine();
       _builder.append("#include \"common/messaging/RTServices.h\"");
       _builder.newLine();
+      _builder.append("#include \"common/messaging/StaticMessageMemory.h\"");
+      _builder.newLine();
       _builder.append("#include \"common/modelbase/InterfaceItemBase.h\"");
       _builder.newLine();
       _builder.newLine();
@@ -461,6 +478,16 @@ public class NodeGen {
       CharSequence _generateConstructorInitalizerList = this.generateConstructorInitalizerList(cc);
       _builder.append(_generateConstructorInitalizerList, "\t\t");
       _builder.newLineIfNotEmpty();
+      {
+        for(final PhysicalThread thread_1 : threads) {
+          _builder.append("\t\t");
+          _builder.append(", msgSvc_");
+          String _name = thread_1.getName();
+          _builder.append(_name, "\t\t");
+          _builder.append("(NULL)");
+          _builder.newLineIfNotEmpty();
+        }
+      }
       _builder.append("{");
       _builder.newLine();
       {
@@ -480,8 +507,8 @@ public class NodeGen {
             boolean _greaterThan = (_multiplicity > 1);
             if (_greaterThan) {
               _builder.append("\t");
-              String _name = sub.getName();
-              _builder.append(_name, "\t");
+              String _name_1 = sub.getName();
+              _builder.append(_name_1, "\t");
               _builder.append(".createSubActors(");
               int _multiplicity_1 = sub.getMultiplicity();
               _builder.append(_multiplicity_1, "\t");
@@ -506,6 +533,16 @@ public class NodeGen {
           _builder.append("\t");
           _builder.append("MSCFunctionObject mscFunctionObject(getInstancePathName(), \"Destructor\");");
           _builder.newLine();
+        }
+      }
+      {
+        for(final PhysicalThread thread_2 : threads) {
+          _builder.append("\t");
+          _builder.append("delete msgSvc_");
+          String _name_2 = thread_2.getName();
+          _builder.append(_name_2, "\t");
+          _builder.append(";");
+          _builder.newLineIfNotEmpty();
         }
       }
       _builder.append("}");
@@ -534,15 +571,28 @@ public class NodeGen {
       }
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("IMessageService* msgService;");
+      _builder.append("IMessageMemory* msgMemory;");
       _builder.newLine();
       {
-        for(final PhysicalThread thread_1 : threads) {
+        for(final PhysicalThread thread_3 : threads) {
           _builder.append("\t");
           _builder.append("{");
           _builder.newLine();
+          _builder.append("\t");
+          _builder.append("\t");
+          _builder.append("msgMemory = new StaticMessageMemory(this, \"MessageMemory_");
+          String _name_3 = thread_3.getName();
+          _builder.append(_name_3, "\t\t");
+          _builder.append("\", ");
+          int _msgblocksize = thread_3.getMsgblocksize();
+          _builder.append(_msgblocksize, "\t\t");
+          _builder.append(", ");
+          int _msgpoolsize = thread_3.getMsgpoolsize();
+          _builder.append(_msgpoolsize, "\t\t");
+          _builder.append(");");
+          _builder.newLineIfNotEmpty();
           {
-            if ((Objects.equal(thread_1.getExecmode(), ExecMode.POLLED) || Objects.equal(thread_1.getExecmode(), ExecMode.MIXED))) {
+            if ((Objects.equal(thread_3.getExecmode(), ExecMode.POLLED) || Objects.equal(thread_3.getExecmode(), ExecMode.MIXED))) {
               _builder.append("\t");
               _builder.append("\t");
               _builder.append("etTime interval;");
@@ -550,7 +600,7 @@ public class NodeGen {
               _builder.append("\t");
               _builder.append("\t");
               _builder.append("interval.sec = ");
-              long _time = thread_1.getTime();
+              long _time = thread_3.getTime();
               long _split = TimeConverter.split(_time, TimeConverter.SEC, true);
               _builder.append(_split, "\t\t");
               _builder.append(";");
@@ -558,44 +608,52 @@ public class NodeGen {
               _builder.append("\t");
               _builder.append("\t");
               _builder.append("interval.nSec = ");
-              long _time_1 = thread_1.getTime();
+              long _time_1 = thread_3.getTime();
               long _split_1 = TimeConverter.split(_time_1, TimeConverter.MILLI_SEC, false);
               _builder.append(_split_1, "\t\t");
               _builder.append("L;");
               _builder.newLineIfNotEmpty();
+              _builder.append("\t");
+              _builder.append("\t");
               _builder.newLine();
               _builder.append("\t");
               _builder.append("\t");
-              _builder.append("msgService = new MessageService(this, IMessageService::");
-              ExecMode _execmode = thread_1.getExecmode();
-              String _name_1 = _execmode.getName();
-              _builder.append(_name_1, "\t\t");
+              _builder.append("msgSvc_");
+              String _name_4 = thread_3.getName();
+              _builder.append(_name_4, "\t\t");
+              _builder.append(" = new MessageService(this, IMessageService::");
+              ExecMode _execmode = thread_3.getExecmode();
+              String _name_5 = _execmode.getName();
+              _builder.append(_name_5, "\t\t");
               _builder.append(", interval, 0, ");
-              String _threadId_1 = this.getThreadId(thread_1);
+              String _threadId_1 = this.getThreadId(thread_3);
               _builder.append(_threadId_1, "\t\t");
               _builder.append(", \"MessageService_");
-              String _name_2 = thread_1.getName();
-              _builder.append(_name_2, "\t\t");
-              _builder.append("\", ");
-              long _prio = thread_1.getPrio();
+              String _name_6 = thread_3.getName();
+              _builder.append(_name_6, "\t\t");
+              _builder.append("\", msgMemory, ");
+              long _prio = thread_3.getPrio();
               _builder.append(_prio, "\t\t");
               _builder.append(");");
               _builder.newLineIfNotEmpty();
             } else {
               _builder.append("\t");
               _builder.append("\t");
-              _builder.append("msgService = new MessageService(this, IMessageService::");
-              ExecMode _execmode_1 = thread_1.getExecmode();
-              String _name_3 = _execmode_1.getName();
-              _builder.append(_name_3, "\t\t");
+              _builder.append("msgSvc_");
+              String _name_7 = thread_3.getName();
+              _builder.append(_name_7, "\t\t");
+              _builder.append(" = new MessageService(this, IMessageService::");
+              ExecMode _execmode_1 = thread_3.getExecmode();
+              String _name_8 = _execmode_1.getName();
+              _builder.append(_name_8, "\t\t");
               _builder.append(", 0, ");
-              String _threadId_2 = this.getThreadId(thread_1);
+              String _threadId_2 = this.getThreadId(thread_3);
               _builder.append(_threadId_2, "\t\t");
               _builder.append(", \"MessageService_");
-              String _name_4 = thread_1.getName();
-              _builder.append(_name_4, "\t\t");
-              _builder.append("\", ");
-              long _prio_1 = thread_1.getPrio();
+              String _name_9 = thread_3.getName();
+              _builder.append(_name_9, "\t\t");
+              _builder.append("\", msgMemory, ");
+              long _prio_1 = thread_3.getPrio();
               _builder.append(_prio_1, "\t\t");
               _builder.append(");");
               _builder.newLineIfNotEmpty();
@@ -603,8 +661,11 @@ public class NodeGen {
           }
           _builder.append("\t");
           _builder.append("\t");
-          _builder.append("RTServices::getInstance().getMsgSvcCtrl().addMsgSvc(*msgService);");
-          _builder.newLine();
+          _builder.append("RTServices::getInstance().getMsgSvcCtrl().addMsgSvc(*msgSvc_");
+          String _name_10 = thread_3.getName();
+          _builder.append(_name_10, "\t\t");
+          _builder.append(");");
+          _builder.newLineIfNotEmpty();
           _builder.append("\t");
           _builder.append("}");
           _builder.newLine();
@@ -676,8 +737,8 @@ public class NodeGen {
                   _builder.append("\t");
                   _builder.append("\t");
                   _builder.append("DebuggingService::getInstance().addMessageActorCreate(*this, ");
-                  String _name_5 = sub_1.getName();
-                  _builder.append(_name_5, "\t\t");
+                  String _name_11 = sub_1.getName();
+                  _builder.append(_name_11, "\t\t");
                   _builder.append(".getSubActor(i)->getName());");
                   _builder.newLineIfNotEmpty();
                   _builder.append("\t");
@@ -686,8 +747,8 @@ public class NodeGen {
                 } else {
                   _builder.append("\t");
                   _builder.append("DebuggingService::getInstance().addMessageActorCreate(*this, \"");
-                  String _name_6 = sub_1.getName();
-                  _builder.append(_name_6, "\t");
+                  String _name_12 = sub_1.getName();
+                  _builder.append(_name_12, "\t");
                   _builder.append("\");");
                   _builder.newLineIfNotEmpty();
                 }
@@ -734,8 +795,8 @@ public class NodeGen {
         EList<ActorRef> _actorRefs_2 = cc.getActorRefs();
         for(final ActorRef sub_2 : _actorRefs_2) {
           _builder.append("\t");
-          String _name_7 = sub_2.getName();
-          _builder.append(_name_7, "\t");
+          String _name_13 = sub_2.getName();
+          _builder.append(_name_13, "\t");
           _builder.append(".initialize();");
           _builder.newLineIfNotEmpty();
         }
@@ -764,8 +825,8 @@ public class NodeGen {
             EList<ActorRef> _actorRefs_3 = cc.getActorRefs();
             for(final ActorRef sub_3 : _actorRefs_3) {
               _builder.append("\t\t");
-              String _name_8 = sub_3.getName();
-              _builder.append(_name_8, "\t\t");
+              String _name_14 = sub_3.getName();
+              _builder.append(_name_14, "\t\t");
               _builder.append(".setProbesActive(recursive, active);");
               _builder.newLineIfNotEmpty();
             }

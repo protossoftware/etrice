@@ -14,7 +14,7 @@ PhysicalModel room.generic.physical {
 			interval = 100ms
 			prio = 0
 			stacksize = 1024
-			msgblocksize = 64
+			msgblocksize = 128
 			msgpoolsize = 100
 		}
 		
@@ -22,7 +22,7 @@ PhysicalModel room.generic.physical {
 			execmode = blocked
 			prio = 0
 			stacksize = 1024
-			msgblocksize = 64
+			msgblocksize = 128
 			msgpoolsize = 100
 		}
 		
@@ -31,7 +31,7 @@ PhysicalModel room.generic.physical {
 			interval = 100ms
 			prio = 0
 			stacksize = 1024
-			msgblocksize = 64
+			msgblocksize = 128
 			msgpoolsize = 100
 		}
 	}

@@ -36,12 +36,15 @@ void MessageTest::testConstructors() {
 	EXPECT_EQUAL_INT16(m_caseId, failMsg, 1, msg2.getEvtId());
 	EXPECT_EQUAL_PTR(m_caseId, failMsg, &data, msg2.getData());
 
-	// Test constructor Message(const Address& addr, int evtm_caseId, const void* dataToCopy, std::size_t dataSize)
-	Message msg3(addr, 1, &data, sizeof(int));
-	EXPECT_TRUE(m_caseId, failMsg, msg3.getAddress() == addr);
-	EXPECT_EQUAL_INT16(m_caseId, failMsg, 1, msg3.getEvtId());
+	// Test constructor DataMessage(const Address& addr, int evtm_caseId, const T& dataToCopy)
+	Message* msg3 = (Message*) new uint8_t[sizeof(DataMessage<int>)];
+	new (msg3) DataMessage<int>(addr, 1, data);
+	EXPECT_TRUE(m_caseId, failMsg, msg3->getAddress() == addr);
+	EXPECT_EQUAL_INT16(m_caseId, failMsg, 1, msg3->getEvtId());
 	EXPECT_TRUE(m_caseId, failMsg,
-			*(static_cast<int*>(msg3.getData())) == data);
+			*(static_cast<int*>(msg3->getData())) == data);
+	msg3->~Message();
+	delete[] (uint8_t*) msg3;
 }
 
 void MessageTest::testGetters() {

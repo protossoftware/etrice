@@ -14,6 +14,7 @@
 #include "common/debugging/DebuggingService.h"
 #include "common/messaging/MessageService.h"
 #include "common/messaging/RTServices.h"
+#include "common/messaging/StaticMessageMemory.h"
 #include "etUnit/etUnit.h"
 
 using namespace etRuntime;
@@ -21,7 +22,7 @@ using namespace etRuntime;
 void DebuggingServiceTest::testLogging() {
 
 	MessageService msgSvc(NULL, IMessageService::BLOCKED, 0, 0,
-			"TestMessageService");
+			"TestMessageService", new StaticMessageMemory(NULL, "TestMemory", 64, 100));
 	RTServices::getInstance().getMsgSvcCtrl().addMsgSvc(msgSvc);
 	RTServices::getInstance().getMsgSvcCtrl().start();
 	SubSystemClass subSystem(NULL, "TestSubSystem");

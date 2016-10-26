@@ -61,9 +61,9 @@ void MessageServiceControllerTest::testMsgSvcManagement() {
 	MessageServiceController& msgSvcController =
 			RTServices::getInstance().getMsgSvcCtrl();
 	MessageService msgSvc1(NULL, IMessageService::BLOCKED, 1,
-			msgSvcController.getNewID(), "MessageService1");
+			msgSvcController.getNewID(), "MessageService1", new StaticMessageMemory(NULL, "TestMemory", 64, 100));
 	MessageService msgSvc2(NULL, IMessageService::POLLED, 1,
-			msgSvcController.getNewID(), "MessageService2");
+			msgSvcController.getNewID(), "MessageService2", new StaticMessageMemory(NULL, "TestMemory", 64, 100));
 
 	msgSvcController.addMsgSvc(msgSvc1);
 	msgSvcController.addMsgSvc(msgSvc2);

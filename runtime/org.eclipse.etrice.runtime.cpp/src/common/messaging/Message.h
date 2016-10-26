@@ -25,12 +25,10 @@ class Message {
 
 public:
 
-	// Messages with data TODO MessageBuffer
-	Message(const Address& addr, int evtId, const void* dataToCopy, std::size_t dataSize);
 	Message(const Address& addr, int evtId, void* dataPtr);
 
 	Message(const Address& addr, int evtId);
-	~Message();
+	virtual ~Message();
 
 	const Address& getAddress() const {
 		return m_address;
@@ -70,6 +68,19 @@ private:
 	Message(Message const&);
 	Message& operator =(Message const&);
 
+};
+
+template<class T>
+class DataMessage : public Message {
+public:
+	DataMessage(const Address& addr, int evtId, const T& dataToCopy) :
+		Message(addr, evtId, &m_data), m_data(dataToCopy) {}
+private:
+	T m_data;
+
+	DataMessage(void);
+	DataMessage(DataMessage const&);
+	DataMessage& operator=(DataMessage const&);
 };
 
 } /* namespace etRuntime */

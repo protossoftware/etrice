@@ -13,10 +13,11 @@
 #ifndef MESSAGESERVICE_H_
 #define MESSAGESERVICE_H_
 
-#include "common/messaging/AbstractMessageService.h"
-
 #include "common/messaging/IMessageService.h"
 #include "common/messaging/Message.h"
+#include "common/messaging/Address.h"
+#include "common/messaging/StaticMessageMemory.h"
+#include "common/messaging/MessageDispatcher.h"
 #include "etDatatypes.h"
 #include "osal/etMutex.h"
 #include "osal/etSema.h"
@@ -26,7 +27,7 @@
 
 namespace etRuntime {
 
-class MessageService: public AbstractMessageService {
+class MessageService: public RTObject, public IMessageService {
 
 public:
 
@@ -34,8 +35,8 @@ public:
 		POLLED, BLOCKED, MIXED
 	};
 
-	MessageService(IRTObject* parent, IMessageService::ExecMode mode, int node, int thread, const std::string& name, int priority = 0);
-	MessageService(IRTObject* parent, IMessageService::ExecMode mode, etTime interval, int node, int thread, const std::string& name, int priority = 0);
+	MessageService(IRTObject* parent, IMessageService::ExecMode mode, int node, int thread, const std::string& name, IMessageMemory* memory, int priority = 0);
+	MessageService(IRTObject* parent, IMessageService::ExecMode mode, etTime interval, int node, int thread, const std::string& name, IMessageMemory* memory, int priority = 0);
 	virtual ~MessageService();
 
 	void run();
@@ -53,6 +54,12 @@ public:
 	virtual void addPollingMessageReceiver(IMessageReceiver& receiver);
 	virtual void removePollingMessageReceiver(IMessageReceiver& receiver);
 	virtual void receive(const Message* msg);
+
+	Message* getMessageBuffer(int size);
+	void returnMessageBuffer(const Message* buffer);
+
+	const Address& getAddress(void) const { return m_address; }
+	std::string toString() const;
 
 protected:
 
@@ -75,12 +82,16 @@ private:
 	etBool m_running;
 	IMessageService::ExecMode m_execMode;
 	long m_lastMessageTimestamp;
-	Message m_pollingMessage;
 
 	etMutex m_mutex;
 	etSema m_executionSemaphore;
 	etThread m_thread;
 	etTimer m_timer;
+
+	Address m_address;
+	MessageSeQueue m_messageQueue;
+	MessageDispatcher m_messageDispatcher;
+	IMessageMemory* m_messageMemory;
 
 	void MessageService_init(etTime interval, int priority); // common ctor
 

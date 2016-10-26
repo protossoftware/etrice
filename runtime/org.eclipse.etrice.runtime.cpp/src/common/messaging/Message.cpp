@@ -18,20 +18,6 @@
 
 namespace etRuntime {
 
-Message::Message(const Address& addr, int evtId, const void* dataToCopy, std::size_t dataSize) :
-		m_address(addr),
-		m_evtId(evtId),
-		m_next(0),
-		m_dataSize(0),
-		m_data(0){
-	if(dataToCopy != 0 && dataSize > 0){
-		m_data = std::malloc(dataSize);
-		if(m_data != 0){
-			m_dataSize = dataSize;
-			std::memcpy(m_data, dataToCopy, dataSize);
-		}
-	}
-}
 Message::Message(const Address& addr, int evtId, void* dataPtr) :
 		m_address(addr),
 		m_evtId(evtId),
@@ -49,8 +35,6 @@ Message::Message(const Address& addr, int evtId) :
 Message::~Message() {
 	m_evtId = 0;
 	m_next = 0;
-	if(m_dataSize > 0)
-		std::free(m_data);
 	m_data = 0;
 	m_dataSize = 0;
 }

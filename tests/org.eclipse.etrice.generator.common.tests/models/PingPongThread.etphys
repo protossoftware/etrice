@@ -3,7 +3,7 @@ PhysicalModel PingPongThread {
 	PhysicalSystem Sys {
 		NodeRef node1: PC
 	}
-	
+
 	NodeClass PC {
 		runtime = PC
 		priomin = 1
@@ -13,7 +13,7 @@ PhysicalModel PingPongThread {
 			execmode = blocked
 			prio = 5
 			stacksize = 1024
-			msgblocksize = 64
+			msgblocksize = 128
 			msgpoolsize = 32
 		}
 		
@@ -21,7 +21,7 @@ PhysicalModel PingPongThread {
 			execmode = blocked
 			prio = 5
 			stacksize = 1024
-			msgblocksize = 64
+			msgblocksize = 128
 			msgpoolsize = 32
 		}
 		
@@ -29,7 +29,7 @@ PhysicalModel PingPongThread {
 			execmode = blocked
 			prio = 5
 			stacksize = 1024
-			msgblocksize = 64
+			msgblocksize = 128
 			msgpoolsize = 32
 		}
 		
@@ -37,7 +37,7 @@ PhysicalModel PingPongThread {
 			execmode = blocked
 			prio = 5
 			stacksize = 1024
-			msgblocksize = 64
+			msgblocksize = 128
 			msgpoolsize = 32
 		}
 		
@@ -46,7 +46,7 @@ PhysicalModel PingPongThread {
 			interval = 100 ms
 			prio = 5
 			stacksize = 1024
-			msgblocksize = 64
+			msgblocksize = 128
 			msgpoolsize = 32
 		}
 	}

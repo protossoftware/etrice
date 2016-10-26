@@ -13,6 +13,8 @@
 #include "messaging/MessageDispatcherTest.h"
 #include "etUnit/etUnit.h"
 #include "common/messaging/MessageDispatcher.h"
+#include "common/messaging/MessageService.h"
+#include "common/messaging/StaticMessageMemory.h"
 
 using namespace etRuntime;
 
@@ -58,19 +60,27 @@ void MessageDispatcherTest::testDispatching() {
 	const char *failMsg = "MessageDispatcher dispatching test failed";
 
 	// Test dispatching Messages
-	MessageDispatcher msgDisp(NULL, Address(1, 2, 0), "TestMessageDispatcher");
+	MessageService msgSvc(NULL, IMessageService::BLOCKED, 1, 2,
+				"Test MessageService", new StaticMessageMemory(NULL, "TestMemory", 64, 100));
+	MessageDispatcher msgDisp(&msgSvc, Address(1, 2, 0), "TestMessageDispatcher");
 	Address addr1 = msgDisp.getFreeAddress();
 	Address addr2 = msgDisp.getFreeAddress();
 	Address addr3 = msgDisp.getFreeAddress();
 	SimpleMessageReceiver recv1(NULL, "Test receiver1", addr1);
 	SimpleMessageReceiver recv2(NULL, "Test receiver2", addr2);
 	SimpleMessageReceiver recv3(NULL, "Test receiver3", addr3);
-	Message *msg1 = new Message(addr1, 1, NULL);
-	Message *msg2 = new Message(addr2, 2, NULL);
-	Message *msg3 = new Message(addr3, 3, NULL);
-	Message *msg4 = new Message(addr1, 4, NULL);
-	Message *msg5 = new Message(addr2, 5, NULL);
-	Message *msg6 = new Message(addr3, 6, NULL);
+	Message *msg1 = msgSvc.getMessageBuffer(sizeof(Message));
+	Message *msg2 = msgSvc.getMessageBuffer(sizeof(Message));
+	Message *msg3 = msgSvc.getMessageBuffer(sizeof(Message));
+	Message *msg4 = msgSvc.getMessageBuffer(sizeof(Message));
+	Message *msg5 = msgSvc.getMessageBuffer(sizeof(Message));
+	Message *msg6 = msgSvc.getMessageBuffer(sizeof(Message));
+	msg1 = new (msg1) Message(addr1, 1);
+	msg2 = new (msg2) Message(addr2, 2);
+	msg3 = new (msg3) Message(addr3, 3);
+	msg4 = new (msg4) Message(addr1, 4);
+	msg5 = new (msg5) Message(addr2, 5);
+	msg6 = new (msg6) Message(addr3, 6);
 
 	msgDisp.addMessageReceiver(recv1);
 	msgDisp.receive(msg1);
@@ -98,16 +108,17 @@ void MessageDispatcherTest::testDispatching() {
 	msgDisp.removeMessageReceiver(recv3);
 
 	// Test polling Messages
-	Message pollMsg(Address(1, 2, 0), 0, NULL);
+	Message *pollMsg = msgSvc.getMessageBuffer(sizeof(Message));
+	pollMsg = new (pollMsg) Message(Address(1, 2, 0), 0);
 	msgDisp.addPollingMessageReceiver(recv1);
 	msgDisp.addPollingMessageReceiver(recv2);
 	msgDisp.addPollingMessageReceiver(recv3);
-	msgDisp.receive(&pollMsg);
-	EXPECT_EQUAL_PTR(m_caseId, failMsg, &pollMsg,
+	msgDisp.receive(pollMsg);
+	EXPECT_EQUAL_PTR(m_caseId, failMsg, pollMsg,
 			recv1.getLastReceivedMessagePtr());
-	EXPECT_EQUAL_PTR(m_caseId, failMsg, &pollMsg,
+	EXPECT_EQUAL_PTR(m_caseId, failMsg, pollMsg,
 			recv2.getLastReceivedMessagePtr());
-	EXPECT_EQUAL_PTR(m_caseId, failMsg, &pollMsg,
+	EXPECT_EQUAL_PTR(m_caseId, failMsg, pollMsg,
 			recv3.getLastReceivedMessagePtr());
 	msgDisp.removePollingMessageReceiver(recv1);
 	msgDisp.removePollingMessageReceiver(recv2);
