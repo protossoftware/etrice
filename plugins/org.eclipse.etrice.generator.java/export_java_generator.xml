@@ -26,7 +26,7 @@
     <!--this file was created by Eclipse Runnable JAR Export Wizard-->
     <!--ANT 1.7 is required                                        -->
     <!--define folder properties-->
-    <target name="create_run_jar">
+    <target name="create_run_jar" depends="testProps">
         <jar destfile="${export_destination}/org.eclipse.etrice.generator.java.jar">
             <manifest>
                 <attribute name="Main-Class" value="org.eclipse.etrice.generator.java.Main"/>

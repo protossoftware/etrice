@@ -28,7 +28,7 @@
     <!--define folder properties-->
     <property name="dir.workspace" value="C:/Users/hrentz/EclipseInstallations/etrice-neon/ws"/>
     <property name="dir.jarfile" value="C:/Users/hrentz/Documents/protos/Entwicklung/protos/eTrice/tmp"/>
-    <target name="create_run_jar">
+    <target name="create_run_jar" depends="testProps">
         <jar destfile="${export_destination}/org.eclipse.etrice.generator.cpp.jar">
             <manifest>
                 <attribute name="Main-Class" value="org.eclipse.etrice.generator.cpp.Main"/>
