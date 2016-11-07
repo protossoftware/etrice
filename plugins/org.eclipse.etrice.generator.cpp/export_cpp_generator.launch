@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="org.eclipse.ant.AntLaunchConfigurationType">
-<booleanAttribute key="org.eclipse.ant.ui.DEFAULT_VM_INSTALL" value="true"/>
+<booleanAttribute key="org.eclipse.ant.ui.DEFAULT_VM_INSTALL" value="false"/>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
 <listEntry value="/org.eclipse.etrice.generator.cpp/export_cpp_generator.xml"/>
 </listAttribute>
@@ -8,13 +8,13 @@
 <listEntry value="1"/>
 </listAttribute>
 <mapAttribute key="org.eclipse.debug.core.environmentVariables">
-<mapEntry key="ANT_HOME" value="C:\Users\hrentz\Downloads\Eclipse\eclipse-automotive-kepler-SR2-incubation-win32-x86_64\eclipse\plugins\org.apache.ant_1.8.4.v201303080030"/>
-<mapEntry key="ECLIPSE_HOME" value="${eclipse_home}"/>
+<mapEntry key="ANT_HOME" value="C:\Users\hrentz\.p2\pool\plugins\org.apache.ant_1.9.6.v201510161327"/>
+<mapEntry key="ECLIPSE_HOME" value="${target_platform_plugin_location:org.eclipse.xtext}/../.."/>
 <mapEntry key="REPO_LOC" value="${git_work_tree}"/>
 <mapEntry key="ZIP_DESTINATION" value="${workspace_loc}/../../deliveries"/>
 </mapAttribute>
 <stringAttribute key="org.eclipse.jdt.launching.CLASSPATH_PROVIDER" value="org.eclipse.ant.ui.AntClasspathProvider"/>
-<stringAttribute key="org.eclipse.jdt.launching.JRE_CONTAINER" value="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.6.0_45"/>
+<stringAttribute key="org.eclipse.jdt.launching.JRE_CONTAINER" value="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="org.eclipse.ant.internal.launching.remote.InternalAntRunner"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="org.eclipse.etrice.generator.cpp"/>
 <stringAttribute key="org.eclipse.jdt.launching.SOURCE_PATH_PROVIDER" value="org.eclipse.ant.ui.AntClasspathProvider"/>
