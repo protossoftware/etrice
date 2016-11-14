@@ -185,7 +185,7 @@ public class ProcedureHelpers {
   }
   
   /**
-   * @param EnumTest a list of {@link Attribute}s
+   * @param attributes a list of {@link Attribute}s
    * @return code declaring the attributes
    */
   public CharSequence attributes(final List<Attribute> attributes) {

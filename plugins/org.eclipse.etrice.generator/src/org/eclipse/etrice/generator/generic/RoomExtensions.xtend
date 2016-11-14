@@ -296,6 +296,31 @@ class RoomExtensions extends FSMExtensions {
 
 	/**
 	 * @param pc a {@link ProtocolClass}
+	 * @param conj flag indicating the desired {@link PortClass}
+	 * @return the port class
+	 */
+	def List<PortClass> getAllPortClasses(ProtocolClass pc, boolean conj) {
+		val ArrayList<PortClass> result = newArrayList()
+		
+		var protocol = pc
+		while (protocol!=null) {
+			if (conj) {
+				if (protocol.conjugated!=null)
+					result.add(protocol.conjugated)
+			}
+			else {
+				if (protocol.regular!=null)
+					result.add(protocol.regular)
+			}
+			
+			protocol = protocol.base
+		}
+			
+		return result
+	}
+
+	/**
+	 * @param pc a {@link ProtocolClass}
 	 * @param conj flag indicating the desired communication direction
 	 * @return <code>true</code> if a send handler is specified for this direction
 	 */
@@ -327,6 +352,20 @@ class RoomExtensions extends FSMExtensions {
 	}
 
 	/**
+	 * @param pc a {@link ProtocolClass}
+	 * @param conj flag indicating the desired communication direction
+	 * @return <code>true</code> if a receive handler is specified for this direction including base classes
+	 */
+	def boolean handlesReceiveIncludingSuper(ProtocolClass pc, boolean conj) {
+		val allPortClasses = pc.getAllPortClasses(conj)
+		for (p : allPortClasses)
+			for (hdlr : pc.getPortClass(conj).msgHandlers)
+				if (pc.getAllMessages(!conj).contains(hdlr.msg))
+					return true;
+		return false;
+	}
+
+	/**
 	 * @param iii an {@link InterfaceItemInstance}
 	 * @return <code>true</code> if the interface item instance is logically conjugate
 	 */
@@ -352,16 +391,31 @@ class RoomExtensions extends FSMExtensions {
 	 * @return a list of defined receive {@link MessageHandler} for this direction
 	 */
 	def List<MessageHandler> getReceiveHandlers(ProtocolClass pc, boolean conj) {
-		if (pc.getPortClass(conj)==null)
-			return new ArrayList<MessageHandler>()
-		else {
-			var res = new ArrayList<MessageHandler>()
+		val res = new ArrayList<MessageHandler>()
+		if (pc.getPortClass(conj)!=null) {
 			for (hdlr : pc.getPortClass(conj).msgHandlers) {
 				if (pc.getAllMessages(!conj).contains(hdlr.msg))
 					res.add(hdlr)
 			}
-			return res
 		}
+		return res
+	}
+
+	/**
+	 * @param pc a {@link ProtocolClass}
+	 * @param conj flag indicating the desired communication direction
+	 * @return a list of defined receive {@link MessageHandler} for this direction including base classes
+	 */
+	def List<MessageHandler> getReceiveHandlersIncludingSuper(ProtocolClass pc, boolean conj) {
+		val res = new ArrayList<MessageHandler>()
+		val allPortClasses = pc.getAllPortClasses(conj)
+		for (p : allPortClasses) {
+			for (hdlr : p.msgHandlers) {
+				if (pc.getAllMessages(!conj).contains(hdlr.msg))
+					res.add(hdlr)
+			}
+		}
+		return res
 	}
 
 	/**

@@ -746,6 +746,17 @@ public class CExtensions implements ILanguageExtension {
     return (_plus_2 + "\"");
   }
   
+  public String getUtilsIncludePath(final RoomClass rc) {
+    EObject _eContainer = rc.eContainer();
+    String _name = ((RoomModel) _eContainer).getName();
+    String _replaceAll = _name.replaceAll("\\.", "/");
+    String _plus = ("\"" + _replaceAll);
+    String _plus_1 = (_plus + "/");
+    String _cUtilsFileName = this.getCUtilsFileName(rc);
+    String _plus_2 = (_plus_1 + _cUtilsFileName);
+    return (_plus_2 + "\"");
+  }
+  
   @Override
   public String getTargetType(final EnumerationType type) {
     String _xifexpression = null;

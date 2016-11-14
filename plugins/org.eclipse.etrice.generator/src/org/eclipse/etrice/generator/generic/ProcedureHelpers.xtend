@@ -111,7 +111,7 @@ class ProcedureHelpers {
 	// Attributes
 
 	/**
-	 * @param EnumTest a list of {@link Attribute}s
+	 * @param attributes a list of {@link Attribute}s
 	 * @return code declaring the attributes
 	 */
 	def attributes(List<Attribute> attributes) {

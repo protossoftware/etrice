@@ -12,6 +12,7 @@
 package org.eclipse.etrice.generator.c.gen;
 
 import com.google.common.base.Objects;
+import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.List;
@@ -47,6 +48,7 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
 
 @Singleton
 @SuppressWarnings("all")
@@ -263,6 +265,20 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.append(_generateIncludeGuardBegin, "");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
+      {
+        ProtocolClass _base = pc.getBase();
+        boolean _notEquals = (!Objects.equal(_base, null));
+        if (_notEquals) {
+          _builder.append("// include base class utils");
+          _builder.newLine();
+          _builder.append("#include ");
+          ProtocolClass _base_1 = pc.getBase();
+          String _utilsIncludePath = this._cExtensions.getUtilsIncludePath(_base_1);
+          _builder.append(_utilsIncludePath, "");
+          _builder.newLineIfNotEmpty();
+          _builder.newLine();
+        }
+      }
       _builder.append("#include ");
       String _includePath = this._cExtensions.getIncludePath(pc);
       _builder.append(_includePath, "");
@@ -481,6 +497,25 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
         _xifexpression = this._roomHelpers.getAllOutgoingMessages(pc);
       }
       List<Message> messages = _xifexpression;
+      final List<PortClass> allPortClasses = this._roomExtensions.getAllPortClasses(pc, (conj).booleanValue());
+      final Function1<PortClass, EList<Attribute>> _function = new Function1<PortClass, EList<Attribute>>() {
+        @Override
+        public EList<Attribute> apply(final PortClass p) {
+          return p.getAttributes();
+        }
+      };
+      List<EList<Attribute>> _map = ListExtensions.<PortClass, EList<Attribute>>map(allPortClasses, _function);
+      Iterable<Attribute> _flatten = Iterables.<Attribute>concat(_map);
+      final List<Attribute> allAttributes = IterableExtensions.<Attribute>toList(_flatten);
+      final Function1<PortClass, EList<PortOperation>> _function_1 = new Function1<PortClass, EList<PortOperation>>() {
+        @Override
+        public EList<PortOperation> apply(final PortClass p) {
+          return p.getOperations();
+        }
+      };
+      List<EList<PortOperation>> _map_1 = ListExtensions.<PortClass, EList<PortOperation>>map(allPortClasses, _function_1);
+      Iterable<PortOperation> _flatten_1 = Iterables.<PortOperation>concat(_map_1);
+      final List<PortOperation> allOperations = IterableExtensions.<PortOperation>toList(_flatten_1);
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("typedef etPort ");
       _builder.append(portClassName, "");
@@ -492,50 +527,38 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.newLineIfNotEmpty();
       _builder.newLine();
       {
-        PortClass _portClass = this._roomExtensions.getPortClass(pc, (conj).booleanValue());
-        boolean _notEquals = (!Objects.equal(_portClass, null));
-        if (_notEquals) {
+        boolean _isEmpty = allAttributes.isEmpty();
+        boolean _not = (!_isEmpty);
+        if (_not) {
+          _builder.append("/* variable part of PortClass (RAM) */");
+          _builder.newLine();
+          _builder.append("typedef struct ");
+          _builder.append(portClassName, "");
+          _builder.append("_var ");
+          _builder.append(portClassName, "");
+          _builder.append("_var; ");
+          _builder.newLineIfNotEmpty();
+          _builder.append("struct ");
+          _builder.append(portClassName, "");
+          _builder.append("_var {");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          CharSequence _attributes = this._procedureHelpers.attributes(allAttributes);
+          _builder.append(_attributes, "\t");
+          _builder.newLineIfNotEmpty();
+          _builder.append("};");
+          _builder.newLine();
           {
-            PortClass _portClass_1 = this._roomExtensions.getPortClass(pc, (conj).booleanValue());
-            EList<Attribute> _attributes = _portClass_1.getAttributes();
-            boolean _isEmpty = _attributes.isEmpty();
-            boolean _not = (!_isEmpty);
-            if (_not) {
-              _builder.append("/* variable part of PortClass (RAM) */");
-              _builder.newLine();
-              _builder.append("typedef struct ");
-              _builder.append(portClassName, "");
-              _builder.append("_var ");
-              _builder.append(portClassName, "");
-              _builder.append("_var; ");
-              _builder.newLineIfNotEmpty();
-              _builder.append("struct ");
-              _builder.append(portClassName, "");
-              _builder.append("_var {");
-              _builder.newLineIfNotEmpty();
-              _builder.append("\t");
-              PortClass _portClass_2 = this._roomExtensions.getPortClass(pc, (conj).booleanValue());
-              EList<Attribute> _attributes_1 = _portClass_2.getAttributes();
-              CharSequence _attributes_2 = this._procedureHelpers.attributes(_attributes_1);
-              _builder.append(_attributes_2, "\t");
-              _builder.newLineIfNotEmpty();
-              _builder.append("};");
-              _builder.newLine();
+            for(final Attribute a : allAttributes) {
               {
-                PortClass _portClass_3 = this._roomExtensions.getPortClass(pc, (conj).booleanValue());
-                EList<Attribute> _attributes_3 = _portClass_3.getAttributes();
-                for(final Attribute a : _attributes_3) {
-                  {
-                    String _defaultValueLiteral = a.getDefaultValueLiteral();
-                    boolean _notEquals_1 = (!Objects.equal(_defaultValueLiteral, null));
-                    if (_notEquals_1) {
-                      String _name = a.getName();
-                      String _plus = ((portClassName + " ") + _name);
-                      String _plus_1 = (_plus + ": Attribute initialization not supported in C");
-                      this.logger.logInfo(_plus_1);
-                      _builder.newLineIfNotEmpty();
-                    }
-                  }
+                String _defaultValueLiteral = a.getDefaultValueLiteral();
+                boolean _notEquals = (!Objects.equal(_defaultValueLiteral, null));
+                if (_notEquals) {
+                  String _name = a.getName();
+                  String _plus = ((portClassName + " ") + _name);
+                  String _plus_1 = (_plus + ": Attribute initialization not supported in C");
+                  this.logger.logInfo(_plus_1);
+                  _builder.newLineIfNotEmpty();
                 }
               }
             }
@@ -594,23 +617,21 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       }
       _builder.newLine();
       {
-        PortClass _portClass_4 = this._roomExtensions.getPortClass(pc, (conj).booleanValue());
-        boolean _notEquals_2 = (!Objects.equal(_portClass_4, null));
-        if (_notEquals_2) {
-          PortClass _portClass_5 = this._roomExtensions.getPortClass(pc, (conj).booleanValue());
-          EList<PortOperation> _operations = _portClass_5.getOperations();
-          CharSequence _operationsDeclaration = this._procedureHelpers.operationsDeclaration(_operations, portClassName);
+        boolean _isEmpty_1 = allOperations.isEmpty();
+        boolean _not_1 = (!_isEmpty_1);
+        if (_not_1) {
+          CharSequence _operationsDeclaration = this._procedureHelpers.operationsDeclaration(allOperations, portClassName);
           _builder.append(_operationsDeclaration, "");
           _builder.newLineIfNotEmpty();
         }
       }
       _builder.newLine();
       {
-        boolean _handlesReceive = this._roomExtensions.handlesReceive(pc, (conj).booleanValue());
-        if (_handlesReceive) {
+        boolean _handlesReceiveIncludingSuper = this._roomExtensions.handlesReceiveIncludingSuper(pc, (conj).booleanValue());
+        if (_handlesReceiveIncludingSuper) {
           {
-            List<MessageHandler> _receiveHandlers = this._roomExtensions.getReceiveHandlers(pc, (conj).booleanValue());
-            for(final MessageHandler h : _receiveHandlers) {
+            List<MessageHandler> _receiveHandlersIncludingSuper = this._roomExtensions.getReceiveHandlersIncludingSuper(pc, (conj).booleanValue());
+            for(final MessageHandler h : _receiveHandlersIncludingSuper) {
               _builder.append("void ");
               _builder.append(portClassName, "");
               _builder.append("_");
@@ -1079,7 +1100,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
   private CharSequence portClassSource(final ProtocolClass pc, final Boolean conj) {
     CharSequence _xblockexpression = null;
     {
-      final PortClass pclass = this._roomExtensions.getPortClass(pc, (conj).booleanValue());
+      final List<PortClass> allPortClasses = this._roomExtensions.getAllPortClasses(pc, (conj).booleanValue());
       final String portClassName = this._roomExtensions.getPortClassName(pc, (conj).booleanValue());
       final String replPortClassName = this._roomExtensions.getPortClassName(pc, (conj).booleanValue(), true);
       List<Message> _xifexpression = null;
@@ -1349,25 +1370,33 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
         }
       }
       {
-        boolean _notEquals_3 = (!Objects.equal(pclass, null));
-        if (_notEquals_3) {
+        boolean _isEmpty = allPortClasses.isEmpty();
+        boolean _not = (!_isEmpty);
+        if (_not) {
           _builder.append("/* begin ");
           _builder.append(portClassName, "");
-          _builder.append(" specific */");
+          _builder.append(" specific (including base classes) */");
           _builder.newLineIfNotEmpty();
-          DetailCode _userCode = pclass.getUserCode();
-          CharSequence _userCode_1 = this._procedureHelpers.userCode(_userCode);
-          _builder.append(_userCode_1, "");
-          _builder.newLineIfNotEmpty();
+          {
+            for(final PortClass p : allPortClasses) {
+              DetailCode _userCode = p.getUserCode();
+              CharSequence _userCode_1 = this._procedureHelpers.userCode(_userCode);
+              _builder.append(_userCode_1, "");
+              _builder.newLineIfNotEmpty();
+            }
+          }
           _builder.newLine();
-          PortClass _portClass = this._roomExtensions.getPortClass(pc, (conj).booleanValue());
-          EList<PortOperation> _operations = _portClass.getOperations();
-          CharSequence _operationsImplementation = this._procedureHelpers.operationsImplementation(_operations, portClassName);
-          _builder.append(_operationsImplementation, "");
-          _builder.newLineIfNotEmpty();
+          {
+            for(final PortClass p_1 : allPortClasses) {
+              EList<PortOperation> _operations = p_1.getOperations();
+              CharSequence _operationsImplementation = this._procedureHelpers.operationsImplementation(_operations, portClassName);
+              _builder.append(_operationsImplementation, "");
+              _builder.newLineIfNotEmpty();
+            }
+          }
           _builder.append("/* end ");
           _builder.append(portClassName, "");
-          _builder.append(" specific */");
+          _builder.append(" specific (including base classes) */");
           _builder.newLineIfNotEmpty();
           _builder.newLine();
         }

@@ -353,6 +353,10 @@ class CExtensions implements ILanguageExtension {
 		"\""+(rc.eContainer as RoomModel).name.replaceAll("\\.","/")+"/"+rc.getCHeaderFileName+"\""
 	}
 
+	def getUtilsIncludePath(RoomClass rc) {
+		"\""+(rc.eContainer as RoomModel).name.replaceAll("\\.","/")+"/"+rc.getCUtilsFileName+"\""
+	}
+
 	override getTargetType(EnumerationType type) {
 		if (type.getPrimitiveType()!=null)
 			type.getPrimitiveType().getTargetName()

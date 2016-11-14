@@ -46,6 +46,7 @@ import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.fsm.base.FileSystemHelpers;
 import org.eclipse.etrice.generator.fsm.generic.FSMExtensions;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -351,6 +352,38 @@ public class RoomExtensions extends FSMExtensions {
   
   /**
    * @param pc a {@link ProtocolClass}
+   * @param conj flag indicating the desired {@link PortClass}
+   * @return the port class
+   */
+  public List<PortClass> getAllPortClasses(final ProtocolClass pc, final boolean conj) {
+    final ArrayList<PortClass> result = CollectionLiterals.<PortClass>newArrayList();
+    ProtocolClass protocol = pc;
+    while ((!Objects.equal(protocol, null))) {
+      {
+        if (conj) {
+          PortClass _conjugated = protocol.getConjugated();
+          boolean _notEquals = (!Objects.equal(_conjugated, null));
+          if (_notEquals) {
+            PortClass _conjugated_1 = protocol.getConjugated();
+            result.add(_conjugated_1);
+          }
+        } else {
+          PortClass _regular = protocol.getRegular();
+          boolean _notEquals_1 = (!Objects.equal(_regular, null));
+          if (_notEquals_1) {
+            PortClass _regular_1 = protocol.getRegular();
+            result.add(_regular_1);
+          }
+        }
+        ProtocolClass _base = protocol.getBase();
+        protocol = _base;
+      }
+    }
+    return result;
+  }
+  
+  /**
+   * @param pc a {@link ProtocolClass}
    * @param conj flag indicating the desired communication direction
    * @return <code>true</code> if a send handler is specified for this direction
    */
@@ -400,6 +433,28 @@ public class RoomExtensions extends FSMExtensions {
   }
   
   /**
+   * @param pc a {@link ProtocolClass}
+   * @param conj flag indicating the desired communication direction
+   * @return <code>true</code> if a receive handler is specified for this direction including base classes
+   */
+  public boolean handlesReceiveIncludingSuper(final ProtocolClass pc, final boolean conj) {
+    final List<PortClass> allPortClasses = this.getAllPortClasses(pc, conj);
+    for (final PortClass p : allPortClasses) {
+      PortClass _portClass = this.getPortClass(pc, conj);
+      EList<MessageHandler> _msgHandlers = _portClass.getMsgHandlers();
+      for (final MessageHandler hdlr : _msgHandlers) {
+        List<Message> _allMessages = this._roomHelpers.getAllMessages(pc, (!conj));
+        Message _msg = hdlr.getMsg();
+        boolean _contains = _allMessages.contains(_msg);
+        if (_contains) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+  
+  /**
    * @param iii an {@link InterfaceItemInstance}
    * @return <code>true</code> if the interface item instance is logically conjugate
    */
@@ -426,12 +481,10 @@ public class RoomExtensions extends FSMExtensions {
    * @return a list of defined receive {@link MessageHandler} for this direction
    */
   public List<MessageHandler> getReceiveHandlers(final ProtocolClass pc, final boolean conj) {
+    final ArrayList<MessageHandler> res = new ArrayList<MessageHandler>();
     PortClass _portClass = this.getPortClass(pc, conj);
-    boolean _equals = Objects.equal(_portClass, null);
-    if (_equals) {
-      return new ArrayList<MessageHandler>();
-    } else {
-      ArrayList<MessageHandler> res = new ArrayList<MessageHandler>();
+    boolean _notEquals = (!Objects.equal(_portClass, null));
+    if (_notEquals) {
       PortClass _portClass_1 = this.getPortClass(pc, conj);
       EList<MessageHandler> _msgHandlers = _portClass_1.getMsgHandlers();
       for (final MessageHandler hdlr : _msgHandlers) {
@@ -442,8 +495,30 @@ public class RoomExtensions extends FSMExtensions {
           res.add(hdlr);
         }
       }
-      return res;
     }
+    return res;
+  }
+  
+  /**
+   * @param pc a {@link ProtocolClass}
+   * @param conj flag indicating the desired communication direction
+   * @return a list of defined receive {@link MessageHandler} for this direction including base classes
+   */
+  public List<MessageHandler> getReceiveHandlersIncludingSuper(final ProtocolClass pc, final boolean conj) {
+    final ArrayList<MessageHandler> res = new ArrayList<MessageHandler>();
+    final List<PortClass> allPortClasses = this.getAllPortClasses(pc, conj);
+    for (final PortClass p : allPortClasses) {
+      EList<MessageHandler> _msgHandlers = p.getMsgHandlers();
+      for (final MessageHandler hdlr : _msgHandlers) {
+        List<Message> _allMessages = this._roomHelpers.getAllMessages(pc, (!conj));
+        Message _msg = hdlr.getMsg();
+        boolean _contains = _allMessages.contains(_msg);
+        if (_contains) {
+          res.add(hdlr);
+        }
+      }
+    }
+    return res;
   }
   
   /**

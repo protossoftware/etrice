@@ -124,7 +124,12 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		 */
 		
 		«generateIncludeGuardBegin(filename)»
-		
+
+		«IF pc.base!=null»
+			// include base class utils
+			#include «pc.base.utilsIncludePath»
+			
+		«ENDIF»
 		#include «pc.includePath»
 		
 		/*
@@ -199,24 +204,25 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		var portClassName = pc.getPortClassName(conj)
 		var replPortClassName = pc.getPortClassName(conj, true)
 		var messages = if (conj) pc.allIncomingMessages else pc.allOutgoingMessages
+		val allPortClasses = pc.getAllPortClasses(conj)
+		val allAttributes = allPortClasses.map[p|p.attributes].flatten.toList
+		val allOperations = allPortClasses.map[p|p.operations].flatten.toList
 		
 		'''
 		typedef etPort «portClassName»;
 		typedef etReplPort «replPortClassName»;
 		
-		«IF pc.getPortClass(conj)!=null»	
-			«IF !(pc.getPortClass(conj).attributes.empty)»
-				/* variable part of PortClass (RAM) */
-				typedef struct «portClassName»_var «portClassName»_var; 
-				struct «portClassName»_var {
-					«pc.getPortClass(conj).attributes.attributes»
-				};
-				«FOR a:pc.getPortClass(conj).attributes»
-					«IF a.defaultValueLiteral!=null»
-						«logger.logInfo(portClassName+" "+a.name+": Attribute initialization not supported in C")»
-					«ENDIF»
-				«ENDFOR»
-			«ENDIF»
+		«IF !(allAttributes.empty)»
+			/* variable part of PortClass (RAM) */
+			typedef struct «portClassName»_var «portClassName»_var; 
+			struct «portClassName»_var {
+				«allAttributes.attributes»
+			};
+			«FOR a:allAttributes»
+				«IF a.defaultValueLiteral!=null»
+					«logger.logInfo(portClassName+" "+a.name+": Attribute initialization not supported in C")»
+				«ENDIF»
+			«ENDFOR»
 		«ENDIF»
 		
 		«FOR message : messages»
@@ -229,12 +235,12 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 			«messageSignature(replPortClassName, message.name, "", ", int idx"+data)»;
 		«ENDFOR»
 		
-		«IF (pc.getPortClass(conj) != null)»	
-			«pc.getPortClass(conj).operations.operationsDeclaration(portClassName)»
+		«IF !(allOperations.empty)»	
+			«allOperations.operationsDeclaration(portClassName)»
 		«ENDIF»
 		
-		«IF pc.handlesReceive(conj)»
-			«FOR h:getReceiveHandlers(pc,conj)»
+		«IF pc.handlesReceiveIncludingSuper(conj)»
+			«FOR h:pc.getReceiveHandlersIncludingSuper(conj)»
 				void «portClassName»_«h.msg.name»_receiveHandler(«portClassName»* self, const etMessage* msg, void * actor, etActorReceiveMessage receiveMessageFunc);
 			«ENDFOR»
 		«ENDIF»
@@ -349,7 +355,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 	}
 	
 	def private portClassSource(ProtocolClass pc, Boolean conj) {
-		val pclass = pc.getPortClass(conj)
+		val allPortClasses = pc.getAllPortClasses(conj)
 		val portClassName = pc.getPortClassName(conj)
 		val replPortClassName = pc.getPortClassName(conj, true)
 		val messages = if (conj) pc.allIncomingMessages else pc.allOutgoingMessages
@@ -414,12 +420,16 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 				}
 				
 			«ENDFOR»
-			«IF pclass!=null»
-				/* begin «portClassName» specific */
-				«pclass.userCode.userCode»
+			«IF !allPortClasses.empty»
+				/* begin «portClassName» specific (including base classes) */
+				«FOR p : allPortClasses»
+					«p.userCode.userCode»
+				«ENDFOR»
 				
-				«pc.getPortClass(conj).operations.operationsImplementation(portClassName)»
-				/* end «portClassName» specific */
+				«FOR p : allPortClasses»
+					«p.operations.operationsImplementation(portClassName)»
+				«ENDFOR»
+				/* end «portClassName» specific (including base classes) */
 				
 			«ENDIF»
 			etInt32 «replPortClassName»_getReplication(const «replPortClassName»* self) {
@@ -470,7 +480,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 	
 	'''
 	/* receiver handlers */
-	«FOR h:getReceiveHandlers(pc,conj)»
+	«FOR h:pc.getReceiveHandlers(conj)»
 		void «portClassName»_«h.msg.name»_receiveHandler(«portClassName»* self, const etMessage* msg, void * actor, etActorReceiveMessage receiveMessageFunc){
 			«AbstractGenerator::getInstance().getTranslatedCode(h.detailCode)»
 			/* hand over the message to the actor:      */

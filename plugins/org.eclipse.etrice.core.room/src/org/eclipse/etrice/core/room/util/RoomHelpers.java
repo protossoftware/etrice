@@ -100,6 +100,23 @@ public class RoomHelpers extends FSMHelpers {
 	/**
 	 * Compute a list of the class itself and its base classes in reverse order (super classes to sub classes)
 	 *
+	 * @param pc the {@link ProtocolClass}
+	 * @return a list of the class itself and its base classes in reverse order (super classes to sub classes)
+	 */
+	public List<ProtocolClass> getClassHierarchy(ProtocolClass pc) {
+		ArrayList<ProtocolClass> result = new ArrayList<ProtocolClass>();
+
+		while (pc!=null) {
+			result.add(0, pc);
+			pc = pc.getBase();
+		}
+
+		return result;
+	}
+
+	/**
+	 * Compute a list of the class itself and its base classes in reverse order (super classes to sub classes)
+	 *
 	 * @param dc the {@link DataClass}
 	 * @return a list of the class itself and its base classes in reverse order (super classes to sub classes)
 	 */
