@@ -10,6 +10,7 @@
  *
  *******************************************************************************/
 
+#include <containers/StaticDequeTest.h>
 #include "containers/StaticArrayTest.h"
 #include "containers/StaticStringTest.h"
 #include "debugging/MSCFunctionObjectTest.h"
@@ -24,7 +25,6 @@
 #include "messaging/MessageServiceTest.h"
 #include "messaging/MessageServiceControllerTest.h"
 #include "messaging/StaticMessageMemoryTest.h"
-
 #include "etUnit/etUnit.h"
 
 int main() {
@@ -37,6 +37,9 @@ int main() {
 
 	StaticStringTest staticStringTest;
 	staticStringTest.run();
+
+	StaticDequeTest dequeTest;
+	dequeTest.run();
 
 	// Test debugging
 	MSCFilterTest filterTest;
