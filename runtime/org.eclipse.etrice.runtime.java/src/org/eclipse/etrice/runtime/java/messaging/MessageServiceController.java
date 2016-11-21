@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -32,6 +33,7 @@ import java.util.Map;
 public class MessageServiceController {
 	
 	private HashMap<Integer, IMessageService> messageServices = new HashMap<Integer, IMessageService>();
+	private LinkedList<IMessageService> orderedMessageServices = new LinkedList<IMessageService>();
 	private LinkedList<Integer> freeIDs = new LinkedList<Integer>();
 	private boolean running = false;
 	private int nextFreeID = 0;
@@ -52,10 +54,12 @@ public class MessageServiceController {
 			nextFreeID = msgSvc.getAddress().threadID+1;
 		
 		messageServices.put(msgSvc.getAddress().threadID, msgSvc);
+		orderedMessageServices.add(msgSvc);
 	}
 
 	public synchronized void removeMsgSvc(IMessageService msgSvc){
 		messageServices.remove(msgSvc.getAddress().threadID);
+		orderedMessageServices.remove(msgSvc);
 	}
 	
 	public synchronized IMessageService getMsgSvc(int id){
@@ -77,7 +81,7 @@ public class MessageServiceController {
 		
 		// start all message services
 		List<Thread> threads = new ArrayList<Thread>(messageServices.size());
-		for (IMessageService msgSvc : messageServices.values()){
+		for (IMessageService msgSvc : orderedMessageServices){
 			Thread thread = new Thread(msgSvc, msgSvc.getName());
 			msgSvc.setThread(thread);
 			threads.add(thread);
@@ -124,9 +128,8 @@ public class MessageServiceController {
 
 	private void terminate() {
 		// terminate all message services
-		for (IMessageService msgSvc : messageServices.values()){
-			msgSvc.terminate();
-			// TODOTS: stop in order of priorities
+		for (Iterator<IMessageService> it = orderedMessageServices.descendingIterator(); it.hasNext(); ) {
+			it.next().terminate();
 		}
 	}
 
@@ -135,8 +138,9 @@ public class MessageServiceController {
 	 * ! not thread safe !
 	 */
 	public void waitTerminate() {
-		for (IMessageService msgSvc : messageServices.values()) {
+		for (Iterator<IMessageService> it = orderedMessageServices.descendingIterator(); it.hasNext(); ) {
 			try {
+				IMessageService msgSvc = it.next();
 				if (msgSvc.getThread()==null)
 					continue;
 				
@@ -153,6 +157,7 @@ public class MessageServiceController {
 	public synchronized void resetAll() {
 		stop();
 		messageServices.clear();
+		orderedMessageServices.clear();
 		freeIDs.clear();
 		nextFreeID = 0;
 	}

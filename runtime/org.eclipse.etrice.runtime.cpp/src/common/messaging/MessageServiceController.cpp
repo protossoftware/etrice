@@ -10,12 +10,14 @@
  *
  *******************************************************************************/
 
+#include <algorithm>
 #include "MessageServiceController.h"
 
 namespace etRuntime {
 
 MessageServiceController::MessageServiceController() :
 		m_messageServices(),
+		m_messageServicesOrdered(),
 		m_freeIDs(),
 		m_running(false),
 		m_nextFreeID(0),
@@ -50,12 +52,15 @@ void MessageServiceController::addMsgSvc(IMessageService& msgSvc) {
 		m_nextFreeID = msgSvc.getAddress().m_threadID + 1;
 
 	m_messageServices[msgSvc.getAddress().m_threadID] = &msgSvc;
+	m_messageServicesOrdered.push_back(&msgSvc);
 	etMutex_leave(&m_mutex);
 }
 
 void MessageServiceController::removeMsgSvc(IMessageService& msgSvc) {
 	etMutex_enter(&m_mutex);
 	m_messageServices.erase(msgSvc.getAddress().m_threadID);
+	std::vector<IMessageService*>::iterator it = std::find(m_messageServicesOrdered.begin(), m_messageServicesOrdered.end(), &msgSvc);
+	m_messageServicesOrdered.erase(it);
 	etMutex_leave(&m_mutex);
 }
 
@@ -71,12 +76,15 @@ IMessageService* MessageServiceController::getMsgSvc(int id) {
 }
 
 void MessageServiceController::start() {
+	etMutex_enter(&m_mutex);
+
 	// start all message services
-	for (std::map<int, IMessageService*>::iterator it = m_messageServices.begin(); it != m_messageServices.end(); ++it) {
-		(it->second)->start();
-		// TODO TS: start in order of priorities
+	for (std::vector<IMessageService*>::iterator it = m_messageServicesOrdered.begin(); it != m_messageServicesOrdered.end(); ++it) {
+		(*it)->start();
 	}
 	m_running = true;
+
+	etMutex_leave(&m_mutex);
 }
 
 void MessageServiceController::stop() {
@@ -111,12 +119,12 @@ void MessageServiceController::dumpThreads(std::string msg) {
 void MessageServiceController::terminate() {
 	// terminate all message services
 	etMutex_enter(&m_mutex);
-	m_terminateServices = m_messageServices;
+	m_terminateServices = m_messageServicesOrdered;
 
-	std::map<int, IMessageService*>::iterator it = m_terminateServices.begin();
-	for (; it != m_terminateServices.end(); ++it) {
-		(it->second)->terminate();
-		//TODO TS: stop in order of priorities
+	// stop in reverse order
+	std::vector<IMessageService*>::reverse_iterator it = m_terminateServices.rbegin();
+	for (; it != m_terminateServices.rend(); ++it) {
+		(*it)->terminate();
 	}
 	etMutex_leave(&m_mutex);
 }
@@ -147,7 +155,10 @@ void MessageServiceController::resetAll() {
 
 void MessageServiceController::setMsgSvcTerminated(const IMessageService& msgSvc){
 	etMutex_enter(&m_mutex);
-	m_terminateServices.erase(msgSvc.getAddress().m_threadID);
+	std::vector<IMessageService*>::iterator it = std::find(m_terminateServices.begin(), m_terminateServices.end(), &msgSvc);
+	if (it!=m_terminateServices.end()) {
+		m_terminateServices.erase(it);
+	}
 	etSema_wakeup(&m_terminateSema);
 	etMutex_leave(&m_mutex);
 }

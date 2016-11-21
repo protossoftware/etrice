@@ -187,7 +187,7 @@ class NodeGen {
 				etTime interval;
 
 				/* initialization of all message services */
-				«FOR thread: threads»
+				«FOR thread: threads.sortBy[-prio]»
 					«IF thread.execmode==ExecMode::POLLED || thread.execmode==ExecMode::MIXED»
 						interval.sec = «TimeConverter::split(thread.time, TimeConverter.SEC, true)»;
 						interval.nSec = «TimeConverter::split(thread.time, TimeConverter.MILLI_SEC, false)»;
@@ -212,7 +212,7 @@ class NodeGen {
 		static void «clsname»_startMessageServices(void) {
 			ET_MSC_LOGGER_SYNC_ENTRY("«clsname»", "startMessageServices")
 
-			«FOR thread: threads.sortBy[getPrio].reverse»
+			«FOR thread: threads.sortBy[-prio]»
 				etMessageService_start(&msgService_«thread.name»);
 			«ENDFOR»
 

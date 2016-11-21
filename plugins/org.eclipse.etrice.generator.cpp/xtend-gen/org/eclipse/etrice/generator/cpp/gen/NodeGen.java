@@ -574,7 +574,15 @@ public class NodeGen {
       _builder.append("IMessageMemory* msgMemory;");
       _builder.newLine();
       {
-        for(final PhysicalThread thread_3 : threads) {
+        final Function1<PhysicalThread, Long> _function_1 = new Function1<PhysicalThread, Long>() {
+          @Override
+          public Long apply(final PhysicalThread it) {
+            long _prio = it.getPrio();
+            return Long.valueOf((-_prio));
+          }
+        };
+        List<PhysicalThread> _sortBy = IterableExtensions.<PhysicalThread, Long>sortBy(threads, _function_1);
+        for(final PhysicalThread thread_3 : _sortBy) {
           _builder.append("\t");
           _builder.append("{");
           _builder.newLine();

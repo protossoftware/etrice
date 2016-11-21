@@ -80,7 +80,6 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ListExtensions;
 
 @Singleton
 @SuppressWarnings("all")
@@ -412,7 +411,15 @@ public class NodeGen {
       _builder.append("/* initialization of all message services */");
       _builder.newLine();
       {
-        for(final PhysicalThread thread : threads) {
+        final Function1<PhysicalThread, Long> _function_1 = new Function1<PhysicalThread, Long>() {
+          @Override
+          public Long apply(final PhysicalThread it) {
+            long _prio = it.getPrio();
+            return Long.valueOf((-_prio));
+          }
+        };
+        List<PhysicalThread> _sortBy = IterableExtensions.<PhysicalThread, Long>sortBy(threads, _function_1);
+        for(final PhysicalThread thread : _sortBy) {
           {
             if ((Objects.equal(thread.getExecmode(), ExecMode.POLLED) || Objects.equal(thread.getExecmode(), ExecMode.MIXED))) {
               _builder.append("\t\t");
@@ -518,15 +525,15 @@ public class NodeGen {
       _builder.newLineIfNotEmpty();
       _builder.newLine();
       {
-        final Function1<PhysicalThread, Long> _function_1 = new Function1<PhysicalThread, Long>() {
+        final Function1<PhysicalThread, Long> _function_2 = new Function1<PhysicalThread, Long>() {
           @Override
           public Long apply(final PhysicalThread it) {
-            return Long.valueOf(it.getPrio());
+            long _prio = it.getPrio();
+            return Long.valueOf((-_prio));
           }
         };
-        List<PhysicalThread> _sortBy = IterableExtensions.<PhysicalThread, Long>sortBy(threads, _function_1);
-        List<PhysicalThread> _reverse = ListExtensions.<PhysicalThread>reverse(_sortBy);
-        for(final PhysicalThread thread_1 : _reverse) {
+        List<PhysicalThread> _sortBy_1 = IterableExtensions.<PhysicalThread, Long>sortBy(threads, _function_2);
+        for(final PhysicalThread thread_1 : _sortBy_1) {
           _builder.append("\t");
           _builder.append("etMessageService_start(&msgService_");
           String _name_11 = thread_1.getName();

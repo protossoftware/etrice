@@ -17,6 +17,7 @@
 #include "osal/etMutex.h"
 #include "osal/etSema.h"
 #include <map>
+#include <vector>
 #include <queue>
 #include <string>
 
@@ -51,13 +52,14 @@ private:
 	void terminate();
 
 	std::map<int, IMessageService*> m_messageServices;
+	std::vector<IMessageService*> m_messageServicesOrdered;
 	std::queue<int> m_freeIDs;
 	etBool m_running;
 	int m_nextFreeID;
 
 	etMutex m_mutex;
 	etSema m_terminateSema;
-	std::map<int, IMessageService*> m_terminateServices;
+	std::vector<IMessageService*> m_terminateServices;
 
 	MessageServiceController(MessageServiceController const&);
 	MessageServiceController& operator=(MessageServiceController const&);

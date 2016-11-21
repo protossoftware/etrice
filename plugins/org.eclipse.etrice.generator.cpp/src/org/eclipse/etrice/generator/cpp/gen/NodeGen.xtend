@@ -234,7 +234,7 @@ class NodeGen {
 			«ENDIF»
 
 			IMessageMemory* msgMemory;
-			«FOR thread: threads»
+			«FOR thread: threads.sortBy[-prio]»
 				{
 					msgMemory = new StaticMessageMemory(this, "MessageMemory_«thread.name»", «thread.msgblocksize», «thread.msgpoolsize»);
 					«IF thread.execmode==ExecMode::POLLED || thread.execmode==ExecMode::MIXED»

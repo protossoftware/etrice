@@ -331,7 +331,15 @@ public class NodeGen {
       _builder.append("IMessageService msgService;");
       _builder.newLine();
       {
-        for(final PhysicalThread thread_1 : threads) {
+        final Function1<PhysicalThread, Long> _function_1 = new Function1<PhysicalThread, Long>() {
+          @Override
+          public Long apply(final PhysicalThread it) {
+            long _prio = it.getPrio();
+            return Long.valueOf((-_prio));
+          }
+        };
+        List<PhysicalThread> _sortBy = IterableExtensions.<PhysicalThread, Long>sortBy(threads, _function_1);
+        for(final PhysicalThread thread_1 : _sortBy) {
           {
             if ((Objects.equal(thread_1.getExecmode(), ExecMode.POLLED) || Objects.equal(thread_1.getExecmode(), ExecMode.MIXED))) {
               _builder.append("\t\t");
@@ -487,20 +495,20 @@ public class NodeGen {
       _builder.newLine();
       {
         BasicEList<AbstractInstance> _allSubInstances = this._roomExtensions.getAllSubInstances(comp);
-        final Function1<AbstractInstance, Boolean> _function_1 = new Function1<AbstractInstance, Boolean>() {
+        final Function1<AbstractInstance, Boolean> _function_2 = new Function1<AbstractInstance, Boolean>() {
           @Override
           public Boolean apply(final AbstractInstance inst) {
             return Boolean.valueOf((inst instanceof ActorInterfaceInstance));
           }
         };
-        Iterable<AbstractInstance> _filter = IterableExtensions.<AbstractInstance>filter(_allSubInstances, _function_1);
-        final Function1<AbstractInstance, ActorInterfaceInstance> _function_2 = new Function1<AbstractInstance, ActorInterfaceInstance>() {
+        Iterable<AbstractInstance> _filter = IterableExtensions.<AbstractInstance>filter(_allSubInstances, _function_2);
+        final Function1<AbstractInstance, ActorInterfaceInstance> _function_3 = new Function1<AbstractInstance, ActorInterfaceInstance>() {
           @Override
           public ActorInterfaceInstance apply(final AbstractInstance inst) {
             return ((ActorInterfaceInstance) inst);
           }
         };
-        Iterable<ActorInterfaceInstance> _map = IterableExtensions.<AbstractInstance, ActorInterfaceInstance>map(_filter, _function_2);
+        Iterable<ActorInterfaceInstance> _map = IterableExtensions.<AbstractInstance, ActorInterfaceInstance>map(_filter, _function_3);
         for(final ActorInterfaceInstance aii : _map) {
           _builder.append("\t\t");
           _builder.append("{");
@@ -760,14 +768,14 @@ public class NodeGen {
           {
             EList<ActorClass> _subClasses = root.getSubClasses(oa);
             List<ActorClass> _union = this._roomExtensions.<ActorClass>union(_subClasses, oa);
-            final Function1<ActorClass, Boolean> _function_3 = new Function1<ActorClass, Boolean>() {
+            final Function1<ActorClass, Boolean> _function_4 = new Function1<ActorClass, Boolean>() {
               @Override
               public Boolean apply(final ActorClass s) {
                 boolean _isAbstract = s.isAbstract();
                 return Boolean.valueOf((!_isAbstract));
               }
             };
-            Iterable<ActorClass> _filter_1 = IterableExtensions.<ActorClass>filter(_union, _function_3);
+            Iterable<ActorClass> _filter_1 = IterableExtensions.<ActorClass>filter(_union, _function_4);
             for(final ActorClass subcls : _filter_1) {
               _builder.append("\t\t");
               _builder.append("\t");

@@ -151,7 +151,7 @@ class NodeGen {
 			public void instantiateMessageServices() {
 
 				IMessageService msgService;
-				«FOR thread: threads»
+				«FOR thread: threads.sortBy[-prio]»
 					«IF thread.execmode==ExecMode::POLLED || thread.execmode==ExecMode::MIXED»
 						msgService = new MessageService(this, MessageService.ExecMode.«thread.execmode.getName», «thread.time»L, 0, «thread.threadId», "MessageService_«thread.name»" /*, thread_prio */);
 					«ELSE»
