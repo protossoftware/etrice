@@ -205,6 +205,9 @@ public abstract class AbstractPropertyDialog extends FormDialog {
 		
 		@Override
 		public Object convert(Object fromObject) {
+			if (fromObject==null)
+				return "";
+			
 			return ((Enumerator)fromObject).getLiteral();
 		}
 	}

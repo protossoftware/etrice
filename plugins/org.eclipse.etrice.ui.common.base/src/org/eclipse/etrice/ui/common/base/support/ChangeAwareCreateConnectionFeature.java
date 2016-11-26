@@ -45,6 +45,9 @@ public abstract class ChangeAwareCreateConnectionFeature extends
 
 	@Override
 	public final boolean hasDoneChanges() {
+		if (changeRecorder==null)
+			return false;
+		
 		return changeRecorder.hasResourceChanged();
 	}
 	
