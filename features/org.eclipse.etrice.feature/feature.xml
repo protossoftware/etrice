@@ -41,11 +41,10 @@ http://www.eclipse.org/legal/epl-v10.html
    </license>
 
    <url>
-      <discovery label="Apache Commons from Orbit" url="http://download.eclipse.org/tools/orbit/downloads/drops/R20130118183705/repository/"/>
-      <discovery label="Xtext composite update site" url="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/"/>
+      <discovery label="Eclipse Orbit" url="http://download.eclipse.org/tools/orbit/downloads/drops/R20160520211859/repository/"/>
    </url>
 
-   <requires>
+      <requires>
       <import plugin="org.eclipse.etrice.core.common" version="1.1.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.etrice.core.fsm" version="1.1.0" match="greaterOrEqual"/>
       <import plugin="org.antlr.runtime" version="3.0.0" match="greaterOrEqual"/>
