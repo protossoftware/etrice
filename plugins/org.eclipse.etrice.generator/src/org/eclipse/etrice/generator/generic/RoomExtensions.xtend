@@ -40,6 +40,7 @@ import org.eclipse.etrice.core.room.ServiceImplementation
 import org.eclipse.etrice.core.room.util.RoomHelpers
 import org.eclipse.etrice.generator.fsm.base.FileSystemHelpers
 import org.eclipse.etrice.generator.fsm.generic.FSMExtensions
+import java.util.Collections
 
 /**
 	collection of convenience functions for code generation
@@ -328,8 +329,9 @@ class RoomExtensions extends FSMExtensions {
 		if (pc.getPortClass(conj)==null)
 			return false
 		else {
-			for (hdlr : pc.getPortClass(conj).msgHandlers)
-				if (pc.getAllMessages(conj).contains(hdlr.msg))
+			val allMessages = pc.getAllMessages(conj)
+			for (hdlr : getSafeList(pc.getPortClass(conj).msgHandlers))
+				if (allMessages.contains(hdlr.msg))
 					return true;
 		}
 		return false;
@@ -344,8 +346,9 @@ class RoomExtensions extends FSMExtensions {
 		if (pc.getPortClass(conj)==null)
 			return false
 		else {
-			for (hdlr : pc.getPortClass(conj).msgHandlers)
-				if (pc.getAllMessages(!conj).contains(hdlr.msg))
+			val allMessages = pc.getAllMessages(!conj)
+			for (hdlr : getSafeList(pc.getPortClass(conj).msgHandlers))
+				if (allMessages.contains(hdlr.msg))
 					return true;
 		}
 		return false;
@@ -358,9 +361,10 @@ class RoomExtensions extends FSMExtensions {
 	 */
 	def boolean handlesReceiveIncludingSuper(ProtocolClass pc, boolean conj) {
 		val allPortClasses = pc.getAllPortClasses(conj)
+		val allMessages = pc.getAllMessages(!conj)
 		for (p : allPortClasses)
-			for (hdlr : pc.getPortClass(conj).msgHandlers)
-				if (pc.getAllMessages(!conj).contains(hdlr.msg))
+			for (hdlr : getSafeList(p.msgHandlers))
+				if (allMessages.contains(hdlr.msg))
 					return true;
 		return false;
 	}
@@ -393,8 +397,9 @@ class RoomExtensions extends FSMExtensions {
 	def List<MessageHandler> getReceiveHandlers(ProtocolClass pc, boolean conj) {
 		val res = new ArrayList<MessageHandler>()
 		if (pc.getPortClass(conj)!=null) {
-			for (hdlr : pc.getPortClass(conj).msgHandlers) {
-				if (pc.getAllMessages(!conj).contains(hdlr.msg))
+			val allMessages = pc.getAllMessages(!conj)
+			for (hdlr : getSafeList(pc.getPortClass(conj).msgHandlers)) {
+				if (allMessages.contains(hdlr.msg))
 					res.add(hdlr)
 			}
 		}
@@ -409,9 +414,10 @@ class RoomExtensions extends FSMExtensions {
 	def List<MessageHandler> getReceiveHandlersIncludingSuper(ProtocolClass pc, boolean conj) {
 		val res = new ArrayList<MessageHandler>()
 		val allPortClasses = pc.getAllPortClasses(conj)
+		val allMsgs = pc.getAllMessages(!conj)
 		for (p : allPortClasses) {
-			for (hdlr : p.msgHandlers) {
-				if (pc.getAllMessages(!conj).contains(hdlr.msg))
+			for (hdlr : getSafeList(p.msgHandlers)) {
+				if (allMsgs.contains(hdlr.msg))
 					res.add(hdlr)
 			}
 		}
@@ -425,11 +431,12 @@ class RoomExtensions extends FSMExtensions {
 	 */
 	def List<MessageHandler> getSendHandlers(ProtocolClass pc, boolean conj) {
 		if (pc.getPortClass(conj)==null)
-			return new ArrayList<MessageHandler>()
+			return Collections.emptyList
 		else {
-			var res = new ArrayList<MessageHandler>()
-			for (hdlr : pc.getPortClass(conj).msgHandlers) {
-				if (pc.getAllMessages(conj).contains(hdlr.msg))
+			val res = new ArrayList<MessageHandler>()
+			val allMessages = pc.getAllMessages(conj)
+			for (hdlr : getSafeList(pc.getPortClass(conj).msgHandlers)) {
+				if (allMessages.contains(hdlr.msg))
 					res.add(hdlr)
 			}
 			return res
@@ -486,6 +493,8 @@ class RoomExtensions extends FSMExtensions {
 		return result;
 	}
 
-
+	def static List<MessageHandler> getSafeList(List<MessageHandler> msgHandlers) {
+		return if (msgHandlers==null) Collections.emptyList else msgHandlers 
+	}
 
 }

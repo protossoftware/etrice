@@ -15,6 +15,7 @@ import com.google.common.collect.Iterables;
 import com.google.inject.Singleton;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import javax.inject.Inject;
 import org.eclipse.emf.common.util.BasicEList;
@@ -393,12 +394,13 @@ public class RoomExtensions extends FSMExtensions {
     if (_equals) {
       return false;
     } else {
+      final List<Message> allMessages = this._roomHelpers.getAllMessages(pc, conj);
       PortClass _portClass_1 = this.getPortClass(pc, conj);
       EList<MessageHandler> _msgHandlers = _portClass_1.getMsgHandlers();
-      for (final MessageHandler hdlr : _msgHandlers) {
-        List<Message> _allMessages = this._roomHelpers.getAllMessages(pc, conj);
+      List<MessageHandler> _safeList = RoomExtensions.getSafeList(_msgHandlers);
+      for (final MessageHandler hdlr : _safeList) {
         Message _msg = hdlr.getMsg();
-        boolean _contains = _allMessages.contains(_msg);
+        boolean _contains = allMessages.contains(_msg);
         if (_contains) {
           return true;
         }
@@ -418,12 +420,13 @@ public class RoomExtensions extends FSMExtensions {
     if (_equals) {
       return false;
     } else {
+      final List<Message> allMessages = this._roomHelpers.getAllMessages(pc, (!conj));
       PortClass _portClass_1 = this.getPortClass(pc, conj);
       EList<MessageHandler> _msgHandlers = _portClass_1.getMsgHandlers();
-      for (final MessageHandler hdlr : _msgHandlers) {
-        List<Message> _allMessages = this._roomHelpers.getAllMessages(pc, (!conj));
+      List<MessageHandler> _safeList = RoomExtensions.getSafeList(_msgHandlers);
+      for (final MessageHandler hdlr : _safeList) {
         Message _msg = hdlr.getMsg();
-        boolean _contains = _allMessages.contains(_msg);
+        boolean _contains = allMessages.contains(_msg);
         if (_contains) {
           return true;
         }
@@ -439,13 +442,13 @@ public class RoomExtensions extends FSMExtensions {
    */
   public boolean handlesReceiveIncludingSuper(final ProtocolClass pc, final boolean conj) {
     final List<PortClass> allPortClasses = this.getAllPortClasses(pc, conj);
+    final List<Message> allMessages = this._roomHelpers.getAllMessages(pc, (!conj));
     for (final PortClass p : allPortClasses) {
-      PortClass _portClass = this.getPortClass(pc, conj);
-      EList<MessageHandler> _msgHandlers = _portClass.getMsgHandlers();
-      for (final MessageHandler hdlr : _msgHandlers) {
-        List<Message> _allMessages = this._roomHelpers.getAllMessages(pc, (!conj));
+      EList<MessageHandler> _msgHandlers = p.getMsgHandlers();
+      List<MessageHandler> _safeList = RoomExtensions.getSafeList(_msgHandlers);
+      for (final MessageHandler hdlr : _safeList) {
         Message _msg = hdlr.getMsg();
-        boolean _contains = _allMessages.contains(_msg);
+        boolean _contains = allMessages.contains(_msg);
         if (_contains) {
           return true;
         }
@@ -485,12 +488,13 @@ public class RoomExtensions extends FSMExtensions {
     PortClass _portClass = this.getPortClass(pc, conj);
     boolean _notEquals = (!Objects.equal(_portClass, null));
     if (_notEquals) {
+      final List<Message> allMessages = this._roomHelpers.getAllMessages(pc, (!conj));
       PortClass _portClass_1 = this.getPortClass(pc, conj);
       EList<MessageHandler> _msgHandlers = _portClass_1.getMsgHandlers();
-      for (final MessageHandler hdlr : _msgHandlers) {
-        List<Message> _allMessages = this._roomHelpers.getAllMessages(pc, (!conj));
+      List<MessageHandler> _safeList = RoomExtensions.getSafeList(_msgHandlers);
+      for (final MessageHandler hdlr : _safeList) {
         Message _msg = hdlr.getMsg();
-        boolean _contains = _allMessages.contains(_msg);
+        boolean _contains = allMessages.contains(_msg);
         if (_contains) {
           res.add(hdlr);
         }
@@ -507,12 +511,13 @@ public class RoomExtensions extends FSMExtensions {
   public List<MessageHandler> getReceiveHandlersIncludingSuper(final ProtocolClass pc, final boolean conj) {
     final ArrayList<MessageHandler> res = new ArrayList<MessageHandler>();
     final List<PortClass> allPortClasses = this.getAllPortClasses(pc, conj);
+    final List<Message> allMsgs = this._roomHelpers.getAllMessages(pc, (!conj));
     for (final PortClass p : allPortClasses) {
       EList<MessageHandler> _msgHandlers = p.getMsgHandlers();
-      for (final MessageHandler hdlr : _msgHandlers) {
-        List<Message> _allMessages = this._roomHelpers.getAllMessages(pc, (!conj));
+      List<MessageHandler> _safeList = RoomExtensions.getSafeList(_msgHandlers);
+      for (final MessageHandler hdlr : _safeList) {
         Message _msg = hdlr.getMsg();
-        boolean _contains = _allMessages.contains(_msg);
+        boolean _contains = allMsgs.contains(_msg);
         if (_contains) {
           res.add(hdlr);
         }
@@ -530,15 +535,16 @@ public class RoomExtensions extends FSMExtensions {
     PortClass _portClass = this.getPortClass(pc, conj);
     boolean _equals = Objects.equal(_portClass, null);
     if (_equals) {
-      return new ArrayList<MessageHandler>();
+      return Collections.<MessageHandler>emptyList();
     } else {
-      ArrayList<MessageHandler> res = new ArrayList<MessageHandler>();
+      final ArrayList<MessageHandler> res = new ArrayList<MessageHandler>();
+      final List<Message> allMessages = this._roomHelpers.getAllMessages(pc, conj);
       PortClass _portClass_1 = this.getPortClass(pc, conj);
       EList<MessageHandler> _msgHandlers = _portClass_1.getMsgHandlers();
-      for (final MessageHandler hdlr : _msgHandlers) {
-        List<Message> _allMessages = this._roomHelpers.getAllMessages(pc, conj);
+      List<MessageHandler> _safeList = RoomExtensions.getSafeList(_msgHandlers);
+      for (final MessageHandler hdlr : _safeList) {
         Message _msg = hdlr.getMsg();
-        boolean _contains = _allMessages.contains(_msg);
+        boolean _contains = allMessages.contains(_msg);
         if (_contains) {
           res.add(hdlr);
         }
@@ -617,6 +623,17 @@ public class RoomExtensions extends FSMExtensions {
       }
     }
     return result;
+  }
+  
+  public static List<MessageHandler> getSafeList(final List<MessageHandler> msgHandlers) {
+    List<MessageHandler> _xifexpression = null;
+    boolean _equals = Objects.equal(msgHandlers, null);
+    if (_equals) {
+      _xifexpression = Collections.<MessageHandler>emptyList();
+    } else {
+      _xifexpression = msgHandlers;
+    }
+    return _xifexpression;
   }
   
   public String getPortClassName(final EObject p) {
