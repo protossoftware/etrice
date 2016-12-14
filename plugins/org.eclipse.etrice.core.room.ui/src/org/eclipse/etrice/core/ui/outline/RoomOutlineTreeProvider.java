@@ -38,6 +38,7 @@ import org.eclipse.etrice.core.fsm.fSM.State;
 import org.eclipse.etrice.core.fsm.fSM.StateGraph;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.ui.internal.RoomActivator;
+import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.scoping.impl.ImportUriResolver;
@@ -64,6 +65,7 @@ public class RoomOutlineTreeProvider extends DefaultOutlineTreeProvider {
 	private static final Object CONJ_PORT_CLASS_LABEL = "conjugated port class";
 	
 	@Inject ImportUriResolver importUriResolver;
+	@Inject ILabelProvider labelProvider;
 	
 	protected boolean _isLeaf(ActorClass ac) {
 		if (ac.getInterfacePorts().size()>0 || ac.getServiceProvisionPoints().size()>0) {
@@ -192,7 +194,7 @@ public class RoomOutlineTreeProvider extends DefaultOutlineTreeProvider {
 		Object nodeName = parentNode.getText();
 		if(parentNode.getText() instanceof StyledString)
 			nodeName = ((StyledString)parentNode.getText()).getString();
-		if(nodeName.equals(pc.getName()))
+		if(nodeName.equals(labelProvider.getText(pc)))
 			createChildren1(parentNode, pc);
 		else
 			createChildren2(parentNode, pc);
