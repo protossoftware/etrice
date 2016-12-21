@@ -58,30 +58,30 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 @SuppressWarnings("all")
 public class ActorClassGen extends GenericActorClassGenerator {
   @Inject
-  private IGeneratorFileIo fileIO;
+  protected IGeneratorFileIo fileIO;
   
   @Inject
   @Extension
-  private CppExtensions _cppExtensions;
+  protected CppExtensions _cppExtensions;
   
   @Inject
   @Extension
-  private RoomExtensions _roomExtensions;
+  protected RoomExtensions _roomExtensions;
   
   @Inject
   @Extension
-  private ProcedureHelpers _procedureHelpers;
+  protected ProcedureHelpers _procedureHelpers;
   
   @Inject
-  private Initialization initHelper;
-  
-  @Inject
-  @Extension
-  private StateMachineGen _stateMachineGen;
+  protected Initialization initHelper;
   
   @Inject
   @Extension
-  private FileSystemHelpers _fileSystemHelpers;
+  protected StateMachineGen _stateMachineGen;
+  
+  @Inject
+  @Extension
+  protected FileSystemHelpers _fileSystemHelpers;
   
   public void doGenerate(final Root root) {
     final Map<ActorClass, WiredActorClass> ac2wired = CollectionLiterals.<ActorClass, WiredActorClass>newHashMap();
@@ -141,7 +141,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
     }
   }
   
-  private CharSequence generateHeaderFile(final Root root, final ExpandedActorClass xpac, final WiredActorClass wired, final boolean manualBehavior) {
+  protected CharSequence generateHeaderFile(final Root root, final ExpandedActorClass xpac, final WiredActorClass wired, final boolean manualBehavior) {
     CharSequence _xblockexpression = null;
     {
       final ActorClass ac = xpac.getActorClass();
@@ -695,7 +695,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
     return _xblockexpression;
   }
   
-  private CharSequence generateSourceFile(final Root root, final ExpandedActorClass xpac, final WiredActorClass wired, final boolean manualBehavior) {
+  protected CharSequence generateSourceFile(final Root root, final ExpandedActorClass xpac, final WiredActorClass wired, final boolean manualBehavior) {
     CharSequence _xblockexpression = null;
     {
       final ActorClass ac = xpac.getActorClass();

@@ -380,10 +380,13 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 				if (getPeerAddress().isValid()) {
 «««					we have to use a dynamic cast here because we have a virtual base class
 					Message* buffer = dynamic_cast<IMessageService*>(getPeerMsgReceiver())->getMessageBuffer(sizeof(«messageType»));
+«««					// TODO JB: Handle buffer == NULL
 					if (buffer) {
 						getPeerMsgReceiver()->receive(«message»);
 					}
-«««					// TODO JB: Handle buffer == NULL
+					else {
+						std::cout << "The message buffer is too small for the message!" << std::endl;
+					}
 				}
 			}
 		'''

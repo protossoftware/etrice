@@ -30,14 +30,14 @@ import org.eclipse.etrice.generator.generic.RoomExtensions
 @Singleton
 class ActorClassGen extends GenericActorClassGenerator {
 
-	@Inject IGeneratorFileIo fileIO
-	@Inject extension CppExtensions
-	@Inject extension RoomExtensions
+	@Inject protected IGeneratorFileIo fileIO
+	@Inject protected extension CppExtensions
+	@Inject protected extension RoomExtensions
 
-	@Inject extension ProcedureHelpers
-	@Inject Initialization initHelper
-	@Inject extension StateMachineGen
-	@Inject extension FileSystemHelpers
+	@Inject protected extension ProcedureHelpers
+	@Inject protected Initialization initHelper
+	@Inject protected extension StateMachineGen
+	@Inject protected extension FileSystemHelpers
 
 	def doGenerate(Root root) {
 		val Map<ActorClass, WiredActorClass> ac2wired = newHashMap
@@ -53,7 +53,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 		}
 	}
 
-	def private generateHeaderFile(Root root, ExpandedActorClass xpac, WiredActorClass wired, boolean manualBehavior) {
+	def protected generateHeaderFile(Root root, ExpandedActorClass xpac, WiredActorClass wired, boolean manualBehavior) {
 		val ac = xpac.actorClass
 		val clsname = if (manualBehavior) "Abstract"+ac.name else ac.name
 		//val models = root.getReferencedModels(ac)
@@ -217,7 +217,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 	}
 
 
-	def private generateSourceFile(Root root, ExpandedActorClass xpac, WiredActorClass wired, boolean manualBehavior) {
+	def protected generateSourceFile(Root root, ExpandedActorClass xpac, WiredActorClass wired, boolean manualBehavior) {
 		val ac = xpac.actorClass
 		val clsname = if (manualBehavior) "Abstract"+ac.name else ac.name
 		//val models = root.getReferencedModels(ac)
