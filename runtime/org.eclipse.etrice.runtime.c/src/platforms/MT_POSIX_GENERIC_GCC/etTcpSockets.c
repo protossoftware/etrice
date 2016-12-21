@@ -19,6 +19,7 @@
 #include <netinet/in.h>
 #include <netdb.h>
 #include <arpa/inet.h>
+#include <errno.h>
 #include "osal/etTcpSockets.h"
 #include "osal/etThread.h"
 
@@ -69,6 +70,7 @@ static void readThreadFunc(void* threadData) {
 			/* TODO: call  WSAGetLastError and do error handling */
 			PRINT_DEBUG("connection thread: socket lost, exiting\n")
 			self->socket = INVALID_SOCKET;
+			etThread_destruct(&self->readThread);
 			return;
 		}
 
@@ -83,6 +85,7 @@ static void listenerThreadFunc(void* threadData) {
 	PRINT_DEBUG("server: listening\n")
 	if (listen(self->socket, self->data.maxConnections) == INVALID_SOCKET) {
 		PRINT_DEBUG("server: error\n")
+		etThread_destruct(&self->listenerThread);
 		return;
 	}
 
@@ -104,8 +107,8 @@ static void listenerThreadFunc(void* threadData) {
 
 		if (self->connections[slot].socket == INVALID_SOCKET) {
 			/* TODO: error handling */
-			PRINT_DEBUG("server: accept interrupted, exiting\n")
-			return;
+			PRINT_DEBUG("server: accept interrupted\n")
+			break;
 		}
 
 		PRINT_DEBUG("server: accepted new client, starting read thread\n")
@@ -118,6 +121,7 @@ static void listenerThreadFunc(void* threadData) {
 				"etSocketServer",
 				readThreadFunc,
 				&self->connections[slot]);
+		etThread_start(&self->connections[slot].readThread);
 	}
 
 	/* TODO: if maxConnections is reached this thread terminates.
@@ -125,6 +129,7 @@ static void listenerThreadFunc(void* threadData) {
 	 */
 
 	PRINT_DEBUG("server: exiting listener thread\n")
+	etThread_destruct(&self->listenerThread);
 }
 
 etSocketError etInitSockets() {
@@ -174,11 +179,17 @@ etSocketError etStartListening(etSocketServerData* data, short port) {
 	local.sin_port = htons(port);
 
 	self->socket = socket(AF_INET, SOCK_STREAM, 0);
-	if (self->socket == INVALID_SOCKET)
+	if (self->socket == INVALID_SOCKET) {
+		printf("server: ", strerror(errno), "\n");
+		fflush(stdout);
 		return ETSOCKET_ERROR;
+	}
 
-	if (bind(self->socket, (struct sockaddr*) &local, sizeof(local)) < 0)
+	if (bind(self->socket, (struct sockaddr*) &local, sizeof(local)) < 0) {
+		printf("server: ", strerror(errno), "\n");
+		fflush(stdout);
 		return ETSOCKET_ERROR;
+	}
 
 	PRINT_DEBUG("server: starting listener thread\n")
 	etThread_construct(
@@ -188,6 +199,8 @@ etSocketError etStartListening(etSocketServerData* data, short port) {
 			"etSocketServer",
 			listenerThreadFunc,
 			self);
+
+	etThread_start(&self->listenerThread);
 
 	return ETSOCKET_OK;
 }
@@ -286,12 +299,18 @@ etSocketError etConnectServer(etSocketConnectionData* data, const char* addr, sh
 	self->address.sin_port = htons(port);
 
 	self->socket = socket(AF_INET, SOCK_STREAM, 0);
-	if (self->socket==INVALID_SOCKET)
+	if (self->socket==INVALID_SOCKET) {
+		printf("client: ", strerror(errno), "\n");
+		fflush(stdout);
 		return ETSOCKET_ERROR;
+	}
 
 	PRINT_DEBUG("client: connecting\n")
-	if (connect(self->socket, (struct sockaddr*)&(self->address), sizeof(self->address)) == INVALID_SOCKET)
+	if (connect(self->socket, (struct sockaddr*)&(self->address), sizeof(self->address)) == INVALID_SOCKET) {
+		printf("client: ", strerror(errno), "\n");
+		fflush(stdout);
 		return ETSOCKET_ERROR;
+	}
 
 	PRINT_DEBUG("client: connected\n")
 	PRINT_DEBUG("client: starting read thread\n")
@@ -302,6 +321,7 @@ etSocketError etConnectServer(etSocketConnectionData* data, const char* addr, sh
 			"etSocketConnection",
 			readThreadFunc,
 			self);
+	etThread_start(&self->readThread);
 
 	return ETSOCKET_OK;
 }
