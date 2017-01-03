@@ -1172,15 +1172,6 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder_4.append("\t\t");
       _builder_4.append("}");
       _builder_4.newLine();
-      _builder_4.append("\t\t");
-      _builder_4.append("else {");
-      _builder_4.newLine();
-      _builder_4.append("\t\t\t");
-      _builder_4.append("std::cout << \"The message buffer is too small for the message!\" << std::endl;");
-      _builder_4.newLine();
-      _builder_4.append("\t\t");
-      _builder_4.append("}");
-      _builder_4.newLine();
       _builder_4.append("\t");
       _builder_4.append("}");
       _builder_4.newLine();

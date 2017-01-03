@@ -96,8 +96,11 @@ class RTSystemServicesProtocolConjPort : public etRuntime::PortBase {
 
 	 // sent messages
 	public: void executeInitialTransition();
+	private: void executeInitialTransition_impl();
 	public: void startDebugging();
+	private: void startDebugging_impl();
 	public: void stopDebugging();
+	private: void stopDebugging_impl();
 };
 
 //------------------------------------------------------------------------------------------------------------

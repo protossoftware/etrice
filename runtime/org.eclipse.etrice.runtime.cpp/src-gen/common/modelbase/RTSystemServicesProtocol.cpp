@@ -108,24 +108,45 @@ void RTSystemServicesProtocolConjPort::receive(const Message* msg) {
 
 // sent messages
 void RTSystemServicesProtocolConjPort::executeInitialTransition() {
+	executeInitialTransition_impl();
+}
+
+void RTSystemServicesProtocolConjPort::executeInitialTransition_impl() {
 	DebuggingService::getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(),
-		RTSystemServicesProtocol::getMessageString(RTSystemServicesProtocol::IN_executeInitialTransition));
-	if (getPeerAddress().isValid()){
-		getPeerMsgReceiver()->receive(new Message(getPeerAddress(), RTSystemServicesProtocol::IN_executeInitialTransition));
+	RTSystemServicesProtocol::getMessageString(RTSystemServicesProtocol::IN_executeInitialTransition));
+	if (getPeerAddress().isValid()) {
+		Message* buffer = dynamic_cast<IMessageService*>(getPeerMsgReceiver())->getMessageBuffer(sizeof(Message));
+		if (buffer) {
+			getPeerMsgReceiver()->receive(new (buffer) Message(getPeerAddress(), RTSystemServicesProtocol::IN_executeInitialTransition));
+		}
 	}
 }
 void RTSystemServicesProtocolConjPort::startDebugging() {
+	startDebugging_impl();
+}
+
+void RTSystemServicesProtocolConjPort::startDebugging_impl() {
 	DebuggingService::getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(),
-		RTSystemServicesProtocol::getMessageString(RTSystemServicesProtocol::IN_startDebugging));
-	if (getPeerAddress().isValid()){
-		getPeerMsgReceiver()->receive(new Message(getPeerAddress(), RTSystemServicesProtocol::IN_startDebugging));
+	RTSystemServicesProtocol::getMessageString(RTSystemServicesProtocol::IN_startDebugging));
+	if (getPeerAddress().isValid()) {
+		Message* buffer = dynamic_cast<IMessageService*>(getPeerMsgReceiver())->getMessageBuffer(sizeof(Message));
+		if (buffer) {
+			getPeerMsgReceiver()->receive(new (buffer) Message(getPeerAddress(), RTSystemServicesProtocol::IN_startDebugging));
+		}
 	}
 }
 void RTSystemServicesProtocolConjPort::stopDebugging() {
+	stopDebugging_impl();
+}
+
+void RTSystemServicesProtocolConjPort::stopDebugging_impl() {
 	DebuggingService::getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(),
-		RTSystemServicesProtocol::getMessageString(RTSystemServicesProtocol::IN_stopDebugging));
-	if (getPeerAddress().isValid()){
-		getPeerMsgReceiver()->receive(new Message(getPeerAddress(), RTSystemServicesProtocol::IN_stopDebugging));
+	RTSystemServicesProtocol::getMessageString(RTSystemServicesProtocol::IN_stopDebugging));
+	if (getPeerAddress().isValid()) {
+		Message* buffer = dynamic_cast<IMessageService*>(getPeerMsgReceiver())->getMessageBuffer(sizeof(Message));
+		if (buffer) {
+			getPeerMsgReceiver()->receive(new (buffer) Message(getPeerAddress(), RTSystemServicesProtocol::IN_stopDebugging));
+		}
 	}
 }
 

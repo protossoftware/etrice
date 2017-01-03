@@ -30,12 +30,16 @@ StaticMessageMemory::~StaticMessageMemory() {
 }
 
 Message* StaticMessageMemory::getMessageBuffer(size_t size) {
-	if(size <= m_size && m_msgPool.getSize() > 0) {
-		return const_cast<Message*>(m_msgPool.pop());
+	if(size > m_size) {
+		std::cout << "Could not provide message buffer (message too big)!" << std::endl;
+	}
+	else if(m_msgPool.getSize() <= 0) {
+		std::cout << "Could not provide message buffer (message pool is empty)!" << std::endl;
 	}
 	else {
-		return 0;
+		return const_cast<Message*>(m_msgPool.pop());
 	}
+	return NULL;
 }
 
 void StaticMessageMemory::returnMessageBuffer(const Message* buffer) {
