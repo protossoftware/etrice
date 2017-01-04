@@ -11,7 +11,6 @@
  *******************************************************************************/
 
 #include "common/messaging/Address.h"
-#include <string>
 
 namespace etRuntime {
 
@@ -71,11 +70,11 @@ bool Address::operator<(const Address& right) const {
 	}
 }
 
-std::string Address::toID() const {
+String Address::toID() const {
 	char buffer[50];
 	sprintf(buffer, "%i_%i_%i", m_nodeID, m_threadID, m_objectID);
 
-	return std::string(buffer);
+	return String(buffer);
 }
 
 Address Address::createInc() const {

@@ -15,17 +15,17 @@
 
 using namespace etRuntime;
 
-MSCFunctionObject::MSCFunctionObject(const std::string& objectName, const std::string& message) :
+MSCFunctionObject::MSCFunctionObject(const String& objectName, const String& message) :
 		m_syncLogger(DebuggingService::getInstance().getSyncLogger()),
 		m_targetName(objectName),
-		m_sourceName(m_syncLogger.getObjectName())
+		m_sourceName(m_syncLogger.getObjectName().c_str())
 {
-	m_syncLogger.setObjectName(m_targetName);
-	m_syncLogger.addMessageSyncCall(m_sourceName, m_targetName, message);
+	m_syncLogger.setObjectName(m_targetName.c_str());
+	m_syncLogger.addMessageSyncCall(m_sourceName.c_str(), m_targetName.c_str(), message.c_str());
 }
 
 MSCFunctionObject::~MSCFunctionObject() {
-	m_syncLogger.setObjectName(m_sourceName);
-	m_syncLogger.addMessageSyncReturn(m_sourceName, m_targetName, "return");
+	m_syncLogger.setObjectName(m_sourceName.c_str());
+	m_syncLogger.addMessageSyncReturn(m_sourceName.c_str(), m_targetName.c_str(), "return");
 }
 

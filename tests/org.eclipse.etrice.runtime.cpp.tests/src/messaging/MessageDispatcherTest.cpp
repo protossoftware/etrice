@@ -22,7 +22,7 @@ void MessageDispatcherTest::testConstructors() {
 
 	const char *failMsg = "MessageDispatcher constructor test failed";
 
-	// Test constructor MessageDispatcher(IRTObject* parent, const Address& addr, const std::string& name)
+	// Test constructor MessageDispatcher(IRTObject* parent, const Address& addr, const String& name)
 	Address addr(1, 2, 3);
 	MessageDispatcher msgDisp(NULL, addr, "TestMessageDispatcher");
 	EXPECT_TRUE(m_caseId, failMsg, addr == msgDisp.getAddress());
@@ -41,15 +41,25 @@ void MessageDispatcherTest::testFreeAddresses() {
 			Address(1, 2, 5) == msgDisp.getFreeAddress());
 	EXPECT_TRUE(m_caseId, failMsg,
 			Address(1, 2, 6) == msgDisp.getFreeAddress());
+
+	// free one address
 	msgDisp.freeAddress(Address(1, 2, 5));
+
+	// get it as next address
 	EXPECT_TRUE(m_caseId, failMsg,
 			Address(1, 2, 5) == msgDisp.getFreeAddress());
+
+	// free two addresses
 	msgDisp.freeAddress(Address(1, 2, 4));
 	msgDisp.freeAddress(Address(1, 2, 6));
-	EXPECT_TRUE(m_caseId, failMsg,
-			Address(1, 2, 4) == msgDisp.getFreeAddress());
+
+	// get them in reverse order
 	EXPECT_TRUE(m_caseId, failMsg,
 			Address(1, 2, 6) == msgDisp.getFreeAddress());
+	EXPECT_TRUE(m_caseId, failMsg,
+			Address(1, 2, 4) == msgDisp.getFreeAddress());
+
+	// no freed address left: get a fresh one
 	EXPECT_TRUE(m_caseId, failMsg,
 			Address(1, 2, 7) == msgDisp.getFreeAddress());
 

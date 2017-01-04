@@ -11,11 +11,10 @@
  *******************************************************************************/
 
 #include "common/modelbase/EventReceiver.h"
-#include <string>
 
 namespace etRuntime {
 
-EventReceiver::EventReceiver(IRTObject* parent, const std::string& name) :
+EventReceiver::EventReceiver(IRTObject* parent, const String& name) :
 		RTObject(parent, name),
 		m_thread(-1) {
 }

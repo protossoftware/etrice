@@ -14,11 +14,9 @@
 #define MESSAGESERVICECONTROLLER_H_
 
 #include "common/messaging/IMessageService.h"
+#include "common/containers/Vector.h"
 #include "osal/etMutex.h"
 #include "osal/etSema.h"
-#include <vector>
-#include <queue>
-#include <string>
 
 namespace etRuntime {
 
@@ -45,15 +43,15 @@ public:
 	void setMsgSvcTerminated(const IMessageService& msgSvc);
 
 protected:
-	void dumpThreads(std::string msg);
+	void dumpThreads(String msg);
 
 private:
 	void terminate();
 
-	typedef std::vector<IMessageService*> MsgSvcList;
+	typedef Vector<IMessageService*> MsgSvcList;
 
 	MsgSvcList m_messageServices;
-	std::queue<int> m_freeIDs;
+	Vector<int> m_freeIDs;
 	etBool m_running;
 	int m_nextFreeID;
 

@@ -16,6 +16,7 @@
 #include "common/messaging/RTServices.h"
 #include "common/messaging/StaticMessageMemory.h"
 #include "etUnit/etUnit.h"
+#include <iostream>
 
 using namespace etRuntime;
 
@@ -61,47 +62,54 @@ void DebuggingServiceTest::testLogging() {
 	RTServices::getInstance().getMsgSvcCtrl().stop();
 
 	const char* failMsg = "DebuggingServiceTest failed";
-	std::list<std::string>& result = dbgSvc.getAsyncLogger().getCommandList();
+	Vector<String>& result = dbgSvc.getAsyncLogger().getCommandList();
+
+	typedef Vector<String> CmdList;
+	for (CmdList::iterator it=result.begin(); it!=result.end(); ++it) {
+		std::cout << (*it).c_str() << std::endl;
+	}
+
+	Vector<String>::iterator it = result.begin();
 
 	EXPECT_TRUE(m_caseId, failMsg,
-			!result.front().compare(
+			0==(*it).compare(
 					"\t/TestSubSystem (!) /TestSubSystem/TestActor1 "));
-	result.pop_front();
+	++it;
 	EXPECT_TRUE(m_caseId, failMsg,
-			!result.front().compare(
+			0==(*it).compare(
 					"\t/TestSubSystem (!) /TestSubSystem/TestActor2 "));
-	result.pop_front();
+	++it;
 	EXPECT_TRUE(m_caseId, failMsg,
-			!result.front().compare(
+			0==(*it).compare(
 					"\t/TestSubSystem/TestActor1 (!) /TestSubSystem/TestActor1/SubActor "));
-	result.pop_front();
+	++it;
 	EXPECT_TRUE(m_caseId, failMsg,
-			!result.front().compare(
+			0==(*it).compare(
 					"\t/TestSubSystem/TestActor1 >-- /TestSubSystem/TestActor2 MessageAsync"));
-	result.pop_front();
+	++it;
 	EXPECT_TRUE(m_caseId, failMsg,
-			!result.front().compare(
+			0==(*it).compare(
 					"\t/TestSubSystem/TestActor1 --> /TestSubSystem/TestActor2 MessageAsync"));
-	result.pop_front();
+	++it;
 	EXPECT_TRUE(m_caseId, failMsg,
-			!result.front().compare(
+			0==(*it).compare(
 					"\t/TestSubSystem/TestActor1 ==> /TestSubSystem/TestActor2 MessageSyncCall"));
-	result.pop_front();
+	++it;
 	EXPECT_TRUE(m_caseId, failMsg,
-			!result.front().compare(
+			0==(*it).compare(
 					"\t/TestSubSystem/TestActor1 <== /TestSubSystem/TestActor2 MessageSyncReturn"));
-	result.pop_front();
+	++it;
 	EXPECT_TRUE(m_caseId, failMsg,
-			!result.front().compare(
+			0==(*it).compare(
 					"\t/TestSubSystem/TestActor1 >>> TestState"));
-	result.pop_front();
+	++it;
 	EXPECT_TRUE(m_caseId, failMsg,
-			!result.front().compare(
+			0==(*it).compare(
 					"\t/TestSubSystem (X) /TestSubSystem/TestActor1 "));
-	result.pop_front();
+	++it;
 	EXPECT_TRUE(m_caseId, failMsg,
-			!result.front().compare("# This is a comment"));
-	result.pop_front();
+			0==(*it).compare("# This is a comment"));
+	++it;
 
 }
 

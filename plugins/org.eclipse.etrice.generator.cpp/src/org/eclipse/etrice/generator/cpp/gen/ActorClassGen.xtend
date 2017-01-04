@@ -78,7 +78,6 @@ class ActorClassGen extends GenericActorClassGenerator {
 		#include "common/messaging/Address.h"
 		#include "common/messaging/IMessageReceiver.h"
 		#include "common/debugging/DebuggingService.h"
-		#include <vector>
 
 		«FOR pc : root.getReferencedProtocolClasses(ac)»
 			#include "«pc.path»«pc.name».h"
@@ -140,7 +139,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 
 			public:
 				//--------------------- construction
-				«ac.name»(etRuntime::IRTObject* parent, const std::string& name);
+				«ac.name»(etRuntime::IRTObject* parent, const String& name);
 				void initialize(void);
 				«IF Main::settings.generateMSCInstrumentation»
 					void setProbesActive(bool recursive, bool active);
@@ -181,11 +180,11 @@ class ActorClassGen extends GenericActorClassGenerator {
 
 		class Replicated«clsname» : public ReplicatedActorClassBase {
 		public:
-			Replicated«clsname»(IRTObject* parent, const std::string& name) :
+			Replicated«clsname»(IRTObject* parent, const String& name) :
 				ReplicatedActorClassBase(parent, name) {}
 			
 		protected:
-			ActorClassBase* createActor(IRTObject* parent, const std::string& name) {
+			ActorClassBase* createActor(IRTObject* parent, const String& name) {
 				return new «clsname»(parent, name);
 			}
 		};
@@ -244,7 +243,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 
 		«ac.userCode3.userCode»
 
-		«clsname»::«clsname»(etRuntime::IRTObject* parent, const std::string& name)
+		«clsname»::«clsname»(etRuntime::IRTObject* parent, const String& name)
 				«ac.generateConstructorInitalizerList»
 		{
 			«IF Main::settings.generateMSCInstrumentation»

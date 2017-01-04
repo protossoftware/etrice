@@ -106,10 +106,10 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 				static bool isValidIncomingEvtID(int evtId) {
 					return ((«IF pc.incomingMessages.size == 0»MSG_MAX«ELSE»IN_«pc.incomingMessages.get(0).name»«ENDIF» <= evtId) && (evtId < MSG_MAX));
 				}
-				static const std::string& getMessageString(int msg_id);
+				static const etRuntime::String& getMessageString(int msg_id);
 
 			private:
-				static const std::string s_messageStrings[];
+				static const etRuntime::String s_messageStrings[];
 
 		};
 
@@ -135,8 +135,8 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 			«pclass.userCode.userCode»
 		«ENDIF»
 	   public:
-		 «portClassName»(etRuntime::IInterfaceItemOwner* actor, const std::string& name, int localId);
-		 «portClassName»(etRuntime::IInterfaceItemOwner* actor, const std::string& name, int localId, int idx);
+		 «portClassName»(etRuntime::IInterfaceItemOwner* actor, const etRuntime::String& name, int localId);
+		 «portClassName»(etRuntime::IInterfaceItemOwner* actor, const etRuntime::String& name, int localId, int idx);
 
 		«IF Main::settings.generateMSCInstrumentation»
 			virtual void destroy();
@@ -162,7 +162,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 	class «replPortClassName» : public etRuntime::ReplicatedPortBase {
 
 		public:
-			«replPortClassName»(etRuntime::IInterfaceItemOwner* actor, const std::string& name, int localId);
+			«replPortClassName»(etRuntime::IInterfaceItemOwner* actor, const etRuntime::String& name, int localId);
 
 			int getReplication() const { return getNInterfaceItems(); }
 			int getIndexOf(const etRuntime::InterfaceItemBase& ifitem) const { return ifitem.getIdx(); }
@@ -181,7 +181,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 			«ENDIF»
 
 		protected:
-			virtual etRuntime::InterfaceItemBase* createInterfaceItem(etRuntime::IInterfaceItemOwner* rcv, const std::string& name, int lid, int idx) {
+			virtual etRuntime::InterfaceItemBase* createInterfaceItem(etRuntime::IInterfaceItemOwner* rcv, const etRuntime::String& name, int lid, int idx) {
 				return new «portClassName»(rcv, name, lid, idx);
 			}
 
@@ -205,8 +205,6 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		#include "common/messaging/Address.h"
 		#include "common/messaging/Message.h"
 		#include "common/modelbase/IEventReceiver.h"
-		#include <iterator>
-		#include <vector>
 
 		using namespace etRuntime;
 
@@ -215,14 +213,14 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		«pc.userCode(3)»
 
 		/* message names as strings for debugging (generate MSC) */
-		const std::string «pc.name»::s_messageStrings[] = {"MIN", «FOR m : pc.getAllOutgoingMessages()»"«m.name»",«ENDFOR» «FOR m : pc.getAllIncomingMessages()»"«m.name»",«ENDFOR»"MAX"};
+		const String «pc.name»::s_messageStrings[] = {"MIN", «FOR m : pc.getAllOutgoingMessages()»"«m.name»",«ENDFOR» «FOR m : pc.getAllIncomingMessages()»"«m.name»",«ENDFOR»"MAX"};
 
-		const std::string& «pc.name»::getMessageString(int msg_id) {
+		const String& «pc.name»::getMessageString(int msg_id) {
 			if ((MSG_MIN < msg_id ) && ( msg_id < MSG_MAX )) {
 				return s_messageStrings[msg_id];
 			} else {
 				// id out of range
-				static const std::string errorMsg = "Message ID out of range";
+				static const String errorMsg = "Message ID out of range";
 				return errorMsg;
 			}
 		}
@@ -245,12 +243,12 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 	// «IF conj»conjugated «ENDIF»port class
 	//------------------------------------------------------------------------------------------------------------
 
-	«portClassName»::«portClassName»(IInterfaceItemOwner* actor, const std::string& name, int localId)
+	«portClassName»::«portClassName»(IInterfaceItemOwner* actor, const String& name, int localId)
 		«pclass.generateConstructorInitalizerList('0')»
 	{
 	}
 
-	«portClassName»::«portClassName»(IInterfaceItemOwner* actor, const std::string& name, int localId, int idx)
+	«portClassName»::«portClassName»(IInterfaceItemOwner* actor, const String& name, int localId, int idx)
 		«pclass.generateConstructorInitalizerList('idx')»
 	{
 		«IF pclass != null»«initHelper.genExtraInitializers(pclass.attributes)»«ENDIF»
@@ -266,11 +264,11 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 	void «portClassName»::receive(const Message* msg) {
 		// TODO JH further
 		if (! «pc.name»::«IF conj»isValidOutgoingEvtID«ELSE»isValidIncomingEvtID«ENDIF»(msg->getEvtId())) {
-			std::cout << "unknown" << std::endl;
+			//std::cout << "unknown" << std::endl;
 		}
 
 		«IF Main::settings.generateMSCInstrumentation»
-			DebuggingService::getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), «pc.name»::getMessageString(msg->getEvtId()));
+			DebuggingService::getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), «pc.name»::getMessageString(msg->getEvtId()).c_str());
 		«ENDIF»
 
 		«IF pc.handlesReceive(conj)»
@@ -305,7 +303,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 	//------------------------------------------------------------------------------------------------------------
 	// «IF conj»conjugated «ENDIF»replicated port class
 	//------------------------------------------------------------------------------------------------------------
-	«replPortClassName»::«replPortClassName»(IInterfaceItemOwner* actor, const std::string& name, int localId) :
+	«replPortClassName»::«replPortClassName»(IInterfaceItemOwner* actor, const String& name, int localId) :
 			ReplicatedPortBase(actor, name, localId)
 	{
 	}
@@ -314,7 +312,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		// incoming messages
 		«FOR m : pc.getAllIncomingMessages()»
 			«messageSignatureDefinition(m, replPortClassName, false)»{
-				for (std::vector<etRuntime::InterfaceItemBase*>::iterator it = getItems().begin(); it != getItems().end(); ++it) {
+				for (Vector<etRuntime::InterfaceItemBase*>::iterator it = getItems().begin(); it != getItems().end(); ++it) {
 					(dynamic_cast<«portClassName»*>(*it))->«messageCall(m, false)»;
 				}
 			}
@@ -323,7 +321,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		// outgoing messages
 		«FOR m : pc.getAllOutgoingMessages()»
 			«messageSignatureDefinition(m, replPortClassName, false)»{
-				for (std::vector<etRuntime::InterfaceItemBase*>::iterator it = getItems().begin(); it != getItems().end(); ++it) {
+				for (Vector<etRuntime::InterfaceItemBase*>::iterator it = getItems().begin(); it != getItems().end(); ++it) {
 					(dynamic_cast<«portClassName»*>(*it))->«messageCall(m, false)»;
 				}
 			}
@@ -375,7 +373,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 			«messageSignatureDefinition(m, classPrefix, true)» {
 				«IF Main::settings.generateMSCInstrumentation»
 					DebuggingService::getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(),
-					«portClassName»::getMessageString(«portClassName»::«dir»_«m.name»));
+						«portClassName»::getMessageString(«portClassName»::«dir»_«m.name»).c_str());
 				«ENDIF»
 				if (getPeerAddress().isValid()) {
 «««					we have to use a dynamic cast here because we have a virtual base class
@@ -422,7 +420,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 			class «pc.getPortClassName(true)» : public etRuntime::DataSendPort {
 
 			public:
-				«pc.getPortClassName(true)»(etRuntime::IRTObject* parent, const std::string& name, int localId);
+				«pc.getPortClassName(true)»(etRuntime::IRTObject* parent, const etRuntime::String& name, int localId);
 
 				// getters and setters
 				«FOR msg : sentMsgs»
@@ -444,7 +442,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 			class «pc.getPortClassName(false)» : public etRuntime::DataReceivePort {
 
 			public:
-				«pc.getPortClassName(false)»(etRuntime::IRTObject* parent, const std::string& name, int localId);
+				«pc.getPortClassName(false)»(etRuntime::IRTObject* parent, const etRuntime::String& name, int localId);
 
 				// getters
 				«FOR msg : sentMsgs»
@@ -489,7 +487,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 			// send port holds data
 
 			// constructor
-			«pc.getPortClassName(true)»::«pc.getPortClassName(true)»(IRTObject* parent, const std::string& name, int localId) :
+			«pc.getPortClassName(true)»::«pc.getPortClassName(true)»(IRTObject* parent, const String& name, int localId) :
 					DataSendPort(parent, name, localId)
 			{
 			}
@@ -497,7 +495,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 			// receive port accesses send port
 
 			// constructor
-			«pc.getPortClassName(false)»::«pc.getPortClassName(false)»(IRTObject* parent, const std::string& name, int localId) :
+			«pc.getPortClassName(false)»::«pc.getPortClassName(false)»(IRTObject* parent, const String& name, int localId) :
 					DataReceivePort(parent, name, localId),
 					m_peer(0)
 			{

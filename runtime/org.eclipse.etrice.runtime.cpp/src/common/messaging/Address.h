@@ -14,7 +14,7 @@
 #define ADDRESS_H_
 
 #include "etDatatypes.h"
-#include <string>
+#include "common/containers/String.h"
 
 namespace etRuntime {
 
@@ -33,8 +33,8 @@ public:
 	bool operator!=(const Address& other) const;
 	bool operator< (const Address& right) const;
 
-	std::string toString() const;
-	std::string toID() const;
+	String toString() const;
+	String toID() const;
 
 	Address createInc() const;
 

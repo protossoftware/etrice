@@ -12,29 +12,31 @@
 
 #include "common/messaging/RTObject.h"
 #include "etDatatypes.h"
-#include <iterator>
-#include <string>
-#include <vector>
 
 namespace etRuntime {
 
-RTObject::RTObject(IRTObject* parent, const std::string& name) :
+RTObject::RTObject(IRTObject* parent, const String& name) :
 		m_name(name),
 		m_parent(parent),
 		m_children() {
 
 	if (m_parent != 0) {
 		m_parent->getChildren().push_back(this);
+#ifdef RTOBJECT_STORES_PATHS
 		m_instancePath = m_parent->getInstancePath() + PATH_DELIM + m_name;
 		m_instancePathName = m_parent->getInstancePathName() + PATHNAME_DELIM + m_name;
-	} else {
+#endif
+	}
+#ifdef RTOBJECT_STORES_PATHS
+	else {
 		m_instancePath = PATH_DELIM + m_name;
 		m_instancePathName = PATHNAME_DELIM + m_name;
 	}
+#endif
 }
 
 void RTObject::destroy() {
-	for (std::vector<IRTObject*>::iterator it = m_children.begin(); it != m_children.end(); ++it) {
+	for (ChildList::iterator it = m_children.begin(); it != m_children.end(); ++it) {
 		RTObject* child = dynamic_cast<RTObject*>(*it);
 		if (child != 0) {
 			child->destroy();
@@ -53,8 +55,8 @@ IRTObject* RTObject::getRoot() const {
 	return root;
 }
 
-IRTObject* RTObject::getChild(const std::string& name) const {
-	for (std::vector<IRTObject*>::const_iterator it = m_children.begin(); it != m_children.end(); ++it) {
+IRTObject* RTObject::getChild(const String& name) const {
+	for (ChildList::const_iterator it = m_children.begin(); it != m_children.end(); ++it) {
 		if (name == ((*it)->getName())) {
 			return *it;
 		}
@@ -63,17 +65,17 @@ IRTObject* RTObject::getChild(const std::string& name) const {
 	return 0;
 }
 
-IRTObject* RTObject::getObject(const std::string& path) const {
+IRTObject* RTObject::getObject(const String& path) const {
 	etBool isAbsolute = (path[0] == PATH_DELIM);
 	if (isAbsolute && getParent() != 0)
 		return getParent()->getObject(path);
 
-	std::string segment;
+	String segment;
 	std::size_t last = 0;
 	if (isAbsolute) {
 		last = 1;
 		size_t first = path.find(PATH_DELIM, last);
-		segment = path.substr(last, (first == std::string::npos) ? std::string::npos : first - 1);
+		segment = path.substr(last, (first == String::npos) ? String::npos : first - 1);
 		if (segment != m_name)
 			return 0;
 
@@ -82,7 +84,7 @@ IRTObject* RTObject::getObject(const std::string& path) const {
 
 	IRTObject* current = const_cast<RTObject*>(this);
 	std::size_t next;
-	while ((next = path.find(PATH_DELIM, last)) != std::string::npos) {
+	while ((next = path.find(PATH_DELIM, last)) != String::npos) {
 		if (next > last + 1) {
 			segment = path.substr(last, next - last);
 			current = current->getChild(segment);
@@ -99,18 +101,18 @@ IRTObject* RTObject::getObject(const std::string& path) const {
 	return current;
 }
 
-int RTObject::getThreadForPath(const std::string& path) const {
+int RTObject::getThreadForPath(const String& path) const {
 	if (m_parent != 0)
 		return m_parent->getThreadForPath(path);
 
 	return -1;
 }
 
-std::string RTObject::toStringRecursive(const std::string& indent) const {
-	std::string result(indent + toString() + "\n");
+String RTObject::toStringRecursive(const String& indent) const {
+	String result(indent + toString() + "\n");
 
-	std::string indentInc("  " + indent);
-	std::vector<IRTObject*>::const_iterator it = m_children.begin();
+	String indentInc("  " + indent);
+	ChildList::const_iterator it = m_children.begin();
 	for (; it != m_children.end(); ++it) {
 		RTObject* child = dynamic_cast<RTObject*>(*it);
 		if (child != 0)
@@ -120,11 +122,31 @@ std::string RTObject::toStringRecursive(const std::string& indent) const {
 	return result;
 }
 
-std::string RTObject::toStringRecursive() const {
+#ifndef RTOBJECT_STORES_PATHS
+String RTObject::getInstancePath() const {
+	if (m_parent != 0) {
+		return m_parent->getInstancePath() + PATH_DELIM + m_name;
+	}
+	else {
+		return PATH_DELIM + m_name;
+	}
+}
+
+String RTObject::getInstancePathName() const {
+	if (m_parent != 0) {
+		return m_parent->getInstancePathName() + PATHNAME_DELIM + m_name;
+	}
+	else {
+		return PATHNAME_DELIM + m_name;
+	}
+}
+#endif
+
+String RTObject::toStringRecursive() const {
 	return toStringRecursive("");
 }
 
-std::string RTObject::toString() const {
+String RTObject::toString() const {
 	return getName();
 }
 

@@ -13,7 +13,7 @@
 #ifndef SUBSYSTEMRUNNERBASE_H_
 #define SUBSYSTEMRUNNERBASE_H_
 
-#include <string>
+#include "common/containers/String.h"
 
 namespace etRuntime {
 
@@ -33,8 +33,8 @@ protected:
 	static void waitForQuit();
 
 private:
-	static const std::string OPTION_RUN_AS_TEST;
-	static const std::string OPTION_RUN_HEADLESS;
+	static const String OPTION_RUN_AS_TEST;
+	static const String OPTION_RUN_HEADLESS;
 
 	SubSystemRunnerBase(SubSystemRunnerBase const&);
 	SubSystemRunnerBase& operator=(SubSystemRunnerBase const&);

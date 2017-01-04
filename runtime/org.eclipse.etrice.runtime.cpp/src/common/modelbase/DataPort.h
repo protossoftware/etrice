@@ -13,15 +13,14 @@
 #define SRC_COMMON_MODELBASE_DATAPORT_H_
 
 #include "common/messaging/RTObject.h"
-#include <string>
 
 namespace etRuntime {
 
 class DataPortBase: public RTObject {
 public:
-	static void connect(IRTObject* obj, const std::string& path1, const std::string& path2);
+	static void connect(IRTObject* obj, const String& path1, const String& path2);
 
-	DataPortBase(IRTObject* parent, const std::string& name, int localId) :
+	DataPortBase(IRTObject* parent, const String& name, int localId) :
 			RTObject(parent, name),
 			m_localId(localId) {
 	}
@@ -40,7 +39,7 @@ private:
 
 class DataSendPort: public DataPortBase {
 public:
-	DataSendPort(IRTObject* parent, const std::string& name, int localId) :
+	DataSendPort(IRTObject* parent, const String& name, int localId) :
 			DataPortBase(parent, name, localId) {
 	}
 
@@ -53,7 +52,7 @@ private:
 class DataReceivePort: public DataPortBase {
 	friend class DataPortBase;
 public:
-	DataReceivePort(IRTObject* parent, const std::string& name, int localId) :
+	DataReceivePort(IRTObject* parent, const String& name, int localId) :
 			DataPortBase(parent, name, localId) {
 	}
 

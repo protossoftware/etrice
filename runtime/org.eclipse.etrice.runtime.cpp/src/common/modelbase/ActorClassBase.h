@@ -18,7 +18,6 @@
 #include "common/modelbase/RTSystemProtocol.h"
 #include "common/modelbase/SystemPortOwner.h"
 #include "etDatatypes.h"
-#include <string>
 
 namespace etRuntime {
 
@@ -28,11 +27,11 @@ public:
 
 	virtual ~ActorClassBase();
 
-	const std::string& getClassName() const {
+	const String& getClassName() const {
 		return m_className;
 	}
 
-	void setClassName(const std::string& className) {
+	void setClassName(const String& className) {
 		m_className = className;
 	}
 
@@ -72,7 +71,7 @@ public:
 
 protected:
 
-	ActorClassBase(IRTObject* parent, const std::string&);
+	ActorClassBase(IRTObject* parent, const String& name);
 
 	static const int EVT_SHIFT = 1000;	// TODOHRR: use 256 or shift operation later
 	static const int NO_STATE = 0;
@@ -88,9 +87,9 @@ protected:
 	RTSystemPort m_RTSystemPort;
 
 	virtual etBool handleSystemEvent(InterfaceItemBase* ifitem, int evt, void* generic_data);
-	std::string toString() const;
+	String toString() const;
 private:
-	std::string m_className;
+	String m_className;
 
 	ActorClassBase();
 	ActorClassBase(ActorClassBase const&);

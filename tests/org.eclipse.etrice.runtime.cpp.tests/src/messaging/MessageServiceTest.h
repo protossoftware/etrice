@@ -54,7 +54,7 @@ private:
 class MessageCounter: public etRuntime::RTObject,
 		public etRuntime::IMessageReceiver {
 public:
-	MessageCounter(IRTObject *parent, const std::string &name,
+	MessageCounter(IRTObject *parent, const etRuntime::String &name,
 			const etRuntime::Address &address) :
 			RTObject(parent, name), m_counter(0), m_address(address) {
 	}

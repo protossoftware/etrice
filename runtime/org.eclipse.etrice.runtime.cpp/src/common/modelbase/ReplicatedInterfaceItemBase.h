@@ -15,9 +15,8 @@
 #include "common/modelbase/IInterfaceItemOwner.h"
 #include "common/modelbase/InterfaceItemBase.h"
 #include "common/modelbase/IReplicatedInterfaceItem.h"
-#include <queue>
-#include <string>
-#include <vector>
+#include "common/containers/String.h"
+#include "common/containers/Vector.h"
 
 namespace etRuntime {
 
@@ -45,23 +44,23 @@ public:
 	virtual IEventReceiver* getEventReceiver() const;
 	virtual IReplicatedInterfaceItem* getSystemPort() const;
 
-	std::string toString() const;
+	String toString() const;
 
 	virtual IInterfaceItem* connectWith(IInterfaceItem* peer);
 
 protected:
 
-	ReplicatedInterfaceItemBase(IInterfaceItemOwner* owner, const std::string& name, int localId);
+	ReplicatedInterfaceItemBase(IInterfaceItemOwner* owner, const String& name, int localId);
 
-	std::vector<InterfaceItemBase*>& getItems() {
+	Vector<InterfaceItemBase*>& getItems() {
 		return m_items;
 	}
 
-	virtual InterfaceItemBase* createInterfaceItem(IInterfaceItemOwner* rcv, const std::string& name, int lid, int idx) = 0;
+	virtual InterfaceItemBase* createInterfaceItem(IInterfaceItemOwner* rcv, const String& name, int lid, int idx) = 0;
 private:
 	int m_localId;
-	std::vector<InterfaceItemBase*> m_items;
-	std::queue<int> m_releasedIndices;
+	Vector<InterfaceItemBase*> m_items;
+	Vector<int> m_releasedIndices;
 
 	int getFreeIndex();
 

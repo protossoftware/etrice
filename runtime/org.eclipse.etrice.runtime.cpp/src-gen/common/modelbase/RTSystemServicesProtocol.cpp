@@ -13,22 +13,20 @@
 #include "common/messaging/Address.h"
 #include "common/messaging/Message.h"
 #include "common/modelbase/IEventReceiver.h"
-#include <iterator>
-#include <vector>
 
 using namespace etRuntime;
 
 
 
 /* message names as strings for debugging (generate MSC) */
-const std::string RTSystemServicesProtocol::s_messageStrings[] = {"MIN",  "executeInitialTransition","startDebugging","stopDebugging","MAX"};
+const String RTSystemServicesProtocol::s_messageStrings[] = {"MIN",  "executeInitialTransition","startDebugging","stopDebugging","MAX"};
 
-const std::string& RTSystemServicesProtocol::getMessageString(int msg_id) {
+const String& RTSystemServicesProtocol::getMessageString(int msg_id) {
 	if ((MSG_MIN < msg_id ) && ( msg_id < MSG_MAX )) {
 		return s_messageStrings[msg_id];
 	} else {
 		// id out of range
-		static const std::string errorMsg = "Message ID out of range";
+		static const String errorMsg = "Message ID out of range";
 		return errorMsg;
 	}
 }
@@ -37,12 +35,12 @@ const std::string& RTSystemServicesProtocol::getMessageString(int msg_id) {
 // port class
 //------------------------------------------------------------------------------------------------------------
 
-RTSystemServicesProtocolPort::RTSystemServicesProtocolPort(IInterfaceItemOwner* actor, const std::string& name, int localId)
+RTSystemServicesProtocolPort::RTSystemServicesProtocolPort(IInterfaceItemOwner* actor, const String& name, int localId)
 	: PortBase(actor, name, localId, 0)
 {
 }
 
-RTSystemServicesProtocolPort::RTSystemServicesProtocolPort(IInterfaceItemOwner* actor, const std::string& name, int localId, int idx)
+RTSystemServicesProtocolPort::RTSystemServicesProtocolPort(IInterfaceItemOwner* actor, const String& name, int localId, int idx)
 	: PortBase(actor, name, localId, idx)
 {
 }
@@ -55,10 +53,10 @@ void RTSystemServicesProtocolPort::destroy() {
 void RTSystemServicesProtocolPort::receive(const Message* msg) {
 	// TODO JH further
 	if (! RTSystemServicesProtocol::isValidIncomingEvtID(msg->getEvtId())) {
-		std::cout << "unknown" << std::endl;
+		//std::cout << "unknown" << std::endl;
 	}
 
-	DebuggingService::getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), RTSystemServicesProtocol::getMessageString(msg->getEvtId()));
+	DebuggingService::getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), RTSystemServicesProtocol::getMessageString(msg->getEvtId()).c_str());
 
 	getActor()->receiveEvent(this, msg->getEvtId(),	msg->getData());
 }
@@ -69,7 +67,7 @@ void RTSystemServicesProtocolPort::receive(const Message* msg) {
 //------------------------------------------------------------------------------------------------------------
 // replicated port class
 //------------------------------------------------------------------------------------------------------------
-RTSystemServicesProtocolReplPort::RTSystemServicesProtocolReplPort(IInterfaceItemOwner* actor, const std::string& name, int localId) :
+RTSystemServicesProtocolReplPort::RTSystemServicesProtocolReplPort(IInterfaceItemOwner* actor, const String& name, int localId) :
 		ReplicatedPortBase(actor, name, localId)
 {
 }
@@ -79,12 +77,12 @@ RTSystemServicesProtocolReplPort::RTSystemServicesProtocolReplPort(IInterfaceIte
 // conjugated port class
 //------------------------------------------------------------------------------------------------------------
 
-RTSystemServicesProtocolConjPort::RTSystemServicesProtocolConjPort(IInterfaceItemOwner* actor, const std::string& name, int localId)
+RTSystemServicesProtocolConjPort::RTSystemServicesProtocolConjPort(IInterfaceItemOwner* actor, const String& name, int localId)
 	: PortBase(actor, name, localId, 0)
 {
 }
 
-RTSystemServicesProtocolConjPort::RTSystemServicesProtocolConjPort(IInterfaceItemOwner* actor, const std::string& name, int localId, int idx)
+RTSystemServicesProtocolConjPort::RTSystemServicesProtocolConjPort(IInterfaceItemOwner* actor, const String& name, int localId, int idx)
 	: PortBase(actor, name, localId, idx)
 {
 }
@@ -97,10 +95,10 @@ void RTSystemServicesProtocolConjPort::destroy() {
 void RTSystemServicesProtocolConjPort::receive(const Message* msg) {
 	// TODO JH further
 	if (! RTSystemServicesProtocol::isValidOutgoingEvtID(msg->getEvtId())) {
-		std::cout << "unknown" << std::endl;
+		//std::cout << "unknown" << std::endl;
 	}
 
-	DebuggingService::getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), RTSystemServicesProtocol::getMessageString(msg->getEvtId()));
+	DebuggingService::getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), RTSystemServicesProtocol::getMessageString(msg->getEvtId()).c_str());
 
 	getActor()->receiveEvent(this, msg->getEvtId(),	msg->getData());
 }
@@ -113,7 +111,7 @@ void RTSystemServicesProtocolConjPort::executeInitialTransition() {
 
 void RTSystemServicesProtocolConjPort::executeInitialTransition_impl() {
 	DebuggingService::getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(),
-	RTSystemServicesProtocol::getMessageString(RTSystemServicesProtocol::IN_executeInitialTransition));
+		RTSystemServicesProtocol::getMessageString(RTSystemServicesProtocol::IN_executeInitialTransition).c_str());
 	if (getPeerAddress().isValid()) {
 		Message* buffer = dynamic_cast<IMessageService*>(getPeerMsgReceiver())->getMessageBuffer(sizeof(Message));
 		if (buffer) {
@@ -127,7 +125,7 @@ void RTSystemServicesProtocolConjPort::startDebugging() {
 
 void RTSystemServicesProtocolConjPort::startDebugging_impl() {
 	DebuggingService::getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(),
-	RTSystemServicesProtocol::getMessageString(RTSystemServicesProtocol::IN_startDebugging));
+		RTSystemServicesProtocol::getMessageString(RTSystemServicesProtocol::IN_startDebugging).c_str());
 	if (getPeerAddress().isValid()) {
 		Message* buffer = dynamic_cast<IMessageService*>(getPeerMsgReceiver())->getMessageBuffer(sizeof(Message));
 		if (buffer) {
@@ -141,7 +139,7 @@ void RTSystemServicesProtocolConjPort::stopDebugging() {
 
 void RTSystemServicesProtocolConjPort::stopDebugging_impl() {
 	DebuggingService::getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(),
-	RTSystemServicesProtocol::getMessageString(RTSystemServicesProtocol::IN_stopDebugging));
+		RTSystemServicesProtocol::getMessageString(RTSystemServicesProtocol::IN_stopDebugging).c_str());
 	if (getPeerAddress().isValid()) {
 		Message* buffer = dynamic_cast<IMessageService*>(getPeerMsgReceiver())->getMessageBuffer(sizeof(Message));
 		if (buffer) {
@@ -153,24 +151,24 @@ void RTSystemServicesProtocolConjPort::stopDebugging_impl() {
 //------------------------------------------------------------------------------------------------------------
 // conjugated replicated port class
 //------------------------------------------------------------------------------------------------------------
-RTSystemServicesProtocolConjReplPort::RTSystemServicesProtocolConjReplPort(IInterfaceItemOwner* actor, const std::string& name, int localId) :
+RTSystemServicesProtocolConjReplPort::RTSystemServicesProtocolConjReplPort(IInterfaceItemOwner* actor, const String& name, int localId) :
 		ReplicatedPortBase(actor, name, localId)
 {
 }
 
 // incoming messages
 void RTSystemServicesProtocolConjReplPort::executeInitialTransition(){
-	for (std::vector<etRuntime::InterfaceItemBase*>::iterator it = getItems().begin(); it != getItems().end(); ++it) {
+	for (Vector<etRuntime::InterfaceItemBase*>::iterator it = getItems().begin(); it != getItems().end(); ++it) {
 		(dynamic_cast<RTSystemServicesProtocolConjPort*>(*it))->executeInitialTransition();
 	}
 }
 void RTSystemServicesProtocolConjReplPort::startDebugging(){
-	for (std::vector<etRuntime::InterfaceItemBase*>::iterator it = getItems().begin(); it != getItems().end(); ++it) {
+	for (Vector<etRuntime::InterfaceItemBase*>::iterator it = getItems().begin(); it != getItems().end(); ++it) {
 		(dynamic_cast<RTSystemServicesProtocolConjPort*>(*it))->startDebugging();
 	}
 }
 void RTSystemServicesProtocolConjReplPort::stopDebugging(){
-	for (std::vector<etRuntime::InterfaceItemBase*>::iterator it = getItems().begin(); it != getItems().end(); ++it) {
+	for (Vector<etRuntime::InterfaceItemBase*>::iterator it = getItems().begin(); it != getItems().end(); ++it) {
 		(dynamic_cast<RTSystemServicesProtocolConjPort*>(*it))->stopDebugging();
 	}
 }

@@ -15,14 +15,11 @@
 #include "common/modelbase/RTSystemServicesProtocol.h"
 #include "common/modelbase/SystemPortOwner.h"
 #include "etDatatypes.h"
-#include <iterator>
-#include <string>
-#include <vector>
 
 
 namespace etRuntime {
 
-ActorClassBase::ActorClassBase(IRTObject* parent, const std::string& name) :
+ActorClassBase::ActorClassBase(IRTObject* parent, const String& name) :
 		SystemPortOwner(parent, name),
 		m_state(0),
 		m_RTSystemPort(this, IFITEM_RTSystemPort),
@@ -51,7 +48,7 @@ void ActorClassBase::initialize() {
 //--------------------- life cycle functions
 void ActorClassBase::init() {
 	ActorClassBase* child = 0;
-	for (std::vector<IRTObject*>::iterator it = getChildren().begin(); it != getChildren().end(); ++it) {
+	for (ChildList::iterator it = getChildren().begin(); it != getChildren().end(); ++it) {
 		if ((child = dynamic_cast<ActorClassBase*>(*it)) != 0)
 			child->init();
 	}
@@ -61,7 +58,7 @@ void ActorClassBase::init() {
 
 void ActorClassBase::start() {
 	ActorClassBase* child = 0;
-	for (std::vector<IRTObject*>::iterator it = getChildren().begin(); it != getChildren().end(); ++it) {
+	for (ChildList::iterator it = getChildren().begin(); it != getChildren().end(); ++it) {
 		if ((child = dynamic_cast<ActorClassBase*>(*it)) != 0)
 			child->start();
 	}
@@ -73,7 +70,7 @@ void ActorClassBase::stop() {
 	stopUser();
 
 	ActorClassBase* child = 0;
-	for (std::vector<IRTObject*>::iterator it = getChildren().begin(); it != getChildren().end(); ++it) {
+	for (ChildList::iterator it = getChildren().begin(); it != getChildren().end(); ++it) {
 		if ((child = dynamic_cast<ActorClassBase*>(*it)) != 0)
 			child->stop();
 	}
@@ -102,7 +99,7 @@ etBool ActorClassBase::handleSystemEvent(InterfaceItemBase* ifitem, int evt, voi
 	return true;
 }
 
-std::string ActorClassBase::toString() const {
+String ActorClassBase::toString() const {
 	ActorClassBase* thisPtr = const_cast<ActorClassBase*>(this);
 	char buffer[10];
 	sprintf(buffer, "%i", thisPtr->getThread());

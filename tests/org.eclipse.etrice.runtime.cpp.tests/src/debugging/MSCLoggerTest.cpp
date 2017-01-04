@@ -13,8 +13,6 @@
 #include "MSCLoggerTest.h"
 #include "common/debugging/MSCLogger.h"
 #include "etUnit/etUnit.h"
-#include <stdio.h>
-#include <string.h>
 
 using namespace etRuntime;
 
@@ -36,38 +34,39 @@ void MSCLoggerTest::testLogger() {
 	logger.close();
 
 	const char* failMsg = "MSCLoggerTest failed";
-	std::list<std::string>& result = logger.getCommandList();
+	Vector<String>& result = logger.getCommandList();
+	Vector<String>::iterator it = result.begin();
 
 	EXPECT_TRUE(m_caseId, failMsg,
-			!result.front().compare("\tSource >-- Target MessageAsync"));
-	result.pop_front();
+			!(*it).compare("\tSource >-- Target MessageAsync"));
+	++it;
 	EXPECT_TRUE(m_caseId, failMsg,
-			!result.front().compare("\tSource --> Target MessageAsync"));
-	result.pop_front();
+			!(*it).compare("\tSource --> Target MessageAsync"));
+	++it;
 	EXPECT_TRUE(m_caseId, failMsg,
-			!result.front().compare("\tSource ==> Target MessageSyncCall"));
-	result.pop_front();
+			!(*it).compare("\tSource ==> Target MessageSyncCall"));
+	++it;
 	EXPECT_TRUE(m_caseId, failMsg,
-			!result.front().compare("\tSource <== Target MessageSyncReturn"));
-	result.pop_front();
+			!(*it).compare("\tSource <== Target MessageSyncReturn"));
+	++it;
 	EXPECT_TRUE(m_caseId, failMsg,
-			!result.front().compare("\tSource (!) Target "));
-	result.pop_front();
+			!(*it).compare("\tSource (!) Target "));
+	++it;
 	EXPECT_TRUE(m_caseId, failMsg,
-			!result.front().compare("\tSource (X) Target "));
-	result.pop_front();
+			!(*it).compare("\tSource (X) Target "));
+	++it;
 	EXPECT_TRUE(m_caseId, failMsg,
-			!result.front().compare("\tActor note: Note"));
-	result.pop_front();
+			!(*it).compare("\tActor note: Note"));
+	++it;
 	EXPECT_TRUE(m_caseId, failMsg,
-			!result.front().compare("\tSource (!) Target "));
-	result.pop_front();
+			!(*it).compare("\tSource (!) Target "));
+	++it;
 	EXPECT_TRUE(m_caseId, failMsg,
-			!result.front().compare("\tActor >>> State"));
-	result.pop_front();
+			!(*it).compare("\tActor >>> State"));
+	++it;
 	EXPECT_TRUE(m_caseId, failMsg,
-			!result.front().compare("# This is a comment"));
-	result.pop_front();
+			!(*it).compare("# This is a comment"));
+	++it;
 
 }
 

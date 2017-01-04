@@ -11,8 +11,6 @@
  *******************************************************************************/
 
 #include "common/messaging/Message.h"
-#include <iostream>
-#include <string>
 #include <cstring>
 #include <cstdlib>
 
@@ -39,13 +37,20 @@ Message::~Message() {
 	m_dataSize = 0;
 }
 
-std::string Message::toString() const {
-	std::stringstream strm;
-	strm << "Message(" << m_address.toID() << ", evt=" << m_evtId << ")";
+String Message::toString() const {
+	char buffer[50];
+
+	String result("Message(");
+	result += m_address.toID();
+	result += ", evt=";
+	sprintf(buffer, "%d", m_evtId);
+	result += buffer;
+	result += ")";
 	if (m_data) {
-		strm << std::showbase << std::hex << m_data;
+		sprintf(buffer, "%p", m_data);
+		result += buffer;
 	}
-	return strm.str();
+	return result;
 }
 
 } /* namespace etRuntime */

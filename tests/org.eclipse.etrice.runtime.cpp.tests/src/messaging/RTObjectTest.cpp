@@ -22,7 +22,7 @@ void RTObjectTest::testConstructors() {
 
 	const char* failMsg = "RTObject constructor test failed";
 
-	// Test constructor RTObject(IRTObject* parent, const std::string& name)
+	// Test constructor RTObject(IRTObject* parent, const String& name)
 	RTObject* rto1 = new RTObject(NULL, "grandparent");
 	RTObject* rto2 = new RTObject(rto1, "parent");
 	RTObject* rto3 = new RTObject(rto2, "child1");
@@ -35,7 +35,7 @@ void RTObjectTest::testConstructors() {
 
 	EXPECT_TRUE(m_caseId, failMsg,
 			!rto1->getInstancePath().compare(
-					IRTObject::PATH_DELIM + std::string("grandparent")));
+					IRTObject::PATH_DELIM + String("grandparent")));
 	EXPECT_TRUE(m_caseId, failMsg,
 			!rto2->getInstancePath().compare(
 					rto1->getInstancePath() + IRTObject::PATH_DELIM + "parent"));
@@ -48,7 +48,7 @@ void RTObjectTest::testConstructors() {
 
 	EXPECT_TRUE(m_caseId, failMsg,
 			!rto1->getInstancePathName().compare(
-					IRTObject::PATHNAME_DELIM + std::string("grandparent")));
+					IRTObject::PATHNAME_DELIM + String("grandparent")));
 	EXPECT_TRUE(m_caseId, failMsg,
 			!rto2->getInstancePathName().compare(
 					rto1->getInstancePathName() + IRTObject::PATHNAME_DELIM
@@ -62,10 +62,10 @@ void RTObjectTest::testConstructors() {
 					rto2->getInstancePathName() + IRTObject::PATHNAME_DELIM
 							+ "child2"));
 
-	std::vector<IRTObject*> children1 = rto1->getChildren();
-	std::vector<IRTObject*> children2 = rto2->getChildren();
-	std::vector<IRTObject*> children3 = rto3->getChildren();
-	std::vector<IRTObject*> children4 = rto4->getChildren();
+	IRTObject::ChildList children1 = rto1->getChildren();
+	IRTObject::ChildList children2 = rto2->getChildren();
+	IRTObject::ChildList children3 = rto3->getChildren();
+	IRTObject::ChildList children4 = rto4->getChildren();
 	IRTObject *child1 = children2.front();
 	IRTObject *child2 = children2.back();
 	EXPECT_EQUAL_PTR(m_caseId, failMsg, rto2, children1.back());
@@ -115,10 +115,10 @@ void RTObjectTest::testGetters() {
 	EXPECT_TRUE(m_caseId, failMsg, !rto.getName().compare("test"));
 	EXPECT_TRUE(m_caseId, failMsg,
 			!rto.getInstancePath().compare(
-					IRTObject::PATH_DELIM + std::string("test")));
+					IRTObject::PATH_DELIM + String("test")));
 	EXPECT_TRUE(m_caseId, failMsg,
 			!rto.getInstancePathName().compare(
-					IRTObject::PATHNAME_DELIM + std::string("test")));
+					IRTObject::PATHNAME_DELIM + String("test")));
 	EXPECT_EQUAL_INT16(m_caseId, failMsg, 0, rto.getChildren().size());
 	EXPECT_EQUAL_PTR(m_caseId, failMsg, NULL, rto.getParent());
 	EXPECT_EQUAL_PTR(m_caseId, failMsg, &rto, rto.getRoot());

@@ -14,9 +14,8 @@
 #define MSCLOGGER_H_
 
 #include "osal/etMutex.h"
-#include <iostream>
-#include <list>
-#include <string>
+#include "common/containers/String.h"
+#include "common/containers/Vector.h"
 
 namespace etRuntime {
 
@@ -27,44 +26,44 @@ public:
 	MSCLogger();
 	virtual ~MSCLogger();
 
-	void setMSC(const std::string& msc_name, const std::string& path);
+	void setMSC(const String& msc_name, const String& path);
 
 	/* synchronized */
 	void open();
-	void addMessageAsyncOut(const std::string& source, const std::string& target, const std::string& message);
-	void addMessageAsyncIn(const std::string& source, const std::string& target, const std::string& message);
-	void addMessageSyncCall(const std::string& source, const std::string& target, const std::string& message);
-	void addMessageSyncReturn(const std::string& source, const std::string& target, const std::string& message);
-	void addMessageActorCreate(const std::string& source, const std::string& target);
-	void addMessageActorDestroy(const std::string& source, const std::string& target);
-	void addNote(const std::string& actor, const std::string& note);
-	void addMessageCreate(const std::string& source, const std::string& target);
-	void addActorState(const std::string& actor, const std::string& state);
-	void addVisibleComment(const std::string& comment);
+	void addMessageAsyncOut(const String& source, const String& target, const String& message);
+	void addMessageAsyncIn(const String& source, const String& target, const String& message);
+	void addMessageSyncCall(const String& source, const String& target, const String& message);
+	void addMessageSyncReturn(const String& source, const String& target, const String& message);
+	void addMessageActorCreate(const String& source, const String& target);
+	void addMessageActorDestroy(const String& source, const String& target);
+	void addNote(const String& actor, const String& note);
+	void addMessageCreate(const String& source, const String& target);
+	void addActorState(const String& actor, const String& state);
+	void addVisibleComment(const String& comment);
 	void close();
 	/* --- */
 
-	const std::string& getObjectName(void) { return m_objectName; }
-	void setObjectName(const std::string& name) { m_objectName = name; }
+	const String& getObjectName(void) { return m_objectName; }
+	void setObjectName(const String& name) { m_objectName = name; }
 
-	std::list<std::string>& getCommandList() {	return m_commandList; };
+	Vector<String>& getCommandList() {	return m_commandList; };
 	MSCFilter* getMSCFilter(){ return m_filter; };
 
 private:
 
-	void createLine(const std::string& source, const std::string& mid, const std::string& target, const std::string& message);
+	void createLine(const String& source, const String& mid, const String& target, const String& message);
 	void saveMSCforTrace2UML(etFileHandle handle);
 
-	std::list<std::string> m_commandList;
+	Vector<String> m_commandList;
 	MSCFilter* m_filter;
 
-	std::string m_path;
-	std::string m_msc_name ;
+	String m_path;
+	String m_msc_name ;
 	etBool m_is_open;
 
 	etMutex m_mutex;
 
-	std::string m_objectName;
+	String m_objectName;
 
 	MSCLogger(const MSCLogger& right);
 	MSCLogger& operator=(const MSCLogger& right);

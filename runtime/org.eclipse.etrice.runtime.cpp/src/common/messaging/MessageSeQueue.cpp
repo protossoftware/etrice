@@ -14,7 +14,7 @@
 
 namespace etRuntime {
 
-MessageSeQueue::MessageSeQueue(IRTObject* parent, const std::string& name)
+MessageSeQueue::MessageSeQueue(IRTObject* parent, const String& name)
 	: 	RTObject(parent, name),
 		m_first(0),
 		m_last(0),

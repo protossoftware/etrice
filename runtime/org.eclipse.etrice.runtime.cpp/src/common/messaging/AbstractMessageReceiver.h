@@ -16,7 +16,6 @@
 #include "common/messaging/Address.h"
 #include "common/messaging/IMessageReceiver.h"
 #include "common/messaging/RTObject.h"
-#include <string>
 
 namespace etRuntime {
 
@@ -31,12 +30,12 @@ public:
 	}
 
 protected:
-	AbstractMessageReceiver(IRTObject* parent, const std::string& name) :
+	AbstractMessageReceiver(IRTObject* parent, const String& name) :
 			RTObject(parent, name),
 			m_address(Address::EMPTY) {
 	}
 
-	AbstractMessageReceiver(IRTObject* parent, const Address& address, const std::string& name) :
+	AbstractMessageReceiver(IRTObject* parent, const Address& address, const String& name) :
 			RTObject(parent, name),
 			m_address(address) {
 	}
@@ -45,7 +44,7 @@ protected:
 		m_address = address;
 	}
 
-	virtual std::string toString() const {
+	virtual String toString() const {
 		return getName() + " " + m_address.toID();
 	}
 

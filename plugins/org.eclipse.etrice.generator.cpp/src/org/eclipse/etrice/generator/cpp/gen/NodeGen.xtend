@@ -114,7 +114,7 @@ class NodeGen {
 					«ENDIF»
 				«ENDFOR»
 
-				«clsname»(IRTObject* parent, const std::string& name);
+				«clsname»(IRTObject* parent, const String& name);
 				~«clsname»();
 
 				virtual void receiveEvent(etRuntime::InterfaceItemBase* ifitem, int evt, void* data);
@@ -199,7 +199,7 @@ class NodeGen {
 			const int «clsname»::«thread.value.threadId» = «thread.index0»;
 		«ENDFOR»
 
-		«clsname»::«clsname»(IRTObject* parent, const std::string& name)
+		«clsname»::«clsname»(IRTObject* parent, const String& name)
 				«cc.generateConstructorInitalizerList»
 				«FOR thread : threads»
 					, msgSvc_«thread.name»(NULL)

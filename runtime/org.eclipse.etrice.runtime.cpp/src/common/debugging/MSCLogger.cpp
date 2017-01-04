@@ -14,8 +14,6 @@
 #include "common/debugging/MSCLogger.h"
 #include "debugging/etLogger.h"
 #include "etDatatypes.h"
-#include <list>
-#include <string>
 
 namespace etRuntime {
 
@@ -36,7 +34,7 @@ MSCLogger::~MSCLogger() {
 	etMutex_destruct(&m_mutex);
 }
 
-void MSCLogger::setMSC(const std::string& msc_name, const std::string& path) {
+void MSCLogger::setMSC(const String& msc_name, const String& path) {
 	m_msc_name = msc_name;
 	m_path = path;
 	if(m_filter != NULL)
@@ -50,78 +48,82 @@ void MSCLogger::open() {
 	etMutex_leave(&m_mutex);
 }
 
-void MSCLogger::addMessageAsyncOut(const std::string& source, const std::string& target, const std::string& message) {
+void MSCLogger::addMessageAsyncOut(const String& source, const String& target, const String& message) {
 	etMutex_enter(&m_mutex);
 	createLine(source, " >-- ", target, message);
 	etMutex_leave(&m_mutex);
 }
 
-void MSCLogger::addMessageAsyncIn(const std::string& source, const std::string& target, const std::string& message) {
+void MSCLogger::addMessageAsyncIn(const String& source, const String& target, const String& message) {
 	etMutex_enter(&m_mutex);
 	createLine(source, " --> ", target, message);
 	etMutex_leave(&m_mutex);
 }
 
-void MSCLogger::addMessageSyncCall(const std::string& source, const std::string& target, const std::string& message) {
+void MSCLogger::addMessageSyncCall(const String& source, const String& target, const String& message) {
 	etMutex_enter(&m_mutex);
 	createLine(source, " ==> ", target, message);
 	etMutex_leave(&m_mutex);
 }
 
-void MSCLogger::addMessageSyncReturn(const std::string& source, const std::string& target, const std::string& message) {
+void MSCLogger::addMessageSyncReturn(const String& source, const String& target, const String& message) {
 	etMutex_enter(&m_mutex);
 	createLine(source, " <== ", target, message);
 	etMutex_leave(&m_mutex);
 }
 
-void MSCLogger::addMessageActorCreate(const std::string& source, const std::string& target) {
+void MSCLogger::addMessageActorCreate(const String& source, const String& target) {
 	etMutex_enter(&m_mutex);
 	createLine(source, " (!) ", target, "");
 	etMutex_leave(&m_mutex);
 }
 
-void MSCLogger::addMessageActorDestroy(const std::string& source, const std::string& target) {
+void MSCLogger::addMessageActorDestroy(const String& source, const String& target) {
 	etMutex_enter(&m_mutex);
 	createLine(source, " (X) ", target, "");
 	etMutex_leave(&m_mutex);
 }
 
-void MSCLogger::addNote(const std::string& actor, const std::string& note) {
+void MSCLogger::addNote(const String& actor, const String& note) {
 	etMutex_enter(&m_mutex);
 	//if (filter.applyTo(actor))
-	getCommandList().push_back("\t" + m_filter->reduceString(actor) + " note: " + note);
+	String reduced = m_filter->reduceString(actor.c_str());
+	getCommandList().push_back("\t" + reduced + " note: " + note);
 	etMutex_leave(&m_mutex);
 }
 
-void MSCLogger::addMessageCreate(const std::string& source, const std::string& target) {
+void MSCLogger::addMessageCreate(const String& source, const String& target) {
 	etMutex_enter(&m_mutex);
 	createLine(source, " (!) ", target, "");
 	etMutex_leave(&m_mutex);
 }
 
-void MSCLogger::addActorState(const std::string& actor, const std::string& state) {
+void MSCLogger::addActorState(const String& actor, const String& state) {
 	etMutex_enter(&m_mutex);
 	//if (filter->applyTo(actor))
-	getCommandList().push_back("\t" + m_filter->reduceString(actor) + " >>> " + state);
+	String reduced = m_filter->reduceString(actor.c_str());
+	getCommandList().push_back("\t" + reduced + " >>> " + state);
 	etMutex_leave(&m_mutex);
 }
 
-void MSCLogger::addVisibleComment(const std::string& comment) {
+void MSCLogger::addVisibleComment(const String& comment) {
 	etMutex_enter(&m_mutex);
 	getCommandList().push_back("# " + comment);
 	etMutex_leave(&m_mutex);
 }
 
-void MSCLogger::createLine(const std::string& source, const std::string& mid, const std::string& target,
-		const std::string& message) {
+void MSCLogger::createLine(const String& source, const String& mid, const String& target,
+		const String& message) {
 	//if (filter->applyTo(source) && filter->applyTo(target)) {
+	String reduced_src = m_filter->reduceString(source.c_str());
+	String reduced_tgt = m_filter->reduceString(target.c_str());
 	getCommandList().push_back(
-			"\t" + m_filter->reduceString(source) + mid + m_filter->reduceString(target) + " " + message);
+			"\t" + reduced_src + mid + reduced_tgt + " " + message);
 }
 
 void MSCLogger::close() {
 	if (m_is_open) {
-		std::string path = m_path + m_msc_name + ".seq";
+		String path = m_path + m_msc_name + ".seq";
 		etFileHandle handle = etLogger_fopen(path.c_str(), "w+");
 		etMutex_enter(&m_mutex);
 		if (handle != 0) {
@@ -136,7 +138,7 @@ void MSCLogger::close() {
 void MSCLogger::saveMSCforTrace2UML(etFileHandle handle) {
 	etLogger_fprintf(handle, "; generated MSC for Trace2UML\n");
 
-	std::list<std::string>::iterator it = getCommandList().begin();
+	Vector<String>::iterator it = getCommandList().begin();
 	for (; it != getCommandList().end(); ++it){
 		etLogger_fprintf(handle, (*it).c_str());
 		etLogger_fprintf(handle, "\n");

@@ -15,7 +15,6 @@
 #include "common/messaging/RTObject.h"
 #include "common/modelbase/EventReceiver.h"
 #include "common/modelbase/IInterfaceItemOwner.h"
-#include <string>
 
 namespace etRuntime {
 
@@ -39,7 +38,7 @@ public:
 	}
 
 protected:
-	SystemPortOwner(IRTObject* parent, const std::string& name) :
+	SystemPortOwner(IRTObject* parent, const String& name) :
 		EventReceiver(parent, name) {
 	}
 

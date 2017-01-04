@@ -9,13 +9,12 @@
 #define SRC_COMMON_MESSAGING_RTSYSTEMPROTOCOL_H_
 
 #include "common/modelbase/RTSystemServicesProtocol.h"
-#include <string>
 
 namespace etRuntime {
 
 class RTSystemProtocol {
 public:
-	static const std::string RT_SYSTEM_PORT_NAME;
+	static const String RT_SYSTEM_PORT_NAME;
 };
 
 
@@ -37,7 +36,7 @@ public:
 	virtual ~RTSystemConjPort() {}
 
 protected:
-	virtual InterfaceItemBase* createInterfaceItem(IInterfaceItemOwner* rcv, const std::string& name, int lid, int idx);
+	virtual InterfaceItemBase* createInterfaceItem(IInterfaceItemOwner* rcv, const String& name, int lid, int idx);
 
 private:
 	RTSystemConjPort();
@@ -47,7 +46,7 @@ private:
 
 class RTSystemConjSubPort: public RTSystemServicesProtocolConjPort {
 public:
-	RTSystemConjSubPort(IInterfaceItemOwner* actor, const std::string& name, int localId, int idx);
+	RTSystemConjSubPort(IInterfaceItemOwner* actor, const String& name, int localId, int idx);
 	virtual ~RTSystemConjSubPort() {}
 
 private:

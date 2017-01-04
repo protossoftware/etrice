@@ -13,7 +13,6 @@
 #define SRC_COMMON_MODELBASE_REPLICATEDPORTBASE_H_
 
 #include "common/modelbase/ReplicatedInterfaceItemBase.h"
-#include <string>
 
 namespace etRuntime {
 
@@ -22,7 +21,7 @@ public:
 	virtual ~ReplicatedPortBase() {}
 
 protected:
-	ReplicatedPortBase(IInterfaceItemOwner* owner, const std::string& name, int localId) :
+	ReplicatedPortBase(IInterfaceItemOwner* owner, const String& name, int localId) :
 			ReplicatedInterfaceItemBase(owner, name, localId) {
 	}
 

@@ -12,26 +12,25 @@
 
 #include "common/modelbase/IEventReceiver.h"
 #include "common/modelbase/RTSystemProtocol.h"
-#include <string>
 
 namespace etRuntime {
 
-const std::string RTSystemProtocol::RT_SYSTEM_PORT_NAME = "RTSystemPort";
+const String RTSystemProtocol::RT_SYSTEM_PORT_NAME = "RTSystemPort";
 
 RTSystemPort::RTSystemPort(IInterfaceItemOwner* actor, int localId) :
-		RTSystemServicesProtocolPort(actor, RTSystemProtocol::RT_SYSTEM_PORT_NAME, localId) {
+		RTSystemServicesProtocolPort(actor, RTSystemProtocol::RT_SYSTEM_PORT_NAME.c_str(), localId) {
 }
 
 RTSystemConjPort::RTSystemConjPort(IInterfaceItemOwner* actor, int localId) :
-		RTSystemServicesProtocolConjReplPort(actor, RTSystemProtocol::RT_SYSTEM_PORT_NAME, localId) {
+		RTSystemServicesProtocolConjReplPort(actor, RTSystemProtocol::RT_SYSTEM_PORT_NAME.c_str(), localId) {
 }
 
-InterfaceItemBase* RTSystemConjPort::createInterfaceItem(IInterfaceItemOwner* rcv, const std::string& name, int lid, int idx) {
+InterfaceItemBase* RTSystemConjPort::createInterfaceItem(IInterfaceItemOwner* rcv, const String& name, int lid, int idx) {
 	return new RTSystemConjSubPort(rcv, name, lid, idx);
 }
 
-RTSystemConjSubPort::RTSystemConjSubPort(IInterfaceItemOwner* actor, const std::string& name, int localId, int idx) :
-		RTSystemServicesProtocolConjPort(actor, name, localId, idx) {
+RTSystemConjSubPort::RTSystemConjSubPort(IInterfaceItemOwner* actor, const String& name, int localId, int idx) :
+		RTSystemServicesProtocolConjPort(actor, name.c_str(), localId, idx) {
 }
 
 }  // namespace etRuntime

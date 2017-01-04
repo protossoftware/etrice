@@ -11,11 +11,10 @@
  *******************************************************************************/
 
 #include "common/modelbase/DataPort.h"
-#include <string>
 
 namespace etRuntime {
 
-void DataPortBase::connect(IRTObject* obj, const std::string& path1, const std::string& path2) {
+void DataPortBase::connect(IRTObject* obj, const String& path1, const String& path2) {
 	IRTObject* obj1 = obj->getObject(path1);
 	IRTObject* obj2 = obj->getObject(path2);
 

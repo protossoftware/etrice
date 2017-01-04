@@ -34,7 +34,7 @@ protected:
 
 class ActorClass: public ActorClassBase {
 public:
-	ActorClass(IRTObject* parent, const std::string& name) :
+	ActorClass(IRTObject* parent, const String& name) :
 			ActorClassBase(parent, name) {
 	}
 
@@ -46,7 +46,7 @@ public:
 
 class SubSystemClass: public SubSystemClassBase {
 public:
-	SubSystemClass(IRTObject* parent, std::string name) :
+	SubSystemClass(IRTObject* parent, String name) :
 			SubSystemClassBase(parent, name) {
 	}
 
@@ -63,7 +63,7 @@ public:
 
 class Port: public PortBase {
 public:
-	Port(IInterfaceItemOwner* owner, const std::string& name) :
+	Port(IInterfaceItemOwner* owner, const String& name) :
 			PortBase(owner, name, 0) {
 	}
 

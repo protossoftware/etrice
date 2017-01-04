@@ -40,7 +40,7 @@ class StateMachineGen extends GenericStateMachineGenerator {
 			'''
 				«IF Main::settings.generateMSCInstrumentation || Main::settings.generateWithVerboseOutput»
 					// state names
-					const std::string «clsName»::s_stateStrings[] = {
+					const String «clsName»::s_stateStrings[] = {
 						"<no state>",
 						"<top>",
 						«FOR state : states SEPARATOR ","»
@@ -52,11 +52,11 @@ class StateMachineGen extends GenericStateMachineGenerator {
 
 				void «clsName»::setState(int new_state) {
 					«IF Main::settings.generateMSCInstrumentation»
-						DebuggingService::getInstance().addActorState(*this, s_stateStrings[new_state]);
+						DebuggingService::getInstance().addActorState(*this, s_stateStrings[new_state].c_str());
 					«ENDIF»
 					«IF Main::settings.generateWithVerboseOutput»
 						if (s_stateStrings[new_state] != "Idle") {
-							std::cout << getInstancePath() << " -> " << s_stateStrings[new_state] << std::endl;
+							std::cout << getInstancePath().c_str() << " -> " << s_stateStrings[new_state].c_str() << std::endl;
 						}
 					«ENDIF»
 					m_state = new_state;
@@ -65,7 +65,7 @@ class StateMachineGen extends GenericStateMachineGenerator {
 		else
 			'''
 				«IF Main::settings.generateMSCInstrumentation || Main::settings.generateWithVerboseOutput»
-				static const std::string s_stateStrings[];
+				static const String s_stateStrings[];
 				«ENDIF»
 				static const int s_numberOfStates;
 

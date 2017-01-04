@@ -23,7 +23,6 @@
 #include "osal/etSema.h"
 #include "osal/etThread.h"
 #include "osal/etTimer.h"
-#include <string>
 
 namespace etRuntime {
 
@@ -35,8 +34,8 @@ public:
 		POLLED, BLOCKED, MIXED
 	};
 
-	MessageService(IRTObject* parent, IMessageService::ExecMode mode, int node, int thread, const std::string& name, IMessageMemory* memory, int priority = 0);
-	MessageService(IRTObject* parent, IMessageService::ExecMode mode, etTime interval, int node, int thread, const std::string& name, IMessageMemory* memory, int priority = 0);
+	MessageService(IRTObject* parent, IMessageService::ExecMode mode, int node, int thread, const String& name, IMessageMemory* memory, int priority = 0);
+	MessageService(IRTObject* parent, IMessageService::ExecMode mode, etTime interval, int node, int thread, const String& name, IMessageMemory* memory, int priority = 0);
 	virtual ~MessageService();
 
 	void run();
@@ -59,7 +58,7 @@ public:
 	void returnMessageBuffer(const Message* buffer);
 
 	const Address& getAddress(void) const { return m_address; }
-	std::string toString() const;
+	String toString() const;
 
 protected:
 

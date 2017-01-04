@@ -34,9 +34,9 @@ protected:
 class SimpleMessageReceiver: public etRuntime::RTObject,
 		public etRuntime::IMessageReceiver {
 public:
-	SimpleMessageReceiver(IRTObject *parent, const std::string& name,
+	SimpleMessageReceiver(IRTObject *parent, const etRuntime::String& name,
 			const etRuntime::Address& address) :
-			RTObject(parent, name), m_address(address), m_lastMessage(NULL) {
+				RTObject(parent, name), m_address(address), m_lastMessage(NULL) {
 	}
 
 	void receive(const etRuntime::Message* msg) {

@@ -58,7 +58,7 @@ public class StateMachineGen extends GenericStateMachineGenerator {
           if ((Main.getSettings().isGenerateMSCInstrumentation() || Main.getSettings().isGenerateWithVerboseOutput())) {
             _builder.append("// state names");
             _builder.newLine();
-            _builder.append("const std::string ");
+            _builder.append("const String ");
             _builder.append(clsName, "");
             _builder.append("::s_stateStrings[] = {");
             _builder.newLineIfNotEmpty();
@@ -106,7 +106,7 @@ public class StateMachineGen extends GenericStateMachineGenerator {
           boolean _isGenerateMSCInstrumentation = _settings.isGenerateMSCInstrumentation();
           if (_isGenerateMSCInstrumentation) {
             _builder.append("\t");
-            _builder.append("DebuggingService::getInstance().addActorState(*this, s_stateStrings[new_state]);");
+            _builder.append("DebuggingService::getInstance().addActorState(*this, s_stateStrings[new_state].c_str());");
             _builder.newLine();
           }
         }
@@ -119,7 +119,7 @@ public class StateMachineGen extends GenericStateMachineGenerator {
             _builder.newLine();
             _builder.append("\t");
             _builder.append("\t");
-            _builder.append("std::cout << getInstancePath() << \" -> \" << s_stateStrings[new_state] << std::endl;");
+            _builder.append("std::cout << getInstancePath().c_str() << \" -> \" << s_stateStrings[new_state].c_str() << std::endl;");
             _builder.newLine();
             _builder.append("\t");
             _builder.append("}");
@@ -136,7 +136,7 @@ public class StateMachineGen extends GenericStateMachineGenerator {
         StringConcatenation _builder_1 = new StringConcatenation();
         {
           if ((Main.getSettings().isGenerateMSCInstrumentation() || Main.getSettings().isGenerateWithVerboseOutput())) {
-            _builder_1.append("static const std::string s_stateStrings[];");
+            _builder_1.append("static const String s_stateStrings[];");
             _builder_1.newLine();
           }
         }

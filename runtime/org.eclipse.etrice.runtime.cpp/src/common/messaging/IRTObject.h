@@ -13,8 +13,8 @@
 #ifndef IRTOBJECT_H_
 #define IRTOBJECT_H_
 
-#include <string>
-#include <vector>
+#include "common/containers/String.h"
+#include "common/containers/Vector.h"
 
 namespace etRuntime {
 
@@ -26,23 +26,25 @@ public:
 
 	static const char PATH_DELIM = '/';
 	static const char PATHNAME_DELIM = '_';
-	static const std::string NO_NAME;
+	static const String NO_NAME;
 
-	virtual const std::string& getName() const = 0;
-	virtual const std::string& getInstancePath() const = 0;
-	virtual const std::string& getInstancePathName() const = 0;
+	typedef Vector<IRTObject*> ChildList;
 
-	virtual std::vector<IRTObject*>& getChildren() = 0;
+	virtual const String& getName() const = 0;
+	virtual String getInstancePath() const = 0;
+	virtual String getInstancePathName() const = 0;
+
+	virtual ChildList& getChildren() = 0;
 
 	virtual IRTObject* getParent() const = 0;
 
 	virtual IRTObject* getRoot() const = 0;
 
-	virtual IRTObject* getChild(const std::string& name) const = 0;
+	virtual IRTObject* getChild(const String& name) const = 0;
 
-	virtual IRTObject* getObject(const std::string& path) const = 0;
+	virtual IRTObject* getObject(const String& path) const = 0;
 
-	virtual int getThreadForPath(const std::string& path) const = 0;
+	virtual int getThreadForPath(const String& path) const = 0;
 };
 
 }

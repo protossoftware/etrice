@@ -269,14 +269,14 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     _builder.append("}");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("static const std::string& getMessageString(int msg_id);");
+    _builder.append("static const etRuntime::String& getMessageString(int msg_id);");
     _builder.newLine();
     _builder.newLine();
     _builder.append("\t");
     _builder.append("private:");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("static const std::string s_messageStrings[];");
+    _builder.append("static const etRuntime::String s_messageStrings[];");
     _builder.newLine();
     _builder.newLine();
     _builder.append("};");
@@ -337,11 +337,11 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.newLine();
       _builder.append("\t ");
       _builder.append(portClassName, "\t ");
-      _builder.append("(etRuntime::IInterfaceItemOwner* actor, const std::string& name, int localId);");
+      _builder.append("(etRuntime::IInterfaceItemOwner* actor, const etRuntime::String& name, int localId);");
       _builder.newLineIfNotEmpty();
       _builder.append("\t ");
       _builder.append(portClassName, "\t ");
-      _builder.append("(etRuntime::IInterfaceItemOwner* actor, const std::string& name, int localId, int idx);");
+      _builder.append("(etRuntime::IInterfaceItemOwner* actor, const etRuntime::String& name, int localId, int idx);");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
       {
@@ -417,7 +417,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append(replPortClassName, "\t\t");
-      _builder.append("(etRuntime::IInterfaceItemOwner* actor, const std::string& name, int localId);");
+      _builder.append("(etRuntime::IInterfaceItemOwner* actor, const etRuntime::String& name, int localId);");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
       _builder.append("\t\t");
@@ -469,7 +469,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.append("protected:");
       _builder.newLine();
       _builder.append("\t\t");
-      _builder.append("virtual etRuntime::InterfaceItemBase* createInterfaceItem(etRuntime::IInterfaceItemOwner* rcv, const std::string& name, int lid, int idx) {");
+      _builder.append("virtual etRuntime::InterfaceItemBase* createInterfaceItem(etRuntime::IInterfaceItemOwner* rcv, const etRuntime::String& name, int lid, int idx) {");
       _builder.newLine();
       _builder.append("\t\t\t");
       _builder.append("return new ");
@@ -527,10 +527,6 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     _builder.newLine();
     _builder.append("#include \"common/modelbase/IEventReceiver.h\"");
     _builder.newLine();
-    _builder.append("#include <iterator>");
-    _builder.newLine();
-    _builder.append("#include <vector>");
-    _builder.newLine();
     _builder.newLine();
     _builder.append("using namespace etRuntime;");
     _builder.newLine();
@@ -545,7 +541,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     _builder.newLine();
     _builder.append("/* message names as strings for debugging (generate MSC) */");
     _builder.newLine();
-    _builder.append("const std::string ");
+    _builder.append("const String ");
     String _name_1 = pc.getName();
     _builder.append(_name_1, "");
     _builder.append("::s_messageStrings[] = {\"MIN\", ");
@@ -571,7 +567,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     _builder.append("\"MAX\"};");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
-    _builder.append("const std::string& ");
+    _builder.append("const String& ");
     String _name_4 = pc.getName();
     _builder.append(_name_4, "");
     _builder.append("::getMessageString(int msg_id) {");
@@ -589,7 +585,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     _builder.append("// id out of range");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("static const std::string errorMsg = \"Message ID out of range\";");
+    _builder.append("static const String errorMsg = \"Message ID out of range\";");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("return errorMsg;");
@@ -637,7 +633,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.append(portClassName, "");
       _builder.append("::");
       _builder.append(portClassName, "");
-      _builder.append("(IInterfaceItemOwner* actor, const std::string& name, int localId)");
+      _builder.append("(IInterfaceItemOwner* actor, const String& name, int localId)");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
       CharSequence _generateConstructorInitalizerList = this.generateConstructorInitalizerList(pclass, "0");
@@ -651,7 +647,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.append(portClassName, "");
       _builder.append("::");
       _builder.append(portClassName, "");
-      _builder.append("(IInterfaceItemOwner* actor, const std::string& name, int localId, int idx)");
+      _builder.append("(IInterfaceItemOwner* actor, const String& name, int localId, int idx)");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
       CharSequence _generateConstructorInitalizerList_1 = this.generateConstructorInitalizerList(pclass, "idx");
@@ -713,7 +709,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.append("(msg->getEvtId())) {");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
-      _builder.append("std::cout << \"unknown\" << std::endl;");
+      _builder.append("//std::cout << \"unknown\" << std::endl;");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("}");
@@ -727,7 +723,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
           _builder.append("DebuggingService::getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), ");
           String _name_1 = pc.getName();
           _builder.append(_name_1, "\t");
-          _builder.append("::getMessageString(msg->getEvtId()));");
+          _builder.append("::getMessageString(msg->getEvtId()).c_str());");
           _builder.newLineIfNotEmpty();
         }
       }
@@ -841,7 +837,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.append(replPortClassName, "");
       _builder.append("::");
       _builder.append(replPortClassName, "");
-      _builder.append("(IInterfaceItemOwner* actor, const std::string& name, int localId) :");
+      _builder.append("(IInterfaceItemOwner* actor, const String& name, int localId) :");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
       _builder.append("ReplicatedPortBase(actor, name, localId)");
@@ -863,7 +859,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
               _builder.append("{");
               _builder.newLineIfNotEmpty();
               _builder.append("\t");
-              _builder.append("for (std::vector<etRuntime::InterfaceItemBase*>::iterator it = getItems().begin(); it != getItems().end(); ++it) {");
+              _builder.append("for (Vector<etRuntime::InterfaceItemBase*>::iterator it = getItems().begin(); it != getItems().end(); ++it) {");
               _builder.newLine();
               _builder.append("\t\t");
               _builder.append("(dynamic_cast<");
@@ -891,7 +887,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
               _builder.append("{");
               _builder.newLineIfNotEmpty();
               _builder.append("\t");
-              _builder.append("for (std::vector<etRuntime::InterfaceItemBase*>::iterator it = getItems().begin(); it != getItems().end(); ++it) {");
+              _builder.append("for (Vector<etRuntime::InterfaceItemBase*>::iterator it = getItems().begin(); it != getItems().end(); ++it) {");
               _builder.newLine();
               _builder.append("\t\t");
               _builder.append("(dynamic_cast<");
@@ -1141,15 +1137,16 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
           _builder_4.append("DebuggingService::getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(),");
           _builder_4.newLine();
           _builder_4.append("\t");
-          _builder_4.append(portClassName, "\t");
+          _builder_4.append("\t");
+          _builder_4.append(portClassName, "\t\t");
           _builder_4.append("::getMessageString(");
-          _builder_4.append(portClassName, "\t");
+          _builder_4.append(portClassName, "\t\t");
           _builder_4.append("::");
-          _builder_4.append(dir, "\t");
+          _builder_4.append(dir, "\t\t");
           _builder_4.append("_");
           String _name_2 = m.getName();
-          _builder_4.append(_name_2, "\t");
-          _builder_4.append("));");
+          _builder_4.append(_name_2, "\t\t");
+          _builder_4.append(").c_str());");
           _builder_4.newLineIfNotEmpty();
         }
       }
@@ -1273,7 +1270,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.append("\t");
       String _portClassName_1 = this.roomExt.getPortClassName(pc, true);
       _builder.append(_portClassName_1, "\t");
-      _builder.append("(etRuntime::IRTObject* parent, const std::string& name, int localId);");
+      _builder.append("(etRuntime::IRTObject* parent, const etRuntime::String& name, int localId);");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
       _builder.append("\t");
@@ -1366,7 +1363,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.append("\t");
       String _portClassName_3 = this.roomExt.getPortClassName(pc, false);
       _builder.append(_portClassName_3, "\t");
-      _builder.append("(etRuntime::IRTObject* parent, const std::string& name, int localId);");
+      _builder.append("(etRuntime::IRTObject* parent, const etRuntime::String& name, int localId);");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
       _builder.append("\t");
@@ -1478,7 +1475,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.append("::");
       String _portClassName_1 = this.roomExt.getPortClassName(pc, true);
       _builder.append(_portClassName_1, "");
-      _builder.append("(IRTObject* parent, const std::string& name, int localId) :");
+      _builder.append("(IRTObject* parent, const String& name, int localId) :");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
       _builder.append("DataSendPort(parent, name, localId)");
@@ -1498,7 +1495,7 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       _builder.append("::");
       String _portClassName_3 = this.roomExt.getPortClassName(pc, false);
       _builder.append(_portClassName_3, "");
-      _builder.append("(IRTObject* parent, const std::string& name, int localId) :");
+      _builder.append("(IRTObject* parent, const String& name, int localId) :");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
       _builder.append("DataReceivePort(parent, name, localId),");

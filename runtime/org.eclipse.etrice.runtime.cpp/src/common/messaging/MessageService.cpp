@@ -15,12 +15,12 @@
 #include "common/messaging/MessageServiceController.h"
 #include "common/messaging/RTServices.h"
 #include "osal/etTime.h"
-#include <string>
+#include <new>
 
 namespace etRuntime {
 
 
-MessageService::MessageService(IRTObject* parent, IMessageService::ExecMode mode, int node, int thread, const std::string& name,
+MessageService::MessageService(IRTObject* parent, IMessageService::ExecMode mode, int node, int thread, const String& name,
 		IMessageMemory* memory, int priority) :
 		RTObject(parent, name),
 		m_running(false),
@@ -38,7 +38,7 @@ MessageService::MessageService(IRTObject* parent, IMessageService::ExecMode mode
 }
 
 MessageService::MessageService(IRTObject* parent, IMessageService::ExecMode mode, etTime interval, int node, int thread,
-		const std::string& name, IMessageMemory* memory, int priority) :
+		const String& name, IMessageMemory* memory, int priority) :
 		RTObject(parent, name),
 		m_running(false),
 		m_execMode(mode),
@@ -173,8 +173,8 @@ void MessageService::returnMessageBuffer(const Message* buffer) {
 	etMutex_leave(&m_mutex);
 }
 
-std::string MessageService::toString() const {
-	return getName() + " " + getAddress().toID();
+String MessageService::toString() const {
+	return getName() + " " + getAddress().toID().c_str();
 }
 
 void MessageService::terminate() {

@@ -11,10 +11,11 @@
  *******************************************************************************/
 
 #include "common/messaging/StaticMessageMemory.h"
+#include <new>
 
 namespace etRuntime {
 
-StaticMessageMemory::StaticMessageMemory(IRTObject* parent, const std::string& name, size_t size, int number) :
+StaticMessageMemory::StaticMessageMemory(IRTObject* parent, const String& name, size_t size, int number) :
 		RTObject(parent, name), m_size(size), m_msgPool(NULL, "memory"), m_buffer(0) {
 	m_buffer = new uint8_t[m_size * number];
 	uint8_t* ptr = m_buffer;
@@ -31,10 +32,10 @@ StaticMessageMemory::~StaticMessageMemory() {
 
 Message* StaticMessageMemory::getMessageBuffer(size_t size) {
 	if(size > m_size) {
-		std::cout << "Could not provide message buffer (message too big)!" << std::endl;
+		printf("Could not provide message buffer (message too big)!\n");
 	}
 	else if(m_msgPool.getSize() <= 0) {
-		std::cout << "Could not provide message buffer (message pool is empty)!" << std::endl;
+		printf("Could not provide message buffer (message pool is empty)!\n");
 	}
 	else {
 		return const_cast<Message*>(m_msgPool.pop());

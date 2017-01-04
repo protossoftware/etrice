@@ -10,11 +10,21 @@
  *
  *******************************************************************************/
 
-#include <algorithm>
-
 #include "MessageServiceController.h"
+#include "common/containers/String.h"
 
 namespace etRuntime {
+
+typedef Vector<IMessageService*>::iterator iterator;
+static iterator find(iterator begin, iterator end, const IMessageService* value) {
+	iterator current = begin;
+	for (; current!=end; ++current) {
+		if (*current==value) {
+			return current;
+		}
+	}
+	return current;
+}
 
 MessageServiceController::MessageServiceController() :
 		m_messageServices(),
@@ -33,7 +43,7 @@ int MessageServiceController::getNewID() {
 		newID = m_nextFreeID++;
 	else {
 		newID = m_freeIDs.back();
-		m_freeIDs.pop();
+		m_freeIDs.pop_back();
 	}
 	etMutex_leave(&m_mutex);
 
@@ -42,7 +52,7 @@ int MessageServiceController::getNewID() {
 
 void MessageServiceController::freeID(int id) {
 	etMutex_enter(&m_mutex);
-	m_freeIDs.push(id);
+	m_freeIDs.push_back(id);
 	etMutex_leave(&m_mutex);
 }
 
@@ -58,7 +68,7 @@ void MessageServiceController::addMsgSvc(IMessageService& msgSvc) {
 void MessageServiceController::removeMsgSvc(IMessageService& msgSvc) {
 	etMutex_enter(&m_mutex);
 
-	MsgSvcList::iterator it = std::find(m_messageServices.begin(), m_messageServices.end(), &msgSvc);
+	MsgSvcList::iterator it = find(m_messageServices.begin(), m_messageServices.end(), &msgSvc);
 	if (it!=m_messageServices.end()) {
 		m_messageServices.erase(it);
 	}
@@ -98,7 +108,7 @@ void MessageServiceController::stop() {
 	m_running = false;
 }
 
-void MessageServiceController::dumpThreads(std::string msg) {
+void MessageServiceController::dumpThreads(String msg) {
 //	std::cout << "<<< begin dump threads <<<" << std::endl;
 //	std::cout << "=== "  << msg << std::endl;
 	//TODO dump stack traces
@@ -146,7 +156,7 @@ void MessageServiceController::resetAll() {
 	etMutex_enter(&m_mutex);
 	m_messageServices.clear();
 	while (!m_freeIDs.empty()) {
-		m_freeIDs.pop();
+		m_freeIDs.pop_back();
 	}
 	m_nextFreeID = 0;
 	etMutex_leave(&m_mutex);
@@ -154,7 +164,7 @@ void MessageServiceController::resetAll() {
 
 void MessageServiceController::setMsgSvcTerminated(const IMessageService& msgSvc){
 	etMutex_enter(&m_mutex);
-	MsgSvcList::iterator it = std::find(m_terminateServices.begin(), m_terminateServices.end(), &msgSvc);
+	MsgSvcList::iterator it = find(m_terminateServices.begin(), m_terminateServices.end(), &msgSvc);
 	if (it!=m_terminateServices.end()) {
 		m_terminateServices.erase(it);
 	}

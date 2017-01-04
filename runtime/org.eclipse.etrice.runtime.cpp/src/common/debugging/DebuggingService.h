@@ -14,11 +14,10 @@
 #define DEBUGGINGSERVICE_H_
 
 #include "common/debugging/MSCLogger.h"
+#include "common/containers/Map.h"
 #include "common/messaging/Address.h"
 #include "etDatatypes.h"
 #include "common/modelbase/InterfaceItemBase.h"
-#include <string>
-#include <map>
 
 namespace etRuntime {
 
@@ -33,15 +32,15 @@ public:
 
 	static DebuggingService& getInstance();
 
-	void addMessageAsyncOut(const Address& source, const Address& target, const std::string& msg);
-	void addMessageAsyncIn(const Address& source, const Address& target, const std::string& msg);
-	void addMessageSyncCall(const Address& source, const Address& target, const std::string& msg);
-	void addMessageSyncReturn(const Address& source, const Address& target, const std::string& msg);
-	void addActorState(const ActorClassBase& actor, const std::string& state);
-	void addMessageActorCreate(const SubSystemClassBase& parent, const std::string& refName);
-	void addMessageActorCreate(const ActorClassBase& parent, const std::string& refName);
+	void addMessageAsyncOut(const Address& source, const Address& target, const String& msg);
+	void addMessageAsyncIn(const Address& source, const Address& target, const String& msg);
+	void addMessageSyncCall(const Address& source, const Address& target, const String& msg);
+	void addMessageSyncReturn(const Address& source, const Address& target, const String& msg);
+	void addActorState(const ActorClassBase& actor, const String& state);
+	void addMessageActorCreate(const SubSystemClassBase& parent, const String& refName);
+	void addMessageActorCreate(const ActorClassBase& parent, const String& refName);
 	void addMessageActorDestroy(const ActorClassBase& inst);
-	void addVisibleComment(const std::string& comment);
+	void addVisibleComment(const String& comment);
 	void addPortInstance(const InterfaceItemBase& port);
 	void removePortInstance(const InterfaceItemBase& port);
 
@@ -52,7 +51,7 @@ private:
 
 	MSCLogger m_asyncLogger;
 	MSCLogger m_syncLogger;
-	std::map<Address, const InterfaceItemBase*> m_portInstances;
+	Map<Address, const InterfaceItemBase*> m_portInstances;
 
 	const InterfaceItemBase* getPort(const Address& address) const;
 

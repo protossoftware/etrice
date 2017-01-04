@@ -15,6 +15,8 @@
 
 #include "common/messaging/RTObject.h"
 #include "common/modelbase/ActorClassBase.h"
+#include "common/containers/String.h"
+#include "common/containers/Vector.h"
 
 namespace etRuntime {
 
@@ -23,19 +25,19 @@ class ReplicatedActorClassBase : public RTObject {
 public:
 	static const char SEP = ':';
 
-	ReplicatedActorClassBase(IRTObject* parent, const std::string& name);
+	ReplicatedActorClassBase(IRTObject* parent, const String& name);
 	virtual ~ReplicatedActorClassBase(void);
 	void createSubActors(int number);
 	void initialize(void);
 	void setProbesActive(bool recursive, bool active);
 	int getNSubActors(void) { return m_items.size(); }
-	ActorClassBase* getSubActor(int index) { return m_items.at(index); }
+	ActorClassBase* getSubActor(int index) { return m_items[index]; }
 
 protected:
-	virtual ActorClassBase* createActor(IRTObject* parent, const std::string& name) = 0;
+	virtual ActorClassBase* createActor(IRTObject* parent, const String& name) = 0;
 
 private:
-	std::vector<ActorClassBase*> m_items;
+	Vector<ActorClassBase*> m_items;
 };
 
 } // namespace et Runtime

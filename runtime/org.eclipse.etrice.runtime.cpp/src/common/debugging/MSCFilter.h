@@ -14,8 +14,8 @@
 #define MSCFILTER_H_
 
 #include "etDatatypes.h"
-#include <list>
-#include <string>
+#include "common/containers/String.h"
+#include "common/containers/Vector.h"
 
 namespace etRuntime {
 
@@ -23,14 +23,18 @@ class MSCFilter {
 public:
 	class FilterItem {
 	public:
-		FilterItem(const std::string& filter_, etBool exclude_) :
-				exclude(exclude_),
-				filter(filter_) {
+		FilterItem(const String& filter_, etBool exclude_)
+		: exclude(exclude_)
+		, filter(filter_)
+		{
+		}
+		FilterItem()
+		: exclude()
+		, filter()
+		{
 		}
 		etBool exclude;
-		std::string filter;
-	private:
-		FilterItem();
+		String filter;
 	};
 
 	MSCFilter();
@@ -38,11 +42,11 @@ public:
 	}
 
 	void addFilter(FilterItem filter);
-	etBool applyTo(const std::string& text);
-	std::string reduceString(const std::string& string);
+	etBool applyTo(const String& text);
+	String reduceString(const String& text);
 
 private:
-	std::list<FilterItem> filterList;
+	Vector<FilterItem> filterList;
 
 };
 

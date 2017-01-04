@@ -13,13 +13,12 @@
 #ifndef SUBSYSTEMCLASSBASE_H_
 #define SUBSYSTEMCLASSBASE_H_
 
+#include "common/containers/Map.h"
 #include "common/modelbase/IEventReceiver.h"
 #include "common/modelbase/IInterfaceItemOwner.h"
 #include "common/modelbase/IReplicatedInterfaceItem.h"
 #include "common/modelbase/RTSystemProtocol.h"
 #include "etDatatypes.h"
-#include <map>
-#include <string>
 
 
 namespace etRuntime {
@@ -43,10 +42,10 @@ public:
 	IMessageService* getMsgService(int idx) const;
 	Address getFreeAddress(int msgSvcId) const;
 
-	ActorClassBase* getInstance(const std::string& path) const;
+	ActorClassBase* getInstance(const String& path) const;
 
-	void addPathToThread(const std::string& path, int thread);
-	int getThreadForPath(const std::string& path) const;
+	void addPathToThread(const String& path, int thread);
+	int getThreadForPath(const String& path) const;
 
 	void resetAll();
 
@@ -68,7 +67,7 @@ public:
 
 protected:
 
-	SubSystemClassBase(IRTObject* parent, std::string name);
+	SubSystemClassBase(IRTObject* parent, String name);
 
 	//--------------------- ports
 	RTSystemConjPort m_RTSystemPort;
@@ -78,7 +77,7 @@ protected:
 
 private:
 
-	std::map<std::string, int> m_path2thread;
+	Map<String, int> m_path2thread;
 
 	SubSystemClassBase();
 	SubSystemClassBase(SubSystemClassBase const&);

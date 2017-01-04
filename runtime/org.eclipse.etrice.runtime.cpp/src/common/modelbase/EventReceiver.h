@@ -15,7 +15,6 @@
 
 #include "common/messaging/RTObject.h"
 #include "common/modelbase/IEventReceiver.h"
-#include <string>
 
 namespace etRuntime {
 
@@ -27,7 +26,7 @@ public:
 	virtual int getThread();
 
 protected:
-	EventReceiver(IRTObject* parent, const std::string& name);
+	EventReceiver(IRTObject* parent, const String& name);
 
 private:
 

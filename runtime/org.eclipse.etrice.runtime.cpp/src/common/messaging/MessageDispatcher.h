@@ -13,13 +13,12 @@
 #ifndef MESSAGEDISPATCHER_H_
 #define MESSAGEDISPATCHER_H_
 
+#include "common/containers/Vector.h"
+#include "common/containers/Set.h"
+#include "common/containers/Map.h"
 #include "common/messaging/Address.h"
 #include "common/messaging/IMessageReceiver.h"
 #include "common/messaging/RTObject.h"
-#include <map>
-#include <queue>
-#include <set>
-#include <string>
 
 
 
@@ -27,7 +26,7 @@ namespace etRuntime {
 
 class MessageDispatcher : public RTObject, public virtual IMessageReceiver {
 	public:
-		MessageDispatcher(IRTObject* parent, const Address& addr, const std::string& name);
+		MessageDispatcher(IRTObject* parent, const Address& addr, const String& name);
 		virtual ~MessageDispatcher() {}
 
 		Address getFreeAddress();
@@ -41,12 +40,12 @@ class MessageDispatcher : public RTObject, public virtual IMessageReceiver {
 		const Address& getAddress() const { return m_address; };
 
 	protected:
-		std::string toString() const;
+		String toString() const;
 
 	private:
-		std::map<int, IMessageReceiver*> m_local_map;
-		std::queue<Address> m_freeAdresses;
-		std::set<IMessageReceiver*> m_pollingMessageReceiver;
+		Map<int, IMessageReceiver*> m_local_map;
+		Vector<Address> m_freeAdresses;
+		Set<IMessageReceiver*> m_pollingMessageReceiver;
 		Address m_address;
 		int m_nextFreeObjId;
 

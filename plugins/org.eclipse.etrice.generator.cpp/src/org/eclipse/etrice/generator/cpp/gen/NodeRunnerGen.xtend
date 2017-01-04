@@ -90,6 +90,10 @@ class NodeRunnerGen {
 
 			#include "«clsname».h"
 			#include "common/modelbase/RTSystem.h"
+			#include "common/containers/String.h"
+			#include "common/containers/Vector.h"
+			#include "common/containers/Set.h"
+			#include "common/containers/Map.h"
 
 			using namespace etRuntime;
 
@@ -108,6 +112,14 @@ class NodeRunnerGen {
 
 «««				// TODO JH crash
 				//delete sys;
+				
+				printf("String allocations %d and deallocations %d\n", etRuntime::String::getNAllocations(), etRuntime::String::getNDeallocations());
+				printf("String creations %d and destructions %d\n", etRuntime::String::getNCreated(), etRuntime::String::getNDestroyed());
+				printf("Vector allocations %d and deallocations %d\n", etRuntime::VectorStats::getNAllocations(), etRuntime::VectorStats::getNDeallocations());
+				printf("Vector creations %d and destructions %d\n", etRuntime::VectorStats::getNCreated(), etRuntime::VectorStats::getNDestroyed());
+				printf("Set creations %d and destructions %d\n", etRuntime::SetStats::getNCreated(), etRuntime::SetStats::getNDestroyed());
+				printf("Map creations %d and destructions %d\n", etRuntime::MapStats::getNCreated(), etRuntime::MapStats::getNDestroyed());
+				fflush(stdout);
 
 				return 0;
 			}

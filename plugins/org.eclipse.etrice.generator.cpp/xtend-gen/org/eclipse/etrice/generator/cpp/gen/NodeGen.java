@@ -255,7 +255,7 @@ public class NodeGen {
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append(clsname, "\t\t");
-      _builder.append("(IRTObject* parent, const std::string& name);");
+      _builder.append("(IRTObject* parent, const String& name);");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
       _builder.append("~");
@@ -472,7 +472,7 @@ public class NodeGen {
       _builder.append(clsname, "");
       _builder.append("::");
       _builder.append(clsname, "");
-      _builder.append("(IRTObject* parent, const std::string& name)");
+      _builder.append("(IRTObject* parent, const String& name)");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
       CharSequence _generateConstructorInitalizerList = this.generateConstructorInitalizerList(cc);

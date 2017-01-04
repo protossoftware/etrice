@@ -16,13 +16,12 @@
 #include "common/messaging/RTObject.h"
 #include "common/messaging/Message.h"
 #include "etDatatypes.h"
-#include <string>
 
 namespace etRuntime {
 
 class MessageSeQueue: public RTObject {
 public:
-	MessageSeQueue(IRTObject* parent, const std::string& name);
+	MessageSeQueue(IRTObject* parent, const String& name);
 	virtual ~MessageSeQueue();
 
 	void push(Message* msg);

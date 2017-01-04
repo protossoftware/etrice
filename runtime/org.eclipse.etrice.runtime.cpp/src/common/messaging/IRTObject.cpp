@@ -11,10 +11,9 @@
  *******************************************************************************/
 
 #include "common/messaging/IRTObject.h"
-#include <string>
 
 namespace etRuntime {
 
-const std::string IRTObject::NO_NAME = "<no name>";
+const String IRTObject::NO_NAME = "<no name>";
 
 }

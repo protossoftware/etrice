@@ -16,22 +16,20 @@
 #include "common/messaging/MessageServiceController.h"
 #include "common/messaging/RTServices.h"
 #include "common/modelbase/ActorClassBase.h"
-#include <iostream>
-#include <iterator>
-#include <map>
-#include <string>
-#include <vector>
-
 
 
 namespace etRuntime {
 
-SubSystemClassBase::SubSystemClassBase(IRTObject* parent, std::string name) :
+SubSystemClassBase::SubSystemClassBase(IRTObject* parent, String name) :
 		RTObject(parent, name),
 		m_RTSystemPort(this, IFITEM_RTSystemPort) {
-	DebuggingService::getInstance().getAsyncLogger().setMSC(name + "_Async", "log/");
+	String asyncMSCname(name);
+	asyncMSCname += "_Async";
+	String syncMSCname(name);
+	syncMSCname += "_Sync";
+	DebuggingService::getInstance().getAsyncLogger().setMSC(asyncMSCname.c_str(), "log/");
 	DebuggingService::getInstance().getAsyncLogger().open();
-	DebuggingService::getInstance().getSyncLogger().setMSC(name + "_Sync", "log/");
+	DebuggingService::getInstance().getSyncLogger().setMSC(syncMSCname.c_str(), "log/");
 	DebuggingService::getInstance().getSyncLogger().open();
 	DebuggingService::getInstance().getSyncLogger().setObjectName("main");
 
@@ -40,7 +38,7 @@ SubSystemClassBase::SubSystemClassBase(IRTObject* parent, std::string name) :
 
 void SubSystemClassBase::init() {
 
-	std::cout << "*** MainComponent " << getInstancePath() << "::init ***" << std::endl;
+	printf("*** MainComponent %s::init ***\n", getInstancePath().c_str());
 
 	// MessageService
 	instantiateMessageServices();
@@ -55,7 +53,7 @@ void SubSystemClassBase::init() {
 //	std::cout << toStringRecursive() << std::endl;
 
 	// initialize all actor instances
-	for (std::vector<IRTObject*>::iterator it = getChildren().begin(); it != getChildren().end(); ++it) {
+	for (ChildList::iterator it = getChildren().begin(); it != getChildren().end(); ++it) {
 		ActorClassBase* child = dynamic_cast<ActorClassBase*>(*it);
 		if (child != 0)
 			child->init();
@@ -72,50 +70,50 @@ void SubSystemClassBase::start() {
 }
 
 void SubSystemClassBase::stop() {
-	std::cout << "*** MainComponent " << getInstancePath() << "::stop ***" << std::endl;
+	printf("*** MainComponent %s::stop ***\n", getInstancePath().c_str());
 
 	RTServices::getInstance().getMsgSvcCtrl().stop();
-	std::cout << "=== done stop MsgSvcCtrl" << std::endl;
+	printf("=== done stop MsgSvcCtrl\n");
 
 	// stop all actor instances
-	for (std::vector<IRTObject*>::iterator it = getChildren().begin(); it != getChildren().end(); ++it) {
+	for (ChildList::iterator it = getChildren().begin(); it != getChildren().end(); ++it) {
 		ActorClassBase* child = dynamic_cast<ActorClassBase*>(*it);
 		if (child != 0)
 			child->stop();
 	}
-	std::cout << "=== done stop actor instances" << std::endl;
+	printf("=== done stop actor instances\n");
 }
 
 void SubSystemClassBase::destroy() {
-	std::cout << "*** MainComponent " << this->getInstancePath() << "::destroy ***" << std::endl;
+	printf("*** MainComponent %s::destroy ***\n", this->getInstancePath().c_str());
 	RTObject::destroy();
 //	std::cout << toStringRecursive() << std::endl;
-	std::cout << "=== done destroy actor instances" << std::endl;
+	printf("=== done destroy actor instances\n");
 
 	DebuggingService::getInstance().getAsyncLogger().close();
 	DebuggingService::getInstance().getSyncLogger().close();
-	std::cout << "=== done close loggers" << std::endl;
+	printf("=== done close loggers\n");
 
 	RTServices::getInstance().destroy();
-	std::cout << "=== done destroy RTServices\n\n\n" << std::endl;
+	printf("=== done destroy RTServices\n\n\n\n");
 }
 
 IMessageService* SubSystemClassBase::getMsgService(int idx) const {
 	return RTServices::getInstance().getMsgSvcCtrl().getMsgSvc(idx);
 }
 
-ActorClassBase* SubSystemClassBase::getInstance(const std::string& path) const {
+ActorClassBase* SubSystemClassBase::getInstance(const String& path) const {
 	IRTObject* object = getObject(path);
 
 	return dynamic_cast<ActorClassBase*>(object);
 }
 
-void SubSystemClassBase::addPathToThread(const std::string& path, int thread) {
+void SubSystemClassBase::addPathToThread(const String& path, int thread) {
 	m_path2thread[path] = thread;
 }
 
-int SubSystemClassBase::getThreadForPath(const std::string& path) const {
-	std::map<std::string, int> ::const_iterator it = m_path2thread.find(path);
+int SubSystemClassBase::getThreadForPath(const String& path) const {
+	Map<String, int> ::const_iterator it = m_path2thread.find(path);
 	if (it == m_path2thread.end())
 		return -1;
 

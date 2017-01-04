@@ -13,20 +13,20 @@
 #ifndef SRC_COMMON_DEBUGGING_MSCFUNCTIONOBJECT_H_
 #define SRC_COMMON_DEBUGGING_MSCFUNCTIONOBJECT_H_
 
-#include <string>
 #include "common/debugging/MSCLogger.h"
+#include "common/containers/String.h"
 
 namespace etRuntime {
 
 class MSCFunctionObject {
 public:
-	MSCFunctionObject(const std::string& objectName, const std::string& message);
+	MSCFunctionObject(const String& objectName, const String& message);
 	~MSCFunctionObject();
 
 private:
 	MSCLogger& m_syncLogger;
-	const std::string m_targetName;
-	const std::string m_sourceName;
+	const String m_targetName;
+	const String m_sourceName;
 };
 
 } // namespace etRuntime

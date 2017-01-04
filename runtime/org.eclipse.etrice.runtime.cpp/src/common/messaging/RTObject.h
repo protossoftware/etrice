@@ -14,28 +14,22 @@
 #define RTOBJECT_H_
 
 #include "common/messaging/IRTObject.h"
-#include <string>
-#include <vector>
 
 namespace etRuntime {
 
 class RTObject: public virtual IRTObject {
 public:
-	RTObject(IRTObject* parent, const std::string& name);
+	RTObject(IRTObject* parent, const String& name);
 
 	virtual ~RTObject() {}
 
-	virtual const std::string& getName() const {
+	virtual const String& getName() const {
 		return m_name;
 	}
-	virtual const std::string& getInstancePath() const {
-		return m_instancePath;
-	}
-	virtual const std::string& getInstancePathName() const {
-		return m_instancePathName;
-	}
+	virtual String getInstancePath() const;
+	virtual String getInstancePathName() const;
 
-	virtual std::vector<IRTObject*>& getChildren() {
+	virtual ChildList& getChildren() {
 		return m_children;
 	}
 
@@ -45,33 +39,47 @@ public:
 
 	virtual IRTObject* getRoot() const;
 
-	virtual IRTObject* getChild(const std::string& name) const;
+	virtual IRTObject* getChild(const String& name) const;
 
-	virtual IRTObject* getObject(const std::string& path) const;
+	virtual IRTObject* getObject(const String& path) const;
 
-	virtual int getThreadForPath(const std::string& path) const;
+	virtual int getThreadForPath(const String& path) const;
 
 protected:
 	virtual void destroy();
 
-	std::string toStringRecursive(const std::string& indent) const;
-	std::string toStringRecursive() const;
-	virtual std::string toString() const;
+	String toStringRecursive(const String& indent) const;
+	String toStringRecursive() const;
+	virtual String toString() const;
 
 private:
 
-	std::string m_name;
-	// for speed optimization the instance paths are created at instantiation
-	// and used as const ref parameters in the logging methods to avoid copying
-	std::string m_instancePath;
-	std::string m_instancePathName;
+	String m_name;
 	IRTObject* m_parent;
-	std::vector<IRTObject*> m_children;
+	ChildList m_children;
+#ifdef RTOBJECT_STORES_PATHS
+	// for speed optimization the instance paths are created at instantiation
+	// TODO: if not RTOBJECT_STORES_PATHS we need to return a copy
+	// in the other case it would be more efficient to return const refs.
+	// Can this be resolved in some way?
+	String m_instancePath;
+	String m_instancePathName;
+#endif
 
+	// unimplemented
 	RTObject();
 	RTObject(RTObject const&);
 	RTObject& operator=(RTObject const&);
 };
+
+#ifdef RTOBJECT_STORES_PATHS
+inline const String& RTObject::getInstancePath() const {
+	return m_instancePath;
+}
+inline const String& RTObject::getInstancePathName() const {
+	return m_instancePathName;
+}
+#endif
 
 } /* namespace etRuntime */
 #endif /* RTOBJECT_H_ */

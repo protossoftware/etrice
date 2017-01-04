@@ -10,9 +10,15 @@
  *
  *******************************************************************************/
 
-#include <containers/StaticDequeTest.h>
+#include "common/containers/Set.h"
+#include "containers/SetTest.h"
+#include "containers/StaticDequeTest.h"
 #include "containers/StaticArrayTest.h"
 #include "containers/StaticStringTest.h"
+#include "containers/StringTest.h"
+#include "containers/VectorTest.h"
+#include "containers/PairTest.h"
+#include "containers/MapTest.h"
 #include "debugging/MSCFunctionObjectTest.h"
 #include "debugging/MSCFilterTest.h"
 #include "debugging/MSCLoggerTest.h"
@@ -40,6 +46,21 @@ int main() {
 
 	StaticDequeTest dequeTest;
 	dequeTest.run();
+
+	StringTest stringTest;
+	stringTest.run();
+
+	VectorTest vectorTest;
+	vectorTest.run();
+
+	SetTest setTest;
+	setTest.run();
+
+	PairTest pairTest;
+	pairTest.run();
+
+	MapTest mapTest;
+	mapTest.run();
 
 	// Test debugging
 	MSCFilterTest filterTest;
@@ -80,6 +101,15 @@ int main() {
 	staticMsgMemTest.run();
 
 	etUnit_close();
+
+	printf("String allocations %d and deallocations %d\n", etRuntime::String::getNAllocations(), etRuntime::String::getNDeallocations());
+	printf("String creations %d and destructions %d\n", etRuntime::String::getNCreated(), etRuntime::String::getNDestroyed());
+	printf("Vector allocations %d and deallocations %d\n", etRuntime::VectorStats::getNAllocations(), etRuntime::VectorStats::getNDeallocations());
+	printf("Vector creations %d and destructions %d\n", etRuntime::VectorStats::getNCreated(), etRuntime::VectorStats::getNDestroyed());
+	printf("Set creations %d and destructions %d\n", etRuntime::SetStats::getNCreated(), etRuntime::SetStats::getNDestroyed());
+	printf("Map creations %d and destructions %d\n", etRuntime::MapStats::getNCreated(), etRuntime::MapStats::getNDestroyed());
+
+	fflush(stdout);
 
 	return 0;
 }

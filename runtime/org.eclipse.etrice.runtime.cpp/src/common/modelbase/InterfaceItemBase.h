@@ -17,7 +17,6 @@
 #include "common/messaging/Address.h"
 #include "common/messaging/IMessageService.h"
 #include "common/modelbase/IInterfaceItem.h"
-#include <string>
 
 namespace etRuntime {
 
@@ -28,7 +27,7 @@ class IMessageService;
 
 class InterfaceItemBase: public AbstractMessageReceiver, public virtual IInterfaceItem {
 public:
-	static void connect(IRTObject* obj, const std::string& path1, const std::string& path2);
+	static void connect(IRTObject* obj, const String& path1, const String& path2);
 
 	virtual ~InterfaceItemBase();
 
@@ -45,9 +44,9 @@ public:
 
 	IEventReceiver* getActor() const;
 
-	virtual std::string toString() const;
+	virtual String toString() const;
 protected:
-	InterfaceItemBase(IInterfaceItemOwner* owner, const std::string& name, int localId, int idx);
+	InterfaceItemBase(IInterfaceItemOwner* owner, const String& name, int localId, int idx);
 
 	IMessageReceiver* getMsgReceiver() const {
 		return m_ownMsgReceiver;

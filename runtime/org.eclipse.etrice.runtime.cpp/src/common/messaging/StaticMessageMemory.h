@@ -21,7 +21,7 @@ namespace etRuntime {
 
 class StaticMessageMemory : public IMessageMemory, public RTObject {
 public:
-	StaticMessageMemory(IRTObject* parent, const std::string& name, size_t size, int number);
+	StaticMessageMemory(IRTObject* parent, const String& name, size_t size, int number);
 	virtual ~StaticMessageMemory();
 
 	// returns a buffer of the specified size in bytes

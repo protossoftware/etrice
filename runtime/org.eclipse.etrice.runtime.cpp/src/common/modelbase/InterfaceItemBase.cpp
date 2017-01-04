@@ -17,11 +17,10 @@
 #include "common/modelbase/IInterfaceItemOwner.h"
 #include "common/modelbase/InterfaceItemBase.h"
 #include "common/modelbase/IReplicatedInterfaceItem.h"
-#include <string>
 
 namespace etRuntime {
 
-void InterfaceItemBase::connect(IRTObject* obj, const std::string& path1, const std::string& path2) {
+void InterfaceItemBase::connect(IRTObject* obj, const String& path1, const String& path2) {
 	IRTObject* obj1 = obj->getObject(path1);
 	IRTObject* obj2 = obj->getObject(path2);
 
@@ -33,7 +32,7 @@ void InterfaceItemBase::connect(IRTObject* obj, const std::string& path1, const 
 	}
 }
 
-InterfaceItemBase::InterfaceItemBase(IInterfaceItemOwner* owner, const std::string& name, int localId, int idx) :
+InterfaceItemBase::InterfaceItemBase(IInterfaceItemOwner* owner, const String& name, int localId, int idx) :
 		AbstractMessageReceiver(owner->getEventReceiver(), name),
 		m_localId(localId),
 		m_idx(idx),
@@ -135,20 +134,19 @@ void InterfaceItemBase::destroy() {
 	AbstractMessageReceiver::destroy();
 }
 
-std::string InterfaceItemBase::toString() const {
-	std::stringstream result;
-
-	result << ((m_replicator != 0) ? "sub " : "");
-	result << "port " + getName() << " " << getAddress().toID() << " ";
-	if(m_peerMsgReceiver == 0)
-		result << "UNCONNECTED";
+String InterfaceItemBase::toString() const {
+	char buffer [256];
+	const char* sub = (m_replicator != 0) ? "sub " : "";
+	int pos = sprintf(buffer, "%sport %s %s ", sub, getName().c_str(), getAddress().toID().c_str());
+	if (m_peerMsgReceiver == 0) {
+		sprintf(buffer+pos, "UNCONNECTED");
+	}
 	else {
-		result << " -> ";
-		result << ((m_peer != 0) ? m_peer->getName() : "?");
-		result << " " << m_peerAddress.toID();
+		const char* peerName = (m_peer != 0) ? m_peer->getName().c_str() : "?";
+		sprintf(buffer + pos, " -> %s %s", peerName, m_peerAddress.toID().c_str());
 	}
 
-	return result.str();
+	return buffer;
 }
 
 } /* namespace etRuntime */

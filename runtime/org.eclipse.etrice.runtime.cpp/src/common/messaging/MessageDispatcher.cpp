@@ -16,7 +16,7 @@
 
 namespace etRuntime {
 
-MessageDispatcher::MessageDispatcher(IRTObject* parent, const Address& addr, const std::string& name) :
+MessageDispatcher::MessageDispatcher(IRTObject* parent, const Address& addr, const String& name) :
 		RTObject(parent, name),
 		m_local_map(),
 		m_freeAdresses(),
@@ -29,15 +29,16 @@ MessageDispatcher::MessageDispatcher(IRTObject* parent, const Address& addr, con
 Address MessageDispatcher::getFreeAddress() {
 	if (m_freeAdresses.empty()) {
 		return Address(getAddress().m_nodeID, getAddress().m_threadID, m_nextFreeObjId++);
-	} else {
-		Address address = m_freeAdresses.front();
-		m_freeAdresses.pop();
+	}
+	else {
+		Address address = m_freeAdresses.back();
+		m_freeAdresses.pop_back();
 
 		return address;
 	}
 }
 void MessageDispatcher::freeAddress(const Address& addr) {
-	m_freeAdresses.push(addr);
+	m_freeAdresses.push_back(addr);
 }
 void MessageDispatcher::addMessageReceiver(IMessageReceiver& receiver) {
 	if (!receiver.getAddress().isValid())
@@ -69,14 +70,13 @@ void MessageDispatcher::receive(const Message* msg) {
 
 	IMessageReceiver* receiver = 0;
 	if (msg->getAddress().m_nodeID == m_address.m_nodeID && msg->getAddress().m_threadID == m_address.m_threadID) {
-		std::map<int, IMessageReceiver*>::iterator it;
-		it = m_local_map.find(msg->getAddress().m_objectID);
+		Map<int, IMessageReceiver*>::iterator it = m_local_map.find(msg->getAddress().m_objectID);
 		if (it != m_local_map.end()) {
 			receiver = it->second;
 		}
 	}
 	if (receiver == this) {
-		for (std::set<IMessageReceiver*>::iterator it = m_pollingMessageReceiver.begin();
+		for (Set<IMessageReceiver*>::iterator it = m_pollingMessageReceiver.begin();
 				it != m_pollingMessageReceiver.end(); ++it) {
 			(*it)->receive(msg);
 		}
@@ -89,8 +89,8 @@ void MessageDispatcher::receive(const Message* msg) {
 	dynamic_cast<IMessageService*>(getParent())->returnMessageBuffer(msg);
 }
 
-std::string MessageDispatcher::toString() const {
-	return getName() + " " + getAddress().toID();
+String MessageDispatcher::toString() const {
+	return getName() + " " + getAddress().toID().c_str();
 }
 
 } /* namespace etRuntime */

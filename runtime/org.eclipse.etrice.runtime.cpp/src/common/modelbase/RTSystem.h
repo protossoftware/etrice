@@ -13,14 +13,14 @@
 #define SRC_COMMON_MODELBASE_RTSYSTEM_H_
 
 #include "common/messaging/RTObject.h"
-#include <string>
+#include "common/containers/String.h"
 
 namespace etRuntime {
 
 class RTSystem: public RTObject {
 
 public:
-	explicit RTSystem(std::string name) :
+	explicit RTSystem(String name) :
 			RTObject(0, name) {
 	}
 	virtual ~RTSystem() {}

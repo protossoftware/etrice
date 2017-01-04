@@ -15,9 +15,7 @@
 
 #include "common/messaging/Address.h"
 #include "stddef.h"
-#include <iostream>
-#include <sstream>
-#include <string>
+#include "common/containers/String.h"
 
 namespace etRuntime {
 
@@ -43,7 +41,7 @@ public:
 		return m_data;
 	}
 
-	std::string toString() const;
+	String toString() const;
 
 protected:
 	friend class MessageSeQueue;

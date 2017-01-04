@@ -38,10 +38,10 @@ class RTSystemServicesProtocol {
 		static bool isValidIncomingEvtID(int evtId) {
 			return ((IN_executeInitialTransition <= evtId) && (evtId < MSG_MAX));
 		}
-		static const std::string& getMessageString(int msg_id);
+		static const etRuntime::String& getMessageString(int msg_id);
 
 	private:
-		static const std::string s_messageStrings[];
+		static const etRuntime::String s_messageStrings[];
 
 };
 
@@ -50,8 +50,8 @@ class RTSystemServicesProtocol {
 //------------------------------------------------------------------------------------------------------------
 class RTSystemServicesProtocolPort : public etRuntime::PortBase {
    public:
-	 RTSystemServicesProtocolPort(etRuntime::IInterfaceItemOwner* actor, const std::string& name, int localId);
-	 RTSystemServicesProtocolPort(etRuntime::IInterfaceItemOwner* actor, const std::string& name, int localId, int idx);
+	 RTSystemServicesProtocolPort(etRuntime::IInterfaceItemOwner* actor, const etRuntime::String& name, int localId);
+	 RTSystemServicesProtocolPort(etRuntime::IInterfaceItemOwner* actor, const etRuntime::String& name, int localId, int idx);
 
 	virtual void destroy();
 
@@ -67,7 +67,7 @@ class RTSystemServicesProtocolPort : public etRuntime::PortBase {
 class RTSystemServicesProtocolReplPort : public etRuntime::ReplicatedPortBase {
 
 	public:
-		RTSystemServicesProtocolReplPort(etRuntime::IInterfaceItemOwner* actor, const std::string& name, int localId);
+		RTSystemServicesProtocolReplPort(etRuntime::IInterfaceItemOwner* actor, const etRuntime::String& name, int localId);
 
 		int getReplication() const { return getNInterfaceItems(); }
 		int getIndexOf(const etRuntime::InterfaceItemBase& ifitem) const { return ifitem.getIdx(); }
@@ -76,7 +76,7 @@ class RTSystemServicesProtocolReplPort : public etRuntime::ReplicatedPortBase {
 		// outgoing messages
 
 	protected:
-		virtual etRuntime::InterfaceItemBase* createInterfaceItem(etRuntime::IInterfaceItemOwner* rcv, const std::string& name, int lid, int idx) {
+		virtual etRuntime::InterfaceItemBase* createInterfaceItem(etRuntime::IInterfaceItemOwner* rcv, const etRuntime::String& name, int lid, int idx) {
 			return new RTSystemServicesProtocolPort(rcv, name, lid, idx);
 		}
 
@@ -86,8 +86,8 @@ class RTSystemServicesProtocolReplPort : public etRuntime::ReplicatedPortBase {
 //------------------------------------------------------------------------------------------------------------
 class RTSystemServicesProtocolConjPort : public etRuntime::PortBase {
    public:
-	 RTSystemServicesProtocolConjPort(etRuntime::IInterfaceItemOwner* actor, const std::string& name, int localId);
-	 RTSystemServicesProtocolConjPort(etRuntime::IInterfaceItemOwner* actor, const std::string& name, int localId, int idx);
+	 RTSystemServicesProtocolConjPort(etRuntime::IInterfaceItemOwner* actor, const etRuntime::String& name, int localId);
+	 RTSystemServicesProtocolConjPort(etRuntime::IInterfaceItemOwner* actor, const etRuntime::String& name, int localId, int idx);
 
 	virtual void destroy();
 
@@ -109,7 +109,7 @@ class RTSystemServicesProtocolConjPort : public etRuntime::PortBase {
 class RTSystemServicesProtocolConjReplPort : public etRuntime::ReplicatedPortBase {
 
 	public:
-		RTSystemServicesProtocolConjReplPort(etRuntime::IInterfaceItemOwner* actor, const std::string& name, int localId);
+		RTSystemServicesProtocolConjReplPort(etRuntime::IInterfaceItemOwner* actor, const etRuntime::String& name, int localId);
 
 		int getReplication() const { return getNInterfaceItems(); }
 		int getIndexOf(const etRuntime::InterfaceItemBase& ifitem) const { return ifitem.getIdx(); }
@@ -121,7 +121,7 @@ class RTSystemServicesProtocolConjReplPort : public etRuntime::ReplicatedPortBas
 		public: void stopDebugging();
 
 	protected:
-		virtual etRuntime::InterfaceItemBase* createInterfaceItem(etRuntime::IInterfaceItemOwner* rcv, const std::string& name, int lid, int idx) {
+		virtual etRuntime::InterfaceItemBase* createInterfaceItem(etRuntime::IInterfaceItemOwner* rcv, const etRuntime::String& name, int lid, int idx) {
 			return new RTSystemServicesProtocolConjPort(rcv, name, lid, idx);
 		}
 

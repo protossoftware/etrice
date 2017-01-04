@@ -15,26 +15,24 @@
 #include "common/modelbase/SubSystemClassBase.h"
 #include "runtime/etRuntime.h"
 #include "etUnit/etUnit.h"
-#include <iostream>
-#include <sstream>
 #include <cstring>
 
 namespace etRuntime {
 
-const std::string SubSystemRunnerBase::OPTION_RUN_AS_TEST = "-run_as_test";
-const std::string SubSystemRunnerBase::OPTION_RUN_HEADLESS = "-headless";
+const String SubSystemRunnerBase::OPTION_RUN_AS_TEST = "-run_as_test";
+const String SubSystemRunnerBase::OPTION_RUN_HEADLESS = "-headless";
 
 void SubSystemRunnerBase::run(SubSystemClassBase& main_component, int argc, char* argv[]) {
 
-	std::cout << "***   T H E   B E G I N   ***" << std::endl;
+	printf("***   T H E   B E G I N   ***\n");
 
 	etBool headless = false;
 	for (int i = 1; i < argc; ++i) { // omit first argument, which is the program name
 		if (OPTION_RUN_AS_TEST.compare(argv[i]) == 0) {
-			std::cout << "*** running as test" << std::endl;
+			printf("*** running as test\n");
 			headless = true;
 		} else if (OPTION_RUN_HEADLESS.compare(argv[i]) == 0) {
-			std::cout << "*** running headless" << std::endl;
+			printf("*** running headless\n");
 			headless = true;
 		}
 	}
@@ -52,7 +50,7 @@ void SubSystemRunnerBase::run(SubSystemClassBase& main_component, int argc, char
 	main_component.stop(); // lifecycle stop
 	main_component.destroy(); // lifecycle destroy
 
-	std::cout << "***   T H E   E N D   ***" << std::endl;
+	printf("***   T H E   E N D   ***\n");
 
 }
 
@@ -83,9 +81,9 @@ void SubSystemRunnerBase::waitForQuit() {
 }
 
 void SubSystemRunnerBase::waitForTerminate() {
-	std::cout << "=== waitForTestcase: before acq. semaphore" << std::endl;
+	printf("=== waitForTestcase: before acq. semaphore\n");
 	etSema_waitForWakeup(etRuntime_getTerminateSemaphore());
-	std::cout << "=== waitForTestcase: after acq. semaphore" << std::endl;
+	printf("=== waitForTestcase: after acq. semaphore\n");
 }
 
 } /* namespace etRuntime */

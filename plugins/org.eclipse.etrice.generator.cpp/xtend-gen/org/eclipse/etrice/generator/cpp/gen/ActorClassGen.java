@@ -207,8 +207,6 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.newLine();
       _builder.append("#include \"common/debugging/DebuggingService.h\"");
       _builder.newLine();
-      _builder.append("#include <vector>");
-      _builder.newLine();
       _builder.newLine();
       {
         EList<ProtocolClass> _referencedProtocolClasses = root.getReferencedProtocolClasses(ac);
@@ -405,7 +403,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append("\t\t");
       String _name_11 = ac.getName();
       _builder.append(_name_11, "\t\t");
-      _builder.append("(etRuntime::IRTObject* parent, const std::string& name);");
+      _builder.append("(etRuntime::IRTObject* parent, const String& name);");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
       _builder.append("void initialize(void);");
@@ -542,7 +540,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append("\t");
       _builder.append("Replicated");
       _builder.append(clsname, "\t");
-      _builder.append("(IRTObject* parent, const std::string& name) :");
+      _builder.append("(IRTObject* parent, const String& name) :");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
       _builder.append("ReplicatedActorClassBase(parent, name) {}");
@@ -552,7 +550,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append("protected:");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("ActorClassBase* createActor(IRTObject* parent, const std::string& name) {");
+      _builder.append("ActorClassBase* createActor(IRTObject* parent, const String& name) {");
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append("return new ");
@@ -770,7 +768,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append(clsname, "");
       _builder.append("::");
       _builder.append(clsname, "");
-      _builder.append("(etRuntime::IRTObject* parent, const std::string& name)");
+      _builder.append("(etRuntime::IRTObject* parent, const String& name)");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
       CharSequence _generateConstructorInitalizerList = this.generateConstructorInitalizerList(ac);

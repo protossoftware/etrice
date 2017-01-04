@@ -15,7 +15,6 @@
 
 #include "common/modelbase/IInterfaceItemOwner.h"
 #include "common/modelbase/InterfaceItemBase.h"
-#include <string>
 
 namespace etRuntime {
 
@@ -25,11 +24,11 @@ public:
 	virtual ~PortBase() {}
 
 protected:
-	PortBase(IInterfaceItemOwner* owner, const std::string& name, int localId) :
+	PortBase(IInterfaceItemOwner* owner, const String& name, int localId) :
 			InterfaceItemBase(owner, name, localId, 0) {
 	}
 
-	PortBase(IInterfaceItemOwner* owner, const std::string& name, int localId, int idx) :
+	PortBase(IInterfaceItemOwner* owner, const String& name, int localId, int idx) :
 			InterfaceItemBase(owner, name, localId, idx) {
 	}
 
