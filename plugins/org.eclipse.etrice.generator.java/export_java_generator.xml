@@ -26,11 +26,11 @@
     <!--this file was created by Eclipse Runnable JAR Export Wizard-->
     <!--ANT 1.7 is required                                        -->
     <!--define folder properties-->
-    <target name="create_run_jar" depends="testProps">
-        <jar destfile="${export_destination}/org.eclipse.etrice.generator.java.jar">
+    <target name="create_run_jar">
+        <jar destfile="${export_destination}/JavaGenerator.jar">
             <manifest>
                 <attribute name="Main-Class" value="org.eclipse.etrice.generator.java.Main"/>
-                <attribute name="Class-Path" value=". org.eclipse.etrice.generator.java_lib/org.eclipse.xtext_2.10.0.v201605250459.jar org.eclipse.etrice.generator.java_lib/org.eclipse.emf.ecore.xmi_2.12.0.v20160420-0247.jar org.eclipse.etrice.generator.java_lib/org.eclipse.emf.ecore_2.12.0.v20160420-0247.jar org.eclipse.etrice.generator.java_lib/org.eclipse.emf.common_2.12.0.v20160420-0247.jar org.eclipse.etrice.generator.java_lib/org.antlr.runtime_3.2.0.v201101311130.jar org.eclipse.etrice.generator.java_lib/com.google.inject_3.0.0.v201605172100.jar org.eclipse.etrice.generator.java_lib/org.eclipse.emf.mwe.core_1.3.20.v201605261103.jar org.eclipse.etrice.generator.java_lib/org.apache.commons.cli_1.2.0.v201404270220.jar org.eclipse.etrice.generator.java_lib/org.eclipse.emf.mwe2.runtime_2.9.0.v201605261103.jar org.eclipse.etrice.generator.java_lib/org.eclipse.emf.mwe.utils_1.3.20.v201605261103.jar org.eclipse.etrice.generator.java_lib/org.eclipse.xtext.util_2.10.0.v201605250459.jar org.eclipse.etrice.generator.java_lib/com.google.guava_15.0.0.v201403281430.jar org.eclipse.etrice.generator.java_lib/javax.inject_1.0.0.v20091030.jar org.eclipse.etrice.generator.java_lib/org.eclipse.xtext.xbase_2.10.0.v201605250459.jar org.eclipse.etrice.generator.java_lib/org.eclipse.xtext.common.types_2.10.0.v201605250459.jar org.eclipse.etrice.generator.java_lib/org.eclipse.xtend.lib_2.10.0.v201605250459.jar org.eclipse.etrice.generator.java_lib/org.eclipse.xtext.xbase.lib_2.10.0.v201605250459.jar org.eclipse.etrice.generator.java_lib/org.eclipse.xtend.lib.macro_2.10.0.v201605250459.jar org.eclipse.etrice.generator.java_lib/org.eclipse.xtext.generator_2.10.0.v201605250459.jar org.eclipse.etrice.generator.java_lib/org.eclipse.xtext.xtext.generator_2.10.0.v201605250459.jar org.eclipse.etrice.generator.java_lib/org.eclipse.emf.codegen.ecore_2.12.0.v20160526-0356.jar org.eclipse.etrice.generator.java_lib/org.eclipse.emf.codegen_2.11.0.v20160526-0356.jar org.eclipse.etrice.generator.java_lib/org.eclipse.xtend_2.2.0.v201605260315.jar org.eclipse.etrice.generator.java_lib/com.ibm.icu_56.1.0.v201601250100.jar org.eclipse.etrice.generator.java_lib/org.eclipse.xpand_2.2.0.v201605260315.jar org.eclipse.etrice.generator.java_lib/org.eclipse.xtend.typesystem.emf_2.2.0.v201605260315.jar org.eclipse.etrice.generator.java_lib/org.eclipse.emf.mwe2.lib_2.9.0.v201605261103.jar org.eclipse.etrice.generator.java_lib/org.apache.commons.logging_1.1.1.v201101211721.jar org.eclipse.etrice.generator.java_lib/org.eclipse.emf.mwe2.launch_2.9.0.v201605261103.jar org.eclipse.etrice.generator.java_lib/org.eclipse.emf.mwe2.language_2.9.0.v201605261103.jar org.eclipse.etrice.generator.java_lib/org.eclipse.core.runtime_3.12.0.v20160606-1342.jar org.eclipse.etrice.generator.java_lib/org.eclipse.osgi_3.11.1.v20160708-1632.jar org.eclipse.etrice.generator.java_lib/org.eclipse.osgi.compatibility.state_1.0.200.v20160504-1419.jar org.eclipse.etrice.generator.java_lib/org.eclipse.equinox.common_3.8.0.v20160509-1230.jar org.eclipse.etrice.generator.java_lib/org.eclipse.core.jobs_3.8.0.v20160509-0411.jar org.eclipse.etrice.generator.java_lib/org.eclipse.equinox.registry_3.6.100.v20160223-2218.jar org.eclipse.etrice.generator.java_lib/org.eclipse.equinox.preferences_3.6.1.v20160815-1406.jar org.eclipse.etrice.generator.java_lib/org.eclipse.core.contenttype_3.5.100.v20160418-1621.jar org.eclipse.etrice.generator.java_lib/org.eclipse.equinox.app_1.3.400.v20150715-1528.jar org.eclipse.etrice.generator.java_lib/org.eclipse.core.resources_3.11.0.v20160503-1608.jar org.eclipse.etrice.generator.java_lib/org.apache.log4j_1.2.15.v201012070815.jar org.eclipse.etrice.generator.java_lib/org.objectweb.asm_5.0.1.v201404251740.jar org.eclipse.etrice.generator.java_lib/org.eclipse.emf_2.6.0.v20160526-0356.jar org.eclipse.etrice.generator.java_lib/org.apache.commons.io_2.2.0.v201405211200.jar org.eclipse.etrice.generator.java_lib/org.eclipse.ui_3.108.0.v20160518-1929.jar org.eclipse.etrice.generator.java_lib/org.eclipse.swt_3.105.1.v20160907-0248.jar org.eclipse.etrice.generator.java_lib/org.eclipse.jface_3.12.0.v20160518-1929.jar org.eclipse.etrice.generator.java_lib/org.eclipse.core.commands_3.8.0.v20160316-1921.jar org.eclipse.etrice.generator.java_lib/org.eclipse.ui.workbench_3.108.1.v20160819-2118.jar org.eclipse.etrice.generator.java_lib/org.eclipse.e4.ui.workbench3_0.13.100.v20160506-0759.jar org.eclipse.etrice.generator.java_lib/org.eclipse.ui.ide_3.12.1.v20160823-0925.jar org.eclipse.etrice.generator.java_lib/org.eclipse.ui.views_3.8.101.v20160816-1954.jar"/>
+                <attribute name="Class-Path" value=". JavaGenerator_lib/org.eclipse.xtext_2.10.0.v201605250459.jar JavaGenerator_lib/org.eclipse.emf.ecore.xmi_2.12.0.v20160420-0247.jar JavaGenerator_lib/org.eclipse.emf.ecore_2.12.0.v20160420-0247.jar JavaGenerator_lib/org.eclipse.emf.common_2.12.0.v20160420-0247.jar JavaGenerator_lib/org.antlr.runtime_3.2.0.v201101311130.jar JavaGenerator_lib/com.google.inject_3.0.0.v201605172100.jar JavaGenerator_lib/org.eclipse.emf.mwe.core_1.3.20.v201605261103.jar JavaGenerator_lib/org.apache.commons.cli_1.2.0.v201404270220.jar JavaGenerator_lib/org.eclipse.emf.mwe2.runtime_2.9.0.v201605261103.jar JavaGenerator_lib/org.eclipse.emf.mwe.utils_1.3.20.v201605261103.jar JavaGenerator_lib/org.eclipse.xtext.util_2.10.0.v201605250459.jar JavaGenerator_lib/com.google.guava_15.0.0.v201403281430.jar JavaGenerator_lib/javax.inject_1.0.0.v20091030.jar JavaGenerator_lib/org.eclipse.xtext.xbase_2.10.0.v201605250459.jar JavaGenerator_lib/org.eclipse.xtext.common.types_2.10.0.v201605250459.jar JavaGenerator_lib/org.eclipse.xtend.lib_2.10.0.v201605250459.jar JavaGenerator_lib/org.eclipse.xtext.xbase.lib_2.10.0.v201605250459.jar JavaGenerator_lib/org.eclipse.xtend.lib.macro_2.10.0.v201605250459.jar JavaGenerator_lib/org.eclipse.xtext.generator_2.10.0.v201605250459.jar JavaGenerator_lib/org.eclipse.xtext.xtext.generator_2.10.0.v201605250459.jar JavaGenerator_lib/org.eclipse.emf.codegen.ecore_2.12.0.v20160526-0356.jar JavaGenerator_lib/org.eclipse.emf.codegen_2.11.0.v20160526-0356.jar JavaGenerator_lib/org.eclipse.xtend_2.2.0.v201605260315.jar JavaGenerator_lib/com.ibm.icu_56.1.0.v201601250100.jar JavaGenerator_lib/org.eclipse.xpand_2.2.0.v201605260315.jar JavaGenerator_lib/org.eclipse.xtend.typesystem.emf_2.2.0.v201605260315.jar JavaGenerator_lib/org.eclipse.emf.mwe2.lib_2.9.0.v201605261103.jar JavaGenerator_lib/org.apache.commons.logging_1.1.1.v201101211721.jar JavaGenerator_lib/org.eclipse.emf.mwe2.launch_2.9.0.v201605261103.jar JavaGenerator_lib/org.eclipse.emf.mwe2.language_2.9.0.v201605261103.jar JavaGenerator_lib/org.eclipse.core.runtime_3.12.0.v20160606-1342.jar JavaGenerator_lib/org.eclipse.osgi_3.11.2.v20161107-1947.jar JavaGenerator_lib/org.eclipse.fx.osgi_2.4.0.201605100504.jar JavaGenerator_lib/org.eclipse.osgi.compatibility.state_1.0.200.v20160504-1419.jar JavaGenerator_lib/org.eclipse.equinox.common_3.8.0.v20160509-1230.jar JavaGenerator_lib/org.eclipse.core.jobs_3.8.0.v20160509-0411.jar JavaGenerator_lib/org.eclipse.equinox.registry_3.6.100.v20160223-2218.jar JavaGenerator_lib/org.eclipse.equinox.preferences_3.6.1.v20160815-1406.jar JavaGenerator_lib/org.eclipse.core.contenttype_3.5.100.v20160418-1621.jar JavaGenerator_lib/org.eclipse.equinox.app_1.3.400.v20150715-1528.jar JavaGenerator_lib/org.eclipse.core.resources_3.11.1.v20161107-2032.jar JavaGenerator_lib/org.apache.log4j_1.2.15.v201012070815.jar JavaGenerator_lib/org.objectweb.asm_5.0.1.v201404251740.jar JavaGenerator_lib/org.eclipse.emf_2.6.0.v20160526-0356.jar JavaGenerator_lib/org.apache.commons.io_2.2.0.v201405211200.jar JavaGenerator_lib/org.eclipse.ui_3.108.1.v20160929-1045.jar JavaGenerator_lib/org.eclipse.swt_3.105.2.v20161122-0613.jar JavaGenerator_lib/org.eclipse.swt.win32.win32.x86_64_3.105.2.v20161122-0613.jar JavaGenerator_lib/org.eclipse.jface_3.12.1.v20160923-1528.jar JavaGenerator_lib/org.eclipse.core.commands_3.8.0.v20160316-1921.jar JavaGenerator_lib/org.eclipse.ui.workbench_3.108.2.v20161025-2029.jar JavaGenerator_lib/org.eclipse.e4.ui.workbench3_0.13.100.v20160506-0759.jar JavaGenerator_lib/org.eclipse.ui.ide_3.12.2.v20161115-1450.jar JavaGenerator_lib/org.eclipse.ui.views_3.8.101.v20160816-1954.jar"/>
             </manifest>
             <fileset dir="${repo_loc}/plugins/org.eclipse.etrice.core.genmodel/bin"/>
             <fileset dir="${repo_loc}/plugins/org.eclipse.etrice.core.common/bin"/>
@@ -46,61 +46,62 @@
             <fileset dir="${repo_loc}/plugins/org.eclipse.etrice.generator.doc/bin"/>
             <fileset dir="${repo_loc}/plugins/org.eclipse.etrice.generator.java/bin"/>
         </jar>
-        <delete dir="${export_destination}/org.eclipse.etrice.generator.java_lib"/>
-        <mkdir dir="${export_destination}/org.eclipse.etrice.generator.java_lib"/>
-        <copy file="${eclipse_home}/plugins/org.eclipse.xtext_2.10.0.v201605250459.jar" todir="${export_destination}/org.eclipse.etrice.generator.java_lib"/>
-        <copy file="${eclipse_home}/plugins/org.eclipse.emf.ecore.xmi_2.12.0.v20160420-0247.jar" todir="${export_destination}/org.eclipse.etrice.generator.java_lib"/>
-        <copy file="${eclipse_home}/plugins/org.eclipse.emf.ecore_2.12.0.v20160420-0247.jar" todir="${export_destination}/org.eclipse.etrice.generator.java_lib"/>
-        <copy file="${eclipse_home}/plugins/org.eclipse.emf.common_2.12.0.v20160420-0247.jar" todir="${export_destination}/org.eclipse.etrice.generator.java_lib"/>
-        <copy file="${eclipse_home}/plugins/org.antlr.runtime_3.2.0.v201101311130.jar" todir="${export_destination}/org.eclipse.etrice.generator.java_lib"/>
-        <copy file="${eclipse_home}/plugins/com.google.inject_3.0.0.v201605172100.jar" todir="${export_destination}/org.eclipse.etrice.generator.java_lib"/>
-        <copy file="${eclipse_home}/plugins/org.eclipse.emf.mwe.core_1.3.20.v201605261103.jar" todir="${export_destination}/org.eclipse.etrice.generator.java_lib"/>
-        <copy file="${eclipse_home}/plugins/org.apache.commons.cli_1.2.0.v201404270220.jar" todir="${export_destination}/org.eclipse.etrice.generator.java_lib"/>
-        <copy file="${eclipse_home}/plugins/org.eclipse.emf.mwe2.runtime_2.9.0.v201605261103.jar" todir="${export_destination}/org.eclipse.etrice.generator.java_lib"/>
-        <copy file="${eclipse_home}/plugins/org.eclipse.emf.mwe.utils_1.3.20.v201605261103.jar" todir="${export_destination}/org.eclipse.etrice.generator.java_lib"/>
-        <copy file="${eclipse_home}/plugins/org.eclipse.xtext.util_2.10.0.v201605250459.jar" todir="${export_destination}/org.eclipse.etrice.generator.java_lib"/>
-        <copy file="${eclipse_home}/plugins/com.google.guava_15.0.0.v201403281430.jar" todir="${export_destination}/org.eclipse.etrice.generator.java_lib"/>
-        <copy file="${eclipse_home}/plugins/javax.inject_1.0.0.v20091030.jar" todir="${export_destination}/org.eclipse.etrice.generator.java_lib"/>
-        <copy file="${eclipse_home}/plugins/org.eclipse.xtext.xbase_2.10.0.v201605250459.jar" todir="${export_destination}/org.eclipse.etrice.generator.java_lib"/>
-        <copy file="${eclipse_home}/plugins/org.eclipse.xtext.common.types_2.10.0.v201605250459.jar" todir="${export_destination}/org.eclipse.etrice.generator.java_lib"/>
-        <copy file="${eclipse_home}/plugins/org.eclipse.xtend.lib_2.10.0.v201605250459.jar" todir="${export_destination}/org.eclipse.etrice.generator.java_lib"/>
-        <copy file="${eclipse_home}/plugins/org.eclipse.xtext.xbase.lib_2.10.0.v201605250459.jar" todir="${export_destination}/org.eclipse.etrice.generator.java_lib"/>
-        <copy file="${eclipse_home}/plugins/org.eclipse.xtend.lib.macro_2.10.0.v201605250459.jar" todir="${export_destination}/org.eclipse.etrice.generator.java_lib"/>
-        <copy file="${eclipse_home}/plugins/org.eclipse.xtext.generator_2.10.0.v201605250459.jar" todir="${export_destination}/org.eclipse.etrice.generator.java_lib"/>
-        <copy file="${eclipse_home}/plugins/org.eclipse.xtext.xtext.generator_2.10.0.v201605250459.jar" todir="${export_destination}/org.eclipse.etrice.generator.java_lib"/>
-        <copy file="${eclipse_home}/plugins/org.eclipse.emf.codegen.ecore_2.12.0.v20160526-0356.jar" todir="${export_destination}/org.eclipse.etrice.generator.java_lib"/>
-        <copy file="${eclipse_home}/plugins/org.eclipse.emf.codegen_2.11.0.v20160526-0356.jar" todir="${export_destination}/org.eclipse.etrice.generator.java_lib"/>
-        <copy file="${eclipse_home}/plugins/org.eclipse.xtend_2.2.0.v201605260315.jar" todir="${export_destination}/org.eclipse.etrice.generator.java_lib"/>
-        <copy file="${eclipse_home}/plugins/com.ibm.icu_56.1.0.v201601250100.jar" todir="${export_destination}/org.eclipse.etrice.generator.java_lib"/>
-        <copy file="${eclipse_home}/plugins/org.eclipse.xpand_2.2.0.v201605260315.jar" todir="${export_destination}/org.eclipse.etrice.generator.java_lib"/>
-        <copy file="${eclipse_home}/plugins/org.eclipse.xtend.typesystem.emf_2.2.0.v201605260315.jar" todir="${export_destination}/org.eclipse.etrice.generator.java_lib"/>
-        <copy file="${eclipse_home}/plugins/org.eclipse.emf.mwe2.lib_2.9.0.v201605261103.jar" todir="${export_destination}/org.eclipse.etrice.generator.java_lib"/>
-        <copy file="${eclipse_home}/plugins/org.apache.commons.logging_1.1.1.v201101211721.jar" todir="${export_destination}/org.eclipse.etrice.generator.java_lib"/>
-        <copy file="${eclipse_home}/plugins/org.eclipse.emf.mwe2.launch_2.9.0.v201605261103.jar" todir="${export_destination}/org.eclipse.etrice.generator.java_lib"/>
-        <copy file="${eclipse_home}/plugins/org.eclipse.emf.mwe2.language_2.9.0.v201605261103.jar" todir="${export_destination}/org.eclipse.etrice.generator.java_lib"/>
-        <copy file="${eclipse_home}/plugins/org.eclipse.core.runtime_3.12.0.v20160606-1342.jar" todir="${export_destination}/org.eclipse.etrice.generator.java_lib"/>
-        <copy file="${eclipse_home}/plugins/org.eclipse.osgi_3.11.1.v20160708-1632.jar" todir="${export_destination}/org.eclipse.etrice.generator.java_lib"/>
-        <copy file="${eclipse_home}/plugins/org.eclipse.osgi.compatibility.state_1.0.200.v20160504-1419.jar" todir="${export_destination}/org.eclipse.etrice.generator.java_lib"/>
-        <copy file="${eclipse_home}/plugins/org.eclipse.equinox.common_3.8.0.v20160509-1230.jar" todir="${export_destination}/org.eclipse.etrice.generator.java_lib"/>
-        <copy file="${eclipse_home}/plugins/org.eclipse.core.jobs_3.8.0.v20160509-0411.jar" todir="${export_destination}/org.eclipse.etrice.generator.java_lib"/>
-        <copy file="${eclipse_home}/plugins/org.eclipse.equinox.registry_3.6.100.v20160223-2218.jar" todir="${export_destination}/org.eclipse.etrice.generator.java_lib"/>
-        <copy file="${eclipse_home}/plugins/org.eclipse.equinox.preferences_3.6.1.v20160815-1406.jar" todir="${export_destination}/org.eclipse.etrice.generator.java_lib"/>
-        <copy file="${eclipse_home}/plugins/org.eclipse.core.contenttype_3.5.100.v20160418-1621.jar" todir="${export_destination}/org.eclipse.etrice.generator.java_lib"/>
-        <copy file="${eclipse_home}/plugins/org.eclipse.equinox.app_1.3.400.v20150715-1528.jar" todir="${export_destination}/org.eclipse.etrice.generator.java_lib"/>
-        <copy file="${eclipse_home}/plugins/org.eclipse.core.resources_3.11.0.v20160503-1608.jar" todir="${export_destination}/org.eclipse.etrice.generator.java_lib"/>
-        <copy file="${eclipse_home}/plugins/org.apache.log4j_1.2.15.v201012070815.jar" todir="${export_destination}/org.eclipse.etrice.generator.java_lib"/>
-        <copy file="${eclipse_home}/plugins/org.objectweb.asm_5.0.1.v201404251740.jar" todir="${export_destination}/org.eclipse.etrice.generator.java_lib"/>
-        <copy file="${eclipse_home}/plugins/org.eclipse.emf_2.6.0.v20160526-0356.jar" todir="${export_destination}/org.eclipse.etrice.generator.java_lib"/>
-        <copy file="${eclipse_home}/plugins/org.apache.commons.io_2.2.0.v201405211200.jar" todir="${export_destination}/org.eclipse.etrice.generator.java_lib"/>
-        <copy file="${eclipse_home}/plugins/org.eclipse.ui_3.108.0.v20160518-1929.jar" todir="${export_destination}/org.eclipse.etrice.generator.java_lib"/>
-        <copy file="${eclipse_home}/plugins/org.eclipse.swt_3.105.1.v20160907-0248.jar" todir="${export_destination}/org.eclipse.etrice.generator.java_lib"/>
-        <copy file="${eclipse_home}/plugins/org.eclipse.jface_3.12.0.v20160518-1929.jar" todir="${export_destination}/org.eclipse.etrice.generator.java_lib"/>
-        <copy file="${eclipse_home}/plugins/org.eclipse.core.commands_3.8.0.v20160316-1921.jar" todir="${export_destination}/org.eclipse.etrice.generator.java_lib"/>
-        <copy file="${eclipse_home}/plugins/org.eclipse.ui.workbench_3.108.1.v20160819-2118.jar" todir="${export_destination}/org.eclipse.etrice.generator.java_lib"/>
-        <copy file="${eclipse_home}/plugins/org.eclipse.e4.ui.workbench3_0.13.100.v20160506-0759.jar" todir="${export_destination}/org.eclipse.etrice.generator.java_lib"/>
-        <copy file="${eclipse_home}/plugins/org.eclipse.ui.ide_3.12.1.v20160823-0925.jar" todir="${export_destination}/org.eclipse.etrice.generator.java_lib"/>
-        <copy file="${eclipse_home}/plugins/org.eclipse.ui.views_3.8.101.v20160816-1954.jar" todir="${export_destination}/org.eclipse.etrice.generator.java_lib"/>
+        <delete dir="${export_destination}/JavaGenerator_lib"/>
+        <mkdir dir="${export_destination}/JavaGenerator_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.xtext_2.10.0.v201605250459.jar" todir="${export_destination}/JavaGenerator_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.emf.ecore.xmi_2.12.0.v20160420-0247.jar" todir="${export_destination}/JavaGenerator_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.emf.ecore_2.12.0.v20160420-0247.jar" todir="${export_destination}/JavaGenerator_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.emf.common_2.12.0.v20160420-0247.jar" todir="${export_destination}/JavaGenerator_lib"/>
+        <copy file="${eclipse_home}/plugins/org.antlr.runtime_3.2.0.v201101311130.jar" todir="${export_destination}/JavaGenerator_lib"/>
+        <copy file="${eclipse_home}/plugins/com.google.inject_3.0.0.v201605172100.jar" todir="${export_destination}/JavaGenerator_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.emf.mwe.core_1.3.20.v201605261103.jar" todir="${export_destination}/JavaGenerator_lib"/>
+        <copy file="${eclipse_home}/plugins/org.apache.commons.cli_1.2.0.v201404270220.jar" todir="${export_destination}/JavaGenerator_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.emf.mwe2.runtime_2.9.0.v201605261103.jar" todir="${export_destination}/JavaGenerator_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.emf.mwe.utils_1.3.20.v201605261103.jar" todir="${export_destination}/JavaGenerator_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.xtext.util_2.10.0.v201605250459.jar" todir="${export_destination}/JavaGenerator_lib"/>
+        <copy file="${eclipse_home}/plugins/com.google.guava_15.0.0.v201403281430.jar" todir="${export_destination}/JavaGenerator_lib"/>
+        <copy file="${eclipse_home}/plugins/javax.inject_1.0.0.v20091030.jar" todir="${export_destination}/JavaGenerator_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.xtext.xbase_2.10.0.v201605250459.jar" todir="${export_destination}/JavaGenerator_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.xtext.common.types_2.10.0.v201605250459.jar" todir="${export_destination}/JavaGenerator_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.xtend.lib_2.10.0.v201605250459.jar" todir="${export_destination}/JavaGenerator_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.xtext.xbase.lib_2.10.0.v201605250459.jar" todir="${export_destination}/JavaGenerator_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.xtend.lib.macro_2.10.0.v201605250459.jar" todir="${export_destination}/JavaGenerator_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.xtext.generator_2.10.0.v201605250459.jar" todir="${export_destination}/JavaGenerator_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.xtext.xtext.generator_2.10.0.v201605250459.jar" todir="${export_destination}/JavaGenerator_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.emf.codegen.ecore_2.12.0.v20160526-0356.jar" todir="${export_destination}/JavaGenerator_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.emf.codegen_2.11.0.v20160526-0356.jar" todir="${export_destination}/JavaGenerator_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.xtend_2.2.0.v201605260315.jar" todir="${export_destination}/JavaGenerator_lib"/>
+        <copy file="${eclipse_home}/plugins/com.ibm.icu_56.1.0.v201601250100.jar" todir="${export_destination}/JavaGenerator_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.xpand_2.2.0.v201605260315.jar" todir="${export_destination}/JavaGenerator_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.xtend.typesystem.emf_2.2.0.v201605260315.jar" todir="${export_destination}/JavaGenerator_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.emf.mwe2.lib_2.9.0.v201605261103.jar" todir="${export_destination}/JavaGenerator_lib"/>
+        <copy file="${eclipse_home}/plugins/org.apache.commons.logging_1.1.1.v201101211721.jar" todir="${export_destination}/JavaGenerator_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.emf.mwe2.launch_2.9.0.v201605261103.jar" todir="${export_destination}/JavaGenerator_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.emf.mwe2.language_2.9.0.v201605261103.jar" todir="${export_destination}/JavaGenerator_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.core.runtime_3.12.0.v20160606-1342.jar" todir="${export_destination}/JavaGenerator_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.osgi_3.11.2.v20161107-1947.jar" todir="${export_destination}/JavaGenerator_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.fx.osgi_2.4.0.201605100504.jar" todir="${export_destination}/JavaGenerator_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.osgi.compatibility.state_1.0.200.v20160504-1419.jar" todir="${export_destination}/JavaGenerator_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.equinox.common_3.8.0.v20160509-1230.jar" todir="${export_destination}/JavaGenerator_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.core.jobs_3.8.0.v20160509-0411.jar" todir="${export_destination}/JavaGenerator_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.equinox.registry_3.6.100.v20160223-2218.jar" todir="${export_destination}/JavaGenerator_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.equinox.preferences_3.6.1.v20160815-1406.jar" todir="${export_destination}/JavaGenerator_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.core.contenttype_3.5.100.v20160418-1621.jar" todir="${export_destination}/JavaGenerator_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.equinox.app_1.3.400.v20150715-1528.jar" todir="${export_destination}/JavaGenerator_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.core.resources_3.11.1.v20161107-2032.jar" todir="${export_destination}/JavaGenerator_lib"/>
+        <copy file="${eclipse_home}/plugins/org.apache.log4j_1.2.15.v201012070815.jar" todir="${export_destination}/JavaGenerator_lib"/>
+        <copy file="${eclipse_home}/plugins/org.objectweb.asm_5.0.1.v201404251740.jar" todir="${export_destination}/JavaGenerator_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.emf_2.6.0.v20160526-0356.jar" todir="${export_destination}/JavaGenerator_lib"/>
+        <copy file="${eclipse_home}/plugins/org.apache.commons.io_2.2.0.v201405211200.jar" todir="${export_destination}/JavaGenerator_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.ui_3.108.1.v20160929-1045.jar" todir="${export_destination}/JavaGenerator_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.swt_3.105.2.v20161122-0613.jar" todir="${export_destination}/JavaGenerator_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.swt.win32.win32.x86_64_3.105.2.v20161122-0613.jar" todir="${export_destination}/JavaGenerator_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.jface_3.12.1.v20160923-1528.jar" todir="${export_destination}/JavaGenerator_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.core.commands_3.8.0.v20160316-1921.jar" todir="${export_destination}/JavaGenerator_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.ui.workbench_3.108.2.v20161025-2029.jar" todir="${export_destination}/JavaGenerator_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.e4.ui.workbench3_0.13.100.v20160506-0759.jar" todir="${export_destination}/JavaGenerator_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.ui.ide_3.12.2.v20161115-1450.jar" todir="${export_destination}/JavaGenerator_lib"/>
+        <copy file="${eclipse_home}/plugins/org.eclipse.ui.views_3.8.101.v20160816-1954.jar" todir="${export_destination}/JavaGenerator_lib"/>
 		<zip destfile="${zip_destination}/eTrice-Java-generator.zip" basedir="${export_destination}" />
-    	<echo message="created ${zip_destination}/eTrice-Java-generator.zip" />
     </target>
 </project>
