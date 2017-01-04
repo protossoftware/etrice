@@ -384,9 +384,6 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 					if (buffer) {
 						getPeerMsgReceiver()->receive(«message»);
 					}
-					else {
-						std::cout << "The message buffer is too small for the message!" << std::endl;
-					}
 				}
 			}
 		'''

@@ -158,11 +158,15 @@ etSocketError etStartListening(etSocketServerData* data, short port) {
 	struct sockaddr_in local;
 	int i;
 
-	if (self==NULL)
+	if (self==NULL) {
+		PRINT_DEBUG("server: SocketServerData is null!")
 		return ETSOCKET_ERROR;
+	}
 
-	if (self->data.maxConnections>MAX_CONNECTIONS)
+	if (self->data.maxConnections>MAX_CONNECTIONS) {
+		PRINT_DEBUG("server: Max connections reached")
 		return ETSOCKET_ERROR;
+	}
 
 	/* mark all connections unused and set receiver and buffer provider */
 	for (i=0; i<MAX_CONNECTIONS; ++i) {
@@ -180,13 +184,13 @@ etSocketError etStartListening(etSocketServerData* data, short port) {
 
 	self->socket = socket(AF_INET, SOCK_STREAM, 0);
 	if (self->socket == INVALID_SOCKET) {
-		printf("server: ", strerror(errno), "\n");
+		printf("server: %s\n", strerror(errno));
 		fflush(stdout);
 		return ETSOCKET_ERROR;
 	}
 
 	if (bind(self->socket, (struct sockaddr*) &local, sizeof(local)) < 0) {
-		printf("server: ", strerror(errno), "\n");
+		printf("server: %s\n", strerror(errno));
 		fflush(stdout);
 		return ETSOCKET_ERROR;
 	}
@@ -216,8 +220,10 @@ etSocketError etWriteServerSocket(etSocketServerData* dat, int connection, int s
 	etSocketServerDataImpl* self = (etSocketServerDataImpl*) dat;
 	int offset = 0;
 
-	if (connection<0 || connection>MAX_CONNECTIONS || self->connections[connection].socket==INVALID_SOCKET)
+	if (connection<0 || connection>MAX_CONNECTIONS || self->connections[connection].socket==INVALID_SOCKET) {
+		PRINT_DEBUG("server: tried to write on invalid socket\n")
 		return ETSOCKET_ERROR;
+	}
 
 	/* Note: loop required because:
 	 * If no error occurs, send returns the total number of bytes sent, which can be less than the number
@@ -227,8 +233,11 @@ etSocketError etWriteServerSocket(etSocketServerData* dat, int connection, int s
 
 	while (size>0) {
 		int sent = send(self->connections[connection].socket, ((int8*)data)+offset, size, 0);
-		if (sent<=0)
+		if (sent<=0) {
+			printf("server error: %s\n", strerror(errno));
+			fflush(stdout);
 			return ETSOCKET_ERROR;
+		}
 
 		offset += sent;
 		size -= sent;
@@ -290,8 +299,10 @@ etSocketError etConnectServer(etSocketConnectionData* data, const char* addr, sh
 		host = gethostbyaddr((char *)&a, 4, AF_INET);
 	}
 
-	if (host == NULL )
+	if (host == NULL ) {
+		PRINT_DEBUG("client: Host is NULL\n")
 		return ETSOCKET_ERROR;
+	}
 
 	memset(&self->address, 0, sizeof(self->address));
 	memcpy(&(self->address.sin_addr), host->h_addr, host->h_length);
@@ -300,14 +311,14 @@ etSocketError etConnectServer(etSocketConnectionData* data, const char* addr, sh
 
 	self->socket = socket(AF_INET, SOCK_STREAM, 0);
 	if (self->socket==INVALID_SOCKET) {
-		printf("client: ", strerror(errno), "\n");
+		printf("client: %s", strerror(errno));
 		fflush(stdout);
 		return ETSOCKET_ERROR;
 	}
 
 	PRINT_DEBUG("client: connecting\n")
 	if (connect(self->socket, (struct sockaddr*)&(self->address), sizeof(self->address)) == INVALID_SOCKET) {
-		printf("client: ", strerror(errno), "\n");
+		printf("client: %s\n", strerror(errno));
 		fflush(stdout);
 		return ETSOCKET_ERROR;
 	}
@@ -332,8 +343,11 @@ etSocketError etWriteSocket(etSocketConnectionData* dat, int size, const int8* d
 
 	while (size>0) {
 		int sent = send(self->socket, ((int8*)data)+offset, size, 0);
-		if (sent<=0)
+		if (sent<=0) {
+			printf("client: %s\n", strerror(errno));
+			fflush(stdout);
 			return ETSOCKET_ERROR;
+		}
 
 		offset += sent;
 		size -= sent;
