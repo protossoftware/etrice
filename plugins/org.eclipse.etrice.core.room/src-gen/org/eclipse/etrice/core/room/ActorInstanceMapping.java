@@ -19,12 +19,12 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.ActorInstanceMapping#getPath <em>Path</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ActorInstanceMapping#getThread <em>Thread</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ActorInstanceMapping#getActorInstanceMappings <em>Actor Instance Mappings</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.etrice.core.room.RoomPackage#getActorInstanceMapping()
  * @model

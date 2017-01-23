@@ -26,10 +26,10 @@ import org.eclipse.etrice.core.config.ConfigValueArray;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.config.impl.ConfigValueArrayImpl#getValues <em>Values</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

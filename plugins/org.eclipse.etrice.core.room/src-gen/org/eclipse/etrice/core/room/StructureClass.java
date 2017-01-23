@@ -22,12 +22,12 @@ import org.eclipse.etrice.core.common.base.Annotation;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.StructureClass#getAnnotations <em>Annotations</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.StructureClass#getConnections <em>Connections</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.StructureClass#getBindings <em>Bindings</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.etrice.core.room.RoomPackage#getStructureClass()
  * @model

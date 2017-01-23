@@ -15,10 +15,10 @@ package org.eclipse.etrice.core.common.base;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.common.base.SimpleAnnotationAttribute#getType <em>Type</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.etrice.core.common.base.BasePackage#getSimpleAnnotationAttribute()
  * @model

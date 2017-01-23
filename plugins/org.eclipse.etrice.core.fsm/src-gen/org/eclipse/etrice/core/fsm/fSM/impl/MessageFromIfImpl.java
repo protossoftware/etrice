@@ -21,11 +21,11 @@ import org.eclipse.etrice.core.fsm.fSM.MessageFromIf;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.fsm.fSM.impl.MessageFromIfImpl#getMessage <em>Message</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.fsm.fSM.impl.MessageFromIfImpl#getFrom <em>From</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

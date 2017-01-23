@@ -23,13 +23,13 @@ import org.eclipse.etrice.core.room.VarDecl;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.impl.MessageImpl#isPriv <em>Priv</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.MessageImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.MessageImpl#getData <em>Data</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.MessageImpl#getDocu <em>Docu</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

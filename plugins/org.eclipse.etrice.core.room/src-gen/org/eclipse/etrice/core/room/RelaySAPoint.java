@@ -15,10 +15,10 @@ package org.eclipse.etrice.core.room;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.RelaySAPoint#getRelay <em>Relay</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.etrice.core.room.RoomPackage#getRelaySAPoint()
  * @model

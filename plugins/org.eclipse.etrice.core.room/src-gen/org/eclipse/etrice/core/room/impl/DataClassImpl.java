@@ -33,6 +33,7 @@ import org.eclipse.etrice.core.room.StandardOperation;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.impl.DataClassImpl#getBase <em>Base</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.DataClassImpl#getAnnotations <em>Annotations</em>}</li>
@@ -43,7 +44,6 @@ import org.eclipse.etrice.core.room.StandardOperation;
  *   <li>{@link org.eclipse.etrice.core.room.impl.DataClassImpl#getStructors <em>Structors</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.DataClassImpl#getAttributes <em>Attributes</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

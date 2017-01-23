@@ -31,5 +31,6 @@ Export-Package: org.eclipse.etrice.core.ui,
  org.eclipse.etrice.core.ui.internal,
  org.eclipse.etrice.core.ui.linking,
  org.eclipse.etrice.core.ui.preferences,
- org.eclipse.etrice.core.ui.quickfix
+ org.eclipse.etrice.core.ui.quickfix,
+ org.eclipse.etrice.core.ui.contentassist.antlr.internal
 Bundle-Activator: org.eclipse.etrice.core.ui.RoomUiActivator

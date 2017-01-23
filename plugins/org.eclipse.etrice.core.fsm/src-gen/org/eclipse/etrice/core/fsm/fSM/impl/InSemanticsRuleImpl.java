@@ -11,8 +11,6 @@ import org.eclipse.etrice.core.fsm.fSM.InSemanticsRule;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>In Semantics Rule</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * </p>
  *
  * @generated
  */

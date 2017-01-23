@@ -23,6 +23,7 @@ import org.eclipse.etrice.core.room.RoomPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.impl.AttributeImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.AttributeImpl#getSize <em>Size</em>}</li>
@@ -30,7 +31,6 @@ import org.eclipse.etrice.core.room.RoomPackage;
  *   <li>{@link org.eclipse.etrice.core.room.impl.AttributeImpl#getDefaultValueLiteral <em>Default Value Literal</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.AttributeImpl#getDocu <em>Docu</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

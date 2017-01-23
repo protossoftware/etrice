@@ -20,10 +20,10 @@ import org.eclipse.etrice.core.room.ServiceImplementation;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ServiceImplementationImpl#getSpp <em>Spp</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

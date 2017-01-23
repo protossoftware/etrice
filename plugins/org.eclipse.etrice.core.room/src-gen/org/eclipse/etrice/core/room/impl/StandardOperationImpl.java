@@ -17,10 +17,10 @@ import org.eclipse.etrice.core.room.StandardOperation;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.impl.StandardOperationImpl#isOverride <em>Override</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

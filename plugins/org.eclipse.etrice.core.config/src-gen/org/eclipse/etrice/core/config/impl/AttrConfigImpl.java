@@ -23,11 +23,11 @@ import org.eclipse.etrice.core.room.Attribute;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.config.impl.AttrConfigImpl#getAttribute <em>Attribute</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.config.impl.AttrConfigImpl#getValue <em>Value</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

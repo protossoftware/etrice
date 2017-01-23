@@ -28,12 +28,12 @@ import org.eclipse.etrice.core.config.ConfigPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.config.impl.AttrClassConfigImpl#getMin <em>Min</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.config.impl.AttrClassConfigImpl#getMax <em>Max</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.config.impl.AttrClassConfigImpl#getAttributes <em>Attributes</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

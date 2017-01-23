@@ -18,11 +18,11 @@ import org.eclipse.etrice.core.common.base.BasePackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.common.base.impl.AnnotationAttributeImpl#isOptional <em>Optional</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.common.base.impl.AnnotationAttributeImpl#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

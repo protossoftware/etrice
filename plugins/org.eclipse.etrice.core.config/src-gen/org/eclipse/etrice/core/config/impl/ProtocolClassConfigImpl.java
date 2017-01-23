@@ -22,12 +22,12 @@ import org.eclipse.etrice.core.room.ProtocolClass;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.config.impl.ProtocolClassConfigImpl#getProtocol <em>Protocol</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.config.impl.ProtocolClassConfigImpl#getRegular <em>Regular</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.config.impl.ProtocolClassConfigImpl#getConjugated <em>Conjugated</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

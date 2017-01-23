@@ -26,10 +26,10 @@ import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.fsm.fSM.impl.FSMModelImpl#getComponents <em>Components</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

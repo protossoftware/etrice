@@ -19,10 +19,10 @@ import org.eclipse.etrice.core.fsm.fSM.TrPointTerminal;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.fsm.fSM.impl.TrPointTerminalImpl#getTrPoint <em>Tr Point</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

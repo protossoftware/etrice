@@ -30,13 +30,13 @@ import org.eclipse.etrice.core.common.base.Documentation;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.common.base.impl.AnnotationTypeImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.common.base.impl.AnnotationTypeImpl#getDocu <em>Docu</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.common.base.impl.AnnotationTypeImpl#getTargets <em>Targets</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.common.base.impl.AnnotationTypeImpl#getAttributes <em>Attributes</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -22,11 +22,11 @@ import org.eclipse.etrice.core.room.Attribute;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.config.AttrConfig#getAttribute <em>Attribute</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.config.AttrConfig#getValue <em>Value</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.etrice.core.config.ConfigPackage#getAttrConfig()
  * @model

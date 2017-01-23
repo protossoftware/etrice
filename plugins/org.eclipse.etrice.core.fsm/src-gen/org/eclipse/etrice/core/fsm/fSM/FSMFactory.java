@@ -149,6 +149,15 @@ public interface FSMFactory extends EFactory
   ChoicePoint createChoicePoint();
 
   /**
+   * Returns a new object of class '<em>Transition Base</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Transition Base</em>'.
+   * @generated
+   */
+  TransitionBase createTransitionBase();
+
+  /**
    * Returns a new object of class '<em>Transition</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

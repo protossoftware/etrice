@@ -24,10 +24,10 @@ import org.eclipse.etrice.core.room.SubProtocol;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.impl.CompoundProtocolClassImpl#getSubProtocols <em>Sub Protocols</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

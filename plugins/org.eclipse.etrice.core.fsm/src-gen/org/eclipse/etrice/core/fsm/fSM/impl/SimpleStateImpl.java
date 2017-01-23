@@ -17,10 +17,10 @@ import org.eclipse.etrice.core.fsm.fSM.SimpleState;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.fsm.fSM.impl.SimpleStateImpl#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

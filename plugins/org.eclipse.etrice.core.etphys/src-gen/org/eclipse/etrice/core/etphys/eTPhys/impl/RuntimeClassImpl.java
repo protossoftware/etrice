@@ -23,12 +23,12 @@ import org.eclipse.etrice.core.etphys.eTPhys.ThreadModel;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.impl.RuntimeClassImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.impl.RuntimeClassImpl#getDocu <em>Docu</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.impl.RuntimeClassImpl#getThreadModel <em>Thread Model</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

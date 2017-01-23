@@ -22,5 +22,6 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.etrice.core.etphys.ui.contentassist,
  org.eclipse.etrice.core.etphys.ui.contentassist.antlr,
  org.eclipse.etrice.core.etphys.ui.internal,
- org.eclipse.etrice.core.etphys.ui.quickfix
+ org.eclipse.etrice.core.etphys.ui.quickfix,
+ org.eclipse.etrice.core.etphys.ui.contentassist.antlr.internal
 Bundle-Activator: org.eclipse.etrice.core.etphys.ui.internal.ETPhysActivator

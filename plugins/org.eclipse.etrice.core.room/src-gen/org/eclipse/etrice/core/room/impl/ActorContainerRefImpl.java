@@ -25,11 +25,11 @@ import org.eclipse.etrice.core.room.SubSystemRef;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorContainerRefImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorContainerRefImpl#getDocu <em>Docu</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

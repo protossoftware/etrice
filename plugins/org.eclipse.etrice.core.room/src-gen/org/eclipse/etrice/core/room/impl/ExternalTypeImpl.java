@@ -17,11 +17,11 @@ import org.eclipse.etrice.core.room.RoomPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ExternalTypeImpl#getTargetName <em>Target Name</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ExternalTypeImpl#getDefaultValueLiteral <em>Default Value Literal</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

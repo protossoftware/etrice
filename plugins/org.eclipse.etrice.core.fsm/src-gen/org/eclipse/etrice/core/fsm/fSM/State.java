@@ -20,6 +20,7 @@ import org.eclipse.etrice.core.common.base.Documentation;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.fsm.fSM.State#getDocu <em>Docu</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.fsm.fSM.State#getEntryCode <em>Entry Code</em>}</li>
@@ -27,7 +28,6 @@ import org.eclipse.etrice.core.common.base.Documentation;
  *   <li>{@link org.eclipse.etrice.core.fsm.fSM.State#getDoCode <em>Do Code</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.fsm.fSM.State#getSubgraph <em>Subgraph</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.etrice.core.fsm.fSM.FSMPackage#getState()
  * @model

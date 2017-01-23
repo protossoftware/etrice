@@ -23,11 +23,11 @@ import org.eclipse.etrice.core.room.LogicalThread;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.etmap.eTMap.impl.ThreadMappingImpl#getLogicalThread <em>Logical Thread</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.etmap.eTMap.impl.ThreadMappingImpl#getPhysicalThread <em>Physical Thread</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

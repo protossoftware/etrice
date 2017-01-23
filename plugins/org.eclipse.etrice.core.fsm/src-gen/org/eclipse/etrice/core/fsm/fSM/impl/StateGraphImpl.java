@@ -30,6 +30,7 @@ import org.eclipse.etrice.core.fsm.fSM.Transition;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.fsm.fSM.impl.StateGraphImpl#getStates <em>States</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.fsm.fSM.impl.StateGraphImpl#getTrPoints <em>Tr Points</em>}</li>
@@ -37,7 +38,6 @@ import org.eclipse.etrice.core.fsm.fSM.Transition;
  *   <li>{@link org.eclipse.etrice.core.fsm.fSM.impl.StateGraphImpl#getTransitions <em>Transitions</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.fsm.fSM.impl.StateGraphImpl#getRefinedTransitions <em>Refined Transitions</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -25,6 +25,7 @@ import org.eclipse.etrice.core.fsm.fSM.StateGraph;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.fsm.fSM.impl.StateImpl#getDocu <em>Docu</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.fsm.fSM.impl.StateImpl#getEntryCode <em>Entry Code</em>}</li>
@@ -32,7 +33,6 @@ import org.eclipse.etrice.core.fsm.fSM.StateGraph;
  *   <li>{@link org.eclipse.etrice.core.fsm.fSM.impl.StateImpl#getDoCode <em>Do Code</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.fsm.fSM.impl.StateImpl#getSubgraph <em>Subgraph</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

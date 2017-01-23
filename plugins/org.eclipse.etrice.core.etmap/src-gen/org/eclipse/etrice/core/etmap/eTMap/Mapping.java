@@ -23,12 +23,12 @@ import org.eclipse.etrice.core.room.LogicalSystem;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.etmap.eTMap.Mapping#getLogicalSys <em>Logical Sys</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.etmap.eTMap.Mapping#getPhysicalSys <em>Physical Sys</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.etmap.eTMap.Mapping#getSubsysMappings <em>Subsys Mappings</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.etrice.core.etmap.eTMap.ETMapPackage#getMapping()
  * @model

@@ -18,10 +18,10 @@ package org.eclipse.etrice.core.fsm.fSM;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.fsm.fSM.GuardedTransition#getGuard <em>Guard</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.etrice.core.fsm.fSM.FSMPackage#getGuardedTransition()
  * @model

@@ -124,6 +124,7 @@ ChoicePoint:
 // transitions
 //
 
+TransitionBase: Transition | RefinedTransition;
 Transition: InitialTransition | NonInitialTransition;
 NonInitialTransition: TransitionChainStartTransition | ContinuationTransition | CPBranchTransition;
 TransitionChainStartTransition: TriggeredTransition | GuardedTransition;

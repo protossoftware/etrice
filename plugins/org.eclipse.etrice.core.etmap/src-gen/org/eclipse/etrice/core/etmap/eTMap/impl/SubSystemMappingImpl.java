@@ -32,12 +32,12 @@ import org.eclipse.etrice.core.room.SubSystemRef;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.etmap.eTMap.impl.SubSystemMappingImpl#getLogicalSubSys <em>Logical Sub Sys</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.etmap.eTMap.impl.SubSystemMappingImpl#getNode <em>Node</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.etmap.eTMap.impl.SubSystemMappingImpl#getThreadMappings <em>Thread Mappings</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

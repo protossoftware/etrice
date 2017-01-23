@@ -10,10 +10,10 @@ package org.eclipse.etrice.core.common.base;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.common.base.BooleanLiteral#isIsTrue <em>Is True</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.etrice.core.common.base.BasePackage#getBooleanLiteral()
  * @model

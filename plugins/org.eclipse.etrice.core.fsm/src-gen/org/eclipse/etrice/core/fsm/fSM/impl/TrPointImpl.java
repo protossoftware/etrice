@@ -17,10 +17,10 @@ import org.eclipse.etrice.core.fsm.fSM.TrPoint;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.fsm.fSM.impl.TrPointImpl#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

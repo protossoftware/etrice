@@ -22,11 +22,11 @@ import org.eclipse.etrice.core.room.RoomPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.impl.RoomClassImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.RoomClassImpl#getDocu <em>Docu</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

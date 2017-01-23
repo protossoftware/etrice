@@ -18,13 +18,13 @@ import org.eclipse.etrice.core.common.base.LiteralType;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.PrimitiveType#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.PrimitiveType#getTargetName <em>Target Name</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.PrimitiveType#getCastName <em>Cast Name</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.PrimitiveType#getDefaultValueLiteral <em>Default Value Literal</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.etrice.core.room.RoomPackage#getPrimitiveType()
  * @model

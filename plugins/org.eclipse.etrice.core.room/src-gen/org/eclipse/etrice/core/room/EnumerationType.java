@@ -18,11 +18,11 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.EnumerationType#getPrimitiveType <em>Primitive Type</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.EnumerationType#getLiterals <em>Literals</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.etrice.core.room.RoomPackage#getEnumerationType()
  * @model

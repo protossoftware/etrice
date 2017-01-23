@@ -29,5 +29,6 @@ Export-Package: org.eclipse.etrice.core.common.ui.contentassist,
  org.eclipse.etrice.core.common.ui.internal,
  org.eclipse.etrice.core.common.ui.labeling,
  org.eclipse.etrice.core.common.ui.linking,
- org.eclipse.etrice.core.common.ui.quickfix
+ org.eclipse.etrice.core.common.ui.quickfix,
+ org.eclipse.etrice.core.common.ui.contentassist.antlr.internal
 Bundle-Activator: org.eclipse.etrice.core.common.ui.ETriceCoreCommonActivator

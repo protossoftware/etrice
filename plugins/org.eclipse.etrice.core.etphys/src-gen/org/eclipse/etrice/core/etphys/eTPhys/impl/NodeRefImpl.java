@@ -23,12 +23,12 @@ import org.eclipse.etrice.core.etphys.eTPhys.NodeRef;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.impl.NodeRefImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.impl.NodeRefImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.impl.NodeRefImpl#getDocu <em>Docu</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -21,10 +21,10 @@ package org.eclipse.etrice.core.room;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.StandardOperation#isOverride <em>Override</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.etrice.core.room.RoomPackage#getStandardOperation()
  * @model

@@ -24,11 +24,11 @@ import org.eclipse.etrice.core.fsm.fSM.FSMPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.fsm.fSM.impl.DetailCodeImpl#isUsed <em>Used</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.fsm.fSM.impl.DetailCodeImpl#getLines <em>Lines</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

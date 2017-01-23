@@ -23,12 +23,12 @@ import org.eclipse.etrice.core.room.SubSystemRef;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.etmap.eTMap.SubSystemMapping#getLogicalSubSys <em>Logical Sub Sys</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.etmap.eTMap.SubSystemMapping#getNode <em>Node</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.etmap.eTMap.SubSystemMapping#getThreadMappings <em>Thread Mappings</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.etrice.core.etmap.eTMap.ETMapPackage#getSubSystemMapping()
  * @model

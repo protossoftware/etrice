@@ -21,11 +21,11 @@ import org.eclipse.etrice.core.room.VarDecl;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.impl.VarDeclImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.VarDeclImpl#getRefType <em>Ref Type</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

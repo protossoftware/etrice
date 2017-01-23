@@ -30,6 +30,7 @@ import org.eclipse.etrice.core.room.SPP;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorContainerClassImpl#getServiceProvisionPoints <em>Service Provision Points</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorContainerClassImpl#getUserCode1 <em>User Code1</em>}</li>
@@ -37,7 +38,6 @@ import org.eclipse.etrice.core.room.SPP;
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorContainerClassImpl#getUserCode3 <em>User Code3</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorContainerClassImpl#getActorRefs <em>Actor Refs</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

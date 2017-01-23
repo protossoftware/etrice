@@ -29,12 +29,12 @@ import org.eclipse.etrice.core.room.RoomPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorInstanceMappingImpl#getPath <em>Path</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorInstanceMappingImpl#getThread <em>Thread</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorInstanceMappingImpl#getActorInstanceMappings <em>Actor Instance Mappings</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

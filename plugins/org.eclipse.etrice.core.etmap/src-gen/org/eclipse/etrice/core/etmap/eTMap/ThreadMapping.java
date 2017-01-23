@@ -21,11 +21,11 @@ import org.eclipse.etrice.core.room.LogicalThread;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.etmap.eTMap.ThreadMapping#getLogicalThread <em>Logical Thread</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.etmap.eTMap.ThreadMapping#getPhysicalThread <em>Physical Thread</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.etrice.core.etmap.eTMap.ETMapPackage#getThreadMapping()
  * @model

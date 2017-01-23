@@ -3,8 +3,8 @@
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.etrice.core.room/src-gen" editDirectory="/org.eclipse.etrice.core.room.edit/src"
     editorDirectory="/org.eclipse.etrice.core.room.editor/src" modelPluginID="org.eclipse.etrice.core.room"
     forceOverwrite="true" modelName="Room" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
-    complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.etrice.core.room.edit"
-    editorPluginID="org.eclipse.etrice.core.room.editor" runtimeVersion="2.10" usedGenPackages="platform:/resource/org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.genmodel#//base platform:/resource/org.eclipse.etrice.core.fsm/model/generated/FSM.genmodel#//fSM">
+    complianceLevel="6.0" copyrightFields="false" editPluginID="org.eclipse.etrice.core.room.edit"
+    editorPluginID="org.eclipse.etrice.core.room.editor" runtimeVersion="2.12" usedGenPackages="platform:/resource/org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.genmodel#//base platform:/resource/org.eclipse.etrice.core.fsm/model/generated/FSM.genmodel#//fSM">
   <genPackages prefix="Room" basePackage="org.eclipse.etrice.core" disposableProviderFactory="true"
       ecorePackage="Room.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="Room.ecore#//CommunicationType">

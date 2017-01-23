@@ -24,11 +24,11 @@ import org.eclipse.etrice.core.common.base.Documentation;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.RoomClass#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.RoomClass#getDocu <em>Docu</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.etrice.core.room.RoomPackage#getRoomClass()
  * @model

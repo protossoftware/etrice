@@ -11,8 +11,6 @@ import org.eclipse.etrice.core.fsm.fSM.OutSemanticsRule;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Out Semantics Rule</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * </p>
  *
  * @generated
  */

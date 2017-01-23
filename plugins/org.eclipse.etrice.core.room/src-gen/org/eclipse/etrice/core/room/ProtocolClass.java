@@ -40,6 +40,7 @@ import org.eclipse.etrice.core.fsm.fSM.ProtocolSemantics;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.ProtocolClass#getCommType <em>Comm Type</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ProtocolClass#getBase <em>Base</em>}</li>
@@ -52,7 +53,6 @@ import org.eclipse.etrice.core.fsm.fSM.ProtocolSemantics;
  *   <li>{@link org.eclipse.etrice.core.room.ProtocolClass#getConjugated <em>Conjugated</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ProtocolClass#getSemantics <em>Semantics</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.etrice.core.room.RoomPackage#getProtocolClass()
  * @model

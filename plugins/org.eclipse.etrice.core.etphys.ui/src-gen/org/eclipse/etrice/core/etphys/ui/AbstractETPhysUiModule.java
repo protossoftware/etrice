@@ -4,14 +4,13 @@
  */
 package org.eclipse.etrice.core.etphys.ui;
 
-import org.eclipse.xtext.ui.DefaultUiModule;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 
 /**
  * Manual modifications go to {org.eclipse.etrice.core.etphys.ui.ETPhysUiModule}
  */
 @SuppressWarnings("all")
-public abstract class AbstractETPhysUiModule extends DefaultUiModule {
+public abstract class AbstractETPhysUiModule extends org.eclipse.xtext.ui.DefaultUiModule {
 	
 	public AbstractETPhysUiModule(AbstractUIPlugin plugin) {
 		super(plugin);

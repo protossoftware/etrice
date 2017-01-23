@@ -25,6 +25,7 @@ import org.eclipse.etrice.core.room.SubSystemRef;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.config.ActorInstanceConfig#getRoot <em>Root</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.config.ActorInstanceConfig#getSubSystem <em>Sub System</em>}</li>
@@ -32,7 +33,6 @@ import org.eclipse.etrice.core.room.SubSystemRef;
  *   <li>{@link org.eclipse.etrice.core.config.ActorInstanceConfig#getAttributes <em>Attributes</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.config.ActorInstanceConfig#getPorts <em>Ports</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.etrice.core.config.ConfigPackage#getActorInstanceConfig()
  * @model

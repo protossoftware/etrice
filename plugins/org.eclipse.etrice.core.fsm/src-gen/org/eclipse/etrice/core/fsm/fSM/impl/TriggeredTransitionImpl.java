@@ -24,10 +24,10 @@ import org.eclipse.etrice.core.fsm.fSM.TriggeredTransition;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.fsm.fSM.impl.TriggeredTransitionImpl#getTriggers <em>Triggers</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

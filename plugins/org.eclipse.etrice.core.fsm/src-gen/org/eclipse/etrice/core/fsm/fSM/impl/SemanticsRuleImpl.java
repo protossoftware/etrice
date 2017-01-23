@@ -28,11 +28,11 @@ import org.eclipse.etrice.core.fsm.fSM.SemanticsRule;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.fsm.fSM.impl.SemanticsRuleImpl#getMsg <em>Msg</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.fsm.fSM.impl.SemanticsRuleImpl#getFollowUps <em>Follow Ups</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

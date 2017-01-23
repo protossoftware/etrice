@@ -26,10 +26,10 @@ import org.eclipse.etrice.core.common.base.LiteralArray;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.common.base.impl.LiteralArrayImpl#getLiterals <em>Literals</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

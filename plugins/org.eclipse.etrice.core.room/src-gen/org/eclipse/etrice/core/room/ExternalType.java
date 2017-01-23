@@ -16,11 +16,11 @@ package org.eclipse.etrice.core.room;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.ExternalType#getTargetName <em>Target Name</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ExternalType#getDefaultValueLiteral <em>Default Value Literal</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.etrice.core.room.RoomPackage#getExternalType()
  * @model

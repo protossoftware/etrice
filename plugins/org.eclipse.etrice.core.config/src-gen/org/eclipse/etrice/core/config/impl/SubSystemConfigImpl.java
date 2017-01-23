@@ -23,12 +23,12 @@ import org.eclipse.etrice.core.room.SubSystemRef;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.config.impl.SubSystemConfigImpl#getRoot <em>Root</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.config.impl.SubSystemConfigImpl#getSubSystem <em>Sub System</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.config.impl.SubSystemConfigImpl#getDynConfig <em>Dyn Config</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

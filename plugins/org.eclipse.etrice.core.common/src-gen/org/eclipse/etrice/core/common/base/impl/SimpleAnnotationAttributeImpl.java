@@ -18,10 +18,10 @@ import org.eclipse.etrice.core.common.base.SimpleAnnotationAttribute;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.common.base.impl.SimpleAnnotationAttributeImpl#getType <em>Type</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

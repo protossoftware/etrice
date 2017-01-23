@@ -21,11 +21,11 @@ import org.eclipse.etrice.core.common.base.Literal;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.common.base.impl.KeyValueImpl#getKey <em>Key</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.common.base.impl.KeyValueImpl#getValue <em>Value</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

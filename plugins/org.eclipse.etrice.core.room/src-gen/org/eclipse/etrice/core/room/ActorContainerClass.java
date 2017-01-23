@@ -22,6 +22,7 @@ import org.eclipse.etrice.core.fsm.fSM.DetailCode;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.ActorContainerClass#getServiceProvisionPoints <em>Service Provision Points</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ActorContainerClass#getUserCode1 <em>User Code1</em>}</li>
@@ -29,7 +30,6 @@ import org.eclipse.etrice.core.fsm.fSM.DetailCode;
  *   <li>{@link org.eclipse.etrice.core.room.ActorContainerClass#getUserCode3 <em>User Code3</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ActorContainerClass#getActorRefs <em>Actor Refs</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.etrice.core.room.RoomPackage#getActorContainerClass()
  * @model

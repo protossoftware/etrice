@@ -20,10 +20,10 @@ import org.eclipse.etrice.core.fsm.fSM.TransitionTerminal;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.fsm.fSM.impl.NonInitialTransitionImpl#getFrom <em>From</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

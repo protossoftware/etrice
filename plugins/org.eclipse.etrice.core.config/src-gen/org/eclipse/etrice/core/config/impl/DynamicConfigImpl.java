@@ -18,13 +18,13 @@ import org.eclipse.etrice.core.config.DynamicConfig;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.config.impl.DynamicConfigImpl#getFilePath <em>File Path</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.config.impl.DynamicConfigImpl#getUserCode1 <em>User Code1</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.config.impl.DynamicConfigImpl#getUserCode2 <em>User Code2</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.config.impl.DynamicConfigImpl#getPolling <em>Polling</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

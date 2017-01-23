@@ -12,11 +12,11 @@ import org.eclipse.etrice.core.room.EnumerationType;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.config.EnumConfigValue#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.config.EnumConfigValue#getValue <em>Value</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.etrice.core.config.ConfigPackage#getEnumConfigValue()
  * @model

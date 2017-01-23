@@ -50,7 +50,7 @@ public class FSMSwitch<T> extends Switch<T>
    * Checks whether this is a switch for the given package.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @parameter ePackage the package in question.
+   * @param ePackage the package in question.
    * @return whether this is a switch for the given package.
    * @generated
    */
@@ -193,11 +193,19 @@ public class FSMSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case FSMPackage.TRANSITION_BASE:
+      {
+        TransitionBase transitionBase = (TransitionBase)theEObject;
+        T result = caseTransitionBase(transitionBase);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case FSMPackage.TRANSITION:
       {
         Transition transition = (Transition)theEObject;
         T result = caseTransition(transition);
         if (result == null) result = caseStateGraphItem(transition);
+        if (result == null) result = caseTransitionBase(transition);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -207,6 +215,7 @@ public class FSMSwitch<T> extends Switch<T>
         T result = caseNonInitialTransition(nonInitialTransition);
         if (result == null) result = caseTransition(nonInitialTransition);
         if (result == null) result = caseStateGraphItem(nonInitialTransition);
+        if (result == null) result = caseTransitionBase(nonInitialTransition);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -217,6 +226,7 @@ public class FSMSwitch<T> extends Switch<T>
         if (result == null) result = caseNonInitialTransition(transitionChainStartTransition);
         if (result == null) result = caseTransition(transitionChainStartTransition);
         if (result == null) result = caseStateGraphItem(transitionChainStartTransition);
+        if (result == null) result = caseTransitionBase(transitionChainStartTransition);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -226,6 +236,7 @@ public class FSMSwitch<T> extends Switch<T>
         T result = caseInitialTransition(initialTransition);
         if (result == null) result = caseTransition(initialTransition);
         if (result == null) result = caseStateGraphItem(initialTransition);
+        if (result == null) result = caseTransitionBase(initialTransition);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -236,6 +247,7 @@ public class FSMSwitch<T> extends Switch<T>
         if (result == null) result = caseNonInitialTransition(continuationTransition);
         if (result == null) result = caseTransition(continuationTransition);
         if (result == null) result = caseStateGraphItem(continuationTransition);
+        if (result == null) result = caseTransitionBase(continuationTransition);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -247,6 +259,7 @@ public class FSMSwitch<T> extends Switch<T>
         if (result == null) result = caseNonInitialTransition(triggeredTransition);
         if (result == null) result = caseTransition(triggeredTransition);
         if (result == null) result = caseStateGraphItem(triggeredTransition);
+        if (result == null) result = caseTransitionBase(triggeredTransition);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -258,6 +271,7 @@ public class FSMSwitch<T> extends Switch<T>
         if (result == null) result = caseNonInitialTransition(guardedTransition);
         if (result == null) result = caseTransition(guardedTransition);
         if (result == null) result = caseStateGraphItem(guardedTransition);
+        if (result == null) result = caseTransitionBase(guardedTransition);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -268,6 +282,7 @@ public class FSMSwitch<T> extends Switch<T>
         if (result == null) result = caseNonInitialTransition(cpBranchTransition);
         if (result == null) result = caseTransition(cpBranchTransition);
         if (result == null) result = caseStateGraphItem(cpBranchTransition);
+        if (result == null) result = caseTransitionBase(cpBranchTransition);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -275,6 +290,7 @@ public class FSMSwitch<T> extends Switch<T>
       {
         RefinedTransition refinedTransition = (RefinedTransition)theEObject;
         T result = caseRefinedTransition(refinedTransition);
+        if (result == null) result = caseTransitionBase(refinedTransition);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -606,6 +622,22 @@ public class FSMSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseChoicePoint(ChoicePoint object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Transition Base</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Transition Base</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseTransitionBase(TransitionBase object)
   {
     return null;
   }

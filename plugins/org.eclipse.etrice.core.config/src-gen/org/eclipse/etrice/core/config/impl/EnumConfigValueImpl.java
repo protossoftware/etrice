@@ -21,11 +21,11 @@ import org.eclipse.etrice.core.room.EnumerationType;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.config.impl.EnumConfigValueImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.config.impl.EnumConfigValueImpl#getValue <em>Value</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

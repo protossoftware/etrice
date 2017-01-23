@@ -19,6 +19,7 @@ import org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.impl.PhysicalThreadImpl#isDefault <em>Default</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.impl.PhysicalThreadImpl#getName <em>Name</em>}</li>
@@ -29,7 +30,6 @@ import org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread;
  *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.impl.PhysicalThreadImpl#getMsgblocksize <em>Msgblocksize</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.impl.PhysicalThreadImpl#getMsgpoolsize <em>Msgpoolsize</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

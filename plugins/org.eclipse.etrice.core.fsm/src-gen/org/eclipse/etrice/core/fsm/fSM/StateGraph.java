@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.fsm.fSM.StateGraph#getStates <em>States</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.fsm.fSM.StateGraph#getTrPoints <em>Tr Points</em>}</li>
@@ -26,7 +27,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.etrice.core.fsm.fSM.StateGraph#getTransitions <em>Transitions</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.fsm.fSM.StateGraph#getRefinedTransitions <em>Refined Transitions</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.etrice.core.fsm.fSM.FSMPackage#getStateGraph()
  * @model

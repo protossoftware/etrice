@@ -26,10 +26,10 @@ import org.eclipse.etrice.core.fsm.fSM.SemanticsRule;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.fsm.fSM.impl.ProtocolSemanticsImpl#getRules <em>Rules</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

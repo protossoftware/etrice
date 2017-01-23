@@ -39,6 +39,7 @@ import org.eclipse.etrice.core.room.SubSystemClass;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.impl.RoomModelImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.RoomModelImpl#getDocu <em>Docu</em>}</li>
@@ -53,7 +54,6 @@ import org.eclipse.etrice.core.room.SubSystemClass;
  *   <li>{@link org.eclipse.etrice.core.room.impl.RoomModelImpl#getSystems <em>Systems</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.RoomModelImpl#getAnnotationTypes <em>Annotation Types</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

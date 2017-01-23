@@ -30,11 +30,11 @@ import org.eclipse.etrice.core.room.InterfaceItem;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.config.impl.PortInstanceConfigImpl#getItem <em>Item</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.config.impl.PortInstanceConfigImpl#getAttributes <em>Attributes</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

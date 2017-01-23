@@ -20,11 +20,11 @@ import org.eclipse.etrice.core.room.RoomPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.impl.RefableTypeImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.RefableTypeImpl#isRef <em>Ref</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

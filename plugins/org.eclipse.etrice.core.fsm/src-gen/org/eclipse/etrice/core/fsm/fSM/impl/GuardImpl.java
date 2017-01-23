@@ -21,10 +21,10 @@ import org.eclipse.etrice.core.fsm.fSM.Guard;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.fsm.fSM.impl.GuardImpl#getGuard <em>Guard</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

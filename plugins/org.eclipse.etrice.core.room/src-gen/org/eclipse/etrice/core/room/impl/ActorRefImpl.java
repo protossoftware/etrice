@@ -20,12 +20,12 @@ import org.eclipse.etrice.core.room.RoomPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorRefImpl#getRefType <em>Ref Type</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorRefImpl#getMultiplicity <em>Multiplicity</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorRefImpl#getType <em>Type</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

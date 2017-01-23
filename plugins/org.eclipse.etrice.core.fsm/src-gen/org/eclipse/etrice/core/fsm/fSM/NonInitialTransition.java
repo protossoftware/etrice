@@ -20,10 +20,10 @@ package org.eclipse.etrice.core.fsm.fSM;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.fsm.fSM.NonInitialTransition#getFrom <em>From</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.etrice.core.fsm.fSM.FSMPackage#getNonInitialTransition()
  * @model

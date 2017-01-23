@@ -22,11 +22,11 @@ import org.eclipse.etrice.core.room.SPPoint;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.impl.LayerConnectionImpl#getFrom <em>From</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.LayerConnectionImpl#getTo <em>To</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

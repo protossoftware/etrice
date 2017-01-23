@@ -19,10 +19,10 @@ import org.eclipse.etrice.core.common.base.EnumAnnotationAttribute;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.common.base.impl.EnumAnnotationAttributeImpl#getValues <em>Values</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

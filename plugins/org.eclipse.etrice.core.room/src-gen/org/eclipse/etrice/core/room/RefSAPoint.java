@@ -15,10 +15,10 @@ package org.eclipse.etrice.core.room;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.RefSAPoint#getRef <em>Ref</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.etrice.core.room.RoomPackage#getRefSAPoint()
  * @model

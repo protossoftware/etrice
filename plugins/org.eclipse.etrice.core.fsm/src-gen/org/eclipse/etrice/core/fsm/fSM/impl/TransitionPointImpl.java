@@ -17,10 +17,10 @@ import org.eclipse.etrice.core.fsm.fSM.TransitionPoint;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.fsm.fSM.impl.TransitionPointImpl#isHandler <em>Handler</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

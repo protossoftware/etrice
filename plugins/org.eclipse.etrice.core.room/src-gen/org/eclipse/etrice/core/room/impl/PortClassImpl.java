@@ -32,13 +32,13 @@ import org.eclipse.etrice.core.room.RoomPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.impl.PortClassImpl#getUserCode <em>User Code</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.PortClassImpl#getMsgHandlers <em>Msg Handlers</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.PortClassImpl#getOperations <em>Operations</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.PortClassImpl#getAttributes <em>Attributes</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

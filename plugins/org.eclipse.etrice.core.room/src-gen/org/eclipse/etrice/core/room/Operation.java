@@ -26,6 +26,7 @@ import org.eclipse.etrice.core.fsm.fSM.DetailCode;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.Operation#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.Operation#getArguments <em>Arguments</em>}</li>
@@ -33,7 +34,6 @@ import org.eclipse.etrice.core.fsm.fSM.DetailCode;
  *   <li>{@link org.eclipse.etrice.core.room.Operation#getDocu <em>Docu</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.Operation#getDetailCode <em>Detail Code</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.etrice.core.room.RoomPackage#getOperation()
  * @model

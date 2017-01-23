@@ -47,6 +47,7 @@ import org.eclipse.etrice.core.fsm.fSM.SubStateTrPointTerminal;
 import org.eclipse.etrice.core.fsm.fSM.TrPoint;
 import org.eclipse.etrice.core.fsm.fSM.TrPointTerminal;
 import org.eclipse.etrice.core.fsm.fSM.Transition;
+import org.eclipse.etrice.core.fsm.fSM.TransitionBase;
 import org.eclipse.etrice.core.fsm.fSM.TransitionChainStartTransition;
 import org.eclipse.etrice.core.fsm.fSM.TransitionPoint;
 import org.eclipse.etrice.core.fsm.fSM.TransitionTerminal;
@@ -158,6 +159,13 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * @generated
    */
   private EClass choicePointEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass transitionBaseEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -778,6 +786,36 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getTransitionBase()
+  {
+    return transitionBaseEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getTransitionBase_Docu()
+  {
+    return (EReference)transitionBaseEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getTransitionBase_Action()
+  {
+    return (EReference)transitionBaseEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getTransition()
   {
     return transitionEClass;
@@ -801,26 +839,6 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
   public EReference getTransition_To()
   {
     return (EReference)transitionEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getTransition_Docu()
-  {
-    return (EReference)transitionEClass.getEStructuralFeatures().get(2);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getTransition_Action()
-  {
-    return (EReference)transitionEClass.getEStructuralFeatures().get(3);
   }
 
   /**
@@ -951,26 +969,6 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
   public EReference getRefinedTransition_Target()
   {
     return (EReference)refinedTransitionEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getRefinedTransition_Docu()
-  {
-    return (EReference)refinedTransitionEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getRefinedTransition_Action()
-  {
-    return (EReference)refinedTransitionEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -1345,11 +1343,13 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
     createEAttribute(choicePointEClass, CHOICE_POINT__NAME);
     createEReference(choicePointEClass, CHOICE_POINT__DOCU);
 
+    transitionBaseEClass = createEClass(TRANSITION_BASE);
+    createEReference(transitionBaseEClass, TRANSITION_BASE__DOCU);
+    createEReference(transitionBaseEClass, TRANSITION_BASE__ACTION);
+
     transitionEClass = createEClass(TRANSITION);
     createEAttribute(transitionEClass, TRANSITION__NAME);
     createEReference(transitionEClass, TRANSITION__TO);
-    createEReference(transitionEClass, TRANSITION__DOCU);
-    createEReference(transitionEClass, TRANSITION__ACTION);
 
     nonInitialTransitionEClass = createEClass(NON_INITIAL_TRANSITION);
     createEReference(nonInitialTransitionEClass, NON_INITIAL_TRANSITION__FROM);
@@ -1371,8 +1371,6 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
 
     refinedTransitionEClass = createEClass(REFINED_TRANSITION);
     createEReference(refinedTransitionEClass, REFINED_TRANSITION__TARGET);
-    createEReference(refinedTransitionEClass, REFINED_TRANSITION__DOCU);
-    createEReference(refinedTransitionEClass, REFINED_TRANSITION__ACTION);
 
     transitionTerminalEClass = createEClass(TRANSITION_TERMINAL);
 
@@ -1463,6 +1461,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
     exitPointEClass.getESuperTypes().add(this.getTrPoint());
     choicePointEClass.getESuperTypes().add(this.getStateGraphNode());
     transitionEClass.getESuperTypes().add(this.getStateGraphItem());
+    transitionEClass.getESuperTypes().add(this.getTransitionBase());
     nonInitialTransitionEClass.getESuperTypes().add(this.getTransition());
     transitionChainStartTransitionEClass.getESuperTypes().add(this.getNonInitialTransition());
     initialTransitionEClass.getESuperTypes().add(this.getTransition());
@@ -1470,6 +1469,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
     triggeredTransitionEClass.getESuperTypes().add(this.getTransitionChainStartTransition());
     guardedTransitionEClass.getESuperTypes().add(this.getTransitionChainStartTransition());
     cpBranchTransitionEClass.getESuperTypes().add(this.getNonInitialTransition());
+    refinedTransitionEClass.getESuperTypes().add(this.getTransitionBase());
     stateTerminalEClass.getESuperTypes().add(this.getTransitionTerminal());
     trPointTerminalEClass.getESuperTypes().add(this.getTransitionTerminal());
     subStateTrPointTerminalEClass.getESuperTypes().add(this.getTransitionTerminal());
@@ -1534,11 +1534,13 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
     initEAttribute(getChoicePoint_Name(), ecorePackage.getEString(), "name", null, 0, 1, ChoicePoint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getChoicePoint_Docu(), theBasePackage.getDocumentation(), null, "docu", null, 0, 1, ChoicePoint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+    initEClass(transitionBaseEClass, TransitionBase.class, "TransitionBase", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getTransitionBase_Docu(), theBasePackage.getDocumentation(), null, "docu", null, 0, 1, TransitionBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getTransitionBase_Action(), this.getDetailCode(), null, "action", null, 0, 1, TransitionBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
     initEClass(transitionEClass, Transition.class, "Transition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getTransition_Name(), ecorePackage.getEString(), "name", null, 0, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getTransition_To(), this.getTransitionTerminal(), null, "to", null, 0, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getTransition_Docu(), theBasePackage.getDocumentation(), null, "docu", null, 0, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getTransition_Action(), this.getDetailCode(), null, "action", null, 0, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(nonInitialTransitionEClass, NonInitialTransition.class, "NonInitialTransition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getNonInitialTransition_From(), this.getTransitionTerminal(), null, "from", null, 0, 1, NonInitialTransition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1560,8 +1562,6 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
 
     initEClass(refinedTransitionEClass, RefinedTransition.class, "RefinedTransition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getRefinedTransition_Target(), this.getTransition(), null, "target", null, 0, 1, RefinedTransition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getRefinedTransition_Docu(), theBasePackage.getDocumentation(), null, "docu", null, 0, 1, RefinedTransition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getRefinedTransition_Action(), this.getDetailCode(), null, "action", null, 0, 1, RefinedTransition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(transitionTerminalEClass, TransitionTerminal.class, "TransitionTerminal", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

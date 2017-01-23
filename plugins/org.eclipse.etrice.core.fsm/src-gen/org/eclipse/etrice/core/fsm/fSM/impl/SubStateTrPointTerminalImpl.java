@@ -20,11 +20,11 @@ import org.eclipse.etrice.core.fsm.fSM.TrPoint;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.fsm.fSM.impl.SubStateTrPointTerminalImpl#getTrPoint <em>Tr Point</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.fsm.fSM.impl.SubStateTrPointTerminalImpl#getState <em>State</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

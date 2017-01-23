@@ -4,14 +4,13 @@
  */
 package org.eclipse.etrice.core.common.ui;
 
-import org.eclipse.xtext.ui.DefaultUiModule;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 
 /**
  * Manual modifications go to {org.eclipse.etrice.core.common.ui.BaseTestUiModule}
  */
 @SuppressWarnings("all")
-public abstract class AbstractBaseTestUiModule extends DefaultUiModule {
+public abstract class AbstractBaseTestUiModule extends org.eclipse.xtext.ui.DefaultUiModule {
 	
 	public AbstractBaseTestUiModule(AbstractUIPlugin plugin) {
 		super(plugin);
@@ -41,6 +40,11 @@ public abstract class AbstractBaseTestUiModule extends DefaultUiModule {
 	// contributed by org.eclipse.xtext.generator.builder.BuilderIntegrationFragment
 	public Class<? extends org.eclipse.xtext.ui.editor.IXtextEditorCallback> bindIXtextEditorCallback() {
 		return org.eclipse.xtext.builder.nature.NatureAddingEditorCallback.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.builder.BuilderIntegrationFragment
+	public Class<? extends org.eclipse.xtext.generator.IContextualOutputConfigurationProvider> bindIContextualOutputConfigurationProvider() {
+		return org.eclipse.xtext.builder.EclipseOutputConfigurationProvider.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.builder.BuilderIntegrationFragment

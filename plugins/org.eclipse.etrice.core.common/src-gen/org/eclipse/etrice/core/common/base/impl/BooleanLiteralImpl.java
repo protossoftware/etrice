@@ -17,10 +17,10 @@ import org.eclipse.etrice.core.common.base.BooleanLiteral;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.common.base.impl.BooleanLiteralImpl#isIsTrue <em>Is True</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

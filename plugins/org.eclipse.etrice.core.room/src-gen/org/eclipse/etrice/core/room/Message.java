@@ -23,13 +23,13 @@ import org.eclipse.etrice.core.common.base.Documentation;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.Message#isPriv <em>Priv</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.Message#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.Message#getData <em>Data</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.Message#getDocu <em>Docu</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.etrice.core.room.RoomPackage#getMessage()
  * @model

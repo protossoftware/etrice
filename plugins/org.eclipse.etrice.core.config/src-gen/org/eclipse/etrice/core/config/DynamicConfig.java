@@ -19,13 +19,13 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.config.DynamicConfig#getFilePath <em>File Path</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.config.DynamicConfig#getUserCode1 <em>User Code1</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.config.DynamicConfig#getUserCode2 <em>User Code2</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.config.DynamicConfig#getPolling <em>Polling</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.etrice.core.config.ConfigPackage#getDynamicConfig()
  * @model

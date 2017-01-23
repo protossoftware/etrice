@@ -54,6 +54,7 @@ import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getInterfacePorts <em>Interface Ports</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getStructureDocu <em>Structure Docu</em>}</li>
@@ -67,7 +68,6 @@ import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
  *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getOperations <em>Operations</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ActorClass#getStructors <em>Structors</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.etrice.core.room.RoomPackage#getActorClass()
  * @model

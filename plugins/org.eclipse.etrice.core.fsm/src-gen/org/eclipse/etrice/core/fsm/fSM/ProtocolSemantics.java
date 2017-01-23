@@ -25,10 +25,10 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.fsm.fSM.ProtocolSemantics#getRules <em>Rules</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.etrice.core.fsm.fSM.FSMPackage#getProtocolSemantics()
  * @model

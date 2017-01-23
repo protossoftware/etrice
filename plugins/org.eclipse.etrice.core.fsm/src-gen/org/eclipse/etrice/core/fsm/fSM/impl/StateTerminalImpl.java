@@ -19,10 +19,10 @@ import org.eclipse.etrice.core.fsm.fSM.StateTerminal;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.fsm.fSM.impl.StateTerminalImpl#getState <em>State</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

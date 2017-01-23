@@ -32,6 +32,7 @@ import org.eclipse.etrice.core.etphys.eTPhys.RuntimeClass;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.impl.PhysicalModelImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.impl.PhysicalModelImpl#getImports <em>Imports</em>}</li>
@@ -39,7 +40,6 @@ import org.eclipse.etrice.core.etphys.eTPhys.RuntimeClass;
  *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.impl.PhysicalModelImpl#getNodeClasses <em>Node Classes</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.impl.PhysicalModelImpl#getRuntimeClasses <em>Runtime Classes</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

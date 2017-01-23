@@ -13,8 +13,6 @@ import org.eclipse.etrice.core.fsm.fSM.TransitionTerminal;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Transition Terminal</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * </p>
  *
  * @generated
  */

@@ -24,5 +24,6 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.etrice.core.etmap.ui.contentassist,
  org.eclipse.etrice.core.etmap.ui.contentassist.antlr,
  org.eclipse.etrice.core.etmap.ui.internal,
- org.eclipse.etrice.core.etmap.ui.quickfix
+ org.eclipse.etrice.core.etmap.ui.quickfix,
+ org.eclipse.etrice.core.etmap.ui.contentassist.antlr.internal
 Bundle-Activator: org.eclipse.etrice.core.etmap.ui.internal.ETMapActivator

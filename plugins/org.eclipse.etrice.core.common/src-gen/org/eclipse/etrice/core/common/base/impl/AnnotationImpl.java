@@ -29,11 +29,11 @@ import org.eclipse.etrice.core.common.base.KeyValue;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.common.base.impl.AnnotationImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.common.base.impl.AnnotationImpl#getAttributes <em>Attributes</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

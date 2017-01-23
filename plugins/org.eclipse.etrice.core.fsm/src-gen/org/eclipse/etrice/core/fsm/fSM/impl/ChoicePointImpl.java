@@ -21,11 +21,11 @@ import org.eclipse.etrice.core.fsm.fSM.FSMPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.fsm.fSM.impl.ChoicePointImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.fsm.fSM.impl.ChoicePointImpl#getDocu <em>Docu</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

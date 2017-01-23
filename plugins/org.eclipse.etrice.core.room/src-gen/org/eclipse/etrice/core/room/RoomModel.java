@@ -25,6 +25,7 @@ import org.eclipse.etrice.core.common.base.Import;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.RoomModel#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.RoomModel#getDocu <em>Docu</em>}</li>
@@ -39,7 +40,6 @@ import org.eclipse.etrice.core.common.base.Import;
  *   <li>{@link org.eclipse.etrice.core.room.RoomModel#getSystems <em>Systems</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.RoomModel#getAnnotationTypes <em>Annotation Types</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.etrice.core.room.RoomPackage#getRoomModel()
  * @model

@@ -17,12 +17,12 @@ import org.eclipse.etrice.core.room.SubSystemRef;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.config.SubSystemConfig#getRoot <em>Root</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.config.SubSystemConfig#getSubSystem <em>Sub System</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.config.SubSystemConfig#getDynConfig <em>Dyn Config</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.etrice.core.config.ConfigPackage#getSubSystemConfig()
  * @model

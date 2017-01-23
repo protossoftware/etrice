@@ -20,6 +20,7 @@ import org.eclipse.etrice.core.common.base.Documentation;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.NodeClass#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.NodeClass#getDocu <em>Docu</em>}</li>
@@ -28,7 +29,6 @@ import org.eclipse.etrice.core.common.base.Documentation;
  *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.NodeClass#getPriomax <em>Priomax</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.NodeClass#getThreads <em>Threads</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage#getNodeClass()
  * @model

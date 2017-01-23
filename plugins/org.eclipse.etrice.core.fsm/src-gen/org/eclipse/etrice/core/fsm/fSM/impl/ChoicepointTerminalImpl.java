@@ -19,10 +19,10 @@ import org.eclipse.etrice.core.fsm.fSM.FSMPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.fsm.fSM.impl.ChoicepointTerminalImpl#getCp <em>Cp</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

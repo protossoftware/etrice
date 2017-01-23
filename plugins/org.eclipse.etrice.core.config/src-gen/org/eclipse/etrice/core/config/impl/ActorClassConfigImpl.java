@@ -29,11 +29,11 @@ import org.eclipse.etrice.core.room.ActorClass;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.config.impl.ActorClassConfigImpl#getActor <em>Actor</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.config.impl.ActorClassConfigImpl#getAttributes <em>Attributes</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

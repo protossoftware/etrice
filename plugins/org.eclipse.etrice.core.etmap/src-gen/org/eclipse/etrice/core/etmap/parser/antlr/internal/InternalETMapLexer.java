@@ -63,15 +63,15 @@ public class InternalETMapLexer extends Lexer {
         super(input,state);
 
     }
-    public String getGrammarFileName() { return "../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g"; }
+    public String getGrammarFileName() { return "InternalETMap.g"; }
 
     // $ANTLR start "T__12"
     public final void mT__12() throws RecognitionException {
         try {
             int _type = T__12;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:11:7: ( 'MappingModel' )
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:11:9: 'MappingModel'
+            // InternalETMap.g:11:7: ( 'MappingModel' )
+            // InternalETMap.g:11:9: 'MappingModel'
             {
             match("MappingModel"); 
 
@@ -91,8 +91,8 @@ public class InternalETMapLexer extends Lexer {
         try {
             int _type = T__13;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:12:7: ( '{' )
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:12:9: '{'
+            // InternalETMap.g:12:7: ( '{' )
+            // InternalETMap.g:12:9: '{'
             {
             match('{'); 
 
@@ -111,8 +111,8 @@ public class InternalETMapLexer extends Lexer {
         try {
             int _type = T__14;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:13:7: ( '}' )
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:13:9: '}'
+            // InternalETMap.g:13:7: ( '}' )
+            // InternalETMap.g:13:9: '}'
             {
             match('}'); 
 
@@ -131,8 +131,8 @@ public class InternalETMapLexer extends Lexer {
         try {
             int _type = T__15;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:14:7: ( 'Mapping' )
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:14:9: 'Mapping'
+            // InternalETMap.g:14:7: ( 'Mapping' )
+            // InternalETMap.g:14:9: 'Mapping'
             {
             match("Mapping"); 
 
@@ -152,8 +152,8 @@ public class InternalETMapLexer extends Lexer {
         try {
             int _type = T__16;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:15:7: ( '->' )
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:15:9: '->'
+            // InternalETMap.g:15:7: ( '->' )
+            // InternalETMap.g:15:9: '->'
             {
             match("->"); 
 
@@ -173,8 +173,8 @@ public class InternalETMapLexer extends Lexer {
         try {
             int _type = T__17;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:16:7: ( 'SubSystemMapping' )
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:16:9: 'SubSystemMapping'
+            // InternalETMap.g:16:7: ( 'SubSystemMapping' )
+            // InternalETMap.g:16:9: 'SubSystemMapping'
             {
             match("SubSystemMapping"); 
 
@@ -194,8 +194,8 @@ public class InternalETMapLexer extends Lexer {
         try {
             int _type = T__18;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:17:7: ( 'ThreadMapping' )
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:17:9: 'ThreadMapping'
+            // InternalETMap.g:17:7: ( 'ThreadMapping' )
+            // InternalETMap.g:17:9: 'ThreadMapping'
             {
             match("ThreadMapping"); 
 
@@ -215,8 +215,8 @@ public class InternalETMapLexer extends Lexer {
         try {
             int _type = T__19;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:18:7: ( '=' )
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:18:9: '='
+            // InternalETMap.g:18:7: ( '=' )
+            // InternalETMap.g:18:9: '='
             {
             match('='); 
 
@@ -235,8 +235,8 @@ public class InternalETMapLexer extends Lexer {
         try {
             int _type = T__20;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:19:7: ( 'optional' )
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:19:9: 'optional'
+            // InternalETMap.g:19:7: ( 'optional' )
+            // InternalETMap.g:19:9: 'optional'
             {
             match("optional"); 
 
@@ -256,8 +256,8 @@ public class InternalETMapLexer extends Lexer {
         try {
             int _type = T__21;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:20:7: ( 'mandatory' )
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:20:9: 'mandatory'
+            // InternalETMap.g:20:7: ( 'mandatory' )
+            // InternalETMap.g:20:9: 'mandatory'
             {
             match("mandatory"); 
 
@@ -277,8 +277,8 @@ public class InternalETMapLexer extends Lexer {
         try {
             int _type = T__22;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:21:7: ( 'attribute' )
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:21:9: 'attribute'
+            // InternalETMap.g:21:7: ( 'attribute' )
+            // InternalETMap.g:21:9: 'attribute'
             {
             match("attribute"); 
 
@@ -298,8 +298,8 @@ public class InternalETMapLexer extends Lexer {
         try {
             int _type = T__23;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:22:7: ( ':' )
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:22:9: ':'
+            // InternalETMap.g:22:7: ( ':' )
+            // InternalETMap.g:22:9: ':'
             {
             match(':'); 
 
@@ -318,8 +318,8 @@ public class InternalETMapLexer extends Lexer {
         try {
             int _type = T__24;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:23:7: ( ',' )
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:23:9: ','
+            // InternalETMap.g:23:7: ( ',' )
+            // InternalETMap.g:23:9: ','
             {
             match(','); 
 
@@ -338,8 +338,8 @@ public class InternalETMapLexer extends Lexer {
         try {
             int _type = T__25;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:24:7: ( 'import' )
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:24:9: 'import'
+            // InternalETMap.g:24:7: ( 'import' )
+            // InternalETMap.g:24:9: 'import'
             {
             match("import"); 
 
@@ -359,8 +359,8 @@ public class InternalETMapLexer extends Lexer {
         try {
             int _type = T__26;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:25:7: ( 'from' )
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:25:9: 'from'
+            // InternalETMap.g:25:7: ( 'from' )
+            // InternalETMap.g:25:9: 'from'
             {
             match("from"); 
 
@@ -380,8 +380,8 @@ public class InternalETMapLexer extends Lexer {
         try {
             int _type = T__27;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:26:7: ( 'model' )
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:26:9: 'model'
+            // InternalETMap.g:26:7: ( 'model' )
+            // InternalETMap.g:26:9: 'model'
             {
             match("model"); 
 
@@ -401,8 +401,8 @@ public class InternalETMapLexer extends Lexer {
         try {
             int _type = T__28;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:27:7: ( '.*' )
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:27:9: '.*'
+            // InternalETMap.g:27:7: ( '.*' )
+            // InternalETMap.g:27:9: '.*'
             {
             match(".*"); 
 
@@ -422,8 +422,8 @@ public class InternalETMapLexer extends Lexer {
         try {
             int _type = T__29;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:28:7: ( '[' )
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:28:9: '['
+            // InternalETMap.g:28:7: ( '[' )
+            // InternalETMap.g:28:9: '['
             {
             match('['); 
 
@@ -442,8 +442,8 @@ public class InternalETMapLexer extends Lexer {
         try {
             int _type = T__30;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:29:7: ( ']' )
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:29:9: ']'
+            // InternalETMap.g:29:7: ( ']' )
+            // InternalETMap.g:29:9: ']'
             {
             match(']'); 
 
@@ -462,8 +462,8 @@ public class InternalETMapLexer extends Lexer {
         try {
             int _type = T__31;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:30:7: ( 'false' )
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:30:9: 'false'
+            // InternalETMap.g:30:7: ( 'false' )
+            // InternalETMap.g:30:9: 'false'
             {
             match("false"); 
 
@@ -483,8 +483,8 @@ public class InternalETMapLexer extends Lexer {
         try {
             int _type = T__32;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:31:7: ( 'true' )
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:31:9: 'true'
+            // InternalETMap.g:31:7: ( 'true' )
+            // InternalETMap.g:31:9: 'true'
             {
             match("true"); 
 
@@ -504,8 +504,8 @@ public class InternalETMapLexer extends Lexer {
         try {
             int _type = T__33;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:32:7: ( '+' )
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:32:9: '+'
+            // InternalETMap.g:32:7: ( '+' )
+            // InternalETMap.g:32:9: '+'
             {
             match('+'); 
 
@@ -524,8 +524,8 @@ public class InternalETMapLexer extends Lexer {
         try {
             int _type = T__34;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:33:7: ( '-' )
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:33:9: '-'
+            // InternalETMap.g:33:7: ( '-' )
+            // InternalETMap.g:33:9: '-'
             {
             match('-'); 
 
@@ -544,8 +544,8 @@ public class InternalETMapLexer extends Lexer {
         try {
             int _type = T__35;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:34:7: ( '.' )
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:34:9: '.'
+            // InternalETMap.g:34:7: ( '.' )
+            // InternalETMap.g:34:9: '.'
             {
             match('.'); 
 
@@ -564,8 +564,8 @@ public class InternalETMapLexer extends Lexer {
         try {
             int _type = T__36;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:35:7: ( 'e' )
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:35:9: 'e'
+            // InternalETMap.g:35:7: ( 'e' )
+            // InternalETMap.g:35:9: 'e'
             {
             match('e'); 
 
@@ -584,8 +584,8 @@ public class InternalETMapLexer extends Lexer {
         try {
             int _type = T__37;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:36:7: ( 'E' )
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:36:9: 'E'
+            // InternalETMap.g:36:7: ( 'E' )
+            // InternalETMap.g:36:9: 'E'
             {
             match('E'); 
 
@@ -604,8 +604,8 @@ public class InternalETMapLexer extends Lexer {
         try {
             int _type = T__38;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:37:7: ( 'ptBoolean' )
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:37:9: 'ptBoolean'
+            // InternalETMap.g:37:7: ( 'ptBoolean' )
+            // InternalETMap.g:37:9: 'ptBoolean'
             {
             match("ptBoolean"); 
 
@@ -625,8 +625,8 @@ public class InternalETMapLexer extends Lexer {
         try {
             int _type = T__39;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:38:7: ( 'ptInteger' )
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:38:9: 'ptInteger'
+            // InternalETMap.g:38:7: ( 'ptInteger' )
+            // InternalETMap.g:38:9: 'ptInteger'
             {
             match("ptInteger"); 
 
@@ -646,8 +646,8 @@ public class InternalETMapLexer extends Lexer {
         try {
             int _type = T__40;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:39:7: ( 'ptReal' )
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:39:9: 'ptReal'
+            // InternalETMap.g:39:7: ( 'ptReal' )
+            // InternalETMap.g:39:9: 'ptReal'
             {
             match("ptReal"); 
 
@@ -667,8 +667,8 @@ public class InternalETMapLexer extends Lexer {
         try {
             int _type = T__41;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:40:7: ( 'ptCharacter' )
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:40:9: 'ptCharacter'
+            // InternalETMap.g:40:7: ( 'ptCharacter' )
+            // InternalETMap.g:40:9: 'ptCharacter'
             {
             match("ptCharacter"); 
 
@@ -688,10 +688,10 @@ public class InternalETMapLexer extends Lexer {
         try {
             int _type = RULE_HEX;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1471:10: ( ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+ )
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1471:12: ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
+            // InternalETMap.g:1471:10: ( ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+ )
+            // InternalETMap.g:1471:12: ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
             {
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1471:12: ( '0x' | '0X' )
+            // InternalETMap.g:1471:12: ( '0x' | '0X' )
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -719,7 +719,7 @@ public class InternalETMapLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1471:13: '0x'
+                    // InternalETMap.g:1471:13: '0x'
                     {
                     match("0x"); 
 
@@ -727,7 +727,7 @@ public class InternalETMapLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1471:18: '0X'
+                    // InternalETMap.g:1471:18: '0X'
                     {
                     match("0X"); 
 
@@ -737,7 +737,7 @@ public class InternalETMapLexer extends Lexer {
 
             }
 
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1471:24: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
+            // InternalETMap.g:1471:24: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
             int cnt2=0;
             loop2:
             do {
@@ -751,7 +751,7 @@ public class InternalETMapLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:
+            	    // InternalETMap.g:
             	    {
             	    if ( (input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='F')||(input.LA(1)>='a' && input.LA(1)<='f') ) {
             	        input.consume();
@@ -791,10 +791,10 @@ public class InternalETMapLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1473:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1473:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalETMap.g:1473:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // InternalETMap.g:1473:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1473:11: ( '^' )?
+            // InternalETMap.g:1473:11: ( '^' )?
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -803,7 +803,7 @@ public class InternalETMapLexer extends Lexer {
             }
             switch (alt3) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1473:11: '^'
+                    // InternalETMap.g:1473:11: '^'
                     {
                     match('^'); 
 
@@ -821,7 +821,7 @@ public class InternalETMapLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1473:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalETMap.g:1473:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop4:
             do {
                 int alt4=2;
@@ -834,7 +834,7 @@ public class InternalETMapLexer extends Lexer {
 
                 switch (alt4) {
             	case 1 :
-            	    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:
+            	    // InternalETMap.g:
             	    {
             	    if ( (input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
             	        input.consume();
@@ -870,10 +870,10 @@ public class InternalETMapLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1475:10: ( ( '0' .. '9' )+ )
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1475:12: ( '0' .. '9' )+
+            // InternalETMap.g:1475:10: ( ( '0' .. '9' )+ )
+            // InternalETMap.g:1475:12: ( '0' .. '9' )+
             {
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1475:12: ( '0' .. '9' )+
+            // InternalETMap.g:1475:12: ( '0' .. '9' )+
             int cnt5=0;
             loop5:
             do {
@@ -887,7 +887,7 @@ public class InternalETMapLexer extends Lexer {
 
                 switch (alt5) {
             	case 1 :
-            	    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1475:13: '0' .. '9'
+            	    // InternalETMap.g:1475:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -919,10 +919,10 @@ public class InternalETMapLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1477:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1477:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalETMap.g:1477:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // InternalETMap.g:1477:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1477:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalETMap.g:1477:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt8=2;
             int LA8_0 = input.LA(1);
 
@@ -940,10 +940,10 @@ public class InternalETMapLexer extends Lexer {
             }
             switch (alt8) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1477:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // InternalETMap.g:1477:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1477:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // InternalETMap.g:1477:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop6:
                     do {
                         int alt6=3;
@@ -959,7 +959,7 @@ public class InternalETMapLexer extends Lexer {
 
                         switch (alt6) {
                     	case 1 :
-                    	    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1477:21: '\\\\' .
+                    	    // InternalETMap.g:1477:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -967,7 +967,7 @@ public class InternalETMapLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1477:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalETMap.g:1477:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -992,10 +992,10 @@ public class InternalETMapLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1477:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // InternalETMap.g:1477:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1477:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // InternalETMap.g:1477:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop7:
                     do {
                         int alt7=3;
@@ -1011,7 +1011,7 @@ public class InternalETMapLexer extends Lexer {
 
                         switch (alt7) {
                     	case 1 :
-                    	    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1477:54: '\\\\' .
+                    	    // InternalETMap.g:1477:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -1019,7 +1019,7 @@ public class InternalETMapLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1477:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalETMap.g:1477:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -1062,12 +1062,12 @@ public class InternalETMapLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1479:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1479:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalETMap.g:1479:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalETMap.g:1479:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1479:24: ( options {greedy=false; } : . )*
+            // InternalETMap.g:1479:24: ( options {greedy=false; } : . )*
             loop9:
             do {
                 int alt9=2;
@@ -1092,7 +1092,7 @@ public class InternalETMapLexer extends Lexer {
 
                 switch (alt9) {
             	case 1 :
-            	    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1479:52: .
+            	    // InternalETMap.g:1479:52: .
             	    {
             	    matchAny(); 
 
@@ -1122,12 +1122,12 @@ public class InternalETMapLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1481:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1481:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalETMap.g:1481:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalETMap.g:1481:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1481:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalETMap.g:1481:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop10:
             do {
                 int alt10=2;
@@ -1140,7 +1140,7 @@ public class InternalETMapLexer extends Lexer {
 
                 switch (alt10) {
             	case 1 :
-            	    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1481:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalETMap.g:1481:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -1160,7 +1160,7 @@ public class InternalETMapLexer extends Lexer {
                 }
             } while (true);
 
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1481:40: ( ( '\\r' )? '\\n' )?
+            // InternalETMap.g:1481:40: ( ( '\\r' )? '\\n' )?
             int alt12=2;
             int LA12_0 = input.LA(1);
 
@@ -1169,9 +1169,9 @@ public class InternalETMapLexer extends Lexer {
             }
             switch (alt12) {
                 case 1 :
-                    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1481:41: ( '\\r' )? '\\n'
+                    // InternalETMap.g:1481:41: ( '\\r' )? '\\n'
                     {
-                    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1481:41: ( '\\r' )?
+                    // InternalETMap.g:1481:41: ( '\\r' )?
                     int alt11=2;
                     int LA11_0 = input.LA(1);
 
@@ -1180,7 +1180,7 @@ public class InternalETMapLexer extends Lexer {
                     }
                     switch (alt11) {
                         case 1 :
-                            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1481:41: '\\r'
+                            // InternalETMap.g:1481:41: '\\r'
                             {
                             match('\r'); 
 
@@ -1212,10 +1212,10 @@ public class InternalETMapLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1483:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1483:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalETMap.g:1483:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalETMap.g:1483:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1483:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalETMap.g:1483:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt13=0;
             loop13:
             do {
@@ -1229,7 +1229,7 @@ public class InternalETMapLexer extends Lexer {
 
                 switch (alt13) {
             	case 1 :
-            	    // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:
+            	    // InternalETMap.g:
             	    {
             	    if ( (input.LA(1)>='\t' && input.LA(1)<='\n')||input.LA(1)=='\r'||input.LA(1)==' ' ) {
             	        input.consume();
@@ -1269,8 +1269,8 @@ public class InternalETMapLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1485:16: ( . )
-            // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1485:18: .
+            // InternalETMap.g:1485:16: ( . )
+            // InternalETMap.g:1485:18: .
             {
             matchAny(); 
 
@@ -1285,271 +1285,271 @@ public class InternalETMapLexer extends Lexer {
     // $ANTLR end "RULE_ANY_OTHER"
 
     public void mTokens() throws RecognitionException {
-        // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1:8: ( T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | RULE_HEX | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
+        // InternalETMap.g:1:8: ( T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | RULE_HEX | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
         int alt14=38;
         alt14 = dfa14.predict(input);
         switch (alt14) {
             case 1 :
-                // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1:10: T__12
+                // InternalETMap.g:1:10: T__12
                 {
                 mT__12(); 
 
                 }
                 break;
             case 2 :
-                // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1:16: T__13
+                // InternalETMap.g:1:16: T__13
                 {
                 mT__13(); 
 
                 }
                 break;
             case 3 :
-                // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1:22: T__14
+                // InternalETMap.g:1:22: T__14
                 {
                 mT__14(); 
 
                 }
                 break;
             case 4 :
-                // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1:28: T__15
+                // InternalETMap.g:1:28: T__15
                 {
                 mT__15(); 
 
                 }
                 break;
             case 5 :
-                // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1:34: T__16
+                // InternalETMap.g:1:34: T__16
                 {
                 mT__16(); 
 
                 }
                 break;
             case 6 :
-                // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1:40: T__17
+                // InternalETMap.g:1:40: T__17
                 {
                 mT__17(); 
 
                 }
                 break;
             case 7 :
-                // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1:46: T__18
+                // InternalETMap.g:1:46: T__18
                 {
                 mT__18(); 
 
                 }
                 break;
             case 8 :
-                // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1:52: T__19
+                // InternalETMap.g:1:52: T__19
                 {
                 mT__19(); 
 
                 }
                 break;
             case 9 :
-                // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1:58: T__20
+                // InternalETMap.g:1:58: T__20
                 {
                 mT__20(); 
 
                 }
                 break;
             case 10 :
-                // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1:64: T__21
+                // InternalETMap.g:1:64: T__21
                 {
                 mT__21(); 
 
                 }
                 break;
             case 11 :
-                // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1:70: T__22
+                // InternalETMap.g:1:70: T__22
                 {
                 mT__22(); 
 
                 }
                 break;
             case 12 :
-                // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1:76: T__23
+                // InternalETMap.g:1:76: T__23
                 {
                 mT__23(); 
 
                 }
                 break;
             case 13 :
-                // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1:82: T__24
+                // InternalETMap.g:1:82: T__24
                 {
                 mT__24(); 
 
                 }
                 break;
             case 14 :
-                // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1:88: T__25
+                // InternalETMap.g:1:88: T__25
                 {
                 mT__25(); 
 
                 }
                 break;
             case 15 :
-                // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1:94: T__26
+                // InternalETMap.g:1:94: T__26
                 {
                 mT__26(); 
 
                 }
                 break;
             case 16 :
-                // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1:100: T__27
+                // InternalETMap.g:1:100: T__27
                 {
                 mT__27(); 
 
                 }
                 break;
             case 17 :
-                // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1:106: T__28
+                // InternalETMap.g:1:106: T__28
                 {
                 mT__28(); 
 
                 }
                 break;
             case 18 :
-                // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1:112: T__29
+                // InternalETMap.g:1:112: T__29
                 {
                 mT__29(); 
 
                 }
                 break;
             case 19 :
-                // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1:118: T__30
+                // InternalETMap.g:1:118: T__30
                 {
                 mT__30(); 
 
                 }
                 break;
             case 20 :
-                // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1:124: T__31
+                // InternalETMap.g:1:124: T__31
                 {
                 mT__31(); 
 
                 }
                 break;
             case 21 :
-                // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1:130: T__32
+                // InternalETMap.g:1:130: T__32
                 {
                 mT__32(); 
 
                 }
                 break;
             case 22 :
-                // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1:136: T__33
+                // InternalETMap.g:1:136: T__33
                 {
                 mT__33(); 
 
                 }
                 break;
             case 23 :
-                // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1:142: T__34
+                // InternalETMap.g:1:142: T__34
                 {
                 mT__34(); 
 
                 }
                 break;
             case 24 :
-                // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1:148: T__35
+                // InternalETMap.g:1:148: T__35
                 {
                 mT__35(); 
 
                 }
                 break;
             case 25 :
-                // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1:154: T__36
+                // InternalETMap.g:1:154: T__36
                 {
                 mT__36(); 
 
                 }
                 break;
             case 26 :
-                // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1:160: T__37
+                // InternalETMap.g:1:160: T__37
                 {
                 mT__37(); 
 
                 }
                 break;
             case 27 :
-                // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1:166: T__38
+                // InternalETMap.g:1:166: T__38
                 {
                 mT__38(); 
 
                 }
                 break;
             case 28 :
-                // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1:172: T__39
+                // InternalETMap.g:1:172: T__39
                 {
                 mT__39(); 
 
                 }
                 break;
             case 29 :
-                // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1:178: T__40
+                // InternalETMap.g:1:178: T__40
                 {
                 mT__40(); 
 
                 }
                 break;
             case 30 :
-                // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1:184: T__41
+                // InternalETMap.g:1:184: T__41
                 {
                 mT__41(); 
 
                 }
                 break;
             case 31 :
-                // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1:190: RULE_HEX
+                // InternalETMap.g:1:190: RULE_HEX
                 {
                 mRULE_HEX(); 
 
                 }
                 break;
             case 32 :
-                // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1:199: RULE_ID
+                // InternalETMap.g:1:199: RULE_ID
                 {
                 mRULE_ID(); 
 
                 }
                 break;
             case 33 :
-                // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1:207: RULE_INT
+                // InternalETMap.g:1:207: RULE_INT
                 {
                 mRULE_INT(); 
 
                 }
                 break;
             case 34 :
-                // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1:216: RULE_STRING
+                // InternalETMap.g:1:216: RULE_STRING
                 {
                 mRULE_STRING(); 
 
                 }
                 break;
             case 35 :
-                // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1:228: RULE_ML_COMMENT
+                // InternalETMap.g:1:228: RULE_ML_COMMENT
                 {
                 mRULE_ML_COMMENT(); 
 
                 }
                 break;
             case 36 :
-                // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1:244: RULE_SL_COMMENT
+                // InternalETMap.g:1:244: RULE_SL_COMMENT
                 {
                 mRULE_SL_COMMENT(); 
 
                 }
                 break;
             case 37 :
-                // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1:260: RULE_WS
+                // InternalETMap.g:1:260: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
             case 38 :
-                // ../org.eclipse.etrice.core.etmap/src-gen/org/eclipse/etrice/core/etmap/parser/antlr/internal/InternalETMap.g:1:268: RULE_ANY_OTHER
+                // InternalETMap.g:1:268: RULE_ANY_OTHER
                 {
                 mRULE_ANY_OTHER(); 
 
@@ -1563,64 +1563,19 @@ public class InternalETMapLexer extends Lexer {
 
     protected DFA14 dfa14 = new DFA14(this);
     static final String DFA14_eotS =
-        "\1\uffff\1\41\2\uffff\1\45\2\41\1\uffff\3\41\2\uffff\2\41\1\63"+
-        "\2\uffff\1\41\1\uffff\1\70\1\71\1\41\1\74\1\37\2\uffff\3\37\2\uffff"+
-        "\1\41\5\uffff\2\41\1\uffff\4\41\2\uffff\3\41\4\uffff\1\41\3\uffff"+
-        "\1\41\6\uffff\27\41\1\147\1\41\1\151\11\41\1\163\2\41\1\uffff\1"+
-        "\166\1\uffff\11\41\1\uffff\1\41\1\u0081\1\uffff\2\41\1\u0084\1\41"+
-        "\1\u0087\5\41\1\uffff\2\41\1\uffff\2\41\1\uffff\2\41\1\u0093\10"+
-        "\41\1\uffff\1\u009c\1\u009d\1\u009e\1\u009f\4\41\4\uffff\4\41\1"+
-        "\u00a8\1\u00a9\2\41\2\uffff\1\41\1\u00ad\1\41\1\uffff\1\41\1\u00b0"+
-        "\1\uffff";
+        "\1\uffff\1\41\2\uffff\1\45\2\41\1\uffff\3\41\2\uffff\2\41\1\63\2\uffff\1\41\1\uffff\1\70\1\71\1\41\1\74\1\37\2\uffff\3\37\2\uffff\1\41\5\uffff\2\41\1\uffff\4\41\2\uffff\3\41\4\uffff\1\41\3\uffff\1\41\6\uffff\27\41\1\147\1\41\1\151\11\41\1\163\2\41\1\uffff\1\166\1\uffff\11\41\1\uffff\1\41\1\u0081\1\uffff\2\41\1\u0084\1\41\1\u0087\5\41\1\uffff\2\41\1\uffff\2\41\1\uffff\2\41\1\u0093\10\41\1\uffff\1\u009c\1\u009d\1\u009e\1\u009f\4\41\4\uffff\4\41\1\u00a8\1\u00a9\2\41\2\uffff\1\41\1\u00ad\1\41\1\uffff\1\41\1\u00b0\1\uffff";
     static final String DFA14_eofS =
         "\u00b1\uffff";
     static final String DFA14_minS =
-        "\1\0\1\141\2\uffff\1\76\1\165\1\150\1\uffff\1\160\1\141\1\164\2"+
-        "\uffff\1\155\1\141\1\52\2\uffff\1\162\1\uffff\2\60\1\164\1\130\1"+
-        "\101\2\uffff\2\0\1\52\2\uffff\1\160\5\uffff\1\142\1\162\1\uffff"+
-        "\1\164\1\156\1\144\1\164\2\uffff\1\160\1\157\1\154\4\uffff\1\165"+
-        "\3\uffff\1\102\6\uffff\1\160\1\123\1\145\1\151\1\144\1\145\1\162"+
-        "\1\157\1\155\1\163\1\145\1\157\1\156\1\145\1\150\1\151\1\171\1\141"+
-        "\1\157\1\141\1\154\1\151\1\162\1\60\1\145\1\60\1\157\1\164\2\141"+
-        "\1\156\1\163\1\144\1\156\1\164\1\60\1\142\1\164\1\uffff\1\60\1\uffff"+
-        "\1\154\1\145\1\154\1\162\1\147\1\164\1\115\1\141\1\157\1\uffff\1"+
-        "\165\1\60\1\uffff\1\145\1\147\1\60\1\141\1\60\1\145\1\141\1\154"+
-        "\1\162\1\164\1\uffff\1\141\1\145\1\uffff\1\143\1\157\1\uffff\1\155"+
-        "\1\160\1\60\1\171\1\145\1\156\1\162\1\164\1\144\1\115\1\160\1\uffff"+
-        "\4\60\2\145\1\141\1\151\4\uffff\1\162\1\154\1\160\1\156\2\60\1\160"+
-        "\1\147\2\uffff\1\151\1\60\1\156\1\uffff\1\147\1\60\1\uffff";
+        "\1\0\1\141\2\uffff\1\76\1\165\1\150\1\uffff\1\160\1\141\1\164\2\uffff\1\155\1\141\1\52\2\uffff\1\162\1\uffff\2\60\1\164\1\130\1\101\2\uffff\2\0\1\52\2\uffff\1\160\5\uffff\1\142\1\162\1\uffff\1\164\1\156\1\144\1\164\2\uffff\1\160\1\157\1\154\4\uffff\1\165\3\uffff\1\102\6\uffff\1\160\1\123\1\145\1\151\1\144\1\145\1\162\1\157\1\155\1\163\1\145\1\157\1\156\1\145\1\150\1\151\1\171\1\141\1\157\1\141\1\154\1\151\1\162\1\60\1\145\1\60\1\157\1\164\2\141\1\156\1\163\1\144\1\156\1\164\1\60\1\142\1\164\1\uffff\1\60\1\uffff\1\154\1\145\1\154\1\162\1\147\1\164\1\115\1\141\1\157\1\uffff\1\165\1\60\1\uffff\1\145\1\147\1\60\1\141\1\60\1\145\1\141\1\154\1\162\1\164\1\uffff\1\141\1\145\1\uffff\1\143\1\157\1\uffff\1\155\1\160\1\60\1\171\1\145\1\156\1\162\1\164\1\144\1\115\1\160\1\uffff\4\60\2\145\1\141\1\151\4\uffff\1\162\1\154\1\160\1\156\2\60\1\160\1\147\2\uffff\1\151\1\60\1\156\1\uffff\1\147\1\60\1\uffff";
     static final String DFA14_maxS =
-        "\1\uffff\1\141\2\uffff\1\76\1\165\1\150\1\uffff\1\160\1\157\1\164"+
-        "\2\uffff\1\155\1\162\1\52\2\uffff\1\162\1\uffff\2\172\1\164\1\170"+
-        "\1\172\2\uffff\2\uffff\1\57\2\uffff\1\160\5\uffff\1\142\1\162\1"+
-        "\uffff\1\164\1\156\1\144\1\164\2\uffff\1\160\1\157\1\154\4\uffff"+
-        "\1\165\3\uffff\1\122\6\uffff\1\160\1\123\1\145\1\151\1\144\1\145"+
-        "\1\162\1\157\1\155\1\163\1\145\1\157\1\156\1\145\1\150\1\151\1\171"+
-        "\1\141\1\157\1\141\1\154\1\151\1\162\1\172\1\145\1\172\1\157\1\164"+
-        "\2\141\1\156\1\163\1\144\1\156\1\164\1\172\1\142\1\164\1\uffff\1"+
-        "\172\1\uffff\1\154\1\145\1\154\1\162\1\147\1\164\1\115\1\141\1\157"+
-        "\1\uffff\1\165\1\172\1\uffff\1\145\1\147\1\172\1\141\1\172\1\145"+
-        "\1\141\1\154\1\162\1\164\1\uffff\1\141\1\145\1\uffff\1\143\1\157"+
-        "\1\uffff\1\155\1\160\1\172\1\171\1\145\1\156\1\162\1\164\1\144\1"+
-        "\115\1\160\1\uffff\4\172\2\145\1\141\1\151\4\uffff\1\162\1\154\1"+
-        "\160\1\156\2\172\1\160\1\147\2\uffff\1\151\1\172\1\156\1\uffff\1"+
-        "\147\1\172\1\uffff";
+        "\1\uffff\1\141\2\uffff\1\76\1\165\1\150\1\uffff\1\160\1\157\1\164\2\uffff\1\155\1\162\1\52\2\uffff\1\162\1\uffff\2\172\1\164\1\170\1\172\2\uffff\2\uffff\1\57\2\uffff\1\160\5\uffff\1\142\1\162\1\uffff\1\164\1\156\1\144\1\164\2\uffff\1\160\1\157\1\154\4\uffff\1\165\3\uffff\1\122\6\uffff\1\160\1\123\1\145\1\151\1\144\1\145\1\162\1\157\1\155\1\163\1\145\1\157\1\156\1\145\1\150\1\151\1\171\1\141\1\157\1\141\1\154\1\151\1\162\1\172\1\145\1\172\1\157\1\164\2\141\1\156\1\163\1\144\1\156\1\164\1\172\1\142\1\164\1\uffff\1\172\1\uffff\1\154\1\145\1\154\1\162\1\147\1\164\1\115\1\141\1\157\1\uffff\1\165\1\172\1\uffff\1\145\1\147\1\172\1\141\1\172\1\145\1\141\1\154\1\162\1\164\1\uffff\1\141\1\145\1\uffff\1\143\1\157\1\uffff\1\155\1\160\1\172\1\171\1\145\1\156\1\162\1\164\1\144\1\115\1\160\1\uffff\4\172\2\145\1\141\1\151\4\uffff\1\162\1\154\1\160\1\156\2\172\1\160\1\147\2\uffff\1\151\1\172\1\156\1\uffff\1\147\1\172\1\uffff";
     static final String DFA14_acceptS =
-        "\2\uffff\1\2\1\3\3\uffff\1\10\3\uffff\1\14\1\15\3\uffff\1\22\1"+
-        "\23\1\uffff\1\26\5\uffff\1\40\1\41\3\uffff\1\45\1\46\1\uffff\1\40"+
-        "\1\2\1\3\1\5\1\27\2\uffff\1\10\4\uffff\1\14\1\15\3\uffff\1\21\1"+
-        "\30\1\22\1\23\1\uffff\1\26\1\31\1\32\1\uffff\1\37\1\41\1\42\1\43"+
-        "\1\44\1\45\46\uffff\1\17\1\uffff\1\25\11\uffff\1\20\2\uffff\1\24"+
-        "\12\uffff\1\16\2\uffff\1\35\2\uffff\1\4\13\uffff\1\11\10\uffff\1"+
-        "\12\1\13\1\33\1\34\10\uffff\1\36\1\1\3\uffff\1\7\2\uffff\1\6";
+        "\2\uffff\1\2\1\3\3\uffff\1\10\3\uffff\1\14\1\15\3\uffff\1\22\1\23\1\uffff\1\26\5\uffff\1\40\1\41\3\uffff\1\45\1\46\1\uffff\1\40\1\2\1\3\1\5\1\27\2\uffff\1\10\4\uffff\1\14\1\15\3\uffff\1\21\1\30\1\22\1\23\1\uffff\1\26\1\31\1\32\1\uffff\1\37\1\41\1\42\1\43\1\44\1\45\46\uffff\1\17\1\uffff\1\25\11\uffff\1\20\2\uffff\1\24\12\uffff\1\16\2\uffff\1\35\2\uffff\1\4\13\uffff\1\11\10\uffff\1\12\1\13\1\33\1\34\10\uffff\1\36\1\1\3\uffff\1\7\2\uffff\1\6";
     static final String DFA14_specialS =
         "\1\1\32\uffff\1\0\1\2\u0094\uffff}>";
     static final String[] DFA14_transitionS = {
-            "\11\37\2\36\2\37\1\36\22\37\1\36\1\37\1\33\4\37\1\34\3\37\1"+
-            "\23\1\14\1\4\1\17\1\35\1\27\11\32\1\13\2\37\1\7\3\37\4\31\1"+
-            "\25\7\31\1\1\5\31\1\5\1\6\6\31\1\20\1\37\1\21\1\30\1\31\1\37"+
-            "\1\12\3\31\1\24\1\16\2\31\1\15\3\31\1\11\1\31\1\10\1\26\3\31"+
-            "\1\22\6\31\1\2\1\37\1\3\uff82\37",
+            "\11\37\2\36\2\37\1\36\22\37\1\36\1\37\1\33\4\37\1\34\3\37\1\23\1\14\1\4\1\17\1\35\1\27\11\32\1\13\2\37\1\7\3\37\4\31\1\25\7\31\1\1\5\31\1\5\1\6\6\31\1\20\1\37\1\21\1\30\1\31\1\37\1\12\3\31\1\24\1\16\2\31\1\15\3\31\1\11\1\31\1\10\1\26\3\31\1\22\6\31\1\2\1\37\1\3\uff82\37",
             "\1\40",
             "",
             "",
@@ -1743,8 +1698,7 @@ public class InternalETMapLexer extends Lexer {
             "\1\u0083",
             "\12\41\7\uffff\32\41\4\uffff\1\41\1\uffff\32\41",
             "\1\u0085",
-            "\12\41\7\uffff\14\41\1\u0086\15\41\4\uffff\1\41\1\uffff\32"+
-            "\41",
+            "\12\41\7\uffff\14\41\1\u0086\15\41\4\uffff\1\41\1\uffff\32\41",
             "\1\u0088",
             "\1\u0089",
             "\1\u008a",

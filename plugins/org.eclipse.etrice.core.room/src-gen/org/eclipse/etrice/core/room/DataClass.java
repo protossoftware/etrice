@@ -33,6 +33,7 @@ import org.eclipse.etrice.core.fsm.fSM.DetailCode;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.DataClass#getBase <em>Base</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.DataClass#getAnnotations <em>Annotations</em>}</li>
@@ -43,7 +44,6 @@ import org.eclipse.etrice.core.fsm.fSM.DetailCode;
  *   <li>{@link org.eclipse.etrice.core.room.DataClass#getStructors <em>Structors</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.DataClass#getAttributes <em>Attributes</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.etrice.core.room.RoomPackage#getDataClass()
  * @model

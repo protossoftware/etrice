@@ -21,10 +21,10 @@ import org.eclipse.etrice.core.common.base.Documentation;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.common.base.impl.DocumentationImpl#getLines <em>Lines</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

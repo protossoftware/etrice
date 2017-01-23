@@ -79,6 +79,7 @@ public class FSMFactoryImpl extends EFactoryImpl implements FSMFactory
       case FSMPackage.ENTRY_POINT: return createEntryPoint();
       case FSMPackage.EXIT_POINT: return createExitPoint();
       case FSMPackage.CHOICE_POINT: return createChoicePoint();
+      case FSMPackage.TRANSITION_BASE: return createTransitionBase();
       case FSMPackage.TRANSITION: return createTransition();
       case FSMPackage.NON_INITIAL_TRANSITION: return createNonInitialTransition();
       case FSMPackage.TRANSITION_CHAIN_START_TRANSITION: return createTransitionChainStartTransition();
@@ -292,6 +293,17 @@ public class FSMFactoryImpl extends EFactoryImpl implements FSMFactory
   {
     ChoicePointImpl choicePoint = new ChoicePointImpl();
     return choicePoint;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public TransitionBase createTransitionBase()
+  {
+    TransitionBaseImpl transitionBase = new TransitionBaseImpl();
+    return transitionBase;
   }
 
   /**

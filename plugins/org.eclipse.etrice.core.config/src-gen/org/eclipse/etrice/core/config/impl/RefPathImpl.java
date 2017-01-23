@@ -26,10 +26,10 @@ import org.eclipse.etrice.core.config.RefSegment;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.config.impl.RefPathImpl#getRefs <em>Refs</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

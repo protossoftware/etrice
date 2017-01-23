@@ -24,10 +24,10 @@ import org.eclipse.etrice.core.room.SubSystemRef;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.impl.LogicalSystemImpl#getSubSystems <em>Sub Systems</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

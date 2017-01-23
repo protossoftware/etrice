@@ -21,6 +21,7 @@ import org.eclipse.etrice.core.common.base.Import;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.PhysicalModel#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.PhysicalModel#getImports <em>Imports</em>}</li>
@@ -28,7 +29,6 @@ import org.eclipse.etrice.core.common.base.Import;
  *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.PhysicalModel#getNodeClasses <em>Node Classes</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.PhysicalModel#getRuntimeClasses <em>Runtime Classes</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage#getPhysicalModel()
  * @model

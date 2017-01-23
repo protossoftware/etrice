@@ -21,11 +21,11 @@ import org.eclipse.etrice.core.room.RoomPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.impl.BindingImpl#getEndpoint1 <em>Endpoint1</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.BindingImpl#getEndpoint2 <em>Endpoint2</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

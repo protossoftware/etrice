@@ -23,12 +23,12 @@ import org.eclipse.etrice.core.common.base.Import;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.config.ConfigModel#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.config.ConfigModel#getImports <em>Imports</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.config.ConfigModel#getConfigElements <em>Config Elements</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.etrice.core.config.ConfigPackage#getConfigModel()
  * @model

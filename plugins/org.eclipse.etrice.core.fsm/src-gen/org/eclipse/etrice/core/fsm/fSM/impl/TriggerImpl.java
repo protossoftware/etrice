@@ -29,11 +29,11 @@ import org.eclipse.etrice.core.fsm.fSM.Trigger;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.fsm.fSM.impl.TriggerImpl#getMsgFromIfPairs <em>Msg From If Pairs</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.fsm.fSM.impl.TriggerImpl#getGuard <em>Guard</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -20,11 +20,11 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.common.base.Annotation#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.common.base.Annotation#getAttributes <em>Attributes</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.etrice.core.common.base.BasePackage#getAnnotation()
  * @model

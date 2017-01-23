@@ -22,12 +22,12 @@ import org.eclipse.etrice.core.room.SubProtocol;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.impl.BindingEndPointImpl#getActorRef <em>Actor Ref</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.BindingEndPointImpl#getPort <em>Port</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.BindingEndPointImpl#getSub <em>Sub</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

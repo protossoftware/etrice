@@ -26,13 +26,13 @@ import org.eclipse.etrice.core.fsm.fSM.DetailCode;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.PortClass#getUserCode <em>User Code</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.PortClass#getMsgHandlers <em>Msg Handlers</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.PortClass#getOperations <em>Operations</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.PortClass#getAttributes <em>Attributes</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.etrice.core.room.RoomPackage#getPortClass()
  * @model

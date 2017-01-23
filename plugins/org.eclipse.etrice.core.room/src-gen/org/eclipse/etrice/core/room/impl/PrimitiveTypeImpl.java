@@ -19,13 +19,13 @@ import org.eclipse.etrice.core.room.RoomPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.impl.PrimitiveTypeImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.PrimitiveTypeImpl#getTargetName <em>Target Name</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.PrimitiveTypeImpl#getCastName <em>Cast Name</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.PrimitiveTypeImpl#getDefaultValueLiteral <em>Default Value Literal</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

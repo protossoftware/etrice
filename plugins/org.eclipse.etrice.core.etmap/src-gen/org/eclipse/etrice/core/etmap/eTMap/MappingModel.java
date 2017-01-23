@@ -20,12 +20,12 @@ import org.eclipse.etrice.core.common.base.Import;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.etmap.eTMap.MappingModel#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.etmap.eTMap.MappingModel#getImports <em>Imports</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.etmap.eTMap.MappingModel#getMappings <em>Mappings</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.etrice.core.etmap.eTMap.ETMapPackage#getMappingModel()
  * @model

@@ -16,11 +16,11 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.common.base.AnnotationAttribute#isOptional <em>Optional</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.common.base.AnnotationAttribute#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.etrice.core.common.base.BasePackage#getAnnotationAttribute()
  * @model

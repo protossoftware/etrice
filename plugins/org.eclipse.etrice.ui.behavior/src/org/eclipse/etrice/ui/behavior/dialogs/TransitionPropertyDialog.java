@@ -246,14 +246,14 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 			if (refined!=null) {
 				createActionCodeEditor(body, "&Action Code:",
 						refined.getAction(), refined,
-						FSMPackage.eINSTANCE.getRefinedTransition_Action(),
+						FSMPackage.eINSTANCE.getTransitionBase_Action(),
 						null, s2m, m2s, true, true, false, null, exprProvider);
 			}
 		}
 		else
 		{
 			createActionCodeEditor(body, "&Action Code:", trans.getAction(),
-					trans, FSMPackage.eINSTANCE.getTransition_Action(), null,
+					trans, FSMPackage.eINSTANCE.getTransitionBase_Action(), null,
 					s2m, m2s, true, true, false, null, exprProvider);
 		}
 		

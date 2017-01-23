@@ -18,11 +18,11 @@ import org.eclipse.etrice.core.room.RoomPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.impl.RefSegmentImpl#getRef <em>Ref</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.RefSegmentImpl#getIdx <em>Idx</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

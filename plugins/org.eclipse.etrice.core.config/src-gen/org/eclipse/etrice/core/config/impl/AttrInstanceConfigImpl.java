@@ -26,12 +26,12 @@ import org.eclipse.etrice.core.config.ConfigPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.config.impl.AttrInstanceConfigImpl#isDynConfig <em>Dyn Config</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.config.impl.AttrInstanceConfigImpl#isReadOnly <em>Read Only</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.config.impl.AttrInstanceConfigImpl#getAttributes <em>Attributes</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

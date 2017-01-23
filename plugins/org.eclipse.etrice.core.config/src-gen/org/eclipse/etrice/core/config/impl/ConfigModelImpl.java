@@ -34,12 +34,12 @@ import org.eclipse.etrice.core.config.SubSystemConfig;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.config.impl.ConfigModelImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.config.impl.ConfigModelImpl#getImports <em>Imports</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.config.impl.ConfigModelImpl#getConfigElements <em>Config Elements</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

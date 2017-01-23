@@ -24,11 +24,11 @@ import org.eclipse.etrice.core.room.ActorClass;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.config.ActorClassConfig#getActor <em>Actor</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.config.ActorClassConfig#getAttributes <em>Attributes</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.etrice.core.config.ConfigPackage#getActorClassConfig()
  * @model

@@ -18,11 +18,11 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.Binding#getEndpoint1 <em>Endpoint1</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.Binding#getEndpoint2 <em>Endpoint2</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.etrice.core.room.RoomPackage#getBinding()
  * @model

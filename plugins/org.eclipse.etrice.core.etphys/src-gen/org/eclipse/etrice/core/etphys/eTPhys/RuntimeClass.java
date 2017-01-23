@@ -18,12 +18,12 @@ import org.eclipse.etrice.core.common.base.Documentation;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.RuntimeClass#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.RuntimeClass#getDocu <em>Docu</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.RuntimeClass#getThreadModel <em>Thread Model</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage#getRuntimeClass()
  * @model

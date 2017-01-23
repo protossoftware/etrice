@@ -38,13 +38,13 @@ import org.eclipse.etrice.core.common.base.Documentation;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.Port#isConjugated <em>Conjugated</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.Port#getMultiplicity <em>Multiplicity</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.Port#getProtocol <em>Protocol</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.Port#getDocu <em>Docu</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.etrice.core.room.RoomPackage#getPort()
  * @model

@@ -11,8 +11,6 @@ import org.eclipse.etrice.core.fsm.fSM.TransitionChainStartTransition;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Transition Chain Start Transition</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * </p>
  *
  * @generated
  */

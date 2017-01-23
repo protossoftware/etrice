@@ -22,13 +22,13 @@ import org.eclipse.etrice.core.room.RoomPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.impl.PortImpl#isConjugated <em>Conjugated</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.PortImpl#getMultiplicity <em>Multiplicity</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.PortImpl#getProtocol <em>Protocol</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.PortImpl#getDocu <em>Docu</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

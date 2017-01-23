@@ -10,6 +10,7 @@ package org.eclipse.etrice.core.fsm.fSM;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.fsm.fSM.ModelComponent#isAbstract <em>Abstract</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.fsm.fSM.ModelComponent#getCommType <em>Comm Type</em>}</li>
@@ -17,7 +18,6 @@ package org.eclipse.etrice.core.fsm.fSM;
  *   <li>{@link org.eclipse.etrice.core.fsm.fSM.ModelComponent#getBase <em>Base</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.fsm.fSM.ModelComponent#getStateMachine <em>State Machine</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.etrice.core.fsm.fSM.FSMPackage#getModelComponent()
  * @model

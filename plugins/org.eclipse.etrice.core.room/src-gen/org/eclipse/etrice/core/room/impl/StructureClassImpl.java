@@ -27,12 +27,12 @@ import org.eclipse.etrice.core.room.StructureClass;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.impl.StructureClassImpl#getAnnotations <em>Annotations</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.StructureClassImpl#getConnections <em>Connections</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.StructureClassImpl#getBindings <em>Bindings</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -32,6 +32,7 @@ import org.eclipse.etrice.core.room.RoomPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ProtocolClassImpl#getCommType <em>Comm Type</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ProtocolClassImpl#getBase <em>Base</em>}</li>
@@ -44,7 +45,6 @@ import org.eclipse.etrice.core.room.RoomPackage;
  *   <li>{@link org.eclipse.etrice.core.room.impl.ProtocolClassImpl#getConjugated <em>Conjugated</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ProtocolClassImpl#getSemantics <em>Semantics</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -25,12 +25,12 @@ import org.eclipse.etrice.core.common.base.NumberLiteral;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.config.AttrClassConfig#getMin <em>Min</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.config.AttrClassConfig#getMax <em>Max</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.config.AttrClassConfig#getAttributes <em>Attributes</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.etrice.core.config.ConfigPackage#getAttrClassConfig()
  * @model

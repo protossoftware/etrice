@@ -18,12 +18,12 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.BindingEndPoint#getActorRef <em>Actor Ref</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.BindingEndPoint#getPort <em>Port</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.BindingEndPoint#getSub <em>Sub</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.etrice.core.room.RoomPackage#getBindingEndPoint()
  * @model

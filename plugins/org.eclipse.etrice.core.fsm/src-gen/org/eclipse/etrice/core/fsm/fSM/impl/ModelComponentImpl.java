@@ -25,6 +25,7 @@ import org.eclipse.etrice.core.fsm.fSM.StateGraph;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.fsm.fSM.impl.ModelComponentImpl#isAbstract <em>Abstract</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.fsm.fSM.impl.ModelComponentImpl#getCommType <em>Comm Type</em>}</li>
@@ -32,7 +33,6 @@ import org.eclipse.etrice.core.fsm.fSM.StateGraph;
  *   <li>{@link org.eclipse.etrice.core.fsm.fSM.impl.ModelComponentImpl#getBase <em>Base</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.fsm.fSM.impl.ModelComponentImpl#getStateMachine <em>State Machine</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

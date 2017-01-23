@@ -93,7 +93,7 @@ public interface FSMPackage extends EPackage
    * @see org.eclipse.etrice.core.fsm.fSM.impl.FSMPackageImpl#getIInterfaceItemOwner()
    * @generated
    */
-  int IINTERFACE_ITEM_OWNER = 36;
+  int IINTERFACE_ITEM_OWNER = 37;
 
   /**
    * The number of structural features of the '<em>IInterface Item Owner</em>' class.
@@ -676,32 +676,14 @@ public interface FSMPackage extends EPackage
   int CHOICE_POINT_FEATURE_COUNT = STATE_GRAPH_NODE_FEATURE_COUNT + 2;
 
   /**
-   * The meta object id for the '{@link org.eclipse.etrice.core.fsm.fSM.impl.TransitionImpl <em>Transition</em>}' class.
+   * The meta object id for the '{@link org.eclipse.etrice.core.fsm.fSM.impl.TransitionBaseImpl <em>Transition Base</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.eclipse.etrice.core.fsm.fSM.impl.TransitionImpl
-   * @see org.eclipse.etrice.core.fsm.fSM.impl.FSMPackageImpl#getTransition()
+   * @see org.eclipse.etrice.core.fsm.fSM.impl.TransitionBaseImpl
+   * @see org.eclipse.etrice.core.fsm.fSM.impl.FSMPackageImpl#getTransitionBase()
    * @generated
    */
-  int TRANSITION = 14;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TRANSITION__NAME = STATE_GRAPH_ITEM_FEATURE_COUNT + 0;
-
-  /**
-   * The feature id for the '<em><b>To</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TRANSITION__TO = STATE_GRAPH_ITEM_FEATURE_COUNT + 1;
+  int TRANSITION_BASE = 14;
 
   /**
    * The feature id for the '<em><b>Docu</b></em>' containment reference.
@@ -710,7 +692,7 @@ public interface FSMPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TRANSITION__DOCU = STATE_GRAPH_ITEM_FEATURE_COUNT + 2;
+  int TRANSITION_BASE__DOCU = 0;
 
   /**
    * The feature id for the '<em><b>Action</b></em>' containment reference.
@@ -719,7 +701,62 @@ public interface FSMPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TRANSITION__ACTION = STATE_GRAPH_ITEM_FEATURE_COUNT + 3;
+  int TRANSITION_BASE__ACTION = 1;
+
+  /**
+   * The number of structural features of the '<em>Transition Base</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TRANSITION_BASE_FEATURE_COUNT = 2;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.etrice.core.fsm.fSM.impl.TransitionImpl <em>Transition</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.etrice.core.fsm.fSM.impl.TransitionImpl
+   * @see org.eclipse.etrice.core.fsm.fSM.impl.FSMPackageImpl#getTransition()
+   * @generated
+   */
+  int TRANSITION = 15;
+
+  /**
+   * The feature id for the '<em><b>Docu</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TRANSITION__DOCU = STATE_GRAPH_ITEM_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Action</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TRANSITION__ACTION = STATE_GRAPH_ITEM_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TRANSITION__NAME = STATE_GRAPH_ITEM_FEATURE_COUNT + 2;
+
+  /**
+   * The feature id for the '<em><b>To</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TRANSITION__TO = STATE_GRAPH_ITEM_FEATURE_COUNT + 3;
 
   /**
    * The number of structural features of the '<em>Transition</em>' class.
@@ -738,25 +775,7 @@ public interface FSMPackage extends EPackage
    * @see org.eclipse.etrice.core.fsm.fSM.impl.FSMPackageImpl#getNonInitialTransition()
    * @generated
    */
-  int NON_INITIAL_TRANSITION = 15;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int NON_INITIAL_TRANSITION__NAME = TRANSITION__NAME;
-
-  /**
-   * The feature id for the '<em><b>To</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int NON_INITIAL_TRANSITION__TO = TRANSITION__TO;
+  int NON_INITIAL_TRANSITION = 16;
 
   /**
    * The feature id for the '<em><b>Docu</b></em>' containment reference.
@@ -775,6 +794,24 @@ public interface FSMPackage extends EPackage
    * @ordered
    */
   int NON_INITIAL_TRANSITION__ACTION = TRANSITION__ACTION;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int NON_INITIAL_TRANSITION__NAME = TRANSITION__NAME;
+
+  /**
+   * The feature id for the '<em><b>To</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int NON_INITIAL_TRANSITION__TO = TRANSITION__TO;
 
   /**
    * The feature id for the '<em><b>From</b></em>' containment reference.
@@ -802,25 +839,7 @@ public interface FSMPackage extends EPackage
    * @see org.eclipse.etrice.core.fsm.fSM.impl.FSMPackageImpl#getTransitionChainStartTransition()
    * @generated
    */
-  int TRANSITION_CHAIN_START_TRANSITION = 16;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TRANSITION_CHAIN_START_TRANSITION__NAME = NON_INITIAL_TRANSITION__NAME;
-
-  /**
-   * The feature id for the '<em><b>To</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TRANSITION_CHAIN_START_TRANSITION__TO = NON_INITIAL_TRANSITION__TO;
+  int TRANSITION_CHAIN_START_TRANSITION = 17;
 
   /**
    * The feature id for the '<em><b>Docu</b></em>' containment reference.
@@ -839,6 +858,24 @@ public interface FSMPackage extends EPackage
    * @ordered
    */
   int TRANSITION_CHAIN_START_TRANSITION__ACTION = NON_INITIAL_TRANSITION__ACTION;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TRANSITION_CHAIN_START_TRANSITION__NAME = NON_INITIAL_TRANSITION__NAME;
+
+  /**
+   * The feature id for the '<em><b>To</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TRANSITION_CHAIN_START_TRANSITION__TO = NON_INITIAL_TRANSITION__TO;
 
   /**
    * The feature id for the '<em><b>From</b></em>' containment reference.
@@ -866,25 +903,7 @@ public interface FSMPackage extends EPackage
    * @see org.eclipse.etrice.core.fsm.fSM.impl.FSMPackageImpl#getInitialTransition()
    * @generated
    */
-  int INITIAL_TRANSITION = 17;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int INITIAL_TRANSITION__NAME = TRANSITION__NAME;
-
-  /**
-   * The feature id for the '<em><b>To</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int INITIAL_TRANSITION__TO = TRANSITION__TO;
+  int INITIAL_TRANSITION = 18;
 
   /**
    * The feature id for the '<em><b>Docu</b></em>' containment reference.
@@ -905,6 +924,24 @@ public interface FSMPackage extends EPackage
   int INITIAL_TRANSITION__ACTION = TRANSITION__ACTION;
 
   /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int INITIAL_TRANSITION__NAME = TRANSITION__NAME;
+
+  /**
+   * The feature id for the '<em><b>To</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int INITIAL_TRANSITION__TO = TRANSITION__TO;
+
+  /**
    * The number of structural features of the '<em>Initial Transition</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -921,25 +958,7 @@ public interface FSMPackage extends EPackage
    * @see org.eclipse.etrice.core.fsm.fSM.impl.FSMPackageImpl#getContinuationTransition()
    * @generated
    */
-  int CONTINUATION_TRANSITION = 18;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int CONTINUATION_TRANSITION__NAME = NON_INITIAL_TRANSITION__NAME;
-
-  /**
-   * The feature id for the '<em><b>To</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int CONTINUATION_TRANSITION__TO = NON_INITIAL_TRANSITION__TO;
+  int CONTINUATION_TRANSITION = 19;
 
   /**
    * The feature id for the '<em><b>Docu</b></em>' containment reference.
@@ -958,6 +977,24 @@ public interface FSMPackage extends EPackage
    * @ordered
    */
   int CONTINUATION_TRANSITION__ACTION = NON_INITIAL_TRANSITION__ACTION;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CONTINUATION_TRANSITION__NAME = NON_INITIAL_TRANSITION__NAME;
+
+  /**
+   * The feature id for the '<em><b>To</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CONTINUATION_TRANSITION__TO = NON_INITIAL_TRANSITION__TO;
 
   /**
    * The feature id for the '<em><b>From</b></em>' containment reference.
@@ -985,25 +1022,7 @@ public interface FSMPackage extends EPackage
    * @see org.eclipse.etrice.core.fsm.fSM.impl.FSMPackageImpl#getTriggeredTransition()
    * @generated
    */
-  int TRIGGERED_TRANSITION = 19;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TRIGGERED_TRANSITION__NAME = TRANSITION_CHAIN_START_TRANSITION__NAME;
-
-  /**
-   * The feature id for the '<em><b>To</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TRIGGERED_TRANSITION__TO = TRANSITION_CHAIN_START_TRANSITION__TO;
+  int TRIGGERED_TRANSITION = 20;
 
   /**
    * The feature id for the '<em><b>Docu</b></em>' containment reference.
@@ -1022,6 +1041,24 @@ public interface FSMPackage extends EPackage
    * @ordered
    */
   int TRIGGERED_TRANSITION__ACTION = TRANSITION_CHAIN_START_TRANSITION__ACTION;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TRIGGERED_TRANSITION__NAME = TRANSITION_CHAIN_START_TRANSITION__NAME;
+
+  /**
+   * The feature id for the '<em><b>To</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TRIGGERED_TRANSITION__TO = TRANSITION_CHAIN_START_TRANSITION__TO;
 
   /**
    * The feature id for the '<em><b>From</b></em>' containment reference.
@@ -1058,25 +1095,7 @@ public interface FSMPackage extends EPackage
    * @see org.eclipse.etrice.core.fsm.fSM.impl.FSMPackageImpl#getGuardedTransition()
    * @generated
    */
-  int GUARDED_TRANSITION = 20;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int GUARDED_TRANSITION__NAME = TRANSITION_CHAIN_START_TRANSITION__NAME;
-
-  /**
-   * The feature id for the '<em><b>To</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int GUARDED_TRANSITION__TO = TRANSITION_CHAIN_START_TRANSITION__TO;
+  int GUARDED_TRANSITION = 21;
 
   /**
    * The feature id for the '<em><b>Docu</b></em>' containment reference.
@@ -1095,6 +1114,24 @@ public interface FSMPackage extends EPackage
    * @ordered
    */
   int GUARDED_TRANSITION__ACTION = TRANSITION_CHAIN_START_TRANSITION__ACTION;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GUARDED_TRANSITION__NAME = TRANSITION_CHAIN_START_TRANSITION__NAME;
+
+  /**
+   * The feature id for the '<em><b>To</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GUARDED_TRANSITION__TO = TRANSITION_CHAIN_START_TRANSITION__TO;
 
   /**
    * The feature id for the '<em><b>From</b></em>' containment reference.
@@ -1131,25 +1168,7 @@ public interface FSMPackage extends EPackage
    * @see org.eclipse.etrice.core.fsm.fSM.impl.FSMPackageImpl#getCPBranchTransition()
    * @generated
    */
-  int CP_BRANCH_TRANSITION = 21;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int CP_BRANCH_TRANSITION__NAME = NON_INITIAL_TRANSITION__NAME;
-
-  /**
-   * The feature id for the '<em><b>To</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int CP_BRANCH_TRANSITION__TO = NON_INITIAL_TRANSITION__TO;
+  int CP_BRANCH_TRANSITION = 22;
 
   /**
    * The feature id for the '<em><b>Docu</b></em>' containment reference.
@@ -1168,6 +1187,24 @@ public interface FSMPackage extends EPackage
    * @ordered
    */
   int CP_BRANCH_TRANSITION__ACTION = NON_INITIAL_TRANSITION__ACTION;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CP_BRANCH_TRANSITION__NAME = NON_INITIAL_TRANSITION__NAME;
+
+  /**
+   * The feature id for the '<em><b>To</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CP_BRANCH_TRANSITION__TO = NON_INITIAL_TRANSITION__TO;
 
   /**
    * The feature id for the '<em><b>From</b></em>' containment reference.
@@ -1204,16 +1241,7 @@ public interface FSMPackage extends EPackage
    * @see org.eclipse.etrice.core.fsm.fSM.impl.FSMPackageImpl#getRefinedTransition()
    * @generated
    */
-  int REFINED_TRANSITION = 22;
-
-  /**
-   * The feature id for the '<em><b>Target</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int REFINED_TRANSITION__TARGET = 0;
+  int REFINED_TRANSITION = 23;
 
   /**
    * The feature id for the '<em><b>Docu</b></em>' containment reference.
@@ -1222,7 +1250,7 @@ public interface FSMPackage extends EPackage
    * @generated
    * @ordered
    */
-  int REFINED_TRANSITION__DOCU = 1;
+  int REFINED_TRANSITION__DOCU = TRANSITION_BASE__DOCU;
 
   /**
    * The feature id for the '<em><b>Action</b></em>' containment reference.
@@ -1231,7 +1259,16 @@ public interface FSMPackage extends EPackage
    * @generated
    * @ordered
    */
-  int REFINED_TRANSITION__ACTION = 2;
+  int REFINED_TRANSITION__ACTION = TRANSITION_BASE__ACTION;
+
+  /**
+   * The feature id for the '<em><b>Target</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int REFINED_TRANSITION__TARGET = TRANSITION_BASE_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>Refined Transition</em>' class.
@@ -1240,7 +1277,7 @@ public interface FSMPackage extends EPackage
    * @generated
    * @ordered
    */
-  int REFINED_TRANSITION_FEATURE_COUNT = 3;
+  int REFINED_TRANSITION_FEATURE_COUNT = TRANSITION_BASE_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.core.fsm.fSM.impl.TransitionTerminalImpl <em>Transition Terminal</em>}' class.
@@ -1250,7 +1287,7 @@ public interface FSMPackage extends EPackage
    * @see org.eclipse.etrice.core.fsm.fSM.impl.FSMPackageImpl#getTransitionTerminal()
    * @generated
    */
-  int TRANSITION_TERMINAL = 23;
+  int TRANSITION_TERMINAL = 24;
 
   /**
    * The number of structural features of the '<em>Transition Terminal</em>' class.
@@ -1269,7 +1306,7 @@ public interface FSMPackage extends EPackage
    * @see org.eclipse.etrice.core.fsm.fSM.impl.FSMPackageImpl#getStateTerminal()
    * @generated
    */
-  int STATE_TERMINAL = 24;
+  int STATE_TERMINAL = 25;
 
   /**
    * The feature id for the '<em><b>State</b></em>' reference.
@@ -1297,7 +1334,7 @@ public interface FSMPackage extends EPackage
    * @see org.eclipse.etrice.core.fsm.fSM.impl.FSMPackageImpl#getTrPointTerminal()
    * @generated
    */
-  int TR_POINT_TERMINAL = 25;
+  int TR_POINT_TERMINAL = 26;
 
   /**
    * The feature id for the '<em><b>Tr Point</b></em>' reference.
@@ -1325,7 +1362,7 @@ public interface FSMPackage extends EPackage
    * @see org.eclipse.etrice.core.fsm.fSM.impl.FSMPackageImpl#getSubStateTrPointTerminal()
    * @generated
    */
-  int SUB_STATE_TR_POINT_TERMINAL = 26;
+  int SUB_STATE_TR_POINT_TERMINAL = 27;
 
   /**
    * The feature id for the '<em><b>Tr Point</b></em>' reference.
@@ -1362,7 +1399,7 @@ public interface FSMPackage extends EPackage
    * @see org.eclipse.etrice.core.fsm.fSM.impl.FSMPackageImpl#getChoicepointTerminal()
    * @generated
    */
-  int CHOICEPOINT_TERMINAL = 27;
+  int CHOICEPOINT_TERMINAL = 28;
 
   /**
    * The feature id for the '<em><b>Cp</b></em>' reference.
@@ -1390,7 +1427,7 @@ public interface FSMPackage extends EPackage
    * @see org.eclipse.etrice.core.fsm.fSM.impl.FSMPackageImpl#getTrigger()
    * @generated
    */
-  int TRIGGER = 28;
+  int TRIGGER = 29;
 
   /**
    * The feature id for the '<em><b>Msg From If Pairs</b></em>' containment reference list.
@@ -1427,7 +1464,7 @@ public interface FSMPackage extends EPackage
    * @see org.eclipse.etrice.core.fsm.fSM.impl.FSMPackageImpl#getMessageFromIf()
    * @generated
    */
-  int MESSAGE_FROM_IF = 29;
+  int MESSAGE_FROM_IF = 30;
 
   /**
    * The feature id for the '<em><b>Message</b></em>' reference.
@@ -1464,7 +1501,7 @@ public interface FSMPackage extends EPackage
    * @see org.eclipse.etrice.core.fsm.fSM.impl.FSMPackageImpl#getAbstractInterfaceItem()
    * @generated
    */
-  int ABSTRACT_INTERFACE_ITEM = 30;
+  int ABSTRACT_INTERFACE_ITEM = 31;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1492,7 +1529,7 @@ public interface FSMPackage extends EPackage
    * @see org.eclipse.etrice.core.fsm.fSM.impl.FSMPackageImpl#getGuard()
    * @generated
    */
-  int GUARD = 31;
+  int GUARD = 32;
 
   /**
    * The feature id for the '<em><b>Guard</b></em>' containment reference.
@@ -1520,7 +1557,7 @@ public interface FSMPackage extends EPackage
    * @see org.eclipse.etrice.core.fsm.fSM.impl.FSMPackageImpl#getProtocolSemantics()
    * @generated
    */
-  int PROTOCOL_SEMANTICS = 32;
+  int PROTOCOL_SEMANTICS = 33;
 
   /**
    * The feature id for the '<em><b>Rules</b></em>' containment reference list.
@@ -1548,7 +1585,7 @@ public interface FSMPackage extends EPackage
    * @see org.eclipse.etrice.core.fsm.fSM.impl.FSMPackageImpl#getSemanticsRule()
    * @generated
    */
-  int SEMANTICS_RULE = 33;
+  int SEMANTICS_RULE = 34;
 
   /**
    * The feature id for the '<em><b>Msg</b></em>' reference.
@@ -1585,7 +1622,7 @@ public interface FSMPackage extends EPackage
    * @see org.eclipse.etrice.core.fsm.fSM.impl.FSMPackageImpl#getInSemanticsRule()
    * @generated
    */
-  int IN_SEMANTICS_RULE = 34;
+  int IN_SEMANTICS_RULE = 35;
 
   /**
    * The feature id for the '<em><b>Msg</b></em>' reference.
@@ -1622,7 +1659,7 @@ public interface FSMPackage extends EPackage
    * @see org.eclipse.etrice.core.fsm.fSM.impl.FSMPackageImpl#getOutSemanticsRule()
    * @generated
    */
-  int OUT_SEMANTICS_RULE = 35;
+  int OUT_SEMANTICS_RULE = 36;
 
   /**
    * The feature id for the '<em><b>Msg</b></em>' reference.
@@ -1659,7 +1696,7 @@ public interface FSMPackage extends EPackage
    * @see org.eclipse.etrice.core.fsm.fSM.impl.FSMPackageImpl#getComponentCommunicationType()
    * @generated
    */
-  int COMPONENT_COMMUNICATION_TYPE = 37;
+  int COMPONENT_COMMUNICATION_TYPE = 38;
 
 
   /**
@@ -2067,6 +2104,38 @@ public interface FSMPackage extends EPackage
   EReference getChoicePoint_Docu();
 
   /**
+   * Returns the meta object for class '{@link org.eclipse.etrice.core.fsm.fSM.TransitionBase <em>Transition Base</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Transition Base</em>'.
+   * @see org.eclipse.etrice.core.fsm.fSM.TransitionBase
+   * @generated
+   */
+  EClass getTransitionBase();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.fsm.fSM.TransitionBase#getDocu <em>Docu</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Docu</em>'.
+   * @see org.eclipse.etrice.core.fsm.fSM.TransitionBase#getDocu()
+   * @see #getTransitionBase()
+   * @generated
+   */
+  EReference getTransitionBase_Docu();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.fsm.fSM.TransitionBase#getAction <em>Action</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Action</em>'.
+   * @see org.eclipse.etrice.core.fsm.fSM.TransitionBase#getAction()
+   * @see #getTransitionBase()
+   * @generated
+   */
+  EReference getTransitionBase_Action();
+
+  /**
    * Returns the meta object for class '{@link org.eclipse.etrice.core.fsm.fSM.Transition <em>Transition</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2097,28 +2166,6 @@ public interface FSMPackage extends EPackage
    * @generated
    */
   EReference getTransition_To();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.fsm.fSM.Transition#getDocu <em>Docu</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Docu</em>'.
-   * @see org.eclipse.etrice.core.fsm.fSM.Transition#getDocu()
-   * @see #getTransition()
-   * @generated
-   */
-  EReference getTransition_Docu();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.fsm.fSM.Transition#getAction <em>Action</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Action</em>'.
-   * @see org.eclipse.etrice.core.fsm.fSM.Transition#getAction()
-   * @see #getTransition()
-   * @generated
-   */
-  EReference getTransition_Action();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.etrice.core.fsm.fSM.NonInitialTransition <em>Non Initial Transition</em>}'.
@@ -2254,28 +2301,6 @@ public interface FSMPackage extends EPackage
    * @generated
    */
   EReference getRefinedTransition_Target();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.fsm.fSM.RefinedTransition#getDocu <em>Docu</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Docu</em>'.
-   * @see org.eclipse.etrice.core.fsm.fSM.RefinedTransition#getDocu()
-   * @see #getRefinedTransition()
-   * @generated
-   */
-  EReference getRefinedTransition_Docu();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.fsm.fSM.RefinedTransition#getAction <em>Action</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Action</em>'.
-   * @see org.eclipse.etrice.core.fsm.fSM.RefinedTransition#getAction()
-   * @see #getRefinedTransition()
-   * @generated
-   */
-  EReference getRefinedTransition_Action();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.etrice.core.fsm.fSM.TransitionTerminal <em>Transition Terminal</em>}'.
@@ -2937,6 +2962,32 @@ public interface FSMPackage extends EPackage
     EReference CHOICE_POINT__DOCU = eINSTANCE.getChoicePoint_Docu();
 
     /**
+     * The meta object literal for the '{@link org.eclipse.etrice.core.fsm.fSM.impl.TransitionBaseImpl <em>Transition Base</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.etrice.core.fsm.fSM.impl.TransitionBaseImpl
+     * @see org.eclipse.etrice.core.fsm.fSM.impl.FSMPackageImpl#getTransitionBase()
+     * @generated
+     */
+    EClass TRANSITION_BASE = eINSTANCE.getTransitionBase();
+
+    /**
+     * The meta object literal for the '<em><b>Docu</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference TRANSITION_BASE__DOCU = eINSTANCE.getTransitionBase_Docu();
+
+    /**
+     * The meta object literal for the '<em><b>Action</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference TRANSITION_BASE__ACTION = eINSTANCE.getTransitionBase_Action();
+
+    /**
      * The meta object literal for the '{@link org.eclipse.etrice.core.fsm.fSM.impl.TransitionImpl <em>Transition</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -2961,22 +3012,6 @@ public interface FSMPackage extends EPackage
      * @generated
      */
     EReference TRANSITION__TO = eINSTANCE.getTransition_To();
-
-    /**
-     * The meta object literal for the '<em><b>Docu</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference TRANSITION__DOCU = eINSTANCE.getTransition_Docu();
-
-    /**
-     * The meta object literal for the '<em><b>Action</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference TRANSITION__ACTION = eINSTANCE.getTransition_Action();
 
     /**
      * The meta object literal for the '{@link org.eclipse.etrice.core.fsm.fSM.impl.NonInitialTransitionImpl <em>Non Initial Transition</em>}' class.
@@ -3097,22 +3132,6 @@ public interface FSMPackage extends EPackage
      * @generated
      */
     EReference REFINED_TRANSITION__TARGET = eINSTANCE.getRefinedTransition_Target();
-
-    /**
-     * The meta object literal for the '<em><b>Docu</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference REFINED_TRANSITION__DOCU = eINSTANCE.getRefinedTransition_Docu();
-
-    /**
-     * The meta object literal for the '<em><b>Action</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference REFINED_TRANSITION__ACTION = eINSTANCE.getRefinedTransition_Action();
 
     /**
      * The meta object literal for the '{@link org.eclipse.etrice.core.fsm.fSM.impl.TransitionTerminalImpl <em>Transition Terminal</em>}' class.

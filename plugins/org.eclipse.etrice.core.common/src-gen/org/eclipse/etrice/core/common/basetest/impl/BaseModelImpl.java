@@ -26,10 +26,10 @@ import org.eclipse.etrice.core.common.basetest.BasetestPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.common.basetest.impl.BaseModelImpl#getElements <em>Elements</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

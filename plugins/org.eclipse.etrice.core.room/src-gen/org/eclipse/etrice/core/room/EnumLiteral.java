@@ -19,11 +19,11 @@ import org.eclipse.etrice.core.common.base.IntLiteral;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.EnumLiteral#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.EnumLiteral#getLiteral <em>Literal</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.etrice.core.room.RoomPackage#getEnumLiteral()
  * @model

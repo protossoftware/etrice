@@ -16,11 +16,11 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.VarDecl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.VarDecl#getRefType <em>Ref Type</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.etrice.core.room.RoomPackage#getVarDecl()
  * @model

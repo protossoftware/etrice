@@ -17,8 +17,6 @@ import org.eclipse.etrice.core.fsm.fSM.Transition;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>State Graph Item</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * </p>
  *
  * @generated
  */

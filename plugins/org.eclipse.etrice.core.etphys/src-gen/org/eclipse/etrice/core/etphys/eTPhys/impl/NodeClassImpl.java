@@ -31,6 +31,7 @@ import org.eclipse.etrice.core.etphys.eTPhys.RuntimeClass;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.impl.NodeClassImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.impl.NodeClassImpl#getDocu <em>Docu</em>}</li>
@@ -39,7 +40,6 @@ import org.eclipse.etrice.core.etphys.eTPhys.RuntimeClass;
  *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.impl.NodeClassImpl#getPriomax <em>Priomax</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.etphys.eTPhys.impl.NodeClassImpl#getThreads <em>Threads</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

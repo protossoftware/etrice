@@ -28,11 +28,11 @@ import org.eclipse.etrice.core.room.RoomPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.impl.EnumerationTypeImpl#getPrimitiveType <em>Primitive Type</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.EnumerationTypeImpl#getLiterals <em>Literals</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

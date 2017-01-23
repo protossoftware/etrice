@@ -4,14 +4,13 @@
  */
 package org.eclipse.etrice.core.fsm.ui;
 
-import org.eclipse.xtext.ui.DefaultUiModule;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 
 /**
  * Manual modifications go to {org.eclipse.etrice.core.fsm.ui.FSMUiModule}
  */
 @SuppressWarnings("all")
-public abstract class AbstractFSMUiModule extends DefaultUiModule {
+public abstract class AbstractFSMUiModule extends org.eclipse.xtext.ui.DefaultUiModule {
 	
 	public AbstractFSMUiModule(AbstractUIPlugin plugin) {
 		super(plugin);
@@ -56,6 +55,11 @@ public abstract class AbstractFSMUiModule extends DefaultUiModule {
 	// contributed by org.eclipse.xtext.generator.builder.BuilderIntegrationFragment
 	public Class<? extends org.eclipse.xtext.ui.editor.IXtextEditorCallback> bindIXtextEditorCallback() {
 		return org.eclipse.xtext.builder.nature.NatureAddingEditorCallback.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.builder.BuilderIntegrationFragment
+	public Class<? extends org.eclipse.xtext.generator.IContextualOutputConfigurationProvider> bindIContextualOutputConfigurationProvider() {
+		return org.eclipse.xtext.builder.EclipseOutputConfigurationProvider.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.builder.BuilderIntegrationFragment

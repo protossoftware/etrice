@@ -26,12 +26,12 @@ import org.eclipse.etrice.core.room.SubSystemClass;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.impl.SubSystemClassImpl#getActorInstanceMappings <em>Actor Instance Mappings</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.SubSystemClassImpl#getThreads <em>Threads</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.SubSystemClassImpl#getRelayPorts <em>Relay Ports</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

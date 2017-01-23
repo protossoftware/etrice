@@ -32,12 +32,12 @@ import org.eclipse.etrice.core.room.LogicalSystem;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.etmap.eTMap.impl.MappingImpl#getLogicalSys <em>Logical Sys</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.etmap.eTMap.impl.MappingImpl#getPhysicalSys <em>Physical Sys</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.etmap.eTMap.impl.MappingImpl#getSubsysMappings <em>Subsys Mappings</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

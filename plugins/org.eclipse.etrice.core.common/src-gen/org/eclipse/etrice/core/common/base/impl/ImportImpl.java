@@ -18,11 +18,11 @@ import org.eclipse.etrice.core.common.base.Import;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.common.base.impl.ImportImpl#getImportedNamespace <em>Imported Namespace</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.common.base.impl.ImportImpl#getImportURI <em>Import URI</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

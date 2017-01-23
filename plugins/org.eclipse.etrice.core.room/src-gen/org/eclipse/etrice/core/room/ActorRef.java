@@ -16,12 +16,12 @@ package org.eclipse.etrice.core.room;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.ActorRef#getRefType <em>Ref Type</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ActorRef#getMultiplicity <em>Multiplicity</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.ActorRef#getType <em>Type</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.etrice.core.room.RoomPackage#getActorRef()
  * @model

@@ -11,10 +11,10 @@ import org.eclipse.etrice.core.common.base.Literal;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.config.LiteralConfigValue#getValue <em>Value</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.etrice.core.config.ConfigPackage#getLiteralConfigValue()
  * @model

@@ -47,6 +47,7 @@ import org.eclipse.etrice.core.room.util.RoomHelpers;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#isAbstract <em>Abstract</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getCommType <em>Comm Type</em>}</li>
@@ -65,7 +66,6 @@ import org.eclipse.etrice.core.room.util.RoomHelpers;
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getOperations <em>Operations</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.ActorClassImpl#getStructors <em>Structors</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
