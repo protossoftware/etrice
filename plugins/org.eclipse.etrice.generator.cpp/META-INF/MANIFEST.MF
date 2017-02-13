@@ -2,16 +2,16 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: eTrice C++ Generator
 Bundle-Vendor: Eclipse eTrice
-Bundle-Version: 1.1.0.qualifier
+Bundle-Version: 1.1.1.qualifier
 Bundle-SymbolicName: org.eclipse.etrice.generator.cpp;singleton:=true
 Bundle-ActivationPolicy: lazy
-Require-Bundle: org.eclipse.etrice.core.genmodel;bundle-version="1.1.0",
- org.eclipse.etrice.core.etphys;bundle-version="1.1.0",
- org.eclipse.etrice.core.etmap;bundle-version="1.1.0",
- org.eclipse.etrice.generator.fsm;bundle-version="1.1.0",
- org.eclipse.etrice.generator;bundle-version="1.1.0",
- org.eclipse.etrice.generator.config;bundle-version="1.1.0",
- org.eclipse.etrice.generator.doc;bundle-version="1.1.0",
+Require-Bundle: org.eclipse.etrice.core.genmodel;bundle-version="1.1.1",
+ org.eclipse.etrice.core.etphys;bundle-version="1.1.1",
+ org.eclipse.etrice.core.etmap;bundle-version="1.1.1",
+ org.eclipse.etrice.generator.fsm;bundle-version="1.1.1",
+ org.eclipse.etrice.generator;bundle-version="1.1.1",
+ org.eclipse.etrice.generator.config;bundle-version="1.1.1",
+ org.eclipse.etrice.generator.doc;bundle-version="1.1.1",
  org.eclipse.xtend.lib;bundle-version="2.6.0",
  org.eclipse.xtext.generator;bundle-version="2.6.0",
  org.eclipse.xtext.util;bundle-version="2.6.0"

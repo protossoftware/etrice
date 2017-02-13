@@ -2,11 +2,11 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: org.eclipse.etrice.generator.fsmtest.tests
 Bundle-Vendor: Eclipse eTrice
-Bundle-Version: 1.1.0.qualifier
+Bundle-Version: 1.1.1.qualifier
 Bundle-SymbolicName: org.eclipse.etrice.generator.fsmtest.tests; singleton:=true
 Bundle-ActivationPolicy: lazy
-Require-Bundle: org.eclipse.etrice.generator.fsmtest;bundle-version="1.1.0",
- org.eclipse.etrice.generator.fsmtest.ui;bundle-version="1.1.0",
+Require-Bundle: org.eclipse.etrice.generator.fsmtest;bundle-version="1.1.1",
+ org.eclipse.etrice.generator.fsmtest.ui;bundle-version="1.1.1",
  org.eclipse.core.runtime,
  org.eclipse.xtext.junit4;bundle-version="2.6.0",
  org.eclipse.ui.workbench;resolution:=optional

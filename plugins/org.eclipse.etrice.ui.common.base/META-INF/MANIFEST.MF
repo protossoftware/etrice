@@ -2,12 +2,12 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Common Base for UI
 Bundle-SymbolicName: org.eclipse.etrice.ui.common.base;singleton:=true
-Bundle-Version: 1.1.0.qualifier
+Bundle-Version: 1.1.1.qualifier
 Bundle-Activator: org.eclipse.etrice.ui.common.base.UIBaseActivator
 Bundle-Vendor: eTrice
-Require-Bundle: org.eclipse.etrice.core.common.ui;bundle-version="1.1.0",
- org.eclipse.etrice.core.fsm.ui;bundle-version="1.1.0",
- org.eclipse.etrice.doc;bundle-version="1.1.0",
+Require-Bundle: org.eclipse.etrice.core.common.ui;bundle-version="1.1.1",
+ org.eclipse.etrice.core.fsm.ui;bundle-version="1.1.1",
+ org.eclipse.etrice.doc;bundle-version="1.1.1",
  org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.emf.transaction;bundle-version="1.4.0",
