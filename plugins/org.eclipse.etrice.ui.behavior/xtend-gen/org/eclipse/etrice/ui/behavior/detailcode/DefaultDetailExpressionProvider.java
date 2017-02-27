@@ -13,6 +13,7 @@ package org.eclipse.etrice.ui.behavior.detailcode;
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.util.List;
+import java.util.function.Consumer;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.CommunicationType;
@@ -32,9 +33,7 @@ import org.eclipse.etrice.ui.behavior.fsm.detailcode.IDetailExpressionProvider;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
  * Defines expression for fsm detail code of an ActorClass
@@ -47,13 +46,31 @@ public class DefaultDetailExpressionProvider extends GuardDetailExpressionProvid
     final List<IDetailExpressionProvider.ExpressionFeature> scope = CollectionLiterals.<IDetailExpressionProvider.ExpressionFeature>newArrayList();
     boolean _notEquals = (!Objects.equal(this.transitionEventData, null));
     if (_notEquals) {
-      IDetailExpressionProvider.ExpressionFeature _createExprFeature = this.createExprFeature(this.transitionEventData);
+      IDetailExpressionProvider.ExpressionFeature _createExprFeature = this.createExprFeature(this.transitionEventData, IDetailExpressionProvider.ExpressionPostfix.NONE);
       scope.add(_createExprFeature);
     }
-    List<InterfaceItem> _allInterfaceItems = this.roomHelpers.getAllInterfaceItems(this.actorClass);
-    final Procedure1<InterfaceItem> _function = new Procedure1<InterfaceItem>() {
+    List<StandardOperation> _latestOperations = this.roomHelpers.getLatestOperations(this.actorClass);
+    final Function1<StandardOperation, IDetailExpressionProvider.ExpressionFeature> _function = new Function1<StandardOperation, IDetailExpressionProvider.ExpressionFeature>() {
       @Override
-      public void apply(final InterfaceItem it) {
+      public IDetailExpressionProvider.ExpressionFeature apply(final StandardOperation it) {
+        return DefaultDetailExpressionProvider.this.createExprFeature(it);
+      }
+    };
+    List<IDetailExpressionProvider.ExpressionFeature> _map = ListExtensions.<StandardOperation, IDetailExpressionProvider.ExpressionFeature>map(_latestOperations, _function);
+    Iterables.<IDetailExpressionProvider.ExpressionFeature>addAll(scope, _map);
+    List<Attribute> _allAttributes = this.roomHelpers.getAllAttributes(this.actorClass);
+    final Function1<Attribute, IDetailExpressionProvider.ExpressionFeature> _function_1 = new Function1<Attribute, IDetailExpressionProvider.ExpressionFeature>() {
+      @Override
+      public IDetailExpressionProvider.ExpressionFeature apply(final Attribute it) {
+        return DefaultDetailExpressionProvider.this.createExprFeature(it);
+      }
+    };
+    List<IDetailExpressionProvider.ExpressionFeature> _map_1 = ListExtensions.<Attribute, IDetailExpressionProvider.ExpressionFeature>map(_allAttributes, _function_1);
+    Iterables.<IDetailExpressionProvider.ExpressionFeature>addAll(scope, _map_1);
+    List<InterfaceItem> _allInterfaceItems = this.roomHelpers.getAllInterfaceItems(this.actorClass);
+    final Consumer<InterfaceItem> _function_2 = new Consumer<InterfaceItem>() {
+      @Override
+      public void accept(final InterfaceItem it) {
         boolean _matched = false;
         if (it instanceof SPP) {
           boolean _isEventDriven = ((SPP)it).isEventDriven();
@@ -69,7 +86,7 @@ public class DefaultDetailExpressionProvider extends GuardDetailExpressionProvid
           }
         }
         if (_matched) {
-          IDetailExpressionProvider.ExpressionFeature _createExprFeature = DefaultDetailExpressionProvider.this.createExprFeature(it);
+          IDetailExpressionProvider.ExpressionFeature _createExprFeature = DefaultDetailExpressionProvider.this.createExprFeature(it, IDetailExpressionProvider.ExpressionPostfix.NONE);
           scope.add(_createExprFeature);
           IDetailExpressionProvider.ExpressionFeature _createExprFeature_1 = DefaultDetailExpressionProvider.this.createExprFeature(it, IDetailExpressionProvider.ExpressionPostfix.BRACKETS);
           scope.add(_createExprFeature_1);
@@ -92,42 +109,12 @@ public class DefaultDetailExpressionProvider extends GuardDetailExpressionProvid
           }
         }
         if (!_matched) {
-          IDetailExpressionProvider.ExpressionFeature _createExprFeature_3 = DefaultDetailExpressionProvider.this.createExprFeature(it);
+          IDetailExpressionProvider.ExpressionFeature _createExprFeature_3 = DefaultDetailExpressionProvider.this.createExprFeature(it, IDetailExpressionProvider.ExpressionPostfix.NONE);
           scope.add(_createExprFeature_3);
         }
       }
     };
-    IterableExtensions.<InterfaceItem>forEach(_allInterfaceItems, _function);
-    List<StandardOperation> _latestOperations = this.roomHelpers.getLatestOperations(this.actorClass);
-    final Function1<StandardOperation, IDetailExpressionProvider.ExpressionFeature> _function_1 = new Function1<StandardOperation, IDetailExpressionProvider.ExpressionFeature>() {
-      @Override
-      public IDetailExpressionProvider.ExpressionFeature apply(final StandardOperation it) {
-        return DefaultDetailExpressionProvider.this.createExprFeature(it, IDetailExpressionProvider.ExpressionPostfix.PARENTHESES);
-      }
-    };
-    List<IDetailExpressionProvider.ExpressionFeature> _map = ListExtensions.<StandardOperation, IDetailExpressionProvider.ExpressionFeature>map(_latestOperations, _function_1);
-    Iterables.<IDetailExpressionProvider.ExpressionFeature>addAll(scope, _map);
-    List<Attribute> _allAttributes = this.roomHelpers.getAllAttributes(this.actorClass);
-    final Function1<Attribute, IDetailExpressionProvider.ExpressionFeature> _function_2 = new Function1<Attribute, IDetailExpressionProvider.ExpressionFeature>() {
-      @Override
-      public IDetailExpressionProvider.ExpressionFeature apply(final Attribute it) {
-        IDetailExpressionProvider.ExpressionFeature _switchResult = null;
-        int _size = it.getSize();
-        boolean _matched = false;
-        int _size_1 = it.getSize();
-        boolean _greaterThan = (_size_1 > 1);
-        if (_greaterThan) {
-          _matched=true;
-          _switchResult = DefaultDetailExpressionProvider.this.createExprFeature(it, IDetailExpressionProvider.ExpressionPostfix.BRACKETS);
-        }
-        if (!_matched) {
-          _switchResult = DefaultDetailExpressionProvider.this.createExprFeature(it);
-        }
-        return _switchResult;
-      }
-    };
-    List<IDetailExpressionProvider.ExpressionFeature> _map_1 = ListExtensions.<Attribute, IDetailExpressionProvider.ExpressionFeature>map(_allAttributes, _function_2);
-    Iterables.<IDetailExpressionProvider.ExpressionFeature>addAll(scope, _map_1);
+    _allInterfaceItems.forEach(_function_2);
     return scope;
   }
   
@@ -158,7 +145,7 @@ public class DefaultDetailExpressionProvider extends GuardDetailExpressionProvid
       final Function1<PortOperation, IDetailExpressionProvider.ExpressionFeature> _function = new Function1<PortOperation, IDetailExpressionProvider.ExpressionFeature>() {
         @Override
         public IDetailExpressionProvider.ExpressionFeature apply(final PortOperation it) {
-          return DefaultDetailExpressionProvider.this.createExprFeature(it, IDetailExpressionProvider.ExpressionPostfix.PARENTHESES);
+          return DefaultDetailExpressionProvider.this.createExprFeature(it);
         }
       };
       List<IDetailExpressionProvider.ExpressionFeature> _map = ListExtensions.<PortOperation, IDetailExpressionProvider.ExpressionFeature>map(_allOperations, _function);
@@ -179,7 +166,7 @@ public class DefaultDetailExpressionProvider extends GuardDetailExpressionProvid
             final Function1<Message, IDetailExpressionProvider.ExpressionFeature> _function_1 = new Function1<Message, IDetailExpressionProvider.ExpressionFeature>() {
               @Override
               public IDetailExpressionProvider.ExpressionFeature apply(final Message it) {
-                return DefaultDetailExpressionProvider.this.createExprFeature(it, IDetailExpressionProvider.ExpressionPostfix.PARENTHESES);
+                return DefaultDetailExpressionProvider.this.createExprFeature(it);
               }
             };
             List<IDetailExpressionProvider.ExpressionFeature> _map_1 = ListExtensions.<Message, IDetailExpressionProvider.ExpressionFeature>map(_allMessages, _function_1);
@@ -192,7 +179,7 @@ public class DefaultDetailExpressionProvider extends GuardDetailExpressionProvid
               final Function1<Message, IDetailExpressionProvider.ExpressionFeature> _function_2 = new Function1<Message, IDetailExpressionProvider.ExpressionFeature>() {
                 @Override
                 public IDetailExpressionProvider.ExpressionFeature apply(final Message it) {
-                  return DefaultDetailExpressionProvider.this.createExprFeature(it, IDetailExpressionProvider.ExpressionPostfix.PARENTHESES);
+                  return DefaultDetailExpressionProvider.this.createExprFeature(it);
                 }
               };
               List<IDetailExpressionProvider.ExpressionFeature> _map_2 = ListExtensions.<Message, IDetailExpressionProvider.ExpressionFeature>map(_allIncomingMessages, _function_2);
@@ -202,7 +189,7 @@ public class DefaultDetailExpressionProvider extends GuardDetailExpressionProvid
               final Function1<Message, IDetailExpressionProvider.ExpressionFeature> _function_3 = new Function1<Message, IDetailExpressionProvider.ExpressionFeature>() {
                 @Override
                 public IDetailExpressionProvider.ExpressionFeature apply(final Message it) {
-                  return DefaultDetailExpressionProvider.this.createExprFeature(it);
+                  return DefaultDetailExpressionProvider.this.createExprFeature(it, IDetailExpressionProvider.ExpressionPostfix.NONE);
                 }
               };
               List<IDetailExpressionProvider.ExpressionFeature> _map_3 = ListExtensions.<Message, IDetailExpressionProvider.ExpressionFeature>map(_allIncomingMessages_1, _function_3);
@@ -229,15 +216,7 @@ public class DefaultDetailExpressionProvider extends GuardDetailExpressionProvid
           final Function1<Attribute, IDetailExpressionProvider.ExpressionFeature> _function_1 = new Function1<Attribute, IDetailExpressionProvider.ExpressionFeature>() {
             @Override
             public IDetailExpressionProvider.ExpressionFeature apply(final Attribute it) {
-              IDetailExpressionProvider.ExpressionFeature _xifexpression = null;
-              int _size = it.getSize();
-              boolean _greaterThan = (_size > 1);
-              if (_greaterThan) {
-                _xifexpression = DefaultDetailExpressionProvider.this.createExprFeature(it, IDetailExpressionProvider.ExpressionPostfix.BRACKETS);
-              } else {
-                _xifexpression = DefaultDetailExpressionProvider.this.createExprFeature(it);
-              }
-              return _xifexpression;
+              return DefaultDetailExpressionProvider.this.createExprFeature(it);
             }
           };
           List<IDetailExpressionProvider.ExpressionFeature> _map_1 = ListExtensions.<Attribute, IDetailExpressionProvider.ExpressionFeature>map(_allAttributes, _function_1);

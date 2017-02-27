@@ -31,6 +31,9 @@ import org.eclipse.xtext.util.SimpleAttributeResolver
 
 import static extension org.eclipse.xtend.lib.annotations.AccessorType.*
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
+import org.eclipse.etrice.core.room.SAP
+import org.eclipse.etrice.core.room.Operation
+import org.eclipse.etrice.core.room.Message
 
 /**
  * Defines expression for fsm guards of an ActorClass
@@ -53,19 +56,16 @@ class GuardDetailExpressionProvider implements IDetailExpressionProvider {
 	override getInitialFeatures() {
 		val List<ExpressionFeature> scope = newArrayList
 
-		if(transitionEventData != null)
-			scope += createExprFeature(transitionEventData)
-		scope += actorClass.allInterfaceItems.filter[isDataDriven && !isConjugated].map[
+		if(transitionEventData != null) { 
+			scope += transitionEventData.createExprFeature(ExpressionPostfix.NONE)
+		}
+		scope += actorClass.allInterfaceItems.filter[isEventDriven || !isConjugated].map[
 			switch it {
 				Port case isReplicated: createExprFeature(ExpressionPostfix.BRACKETS)
-				default: createExprFeature
-			}]
-		scope += actorClass.latestOperations.map[createExprFeature(ExpressionPostfix.PARENTHESES)]
-		scope += actorClass.allAttributes.map[
-			switch (size) {
-				case size > 1: createExprFeature(ExpressionPostfix.BRACKETS)
-				default: createExprFeature
-			}]
+				default: createExprFeature(ExpressionPostfix.NONE)
+		}]
+		scope += actorClass.latestOperations.map[createExprFeature]
+		scope += actorClass.allAttributes.map[createExprFeature]
 
 		return scope
 	}
@@ -75,27 +75,46 @@ class GuardDetailExpressionProvider implements IDetailExpressionProvider {
 
 		val List<ExpressionFeature> scope = newArrayList
 		switch obj : ctx.data {
+			Port case obj.multiplicity == 1/* fall through  */,
+			SAP: scope +=
+				obj.protocol.getAllOperations(!obj.conjugated).map[createExprFeature]
+		}
+		switch obj : ctx.data {
 			InterfaceItem: {
 				val pc = obj.protocol
 				switch pc.commType {
 					case DATA_DRIVEN:
-						if (!obj.conjugated)
-							scope += pc.allIncomingMessages.map[createExprFeature]
+						if (!obj.conjugated) scope += pc.allIncomingMessages.map[createExprFeature]
+					case EVENT_DRIVEN: { /* no async message calls */}
+					case SYNCHRONOUS: {}
 				}
 			}
 			Attribute case obj.type.type instanceof DataClass: {
 				val dc = obj.type.type as DataClass
-				scope += dc.allAttributes.map[
-					if(size > 1) createExprFeature(ExpressionPostfix.BRACKETS) else createExprFeature]
-				scope += dc.latestOperations.map[createExprFeature(ExpressionPostfix.PARENTHESES)]
+				scope += dc.allAttributes.map[createExprFeature]
+				scope += dc.latestOperations.map[createExprFeature]
 			}
 		}
 
 		return scope
 	}
-
-	def protected createExprFeature(EObject eObj) {
-		createExprFeature(eObj, ExpressionPostfix.NONE)
+	
+	def ExpressionFeature createExprFeature(Operation it){
+		// assuming all operations have parenthesis
+		createExprFeature(ExpressionPostfix.PARENTHESES)
+	}
+	
+	def ExpressionFeature createExprFeature(Message it){
+		// assuming all message have parenthesis
+		createExprFeature(ExpressionPostfix.PARENTHESES)
+	}
+	
+	def ExpressionFeature createExprFeature(Attribute it){
+		// assuming all attributes have brackets or not depending on size
+		switch (size) {
+			case size > 1: createExprFeature(ExpressionPostfix.BRACKETS)
+			default: createExprFeature(ExpressionPostfix.NONE)
+		}
 	}
 
 	def protected createExprFeature(EObject eObj, ExpressionPostfix postfix) {

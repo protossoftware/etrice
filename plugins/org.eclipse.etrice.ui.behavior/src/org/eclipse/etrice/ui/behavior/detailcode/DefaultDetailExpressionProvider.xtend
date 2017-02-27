@@ -30,28 +30,25 @@ class DefaultDetailExpressionProvider extends GuardDetailExpressionProvider {
 		// no super call, keep it simple
 		val List<ExpressionFeature> scope = newArrayList
 
-		if (transitionEventData != null)
-			scope += createExprFeature(transitionEventData)
+		if(transitionEventData != null) { 
+			scope += transitionEventData.createExprFeature(ExpressionPostfix.NONE)
+		}
+		scope += actorClass.latestOperations.map[createExprFeature]
+		scope += actorClass.allAttributes.map[createExprFeature]
 		actorClass.allInterfaceItems.forEach [
 			switch it {
 				SPP case isEventDriven/* fall through */,
 				Port case isEventDriven && isReplicated: {
-					scope += createExprFeature // additional feature for broadcast 
+					scope += createExprFeature(ExpressionPostfix.NONE) // additional feature for broadcast 
 					scope += createExprFeature(ExpressionPostfix.BRACKETS)
 				}
 				Port case isReplicated/* fall through  */,
 				SPP:
 					scope += createExprFeature(ExpressionPostfix.BRACKETS)
 				default:
-					scope += createExprFeature
+					scope += createExprFeature(ExpressionPostfix.NONE)
 			}
 		]
-		scope += actorClass.latestOperations.map[createExprFeature(ExpressionPostfix.PARENTHESES)]
-		scope += actorClass.allAttributes.map[
-			switch (size) {
-				case size > 1: createExprFeature(ExpressionPostfix.BRACKETS)
-				default: createExprFeature
-			}]
 
 		return scope
 	}
@@ -64,29 +61,27 @@ class DefaultDetailExpressionProvider extends GuardDetailExpressionProvider {
 		switch obj : ctx.data {
 			Port case obj.multiplicity == 1/* fall through  */,
 			SAP: scope +=
-				obj.protocol.getAllOperations(!obj.conjugated).map[createExprFeature(ExpressionPostfix.PARENTHESES)]
+				obj.protocol.getAllOperations(!obj.conjugated).map[createExprFeature]
 		}
 		switch obj : ctx.data {
 			InterfaceItem: {
 				val pc = obj.protocol
 				switch pc.commType {
 					case EVENT_DRIVEN:
-						scope += pc.getAllMessages(obj.conjugated).map[createExprFeature(ExpressionPostfix.PARENTHESES)]
+						scope += pc.getAllMessages(obj.conjugated).map[createExprFeature]
 					case DATA_DRIVEN:
 						if (obj.conjugated)
-							scope += pc.allIncomingMessages.map[createExprFeature(ExpressionPostfix.PARENTHESES)]
-						else
 							scope += pc.allIncomingMessages.map[createExprFeature]
-					case SYNCHRONOUS: {
-					}
+						else
+							scope += pc.allIncomingMessages.map[createExprFeature(ExpressionPostfix.NONE)] // data message has no Parenthesis
+					case SYNCHRONOUS: {}
 				}
 
 			// TODO Attributes ?
 			}
 			Attribute case obj.type.type instanceof DataClass: {
 				val dc = obj.type.type as DataClass
-				scope += dc.allAttributes.map[
-					if(size > 1) createExprFeature(ExpressionPostfix.BRACKETS) else createExprFeature]
+				scope += dc.allAttributes.map[createExprFeature]
 				// not supported yet by code translation:
 				// scope += dc.latestOperations.map[createExprFeature(ExpressionPostfix.PARENTHESES)]
 			}

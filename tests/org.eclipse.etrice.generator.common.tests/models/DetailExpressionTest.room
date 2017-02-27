@@ -29,11 +29,11 @@ RoomModel DetailExpressionTestModel {
 					triggers {
 						<out1: cPortEvent guard {
 							"/* TODO activate action code editor */"
-							"rPortData.in1 == numberArray[3] &&"
-							"accessibleMessageData && infoData.flag"
+							"rPortData.in1 == numberArray[3] && accessibleMessageData && infoData.flag && actorOp(32)  && rPortEvent.regularOp(32) && cPortEvent.conjugatedOp(32)"
 						}>
 					}
-					action {
+					action 
+				{
 						"// TODO syntax highlightiing"
 						"rPortEvent.out1(true);"
 						"rPortData.in1;"
@@ -67,8 +67,9 @@ RoomModel DetailExpressionTestModel {
 					}
 				}
 				Transition guardedTrans: idle -> state2 {
-					guard {
-						"rPortData.in1 == numberArray[3] && infoData.flag"
+					guard 
+				{
+						"rPortData.in1 == numberArray[3] && infoData.flag && actorOp(32)  && rPortEvent.regularOp(32) && cPortEvent.conjugatedOp(32)"
 					}
 				}
 				Transition init: initial -> idle
