@@ -65,40 +65,40 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 @SuppressWarnings("all")
 public class ActorClassGen extends GenericActorClassGenerator {
   @Inject
-  private IGeneratorFileIo fileIO;
+  protected IGeneratorFileIo fileIO;
   
   @Inject
   @Extension
-  private JavaExtensions _javaExtensions;
+  protected JavaExtensions _javaExtensions;
   
   @Inject
   @Extension
-  private RoomExtensions _roomExtensions;
+  protected RoomExtensions _roomExtensions;
   
   @Inject
-  private IDataConfiguration dataConfigExt;
+  protected IDataConfiguration dataConfigExt;
   
-  private final ConfigGenAddon configGenAddon;
-  
-  @Inject
-  @Extension
-  private ProcedureHelpers _procedureHelpers;
+  protected final ConfigGenAddon configGenAddon;
   
   @Inject
   @Extension
-  private Initialization _initialization;
+  protected ProcedureHelpers _procedureHelpers;
   
   @Inject
   @Extension
-  private StateMachineGen _stateMachineGen;
+  protected Initialization _initialization;
   
   @Inject
   @Extension
-  private TypeHelpers _typeHelpers;
+  protected StateMachineGen _stateMachineGen;
   
   @Inject
   @Extension
-  private FileSystemHelpers _fileSystemHelpers;
+  protected TypeHelpers _typeHelpers;
+  
+  @Inject
+  @Extension
+  protected FileSystemHelpers _fileSystemHelpers;
   
   @Inject
   public ActorClassGen(final ConfigGenAddon configGenAddon) {

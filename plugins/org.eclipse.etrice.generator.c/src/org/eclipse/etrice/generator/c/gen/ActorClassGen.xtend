@@ -34,13 +34,13 @@ import org.eclipse.etrice.generator.generic.RoomExtensions
 class ActorClassGen extends GenericActorClassGenerator {
 
 	@Inject protected extension RoomExtensions
-	@Inject extension CExtensions
-	@Inject extension ProcedureHelpers
-	@Inject extension StateMachineGen
+	@Inject protected extension CExtensions
+	@Inject protected extension ProcedureHelpers
+	@Inject protected extension StateMachineGen
 
 	@Inject protected ILanguageExtension langExt
-	@Inject IGeneratorFileIo fileIO
-	@Inject ILogger logger
+	@Inject protected IGeneratorFileIo fileIO
+	@Inject protected ILogger logger
 
 	def doGenerate(Root root) {
 		for (xpac: root.xpActorClasses) {
@@ -66,7 +66,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 		}
 	}
 
-	def private generateHeaderFile(Root root, ExpandedActorClass xpac) {
+	def protected generateHeaderFile(Root root, ExpandedActorClass xpac) {
 		val ac = xpac.actorClass
 		val eventPorts = ac.allEndPorts.filter(p|(p.protocol as ProtocolClass).commType==CommunicationType::EVENT_DRIVEN)
 		val sendPorts = ac.allEndPorts.filter(p|(p.protocol as ProtocolClass).commType==CommunicationType::DATA_DRIVEN && p.conjugated)
@@ -201,7 +201,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 	'''
 	}
 
-	def private generateUtilsFile(Root root, ExpandedActorClass xpac) {
+	def protected generateUtilsFile(Root root, ExpandedActorClass xpac) {
 		val ac = xpac.actorClass
 		val eventPorts = ac.allEndPorts.filter(p|(p.protocol as ProtocolClass).commType==CommunicationType::EVENT_DRIVEN)
 		val replEventPorts = eventPorts.filter[multiplicity!=1]
@@ -311,7 +311,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 		'''«FOR a : op.arguments SEPARATOR ", "»«a.name»«ENDFOR»'''
 	}
 
-	def private generateSourceFile(Root root, ExpandedActorClass xpac) {
+	def protected generateSourceFile(Root root, ExpandedActorClass xpac) {
 		val ac = xpac.actorClass
 		val async = ac.commType==ComponentCommunicationType::ASYNCHRONOUS
 		val eventDriven = ac.commType==ComponentCommunicationType::EVENT_DRIVEN

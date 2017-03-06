@@ -64,24 +64,24 @@ public class ActorClassGen extends GenericActorClassGenerator {
   
   @Inject
   @Extension
-  private CExtensions _cExtensions;
+  protected CExtensions _cExtensions;
   
   @Inject
   @Extension
-  private ProcedureHelpers _procedureHelpers;
+  protected ProcedureHelpers _procedureHelpers;
   
   @Inject
   @Extension
-  private StateMachineGen _stateMachineGen;
+  protected StateMachineGen _stateMachineGen;
   
   @Inject
   protected ILanguageExtension langExt;
   
   @Inject
-  private IGeneratorFileIo fileIO;
+  protected IGeneratorFileIo fileIO;
   
   @Inject
-  private ILogger logger;
+  protected ILogger logger;
   
   public void doGenerate(final Root root) {
     EList<ExpandedActorClass> _xpActorClasses = root.getXpActorClasses();
@@ -125,7 +125,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
     }
   }
   
-  private CharSequence generateHeaderFile(final Root root, final ExpandedActorClass xpac) {
+  protected CharSequence generateHeaderFile(final Root root, final ExpandedActorClass xpac) {
     CharSequence _xblockexpression = null;
     {
       final ActorClass ac = xpac.getActorClass();
@@ -513,7 +513,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
     return _xblockexpression;
   }
   
-  private CharSequence generateUtilsFile(final Root root, final ExpandedActorClass xpac) {
+  protected CharSequence generateUtilsFile(final Root root, final ExpandedActorClass xpac) {
     CharSequence _xblockexpression = null;
     {
       final ActorClass ac = xpac.getActorClass();
@@ -1082,7 +1082,7 @@ public class ActorClassGen extends GenericActorClassGenerator {
     return _builder;
   }
   
-  private CharSequence generateSourceFile(final Root root, final ExpandedActorClass xpac) {
+  protected CharSequence generateSourceFile(final Root root, final ExpandedActorClass xpac) {
     CharSequence _xblockexpression = null;
     {
       final ActorClass ac = xpac.getActorClass();

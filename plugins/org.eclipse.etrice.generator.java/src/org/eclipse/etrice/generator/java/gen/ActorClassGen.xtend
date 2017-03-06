@@ -36,17 +36,17 @@ import org.eclipse.etrice.generator.java.Main
 @Singleton
 class ActorClassGen extends GenericActorClassGenerator {
 
-	@Inject IGeneratorFileIo fileIO
-	@Inject extension JavaExtensions
-	@Inject extension RoomExtensions
-	@Inject IDataConfiguration dataConfigExt
-	final ConfigGenAddon configGenAddon
+	@Inject protected IGeneratorFileIo fileIO
+	@Inject protected extension JavaExtensions
+	@Inject protected extension RoomExtensions
+	@Inject protected IDataConfiguration dataConfigExt
+	final protected ConfigGenAddon configGenAddon
 
-	@Inject extension ProcedureHelpers
-	@Inject extension Initialization
-	@Inject extension StateMachineGen
-	@Inject extension TypeHelpers
-	@Inject extension FileSystemHelpers
+	@Inject protected extension ProcedureHelpers
+	@Inject protected extension Initialization
+	@Inject protected extension StateMachineGen
+	@Inject protected extension TypeHelpers
+	@Inject protected extension FileSystemHelpers
 
 	@Inject
 	new (ConfigGenAddon configGenAddon) {
