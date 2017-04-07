@@ -100,9 +100,11 @@ public class AbstractFSMDiagramBehavior extends CustomDiagramBehavior {
 		 */
 		@Override
 		public void internalRefreshEditPart(EditPart editPart) {
+			// JH: deactivated due https://bugs.eclipse.org/bugs/show_bug.cgi?id=464014
+			// TODO find another solution
 			// Explicitly deactivate and reactivate EditPart to force call to removeDecorators
-			editPart.deactivate();
-			editPart.activate();
+			//editPart.deactivate();
+			//editPart.activate();
 			super.internalRefreshEditPart(editPart);
 		}
 	}
