@@ -123,6 +123,19 @@ public class PortPropertyDialog extends AbstractPropertyDialog {
 						return ValidationStatus.error("data driven ports can not be replicated");
 				}
 			}
+			else if (value instanceof String) {
+				if (!value.equals("*")) {
+					try {
+						Integer.parseInt((String) value);
+					}
+					catch (NumberFormatException e) {
+						return ValidationStatus.error("Multiplicity must be * or integer > 0");
+					}
+				}
+			}
+			else {
+				return ValidationStatus.error("Multiplicity must be * or integer > 0");
+			}
 			return Status.OK_STATUS;
 		}
 	}
@@ -172,8 +185,14 @@ public class PortPropertyDialog extends AbstractPropertyDialog {
 		public Object convert(Object fromObject) {
 			if (fromObject.equals("*"))
 				return -1;
-			else
-				return Integer.parseInt((String) fromObject);
+			else {
+				try {
+					return Integer.parseInt((String) fromObject);
+				}
+				catch (NumberFormatException e) {
+					return "";
+				}
+			}
 		}
 	}
 	
