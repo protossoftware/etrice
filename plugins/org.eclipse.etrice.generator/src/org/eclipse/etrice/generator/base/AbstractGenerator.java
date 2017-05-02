@@ -452,9 +452,9 @@ public abstract class AbstractGenerator implements IDetailCodeTranslator {
 		// create a list of ROOM models
 		List<RoomModel> rml = new ArrayList<RoomModel>();
 		for (Resource resource : getResourceSet().getResources()) {
-			List<EObject> contents = resource.getContents();
-			if (!contents.isEmpty() && contents.get(0) instanceof RoomModel) {
-				rml.add((RoomModel)contents.get(0));
+			for(EObject content : resource.getContents()){
+				if(content instanceof RoomModel)
+					rml.add((RoomModel) content);
 			}
 		}
 		if (rml.isEmpty()) {

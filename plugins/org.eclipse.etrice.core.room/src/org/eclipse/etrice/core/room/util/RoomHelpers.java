@@ -1136,15 +1136,20 @@ public class RoomHelpers extends FSMHelpers {
 	 * @see #getAllMessages(ProtocolClass, boolean)
 	 */
 	public List<Message> getMessageListDeep(InterfaceItem item, boolean outgoing) {
+		if(item.getGeneralProtocol().eIsProxy()){
+			return Lists.newArrayList();
+		}
+		
 		ProtocolClass protocol = null;
 		if (item instanceof Port) {
-			if (!(((Port) item).getProtocol() instanceof ProtocolClass)) {
+			Port port = (Port) item;
+			if (!(port.getProtocol() instanceof ProtocolClass)) {
 				// end ports (for which this is called) can have no CompoundProtocolClass
 				assert(false): "unexpected protocol type";
 				return null;
 			}
 
-			protocol = (ProtocolClass) ((Port) item).getProtocol();
+			protocol = (ProtocolClass) port.getProtocol();
 			if (((Port) item).isConjugated())
 				outgoing = !outgoing;
 		}
