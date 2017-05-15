@@ -66,6 +66,7 @@ public class FileSystemHelpers extends RelativePathHelpers {
 				IFolder file = workspaceRoot.getFolder(new Path(mainPath.toPlatformString(true)));
 				String osString = file.getLocation().toOSString();
 				parent = new File(osString);
+				mainPath = URI.createFileURI(parent.getAbsolutePath());
 			}
 			else {
 				try {

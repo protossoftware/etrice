@@ -92,7 +92,7 @@ class TestInstanceCreator {
 		val testRoomModel = createRoomModel => [
 			name = "DerivedTestRoomModel"
 			systems += testSystem
-			subSystemClasses += testSubSystem
+			if(testSubSystem.eResource === null) subSystemClasses += testSubSystem
 		]
 		val testMappingModel = createMappingModel => [
 			name = "DerivedTestMappingModel"
@@ -109,7 +109,7 @@ class TestInstanceCreator {
 		]
 
 		// create memory resource with same uri locations as test instance
-		val Resource existingResource = if(testSubSystem.eResource != null) testSubSystem.eResource else testSubSystem.actorRefs.head?.type?.eResource
+		val Resource existingResource = if(testSubSystem.eResource !== null) testSubSystem.eResource else allAnnotatedClasses.head.eResource
 		val uriPath = existingResource.URI.trimFileExtension.trimSegments(1)
 		rs.createResource(uriPath.appendSegment("DerivedTestMappingModel").appendFileExtension("etmap")).contents += testMappingModel
 		rs.createResource(uriPath.appendSegment("DerivedTestRoomModel").appendFileExtension("room")).contents += testRoomModel
