@@ -85,10 +85,10 @@ RoomModel TestBindings {
 	
 	ActorClass Example8 {
 		Structure {
-			ActorRef ref1: AC5
-			ActorRef ref2: AC6
-			ActorRef ref3: AC5
-			ActorRef ref4: AC6
+			ActorRef ref1: AC5a
+			ActorRef ref2: AC6a
+			ActorRef ref3: AC5a
+			ActorRef ref4: AC6a
 	
 			// a replicated port must have at most one replicated peer
 			Binding ref1.p and ref2.pc 
@@ -137,9 +137,21 @@ RoomModel TestBindings {
 		}
 	}
 	
+	ActorClass AC5a {
+		Interface {
+			Port p[*]: PC1
+		}
+	}
+	
 	ActorClass AC6 {
 		Interface {
 			conjugated Port pc[2]: PC1
+		}
+	}
+	
+	ActorClass AC6a {
+		Interface {
+			conjugated Port pc[*]: PC1
 		}
 	}
 	

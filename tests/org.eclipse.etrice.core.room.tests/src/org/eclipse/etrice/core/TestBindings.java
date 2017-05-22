@@ -81,13 +81,10 @@ public class TestBindings extends TestBase {
 		assertEquals("derived protocols not connectable (both directions extended)", diag.getMessage());
 		
 		diag = getDiag(resource.getEObject("ActorClass:Example8"));
+		assertEquals(2, diag.getChildren().size());
 		Diagnostic childDiag = diag.getChildren().get(0);
 		assertEquals(RoomJavaValidator.A_REPLICATED_PORT_MUST_HAVE_AT_MOST_ONE_REPLICATED_PEER, childDiag.getMessage());
 		childDiag = diag.getChildren().get(1);
-		assertEquals(RoomJavaValidator.A_REPLICATED_PORT_MUST_HAVE_AT_MOST_ONE_REPLICATED_PEER, childDiag.getMessage());
-		childDiag = diag.getChildren().get(2);
-		assertEquals(RoomJavaValidator.A_REPLICATED_PORT_MUST_HAVE_AT_MOST_ONE_REPLICATED_PEER, childDiag.getMessage());
-		childDiag = diag.getChildren().get(3);
 		assertEquals(RoomJavaValidator.A_REPLICATED_PORT_MUST_HAVE_AT_MOST_ONE_REPLICATED_PEER, childDiag.getMessage());
 	}
 	

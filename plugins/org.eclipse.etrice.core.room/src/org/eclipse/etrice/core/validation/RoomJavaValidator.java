@@ -45,6 +45,7 @@ import org.eclipse.etrice.core.room.ActorInstanceMapping;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.Binding;
+import org.eclipse.etrice.core.room.BindingEndPoint;
 import org.eclipse.etrice.core.room.CommunicationType;
 import org.eclipse.etrice.core.room.CompoundProtocolClass;
 import org.eclipse.etrice.core.room.DataClass;
@@ -97,7 +98,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	/* message strings */
 	public static final String OPTIONAL_REFS_HAVE_TO_HAVE_MULTIPLICITY_ANY = "optional refs have to have multiplicity any [*]";
 	public static final String MULTIPLICITY_ANY_REQUIRES_OPTIONAL = "multiplicity any [*] requires optional";
-	public static final String A_REPLICATED_PORT_MUST_HAVE_AT_MOST_ONE_REPLICATED_PEER = "a replicated port must have at most one replicated peer";
+	public static final String A_REPLICATED_PORT_MUST_HAVE_AT_MOST_ONE_REPLICATED_PEER = "a replicated port must have at most one replicated peer (with arbitrary multiplicity each)";
 
 	/* tags for quick fixes */
 	public static final String THREAD_MISSING = "RoomJavaValidator.ThreadMissing";
@@ -655,21 +656,26 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 
 	@Check
 	public void checkReplicatedPortBindingPatterns(StructureClass sc) {
-		HashSet<Port> haveReplPeer = new HashSet<Port>();
+		HashSet<String> haveReplPeer = new HashSet<String>();
 		for (Binding bind : sc.getBindings()) {
 			Port p1 = bind.getEndpoint1().getPort();
 			Port p2 = bind.getEndpoint2().getPort();
-			if (p1.getMultiplicity()!=1 && p2.getMultiplicity()!=1) {
-				if (!haveReplPeer.add(p1))
+			if (p1.getMultiplicity()<0 && p2.getMultiplicity()<0) {
+				if (!haveReplPeer.add(getEndpointKey(bind.getEndpoint1())))
 					error(A_REPLICATED_PORT_MUST_HAVE_AT_MOST_ONE_REPLICATED_PEER,
 							bind,
 							RoomPackage.Literals.BINDING__ENDPOINT1);
-				if (!haveReplPeer.add(p2))
+				if (!haveReplPeer.add(getEndpointKey(bind.getEndpoint2())))
 					error(A_REPLICATED_PORT_MUST_HAVE_AT_MOST_ONE_REPLICATED_PEER,
 							bind,
 							RoomPackage.Literals.BINDING__ENDPOINT2);
 			}
 		}
+	}
+	
+	private String getEndpointKey(BindingEndPoint ep) {
+		String ref = ep.getActorRef()==null? "" : ep.getActorRef().getName();
+		return ref + "#" + ep.getPort().getName();
 	}
 
 	@Check
