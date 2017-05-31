@@ -285,8 +285,8 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	public void checkAttribute(Attribute attr){
 		if(attr.getType() == null)
 			error("missing type", attr, RoomPackage.Literals.ATTRIBUTE__TYPE);
-		if(attr.getDefaultValueLiteral() != null)
-			warning("deprecated,  initialize in user code or .config instead", attr, RoomPackage.Literals.ATTRIBUTE__DEFAULT_VALUE_LITERAL);
+//		if(attr.getDefaultValueLiteral() != null)
+//			warning("deprecated,  initialize in user code or .config instead", attr, RoomPackage.Literals.ATTRIBUTE__DEFAULT_VALUE_LITERAL);
 	}
 
 	@Check
