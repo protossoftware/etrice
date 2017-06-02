@@ -33,10 +33,12 @@ import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.etrice.core.common.ui.linking.GlobalNonPlatformURIEditorOpener;
 import org.eclipse.etrice.ui.common.base.UIBaseActivator;
 import org.eclipse.etrice.ui.common.base.editor.DiagramEditorBase;
+import org.eclipse.etrice.ui.common.base.editor.RelativeFileURIHandler;
 import org.eclipse.etrice.ui.common.base.preferences.UIBasePreferenceConstants;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.graphiti.services.Graphiti;
 import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
@@ -44,6 +46,7 @@ import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 
+import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 
 /**
@@ -131,7 +134,7 @@ public abstract class DiagramAccessBase {
 			populateDiagram(rootObject, diagram);
 			
 			try {
-				diagRes.save(Collections.EMPTY_MAP);
+				diagRes.save(RelativeFileURIHandler.addToOptions(Maps.newHashMap()));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -206,34 +209,39 @@ public abstract class DiagramAccessBase {
 	public DiagramEditorBase findDiagramEditor(EObject rootObject) {
 		IFileEditorInput input = getEditorInput(rootObject);
 	
-		return (DiagramEditorBase) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findEditor(input);
+		IEditorPart part = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findEditor(input);
+		if(part instanceof DiagramEditorBase) {
+			return (DiagramEditorBase) part;
+		}
+		
+		return null;
 	}
 
 	public DiagramEditorBase openDiagramEditor(EObject rootObject) {
 		IFileEditorInput input = getEditorInput(rootObject);
 	
-		try {
-			return (DiagramEditorBase) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().openEditor(input, getEditorId());
-		} catch (PartInitException e) {
-			String error = "Error while opening diagram editor";
-			System.err.println(error);
+		if(input != null) {
+			try {
+				IEditorPart part = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().openEditor(input, getEditorId());
+				if(part instanceof DiagramEditorBase) {
+					return (DiagramEditorBase) part;
+				}
+			} catch (PartInitException e) {
+				String error = "Error while opening diagram editor";
+				System.err.println(error);
+			}
 		}
+		
 		return null;
 	}
 
 	private IFileEditorInput getEditorInput(EObject rootObject) {
 		Diagram diagram = getDiagram(rootObject);
+		if(diagram == null) return null;
 		
-		URI uri = diagram.eResource().getURI();
-		String platformString = null;
-		if (uri.isPlatform()) {
-			platformString = uri.toPlatformString(true);
-		}
-		else {
-			uri = GlobalNonPlatformURIEditorOpener.getPlatformURI(uri);
-			platformString = uri.toPlatformString(true);
-		}
-		IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(platformString));
+		URI uri = GlobalNonPlatformURIEditorOpener.getPlatformURI(diagram.eResource().getURI());
+		if(uri == null) return null;
+		IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(uri.toPlatformString(true)));
 		IFileEditorInput input = new FileEditorInput(file);
 		return input;
 	}

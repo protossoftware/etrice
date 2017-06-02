@@ -68,6 +68,8 @@ public class CustomUpdateBehavior extends DefaultUpdateBehavior {
 			resourceSet = new XtextResourceSet();
 		}
 		
+		RelativeFileURIHandler.addToOptions(resourceSet.getLoadOptions());
+		
 		final IWorkspaceCommandStack workspaceCommandStack = new GFWorkspaceCommandStackImpl(new DefaultOperationHistory());
 		
 		final TransactionalEditingDomainImpl editingDomain = new TransactionalEditingDomainImpl(new ComposedAdapterFactory(

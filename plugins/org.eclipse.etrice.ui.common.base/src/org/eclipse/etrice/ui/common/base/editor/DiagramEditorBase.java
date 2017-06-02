@@ -15,14 +15,13 @@ package org.eclipse.etrice.ui.common.base.editor;
 import java.util.Collection;
 import java.util.Map;
 
-import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.etrice.core.common.ui.linking.GlobalNonPlatformURIEditorOpener;
 import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
 import org.eclipse.etrice.core.fsm.ui.FSMUiModule;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
@@ -85,8 +84,10 @@ public abstract class DiagramEditorBase extends DiagramEditor implements IInputU
 		
 		ResourceSet resourceSet = getEditingDomain().getResourceSet();
 		Map<EObject, Collection<Setting>> result = EcoreUtil.UnresolvedProxyCrossReferencer.find(resourceSet);
-		if (!result.isEmpty())
+		if (!result.isEmpty()){
 			System.err.println("ERROR in diagram viewer: could not resolve all proxies!");
+			//System.out.println(result);
+		}
 	
 		mte.setTarget(getEditingDomain());
 	}	
@@ -135,6 +136,10 @@ public abstract class DiagramEditorBase extends DiagramEditor implements IInputU
 	@Override
 	public void createPartControl(Composite parent) {
 		super.createPartControl(parent);
+		if(!getDiagramBehavior().isAlive()){
+			// something is wrong, avoid further exceptions
+			return;
+		}
 		
 		superClassListener = new SuperClassListener(this, textEditorClass);
 		PlatformUI.getWorkbench().getActiveWorkbenchWindow().getPartService().addPartListener(superClassListener);
@@ -162,11 +167,11 @@ public abstract class DiagramEditorBase extends DiagramEditor implements IInputU
 		
 		ModelComponent editorSc = editor.getModelComponent();
 		if (editorSc!=null) {
-			URI editorResURI = toCurrentPlatformURI(editorSc.eResource().getURI());
+			URI editorResURI = GlobalNonPlatformURIEditorOpener.getPlatformURI(editorSc.eResource().getURI());
 			
 			ModelComponent base = getModelComponent();
 			while((base = base.getBase()) != null){
-				URI baseResURI = toCurrentPlatformURI(base.eResource().getURI());
+				URI baseResURI = GlobalNonPlatformURIEditorOpener.getPlatformURI(base.eResource().getURI());
 				if(editorResURI.equals(baseResURI))
 					if(editorSc.getComponentName().equals(base.getComponentName()))
 						return true;
@@ -192,16 +197,16 @@ public abstract class DiagramEditorBase extends DiagramEditor implements IInputU
 			@Override
 			public Boolean exec(XtextResource resource) throws Exception {
 				
-				URI editorResURI = toCurrentPlatformURI(resource.getURI());
-				URI thisScResURI = toCurrentPlatformURI(getModelComponent().eResource().getURI());
+				URI editorResURI = GlobalNonPlatformURIEditorOpener.getPlatformURI(resource.getURI());
+				URI thisScResURI = GlobalNonPlatformURIEditorOpener.getPlatformURI(getModelComponent().eResource().getURI());
 				
 				// ignore if in same file (handled by graphiti)
-				if(thisScResURI.equals(editorResURI))
+				if(thisScResURI == null || thisScResURI.equals(editorResURI))
 					return false;
 				
 				ModelComponent base = getModelComponent();
 				while((base = base.getBase()) != null){
-					URI baseResURI = toCurrentPlatformURI(base.eResource().getURI());
+					URI baseResURI = GlobalNonPlatformURIEditorOpener.getPlatformURI(base.eResource().getURI());
 					if(editorResURI.equals(baseResURI))
 						return true;
 				}
@@ -209,19 +214,6 @@ public abstract class DiagramEditorBase extends DiagramEditor implements IInputU
 				return false;
 			}
 		});
-	}
-
-	private URI toCurrentPlatformURI(URI uri) {
-		if(uri.isPlatform())
-			return uri;
-		else if(uri.isFile()){
-			final IPath rootPath = ResourcesPlugin.getWorkspace().getRoot().getLocation();
-			String rootString = rootPath.toFile().toString();
-			String fileString = uri.toFileString();
-			if(fileString.startsWith(rootString))
-				return URI.createPlatformResourceURI(fileString.replace(rootString, ""), false);
-		}
-		return null;
 	}
 
 	protected abstract void handleMissingDiagramBo(Diagram diagram);

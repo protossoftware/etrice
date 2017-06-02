@@ -55,17 +55,17 @@ public class GlobalNonPlatformURIEditorOpener extends GlobalURIEditorOpener {
 	public static URI getPlatformURI(URI uri) {
 		if (uri.isPlatform())
 			return uri;
-		
+
 		// HOWTO: find absolute path location in workspace (as platform URI)
 		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
 		IFile[] files = root.findFilesForLocationURI(java.net.URI.create(uri.toString()));
-		if (files.length!=0) {
-			String pluri = files[0].toString();
-			// the pluri starts with L/ which we have to omit for URI.createPlatformResourceURI
-			uri = URI.createPlatformResourceURI(pluri.substring(2), true).appendFragment(uri.fragment());
-			return uri;
+		for (IFile file : files) { // which file to choose ?
+			if (!file.isAccessible())	// avoid closed or other bad files
+				continue;
+			
+			return URI.createPlatformResourceURI(file.getFullPath().toString(), true).appendFragment(uri.fragment());
 		}
-		
+
 		return null;
 	}
 
