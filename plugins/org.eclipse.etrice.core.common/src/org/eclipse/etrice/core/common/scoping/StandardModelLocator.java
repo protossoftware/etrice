@@ -29,6 +29,9 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.xtext.resource.ClasspathUriResolutionException;
 
+/**
+ *  TODO import resolve (and deresolve in diagrams) is not consistent 
+ */
 public class StandardModelLocator implements IModelLocator {
 
 	private static final String CLASSPATH = "classpath:/";
@@ -111,33 +114,26 @@ public class StandardModelLocator implements IModelLocator {
 			return null;
 
 		URI uri = URI.createURI(resolve);
-		if (uri.isRelative()) {
+		if (uri.isFile() && uri.hasRelativePath()) {
+			// NOTE: deresolve (== reverse direction) is implemented in ui.RelativeFileURIHandler
 			URI base = baseUri.trimSegments(1);
 			if (base.isPlatformResource() && EMFPlugin.IS_ECLIPSE_RUNNING) {
-				URI platUri = uri.resolve(baseUri);
-				if (!existsInPlatform(platUri)) {
-					// platUri does not exist in the workspace as a platform
-					// resource
-					URI fileUri = resolveFileUriFromPlatformBase(uri, baseUri);
-					if (existsInFileSys(fileUri)) {
-						// corresponding fileUri does exist in the file system,
-						// so try to create a mapping in URIMap
-						if (!updateURIMapEntry(res, platUri, fileUri))
-							return null;
-					} else {
-						// corresponding fileUri does not exist in the file
-						// system either, so fail and return null
-						return null;
-					}
+				URI fileUri = resolveFileUriFromPlatformBase(uri, baseUri); // relative path ?-> baseFileURI => absolute file uri
+				URI platUri = getPlatformURI(fileUri);						// absolute file uri => accessible platform uri
+				if(platUri == null){
+					// JH: Fix this here ? Why need we an URI mapping ? Room import does not support any logicals URIs ?
+//					if(existsInFileSys(fileUri)){
+//						// corresponding fileUri does exist in the file system,
+//						// so try to create a mapping in URIMap
+//						if (!updateURIMapEntry(res, platUri, fileUri))
+//							return null;
+//					}
+					
+					// room import is file based => can only return an fileURI here
+					return fileUri.toString();	
 				}
 				else {
-					// platUri exists in the workspace
-					
-					// check whether a simple concatenation with the base gives a valid file system path
-					URI fileUri = resolveFileUriFromPlatformBase(uri, baseUri);
-					if (!existsInFileSys(fileUri))
-						return null;
-					
+					// platUri exists in the workspace					
 					removeURIMapEntry(res, platUri);
 					return platUri.toString();
 				}
@@ -250,6 +246,7 @@ public class StandardModelLocator implements IModelLocator {
 	private boolean existsInPlatform(URI uri) {
 		if(!EMFPlugin.IS_ECLIPSE_RUNNING)
 			return false;
+		
 		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
 		if (root == null)
 			return false;
@@ -325,4 +322,30 @@ public class StandardModelLocator implements IModelLocator {
 	protected File locateFile(File f) {
 		return f;
 	}
+	
+	/**
+	 *  Returns a platformURI which underlying file is accessible.
+	 *  Copied from GlobalNonPlatformURIEditorOpener
+	 */
+	public static URI getPlatformURI(URI uri) {
+		if (uri.isPlatform())
+			return uri;
+
+		// HOWTO: find absolute path location in workspace (as platform URI)
+		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
+		IFile[] files = root.findFilesForLocationURI(java.net.URI.create(uri.toString()));
+		
+		URI minLength = null;
+		for (IFile file : files) {
+			if (!file.isAccessible())	// avoid closed or other bad files
+				continue;
+			
+			URI platURI = URI.createPlatformResourceURI(file.getFullPath().toString(), true).appendFragment(uri.fragment());
+			if(minLength == null || platURI.toString().length() < minLength.toString().length())
+				minLength = platURI;
+		}	
+
+		return minLength;
+	}
+
 }

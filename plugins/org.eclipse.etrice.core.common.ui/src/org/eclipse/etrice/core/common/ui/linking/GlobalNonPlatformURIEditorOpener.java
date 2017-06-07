@@ -52,6 +52,9 @@ public class GlobalNonPlatformURIEditorOpener extends GlobalURIEditorOpener {
 			return openExternalFile(uri);
 	}
 	
+	/**
+	 *  Returns a platformURI which underlying file is accessible
+	 */
 	public static URI getPlatformURI(URI uri) {
 		if (uri.isPlatform())
 			return uri;
@@ -59,14 +62,18 @@ public class GlobalNonPlatformURIEditorOpener extends GlobalURIEditorOpener {
 		// HOWTO: find absolute path location in workspace (as platform URI)
 		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
 		IFile[] files = root.findFilesForLocationURI(java.net.URI.create(uri.toString()));
-		for (IFile file : files) { // which file to choose ?
+		
+		URI minLength = null;
+		for (IFile file : files) {
 			if (!file.isAccessible())	// avoid closed or other bad files
 				continue;
 			
-			return URI.createPlatformResourceURI(file.getFullPath().toString(), true).appendFragment(uri.fragment());
-		}
+			URI platURI = URI.createPlatformResourceURI(file.getFullPath().toString(), true).appendFragment(uri.fragment());
+			if(minLength == null || platURI.toString().length() < minLength.toString().length())
+				minLength = platURI;
+		}	
 
-		return null;
+		return minLength;
 	}
 
 	private IEditorPart openExternalFile(URI referenceOwnerURI) {

@@ -209,7 +209,7 @@ public abstract class DiagramAccessBase {
 	public DiagramEditorBase findDiagramEditor(EObject rootObject) {
 		IFileEditorInput input = getEditorInput(rootObject);
 	
-		IEditorPart part = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findEditor(input);
+		IEditorPart part = (input == null) ? null : PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().findEditor(input);
 		if(part instanceof DiagramEditorBase) {
 			return (DiagramEditorBase) part;
 		}
@@ -220,16 +220,14 @@ public abstract class DiagramAccessBase {
 	public DiagramEditorBase openDiagramEditor(EObject rootObject) {
 		IFileEditorInput input = getEditorInput(rootObject);
 	
-		if(input != null) {
-			try {
-				IEditorPart part = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().openEditor(input, getEditorId());
-				if(part instanceof DiagramEditorBase) {
-					return (DiagramEditorBase) part;
-				}
-			} catch (PartInitException e) {
-				String error = "Error while opening diagram editor";
-				System.err.println(error);
+		try {
+			IEditorPart part = (input == null) ? null : PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().openEditor(input, getEditorId());
+			if(part instanceof DiagramEditorBase) {
+				return (DiagramEditorBase) part;
 			}
+		} catch (PartInitException e) {
+			String error = "Error while opening diagram editor";
+			System.err.println(error);
 		}
 		
 		return null;
