@@ -15,9 +15,9 @@ package org.eclipse.etrice.core.ui.outline;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.etrice.core.common.base.Import;
+import org.eclipse.etrice.core.fsm.fSM.State;
+import org.eclipse.etrice.core.fsm.fSM.StateGraph;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorInstanceMapping;
 import org.eclipse.etrice.core.room.ActorRef;
@@ -30,12 +30,9 @@ import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.PortOperation;
 import org.eclipse.etrice.core.room.ProtocolClass;
-import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.SAP;
 import org.eclipse.etrice.core.room.SPP;
 import org.eclipse.etrice.core.room.ServiceImplementation;
-import org.eclipse.etrice.core.fsm.fSM.State;
-import org.eclipse.etrice.core.fsm.fSM.StateGraph;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.ui.internal.RoomActivator;
 import org.eclipse.jface.viewers.ILabelProvider;
@@ -259,37 +256,14 @@ public class RoomOutlineTreeProvider extends DefaultOutlineTreeProvider {
 	}
 	
 	protected void _createChildren(IOutlineNode parentNode, Import im) {
-		String uriString = importUriResolver.resolve(im);
+		String resolvedURI = importUriResolver.resolve(im);
+		if(resolvedURI == null) return;
 		
-		if (uriString==null)
-			return;
+		Resource res = im.eResource().getResourceSet().getResource(URI.createURI(resolvedURI), false);
+		if(res == null) return;
 		
-		URI uri = URI.createURI(uriString);
-		ResourceSet rs = new ResourceSetImpl();
-		RoomModel refModel = null;
-		
-		try {
-			Resource res = rs.getResource(uri, true);
-			if(res != null && !res.getContents().isEmpty() && res.getContents().get(0) instanceof RoomModel)
-				refModel = (RoomModel)res.getContents().get(0);
-		}catch (RuntimeException re) {
-		}
-		
-		if(refModel != null){
-			for(EObject firstLevelElement : refModel.getActorClasses())
-				_createNode(parentNode, firstLevelElement);
-			for(EObject firstLevelElement : refModel.getDataClasses())
-				_createNode(parentNode, firstLevelElement);
-			for(EObject firstLevelElement : refModel.getExternalTypes())
-				_createNode(parentNode, firstLevelElement);
-			for(EObject firstLevelElement : refModel.getPrimitiveTypes())
-				_createNode(parentNode, firstLevelElement);
-			for(EObject firstLevelElement : refModel.getProtocolClasses())
-				_createNode(parentNode, firstLevelElement);
-			for(EObject firstLevelElement : refModel.getSubSystemClasses())
-				_createNode(parentNode, firstLevelElement);
-			for(EObject firstLevelElement : refModel.getSystems())
-				_createNode(parentNode, firstLevelElement);
+		for(EObject content : res.getContents()) {
+			createChildren(parentNode, content);
 		}
 	}
 	
