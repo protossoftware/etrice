@@ -59,6 +59,7 @@ class RelativeFileURITest {
 		"file:/C:/My%20Documents/me/50%25+1.txt"
 	]
 
+	// require ResourcePlugin and actual files to test
 	val static ENCODED_PLATFORM_PATH_URIS = #[
 		"platform:/resource/project/myfile.txt",
 		"platform:/resource/My%20Project%20%231/My%20File.txt",
@@ -73,7 +74,7 @@ class RelativeFileURITest {
 	val static TEST_URI = URI.createURI("file:/a/b/c/d")
 
 	def Iterable<URI> allURIs() {
-		(ABSOLUTE_URLS + RESOLVED_PRESERVE_ABOVE_ROOT_URIS + RESOLVED_NO_PRESERVE_ABOVE_ROOT_URIS + ENCODED_URIS + ENCODED_PLATFORM_PATH_URIS).map[ uri |
+		(ABSOLUTE_URLS + RESOLVED_PRESERVE_ABOVE_ROOT_URIS + RESOLVED_NO_PRESERVE_ABOVE_ROOT_URIS + ENCODED_URIS).map[ uri |
 			QUERIES.map[query | FRAGMENTS.map[fragment | uri + query + fragment]]
 		].flatten.flatten.map[URI.createURI(it)]
 	}

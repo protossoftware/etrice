@@ -45,7 +45,6 @@ public class RelativeFileURITest {
     Iterable<String> _plus = Iterables.<String>concat(RelativeFileURITest.ABSOLUTE_URLS, RelativeFileURITest.RESOLVED_PRESERVE_ABOVE_ROOT_URIS);
     Iterable<String> _plus_1 = Iterables.<String>concat(_plus, RelativeFileURITest.RESOLVED_NO_PRESERVE_ABOVE_ROOT_URIS);
     Iterable<String> _plus_2 = Iterables.<String>concat(_plus_1, RelativeFileURITest.ENCODED_URIS);
-    Iterable<String> _plus_3 = Iterables.<String>concat(_plus_2, RelativeFileURITest.ENCODED_PLATFORM_PATH_URIS);
     final Function1<String, List<List<String>>> _function = new Function1<String, List<List<String>>>() {
       @Override
       public List<List<String>> apply(final String uri) {
@@ -64,7 +63,7 @@ public class RelativeFileURITest {
         return ListExtensions.<String, List<String>>map(RelativeFileURITest.QUERIES, _function);
       }
     };
-    Iterable<List<List<String>>> _map = IterableExtensions.<String, List<List<String>>>map(_plus_3, _function);
+    Iterable<List<List<String>>> _map = IterableExtensions.<String, List<List<String>>>map(_plus_2, _function);
     Iterable<List<String>> _flatten = Iterables.<List<String>>concat(_map);
     Iterable<String> _flatten_1 = Iterables.<String>concat(_flatten);
     final Function1<String, URI> _function_1 = new Function1<String, URI>() {

@@ -18,6 +18,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.XMLResource.URIHandler;
@@ -59,9 +60,12 @@ public class RelativeFileURIHandler extends URIHandlerImpl {
 			
 			URI resolvedFileURI = fileURI.resolve(baseFileURI, true);	
 		//	System.out.println("resolve: " + fileURI + " -> " + baseFileURI + " = " + resolvedFileURI);
-			URI platURI = StandardModelLocator.getPlatformURI(resolvedFileURI);
-			
-			return (platURI != null) ? platURI : resolvedFileURI;
+			if(EMFPlugin.IS_ECLIPSE_RUNNING) {
+				URI platURI = StandardModelLocator.getPlatformURI(resolvedFileURI);
+				return (platURI != null) ? platURI : resolvedFileURI;
+			} else {
+				return resolvedFileURI;
+			}
 		}
 		
 		return (fallback != null) ? fallback.resolve(uri) : uri;
