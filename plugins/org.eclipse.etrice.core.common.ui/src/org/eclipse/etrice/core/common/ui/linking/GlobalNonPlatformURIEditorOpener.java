@@ -14,12 +14,10 @@ package org.eclipse.etrice.core.common.ui.linking;
 
 import org.eclipse.core.filesystem.EFS;
 import org.eclipse.core.filesystem.IFileStore;
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IWorkspaceRoot;
-import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.etrice.core.common.scoping.StandardModelLocator;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
@@ -56,24 +54,7 @@ public class GlobalNonPlatformURIEditorOpener extends GlobalURIEditorOpener {
 	 *  Returns a platformURI which underlying file is accessible
 	 */
 	public static URI getPlatformURI(URI uri) {
-		if (uri.isPlatform())
-			return uri;
-
-		// HOWTO: find absolute path location in workspace (as platform URI)
-		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
-		IFile[] files = root.findFilesForLocationURI(java.net.URI.create(uri.toString()));
-		
-		URI minLength = null;
-		for (IFile file : files) {
-			if (!file.isAccessible())	// avoid closed or other bad files
-				continue;
-			
-			URI platURI = URI.createPlatformResourceURI(file.getFullPath().toString(), true).appendFragment(uri.fragment());
-			if(minLength == null || platURI.toString().length() < minLength.toString().length())
-				minLength = platURI;
-		}	
-
-		return minLength;
+		return StandardModelLocator.getPlatformURI(uri);
 	}
 
 	private IEditorPart openExternalFile(URI referenceOwnerURI) {

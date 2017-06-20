@@ -10,10 +10,10 @@
  * 
  *******************************************************************************/
 
-package org.eclipse.etrice.tests.base
+package org.eclipse.etrice.core.common.tests
 
 import org.eclipse.emf.common.util.URI
-import org.eclipse.etrice.ui.common.base.editor.RelativeFileURIHandler
+import org.eclipse.etrice.core.common.scoping.RelativeFileURIHandler
 import org.junit.Test
 
 import static org.junit.Assert.assertEquals
@@ -78,7 +78,7 @@ class RelativeFileURITest {
 		].flatten.flatten.map[URI.createURI(it)]
 	}
 	
-	val handler = new RelativeFileURIHandler(null);
+	val handler = new RelativeFileURIHandler
 
 	@Test
 	def void resolveSelf() {

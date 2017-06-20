@@ -10,7 +10,7 @@
  * 
  *******************************************************************************/
 
-package org.eclipse.etrice.ui.common.base.editor;
+package org.eclipse.etrice.core.common.scoping;
 
 import java.util.Map;
 
@@ -22,7 +22,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.XMLResource.URIHandler;
 import org.eclipse.emf.ecore.xmi.impl.URIHandlerImpl;
-import org.eclipse.etrice.core.common.ui.linking.GlobalNonPlatformURIEditorOpener;
 
 /**
  *  {@linkplain URIHandler} which deresolves to relative file uri and resolves to absolute file uri. <br>
@@ -41,6 +40,10 @@ public class RelativeFileURIHandler extends URIHandlerImpl {
 	
 	final protected URIHandler fallback;
 	
+	public RelativeFileURIHandler() {
+		this(null);
+	}
+	
 	public RelativeFileURIHandler(URIHandler fallback) {
 		this.fallback = fallback;
 	}
@@ -56,7 +59,7 @@ public class RelativeFileURIHandler extends URIHandlerImpl {
 			
 			URI resolvedFileURI = fileURI.resolve(baseFileURI, true);	
 		//	System.out.println("resolve: " + fileURI + " -> " + baseFileURI + " = " + resolvedFileURI);
-			URI platURI = GlobalNonPlatformURIEditorOpener.getPlatformURI(resolvedFileURI);
+			URI platURI = StandardModelLocator.getPlatformURI(resolvedFileURI);
 			
 			return (platURI != null) ? platURI : resolvedFileURI;
 		}

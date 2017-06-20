@@ -8,14 +8,14 @@
  * CONTRIBUTORS:
  * 		Juergen Haug (initial contribution)
  */
-package org.eclipse.etrice.tests.base;
+package org.eclipse.etrice.core.common.tests;
 
 import com.google.common.collect.Iterables;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.etrice.ui.common.base.editor.RelativeFileURIHandler;
+import org.eclipse.etrice.core.common.scoping.RelativeFileURIHandler;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -76,7 +76,7 @@ public class RelativeFileURITest {
     return IterableExtensions.<String, URI>map(_flatten_1, _function_1);
   }
   
-  private final RelativeFileURIHandler handler = new RelativeFileURIHandler(null);
+  private final RelativeFileURIHandler handler = new RelativeFileURIHandler();
   
   @Test
   public void resolveSelf() {

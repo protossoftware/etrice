@@ -9,13 +9,16 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.etrice.core.common.base.util.RelativePathHelpers;
+import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.xtext.ui.editor.contentassist.AbstractContentProposalProvider;
+import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
+import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher;
 
 public class ImportModelAssist {
-	
+		
 	public static void addPaths(final AbstractContentProposalProvider provider, final ContentAssistContext context,
 			final ICompletionProposalAcceptor acceptor, final String extension) {
 		final IPath rootPath = ResourcesPlugin.getWorkspace().getRoot().getFullPath();
@@ -39,11 +42,18 @@ public class ImportModelAssist {
 					if (relPath==null)
 						relPath = "file:/"+(relURI.toFileString().replaceAll("\\\\", "/"));
 					IPath relWorkspacePath = proxy.requestFullPath().makeRelativeTo(rootPath);
-					String proposal = "\"" + relPath + "\"";
-					String displayString = relModelPath.lastSegment() + " - "
-							+ relWorkspacePath;
-					acceptor.accept(provider.createCompletionProposal(proposal,
-							new StyledString(displayString), null, context));
+					String proposalString = "\"" + relPath + "\"";
+					String displayString = relModelPath.lastSegment() + " - " + relWorkspacePath;
+					
+					ICompletionProposal proposal = provider.createCompletionProposal(proposalString,
+							new StyledString(displayString), null, context);
+					if(proposal instanceof ConfigurableCompletionProposal) {
+						ConfigurableCompletionProposal cfgProposal = (ConfigurableCompletionProposal) proposal;
+						cfgProposal.setAutoInsertable(false);
+						cfgProposal.setMatcher(new ImportPrefixMatcher());
+					}
+					
+					acceptor.accept(proposal);
 				}
 				return false;
 			}
@@ -54,6 +64,18 @@ public class ImportModelAssist {
 		} catch (CoreException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	private static class ImportPrefixMatcher extends PrefixMatcher {
+
+		@Override
+		public boolean isCandidateMatchingPrefix(String name, String prefix) {
+			String[] segments = name.split("/");
+			String last = (segments.length > 0) ? segments[segments.length-1]: "";
+			
+			return last.replace("\"", "").toLowerCase().startsWith(prefix.replace("\"", "").toLowerCase());
+		}
+		
 	}
 
 }
