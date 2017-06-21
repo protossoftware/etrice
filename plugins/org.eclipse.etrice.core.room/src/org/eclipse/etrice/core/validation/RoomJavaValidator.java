@@ -81,6 +81,7 @@ import org.eclipse.xtext.scoping.impl.ImportUriResolver;
 import org.eclipse.xtext.validation.Check;
 
 import com.google.common.base.Function;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
@@ -141,7 +142,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 		URI uri = URI.createURI(uriString);
 		ResourceSet rs = imp.eResource().getResourceSet();
 
-		RoomModel importedModel;
+		List<RoomModel> importedModels = Lists.newArrayList();
 		try {
 			Resource res = rs.getResource(uri, true);
 			if (res==null)
@@ -152,14 +153,19 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 				return;
 			}
 
-			if (!(res.getContents().get(0) instanceof RoomModel)) {
-				if (uri.lastSegment().endsWith(".room"))
+			for(EObject content : res.getContents()) {
+				if(content instanceof RoomModel) {
+					importedModels.add((RoomModel) content);
+				}
+			}
+			
+			if (importedModels.isEmpty()) {
+				if (uri.fileExtension().equals("room"))
 					error("referenced model is no ROOM model (but has .room extension)", BasePackage.Literals.IMPORT__IMPORT_URI);
 				else
 					warning("referenced model is no ROOM model", BasePackage.Literals.IMPORT__IMPORT_URI);
 				return;
 			}
-			importedModel = (RoomModel) res.getContents().get(0);
 		}
 		catch (RuntimeException re) {
 			warning("could not load referenced model", BasePackage.Literals.IMPORT__IMPORT_URI);
@@ -170,7 +176,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 		if (resourceServiceProvider==null)
 			return;
 		IResourceDescription.Manager manager = resourceServiceProvider.getResourceDescriptionManager();
-		IResourceDescription description = manager.getResourceDescription(importedModel.eResource());
+		IResourceDescription description = manager.getResourceDescription(importedModels.get(0).eResource());
 
 		// TODO check for empty namespace
 		boolean exportedNameMatch = false;
@@ -182,10 +188,9 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 					break;
 			}
 		}
-		if(!exportedNameMatch)
-			error("no match for imported namespace", BasePackage.Literals.IMPORT__IMPORTED_NAMESPACE, WRONG_NAMESPACE, importedModel.getName()+".*");
-
-
+		if(!exportedNameMatch) {
+			error("no match for imported namespace", BasePackage.Literals.IMPORT__IMPORTED_NAMESPACE, WRONG_NAMESPACE, importedModels.get(0).getName()+".*");
+		}
 	}
 
 	@Check
