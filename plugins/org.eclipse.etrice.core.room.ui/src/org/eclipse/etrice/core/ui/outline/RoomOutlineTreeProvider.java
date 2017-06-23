@@ -30,6 +30,7 @@ import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.PortOperation;
 import org.eclipse.etrice.core.room.ProtocolClass;
+import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.SAP;
 import org.eclipse.etrice.core.room.SPP;
 import org.eclipse.etrice.core.room.ServiceImplementation;
@@ -263,7 +264,13 @@ public class RoomOutlineTreeProvider extends DefaultOutlineTreeProvider {
 		if(res == null) return;
 		
 		for(EObject content : res.getContents()) {
-			createChildren(parentNode, content);
+			if(content instanceof RoomModel) {
+				for(EObject topLevel : content.eContents()){
+					if(!(topLevel instanceof Import)){
+						_createNode(parentNode, topLevel);
+					}
+				}
+			}
 		}
 	}
 	
