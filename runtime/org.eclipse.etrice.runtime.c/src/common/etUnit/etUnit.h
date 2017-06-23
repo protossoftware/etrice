@@ -72,6 +72,14 @@ void etUnit_closeTestCase(etInt16 id);
  */
 etBool etUnit_isSuccess(etInt16 id);
 /**
+ * indicate success of current test suite
+ */
+etBool etUnit_isSuccessSuite();
+/**
+ * indicate success of all test suites
+ */
+etBool etUnit_isSuccessAll();
+/**
  * releases the \ref etRuntime_getTerminateSemaphore() and thus makes the program terminate
  *
  * \param id (unused)
@@ -153,6 +161,10 @@ void etUnit_closeAll(etInt16 id);
 #define EXPECT_EQUAL_PTR(id, msg, expected, actual) \
 	expect_equal_void_ptr(id, msg, (const void*) expected, (const void*) actual, __FILE__, __LINE__)
 
+/*
+ *  Strings
+ */
+#define EXPECT_EQUAL_STR(id, msg, expected, actual) expectEqualStr(id, msg, expected, actual, __FILE__, __LINE__)
 
 /*
  * more specialized functions
@@ -358,6 +370,19 @@ void expectRangeFloat64(etInt16 id, const char* message, etFloat64 min, etFloat6
  * \param line the line
  */
 void expect_equal_void_ptr(etInt16 id, const char* msg, const void* expected, const void* actual, const char* file, int line);
+
+/**
+ * reports an error if two strings aren't equal
+ *
+ * \param id the test case id
+ * \param msg the result message
+ * \param expected the expected value
+ * \param actual the actual value
+ * \param file the file name with the test case
+ * \param line the line
+ */
+void expectEqualStr(etInt16 id, const char* msg, const char* expected, const char* actual, const char* file, int line);
+
 /**
  * start of a comparison of an expected order. Initially with this method
  * a list of integers is passed. Later calls of \ref expectOrder(etInt16, const char* msg, etInt16, const char* int)

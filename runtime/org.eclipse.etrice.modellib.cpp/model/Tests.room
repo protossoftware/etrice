@@ -1,10 +1,11 @@
-RoomModel room.basic.etunit {
-
-	import room.basic.types.* from "Types.room"
+RoomModel room.basic.test {
+	
+	import room.basic.service.timing.* from "TimingService.room"
+	import room.basic.types.* from "Types.room"	
 
 	/**
 	 * A SubSystemClass or ActorClass having this annotation is construed as an instance.<br>
-	 * During generation the necessary instantiation (LogicalSystem, SubSystemRef etc.) and mapping will be created.
+	 * During generation the necessary instantiation (LogicalSystem, SubSystemRef etc.) and mapping will be created. 
 	 * <p>
 	 * Must not have LogicalThreads. Globally only once allowed. Runtime execution on DefaultThread of given PhysicalSystem.
 	 * </p>

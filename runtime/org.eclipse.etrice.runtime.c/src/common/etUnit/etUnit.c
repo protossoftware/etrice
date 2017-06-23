@@ -21,6 +21,8 @@
 
 /*** member variables */
 
+static etInt16 etUnit_failedSuites = 0;
+
 /* file handling */
 static FILE* etUnit_reportfile = NULL;
 
@@ -131,6 +133,8 @@ void etUnit_close(void) {
 	else
 		etLogger_logErrorF("Error Counter: %ld", etUnit_errorCounter);
 	etLogger_logInfoF("************* TEST END **************");
+
+	etUnit_errorCounter = 0;
 }
 
 void etUnit_openTestSuite(const char* testSuiteName) {
@@ -140,6 +144,7 @@ void etUnit_openTestSuite(const char* testSuiteName) {
 }
 
 void etUnit_closeTestSuite(void) {
+	etUnit_failedSuites += (etUnit_isSuccessSuite()) ? 0 : 1;
 }
 
 etInt16 etUnit_openTestCase(const char* testCaseName) {
@@ -250,6 +255,16 @@ void expect_equal_void_ptr(etInt16 id, const char* message, const void* expected
 	}
 }
 
+void expectEqualStr(etInt16 id, const char* message, const char* expected, const char* actual, const char* file, int line) {
+	if (!(expected || actual || strcmp(expected, actual) == 0)) {
+		char testresult[ETUNIT_FAILURE_TEXT_LEN];
+		sprintf(testresult, "%s: expected=%s, actual=%s", message, expected, actual);
+		etUnit_handleExpect(id, ET_FALSE, testresult, expected, actual, file, line);
+	} else {
+		etUnit_handleExpect(id, ET_TRUE, "", NULL, NULL, file, line);
+	}
+}
+
 #ifdef ET_FLOAT32
 void expectEqualFloat32(etInt16 id, const char* message, etFloat32 expected, etFloat32 actual, etFloat32 precision, const char* file, int line) {
 	expect_equal_float(id, message, expected, actual, precision, file, line);
@@ -319,6 +334,14 @@ void expectOrderEnd(etInt16 id, const char* message, etInt16 identifier, const c
 
 etBool etUnit_isSuccess(etInt16 id) {
 	return etUnit_testcaseSuccess[id];
+}
+
+etBool etUnit_isSuccessSuite() {
+	return etUnit_errorCounter == 0;
+}
+
+etBool etUnit_isSuccessAll() {
+	return etUnit_failedSuites == 0;
 }
 
 /* private functions */

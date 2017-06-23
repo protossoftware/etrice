@@ -1,4 +1,4 @@
-RoomModel room.basic.etunit {
+RoomModel room.basic.test {
 	
 	import room.basic.service.timing.* from "TimingService.room"
 	import room.basic.types.* from "Types.room"	
@@ -14,169 +14,65 @@ RoomModel room.basic.etunit {
 		target = { SubSystemClass, ActorClass }
 	}
 
-	/**
-	 * Creates an etUnit test suite. Test cases can be added by creating added ActorRefs of type <i>TestSuiteActor</i>.
-	 */
-	abstract ActorClass TestSuiteActor {
+	ActorClass SequentialTestExecutor {
 		Interface {
-			SPP timer : PTimer
-			SPP tcLifecycle : PTestLifecycle
+			conjugated Port control[*]: PTestControl
+			
 		}
 		Structure {
-			LayerConnection relay_sap timer satisfied_by timingService.timer
-			LayerConnection relay_sap tcLifecycle satisfied_by lifecycleActor.fct
-			ActorRef timingService: ATimingService
-			ActorRef lifecycleActor : TestLifecycleActor
+			usercode3 {
+				"#include \"etUnit/etUnit.h\""
+			}
+			external Port control	
+			Attribute next : int16
 		}
 		Behavior {
-			ctor {
-				"etUnit_open(\"log/testlog\", getTestSuiteName());"
-				"etUnit_openTestSuite(getTestSuiteName());"
-			}
-			dtor {
-				"etUnit_closeTestSuite();"
-				"etUnit_close();"
-			}
-			Operation getTestSuiteName() : string {
-				"return \"unnamedTestSuite\";"
-			}
-		}
-	}
-	
-	abstract async ActorClass TestCaseActor {
-		Structure {
-			Attribute tcTimeoutIgnore : boolean
-			Attribute tcCaseId : int32
-			SAP tcLifecycle : PTestLifecycle
-			SAP tcTimer : PTimer
-		}
-		Behavior {
-			Operation getTestCaseName() : string {
-				"return \"unnamedTestCase\";"
-			}
-			Operation startTimeout(timeMs: uint32){
-				"tcTimeoutIgnore = ET_FALSE;"
-				"tcTimer.startTimeout(timeMs);"
-			}
-			Operation invalidateTimeout(){
-				"tcTimeoutIgnore = ET_TRUE;"
-			}
 			StateMachine {
-				Transition init: initial -> wait4Start {
-					action {
-						"invalidateTimeout();"
+				State execute {
+					entry 
+				
+				{
+						"if(next < self->constData->control.size){"
+						"\tcontrol[next++].start();"
+						"} else {"
+						"\tetUnit_testFinished(0);"
+						"}"
 					}
 				}
-				Transition trFinish: tpFinish of testing -> finish
-				Transition trTimeout: testing -> timeout {
+				Transition init0: initial -> execute
+			{
+					}
+				Transition tr0: execute -> execute {
 					triggers {
-						<timeout: tcTimer guard {
-							"!tcTimeoutIgnore"
-						}>
-					}
-					action {
-						"invalidateTimeout();"
-					}
-				}
-				Transition tr0: wait4Start -> testing {
-					triggers {
-						<startTestCase: tcLifecycle>
-					}
-				}
-				State testing {
-					subgraph {
-						ExitPoint tpFinish
-					}
-				}
-				State timeout {
-					entry {
-						"EXPECT_FALSE(tcCaseId, \"timeout\", ET_TRUE);"
-						"etUnit_closeTestCase(tcCaseId);"
-						"tcLifecycle.finishedTestCase();"
-					}
-				}
-				State finish {
-					entry {
-						"etUnit_closeTestCase(tcCaseId);"
-						"tcLifecycle.finishedTestCase();"
-					}
-				}
-				State wait4Start {
-					exit {
-						"tcCaseId = etUnit_openTestCase(getTestCaseName());"
+						<done: control>
 					}
 				}
 			}
 		}
 	}
 	
-	ActorClass TestLifecycleActor {
-		Interface {
-			SPP fct: PTestLifecycle
-		}
-		Structure {
-			ServiceImplementation of fct
-			Attribute entireTestTimeout : int32 = "5000"
-			Attribute sequentialExecution : boolean = "true"
-			Attribute tcCurrentIdx : int32 = "0"
-			SAP timer : PTimer
-		}
-		Behavior {
-			StateMachine {
-				Transition init: initial -> idle {
-					action {
-						"//printf(\"TestLifecycleActor (%s) starting with %d test cases\\n\", self->constData->instName, self->constData->fct.size);"
-						"if(self->constData->fct.size == 0)"
-						"\tetUnit_testFinished(-1);"
-						"else"
-						"\ttimer.startTimeout(entireTestTimeout);"
-						""
-						"if(!sequentialExecution)"
-						"\tfct.startTestCase();"
-					}
-				}
-				Transition tr1: idle -> cp cp0 {
-					triggers {
-						<finishedTestCase: fct>
-					}
-					action {
-						"tcCurrentIdx++;"
-					}
-				}
-				Transition tr2: idle -> terminate {
-					triggers {
-						<timeout: timer>
-					}
-				}
-				Transition tr3: cp cp0 -> idle
-				Transition tr4: cp cp0 -> terminate {
-					cond {
-						"tcCurrentIdx >= self->constData->fct.size"
-					}
-				}
-				ChoicePoint cp0
-				State idle {
-					entry {
-						"if(sequentialExecution)"
-						"\tfct[tcCurrentIdx].startTestCase();"
-					}
-				}
-				State terminate {
-					entry {
-						"etUnit_testFinished(-1);"
-					}
-				}
-			}
-		}
-	}
-
-	ProtocolClass PTestLifecycle {
+	ProtocolClass PTestControl {
 		incoming {
-			Message finishedTestCase()
+			/**
+			 *  Start test execution.
+			 */
+			Message start()
+			
+			/**
+			 *  Abort test execution.
+			 */
+			Message abort()
 		}
 		outgoing {
-			Message startTestCase()
+			/**
+			 *  Test execution finished or aborted.
+			 */
+			Message done(success : boolean)
 		}
+//		semantics {
+//			in:start -> out:done
+//			in:abort -> out:done
+//		}
 	}
 
 }

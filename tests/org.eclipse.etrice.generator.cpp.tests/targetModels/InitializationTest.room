@@ -2,7 +2,7 @@ RoomModel InitializationTest {
 
 	import room.basic.types.* from "Types.room"
 
-	import room.basic.etunit.* from "Tests.room"
+	import room.basic.test.* from "Tests.room"
 
 	async ActorClass InitializationTest {
 		@TestInstance

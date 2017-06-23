@@ -1,6 +1,6 @@
 RoomModel ChoicePointTestExtended {
 
-	import room.basic.etunit.* from "Tests.room"
+	import room.basic.test.* from "Tests.room"
 	import room.basic.types.* from "Types.room"
 
 	SubSystemClass SubSystem_CPTestExtended {
