@@ -79,6 +79,13 @@ public class Main extends AbstractGenerator {
 		if (isTerminateOnError() && ret!=GENERATOR_OK)
 			System.exit(ret);
 	}
+	
+	/**
+	 * @return the unique {@link GlobalSettings}
+	 */
+	public static GlobalGeneratorSettings getSettings() {
+		return (GlobalGeneratorSettings) getInstance().getGeneratorSettings();
+	}
 
 	@Inject
 	private MainGen mainGenerator;
@@ -95,11 +102,13 @@ public class Main extends AbstractGenerator {
 	@Inject
 	protected IDataConfiguration dataConfig;
 
+	private Root genModelResult = null;
+	
 	/**
-	 * @return the unique {@link GlobalSettings}
+	 *  The resulting genmodel of {@linkplain #Main.runGenerator} if available.
 	 */
-	public static GlobalGeneratorSettings getSettings() {
-		return (GlobalGeneratorSettings) getInstance().getGeneratorSettings();
+	public Root getGenModel() {
+		return genModelResult;
 	}
 	
 	/**
@@ -146,7 +155,7 @@ public class Main extends AbstractGenerator {
 				return GENERATOR_ERROR;
 			}
 			
-			Root genModel = createGeneratorModel(getSettings().isGenerateAsLibrary(), getSettings().getGeneratorModelPath());
+			Root genModel = createGeneratorModel(getSettings().isGenerateAsLibrary(), getSettings().getGeneratorModelPath());		
 			if (diagnostician.isFailed() || genModel==null) {
 				logger.logInfo("errors during build of generator model");
 				logger.logError("-- terminating", null);
@@ -187,6 +196,9 @@ public class Main extends AbstractGenerator {
 				logger.logError("-- terminating", null);
 				return GENERATOR_ERROR;
 			}
+			
+			genModelResult = genModel;
+			
 			logger.logInfo("-- finished code generation");
 		}
 		finally {

@@ -70,6 +70,8 @@ public abstract class AbstractGeneratorBaseModule implements Module {
 		binder.bind(IMessageIdGenerator.class).to(GenericProtocolClassGenerator.class);
 		binder.bind(IIfItemIdGenerator.class).to(GenericActorClassGenerator.class);
 		
+		if(bindAbstractGenerator() != null)
+			binder.bind(AbstractGenerator.class).to(bindAbstractGenerator());
 		binder.bind(IDetailCodeTranslator.class).to(AbstractGenerator.class);
 		
 		binder.bind(ILanguageExtensionBase.class).to(ILanguageExtension.class);
@@ -84,6 +86,12 @@ public abstract class AbstractGeneratorBaseModule implements Module {
 		binder.bind(EValidator.Registry.class).toInstance(EValidator.Registry.INSTANCE);
 		binder.bind(org.eclipse.emf.ecore.util.Diagnostician.class).to(GenerationEMFDiagnostician.class).asEagerSingleton();
 	}
+	
+	/**
+	 * Abstract method that retrieves a class to which {@link AbstractGenerator} is bound
+	 * @return a Class extending {@link AbstractGenerator}
+	 */
+	public abstract Class<? extends AbstractGenerator> bindAbstractGenerator();
 
 	/**
 	 * Abstract method that retrieves a class to which {@link ILanguageExtension} is bound

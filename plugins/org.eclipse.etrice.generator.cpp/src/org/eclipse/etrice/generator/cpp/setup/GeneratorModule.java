@@ -37,14 +37,19 @@ public class GeneratorModule extends AbstractGeneratorBaseModule {
 	public void configure(Binder binder) {
 		super.configure(binder);
 
-		binder.bind(AbstractGenerator.class).to(Main.class);
 		binder.bind(ProcedureHelpers.class).to(CppProcedureHelpers.class);
 		binder.bind(GenericProtocolClassGenerator.class).to(ProtocolClassGen.class);
 		binder.bind(GenericActorClassGenerator.class).to(ActorClassGen.class);
 
 		binder.bind(ImportUriResolver.class).to(ModelLocatorUriResolver.class);
 	}
-
+	
+	@Override
+	public Class<? extends AbstractGenerator> bindAbstractGenerator() {
+		return Main.class;
+	}
+	
+	@Override
 	public Class<? extends ILanguageExtension> bindILanguageExtension() {
 		return CppExtensions.class;
 	}

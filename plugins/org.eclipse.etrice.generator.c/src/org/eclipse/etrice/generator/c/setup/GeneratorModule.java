@@ -34,9 +34,13 @@ public class GeneratorModule extends AbstractGeneratorBaseModule {
 	public void configure(Binder binder) {
 		super.configure(binder);
 
-		binder.bind(AbstractGenerator.class).to(Main.class);
 		binder.bind(GenericProtocolClassGenerator.class).to(ProtocolClassGen.class);
 		binder.bind(GenericActorClassGenerator.class).to(ActorClassGen.class);
+	}
+	
+	@Override
+	public Class<? extends AbstractGenerator> bindAbstractGenerator() {
+		return Main.class;
 	}
 
 	@Override

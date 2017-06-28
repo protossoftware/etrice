@@ -56,6 +56,7 @@ public class IncrementalGenerationFileIo implements IGeneratorFileIo {
 	 * then the file stored in the {@code infopath} is copied to {@code path} while preserving the file data.
 	 * In the other case the key is stored and the file is stored to {@code infopath} and {@code path}.
 	 */
+	@Override
 	public void generateFile(String desc, String path, String infopath, String file, CharSequence contents) {
 		
 		long oldCRC = 0;
