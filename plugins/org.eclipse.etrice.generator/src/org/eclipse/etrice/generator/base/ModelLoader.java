@@ -16,9 +16,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -87,7 +87,7 @@ public class ModelLoader {
 				if (loadModel(uri)) {
 					Resource resource = resourceSet.getResources().get(resourceSet.getResources().size()-1);
 					for (EObject root : resource.getContents()) {
-						TreeIterator<EObject> it = root.eAllContents();
+						Iterator<EObject> it = root.eContents().iterator();
 						while (it.hasNext()) {
 							EObject obj = it.next();
 							String importUri = uriResolver.resolve(obj);

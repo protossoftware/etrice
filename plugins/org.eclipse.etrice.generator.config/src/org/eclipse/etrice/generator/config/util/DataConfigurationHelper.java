@@ -67,9 +67,10 @@ public class DataConfigurationHelper {
 
 		List<ConfigModel> configs = new ArrayList<ConfigModel>();
 		for (Resource res : rs.getResources()) {
-			EObject object = res.getContents().get(0);
-			if (object instanceof ConfigModel)
-				configs.add((ConfigModel) object);
+			for(EObject object : res.getContents()){
+				if (object instanceof ConfigModel)
+					configs.add((ConfigModel) object);
+			}
 		}
 
 		if (!configs.isEmpty())
