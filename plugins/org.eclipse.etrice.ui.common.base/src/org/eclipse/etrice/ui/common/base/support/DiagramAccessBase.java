@@ -30,7 +30,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.impl.TransactionalEditingDomainImpl;
 import org.eclipse.emf.transaction.util.TransactionUtil;
-import org.eclipse.etrice.core.common.scoping.RelativeFileURIHandler;
 import org.eclipse.etrice.core.common.ui.linking.GlobalNonPlatformURIEditorOpener;
 import org.eclipse.etrice.ui.common.base.UIBaseActivator;
 import org.eclipse.etrice.ui.common.base.editor.DiagramEditorBase;
@@ -46,7 +45,6 @@ import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 
-import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 
 /**
@@ -134,7 +132,7 @@ public abstract class DiagramAccessBase {
 			populateDiagram(rootObject, diagram);
 			
 			try {
-				diagRes.save(RelativeFileURIHandler.addToOptions(Maps.newHashMap()));
+				diagRes.save(null);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

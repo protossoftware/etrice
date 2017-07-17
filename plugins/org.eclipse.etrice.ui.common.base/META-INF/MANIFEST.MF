@@ -35,4 +35,5 @@ Export-Package: org.eclipse.etrice.ui.common.base,
  org.eclipse.etrice.ui.common.base.editor,
  org.eclipse.etrice.ui.common.base.preferences,
  org.eclipse.etrice.ui.common.base.quickfix,
+ org.eclipse.etrice.ui.common.base.resource,
  org.eclipse.etrice.ui.common.base.support

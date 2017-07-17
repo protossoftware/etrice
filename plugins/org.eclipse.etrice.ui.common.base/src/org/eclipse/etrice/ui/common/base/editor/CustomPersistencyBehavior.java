@@ -15,7 +15,6 @@ package org.eclipse.etrice.ui.common.base.editor;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -26,7 +25,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.transaction.RunnableWithResult;
 import org.eclipse.emf.transaction.util.TransactionUtil;
-import org.eclipse.etrice.core.common.scoping.RelativeFileURIHandler;
 import org.eclipse.etrice.ui.common.base.UIBaseActivator;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.graphiti.ui.editor.DefaultPersistencyBehavior;
@@ -58,17 +56,6 @@ public class CustomPersistencyBehavior extends DefaultPersistencyBehavior {
 	public Diagram loadDiagram(URI uri) {
 		saveOnFocusListener = new SaveOnFocusLostListener((IEditorPart)diagramBehavior.getDiagramContainer().getWorkbenchPart());
 		return super.loadDiagram(uri);
-	}
-	
-	@Override
-	protected Map<Resource, Map<?, ?>> createSaveOptions() {
-		Map<Resource, Map<?, ?>> resMap = super.createSaveOptions();
-		
-		@SuppressWarnings("unchecked")
-		Map<Object, Object> diagSaveOptions = (Map<Object, Object>) resMap.get(diagramBehavior.getDiagramTypeProvider().getDiagram().eResource());
-		RelativeFileURIHandler.addToOptions(diagSaveOptions);
-
-		return resMap;
 	}
 	
 	@Override

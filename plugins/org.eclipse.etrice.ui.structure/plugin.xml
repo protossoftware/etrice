@@ -51,7 +51,7 @@
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser
-			class="org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl"
+			class="org.eclipse.etrice.ui.common.base.resource.DiagramResourceFactory"
 			type="structure">
 		</parser>
 	</extension>

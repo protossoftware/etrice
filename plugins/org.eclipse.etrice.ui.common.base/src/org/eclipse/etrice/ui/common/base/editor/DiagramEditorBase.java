@@ -97,12 +97,16 @@ public abstract class DiagramEditorBase extends DiagramEditor implements IInputU
 	 */
 	@Override
 	public void setFocus() {
+		if (getGraphicalViewer() == null) {
+			return;
+		}
+		
 		boolean dirtyAlready = isDirty();
 		
 		// inside this call auto refresh will happen if (and turn the editor dirty)
 		super.setFocus();
 		
-		if (superClassListener.isChangeInSuperClass())
+		if (superClassListener != null && superClassListener.isChangeInSuperClass())
 			superClassChanged();
 		
 		if (!dirtyAlready && isDirty())
@@ -127,8 +131,10 @@ public abstract class DiagramEditorBase extends DiagramEditor implements IInputU
 	public void dispose() {
 		mte.unsetTarget(getEditingDomain());
 	
-		PlatformUI.getWorkbench().getActiveWorkbenchWindow().getPartService().removePartListener(superClassListener);
-		superClassListener.dispose();
+		if(superClassListener != null) {
+			PlatformUI.getWorkbench().getActiveWorkbenchWindow().getPartService().removePartListener(superClassListener);
+			superClassListener.dispose();
+		}
 		
 		super.dispose();
 	}
