@@ -85,11 +85,8 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
   
   public void doGenerate(final Root root) {
     EList<ProtocolClass> _usedProtocolClasses = root.getUsedProtocolClasses();
-    final Function1<ProtocolClass, Boolean> _function = new Function1<ProtocolClass, Boolean>() {
-      @Override
-      public Boolean apply(final ProtocolClass cl) {
-        return Boolean.valueOf(ProtocolClassGen.this._fileSystemHelpers.isValidGenerationLocation(cl));
-      }
+    final Function1<ProtocolClass, Boolean> _function = (ProtocolClass cl) -> {
+      return Boolean.valueOf(this._fileSystemHelpers.isValidGenerationLocation(cl));
     };
     Iterable<ProtocolClass> _filter = IterableExtensions.<ProtocolClass>filter(_usedProtocolClasses, _function);
     for (final ProtocolClass pc : _filter) {
@@ -826,12 +823,9 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     CharSequence _xblockexpression = null;
     {
       List<Message> _allIncomingMessages = this._roomHelpers.getAllIncomingMessages(pc);
-      final Function1<Message, Boolean> _function = new Function1<Message, Boolean>() {
-        @Override
-        public Boolean apply(final Message m) {
-          VarDecl _data = m.getData();
-          return Boolean.valueOf((!Objects.equal(_data, null)));
-        }
+      final Function1<Message, Boolean> _function = (Message m) -> {
+        VarDecl _data = m.getData();
+        return Boolean.valueOf((!Objects.equal(_data, null)));
       };
       final Iterable<Message> sentMsgs = IterableExtensions.<Message>filter(_allIncomingMessages, _function);
       final EList<RoomModel> models = root.getReferencedModels(pc);

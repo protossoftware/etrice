@@ -22,7 +22,7 @@ Require-Bundle: org.eclipse.etrice.core.room.ui;bundle-version="1.1.1",
  org.eclipse.etrice.abstractexec.behavior;bundle-version="1.1.1",
  org.eclipse.etrice.core.genmodel;bundle-version="1.1.1"
 Bundle-ActivationPolicy: lazy
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-Vendor: Eclipse eTrice
 Export-Package: org.eclipse.etrice.ui.behavior,
  org.eclipse.etrice.ui.behavior.detailcode,

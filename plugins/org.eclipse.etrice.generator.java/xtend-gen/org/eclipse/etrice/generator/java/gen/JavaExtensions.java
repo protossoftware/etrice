@@ -126,19 +126,16 @@ public class JavaExtensions implements ILanguageExtension {
   
   public String toWrapper(final String type) {
     String _switchResult = null;
-    boolean _matched = false;
-    if (Objects.equal(type, "int")) {
-      _matched=true;
-      _switchResult = "Integer";
-    }
-    if (!_matched) {
-      if (Objects.equal(type, "char")) {
-        _matched=true;
+    switch (type) {
+      case "int":
+        _switchResult = "Integer";
+        break;
+      case "char":
         _switchResult = "Character";
-      }
-    }
-    if (!_matched) {
-      _switchResult = StringExtensions.toFirstUpper(type);
+        break;
+      default:
+        _switchResult = StringExtensions.toFirstUpper(type);
+        break;
     }
     return _switchResult;
   }
@@ -358,50 +355,29 @@ public class JavaExtensions implements ILanguageExtension {
   private String castValue(final PrimitiveType type, final String value) {
     String _switchResult = null;
     String _targetName = type.getTargetName();
-    boolean _matched = false;
-    if (Objects.equal(_targetName, "boolean")) {
-      _matched=true;
-      _switchResult = value.toLowerCase();
-    }
-    if (!_matched) {
-      if (Objects.equal(_targetName, "byte")) {
-        _matched=true;
+    switch (_targetName) {
+      case "boolean":
+        _switchResult = value.toLowerCase();
+        break;
+      case "byte":
         _switchResult = ("(byte)" + value);
-      }
-    }
-    if (!_matched) {
-      if (Objects.equal(_targetName, "short")) {
-        _matched=true;
+        break;
+      case "short":
         _switchResult = ("(short)" + value);
-      }
-    }
-    if (!_matched) {
-      if (Objects.equal(_targetName, "int")) {
-        _matched=true;
+        break;
+      case "int":
         _switchResult = value;
-      }
-    }
-    if (!_matched) {
-      if (Objects.equal(_targetName, "long")) {
-        _matched=true;
+        break;
+      case "long":
         _switchResult = (value + "L");
-      }
-    }
-    if (!_matched) {
-      if (Objects.equal(_targetName, "float")) {
-        _matched=true;
+        break;
+      case "float":
         _switchResult = (value + "f");
-      }
-    }
-    if (!_matched) {
-      if (Objects.equal(_targetName, "double")) {
-        _matched=true;
+        break;
+      case "double":
         _switchResult = (value + "d");
-      }
-    }
-    if (!_matched) {
-      if (Objects.equal(_targetName, "char")) {
-        _matched=true;
+        break;
+      case "char":
         String _xifexpression = null;
         boolean _isEmpty = value.isEmpty();
         if (_isEmpty) {
@@ -423,20 +399,16 @@ public class JavaExtensions implements ILanguageExtension {
           _xifexpression = _xifexpression_1;
         }
         _switchResult = _xifexpression;
-      }
-    }
-    if (!_matched) {
-      if (Objects.equal(_targetName, "String")) {
-        _matched=true;
+        break;
+      case "String":
         String _replace_2 = value.replace("\\", "\\\\");
         String _replace_3 = _replace_2.replace("\"", "\\\"");
         String _plus_2 = ("\"" + _replace_3);
         _switchResult = (_plus_2 + "\"");
-      }
-    }
-    if (!_matched) {
-      String _targetName_1 = type.getTargetName();
-      throw new UnsupportedOperationException(_targetName_1);
+        break;
+      default:
+        String _targetName_1 = type.getTargetName();
+        throw new UnsupportedOperationException(_targetName_1);
     }
     return _switchResult;
   }

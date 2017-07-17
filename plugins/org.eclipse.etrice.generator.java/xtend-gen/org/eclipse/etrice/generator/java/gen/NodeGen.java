@@ -22,6 +22,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Consumer;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -72,7 +73,6 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @Singleton
 @SuppressWarnings("all")
@@ -111,21 +111,15 @@ public class NodeGen {
   public void doGenerate(final Root root) {
     final HashMap<SubSystemClass, WiredSubSystemClass> sscc2wired = new HashMap<SubSystemClass, WiredSubSystemClass>();
     EList<WiredStructureClass> _wiredInstances = root.getWiredInstances();
-    final Function1<WiredStructureClass, Boolean> _function = new Function1<WiredStructureClass, Boolean>() {
-      @Override
-      public Boolean apply(final WiredStructureClass w) {
-        return Boolean.valueOf((w instanceof WiredSubSystemClass));
-      }
+    final Function1<WiredStructureClass, Boolean> _function = (WiredStructureClass w) -> {
+      return Boolean.valueOf((w instanceof WiredSubSystemClass));
     };
     Iterable<WiredStructureClass> _filter = IterableExtensions.<WiredStructureClass>filter(_wiredInstances, _function);
-    final Procedure1<WiredStructureClass> _function_1 = new Procedure1<WiredStructureClass>() {
-      @Override
-      public void apply(final WiredStructureClass w) {
-        SubSystemClass _subSystemClass = ((WiredSubSystemClass) w).getSubSystemClass();
-        sscc2wired.put(_subSystemClass, ((WiredSubSystemClass) w));
-      }
+    final Consumer<WiredStructureClass> _function_1 = (WiredStructureClass w) -> {
+      SubSystemClass _subSystemClass = ((WiredSubSystemClass) w).getSubSystemClass();
+      sscc2wired.put(_subSystemClass, ((WiredSubSystemClass) w));
     };
-    IterableExtensions.<WiredStructureClass>forEach(_filter, _function_1);
+    _filter.forEach(_function_1);
     Collection<NodeRef> _nodeRefs = ETMapUtil.getNodeRefs();
     for (final NodeRef nr : _nodeRefs) {
       List<String> _subSystemInstancePaths = ETMapUtil.getSubSystemInstancePaths(nr);
@@ -166,26 +160,17 @@ public class NodeGen {
    */
   private HashSet<ActorClass> getOptionalActorClasses(final Root root, final StructureInstance si) {
     TreeIterator<EObject> _eAllContents = si.eAllContents();
-    final Function1<EObject, Boolean> _function = new Function1<EObject, Boolean>() {
-      @Override
-      public Boolean apply(final EObject i) {
-        return Boolean.valueOf((i instanceof ActorInterfaceInstance));
-      }
+    final Function1<EObject, Boolean> _function = (EObject i) -> {
+      return Boolean.valueOf((i instanceof ActorInterfaceInstance));
     };
     Iterator<EObject> _filter = IteratorExtensions.<EObject>filter(_eAllContents, _function);
-    final Function1<EObject, ActorInterfaceInstance> _function_1 = new Function1<EObject, ActorInterfaceInstance>() {
-      @Override
-      public ActorInterfaceInstance apply(final EObject aii) {
-        return ((ActorInterfaceInstance) aii);
-      }
+    final Function1<EObject, ActorInterfaceInstance> _function_1 = (EObject aii) -> {
+      return ((ActorInterfaceInstance) aii);
     };
     Iterator<ActorInterfaceInstance> _map = IteratorExtensions.<EObject, ActorInterfaceInstance>map(_filter, _function_1);
     final ArrayList<ActorInterfaceInstance> aifs = Lists.<ActorInterfaceInstance>newArrayList(_map);
-    final Function1<ActorInterfaceInstance, ActorClass> _function_2 = new Function1<ActorInterfaceInstance, ActorClass>() {
-      @Override
-      public ActorClass apply(final ActorInterfaceInstance aii) {
-        return ((ActorInterfaceInstance) aii).getActorClass();
-      }
+    final Function1<ActorInterfaceInstance, ActorClass> _function_2 = (ActorInterfaceInstance aii) -> {
+      return ((ActorInterfaceInstance) aii).getActorClass();
     };
     List<ActorClass> _map_1 = ListExtensions.<ActorInterfaceInstance, ActorClass>map(aifs, _function_2);
     final HashSet<ActorClass> result = Sets.<ActorClass>newHashSet(_map_1);
@@ -208,11 +193,8 @@ public class NodeGen {
       final String clsname = this._javaExtensions.getJavaClassName(nr, comp);
       NodeClass _type = nr.getType();
       EList<PhysicalThread> _threads = _type.getThreads();
-      final Function1<PhysicalThread, Boolean> _function = new Function1<PhysicalThread, Boolean>() {
-        @Override
-        public Boolean apply(final PhysicalThread t) {
-          return Boolean.valueOf(usedThreads.contains(t));
-        }
+      final Function1<PhysicalThread, Boolean> _function = (PhysicalThread t) -> {
+        return Boolean.valueOf(usedThreads.contains(t));
       };
       final Iterable<PhysicalThread> threads = IterableExtensions.<PhysicalThread>filter(_threads, _function);
       final HashSet<ActorClass> opt = this.getOptionalActorClasses(root, comp);
@@ -331,12 +313,9 @@ public class NodeGen {
       _builder.append("IMessageService msgService;");
       _builder.newLine();
       {
-        final Function1<PhysicalThread, Long> _function_1 = new Function1<PhysicalThread, Long>() {
-          @Override
-          public Long apply(final PhysicalThread it) {
-            long _prio = it.getPrio();
-            return Long.valueOf((-_prio));
-          }
+        final Function1<PhysicalThread, Long> _function_1 = (PhysicalThread it) -> {
+          long _prio = it.getPrio();
+          return Long.valueOf((-_prio));
         };
         List<PhysicalThread> _sortBy = IterableExtensions.<PhysicalThread, Long>sortBy(threads, _function_1);
         for(final PhysicalThread thread_1 : _sortBy) {
@@ -495,18 +474,12 @@ public class NodeGen {
       _builder.newLine();
       {
         BasicEList<AbstractInstance> _allSubInstances = this._roomExtensions.getAllSubInstances(comp);
-        final Function1<AbstractInstance, Boolean> _function_2 = new Function1<AbstractInstance, Boolean>() {
-          @Override
-          public Boolean apply(final AbstractInstance inst) {
-            return Boolean.valueOf((inst instanceof ActorInterfaceInstance));
-          }
+        final Function1<AbstractInstance, Boolean> _function_2 = (AbstractInstance inst) -> {
+          return Boolean.valueOf((inst instanceof ActorInterfaceInstance));
         };
         Iterable<AbstractInstance> _filter = IterableExtensions.<AbstractInstance>filter(_allSubInstances, _function_2);
-        final Function1<AbstractInstance, ActorInterfaceInstance> _function_3 = new Function1<AbstractInstance, ActorInterfaceInstance>() {
-          @Override
-          public ActorInterfaceInstance apply(final AbstractInstance inst) {
-            return ((ActorInterfaceInstance) inst);
-          }
+        final Function1<AbstractInstance, ActorInterfaceInstance> _function_3 = (AbstractInstance inst) -> {
+          return ((ActorInterfaceInstance) inst);
         };
         Iterable<ActorInterfaceInstance> _map = IterableExtensions.<AbstractInstance, ActorInterfaceInstance>map(_filter, _function_3);
         for(final ActorInterfaceInstance aii : _map) {
@@ -768,12 +741,9 @@ public class NodeGen {
           {
             EList<ActorClass> _subClasses = root.getSubClasses(oa);
             List<ActorClass> _union = this._roomExtensions.<ActorClass>union(_subClasses, oa);
-            final Function1<ActorClass, Boolean> _function_4 = new Function1<ActorClass, Boolean>() {
-              @Override
-              public Boolean apply(final ActorClass s) {
-                boolean _isAbstract = s.isAbstract();
-                return Boolean.valueOf((!_isAbstract));
-              }
+            final Function1<ActorClass, Boolean> _function_4 = (ActorClass s) -> {
+              boolean _isAbstract = s.isAbstract();
+              return Boolean.valueOf((!_isAbstract));
             };
             Iterable<ActorClass> _filter_1 = IterableExtensions.<ActorClass>filter(_union, _function_4);
             for(final ActorClass subcls : _filter_1) {

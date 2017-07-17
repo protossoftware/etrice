@@ -253,12 +253,9 @@ public class CppExtensions implements ILanguageExtension {
     Iterable<String> _plus = Iterables.<String>concat(((Iterable<? extends String>)Conversions.doWrapArray(_split)), Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(_name)));
     String[] _split_1 = appendSegments.split("\\.");
     Iterable<String> _plus_1 = Iterables.<String>concat(_plus, ((Iterable<? extends String>)Conversions.doWrapArray(_split_1)));
-    final Function1<String, Boolean> _function = new Function1<String, Boolean>() {
-      @Override
-      public Boolean apply(final String it) {
-        boolean _isEmpty = it.isEmpty();
-        return Boolean.valueOf((!_isEmpty));
-      }
+    final Function1<String, Boolean> _function = (String it) -> {
+      boolean _isEmpty = it.isEmpty();
+      return Boolean.valueOf((!_isEmpty));
     };
     Iterable<String> _filter = IterableExtensions.<String>filter(_plus_1, _function);
     String _join = IterableExtensions.join(_filter, "_");
@@ -545,12 +542,9 @@ public class CppExtensions implements ILanguageExtension {
       if (_isEmpty) {
         _xifexpression = ac.getName();
       } else {
-        final Function1<KeyValue, Boolean> _function = new Function1<KeyValue, Boolean>() {
-          @Override
-          public Boolean apply(final KeyValue it) {
-            String _key = it.getKey();
-            return Boolean.valueOf(Objects.equal(_key, "fqnClassName"));
-          }
+        final Function1<KeyValue, Boolean> _function = (KeyValue it) -> {
+          String _key = it.getKey();
+          return Boolean.valueOf(Objects.equal(_key, "fqnClassName"));
         };
         Iterable<KeyValue> _filter = IterableExtensions.<KeyValue>filter(attributes, _function);
         KeyValue _head = IterableExtensions.<KeyValue>head(_filter);
@@ -581,12 +575,9 @@ public class CppExtensions implements ILanguageExtension {
       } else {
         String _xblockexpression_1 = null;
         {
-          final Function1<KeyValue, Boolean> _function = new Function1<KeyValue, Boolean>() {
-            @Override
-            public Boolean apply(final KeyValue it) {
-              String _key = it.getKey();
-              return Boolean.valueOf(Objects.equal(_key, "includePath"));
-            }
+          final Function1<KeyValue, Boolean> _function = (KeyValue it) -> {
+            String _key = it.getKey();
+            return Boolean.valueOf(Objects.equal(_key, "includePath"));
           };
           final Iterable<KeyValue> path = IterableExtensions.<KeyValue>filter(attributes, _function);
           String _xifexpression_1 = null;
@@ -594,12 +585,9 @@ public class CppExtensions implements ILanguageExtension {
           if (_isEmpty_1) {
             String _xblockexpression_2 = null;
             {
-              final Function1<KeyValue, Boolean> _function_1 = new Function1<KeyValue, Boolean>() {
-                @Override
-                public Boolean apply(final KeyValue it) {
-                  String _key = it.getKey();
-                  return Boolean.valueOf(Objects.equal(_key, "fqnClassName"));
-                }
+              final Function1<KeyValue, Boolean> _function_1 = (KeyValue it) -> {
+                String _key = it.getKey();
+                return Boolean.valueOf(Objects.equal(_key, "fqnClassName"));
               };
               Iterable<KeyValue> _filter = IterableExtensions.<KeyValue>filter(attributes, _function_1);
               KeyValue _head = IterableExtensions.<KeyValue>head(_filter);

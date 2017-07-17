@@ -94,24 +94,21 @@ public class CppProcedureHelpers extends ProcedureHelpers {
    * @return an argument list for the attributes with const except for ref {@link Attribute}s
    */
   public String constArgList(final Iterable<Attribute> attributes) {
-    final Function1<Attribute, String> _function = new Function1<Attribute, String>() {
-      @Override
-      public String apply(final Attribute it) {
-        String _xifexpression = null;
-        RefableType _type = it.getType();
-        boolean _isRef = _type.isRef();
-        boolean _not = (!_isRef);
-        if (_not) {
-          _xifexpression = "const ";
-        } else {
-          _xifexpression = "";
-        }
-        String _signatureString = CppProcedureHelpers.this.signatureString(it);
-        String _plus = (_xifexpression + _signatureString);
-        String _plus_1 = (_plus + " ");
-        String _name = it.getName();
-        return (_plus_1 + _name);
+    final Function1<Attribute, String> _function = (Attribute it) -> {
+      String _xifexpression = null;
+      RefableType _type = it.getType();
+      boolean _isRef = _type.isRef();
+      boolean _not = (!_isRef);
+      if (_not) {
+        _xifexpression = "const ";
+      } else {
+        _xifexpression = "";
       }
+      String _signatureString = this.signatureString(it);
+      String _plus = (_xifexpression + _signatureString);
+      String _plus_1 = (_plus + " ");
+      String _name = it.getName();
+      return (_plus_1 + _name);
     };
     Iterable<String> _map = IterableExtensions.<Attribute, String>map(attributes, _function);
     return IterableExtensions.join(_map, ", ");

@@ -3,7 +3,7 @@
 # Run Buckminster script (nightly)
 #
 
-setpref complianceLevel=1.6
+setpref complianceLevel=1.8
 
 setpref targetPlatformPath="${WORKSPACE}/buildroot/target.platform"
 

@@ -498,20 +498,14 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       }
       List<Message> messages = _xifexpression;
       final List<PortClass> allPortClasses = this._roomExtensions.getAllPortClasses(pc, (conj).booleanValue());
-      final Function1<PortClass, EList<Attribute>> _function = new Function1<PortClass, EList<Attribute>>() {
-        @Override
-        public EList<Attribute> apply(final PortClass p) {
-          return p.getAttributes();
-        }
+      final Function1<PortClass, EList<Attribute>> _function = (PortClass p) -> {
+        return p.getAttributes();
       };
       List<EList<Attribute>> _map = ListExtensions.<PortClass, EList<Attribute>>map(allPortClasses, _function);
       Iterable<Attribute> _flatten = Iterables.<Attribute>concat(_map);
       final List<Attribute> allAttributes = IterableExtensions.<Attribute>toList(_flatten);
-      final Function1<PortClass, EList<PortOperation>> _function_1 = new Function1<PortClass, EList<PortOperation>>() {
-        @Override
-        public EList<PortOperation> apply(final PortClass p) {
-          return p.getOperations();
-        }
+      final Function1<PortClass, EList<PortOperation>> _function_1 = (PortClass p) -> {
+        return p.getOperations();
       };
       List<EList<PortOperation>> _map_1 = ListExtensions.<PortClass, EList<PortOperation>>map(allPortClasses, _function_1);
       Iterable<PortOperation> _flatten_1 = Iterables.<PortOperation>concat(_map_1);
@@ -661,32 +655,23 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     CharSequence _xblockexpression = null;
     {
       List<Message> _allIncomingMessages = this._roomHelpers.getAllIncomingMessages(pc);
-      final Function1<Message, Boolean> _function = new Function1<Message, Boolean>() {
-        @Override
-        public Boolean apply(final Message m) {
-          VarDecl _data = m.getData();
-          return Boolean.valueOf((!Objects.equal(_data, null)));
-        }
+      final Function1<Message, Boolean> _function = (Message m) -> {
+        VarDecl _data = m.getData();
+        return Boolean.valueOf((!Objects.equal(_data, null)));
       };
       Iterable<Message> sentMsgs = IterableExtensions.<Message>filter(_allIncomingMessages, _function);
-      final Function1<Message, Boolean> _function_1 = new Function1<Message, Boolean>() {
-        @Override
-        public Boolean apply(final Message m) {
-          VarDecl _data = m.getData();
-          RefableType _refType = _data.getRefType();
-          DataType _type = _refType.getType();
-          return Boolean.valueOf(ProtocolClassGen.this._typeHelpers.isEnumeration(_type));
-        }
+      final Function1<Message, Boolean> _function_1 = (Message m) -> {
+        VarDecl _data = m.getData();
+        RefableType _refType = _data.getRefType();
+        DataType _type = _refType.getType();
+        return Boolean.valueOf(this._typeHelpers.isEnumeration(_type));
       };
       final Iterable<Message> enumMsgs = IterableExtensions.<Message>filter(sentMsgs, _function_1);
-      final Function1<Message, Boolean> _function_2 = new Function1<Message, Boolean>() {
-        @Override
-        public Boolean apply(final Message m) {
-          VarDecl _data = m.getData();
-          RefableType _refType = _data.getRefType();
-          DataType _type = _refType.getType();
-          return Boolean.valueOf(ProtocolClassGen.this._typeHelpers.isBoolean(_type));
-        }
+      final Function1<Message, Boolean> _function_2 = (Message m) -> {
+        VarDecl _data = m.getData();
+        RefableType _refType = _data.getRefType();
+        DataType _type = _refType.getType();
+        return Boolean.valueOf(this._typeHelpers.isBoolean(_type));
       };
       final Iterable<Message> boolMsgs = IterableExtensions.<Message>filter(sentMsgs, _function_2);
       final boolean usesMSC = (Main.getSettings().isGenerateMSCInstrumentation() && (!(IterableExtensions.isEmpty(enumMsgs) && IterableExtensions.isEmpty(boolMsgs))));
@@ -909,32 +894,23 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     CharSequence _xblockexpression = null;
     {
       List<Message> _allIncomingMessages = this._roomHelpers.getAllIncomingMessages(pc);
-      final Function1<Message, Boolean> _function = new Function1<Message, Boolean>() {
-        @Override
-        public Boolean apply(final Message m) {
-          VarDecl _data = m.getData();
-          return Boolean.valueOf((!Objects.equal(_data, null)));
-        }
+      final Function1<Message, Boolean> _function = (Message m) -> {
+        VarDecl _data = m.getData();
+        return Boolean.valueOf((!Objects.equal(_data, null)));
       };
       Iterable<Message> messages = IterableExtensions.<Message>filter(_allIncomingMessages, _function);
-      final Function1<Message, Boolean> _function_1 = new Function1<Message, Boolean>() {
-        @Override
-        public Boolean apply(final Message m) {
-          VarDecl _data = m.getData();
-          RefableType _refType = _data.getRefType();
-          DataType _type = _refType.getType();
-          return Boolean.valueOf(ProtocolClassGen.this._typeHelpers.isEnumeration(_type));
-        }
+      final Function1<Message, Boolean> _function_1 = (Message m) -> {
+        VarDecl _data = m.getData();
+        RefableType _refType = _data.getRefType();
+        DataType _type = _refType.getType();
+        return Boolean.valueOf(this._typeHelpers.isEnumeration(_type));
       };
       final Iterable<Message> enumMsgs = IterableExtensions.<Message>filter(messages, _function_1);
-      final Function1<Message, Boolean> _function_2 = new Function1<Message, Boolean>() {
-        @Override
-        public Boolean apply(final Message m) {
-          VarDecl _data = m.getData();
-          RefableType _refType = _data.getRefType();
-          DataType _type = _refType.getType();
-          return Boolean.valueOf(ProtocolClassGen.this._typeHelpers.isBoolean(_type));
-        }
+      final Function1<Message, Boolean> _function_2 = (Message m) -> {
+        VarDecl _data = m.getData();
+        RefableType _refType = _data.getRefType();
+        DataType _type = _refType.getType();
+        return Boolean.valueOf(this._typeHelpers.isBoolean(_type));
       };
       final Iterable<Message> boolMsgs = IterableExtensions.<Message>filter(messages, _function_2);
       final boolean usesMSC = (Main.getSettings().isGenerateMSCInstrumentation() && (!(IterableExtensions.isEmpty(enumMsgs) && IterableExtensions.isEmpty(boolMsgs))));
@@ -968,12 +944,9 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
           _builder.append(" {");
           _builder.newLineIfNotEmpty();
           {
-            if ((usesMSC && IterableExtensions.<Message>exists(enumMsgs, new Function1<Message, Boolean>() {
-              @Override
-              public Boolean apply(final Message m) {
-                return Boolean.valueOf(Objects.equal(m, message));
-              }
-            }))) {
+            if ((usesMSC && IterableExtensions.<Message>exists(enumMsgs, ((Function1<Message, Boolean>) (Message m) -> {
+              return Boolean.valueOf(Objects.equal(m, message));
+            })))) {
               _builder.append("\t");
               _builder.append("#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE");
               _builder.newLine();
@@ -1023,12 +996,9 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
             }
           }
           {
-            if ((usesMSC && IterableExtensions.<Message>exists(boolMsgs, new Function1<Message, Boolean>() {
-              @Override
-              public Boolean apply(final Message m) {
-                return Boolean.valueOf(Objects.equal(m, message));
-              }
-            }))) {
+            if ((usesMSC && IterableExtensions.<Message>exists(boolMsgs, ((Function1<Message, Boolean>) (Message m) -> {
+              return Boolean.valueOf(Objects.equal(m, message));
+            })))) {
               _builder.append("\t");
               _builder.append("#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE");
               _builder.newLine();

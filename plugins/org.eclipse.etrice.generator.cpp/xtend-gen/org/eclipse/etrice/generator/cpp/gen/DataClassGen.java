@@ -462,18 +462,15 @@ public class DataClassGen {
         initList.add(_plus);
       }
       EList<Attribute> _attributes = dataClass.getAttributes();
-      final Function1<Attribute, String> _function = new Function1<Attribute, String>() {
-        @Override
-        public String apply(final Attribute it) {
-          StringConcatenation _builder = new StringConcatenation();
-          String _name = it.getName();
-          _builder.append(_name, "");
-          _builder.append("(");
-          String _initializerListValue = initHelper.getInitializerListValue(it);
-          _builder.append(_initializerListValue, "");
-          _builder.append(")");
-          return _builder.toString();
-        }
+      final Function1<Attribute, String> _function = (Attribute it) -> {
+        StringConcatenation _builder = new StringConcatenation();
+        String _name_1 = it.getName();
+        _builder.append(_name_1, "");
+        _builder.append("(");
+        String _initializerListValue = initHelper.getInitializerListValue(it);
+        _builder.append(_initializerListValue, "");
+        _builder.append(")");
+        return _builder.toString();
       };
       List<String> _map = ListExtensions.<Attribute, String>map(_attributes, _function);
       Iterables.<CharSequence>addAll(initList, _map);
@@ -497,18 +494,15 @@ public class DataClassGen {
         initList.add(_plus);
       }
       EList<Attribute> _attributes = dataClass.getAttributes();
-      final Function1<Attribute, String> _function = new Function1<Attribute, String>() {
-        @Override
-        public String apply(final Attribute it) {
-          StringConcatenation _builder = new StringConcatenation();
-          String _name = it.getName();
-          _builder.append(_name, "");
-          _builder.append("(rhs.");
-          String _name_1 = it.getName();
-          _builder.append(_name_1, "");
-          _builder.append(")");
-          return _builder.toString();
-        }
+      final Function1<Attribute, String> _function = (Attribute it) -> {
+        StringConcatenation _builder = new StringConcatenation();
+        String _name_1 = it.getName();
+        _builder.append(_name_1, "");
+        _builder.append("(rhs.");
+        String _name_2 = it.getName();
+        _builder.append(_name_2, "");
+        _builder.append(")");
+        return _builder.toString();
       };
       List<String> _map = ListExtensions.<Attribute, String>map(_attributes, _function);
       Iterables.<CharSequence>addAll(initList, _map);
@@ -533,11 +527,8 @@ public class DataClassGen {
         _builder.append("(");
         DataClass _base_2 = dataClass.getBase();
         List<Attribute> _allAttributes = this._roomHelpers.getAllAttributes(_base_2);
-        final Function1<Attribute, String> _function = new Function1<Attribute, String>() {
-          @Override
-          public String apply(final Attribute it) {
-            return it.getName();
-          }
+        final Function1<Attribute, String> _function = (Attribute it) -> {
+          return it.getName();
         };
         List<String> _map = ListExtensions.<Attribute, String>map(_allAttributes, _function);
         String _join = IterableExtensions.join(_map, ", ");
@@ -546,18 +537,15 @@ public class DataClassGen {
         initList.add(_builder.toString());
       }
       EList<Attribute> _attributes = dataClass.getAttributes();
-      final Function1<Attribute, String> _function_1 = new Function1<Attribute, String>() {
-        @Override
-        public String apply(final Attribute it) {
-          StringConcatenation _builder = new StringConcatenation();
-          String _name = it.getName();
-          _builder.append(_name, "");
-          _builder.append("(");
-          String _name_1 = it.getName();
-          _builder.append(_name_1, "");
-          _builder.append(")");
-          return _builder.toString();
-        }
+      final Function1<Attribute, String> _function_1 = (Attribute it) -> {
+        StringConcatenation _builder_1 = new StringConcatenation();
+        String _name_1 = it.getName();
+        _builder_1.append(_name_1, "");
+        _builder_1.append("(");
+        String _name_2 = it.getName();
+        _builder_1.append(_name_2, "");
+        _builder_1.append(")");
+        return _builder_1.toString();
       };
       List<String> _map_1 = ListExtensions.<Attribute, String>map(_attributes, _function_1);
       Iterables.<CharSequence>addAll(initList, _map_1);

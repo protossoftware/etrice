@@ -74,48 +74,36 @@ public class GuardDetailExpressionProvider implements IDetailExpressionProvider 
       scope.add(_createExprFeature);
     }
     List<InterfaceItem> _allInterfaceItems = this.roomHelpers.getAllInterfaceItems(this.actorClass);
-    final Function1<InterfaceItem, Boolean> _function = new Function1<InterfaceItem, Boolean>() {
-      @Override
-      public Boolean apply(final InterfaceItem it) {
-        return Boolean.valueOf((it.isEventDriven() || (!GuardDetailExpressionProvider.this.roomHelpers.isConjugated(it))));
-      }
+    final Function1<InterfaceItem, Boolean> _function = (InterfaceItem it) -> {
+      return Boolean.valueOf((it.isEventDriven() || (!this.roomHelpers.isConjugated(it))));
     };
     Iterable<InterfaceItem> _filter = IterableExtensions.<InterfaceItem>filter(_allInterfaceItems, _function);
-    final Function1<InterfaceItem, IDetailExpressionProvider.ExpressionFeature> _function_1 = new Function1<InterfaceItem, IDetailExpressionProvider.ExpressionFeature>() {
-      @Override
-      public IDetailExpressionProvider.ExpressionFeature apply(final InterfaceItem it) {
-        IDetailExpressionProvider.ExpressionFeature _switchResult = null;
-        boolean _matched = false;
-        if (it instanceof Port) {
-          boolean _isReplicated = ((Port)it).isReplicated();
-          if (_isReplicated) {
-            _matched=true;
-            _switchResult = GuardDetailExpressionProvider.this.createExprFeature(it, IDetailExpressionProvider.ExpressionPostfix.BRACKETS);
-          }
+    final Function1<InterfaceItem, IDetailExpressionProvider.ExpressionFeature> _function_1 = (InterfaceItem it) -> {
+      IDetailExpressionProvider.ExpressionFeature _switchResult = null;
+      boolean _matched = false;
+      if (it instanceof Port) {
+        boolean _isReplicated = ((Port)it).isReplicated();
+        if (_isReplicated) {
+          _matched=true;
+          _switchResult = this.createExprFeature(it, IDetailExpressionProvider.ExpressionPostfix.BRACKETS);
         }
-        if (!_matched) {
-          _switchResult = GuardDetailExpressionProvider.this.createExprFeature(it, IDetailExpressionProvider.ExpressionPostfix.NONE);
-        }
-        return _switchResult;
       }
+      if (!_matched) {
+        _switchResult = this.createExprFeature(it, IDetailExpressionProvider.ExpressionPostfix.NONE);
+      }
+      return _switchResult;
     };
     Iterable<IDetailExpressionProvider.ExpressionFeature> _map = IterableExtensions.<InterfaceItem, IDetailExpressionProvider.ExpressionFeature>map(_filter, _function_1);
     Iterables.<IDetailExpressionProvider.ExpressionFeature>addAll(scope, _map);
     List<StandardOperation> _latestOperations = this.roomHelpers.getLatestOperations(this.actorClass);
-    final Function1<StandardOperation, IDetailExpressionProvider.ExpressionFeature> _function_2 = new Function1<StandardOperation, IDetailExpressionProvider.ExpressionFeature>() {
-      @Override
-      public IDetailExpressionProvider.ExpressionFeature apply(final StandardOperation it) {
-        return GuardDetailExpressionProvider.this.createExprFeature(it);
-      }
+    final Function1<StandardOperation, IDetailExpressionProvider.ExpressionFeature> _function_2 = (StandardOperation it) -> {
+      return this.createExprFeature(it);
     };
     List<IDetailExpressionProvider.ExpressionFeature> _map_1 = ListExtensions.<StandardOperation, IDetailExpressionProvider.ExpressionFeature>map(_latestOperations, _function_2);
     Iterables.<IDetailExpressionProvider.ExpressionFeature>addAll(scope, _map_1);
     List<Attribute> _allAttributes = this.roomHelpers.getAllAttributes(this.actorClass);
-    final Function1<Attribute, IDetailExpressionProvider.ExpressionFeature> _function_3 = new Function1<Attribute, IDetailExpressionProvider.ExpressionFeature>() {
-      @Override
-      public IDetailExpressionProvider.ExpressionFeature apply(final Attribute it) {
-        return GuardDetailExpressionProvider.this.createExprFeature(it);
-      }
+    final Function1<Attribute, IDetailExpressionProvider.ExpressionFeature> _function_3 = (Attribute it) -> {
+      return this.createExprFeature(it);
     };
     List<IDetailExpressionProvider.ExpressionFeature> _map_2 = ListExtensions.<Attribute, IDetailExpressionProvider.ExpressionFeature>map(_allAttributes, _function_3);
     Iterables.<IDetailExpressionProvider.ExpressionFeature>addAll(scope, _map_2);
@@ -146,11 +134,8 @@ public class GuardDetailExpressionProvider implements IDetailExpressionProvider 
       boolean _isConjugated = this.roomHelpers.isConjugated(((InterfaceItem)obj));
       boolean _not = (!_isConjugated);
       List<PortOperation> _allOperations = this.roomHelpers.getAllOperations(_protocol, _not);
-      final Function1<PortOperation, IDetailExpressionProvider.ExpressionFeature> _function = new Function1<PortOperation, IDetailExpressionProvider.ExpressionFeature>() {
-        @Override
-        public IDetailExpressionProvider.ExpressionFeature apply(final PortOperation it) {
-          return GuardDetailExpressionProvider.this.createExprFeature(it);
-        }
+      final Function1<PortOperation, IDetailExpressionProvider.ExpressionFeature> _function = (PortOperation it) -> {
+        return this.createExprFeature(it);
       };
       List<IDetailExpressionProvider.ExpressionFeature> _map = ListExtensions.<PortOperation, IDetailExpressionProvider.ExpressionFeature>map(_allOperations, _function);
       Iterables.<IDetailExpressionProvider.ExpressionFeature>addAll(scope, _map);
@@ -169,11 +154,8 @@ public class GuardDetailExpressionProvider implements IDetailExpressionProvider 
             boolean _not_1 = (!_isConjugated_1);
             if (_not_1) {
               List<Message> _allIncomingMessages = this.roomHelpers.getAllIncomingMessages(pc);
-              final Function1<Message, IDetailExpressionProvider.ExpressionFeature> _function_1 = new Function1<Message, IDetailExpressionProvider.ExpressionFeature>() {
-                @Override
-                public IDetailExpressionProvider.ExpressionFeature apply(final Message it) {
-                  return GuardDetailExpressionProvider.this.createExprFeature(it);
-                }
+              final Function1<Message, IDetailExpressionProvider.ExpressionFeature> _function_1 = (Message it) -> {
+                return this.createExprFeature(it);
               };
               List<IDetailExpressionProvider.ExpressionFeature> _map_1 = ListExtensions.<Message, IDetailExpressionProvider.ExpressionFeature>map(_allIncomingMessages, _function_1);
               Iterables.<IDetailExpressionProvider.ExpressionFeature>addAll(scope, _map_1);
@@ -198,20 +180,14 @@ public class GuardDetailExpressionProvider implements IDetailExpressionProvider 
           DataType _type_3 = _type_2.getType();
           final DataClass dc = ((DataClass) _type_3);
           List<Attribute> _allAttributes = this.roomHelpers.getAllAttributes(dc);
-          final Function1<Attribute, IDetailExpressionProvider.ExpressionFeature> _function_1 = new Function1<Attribute, IDetailExpressionProvider.ExpressionFeature>() {
-            @Override
-            public IDetailExpressionProvider.ExpressionFeature apply(final Attribute it) {
-              return GuardDetailExpressionProvider.this.createExprFeature(it);
-            }
+          final Function1<Attribute, IDetailExpressionProvider.ExpressionFeature> _function_1 = (Attribute it) -> {
+            return this.createExprFeature(it);
           };
           List<IDetailExpressionProvider.ExpressionFeature> _map_1 = ListExtensions.<Attribute, IDetailExpressionProvider.ExpressionFeature>map(_allAttributes, _function_1);
           Iterables.<IDetailExpressionProvider.ExpressionFeature>addAll(scope, _map_1);
           List<StandardOperation> _latestOperations = this.roomHelpers.getLatestOperations(dc);
-          final Function1<StandardOperation, IDetailExpressionProvider.ExpressionFeature> _function_2 = new Function1<StandardOperation, IDetailExpressionProvider.ExpressionFeature>() {
-            @Override
-            public IDetailExpressionProvider.ExpressionFeature apply(final StandardOperation it) {
-              return GuardDetailExpressionProvider.this.createExprFeature(it);
-            }
+          final Function1<StandardOperation, IDetailExpressionProvider.ExpressionFeature> _function_2 = (StandardOperation it) -> {
+            return this.createExprFeature(it);
           };
           List<IDetailExpressionProvider.ExpressionFeature> _map_2 = ListExtensions.<StandardOperation, IDetailExpressionProvider.ExpressionFeature>map(_latestOperations, _function_2);
           Iterables.<IDetailExpressionProvider.ExpressionFeature>addAll(scope, _map_2);

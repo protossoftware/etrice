@@ -122,11 +122,8 @@ public class GenericStateMachineGenerator extends AbstractStateMachineGenerator 
     String _xblockexpression = null;
     {
       EList<Trigger> _triggers = tt.getTriggers();
-      final Function1<Trigger, Boolean> _function = new Function1<Trigger, Boolean>() {
-        @Override
-        public Boolean apply(final Trigger e) {
-          return Boolean.valueOf(mc.isMatching(e, trigger));
-        }
+      final Function1<Trigger, Boolean> _function = (Trigger e) -> {
+        return Boolean.valueOf(mc.isMatching(e, trigger));
       };
       final Trigger tr = IterableExtensions.<Trigger>findFirst(_triggers, _function);
       StringConcatenation _builder = new StringConcatenation();
@@ -162,12 +159,9 @@ public class GenericStateMachineGenerator extends AbstractStateMachineGenerator 
     String _xblockexpression = null;
     {
       EList<TransitionChain> chain = xpmc.getChains(tr);
-      boolean hasArgs = ((!chain.isEmpty()) && IterableExtensions.<TransitionChain>forall(chain, new Function1<TransitionChain, Boolean>() {
-        @Override
-        public Boolean apply(final TransitionChain it) {
-          return Boolean.valueOf(((it.getTransition() instanceof NonInitialTransition) && (!(it.getTransition() instanceof GuardedTransition))));
-        }
-      }));
+      boolean hasArgs = ((!chain.isEmpty()) && IterableExtensions.<TransitionChain>forall(chain, ((Function1<TransitionChain, Boolean>) (TransitionChain it) -> {
+        return Boolean.valueOf(((it.getTransition() instanceof NonInitialTransition) && (!(it.getTransition() instanceof GuardedTransition))));
+      })));
       String _className = this.getClassName(xpmc);
       final String opScope = this.langExt.operationScope(_className, false);
       String _xifexpression = null;

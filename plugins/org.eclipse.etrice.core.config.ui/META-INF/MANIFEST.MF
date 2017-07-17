@@ -23,7 +23,7 @@ Require-Bundle: org.eclipse.etrice.core.room.ui;bundle-version="1.1.1",
 Import-Package: org.apache.commons.logging,
  org.apache.log4j,
  org.eclipse.etrice.core.genmodel.etricegen
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.eclipse.etrice.core.ui.contentassist.antlr,
  org.eclipse.etrice.core.ui.internal,
  org.eclipse.etrice.core.ui.contentassist,

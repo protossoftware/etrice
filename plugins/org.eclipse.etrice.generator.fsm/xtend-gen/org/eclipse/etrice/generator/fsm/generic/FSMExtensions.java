@@ -114,19 +114,13 @@ public class FSMExtensions {
   public List<State> getLeafStatesLast(final List<State> states) {
     List<State> _xblockexpression = null;
     {
-      final Function1<State, Boolean> _function = new Function1<State, Boolean>() {
-        @Override
-        public Boolean apply(final State s) {
-          return Boolean.valueOf(FSMExtensions.this._fSMHelpers.isLeaf(s));
-        }
+      final Function1<State, Boolean> _function = (State s) -> {
+        return Boolean.valueOf(this._fSMHelpers.isLeaf(s));
       };
       final Iterable<State> leaf = IterableExtensions.<State>filter(states, _function);
-      final Function1<State, Boolean> _function_1 = new Function1<State, Boolean>() {
-        @Override
-        public Boolean apply(final State s) {
-          boolean _isLeaf = FSMExtensions.this._fSMHelpers.isLeaf(s);
-          return Boolean.valueOf((!_isLeaf));
-        }
+      final Function1<State, Boolean> _function_1 = (State s) -> {
+        boolean _isLeaf = this._fSMHelpers.isLeaf(s);
+        return Boolean.valueOf((!_isLeaf));
       };
       final Iterable<State> nonLeaf = IterableExtensions.<State>filter(states, _function_1);
       _xblockexpression = this.<State>union(nonLeaf, leaf);

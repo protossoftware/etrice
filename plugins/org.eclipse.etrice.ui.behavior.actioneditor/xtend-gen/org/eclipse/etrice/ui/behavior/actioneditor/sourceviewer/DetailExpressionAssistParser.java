@@ -60,23 +60,20 @@ public class DetailExpressionAssistParser {
     char closingChar = 0;
     char _char = this.document.getChar((offset - 1));
     String _string = Character.valueOf(_char).toString();
-    boolean _matched = false;
-    if (Objects.equal(_string, ")")) {
-      _matched=true;
-      postfixResult = IDetailExpressionProvider.ExpressionPostfix.PARENTHESES;
-      openingChar = '(';
-      closingChar = ')';
-    }
-    if (!_matched) {
-      if (Objects.equal(_string, "]")) {
-        _matched=true;
+    switch (_string) {
+      case ")":
+        postfixResult = IDetailExpressionProvider.ExpressionPostfix.PARENTHESES;
+        openingChar = '(';
+        closingChar = ')';
+        break;
+      case "]":
         postfixResult = IDetailExpressionProvider.ExpressionPostfix.BRACKETS;
         openingChar = '[';
         closingChar = ']';
-      }
-    }
-    if (!_matched) {
-      postfixResult = IDetailExpressionProvider.ExpressionPostfix.NONE;
+        break;
+      default:
+        postfixResult = IDetailExpressionProvider.ExpressionPostfix.NONE;
+        break;
     }
     int start = offset;
     boolean _notEquals = (!Objects.equal(postfixResult, IDetailExpressionProvider.ExpressionPostfix.NONE));
@@ -87,14 +84,14 @@ public class DetailExpressionAssistParser {
         {
           start--;
           char _char_1 = this.document.getChar(start);
-          boolean _matched_1 = false;
+          boolean _matched = false;
           if (Objects.equal(_char_1, openingChar)) {
-            _matched_1=true;
+            _matched=true;
             counter--;
           }
-          if (!_matched_1) {
+          if (!_matched) {
             if (Objects.equal(_char_1, closingChar)) {
-              _matched_1=true;
+              _matched=true;
               counter++;
             }
           }
@@ -171,22 +168,16 @@ public class DetailExpressionAssistParser {
     }
     final IDetailExpressionProvider.ExpressionFeature firstParseResult = parsedFeatures.pop();
     List<IDetailExpressionProvider.ExpressionFeature> _initialFeatures = this.provider.getInitialFeatures();
-    final Function1<IDetailExpressionProvider.ExpressionFeature, Boolean> _function = new Function1<IDetailExpressionProvider.ExpressionFeature, Boolean>() {
-      @Override
-      public Boolean apply(final IDetailExpressionProvider.ExpressionFeature it) {
-        return Boolean.valueOf(DetailExpressionAssistParser.this.matches(it, firstParseResult));
-      }
+    final Function1<IDetailExpressionProvider.ExpressionFeature, Boolean> _function = (IDetailExpressionProvider.ExpressionFeature it) -> {
+      return Boolean.valueOf(this.matches(it, firstParseResult));
     };
     IDetailExpressionProvider.ExpressionFeature lastMatch = IterableExtensions.<IDetailExpressionProvider.ExpressionFeature>findFirst(_initialFeatures, _function);
     while (((!Objects.equal(lastMatch, null)) && (!parsedFeatures.isEmpty()))) {
       {
         final IDetailExpressionProvider.ExpressionFeature nextParseResult = parsedFeatures.pop();
         List<IDetailExpressionProvider.ExpressionFeature> _contextFeatures = this.provider.getContextFeatures(lastMatch);
-        final Function1<IDetailExpressionProvider.ExpressionFeature, Boolean> _function_1 = new Function1<IDetailExpressionProvider.ExpressionFeature, Boolean>() {
-          @Override
-          public Boolean apply(final IDetailExpressionProvider.ExpressionFeature it) {
-            return Boolean.valueOf(DetailExpressionAssistParser.this.matches(it, nextParseResult));
-          }
+        final Function1<IDetailExpressionProvider.ExpressionFeature, Boolean> _function_1 = (IDetailExpressionProvider.ExpressionFeature it) -> {
+          return Boolean.valueOf(this.matches(it, nextParseResult));
         };
         IDetailExpressionProvider.ExpressionFeature _findFirst = IterableExtensions.<IDetailExpressionProvider.ExpressionFeature>findFirst(_contextFeatures, _function_1);
         lastMatch = _findFirst;

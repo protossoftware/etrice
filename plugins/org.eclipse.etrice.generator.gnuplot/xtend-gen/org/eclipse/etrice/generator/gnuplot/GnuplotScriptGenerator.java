@@ -54,13 +54,10 @@ public class GnuplotScriptGenerator {
     final SubSystemInstance ssi = IterableExtensions.<SubSystemInstance>head(_subSystemInstances_1);
     SubSystemClass _subSystemClass = ssi.getSubSystemClass();
     EList<Annotation> _annotations = _subSystemClass.getAnnotations();
-    final Function1<Annotation, Boolean> _function = new Function1<Annotation, Boolean>() {
-      @Override
-      public Boolean apply(final Annotation a) {
-        AnnotationType _type = a.getType();
-        String _name = _type.getName();
-        return Boolean.valueOf(Objects.equal(_name, "Gnuplot"));
-      }
+    final Function1<Annotation, Boolean> _function = (Annotation a) -> {
+      AnnotationType _type = a.getType();
+      String _name = _type.getName();
+      return Boolean.valueOf(Objects.equal(_name, "Gnuplot"));
     };
     boolean _exists = IterableExtensions.<Annotation>exists(_annotations, _function);
     boolean _not = (!_exists);
@@ -111,12 +108,9 @@ public class GnuplotScriptGenerator {
   
   protected KeyValue getAttribute(final Annotation anno, final String name) {
     EList<KeyValue> _attributes = anno.getAttributes();
-    final Function1<KeyValue, Boolean> _function = new Function1<KeyValue, Boolean>() {
-      @Override
-      public Boolean apply(final KeyValue attr) {
-        String _key = attr.getKey();
-        return Boolean.valueOf(Objects.equal(_key, name));
-      }
+    final Function1<KeyValue, Boolean> _function = (KeyValue attr) -> {
+      String _key = attr.getKey();
+      return Boolean.valueOf(Objects.equal(_key, name));
     };
     return IterableExtensions.<KeyValue>findFirst(_attributes, _function);
   }
@@ -171,13 +165,10 @@ public class GnuplotScriptGenerator {
     {
       SubSystemClass _subSystemClass = ssi.getSubSystemClass();
       EList<Annotation> _annotations = _subSystemClass.getAnnotations();
-      final Function1<Annotation, Boolean> _function = new Function1<Annotation, Boolean>() {
-        @Override
-        public Boolean apply(final Annotation a) {
-          AnnotationType _type = a.getType();
-          String _name = _type.getName();
-          return Boolean.valueOf(Objects.equal(_name, "Gnuplot"));
-        }
+      final Function1<Annotation, Boolean> _function = (Annotation a) -> {
+        AnnotationType _type = a.getType();
+        String _name = _type.getName();
+        return Boolean.valueOf(Objects.equal(_name, "Gnuplot"));
       };
       Iterable<Annotation> _filter = IterableExtensions.<Annotation>filter(_annotations, _function);
       final Annotation plotAnnotation = IterableExtensions.<Annotation>head(_filter);
@@ -235,13 +226,10 @@ public class GnuplotScriptGenerator {
       final Number fontsize = ((Number)_elvis);
       SubSystemClass _subSystemClass_1 = ssi.getSubSystemClass();
       EList<Annotation> _annotations_1 = _subSystemClass_1.getAnnotations();
-      final Function1<Annotation, Boolean> _function_1 = new Function1<Annotation, Boolean>() {
-        @Override
-        public Boolean apply(final Annotation a) {
-          AnnotationType _type = a.getType();
-          String _name = _type.getName();
-          return Boolean.valueOf(Objects.equal(_name, "GnuplotGraph"));
-        }
+      final Function1<Annotation, Boolean> _function_1 = (Annotation a) -> {
+        AnnotationType _type = a.getType();
+        String _name = _type.getName();
+        return Boolean.valueOf(Objects.equal(_name, "GnuplotGraph"));
       };
       Iterable<Annotation> _filter_1 = IterableExtensions.<Annotation>filter(_annotations_1, _function_1);
       final List<Annotation> graphAnnotations = IterableExtensions.<Annotation>toList(_filter_1);

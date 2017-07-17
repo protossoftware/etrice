@@ -44,24 +44,18 @@ public class PostprocessingHelpers {
   
   public static EAttribute getAttribute(final EClass cls, final String name) {
     EList<EAttribute> _eAllAttributes = cls.getEAllAttributes();
-    final Function1<EAttribute, Boolean> _function = new Function1<EAttribute, Boolean>() {
-      @Override
-      public Boolean apply(final EAttribute a) {
-        String _name = a.getName();
-        return Boolean.valueOf(_name.equals(name));
-      }
+    final Function1<EAttribute, Boolean> _function = (EAttribute a) -> {
+      String _name = a.getName();
+      return Boolean.valueOf(_name.equals(name));
     };
     return IterableExtensions.<EAttribute>findFirst(_eAllAttributes, _function);
   }
   
   public static EReference getReference(final EClass cls, final String name) {
     EList<EReference> _eAllReferences = cls.getEAllReferences();
-    final Function1<EReference, Boolean> _function = new Function1<EReference, Boolean>() {
-      @Override
-      public Boolean apply(final EReference a) {
-        String _name = a.getName();
-        return Boolean.valueOf(_name.equals(name));
-      }
+    final Function1<EReference, Boolean> _function = (EReference a) -> {
+      String _name = a.getName();
+      return Boolean.valueOf(_name.equals(name));
     };
     return IterableExtensions.<EReference>findFirst(_eAllReferences, _function);
   }

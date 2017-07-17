@@ -86,11 +86,8 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
   
   public void doGenerate(final Root root) {
     EList<ProtocolClass> _usedProtocolClasses = root.getUsedProtocolClasses();
-    final Function1<ProtocolClass, Boolean> _function = new Function1<ProtocolClass, Boolean>() {
-      @Override
-      public Boolean apply(final ProtocolClass cl) {
-        return Boolean.valueOf(ProtocolClassGen.this._fileSystemHelpers.isValidGenerationLocation(cl));
-      }
+    final Function1<ProtocolClass, Boolean> _function = (ProtocolClass cl) -> {
+      return Boolean.valueOf(this._fileSystemHelpers.isValidGenerationLocation(cl));
     };
     Iterable<ProtocolClass> _filter = IterableExtensions.<ProtocolClass>filter(_usedProtocolClasses, _function);
     for (final ProtocolClass pc : _filter) {
@@ -925,18 +922,15 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
       boolean _notEquals = (!Objects.equal(pc, null));
       if (_notEquals) {
         EList<Attribute> _attributes = pc.getAttributes();
-        final Function1<Attribute, String> _function = new Function1<Attribute, String>() {
-          @Override
-          public String apply(final Attribute it) {
-            StringConcatenation _builder = new StringConcatenation();
-            String _name = it.getName();
-            _builder.append(_name, "");
-            _builder.append("(");
-            String _initializerListValue = initHelper.getInitializerListValue(it);
-            _builder.append(_initializerListValue, "");
-            _builder.append(")");
-            return _builder.toString();
-          }
+        final Function1<Attribute, String> _function = (Attribute it) -> {
+          StringConcatenation _builder_1 = new StringConcatenation();
+          String _name = it.getName();
+          _builder_1.append(_name, "");
+          _builder_1.append("(");
+          String _initializerListValue = initHelper.getInitializerListValue(it);
+          _builder_1.append(_initializerListValue, "");
+          _builder_1.append(")");
+          return _builder_1.toString();
         };
         List<String> _map = ListExtensions.<Attribute, String>map(_attributes, _function);
         Iterables.<CharSequence>addAll(initList, _map);
@@ -1183,12 +1177,9 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     CharSequence _xblockexpression = null;
     {
       List<Message> _allIncomingMessages = this._roomHelpers.getAllIncomingMessages(pc);
-      final Function1<Message, Boolean> _function = new Function1<Message, Boolean>() {
-        @Override
-        public Boolean apply(final Message m) {
-          VarDecl _data = m.getData();
-          return Boolean.valueOf((!Objects.equal(_data, null)));
-        }
+      final Function1<Message, Boolean> _function = (Message m) -> {
+        VarDecl _data = m.getData();
+        return Boolean.valueOf((!Objects.equal(_data, null)));
       };
       final Iterable<Message> sentMsgs = IterableExtensions.<Message>filter(_allIncomingMessages, _function);
       StringConcatenation _builder = new StringConcatenation();
@@ -1418,12 +1409,9 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
     CharSequence _xblockexpression = null;
     {
       List<Message> _allIncomingMessages = this._roomHelpers.getAllIncomingMessages(pc);
-      final Function1<Message, Boolean> _function = new Function1<Message, Boolean>() {
-        @Override
-        public Boolean apply(final Message m) {
-          VarDecl _data = m.getData();
-          return Boolean.valueOf((!Objects.equal(_data, null)));
-        }
+      final Function1<Message, Boolean> _function = (Message m) -> {
+        VarDecl _data = m.getData();
+        return Boolean.valueOf((!Objects.equal(_data, null)));
       };
       final Iterable<Message> sentMsgs = IterableExtensions.<Message>filter(_allIncomingMessages, _function);
       StringConcatenation _builder = new StringConcatenation();

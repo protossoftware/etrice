@@ -551,25 +551,19 @@ public class ConfigGenAddon {
   private String getMinMaxType(final PrimitiveType type) {
     String _switchResult = null;
     String _typeName = this.typeHelpers.typeName(type);
-    boolean _matched = false;
-    if (Objects.equal(_typeName, "byte")) {
-      _matched=true;
-      _switchResult = "int";
-    }
-    if (!_matched) {
-      if (Objects.equal(_typeName, "short")) {
-        _matched=true;
+    switch (_typeName) {
+      case "byte":
         _switchResult = "int";
-      }
-    }
-    if (!_matched) {
-      if (Objects.equal(_typeName, "float")) {
-        _matched=true;
+        break;
+      case "short":
+        _switchResult = "int";
+        break;
+      case "float":
         _switchResult = "double";
-      }
-    }
-    if (!_matched) {
-      _switchResult = this.typeHelpers.typeName(type);
+        break;
+      default:
+        _switchResult = this.typeHelpers.typeName(type);
+        break;
     }
     return _switchResult;
   }

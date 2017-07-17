@@ -4,7 +4,7 @@ Bundle-Name: Abstract Execution for State Machines
 Bundle-SymbolicName: org.eclipse.etrice.abstractexec.behavior;singleton:=true
 Bundle-Version: 1.1.1.qualifier
 Bundle-Vendor: Eclipse eTrice
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: org.eclipse.etrice.core.fsm;bundle-version="1.1.1",
  org.eclipse.etrice.core.genmodel.fsm;bundle-version="1.1.1",
  org.eclipse.etrice.generator.fsm;bundle-version="1.1.1",

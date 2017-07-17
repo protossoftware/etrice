@@ -696,11 +696,8 @@ public abstract class AbstractStateMachineGenerator {
           final List<State> baseStateList = this._fSMHelpers.getBaseStateList(_stateMachine_1);
           _builder.newLineIfNotEmpty();
           _builder.append("\t");
-          final Function1<State, Boolean> _function = new Function1<State, Boolean>() {
-            @Override
-            public Boolean apply(final State s) {
-              return Boolean.valueOf(AbstractStateMachineGenerator.this._fSMHelpers.hasEntryCode(s, true));
-            }
+          final Function1<State, Boolean> _function = (State s) -> {
+            return Boolean.valueOf(this._fSMHelpers.hasEntryCode(s, true));
           };
           Iterable<State> _filter = IterableExtensions.<State>filter(baseStateList, _function);
           boolean _isEmpty = IterableExtensions.isEmpty(_filter);
@@ -1470,11 +1467,8 @@ public abstract class AbstractStateMachineGenerator {
       _builder.append(_genDoCodes, "");
       _builder.newLineIfNotEmpty();
       List<Transition> _outgoingTransitionsHierarchical = this._fSMExtensions.getOutgoingTransitionsHierarchical(xpmc, state);
-      final Function1<Transition, Boolean> _function = new Function1<Transition, Boolean>() {
-        @Override
-        public Boolean apply(final Transition t) {
-          return Boolean.valueOf((t instanceof GuardedTransition));
-        }
+      final Function1<Transition, Boolean> _function = (Transition t) -> {
+        return Boolean.valueOf((t instanceof GuardedTransition));
       };
       Iterable<Transition> transitions = IterableExtensions.<Transition>filter(_outgoingTransitionsHierarchical, _function);
       _builder.newLineIfNotEmpty();
@@ -1751,11 +1745,8 @@ public abstract class AbstractStateMachineGenerator {
       }
       StateGraph _stateMachine_1 = xpmc.getStateMachine();
       List<TrPoint> _allTrPointsRecursive = this._fSMHelpers.getAllTrPointsRecursive(_stateMachine_1);
-      final Function1<TrPoint, Boolean> _function = new Function1<TrPoint, Boolean>() {
-        @Override
-        public Boolean apply(final TrPoint t) {
-          return Boolean.valueOf(((t instanceof TransitionPoint) && ((TransitionPoint) t).isHandler()));
-        }
+      final Function1<TrPoint, Boolean> _function = (TrPoint t) -> {
+        return Boolean.valueOf(((t instanceof TransitionPoint) && ((TransitionPoint) t).isHandler()));
       };
       Iterable<TrPoint> _filter = IterableExtensions.<TrPoint>filter(_allTrPointsRecursive, _function);
       boolean _isEmpty_1 = IterableExtensions.isEmpty(_filter);

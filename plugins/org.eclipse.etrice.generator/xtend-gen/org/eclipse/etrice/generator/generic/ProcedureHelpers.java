@@ -388,14 +388,11 @@ public class ProcedureHelpers {
    * @return an argument list for the attributes
    */
   public String argList(final Iterable<Attribute> attributes) {
-    final Function1<Attribute, String> _function = new Function1<Attribute, String>() {
-      @Override
-      public String apply(final Attribute it) {
-        String _signatureString = ProcedureHelpers.this.signatureString(it);
-        String _plus = (_signatureString + " ");
-        String _name = it.getName();
-        return (_plus + _name);
-      }
+    final Function1<Attribute, String> _function = (Attribute it) -> {
+      String _signatureString = this.signatureString(it);
+      String _plus = (_signatureString + " ");
+      String _name = it.getName();
+      return (_plus + _name);
     };
     Iterable<String> _map = IterableExtensions.<Attribute, String>map(attributes, _function);
     return IterableExtensions.join(_map, ", ");
@@ -561,12 +558,9 @@ public class ProcedureHelpers {
     boolean _usesInheritance = this.languageExt.usesInheritance();
     boolean _not = (!_usesInheritance);
     List<ClassStructor> _structors = this.getStructors(cls, _not);
-    final Function1<ClassStructor, Boolean> _function = new Function1<ClassStructor, Boolean>() {
-      @Override
-      public Boolean apply(final ClassStructor it) {
-        boolean _isConstructor = it.isConstructor();
-        return Boolean.valueOf((_isConstructor == ctor));
-      }
+    final Function1<ClassStructor, Boolean> _function = (ClassStructor it) -> {
+      boolean _isConstructor = it.isConstructor();
+      return Boolean.valueOf((_isConstructor == ctor));
     };
     boolean _exists = IterableExtensions.<ClassStructor>exists(_structors, _function);
     if (_exists) {
@@ -603,11 +597,8 @@ public class ProcedureHelpers {
       boolean _usesInheritance = this.languageExt.usesInheritance();
       boolean _not = (!_usesInheritance);
       List<ClassStructor> _structors = this.getStructors(cls, _not);
-      final Function1<ClassStructor, Boolean> _function = new Function1<ClassStructor, Boolean>() {
-        @Override
-        public Boolean apply(final ClassStructor it) {
-          return Boolean.valueOf(it.isConstructor());
-        }
+      final Function1<ClassStructor, Boolean> _function = (ClassStructor it) -> {
+        return Boolean.valueOf(it.isConstructor());
       };
       boolean _exists = IterableExtensions.<ClassStructor>exists(_structors, _function);
       if (_exists) {
@@ -619,12 +610,9 @@ public class ProcedureHelpers {
       boolean _usesInheritance_1 = this.languageExt.usesInheritance();
       boolean _not_1 = (!_usesInheritance_1);
       List<ClassStructor> _structors_1 = this.getStructors(cls, _not_1);
-      final Function1<ClassStructor, Boolean> _function_1 = new Function1<ClassStructor, Boolean>() {
-        @Override
-        public Boolean apply(final ClassStructor it) {
-          boolean _isConstructor = it.isConstructor();
-          return Boolean.valueOf((!_isConstructor));
-        }
+      final Function1<ClassStructor, Boolean> _function_1 = (ClassStructor it) -> {
+        boolean _isConstructor = it.isConstructor();
+        return Boolean.valueOf((!_isConstructor));
       };
       boolean _exists_1 = IterableExtensions.<ClassStructor>exists(_structors_1, _function_1);
       if (_exists_1) {
@@ -666,12 +654,9 @@ public class ProcedureHelpers {
       boolean _usesInheritance = this.languageExt.usesInheritance();
       boolean _not = (!_usesInheritance);
       List<ClassStructor> _structors = this.getStructors(cls, _not);
-      final Function1<ClassStructor, Boolean> _function = new Function1<ClassStructor, Boolean>() {
-        @Override
-        public Boolean apply(final ClassStructor it) {
-          boolean _isConstructor = it.isConstructor();
-          return Boolean.valueOf((_isConstructor == ctor));
-        }
+      final Function1<ClassStructor, Boolean> _function = (ClassStructor it) -> {
+        boolean _isConstructor = it.isConstructor();
+        return Boolean.valueOf((_isConstructor == ctor));
       };
       boolean _exists = IterableExtensions.<ClassStructor>exists(_structors, _function);
       boolean _not_1 = (!_exists);
@@ -720,42 +705,30 @@ public class ProcedureHelpers {
     boolean _usesInheritance = this.languageExt.usesInheritance();
     boolean _not = (!_usesInheritance);
     List<ClassStructor> _structors = this.getStructors(cls, _not);
-    final Function1<ClassStructor, Boolean> _function = new Function1<ClassStructor, Boolean>() {
-      @Override
-      public Boolean apply(final ClassStructor it) {
-        boolean _isConstructor = it.isConstructor();
-        return Boolean.valueOf((_isConstructor == ctor));
-      }
+    final Function1<ClassStructor, Boolean> _function = (ClassStructor it) -> {
+      boolean _isConstructor = it.isConstructor();
+      return Boolean.valueOf((_isConstructor == ctor));
     };
     final Iterable<ClassStructor> implementedStructors = IterableExtensions.<ClassStructor>filter(_structors, _function);
-    final Function1<ClassStructor, DetailCode> _function_1 = new Function1<ClassStructor, DetailCode>() {
-      @Override
-      public DetailCode apply(final ClassStructor it) {
-        return it.getDetailCode();
-      }
+    final Function1<ClassStructor, DetailCode> _function_1 = (ClassStructor it) -> {
+      return it.getDetailCode();
     };
     Iterable<DetailCode> _map = IterableExtensions.<ClassStructor, DetailCode>map(implementedStructors, _function_1);
-    final Function1<DetailCode, String> _function_2 = new Function1<DetailCode, String>() {
-      @Override
-      public String apply(final DetailCode it) {
-        AbstractGenerator _instance = AbstractGenerator.getInstance();
-        return _instance.getTranslatedCode(it);
-      }
+    final Function1<DetailCode, String> _function_2 = (DetailCode it) -> {
+      AbstractGenerator _instance = AbstractGenerator.getInstance();
+      return _instance.getTranslatedCode(it);
     };
     final Iterable<String> translatedCodes = IterableExtensions.<DetailCode, String>map(_map, _function_2);
-    final Function1<String, CharSequence> _function_3 = new Function1<String, CharSequence>() {
-      @Override
-      public CharSequence apply(final String it) {
-        CharSequence _xifexpression = null;
-        int _size = IterableExtensions.size(translatedCodes);
-        boolean _greaterThan = (_size > 1);
-        if (_greaterThan) {
-          _xifexpression = ProcedureHelpers.this.asBlock(it);
-        } else {
-          _xifexpression = it;
-        }
-        return _xifexpression;
+    final Function1<String, CharSequence> _function_3 = (String it) -> {
+      CharSequence _xifexpression = null;
+      int _size = IterableExtensions.size(translatedCodes);
+      boolean _greaterThan = (_size > 1);
+      if (_greaterThan) {
+        _xifexpression = this.asBlock(it);
+      } else {
+        _xifexpression = it;
       }
+      return _xifexpression;
     };
     Iterable<CharSequence> _map_1 = IterableExtensions.<String, CharSequence>map(translatedCodes, _function_3);
     String _join = IterableExtensions.join(_map_1);

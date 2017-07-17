@@ -63,6 +63,10 @@
         optional="true"/>
     <requirement
         name="org.eclipse.egit.feature.group"/>
+    <requirement
+        name="org.apache.commons.io.feature.group"/>
+    <repository
+        url="http://download.eclipse.org/tools/orbit/R-builds/R20170307180635/repository"/>
     <description>Install the tools needed in the IDE to work with the source code for ${scope.project.label}</description>
   </setupTask>
   <setupTask
@@ -158,15 +162,15 @@
         <setupTask
             xsi:type="setup:PreferenceTask"
             key="/instance/org.eclipse.jdt.core/org.eclipse.jdt.core.compiler.codegen.targetPlatform"
-            value="1.7"/>
+            value="1.8"/>
         <setupTask
             xsi:type="setup:PreferenceTask"
             key="/instance/org.eclipse.jdt.core/org.eclipse.jdt.core.compiler.compliance"
-            value="1.7"/>
+            value="1.8"/>
         <setupTask
             xsi:type="setup:PreferenceTask"
             key="/instance/org.eclipse.jdt.core/org.eclipse.jdt.core.compiler.source"
-            value="1.7"/>
+            value="1.8"/>
       </setupTask>
       <setupTask
           xsi:type="setup:CompoundTask"
