@@ -9,6 +9,7 @@ import java.util.Collection;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.etrice.core.common.util.CCStringIndentation;
 import org.eclipse.etrice.core.fsm.fSM.ChoicePoint;
 import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.etrice.core.fsm.fSM.FSMPackage;
@@ -122,10 +123,17 @@ public class FSMJavaValidator extends org.eclipse.etrice.core.fsm.validation.Abs
 		if (dc.getLines().isEmpty())
 			error("detail code must not be empty", dc, FSMPackage.Literals.DETAIL_CODE__LINES);
 		
+		// ccstring should be new standard
+//		for(String line : dc.getLines()){
+//			// bad: "\r\n" is affected too
+//			if(line.contains(Strings.newLine()))
+//				warning("multi line string", dc, FSMPackage.Literals.DETAIL_CODE__LINES, dc.getLines().indexOf(line), MULTI_LINE_DETAILCODE);
+//		}
+		
 		for(String line : dc.getLines()){
-			// bad: "\r\n" is affected too
-			if(line.contains(Strings.newLine()))
-				warning("multi line string", dc, FSMPackage.Literals.DETAIL_CODE__LINES, dc.getLines().indexOf(line), MULTI_LINE_DETAILCODE);
+			CCStringIndentation ccStringIndent = new CCStringIndentation(line);
+			if(!ccStringIndent.validateIndentation())
+				warning("Inconsistent indentation", dc, FSMPackage.Literals.DETAIL_CODE__LINES, dc.getLines().indexOf(line));
 		}
 	}
 	

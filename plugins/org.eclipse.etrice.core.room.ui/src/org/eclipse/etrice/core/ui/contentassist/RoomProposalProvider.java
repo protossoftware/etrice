@@ -218,12 +218,19 @@ public class RoomProposalProvider extends AbstractRoomProposalProvider {
 
 		return refs;
 	}
+	
+	@Override
+	public void complete_DetailCode(EObject model, RuleCall ruleCall, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		// TODO Auto-generated method stub
+		super.complete_DetailCode(model, ruleCall, context, acceptor);
+	}
+	
+	@Override
+	public void complete_CC_STRING(EObject model, RuleCall ruleCall, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		// TODO Auto-generated method stub
+		super.complete_CC_STRING(model, ruleCall, context, acceptor);
+	}
 
-//	public void completeActorRef_Type(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-//		super.completeActorRef_Type(
-//			    model, 
-//			    assignment, 
-//			    context, 
-//			    acceptor);
-//	}
 }

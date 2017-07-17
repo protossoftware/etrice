@@ -935,17 +935,17 @@ ruleDetailCode returns [EObject current=null]
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
-((
+(((
     {
         $current = forceCreateModelElement(
-            grammarAccess.getDetailCodeAccess().getDetailCodeAction_0(),
+            grammarAccess.getDetailCodeAccess().getDetailCodeAction_0_0(),
             $current);
     }
-)(
+)((
 (
 		lv_used_1_0=	'{' 
     {
-        newLeafNode(lv_used_1_0, grammarAccess.getDetailCodeAccess().getUsedLeftCurlyBracketKeyword_1_0());
+        newLeafNode(lv_used_1_0, grammarAccess.getDetailCodeAccess().getUsedLeftCurlyBracketKeyword_0_1_0_0());
     }
  
 	    {
@@ -960,7 +960,7 @@ ruleDetailCode returns [EObject current=null]
 (
 		lv_lines_2_0=RULE_STRING
 		{
-			newLeafNode(lv_lines_2_0, grammarAccess.getDetailCodeAccess().getLinesSTRINGTerminalRuleCall_2_0()); 
+			newLeafNode(lv_lines_2_0, grammarAccess.getDetailCodeAccess().getLinesSTRINGTerminalRuleCall_0_1_1_0()); 
 		}
 		{
 	        if ($current==null) {
@@ -976,9 +976,28 @@ ruleDetailCode returns [EObject current=null]
 )
 )*	otherlv_3='}' 
     {
-    	newLeafNode(otherlv_3, grammarAccess.getDetailCodeAccess().getRightCurlyBracketKeyword_3());
+    	newLeafNode(otherlv_3, grammarAccess.getDetailCodeAccess().getRightCurlyBracketKeyword_0_1_2());
     }
+))
+    |(
+(
+		lv_lines_4_0=RULE_CC_STRING
+		{
+			newLeafNode(lv_lines_4_0, grammarAccess.getDetailCodeAccess().getLinesCC_STRINGTerminalRuleCall_1_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getDetailCodeRule());
+	        }
+       		addWithLastConsumed(
+       			$current, 
+       			"lines",
+        		lv_lines_4_0, 
+        		"org.eclipse.etrice.core.common.Base.CC_STRING");
+	    }
+
 )
+)?)
 ;
 
 
@@ -3949,6 +3968,8 @@ ruleLiteralType returns [Enumerator current=null]
 
 
 RULE_HEX : ('0x'|'0X') ('0'..'9'|'a'..'f'|'A'..'F')+;
+
+RULE_CC_STRING : '\'\'\'' ( options {greedy=false;} : . )*'\'\'\'';
 
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 

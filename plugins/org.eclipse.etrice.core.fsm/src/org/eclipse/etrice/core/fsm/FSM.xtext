@@ -92,11 +92,9 @@ RefinedState:
 
 // the detail level (or target language) code
 // the used flag might be used when overriding in derived grammars
-DetailCode:
-	{DetailCode}
-	used?='{'
-		lines+=STRING*
-	'}';
+DetailCode: {DetailCode}
+	(used?='{' lines+=STRING* '}') | (lines+=CC_STRING?)
+;
 
 //
 // transition points

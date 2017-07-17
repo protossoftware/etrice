@@ -298,7 +298,7 @@ public class FSMSemanticSequencer extends BaseSemanticSequencer {
 	 *     DetailCode returns DetailCode
 	 *
 	 * Constraint:
-	 *     (used?='{' lines+=STRING*)
+	 *     ((used?='{' lines+=STRING*) | lines+=CC_STRING)
 	 */
 	protected void sequence_DetailCode(ISerializationContext context, DetailCode semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

@@ -47,4 +47,9 @@ public class BaseConverterService extends DefaultTerminalConverters {
 	public IValueConverter<String> FQN() {
 		return fqnConverter;
 	}
+	
+	@ValueConverter(rule = "CC_STRING")
+	public IValueConverter<String> getCC_StringConverter() {
+		return new CC_StringConveter();
+	}
 }

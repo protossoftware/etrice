@@ -12,9 +12,9 @@
 
 package org.eclipse.etrice.core.ui.highlight;
 
+import org.eclipse.etrice.core.common.ui.highlight.BaseHighlightingConfig;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.RGB;
-import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfigurationAcceptor;
 import org.eclipse.xtext.ui.editor.utils.TextStyle;
 
@@ -22,9 +22,7 @@ import org.eclipse.xtext.ui.editor.utils.TextStyle;
  * @author Henrik Rentz-Reichert
  * 
  */
-public class RoomHighlightingConfiguration
-		extends
-			DefaultHighlightingConfiguration {
+public class RoomHighlightingConfiguration extends BaseHighlightingConfig {
 
 	// provide an id string for the highlighting calculator
 	public static final String HL_ANNOTATION_ID = "hl_annotation";

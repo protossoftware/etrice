@@ -404,6 +404,12 @@ public class BaseTestGrammarAccess extends AbstractGrammarElementFinder {
 		return gaBase.getHEXRule();
 	} 
 
+	//terminal CC_STRING:
+	//	"'''"->"'''";
+	public TerminalRule getCC_STRINGRule() {
+		return gaBase.getCC_STRINGRule();
+	} 
+
 	//terminal ID:
 	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {

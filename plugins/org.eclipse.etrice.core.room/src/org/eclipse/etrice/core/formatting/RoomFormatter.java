@@ -94,7 +94,7 @@ public class RoomFormatter extends AbstractDeclarativeFormatter {
 		c.setLinewrap().around(f.getPortRule());
 		c.setLinewrap().around(f.getExternalPortRule());
 		c.setLinewrap().around(f.getLogicalThreadRule());
-		c.setLinewrap().around(f.getDetailCodeAccess().getLinesAssignment_2());
+		c.setLinewrap().around(f.getDetailCodeAccess().getLinesAssignment_0_1_1());
 		c.setLinewrap().around(f.getBindingRule());
 		c.setLinewrap().around(f.getSAPRule());
 		c.setLinewrap().around(f.getSPPRule());

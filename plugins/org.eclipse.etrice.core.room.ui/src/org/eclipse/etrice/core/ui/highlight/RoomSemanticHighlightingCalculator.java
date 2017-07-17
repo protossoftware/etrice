@@ -13,21 +13,22 @@
 package org.eclipse.etrice.core.ui.highlight;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.etrice.core.common.ui.highlight.BaseSemanticHighlighter;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor;
-import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 
 /**
  * @author Henrik Rentz-Reichert
  * 
  */
-public class RoomSemanticHighlightingCalculator implements
-			ISemanticHighlightingCalculator {
+public class RoomSemanticHighlightingCalculator extends BaseSemanticHighlighter {
 
 	// @Override
 	public void provideHighlightingFor(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
+		super.provideHighlightingFor(resource, acceptor);
+		
 		if (resource == null || resource.getParseResult() == null)
 			return;
 

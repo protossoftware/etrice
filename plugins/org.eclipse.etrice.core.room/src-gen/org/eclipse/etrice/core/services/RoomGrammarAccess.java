@@ -941,7 +941,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//':'
 		public Keyword getColonKeyword_6_0() { return cColonKeyword_6_0; }
 
-		//'void' | returnType=RefableType
+		//('void' | returnType=RefableType)
 		public Alternatives getAlternatives_6_1() { return cAlternatives_6_1; }
 
 		//'void'
@@ -1054,7 +1054,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//':'
 		public Keyword getColonKeyword_5_0_0() { return cColonKeyword_5_0_0; }
 
-		//'void' | returnType=RefableType
+		//('void' | returnType=RefableType)
 		public Alternatives getAlternatives_5_0_1() { return cAlternatives_5_0_1; }
 
 		//'void'
@@ -1836,7 +1836,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//structors+=ClassStructor)* stateMachine=StateMachine? '}')? '}'
 		public Group getGroup() { return cGroup; }
 
-		//abstract?='abstract'? & commType=ComponentCommunicationType?
+		//(abstract?='abstract'? & commType=ComponentCommunicationType?)
 		public UnorderedGroup getUnorderedGroup_0() { return cUnorderedGroup_0; }
 
 		//abstract?='abstract'?
@@ -3141,7 +3141,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//'['
 		public Keyword getLeftSquareBracketKeyword_0() { return cLeftSquareBracketKeyword_0; }
 
-		//'*' | INT
+		//('*' | INT)
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//'*'
@@ -4286,9 +4286,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//// the detail level (or target language) code
 	//// the used flag might be used when overriding in derived grammars
 	//DetailCode:
-	//	{DetailCode} used?='{'
-	//	lines+=STRING*
-	//	'}';
+	//	{DetailCode} (used?='{' lines+=STRING* '}') | lines+=CC_STRING?;
 	public FSMGrammarAccess.DetailCodeElements getDetailCodeAccess() {
 		return gaFSM.getDetailCodeAccess();
 	}
@@ -4891,6 +4889,12 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//	('0x' | '0X') ('0'..'9' | 'a'..'f' | 'A'..'F')+;
 	public TerminalRule getHEXRule() {
 		return gaBase.getHEXRule();
+	} 
+
+	//terminal CC_STRING:
+	//	"'''"->"'''";
+	public TerminalRule getCC_STRINGRule() {
+		return gaBase.getCC_STRINGRule();
 	} 
 
 	//terminal ID:

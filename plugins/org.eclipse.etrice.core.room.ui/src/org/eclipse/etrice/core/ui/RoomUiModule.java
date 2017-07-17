@@ -29,6 +29,8 @@ import org.eclipse.xtext.ui.editor.hover.IEObjectHoverProvider;
 import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
+import org.eclipse.etrice.core.common.ui.autoedit.BaseAutoEditStrategyProvider;
+import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategyProvider;
 
 import com.google.inject.Binder;
 import com.google.inject.Injector;
@@ -84,4 +86,9 @@ public class RoomUiModule extends org.eclipse.etrice.core.ui.AbstractRoomUiModul
 	public Class<? extends IEObjectHover> bindIEObjectHover() {
 		return KeywordEObjectTextHover.class;
 	}
+
+	public Class<? extends AbstractEditStrategyProvider> bindAbstractEditStrategyProvider() {
+		return BaseAutoEditStrategyProvider.class;
+	}
+
 }

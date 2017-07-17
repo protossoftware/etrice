@@ -40,5 +40,6 @@ Export-Package: org.eclipse.etrice.core.common,
  org.eclipse.etrice.core.common.scoping,
  org.eclipse.etrice.core.common.serializer,
  org.eclipse.etrice.core.common.services,
+ org.eclipse.etrice.core.common.util,
  org.eclipse.etrice.core.common.validation
 
