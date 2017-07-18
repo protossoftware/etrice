@@ -141,16 +141,20 @@ public class RoomFragmentProvider extends FSMFragmentProvider {
 
 	@Override
 	public String getFragment(EObject obj, Fallback fallback) {
-		String path = roomPathProvider.doSwitch(obj);
-		if (path!=null)
-			return obj.eClass().getName()+TYPE_SEP+path;
+		String path = getFragment(obj);
+		if (path != null)
+			return path;
 
 		return fallback.getFragment(obj);
 	}
+	
+	protected String getFragment(EObject obj) {
+		String path = roomPathProvider.doSwitch(obj);		
+		return (path != null) ? obj.eClass().getName()+TYPE_SEP+path : null;
+	}
 
 	@Override
-	public EObject getEObject(Resource resource, String fragment,
-			Fallback fallback) {
+	public EObject getEObject(Resource resource, String fragment, Fallback fallback) {
 
 		if (!resource.getContents().isEmpty()) {
 			RoomModel model = (RoomModel) resource.getContents().get(0);
@@ -219,7 +223,7 @@ public class RoomFragmentProvider extends FSMFragmentProvider {
 		return false;
 	}
 
-	private EObject getEObject(RoomModel model, String fragment) {
+	protected EObject getEObject(RoomModel model, String fragment) {
 		int begin = 0;
 		int end = fragment.indexOf(TYPE_SEP);
 		if (end<0)
