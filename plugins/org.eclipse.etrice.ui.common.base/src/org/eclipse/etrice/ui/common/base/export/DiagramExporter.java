@@ -10,7 +10,7 @@
  * 
  *******************************************************************************/
 
-package org.eclipse.etrice.ui.common.base.editor;
+package org.eclipse.etrice.ui.common.base.export;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
@@ -23,6 +23,7 @@ import org.eclipse.draw2d.SWTGraphics;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.ui.common.base.UIBaseActivator;
+import org.eclipse.etrice.ui.common.base.editor.DiagramEditorBase;
 import org.eclipse.etrice.ui.common.base.preferences.UIBasePreferenceConstants;
 import org.eclipse.etrice.ui.common.base.support.DiagramAccessBase;
 import org.eclipse.gef.EditPart;

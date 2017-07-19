@@ -16,12 +16,10 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.core.ui.RoomUiModule;
 import org.eclipse.etrice.core.ui.editor.RoomEditor;
-import org.eclipse.etrice.ui.behavior.editor.BehaviorEditor;
-import org.eclipse.etrice.ui.structure.editor.StructureEditor;
+import org.eclipse.etrice.ui.common.base.editor.DiagramEditorBase;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.jface.viewers.ISelection;
@@ -120,16 +118,10 @@ public abstract class AbstractEditHandler extends AbstractHandler {
 				}
 			}
 		}
-		else if (editor instanceof StructureEditor) {
-			StructureClass sc = ((StructureEditor)editor).getStructureClass();
-			if (sc instanceof ActorClass) {
-				openEditor(sc);
-			}
+		else if (editor instanceof DiagramEditorBase) {
+			openEditor(((DiagramEditorBase) editor).getModelComponent());
 		}
-		else if (editor instanceof BehaviorEditor) {
-			ActorClass ac = ((BehaviorEditor)editor).getActorClass();
-			openEditor(ac);
-		}
+		
 		return null;
 	}
 	
@@ -178,14 +170,10 @@ public abstract class AbstractEditHandler extends AbstractHandler {
 				return isEnabled(fragment);
 			}
 		}
-		else if (editor instanceof StructureEditor) {
-			StructureClass sc = ((StructureEditor)editor).getStructureClass();
-			return isEnabled(fragmentProvider.getFragment(sc, null));
+		else if (editor instanceof DiagramEditorBase) {
+			openEditor(((DiagramEditorBase) editor).getModelComponent());
 		}
-		else if (editor instanceof BehaviorEditor) {
-			ActorClass ac = ((BehaviorEditor)editor).getActorClass();
-			return isEnabled(fragmentProvider.getFragment(ac, null));
-		}
+		
 		return false;
 	}
 

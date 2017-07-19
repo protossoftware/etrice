@@ -33,6 +33,7 @@ import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.etrice.core.common.ui.linking.GlobalNonPlatformURIEditorOpener;
 import org.eclipse.etrice.ui.common.base.UIBaseActivator;
 import org.eclipse.etrice.ui.common.base.editor.DiagramEditorBase;
+import org.eclipse.etrice.ui.common.base.export.IBulkDiagramExporter;
 import org.eclipse.etrice.ui.common.base.preferences.UIBasePreferenceConstants;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.graphiti.services.Graphiti;
@@ -243,6 +244,7 @@ public abstract class DiagramAccessBase {
 	}
 
 	public abstract String getDiagramName(EObject rootObject);
+	public abstract IBulkDiagramExporter getDiagramExporter();
 	abstract protected String getDigramFileName(EObject rootObject);
 	abstract protected String getDiagramTypeId();
 	abstract protected String getEditorId();

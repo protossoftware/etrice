@@ -34,6 +34,7 @@ import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.core.room.SubSystemRef;
+import org.eclipse.etrice.ui.commands.RoomOpeningHelper;
 import org.eclipse.etrice.ui.common.base.preferences.UIBasePreferenceConstants;
 import org.eclipse.etrice.ui.common.base.support.BaseToolBehaviorProvider;
 import org.eclipse.etrice.ui.common.base.support.CantRemoveFeature;
@@ -41,8 +42,6 @@ import org.eclipse.etrice.ui.common.base.support.ChangeAwareCreateFeature;
 import org.eclipse.etrice.ui.common.base.support.ChangeAwareCustomFeature;
 import org.eclipse.etrice.ui.common.base.support.CommonSupportUtil;
 import org.eclipse.etrice.ui.common.base.support.DeleteWithoutConfirmFeature;
-import org.eclipse.etrice.ui.common.base.support.DiagramAccessBase;
-import org.eclipse.etrice.ui.structure.DiagramAccess;
 import org.eclipse.etrice.ui.structure.DiagramTypeProvider;
 import org.eclipse.etrice.ui.structure.ImageProvider;
 import org.eclipse.etrice.ui.structure.dialogs.ActorContainerRefPropertyDialog;
@@ -667,8 +666,7 @@ public class ActorContainerRefSupport {
 				        shell.getDisplay().asyncExec(new Runnable() {
 							@Override
 							public void run() {
-								DiagramAccessBase diagramAccess = new DiagramAccess();
-								diagramAccess.openDiagramEditor(sc);
+								RoomOpeningHelper.openStructure(sc);
 							}
 				        });
 					}
@@ -718,8 +716,7 @@ public class ActorContainerRefSupport {
 				        shell.getDisplay().asyncExec(new Runnable() {
 							@Override
 							public void run() {
-								DiagramAccessBase diagramAccess = new org.eclipse.etrice.ui.behavior.DiagramAccess();
-								diagramAccess.openDiagramEditor(ac);
+								RoomOpeningHelper.openBehavior(ac);
 							}
 				        });
 					}

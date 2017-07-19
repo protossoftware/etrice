@@ -14,31 +14,35 @@ package org.eclipse.etrice.ui.behavior.fsm.editor;
 
 import java.io.File;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
 import org.eclipse.etrice.core.fsm.fSM.State;
 import org.eclipse.etrice.core.fsm.fSM.StateGraph;
 import org.eclipse.etrice.ui.behavior.fsm.support.FSMSupportUtil;
-import org.eclipse.etrice.ui.common.base.editor.DiagramExporter;
+import org.eclipse.etrice.ui.common.base.export.DiagramExporter;
+import org.eclipse.etrice.ui.common.base.export.IBulkDiagramExporter;
 import org.eclipse.etrice.ui.common.base.support.DiagramAccessBase;
 import org.eclipse.ui.PlatformUI;
 
-import com.google.inject.Inject;
-
-public class BehaviorExporter {
+public class BehaviorExporter implements IBulkDiagramExporter {
 
 	private static final String SUFFIX = "_behavior";
 	
-	@Inject
 	private DiagramAccessBase da;
+	
+	public BehaviorExporter(DiagramAccessBase da) {
+		this.da = da;
+	}
 
-	public void export(ModelComponent mc, String folder) {
+	public void export(EObject roomClass, String folder) {
 
 		boolean wasOpen = false;
-		AbstractFSMEditor editor = (AbstractFSMEditor) da.findDiagramEditor(mc);
+		AbstractFSMEditor editor = (AbstractFSMEditor) da.findDiagramEditor(roomClass);
 		if (editor!=null)
 			wasOpen = true;
 		else
-			editor = (AbstractFSMEditor) da.openDiagramEditor(mc);
+			editor = (AbstractFSMEditor) da.openDiagramEditor(roomClass);
+		ModelComponent mc = editor.getModelComponent();
 
 		if (editor!=null) {
 			String filename = folder+File.separatorChar+mc.getComponentName()+SUFFIX;

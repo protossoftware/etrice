@@ -14,14 +14,14 @@ package org.eclipse.etrice.ui.commands.handlers;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.etrice.core.naming.RoomFragmentProvider;
-import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.fsm.fSM.State;
 import org.eclipse.etrice.core.fsm.fSM.StateGraph;
 import org.eclipse.etrice.core.fsm.fSM.Transition;
+import org.eclipse.etrice.core.naming.RoomFragmentProvider;
+import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.util.RoomNewNamingUtil;
 import org.eclipse.etrice.core.ui.RoomUiModule;
-import org.eclipse.etrice.ui.behavior.DiagramAccess;
+import org.eclipse.etrice.ui.commands.RoomOpeningHelper;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
@@ -126,10 +126,7 @@ public class EditBehaviorHandler extends AbstractEditHandler {
 	}
 
 	protected void openEditor(EObject object) {
-		if (object instanceof ActorClass) {
-			DiagramAccess diagramAccess = new DiagramAccess();
-			diagramAccess.openDiagramEditor((ActorClass) object);
-		}
+		RoomOpeningHelper.openBehavior(object);
 	}
 
 	@Override

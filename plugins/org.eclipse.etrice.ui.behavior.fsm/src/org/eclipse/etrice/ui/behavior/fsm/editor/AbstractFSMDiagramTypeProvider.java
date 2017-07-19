@@ -12,7 +12,7 @@
 
 package org.eclipse.etrice.ui.behavior.fsm.editor;
 
-import org.eclipse.graphiti.dt.AbstractDiagramTypeProvider;
+import org.eclipse.etrice.ui.common.base.editor.AbstractBaseDiagramTypeProvider;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.graphiti.platform.IDiagramContainer;
 
@@ -21,7 +21,7 @@ import org.eclipse.graphiti.platform.IDiagramContainer;
  * functionality provided by {@link AbstractFSMEditor}. Diagram editor plugins 
  * that extend {@link AbstractFSMEditor} should also extend and use this class.
  */
-public abstract class AbstractFSMDiagramTypeProvider extends AbstractDiagramTypeProvider {
+public abstract class AbstractFSMDiagramTypeProvider extends AbstractBaseDiagramTypeProvider {
 	
 	/* (non-Javadoc)
 	 * @see org.eclipse.graphiti.dt.AbstractDiagramTypeProvider#resourceReloaded(org.eclipse.graphiti.mm.pictograms.Diagram)

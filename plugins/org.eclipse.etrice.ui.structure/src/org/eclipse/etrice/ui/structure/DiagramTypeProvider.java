@@ -13,7 +13,8 @@
 package org.eclipse.etrice.ui.structure;
 
 import org.eclipse.etrice.core.ui.RoomUiModule;
-import org.eclipse.graphiti.dt.AbstractDiagramTypeProvider;
+import org.eclipse.etrice.ui.common.base.editor.AbstractBaseDiagramTypeProvider;
+import org.eclipse.etrice.ui.common.base.support.DiagramAccessBase;
 import org.eclipse.graphiti.tb.IToolBehaviorProvider;
 import org.eclipse.xtext.scoping.IScopeProvider;
 
@@ -21,7 +22,7 @@ import com.google.inject.Inject;
 import com.google.inject.Injector;
 
 //@SuppressWarnings("restriction")
-public class DiagramTypeProvider extends AbstractDiagramTypeProvider {
+public class DiagramTypeProvider extends AbstractBaseDiagramTypeProvider {
 
 	private static final boolean USE_AUTO_UPDATE = true;
 
@@ -83,5 +84,10 @@ public class DiagramTypeProvider extends AbstractDiagramTypeProvider {
 	
 	public IScopeProvider getScopeProvider() {
 		return scopeProvider;
+	}
+
+	@Override
+	public DiagramAccessBase getDiagramAccess() {
+		return new DiagramAccess();
 	}
 }

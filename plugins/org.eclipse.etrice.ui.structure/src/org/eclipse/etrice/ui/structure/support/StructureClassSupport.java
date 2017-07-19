@@ -19,11 +19,11 @@ import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.StructureClass;
+import org.eclipse.etrice.ui.commands.RoomOpeningHelper;
 import org.eclipse.etrice.ui.common.base.editor.DiagramEditorBase;
 import org.eclipse.etrice.ui.common.base.support.BaseToolBehaviorProvider;
 import org.eclipse.etrice.ui.common.base.support.CantRemoveFeature;
 import org.eclipse.etrice.ui.common.base.support.DeleteWithoutConfirmFeature;
-import org.eclipse.etrice.ui.common.base.support.DiagramAccessBase;
 import org.eclipse.etrice.ui.common.commands.ChangeDiagramInputJob;
 import org.eclipse.graphiti.dt.IDiagramTypeProvider;
 import org.eclipse.graphiti.features.IAddFeature;
@@ -249,8 +249,7 @@ public class StructureClassSupport {
 				        shell.getDisplay().asyncExec(new Runnable() {
 							@Override
 							public void run() {
-								DiagramAccessBase diagramAccess = new org.eclipse.etrice.ui.behavior.DiagramAccess();
-								diagramAccess.openDiagramEditor(ac);
+								RoomOpeningHelper.openBehavior(ac);
 							}
 				        });
 					}

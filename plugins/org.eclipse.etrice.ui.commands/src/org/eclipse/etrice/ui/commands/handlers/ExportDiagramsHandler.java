@@ -34,10 +34,10 @@ import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.ui.RoomUiModule;
-import org.eclipse.etrice.ui.behavior.fsm.editor.BehaviorExporter;
+import org.eclipse.etrice.ui.commands.RoomOpeningHelper;
 import org.eclipse.etrice.ui.common.base.UIBaseActivator;
+import org.eclipse.etrice.ui.common.base.export.IBulkDiagramExporter;
 import org.eclipse.etrice.ui.common.base.preferences.UIBasePreferenceConstants;
-import org.eclipse.etrice.ui.structure.editor.StructureExporter;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.viewers.ISelection;
@@ -143,16 +143,17 @@ public class ExportDiagramsHandler extends AbstractHandler {
 			if (folder.exists()) {
 				String folderPath = folder.getLocation().toOSString();
 				
-				BehaviorExporter exporter = org.eclipse.etrice.ui.behavior.Activator.getDefault().getInjector().getInstance(BehaviorExporter.class);
+				IBulkDiagramExporter behaviorExporter = RoomOpeningHelper.getBehaviorDiagramAccess().getDiagramExporter();
+				IBulkDiagramExporter structureExporter = RoomOpeningHelper.getStructureDiagramAccess().getDiagramExporter();
 				for (ActorClass ac : model.getActorClasses()) {
 					if (ac.getStateMachine()!=null)
-						exporter.export(ac, folderPath);
+						behaviorExporter.export(ac, folderPath);
 					
-					StructureExporter.export(ac, folderPath);
+					structureExporter.export(ac, folderPath);
 				}
 				
 				for (SubSystemClass ssc : model.getSubSystemClasses()) {
-					StructureExporter.export(ssc, folderPath);
+					structureExporter.export(ssc, folderPath);
 				}
 				
 				try {

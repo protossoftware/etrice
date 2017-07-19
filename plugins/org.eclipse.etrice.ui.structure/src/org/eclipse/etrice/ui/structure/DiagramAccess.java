@@ -16,9 +16,11 @@ package org.eclipse.etrice.ui.structure;
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
+import org.eclipse.etrice.ui.common.base.export.IBulkDiagramExporter;
 import org.eclipse.etrice.ui.common.base.support.DiagramAccessBase;
 import org.eclipse.etrice.ui.structure.commands.UpdateDiagramCommand;
 import org.eclipse.etrice.ui.structure.editor.StructureEditor;
+import org.eclipse.etrice.ui.structure.editor.StructureExporter;
 import org.eclipse.graphiti.dt.IDiagramTypeProvider;
 import org.eclipse.graphiti.features.IFeatureProvider;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
@@ -87,5 +89,10 @@ public class DiagramAccess extends DiagramAccessBase {
 	protected void injectMembers() {
 		Injector injector = RoomUiModule.getInjector();
         injector.injectMembers(this);
+	}
+
+	@Override
+	public IBulkDiagramExporter getDiagramExporter() {
+		return new StructureExporter();
 	}
 }
