@@ -92,8 +92,12 @@ public class RoomFragmentProvider extends FSMFragmentProvider {
 		}
 
 		private String caseBindingEndPointShort(BindingEndPoint ep) {
+			if(ep==null)
+				return "null";
 			String loc = ep.getActorRef()==null? LOCAL:ep.getActorRef().getName();
-			if (ep.getSub()!=null)
+			if(ep.getPort()==null)
+				return "null" + loc;
+			else if (ep.getSub()!=null)
 				return ep.getPort().getName()+EP_SEP+loc+SUB_SEP+ep.getSub().getName();
 			else
 				return ep.getPort().getName()+EP_SEP+loc;
