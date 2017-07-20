@@ -26,6 +26,7 @@ import org.eclipse.etrice.core.fsm.scoping.FSMScopeProvider;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.ActorRef;
+import org.eclipse.etrice.core.room.Binding;
 import org.eclipse.etrice.core.room.BindingEndPoint;
 import org.eclipse.etrice.core.room.CompoundProtocolClass;
 import org.eclipse.etrice.core.room.ExternalPort;
@@ -257,6 +258,22 @@ public class RoomScopeProvider extends FSMScopeProvider {
 		}
 
 		return new SimpleScope(IScope.NULLSCOPE, scopes);
+	}
+	
+	public IScope scope_BindingEndPoint_port(Binding bind, EReference ref) {
+		if(bind.getEndpoint1() != null){
+			return scope_BindingEndPoint_port(bind.getEndpoint1(), ref);
+		}
+		
+		return IScope.NULLSCOPE;
+	}
+	
+	public IScope scope_BindingEndPoint_actorRef(Binding bind, EReference ref) {
+		if(bind.getEndpoint1() != null){
+			return scope_BindingEndPoint_actorRef(bind.getEndpoint1(), ref);
+		}
+		
+		return IScope.NULLSCOPE;
 	}
 
 	/**
