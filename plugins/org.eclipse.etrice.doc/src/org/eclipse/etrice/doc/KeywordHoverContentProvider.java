@@ -19,8 +19,10 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.eclipse.etrice.core.common.ui.hover.IKeywordHoverContentProvider;
 
-public class KeywordHoverProvider {
+
+public class KeywordHoverContentProvider  implements IKeywordHoverContentProvider {
 
 	private static final String CONTENT_DIR;
 	static {
@@ -32,10 +34,12 @@ public class KeywordHoverProvider {
 	
 	private final Map<String, String> cache = new HashMap<String, String>();
 
+	@Override
 	public String getHTMLContent(String name) {
-		if (!ETriceHelp.DEV_MODE && cache.containsKey(name))
+		if (!ETriceHelp.DEV_MODE && cache.containsKey(name)) {
 			return cache.get(name);
-
+		}
+		
 		URL fileURL = ETriceHelp.getDefault().getBundle().getEntry(CONTENT_DIR + name + ".html");
 		String result = null;
 		if (fileURL != null) {

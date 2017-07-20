@@ -16,7 +16,6 @@ import java.util.List;
 
 import org.eclipse.etrice.core.common.ui.editor.IValidatingEditor;
 import org.eclipse.etrice.core.common.ui.editor.SaveOnFocusLostListener;
-import org.eclipse.etrice.core.common.ui.editor.SelectedModelHelpProvider;
 import org.eclipse.etrice.core.ui.preferences.RoomPreferenceConstants;
 import org.eclipse.help.IContextProvider;
 import org.eclipse.swt.widgets.Composite;

@@ -11,30 +11,41 @@
  * 
  *******************************************************************************/
 
-package org.eclipse.etrice.core.ui.hover;
+package org.eclipse.etrice.core.common.ui.hover;
 
 import java.io.IOException;
+import java.net.URL;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.etrice.core.ui.RoomUiActivator;
-import org.eclipse.etrice.doc.ETriceHelp;
+import org.eclipse.etrice.core.common.ui.ETriceCoreCommonActivator;
 import org.eclipse.jface.internal.text.html.HTMLPrinter;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.viewers.ILabelProvider;
+import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ui.editor.hover.html.DefaultEObjectHoverProvider;
 import org.eclipse.xtext.ui.editor.hover.html.XtextBrowserInformationControlInput;
 import org.eclipse.xtext.util.Files;
 
 import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 @SuppressWarnings("restriction")
 public class KeywordHoverProvider extends DefaultEObjectHoverProvider {
+	
+	public final static String STYLE_SHEET_KEY = "keywordHoverStyleSheetFileName";
 
-	private static final String styleSheetFileName = "/eTriceKeywordHoverStyle.css";
+	@Inject(optional=true) @Named(STYLE_SHEET_KEY)
+	private String styleSheetFileName;
 
 	@Inject
+	protected AbstractUIPlugin plugin;
+	
+	@Inject
 	protected ILabelProvider labelProvider;
+	
+	@Inject
+	protected IKeywordHoverContentProvider contentProvider;
 
 	private String styleSheet = null;
 
@@ -43,7 +54,7 @@ public class KeywordHoverProvider extends DefaultEObjectHoverProvider {
 			XtextBrowserInformationControlInput previous) {
 		if (element instanceof Keyword) {
 			Keyword keyword = (Keyword) element;
-			String html = ETriceHelp.getKeywordHoverContentProvider().getHTMLContent(keyword.getValue());
+			String html = contentProvider.getHTMLContent(keyword.getValue());
 			if (html != null) {
 				StringBuffer buffer = new StringBuffer(html);
 				HTMLPrinter.insertPageProlog(buffer, 0, getKeywordStyleSheet());
@@ -56,11 +67,17 @@ public class KeywordHoverProvider extends DefaultEObjectHoverProvider {
 
 	protected String getKeywordStyleSheet() {
 		String superStyle = super.getStyleSheet();
-		if (styleSheet == null || ETriceHelp.DEV_MODE) {
+		if (styleSheet == null) {
 			styleSheet = "";
 			try {
-				styleSheet = Files.readStreamIntoString(RoomUiActivator.getDefault().getBundle()
-						.getEntry(styleSheetFileName).openStream());
+				URL url = null;
+				if(plugin != null && styleSheetFileName != null) {
+					url = plugin.getBundle().getEntry(styleSheetFileName);
+				}
+				else {
+					url = ETriceCoreCommonActivator.getInstance().getBundle().getEntry("/eTriceKeywordHoverStyle.css");
+				}
+				styleSheet = Files.readStreamIntoString(url.openStream());
 			}
 			catch (IOException e) {
 				e.printStackTrace();

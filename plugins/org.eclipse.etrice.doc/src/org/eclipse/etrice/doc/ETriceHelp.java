@@ -24,15 +24,7 @@ public class ETriceHelp extends AbstractUIPlugin {
 	public static final boolean DEV_MODE = false;
 	
 	private static ETriceHelp plugin;
-	private KeywordHoverProvider keywordHoverProvider;
-	//private ContextHelpProvider contextHelp;
-	
-	public static KeywordHoverProvider getKeywordHoverContentProvider(){
-		if(getDefault().keywordHoverProvider == null)
-			getDefault().keywordHoverProvider = new KeywordHoverProvider();
-		
-		return getDefault().keywordHoverProvider;
-	}
+	//private ContextHelpProvider contextHelp;	
 	
 //	public static ContextHelpProvider getContextHelpProvider(){
 //		if(getDefault().contextHelp == null)

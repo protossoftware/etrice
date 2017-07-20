@@ -11,7 +11,7 @@
  * 
  *******************************************************************************/
 
-package org.eclipse.etrice.core.ui.hover;
+package org.eclipse.etrice.core.common.ui.hover;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.IRegion;
@@ -30,7 +30,7 @@ import org.eclipse.xtext.util.Tuples;
 import com.google.inject.Inject;
 
 public class KeywordEObjectTextHover extends DispatchingEObjectTextHover {
-
+	
 	@Inject
 	protected IEObjectHoverProvider hoverProvider;
 

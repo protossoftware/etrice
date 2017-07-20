@@ -10,7 +10,7 @@
  * 
  *******************************************************************************/
 
-package org.eclipse.etrice.core.common.ui.editor;
+package org.eclipse.etrice.core.ui.editor;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.doc.ContextHelpProvider;
