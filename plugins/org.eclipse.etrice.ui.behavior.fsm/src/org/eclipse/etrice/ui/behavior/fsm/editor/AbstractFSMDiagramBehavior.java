@@ -12,7 +12,6 @@
 
 package org.eclipse.etrice.ui.behavior.fsm.editor;
 
-import org.eclipse.etrice.ui.behavior.fsm.editor.DiagnosingModelObserver;
 import org.eclipse.etrice.ui.common.base.editor.CustomDiagramBehavior;
 import org.eclipse.gef.EditPart;
 import org.eclipse.graphiti.ui.editor.DefaultRefreshBehavior;

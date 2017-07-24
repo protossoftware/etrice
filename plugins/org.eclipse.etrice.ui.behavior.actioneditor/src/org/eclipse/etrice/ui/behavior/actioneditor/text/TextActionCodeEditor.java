@@ -13,6 +13,7 @@
 
 package org.eclipse.etrice.ui.behavior.actioneditor.text;
 
+import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.etrice.ui.behavior.actioneditor.sourceviewer.AbstractActionCodeEditor;
 import org.eclipse.etrice.ui.behavior.fsm.actioneditor.IActionCodeEditor;
 import org.eclipse.jface.text.Document;

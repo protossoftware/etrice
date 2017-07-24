@@ -12,25 +12,26 @@
 
 package org.eclipse.etrice.core.ui;
 
+import org.eclipse.etrice.core.common.ui.autoedit.BaseAutoEditStrategyProvider;
 import org.eclipse.etrice.core.common.ui.hover.IKeywordHoverContentProvider;
 import org.eclipse.etrice.core.common.ui.hover.KeywordEObjectTextHover;
 import org.eclipse.etrice.core.common.ui.hover.KeywordHoverProvider;
 import org.eclipse.etrice.core.common.ui.linking.GlobalNonPlatformURIEditorOpener;
 import org.eclipse.etrice.core.ui.highlight.RoomHighlightingConfiguration;
 import org.eclipse.etrice.core.ui.highlight.RoomSemanticHighlightingCalculator;
+import org.eclipse.etrice.core.ui.hover.RoomHoverProvider;
 import org.eclipse.etrice.core.ui.internal.RoomActivator;
 import org.eclipse.etrice.core.ui.linking.RoomHyperlinkHelper;
 import org.eclipse.etrice.core.ui.outline.RoomOutlinePage;
 import org.eclipse.etrice.doc.KeywordHoverContentProvider;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
+import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategyProvider;
 import org.eclipse.xtext.ui.editor.hover.IEObjectHover;
 import org.eclipse.xtext.ui.editor.hover.IEObjectHoverProvider;
 import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
-import org.eclipse.etrice.core.common.ui.autoedit.BaseAutoEditStrategyProvider;
-import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategyProvider;
 
 import com.google.inject.Binder;
 import com.google.inject.Injector;
@@ -84,11 +85,10 @@ public class RoomUiModule extends org.eclipse.etrice.core.ui.AbstractRoomUiModul
 
 	@Override
 	public Class<? extends IEObjectHover> bindIEObjectHover() {
-		return KeywordEObjectTextHover.class;
+		return RoomHoverProvider.class;
 	}
 
 	public Class<? extends AbstractEditStrategyProvider> bindAbstractEditStrategyProvider() {
 		return BaseAutoEditStrategyProvider.class;
 	}
-
 }

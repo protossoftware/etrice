@@ -26,6 +26,7 @@ public class RoomHighlightingConfiguration extends BaseHighlightingConfig {
 
 	// provide an id string for the highlighting calculator
 	public static final String HL_ANNOTATION_ID = "hl_annotation";
+	public static final String HL_TARGET_LANG_KEYWORD_ID = "hl_targetlang_keyword";
 
 	// default fonts used by this specific highlighting (defaults)
 	// private static FontData defaultAnnotationBlockFont = new
@@ -36,6 +37,7 @@ public class RoomHighlightingConfiguration extends BaseHighlightingConfig {
 	public void configure(IHighlightingConfigurationAcceptor acceptor) {
 		super.configure(acceptor);
 		acceptor.acceptDefaultHighlighting(HL_ANNOTATION_ID, "Annotation", typeAnnotationBlock());
+		acceptor.acceptDefaultHighlighting(HL_TARGET_LANG_KEYWORD_ID, "Target Language Keyword", targetLangKeyword());
 	}
 
 	// method for calculating an actual text styles
@@ -45,6 +47,12 @@ public class RoomHighlightingConfiguration extends BaseHighlightingConfig {
 		textStyle.setColor(new RGB(160, 0, 0));
 		textStyle.setStyle(SWT.BOLD);
 		// textStyle.setFontData(defaultCommentFont);
+		return textStyle;
+	}
+	
+	public TextStyle targetLangKeyword() {
+		TextStyle textStyle = new TextStyle();
+		textStyle.setStyle(SWT.BOLD);
 		return textStyle;
 	}
 

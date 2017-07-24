@@ -12,9 +12,9 @@
 
 package org.eclipse.etrice.ui.behavior.actioneditor.sourceviewer
 
-import org.eclipse.etrice.ui.behavior.fsm.detailcode.IDetailExpressionProvider
-import org.eclipse.etrice.ui.behavior.fsm.detailcode.IDetailExpressionProvider.ExpressionFeature
-import org.eclipse.etrice.ui.behavior.fsm.detailcode.IDetailExpressionProvider.ExpressionPostfix
+import org.eclipse.etrice.expressions.detailcode.IDetailExpressionProvider
+import org.eclipse.etrice.expressions.detailcode.IDetailExpressionProvider.ExpressionFeature
+import org.eclipse.etrice.expressions.detailcode.IDetailExpressionProvider.ExpressionPostfix
 import org.eclipse.jface.text.BadLocationException
 import org.eclipse.jface.text.IDocument
 import org.eclipse.jface.text.rules.IWordDetector

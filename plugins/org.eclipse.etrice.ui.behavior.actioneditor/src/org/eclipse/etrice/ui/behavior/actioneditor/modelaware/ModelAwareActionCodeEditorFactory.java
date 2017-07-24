@@ -15,11 +15,11 @@ package org.eclipse.etrice.ui.behavior.actioneditor.modelaware;
 
 import java.util.List;
 
+import org.eclipse.etrice.expressions.detailcode.IDetailExpressionProvider;
 import org.eclipse.etrice.ui.behavior.actioneditor.sourceviewer.AbstractActionCodeEditor;
 import org.eclipse.etrice.ui.behavior.actioneditor.sourceviewer.SourceViewerActionCodeEditor;
 import org.eclipse.etrice.ui.behavior.fsm.actioneditor.IActionCodeEditor;
 import org.eclipse.etrice.ui.behavior.fsm.actioneditor.IActionCodeEditorFactory;
-import org.eclipse.etrice.ui.behavior.fsm.detailcode.IDetailExpressionProvider;
 import org.eclipse.swt.widgets.Composite;
 
 import com.google.common.collect.Lists;

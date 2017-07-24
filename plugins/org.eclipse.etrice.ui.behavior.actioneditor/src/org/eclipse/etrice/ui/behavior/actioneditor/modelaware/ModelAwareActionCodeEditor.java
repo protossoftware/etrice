@@ -13,9 +13,9 @@
 
 package org.eclipse.etrice.ui.behavior.actioneditor.modelaware;
 
+import org.eclipse.etrice.expressions.detailcode.IDetailExpressionProvider;
 import org.eclipse.etrice.ui.behavior.actioneditor.sourceviewer.ActionCodeColorManager;
 import org.eclipse.etrice.ui.behavior.actioneditor.sourceviewer.SourceViewerActionCodeEditor;
-import org.eclipse.etrice.ui.behavior.fsm.detailcode.IDetailExpressionProvider;
 
 /**
  * An extension of the {@link SourceViewerActionCodeEditor} which configures it

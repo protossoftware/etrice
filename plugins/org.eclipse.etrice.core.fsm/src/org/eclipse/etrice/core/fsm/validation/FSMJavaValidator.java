@@ -5,10 +5,12 @@ package org.eclipse.etrice.core.fsm.validation;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.etrice.core.common.converter.CC_StringConveter;
 import org.eclipse.etrice.core.common.util.CCStringIndentation;
 import org.eclipse.etrice.core.fsm.fSM.ChoicePoint;
 import org.eclipse.etrice.core.fsm.fSM.DetailCode;
@@ -23,8 +25,13 @@ import org.eclipse.etrice.core.fsm.fSM.StateGraph;
 import org.eclipse.etrice.core.fsm.fSM.StateGraphItem;
 import org.eclipse.etrice.core.fsm.fSM.TrPoint;
 import org.eclipse.etrice.core.fsm.fSM.Transition;
+import org.eclipse.etrice.core.fsm.services.FSMGrammarAccess;
 import org.eclipse.etrice.core.fsm.validation.FSMValidationUtilXtend.Result;
-import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.ILeafNode;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.validation.Check;
 
 import com.google.common.collect.ArrayListMultimap;
@@ -118,6 +125,9 @@ public class FSMJavaValidator extends org.eclipse.etrice.core.fsm.validation.Abs
 		}
 	}
 	
+	@Inject
+	FSMGrammarAccess grammar;
+	
 	@Check
 	public void checkDetailCode(DetailCode dc) {
 		if (dc.getLines().isEmpty())
@@ -130,10 +140,15 @@ public class FSMJavaValidator extends org.eclipse.etrice.core.fsm.validation.Abs
 //				warning("multi line string", dc, FSMPackage.Literals.DETAIL_CODE__LINES, dc.getLines().indexOf(line), MULTI_LINE_DETAILCODE);
 //		}
 		
-		for(String line : dc.getLines()){
-			CCStringIndentation ccStringIndent = new CCStringIndentation(line);
-			if(!ccStringIndent.validateIndentation())
-				warning("Inconsistent indentation", dc, FSMPackage.Literals.DETAIL_CODE__LINES, dc.getLines().indexOf(line));
+		List<INode> lineNodes = NodeModelUtils.findNodesForFeature(dc, FSMPackage.Literals.DETAIL_CODE__LINES);
+		for(INode lineNode : lineNodes){
+			if(lineNode.getGrammarElement() instanceof RuleCall){
+				if(((RuleCall)lineNode.getGrammarElement()).getRule() == grammar.getCC_STRINGRule()) {
+					CCStringIndentation ccStringIndent = new CCStringIndentation(CC_StringConveter.stripDelim(lineNode.getText()));
+					if(!ccStringIndent.validateIndentation())
+						warning("Inconsistent indentation", dc, FSMPackage.Literals.DETAIL_CODE__LINES, lineNodes.indexOf(lineNode));
+				}
+			}
 		}
 	}
 	

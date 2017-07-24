@@ -7,17 +7,17 @@ import org.eclipse.etrice.core.common.converter.CC_StringConveter;
 import org.eclipse.xtext.util.Strings;
 
 public class CCStringIndentation {
-
-	protected final static String NEW_LINE = CC_StringConveter.NEW_LINE;
 	
 	private String ccString;
 	private List<String> splittedLines;
 	private boolean ignoreFirst;
 	private boolean ignoreLast;
+	private String lineEnding;
 	
 	public CCStringIndentation(String ccString){
 		this.ccString = ccString;
-		this.splittedLines = Strings.split(ccString, NEW_LINE);
+		this.lineEnding = CC_StringConveter.getLineEnding(ccString);
+		this.splittedLines = Strings.split(ccString, lineEnding);
 		this.ignoreFirst = splittedLines.size() > 1 && splittedLines.get(0).isEmpty();
 		this.ignoreLast = splittedLines.size() > 1 && splittedLines.get(splittedLines.size() - 1).trim().isEmpty();
 	}
@@ -56,7 +56,7 @@ public class CCStringIndentation {
 			String line = lines.get(i);
 
 			if (i == 0 && ignoreFirst) {
-				offset += line.length() + NEW_LINE.length();
+				offset += line.length() + lineEnding.length();
 				continue;
 			}
 
@@ -69,9 +69,9 @@ public class CCStringIndentation {
 			else
 				pos = new int[] { offset, line.length() };
 			if (i < lines.size() - 1)
-				pos[1] += NEW_LINE.length();
+				pos[1] += lineEnding.length();
 
-			offset += line.length() + NEW_LINE.length();
+			offset += line.length() + lineEnding.length();
 			offsetLengthLines.add(pos);
 		}
 
@@ -110,13 +110,8 @@ public class CCStringIndentation {
 		for (String line : lines)
 			wsLines.add(Strings.getLeadingWhiteSpace(line));
 	
-		String minIndent = wsLines.get(0);
-		for (int i = 0; i < lines.size(); i++) {
-			if (!lines.get(i).isEmpty() && wsLines.get(i).length() < minIndent.length())
-				minIndent = wsLines.get(i);
-		}
-		
-		String commonIndent = minIndent;
+		final String baseIndent = wsLines.get(0);		
+		String commonIndent = baseIndent;
 		for(String wsLine : wsLines){
 			if(!wsLine.isEmpty())
 				commonIndent = com.google.common.base.Strings.commonPrefix(commonIndent, wsLine);
@@ -125,10 +120,10 @@ public class CCStringIndentation {
 		if (!consistent)
 			return commonIndent;
 	
-		int afterMinIndentIndex = minIndent.length();
+		int afterMinIndentIndex = baseIndent.length();
 	
 		// 1. check if every line contains the minIndent
-		if(!minIndent.equals(commonIndent))
+		if(!baseIndent.equals(commonIndent))
 			return null;
 	
 		// 2. check if there is still space between minIndent and first terminal
@@ -146,7 +141,7 @@ public class CCStringIndentation {
 				return null;
 		}
 	
-		return minIndent;
+		return baseIndent;
 	}
 
 }

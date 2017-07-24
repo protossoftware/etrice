@@ -18,7 +18,8 @@ import java.util.List;
 
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.etrice.core.ui.RoomUiModule;
-import org.eclipse.etrice.ui.behavior.fsm.detailcode.IDetailExpressionProvider;
+import org.eclipse.etrice.expressions.detailcode.IDetailExpressionProvider;
+import org.eclipse.etrice.expressions.detailcode.IDetailExpressionProvider.ExpressionFeature;
 import org.eclipse.jface.text.source.SourceViewer;
 import org.eclipse.jface.text.source.SourceViewerConfiguration;
 
