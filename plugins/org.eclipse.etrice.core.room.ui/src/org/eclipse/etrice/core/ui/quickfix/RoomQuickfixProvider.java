@@ -29,6 +29,7 @@ import org.eclipse.etrice.core.common.base.RealLiteral;
 import org.eclipse.etrice.core.common.base.SimpleAnnotationAttribute;
 import org.eclipse.etrice.core.common.base.StringLiteral;
 import org.eclipse.etrice.core.fsm.fSM.ComponentCommunicationType;
+import org.eclipse.etrice.core.fsm.ui.quickfix.FSMQuickfixProvider;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.ReferenceType;
@@ -39,13 +40,12 @@ import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.edit.IModification;
 import org.eclipse.xtext.ui.editor.model.edit.IModificationContext;
 import org.eclipse.xtext.ui.editor.model.edit.ISemanticModification;
-import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider;
 import org.eclipse.xtext.ui.editor.quickfix.Fix;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolution;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor;
 import org.eclipse.xtext.validation.Issue;
 
-public class RoomQuickfixProvider extends DefaultQuickfixProvider {
+public class RoomQuickfixProvider extends FSMQuickfixProvider {
 
 	/**
 	 * @author Henrik Rentz-Reichert
@@ -296,19 +296,6 @@ public class RoomQuickfixProvider extends DefaultQuickfixProvider {
 			}
 		});
 
-	}
-	
-
-	@Fix(RoomJavaValidator.MULTI_LINE_DETAILCODE)
-	public void fixMultiLineDetailCode(final Issue issue, IssueResolutionAcceptor acceptor){
-		acceptor.accept(issue, "Convert to single lines", "", "correction_change.gif", new IModification() {
-			@Override
-			public void apply(IModificationContext context) throws Exception {
-				IXtextDocument document = context.getXtextDocument();
-				String editorReplace = DetailCodeIndentHelper.convertToSingleLines(document, issue);
-				document.replace(issue.getOffset(), issue.getLength(), editorReplace);
-			}
-		});
 	}
 	
 	@Fix(RoomJavaValidator.OPERATION_MISSING_OVERRIDE)

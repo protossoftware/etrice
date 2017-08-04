@@ -15,7 +15,7 @@ public class InternalFSMLexer extends Lexer {
     public static final int RULE_HEX=8;
     public static final int T__50=50;
     public static final int T__19=19;
-    public static final int RULE_CC_STRING=6;
+    public static final int RULE_CC_STRING=5;
     public static final int T__15=15;
     public static final int T__59=59;
     public static final int T__16=16;
@@ -57,7 +57,7 @@ public class InternalFSMLexer extends Lexer {
     public static final int T__70=70;
     public static final int T__71=71;
     public static final int T__72=72;
-    public static final int RULE_STRING=5;
+    public static final int RULE_STRING=6;
     public static final int RULE_SL_COMMENT=10;
     public static final int T__37=37;
     public static final int T__38=38;

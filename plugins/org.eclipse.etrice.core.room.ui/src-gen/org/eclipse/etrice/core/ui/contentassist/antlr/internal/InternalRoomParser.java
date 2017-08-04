@@ -9588,11 +9588,11 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             if ( (LA13_0==72) ) {
                 int LA13_1 = input.LA(2);
 
-                if ( (LA13_1==65) ) {
-                    alt13=2;
-                }
-                else if ( (LA13_1==64) ) {
+                if ( (LA13_1==64) ) {
                     alt13=1;
+                }
+                else if ( (LA13_1==65) ) {
+                    alt13=2;
                 }
                 else {
                     NoViableAltException nvae =
@@ -11498,29 +11498,29 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__DetailCode__Alternatives"
-    // InternalRoom.g:3866:1: rule__DetailCode__Alternatives : ( ( ( rule__DetailCode__Group_0__0 ) ) | ( ( rule__DetailCode__LinesAssignment_1 )? ) );
+    // InternalRoom.g:3866:1: rule__DetailCode__Alternatives : ( ( ( rule__DetailCode__Group_0__0 ) ) | ( ( rule__DetailCode__Group_1__0 ) ) );
     public final void rule__DetailCode__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalRoom.g:3870:1: ( ( ( rule__DetailCode__Group_0__0 ) ) | ( ( rule__DetailCode__LinesAssignment_1 )? ) )
-            int alt28=2;
-            int LA28_0 = input.LA(1);
+            // InternalRoom.g:3870:1: ( ( ( rule__DetailCode__Group_0__0 ) ) | ( ( rule__DetailCode__Group_1__0 ) ) )
+            int alt27=2;
+            int LA27_0 = input.LA(1);
 
-            if ( (LA28_0==42) ) {
-                alt28=1;
+            if ( (LA27_0==EOF||LA27_0==RULE_CC_STRING||(LA27_0>=14 && LA27_0<=15)||(LA27_0>=34 && LA27_0<=35)||LA27_0==43||(LA27_0>=57 && LA27_0<=59)||LA27_0==62||(LA27_0>=64 && LA27_0<=66)||LA27_0==68||LA27_0==72||(LA27_0>=76 && LA27_0<=80)||(LA27_0>=82 && LA27_0<=83)||LA27_0==85||LA27_0==89||(LA27_0>=93 && LA27_0<=94)||(LA27_0>=97 && LA27_0<=99)||LA27_0==107||LA27_0==116||LA27_0==118||LA27_0==128) ) {
+                alt27=1;
             }
-            else if ( (LA28_0==EOF||LA28_0==RULE_CC_STRING||(LA28_0>=14 && LA28_0<=15)||(LA28_0>=34 && LA28_0<=35)||LA28_0==43||(LA28_0>=57 && LA28_0<=59)||LA28_0==62||(LA28_0>=64 && LA28_0<=66)||LA28_0==68||LA28_0==72||(LA28_0>=76 && LA28_0<=80)||(LA28_0>=82 && LA28_0<=83)||LA28_0==85||LA28_0==89||(LA28_0>=93 && LA28_0<=94)||(LA28_0>=97 && LA28_0<=99)||LA28_0==107||LA28_0==116||LA28_0==118||LA28_0==128) ) {
-                alt28=2;
+            else if ( (LA27_0==42) ) {
+                alt27=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 28, 0, input);
+                    new NoViableAltException("", 27, 0, input);
 
                 throw nvae;
             }
-            switch (alt28) {
+            switch (alt27) {
                 case 1 :
                     // InternalRoom.g:3871:1: ( ( rule__DetailCode__Group_0__0 ) )
                     {
@@ -11547,35 +11547,24 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 2 :
-                    // InternalRoom.g:3877:6: ( ( rule__DetailCode__LinesAssignment_1 )? )
+                    // InternalRoom.g:3877:6: ( ( rule__DetailCode__Group_1__0 ) )
                     {
-                    // InternalRoom.g:3877:6: ( ( rule__DetailCode__LinesAssignment_1 )? )
-                    // InternalRoom.g:3878:1: ( rule__DetailCode__LinesAssignment_1 )?
+                    // InternalRoom.g:3877:6: ( ( rule__DetailCode__Group_1__0 ) )
+                    // InternalRoom.g:3878:1: ( rule__DetailCode__Group_1__0 )
                     {
-                     before(grammarAccess.getDetailCodeAccess().getLinesAssignment_1()); 
-                    // InternalRoom.g:3879:1: ( rule__DetailCode__LinesAssignment_1 )?
-                    int alt27=2;
-                    int LA27_0 = input.LA(1);
+                     before(grammarAccess.getDetailCodeAccess().getGroup_1()); 
+                    // InternalRoom.g:3879:1: ( rule__DetailCode__Group_1__0 )
+                    // InternalRoom.g:3879:2: rule__DetailCode__Group_1__0
+                    {
+                    pushFollow(FOLLOW_2);
+                    rule__DetailCode__Group_1__0();
 
-                    if ( (LA27_0==RULE_CC_STRING) ) {
-                        alt27=1;
-                    }
-                    switch (alt27) {
-                        case 1 :
-                            // InternalRoom.g:3879:2: rule__DetailCode__LinesAssignment_1
-                            {
-                            pushFollow(FOLLOW_2);
-                            rule__DetailCode__LinesAssignment_1();
+                    state._fsp--;
 
-                            state._fsp--;
-
-
-                            }
-                            break;
 
                     }
 
-                     after(grammarAccess.getDetailCodeAccess().getLinesAssignment_1()); 
+                     after(grammarAccess.getDetailCodeAccess().getGroup_1()); 
 
                     }
 
@@ -11607,32 +11596,32 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             
         try {
             // InternalRoom.g:3892:1: ( ( ruleTransitionPoint ) | ( ruleEntryPoint ) | ( ruleExitPoint ) )
-            int alt29=3;
+            int alt28=3;
             switch ( input.LA(1) ) {
             case 101:
             case 131:
                 {
-                alt29=1;
+                alt28=1;
                 }
                 break;
             case 102:
                 {
-                alt29=2;
+                alt28=2;
                 }
                 break;
             case 103:
                 {
-                alt29=3;
+                alt28=3;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 29, 0, input);
+                    new NoViableAltException("", 28, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt29) {
+            switch (alt28) {
                 case 1 :
                     // InternalRoom.g:3893:1: ( ruleTransitionPoint )
                     {
@@ -11715,68 +11704,68 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             
         try {
             // InternalRoom.g:3921:1: ( ( ruleInitialTransition ) | ( ruleNonInitialTransition ) )
-            int alt30=2;
-            int LA30_0 = input.LA(1);
+            int alt29=2;
+            int LA29_0 = input.LA(1);
 
-            if ( (LA30_0==105) ) {
-                int LA30_1 = input.LA(2);
+            if ( (LA29_0==105) ) {
+                int LA29_1 = input.LA(2);
 
-                if ( (LA30_1==RULE_ID) ) {
-                    int LA30_2 = input.LA(3);
+                if ( (LA29_1==RULE_ID) ) {
+                    int LA29_2 = input.LA(3);
 
-                    if ( (LA30_2==44) ) {
-                        int LA30_3 = input.LA(4);
+                    if ( (LA29_2==44) ) {
+                        int LA29_3 = input.LA(4);
 
-                        if ( (LA30_3==106) ) {
-                            alt30=1;
+                        if ( (LA29_3==106) ) {
+                            alt29=1;
                         }
-                        else if ( (LA30_3==RULE_ID||(LA30_3>=113 && LA30_3<=114)) ) {
-                            alt30=2;
+                        else if ( (LA29_3==RULE_ID||(LA29_3>=113 && LA29_3<=114)) ) {
+                            alt29=2;
                         }
                         else {
                             NoViableAltException nvae =
-                                new NoViableAltException("", 30, 3, input);
+                                new NoViableAltException("", 29, 3, input);
 
                             throw nvae;
                         }
                     }
                     else {
                         NoViableAltException nvae =
-                            new NoViableAltException("", 30, 2, input);
+                            new NoViableAltException("", 29, 2, input);
 
                         throw nvae;
                     }
                 }
-                else if ( (LA30_1==44) ) {
-                    int LA30_3 = input.LA(3);
+                else if ( (LA29_1==44) ) {
+                    int LA29_3 = input.LA(3);
 
-                    if ( (LA30_3==106) ) {
-                        alt30=1;
+                    if ( (LA29_3==106) ) {
+                        alt29=1;
                     }
-                    else if ( (LA30_3==RULE_ID||(LA30_3>=113 && LA30_3<=114)) ) {
-                        alt30=2;
+                    else if ( (LA29_3==RULE_ID||(LA29_3>=113 && LA29_3<=114)) ) {
+                        alt29=2;
                     }
                     else {
                         NoViableAltException nvae =
-                            new NoViableAltException("", 30, 3, input);
+                            new NoViableAltException("", 29, 3, input);
 
                         throw nvae;
                     }
                 }
                 else {
                     NoViableAltException nvae =
-                        new NoViableAltException("", 30, 1, input);
+                        new NoViableAltException("", 29, 1, input);
 
                     throw nvae;
                 }
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 30, 0, input);
+                    new NoViableAltException("", 29, 0, input);
 
                 throw nvae;
             }
-            switch (alt30) {
+            switch (alt29) {
                 case 1 :
                     // InternalRoom.g:3922:1: ( ruleInitialTransition )
                     {
@@ -11840,9 +11829,9 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             
         try {
             // InternalRoom.g:3943:1: ( ( ruleTransitionChainStartTransition ) | ( ruleContinuationTransition ) | ( ruleCPBranchTransition ) )
-            int alt31=3;
-            alt31 = dfa31.predict(input);
-            switch (alt31) {
+            int alt30=3;
+            alt30 = dfa30.predict(input);
+            switch (alt30) {
                 case 1 :
                     // InternalRoom.g:3944:1: ( ruleTransitionChainStartTransition )
                     {
@@ -11925,9 +11914,9 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             
         try {
             // InternalRoom.g:3971:1: ( ( ruleTriggeredTransition ) | ( ruleGuardedTransition ) )
-            int alt32=2;
-            alt32 = dfa32.predict(input);
-            switch (alt32) {
+            int alt31=2;
+            alt31 = dfa31.predict(input);
+            switch (alt31) {
                 case 1 :
                     // InternalRoom.g:3972:1: ( ruleTriggeredTransition )
                     {
@@ -11991,21 +11980,21 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             
         try {
             // InternalRoom.g:3993:1: ( ( ruleStateTerminal ) | ( ruleTrPointTerminal ) | ( ruleSubStateTrPointTerminal ) | ( ruleChoicepointTerminal ) )
-            int alt33=4;
+            int alt32=4;
             switch ( input.LA(1) ) {
             case RULE_ID:
                 {
-                int LA33_1 = input.LA(2);
+                int LA32_1 = input.LA(2);
 
-                if ( (LA33_1==51) ) {
-                    alt33=3;
+                if ( (LA32_1==51) ) {
+                    alt32=3;
                 }
-                else if ( (LA33_1==EOF||(LA33_1>=42 && LA33_1<=43)||LA33_1==46||LA33_1==60||LA33_1==95||(LA33_1>=100 && LA33_1<=105)||LA33_1==112||LA33_1==131) ) {
-                    alt33=1;
+                else if ( (LA32_1==EOF||(LA32_1>=42 && LA32_1<=43)||LA32_1==46||LA32_1==60||LA32_1==95||(LA32_1>=100 && LA32_1<=105)||LA32_1==112||LA32_1==131) ) {
+                    alt32=1;
                 }
                 else {
                     NoViableAltException nvae =
-                        new NoViableAltException("", 33, 1, input);
+                        new NoViableAltException("", 32, 1, input);
 
                     throw nvae;
                 }
@@ -12013,22 +12002,22 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
                 break;
             case 113:
                 {
-                alt33=2;
+                alt32=2;
                 }
                 break;
             case 114:
                 {
-                alt33=4;
+                alt32=4;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 33, 0, input);
+                    new NoViableAltException("", 32, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt33) {
+            switch (alt32) {
                 case 1 :
                     // InternalRoom.g:3994:1: ( ruleStateTerminal )
                     {
@@ -12130,22 +12119,22 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             
         try {
             // InternalRoom.g:4027:1: ( ( ruleInSemanticsRule ) | ( ruleOutSemanticsRule ) )
-            int alt34=2;
-            int LA34_0 = input.LA(1);
+            int alt33=2;
+            int LA33_0 = input.LA(1);
 
-            if ( (LA34_0==119) ) {
-                alt34=1;
+            if ( (LA33_0==119) ) {
+                alt33=1;
             }
-            else if ( (LA34_0==120) ) {
-                alt34=2;
+            else if ( (LA33_0==120) ) {
+                alt33=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 34, 0, input);
+                    new NoViableAltException("", 33, 0, input);
 
                 throw nvae;
             }
-            switch (alt34) {
+            switch (alt33) {
                 case 1 :
                     // InternalRoom.g:4028:1: ( ruleInSemanticsRule )
                     {
@@ -12209,22 +12198,22 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             
         try {
             // InternalRoom.g:4049:1: ( ( ( rule__InSemanticsRule__FollowUpsAssignment_3_1_0 ) ) | ( ( rule__InSemanticsRule__Group_3_1_1__0 ) ) )
-            int alt35=2;
-            int LA35_0 = input.LA(1);
+            int alt34=2;
+            int LA34_0 = input.LA(1);
 
-            if ( ((LA35_0>=119 && LA35_0<=120)) ) {
-                alt35=1;
+            if ( ((LA34_0>=119 && LA34_0<=120)) ) {
+                alt34=1;
             }
-            else if ( (LA35_0==48) ) {
-                alt35=2;
+            else if ( (LA34_0==48) ) {
+                alt34=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 35, 0, input);
+                    new NoViableAltException("", 34, 0, input);
 
                 throw nvae;
             }
-            switch (alt35) {
+            switch (alt34) {
                 case 1 :
                     // InternalRoom.g:4050:1: ( ( rule__InSemanticsRule__FollowUpsAssignment_3_1_0 ) )
                     {
@@ -12300,22 +12289,22 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             
         try {
             // InternalRoom.g:4071:1: ( ( ( rule__OutSemanticsRule__FollowUpsAssignment_3_1_0 ) ) | ( ( rule__OutSemanticsRule__Group_3_1_1__0 ) ) )
-            int alt36=2;
-            int LA36_0 = input.LA(1);
+            int alt35=2;
+            int LA35_0 = input.LA(1);
 
-            if ( ((LA36_0>=119 && LA36_0<=120)) ) {
-                alt36=1;
+            if ( ((LA35_0>=119 && LA35_0<=120)) ) {
+                alt35=1;
             }
-            else if ( (LA36_0==48) ) {
-                alt36=2;
+            else if ( (LA35_0==48) ) {
+                alt35=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 36, 0, input);
+                    new NoViableAltException("", 35, 0, input);
 
                 throw nvae;
             }
-            switch (alt36) {
+            switch (alt35) {
                 case 1 :
                     // InternalRoom.g:4072:1: ( ( rule__OutSemanticsRule__FollowUpsAssignment_3_1_0 ) )
                     {
@@ -12391,22 +12380,22 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             
         try {
             // InternalRoom.g:4093:1: ( ( ( rule__AnnotationType__TargetsAssignment_6_0 ) ) | ( ( rule__AnnotationType__Group_6_1__0 ) ) )
-            int alt37=2;
-            int LA37_0 = input.LA(1);
+            int alt36=2;
+            int LA36_0 = input.LA(1);
 
-            if ( ((LA37_0>=17 && LA37_0<=23)) ) {
-                alt37=1;
+            if ( ((LA36_0>=17 && LA36_0<=23)) ) {
+                alt36=1;
             }
-            else if ( (LA37_0==42) ) {
-                alt37=2;
+            else if ( (LA36_0==42) ) {
+                alt36=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 37, 0, input);
+                    new NoViableAltException("", 36, 0, input);
 
                 throw nvae;
             }
-            switch (alt37) {
+            switch (alt36) {
                 case 1 :
                     // InternalRoom.g:4094:1: ( ( rule__AnnotationType__TargetsAssignment_6_0 ) )
                     {
@@ -12482,108 +12471,108 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             
         try {
             // InternalRoom.g:4115:1: ( ( ruleSimpleAnnotationAttribute ) | ( ruleEnumAnnotationAttribute ) )
-            int alt38=2;
-            int LA38_0 = input.LA(1);
+            int alt37=2;
+            int LA37_0 = input.LA(1);
 
-            if ( (LA38_0==35) ) {
-                int LA38_1 = input.LA(2);
+            if ( (LA37_0==35) ) {
+                int LA37_1 = input.LA(2);
 
-                if ( (LA38_1==124) ) {
-                    int LA38_3 = input.LA(3);
+                if ( (LA37_1==124) ) {
+                    int LA37_3 = input.LA(3);
 
-                    if ( (LA38_3==RULE_ID) ) {
-                        int LA38_4 = input.LA(4);
+                    if ( (LA37_3==RULE_ID) ) {
+                        int LA37_4 = input.LA(4);
 
-                        if ( (LA38_4==44) ) {
-                            int LA38_5 = input.LA(5);
+                        if ( (LA37_4==44) ) {
+                            int LA37_5 = input.LA(5);
 
-                            if ( ((LA38_5>=37 && LA38_5<=40)) ) {
-                                alt38=1;
+                            if ( ((LA37_5>=37 && LA37_5<=40)) ) {
+                                alt37=1;
                             }
-                            else if ( (LA38_5==42) ) {
-                                alt38=2;
+                            else if ( (LA37_5==42) ) {
+                                alt37=2;
                             }
                             else {
                                 NoViableAltException nvae =
-                                    new NoViableAltException("", 38, 5, input);
+                                    new NoViableAltException("", 37, 5, input);
 
                                 throw nvae;
                             }
                         }
                         else {
                             NoViableAltException nvae =
-                                new NoViableAltException("", 38, 4, input);
+                                new NoViableAltException("", 37, 4, input);
 
                             throw nvae;
                         }
                     }
                     else {
                         NoViableAltException nvae =
-                            new NoViableAltException("", 38, 3, input);
+                            new NoViableAltException("", 37, 3, input);
 
                         throw nvae;
                     }
                 }
                 else {
                     NoViableAltException nvae =
-                        new NoViableAltException("", 38, 1, input);
+                        new NoViableAltException("", 37, 1, input);
 
                     throw nvae;
                 }
             }
-            else if ( (LA38_0==24) ) {
-                int LA38_2 = input.LA(2);
+            else if ( (LA37_0==24) ) {
+                int LA37_2 = input.LA(2);
 
-                if ( (LA38_2==124) ) {
-                    int LA38_3 = input.LA(3);
+                if ( (LA37_2==124) ) {
+                    int LA37_3 = input.LA(3);
 
-                    if ( (LA38_3==RULE_ID) ) {
-                        int LA38_4 = input.LA(4);
+                    if ( (LA37_3==RULE_ID) ) {
+                        int LA37_4 = input.LA(4);
 
-                        if ( (LA38_4==44) ) {
-                            int LA38_5 = input.LA(5);
+                        if ( (LA37_4==44) ) {
+                            int LA37_5 = input.LA(5);
 
-                            if ( ((LA38_5>=37 && LA38_5<=40)) ) {
-                                alt38=1;
+                            if ( ((LA37_5>=37 && LA37_5<=40)) ) {
+                                alt37=1;
                             }
-                            else if ( (LA38_5==42) ) {
-                                alt38=2;
+                            else if ( (LA37_5==42) ) {
+                                alt37=2;
                             }
                             else {
                                 NoViableAltException nvae =
-                                    new NoViableAltException("", 38, 5, input);
+                                    new NoViableAltException("", 37, 5, input);
 
                                 throw nvae;
                             }
                         }
                         else {
                             NoViableAltException nvae =
-                                new NoViableAltException("", 38, 4, input);
+                                new NoViableAltException("", 37, 4, input);
 
                             throw nvae;
                         }
                     }
                     else {
                         NoViableAltException nvae =
-                            new NoViableAltException("", 38, 3, input);
+                            new NoViableAltException("", 37, 3, input);
 
                         throw nvae;
                     }
                 }
                 else {
                     NoViableAltException nvae =
-                        new NoViableAltException("", 38, 2, input);
+                        new NoViableAltException("", 37, 2, input);
 
                     throw nvae;
                 }
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 38, 0, input);
+                    new NoViableAltException("", 37, 0, input);
 
                 throw nvae;
             }
-            switch (alt38) {
+            switch (alt37) {
                 case 1 :
                     // InternalRoom.g:4116:1: ( ruleSimpleAnnotationAttribute )
                     {
@@ -12647,22 +12636,22 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             
         try {
             // InternalRoom.g:4137:1: ( ( ( rule__SimpleAnnotationAttribute__OptionalAssignment_0_0 ) ) | ( 'mandatory' ) )
-            int alt39=2;
-            int LA39_0 = input.LA(1);
+            int alt38=2;
+            int LA38_0 = input.LA(1);
 
-            if ( (LA39_0==35) ) {
-                alt39=1;
+            if ( (LA38_0==35) ) {
+                alt38=1;
             }
-            else if ( (LA39_0==24) ) {
-                alt39=2;
+            else if ( (LA38_0==24) ) {
+                alt38=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 39, 0, input);
+                    new NoViableAltException("", 38, 0, input);
 
                 throw nvae;
             }
-            switch (alt39) {
+            switch (alt38) {
                 case 1 :
                     // InternalRoom.g:4138:1: ( ( rule__SimpleAnnotationAttribute__OptionalAssignment_0_0 ) )
                     {
@@ -12728,22 +12717,22 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             
         try {
             // InternalRoom.g:4161:1: ( ( ( rule__EnumAnnotationAttribute__OptionalAssignment_0_0 ) ) | ( 'mandatory' ) )
-            int alt40=2;
-            int LA40_0 = input.LA(1);
+            int alt39=2;
+            int LA39_0 = input.LA(1);
 
-            if ( (LA40_0==35) ) {
-                alt40=1;
+            if ( (LA39_0==35) ) {
+                alt39=1;
             }
-            else if ( (LA40_0==24) ) {
-                alt40=2;
+            else if ( (LA39_0==24) ) {
+                alt39=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 40, 0, input);
+                    new NoViableAltException("", 39, 0, input);
 
                 throw nvae;
             }
-            switch (alt40) {
+            switch (alt39) {
                 case 1 :
                     // InternalRoom.g:4162:1: ( ( rule__EnumAnnotationAttribute__OptionalAssignment_0_0 ) )
                     {
@@ -12809,22 +12798,22 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             
         try {
             // InternalRoom.g:4185:1: ( ( ( rule__Import__Group_1_0__0 ) ) | ( 'model' ) )
-            int alt41=2;
-            int LA41_0 = input.LA(1);
+            int alt40=2;
+            int LA40_0 = input.LA(1);
 
-            if ( (LA41_0==RULE_ID) ) {
-                alt41=1;
+            if ( (LA40_0==RULE_ID) ) {
+                alt40=1;
             }
-            else if ( (LA41_0==25) ) {
-                alt41=2;
+            else if ( (LA40_0==25) ) {
+                alt40=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 41, 0, input);
+                    new NoViableAltException("", 40, 0, input);
 
                 throw nvae;
             }
-            switch (alt41) {
+            switch (alt40) {
                 case 1 :
                     // InternalRoom.g:4186:1: ( ( rule__Import__Group_1_0__0 ) )
                     {
@@ -12890,12 +12879,12 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             
         try {
             // InternalRoom.g:4210:1: ( ( ruleBooleanLiteral ) | ( ruleNumberLiteral ) | ( ruleStringLiteral ) )
-            int alt42=3;
+            int alt41=3;
             switch ( input.LA(1) ) {
             case 26:
             case 132:
                 {
-                alt42=1;
+                alt41=1;
                 }
                 break;
             case RULE_INT:
@@ -12903,22 +12892,22 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             case 27:
             case 28:
                 {
-                alt42=2;
+                alt41=2;
                 }
                 break;
             case RULE_STRING:
                 {
-                alt42=3;
+                alt41=3;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 42, 0, input);
+                    new NoViableAltException("", 41, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt42) {
+            switch (alt41) {
                 case 1 :
                     // InternalRoom.g:4211:1: ( ruleBooleanLiteral )
                     {
@@ -13001,22 +12990,22 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             
         try {
             // InternalRoom.g:4238:1: ( ( 'false' ) | ( ( rule__BooleanLiteral__IsTrueAssignment_1_1 ) ) )
-            int alt43=2;
-            int LA43_0 = input.LA(1);
+            int alt42=2;
+            int LA42_0 = input.LA(1);
 
-            if ( (LA43_0==26) ) {
-                alt43=1;
+            if ( (LA42_0==26) ) {
+                alt42=1;
             }
-            else if ( (LA43_0==132) ) {
-                alt43=2;
+            else if ( (LA42_0==132) ) {
+                alt42=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 43, 0, input);
+                    new NoViableAltException("", 42, 0, input);
 
                 throw nvae;
             }
-            switch (alt43) {
+            switch (alt42) {
                 case 1 :
                     // InternalRoom.g:4239:1: ( 'false' )
                     {
@@ -13082,31 +13071,31 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             
         try {
             // InternalRoom.g:4262:1: ( ( ruleIntLiteral ) | ( ruleRealLiteral ) )
-            int alt44=2;
+            int alt43=2;
             switch ( input.LA(1) ) {
             case 27:
                 {
-                int LA44_1 = input.LA(2);
+                int LA43_1 = input.LA(2);
 
-                if ( (LA44_1==RULE_INT) ) {
-                    int LA44_3 = input.LA(3);
+                if ( (LA43_1==RULE_INT) ) {
+                    int LA43_3 = input.LA(3);
 
-                    if ( (LA44_3==87) ) {
-                        alt44=2;
+                    if ( (LA43_3==EOF||LA43_3==49||LA43_3==52) ) {
+                        alt43=1;
                     }
-                    else if ( (LA44_3==EOF||LA44_3==49||LA44_3==52) ) {
-                        alt44=1;
+                    else if ( (LA43_3==87) ) {
+                        alt43=2;
                     }
                     else {
                         NoViableAltException nvae =
-                            new NoViableAltException("", 44, 3, input);
+                            new NoViableAltException("", 43, 3, input);
 
                         throw nvae;
                     }
                 }
                 else {
                     NoViableAltException nvae =
-                        new NoViableAltException("", 44, 1, input);
+                        new NoViableAltException("", 43, 1, input);
 
                     throw nvae;
                 }
@@ -13114,27 +13103,27 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
                 break;
             case 28:
                 {
-                int LA44_2 = input.LA(2);
+                int LA43_2 = input.LA(2);
 
-                if ( (LA44_2==RULE_INT) ) {
-                    int LA44_3 = input.LA(3);
+                if ( (LA43_2==RULE_INT) ) {
+                    int LA43_3 = input.LA(3);
 
-                    if ( (LA44_3==87) ) {
-                        alt44=2;
+                    if ( (LA43_3==EOF||LA43_3==49||LA43_3==52) ) {
+                        alt43=1;
                     }
-                    else if ( (LA44_3==EOF||LA44_3==49||LA44_3==52) ) {
-                        alt44=1;
+                    else if ( (LA43_3==87) ) {
+                        alt43=2;
                     }
                     else {
                         NoViableAltException nvae =
-                            new NoViableAltException("", 44, 3, input);
+                            new NoViableAltException("", 43, 3, input);
 
                         throw nvae;
                     }
                 }
                 else {
                     NoViableAltException nvae =
-                        new NoViableAltException("", 44, 2, input);
+                        new NoViableAltException("", 43, 2, input);
 
                     throw nvae;
                 }
@@ -13142,17 +13131,17 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
                 break;
             case RULE_INT:
                 {
-                int LA44_3 = input.LA(2);
+                int LA43_3 = input.LA(2);
 
-                if ( (LA44_3==87) ) {
-                    alt44=2;
+                if ( (LA43_3==EOF||LA43_3==49||LA43_3==52) ) {
+                    alt43=1;
                 }
-                else if ( (LA44_3==EOF||LA44_3==49||LA44_3==52) ) {
-                    alt44=1;
+                else if ( (LA43_3==87) ) {
+                    alt43=2;
                 }
                 else {
                     NoViableAltException nvae =
-                        new NoViableAltException("", 44, 3, input);
+                        new NoViableAltException("", 43, 3, input);
 
                     throw nvae;
                 }
@@ -13160,17 +13149,17 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
                 break;
             case RULE_HEX:
                 {
-                alt44=1;
+                alt43=1;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 44, 0, input);
+                    new NoViableAltException("", 43, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt44) {
+            switch (alt43) {
                 case 1 :
                     // InternalRoom.g:4263:1: ( ruleIntLiteral )
                     {
@@ -13234,22 +13223,22 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             
         try {
             // InternalRoom.g:4284:1: ( ( ( rule__Integer__Group_0__0 ) ) | ( RULE_HEX ) )
-            int alt45=2;
-            int LA45_0 = input.LA(1);
+            int alt44=2;
+            int LA44_0 = input.LA(1);
 
-            if ( (LA45_0==RULE_INT||(LA45_0>=27 && LA45_0<=28)) ) {
-                alt45=1;
+            if ( (LA44_0==RULE_INT||(LA44_0>=27 && LA44_0<=28)) ) {
+                alt44=1;
             }
-            else if ( (LA45_0==RULE_HEX) ) {
-                alt45=2;
+            else if ( (LA44_0==RULE_HEX) ) {
+                alt44=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 45, 0, input);
+                    new NoViableAltException("", 44, 0, input);
 
                 throw nvae;
             }
-            switch (alt45) {
+            switch (alt44) {
                 case 1 :
                     // InternalRoom.g:4285:1: ( ( rule__Integer__Group_0__0 ) )
                     {
@@ -13315,22 +13304,22 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             
         try {
             // InternalRoom.g:4306:1: ( ( '+' ) | ( '-' ) )
-            int alt46=2;
-            int LA46_0 = input.LA(1);
+            int alt45=2;
+            int LA45_0 = input.LA(1);
 
-            if ( (LA46_0==27) ) {
-                alt46=1;
+            if ( (LA45_0==27) ) {
+                alt45=1;
             }
-            else if ( (LA46_0==28) ) {
-                alt46=2;
+            else if ( (LA45_0==28) ) {
+                alt45=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 46, 0, input);
+                    new NoViableAltException("", 45, 0, input);
 
                 throw nvae;
             }
-            switch (alt46) {
+            switch (alt45) {
                 case 1 :
                     // InternalRoom.g:4307:1: ( '+' )
                     {
@@ -13386,51 +13375,51 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             
         try {
             // InternalRoom.g:4332:1: ( ( ruleDecimal ) | ( ruleDecimalExp ) )
-            int alt47=2;
+            int alt46=2;
             switch ( input.LA(1) ) {
             case 27:
                 {
-                int LA47_1 = input.LA(2);
+                int LA46_1 = input.LA(2);
 
-                if ( (LA47_1==RULE_INT) ) {
-                    int LA47_3 = input.LA(3);
+                if ( (LA46_1==RULE_INT) ) {
+                    int LA46_3 = input.LA(3);
 
-                    if ( (LA47_3==87) ) {
-                        int LA47_4 = input.LA(4);
+                    if ( (LA46_3==87) ) {
+                        int LA46_4 = input.LA(4);
 
-                        if ( (LA47_4==RULE_INT) ) {
-                            int LA47_5 = input.LA(5);
+                        if ( (LA46_4==RULE_INT) ) {
+                            int LA46_5 = input.LA(5);
 
-                            if ( (LA47_5==EOF||LA47_5==49||LA47_5==52) ) {
-                                alt47=1;
+                            if ( (LA46_5==EOF||LA46_5==49||LA46_5==52) ) {
+                                alt46=1;
                             }
-                            else if ( ((LA47_5>=29 && LA47_5<=30)) ) {
-                                alt47=2;
+                            else if ( ((LA46_5>=29 && LA46_5<=30)) ) {
+                                alt46=2;
                             }
                             else {
                                 NoViableAltException nvae =
-                                    new NoViableAltException("", 47, 5, input);
+                                    new NoViableAltException("", 46, 5, input);
 
                                 throw nvae;
                             }
                         }
                         else {
                             NoViableAltException nvae =
-                                new NoViableAltException("", 47, 4, input);
+                                new NoViableAltException("", 46, 4, input);
 
                             throw nvae;
                         }
                     }
                     else {
                         NoViableAltException nvae =
-                            new NoViableAltException("", 47, 3, input);
+                            new NoViableAltException("", 46, 3, input);
 
                         throw nvae;
                     }
                 }
                 else {
                     NoViableAltException nvae =
-                        new NoViableAltException("", 47, 1, input);
+                        new NoViableAltException("", 46, 1, input);
 
                     throw nvae;
                 }
@@ -13438,47 +13427,47 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
                 break;
             case 28:
                 {
-                int LA47_2 = input.LA(2);
+                int LA46_2 = input.LA(2);
 
-                if ( (LA47_2==RULE_INT) ) {
-                    int LA47_3 = input.LA(3);
+                if ( (LA46_2==RULE_INT) ) {
+                    int LA46_3 = input.LA(3);
 
-                    if ( (LA47_3==87) ) {
-                        int LA47_4 = input.LA(4);
+                    if ( (LA46_3==87) ) {
+                        int LA46_4 = input.LA(4);
 
-                        if ( (LA47_4==RULE_INT) ) {
-                            int LA47_5 = input.LA(5);
+                        if ( (LA46_4==RULE_INT) ) {
+                            int LA46_5 = input.LA(5);
 
-                            if ( (LA47_5==EOF||LA47_5==49||LA47_5==52) ) {
-                                alt47=1;
+                            if ( (LA46_5==EOF||LA46_5==49||LA46_5==52) ) {
+                                alt46=1;
                             }
-                            else if ( ((LA47_5>=29 && LA47_5<=30)) ) {
-                                alt47=2;
+                            else if ( ((LA46_5>=29 && LA46_5<=30)) ) {
+                                alt46=2;
                             }
                             else {
                                 NoViableAltException nvae =
-                                    new NoViableAltException("", 47, 5, input);
+                                    new NoViableAltException("", 46, 5, input);
 
                                 throw nvae;
                             }
                         }
                         else {
                             NoViableAltException nvae =
-                                new NoViableAltException("", 47, 4, input);
+                                new NoViableAltException("", 46, 4, input);
 
                             throw nvae;
                         }
                     }
                     else {
                         NoViableAltException nvae =
-                            new NoViableAltException("", 47, 3, input);
+                            new NoViableAltException("", 46, 3, input);
 
                         throw nvae;
                     }
                 }
                 else {
                     NoViableAltException nvae =
-                        new NoViableAltException("", 47, 2, input);
+                        new NoViableAltException("", 46, 2, input);
 
                     throw nvae;
                 }
@@ -13486,37 +13475,37 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
                 break;
             case RULE_INT:
                 {
-                int LA47_3 = input.LA(2);
+                int LA46_3 = input.LA(2);
 
-                if ( (LA47_3==87) ) {
-                    int LA47_4 = input.LA(3);
+                if ( (LA46_3==87) ) {
+                    int LA46_4 = input.LA(3);
 
-                    if ( (LA47_4==RULE_INT) ) {
-                        int LA47_5 = input.LA(4);
+                    if ( (LA46_4==RULE_INT) ) {
+                        int LA46_5 = input.LA(4);
 
-                        if ( (LA47_5==EOF||LA47_5==49||LA47_5==52) ) {
-                            alt47=1;
+                        if ( (LA46_5==EOF||LA46_5==49||LA46_5==52) ) {
+                            alt46=1;
                         }
-                        else if ( ((LA47_5>=29 && LA47_5<=30)) ) {
-                            alt47=2;
+                        else if ( ((LA46_5>=29 && LA46_5<=30)) ) {
+                            alt46=2;
                         }
                         else {
                             NoViableAltException nvae =
-                                new NoViableAltException("", 47, 5, input);
+                                new NoViableAltException("", 46, 5, input);
 
                             throw nvae;
                         }
                     }
                     else {
                         NoViableAltException nvae =
-                            new NoViableAltException("", 47, 4, input);
+                            new NoViableAltException("", 46, 4, input);
 
                         throw nvae;
                     }
                 }
                 else {
                     NoViableAltException nvae =
-                        new NoViableAltException("", 47, 3, input);
+                        new NoViableAltException("", 46, 3, input);
 
                     throw nvae;
                 }
@@ -13524,12 +13513,12 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 47, 0, input);
+                    new NoViableAltException("", 46, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt47) {
+            switch (alt46) {
                 case 1 :
                     // InternalRoom.g:4333:1: ( ruleDecimal )
                     {
@@ -13593,22 +13582,22 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             
         try {
             // InternalRoom.g:4354:1: ( ( '+' ) | ( '-' ) )
-            int alt48=2;
-            int LA48_0 = input.LA(1);
+            int alt47=2;
+            int LA47_0 = input.LA(1);
 
-            if ( (LA48_0==27) ) {
-                alt48=1;
+            if ( (LA47_0==27) ) {
+                alt47=1;
             }
-            else if ( (LA48_0==28) ) {
-                alt48=2;
+            else if ( (LA47_0==28) ) {
+                alt47=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 48, 0, input);
+                    new NoViableAltException("", 47, 0, input);
 
                 throw nvae;
             }
-            switch (alt48) {
+            switch (alt47) {
                 case 1 :
                     // InternalRoom.g:4355:1: ( '+' )
                     {
@@ -13664,22 +13653,22 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             
         try {
             // InternalRoom.g:4380:1: ( ( '+' ) | ( '-' ) )
-            int alt49=2;
-            int LA49_0 = input.LA(1);
+            int alt48=2;
+            int LA48_0 = input.LA(1);
 
-            if ( (LA49_0==27) ) {
-                alt49=1;
+            if ( (LA48_0==27) ) {
+                alt48=1;
             }
-            else if ( (LA49_0==28) ) {
-                alt49=2;
+            else if ( (LA48_0==28) ) {
+                alt48=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 49, 0, input);
+                    new NoViableAltException("", 48, 0, input);
 
                 throw nvae;
             }
-            switch (alt49) {
+            switch (alt48) {
                 case 1 :
                     // InternalRoom.g:4381:1: ( '+' )
                     {
@@ -13735,22 +13724,22 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             
         try {
             // InternalRoom.g:4406:1: ( ( 'e' ) | ( 'E' ) )
-            int alt50=2;
-            int LA50_0 = input.LA(1);
+            int alt49=2;
+            int LA49_0 = input.LA(1);
 
-            if ( (LA50_0==29) ) {
-                alt50=1;
+            if ( (LA49_0==29) ) {
+                alt49=1;
             }
-            else if ( (LA50_0==30) ) {
-                alt50=2;
+            else if ( (LA49_0==30) ) {
+                alt49=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 50, 0, input);
+                    new NoViableAltException("", 49, 0, input);
 
                 throw nvae;
             }
-            switch (alt50) {
+            switch (alt49) {
                 case 1 :
                     // InternalRoom.g:4407:1: ( 'e' )
                     {
@@ -13806,22 +13795,22 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             
         try {
             // InternalRoom.g:4432:1: ( ( '+' ) | ( '-' ) )
-            int alt51=2;
-            int LA51_0 = input.LA(1);
+            int alt50=2;
+            int LA50_0 = input.LA(1);
 
-            if ( (LA51_0==27) ) {
-                alt51=1;
+            if ( (LA50_0==27) ) {
+                alt50=1;
             }
-            else if ( (LA51_0==28) ) {
-                alt51=2;
+            else if ( (LA50_0==28) ) {
+                alt50=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 51, 0, input);
+                    new NoViableAltException("", 50, 0, input);
 
                 throw nvae;
             }
-            switch (alt51) {
+            switch (alt50) {
                 case 1 :
                     // InternalRoom.g:4433:1: ( '+' )
                     {
@@ -13877,31 +13866,31 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             
         try {
             // InternalRoom.g:4458:1: ( ( ( 'eventdriven' ) ) | ( ( 'datadriven' ) ) | ( ( 'sync' ) ) )
-            int alt52=3;
+            int alt51=3;
             switch ( input.LA(1) ) {
             case 31:
                 {
-                alt52=1;
+                alt51=1;
                 }
                 break;
             case 32:
                 {
-                alt52=2;
+                alt51=2;
                 }
                 break;
             case 33:
                 {
-                alt52=3;
+                alt51=3;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 52, 0, input);
+                    new NoViableAltException("", 51, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt52) {
+            switch (alt51) {
                 case 1 :
                     // InternalRoom.g:4459:1: ( ( 'eventdriven' ) )
                     {
@@ -13990,22 +13979,22 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             
         try {
             // InternalRoom.g:4489:1: ( ( ( 'fixed' ) ) | ( ( 'optional' ) ) )
-            int alt53=2;
-            int LA53_0 = input.LA(1);
+            int alt52=2;
+            int LA52_0 = input.LA(1);
 
-            if ( (LA53_0==34) ) {
-                alt53=1;
+            if ( (LA52_0==34) ) {
+                alt52=1;
             }
-            else if ( (LA53_0==35) ) {
-                alt53=2;
+            else if ( (LA52_0==35) ) {
+                alt52=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 53, 0, input);
+                    new NoViableAltException("", 52, 0, input);
 
                 throw nvae;
             }
-            switch (alt53) {
+            switch (alt52) {
                 case 1 :
                     // InternalRoom.g:4490:1: ( ( 'fixed' ) )
                     {
@@ -14073,36 +14062,36 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             
         try {
             // InternalRoom.g:4514:1: ( ( ( 'eventdriven' ) ) | ( ( 'datadriven' ) ) | ( ( 'async' ) ) | ( ( 'sync' ) ) )
-            int alt54=4;
+            int alt53=4;
             switch ( input.LA(1) ) {
             case 31:
                 {
-                alt54=1;
+                alt53=1;
                 }
                 break;
             case 32:
                 {
-                alt54=2;
+                alt53=2;
                 }
                 break;
             case 36:
                 {
-                alt54=3;
+                alt53=3;
                 }
                 break;
             case 33:
                 {
-                alt54=4;
+                alt53=4;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 54, 0, input);
+                    new NoViableAltException("", 53, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt54) {
+            switch (alt53) {
                 case 1 :
                     // InternalRoom.g:4515:1: ( ( 'eventdriven' ) )
                     {
@@ -14212,36 +14201,36 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             
         try {
             // InternalRoom.g:4552:1: ( ( ( 'ptBoolean' ) ) | ( ( 'ptInteger' ) ) | ( ( 'ptReal' ) ) | ( ( 'ptCharacter' ) ) )
-            int alt55=4;
+            int alt54=4;
             switch ( input.LA(1) ) {
             case 37:
                 {
-                alt55=1;
+                alt54=1;
                 }
                 break;
             case 38:
                 {
-                alt55=2;
+                alt54=2;
                 }
                 break;
             case 39:
                 {
-                alt55=3;
+                alt54=3;
                 }
                 break;
             case 40:
                 {
-                alt55=4;
+                alt54=4;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 55, 0, input);
+                    new NoViableAltException("", 54, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt55) {
+            switch (alt54) {
                 case 1 :
                     // InternalRoom.g:4553:1: ( ( 'ptBoolean' ) )
                     {
@@ -14556,13 +14545,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getRoomModelAccess().getDocuAssignment_2()); 
             // InternalRoom.g:4667:1: ( rule__RoomModel__DocuAssignment_2 )?
-            int alt56=2;
-            int LA56_0 = input.LA(1);
+            int alt55=2;
+            int LA55_0 = input.LA(1);
 
-            if ( (LA56_0==60) ) {
-                alt56=1;
+            if ( (LA55_0==60) ) {
+                alt55=1;
             }
-            switch (alt56) {
+            switch (alt55) {
                 case 1 :
                     // InternalRoom.g:4667:2: rule__RoomModel__DocuAssignment_2
                     {
@@ -14727,17 +14716,17 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getRoomModelAccess().getImportsAssignment_4()); 
             // InternalRoom.g:4727:1: ( rule__RoomModel__ImportsAssignment_4 )*
-            loop57:
+            loop56:
             do {
-                int alt57=2;
-                int LA57_0 = input.LA(1);
+                int alt56=2;
+                int LA56_0 = input.LA(1);
 
-                if ( (LA57_0==125) ) {
-                    alt57=1;
+                if ( (LA56_0==125) ) {
+                    alt56=1;
                 }
 
 
-                switch (alt57) {
+                switch (alt56) {
             	case 1 :
             	    // InternalRoom.g:4727:2: rule__RoomModel__ImportsAssignment_4
             	    {
@@ -14751,7 +14740,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             	    break;
 
             	default :
-            	    break loop57;
+            	    break loop56;
                 }
             } while (true);
 
@@ -14830,17 +14819,17 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getRoomModelAccess().getAlternatives_5()); 
             // InternalRoom.g:4756:1: ( rule__RoomModel__Alternatives_5 )*
-            loop58:
+            loop57:
             do {
-                int alt58=2;
-                int LA58_0 = input.LA(1);
+                int alt57=2;
+                int LA57_0 = input.LA(1);
 
-                if ( ((LA58_0>=17 && LA58_0<=18)||(LA58_0>=20 && LA58_0<=23)||(LA58_0>=31 && LA58_0<=33)||LA58_0==36||LA58_0==45||LA58_0==50||LA58_0==54||LA58_0==122||LA58_0==130) ) {
-                    alt58=1;
+                if ( ((LA57_0>=17 && LA57_0<=18)||(LA57_0>=20 && LA57_0<=23)||(LA57_0>=31 && LA57_0<=33)||LA57_0==36||LA57_0==45||LA57_0==50||LA57_0==54||LA57_0==122||LA57_0==130) ) {
+                    alt57=1;
                 }
 
 
-                switch (alt58) {
+                switch (alt57) {
             	case 1 :
             	    // InternalRoom.g:4756:2: rule__RoomModel__Alternatives_5
             	    {
@@ -14854,7 +14843,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             	    break;
 
             	default :
-            	    break loop58;
+            	    break loop57;
                 }
             } while (true);
 
@@ -15323,13 +15312,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getRefableTypeAccess().getRefAssignment_1()); 
             // InternalRoom.g:4951:1: ( rule__RefableType__RefAssignment_1 )?
-            int alt59=2;
-            int LA59_0 = input.LA(1);
+            int alt58=2;
+            int LA58_0 = input.LA(1);
 
-            if ( (LA59_0==91) ) {
-                alt59=1;
+            if ( (LA58_0==91) ) {
+                alt58=1;
             }
-            switch (alt59) {
+            switch (alt58) {
                 case 1 :
                     // InternalRoom.g:4951:2: rule__RefableType__RefAssignment_1
                     {
@@ -15899,13 +15888,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getPrimitiveTypeAccess().getGroup_6()); 
             // InternalRoom.g:5164:1: ( rule__PrimitiveType__Group_6__0 )?
-            int alt60=2;
-            int LA60_0 = input.LA(1);
+            int alt59=2;
+            int LA59_0 = input.LA(1);
 
-            if ( (LA60_0==48) ) {
-                alt60=1;
+            if ( (LA59_0==48) ) {
+                alt59=1;
             }
-            switch (alt60) {
+            switch (alt59) {
                 case 1 :
                     // InternalRoom.g:5164:2: rule__PrimitiveType__Group_6__0
                     {
@@ -16150,13 +16139,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getPrimitiveTypeAccess().getDocuAssignment_9()); 
             // InternalRoom.g:5252:1: ( rule__PrimitiveType__DocuAssignment_9 )?
-            int alt61=2;
-            int LA61_0 = input.LA(1);
+            int alt60=2;
+            int LA60_0 = input.LA(1);
 
-            if ( (LA61_0==60) ) {
-                alt61=1;
+            if ( (LA60_0==60) ) {
+                alt60=1;
             }
-            switch (alt61) {
+            switch (alt60) {
                 case 1 :
                     // InternalRoom.g:5252:2: rule__PrimitiveType__DocuAssignment_9
                     {
@@ -16636,13 +16625,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getEnumerationTypeAccess().getDocuAssignment_2()); 
             // InternalRoom.g:5457:1: ( rule__EnumerationType__DocuAssignment_2 )?
-            int alt62=2;
-            int LA62_0 = input.LA(1);
+            int alt61=2;
+            int LA61_0 = input.LA(1);
 
-            if ( (LA62_0==60) ) {
-                alt62=1;
+            if ( (LA61_0==60) ) {
+                alt61=1;
             }
-            switch (alt62) {
+            switch (alt61) {
                 case 1 :
                     // InternalRoom.g:5457:2: rule__EnumerationType__DocuAssignment_2
                     {
@@ -16732,13 +16721,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getEnumerationTypeAccess().getGroup_3()); 
             // InternalRoom.g:5486:1: ( rule__EnumerationType__Group_3__0 )?
-            int alt63=2;
-            int LA63_0 = input.LA(1);
+            int alt62=2;
+            int LA62_0 = input.LA(1);
 
-            if ( (LA63_0==51) ) {
-                alt63=1;
+            if ( (LA62_0==51) ) {
+                alt62=1;
             }
-            switch (alt63) {
+            switch (alt62) {
                 case 1 :
                     // InternalRoom.g:5486:2: rule__EnumerationType__Group_3__0
                     {
@@ -16903,13 +16892,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getEnumerationTypeAccess().getGroup_5()); 
             // InternalRoom.g:5546:1: ( rule__EnumerationType__Group_5__0 )?
-            int alt64=2;
-            int LA64_0 = input.LA(1);
+            int alt63=2;
+            int LA63_0 = input.LA(1);
 
-            if ( (LA64_0==RULE_ID) ) {
-                alt64=1;
+            if ( (LA63_0==RULE_ID) ) {
+                alt63=1;
             }
-            switch (alt64) {
+            switch (alt63) {
                 case 1 :
                     // InternalRoom.g:5546:2: rule__EnumerationType__Group_5__0
                     {
@@ -17304,17 +17293,17 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getEnumerationTypeAccess().getGroup_5_1()); 
             // InternalRoom.g:5710:1: ( rule__EnumerationType__Group_5_1__0 )*
-            loop65:
+            loop64:
             do {
-                int alt65=2;
-                int LA65_0 = input.LA(1);
+                int alt64=2;
+                int LA64_0 = input.LA(1);
 
-                if ( (LA65_0==52) ) {
-                    alt65=1;
+                if ( (LA64_0==52) ) {
+                    alt64=1;
                 }
 
 
-                switch (alt65) {
+                switch (alt64) {
             	case 1 :
             	    // InternalRoom.g:5710:2: rule__EnumerationType__Group_5_1__0
             	    {
@@ -17328,7 +17317,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             	    break;
 
             	default :
-            	    break loop65;
+            	    break loop64;
                 }
             } while (true);
 
@@ -17642,13 +17631,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getEnumLiteralAccess().getGroup_1()); 
             // InternalRoom.g:5834:1: ( rule__EnumLiteral__Group_1__0 )?
-            int alt66=2;
-            int LA66_0 = input.LA(1);
+            int alt65=2;
+            int LA65_0 = input.LA(1);
 
-            if ( (LA66_0==53) ) {
-                alt66=1;
+            if ( (LA65_0==53) ) {
+                alt65=1;
             }
-            switch (alt66) {
+            switch (alt65) {
                 case 1 :
                     // InternalRoom.g:5834:2: rule__EnumLiteral__Group_1__0
                     {
@@ -18213,13 +18202,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getExternalTypeAccess().getGroup_4()); 
             // InternalRoom.g:6050:1: ( rule__ExternalType__Group_4__0 )?
-            int alt67=2;
-            int LA67_0 = input.LA(1);
+            int alt66=2;
+            int LA66_0 = input.LA(1);
 
-            if ( (LA67_0==47) ) {
-                alt67=1;
+            if ( (LA66_0==47) ) {
+                alt66=1;
             }
-            switch (alt67) {
+            switch (alt66) {
                 case 1 :
                     // InternalRoom.g:6050:2: rule__ExternalType__Group_4__0
                     {
@@ -18304,13 +18293,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getExternalTypeAccess().getDocuAssignment_5()); 
             // InternalRoom.g:6078:1: ( rule__ExternalType__DocuAssignment_5 )?
-            int alt68=2;
-            int LA68_0 = input.LA(1);
+            int alt67=2;
+            int LA67_0 = input.LA(1);
 
-            if ( (LA68_0==60) ) {
-                alt68=1;
+            if ( (LA67_0==60) ) {
+                alt67=1;
             }
-            switch (alt68) {
+            switch (alt67) {
                 case 1 :
                     // InternalRoom.g:6078:2: rule__ExternalType__DocuAssignment_5
                     {
@@ -18715,13 +18704,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getDataClassAccess().getDocuAssignment_2()); 
             // InternalRoom.g:6242:1: ( rule__DataClass__DocuAssignment_2 )?
-            int alt69=2;
-            int LA69_0 = input.LA(1);
+            int alt68=2;
+            int LA68_0 = input.LA(1);
 
-            if ( (LA69_0==60) ) {
-                alt69=1;
+            if ( (LA68_0==60) ) {
+                alt68=1;
             }
-            switch (alt69) {
+            switch (alt68) {
                 case 1 :
                     // InternalRoom.g:6242:2: rule__DataClass__DocuAssignment_2
                     {
@@ -18811,13 +18800,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getDataClassAccess().getGroup_3()); 
             // InternalRoom.g:6271:1: ( rule__DataClass__Group_3__0 )?
-            int alt70=2;
-            int LA70_0 = input.LA(1);
+            int alt69=2;
+            int LA69_0 = input.LA(1);
 
-            if ( (LA70_0==55) ) {
-                alt70=1;
+            if ( (LA69_0==55) ) {
+                alt69=1;
             }
-            switch (alt70) {
+            switch (alt69) {
                 case 1 :
                     // InternalRoom.g:6271:2: rule__DataClass__Group_3__0
                     {
@@ -18982,17 +18971,17 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getDataClassAccess().getAnnotationsAssignment_5()); 
             // InternalRoom.g:6331:1: ( rule__DataClass__AnnotationsAssignment_5 )*
-            loop71:
+            loop70:
             do {
-                int alt71=2;
-                int LA71_0 = input.LA(1);
+                int alt70=2;
+                int LA70_0 = input.LA(1);
 
-                if ( (LA71_0==121) ) {
-                    alt71=1;
+                if ( (LA70_0==121) ) {
+                    alt70=1;
                 }
 
 
-                switch (alt71) {
+                switch (alt70) {
             	case 1 :
             	    // InternalRoom.g:6331:2: rule__DataClass__AnnotationsAssignment_5
             	    {
@@ -19006,7 +18995,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             	    break;
 
             	default :
-            	    break loop71;
+            	    break loop70;
                 }
             } while (true);
 
@@ -19085,13 +19074,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getDataClassAccess().getGroup_6()); 
             // InternalRoom.g:6360:1: ( rule__DataClass__Group_6__0 )?
-            int alt72=2;
-            int LA72_0 = input.LA(1);
+            int alt71=2;
+            int LA71_0 = input.LA(1);
 
-            if ( (LA72_0==56) ) {
-                alt72=1;
+            if ( (LA71_0==56) ) {
+                alt71=1;
             }
-            switch (alt72) {
+            switch (alt71) {
                 case 1 :
                     // InternalRoom.g:6360:2: rule__DataClass__Group_6__0
                     {
@@ -19181,13 +19170,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getDataClassAccess().getGroup_7()); 
             // InternalRoom.g:6389:1: ( rule__DataClass__Group_7__0 )?
-            int alt73=2;
-            int LA73_0 = input.LA(1);
+            int alt72=2;
+            int LA72_0 = input.LA(1);
 
-            if ( (LA73_0==57) ) {
-                alt73=1;
+            if ( (LA72_0==57) ) {
+                alt72=1;
             }
-            switch (alt73) {
+            switch (alt72) {
                 case 1 :
                     // InternalRoom.g:6389:2: rule__DataClass__Group_7__0
                     {
@@ -19277,13 +19266,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getDataClassAccess().getGroup_8()); 
             // InternalRoom.g:6418:1: ( rule__DataClass__Group_8__0 )?
-            int alt74=2;
-            int LA74_0 = input.LA(1);
+            int alt73=2;
+            int LA73_0 = input.LA(1);
 
-            if ( (LA74_0==58) ) {
-                alt74=1;
+            if ( (LA73_0==58) ) {
+                alt73=1;
             }
-            switch (alt74) {
+            switch (alt73) {
                 case 1 :
                     // InternalRoom.g:6418:2: rule__DataClass__Group_8__0
                     {
@@ -19373,17 +19362,17 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getDataClassAccess().getAlternatives_9()); 
             // InternalRoom.g:6447:1: ( rule__DataClass__Alternatives_9 )*
-            loop75:
+            loop74:
             do {
-                int alt75=2;
-                int LA75_0 = input.LA(1);
+                int alt74=2;
+                int LA74_0 = input.LA(1);
 
-                if ( ((LA75_0>=14 && LA75_0<=15)||LA75_0==59||LA75_0==62||LA75_0==128) ) {
-                    alt75=1;
+                if ( ((LA74_0>=14 && LA74_0<=15)||LA74_0==59||LA74_0==62||LA74_0==128) ) {
+                    alt74=1;
                 }
 
 
-                switch (alt75) {
+                switch (alt74) {
             	case 1 :
             	    // InternalRoom.g:6447:2: rule__DataClass__Alternatives_9
             	    {
@@ -19397,7 +19386,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             	    break;
 
             	default :
-            	    break loop75;
+            	    break loop74;
                 }
             } while (true);
 
@@ -20326,13 +20315,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getAttributeAccess().getGroup_2()); 
             // InternalRoom.g:6840:1: ( rule__Attribute__Group_2__0 )?
-            int alt76=2;
-            int LA76_0 = input.LA(1);
+            int alt75=2;
+            int LA75_0 = input.LA(1);
 
-            if ( (LA76_0==60) ) {
-                alt76=1;
+            if ( (LA75_0==60) ) {
+                alt75=1;
             }
-            switch (alt76) {
+            switch (alt75) {
                 case 1 :
                     // InternalRoom.g:6840:2: rule__Attribute__Group_2__0
                     {
@@ -20497,13 +20486,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getAttributeAccess().getTypeAssignment_4()); 
             // InternalRoom.g:6900:1: ( rule__Attribute__TypeAssignment_4 )?
-            int alt77=2;
-            int LA77_0 = input.LA(1);
+            int alt76=2;
+            int LA76_0 = input.LA(1);
 
-            if ( (LA77_0==RULE_ID) ) {
-                alt77=1;
+            if ( (LA76_0==RULE_ID) ) {
+                alt76=1;
             }
-            switch (alt77) {
+            switch (alt76) {
                 case 1 :
                     // InternalRoom.g:6900:2: rule__Attribute__TypeAssignment_4
                     {
@@ -20593,13 +20582,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getAttributeAccess().getGroup_5()); 
             // InternalRoom.g:6929:1: ( rule__Attribute__Group_5__0 )?
-            int alt78=2;
-            int LA78_0 = input.LA(1);
+            int alt77=2;
+            int LA77_0 = input.LA(1);
 
-            if ( (LA78_0==53) ) {
-                alt78=1;
+            if ( (LA77_0==53) ) {
+                alt77=1;
             }
-            switch (alt78) {
+            switch (alt77) {
                 case 1 :
                     // InternalRoom.g:6929:2: rule__Attribute__Group_5__0
                     {
@@ -20684,13 +20673,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getAttributeAccess().getDocuAssignment_6()); 
             // InternalRoom.g:6957:1: ( rule__Attribute__DocuAssignment_6 )?
-            int alt79=2;
-            int LA79_0 = input.LA(1);
+            int alt78=2;
+            int LA78_0 = input.LA(1);
 
-            if ( (LA79_0==60) ) {
-                alt79=1;
+            if ( (LA78_0==60) ) {
+                alt78=1;
             }
-            switch (alt79) {
+            switch (alt78) {
                 case 1 :
                     // InternalRoom.g:6957:2: rule__Attribute__DocuAssignment_6
                     {
@@ -21165,13 +21154,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getStandardOperationAccess().getOverrideAssignment_0()); 
             // InternalRoom.g:7159:1: ( rule__StandardOperation__OverrideAssignment_0 )?
-            int alt80=2;
-            int LA80_0 = input.LA(1);
+            int alt79=2;
+            int LA79_0 = input.LA(1);
 
-            if ( (LA80_0==128) ) {
-                alt80=1;
+            if ( (LA79_0==128) ) {
+                alt79=1;
             }
-            switch (alt80) {
+            switch (alt79) {
                 case 1 :
                     // InternalRoom.g:7159:2: rule__StandardOperation__OverrideAssignment_0
                     {
@@ -21496,13 +21485,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getStandardOperationAccess().getGroup_4()); 
             // InternalRoom.g:7279:1: ( rule__StandardOperation__Group_4__0 )?
-            int alt81=2;
-            int LA81_0 = input.LA(1);
+            int alt80=2;
+            int LA80_0 = input.LA(1);
 
-            if ( (LA81_0==RULE_ID) ) {
-                alt81=1;
+            if ( (LA80_0==RULE_ID) ) {
+                alt80=1;
             }
-            switch (alt81) {
+            switch (alt80) {
                 case 1 :
                     // InternalRoom.g:7279:2: rule__StandardOperation__Group_4__0
                     {
@@ -21667,13 +21656,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getStandardOperationAccess().getGroup_6()); 
             // InternalRoom.g:7339:1: ( rule__StandardOperation__Group_6__0 )?
-            int alt82=2;
-            int LA82_0 = input.LA(1);
+            int alt81=2;
+            int LA81_0 = input.LA(1);
 
-            if ( (LA82_0==44) ) {
-                alt82=1;
+            if ( (LA81_0==44) ) {
+                alt81=1;
             }
-            switch (alt82) {
+            switch (alt81) {
                 case 1 :
                     // InternalRoom.g:7339:2: rule__StandardOperation__Group_6__0
                     {
@@ -21763,13 +21752,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getStandardOperationAccess().getDocuAssignment_7()); 
             // InternalRoom.g:7368:1: ( rule__StandardOperation__DocuAssignment_7 )?
-            int alt83=2;
-            int LA83_0 = input.LA(1);
+            int alt82=2;
+            int LA82_0 = input.LA(1);
 
-            if ( (LA83_0==60) ) {
-                alt83=1;
+            if ( (LA82_0==60) ) {
+                alt82=1;
             }
-            switch (alt83) {
+            switch (alt82) {
                 case 1 :
                     // InternalRoom.g:7368:2: rule__StandardOperation__DocuAssignment_7
                     {
@@ -22019,17 +22008,17 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getStandardOperationAccess().getGroup_4_1()); 
             // InternalRoom.g:7471:1: ( rule__StandardOperation__Group_4_1__0 )*
-            loop84:
+            loop83:
             do {
-                int alt84=2;
-                int LA84_0 = input.LA(1);
+                int alt83=2;
+                int LA83_0 = input.LA(1);
 
-                if ( (LA84_0==52) ) {
-                    alt84=1;
+                if ( (LA83_0==52) ) {
+                    alt83=1;
                 }
 
 
-                switch (alt84) {
+                switch (alt83) {
             	case 1 :
             	    // InternalRoom.g:7471:2: rule__StandardOperation__Group_4_1__0
             	    {
@@ -22043,7 +22032,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             	    break;
 
             	default :
-            	    break loop84;
+            	    break loop83;
                 }
             } while (true);
 
@@ -22667,13 +22656,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getPortOperationAccess().getGroup_3()); 
             // InternalRoom.g:7721:1: ( rule__PortOperation__Group_3__0 )?
-            int alt85=2;
-            int LA85_0 = input.LA(1);
+            int alt84=2;
+            int LA84_0 = input.LA(1);
 
-            if ( (LA85_0==RULE_ID) ) {
-                alt85=1;
+            if ( (LA84_0==RULE_ID) ) {
+                alt84=1;
             }
-            switch (alt85) {
+            switch (alt84) {
                 case 1 :
                     // InternalRoom.g:7721:2: rule__PortOperation__Group_3__0
                     {
@@ -22838,13 +22827,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getPortOperationAccess().getAlternatives_5()); 
             // InternalRoom.g:7781:1: ( rule__PortOperation__Alternatives_5 )?
-            int alt86=2;
-            int LA86_0 = input.LA(1);
+            int alt85=2;
+            int LA85_0 = input.LA(1);
 
-            if ( (LA86_0==44||LA86_0==63) ) {
-                alt86=1;
+            if ( (LA85_0==44||LA85_0==63) ) {
+                alt85=1;
             }
-            switch (alt86) {
+            switch (alt85) {
                 case 1 :
                     // InternalRoom.g:7781:2: rule__PortOperation__Alternatives_5
                     {
@@ -22934,13 +22923,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getPortOperationAccess().getDocuAssignment_6()); 
             // InternalRoom.g:7810:1: ( rule__PortOperation__DocuAssignment_6 )?
-            int alt87=2;
-            int LA87_0 = input.LA(1);
+            int alt86=2;
+            int LA86_0 = input.LA(1);
 
-            if ( (LA87_0==60) ) {
-                alt87=1;
+            if ( (LA86_0==60) ) {
+                alt86=1;
             }
-            switch (alt87) {
+            switch (alt86) {
                 case 1 :
                     // InternalRoom.g:7810:2: rule__PortOperation__DocuAssignment_6
                     {
@@ -23190,17 +23179,17 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getPortOperationAccess().getGroup_3_1()); 
             // InternalRoom.g:7911:1: ( rule__PortOperation__Group_3_1__0 )*
-            loop88:
+            loop87:
             do {
-                int alt88=2;
-                int LA88_0 = input.LA(1);
+                int alt87=2;
+                int LA87_0 = input.LA(1);
 
-                if ( (LA88_0==52) ) {
-                    alt88=1;
+                if ( (LA87_0==52) ) {
+                    alt87=1;
                 }
 
 
-                switch (alt88) {
+                switch (alt87) {
             	case 1 :
             	    // InternalRoom.g:7911:2: rule__PortOperation__Group_3_1__0
             	    {
@@ -23214,7 +23203,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             	    break;
 
             	default :
-            	    break loop88;
+            	    break loop87;
                 }
             } while (true);
 
@@ -23923,13 +23912,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getProtocolClassAccess().getCommTypeAssignment_0()); 
             // InternalRoom.g:8194:1: ( rule__ProtocolClass__CommTypeAssignment_0 )?
-            int alt89=2;
-            int LA89_0 = input.LA(1);
+            int alt88=2;
+            int LA88_0 = input.LA(1);
 
-            if ( ((LA89_0>=31 && LA89_0<=33)) ) {
-                alt89=1;
+            if ( ((LA88_0>=31 && LA88_0<=33)) ) {
+                alt88=1;
             }
-            switch (alt89) {
+            switch (alt88) {
                 case 1 :
                     // InternalRoom.g:8194:2: rule__ProtocolClass__CommTypeAssignment_0
                     {
@@ -24179,13 +24168,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getProtocolClassAccess().getDocuAssignment_3()); 
             // InternalRoom.g:8283:1: ( rule__ProtocolClass__DocuAssignment_3 )?
-            int alt90=2;
-            int LA90_0 = input.LA(1);
+            int alt89=2;
+            int LA89_0 = input.LA(1);
 
-            if ( (LA90_0==60) ) {
-                alt90=1;
+            if ( (LA89_0==60) ) {
+                alt89=1;
             }
-            switch (alt90) {
+            switch (alt89) {
                 case 1 :
                     // InternalRoom.g:8283:2: rule__ProtocolClass__DocuAssignment_3
                     {
@@ -24275,13 +24264,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getProtocolClassAccess().getGroup_4()); 
             // InternalRoom.g:8312:1: ( rule__ProtocolClass__Group_4__0 )?
-            int alt91=2;
-            int LA91_0 = input.LA(1);
+            int alt90=2;
+            int LA90_0 = input.LA(1);
 
-            if ( (LA91_0==55) ) {
-                alt91=1;
+            if ( (LA90_0==55) ) {
+                alt90=1;
             }
-            switch (alt91) {
+            switch (alt90) {
                 case 1 :
                     // InternalRoom.g:8312:2: rule__ProtocolClass__Group_4__0
                     {
@@ -24446,17 +24435,17 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getProtocolClassAccess().getAnnotationsAssignment_6()); 
             // InternalRoom.g:8372:1: ( rule__ProtocolClass__AnnotationsAssignment_6 )*
-            loop92:
+            loop91:
             do {
-                int alt92=2;
-                int LA92_0 = input.LA(1);
+                int alt91=2;
+                int LA91_0 = input.LA(1);
 
-                if ( (LA92_0==121) ) {
-                    alt92=1;
+                if ( (LA91_0==121) ) {
+                    alt91=1;
                 }
 
 
-                switch (alt92) {
+                switch (alt91) {
             	case 1 :
             	    // InternalRoom.g:8372:2: rule__ProtocolClass__AnnotationsAssignment_6
             	    {
@@ -24470,7 +24459,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             	    break;
 
             	default :
-            	    break loop92;
+            	    break loop91;
                 }
             } while (true);
 
@@ -24549,13 +24538,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getProtocolClassAccess().getGroup_7()); 
             // InternalRoom.g:8401:1: ( rule__ProtocolClass__Group_7__0 )?
-            int alt93=2;
-            int LA93_0 = input.LA(1);
+            int alt92=2;
+            int LA92_0 = input.LA(1);
 
-            if ( (LA93_0==56) ) {
-                alt93=1;
+            if ( (LA92_0==56) ) {
+                alt92=1;
             }
-            switch (alt93) {
+            switch (alt92) {
                 case 1 :
                     // InternalRoom.g:8401:2: rule__ProtocolClass__Group_7__0
                     {
@@ -24645,13 +24634,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getProtocolClassAccess().getGroup_8()); 
             // InternalRoom.g:8430:1: ( rule__ProtocolClass__Group_8__0 )?
-            int alt94=2;
-            int LA94_0 = input.LA(1);
+            int alt93=2;
+            int LA93_0 = input.LA(1);
 
-            if ( (LA94_0==57) ) {
-                alt94=1;
+            if ( (LA93_0==57) ) {
+                alt93=1;
             }
-            switch (alt94) {
+            switch (alt93) {
                 case 1 :
                     // InternalRoom.g:8430:2: rule__ProtocolClass__Group_8__0
                     {
@@ -24741,13 +24730,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getProtocolClassAccess().getGroup_9()); 
             // InternalRoom.g:8459:1: ( rule__ProtocolClass__Group_9__0 )?
-            int alt95=2;
-            int LA95_0 = input.LA(1);
+            int alt94=2;
+            int LA94_0 = input.LA(1);
 
-            if ( (LA95_0==58) ) {
-                alt95=1;
+            if ( (LA94_0==58) ) {
+                alt94=1;
             }
-            switch (alt95) {
+            switch (alt94) {
                 case 1 :
                     // InternalRoom.g:8459:2: rule__ProtocolClass__Group_9__0
                     {
@@ -24837,13 +24826,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getProtocolClassAccess().getGroup_10()); 
             // InternalRoom.g:8488:1: ( rule__ProtocolClass__Group_10__0 )?
-            int alt96=2;
-            int LA96_0 = input.LA(1);
+            int alt95=2;
+            int LA95_0 = input.LA(1);
 
-            if ( (LA96_0==64) ) {
-                alt96=1;
+            if ( (LA95_0==64) ) {
+                alt95=1;
             }
-            switch (alt96) {
+            switch (alt95) {
                 case 1 :
                     // InternalRoom.g:8488:2: rule__ProtocolClass__Group_10__0
                     {
@@ -24933,13 +24922,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getProtocolClassAccess().getGroup_11()); 
             // InternalRoom.g:8517:1: ( rule__ProtocolClass__Group_11__0 )?
-            int alt97=2;
-            int LA97_0 = input.LA(1);
+            int alt96=2;
+            int LA96_0 = input.LA(1);
 
-            if ( (LA97_0==65) ) {
-                alt97=1;
+            if ( (LA96_0==65) ) {
+                alt96=1;
             }
-            switch (alt97) {
+            switch (alt96) {
                 case 1 :
                     // InternalRoom.g:8517:2: rule__ProtocolClass__Group_11__0
                     {
@@ -25029,13 +25018,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getProtocolClassAccess().getGroup_12()); 
             // InternalRoom.g:8546:1: ( rule__ProtocolClass__Group_12__0 )?
-            int alt98=2;
-            int LA98_0 = input.LA(1);
+            int alt97=2;
+            int LA97_0 = input.LA(1);
 
-            if ( (LA98_0==66) ) {
-                alt98=1;
+            if ( (LA97_0==66) ) {
+                alt97=1;
             }
-            switch (alt98) {
+            switch (alt97) {
                 case 1 :
                     // InternalRoom.g:8546:2: rule__ProtocolClass__Group_12__0
                     {
@@ -25125,13 +25114,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getProtocolClassAccess().getGroup_13()); 
             // InternalRoom.g:8575:1: ( rule__ProtocolClass__Group_13__0 )?
-            int alt99=2;
-            int LA99_0 = input.LA(1);
+            int alt98=2;
+            int LA98_0 = input.LA(1);
 
-            if ( (LA99_0==68) ) {
-                alt99=1;
+            if ( (LA98_0==68) ) {
+                alt98=1;
             }
-            switch (alt99) {
+            switch (alt98) {
                 case 1 :
                     // InternalRoom.g:8575:2: rule__ProtocolClass__Group_13__0
                     {
@@ -25221,13 +25210,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getProtocolClassAccess().getSemanticsAssignment_14()); 
             // InternalRoom.g:8604:1: ( rule__ProtocolClass__SemanticsAssignment_14 )?
-            int alt100=2;
-            int LA100_0 = input.LA(1);
+            int alt99=2;
+            int LA99_0 = input.LA(1);
 
-            if ( (LA100_0==118) ) {
-                alt100=1;
+            if ( (LA99_0==118) ) {
+                alt99=1;
             }
-            switch (alt100) {
+            switch (alt99) {
                 case 1 :
                     // InternalRoom.g:8604:2: rule__ProtocolClass__SemanticsAssignment_14
                     {
@@ -26157,17 +26146,17 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getProtocolClassAccess().getIncomingMessagesAssignment_10_2()); 
             // InternalRoom.g:9009:1: ( rule__ProtocolClass__IncomingMessagesAssignment_10_2 )*
-            loop101:
+            loop100:
             do {
-                int alt101=2;
-                int LA101_0 = input.LA(1);
+                int alt100=2;
+                int LA100_0 = input.LA(1);
 
-                if ( (LA101_0==70||LA101_0==129) ) {
-                    alt101=1;
+                if ( (LA100_0==70||LA100_0==129) ) {
+                    alt100=1;
                 }
 
 
-                switch (alt101) {
+                switch (alt100) {
             	case 1 :
             	    // InternalRoom.g:9009:2: rule__ProtocolClass__IncomingMessagesAssignment_10_2
             	    {
@@ -26181,7 +26170,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             	    break;
 
             	default :
-            	    break loop101;
+            	    break loop100;
                 }
             } while (true);
 
@@ -26480,17 +26469,17 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getProtocolClassAccess().getOutgoingMessagesAssignment_11_2()); 
             // InternalRoom.g:9138:1: ( rule__ProtocolClass__OutgoingMessagesAssignment_11_2 )*
-            loop102:
+            loop101:
             do {
-                int alt102=2;
-                int LA102_0 = input.LA(1);
+                int alt101=2;
+                int LA101_0 = input.LA(1);
 
-                if ( (LA102_0==70||LA102_0==129) ) {
-                    alt102=1;
+                if ( (LA101_0==70||LA101_0==129) ) {
+                    alt101=1;
                 }
 
 
-                switch (alt102) {
+                switch (alt101) {
             	case 1 :
             	    // InternalRoom.g:9138:2: rule__ProtocolClass__OutgoingMessagesAssignment_11_2
             	    {
@@ -26504,7 +26493,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             	    break;
 
             	default :
-            	    break loop102;
+            	    break loop101;
                 }
             } while (true);
 
@@ -27273,13 +27262,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getCompoundProtocolClassAccess().getDocuAssignment_2()); 
             // InternalRoom.g:9457:1: ( rule__CompoundProtocolClass__DocuAssignment_2 )?
-            int alt103=2;
-            int LA103_0 = input.LA(1);
+            int alt102=2;
+            int LA102_0 = input.LA(1);
 
-            if ( (LA103_0==60) ) {
-                alt103=1;
+            if ( (LA102_0==60) ) {
+                alt102=1;
             }
-            switch (alt103) {
+            switch (alt102) {
                 case 1 :
                     // InternalRoom.g:9457:2: rule__CompoundProtocolClass__DocuAssignment_2
                     {
@@ -27444,17 +27433,17 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getCompoundProtocolClassAccess().getAnnotationsAssignment_4()); 
             // InternalRoom.g:9517:1: ( rule__CompoundProtocolClass__AnnotationsAssignment_4 )*
-            loop104:
+            loop103:
             do {
-                int alt104=2;
-                int LA104_0 = input.LA(1);
+                int alt103=2;
+                int LA103_0 = input.LA(1);
 
-                if ( (LA104_0==121) ) {
-                    alt104=1;
+                if ( (LA103_0==121) ) {
+                    alt103=1;
                 }
 
 
-                switch (alt104) {
+                switch (alt103) {
             	case 1 :
             	    // InternalRoom.g:9517:2: rule__CompoundProtocolClass__AnnotationsAssignment_4
             	    {
@@ -27468,7 +27457,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             	    break;
 
             	default :
-            	    break loop104;
+            	    break loop103;
                 }
             } while (true);
 
@@ -27547,17 +27536,17 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getCompoundProtocolClassAccess().getSubProtocolsAssignment_5()); 
             // InternalRoom.g:9546:1: ( rule__CompoundProtocolClass__SubProtocolsAssignment_5 )*
-            loop105:
+            loop104:
             do {
-                int alt105=2;
-                int LA105_0 = input.LA(1);
+                int alt104=2;
+                int LA104_0 = input.LA(1);
 
-                if ( (LA105_0==69) ) {
-                    alt105=1;
+                if ( (LA104_0==69) ) {
+                    alt104=1;
                 }
 
 
-                switch (alt105) {
+                switch (alt104) {
             	case 1 :
             	    // InternalRoom.g:9546:2: rule__CompoundProtocolClass__SubProtocolsAssignment_5
             	    {
@@ -27571,7 +27560,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             	    break;
 
             	default :
-            	    break loop105;
+            	    break loop104;
                 }
             } while (true);
 
@@ -28035,13 +28024,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getMessageAccess().getPrivAssignment_0()); 
             // InternalRoom.g:9746:1: ( rule__Message__PrivAssignment_0 )?
-            int alt106=2;
-            int LA106_0 = input.LA(1);
+            int alt105=2;
+            int LA105_0 = input.LA(1);
 
-            if ( (LA106_0==129) ) {
-                alt106=1;
+            if ( (LA105_0==129) ) {
+                alt105=1;
             }
-            switch (alt106) {
+            switch (alt105) {
                 case 1 :
                     // InternalRoom.g:9746:2: rule__Message__PrivAssignment_0
                     {
@@ -28366,13 +28355,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getMessageAccess().getDataAssignment_4()); 
             // InternalRoom.g:9866:1: ( rule__Message__DataAssignment_4 )?
-            int alt107=2;
-            int LA107_0 = input.LA(1);
+            int alt106=2;
+            int LA106_0 = input.LA(1);
 
-            if ( (LA107_0==RULE_ID) ) {
-                alt107=1;
+            if ( (LA106_0==RULE_ID) ) {
+                alt106=1;
             }
-            switch (alt107) {
+            switch (alt106) {
                 case 1 :
                     // InternalRoom.g:9866:2: rule__Message__DataAssignment_4
                     {
@@ -28532,13 +28521,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getMessageAccess().getDocuAssignment_6()); 
             // InternalRoom.g:9925:1: ( rule__Message__DocuAssignment_6 )?
-            int alt108=2;
-            int LA108_0 = input.LA(1);
+            int alt107=2;
+            int LA107_0 = input.LA(1);
 
-            if ( (LA108_0==60) ) {
-                alt108=1;
+            if ( (LA107_0==60) ) {
+                alt107=1;
             }
-            switch (alt108) {
+            switch (alt107) {
                 case 1 :
                     // InternalRoom.g:9925:2: rule__Message__DocuAssignment_6
                     {
@@ -28778,13 +28767,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getPortClassAccess().getGroup_2()); 
             // InternalRoom.g:10030:1: ( rule__PortClass__Group_2__0 )?
-            int alt109=2;
-            int LA109_0 = input.LA(1);
+            int alt108=2;
+            int LA108_0 = input.LA(1);
 
-            if ( (LA109_0==71) ) {
-                alt109=1;
+            if ( (LA108_0==71) ) {
+                alt108=1;
             }
-            switch (alt109) {
+            switch (alt108) {
                 case 1 :
                     // InternalRoom.g:10030:2: rule__PortClass__Group_2__0
                     {
@@ -28874,17 +28863,17 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getPortClassAccess().getAlternatives_3()); 
             // InternalRoom.g:10059:1: ( rule__PortClass__Alternatives_3 )*
-            loop110:
+            loop109:
             do {
-                int alt110=2;
-                int LA110_0 = input.LA(1);
+                int alt109=2;
+                int LA109_0 = input.LA(1);
 
-                if ( (LA110_0==59||LA110_0==62||LA110_0==72) ) {
-                    alt110=1;
+                if ( (LA109_0==59||LA109_0==62||LA109_0==72) ) {
+                    alt109=1;
                 }
 
 
-                switch (alt110) {
+                switch (alt109) {
             	case 1 :
             	    // InternalRoom.g:10059:2: rule__PortClass__Alternatives_3
             	    {
@@ -28898,7 +28887,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             	    break;
 
             	default :
-            	    break loop110;
+            	    break loop109;
                 }
             } while (true);
 
@@ -30077,13 +30066,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getActorClassAccess().getDocuAssignment_3()); 
             // InternalRoom.g:10534:1: ( rule__ActorClass__DocuAssignment_3 )?
-            int alt111=2;
-            int LA111_0 = input.LA(1);
+            int alt110=2;
+            int LA110_0 = input.LA(1);
 
-            if ( (LA111_0==60) ) {
-                alt111=1;
+            if ( (LA110_0==60) ) {
+                alt110=1;
             }
-            switch (alt111) {
+            switch (alt110) {
                 case 1 :
                     // InternalRoom.g:10534:2: rule__ActorClass__DocuAssignment_3
                     {
@@ -30173,13 +30162,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getActorClassAccess().getGroup_4()); 
             // InternalRoom.g:10563:1: ( rule__ActorClass__Group_4__0 )?
-            int alt112=2;
-            int LA112_0 = input.LA(1);
+            int alt111=2;
+            int LA111_0 = input.LA(1);
 
-            if ( (LA112_0==55) ) {
-                alt112=1;
+            if ( (LA111_0==55) ) {
+                alt111=1;
             }
-            switch (alt112) {
+            switch (alt111) {
                 case 1 :
                     // InternalRoom.g:10563:2: rule__ActorClass__Group_4__0
                     {
@@ -30344,17 +30333,17 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getActorClassAccess().getAnnotationsAssignment_6()); 
             // InternalRoom.g:10623:1: ( rule__ActorClass__AnnotationsAssignment_6 )*
-            loop113:
+            loop112:
             do {
-                int alt113=2;
-                int LA113_0 = input.LA(1);
+                int alt112=2;
+                int LA112_0 = input.LA(1);
 
-                if ( (LA113_0==121) ) {
-                    alt113=1;
+                if ( (LA112_0==121) ) {
+                    alt112=1;
                 }
 
 
-                switch (alt113) {
+                switch (alt112) {
             	case 1 :
             	    // InternalRoom.g:10623:2: rule__ActorClass__AnnotationsAssignment_6
             	    {
@@ -30368,7 +30357,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             	    break;
 
             	default :
-            	    break loop113;
+            	    break loop112;
                 }
             } while (true);
 
@@ -30447,13 +30436,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getActorClassAccess().getGroup_7()); 
             // InternalRoom.g:10652:1: ( rule__ActorClass__Group_7__0 )?
-            int alt114=2;
-            int LA114_0 = input.LA(1);
+            int alt113=2;
+            int LA113_0 = input.LA(1);
 
-            if ( (LA114_0==73) ) {
-                alt114=1;
+            if ( (LA113_0==73) ) {
+                alt113=1;
             }
-            switch (alt114) {
+            switch (alt113) {
                 case 1 :
                     // InternalRoom.g:10652:2: rule__ActorClass__Group_7__0
                     {
@@ -30543,13 +30532,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getActorClassAccess().getGroup_8()); 
             // InternalRoom.g:10681:1: ( rule__ActorClass__Group_8__0 )?
-            int alt115=2;
-            int LA115_0 = input.LA(1);
+            int alt114=2;
+            int LA114_0 = input.LA(1);
 
-            if ( (LA115_0==74) ) {
-                alt115=1;
+            if ( (LA114_0==74) ) {
+                alt114=1;
             }
-            switch (alt115) {
+            switch (alt114) {
                 case 1 :
                     // InternalRoom.g:10681:2: rule__ActorClass__Group_8__0
                     {
@@ -30639,13 +30628,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getActorClassAccess().getGroup_9()); 
             // InternalRoom.g:10710:1: ( rule__ActorClass__Group_9__0 )?
-            int alt116=2;
-            int LA116_0 = input.LA(1);
+            int alt115=2;
+            int LA115_0 = input.LA(1);
 
-            if ( (LA116_0==75) ) {
-                alt116=1;
+            if ( (LA115_0==75) ) {
+                alt115=1;
             }
-            switch (alt116) {
+            switch (alt115) {
                 case 1 :
                     // InternalRoom.g:10710:2: rule__ActorClass__Group_9__0
                     {
@@ -31110,17 +31099,17 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getActorClassAccess().getAlternatives_7_2()); 
             // InternalRoom.g:10916:1: ( rule__ActorClass__Alternatives_7_2 )*
-            loop117:
+            loop116:
             do {
-                int alt117=2;
-                int LA117_0 = input.LA(1);
+                int alt116=2;
+                int LA116_0 = input.LA(1);
 
-                if ( (LA117_0==68||LA117_0==76||LA117_0==79) ) {
-                    alt117=1;
+                if ( (LA116_0==68||LA116_0==76||LA116_0==79) ) {
+                    alt116=1;
                 }
 
 
-                switch (alt117) {
+                switch (alt116) {
             	case 1 :
             	    // InternalRoom.g:10916:2: rule__ActorClass__Alternatives_7_2
             	    {
@@ -31134,7 +31123,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             	    break;
 
             	default :
-            	    break loop117;
+            	    break loop116;
                 }
             } while (true);
 
@@ -31358,13 +31347,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getActorClassAccess().getStructureDocuAssignment_8_1()); 
             // InternalRoom.g:11014:1: ( rule__ActorClass__StructureDocuAssignment_8_1 )?
-            int alt118=2;
-            int LA118_0 = input.LA(1);
+            int alt117=2;
+            int LA117_0 = input.LA(1);
 
-            if ( (LA118_0==60) ) {
-                alt118=1;
+            if ( (LA117_0==60) ) {
+                alt117=1;
             }
-            switch (alt118) {
+            switch (alt117) {
                 case 1 :
                     // InternalRoom.g:11014:2: rule__ActorClass__StructureDocuAssignment_8_1
                     {
@@ -31529,13 +31518,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getActorClassAccess().getGroup_8_3()); 
             // InternalRoom.g:11074:1: ( rule__ActorClass__Group_8_3__0 )?
-            int alt119=2;
-            int LA119_0 = input.LA(1);
+            int alt118=2;
+            int LA118_0 = input.LA(1);
 
-            if ( (LA119_0==56) ) {
-                alt119=1;
+            if ( (LA118_0==56) ) {
+                alt118=1;
             }
-            switch (alt119) {
+            switch (alt118) {
                 case 1 :
                     // InternalRoom.g:11074:2: rule__ActorClass__Group_8_3__0
                     {
@@ -31625,13 +31614,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getActorClassAccess().getGroup_8_4()); 
             // InternalRoom.g:11103:1: ( rule__ActorClass__Group_8_4__0 )?
-            int alt120=2;
-            int LA120_0 = input.LA(1);
+            int alt119=2;
+            int LA119_0 = input.LA(1);
 
-            if ( (LA120_0==57) ) {
-                alt120=1;
+            if ( (LA119_0==57) ) {
+                alt119=1;
             }
-            switch (alt120) {
+            switch (alt119) {
                 case 1 :
                     // InternalRoom.g:11103:2: rule__ActorClass__Group_8_4__0
                     {
@@ -31721,13 +31710,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getActorClassAccess().getGroup_8_5()); 
             // InternalRoom.g:11132:1: ( rule__ActorClass__Group_8_5__0 )?
-            int alt121=2;
-            int LA121_0 = input.LA(1);
+            int alt120=2;
+            int LA120_0 = input.LA(1);
 
-            if ( (LA121_0==58) ) {
-                alt121=1;
+            if ( (LA120_0==58) ) {
+                alt120=1;
             }
-            switch (alt121) {
+            switch (alt120) {
                 case 1 :
                     // InternalRoom.g:11132:2: rule__ActorClass__Group_8_5__0
                     {
@@ -31817,17 +31806,17 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getActorClassAccess().getAlternatives_8_6()); 
             // InternalRoom.g:11161:1: ( rule__ActorClass__Alternatives_8_6 )*
-            loop122:
+            loop121:
             do {
-                int alt122=2;
-                int LA122_0 = input.LA(1);
+                int alt121=2;
+                int LA121_0 = input.LA(1);
 
-                if ( ((LA122_0>=34 && LA122_0<=35)||LA122_0==59||LA122_0==68||(LA122_0>=76 && LA122_0<=78)||LA122_0==80||LA122_0==85||LA122_0==89||LA122_0==93) ) {
-                    alt122=1;
+                if ( ((LA121_0>=34 && LA121_0<=35)||LA121_0==59||LA121_0==68||(LA121_0>=76 && LA121_0<=78)||LA121_0==80||LA121_0==85||LA121_0==89||LA121_0==93) ) {
+                    alt121=1;
                 }
 
 
-                switch (alt122) {
+                switch (alt121) {
             	case 1 :
             	    // InternalRoom.g:11161:2: rule__ActorClass__Alternatives_8_6
             	    {
@@ -31841,7 +31830,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             	    break;
 
             	default :
-            	    break loop122;
+            	    break loop121;
                 }
             } while (true);
 
@@ -32530,13 +32519,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getActorClassAccess().getBehaviorDocuAssignment_9_1()); 
             // InternalRoom.g:11456:1: ( rule__ActorClass__BehaviorDocuAssignment_9_1 )?
-            int alt123=2;
-            int LA123_0 = input.LA(1);
+            int alt122=2;
+            int LA122_0 = input.LA(1);
 
-            if ( (LA123_0==60) ) {
-                alt123=1;
+            if ( (LA122_0==60) ) {
+                alt122=1;
             }
-            switch (alt123) {
+            switch (alt122) {
                 case 1 :
                     // InternalRoom.g:11456:2: rule__ActorClass__BehaviorDocuAssignment_9_1
                     {
@@ -32701,17 +32690,17 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getActorClassAccess().getBehaviorAnnotationsAssignment_9_3()); 
             // InternalRoom.g:11516:1: ( rule__ActorClass__BehaviorAnnotationsAssignment_9_3 )*
-            loop124:
+            loop123:
             do {
-                int alt124=2;
-                int LA124_0 = input.LA(1);
+                int alt123=2;
+                int LA123_0 = input.LA(1);
 
-                if ( (LA124_0==121) ) {
-                    alt124=1;
+                if ( (LA123_0==121) ) {
+                    alt123=1;
                 }
 
 
-                switch (alt124) {
+                switch (alt123) {
             	case 1 :
             	    // InternalRoom.g:11516:2: rule__ActorClass__BehaviorAnnotationsAssignment_9_3
             	    {
@@ -32725,7 +32714,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             	    break;
 
             	default :
-            	    break loop124;
+            	    break loop123;
                 }
             } while (true);
 
@@ -32804,17 +32793,17 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getActorClassAccess().getAlternatives_9_4()); 
             // InternalRoom.g:11545:1: ( rule__ActorClass__Alternatives_9_4 )*
-            loop125:
+            loop124:
             do {
-                int alt125=2;
-                int LA125_0 = input.LA(1);
+                int alt124=2;
+                int LA124_0 = input.LA(1);
 
-                if ( ((LA125_0>=14 && LA125_0<=15)||LA125_0==62||LA125_0==128) ) {
-                    alt125=1;
+                if ( ((LA124_0>=14 && LA124_0<=15)||LA124_0==62||LA124_0==128) ) {
+                    alt124=1;
                 }
 
 
-                switch (alt125) {
+                switch (alt124) {
             	case 1 :
             	    // InternalRoom.g:11545:2: rule__ActorClass__Alternatives_9_4
             	    {
@@ -32828,7 +32817,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             	    break;
 
             	default :
-            	    break loop125;
+            	    break loop124;
                 }
             } while (true);
 
@@ -32907,13 +32896,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getActorClassAccess().getStateMachineAssignment_9_5()); 
             // InternalRoom.g:11574:1: ( rule__ActorClass__StateMachineAssignment_9_5 )?
-            int alt126=2;
-            int LA126_0 = input.LA(1);
+            int alt125=2;
+            int LA125_0 = input.LA(1);
 
-            if ( (LA126_0==94) ) {
-                alt126=1;
+            if ( (LA125_0==94) ) {
+                alt125=1;
             }
-            switch (alt126) {
+            switch (alt125) {
                 case 1 :
                     // InternalRoom.g:11574:2: rule__ActorClass__StateMachineAssignment_9_5
                     {
@@ -33073,13 +33062,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getPortAccess().getConjugatedAssignment_0()); 
             // InternalRoom.g:11647:1: ( rule__Port__ConjugatedAssignment_0 )?
-            int alt127=2;
-            int LA127_0 = input.LA(1);
+            int alt126=2;
+            int LA126_0 = input.LA(1);
 
-            if ( (LA127_0==68) ) {
-                alt127=1;
+            if ( (LA126_0==68) ) {
+                alt126=1;
             }
-            switch (alt127) {
+            switch (alt126) {
                 case 1 :
                     // InternalRoom.g:11647:2: rule__Port__ConjugatedAssignment_0
                     {
@@ -33329,13 +33318,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getPortAccess().getMultiplicityAssignment_3()); 
             // InternalRoom.g:11736:1: ( rule__Port__MultiplicityAssignment_3 )?
-            int alt128=2;
-            int LA128_0 = input.LA(1);
+            int alt127=2;
+            int LA127_0 = input.LA(1);
 
-            if ( (LA128_0==60) ) {
-                alt128=1;
+            if ( (LA127_0==60) ) {
+                alt127=1;
             }
-            switch (alt128) {
+            switch (alt127) {
                 case 1 :
                     // InternalRoom.g:11736:2: rule__Port__MultiplicityAssignment_3
                     {
@@ -33580,13 +33569,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getPortAccess().getDocuAssignment_6()); 
             // InternalRoom.g:11824:1: ( rule__Port__DocuAssignment_6 )?
-            int alt129=2;
-            int LA129_0 = input.LA(1);
+            int alt128=2;
+            int LA128_0 = input.LA(1);
 
-            if ( (LA129_0==60) ) {
-                alt129=1;
+            if ( (LA128_0==60) ) {
+                alt128=1;
             }
-            switch (alt129) {
+            switch (alt128) {
                 case 1 :
                     // InternalRoom.g:11824:2: rule__Port__DocuAssignment_6
                     {
@@ -34926,13 +34915,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getLogicalSystemAccess().getDocuAssignment_2()); 
             // InternalRoom.g:12373:1: ( rule__LogicalSystem__DocuAssignment_2 )?
-            int alt130=2;
-            int LA130_0 = input.LA(1);
+            int alt129=2;
+            int LA129_0 = input.LA(1);
 
-            if ( (LA130_0==60) ) {
-                alt130=1;
+            if ( (LA129_0==60) ) {
+                alt129=1;
             }
-            switch (alt130) {
+            switch (alt129) {
                 case 1 :
                     // InternalRoom.g:12373:2: rule__LogicalSystem__DocuAssignment_2
                     {
@@ -35097,17 +35086,17 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getLogicalSystemAccess().getAnnotationsAssignment_4()); 
             // InternalRoom.g:12433:1: ( rule__LogicalSystem__AnnotationsAssignment_4 )*
-            loop131:
+            loop130:
             do {
-                int alt131=2;
-                int LA131_0 = input.LA(1);
+                int alt130=2;
+                int LA130_0 = input.LA(1);
 
-                if ( (LA131_0==121) ) {
-                    alt131=1;
+                if ( (LA130_0==121) ) {
+                    alt130=1;
                 }
 
 
-                switch (alt131) {
+                switch (alt130) {
             	case 1 :
             	    // InternalRoom.g:12433:2: rule__LogicalSystem__AnnotationsAssignment_4
             	    {
@@ -35121,7 +35110,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             	    break;
 
             	default :
-            	    break loop131;
+            	    break loop130;
                 }
             } while (true);
 
@@ -35200,17 +35189,17 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getLogicalSystemAccess().getAlternatives_5()); 
             // InternalRoom.g:12462:1: ( rule__LogicalSystem__Alternatives_5 )*
-            loop132:
+            loop131:
             do {
-                int alt132=2;
-                int LA132_0 = input.LA(1);
+                int alt131=2;
+                int LA131_0 = input.LA(1);
 
-                if ( (LA132_0==81||LA132_0==85||LA132_0==89) ) {
-                    alt132=1;
+                if ( (LA131_0==81||LA131_0==85||LA131_0==89) ) {
+                    alt131=1;
                 }
 
 
-                switch (alt132) {
+                switch (alt131) {
             	case 1 :
             	    // InternalRoom.g:12462:2: rule__LogicalSystem__Alternatives_5
             	    {
@@ -35224,7 +35213,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             	    break;
 
             	default :
-            	    break loop132;
+            	    break loop131;
                 }
             } while (true);
 
@@ -35688,13 +35677,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getSubSystemRefAccess().getDocuAssignment_4()); 
             // InternalRoom.g:12654:1: ( rule__SubSystemRef__DocuAssignment_4 )?
-            int alt133=2;
-            int LA133_0 = input.LA(1);
+            int alt132=2;
+            int LA132_0 = input.LA(1);
 
-            if ( (LA133_0==60) ) {
-                alt133=1;
+            if ( (LA132_0==60) ) {
+                alt132=1;
             }
-            switch (alt133) {
+            switch (alt132) {
                 case 1 :
                     // InternalRoom.g:12654:2: rule__SubSystemRef__DocuAssignment_4
                     {
@@ -35944,13 +35933,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getSubSystemClassAccess().getDocuAssignment_2()); 
             // InternalRoom.g:12753:1: ( rule__SubSystemClass__DocuAssignment_2 )?
-            int alt134=2;
-            int LA134_0 = input.LA(1);
+            int alt133=2;
+            int LA133_0 = input.LA(1);
 
-            if ( (LA134_0==60) ) {
-                alt134=1;
+            if ( (LA133_0==60) ) {
+                alt133=1;
             }
-            switch (alt134) {
+            switch (alt133) {
                 case 1 :
                     // InternalRoom.g:12753:2: rule__SubSystemClass__DocuAssignment_2
                     {
@@ -36115,17 +36104,17 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getSubSystemClassAccess().getAnnotationsAssignment_4()); 
             // InternalRoom.g:12813:1: ( rule__SubSystemClass__AnnotationsAssignment_4 )*
-            loop135:
+            loop134:
             do {
-                int alt135=2;
-                int LA135_0 = input.LA(1);
+                int alt134=2;
+                int LA134_0 = input.LA(1);
 
-                if ( (LA135_0==121) ) {
-                    alt135=1;
+                if ( (LA134_0==121) ) {
+                    alt134=1;
                 }
 
 
-                switch (alt135) {
+                switch (alt134) {
             	case 1 :
             	    // InternalRoom.g:12813:2: rule__SubSystemClass__AnnotationsAssignment_4
             	    {
@@ -36139,7 +36128,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             	    break;
 
             	default :
-            	    break loop135;
+            	    break loop134;
                 }
             } while (true);
 
@@ -36218,13 +36207,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getSubSystemClassAccess().getGroup_5()); 
             // InternalRoom.g:12842:1: ( rule__SubSystemClass__Group_5__0 )?
-            int alt136=2;
-            int LA136_0 = input.LA(1);
+            int alt135=2;
+            int LA135_0 = input.LA(1);
 
-            if ( (LA136_0==56) ) {
-                alt136=1;
+            if ( (LA135_0==56) ) {
+                alt135=1;
             }
-            switch (alt136) {
+            switch (alt135) {
                 case 1 :
                     // InternalRoom.g:12842:2: rule__SubSystemClass__Group_5__0
                     {
@@ -36314,13 +36303,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getSubSystemClassAccess().getGroup_6()); 
             // InternalRoom.g:12871:1: ( rule__SubSystemClass__Group_6__0 )?
-            int alt137=2;
-            int LA137_0 = input.LA(1);
+            int alt136=2;
+            int LA136_0 = input.LA(1);
 
-            if ( (LA137_0==57) ) {
-                alt137=1;
+            if ( (LA136_0==57) ) {
+                alt136=1;
             }
-            switch (alt137) {
+            switch (alt136) {
                 case 1 :
                     // InternalRoom.g:12871:2: rule__SubSystemClass__Group_6__0
                     {
@@ -36410,13 +36399,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getSubSystemClassAccess().getGroup_7()); 
             // InternalRoom.g:12900:1: ( rule__SubSystemClass__Group_7__0 )?
-            int alt138=2;
-            int LA138_0 = input.LA(1);
+            int alt137=2;
+            int LA137_0 = input.LA(1);
 
-            if ( (LA138_0==58) ) {
-                alt138=1;
+            if ( (LA137_0==58) ) {
+                alt137=1;
             }
-            switch (alt138) {
+            switch (alt137) {
                 case 1 :
                     // InternalRoom.g:12900:2: rule__SubSystemClass__Group_7__0
                     {
@@ -36506,17 +36495,17 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getSubSystemClassAccess().getAlternatives_8()); 
             // InternalRoom.g:12929:1: ( rule__SubSystemClass__Alternatives_8 )*
-            loop139:
+            loop138:
             do {
-                int alt139=2;
-                int LA139_0 = input.LA(1);
+                int alt138=2;
+                int LA138_0 = input.LA(1);
 
-                if ( ((LA139_0>=34 && LA139_0<=35)||LA139_0==68||LA139_0==76||LA139_0==79||(LA139_0>=82 && LA139_0<=83)||LA139_0==85||LA139_0==89||LA139_0==93) ) {
-                    alt139=1;
+                if ( ((LA138_0>=34 && LA138_0<=35)||LA138_0==68||LA138_0==76||LA138_0==79||(LA138_0>=82 && LA138_0<=83)||LA138_0==85||LA138_0==89||LA138_0==93) ) {
+                    alt138=1;
                 }
 
 
-                switch (alt139) {
+                switch (alt138) {
             	case 1 :
             	    // InternalRoom.g:12929:2: rule__SubSystemClass__Alternatives_8
             	    {
@@ -36530,7 +36519,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             	    break;
 
             	default :
-            	    break loop139;
+            	    break loop138;
                 }
             } while (true);
 
@@ -37614,13 +37603,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getActorInstanceMappingAccess().getGroup_4()); 
             // InternalRoom.g:13379:1: ( rule__ActorInstanceMapping__Group_4__0 )?
-            int alt140=2;
-            int LA140_0 = input.LA(1);
+            int alt139=2;
+            int LA139_0 = input.LA(1);
 
-            if ( (LA140_0==42) ) {
-                alt140=1;
+            if ( (LA139_0==42) ) {
+                alt139=1;
             }
-            switch (alt140) {
+            switch (alt139) {
                 case 1 :
                     // InternalRoom.g:13379:2: rule__ActorInstanceMapping__Group_4__0
                     {
@@ -37785,17 +37774,17 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getActorInstanceMappingAccess().getActorInstanceMappingsAssignment_4_1()); 
             // InternalRoom.g:13449:1: ( rule__ActorInstanceMapping__ActorInstanceMappingsAssignment_4_1 )*
-            loop141:
+            loop140:
             do {
-                int alt141=2;
-                int LA141_0 = input.LA(1);
+                int alt140=2;
+                int LA140_0 = input.LA(1);
 
-                if ( (LA141_0==83) ) {
-                    alt141=1;
+                if ( (LA140_0==83) ) {
+                    alt140=1;
                 }
 
 
-                switch (alt141) {
+                switch (alt140) {
             	case 1 :
             	    // InternalRoom.g:13449:2: rule__ActorInstanceMapping__ActorInstanceMappingsAssignment_4_1
             	    {
@@ -37809,7 +37798,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             	    break;
 
             	default :
-            	    break loop141;
+            	    break loop140;
                 }
             } while (true);
 
@@ -38038,17 +38027,17 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getRefPathAccess().getGroup_1()); 
             // InternalRoom.g:13542:1: ( rule__RefPath__Group_1__0 )*
-            loop142:
+            loop141:
             do {
-                int alt142=2;
-                int LA142_0 = input.LA(1);
+                int alt141=2;
+                int LA141_0 = input.LA(1);
 
-                if ( (LA142_0==84) ) {
-                    alt142=1;
+                if ( (LA141_0==84) ) {
+                    alt141=1;
                 }
 
 
-                switch (alt142) {
+                switch (alt141) {
             	case 1 :
             	    // InternalRoom.g:13542:2: rule__RefPath__Group_1__0
             	    {
@@ -38062,7 +38051,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             	    break;
 
             	default :
-            	    break loop142;
+            	    break loop141;
                 }
             } while (true);
 
@@ -38376,13 +38365,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getRefSegmentAccess().getGroup_1()); 
             // InternalRoom.g:13666:1: ( rule__RefSegment__Group_1__0 )?
-            int alt143=2;
-            int LA143_0 = input.LA(1);
+            int alt142=2;
+            int LA142_0 = input.LA(1);
 
-            if ( (LA143_0==44) ) {
-                alt143=1;
+            if ( (LA142_0==44) ) {
+                alt142=1;
             }
-            switch (alt143) {
+            switch (alt142) {
                 case 1 :
                     // InternalRoom.g:13666:2: rule__RefSegment__Group_1__0
                     {
@@ -38942,17 +38931,17 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getBindingEndPointAccess().getGroup_0()); 
             // InternalRoom.g:13889:1: ( rule__BindingEndPoint__Group_0__0 )?
-            int alt144=2;
-            int LA144_0 = input.LA(1);
+            int alt143=2;
+            int LA143_0 = input.LA(1);
 
-            if ( (LA144_0==RULE_ID) ) {
-                int LA144_1 = input.LA(2);
+            if ( (LA143_0==RULE_ID) ) {
+                int LA143_1 = input.LA(2);
 
-                if ( (LA144_1==87) ) {
-                    alt144=1;
+                if ( (LA143_1==87) ) {
+                    alt143=1;
                 }
             }
-            switch (alt144) {
+            switch (alt143) {
                 case 1 :
                     // InternalRoom.g:13889:2: rule__BindingEndPoint__Group_0__0
                     {
@@ -39122,13 +39111,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getBindingEndPointAccess().getGroup_2()); 
             // InternalRoom.g:13946:1: ( rule__BindingEndPoint__Group_2__0 )?
-            int alt145=2;
-            int LA145_0 = input.LA(1);
+            int alt144=2;
+            int LA144_0 = input.LA(1);
 
-            if ( (LA145_0==88) ) {
-                alt145=1;
+            if ( (LA144_0==88) ) {
+                alt144=1;
             }
-            switch (alt145) {
+            switch (alt144) {
                 case 1 :
                     // InternalRoom.g:13946:2: rule__BindingEndPoint__Group_2__0
                     {
@@ -40393,13 +40382,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getActorRefAccess().getRefTypeAssignment_0()); 
             // InternalRoom.g:14454:1: ( rule__ActorRef__RefTypeAssignment_0 )?
-            int alt146=2;
-            int LA146_0 = input.LA(1);
+            int alt145=2;
+            int LA145_0 = input.LA(1);
 
-            if ( ((LA146_0>=34 && LA146_0<=35)) ) {
-                alt146=1;
+            if ( ((LA145_0>=34 && LA145_0<=35)) ) {
+                alt145=1;
             }
-            switch (alt146) {
+            switch (alt145) {
                 case 1 :
                     // InternalRoom.g:14454:2: rule__ActorRef__RefTypeAssignment_0
                     {
@@ -40649,13 +40638,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getActorRefAccess().getMultiplicityAssignment_3()); 
             // InternalRoom.g:14543:1: ( rule__ActorRef__MultiplicityAssignment_3 )?
-            int alt147=2;
-            int LA147_0 = input.LA(1);
+            int alt146=2;
+            int LA146_0 = input.LA(1);
 
-            if ( (LA147_0==60) ) {
-                alt147=1;
+            if ( (LA146_0==60) ) {
+                alt146=1;
             }
-            switch (alt147) {
+            switch (alt146) {
                 case 1 :
                     // InternalRoom.g:14543:2: rule__ActorRef__MultiplicityAssignment_3
                     {
@@ -40900,13 +40889,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getActorRefAccess().getDocuAssignment_6()); 
             // InternalRoom.g:14631:1: ( rule__ActorRef__DocuAssignment_6 )?
-            int alt148=2;
-            int LA148_0 = input.LA(1);
+            int alt147=2;
+            int LA147_0 = input.LA(1);
 
-            if ( (LA148_0==60) ) {
-                alt148=1;
+            if ( (LA147_0==60) ) {
+                alt147=1;
             }
-            switch (alt148) {
+            switch (alt147) {
                 case 1 :
                     // InternalRoom.g:14631:2: rule__ActorRef__DocuAssignment_6
                     {
@@ -41376,17 +41365,17 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getStateGraphAccess().getAlternatives_2()); 
             // InternalRoom.g:14832:1: ( rule__StateGraph__Alternatives_2 )*
-            loop149:
+            loop148:
             do {
-                int alt149=2;
-                int LA149_0 = input.LA(1);
+                int alt148=2;
+                int LA148_0 = input.LA(1);
 
-                if ( (LA149_0==95||(LA149_0>=100 && LA149_0<=105)||LA149_0==112||LA149_0==131) ) {
-                    alt149=1;
+                if ( (LA148_0==95||(LA148_0>=100 && LA148_0<=105)||LA148_0==112||LA148_0==131) ) {
+                    alt148=1;
                 }
 
 
-                switch (alt149) {
+                switch (alt148) {
             	case 1 :
             	    // InternalRoom.g:14832:2: rule__StateGraph__Alternatives_2
             	    {
@@ -41400,7 +41389,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             	    break;
 
             	default :
-            	    break loop149;
+            	    break loop148;
                 }
             } while (true);
 
@@ -41774,17 +41763,17 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getStateMachineAccess().getAlternatives_3()); 
             // InternalRoom.g:14992:1: ( rule__StateMachine__Alternatives_3 )*
-            loop150:
+            loop149:
             do {
-                int alt150=2;
-                int LA150_0 = input.LA(1);
+                int alt149=2;
+                int LA149_0 = input.LA(1);
 
-                if ( (LA150_0==95||(LA150_0>=100 && LA150_0<=105)||LA150_0==112||LA150_0==131) ) {
-                    alt150=1;
+                if ( (LA149_0==95||(LA149_0>=100 && LA149_0<=105)||LA149_0==112||LA149_0==131) ) {
+                    alt149=1;
                 }
 
 
-                switch (alt150) {
+                switch (alt149) {
             	case 1 :
             	    // InternalRoom.g:14992:2: rule__StateMachine__Alternatives_3
             	    {
@@ -41798,7 +41787,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             	    break;
 
             	default :
-            	    break loop150;
+            	    break loop149;
                 }
             } while (true);
 
@@ -42107,13 +42096,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getSimpleStateAccess().getDocuAssignment_2()); 
             // InternalRoom.g:15121:1: ( rule__SimpleState__DocuAssignment_2 )?
-            int alt151=2;
-            int LA151_0 = input.LA(1);
+            int alt150=2;
+            int LA150_0 = input.LA(1);
 
-            if ( (LA151_0==60) ) {
-                alt151=1;
+            if ( (LA150_0==60) ) {
+                alt150=1;
             }
-            switch (alt151) {
+            switch (alt150) {
                 case 1 :
                     // InternalRoom.g:15121:2: rule__SimpleState__DocuAssignment_2
                     {
@@ -42198,13 +42187,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getSimpleStateAccess().getGroup_3()); 
             // InternalRoom.g:15149:1: ( rule__SimpleState__Group_3__0 )?
-            int alt152=2;
-            int LA152_0 = input.LA(1);
+            int alt151=2;
+            int LA151_0 = input.LA(1);
 
-            if ( (LA152_0==42) ) {
-                alt152=1;
+            if ( (LA151_0==42) ) {
+                alt151=1;
             }
-            switch (alt152) {
+            switch (alt151) {
                 case 1 :
                     // InternalRoom.g:15149:2: rule__SimpleState__Group_3__0
                     {
@@ -42369,13 +42358,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getSimpleStateAccess().getGroup_3_1()); 
             // InternalRoom.g:15217:1: ( rule__SimpleState__Group_3_1__0 )?
-            int alt153=2;
-            int LA153_0 = input.LA(1);
+            int alt152=2;
+            int LA152_0 = input.LA(1);
 
-            if ( (LA153_0==96) ) {
-                alt153=1;
+            if ( (LA152_0==96) ) {
+                alt152=1;
             }
-            switch (alt153) {
+            switch (alt152) {
                 case 1 :
                     // InternalRoom.g:15217:2: rule__SimpleState__Group_3_1__0
                     {
@@ -42465,13 +42454,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getSimpleStateAccess().getGroup_3_2()); 
             // InternalRoom.g:15246:1: ( rule__SimpleState__Group_3_2__0 )?
-            int alt154=2;
-            int LA154_0 = input.LA(1);
+            int alt153=2;
+            int LA153_0 = input.LA(1);
 
-            if ( (LA154_0==97) ) {
-                alt154=1;
+            if ( (LA153_0==97) ) {
+                alt153=1;
             }
-            switch (alt154) {
+            switch (alt153) {
                 case 1 :
                     // InternalRoom.g:15246:2: rule__SimpleState__Group_3_2__0
                     {
@@ -42561,13 +42550,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getSimpleStateAccess().getGroup_3_3()); 
             // InternalRoom.g:15275:1: ( rule__SimpleState__Group_3_3__0 )?
-            int alt155=2;
-            int LA155_0 = input.LA(1);
+            int alt154=2;
+            int LA154_0 = input.LA(1);
 
-            if ( (LA155_0==98) ) {
-                alt155=1;
+            if ( (LA154_0==98) ) {
+                alt154=1;
             }
-            switch (alt155) {
+            switch (alt154) {
                 case 1 :
                     // InternalRoom.g:15275:2: rule__SimpleState__Group_3_3__0
                     {
@@ -42657,13 +42646,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getSimpleStateAccess().getGroup_3_4()); 
             // InternalRoom.g:15304:1: ( rule__SimpleState__Group_3_4__0 )?
-            int alt156=2;
-            int LA156_0 = input.LA(1);
+            int alt155=2;
+            int LA155_0 = input.LA(1);
 
-            if ( (LA156_0==99) ) {
-                alt156=1;
+            if ( (LA155_0==99) ) {
+                alt155=1;
             }
-            switch (alt156) {
+            switch (alt155) {
                 case 1 :
                     // InternalRoom.g:15304:2: rule__SimpleState__Group_3_4__0
                     {
@@ -43603,13 +43592,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getRefinedStateAccess().getDocuAssignment_2()); 
             // InternalRoom.g:15687:1: ( rule__RefinedState__DocuAssignment_2 )?
-            int alt157=2;
-            int LA157_0 = input.LA(1);
+            int alt156=2;
+            int LA156_0 = input.LA(1);
 
-            if ( (LA157_0==60) ) {
-                alt157=1;
+            if ( (LA156_0==60) ) {
+                alt156=1;
             }
-            switch (alt157) {
+            switch (alt156) {
                 case 1 :
                     // InternalRoom.g:15687:2: rule__RefinedState__DocuAssignment_2
                     {
@@ -43774,13 +43763,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getRefinedStateAccess().getGroup_4()); 
             // InternalRoom.g:15747:1: ( rule__RefinedState__Group_4__0 )?
-            int alt158=2;
-            int LA158_0 = input.LA(1);
+            int alt157=2;
+            int LA157_0 = input.LA(1);
 
-            if ( (LA158_0==96) ) {
-                alt158=1;
+            if ( (LA157_0==96) ) {
+                alt157=1;
             }
-            switch (alt158) {
+            switch (alt157) {
                 case 1 :
                     // InternalRoom.g:15747:2: rule__RefinedState__Group_4__0
                     {
@@ -43870,13 +43859,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getRefinedStateAccess().getGroup_5()); 
             // InternalRoom.g:15776:1: ( rule__RefinedState__Group_5__0 )?
-            int alt159=2;
-            int LA159_0 = input.LA(1);
+            int alt158=2;
+            int LA158_0 = input.LA(1);
 
-            if ( (LA159_0==97) ) {
-                alt159=1;
+            if ( (LA158_0==97) ) {
+                alt158=1;
             }
-            switch (alt159) {
+            switch (alt158) {
                 case 1 :
                     // InternalRoom.g:15776:2: rule__RefinedState__Group_5__0
                     {
@@ -43966,13 +43955,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getRefinedStateAccess().getGroup_6()); 
             // InternalRoom.g:15805:1: ( rule__RefinedState__Group_6__0 )?
-            int alt160=2;
-            int LA160_0 = input.LA(1);
+            int alt159=2;
+            int LA159_0 = input.LA(1);
 
-            if ( (LA160_0==98) ) {
-                alt160=1;
+            if ( (LA159_0==98) ) {
+                alt159=1;
             }
-            switch (alt160) {
+            switch (alt159) {
                 case 1 :
                     // InternalRoom.g:15805:2: rule__RefinedState__Group_6__0
                     {
@@ -44062,13 +44051,13 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getRefinedStateAccess().getGroup_7()); 
             // InternalRoom.g:15834:1: ( rule__RefinedState__Group_7__0 )?
-            int alt161=2;
-            int LA161_0 = input.LA(1);
+            int alt160=2;
+            int LA160_0 = input.LA(1);
 
-            if ( (LA161_0==99) ) {
-                alt161=1;
+            if ( (LA160_0==99) ) {
+                alt160=1;
             }
-            switch (alt161) {
+            switch (alt160) {
                 case 1 :
                     // InternalRoom.g:15834:2: rule__RefinedState__Group_7__0
                     {
@@ -44805,7 +44794,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:16148:1: ( rule__DetailCode__Group_0__0__Impl rule__DetailCode__Group_0__1 )
             // InternalRoom.g:16149:2: rule__DetailCode__Group_0__0__Impl rule__DetailCode__Group_0__1
             {
-            pushFollow(FOLLOW_40);
+            pushFollow(FOLLOW_81);
             rule__DetailCode__Group_0__0__Impl();
 
             state._fsp--;
@@ -44904,31 +44893,42 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__DetailCode__Group_0__1__Impl"
-    // InternalRoom.g:16186:1: rule__DetailCode__Group_0__1__Impl : ( ( rule__DetailCode__Group_0_1__0 ) ) ;
+    // InternalRoom.g:16186:1: rule__DetailCode__Group_0__1__Impl : ( ( rule__DetailCode__LinesAssignment_0_1 )? ) ;
     public final void rule__DetailCode__Group_0__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalRoom.g:16190:1: ( ( ( rule__DetailCode__Group_0_1__0 ) ) )
-            // InternalRoom.g:16191:1: ( ( rule__DetailCode__Group_0_1__0 ) )
+            // InternalRoom.g:16190:1: ( ( ( rule__DetailCode__LinesAssignment_0_1 )? ) )
+            // InternalRoom.g:16191:1: ( ( rule__DetailCode__LinesAssignment_0_1 )? )
             {
-            // InternalRoom.g:16191:1: ( ( rule__DetailCode__Group_0_1__0 ) )
-            // InternalRoom.g:16192:1: ( rule__DetailCode__Group_0_1__0 )
+            // InternalRoom.g:16191:1: ( ( rule__DetailCode__LinesAssignment_0_1 )? )
+            // InternalRoom.g:16192:1: ( rule__DetailCode__LinesAssignment_0_1 )?
             {
-             before(grammarAccess.getDetailCodeAccess().getGroup_0_1()); 
-            // InternalRoom.g:16193:1: ( rule__DetailCode__Group_0_1__0 )
-            // InternalRoom.g:16193:2: rule__DetailCode__Group_0_1__0
-            {
-            pushFollow(FOLLOW_2);
-            rule__DetailCode__Group_0_1__0();
+             before(grammarAccess.getDetailCodeAccess().getLinesAssignment_0_1()); 
+            // InternalRoom.g:16193:1: ( rule__DetailCode__LinesAssignment_0_1 )?
+            int alt161=2;
+            int LA161_0 = input.LA(1);
 
-            state._fsp--;
+            if ( (LA161_0==RULE_CC_STRING) ) {
+                alt161=1;
+            }
+            switch (alt161) {
+                case 1 :
+                    // InternalRoom.g:16193:2: rule__DetailCode__LinesAssignment_0_1
+                    {
+                    pushFollow(FOLLOW_2);
+                    rule__DetailCode__LinesAssignment_0_1();
 
+                    state._fsp--;
+
+
+                    }
+                    break;
 
             }
 
-             after(grammarAccess.getDetailCodeAccess().getGroup_0_1()); 
+             after(grammarAccess.getDetailCodeAccess().getLinesAssignment_0_1()); 
 
             }
 
@@ -44950,23 +44950,23 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__DetailCode__Group_0__1__Impl"
 
 
-    // $ANTLR start "rule__DetailCode__Group_0_1__0"
-    // InternalRoom.g:16207:1: rule__DetailCode__Group_0_1__0 : rule__DetailCode__Group_0_1__0__Impl rule__DetailCode__Group_0_1__1 ;
-    public final void rule__DetailCode__Group_0_1__0() throws RecognitionException {
+    // $ANTLR start "rule__DetailCode__Group_1__0"
+    // InternalRoom.g:16207:1: rule__DetailCode__Group_1__0 : rule__DetailCode__Group_1__0__Impl rule__DetailCode__Group_1__1 ;
+    public final void rule__DetailCode__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalRoom.g:16211:1: ( rule__DetailCode__Group_0_1__0__Impl rule__DetailCode__Group_0_1__1 )
-            // InternalRoom.g:16212:2: rule__DetailCode__Group_0_1__0__Impl rule__DetailCode__Group_0_1__1
+            // InternalRoom.g:16211:1: ( rule__DetailCode__Group_1__0__Impl rule__DetailCode__Group_1__1 )
+            // InternalRoom.g:16212:2: rule__DetailCode__Group_1__0__Impl rule__DetailCode__Group_1__1
             {
-            pushFollow(FOLLOW_81);
-            rule__DetailCode__Group_0_1__0__Impl();
+            pushFollow(FOLLOW_82);
+            rule__DetailCode__Group_1__0__Impl();
 
             state._fsp--;
 
             pushFollow(FOLLOW_2);
-            rule__DetailCode__Group_0_1__1();
+            rule__DetailCode__Group_1__1();
 
             state._fsp--;
 
@@ -44985,35 +44985,35 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__DetailCode__Group_0_1__0"
+    // $ANTLR end "rule__DetailCode__Group_1__0"
 
 
-    // $ANTLR start "rule__DetailCode__Group_0_1__0__Impl"
-    // InternalRoom.g:16219:1: rule__DetailCode__Group_0_1__0__Impl : ( ( rule__DetailCode__UsedAssignment_0_1_0 ) ) ;
-    public final void rule__DetailCode__Group_0_1__0__Impl() throws RecognitionException {
+    // $ANTLR start "rule__DetailCode__Group_1__0__Impl"
+    // InternalRoom.g:16219:1: rule__DetailCode__Group_1__0__Impl : ( ( rule__DetailCode__UsedAssignment_1_0 ) ) ;
+    public final void rule__DetailCode__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalRoom.g:16223:1: ( ( ( rule__DetailCode__UsedAssignment_0_1_0 ) ) )
-            // InternalRoom.g:16224:1: ( ( rule__DetailCode__UsedAssignment_0_1_0 ) )
+            // InternalRoom.g:16223:1: ( ( ( rule__DetailCode__UsedAssignment_1_0 ) ) )
+            // InternalRoom.g:16224:1: ( ( rule__DetailCode__UsedAssignment_1_0 ) )
             {
-            // InternalRoom.g:16224:1: ( ( rule__DetailCode__UsedAssignment_0_1_0 ) )
-            // InternalRoom.g:16225:1: ( rule__DetailCode__UsedAssignment_0_1_0 )
+            // InternalRoom.g:16224:1: ( ( rule__DetailCode__UsedAssignment_1_0 ) )
+            // InternalRoom.g:16225:1: ( rule__DetailCode__UsedAssignment_1_0 )
             {
-             before(grammarAccess.getDetailCodeAccess().getUsedAssignment_0_1_0()); 
-            // InternalRoom.g:16226:1: ( rule__DetailCode__UsedAssignment_0_1_0 )
-            // InternalRoom.g:16226:2: rule__DetailCode__UsedAssignment_0_1_0
+             before(grammarAccess.getDetailCodeAccess().getUsedAssignment_1_0()); 
+            // InternalRoom.g:16226:1: ( rule__DetailCode__UsedAssignment_1_0 )
+            // InternalRoom.g:16226:2: rule__DetailCode__UsedAssignment_1_0
             {
             pushFollow(FOLLOW_2);
-            rule__DetailCode__UsedAssignment_0_1_0();
+            rule__DetailCode__UsedAssignment_1_0();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getDetailCodeAccess().getUsedAssignment_0_1_0()); 
+             after(grammarAccess.getDetailCodeAccess().getUsedAssignment_1_0()); 
 
             }
 
@@ -45032,26 +45032,26 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__DetailCode__Group_0_1__0__Impl"
+    // $ANTLR end "rule__DetailCode__Group_1__0__Impl"
 
 
-    // $ANTLR start "rule__DetailCode__Group_0_1__1"
-    // InternalRoom.g:16236:1: rule__DetailCode__Group_0_1__1 : rule__DetailCode__Group_0_1__1__Impl rule__DetailCode__Group_0_1__2 ;
-    public final void rule__DetailCode__Group_0_1__1() throws RecognitionException {
+    // $ANTLR start "rule__DetailCode__Group_1__1"
+    // InternalRoom.g:16236:1: rule__DetailCode__Group_1__1 : rule__DetailCode__Group_1__1__Impl rule__DetailCode__Group_1__2 ;
+    public final void rule__DetailCode__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalRoom.g:16240:1: ( rule__DetailCode__Group_0_1__1__Impl rule__DetailCode__Group_0_1__2 )
-            // InternalRoom.g:16241:2: rule__DetailCode__Group_0_1__1__Impl rule__DetailCode__Group_0_1__2
+            // InternalRoom.g:16240:1: ( rule__DetailCode__Group_1__1__Impl rule__DetailCode__Group_1__2 )
+            // InternalRoom.g:16241:2: rule__DetailCode__Group_1__1__Impl rule__DetailCode__Group_1__2
             {
-            pushFollow(FOLLOW_81);
-            rule__DetailCode__Group_0_1__1__Impl();
+            pushFollow(FOLLOW_82);
+            rule__DetailCode__Group_1__1__Impl();
 
             state._fsp--;
 
             pushFollow(FOLLOW_2);
-            rule__DetailCode__Group_0_1__2();
+            rule__DetailCode__Group_1__2();
 
             state._fsp--;
 
@@ -45070,24 +45070,24 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__DetailCode__Group_0_1__1"
+    // $ANTLR end "rule__DetailCode__Group_1__1"
 
 
-    // $ANTLR start "rule__DetailCode__Group_0_1__1__Impl"
-    // InternalRoom.g:16248:1: rule__DetailCode__Group_0_1__1__Impl : ( ( rule__DetailCode__LinesAssignment_0_1_1 )* ) ;
-    public final void rule__DetailCode__Group_0_1__1__Impl() throws RecognitionException {
+    // $ANTLR start "rule__DetailCode__Group_1__1__Impl"
+    // InternalRoom.g:16248:1: rule__DetailCode__Group_1__1__Impl : ( ( rule__DetailCode__LinesAssignment_1_1 )* ) ;
+    public final void rule__DetailCode__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalRoom.g:16252:1: ( ( ( rule__DetailCode__LinesAssignment_0_1_1 )* ) )
-            // InternalRoom.g:16253:1: ( ( rule__DetailCode__LinesAssignment_0_1_1 )* )
+            // InternalRoom.g:16252:1: ( ( ( rule__DetailCode__LinesAssignment_1_1 )* ) )
+            // InternalRoom.g:16253:1: ( ( rule__DetailCode__LinesAssignment_1_1 )* )
             {
-            // InternalRoom.g:16253:1: ( ( rule__DetailCode__LinesAssignment_0_1_1 )* )
-            // InternalRoom.g:16254:1: ( rule__DetailCode__LinesAssignment_0_1_1 )*
+            // InternalRoom.g:16253:1: ( ( rule__DetailCode__LinesAssignment_1_1 )* )
+            // InternalRoom.g:16254:1: ( rule__DetailCode__LinesAssignment_1_1 )*
             {
-             before(grammarAccess.getDetailCodeAccess().getLinesAssignment_0_1_1()); 
-            // InternalRoom.g:16255:1: ( rule__DetailCode__LinesAssignment_0_1_1 )*
+             before(grammarAccess.getDetailCodeAccess().getLinesAssignment_1_1()); 
+            // InternalRoom.g:16255:1: ( rule__DetailCode__LinesAssignment_1_1 )*
             loop162:
             do {
                 int alt162=2;
@@ -45100,10 +45100,10 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
 
                 switch (alt162) {
             	case 1 :
-            	    // InternalRoom.g:16255:2: rule__DetailCode__LinesAssignment_0_1_1
+            	    // InternalRoom.g:16255:2: rule__DetailCode__LinesAssignment_1_1
             	    {
-            	    pushFollow(FOLLOW_82);
-            	    rule__DetailCode__LinesAssignment_0_1_1();
+            	    pushFollow(FOLLOW_83);
+            	    rule__DetailCode__LinesAssignment_1_1();
 
             	    state._fsp--;
 
@@ -45116,7 +45116,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
                 }
             } while (true);
 
-             after(grammarAccess.getDetailCodeAccess().getLinesAssignment_0_1_1()); 
+             after(grammarAccess.getDetailCodeAccess().getLinesAssignment_1_1()); 
 
             }
 
@@ -45135,21 +45135,21 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__DetailCode__Group_0_1__1__Impl"
+    // $ANTLR end "rule__DetailCode__Group_1__1__Impl"
 
 
-    // $ANTLR start "rule__DetailCode__Group_0_1__2"
-    // InternalRoom.g:16265:1: rule__DetailCode__Group_0_1__2 : rule__DetailCode__Group_0_1__2__Impl ;
-    public final void rule__DetailCode__Group_0_1__2() throws RecognitionException {
+    // $ANTLR start "rule__DetailCode__Group_1__2"
+    // InternalRoom.g:16265:1: rule__DetailCode__Group_1__2 : rule__DetailCode__Group_1__2__Impl ;
+    public final void rule__DetailCode__Group_1__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalRoom.g:16269:1: ( rule__DetailCode__Group_0_1__2__Impl )
-            // InternalRoom.g:16270:2: rule__DetailCode__Group_0_1__2__Impl
+            // InternalRoom.g:16269:1: ( rule__DetailCode__Group_1__2__Impl )
+            // InternalRoom.g:16270:2: rule__DetailCode__Group_1__2__Impl
             {
             pushFollow(FOLLOW_2);
-            rule__DetailCode__Group_0_1__2__Impl();
+            rule__DetailCode__Group_1__2__Impl();
 
             state._fsp--;
 
@@ -45168,12 +45168,12 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__DetailCode__Group_0_1__2"
+    // $ANTLR end "rule__DetailCode__Group_1__2"
 
 
-    // $ANTLR start "rule__DetailCode__Group_0_1__2__Impl"
-    // InternalRoom.g:16276:1: rule__DetailCode__Group_0_1__2__Impl : ( '}' ) ;
-    public final void rule__DetailCode__Group_0_1__2__Impl() throws RecognitionException {
+    // $ANTLR start "rule__DetailCode__Group_1__2__Impl"
+    // InternalRoom.g:16276:1: rule__DetailCode__Group_1__2__Impl : ( '}' ) ;
+    public final void rule__DetailCode__Group_1__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -45184,9 +45184,9 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:16281:1: ( '}' )
             // InternalRoom.g:16282:1: '}'
             {
-             before(grammarAccess.getDetailCodeAccess().getRightCurlyBracketKeyword_0_1_2()); 
+             before(grammarAccess.getDetailCodeAccess().getRightCurlyBracketKeyword_1_2()); 
             match(input,43,FOLLOW_2); 
-             after(grammarAccess.getDetailCodeAccess().getRightCurlyBracketKeyword_0_1_2()); 
+             after(grammarAccess.getDetailCodeAccess().getRightCurlyBracketKeyword_1_2()); 
 
             }
 
@@ -45205,7 +45205,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__DetailCode__Group_0_1__2__Impl"
+    // $ANTLR end "rule__DetailCode__Group_1__2__Impl"
 
 
     // $ANTLR start "rule__TransitionPoint__Group__0"
@@ -45218,7 +45218,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:16305:1: ( rule__TransitionPoint__Group__0__Impl rule__TransitionPoint__Group__1 )
             // InternalRoom.g:16306:2: rule__TransitionPoint__Group__0__Impl rule__TransitionPoint__Group__1
             {
-            pushFollow(FOLLOW_83);
+            pushFollow(FOLLOW_84);
             rule__TransitionPoint__Group__0__Impl();
 
             state._fsp--;
@@ -46030,7 +46030,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:16619:1: ( rule__InitialTransition__Group__0__Impl rule__InitialTransition__Group__1 )
             // InternalRoom.g:16620:2: rule__InitialTransition__Group__0__Impl rule__InitialTransition__Group__1
             {
-            pushFollow(FOLLOW_84);
+            pushFollow(FOLLOW_85);
             rule__InitialTransition__Group__0__Impl();
 
             state._fsp--;
@@ -46105,7 +46105,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:16650:1: ( rule__InitialTransition__Group__1__Impl rule__InitialTransition__Group__2 )
             // InternalRoom.g:16651:2: rule__InitialTransition__Group__1__Impl rule__InitialTransition__Group__2
             {
-            pushFollow(FOLLOW_84);
+            pushFollow(FOLLOW_85);
             rule__InitialTransition__Group__1__Impl();
 
             state._fsp--;
@@ -46201,7 +46201,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:16679:1: ( rule__InitialTransition__Group__2__Impl rule__InitialTransition__Group__3 )
             // InternalRoom.g:16680:2: rule__InitialTransition__Group__2__Impl rule__InitialTransition__Group__3
             {
-            pushFollow(FOLLOW_85);
+            pushFollow(FOLLOW_86);
             rule__InitialTransition__Group__2__Impl();
 
             state._fsp--;
@@ -46351,7 +46351,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:16741:1: ( rule__InitialTransition__Group__4__Impl rule__InitialTransition__Group__5 )
             // InternalRoom.g:16742:2: rule__InitialTransition__Group__4__Impl rule__InitialTransition__Group__5
             {
-            pushFollow(FOLLOW_86);
+            pushFollow(FOLLOW_87);
             rule__InitialTransition__Group__4__Impl();
 
             state._fsp--;
@@ -46698,7 +46698,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:16874:1: ( rule__InitialTransition__Group_7__0__Impl rule__InitialTransition__Group_7__1 )
             // InternalRoom.g:16875:2: rule__InitialTransition__Group_7__0__Impl rule__InitialTransition__Group_7__1
             {
-            pushFollow(FOLLOW_87);
+            pushFollow(FOLLOW_88);
             rule__InitialTransition__Group_7__0__Impl();
 
             state._fsp--;
@@ -46773,7 +46773,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:16905:1: ( rule__InitialTransition__Group_7__1__Impl rule__InitialTransition__Group_7__2 )
             // InternalRoom.g:16906:2: rule__InitialTransition__Group_7__1__Impl rule__InitialTransition__Group_7__2
             {
-            pushFollow(FOLLOW_87);
+            pushFollow(FOLLOW_88);
             rule__InitialTransition__Group_7__1__Impl();
 
             state._fsp--;
@@ -47094,7 +47094,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:17033:1: ( rule__ContinuationTransition__Group__0__Impl rule__ContinuationTransition__Group__1 )
             // InternalRoom.g:17034:2: rule__ContinuationTransition__Group__0__Impl rule__ContinuationTransition__Group__1
             {
-            pushFollow(FOLLOW_84);
+            pushFollow(FOLLOW_85);
             rule__ContinuationTransition__Group__0__Impl();
 
             state._fsp--;
@@ -47169,7 +47169,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:17064:1: ( rule__ContinuationTransition__Group__1__Impl rule__ContinuationTransition__Group__2 )
             // InternalRoom.g:17065:2: rule__ContinuationTransition__Group__1__Impl rule__ContinuationTransition__Group__2
             {
-            pushFollow(FOLLOW_84);
+            pushFollow(FOLLOW_85);
             rule__ContinuationTransition__Group__1__Impl();
 
             state._fsp--;
@@ -47265,7 +47265,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:17093:1: ( rule__ContinuationTransition__Group__2__Impl rule__ContinuationTransition__Group__3 )
             // InternalRoom.g:17094:2: rule__ContinuationTransition__Group__2__Impl rule__ContinuationTransition__Group__3
             {
-            pushFollow(FOLLOW_86);
+            pushFollow(FOLLOW_87);
             rule__ContinuationTransition__Group__2__Impl();
 
             state._fsp--;
@@ -47425,7 +47425,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:17153:1: ( rule__ContinuationTransition__Group__4__Impl rule__ContinuationTransition__Group__5 )
             // InternalRoom.g:17154:2: rule__ContinuationTransition__Group__4__Impl rule__ContinuationTransition__Group__5
             {
-            pushFollow(FOLLOW_86);
+            pushFollow(FOLLOW_87);
             rule__ContinuationTransition__Group__4__Impl();
 
             state._fsp--;
@@ -47772,7 +47772,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:17286:1: ( rule__ContinuationTransition__Group_7__0__Impl rule__ContinuationTransition__Group_7__1 )
             // InternalRoom.g:17287:2: rule__ContinuationTransition__Group_7__0__Impl rule__ContinuationTransition__Group_7__1
             {
-            pushFollow(FOLLOW_87);
+            pushFollow(FOLLOW_88);
             rule__ContinuationTransition__Group_7__0__Impl();
 
             state._fsp--;
@@ -47847,7 +47847,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:17317:1: ( rule__ContinuationTransition__Group_7__1__Impl rule__ContinuationTransition__Group_7__2 )
             // InternalRoom.g:17318:2: rule__ContinuationTransition__Group_7__1__Impl rule__ContinuationTransition__Group_7__2
             {
-            pushFollow(FOLLOW_87);
+            pushFollow(FOLLOW_88);
             rule__ContinuationTransition__Group_7__1__Impl();
 
             state._fsp--;
@@ -48168,7 +48168,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:17445:1: ( rule__TriggeredTransition__Group__0__Impl rule__TriggeredTransition__Group__1 )
             // InternalRoom.g:17446:2: rule__TriggeredTransition__Group__0__Impl rule__TriggeredTransition__Group__1
             {
-            pushFollow(FOLLOW_84);
+            pushFollow(FOLLOW_85);
             rule__TriggeredTransition__Group__0__Impl();
 
             state._fsp--;
@@ -48243,7 +48243,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:17476:1: ( rule__TriggeredTransition__Group__1__Impl rule__TriggeredTransition__Group__2 )
             // InternalRoom.g:17477:2: rule__TriggeredTransition__Group__1__Impl rule__TriggeredTransition__Group__2
             {
-            pushFollow(FOLLOW_84);
+            pushFollow(FOLLOW_85);
             rule__TriggeredTransition__Group__1__Impl();
 
             state._fsp--;
@@ -48339,7 +48339,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:17505:1: ( rule__TriggeredTransition__Group__2__Impl rule__TriggeredTransition__Group__3 )
             // InternalRoom.g:17506:2: rule__TriggeredTransition__Group__2__Impl rule__TriggeredTransition__Group__3
             {
-            pushFollow(FOLLOW_86);
+            pushFollow(FOLLOW_87);
             rule__TriggeredTransition__Group__2__Impl();
 
             state._fsp--;
@@ -48499,7 +48499,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:17565:1: ( rule__TriggeredTransition__Group__4__Impl rule__TriggeredTransition__Group__5 )
             // InternalRoom.g:17566:2: rule__TriggeredTransition__Group__4__Impl rule__TriggeredTransition__Group__5
             {
-            pushFollow(FOLLOW_86);
+            pushFollow(FOLLOW_87);
             rule__TriggeredTransition__Group__4__Impl();
 
             state._fsp--;
@@ -48755,7 +48755,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:17654:1: ( rule__TriggeredTransition__Group__7__Impl rule__TriggeredTransition__Group__8 )
             // InternalRoom.g:17655:2: rule__TriggeredTransition__Group__7__Impl rule__TriggeredTransition__Group__8
             {
-            pushFollow(FOLLOW_88);
+            pushFollow(FOLLOW_89);
             rule__TriggeredTransition__Group__7__Impl();
 
             state._fsp--;
@@ -48905,7 +48905,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:17716:1: ( rule__TriggeredTransition__Group__9__Impl rule__TriggeredTransition__Group__10 )
             // InternalRoom.g:17717:2: rule__TriggeredTransition__Group__9__Impl rule__TriggeredTransition__Group__10
             {
-            pushFollow(FOLLOW_89);
+            pushFollow(FOLLOW_90);
             rule__TriggeredTransition__Group__9__Impl();
 
             state._fsp--;
@@ -48980,7 +48980,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:17747:1: ( rule__TriggeredTransition__Group__10__Impl rule__TriggeredTransition__Group__11 )
             // InternalRoom.g:17748:2: rule__TriggeredTransition__Group__10__Impl rule__TriggeredTransition__Group__11
             {
-            pushFollow(FOLLOW_90);
+            pushFollow(FOLLOW_91);
             rule__TriggeredTransition__Group__10__Impl();
 
             state._fsp--;
@@ -49065,7 +49065,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:17776:1: ( rule__TriggeredTransition__Group__11__Impl rule__TriggeredTransition__Group__12 )
             // InternalRoom.g:17777:2: rule__TriggeredTransition__Group__11__Impl rule__TriggeredTransition__Group__12
             {
-            pushFollow(FOLLOW_90);
+            pushFollow(FOLLOW_91);
             rule__TriggeredTransition__Group__11__Impl();
 
             state._fsp--;
@@ -49122,7 +49122,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             	case 1 :
             	    // InternalRoom.g:17791:2: rule__TriggeredTransition__Group_11__0
             	    {
-            	    pushFollow(FOLLOW_91);
+            	    pushFollow(FOLLOW_92);
             	    rule__TriggeredTransition__Group_11__0();
 
             	    state._fsp--;
@@ -49168,7 +49168,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:17805:1: ( rule__TriggeredTransition__Group__12__Impl rule__TriggeredTransition__Group__13 )
             // InternalRoom.g:17806:2: rule__TriggeredTransition__Group__12__Impl rule__TriggeredTransition__Group__13
             {
-            pushFollow(FOLLOW_87);
+            pushFollow(FOLLOW_88);
             rule__TriggeredTransition__Group__12__Impl();
 
             state._fsp--;
@@ -49243,7 +49243,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:17836:1: ( rule__TriggeredTransition__Group__13__Impl rule__TriggeredTransition__Group__14 )
             // InternalRoom.g:17837:2: rule__TriggeredTransition__Group__13__Impl rule__TriggeredTransition__Group__14
             {
-            pushFollow(FOLLOW_87);
+            pushFollow(FOLLOW_88);
             rule__TriggeredTransition__Group__13__Impl();
 
             state._fsp--;
@@ -49409,7 +49409,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:17925:1: ( rule__TriggeredTransition__Group_11__0__Impl rule__TriggeredTransition__Group_11__1 )
             // InternalRoom.g:17926:2: rule__TriggeredTransition__Group_11__0__Impl rule__TriggeredTransition__Group_11__1
             {
-            pushFollow(FOLLOW_89);
+            pushFollow(FOLLOW_90);
             rule__TriggeredTransition__Group_11__0__Impl();
 
             state._fsp--;
@@ -49719,7 +49719,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:18051:1: ( rule__GuardedTransition__Group__0__Impl rule__GuardedTransition__Group__1 )
             // InternalRoom.g:18052:2: rule__GuardedTransition__Group__0__Impl rule__GuardedTransition__Group__1
             {
-            pushFollow(FOLLOW_84);
+            pushFollow(FOLLOW_85);
             rule__GuardedTransition__Group__0__Impl();
 
             state._fsp--;
@@ -49794,7 +49794,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:18082:1: ( rule__GuardedTransition__Group__1__Impl rule__GuardedTransition__Group__2 )
             // InternalRoom.g:18083:2: rule__GuardedTransition__Group__1__Impl rule__GuardedTransition__Group__2
             {
-            pushFollow(FOLLOW_84);
+            pushFollow(FOLLOW_85);
             rule__GuardedTransition__Group__1__Impl();
 
             state._fsp--;
@@ -49890,7 +49890,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:18111:1: ( rule__GuardedTransition__Group__2__Impl rule__GuardedTransition__Group__3 )
             // InternalRoom.g:18112:2: rule__GuardedTransition__Group__2__Impl rule__GuardedTransition__Group__3
             {
-            pushFollow(FOLLOW_86);
+            pushFollow(FOLLOW_87);
             rule__GuardedTransition__Group__2__Impl();
 
             state._fsp--;
@@ -50050,7 +50050,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:18171:1: ( rule__GuardedTransition__Group__4__Impl rule__GuardedTransition__Group__5 )
             // InternalRoom.g:18172:2: rule__GuardedTransition__Group__4__Impl rule__GuardedTransition__Group__5
             {
-            pushFollow(FOLLOW_86);
+            pushFollow(FOLLOW_87);
             rule__GuardedTransition__Group__4__Impl();
 
             state._fsp--;
@@ -50306,7 +50306,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:18260:1: ( rule__GuardedTransition__Group__7__Impl rule__GuardedTransition__Group__8 )
             // InternalRoom.g:18261:2: rule__GuardedTransition__Group__7__Impl rule__GuardedTransition__Group__8
             {
-            pushFollow(FOLLOW_92);
+            pushFollow(FOLLOW_93);
             rule__GuardedTransition__Group__7__Impl();
 
             state._fsp--;
@@ -50456,7 +50456,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:18322:1: ( rule__GuardedTransition__Group__9__Impl rule__GuardedTransition__Group__10 )
             // InternalRoom.g:18323:2: rule__GuardedTransition__Group__9__Impl rule__GuardedTransition__Group__10
             {
-            pushFollow(FOLLOW_87);
+            pushFollow(FOLLOW_88);
             rule__GuardedTransition__Group__9__Impl();
 
             state._fsp--;
@@ -50541,7 +50541,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:18351:1: ( rule__GuardedTransition__Group__10__Impl rule__GuardedTransition__Group__11 )
             // InternalRoom.g:18352:2: rule__GuardedTransition__Group__10__Impl rule__GuardedTransition__Group__11
             {
-            pushFollow(FOLLOW_87);
+            pushFollow(FOLLOW_88);
             rule__GuardedTransition__Group__10__Impl();
 
             state._fsp--;
@@ -50862,7 +50862,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:18497:1: ( rule__CPBranchTransition__Group__0__Impl rule__CPBranchTransition__Group__1 )
             // InternalRoom.g:18498:2: rule__CPBranchTransition__Group__0__Impl rule__CPBranchTransition__Group__1
             {
-            pushFollow(FOLLOW_84);
+            pushFollow(FOLLOW_85);
             rule__CPBranchTransition__Group__0__Impl();
 
             state._fsp--;
@@ -50937,7 +50937,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:18528:1: ( rule__CPBranchTransition__Group__1__Impl rule__CPBranchTransition__Group__2 )
             // InternalRoom.g:18529:2: rule__CPBranchTransition__Group__1__Impl rule__CPBranchTransition__Group__2
             {
-            pushFollow(FOLLOW_84);
+            pushFollow(FOLLOW_85);
             rule__CPBranchTransition__Group__1__Impl();
 
             state._fsp--;
@@ -51033,7 +51033,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:18557:1: ( rule__CPBranchTransition__Group__2__Impl rule__CPBranchTransition__Group__3 )
             // InternalRoom.g:18558:2: rule__CPBranchTransition__Group__2__Impl rule__CPBranchTransition__Group__3
             {
-            pushFollow(FOLLOW_86);
+            pushFollow(FOLLOW_87);
             rule__CPBranchTransition__Group__2__Impl();
 
             state._fsp--;
@@ -51193,7 +51193,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:18617:1: ( rule__CPBranchTransition__Group__4__Impl rule__CPBranchTransition__Group__5 )
             // InternalRoom.g:18618:2: rule__CPBranchTransition__Group__4__Impl rule__CPBranchTransition__Group__5
             {
-            pushFollow(FOLLOW_86);
+            pushFollow(FOLLOW_87);
             rule__CPBranchTransition__Group__4__Impl();
 
             state._fsp--;
@@ -51449,7 +51449,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:18706:1: ( rule__CPBranchTransition__Group__7__Impl rule__CPBranchTransition__Group__8 )
             // InternalRoom.g:18707:2: rule__CPBranchTransition__Group__7__Impl rule__CPBranchTransition__Group__8
             {
-            pushFollow(FOLLOW_93);
+            pushFollow(FOLLOW_94);
             rule__CPBranchTransition__Group__7__Impl();
 
             state._fsp--;
@@ -51599,7 +51599,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:18768:1: ( rule__CPBranchTransition__Group__9__Impl rule__CPBranchTransition__Group__10 )
             // InternalRoom.g:18769:2: rule__CPBranchTransition__Group__9__Impl rule__CPBranchTransition__Group__10
             {
-            pushFollow(FOLLOW_87);
+            pushFollow(FOLLOW_88);
             rule__CPBranchTransition__Group__9__Impl();
 
             state._fsp--;
@@ -51684,7 +51684,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:18797:1: ( rule__CPBranchTransition__Group__10__Impl rule__CPBranchTransition__Group__11 )
             // InternalRoom.g:18798:2: rule__CPBranchTransition__Group__10__Impl rule__CPBranchTransition__Group__11
             {
-            pushFollow(FOLLOW_87);
+            pushFollow(FOLLOW_88);
             rule__CPBranchTransition__Group__10__Impl();
 
             state._fsp--;
@@ -52261,7 +52261,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:19032:1: ( rule__RefinedTransition__Group__3__Impl rule__RefinedTransition__Group__4 )
             // InternalRoom.g:19033:2: rule__RefinedTransition__Group__3__Impl rule__RefinedTransition__Group__4
             {
-            pushFollow(FOLLOW_94);
+            pushFollow(FOLLOW_95);
             rule__RefinedTransition__Group__3__Impl();
 
             state._fsp--;
@@ -52411,7 +52411,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:19094:1: ( rule__RefinedTransition__Group__5__Impl rule__RefinedTransition__Group__6 )
             // InternalRoom.g:19095:2: rule__RefinedTransition__Group__5__Impl rule__RefinedTransition__Group__6
             {
-            pushFollow(FOLLOW_95);
+            pushFollow(FOLLOW_96);
             rule__RefinedTransition__Group__5__Impl();
 
             state._fsp--;
@@ -53191,7 +53191,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:19418:1: ( rule__Trigger__Group__1__Impl rule__Trigger__Group__2 )
             // InternalRoom.g:19419:2: rule__Trigger__Group__1__Impl rule__Trigger__Group__2
             {
-            pushFollow(FOLLOW_96);
+            pushFollow(FOLLOW_97);
             rule__Trigger__Group__1__Impl();
 
             state._fsp--;
@@ -53276,7 +53276,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:19447:1: ( rule__Trigger__Group__2__Impl rule__Trigger__Group__3 )
             // InternalRoom.g:19448:2: rule__Trigger__Group__2__Impl rule__Trigger__Group__3
             {
-            pushFollow(FOLLOW_96);
+            pushFollow(FOLLOW_97);
             rule__Trigger__Group__2__Impl();
 
             state._fsp--;
@@ -53333,7 +53333,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             	case 1 :
             	    // InternalRoom.g:19462:2: rule__Trigger__Group_2__0
             	    {
-            	    pushFollow(FOLLOW_97);
+            	    pushFollow(FOLLOW_98);
             	    rule__Trigger__Group_2__0();
 
             	    state._fsp--;
@@ -53379,7 +53379,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:19476:1: ( rule__Trigger__Group__3__Impl rule__Trigger__Group__4 )
             // InternalRoom.g:19477:2: rule__Trigger__Group__3__Impl rule__Trigger__Group__4
             {
-            pushFollow(FOLLOW_96);
+            pushFollow(FOLLOW_97);
             rule__Trigger__Group__3__Impl();
 
             state._fsp--;
@@ -54095,7 +54095,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:19765:1: ( rule__ProtocolSemantics__Group__0__Impl rule__ProtocolSemantics__Group__1 )
             // InternalRoom.g:19766:2: rule__ProtocolSemantics__Group__0__Impl rule__ProtocolSemantics__Group__1
             {
-            pushFollow(FOLLOW_98);
+            pushFollow(FOLLOW_99);
             rule__ProtocolSemantics__Group__0__Impl();
 
             state._fsp--;
@@ -54245,7 +54245,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:19827:1: ( rule__ProtocolSemantics__Group__2__Impl rule__ProtocolSemantics__Group__3 )
             // InternalRoom.g:19828:2: rule__ProtocolSemantics__Group__2__Impl rule__ProtocolSemantics__Group__3
             {
-            pushFollow(FOLLOW_99);
+            pushFollow(FOLLOW_100);
             rule__ProtocolSemantics__Group__2__Impl();
 
             state._fsp--;
@@ -54320,7 +54320,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:19858:1: ( rule__ProtocolSemantics__Group__3__Impl rule__ProtocolSemantics__Group__4 )
             // InternalRoom.g:19859:2: rule__ProtocolSemantics__Group__3__Impl rule__ProtocolSemantics__Group__4
             {
-            pushFollow(FOLLOW_99);
+            pushFollow(FOLLOW_100);
             rule__ProtocolSemantics__Group__3__Impl();
 
             state._fsp--;
@@ -54377,7 +54377,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             	case 1 :
             	    // InternalRoom.g:19873:2: rule__ProtocolSemantics__RulesAssignment_3
             	    {
-            	    pushFollow(FOLLOW_100);
+            	    pushFollow(FOLLOW_101);
             	    rule__ProtocolSemantics__RulesAssignment_3();
 
             	    state._fsp--;
@@ -54819,7 +54819,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:20054:1: ( rule__InSemanticsRule__Group_3__0__Impl rule__InSemanticsRule__Group_3__1 )
             // InternalRoom.g:20055:2: rule__InSemanticsRule__Group_3__0__Impl rule__InSemanticsRule__Group_3__1
             {
-            pushFollow(FOLLOW_101);
+            pushFollow(FOLLOW_102);
             rule__InSemanticsRule__Group_3__0__Impl();
 
             state._fsp--;
@@ -54974,7 +54974,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:20117:1: ( rule__InSemanticsRule__Group_3_1_1__0__Impl rule__InSemanticsRule__Group_3_1_1__1 )
             // InternalRoom.g:20118:2: rule__InSemanticsRule__Group_3_1_1__0__Impl rule__InSemanticsRule__Group_3_1_1__1
             {
-            pushFollow(FOLLOW_102);
+            pushFollow(FOLLOW_103);
             rule__InSemanticsRule__Group_3_1_1__0__Impl();
 
             state._fsp--;
@@ -55332,7 +55332,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:20251:1: ( rule__InSemanticsRule__Group_3_1_1_2__0__Impl rule__InSemanticsRule__Group_3_1_1_2__1 )
             // InternalRoom.g:20252:2: rule__InSemanticsRule__Group_3_1_1_2__0__Impl rule__InSemanticsRule__Group_3_1_1_2__1
             {
-            pushFollow(FOLLOW_102);
+            pushFollow(FOLLOW_103);
             rule__InSemanticsRule__Group_3_1_1_2__0__Impl();
 
             state._fsp--;
@@ -55813,7 +55813,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:20441:1: ( rule__OutSemanticsRule__Group_3__0__Impl rule__OutSemanticsRule__Group_3__1 )
             // InternalRoom.g:20442:2: rule__OutSemanticsRule__Group_3__0__Impl rule__OutSemanticsRule__Group_3__1
             {
-            pushFollow(FOLLOW_101);
+            pushFollow(FOLLOW_102);
             rule__OutSemanticsRule__Group_3__0__Impl();
 
             state._fsp--;
@@ -55968,7 +55968,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:20504:1: ( rule__OutSemanticsRule__Group_3_1_1__0__Impl rule__OutSemanticsRule__Group_3_1_1__1 )
             // InternalRoom.g:20505:2: rule__OutSemanticsRule__Group_3_1_1__0__Impl rule__OutSemanticsRule__Group_3_1_1__1
             {
-            pushFollow(FOLLOW_102);
+            pushFollow(FOLLOW_103);
             rule__OutSemanticsRule__Group_3_1_1__0__Impl();
 
             state._fsp--;
@@ -56326,7 +56326,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:20638:1: ( rule__OutSemanticsRule__Group_3_1_1_2__0__Impl rule__OutSemanticsRule__Group_3_1_1_2__1 )
             // InternalRoom.g:20639:2: rule__OutSemanticsRule__Group_3_1_1_2__0__Impl rule__OutSemanticsRule__Group_3_1_1_2__1
             {
-            pushFollow(FOLLOW_102);
+            pushFollow(FOLLOW_103);
             rule__OutSemanticsRule__Group_3_1_1_2__0__Impl();
 
             state._fsp--;
@@ -56807,7 +56807,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:20826:1: ( rule__Annotation__Group_2__1__Impl rule__Annotation__Group_2__2 )
             // InternalRoom.g:20827:2: rule__Annotation__Group_2__1__Impl rule__Annotation__Group_2__2
             {
-            pushFollow(FOLLOW_103);
+            pushFollow(FOLLOW_104);
             rule__Annotation__Group_2__1__Impl();
 
             state._fsp--;
@@ -56892,7 +56892,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:20855:1: ( rule__Annotation__Group_2__2__Impl rule__Annotation__Group_2__3 )
             // InternalRoom.g:20856:2: rule__Annotation__Group_2__2__Impl rule__Annotation__Group_2__3
             {
-            pushFollow(FOLLOW_103);
+            pushFollow(FOLLOW_104);
             rule__Annotation__Group_2__2__Impl();
 
             state._fsp--;
@@ -57305,7 +57305,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:21014:1: ( rule__KeyValue__Group__1__Impl rule__KeyValue__Group__2 )
             // InternalRoom.g:21015:2: rule__KeyValue__Group__1__Impl rule__KeyValue__Group__2
             {
-            pushFollow(FOLLOW_104);
+            pushFollow(FOLLOW_105);
             rule__KeyValue__Group__1__Impl();
 
             state._fsp--;
@@ -57716,7 +57716,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:21168:1: ( rule__AnnotationType__Group__3__Impl rule__AnnotationType__Group__4 )
             // InternalRoom.g:21169:2: rule__AnnotationType__Group__3__Impl rule__AnnotationType__Group__4
             {
-            pushFollow(FOLLOW_105);
+            pushFollow(FOLLOW_106);
             rule__AnnotationType__Group__3__Impl();
 
             state._fsp--;
@@ -57866,7 +57866,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:21230:1: ( rule__AnnotationType__Group__5__Impl rule__AnnotationType__Group__6 )
             // InternalRoom.g:21231:2: rule__AnnotationType__Group__5__Impl rule__AnnotationType__Group__6
             {
-            pushFollow(FOLLOW_106);
+            pushFollow(FOLLOW_107);
             rule__AnnotationType__Group__5__Impl();
 
             state._fsp--;
@@ -57941,7 +57941,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:21261:1: ( rule__AnnotationType__Group__6__Impl rule__AnnotationType__Group__7 )
             // InternalRoom.g:21262:2: rule__AnnotationType__Group__6__Impl rule__AnnotationType__Group__7
             {
-            pushFollow(FOLLOW_107);
+            pushFollow(FOLLOW_108);
             rule__AnnotationType__Group__6__Impl();
 
             state._fsp--;
@@ -58026,7 +58026,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:21290:1: ( rule__AnnotationType__Group__7__Impl rule__AnnotationType__Group__8 )
             // InternalRoom.g:21291:2: rule__AnnotationType__Group__7__Impl rule__AnnotationType__Group__8
             {
-            pushFollow(FOLLOW_107);
+            pushFollow(FOLLOW_108);
             rule__AnnotationType__Group__7__Impl();
 
             state._fsp--;
@@ -58083,7 +58083,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             	case 1 :
             	    // InternalRoom.g:21305:2: rule__AnnotationType__AttributesAssignment_7
             	    {
-            	    pushFollow(FOLLOW_108);
+            	    pushFollow(FOLLOW_109);
             	    rule__AnnotationType__AttributesAssignment_7();
 
             	    state._fsp--;
@@ -58199,7 +58199,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:21367:1: ( rule__AnnotationType__Group_6_1__0__Impl rule__AnnotationType__Group_6_1__1 )
             // InternalRoom.g:21368:2: rule__AnnotationType__Group_6_1__0__Impl rule__AnnotationType__Group_6_1__1
             {
-            pushFollow(FOLLOW_109);
+            pushFollow(FOLLOW_110);
             rule__AnnotationType__Group_6_1__0__Impl();
 
             state._fsp--;
@@ -58274,7 +58274,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:21398:1: ( rule__AnnotationType__Group_6_1__1__Impl rule__AnnotationType__Group_6_1__2 )
             // InternalRoom.g:21399:2: rule__AnnotationType__Group_6_1__1__Impl rule__AnnotationType__Group_6_1__2
             {
-            pushFollow(FOLLOW_110);
+            pushFollow(FOLLOW_111);
             rule__AnnotationType__Group_6_1__1__Impl();
 
             state._fsp--;
@@ -58359,7 +58359,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:21427:1: ( rule__AnnotationType__Group_6_1__2__Impl rule__AnnotationType__Group_6_1__3 )
             // InternalRoom.g:21428:2: rule__AnnotationType__Group_6_1__2__Impl rule__AnnotationType__Group_6_1__3
             {
-            pushFollow(FOLLOW_110);
+            pushFollow(FOLLOW_111);
             rule__AnnotationType__Group_6_1__2__Impl();
 
             state._fsp--;
@@ -58532,7 +58532,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:21494:1: ( rule__AnnotationType__Group_6_1_2__0__Impl rule__AnnotationType__Group_6_1_2__1 )
             // InternalRoom.g:21495:2: rule__AnnotationType__Group_6_1_2__0__Impl rule__AnnotationType__Group_6_1_2__1
             {
-            pushFollow(FOLLOW_109);
+            pushFollow(FOLLOW_110);
             rule__AnnotationType__Group_6_1_2__0__Impl();
 
             state._fsp--;
@@ -58687,7 +58687,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:21557:1: ( rule__SimpleAnnotationAttribute__Group__0__Impl rule__SimpleAnnotationAttribute__Group__1 )
             // InternalRoom.g:21558:2: rule__SimpleAnnotationAttribute__Group__0__Impl rule__SimpleAnnotationAttribute__Group__1
             {
-            pushFollow(FOLLOW_111);
+            pushFollow(FOLLOW_112);
             rule__SimpleAnnotationAttribute__Group__0__Impl();
 
             state._fsp--;
@@ -59087,7 +59087,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:21715:1: ( rule__EnumAnnotationAttribute__Group__0__Impl rule__EnumAnnotationAttribute__Group__1 )
             // InternalRoom.g:21716:2: rule__EnumAnnotationAttribute__Group__0__Impl rule__EnumAnnotationAttribute__Group__1
             {
-            pushFollow(FOLLOW_111);
+            pushFollow(FOLLOW_112);
             rule__EnumAnnotationAttribute__Group__0__Impl();
 
             state._fsp--;
@@ -59482,7 +59482,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:21866:1: ( rule__EnumAnnotationAttribute__Group__5__Impl rule__EnumAnnotationAttribute__Group__6 )
             // InternalRoom.g:21867:2: rule__EnumAnnotationAttribute__Group__5__Impl rule__EnumAnnotationAttribute__Group__6
             {
-            pushFollow(FOLLOW_110);
+            pushFollow(FOLLOW_111);
             rule__EnumAnnotationAttribute__Group__5__Impl();
 
             state._fsp--;
@@ -59567,7 +59567,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:21895:1: ( rule__EnumAnnotationAttribute__Group__6__Impl rule__EnumAnnotationAttribute__Group__7 )
             // InternalRoom.g:21896:2: rule__EnumAnnotationAttribute__Group__6__Impl rule__EnumAnnotationAttribute__Group__7
             {
-            pushFollow(FOLLOW_110);
+            pushFollow(FOLLOW_111);
             rule__EnumAnnotationAttribute__Group__6__Impl();
 
             state._fsp--;
@@ -59895,7 +59895,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:22033:1: ( rule__Import__Group__0__Impl rule__Import__Group__1 )
             // InternalRoom.g:22034:2: rule__Import__Group__0__Impl rule__Import__Group__1
             {
-            pushFollow(FOLLOW_112);
+            pushFollow(FOLLOW_113);
             rule__Import__Group__0__Impl();
 
             state._fsp--;
@@ -60135,7 +60135,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:22127:1: ( rule__Import__Group_1_0__0__Impl rule__Import__Group_1_0__1 )
             // InternalRoom.g:22128:2: rule__Import__Group_1_0__0__Impl rule__Import__Group_1_0__1
             {
-            pushFollow(FOLLOW_113);
+            pushFollow(FOLLOW_114);
             rule__Import__Group_1_0__0__Impl();
 
             state._fsp--;
@@ -60290,7 +60290,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:22190:1: ( rule__ImportedFQN__Group__0__Impl rule__ImportedFQN__Group__1 )
             // InternalRoom.g:22191:2: rule__ImportedFQN__Group__0__Impl rule__ImportedFQN__Group__1
             {
-            pushFollow(FOLLOW_114);
+            pushFollow(FOLLOW_115);
             rule__ImportedFQN__Group__0__Impl();
 
             state._fsp--;
@@ -60531,7 +60531,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:22284:1: ( rule__Documentation__Group__1__Impl rule__Documentation__Group__2 )
             // InternalRoom.g:22285:2: rule__Documentation__Group__1__Impl rule__Documentation__Group__2
             {
-            pushFollow(FOLLOW_115);
+            pushFollow(FOLLOW_116);
             rule__Documentation__Group__1__Impl();
 
             state._fsp--;
@@ -60606,7 +60606,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:22315:1: ( rule__Documentation__Group__2__Impl rule__Documentation__Group__3 )
             // InternalRoom.g:22316:2: rule__Documentation__Group__2__Impl rule__Documentation__Group__3
             {
-            pushFollow(FOLLOW_115);
+            pushFollow(FOLLOW_116);
             rule__Documentation__Group__2__Impl();
 
             state._fsp--;
@@ -60663,7 +60663,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             	case 1 :
             	    // InternalRoom.g:22330:2: rule__Documentation__LinesAssignment_2
             	    {
-            	    pushFollow(FOLLOW_82);
+            	    pushFollow(FOLLOW_83);
             	    rule__Documentation__LinesAssignment_2();
 
             	    state._fsp--;
@@ -60779,7 +60779,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:22388:1: ( rule__BooleanLiteral__Group__0__Impl rule__BooleanLiteral__Group__1 )
             // InternalRoom.g:22389:2: rule__BooleanLiteral__Group__0__Impl rule__BooleanLiteral__Group__1
             {
-            pushFollow(FOLLOW_116);
+            pushFollow(FOLLOW_117);
             rule__BooleanLiteral__Group__0__Impl();
 
             state._fsp--;
@@ -61244,7 +61244,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:22577:1: ( rule__StringLiteral__Group__0__Impl rule__StringLiteral__Group__1 )
             // InternalRoom.g:22578:2: rule__StringLiteral__Group__0__Impl rule__StringLiteral__Group__1
             {
-            pushFollow(FOLLOW_104);
+            pushFollow(FOLLOW_105);
             rule__StringLiteral__Group__0__Impl();
 
             state._fsp--;
@@ -61399,7 +61399,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:22640:1: ( rule__Integer__Group_0__0__Impl rule__Integer__Group_0__1 )
             // InternalRoom.g:22641:2: rule__Integer__Group_0__0__Impl rule__Integer__Group_0__1
             {
-            pushFollow(FOLLOW_117);
+            pushFollow(FOLLOW_118);
             rule__Integer__Group_0__0__Impl();
 
             state._fsp--;
@@ -61565,7 +61565,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:22701:1: ( rule__Decimal__Group__0__Impl rule__Decimal__Group__1 )
             // InternalRoom.g:22702:2: rule__Decimal__Group__0__Impl rule__Decimal__Group__1
             {
-            pushFollow(FOLLOW_117);
+            pushFollow(FOLLOW_118);
             rule__Decimal__Group__0__Impl();
 
             state._fsp--;
@@ -62127,7 +62127,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:22915:1: ( rule__DecimalExp__Group__3__Impl rule__DecimalExp__Group__4 )
             // InternalRoom.g:22916:2: rule__DecimalExp__Group__3__Impl rule__DecimalExp__Group__4
             {
-            pushFollow(FOLLOW_118);
+            pushFollow(FOLLOW_119);
             rule__DecimalExp__Group__3__Impl();
 
             state._fsp--;
@@ -62202,7 +62202,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:22944:1: ( rule__DecimalExp__Group__4__Impl rule__DecimalExp__Group__5 )
             // InternalRoom.g:22945:2: rule__DecimalExp__Group__4__Impl rule__DecimalExp__Group__5
             {
-            pushFollow(FOLLOW_117);
+            pushFollow(FOLLOW_118);
             rule__DecimalExp__Group__4__Impl();
 
             state._fsp--;
@@ -62287,7 +62287,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:22973:1: ( rule__DecimalExp__Group__5__Impl rule__DecimalExp__Group__6 )
             // InternalRoom.g:22974:2: rule__DecimalExp__Group__5__Impl rule__DecimalExp__Group__6
             {
-            pushFollow(FOLLOW_117);
+            pushFollow(FOLLOW_118);
             rule__DecimalExp__Group__5__Impl();
 
             state._fsp--;
@@ -62580,7 +62580,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             	case 1 :
             	    // InternalRoom.g:23087:2: rule__FQN__Group_1__0
             	    {
-            	    pushFollow(FOLLOW_119);
+            	    pushFollow(FOLLOW_120);
             	    rule__FQN__Group_1__0();
 
             	    state._fsp--;
@@ -62969,7 +62969,7 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             // InternalRoom.g:23236:1: ( rule__ActorClass__UnorderedGroup_0__Impl ( rule__ActorClass__UnorderedGroup_0__1 )? )
             // InternalRoom.g:23237:2: rule__ActorClass__UnorderedGroup_0__Impl ( rule__ActorClass__UnorderedGroup_0__1 )?
             {
-            pushFollow(FOLLOW_120);
+            pushFollow(FOLLOW_121);
             rule__ActorClass__UnorderedGroup_0__Impl();
 
             state._fsp--;
@@ -71259,104 +71259,22 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__RefinedState__SubgraphAssignment_7_1"
 
 
-    // $ANTLR start "rule__DetailCode__UsedAssignment_0_1_0"
-    // InternalRoom.g:26388:1: rule__DetailCode__UsedAssignment_0_1_0 : ( ( '{' ) ) ;
-    public final void rule__DetailCode__UsedAssignment_0_1_0() throws RecognitionException {
+    // $ANTLR start "rule__DetailCode__LinesAssignment_0_1"
+    // InternalRoom.g:26388:1: rule__DetailCode__LinesAssignment_0_1 : ( RULE_CC_STRING ) ;
+    public final void rule__DetailCode__LinesAssignment_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalRoom.g:26392:1: ( ( ( '{' ) ) )
-            // InternalRoom.g:26393:1: ( ( '{' ) )
+            // InternalRoom.g:26392:1: ( ( RULE_CC_STRING ) )
+            // InternalRoom.g:26393:1: ( RULE_CC_STRING )
             {
-            // InternalRoom.g:26393:1: ( ( '{' ) )
-            // InternalRoom.g:26394:1: ( '{' )
+            // InternalRoom.g:26393:1: ( RULE_CC_STRING )
+            // InternalRoom.g:26394:1: RULE_CC_STRING
             {
-             before(grammarAccess.getDetailCodeAccess().getUsedLeftCurlyBracketKeyword_0_1_0_0()); 
-            // InternalRoom.g:26395:1: ( '{' )
-            // InternalRoom.g:26396:1: '{'
-            {
-             before(grammarAccess.getDetailCodeAccess().getUsedLeftCurlyBracketKeyword_0_1_0_0()); 
-            match(input,42,FOLLOW_2); 
-             after(grammarAccess.getDetailCodeAccess().getUsedLeftCurlyBracketKeyword_0_1_0_0()); 
-
-            }
-
-             after(grammarAccess.getDetailCodeAccess().getUsedLeftCurlyBracketKeyword_0_1_0_0()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__DetailCode__UsedAssignment_0_1_0"
-
-
-    // $ANTLR start "rule__DetailCode__LinesAssignment_0_1_1"
-    // InternalRoom.g:26411:1: rule__DetailCode__LinesAssignment_0_1_1 : ( RULE_STRING ) ;
-    public final void rule__DetailCode__LinesAssignment_0_1_1() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // InternalRoom.g:26415:1: ( ( RULE_STRING ) )
-            // InternalRoom.g:26416:1: ( RULE_STRING )
-            {
-            // InternalRoom.g:26416:1: ( RULE_STRING )
-            // InternalRoom.g:26417:1: RULE_STRING
-            {
-             before(grammarAccess.getDetailCodeAccess().getLinesSTRINGTerminalRuleCall_0_1_1_0()); 
-            match(input,RULE_STRING,FOLLOW_2); 
-             after(grammarAccess.getDetailCodeAccess().getLinesSTRINGTerminalRuleCall_0_1_1_0()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__DetailCode__LinesAssignment_0_1_1"
-
-
-    // $ANTLR start "rule__DetailCode__LinesAssignment_1"
-    // InternalRoom.g:26426:1: rule__DetailCode__LinesAssignment_1 : ( RULE_CC_STRING ) ;
-    public final void rule__DetailCode__LinesAssignment_1() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // InternalRoom.g:26430:1: ( ( RULE_CC_STRING ) )
-            // InternalRoom.g:26431:1: ( RULE_CC_STRING )
-            {
-            // InternalRoom.g:26431:1: ( RULE_CC_STRING )
-            // InternalRoom.g:26432:1: RULE_CC_STRING
-            {
-             before(grammarAccess.getDetailCodeAccess().getLinesCC_STRINGTerminalRuleCall_1_0()); 
+             before(grammarAccess.getDetailCodeAccess().getLinesCC_STRINGTerminalRuleCall_0_1_0()); 
             match(input,RULE_CC_STRING,FOLLOW_2); 
-             after(grammarAccess.getDetailCodeAccess().getLinesCC_STRINGTerminalRuleCall_1_0()); 
+             after(grammarAccess.getDetailCodeAccess().getLinesCC_STRINGTerminalRuleCall_0_1_0()); 
 
             }
 
@@ -71375,7 +71293,89 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__DetailCode__LinesAssignment_1"
+    // $ANTLR end "rule__DetailCode__LinesAssignment_0_1"
+
+
+    // $ANTLR start "rule__DetailCode__UsedAssignment_1_0"
+    // InternalRoom.g:26403:1: rule__DetailCode__UsedAssignment_1_0 : ( ( '{' ) ) ;
+    public final void rule__DetailCode__UsedAssignment_1_0() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // InternalRoom.g:26407:1: ( ( ( '{' ) ) )
+            // InternalRoom.g:26408:1: ( ( '{' ) )
+            {
+            // InternalRoom.g:26408:1: ( ( '{' ) )
+            // InternalRoom.g:26409:1: ( '{' )
+            {
+             before(grammarAccess.getDetailCodeAccess().getUsedLeftCurlyBracketKeyword_1_0_0()); 
+            // InternalRoom.g:26410:1: ( '{' )
+            // InternalRoom.g:26411:1: '{'
+            {
+             before(grammarAccess.getDetailCodeAccess().getUsedLeftCurlyBracketKeyword_1_0_0()); 
+            match(input,42,FOLLOW_2); 
+             after(grammarAccess.getDetailCodeAccess().getUsedLeftCurlyBracketKeyword_1_0_0()); 
+
+            }
+
+             after(grammarAccess.getDetailCodeAccess().getUsedLeftCurlyBracketKeyword_1_0_0()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__DetailCode__UsedAssignment_1_0"
+
+
+    // $ANTLR start "rule__DetailCode__LinesAssignment_1_1"
+    // InternalRoom.g:26426:1: rule__DetailCode__LinesAssignment_1_1 : ( RULE_STRING ) ;
+    public final void rule__DetailCode__LinesAssignment_1_1() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // InternalRoom.g:26430:1: ( ( RULE_STRING ) )
+            // InternalRoom.g:26431:1: ( RULE_STRING )
+            {
+            // InternalRoom.g:26431:1: ( RULE_STRING )
+            // InternalRoom.g:26432:1: RULE_STRING
+            {
+             before(grammarAccess.getDetailCodeAccess().getLinesSTRINGTerminalRuleCall_1_1_0()); 
+            match(input,RULE_STRING,FOLLOW_2); 
+             after(grammarAccess.getDetailCodeAccess().getLinesSTRINGTerminalRuleCall_1_1_0()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__DetailCode__LinesAssignment_1_1"
 
 
     // $ANTLR start "rule__TransitionPoint__HandlerAssignment_0"
@@ -74739,8 +74739,8 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
 
 
     protected DFA1 dfa1 = new DFA1(this);
+    protected DFA30 dfa30 = new DFA30(this);
     protected DFA31 dfa31 = new DFA31(this);
-    protected DFA32 dfa32 = new DFA32(this);
     static final String dfa_1s = "\15\uffff";
     static final String dfa_2s = "\1\21\4\uffff\3\22\5\uffff";
     static final String dfa_3s = "\1\u0082\4\uffff\3\u0082\5\uffff";
@@ -74787,10 +74787,10 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
         }
     }
     static final String dfa_7s = "\32\uffff";
-    static final String dfa_8s = "\13\uffff\1\22\7\uffff\3\22\1\uffff\1\22\2\uffff";
-    static final String dfa_9s = "\1\151\1\6\1\54\1\6\1\56\4\6\2\56\1\52\2\6\1\56\1\6\1\7\1\53\1\uffff\3\52\1\7\1\52\2\uffff";
-    static final String dfa_10s = "\1\151\2\54\1\162\1\63\2\6\1\162\1\6\2\56\1\u0083\2\6\1\56\1\6\1\75\1\157\1\uffff\3\u0083\1\75\1\u0083\2\uffff";
-    static final String dfa_11s = "\22\uffff\1\2\5\uffff\1\1\1\3";
+    static final String dfa_8s = "\13\uffff\1\22\7\uffff\2\22\1\uffff\1\22\2\uffff\1\22";
+    static final String dfa_9s = "\1\151\1\6\1\54\1\6\1\56\4\6\2\56\1\52\2\6\1\56\1\7\1\53\1\6\1\uffff\2\52\1\7\1\52\2\uffff\1\52";
+    static final String dfa_10s = "\1\151\2\54\1\162\1\63\2\6\1\162\1\6\2\56\1\u0083\2\6\1\56\1\75\1\157\1\6\1\uffff\2\u0083\1\75\1\u0083\2\uffff\1\u0083";
+    static final String dfa_11s = "\22\uffff\1\2\4\uffff\1\1\1\3\1\uffff";
     static final String dfa_12s = "\32\uffff}>";
     static final String[] dfa_13s = {
             "\1\1",
@@ -74804,21 +74804,21 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
             "\1\16",
             "\1\7",
             "\1\7",
-            "\1\21\1\22\7\uffff\1\17\10\uffff\1\20\42\uffff\1\22\4\uffff\6\22\6\uffff\1\22\22\uffff\1\22",
+            "\1\20\1\22\7\uffff\1\21\10\uffff\1\17\42\uffff\1\22\4\uffff\6\22\6\uffff\1\22\22\uffff\1\22",
             "\1\23",
             "\1\24",
             "\1\7",
-            "\1\25",
-            "\1\26\65\uffff\1\27",
-            "\1\22\77\uffff\1\22\1\30\1\uffff\1\30\1\31",
+            "\1\25\65\uffff\1\26",
+            "\1\22\77\uffff\1\22\1\27\1\uffff\1\27\1\30",
+            "\1\31",
             "",
-            "\1\21\1\22\20\uffff\1\20\42\uffff\1\22\4\uffff\6\22\6\uffff\1\22\22\uffff\1\22",
-            "\1\21\1\22\20\uffff\1\20\42\uffff\1\22\4\uffff\6\22\6\uffff\1\22\22\uffff\1\22",
-            "\1\21\1\22\20\uffff\1\20\42\uffff\1\22\4\uffff\6\22\6\uffff\1\22\22\uffff\1\22",
-            "\1\26\65\uffff\1\27",
-            "\1\21\1\22\63\uffff\1\22\4\uffff\6\22\6\uffff\1\22\22\uffff\1\22",
+            "\1\20\1\22\20\uffff\1\17\42\uffff\1\22\4\uffff\6\22\6\uffff\1\22\22\uffff\1\22",
+            "\1\20\1\22\20\uffff\1\17\42\uffff\1\22\4\uffff\6\22\6\uffff\1\22\22\uffff\1\22",
+            "\1\25\65\uffff\1\26",
+            "\1\20\1\22\63\uffff\1\22\4\uffff\6\22\6\uffff\1\22\22\uffff\1\22",
             "",
-            ""
+            "",
+            "\1\20\1\22\20\uffff\1\17\42\uffff\1\22\4\uffff\6\22\6\uffff\1\22\22\uffff\1\22"
     };
 
     static final short[] dfa_7 = DFA.unpackEncodedString(dfa_7s);
@@ -74829,11 +74829,11 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
     static final short[] dfa_12 = DFA.unpackEncodedString(dfa_12s);
     static final short[][] dfa_13 = unpackEncodedStringArray(dfa_13s);
 
-    class DFA31 extends DFA {
+    class DFA30 extends DFA {
 
-        public DFA31(BaseRecognizer recognizer) {
+        public DFA30(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
-            this.decisionNumber = 31;
+            this.decisionNumber = 30;
             this.eot = dfa_7;
             this.eof = dfa_8;
             this.min = dfa_9;
@@ -74886,11 +74886,11 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
     static final short[] dfa_18 = DFA.unpackEncodedString(dfa_18s);
     static final short[][] dfa_19 = unpackEncodedStringArray(dfa_19s);
 
-    class DFA32 extends DFA {
+    class DFA31 extends DFA {
 
-        public DFA32(BaseRecognizer recognizer) {
+        public DFA31(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
-            this.decisionNumber = 32;
+            this.decisionNumber = 31;
             this.eot = dfa_14;
             this.eof = dfa_14;
             this.min = dfa_15;
@@ -74985,45 +74985,46 @@ public class InternalRoomParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_78 = new BitSet(new long[]{0x0000000000000002L,0x000103F080000000L,0x0000000000000008L});
     public static final BitSet FOLLOW_79 = new BitSet(new long[]{0x0000000000000000L,0x0000000040000000L});
     public static final BitSet FOLLOW_80 = new BitSet(new long[]{0x0000080000000000L,0x0000000F00000000L});
-    public static final BitSet FOLLOW_81 = new BitSet(new long[]{0x0000080000000080L});
-    public static final BitSet FOLLOW_82 = new BitSet(new long[]{0x0000000000000082L});
-    public static final BitSet FOLLOW_83 = new BitSet(new long[]{0x0000000000000000L,0x0000002000000000L,0x0000000000000008L});
-    public static final BitSet FOLLOW_84 = new BitSet(new long[]{0x0000100000000040L});
-    public static final BitSet FOLLOW_85 = new BitSet(new long[]{0x0000000000000000L,0x0000040000000000L});
-    public static final BitSet FOLLOW_86 = new BitSet(new long[]{0x0000000000000040L,0x0006000000000000L});
-    public static final BitSet FOLLOW_87 = new BitSet(new long[]{0x0000080000000000L,0x0000080000000000L});
-    public static final BitSet FOLLOW_88 = new BitSet(new long[]{0x0000000000000000L,0x0000100000000000L});
-    public static final BitSet FOLLOW_89 = new BitSet(new long[]{0x0000000000000000L,0x0008000000000000L});
-    public static final BitSet FOLLOW_90 = new BitSet(new long[]{0x0000080000000000L,0x0000200000000000L});
-    public static final BitSet FOLLOW_91 = new BitSet(new long[]{0x0000000000000002L,0x0000200000000000L});
-    public static final BitSet FOLLOW_92 = new BitSet(new long[]{0x0000000000000000L,0x0000400000000000L});
-    public static final BitSet FOLLOW_93 = new BitSet(new long[]{0x0000000000000000L,0x0000800000000000L});
-    public static final BitSet FOLLOW_94 = new BitSet(new long[]{0x0000000000000000L,0x0000080000000000L});
-    public static final BitSet FOLLOW_95 = new BitSet(new long[]{0x0000080000000000L});
-    public static final BitSet FOLLOW_96 = new BitSet(new long[]{0x0000000000000000L,0x0030400000000000L});
-    public static final BitSet FOLLOW_97 = new BitSet(new long[]{0x0000000000000002L,0x0020000000000000L});
-    public static final BitSet FOLLOW_98 = new BitSet(new long[]{0x0000000000000000L,0x0040000000000000L});
-    public static final BitSet FOLLOW_99 = new BitSet(new long[]{0x0000080000000000L,0x0180000000000000L});
-    public static final BitSet FOLLOW_100 = new BitSet(new long[]{0x0000000000000002L,0x0180000000000000L});
-    public static final BitSet FOLLOW_101 = new BitSet(new long[]{0x0001000000000000L,0x0180000000000000L});
-    public static final BitSet FOLLOW_102 = new BitSet(new long[]{0x0000000000000000L,0x0180000000000000L});
-    public static final BitSet FOLLOW_103 = new BitSet(new long[]{0x0012000000000000L});
-    public static final BitSet FOLLOW_104 = new BitSet(new long[]{0x000000001C0000B0L,0x0000000000000000L,0x0000000000000010L});
-    public static final BitSet FOLLOW_105 = new BitSet(new long[]{0x0000000000000000L,0x0800000000000000L});
-    public static final BitSet FOLLOW_106 = new BitSet(new long[]{0x0000040000FE0000L});
-    public static final BitSet FOLLOW_107 = new BitSet(new long[]{0x0000080801000000L});
-    public static final BitSet FOLLOW_108 = new BitSet(new long[]{0x0000000801000002L});
-    public static final BitSet FOLLOW_109 = new BitSet(new long[]{0x0000000000FE0000L});
-    public static final BitSet FOLLOW_110 = new BitSet(new long[]{0x0010080000000000L});
-    public static final BitSet FOLLOW_111 = new BitSet(new long[]{0x0000000000000000L,0x1000000000000000L});
-    public static final BitSet FOLLOW_112 = new BitSet(new long[]{0x0000000002000040L});
-    public static final BitSet FOLLOW_113 = new BitSet(new long[]{0x0000000000000000L,0x4000000000000000L});
-    public static final BitSet FOLLOW_114 = new BitSet(new long[]{0x0000000000000000L,0x8000000000000000L});
-    public static final BitSet FOLLOW_115 = new BitSet(new long[]{0x2000000000000080L});
-    public static final BitSet FOLLOW_116 = new BitSet(new long[]{0x0000000004000000L,0x0000000000000000L,0x0000000000000010L});
-    public static final BitSet FOLLOW_117 = new BitSet(new long[]{0x0000000018000010L});
-    public static final BitSet FOLLOW_118 = new BitSet(new long[]{0x0000000060000000L});
-    public static final BitSet FOLLOW_119 = new BitSet(new long[]{0x0000000000000002L,0x0000000000800000L});
-    public static final BitSet FOLLOW_120 = new BitSet(new long[]{0x0000001380000002L,0x0000000000000000L,0x0000000000000004L});
+    public static final BitSet FOLLOW_81 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_82 = new BitSet(new long[]{0x0000080000000080L});
+    public static final BitSet FOLLOW_83 = new BitSet(new long[]{0x0000000000000082L});
+    public static final BitSet FOLLOW_84 = new BitSet(new long[]{0x0000000000000000L,0x0000002000000000L,0x0000000000000008L});
+    public static final BitSet FOLLOW_85 = new BitSet(new long[]{0x0000100000000040L});
+    public static final BitSet FOLLOW_86 = new BitSet(new long[]{0x0000000000000000L,0x0000040000000000L});
+    public static final BitSet FOLLOW_87 = new BitSet(new long[]{0x0000000000000040L,0x0006000000000000L});
+    public static final BitSet FOLLOW_88 = new BitSet(new long[]{0x0000080000000000L,0x0000080000000000L});
+    public static final BitSet FOLLOW_89 = new BitSet(new long[]{0x0000000000000000L,0x0000100000000000L});
+    public static final BitSet FOLLOW_90 = new BitSet(new long[]{0x0000000000000000L,0x0008000000000000L});
+    public static final BitSet FOLLOW_91 = new BitSet(new long[]{0x0000080000000000L,0x0000200000000000L});
+    public static final BitSet FOLLOW_92 = new BitSet(new long[]{0x0000000000000002L,0x0000200000000000L});
+    public static final BitSet FOLLOW_93 = new BitSet(new long[]{0x0000000000000000L,0x0000400000000000L});
+    public static final BitSet FOLLOW_94 = new BitSet(new long[]{0x0000000000000000L,0x0000800000000000L});
+    public static final BitSet FOLLOW_95 = new BitSet(new long[]{0x0000000000000000L,0x0000080000000000L});
+    public static final BitSet FOLLOW_96 = new BitSet(new long[]{0x0000080000000000L});
+    public static final BitSet FOLLOW_97 = new BitSet(new long[]{0x0000000000000000L,0x0030400000000000L});
+    public static final BitSet FOLLOW_98 = new BitSet(new long[]{0x0000000000000002L,0x0020000000000000L});
+    public static final BitSet FOLLOW_99 = new BitSet(new long[]{0x0000000000000000L,0x0040000000000000L});
+    public static final BitSet FOLLOW_100 = new BitSet(new long[]{0x0000080000000000L,0x0180000000000000L});
+    public static final BitSet FOLLOW_101 = new BitSet(new long[]{0x0000000000000002L,0x0180000000000000L});
+    public static final BitSet FOLLOW_102 = new BitSet(new long[]{0x0001000000000000L,0x0180000000000000L});
+    public static final BitSet FOLLOW_103 = new BitSet(new long[]{0x0000000000000000L,0x0180000000000000L});
+    public static final BitSet FOLLOW_104 = new BitSet(new long[]{0x0012000000000000L});
+    public static final BitSet FOLLOW_105 = new BitSet(new long[]{0x000000001C0000B0L,0x0000000000000000L,0x0000000000000010L});
+    public static final BitSet FOLLOW_106 = new BitSet(new long[]{0x0000000000000000L,0x0800000000000000L});
+    public static final BitSet FOLLOW_107 = new BitSet(new long[]{0x0000040000FE0000L});
+    public static final BitSet FOLLOW_108 = new BitSet(new long[]{0x0000080801000000L});
+    public static final BitSet FOLLOW_109 = new BitSet(new long[]{0x0000000801000002L});
+    public static final BitSet FOLLOW_110 = new BitSet(new long[]{0x0000000000FE0000L});
+    public static final BitSet FOLLOW_111 = new BitSet(new long[]{0x0010080000000000L});
+    public static final BitSet FOLLOW_112 = new BitSet(new long[]{0x0000000000000000L,0x1000000000000000L});
+    public static final BitSet FOLLOW_113 = new BitSet(new long[]{0x0000000002000040L});
+    public static final BitSet FOLLOW_114 = new BitSet(new long[]{0x0000000000000000L,0x4000000000000000L});
+    public static final BitSet FOLLOW_115 = new BitSet(new long[]{0x0000000000000000L,0x8000000000000000L});
+    public static final BitSet FOLLOW_116 = new BitSet(new long[]{0x2000000000000080L});
+    public static final BitSet FOLLOW_117 = new BitSet(new long[]{0x0000000004000000L,0x0000000000000000L,0x0000000000000010L});
+    public static final BitSet FOLLOW_118 = new BitSet(new long[]{0x0000000018000010L});
+    public static final BitSet FOLLOW_119 = new BitSet(new long[]{0x0000000060000000L});
+    public static final BitSet FOLLOW_120 = new BitSet(new long[]{0x0000000000000002L,0x0000000000800000L});
+    public static final BitSet FOLLOW_121 = new BitSet(new long[]{0x0000001380000002L,0x0000000000000000L,0x0000000000000004L});
 
 }

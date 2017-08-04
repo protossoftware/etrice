@@ -941,11 +941,30 @@ ruleDetailCode returns [EObject current=null]
             grammarAccess.getDetailCodeAccess().getDetailCodeAction_0_0(),
             $current);
     }
-)((
+)(
 (
-		lv_used_1_0=	'{' 
+		lv_lines_1_0=RULE_CC_STRING
+		{
+			newLeafNode(lv_lines_1_0, grammarAccess.getDetailCodeAccess().getLinesCC_STRINGTerminalRuleCall_0_1_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getDetailCodeRule());
+	        }
+       		addWithLastConsumed(
+       			$current, 
+       			"lines",
+        		lv_lines_1_0, 
+        		"org.eclipse.etrice.core.common.Base.CC_STRING");
+	    }
+
+)
+)?)
+    |((
+(
+		lv_used_2_0=	'{' 
     {
-        newLeafNode(lv_used_1_0, grammarAccess.getDetailCodeAccess().getUsedLeftCurlyBracketKeyword_0_1_0_0());
+        newLeafNode(lv_used_2_0, grammarAccess.getDetailCodeAccess().getUsedLeftCurlyBracketKeyword_1_0_0());
     }
  
 	    {
@@ -958,9 +977,9 @@ ruleDetailCode returns [EObject current=null]
 )
 )(
 (
-		lv_lines_2_0=RULE_STRING
+		lv_lines_3_0=RULE_STRING
 		{
-			newLeafNode(lv_lines_2_0, grammarAccess.getDetailCodeAccess().getLinesSTRINGTerminalRuleCall_0_1_1_0()); 
+			newLeafNode(lv_lines_3_0, grammarAccess.getDetailCodeAccess().getLinesSTRINGTerminalRuleCall_1_1_0()); 
 		}
 		{
 	        if ($current==null) {
@@ -969,35 +988,16 @@ ruleDetailCode returns [EObject current=null]
        		addWithLastConsumed(
        			$current, 
        			"lines",
-        		lv_lines_2_0, 
+        		lv_lines_3_0, 
         		"org.eclipse.xtext.common.Terminals.STRING");
 	    }
 
 )
-)*	otherlv_3='}' 
+)*	otherlv_4='}' 
     {
-    	newLeafNode(otherlv_3, grammarAccess.getDetailCodeAccess().getRightCurlyBracketKeyword_0_1_2());
+    	newLeafNode(otherlv_4, grammarAccess.getDetailCodeAccess().getRightCurlyBracketKeyword_1_2());
     }
 ))
-    |(
-(
-		lv_lines_4_0=RULE_CC_STRING
-		{
-			newLeafNode(lv_lines_4_0, grammarAccess.getDetailCodeAccess().getLinesCC_STRINGTerminalRuleCall_1_0()); 
-		}
-		{
-	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getDetailCodeRule());
-	        }
-       		addWithLastConsumed(
-       			$current, 
-       			"lines",
-        		lv_lines_4_0, 
-        		"org.eclipse.etrice.core.common.Base.CC_STRING");
-	    }
-
-)
-)?)
 ;
 
 

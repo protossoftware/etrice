@@ -27,9 +27,8 @@ import org.eclipse.etrice.core.fsm.fSM.TrPoint;
 import org.eclipse.etrice.core.fsm.fSM.Transition;
 import org.eclipse.etrice.core.fsm.services.FSMGrammarAccess;
 import org.eclipse.etrice.core.fsm.validation.FSMValidationUtilXtend.Result;
+import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.nodemodel.ICompositeNode;
-import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.validation.Check;
@@ -45,10 +44,13 @@ import com.google.inject.Inject;
  */
 public class FSMJavaValidator extends org.eclipse.etrice.core.fsm.validation.AbstractFSMJavaValidator {
 
-	public static final String MULTI_LINE_DETAILCODE = "RoomJavaValidator.MultiLineDetailCode";
+	public static final String PLAIN_STRING_DETAILCODE = "RoomJavaValidator.PlainStringDetailCode";
 	
 	@Inject
 	private FSMValidationUtil ValidationUtil;
+	
+	@Inject
+	FSMGrammarAccess grammar;
 	
 	@Check
 	public void checkRefinedStateUnique(RefinedState rs) {
@@ -125,30 +127,30 @@ public class FSMJavaValidator extends org.eclipse.etrice.core.fsm.validation.Abs
 		}
 	}
 	
-	@Inject
-	FSMGrammarAccess grammar;
+
 	
 	@Check
 	public void checkDetailCode(DetailCode dc) {
 		if (dc.getLines().isEmpty())
 			error("detail code must not be empty", dc, FSMPackage.Literals.DETAIL_CODE__LINES);
 		
-		// ccstring should be new standard
-//		for(String line : dc.getLines()){
-//			// bad: "\r\n" is affected too
-//			if(line.contains(Strings.newLine()))
-//				warning("multi line string", dc, FSMPackage.Literals.DETAIL_CODE__LINES, dc.getLines().indexOf(line), MULTI_LINE_DETAILCODE);
-//		}
-		
+		// ccstring is new standard for detail code
+		boolean isPlainStyle = false;
 		List<INode> lineNodes = NodeModelUtils.findNodesForFeature(dc, FSMPackage.Literals.DETAIL_CODE__LINES);
 		for(INode lineNode : lineNodes){
 			if(lineNode.getGrammarElement() instanceof RuleCall){
-				if(((RuleCall)lineNode.getGrammarElement()).getRule() == grammar.getCC_STRINGRule()) {
+				AbstractRule rule = ((RuleCall)lineNode.getGrammarElement()).getRule();
+				if(rule == grammar.getCC_STRINGRule()) {
 					CCStringIndentation ccStringIndent = new CCStringIndentation(CC_StringConveter.stripDelim(lineNode.getText()));
 					if(!ccStringIndent.validateIndentation())
 						warning("Inconsistent indentation", dc, FSMPackage.Literals.DETAIL_CODE__LINES, lineNodes.indexOf(lineNode));
+				} else if(rule == grammar.getSTRINGRule()) {
+					isPlainStyle = true;
 				}
 			}
+		}
+		if(isPlainStyle) {
+			warning("old style line string", dc, null, PLAIN_STRING_DETAILCODE);
 		}
 	}
 	

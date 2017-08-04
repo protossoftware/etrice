@@ -491,22 +491,22 @@ public interface FSMPackage extends EPackage
   int DETAIL_CODE = 8;
 
   /**
-   * The feature id for the '<em><b>Used</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int DETAIL_CODE__USED = 0;
-
-  /**
    * The feature id for the '<em><b>Lines</b></em>' attribute list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int DETAIL_CODE__LINES = 1;
+  int DETAIL_CODE__LINES = 0;
+
+  /**
+   * The feature id for the '<em><b>Used</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DETAIL_CODE__USED = 1;
 
   /**
    * The number of structural features of the '<em>Detail Code</em>' class.
@@ -1988,17 +1988,6 @@ public interface FSMPackage extends EPackage
   EClass getDetailCode();
 
   /**
-   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.fsm.fSM.DetailCode#isUsed <em>Used</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Used</em>'.
-   * @see org.eclipse.etrice.core.fsm.fSM.DetailCode#isUsed()
-   * @see #getDetailCode()
-   * @generated
-   */
-  EAttribute getDetailCode_Used();
-
-  /**
    * Returns the meta object for the attribute list '{@link org.eclipse.etrice.core.fsm.fSM.DetailCode#getLines <em>Lines</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2008,6 +1997,17 @@ public interface FSMPackage extends EPackage
    * @generated
    */
   EAttribute getDetailCode_Lines();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.fsm.fSM.DetailCode#isUsed <em>Used</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Used</em>'.
+   * @see org.eclipse.etrice.core.fsm.fSM.DetailCode#isUsed()
+   * @see #getDetailCode()
+   * @generated
+   */
+  EAttribute getDetailCode_Used();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.etrice.core.fsm.fSM.TrPoint <em>Tr Point</em>}'.
@@ -2864,20 +2864,20 @@ public interface FSMPackage extends EPackage
     EClass DETAIL_CODE = eINSTANCE.getDetailCode();
 
     /**
-     * The meta object literal for the '<em><b>Used</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute DETAIL_CODE__USED = eINSTANCE.getDetailCode_Used();
-
-    /**
      * The meta object literal for the '<em><b>Lines</b></em>' attribute list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
     EAttribute DETAIL_CODE__LINES = eINSTANCE.getDetailCode_Lines();
+
+    /**
+     * The meta object literal for the '<em><b>Used</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute DETAIL_CODE__USED = eINSTANCE.getDetailCode_Used();
 
     /**
      * The meta object literal for the '{@link org.eclipse.etrice.core.fsm.fSM.impl.TrPointImpl <em>Tr Point</em>}' class.

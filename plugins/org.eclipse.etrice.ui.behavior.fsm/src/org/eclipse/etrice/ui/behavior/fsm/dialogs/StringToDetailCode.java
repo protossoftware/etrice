@@ -21,24 +21,11 @@ public class StringToDetailCode extends Converter {
 	public Object convert(Object fromObject) {
 		if (fromObject instanceof String) {
 			String code = (String) fromObject;
-			if (code.isEmpty())
-				return emptyIsNull? null:createEmptyDetailCode();
-
-			String trimmed = code.trim();
-			if (trimmed.isEmpty())
+			if (code.isEmpty() || code.trim().isEmpty())
 				return emptyIsNull? null:createEmptyDetailCode();
 			
-			// first check for Windows line endings, if not present then split by Unix line ending
-			String[] cmds = code.indexOf("\r\n")>=0 ? code.split("\r\n") : code.split("\n");
 			DetailCode dc = FSMFactory.eINSTANCE.createDetailCode();
-			for (int i = 0; i < cmds.length; i++) {
-				dc.getLines().add(cmds[i]);
-			}
-			// trim last command if empty
-			if (cmds[cmds.length-1].isEmpty())
-				dc.getLines().remove(cmds.length-1);
-			
-			dc.setUsed(true);
+			dc.getLines().add(code);
 			
 			return dc;
 		}

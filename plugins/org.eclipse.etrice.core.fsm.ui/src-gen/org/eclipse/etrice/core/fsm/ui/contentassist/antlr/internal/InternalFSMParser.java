@@ -22,12 +22,12 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalFSMParser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_HEX", "RULE_INT", "RULE_STRING", "RULE_CC_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'mandatory'", "'false'", "'+'", "'-'", "'e'", "'E'", "'eventdriven'", "'datadriven'", "'async'", "'sync'", "'ptBoolean'", "'ptInteger'", "'ptReal'", "'ptCharacter'", "'ModelComponent'", "'extends'", "'{'", "'}'", "'StateMachine'", "'State'", "'entry'", "'exit'", "'do'", "'subgraph'", "'RefinedState'", "'TransitionPoint'", "'EntryPoint'", "'ExitPoint'", "'ChoicePoint'", "'Transition'", "':'", "'initial'", "'->'", "'action'", "'triggers'", "'or'", "'guard'", "'cond'", "'RefinedTransition'", "'my'", "'of'", "'cp'", "'<'", "'>'", "'|'", "'in'", "'('", "')'", "','", "'out'", "'='", "'attribute'", "'.*'", "'['", "']'", "'.'", "'abstract'", "'handler'", "'optional'", "'true'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_HEX", "RULE_INT", "RULE_CC_STRING", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'mandatory'", "'false'", "'+'", "'-'", "'e'", "'E'", "'eventdriven'", "'datadriven'", "'async'", "'sync'", "'ptBoolean'", "'ptInteger'", "'ptReal'", "'ptCharacter'", "'ModelComponent'", "'extends'", "'{'", "'}'", "'StateMachine'", "'State'", "'entry'", "'exit'", "'do'", "'subgraph'", "'RefinedState'", "'TransitionPoint'", "'EntryPoint'", "'ExitPoint'", "'ChoicePoint'", "'Transition'", "':'", "'initial'", "'->'", "'action'", "'triggers'", "'or'", "'guard'", "'cond'", "'RefinedTransition'", "'my'", "'of'", "'cp'", "'<'", "'>'", "'|'", "'in'", "'('", "')'", "','", "'out'", "'='", "'attribute'", "'.*'", "'['", "']'", "'.'", "'abstract'", "'handler'", "'optional'", "'true'"
     };
     public static final int RULE_HEX=5;
     public static final int T__50=50;
     public static final int T__19=19;
-    public static final int RULE_CC_STRING=8;
+    public static final int RULE_CC_STRING=7;
     public static final int T__15=15;
     public static final int T__59=59;
     public static final int T__16=16;
@@ -69,7 +69,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
     public static final int T__70=70;
     public static final int T__71=71;
     public static final int T__72=72;
-    public static final int RULE_STRING=7;
+    public static final int RULE_STRING=8;
     public static final int RULE_SL_COMMENT=10;
     public static final int T__37=37;
     public static final int T__38=38;
@@ -4823,29 +4823,29 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__DetailCode__Alternatives"
-    // InternalFSM.g:1719:1: rule__DetailCode__Alternatives : ( ( ( rule__DetailCode__Group_0__0 ) ) | ( ( rule__DetailCode__LinesAssignment_1 )? ) );
+    // InternalFSM.g:1719:1: rule__DetailCode__Alternatives : ( ( ( rule__DetailCode__Group_0__0 ) ) | ( ( rule__DetailCode__Group_1__0 ) ) );
     public final void rule__DetailCode__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalFSM.g:1723:1: ( ( ( rule__DetailCode__Group_0__0 ) ) | ( ( rule__DetailCode__LinesAssignment_1 )? ) )
-            int alt7=2;
-            int LA7_0 = input.LA(1);
+            // InternalFSM.g:1723:1: ( ( ( rule__DetailCode__Group_0__0 ) ) | ( ( rule__DetailCode__Group_1__0 ) ) )
+            int alt6=2;
+            int LA6_0 = input.LA(1);
 
-            if ( (LA7_0==29) ) {
-                alt7=1;
+            if ( (LA6_0==EOF||LA6_0==RULE_CC_STRING||LA6_0==30||(LA6_0>=34 && LA6_0<=36)||LA6_0==46||LA6_0==56) ) {
+                alt6=1;
             }
-            else if ( (LA7_0==EOF||LA7_0==RULE_CC_STRING||LA7_0==30||(LA7_0>=34 && LA7_0<=36)||LA7_0==46||LA7_0==56) ) {
-                alt7=2;
+            else if ( (LA6_0==29) ) {
+                alt6=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 7, 0, input);
+                    new NoViableAltException("", 6, 0, input);
 
                 throw nvae;
             }
-            switch (alt7) {
+            switch (alt6) {
                 case 1 :
                     // InternalFSM.g:1724:1: ( ( rule__DetailCode__Group_0__0 ) )
                     {
@@ -4872,35 +4872,24 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 2 :
-                    // InternalFSM.g:1730:6: ( ( rule__DetailCode__LinesAssignment_1 )? )
+                    // InternalFSM.g:1730:6: ( ( rule__DetailCode__Group_1__0 ) )
                     {
-                    // InternalFSM.g:1730:6: ( ( rule__DetailCode__LinesAssignment_1 )? )
-                    // InternalFSM.g:1731:1: ( rule__DetailCode__LinesAssignment_1 )?
+                    // InternalFSM.g:1730:6: ( ( rule__DetailCode__Group_1__0 ) )
+                    // InternalFSM.g:1731:1: ( rule__DetailCode__Group_1__0 )
                     {
-                     before(grammarAccess.getDetailCodeAccess().getLinesAssignment_1()); 
-                    // InternalFSM.g:1732:1: ( rule__DetailCode__LinesAssignment_1 )?
-                    int alt6=2;
-                    int LA6_0 = input.LA(1);
+                     before(grammarAccess.getDetailCodeAccess().getGroup_1()); 
+                    // InternalFSM.g:1732:1: ( rule__DetailCode__Group_1__0 )
+                    // InternalFSM.g:1732:2: rule__DetailCode__Group_1__0
+                    {
+                    pushFollow(FOLLOW_2);
+                    rule__DetailCode__Group_1__0();
 
-                    if ( (LA6_0==RULE_CC_STRING) ) {
-                        alt6=1;
-                    }
-                    switch (alt6) {
-                        case 1 :
-                            // InternalFSM.g:1732:2: rule__DetailCode__LinesAssignment_1
-                            {
-                            pushFollow(FOLLOW_2);
-                            rule__DetailCode__LinesAssignment_1();
+                    state._fsp--;
 
-                            state._fsp--;
-
-
-                            }
-                            break;
 
                     }
 
-                     after(grammarAccess.getDetailCodeAccess().getLinesAssignment_1()); 
+                     after(grammarAccess.getDetailCodeAccess().getGroup_1()); 
 
                     }
 
@@ -4932,32 +4921,32 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             
         try {
             // InternalFSM.g:1745:1: ( ( ruleTransitionPoint ) | ( ruleEntryPoint ) | ( ruleExitPoint ) )
-            int alt8=3;
+            int alt7=3;
             switch ( input.LA(1) ) {
             case 38:
             case 70:
                 {
-                alt8=1;
+                alt7=1;
                 }
                 break;
             case 39:
                 {
-                alt8=2;
+                alt7=2;
                 }
                 break;
             case 40:
                 {
-                alt8=3;
+                alt7=3;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 8, 0, input);
+                    new NoViableAltException("", 7, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt8) {
+            switch (alt7) {
                 case 1 :
                     // InternalFSM.g:1746:1: ( ruleTransitionPoint )
                     {
@@ -5040,68 +5029,68 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             
         try {
             // InternalFSM.g:1774:1: ( ( ruleInitialTransition ) | ( ruleNonInitialTransition ) )
-            int alt9=2;
-            int LA9_0 = input.LA(1);
+            int alt8=2;
+            int LA8_0 = input.LA(1);
 
-            if ( (LA9_0==42) ) {
-                int LA9_1 = input.LA(2);
+            if ( (LA8_0==42) ) {
+                int LA8_1 = input.LA(2);
 
-                if ( (LA9_1==RULE_ID) ) {
-                    int LA9_2 = input.LA(3);
+                if ( (LA8_1==RULE_ID) ) {
+                    int LA8_2 = input.LA(3);
 
-                    if ( (LA9_2==43) ) {
-                        int LA9_3 = input.LA(4);
+                    if ( (LA8_2==43) ) {
+                        int LA8_3 = input.LA(4);
 
-                        if ( (LA9_3==44) ) {
-                            alt9=1;
+                        if ( (LA8_3==44) ) {
+                            alt8=1;
                         }
-                        else if ( (LA9_3==RULE_ID||LA9_3==52||LA9_3==54) ) {
-                            alt9=2;
+                        else if ( (LA8_3==RULE_ID||LA8_3==52||LA8_3==54) ) {
+                            alt8=2;
                         }
                         else {
                             NoViableAltException nvae =
-                                new NoViableAltException("", 9, 3, input);
+                                new NoViableAltException("", 8, 3, input);
 
                             throw nvae;
                         }
                     }
                     else {
                         NoViableAltException nvae =
-                            new NoViableAltException("", 9, 2, input);
+                            new NoViableAltException("", 8, 2, input);
 
                         throw nvae;
                     }
                 }
-                else if ( (LA9_1==43) ) {
-                    int LA9_3 = input.LA(3);
+                else if ( (LA8_1==43) ) {
+                    int LA8_3 = input.LA(3);
 
-                    if ( (LA9_3==44) ) {
-                        alt9=1;
+                    if ( (LA8_3==44) ) {
+                        alt8=1;
                     }
-                    else if ( (LA9_3==RULE_ID||LA9_3==52||LA9_3==54) ) {
-                        alt9=2;
+                    else if ( (LA8_3==RULE_ID||LA8_3==52||LA8_3==54) ) {
+                        alt8=2;
                     }
                     else {
                         NoViableAltException nvae =
-                            new NoViableAltException("", 9, 3, input);
+                            new NoViableAltException("", 8, 3, input);
 
                         throw nvae;
                     }
                 }
                 else {
                     NoViableAltException nvae =
-                        new NoViableAltException("", 9, 1, input);
+                        new NoViableAltException("", 8, 1, input);
 
                     throw nvae;
                 }
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 9, 0, input);
+                    new NoViableAltException("", 8, 0, input);
 
                 throw nvae;
             }
-            switch (alt9) {
+            switch (alt8) {
                 case 1 :
                     // InternalFSM.g:1775:1: ( ruleInitialTransition )
                     {
@@ -5165,9 +5154,9 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             
         try {
             // InternalFSM.g:1796:1: ( ( ruleTransitionChainStartTransition ) | ( ruleContinuationTransition ) | ( ruleCPBranchTransition ) )
-            int alt10=3;
-            alt10 = dfa10.predict(input);
-            switch (alt10) {
+            int alt9=3;
+            alt9 = dfa9.predict(input);
+            switch (alt9) {
                 case 1 :
                     // InternalFSM.g:1797:1: ( ruleTransitionChainStartTransition )
                     {
@@ -5250,9 +5239,9 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             
         try {
             // InternalFSM.g:1824:1: ( ( ruleTriggeredTransition ) | ( ruleGuardedTransition ) )
-            int alt11=2;
-            alt11 = dfa11.predict(input);
-            switch (alt11) {
+            int alt10=2;
+            alt10 = dfa10.predict(input);
+            switch (alt10) {
                 case 1 :
                     // InternalFSM.g:1825:1: ( ruleTriggeredTransition )
                     {
@@ -5316,21 +5305,21 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             
         try {
             // InternalFSM.g:1846:1: ( ( ruleStateTerminal ) | ( ruleTrPointTerminal ) | ( ruleSubStateTrPointTerminal ) | ( ruleChoicepointTerminal ) )
-            int alt12=4;
+            int alt11=4;
             switch ( input.LA(1) ) {
             case RULE_ID:
                 {
-                int LA12_1 = input.LA(2);
+                int LA11_1 = input.LA(2);
 
-                if ( (LA12_1==EOF||(LA12_1>=29 && LA12_1<=30)||LA12_1==32||(LA12_1>=37 && LA12_1<=42)||LA12_1==45||LA12_1==51||LA12_1==66||LA12_1==70) ) {
-                    alt12=1;
+                if ( (LA11_1==EOF||(LA11_1>=29 && LA11_1<=30)||LA11_1==32||(LA11_1>=37 && LA11_1<=42)||LA11_1==45||LA11_1==51||LA11_1==66||LA11_1==70) ) {
+                    alt11=1;
                 }
-                else if ( (LA12_1==53) ) {
-                    alt12=3;
+                else if ( (LA11_1==53) ) {
+                    alt11=3;
                 }
                 else {
                     NoViableAltException nvae =
-                        new NoViableAltException("", 12, 1, input);
+                        new NoViableAltException("", 11, 1, input);
 
                     throw nvae;
                 }
@@ -5338,22 +5327,22 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
                 break;
             case 52:
                 {
-                alt12=2;
+                alt11=2;
                 }
                 break;
             case 54:
                 {
-                alt12=4;
+                alt11=4;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 12, 0, input);
+                    new NoViableAltException("", 11, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt12) {
+            switch (alt11) {
                 case 1 :
                     // InternalFSM.g:1847:1: ( ruleStateTerminal )
                     {
@@ -5455,22 +5444,22 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             
         try {
             // InternalFSM.g:1880:1: ( ( ruleInSemanticsRule ) | ( ruleOutSemanticsRule ) )
-            int alt13=2;
-            int LA13_0 = input.LA(1);
+            int alt12=2;
+            int LA12_0 = input.LA(1);
 
-            if ( (LA13_0==58) ) {
-                alt13=1;
+            if ( (LA12_0==58) ) {
+                alt12=1;
             }
-            else if ( (LA13_0==62) ) {
-                alt13=2;
+            else if ( (LA12_0==62) ) {
+                alt12=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 13, 0, input);
+                    new NoViableAltException("", 12, 0, input);
 
                 throw nvae;
             }
-            switch (alt13) {
+            switch (alt12) {
                 case 1 :
                     // InternalFSM.g:1881:1: ( ruleInSemanticsRule )
                     {
@@ -5534,22 +5523,22 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             
         try {
             // InternalFSM.g:1902:1: ( ( ( rule__InSemanticsRule__FollowUpsAssignment_3_1_0 ) ) | ( ( rule__InSemanticsRule__Group_3_1_1__0 ) ) )
-            int alt14=2;
-            int LA14_0 = input.LA(1);
+            int alt13=2;
+            int LA13_0 = input.LA(1);
 
-            if ( (LA14_0==58||LA14_0==62) ) {
-                alt14=1;
+            if ( (LA13_0==58||LA13_0==62) ) {
+                alt13=1;
             }
-            else if ( (LA14_0==59) ) {
-                alt14=2;
+            else if ( (LA13_0==59) ) {
+                alt13=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 14, 0, input);
+                    new NoViableAltException("", 13, 0, input);
 
                 throw nvae;
             }
-            switch (alt14) {
+            switch (alt13) {
                 case 1 :
                     // InternalFSM.g:1903:1: ( ( rule__InSemanticsRule__FollowUpsAssignment_3_1_0 ) )
                     {
@@ -5625,22 +5614,22 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             
         try {
             // InternalFSM.g:1924:1: ( ( ( rule__OutSemanticsRule__FollowUpsAssignment_3_1_0 ) ) | ( ( rule__OutSemanticsRule__Group_3_1_1__0 ) ) )
-            int alt15=2;
-            int LA15_0 = input.LA(1);
+            int alt14=2;
+            int LA14_0 = input.LA(1);
 
-            if ( (LA15_0==58||LA15_0==62) ) {
-                alt15=1;
+            if ( (LA14_0==58||LA14_0==62) ) {
+                alt14=1;
             }
-            else if ( (LA15_0==59) ) {
-                alt15=2;
+            else if ( (LA14_0==59) ) {
+                alt14=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 15, 0, input);
+                    new NoViableAltException("", 14, 0, input);
 
                 throw nvae;
             }
-            switch (alt15) {
+            switch (alt14) {
                 case 1 :
                     // InternalFSM.g:1925:1: ( ( rule__OutSemanticsRule__FollowUpsAssignment_3_1_0 ) )
                     {
@@ -5716,108 +5705,108 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             
         try {
             // InternalFSM.g:1947:1: ( ( ruleSimpleAnnotationAttribute ) | ( ruleEnumAnnotationAttribute ) )
-            int alt16=2;
-            int LA16_0 = input.LA(1);
+            int alt15=2;
+            int LA15_0 = input.LA(1);
 
-            if ( (LA16_0==71) ) {
-                int LA16_1 = input.LA(2);
+            if ( (LA15_0==71) ) {
+                int LA15_1 = input.LA(2);
 
-                if ( (LA16_1==64) ) {
-                    int LA16_3 = input.LA(3);
+                if ( (LA15_1==64) ) {
+                    int LA15_3 = input.LA(3);
 
-                    if ( (LA16_3==RULE_ID) ) {
-                        int LA16_4 = input.LA(4);
+                    if ( (LA15_3==RULE_ID) ) {
+                        int LA15_4 = input.LA(4);
 
-                        if ( (LA16_4==43) ) {
-                            int LA16_5 = input.LA(5);
+                        if ( (LA15_4==43) ) {
+                            int LA15_5 = input.LA(5);
 
-                            if ( ((LA16_5>=23 && LA16_5<=26)) ) {
-                                alt16=1;
+                            if ( ((LA15_5>=23 && LA15_5<=26)) ) {
+                                alt15=1;
                             }
-                            else if ( (LA16_5==29) ) {
-                                alt16=2;
+                            else if ( (LA15_5==29) ) {
+                                alt15=2;
                             }
                             else {
                                 NoViableAltException nvae =
-                                    new NoViableAltException("", 16, 5, input);
+                                    new NoViableAltException("", 15, 5, input);
 
                                 throw nvae;
                             }
                         }
                         else {
                             NoViableAltException nvae =
-                                new NoViableAltException("", 16, 4, input);
+                                new NoViableAltException("", 15, 4, input);
 
                             throw nvae;
                         }
                     }
                     else {
                         NoViableAltException nvae =
-                            new NoViableAltException("", 16, 3, input);
+                            new NoViableAltException("", 15, 3, input);
 
                         throw nvae;
                     }
                 }
                 else {
                     NoViableAltException nvae =
-                        new NoViableAltException("", 16, 1, input);
+                        new NoViableAltException("", 15, 1, input);
 
                     throw nvae;
                 }
             }
-            else if ( (LA16_0==13) ) {
-                int LA16_2 = input.LA(2);
+            else if ( (LA15_0==13) ) {
+                int LA15_2 = input.LA(2);
 
-                if ( (LA16_2==64) ) {
-                    int LA16_3 = input.LA(3);
+                if ( (LA15_2==64) ) {
+                    int LA15_3 = input.LA(3);
 
-                    if ( (LA16_3==RULE_ID) ) {
-                        int LA16_4 = input.LA(4);
+                    if ( (LA15_3==RULE_ID) ) {
+                        int LA15_4 = input.LA(4);
 
-                        if ( (LA16_4==43) ) {
-                            int LA16_5 = input.LA(5);
+                        if ( (LA15_4==43) ) {
+                            int LA15_5 = input.LA(5);
 
-                            if ( ((LA16_5>=23 && LA16_5<=26)) ) {
-                                alt16=1;
+                            if ( ((LA15_5>=23 && LA15_5<=26)) ) {
+                                alt15=1;
                             }
-                            else if ( (LA16_5==29) ) {
-                                alt16=2;
+                            else if ( (LA15_5==29) ) {
+                                alt15=2;
                             }
                             else {
                                 NoViableAltException nvae =
-                                    new NoViableAltException("", 16, 5, input);
+                                    new NoViableAltException("", 15, 5, input);
 
                                 throw nvae;
                             }
                         }
                         else {
                             NoViableAltException nvae =
-                                new NoViableAltException("", 16, 4, input);
+                                new NoViableAltException("", 15, 4, input);
 
                             throw nvae;
                         }
                     }
                     else {
                         NoViableAltException nvae =
-                            new NoViableAltException("", 16, 3, input);
+                            new NoViableAltException("", 15, 3, input);
 
                         throw nvae;
                     }
                 }
                 else {
                     NoViableAltException nvae =
-                        new NoViableAltException("", 16, 2, input);
+                        new NoViableAltException("", 15, 2, input);
 
                     throw nvae;
                 }
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 16, 0, input);
+                    new NoViableAltException("", 15, 0, input);
 
                 throw nvae;
             }
-            switch (alt16) {
+            switch (alt15) {
                 case 1 :
                     // InternalFSM.g:1948:1: ( ruleSimpleAnnotationAttribute )
                     {
@@ -5881,22 +5870,22 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             
         try {
             // InternalFSM.g:1969:1: ( ( ( rule__SimpleAnnotationAttribute__OptionalAssignment_0_0 ) ) | ( 'mandatory' ) )
-            int alt17=2;
-            int LA17_0 = input.LA(1);
+            int alt16=2;
+            int LA16_0 = input.LA(1);
 
-            if ( (LA17_0==71) ) {
-                alt17=1;
+            if ( (LA16_0==71) ) {
+                alt16=1;
             }
-            else if ( (LA17_0==13) ) {
-                alt17=2;
+            else if ( (LA16_0==13) ) {
+                alt16=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 17, 0, input);
+                    new NoViableAltException("", 16, 0, input);
 
                 throw nvae;
             }
-            switch (alt17) {
+            switch (alt16) {
                 case 1 :
                     // InternalFSM.g:1970:1: ( ( rule__SimpleAnnotationAttribute__OptionalAssignment_0_0 ) )
                     {
@@ -5962,22 +5951,22 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             
         try {
             // InternalFSM.g:1993:1: ( ( ( rule__EnumAnnotationAttribute__OptionalAssignment_0_0 ) ) | ( 'mandatory' ) )
-            int alt18=2;
-            int LA18_0 = input.LA(1);
+            int alt17=2;
+            int LA17_0 = input.LA(1);
 
-            if ( (LA18_0==71) ) {
-                alt18=1;
+            if ( (LA17_0==71) ) {
+                alt17=1;
             }
-            else if ( (LA18_0==13) ) {
-                alt18=2;
+            else if ( (LA17_0==13) ) {
+                alt17=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 18, 0, input);
+                    new NoViableAltException("", 17, 0, input);
 
                 throw nvae;
             }
-            switch (alt18) {
+            switch (alt17) {
                 case 1 :
                     // InternalFSM.g:1994:1: ( ( rule__EnumAnnotationAttribute__OptionalAssignment_0_0 ) )
                     {
@@ -6043,12 +6032,12 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             
         try {
             // InternalFSM.g:2019:1: ( ( ruleBooleanLiteral ) | ( ruleNumberLiteral ) | ( ruleStringLiteral ) )
-            int alt19=3;
+            int alt18=3;
             switch ( input.LA(1) ) {
             case 14:
             case 72:
                 {
-                alt19=1;
+                alt18=1;
                 }
                 break;
             case RULE_HEX:
@@ -6056,22 +6045,22 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             case 15:
             case 16:
                 {
-                alt19=2;
+                alt18=2;
                 }
                 break;
             case RULE_STRING:
                 {
-                alt19=3;
+                alt18=3;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 19, 0, input);
+                    new NoViableAltException("", 18, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt19) {
+            switch (alt18) {
                 case 1 :
                     // InternalFSM.g:2020:1: ( ruleBooleanLiteral )
                     {
@@ -6154,22 +6143,22 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             
         try {
             // InternalFSM.g:2047:1: ( ( 'false' ) | ( ( rule__BooleanLiteral__IsTrueAssignment_1_1 ) ) )
-            int alt20=2;
-            int LA20_0 = input.LA(1);
+            int alt19=2;
+            int LA19_0 = input.LA(1);
 
-            if ( (LA20_0==14) ) {
-                alt20=1;
+            if ( (LA19_0==14) ) {
+                alt19=1;
             }
-            else if ( (LA20_0==72) ) {
-                alt20=2;
+            else if ( (LA19_0==72) ) {
+                alt19=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 20, 0, input);
+                    new NoViableAltException("", 19, 0, input);
 
                 throw nvae;
             }
-            switch (alt20) {
+            switch (alt19) {
                 case 1 :
                     // InternalFSM.g:2048:1: ( 'false' )
                     {
@@ -6235,31 +6224,31 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             
         try {
             // InternalFSM.g:2071:1: ( ( ruleIntLiteral ) | ( ruleRealLiteral ) )
-            int alt21=2;
+            int alt20=2;
             switch ( input.LA(1) ) {
             case 15:
                 {
-                int LA21_1 = input.LA(2);
+                int LA20_1 = input.LA(2);
 
-                if ( (LA21_1==RULE_INT) ) {
-                    int LA21_3 = input.LA(3);
+                if ( (LA20_1==RULE_INT) ) {
+                    int LA20_3 = input.LA(3);
 
-                    if ( (LA21_3==EOF) ) {
-                        alt21=1;
+                    if ( (LA20_3==68) ) {
+                        alt20=2;
                     }
-                    else if ( (LA21_3==68) ) {
-                        alt21=2;
+                    else if ( (LA20_3==EOF) ) {
+                        alt20=1;
                     }
                     else {
                         NoViableAltException nvae =
-                            new NoViableAltException("", 21, 3, input);
+                            new NoViableAltException("", 20, 3, input);
 
                         throw nvae;
                     }
                 }
                 else {
                     NoViableAltException nvae =
-                        new NoViableAltException("", 21, 1, input);
+                        new NoViableAltException("", 20, 1, input);
 
                     throw nvae;
                 }
@@ -6267,27 +6256,27 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
                 break;
             case 16:
                 {
-                int LA21_2 = input.LA(2);
+                int LA20_2 = input.LA(2);
 
-                if ( (LA21_2==RULE_INT) ) {
-                    int LA21_3 = input.LA(3);
+                if ( (LA20_2==RULE_INT) ) {
+                    int LA20_3 = input.LA(3);
 
-                    if ( (LA21_3==EOF) ) {
-                        alt21=1;
+                    if ( (LA20_3==68) ) {
+                        alt20=2;
                     }
-                    else if ( (LA21_3==68) ) {
-                        alt21=2;
+                    else if ( (LA20_3==EOF) ) {
+                        alt20=1;
                     }
                     else {
                         NoViableAltException nvae =
-                            new NoViableAltException("", 21, 3, input);
+                            new NoViableAltException("", 20, 3, input);
 
                         throw nvae;
                     }
                 }
                 else {
                     NoViableAltException nvae =
-                        new NoViableAltException("", 21, 2, input);
+                        new NoViableAltException("", 20, 2, input);
 
                     throw nvae;
                 }
@@ -6295,17 +6284,17 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
                 break;
             case RULE_INT:
                 {
-                int LA21_3 = input.LA(2);
+                int LA20_3 = input.LA(2);
 
-                if ( (LA21_3==EOF) ) {
-                    alt21=1;
+                if ( (LA20_3==68) ) {
+                    alt20=2;
                 }
-                else if ( (LA21_3==68) ) {
-                    alt21=2;
+                else if ( (LA20_3==EOF) ) {
+                    alt20=1;
                 }
                 else {
                     NoViableAltException nvae =
-                        new NoViableAltException("", 21, 3, input);
+                        new NoViableAltException("", 20, 3, input);
 
                     throw nvae;
                 }
@@ -6313,17 +6302,17 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
                 break;
             case RULE_HEX:
                 {
-                alt21=1;
+                alt20=1;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 21, 0, input);
+                    new NoViableAltException("", 20, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt21) {
+            switch (alt20) {
                 case 1 :
                     // InternalFSM.g:2072:1: ( ruleIntLiteral )
                     {
@@ -6387,22 +6376,22 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             
         try {
             // InternalFSM.g:2093:1: ( ( ( rule__Integer__Group_0__0 ) ) | ( RULE_HEX ) )
-            int alt22=2;
-            int LA22_0 = input.LA(1);
+            int alt21=2;
+            int LA21_0 = input.LA(1);
 
-            if ( (LA22_0==RULE_INT||(LA22_0>=15 && LA22_0<=16)) ) {
-                alt22=1;
+            if ( (LA21_0==RULE_INT||(LA21_0>=15 && LA21_0<=16)) ) {
+                alt21=1;
             }
-            else if ( (LA22_0==RULE_HEX) ) {
-                alt22=2;
+            else if ( (LA21_0==RULE_HEX) ) {
+                alt21=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 22, 0, input);
+                    new NoViableAltException("", 21, 0, input);
 
                 throw nvae;
             }
-            switch (alt22) {
+            switch (alt21) {
                 case 1 :
                     // InternalFSM.g:2094:1: ( ( rule__Integer__Group_0__0 ) )
                     {
@@ -6468,22 +6457,22 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             
         try {
             // InternalFSM.g:2115:1: ( ( '+' ) | ( '-' ) )
-            int alt23=2;
-            int LA23_0 = input.LA(1);
+            int alt22=2;
+            int LA22_0 = input.LA(1);
 
-            if ( (LA23_0==15) ) {
-                alt23=1;
+            if ( (LA22_0==15) ) {
+                alt22=1;
             }
-            else if ( (LA23_0==16) ) {
-                alt23=2;
+            else if ( (LA22_0==16) ) {
+                alt22=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 23, 0, input);
+                    new NoViableAltException("", 22, 0, input);
 
                 throw nvae;
             }
-            switch (alt23) {
+            switch (alt22) {
                 case 1 :
                     // InternalFSM.g:2116:1: ( '+' )
                     {
@@ -6539,51 +6528,51 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             
         try {
             // InternalFSM.g:2141:1: ( ( ruleDecimal ) | ( ruleDecimalExp ) )
-            int alt24=2;
+            int alt23=2;
             switch ( input.LA(1) ) {
             case 15:
                 {
-                int LA24_1 = input.LA(2);
+                int LA23_1 = input.LA(2);
 
-                if ( (LA24_1==RULE_INT) ) {
-                    int LA24_3 = input.LA(3);
+                if ( (LA23_1==RULE_INT) ) {
+                    int LA23_3 = input.LA(3);
 
-                    if ( (LA24_3==68) ) {
-                        int LA24_4 = input.LA(4);
+                    if ( (LA23_3==68) ) {
+                        int LA23_4 = input.LA(4);
 
-                        if ( (LA24_4==RULE_INT) ) {
-                            int LA24_5 = input.LA(5);
+                        if ( (LA23_4==RULE_INT) ) {
+                            int LA23_5 = input.LA(5);
 
-                            if ( (LA24_5==EOF) ) {
-                                alt24=1;
+                            if ( (LA23_5==EOF) ) {
+                                alt23=1;
                             }
-                            else if ( ((LA24_5>=17 && LA24_5<=18)) ) {
-                                alt24=2;
+                            else if ( ((LA23_5>=17 && LA23_5<=18)) ) {
+                                alt23=2;
                             }
                             else {
                                 NoViableAltException nvae =
-                                    new NoViableAltException("", 24, 5, input);
+                                    new NoViableAltException("", 23, 5, input);
 
                                 throw nvae;
                             }
                         }
                         else {
                             NoViableAltException nvae =
-                                new NoViableAltException("", 24, 4, input);
+                                new NoViableAltException("", 23, 4, input);
 
                             throw nvae;
                         }
                     }
                     else {
                         NoViableAltException nvae =
-                            new NoViableAltException("", 24, 3, input);
+                            new NoViableAltException("", 23, 3, input);
 
                         throw nvae;
                     }
                 }
                 else {
                     NoViableAltException nvae =
-                        new NoViableAltException("", 24, 1, input);
+                        new NoViableAltException("", 23, 1, input);
 
                     throw nvae;
                 }
@@ -6591,47 +6580,47 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
                 break;
             case 16:
                 {
-                int LA24_2 = input.LA(2);
+                int LA23_2 = input.LA(2);
 
-                if ( (LA24_2==RULE_INT) ) {
-                    int LA24_3 = input.LA(3);
+                if ( (LA23_2==RULE_INT) ) {
+                    int LA23_3 = input.LA(3);
 
-                    if ( (LA24_3==68) ) {
-                        int LA24_4 = input.LA(4);
+                    if ( (LA23_3==68) ) {
+                        int LA23_4 = input.LA(4);
 
-                        if ( (LA24_4==RULE_INT) ) {
-                            int LA24_5 = input.LA(5);
+                        if ( (LA23_4==RULE_INT) ) {
+                            int LA23_5 = input.LA(5);
 
-                            if ( (LA24_5==EOF) ) {
-                                alt24=1;
+                            if ( (LA23_5==EOF) ) {
+                                alt23=1;
                             }
-                            else if ( ((LA24_5>=17 && LA24_5<=18)) ) {
-                                alt24=2;
+                            else if ( ((LA23_5>=17 && LA23_5<=18)) ) {
+                                alt23=2;
                             }
                             else {
                                 NoViableAltException nvae =
-                                    new NoViableAltException("", 24, 5, input);
+                                    new NoViableAltException("", 23, 5, input);
 
                                 throw nvae;
                             }
                         }
                         else {
                             NoViableAltException nvae =
-                                new NoViableAltException("", 24, 4, input);
+                                new NoViableAltException("", 23, 4, input);
 
                             throw nvae;
                         }
                     }
                     else {
                         NoViableAltException nvae =
-                            new NoViableAltException("", 24, 3, input);
+                            new NoViableAltException("", 23, 3, input);
 
                         throw nvae;
                     }
                 }
                 else {
                     NoViableAltException nvae =
-                        new NoViableAltException("", 24, 2, input);
+                        new NoViableAltException("", 23, 2, input);
 
                     throw nvae;
                 }
@@ -6639,37 +6628,37 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
                 break;
             case RULE_INT:
                 {
-                int LA24_3 = input.LA(2);
+                int LA23_3 = input.LA(2);
 
-                if ( (LA24_3==68) ) {
-                    int LA24_4 = input.LA(3);
+                if ( (LA23_3==68) ) {
+                    int LA23_4 = input.LA(3);
 
-                    if ( (LA24_4==RULE_INT) ) {
-                        int LA24_5 = input.LA(4);
+                    if ( (LA23_4==RULE_INT) ) {
+                        int LA23_5 = input.LA(4);
 
-                        if ( (LA24_5==EOF) ) {
-                            alt24=1;
+                        if ( (LA23_5==EOF) ) {
+                            alt23=1;
                         }
-                        else if ( ((LA24_5>=17 && LA24_5<=18)) ) {
-                            alt24=2;
+                        else if ( ((LA23_5>=17 && LA23_5<=18)) ) {
+                            alt23=2;
                         }
                         else {
                             NoViableAltException nvae =
-                                new NoViableAltException("", 24, 5, input);
+                                new NoViableAltException("", 23, 5, input);
 
                             throw nvae;
                         }
                     }
                     else {
                         NoViableAltException nvae =
-                            new NoViableAltException("", 24, 4, input);
+                            new NoViableAltException("", 23, 4, input);
 
                         throw nvae;
                     }
                 }
                 else {
                     NoViableAltException nvae =
-                        new NoViableAltException("", 24, 3, input);
+                        new NoViableAltException("", 23, 3, input);
 
                     throw nvae;
                 }
@@ -6677,12 +6666,12 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 24, 0, input);
+                    new NoViableAltException("", 23, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt24) {
+            switch (alt23) {
                 case 1 :
                     // InternalFSM.g:2142:1: ( ruleDecimal )
                     {
@@ -6746,22 +6735,22 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             
         try {
             // InternalFSM.g:2163:1: ( ( '+' ) | ( '-' ) )
-            int alt25=2;
-            int LA25_0 = input.LA(1);
+            int alt24=2;
+            int LA24_0 = input.LA(1);
 
-            if ( (LA25_0==15) ) {
-                alt25=1;
+            if ( (LA24_0==15) ) {
+                alt24=1;
             }
-            else if ( (LA25_0==16) ) {
-                alt25=2;
+            else if ( (LA24_0==16) ) {
+                alt24=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 25, 0, input);
+                    new NoViableAltException("", 24, 0, input);
 
                 throw nvae;
             }
-            switch (alt25) {
+            switch (alt24) {
                 case 1 :
                     // InternalFSM.g:2164:1: ( '+' )
                     {
@@ -6817,22 +6806,22 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             
         try {
             // InternalFSM.g:2189:1: ( ( '+' ) | ( '-' ) )
-            int alt26=2;
-            int LA26_0 = input.LA(1);
+            int alt25=2;
+            int LA25_0 = input.LA(1);
 
-            if ( (LA26_0==15) ) {
-                alt26=1;
+            if ( (LA25_0==15) ) {
+                alt25=1;
             }
-            else if ( (LA26_0==16) ) {
-                alt26=2;
+            else if ( (LA25_0==16) ) {
+                alt25=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 26, 0, input);
+                    new NoViableAltException("", 25, 0, input);
 
                 throw nvae;
             }
-            switch (alt26) {
+            switch (alt25) {
                 case 1 :
                     // InternalFSM.g:2190:1: ( '+' )
                     {
@@ -6888,22 +6877,22 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             
         try {
             // InternalFSM.g:2215:1: ( ( 'e' ) | ( 'E' ) )
-            int alt27=2;
-            int LA27_0 = input.LA(1);
+            int alt26=2;
+            int LA26_0 = input.LA(1);
 
-            if ( (LA27_0==17) ) {
-                alt27=1;
+            if ( (LA26_0==17) ) {
+                alt26=1;
             }
-            else if ( (LA27_0==18) ) {
-                alt27=2;
+            else if ( (LA26_0==18) ) {
+                alt26=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 27, 0, input);
+                    new NoViableAltException("", 26, 0, input);
 
                 throw nvae;
             }
-            switch (alt27) {
+            switch (alt26) {
                 case 1 :
                     // InternalFSM.g:2216:1: ( 'e' )
                     {
@@ -6959,22 +6948,22 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             
         try {
             // InternalFSM.g:2241:1: ( ( '+' ) | ( '-' ) )
-            int alt28=2;
-            int LA28_0 = input.LA(1);
+            int alt27=2;
+            int LA27_0 = input.LA(1);
 
-            if ( (LA28_0==15) ) {
-                alt28=1;
+            if ( (LA27_0==15) ) {
+                alt27=1;
             }
-            else if ( (LA28_0==16) ) {
-                alt28=2;
+            else if ( (LA27_0==16) ) {
+                alt27=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 28, 0, input);
+                    new NoViableAltException("", 27, 0, input);
 
                 throw nvae;
             }
-            switch (alt28) {
+            switch (alt27) {
                 case 1 :
                     // InternalFSM.g:2242:1: ( '+' )
                     {
@@ -7030,36 +7019,36 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             
         try {
             // InternalFSM.g:2267:1: ( ( ( 'eventdriven' ) ) | ( ( 'datadriven' ) ) | ( ( 'async' ) ) | ( ( 'sync' ) ) )
-            int alt29=4;
+            int alt28=4;
             switch ( input.LA(1) ) {
             case 19:
                 {
-                alt29=1;
+                alt28=1;
                 }
                 break;
             case 20:
                 {
-                alt29=2;
+                alt28=2;
                 }
                 break;
             case 21:
                 {
-                alt29=3;
+                alt28=3;
                 }
                 break;
             case 22:
                 {
-                alt29=4;
+                alt28=4;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 29, 0, input);
+                    new NoViableAltException("", 28, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt29) {
+            switch (alt28) {
                 case 1 :
                     // InternalFSM.g:2268:1: ( ( 'eventdriven' ) )
                     {
@@ -7169,36 +7158,36 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             
         try {
             // InternalFSM.g:2305:1: ( ( ( 'ptBoolean' ) ) | ( ( 'ptInteger' ) ) | ( ( 'ptReal' ) ) | ( ( 'ptCharacter' ) ) )
-            int alt30=4;
+            int alt29=4;
             switch ( input.LA(1) ) {
             case 23:
                 {
-                alt30=1;
+                alt29=1;
                 }
                 break;
             case 24:
                 {
-                alt30=2;
+                alt29=2;
                 }
                 break;
             case 25:
                 {
-                alt30=3;
+                alt29=3;
                 }
                 break;
             case 26:
                 {
-                alt30=4;
+                alt29=4;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 30, 0, input);
+                    new NoViableAltException("", 29, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt30) {
+            switch (alt29) {
                 case 1 :
                     // InternalFSM.g:2306:1: ( ( 'ptBoolean' ) )
                     {
@@ -7598,13 +7587,13 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getModelComponentAccess().getGroup_3()); 
             // InternalFSM.g:2449:1: ( rule__ModelComponent__Group_3__0 )?
-            int alt31=2;
-            int LA31_0 = input.LA(1);
+            int alt30=2;
+            int LA30_0 = input.LA(1);
 
-            if ( (LA31_0==28) ) {
-                alt31=1;
+            if ( (LA30_0==28) ) {
+                alt30=1;
             }
-            switch (alt31) {
+            switch (alt30) {
                 case 1 :
                     // InternalFSM.g:2449:2: rule__ModelComponent__Group_3__0
                     {
@@ -8079,17 +8068,17 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getStateGraphAccess().getAlternatives_2()); 
             // InternalFSM.g:2641:1: ( rule__StateGraph__Alternatives_2 )*
-            loop32:
+            loop31:
             do {
-                int alt32=2;
-                int LA32_0 = input.LA(1);
+                int alt31=2;
+                int LA31_0 = input.LA(1);
 
-                if ( (LA32_0==32||(LA32_0>=37 && LA32_0<=42)||LA32_0==51||LA32_0==70) ) {
-                    alt32=1;
+                if ( (LA31_0==32||(LA31_0>=37 && LA31_0<=42)||LA31_0==51||LA31_0==70) ) {
+                    alt31=1;
                 }
 
 
-                switch (alt32) {
+                switch (alt31) {
             	case 1 :
             	    // InternalFSM.g:2641:2: rule__StateGraph__Alternatives_2
             	    {
@@ -8103,7 +8092,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             	    break;
 
             	default :
-            	    break loop32;
+            	    break loop31;
                 }
             } while (true);
 
@@ -8477,17 +8466,17 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getStateMachineAccess().getAlternatives_3()); 
             // InternalFSM.g:2801:1: ( rule__StateMachine__Alternatives_3 )*
-            loop33:
+            loop32:
             do {
-                int alt33=2;
-                int LA33_0 = input.LA(1);
+                int alt32=2;
+                int LA32_0 = input.LA(1);
 
-                if ( (LA33_0==32||(LA33_0>=37 && LA33_0<=42)||LA33_0==51||LA33_0==70) ) {
-                    alt33=1;
+                if ( (LA32_0==32||(LA32_0>=37 && LA32_0<=42)||LA32_0==51||LA32_0==70) ) {
+                    alt32=1;
                 }
 
 
-                switch (alt33) {
+                switch (alt32) {
             	case 1 :
             	    // InternalFSM.g:2801:2: rule__StateMachine__Alternatives_3
             	    {
@@ -8501,7 +8490,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             	    break;
 
             	default :
-            	    break loop33;
+            	    break loop32;
                 }
             } while (true);
 
@@ -8810,13 +8799,13 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getSimpleStateAccess().getDocuAssignment_2()); 
             // InternalFSM.g:2930:1: ( rule__SimpleState__DocuAssignment_2 )?
-            int alt34=2;
-            int LA34_0 = input.LA(1);
+            int alt33=2;
+            int LA33_0 = input.LA(1);
 
-            if ( (LA34_0==66) ) {
-                alt34=1;
+            if ( (LA33_0==66) ) {
+                alt33=1;
             }
-            switch (alt34) {
+            switch (alt33) {
                 case 1 :
                     // InternalFSM.g:2930:2: rule__SimpleState__DocuAssignment_2
                     {
@@ -8901,13 +8890,13 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getSimpleStateAccess().getGroup_3()); 
             // InternalFSM.g:2958:1: ( rule__SimpleState__Group_3__0 )?
-            int alt35=2;
-            int LA35_0 = input.LA(1);
+            int alt34=2;
+            int LA34_0 = input.LA(1);
 
-            if ( (LA35_0==29) ) {
-                alt35=1;
+            if ( (LA34_0==29) ) {
+                alt34=1;
             }
-            switch (alt35) {
+            switch (alt34) {
                 case 1 :
                     // InternalFSM.g:2958:2: rule__SimpleState__Group_3__0
                     {
@@ -9072,13 +9061,13 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getSimpleStateAccess().getGroup_3_1()); 
             // InternalFSM.g:3026:1: ( rule__SimpleState__Group_3_1__0 )?
-            int alt36=2;
-            int LA36_0 = input.LA(1);
+            int alt35=2;
+            int LA35_0 = input.LA(1);
 
-            if ( (LA36_0==33) ) {
-                alt36=1;
+            if ( (LA35_0==33) ) {
+                alt35=1;
             }
-            switch (alt36) {
+            switch (alt35) {
                 case 1 :
                     // InternalFSM.g:3026:2: rule__SimpleState__Group_3_1__0
                     {
@@ -9168,13 +9157,13 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getSimpleStateAccess().getGroup_3_2()); 
             // InternalFSM.g:3055:1: ( rule__SimpleState__Group_3_2__0 )?
-            int alt37=2;
-            int LA37_0 = input.LA(1);
+            int alt36=2;
+            int LA36_0 = input.LA(1);
 
-            if ( (LA37_0==34) ) {
-                alt37=1;
+            if ( (LA36_0==34) ) {
+                alt36=1;
             }
-            switch (alt37) {
+            switch (alt36) {
                 case 1 :
                     // InternalFSM.g:3055:2: rule__SimpleState__Group_3_2__0
                     {
@@ -9264,13 +9253,13 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getSimpleStateAccess().getGroup_3_3()); 
             // InternalFSM.g:3084:1: ( rule__SimpleState__Group_3_3__0 )?
-            int alt38=2;
-            int LA38_0 = input.LA(1);
+            int alt37=2;
+            int LA37_0 = input.LA(1);
 
-            if ( (LA38_0==35) ) {
-                alt38=1;
+            if ( (LA37_0==35) ) {
+                alt37=1;
             }
-            switch (alt38) {
+            switch (alt37) {
                 case 1 :
                     // InternalFSM.g:3084:2: rule__SimpleState__Group_3_3__0
                     {
@@ -9360,13 +9349,13 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getSimpleStateAccess().getGroup_3_4()); 
             // InternalFSM.g:3113:1: ( rule__SimpleState__Group_3_4__0 )?
-            int alt39=2;
-            int LA39_0 = input.LA(1);
+            int alt38=2;
+            int LA38_0 = input.LA(1);
 
-            if ( (LA39_0==36) ) {
-                alt39=1;
+            if ( (LA38_0==36) ) {
+                alt38=1;
             }
-            switch (alt39) {
+            switch (alt38) {
                 case 1 :
                     // InternalFSM.g:3113:2: rule__SimpleState__Group_3_4__0
                     {
@@ -10306,13 +10295,13 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getRefinedStateAccess().getDocuAssignment_2()); 
             // InternalFSM.g:3496:1: ( rule__RefinedState__DocuAssignment_2 )?
-            int alt40=2;
-            int LA40_0 = input.LA(1);
+            int alt39=2;
+            int LA39_0 = input.LA(1);
 
-            if ( (LA40_0==66) ) {
-                alt40=1;
+            if ( (LA39_0==66) ) {
+                alt39=1;
             }
-            switch (alt40) {
+            switch (alt39) {
                 case 1 :
                     // InternalFSM.g:3496:2: rule__RefinedState__DocuAssignment_2
                     {
@@ -10477,13 +10466,13 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getRefinedStateAccess().getGroup_4()); 
             // InternalFSM.g:3556:1: ( rule__RefinedState__Group_4__0 )?
-            int alt41=2;
-            int LA41_0 = input.LA(1);
+            int alt40=2;
+            int LA40_0 = input.LA(1);
 
-            if ( (LA41_0==33) ) {
-                alt41=1;
+            if ( (LA40_0==33) ) {
+                alt40=1;
             }
-            switch (alt41) {
+            switch (alt40) {
                 case 1 :
                     // InternalFSM.g:3556:2: rule__RefinedState__Group_4__0
                     {
@@ -10573,13 +10562,13 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getRefinedStateAccess().getGroup_5()); 
             // InternalFSM.g:3585:1: ( rule__RefinedState__Group_5__0 )?
-            int alt42=2;
-            int LA42_0 = input.LA(1);
+            int alt41=2;
+            int LA41_0 = input.LA(1);
 
-            if ( (LA42_0==34) ) {
-                alt42=1;
+            if ( (LA41_0==34) ) {
+                alt41=1;
             }
-            switch (alt42) {
+            switch (alt41) {
                 case 1 :
                     // InternalFSM.g:3585:2: rule__RefinedState__Group_5__0
                     {
@@ -10669,13 +10658,13 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getRefinedStateAccess().getGroup_6()); 
             // InternalFSM.g:3614:1: ( rule__RefinedState__Group_6__0 )?
-            int alt43=2;
-            int LA43_0 = input.LA(1);
+            int alt42=2;
+            int LA42_0 = input.LA(1);
 
-            if ( (LA43_0==35) ) {
-                alt43=1;
+            if ( (LA42_0==35) ) {
+                alt42=1;
             }
-            switch (alt43) {
+            switch (alt42) {
                 case 1 :
                     // InternalFSM.g:3614:2: rule__RefinedState__Group_6__0
                     {
@@ -10765,13 +10754,13 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             {
              before(grammarAccess.getRefinedStateAccess().getGroup_7()); 
             // InternalFSM.g:3643:1: ( rule__RefinedState__Group_7__0 )?
-            int alt44=2;
-            int LA44_0 = input.LA(1);
+            int alt43=2;
+            int LA43_0 = input.LA(1);
 
-            if ( (LA44_0==36) ) {
-                alt44=1;
+            if ( (LA43_0==36) ) {
+                alt43=1;
             }
-            switch (alt44) {
+            switch (alt43) {
                 case 1 :
                     // InternalFSM.g:3643:2: rule__RefinedState__Group_7__0
                     {
@@ -11508,7 +11497,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:3957:1: ( rule__DetailCode__Group_0__0__Impl rule__DetailCode__Group_0__1 )
             // InternalFSM.g:3958:2: rule__DetailCode__Group_0__0__Impl rule__DetailCode__Group_0__1
             {
-            pushFollow(FOLLOW_7);
+            pushFollow(FOLLOW_13);
             rule__DetailCode__Group_0__0__Impl();
 
             state._fsp--;
@@ -11607,31 +11596,42 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__DetailCode__Group_0__1__Impl"
-    // InternalFSM.g:3995:1: rule__DetailCode__Group_0__1__Impl : ( ( rule__DetailCode__Group_0_1__0 ) ) ;
+    // InternalFSM.g:3995:1: rule__DetailCode__Group_0__1__Impl : ( ( rule__DetailCode__LinesAssignment_0_1 )? ) ;
     public final void rule__DetailCode__Group_0__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalFSM.g:3999:1: ( ( ( rule__DetailCode__Group_0_1__0 ) ) )
-            // InternalFSM.g:4000:1: ( ( rule__DetailCode__Group_0_1__0 ) )
+            // InternalFSM.g:3999:1: ( ( ( rule__DetailCode__LinesAssignment_0_1 )? ) )
+            // InternalFSM.g:4000:1: ( ( rule__DetailCode__LinesAssignment_0_1 )? )
             {
-            // InternalFSM.g:4000:1: ( ( rule__DetailCode__Group_0_1__0 ) )
-            // InternalFSM.g:4001:1: ( rule__DetailCode__Group_0_1__0 )
+            // InternalFSM.g:4000:1: ( ( rule__DetailCode__LinesAssignment_0_1 )? )
+            // InternalFSM.g:4001:1: ( rule__DetailCode__LinesAssignment_0_1 )?
             {
-             before(grammarAccess.getDetailCodeAccess().getGroup_0_1()); 
-            // InternalFSM.g:4002:1: ( rule__DetailCode__Group_0_1__0 )
-            // InternalFSM.g:4002:2: rule__DetailCode__Group_0_1__0
-            {
-            pushFollow(FOLLOW_2);
-            rule__DetailCode__Group_0_1__0();
+             before(grammarAccess.getDetailCodeAccess().getLinesAssignment_0_1()); 
+            // InternalFSM.g:4002:1: ( rule__DetailCode__LinesAssignment_0_1 )?
+            int alt44=2;
+            int LA44_0 = input.LA(1);
 
-            state._fsp--;
+            if ( (LA44_0==RULE_CC_STRING) ) {
+                alt44=1;
+            }
+            switch (alt44) {
+                case 1 :
+                    // InternalFSM.g:4002:2: rule__DetailCode__LinesAssignment_0_1
+                    {
+                    pushFollow(FOLLOW_2);
+                    rule__DetailCode__LinesAssignment_0_1();
 
+                    state._fsp--;
+
+
+                    }
+                    break;
 
             }
 
-             after(grammarAccess.getDetailCodeAccess().getGroup_0_1()); 
+             after(grammarAccess.getDetailCodeAccess().getLinesAssignment_0_1()); 
 
             }
 
@@ -11653,23 +11653,23 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__DetailCode__Group_0__1__Impl"
 
 
-    // $ANTLR start "rule__DetailCode__Group_0_1__0"
-    // InternalFSM.g:4016:1: rule__DetailCode__Group_0_1__0 : rule__DetailCode__Group_0_1__0__Impl rule__DetailCode__Group_0_1__1 ;
-    public final void rule__DetailCode__Group_0_1__0() throws RecognitionException {
+    // $ANTLR start "rule__DetailCode__Group_1__0"
+    // InternalFSM.g:4016:1: rule__DetailCode__Group_1__0 : rule__DetailCode__Group_1__0__Impl rule__DetailCode__Group_1__1 ;
+    public final void rule__DetailCode__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalFSM.g:4020:1: ( rule__DetailCode__Group_0_1__0__Impl rule__DetailCode__Group_0_1__1 )
-            // InternalFSM.g:4021:2: rule__DetailCode__Group_0_1__0__Impl rule__DetailCode__Group_0_1__1
+            // InternalFSM.g:4020:1: ( rule__DetailCode__Group_1__0__Impl rule__DetailCode__Group_1__1 )
+            // InternalFSM.g:4021:2: rule__DetailCode__Group_1__0__Impl rule__DetailCode__Group_1__1
             {
-            pushFollow(FOLLOW_13);
-            rule__DetailCode__Group_0_1__0__Impl();
+            pushFollow(FOLLOW_14);
+            rule__DetailCode__Group_1__0__Impl();
 
             state._fsp--;
 
             pushFollow(FOLLOW_2);
-            rule__DetailCode__Group_0_1__1();
+            rule__DetailCode__Group_1__1();
 
             state._fsp--;
 
@@ -11688,35 +11688,35 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__DetailCode__Group_0_1__0"
+    // $ANTLR end "rule__DetailCode__Group_1__0"
 
 
-    // $ANTLR start "rule__DetailCode__Group_0_1__0__Impl"
-    // InternalFSM.g:4028:1: rule__DetailCode__Group_0_1__0__Impl : ( ( rule__DetailCode__UsedAssignment_0_1_0 ) ) ;
-    public final void rule__DetailCode__Group_0_1__0__Impl() throws RecognitionException {
+    // $ANTLR start "rule__DetailCode__Group_1__0__Impl"
+    // InternalFSM.g:4028:1: rule__DetailCode__Group_1__0__Impl : ( ( rule__DetailCode__UsedAssignment_1_0 ) ) ;
+    public final void rule__DetailCode__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalFSM.g:4032:1: ( ( ( rule__DetailCode__UsedAssignment_0_1_0 ) ) )
-            // InternalFSM.g:4033:1: ( ( rule__DetailCode__UsedAssignment_0_1_0 ) )
+            // InternalFSM.g:4032:1: ( ( ( rule__DetailCode__UsedAssignment_1_0 ) ) )
+            // InternalFSM.g:4033:1: ( ( rule__DetailCode__UsedAssignment_1_0 ) )
             {
-            // InternalFSM.g:4033:1: ( ( rule__DetailCode__UsedAssignment_0_1_0 ) )
-            // InternalFSM.g:4034:1: ( rule__DetailCode__UsedAssignment_0_1_0 )
+            // InternalFSM.g:4033:1: ( ( rule__DetailCode__UsedAssignment_1_0 ) )
+            // InternalFSM.g:4034:1: ( rule__DetailCode__UsedAssignment_1_0 )
             {
-             before(grammarAccess.getDetailCodeAccess().getUsedAssignment_0_1_0()); 
-            // InternalFSM.g:4035:1: ( rule__DetailCode__UsedAssignment_0_1_0 )
-            // InternalFSM.g:4035:2: rule__DetailCode__UsedAssignment_0_1_0
+             before(grammarAccess.getDetailCodeAccess().getUsedAssignment_1_0()); 
+            // InternalFSM.g:4035:1: ( rule__DetailCode__UsedAssignment_1_0 )
+            // InternalFSM.g:4035:2: rule__DetailCode__UsedAssignment_1_0
             {
             pushFollow(FOLLOW_2);
-            rule__DetailCode__UsedAssignment_0_1_0();
+            rule__DetailCode__UsedAssignment_1_0();
 
             state._fsp--;
 
 
             }
 
-             after(grammarAccess.getDetailCodeAccess().getUsedAssignment_0_1_0()); 
+             after(grammarAccess.getDetailCodeAccess().getUsedAssignment_1_0()); 
 
             }
 
@@ -11735,26 +11735,26 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__DetailCode__Group_0_1__0__Impl"
+    // $ANTLR end "rule__DetailCode__Group_1__0__Impl"
 
 
-    // $ANTLR start "rule__DetailCode__Group_0_1__1"
-    // InternalFSM.g:4045:1: rule__DetailCode__Group_0_1__1 : rule__DetailCode__Group_0_1__1__Impl rule__DetailCode__Group_0_1__2 ;
-    public final void rule__DetailCode__Group_0_1__1() throws RecognitionException {
+    // $ANTLR start "rule__DetailCode__Group_1__1"
+    // InternalFSM.g:4045:1: rule__DetailCode__Group_1__1 : rule__DetailCode__Group_1__1__Impl rule__DetailCode__Group_1__2 ;
+    public final void rule__DetailCode__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalFSM.g:4049:1: ( rule__DetailCode__Group_0_1__1__Impl rule__DetailCode__Group_0_1__2 )
-            // InternalFSM.g:4050:2: rule__DetailCode__Group_0_1__1__Impl rule__DetailCode__Group_0_1__2
+            // InternalFSM.g:4049:1: ( rule__DetailCode__Group_1__1__Impl rule__DetailCode__Group_1__2 )
+            // InternalFSM.g:4050:2: rule__DetailCode__Group_1__1__Impl rule__DetailCode__Group_1__2
             {
-            pushFollow(FOLLOW_13);
-            rule__DetailCode__Group_0_1__1__Impl();
+            pushFollow(FOLLOW_14);
+            rule__DetailCode__Group_1__1__Impl();
 
             state._fsp--;
 
             pushFollow(FOLLOW_2);
-            rule__DetailCode__Group_0_1__2();
+            rule__DetailCode__Group_1__2();
 
             state._fsp--;
 
@@ -11773,24 +11773,24 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__DetailCode__Group_0_1__1"
+    // $ANTLR end "rule__DetailCode__Group_1__1"
 
 
-    // $ANTLR start "rule__DetailCode__Group_0_1__1__Impl"
-    // InternalFSM.g:4057:1: rule__DetailCode__Group_0_1__1__Impl : ( ( rule__DetailCode__LinesAssignment_0_1_1 )* ) ;
-    public final void rule__DetailCode__Group_0_1__1__Impl() throws RecognitionException {
+    // $ANTLR start "rule__DetailCode__Group_1__1__Impl"
+    // InternalFSM.g:4057:1: rule__DetailCode__Group_1__1__Impl : ( ( rule__DetailCode__LinesAssignment_1_1 )* ) ;
+    public final void rule__DetailCode__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalFSM.g:4061:1: ( ( ( rule__DetailCode__LinesAssignment_0_1_1 )* ) )
-            // InternalFSM.g:4062:1: ( ( rule__DetailCode__LinesAssignment_0_1_1 )* )
+            // InternalFSM.g:4061:1: ( ( ( rule__DetailCode__LinesAssignment_1_1 )* ) )
+            // InternalFSM.g:4062:1: ( ( rule__DetailCode__LinesAssignment_1_1 )* )
             {
-            // InternalFSM.g:4062:1: ( ( rule__DetailCode__LinesAssignment_0_1_1 )* )
-            // InternalFSM.g:4063:1: ( rule__DetailCode__LinesAssignment_0_1_1 )*
+            // InternalFSM.g:4062:1: ( ( rule__DetailCode__LinesAssignment_1_1 )* )
+            // InternalFSM.g:4063:1: ( rule__DetailCode__LinesAssignment_1_1 )*
             {
-             before(grammarAccess.getDetailCodeAccess().getLinesAssignment_0_1_1()); 
-            // InternalFSM.g:4064:1: ( rule__DetailCode__LinesAssignment_0_1_1 )*
+             before(grammarAccess.getDetailCodeAccess().getLinesAssignment_1_1()); 
+            // InternalFSM.g:4064:1: ( rule__DetailCode__LinesAssignment_1_1 )*
             loop45:
             do {
                 int alt45=2;
@@ -11803,10 +11803,10 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
 
                 switch (alt45) {
             	case 1 :
-            	    // InternalFSM.g:4064:2: rule__DetailCode__LinesAssignment_0_1_1
+            	    // InternalFSM.g:4064:2: rule__DetailCode__LinesAssignment_1_1
             	    {
-            	    pushFollow(FOLLOW_14);
-            	    rule__DetailCode__LinesAssignment_0_1_1();
+            	    pushFollow(FOLLOW_15);
+            	    rule__DetailCode__LinesAssignment_1_1();
 
             	    state._fsp--;
 
@@ -11819,7 +11819,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
                 }
             } while (true);
 
-             after(grammarAccess.getDetailCodeAccess().getLinesAssignment_0_1_1()); 
+             after(grammarAccess.getDetailCodeAccess().getLinesAssignment_1_1()); 
 
             }
 
@@ -11838,21 +11838,21 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__DetailCode__Group_0_1__1__Impl"
+    // $ANTLR end "rule__DetailCode__Group_1__1__Impl"
 
 
-    // $ANTLR start "rule__DetailCode__Group_0_1__2"
-    // InternalFSM.g:4074:1: rule__DetailCode__Group_0_1__2 : rule__DetailCode__Group_0_1__2__Impl ;
-    public final void rule__DetailCode__Group_0_1__2() throws RecognitionException {
+    // $ANTLR start "rule__DetailCode__Group_1__2"
+    // InternalFSM.g:4074:1: rule__DetailCode__Group_1__2 : rule__DetailCode__Group_1__2__Impl ;
+    public final void rule__DetailCode__Group_1__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalFSM.g:4078:1: ( rule__DetailCode__Group_0_1__2__Impl )
-            // InternalFSM.g:4079:2: rule__DetailCode__Group_0_1__2__Impl
+            // InternalFSM.g:4078:1: ( rule__DetailCode__Group_1__2__Impl )
+            // InternalFSM.g:4079:2: rule__DetailCode__Group_1__2__Impl
             {
             pushFollow(FOLLOW_2);
-            rule__DetailCode__Group_0_1__2__Impl();
+            rule__DetailCode__Group_1__2__Impl();
 
             state._fsp--;
 
@@ -11871,12 +11871,12 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__DetailCode__Group_0_1__2"
+    // $ANTLR end "rule__DetailCode__Group_1__2"
 
 
-    // $ANTLR start "rule__DetailCode__Group_0_1__2__Impl"
-    // InternalFSM.g:4085:1: rule__DetailCode__Group_0_1__2__Impl : ( '}' ) ;
-    public final void rule__DetailCode__Group_0_1__2__Impl() throws RecognitionException {
+    // $ANTLR start "rule__DetailCode__Group_1__2__Impl"
+    // InternalFSM.g:4085:1: rule__DetailCode__Group_1__2__Impl : ( '}' ) ;
+    public final void rule__DetailCode__Group_1__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -11887,9 +11887,9 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:4090:1: ( '}' )
             // InternalFSM.g:4091:1: '}'
             {
-             before(grammarAccess.getDetailCodeAccess().getRightCurlyBracketKeyword_0_1_2()); 
+             before(grammarAccess.getDetailCodeAccess().getRightCurlyBracketKeyword_1_2()); 
             match(input,30,FOLLOW_2); 
-             after(grammarAccess.getDetailCodeAccess().getRightCurlyBracketKeyword_0_1_2()); 
+             after(grammarAccess.getDetailCodeAccess().getRightCurlyBracketKeyword_1_2()); 
 
             }
 
@@ -11908,7 +11908,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__DetailCode__Group_0_1__2__Impl"
+    // $ANTLR end "rule__DetailCode__Group_1__2__Impl"
 
 
     // $ANTLR start "rule__TransitionPoint__Group__0"
@@ -11921,7 +11921,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:4114:1: ( rule__TransitionPoint__Group__0__Impl rule__TransitionPoint__Group__1 )
             // InternalFSM.g:4115:2: rule__TransitionPoint__Group__0__Impl rule__TransitionPoint__Group__1
             {
-            pushFollow(FOLLOW_15);
+            pushFollow(FOLLOW_16);
             rule__TransitionPoint__Group__0__Impl();
 
             state._fsp--;
@@ -12557,7 +12557,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:4365:1: ( rule__ChoicePoint__Group__1__Impl rule__ChoicePoint__Group__2 )
             // InternalFSM.g:4366:2: rule__ChoicePoint__Group__1__Impl rule__ChoicePoint__Group__2
             {
-            pushFollow(FOLLOW_16);
+            pushFollow(FOLLOW_17);
             rule__ChoicePoint__Group__1__Impl();
 
             state._fsp--;
@@ -12733,7 +12733,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:4428:1: ( rule__InitialTransition__Group__0__Impl rule__InitialTransition__Group__1 )
             // InternalFSM.g:4429:2: rule__InitialTransition__Group__0__Impl rule__InitialTransition__Group__1
             {
-            pushFollow(FOLLOW_17);
+            pushFollow(FOLLOW_18);
             rule__InitialTransition__Group__0__Impl();
 
             state._fsp--;
@@ -12808,7 +12808,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:4459:1: ( rule__InitialTransition__Group__1__Impl rule__InitialTransition__Group__2 )
             // InternalFSM.g:4460:2: rule__InitialTransition__Group__1__Impl rule__InitialTransition__Group__2
             {
-            pushFollow(FOLLOW_17);
+            pushFollow(FOLLOW_18);
             rule__InitialTransition__Group__1__Impl();
 
             state._fsp--;
@@ -12904,7 +12904,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:4488:1: ( rule__InitialTransition__Group__2__Impl rule__InitialTransition__Group__3 )
             // InternalFSM.g:4489:2: rule__InitialTransition__Group__2__Impl rule__InitialTransition__Group__3
             {
-            pushFollow(FOLLOW_18);
+            pushFollow(FOLLOW_19);
             rule__InitialTransition__Group__2__Impl();
 
             state._fsp--;
@@ -12979,7 +12979,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:4519:1: ( rule__InitialTransition__Group__3__Impl rule__InitialTransition__Group__4 )
             // InternalFSM.g:4520:2: rule__InitialTransition__Group__3__Impl rule__InitialTransition__Group__4
             {
-            pushFollow(FOLLOW_19);
+            pushFollow(FOLLOW_20);
             rule__InitialTransition__Group__3__Impl();
 
             state._fsp--;
@@ -13054,7 +13054,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:4550:1: ( rule__InitialTransition__Group__4__Impl rule__InitialTransition__Group__5 )
             // InternalFSM.g:4551:2: rule__InitialTransition__Group__4__Impl rule__InitialTransition__Group__5
             {
-            pushFollow(FOLLOW_20);
+            pushFollow(FOLLOW_21);
             rule__InitialTransition__Group__4__Impl();
 
             state._fsp--;
@@ -13401,7 +13401,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:4683:1: ( rule__InitialTransition__Group_7__0__Impl rule__InitialTransition__Group_7__1 )
             // InternalFSM.g:4684:2: rule__InitialTransition__Group_7__0__Impl rule__InitialTransition__Group_7__1
             {
-            pushFollow(FOLLOW_21);
+            pushFollow(FOLLOW_22);
             rule__InitialTransition__Group_7__0__Impl();
 
             state._fsp--;
@@ -13476,7 +13476,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:4714:1: ( rule__InitialTransition__Group_7__1__Impl rule__InitialTransition__Group_7__2 )
             // InternalFSM.g:4715:2: rule__InitialTransition__Group_7__1__Impl rule__InitialTransition__Group_7__2
             {
-            pushFollow(FOLLOW_21);
+            pushFollow(FOLLOW_22);
             rule__InitialTransition__Group_7__1__Impl();
 
             state._fsp--;
@@ -13797,7 +13797,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:4842:1: ( rule__ContinuationTransition__Group__0__Impl rule__ContinuationTransition__Group__1 )
             // InternalFSM.g:4843:2: rule__ContinuationTransition__Group__0__Impl rule__ContinuationTransition__Group__1
             {
-            pushFollow(FOLLOW_17);
+            pushFollow(FOLLOW_18);
             rule__ContinuationTransition__Group__0__Impl();
 
             state._fsp--;
@@ -13872,7 +13872,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:4873:1: ( rule__ContinuationTransition__Group__1__Impl rule__ContinuationTransition__Group__2 )
             // InternalFSM.g:4874:2: rule__ContinuationTransition__Group__1__Impl rule__ContinuationTransition__Group__2
             {
-            pushFollow(FOLLOW_17);
+            pushFollow(FOLLOW_18);
             rule__ContinuationTransition__Group__1__Impl();
 
             state._fsp--;
@@ -13968,7 +13968,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:4902:1: ( rule__ContinuationTransition__Group__2__Impl rule__ContinuationTransition__Group__3 )
             // InternalFSM.g:4903:2: rule__ContinuationTransition__Group__2__Impl rule__ContinuationTransition__Group__3
             {
-            pushFollow(FOLLOW_20);
+            pushFollow(FOLLOW_21);
             rule__ContinuationTransition__Group__2__Impl();
 
             state._fsp--;
@@ -14043,7 +14043,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:4933:1: ( rule__ContinuationTransition__Group__3__Impl rule__ContinuationTransition__Group__4 )
             // InternalFSM.g:4934:2: rule__ContinuationTransition__Group__3__Impl rule__ContinuationTransition__Group__4
             {
-            pushFollow(FOLLOW_19);
+            pushFollow(FOLLOW_20);
             rule__ContinuationTransition__Group__3__Impl();
 
             state._fsp--;
@@ -14128,7 +14128,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:4962:1: ( rule__ContinuationTransition__Group__4__Impl rule__ContinuationTransition__Group__5 )
             // InternalFSM.g:4963:2: rule__ContinuationTransition__Group__4__Impl rule__ContinuationTransition__Group__5
             {
-            pushFollow(FOLLOW_20);
+            pushFollow(FOLLOW_21);
             rule__ContinuationTransition__Group__4__Impl();
 
             state._fsp--;
@@ -14475,7 +14475,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:5095:1: ( rule__ContinuationTransition__Group_7__0__Impl rule__ContinuationTransition__Group_7__1 )
             // InternalFSM.g:5096:2: rule__ContinuationTransition__Group_7__0__Impl rule__ContinuationTransition__Group_7__1
             {
-            pushFollow(FOLLOW_21);
+            pushFollow(FOLLOW_22);
             rule__ContinuationTransition__Group_7__0__Impl();
 
             state._fsp--;
@@ -14550,7 +14550,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:5126:1: ( rule__ContinuationTransition__Group_7__1__Impl rule__ContinuationTransition__Group_7__2 )
             // InternalFSM.g:5127:2: rule__ContinuationTransition__Group_7__1__Impl rule__ContinuationTransition__Group_7__2
             {
-            pushFollow(FOLLOW_21);
+            pushFollow(FOLLOW_22);
             rule__ContinuationTransition__Group_7__1__Impl();
 
             state._fsp--;
@@ -14871,7 +14871,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:5254:1: ( rule__TriggeredTransition__Group__0__Impl rule__TriggeredTransition__Group__1 )
             // InternalFSM.g:5255:2: rule__TriggeredTransition__Group__0__Impl rule__TriggeredTransition__Group__1
             {
-            pushFollow(FOLLOW_17);
+            pushFollow(FOLLOW_18);
             rule__TriggeredTransition__Group__0__Impl();
 
             state._fsp--;
@@ -14946,7 +14946,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:5285:1: ( rule__TriggeredTransition__Group__1__Impl rule__TriggeredTransition__Group__2 )
             // InternalFSM.g:5286:2: rule__TriggeredTransition__Group__1__Impl rule__TriggeredTransition__Group__2
             {
-            pushFollow(FOLLOW_17);
+            pushFollow(FOLLOW_18);
             rule__TriggeredTransition__Group__1__Impl();
 
             state._fsp--;
@@ -15042,7 +15042,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:5314:1: ( rule__TriggeredTransition__Group__2__Impl rule__TriggeredTransition__Group__3 )
             // InternalFSM.g:5315:2: rule__TriggeredTransition__Group__2__Impl rule__TriggeredTransition__Group__3
             {
-            pushFollow(FOLLOW_20);
+            pushFollow(FOLLOW_21);
             rule__TriggeredTransition__Group__2__Impl();
 
             state._fsp--;
@@ -15117,7 +15117,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:5345:1: ( rule__TriggeredTransition__Group__3__Impl rule__TriggeredTransition__Group__4 )
             // InternalFSM.g:5346:2: rule__TriggeredTransition__Group__3__Impl rule__TriggeredTransition__Group__4
             {
-            pushFollow(FOLLOW_19);
+            pushFollow(FOLLOW_20);
             rule__TriggeredTransition__Group__3__Impl();
 
             state._fsp--;
@@ -15202,7 +15202,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:5374:1: ( rule__TriggeredTransition__Group__4__Impl rule__TriggeredTransition__Group__5 )
             // InternalFSM.g:5375:2: rule__TriggeredTransition__Group__4__Impl rule__TriggeredTransition__Group__5
             {
-            pushFollow(FOLLOW_20);
+            pushFollow(FOLLOW_21);
             rule__TriggeredTransition__Group__4__Impl();
 
             state._fsp--;
@@ -15458,7 +15458,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:5463:1: ( rule__TriggeredTransition__Group__7__Impl rule__TriggeredTransition__Group__8 )
             // InternalFSM.g:5464:2: rule__TriggeredTransition__Group__7__Impl rule__TriggeredTransition__Group__8
             {
-            pushFollow(FOLLOW_22);
+            pushFollow(FOLLOW_23);
             rule__TriggeredTransition__Group__7__Impl();
 
             state._fsp--;
@@ -15608,7 +15608,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:5525:1: ( rule__TriggeredTransition__Group__9__Impl rule__TriggeredTransition__Group__10 )
             // InternalFSM.g:5526:2: rule__TriggeredTransition__Group__9__Impl rule__TriggeredTransition__Group__10
             {
-            pushFollow(FOLLOW_23);
+            pushFollow(FOLLOW_24);
             rule__TriggeredTransition__Group__9__Impl();
 
             state._fsp--;
@@ -15683,7 +15683,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:5556:1: ( rule__TriggeredTransition__Group__10__Impl rule__TriggeredTransition__Group__11 )
             // InternalFSM.g:5557:2: rule__TriggeredTransition__Group__10__Impl rule__TriggeredTransition__Group__11
             {
-            pushFollow(FOLLOW_24);
+            pushFollow(FOLLOW_25);
             rule__TriggeredTransition__Group__10__Impl();
 
             state._fsp--;
@@ -15768,7 +15768,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:5585:1: ( rule__TriggeredTransition__Group__11__Impl rule__TriggeredTransition__Group__12 )
             // InternalFSM.g:5586:2: rule__TriggeredTransition__Group__11__Impl rule__TriggeredTransition__Group__12
             {
-            pushFollow(FOLLOW_24);
+            pushFollow(FOLLOW_25);
             rule__TriggeredTransition__Group__11__Impl();
 
             state._fsp--;
@@ -15825,7 +15825,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             	case 1 :
             	    // InternalFSM.g:5600:2: rule__TriggeredTransition__Group_11__0
             	    {
-            	    pushFollow(FOLLOW_25);
+            	    pushFollow(FOLLOW_26);
             	    rule__TriggeredTransition__Group_11__0();
 
             	    state._fsp--;
@@ -15871,7 +15871,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:5614:1: ( rule__TriggeredTransition__Group__12__Impl rule__TriggeredTransition__Group__13 )
             // InternalFSM.g:5615:2: rule__TriggeredTransition__Group__12__Impl rule__TriggeredTransition__Group__13
             {
-            pushFollow(FOLLOW_21);
+            pushFollow(FOLLOW_22);
             rule__TriggeredTransition__Group__12__Impl();
 
             state._fsp--;
@@ -15946,7 +15946,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:5645:1: ( rule__TriggeredTransition__Group__13__Impl rule__TriggeredTransition__Group__14 )
             // InternalFSM.g:5646:2: rule__TriggeredTransition__Group__13__Impl rule__TriggeredTransition__Group__14
             {
-            pushFollow(FOLLOW_21);
+            pushFollow(FOLLOW_22);
             rule__TriggeredTransition__Group__13__Impl();
 
             state._fsp--;
@@ -16112,7 +16112,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:5734:1: ( rule__TriggeredTransition__Group_11__0__Impl rule__TriggeredTransition__Group_11__1 )
             // InternalFSM.g:5735:2: rule__TriggeredTransition__Group_11__0__Impl rule__TriggeredTransition__Group_11__1
             {
-            pushFollow(FOLLOW_23);
+            pushFollow(FOLLOW_24);
             rule__TriggeredTransition__Group_11__0__Impl();
 
             state._fsp--;
@@ -16422,7 +16422,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:5860:1: ( rule__GuardedTransition__Group__0__Impl rule__GuardedTransition__Group__1 )
             // InternalFSM.g:5861:2: rule__GuardedTransition__Group__0__Impl rule__GuardedTransition__Group__1
             {
-            pushFollow(FOLLOW_17);
+            pushFollow(FOLLOW_18);
             rule__GuardedTransition__Group__0__Impl();
 
             state._fsp--;
@@ -16497,7 +16497,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:5891:1: ( rule__GuardedTransition__Group__1__Impl rule__GuardedTransition__Group__2 )
             // InternalFSM.g:5892:2: rule__GuardedTransition__Group__1__Impl rule__GuardedTransition__Group__2
             {
-            pushFollow(FOLLOW_17);
+            pushFollow(FOLLOW_18);
             rule__GuardedTransition__Group__1__Impl();
 
             state._fsp--;
@@ -16593,7 +16593,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:5920:1: ( rule__GuardedTransition__Group__2__Impl rule__GuardedTransition__Group__3 )
             // InternalFSM.g:5921:2: rule__GuardedTransition__Group__2__Impl rule__GuardedTransition__Group__3
             {
-            pushFollow(FOLLOW_20);
+            pushFollow(FOLLOW_21);
             rule__GuardedTransition__Group__2__Impl();
 
             state._fsp--;
@@ -16668,7 +16668,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:5951:1: ( rule__GuardedTransition__Group__3__Impl rule__GuardedTransition__Group__4 )
             // InternalFSM.g:5952:2: rule__GuardedTransition__Group__3__Impl rule__GuardedTransition__Group__4
             {
-            pushFollow(FOLLOW_19);
+            pushFollow(FOLLOW_20);
             rule__GuardedTransition__Group__3__Impl();
 
             state._fsp--;
@@ -16753,7 +16753,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:5980:1: ( rule__GuardedTransition__Group__4__Impl rule__GuardedTransition__Group__5 )
             // InternalFSM.g:5981:2: rule__GuardedTransition__Group__4__Impl rule__GuardedTransition__Group__5
             {
-            pushFollow(FOLLOW_20);
+            pushFollow(FOLLOW_21);
             rule__GuardedTransition__Group__4__Impl();
 
             state._fsp--;
@@ -17009,7 +17009,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:6069:1: ( rule__GuardedTransition__Group__7__Impl rule__GuardedTransition__Group__8 )
             // InternalFSM.g:6070:2: rule__GuardedTransition__Group__7__Impl rule__GuardedTransition__Group__8
             {
-            pushFollow(FOLLOW_26);
+            pushFollow(FOLLOW_27);
             rule__GuardedTransition__Group__7__Impl();
 
             state._fsp--;
@@ -17159,7 +17159,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:6131:1: ( rule__GuardedTransition__Group__9__Impl rule__GuardedTransition__Group__10 )
             // InternalFSM.g:6132:2: rule__GuardedTransition__Group__9__Impl rule__GuardedTransition__Group__10
             {
-            pushFollow(FOLLOW_21);
+            pushFollow(FOLLOW_22);
             rule__GuardedTransition__Group__9__Impl();
 
             state._fsp--;
@@ -17244,7 +17244,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:6160:1: ( rule__GuardedTransition__Group__10__Impl rule__GuardedTransition__Group__11 )
             // InternalFSM.g:6161:2: rule__GuardedTransition__Group__10__Impl rule__GuardedTransition__Group__11
             {
-            pushFollow(FOLLOW_21);
+            pushFollow(FOLLOW_22);
             rule__GuardedTransition__Group__10__Impl();
 
             state._fsp--;
@@ -17565,7 +17565,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:6306:1: ( rule__CPBranchTransition__Group__0__Impl rule__CPBranchTransition__Group__1 )
             // InternalFSM.g:6307:2: rule__CPBranchTransition__Group__0__Impl rule__CPBranchTransition__Group__1
             {
-            pushFollow(FOLLOW_17);
+            pushFollow(FOLLOW_18);
             rule__CPBranchTransition__Group__0__Impl();
 
             state._fsp--;
@@ -17640,7 +17640,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:6337:1: ( rule__CPBranchTransition__Group__1__Impl rule__CPBranchTransition__Group__2 )
             // InternalFSM.g:6338:2: rule__CPBranchTransition__Group__1__Impl rule__CPBranchTransition__Group__2
             {
-            pushFollow(FOLLOW_17);
+            pushFollow(FOLLOW_18);
             rule__CPBranchTransition__Group__1__Impl();
 
             state._fsp--;
@@ -17736,7 +17736,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:6366:1: ( rule__CPBranchTransition__Group__2__Impl rule__CPBranchTransition__Group__3 )
             // InternalFSM.g:6367:2: rule__CPBranchTransition__Group__2__Impl rule__CPBranchTransition__Group__3
             {
-            pushFollow(FOLLOW_20);
+            pushFollow(FOLLOW_21);
             rule__CPBranchTransition__Group__2__Impl();
 
             state._fsp--;
@@ -17811,7 +17811,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:6397:1: ( rule__CPBranchTransition__Group__3__Impl rule__CPBranchTransition__Group__4 )
             // InternalFSM.g:6398:2: rule__CPBranchTransition__Group__3__Impl rule__CPBranchTransition__Group__4
             {
-            pushFollow(FOLLOW_19);
+            pushFollow(FOLLOW_20);
             rule__CPBranchTransition__Group__3__Impl();
 
             state._fsp--;
@@ -17896,7 +17896,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:6426:1: ( rule__CPBranchTransition__Group__4__Impl rule__CPBranchTransition__Group__5 )
             // InternalFSM.g:6427:2: rule__CPBranchTransition__Group__4__Impl rule__CPBranchTransition__Group__5
             {
-            pushFollow(FOLLOW_20);
+            pushFollow(FOLLOW_21);
             rule__CPBranchTransition__Group__4__Impl();
 
             state._fsp--;
@@ -18152,7 +18152,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:6515:1: ( rule__CPBranchTransition__Group__7__Impl rule__CPBranchTransition__Group__8 )
             // InternalFSM.g:6516:2: rule__CPBranchTransition__Group__7__Impl rule__CPBranchTransition__Group__8
             {
-            pushFollow(FOLLOW_27);
+            pushFollow(FOLLOW_28);
             rule__CPBranchTransition__Group__7__Impl();
 
             state._fsp--;
@@ -18302,7 +18302,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:6577:1: ( rule__CPBranchTransition__Group__9__Impl rule__CPBranchTransition__Group__10 )
             // InternalFSM.g:6578:2: rule__CPBranchTransition__Group__9__Impl rule__CPBranchTransition__Group__10
             {
-            pushFollow(FOLLOW_21);
+            pushFollow(FOLLOW_22);
             rule__CPBranchTransition__Group__9__Impl();
 
             state._fsp--;
@@ -18387,7 +18387,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:6606:1: ( rule__CPBranchTransition__Group__10__Impl rule__CPBranchTransition__Group__11 )
             // InternalFSM.g:6607:2: rule__CPBranchTransition__Group__10__Impl rule__CPBranchTransition__Group__11
             {
-            pushFollow(FOLLOW_21);
+            pushFollow(FOLLOW_22);
             rule__CPBranchTransition__Group__10__Impl();
 
             state._fsp--;
@@ -18964,7 +18964,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:6841:1: ( rule__RefinedTransition__Group__3__Impl rule__RefinedTransition__Group__4 )
             // InternalFSM.g:6842:2: rule__RefinedTransition__Group__3__Impl rule__RefinedTransition__Group__4
             {
-            pushFollow(FOLLOW_28);
+            pushFollow(FOLLOW_29);
             rule__RefinedTransition__Group__3__Impl();
 
             state._fsp--;
@@ -19114,7 +19114,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:6903:1: ( rule__RefinedTransition__Group__5__Impl rule__RefinedTransition__Group__6 )
             // InternalFSM.g:6904:2: rule__RefinedTransition__Group__5__Impl rule__RefinedTransition__Group__6
             {
-            pushFollow(FOLLOW_29);
+            pushFollow(FOLLOW_30);
             rule__RefinedTransition__Group__5__Impl();
 
             state._fsp--;
@@ -19424,7 +19424,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:7039:1: ( rule__SubStateTrPointTerminal__Group__0__Impl rule__SubStateTrPointTerminal__Group__1 )
             // InternalFSM.g:7040:2: rule__SubStateTrPointTerminal__Group__0__Impl rule__SubStateTrPointTerminal__Group__1
             {
-            pushFollow(FOLLOW_30);
+            pushFollow(FOLLOW_31);
             rule__SubStateTrPointTerminal__Group__0__Impl();
 
             state._fsp--;
@@ -19894,7 +19894,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:7227:1: ( rule__Trigger__Group__1__Impl rule__Trigger__Group__2 )
             // InternalFSM.g:7228:2: rule__Trigger__Group__1__Impl rule__Trigger__Group__2
             {
-            pushFollow(FOLLOW_31);
+            pushFollow(FOLLOW_32);
             rule__Trigger__Group__1__Impl();
 
             state._fsp--;
@@ -19979,7 +19979,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:7256:1: ( rule__Trigger__Group__2__Impl rule__Trigger__Group__3 )
             // InternalFSM.g:7257:2: rule__Trigger__Group__2__Impl rule__Trigger__Group__3
             {
-            pushFollow(FOLLOW_31);
+            pushFollow(FOLLOW_32);
             rule__Trigger__Group__2__Impl();
 
             state._fsp--;
@@ -20036,7 +20036,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             	case 1 :
             	    // InternalFSM.g:7271:2: rule__Trigger__Group_2__0
             	    {
-            	    pushFollow(FOLLOW_32);
+            	    pushFollow(FOLLOW_33);
             	    rule__Trigger__Group_2__0();
 
             	    state._fsp--;
@@ -20082,7 +20082,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:7285:1: ( rule__Trigger__Group__3__Impl rule__Trigger__Group__4 )
             // InternalFSM.g:7286:2: rule__Trigger__Group__3__Impl rule__Trigger__Group__4
             {
-            pushFollow(FOLLOW_31);
+            pushFollow(FOLLOW_32);
             rule__Trigger__Group__3__Impl();
 
             state._fsp--;
@@ -20403,7 +20403,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:7417:1: ( rule__MessageFromIf__Group__0__Impl rule__MessageFromIf__Group__1 )
             // InternalFSM.g:7418:2: rule__MessageFromIf__Group__0__Impl rule__MessageFromIf__Group__1
             {
-            pushFollow(FOLLOW_33);
+            pushFollow(FOLLOW_34);
             rule__MessageFromIf__Group__0__Impl();
 
             state._fsp--;
@@ -20798,7 +20798,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:7575:1: ( rule__InSemanticsRule__Group__0__Impl rule__InSemanticsRule__Group__1 )
             // InternalFSM.g:7576:2: rule__InSemanticsRule__Group__0__Impl rule__InSemanticsRule__Group__1
             {
-            pushFollow(FOLLOW_33);
+            pushFollow(FOLLOW_34);
             rule__InSemanticsRule__Group__0__Impl();
 
             state._fsp--;
@@ -20948,7 +20948,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:7637:1: ( rule__InSemanticsRule__Group__2__Impl rule__InSemanticsRule__Group__3 )
             // InternalFSM.g:7638:2: rule__InSemanticsRule__Group__2__Impl rule__InSemanticsRule__Group__3
             {
-            pushFollow(FOLLOW_19);
+            pushFollow(FOLLOW_20);
             rule__InSemanticsRule__Group__2__Impl();
 
             state._fsp--;
@@ -21124,7 +21124,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:7702:1: ( rule__InSemanticsRule__Group_3__0__Impl rule__InSemanticsRule__Group_3__1 )
             // InternalFSM.g:7703:2: rule__InSemanticsRule__Group_3__0__Impl rule__InSemanticsRule__Group_3__1
             {
-            pushFollow(FOLLOW_34);
+            pushFollow(FOLLOW_35);
             rule__InSemanticsRule__Group_3__0__Impl();
 
             state._fsp--;
@@ -21279,7 +21279,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:7765:1: ( rule__InSemanticsRule__Group_3_1_1__0__Impl rule__InSemanticsRule__Group_3_1_1__1 )
             // InternalFSM.g:7766:2: rule__InSemanticsRule__Group_3_1_1__0__Impl rule__InSemanticsRule__Group_3_1_1__1
             {
-            pushFollow(FOLLOW_35);
+            pushFollow(FOLLOW_36);
             rule__InSemanticsRule__Group_3_1_1__0__Impl();
 
             state._fsp--;
@@ -21354,7 +21354,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:7796:1: ( rule__InSemanticsRule__Group_3_1_1__1__Impl rule__InSemanticsRule__Group_3_1_1__2 )
             // InternalFSM.g:7797:2: rule__InSemanticsRule__Group_3_1_1__1__Impl rule__InSemanticsRule__Group_3_1_1__2
             {
-            pushFollow(FOLLOW_36);
+            pushFollow(FOLLOW_37);
             rule__InSemanticsRule__Group_3_1_1__1__Impl();
 
             state._fsp--;
@@ -21439,7 +21439,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:7825:1: ( rule__InSemanticsRule__Group_3_1_1__2__Impl rule__InSemanticsRule__Group_3_1_1__3 )
             // InternalFSM.g:7826:2: rule__InSemanticsRule__Group_3_1_1__2__Impl rule__InSemanticsRule__Group_3_1_1__3
             {
-            pushFollow(FOLLOW_37);
+            pushFollow(FOLLOW_38);
             rule__InSemanticsRule__Group_3_1_1__2__Impl();
 
             state._fsp--;
@@ -21487,7 +21487,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:7841:1: ( rule__InSemanticsRule__Group_3_1_1_2__0 )
             // InternalFSM.g:7841:2: rule__InSemanticsRule__Group_3_1_1_2__0
             {
-            pushFollow(FOLLOW_38);
+            pushFollow(FOLLOW_39);
             rule__InSemanticsRule__Group_3_1_1_2__0();
 
             state._fsp--;
@@ -21518,7 +21518,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             	case 1 :
             	    // InternalFSM.g:7846:2: rule__InSemanticsRule__Group_3_1_1_2__0
             	    {
-            	    pushFollow(FOLLOW_38);
+            	    pushFollow(FOLLOW_39);
             	    rule__InSemanticsRule__Group_3_1_1_2__0();
 
             	    state._fsp--;
@@ -21637,7 +21637,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:7899:1: ( rule__InSemanticsRule__Group_3_1_1_2__0__Impl rule__InSemanticsRule__Group_3_1_1_2__1 )
             // InternalFSM.g:7900:2: rule__InSemanticsRule__Group_3_1_1_2__0__Impl rule__InSemanticsRule__Group_3_1_1_2__1
             {
-            pushFollow(FOLLOW_35);
+            pushFollow(FOLLOW_36);
             rule__InSemanticsRule__Group_3_1_1_2__0__Impl();
 
             state._fsp--;
@@ -21792,7 +21792,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:7962:1: ( rule__OutSemanticsRule__Group__0__Impl rule__OutSemanticsRule__Group__1 )
             // InternalFSM.g:7963:2: rule__OutSemanticsRule__Group__0__Impl rule__OutSemanticsRule__Group__1
             {
-            pushFollow(FOLLOW_33);
+            pushFollow(FOLLOW_34);
             rule__OutSemanticsRule__Group__0__Impl();
 
             state._fsp--;
@@ -21942,7 +21942,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:8024:1: ( rule__OutSemanticsRule__Group__2__Impl rule__OutSemanticsRule__Group__3 )
             // InternalFSM.g:8025:2: rule__OutSemanticsRule__Group__2__Impl rule__OutSemanticsRule__Group__3
             {
-            pushFollow(FOLLOW_19);
+            pushFollow(FOLLOW_20);
             rule__OutSemanticsRule__Group__2__Impl();
 
             state._fsp--;
@@ -22118,7 +22118,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:8089:1: ( rule__OutSemanticsRule__Group_3__0__Impl rule__OutSemanticsRule__Group_3__1 )
             // InternalFSM.g:8090:2: rule__OutSemanticsRule__Group_3__0__Impl rule__OutSemanticsRule__Group_3__1
             {
-            pushFollow(FOLLOW_34);
+            pushFollow(FOLLOW_35);
             rule__OutSemanticsRule__Group_3__0__Impl();
 
             state._fsp--;
@@ -22273,7 +22273,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:8152:1: ( rule__OutSemanticsRule__Group_3_1_1__0__Impl rule__OutSemanticsRule__Group_3_1_1__1 )
             // InternalFSM.g:8153:2: rule__OutSemanticsRule__Group_3_1_1__0__Impl rule__OutSemanticsRule__Group_3_1_1__1
             {
-            pushFollow(FOLLOW_35);
+            pushFollow(FOLLOW_36);
             rule__OutSemanticsRule__Group_3_1_1__0__Impl();
 
             state._fsp--;
@@ -22348,7 +22348,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:8183:1: ( rule__OutSemanticsRule__Group_3_1_1__1__Impl rule__OutSemanticsRule__Group_3_1_1__2 )
             // InternalFSM.g:8184:2: rule__OutSemanticsRule__Group_3_1_1__1__Impl rule__OutSemanticsRule__Group_3_1_1__2
             {
-            pushFollow(FOLLOW_36);
+            pushFollow(FOLLOW_37);
             rule__OutSemanticsRule__Group_3_1_1__1__Impl();
 
             state._fsp--;
@@ -22433,7 +22433,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:8212:1: ( rule__OutSemanticsRule__Group_3_1_1__2__Impl rule__OutSemanticsRule__Group_3_1_1__3 )
             // InternalFSM.g:8213:2: rule__OutSemanticsRule__Group_3_1_1__2__Impl rule__OutSemanticsRule__Group_3_1_1__3
             {
-            pushFollow(FOLLOW_37);
+            pushFollow(FOLLOW_38);
             rule__OutSemanticsRule__Group_3_1_1__2__Impl();
 
             state._fsp--;
@@ -22481,7 +22481,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:8228:1: ( rule__OutSemanticsRule__Group_3_1_1_2__0 )
             // InternalFSM.g:8228:2: rule__OutSemanticsRule__Group_3_1_1_2__0
             {
-            pushFollow(FOLLOW_38);
+            pushFollow(FOLLOW_39);
             rule__OutSemanticsRule__Group_3_1_1_2__0();
 
             state._fsp--;
@@ -22512,7 +22512,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             	case 1 :
             	    // InternalFSM.g:8233:2: rule__OutSemanticsRule__Group_3_1_1_2__0
             	    {
-            	    pushFollow(FOLLOW_38);
+            	    pushFollow(FOLLOW_39);
             	    rule__OutSemanticsRule__Group_3_1_1_2__0();
 
             	    state._fsp--;
@@ -22631,7 +22631,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:8286:1: ( rule__OutSemanticsRule__Group_3_1_1_2__0__Impl rule__OutSemanticsRule__Group_3_1_1_2__1 )
             // InternalFSM.g:8287:2: rule__OutSemanticsRule__Group_3_1_1_2__0__Impl rule__OutSemanticsRule__Group_3_1_1_2__1
             {
-            pushFollow(FOLLOW_35);
+            pushFollow(FOLLOW_36);
             rule__OutSemanticsRule__Group_3_1_1_2__0__Impl();
 
             state._fsp--;
@@ -22786,7 +22786,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:8352:1: ( rule__KeyValue__Group__0__Impl rule__KeyValue__Group__1 )
             // InternalFSM.g:8353:2: rule__KeyValue__Group__0__Impl rule__KeyValue__Group__1
             {
-            pushFollow(FOLLOW_39);
+            pushFollow(FOLLOW_40);
             rule__KeyValue__Group__0__Impl();
 
             state._fsp--;
@@ -22871,7 +22871,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:8381:1: ( rule__KeyValue__Group__1__Impl rule__KeyValue__Group__2 )
             // InternalFSM.g:8382:2: rule__KeyValue__Group__1__Impl rule__KeyValue__Group__2
             {
-            pushFollow(FOLLOW_40);
+            pushFollow(FOLLOW_41);
             rule__KeyValue__Group__1__Impl();
 
             state._fsp--;
@@ -23026,7 +23026,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:8449:1: ( rule__SimpleAnnotationAttribute__Group__0__Impl rule__SimpleAnnotationAttribute__Group__1 )
             // InternalFSM.g:8450:2: rule__SimpleAnnotationAttribute__Group__0__Impl rule__SimpleAnnotationAttribute__Group__1
             {
-            pushFollow(FOLLOW_41);
+            pushFollow(FOLLOW_42);
             rule__SimpleAnnotationAttribute__Group__0__Impl();
 
             state._fsp--;
@@ -23186,7 +23186,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:8509:1: ( rule__SimpleAnnotationAttribute__Group__2__Impl rule__SimpleAnnotationAttribute__Group__3 )
             // InternalFSM.g:8510:2: rule__SimpleAnnotationAttribute__Group__2__Impl rule__SimpleAnnotationAttribute__Group__3
             {
-            pushFollow(FOLLOW_33);
+            pushFollow(FOLLOW_34);
             rule__SimpleAnnotationAttribute__Group__2__Impl();
 
             state._fsp--;
@@ -23271,7 +23271,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:8538:1: ( rule__SimpleAnnotationAttribute__Group__3__Impl rule__SimpleAnnotationAttribute__Group__4 )
             // InternalFSM.g:8539:2: rule__SimpleAnnotationAttribute__Group__3__Impl rule__SimpleAnnotationAttribute__Group__4
             {
-            pushFollow(FOLLOW_42);
+            pushFollow(FOLLOW_43);
             rule__SimpleAnnotationAttribute__Group__3__Impl();
 
             state._fsp--;
@@ -23426,7 +23426,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:8607:1: ( rule__EnumAnnotationAttribute__Group__0__Impl rule__EnumAnnotationAttribute__Group__1 )
             // InternalFSM.g:8608:2: rule__EnumAnnotationAttribute__Group__0__Impl rule__EnumAnnotationAttribute__Group__1
             {
-            pushFollow(FOLLOW_41);
+            pushFollow(FOLLOW_42);
             rule__EnumAnnotationAttribute__Group__0__Impl();
 
             state._fsp--;
@@ -23586,7 +23586,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:8667:1: ( rule__EnumAnnotationAttribute__Group__2__Impl rule__EnumAnnotationAttribute__Group__3 )
             // InternalFSM.g:8668:2: rule__EnumAnnotationAttribute__Group__2__Impl rule__EnumAnnotationAttribute__Group__3
             {
-            pushFollow(FOLLOW_33);
+            pushFollow(FOLLOW_34);
             rule__EnumAnnotationAttribute__Group__2__Impl();
 
             state._fsp--;
@@ -23746,7 +23746,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:8727:1: ( rule__EnumAnnotationAttribute__Group__4__Impl rule__EnumAnnotationAttribute__Group__5 )
             // InternalFSM.g:8728:2: rule__EnumAnnotationAttribute__Group__4__Impl rule__EnumAnnotationAttribute__Group__5
             {
-            pushFollow(FOLLOW_43);
+            pushFollow(FOLLOW_44);
             rule__EnumAnnotationAttribute__Group__4__Impl();
 
             state._fsp--;
@@ -23821,7 +23821,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:8758:1: ( rule__EnumAnnotationAttribute__Group__5__Impl rule__EnumAnnotationAttribute__Group__6 )
             // InternalFSM.g:8759:2: rule__EnumAnnotationAttribute__Group__5__Impl rule__EnumAnnotationAttribute__Group__6
             {
-            pushFollow(FOLLOW_44);
+            pushFollow(FOLLOW_45);
             rule__EnumAnnotationAttribute__Group__5__Impl();
 
             state._fsp--;
@@ -23906,7 +23906,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:8787:1: ( rule__EnumAnnotationAttribute__Group__6__Impl rule__EnumAnnotationAttribute__Group__7 )
             // InternalFSM.g:8788:2: rule__EnumAnnotationAttribute__Group__6__Impl rule__EnumAnnotationAttribute__Group__7
             {
-            pushFollow(FOLLOW_44);
+            pushFollow(FOLLOW_45);
             rule__EnumAnnotationAttribute__Group__6__Impl();
 
             state._fsp--;
@@ -23963,7 +23963,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             	case 1 :
             	    // InternalFSM.g:8802:2: rule__EnumAnnotationAttribute__Group_6__0
             	    {
-            	    pushFollow(FOLLOW_38);
+            	    pushFollow(FOLLOW_39);
             	    rule__EnumAnnotationAttribute__Group_6__0();
 
             	    state._fsp--;
@@ -24079,7 +24079,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:8862:1: ( rule__EnumAnnotationAttribute__Group_6__0__Impl rule__EnumAnnotationAttribute__Group_6__1 )
             // InternalFSM.g:8863:2: rule__EnumAnnotationAttribute__Group_6__0__Impl rule__EnumAnnotationAttribute__Group_6__1
             {
-            pushFollow(FOLLOW_43);
+            pushFollow(FOLLOW_44);
             rule__EnumAnnotationAttribute__Group_6__0__Impl();
 
             state._fsp--;
@@ -24234,7 +24234,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:8927:1: ( rule__ImportedFQN__Group__0__Impl rule__ImportedFQN__Group__1 )
             // InternalFSM.g:8928:2: rule__ImportedFQN__Group__0__Impl rule__ImportedFQN__Group__1
             {
-            pushFollow(FOLLOW_45);
+            pushFollow(FOLLOW_46);
             rule__ImportedFQN__Group__0__Impl();
 
             state._fsp--;
@@ -24400,7 +24400,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:8990:1: ( rule__Documentation__Group__0__Impl rule__Documentation__Group__1 )
             // InternalFSM.g:8991:2: rule__Documentation__Group__0__Impl rule__Documentation__Group__1
             {
-            pushFollow(FOLLOW_16);
+            pushFollow(FOLLOW_17);
             rule__Documentation__Group__0__Impl();
 
             state._fsp--;
@@ -24475,7 +24475,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:9021:1: ( rule__Documentation__Group__1__Impl rule__Documentation__Group__2 )
             // InternalFSM.g:9022:2: rule__Documentation__Group__1__Impl rule__Documentation__Group__2
             {
-            pushFollow(FOLLOW_46);
+            pushFollow(FOLLOW_47);
             rule__Documentation__Group__1__Impl();
 
             state._fsp--;
@@ -24550,7 +24550,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:9052:1: ( rule__Documentation__Group__2__Impl rule__Documentation__Group__3 )
             // InternalFSM.g:9053:2: rule__Documentation__Group__2__Impl rule__Documentation__Group__3
             {
-            pushFollow(FOLLOW_46);
+            pushFollow(FOLLOW_47);
             rule__Documentation__Group__2__Impl();
 
             state._fsp--;
@@ -24607,7 +24607,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             	case 1 :
             	    // InternalFSM.g:9067:2: rule__Documentation__LinesAssignment_2
             	    {
-            	    pushFollow(FOLLOW_14);
+            	    pushFollow(FOLLOW_15);
             	    rule__Documentation__LinesAssignment_2();
 
             	    state._fsp--;
@@ -24723,7 +24723,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:9125:1: ( rule__BooleanLiteral__Group__0__Impl rule__BooleanLiteral__Group__1 )
             // InternalFSM.g:9126:2: rule__BooleanLiteral__Group__0__Impl rule__BooleanLiteral__Group__1
             {
-            pushFollow(FOLLOW_47);
+            pushFollow(FOLLOW_48);
             rule__BooleanLiteral__Group__0__Impl();
 
             state._fsp--;
@@ -24878,7 +24878,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:9188:1: ( rule__RealLiteral__Group__0__Impl rule__RealLiteral__Group__1 )
             // InternalFSM.g:9189:2: rule__RealLiteral__Group__0__Impl rule__RealLiteral__Group__1
             {
-            pushFollow(FOLLOW_48);
+            pushFollow(FOLLOW_49);
             rule__RealLiteral__Group__0__Impl();
 
             state._fsp--;
@@ -25033,7 +25033,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:9251:1: ( rule__IntLiteral__Group__0__Impl rule__IntLiteral__Group__1 )
             // InternalFSM.g:9252:2: rule__IntLiteral__Group__0__Impl rule__IntLiteral__Group__1
             {
-            pushFollow(FOLLOW_48);
+            pushFollow(FOLLOW_49);
             rule__IntLiteral__Group__0__Impl();
 
             state._fsp--;
@@ -25188,7 +25188,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:9314:1: ( rule__StringLiteral__Group__0__Impl rule__StringLiteral__Group__1 )
             // InternalFSM.g:9315:2: rule__StringLiteral__Group__0__Impl rule__StringLiteral__Group__1
             {
-            pushFollow(FOLLOW_40);
+            pushFollow(FOLLOW_41);
             rule__StringLiteral__Group__0__Impl();
 
             state._fsp--;
@@ -25343,7 +25343,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:9377:1: ( rule__Integer__Group_0__0__Impl rule__Integer__Group_0__1 )
             // InternalFSM.g:9378:2: rule__Integer__Group_0__0__Impl rule__Integer__Group_0__1
             {
-            pushFollow(FOLLOW_49);
+            pushFollow(FOLLOW_50);
             rule__Integer__Group_0__0__Impl();
 
             state._fsp--;
@@ -25509,7 +25509,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:9438:1: ( rule__Decimal__Group__0__Impl rule__Decimal__Group__1 )
             // InternalFSM.g:9439:2: rule__Decimal__Group__0__Impl rule__Decimal__Group__1
             {
-            pushFollow(FOLLOW_49);
+            pushFollow(FOLLOW_50);
             rule__Decimal__Group__0__Impl();
 
             state._fsp--;
@@ -25605,7 +25605,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:9467:1: ( rule__Decimal__Group__1__Impl rule__Decimal__Group__2 )
             // InternalFSM.g:9468:2: rule__Decimal__Group__1__Impl rule__Decimal__Group__2
             {
-            pushFollow(FOLLOW_50);
+            pushFollow(FOLLOW_51);
             rule__Decimal__Group__1__Impl();
 
             state._fsp--;
@@ -25680,7 +25680,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:9496:1: ( rule__Decimal__Group__2__Impl rule__Decimal__Group__3 )
             // InternalFSM.g:9497:2: rule__Decimal__Group__2__Impl rule__Decimal__Group__3
             {
-            pushFollow(FOLLOW_51);
+            pushFollow(FOLLOW_52);
             rule__Decimal__Group__2__Impl();
 
             state._fsp--;
@@ -25825,7 +25825,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:9563:1: ( rule__DecimalExp__Group__0__Impl rule__DecimalExp__Group__1 )
             // InternalFSM.g:9564:2: rule__DecimalExp__Group__0__Impl rule__DecimalExp__Group__1
             {
-            pushFollow(FOLLOW_48);
+            pushFollow(FOLLOW_49);
             rule__DecimalExp__Group__0__Impl();
 
             state._fsp--;
@@ -25921,7 +25921,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:9592:1: ( rule__DecimalExp__Group__1__Impl rule__DecimalExp__Group__2 )
             // InternalFSM.g:9593:2: rule__DecimalExp__Group__1__Impl rule__DecimalExp__Group__2
             {
-            pushFollow(FOLLOW_50);
+            pushFollow(FOLLOW_51);
             rule__DecimalExp__Group__1__Impl();
 
             state._fsp--;
@@ -25996,7 +25996,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:9621:1: ( rule__DecimalExp__Group__2__Impl rule__DecimalExp__Group__3 )
             // InternalFSM.g:9622:2: rule__DecimalExp__Group__2__Impl rule__DecimalExp__Group__3
             {
-            pushFollow(FOLLOW_51);
+            pushFollow(FOLLOW_52);
             rule__DecimalExp__Group__2__Impl();
 
             state._fsp--;
@@ -26071,7 +26071,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:9652:1: ( rule__DecimalExp__Group__3__Impl rule__DecimalExp__Group__4 )
             // InternalFSM.g:9653:2: rule__DecimalExp__Group__3__Impl rule__DecimalExp__Group__4
             {
-            pushFollow(FOLLOW_52);
+            pushFollow(FOLLOW_53);
             rule__DecimalExp__Group__3__Impl();
 
             state._fsp--;
@@ -26146,7 +26146,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:9681:1: ( rule__DecimalExp__Group__4__Impl rule__DecimalExp__Group__5 )
             // InternalFSM.g:9682:2: rule__DecimalExp__Group__4__Impl rule__DecimalExp__Group__5
             {
-            pushFollow(FOLLOW_49);
+            pushFollow(FOLLOW_50);
             rule__DecimalExp__Group__4__Impl();
 
             state._fsp--;
@@ -26231,7 +26231,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:9710:1: ( rule__DecimalExp__Group__5__Impl rule__DecimalExp__Group__6 )
             // InternalFSM.g:9711:2: rule__DecimalExp__Group__5__Impl rule__DecimalExp__Group__6
             {
-            pushFollow(FOLLOW_49);
+            pushFollow(FOLLOW_50);
             rule__DecimalExp__Group__5__Impl();
 
             state._fsp--;
@@ -26397,7 +26397,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             // InternalFSM.g:9781:1: ( rule__FQN__Group__0__Impl rule__FQN__Group__1 )
             // InternalFSM.g:9782:2: rule__FQN__Group__0__Impl rule__FQN__Group__1
             {
-            pushFollow(FOLLOW_50);
+            pushFollow(FOLLOW_51);
             rule__FQN__Group__0__Impl();
 
             state._fsp--;
@@ -26524,7 +26524,7 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
             	case 1 :
             	    // InternalFSM.g:9824:2: rule__FQN__Group_1__0
             	    {
-            	    pushFollow(FOLLOW_53);
+            	    pushFollow(FOLLOW_54);
             	    rule__FQN__Group_1__0();
 
             	    state._fsp--;
@@ -28154,104 +28154,22 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__RefinedState__SubgraphAssignment_7_1"
 
 
-    // $ANTLR start "rule__DetailCode__UsedAssignment_0_1_0"
-    // InternalFSM.g:10434:1: rule__DetailCode__UsedAssignment_0_1_0 : ( ( '{' ) ) ;
-    public final void rule__DetailCode__UsedAssignment_0_1_0() throws RecognitionException {
+    // $ANTLR start "rule__DetailCode__LinesAssignment_0_1"
+    // InternalFSM.g:10434:1: rule__DetailCode__LinesAssignment_0_1 : ( RULE_CC_STRING ) ;
+    public final void rule__DetailCode__LinesAssignment_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalFSM.g:10438:1: ( ( ( '{' ) ) )
-            // InternalFSM.g:10439:1: ( ( '{' ) )
+            // InternalFSM.g:10438:1: ( ( RULE_CC_STRING ) )
+            // InternalFSM.g:10439:1: ( RULE_CC_STRING )
             {
-            // InternalFSM.g:10439:1: ( ( '{' ) )
-            // InternalFSM.g:10440:1: ( '{' )
+            // InternalFSM.g:10439:1: ( RULE_CC_STRING )
+            // InternalFSM.g:10440:1: RULE_CC_STRING
             {
-             before(grammarAccess.getDetailCodeAccess().getUsedLeftCurlyBracketKeyword_0_1_0_0()); 
-            // InternalFSM.g:10441:1: ( '{' )
-            // InternalFSM.g:10442:1: '{'
-            {
-             before(grammarAccess.getDetailCodeAccess().getUsedLeftCurlyBracketKeyword_0_1_0_0()); 
-            match(input,29,FOLLOW_2); 
-             after(grammarAccess.getDetailCodeAccess().getUsedLeftCurlyBracketKeyword_0_1_0_0()); 
-
-            }
-
-             after(grammarAccess.getDetailCodeAccess().getUsedLeftCurlyBracketKeyword_0_1_0_0()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__DetailCode__UsedAssignment_0_1_0"
-
-
-    // $ANTLR start "rule__DetailCode__LinesAssignment_0_1_1"
-    // InternalFSM.g:10457:1: rule__DetailCode__LinesAssignment_0_1_1 : ( RULE_STRING ) ;
-    public final void rule__DetailCode__LinesAssignment_0_1_1() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // InternalFSM.g:10461:1: ( ( RULE_STRING ) )
-            // InternalFSM.g:10462:1: ( RULE_STRING )
-            {
-            // InternalFSM.g:10462:1: ( RULE_STRING )
-            // InternalFSM.g:10463:1: RULE_STRING
-            {
-             before(grammarAccess.getDetailCodeAccess().getLinesSTRINGTerminalRuleCall_0_1_1_0()); 
-            match(input,RULE_STRING,FOLLOW_2); 
-             after(grammarAccess.getDetailCodeAccess().getLinesSTRINGTerminalRuleCall_0_1_1_0()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__DetailCode__LinesAssignment_0_1_1"
-
-
-    // $ANTLR start "rule__DetailCode__LinesAssignment_1"
-    // InternalFSM.g:10472:1: rule__DetailCode__LinesAssignment_1 : ( RULE_CC_STRING ) ;
-    public final void rule__DetailCode__LinesAssignment_1() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // InternalFSM.g:10476:1: ( ( RULE_CC_STRING ) )
-            // InternalFSM.g:10477:1: ( RULE_CC_STRING )
-            {
-            // InternalFSM.g:10477:1: ( RULE_CC_STRING )
-            // InternalFSM.g:10478:1: RULE_CC_STRING
-            {
-             before(grammarAccess.getDetailCodeAccess().getLinesCC_STRINGTerminalRuleCall_1_0()); 
+             before(grammarAccess.getDetailCodeAccess().getLinesCC_STRINGTerminalRuleCall_0_1_0()); 
             match(input,RULE_CC_STRING,FOLLOW_2); 
-             after(grammarAccess.getDetailCodeAccess().getLinesCC_STRINGTerminalRuleCall_1_0()); 
+             after(grammarAccess.getDetailCodeAccess().getLinesCC_STRINGTerminalRuleCall_0_1_0()); 
 
             }
 
@@ -28270,7 +28188,89 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__DetailCode__LinesAssignment_1"
+    // $ANTLR end "rule__DetailCode__LinesAssignment_0_1"
+
+
+    // $ANTLR start "rule__DetailCode__UsedAssignment_1_0"
+    // InternalFSM.g:10449:1: rule__DetailCode__UsedAssignment_1_0 : ( ( '{' ) ) ;
+    public final void rule__DetailCode__UsedAssignment_1_0() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // InternalFSM.g:10453:1: ( ( ( '{' ) ) )
+            // InternalFSM.g:10454:1: ( ( '{' ) )
+            {
+            // InternalFSM.g:10454:1: ( ( '{' ) )
+            // InternalFSM.g:10455:1: ( '{' )
+            {
+             before(grammarAccess.getDetailCodeAccess().getUsedLeftCurlyBracketKeyword_1_0_0()); 
+            // InternalFSM.g:10456:1: ( '{' )
+            // InternalFSM.g:10457:1: '{'
+            {
+             before(grammarAccess.getDetailCodeAccess().getUsedLeftCurlyBracketKeyword_1_0_0()); 
+            match(input,29,FOLLOW_2); 
+             after(grammarAccess.getDetailCodeAccess().getUsedLeftCurlyBracketKeyword_1_0_0()); 
+
+            }
+
+             after(grammarAccess.getDetailCodeAccess().getUsedLeftCurlyBracketKeyword_1_0_0()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__DetailCode__UsedAssignment_1_0"
+
+
+    // $ANTLR start "rule__DetailCode__LinesAssignment_1_1"
+    // InternalFSM.g:10472:1: rule__DetailCode__LinesAssignment_1_1 : ( RULE_STRING ) ;
+    public final void rule__DetailCode__LinesAssignment_1_1() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // InternalFSM.g:10476:1: ( ( RULE_STRING ) )
+            // InternalFSM.g:10477:1: ( RULE_STRING )
+            {
+            // InternalFSM.g:10477:1: ( RULE_STRING )
+            // InternalFSM.g:10478:1: RULE_STRING
+            {
+             before(grammarAccess.getDetailCodeAccess().getLinesSTRINGTerminalRuleCall_1_1_0()); 
+            match(input,RULE_STRING,FOLLOW_2); 
+             after(grammarAccess.getDetailCodeAccess().getLinesSTRINGTerminalRuleCall_1_1_0()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__DetailCode__LinesAssignment_1_1"
 
 
     // $ANTLR start "rule__TransitionPoint__HandlerAssignment_0"
@@ -31141,41 +31141,41 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
     // Delegated rules
 
 
+    protected DFA9 dfa9 = new DFA9(this);
     protected DFA10 dfa10 = new DFA10(this);
-    protected DFA11 dfa11 = new DFA11(this);
     static final String dfa_1s = "\32\uffff";
-    static final String dfa_2s = "\14\uffff\1\22\6\uffff\2\22\1\uffff\1\22\2\uffff\1\22";
-    static final String dfa_3s = "\1\52\1\4\1\53\1\4\1\55\4\4\3\55\1\35\2\4\1\7\1\36\1\4\1\uffff\2\35\1\7\1\35\2\uffff\1\35";
-    static final String dfa_4s = "\1\52\2\53\1\66\1\65\3\4\1\66\3\55\1\106\2\4\1\103\1\62\1\4\1\uffff\2\106\1\103\1\106\2\uffff\1\106";
-    static final String dfa_5s = "\22\uffff\1\2\4\uffff\1\1\1\3\1\uffff";
+    static final String dfa_2s = "\13\uffff\1\21\7\uffff\2\21\1\uffff\1\21\2\uffff\1\21";
+    static final String dfa_3s = "\1\52\1\4\1\53\1\4\1\55\4\4\2\55\1\35\2\4\1\55\1\10\1\36\1\uffff\1\4\2\35\1\10\1\35\2\uffff\1\35";
+    static final String dfa_4s = "\1\52\2\53\1\66\1\65\2\4\1\66\1\4\2\55\1\106\2\4\1\55\1\103\1\62\1\uffff\1\4\2\106\1\103\1\106\2\uffff\1\106";
+    static final String dfa_5s = "\21\uffff\1\2\5\uffff\1\1\1\3\1\uffff";
     static final String dfa_6s = "\32\uffff}>";
     static final String[] dfa_7s = {
             "\1\1",
             "\1\2\46\uffff\1\3",
             "\1\3",
             "\1\4\57\uffff\1\5\1\uffff\1\6",
-            "\1\10\7\uffff\1\7",
+            "\1\7\7\uffff\1\10",
             "\1\11",
             "\1\12",
-            "\1\13",
-            "\1\14\57\uffff\1\15\1\uffff\1\16",
-            "\1\10",
-            "\1\10",
-            "\1\10",
-            "\1\20\1\22\1\uffff\1\22\4\uffff\6\22\10\uffff\1\22\1\uffff\1\21\14\uffff\1\17\3\uffff\1\22",
+            "\1\13\57\uffff\1\14\1\uffff\1\15",
+            "\1\16",
+            "\1\7",
+            "\1\7",
+            "\1\20\1\21\1\uffff\1\21\4\uffff\6\21\10\uffff\1\21\1\uffff\1\22\14\uffff\1\17\3\uffff\1\21",
             "\1\23",
             "\1\24",
-            "\1\25\73\uffff\1\26",
-            "\1\22\17\uffff\1\22\1\27\1\uffff\1\27\1\30",
+            "\1\7",
+            "\1\25\72\uffff\1\26",
+            "\1\21\17\uffff\1\21\1\27\1\uffff\1\27\1\30",
+            "",
             "\1\31",
+            "\1\20\1\21\1\uffff\1\21\4\uffff\6\21\10\uffff\1\21\16\uffff\1\17\3\uffff\1\21",
+            "\1\20\1\21\1\uffff\1\21\4\uffff\6\21\10\uffff\1\21\16\uffff\1\17\3\uffff\1\21",
+            "\1\25\72\uffff\1\26",
+            "\1\20\1\21\1\uffff\1\21\4\uffff\6\21\10\uffff\1\21\22\uffff\1\21",
             "",
-            "\1\20\1\22\1\uffff\1\22\4\uffff\6\22\10\uffff\1\22\16\uffff\1\17\3\uffff\1\22",
-            "\1\20\1\22\1\uffff\1\22\4\uffff\6\22\10\uffff\1\22\16\uffff\1\17\3\uffff\1\22",
-            "\1\25\73\uffff\1\26",
-            "\1\20\1\22\1\uffff\1\22\4\uffff\6\22\10\uffff\1\22\22\uffff\1\22",
             "",
-            "",
-            "\1\20\1\22\1\uffff\1\22\4\uffff\6\22\10\uffff\1\22\16\uffff\1\17\3\uffff\1\22"
+            "\1\20\1\21\1\uffff\1\21\4\uffff\6\21\10\uffff\1\21\16\uffff\1\17\3\uffff\1\21"
     };
 
     static final short[] dfa_1 = DFA.unpackEncodedString(dfa_1s);
@@ -31186,11 +31186,11 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
     static final short[] dfa_6 = DFA.unpackEncodedString(dfa_6s);
     static final short[][] dfa_7 = unpackEncodedStringArray(dfa_7s);
 
-    class DFA10 extends DFA {
+    class DFA9 extends DFA {
 
-        public DFA10(BaseRecognizer recognizer) {
+        public DFA9(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
-            this.decisionNumber = 10;
+            this.decisionNumber = 9;
             this.eot = dfa_1;
             this.eof = dfa_2;
             this.min = dfa_3;
@@ -31204,32 +31204,32 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
         }
     }
     static final String dfa_8s = "\31\uffff";
-    static final String dfa_9s = "\1\52\1\4\1\53\1\4\1\55\4\4\3\55\1\35\2\4\1\7\1\57\1\4\2\35\1\7\1\35\2\uffff\1\35";
-    static final String dfa_10s = "\1\52\2\53\1\66\1\65\3\4\1\66\3\55\1\102\2\4\1\103\1\61\1\4\2\102\1\103\1\35\2\uffff\1\102";
-    static final String dfa_11s = "\26\uffff\1\2\1\1\1\uffff";
+    static final String dfa_9s = "\1\52\1\4\1\53\1\4\1\55\4\4\2\55\1\35\2\4\1\55\1\10\1\57\1\4\2\35\1\10\1\35\2\uffff\1\35";
+    static final String dfa_10s = "\1\52\2\53\1\66\1\65\2\4\1\66\1\4\2\55\1\102\2\4\1\55\1\103\1\61\1\4\2\102\1\103\1\35\2\uffff\1\102";
+    static final String dfa_11s = "\26\uffff\1\1\1\2\1\uffff";
     static final String dfa_12s = "\31\uffff}>";
     static final String[] dfa_13s = {
             "\1\1",
             "\1\2\46\uffff\1\3",
             "\1\3",
             "\1\4\57\uffff\1\5\1\uffff\1\6",
-            "\1\10\7\uffff\1\7",
+            "\1\7\7\uffff\1\10",
             "\1\11",
             "\1\12",
-            "\1\13",
-            "\1\14\57\uffff\1\15\1\uffff\1\16",
-            "\1\10",
-            "\1\10",
-            "\1\10",
+            "\1\13\57\uffff\1\14\1\uffff\1\15",
+            "\1\16",
+            "\1\7",
+            "\1\7",
             "\1\20\27\uffff\1\21\14\uffff\1\17",
             "\1\22",
             "\1\23",
-            "\1\24\73\uffff\1\25",
-            "\1\27\1\uffff\1\26",
+            "\1\7",
+            "\1\24\72\uffff\1\25",
+            "\1\26\1\uffff\1\27",
             "\1\30",
             "\1\20\44\uffff\1\17",
             "\1\20\44\uffff\1\17",
-            "\1\24\73\uffff\1\25",
+            "\1\24\72\uffff\1\25",
             "\1\20",
             "",
             "",
@@ -31243,11 +31243,11 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
     static final short[] dfa_12 = DFA.unpackEncodedString(dfa_12s);
     static final short[][] dfa_13 = unpackEncodedStringArray(dfa_13s);
 
-    class DFA11 extends DFA {
+    class DFA10 extends DFA {
 
-        public DFA11(BaseRecognizer recognizer) {
+        public DFA10(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
-            this.decisionNumber = 11;
+            this.decisionNumber = 10;
             this.eot = dfa_8;
             this.eof = dfa_8;
             this.min = dfa_9;
@@ -31273,47 +31273,48 @@ public class InternalFSMParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x000807E100000002L,0x0000000000000040L});
     public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x0000000020000000L,0x0000000000000004L});
     public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000001E40000000L});
-    public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x0000000020000100L});
-    public static final BitSet FOLLOW_13 = new BitSet(new long[]{0x0000000040000080L});
-    public static final BitSet FOLLOW_14 = new BitSet(new long[]{0x0000000000000082L});
-    public static final BitSet FOLLOW_15 = new BitSet(new long[]{0x0000004000000000L,0x0000000000000040L});
-    public static final BitSet FOLLOW_16 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000004L});
-    public static final BitSet FOLLOW_17 = new BitSet(new long[]{0x0000080000000010L});
-    public static final BitSet FOLLOW_18 = new BitSet(new long[]{0x0000100000000000L});
-    public static final BitSet FOLLOW_19 = new BitSet(new long[]{0x0000200000000000L});
-    public static final BitSet FOLLOW_20 = new BitSet(new long[]{0x0050000000000010L});
-    public static final BitSet FOLLOW_21 = new BitSet(new long[]{0x0000400040000000L});
-    public static final BitSet FOLLOW_22 = new BitSet(new long[]{0x0000800000000000L});
-    public static final BitSet FOLLOW_23 = new BitSet(new long[]{0x0080000000000000L});
-    public static final BitSet FOLLOW_24 = new BitSet(new long[]{0x0001000040000000L});
-    public static final BitSet FOLLOW_25 = new BitSet(new long[]{0x0001000000000002L});
-    public static final BitSet FOLLOW_26 = new BitSet(new long[]{0x0002000000000000L});
-    public static final BitSet FOLLOW_27 = new BitSet(new long[]{0x0004000000000000L});
-    public static final BitSet FOLLOW_28 = new BitSet(new long[]{0x0000400000000000L});
-    public static final BitSet FOLLOW_29 = new BitSet(new long[]{0x0000000040000000L});
-    public static final BitSet FOLLOW_30 = new BitSet(new long[]{0x0020000000000000L});
-    public static final BitSet FOLLOW_31 = new BitSet(new long[]{0x0302000000000000L});
-    public static final BitSet FOLLOW_32 = new BitSet(new long[]{0x0200000000000002L});
-    public static final BitSet FOLLOW_33 = new BitSet(new long[]{0x0000080000000000L});
-    public static final BitSet FOLLOW_34 = new BitSet(new long[]{0x4C00000000000000L});
-    public static final BitSet FOLLOW_35 = new BitSet(new long[]{0x4400000000000000L});
-    public static final BitSet FOLLOW_36 = new BitSet(new long[]{0x2000000000000000L});
-    public static final BitSet FOLLOW_37 = new BitSet(new long[]{0x1000000000000000L});
-    public static final BitSet FOLLOW_38 = new BitSet(new long[]{0x2000000000000002L});
-    public static final BitSet FOLLOW_39 = new BitSet(new long[]{0x8000000000000000L});
-    public static final BitSet FOLLOW_40 = new BitSet(new long[]{0x000000000001C0E0L,0x0000000000000100L});
-    public static final BitSet FOLLOW_41 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000001L});
-    public static final BitSet FOLLOW_42 = new BitSet(new long[]{0x0000000007800000L});
-    public static final BitSet FOLLOW_43 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_44 = new BitSet(new long[]{0x2000000040000000L});
-    public static final BitSet FOLLOW_45 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000002L});
-    public static final BitSet FOLLOW_46 = new BitSet(new long[]{0x0000000000000080L,0x0000000000000008L});
-    public static final BitSet FOLLOW_47 = new BitSet(new long[]{0x0000000000004000L,0x0000000000000100L});
-    public static final BitSet FOLLOW_48 = new BitSet(new long[]{0x0000000000018060L});
-    public static final BitSet FOLLOW_49 = new BitSet(new long[]{0x0000000000018040L});
-    public static final BitSet FOLLOW_50 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000010L});
-    public static final BitSet FOLLOW_51 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_52 = new BitSet(new long[]{0x0000000000060000L});
-    public static final BitSet FOLLOW_53 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000010L});
+    public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x0000000020000080L});
+    public static final BitSet FOLLOW_13 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_14 = new BitSet(new long[]{0x0000000040000100L});
+    public static final BitSet FOLLOW_15 = new BitSet(new long[]{0x0000000000000102L});
+    public static final BitSet FOLLOW_16 = new BitSet(new long[]{0x0000004000000000L,0x0000000000000040L});
+    public static final BitSet FOLLOW_17 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000004L});
+    public static final BitSet FOLLOW_18 = new BitSet(new long[]{0x0000080000000010L});
+    public static final BitSet FOLLOW_19 = new BitSet(new long[]{0x0000100000000000L});
+    public static final BitSet FOLLOW_20 = new BitSet(new long[]{0x0000200000000000L});
+    public static final BitSet FOLLOW_21 = new BitSet(new long[]{0x0050000000000010L});
+    public static final BitSet FOLLOW_22 = new BitSet(new long[]{0x0000400040000000L});
+    public static final BitSet FOLLOW_23 = new BitSet(new long[]{0x0000800000000000L});
+    public static final BitSet FOLLOW_24 = new BitSet(new long[]{0x0080000000000000L});
+    public static final BitSet FOLLOW_25 = new BitSet(new long[]{0x0001000040000000L});
+    public static final BitSet FOLLOW_26 = new BitSet(new long[]{0x0001000000000002L});
+    public static final BitSet FOLLOW_27 = new BitSet(new long[]{0x0002000000000000L});
+    public static final BitSet FOLLOW_28 = new BitSet(new long[]{0x0004000000000000L});
+    public static final BitSet FOLLOW_29 = new BitSet(new long[]{0x0000400000000000L});
+    public static final BitSet FOLLOW_30 = new BitSet(new long[]{0x0000000040000000L});
+    public static final BitSet FOLLOW_31 = new BitSet(new long[]{0x0020000000000000L});
+    public static final BitSet FOLLOW_32 = new BitSet(new long[]{0x0302000000000000L});
+    public static final BitSet FOLLOW_33 = new BitSet(new long[]{0x0200000000000002L});
+    public static final BitSet FOLLOW_34 = new BitSet(new long[]{0x0000080000000000L});
+    public static final BitSet FOLLOW_35 = new BitSet(new long[]{0x4C00000000000000L});
+    public static final BitSet FOLLOW_36 = new BitSet(new long[]{0x4400000000000000L});
+    public static final BitSet FOLLOW_37 = new BitSet(new long[]{0x2000000000000000L});
+    public static final BitSet FOLLOW_38 = new BitSet(new long[]{0x1000000000000000L});
+    public static final BitSet FOLLOW_39 = new BitSet(new long[]{0x2000000000000002L});
+    public static final BitSet FOLLOW_40 = new BitSet(new long[]{0x8000000000000000L});
+    public static final BitSet FOLLOW_41 = new BitSet(new long[]{0x000000000001C160L,0x0000000000000100L});
+    public static final BitSet FOLLOW_42 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000001L});
+    public static final BitSet FOLLOW_43 = new BitSet(new long[]{0x0000000007800000L});
+    public static final BitSet FOLLOW_44 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_45 = new BitSet(new long[]{0x2000000040000000L});
+    public static final BitSet FOLLOW_46 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000002L});
+    public static final BitSet FOLLOW_47 = new BitSet(new long[]{0x0000000000000100L,0x0000000000000008L});
+    public static final BitSet FOLLOW_48 = new BitSet(new long[]{0x0000000000004000L,0x0000000000000100L});
+    public static final BitSet FOLLOW_49 = new BitSet(new long[]{0x0000000000018060L});
+    public static final BitSet FOLLOW_50 = new BitSet(new long[]{0x0000000000018040L});
+    public static final BitSet FOLLOW_51 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000010L});
+    public static final BitSet FOLLOW_52 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_53 = new BitSet(new long[]{0x0000000000060000L});
+    public static final BitSet FOLLOW_54 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000010L});
 
 }

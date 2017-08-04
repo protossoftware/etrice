@@ -14285,29 +14285,29 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleDetailCode"
-    // InternalRoom.g:5744:1: ruleDetailCode returns [EObject current=null] : ( ( () ( ( (lv_used_1_0= '{' ) ) ( (lv_lines_2_0= RULE_STRING ) )* otherlv_3= '}' ) ) | ( (lv_lines_4_0= RULE_CC_STRING ) )? ) ;
+    // InternalRoom.g:5744:1: ruleDetailCode returns [EObject current=null] : ( ( () ( (lv_lines_1_0= RULE_CC_STRING ) )? ) | ( ( (lv_used_2_0= '{' ) ) ( (lv_lines_3_0= RULE_STRING ) )* otherlv_4= '}' ) ) ;
     public final EObject ruleDetailCode() throws RecognitionException {
         EObject current = null;
 
-        Token lv_used_1_0=null;
-        Token lv_lines_2_0=null;
-        Token otherlv_3=null;
-        Token lv_lines_4_0=null;
+        Token lv_lines_1_0=null;
+        Token lv_used_2_0=null;
+        Token lv_lines_3_0=null;
+        Token otherlv_4=null;
 
          enterRule(); 
             
         try {
-            // InternalRoom.g:5747:28: ( ( ( () ( ( (lv_used_1_0= '{' ) ) ( (lv_lines_2_0= RULE_STRING ) )* otherlv_3= '}' ) ) | ( (lv_lines_4_0= RULE_CC_STRING ) )? ) )
-            // InternalRoom.g:5748:1: ( ( () ( ( (lv_used_1_0= '{' ) ) ( (lv_lines_2_0= RULE_STRING ) )* otherlv_3= '}' ) ) | ( (lv_lines_4_0= RULE_CC_STRING ) )? )
+            // InternalRoom.g:5747:28: ( ( ( () ( (lv_lines_1_0= RULE_CC_STRING ) )? ) | ( ( (lv_used_2_0= '{' ) ) ( (lv_lines_3_0= RULE_STRING ) )* otherlv_4= '}' ) ) )
+            // InternalRoom.g:5748:1: ( ( () ( (lv_lines_1_0= RULE_CC_STRING ) )? ) | ( ( (lv_used_2_0= '{' ) ) ( (lv_lines_3_0= RULE_STRING ) )* otherlv_4= '}' ) )
             {
-            // InternalRoom.g:5748:1: ( ( () ( ( (lv_used_1_0= '{' ) ) ( (lv_lines_2_0= RULE_STRING ) )* otherlv_3= '}' ) ) | ( (lv_lines_4_0= RULE_CC_STRING ) )? )
+            // InternalRoom.g:5748:1: ( ( () ( (lv_lines_1_0= RULE_CC_STRING ) )? ) | ( ( (lv_used_2_0= '{' ) ) ( (lv_lines_3_0= RULE_STRING ) )* otherlv_4= '}' ) )
             int alt125=2;
             int LA125_0 = input.LA(1);
 
-            if ( (LA125_0==14) ) {
+            if ( (LA125_0==EOF||LA125_0==RULE_CC_STRING||LA125_0==15||(LA125_0>=31 && LA125_0<=33)||(LA125_0>=36 && LA125_0<=37)||(LA125_0>=40 && LA125_0<=41)||(LA125_0>=43 && LA125_0<=45)||LA125_0==47||LA125_0==53||(LA125_0>=59 && LA125_0<=63)||(LA125_0>=67 && LA125_0<=68)||LA125_0==70||LA125_0==74||LA125_0==77||LA125_0==80||(LA125_0>=83 && LA125_0<=85)||LA125_0==94||(LA125_0>=104 && LA125_0<=105)||LA125_0==111||LA125_0==127) ) {
                 alt125=1;
             }
-            else if ( (LA125_0==EOF||LA125_0==RULE_CC_STRING||LA125_0==15||(LA125_0>=31 && LA125_0<=33)||(LA125_0>=36 && LA125_0<=37)||(LA125_0>=40 && LA125_0<=41)||(LA125_0>=43 && LA125_0<=45)||LA125_0==47||LA125_0==53||(LA125_0>=59 && LA125_0<=63)||(LA125_0>=67 && LA125_0<=68)||LA125_0==70||LA125_0==74||LA125_0==77||LA125_0==80||(LA125_0>=83 && LA125_0<=85)||LA125_0==94||(LA125_0>=104 && LA125_0<=105)||LA125_0==111||LA125_0==127) ) {
+            else if ( (LA125_0==14) ) {
                 alt125=2;
             }
             else {
@@ -14318,10 +14318,10 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             }
             switch (alt125) {
                 case 1 :
-                    // InternalRoom.g:5748:2: ( () ( ( (lv_used_1_0= '{' ) ) ( (lv_lines_2_0= RULE_STRING ) )* otherlv_3= '}' ) )
+                    // InternalRoom.g:5748:2: ( () ( (lv_lines_1_0= RULE_CC_STRING ) )? )
                     {
-                    // InternalRoom.g:5748:2: ( () ( ( (lv_used_1_0= '{' ) ) ( (lv_lines_2_0= RULE_STRING ) )* otherlv_3= '}' ) )
-                    // InternalRoom.g:5748:3: () ( ( (lv_used_1_0= '{' ) ) ( (lv_lines_2_0= RULE_STRING ) )* otherlv_3= '}' )
+                    // InternalRoom.g:5748:2: ( () ( (lv_lines_1_0= RULE_CC_STRING ) )? )
+                    // InternalRoom.g:5748:3: () ( (lv_lines_1_0= RULE_CC_STRING ) )?
                     {
                     // InternalRoom.g:5748:3: ()
                     // InternalRoom.g:5749:5: 
@@ -14334,18 +14334,64 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // InternalRoom.g:5754:2: ( ( (lv_used_1_0= '{' ) ) ( (lv_lines_2_0= RULE_STRING ) )* otherlv_3= '}' )
-                    // InternalRoom.g:5754:3: ( (lv_used_1_0= '{' ) ) ( (lv_lines_2_0= RULE_STRING ) )* otherlv_3= '}'
-                    {
-                    // InternalRoom.g:5754:3: ( (lv_used_1_0= '{' ) )
-                    // InternalRoom.g:5755:1: (lv_used_1_0= '{' )
-                    {
-                    // InternalRoom.g:5755:1: (lv_used_1_0= '{' )
-                    // InternalRoom.g:5756:3: lv_used_1_0= '{'
-                    {
-                    lv_used_1_0=(Token)match(input,14,FOLLOW_115); 
+                    // InternalRoom.g:5754:2: ( (lv_lines_1_0= RULE_CC_STRING ) )?
+                    int alt123=2;
+                    int LA123_0 = input.LA(1);
 
-                            newLeafNode(lv_used_1_0, grammarAccess.getDetailCodeAccess().getUsedLeftCurlyBracketKeyword_0_1_0_0());
+                    if ( (LA123_0==RULE_CC_STRING) ) {
+                        alt123=1;
+                    }
+                    switch (alt123) {
+                        case 1 :
+                            // InternalRoom.g:5755:1: (lv_lines_1_0= RULE_CC_STRING )
+                            {
+                            // InternalRoom.g:5755:1: (lv_lines_1_0= RULE_CC_STRING )
+                            // InternalRoom.g:5756:3: lv_lines_1_0= RULE_CC_STRING
+                            {
+                            lv_lines_1_0=(Token)match(input,RULE_CC_STRING,FOLLOW_2); 
+
+                            			newLeafNode(lv_lines_1_0, grammarAccess.getDetailCodeAccess().getLinesCC_STRINGTerminalRuleCall_0_1_0()); 
+                            		
+
+                            	        if (current==null) {
+                            	            current = createModelElement(grammarAccess.getDetailCodeRule());
+                            	        }
+                                   		addWithLastConsumed(
+                                   			current, 
+                                   			"lines",
+                                    		lv_lines_1_0, 
+                                    		"org.eclipse.etrice.core.common.Base.CC_STRING");
+                            	    
+
+                            }
+
+
+                            }
+                            break;
+
+                    }
+
+
+                    }
+
+
+                    }
+                    break;
+                case 2 :
+                    // InternalRoom.g:5773:6: ( ( (lv_used_2_0= '{' ) ) ( (lv_lines_3_0= RULE_STRING ) )* otherlv_4= '}' )
+                    {
+                    // InternalRoom.g:5773:6: ( ( (lv_used_2_0= '{' ) ) ( (lv_lines_3_0= RULE_STRING ) )* otherlv_4= '}' )
+                    // InternalRoom.g:5773:7: ( (lv_used_2_0= '{' ) ) ( (lv_lines_3_0= RULE_STRING ) )* otherlv_4= '}'
+                    {
+                    // InternalRoom.g:5773:7: ( (lv_used_2_0= '{' ) )
+                    // InternalRoom.g:5774:1: (lv_used_2_0= '{' )
+                    {
+                    // InternalRoom.g:5774:1: (lv_used_2_0= '{' )
+                    // InternalRoom.g:5775:3: lv_used_2_0= '{'
+                    {
+                    lv_used_2_0=(Token)match(input,14,FOLLOW_115); 
+
+                            newLeafNode(lv_used_2_0, grammarAccess.getDetailCodeAccess().getUsedLeftCurlyBracketKeyword_1_0_0());
                         
 
                     	        if (current==null) {
@@ -14359,27 +14405,27 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // InternalRoom.g:5769:2: ( (lv_lines_2_0= RULE_STRING ) )*
-                    loop123:
+                    // InternalRoom.g:5788:2: ( (lv_lines_3_0= RULE_STRING ) )*
+                    loop124:
                     do {
-                        int alt123=2;
-                        int LA123_0 = input.LA(1);
+                        int alt124=2;
+                        int LA124_0 = input.LA(1);
 
-                        if ( (LA123_0==RULE_STRING) ) {
-                            alt123=1;
+                        if ( (LA124_0==RULE_STRING) ) {
+                            alt124=1;
                         }
 
 
-                        switch (alt123) {
+                        switch (alt124) {
                     	case 1 :
-                    	    // InternalRoom.g:5770:1: (lv_lines_2_0= RULE_STRING )
+                    	    // InternalRoom.g:5789:1: (lv_lines_3_0= RULE_STRING )
                     	    {
-                    	    // InternalRoom.g:5770:1: (lv_lines_2_0= RULE_STRING )
-                    	    // InternalRoom.g:5771:3: lv_lines_2_0= RULE_STRING
+                    	    // InternalRoom.g:5789:1: (lv_lines_3_0= RULE_STRING )
+                    	    // InternalRoom.g:5790:3: lv_lines_3_0= RULE_STRING
                     	    {
-                    	    lv_lines_2_0=(Token)match(input,RULE_STRING,FOLLOW_115); 
+                    	    lv_lines_3_0=(Token)match(input,RULE_STRING,FOLLOW_115); 
 
-                    	    			newLeafNode(lv_lines_2_0, grammarAccess.getDetailCodeAccess().getLinesSTRINGTerminalRuleCall_0_1_1_0()); 
+                    	    			newLeafNode(lv_lines_3_0, grammarAccess.getDetailCodeAccess().getLinesSTRINGTerminalRuleCall_1_1_0()); 
                     	    		
 
                     	    	        if (current==null) {
@@ -14388,7 +14434,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	           		addWithLastConsumed(
                     	           			current, 
                     	           			"lines",
-                    	            		lv_lines_2_0, 
+                    	            		lv_lines_3_0, 
                     	            		"org.eclipse.xtext.common.Terminals.STRING");
                     	    	    
 
@@ -14399,60 +14445,14 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	    break;
 
                     	default :
-                    	    break loop123;
+                    	    break loop124;
                         }
                     } while (true);
 
-                    otherlv_3=(Token)match(input,15,FOLLOW_2); 
+                    otherlv_4=(Token)match(input,15,FOLLOW_2); 
 
-                        	newLeafNode(otherlv_3, grammarAccess.getDetailCodeAccess().getRightCurlyBracketKeyword_0_1_2());
+                        	newLeafNode(otherlv_4, grammarAccess.getDetailCodeAccess().getRightCurlyBracketKeyword_1_2());
                         
-
-                    }
-
-
-                    }
-
-
-                    }
-                    break;
-                case 2 :
-                    // InternalRoom.g:5792:6: ( (lv_lines_4_0= RULE_CC_STRING ) )?
-                    {
-                    // InternalRoom.g:5792:6: ( (lv_lines_4_0= RULE_CC_STRING ) )?
-                    int alt124=2;
-                    int LA124_0 = input.LA(1);
-
-                    if ( (LA124_0==RULE_CC_STRING) ) {
-                        alt124=1;
-                    }
-                    switch (alt124) {
-                        case 1 :
-                            // InternalRoom.g:5793:1: (lv_lines_4_0= RULE_CC_STRING )
-                            {
-                            // InternalRoom.g:5793:1: (lv_lines_4_0= RULE_CC_STRING )
-                            // InternalRoom.g:5794:3: lv_lines_4_0= RULE_CC_STRING
-                            {
-                            lv_lines_4_0=(Token)match(input,RULE_CC_STRING,FOLLOW_2); 
-
-                            			newLeafNode(lv_lines_4_0, grammarAccess.getDetailCodeAccess().getLinesCC_STRINGTerminalRuleCall_1_0()); 
-                            		
-
-                            	        if (current==null) {
-                            	            current = createModelElement(grammarAccess.getDetailCodeRule());
-                            	        }
-                                   		addWithLastConsumed(
-                                   			current, 
-                                   			"lines",
-                                    		lv_lines_4_0, 
-                                    		"org.eclipse.etrice.core.common.Base.CC_STRING");
-                            	    
-
-                            }
-
-
-                            }
-                            break;
 
                     }
 

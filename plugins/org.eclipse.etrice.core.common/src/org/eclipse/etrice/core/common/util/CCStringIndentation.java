@@ -16,7 +16,7 @@ public class CCStringIndentation {
 	
 	public CCStringIndentation(String ccString){
 		this.ccString = ccString;
-		this.lineEnding = CC_StringConveter.getLineEnding(ccString);
+		this.lineEnding = CC_StringConveter.getLineEnding(ccString); // use contents line ending
 		this.splittedLines = Strings.split(ccString, lineEnding);
 		this.ignoreFirst = splittedLines.size() > 1 && splittedLines.get(0).isEmpty();
 		this.ignoreLast = splittedLines.size() > 1 && splittedLines.get(splittedLines.size() - 1).trim().isEmpty();

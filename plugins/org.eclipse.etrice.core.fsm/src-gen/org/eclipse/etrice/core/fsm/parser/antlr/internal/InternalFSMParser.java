@@ -22,12 +22,12 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalFSMParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_STRING", "RULE_CC_STRING", "RULE_INT", "RULE_HEX", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'abstract'", "'ModelComponent'", "'extends'", "'{'", "'}'", "'StateMachine'", "'State'", "'entry'", "'exit'", "'do'", "'subgraph'", "'RefinedState'", "'handler'", "'TransitionPoint'", "'EntryPoint'", "'ExitPoint'", "'ChoicePoint'", "'Transition'", "':'", "'initial'", "'->'", "'action'", "'triggers'", "'or'", "'guard'", "'cond'", "'RefinedTransition'", "'my'", "'of'", "'cp'", "'<'", "'|'", "'>'", "'in'", "'('", "','", "')'", "'out'", "'='", "'optional'", "'mandatory'", "'attribute'", "'.*'", "'['", "']'", "'false'", "'true'", "'+'", "'-'", "'.'", "'e'", "'E'", "'eventdriven'", "'datadriven'", "'async'", "'sync'", "'ptBoolean'", "'ptInteger'", "'ptReal'", "'ptCharacter'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_CC_STRING", "RULE_STRING", "RULE_INT", "RULE_HEX", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'abstract'", "'ModelComponent'", "'extends'", "'{'", "'}'", "'StateMachine'", "'State'", "'entry'", "'exit'", "'do'", "'subgraph'", "'RefinedState'", "'handler'", "'TransitionPoint'", "'EntryPoint'", "'ExitPoint'", "'ChoicePoint'", "'Transition'", "':'", "'initial'", "'->'", "'action'", "'triggers'", "'or'", "'guard'", "'cond'", "'RefinedTransition'", "'my'", "'of'", "'cp'", "'<'", "'|'", "'>'", "'in'", "'('", "','", "')'", "'out'", "'='", "'optional'", "'mandatory'", "'attribute'", "'.*'", "'['", "']'", "'false'", "'true'", "'+'", "'-'", "'.'", "'e'", "'E'", "'eventdriven'", "'datadriven'", "'async'", "'sync'", "'ptBoolean'", "'ptInteger'", "'ptReal'", "'ptCharacter'"
     };
     public static final int RULE_HEX=8;
     public static final int T__50=50;
     public static final int T__19=19;
-    public static final int RULE_CC_STRING=6;
+    public static final int RULE_CC_STRING=5;
     public static final int T__15=15;
     public static final int T__59=59;
     public static final int T__16=16;
@@ -69,7 +69,7 @@ public class InternalFSMParser extends AbstractInternalAntlrParser {
     public static final int T__70=70;
     public static final int T__71=71;
     public static final int T__72=72;
-    public static final int RULE_STRING=5;
+    public static final int RULE_STRING=6;
     public static final int RULE_SL_COMMENT=10;
     public static final int T__37=37;
     public static final int T__38=38;
@@ -2367,29 +2367,29 @@ public class InternalFSMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleDetailCode"
-    // InternalFSM.g:934:1: ruleDetailCode returns [EObject current=null] : ( ( () ( ( (lv_used_1_0= '{' ) ) ( (lv_lines_2_0= RULE_STRING ) )* otherlv_3= '}' ) ) | ( (lv_lines_4_0= RULE_CC_STRING ) )? ) ;
+    // InternalFSM.g:934:1: ruleDetailCode returns [EObject current=null] : ( ( () ( (lv_lines_1_0= RULE_CC_STRING ) )? ) | ( ( (lv_used_2_0= '{' ) ) ( (lv_lines_3_0= RULE_STRING ) )* otherlv_4= '}' ) ) ;
     public final EObject ruleDetailCode() throws RecognitionException {
         EObject current = null;
 
-        Token lv_used_1_0=null;
-        Token lv_lines_2_0=null;
-        Token otherlv_3=null;
-        Token lv_lines_4_0=null;
+        Token lv_lines_1_0=null;
+        Token lv_used_2_0=null;
+        Token lv_lines_3_0=null;
+        Token otherlv_4=null;
 
          enterRule(); 
             
         try {
-            // InternalFSM.g:937:28: ( ( ( () ( ( (lv_used_1_0= '{' ) ) ( (lv_lines_2_0= RULE_STRING ) )* otherlv_3= '}' ) ) | ( (lv_lines_4_0= RULE_CC_STRING ) )? ) )
-            // InternalFSM.g:938:1: ( ( () ( ( (lv_used_1_0= '{' ) ) ( (lv_lines_2_0= RULE_STRING ) )* otherlv_3= '}' ) ) | ( (lv_lines_4_0= RULE_CC_STRING ) )? )
+            // InternalFSM.g:937:28: ( ( ( () ( (lv_lines_1_0= RULE_CC_STRING ) )? ) | ( ( (lv_used_2_0= '{' ) ) ( (lv_lines_3_0= RULE_STRING ) )* otherlv_4= '}' ) ) )
+            // InternalFSM.g:938:1: ( ( () ( (lv_lines_1_0= RULE_CC_STRING ) )? ) | ( ( (lv_used_2_0= '{' ) ) ( (lv_lines_3_0= RULE_STRING ) )* otherlv_4= '}' ) )
             {
-            // InternalFSM.g:938:1: ( ( () ( ( (lv_used_1_0= '{' ) ) ( (lv_lines_2_0= RULE_STRING ) )* otherlv_3= '}' ) ) | ( (lv_lines_4_0= RULE_CC_STRING ) )? )
+            // InternalFSM.g:938:1: ( ( () ( (lv_lines_1_0= RULE_CC_STRING ) )? ) | ( ( (lv_used_2_0= '{' ) ) ( (lv_lines_3_0= RULE_STRING ) )* otherlv_4= '}' ) )
             int alt21=2;
             int LA21_0 = input.LA(1);
 
-            if ( (LA21_0==16) ) {
+            if ( (LA21_0==EOF||LA21_0==RULE_CC_STRING||LA21_0==17||(LA21_0>=21 && LA21_0<=23)||LA21_0==34||LA21_0==45) ) {
                 alt21=1;
             }
-            else if ( (LA21_0==EOF||LA21_0==RULE_CC_STRING||LA21_0==17||(LA21_0>=21 && LA21_0<=23)||LA21_0==34||LA21_0==45) ) {
+            else if ( (LA21_0==16) ) {
                 alt21=2;
             }
             else {
@@ -2400,10 +2400,10 @@ public class InternalFSMParser extends AbstractInternalAntlrParser {
             }
             switch (alt21) {
                 case 1 :
-                    // InternalFSM.g:938:2: ( () ( ( (lv_used_1_0= '{' ) ) ( (lv_lines_2_0= RULE_STRING ) )* otherlv_3= '}' ) )
+                    // InternalFSM.g:938:2: ( () ( (lv_lines_1_0= RULE_CC_STRING ) )? )
                     {
-                    // InternalFSM.g:938:2: ( () ( ( (lv_used_1_0= '{' ) ) ( (lv_lines_2_0= RULE_STRING ) )* otherlv_3= '}' ) )
-                    // InternalFSM.g:938:3: () ( ( (lv_used_1_0= '{' ) ) ( (lv_lines_2_0= RULE_STRING ) )* otherlv_3= '}' )
+                    // InternalFSM.g:938:2: ( () ( (lv_lines_1_0= RULE_CC_STRING ) )? )
+                    // InternalFSM.g:938:3: () ( (lv_lines_1_0= RULE_CC_STRING ) )?
                     {
                     // InternalFSM.g:938:3: ()
                     // InternalFSM.g:939:5: 
@@ -2416,18 +2416,64 @@ public class InternalFSMParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // InternalFSM.g:944:2: ( ( (lv_used_1_0= '{' ) ) ( (lv_lines_2_0= RULE_STRING ) )* otherlv_3= '}' )
-                    // InternalFSM.g:944:3: ( (lv_used_1_0= '{' ) ) ( (lv_lines_2_0= RULE_STRING ) )* otherlv_3= '}'
-                    {
-                    // InternalFSM.g:944:3: ( (lv_used_1_0= '{' ) )
-                    // InternalFSM.g:945:1: (lv_used_1_0= '{' )
-                    {
-                    // InternalFSM.g:945:1: (lv_used_1_0= '{' )
-                    // InternalFSM.g:946:3: lv_used_1_0= '{'
-                    {
-                    lv_used_1_0=(Token)match(input,16,FOLLOW_20); 
+                    // InternalFSM.g:944:2: ( (lv_lines_1_0= RULE_CC_STRING ) )?
+                    int alt19=2;
+                    int LA19_0 = input.LA(1);
 
-                            newLeafNode(lv_used_1_0, grammarAccess.getDetailCodeAccess().getUsedLeftCurlyBracketKeyword_0_1_0_0());
+                    if ( (LA19_0==RULE_CC_STRING) ) {
+                        alt19=1;
+                    }
+                    switch (alt19) {
+                        case 1 :
+                            // InternalFSM.g:945:1: (lv_lines_1_0= RULE_CC_STRING )
+                            {
+                            // InternalFSM.g:945:1: (lv_lines_1_0= RULE_CC_STRING )
+                            // InternalFSM.g:946:3: lv_lines_1_0= RULE_CC_STRING
+                            {
+                            lv_lines_1_0=(Token)match(input,RULE_CC_STRING,FOLLOW_2); 
+
+                            			newLeafNode(lv_lines_1_0, grammarAccess.getDetailCodeAccess().getLinesCC_STRINGTerminalRuleCall_0_1_0()); 
+                            		
+
+                            	        if (current==null) {
+                            	            current = createModelElement(grammarAccess.getDetailCodeRule());
+                            	        }
+                                   		addWithLastConsumed(
+                                   			current, 
+                                   			"lines",
+                                    		lv_lines_1_0, 
+                                    		"org.eclipse.etrice.core.common.Base.CC_STRING");
+                            	    
+
+                            }
+
+
+                            }
+                            break;
+
+                    }
+
+
+                    }
+
+
+                    }
+                    break;
+                case 2 :
+                    // InternalFSM.g:963:6: ( ( (lv_used_2_0= '{' ) ) ( (lv_lines_3_0= RULE_STRING ) )* otherlv_4= '}' )
+                    {
+                    // InternalFSM.g:963:6: ( ( (lv_used_2_0= '{' ) ) ( (lv_lines_3_0= RULE_STRING ) )* otherlv_4= '}' )
+                    // InternalFSM.g:963:7: ( (lv_used_2_0= '{' ) ) ( (lv_lines_3_0= RULE_STRING ) )* otherlv_4= '}'
+                    {
+                    // InternalFSM.g:963:7: ( (lv_used_2_0= '{' ) )
+                    // InternalFSM.g:964:1: (lv_used_2_0= '{' )
+                    {
+                    // InternalFSM.g:964:1: (lv_used_2_0= '{' )
+                    // InternalFSM.g:965:3: lv_used_2_0= '{'
+                    {
+                    lv_used_2_0=(Token)match(input,16,FOLLOW_20); 
+
+                            newLeafNode(lv_used_2_0, grammarAccess.getDetailCodeAccess().getUsedLeftCurlyBracketKeyword_1_0_0());
                         
 
                     	        if (current==null) {
@@ -2441,27 +2487,27 @@ public class InternalFSMParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // InternalFSM.g:959:2: ( (lv_lines_2_0= RULE_STRING ) )*
-                    loop19:
+                    // InternalFSM.g:978:2: ( (lv_lines_3_0= RULE_STRING ) )*
+                    loop20:
                     do {
-                        int alt19=2;
-                        int LA19_0 = input.LA(1);
+                        int alt20=2;
+                        int LA20_0 = input.LA(1);
 
-                        if ( (LA19_0==RULE_STRING) ) {
-                            alt19=1;
+                        if ( (LA20_0==RULE_STRING) ) {
+                            alt20=1;
                         }
 
 
-                        switch (alt19) {
+                        switch (alt20) {
                     	case 1 :
-                    	    // InternalFSM.g:960:1: (lv_lines_2_0= RULE_STRING )
+                    	    // InternalFSM.g:979:1: (lv_lines_3_0= RULE_STRING )
                     	    {
-                    	    // InternalFSM.g:960:1: (lv_lines_2_0= RULE_STRING )
-                    	    // InternalFSM.g:961:3: lv_lines_2_0= RULE_STRING
+                    	    // InternalFSM.g:979:1: (lv_lines_3_0= RULE_STRING )
+                    	    // InternalFSM.g:980:3: lv_lines_3_0= RULE_STRING
                     	    {
-                    	    lv_lines_2_0=(Token)match(input,RULE_STRING,FOLLOW_20); 
+                    	    lv_lines_3_0=(Token)match(input,RULE_STRING,FOLLOW_20); 
 
-                    	    			newLeafNode(lv_lines_2_0, grammarAccess.getDetailCodeAccess().getLinesSTRINGTerminalRuleCall_0_1_1_0()); 
+                    	    			newLeafNode(lv_lines_3_0, grammarAccess.getDetailCodeAccess().getLinesSTRINGTerminalRuleCall_1_1_0()); 
                     	    		
 
                     	    	        if (current==null) {
@@ -2470,7 +2516,7 @@ public class InternalFSMParser extends AbstractInternalAntlrParser {
                     	           		addWithLastConsumed(
                     	           			current, 
                     	           			"lines",
-                    	            		lv_lines_2_0, 
+                    	            		lv_lines_3_0, 
                     	            		"org.eclipse.xtext.common.Terminals.STRING");
                     	    	    
 
@@ -2481,60 +2527,14 @@ public class InternalFSMParser extends AbstractInternalAntlrParser {
                     	    break;
 
                     	default :
-                    	    break loop19;
+                    	    break loop20;
                         }
                     } while (true);
 
-                    otherlv_3=(Token)match(input,17,FOLLOW_2); 
+                    otherlv_4=(Token)match(input,17,FOLLOW_2); 
 
-                        	newLeafNode(otherlv_3, grammarAccess.getDetailCodeAccess().getRightCurlyBracketKeyword_0_1_2());
+                        	newLeafNode(otherlv_4, grammarAccess.getDetailCodeAccess().getRightCurlyBracketKeyword_1_2());
                         
-
-                    }
-
-
-                    }
-
-
-                    }
-                    break;
-                case 2 :
-                    // InternalFSM.g:982:6: ( (lv_lines_4_0= RULE_CC_STRING ) )?
-                    {
-                    // InternalFSM.g:982:6: ( (lv_lines_4_0= RULE_CC_STRING ) )?
-                    int alt20=2;
-                    int LA20_0 = input.LA(1);
-
-                    if ( (LA20_0==RULE_CC_STRING) ) {
-                        alt20=1;
-                    }
-                    switch (alt20) {
-                        case 1 :
-                            // InternalFSM.g:983:1: (lv_lines_4_0= RULE_CC_STRING )
-                            {
-                            // InternalFSM.g:983:1: (lv_lines_4_0= RULE_CC_STRING )
-                            // InternalFSM.g:984:3: lv_lines_4_0= RULE_CC_STRING
-                            {
-                            lv_lines_4_0=(Token)match(input,RULE_CC_STRING,FOLLOW_2); 
-
-                            			newLeafNode(lv_lines_4_0, grammarAccess.getDetailCodeAccess().getLinesCC_STRINGTerminalRuleCall_1_0()); 
-                            		
-
-                            	        if (current==null) {
-                            	            current = createModelElement(grammarAccess.getDetailCodeRule());
-                            	        }
-                                   		addWithLastConsumed(
-                                   			current, 
-                                   			"lines",
-                                    		lv_lines_4_0, 
-                                    		"org.eclipse.etrice.core.common.Base.CC_STRING");
-                            	    
-
-                            }
-
-
-                            }
-                            break;
 
                     }
 
@@ -10414,7 +10414,7 @@ public class InternalFSMParser extends AbstractInternalAntlrParser {
     protected DFA27 dfa27 = new DFA27(this);
     static final String dfa_1s = "\32\uffff";
     static final String dfa_2s = "\13\uffff\1\22\7\uffff\3\22\1\uffff\1\22\2\uffff";
-    static final String dfa_3s = "\1\36\1\4\1\37\1\4\1\41\4\4\2\41\1\20\2\4\1\41\1\4\1\5\1\21\1\uffff\3\20\1\5\1\20\2\uffff";
+    static final String dfa_3s = "\1\36\1\4\1\37\1\4\1\41\4\4\2\41\1\20\2\4\1\41\1\4\1\6\1\21\1\uffff\3\20\1\6\1\20\2\uffff";
     static final String dfa_4s = "\1\36\2\37\1\52\1\51\2\4\1\52\1\4\2\41\1\70\2\4\1\41\1\4\1\71\1\46\1\uffff\3\70\1\71\1\47\2\uffff";
     static final String dfa_5s = "\22\uffff\1\2\5\uffff\1\1\1\3";
     static final String dfa_6s = "\32\uffff}>";
@@ -10435,13 +10435,13 @@ public class InternalFSMParser extends AbstractInternalAntlrParser {
             "\1\24",
             "\1\7",
             "\1\25",
-            "\1\26\63\uffff\1\27",
+            "\1\26\62\uffff\1\27",
             "\1\22\20\uffff\1\22\1\30\1\uffff\1\30\1\31",
             "",
             "\1\21\1\22\1\uffff\1\22\4\uffff\7\22\10\uffff\1\22\20\uffff\1\20",
             "\1\21\1\22\1\uffff\1\22\4\uffff\7\22\10\uffff\1\22\20\uffff\1\20",
             "\1\21\1\22\1\uffff\1\22\4\uffff\7\22\10\uffff\1\22\20\uffff\1\20",
-            "\1\26\63\uffff\1\27",
+            "\1\26\62\uffff\1\27",
             "\1\21\1\22\1\uffff\1\22\4\uffff\7\22\10\uffff\1\22",
             "",
             ""
@@ -10473,7 +10473,7 @@ public class InternalFSMParser extends AbstractInternalAntlrParser {
         }
     }
     static final String dfa_8s = "\31\uffff";
-    static final String dfa_9s = "\1\36\1\4\1\37\1\4\1\41\4\4\2\41\1\20\2\4\1\41\1\5\1\43\1\4\2\20\1\5\1\20\2\uffff\1\20";
+    static final String dfa_9s = "\1\36\1\4\1\37\1\4\1\41\4\4\2\41\1\20\2\4\1\41\1\6\1\43\1\4\2\20\1\6\1\20\2\uffff\1\20";
     static final String dfa_10s = "\1\36\2\37\1\52\1\51\2\4\1\52\1\4\2\41\1\70\2\4\1\41\1\71\1\45\1\4\2\70\1\71\1\20\2\uffff\1\70";
     static final String dfa_11s = "\26\uffff\1\1\1\2\1\uffff";
     static final String dfa_12s = "\31\uffff}>";
@@ -10493,12 +10493,12 @@ public class InternalFSMParser extends AbstractInternalAntlrParser {
             "\1\22",
             "\1\23",
             "\1\7",
-            "\1\24\63\uffff\1\25",
+            "\1\24\62\uffff\1\25",
             "\1\26\1\uffff\1\27",
             "\1\30",
             "\1\20\47\uffff\1\17",
             "\1\20\47\uffff\1\17",
-            "\1\24\63\uffff\1\25",
+            "\1\24\62\uffff\1\25",
             "\1\20",
             "",
             "",
@@ -10542,15 +10542,15 @@ public class InternalFSMParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x0100000000010002L});
     public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x0000000000010002L});
     public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000000000F20000L});
-    public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x0000000000E30040L});
+    public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x0000000000E30020L});
     public static final BitSet FOLLOW_13 = new BitSet(new long[]{0x0000000000E20000L});
-    public static final BitSet FOLLOW_14 = new BitSet(new long[]{0x0000000000C30040L});
+    public static final BitSet FOLLOW_14 = new BitSet(new long[]{0x0000000000C30020L});
     public static final BitSet FOLLOW_15 = new BitSet(new long[]{0x0000000000C20000L});
-    public static final BitSet FOLLOW_16 = new BitSet(new long[]{0x0000000000830040L});
+    public static final BitSet FOLLOW_16 = new BitSet(new long[]{0x0000000000830020L});
     public static final BitSet FOLLOW_17 = new BitSet(new long[]{0x0000000000820000L});
     public static final BitSet FOLLOW_18 = new BitSet(new long[]{0x0000000000020000L});
     public static final BitSet FOLLOW_19 = new BitSet(new long[]{0x0100000000010000L});
-    public static final BitSet FOLLOW_20 = new BitSet(new long[]{0x0000000000020020L});
+    public static final BitSet FOLLOW_20 = new BitSet(new long[]{0x0000000000020040L});
     public static final BitSet FOLLOW_21 = new BitSet(new long[]{0x0000000004000000L});
     public static final BitSet FOLLOW_22 = new BitSet(new long[]{0x0100000000000002L});
     public static final BitSet FOLLOW_23 = new BitSet(new long[]{0x0000000080000010L});
@@ -10559,31 +10559,31 @@ public class InternalFSMParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_26 = new BitSet(new long[]{0x0000000200000000L});
     public static final BitSet FOLLOW_27 = new BitSet(new long[]{0x0000050000000010L});
     public static final BitSet FOLLOW_28 = new BitSet(new long[]{0x0000000400020000L});
-    public static final BitSet FOLLOW_29 = new BitSet(new long[]{0x0000000000030040L});
+    public static final BitSet FOLLOW_29 = new BitSet(new long[]{0x0000000000030020L});
     public static final BitSet FOLLOW_30 = new BitSet(new long[]{0x0000000800000000L});
     public static final BitSet FOLLOW_31 = new BitSet(new long[]{0x0000080000000000L});
     public static final BitSet FOLLOW_32 = new BitSet(new long[]{0x0000001000020000L});
     public static final BitSet FOLLOW_33 = new BitSet(new long[]{0x0000002000000000L});
-    public static final BitSet FOLLOW_34 = new BitSet(new long[]{0x0000000400030040L});
+    public static final BitSet FOLLOW_34 = new BitSet(new long[]{0x0000000400030020L});
     public static final BitSet FOLLOW_35 = new BitSet(new long[]{0x0000004000000000L});
     public static final BitSet FOLLOW_36 = new BitSet(new long[]{0x0000000400000000L});
     public static final BitSet FOLLOW_37 = new BitSet(new long[]{0x0000020000000000L});
     public static final BitSet FOLLOW_38 = new BitSet(new long[]{0x0000302000000000L});
     public static final BitSet FOLLOW_39 = new BitSet(new long[]{0x0000200000000000L});
-    public static final BitSet FOLLOW_40 = new BitSet(new long[]{0x0000000000010040L});
+    public static final BitSet FOLLOW_40 = new BitSet(new long[]{0x0000000000010020L});
     public static final BitSet FOLLOW_41 = new BitSet(new long[]{0x0000000200000002L});
     public static final BitSet FOLLOW_42 = new BitSet(new long[]{0x0004C00000000000L});
     public static final BitSet FOLLOW_43 = new BitSet(new long[]{0x0004400000000000L});
     public static final BitSet FOLLOW_44 = new BitSet(new long[]{0x0001000000000000L});
     public static final BitSet FOLLOW_45 = new BitSet(new long[]{0x0003000000000000L});
     public static final BitSet FOLLOW_46 = new BitSet(new long[]{0x0008000000000000L});
-    public static final BitSet FOLLOW_47 = new BitSet(new long[]{0x3C000000000001A0L});
+    public static final BitSet FOLLOW_47 = new BitSet(new long[]{0x3C000000000001C0L});
     public static final BitSet FOLLOW_48 = new BitSet(new long[]{0x0040000000000000L});
     public static final BitSet FOLLOW_49 = new BitSet(new long[]{0x0000000000000000L,0x00000000000001E0L});
-    public static final BitSet FOLLOW_50 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_50 = new BitSet(new long[]{0x0000000000000040L});
     public static final BitSet FOLLOW_51 = new BitSet(new long[]{0x0001000000020000L});
     public static final BitSet FOLLOW_52 = new BitSet(new long[]{0x0080000000000002L});
-    public static final BitSet FOLLOW_53 = new BitSet(new long[]{0x0200000000000020L});
+    public static final BitSet FOLLOW_53 = new BitSet(new long[]{0x0200000000000040L});
     public static final BitSet FOLLOW_54 = new BitSet(new long[]{0x0000000000000080L});
     public static final BitSet FOLLOW_55 = new BitSet(new long[]{0x4000000000000000L});
     public static final BitSet FOLLOW_56 = new BitSet(new long[]{0x8000000000000000L,0x0000000000000001L});

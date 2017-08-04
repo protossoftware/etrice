@@ -195,7 +195,7 @@ public class RoomParser extends AbstractContentAssistParser {
 					put(grammarAccess.getRefinedStateAccess().getGroup_6(), "rule__RefinedState__Group_6__0");
 					put(grammarAccess.getRefinedStateAccess().getGroup_7(), "rule__RefinedState__Group_7__0");
 					put(grammarAccess.getDetailCodeAccess().getGroup_0(), "rule__DetailCode__Group_0__0");
-					put(grammarAccess.getDetailCodeAccess().getGroup_0_1(), "rule__DetailCode__Group_0_1__0");
+					put(grammarAccess.getDetailCodeAccess().getGroup_1(), "rule__DetailCode__Group_1__0");
 					put(grammarAccess.getTransitionPointAccess().getGroup(), "rule__TransitionPoint__Group__0");
 					put(grammarAccess.getEntryPointAccess().getGroup(), "rule__EntryPoint__Group__0");
 					put(grammarAccess.getExitPointAccess().getGroup(), "rule__ExitPoint__Group__0");
@@ -459,9 +459,9 @@ public class RoomParser extends AbstractContentAssistParser {
 					put(grammarAccess.getRefinedStateAccess().getExitCodeAssignment_5_1(), "rule__RefinedState__ExitCodeAssignment_5_1");
 					put(grammarAccess.getRefinedStateAccess().getDoCodeAssignment_6_1(), "rule__RefinedState__DoCodeAssignment_6_1");
 					put(grammarAccess.getRefinedStateAccess().getSubgraphAssignment_7_1(), "rule__RefinedState__SubgraphAssignment_7_1");
-					put(grammarAccess.getDetailCodeAccess().getUsedAssignment_0_1_0(), "rule__DetailCode__UsedAssignment_0_1_0");
-					put(grammarAccess.getDetailCodeAccess().getLinesAssignment_0_1_1(), "rule__DetailCode__LinesAssignment_0_1_1");
-					put(grammarAccess.getDetailCodeAccess().getLinesAssignment_1(), "rule__DetailCode__LinesAssignment_1");
+					put(grammarAccess.getDetailCodeAccess().getLinesAssignment_0_1(), "rule__DetailCode__LinesAssignment_0_1");
+					put(grammarAccess.getDetailCodeAccess().getUsedAssignment_1_0(), "rule__DetailCode__UsedAssignment_1_0");
+					put(grammarAccess.getDetailCodeAccess().getLinesAssignment_1_1(), "rule__DetailCode__LinesAssignment_1_1");
 					put(grammarAccess.getTransitionPointAccess().getHandlerAssignment_0(), "rule__TransitionPoint__HandlerAssignment_0");
 					put(grammarAccess.getTransitionPointAccess().getNameAssignment_2(), "rule__TransitionPoint__NameAssignment_2");
 					put(grammarAccess.getEntryPointAccess().getNameAssignment_1(), "rule__EntryPoint__NameAssignment_1");

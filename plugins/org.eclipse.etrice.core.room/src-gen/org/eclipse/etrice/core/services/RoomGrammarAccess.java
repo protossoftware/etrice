@@ -4286,7 +4286,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//// the detail level (or target language) code
 	//// the used flag might be used when overriding in derived grammars
 	//DetailCode:
-	//	{DetailCode} (used?='{' lines+=STRING* '}') | lines+=CC_STRING?;
+	//	{DetailCode} lines+=CC_STRING? | used?='{' lines+=STRING* '}';
 	public FSMGrammarAccess.DetailCodeElements getDetailCodeAccess() {
 		return gaFSM.getDetailCodeAccess();
 	}

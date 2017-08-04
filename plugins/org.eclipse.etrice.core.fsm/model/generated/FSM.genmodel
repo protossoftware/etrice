@@ -49,8 +49,8 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference FSM.ecore#//RefinedState/target"/>
     </genClasses>
     <genClasses ecoreClass="FSM.ecore#//DetailCode">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FSM.ecore#//DetailCode/used"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FSM.ecore#//DetailCode/lines"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FSM.ecore#//DetailCode/used"/>
     </genClasses>
     <genClasses ecoreClass="FSM.ecore#//TrPoint">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FSM.ecore#//TrPoint/name"/>
