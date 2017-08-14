@@ -10,8 +10,7 @@ import java.util.List;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.etrice.core.common.converter.CC_StringConveter;
-import org.eclipse.etrice.core.common.util.CCStringIndentation;
+import org.eclipse.etrice.core.common.converter.CCStringIndentation;
 import org.eclipse.etrice.core.fsm.fSM.ChoicePoint;
 import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.etrice.core.fsm.fSM.FSMPackage;
@@ -131,8 +130,10 @@ public class FSMJavaValidator extends org.eclipse.etrice.core.fsm.validation.Abs
 	
 	@Check
 	public void checkDetailCode(DetailCode dc) {
-		if (dc.getLines().isEmpty())
+		if (dc.getLines().isEmpty()) {
 			error("detail code must not be empty", dc, FSMPackage.Literals.DETAIL_CODE__LINES);
+			return;
+		}
 		
 		// ccstring is new standard for detail code
 		boolean isPlainStyle = false;
@@ -141,8 +142,7 @@ public class FSMJavaValidator extends org.eclipse.etrice.core.fsm.validation.Abs
 			if(lineNode.getGrammarElement() instanceof RuleCall){
 				AbstractRule rule = ((RuleCall)lineNode.getGrammarElement()).getRule();
 				if(rule == grammar.getCC_STRINGRule()) {
-					CCStringIndentation ccStringIndent = new CCStringIndentation(CC_StringConveter.stripDelim(lineNode.getText()));
-					if(!ccStringIndent.validateIndentation())
+					if(!new CCStringIndentation(lineNode.getText()).hasConsistentIndentation())
 						warning("Inconsistent indentation", dc, FSMPackage.Literals.DETAIL_CODE__LINES, lineNodes.indexOf(lineNode));
 				} else if(rule == grammar.getSTRINGRule()) {
 					isPlainStyle = true;

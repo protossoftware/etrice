@@ -8,7 +8,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.etrice.core.common.converter.CC_StringConveter;
+import org.eclipse.etrice.core.common.converter.CC_StringConverter;
 import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.etrice.core.fsm.validation.FSMJavaValidator;
 import org.eclipse.xtext.formatting.ILineSeparatorInformation;
@@ -53,7 +53,8 @@ public class FSMQuickfixProvider extends DefaultQuickfixProvider {
           IXtextDocument _xtextDocument = context.getXtextDocument();
           int _offset = it.getOffset();
           int _length = it.getLength();
-          _xtextDocument.replace(_offset, _length, ((CC_StringConveter.DELIM + ccString) + CC_StringConveter.DELIM));
+          String _addDelim = CC_StringConverter.addDelim(ccString);
+          _xtextDocument.replace(_offset, _length, _addDelim);
         } catch (Throwable _e) {
           throw Exceptions.sneakyThrow(_e);
         }

@@ -12,7 +12,7 @@
 
 package org.eclipse.etrice.core.formatting;
 
-import org.eclipse.etrice.core.common.converter.CC_StringConveter;
+import org.eclipse.etrice.core.common.converter.CC_StringConverter;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.formatting.impl.AbstractDeclarativeFormatter;
 import org.eclipse.xtext.formatting.impl.FormattingConfig;
@@ -24,6 +24,7 @@ import org.eclipse.xtext.util.Pair;
  * 
  * Also see {@link org.eclipse.xtext.xtext.XtextFormattingTokenSerializer} as an example
  */
+@Deprecated
 public class RoomFormatter extends AbstractDeclarativeFormatter {
 	
 	@Override
@@ -67,7 +68,7 @@ public class RoomFormatter extends AbstractDeclarativeFormatter {
 		}
 		
 		for (Keyword k: f.findKeywords("do", "entry", "exit", "action", "cond", "usercode", "usercode1", "usercode2")) {
-			c.setSpace(" ").between(k, f.findKeywords(CC_StringConveter.DELIM).get(0));
+			c.setSpace(" ").between(k, f.findKeywords(CC_StringConverter.DELIM).get(0));
 		}
 		
 		c.setLinewrap(2).around(f.getImportRule());

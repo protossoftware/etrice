@@ -4,7 +4,7 @@
 package org.eclipse.etrice.core.fsm.ui.quickfix
 
 import com.google.inject.Inject
-import org.eclipse.etrice.core.common.converter.CC_StringConveter
+import org.eclipse.etrice.core.common.converter.CC_StringConverter
 import org.eclipse.etrice.core.fsm.fSM.DetailCode
 import org.eclipse.etrice.core.fsm.validation.FSMJavaValidator
 import org.eclipse.xtext.formatting.IWhitespaceInformationProvider
@@ -37,7 +37,7 @@ class FSMQuickfixProvider extends DefaultQuickfixProvider {
 			
 			// workaround
 			NodeModelUtils.findActualNodeFor(dc) => [
-				context.xtextDocument.replace(offset, length, CC_StringConveter.DELIM + ccString + CC_StringConveter.DELIM)
+				context.xtextDocument.replace(offset, length, CC_StringConverter.addDelim(ccString))
 			]
 		])
 	}

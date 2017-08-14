@@ -13,8 +13,8 @@
 package org.eclipse.etrice.core.ui;
 
 import org.eclipse.etrice.core.common.ui.autoedit.BaseAutoEditStrategyProvider;
+import org.eclipse.etrice.core.common.ui.editor.model.BaseTokenTypeToPartitionMapper;
 import org.eclipse.etrice.core.common.ui.hover.IKeywordHoverContentProvider;
-import org.eclipse.etrice.core.common.ui.hover.KeywordEObjectTextHover;
 import org.eclipse.etrice.core.common.ui.hover.KeywordHoverProvider;
 import org.eclipse.etrice.core.common.ui.linking.GlobalNonPlatformURIEditorOpener;
 import org.eclipse.etrice.core.ui.highlight.RoomHighlightingConfiguration;
@@ -30,6 +30,7 @@ import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategyProvider;
 import org.eclipse.xtext.ui.editor.hover.IEObjectHover;
 import org.eclipse.xtext.ui.editor.hover.IEObjectHoverProvider;
 import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper;
+import org.eclipse.xtext.ui.editor.model.ITokenTypeToPartitionTypeMapper;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 
@@ -91,4 +92,24 @@ public class RoomUiModule extends org.eclipse.etrice.core.ui.AbstractRoomUiModul
 	public Class<? extends AbstractEditStrategyProvider> bindAbstractEditStrategyProvider() {
 		return BaseAutoEditStrategyProvider.class;
 	}
+	
+	public Class<? extends ITokenTypeToPartitionTypeMapper> bindITokenTypeToPartitionTypeMapper(){
+		return BaseTokenTypeToPartitionMapper.class;
+	}
+	
+	/*
+	// auto format for quick fix
+    public Class<? extends ITextEditComposer> bindITextEditComposer() {
+        return AutoFormatTextEditComposer.class;
+    }
+	
+	public static class AutoFormatTextEditComposer extends DefaultTextEditComposer {
+
+	    @Override
+	    protected SaveOptions getSaveOptions() {
+	        return SaveOptions.newBuilder().format().getOptions();
+	    }
+
+	}
+	*/
 }

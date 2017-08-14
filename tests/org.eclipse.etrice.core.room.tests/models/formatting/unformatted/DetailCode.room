@@ -1,0 +1,53 @@
+RoomModel DetailCode {
+
+	ActorClass ADetailCode {
+		Structure {
+			usercode1 {
+				"/*uc1*/"
+			}
+			usercode2 '''/*uc3*/'''
+			usercode3 '''
+			/*uc3*/'''
+		}
+		Behavior {
+			Operation op1() '''text\r\n'''			
+			Operation op2() '''
+			text\r\n
+			'''
+			StateMachine {
+				State state {
+					entry '''dfd'''
+					exit '''d
+'''
+				}
+				
+				Transition init : initial -> state {
+					action '''
+	/* maintain timers */
+	etTimerControlBlock* temp;
+	etTime t;
+
+	getTimeFromTarget(&t);
+	while (usedTcbsRoot != 0) {
+		if (isTimeGreater(&t, &(usedTcbsRoot->expTime))) {
+			timer_timeout(usedTcbsRoot->portIdx);
+			temp = usedTcbsRoot;
+			usedTcbsRoot = usedTcbsRoot->next;
+			if ((temp->pTime.sec == 0) && (temp->pTime.nSec == 0)) {
+				/* single shot timer */
+				returnTcb(temp);
+			} else {
+				/* periodic timer */
+				addTime(&temp->expTime, &temp->pTime);
+				putTcbToUsedList(temp);
+			}
+		} else {
+			break;
+		}
+	}
+					'''
+				}
+			}
+		}
+	}
+}

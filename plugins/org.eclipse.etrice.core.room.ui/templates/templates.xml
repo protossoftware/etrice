@@ -43,10 +43,6 @@ id="protocol_class" name="ProtocolClass">${xx: Enum('CommunicationType')}  Proto
 		deleted="false" description="data class skeleton" enabled="true"
 		id="data_class" name="DataClass">DataClass ${DataClassName} {&#13;
 	Attribute ${Attr1}: ${atype:CrossReference('Attribute.type')}
-	Operation ${Operation1}(${par}: ${type}): ${rtype} {&#13;
-		"${UserCodeLine1}"&#13;
-		"${UserCodeLine2}"&#13;
-	}&#13;
 	${cursor}
 }</template>
 
@@ -67,10 +63,9 @@ ${cursor}</template>
 
 	<template autoinsert="true" context="org.eclipse.etrice.core.Room.kw_Operation"
 		deleted="false" description="operation skeleton" enabled="true"
-		id="operation" name="Operation">Operation ${name}(${param}: ${paramtype}): ${rtype} {&#13;
-	"${UserCodeLine1}"&#13;
-	"${UserCodeLine2}"&#13;
-}&#13;
+		id="operation" name="Operation">Operation ${name}(${param}: ${paramtype}): ${rtype} '''&#13;
+	${cursor}
+'''&#13;
 ${cursor}</template>
 
 	<template autoinsert="true" context="org.eclipse.etrice.core.fsm.FSM.kw_State"
@@ -89,9 +84,9 @@ ${cursor}</template>
 
 	<template autoinsert="true" context="org.eclipse.etrice.core.fsm.FSM.DetailCode"
 		deleted="false" description="detail code" enabled="true" id="detail_code"
-		name="detail code">{&#13;
-	"${cursor}"&#13;
-}</template>
+		name="detail code"> '''&#13;
+	${text}${cursor}&#13;
+'''&#13;</template>
 
 	<template autoinsert="true" context="org.eclipse.etrice.core.Room.kw_Port"
 		deleted="false" description="insert port" enabled="true" id="port"

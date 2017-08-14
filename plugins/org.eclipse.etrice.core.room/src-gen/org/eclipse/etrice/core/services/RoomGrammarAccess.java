@@ -4615,8 +4615,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//// **************************************************************
-	//// AnnotationType and Annotation Rules
-	//Annotation:
+	// // AnnotationType and Annotation Rules
+	// Annotation:
 	//	'@' type=[AnnotationType|FQN] ('(' attributes+=KeyValue (',' attributes+=KeyValue)* ')')?;
 	public BaseGrammarAccess.AnnotationElements getAnnotationAccess() {
 		return gaBase.getAnnotationAccess();
@@ -4637,10 +4637,9 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//AnnotationType:
-	//	'AnnotationType' name=ID docu=Documentation? '{'
-	//	'target' '=' (targets+=super::AnnotationTargetType | '{' targets+=super::AnnotationTargetType (','
-	//	targets+=super::AnnotationTargetType)* '}') attributes+=AnnotationAttribute*
-	//	'}';
+	//	'AnnotationType' name=ID docu=Documentation? '{' 'target' '=' (targets+=super::AnnotationTargetType | '{'
+	//	targets+=super::AnnotationTargetType (',' targets+=super::AnnotationTargetType)* '}')
+	//	attributes+=AnnotationAttribute* '}';
 	public BaseGrammarAccess.AnnotationTypeElements getAnnotationTypeAccess() {
 		return gaBase.getAnnotationTypeAccess();
 	}
@@ -4680,26 +4679,37 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//// **************************************************************
-	//// Import rules
+	// // Import rules
+	//
 	//// HOWTO: use a combination of URI global scopes and namespace aware local scope provider
+	//
 	//// this is configured in the work flow by
-	////			fragment = scoping.ImportURIScopingFragment {}
+	// //			fragment = scoping.ImportURIScopingFragment {}
+	//
 	//// and by overriding configureIScopeProviderDelegate in the runtime module with 
+	//
 	////			ImportedNamespaceAwareLocalScopeProvider
-	//// also configure in the RuntimeModule
+	// // also configure in the RuntimeModule
+	//
 	////	public Class<? extends ImportUriResolver> bindImportUriResolver() {
-	////		return PlatformRelativeUriResolver.class;
+	// //		return PlatformRelativeUriResolver.class;
+	//
 	////	}
-	//// and in the UiRuntimeModule
+	// // and in the UiRuntimeModule
+	//
 	////	public Class<? extends org.eclipse.xtext.ui.editor.IURIEditorOpener> bindIURIEditorOpener() {
+	//
 	////		return GlobalNonPlatformURIEditorOpener.class;
-	////	}
+	// //	}
+	//
 	////	public Class<? extends IHyperlinkHelper> bindIHyperlinkHelper() {
-	////		return ImportAwareHyperlinkHelper.class;
+	// //		return ImportAwareHyperlinkHelper.class;
+	//
 	////	}
-	//// the attribute 'importedNamespace' is picked up by the ImportedNamespaceAwareLocalScopeProvider
+	// // the attribute 'importedNamespace' is picked up by the ImportedNamespaceAwareLocalScopeProvider
+	//
 	//// the attribute 'importURI' is picked up by the ImportUriGlobalScopeProvider
-	//Import:
+	// Import:
 	//	'import' (importedNamespace=ImportedFQN 'from' | 'model') importURI=STRING;
 	public BaseGrammarAccess.ImportElements getImportAccess() {
 		return gaBase.getImportAccess();
@@ -4720,12 +4730,9 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//// **************************************************************
-	//// Documentation Rule
-	//Documentation:
-	//	{Documentation}
-	//	'['
-	//	lines+=STRING*
-	//	']';
+	// // Documentation Rule
+	// Documentation:
+	//	{Documentation} '[' lines+=STRING* ']';
 	public BaseGrammarAccess.DocumentationElements getDocumentationAccess() {
 		return gaBase.getDocumentationAccess();
 	}
@@ -4735,8 +4742,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//// **************************************************************
-	//// Time Rule
-	//TIME ecore::ELong:
+	// // Time Rule
+	// TIME ecore::ELong:
 	//	INT 's' | INT 'ms' | INT 'us' | INT 'ns'
 	public BaseGrammarAccess.TIMEElements getTIMEAccess() {
 		return gaBase.getTIMEAccess();
@@ -4747,10 +4754,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//enum LiteralType:
-	//	BOOL='ptBoolean' |
-	//	INT='ptInteger' |
-	//	REAL='ptReal' |
-	//	CHAR='ptCharacter';
+	//	BOOL='ptBoolean' | INT='ptInteger' | REAL='ptReal' | CHAR='ptCharacter';
 	public BaseGrammarAccess.LiteralTypeElements getLiteralTypeAccess() {
 		return gaBase.getLiteralTypeAccess();
 	}
@@ -4770,7 +4774,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//// Value Types for Attributes
-	//Literal:
+	// Literal:
 	//	BooleanLiteral | NumberLiteral | StringLiteral;
 	public BaseGrammarAccess.LiteralElements getLiteralAccess() {
 		return gaBase.getLiteralAccess();
@@ -4861,11 +4865,12 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	////DotDecimal hidden():
-	////	('+' | '-')? '.' INT;
-	////
-	////DecimalDot hidden():
-	////	('+' | '-')? INT '.';
-	//DecimalExp hidden():
+	// //	('+' | '-')? '.' INT;
+	// //
+	// //DecimalDot hidden():
+	// //	('+' | '-')? INT '.';
+	// DecimalExp
+	//hidden():
 	//	('+' | '-')? INT '.' INT ('e' | 'E') ('+' | '-')? INT;
 	public BaseGrammarAccess.DecimalExpElements getDecimalExpAccess() {
 		return gaBase.getDecimalExpAccess();
