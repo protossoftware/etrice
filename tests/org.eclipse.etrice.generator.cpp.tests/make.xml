@@ -69,7 +69,7 @@
 			<convert testId="@{testId}"/>
 
 			<echo>copying result @{testId}</echo>
-			<copyResult testId="@{testId}" targetId="${runtime.platform}_"/>
+			<copyResult testId="@{testId}" targetId="CPP_${runtime.platform}_"/>
 		</sequential>
 	</macrodef>
 

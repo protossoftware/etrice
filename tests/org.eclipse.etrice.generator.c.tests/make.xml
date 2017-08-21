@@ -6,14 +6,13 @@
 -->
 <project name="org.eclipse.etrice.generator.c.tests" basedir="." default="all">
 
-	<target name="testing" depends="setVars">
+	<target name="testing" depends="common.testing">
 
 		<!-- add test here, testid==testSuiteFileName -->
 		<test testid="StaticConfigTest" models="${models.path}/staticConfig/StaticConfigTest.etmap ${models.path}/staticConfig/StaticConfigTest.config" />
 
-		<!--
-		<test testid="SendingDataTestC" models="${models.path}/sendingData/SendingDataTestC.room ${models.path}/GenericPhysical.etphys" />
-		-->
+		<!-- fail on build server -->
+		<!--<test testid="SendingDataTestC" models="${models.path}/sendingData/SendingDataTestC.room ${models.path}/GenericPhysical.etphys" />-->
 		<echo>done with ${ant.project.name}</echo>
 	</target>
 
@@ -49,7 +48,7 @@
 			<build testId="@{testId}"/>
 			<run testId="@{testId}"/>
 			<convert testId="@{testId}"/>
-			<copyResult testId="@{testId}" targetId="${runtime.platform}_"/>
+			<copyResult testId="@{testId}" targetId="C_${runtime.platform}_"/>
 		</sequential>
 	</macrodef>
 
