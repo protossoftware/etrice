@@ -769,10 +769,6 @@ public class ActorClassGen extends GenericActorClassGenerator {
               _builder.newLine();
               _builder.append("\t");
               _builder.append("\t");
-              _builder.append("stopUser();");
-              _builder.newLine();
-              _builder.append("\t");
-              _builder.append("\t");
               _builder.append("super.stop();");
               _builder.newLine();
               _builder.append("\t");

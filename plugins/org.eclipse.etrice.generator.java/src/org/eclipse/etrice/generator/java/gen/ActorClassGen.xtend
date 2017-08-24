@@ -230,7 +230,6 @@ class ActorClassGen extends GenericActorClassGenerator {
 					public abstract void stop();
 				«ELSE»
 					public void stop(){
-						stopUser();
 						super.stop();
 					}
 				«ENDIF»

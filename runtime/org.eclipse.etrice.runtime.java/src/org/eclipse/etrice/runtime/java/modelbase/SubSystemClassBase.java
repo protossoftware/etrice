@@ -83,12 +83,17 @@ public abstract class SubSystemClassBase extends RTObject implements IEventRecei
 	
 	
 	public void start() {
-		// start all actors instances
+		// execute initial transition of all actor instances
 		RTSystemPort.executeInitialTransition();
 		
 		// start all message services
 		RTServices.getInstance().getMsgSvcCtrl().start();
 		
+		// start all actors
+		for(IRTObject child : getChildren()) {
+			if(child instanceof ActorClassBase)
+				((ActorClassBase) child).start();
+		}
 	}
 	
 	public void stop() {
