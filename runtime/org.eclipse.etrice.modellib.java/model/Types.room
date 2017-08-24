@@ -1,7 +1,7 @@
 RoomModel room.basic.types {
 
 	PrimitiveType boolean: ptBoolean -> 'boolean' (Boolean) default 'false'
-	PrimitiveType char: ptCharacter -> 'char' (Char) default ''
+	PrimitiveType char: ptCharacter -> 'char' (Character) default ''
 	PrimitiveType int8: ptInteger -> 'byte' (Byte) default '0'
 	PrimitiveType int16: ptInteger -> 'short' (Short) default '0'
 	PrimitiveType int32: ptInteger -> 'int' (Integer) default '0'
