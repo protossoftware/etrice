@@ -15,6 +15,7 @@ package org.eclipse.etrice.ui.common.base.editor;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -34,6 +35,7 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.xtext.diagnostics.Severity;
+import org.eclipse.xtext.resource.SaveOptions;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.serializer.ISerializer;
 import org.eclipse.xtext.util.CancelIndicator;
@@ -56,6 +58,23 @@ public class CustomPersistencyBehavior extends DefaultPersistencyBehavior {
 	public Diagram loadDiagram(URI uri) {
 		saveOnFocusListener = new SaveOnFocusLostListener((IEditorPart)diagramBehavior.getDiagramContainer().getWorkbenchPart());
 		return super.loadDiagram(uri);
+	}
+	
+	@Override
+	protected Map<Resource, Map<?, ?>> createSaveOptions() {
+		// save options for xtext: activate formatting
+		SaveOptions xtextSaveOptions = SaveOptions.newBuilder().format().getOptions();
+		
+		Map<Resource, Map<?, ?>> saveOptions = super.createSaveOptions();
+		for(Resource res : saveOptions.keySet()) {
+			if(res instanceof XtextResource) {
+				@SuppressWarnings("unchecked")
+				Map<Object, Object> optionMap = (Map<Object, Object>) saveOptions.get(res);
+				xtextSaveOptions.addTo(optionMap);
+			}
+		}
+		
+		return saveOptions;
 	}
 	
 	@Override
