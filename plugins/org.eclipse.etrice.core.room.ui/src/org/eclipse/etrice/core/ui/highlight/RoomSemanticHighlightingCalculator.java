@@ -22,11 +22,10 @@ import org.eclipse.etrice.core.common.ui.highlight.BaseSemanticHighlighter;
 import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.etrice.core.services.RoomGrammarAccess;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor;
 
-import com.google.common.base.CharMatcher;
 import com.google.inject.Inject;
 
 /**
@@ -58,38 +57,34 @@ public class RoomSemanticHighlightingCalculator extends BaseSemanticHighlighter 
 		return keywordPattern;
 	}
 	
-	// @Override
-	public void provideHighlightingFor(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
-		super.provideHighlightingFor(resource, acceptor);
+	@Override
+	protected void provideHighlightingFor(INode node, XtextResource resource, IHighlightedPositionAcceptor acceptor) {
+		super.provideHighlightingFor(node, resource, acceptor);
 		
-		if (resource == null || resource.getParseResult() == null)
-			return;
-
-		INode root = resource.getParseResult().getRootNode();
-		for (INode node : root.getAsTreeIterable()) {
-			EObject obj = node.getGrammarElement();
-			if (obj instanceof RuleCall) {
-				RuleCall ruleCall = (RuleCall) obj;
-				if(ruleCall.getRule() == grammar.getAnnotationRule()){
-					acceptor.addPosition(
-							node.getOffset(),
-							node.getLength(),
-							RoomHighlightingConfiguration.HL_ANNOTATION_ID);
-				}
-				else if(node.getParent().getSemanticElement() instanceof DetailCode && ruleCall.getRule() == grammar.getCC_STRINGRule()) {
-					final String text = node.getText();
-					for(Pattern keywordPattern : getKeywordPatterns()){							
-						Matcher matcher = keywordPattern.matcher(text);
-						while(matcher.find()){
-							boolean leftNotId = !Character.isJavaIdentifierPart(text.charAt(matcher.start()-1));
-							boolean rightNotId = !Character.isJavaIdentifierPart(text.charAt(matcher.end()+1));
-							if(leftNotId && rightNotId){
-								acceptor.addPosition(node.getOffset() + matcher.start(), matcher.end() - matcher.start(), RoomHighlightingConfiguration.HL_TARGET_LANG_KEYWORD_ID);
-							}
+		EObject obj = node.getGrammarElement();
+		if (obj instanceof RuleCall) {
+			RuleCall ruleCall = (RuleCall) obj;
+			if(ruleCall.getRule() == grammar.getAnnotationRule()){
+				acceptor.addPosition(
+						node.getOffset(),
+						node.getLength(),
+						RoomHighlightingConfiguration.HL_ANNOTATION_ID);
+			}
+			else if(node.getParent().getSemanticElement() instanceof DetailCode && ruleCall.getRule() == grammar.getCC_STRINGRule()) {
+				final String text = node.getText();
+				for(Pattern keywordPattern : getKeywordPatterns()){							
+					Matcher matcher = keywordPattern.matcher(text);
+					while(matcher.find()){
+						boolean leftNotId = !Character.isJavaIdentifierPart(text.charAt(matcher.start()-1));
+						boolean rightNotId = !Character.isJavaIdentifierPart(text.charAt(matcher.end()+1));
+						if(leftNotId && rightNotId){
+							acceptor.addPosition(node.getOffset() + matcher.start(), matcher.end() - matcher.start(), RoomHighlightingConfiguration.HL_TARGET_LANG_KEYWORD_ID);
 						}
 					}
 				}
 			}
 		}
+		
 	}
+	
 }

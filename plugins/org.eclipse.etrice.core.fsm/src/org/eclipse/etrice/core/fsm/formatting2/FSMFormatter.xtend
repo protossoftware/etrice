@@ -14,9 +14,9 @@ package org.eclipse.etrice.core.fsm.formatting2
 
 import com.google.inject.Inject
 import org.eclipse.emf.ecore.EObject
-import org.eclipse.etrice.core.common.converter.CCStringIndentation
-import org.eclipse.etrice.core.common.converter.CC_StringConverter
+import org.eclipse.etrice.core.common.converter.BaseConverterService
 import org.eclipse.etrice.core.common.formatting2.BaseFormatter
+import org.eclipse.etrice.core.common.formatting2.CCStringReplacer
 import org.eclipse.etrice.core.fsm.fSM.DetailCode
 import org.eclipse.etrice.core.fsm.fSM.ProtocolSemantics
 import org.eclipse.etrice.core.fsm.fSM.State
@@ -25,10 +25,7 @@ import org.eclipse.etrice.core.fsm.fSM.Transition
 import org.eclipse.etrice.core.fsm.fSM.Trigger
 import org.eclipse.etrice.core.fsm.fSM.TriggeredTransition
 import org.eclipse.etrice.core.fsm.services.FSMGrammarAccess
-import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.formatting2.IFormattableDocument
-import org.eclipse.xtext.formatting2.ITextReplacerContext
-import org.eclipse.xtext.formatting2.internal.AbstractTextReplacer
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion
 
 class FSMFormatter extends BaseFormatter {
@@ -76,30 +73,14 @@ class FSMFormatter extends BaseFormatter {
 		rules.forEach[prependDefaultNewLines(document)]
 	}
 	
-	@FinalFieldsConstructor
-	static class DetailCodeReplacer extends AbstractTextReplacer {
-	
-		override createReplacements(ITextReplacerContext context) {
-			if (region.multiline) {
-				val ccIndent = new CCStringIndentation(CC_StringConverter.stripDelim(region.text.trim))
-				val endIndent = if(ccIndent.ignoreLast) context.indentationString else ''
-				val replacement = ccIndent.replaceEditorIndentation(context.getIndentationString(context.indentation + 1)) + endIndent
-				context => [
-					addReplacement(region.replaceWith(CC_StringConverter.DELIM + replacement + CC_StringConverter.DELIM))
-				]		
-	
-			}
-			
-			context	
-		}
-	
-	}
+	@Inject
+	BaseConverterService converterService
 	
 	def dispatch void format(DetailCode detailcode, extension IFormattableDocument document) {		
 		val ccRegion = detailcode.regionFor.assignment(detailCodeAccess.linesAssignment_0_1)
 		if(ccRegion !== null) {
 			detailcode.prepend[oneSpace]
-			if(detailcode.multiline) document.addReplacer(new DetailCodeReplacer(document, ccRegion))
+			if(detailcode.multiline) document.addReplacer(new CCStringReplacer(document, ccRegion, converterService.CC_StringConverter))
 		} else {
 			detailcode.regionFor.assignments(detailCodeAccess.linesAssignment_1_1).forEach[prepend[newLine]]
 		}

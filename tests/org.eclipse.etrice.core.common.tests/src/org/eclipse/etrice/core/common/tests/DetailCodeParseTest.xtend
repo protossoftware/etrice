@@ -10,11 +10,11 @@
  * 
  *******************************************************************************/
 
-package org.eclipse.etrice.core.common
+package org.eclipse.etrice.core.common.tests
 
 import com.google.inject.Inject
+import org.eclipse.etrice.core.common.BaseTestInjectorProvider
 import org.eclipse.etrice.core.common.converter.BaseConverterService
-import org.eclipse.etrice.core.common.converter.CC_StringConverter
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.util.Strings
@@ -28,7 +28,7 @@ import static org.junit.Assert.*
 class DetailCodeParseTest {
 
 	val NL = Strings.newLine
-	val DELIM = CC_StringConverter.DELIM
+	val DELIM = "'''"
 
 	@Inject
 	BaseConverterService baseConverterService

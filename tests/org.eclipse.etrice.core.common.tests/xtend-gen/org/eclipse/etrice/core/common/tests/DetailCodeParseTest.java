@@ -8,14 +8,13 @@
  * CONTRIBUTORS:
  * 		Juergen Haug (initial contribution)
  */
-package org.eclipse.etrice.core.common;
+package org.eclipse.etrice.core.common.tests;
 
 import com.google.inject.Inject;
 import org.eclipse.etrice.core.common.BaseTestInjectorProvider;
 import org.eclipse.etrice.core.common.converter.BaseConverterService;
-import org.eclipse.etrice.core.common.converter.CC_StringConverter;
+import org.eclipse.etrice.core.common.converter.CCStringConverter;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.util.Strings;
@@ -31,16 +30,16 @@ import org.junit.runner.RunWith;
 public class DetailCodeParseTest {
   private final String NL = Strings.newLine();
   
-  private final String DELIM = CC_StringConverter.DELIM;
+  private final String DELIM = "\'\'\'";
   
   @Inject
   private BaseConverterService baseConverterService;
   
   protected String toValue(final String withoutDelim) {
-    IValueConverter<String> _cC_StringConverter = this.baseConverterService.getCC_StringConverter();
+    CCStringConverter _cC_StringConverter = this.baseConverterService.getCC_StringConverter();
     String _value = _cC_StringConverter.toValue(withoutDelim, null);
     final Procedure1<String> _function = (String convertedWithoutDelim) -> {
-      IValueConverter<String> _cC_StringConverter_1 = this.baseConverterService.getCC_StringConverter();
+      CCStringConverter _cC_StringConverter_1 = this.baseConverterService.getCC_StringConverter();
       final String convertedWithDelim = _cC_StringConverter_1.toValue(((this.DELIM + withoutDelim) + this.DELIM), null);
       Assert.assertEquals(convertedWithoutDelim, convertedWithDelim);
     };

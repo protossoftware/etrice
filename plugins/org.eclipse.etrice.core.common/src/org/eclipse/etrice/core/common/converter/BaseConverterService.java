@@ -26,7 +26,7 @@ public class BaseConverterService extends DefaultTerminalConverters {
 	private TimeConverter timeConverter = new TimeConverter();
 	private LongConverter longConverter = new LongConverter();
 	private DoubleConverter doubleConverter = new DoubleConverter();
-	private CC_StringConverter ccStringConverter = new CC_StringConverter();
+	private CCStringConverter ccStringConverter = new CCStringConverter("'''");
 
 	@Inject
 	private QualifiedNameValueConverter fqnConverter;
@@ -52,7 +52,8 @@ public class BaseConverterService extends DefaultTerminalConverters {
 	}
 	
 	@ValueConverter(rule = "CC_STRING")
-	public IValueConverter<String> getCC_StringConverter() {
+	public CCStringConverter getCC_StringConverter() {
 		return ccStringConverter;
 	}
+	
 }

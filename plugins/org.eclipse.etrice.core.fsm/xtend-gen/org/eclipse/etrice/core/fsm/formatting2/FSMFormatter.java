@@ -20,9 +20,10 @@ import org.eclipse.etrice.core.common.base.Annotation;
 import org.eclipse.etrice.core.common.base.AnnotationType;
 import org.eclipse.etrice.core.common.base.Documentation;
 import org.eclipse.etrice.core.common.base.Import;
-import org.eclipse.etrice.core.common.converter.CCStringIndentation;
-import org.eclipse.etrice.core.common.converter.CC_StringConverter;
+import org.eclipse.etrice.core.common.converter.BaseConverterService;
+import org.eclipse.etrice.core.common.converter.CCStringConverter;
 import org.eclipse.etrice.core.common.formatting2.BaseFormatter;
+import org.eclipse.etrice.core.common.formatting2.CCStringReplacer;
 import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.etrice.core.fsm.fSM.ProtocolSemantics;
 import org.eclipse.etrice.core.fsm.fSM.SemanticsRule;
@@ -32,70 +33,20 @@ import org.eclipse.etrice.core.fsm.fSM.Transition;
 import org.eclipse.etrice.core.fsm.fSM.Trigger;
 import org.eclipse.etrice.core.fsm.fSM.TriggeredTransition;
 import org.eclipse.etrice.core.fsm.services.FSMGrammarAccess;
-import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.formatting2.IFormattableDocument;
 import org.eclipse.xtext.formatting2.IHiddenRegionFormatter;
-import org.eclipse.xtext.formatting2.ITextReplacerContext;
-import org.eclipse.xtext.formatting2.internal.AbstractTextReplacer;
 import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegionsFinder;
-import org.eclipse.xtext.formatting2.regionaccess.ITextReplacement;
-import org.eclipse.xtext.formatting2.regionaccess.ITextSegment;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
 public class FSMFormatter extends BaseFormatter {
-  @FinalFieldsConstructor
-  public static class DetailCodeReplacer extends AbstractTextReplacer {
-    @Override
-    public ITextReplacerContext createReplacements(final ITextReplacerContext context) {
-      ITextReplacerContext _xblockexpression = null;
-      {
-        ITextSegment _region = this.getRegion();
-        boolean _isMultiline = _region.isMultiline();
-        if (_isMultiline) {
-          ITextSegment _region_1 = this.getRegion();
-          String _text = _region_1.getText();
-          String _trim = _text.trim();
-          String _stripDelim = CC_StringConverter.stripDelim(_trim);
-          final CCStringIndentation ccIndent = new CCStringIndentation(_stripDelim);
-          String _xifexpression = null;
-          boolean _isIgnoreLast = ccIndent.isIgnoreLast();
-          if (_isIgnoreLast) {
-            _xifexpression = context.getIndentationString();
-          } else {
-            _xifexpression = "";
-          }
-          final String endIndent = _xifexpression;
-          int _indentation = context.getIndentation();
-          int _plus = (_indentation + 1);
-          String _indentationString = context.getIndentationString(_plus);
-          String _replaceEditorIndentation = ccIndent.replaceEditorIndentation(_indentationString);
-          final String replacement = (_replaceEditorIndentation + endIndent);
-          final Procedure1<ITextReplacerContext> _function = (ITextReplacerContext it) -> {
-            ITextSegment _region_2 = this.getRegion();
-            ITextReplacement _replaceWith = _region_2.replaceWith(((CC_StringConverter.DELIM + replacement) + CC_StringConverter.DELIM));
-            it.addReplacement(_replaceWith);
-          };
-          ObjectExtensions.<ITextReplacerContext>operator_doubleArrow(context, _function);
-        }
-        _xblockexpression = context;
-      }
-      return _xblockexpression;
-    }
-    
-    public DetailCodeReplacer(final IFormattableDocument document, final ITextSegment region) {
-      super(document, region);
-    }
-  }
-  
   @Inject
   @Extension
   private FSMGrammarAccess _fSMGrammarAccess;
@@ -234,6 +185,9 @@ public class FSMFormatter extends BaseFormatter {
     _rules.forEach(_function);
   }
   
+  @Inject
+  private BaseConverterService converterService;
+  
   protected void _format(final DetailCode detailcode, @Extension final IFormattableDocument document) {
     ISemanticRegionsFinder _regionFor = this.textRegionExtensions.regionFor(detailcode);
     FSMGrammarAccess.DetailCodeElements _detailCodeAccess = this._fSMGrammarAccess.getDetailCodeAccess();
@@ -246,8 +200,9 @@ public class FSMFormatter extends BaseFormatter {
       document.<DetailCode>prepend(detailcode, _function);
       boolean _isMultiline = this.textRegionExtensions.isMultiline(detailcode);
       if (_isMultiline) {
-        FSMFormatter.DetailCodeReplacer _detailCodeReplacer = new FSMFormatter.DetailCodeReplacer(document, ccRegion);
-        document.addReplacer(_detailCodeReplacer);
+        CCStringConverter _cC_StringConverter = this.converterService.getCC_StringConverter();
+        CCStringReplacer _cCStringReplacer = new CCStringReplacer(document, ccRegion, _cC_StringConverter);
+        document.addReplacer(_cCStringReplacer);
       }
     } else {
       ISemanticRegionsFinder _regionFor_1 = this.textRegionExtensions.regionFor(detailcode);
