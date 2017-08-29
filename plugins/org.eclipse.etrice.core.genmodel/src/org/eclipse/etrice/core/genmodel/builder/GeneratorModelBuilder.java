@@ -192,7 +192,6 @@ public class GeneratorModelBuilder {
 				}
 			}
 			
-			System.out.println("no. subsysinst = " + root.getSubSystemInstances().size());
 			if (!root.getSubSystemInstances().isEmpty()) {
 				createOptionalActorInstanceTrees(root);
 				
@@ -325,8 +324,6 @@ public class GeneratorModelBuilder {
 	private void createOptionalActorInstanceTrees(Root root) {
 		root.computeSubClasses();
 		
-		System.out.println("createOptionalActorInstanceTrees");
-		
 		/* determine all optional actor classes
 		 * 
 		 * For the sake of simplicity we have to do this for all models to really get all possibilities.
@@ -339,7 +336,6 @@ public class GeneratorModelBuilder {
 			for (ActorClass ac : mdl.getActorClasses()) {
 				for (ActorRef ar : ac.getActorRefs()) {
 					if (ar.getRefType()==ReferenceType.OPTIONAL) {
-						System.out.println("createOptionalActorInstanceTrees " + ar.getType().getName());
 						optionalActors.put(ar.getType(), null);
 					}
 				}
