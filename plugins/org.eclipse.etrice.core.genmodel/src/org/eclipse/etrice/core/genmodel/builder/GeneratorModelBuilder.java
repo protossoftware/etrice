@@ -134,8 +134,8 @@ public class GeneratorModelBuilder {
 		this.diagnostician = diagnostician;
 	}
 	
-	public Root createGeneratorModel(List<RoomModel> models, boolean asLibrary) {
-		return createGeneratorModel(models, asLibrary, false);
+	public Root createGeneratorModel(List<RoomModel> mainModels, List<RoomModel> importedModels, boolean asLibrary) {
+		return createGeneratorModel(mainModels, importedModels, asLibrary, false);
 	}
 	
 	/**
@@ -153,14 +153,16 @@ public class GeneratorModelBuilder {
 	 * contain also inherited state graph items and where RefinedStates
 	 * are removed and their contents is relocated.
 	 * 
-	 * @param models
+	 * @param mainModels all models for which code should be generated
+	 * @param importedModels all imported models
 	 * @param asLibrary
 	 * @param debug if true more output is produced
 	 * @return the root of the newly created instance model
 	 */
-	public Root createGeneratorModel(List<RoomModel> models, boolean asLibrary, boolean debug) {
+	public Root createGeneratorModel(List<RoomModel> mainModels, List<RoomModel> importedModels, boolean asLibrary, boolean debug) {
 		Root root = ETriceGenFactory.eINSTANCE.createRoot();
-		root.getModels().addAll(models);
+		root.getModels().addAll(mainModels);
+		root.getImportedModels().addAll(importedModels);
 		root.setLibrary(asLibrary);
 		this.debug = debug;
 
@@ -173,7 +175,7 @@ public class GeneratorModelBuilder {
 			checkRelayPorts(root);
 			
 			boolean hasSystem = false;
-			for (RoomModel mdl : models) {
+			for (RoomModel mdl : mainModels) {
 				for (LogicalSystem sys : mdl.getSystems()) {
 					hasSystem = true;
 					SystemInstance si = createLogicalSystemInstance(sys);
@@ -183,13 +185,14 @@ public class GeneratorModelBuilder {
 			
 			if (!hasSystem) {
 				logger.logInfo("GeneratorModelBuilder: no SystemClass found, assuming SubSystemClasses as top level elements");
-				for (RoomModel mdl : models) {
+				for (RoomModel mdl : mainModels) {
 					for (SubSystemClass comp : mdl.getSubSystemClasses()) {
 						root.getOwnSubSystemInstances().add(createSubSystemInstance(comp, comp.getName()));
 					}
 				}
 			}
 			
+			System.out.println("no. subsysinst = " + root.getSubSystemInstances().size());
 			if (!root.getSubSystemInstances().isEmpty()) {
 				createOptionalActorInstanceTrees(root);
 				
@@ -322,6 +325,8 @@ public class GeneratorModelBuilder {
 	private void createOptionalActorInstanceTrees(Root root) {
 		root.computeSubClasses();
 		
+		System.out.println("createOptionalActorInstanceTrees");
+		
 		/* determine all optional actor classes
 		 * 
 		 * For the sake of simplicity we have to do this for all models to really get all possibilities.
@@ -333,8 +338,10 @@ public class GeneratorModelBuilder {
 		for (RoomModel mdl : root.getModels()) {
 			for (ActorClass ac : mdl.getActorClasses()) {
 				for (ActorRef ar : ac.getActorRefs()) {
-					if (ar.getRefType()==ReferenceType.OPTIONAL)
+					if (ar.getRefType()==ReferenceType.OPTIONAL) {
+						System.out.println("createOptionalActorInstanceTrees " + ar.getType().getName());
 						optionalActors.put(ar.getType(), null);
+					}
 				}
 			}
 		}
@@ -1230,8 +1237,15 @@ public class GeneratorModelBuilder {
 	 * @param root - the model root
 	 */
 	private void createExpandedActorClasses(Root root) {
-		for (ActorClass ac : root.getUsedActorClasses()) {
+		for (ActorClass ac : root.getActorClasses()) {
 			root.getXpActorClasses().add(createExpandedActorClass(ac));
+		}
+		
+		// the C generator also needs actor classes to connect with
+		for (RoomModel model : root.getImportedModels()) {
+			for (ActorClass ac : model.getActorClasses()) {
+				root.getXpActorClasses().add(createExpandedActorClass(ac));
+			}
 		}
 	}
 

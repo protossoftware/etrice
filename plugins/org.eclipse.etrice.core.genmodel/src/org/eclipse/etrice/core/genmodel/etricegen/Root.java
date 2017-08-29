@@ -30,24 +30,24 @@ import org.eclipse.etrice.core.room.SubSystemClass;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.Root#isLibrary <em>Library</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.Root#getSystemInstances <em>System Instances</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.Root#getOwnSubSystemInstances <em>Own Sub System Instances</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.Root#getSubSystemInstances <em>Sub System Instances</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.Root#getModels <em>Models</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.Root#getImportedModels <em>Imported Models</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.Root#getXpActorClasses <em>Xp Actor Classes</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.Root#getUsedDataClasses <em>Used Data Classes</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.Root#getUsedProtocolClasses <em>Used Protocol Classes</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.Root#getUsedActorClasses <em>Used Actor Classes</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.Root#getUsedRoomModels <em>Used Room Models</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.Root#getDataClasses <em>Data Classes</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.Root#getProtocolClasses <em>Protocol Classes</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.Root#getActorClasses <em>Actor Classes</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.Root#getEnumClasses <em>Enum Classes</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.Root#getSubSystemClasses <em>Sub System Classes</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.Root#getOptionalInstances <em>Optional Instances</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.Root#getOptionalActorClasses <em>Optional Actor Classes</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.Root#getWiredInstances <em>Wired Instances</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.Root#getUsedEnumClasses <em>Used Enum Classes</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage#getRoot()
  * @model
@@ -142,6 +142,22 @@ public interface Root extends EObject {
 	EList<RoomModel> getModels();
 
 	/**
+	 * Returns the value of the '<em><b>Imported Models</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.etrice.core.room.RoomModel}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Imported Models</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Imported Models</em>' reference list.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage#getRoot_ImportedModels()
+	 * @model
+	 * @generated
+	 */
+	EList<RoomModel> getImportedModels();
+
+	/**
 	 * Returns the value of the '<em><b>Xp Actor Classes</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass}.
 	 * <!-- begin-user-doc -->
@@ -157,68 +173,68 @@ public interface Root extends EObject {
 	EList<ExpandedActorClass> getXpActorClasses();
 
 	/**
-	 * Returns the value of the '<em><b>Used Data Classes</b></em>' reference list.
+	 * Returns the value of the '<em><b>Data Classes</b></em>' reference list.
 	 * The list contents are of type {@link org.eclipse.etrice.core.room.DataClass}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * This is a list of all used data classes (i.e. directly or indirectly referenced starting from the top level object
-	 * which is a logical system or, if no such is present, a sub system).
+	 * If the meaning of the '<em>Data Classes</em>' reference list isn't clear,
+	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Used Data Classes</em>' reference list.
-	 * @see org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage#getRoot_UsedDataClasses()
+	 * @return the value of the '<em>Data Classes</em>' reference list.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage#getRoot_DataClasses()
 	 * @model transient="true" volatile="true" derived="true"
 	 * @generated
 	 */
-	EList<DataClass> getUsedDataClasses();
+	EList<DataClass> getDataClasses();
 
 	/**
-	 * Returns the value of the '<em><b>Used Protocol Classes</b></em>' reference list.
+	 * Returns the value of the '<em><b>Protocol Classes</b></em>' reference list.
 	 * The list contents are of type {@link org.eclipse.etrice.core.room.ProtocolClass}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * This is a list of all used protocol classes (i.e. directly or indirectly referenced starting from the top level object
-	 * which is a logical system or, if no such is present, a sub system).
+	 * If the meaning of the '<em>Protocol Classes</em>' reference list isn't clear,
+	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Used Protocol Classes</em>' reference list.
-	 * @see org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage#getRoot_UsedProtocolClasses()
+	 * @return the value of the '<em>Protocol Classes</em>' reference list.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage#getRoot_ProtocolClasses()
 	 * @model transient="true" volatile="true" derived="true"
 	 * @generated
 	 */
-	EList<ProtocolClass> getUsedProtocolClasses();
+	EList<ProtocolClass> getProtocolClasses();
 
 	/**
-	 * Returns the value of the '<em><b>Used Actor Classes</b></em>' reference list.
+	 * Returns the value of the '<em><b>Actor Classes</b></em>' reference list.
 	 * The list contents are of type {@link org.eclipse.etrice.core.room.ActorClass}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * This is a list of all used actor classes (i.e. directly or indirectly referenced starting from the top level object
-	 * which is a logical system or, if no such is present, a sub system).
+	 * If the meaning of the '<em>Actor Classes</em>' reference list isn't clear,
+	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Used Actor Classes</em>' reference list.
-	 * @see org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage#getRoot_UsedActorClasses()
+	 * @return the value of the '<em>Actor Classes</em>' reference list.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage#getRoot_ActorClasses()
 	 * @model transient="true" volatile="true" derived="true"
 	 * @generated
 	 */
-	EList<ActorClass> getUsedActorClasses();
+	EList<ActorClass> getActorClasses();
 
 	/**
-	 * Returns the value of the '<em><b>Used Room Models</b></em>' reference list.
-	 * The list contents are of type {@link org.eclipse.etrice.core.room.RoomModel}.
+	 * Returns the value of the '<em><b>Enum Classes</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.etrice.core.room.EnumerationType}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * This is a list of all used models (i.e. directly or indirectly referenced starting from the top level object
-	 * which is a logical system or, if no such is present, a sub system).
+	 * If the meaning of the '<em>Enum Classes</em>' reference list isn't clear,
+	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Used Room Models</em>' reference list.
-	 * @see org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage#getRoot_UsedRoomModels()
+	 * @return the value of the '<em>Enum Classes</em>' reference list.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage#getRoot_EnumClasses()
 	 * @model transient="true" volatile="true" derived="true"
 	 * @generated
 	 */
-	EList<RoomModel> getUsedRoomModels();
+	EList<EnumerationType> getEnumClasses();
 
 	/**
 	 * Returns the value of the '<em><b>Sub System Classes</b></em>' reference list.
@@ -285,22 +301,6 @@ public interface Root extends EObject {
 	EList<WiredStructureClass> getWiredInstances();
 
 	/**
-	 * Returns the value of the '<em><b>Used Enum Classes</b></em>' reference list.
-	 * The list contents are of type {@link org.eclipse.etrice.core.room.EnumerationType}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Used Enum Classes</em>' reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Used Enum Classes</em>' reference list.
-	 * @see org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage#getRoot_UsedEnumClasses()
-	 * @model transient="true" volatile="true" derived="true"
-	 * @generated
-	 */
-	EList<EnumerationType> getUsedEnumClasses();
-
-	/**
 	 * <!-- begin-user-doc -->
 	 * @param cls a room class
 	 * @return all room models referenced directly or indirectly by this room class
@@ -360,6 +360,14 @@ public interface Root extends EObject {
 	 * @generated
 	 */
 	ExpandedActorClass getExpandedActorClass(ActorInstance ai);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	ExpandedActorClass getExpandedActorClass(ActorClass ac);
 
 	/**
 	 * <!-- begin-user-doc -->

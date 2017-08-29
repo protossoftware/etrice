@@ -30,11 +30,11 @@ import org.eclipse.etrice.core.room.Port;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.OpenBindingImpl#getPath <em>Path</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.OpenBindingImpl#getPort <em>Port</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

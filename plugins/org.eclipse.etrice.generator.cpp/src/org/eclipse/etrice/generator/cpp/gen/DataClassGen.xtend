@@ -38,7 +38,7 @@ class DataClassGen {
 
 	def doGenerate(Root root) {
 		logger.logInfo("generating code")
-		for (dc: root.usedDataClasses) {
+		for (dc: root.dataClasses) {
 			var path = dc.generationTargetPath + dc.getPath
 
 			// header file

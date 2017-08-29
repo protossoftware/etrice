@@ -37,7 +37,7 @@ class TestInstanceCreator {
 	 * @param rs ResourceSet for new resources
 	 * @return false, if creation failed and generation should stop
 	 */
-	def boolean createInstancesAndMapping(ResourceSet rs) {
+	def List<Resource> createInstancesAndMapping(ResourceSet rs) {
 		val roomModels = newArrayList
 		val physModels = newArrayList
 		rs.resources.forEach[contents.forall[switch it { RoomModel: roomModels += it PhysicalModel: physModels += it }]]
@@ -45,6 +45,7 @@ class TestInstanceCreator {
 		// try find annotated SubSystemClass
 		val allTestSubSystems = roomModels.fold(newArrayList, [list, model | list += model.subSystemClasses.filter[hasTestAnnotation] return list])
 		val List<StructureClass> allAnnotatedClasses = newArrayList(allTestSubSystems)
+		val result = newArrayList
 
 		// try find annotated ActorClasses and map them to virtual sub system
 		{
@@ -61,7 +62,9 @@ class TestInstanceCreator {
 				allTestSubSystems += derivedSubSystem
 		}
 
-		if(allTestSubSystems.isEmpty) return true
+		if(allTestSubSystems.isEmpty) {
+			return result
+		}
 //		if (roomModels.exists[model|!model.systems.empty]) {
 //			allAnnotatedClasses.forEach[roomCls|
 //				logger.logInfo(
@@ -73,14 +76,14 @@ class TestInstanceCreator {
 		if (allAnnotatedClasses.size > 1) {
 			allAnnotatedClasses.forEach[roomCls|
 				logger.logError('''TestInstanceCreator: mapping failed, multiple test instances present''', roomCls)]
-			return false
+			return null
 		}
 
 		// get physical system
 		val List<PhysicalSystem> allPhysSystems = physModels.fold(newArrayList,[list, model|list += model.systems return list])
 		if (allPhysSystems.size != 1) {
 			logger.logError('''TestInstanceCreator: mapping failed, found «allPhysSystems.size» physical systems''', null)
-			return false
+			return null
 		}
 
 		// create mapping
@@ -111,9 +114,14 @@ class TestInstanceCreator {
 		// create memory resource with same uri locations as test instance
 		val Resource existingResource = if(testSubSystem.eResource !== null) testSubSystem.eResource else allAnnotatedClasses.head.eResource
 		val uriPath = existingResource.URI.trimFileExtension.trimSegments(1)
-		rs.createResource(uriPath.appendSegment("DerivedTestMappingModel").appendFileExtension("etmap")).contents += testMappingModel
-		rs.createResource(uriPath.appendSegment("DerivedTestRoomModel").appendFileExtension("room")).contents += testRoomModel
-			
+		var res = rs.createResource(uriPath.appendSegment("DerivedTestMappingModel").appendFileExtension("etmap"))
+		res.contents += testMappingModel
+		result.add(res)
+		res = rs.createResource(uriPath.appendSegment("DerivedTestRoomModel").appendFileExtension("room"))
+		res.contents += testRoomModel
+		result.add(res)
+
+		return result			
 	}
 
 	def protected hasTestAnnotation(StructureClass cls) {

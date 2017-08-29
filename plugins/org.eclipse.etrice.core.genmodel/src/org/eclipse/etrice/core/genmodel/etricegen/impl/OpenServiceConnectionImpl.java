@@ -30,11 +30,11 @@ import org.eclipse.etrice.core.room.ProtocolClass;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.OpenServiceConnectionImpl#getPath <em>Path</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.OpenServiceConnectionImpl#getProtocol <em>Protocol</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

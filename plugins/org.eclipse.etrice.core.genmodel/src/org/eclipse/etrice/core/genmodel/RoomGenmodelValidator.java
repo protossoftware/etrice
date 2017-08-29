@@ -104,7 +104,10 @@ public class RoomGenmodelValidator implements ICustomValidator {
 //			System.out.println("checking model " + model.getName());
 
 			ArrayList<RoomModel> models = new ArrayList<RoomModel>();
+			ArrayList<RoomModel> importedModels = new ArrayList<RoomModel>();
 
+			models.add(model);
+			
 			Resource resource = model.eResource();
 			if (resource != null) {
 				ResourceSet rs = resource.getResourceSet();
@@ -112,18 +115,16 @@ public class RoomGenmodelValidator implements ICustomValidator {
 					EcoreUtil.resolveAll(rs);
 					for (Resource res : rs.getResources()) {
 						for (EObject obj : res.getContents()) {
-							if (obj instanceof RoomModel)
-								models.add((RoomModel) obj);
+							if (obj instanceof RoomModel && obj!=model)
+								importedModels.add((RoomModel) obj);
 						}
 					}
 				}
 			}
-			if (models.isEmpty())
-				models.add(model);
 
 			Diag diagnostician = new Diag(messageAcceptor);
 			GeneratorModelBuilder builder = new GeneratorModelBuilder(new NullLogger(), diagnostician);
-			builder.createGeneratorModel(models, true);
+			builder.createGeneratorModel(models, importedModels, true);
 
 //			System.out.println("done checking model " + model.getName() + " with result: "
 //					+ (diagnostician.isFailed() ? "failed" : "ok"));

@@ -10,9 +10,9 @@
 		
 		<!-- add test here, testid==testSuiteFileName -->
 		<test testid="SendingDataTestJava" 	models="${models.path}/sendingData/SendingDataTestJava.room ${models.path}/GenericPhysical.etphys" />
-		<test testid="TCPTest"		 	 	models="${models.path}/TCPTest.room ${models.path}/GenericPhysical.etphys" />
-		<test testid="DynamicConfigTest" 	models="${models.path}/DynamicConfigTest.etmap ${models.path}/DynamicConfigTest.config"/>
-		<test testid="StaticConfigTest" models="${models.path}/staticConfig/StaticConfigTest.etmap ${models.path}/staticConfig/StaticConfigTest.config" />
+		<test testid="TCPTest"		 	 	models="${models.path}/TCPTest.room ${models.path}/GenericPhysical.etphys ${models.path}/TcpService.room" />
+		<test testid="DynamicConfigTest" 	models="${models.path}/DynamicConfigTest.etmap ${models.path}/DynamicConfigTest.room ${models.path}/DynamicConfigTest.config ${models.path}/TimingService.room"/>
+		<test testid="StaticConfigTest" models="${models.path}/staticConfig/StaticConfigTest.etmap ${models.path}/staticConfig/StaticConfigTest.room ${models.path}/staticConfig/StaticConfigTest.config ${models.path}/TimingService.room" />
 		
 		<echo>done with ${ant.project.name}</echo>
 	</target>
@@ -20,13 +20,13 @@
 	<target name="dynamicActorTests">
 		<property name="genOptions" value="-persistable -storeDataObj"/>
 		
-		<test testid="DynamicActorTest1" genOptions="${genOptions}" models="${models.path}/DynamicActorTest1.etmap" />
-		<test testid="DynamicActorTest2" genOptions="${genOptions}" models="${models.path}/DynamicActorTest2.etmap" />
+		<test testid="DynamicActorTest1" genOptions="${genOptions}" models="${models.path}/DynamicActorTest1.etmap ${models.path}/DynamicActorTest1.room" />
+		<test testid="DynamicActorTest2" genOptions="${genOptions}" models="${models.path}/DynamicActorTest2.etmap ${models.path}/DynamicActorTest2.room" />
 		<test testid="DynamicActorTest3" genOptions="${genOptions}" models="${models.path}/DynamicActorTest3.room ${models.path}/GenericPhysical.etphys" />
 		<test testid="DynamicActorTest4" genOptions="${genOptions}" models="${models.path}/DynamicActorTest4.room ${models.path}/GenericPhysical.etphys" />
 		<test testid="DynamicActorTest5" genOptions="${genOptions}" models="${models.path}/DynamicActorTest5.room ${models.path}/GenericPhysical.etphys" />
 		<test testid="DynamicActorTest6" genOptions="${genOptions}" models="${models.path}/DynamicActorTest6.room ${models.path}/GenericPhysical.etphys" />
-		<test testid="DynamicActorTest7" genOptions="${genOptions}" models="${models.path}/DynamicActorTest7.etmap" />
+		<test testid="DynamicActorTest7" genOptions="${genOptions}" models="${models.path}/DynamicActorTest7.etmap ${models.path}/DynamicActorTest7.room" />
 		<test testid="StoreRestore" 	 genOptions="${genOptions}" models="${models.path}/StoreRestore.room ${models.path}/GenericPhysical.etphys" />
 	</target>
 	

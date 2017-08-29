@@ -37,6 +37,7 @@ import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefSAPoint;
 import org.eclipse.etrice.core.room.ReferenceType;
 import org.eclipse.etrice.core.room.RelaySAPoint;
+import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.SAP;
 import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.SubSystemClass;
@@ -179,8 +180,15 @@ public class Wiring {
 	}
 
 	public void createWiredClasses() {
-		for (ActorClass ac : root.getUsedActorClasses()) {
+		for (ActorClass ac : root.getActorClasses()) {
 			getWiredActorClass(ac);
+		}
+		
+		// the wiring model also needs actor classes to connect with
+		for (RoomModel model : root.getImportedModels()) {
+			for (ActorClass ac : model.getActorClasses()) {
+				getWiredActorClass(ac);
+			}
 		}
 		
 		for (SubSystemClass ssc : root.getSubSystemClasses()) {

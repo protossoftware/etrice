@@ -23,12 +23,12 @@ import org.eclipse.etrice.core.room.SPP;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.SPPInstance#getSpp <em>Spp</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.SPPInstance#getIncoming <em>Incoming</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.SPPInstance#getOutgoing <em>Outgoing</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage#getSPPInstance()
  * @model

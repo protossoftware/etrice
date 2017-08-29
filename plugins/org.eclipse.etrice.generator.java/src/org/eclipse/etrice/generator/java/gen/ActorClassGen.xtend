@@ -56,7 +56,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 	def doGenerate(Root root) {
 		val HashMap<ActorClass, WiredActorClass> ac2wired = new HashMap<ActorClass, WiredActorClass>
 		root.wiredInstances.filter(w|w instanceof WiredActorClass).forEach[w|ac2wired.put((w as WiredActorClass).actorClass, w as WiredActorClass)]
-		for (xpac: root.xpActorClasses.filter(cl|cl.actorClass.isValidGenerationLocation)) {
+		for (xpac: root.actorClasses.filter[isValidGenerationLocation].map[root.getExpandedActorClass(it)]) {
 			val wired = ac2wired.get(xpac.actorClass)
 			val manualBehavior = xpac.actorClass.isBehaviorAnnotationPresent("BehaviorManual")
 			val path = xpac.actorClass.generationTargetPath+xpac.actorClass.getPath

@@ -22,10 +22,10 @@ import org.eclipse.etrice.core.room.ServiceImplementation;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.ServiceImplInstance#getSvcImpl <em>Svc Impl</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage#getServiceImplInstance()
  * @model

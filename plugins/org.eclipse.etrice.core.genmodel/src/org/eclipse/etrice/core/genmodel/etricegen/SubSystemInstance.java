@@ -22,11 +22,11 @@ import org.eclipse.etrice.core.room.SubSystemClass;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance#getSubSystemClass <em>Sub System Class</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance#getMaxObjId <em>Max Obj Id</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage#getSubSystemInstance()
  * @model

@@ -43,16 +43,16 @@ RoomModel StatemachineInterfaceTestInheritedModel {
 
 	}
 
-	async ActorClass EmptyAsyncAppManualExt extends EmptyAsyncAppManual {
+//	async ActorClass EmptyAsyncAppManualExt extends EmptyAsyncAppManual {
+//
+//	}
 
-	}
+//	datadriven ActorClass EmptyDataAppManualExt extends EmptyDataAppManual {
+//
+//	}
 
-	datadriven ActorClass EmptyDataAppManualExt extends EmptyDataAppManual {
-
-	}
-
-	ActorClass EmptyEventAppManualExt extends EmptyEventAppManual {
-
-	}
+//	ActorClass EmptyEventAppManualExt extends EmptyEventAppManual {
+//
+//	}
 
 }

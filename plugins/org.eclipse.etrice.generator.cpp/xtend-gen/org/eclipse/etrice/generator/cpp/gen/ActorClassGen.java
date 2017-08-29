@@ -92,13 +92,16 @@ public class ActorClassGen extends GenericActorClassGenerator {
       ac2wired.put(_actorClass, it);
     };
     _filter.forEach(_function);
-    EList<ExpandedActorClass> _xpActorClasses = root.getXpActorClasses();
-    final Function1<ExpandedActorClass, Boolean> _function_1 = (ExpandedActorClass cl) -> {
-      ActorClass _actorClass = cl.getActorClass();
-      return Boolean.valueOf(this._fileSystemHelpers.isValidGenerationLocation(_actorClass));
+    EList<ActorClass> _actorClasses = root.getActorClasses();
+    final Function1<ActorClass, Boolean> _function_1 = (ActorClass it) -> {
+      return Boolean.valueOf(this._fileSystemHelpers.isValidGenerationLocation(it));
     };
-    Iterable<ExpandedActorClass> _filter_1 = IterableExtensions.<ExpandedActorClass>filter(_xpActorClasses, _function_1);
-    for (final ExpandedActorClass xpac : _filter_1) {
+    Iterable<ActorClass> _filter_1 = IterableExtensions.<ActorClass>filter(_actorClasses, _function_1);
+    final Function1<ActorClass, ExpandedActorClass> _function_2 = (ActorClass it) -> {
+      return root.getExpandedActorClass(it);
+    };
+    Iterable<ExpandedActorClass> _map = IterableExtensions.<ActorClass, ExpandedActorClass>map(_filter_1, _function_2);
+    for (final ExpandedActorClass xpac : _map) {
       {
         ActorClass _actorClass = xpac.getActorClass();
         final WiredActorClass wired = ac2wired.get(_actorClass);

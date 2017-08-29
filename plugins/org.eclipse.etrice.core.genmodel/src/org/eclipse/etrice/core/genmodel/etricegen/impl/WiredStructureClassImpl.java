@@ -32,13 +32,13 @@ import org.eclipse.etrice.core.genmodel.etricegen.WiredStructureClass;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.WiredStructureClassImpl#getWires <em>Wires</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.WiredStructureClassImpl#getOpenBindings <em>Open Bindings</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.WiredStructureClassImpl#getProvidedServices <em>Provided Services</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.WiredStructureClassImpl#getRequiredServices <em>Required Services</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

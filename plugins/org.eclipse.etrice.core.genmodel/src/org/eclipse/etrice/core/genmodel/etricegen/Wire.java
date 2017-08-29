@@ -22,12 +22,12 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.Wire#isDataDriven <em>Data Driven</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.Wire#getPath1 <em>Path1</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.Wire#getPath2 <em>Path2</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage#getWire()
  * @model

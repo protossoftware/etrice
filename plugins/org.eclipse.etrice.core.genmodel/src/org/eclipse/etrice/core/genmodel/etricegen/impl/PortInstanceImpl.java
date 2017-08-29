@@ -36,12 +36,12 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.PortInstanceImpl#getPort <em>Port</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.PortInstanceImpl#getKind <em>Kind</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.PortInstanceImpl#getBindings <em>Bindings</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

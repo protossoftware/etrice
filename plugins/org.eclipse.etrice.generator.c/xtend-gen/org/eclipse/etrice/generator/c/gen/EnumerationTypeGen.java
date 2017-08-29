@@ -45,8 +45,8 @@ public class EnumerationTypeGen {
   private TypeHelpers _typeHelpers;
   
   public void doGenerate(final Root root) {
-    EList<EnumerationType> _usedEnumClasses = root.getUsedEnumClasses();
-    for (final EnumerationType et : _usedEnumClasses) {
+    EList<EnumerationType> _enumClasses = root.getEnumClasses();
+    for (final EnumerationType et : _enumClasses) {
       {
         String _generationTargetPath = this._roomExtensions.getGenerationTargetPath(et);
         String _path = this._roomExtensions.getPath(et);

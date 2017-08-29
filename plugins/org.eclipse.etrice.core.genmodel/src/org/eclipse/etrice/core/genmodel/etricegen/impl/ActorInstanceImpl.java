@@ -27,12 +27,12 @@ import org.eclipse.etrice.core.room.ActorClass;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.ActorInstanceImpl#getActorClass <em>Actor Class</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.ActorInstanceImpl#getReplIdx <em>Repl Idx</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.ActorInstanceImpl#getUnindexedName <em>Unindexed Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

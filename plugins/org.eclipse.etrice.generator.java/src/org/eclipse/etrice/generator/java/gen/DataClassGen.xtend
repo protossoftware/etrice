@@ -37,7 +37,7 @@ class DataClassGen {
 	@Inject RoomHelpers roomHelpers
 
 	def doGenerate(Root root) {
-		for (dc: root.usedDataClasses.filter(cl|cl.isValidGenerationLocation)) {
+		for (dc: root.dataClasses.filter(cl|cl.isValidGenerationLocation)) {
 			var path = dc.generationTargetPath+dc.getPath
 			var infopath = dc.generationInfoPath+dc.getPath
 			var file = dc.getJavaFileName

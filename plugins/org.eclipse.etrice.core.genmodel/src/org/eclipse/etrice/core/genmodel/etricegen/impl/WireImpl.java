@@ -28,12 +28,12 @@ import org.eclipse.etrice.core.genmodel.etricegen.Wire;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.WireImpl#isDataDriven <em>Data Driven</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.WireImpl#getPath1 <em>Path1</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.WireImpl#getPath2 <em>Path2</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

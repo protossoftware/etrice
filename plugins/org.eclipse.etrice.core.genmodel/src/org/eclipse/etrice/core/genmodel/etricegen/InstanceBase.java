@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.InstanceBase#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.InstanceBase#getPath <em>Path</em>}</li>
@@ -35,7 +36,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.InstanceBase#getThreadId <em>Thread Id</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.InstanceBase#getNObjIDs <em>NObj IDs</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage#getInstanceBase()
  * @model abstract="true"

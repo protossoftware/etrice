@@ -47,7 +47,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 
 	def doGenerate(Root root) {
 
-		for (pc: root.usedProtocolClasses.filter(cl|cl.isValidGenerationLocation)) {
+		for (pc: root.protocolClasses.filter(cl|cl.isValidGenerationLocation)) {
 			val path = pc.generationTargetPath+pc.getPath
 			val infopath = pc.generationInfoPath+pc.getPath
 			switch (pc.commType) {

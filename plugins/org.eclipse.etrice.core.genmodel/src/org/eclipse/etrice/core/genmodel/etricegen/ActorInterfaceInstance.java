@@ -21,13 +21,13 @@ import org.eclipse.etrice.core.room.ActorClass;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.ActorInterfaceInstance#getActorClass <em>Actor Class</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.ActorInterfaceInstance#getProvidedServices <em>Provided Services</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.ActorInterfaceInstance#getOptionalInstances <em>Optional Instances</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.ActorInterfaceInstance#isArray <em>Array</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage#getActorInterfaceInstance()
  * @model

@@ -30,13 +30,13 @@ import org.eclipse.etrice.core.room.LayerConnection;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.ConnectionInstanceImpl#getFromAI <em>From AI</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.ConnectionInstanceImpl#getFromSPP <em>From SPP</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.ConnectionInstanceImpl#getToSPP <em>To SPP</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.ConnectionInstanceImpl#getConnection <em>Connection</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

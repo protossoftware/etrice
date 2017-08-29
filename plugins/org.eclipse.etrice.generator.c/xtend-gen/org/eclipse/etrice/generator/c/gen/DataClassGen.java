@@ -60,8 +60,8 @@ public class DataClassGen {
   private ILogger logger;
   
   public void doGenerate(final Root root) {
-    EList<DataClass> _usedDataClasses = root.getUsedDataClasses();
-    for (final DataClass dc : _usedDataClasses) {
+    EList<DataClass> _dataClasses = root.getDataClasses();
+    for (final DataClass dc : _dataClasses) {
       {
         String _generationTargetPath = this._roomExtensions.getGenerationTargetPath(dc);
         String _path = this._roomExtensions.getPath(dc);

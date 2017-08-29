@@ -65,11 +65,11 @@ public class DataClassGen {
   private RoomHelpers roomHelpers;
   
   public void doGenerate(final Root root) {
-    EList<DataClass> _usedDataClasses = root.getUsedDataClasses();
+    EList<DataClass> _dataClasses = root.getDataClasses();
     final Function1<DataClass, Boolean> _function = (DataClass cl) -> {
       return Boolean.valueOf(this._fileSystemHelpers.isValidGenerationLocation(cl));
     };
-    Iterable<DataClass> _filter = IterableExtensions.<DataClass>filter(_usedDataClasses, _function);
+    Iterable<DataClass> _filter = IterableExtensions.<DataClass>filter(_dataClasses, _function);
     for (final DataClass dc : _filter) {
       {
         String _generationTargetPath = this._roomExtensions.getGenerationTargetPath(dc);

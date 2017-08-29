@@ -27,6 +27,7 @@ import org.eclipse.etrice.core.room.ActorRef;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.StructureInstance#getInstances <em>Instances</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.StructureInstance#getSaps <em>Saps</em>}</li>
@@ -37,7 +38,6 @@ import org.eclipse.etrice.core.room.ActorRef;
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.StructureInstance#getAllContainedInstances <em>All Contained Instances</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.StructureInstance#getOrderedIfItemInstances <em>Ordered If Item Instances</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage#getStructureInstance()
  * @model

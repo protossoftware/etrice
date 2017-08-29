@@ -24,12 +24,12 @@ import org.eclipse.etrice.core.room.Port;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.PortInstance#getPort <em>Port</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.PortInstance#getKind <em>Kind</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.PortInstance#getBindings <em>Bindings</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage#getPortInstance()
  * @model

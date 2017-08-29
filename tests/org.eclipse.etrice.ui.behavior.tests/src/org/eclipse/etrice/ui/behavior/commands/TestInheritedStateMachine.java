@@ -44,7 +44,7 @@ public class TestInheritedStateMachine extends AbstractStateMachineTest {
 	
 	@After
 	public void tearDown() {
-		removeDiagramsDirectory();
+//		removeDiagramsDirectory();
 	}
 	
 	@Override

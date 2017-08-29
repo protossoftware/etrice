@@ -81,33 +81,33 @@ RoomModel StatemachineInterfaceTestModel {
 		}
 	}
 	
-	ActorClass EmptyEventAppManual {
-		Structure {
-			Port p1 : EventProtocol
-		}
-		Behavior {
-			@BehaviorManual
-		}
-	}
+//	ActorClass EmptyEventAppManual {
+//		Structure {
+//			Port p1 : EventProtocol
+//		}
+//		Behavior {
+//			@BehaviorManual
+//		}
+//	}
 
-	async ActorClass EmptyAsyncAppManual {
-		Structure {
-			Port p0 : DataProtocol
-			Port p1 : EventProtocol
-		}
-		Behavior {
-			@BehaviorManual
-		}
-	}
+//	async ActorClass EmptyAsyncAppManual {
+//		Structure {
+//			Port p0 : DataProtocol
+//			Port p1 : EventProtocol
+//		}
+//		Behavior {
+//			@BehaviorManual
+//		}
+//	}
 
-	datadriven ActorClass EmptyDataAppManual {
-		Structure {
-			Port p0 : DataProtocol
-		}
-		Behavior { 
-			@BehaviorManual
-		}
-	}
+//	datadriven ActorClass EmptyDataAppManual {
+//		Structure {
+//			Port p0 : DataProtocol
+//		}
+//		Behavior { 
+//			@BehaviorManual
+//		}
+//	}
 
 	ProtocolClass EventProtocol {
 		incoming {

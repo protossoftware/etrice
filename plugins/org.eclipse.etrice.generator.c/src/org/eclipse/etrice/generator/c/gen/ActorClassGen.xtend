@@ -43,7 +43,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 	@Inject protected ILogger logger
 
 	def doGenerate(Root root) {
-		for (xpac: root.xpActorClasses) {
+		for (xpac: root.actorClasses.map[root.getExpandedActorClass(it)]) {
 			val path = xpac.actorClass.generationTargetPath+xpac.actorClass.getPath
 			val infopath = xpac.actorClass.generationInfoPath+xpac.actorClass.getPath
 			var file = xpac.actorClass.getCHeaderFileName

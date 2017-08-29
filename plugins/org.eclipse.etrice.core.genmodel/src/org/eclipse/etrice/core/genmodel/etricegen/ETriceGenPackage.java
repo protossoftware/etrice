@@ -122,49 +122,58 @@ public interface ETriceGenPackage extends EPackage {
 	int ROOT__MODELS = 4;
 
 	/**
+	 * The feature id for the '<em><b>Imported Models</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROOT__IMPORTED_MODELS = 5;
+
+	/**
 	 * The feature id for the '<em><b>Xp Actor Classes</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ROOT__XP_ACTOR_CLASSES = 5;
+	int ROOT__XP_ACTOR_CLASSES = 6;
 
 	/**
-	 * The feature id for the '<em><b>Used Data Classes</b></em>' reference list.
+	 * The feature id for the '<em><b>Data Classes</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ROOT__USED_DATA_CLASSES = 6;
+	int ROOT__DATA_CLASSES = 7;
 
 	/**
-	 * The feature id for the '<em><b>Used Protocol Classes</b></em>' reference list.
+	 * The feature id for the '<em><b>Protocol Classes</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ROOT__USED_PROTOCOL_CLASSES = 7;
+	int ROOT__PROTOCOL_CLASSES = 8;
 
 	/**
-	 * The feature id for the '<em><b>Used Actor Classes</b></em>' reference list.
+	 * The feature id for the '<em><b>Actor Classes</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ROOT__USED_ACTOR_CLASSES = 8;
+	int ROOT__ACTOR_CLASSES = 9;
 
 	/**
-	 * The feature id for the '<em><b>Used Room Models</b></em>' reference list.
+	 * The feature id for the '<em><b>Enum Classes</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ROOT__USED_ROOM_MODELS = 9;
+	int ROOT__ENUM_CLASSES = 10;
 
 	/**
 	 * The feature id for the '<em><b>Sub System Classes</b></em>' reference list.
@@ -173,7 +182,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROOT__SUB_SYSTEM_CLASSES = 10;
+	int ROOT__SUB_SYSTEM_CLASSES = 11;
 
 	/**
 	 * The feature id for the '<em><b>Optional Instances</b></em>' containment reference list.
@@ -182,7 +191,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROOT__OPTIONAL_INSTANCES = 11;
+	int ROOT__OPTIONAL_INSTANCES = 12;
 
 	/**
 	 * The feature id for the '<em><b>Optional Actor Classes</b></em>' reference list.
@@ -191,7 +200,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROOT__OPTIONAL_ACTOR_CLASSES = 12;
+	int ROOT__OPTIONAL_ACTOR_CLASSES = 13;
 
 	/**
 	 * The feature id for the '<em><b>Wired Instances</b></em>' containment reference list.
@@ -200,16 +209,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROOT__WIRED_INSTANCES = 13;
-
-	/**
-	 * The feature id for the '<em><b>Used Enum Classes</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ROOT__USED_ENUM_CLASSES = 14;
+	int ROOT__WIRED_INSTANCES = 14;
 
 	/**
 	 * The number of structural features of the '<em>Root</em>' class.
@@ -2182,6 +2182,17 @@ public interface ETriceGenPackage extends EPackage {
 	EReference getRoot_Models();
 
 	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.etrice.core.genmodel.etricegen.Root#getImportedModels <em>Imported Models</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Imported Models</em>'.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.Root#getImportedModels()
+	 * @see #getRoot()
+	 * @generated
+	 */
+	EReference getRoot_ImportedModels();
+
+	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.genmodel.etricegen.Root#getXpActorClasses <em>Xp Actor Classes</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2193,48 +2204,48 @@ public interface ETriceGenPackage extends EPackage {
 	EReference getRoot_XpActorClasses();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.eclipse.etrice.core.genmodel.etricegen.Root#getUsedDataClasses <em>Used Data Classes</em>}'.
+	 * Returns the meta object for the reference list '{@link org.eclipse.etrice.core.genmodel.etricegen.Root#getDataClasses <em>Data Classes</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Used Data Classes</em>'.
-	 * @see org.eclipse.etrice.core.genmodel.etricegen.Root#getUsedDataClasses()
+	 * @return the meta object for the reference list '<em>Data Classes</em>'.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.Root#getDataClasses()
 	 * @see #getRoot()
 	 * @generated
 	 */
-	EReference getRoot_UsedDataClasses();
+	EReference getRoot_DataClasses();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.eclipse.etrice.core.genmodel.etricegen.Root#getUsedProtocolClasses <em>Used Protocol Classes</em>}'.
+	 * Returns the meta object for the reference list '{@link org.eclipse.etrice.core.genmodel.etricegen.Root#getProtocolClasses <em>Protocol Classes</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Used Protocol Classes</em>'.
-	 * @see org.eclipse.etrice.core.genmodel.etricegen.Root#getUsedProtocolClasses()
+	 * @return the meta object for the reference list '<em>Protocol Classes</em>'.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.Root#getProtocolClasses()
 	 * @see #getRoot()
 	 * @generated
 	 */
-	EReference getRoot_UsedProtocolClasses();
+	EReference getRoot_ProtocolClasses();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.eclipse.etrice.core.genmodel.etricegen.Root#getUsedActorClasses <em>Used Actor Classes</em>}'.
+	 * Returns the meta object for the reference list '{@link org.eclipse.etrice.core.genmodel.etricegen.Root#getActorClasses <em>Actor Classes</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Used Actor Classes</em>'.
-	 * @see org.eclipse.etrice.core.genmodel.etricegen.Root#getUsedActorClasses()
+	 * @return the meta object for the reference list '<em>Actor Classes</em>'.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.Root#getActorClasses()
 	 * @see #getRoot()
 	 * @generated
 	 */
-	EReference getRoot_UsedActorClasses();
+	EReference getRoot_ActorClasses();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.eclipse.etrice.core.genmodel.etricegen.Root#getUsedRoomModels <em>Used Room Models</em>}'.
+	 * Returns the meta object for the reference list '{@link org.eclipse.etrice.core.genmodel.etricegen.Root#getEnumClasses <em>Enum Classes</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Used Room Models</em>'.
-	 * @see org.eclipse.etrice.core.genmodel.etricegen.Root#getUsedRoomModels()
+	 * @return the meta object for the reference list '<em>Enum Classes</em>'.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.Root#getEnumClasses()
 	 * @see #getRoot()
 	 * @generated
 	 */
-	EReference getRoot_UsedRoomModels();
+	EReference getRoot_EnumClasses();
 
 	/**
 	 * Returns the meta object for the reference list '{@link org.eclipse.etrice.core.genmodel.etricegen.Root#getSubSystemClasses <em>Sub System Classes</em>}'.
@@ -2279,17 +2290,6 @@ public interface ETriceGenPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getRoot_WiredInstances();
-
-	/**
-	 * Returns the meta object for the reference list '{@link org.eclipse.etrice.core.genmodel.etricegen.Root#getUsedEnumClasses <em>Used Enum Classes</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Used Enum Classes</em>'.
-	 * @see org.eclipse.etrice.core.genmodel.etricegen.Root#getUsedEnumClasses()
-	 * @see #getRoot()
-	 * @generated
-	 */
-	EReference getRoot_UsedEnumClasses();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.etrice.core.genmodel.etricegen.InstanceBase <em>Instance Base</em>}'.
@@ -3221,6 +3221,14 @@ public interface ETriceGenPackage extends EPackage {
 		EReference ROOT__MODELS = eINSTANCE.getRoot_Models();
 
 		/**
+		 * The meta object literal for the '<em><b>Imported Models</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ROOT__IMPORTED_MODELS = eINSTANCE.getRoot_ImportedModels();
+
+		/**
 		 * The meta object literal for the '<em><b>Xp Actor Classes</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3229,36 +3237,36 @@ public interface ETriceGenPackage extends EPackage {
 		EReference ROOT__XP_ACTOR_CLASSES = eINSTANCE.getRoot_XpActorClasses();
 
 		/**
-		 * The meta object literal for the '<em><b>Used Data Classes</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Data Classes</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ROOT__USED_DATA_CLASSES = eINSTANCE.getRoot_UsedDataClasses();
+		EReference ROOT__DATA_CLASSES = eINSTANCE.getRoot_DataClasses();
 
 		/**
-		 * The meta object literal for the '<em><b>Used Protocol Classes</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Protocol Classes</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ROOT__USED_PROTOCOL_CLASSES = eINSTANCE.getRoot_UsedProtocolClasses();
+		EReference ROOT__PROTOCOL_CLASSES = eINSTANCE.getRoot_ProtocolClasses();
 
 		/**
-		 * The meta object literal for the '<em><b>Used Actor Classes</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Actor Classes</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ROOT__USED_ACTOR_CLASSES = eINSTANCE.getRoot_UsedActorClasses();
+		EReference ROOT__ACTOR_CLASSES = eINSTANCE.getRoot_ActorClasses();
 
 		/**
-		 * The meta object literal for the '<em><b>Used Room Models</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Enum Classes</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ROOT__USED_ROOM_MODELS = eINSTANCE.getRoot_UsedRoomModels();
+		EReference ROOT__ENUM_CLASSES = eINSTANCE.getRoot_EnumClasses();
 
 		/**
 		 * The meta object literal for the '<em><b>Sub System Classes</b></em>' reference list feature.
@@ -3291,14 +3299,6 @@ public interface ETriceGenPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ROOT__WIRED_INSTANCES = eINSTANCE.getRoot_WiredInstances();
-
-		/**
-		 * The meta object literal for the '<em><b>Used Enum Classes</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ROOT__USED_ENUM_CLASSES = eINSTANCE.getRoot_UsedEnumClasses();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.etrice.core.genmodel.etricegen.impl.InstanceBaseImpl <em>Instance Base</em>}' class.

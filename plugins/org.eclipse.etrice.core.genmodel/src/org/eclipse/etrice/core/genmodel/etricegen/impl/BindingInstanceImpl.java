@@ -39,11 +39,11 @@ import org.eclipse.etrice.core.room.Binding;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.BindingInstanceImpl#getPorts <em>Ports</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.BindingInstanceImpl#getBinding <em>Binding</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -24,11 +24,11 @@ import org.eclipse.etrice.core.room.ProtocolClass;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.OpenServiceConnection#getPath <em>Path</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.OpenServiceConnection#getProtocol <em>Protocol</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage#getOpenServiceConnection()
  * @model

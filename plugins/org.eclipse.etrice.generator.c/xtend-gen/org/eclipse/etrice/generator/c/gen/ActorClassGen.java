@@ -54,6 +54,7 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
 
 @Singleton
 @SuppressWarnings("all")
@@ -84,8 +85,12 @@ public class ActorClassGen extends GenericActorClassGenerator {
   protected ILogger logger;
   
   public void doGenerate(final Root root) {
-    EList<ExpandedActorClass> _xpActorClasses = root.getXpActorClasses();
-    for (final ExpandedActorClass xpac : _xpActorClasses) {
+    EList<ActorClass> _actorClasses = root.getActorClasses();
+    final Function1<ActorClass, ExpandedActorClass> _function = (ActorClass it) -> {
+      return root.getExpandedActorClass(it);
+    };
+    List<ExpandedActorClass> _map = ListExtensions.<ActorClass, ExpandedActorClass>map(_actorClasses, _function);
+    for (final ExpandedActorClass xpac : _map) {
       {
         ActorClass _actorClass = xpac.getActorClass();
         String _generationTargetPath = this._roomExtensions.getGenerationTargetPath(_actorClass);

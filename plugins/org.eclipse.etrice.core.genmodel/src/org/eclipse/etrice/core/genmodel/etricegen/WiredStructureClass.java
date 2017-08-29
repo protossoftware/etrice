@@ -22,13 +22,13 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.WiredStructureClass#getWires <em>Wires</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.WiredStructureClass#getOpenBindings <em>Open Bindings</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.WiredStructureClass#getProvidedServices <em>Provided Services</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.WiredStructureClass#getRequiredServices <em>Required Services</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage#getWiredStructureClass()
  * @model abstract="true"

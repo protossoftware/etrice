@@ -36,11 +36,11 @@ import org.eclipse.etrice.core.room.LogicalSystem;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.SystemInstanceImpl#getInstances <em>Instances</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.SystemInstanceImpl#getLogicalSystem <em>Logical System</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

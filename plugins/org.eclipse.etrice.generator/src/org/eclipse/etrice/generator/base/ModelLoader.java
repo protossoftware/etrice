@@ -56,6 +56,7 @@ public class ModelLoader {
 	
 	private ResourceSet resourceSet;
 	private HashSet<URI> modelURIs = new HashSet<URI>();
+	private HashSet<URI> mainModelURIs = new HashSet<URI>();
 	private HashSet<URI> loadedModelURIs = new HashSet<URI>();
 
     public boolean loadModels(List<String> uriList) {
@@ -78,6 +79,9 @@ public class ModelLoader {
 		for (String uri : uriList) {
 			addResourceURI(uriResolver.resolve(uri, null));
 		}
+		
+		// now that we have a list of normalized input models we make a copy of them
+		mainModelURIs.addAll(modelURIs);
 		
 		boolean ok = true;
 		while (!modelURIs.isEmpty()) {
@@ -172,5 +176,12 @@ public class ModelLoader {
 	 */
 	public ResourceSet getResourceSet() {
 		return resourceSet;
+	}
+
+	/**
+	 * @return the mainModelURIs
+	 */
+	public HashSet<URI> getMainModelURIs() {
+		return mainModelURIs;
 	}
 }

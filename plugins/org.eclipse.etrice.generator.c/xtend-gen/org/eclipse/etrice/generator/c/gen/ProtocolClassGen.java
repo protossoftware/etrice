@@ -76,8 +76,8 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
   private ILogger logger;
   
   public void doGenerate(final Root root) {
-    EList<ProtocolClass> _usedProtocolClasses = root.getUsedProtocolClasses();
-    for (final ProtocolClass pc : _usedProtocolClasses) {
+    EList<ProtocolClass> _protocolClasses = root.getProtocolClasses();
+    for (final ProtocolClass pc : _protocolClasses) {
       {
         String _generationTargetPath = this._roomExtensions.getGenerationTargetPath(pc);
         String _path = this._roomExtensions.getPath(pc);

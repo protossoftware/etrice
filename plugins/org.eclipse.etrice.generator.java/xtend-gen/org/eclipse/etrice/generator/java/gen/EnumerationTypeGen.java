@@ -45,11 +45,11 @@ public class EnumerationTypeGen {
   private FileSystemHelpers _fileSystemHelpers;
   
   public void doGenerate(final Root root) {
-    EList<EnumerationType> _usedEnumClasses = root.getUsedEnumClasses();
+    EList<EnumerationType> _enumClasses = root.getEnumClasses();
     final Function1<EnumerationType, Boolean> _function = (EnumerationType cl) -> {
       return Boolean.valueOf(this._fileSystemHelpers.isValidGenerationLocation(cl));
     };
-    Iterable<EnumerationType> _filter = IterableExtensions.<EnumerationType>filter(_usedEnumClasses, _function);
+    Iterable<EnumerationType> _filter = IterableExtensions.<EnumerationType>filter(_enumClasses, _function);
     for (final EnumerationType et : _filter) {
       {
         String _generationTargetPath = this._roomExtensions.getGenerationTargetPath(et);

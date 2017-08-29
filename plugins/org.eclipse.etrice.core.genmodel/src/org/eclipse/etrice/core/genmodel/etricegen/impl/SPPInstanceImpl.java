@@ -39,12 +39,12 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.SPPInstanceImpl#getSpp <em>Spp</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.SPPInstanceImpl#getIncoming <em>Incoming</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.SPPInstanceImpl#getOutgoing <em>Outgoing</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

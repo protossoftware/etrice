@@ -27,11 +27,11 @@ import org.eclipse.etrice.core.room.Binding;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.BindingInstance#getPorts <em>Ports</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.BindingInstance#getBinding <em>Binding</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage#getBindingInstance()
  * @model

@@ -9,7 +9,7 @@
 	<target name="testing" depends="common.testing">
 
 		<!-- add test here, testid==testSuiteFileName -->
-		<test testid="StaticConfigTest" models="${models.path}/staticConfig/StaticConfigTest.etmap ${models.path}/staticConfig/StaticConfigTest.config" />
+		<test testid="StaticConfigTest" models="${models.path}/staticConfig/StaticConfigTest.etmap ${models.path}/staticConfig/StaticConfigTest.room ${models.path}/staticConfig/StaticConfigTest.config ${models.path}/TimingService.room" />
 
 		<!-- fail on build server -->
 		<!--<test testid="SendingDataTestC" models="${models.path}/sendingData/SendingDataTestC.room ${models.path}/GenericPhysical.etphys" />-->

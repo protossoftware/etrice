@@ -37,7 +37,7 @@ class DataClassGen {
 	@Inject ILogger logger
 	
 	def doGenerate(Root root) {
-		for (dc: root.usedDataClasses) {
+		for (dc: root.dataClasses) {
 			val path = dc.generationTargetPath+dc.getPath
 			val infopath = dc.generationInfoPath+dc.getPath
 			var file = dc.getCHeaderFileName

@@ -22,11 +22,11 @@ import org.eclipse.etrice.core.room.LogicalSystem;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.SystemInstance#getInstances <em>Instances</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.SystemInstance#getLogicalSystem <em>Logical System</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage#getSystemInstance()
  * @model

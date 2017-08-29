@@ -50,8 +50,8 @@ public class PrepareFileSystem {
     EList<EObject> _contents = resource.getContents();
     for (final EObject e : _contents) {
       if ((e instanceof Root)) {
-        EList<RoomModel> _usedRoomModels = ((Root) e).getUsedRoomModels();
-        for (final RoomModel mdl : _usedRoomModels) {
+        EList<RoomModel> _models = ((Root) e).getModels();
+        for (final RoomModel mdl : _models) {
           {
             final String tgtpath = this._roomExtensions.getGenerationTargetPath(mdl);
             if (((!Objects.equal(tgtpath, null)) && (!tgtpath.isEmpty()))) {
@@ -69,8 +69,8 @@ public class PrepareFileSystem {
     EList<EObject> _contents = resource.getContents();
     for (final EObject e : _contents) {
       if ((e instanceof Root)) {
-        EList<RoomModel> _usedRoomModels = ((Root) e).getUsedRoomModels();
-        for (final RoomModel mdl : _usedRoomModels) {
+        EList<RoomModel> _models = ((Root) e).getModels();
+        for (final RoomModel mdl : _models) {
           {
             final String tgtpath = this._roomExtensions.getDocGenerationTargetPath(mdl);
             if (((!Objects.equal(tgtpath, null)) && (!tgtpath.isEmpty()))) {

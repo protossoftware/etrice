@@ -39,7 +39,7 @@ class PrepareFileSystem {
 		var Set<String> pathes = new HashSet<String>();
 		for (e: resource.contents){
 			if (e instanceof Root) {
-				for (mdl : (e as Root).usedRoomModels) {
+				for (mdl : (e as Root).models) {
 					val tgtpath = mdl.generationTargetPath
 					if (tgtpath!=null && !tgtpath.empty)
 						pathes.add(tgtpath)
@@ -53,7 +53,7 @@ class PrepareFileSystem {
 		var Set<String> pathes = new HashSet<String>();
 		for (e: resource.contents){
 			if (e instanceof Root) {
-				for (mdl : (e as Root).usedRoomModels) {
+				for (mdl : (e as Root).models) {
 					val tgtpath = mdl.docGenerationTargetPath
 					if (tgtpath!=null && !tgtpath.empty)
 						pathes.add(tgtpath)

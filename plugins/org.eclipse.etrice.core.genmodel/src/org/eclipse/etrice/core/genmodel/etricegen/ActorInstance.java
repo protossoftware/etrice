@@ -28,12 +28,12 @@ import org.eclipse.etrice.core.room.SubSystemClass;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.ActorInstance#getActorClass <em>Actor Class</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.ActorInstance#getReplIdx <em>Repl Idx</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.ActorInstance#getUnindexedName <em>Unindexed Name</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage#getActorInstance()
  * @model

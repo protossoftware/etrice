@@ -34,11 +34,11 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.SubSystemInstanceImpl#getSubSystemClass <em>Sub System Class</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.SubSystemInstanceImpl#getMaxObjId <em>Max Obj Id</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

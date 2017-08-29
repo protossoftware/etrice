@@ -71,8 +71,8 @@ public class DataClassGen {
   
   public void doGenerate(final Root root) {
     this.logger.logInfo("generating code");
-    EList<DataClass> _usedDataClasses = root.getUsedDataClasses();
-    for (final DataClass dc : _usedDataClasses) {
+    EList<DataClass> _dataClasses = root.getDataClasses();
+    for (final DataClass dc : _dataClasses) {
       {
         String _generationTargetPath = this.roomExt.getGenerationTargetPath(dc);
         String _path = this.roomExt.getPath(dc);

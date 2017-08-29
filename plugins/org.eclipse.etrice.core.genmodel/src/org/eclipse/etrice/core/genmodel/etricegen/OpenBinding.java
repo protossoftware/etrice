@@ -24,11 +24,11 @@ import org.eclipse.etrice.core.room.Port;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.OpenBinding#getPath <em>Path</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.OpenBinding#getPort <em>Port</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage#getOpenBinding()
  * @model

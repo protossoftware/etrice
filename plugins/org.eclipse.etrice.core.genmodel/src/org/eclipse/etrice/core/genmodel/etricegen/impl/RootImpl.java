@@ -17,7 +17,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Set;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -25,9 +24,7 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.DelegatingEList;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
@@ -36,7 +33,6 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.etrice.core.genmodel.etricegen.AbstractInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance;
-import org.eclipse.etrice.core.genmodel.etricegen.ActorInterfaceInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.genmodel.etricegen.InstanceBase;
@@ -62,24 +58,24 @@ import org.eclipse.etrice.core.room.SubSystemClass;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.RootImpl#isLibrary <em>Library</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.RootImpl#getSystemInstances <em>System Instances</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.RootImpl#getOwnSubSystemInstances <em>Own Sub System Instances</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.RootImpl#getSubSystemInstances <em>Sub System Instances</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.RootImpl#getModels <em>Models</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.RootImpl#getImportedModels <em>Imported Models</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.RootImpl#getXpActorClasses <em>Xp Actor Classes</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.RootImpl#getUsedDataClasses <em>Used Data Classes</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.RootImpl#getUsedProtocolClasses <em>Used Protocol Classes</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.RootImpl#getUsedActorClasses <em>Used Actor Classes</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.RootImpl#getUsedRoomModels <em>Used Room Models</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.RootImpl#getDataClasses <em>Data Classes</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.RootImpl#getProtocolClasses <em>Protocol Classes</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.RootImpl#getActorClasses <em>Actor Classes</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.RootImpl#getEnumClasses <em>Enum Classes</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.RootImpl#getSubSystemClasses <em>Sub System Classes</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.RootImpl#getOptionalInstances <em>Optional Instances</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.RootImpl#getOptionalActorClasses <em>Optional Actor Classes</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.RootImpl#getWiredInstances <em>Wired Instances</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.RootImpl#getUsedEnumClasses <em>Used Enum Classes</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -154,6 +150,16 @@ public class RootImpl extends EObjectImpl implements Root {
 	 * @ordered
 	 */
 	protected EList<RoomModel> models;
+
+	/**
+	 * The cached value of the '{@link #getImportedModels() <em>Imported Models</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getImportedModels()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<RoomModel> importedModels;
 
 	/**
 	 * The cached value of the '{@link #getXpActorClasses() <em>Xp Actor Classes</em>}' containment reference list.
@@ -252,6 +258,18 @@ public class RootImpl extends EObjectImpl implements Root {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<RoomModel> getImportedModels() {
+		if (importedModels == null) {
+			importedModels = new EObjectResolvingEList<RoomModel>(RoomModel.class, this, ETriceGenPackage.ROOT__IMPORTED_MODELS);
+		}
+		return importedModels;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<ExpandedActorClass> getXpActorClasses() {
 		if (xpActorClasses == null) {
 			xpActorClasses = new EObjectContainmentEList<ExpandedActorClass>(ExpandedActorClass.class, this, ETriceGenPackage.ROOT__XP_ACTOR_CLASSES);
@@ -264,11 +282,11 @@ public class RootImpl extends EObjectImpl implements Root {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public EList<DataClass> getUsedDataClasses() {
-		if (usedDataClasses==null) {
+	public EList<DataClass> getDataClasses() {
+		if (dataClasses==null) {
 			computeUsedClasses();
 		}
-		return usedDataClasses;
+		return dataClasses;
 	}
 
 	/**
@@ -276,11 +294,11 @@ public class RootImpl extends EObjectImpl implements Root {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public EList<EnumerationType> getUsedEnumClasses() {
-		if (usedEnumClasses==null) {
+	public EList<EnumerationType> getEnumClasses() {
+		if (enumClasses==null) {
 			computeUsedClasses();
 		}
-		return usedEnumClasses;
+		return enumClasses;
 	}
 
 	/**
@@ -288,11 +306,11 @@ public class RootImpl extends EObjectImpl implements Root {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public EList<ProtocolClass> getUsedProtocolClasses() {
-		if (usedProtocolClasses==null) {
+	public EList<ProtocolClass> getProtocolClasses() {
+		if (protocolClasses==null) {
 			computeUsedClasses();
 		}
-		return usedProtocolClasses;
+		return protocolClasses;
 	}
 
 	/**
@@ -300,23 +318,11 @@ public class RootImpl extends EObjectImpl implements Root {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public EList<ActorClass> getUsedActorClasses() {
-		if (usedActorClasses==null) {
+	public EList<ActorClass> getActorClasses() {
+		if (actorClasses==null) {
 			computeUsedClasses();
 		}
-		return usedActorClasses;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public EList<RoomModel> getUsedRoomModels() {
-		if (usedRoomModels==null) {
-			computeUsedClasses();
-		}
-		return usedRoomModels;
+		return actorClasses;
 	}
 
 	private BasicEList<SubSystemClass> subSystemClasses = null;
@@ -498,6 +504,19 @@ public class RootImpl extends EObjectImpl implements Root {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
+	public ExpandedActorClass getExpandedActorClass(ActorClass ac) {
+		for (ExpandedActorClass xpac : getXpActorClasses()) {
+			if (xpac.getActorClass()==ac)
+				return xpac;
+		}
+		return null;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
 	public StructureInstance getInstance(String path) {
 		if (!path.startsWith(Character.toString(InstanceBase.pathDelim)))
 			return null;
@@ -612,16 +631,18 @@ public class RootImpl extends EObjectImpl implements Root {
 				return getSubSystemInstances();
 			case ETriceGenPackage.ROOT__MODELS:
 				return getModels();
+			case ETriceGenPackage.ROOT__IMPORTED_MODELS:
+				return getImportedModels();
 			case ETriceGenPackage.ROOT__XP_ACTOR_CLASSES:
 				return getXpActorClasses();
-			case ETriceGenPackage.ROOT__USED_DATA_CLASSES:
-				return getUsedDataClasses();
-			case ETriceGenPackage.ROOT__USED_PROTOCOL_CLASSES:
-				return getUsedProtocolClasses();
-			case ETriceGenPackage.ROOT__USED_ACTOR_CLASSES:
-				return getUsedActorClasses();
-			case ETriceGenPackage.ROOT__USED_ROOM_MODELS:
-				return getUsedRoomModels();
+			case ETriceGenPackage.ROOT__DATA_CLASSES:
+				return getDataClasses();
+			case ETriceGenPackage.ROOT__PROTOCOL_CLASSES:
+				return getProtocolClasses();
+			case ETriceGenPackage.ROOT__ACTOR_CLASSES:
+				return getActorClasses();
+			case ETriceGenPackage.ROOT__ENUM_CLASSES:
+				return getEnumClasses();
 			case ETriceGenPackage.ROOT__SUB_SYSTEM_CLASSES:
 				return getSubSystemClasses();
 			case ETriceGenPackage.ROOT__OPTIONAL_INSTANCES:
@@ -630,8 +651,6 @@ public class RootImpl extends EObjectImpl implements Root {
 				return getOptionalActorClasses();
 			case ETriceGenPackage.ROOT__WIRED_INSTANCES:
 				return getWiredInstances();
-			case ETriceGenPackage.ROOT__USED_ENUM_CLASSES:
-				return getUsedEnumClasses();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -660,25 +679,29 @@ public class RootImpl extends EObjectImpl implements Root {
 				getModels().clear();
 				getModels().addAll((Collection<? extends RoomModel>)newValue);
 				return;
+			case ETriceGenPackage.ROOT__IMPORTED_MODELS:
+				getImportedModels().clear();
+				getImportedModels().addAll((Collection<? extends RoomModel>)newValue);
+				return;
 			case ETriceGenPackage.ROOT__XP_ACTOR_CLASSES:
 				getXpActorClasses().clear();
 				getXpActorClasses().addAll((Collection<? extends ExpandedActorClass>)newValue);
 				return;
-			case ETriceGenPackage.ROOT__USED_DATA_CLASSES:
-				getUsedDataClasses().clear();
-				getUsedDataClasses().addAll((Collection<? extends DataClass>)newValue);
+			case ETriceGenPackage.ROOT__DATA_CLASSES:
+				getDataClasses().clear();
+				getDataClasses().addAll((Collection<? extends DataClass>)newValue);
 				return;
-			case ETriceGenPackage.ROOT__USED_PROTOCOL_CLASSES:
-				getUsedProtocolClasses().clear();
-				getUsedProtocolClasses().addAll((Collection<? extends ProtocolClass>)newValue);
+			case ETriceGenPackage.ROOT__PROTOCOL_CLASSES:
+				getProtocolClasses().clear();
+				getProtocolClasses().addAll((Collection<? extends ProtocolClass>)newValue);
 				return;
-			case ETriceGenPackage.ROOT__USED_ACTOR_CLASSES:
-				getUsedActorClasses().clear();
-				getUsedActorClasses().addAll((Collection<? extends ActorClass>)newValue);
+			case ETriceGenPackage.ROOT__ACTOR_CLASSES:
+				getActorClasses().clear();
+				getActorClasses().addAll((Collection<? extends ActorClass>)newValue);
 				return;
-			case ETriceGenPackage.ROOT__USED_ROOM_MODELS:
-				getUsedRoomModels().clear();
-				getUsedRoomModels().addAll((Collection<? extends RoomModel>)newValue);
+			case ETriceGenPackage.ROOT__ENUM_CLASSES:
+				getEnumClasses().clear();
+				getEnumClasses().addAll((Collection<? extends EnumerationType>)newValue);
 				return;
 			case ETriceGenPackage.ROOT__SUB_SYSTEM_CLASSES:
 				getSubSystemClasses().clear();
@@ -695,10 +718,6 @@ public class RootImpl extends EObjectImpl implements Root {
 			case ETriceGenPackage.ROOT__WIRED_INSTANCES:
 				getWiredInstances().clear();
 				getWiredInstances().addAll((Collection<? extends WiredStructureClass>)newValue);
-				return;
-			case ETriceGenPackage.ROOT__USED_ENUM_CLASSES:
-				getUsedEnumClasses().clear();
-				getUsedEnumClasses().addAll((Collection<? extends EnumerationType>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -724,20 +743,23 @@ public class RootImpl extends EObjectImpl implements Root {
 			case ETriceGenPackage.ROOT__MODELS:
 				getModels().clear();
 				return;
+			case ETriceGenPackage.ROOT__IMPORTED_MODELS:
+				getImportedModels().clear();
+				return;
 			case ETriceGenPackage.ROOT__XP_ACTOR_CLASSES:
 				getXpActorClasses().clear();
 				return;
-			case ETriceGenPackage.ROOT__USED_DATA_CLASSES:
-				getUsedDataClasses().clear();
+			case ETriceGenPackage.ROOT__DATA_CLASSES:
+				getDataClasses().clear();
 				return;
-			case ETriceGenPackage.ROOT__USED_PROTOCOL_CLASSES:
-				getUsedProtocolClasses().clear();
+			case ETriceGenPackage.ROOT__PROTOCOL_CLASSES:
+				getProtocolClasses().clear();
 				return;
-			case ETriceGenPackage.ROOT__USED_ACTOR_CLASSES:
-				getUsedActorClasses().clear();
+			case ETriceGenPackage.ROOT__ACTOR_CLASSES:
+				getActorClasses().clear();
 				return;
-			case ETriceGenPackage.ROOT__USED_ROOM_MODELS:
-				getUsedRoomModels().clear();
+			case ETriceGenPackage.ROOT__ENUM_CLASSES:
+				getEnumClasses().clear();
 				return;
 			case ETriceGenPackage.ROOT__SUB_SYSTEM_CLASSES:
 				getSubSystemClasses().clear();
@@ -750,9 +772,6 @@ public class RootImpl extends EObjectImpl implements Root {
 				return;
 			case ETriceGenPackage.ROOT__WIRED_INSTANCES:
 				getWiredInstances().clear();
-				return;
-			case ETriceGenPackage.ROOT__USED_ENUM_CLASSES:
-				getUsedEnumClasses().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -776,16 +795,18 @@ public class RootImpl extends EObjectImpl implements Root {
 				return !getSubSystemInstances().isEmpty();
 			case ETriceGenPackage.ROOT__MODELS:
 				return models != null && !models.isEmpty();
+			case ETriceGenPackage.ROOT__IMPORTED_MODELS:
+				return importedModels != null && !importedModels.isEmpty();
 			case ETriceGenPackage.ROOT__XP_ACTOR_CLASSES:
 				return xpActorClasses != null && !xpActorClasses.isEmpty();
-			case ETriceGenPackage.ROOT__USED_DATA_CLASSES:
-				return !getUsedDataClasses().isEmpty();
-			case ETriceGenPackage.ROOT__USED_PROTOCOL_CLASSES:
-				return !getUsedProtocolClasses().isEmpty();
-			case ETriceGenPackage.ROOT__USED_ACTOR_CLASSES:
-				return !getUsedActorClasses().isEmpty();
-			case ETriceGenPackage.ROOT__USED_ROOM_MODELS:
-				return !getUsedRoomModels().isEmpty();
+			case ETriceGenPackage.ROOT__DATA_CLASSES:
+				return !getDataClasses().isEmpty();
+			case ETriceGenPackage.ROOT__PROTOCOL_CLASSES:
+				return !getProtocolClasses().isEmpty();
+			case ETriceGenPackage.ROOT__ACTOR_CLASSES:
+				return !getActorClasses().isEmpty();
+			case ETriceGenPackage.ROOT__ENUM_CLASSES:
+				return !getEnumClasses().isEmpty();
 			case ETriceGenPackage.ROOT__SUB_SYSTEM_CLASSES:
 				return !getSubSystemClasses().isEmpty();
 			case ETriceGenPackage.ROOT__OPTIONAL_INSTANCES:
@@ -794,8 +815,6 @@ public class RootImpl extends EObjectImpl implements Root {
 				return optionalActorClasses != null && !optionalActorClasses.isEmpty();
 			case ETriceGenPackage.ROOT__WIRED_INSTANCES:
 				return wiredInstances != null && !wiredInstances.isEmpty();
-			case ETriceGenPackage.ROOT__USED_ENUM_CLASSES:
-				return !getUsedEnumClasses().isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -818,80 +837,29 @@ public class RootImpl extends EObjectImpl implements Root {
 
 	private RoomCrossReferencer crossReferencer = new RoomCrossReferencer();
 	
-	private BasicEList<DataClass> usedDataClasses = null;
-	private BasicEList<EnumerationType> usedEnumClasses = null;
-	private BasicEList<ProtocolClass> usedProtocolClasses = null;
-	private BasicEList<ActorClass> usedActorClasses = null;
-	private BasicEList<RoomModel> usedRoomModels = null;
+	private BasicEList<DataClass> dataClasses = null;
+	private BasicEList<EnumerationType> enumClasses = null;
+	private BasicEList<ProtocolClass> protocolClasses = null;
+	private BasicEList<ActorClass> actorClasses = null;
 	
 	private void computeUsedClasses() {
-		if (isLibrary()) {
-			usedDataClasses = new BasicEList<DataClass>();
-			usedEnumClasses = new BasicEList<EnumerationType>();
-			usedProtocolClasses = new BasicEList<ProtocolClass>();
-			usedActorClasses = new BasicEList<ActorClass>();
-			usedRoomModels = new BasicEList<RoomModel>();
-			subSystemClasses = new BasicEList<SubSystemClass>();
-			for (RoomModel mdl : getModels()) {
-				usedDataClasses.addAll(mdl.getDataClasses());
-				usedEnumClasses.addAll(mdl.getEnumerationTypes());
-				
-				for (GeneralProtocolClass gpc : mdl.getProtocolClasses()) {
-					if (gpc instanceof ProtocolClass)
-						usedProtocolClasses.add((ProtocolClass) gpc);
-				}
-				
-				usedActorClasses.addAll(mdl.getActorClasses());
-				subSystemClasses.addAll(mdl.getSubSystemClasses());
-				usedRoomModels.add(mdl);
+		dataClasses = new BasicEList<DataClass>();
+		enumClasses = new BasicEList<EnumerationType>();
+		protocolClasses = new BasicEList<ProtocolClass>();
+		actorClasses = new BasicEList<ActorClass>();
+		subSystemClasses = new BasicEList<SubSystemClass>();
+		for (RoomModel mdl : getModels()) {
+			dataClasses.addAll(mdl.getDataClasses());
+			enumClasses.addAll(mdl.getEnumerationTypes());
+			
+			for (GeneralProtocolClass gpc : mdl.getProtocolClasses()) {
+				if (gpc instanceof ProtocolClass)
+					protocolClasses.add((ProtocolClass) gpc);
 			}
+			
+			actorClasses.addAll(mdl.getActorClasses());
+			subSystemClasses.addAll(mdl.getSubSystemClasses());
 		}
-		else {
-			// first we collect actor classes
-			HashSet<ActorClass> actorClasses = new HashSet<ActorClass>();
-			for (SubSystemInstance ci : getSubSystemInstances()) {
-				TreeIterator<EObject> it = ci.eAllContents();
-				while (it.hasNext()) {
-					EObject obj = it.next();
-					if (obj instanceof ActorInstance) {
-						ActorClass ac = ((ActorInstance)obj).getActorClass();
-						actorClasses.add(ac);
-					}
-					else if (obj instanceof ActorInterfaceInstance) {
-						ActorInterfaceInstance aii = (ActorInterfaceInstance) obj;
-						actorClasses.add(aii.getActorClass());
-						for (OptionalActorInstance oai : aii.getOptionalInstances()) {
-							actorClasses.add(oai.getActorClass());
-						}
-					}
-				}
-			}
-			for (OptionalActorInstance oai: getOptionalInstances()) {
-				actorClasses.add(oai.getActorClass());
-			}
-			
-			HashSet<DataClass> dataClasses = new HashSet<DataClass>();
-			HashSet<EnumerationType> enumClasses = new HashSet<EnumerationType>();
-			HashSet<ProtocolClass> protocolClasses = new HashSet<ProtocolClass>();
-			HashSet<RoomModel> models = new HashSet<RoomModel>();
-			
-			crossReferencer.getReferencedClassesAndModels(dataClasses, enumClasses, protocolClasses,
-					actorClasses, models);
-			
-			usedDataClasses = new BasicEList<DataClass>(dataClasses);
-			usedEnumClasses = new BasicEList<EnumerationType>(enumClasses);
-			usedProtocolClasses = new BasicEList<ProtocolClass>(protocolClasses);
-			usedActorClasses = new BasicEList<ActorClass>(actorClasses);
-			usedRoomModels = new BasicEList<RoomModel>(models);
-		}
-		
-		RoomClassComparator rcComp = new RoomClassComparator();
-		RoomModelComparator mdlComp = new RoomModelComparator();
-		Collections.sort(usedDataClasses, rcComp);
-		Collections.sort(usedEnumClasses, rcComp);
-		Collections.sort(usedProtocolClasses, rcComp);
-		Collections.sort(usedActorClasses, rcComp);
-		Collections.sort(usedRoomModels, mdlComp);
 	}
 
 } //RootImpl

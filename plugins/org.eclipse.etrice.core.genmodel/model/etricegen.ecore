@@ -20,6 +20,9 @@
     <eOperations name="getExpandedActorClass" eType="#//ExpandedActorClass">
       <eParameters name="ai" eType="#//ActorInstance"/>
     </eOperations>
+    <eOperations name="getExpandedActorClass" eType="#//ExpandedActorClass">
+      <eParameters name="ac" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ActorClass"/>
+    </eOperations>
     <eOperations name="getInstance" eType="#//StructureInstance">
       <eParameters name="path" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
@@ -37,19 +40,21 @@
         derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="models" upperBound="-1"
         eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//RoomModel"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="importedModels" upperBound="-1"
+        eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//RoomModel"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="xpActorClasses" upperBound="-1"
         eType="#//ExpandedActorClass" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="usedDataClasses" upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dataClasses" upperBound="-1"
         eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//DataClass"
         volatile="true" transient="true" derived="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="usedProtocolClasses" upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="protocolClasses" upperBound="-1"
         eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ProtocolClass"
         volatile="true" transient="true" derived="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="usedActorClasses" upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="actorClasses" upperBound="-1"
         eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ActorClass"
         volatile="true" transient="true" derived="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="usedRoomModels" upperBound="-1"
-        eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//RoomModel"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="enumClasses" upperBound="-1"
+        eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//EnumerationType"
         volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="subSystemClasses" upperBound="-1"
         eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//SubSystemClass"
@@ -60,9 +65,6 @@
         eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ActorClass"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="wiredInstances" upperBound="-1"
         eType="#//WiredStructureClass" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="usedEnumClasses" upperBound="-1"
-        eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//EnumerationType"
-        volatile="true" transient="true" derived="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="InstanceBase" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

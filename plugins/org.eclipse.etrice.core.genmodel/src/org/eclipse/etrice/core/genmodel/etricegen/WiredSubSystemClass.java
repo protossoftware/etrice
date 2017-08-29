@@ -20,10 +20,10 @@ import org.eclipse.etrice.core.room.SubSystemClass;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.WiredSubSystemClass#getSubSystemClass <em>Sub System Class</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage#getWiredSubSystemClass()
  * @model

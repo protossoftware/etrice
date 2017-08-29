@@ -31,7 +31,7 @@ class EnumerationTypeGen {
 	@Inject extension TypeHelpers
 	
 	def doGenerate(Root root) {
-		for (et: root.usedEnumClasses) {
+		for (et: root.enumClasses) {
 			val path = et.generationTargetPath+et.getPath
 			val infopath = et.generationInfoPath+et.getPath
 			var file = et.getCHeaderFileName

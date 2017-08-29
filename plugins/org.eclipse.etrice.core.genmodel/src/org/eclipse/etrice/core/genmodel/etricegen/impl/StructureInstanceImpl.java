@@ -45,6 +45,7 @@ import org.eclipse.etrice.core.room.ActorClass;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.StructureInstanceImpl#getInstances <em>Instances</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.StructureInstanceImpl#getSaps <em>Saps</em>}</li>
@@ -55,7 +56,6 @@ import org.eclipse.etrice.core.room.ActorClass;
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.StructureInstanceImpl#getAllContainedInstances <em>All Contained Instances</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.StructureInstanceImpl#getOrderedIfItemInstances <em>Ordered If Item Instances</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

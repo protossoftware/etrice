@@ -330,19 +330,19 @@ RoomModel ContinuationTransitionTest {
 		}
 	}
 	
-	ActorClass TransitionChainWithData_Sub extends TransitionChainWithData_Base{
-		Structure { }
-		Behavior {
-			StateMachine {
-				Transition tr3: state3 -> cp cp0 {
-					triggers {
-						<in2: p0>
-					}
-				}
-				State state3
-			}
-		}
-	}
+//	ActorClass TransitionChainWithData_Sub extends TransitionChainWithData_Base{
+//		Structure { }
+//		Behavior {
+//			StateMachine {
+//				Transition tr3: state3 -> cp cp0 {
+//					triggers {
+//						<in2: p0>
+//					}
+//				}
+//				State state3
+//			}
+//		}
+//	}
 	
 	abstract ActorClass TransitionChainWithoutIfItem_Base {
 		Structure {

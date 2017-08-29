@@ -29,10 +29,10 @@ import org.eclipse.etrice.core.room.ActorClass;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.WiredActorClassImpl#getActorClass <em>Actor Class</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

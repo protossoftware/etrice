@@ -31,13 +31,13 @@ import org.eclipse.etrice.core.room.ActorClass;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.ActorInterfaceInstanceImpl#getActorClass <em>Actor Class</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.ActorInterfaceInstanceImpl#getProvidedServices <em>Provided Services</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.ActorInterfaceInstanceImpl#getOptionalInstances <em>Optional Instances</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.ActorInterfaceInstanceImpl#isArray <em>Array</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

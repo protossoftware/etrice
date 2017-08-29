@@ -30,6 +30,7 @@ import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.InstanceBaseImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.InstanceBaseImpl#getPath <em>Path</em>}</li>
@@ -37,7 +38,6 @@ import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance;
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.InstanceBaseImpl#getThreadId <em>Thread Id</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.InstanceBaseImpl#getNObjIDs <em>NObj IDs</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

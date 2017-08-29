@@ -40,7 +40,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 	@Inject ILogger logger
 	
 	def doGenerate(Root root) {
-		for (pc: root.usedProtocolClasses) {
+		for (pc: root.protocolClasses) {
 			val path = pc.generationTargetPath+pc.getPath
 			val infopath = pc.generationInfoPath+pc.getPath
 			var file = pc.getCHeaderFileName

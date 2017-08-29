@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 
@@ -444,20 +445,39 @@ public abstract class AbstractGenerator implements IDetailCodeTranslator {
 	 */
 	protected Root createGeneratorModel(boolean asLibrary, String genModelPath) {
 		// create instance and mapping for test instances
-		if(!new TestInstanceCreator(logger).createInstancesAndMapping(getResourceSet())){
+		List<Resource> testInstanceResources = new TestInstanceCreator(logger).createInstancesAndMapping(getResourceSet());
+		if (testInstanceResources==null) {
 			logger.logError("-- terminating", null);
 			return null;
 		}
 		
 		// create a list of ROOM models
-		List<RoomModel> rml = new ArrayList<RoomModel>();
+		HashSet<URI> mainModelURIs = modelLoader.getMainModelURIs();
+		List<RoomModel> mainModels = new ArrayList<RoomModel>();
+		List<RoomModel> importedModels = new ArrayList<RoomModel>();
 		for (Resource resource : getResourceSet().getResources()) {
-			for(EObject content : resource.getContents()){
-				if(content instanceof RoomModel)
-					rml.add((RoomModel) content);
+			boolean isMainModel = mainModelURIs.contains(resource.getURI());
+			for (EObject content : resource.getContents()){
+				if (content instanceof RoomModel) {
+					if (isMainModel) {
+						mainModels.add((RoomModel) content);
+					}
+					else {
+						importedModels.add((RoomModel) content);
+					}
+				}
 			}
 		}
-		if (rml.isEmpty()) {
+		if (!testInstanceResources.isEmpty()) {
+			for (Resource resource : testInstanceResources) {
+				for (EObject content : resource.getContents()){
+					if (content instanceof RoomModel) {
+						mainModels.add((RoomModel) content);
+					}
+				}
+			}
+		}
+		if (importedModels.isEmpty() && mainModels.isEmpty()) {
 			logger.logError("no ROOM models found", null);
 			logger.logError("-- terminating", null);
 			return null;
@@ -465,7 +485,7 @@ public abstract class AbstractGenerator implements IDetailCodeTranslator {
 		else {			
 			logger.logInfo("-- creating generator model");
 			GeneratorModelBuilder gmb = new GeneratorModelBuilder(logger, diagnostician);
-			Root gmRoot = gmb.createGeneratorModel(rml, asLibrary);
+			Root gmRoot = gmb.createGeneratorModel(mainModels, importedModels, asLibrary);
 			if (diagnostician.isFailed()) {
 				logger.logError("validation failed during build of generator model", null);
 				logger.logError("-- terminating", null);
@@ -567,12 +587,12 @@ public abstract class AbstractGenerator implements IDetailCodeTranslator {
 			translateDetailCodesOfTree(xpac.getStateMachine(), dct);
 		}
 		
-		for (DataClass dc : gmRoot.getUsedDataClasses()) {
+		for (DataClass dc : gmRoot.getDataClasses()) {
 			DetailCodeTranslator dct = new DetailCodeTranslator(dc, translationProvider, doTranslate);
 			translateDetailCodesOfTree(dc, dct);
 		}
 		
-		for (ProtocolClass pc : gmRoot.getUsedProtocolClasses()) {
+		for (ProtocolClass pc : gmRoot.getProtocolClasses()) {
 			if (pc.getConjugated()!=null) {
 				DetailCodeTranslator dct = new DetailCodeTranslator(pc.getConjugated(), translationProvider, doTranslate);
 				translateDetailCodesOfTree(pc.getConjugated(), dct);

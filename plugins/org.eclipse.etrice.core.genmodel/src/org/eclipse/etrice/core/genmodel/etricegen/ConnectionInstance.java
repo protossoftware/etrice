@@ -24,13 +24,13 @@ import org.eclipse.etrice.core.room.SPP;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.ConnectionInstance#getFromAI <em>From AI</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.ConnectionInstance#getFromSPP <em>From SPP</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.ConnectionInstance#getToSPP <em>To SPP</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.ConnectionInstance#getConnection <em>Connection</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage#getConnectionInstance()
  * @model

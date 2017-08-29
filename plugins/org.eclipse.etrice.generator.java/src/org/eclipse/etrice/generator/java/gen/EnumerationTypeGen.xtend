@@ -32,7 +32,7 @@ class EnumerationTypeGen {
 	@Inject extension FileSystemHelpers
 	
 	def doGenerate(Root root) {
-		for (et: root.usedEnumClasses.filter(cl|cl.isValidGenerationLocation)) {
+		for (et: root.enumClasses.filter(cl|cl.isValidGenerationLocation)) {
 			var path = et.generationTargetPath+et.getPath
 			var infopath = et.generationInfoPath+et.getPath
 			var file = et.getJavaFileName

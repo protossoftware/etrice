@@ -84,11 +84,11 @@ public class ProtocolClassGen extends GenericProtocolClassGenerator {
   private ILogger logger;
   
   public void doGenerate(final Root root) {
-    EList<ProtocolClass> _usedProtocolClasses = root.getUsedProtocolClasses();
+    EList<ProtocolClass> _protocolClasses = root.getProtocolClasses();
     final Function1<ProtocolClass, Boolean> _function = (ProtocolClass cl) -> {
       return Boolean.valueOf(this._fileSystemHelpers.isValidGenerationLocation(cl));
     };
-    Iterable<ProtocolClass> _filter = IterableExtensions.<ProtocolClass>filter(_usedProtocolClasses, _function);
+    Iterable<ProtocolClass> _filter = IterableExtensions.<ProtocolClass>filter(_protocolClasses, _function);
     for (final ProtocolClass pc : _filter) {
       {
         String _generationTargetPath = this._roomExtensions.getGenerationTargetPath(pc);

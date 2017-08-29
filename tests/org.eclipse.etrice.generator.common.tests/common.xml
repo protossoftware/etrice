@@ -4,16 +4,16 @@
 	<target name="testing" depends="copyModels">
 
 		<!-- add test here, testid==testSuiteFileName -->
-		<test testid="ActorCommunicationTest" models="${models.path}/ActorCommunicationTest.room ${models.path}/GenericPhysical.etphys" />
+		<test testid="ActorCommunicationTest" models="${models.path}/ActorCommunicationTest.room ${models.path}/GenericPhysical.etphys ${models.path}/TimingService.room" />
 		<test testid="ChoicePointTest" models="${models.path}/ChoicePointTest.room ${models.path}/GenericPhysical.etphys" />
 		<test testid="ChoicePointTestExtended" models="${models.path}/ChoicePointTestExtended.room ${models.path}/GenericPhysical.etphys" />
-		<test testid="DataDrivenTest" models="${models.path}/DataDrivenTest.room ${models.path}/GenericPhysical.etphys" />
+		<test testid="DataDrivenTest" models="${models.path}/DataDrivenTest.room ${models.path}/GenericPhysical.etphys ${models.path}/TimingService.room" />
 		<test testid="EnumTest" models="${models.path}/EnumTest.room ${models.path}/GenericPhysical.etphys" />
-		<test testid="CompileTests" models="${models.path}/CompileTests.room ${models.path}/GenericPhysical.etphys" />
+		<test testid="CompileTests" models="${models.path}/CompileTests.room ${models.path}/GenericPhysical.etphys ${models.path}/DetailExpressionTest.room ${models.path}/StatemachineInterfaceTest.room ${models.path}/StatemachineInterfaceInheritedTest.room ${models.path}/StatemachineInterfaceTest.room ${models.path}/ContinuationTransitionTest.room ${models.path}/TimingService.room" />
 		<test testid="HandlerTest" models="${models.path}/HandlerTest.room ${models.path}/GenericPhysical.etphys" />
 		<test testid="OperationInheritanceTest" models="${models.path}/OperationInheritanceTest.room ${models.path}/GenericPhysical.etphys" />
-		<test testid="PingPongThreadTest" models="${models.path}/PingPongThreadTest.etmap" />
-		<test testid="PingPongThreadReplPortTest" models="${models.path}/PingPongThreadReplPortTest.etmap" />
+		<test testid="PingPongThreadTest" models="${models.path}/PingPongThreadTest.etmap ${models.path}/PingPongThreadTest.room ${models.path}/TimingService.room" />
+		<test testid="PingPongThreadReplPortTest" models="${models.path}/PingPongThreadReplPortTest.etmap ${models.path}/PingPongThreadReplPortTest.room ${models.path}/TimingService.room" />
 
 
 		<echo>done with ${ant.project.name}</echo>
