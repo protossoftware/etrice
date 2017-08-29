@@ -30,6 +30,7 @@ import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.validation.Check;
 
 import com.google.common.collect.ArrayListMultimap;
@@ -146,12 +147,16 @@ public class FSMJavaValidator extends org.eclipse.etrice.core.fsm.validation.Abs
 						warning("Inconsistent indentation", dc, FSMPackage.Literals.DETAIL_CODE__LINES, lineNodes.indexOf(lineNode));
 				} else if(rule == grammar.getSTRINGRule()) {
 					isPlainStyle = true;
+					if(Strings.countLineBreaks(lineNode.getText()) > 0)
+						warning("multi line string, use smart string instead", dc, FSMPackage.Literals.DETAIL_CODE__LINES, lineNodes.indexOf(lineNode));
 				}
 			}
 		}
 		if(isPlainStyle) {
-			warning("old style line string", dc, null, PLAIN_STRING_DETAILCODE);
+			// TODO quickfix here does not work yet, see FSMQuickfixProvider
+//			warning("old style line string", dc, null, PLAIN_STRING_DETAILCODE);
 		}
+		
 	}
 	
 	@Check

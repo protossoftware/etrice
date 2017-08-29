@@ -4,7 +4,6 @@
 package org.eclipse.etrice.core.fsm.ui.quickfix
 
 import com.google.inject.Inject
-import org.eclipse.etrice.core.common.converter.CC_StringConverter
 import org.eclipse.etrice.core.fsm.fSM.DetailCode
 import org.eclipse.etrice.core.fsm.validation.FSMJavaValidator
 import org.eclipse.xtext.formatting.IWhitespaceInformationProvider
@@ -13,6 +12,7 @@ import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider
 import org.eclipse.xtext.ui.editor.quickfix.Fix
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor
 import org.eclipse.xtext.validation.Issue
+import org.eclipse.etrice.core.common.converter.BaseConverterService
 
 /**
  * Custom quickfixes.
@@ -22,23 +22,28 @@ import org.eclipse.xtext.validation.Issue
 class FSMQuickfixProvider extends DefaultQuickfixProvider {
 
 	@Inject
+	BaseConverterService converterService
+
+	@Inject
 	IWhitespaceInformationProvider whitespaceProvider;
 
 	@Fix(FSMJavaValidator.PLAIN_STRING_DETAILCODE)
 	def void fixMultiLineDetailCode(Issue issue, IssueResolutionAcceptor acceptor){		
 		acceptor.accept(issue, "Convert to smart string", "", "correction_change.gif", [ element, context |
-			val dc = element as DetailCode			
-			val ccString =  dc.lines.join(whitespaceProvider.getLineSeparatorInformation(dc.eResource.URI).lineSeparator)
-			
-			// xtext bug: serializer freezes (manual serialization via ISerializer does not work either)
-//			dc.eContainer.eSet(dc.eContainmentFeature, FSMFactory.eINSTANCE.createDetailCode => [
+			element as DetailCode => [
+				val ccString = lines.join(whitespaceProvider.getLineSeparatorInformation(eResource.URI).lineSeparator)
+				
+				// xtext bug: serializer freezes in many situations (manual serialization via ISerializer does not work either)
+				// semantic change can trigger formatting, activate in RoomUiModule (https://www.eclipse.org/forums/index.php/t/1067512/)
+//				used = false
+//				lines.clear
 //				lines += ccString
-//			])
 			
-			// workaround
-			NodeModelUtils.findActualNodeFor(dc) => [
-				context.xtextDocument.replace(offset, length, CC_StringConverter.addDelim(ccString))
-			]
+				// workaround, TODO do formatting manually
+				NodeModelUtils.findActualNodeFor(it) => [
+					context.xtextDocument.replace(offset, length, converterService.CC_StringConverter.addDelim(ccString))
+				]
+			]			
 		])
 	}
 	

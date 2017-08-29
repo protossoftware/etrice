@@ -39,7 +39,7 @@ class FSMFormatter extends BaseFormatter {
 	}
 	
 	protected def prependDefaultNewLines(EObject it, extension IFormattableDocument document) {
-		if(previousHiddenRegion.lineCount > 2) prepend[newLines = 2] else prepend[newLine]
+		if(previousHiddenRegion !== null && previousHiddenRegion.lineCount > 2) prepend[newLines = 2] else prepend[newLine]
 	}
 	
 	protected def prependDefaultNewLines(ISemanticRegion it, extension IFormattableDocument document) {

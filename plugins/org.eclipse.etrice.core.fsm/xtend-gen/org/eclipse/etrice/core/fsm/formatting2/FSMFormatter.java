@@ -67,10 +67,7 @@ public class FSMFormatter extends BaseFormatter {
   
   protected EObject prependDefaultNewLines(final EObject it, @Extension final IFormattableDocument document) {
     EObject _xifexpression = null;
-    IHiddenRegion _previousHiddenRegion = this.textRegionExtensions.previousHiddenRegion(it);
-    int _lineCount = _previousHiddenRegion.getLineCount();
-    boolean _greaterThan = (_lineCount > 2);
-    if (_greaterThan) {
+    if (((this.textRegionExtensions.previousHiddenRegion(it) != null) && (this.textRegionExtensions.previousHiddenRegion(it).getLineCount() > 2))) {
       final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it_1) -> {
         it_1.setNewLines(2);
       };
