@@ -674,9 +674,9 @@
 <h3><a href="#dataclass" name="dataclass"></a>DataClass</h3>
 <p>A DataClass is a composition of Attributes</p>
 <p>Intended to model a type that primarily consists of data, which is usually grouped together in some manner. DataClasses roughly translate to Java classes without interaction or C <em>struct</em>s.</p>
-<pre><code class="room		">DataClass TCPConnectionData {
-	Attribute IPAddr: string
-	Attribute TcpPort: int32
+<pre><code class="room customHighlighted"><span class="keyword">DataClass</span> TCPConnectionData {
+	<span class="keyword">Attribute</span> IPAddr: string
+	<span class="keyword">Attribute</span> TcpPort: int32
 }
 </code></pre>
 <table style="vertical-align: middle;" class="table">
@@ -722,9 +722,9 @@
 	<span class="keyword">Attribute</span> attribute2: SimpleDataClass
 	<span class="keyword">Attribute</span> attribute3: voidType <span class="keyword">ref</span>
 	
-	<span class="keyword">Operation</span> operation1(param1: uint32, param2: uint16): boolean {
-		<span class="string">"return true;"</span>
-	}
+	<span class="keyword">Operation</span> operation1(param1: uint32, param2: uint16): boolean <span class="string">'''
+		return true;
+	'''</span>
 }
 </code></pre>
 <hr>
@@ -955,16 +955,16 @@
 
 <span class="keyword">ActorClass</span> ActorClassWithExternalType{
 	<span class="keyword">Structure</span> {
-		<span class="keyword">usercode1</span> {
-			<span class="string">"// #include &lt;___.h&gt; /* User includes here*/"</span>
-		}
+		<span class="keyword">usercode1</span> <span class="string">'''
+			// #include &lt;___.h&gt; /* User includes here*/
+		'''</span>
 		<span class="keyword">Attribute</span> someHandle : someStructType <span class="keyword">ref</span> <span class="comment">// needs include
 </span>	}
 	<span class="keyword">Behavior</span> {
-		<span class="keyword">Operation</span> operation1(param1: charPtr) {
-			<span class="comment">// external calls or casts may need includes
-</span>			<span class="string">"write(someHandle, param1);"</span>
-		}
+		<span class="keyword">Operation</span> operation1(param1: charPtr) <span class="string">'''
+			// external calls or casts may need includes
+			write(someHandle, param1);
+		'''</span>
 	}
 }
 </code></pre>
@@ -1020,9 +1020,9 @@
 		<span class="keyword">Attribute</span> attribute1 : uint32
 	}
 	<span class="keyword">Behavior</span> {
-		<span class="keyword">Operation</span> operation1(){
-			<span class="string">"return;"</span>
-		}
+		<span class="keyword">Operation</span> operation1() <span class="string">'''
+			return;
+		'''</span>
 	}
 }
 
@@ -1236,9 +1236,9 @@
 <span class="keyword">DataClass</span> DataClassWithOperation {
 	<span class="keyword">Attribute</span> attribute1 : uint32
 	
-	<span class="keyword">Operation</span> operation1(param1: uint32, param2: int32): boolean {
-		<span class="string">"return attribute1 &gt; (param1 - param2);"</span>
-	}
+	<span class="keyword">Operation</span> operation1(param1: uint32, param2: int32): boolean <span class="string">'''
+		return attribute1 &gt; (param1 - param2);
+	'''</span>
 }
 
 <span class="keyword">ActorClass</span> ActorClassWithOperation {
@@ -1246,24 +1246,24 @@
 		<span class="keyword">Attribute</span> attribute1 : uint32
 	}
 	<span class="keyword">Behavior</span> {
-		<span class="keyword">Operation</span> operation1(param1: uint32, param2: int32): boolean {
-			<span class="string">"return attribute1 &gt; (param1 - param2);"</span>
-		}
+		<span class="keyword">Operation</span> operation1(param1: uint32, param2: int32): boolean <span class="string">'''
+			return attribute1 &gt; (param1 - param2);
+		'''</span>
 	}
 }
 
 <span class="keyword">ActorClass</span> ActorClassWithOperation2 {
 	<span class="keyword">Structure</span> {
-		<span class="keyword">usercode1</span> {
-			<span class="string">"// #include &lt;___.h&gt; /* User includes here*/"</span>
-		}
+		<span class="keyword">usercode1</span> <span class="string">'''
+			// #include &lt;___.h&gt; /* User includes here */
+		'''</span>
 		<span class="keyword">Attribute</span> someHandle : voidType <span class="keyword">ref</span>
 	}
 	<span class="keyword">Behavior</span> {
-		<span class="keyword">Operation</span> operation1(param1: charPtr) {
-			<span class="comment">// external calls or casts may need includes
-</span>			<span class="string">"write(someHandle, param1);"</span>
-		}
+		<span class="keyword">Operation</span> operation1(param1: charPtr) <span class="string">'''
+			// external calls or casts may need includes
+			write(someHandle, param1);
+		'''</span>
 	}
 }
 </code></pre>

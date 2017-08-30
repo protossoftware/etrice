@@ -1,4 +1,4 @@
-FeaturizerModel eTriceROOMLanguage 
+FeaturizerModel eTriceROOMLanguage
 	imports "etrice.featurizer"
 
 
@@ -107,7 +107,7 @@ Feature Inheritance
 		StateMachine <==> non-accessible implicit late refinement
 		UserCode <==> non-accessible implicit late refinement
 	'''
-	example '''
+	example ¦¦¦
 		```room
 		ActorClass ActorSubClass extends ActorBaseClass {
 			// inherits all elements from super type hierarchy
@@ -121,9 +121,9 @@ Feature Inheritance
 				Attribute attribute1 : uint32
 			}
 			Behavior {
-				Operation operation1(){
-					"return;"
-				}
+				Operation operation1() '''
+					return;
+				'''
 			}
 		}
 		
@@ -145,7 +145,7 @@ Feature Inheritance
 			Attribute attribute1 : uint32
 		}
 		```
-		'''
+		¦¦¦
 	prototype	
 ;
 
@@ -352,10 +352,8 @@ Feature ActorClass
 		```
 	'''
 	
-	example '''
-		
-	'''
-	help '''
+	example ''''''
+	help ¦¦¦
 		```room
 		// prefixes: abstract and (eventdriven, datadriven, async, sync)
 		ActorClass ActorName ["An eventdriven ActorClass by default"] {
@@ -364,9 +362,9 @@ Feature ActorClass
 				SPP spp1 ...
 			}
 			Structure ["Documentation"] {
-				usercode1 { "" }
-				usercode2 { "" }
-				usercode3 { "" } 
+				usercode1 ''' '''
+				usercode2 ''' '''
+				usercode3 ''' '''
 				external Port port1
 				Port internalPort2 ...
 				ActorRef ...
@@ -377,14 +375,14 @@ Feature ActorClass
 				LayerConnection ...
 			}
 			Behavior ["Documentation"] {
-				ctor { /* constructor */ }
-				dtor { /* destructor */ }
+				ctor ''' /* constructor */ '''
+				dtor ''' /* destructor */ '''
 				Operation ...
 				StateMachine ...
 			}
 		}
 		```
-	'''
+	¦¦¦
 	
 	contains ExecutionType
 	contains ActorRef
@@ -748,13 +746,13 @@ Feature ProtocolClass
 		}
 		```
 	'''
-	help '''
+	help ¦¦¦
 		```room
 		// prefixes: (eventdriven, datadriven, sync)
 		ProtocolClass ProtocolName ["An eventdriven ProtocolClass by default"] {
-			usercode1 { "" }
-			usercode2 { "" }
-			usercode3 { "" } 
+			usercode1 ''' '''
+			usercode2 ''' '''
+			usercode3 ''' '''
 			incoming {
 				Message messageName()
 				Message messageName(data: int32)
@@ -763,7 +761,7 @@ Feature ProtocolClass
 				Message ...
 			}
 			regular PortClass {
-				usercode1 { "" }
+				usercode1 ''' '''
 				Attribute ...
 				Operation ...
 			}
@@ -776,7 +774,7 @@ Feature ProtocolClass
 			// inherits all elements from super class
 		}
 		```
-	'''
+	¦¦¦
 	contains CommunicationType
 	contains Attribute
 	contains Operation
@@ -865,14 +863,14 @@ Feature DataClass
 	text '''
 		Intended to model a type that primarily consists of data, which is usually grouped together in some manner. DataClasses roughly translate to Java classes without interaction or C <em>struct</em>s.
 		
-		```room		
+		```room
 		DataClass TCPConnectionData {
 			Attribute IPAddr: string
 			Attribute TcpPort: int32
 		}
 		```
 	'''
-	example '''
+	example ¦¦¦
 		```room
 		DataClass SimpleDataClass {
 			Attribute attribute1: uint16
@@ -884,18 +882,18 @@ Feature DataClass
 			Attribute attribute2: SimpleDataClass
 			Attribute attribute3: voidType ref
 			
-			Operation operation1(param1: uint32, param2: uint16): boolean {
-				"return true;"
-			}
+			Operation operation1(param1: uint32, param2: uint16): boolean '''
+				return true;
+			'''
 		}
 		```
-	'''
-	help '''
+	¦¦¦
+	help ¦¦¦
 		```room
 		DataClass DataClassName ["Documentation"] {
 			Attribute ... // nested DataClasses possible
-			ctor { /* constructor */ }
-			dtor { /* destructor */ }
+			ctor ''' /* constructor */ '''
+			dtor ''' /* destructor */ '''
 			Operation ...
 		}
 		
@@ -904,7 +902,7 @@ Feature DataClass
 			...
 		}
 		```
-	'''
+	¦¦¦
 	isA DataType
 	contains Attribute
 	contains Operation
@@ -914,27 +912,27 @@ Feature DataClass
 
 Feature ExternalType 
 	description '''An ExternalType is used to make an target language type accessible in ROOM'''
-	example '''
+	example ¦¦¦
 		```room
 		// Include is needed when used (e.g. in ActorClassWithExternalType)
 		ExternalType someStructType -> "struct FILE_HANDLE"
 		
 		ActorClass ActorClassWithExternalType{
 			Structure {
-				usercode1 {
-					"// #include <___.h> /* User includes here*/"
-				}
+				usercode1 '''
+					// #include <___.h> /* User includes here*/
+				'''
 				Attribute someHandle : someStructType ref // needs include
 			}
 			Behavior {
-				Operation operation1(param1: charPtr) {
+				Operation operation1(param1: charPtr) '''
 					// external calls or casts may need includes
-					"write(someHandle, param1);"
-				}
+					write(someHandle, param1);
+				'''
 			}
 		}
 		```
-	'''
+	¦¦¦
 	help '''
 		```room
 		ExternalType voidType -> "void" default "NULL"
@@ -992,9 +990,9 @@ Feature Attribute
 	'''
 	help '''
 		```room
-		Attribute attributeName: boolean				["An boolean attribute"]
-		Attribute attributeName[8]: int32 = "0"			["An array attribute"]
-		Attribute attributeName: voidType ref = "NULL"	["An external type attribute as reference"]
+		Attribute attributeName: boolean                ["An boolean attribute"]
+		Attribute attributeName[8]: int32 = "0"         ["An array attribute"]
+		Attribute attributeName: voidType ref = "NULL"  ["An external type attribute as reference"]
 		```
 	'''
 	isOfType DataType
@@ -1017,16 +1015,16 @@ Feature Operation
 		- 'override' keyword, replaces the logic of the inherited operation having the same signature
 		
 	'''
-	example '''
+	example ¦¦¦
 		```room
 		import room.basic.types.* from "../../../org.eclipse.etrice.modellib.c/model/Types.room"
 		
 		DataClass DataClassWithOperation {
 			Attribute attribute1 : uint32
 			
-			Operation operation1(param1: uint32, param2: int32): boolean {
-				"return attribute1 > (param1 - param2);"
-			}
+			Operation operation1(param1: uint32, param2: int32): boolean '''
+				return attribute1 > (param1 - param2);
+			'''
 		}
 		
 		ActorClass ActorClassWithOperation {
@@ -1034,45 +1032,45 @@ Feature Operation
 				Attribute attribute1 : uint32
 			}
 			Behavior {
-				Operation operation1(param1: uint32, param2: int32): boolean {
-					"return attribute1 > (param1 - param2);"
-				}
+				Operation operation1(param1: uint32, param2: int32): boolean '''
+					return attribute1 > (param1 - param2);
+				'''
 			}
 		}
 		
 		ActorClass ActorClassWithOperation2 {
 			Structure {
-				usercode1 {
-					"// #include <___.h> /* User includes here*/"
-				}
+				usercode1 '''
+					// #include <___.h> /* User includes here */
+				'''
 				Attribute someHandle : voidType ref
 			}
 			Behavior {
-				Operation operation1(param1: charPtr) {
+				Operation operation1(param1: charPtr) '''
 					// external calls or casts may need includes
-					"write(someHandle, param1);"
-				}
+					write(someHandle, param1);
+				'''
 			}
 		}
 		```
-	'''
-	help '''
+	¦¦¦
+	help ¦¦¦
 		```room
-		Operation operationName() ["A void operation"] {
-			"target code here;"
-			"escaping required and don't forget the \";\" at line end"
-		}
+		Operation operationName() ["A void operation"] '''
+			user code here;
+			// don't forget the ';' at line end 
+		'''
 
 		Operation operationName(param1: int16, param2: int32) : boolean
-			["Operations can have multiple parameters and one return type"] {
-			"return param1 == param2;"
-		}
+			["Operations can have multiple parameters and one return type"] '''
+			return param1 == param2;
+		'''
 
 		// 'override' replaces implementation of overriding operation,
 		// becomes effective in entire inheritance hierarchy
-		override Operation operationName(param: int32) : boolean {""}
+		override Operation operationName(param: int32) : boolean ''' '''
 		```
-	'''
+	¦¦¦
 	uses DataType
 	property returnType values { "DataType" }
 	property arguments values { "name : DataType" }

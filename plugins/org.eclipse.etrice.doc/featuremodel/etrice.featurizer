@@ -1,7 +1,7 @@
 /*
  * Root model   
  */  
-FeaturizerModel eTrice
+FeaturizerModel eTrice 
 	imports "etrice.roomlanguage.featurizer", "etrice.modeleditors.featurizer", "etrice.codegenerators.featurizer"
 	 
 	// Generator settings 

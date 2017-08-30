@@ -297,7 +297,6 @@ An ActorClass consists of three main parts:
 **Example**:
 
 
-
 ---
 
 
@@ -826,7 +825,7 @@ A DataClass is a composition of Attributes
 
 Intended to model a type that primarily consists of data, which is usually grouped together in some manner. DataClasses roughly translate to Java classes without interaction or C <em>struct</em>s.
 
-```room		
+```room
 DataClass TCPConnectionData {
 	Attribute IPAddr: string
 	Attribute TcpPort: int32
@@ -886,9 +885,9 @@ DataClass DataClassExample {
 	Attribute attribute2: SimpleDataClass
 	Attribute attribute3: voidType ref
 	
-	Operation operation1(param1: uint32, param2: uint16): boolean {
-		"return true;"
-	}
+	Operation operation1(param1: uint32, param2: uint16): boolean '''
+		return true;
+	'''
 }
 ```
 
@@ -1185,16 +1184,16 @@ ExternalType someStructType -> "struct FILE_HANDLE"
 
 ActorClass ActorClassWithExternalType{
 	Structure {
-		usercode1 {
-			"// #include <___.h> /* User includes here*/"
-		}
+		usercode1 '''
+			// #include <___.h> /* User includes here*/
+		'''
 		Attribute someHandle : someStructType ref // needs include
 	}
 	Behavior {
-		Operation operation1(param1: charPtr) {
+		Operation operation1(param1: charPtr) '''
 			// external calls or casts may need includes
-			"write(someHandle, param1);"
-		}
+			write(someHandle, param1);
+		'''
 	}
 }
 ```
@@ -1280,9 +1279,9 @@ ActorClass ActorBaseClass {
 		Attribute attribute1 : uint32
 	}
 	Behavior {
-		Operation operation1(){
-			"return;"
-		}
+		Operation operation1() '''
+			return;
+		'''
 	}
 }
 
@@ -1545,9 +1544,9 @@ import room.basic.types.* from "../../../org.eclipse.etrice.modellib.c/model/Typ
 DataClass DataClassWithOperation {
 	Attribute attribute1 : uint32
 	
-	Operation operation1(param1: uint32, param2: int32): boolean {
-		"return attribute1 > (param1 - param2);"
-	}
+	Operation operation1(param1: uint32, param2: int32): boolean '''
+		return attribute1 > (param1 - param2);
+	'''
 }
 
 ActorClass ActorClassWithOperation {
@@ -1555,24 +1554,24 @@ ActorClass ActorClassWithOperation {
 		Attribute attribute1 : uint32
 	}
 	Behavior {
-		Operation operation1(param1: uint32, param2: int32): boolean {
-			"return attribute1 > (param1 - param2);"
-		}
+		Operation operation1(param1: uint32, param2: int32): boolean '''
+			return attribute1 > (param1 - param2);
+		'''
 	}
 }
 
 ActorClass ActorClassWithOperation2 {
 	Structure {
-		usercode1 {
-			"// #include <___.h> /* User includes here*/"
-		}
+		usercode1 '''
+			// #include <___.h> /* User includes here */
+		'''
 		Attribute someHandle : voidType ref
 	}
 	Behavior {
-		Operation operation1(param1: charPtr) {
+		Operation operation1(param1: charPtr) '''
 			// external calls or casts may need includes
-			"write(someHandle, param1);"
-		}
+			write(someHandle, param1);
+		'''
 	}
 }
 ```
@@ -2782,6 +2781,7 @@ Shows the structure of the current opened model in the textual editor. Select th
 
 
 
+
 <table style="vertical-align: middle;" class="table">
 <thead>
 <tr>
@@ -3109,14 +3109,20 @@ The MSCLogging is activated by default, but can be set manually in the [Generati
 
 
 
-[TemplateFeature]: #templatefeature
-[Feature123]: #feature123
 [CCodeGenerator]: #ccodegenerator
 [JavaCodeGenerator]: #javacodegenerator
 [CPPCodeGenerator]: #cppcodegenerator
 [GenerationOptions]: #generationoptions
 [MSCLogging]: #msclogging
 [DataLogging]: #datalogging
+[TextualROOMEditor]: #textualroomeditor
+[OutlineView]: #outlineview
+[GraphicalBehaviorEditor]: #graphicalbehavioreditor
+[GraphicalStructureEditor]: #graphicalstructureeditor
+[StructureEditorPalette]: #structureeditorpalette
+[ActorRefPropertyDialog]: #actorrefpropertydialog
+[PortPropertyDialog]: #portpropertydialog
+[SPPPropertyDialog]: #spppropertydialog
 [AnnotationType]: #annotationtype
 [Annotation]: #annotation
 [Inheritance]: #inheritance
@@ -3150,14 +3156,3 @@ The MSCLogging is activated by default, but can be set manually in the [Generati
 [SAP]: #sap
 [ServiceImplementation]: #serviceimplementation
 [SPP]: #spp
-[TextualROOMEditor]: #textualroomeditor
-[OutlineView]: #outlineview
-[GraphicalBehaviorEditor]: #graphicalbehavioreditor
-[GraphicalStructureEditor]: #graphicalstructureeditor
-[StructureEditorPalette]: #structureeditorpalette
-[ActorRefPropertyDialog]: #actorrefpropertydialog
-[PortPropertyDialog]: #portpropertydialog
-[SPPPropertyDialog]: #spppropertydialog
-[SynatxColoring]: #synatxcoloring
-[MarkdownCheatsheet]: #markdowncheatsheet
-[MarkdownExample]: #markdownexample

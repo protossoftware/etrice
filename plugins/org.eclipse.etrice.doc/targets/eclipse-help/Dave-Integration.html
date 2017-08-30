@@ -96,9 +96,9 @@
 <p>Open <em>BlinkyTutorial.room</em> and create a new Actor called AHWAbstraction by adding the following text:</p>
 <pre><code class="room customHighlighted"><span class="keyword">ActorClass</span> AHWAbstraction {
     <span class="keyword">Structure</span> {
-        <span class="keyword">usercode1</span> {
-            <span class="string">"#include \"</span>Dave.h\<span class="string">""</span>
-        }
+        <span class="keyword">usercode1</span> <span class="string">'''
+            #include "Dave.h"
+        '''</span>
     }
 }
 </code></pre>
@@ -130,9 +130,9 @@
         <span class="keyword">Port</span> LED1: POnOff
     }
     <span class="keyword">Structure</span> {
-        <span class="keyword">usercode1</span> {
-            <span class="string">"#include \"</span>Dave.h\<span class="string">""</span>
-        }
+        <span class="keyword">usercode1</span> <span class="string">'''
+            #include "Dave.h"
+        '''</span>
         <span class="keyword">external</span> <span class="keyword">Port</span> LED1
     }
     <span class="keyword">Behavior</span> {
@@ -143,17 +143,17 @@
                 <span class="keyword">triggers</span> {
                     &lt;on: LED1&gt;
                 }
-                <span class="keyword">action</span> {
-                    <span class="string">"DIGITAL_IO_SetOutputHigh(&amp;LED1_P5_9);"</span>
-                }
+                <span class="keyword">action</span> <span class="string">'''
+                    DIGITAL_IO_SetOutputHigh(&amp;LED1_P5_9);
+                '''</span>
             }
             <span class="keyword">Transition</span> tr1: state0 -&gt; state0 {
                 <span class="keyword">triggers</span> {
                     &lt;off: LED1&gt;
                 }
-                <span class="keyword">action</span> {
-                    <span class="string">"DIGITAL_IO_SetOutputLow(&amp;LED1_P5_9);"</span>
-                }
+                <span class="keyword">action</span> <span class="string">'''
+                    DIGITAL_IO_SetOutputLow(&amp;LED1_P5_9);
+                '''</span>
             }
         }
     }
@@ -186,25 +186,25 @@
             <span class="keyword">State</span> state0
             <span class="keyword">State</span> state1
             <span class="keyword">Transition</span> init: <span class="keyword">initial</span> -&gt; state0 {
-                <span class="keyword">action</span> {
-                    <span class="string">"timer.startTimer(300);"</span>
-                }
+                <span class="keyword">action</span> <span class="string">'''
+                    timer.startTimer(300);
+                '''</span>
             }
             <span class="keyword">Transition</span> tr0: state0 -&gt; state1 {
                 <span class="keyword">triggers</span> {
                     &lt;timeout: timer&gt;
                 }
-                <span class="keyword">action</span> {
-                    <span class="string">"out.on();"</span>
-                }
+                <span class="keyword">action</span> <span class="string">'''
+                    out.on();
+                '''</span>
             }
             <span class="keyword">Transition</span> tr1: state1 -&gt; state0 {
                 <span class="keyword">triggers</span> {
                     &lt;timeout: timer&gt;
                 }
-                <span class="keyword">action</span> {
-                    <span class="string">"out.off();"</span>
-                }
+                <span class="keyword">action</span> <span class="string">'''
+                    out.off();
+                '''</span>
             }
         }
     }
@@ -243,25 +243,25 @@
                 <span class="keyword">State</span> state0
                 <span class="keyword">State</span> state1
                 <span class="keyword">Transition</span> init: <span class="keyword">initial</span> -&gt; state0 {
-                    <span class="keyword">action</span> {
-                        <span class="string">"timer.startTimer(300);"</span>
-                    }
+                    <span class="keyword">action</span> <span class="string">'''
+                        timer.startTimer(300);
+                    '''</span>
                 }
                 <span class="keyword">Transition</span> tr0: state0 -&gt; state1 {
                     <span class="keyword">triggers</span> {
                         &lt;timeout: timer&gt;
                     }
-                    <span class="keyword">action</span> {
-                        <span class="string">"out.on();"</span>
-                    }
+                    <span class="keyword">action</span> <span class="string">'''
+                        out.on();
+                    '''</span>
                 }
                 <span class="keyword">Transition</span> tr1: state1 -&gt; state0 {
                     <span class="keyword">triggers</span> {
                         &lt;timeout: timer&gt;
                     }
-                    <span class="keyword">action</span> {
-                        <span class="string">"out.off();"</span>
-                    }
+                    <span class="keyword">action</span> <span class="string">'''
+                        out.off();
+                    '''</span>
                 }
             }
         }
@@ -272,9 +272,9 @@
             <span class="keyword">Port</span> LED1: POnOff
         }
         <span class="keyword">Structure</span> {
-            <span class="keyword">usercode1</span> {
-                <span class="string">"#include \"</span>Dave.h\<span class="string">""</span>
-            }
+            <span class="keyword">usercode1</span> <span class="string">'''
+                #include "Dave.h"
+            '''</span>
             <span class="keyword">external</span> <span class="keyword">Port</span> LED1
         }
         <span class="keyword">Behavior</span> {
@@ -285,17 +285,17 @@
                     <span class="keyword">triggers</span> {
                         &lt;on: LED1&gt;
                     }
-                    <span class="keyword">action</span> {
-                        <span class="string">"DIGITAL_IO_SetOutputHigh(&amp;LED1_P5_9);"</span>
-                    }
+                    <span class="keyword">action</span> <span class="string">'''
+                        DIGITAL_IO_SetOutputHigh(&amp;LED1_P5_9);
+                    '''</span>
                 }
                 <span class="keyword">Transition</span> tr1: state0 -&gt; state0 {
                     <span class="keyword">triggers</span> {
                         &lt;off: LED1&gt;
                     }
-                    <span class="keyword">action</span> {
-                        <span class="string">"DIGITAL_IO_SetOutputLow(&amp;LED1_P5_9);"</span>
-                    }
+                    <span class="keyword">action</span> <span class="string">'''
+                        DIGITAL_IO_SetOutputLow(&amp;LED1_P5_9);
+                    '''</span>
                 }
             }
         }
@@ -378,14 +378,14 @@
                 <span class="keyword">State</span> blinking {
                     <span class="keyword">subgraph</span> {
                         <span class="keyword">State</span> on {
-                            <span class="keyword">entry</span> {
-                                <span class="string">"out.on();"</span>
-                            }
+                            <span class="keyword">entry</span> <span class="string">'''
+                                out.on();
+                            '''</span>
                         }
                         <span class="keyword">State</span> off {
-                            <span class="keyword">entry</span> {
-                                <span class="string">"out.off();"</span>
-                            }
+                            <span class="keyword">entry</span> <span class="string">'''
+                                out.off();
+                            '''</span>
                         }
                         <span class="keyword">EntryPoint</span> tp0
                         <span class="keyword">Transition</span> tr0: on -&gt; off {
@@ -399,9 +399,9 @@
                             }
                         }
                         <span class="keyword">Transition</span> tr2: <span class="keyword">my</span> tp0 -&gt; on {
-                            <span class="keyword">action</span> {
-                                <span class="string">"timer.startTimer(300);"</span>
-                            }
+                            <span class="keyword">action</span> <span class="string">'''
+                                timer.startTimer(300);
+                            '''</span>
                         }
                     }
                 }
@@ -417,10 +417,10 @@
                     <span class="keyword">triggers</span> {
                         &lt;off: ctrl&gt;
                     }
-                    <span class="keyword">action</span> {
-                        <span class="string">"timer.kill();"</span>
-                        <span class="string">"out.off();"</span>
-                    }
+                    <span class="keyword">action</span> <span class="string">'''
+                        timer.kill();
+                        out.off();
+                    '''</span>
                 }
             }
         }
@@ -434,9 +434,9 @@
             <span class="keyword">conjugated</span> <span class="keyword">Port</span> BUTTON2: POnOff
         }
         <span class="keyword">Structure</span> {
-            <span class="keyword">usercode1</span> {
-                <span class="string">"#include \"</span>Dave.h\<span class="string">""</span>
-            }
+            <span class="keyword">usercode1</span> <span class="string">'''
+                #include "Dave.h"
+            '''</span>
             <span class="keyword">SAP</span> timer: PTimer
             <span class="keyword">external</span> <span class="keyword">Port</span> LED1
             <span class="keyword">external</span> <span class="keyword">Port</span> LED2
@@ -449,78 +449,77 @@
             <span class="keyword">StateMachine</span> {
                 <span class="keyword">State</span> state0
                 <span class="keyword">Transition</span> init: <span class="keyword">initial</span> -&gt; state0 {
-                    <span class="keyword">action</span> {
-                        <span class="string">"timer.startTimer(50);"</span>
-                    }
+                    <span class="keyword">action</span> <span class="string">'''
+                        timer.startTimer(50);
+                    '''</span>
                 }
                 <span class="keyword">Transition</span> tr0: state0 -&gt; state0 {
                     <span class="keyword">triggers</span> {
                         &lt;on: LED1&gt;
                     }
-                    <span class="keyword">action</span> {
-                        <span class="string">"DIGITAL_IO_SetOutputHigh(&amp;LED1_P5_9);"</span>
-                    }
+                    <span class="keyword">action</span> <span class="string">'''
+                        DIGITAL_IO_SetOutputHigh(&amp;LED1_P5_9);
+                    '''</span>
                 }
                 <span class="keyword">Transition</span> tr1: state0 -&gt; state0 {
                     <span class="keyword">triggers</span> {
                         &lt;off: LED1&gt;
                     }
-                    <span class="keyword">action</span> {
-                        <span class="string">"DIGITAL_IO_SetOutputLow(&amp;LED1_P5_9);"</span>
-                    }
+                    <span class="keyword">action</span> <span class="string">'''
+                        DIGITAL_IO_SetOutputLow(&amp;LED1_P5_9);
+                    '''</span>
                 }
                 <span class="keyword">Transition</span> tr2: state0 -&gt; state0 {
                     <span class="keyword">triggers</span> {
                         &lt;on: LED2&gt;
                     }
-                    <span class="keyword">action</span> {
-                        <span class="string">"DIGITAL_IO_SetOutputHigh(&amp;LED2_P5_8);"</span>
-                    }
+                    <span class="keyword">action</span> <span class="string">'''
+                        DIGITAL_IO_SetOutputHigh(&amp;LED2_P5_8);
+                    '''</span>
                 }
                 <span class="keyword">Transition</span> tr3: state0 -&gt; state0 {
                     <span class="keyword">triggers</span> {
                         &lt;off: LED2&gt;
                     }
-                    <span class="keyword">action</span> {
-                        <span class="string">"DIGITAL_IO_SetOutputLow(&amp;LED2_P5_8);"</span>
-                    }
+                    <span class="keyword">action</span> <span class="string">'''
+                        DIGITAL_IO_SetOutputLow(&amp;LED2_P5_8);
+                    '''</span>
                 }
                 <span class="keyword">Transition</span> tr4: state0 -&gt; state0 {
                     <span class="keyword">triggers</span> {
                         &lt;timeout: timer&gt;
                     }
-                    <span class="keyword">action</span> 
-                {
-                        <span class="string">"if (DIGITAL_IO_GetInput(&amp;BUTTON1_P15_13) == 0){"</span>
-                        <span class="string">"  if (b1Status == 0){"</span>
-                        <span class="string">"\t// input changed"</span>
-                        <span class="string">"\tb1Status = 1;"</span>
-                        <span class="string">"\tBUTTON1.on();"</span>
-                        <span class="string">"  }"</span>
-                        <span class="string">"}"</span>
-                        <span class="string">"else{"</span>
-                        <span class="string">"  if (b1Status == 1){"</span>
-                        <span class="string">"\t// input changed"</span>
-                        <span class="string">"\tb1Status = 0;"</span>
-                        <span class="string">"\tBUTTON1.off();"</span>
-                        <span class="string">"  }"</span>
-                        <span class="string">"}"</span>
-                        <span class="string">""</span>
-                        <span class="string">"if (DIGITAL_IO_GetInput(&amp;BUTTON2_P15_12) == 0){"</span>
-                        <span class="string">"  if (b2Status == 0){"</span>
-                        <span class="string">"\t// input changed"</span>
-                        <span class="string">"\tb2Status = 1;"</span>
-                        <span class="string">"\tBUTTON2.on();"</span>
-                        <span class="string">"  }"</span>
-                        <span class="string">"}"</span>
-                        <span class="string">"else{"</span>
-                        <span class="string">"  if (b2Status == 1){"</span>
-                        <span class="string">"\t// input changed"</span>
-                        <span class="string">"\tb2Status = 0;"</span>
-                        <span class="string">"\tBUTTON2.off();"</span>
-                        <span class="string">"  }"</span>
-                        <span class="string">"}"</span>
-                    }
+                    <span class="keyword">action</span> <span class="string">'''
+                        if (DIGITAL_IO_GetInput(&amp;BUTTON1_P15_13) == 0) {
+                            if (b1Status == 0) {
+                                // input changed
+                                b1Status = 1;
+                                BUTTON1.on();
+                            }
+                        }
+                        else {
+                            if (b1Status == 1) {
+                                // input changed
+                                b1Status = 0;
+                            	BUTTON1.off();
+                            }
+                        }
+                        
+                        if (DIGITAL_IO_GetInput(&amp;BUTTON2_P15_12) == 0) {
+                                if (b2Status == 0){
+                                // input changed
+                                b2Status = 1;
+                                BUTTON2.on();
+                            }
+                        }
+                        else {
+                            if (b2Status == 1) {
+                                // input changed
+                                b2Status = 0;
+                                BUTTON2.off();
+                            }
+                        }
+                    '''</span>
                 }
             }
         }
@@ -551,17 +550,17 @@
                     <span class="keyword">triggers</span> {
                         &lt;on: ctrl&gt;
                     }
-                    <span class="keyword">action</span> {
-                        <span class="string">"out.on();"</span>
-                    }
+                    <span class="keyword">action</span> <span class="string">'''
+                        out.on();
+                    '''</span>
                 }
                 <span class="keyword">Transition</span> tr1: on -&gt; off {
                     <span class="keyword">triggers</span> {
                         &lt;on: ctrl&gt;
                     }
-                    <span class="keyword">action</span> {
-                        <span class="string">"out.off();"</span>
-                    }
+                    <span class="keyword">action</span> <span class="string">'''
+                        out.off();
+                    '''</span>
                 }
             }
         }

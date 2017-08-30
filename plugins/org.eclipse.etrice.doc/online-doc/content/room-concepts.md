@@ -139,21 +139,21 @@ Example:
 ActorClass ActorClass4 {
 	Behavior {
 		// no arguments, no return value
-		Operation operation1(): void {
-			"UserCodeLine1"
-		}
+		Operation operation1(): void '''
+			user code
+		'''
 		// argument of primitive type, return value of primitive type
-		Operation operation2(Param1: int32, Param2: float64): uint16 {
-			"UserCodeLine1"
-		}
+		Operation operation2(Param1: int32, Param2: float64): uint16 '''
+			user code
+		'''
 		// arguments and return value by value
-		Operation operation3(Param1: int32, Param2: DataClass1): DataClass1 {
-			"UserCodeLine1"
-		}
+		Operation operation3(Param1: int32, Param2: DataClass1): DataClass1 '''
+			user code
+		'''
 		// arguments and return value by reference except for primitive types
-		Operation operation4(Param1: int32, Param2: DataClass1 ref): DataClass1 ref {
-			"UserCodeLine1"
-		}
+		Operation operation4(Param1: int32, Param2: DataClass1 ref): DataClass1 ref '''
+			user code
+		'''
 	}
 }
 ```
@@ -436,17 +436,17 @@ DataClass DataClass1 {
 	Attribute attribute2: float32  // attribute of another primitive type
 
 	// no arguments, no return value
-	Operation operation1(): void {
-		"UserCodeLine1"
-	}
+	Operation operation1(): void '''
+		user code
+	'''
 	// argument of primitive type, no return value
-	Operation operation2(Param1: int32): void {
-		"UserCodeLine1"
-	}
+	Operation operation2(Param1: int32): void '''
+		user code
+	'''
 	// argument of primitive type, return value of primitive type
-	Operation operation3(Param1: int32): float64 {
-		"UserCodeLine1"
-	}
+	Operation operation3(Param1: int32): float64 '''
+		user code
+	'''
 }
 ```
 Example: DataClass using other DataClasses:
@@ -457,13 +457,13 @@ DataClass DataClass2 {
 	Attribute attribute2: DataClass1 // attribute of DataClass
 
 	// arguments and return value by value
-	Operation operation1(Param1: int32, Param2: DataClass1): DataClass1 {
-		"UserCodeLine1"
-	}
+	Operation operation1(Param1: int32, Param2: DataClass1): DataClass1 '''
+		user code
+	'''
 	// arguments and return value by reference except for primitive types
-	Operation operation2(Param1: int32, Param2: DataClass1 ref): DataClass1 ref {
-		"UserCodeLine1"
-	}
+	Operation operation2(Param1: int32, Param2: DataClass1 ref): DataClass1 ref '''
+		user code
+	'''
 }
 ```
 
