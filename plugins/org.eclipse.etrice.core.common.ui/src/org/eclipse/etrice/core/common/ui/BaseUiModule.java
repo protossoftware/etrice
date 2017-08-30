@@ -17,7 +17,9 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
  * Use this class to register components to be used within the IDE.
  */
 public class BaseUiModule extends org.eclipse.etrice.core.common.ui.AbstractBaseUiModule {
+	
 	public BaseUiModule(AbstractUIPlugin plugin) {
 		super(plugin);
 	}
+	
 }

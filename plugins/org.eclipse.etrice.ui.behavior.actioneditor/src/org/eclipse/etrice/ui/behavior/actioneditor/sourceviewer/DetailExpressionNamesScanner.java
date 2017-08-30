@@ -16,7 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.etrice.ui.behavior.fsm.detailcode.IDetailExpressionProvider.ExpressionFeature;
+import org.eclipse.etrice.expressions.detailcode.IDetailExpressionProvider.ExpressionFeature;
 import org.eclipse.jface.text.TextAttribute;
 import org.eclipse.jface.text.rules.IRule;
 import org.eclipse.jface.text.rules.IToken;

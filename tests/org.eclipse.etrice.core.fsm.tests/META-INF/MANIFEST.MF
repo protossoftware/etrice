@@ -5,7 +5,8 @@ Bundle-Vendor: Eclipse eTrice
 Bundle-Version: 1.1.1.qualifier
 Bundle-SymbolicName: org.eclipse.etrice.core.fsm.tests; singleton:=true
 Bundle-ActivationPolicy: lazy
-Require-Bundle: org.eclipse.etrice.core.fsm,
+Require-Bundle: org.eclipse.etrice.core.common,
+ org.eclipse.etrice.core.fsm,
  org.eclipse.etrice.core.fsm.ui,
  org.eclipse.core.runtime,
  org.eclipse.xtext.junit4;bundle-version="2.6.0",

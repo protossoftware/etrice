@@ -12,10 +12,10 @@
 
 package org.eclipse.etrice.ui.behavior;
 
+import org.eclipse.etrice.ui.behavior.fsm.editor.AbstractFSMDiagramTypeProvider;
 import org.eclipse.etrice.ui.behavior.fsm.support.AbstractFSMProviderDispatcher;
 import org.eclipse.etrice.ui.behavior.support.ProviderDispatcher;
 import org.eclipse.etrice.ui.common.base.support.DiagramAccessBase;
-import org.eclipse.etrice.ui.behavior.fsm.editor.AbstractFSMDiagramTypeProvider;
 import org.eclipse.graphiti.tb.IToolBehaviorProvider;
 
 public class DiagramTypeProvider extends AbstractFSMDiagramTypeProvider {

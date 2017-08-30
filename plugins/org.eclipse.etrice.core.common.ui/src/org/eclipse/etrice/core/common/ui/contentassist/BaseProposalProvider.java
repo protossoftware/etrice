@@ -47,4 +47,5 @@ public class BaseProposalProvider extends org.eclipse.etrice.core.common.ui.cont
 		}
 		super.complete_TIME(model, ruleCall, context, acceptor);
 	}
+	
 }

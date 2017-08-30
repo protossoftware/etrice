@@ -13,7 +13,7 @@
 
 package org.eclipse.etrice.ui.behavior.fsm.actioneditor;
 
-import org.eclipse.etrice.ui.behavior.fsm.detailcode.IDetailExpressionProvider;
+import org.eclipse.etrice.expressions.detailcode.IDetailExpressionProvider;
 import org.eclipse.swt.widgets.Composite;
 
 /**

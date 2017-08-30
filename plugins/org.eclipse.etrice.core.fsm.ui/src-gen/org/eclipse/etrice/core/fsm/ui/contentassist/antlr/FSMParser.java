@@ -42,6 +42,7 @@ public class FSMParser extends AbstractContentAssistParser {
 					put(grammarAccess.getStateGraphAccess().getAlternatives_2(), "rule__StateGraph__Alternatives_2");
 					put(grammarAccess.getStateMachineAccess().getAlternatives_3(), "rule__StateMachine__Alternatives_3");
 					put(grammarAccess.getStateAccess().getAlternatives(), "rule__State__Alternatives");
+					put(grammarAccess.getDetailCodeAccess().getAlternatives(), "rule__DetailCode__Alternatives");
 					put(grammarAccess.getTrPointAccess().getAlternatives(), "rule__TrPoint__Alternatives");
 					put(grammarAccess.getTransitionBaseAccess().getAlternatives(), "rule__TransitionBase__Alternatives");
 					put(grammarAccess.getTransitionAccess().getAlternatives(), "rule__Transition__Alternatives");
@@ -84,7 +85,8 @@ public class FSMParser extends AbstractContentAssistParser {
 					put(grammarAccess.getRefinedStateAccess().getGroup_5(), "rule__RefinedState__Group_5__0");
 					put(grammarAccess.getRefinedStateAccess().getGroup_6(), "rule__RefinedState__Group_6__0");
 					put(grammarAccess.getRefinedStateAccess().getGroup_7(), "rule__RefinedState__Group_7__0");
-					put(grammarAccess.getDetailCodeAccess().getGroup(), "rule__DetailCode__Group__0");
+					put(grammarAccess.getDetailCodeAccess().getGroup_0(), "rule__DetailCode__Group_0__0");
+					put(grammarAccess.getDetailCodeAccess().getGroup_1(), "rule__DetailCode__Group_1__0");
 					put(grammarAccess.getTransitionPointAccess().getGroup(), "rule__TransitionPoint__Group__0");
 					put(grammarAccess.getEntryPointAccess().getGroup(), "rule__EntryPoint__Group__0");
 					put(grammarAccess.getExitPointAccess().getGroup(), "rule__ExitPoint__Group__0");
@@ -176,8 +178,9 @@ public class FSMParser extends AbstractContentAssistParser {
 					put(grammarAccess.getRefinedStateAccess().getExitCodeAssignment_5_1(), "rule__RefinedState__ExitCodeAssignment_5_1");
 					put(grammarAccess.getRefinedStateAccess().getDoCodeAssignment_6_1(), "rule__RefinedState__DoCodeAssignment_6_1");
 					put(grammarAccess.getRefinedStateAccess().getSubgraphAssignment_7_1(), "rule__RefinedState__SubgraphAssignment_7_1");
-					put(grammarAccess.getDetailCodeAccess().getUsedAssignment_1(), "rule__DetailCode__UsedAssignment_1");
-					put(grammarAccess.getDetailCodeAccess().getLinesAssignment_2(), "rule__DetailCode__LinesAssignment_2");
+					put(grammarAccess.getDetailCodeAccess().getLinesAssignment_0_1(), "rule__DetailCode__LinesAssignment_0_1");
+					put(grammarAccess.getDetailCodeAccess().getUsedAssignment_1_0(), "rule__DetailCode__UsedAssignment_1_0");
+					put(grammarAccess.getDetailCodeAccess().getLinesAssignment_1_1(), "rule__DetailCode__LinesAssignment_1_1");
 					put(grammarAccess.getTransitionPointAccess().getHandlerAssignment_0(), "rule__TransitionPoint__HandlerAssignment_0");
 					put(grammarAccess.getTransitionPointAccess().getNameAssignment_2(), "rule__TransitionPoint__NameAssignment_2");
 					put(grammarAccess.getEntryPointAccess().getNameAssignment_1(), "rule__EntryPoint__NameAssignment_1");

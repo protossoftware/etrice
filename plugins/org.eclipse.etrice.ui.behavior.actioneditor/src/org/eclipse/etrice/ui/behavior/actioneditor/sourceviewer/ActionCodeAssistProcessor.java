@@ -13,11 +13,10 @@
 
 package org.eclipse.etrice.ui.behavior.actioneditor.sourceviewer;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.eclipse.etrice.ui.behavior.fsm.detailcode.IDetailExpressionProvider;
-import org.eclipse.etrice.ui.behavior.fsm.detailcode.IDetailExpressionProvider.ExpressionFeature;
+import org.eclipse.etrice.core.ui.RoomUiActivator;
+import org.eclipse.etrice.expressions.detailcode.IDetailExpressionProvider;
+import org.eclipse.etrice.expressions.detailcode.IDetailExpressionProvider.ExpressionFeature;
+import org.eclipse.etrice.expressions.ui.contentassist.RoomExpressionProposals;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.contentassist.CompletionProposal;
@@ -28,6 +27,8 @@ import org.eclipse.jface.text.contentassist.IContextInformationValidator;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.lib.Pair;
+
+import com.google.inject.Inject;
 
 /**
  * An Action Editor specific content assist processor. The processor lexically
@@ -42,11 +43,15 @@ public class ActionCodeAssistProcessor implements IContentAssistProcessor {
 	private ActionCodeEditorConfiguration fConfiguration;
 
 	private DetailExpressionUIProvider exprProvider;
-
+	
+	@Inject
+	RoomExpressionProposals proposals;
+	
 	public ActionCodeAssistProcessor(ActionCodeEditorConfiguration configuration) {
 		super();
 		fConfiguration = configuration;
 		exprProvider = fConfiguration.getDetailExpressionProvider();
+		RoomUiActivator.getDefault().getInjector(RoomUiActivator.ORG_ECLIPSE_ETRICE_CORE_ROOM).injectMembers(this);
 	}
 
 	/**
@@ -56,62 +61,9 @@ public class ActionCodeAssistProcessor implements IContentAssistProcessor {
 	 */
 	@Override
 	public ICompletionProposal[] computeCompletionProposals(ITextViewer viewer, int offset) {
-		List<ICompletionProposal> proposals = new ArrayList<ICompletionProposal>();
-
-		// get last context feature + prefix
-		DetailExpressionAssistParser resolver = new DetailExpressionAssistParser(viewer.getDocument(), offset,
-				exprProvider);
-		ExpressionFeature contextFeature = resolver.resolveLatestCompleted();
-		String idPrefix = "";
-		try {
-			idPrefix = resolver.computeIdentifierPrefix(offset);
-		}
-		catch (BadLocationException e) {
-		}
-
-		// cancel, if user expects proposals from context, but contextFeature
-		// could not be resolved
-		if (contextFeature == null && isExpressionSeparator(viewer, offset))
-			return new ICompletionProposal[0];
-
-		// create proposals
-		Iterable<ExpressionFeature> features = (contextFeature != null) ? exprProvider.getContextFeaturesWithPrefix(
-				contextFeature, idPrefix) : exprProvider.getInitialFeaturesWithPrefix(idPrefix);
-		for (ExpressionFeature feature : features) {
-			try {
-				proposals.add(createPrefixCompletionProposal(feature, offset, idPrefix));
-			}
-			catch (Exception e) {
-			}
-		}
-
-		return proposals.toArray(new ICompletionProposal[proposals.size()]);
+		return proposals.createProposals(exprProvider, viewer.getDocument().get(), offset, offset).toArray(new ICompletionProposal[0]);
 	}
 
-	private boolean isExpressionSeparator(ITextViewer viewer, int offset) {
-		try {
-			return viewer.getDocument().getChar(offset - 1) == IDetailExpressionProvider.SEPARATOR;
-		}
-		catch (BadLocationException e) {
-		}
-		return false;
-	}
-
-	private ICompletionProposal createPrefixCompletionProposal(ExpressionFeature feature, int offset, String prefix) {
-		Pair<String, Point> completionPair = exprProvider.getCompletion(feature);
-		String completion = completionPair.getKey();
-		String displayString = exprProvider.getDisplayString(feature);
-		if (Strings.isEmpty(displayString))
-			displayString = completion;
-
-		ICompletionProposal proposal = new CompletionProposal(completion, offset - prefix.length(), prefix.length(),
-				completion.length(), exprProvider.getImage(feature), displayString, null, null);
-
-		Point selection = completionPair.getValue();
-		if (selection != null)
-			selection.x += (offset - prefix.length());
-		return new CustomCompletionProposal(proposal, selection);
-	}
 
 	/**
 	 * {@inheritDoc}

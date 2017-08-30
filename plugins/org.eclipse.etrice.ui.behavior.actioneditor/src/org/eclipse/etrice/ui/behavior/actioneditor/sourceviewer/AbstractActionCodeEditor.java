@@ -14,6 +14,7 @@
 package org.eclipse.etrice.ui.behavior.actioneditor.sourceviewer;
 
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.etrice.ui.behavior.fsm.actioneditor.IActionCodeEditor;
 import org.eclipse.swt.widgets.Composite;
 

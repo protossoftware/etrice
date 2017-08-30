@@ -22,18 +22,19 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalBaseParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_STRING", "RULE_INT", "RULE_HEX", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'@'", "'('", "','", "')'", "'='", "'optional'", "'mandatory'", "'attribute'", "':'", "'{'", "'}'", "'.*'", "'['", "']'", "'false'", "'true'", "'+'", "'-'", "'.'", "'e'", "'E'", "'ptBoolean'", "'ptInteger'", "'ptReal'", "'ptCharacter'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_STRING", "RULE_INT", "RULE_HEX", "RULE_CC_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'@'", "'('", "','", "')'", "'='", "'optional'", "'mandatory'", "'attribute'", "':'", "'{'", "'}'", "'.*'", "'['", "']'", "'false'", "'true'", "'+'", "'-'", "'.'", "'e'", "'E'", "'ptBoolean'", "'ptInteger'", "'ptReal'", "'ptCharacter'"
     };
     public static final int RULE_HEX=7;
     public static final int RULE_STRING=5;
-    public static final int RULE_SL_COMMENT=9;
+    public static final int RULE_SL_COMMENT=10;
     public static final int T__19=19;
+    public static final int RULE_CC_STRING=8;
     public static final int T__15=15;
+    public static final int T__37=37;
     public static final int T__16=16;
     public static final int T__17=17;
     public static final int T__18=18;
     public static final int T__33=33;
-    public static final int T__12=12;
     public static final int T__34=34;
     public static final int T__13=13;
     public static final int T__35=35;
@@ -44,15 +45,15 @@ public class InternalBaseParser extends AbstractInternalAntlrParser {
     public static final int T__31=31;
     public static final int T__32=32;
     public static final int RULE_ID=4;
-    public static final int RULE_WS=10;
-    public static final int RULE_ANY_OTHER=11;
+    public static final int RULE_WS=11;
+    public static final int RULE_ANY_OTHER=12;
     public static final int T__26=26;
     public static final int T__27=27;
     public static final int T__28=28;
     public static final int RULE_INT=6;
     public static final int T__29=29;
     public static final int T__22=22;
-    public static final int RULE_ML_COMMENT=8;
+    public static final int RULE_ML_COMMENT=9;
     public static final int T__23=23;
     public static final int T__24=24;
     public static final int T__25=25;
@@ -156,7 +157,7 @@ public class InternalBaseParser extends AbstractInternalAntlrParser {
             // InternalBase.g:81:1: (otherlv_0= '@' ( ( ruleFQN ) ) (otherlv_2= '(' ( (lv_attributes_3_0= ruleKeyValue ) ) (otherlv_4= ',' ( (lv_attributes_5_0= ruleKeyValue ) ) )* otherlv_6= ')' )? )
             // InternalBase.g:81:3: otherlv_0= '@' ( ( ruleFQN ) ) (otherlv_2= '(' ( (lv_attributes_3_0= ruleKeyValue ) ) (otherlv_4= ',' ( (lv_attributes_5_0= ruleKeyValue ) ) )* otherlv_6= ')' )?
             {
-            otherlv_0=(Token)match(input,12,FOLLOW_3); 
+            otherlv_0=(Token)match(input,13,FOLLOW_3); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getAnnotationAccess().getCommercialAtKeyword_0());
                 
@@ -192,14 +193,14 @@ public class InternalBaseParser extends AbstractInternalAntlrParser {
             int alt2=2;
             int LA2_0 = input.LA(1);
 
-            if ( (LA2_0==13) ) {
+            if ( (LA2_0==14) ) {
                 alt2=1;
             }
             switch (alt2) {
                 case 1 :
                     // InternalBase.g:100:4: otherlv_2= '(' ( (lv_attributes_3_0= ruleKeyValue ) ) (otherlv_4= ',' ( (lv_attributes_5_0= ruleKeyValue ) ) )* otherlv_6= ')'
                     {
-                    otherlv_2=(Token)match(input,13,FOLLOW_3); 
+                    otherlv_2=(Token)match(input,14,FOLLOW_3); 
 
                         	newLeafNode(otherlv_2, grammarAccess.getAnnotationAccess().getLeftParenthesisKeyword_2_0());
                         
@@ -240,7 +241,7 @@ public class InternalBaseParser extends AbstractInternalAntlrParser {
                         int alt1=2;
                         int LA1_0 = input.LA(1);
 
-                        if ( (LA1_0==14) ) {
+                        if ( (LA1_0==15) ) {
                             alt1=1;
                         }
 
@@ -249,7 +250,7 @@ public class InternalBaseParser extends AbstractInternalAntlrParser {
                     	case 1 :
                     	    // InternalBase.g:122:4: otherlv_4= ',' ( (lv_attributes_5_0= ruleKeyValue ) )
                     	    {
-                    	    otherlv_4=(Token)match(input,14,FOLLOW_3); 
+                    	    otherlv_4=(Token)match(input,15,FOLLOW_3); 
 
                     	        	newLeafNode(otherlv_4, grammarAccess.getAnnotationAccess().getCommaKeyword_2_2_0());
                     	        
@@ -293,7 +294,7 @@ public class InternalBaseParser extends AbstractInternalAntlrParser {
                         }
                     } while (true);
 
-                    otherlv_6=(Token)match(input,15,FOLLOW_2); 
+                    otherlv_6=(Token)match(input,16,FOLLOW_2); 
 
                         	newLeafNode(otherlv_6, grammarAccess.getAnnotationAccess().getRightParenthesisKeyword_2_3());
                         
@@ -404,7 +405,7 @@ public class InternalBaseParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,16,FOLLOW_7); 
+            otherlv_1=(Token)match(input,17,FOLLOW_7); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getKeyValueAccess().getEqualsSignKeyword_1());
                 
@@ -588,22 +589,22 @@ public class InternalBaseParser extends AbstractInternalAntlrParser {
             int alt3=2;
             int LA3_0 = input.LA(1);
 
-            if ( (LA3_0==17) ) {
+            if ( (LA3_0==18) ) {
                 int LA3_1 = input.LA(2);
 
-                if ( (LA3_1==19) ) {
+                if ( (LA3_1==20) ) {
                     int LA3_3 = input.LA(3);
 
                     if ( (LA3_3==RULE_ID) ) {
                         int LA3_4 = input.LA(4);
 
-                        if ( (LA3_4==20) ) {
+                        if ( (LA3_4==21) ) {
                             int LA3_5 = input.LA(5);
 
-                            if ( ((LA3_5>=33 && LA3_5<=36)) ) {
+                            if ( ((LA3_5>=34 && LA3_5<=37)) ) {
                                 alt3=1;
                             }
-                            else if ( (LA3_5==21) ) {
+                            else if ( (LA3_5==22) ) {
                                 alt3=2;
                             }
                             else {
@@ -634,22 +635,22 @@ public class InternalBaseParser extends AbstractInternalAntlrParser {
                     throw nvae;
                 }
             }
-            else if ( (LA3_0==18) ) {
+            else if ( (LA3_0==19) ) {
                 int LA3_2 = input.LA(2);
 
-                if ( (LA3_2==19) ) {
+                if ( (LA3_2==20) ) {
                     int LA3_3 = input.LA(3);
 
                     if ( (LA3_3==RULE_ID) ) {
                         int LA3_4 = input.LA(4);
 
-                        if ( (LA3_4==20) ) {
+                        if ( (LA3_4==21) ) {
                             int LA3_5 = input.LA(5);
 
-                            if ( ((LA3_5>=33 && LA3_5<=36)) ) {
+                            if ( ((LA3_5>=34 && LA3_5<=37)) ) {
                                 alt3=1;
                             }
-                            else if ( (LA3_5==21) ) {
+                            else if ( (LA3_5==22) ) {
                                 alt3=2;
                             }
                             else {
@@ -805,10 +806,10 @@ public class InternalBaseParser extends AbstractInternalAntlrParser {
             int alt4=2;
             int LA4_0 = input.LA(1);
 
-            if ( (LA4_0==17) ) {
+            if ( (LA4_0==18) ) {
                 alt4=1;
             }
-            else if ( (LA4_0==18) ) {
+            else if ( (LA4_0==19) ) {
                 alt4=2;
             }
             else {
@@ -827,7 +828,7 @@ public class InternalBaseParser extends AbstractInternalAntlrParser {
                     // InternalBase.g:301:1: (lv_optional_0_0= 'optional' )
                     // InternalBase.g:302:3: lv_optional_0_0= 'optional'
                     {
-                    lv_optional_0_0=(Token)match(input,17,FOLLOW_8); 
+                    lv_optional_0_0=(Token)match(input,18,FOLLOW_8); 
 
                             newLeafNode(lv_optional_0_0, grammarAccess.getSimpleAnnotationAttributeAccess().getOptionalOptionalKeyword_0_0_0());
                         
@@ -849,7 +850,7 @@ public class InternalBaseParser extends AbstractInternalAntlrParser {
                 case 2 :
                     // InternalBase.g:316:7: otherlv_1= 'mandatory'
                     {
-                    otherlv_1=(Token)match(input,18,FOLLOW_8); 
+                    otherlv_1=(Token)match(input,19,FOLLOW_8); 
 
                         	newLeafNode(otherlv_1, grammarAccess.getSimpleAnnotationAttributeAccess().getMandatoryKeyword_0_1());
                         
@@ -859,7 +860,7 @@ public class InternalBaseParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_2=(Token)match(input,19,FOLLOW_3); 
+            otherlv_2=(Token)match(input,20,FOLLOW_3); 
 
                 	newLeafNode(otherlv_2, grammarAccess.getSimpleAnnotationAttributeAccess().getAttributeKeyword_1());
                 
@@ -889,7 +890,7 @@ public class InternalBaseParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_4=(Token)match(input,20,FOLLOW_10); 
+            otherlv_4=(Token)match(input,21,FOLLOW_10); 
 
                 	newLeafNode(otherlv_4, grammarAccess.getSimpleAnnotationAttributeAccess().getColonKeyword_3());
                 
@@ -1009,10 +1010,10 @@ public class InternalBaseParser extends AbstractInternalAntlrParser {
             int alt5=2;
             int LA5_0 = input.LA(1);
 
-            if ( (LA5_0==17) ) {
+            if ( (LA5_0==18) ) {
                 alt5=1;
             }
-            else if ( (LA5_0==18) ) {
+            else if ( (LA5_0==19) ) {
                 alt5=2;
             }
             else {
@@ -1031,7 +1032,7 @@ public class InternalBaseParser extends AbstractInternalAntlrParser {
                     // InternalBase.g:386:1: (lv_optional_0_0= 'optional' )
                     // InternalBase.g:387:3: lv_optional_0_0= 'optional'
                     {
-                    lv_optional_0_0=(Token)match(input,17,FOLLOW_8); 
+                    lv_optional_0_0=(Token)match(input,18,FOLLOW_8); 
 
                             newLeafNode(lv_optional_0_0, grammarAccess.getEnumAnnotationAttributeAccess().getOptionalOptionalKeyword_0_0_0());
                         
@@ -1053,7 +1054,7 @@ public class InternalBaseParser extends AbstractInternalAntlrParser {
                 case 2 :
                     // InternalBase.g:401:7: otherlv_1= 'mandatory'
                     {
-                    otherlv_1=(Token)match(input,18,FOLLOW_8); 
+                    otherlv_1=(Token)match(input,19,FOLLOW_8); 
 
                         	newLeafNode(otherlv_1, grammarAccess.getEnumAnnotationAttributeAccess().getMandatoryKeyword_0_1());
                         
@@ -1063,7 +1064,7 @@ public class InternalBaseParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_2=(Token)match(input,19,FOLLOW_3); 
+            otherlv_2=(Token)match(input,20,FOLLOW_3); 
 
                 	newLeafNode(otherlv_2, grammarAccess.getEnumAnnotationAttributeAccess().getAttributeKeyword_1());
                 
@@ -1093,11 +1094,11 @@ public class InternalBaseParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_4=(Token)match(input,20,FOLLOW_11); 
+            otherlv_4=(Token)match(input,21,FOLLOW_11); 
 
                 	newLeafNode(otherlv_4, grammarAccess.getEnumAnnotationAttributeAccess().getColonKeyword_3());
                 
-            otherlv_5=(Token)match(input,21,FOLLOW_12); 
+            otherlv_5=(Token)match(input,22,FOLLOW_12); 
 
                 	newLeafNode(otherlv_5, grammarAccess.getEnumAnnotationAttributeAccess().getLeftCurlyBracketKeyword_4());
                 
@@ -1133,7 +1134,7 @@ public class InternalBaseParser extends AbstractInternalAntlrParser {
                 int alt6=2;
                 int LA6_0 = input.LA(1);
 
-                if ( (LA6_0==14) ) {
+                if ( (LA6_0==15) ) {
                     alt6=1;
                 }
 
@@ -1142,7 +1143,7 @@ public class InternalBaseParser extends AbstractInternalAntlrParser {
             	case 1 :
             	    // InternalBase.g:453:4: otherlv_7= ',' ( (lv_values_8_0= RULE_STRING ) )
             	    {
-            	    otherlv_7=(Token)match(input,14,FOLLOW_12); 
+            	    otherlv_7=(Token)match(input,15,FOLLOW_12); 
 
             	        	newLeafNode(otherlv_7, grammarAccess.getEnumAnnotationAttributeAccess().getCommaKeyword_6_0());
             	        
@@ -1181,7 +1182,7 @@ public class InternalBaseParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            otherlv_9=(Token)match(input,22,FOLLOW_2); 
+            otherlv_9=(Token)match(input,23,FOLLOW_2); 
 
                 	newLeafNode(otherlv_9, grammarAccess.getEnumAnnotationAttributeAccess().getRightCurlyBracketKeyword_7());
                 
@@ -1277,14 +1278,14 @@ public class InternalBaseParser extends AbstractInternalAntlrParser {
             int alt7=2;
             int LA7_0 = input.LA(1);
 
-            if ( (LA7_0==23) ) {
+            if ( (LA7_0==24) ) {
                 alt7=1;
             }
             switch (alt7) {
                 case 1 :
                     // InternalBase.g:514:2: kw= '.*'
                     {
-                    kw=(Token)match(input,23,FOLLOW_2); 
+                    kw=(Token)match(input,24,FOLLOW_2); 
 
                             current.merge(kw);
                             newLeafNode(kw, grammarAccess.getImportedFQNAccess().getFullStopAsteriskKeyword_1()); 
@@ -1380,7 +1381,7 @@ public class InternalBaseParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,24,FOLLOW_15); 
+            otherlv_1=(Token)match(input,25,FOLLOW_15); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getDocumentationAccess().getLeftSquareBracketKeyword_1());
                 
@@ -1428,7 +1429,7 @@ public class InternalBaseParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            otherlv_3=(Token)match(input,25,FOLLOW_2); 
+            otherlv_3=(Token)match(input,26,FOLLOW_2); 
 
                 	newLeafNode(otherlv_3, grammarAccess.getDocumentationAccess().getRightSquareBracketKeyword_3());
                 
@@ -1509,16 +1510,16 @@ public class InternalBaseParser extends AbstractInternalAntlrParser {
             // InternalBase.g:597:1: (this_BooleanLiteral_0= ruleBooleanLiteral | this_NumberLiteral_1= ruleNumberLiteral | this_StringLiteral_2= ruleStringLiteral )
             int alt9=3;
             switch ( input.LA(1) ) {
-            case 26:
             case 27:
+            case 28:
                 {
                 alt9=1;
                 }
                 break;
             case RULE_INT:
             case RULE_HEX:
-            case 28:
             case 29:
+            case 30:
                 {
                 alt9=2;
                 }
@@ -1678,10 +1679,10 @@ public class InternalBaseParser extends AbstractInternalAntlrParser {
             int alt10=2;
             int LA10_0 = input.LA(1);
 
-            if ( (LA10_0==26) ) {
+            if ( (LA10_0==27) ) {
                 alt10=1;
             }
-            else if ( (LA10_0==27) ) {
+            else if ( (LA10_0==28) ) {
                 alt10=2;
             }
             else {
@@ -1694,7 +1695,7 @@ public class InternalBaseParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // InternalBase.g:653:4: otherlv_1= 'false'
                     {
-                    otherlv_1=(Token)match(input,26,FOLLOW_2); 
+                    otherlv_1=(Token)match(input,27,FOLLOW_2); 
 
                         	newLeafNode(otherlv_1, grammarAccess.getBooleanLiteralAccess().getFalseKeyword_1_0());
                         
@@ -1710,7 +1711,7 @@ public class InternalBaseParser extends AbstractInternalAntlrParser {
                     // InternalBase.g:659:1: (lv_isTrue_2_0= 'true' )
                     // InternalBase.g:660:3: lv_isTrue_2_0= 'true'
                     {
-                    lv_isTrue_2_0=(Token)match(input,27,FOLLOW_2); 
+                    lv_isTrue_2_0=(Token)match(input,28,FOLLOW_2); 
 
                             newLeafNode(lv_isTrue_2_0, grammarAccess.getBooleanLiteralAccess().getIsTrueTrueKeyword_1_1_0());
                         
@@ -1807,17 +1808,17 @@ public class InternalBaseParser extends AbstractInternalAntlrParser {
             // InternalBase.g:694:1: (this_IntLiteral_0= ruleIntLiteral | this_RealLiteral_1= ruleRealLiteral )
             int alt11=2;
             switch ( input.LA(1) ) {
-            case 28:
+            case 29:
                 {
                 int LA11_1 = input.LA(2);
 
                 if ( (LA11_1==RULE_INT) ) {
                     int LA11_3 = input.LA(3);
 
-                    if ( (LA11_3==EOF||(LA11_3>=14 && LA11_3<=15)) ) {
+                    if ( (LA11_3==EOF||(LA11_3>=15 && LA11_3<=16)) ) {
                         alt11=1;
                     }
-                    else if ( (LA11_3==30) ) {
+                    else if ( (LA11_3==31) ) {
                         alt11=2;
                     }
                     else {
@@ -1835,17 +1836,17 @@ public class InternalBaseParser extends AbstractInternalAntlrParser {
                 }
                 }
                 break;
-            case 29:
+            case 30:
                 {
                 int LA11_2 = input.LA(2);
 
                 if ( (LA11_2==RULE_INT) ) {
                     int LA11_3 = input.LA(3);
 
-                    if ( (LA11_3==EOF||(LA11_3>=14 && LA11_3<=15)) ) {
+                    if ( (LA11_3==EOF||(LA11_3>=15 && LA11_3<=16)) ) {
                         alt11=1;
                     }
-                    else if ( (LA11_3==30) ) {
+                    else if ( (LA11_3==31) ) {
                         alt11=2;
                     }
                     else {
@@ -1867,10 +1868,10 @@ public class InternalBaseParser extends AbstractInternalAntlrParser {
                 {
                 int LA11_3 = input.LA(2);
 
-                if ( (LA11_3==EOF||(LA11_3>=14 && LA11_3<=15)) ) {
+                if ( (LA11_3==EOF||(LA11_3>=15 && LA11_3<=16)) ) {
                     alt11=1;
                 }
-                else if ( (LA11_3==30) ) {
+                else if ( (LA11_3==31) ) {
                     alt11=2;
                 }
                 else {
@@ -2344,7 +2345,7 @@ public class InternalBaseParser extends AbstractInternalAntlrParser {
             int alt13=2;
             int LA13_0 = input.LA(1);
 
-            if ( (LA13_0==RULE_INT||(LA13_0>=28 && LA13_0<=29)) ) {
+            if ( (LA13_0==RULE_INT||(LA13_0>=29 && LA13_0<=30)) ) {
                 alt13=1;
             }
             else if ( (LA13_0==RULE_HEX) ) {
@@ -2367,17 +2368,17 @@ public class InternalBaseParser extends AbstractInternalAntlrParser {
                     int alt12=3;
                     int LA12_0 = input.LA(1);
 
-                    if ( (LA12_0==28) ) {
+                    if ( (LA12_0==29) ) {
                         alt12=1;
                     }
-                    else if ( (LA12_0==29) ) {
+                    else if ( (LA12_0==30) ) {
                         alt12=2;
                     }
                     switch (alt12) {
                         case 1 :
                             // InternalBase.g:870:2: kw= '+'
                             {
-                            kw=(Token)match(input,28,FOLLOW_16); 
+                            kw=(Token)match(input,29,FOLLOW_16); 
 
                                     current.merge(kw);
                                     newLeafNode(kw, grammarAccess.getIntegerAccess().getPlusSignKeyword_0_0_0()); 
@@ -2388,7 +2389,7 @@ public class InternalBaseParser extends AbstractInternalAntlrParser {
                         case 2 :
                             // InternalBase.g:877:2: kw= '-'
                             {
-                            kw=(Token)match(input,29,FOLLOW_16); 
+                            kw=(Token)match(input,30,FOLLOW_16); 
 
                                     current.merge(kw);
                                     newLeafNode(kw, grammarAccess.getIntegerAccess().getHyphenMinusKeyword_0_0_1()); 
@@ -2500,23 +2501,23 @@ public class InternalBaseParser extends AbstractInternalAntlrParser {
             // InternalBase.g:918:1: (this_Decimal_0= ruleDecimal | this_DecimalExp_1= ruleDecimalExp )
             int alt14=2;
             switch ( input.LA(1) ) {
-            case 28:
+            case 29:
                 {
                 int LA14_1 = input.LA(2);
 
                 if ( (LA14_1==RULE_INT) ) {
                     int LA14_3 = input.LA(3);
 
-                    if ( (LA14_3==30) ) {
+                    if ( (LA14_3==31) ) {
                         int LA14_4 = input.LA(4);
 
                         if ( (LA14_4==RULE_INT) ) {
                             int LA14_5 = input.LA(5);
 
-                            if ( (LA14_5==EOF||(LA14_5>=14 && LA14_5<=15)) ) {
+                            if ( (LA14_5==EOF||(LA14_5>=15 && LA14_5<=16)) ) {
                                 alt14=1;
                             }
-                            else if ( ((LA14_5>=31 && LA14_5<=32)) ) {
+                            else if ( ((LA14_5>=32 && LA14_5<=33)) ) {
                                 alt14=2;
                             }
                             else {
@@ -2548,23 +2549,23 @@ public class InternalBaseParser extends AbstractInternalAntlrParser {
                 }
                 }
                 break;
-            case 29:
+            case 30:
                 {
                 int LA14_2 = input.LA(2);
 
                 if ( (LA14_2==RULE_INT) ) {
                     int LA14_3 = input.LA(3);
 
-                    if ( (LA14_3==30) ) {
+                    if ( (LA14_3==31) ) {
                         int LA14_4 = input.LA(4);
 
                         if ( (LA14_4==RULE_INT) ) {
                             int LA14_5 = input.LA(5);
 
-                            if ( (LA14_5==EOF||(LA14_5>=14 && LA14_5<=15)) ) {
+                            if ( (LA14_5==EOF||(LA14_5>=15 && LA14_5<=16)) ) {
                                 alt14=1;
                             }
-                            else if ( ((LA14_5>=31 && LA14_5<=32)) ) {
+                            else if ( ((LA14_5>=32 && LA14_5<=33)) ) {
                                 alt14=2;
                             }
                             else {
@@ -2600,16 +2601,16 @@ public class InternalBaseParser extends AbstractInternalAntlrParser {
                 {
                 int LA14_3 = input.LA(2);
 
-                if ( (LA14_3==30) ) {
+                if ( (LA14_3==31) ) {
                     int LA14_4 = input.LA(3);
 
                     if ( (LA14_4==RULE_INT) ) {
                         int LA14_5 = input.LA(4);
 
-                        if ( (LA14_5==EOF||(LA14_5>=14 && LA14_5<=15)) ) {
+                        if ( (LA14_5==EOF||(LA14_5>=15 && LA14_5<=16)) ) {
                             alt14=1;
                         }
-                        else if ( ((LA14_5>=31 && LA14_5<=32)) ) {
+                        else if ( ((LA14_5>=32 && LA14_5<=33)) ) {
                             alt14=2;
                         }
                         else {
@@ -2767,17 +2768,17 @@ public class InternalBaseParser extends AbstractInternalAntlrParser {
             int alt15=3;
             int LA15_0 = input.LA(1);
 
-            if ( (LA15_0==28) ) {
+            if ( (LA15_0==29) ) {
                 alt15=1;
             }
-            else if ( (LA15_0==29) ) {
+            else if ( (LA15_0==30) ) {
                 alt15=2;
             }
             switch (alt15) {
                 case 1 :
                     // InternalBase.g:970:2: kw= '+'
                     {
-                    kw=(Token)match(input,28,FOLLOW_16); 
+                    kw=(Token)match(input,29,FOLLOW_16); 
 
                             current.merge(kw);
                             newLeafNode(kw, grammarAccess.getDecimalAccess().getPlusSignKeyword_0_0()); 
@@ -2788,7 +2789,7 @@ public class InternalBaseParser extends AbstractInternalAntlrParser {
                 case 2 :
                     // InternalBase.g:977:2: kw= '-'
                     {
-                    kw=(Token)match(input,29,FOLLOW_16); 
+                    kw=(Token)match(input,30,FOLLOW_16); 
 
                             current.merge(kw);
                             newLeafNode(kw, grammarAccess.getDecimalAccess().getHyphenMinusKeyword_0_1()); 
@@ -2806,7 +2807,7 @@ public class InternalBaseParser extends AbstractInternalAntlrParser {
              
                 newLeafNode(this_INT_2, grammarAccess.getDecimalAccess().getINTTerminalRuleCall_1()); 
                 
-            kw=(Token)match(input,30,FOLLOW_16); 
+            kw=(Token)match(input,31,FOLLOW_16); 
 
                     current.merge(kw);
                     newLeafNode(kw, grammarAccess.getDecimalAccess().getFullStopKeyword_2()); 
@@ -2907,17 +2908,17 @@ public class InternalBaseParser extends AbstractInternalAntlrParser {
             int alt16=3;
             int LA16_0 = input.LA(1);
 
-            if ( (LA16_0==28) ) {
+            if ( (LA16_0==29) ) {
                 alt16=1;
             }
-            else if ( (LA16_0==29) ) {
+            else if ( (LA16_0==30) ) {
                 alt16=2;
             }
             switch (alt16) {
                 case 1 :
                     // InternalBase.g:1034:2: kw= '+'
                     {
-                    kw=(Token)match(input,28,FOLLOW_16); 
+                    kw=(Token)match(input,29,FOLLOW_16); 
 
                             current.merge(kw);
                             newLeafNode(kw, grammarAccess.getDecimalExpAccess().getPlusSignKeyword_0_0()); 
@@ -2928,7 +2929,7 @@ public class InternalBaseParser extends AbstractInternalAntlrParser {
                 case 2 :
                     // InternalBase.g:1041:2: kw= '-'
                     {
-                    kw=(Token)match(input,29,FOLLOW_16); 
+                    kw=(Token)match(input,30,FOLLOW_16); 
 
                             current.merge(kw);
                             newLeafNode(kw, grammarAccess.getDecimalExpAccess().getHyphenMinusKeyword_0_1()); 
@@ -2946,7 +2947,7 @@ public class InternalBaseParser extends AbstractInternalAntlrParser {
              
                 newLeafNode(this_INT_2, grammarAccess.getDecimalExpAccess().getINTTerminalRuleCall_1()); 
                 
-            kw=(Token)match(input,30,FOLLOW_16); 
+            kw=(Token)match(input,31,FOLLOW_16); 
 
                     current.merge(kw);
                     newLeafNode(kw, grammarAccess.getDecimalExpAccess().getFullStopKeyword_2()); 
@@ -2962,10 +2963,10 @@ public class InternalBaseParser extends AbstractInternalAntlrParser {
             int alt17=2;
             int LA17_0 = input.LA(1);
 
-            if ( (LA17_0==31) ) {
+            if ( (LA17_0==32) ) {
                 alt17=1;
             }
-            else if ( (LA17_0==32) ) {
+            else if ( (LA17_0==33) ) {
                 alt17=2;
             }
             else {
@@ -2978,7 +2979,7 @@ public class InternalBaseParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // InternalBase.g:1067:2: kw= 'e'
                     {
-                    kw=(Token)match(input,31,FOLLOW_19); 
+                    kw=(Token)match(input,32,FOLLOW_19); 
 
                             current.merge(kw);
                             newLeafNode(kw, grammarAccess.getDecimalExpAccess().getEKeyword_4_0()); 
@@ -2989,7 +2990,7 @@ public class InternalBaseParser extends AbstractInternalAntlrParser {
                 case 2 :
                     // InternalBase.g:1074:2: kw= 'E'
                     {
-                    kw=(Token)match(input,32,FOLLOW_19); 
+                    kw=(Token)match(input,33,FOLLOW_19); 
 
                             current.merge(kw);
                             newLeafNode(kw, grammarAccess.getDecimalExpAccess().getEKeyword_4_1()); 
@@ -3004,17 +3005,17 @@ public class InternalBaseParser extends AbstractInternalAntlrParser {
             int alt18=3;
             int LA18_0 = input.LA(1);
 
-            if ( (LA18_0==28) ) {
+            if ( (LA18_0==29) ) {
                 alt18=1;
             }
-            else if ( (LA18_0==29) ) {
+            else if ( (LA18_0==30) ) {
                 alt18=2;
             }
             switch (alt18) {
                 case 1 :
                     // InternalBase.g:1080:2: kw= '+'
                     {
-                    kw=(Token)match(input,28,FOLLOW_16); 
+                    kw=(Token)match(input,29,FOLLOW_16); 
 
                             current.merge(kw);
                             newLeafNode(kw, grammarAccess.getDecimalExpAccess().getPlusSignKeyword_5_0()); 
@@ -3025,7 +3026,7 @@ public class InternalBaseParser extends AbstractInternalAntlrParser {
                 case 2 :
                     // InternalBase.g:1087:2: kw= '-'
                     {
-                    kw=(Token)match(input,29,FOLLOW_16); 
+                    kw=(Token)match(input,30,FOLLOW_16); 
 
                             current.merge(kw);
                             newLeafNode(kw, grammarAccess.getDecimalExpAccess().getHyphenMinusKeyword_5_1()); 
@@ -3133,7 +3134,7 @@ public class InternalBaseParser extends AbstractInternalAntlrParser {
                 int alt19=2;
                 int LA19_0 = input.LA(1);
 
-                if ( (LA19_0==30) ) {
+                if ( (LA19_0==31) ) {
                     alt19=1;
                 }
 
@@ -3142,7 +3143,7 @@ public class InternalBaseParser extends AbstractInternalAntlrParser {
             	case 1 :
             	    // InternalBase.g:1131:2: kw= '.' this_ID_2= RULE_ID
             	    {
-            	    kw=(Token)match(input,30,FOLLOW_3); 
+            	    kw=(Token)match(input,31,FOLLOW_3); 
 
             	            current.merge(kw);
             	            newLeafNode(kw, grammarAccess.getFQNAccess().getFullStopKeyword_1_0()); 
@@ -3201,22 +3202,22 @@ public class InternalBaseParser extends AbstractInternalAntlrParser {
             // InternalBase.g:1154:1: ( (enumLiteral_0= 'ptBoolean' ) | (enumLiteral_1= 'ptInteger' ) | (enumLiteral_2= 'ptReal' ) | (enumLiteral_3= 'ptCharacter' ) )
             int alt20=4;
             switch ( input.LA(1) ) {
-            case 33:
+            case 34:
                 {
                 alt20=1;
                 }
                 break;
-            case 34:
+            case 35:
                 {
                 alt20=2;
                 }
                 break;
-            case 35:
+            case 36:
                 {
                 alt20=3;
                 }
                 break;
-            case 36:
+            case 37:
                 {
                 alt20=4;
                 }
@@ -3235,7 +3236,7 @@ public class InternalBaseParser extends AbstractInternalAntlrParser {
                     // InternalBase.g:1154:2: (enumLiteral_0= 'ptBoolean' )
                     // InternalBase.g:1154:4: enumLiteral_0= 'ptBoolean'
                     {
-                    enumLiteral_0=(Token)match(input,33,FOLLOW_2); 
+                    enumLiteral_0=(Token)match(input,34,FOLLOW_2); 
 
                             current = grammarAccess.getLiteralTypeAccess().getBOOLEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
                             newLeafNode(enumLiteral_0, grammarAccess.getLiteralTypeAccess().getBOOLEnumLiteralDeclaration_0()); 
@@ -3252,7 +3253,7 @@ public class InternalBaseParser extends AbstractInternalAntlrParser {
                     // InternalBase.g:1160:6: (enumLiteral_1= 'ptInteger' )
                     // InternalBase.g:1160:8: enumLiteral_1= 'ptInteger'
                     {
-                    enumLiteral_1=(Token)match(input,34,FOLLOW_2); 
+                    enumLiteral_1=(Token)match(input,35,FOLLOW_2); 
 
                             current = grammarAccess.getLiteralTypeAccess().getINTEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
                             newLeafNode(enumLiteral_1, grammarAccess.getLiteralTypeAccess().getINTEnumLiteralDeclaration_1()); 
@@ -3269,7 +3270,7 @@ public class InternalBaseParser extends AbstractInternalAntlrParser {
                     // InternalBase.g:1166:6: (enumLiteral_2= 'ptReal' )
                     // InternalBase.g:1166:8: enumLiteral_2= 'ptReal'
                     {
-                    enumLiteral_2=(Token)match(input,35,FOLLOW_2); 
+                    enumLiteral_2=(Token)match(input,36,FOLLOW_2); 
 
                             current = grammarAccess.getLiteralTypeAccess().getREALEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
                             newLeafNode(enumLiteral_2, grammarAccess.getLiteralTypeAccess().getREALEnumLiteralDeclaration_2()); 
@@ -3286,7 +3287,7 @@ public class InternalBaseParser extends AbstractInternalAntlrParser {
                     // InternalBase.g:1172:6: (enumLiteral_3= 'ptCharacter' )
                     // InternalBase.g:1172:8: enumLiteral_3= 'ptCharacter'
                     {
-                    enumLiteral_3=(Token)match(input,36,FOLLOW_2); 
+                    enumLiteral_3=(Token)match(input,37,FOLLOW_2); 
 
                             current = grammarAccess.getLiteralTypeAccess().getCHAREnumLiteralDeclaration_3().getEnumLiteral().getInstance();
                             newLeafNode(enumLiteral_3, grammarAccess.getLiteralTypeAccess().getCHAREnumLiteralDeclaration_3()); 
@@ -3324,22 +3325,22 @@ public class InternalBaseParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000002002L});
-    public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x000000000000C000L});
-    public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000010000L});
-    public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x000000003C0000E0L});
-    public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x0000000000080000L});
-    public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x0000000000100000L});
-    public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x0000001E00000000L});
-    public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000000000200000L});
+    public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000004002L});
+    public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000018000L});
+    public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000020000L});
+    public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x00000000780000E0L});
+    public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x0000000000100000L});
+    public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x0000000000200000L});
+    public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x0000003C00000000L});
+    public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000000000400000L});
     public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_13 = new BitSet(new long[]{0x0000000000404000L});
-    public static final BitSet FOLLOW_14 = new BitSet(new long[]{0x0000000000800002L});
-    public static final BitSet FOLLOW_15 = new BitSet(new long[]{0x0000000002000020L});
+    public static final BitSet FOLLOW_13 = new BitSet(new long[]{0x0000000000808000L});
+    public static final BitSet FOLLOW_14 = new BitSet(new long[]{0x0000000001000002L});
+    public static final BitSet FOLLOW_15 = new BitSet(new long[]{0x0000000004000020L});
     public static final BitSet FOLLOW_16 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_17 = new BitSet(new long[]{0x0000000040000000L});
-    public static final BitSet FOLLOW_18 = new BitSet(new long[]{0x0000000180000000L});
-    public static final BitSet FOLLOW_19 = new BitSet(new long[]{0x0000000030000040L});
-    public static final BitSet FOLLOW_20 = new BitSet(new long[]{0x0000000040000002L});
+    public static final BitSet FOLLOW_17 = new BitSet(new long[]{0x0000000080000000L});
+    public static final BitSet FOLLOW_18 = new BitSet(new long[]{0x0000000300000000L});
+    public static final BitSet FOLLOW_19 = new BitSet(new long[]{0x0000000060000040L});
+    public static final BitSet FOLLOW_20 = new BitSet(new long[]{0x0000000080000002L});
 
 }

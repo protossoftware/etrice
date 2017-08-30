@@ -3127,6 +3127,8 @@ finally {
 
 RULE_HEX : ('0x'|'0X') ('0'..'9'|'a'..'f'|'A'..'F')+;
 
+RULE_CC_STRING : '\'\'\'' ( options {greedy=false;} : . )*'\'\'\'';
+
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
 RULE_INT : ('0'..'9')+;

@@ -98,4 +98,5 @@ public class RoomRuntimeModule extends org.eclipse.etrice.core.AbstractRoomRunti
 	public Class<? extends INamesAreUniqueValidationHelper> bindINamesAreUniqueValidationHelper(){
 		return FQNAreUniqueValidationHelper.class;
 	}
+
 }

@@ -15,9 +15,9 @@ package org.eclipse.etrice.ui.behavior.actioneditor.text;
 
 import java.util.ArrayList;
 
+import org.eclipse.etrice.expressions.detailcode.IDetailExpressionProvider;
 import org.eclipse.etrice.ui.behavior.fsm.actioneditor.IActionCodeEditor;
 import org.eclipse.etrice.ui.behavior.fsm.actioneditor.IActionCodeEditorFactory;
-import org.eclipse.etrice.ui.behavior.fsm.detailcode.IDetailExpressionProvider;
 import org.eclipse.swt.widgets.Composite;
 
 /**

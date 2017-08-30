@@ -28,8 +28,8 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.etrice.core.fsm.fSM.DetailCode#isUsed <em>Used</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.fsm.fSM.DetailCode#getLines <em>Lines</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.fsm.fSM.DetailCode#isUsed <em>Used</em>}</li>
  * </ul>
  *
  * @see org.eclipse.etrice.core.fsm.fSM.FSMPackage#getDetailCode()
@@ -38,6 +38,22 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface DetailCode extends EObject
 {
+  /**
+   * Returns the value of the '<em><b>Lines</b></em>' attribute list.
+   * The list contents are of type {@link java.lang.String}.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * <!-- begin-model-doc -->
+   * <br>This is a list of commands in the code generator's target language.
+   * 
+   * <!-- end-model-doc -->
+   * @return the value of the '<em>Lines</em>' attribute list.
+   * @see org.eclipse.etrice.core.fsm.fSM.FSMPackage#getDetailCode_Lines()
+   * @model unique="false"
+   * @generated
+   */
+  EList<String> getLines();
+
   /**
    * Returns the value of the '<em><b>Used</b></em>' attribute.
    * <!-- begin-user-doc -->
@@ -63,21 +79,5 @@ public interface DetailCode extends EObject
    * @generated
    */
   void setUsed(boolean value);
-
-  /**
-   * Returns the value of the '<em><b>Lines</b></em>' attribute list.
-   * The list contents are of type {@link java.lang.String}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * <!-- begin-model-doc -->
-   * <br>This is a list of commands in the code generator's target language.
-   * 
-   * <!-- end-model-doc -->
-   * @return the value of the '<em>Lines</em>' attribute list.
-   * @see org.eclipse.etrice.core.fsm.fSM.FSMPackage#getDetailCode_Lines()
-   * @model unique="false"
-   * @generated
-   */
-  EList<String> getLines();
 
 } // DetailCode

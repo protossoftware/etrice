@@ -12,9 +12,9 @@
 
 package org.eclipse.etrice.core.ui.highlight;
 
+import org.eclipse.etrice.core.common.ui.highlight.BaseHighlightingConfig;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.RGB;
-import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfigurationAcceptor;
 import org.eclipse.xtext.ui.editor.utils.TextStyle;
 
@@ -22,12 +22,11 @@ import org.eclipse.xtext.ui.editor.utils.TextStyle;
  * @author Henrik Rentz-Reichert
  * 
  */
-public class RoomHighlightingConfiguration
-		extends
-			DefaultHighlightingConfiguration {
+public class RoomHighlightingConfiguration extends BaseHighlightingConfig {
 
 	// provide an id string for the highlighting calculator
 	public static final String HL_ANNOTATION_ID = "hl_annotation";
+	public static final String HL_TARGET_LANG_KEYWORD_ID = "hl_targetlang_keyword";
 
 	// default fonts used by this specific highlighting (defaults)
 	// private static FontData defaultAnnotationBlockFont = new
@@ -38,6 +37,7 @@ public class RoomHighlightingConfiguration
 	public void configure(IHighlightingConfigurationAcceptor acceptor) {
 		super.configure(acceptor);
 		acceptor.acceptDefaultHighlighting(HL_ANNOTATION_ID, "Annotation", typeAnnotationBlock());
+		acceptor.acceptDefaultHighlighting(HL_TARGET_LANG_KEYWORD_ID, "Target Language Keyword", targetLangKeyword());
 	}
 
 	// method for calculating an actual text styles
@@ -47,6 +47,12 @@ public class RoomHighlightingConfiguration
 		textStyle.setColor(new RGB(160, 0, 0));
 		textStyle.setStyle(SWT.BOLD);
 		// textStyle.setFontData(defaultCommentFont);
+		return textStyle;
+	}
+	
+	public TextStyle targetLangKeyword() {
+		TextStyle textStyle = new TextStyle();
+		textStyle.setStyle(SWT.BOLD);
 		return textStyle;
 	}
 

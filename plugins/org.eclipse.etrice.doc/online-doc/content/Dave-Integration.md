@@ -137,9 +137,9 @@ Open *BlinkyTutorial.room* and create a new Actor called AHWAbstraction by addin
 ```room
 ActorClass AHWAbstraction {
     Structure {
-        usercode1 {
-            "#include \"Dave.h\""
-        }
+        usercode1 '''
+            #include "Dave.h"
+        '''
     }
 }
 ```
@@ -192,9 +192,9 @@ ActorClass AHWAbstraction {
         Port LED1: POnOff
     }
     Structure {
-        usercode1 {
-            "#include \"Dave.h\""
-        }
+        usercode1 '''
+            #include "Dave.h"
+        '''
         external Port LED1
     }
     Behavior {
@@ -205,17 +205,17 @@ ActorClass AHWAbstraction {
                 triggers {
                     <on: LED1>
                 }
-                action {
-                    "DIGITAL_IO_SetOutputHigh(&LED1_P5_9);"
-                }
+                action '''
+                    DIGITAL_IO_SetOutputHigh(&LED1_P5_9);
+                '''
             }
             Transition tr1: state0 -> state0 {
                 triggers {
                     <off: LED1>
                 }
-                action {
-                    "DIGITAL_IO_SetOutputLow(&LED1_P5_9);"
-                }
+                action '''
+                    DIGITAL_IO_SetOutputLow(&LED1_P5_9);
+                '''
             }
         }
     }
@@ -259,25 +259,25 @@ ActorClass ABlinky {
             State state0
             State state1
             Transition init: initial -> state0 {
-                action {
-                    "timer.startTimer(300);"
-                }
+                action '''
+                    timer.startTimer(300);
+                '''
             }
             Transition tr0: state0 -> state1 {
                 triggers {
                     <timeout: timer>
                 }
-                action {
-                    "out.on();"
-                }
+                action '''
+                    out.on();
+                '''
             }
             Transition tr1: state1 -> state0 {
                 triggers {
                     <timeout: timer>
                 }
-                action {
-                    "out.off();"
-                }
+                action '''
+                    out.off();
+                '''
             }
         }
     }
@@ -324,25 +324,25 @@ RoomModel BlinkyTutorial {
                 State state0
                 State state1
                 Transition init: initial -> state0 {
-                    action {
-                        "timer.startTimer(300);"
-                    }
+                    action '''
+                        timer.startTimer(300);
+                    '''
                 }
                 Transition tr0: state0 -> state1 {
                     triggers {
                         <timeout: timer>
                     }
-                    action {
-                        "out.on();"
-                    }
+                    action '''
+                        out.on();
+                    '''
                 }
                 Transition tr1: state1 -> state0 {
                     triggers {
                         <timeout: timer>
                     }
-                    action {
-                        "out.off();"
-                    }
+                    action '''
+                        out.off();
+                    '''
                 }
             }
         }
@@ -353,9 +353,9 @@ RoomModel BlinkyTutorial {
             Port LED1: POnOff
         }
         Structure {
-            usercode1 {
-                "#include \"Dave.h\""
-            }
+            usercode1 '''
+                #include "Dave.h"
+            '''
             external Port LED1
         }
         Behavior {
@@ -366,17 +366,17 @@ RoomModel BlinkyTutorial {
                     triggers {
                         <on: LED1>
                     }
-                    action {
-                        "DIGITAL_IO_SetOutputHigh(&LED1_P5_9);"
-                    }
+                    action '''
+                        DIGITAL_IO_SetOutputHigh(&LED1_P5_9);
+                    '''
                 }
                 Transition tr1: state0 -> state0 {
                     triggers {
                         <off: LED1>
                     }
-                    action {
-                        "DIGITAL_IO_SetOutputLow(&LED1_P5_9);"
-                    }
+                    action '''
+                        DIGITAL_IO_SetOutputLow(&LED1_P5_9);
+                    '''
                 }
             }
         }
@@ -484,14 +484,14 @@ RoomModel BlinkyTutorial {
                 State blinking {
                     subgraph {
                         State on {
-                            entry {
-                                "out.on();"
-                            }
+                            entry '''
+                                out.on();
+                            '''
                         }
                         State off {
-                            entry {
-                                "out.off();"
-                            }
+                            entry '''
+                                out.off();
+                            '''
                         }
                         EntryPoint tp0
                         Transition tr0: on -> off {
@@ -505,9 +505,9 @@ RoomModel BlinkyTutorial {
                             }
                         }
                         Transition tr2: my tp0 -> on {
-                            action {
-                                "timer.startTimer(300);"
-                            }
+                            action '''
+                                timer.startTimer(300);
+                            '''
                         }
                     }
                 }
@@ -523,10 +523,10 @@ RoomModel BlinkyTutorial {
                     triggers {
                         <off: ctrl>
                     }
-                    action {
-                        "timer.kill();"
-                        "out.off();"
-                    }
+                    action '''
+                        timer.kill();
+                        out.off();
+                    '''
                 }
             }
         }
@@ -540,9 +540,9 @@ RoomModel BlinkyTutorial {
             conjugated Port BUTTON2: POnOff
         }
         Structure {
-            usercode1 {
-                "#include \"Dave.h\""
-            }
+            usercode1 '''
+                #include "Dave.h"
+            '''
             SAP timer: PTimer
             external Port LED1
             external Port LED2
@@ -555,78 +555,77 @@ RoomModel BlinkyTutorial {
             StateMachine {
                 State state0
                 Transition init: initial -> state0 {
-                    action {
-                        "timer.startTimer(50);"
-                    }
+                    action '''
+                        timer.startTimer(50);
+                    '''
                 }
                 Transition tr0: state0 -> state0 {
                     triggers {
                         <on: LED1>
                     }
-                    action {
-                        "DIGITAL_IO_SetOutputHigh(&LED1_P5_9);"
-                    }
+                    action '''
+                        DIGITAL_IO_SetOutputHigh(&LED1_P5_9);
+                    '''
                 }
                 Transition tr1: state0 -> state0 {
                     triggers {
                         <off: LED1>
                     }
-                    action {
-                        "DIGITAL_IO_SetOutputLow(&LED1_P5_9);"
-                    }
+                    action '''
+                        DIGITAL_IO_SetOutputLow(&LED1_P5_9);
+                    '''
                 }
                 Transition tr2: state0 -> state0 {
                     triggers {
                         <on: LED2>
                     }
-                    action {
-                        "DIGITAL_IO_SetOutputHigh(&LED2_P5_8);"
-                    }
+                    action '''
+                        DIGITAL_IO_SetOutputHigh(&LED2_P5_8);
+                    '''
                 }
                 Transition tr3: state0 -> state0 {
                     triggers {
                         <off: LED2>
                     }
-                    action {
-                        "DIGITAL_IO_SetOutputLow(&LED2_P5_8);"
-                    }
+                    action '''
+                        DIGITAL_IO_SetOutputLow(&LED2_P5_8);
+                    '''
                 }
                 Transition tr4: state0 -> state0 {
                     triggers {
                         <timeout: timer>
                     }
-                    action 
-                {
-                        "if (DIGITAL_IO_GetInput(&BUTTON1_P15_13) == 0){"
-                        "  if (b1Status == 0){"
-                        "\t// input changed"
-                        "\tb1Status = 1;"
-                        "\tBUTTON1.on();"
-                        "  }"
-                        "}"
-                        "else{"
-                        "  if (b1Status == 1){"
-                        "\t// input changed"
-                        "\tb1Status = 0;"
-                        "\tBUTTON1.off();"
-                        "  }"
-                        "}"
-                        ""
-                        "if (DIGITAL_IO_GetInput(&BUTTON2_P15_12) == 0){"
-                        "  if (b2Status == 0){"
-                        "\t// input changed"
-                        "\tb2Status = 1;"
-                        "\tBUTTON2.on();"
-                        "  }"
-                        "}"
-                        "else{"
-                        "  if (b2Status == 1){"
-                        "\t// input changed"
-                        "\tb2Status = 0;"
-                        "\tBUTTON2.off();"
-                        "  }"
-                        "}"
-                    }
+                    action '''
+                        if (DIGITAL_IO_GetInput(&BUTTON1_P15_13) == 0) {
+                            if (b1Status == 0) {
+                                // input changed
+                                b1Status = 1;
+                                BUTTON1.on();
+                            }
+                        }
+                        else {
+                            if (b1Status == 1) {
+                                // input changed
+                                b1Status = 0;
+                            	BUTTON1.off();
+                            }
+                        }
+                        
+                        if (DIGITAL_IO_GetInput(&BUTTON2_P15_12) == 0) {
+                                if (b2Status == 0){
+                                // input changed
+                                b2Status = 1;
+                                BUTTON2.on();
+                            }
+                        }
+                        else {
+                            if (b2Status == 1) {
+                                // input changed
+                                b2Status = 0;
+                                BUTTON2.off();
+                            }
+                        }
+                    '''
                 }
             }
         }
@@ -657,17 +656,17 @@ RoomModel BlinkyTutorial {
                     triggers {
                         <on: ctrl>
                     }
-                    action {
-                        "out.on();"
-                    }
+                    action '''
+                        out.on();
+                    '''
                 }
                 Transition tr1: on -> off {
                     triggers {
                         <on: ctrl>
                     }
-                    action {
-                        "out.off();"
-                    }
+                    action '''
+                        out.off();
+                    '''
                 }
             }
         }

@@ -26,14 +26,24 @@ import org.eclipse.etrice.core.fsm.fSM.FSMPackage;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.etrice.core.fsm.fSM.impl.DetailCodeImpl#isUsed <em>Used</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.fsm.fSM.impl.DetailCodeImpl#getLines <em>Lines</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.fsm.fSM.impl.DetailCodeImpl#isUsed <em>Used</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class DetailCodeImpl extends MinimalEObjectImpl.Container implements DetailCode
 {
+  /**
+   * The cached value of the '{@link #getLines() <em>Lines</em>}' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getLines()
+   * @generated
+   * @ordered
+   */
+  protected EList<String> lines;
+
   /**
    * The default value of the '{@link #isUsed() <em>Used</em>}' attribute.
    * <!-- begin-user-doc -->
@@ -55,16 +65,6 @@ public class DetailCodeImpl extends MinimalEObjectImpl.Container implements Deta
   protected boolean used = USED_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getLines() <em>Lines</em>}' attribute list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getLines()
-   * @generated
-   * @ordered
-   */
-  protected EList<String> lines;
-
-  /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -83,6 +83,20 @@ public class DetailCodeImpl extends MinimalEObjectImpl.Container implements Deta
   protected EClass eStaticClass()
   {
     return FSMPackage.Literals.DETAIL_CODE;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EList<String> getLines()
+  {
+    if (lines == null)
+    {
+      lines = new EDataTypeEList<String>(String.class, this, FSMPackage.DETAIL_CODE__LINES);
+    }
+    return lines;
   }
 
   /**
@@ -113,29 +127,15 @@ public class DetailCodeImpl extends MinimalEObjectImpl.Container implements Deta
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<String> getLines()
-  {
-    if (lines == null)
-    {
-      lines = new EDataTypeEList<String>(String.class, this, FSMPackage.DETAIL_CODE__LINES);
-    }
-    return lines;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
     switch (featureID)
     {
-      case FSMPackage.DETAIL_CODE__USED:
-        return isUsed();
       case FSMPackage.DETAIL_CODE__LINES:
         return getLines();
+      case FSMPackage.DETAIL_CODE__USED:
+        return isUsed();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -151,12 +151,12 @@ public class DetailCodeImpl extends MinimalEObjectImpl.Container implements Deta
   {
     switch (featureID)
     {
-      case FSMPackage.DETAIL_CODE__USED:
-        setUsed((Boolean)newValue);
-        return;
       case FSMPackage.DETAIL_CODE__LINES:
         getLines().clear();
         getLines().addAll((Collection<? extends String>)newValue);
+        return;
+      case FSMPackage.DETAIL_CODE__USED:
+        setUsed((Boolean)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -172,11 +172,11 @@ public class DetailCodeImpl extends MinimalEObjectImpl.Container implements Deta
   {
     switch (featureID)
     {
-      case FSMPackage.DETAIL_CODE__USED:
-        setUsed(USED_EDEFAULT);
-        return;
       case FSMPackage.DETAIL_CODE__LINES:
         getLines().clear();
+        return;
+      case FSMPackage.DETAIL_CODE__USED:
+        setUsed(USED_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -192,10 +192,10 @@ public class DetailCodeImpl extends MinimalEObjectImpl.Container implements Deta
   {
     switch (featureID)
     {
-      case FSMPackage.DETAIL_CODE__USED:
-        return used != USED_EDEFAULT;
       case FSMPackage.DETAIL_CODE__LINES:
         return lines != null && !lines.isEmpty();
+      case FSMPackage.DETAIL_CODE__USED:
+        return used != USED_EDEFAULT;
     }
     return super.eIsSet(featureID);
   }
@@ -211,10 +211,10 @@ public class DetailCodeImpl extends MinimalEObjectImpl.Container implements Deta
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (used: ");
-    result.append(used);
-    result.append(", lines: ");
+    result.append(" (lines: ");
     result.append(lines);
+    result.append(", used: ");
+    result.append(used);
     result.append(')');
     return result.toString();
   }

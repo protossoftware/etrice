@@ -5,10 +5,12 @@ package org.eclipse.etrice.core.fsm.validation;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.etrice.core.common.converter.CCStringIndentation;
 import org.eclipse.etrice.core.fsm.fSM.ChoicePoint;
 import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.etrice.core.fsm.fSM.FSMPackage;
@@ -22,7 +24,12 @@ import org.eclipse.etrice.core.fsm.fSM.StateGraph;
 import org.eclipse.etrice.core.fsm.fSM.StateGraphItem;
 import org.eclipse.etrice.core.fsm.fSM.TrPoint;
 import org.eclipse.etrice.core.fsm.fSM.Transition;
+import org.eclipse.etrice.core.fsm.services.FSMGrammarAccess;
 import org.eclipse.etrice.core.fsm.validation.FSMValidationUtilXtend.Result;
+import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.validation.Check;
 
@@ -37,10 +44,13 @@ import com.google.inject.Inject;
  */
 public class FSMJavaValidator extends org.eclipse.etrice.core.fsm.validation.AbstractFSMJavaValidator {
 
-	public static final String MULTI_LINE_DETAILCODE = "RoomJavaValidator.MultiLineDetailCode";
+	public static final String PLAIN_STRING_DETAILCODE = "RoomJavaValidator.PlainStringDetailCode";
 	
 	@Inject
 	private FSMValidationUtil ValidationUtil;
+	
+	@Inject
+	FSMGrammarAccess grammar;
 	
 	@Check
 	public void checkRefinedStateUnique(RefinedState rs) {
@@ -117,16 +127,36 @@ public class FSMJavaValidator extends org.eclipse.etrice.core.fsm.validation.Abs
 		}
 	}
 	
+
+	
 	@Check
 	public void checkDetailCode(DetailCode dc) {
-		if (dc.getLines().isEmpty())
+		if (dc.getLines().isEmpty()) {
 			error("detail code must not be empty", dc, FSMPackage.Literals.DETAIL_CODE__LINES);
-		
-		for(String line : dc.getLines()){
-			// bad: "\r\n" is affected too
-			if(line.contains(Strings.newLine()))
-				warning("multi line string", dc, FSMPackage.Literals.DETAIL_CODE__LINES, dc.getLines().indexOf(line), MULTI_LINE_DETAILCODE);
+			return;
 		}
+		
+		// ccstring is new standard for detail code
+		boolean isPlainStyle = false;
+		List<INode> lineNodes = NodeModelUtils.findNodesForFeature(dc, FSMPackage.Literals.DETAIL_CODE__LINES);
+		for(INode lineNode : lineNodes){
+			if(lineNode.getGrammarElement() instanceof RuleCall){
+				AbstractRule rule = ((RuleCall)lineNode.getGrammarElement()).getRule();
+				if(rule == grammar.getCC_STRINGRule()) {
+					if(!new CCStringIndentation(lineNode.getText()).hasConsistentIndentation())
+						warning("Inconsistent indentation", dc, FSMPackage.Literals.DETAIL_CODE__LINES, lineNodes.indexOf(lineNode));
+				} else if(rule == grammar.getSTRINGRule()) {
+					isPlainStyle = true;
+					if(Strings.countLineBreaks(lineNode.getText()) > 0)
+						warning("multi line string, use smart string instead", dc, FSMPackage.Literals.DETAIL_CODE__LINES, lineNodes.indexOf(lineNode));
+				}
+			}
+		}
+		if(isPlainStyle) {
+			// TODO quickfix here does not work yet, see FSMQuickfixProvider
+//			warning("old style line string", dc, null, PLAIN_STRING_DETAILCODE);
+		}
+		
 	}
 	
 	@Check

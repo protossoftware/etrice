@@ -13,7 +13,7 @@ package org.eclipse.etrice.ui.behavior.actioneditor.sourceviewer;
 import com.google.common.base.Objects;
 import java.util.LinkedList;
 import java.util.List;
-import org.eclipse.etrice.ui.behavior.fsm.detailcode.IDetailExpressionProvider;
+import org.eclipse.etrice.expressions.detailcode.IDetailExpressionProvider;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.rules.IWordDetector;

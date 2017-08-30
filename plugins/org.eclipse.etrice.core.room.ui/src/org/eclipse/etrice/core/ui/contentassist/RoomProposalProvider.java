@@ -19,6 +19,7 @@ import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.common.base.AnnotationType;
+import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerClass;
@@ -32,6 +33,9 @@ import org.eclipse.etrice.core.room.RoomAnnotationTargetEnum;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
+import org.eclipse.etrice.expressions.detailcode.DefaultDetailExpressionProvider;
+import org.eclipse.etrice.expressions.detailcode.IDetailExpressionProvider;
+import org.eclipse.etrice.expressions.ui.contentassist.RoomExpressionProposals;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;
@@ -218,12 +222,40 @@ public class RoomProposalProvider extends AbstractRoomProposalProvider {
 
 		return refs;
 	}
+	
+	@Inject
+	RoomExpressionProposals expressionProposals;
+	
+	@Override
+	public void complete_CC_STRING(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		ActorClass ac = findActorClass(model);
+		if (ac == null) {
+			super.complete_CC_STRING(model, ruleCall, context, acceptor);
+			return;
+		}
 
-//	public void completeActorRef_Type(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-//		super.completeActorRef_Type(
-//			    model, 
-//			    assignment, 
-//			    context, 
-//			    acceptor);
-//	}
+		String text = context.getCurrentNode().getText();
+		int localOffset = context.getOffset() - context.getCurrentNode().getOffset();
+		int globalOffset = context.getOffset();
+		if (context.getCurrentNode().getSemanticElement() instanceof DetailCode) {
+			IDetailExpressionProvider exprPovider = new DefaultDetailExpressionProvider(ac);
+			for(ICompletionProposal proposal : expressionProposals.createProposals(exprPovider, text, localOffset, globalOffset))
+				acceptor.accept(proposal);
+		}
+
+		super.complete_CC_STRING(model, ruleCall, context, acceptor);
+	}
+	
+	private ActorClass findActorClass(EObject model) {
+		EObject parent = model;
+		while(parent != null) {
+			if(parent instanceof ActorClass){
+				return (ActorClass) parent;
+			}
+			parent = parent.eContainer();
+		}
+		
+		return null;
+	}
+
 }

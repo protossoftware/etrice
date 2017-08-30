@@ -676,7 +676,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getDetailCode_Used()
+  public EAttribute getDetailCode_Lines()
   {
     return (EAttribute)detailCodeEClass.getEStructuralFeatures().get(0);
   }
@@ -686,7 +686,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getDetailCode_Lines()
+  public EAttribute getDetailCode_Used()
   {
     return (EAttribute)detailCodeEClass.getEStructuralFeatures().get(1);
   }
@@ -1326,8 +1326,8 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
     createEReference(refinedStateEClass, REFINED_STATE__TARGET);
 
     detailCodeEClass = createEClass(DETAIL_CODE);
-    createEAttribute(detailCodeEClass, DETAIL_CODE__USED);
     createEAttribute(detailCodeEClass, DETAIL_CODE__LINES);
+    createEAttribute(detailCodeEClass, DETAIL_CODE__USED);
 
     trPointEClass = createEClass(TR_POINT);
     createEAttribute(trPointEClass, TR_POINT__NAME);
@@ -1517,8 +1517,8 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
     initEReference(getRefinedState_Target(), this.getState(), null, "target", null, 0, 1, RefinedState.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(detailCodeEClass, DetailCode.class, "DetailCode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getDetailCode_Used(), ecorePackage.getEBoolean(), "used", null, 0, 1, DetailCode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getDetailCode_Lines(), ecorePackage.getEString(), "lines", null, 0, -1, DetailCode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getDetailCode_Used(), ecorePackage.getEBoolean(), "used", null, 0, 1, DetailCode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(trPointEClass, TrPoint.class, "TrPoint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getTrPoint_Name(), ecorePackage.getEString(), "name", null, 0, 1, TrPoint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

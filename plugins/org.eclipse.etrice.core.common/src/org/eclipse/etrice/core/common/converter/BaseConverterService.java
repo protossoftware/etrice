@@ -18,12 +18,15 @@ import org.eclipse.xtext.conversion.ValueConverter;
 import org.eclipse.xtext.conversion.impl.QualifiedNameValueConverter;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
+@Singleton
 public class BaseConverterService extends DefaultTerminalConverters {
 
 	private TimeConverter timeConverter = new TimeConverter();
 	private LongConverter longConverter = new LongConverter();
 	private DoubleConverter doubleConverter = new DoubleConverter();
+	private CCStringConverter ccStringConverter = new CCStringConverter("'''");
 
 	@Inject
 	private QualifiedNameValueConverter fqnConverter;
@@ -47,4 +50,10 @@ public class BaseConverterService extends DefaultTerminalConverters {
 	public IValueConverter<String> FQN() {
 		return fqnConverter;
 	}
+	
+	@ValueConverter(rule = "CC_STRING")
+	public CCStringConverter getCC_StringConverter() {
+		return ccStringConverter;
+	}
+	
 }

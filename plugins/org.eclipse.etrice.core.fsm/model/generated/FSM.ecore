@@ -78,7 +78,7 @@
         <details key="body" value="return (this instanceof &lt;%org.eclipse.etrice.core.fsm.fSM.SimpleState%>)? ((SimpleState)this).getName() :(this instanceof &lt;%org.eclipse.etrice.core.fsm.fSM.RefinedState%>)? (((RefinedState)this).getTarget()==null? &quot;&quot;:((RefinedState)this).getTarget().getName()) :&quot;&quot;;"/>
       </eAnnotations>
     </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="docu" eType="ecore:EClass ../../../org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.ecore#//Documentation"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="docu" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.ecore#//Documentation"
         containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;br>This is an optional documentation.&#xD;&#xA;"/>
@@ -133,13 +133,13 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="&lt;br>The detail code contains a list of strings which&#xD;&#xA;are considered verbatim code of the code generator&#xD;&#xA;target language.&#xD;&#xA;&#xD;&#xA;&lt;p>&#xD;&#xA;The detail code is parsed by the {@link org.eclipse.etrice.generator.base.DetailCodeTranslator}&#xD;&#xA;which replaces certain frequent constructs like access of members&#xD;&#xA;and sending a message via a port by target language specific code.&#xD;&#xA;&lt;/p>&#xD;&#xA;"/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="used" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="lines" unique="false" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;br>This is a list of commands in the code generator's target language.&#xD;&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="used" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TrPoint" eSuperTypes="#//StateGraphNode">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -180,7 +180,7 @@
         <details key="documentation" value="&lt;br>By this name the choice point is referred to in the model.&#xD;&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="docu" eType="ecore:EClass ../../../org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.ecore#//Documentation"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="docu" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.ecore#//Documentation"
         containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;br>This is an optional documentation.&#xD;&#xA;"/>
@@ -188,7 +188,7 @@
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TransitionBase">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="docu" eType="ecore:EClass ../../../org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.ecore#//Documentation"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="docu" eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.ecore#//Documentation"
         containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;br>This is an optional documentation.&#xD;&#xA;"/>

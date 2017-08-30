@@ -1026,6 +1026,7 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 	private final DecimalExpElements pDecimalExp;
 	private final FQNElements pFQN;
 	private final TerminalRule tHEX;
+	private final TerminalRule tCC_STRING;
 	
 	private final Grammar grammar;
 
@@ -1061,6 +1062,7 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 		this.pDecimalExp = new DecimalExpElements();
 		this.pFQN = new FQNElements();
 		this.tHEX = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.etrice.core.common.Base.HEX");
+		this.tCC_STRING = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.etrice.core.common.Base.CC_STRING");
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -1383,6 +1385,12 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 	//	('0x' | '0X') ('0'..'9' | 'a'..'f' | 'A'..'F')+;
 	public TerminalRule getHEXRule() {
 		return tHEX;
+	} 
+
+	//terminal CC_STRING:
+	//	"'''"->"'''";
+	public TerminalRule getCC_STRINGRule() {
+		return tCC_STRING;
 	} 
 
 	//terminal ID:

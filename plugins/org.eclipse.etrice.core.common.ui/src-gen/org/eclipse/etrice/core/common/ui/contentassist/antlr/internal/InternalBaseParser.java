@@ -22,18 +22,19 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalBaseParser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_HEX", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'mandatory'", "'false'", "'+'", "'-'", "'e'", "'E'", "'ptBoolean'", "'ptInteger'", "'ptReal'", "'ptCharacter'", "'@'", "'('", "')'", "','", "'='", "'attribute'", "':'", "'{'", "'}'", "'.*'", "'['", "']'", "'.'", "'optional'", "'true'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_HEX", "RULE_INT", "RULE_STRING", "RULE_CC_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'mandatory'", "'false'", "'+'", "'-'", "'e'", "'E'", "'ptBoolean'", "'ptInteger'", "'ptReal'", "'ptCharacter'", "'@'", "'('", "')'", "','", "'='", "'attribute'", "':'", "'{'", "'}'", "'.*'", "'['", "']'", "'.'", "'optional'", "'true'"
     };
     public static final int RULE_HEX=5;
     public static final int RULE_STRING=7;
-    public static final int RULE_SL_COMMENT=9;
+    public static final int RULE_SL_COMMENT=10;
     public static final int T__19=19;
+    public static final int RULE_CC_STRING=8;
     public static final int T__15=15;
+    public static final int T__37=37;
     public static final int T__16=16;
     public static final int T__17=17;
     public static final int T__18=18;
     public static final int T__33=33;
-    public static final int T__12=12;
     public static final int T__34=34;
     public static final int T__13=13;
     public static final int T__35=35;
@@ -44,15 +45,15 @@ public class InternalBaseParser extends AbstractInternalContentAssistParser {
     public static final int T__31=31;
     public static final int T__32=32;
     public static final int RULE_ID=4;
-    public static final int RULE_WS=10;
-    public static final int RULE_ANY_OTHER=11;
+    public static final int RULE_WS=11;
+    public static final int RULE_ANY_OTHER=12;
     public static final int T__26=26;
     public static final int T__27=27;
     public static final int T__28=28;
     public static final int RULE_INT=6;
     public static final int T__29=29;
     public static final int T__22=22;
-    public static final int RULE_ML_COMMENT=8;
+    public static final int RULE_ML_COMMENT=9;
     public static final int T__23=23;
     public static final int T__24=24;
     public static final int T__25=25;
@@ -1623,22 +1624,22 @@ public class InternalBaseParser extends AbstractInternalContentAssistParser {
             int alt1=2;
             int LA1_0 = input.LA(1);
 
-            if ( (LA1_0==35) ) {
+            if ( (LA1_0==36) ) {
                 int LA1_1 = input.LA(2);
 
-                if ( (LA1_1==27) ) {
+                if ( (LA1_1==28) ) {
                     int LA1_3 = input.LA(3);
 
                     if ( (LA1_3==RULE_ID) ) {
                         int LA1_4 = input.LA(4);
 
-                        if ( (LA1_4==28) ) {
+                        if ( (LA1_4==29) ) {
                             int LA1_5 = input.LA(5);
 
-                            if ( (LA1_5==29) ) {
+                            if ( (LA1_5==30) ) {
                                 alt1=2;
                             }
-                            else if ( ((LA1_5>=18 && LA1_5<=21)) ) {
+                            else if ( ((LA1_5>=19 && LA1_5<=22)) ) {
                                 alt1=1;
                             }
                             else {
@@ -1669,22 +1670,22 @@ public class InternalBaseParser extends AbstractInternalContentAssistParser {
                     throw nvae;
                 }
             }
-            else if ( (LA1_0==12) ) {
+            else if ( (LA1_0==13) ) {
                 int LA1_2 = input.LA(2);
 
-                if ( (LA1_2==27) ) {
+                if ( (LA1_2==28) ) {
                     int LA1_3 = input.LA(3);
 
                     if ( (LA1_3==RULE_ID) ) {
                         int LA1_4 = input.LA(4);
 
-                        if ( (LA1_4==28) ) {
+                        if ( (LA1_4==29) ) {
                             int LA1_5 = input.LA(5);
 
-                            if ( (LA1_5==29) ) {
+                            if ( (LA1_5==30) ) {
                                 alt1=2;
                             }
-                            else if ( ((LA1_5>=18 && LA1_5<=21)) ) {
+                            else if ( ((LA1_5>=19 && LA1_5<=22)) ) {
                                 alt1=1;
                             }
                             else {
@@ -1788,10 +1789,10 @@ public class InternalBaseParser extends AbstractInternalContentAssistParser {
             int alt2=2;
             int LA2_0 = input.LA(1);
 
-            if ( (LA2_0==35) ) {
+            if ( (LA2_0==36) ) {
                 alt2=1;
             }
-            else if ( (LA2_0==12) ) {
+            else if ( (LA2_0==13) ) {
                 alt2=2;
             }
             else {
@@ -1833,7 +1834,7 @@ public class InternalBaseParser extends AbstractInternalContentAssistParser {
                     // InternalBase.g:670:1: 'mandatory'
                     {
                      before(grammarAccess.getSimpleAnnotationAttributeAccess().getMandatoryKeyword_0_1()); 
-                    match(input,12,FOLLOW_2); 
+                    match(input,13,FOLLOW_2); 
                      after(grammarAccess.getSimpleAnnotationAttributeAccess().getMandatoryKeyword_0_1()); 
 
                     }
@@ -1869,10 +1870,10 @@ public class InternalBaseParser extends AbstractInternalContentAssistParser {
             int alt3=2;
             int LA3_0 = input.LA(1);
 
-            if ( (LA3_0==35) ) {
+            if ( (LA3_0==36) ) {
                 alt3=1;
             }
-            else if ( (LA3_0==12) ) {
+            else if ( (LA3_0==13) ) {
                 alt3=2;
             }
             else {
@@ -1914,7 +1915,7 @@ public class InternalBaseParser extends AbstractInternalContentAssistParser {
                     // InternalBase.g:694:1: 'mandatory'
                     {
                      before(grammarAccess.getEnumAnnotationAttributeAccess().getMandatoryKeyword_0_1()); 
-                    match(input,12,FOLLOW_2); 
+                    match(input,13,FOLLOW_2); 
                      after(grammarAccess.getEnumAnnotationAttributeAccess().getMandatoryKeyword_0_1()); 
 
                     }
@@ -1949,16 +1950,16 @@ public class InternalBaseParser extends AbstractInternalContentAssistParser {
             // InternalBase.g:712:1: ( ( ruleBooleanLiteral ) | ( ruleNumberLiteral ) | ( ruleStringLiteral ) )
             int alt4=3;
             switch ( input.LA(1) ) {
-            case 13:
-            case 36:
+            case 14:
+            case 37:
                 {
                 alt4=1;
                 }
                 break;
             case RULE_HEX:
             case RULE_INT:
-            case 14:
             case 15:
+            case 16:
                 {
                 alt4=2;
                 }
@@ -2061,10 +2062,10 @@ public class InternalBaseParser extends AbstractInternalContentAssistParser {
             int alt5=2;
             int LA5_0 = input.LA(1);
 
-            if ( (LA5_0==13) ) {
+            if ( (LA5_0==14) ) {
                 alt5=1;
             }
-            else if ( (LA5_0==36) ) {
+            else if ( (LA5_0==37) ) {
                 alt5=2;
             }
             else {
@@ -2081,7 +2082,7 @@ public class InternalBaseParser extends AbstractInternalContentAssistParser {
                     // InternalBase.g:742:1: 'false'
                     {
                      before(grammarAccess.getBooleanLiteralAccess().getFalseKeyword_1_0()); 
-                    match(input,13,FOLLOW_2); 
+                    match(input,14,FOLLOW_2); 
                      after(grammarAccess.getBooleanLiteralAccess().getFalseKeyword_1_0()); 
 
                     }
@@ -2141,17 +2142,17 @@ public class InternalBaseParser extends AbstractInternalContentAssistParser {
             // InternalBase.g:764:1: ( ( ruleIntLiteral ) | ( ruleRealLiteral ) )
             int alt6=2;
             switch ( input.LA(1) ) {
-            case 14:
+            case 15:
                 {
                 int LA6_1 = input.LA(2);
 
                 if ( (LA6_1==RULE_INT) ) {
                     int LA6_3 = input.LA(3);
 
-                    if ( (LA6_3==34) ) {
+                    if ( (LA6_3==35) ) {
                         alt6=2;
                     }
-                    else if ( (LA6_3==EOF||(LA6_3>=24 && LA6_3<=25)) ) {
+                    else if ( (LA6_3==EOF||(LA6_3>=25 && LA6_3<=26)) ) {
                         alt6=1;
                     }
                     else {
@@ -2169,17 +2170,17 @@ public class InternalBaseParser extends AbstractInternalContentAssistParser {
                 }
                 }
                 break;
-            case 15:
+            case 16:
                 {
                 int LA6_2 = input.LA(2);
 
                 if ( (LA6_2==RULE_INT) ) {
                     int LA6_3 = input.LA(3);
 
-                    if ( (LA6_3==34) ) {
+                    if ( (LA6_3==35) ) {
                         alt6=2;
                     }
-                    else if ( (LA6_3==EOF||(LA6_3>=24 && LA6_3<=25)) ) {
+                    else if ( (LA6_3==EOF||(LA6_3>=25 && LA6_3<=26)) ) {
                         alt6=1;
                     }
                     else {
@@ -2201,10 +2202,10 @@ public class InternalBaseParser extends AbstractInternalContentAssistParser {
                 {
                 int LA6_3 = input.LA(2);
 
-                if ( (LA6_3==34) ) {
+                if ( (LA6_3==35) ) {
                     alt6=2;
                 }
-                else if ( (LA6_3==EOF||(LA6_3>=24 && LA6_3<=25)) ) {
+                else if ( (LA6_3==EOF||(LA6_3>=25 && LA6_3<=26)) ) {
                     alt6=1;
                 }
                 else {
@@ -2294,7 +2295,7 @@ public class InternalBaseParser extends AbstractInternalContentAssistParser {
             int alt7=2;
             int LA7_0 = input.LA(1);
 
-            if ( (LA7_0==RULE_INT||(LA7_0>=14 && LA7_0<=15)) ) {
+            if ( (LA7_0==RULE_INT||(LA7_0>=15 && LA7_0<=16)) ) {
                 alt7=1;
             }
             else if ( (LA7_0==RULE_HEX) ) {
@@ -2375,10 +2376,10 @@ public class InternalBaseParser extends AbstractInternalContentAssistParser {
             int alt8=2;
             int LA8_0 = input.LA(1);
 
-            if ( (LA8_0==14) ) {
+            if ( (LA8_0==15) ) {
                 alt8=1;
             }
-            else if ( (LA8_0==15) ) {
+            else if ( (LA8_0==16) ) {
                 alt8=2;
             }
             else {
@@ -2395,7 +2396,7 @@ public class InternalBaseParser extends AbstractInternalContentAssistParser {
                     // InternalBase.g:810:1: '+'
                     {
                      before(grammarAccess.getIntegerAccess().getPlusSignKeyword_0_0_0()); 
-                    match(input,14,FOLLOW_2); 
+                    match(input,15,FOLLOW_2); 
                      after(grammarAccess.getIntegerAccess().getPlusSignKeyword_0_0_0()); 
 
                     }
@@ -2410,7 +2411,7 @@ public class InternalBaseParser extends AbstractInternalContentAssistParser {
                     // InternalBase.g:818:1: '-'
                     {
                      before(grammarAccess.getIntegerAccess().getHyphenMinusKeyword_0_0_1()); 
-                    match(input,15,FOLLOW_2); 
+                    match(input,16,FOLLOW_2); 
                      after(grammarAccess.getIntegerAccess().getHyphenMinusKeyword_0_0_1()); 
 
                     }
@@ -2445,23 +2446,23 @@ public class InternalBaseParser extends AbstractInternalContentAssistParser {
             // InternalBase.g:834:1: ( ( ruleDecimal ) | ( ruleDecimalExp ) )
             int alt9=2;
             switch ( input.LA(1) ) {
-            case 14:
+            case 15:
                 {
                 int LA9_1 = input.LA(2);
 
                 if ( (LA9_1==RULE_INT) ) {
                     int LA9_3 = input.LA(3);
 
-                    if ( (LA9_3==34) ) {
+                    if ( (LA9_3==35) ) {
                         int LA9_4 = input.LA(4);
 
                         if ( (LA9_4==RULE_INT) ) {
                             int LA9_5 = input.LA(5);
 
-                            if ( (LA9_5==EOF||(LA9_5>=24 && LA9_5<=25)) ) {
+                            if ( (LA9_5==EOF||(LA9_5>=25 && LA9_5<=26)) ) {
                                 alt9=1;
                             }
-                            else if ( ((LA9_5>=16 && LA9_5<=17)) ) {
+                            else if ( ((LA9_5>=17 && LA9_5<=18)) ) {
                                 alt9=2;
                             }
                             else {
@@ -2493,23 +2494,23 @@ public class InternalBaseParser extends AbstractInternalContentAssistParser {
                 }
                 }
                 break;
-            case 15:
+            case 16:
                 {
                 int LA9_2 = input.LA(2);
 
                 if ( (LA9_2==RULE_INT) ) {
                     int LA9_3 = input.LA(3);
 
-                    if ( (LA9_3==34) ) {
+                    if ( (LA9_3==35) ) {
                         int LA9_4 = input.LA(4);
 
                         if ( (LA9_4==RULE_INT) ) {
                             int LA9_5 = input.LA(5);
 
-                            if ( (LA9_5==EOF||(LA9_5>=24 && LA9_5<=25)) ) {
+                            if ( (LA9_5==EOF||(LA9_5>=25 && LA9_5<=26)) ) {
                                 alt9=1;
                             }
-                            else if ( ((LA9_5>=16 && LA9_5<=17)) ) {
+                            else if ( ((LA9_5>=17 && LA9_5<=18)) ) {
                                 alt9=2;
                             }
                             else {
@@ -2545,16 +2546,16 @@ public class InternalBaseParser extends AbstractInternalContentAssistParser {
                 {
                 int LA9_3 = input.LA(2);
 
-                if ( (LA9_3==34) ) {
+                if ( (LA9_3==35) ) {
                     int LA9_4 = input.LA(3);
 
                     if ( (LA9_4==RULE_INT) ) {
                         int LA9_5 = input.LA(4);
 
-                        if ( (LA9_5==EOF||(LA9_5>=24 && LA9_5<=25)) ) {
+                        if ( (LA9_5==EOF||(LA9_5>=25 && LA9_5<=26)) ) {
                             alt9=1;
                         }
-                        else if ( ((LA9_5>=16 && LA9_5<=17)) ) {
+                        else if ( ((LA9_5>=17 && LA9_5<=18)) ) {
                             alt9=2;
                         }
                         else {
@@ -2653,10 +2654,10 @@ public class InternalBaseParser extends AbstractInternalContentAssistParser {
             int alt10=2;
             int LA10_0 = input.LA(1);
 
-            if ( (LA10_0==14) ) {
+            if ( (LA10_0==15) ) {
                 alt10=1;
             }
-            else if ( (LA10_0==15) ) {
+            else if ( (LA10_0==16) ) {
                 alt10=2;
             }
             else {
@@ -2673,7 +2674,7 @@ public class InternalBaseParser extends AbstractInternalContentAssistParser {
                     // InternalBase.g:858:1: '+'
                     {
                      before(grammarAccess.getDecimalAccess().getPlusSignKeyword_0_0()); 
-                    match(input,14,FOLLOW_2); 
+                    match(input,15,FOLLOW_2); 
                      after(grammarAccess.getDecimalAccess().getPlusSignKeyword_0_0()); 
 
                     }
@@ -2688,7 +2689,7 @@ public class InternalBaseParser extends AbstractInternalContentAssistParser {
                     // InternalBase.g:866:1: '-'
                     {
                      before(grammarAccess.getDecimalAccess().getHyphenMinusKeyword_0_1()); 
-                    match(input,15,FOLLOW_2); 
+                    match(input,16,FOLLOW_2); 
                      after(grammarAccess.getDecimalAccess().getHyphenMinusKeyword_0_1()); 
 
                     }
@@ -2724,10 +2725,10 @@ public class InternalBaseParser extends AbstractInternalContentAssistParser {
             int alt11=2;
             int LA11_0 = input.LA(1);
 
-            if ( (LA11_0==14) ) {
+            if ( (LA11_0==15) ) {
                 alt11=1;
             }
-            else if ( (LA11_0==15) ) {
+            else if ( (LA11_0==16) ) {
                 alt11=2;
             }
             else {
@@ -2744,7 +2745,7 @@ public class InternalBaseParser extends AbstractInternalContentAssistParser {
                     // InternalBase.g:884:1: '+'
                     {
                      before(grammarAccess.getDecimalExpAccess().getPlusSignKeyword_0_0()); 
-                    match(input,14,FOLLOW_2); 
+                    match(input,15,FOLLOW_2); 
                      after(grammarAccess.getDecimalExpAccess().getPlusSignKeyword_0_0()); 
 
                     }
@@ -2759,7 +2760,7 @@ public class InternalBaseParser extends AbstractInternalContentAssistParser {
                     // InternalBase.g:892:1: '-'
                     {
                      before(grammarAccess.getDecimalExpAccess().getHyphenMinusKeyword_0_1()); 
-                    match(input,15,FOLLOW_2); 
+                    match(input,16,FOLLOW_2); 
                      after(grammarAccess.getDecimalExpAccess().getHyphenMinusKeyword_0_1()); 
 
                     }
@@ -2795,10 +2796,10 @@ public class InternalBaseParser extends AbstractInternalContentAssistParser {
             int alt12=2;
             int LA12_0 = input.LA(1);
 
-            if ( (LA12_0==16) ) {
+            if ( (LA12_0==17) ) {
                 alt12=1;
             }
-            else if ( (LA12_0==17) ) {
+            else if ( (LA12_0==18) ) {
                 alt12=2;
             }
             else {
@@ -2815,7 +2816,7 @@ public class InternalBaseParser extends AbstractInternalContentAssistParser {
                     // InternalBase.g:910:1: 'e'
                     {
                      before(grammarAccess.getDecimalExpAccess().getEKeyword_4_0()); 
-                    match(input,16,FOLLOW_2); 
+                    match(input,17,FOLLOW_2); 
                      after(grammarAccess.getDecimalExpAccess().getEKeyword_4_0()); 
 
                     }
@@ -2830,7 +2831,7 @@ public class InternalBaseParser extends AbstractInternalContentAssistParser {
                     // InternalBase.g:918:1: 'E'
                     {
                      before(grammarAccess.getDecimalExpAccess().getEKeyword_4_1()); 
-                    match(input,17,FOLLOW_2); 
+                    match(input,18,FOLLOW_2); 
                      after(grammarAccess.getDecimalExpAccess().getEKeyword_4_1()); 
 
                     }
@@ -2866,10 +2867,10 @@ public class InternalBaseParser extends AbstractInternalContentAssistParser {
             int alt13=2;
             int LA13_0 = input.LA(1);
 
-            if ( (LA13_0==14) ) {
+            if ( (LA13_0==15) ) {
                 alt13=1;
             }
-            else if ( (LA13_0==15) ) {
+            else if ( (LA13_0==16) ) {
                 alt13=2;
             }
             else {
@@ -2886,7 +2887,7 @@ public class InternalBaseParser extends AbstractInternalContentAssistParser {
                     // InternalBase.g:936:1: '+'
                     {
                      before(grammarAccess.getDecimalExpAccess().getPlusSignKeyword_5_0()); 
-                    match(input,14,FOLLOW_2); 
+                    match(input,15,FOLLOW_2); 
                      after(grammarAccess.getDecimalExpAccess().getPlusSignKeyword_5_0()); 
 
                     }
@@ -2901,7 +2902,7 @@ public class InternalBaseParser extends AbstractInternalContentAssistParser {
                     // InternalBase.g:944:1: '-'
                     {
                      before(grammarAccess.getDecimalExpAccess().getHyphenMinusKeyword_5_1()); 
-                    match(input,15,FOLLOW_2); 
+                    match(input,16,FOLLOW_2); 
                      after(grammarAccess.getDecimalExpAccess().getHyphenMinusKeyword_5_1()); 
 
                     }
@@ -2936,22 +2937,22 @@ public class InternalBaseParser extends AbstractInternalContentAssistParser {
             // InternalBase.g:960:1: ( ( ( 'ptBoolean' ) ) | ( ( 'ptInteger' ) ) | ( ( 'ptReal' ) ) | ( ( 'ptCharacter' ) ) )
             int alt14=4;
             switch ( input.LA(1) ) {
-            case 18:
+            case 19:
                 {
                 alt14=1;
                 }
                 break;
-            case 19:
+            case 20:
                 {
                 alt14=2;
                 }
                 break;
-            case 20:
+            case 21:
                 {
                 alt14=3;
                 }
                 break;
-            case 21:
+            case 22:
                 {
                 alt14=4;
                 }
@@ -2974,7 +2975,7 @@ public class InternalBaseParser extends AbstractInternalContentAssistParser {
                     // InternalBase.g:963:1: ( 'ptBoolean' )
                     // InternalBase.g:963:3: 'ptBoolean'
                     {
-                    match(input,18,FOLLOW_2); 
+                    match(input,19,FOLLOW_2); 
 
                     }
 
@@ -2995,7 +2996,7 @@ public class InternalBaseParser extends AbstractInternalContentAssistParser {
                     // InternalBase.g:970:1: ( 'ptInteger' )
                     // InternalBase.g:970:3: 'ptInteger'
                     {
-                    match(input,19,FOLLOW_2); 
+                    match(input,20,FOLLOW_2); 
 
                     }
 
@@ -3016,7 +3017,7 @@ public class InternalBaseParser extends AbstractInternalContentAssistParser {
                     // InternalBase.g:977:1: ( 'ptReal' )
                     // InternalBase.g:977:3: 'ptReal'
                     {
-                    match(input,20,FOLLOW_2); 
+                    match(input,21,FOLLOW_2); 
 
                     }
 
@@ -3037,7 +3038,7 @@ public class InternalBaseParser extends AbstractInternalContentAssistParser {
                     // InternalBase.g:984:1: ( 'ptCharacter' )
                     // InternalBase.g:984:3: 'ptCharacter'
                     {
-                    match(input,21,FOLLOW_2); 
+                    match(input,22,FOLLOW_2); 
 
                     }
 
@@ -3117,7 +3118,7 @@ public class InternalBaseParser extends AbstractInternalContentAssistParser {
             // InternalBase.g:1014:1: '@'
             {
              before(grammarAccess.getAnnotationAccess().getCommercialAtKeyword_0()); 
-            match(input,22,FOLLOW_2); 
+            match(input,23,FOLLOW_2); 
              after(grammarAccess.getAnnotationAccess().getCommercialAtKeyword_0()); 
 
             }
@@ -3276,7 +3277,7 @@ public class InternalBaseParser extends AbstractInternalContentAssistParser {
             int alt15=2;
             int LA15_0 = input.LA(1);
 
-            if ( (LA15_0==23) ) {
+            if ( (LA15_0==24) ) {
                 alt15=1;
             }
             switch (alt15) {
@@ -3368,7 +3369,7 @@ public class InternalBaseParser extends AbstractInternalContentAssistParser {
             // InternalBase.g:1108:1: '('
             {
              before(grammarAccess.getAnnotationAccess().getLeftParenthesisKeyword_2_0()); 
-            match(input,23,FOLLOW_2); 
+            match(input,24,FOLLOW_2); 
              after(grammarAccess.getAnnotationAccess().getLeftParenthesisKeyword_2_0()); 
 
             }
@@ -3534,7 +3535,7 @@ public class InternalBaseParser extends AbstractInternalContentAssistParser {
                 int alt16=2;
                 int LA16_0 = input.LA(1);
 
-                if ( (LA16_0==25) ) {
+                if ( (LA16_0==26) ) {
                     alt16=1;
                 }
 
@@ -3626,7 +3627,7 @@ public class InternalBaseParser extends AbstractInternalContentAssistParser {
             // InternalBase.g:1196:1: ')'
             {
              before(grammarAccess.getAnnotationAccess().getRightParenthesisKeyword_2_3()); 
-            match(input,24,FOLLOW_2); 
+            match(input,25,FOLLOW_2); 
              after(grammarAccess.getAnnotationAccess().getRightParenthesisKeyword_2_3()); 
 
             }
@@ -3701,7 +3702,7 @@ public class InternalBaseParser extends AbstractInternalContentAssistParser {
             // InternalBase.g:1235:1: ','
             {
              before(grammarAccess.getAnnotationAccess().getCommaKeyword_2_2_0()); 
-            match(input,25,FOLLOW_2); 
+            match(input,26,FOLLOW_2); 
              after(grammarAccess.getAnnotationAccess().getCommaKeyword_2_2_0()); 
 
             }
@@ -3941,7 +3942,7 @@ public class InternalBaseParser extends AbstractInternalContentAssistParser {
             // InternalBase.g:1327:1: '='
             {
              before(grammarAccess.getKeyValueAccess().getEqualsSignKeyword_1()); 
-            match(input,26,FOLLOW_2); 
+            match(input,27,FOLLOW_2); 
              after(grammarAccess.getKeyValueAccess().getEqualsSignKeyword_1()); 
 
             }
@@ -4181,7 +4182,7 @@ public class InternalBaseParser extends AbstractInternalContentAssistParser {
             // InternalBase.g:1424:1: 'attribute'
             {
              before(grammarAccess.getSimpleAnnotationAttributeAccess().getAttributeKeyword_1()); 
-            match(input,27,FOLLOW_2); 
+            match(input,28,FOLLOW_2); 
              after(grammarAccess.getSimpleAnnotationAttributeAccess().getAttributeKeyword_1()); 
 
             }
@@ -4341,7 +4342,7 @@ public class InternalBaseParser extends AbstractInternalContentAssistParser {
             // InternalBase.g:1484:1: ':'
             {
              before(grammarAccess.getSimpleAnnotationAttributeAccess().getColonKeyword_3()); 
-            match(input,28,FOLLOW_2); 
+            match(input,29,FOLLOW_2); 
              after(grammarAccess.getSimpleAnnotationAttributeAccess().getColonKeyword_3()); 
 
             }
@@ -4581,7 +4582,7 @@ public class InternalBaseParser extends AbstractInternalContentAssistParser {
             // InternalBase.g:1582:1: 'attribute'
             {
              before(grammarAccess.getEnumAnnotationAttributeAccess().getAttributeKeyword_1()); 
-            match(input,27,FOLLOW_2); 
+            match(input,28,FOLLOW_2); 
              after(grammarAccess.getEnumAnnotationAttributeAccess().getAttributeKeyword_1()); 
 
             }
@@ -4741,7 +4742,7 @@ public class InternalBaseParser extends AbstractInternalContentAssistParser {
             // InternalBase.g:1642:1: ':'
             {
              before(grammarAccess.getEnumAnnotationAttributeAccess().getColonKeyword_3()); 
-            match(input,28,FOLLOW_2); 
+            match(input,29,FOLLOW_2); 
              after(grammarAccess.getEnumAnnotationAttributeAccess().getColonKeyword_3()); 
 
             }
@@ -4816,7 +4817,7 @@ public class InternalBaseParser extends AbstractInternalContentAssistParser {
             // InternalBase.g:1673:1: '{'
             {
              before(grammarAccess.getEnumAnnotationAttributeAccess().getLeftCurlyBracketKeyword_4()); 
-            match(input,29,FOLLOW_2); 
+            match(input,30,FOLLOW_2); 
              after(grammarAccess.getEnumAnnotationAttributeAccess().getLeftCurlyBracketKeyword_4()); 
 
             }
@@ -4982,7 +4983,7 @@ public class InternalBaseParser extends AbstractInternalContentAssistParser {
                 int alt17=2;
                 int LA17_0 = input.LA(1);
 
-                if ( (LA17_0==25) ) {
+                if ( (LA17_0==26) ) {
                     alt17=1;
                 }
 
@@ -5074,7 +5075,7 @@ public class InternalBaseParser extends AbstractInternalContentAssistParser {
             // InternalBase.g:1761:1: '}'
             {
              before(grammarAccess.getEnumAnnotationAttributeAccess().getRightCurlyBracketKeyword_7()); 
-            match(input,30,FOLLOW_2); 
+            match(input,31,FOLLOW_2); 
              after(grammarAccess.getEnumAnnotationAttributeAccess().getRightCurlyBracketKeyword_7()); 
 
             }
@@ -5149,7 +5150,7 @@ public class InternalBaseParser extends AbstractInternalContentAssistParser {
             // InternalBase.g:1808:1: ','
             {
              before(grammarAccess.getEnumAnnotationAttributeAccess().getCommaKeyword_6_0()); 
-            match(input,25,FOLLOW_2); 
+            match(input,26,FOLLOW_2); 
              after(grammarAccess.getEnumAnnotationAttributeAccess().getCommaKeyword_6_0()); 
 
             }
@@ -5382,14 +5383,14 @@ public class InternalBaseParser extends AbstractInternalContentAssistParser {
             int alt18=2;
             int LA18_0 = input.LA(1);
 
-            if ( (LA18_0==31) ) {
+            if ( (LA18_0==32) ) {
                 alt18=1;
             }
             switch (alt18) {
                 case 1 :
                     // InternalBase.g:1903:2: '.*'
                     {
-                    match(input,31,FOLLOW_2); 
+                    match(input,32,FOLLOW_2); 
 
                     }
                     break;
@@ -5545,7 +5546,7 @@ public class InternalBaseParser extends AbstractInternalContentAssistParser {
             // InternalBase.g:1967:1: '['
             {
              before(grammarAccess.getDocumentationAccess().getLeftSquareBracketKeyword_1()); 
-            match(input,32,FOLLOW_2); 
+            match(input,33,FOLLOW_2); 
              after(grammarAccess.getDocumentationAccess().getLeftSquareBracketKeyword_1()); 
 
             }
@@ -5718,7 +5719,7 @@ public class InternalBaseParser extends AbstractInternalContentAssistParser {
             // InternalBase.g:2026:1: ']'
             {
              before(grammarAccess.getDocumentationAccess().getRightSquareBracketKeyword_3()); 
-            match(input,33,FOLLOW_2); 
+            match(input,34,FOLLOW_2); 
              after(grammarAccess.getDocumentationAccess().getRightSquareBracketKeyword_3()); 
 
             }
@@ -6417,7 +6418,7 @@ public class InternalBaseParser extends AbstractInternalContentAssistParser {
             int alt20=2;
             int LA20_0 = input.LA(1);
 
-            if ( ((LA20_0>=14 && LA20_0<=15)) ) {
+            if ( ((LA20_0>=15 && LA20_0<=16)) ) {
                 alt20=1;
             }
             switch (alt20) {
@@ -6583,7 +6584,7 @@ public class InternalBaseParser extends AbstractInternalContentAssistParser {
             int alt21=2;
             int LA21_0 = input.LA(1);
 
-            if ( ((LA21_0>=14 && LA21_0<=15)) ) {
+            if ( ((LA21_0>=15 && LA21_0<=16)) ) {
                 alt21=1;
             }
             switch (alt21) {
@@ -6750,7 +6751,7 @@ public class InternalBaseParser extends AbstractInternalContentAssistParser {
             // InternalBase.g:2442:1: '.'
             {
              before(grammarAccess.getDecimalAccess().getFullStopKeyword_2()); 
-            match(input,34,FOLLOW_2); 
+            match(input,35,FOLLOW_2); 
              after(grammarAccess.getDecimalAccess().getFullStopKeyword_2()); 
 
             }
@@ -6899,7 +6900,7 @@ public class InternalBaseParser extends AbstractInternalContentAssistParser {
             int alt22=2;
             int LA22_0 = input.LA(1);
 
-            if ( ((LA22_0>=14 && LA22_0<=15)) ) {
+            if ( ((LA22_0>=15 && LA22_0<=16)) ) {
                 alt22=1;
             }
             switch (alt22) {
@@ -7066,7 +7067,7 @@ public class InternalBaseParser extends AbstractInternalContentAssistParser {
             // InternalBase.g:2567:1: '.'
             {
              before(grammarAccess.getDecimalExpAccess().getFullStopKeyword_2()); 
-            match(input,34,FOLLOW_2); 
+            match(input,35,FOLLOW_2); 
              after(grammarAccess.getDecimalExpAccess().getFullStopKeyword_2()); 
 
             }
@@ -7305,7 +7306,7 @@ public class InternalBaseParser extends AbstractInternalContentAssistParser {
             int alt23=2;
             int LA23_0 = input.LA(1);
 
-            if ( ((LA23_0>=14 && LA23_0<=15)) ) {
+            if ( ((LA23_0>=15 && LA23_0<=16)) ) {
                 alt23=1;
             }
             switch (alt23) {
@@ -7543,7 +7544,7 @@ public class InternalBaseParser extends AbstractInternalContentAssistParser {
                 int alt24=2;
                 int LA24_0 = input.LA(1);
 
-                if ( (LA24_0==34) ) {
+                if ( (LA24_0==35) ) {
                     alt24=1;
                 }
 
@@ -7640,7 +7641,7 @@ public class InternalBaseParser extends AbstractInternalContentAssistParser {
             // InternalBase.g:2788:1: '.'
             {
              before(grammarAccess.getFQNAccess().getFullStopKeyword_1_0()); 
-            match(input,34,FOLLOW_2); 
+            match(input,35,FOLLOW_2); 
              after(grammarAccess.getFQNAccess().getFullStopKeyword_1_0()); 
 
             }
@@ -7960,7 +7961,7 @@ public class InternalBaseParser extends AbstractInternalContentAssistParser {
             // InternalBase.g:2927:1: 'optional'
             {
              before(grammarAccess.getSimpleAnnotationAttributeAccess().getOptionalOptionalKeyword_0_0_0()); 
-            match(input,35,FOLLOW_2); 
+            match(input,36,FOLLOW_2); 
              after(grammarAccess.getSimpleAnnotationAttributeAccess().getOptionalOptionalKeyword_0_0_0()); 
 
             }
@@ -8083,7 +8084,7 @@ public class InternalBaseParser extends AbstractInternalContentAssistParser {
             // InternalBase.g:2980:1: 'optional'
             {
              before(grammarAccess.getEnumAnnotationAttributeAccess().getOptionalOptionalKeyword_0_0_0()); 
-            match(input,35,FOLLOW_2); 
+            match(input,36,FOLLOW_2); 
              after(grammarAccess.getEnumAnnotationAttributeAccess().getOptionalOptionalKeyword_0_0_0()); 
 
             }
@@ -8276,7 +8277,7 @@ public class InternalBaseParser extends AbstractInternalContentAssistParser {
             // InternalBase.g:3067:1: 'true'
             {
              before(grammarAccess.getBooleanLiteralAccess().getIsTrueTrueKeyword_1_1_0()); 
-            match(input,36,FOLLOW_2); 
+            match(input,37,FOLLOW_2); 
              after(grammarAccess.getBooleanLiteralAccess().getIsTrueTrueKeyword_1_1_0()); 
 
             }
@@ -8429,27 +8430,27 @@ public class InternalBaseParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000800000L});
-    public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000003000000L});
-    public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000002000002L});
-    public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000004000000L});
-    public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x000000100000E0E0L});
-    public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x0000000008000000L});
-    public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x0000000010000000L});
-    public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x00000000003C0000L});
-    public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x0000000020000000L});
+    public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000001000000L});
+    public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000006000000L});
+    public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000004000002L});
+    public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000008000000L});
+    public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x000000200001C0E0L});
+    public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x0000000010000000L});
+    public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x0000000020000000L});
+    public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000000000780000L});
+    public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x0000000040000000L});
     public static final BitSet FOLLOW_13 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_14 = new BitSet(new long[]{0x0000000042000000L});
-    public static final BitSet FOLLOW_15 = new BitSet(new long[]{0x0000000080000000L});
-    public static final BitSet FOLLOW_16 = new BitSet(new long[]{0x0000000100000000L});
-    public static final BitSet FOLLOW_17 = new BitSet(new long[]{0x0000000200000080L});
+    public static final BitSet FOLLOW_14 = new BitSet(new long[]{0x0000000084000000L});
+    public static final BitSet FOLLOW_15 = new BitSet(new long[]{0x0000000100000000L});
+    public static final BitSet FOLLOW_16 = new BitSet(new long[]{0x0000000200000000L});
+    public static final BitSet FOLLOW_17 = new BitSet(new long[]{0x0000000400000080L});
     public static final BitSet FOLLOW_18 = new BitSet(new long[]{0x0000000000000082L});
-    public static final BitSet FOLLOW_19 = new BitSet(new long[]{0x0000001000002000L});
-    public static final BitSet FOLLOW_20 = new BitSet(new long[]{0x000000000000C060L});
-    public static final BitSet FOLLOW_21 = new BitSet(new long[]{0x000000000000C040L});
-    public static final BitSet FOLLOW_22 = new BitSet(new long[]{0x0000000400000000L});
+    public static final BitSet FOLLOW_19 = new BitSet(new long[]{0x0000002000004000L});
+    public static final BitSet FOLLOW_20 = new BitSet(new long[]{0x0000000000018060L});
+    public static final BitSet FOLLOW_21 = new BitSet(new long[]{0x0000000000018040L});
+    public static final BitSet FOLLOW_22 = new BitSet(new long[]{0x0000000800000000L});
     public static final BitSet FOLLOW_23 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_24 = new BitSet(new long[]{0x0000000000030000L});
-    public static final BitSet FOLLOW_25 = new BitSet(new long[]{0x0000000400000002L});
+    public static final BitSet FOLLOW_24 = new BitSet(new long[]{0x0000000000060000L});
+    public static final BitSet FOLLOW_25 = new BitSet(new long[]{0x0000000800000002L});
 
 }

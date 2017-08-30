@@ -13,10 +13,10 @@
 
 package org.eclipse.etrice.ui.behavior.actioneditor.modelaware;
 
+import org.eclipse.etrice.expressions.detailcode.IDetailExpressionProvider;
 import org.eclipse.etrice.ui.behavior.actioneditor.sourceviewer.ActionCodeAssistProcessor;
 import org.eclipse.etrice.ui.behavior.actioneditor.sourceviewer.ActionCodeColorManager;
 import org.eclipse.etrice.ui.behavior.actioneditor.sourceviewer.ActionCodeEditorConfiguration;
-import org.eclipse.etrice.ui.behavior.fsm.detailcode.IDetailExpressionProvider;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.TextAttribute;
 import org.eclipse.jface.text.contentassist.ContentAssistant;

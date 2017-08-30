@@ -23,6 +23,7 @@ import org.eclipse.xtext.util.Pair;
  * 
  * Also see {@link org.eclipse.xtext.xtext.XtextFormattingTokenSerializer} as an example
  */
+@Deprecated
 public class RoomFormatter extends AbstractDeclarativeFormatter {
 	
 	@Override
@@ -60,9 +61,13 @@ public class RoomFormatter extends AbstractDeclarativeFormatter {
 			c.setNoSpace().before(k);
 		}
 		
-		for (Keyword k: f.findKeywords("entry", "exit", "StateMachine", "subgraph", "action", "cond", "regular", "conjugated",
+		for (Keyword k: f.findKeywords("do", "entry", "exit", "StateMachine", "subgraph", "action", "cond", "regular", "conjugated",
 				"incoming", "outgoing", "ServiceImplementation", "SubProtocol", "Structure", "Behavior", "Interface", "usercode", "usercode1", "usercode2")) {
 			c.setLinewrap().before(k);
+		}
+		
+		for (Keyword k: f.findKeywords("do", "entry", "exit", "action", "cond", "usercode", "usercode1", "usercode2")) {
+			c.setSpace(" ").between(k, f.findKeywords("'''").get(0));
 		}
 		
 		c.setLinewrap(2).around(f.getImportRule());
@@ -94,7 +99,7 @@ public class RoomFormatter extends AbstractDeclarativeFormatter {
 		c.setLinewrap().around(f.getPortRule());
 		c.setLinewrap().around(f.getExternalPortRule());
 		c.setLinewrap().around(f.getLogicalThreadRule());
-		c.setLinewrap().around(f.getDetailCodeAccess().getLinesAssignment_2());
+		c.setLinewrap().around(f.getDetailCodeAccess().getLinesAssignment_1_1());
 		c.setLinewrap().around(f.getBindingRule());
 		c.setLinewrap().around(f.getSAPRule());
 		c.setLinewrap().around(f.getSPPRule());

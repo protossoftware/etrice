@@ -558,42 +558,56 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 
 	public class DetailCodeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.etrice.core.fsm.FSM.DetailCode");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cDetailCodeAction_0 = (Action)cGroup.eContents().get(0);
-		private final Assignment cUsedAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final Keyword cUsedLeftCurlyBracketKeyword_1_0 = (Keyword)cUsedAssignment_1.eContents().get(0);
-		private final Assignment cLinesAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cLinesSTRINGTerminalRuleCall_2_0 = (RuleCall)cLinesAssignment_2.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
+		private final Action cDetailCodeAction_0_0 = (Action)cGroup_0.eContents().get(0);
+		private final Assignment cLinesAssignment_0_1 = (Assignment)cGroup_0.eContents().get(1);
+		private final RuleCall cLinesCC_STRINGTerminalRuleCall_0_1_0 = (RuleCall)cLinesAssignment_0_1.eContents().get(0);
+		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
+		private final Assignment cUsedAssignment_1_0 = (Assignment)cGroup_1.eContents().get(0);
+		private final Keyword cUsedLeftCurlyBracketKeyword_1_0_0 = (Keyword)cUsedAssignment_1_0.eContents().get(0);
+		private final Assignment cLinesAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final RuleCall cLinesSTRINGTerminalRuleCall_1_1_0 = (RuleCall)cLinesAssignment_1_1.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_1_2 = (Keyword)cGroup_1.eContents().get(2);
 		
 		//// the detail level (or target language) code
 		//// the used flag might be used when overriding in derived grammars
 		//DetailCode:
-		//	{DetailCode} used?='{'
-		//	lines+=STRING*
-		//	'}';
+		//	{DetailCode} lines+=CC_STRING? | used?='{' lines+=STRING* '}';
 		@Override public ParserRule getRule() { return rule; }
 
-		//{DetailCode} used?='{' lines+=STRING* '}'
-		public Group getGroup() { return cGroup; }
+		//{DetailCode} lines+=CC_STRING? | used?='{' lines+=STRING* '}'
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//{DetailCode} lines+=CC_STRING?
+		public Group getGroup_0() { return cGroup_0; }
 
 		//{DetailCode}
-		public Action getDetailCodeAction_0() { return cDetailCodeAction_0; }
+		public Action getDetailCodeAction_0_0() { return cDetailCodeAction_0_0; }
+
+		//lines+=CC_STRING?
+		public Assignment getLinesAssignment_0_1() { return cLinesAssignment_0_1; }
+
+		//CC_STRING
+		public RuleCall getLinesCC_STRINGTerminalRuleCall_0_1_0() { return cLinesCC_STRINGTerminalRuleCall_0_1_0; }
+
+		//used?='{' lines+=STRING* '}'
+		public Group getGroup_1() { return cGroup_1; }
 
 		//used?='{'
-		public Assignment getUsedAssignment_1() { return cUsedAssignment_1; }
+		public Assignment getUsedAssignment_1_0() { return cUsedAssignment_1_0; }
 
 		//'{'
-		public Keyword getUsedLeftCurlyBracketKeyword_1_0() { return cUsedLeftCurlyBracketKeyword_1_0; }
+		public Keyword getUsedLeftCurlyBracketKeyword_1_0_0() { return cUsedLeftCurlyBracketKeyword_1_0_0; }
 
 		//lines+=STRING*
-		public Assignment getLinesAssignment_2() { return cLinesAssignment_2; }
+		public Assignment getLinesAssignment_1_1() { return cLinesAssignment_1_1; }
 
 		//STRING
-		public RuleCall getLinesSTRINGTerminalRuleCall_2_0() { return cLinesSTRINGTerminalRuleCall_2_0; }
+		public RuleCall getLinesSTRINGTerminalRuleCall_1_1_0() { return cLinesSTRINGTerminalRuleCall_1_1_0; }
 
 		//'}'
-		public Keyword getRightCurlyBracketKeyword_3() { return cRightCurlyBracketKeyword_3; }
+		public Keyword getRightCurlyBracketKeyword_1_2() { return cRightCurlyBracketKeyword_1_2; }
 	}
 
 	public class TrPointElements extends AbstractParserRuleElementFinder {
@@ -2201,9 +2215,7 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	//// the detail level (or target language) code
 	//// the used flag might be used when overriding in derived grammars
 	//DetailCode:
-	//	{DetailCode} used?='{'
-	//	lines+=STRING*
-	//	'}';
+	//	{DetailCode} lines+=CC_STRING? | used?='{' lines+=STRING* '}';
 	public DetailCodeElements getDetailCodeAccess() {
 		return pDetailCode;
 	}
@@ -2835,6 +2847,12 @@ public class FSMGrammarAccess extends AbstractGrammarElementFinder {
 	//	('0x' | '0X') ('0'..'9' | 'a'..'f' | 'A'..'F')+;
 	public TerminalRule getHEXRule() {
 		return gaBase.getHEXRule();
+	} 
+
+	//terminal CC_STRING:
+	//	"'''"->"'''";
+	public TerminalRule getCC_STRINGRule() {
+		return gaBase.getCC_STRINGRule();
 	} 
 
 	//terminal ID:

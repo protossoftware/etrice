@@ -149,3 +149,6 @@ FQN:
 
 terminal HEX:
 	('0x' | '0X') ('0'..'9' | 'a'..'f' | 'A'..'F')+;
+	
+terminal CC_STRING:
+	"'''" -> "'''";
