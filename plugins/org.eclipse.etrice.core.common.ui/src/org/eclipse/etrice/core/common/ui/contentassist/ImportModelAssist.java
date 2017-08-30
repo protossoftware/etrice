@@ -1,4 +1,4 @@
-package org.eclipse.etrice.core.ui.contentassist;
+package org.eclipse.etrice.core.common.ui.contentassist;
 
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceProxy;

@@ -13,7 +13,7 @@
 package org.eclipse.etrice.core.etphys.ui.contentassist;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.etrice.core.ui.contentassist.ImportModelAssist;
+import org.eclipse.etrice.core.common.ui.contentassist.ImportModelAssist;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;

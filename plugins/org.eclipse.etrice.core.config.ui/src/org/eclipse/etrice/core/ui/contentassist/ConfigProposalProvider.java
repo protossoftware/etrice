@@ -17,6 +17,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.common.base.LiteralType;
+import org.eclipse.etrice.core.common.ui.contentassist.ImportModelAssist;
 import org.eclipse.etrice.core.config.ActorInstanceConfig;
 import org.eclipse.etrice.core.config.AttrConfig;
 import org.eclipse.etrice.core.config.AttrInstanceConfig;

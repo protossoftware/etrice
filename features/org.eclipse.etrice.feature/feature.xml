@@ -44,7 +44,7 @@ http://www.eclipse.org/legal/epl-v10.html
       <discovery label="Eclipse Orbit" url="http://download.eclipse.org/tools/orbit/downloads/drops/R20160520211859/repository/"/>
    </url>
 
-      <requires>
+   <requires>
       <import plugin="org.eclipse.etrice.core.common" version="1.1.1" match="greaterOrEqual"/>
       <import plugin="org.eclipse.etrice.core.fsm" version="1.1.1" match="greaterOrEqual"/>
       <import plugin="org.antlr.runtime" version="3.0.0" match="greaterOrEqual"/>
@@ -404,6 +404,13 @@ http://www.eclipse.org/legal/epl-v10.html
 
    <plugin
          id="org.eclipse.etrice.generator.gnuplot"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.etrice.expressions.ui"
          download-size="0"
          install-size="0"
          version="0.0.0"
