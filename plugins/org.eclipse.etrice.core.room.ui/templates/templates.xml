@@ -64,9 +64,8 @@ ${cursor}</template>
 	<template autoinsert="true" context="org.eclipse.etrice.core.Room.kw_Operation"
 		deleted="false" description="operation skeleton" enabled="true"
 		id="operation" name="Operation">Operation ${name}(${param}: ${paramtype}): ${rtype} '''&#13;
-	${cursor}
-'''&#13;
-${cursor}</template>
+	${cursor}&#13;
+'''</template>
 
 	<template autoinsert="true" context="org.eclipse.etrice.core.fsm.FSM.kw_State"
 		deleted="false" description="State with entry code, exit code and sub graph"
@@ -85,8 +84,8 @@ ${cursor}</template>
 	<template autoinsert="true" context="org.eclipse.etrice.core.fsm.FSM.DetailCode"
 		deleted="false" description="detail code" enabled="true" id="detail_code"
 		name="detail code"> '''&#13;
-	${text}${cursor}&#13;
-'''&#13;</template>
+	${cursor}&#13;
+'''</template>
 
 	<template autoinsert="true" context="org.eclipse.etrice.core.Room.kw_Port"
 		deleted="false" description="insert port" enabled="true" id="port"
