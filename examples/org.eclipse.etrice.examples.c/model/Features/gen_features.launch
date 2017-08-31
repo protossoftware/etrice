@@ -5,6 +5,7 @@
 <booleanAttribute key="UseTranslation" value="true"/>
 <listAttribute key="ModelFiles">
 <listEntry value="${workspace_loc:/org.eclipse.etrice.examples.c/model/Features/Features.etmap}"/>
+<listEntry value="${workspace_loc:/org.eclipse.etrice.examples.c/model/Features/Multiplicity.room}"/>
 </listAttribute>
 <listAttribute key="org.eclipse.debug.ui.favoriteGroups">
 <listEntry value="org.eclipse.debug.ui.launchGroup.run"/>

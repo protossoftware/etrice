@@ -8,6 +8,7 @@
 <booleanAttribute key="MSC" value="false"/>
 <listAttribute key="ModelFiles">
 <listEntry value="${workspace_loc:/org.eclipse.etrice.examples.java/model/dynamicactors1/DynAct1.room}"/>
+<listEntry value="${workspace_loc:/org.eclipse.etrice.examples.java/model/dynamicactors1/DynAct1.etmap}"/>
 </listAttribute>
 <booleanAttribute key="Persist" value="false"/>
 <booleanAttribute key="SaveGenModel" value="true"/>

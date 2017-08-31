@@ -1,6 +1,4 @@
 bin
-src-gen/*
-!src-gen/readme.txt
 src-gen-info/*
 !src-gen-info/readme.txt
 doc-gen/*

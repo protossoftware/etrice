@@ -2,8 +2,6 @@ WindowsMinGW
 LinuxPosix
 WindowsMinGW_ST
 
-src-gen/*
-!src-gen/readme.txt
 src-gen-info/*
 !src-gen-info/readme.txt
 
@@ -12,4 +10,3 @@ src-gen-info/*
 *.gz
 *.toc
 *.log
-/MinGWDebug/

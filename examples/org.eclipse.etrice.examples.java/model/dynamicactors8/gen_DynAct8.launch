@@ -9,6 +9,7 @@
 <booleanAttribute key="MSC" value="true"/>
 <listAttribute key="ModelFiles">
 <listEntry value="${workspace_loc:/org.eclipse.etrice.examples.java/model/dynamicactors8/DynAct8.etmap}"/>
+<listEntry value="${workspace_loc:/org.eclipse.etrice.examples.java/model/dynamicactors8/DynAct8.room}"/>
 </listAttribute>
 <booleanAttribute key="OverrideDirectories" value="false"/>
 <booleanAttribute key="Persist" value="false"/>

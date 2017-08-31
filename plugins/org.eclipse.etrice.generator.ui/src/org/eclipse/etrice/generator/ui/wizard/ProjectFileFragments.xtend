@@ -85,7 +85,7 @@ class ProjectFileFragments {
 		'''
 	}
 	
-	def static String getGeneratorLaunchConfig(String targetLanguage, String modelPath, String baseName, String mainMethodName, String[] addLines) {
+	def static String getGeneratorLaunchConfig(String targetLanguage, String modelPath, String mainMethodName, String[] addLines) {
 		val prefStore = new ScopedPreferenceStore(InstanceScope.INSTANCE, "org.eclipse.etrice.generator.ui");
 		val useTranslation = prefStore.getBoolean(PreferenceConstants::GEN_USE_TRANSLATION)
 		'''
@@ -96,7 +96,8 @@ class ProjectFileFragments {
 			<booleanAttribute key="UseTranslation" value="«useTranslation»"/>
 			<stringAttribute key="MainMethodName" value="«mainMethodName»"/>
 			<listAttribute key="ModelFiles">
-			<listEntry value="${workspace_loc:«modelPath»/«baseName».etmap}"/>
+			<listEntry value="${workspace_loc:«modelPath»/Mapping.etmap}"/>
+			<listEntry value="${workspace_loc:«modelPath»/TemplateModel.room}"/>
 			</listAttribute>
 			<listAttribute key="org.eclipse.debug.ui.favoriteGroups">
 			<listEntry value="org.eclipse.debug.ui.launchGroup.run"/>

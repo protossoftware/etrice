@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="org.eclipse.etrice.generator.launch.c.launchConfigurationType">
+<booleanAttribute key="DataLogging" value="false"/>
 <booleanAttribute key="Debug" value="false"/>
-<booleanAttribute key="GenDocumentation" value="true"/>
-<booleanAttribute key="GenInstanceDiagram" value="true"/>
+<booleanAttribute key="GenDocumentation" value="false"/>
+<booleanAttribute key="GenInstanceDiagram" value="false"/>
 <stringAttribute key="GenModelPath" value=""/>
 <booleanAttribute key="Lib" value="true"/>
 <booleanAttribute key="MSC" value="true"/>
+<stringAttribute key="MainMethodName" value="main"/>
 <listAttribute key="ModelFiles">
 <listEntry value="${workspace_loc:/org.eclipse.etrice.modellib.c/model/TimingService.room}"/>
 <listEntry value="${workspace_loc:/org.eclipse.etrice.modellib.c/model/TcpService.room}"/>
+<listEntry value="${workspace_loc:/org.eclipse.etrice.modellib.c/model/Tests.room}"/>
+<listEntry value="${workspace_loc:/org.eclipse.etrice.modellib.c/model/PInterrupt.room}"/>
 </listAttribute>
+<booleanAttribute key="OverrideDirectories" value="false"/>
 <booleanAttribute key="SaveGenModel" value="false"/>
+<booleanAttribute key="UseTranslation" value="true"/>
 <booleanAttribute key="Verbose" value="false"/>
-<stringAttribute key="org.eclipse.debug.core.ATTR_REFRESH_SCOPE" value="${workspace}"/>
+<stringAttribute key="org.eclipse.debug.core.ATTR_REFRESH_SCOPE" value="${project}"/>
 </launchConfiguration>
