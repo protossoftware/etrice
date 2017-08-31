@@ -126,18 +126,18 @@ class GnuplotScriptGenerator {
 			
 			cd 'log'
 			set datafile separator comma
-			set terminal Â«formatÂ» size Â«widthÂ»,Â«heightÂ» font ",Â«fontsizeÂ»" background "white"
-			set output 'Â«outputfileÂ»'
+			set terminal «format» size «width»,«height» font ",«fontsize»" background "white"
+			set output '«outputfile»'
 			set size 1,1
-			set multiplot layout Â«graphAnnotations.sizeÂ»,1
+			set multiplot layout «graphAnnotations.size»,1
 			set grid
 			show grid
 			set format y "% 5.3f"
-			Â«var i = 0Â»
-			Â«FOR a : graphAnnotationsÂ»
+			«var i = 0»
+			«FOR a : graphAnnotations»
 				
-				Â«ssi.generateGraph(a, i++, graphAnnotations.size)Â»
-			Â«ENDFORÂ»
+				«ssi.generateGraph(a, i++, graphAnnotations.size)»
+			«ENDFOR»
 			
 			unset multiplot
 			unset output
@@ -161,15 +161,15 @@ class GnuplotScriptGenerator {
 		val vertSize = 1.0F / total
 
 		'''
-			set yrange [Â«ymin ?: "*"Â» : Â«ymax ?: "*"Â»]
-			set xtics rotate Â«xticsÂ»
-			set mxtics Â«mxticsÂ»
+			set yrange [«ymin ?: "*"» : «ymax ?: "*"»]
+			set xtics rotate «xtics»
+			set mxtics «mxtics»
 			set ylabel
 			set xlabel "time (ms)"
-			timeInMs(x) = Â«intervalÂ» * x
-			set origin 0,Â«vertOriginÂ»
-			set size 1,Â«vertSizeÂ»
-			plot 'main.data.csv' using (timeInMs(column(1))):(column("Â«pathsÂ»")) with lines
+			timeInMs(x) = «interval» * x
+			set origin 0,«vertOrigin»
+			set size 1,«vertSize»
+			plot 'main.data.csv' using (timeInMs(column(1))):(column("«paths»")) with lines
 		'''
 	}
 }

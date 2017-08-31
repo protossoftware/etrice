@@ -5,3 +5,4 @@ gerritKeys.pub
 *.xtendbin
 language.settings.xml
 target/
+xtend-gen/
