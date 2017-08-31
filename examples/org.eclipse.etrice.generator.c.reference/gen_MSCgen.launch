@@ -8,6 +8,7 @@
 <booleanAttribute key="MSC" value="false"/>
 <listAttribute key="ModelFiles">
 <listEntry value="${workspace_loc:/org.eclipse.etrice.generator.c.reference/model/MSCgen/MSCgen.etmap}"/>
+<listEntry value="${workspace_loc:/org.eclipse.etrice.generator.c.reference/model/MSCgen/MSCgen.room}"/>
 </listAttribute>
 <booleanAttribute key="SaveGenModel" value="false"/>
 <booleanAttribute key="Verbose" value="false"/>

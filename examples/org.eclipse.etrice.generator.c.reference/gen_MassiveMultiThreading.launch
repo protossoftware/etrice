@@ -8,6 +8,7 @@
 <booleanAttribute key="MSC" value="true"/>
 <listAttribute key="ModelFiles">
 <listEntry value="${workspace_loc:/org.eclipse.etrice.generator.c.reference/model/MassiveMultiThreading.etmap}"/>
+<listEntry value="${workspace_loc:/org.eclipse.etrice.generator.c.reference/model/MassiveMultiThreading.room}"/>
 </listAttribute>
 <booleanAttribute key="SaveGenModel" value="false"/>
 <booleanAttribute key="Verbose" value="false"/>

@@ -10,6 +10,7 @@
 <listEntry value="${workspace_loc:/org.eclipse.etrice.modellib.java/model/TimingService.room}"/>
 <listEntry value="${workspace_loc:/org.eclipse.etrice.modellib.java/model/ALogService.room}"/>
 <listEntry value="${workspace_loc:/org.eclipse.etrice.modellib.java/model/TcpService.room}"/>
+<listEntry value="${workspace_loc:/org.eclipse.etrice.modellib.java/model/Tests.room}"/>
 </listAttribute>
 <booleanAttribute key="Persist" value="false"/>
 <booleanAttribute key="SaveGenModel" value="false"/>

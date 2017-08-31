@@ -8,6 +8,7 @@
 <booleanAttribute key="MSC" value="true"/>
 <listAttribute key="ModelFiles">
 <listEntry value="${workspace_loc:/org.eclipse.etrice.tutorials.simulators.trafficlight.example/model/trafficlight.example.etmap}"/>
+<listEntry value="${workspace_loc:/org.eclipse.etrice.tutorials.simulators.trafficlight.example/model/trafficlight.example.room}"/>
 <listEntry value="${workspace_loc:/org.eclipse.etrice.tutorials.simulators.trafficlight.example/model/trafficlight.example.config}"/>
 </listAttribute>
 <booleanAttribute key="Persist" value="false"/>

@@ -364,8 +364,8 @@ public class ProjectCreator {
 	}
 
 	public static void createLaunchGeneratorConfig(URI uri,
-			String targetLanguage, String modelPath, String baseName, String mainMethodName, String[] addLines) {
-		writeFile(uri, ProjectFileFragments.getGeneratorLaunchConfig(targetLanguage, modelPath, baseName, mainMethodName, addLines));
+			String targetLanguage, String modelPath, String mainMethodName, String[] addLines) {
+		writeFile(uri, ProjectFileFragments.getGeneratorLaunchConfig(targetLanguage, modelPath, mainMethodName, addLines));
 	}
 
 	public static void createLaunchJavaApplicationConfig(URI uri,
@@ -385,7 +385,7 @@ public class ProjectCreator {
 			ProjectCreator.createLaunchGeneratorConfig(
 					URI.createPlatformResourceURI("/" + project.getName()
 							+ "/gen_" + baseName + ".launch", true), "java",
-					mdlPath, baseName, mainMethodName, additionalLaunchConfigLines);
+					mdlPath, mainMethodName, additionalLaunchConfigLines);
 			ProjectCreator.createLaunchJavaApplicationConfig(
 					URI.createPlatformResourceURI("/" + project.getName()
 							+ "/run_" + baseName + ".launch", true),
@@ -401,7 +401,7 @@ public class ProjectCreator {
 			ProjectCreator.createLaunchGeneratorConfig(
 					URI.createPlatformResourceURI("/" + project.getName()
 							+ "/gen_" + baseName + ".launch", true), language,
-					mdlPath, baseName, mainMethodName, additionalLaunchConfigLines);
+					mdlPath, mainMethodName, additionalLaunchConfigLines);
 			ProjectCreator.createLaunchCApplicationConfig(
 					URI.createPlatformResourceURI("/" + project.getName()
 							+ "/run_" + baseName + ".launch", true),

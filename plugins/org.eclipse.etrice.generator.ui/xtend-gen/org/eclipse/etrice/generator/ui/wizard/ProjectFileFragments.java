@@ -180,7 +180,7 @@ public class ProjectFileFragments {
     return _builder.toString();
   }
   
-  public static String getGeneratorLaunchConfig(final String targetLanguage, final String modelPath, final String baseName, final String mainMethodName, final String[] addLines) {
+  public static String getGeneratorLaunchConfig(final String targetLanguage, final String modelPath, final String mainMethodName, final String[] addLines) {
     String _xblockexpression = null;
     {
       final ScopedPreferenceStore prefStore = new ScopedPreferenceStore(InstanceScope.INSTANCE, "org.eclipse.etrice.generator.ui");
@@ -208,9 +208,11 @@ public class ProjectFileFragments {
       _builder.newLine();
       _builder.append("<listEntry value=\"${workspace_loc:");
       _builder.append(modelPath, "");
-      _builder.append("/");
-      _builder.append(baseName, "");
-      _builder.append(".etmap}\"/>");
+      _builder.append("/Mapping.etmap}\"/>");
+      _builder.newLineIfNotEmpty();
+      _builder.append("<listEntry value=\"${workspace_loc:");
+      _builder.append(modelPath, "");
+      _builder.append("/TemplateModel.room}\"/>");
       _builder.newLineIfNotEmpty();
       _builder.append("</listAttribute>");
       _builder.newLine();
