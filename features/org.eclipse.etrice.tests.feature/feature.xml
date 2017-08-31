@@ -27,18 +27,17 @@ http://www.eclipse.org/legal/epl-v10.html
       <import plugin="org.eclipse.etrice.core.common" version="1.1.1" match="greaterOrEqual"/>
       <import plugin="org.eclipse.etrice.core.fsm" version="1.1.1" match="greaterOrEqual"/>
       <import plugin="org.junit" version="4.8.1" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.xtext.junit4" version="2.6.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.osgi" version="3.6.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.xtext" version="2.6.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.core.runtime" version="3.6.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.emf.ecore"/>
-      <import plugin="org.eclipse.xtend.core" version="2.7.3" match="greaterOrEqual"/>
       <import plugin="org.eclipse.etrice.generator" version="1.1.1" match="greaterOrEqual"/>
       <import plugin="org.eclipse.etrice.generator.fsm" version="1.1.1" match="greaterOrEqual"/>
       <import plugin="org.eclipse.etrice.ui.behavior" version="1.1.1" match="greaterOrEqual"/>
       <import plugin="org.eclipse.etrice.ui.behavior.fsm" version="1.1.1" match="greaterOrEqual"/>
       <import plugin="org.eclipse.etrice.ui.common" version="1.1.1" match="greaterOrEqual"/>
       <import plugin="org.eclipse.etrice.ui.common.base" version="1.1.1" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.etrice.ui.tests.base" version="1.1.1" match="greaterOrEqual"/>
       <import plugin="org.eclipse.ui" version="3.6.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.graphiti" version="0.8.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.etrice.ui.structure" version="1.1.1" match="greaterOrEqual"/>
@@ -48,7 +47,6 @@ http://www.eclipse.org/legal/epl-v10.html
       <import plugin="org.eclipse.core.runtime" version="3.7.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.etrice.core.config" version="1.1.1" match="greaterOrEqual"/>
       <import plugin="org.eclipse.etrice.core.config.ui" version="1.1.1" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.xtext.junit4" version="2.6.0" match="greaterOrEqual"/>
       <import plugin="org.apache.log4j" version="1.2.15" match="greaterOrEqual"/>
       <import plugin="org.apache.commons.logging" version="1.0.4" match="greaterOrEqual"/>
       <import plugin="org.hamcrest.core"/>
@@ -65,7 +63,14 @@ http://www.eclipse.org/legal/epl-v10.html
       <import plugin="org.eclipse.core.resources" version="3.5.0" match="compatible"/>
       <import plugin="org.eclipse.pde.core" version="3.5.0" match="compatible"/>
       <import plugin="org.eclipse.equinox.frameworkadmin" version="2.0.0" match="compatible"/>
-      <import plugin="org.eclipse.oomph.util" version="1.5.0" match="compatible"/>
+      <import plugin="org.eclipse.xtext.xbase.junit"/>
+      <import plugin="org.eclipse.etrice.ui.base.tests" version="1.1.1" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.xtext.xbase.lib"/>
+      <import plugin="org.eclipse.etrice.core.common.ui"/>
+      <import plugin="org.eclipse.oomph.util" version="1.7.0" match="compatible"/>
+      <import plugin="com.google.guava"/>
+      <import plugin="org.eclipse.xtend.lib"/>
+      <import plugin="org.eclipse.xtend.lib.macro"/>
    </requires>
 
    <plugin
@@ -91,13 +96,6 @@ http://www.eclipse.org/legal/epl-v10.html
 
    <plugin
          id="org.eclipse.etrice.ui.structure.tests"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.etrice.ui.tests.base"
          download-size="0"
          install-size="0"
          version="0.0.0"
@@ -154,6 +152,13 @@ http://www.eclipse.org/legal/epl-v10.html
 
    <plugin
          id="org.eclipse.oomph.util.pde"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.etrice.ui.base.tests"
          download-size="0"
          install-size="0"
          version="0.0.0"
