@@ -1,0 +1,5 @@
+RoomModel ModelDep2 {
+	
+	ActorClass ModelDep2 {
+	}
+}

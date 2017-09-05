@@ -1,0 +1,9 @@
+RoomModel NotMapped {
+	import model "NotMappedDep.room"
+	
+	ActorClass NotMapped {
+		Structure {
+			ActorRef ref0 : NotMappedDep.NotMappedDep
+		}
+	}
+}

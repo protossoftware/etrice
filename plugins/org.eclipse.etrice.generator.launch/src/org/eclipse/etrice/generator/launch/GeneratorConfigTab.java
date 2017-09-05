@@ -76,6 +76,7 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 	public static final String VERBOSE = "Verbose";
 	public static final String USE_TRAANSLATION = "UseTranslation";
 	public static final String OVERRIDE_DIRECTORIES = "OverrideDirectories";
+	public static final String GEN_DEPS_WITHIN_PROJECT = "GenerateDepsWithinProject";
 	public static final String SRCGEN_PATH = "SrcgenPath";
 	public static final String INFO_PATH = "InfoPath";
 	public static final String DOC_PATH = "DocPath";
@@ -89,6 +90,7 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 	private Button mscButton;
 	private Button verboseButton;
 	private Button useTranslationButton;
+	private Button generateDepsWithinProject;
 	private Button overrideDirectories;
 	private Text srcgenPath;
 	private Text infoPath;
@@ -188,6 +190,11 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 		});
 
 		createSeparator(mainComposite, 2);
+		
+		generateDepsWithinProject = createCheckButton(mainComposite, "generate all .etmap dependencies within project");
+		generateDepsWithinProject.setToolTipText("this options automatically generates all referenced model files in this project");
+		generateDepsWithinProject.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 2, 1));
+		generateDepsWithinProject.addSelectionListener(new UpdateConfig());
 		
 		overrideDirectories = createCheckButton(mainComposite, "override generation directories");
 		overrideDirectories.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 2, 1));
@@ -363,6 +370,8 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 				infoPath.setText(infoDir);
 				docPath.setText(docDir);
 			}
+			
+			generateDepsWithinProject.setSelection(configuration.getAttribute(GEN_DEPS_WITHIN_PROJECT, true));
 		}
 		catch (CoreException e) {
 			e.printStackTrace();
@@ -393,6 +402,8 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 			configuration.setAttribute(INFO_PATH, infoPath.getText());
 			configuration.setAttribute(DOC_PATH, docPath.getText());
 		}
+		
+		configuration.setAttribute(GEN_DEPS_WITHIN_PROJECT, generateDepsWithinProject.getSelection());
 	}
 
 	/* (non-Javadoc)

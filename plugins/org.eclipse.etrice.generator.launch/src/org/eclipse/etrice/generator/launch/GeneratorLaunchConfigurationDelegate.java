@@ -14,6 +14,7 @@ package org.eclipse.etrice.generator.launch;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -22,6 +23,7 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.core.runtime.preferences.InstanceScope;
+import org.eclipse.core.variables.IStringVariableManager;
 import org.eclipse.core.variables.VariablesPlugin;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
@@ -44,6 +46,8 @@ import org.eclipse.ui.console.IConsoleView;
 import org.eclipse.ui.console.MessageConsole;
 import org.eclipse.ui.console.MessageConsoleStream;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
+
+import com.google.common.collect.Lists;
 
 /**
  * @author Henrik Rentz-Reichert (initial contribution)
@@ -161,11 +165,24 @@ public abstract class GeneratorLaunchConfigurationDelegate extends AbstractJavaL
 	}
 
 	protected void addModels(ILaunchConfiguration configuration, StringBuffer argString) throws CoreException {
-		@SuppressWarnings("unchecked")
-		ArrayList<String> models = (ArrayList<String>) configuration.getAttribute("ModelFiles", Collections.EMPTY_LIST);
-		for (String model : models){
-			argString.append(" \""+model+"\"");
+		IStringVariableManager variableManager = VariablesPlugin.getDefault().getStringVariableManager();
+		
+		List<String> models = Lists.newArrayList();
+		for(String model : getModels(configuration)) {
+			models.add(variableManager.performStringSubstitution(model));
 		}
+		if(configuration.getAttribute(GeneratorConfigTab.GEN_DEPS_WITHIN_PROJECT, true)) {
+			// generate all dependencies within project for .etmap
+			models = Lists.newArrayList(GeneratorLaunchHelper.getAllDependenciesWithinProjects(models));
+		}
+		for(String model : models) {
+			argString.append(" \""+model+"\"");
+		}		
+	}
+	
+	@SuppressWarnings("unchecked")
+	protected List<String> getModels(ILaunchConfiguration configuration) throws CoreException {
+		return configuration.getAttribute("ModelFiles", Collections.EMPTY_LIST);
 	}
 	
 	/**

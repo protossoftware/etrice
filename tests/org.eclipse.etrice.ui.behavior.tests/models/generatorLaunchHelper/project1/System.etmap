@@ -1,0 +1,8 @@
+MappingModel SystemMapping {
+	import model "Dep.room"
+	import model "Physical.etphys"
+	
+	Mapping  Dep.logicalSystem -> physicalSystem.PhysSys1 {
+		SubSystemMapping subSys -> nodeRef1 {}
+		}
+}
