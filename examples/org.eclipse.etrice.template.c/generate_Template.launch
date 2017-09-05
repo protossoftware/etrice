@@ -9,7 +9,6 @@
 <booleanAttribute key="DataLogging" value="true"/>
 <listAttribute key="ModelFiles">
 <listEntry value="${workspace_loc:/org.eclipse.etrice.template.c/model/Mapping.etmap}"/>
-<listEntry value="${workspace_loc:/org.eclipse.etrice.template.c/model/TemplateModel.room}"/>
 </listAttribute>
 <booleanAttribute key="OverrideDirectories" value="false"/>
 <booleanAttribute key="SaveGenModel" value="false"/>

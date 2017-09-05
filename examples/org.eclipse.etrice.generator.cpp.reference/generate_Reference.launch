@@ -9,10 +9,6 @@
 <booleanAttribute key="DataLogging" value="true"/>
 <listAttribute key="ModelFiles">
 <listEntry value="${workspace_loc:/org.eclipse.etrice.generator.cpp.reference/model/Mapping.etmap}"/>
-<listEntry value="${workspace_loc:/org.eclipse.etrice.generator.cpp.reference/model/ReferenceCPP_Main.room}"/>
-<listEntry value="${workspace_loc:/org.eclipse.etrice.generator.cpp.reference/model/ReferenceCPP_ActorClasses.room}"/>
-<listEntry value="${workspace_loc:/org.eclipse.etrice.generator.cpp.reference/model/ReferenceCPP_DataClasses.room}"/>
-<listEntry value="${workspace_loc:/org.eclipse.etrice.generator.cpp.reference/model/ReferenceCPP_ProtocolClasses.etmap}"/>
 </listAttribute>
 <booleanAttribute key="OverrideDirectories" value="false"/>
 <booleanAttribute key="SaveGenModel" value="false"/>

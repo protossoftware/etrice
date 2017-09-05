@@ -9,7 +9,6 @@
 <booleanAttribute key="DataLogging" value="true"/>
 <listAttribute key="ModelFiles">
 <listEntry value="${workspace_loc:/org.eclipse.etrice.tutorials.c/model/PingPong/Mapping.etmap}"/>
-<listEntry value="${workspace_loc:/org.eclipse.etrice.tutorials.c/model/PingPong/PingPong.room}"/>
 </listAttribute>
 <booleanAttribute key="SaveGenModel" value="false"/>
 <booleanAttribute key="Verbose" value="false"/>

@@ -10,7 +10,6 @@
 <booleanAttribute key="DataLogging" value="true"/>
 <listAttribute key="ModelFiles">
 <listEntry value="${workspace_loc:/org.eclipse.etrice.tutorials.java/model/HelloWorld/Mapping.etmap}"/>
-<listEntry value="${workspace_loc:/org.eclipse.etrice.tutorials.java/model/HelloWorld/HelloWorld.room}"/>
 </listAttribute>
 <booleanAttribute key="Persist" value="false"/>
 <booleanAttribute key="SaveGenModel" value="false"/>
