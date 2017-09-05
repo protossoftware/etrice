@@ -32,21 +32,21 @@ class TestGeneratorLaunchHelper {
 		#['1.room', '2.etphys', '3.etmap', '4.etconfig', '5.unknown'] => [models|assertEquals(models, get(models))]
 	}
 
-	@Test
-	def void project() {
-		val (String) => String toAbsolutePath = [file| Paths.get('models/generatorLaunchHelper', file).toAbsolutePath.toString]
-
-		assertEquals(
-			#[
-			'project1/System.etmap',
-			'project1/NotMapped.room',
-			'project1/Physical.etphys',
-			'project1/Dep.room'
-		].map[toAbsolutePath.apply(it)], get(
-			#[
-			'project1/System.etmap',
-			'project1/NotMapped.room'
-		].map[toAbsolutePath.apply(it)]))
-
-	}
+//	@Test
+//	def void project() {
+//		val (String) => String toAbsolutePath = [file| Paths.get('models/generatorLaunchHelper', file).toAbsolutePath.toString]
+//
+//		assertEquals(
+//			#[
+//			'project1/System.etmap',
+//			'project1/NotMapped.room',
+//			'project1/Physical.etphys',
+//			'project1/Dep.room'
+//		].map[toAbsolutePath.apply(it)], get(
+//			#[
+//			'project1/System.etmap',
+//			'project1/NotMapped.room'
+//		].map[toAbsolutePath.apply(it)]))
+//
+//	}
 }
