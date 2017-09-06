@@ -10,12 +10,16 @@
  */
 package org.eclipse.etrice.ui.launch;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import org.eclipse.etrice.generator.launch.GeneratorLaunchHelper;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Assert;
@@ -48,5 +52,25 @@ public class TestGeneratorLaunchHelper {
     };
     ObjectExtensions.<List<String>>operator_doubleArrow(
       Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("1.room", "2.etphys", "3.etmap", "4.etconfig", "5.unknown")), _function_2);
+  }
+  
+  @Test
+  public void project() {
+    final Function1<String, String> _function = (String file) -> {
+      Path _get = Paths.get("models/generatorLaunchHelper", file);
+      Path _absolutePath = _get.toAbsolutePath();
+      return _absolutePath.toString();
+    };
+    final Function1<? super String, ? extends String> toAbsolutePath = _function;
+    final Function1<String, String> _function_1 = (String it) -> {
+      return toAbsolutePath.apply(it);
+    };
+    List<String> _map = ListExtensions.<String, String>map(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("project1/System.etmap", "project1/NotMapped.room", "project1/Physical.etphys", "project1/Dep.room")), _function_1);
+    final Function1<String, String> _function_2 = (String it) -> {
+      return toAbsolutePath.apply(it);
+    };
+    List<String> _map_1 = ListExtensions.<String, String>map(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("project1/System.etmap", "project1/NotMapped.room")), _function_2);
+    List<String> _get = this.get(_map_1);
+    Assert.assertEquals(_map, _get);
   }
 }
