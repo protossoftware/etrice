@@ -68,7 +68,7 @@ public class StandardModelLocator implements IModelLocator {
 				resolve = resolve.replaceAll("\\\\", "/");
 				resolve = resolve.replaceAll("//", "/");
 				
-				resolve = "file:/" + resolve;
+				resolve = URI.createFileURI(resolve).toString();
 			}
 		} catch (IOException e) {
 			return null;
