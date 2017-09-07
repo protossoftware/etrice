@@ -415,7 +415,7 @@ public abstract class AbstractGenerator implements IDetailCodeTranslator {
 	protected GlobalGeneratorSettings generatorSettings;
 	
 	@Inject
-	private ModelLoader modelLoader;
+	protected ModelLoader modelLoader;
 	
 	@Inject
 	protected IResourceValidator validator;
