@@ -191,11 +191,9 @@ public class DocuPostprocessor {
     EClass _class_6 = PostprocessingHelpers.getClass(pckg, "DetailCode");
     cls = _class_6;
     StringConcatenation _builder_20 = new StringConcatenation();
-    _builder_20.append("The detail code contains a list of strings which");
+    _builder_20.append("The detail code is a string which represents the verbatim code");
     _builder_20.newLine();
-    _builder_20.append("are considered verbatim code of the code generator");
-    _builder_20.newLine();
-    _builder_20.append("target language.");
+    _builder_20.append("of the code generator target language.");
     _builder_20.newLine();
     _builder_20.newLine();
     _builder_20.append("<p>");
@@ -211,7 +209,9 @@ public class DocuPostprocessor {
     PostprocessingHelpers.setDocumentation(cls, _builder_20.toString());
     EAttribute _attribute_2 = PostprocessingHelpers.getAttribute(cls, "lines");
     StringConcatenation _builder_21 = new StringConcatenation();
-    _builder_21.append("This is a list of commands in the code generator\'s target language.");
+    _builder_21.append("This is the program code in the code generator\'s target language.");
+    _builder_21.newLine();
+    _builder_21.append("Due backward compability this is a list of strings. Actually the size of the list should be 0 or 1.");
     _builder_21.newLine();
     PostprocessingHelpers.setDocumentation(_attribute_2, _builder_21.toString());
     EClass _class_7 = PostprocessingHelpers.getClass(pckg, "TrPoint");

@@ -12,17 +12,17 @@ package org.eclipse.etrice.core.common.converter;
 
 import com.google.common.collect.ImmutableList;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
+import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -37,53 +37,52 @@ import org.eclipse.xtext.xbase.lib.Pure;
  */
 @SuppressWarnings("all")
 public class CCStringIndentation {
-  private final static String JAVA_NL = Strings.newLine();
-  
-  private final static String CRLF = "\r\n";
-  
-  private final static String LF = "\n";
-  
-  private final static String CR = "\r";
-  
   public static boolean hasLineBreak(final String nodeText) {
     int _countLineBreaks = Strings.countLineBreaks(nodeText);
     return (_countLineBreaks > 0);
   }
   
-  public static String getLineEnding(final String it) {
+  public static String firstLineSeparator(final String it) {
     String _switchResult = null;
     boolean _matched = false;
-    int _indexOf = it.indexOf(CCStringIndentation.CRLF);
+    int _indexOf = it.indexOf("\r\n");
     boolean _greaterEqualsThan = (_indexOf >= 0);
     if (_greaterEqualsThan) {
       _matched=true;
-      _switchResult = CCStringIndentation.CRLF;
+      _switchResult = "\r\n";
     }
     if (!_matched) {
-      int _indexOf_1 = it.indexOf(CCStringIndentation.LF);
+      int _indexOf_1 = it.indexOf("\n");
       boolean _greaterEqualsThan_1 = (_indexOf_1 >= 0);
       if (_greaterEqualsThan_1) {
         _matched=true;
-        _switchResult = CCStringIndentation.LF;
+        _switchResult = "\n";
       }
     }
     if (!_matched) {
-      int _indexOf_2 = it.indexOf(CCStringIndentation.CR);
+      int _indexOf_2 = it.indexOf("\r");
       boolean _greaterEqualsThan_2 = (_indexOf_2 >= 0);
       if (_greaterEqualsThan_2) {
         _matched=true;
-        _switchResult = CCStringIndentation.CR;
+        _switchResult = "\r";
       }
     }
     if (!_matched) {
-      _switchResult = CCStringIndentation.JAVA_NL;
+      _switchResult = Strings.newLine();
     }
     return _switchResult;
   }
   
-  private final String ccString;
+  private final static Pattern lineSeparatorPattern = new Function0<Pattern>() {
+    public Pattern apply() {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("(\\r(\\n)?|\\n)");
+      Pattern _compile = Pattern.compile(_builder.toString());
+      return _compile;
+    }
+  }.apply();
   
-  private final String lineEnding;
+  private final String ccString;
   
   @Accessors(AccessorType.PUBLIC_GETTER)
   private final ImmutableList<String> splittedLines;
@@ -99,20 +98,17 @@ public class CCStringIndentation {
    */
   public CCStringIndentation(final String ccString) {
     this.ccString = ccString;
-    String _lineEnding = CCStringIndentation.getLineEnding(ccString);
-    this.lineEnding = _lineEnding;
     ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList();
     final Procedure1<ArrayList<String>> _function = (ArrayList<String> lines) -> {
-      Pattern _compile = Pattern.compile(this.lineEnding);
-      final Matcher matcher = _compile.matcher(ccString);
+      final Matcher matcher = CCStringIndentation.lineSeparatorPattern.matcher(ccString);
       int lastOffset = 0;
       while (matcher.find()) {
         {
-          int _start = matcher.start();
-          String _substring = ccString.substring(lastOffset, _start);
-          lines.add(_substring);
           int _end = matcher.end();
-          lastOffset = _end;
+          String _substring = ccString.substring(lastOffset, _end);
+          lines.add(_substring);
+          int _end_1 = matcher.end();
+          lastOffset = _end_1;
         }
       }
       int _length = ccString.length();
@@ -121,8 +117,7 @@ public class CCStringIndentation {
         String _substring = ccString.substring(lastOffset);
         lines.add(_substring);
       } else {
-        boolean _endsWith = ccString.endsWith(this.lineEnding);
-        if (_endsWith) {
+        if ((ccString.endsWith("\n") || ccString.endsWith("\r"))) {
           lines.add("");
         }
       }
@@ -140,20 +135,32 @@ public class CCStringIndentation {
    * @see #highlight()
    */
   public String removeEditorWhiteSpace() {
-    return this.removeEditorWhiteSpace("");
+    return this.removeEditorWhiteSpace("", null);
   }
   
-  protected String removeEditorWhiteSpace(final String indent) {
+  protected String removeEditorWhiteSpace(final String indent, final String lineSeparator) {
     List<Pair<Integer, Integer>> _highlight = this.highlight();
-    final Function2<String, Pair<Integer, Integer>, String> _function = (String lines, Pair<Integer, Integer> offsetLength) -> {
+    final Function1<Pair<Integer, Integer>, String> _function = (Pair<Integer, Integer> offsetLength) -> {
       Integer _key = offsetLength.getKey();
       Integer _key_1 = offsetLength.getKey();
       Integer _value = offsetLength.getValue();
       int _plus = ((_key_1).intValue() + (_value).intValue());
       String _substring = this.ccString.substring((_key).intValue(), _plus);
-      return ((lines + indent) + _substring);
+      return (indent + _substring);
     };
-    return IterableExtensions.<Pair<Integer, Integer>, String>fold(_highlight, "", _function);
+    List<String> _map = ListExtensions.<Pair<Integer, Integer>, String>map(_highlight, _function);
+    final Function1<String, String> _function_1 = (String it) -> {
+      String _xifexpression = null;
+      if ((lineSeparator != null)) {
+        CharSequence _trimTrailingLineBreak = Strings.trimTrailingLineBreak(it);
+        _xifexpression = (_trimTrailingLineBreak + lineSeparator);
+      } else {
+        _xifexpression = it;
+      }
+      return _xifexpression;
+    };
+    List<String> _map_1 = ListExtensions.<String, String>map(_map, _function_1);
+    return IterableExtensions.join(_map_1);
   }
   
   /**
@@ -166,57 +173,71 @@ public class CCStringIndentation {
   /**
    * Returns ccString replaced with given indentation if possible. Ignored lines are trimmed. No delims included.
    * 
+   * @param indentation null to preserve original indentation
+   * @param lineSeparator null to preserve original line endings
+   * 
    * @see #highlight()
    */
-  public String replaceEditorIndentation(final String indentation) {
-    String _xblockexpression = null;
-    {
-      String _xifexpression = null;
-      if ((indentation == null)) {
-        _xifexpression = "";
-      } else {
-        _xifexpression = indentation;
-      }
-      final String indent = _xifexpression;
-      String _xifexpression_1 = null;
-      boolean _canRemoveEditorIndentation = this.canRemoveEditorIndentation();
-      if (_canRemoveEditorIndentation) {
-        String _xifexpression_2 = null;
-        if ((this.ignoreFirst && (this.splittedLines.size() == 2))) {
-          _xifexpression_2 = this.removeEditorWhiteSpace("");
-        } else {
-          String _xifexpression_3 = null;
-          if (this.ignoreFirst) {
-            _xifexpression_3 = this.lineEnding;
+  public String replaceEditorIndentation(final String indentation, final String lineSeparator) {
+    String _xifexpression = null;
+    if (((indentation != null) && this.canRemoveEditorIndentation())) {
+      String _xblockexpression = null;
+      {
+        String _xifexpression_1 = null;
+        if ((this.ignoreFirst && (this.splittedLines.size() > 2))) {
+          String _elvis = null;
+          if (lineSeparator != null) {
+            _elvis = lineSeparator;
           } else {
-            _xifexpression_3 = "";
+            String _head = IterableExtensions.<String>head(this.splittedLines);
+            String _firstLineSeparator = null;
+            if (_head!=null) {
+              _firstLineSeparator=CCStringIndentation.firstLineSeparator(_head);
+            }
+            _elvis = _firstLineSeparator;
           }
-          String _removeEditorWhiteSpace = this.removeEditorWhiteSpace(indent);
-          _xifexpression_2 = (_xifexpression_3 + _removeEditorWhiteSpace);
+          _xifexpression_1 = _elvis;
+        } else {
+          _xifexpression_1 = "";
         }
-        _xifexpression_1 = _xifexpression_2;
-      } else {
-        String _xblockexpression_1 = null;
-        {
-          LinkedList<String> _newLinkedList = CollectionLiterals.<String>newLinkedList(((String[])Conversions.unwrapArray(this.splittedLines, String.class)));
-          final Procedure1<LinkedList<String>> _function = (LinkedList<String> it) -> {
-            if (this.ignoreFirst) {
-              it.set(0, "");
-            }
-            if (this.ignoreLast) {
-              int _size = it.size();
-              int _minus = (_size - 1);
-              it.set(_minus, "");
-            }
-          };
-          final LinkedList<String> lines = ObjectExtensions.<LinkedList<String>>operator_doubleArrow(_newLinkedList, _function);
-          _xblockexpression_1 = IterableExtensions.join(lines, this.lineEnding);
-        }
-        _xifexpression_1 = _xblockexpression_1;
+        final String addFirstLine = _xifexpression_1;
+        String _removeEditorWhiteSpace = this.removeEditorWhiteSpace(indentation, lineSeparator);
+        _xblockexpression = (addFirstLine + _removeEditorWhiteSpace);
       }
-      _xblockexpression = _xifexpression_1;
+      _xifexpression = _xblockexpression;
+    } else {
+      String _xblockexpression_1 = null;
+      {
+        ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList(((String[])Conversions.unwrapArray(this.splittedLines, String.class)));
+        final Procedure1<ArrayList<String>> _function = (ArrayList<String> it) -> {
+          if (this.ignoreFirst) {
+            String _head = IterableExtensions.<String>head(it);
+            String _firstLineSeparator = CCStringIndentation.firstLineSeparator(_head);
+            it.set(0, _firstLineSeparator);
+          }
+          if (this.ignoreLast) {
+            int _size = it.size();
+            int _minus = (_size - 1);
+            it.remove(_minus);
+          }
+        };
+        final ArrayList<String> lines = ObjectExtensions.<ArrayList<String>>operator_doubleArrow(_newArrayList, _function);
+        final Function1<String, String> _function_1 = (String it) -> {
+          String _xifexpression_1 = null;
+          if ((lineSeparator != null)) {
+            CharSequence _trimTrailingLineBreak = Strings.trimTrailingLineBreak(it);
+            _xifexpression_1 = (_trimTrailingLineBreak + lineSeparator);
+          } else {
+            _xifexpression_1 = it;
+          }
+          return _xifexpression_1;
+        };
+        List<String> _map = ListExtensions.<String, String>map(lines, _function_1);
+        _xblockexpression_1 = IterableExtensions.join(_map);
+      }
+      _xifexpression = _xblockexpression_1;
     }
-    return _xblockexpression;
+    return _xifexpression;
   }
   
   /**
@@ -236,44 +257,24 @@ public class CCStringIndentation {
         if (((i == 0) && this.ignoreFirst)) {
           int _offset = offset;
           int _length = line.length();
-          int _length_1 = this.lineEnding.length();
-          int _plus = (_length + _length_1);
-          offset = (_offset + _plus);
+          offset = (_offset + _length);
         } else {
           if (((i == (this.splittedLines.size() - 1)) && this.ignoreLast)) {
           } else {
-            Pair<Integer, Integer> _xblockexpression = null;
-            {
-              int _xifexpression = (int) 0;
-              int _size = this.splittedLines.size();
-              int _minus = (_size - 1);
-              boolean _lessThan = (i < _minus);
-              if (_lessThan) {
-                _xifexpression = this.lineEnding.length();
-              } else {
-                _xifexpression = 0;
-              }
-              final int NL = _xifexpression;
-              Pair<Integer, Integer> _xifexpression_1 = null;
-              boolean _startsWith = line.startsWith(editorIndent);
-              if (_startsWith) {
-                int _length_2 = line.length();
-                int _minus_1 = (_length_2 - skip);
-                int _plus_1 = (_minus_1 + NL);
-                _xifexpression_1 = Pair.<Integer, Integer>of(Integer.valueOf((offset + skip)), Integer.valueOf(_plus_1));
-              } else {
-                int _length_3 = line.length();
-                int _plus_2 = (_length_3 + NL);
-                _xifexpression_1 = Pair.<Integer, Integer>of(Integer.valueOf(offset), Integer.valueOf(_plus_2));
-              }
-              _xblockexpression = _xifexpression_1;
+            Pair<Integer, Integer> _xifexpression = null;
+            boolean _startsWith = line.startsWith(editorIndent);
+            if (_startsWith) {
+              int _length_1 = line.length();
+              int _minus = (_length_1 - skip);
+              _xifexpression = Pair.<Integer, Integer>of(Integer.valueOf((offset + skip)), Integer.valueOf(_minus));
+            } else {
+              int _length_2 = line.length();
+              _xifexpression = Pair.<Integer, Integer>of(Integer.valueOf(offset), Integer.valueOf(_length_2));
             }
-            offsetLengthLines.add(_xblockexpression);
+            offsetLengthLines.add(_xifexpression);
             int _offset_1 = offset;
-            int _length_2 = line.length();
-            int _length_3 = this.lineEnding.length();
-            int _plus_1 = (_length_2 + _length_3);
-            offset = (_offset_1 + _plus_1);
+            int _length_3 = line.length();
+            offset = (_offset_1 + _length_3);
           }
         }
       }
@@ -312,13 +313,18 @@ public class CCStringIndentation {
           _xifexpression_1 = 0;
         }
         final int end = (_size - _xifexpression_1);
-        ImmutableList<String> _subList = this.splittedLines.subList(begin, end);
-        final Function1<String, Pair<String, String>> _function = (String line) -> {
+        final Function1<String, String> _function = (String it) -> {
+          CharSequence _trimTrailingLineBreak = Strings.trimTrailingLineBreak(it);
+          return _trimTrailingLineBreak.toString();
+        };
+        List<String> _map = ListExtensions.<String, String>map(this.splittedLines, _function);
+        List<String> _subList = _map.subList(begin, end);
+        final Function1<String, Pair<String, String>> _function_1 = (String line) -> {
           String _leadingWhiteSpace = Strings.getLeadingWhiteSpace(line);
           return Pair.<String, String>of(_leadingWhiteSpace, line);
         };
-        List<Pair<String, String>> _map = ListExtensions.<String, Pair<String, String>>map(_subList, _function);
-        _xblockexpression_1 = IterableExtensions.<Pair<String, String>>toList(_map);
+        List<Pair<String, String>> _map_1 = ListExtensions.<String, Pair<String, String>>map(_subList, _function_1);
+        _xblockexpression_1 = IterableExtensions.<Pair<String, String>>toList(_map_1);
       }
       final List<Pair<String, String>> wsLinePairs = _xblockexpression_1;
       final Function1<Iterable<String>, String> _function = (Iterable<String> it) -> {

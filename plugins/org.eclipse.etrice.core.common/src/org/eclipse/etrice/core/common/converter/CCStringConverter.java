@@ -20,7 +20,7 @@ public class CCStringConverter extends AbstractLexerBasedConverter<String> {
 	
 	static public String addDelim(final String text, String delim) {
 		if(CCStringIndentation.hasLineBreak(text)) {
-			final String lineEnding = CCStringIndentation.getLineEnding(text);
+			final String lineEnding = CCStringIndentation.firstLineSeparator(text);
 			return delim + lineEnding + text + delim;
 		}
 		return delim + text + delim;

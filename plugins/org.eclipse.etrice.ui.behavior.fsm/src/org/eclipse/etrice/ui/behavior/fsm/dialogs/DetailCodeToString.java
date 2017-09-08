@@ -21,6 +21,7 @@ public class DetailCodeToString extends Converter {
 		if (fromObject instanceof DetailCode) {
 			String result = "";
 			for (String cmd : ((DetailCode) fromObject).getLines()) {
+				// line ending will be corrected at serialization + formatting
 				result += cmd+"\n";
 			}
 			if (!result.isEmpty()) {

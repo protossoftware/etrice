@@ -27,8 +27,8 @@ class CCStringReplacer extends AbstractTextReplacer {
 		if (region.multiline) {
 			val ccIndent = new CCStringIndentation(converter.stripDelim(region.text.trim))
 			val endIndent = if(ccIndent.ignoreLast) context.indentationString else ''
-			val replacement = ccIndent.replaceEditorIndentation(context.getIndentationString(context.indentation + 1)) +
-				endIndent
+			val indentInc = context.getIndentationString(context.indentation + 1)
+			val replacement = ccIndent.replaceEditorIndentation(indentInc, context.getNewLinesString(1)) + endIndent
 			context => [
 				addReplacement(region.replaceWith(converter.delim + replacement + converter.delim))
 			]

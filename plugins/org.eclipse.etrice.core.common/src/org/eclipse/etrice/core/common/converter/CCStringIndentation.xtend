@@ -12,11 +12,11 @@
 
 package org.eclipse.etrice.core.common.converter
 
+import com.google.common.collect.ImmutableList
 import java.util.List
 import java.util.regex.Pattern
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.util.Strings
-import com.google.common.collect.ImmutableList
 
 /**
  *  TODO: Handling mixed line endings
@@ -25,26 +25,23 @@ import com.google.common.collect.ImmutableList
  */
 class CCStringIndentation {
 	
-	val static JAVA_NL = Strings.newLine
-	val static CRLF = "\r\n"
-	val static LF = "\n"
-	val static CR = "\r"
-	
 	static def boolean hasLineBreak(String nodeText) {
 		Strings.countLineBreaks(nodeText) > 0;
 	}
-
-	static def String getLineEnding(String it) {
+	
+	static def String firstLineSeparator(String it) {
 		switch it {
-			case indexOf(CRLF) >= 0: CRLF
-			case indexOf(LF) >= 0: LF
-			case indexOf(CR) >= 0: CR
-			default: JAVA_NL
+			case indexOf('\r\n') >= 0: '\r\n'
+			case indexOf('\n') >= 0: '\n'
+			case indexOf('\r') >= 0: '\r'
+			default: Strings.newLine
 		}
 	}
 	
+	
+	static val lineSeparatorPattern = Pattern.compile('''(\r(\n)?|\n)''');
+	
 	val String ccString
-	val String lineEnding // first lineEnding found (mixed line endings ?!)
 	
 	@Accessors(PUBLIC_GETTER)
 	val ImmutableList<String> splittedLines
@@ -58,20 +55,19 @@ class CCStringIndentation {
 	 */
 	new(String ccString) {
 		this.ccString = ccString
-		lineEnding = getLineEnding(ccString) // use contents line ending
 		splittedLines = ImmutableList.copyOf(newArrayList => [ lines |
-			// split lines by lineEnding, keep all whitespace
-			val matcher = Pattern.compile(lineEnding).matcher(ccString)
+			// split lines by line separator, keep all whitespace
+			val matcher = lineSeparatorPattern.matcher(ccString)
 			var lastOffset = 0
 			while (matcher.find) {
-				lines += ccString.substring(lastOffset, matcher.start)
+				lines += ccString.substring(lastOffset, matcher.end)
 				lastOffset = matcher.end
 			}
 			if (lastOffset < ccString.length) {
 				// put rest
 				lines += ccString.substring(lastOffset)
-			} else if (ccString.endsWith(lineEnding)) {
-				// empty last line is important
+			} else if (ccString.endsWith('\n') || ccString.endsWith('\r')) {
+				// consider empty last line
 				lines += ''
 			}
 		])
@@ -85,13 +81,15 @@ class CCStringIndentation {
 	 * @see #highlight()
 	 */
 	def String removeEditorWhiteSpace() {
-		removeEditorWhiteSpace('')
+		removeEditorWhiteSpace('', null)
 	}
 	
-	protected def String removeEditorWhiteSpace(String indent) {
-		highlight.fold('', [lines, offsetLength | 
-			lines + indent + ccString.substring(offsetLength.key, offsetLength.key + offsetLength.value)
-		])
+	protected def String removeEditorWhiteSpace(String indent, String lineSeparator) {
+		highlight.map[offsetLength | 
+			indent + ccString.substring(offsetLength.key, offsetLength.key + offsetLength.value)
+		].map[
+			if(lineSeparator !== null) Strings.trimTrailingLineBreak(it) + lineSeparator else it
+		].join
 	}
 	
 	/**
@@ -104,22 +102,27 @@ class CCStringIndentation {
 	/**
 	 * Returns ccString replaced with given indentation if possible. Ignored lines are trimmed. No delims included.
 	 * 
+	 * @param indentation null to preserve original indentation
+	 * @param lineSeparator null to preserve original line endings 
+	 * 
 	 * @see #highlight()
 	 */
-	def String replaceEditorIndentation(String indentation) {
-		val indent = if(indentation === null) '' else indentation
-		if(canRemoveEditorIndentation) {
-			if(ignoreFirst && splittedLines.size == 2) {
-				removeEditorWhiteSpace('')
-			} else {
-				(if(ignoreFirst) lineEnding else '') + removeEditorWhiteSpace(indent)			
-			}
-		} else {
-			val lines = <String>newLinkedList(splittedLines) => [
-				if(ignoreFirst) set(0, '')
-				if(ignoreLast) set(size - 1, '')
+	def String replaceEditorIndentation(String indentation, String lineSeparator) {		
+		if(indentation !== null && canRemoveEditorIndentation) {
+			// replace body indentation
+			// first editor line is whitespace, add it trimmed again
+			val addFirstLine = if(ignoreFirst && splittedLines.size > 2) lineSeparator?:splittedLines.head?.firstLineSeparator else ''
+			addFirstLine + removeEditorWhiteSpace(indentation, lineSeparator)
+		} 
+		else {
+			// keep body indentation
+			// trim delim lines and replace line separator
+			val lines = <String>newArrayList(splittedLines) => [
+				// trim delim lines
+				if(ignoreFirst) set(0, head.firstLineSeparator)
+				if(ignoreLast) remove(size - 1)
 			]
-			lines.join(lineEnding)
+			lines.map [if(lineSeparator !== null) Strings.trimTrailingLineBreak(it) + lineSeparator else it].join
 		}
 	}
 	
@@ -140,20 +143,19 @@ class CCStringIndentation {
 			val line = splittedLines.get(i)
 
 			if (i == 0 && ignoreFirst) {
-				offset += line.length + lineEnding.length
+				offset += line.length
 			}
 			else if (i == splittedLines.size - 1 && ignoreLast){
 				// skip
 			}
 			else {	
 				offsetLengthLines += {	
-					val NL = if (i < splittedLines.size - 1) lineEnding.length else 0
 					if (line.startsWith(editorIndent))
-						 offset + skip -> line.length - skip + NL
+						 offset + skip -> line.length - skip
 					else
-						offset -> line.length + NL
+						offset -> line.length
 				}	
-				offset += line.length + lineEnding.length
+				offset += line.length
 			}
 		}
 
@@ -177,14 +179,16 @@ class CCStringIndentation {
 		val wsLinePairs = {
 			val begin = if(ignoreFirst) 1 else 0
 			val end = splittedLines.size - (if(ignoreLast) 1 else 0)
-			splittedLines.subList(begin, end).map[ line |
+			splittedLines.map[Strings.trimTrailingLineBreak(it).toString].subList(begin, end).map[ line |
 				Strings.getLeadingWhiteSpace(line) -> line
 			].toList	
 		}
 		
 		val (Iterable<String>) => String minWSComputor = [if(empty) '' else min]
 		val textIndent = minWSComputor.apply(wsLinePairs.filter[!value.trim.empty].map[key])
-		val consistent = wsLinePairs.map[key].filter[!empty].forall[nonEmptyIndent | nonEmptyIndent.startsWith(textIndent)]		
+		val consistent = wsLinePairs.map[key].filter[!empty].forall[nonEmptyIndent | 
+			nonEmptyIndent.startsWith(textIndent)
+		]		
 			
 		switch this {
 			case consistent: textIndent

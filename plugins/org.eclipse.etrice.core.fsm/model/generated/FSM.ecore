@@ -131,12 +131,12 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DetailCode">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="&lt;br>The detail code contains a list of strings which&#xD;&#xA;are considered verbatim code of the code generator&#xD;&#xA;target language.&#xD;&#xA;&#xD;&#xA;&lt;p>&#xD;&#xA;The detail code is parsed by the {@link org.eclipse.etrice.generator.base.DetailCodeTranslator}&#xD;&#xA;which replaces certain frequent constructs like access of members&#xD;&#xA;and sending a message via a port by target language specific code.&#xD;&#xA;&lt;/p>&#xD;&#xA;"/>
+      <details key="documentation" value="&lt;br>The detail code is a string which represents the verbatim code&#xD;&#xA;of the code generator target language.&#xD;&#xA;&#xD;&#xA;&lt;p>&#xD;&#xA;The detail code is parsed by the {@link org.eclipse.etrice.generator.base.DetailCodeTranslator}&#xD;&#xA;which replaces certain frequent constructs like access of members&#xD;&#xA;and sending a message via a port by target language specific code.&#xD;&#xA;&lt;/p>&#xD;&#xA;"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="lines" unique="false" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="&lt;br>This is a list of commands in the code generator's target language.&#xD;&#xA;"/>
+        <details key="documentation" value="&lt;br>This is the program code in the code generator's target language.&#xD;&#xA;Due backward compability this is a list of strings. Actually the size of the list should be 0 or 1.&#xD;&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="used" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>

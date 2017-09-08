@@ -10,6 +10,7 @@ import java.util.List;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.etrice.core.common.converter.BaseConverterService;
 import org.eclipse.etrice.core.common.converter.CCStringIndentation;
 import org.eclipse.etrice.core.fsm.fSM.ChoicePoint;
 import org.eclipse.etrice.core.fsm.fSM.DetailCode;
@@ -51,6 +52,9 @@ public class FSMJavaValidator extends org.eclipse.etrice.core.fsm.validation.Abs
 	
 	@Inject
 	FSMGrammarAccess grammar;
+	
+	@Inject
+	BaseConverterService converterService;
 	
 	@Check
 	public void checkRefinedStateUnique(RefinedState rs) {
@@ -143,7 +147,7 @@ public class FSMJavaValidator extends org.eclipse.etrice.core.fsm.validation.Abs
 			if(lineNode.getGrammarElement() instanceof RuleCall){
 				AbstractRule rule = ((RuleCall)lineNode.getGrammarElement()).getRule();
 				if(rule == grammar.getCC_STRINGRule()) {
-					if(!new CCStringIndentation(lineNode.getText()).hasConsistentIndentation())
+					if(!new CCStringIndentation(converterService.getCC_StringConverter().stripDelim(lineNode.getText())).hasConsistentIndentation())
 						warning("Inconsistent indentation", dc, FSMPackage.Literals.DETAIL_CODE__LINES, lineNodes.indexOf(lineNode));
 				} else if(rule == grammar.getSTRINGRule()) {
 					isPlainStyle = true;

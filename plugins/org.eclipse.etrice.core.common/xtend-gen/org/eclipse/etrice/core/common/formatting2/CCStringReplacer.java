@@ -46,8 +46,9 @@ public class CCStringReplacer extends AbstractTextReplacer {
       final String endIndent = _xifexpression;
       int _indentation = context.getIndentation();
       int _plus = (_indentation + 1);
-      String _indentationString = context.getIndentationString(_plus);
-      String _replaceEditorIndentation = ccIndent.replaceEditorIndentation(_indentationString);
+      final String indentInc = context.getIndentationString(_plus);
+      String _newLinesString = context.getNewLinesString(1);
+      String _replaceEditorIndentation = ccIndent.replaceEditorIndentation(indentInc, _newLinesString);
       final String replacement = (_replaceEditorIndentation + endIndent);
       final Procedure1<ITextReplacerContext> _function = (ITextReplacerContext it) -> {
         ITextSegment _region_2 = this.getRegion();

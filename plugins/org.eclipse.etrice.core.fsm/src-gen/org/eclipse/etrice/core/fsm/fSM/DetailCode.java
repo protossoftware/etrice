@@ -12,9 +12,8 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * <br>The detail code contains a list of strings which
- * are considered verbatim code of the code generator
- * target language.
+ * <br>The detail code is a string which represents the verbatim code
+ * of the code generator target language.
  * 
  * <p>
  * The detail code is parsed by the {@link org.eclipse.etrice.generator.base.DetailCodeTranslator}
@@ -44,7 +43,8 @@ public interface DetailCode extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * <br>This is a list of commands in the code generator's target language.
+   * <br>This is the program code in the code generator's target language.
+   * Due backward compability this is a list of strings. Actually the size of the list should be 0 or 1.
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Lines</em>' attribute list.
