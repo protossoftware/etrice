@@ -1,0 +1,20 @@
+plugins {
+	id 'java'
+}
+
+dependencies {
+	compile project(':plugins:org.eclipse.etrice.core.common')
+	compile project(':plugins:org.eclipse.etrice.core.etphys')
+	compile project(':plugins:org.eclipse.etrice.core.room')
+	compile project(':plugins:org.eclipse.etrice.core.genmodel')
+	
+	compile "org.eclipse.xtext:org.eclipse.xtext:$xtext_version"
+}
+
+sourceSets {
+	main {
+		java {
+			srcDirs = ['src', 'src-gen', 'xtend-gen']
+		}
+	}
+}

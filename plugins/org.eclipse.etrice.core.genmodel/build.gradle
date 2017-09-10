@@ -1,0 +1,17 @@
+plugins {
+	id 'java'
+}
+
+dependencies {
+	compile project(':plugins:org.eclipse.etrice.core.common')
+	compile project(':plugins:org.eclipse.etrice.core.room')
+	compile project(':plugins:org.eclipse.etrice.core.genmodel.fsm')
+}
+
+sourceSets {
+	main {
+		java {
+			srcDirs = ['src']
+		}
+	}
+}

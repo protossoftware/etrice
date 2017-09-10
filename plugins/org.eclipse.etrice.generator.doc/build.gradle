@@ -1,0 +1,19 @@
+plugins {
+	id 'java'
+}
+
+dependencies {
+	compile project(':plugins:org.eclipse.etrice.core.etmap')
+	compile project(':plugins:org.eclipse.etrice.core.genmodel')
+	compile project(':plugins:org.eclipse.etrice.core.genmodel.fsm')
+	compile project(':plugins:org.eclipse.etrice.generator')
+	compile project(':plugins:org.eclipse.etrice.generator.fsm')
+}
+
+sourceSets {
+	main {
+		java {
+			srcDirs = ['src', 'xtend-gen']
+		}
+	}
+}

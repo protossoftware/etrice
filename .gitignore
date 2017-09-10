@@ -6,3 +6,5 @@ gerritKeys.pub
 language.settings.xml
 target/
 xtend-gen/
+build/
+.gradle/
