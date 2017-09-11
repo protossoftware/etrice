@@ -76,7 +76,7 @@ public class RoomSemanticHighlightingCalculator extends BaseSemanticHighlighter 
 					Matcher matcher = keywordPattern.matcher(text);
 					while(matcher.find()){
 						boolean leftNotId = !Character.isJavaIdentifierPart(text.charAt(matcher.start()-1));
-						boolean rightNotId = !Character.isJavaIdentifierPart(text.charAt(matcher.end()+1));
+						boolean rightNotId = !Character.isJavaIdentifierPart(text.charAt(matcher.end()));
 						if(leftNotId && rightNotId){
 							acceptor.addPosition(node.getOffset() + matcher.start(), matcher.end() - matcher.start(), RoomHighlightingConfiguration.HL_TARGET_LANG_KEYWORD_ID);
 						}
