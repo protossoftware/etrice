@@ -88,7 +88,7 @@ class CCStringIndentation {
 		highlight.map[offsetLength | 
 			indent + ccString.substring(offsetLength.key, offsetLength.key + offsetLength.value)
 		].map[
-			if(lineSeparator !== null) Strings.trimTrailingLineBreak(it) + lineSeparator else it
+			replaceLineBreak(lineSeparator)
 		].join
 	}
 	
@@ -122,8 +122,17 @@ class CCStringIndentation {
 				if(ignoreFirst) set(0, head.firstLineSeparator)
 				if(ignoreLast) remove(size - 1)
 			]
-			lines.map [if(lineSeparator !== null) Strings.trimTrailingLineBreak(it) + lineSeparator else it].join
+			lines.map[
+				replaceLineBreak(lineSeparator)
+			].join
 		}
+	}
+	
+	private def replaceLineBreak(String line, String newLineSeparator) {
+		if (newLineSeparator !== null && Strings.countLineBreaks(line) > 0)
+			Strings.trimTrailingLineBreak(line) + newLineSeparator
+		else
+			line
 	}
 	
 	/**

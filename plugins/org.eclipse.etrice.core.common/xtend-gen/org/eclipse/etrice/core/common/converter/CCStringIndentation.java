@@ -150,14 +150,7 @@ public class CCStringIndentation {
     };
     List<String> _map = ListExtensions.<Pair<Integer, Integer>, String>map(_highlight, _function);
     final Function1<String, String> _function_1 = (String it) -> {
-      String _xifexpression = null;
-      if ((lineSeparator != null)) {
-        CharSequence _trimTrailingLineBreak = Strings.trimTrailingLineBreak(it);
-        _xifexpression = (_trimTrailingLineBreak + lineSeparator);
-      } else {
-        _xifexpression = it;
-      }
-      return _xifexpression;
+      return this.replaceLineBreak(it, lineSeparator);
     };
     List<String> _map_1 = ListExtensions.<String, String>map(_map, _function_1);
     return IterableExtensions.join(_map_1);
@@ -223,19 +216,23 @@ public class CCStringIndentation {
         };
         final ArrayList<String> lines = ObjectExtensions.<ArrayList<String>>operator_doubleArrow(_newArrayList, _function);
         final Function1<String, String> _function_1 = (String it) -> {
-          String _xifexpression_1 = null;
-          if ((lineSeparator != null)) {
-            CharSequence _trimTrailingLineBreak = Strings.trimTrailingLineBreak(it);
-            _xifexpression_1 = (_trimTrailingLineBreak + lineSeparator);
-          } else {
-            _xifexpression_1 = it;
-          }
-          return _xifexpression_1;
+          return this.replaceLineBreak(it, lineSeparator);
         };
         List<String> _map = ListExtensions.<String, String>map(lines, _function_1);
         _xblockexpression_1 = IterableExtensions.join(_map);
       }
       _xifexpression = _xblockexpression_1;
+    }
+    return _xifexpression;
+  }
+  
+  private String replaceLineBreak(final String line, final String newLineSeparator) {
+    String _xifexpression = null;
+    if (((newLineSeparator != null) && (Strings.countLineBreaks(line) > 0))) {
+      CharSequence _trimTrailingLineBreak = Strings.trimTrailingLineBreak(line);
+      _xifexpression = (_trimTrailingLineBreak + newLineSeparator);
+    } else {
+      _xifexpression = line;
     }
     return _xifexpression;
   }
