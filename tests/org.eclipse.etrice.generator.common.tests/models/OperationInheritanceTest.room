@@ -1,11 +1,14 @@
 RoomModel OperationInheritanceTest {
 
-	import room.basic.types.* from "Types.room"
+	import room.basic.types.* from "../../../runtime/${etModellib}/model/Types.room"
+	import room.basic.test.* from "../../../runtime/${etModellib}/model/Tests.room"
 
-	import room.basic.test.* from "Tests.room"
+	SubSystemClass SubSystem_OperationInheritanceTest {
+		@TestInstance
+		ActorRef top_test : OperationInheritanceTest
+	}
 
 	async ActorClass OperationInheritanceTest extends BaseActor {
-		@TestInstance
 		Structure {
 			Attribute testDataClass: SubDataClass
 		}

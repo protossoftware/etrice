@@ -1,10 +1,14 @@
 RoomModel ChoicePointTest {
 
-	import room.basic.test.* from "Tests.room"
-	import room.basic.types.* from "Types.room"
+	import room.basic.types.* from "../../../runtime/${etModellib}/model/Types.room"
+	import room.basic.test.* from "../../../runtime/${etModellib}/model/Tests.room"
+
+	SubSystemClass SubSystem_ChoicePointTest {
+		@TestInstance
+		ActorRef cptest_top : CPTest_Top
+	}
 
 	ActorClass CPTest_Top {
-		@TestInstance
 		Structure {
 			ActorRef cp_tester: CPTester
 			ActorRef cp_user: CPUser

@@ -16,5 +16,9 @@ sourceSets {
 		java {
 			srcDirs = ['src', 'src-gen', 'xtend-gen']
 		}
+		resources {
+			srcDirs = ['src', 'src-gen']
+			include '**/*.xtextbin', '**/*.tokens'
+		}
 	}
 }

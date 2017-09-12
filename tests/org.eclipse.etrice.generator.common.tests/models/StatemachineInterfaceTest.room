@@ -1,6 +1,6 @@
 RoomModel StatemachineInterfaceTestModel {
 
-	import room.basic.types.* from "Types.room"
+	import room.basic.types.* from "../../../runtime/${etModellib}/model/Types.room"
 
 	ActorClass StatemachineInterfaceTest {
 		Structure {

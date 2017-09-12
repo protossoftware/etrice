@@ -1,0 +1,24 @@
+plugins {
+	id 'cpp'
+}
+
+model {
+	components {
+		etrice_runtime_cpp(NativeLibrarySpec) {
+			sources.cpp {
+				source {
+					srcDirs = ['src', 'src-gen']
+					include '**/*.cpp'
+				}
+				exportedHeaders {
+					srcDirs = ['src', 'src-gen']
+				}
+				lib project: ':runtime:org.eclipse.etrice.runtime.c', library: 'etrice_runtime_c', linkage: 'api'
+			}
+			binaries {
+				withType(SharedLibraryBinarySpec) { buildable = false }
+				all { cppCompiler.args '-g3' }
+			}
+		}
+	}
+}

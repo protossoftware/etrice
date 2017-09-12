@@ -5,8 +5,9 @@ plugins {
 dependencies {
 	compile project(':plugins:org.eclipse.etrice.core.common')
 	compile project(':plugins:org.eclipse.etrice.core.fsm')
-	runtime project(':plugins:org.eclipse.etrice.abstractexec.behavior')
-	
+	compile project(':plugins:org.eclipse.etrice.core.genmodel.fsm')
+	compile project(':plugins:org.eclipse.etrice.generator.fsm')
+
 	compile "org.eclipse.platform:org.eclipse.core.runtime:$core_version"
 	compile "org.eclipse.xtext:org.eclipse.xtext:$xtext_version"
 }
@@ -14,11 +15,7 @@ dependencies {
 sourceSets {
 	main {
 		java {
-			srcDirs = ['src', 'src-gen', 'xtend-gen']
-		}
-		resources {
-			srcDirs = ['src', 'src-gen']
-			include '**/*.xtextbin', '**/*.tokens'
+			srcDirs = ['src']
 		}
 	}
 }

@@ -1,7 +1,7 @@
 RoomModel ContinuationTransitionTest {
 	
-	import room.basic.types.* from "Types.room"
-	import room.basic.test.* from "Tests.room"
+	import room.basic.types.* from "../../../runtime/${etModellib}/model/Types.room"
+	import room.basic.test.* from "../../../runtime/${etModellib}/model/Tests.room"
 	
 	ActorClass ContinuationTransitionTest {
 		Structure {

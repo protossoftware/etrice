@@ -1,0 +1,24 @@
+plugins {
+	id 'application'
+}
+
+dependencies {
+	compile "org.eclipse.platform:org.eclipse.core.runtime:$core_version"
+	compile "org.eclipse.emf:org.eclipse.emf.common:$emf_version"
+	compile "org.eclipse.emf:org.eclipse.emf.ecore:$emf_version"
+	compile "org.eclipse.emf:org.eclipse.emf.ecore.xmi:$emf_version"
+}
+
+sourceSets {
+	main {
+		java {
+			srcDirs = ['src']
+		}
+	}
+}
+
+ext.classpath = sourceSets.main.runtimeClasspath
+
+mainClassName = 'org.eclipse.etrice.etunit.converter.EtUnitReportConverter'
+
+distTar.enabled = false

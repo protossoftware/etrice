@@ -1,14 +1,18 @@
-RoomModel CompileTestsModel {
+RoomModel CompileTests {
 
-	import room.basic.types.* from "Types.room"
-	import room.basic.test.* from "Tests.room"
+	import room.basic.types.* from "../../../runtime/${etModellib}/model/Types.room"
+	import room.basic.test.* from "../../../runtime/${etModellib}/model/Tests.room"
 	import DetailExpressionTestModel.DetailExpressionTest from "DetailExpressionTest.room"
 	import StatemachineInterfaceTestModel.StatemachineInterfaceTest from "StatemachineInterfaceTest.room"
 	import StatemachineInterfaceTestInheritedModel.StatemachineInterfaceInheritedTest from "StatemachineInterfaceInheritedTest.room"
 	import ContinuationTransitionTest.ContinuationTransitionTest from "ContinuationTransitionTest.room"
 
-	ActorClass CompileTests {
+	SubSystemClass SubSystem_CompileTests {
 		@TestInstance
+		ActorRef compileTests : CompileTests
+	}
+
+	ActorClass CompileTests {
 		Structure {
 			Attribute caseId : int32
 

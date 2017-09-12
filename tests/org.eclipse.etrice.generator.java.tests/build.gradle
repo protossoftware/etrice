@@ -1,0 +1,32 @@
+plugins {
+	id 'java'
+}
+
+dependencies {
+	compile project(':runtime:org.eclipse.etrice.runtime.java')
+	compile project(':runtime:org.eclipse.etrice.modellib.java')
+}
+
+sourceSets {
+	main {
+		java {
+			srcDirs = ['src', 'src-gen']
+		}
+	}
+}
+
+/*def createTestTasks(name, models, options) {
+	
+}*/
+
+task gen(type: JavaExec, dependsOn: ':plugins:org.eclipse.etrice.generator.java:classes') {
+	main = 'org.eclipse.etrice.generator.java.Main'
+	classpath = project(':plugins:org.eclipse.etrice.generator.java').sourceSets.main.runtimeClasspath
+	args 'ActorCommunicationTest.room'
+}
+
+task run(type: JavaExec, dependsOn: classes) {
+	main = 'DynamicActorTest1.Node_node_da1TestRunner'
+	classpath = sourceSets.main.runtimeClasspath
+	args '-run_as_test'
+}

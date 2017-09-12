@@ -1,6 +1,14 @@
 package org.eclipse.etrice.runtime.java.modelbase;
 
 import org.eclipse.etrice.runtime.java.messaging.Message;
+import org.eclipse.etrice.runtime.java.modelbase.EventMessage;
+import org.eclipse.etrice.runtime.java.modelbase.EventWithDataMessage;
+import org.eclipse.etrice.runtime.java.modelbase.IInterfaceItemOwner;
+import org.eclipse.etrice.runtime.java.modelbase.InterfaceItemBase;
+import org.eclipse.etrice.runtime.java.modelbase.PortBase;
+import org.eclipse.etrice.runtime.java.modelbase.ReplicatedPortBase;
+import org.eclipse.etrice.runtime.java.debugging.DebuggingService;
+import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;
 
 
 
@@ -34,6 +42,12 @@ public class RTSystemServicesProtocol {
 		}
 		public RTSystemServicesProtocolPort(IInterfaceItemOwner actor, String name, int localId, int idx) {
 			super(actor, name, localId, idx);
+			DebuggingService.getInstance().addPortInstance(this);
+		}
+	
+		public void destroy() {
+			DebuggingService.getInstance().removePortInstance(this);
+			super.destroy();
 		}
 	
 		@Override
@@ -42,14 +56,15 @@ public class RTSystemServicesProtocol {
 				return;
 			EventMessage msg = (EventMessage) m;
 			if (0 < msg.getEvtId() && msg.getEvtId() < MSG_MAX) {
-					if (msg instanceof EventWithDataMessage)
-						getActor().receiveEvent(this, msg.getEvtId(), ((EventWithDataMessage)msg).getData());
-					else
-						getActor().receiveEvent(this, msg.getEvtId(), null);
+				DebuggingService.getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), messageStrings[msg.getEvtId()]);
+				if (msg instanceof EventWithDataMessage)
+					getActor().receiveEvent(this, msg.getEvtId(), ((EventWithDataMessage)msg).getData());
+				else
+					getActor().receiveEvent(this, msg.getEvtId(), null);
 			}
 	}
 	
-		
+	
 		// sent messages
 	}
 	
@@ -59,23 +74,23 @@ public class RTSystemServicesProtocol {
 		public RTSystemServicesProtocolReplPort(IInterfaceItemOwner actor, String name, int localId) {
 			super(actor, name, localId);
 		}
-		
+	
 		public int getReplication() {
 			return getNInterfaceItems();
 		}
-		
+	
 		public int getIndexOf(InterfaceItemBase ifitem){
 				return ifitem.getIdx();
-			}
-		
+		}
+	
 		public RTSystemServicesProtocolPort get(int idx) {
 			return (RTSystemServicesProtocolPort) getInterfaceItem(idx);
 		}
-		
+	
 		protected InterfaceItemBase createInterfaceItem(IInterfaceItemOwner rcv, String name, int lid, int idx) {
 			return new RTSystemServicesProtocolPort(rcv, name, lid, idx);
 		}
-		
+	
 		// outgoing messages
 	}
 	
@@ -88,6 +103,12 @@ public class RTSystemServicesProtocol {
 		}
 		public RTSystemServicesProtocolConjPort(IInterfaceItemOwner actor, String name, int localId, int idx) {
 			super(actor, name, localId, idx);
+			DebuggingService.getInstance().addPortInstance(this);
+		}
+	
+		public void destroy() {
+			DebuggingService.getInstance().removePortInstance(this);
+			super.destroy();
 		}
 	
 		@Override
@@ -96,27 +117,31 @@ public class RTSystemServicesProtocol {
 				return;
 			EventMessage msg = (EventMessage) m;
 			if (0 < msg.getEvtId() && msg.getEvtId() < MSG_MAX) {
-					if (msg instanceof EventWithDataMessage)
-						getActor().receiveEvent(this, msg.getEvtId(), ((EventWithDataMessage)msg).getData());
-					else
-						getActor().receiveEvent(this, msg.getEvtId(), null);
+				DebuggingService.getInstance().addMessageAsyncIn(getPeerAddress(), getAddress(), messageStrings[msg.getEvtId()]);
+				if (msg instanceof EventWithDataMessage)
+					getActor().receiveEvent(this, msg.getEvtId(), ((EventWithDataMessage)msg).getData());
+				else
+					getActor().receiveEvent(this, msg.getEvtId(), null);
 			}
 	}
 	
-		
+	
 		// sent messages
 		public void executeInitialTransition() {
+			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_executeInitialTransition]);
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), IN_executeInitialTransition));
-				}
+		}
 		public void startDebugging() {
+			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_startDebugging]);
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), IN_startDebugging));
-				}
+		}
 		public void stopDebugging() {
+			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_stopDebugging]);
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), IN_stopDebugging));
-				}
+		}
 	}
 	
 	// replicated port class
@@ -125,23 +150,23 @@ public class RTSystemServicesProtocol {
 		public RTSystemServicesProtocolConjReplPort(IInterfaceItemOwner actor, String name, int localId) {
 			super(actor, name, localId);
 		}
-		
+	
 		public int getReplication() {
 			return getNInterfaceItems();
 		}
-		
+	
 		public int getIndexOf(InterfaceItemBase ifitem){
 				return ifitem.getIdx();
-			}
-		
+		}
+	
 		public RTSystemServicesProtocolConjPort get(int idx) {
 			return (RTSystemServicesProtocolConjPort) getInterfaceItem(idx);
 		}
-		
+	
 		protected InterfaceItemBase createInterfaceItem(IInterfaceItemOwner rcv, String name, int lid, int idx) {
 			return new RTSystemServicesProtocolConjPort(rcv, name, lid, idx);
 		}
-		
+	
 		// incoming messages
 		public void executeInitialTransition(){
 			for (InterfaceItemBase item : getItems()) {

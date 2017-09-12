@@ -1,8 +1,8 @@
 RoomModel SendingDataTestCpp {
 
-	import room.basic.test.* from "../Tests.room"
-	import room.basic.types.* from "../Types.room"
-	import room.basic.language.* from "../Language.room"
+	import room.basic.test.* from "../../../../runtime/org.eclipse.etrice.modellib.cpp/model/Tests.room"
+	import room.basic.types.* from "../../../../runtime/org.eclipse.etrice.modellib.cpp/model/Types.room"
+	import room.basic.language.* from "../../../../runtime/org.eclipse.etrice.modellib.cpp/model/Language.room"
 
 	ActorClass SendingDataTop {
 		@TestInstance

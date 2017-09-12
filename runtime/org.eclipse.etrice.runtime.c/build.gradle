@@ -1,0 +1,23 @@
+plugins {
+	id 'c'
+}
+
+model {
+	components {
+		etrice_runtime_c(NativeLibrarySpec) {
+			sources.c {
+				source {
+					srcDirs = ['src/common', 'src/config', 'src/platforms/MT_WIN_MinGW', 'src/util']
+					include '**/*.c'
+				}
+				exportedHeaders {
+					srcDirs = ['src/common', 'src/config', 'src/platforms/MT_WIN_MinGW', 'src/util']
+				}
+			}
+			binaries {
+				withType(SharedLibraryBinarySpec) { buildable = false }
+				all { cCompiler.args '-g3' }
+			}
+		}
+	}
+}

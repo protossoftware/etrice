@@ -1,4 +1,4 @@
-include 'plugins:org.eclipse.etrice.core.common',
+include	'plugins:org.eclipse.etrice.core.common',
 	'plugins:org.eclipse.etrice.core.fsm',
 	'plugins:org.eclipse.etrice.core.room',
 	'plugins:org.eclipse.etrice.core.config',
@@ -13,4 +13,15 @@ include 'plugins:org.eclipse.etrice.core.common',
 	'plugins:org.eclipse.etrice.generator.gnuplot',
 	'plugins:org.eclipse.etrice.generator.c',
 	'plugins:org.eclipse.etrice.generator.cpp',
-	'plugins:org.eclipse.etrice.generator.java'
+	'plugins:org.eclipse.etrice.generator.java',
+	'plugins:org.eclipse.etrice.abstractexec.behavior',
+	'plugins:org.eclipse.etrice.etunit.converter',
+	
+	'runtime:org.eclipse.etrice.modellib.c',
+	'runtime:org.eclipse.etrice.modellib.cpp',
+	'runtime:org.eclipse.etrice.modellib.java',
+	'runtime:org.eclipse.etrice.runtime.c',
+	'runtime:org.eclipse.etrice.runtime.cpp',
+	'runtime:org.eclipse.etrice.runtime.java',
+	
+	'tests:org.eclipse.etrice.generator.common.tests'

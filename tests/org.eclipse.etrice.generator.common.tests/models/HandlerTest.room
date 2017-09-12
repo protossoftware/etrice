@@ -1,11 +1,14 @@
 RoomModel HandlerTest {
 
-	import room.basic.types.* from "Types.room"
-	import room.basic.test.* from "Tests.room"
+	import room.basic.types.* from "../../../runtime/${etModellib}/model/Types.room"
+	import room.basic.test.* from "../../../runtime/${etModellib}/model/Tests.room"
 
+	SubSystemClass SubSystem_HandlerTest {
+		@TestInstance
+		ActorRef handlerTest_top : HandlerTest_Top
+	}
 
 	ActorClass HandlerTest_Top {
-		@TestInstance
 		Structure {
 			ActorRef tester: Tester
 			ActorRef handlerUser: HandlerUser

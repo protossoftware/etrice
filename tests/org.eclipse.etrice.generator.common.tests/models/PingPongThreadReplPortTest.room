@@ -1,10 +1,10 @@
 RoomModel PingPongThreadReplPortTest {
 
-	import room.basic.service.timing.* from "TimingService.room"
-	import room.basic.types.* from "Types.room"
+	import room.basic.types.* from "../../../runtime/${etModellib}/model/Types.room"
+	import room.basic.service.timing.* from "../../../runtime/${etModellib}/model/TimingService.room"
 
 	LogicalSystem System_PingPongReplPort{
-		SubSystemRef main : SubSystem_PingPongReplPort
+		SubSystemRef ref_SubSystem_PingPongThreadReplPortTest : SubSystem_PingPongReplPort
 	}
 	
 	SubSystemClass SubSystem_PingPongReplPort {

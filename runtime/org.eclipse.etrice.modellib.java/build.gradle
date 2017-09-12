@@ -1,0 +1,32 @@
+plugins {
+	id 'java'
+}
+
+def generator = ':plugins:org.eclipse.etrice.generator.java'
+
+task generate(type: JavaExec, group: 'build', dependsOn: "$generator:classes") {
+	main = project(generator).mainClassName
+	classpath = project(generator).classpath
+	inputs.dir 'model'
+	outputs.dir 'src-gen'
+	args '-lib', '-msc_instr', '-genDir', 'src-gen',
+		'model/ALogService.room',
+		'model/TcpService.room',
+		'model/TimingService.room'
+}
+
+dependencies {
+	compile project(':runtime:org.eclipse.etrice.runtime.java')
+}
+
+sourceSets {
+	main {
+		java {
+			srcDirs = ['src-gen']
+		}
+	}
+}
+
+compileJava.dependsOn generate
+
+clean.delete 'src-gen'

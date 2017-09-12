@@ -25,6 +25,8 @@ sourceSets {
 	}
 }
 
+ext.classpath = sourceSets.main.runtimeClasspath
+
 mainClassName = 'org.eclipse.etrice.generator.c.Main'
 
 distTar.enabled = false
