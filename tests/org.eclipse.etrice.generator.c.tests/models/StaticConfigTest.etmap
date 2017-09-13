@@ -1,0 +1,10 @@
+MappingModel StaticConfigTest {
+
+	import StaticConfigTest.* from "StaticConfigTest.room"
+	import room.generic.physical.* from "../../org.eclipse.etrice.generator.common.tests/models/GenericPhysical.etphys"
+
+	Mapping System_StaticConfigTest -> GenericPhysicalSystem {
+		SubSystemMapping main -> node {}
+	}
+
+}
