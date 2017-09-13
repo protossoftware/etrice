@@ -1,7 +1,7 @@
 PhysicalModel PingPongThread {
 	
 	PhysicalSystem Sys {
-		NodeRef node: PC
+		NodeRef node1: PC
 	}
 
 	NodeClass PC {

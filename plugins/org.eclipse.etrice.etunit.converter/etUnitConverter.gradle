@@ -1,0 +1,22 @@
+
+def etUnitConverter = ':plugins:org.eclipse.etrice.etunit.converter'
+evaluationDependsOn(etUnitConverter)
+
+/**
+ * Creates a tasks that converts etu files to xml files
+ * @param name: The name of the new task
+ * @param etuProducerTask: The task that produces the etu files
+ */
+ext.createEtUnitConverterTask = { name, etuProducerTask ->
+	def etuFiles = etuProducerTask.outputs.getFiles().collect { it.path }
+	def xmlFiles = etuFiles.collect { it.replace('.etu', '.xml') }
+
+	return tasks.create(name: name, type: JavaExec, dependsOn: "$etUnitConverter:classes") {
+		dependsOn etuProducerTask
+		main = project(etUnitConverter).mainClassName
+		classpath = project(etUnitConverter).sourceSets.main.runtimeClasspath
+		args etuFiles
+		inputs.files etuProducerTask.outputs
+		outputs.files xmlFiles
+	}
+}

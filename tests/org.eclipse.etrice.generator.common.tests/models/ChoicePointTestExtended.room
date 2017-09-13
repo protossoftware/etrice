@@ -350,7 +350,7 @@ RoomModel ChoicePointTestExtended {
 		}
 		Behavior {
 			ctor {
-				"caseId = etUnit_openAll(\"log/testlog\", \"ChoicePointTestExtended\", \"org.eclipse.etrice.generator.common.tests.ChoicePointTestExtended\", \"ChoicePointTest_case\");"
+				"caseId = etUnit_openAll(\".\", \"ChoicePointTestExtended\", \"org.eclipse.etrice.generator.common.tests.ChoicePointTestExtended\", \"ChoicePointTest_case\");"
 			}
 			dtor {
 				"etUnit_closeAll(caseId);"

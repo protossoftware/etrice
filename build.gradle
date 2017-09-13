@@ -1,0 +1,10 @@
+ext {
+	xtext_version = '+'
+	emf_version = '+'
+	core_version = '+'
+	commons_io_version = '+'
+
+	etUnitConverter = "$rootDir/plugins/org.eclipse.etrice.etunit.converter/etUnitConverter.gradle"
+	etriceGenerator = "$rootDir/plugins/org.eclipse.etrice.generator/etriceGenerator.gradle"
+	etriceTest = "$rootDir/tests/org.eclipse.etrice.generator.common.tests/etriceTest.gradle"
+}

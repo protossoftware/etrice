@@ -1,10 +1,10 @@
 RoomModel PingPongThreadReplPortTest {
 
-	import room.basic.types.* from "../../../runtime/${etModellib}/model/Types.room"
 	import room.basic.service.timing.* from "../../../runtime/${etModellib}/model/TimingService.room"
+	import room.basic.types.* from "../../../runtime/${etModellib}/model/Types.room"
 
 	LogicalSystem System_PingPongReplPort{
-		SubSystemRef ref_SubSystem_PingPongThreadReplPortTest : SubSystem_PingPongReplPort
+		SubSystemRef main : SubSystem_PingPongReplPort
 	}
 	
 	SubSystemClass SubSystem_PingPongReplPort {
@@ -54,7 +54,7 @@ RoomModel PingPongThreadReplPortTest {
 		}
 		Behavior {
 			ctor {
-				"caseId = etUnit_openAll(\"log/testlog\", \"PingPongThreadReplPortTest\", \"org.eclipse.etrice.generator.common.tests.PingPongThreadTestReplPort\", \"PingPongThreadTestReplPort_case\");"
+				"caseId = etUnit_openAll(\".\", \"PingPongThreadReplPortTest\", \"org.eclipse.etrice.generator.common.tests.PingPongThreadTestReplPort\", \"PingPongThreadTestReplPort_case\");"
 			}
 			dtor {
 				"etUnit_closeAll(caseId);"

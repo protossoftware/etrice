@@ -63,7 +63,7 @@ RoomModel ActorCommunicationTest {
 		}
 		Behavior {
 			ctor {
-				"etUnit_open(\"log/testlog\", \"ActorCommunicationTest\");"
+				"etUnit_open(\".\", \"ActorCommunicationTest\");"
 				"etUnit_openTestSuite(\"org.eclipse.etrice.generator.common.tests\");"
 			}
 			dtor {

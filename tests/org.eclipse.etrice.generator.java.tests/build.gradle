@@ -1,32 +1,29 @@
 plugins {
-	id 'java'
+	id 'java-base'
 }
 
-dependencies {
-	compile project(':runtime:org.eclipse.etrice.runtime.java')
-	compile project(':runtime:org.eclipse.etrice.modellib.java')
-}
+apply from: etriceTest
 
-sourceSets {
-	main {
-		java {
-			srcDirs = ['src', 'src-gen']
-		}
-	}
-}
+def genericPhysical = '../org.eclipse.etrice.generator.common.tests/models/GenericPhysical.etphys'
 
-/*def createTestTasks(name, models, options) {
-	
-}*/
+createTest('java', 'sendingDataTest', ['models/SendingDataTest.room', genericPhysical])
+createTest('java', 'staticConfigTest', ['models/StaticConfigTest.etmap', 'models/StaticConfigTest.room', 'models/StaticConfigTest.config'])
+sourceSets.staticConfigTest.java.srcDir 'src/staticConfigTest'
 
-task gen(type: JavaExec, dependsOn: ':plugins:org.eclipse.etrice.generator.java:classes') {
-	main = 'org.eclipse.etrice.generator.java.Main'
-	classpath = project(':plugins:org.eclipse.etrice.generator.java').sourceSets.main.runtimeClasspath
-	args 'ActorCommunicationTest.room'
-}
+createTest('java', 'dynamicActorTest1', ['models/DynamicActorTest1.etmap', 'models/DynamicActorTest1.room'])
+createTest('java', 'dynamicActorTest2', ['models/DynamicActorTest2.etmap', 'models/DynamicActorTest2.room'])
+createTest('java', 'dynamicActorTest3', ['models/DynamicActorTest3.room', genericPhysical])
+createTest('java', 'dynamicActorTest4', ['models/DynamicActorTest4.room', genericPhysical])
+createTest('java', 'dynamicActorTest5', ['models/DynamicActorTest5.room', genericPhysical])
+createTest('java', 'dynamicActorTest6', ['models/DynamicActorTest6.room', genericPhysical])
 
-task run(type: JavaExec, dependsOn: classes) {
-	main = 'DynamicActorTest1.Node_node_da1TestRunner'
-	classpath = sourceSets.main.runtimeClasspath
-	args '-run_as_test'
-}
+createTest('java', 'tCPTest', ['models/TCPTest.room', genericPhysical])
+
+/* These are not working yet (problem when genererating with -persistable -storeObjects the Modellib is overriden)	:((
+def genOptions = ['-persistable', '-storeDataObj']
+createTest('java', 'dynamicActorTest7', ['models/DynamicActorTest7.etmap', 'models/DynamicActorTest7.room'], genOptions)
+sourceSets.dynamicActorTest7.java.srcDir 'src/dynamicActorTest7'
+createTest('java', 'dynamicConfigTest', ['models/DynamicConfigTest.etmap', 'models/DynamicConfigTest.room'], genOptions)
+sourceSets.dynamicConfigTest.java.srcDir 'src/dynamicConfigTest'
+createTest('java', 'storeRestoreTest', ['models/StoreRestoreTest.room', genericPhysical], genOptions)
+sourceSets.storeRestoreTest.java.srcDir 'src/storeRestoreTest'	*/

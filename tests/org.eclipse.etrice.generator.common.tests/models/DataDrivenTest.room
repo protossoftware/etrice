@@ -68,7 +68,7 @@ RoomModel DataDrivenTest {
 		}
 		Behavior {
 			ctor {
-				"caseId = etUnit_openAll(\"log/testlog\", \"DataDrivenTest\", \"org.eclipse.etrice.generator.common.tests.DataDrivenTest\", \"DataDrivenTest_case\");"
+				"caseId = etUnit_openAll(\".\", \"DataDrivenTest\", \"org.eclipse.etrice.generator.common.tests.DataDrivenTest\", \"DataDrivenTest_case\");"
 			}
 			dtor {
 				"etUnit_closeAll(caseId);"

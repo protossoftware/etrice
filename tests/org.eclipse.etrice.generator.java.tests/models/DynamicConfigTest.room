@@ -1,0 +1,202 @@
+RoomModel DynamicConfigTest {
+
+	import room.basic.types.* from "../../../runtime/org.eclipse.etrice.modellib.java/model/Types.room"
+	import room.basic.service.timing.* from "../../../runtime/org.eclipse.etrice.modellib.java/model/TimingService.room"
+
+	LogicalSystem System_DynamicConfigTest{
+		SubSystemRef main : SubSystem_DynamicConfigTest
+	}
+	
+	SubSystemClass SubSystem_DynamicConfigTest {
+		ActorRef testee: Testee_ac
+		ActorRef timingService: ATimingService
+		LayerConnection ref testee satisfied_by timingService.timer
+	}
+
+	ActorClass Testee_ac {
+		Structure {
+			usercode1 {
+				"import java.util.HashMap;"
+				"import java.util.Map;"
+				"import org.eclipse.etrice.runtime.java.config.IConfigSource;"
+			}
+			SAP timer: PTimer
+			Attribute caseId: int32
+			Attribute testId: int32 = "1"
+
+			// no dynConfig
+			Attribute sString: string
+
+			// dynConfig
+			Attribute aInt8: int8
+			Attribute aInt16: int16
+			Attribute aInt32: int32
+			Attribute aInt64: int64
+			Attribute aBool: boolean
+			Attribute aFloat32: float32
+			Attribute aFloat64: float64
+			Attribute aChar: char
+			Attribute aString: string
+			Attribute aInt8_array [ 2 ]: int8
+			Attribute aInt16_array [ 2 ]: int16
+			Attribute aInt32_array [ 2 ]: int32
+			Attribute aInt64_array [ 2 ]: int64
+			Attribute aBool_array [ 2 ]: boolean
+			Attribute aFloat32_array [ 2 ]: float32
+			Attribute aFloat64_array [ 2 ]: float64
+			Attribute aChar_array [ 2 ]: char
+			Attribute dc: Data_dc
+		}
+		Behavior {
+			ctor {
+				"etUnit_open(\".\", \"DynamicConfigTest\");"
+				"etUnit_openTestSuite(\"org.eclipse.etrice.generator.common.tests.DynamicConfigTest\");"
+				"caseId = etUnit_openTestCase(\"DynamicConfigTest_case_Testee_ac\");"
+			}
+			dtor {
+				"etUnit_closeTestCase(caseId);"
+				"etUnit_closeTestSuite();"
+				"etUnit_close();"
+			}
+			StateMachine {
+				Transition t0: initial -> ChangeConfigValid { }
+				Transition t1: ChangeConfigValid -> Test {
+					triggers {
+						<timeout: timer>
+					}
+					action {
+						"testId++;"
+					}
+				}
+				Transition t2: Test -> ChangeConfigInvalid {
+					triggers {
+						<timeout: timer guard {
+							"testId==2"
+						}>
+					}
+				}
+				Transition t3: ChangeConfigInvalid -> Test {
+					triggers {
+						<timeout: timer>
+					}
+					action {
+						"testId++;"
+					}
+				}
+				Transition t4: Test -> Done {
+					triggers {
+						<timeout: timer guard {
+							"testId==4"
+						}>
+					}
+				}
+				Transition tr0: Test -> ChangeConfigValid {
+					triggers {
+						<timeout: timer guard {
+							"testId==3"
+						}>
+					}
+				}
+				State ChangeConfigValid {
+					entry {
+						"IConfigSource source = ConfigSourceTestInstance.getInstance();"
+						"String path = this.getInstancePath();"
+						"Map<String, Object> testValues = new HashMap<String, Object>();"
+						"testValues.put(path+\"/aInt8\", 50);"
+						"testValues.put(path+\"/aInt16\", 51);"
+						"testValues.put(path+\"/aInt32\", 52);"
+						"testValues.put(path+\"/aInt64\", 53);"
+						"testValues.put(path+\"/aFloat32\", 5.4f);"
+						"testValues.put(path+\"/aFloat64\", 5.5);"
+						"testValues.put(path+\"/aChar\", 'B');"
+						"testValues.put(path+\"/aString\", \"Do-NOT-UPDATE-me\");"
+						"testValues.put(path+\"/aBool\", true);"
+						"testValues.put(path+\"/dc/nested/aInt32\", 56);"
+						"testValues.put(path+\"/dc/aString\", \"Okay\");"
+						"testValues.put(path+\"/aInt8_array\", new Byte[]{50,40});"
+						"testValues.put(path+\"/aInt16_array\", new Short[]{51,41});"
+						"testValues.put(path+\"/aInt32_array\", new Integer[]{52,42});"
+						"testValues.put(path+\"/aInt64_array\", new Long[]{53L,43L});"
+						"testValues.put(path+\"/aFloat32_array\", new Float[]{5.4f, 4.4f});"
+						"testValues.put(path+\"/aFloat64_array\", new Double[]{5.5, 4.5});"
+						"testValues.put(path+\"/aChar_array\", \"BB\");"
+						"testValues.put(path+\"/aBool_array\", new Boolean[]{true, false});"
+						"source.writeValues(testValues);"
+						"timer.startTimer(400);"
+					}
+				}
+				State ChangeConfigInvalid {
+					entry {
+						// do not update aString
+						"getAStringLock().forbidUpdate();"
+						
+						"IConfigSource source = ConfigSourceTestInstance.getInstance();"
+						"String path = this.getInstancePath();"
+						"Map<String, Object> testValues = new HashMap<String, Object>();"
+						"testValues.put(path+\"/aInt8\", 128);"
+						"testValues.put(path+\"/aInt16\", 61);"
+						"testValues.put(path+\"/aInt32\", -2);"
+						"testValues.put(path+\"/aInt64\", Long.MAX_VALUE);"
+						"testValues.put(path+\"/aFloat32\", -100f);"
+						"testValues.put(path+\"/aFloat64\", 100d);"
+						"testValues.put(path+\"/aChar\", \"string\");"
+						"testValues.put(path+\"/aString\", \"VALID-String\");"
+						"testValues.put(path+\"/aBool\", \"true\");"
+						"testValues.put(path+\"/dc/aString\", 0.89898);"
+						"testValues.put(path+\"/dc/nested/aInt32\", 62);"
+						"testValues.put(path+\"/aInt8_array\", 128);"
+						"testValues.put(path+\"/aInt16_array\", new Short[]{-1,-2});"
+						"testValues.put(path+\"/aInt32_array\", new Integer[]{60,59});"
+						"testValues.put(path+\"/aInt64_array\", new Long[]{60000L,60000L});"
+						"testValues.put(path+\"/aFloat32_array\", new Float[]{0f, -2f});"
+						"testValues.put(path+\"/aFloat64_array\", \"string\");"
+						"testValues.put(path+\"/aChar_array\", \"BBB\");"
+						"testValues.put(path+\"/aBool_array\", 500);"
+						"source.writeValues(testValues);"
+						"timer.startTimer(400);"
+					}
+				}
+				State Test {
+					entry {
+						"EXPECT_EQUAL_INT8(caseId, \"1:Testee_ac\", (byte)50, getAInt8());"
+						"EXPECT_EQUAL_INT16(caseId, \"2:Testee_ac\", (short)51, getAInt16());"
+						"EXPECT_EQUAL_INT32(caseId, \"3:Testee_ac\", 52, getAInt32());"
+						"EXPECT_TRUE(caseId, \"4:Testee_ac\", getAInt64() == 53L);"
+						"EXPECT_EQUAL_FLOAT32(caseId, \"5:Testee_ac\", 5.4f, getAFloat32(), 0.1f);"
+						"EXPECT_TRUE(caseId, \"6:Testee_ac\", getAFloat64() == 5.5);"
+						"EXPECT_TRUE(caseId, \"7:Testee_ac\", getAChar() == 'B');"
+						"EXPECT_TRUE(caseId, \"8:Testee_ac\", \"Do-NOT-UPDATE-me\".equals(getAString()));"
+						"EXPECT_TRUE(caseId, \"9:Testee_ac\", getABool() == true);"
+						"EXPECT_TRUE(caseId, \"10:Testee_ac\", getAInt8_array()[0] == 50 && getAInt8_array()[1] == 40);"
+						"EXPECT_TRUE(caseId, \"11:Testee_ac\", getAInt16_array()[0] == 51 && getAInt16_array()[1] == 41);"
+						"EXPECT_TRUE(caseId, \"12:Testee_ac\", getAInt32_array()[0] == 52 && getAInt32_array()[1] == 42);"
+						"EXPECT_TRUE(caseId, \"13:Testee_ac\", getAInt64_array()[0] == 53L && getAInt64_array()[1] == 43L);"
+						"EXPECT_EQUAL_FLOAT32(caseId, \"14.1:Testee_ac\", 5.4f, getAFloat32_array()[0], 0.1f);"
+						"EXPECT_EQUAL_FLOAT32(caseId, \"14.2:Testee_ac\", 4.4f, getAFloat32_array()[1], 0.1f);"
+						"EXPECT_TRUE(caseId, \"15:Testee_ac\", getAFloat64_array()[0] == 5.5 && getAFloat64_array()[1] == 4.5);"
+						"EXPECT_TRUE(caseId, \"16:Testee_ac\", String.valueOf(getAChar_array()).equals(\"BB\"));"
+						"EXPECT_TRUE(caseId, \"18:Testee_ac\", getABool_array()[0] == true && getABool_array()[1] == false);"
+						"EXPECT_TRUE(caseId, \"19:Testee_ac\", \"Okay\".equals(getDc().getAString()));"
+						"EXPECT_TRUE(caseId, \"20:Testee_ac\", getDc().getNested().getAInt32() == 56);"
+						"timer.startTimer(1);"
+					}
+				}
+				State Done {
+					entry {
+						"\tetUnit_testFinished(caseId);"
+					}
+				}
+			}
+		}
+	}
+
+	DataClass Data_dc {
+		Attribute aString:string
+		Attribute nested: Data_nested_dc
+	}
+
+	DataClass Data_nested_dc {
+		Attribute aInt32: int32
+	}
+
+}

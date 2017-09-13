@@ -4,7 +4,7 @@ plugins {
 	id 'java-base'
 }
 
-apply from: "test.gradle"
+apply from: etriceTest
 
 def genericPhysical = 'models/GenericPhysical.etphys'
 
@@ -13,7 +13,7 @@ def tests = [
 	choicePointTest: 			['models/ChoicePointTest.room', genericPhysical],
 	choicePointTestExtended: 	['models/ChoicePointTestExtended.room', genericPhysical],
 	dataDrivenTest:				['models/DataDrivenTest.room', genericPhysical],
-	//enumTest:					['models/EnumTest.room', genericPhysical],
+	/* enumTest:				['models/EnumTest.room', genericPhysical],		not supported in c++	*/
 	compileTests:				['models/CompileTests.room', genericPhysical, 'models/DetailExpressionTest.room', 'models/StatemachineInterfaceTest.room', 'models/StatemachineInterfaceInheritedTest.room', 'models/StatemachineInterfaceTest.room', 'models/ContinuationTransitionTest.room'],
 	handlerTest:				['models/HandlerTest.room', genericPhysical],
 	operationInheritanceTest:	['models/OperationInheritanceTest.room', genericPhysical],
@@ -21,14 +21,12 @@ def tests = [
 	pingPongThreadReplPortTest:	['models/PingPongThreadReplPortTest.etmap', 'models/PingPongThreadReplPortTest.room']
 ]
 
-tests.each { key, value ->
-	def testTasks = [
-		addTest('c', key, value),
-		addTest('cpp', key, value),
-		addTest('java', key, value)
-	]
-	
-	tasks.create(name: key, dependsOn: testTasks, group: 'verification')
+tests.each { name, models ->
+	createTest('c', name, models)
+	createTest('cpp', name, models)
+	createTest('java', name, models)
 }
 
-clean.delete 'src-gen', fileTree('log') { exclude '**/readme.txt' }
+// Enum Test
+createTest('c', 'enumTest', ['models/EnumTest.room', genericPhysical])
+createTest('java', 'enumTest', ['models/EnumTest.room', genericPhysical])

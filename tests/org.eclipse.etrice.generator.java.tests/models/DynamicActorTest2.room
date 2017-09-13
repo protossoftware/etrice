@@ -1,0 +1,236 @@
+RoomModel DynamicActorTest2 {
+	
+	import room.basic.test.* from "../../../runtime/org.eclipse.etrice.modellib.java/model/Tests.room"
+	import room.basic.types.* from "../../../runtime/org.eclipse.etrice.modellib.java/model/Types.room"
+	
+	LogicalSystem JavaGenTests {
+		SubSystemRef da2Test : SubSystem_DynamicActorTest2
+	}
+	
+	SubSystemClass SubSystem_DynamicActorTest2 {
+		ActorRef appl : Appl
+	
+		LogicalThread defaultThread
+	}
+	
+	ActorClass Appl {
+		Structure {
+			ActorRef cont: Container
+		}
+		Behavior { }
+	}
+	
+	ActorClass Container {
+		Structure {
+			conjugated Port p0[*]: PC
+			Attribute caseId: int32
+			optional ActorRef optarray[*]: Optional
+			
+			Binding p0 and optarray.p0
+		}
+		Behavior {
+			ctor {
+				"caseId = etUnit_openAll(\".\", \"DynamicActorTest2\", \"org.eclipse.etrice.generator.common.tests.DynamicActorTest2\", \"DynamicActorTest2_case\");"
+			}
+			dtor {
+				"etUnit_closeAll(caseId);"
+			}
+
+			StateMachine {
+				Transition init: initial -> CreateOptional2 { }
+				Transition tr0: CreateOptional2 -> CreateOptional1 {
+					triggers {
+						<hello: p0>
+					}
+					action {
+						"EXPECT_TRUE(caseId, \"<|MODEL_LOCATION|>\", txt.equals(\"AC3:/JavaGenTests/da2Test/appl/cont/optarray:0/sub2/deep_sub\"));"
+					}
+				}
+				Transition tr2: CreateOptional1 -> ReceivedHelloAgain {
+					triggers {
+						<hello: p0>
+					}
+					action {
+						"EXPECT_TRUE(caseId, \"<|MODEL_LOCATION|>\", txt.equals(\"AC3:/JavaGenTests/da2Test/appl/cont/optarray:0/sub2/deep_sub\"));"
+					}
+				}
+				Transition tr1: ReceivedHelloAgain -> Destroy0 {
+					triggers {
+						<hello: p0>
+					}
+					action {
+						"EXPECT_TRUE(caseId, \"<|MODEL_LOCATION|>\", txt.equals(\"AC1:/JavaGenTests/da2Test/appl/cont/optarray:1/sub1\"));"
+					}
+				}
+				Transition tr3: Destroy0 -> Destroy1Create2 {
+					triggers {
+						<hello: p0>
+					}
+					action {
+						"EXPECT_TRUE(caseId, \"<|MODEL_LOCATION|>\", txt.equals(\"AC1:/JavaGenTests/da2Test/appl/cont/optarray:1/sub1\"));"
+					}
+				}
+				Transition tr4: Destroy1Create2 -> Done {
+					triggers {
+						<hello: p0>
+					}
+					action {
+						"EXPECT_TRUE(caseId, \"<|MODEL_LOCATION|>\", txt.equals(\"AC3:/JavaGenTests/da2Test/appl/cont/optarray:1/sub2/deep_sub\"));"
+					}
+				}
+				State CreateOptional2 {
+					entry {
+						"optarray.createOptionalActor(\"Optional2\", getThread());"
+						"p0.sayHello();"
+					}
+				}
+				State CreateOptional1 {
+					entry {
+						"optarray.createOptionalActor(\"Optional1\", getThread());"
+						"p0.sayHello();"
+					}
+				}
+				State ReceivedHelloAgain
+				State Destroy0 {
+					entry {
+						"optarray.destroyOptionalActor(0);"
+						"p0.sayHello();"
+					}
+				}
+				State Destroy1Create2 {
+					entry {
+						"optarray.destroyOptionalActor(1);"
+						""
+						"IRTObject opt = getChild(\"optarray\");"
+						"int size = opt.getChildren().size();"
+						""
+						"// we expect the RTSystemPort and the InterfaceItemBroker"
+						"EXPECT_EQUAL_INT32(caseId, \"<|MODEL_LOCATION|>\", 2, size);"
+						""
+						"optarray.createOptionalActor(\"Optional2\", getThread());"
+						"p0.sayHello();"
+					}
+				}
+				State Done {
+					entry {
+						"IRTObject opt = getChild(\"optarray\");"
+						"int size = opt.getChildren().size();"
+						""
+						"// we expect the RTSystemPort and the InterfaceItemBroker"
+						"// plus an instance of Optional2"
+						"// plus 3 sub ports of RTSystemPort"
+						"EXPECT_EQUAL_INT32(caseId, \"<MODEL_LOCATION|>\", 6, size);"
+						""
+						"// we grab the leaf actor of the optional sub tree"
+						"IRTObject leafActor = getObject(\"/JavaGenTests/da2Test/appl/cont/optarray/optarray:1/sub2/deep_sub\");"
+						"size = leafActor.getChildren().size();"
+						""
+						"// we expect an RTSystemPort and p0"
+						"EXPECT_EQUAL_INT32(caseId, \"<MODEL_LOCATION|>\", 2, size);"
+						""
+						"EXPECT_TRUE(caseId, \"<MODEL_LOCATION|>\", leafActor.getInstancePath().equals(\"/JavaGenTests/da2Test/appl/cont/optarray:1/sub2/deep_sub\"));"
+						""
+						"etUnit_testFinished(caseId);"
+					}
+				}
+			}
+		}
+	}
+	
+	// the class that is referenced as optional by the Container
+	// since it is abstract it just serves as an interface
+	abstract ActorClass Optional {
+		Interface {
+			Port p0: PC
+		}
+		Structure { }
+		Behavior { }
+	}
+	
+	// a sub class of Optional which is valid as optional actor
+	ActorClass Optional1 extends Optional {
+		Structure {
+			ActorRef sub1: AC1
+			Binding p0 and sub1.p0
+		}
+		Behavior { }
+	}
+	
+	// a sub class of Optional which is valid as optional actor
+	ActorClass Optional2 extends Optional {
+		Structure {
+			ActorRef sub2: AC2
+			Binding p0 and sub2.p0
+		}
+		Behavior { }
+	}
+	
+	// the following actor classes are part of the possible optional instance sub trees
+	
+	ActorClass AC1 {
+		Interface {
+			Port p0: PC
+		}
+		Structure {
+			external Port p0
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> Ready { }
+				Transition tr0: Ready -> Ready {
+					triggers {
+						<sayHello: p0>
+					}
+					action {
+						"p0.hello(\"AC1:\"+getInstancePath());"
+					}
+				}
+				State Ready
+			}
+		}
+	}
+	
+	ActorClass AC2 {
+		Interface {
+			Port p0: PC
+		}
+		Structure {
+			ActorRef deep_sub: AC3
+			Binding p0 and deep_sub.p0
+		}
+		Behavior { }
+	}
+	
+	ActorClass AC3 {
+		Interface {
+			Port p0: PC
+		}
+		Structure {
+			external Port p0
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> Ready { }
+				Transition tr0: Ready -> Ready {
+					triggers {
+						<sayHello: p0>
+					}
+					action {
+						"p0.hello(\"AC3:\"+getInstancePath());"
+					}
+				}
+				State Ready
+			}
+		}
+	}
+	
+	// a simple protocol that is used to demonstrate that actors are connected
+	ProtocolClass PC {
+		incoming {
+			Message sayHello()
+		}
+		outgoing {
+			Message hello(txt: string)
+		}
+	}
+}

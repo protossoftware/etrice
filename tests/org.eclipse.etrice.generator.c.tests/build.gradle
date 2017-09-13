@@ -1,0 +1,10 @@
+plugins {
+	id 'c'
+}
+
+apply from: etriceTest
+
+def genericPhysical = '../org.eclipse.etrice.generator.common.tests/models/GenericPhysical.etphys'
+
+createTest('c', 'sendingDataTest', ['models/SendingDataTest.room', genericPhysical])
+createTest('c', 'staticConfigTest', ['models/StaticConfigTest.etmap', 'models/StaticConfigTest.room', 'models/StaticConfigTest.config'])

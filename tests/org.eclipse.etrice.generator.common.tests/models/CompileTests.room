@@ -7,12 +7,8 @@ RoomModel CompileTests {
 	import StatemachineInterfaceTestInheritedModel.StatemachineInterfaceInheritedTest from "StatemachineInterfaceInheritedTest.room"
 	import ContinuationTransitionTest.ContinuationTransitionTest from "ContinuationTransitionTest.room"
 
-	SubSystemClass SubSystem_CompileTests {
-		@TestInstance
-		ActorRef compileTests : CompileTests
-	}
-
 	ActorClass CompileTests {
+		@TestInstance
 		Structure {
 			Attribute caseId : int32
 
@@ -24,7 +20,7 @@ RoomModel CompileTests {
 		}
 		Behavior {
 			ctor {
-				"caseId = etUnit_openAll(\"log/testlog\", \"CompileTests\", \"org.eclipse.etrice.generator.common.tests.CompileTests\", \"CompileTests_case\");"
+				"caseId = etUnit_openAll(\".\", \"CompileTests\", \"org.eclipse.etrice.generator.common.tests.CompileTests\", \"CompileTests_case\");"
 			}
 			dtor {
 				"etUnit_closeAll(caseId);"

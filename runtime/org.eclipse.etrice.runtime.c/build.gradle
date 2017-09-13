@@ -1,17 +1,24 @@
+import static org.apache.tools.ant.taskdefs.condition.Os.*
+
 plugins {
 	id 'c'
 }
+
+def platform = ''
+
+if(isFamily(FAMILY_WINDOWS)) { platform = 'MT_WIN_MinGW' }
+else if(isFamily(FAMILY_UNIX)) { platform = 'MT_POSIX_GENERIC_GCC' }
 
 model {
 	components {
 		etrice_runtime_c(NativeLibrarySpec) {
 			sources.c {
 				source {
-					srcDirs = ['src/common', 'src/config', 'src/platforms/MT_WIN_MinGW', 'src/util']
+					srcDirs = ['src/common', 'src/config', "src/platforms/$platform", 'src/util']
 					include '**/*.c'
 				}
 				exportedHeaders {
-					srcDirs = ['src/common', 'src/config', 'src/platforms/MT_WIN_MinGW', 'src/util']
+					srcDirs = ['src/common', 'src/config', "src/platforms/$platform", 'src/util']
 				}
 			}
 			binaries {

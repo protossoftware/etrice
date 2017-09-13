@@ -2,18 +2,15 @@ plugins {
 	id 'c'
 }
 
-def generator = ':plugins:org.eclipse.etrice.generator.c'
+apply from: etriceGenerator
 
-task generate(type: JavaExec, group: 'build', dependsOn: "$generator:classes") {
-	main = project(generator).mainClassName
-	classpath = project(generator).classpath
-	inputs.dir 'model'
-	outputs.dir 'src-gen'
-	args '-lib', '-msc_instr', '-genDir', 'src-gen',
-		'model/PInterrupt.room',
-		'model/TcpService.room',
-		'model/TimingService.room'
-}
+def models = [
+	'model/PInterrupt.room',
+	'model/TcpService.room',
+	'model/TimingService.room'
+]
+
+createGeneratorTask('generate', 'c', models, 'src-gen', '-lib')
 
 model {
 	components {

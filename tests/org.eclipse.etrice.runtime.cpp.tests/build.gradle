@@ -1,0 +1,40 @@
+plugins {
+	id 'cpp'
+}
+
+apply from: etUnitConverter
+
+model {
+	components {
+		etrice_runtime_cpp_tests(NativeExecutableSpec) {
+			sources.cpp {
+				source {
+					srcDirs = ['src']
+					include '**/*.cpp'
+				}
+				exportedHeaders {
+					srcDirs = ['src']
+				}
+				lib project: ':runtime:org.eclipse.etrice.runtime.cpp', library: 'etrice_runtime_cpp', linkage: 'static'
+				lib project: ':runtime:org.eclipse.etrice.runtime.c', library: 'etrice_runtime_c', linkage: 'static'
+			}
+		}
+	}
+}
+
+def exeFile = "$buildDir/exe/etrice_runtime_cpp_tests/etrice_runtime_cpp_tests"
+def etuFile = 'log/testlog/TestCppRuntime.etu'
+
+clean.delete 'log'
+
+task run(type: Exec, dependsOn: assemble, group: 'verification') {
+	commandLine exeFile
+	inputs.file exeFile
+	outputs.files etuFile
+	
+	doFirst { file('log/testlog').mkdirs() }
+}
+
+createEtUnitConverterTask('convert', run)
+
+check.dependsOn convert

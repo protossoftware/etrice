@@ -4,7 +4,7 @@ MappingModel PingPongThreadReplPortTest {
 	import PingPongThread.* from "PingPongThread.etphys"
 	
 	Mapping System_PingPongReplPort -> Sys {
-		SubSystemMapping ref_SubSystem_PingPongThreadReplPortTest -> node {
+		SubSystemMapping main -> node1 {
 			ThreadMapping mrPingThread -> DfltThread
 			ThreadMapping mrPong1Thread -> Thread1
 			ThreadMapping mrPong2Thread -> Thread2

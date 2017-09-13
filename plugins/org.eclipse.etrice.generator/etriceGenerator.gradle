@@ -1,0 +1,25 @@
+
+evaluationDependsOn(':plugins:org.eclipse.etrice.generator.c')
+evaluationDependsOn(':plugins:org.eclipse.etrice.generator.cpp')
+evaluationDependsOn(':plugins:org.eclipse.etrice.generator.java')
+
+/**
+ * Creates an eTrice generator task
+ * @param name: The name of the new task
+ * @param models: The models passed to the generator
+ * @param genDir: The generation directory
+ * @param options: The eTrice generator options
+ */
+ext.createGeneratorTask = { name, lang, models, genDir = 'src-gen', options = [] ->
+	def generator = ":plugins:org.eclipse.etrice.generator.$lang"
+
+	return tasks.create(name: name, type: JavaExec, dependsOn: "$generator:classes") {
+		main = project(generator).mainClassName
+		classpath = project(generator).sourceSets.main.runtimeClasspath
+		args '-msc_instr', '-genDir', genDir
+		args options
+		args models
+		inputs.files models
+		outputs.dir genDir
+	}
+}
