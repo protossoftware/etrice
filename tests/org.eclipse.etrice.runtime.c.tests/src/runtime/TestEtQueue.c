@@ -62,7 +62,7 @@ static void TestEtQueue_test(etInt16 id){
 }
 
 void TestEtQueue_runSuite(void){
-	etUnit_openTestSuite("TestQueue");
+	etUnit_openTestSuite("org.eclipse.etrice.runtime.c.tests.TestQueue");
 	ADD_TESTCASE(TestEtQueue_test);
 	etUnit_closeTestSuite();
 }

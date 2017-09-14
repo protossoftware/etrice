@@ -19,7 +19,7 @@
 using namespace etRuntime;
 
 MessageServiceTest::MessageServiceTest() :
-		etTestSuite("MessageServiceTest"), m_senderTerminated(0) {
+		etTestSuite("org.eclipse.etrice.runtime.cpp.tests.MessageServiceTest"), m_senderTerminated(0) {
 
 	RTServices::getInstance().getMsgSvcCtrl().resetAll();
 

@@ -42,7 +42,7 @@ RoomModel DynamicActorTest7 {
 		}
 		Behavior {
 			ctor {
-				"caseId = etUnit_openAll(\".\", \"DynamicActorTest7\", \"org.eclipse.etrice.generator.common.tests.DynamicActorTest7\", \"DynamicActorTest7_case\");"
+				"caseId = etUnit_openAll(\".\", \"DynamicActorTest7\", \"org.eclipse.etrice.generator.java.tests.DynamicActorTest7\", \"DynamicActorTest7_case\");"
 			}
 			dtor {
 				"etUnit_closeAll(caseId);"

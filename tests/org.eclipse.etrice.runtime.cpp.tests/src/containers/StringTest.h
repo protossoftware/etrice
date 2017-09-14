@@ -20,7 +20,7 @@ class StringTest : public etTestSuite {
 
 public:
 	StringTest() :
-		etTestSuite("StringTest"){
+		etTestSuite("org.eclipse.etrice.runtime.cpp.tests.StringTest"){
 	}
 
 protected:

@@ -41,7 +41,7 @@ RoomModel TCPTest {
 		}
 		Behavior {
 			ctor {
-				"caseId = etUnit_openAll(\".\", \"TCPTest\", \"org.eclipse.etrice.generator.common.tests.TCPTest\", \"TCPTest_case\");"
+				"caseId = etUnit_openAll(\".\", \"TCPTest\", \"org.eclipse.etrice.generator.java.tests.TCPTest\", \"TCPTest_case\");"
 			}
 			dtor {
 				"etUnit_closeAll(caseId);"

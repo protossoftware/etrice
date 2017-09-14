@@ -20,7 +20,7 @@ class PairTest : public etTestSuite {
 
 public:
 	PairTest() :
-		etTestSuite("PairTest"){
+		etTestSuite("org.eclipse.etrice.runtime.cpp.tests.PairTest"){
 	}
 
 protected:

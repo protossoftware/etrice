@@ -59,7 +59,7 @@ void TestEtUnit_Expect_Order(etInt16 id){
 }
 
 void TestEtUnit_runSuite(void){
-	etUnit_openTestSuite("TestEtUnit");
+	etUnit_openTestSuite("org.eclipse.etrice.runtime.c.tests.TestEtUnit");
 	ADD_TESTCASE(TestEtUnit_Expect_Order);
 	ADD_TESTCASE(TestEtUnit_Expect);
 	etUnit_closeTestSuite();

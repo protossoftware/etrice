@@ -18,7 +18,7 @@
 class MessageSeQueueTest: public etTestSuite {
 public:
 	MessageSeQueueTest(void) :
-			etTestSuite("MessageSeQueueTest") {
+			etTestSuite("org.eclipse.etrice.runtime.cpp.tests.MessageSeQueueTest") {
 	}
 
 protected:

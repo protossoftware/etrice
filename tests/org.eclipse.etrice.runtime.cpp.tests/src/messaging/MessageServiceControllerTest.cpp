@@ -20,7 +20,7 @@
 using namespace etRuntime;
 
 MessageServiceControllerTest::MessageServiceControllerTest() :
-		etTestSuite("MessageServiceControllerTest") {
+		etTestSuite("org.eclipse.etrice.runtime.cpp.tests.MessageServiceControllerTest") {
 
 	etTime interval;
 	interval.sec = 5;

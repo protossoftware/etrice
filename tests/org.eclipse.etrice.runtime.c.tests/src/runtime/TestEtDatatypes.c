@@ -85,7 +85,7 @@ void TestEtDatatypes_FLOAT(etInt16 id) {
 }
 
 void TestEtDatatypes_runSuite(void) {
-	etUnit_openTestSuite("TestDatatypes");
+	etUnit_openTestSuite("org.eclipse.etrice.runtime.c.tests.TestDatatypes");
 	ADD_TESTCASE(TestEtDatatypes_IntegerSize);
 	ADD_TESTCASE(TestEtDatatypes_IntegerSign);
 	ADD_TESTCASE(TestEtDatatypes_Boolean);

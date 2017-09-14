@@ -18,7 +18,7 @@
 class RTObjectTest: public etTestSuite {
 public:
 	RTObjectTest(void) :
-			etTestSuite("RTObject Test") {
+			etTestSuite("org.eclipse.etrice.runtime.cpp.tests.RTObject Test") {
 	}
 
 protected:

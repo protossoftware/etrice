@@ -117,7 +117,7 @@ RoomModel StoreRestoreTest {
 		}
 		Behavior {
 			ctor {
-				"caseId = etUnit_openAll(\".\", \"StoreRestoreTest\", \"org.eclipse.etrice.generator.common.tests.StoreRestoreTest\", \"StoreRestoreTest_case\");"
+				"caseId = etUnit_openAll(\".\", \"StoreRestoreTest\", \"org.eclipse.etrice.generator.java.tests.StoreRestoreTest\", \"StoreRestoreTest_case\");"
 			}
 			dtor {
 				"etUnit_closeAll(caseId);"

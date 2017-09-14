@@ -20,7 +20,7 @@
 class MessageDispatcherTest: public etTestSuite {
 public:
 	MessageDispatcherTest(void) :
-			etTestSuite("MessageDispatcherTest") {
+			etTestSuite("org.eclipse.etrice.runtime.cpp.tests.MessageDispatcherTest") {
 	}
 
 protected:

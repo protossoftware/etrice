@@ -56,7 +56,7 @@ void RunCRuntimeTestcases(void){
 
 	/* special situation for testing openAll and closeAll of etUnit
 	 * this has to be done outside of etUnit_open and etUnit_close */
-	id = etUnit_openAll("log/testlog","TestEtUnitSpecial", "etUnit", "openAll and closeAll");
+	id = etUnit_openAll("log/testlog","TestEtUnitSpecial", "etUnit", "org.eclipse.etrice.runtime.c.tests.openAll_and_closeAll");
 	EXPECT_TRUE(id, "Open and Close", ET_TRUE);
 	etUnit_closeAll(id);
 

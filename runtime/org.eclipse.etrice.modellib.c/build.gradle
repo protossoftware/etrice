@@ -2,7 +2,7 @@ plugins {
 	id 'c'
 }
 
-apply from: etriceGenerator
+apply from: etGenerator
 
 def models = [
 	'model/PInterrupt.room',

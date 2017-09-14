@@ -20,7 +20,7 @@ class StaticStringTest : public etTestSuite {
 
 public:
 	StaticStringTest() :
-		etTestSuite("StaticStringTest"){
+		etTestSuite("org.eclipse.etrice.runtime.cpp.tests.StaticStringTest"){
 	}
 
 protected:

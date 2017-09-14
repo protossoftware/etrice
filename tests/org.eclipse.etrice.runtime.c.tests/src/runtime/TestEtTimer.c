@@ -116,7 +116,7 @@ static void TestEtTimer_multiTimer (etInt16 id) {
 }
 
 void TestEtTimer_runSuite(void){
-	etUnit_openTestSuite("TestEtTimer");
+	etUnit_openTestSuite("org.eclipse.etrice.runtime.c.tests.TestEtTimer");
 	ADD_TESTCASE(TestEtTimer_lifecycle);
 	ADD_TESTCASE(TestEtTimer_multiTimer);
 	etUnit_closeTestSuite();

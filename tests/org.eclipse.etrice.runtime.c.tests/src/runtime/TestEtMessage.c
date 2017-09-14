@@ -38,7 +38,7 @@ void TestEtMessage_testBasicMessage(etInt16 id){
 }
 
 void TestEtMessage_runSuite(void){
-	etUnit_openTestSuite("TestMessage");
+	etUnit_openTestSuite("org.eclipse.etrice.runtime.c.tests.TestMessage");
 	ADD_TESTCASE(TestEtMessage_testBasicMessage);
 	etUnit_closeTestSuite();
 }

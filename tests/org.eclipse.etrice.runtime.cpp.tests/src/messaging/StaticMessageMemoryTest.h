@@ -18,7 +18,7 @@
 class StaticMessageMemoryTest: public etTestSuite {
 public:
 	StaticMessageMemoryTest(void) :
-			etTestSuite("StaticMessageMemoryTest") {
+			etTestSuite("org.eclipse.etrice.runtime.cpp.tests.StaticMessageMemoryTest") {
 	}
 
 protected:

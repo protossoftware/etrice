@@ -18,7 +18,7 @@
 class MSCLoggerTest: public etTestSuite {
 public:
 	MSCLoggerTest(void) :
-			etTestSuite("MSCLoggerTest") {
+			etTestSuite("org.eclipse.etrice.runtime.cpp.tests.MSCLoggerTest") {
 	}
 
 protected:

@@ -17,7 +17,7 @@
 
 class StaticDequeTest : public etTestSuite {
 public:
-	StaticDequeTest(void) : etTestSuite("StaticDequeTest") {}
+	StaticDequeTest(void) : etTestSuite("org.eclipse.etrice.runtime.cpp.tests.StaticDequeTest") {}
 
 protected:
 	void runAllTestCases(void);

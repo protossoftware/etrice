@@ -2,7 +2,7 @@ plugins {
 	id 'cpp'
 }
 
-apply from: etriceTest
+apply from: etTest
 
 def genericPhysical = '../org.eclipse.etrice.generator.common.tests/models/GenericPhysical.etphys'
 

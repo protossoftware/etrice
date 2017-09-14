@@ -2,7 +2,7 @@ plugins {
 	id 'java'
 }
 
-apply from: etriceGenerator
+apply from: etGenerator
 
 def models = [
 	'model/ALogService.room',

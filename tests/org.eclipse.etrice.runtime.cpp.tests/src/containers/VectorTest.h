@@ -20,7 +20,7 @@ class VectorTest : public etTestSuite {
 
 public:
 	VectorTest() :
-		etTestSuite("VectorTest"){
+		etTestSuite("org.eclipse.etrice.runtime.cpp.tests.VectorTest"){
 	}
 
 protected:

@@ -293,7 +293,7 @@ void TestEtMessageService_getMessagePoolLowWaterMark(etInt16 id){
 
 
 void TestEtMessageService_runSuite(void){
-	etUnit_openTestSuite("TestEtMessageService");
+	etUnit_openTestSuite("org.eclipse.etrice.runtime.c.tests.TestEtMessageService");
 	ADD_TESTCASE(TestEtMessageService_init);
 	ADD_TESTCASE(TestEtMessageService_GetPushPopReturn);
 	ADD_TESTCASE(TestEtMessageService_GetReturn);

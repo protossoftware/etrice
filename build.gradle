@@ -5,6 +5,6 @@ ext {
 	commons_io_version = '+'
 
 	etUnitConverter = "$rootDir/plugins/org.eclipse.etrice.etunit.converter/etUnitConverter.gradle"
-	etriceGenerator = "$rootDir/plugins/org.eclipse.etrice.generator/etriceGenerator.gradle"
-	etriceTest = "$rootDir/tests/org.eclipse.etrice.generator.common.tests/etriceTest.gradle"
+	etGenerator = "$rootDir/plugins/org.eclipse.etrice.generator/etGenerator.gradle"
+	etTest = "$rootDir/tests/org.eclipse.etrice.generator.common.tests/etTest.gradle"
 }

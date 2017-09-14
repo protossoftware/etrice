@@ -185,7 +185,7 @@ static void TestEtMemory_testFreeListOverflow(etInt16 id) {
 }
 
 void TestEtMemory_runSuite(void){
-	etUnit_openTestSuite("TestMemory");
+	etUnit_openTestSuite("org.eclipse.etrice.runtime.c.tests.TestMemory");
 	ADD_TESTCASE(TestEtMemory_testFixedSize);
 	ADD_TESTCASE(TestEtMemory_testFreeList);
 	ADD_TESTCASE(TestEtMemory_testFreeListOverflow);

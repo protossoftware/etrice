@@ -2,7 +2,7 @@ plugins {
 	id 'cpp'
 }
 
-apply from: etriceGenerator
+apply from: etGenerator
 
 def models = [
 	'model/TimingService.room'
