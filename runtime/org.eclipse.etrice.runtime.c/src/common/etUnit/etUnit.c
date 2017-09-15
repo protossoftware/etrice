@@ -21,14 +21,12 @@
 
 /*** member variables */
 
-static etInt16 etUnit_failedSuites = 0;
-
 /* file handling */
 static FILE* etUnit_reportfile = NULL;
 
 /* counters */
-static etInt16 etUnit_nextCaseId = 1;
-static etInt32 etUnit_errorCounter = 0;
+static etInt16 etUnit_nextCaseId;
+static etInt32 etUnit_errorCounter;
 
 #define ETUNIT_MAX_TEST_CASES		256
 static etBool etUnit_testcaseSuccess[ETUNIT_MAX_TEST_CASES];
@@ -104,6 +102,8 @@ void etUnit_open(const char* testResultPath, const char* testFileName) {
 			etUnit_orderInfo[i].id = 0;
 		for (i = 0; i < ETUNIT_MAX_TEST_CASES; ++i)
 			etUnit_testcaseSuccess[i] = ET_TRUE;
+		etUnit_errorCounter = 0;
+		etUnit_nextCaseId = 1;
 
 		if (etUnit_reportfile == NULL) {
 			etUnit_reportfile = etLogger_fopen(filename, "w+");
@@ -133,8 +133,6 @@ void etUnit_close(void) {
 	else
 		etLogger_logErrorF("Error Counter: %ld", etUnit_errorCounter);
 	etLogger_logInfoF("************* TEST END **************");
-
-	etUnit_errorCounter = 0;
 }
 
 void etUnit_openTestSuite(const char* testSuiteName) {
@@ -144,7 +142,6 @@ void etUnit_openTestSuite(const char* testSuiteName) {
 }
 
 void etUnit_closeTestSuite(void) {
-	etUnit_failedSuites += (etUnit_isSuccessSuite()) ? 0 : 1;
 }
 
 etInt16 etUnit_openTestCase(const char* testCaseName) {
@@ -334,14 +331,6 @@ void expectOrderEnd(etInt16 id, const char* message, etInt16 identifier, const c
 
 etBool etUnit_isSuccess(etInt16 id) {
 	return etUnit_testcaseSuccess[id];
-}
-
-etBool etUnit_isSuccessSuite() {
-	return etUnit_errorCounter == 0;
-}
-
-etBool etUnit_isSuccessAll() {
-	return etUnit_failedSuites == 0;
 }
 
 /* private functions */

@@ -71,14 +71,7 @@ void etUnit_closeTestCase(etInt16 id);
  * \param id the test case id
  */
 etBool etUnit_isSuccess(etInt16 id);
-/**
- * indicate success of current test suite
- */
-etBool etUnit_isSuccessSuite();
-/**
- * indicate success of all test suites
- */
-etBool etUnit_isSuccessAll();
+
 /**
  * releases the \ref etRuntime_getTerminateSemaphore() and thus makes the program terminate
  *
