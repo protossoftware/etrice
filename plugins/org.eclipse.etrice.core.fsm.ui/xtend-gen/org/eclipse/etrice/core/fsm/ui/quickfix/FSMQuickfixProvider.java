@@ -43,31 +43,40 @@ public class FSMQuickfixProvider extends DefaultQuickfixProvider {
   
   @Fix(FSMJavaValidator.PLAIN_STRING_DETAILCODE)
   public void fixMultiLineDetailCode(final Issue issue, final IssueResolutionAcceptor acceptor) {
-    final ISemanticModification _function = (EObject element, IModificationContext context) -> {
-      final Procedure1<DetailCode> _function_1 = (DetailCode it) -> {
-        EList<String> _lines = it.getLines();
-        Resource _eResource = it.eResource();
-        URI _uRI = _eResource.getURI();
-        ILineSeparatorInformation _lineSeparatorInformation = this.whitespaceProvider.getLineSeparatorInformation(_uRI);
-        String _lineSeparator = _lineSeparatorInformation.getLineSeparator();
-        final String ccString = IterableExtensions.join(_lines, _lineSeparator);
-        ICompositeNode _findActualNodeFor = NodeModelUtils.findActualNodeFor(it);
-        final Procedure1<ICompositeNode> _function_2 = (ICompositeNode it_1) -> {
-          try {
-            IXtextDocument _xtextDocument = context.getXtextDocument();
-            int _offset = it_1.getOffset();
-            int _length = it_1.getLength();
-            CCStringConverter _cC_StringConverter = this.converterService.getCC_StringConverter();
-            String _addDelim = _cC_StringConverter.addDelim(ccString);
-            _xtextDocument.replace(_offset, _length, _addDelim);
-          } catch (Throwable _e) {
-            throw Exceptions.sneakyThrow(_e);
+    final ISemanticModification _function = new ISemanticModification() {
+      @Override
+      public void apply(final EObject element, final IModificationContext context) throws Exception {
+        final Procedure1<DetailCode> _function = new Procedure1<DetailCode>() {
+          @Override
+          public void apply(final DetailCode it) {
+            EList<String> _lines = it.getLines();
+            Resource _eResource = it.eResource();
+            URI _uRI = _eResource.getURI();
+            ILineSeparatorInformation _lineSeparatorInformation = FSMQuickfixProvider.this.whitespaceProvider.getLineSeparatorInformation(_uRI);
+            String _lineSeparator = _lineSeparatorInformation.getLineSeparator();
+            final String ccString = IterableExtensions.join(_lines, _lineSeparator);
+            ICompositeNode _findActualNodeFor = NodeModelUtils.findActualNodeFor(it);
+            final Procedure1<ICompositeNode> _function = new Procedure1<ICompositeNode>() {
+              @Override
+              public void apply(final ICompositeNode it) {
+                try {
+                  IXtextDocument _xtextDocument = context.getXtextDocument();
+                  int _offset = it.getOffset();
+                  int _length = it.getLength();
+                  CCStringConverter _cC_StringConverter = FSMQuickfixProvider.this.converterService.getCC_StringConverter();
+                  String _addDelim = _cC_StringConverter.addDelim(ccString);
+                  _xtextDocument.replace(_offset, _length, _addDelim);
+                } catch (Throwable _e) {
+                  throw Exceptions.sneakyThrow(_e);
+                }
+              }
+            };
+            ObjectExtensions.<ICompositeNode>operator_doubleArrow(_findActualNodeFor, _function);
           }
         };
-        ObjectExtensions.<ICompositeNode>operator_doubleArrow(_findActualNodeFor, _function_2);
-      };
-      ObjectExtensions.<DetailCode>operator_doubleArrow(
-        ((DetailCode) element), _function_1);
+        ObjectExtensions.<DetailCode>operator_doubleArrow(
+          ((DetailCode) element), _function);
+      }
     };
     acceptor.accept(issue, "Convert to smart string", "", "correction_change.gif", _function);
   }

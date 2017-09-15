@@ -49,8 +49,11 @@ public class OptionalActorInterfaceGen extends GenericActorClassGenerator {
   
   public void doGenerate(final Root root) {
     EList<ActorClass> _optionalActorClasses = root.getOptionalActorClasses();
-    final Function1<ActorClass, Boolean> _function = (ActorClass cl) -> {
-      return Boolean.valueOf(this._fileSystemHelpers.isValidGenerationLocation(cl));
+    final Function1<ActorClass, Boolean> _function = new Function1<ActorClass, Boolean>() {
+      @Override
+      public Boolean apply(final ActorClass cl) {
+        return Boolean.valueOf(OptionalActorInterfaceGen.this._fileSystemHelpers.isValidGenerationLocation(cl));
+      }
     };
     Iterable<ActorClass> _filter = IterableExtensions.<ActorClass>filter(_optionalActorClasses, _function);
     for (final ActorClass ac : _filter) {

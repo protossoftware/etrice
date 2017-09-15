@@ -66,8 +66,11 @@ public class DataClassGen {
   
   public void doGenerate(final Root root) {
     EList<DataClass> _dataClasses = root.getDataClasses();
-    final Function1<DataClass, Boolean> _function = (DataClass cl) -> {
-      return Boolean.valueOf(this._fileSystemHelpers.isValidGenerationLocation(cl));
+    final Function1<DataClass, Boolean> _function = new Function1<DataClass, Boolean>() {
+      @Override
+      public Boolean apply(final DataClass cl) {
+        return Boolean.valueOf(DataClassGen.this._fileSystemHelpers.isValidGenerationLocation(cl));
+      }
     };
     Iterable<DataClass> _filter = IterableExtensions.<DataClass>filter(_dataClasses, _function);
     for (final DataClass dc : _filter) {

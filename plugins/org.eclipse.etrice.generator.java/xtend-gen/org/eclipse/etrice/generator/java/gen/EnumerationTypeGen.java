@@ -46,8 +46,11 @@ public class EnumerationTypeGen {
   
   public void doGenerate(final Root root) {
     EList<EnumerationType> _enumClasses = root.getEnumClasses();
-    final Function1<EnumerationType, Boolean> _function = (EnumerationType cl) -> {
-      return Boolean.valueOf(this._fileSystemHelpers.isValidGenerationLocation(cl));
+    final Function1<EnumerationType, Boolean> _function = new Function1<EnumerationType, Boolean>() {
+      @Override
+      public Boolean apply(final EnumerationType cl) {
+        return Boolean.valueOf(EnumerationTypeGen.this._fileSystemHelpers.isValidGenerationLocation(cl));
+      }
     };
     Iterable<EnumerationType> _filter = IterableExtensions.<EnumerationType>filter(_enumClasses, _function);
     for (final EnumerationType et : _filter) {

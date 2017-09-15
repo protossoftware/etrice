@@ -13,7 +13,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.function.Consumer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.eclipse.core.runtime.FileLocator;
@@ -60,102 +59,129 @@ public class FormatterTest extends FormatterTester {
   @Test
   public void unformatEqualsFormat() {
     ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList();
-    final Procedure1<ArrayList<String>> _function = (ArrayList<String> contents) -> {
-      try {
-        CoreTestsActivator _instance = CoreTestsActivator.getInstance();
-        Bundle _bundle = _instance.getBundle();
-        final Enumeration<URL> entries = _bundle.findEntries("models/formatting/unformatEqualsFormat/", "*.room", false);
-        while (entries.hasMoreElements()) {
-          URL _nextElement = entries.nextElement();
-          URL _fileURL = FileLocator.toFileURL(_nextElement);
-          InputStream _openStream = _fileURL.openStream();
-          InputStreamReader _inputStreamReader = new InputStreamReader(_openStream);
-          String _string = CharStreams.toString(_inputStreamReader);
-          contents.add(_string);
+    final Procedure1<ArrayList<String>> _function = new Procedure1<ArrayList<String>>() {
+      @Override
+      public void apply(final ArrayList<String> contents) {
+        try {
+          CoreTestsActivator _instance = CoreTestsActivator.getInstance();
+          Bundle _bundle = _instance.getBundle();
+          final Enumeration<URL> entries = _bundle.findEntries("models/formatting/unformatEqualsFormat/", "*.room", false);
+          while (entries.hasMoreElements()) {
+            URL _nextElement = entries.nextElement();
+            URL _fileURL = FileLocator.toFileURL(_nextElement);
+            InputStream _openStream = _fileURL.openStream();
+            InputStreamReader _inputStreamReader = new InputStreamReader(_openStream);
+            String _string = CharStreams.toString(_inputStreamReader);
+            contents.add(_string);
+          }
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
         }
-      } catch (Throwable _e) {
-        throw Exceptions.sneakyThrow(_e);
       }
     };
     final ArrayList<String> expectedContents = ObjectExtensions.<ArrayList<String>>operator_doubleArrow(_newArrayList, _function);
     boolean _isEmpty = expectedContents.isEmpty();
     boolean _not = (!_isEmpty);
     Assert.assertTrue(_not);
-    final Function1<String, String> _function_1 = (String content) -> {
-      String _xblockexpression = null;
-      {
-        final Function2<String, Pattern, String> _function_2 = (String replaced, Pattern pattern) -> {
-          Matcher _matcher = pattern.matcher(replaced);
-          return _matcher.replaceAll("$1$2");
-        };
-        final String unformatted = IterableExtensions.<Pattern, String>fold(this.patterns, content, _function_2);
-        Assert.assertNotEquals(content, unformatted);
-        String _replace = unformatted.replace("\r\n", " ");
-        _xblockexpression = _replace.replace("\n", " ");
+    final Function1<String, String> _function_1 = new Function1<String, String>() {
+      @Override
+      public String apply(final String content) {
+        String _xblockexpression = null;
+        {
+          final Function2<String, Pattern, String> _function = new Function2<String, Pattern, String>() {
+            @Override
+            public String apply(final String replaced, final Pattern pattern) {
+              Matcher _matcher = pattern.matcher(replaced);
+              return _matcher.replaceAll("$1$2");
+            }
+          };
+          final String unformatted = IterableExtensions.<Pattern, String>fold(FormatterTest.this.patterns, content, _function);
+          Assert.assertNotEquals(content, unformatted);
+          String _replace = unformatted.replace("\r\n", " ");
+          _xblockexpression = _replace.replace("\n", " ");
+        }
+        return _xblockexpression;
       }
-      return _xblockexpression;
     };
     final Function1<? super String, ? extends String> unformatter = _function_1;
-    final Consumer<String> _function_2 = (String expected) -> {
-      String _apply = unformatter.apply(expected);
-      InputOutput.<String>println(_apply);
-      final Procedure1<FormatterTestRequest> _function_3 = (FormatterTestRequest it) -> {
-        it.setExpectation(expected);
-        String _apply_1 = unformatter.apply(expected);
-        it.setToBeFormatted(_apply_1);
-      };
-      this.assertFormatted(_function_3);
+    final Procedure1<String> _function_2 = new Procedure1<String>() {
+      @Override
+      public void apply(final String expected) {
+        String _apply = unformatter.apply(expected);
+        InputOutput.<String>println(_apply);
+        final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+          @Override
+          public void apply(final FormatterTestRequest it) {
+            it.setExpectation(expected);
+            String _apply = unformatter.apply(expected);
+            it.setToBeFormatted(_apply);
+          }
+        };
+        FormatterTest.this.assertFormatted(_function);
+      }
     };
-    expectedContents.forEach(_function_2);
+    IterableExtensions.<String>forEach(expectedContents, _function_2);
   }
   
   @Test
   public void testManual() {
-    final Function1<String, Map<String, String>> _function = (String path) -> {
-      HashMap<String, String> _xblockexpression = null;
-      {
-        CoreTestsActivator _instance = CoreTestsActivator.getInstance();
-        Bundle _bundle = _instance.getBundle();
-        final Enumeration<URL> entries = _bundle.findEntries(path, "*.room", false);
-        HashMap<String, String> _newHashMap = CollectionLiterals.<String, String>newHashMap();
-        final Procedure1<HashMap<String, String>> _function_1 = (HashMap<String, String> contentMap) -> {
-          try {
-            while (entries.hasMoreElements()) {
-              {
-                final URL entry = entries.nextElement();
-                URI _uRI = entry.toURI();
-                String _string = _uRI.toString();
-                org.eclipse.emf.common.util.URI _createURI = org.eclipse.emf.common.util.URI.createURI(_string);
-                final String name = _createURI.lastSegment();
-                URL _fileURL = FileLocator.toFileURL(entry);
-                InputStream _openStream = _fileURL.openStream();
-                InputStreamReader _inputStreamReader = new InputStreamReader(_openStream);
-                String _string_1 = CharStreams.toString(_inputStreamReader);
-                contentMap.put(name, _string_1);
+    final Function1<String, Map<String, String>> _function = new Function1<String, Map<String, String>>() {
+      @Override
+      public Map<String, String> apply(final String path) {
+        HashMap<String, String> _xblockexpression = null;
+        {
+          CoreTestsActivator _instance = CoreTestsActivator.getInstance();
+          Bundle _bundle = _instance.getBundle();
+          final Enumeration<URL> entries = _bundle.findEntries(path, "*.room", false);
+          HashMap<String, String> _newHashMap = CollectionLiterals.<String, String>newHashMap();
+          final Procedure1<HashMap<String, String>> _function = new Procedure1<HashMap<String, String>>() {
+            @Override
+            public void apply(final HashMap<String, String> contentMap) {
+              try {
+                while (entries.hasMoreElements()) {
+                  {
+                    final URL entry = entries.nextElement();
+                    URI _uRI = entry.toURI();
+                    String _string = _uRI.toString();
+                    org.eclipse.emf.common.util.URI _createURI = org.eclipse.emf.common.util.URI.createURI(_string);
+                    final String name = _createURI.lastSegment();
+                    URL _fileURL = FileLocator.toFileURL(entry);
+                    InputStream _openStream = _fileURL.openStream();
+                    InputStreamReader _inputStreamReader = new InputStreamReader(_openStream);
+                    String _string_1 = CharStreams.toString(_inputStreamReader);
+                    contentMap.put(name, _string_1);
+                  }
+                }
+              } catch (Throwable _e) {
+                throw Exceptions.sneakyThrow(_e);
               }
             }
-          } catch (Throwable _e) {
-            throw Exceptions.sneakyThrow(_e);
-          }
-        };
-        _xblockexpression = ObjectExtensions.<HashMap<String, String>>operator_doubleArrow(_newHashMap, _function_1);
+          };
+          _xblockexpression = ObjectExtensions.<HashMap<String, String>>operator_doubleArrow(_newHashMap, _function);
+        }
+        return _xblockexpression;
       }
-      return _xblockexpression;
     };
     final Function1<? super String, ? extends Map<String, String>> collector = _function;
     final Map<String, String> unformattedContents = collector.apply("models/formatting/expected/");
     final Map<String, String> expectedContents = collector.apply("models/formatting/expected/");
     Assert.assertTrue(((!unformattedContents.isEmpty()) && Objects.equal(expectedContents.keySet(), unformattedContents.keySet())));
     Set<String> _keySet = expectedContents.keySet();
-    final Consumer<String> _function_1 = (String fileName) -> {
-      final Procedure1<FormatterTestRequest> _function_2 = (FormatterTestRequest it) -> {
-        String _get = expectedContents.get(fileName);
-        it.setExpectation(_get);
-        String _get_1 = unformattedContents.get(fileName);
-        it.setToBeFormatted(_get_1);
-      };
-      this.assertFormatted(_function_2);
+    final Procedure1<String> _function_1 = new Procedure1<String>() {
+      @Override
+      public void apply(final String fileName) {
+        final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+          @Override
+          public void apply(final FormatterTestRequest it) {
+            String _get = expectedContents.get(fileName);
+            it.setExpectation(_get);
+            String _get_1 = unformattedContents.get(fileName);
+            it.setToBeFormatted(_get_1);
+          }
+        };
+        FormatterTest.this.assertFormatted(_function);
+      }
     };
-    _keySet.forEach(_function_1);
+    IterableExtensions.<String>forEach(_keySet, _function_1);
   }
 }

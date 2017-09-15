@@ -19,7 +19,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.function.Consumer;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.core.common.converter.TimeConverter;
 import org.eclipse.etrice.core.etmap.util.ETMapUtil;
@@ -54,6 +53,7 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @Singleton
 @SuppressWarnings("all")
@@ -84,11 +84,14 @@ public class NodeGen {
     final Map<SubSystemClass, WiredSubSystemClass> sscc2wired = CollectionLiterals.<SubSystemClass, WiredSubSystemClass>newHashMap();
     EList<WiredStructureClass> _wiredInstances = root.getWiredInstances();
     Iterable<WiredSubSystemClass> _filter = Iterables.<WiredSubSystemClass>filter(_wiredInstances, WiredSubSystemClass.class);
-    final Consumer<WiredSubSystemClass> _function = (WiredSubSystemClass it) -> {
-      SubSystemClass _subSystemClass = it.getSubSystemClass();
-      sscc2wired.put(_subSystemClass, it);
+    final Procedure1<WiredSubSystemClass> _function = new Procedure1<WiredSubSystemClass>() {
+      @Override
+      public void apply(final WiredSubSystemClass it) {
+        SubSystemClass _subSystemClass = it.getSubSystemClass();
+        sscc2wired.put(_subSystemClass, it);
+      }
     };
-    _filter.forEach(_function);
+    IterableExtensions.<WiredSubSystemClass>forEach(_filter, _function);
     Collection<NodeRef> _nodeRefs = ETMapUtil.getNodeRefs();
     for (final NodeRef nr : _nodeRefs) {
       List<String> _subSystemInstancePaths = ETMapUtil.getSubSystemInstancePaths(nr);
@@ -131,8 +134,11 @@ public class NodeGen {
       final String clsname = this._cppExtensions.getCppClassName(nr, comp);
       NodeClass _type = nr.getType();
       EList<PhysicalThread> _threads = _type.getThreads();
-      final Function1<PhysicalThread, Boolean> _function = (PhysicalThread t) -> {
-        return Boolean.valueOf(usedThreads.contains(t));
+      final Function1<PhysicalThread, Boolean> _function = new Function1<PhysicalThread, Boolean>() {
+        @Override
+        public Boolean apply(final PhysicalThread t) {
+          return Boolean.valueOf(usedThreads.contains(t));
+        }
       };
       final Iterable<PhysicalThread> threads = IterableExtensions.<PhysicalThread>filter(_threads, _function);
       StringConcatenation _builder = new StringConcatenation();
@@ -360,15 +366,18 @@ public class NodeGen {
       _builder.append("SubSystemClassBase(parent, name)");
       initList.add(_builder.toString());
       EList<ActorRef> _actorRefs = cc.getActorRefs();
-      final Function1<ActorRef, String> _function = (ActorRef it) -> {
-        StringConcatenation _builder_1 = new StringConcatenation();
-        String _name = it.getName();
-        _builder_1.append(_name, "");
-        _builder_1.append("(this, \"");
-        String _name_1 = it.getName();
-        _builder_1.append(_name_1, "");
-        _builder_1.append("\")");
-        return _builder_1.toString();
+      final Function1<ActorRef, String> _function = new Function1<ActorRef, String>() {
+        @Override
+        public String apply(final ActorRef it) {
+          StringConcatenation _builder = new StringConcatenation();
+          String _name = it.getName();
+          _builder.append(_name, "");
+          _builder.append("(this, \"");
+          String _name_1 = it.getName();
+          _builder.append(_name_1, "");
+          _builder.append("\")");
+          return _builder.toString();
+        }
       };
       List<String> _map = ListExtensions.<ActorRef, String>map(_actorRefs, _function);
       Iterables.<CharSequence>addAll(initList, _map);
@@ -386,8 +395,11 @@ public class NodeGen {
       final String clsname = this._cppExtensions.getCppClassName(nr, comp);
       NodeClass _type = nr.getType();
       EList<PhysicalThread> _threads = _type.getThreads();
-      final Function1<PhysicalThread, Boolean> _function = (PhysicalThread t) -> {
-        return Boolean.valueOf(usedThreads.contains(t));
+      final Function1<PhysicalThread, Boolean> _function = new Function1<PhysicalThread, Boolean>() {
+        @Override
+        public Boolean apply(final PhysicalThread t) {
+          return Boolean.valueOf(usedThreads.contains(t));
+        }
       };
       final Iterable<PhysicalThread> threads = IterableExtensions.<PhysicalThread>filter(_threads, _function);
       StringConcatenation _builder = new StringConcatenation();
@@ -562,9 +574,12 @@ public class NodeGen {
       _builder.append("IMessageMemory* msgMemory;");
       _builder.newLine();
       {
-        final Function1<PhysicalThread, Long> _function_1 = (PhysicalThread it) -> {
-          long _prio = it.getPrio();
-          return Long.valueOf((-_prio));
+        final Function1<PhysicalThread, Long> _function_1 = new Function1<PhysicalThread, Long>() {
+          @Override
+          public Long apply(final PhysicalThread it) {
+            long _prio = it.getPrio();
+            return Long.valueOf((-_prio));
+          }
         };
         List<PhysicalThread> _sortBy = IterableExtensions.<PhysicalThread, Long>sortBy(threads, _function_1);
         for(final PhysicalThread thread_3 : _sortBy) {

@@ -15,7 +15,6 @@ import com.google.inject.Inject;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.function.Consumer;
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -48,6 +47,7 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.scoping.impl.ImportUriResolver;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
 public class DataConfiguration implements IDataConfiguration {
@@ -307,14 +307,17 @@ public class DataConfiguration implements IDataConfiguration {
     String _path = ai.getPath();
     List<AttrInstanceConfig> configs = this._dataConfigurationHelper.dynActorInstanceAttrMap.get(_path);
     if (configs!=null) {
-      final Consumer<AttrInstanceConfig> _function = (AttrInstanceConfig c) -> {
-        boolean _isReadOnly = c.isReadOnly();
-        if (_isReadOnly) {
-          Attribute _attribute = c.getAttribute();
-          result.add(_attribute);
+      final Procedure1<AttrInstanceConfig> _function = new Procedure1<AttrInstanceConfig>() {
+        @Override
+        public void apply(final AttrInstanceConfig c) {
+          boolean _isReadOnly = c.isReadOnly();
+          if (_isReadOnly) {
+            Attribute _attribute = c.getAttribute();
+            result.add(_attribute);
+          }
         }
       };
-      configs.forEach(_function);
+      IterableExtensions.<AttrInstanceConfig>forEach(configs, _function);
     }
     return result;
   }
@@ -325,15 +328,18 @@ public class DataConfiguration implements IDataConfiguration {
     String _path = ai.getPath();
     List<AttrInstanceConfig> configs = this._dataConfigurationHelper.dynActorInstanceAttrMap.get(_path);
     if (configs!=null) {
-      final Consumer<AttrInstanceConfig> _function = (AttrInstanceConfig c) -> {
-        boolean _isReadOnly = c.isReadOnly();
-        boolean _not = (!_isReadOnly);
-        if (_not) {
-          Attribute _attribute = c.getAttribute();
-          result.add(_attribute);
+      final Procedure1<AttrInstanceConfig> _function = new Procedure1<AttrInstanceConfig>() {
+        @Override
+        public void apply(final AttrInstanceConfig c) {
+          boolean _isReadOnly = c.isReadOnly();
+          boolean _not = (!_isReadOnly);
+          if (_not) {
+            Attribute _attribute = c.getAttribute();
+            result.add(_attribute);
+          }
         }
       };
-      configs.forEach(_function);
+      IterableExtensions.<AttrInstanceConfig>forEach(configs, _function);
     }
     return result;
   }
@@ -426,14 +432,17 @@ public class DataConfiguration implements IDataConfiguration {
     final HashSet<Attribute> result = new HashSet<Attribute>();
     final List<AttrInstanceConfig> configs = this._dataConfigurationHelper.dynActorClassAttrMap.get(actor);
     if (configs!=null) {
-      final Consumer<AttrInstanceConfig> _function = (AttrInstanceConfig c) -> {
-        boolean _isReadOnly = c.isReadOnly();
-        if (_isReadOnly) {
-          Attribute _attribute = c.getAttribute();
-          result.add(_attribute);
+      final Procedure1<AttrInstanceConfig> _function = new Procedure1<AttrInstanceConfig>() {
+        @Override
+        public void apply(final AttrInstanceConfig c) {
+          boolean _isReadOnly = c.isReadOnly();
+          if (_isReadOnly) {
+            Attribute _attribute = c.getAttribute();
+            result.add(_attribute);
+          }
         }
       };
-      configs.forEach(_function);
+      IterableExtensions.<AttrInstanceConfig>forEach(configs, _function);
     }
     return IterableExtensions.<Attribute>toList(result);
   }
@@ -443,15 +452,18 @@ public class DataConfiguration implements IDataConfiguration {
     final HashSet<Attribute> result = new HashSet<Attribute>();
     final List<AttrInstanceConfig> configs = this._dataConfigurationHelper.dynActorClassAttrMap.get(actor);
     if (configs!=null) {
-      final Consumer<AttrInstanceConfig> _function = (AttrInstanceConfig c) -> {
-        boolean _isReadOnly = c.isReadOnly();
-        boolean _not = (!_isReadOnly);
-        if (_not) {
-          Attribute _attribute = c.getAttribute();
-          result.add(_attribute);
+      final Procedure1<AttrInstanceConfig> _function = new Procedure1<AttrInstanceConfig>() {
+        @Override
+        public void apply(final AttrInstanceConfig c) {
+          boolean _isReadOnly = c.isReadOnly();
+          boolean _not = (!_isReadOnly);
+          if (_not) {
+            Attribute _attribute = c.getAttribute();
+            result.add(_attribute);
+          }
         }
       };
-      configs.forEach(_function);
+      IterableExtensions.<AttrInstanceConfig>forEach(configs, _function);
     }
     return IterableExtensions.<Attribute>toList(result);
   }

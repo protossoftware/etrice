@@ -56,20 +56,29 @@ public class GeneratorLaunchHelper {
     LinkedHashSet<String> _xblockexpression = null;
     {
       GeneratorLaunchHelper _generatorLaunchHelper = new GeneratorLaunchHelper();
-      final Procedure1<GeneratorLaunchHelper> _function = (GeneratorLaunchHelper it) -> {
-        Injector _injector = RoomUiModule.getInjector();
-        _injector.injectMembers(it);
+      final Procedure1<GeneratorLaunchHelper> _function = new Procedure1<GeneratorLaunchHelper>() {
+        @Override
+        public void apply(final GeneratorLaunchHelper it) {
+          Injector _injector = RoomUiModule.getInjector();
+          _injector.injectMembers(it);
+        }
       };
       final GeneratorLaunchHelper helper = ObjectExtensions.<GeneratorLaunchHelper>operator_doubleArrow(_generatorLaunchHelper, _function);
       LinkedHashSet<String> _newLinkedHashSet = CollectionLiterals.<String>newLinkedHashSet();
-      final Procedure1<LinkedHashSet<String>> _function_1 = (LinkedHashSet<String> it) -> {
-        Iterables.<String>addAll(it, models);
-        final Function1<String, Iterable<String>> _function_2 = (String it_1) -> {
-          return helper.getAllDependencies(it_1);
-        };
-        Iterable<Iterable<String>> _map = IterableExtensions.<String, Iterable<String>>map(models, _function_2);
-        Iterable<String> _flatten = Iterables.<String>concat(_map);
-        Iterables.<String>addAll(it, _flatten);
+      final Procedure1<LinkedHashSet<String>> _function_1 = new Procedure1<LinkedHashSet<String>>() {
+        @Override
+        public void apply(final LinkedHashSet<String> it) {
+          Iterables.<String>addAll(it, models);
+          final Function1<String, Iterable<String>> _function = new Function1<String, Iterable<String>>() {
+            @Override
+            public Iterable<String> apply(final String it) {
+              return helper.getAllDependencies(it);
+            }
+          };
+          Iterable<Iterable<String>> _map = IterableExtensions.<String, Iterable<String>>map(models, _function);
+          Iterable<String> _flatten = Iterables.<String>concat(_map);
+          Iterables.<String>addAll(it, _flatten);
+        }
       };
       _xblockexpression = ObjectExtensions.<LinkedHashSet<String>>operator_doubleArrow(_newLinkedHashSet, _function_1);
     }
@@ -131,53 +140,56 @@ public class GeneratorLaunchHelper {
       final Path projectPath = Paths.get(_fileString);
       EcoreUtil.resolveAll(rs);
       EList<Resource> _resources = rs.getResources();
-      final Function1<Resource, String> _function = (Resource it) -> {
-        String _switchResult = null;
-        URI _uRI = it.getURI();
-        final URI it_1 = _uRI;
-        boolean _matched = false;
-        boolean _isPlatformResource = it_1.isPlatformResource();
-        if (_isPlatformResource) {
-          _matched=true;
-          String _xblockexpression_1 = null;
-          {
-            IWorkspace _workspace = ResourcesPlugin.getWorkspace();
-            IWorkspaceRoot _root = _workspace.getRoot();
-            String _platformString = it_1.toPlatformString(false);
-            org.eclipse.core.runtime.Path _path = new org.eclipse.core.runtime.Path(_platformString);
-            final IResource platformMember = _root.findMember(_path);
-            IPath _location = null;
-            if (platformMember!=null) {
-              _location=platformMember.getLocation();
-            }
-            String _oSString = null;
-            if (_location!=null) {
-              _oSString=_location.toOSString();
-            }
-            final String location = _oSString;
-            String _xifexpression = null;
-            if (((location != null) && Paths.get(location).startsWith(projectPath))) {
-              _xifexpression = location;
-            }
-            _xblockexpression_1 = _xifexpression;
-          }
-          _switchResult = _xblockexpression_1;
-        }
-        if (!_matched) {
-          boolean _isFile = it_1.isFile();
-          if (_isFile) {
+      final Function1<Resource, String> _function = new Function1<Resource, String>() {
+        @Override
+        public String apply(final Resource it) {
+          String _switchResult = null;
+          URI _uRI = it.getURI();
+          final URI it_1 = _uRI;
+          boolean _matched = false;
+          boolean _isPlatformResource = it_1.isPlatformResource();
+          if (_isPlatformResource) {
             _matched=true;
-            String _xifexpression = null;
-            String _fileString_1 = it_1.toFileString();
-            Path _get = Paths.get(_fileString_1);
-            boolean _startsWith = _get.startsWith(projectPath);
-            if (_startsWith) {
-              _xifexpression = it_1.toFileString();
+            String _xblockexpression = null;
+            {
+              IWorkspace _workspace = ResourcesPlugin.getWorkspace();
+              IWorkspaceRoot _root = _workspace.getRoot();
+              String _platformString = it_1.toPlatformString(false);
+              org.eclipse.core.runtime.Path _path = new org.eclipse.core.runtime.Path(_platformString);
+              final IResource platformMember = _root.findMember(_path);
+              IPath _location = null;
+              if (platformMember!=null) {
+                _location=platformMember.getLocation();
+              }
+              String _oSString = null;
+              if (_location!=null) {
+                _oSString=_location.toOSString();
+              }
+              final String location = _oSString;
+              String _xifexpression = null;
+              if (((location != null) && Paths.get(location).startsWith(projectPath))) {
+                _xifexpression = location;
+              }
+              _xblockexpression = _xifexpression;
             }
-            _switchResult = _xifexpression;
+            _switchResult = _xblockexpression;
           }
+          if (!_matched) {
+            boolean _isFile = it_1.isFile();
+            if (_isFile) {
+              _matched=true;
+              String _xifexpression = null;
+              String _fileString = it_1.toFileString();
+              Path _get = Paths.get(_fileString);
+              boolean _startsWith = _get.startsWith(projectPath);
+              if (_startsWith) {
+                _xifexpression = it_1.toFileString();
+              }
+              _switchResult = _xifexpression;
+            }
+          }
+          return _switchResult;
         }
-        return _switchResult;
       };
       List<String> _map = ListExtensions.<Resource, String>map(_resources, _function);
       _xblockexpression = IterableExtensions.<String>filterNull(_map);

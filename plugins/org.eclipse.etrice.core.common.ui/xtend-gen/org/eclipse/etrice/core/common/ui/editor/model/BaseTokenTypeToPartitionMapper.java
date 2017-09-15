@@ -10,6 +10,7 @@
  */
 package org.eclipse.etrice.core.common.ui.editor.model;
 
+import com.google.common.base.Objects;
 import org.eclipse.xtext.ui.editor.model.TerminalsTokenTypeToPartitionMapper;
 
 @SuppressWarnings("all")
@@ -17,13 +18,13 @@ public class BaseTokenTypeToPartitionMapper extends TerminalsTokenTypeToPartitio
   @Override
   protected String calculateId(final String tokenName, final int tokenType) {
     String _switchResult = null;
-    switch (tokenName) {
-      case "RULE_CC_STRING":
-        _switchResult = TerminalsTokenTypeToPartitionMapper.STRING_LITERAL_PARTITION;
-        break;
-      default:
-        _switchResult = super.calculateId(tokenName, tokenType);
-        break;
+    boolean _matched = false;
+    if (Objects.equal(tokenName, "RULE_CC_STRING")) {
+      _matched=true;
+      _switchResult = TerminalsTokenTypeToPartitionMapper.STRING_LITERAL_PARTITION;
+    }
+    if (!_matched) {
+      _switchResult = super.calculateId(tokenName, tokenType);
     }
     return _switchResult;
   }
