@@ -13,7 +13,6 @@ package org.eclipse.etrice.core.fsm.formatting2;
 import com.google.inject.Inject;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Consumer;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.common.base.Annotation;
@@ -56,25 +55,37 @@ public class FSMFormatter extends BaseFormatter {
     super.formatAllByKeywords(it, document);
     ISemanticRegionsFinder _allRegionsFor = this.textRegionExtensions.allRegionsFor(it);
     List<ISemanticRegion> _keywords = _allRegionsFor.keywords("->", "extends", "=", "or", "|");
-    final Consumer<ISemanticRegion> _function = (ISemanticRegion it_1) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it_2) -> {
-        it_2.oneSpace();
-      };
-      document.surround(it_1, _function_1);
+    final Procedure1<ISemanticRegion> _function = new Procedure1<ISemanticRegion>() {
+      @Override
+      public void apply(final ISemanticRegion it) {
+        final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
+          @Override
+          public void apply(final IHiddenRegionFormatter it) {
+            it.oneSpace();
+          }
+        };
+        document.surround(it, _function);
+      }
     };
-    _keywords.forEach(_function);
+    IterableExtensions.<ISemanticRegion>forEach(_keywords, _function);
   }
   
   protected EObject prependDefaultNewLines(final EObject it, @Extension final IFormattableDocument document) {
     EObject _xifexpression = null;
     if (((this.textRegionExtensions.previousHiddenRegion(it) != null) && (this.textRegionExtensions.previousHiddenRegion(it).getLineCount() > 2))) {
-      final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it_1) -> {
-        it_1.setNewLines(2);
+      final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
+        @Override
+        public void apply(final IHiddenRegionFormatter it) {
+          it.setNewLines(2);
+        }
       };
       _xifexpression = document.<EObject>prepend(it, _function);
     } else {
-      final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
+      final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
+        @Override
+        public void apply(final IHiddenRegionFormatter it) {
+          it.newLine();
+        }
       };
       _xifexpression = document.<EObject>prepend(it, _function_1);
     }
@@ -87,13 +98,19 @@ public class FSMFormatter extends BaseFormatter {
     int _lineCount = _previousHiddenRegion.getLineCount();
     boolean _greaterThan = (_lineCount > 2);
     if (_greaterThan) {
-      final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it_1) -> {
-        it_1.setNewLines(2);
+      final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
+        @Override
+        public void apply(final IHiddenRegionFormatter it) {
+          it.setNewLines(2);
+        }
       };
       _xifexpression = document.prepend(it, _function);
     } else {
-      final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it_1) -> {
-        it_1.newLine();
+      final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
+        @Override
+        public void apply(final IHiddenRegionFormatter it) {
+          it.newLine();
+        }
       };
       _xifexpression = document.prepend(it, _function_1);
     }
@@ -102,84 +119,123 @@ public class FSMFormatter extends BaseFormatter {
   
   protected void _format(final StateGraph it, @Extension final IFormattableDocument document) {
     EList<EObject> _eContents = it.eContents();
-    final Consumer<EObject> _function = (EObject it_1) -> {
-      this.prependDefaultNewLines(it_1, document);
+    final Procedure1<EObject> _function = new Procedure1<EObject>() {
+      @Override
+      public void apply(final EObject it) {
+        FSMFormatter.this.prependDefaultNewLines(it, document);
+      }
     };
-    _eContents.forEach(_function);
+    IterableExtensions.<EObject>forEach(_eContents, _function);
   }
   
   protected void _format(final State it, @Extension final IFormattableDocument document) {
     ISemanticRegionsFinder _regionFor = this.textRegionExtensions.regionFor(it);
     List<ISemanticRegion> _keywords = _regionFor.keywords("entry", "exit", "do", "subgraph");
-    final Consumer<ISemanticRegion> _function = (ISemanticRegion it_1) -> {
-      this.prependDefaultNewLines(it_1, document);
-      final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it_2) -> {
-        it_2.oneSpace();
-      };
-      document.append(it_1, _function_1);
+    final Procedure1<ISemanticRegion> _function = new Procedure1<ISemanticRegion>() {
+      @Override
+      public void apply(final ISemanticRegion it) {
+        FSMFormatter.this.prependDefaultNewLines(it, document);
+        final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
+          @Override
+          public void apply(final IHiddenRegionFormatter it) {
+            it.oneSpace();
+          }
+        };
+        document.append(it, _function);
+      }
     };
-    _keywords.forEach(_function);
+    IterableExtensions.<ISemanticRegion>forEach(_keywords, _function);
   }
   
   protected void _format(final Transition it, @Extension final IFormattableDocument document) {
     ISemanticRegionsFinder _regionFor = this.textRegionExtensions.regionFor(it);
     List<ISemanticRegion> _keywords = _regionFor.keywords("action", "guard", "cond");
-    final Consumer<ISemanticRegion> _function = (ISemanticRegion it_1) -> {
-      this.prependDefaultNewLines(it_1, document);
-      final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it_2) -> {
-        it_2.oneSpace();
-      };
-      document.append(it_1, _function_1);
+    final Procedure1<ISemanticRegion> _function = new Procedure1<ISemanticRegion>() {
+      @Override
+      public void apply(final ISemanticRegion it) {
+        FSMFormatter.this.prependDefaultNewLines(it, document);
+        final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
+          @Override
+          public void apply(final IHiddenRegionFormatter it) {
+            it.oneSpace();
+          }
+        };
+        document.append(it, _function);
+      }
     };
-    _keywords.forEach(_function);
+    IterableExtensions.<ISemanticRegion>forEach(_keywords, _function);
   }
   
   protected void _format(final TriggeredTransition it, @Extension final IFormattableDocument document) {
     ISemanticRegionsFinder _regionFor = this.textRegionExtensions.regionFor(it);
     List<ISemanticRegion> _keywords = _regionFor.keywords("action", "guard", "cond", "triggers");
-    final Consumer<ISemanticRegion> _function = (ISemanticRegion it_1) -> {
-      this.prependDefaultNewLines(it_1, document);
-      final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it_2) -> {
-        it_2.oneSpace();
-      };
-      document.append(it_1, _function_1);
+    final Procedure1<ISemanticRegion> _function = new Procedure1<ISemanticRegion>() {
+      @Override
+      public void apply(final ISemanticRegion it) {
+        FSMFormatter.this.prependDefaultNewLines(it, document);
+        final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
+          @Override
+          public void apply(final IHiddenRegionFormatter it) {
+            it.oneSpace();
+          }
+        };
+        document.append(it, _function);
+      }
     };
-    _keywords.forEach(_function);
+    IterableExtensions.<ISemanticRegion>forEach(_keywords, _function);
     EList<Trigger> _triggers = it.getTriggers();
     Trigger _head = IterableExtensions.<Trigger>head(_triggers);
-    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it_1) -> {
-      it_1.newLine();
+    final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
+      @Override
+      public void apply(final IHiddenRegionFormatter it) {
+        it.newLine();
+      }
     };
     document.<Trigger>prepend(_head, _function_1);
     EList<Trigger> _triggers_1 = it.getTriggers();
     Iterable<Trigger> _tail = IterableExtensions.<Trigger>tail(_triggers_1);
-    final Consumer<Trigger> _function_2 = (Trigger it_1) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it_2) -> {
-        it_2.oneSpace();
-      };
-      document.<Trigger>prepend(it_1, _function_3);
+    final Procedure1<Trigger> _function_2 = new Procedure1<Trigger>() {
+      @Override
+      public void apply(final Trigger it) {
+        final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
+          @Override
+          public void apply(final IHiddenRegionFormatter it) {
+            it.oneSpace();
+          }
+        };
+        document.<Trigger>prepend(it, _function);
+      }
     };
-    _tail.forEach(_function_2);
+    IterableExtensions.<Trigger>forEach(_tail, _function_2);
   }
   
   protected void _format(final Trigger it, @Extension final IFormattableDocument document) {
     ISemanticRegionsFinder _regionFor = this.textRegionExtensions.regionFor(it);
     List<Pair<ISemanticRegion, ISemanticRegion>> _keywordPairs = _regionFor.keywordPairs("<", ">");
-    final Consumer<Pair<ISemanticRegion, ISemanticRegion>> _function = (Pair<ISemanticRegion, ISemanticRegion> it_1) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it_2) -> {
-        it_2.noSpace();
-      };
-      document.<ISemanticRegion, ISemanticRegion>interior(it_1, _function_1);
+    final Procedure1<Pair<ISemanticRegion, ISemanticRegion>> _function = new Procedure1<Pair<ISemanticRegion, ISemanticRegion>>() {
+      @Override
+      public void apply(final Pair<ISemanticRegion, ISemanticRegion> it) {
+        final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
+          @Override
+          public void apply(final IHiddenRegionFormatter it) {
+            it.noSpace();
+          }
+        };
+        document.<ISemanticRegion, ISemanticRegion>interior(it, _function);
+      }
     };
-    _keywordPairs.forEach(_function);
+    IterableExtensions.<Pair<ISemanticRegion, ISemanticRegion>>forEach(_keywordPairs, _function);
   }
   
   protected void _format(final ProtocolSemantics it, @Extension final IFormattableDocument document) {
     EList<SemanticsRule> _rules = it.getRules();
-    final Consumer<SemanticsRule> _function = (SemanticsRule it_1) -> {
-      this.prependDefaultNewLines(it_1, document);
+    final Procedure1<SemanticsRule> _function = new Procedure1<SemanticsRule>() {
+      @Override
+      public void apply(final SemanticsRule it) {
+        FSMFormatter.this.prependDefaultNewLines(it, document);
+      }
     };
-    _rules.forEach(_function);
+    IterableExtensions.<SemanticsRule>forEach(_rules, _function);
   }
   
   @Inject
@@ -191,8 +247,11 @@ public class FSMFormatter extends BaseFormatter {
     Assignment _linesAssignment_0_1 = _detailCodeAccess.getLinesAssignment_0_1();
     final ISemanticRegion ccRegion = _regionFor.assignment(_linesAssignment_0_1);
     if ((ccRegion != null)) {
-      final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
-        it.oneSpace();
+      final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
+        @Override
+        public void apply(final IHiddenRegionFormatter it) {
+          it.oneSpace();
+        }
       };
       document.<DetailCode>prepend(detailcode, _function);
       boolean _isMultiline = this.textRegionExtensions.isMultiline(detailcode);
@@ -206,13 +265,19 @@ public class FSMFormatter extends BaseFormatter {
       FSMGrammarAccess.DetailCodeElements _detailCodeAccess_1 = this._fSMGrammarAccess.getDetailCodeAccess();
       Assignment _linesAssignment_1_1 = _detailCodeAccess_1.getLinesAssignment_1_1();
       List<ISemanticRegion> _assignments = _regionFor_1.assignments(_linesAssignment_1_1);
-      final Consumer<ISemanticRegion> _function_1 = (ISemanticRegion it) -> {
-        final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it_1) -> {
-          it_1.newLine();
-        };
-        document.prepend(it, _function_2);
+      final Procedure1<ISemanticRegion> _function_1 = new Procedure1<ISemanticRegion>() {
+        @Override
+        public void apply(final ISemanticRegion it) {
+          final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
+            @Override
+            public void apply(final IHiddenRegionFormatter it) {
+              it.newLine();
+            }
+          };
+          document.prepend(it, _function);
+        }
       };
-      _assignments.forEach(_function_1);
+      IterableExtensions.<ISemanticRegion>forEach(_assignments, _function_1);
     }
   }
   

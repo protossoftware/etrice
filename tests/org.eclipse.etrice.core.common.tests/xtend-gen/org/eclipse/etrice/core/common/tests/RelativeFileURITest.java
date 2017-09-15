@@ -13,13 +13,13 @@ package org.eclipse.etrice.core.common.tests;
 import com.google.common.collect.Iterables;
 import java.util.Collections;
 import java.util.List;
-import java.util.function.Consumer;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.etrice.core.common.scoping.RelativeFileURIHandler;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -45,20 +45,32 @@ public class RelativeFileURITest {
     Iterable<String> _plus = Iterables.<String>concat(RelativeFileURITest.ABSOLUTE_URLS, RelativeFileURITest.RESOLVED_PRESERVE_ABOVE_ROOT_URIS);
     Iterable<String> _plus_1 = Iterables.<String>concat(_plus, RelativeFileURITest.RESOLVED_NO_PRESERVE_ABOVE_ROOT_URIS);
     Iterable<String> _plus_2 = Iterables.<String>concat(_plus_1, RelativeFileURITest.ENCODED_URIS);
-    final Function1<String, List<List<String>>> _function = (String uri) -> {
-      final Function1<String, List<String>> _function_1 = (String query) -> {
-        final Function1<String, String> _function_2 = (String fragment) -> {
-          return ((uri + query) + fragment);
+    final Function1<String, List<List<String>>> _function = new Function1<String, List<List<String>>>() {
+      @Override
+      public List<List<String>> apply(final String uri) {
+        final Function1<String, List<String>> _function = new Function1<String, List<String>>() {
+          @Override
+          public List<String> apply(final String query) {
+            final Function1<String, String> _function = new Function1<String, String>() {
+              @Override
+              public String apply(final String fragment) {
+                return ((uri + query) + fragment);
+              }
+            };
+            return ListExtensions.<String, String>map(RelativeFileURITest.FRAGMENTS, _function);
+          }
         };
-        return ListExtensions.<String, String>map(RelativeFileURITest.FRAGMENTS, _function_2);
-      };
-      return ListExtensions.<String, List<String>>map(RelativeFileURITest.QUERIES, _function_1);
+        return ListExtensions.<String, List<String>>map(RelativeFileURITest.QUERIES, _function);
+      }
     };
     Iterable<List<List<String>>> _map = IterableExtensions.<String, List<List<String>>>map(_plus_2, _function);
     Iterable<List<String>> _flatten = Iterables.<List<String>>concat(_map);
     Iterable<String> _flatten_1 = Iterables.<String>concat(_flatten);
-    final Function1<String, URI> _function_1 = (String it) -> {
-      return URI.createURI(it);
+    final Function1<String, URI> _function_1 = new Function1<String, URI>() {
+      @Override
+      public URI apply(final String it) {
+        return URI.createURI(it);
+      }
     };
     return IterableExtensions.<String, URI>map(_flatten_1, _function_1);
   }
@@ -68,25 +80,31 @@ public class RelativeFileURITest {
   @Test
   public void resolveSelf() {
     Iterable<URI> _allURIs = this.allURIs();
-    final Consumer<URI> _function = (URI uri) -> {
-      this.handler.setBaseURI(RelativeFileURITest.TEST_URI);
-      URI _resolve = this.handler.resolve(uri);
-      Assert.assertEquals(uri, _resolve);
+    final Procedure1<URI> _function = new Procedure1<URI>() {
+      @Override
+      public void apply(final URI uri) {
+        RelativeFileURITest.this.handler.setBaseURI(RelativeFileURITest.TEST_URI);
+        URI _resolve = RelativeFileURITest.this.handler.resolve(uri);
+        Assert.assertEquals(uri, _resolve);
+      }
     };
-    _allURIs.forEach(_function);
+    IterableExtensions.<URI>forEach(_allURIs, _function);
   }
   
   @Test
   public void roundtripResolve() {
     Iterable<URI> _allURIs = this.allURIs();
-    final Consumer<URI> _function = (URI uri) -> {
-      URI _createURI = URI.createURI("file:/a/b/c/d");
-      this.handler.setBaseURI(_createURI);
-      URI _deresolve = this.handler.deresolve(uri);
-      URI _resolve = this.handler.resolve(_deresolve);
-      Assert.assertEquals(uri, _resolve);
+    final Procedure1<URI> _function = new Procedure1<URI>() {
+      @Override
+      public void apply(final URI uri) {
+        URI _createURI = URI.createURI("file:/a/b/c/d");
+        RelativeFileURITest.this.handler.setBaseURI(_createURI);
+        URI _deresolve = RelativeFileURITest.this.handler.deresolve(uri);
+        URI _resolve = RelativeFileURITest.this.handler.resolve(_deresolve);
+        Assert.assertEquals(uri, _resolve);
+      }
     };
-    _allURIs.forEach(_function);
+    IterableExtensions.<URI>forEach(_allURIs, _function);
   }
   
   @Test

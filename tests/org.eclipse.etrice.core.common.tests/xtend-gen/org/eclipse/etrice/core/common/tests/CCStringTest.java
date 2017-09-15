@@ -13,7 +13,6 @@ package org.eclipse.etrice.core.common.tests;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.Collections;
-import java.util.function.Consumer;
 import org.eclipse.etrice.core.common.BaseTestInjectorProvider;
 import org.eclipse.etrice.core.common.converter.BaseConverterService;
 import org.eclipse.etrice.core.common.converter.CCStringConverter;
@@ -53,10 +52,13 @@ public class CCStringTest {
   protected String toValue(final String withoutDelim) {
     CCStringConverter _cC_StringConverter = this.baseConverterService.getCC_StringConverter();
     String _value = _cC_StringConverter.toValue(withoutDelim, null);
-    final Procedure1<String> _function = (String convertedWithoutDelim) -> {
-      CCStringConverter _cC_StringConverter_1 = this.baseConverterService.getCC_StringConverter();
-      final String convertedWithDelim = _cC_StringConverter_1.toValue(((this.DELIM + withoutDelim) + this.DELIM), null);
-      Assert.assertEquals(convertedWithoutDelim, convertedWithDelim);
+    final Procedure1<String> _function = new Procedure1<String>() {
+      @Override
+      public void apply(final String convertedWithoutDelim) {
+        CCStringConverter _cC_StringConverter = CCStringTest.this.baseConverterService.getCC_StringConverter();
+        final String convertedWithDelim = _cC_StringConverter.toValue(((CCStringTest.this.DELIM + withoutDelim) + CCStringTest.this.DELIM), null);
+        Assert.assertEquals(convertedWithoutDelim, convertedWithDelim);
+      }
     };
     return ObjectExtensions.<String>operator_doubleArrow(_value, _function);
   }
@@ -130,104 +132,125 @@ public class CCStringTest {
     String _string = _builder.toString();
     String _value_3 = this.toValue(this.NL);
     Assert.assertEquals(_string, _value_3);
-    final Procedure1<String> _function = (String text) -> {
-      String _value_4 = this.toValue(text);
-      Assert.assertEquals("", _value_4);
-      StringConcatenation _builder_1 = new StringConcatenation();
-      String _string_1 = _builder_1.toString();
-      String _value_5 = this.toValue(text);
-      Assert.assertEquals(_string_1, _value_5);
-      CCStringIndentation _cCStringIndentation = new CCStringIndentation(text);
-      boolean _hasConsistentIndentation = _cCStringIndentation.hasConsistentIndentation();
-      Assert.assertTrue(_hasConsistentIndentation);
+    final Procedure1<String> _function = new Procedure1<String>() {
+      @Override
+      public void apply(final String text) {
+        String _value = CCStringTest.this.toValue(text);
+        Assert.assertEquals("", _value);
+        StringConcatenation _builder = new StringConcatenation();
+        String _string = _builder.toString();
+        String _value_1 = CCStringTest.this.toValue(text);
+        Assert.assertEquals(_string, _value_1);
+        CCStringIndentation _cCStringIndentation = new CCStringIndentation(text);
+        boolean _hasConsistentIndentation = _cCStringIndentation.hasConsistentIndentation();
+        Assert.assertTrue(_hasConsistentIndentation);
+      }
     };
     ObjectExtensions.<String>operator_doubleArrow(
       ("\t" + this.NL), _function);
-    final Procedure1<String> _function_1 = (String text) -> {
-      String _value_4 = this.toValue(text);
-      Assert.assertEquals(("text" + this.NL), _value_4);
-      StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append("text");
-      _builder_1.newLine();
-      String _string_1 = _builder_1.toString();
-      String _value_5 = this.toValue(text);
-      Assert.assertEquals(_string_1, _value_5);
-      CCStringIndentation _cCStringIndentation = new CCStringIndentation(text);
-      boolean _hasConsistentIndentation = _cCStringIndentation.hasConsistentIndentation();
-      Assert.assertTrue(_hasConsistentIndentation);
+    final Procedure1<String> _function_1 = new Procedure1<String>() {
+      @Override
+      public void apply(final String text) {
+        String _value = CCStringTest.this.toValue(text);
+        Assert.assertEquals(("text" + CCStringTest.this.NL), _value);
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("text");
+        _builder.newLine();
+        String _string = _builder.toString();
+        String _value_1 = CCStringTest.this.toValue(text);
+        Assert.assertEquals(_string, _value_1);
+        CCStringIndentation _cCStringIndentation = new CCStringIndentation(text);
+        boolean _hasConsistentIndentation = _cCStringIndentation.hasConsistentIndentation();
+        Assert.assertTrue(_hasConsistentIndentation);
+      }
     };
     ObjectExtensions.<String>operator_doubleArrow(
       ("text" + this.NL), _function_1);
-    final Procedure1<String> _function_2 = (String text) -> {
-      String _value_4 = this.toValue(text);
-      Assert.assertEquals((" text\t" + this.NL), _value_4);
-      StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append(" ");
-      _builder_1.append("text\t");
-      _builder_1.newLine();
-      String _string_1 = _builder_1.toString();
-      String _value_5 = this.toValue(text);
-      Assert.assertEquals(_string_1, _value_5);
-      CCStringIndentation _cCStringIndentation = new CCStringIndentation(text);
-      boolean _hasConsistentIndentation = _cCStringIndentation.hasConsistentIndentation();
-      Assert.assertTrue(_hasConsistentIndentation);
+    final Procedure1<String> _function_2 = new Procedure1<String>() {
+      @Override
+      public void apply(final String text) {
+        String _value = CCStringTest.this.toValue(text);
+        Assert.assertEquals((" text\t" + CCStringTest.this.NL), _value);
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append(" ");
+        _builder.append("text\t");
+        _builder.newLine();
+        String _string = _builder.toString();
+        String _value_1 = CCStringTest.this.toValue(text);
+        Assert.assertEquals(_string, _value_1);
+        CCStringIndentation _cCStringIndentation = new CCStringIndentation(text);
+        boolean _hasConsistentIndentation = _cCStringIndentation.hasConsistentIndentation();
+        Assert.assertTrue(_hasConsistentIndentation);
+      }
     };
     ObjectExtensions.<String>operator_doubleArrow(
       (" text\t" + this.NL), _function_2);
-    final Procedure1<String> _function_3 = (String text) -> {
-      String _value_4 = this.toValue(text);
-      Assert.assertEquals(("text\\n" + this.NL), _value_4);
-      StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append("text\\n");
-      _builder_1.newLine();
-      String _string_1 = _builder_1.toString();
-      String _value_5 = this.toValue(text);
-      Assert.assertEquals(_string_1, _value_5);
-      CCStringIndentation _cCStringIndentation = new CCStringIndentation(text);
-      boolean _hasConsistentIndentation = _cCStringIndentation.hasConsistentIndentation();
-      Assert.assertTrue(_hasConsistentIndentation);
+    final Procedure1<String> _function_3 = new Procedure1<String>() {
+      @Override
+      public void apply(final String text) {
+        String _value = CCStringTest.this.toValue(text);
+        Assert.assertEquals(("text\\n" + CCStringTest.this.NL), _value);
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("text\\n");
+        _builder.newLine();
+        String _string = _builder.toString();
+        String _value_1 = CCStringTest.this.toValue(text);
+        Assert.assertEquals(_string, _value_1);
+        CCStringIndentation _cCStringIndentation = new CCStringIndentation(text);
+        boolean _hasConsistentIndentation = _cCStringIndentation.hasConsistentIndentation();
+        Assert.assertTrue(_hasConsistentIndentation);
+      }
     };
     ObjectExtensions.<String>operator_doubleArrow(
       (("text\\n" + this.NL) + "\t"), _function_3);
-    final Procedure1<String> _function_4 = (String text) -> {
-      String _value_4 = this.toValue(text);
-      Assert.assertEquals("text ", _value_4);
-      StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append("text ");
-      String _string_1 = _builder_1.toString();
-      String _value_5 = this.toValue(text);
-      Assert.assertEquals(_string_1, _value_5);
-      CCStringIndentation _cCStringIndentation = new CCStringIndentation(text);
-      boolean _hasConsistentIndentation = _cCStringIndentation.hasConsistentIndentation();
-      Assert.assertTrue(_hasConsistentIndentation);
+    final Procedure1<String> _function_4 = new Procedure1<String>() {
+      @Override
+      public void apply(final String text) {
+        String _value = CCStringTest.this.toValue(text);
+        Assert.assertEquals("text ", _value);
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("text ");
+        String _string = _builder.toString();
+        String _value_1 = CCStringTest.this.toValue(text);
+        Assert.assertEquals(_string, _value_1);
+        CCStringIndentation _cCStringIndentation = new CCStringIndentation(text);
+        boolean _hasConsistentIndentation = _cCStringIndentation.hasConsistentIndentation();
+        Assert.assertTrue(_hasConsistentIndentation);
+      }
     };
     ObjectExtensions.<String>operator_doubleArrow(
       (this.NL + "text "), _function_4);
-    final Procedure1<String> _function_5 = (String text) -> {
-      String _value_4 = this.toValue(text);
-      Assert.assertEquals("text", _value_4);
-      StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append("text");
-      String _string_1 = _builder_1.toString();
-      String _value_5 = this.toValue(text);
-      Assert.assertEquals(_string_1, _value_5);
-      CCStringIndentation _cCStringIndentation = new CCStringIndentation(text);
-      boolean _hasConsistentIndentation = _cCStringIndentation.hasConsistentIndentation();
-      Assert.assertTrue(_hasConsistentIndentation);
+    final Procedure1<String> _function_5 = new Procedure1<String>() {
+      @Override
+      public void apply(final String text) {
+        String _value = CCStringTest.this.toValue(text);
+        Assert.assertEquals("text", _value);
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("text");
+        String _string = _builder.toString();
+        String _value_1 = CCStringTest.this.toValue(text);
+        Assert.assertEquals(_string, _value_1);
+        CCStringIndentation _cCStringIndentation = new CCStringIndentation(text);
+        boolean _hasConsistentIndentation = _cCStringIndentation.hasConsistentIndentation();
+        Assert.assertTrue(_hasConsistentIndentation);
+      }
     };
     ObjectExtensions.<String>operator_doubleArrow(
       ((" " + this.NL) + "text"), _function_5);
-    final Procedure1<String> _function_6 = (String text) -> {
-      String _value_4 = this.toValue(text);
-      Assert.assertEquals("text ", _value_4);
-      StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append("text ");
-      String _string_1 = _builder_1.toString();
-      String _value_5 = this.toValue(text);
-      Assert.assertEquals(_string_1, _value_5);
-      CCStringIndentation _cCStringIndentation = new CCStringIndentation(text);
-      boolean _hasConsistentIndentation = _cCStringIndentation.hasConsistentIndentation();
-      Assert.assertTrue(_hasConsistentIndentation);
+    final Procedure1<String> _function_6 = new Procedure1<String>() {
+      @Override
+      public void apply(final String text) {
+        String _value = CCStringTest.this.toValue(text);
+        Assert.assertEquals("text ", _value);
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("text ");
+        String _string = _builder.toString();
+        String _value_1 = CCStringTest.this.toValue(text);
+        Assert.assertEquals(_string, _value_1);
+        CCStringIndentation _cCStringIndentation = new CCStringIndentation(text);
+        boolean _hasConsistentIndentation = _cCStringIndentation.hasConsistentIndentation();
+        Assert.assertTrue(_hasConsistentIndentation);
+      }
     };
     ObjectExtensions.<String>operator_doubleArrow(
       (this.NL + " text "), _function_6);
@@ -235,158 +258,191 @@ public class CCStringTest {
   
   @Test
   public void twoLineBreaks() {
-    final Procedure1<String> _function = (String text) -> {
-      String _value = this.toValue(text);
-      Assert.assertEquals(this.NL, _value);
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.newLine();
-      String _string = _builder.toString();
-      String _value_1 = this.toValue(text);
-      Assert.assertEquals(_string, _value_1);
-      CCStringIndentation _cCStringIndentation = new CCStringIndentation(text);
-      boolean _hasConsistentIndentation = _cCStringIndentation.hasConsistentIndentation();
-      Assert.assertTrue(_hasConsistentIndentation);
+    final Procedure1<String> _function = new Procedure1<String>() {
+      @Override
+      public void apply(final String text) {
+        String _value = CCStringTest.this.toValue(text);
+        Assert.assertEquals(CCStringTest.this.NL, _value);
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.newLine();
+        String _string = _builder.toString();
+        String _value_1 = CCStringTest.this.toValue(text);
+        Assert.assertEquals(_string, _value_1);
+        CCStringIndentation _cCStringIndentation = new CCStringIndentation(text);
+        boolean _hasConsistentIndentation = _cCStringIndentation.hasConsistentIndentation();
+        Assert.assertTrue(_hasConsistentIndentation);
+      }
     };
     ObjectExtensions.<String>operator_doubleArrow(
       (this.NL + this.NL), _function);
-    final Procedure1<String> _function_1 = (String text) -> {
-      String _value = this.toValue(text);
-      Assert.assertEquals((("text" + this.NL) + this.NL), _value);
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("text");
-      _builder.newLine();
-      _builder.newLine();
-      String _string = _builder.toString();
-      String _value_1 = this.toValue(text);
-      Assert.assertEquals(_string, _value_1);
-      CCStringIndentation _cCStringIndentation = new CCStringIndentation(text);
-      boolean _hasConsistentIndentation = _cCStringIndentation.hasConsistentIndentation();
-      Assert.assertTrue(_hasConsistentIndentation);
+    final Procedure1<String> _function_1 = new Procedure1<String>() {
+      @Override
+      public void apply(final String text) {
+        String _value = CCStringTest.this.toValue(text);
+        Assert.assertEquals((("text" + CCStringTest.this.NL) + CCStringTest.this.NL), _value);
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("text");
+        _builder.newLine();
+        _builder.newLine();
+        String _string = _builder.toString();
+        String _value_1 = CCStringTest.this.toValue(text);
+        Assert.assertEquals(_string, _value_1);
+        CCStringIndentation _cCStringIndentation = new CCStringIndentation(text);
+        boolean _hasConsistentIndentation = _cCStringIndentation.hasConsistentIndentation();
+        Assert.assertTrue(_hasConsistentIndentation);
+      }
     };
     ObjectExtensions.<String>operator_doubleArrow(
       (("text" + this.NL) + this.NL), _function_1);
-    final Procedure1<String> _function_2 = (String text) -> {
-      String _value = this.toValue(text);
-      Assert.assertEquals(((("text" + this.NL) + "\t\t\t\tindent") + this.NL), _value);
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("text");
-      _builder.newLine();
-      _builder.append("\t\t\t\t");
-      _builder.append("indent");
-      _builder.newLine();
-      String _string = _builder.toString();
-      String _value_1 = this.toValue(text);
-      Assert.assertEquals(_string, _value_1);
-      CCStringIndentation _cCStringIndentation = new CCStringIndentation(text);
-      boolean _hasConsistentIndentation = _cCStringIndentation.hasConsistentIndentation();
-      Assert.assertTrue(_hasConsistentIndentation);
+    final Procedure1<String> _function_2 = new Procedure1<String>() {
+      @Override
+      public void apply(final String text) {
+        String _value = CCStringTest.this.toValue(text);
+        Assert.assertEquals(((("text" + CCStringTest.this.NL) + "\t\t\t\tindent") + CCStringTest.this.NL), _value);
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("text");
+        _builder.newLine();
+        _builder.append("\t\t\t\t");
+        _builder.append("indent");
+        _builder.newLine();
+        String _string = _builder.toString();
+        String _value_1 = CCStringTest.this.toValue(text);
+        Assert.assertEquals(_string, _value_1);
+        CCStringIndentation _cCStringIndentation = new CCStringIndentation(text);
+        boolean _hasConsistentIndentation = _cCStringIndentation.hasConsistentIndentation();
+        Assert.assertTrue(_hasConsistentIndentation);
+      }
     };
     ObjectExtensions.<String>operator_doubleArrow(
       ((("text" + this.NL) + "\t\t\t\tindent") + this.NL), _function_2);
-    final Procedure1<String> _function_3 = (String text) -> {
-      String _value = this.toValue(text);
-      Assert.assertEquals(("text" + this.NL), _value);
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("text");
-      _builder.newLine();
-      String _string = _builder.toString();
-      String _value_1 = this.toValue(text);
-      Assert.assertEquals(_string, _value_1);
-      CCStringIndentation _cCStringIndentation = new CCStringIndentation(text);
-      boolean _hasConsistentIndentation = _cCStringIndentation.hasConsistentIndentation();
-      Assert.assertTrue(_hasConsistentIndentation);
+    final Procedure1<String> _function_3 = new Procedure1<String>() {
+      @Override
+      public void apply(final String text) {
+        String _value = CCStringTest.this.toValue(text);
+        Assert.assertEquals(("text" + CCStringTest.this.NL), _value);
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("text");
+        _builder.newLine();
+        String _string = _builder.toString();
+        String _value_1 = CCStringTest.this.toValue(text);
+        Assert.assertEquals(_string, _value_1);
+        CCStringIndentation _cCStringIndentation = new CCStringIndentation(text);
+        boolean _hasConsistentIndentation = _cCStringIndentation.hasConsistentIndentation();
+        Assert.assertTrue(_hasConsistentIndentation);
+      }
     };
     ObjectExtensions.<String>operator_doubleArrow(
       ((this.NL + "text") + this.NL), _function_3);
-    final Procedure1<String> _function_4 = (String text) -> {
-      String _value = this.toValue(text);
-      Assert.assertEquals(("text\t" + this.NL), _value);
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("text\t");
-      _builder.newLine();
-      String _string = _builder.toString();
-      String _value_1 = this.toValue(text);
-      Assert.assertEquals(_string, _value_1);
-      CCStringIndentation _cCStringIndentation = new CCStringIndentation(text);
-      boolean _hasConsistentIndentation = _cCStringIndentation.hasConsistentIndentation();
-      Assert.assertTrue(_hasConsistentIndentation);
+    final Procedure1<String> _function_4 = new Procedure1<String>() {
+      @Override
+      public void apply(final String text) {
+        String _value = CCStringTest.this.toValue(text);
+        Assert.assertEquals(("text\t" + CCStringTest.this.NL), _value);
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("text\t");
+        _builder.newLine();
+        String _string = _builder.toString();
+        String _value_1 = CCStringTest.this.toValue(text);
+        Assert.assertEquals(_string, _value_1);
+        CCStringIndentation _cCStringIndentation = new CCStringIndentation(text);
+        boolean _hasConsistentIndentation = _cCStringIndentation.hasConsistentIndentation();
+        Assert.assertTrue(_hasConsistentIndentation);
+      }
     };
     ObjectExtensions.<String>operator_doubleArrow(
       ((this.NL + "\t\t\t\ttext\t") + this.NL), _function_4);
-    final Procedure1<String> _function_5 = (String text) -> {
-      String _value = this.toValue(text);
-      Assert.assertEquals((("text" + this.NL) + "text2 "), _value);
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("text");
-      _builder.newLine();
-      _builder.append("text2 ");
-      String _string = _builder.toString();
-      String _value_1 = this.toValue(text);
-      Assert.assertEquals(_string, _value_1);
-      CCStringIndentation _cCStringIndentation = new CCStringIndentation(text);
-      boolean _hasConsistentIndentation = _cCStringIndentation.hasConsistentIndentation();
-      Assert.assertTrue(_hasConsistentIndentation);
+    final Procedure1<String> _function_5 = new Procedure1<String>() {
+      @Override
+      public void apply(final String text) {
+        String _value = CCStringTest.this.toValue(text);
+        Assert.assertEquals((("text" + CCStringTest.this.NL) + "text2 "), _value);
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("text");
+        _builder.newLine();
+        _builder.append("text2 ");
+        String _string = _builder.toString();
+        String _value_1 = CCStringTest.this.toValue(text);
+        Assert.assertEquals(_string, _value_1);
+        CCStringIndentation _cCStringIndentation = new CCStringIndentation(text);
+        boolean _hasConsistentIndentation = _cCStringIndentation.hasConsistentIndentation();
+        Assert.assertTrue(_hasConsistentIndentation);
+      }
     };
     ObjectExtensions.<String>operator_doubleArrow(
       (((this.NL + "text") + this.NL) + "text2 "), _function_5);
-    final Procedure1<String> _function_6 = (String text) -> {
-      String _value = this.toValue(text);
-      Assert.assertEquals((("text\\r" + this.LF) + "text2 "), _value);
-      CCStringIndentation _cCStringIndentation = new CCStringIndentation(text);
-      boolean _hasConsistentIndentation = _cCStringIndentation.hasConsistentIndentation();
-      Assert.assertTrue(_hasConsistentIndentation);
+    final Procedure1<String> _function_6 = new Procedure1<String>() {
+      @Override
+      public void apply(final String text) {
+        String _value = CCStringTest.this.toValue(text);
+        Assert.assertEquals((("text\\r" + CCStringTest.this.LF) + "text2 "), _value);
+        CCStringIndentation _cCStringIndentation = new CCStringIndentation(text);
+        boolean _hasConsistentIndentation = _cCStringIndentation.hasConsistentIndentation();
+        Assert.assertTrue(_hasConsistentIndentation);
+      }
     };
     ObjectExtensions.<String>operator_doubleArrow(
       (((this.CRLF + "text\\r") + this.LF) + "text2 "), _function_6);
-    final Procedure1<String> _function_7 = (String text) -> {
-      String _value = this.toValue(text);
-      Assert.assertEquals((("text" + this.CR) + "text2 "), _value);
-      CCStringIndentation _cCStringIndentation = new CCStringIndentation(text);
-      boolean _hasConsistentIndentation = _cCStringIndentation.hasConsistentIndentation();
-      Assert.assertTrue(_hasConsistentIndentation);
+    final Procedure1<String> _function_7 = new Procedure1<String>() {
+      @Override
+      public void apply(final String text) {
+        String _value = CCStringTest.this.toValue(text);
+        Assert.assertEquals((("text" + CCStringTest.this.CR) + "text2 "), _value);
+        CCStringIndentation _cCStringIndentation = new CCStringIndentation(text);
+        boolean _hasConsistentIndentation = _cCStringIndentation.hasConsistentIndentation();
+        Assert.assertTrue(_hasConsistentIndentation);
+      }
     };
     ObjectExtensions.<String>operator_doubleArrow(
       (((this.LF + "text") + this.CR) + "text2 "), _function_7);
-    final Procedure1<String> _function_8 = (String text) -> {
-      String _value = this.toValue(text);
-      Assert.assertEquals((("text" + this.CRLF) + "text2 "), _value);
-      CCStringIndentation _cCStringIndentation = new CCStringIndentation(text);
-      boolean _hasConsistentIndentation = _cCStringIndentation.hasConsistentIndentation();
-      Assert.assertTrue(_hasConsistentIndentation);
+    final Procedure1<String> _function_8 = new Procedure1<String>() {
+      @Override
+      public void apply(final String text) {
+        String _value = CCStringTest.this.toValue(text);
+        Assert.assertEquals((("text" + CCStringTest.this.CRLF) + "text2 "), _value);
+        CCStringIndentation _cCStringIndentation = new CCStringIndentation(text);
+        boolean _hasConsistentIndentation = _cCStringIndentation.hasConsistentIndentation();
+        Assert.assertTrue(_hasConsistentIndentation);
+      }
     };
     ObjectExtensions.<String>operator_doubleArrow(
       (((this.LF + "text") + this.CRLF) + "text2 "), _function_8);
-    final Procedure1<String> _function_9 = (String text) -> {
-      String _value = this.toValue(text);
-      Assert.assertEquals((("\ttext" + this.NL) + "text2 "), _value);
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("\t");
-      _builder.append("text");
-      _builder.newLine();
-      _builder.append("text2 ");
-      String _string = _builder.toString();
-      String _value_1 = this.toValue(text);
-      Assert.assertEquals(_string, _value_1);
-      CCStringIndentation _cCStringIndentation = new CCStringIndentation(text);
-      boolean _hasConsistentIndentation = _cCStringIndentation.hasConsistentIndentation();
-      Assert.assertTrue(_hasConsistentIndentation);
+    final Procedure1<String> _function_9 = new Procedure1<String>() {
+      @Override
+      public void apply(final String text) {
+        String _value = CCStringTest.this.toValue(text);
+        Assert.assertEquals((("\ttext" + CCStringTest.this.NL) + "text2 "), _value);
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("\t");
+        _builder.append("text");
+        _builder.newLine();
+        _builder.append("text2 ");
+        String _string = _builder.toString();
+        String _value_1 = CCStringTest.this.toValue(text);
+        Assert.assertEquals(_string, _value_1);
+        CCStringIndentation _cCStringIndentation = new CCStringIndentation(text);
+        boolean _hasConsistentIndentation = _cCStringIndentation.hasConsistentIndentation();
+        Assert.assertTrue(_hasConsistentIndentation);
+      }
     };
     ObjectExtensions.<String>operator_doubleArrow(
       (((this.NL + "\ttext") + this.NL) + "text2 "), _function_9);
-    final Procedure1<String> _function_10 = (String text) -> {
-      String _value = this.toValue(text);
-      Assert.assertEquals((("text" + this.NL) + "\t\t\tindent"), _value);
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("text");
-      _builder.newLine();
-      _builder.append("\t\t\t");
-      _builder.append("indent");
-      String _string = _builder.toString();
-      String _value_1 = this.toValue(text);
-      Assert.assertEquals(_string, _value_1);
-      CCStringIndentation _cCStringIndentation = new CCStringIndentation(text);
-      boolean _hasConsistentIndentation = _cCStringIndentation.hasConsistentIndentation();
-      Assert.assertTrue(_hasConsistentIndentation);
+    final Procedure1<String> _function_10 = new Procedure1<String>() {
+      @Override
+      public void apply(final String text) {
+        String _value = CCStringTest.this.toValue(text);
+        Assert.assertEquals((("text" + CCStringTest.this.NL) + "\t\t\tindent"), _value);
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("text");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("indent");
+        String _string = _builder.toString();
+        String _value_1 = CCStringTest.this.toValue(text);
+        Assert.assertEquals(_string, _value_1);
+        CCStringIndentation _cCStringIndentation = new CCStringIndentation(text);
+        boolean _hasConsistentIndentation = _cCStringIndentation.hasConsistentIndentation();
+        Assert.assertTrue(_hasConsistentIndentation);
+      }
     };
     ObjectExtensions.<String>operator_doubleArrow(
       (((this.NL + "text") + this.NL) + "\t\t\tindent"), _function_10);
@@ -400,23 +456,26 @@ public class CCStringTest {
   
   @Test
   public void multiLineBreaks() {
-    final Procedure1<String> _function = (String text) -> {
-      String _value = this.toValue(text);
-      Assert.assertEquals((((((("   " + this.NL) + this.NL) + "\t\t ") + this.NL) + "text") + this.NL), _value);
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("   ");
-      _builder.newLine();
-      _builder.newLine();
-      _builder.append("\t\t ");
-      _builder.newLine();
-      _builder.append("text");
-      _builder.newLine();
-      String _string = _builder.toString();
-      String _value_1 = this.toValue(text);
-      Assert.assertEquals(_string, _value_1);
-      CCStringIndentation _cCStringIndentation = new CCStringIndentation(text);
-      boolean _hasConsistentIndentation = _cCStringIndentation.hasConsistentIndentation();
-      Assert.assertFalse(_hasConsistentIndentation);
+    final Procedure1<String> _function = new Procedure1<String>() {
+      @Override
+      public void apply(final String text) {
+        String _value = CCStringTest.this.toValue(text);
+        Assert.assertEquals((((((("   " + CCStringTest.this.NL) + CCStringTest.this.NL) + "\t\t ") + CCStringTest.this.NL) + "text") + CCStringTest.this.NL), _value);
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("   ");
+        _builder.newLine();
+        _builder.newLine();
+        _builder.append("\t\t ");
+        _builder.newLine();
+        _builder.append("text");
+        _builder.newLine();
+        String _string = _builder.toString();
+        String _value_1 = CCStringTest.this.toValue(text);
+        Assert.assertEquals(_string, _value_1);
+        CCStringIndentation _cCStringIndentation = new CCStringIndentation(text);
+        boolean _hasConsistentIndentation = _cCStringIndentation.hasConsistentIndentation();
+        Assert.assertFalse(_hasConsistentIndentation);
+      }
     };
     ObjectExtensions.<String>operator_doubleArrow(
       (((((((this.NL + "\t\t\t   ") + this.NL) + this.NL) + "\t\t ") + this.NL) + "\t\t\ttext") + this.NL), _function);
@@ -425,65 +484,98 @@ public class CCStringTest {
   @Test
   public void testReplaceEditorIndentation() {
     CCStringIndentation _cCStringIndentation = new CCStringIndentation("\r\t\t\tText\r\n\t\t\t\n");
-    final Procedure1<CCStringIndentation> _function = (CCStringIndentation it) -> {
-      final Consumer<String> _function_1 = (String indent) -> {
-        final Consumer<String> _function_2 = (String lineSep) -> {
-          final String replaced = it.replaceEditorIndentation(indent, lineSep);
-          int _countLineBreaks = Strings.countLineBreaks(replaced);
-          Assert.assertEquals(3, _countLineBreaks);
-          final Function1<String, Boolean> _function_3 = (String it_1) -> {
-            return Boolean.valueOf((!Objects.equal(it_1, lineSep)));
-          };
-          Iterable<String> _filter = IterableExtensions.<String>filter(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(this.CRLF, this.LF, this.CR)), _function_3);
-          final Consumer<String> _function_4 = (String otherLineSep) -> {
-            boolean _matches = replaced.matches(otherLineSep);
-            Assert.assertFalse(_matches);
-          };
-          _filter.forEach(_function_4);
-          int _indexOf = replaced.indexOf("\t\t\t");
-          Assert.assertEquals((-1), _indexOf);
-          int _indexOf_1 = replaced.indexOf(indent);
-          boolean _greaterThan = (_indexOf_1 > 0);
-          Assert.assertTrue(_greaterThan);
+    final Procedure1<CCStringIndentation> _function = new Procedure1<CCStringIndentation>() {
+      @Override
+      public void apply(final CCStringIndentation it) {
+        final Procedure1<String> _function = new Procedure1<String>() {
+          @Override
+          public void apply(final String indent) {
+            final Procedure1<String> _function = new Procedure1<String>() {
+              @Override
+              public void apply(final String lineSep) {
+                final String replaced = it.replaceEditorIndentation(indent, lineSep);
+                int _countLineBreaks = Strings.countLineBreaks(replaced);
+                Assert.assertEquals(3, _countLineBreaks);
+                final Function1<String, Boolean> _function = new Function1<String, Boolean>() {
+                  @Override
+                  public Boolean apply(final String it) {
+                    return Boolean.valueOf((!Objects.equal(it, lineSep)));
+                  }
+                };
+                Iterable<String> _filter = IterableExtensions.<String>filter(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(CCStringTest.this.CRLF, CCStringTest.this.LF, CCStringTest.this.CR)), _function);
+                final Procedure1<String> _function_1 = new Procedure1<String>() {
+                  @Override
+                  public void apply(final String otherLineSep) {
+                    boolean _matches = replaced.matches(otherLineSep);
+                    Assert.assertFalse(_matches);
+                  }
+                };
+                IterableExtensions.<String>forEach(_filter, _function_1);
+                int _indexOf = replaced.indexOf("\t\t\t");
+                Assert.assertEquals((-1), _indexOf);
+                int _indexOf_1 = replaced.indexOf(indent);
+                boolean _greaterThan = (_indexOf_1 > 0);
+                Assert.assertTrue(_greaterThan);
+              }
+            };
+            IterableExtensions.<String>forEach(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(CCStringTest.this.CRLF, CCStringTest.this.LF, CCStringTest.this.CR)), _function);
+          }
         };
-        Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(this.CRLF, this.LF, this.CR)).forEach(_function_2);
-      };
-      Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("\t", " ")).forEach(_function_1);
+        IterableExtensions.<String>forEach(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("\t", " ")), _function);
+      }
     };
     ObjectExtensions.<CCStringIndentation>operator_doubleArrow(_cCStringIndentation, _function);
     CCStringIndentation _cCStringIndentation_1 = new CCStringIndentation("\r\t\t\tText\r\n\t\t\t\n");
-    final Procedure1<CCStringIndentation> _function_1 = (CCStringIndentation it) -> {
-      final Consumer<String> _function_2 = (String lineSep) -> {
-        final String replaced = it.replaceEditorIndentation(null, lineSep);
-        int _countLineBreaks = Strings.countLineBreaks(replaced);
-        Assert.assertEquals(3, _countLineBreaks);
-        final Function1<String, Boolean> _function_3 = (String it_1) -> {
-          return Boolean.valueOf((!Objects.equal(it_1, lineSep)));
+    final Procedure1<CCStringIndentation> _function_1 = new Procedure1<CCStringIndentation>() {
+      @Override
+      public void apply(final CCStringIndentation it) {
+        final Procedure1<String> _function = new Procedure1<String>() {
+          @Override
+          public void apply(final String lineSep) {
+            final String replaced = it.replaceEditorIndentation(null, lineSep);
+            int _countLineBreaks = Strings.countLineBreaks(replaced);
+            Assert.assertEquals(3, _countLineBreaks);
+            final Function1<String, Boolean> _function = new Function1<String, Boolean>() {
+              @Override
+              public Boolean apply(final String it) {
+                return Boolean.valueOf((!Objects.equal(it, lineSep)));
+              }
+            };
+            Iterable<String> _filter = IterableExtensions.<String>filter(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(CCStringTest.this.CRLF, CCStringTest.this.LF, CCStringTest.this.CR)), _function);
+            final Procedure1<String> _function_1 = new Procedure1<String>() {
+              @Override
+              public void apply(final String otherLineSep) {
+                boolean _matches = replaced.matches(otherLineSep);
+                Assert.assertFalse(_matches);
+              }
+            };
+            IterableExtensions.<String>forEach(_filter, _function_1);
+            int _indexOf = replaced.indexOf("\t\t\t");
+            boolean _greaterThan = (_indexOf > 0);
+            Assert.assertTrue(_greaterThan);
+          }
         };
-        Iterable<String> _filter = IterableExtensions.<String>filter(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(this.CRLF, this.LF, this.CR)), _function_3);
-        final Consumer<String> _function_4 = (String otherLineSep) -> {
-          boolean _matches = replaced.matches(otherLineSep);
-          Assert.assertFalse(_matches);
-        };
-        _filter.forEach(_function_4);
-        int _indexOf = replaced.indexOf("\t\t\t");
-        boolean _greaterThan = (_indexOf > 0);
-        Assert.assertTrue(_greaterThan);
-      };
-      Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(this.CRLF, this.LF, this.CR)).forEach(_function_2);
+        IterableExtensions.<String>forEach(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(CCStringTest.this.CRLF, CCStringTest.this.LF, CCStringTest.this.CR)), _function);
+      }
     };
     ObjectExtensions.<CCStringIndentation>operator_doubleArrow(_cCStringIndentation_1, _function_1);
     CCStringIndentation _cCStringIndentation_2 = new CCStringIndentation("\r\t\t\tText\r\n\t\t\t\n");
-    final Procedure1<CCStringIndentation> _function_2 = (CCStringIndentation it) -> {
-      final Consumer<String> _function_3 = (String indent) -> {
-        final String replaced = it.replaceEditorIndentation(indent, null);
-        int _indexOf = replaced.indexOf("\t\t\t");
-        Assert.assertEquals((-1), _indexOf);
-        int _indexOf_1 = replaced.indexOf(indent);
-        boolean _greaterThan = (_indexOf_1 > 0);
-        Assert.assertTrue(_greaterThan);
-      };
-      Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("\t", " ")).forEach(_function_3);
+    final Procedure1<CCStringIndentation> _function_2 = new Procedure1<CCStringIndentation>() {
+      @Override
+      public void apply(final CCStringIndentation it) {
+        final Procedure1<String> _function = new Procedure1<String>() {
+          @Override
+          public void apply(final String indent) {
+            final String replaced = it.replaceEditorIndentation(indent, null);
+            int _indexOf = replaced.indexOf("\t\t\t");
+            Assert.assertEquals((-1), _indexOf);
+            int _indexOf_1 = replaced.indexOf(indent);
+            boolean _greaterThan = (_indexOf_1 > 0);
+            Assert.assertTrue(_greaterThan);
+          }
+        };
+        IterableExtensions.<String>forEach(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("\t", " ")), _function);
+      }
     };
     ObjectExtensions.<CCStringIndentation>operator_doubleArrow(_cCStringIndentation_2, _function_2);
     CCStringIndentation _cCStringIndentation_3 = new CCStringIndentation("\r\tText\n\r\t\n");

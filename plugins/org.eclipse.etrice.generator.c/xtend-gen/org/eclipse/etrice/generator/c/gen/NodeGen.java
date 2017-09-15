@@ -271,8 +271,11 @@ public class NodeGen {
       final String clsname = (_plus + _name_1);
       NodeClass _type = nr.getType();
       EList<PhysicalThread> _threads = _type.getThreads();
-      final Function1<PhysicalThread, Boolean> _function = (PhysicalThread t) -> {
-        return Boolean.valueOf(usedThreads.contains(t));
+      final Function1<PhysicalThread, Boolean> _function = new Function1<PhysicalThread, Boolean>() {
+        @Override
+        public Boolean apply(final PhysicalThread t) {
+          return Boolean.valueOf(usedThreads.contains(t));
+        }
       };
       final Iterable<PhysicalThread> threads = IterableExtensions.<PhysicalThread>filter(_threads, _function);
       final boolean logData = (Main.getSettings().isGenerateDataInstrumentation() && this._roomHelpers.isAnnotationPresent(ssc.getAnnotations(), "DataLogging"));
@@ -408,9 +411,12 @@ public class NodeGen {
       _builder.append("/* initialization of all message services */");
       _builder.newLine();
       {
-        final Function1<PhysicalThread, Long> _function_1 = (PhysicalThread it) -> {
-          long _prio = it.getPrio();
-          return Long.valueOf((-_prio));
+        final Function1<PhysicalThread, Long> _function_1 = new Function1<PhysicalThread, Long>() {
+          @Override
+          public Long apply(final PhysicalThread it) {
+            long _prio = it.getPrio();
+            return Long.valueOf((-_prio));
+          }
         };
         List<PhysicalThread> _sortBy = IterableExtensions.<PhysicalThread, Long>sortBy(threads, _function_1);
         for(final PhysicalThread thread : _sortBy) {
@@ -519,9 +525,12 @@ public class NodeGen {
       _builder.newLineIfNotEmpty();
       _builder.newLine();
       {
-        final Function1<PhysicalThread, Long> _function_2 = (PhysicalThread it) -> {
-          long _prio_1 = it.getPrio();
-          return Long.valueOf((-_prio_1));
+        final Function1<PhysicalThread, Long> _function_2 = new Function1<PhysicalThread, Long>() {
+          @Override
+          public Long apply(final PhysicalThread it) {
+            long _prio = it.getPrio();
+            return Long.valueOf((-_prio));
+          }
         };
         List<PhysicalThread> _sortBy_1 = IterableExtensions.<PhysicalThread, Long>sortBy(threads, _function_2);
         for(final PhysicalThread thread_1 : _sortBy_1) {
@@ -976,8 +985,11 @@ public class NodeGen {
       {
         NodeClass _type = nr.getType();
         EList<PhysicalThread> _threads = _type.getThreads();
-        final Function1<PhysicalThread, Boolean> _function = (PhysicalThread t) -> {
-          return Boolean.valueOf(usedThreads.contains(t));
+        final Function1<PhysicalThread, Boolean> _function = new Function1<PhysicalThread, Boolean>() {
+          @Override
+          public Boolean apply(final PhysicalThread t) {
+            return Boolean.valueOf(usedThreads.contains(t));
+          }
         };
         Iterable<PhysicalThread> _filter = IterableExtensions.<PhysicalThread>filter(_threads, _function);
         for(final PhysicalThread thread : _filter) {
@@ -1170,63 +1182,96 @@ public class NodeGen {
       final String instName = this._roomExtensions.getPathName(_path);
       final ArrayList<InterfaceItemInstance> replEventItems = new ArrayList<InterfaceItemInstance>();
       EList<InterfaceItemInstance> _orderedIfItemInstances = ai.getOrderedIfItemInstances();
-      final Function1<InterfaceItemInstance, Boolean> _function = (InterfaceItemInstance e) -> {
-        return Boolean.valueOf(e.isReplicated());
+      final Function1<InterfaceItemInstance, Boolean> _function = new Function1<InterfaceItemInstance, Boolean>() {
+        @Override
+        public Boolean apply(final InterfaceItemInstance e) {
+          return Boolean.valueOf(e.isReplicated());
+        }
       };
       Iterable<InterfaceItemInstance> _filter = IterableExtensions.<InterfaceItemInstance>filter(_orderedIfItemInstances, _function);
       Iterables.<InterfaceItemInstance>addAll(replEventItems, _filter);
-      final Function1<InterfaceItemInstance, Boolean> _function_1 = (InterfaceItemInstance e) -> {
-        EList<InterfaceItemInstance> _peers = e.getPeers();
-        boolean _isEmpty = _peers.isEmpty();
-        return Boolean.valueOf((!_isEmpty));
+      final Function1<InterfaceItemInstance, Boolean> _function_1 = new Function1<InterfaceItemInstance, Boolean>() {
+        @Override
+        public Boolean apply(final InterfaceItemInstance e) {
+          EList<InterfaceItemInstance> _peers = e.getPeers();
+          boolean _isEmpty = _peers.isEmpty();
+          return Boolean.valueOf((!_isEmpty));
+        }
       };
       InterfaceItemInstance _findFirst = IterableExtensions.<InterfaceItemInstance>findFirst(replEventItems, _function_1);
       final boolean haveReplSubItems = (!Objects.equal(_findFirst, null));
-      final Function1<InterfaceItemInstance, Boolean> _function_2 = (InterfaceItemInstance i) -> {
-        InterfaceItem _interfaceItem = i.getInterfaceItem();
-        return Boolean.valueOf((_interfaceItem instanceof Port));
+      final Function1<InterfaceItemInstance, Boolean> _function_2 = new Function1<InterfaceItemInstance, Boolean>() {
+        @Override
+        public Boolean apply(final InterfaceItemInstance i) {
+          InterfaceItem _interfaceItem = i.getInterfaceItem();
+          return Boolean.valueOf((_interfaceItem instanceof Port));
+        }
       };
       final Iterable<InterfaceItemInstance> replEventPorts = IterableExtensions.<InterfaceItemInstance>filter(replEventItems, _function_2);
-      final Function1<InterfaceItemInstance, Boolean> _function_3 = (InterfaceItemInstance i) -> {
-        InterfaceItem _interfaceItem = i.getInterfaceItem();
-        return Boolean.valueOf((_interfaceItem instanceof SPP));
+      final Function1<InterfaceItemInstance, Boolean> _function_3 = new Function1<InterfaceItemInstance, Boolean>() {
+        @Override
+        public Boolean apply(final InterfaceItemInstance i) {
+          InterfaceItem _interfaceItem = i.getInterfaceItem();
+          return Boolean.valueOf((_interfaceItem instanceof SPP));
+        }
       };
       final Iterable<InterfaceItemInstance> replEventSPPs = IterableExtensions.<InterfaceItemInstance>filter(replEventItems, _function_3);
       EList<InterfaceItemInstance> _orderedIfItemInstances_1 = ai.getOrderedIfItemInstances();
-      final Function1<InterfaceItemInstance, Boolean> _function_4 = (InterfaceItemInstance e) -> {
-        return Boolean.valueOf(e.isSimple());
+      final Function1<InterfaceItemInstance, Boolean> _function_4 = new Function1<InterfaceItemInstance, Boolean>() {
+        @Override
+        public Boolean apply(final InterfaceItemInstance e) {
+          return Boolean.valueOf(e.isSimple());
+        }
       };
       final Iterable<InterfaceItemInstance> simplePorts = IterableExtensions.<InterfaceItemInstance>filter(_orderedIfItemInstances_1, _function_4);
       final ArrayList<InterfaceItemInstance> simpleEventItems = new ArrayList<InterfaceItemInstance>();
-      final Function1<InterfaceItemInstance, Boolean> _function_5 = (InterfaceItemInstance p) -> {
-        ProtocolClass _protocol = p.getProtocol();
-        CommunicationType _commType = _protocol.getCommType();
-        return Boolean.valueOf(Objects.equal(_commType, CommunicationType.EVENT_DRIVEN));
+      final Function1<InterfaceItemInstance, Boolean> _function_5 = new Function1<InterfaceItemInstance, Boolean>() {
+        @Override
+        public Boolean apply(final InterfaceItemInstance p) {
+          ProtocolClass _protocol = p.getProtocol();
+          CommunicationType _commType = _protocol.getCommType();
+          return Boolean.valueOf(Objects.equal(_commType, CommunicationType.EVENT_DRIVEN));
+        }
       };
       Iterable<InterfaceItemInstance> _filter_1 = IterableExtensions.<InterfaceItemInstance>filter(simplePorts, _function_5);
       Iterables.<InterfaceItemInstance>addAll(simpleEventItems, _filter_1);
-      final Function1<InterfaceItemInstance, Boolean> _function_6 = (InterfaceItemInstance i) -> {
-        InterfaceItem _interfaceItem = i.getInterfaceItem();
-        return Boolean.valueOf((_interfaceItem instanceof Port));
+      final Function1<InterfaceItemInstance, Boolean> _function_6 = new Function1<InterfaceItemInstance, Boolean>() {
+        @Override
+        public Boolean apply(final InterfaceItemInstance i) {
+          InterfaceItem _interfaceItem = i.getInterfaceItem();
+          return Boolean.valueOf((_interfaceItem instanceof Port));
+        }
       };
       final Iterable<InterfaceItemInstance> simpleEventPorts = IterableExtensions.<InterfaceItemInstance>filter(simpleEventItems, _function_6);
-      final Function1<InterfaceItemInstance, Boolean> _function_7 = (InterfaceItemInstance i) -> {
-        InterfaceItem _interfaceItem = i.getInterfaceItem();
-        return Boolean.valueOf((_interfaceItem instanceof SAP));
+      final Function1<InterfaceItemInstance, Boolean> _function_7 = new Function1<InterfaceItemInstance, Boolean>() {
+        @Override
+        public Boolean apply(final InterfaceItemInstance i) {
+          InterfaceItem _interfaceItem = i.getInterfaceItem();
+          return Boolean.valueOf((_interfaceItem instanceof SAP));
+        }
       };
       final Iterable<InterfaceItemInstance> simpleEventSAPs = IterableExtensions.<InterfaceItemInstance>filter(simpleEventItems, _function_7);
-      final Function1<InterfaceItemInstance, Boolean> _function_8 = (InterfaceItemInstance p) -> {
-        ProtocolClass _protocol = p.getProtocol();
-        CommunicationType _commType = _protocol.getCommType();
-        return Boolean.valueOf(Objects.equal(_commType, CommunicationType.DATA_DRIVEN));
+      final Function1<InterfaceItemInstance, Boolean> _function_8 = new Function1<InterfaceItemInstance, Boolean>() {
+        @Override
+        public Boolean apply(final InterfaceItemInstance p) {
+          ProtocolClass _protocol = p.getProtocol();
+          CommunicationType _commType = _protocol.getCommType();
+          return Boolean.valueOf(Objects.equal(_commType, CommunicationType.DATA_DRIVEN));
+        }
       };
       final Iterable<InterfaceItemInstance> dataPorts = IterableExtensions.<InterfaceItemInstance>filter(simplePorts, _function_8);
-      final Function1<InterfaceItemInstance, Boolean> _function_9 = (InterfaceItemInstance p) -> {
-        return Boolean.valueOf(((p instanceof PortInstance) && (!((PortInstance) p).getPort().isConjugated())));
+      final Function1<InterfaceItemInstance, Boolean> _function_9 = new Function1<InterfaceItemInstance, Boolean>() {
+        @Override
+        public Boolean apply(final InterfaceItemInstance p) {
+          return Boolean.valueOf(((p instanceof PortInstance) && (!((PortInstance) p).getPort().isConjugated())));
+        }
       };
       final Iterable<InterfaceItemInstance> recvPorts = IterableExtensions.<InterfaceItemInstance>filter(dataPorts, _function_9);
-      final Function1<InterfaceItemInstance, Boolean> _function_10 = (InterfaceItemInstance p) -> {
-        return Boolean.valueOf(((p instanceof PortInstance) && ((PortInstance) p).getPort().isConjugated()));
+      final Function1<InterfaceItemInstance, Boolean> _function_10 = new Function1<InterfaceItemInstance, Boolean>() {
+        @Override
+        public Boolean apply(final InterfaceItemInstance p) {
+          return Boolean.valueOf(((p instanceof PortInstance) && ((PortInstance) p).getPort().isConjugated()));
+        }
       };
       final Iterable<InterfaceItemInstance> sendPorts = IterableExtensions.<InterfaceItemInstance>filter(dataPorts, _function_10);
       final HashMap<InterfaceItemInstance, Integer> offsets = new HashMap<InterfaceItemInstance, Integer>();
@@ -1280,10 +1325,13 @@ public class NodeGen {
           _builder.append("/* Replicated Sub Ports: {varData, msgService, peerAddress, localId, index} */");
           _builder.newLine();
           {
-            final Function1<InterfaceItemInstance, Boolean> _function_11 = (InterfaceItemInstance e) -> {
-              EList<InterfaceItemInstance> _peers = e.getPeers();
-              boolean _isEmpty = _peers.isEmpty();
-              return Boolean.valueOf((!_isEmpty));
+            final Function1<InterfaceItemInstance, Boolean> _function_11 = new Function1<InterfaceItemInstance, Boolean>() {
+              @Override
+              public Boolean apply(final InterfaceItemInstance e) {
+                EList<InterfaceItemInstance> _peers = e.getPeers();
+                boolean _isEmpty = _peers.isEmpty();
+                return Boolean.valueOf((!_isEmpty));
+              }
             };
             Iterable<InterfaceItemInstance> _filter_2 = IterableExtensions.<InterfaceItemInstance>filter(replEventItems, _function_11);
             boolean _hasElements = false;
@@ -1471,27 +1519,42 @@ public class NodeGen {
     CharSequence _xblockexpression = null;
     {
       EList<InterfaceItemInstance> _orderedIfItemInstances = ai.getOrderedIfItemInstances();
-      final Function1<InterfaceItemInstance, Boolean> _function = (InterfaceItemInstance e) -> {
-        return Boolean.valueOf((e.isSimple() && (e instanceof PortInstance)));
+      final Function1<InterfaceItemInstance, Boolean> _function = new Function1<InterfaceItemInstance, Boolean>() {
+        @Override
+        public Boolean apply(final InterfaceItemInstance e) {
+          return Boolean.valueOf((e.isSimple() && (e instanceof PortInstance)));
+        }
       };
       Iterable<InterfaceItemInstance> _filter = IterableExtensions.<InterfaceItemInstance>filter(_orderedIfItemInstances, _function);
-      final Function1<InterfaceItemInstance, PortInstance> _function_1 = (InterfaceItemInstance inst) -> {
-        return ((PortInstance) inst);
+      final Function1<InterfaceItemInstance, PortInstance> _function_1 = new Function1<InterfaceItemInstance, PortInstance>() {
+        @Override
+        public PortInstance apply(final InterfaceItemInstance inst) {
+          return ((PortInstance) inst);
+        }
       };
       final Iterable<PortInstance> simplePorts = IterableExtensions.<InterfaceItemInstance, PortInstance>map(_filter, _function_1);
-      final Function1<PortInstance, Boolean> _function_2 = (PortInstance p) -> {
-        return Boolean.valueOf((p.getPort().isConjugated() && Objects.equal(p.getProtocol().getCommType(), CommunicationType.DATA_DRIVEN)));
+      final Function1<PortInstance, Boolean> _function_2 = new Function1<PortInstance, Boolean>() {
+        @Override
+        public Boolean apply(final PortInstance p) {
+          return Boolean.valueOf((p.getPort().isConjugated() && Objects.equal(p.getProtocol().getCommType(), CommunicationType.DATA_DRIVEN)));
+        }
       };
       final Iterable<PortInstance> sendPorts = IterableExtensions.<PortInstance>filter(simplePorts, _function_2);
-      final Function1<PortInstance, Boolean> _function_3 = (PortInstance p) -> {
-        Port _port = p.getPort();
-        List<Message> _outgoing = this._roomHelpers.getOutgoing(_port);
-        final Function1<Message, Boolean> _function_4 = (Message m) -> {
-          return Boolean.valueOf((this._typeHelpers.isEnumeration(m.getData().getRefType().getType()) || this._typeHelpers.isBoolean(m.getData().getRefType().getType())));
-        };
-        Iterable<Message> _filter_1 = IterableExtensions.<Message>filter(_outgoing, _function_4);
-        boolean _isEmpty = IterableExtensions.isEmpty(_filter_1);
-        return Boolean.valueOf((!_isEmpty));
+      final Function1<PortInstance, Boolean> _function_3 = new Function1<PortInstance, Boolean>() {
+        @Override
+        public Boolean apply(final PortInstance p) {
+          Port _port = p.getPort();
+          List<Message> _outgoing = NodeGen.this._roomHelpers.getOutgoing(_port);
+          final Function1<Message, Boolean> _function = new Function1<Message, Boolean>() {
+            @Override
+            public Boolean apply(final Message m) {
+              return Boolean.valueOf((NodeGen.this._typeHelpers.isEnumeration(m.getData().getRefType().getType()) || NodeGen.this._typeHelpers.isBoolean(m.getData().getRefType().getType())));
+            }
+          };
+          Iterable<Message> _filter = IterableExtensions.<Message>filter(_outgoing, _function);
+          boolean _isEmpty = IterableExtensions.isEmpty(_filter);
+          return Boolean.valueOf((!_isEmpty));
+        }
       };
       final Iterable<PortInstance> loggedPorts = IterableExtensions.<PortInstance>filter(sendPorts, _function_3);
       StringConcatenation _builder = new StringConcatenation();
@@ -1638,23 +1701,32 @@ public class NodeGen {
       GeneralProtocolClass _protocol = _port.getProtocol();
       final ProtocolClass pc = ((ProtocolClass) _protocol);
       List<Message> _allIncomingMessages = this._roomHelpers.getAllIncomingMessages(pc);
-      final Function1<Message, Boolean> _function = (Message m) -> {
-        VarDecl _data = m.getData();
-        return Boolean.valueOf((!Objects.equal(_data, null)));
+      final Function1<Message, Boolean> _function = new Function1<Message, Boolean>() {
+        @Override
+        public Boolean apply(final Message m) {
+          VarDecl _data = m.getData();
+          return Boolean.valueOf((!Objects.equal(_data, null)));
+        }
       };
       Iterable<Message> messages = IterableExtensions.<Message>filter(_allIncomingMessages, _function);
-      final Function1<Message, Boolean> _function_1 = (Message m) -> {
-        VarDecl _data = m.getData();
-        RefableType _refType = _data.getRefType();
-        DataType _type = _refType.getType();
-        return Boolean.valueOf(this._typeHelpers.isEnumeration(_type));
+      final Function1<Message, Boolean> _function_1 = new Function1<Message, Boolean>() {
+        @Override
+        public Boolean apply(final Message m) {
+          VarDecl _data = m.getData();
+          RefableType _refType = _data.getRefType();
+          DataType _type = _refType.getType();
+          return Boolean.valueOf(NodeGen.this._typeHelpers.isEnumeration(_type));
+        }
       };
       final Iterable<Message> enumMsgs = IterableExtensions.<Message>filter(messages, _function_1);
-      final Function1<Message, Boolean> _function_2 = (Message m) -> {
-        VarDecl _data = m.getData();
-        RefableType _refType = _data.getRefType();
-        DataType _type = _refType.getType();
-        return Boolean.valueOf(this._typeHelpers.isBoolean(_type));
+      final Function1<Message, Boolean> _function_2 = new Function1<Message, Boolean>() {
+        @Override
+        public Boolean apply(final Message m) {
+          VarDecl _data = m.getData();
+          RefableType _refType = _data.getRefType();
+          DataType _type = _refType.getType();
+          return Boolean.valueOf(NodeGen.this._typeHelpers.isBoolean(_type));
+        }
       };
       final Iterable<Message> boolMsgs = IterableExtensions.<Message>filter(messages, _function_2);
       final boolean usesMSC = (Main.getSettings().isGenerateMSCInstrumentation() && (!(IterableExtensions.isEmpty(enumMsgs) && IterableExtensions.isEmpty(boolMsgs))));
@@ -1742,23 +1814,32 @@ public class NodeGen {
     {
       InterfaceItem _interfaceItem = pi.getInterfaceItem();
       List<Message> _incoming = this._roomHelpers.getIncoming(_interfaceItem);
-      final Function1<Message, Boolean> _function = (Message m) -> {
-        VarDecl _data = m.getData();
-        return Boolean.valueOf((!Objects.equal(_data, null)));
+      final Function1<Message, Boolean> _function = new Function1<Message, Boolean>() {
+        @Override
+        public Boolean apply(final Message m) {
+          VarDecl _data = m.getData();
+          return Boolean.valueOf((!Objects.equal(_data, null)));
+        }
       };
       Iterable<Message> sentMsgs = IterableExtensions.<Message>filter(_incoming, _function);
-      final Function1<Message, Boolean> _function_1 = (Message m) -> {
-        VarDecl _data = m.getData();
-        RefableType _refType = _data.getRefType();
-        DataType _type = _refType.getType();
-        return Boolean.valueOf(this._typeHelpers.isEnumeration(_type));
+      final Function1<Message, Boolean> _function_1 = new Function1<Message, Boolean>() {
+        @Override
+        public Boolean apply(final Message m) {
+          VarDecl _data = m.getData();
+          RefableType _refType = _data.getRefType();
+          DataType _type = _refType.getType();
+          return Boolean.valueOf(NodeGen.this._typeHelpers.isEnumeration(_type));
+        }
       };
       final Iterable<Message> enumMsgs = IterableExtensions.<Message>filter(sentMsgs, _function_1);
-      final Function1<Message, Boolean> _function_2 = (Message m) -> {
-        VarDecl _data = m.getData();
-        RefableType _refType = _data.getRefType();
-        DataType _type = _refType.getType();
-        return Boolean.valueOf(this._typeHelpers.isBoolean(_type));
+      final Function1<Message, Boolean> _function_2 = new Function1<Message, Boolean>() {
+        @Override
+        public Boolean apply(final Message m) {
+          VarDecl _data = m.getData();
+          RefableType _refType = _data.getRefType();
+          DataType _type = _refType.getType();
+          return Boolean.valueOf(NodeGen.this._typeHelpers.isBoolean(_type));
+        }
       };
       final Iterable<Message> boolMsgs = IterableExtensions.<Message>filter(sentMsgs, _function_2);
       final boolean usesMSC = (Main.getSettings().isGenerateMSCInstrumentation() && (!(IterableExtensions.isEmpty(enumMsgs) && IterableExtensions.isEmpty(boolMsgs))));
@@ -1935,8 +2016,11 @@ public class NodeGen {
       {
         NodeClass _type = nr.getType();
         EList<PhysicalThread> _threads = _type.getThreads();
-        final Function1<PhysicalThread, Boolean> _function = (PhysicalThread t) -> {
-          return Boolean.valueOf(usedThreads.contains(t));
+        final Function1<PhysicalThread, Boolean> _function = new Function1<PhysicalThread, Boolean>() {
+          @Override
+          public Boolean apply(final PhysicalThread t) {
+            return Boolean.valueOf(usedThreads.contains(t));
+          }
         };
         Iterable<PhysicalThread> _filter = IterableExtensions.<PhysicalThread>filter(_threads, _function);
         boolean _hasElements = false;
@@ -1947,20 +2031,29 @@ public class NodeGen {
             _builder.appendImmediate("\n", "");
           }
           EList<ActorInstance> _allContainedInstances = ssi.getAllContainedInstances();
-          final Function1<ActorInstance, Boolean> _function_1 = (ActorInstance ai) -> {
-            ETMapUtil.MappedThread _mappedThread = ETMapUtil.getMappedThread(ai);
-            PhysicalThread _thread = _mappedThread.getThread();
-            return Boolean.valueOf(Objects.equal(_thread, thread));
+          final Function1<ActorInstance, Boolean> _function_1 = new Function1<ActorInstance, Boolean>() {
+            @Override
+            public Boolean apply(final ActorInstance ai) {
+              ETMapUtil.MappedThread _mappedThread = ETMapUtil.getMappedThread(ai);
+              PhysicalThread _thread = _mappedThread.getThread();
+              return Boolean.valueOf(Objects.equal(_thread, thread));
+            }
           };
           final Iterable<ActorInstance> instancesOnThread = IterableExtensions.<ActorInstance>filter(_allContainedInstances, _function_1);
           _builder.newLineIfNotEmpty();
-          final Function1<ActorInstance, Boolean> _function_2 = (ActorInstance ai) -> {
-            return Boolean.valueOf((Objects.equal(ai.getActorClass().getCommType(), ComponentCommunicationType.EVENT_DRIVEN) || Objects.equal(ai.getActorClass().getCommType(), ComponentCommunicationType.ASYNCHRONOUS)));
+          final Function1<ActorInstance, Boolean> _function_2 = new Function1<ActorInstance, Boolean>() {
+            @Override
+            public Boolean apply(final ActorInstance ai) {
+              return Boolean.valueOf((Objects.equal(ai.getActorClass().getCommType(), ComponentCommunicationType.EVENT_DRIVEN) || Objects.equal(ai.getActorClass().getCommType(), ComponentCommunicationType.ASYNCHRONOUS)));
+            }
           };
           final Iterable<ActorInstance> dispatchedInstances = IterableExtensions.<ActorInstance>filter(instancesOnThread, _function_2);
           _builder.newLineIfNotEmpty();
-          final Function1<ActorInstance, Boolean> _function_3 = (ActorInstance ai) -> {
-            return Boolean.valueOf((Objects.equal(ai.getActorClass().getCommType(), ComponentCommunicationType.DATA_DRIVEN) || Objects.equal(ai.getActorClass().getCommType(), ComponentCommunicationType.ASYNCHRONOUS)));
+          final Function1<ActorInstance, Boolean> _function_3 = new Function1<ActorInstance, Boolean>() {
+            @Override
+            public Boolean apply(final ActorInstance ai) {
+              return Boolean.valueOf((Objects.equal(ai.getActorClass().getCommType(), ComponentCommunicationType.DATA_DRIVEN) || Objects.equal(ai.getActorClass().getCommType(), ComponentCommunicationType.ASYNCHRONOUS)));
+            }
           };
           final Iterable<ActorInstance> executedInstances = IterableExtensions.<ActorInstance>filter(instancesOnThread, _function_3);
           _builder.newLineIfNotEmpty();
@@ -2134,10 +2227,13 @@ public class NodeGen {
               _builder.newLineIfNotEmpty();
               {
                 EList<InterfaceItemInstance> _orderedIfItemInstances = ai_1.getOrderedIfItemInstances();
-                final Function1<InterfaceItemInstance, Boolean> _function_4 = (InterfaceItemInstance p) -> {
-                  ProtocolClass _protocol = p.getProtocol();
-                  CommunicationType _commType = _protocol.getCommType();
-                  return Boolean.valueOf(Objects.equal(_commType, CommunicationType.EVENT_DRIVEN));
+                final Function1<InterfaceItemInstance, Boolean> _function_4 = new Function1<InterfaceItemInstance, Boolean>() {
+                  @Override
+                  public Boolean apply(final InterfaceItemInstance p) {
+                    ProtocolClass _protocol = p.getProtocol();
+                    CommunicationType _commType = _protocol.getCommType();
+                    return Boolean.valueOf(Objects.equal(_commType, CommunicationType.EVENT_DRIVEN));
+                  }
                 };
                 Iterable<InterfaceItemInstance> _filter_1 = IterableExtensions.<InterfaceItemInstance>filter(_orderedIfItemInstances, _function_4);
                 for(final InterfaceItemInstance pi_2 : _filter_1) {
@@ -2554,8 +2650,11 @@ public class NodeGen {
     {
       ProtocolClass _protocol = pi.getProtocol();
       EList<Message> _incomingMessages = _protocol.getIncomingMessages();
-      final Function1<Message, Boolean> _function = (Message m) -> {
-        return Boolean.valueOf(((!Objects.equal(m.getData(), null)) && this._typeHelpers.isEnumerationOrPrimitive(m.getData().getRefType().getType())));
+      final Function1<Message, Boolean> _function = new Function1<Message, Boolean>() {
+        @Override
+        public Boolean apply(final Message m) {
+          return Boolean.valueOf(((!Objects.equal(m.getData(), null)) && NodeGen.this._typeHelpers.isEnumerationOrPrimitive(m.getData().getRefType().getType())));
+        }
       };
       Iterable<Message> _filter = IterableExtensions.<Message>filter(_incomingMessages, _function);
       final Message msg = ((Message[])Conversions.unwrapArray(_filter, Message.class))[0];
@@ -2651,8 +2750,11 @@ public class NodeGen {
                       matched = true;
                       ProtocolClass _protocol_1 = pi.getProtocol();
                       EList<Message> _incomingMessages = _protocol_1.getIncomingMessages();
-                      final Function1<Message, Boolean> _function = (Message m) -> {
-                        return Boolean.valueOf(((!Objects.equal(m.getData(), null)) && this._typeHelpers.isEnumerationOrPrimitive(m.getData().getRefType().getType())));
+                      final Function1<Message, Boolean> _function = new Function1<Message, Boolean>() {
+                        @Override
+                        public Boolean apply(final Message m) {
+                          return Boolean.valueOf(((!Objects.equal(m.getData(), null)) && NodeGen.this._typeHelpers.isEnumerationOrPrimitive(m.getData().getRefType().getType())));
+                        }
                       };
                       Iterable<Message> _filter = IterableExtensions.<Message>filter(_incomingMessages, _function);
                       boolean _isEmpty = IterableExtensions.isEmpty(_filter);

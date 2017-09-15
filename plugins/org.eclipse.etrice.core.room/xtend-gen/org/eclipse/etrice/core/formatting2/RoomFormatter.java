@@ -10,7 +10,6 @@ import com.google.inject.Inject;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
-import java.util.function.Consumer;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
@@ -69,215 +68,329 @@ public class RoomFormatter extends FSMFormatter {
     super.formatAllByKeywords(it, document);
     ISemanticRegionsFinder _allRegionsFor = this.textRegionExtensions.allRegionsFor(it);
     List<ISemanticRegion> _keywords = _allRegionsFor.keywords("default", "void", "sends", "sub", "of", "and", "satisfied_by");
-    final Consumer<ISemanticRegion> _function = (ISemanticRegion it_1) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it_2) -> {
-        it_2.oneSpace();
-      };
-      document.surround(it_1, _function_1);
+    final Procedure1<ISemanticRegion> _function = new Procedure1<ISemanticRegion>() {
+      @Override
+      public void apply(final ISemanticRegion it) {
+        final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
+          @Override
+          public void apply(final IHiddenRegionFormatter it) {
+            it.oneSpace();
+          }
+        };
+        document.surround(it, _function);
+      }
     };
-    _keywords.forEach(_function);
+    IterableExtensions.<ISemanticRegion>forEach(_keywords, _function);
     ISemanticRegionsFinder _allRegionsFor_1 = this.textRegionExtensions.allRegionsFor(it);
     List<ISemanticRegion> _keywords_1 = _allRegionsFor_1.keywords("/");
-    final Consumer<ISemanticRegion> _function_1 = (ISemanticRegion it_1) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it_2) -> {
-        it_2.noSpace();
-      };
-      document.surround(it_1, _function_2);
+    final Procedure1<ISemanticRegion> _function_1 = new Procedure1<ISemanticRegion>() {
+      @Override
+      public void apply(final ISemanticRegion it) {
+        final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
+          @Override
+          public void apply(final IHiddenRegionFormatter it) {
+            it.noSpace();
+          }
+        };
+        document.surround(it, _function);
+      }
     };
-    _keywords_1.forEach(_function_1);
+    IterableExtensions.<ISemanticRegion>forEach(_keywords_1, _function_1);
     Grammar _grammar = this._roomGrammarAccess.getGrammar();
     List<AbstractRule> _allRules = GrammarUtil.allRules(_grammar);
-    final Function1<AbstractRule, Iterable<Keyword>> _function_2 = (AbstractRule it_1) -> {
-      TreeIterator<EObject> _eAllContents = it_1.eAllContents();
-      Iterator<Keyword> _filter = Iterators.<Keyword>filter(_eAllContents, Keyword.class);
-      final Function1<Keyword, Boolean> _function_3 = (Keyword it_2) -> {
-        String _value = it_2.getValue();
-        return Boolean.valueOf((!Objects.equal(_value, "ref")));
-      };
-      Iterator<Keyword> _filter_1 = IteratorExtensions.<Keyword>filter(_filter, _function_3);
-      final Function1<Keyword, Boolean> _function_4 = (Keyword it_2) -> {
-        String _value = it_2.getValue();
-        char[] _charArray = _value.toCharArray();
-        final Function1<Character, Boolean> _function_5 = (Character it_3) -> {
-          return Boolean.valueOf(Character.isLetter((it_3).charValue()));
+    final Function1<AbstractRule, Iterable<Keyword>> _function_2 = new Function1<AbstractRule, Iterable<Keyword>>() {
+      @Override
+      public Iterable<Keyword> apply(final AbstractRule it) {
+        TreeIterator<EObject> _eAllContents = it.eAllContents();
+        Iterator<Keyword> _filter = Iterators.<Keyword>filter(_eAllContents, Keyword.class);
+        final Function1<Keyword, Boolean> _function = new Function1<Keyword, Boolean>() {
+          @Override
+          public Boolean apply(final Keyword it) {
+            String _value = it.getValue();
+            return Boolean.valueOf((!Objects.equal(_value, "ref")));
+          }
         };
-        return Boolean.valueOf(IterableExtensions.<Character>forall(((Iterable<Character>)Conversions.doWrapArray(_charArray)), _function_5));
-      };
-      Iterator<Keyword> _filter_2 = IteratorExtensions.<Keyword>filter(_filter_1, _function_4);
-      return IteratorExtensions.<Keyword>toIterable(_filter_2);
+        Iterator<Keyword> _filter_1 = IteratorExtensions.<Keyword>filter(_filter, _function);
+        final Function1<Keyword, Boolean> _function_1 = new Function1<Keyword, Boolean>() {
+          @Override
+          public Boolean apply(final Keyword it) {
+            String _value = it.getValue();
+            char[] _charArray = _value.toCharArray();
+            final Function1<Character, Boolean> _function = new Function1<Character, Boolean>() {
+              @Override
+              public Boolean apply(final Character it) {
+                return Boolean.valueOf(Character.isLetter((it).charValue()));
+              }
+            };
+            return Boolean.valueOf(IterableExtensions.<Character>forall(((Iterable<Character>)Conversions.doWrapArray(_charArray)), _function));
+          }
+        };
+        Iterator<Keyword> _filter_2 = IteratorExtensions.<Keyword>filter(_filter_1, _function_1);
+        return IteratorExtensions.<Keyword>toIterable(_filter_2);
+      }
     };
     List<Iterable<Keyword>> _map = ListExtensions.<AbstractRule, Iterable<Keyword>>map(_allRules, _function_2);
     final Iterable<Keyword> textKeywords = Iterables.<Keyword>concat(_map);
     ISemanticRegionsFinder _allRegionsFor_2 = this.textRegionExtensions.allRegionsFor(it);
     List<ISemanticRegion> _keywords_2 = _allRegionsFor_2.keywords(((Keyword[])Conversions.unwrapArray(textKeywords, Keyword.class)));
-    final Consumer<ISemanticRegion> _function_3 = (ISemanticRegion it_1) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_4 = (IHiddenRegionFormatter it_2) -> {
-        it_2.oneSpace();
-      };
-      document.append(it_1, _function_4);
+    final Procedure1<ISemanticRegion> _function_3 = new Procedure1<ISemanticRegion>() {
+      @Override
+      public void apply(final ISemanticRegion it) {
+        final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
+          @Override
+          public void apply(final IHiddenRegionFormatter it) {
+            it.oneSpace();
+          }
+        };
+        document.append(it, _function);
+      }
     };
-    _keywords_2.forEach(_function_3);
+    IterableExtensions.<ISemanticRegion>forEach(_keywords_2, _function_3);
   }
   
   protected void _format(final RoomModel it, @Extension final IFormattableDocument document) {
     this.formatAllByKeywords(it, document);
     EList<EObject> _eContents = it.eContents();
     EObject _head = IterableExtensions.<EObject>head(_eContents);
-    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it_1) -> {
-      it_1.setNewLines(2);
+    final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
+      @Override
+      public void apply(final IHiddenRegionFormatter it) {
+        it.setNewLines(2);
+      }
     };
     document.<EObject>prepend(_head, _function);
     EList<EObject> _eContents_1 = it.eContents();
     Iterable<EObject> _tail = IterableExtensions.<EObject>tail(_eContents_1);
     Iterable<DataClass> _filter = Iterables.<DataClass>filter(_tail, DataClass.class);
-    final Consumer<DataClass> _function_1 = (DataClass it_1) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it_2) -> {
-        it_2.setNewLines(2);
-      };
-      document.<DataClass>prepend(it_1, _function_2);
+    final Procedure1<DataClass> _function_1 = new Procedure1<DataClass>() {
+      @Override
+      public void apply(final DataClass it) {
+        final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
+          @Override
+          public void apply(final IHiddenRegionFormatter it) {
+            it.setNewLines(2);
+          }
+        };
+        document.<DataClass>prepend(it, _function);
+      }
     };
-    _filter.forEach(_function_1);
+    IterableExtensions.<DataClass>forEach(_filter, _function_1);
     EList<EObject> _eContents_2 = it.eContents();
     Iterable<EObject> _tail_1 = IterableExtensions.<EObject>tail(_eContents_2);
     Iterable<GeneralProtocolClass> _filter_1 = Iterables.<GeneralProtocolClass>filter(_tail_1, GeneralProtocolClass.class);
-    final Consumer<GeneralProtocolClass> _function_2 = (GeneralProtocolClass it_1) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it_2) -> {
-        it_2.setNewLines(2);
-      };
-      document.<GeneralProtocolClass>prepend(it_1, _function_3);
+    final Procedure1<GeneralProtocolClass> _function_2 = new Procedure1<GeneralProtocolClass>() {
+      @Override
+      public void apply(final GeneralProtocolClass it) {
+        final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
+          @Override
+          public void apply(final IHiddenRegionFormatter it) {
+            it.setNewLines(2);
+          }
+        };
+        document.<GeneralProtocolClass>prepend(it, _function);
+      }
     };
-    _filter_1.forEach(_function_2);
+    IterableExtensions.<GeneralProtocolClass>forEach(_filter_1, _function_2);
     EList<EObject> _eContents_3 = it.eContents();
     Iterable<EObject> _tail_2 = IterableExtensions.<EObject>tail(_eContents_3);
     Iterable<ActorClass> _filter_2 = Iterables.<ActorClass>filter(_tail_2, ActorClass.class);
-    final Consumer<ActorClass> _function_3 = (ActorClass it_1) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_4 = (IHiddenRegionFormatter it_2) -> {
-        it_2.setNewLines(2);
-      };
-      document.<ActorClass>prepend(it_1, _function_4);
+    final Procedure1<ActorClass> _function_3 = new Procedure1<ActorClass>() {
+      @Override
+      public void apply(final ActorClass it) {
+        final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
+          @Override
+          public void apply(final IHiddenRegionFormatter it) {
+            it.setNewLines(2);
+          }
+        };
+        document.<ActorClass>prepend(it, _function);
+      }
     };
-    _filter_2.forEach(_function_3);
+    IterableExtensions.<ActorClass>forEach(_filter_2, _function_3);
     EList<EObject> _eContents_4 = it.eContents();
     Iterable<EObject> _tail_3 = IterableExtensions.<EObject>tail(_eContents_4);
     Iterable<SubSystemClass> _filter_3 = Iterables.<SubSystemClass>filter(_tail_3, SubSystemClass.class);
-    final Consumer<SubSystemClass> _function_4 = (SubSystemClass it_1) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_5 = (IHiddenRegionFormatter it_2) -> {
-        it_2.setNewLines(2);
-      };
-      document.<SubSystemClass>prepend(it_1, _function_5);
+    final Procedure1<SubSystemClass> _function_4 = new Procedure1<SubSystemClass>() {
+      @Override
+      public void apply(final SubSystemClass it) {
+        final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
+          @Override
+          public void apply(final IHiddenRegionFormatter it) {
+            it.setNewLines(2);
+          }
+        };
+        document.<SubSystemClass>prepend(it, _function);
+      }
     };
-    _filter_3.forEach(_function_4);
+    IterableExtensions.<SubSystemClass>forEach(_filter_3, _function_4);
     EList<EObject> _eContents_5 = it.eContents();
     Iterable<EObject> _tail_4 = IterableExtensions.<EObject>tail(_eContents_5);
     Iterable<AnnotationType> _filter_4 = Iterables.<AnnotationType>filter(_tail_4, AnnotationType.class);
-    final Consumer<AnnotationType> _function_5 = (AnnotationType it_1) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_6 = (IHiddenRegionFormatter it_2) -> {
-        it_2.setNewLines(2);
-      };
-      document.<AnnotationType>prepend(it_1, _function_6);
+    final Procedure1<AnnotationType> _function_5 = new Procedure1<AnnotationType>() {
+      @Override
+      public void apply(final AnnotationType it) {
+        final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
+          @Override
+          public void apply(final IHiddenRegionFormatter it) {
+            it.setNewLines(2);
+          }
+        };
+        document.<AnnotationType>prepend(it, _function);
+      }
     };
-    _filter_4.forEach(_function_5);
+    IterableExtensions.<AnnotationType>forEach(_filter_4, _function_5);
     EList<EObject> _eContents_6 = it.eContents();
     Iterable<EObject> _tail_5 = IterableExtensions.<EObject>tail(_eContents_6);
     Iterable<AnnotationType> _filter_5 = Iterables.<AnnotationType>filter(_tail_5, AnnotationType.class);
-    final Consumer<AnnotationType> _function_6 = (AnnotationType it_1) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_7 = (IHiddenRegionFormatter it_2) -> {
-        it_2.setNewLines(2);
-      };
-      document.<AnnotationType>prepend(it_1, _function_7);
+    final Procedure1<AnnotationType> _function_6 = new Procedure1<AnnotationType>() {
+      @Override
+      public void apply(final AnnotationType it) {
+        final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
+          @Override
+          public void apply(final IHiddenRegionFormatter it) {
+            it.setNewLines(2);
+          }
+        };
+        document.<AnnotationType>prepend(it, _function);
+      }
     };
-    _filter_5.forEach(_function_6);
+    IterableExtensions.<AnnotationType>forEach(_filter_5, _function_6);
     EList<EObject> _eContents_7 = it.eContents();
     Iterable<EObject> _tail_6 = IterableExtensions.<EObject>tail(_eContents_7);
     Iterable<Import> _filter_6 = Iterables.<Import>filter(_tail_6, Import.class);
-    final Consumer<Import> _function_7 = (Import it_1) -> {
-      this.prependDefaultNewLines(it_1, document);
+    final Procedure1<Import> _function_7 = new Procedure1<Import>() {
+      @Override
+      public void apply(final Import it) {
+        RoomFormatter.this.prependDefaultNewLines(it, document);
+      }
     };
-    _filter_6.forEach(_function_7);
+    IterableExtensions.<Import>forEach(_filter_6, _function_7);
     EList<EObject> _eContents_8 = it.eContents();
     Iterable<EObject> _tail_7 = IterableExtensions.<EObject>tail(_eContents_8);
     Iterable<PrimitiveType> _filter_7 = Iterables.<PrimitiveType>filter(_tail_7, PrimitiveType.class);
-    final Consumer<PrimitiveType> _function_8 = (PrimitiveType it_1) -> {
-      this.prependDefaultNewLines(it_1, document);
+    final Procedure1<PrimitiveType> _function_8 = new Procedure1<PrimitiveType>() {
+      @Override
+      public void apply(final PrimitiveType it) {
+        RoomFormatter.this.prependDefaultNewLines(it, document);
+      }
     };
-    _filter_7.forEach(_function_8);
+    IterableExtensions.<PrimitiveType>forEach(_filter_7, _function_8);
     EList<EObject> _eContents_9 = it.eContents();
     Iterable<EObject> _tail_8 = IterableExtensions.<EObject>tail(_eContents_9);
     Iterable<EnumerationType> _filter_8 = Iterables.<EnumerationType>filter(_tail_8, EnumerationType.class);
-    final Consumer<EnumerationType> _function_9 = (EnumerationType it_1) -> {
-      this.prependDefaultNewLines(it_1, document);
+    final Procedure1<EnumerationType> _function_9 = new Procedure1<EnumerationType>() {
+      @Override
+      public void apply(final EnumerationType it) {
+        RoomFormatter.this.prependDefaultNewLines(it, document);
+      }
     };
-    _filter_8.forEach(_function_9);
+    IterableExtensions.<EnumerationType>forEach(_filter_8, _function_9);
     EList<EObject> _eContents_10 = it.eContents();
     Iterable<EObject> _tail_9 = IterableExtensions.<EObject>tail(_eContents_10);
     Iterable<ExternalType> _filter_9 = Iterables.<ExternalType>filter(_tail_9, ExternalType.class);
-    final Consumer<ExternalType> _function_10 = (ExternalType it_1) -> {
-      this.prependDefaultNewLines(it_1, document);
+    final Procedure1<ExternalType> _function_10 = new Procedure1<ExternalType>() {
+      @Override
+      public void apply(final ExternalType it) {
+        RoomFormatter.this.prependDefaultNewLines(it, document);
+      }
     };
-    _filter_9.forEach(_function_10);
+    IterableExtensions.<ExternalType>forEach(_filter_9, _function_10);
     TreeIterator<EObject> _eAllContents = it.eAllContents();
-    final Procedure1<EObject> _function_11 = (EObject it_1) -> {
-      document.<EObject>format(it_1);
+    final Procedure1<EObject> _function_11 = new Procedure1<EObject>() {
+      @Override
+      public void apply(final EObject it) {
+        document.<EObject>format(it);
+      }
     };
     IteratorExtensions.<EObject>forEach(_eAllContents, _function_11);
   }
   
   protected void _format(final RoomClass it, @Extension final IFormattableDocument document) {
     EList<EObject> _eContents = it.eContents();
-    final Function1<EObject, Boolean> _function = (EObject it_1) -> {
-      return Boolean.valueOf((!((it_1 instanceof DetailCode) || (it_1 instanceof Documentation))));
+    final Function1<EObject, Boolean> _function = new Function1<EObject, Boolean>() {
+      @Override
+      public Boolean apply(final EObject it) {
+        return Boolean.valueOf((!((it instanceof DetailCode) || (it instanceof Documentation))));
+      }
     };
     Iterable<EObject> _filter = IterableExtensions.<EObject>filter(_eContents, _function);
-    final Consumer<EObject> _function_1 = (EObject it_1) -> {
-      this.prependDefaultNewLines(it_1, document);
+    final Procedure1<EObject> _function_1 = new Procedure1<EObject>() {
+      @Override
+      public void apply(final EObject it) {
+        RoomFormatter.this.prependDefaultNewLines(it, document);
+      }
     };
-    _filter.forEach(_function_1);
+    IterableExtensions.<EObject>forEach(_filter, _function_1);
     ISemanticRegionsFinder _regionFor = this.textRegionExtensions.regionFor(it);
     List<ISemanticRegion> _keywords = _regionFor.keywords("usercode1", "usercode2", "usercode3", "incoming", "outgoing", "regular", "conjugated", "Interface", "Structure", "Behavior");
-    final Consumer<ISemanticRegion> _function_2 = (ISemanticRegion it_1) -> {
-      this.prependDefaultNewLines(it_1, document);
+    final Procedure1<ISemanticRegion> _function_2 = new Procedure1<ISemanticRegion>() {
+      @Override
+      public void apply(final ISemanticRegion it) {
+        RoomFormatter.this.prependDefaultNewLines(it, document);
+      }
     };
-    _keywords.forEach(_function_2);
+    IterableExtensions.<ISemanticRegion>forEach(_keywords, _function_2);
   }
   
   protected void _format(final PortClass it, @Extension final IFormattableDocument document) {
     EList<EObject> _eContents = it.eContents();
-    final Function1<EObject, Boolean> _function = (EObject it_1) -> {
-      return Boolean.valueOf((!((it_1 instanceof DetailCode) || (it_1 instanceof Documentation))));
+    final Function1<EObject, Boolean> _function = new Function1<EObject, Boolean>() {
+      @Override
+      public Boolean apply(final EObject it) {
+        return Boolean.valueOf((!((it instanceof DetailCode) || (it instanceof Documentation))));
+      }
     };
     Iterable<EObject> _filter = IterableExtensions.<EObject>filter(_eContents, _function);
-    final Consumer<EObject> _function_1 = (EObject it_1) -> {
-      this.prependDefaultNewLines(it_1, document);
+    final Procedure1<EObject> _function_1 = new Procedure1<EObject>() {
+      @Override
+      public void apply(final EObject it) {
+        RoomFormatter.this.prependDefaultNewLines(it, document);
+      }
     };
-    _filter.forEach(_function_1);
+    IterableExtensions.<EObject>forEach(_filter, _function_1);
   }
   
   protected void _format(final Operation it, @Extension final IFormattableDocument document) {
     EList<VarDecl> _arguments = it.getArguments();
-    final Consumer<VarDecl> _function = (VarDecl it_1) -> {
-      final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it_2) -> {
-        it_2.noSpace();
-      };
-      document.<VarDecl>append(it_1, _function_1);
+    final Procedure1<VarDecl> _function = new Procedure1<VarDecl>() {
+      @Override
+      public void apply(final VarDecl it) {
+        final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
+          @Override
+          public void apply(final IHiddenRegionFormatter it) {
+            it.noSpace();
+          }
+        };
+        document.<VarDecl>append(it, _function);
+      }
     };
-    _arguments.forEach(_function);
+    IterableExtensions.<VarDecl>forEach(_arguments, _function);
   }
   
   protected void _format(final Attribute it, @Extension final IFormattableDocument document) {
     ISemanticRegionsFinder _regionFor = this.textRegionExtensions.regionFor(it);
     List<Pair<ISemanticRegion, ISemanticRegion>> _keywordPairs = _regionFor.keywordPairs("[", "]");
-    final Consumer<Pair<ISemanticRegion, ISemanticRegion>> _function = (Pair<ISemanticRegion, ISemanticRegion> it_1) -> {
-      ISemanticRegion _key = it_1.getKey();
-      final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it_2) -> {
-        it_2.oneSpace();
-      };
-      document.prepend(_key, _function_1);
-      final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it_2) -> {
-        it_2.noSpace();
-      };
-      document.<ISemanticRegion, ISemanticRegion>interior(it_1, _function_2);
+    final Procedure1<Pair<ISemanticRegion, ISemanticRegion>> _function = new Procedure1<Pair<ISemanticRegion, ISemanticRegion>>() {
+      @Override
+      public void apply(final Pair<ISemanticRegion, ISemanticRegion> it) {
+        ISemanticRegion _key = it.getKey();
+        final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
+          @Override
+          public void apply(final IHiddenRegionFormatter it) {
+            it.oneSpace();
+          }
+        };
+        document.prepend(_key, _function);
+        final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
+          @Override
+          public void apply(final IHiddenRegionFormatter it) {
+            it.noSpace();
+          }
+        };
+        document.<ISemanticRegion, ISemanticRegion>interior(it, _function_1);
+      }
     };
-    _keywordPairs.forEach(_function);
+    IterableExtensions.<Pair<ISemanticRegion, ISemanticRegion>>forEach(_keywordPairs, _function);
   }
   
   public void format(final Object it, final IFormattableDocument document) {

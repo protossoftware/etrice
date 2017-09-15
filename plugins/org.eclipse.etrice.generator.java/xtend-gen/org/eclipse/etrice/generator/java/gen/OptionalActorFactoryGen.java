@@ -4,7 +4,6 @@ import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.HashMap;
 import java.util.List;
-import java.util.function.Consumer;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.core.genmodel.etricegen.OpenBinding;
 import org.eclipse.etrice.core.genmodel.etricegen.OpenServiceConnection;
@@ -25,6 +24,7 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
 public class OptionalActorFactoryGen {
@@ -50,19 +50,28 @@ public class OptionalActorFactoryGen {
   public void doGenerate(final Root root) {
     final HashMap<ActorClass, WiredActorClass> ac2wired = new HashMap<ActorClass, WiredActorClass>();
     EList<WiredStructureClass> _wiredInstances = root.getWiredInstances();
-    final Function1<WiredStructureClass, Boolean> _function = (WiredStructureClass w) -> {
-      return Boolean.valueOf((w instanceof WiredActorClass));
+    final Function1<WiredStructureClass, Boolean> _function = new Function1<WiredStructureClass, Boolean>() {
+      @Override
+      public Boolean apply(final WiredStructureClass w) {
+        return Boolean.valueOf((w instanceof WiredActorClass));
+      }
     };
     Iterable<WiredStructureClass> _filter = IterableExtensions.<WiredStructureClass>filter(_wiredInstances, _function);
-    final Consumer<WiredStructureClass> _function_1 = (WiredStructureClass w) -> {
-      ActorClass _actorClass = ((WiredActorClass) w).getActorClass();
-      ac2wired.put(_actorClass, ((WiredActorClass) w));
+    final Procedure1<WiredStructureClass> _function_1 = new Procedure1<WiredStructureClass>() {
+      @Override
+      public void apply(final WiredStructureClass w) {
+        ActorClass _actorClass = ((WiredActorClass) w).getActorClass();
+        ac2wired.put(_actorClass, ((WiredActorClass) w));
+      }
     };
-    _filter.forEach(_function_1);
+    IterableExtensions.<WiredStructureClass>forEach(_filter, _function_1);
     EList<OptionalActorInstance> _optionalInstances = root.getOptionalInstances();
-    final Function1<OptionalActorInstance, Boolean> _function_2 = (OptionalActorInstance cl) -> {
-      ActorClass _actorClass = cl.getActorClass();
-      return Boolean.valueOf(this._fileSystemHelpers.isValidGenerationLocation(_actorClass));
+    final Function1<OptionalActorInstance, Boolean> _function_2 = new Function1<OptionalActorInstance, Boolean>() {
+      @Override
+      public Boolean apply(final OptionalActorInstance cl) {
+        ActorClass _actorClass = cl.getActorClass();
+        return Boolean.valueOf(OptionalActorFactoryGen.this._fileSystemHelpers.isValidGenerationLocation(_actorClass));
+      }
     };
     Iterable<OptionalActorInstance> _filter_1 = IterableExtensions.<OptionalActorInstance>filter(_optionalInstances, _function_2);
     for (final OptionalActorInstance oi : _filter_1) {
@@ -139,8 +148,11 @@ public class OptionalActorFactoryGen {
       _builder.newLine();
       {
         List<Port> _allEndPorts = this._roomHelpers.getAllEndPorts(ac);
-        final Function1<Port, Boolean> _function = (Port p) -> {
-          return Boolean.valueOf(this._roomHelpers.isExternal(p));
+        final Function1<Port, Boolean> _function = new Function1<Port, Boolean>() {
+          @Override
+          public Boolean apply(final Port p) {
+            return Boolean.valueOf(OptionalActorFactoryGen.this._roomHelpers.isExternal(p));
+          }
         };
         Iterable<Port> _filter = IterableExtensions.<Port>filter(_allEndPorts, _function);
         for(final Port port : _filter) {

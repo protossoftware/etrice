@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.function.Consumer;
 import javax.inject.Inject;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
@@ -52,6 +51,7 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
  * collection of convenience functions for code generation
@@ -103,11 +103,14 @@ public class RoomExtensions extends FSMExtensions {
    */
   public List<Port> punion(final Iterable<Port> in1, final Iterable<ExternalPort> in2) {
     final ArrayList<Port> ret = new ArrayList<Port>();
-    final Consumer<ExternalPort> _function = (ExternalPort e) -> {
-      Port _interfacePort = e.getInterfacePort();
-      ret.add(_interfacePort);
+    final Procedure1<ExternalPort> _function = new Procedure1<ExternalPort>() {
+      @Override
+      public void apply(final ExternalPort e) {
+        Port _interfacePort = e.getInterfacePort();
+        ret.add(_interfacePort);
+      }
     };
-    in2.forEach(_function);
+    IterableExtensions.<ExternalPort>forEach(in2, _function);
     Iterables.<Port>addAll(ret, in1);
     return ret;
   }
@@ -558,9 +561,12 @@ public class RoomExtensions extends FSMExtensions {
   public MessageHandler getSendHandler(final Message m, final boolean conj) {
     EObject _eContainer = m.eContainer();
     List<MessageHandler> _sendHandlers = this.getSendHandlers(((ProtocolClass) _eContainer), conj);
-    final Function1<MessageHandler, Boolean> _function = (MessageHandler e) -> {
-      Message _msg = e.getMsg();
-      return Boolean.valueOf(Objects.equal(_msg, m));
+    final Function1<MessageHandler, Boolean> _function = new Function1<MessageHandler, Boolean>() {
+      @Override
+      public Boolean apply(final MessageHandler e) {
+        Message _msg = e.getMsg();
+        return Boolean.valueOf(Objects.equal(_msg, m));
+      }
     };
     return IterableExtensions.<MessageHandler>findFirst(_sendHandlers, _function);
   }
@@ -597,9 +603,12 @@ public class RoomExtensions extends FSMExtensions {
    * 		void return type
    */
   public boolean overridesStop(final ActorClass ac) {
-    return (IterableExtensions.<StandardOperation>exists(ac.getOperations(), ((Function1<StandardOperation, Boolean>) (StandardOperation e) -> {
-      return Boolean.valueOf(((Objects.equal(e.getName(), "stop") && e.getArguments().isEmpty()) && Objects.equal(e.getReturnType(), null)));
-    })) || ((!Objects.equal(ac.getActorBase(), null)) && this.overridesStop(ac.getActorBase())));
+    return (IterableExtensions.<StandardOperation>exists(ac.getOperations(), new Function1<StandardOperation, Boolean>() {
+      @Override
+      public Boolean apply(final StandardOperation e) {
+        return Boolean.valueOf(((Objects.equal(e.getName(), "stop") && e.getArguments().isEmpty()) && Objects.equal(e.getReturnType(), null)));
+      }
+    }) || ((!Objects.equal(ac.getActorBase(), null)) && this.overridesStop(ac.getActorBase())));
   }
   
   public BasicEList<AbstractInstance> getAllSubInstances(final StructureInstance ssi) {

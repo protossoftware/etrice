@@ -63,8 +63,11 @@ public class Initialization {
   public CharSequence genExtraInitializers(final Iterable<Attribute> attributes) {
     CharSequence _xblockexpression = null;
     {
-      final Function1<Attribute, Boolean> _function = (Attribute it) -> {
-        return Boolean.valueOf(((Objects.equal(this.getInitializerListValue(it), null) && (!Objects.equal(this.getInitValue(it), null))) && this.getInitValue(it).startsWith("{")));
+      final Function1<Attribute, Boolean> _function = new Function1<Attribute, Boolean>() {
+        @Override
+        public Boolean apply(final Attribute it) {
+          return Boolean.valueOf(((Objects.equal(Initialization.this.getInitializerListValue(it), null) && (!Objects.equal(Initialization.this.getInitValue(it), null))) && Initialization.this.getInitValue(it).startsWith("{")));
+        }
       };
       final Iterable<Attribute> extraInitAttrs = IterableExtensions.<Attribute>filter(attributes, _function);
       boolean _isEmpty = IterableExtensions.isEmpty(extraInitAttrs);
@@ -75,9 +78,12 @@ public class Initialization {
       _builder.append("// extra initialization");
       _builder.newLine();
       {
-        final Function1<Attribute, Boolean> _function_1 = (Attribute it) -> {
-          int _size = it.getSize();
-          return Boolean.valueOf((_size > 0));
+        final Function1<Attribute, Boolean> _function_1 = new Function1<Attribute, Boolean>() {
+          @Override
+          public Boolean apply(final Attribute it) {
+            int _size = it.getSize();
+            return Boolean.valueOf((_size > 0));
+          }
         };
         Iterable<Attribute> _filter = IterableExtensions.<Attribute>filter(extraInitAttrs, _function_1);
         for(final Attribute it : _filter) {
@@ -104,9 +110,12 @@ public class Initialization {
         }
       }
       {
-        final Function1<Attribute, Boolean> _function_2 = (Attribute it_1) -> {
-          int _size_1 = it_1.getSize();
-          return Boolean.valueOf((_size_1 == 0));
+        final Function1<Attribute, Boolean> _function_2 = new Function1<Attribute, Boolean>() {
+          @Override
+          public Boolean apply(final Attribute it) {
+            int _size = it.getSize();
+            return Boolean.valueOf((_size == 0));
+          }
         };
         Iterable<Attribute> _filter_1 = IterableExtensions.<Attribute>filter(extraInitAttrs, _function_2);
         for(final Attribute it_1 : _filter_1) {

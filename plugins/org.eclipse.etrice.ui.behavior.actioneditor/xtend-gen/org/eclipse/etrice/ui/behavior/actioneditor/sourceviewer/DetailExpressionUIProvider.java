@@ -90,8 +90,11 @@ public class DetailExpressionUIProvider implements IDetailExpressionProvider {
       if (data instanceof Operation) {
         _matched=true;
         EList<VarDecl> _arguments = ((Operation)data).getArguments();
-        final Function1<VarDecl, String> _function = (VarDecl it) -> {
-          return it.getName();
+        final Function1<VarDecl, String> _function = new Function1<VarDecl, String>() {
+          @Override
+          public String apply(final VarDecl it) {
+            return it.getName();
+          }
         };
         List<String> _map = ListExtensions.<VarDecl, String>map(_arguments, _function);
         _switchResult_1 = IterableExtensions.join(_map, ", ");
@@ -329,9 +332,12 @@ public class DetailExpressionUIProvider implements IDetailExpressionProvider {
    */
   public Iterable<IDetailExpressionProvider.ExpressionFeature> getContextFeaturesWithPrefix(final IDetailExpressionProvider.ExpressionFeature ctx, final String prefix) {
     List<IDetailExpressionProvider.ExpressionFeature> _contextFeatures = this.delegate.getContextFeatures(ctx);
-    final Function1<IDetailExpressionProvider.ExpressionFeature, Boolean> _function = (IDetailExpressionProvider.ExpressionFeature it) -> {
-      String _id = it.getId();
-      return Boolean.valueOf(_id.startsWith(prefix));
+    final Function1<IDetailExpressionProvider.ExpressionFeature, Boolean> _function = new Function1<IDetailExpressionProvider.ExpressionFeature, Boolean>() {
+      @Override
+      public Boolean apply(final IDetailExpressionProvider.ExpressionFeature it) {
+        String _id = it.getId();
+        return Boolean.valueOf(_id.startsWith(prefix));
+      }
     };
     return IterableExtensions.<IDetailExpressionProvider.ExpressionFeature>filter(_contextFeatures, _function);
   }
@@ -341,9 +347,12 @@ public class DetailExpressionUIProvider implements IDetailExpressionProvider {
    */
   public Iterable<IDetailExpressionProvider.ExpressionFeature> getInitialFeaturesWithPrefix(final String prefix) {
     List<IDetailExpressionProvider.ExpressionFeature> _initialFeatures = this.delegate.getInitialFeatures();
-    final Function1<IDetailExpressionProvider.ExpressionFeature, Boolean> _function = (IDetailExpressionProvider.ExpressionFeature it) -> {
-      String _id = it.getId();
-      return Boolean.valueOf(_id.startsWith(prefix));
+    final Function1<IDetailExpressionProvider.ExpressionFeature, Boolean> _function = new Function1<IDetailExpressionProvider.ExpressionFeature, Boolean>() {
+      @Override
+      public Boolean apply(final IDetailExpressionProvider.ExpressionFeature it) {
+        String _id = it.getId();
+        return Boolean.valueOf(_id.startsWith(prefix));
+      }
     };
     return IterableExtensions.<IDetailExpressionProvider.ExpressionFeature>filter(_initialFeatures, _function);
   }

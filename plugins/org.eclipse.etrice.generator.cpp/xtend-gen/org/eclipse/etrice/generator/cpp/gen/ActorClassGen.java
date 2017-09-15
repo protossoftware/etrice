@@ -17,7 +17,6 @@ import com.google.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Consumer;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.core.fsm.fSM.ComponentCommunicationType;
 import org.eclipse.etrice.core.fsm.fSM.DetailCode;
@@ -53,6 +52,7 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @Singleton
 @SuppressWarnings("all")
@@ -87,18 +87,27 @@ public class ActorClassGen extends GenericActorClassGenerator {
     final Map<ActorClass, WiredActorClass> ac2wired = CollectionLiterals.<ActorClass, WiredActorClass>newHashMap();
     EList<WiredStructureClass> _wiredInstances = root.getWiredInstances();
     Iterable<WiredActorClass> _filter = Iterables.<WiredActorClass>filter(_wiredInstances, WiredActorClass.class);
-    final Consumer<WiredActorClass> _function = (WiredActorClass it) -> {
-      ActorClass _actorClass = it.getActorClass();
-      ac2wired.put(_actorClass, it);
+    final Procedure1<WiredActorClass> _function = new Procedure1<WiredActorClass>() {
+      @Override
+      public void apply(final WiredActorClass it) {
+        ActorClass _actorClass = it.getActorClass();
+        ac2wired.put(_actorClass, it);
+      }
     };
-    _filter.forEach(_function);
+    IterableExtensions.<WiredActorClass>forEach(_filter, _function);
     EList<ActorClass> _actorClasses = root.getActorClasses();
-    final Function1<ActorClass, Boolean> _function_1 = (ActorClass it) -> {
-      return Boolean.valueOf(this._fileSystemHelpers.isValidGenerationLocation(it));
+    final Function1<ActorClass, Boolean> _function_1 = new Function1<ActorClass, Boolean>() {
+      @Override
+      public Boolean apply(final ActorClass it) {
+        return Boolean.valueOf(ActorClassGen.this._fileSystemHelpers.isValidGenerationLocation(it));
+      }
     };
     Iterable<ActorClass> _filter_1 = IterableExtensions.<ActorClass>filter(_actorClasses, _function_1);
-    final Function1<ActorClass, ExpandedActorClass> _function_2 = (ActorClass it) -> {
-      return root.getExpandedActorClass(it);
+    final Function1<ActorClass, ExpandedActorClass> _function_2 = new Function1<ActorClass, ExpandedActorClass>() {
+      @Override
+      public ExpandedActorClass apply(final ActorClass it) {
+        return root.getExpandedActorClass(it);
+      }
     };
     Iterable<ExpandedActorClass> _map = IterableExtensions.<ActorClass, ExpandedActorClass>map(_filter_1, _function_2);
     for (final ExpandedActorClass xpac : _map) {
@@ -420,11 +429,14 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.newLine();
       _builder.append("\t\t");
       List<Port> _endPorts_1 = this._roomHelpers.getEndPorts(ac);
-      final Function1<Port, CharSequence> _function = (Port it) -> {
-        String _portClassName_3 = this._roomExtensions.getPortClassName(it);
-        String _plus = (_portClassName_3 + "&");
-        String _name_12 = it.getName();
-        return this._procedureHelpers.getterImplementation(_plus, _name_12, clsname);
+      final Function1<Port, CharSequence> _function = new Function1<Port, CharSequence>() {
+        @Override
+        public CharSequence apply(final Port it) {
+          String _portClassName = ActorClassGen.this._roomExtensions.getPortClassName(it);
+          String _plus = (_portClassName + "&");
+          String _name = it.getName();
+          return ActorClassGen.this._procedureHelpers.getterImplementation(_plus, _name, clsname);
+        }
       };
       List<CharSequence> _map = ListExtensions.<Port, CharSequence>map(_endPorts_1, _function);
       String _join = IterableExtensions.join(_map, this._roomExtensions.NEWLINE);
@@ -433,11 +445,14 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.newLine();
       _builder.append("\t\t");
       EList<SAP> _serviceAccessPoints_1 = ac.getServiceAccessPoints();
-      final Function1<SAP, CharSequence> _function_1 = (SAP it) -> {
-        String _portClassName_3 = this._roomExtensions.getPortClassName(it);
-        String _plus = (_portClassName_3 + "&");
-        String _name_12 = it.getName();
-        return this._procedureHelpers.getterImplementation(_plus, _name_12, clsname);
+      final Function1<SAP, CharSequence> _function_1 = new Function1<SAP, CharSequence>() {
+        @Override
+        public CharSequence apply(final SAP it) {
+          String _portClassName = ActorClassGen.this._roomExtensions.getPortClassName(it);
+          String _plus = (_portClassName + "&");
+          String _name = it.getName();
+          return ActorClassGen.this._procedureHelpers.getterImplementation(_plus, _name, clsname);
+        }
       };
       List<CharSequence> _map_1 = ListExtensions.<SAP, CharSequence>map(_serviceAccessPoints_1, _function_1);
       String _join_1 = IterableExtensions.join(_map_1, this._roomExtensions.NEWLINE);
@@ -446,12 +461,15 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.newLine();
       _builder.append("\t\t");
       EList<ServiceImplementation> _serviceImplementations_1 = ac.getServiceImplementations();
-      final Function1<ServiceImplementation, CharSequence> _function_2 = (ServiceImplementation it) -> {
-        String _portClassName_3 = this._roomExtensions.getPortClassName(it);
-        String _plus = (_portClassName_3 + "&");
-        SPP _spp_1 = it.getSpp();
-        String _name_12 = _spp_1.getName();
-        return this._procedureHelpers.getterImplementation(_plus, _name_12, clsname);
+      final Function1<ServiceImplementation, CharSequence> _function_2 = new Function1<ServiceImplementation, CharSequence>() {
+        @Override
+        public CharSequence apply(final ServiceImplementation it) {
+          String _portClassName = ActorClassGen.this._roomExtensions.getPortClassName(it);
+          String _plus = (_portClassName + "&");
+          SPP _spp = it.getSpp();
+          String _name = _spp.getName();
+          return ActorClassGen.this._procedureHelpers.getterImplementation(_plus, _name, clsname);
+        }
       };
       List<CharSequence> _map_2 = ListExtensions.<ServiceImplementation, CharSequence>map(_serviceImplementations_1, _function_2);
       String _join_2 = IterableExtensions.join(_map_2, this._roomExtensions.NEWLINE);
@@ -585,79 +603,94 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append("(parent, name)");
       initList.add(_builder.toString());
       List<Port> _endPorts = this._roomHelpers.getEndPorts(ac);
-      final Function1<Port, String> _function = (Port it) -> {
-        StringConcatenation _builder_1 = new StringConcatenation();
-        String _name_1 = it.getName();
-        _builder_1.append(_name_1, "");
-        _builder_1.append("(this, \"");
-        String _name_2 = it.getName();
-        _builder_1.append(_name_2, "");
-        _builder_1.append("\", IFITEM_");
-        String _name_3 = it.getName();
-        _builder_1.append(_name_3, "");
-        _builder_1.append(")");
-        return _builder_1.toString();
+      final Function1<Port, String> _function = new Function1<Port, String>() {
+        @Override
+        public String apply(final Port it) {
+          StringConcatenation _builder = new StringConcatenation();
+          String _name = it.getName();
+          _builder.append(_name, "");
+          _builder.append("(this, \"");
+          String _name_1 = it.getName();
+          _builder.append(_name_1, "");
+          _builder.append("\", IFITEM_");
+          String _name_2 = it.getName();
+          _builder.append(_name_2, "");
+          _builder.append(")");
+          return _builder.toString();
+        }
       };
       List<String> _map = ListExtensions.<Port, String>map(_endPorts, _function);
       Iterables.<CharSequence>addAll(initList, _map);
       EList<ActorRef> _actorRefs = ac.getActorRefs();
-      final Function1<ActorRef, String> _function_1 = (ActorRef it) -> {
-        StringConcatenation _builder_1 = new StringConcatenation();
-        String _name_1 = it.getName();
-        _builder_1.append(_name_1, "");
-        _builder_1.append("(this, \"");
-        String _name_2 = it.getName();
-        _builder_1.append(_name_2, "");
-        _builder_1.append("\")");
-        return _builder_1.toString();
+      final Function1<ActorRef, String> _function_1 = new Function1<ActorRef, String>() {
+        @Override
+        public String apply(final ActorRef it) {
+          StringConcatenation _builder = new StringConcatenation();
+          String _name = it.getName();
+          _builder.append(_name, "");
+          _builder.append("(this, \"");
+          String _name_1 = it.getName();
+          _builder.append(_name_1, "");
+          _builder.append("\")");
+          return _builder.toString();
+        }
       };
       List<String> _map_1 = ListExtensions.<ActorRef, String>map(_actorRefs, _function_1);
       Iterables.<CharSequence>addAll(initList, _map_1);
       EList<SAP> _serviceAccessPoints = ac.getServiceAccessPoints();
-      final Function1<SAP, String> _function_2 = (SAP it) -> {
-        StringConcatenation _builder_1 = new StringConcatenation();
-        String _name_1 = it.getName();
-        _builder_1.append(_name_1, "");
-        _builder_1.append("(this, \"");
-        String _name_2 = it.getName();
-        _builder_1.append(_name_2, "");
-        _builder_1.append("\", IFITEM_");
-        String _name_3 = it.getName();
-        _builder_1.append(_name_3, "");
-        _builder_1.append(")");
-        return _builder_1.toString();
+      final Function1<SAP, String> _function_2 = new Function1<SAP, String>() {
+        @Override
+        public String apply(final SAP it) {
+          StringConcatenation _builder = new StringConcatenation();
+          String _name = it.getName();
+          _builder.append(_name, "");
+          _builder.append("(this, \"");
+          String _name_1 = it.getName();
+          _builder.append(_name_1, "");
+          _builder.append("\", IFITEM_");
+          String _name_2 = it.getName();
+          _builder.append(_name_2, "");
+          _builder.append(")");
+          return _builder.toString();
+        }
       };
       List<String> _map_2 = ListExtensions.<SAP, String>map(_serviceAccessPoints, _function_2);
       Iterables.<CharSequence>addAll(initList, _map_2);
       EList<ServiceImplementation> _serviceImplementations = ac.getServiceImplementations();
-      final Function1<ServiceImplementation, String> _function_3 = (ServiceImplementation it) -> {
-        StringConcatenation _builder_1 = new StringConcatenation();
-        SPP _spp = it.getSpp();
-        String _name_1 = _spp.getName();
-        _builder_1.append(_name_1, "");
-        _builder_1.append("(this, \"");
-        SPP _spp_1 = it.getSpp();
-        String _name_2 = _spp_1.getName();
-        _builder_1.append(_name_2, "");
-        _builder_1.append("\", IFITEM_");
-        SPP _spp_2 = it.getSpp();
-        String _name_3 = _spp_2.getName();
-        _builder_1.append(_name_3, "");
-        _builder_1.append(")");
-        return _builder_1.toString();
+      final Function1<ServiceImplementation, String> _function_3 = new Function1<ServiceImplementation, String>() {
+        @Override
+        public String apply(final ServiceImplementation it) {
+          StringConcatenation _builder = new StringConcatenation();
+          SPP _spp = it.getSpp();
+          String _name = _spp.getName();
+          _builder.append(_name, "");
+          _builder.append("(this, \"");
+          SPP _spp_1 = it.getSpp();
+          String _name_1 = _spp_1.getName();
+          _builder.append(_name_1, "");
+          _builder.append("\", IFITEM_");
+          SPP _spp_2 = it.getSpp();
+          String _name_2 = _spp_2.getName();
+          _builder.append(_name_2, "");
+          _builder.append(")");
+          return _builder.toString();
+        }
       };
       List<String> _map_3 = ListExtensions.<ServiceImplementation, String>map(_serviceImplementations, _function_3);
       Iterables.<CharSequence>addAll(initList, _map_3);
       EList<Attribute> _attributes = ac.getAttributes();
-      final Function1<Attribute, String> _function_4 = (Attribute it) -> {
-        StringConcatenation _builder_1 = new StringConcatenation();
-        String _name_1 = it.getName();
-        _builder_1.append(_name_1, "");
-        _builder_1.append("(");
-        String _initializerListValue = initHelper.getInitializerListValue(it);
-        _builder_1.append(_initializerListValue, "");
-        _builder_1.append(")");
-        return _builder_1.toString();
+      final Function1<Attribute, String> _function_4 = new Function1<Attribute, String>() {
+        @Override
+        public String apply(final Attribute it) {
+          StringConcatenation _builder = new StringConcatenation();
+          String _name = it.getName();
+          _builder.append(_name, "");
+          _builder.append("(");
+          String _initializerListValue = initHelper.getInitializerListValue(it);
+          _builder.append(_initializerListValue, "");
+          _builder.append(")");
+          return _builder.toString();
+        }
       };
       List<String> _map_4 = ListExtensions.<Attribute, String>map(_attributes, _function_4);
       Iterables.<CharSequence>addAll(initList, _map_4);

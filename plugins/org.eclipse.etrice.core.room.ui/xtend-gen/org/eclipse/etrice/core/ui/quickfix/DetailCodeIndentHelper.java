@@ -43,49 +43,55 @@ public class DetailCodeIndentHelper {
         return editorString;
       }
       Iterable<String> _tail = IterableExtensions.<String>tail(editorLines);
-      final Function1<String, Integer> _function = (String it) -> {
-        return Integer.valueOf(DetailCodeIndentHelper.countIndent(it));
+      final Function1<String, Integer> _function = new Function1<String, Integer>() {
+        @Override
+        public Integer apply(final String it) {
+          return Integer.valueOf(DetailCodeIndentHelper.countIndent(it));
+        }
       };
       List<String> _sortBy = IterableExtensions.<String, Integer>sortBy(_tail, _function);
       String _head = IterableExtensions.<String>head(_sortBy);
       final int minIndent = DetailCodeIndentHelper.countIndent(_head);
       final ArrayList<String> newEditorLines = new ArrayList<String>();
-      final Procedure2<String, Integer> _function_1 = (String line, Integer lineCount) -> {
-        String _xifexpression = null;
-        if (((lineCount).intValue() != 0)) {
-          _xifexpression = (editorIndent + mark);
-        }
-        String front = _xifexpression;
-        int _countIndent = DetailCodeIndentHelper.countIndent(line);
-        int indentCount = (_countIndent - minIndent);
-        String _xifexpression_1 = null;
-        if ((((lineCount).intValue() != 0) && (indentCount > 0))) {
-          StringConcatenation _builder = new StringConcatenation();
-          {
-            IntegerRange _upTo = new IntegerRange(1, indentCount);
-            for(final Integer i : _upTo) {
-              _builder.append("\t");
-            }
+      final Procedure2<String, Integer> _function_1 = new Procedure2<String, Integer>() {
+        @Override
+        public void apply(final String line, final Integer lineCount) {
+          String _xifexpression = null;
+          if (((lineCount).intValue() != 0)) {
+            _xifexpression = (editorIndent + mark);
           }
-          _xifexpression_1 = _builder.toString();
+          String front = _xifexpression;
+          int _countIndent = DetailCodeIndentHelper.countIndent(line);
+          int indentCount = (_countIndent - minIndent);
+          String _xifexpression_1 = null;
+          if ((((lineCount).intValue() != 0) && (indentCount > 0))) {
+            StringConcatenation _builder = new StringConcatenation();
+            {
+              IntegerRange _upTo = new IntegerRange(1, indentCount);
+              for(final Integer i : _upTo) {
+                _builder.append("\t");
+              }
+            }
+            _xifexpression_1 = _builder.toString();
+          }
+          String indent = _xifexpression_1;
+          String noneWSLine = Strings.removeLeadingWhitespace(line);
+          String _xifexpression_2 = null;
+          int _size = editorLines.size();
+          int _minus = (_size - 1);
+          boolean _notEquals = ((lineCount).intValue() != _minus);
+          if (_notEquals) {
+            _xifexpression_2 = mark;
+          }
+          String end = _xifexpression_2;
+          StringConcatenation _builder_1 = new StringConcatenation();
+          _builder_1.append(front, "");
+          _builder_1.append(indent, "");
+          _builder_1.append(noneWSLine, "");
+          _builder_1.append(end, "");
+          String newEditorLine = _builder_1.toString();
+          newEditorLines.add(newEditorLine);
         }
-        String indent = _xifexpression_1;
-        String noneWSLine = Strings.removeLeadingWhitespace(line);
-        String _xifexpression_2 = null;
-        int _size_1 = editorLines.size();
-        int _minus = (_size_1 - 1);
-        boolean _notEquals = ((lineCount).intValue() != _minus);
-        if (_notEquals) {
-          _xifexpression_2 = mark;
-        }
-        String end = _xifexpression_2;
-        StringConcatenation _builder_1 = new StringConcatenation();
-        _builder_1.append(front, "");
-        _builder_1.append(indent, "");
-        _builder_1.append(noneWSLine, "");
-        _builder_1.append(end, "");
-        String newEditorLine = _builder_1.toString();
-        newEditorLines.add(newEditorLine);
       };
       IterableExtensions.<String>forEach(editorLines, _function_1);
       String _newLine_1 = Strings.newLine();

@@ -86,8 +86,11 @@ public class ActorClassGen extends GenericActorClassGenerator {
   
   public void doGenerate(final Root root) {
     EList<ActorClass> _actorClasses = root.getActorClasses();
-    final Function1<ActorClass, ExpandedActorClass> _function = (ActorClass it) -> {
-      return root.getExpandedActorClass(it);
+    final Function1<ActorClass, ExpandedActorClass> _function = new Function1<ActorClass, ExpandedActorClass>() {
+      @Override
+      public ExpandedActorClass apply(final ActorClass it) {
+        return root.getExpandedActorClass(it);
+      }
     };
     List<ExpandedActorClass> _map = ListExtensions.<ActorClass, ExpandedActorClass>map(_actorClasses, _function);
     for (final ExpandedActorClass xpac : _map) {
@@ -135,20 +138,29 @@ public class ActorClassGen extends GenericActorClassGenerator {
     {
       final ActorClass ac = xpac.getActorClass();
       List<Port> _allEndPorts = this._roomHelpers.getAllEndPorts(ac);
-      final Function1<Port, Boolean> _function = (Port p) -> {
-        GeneralProtocolClass _protocol = p.getProtocol();
-        CommunicationType _commType = ((ProtocolClass) _protocol).getCommType();
-        return Boolean.valueOf(Objects.equal(_commType, CommunicationType.EVENT_DRIVEN));
+      final Function1<Port, Boolean> _function = new Function1<Port, Boolean>() {
+        @Override
+        public Boolean apply(final Port p) {
+          GeneralProtocolClass _protocol = p.getProtocol();
+          CommunicationType _commType = ((ProtocolClass) _protocol).getCommType();
+          return Boolean.valueOf(Objects.equal(_commType, CommunicationType.EVENT_DRIVEN));
+        }
       };
       final Iterable<Port> eventPorts = IterableExtensions.<Port>filter(_allEndPorts, _function);
       List<Port> _allEndPorts_1 = this._roomHelpers.getAllEndPorts(ac);
-      final Function1<Port, Boolean> _function_1 = (Port p) -> {
-        return Boolean.valueOf((Objects.equal(((ProtocolClass) p.getProtocol()).getCommType(), CommunicationType.DATA_DRIVEN) && p.isConjugated()));
+      final Function1<Port, Boolean> _function_1 = new Function1<Port, Boolean>() {
+        @Override
+        public Boolean apply(final Port p) {
+          return Boolean.valueOf((Objects.equal(((ProtocolClass) p.getProtocol()).getCommType(), CommunicationType.DATA_DRIVEN) && p.isConjugated()));
+        }
       };
       final Iterable<Port> sendPorts = IterableExtensions.<Port>filter(_allEndPorts_1, _function_1);
       List<Port> _allEndPorts_2 = this._roomHelpers.getAllEndPorts(ac);
-      final Function1<Port, Boolean> _function_2 = (Port p) -> {
-        return Boolean.valueOf((Objects.equal(((ProtocolClass) p.getProtocol()).getCommType(), CommunicationType.DATA_DRIVEN) && (!p.isConjugated())));
+      final Function1<Port, Boolean> _function_2 = new Function1<Port, Boolean>() {
+        @Override
+        public Boolean apply(final Port p) {
+          return Boolean.valueOf((Objects.equal(((ProtocolClass) p.getProtocol()).getCommType(), CommunicationType.DATA_DRIVEN) && (!p.isConjugated())));
+        }
       };
       final Iterable<Port> recvPorts = IterableExtensions.<Port>filter(_allEndPorts_2, _function_2);
       ComponentCommunicationType _commType = ac.getCommType();
@@ -514,30 +526,45 @@ public class ActorClassGen extends GenericActorClassGenerator {
     {
       final ActorClass ac = xpac.getActorClass();
       List<Port> _allEndPorts = this._roomHelpers.getAllEndPorts(ac);
-      final Function1<Port, Boolean> _function = (Port p) -> {
-        GeneralProtocolClass _protocol = p.getProtocol();
-        CommunicationType _commType = ((ProtocolClass) _protocol).getCommType();
-        return Boolean.valueOf(Objects.equal(_commType, CommunicationType.EVENT_DRIVEN));
+      final Function1<Port, Boolean> _function = new Function1<Port, Boolean>() {
+        @Override
+        public Boolean apply(final Port p) {
+          GeneralProtocolClass _protocol = p.getProtocol();
+          CommunicationType _commType = ((ProtocolClass) _protocol).getCommType();
+          return Boolean.valueOf(Objects.equal(_commType, CommunicationType.EVENT_DRIVEN));
+        }
       };
       final Iterable<Port> eventPorts = IterableExtensions.<Port>filter(_allEndPorts, _function);
-      final Function1<Port, Boolean> _function_1 = (Port it) -> {
-        int _multiplicity = it.getMultiplicity();
-        return Boolean.valueOf((_multiplicity != 1));
+      final Function1<Port, Boolean> _function_1 = new Function1<Port, Boolean>() {
+        @Override
+        public Boolean apply(final Port it) {
+          int _multiplicity = it.getMultiplicity();
+          return Boolean.valueOf((_multiplicity != 1));
+        }
       };
       final Iterable<Port> replEventPorts = IterableExtensions.<Port>filter(eventPorts, _function_1);
       List<Port> _allEndPorts_1 = this._roomHelpers.getAllEndPorts(ac);
-      final Function1<Port, Boolean> _function_2 = (Port p) -> {
-        return Boolean.valueOf(((Objects.equal(((ProtocolClass) p.getProtocol()).getCommType(), CommunicationType.DATA_DRIVEN) && p.isConjugated()) && (p.getMultiplicity() == 1)));
+      final Function1<Port, Boolean> _function_2 = new Function1<Port, Boolean>() {
+        @Override
+        public Boolean apply(final Port p) {
+          return Boolean.valueOf(((Objects.equal(((ProtocolClass) p.getProtocol()).getCommType(), CommunicationType.DATA_DRIVEN) && p.isConjugated()) && (p.getMultiplicity() == 1)));
+        }
       };
       final Iterable<Port> sendPorts = IterableExtensions.<Port>filter(_allEndPorts_1, _function_2);
       List<Port> _allEndPorts_2 = this._roomHelpers.getAllEndPorts(ac);
-      final Function1<Port, Boolean> _function_3 = (Port p) -> {
-        return Boolean.valueOf(((Objects.equal(((ProtocolClass) p.getProtocol()).getCommType(), CommunicationType.DATA_DRIVEN) && (!p.isConjugated())) && (p.getMultiplicity() == 1)));
+      final Function1<Port, Boolean> _function_3 = new Function1<Port, Boolean>() {
+        @Override
+        public Boolean apply(final Port p) {
+          return Boolean.valueOf(((Objects.equal(((ProtocolClass) p.getProtocol()).getCommType(), CommunicationType.DATA_DRIVEN) && (!p.isConjugated())) && (p.getMultiplicity() == 1)));
+        }
       };
       final Iterable<Port> recvPorts = IterableExtensions.<Port>filter(_allEndPorts_2, _function_3);
       List<InterfaceItem> _allInterfaceItems = this._roomHelpers.getAllInterfaceItems(ac);
-      final Function1<InterfaceItem, Boolean> _function_4 = (InterfaceItem p) -> {
-        return Boolean.valueOf(((!Objects.equal(this._roomHelpers.getPortClass(p), null)) && (this._roomHelpers.getPortClass(p).getOperations().size() > 0)));
+      final Function1<InterfaceItem, Boolean> _function_4 = new Function1<InterfaceItem, Boolean>() {
+        @Override
+        public Boolean apply(final InterfaceItem p) {
+          return Boolean.valueOf(((!Objects.equal(ActorClassGen.this._roomHelpers.getPortClass(p), null)) && (ActorClassGen.this._roomHelpers.getPortClass(p).getOperations().size() > 0)));
+        }
       };
       final Iterable<InterfaceItem> portsWithOperations = IterableExtensions.<InterfaceItem>filter(_allInterfaceItems, _function_4);
       EObject _eContainer = ac.eContainer();
@@ -588,9 +615,12 @@ public class ActorClassGen extends GenericActorClassGenerator {
       _builder.append("/* simple event ports */");
       _builder.newLine();
       {
-        final Function1<Port, Boolean> _function_5 = (Port it) -> {
-          int _multiplicity = it.getMultiplicity();
-          return Boolean.valueOf((_multiplicity == 1));
+        final Function1<Port, Boolean> _function_5 = new Function1<Port, Boolean>() {
+          @Override
+          public Boolean apply(final Port it) {
+            int _multiplicity = it.getMultiplicity();
+            return Boolean.valueOf((_multiplicity == 1));
+          }
         };
         Iterable<Port> _filter = IterableExtensions.<Port>filter(eventPorts, _function_5);
         for(final Port ep : _filter) {

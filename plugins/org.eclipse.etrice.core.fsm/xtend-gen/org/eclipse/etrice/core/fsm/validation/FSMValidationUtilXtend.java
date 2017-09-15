@@ -100,15 +100,21 @@ public class FSMValidationUtilXtend {
     final HashMap<String, TriggeredTransition> trig2trans = CollectionLiterals.<String, TriggeredTransition>newHashMap();
     final ArrayList<FSMValidationUtilXtend.Result> result = CollectionLiterals.<FSMValidationUtilXtend.Result>newArrayList();
     EList<Transition> _transitions = parent.getTransitions();
-    final Function1<Transition, Boolean> _function = (Transition t) -> {
-      return Boolean.valueOf((((t instanceof TriggeredTransition) && (((TriggeredTransition) t).getFrom() instanceof StateTerminal)) && Objects.equal(myState, ((StateTerminal) ((TriggeredTransition) t).getFrom()).getState())));
+    final Function1<Transition, Boolean> _function = new Function1<Transition, Boolean>() {
+      @Override
+      public Boolean apply(final Transition t) {
+        return Boolean.valueOf((((t instanceof TriggeredTransition) && (((TriggeredTransition) t).getFrom() instanceof StateTerminal)) && Objects.equal(myState, ((StateTerminal) ((TriggeredTransition) t).getFrom()).getState())));
+      }
     };
     Iterable<Transition> _filter = IterableExtensions.<Transition>filter(_transitions, _function);
     for (final Transition t : _filter) {
       EList<Trigger> _triggers = ((TriggeredTransition) t).getTriggers();
-      final Function1<Trigger, Boolean> _function_1 = (Trigger k) -> {
-        Guard _guard = k.getGuard();
-        return Boolean.valueOf(Objects.equal(_guard, null));
+      final Function1<Trigger, Boolean> _function_1 = new Function1<Trigger, Boolean>() {
+        @Override
+        public Boolean apply(final Trigger k) {
+          Guard _guard = k.getGuard();
+          return Boolean.valueOf(Objects.equal(_guard, null));
+        }
       };
       Iterable<Trigger> _filter_1 = IterableExtensions.<Trigger>filter(_triggers, _function_1);
       for (final Trigger k : _filter_1) {
