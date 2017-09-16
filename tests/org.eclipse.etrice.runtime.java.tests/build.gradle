@@ -2,10 +2,6 @@ plugins {
 	id 'java'
 }
 
-repositories {
-	mavenCentral()
-}
-
 dependencies {
 	testCompile project(':runtime:org.eclipse.etrice.runtime.java')
 	testCompile 'junit:junit:4.12'

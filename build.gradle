@@ -12,4 +12,10 @@ ext {
 allprojects {
 	group = 'org.eclipse.etrice'
 	version = '1.0.0-SNAPSHOT'
+	
+	repositories {
+		maven {
+			url 'https://repo.eclipse.org/content/repositories/maven_central/'
+		}
+	}
 }
