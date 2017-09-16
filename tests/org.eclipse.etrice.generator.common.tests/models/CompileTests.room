@@ -20,7 +20,7 @@ RoomModel CompileTests {
 		}
 		Behavior {
 			ctor {
-				"caseId = etUnit_openAll(\".\", \"CompileTests\", \"org.eclipse.etrice.generator.common.tests.CompileTests\", \"CompileTests_case\");"
+				"caseId = etUnit_openAll(\"log\", \"CompileTests\", \"org.eclipse.etrice.generator.common.tests.CompileTests\", \"CompileTests_case\");"
 			}
 			dtor {
 				"etUnit_closeAll(caseId);"

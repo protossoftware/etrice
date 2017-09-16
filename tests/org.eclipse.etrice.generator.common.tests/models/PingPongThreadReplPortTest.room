@@ -54,7 +54,7 @@ RoomModel PingPongThreadReplPortTest {
 		}
 		Behavior {
 			ctor {
-				"caseId = etUnit_openAll(\".\", \"PingPongThreadReplPortTest\", \"org.eclipse.etrice.generator.common.tests.PingPongThreadTestReplPort\", \"PingPongThreadTestReplPort_case\");"
+				"caseId = etUnit_openAll(\"log\", \"PingPongThreadReplPortTest\", \"org.eclipse.etrice.generator.common.tests.PingPongThreadTestReplPort\", \"PingPongThreadTestReplPort_case\");"
 			}
 			dtor {
 				"etUnit_closeAll(caseId);"

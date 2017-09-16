@@ -1,7 +1,37 @@
 subprojects {
-	
 	repositories {
+		maven {
+			name 'Protos Nexus'
+			url 'http://10.8.1.101:8081/repository/maven-public'
+		}
 		mavenCentral()
 	}
 	
+	apply plugin: 'maven-publish'
+	
+	publishing {
+		publications {
+			mavenJava(MavenPublication) {
+				from components.java
+			}
+		}
+		repositories {
+			maven {
+				name 'maven-snapshots'
+				url "http://10.8.1.101:8081/repository/maven-snapshots"
+				credentials {
+					username project.properties.nexusUser
+					password project.properties.nexusPassword
+				}
+			}
+			/*maven {
+				name 'maven-releases'
+				url "http://10.8.1.101:8081/repository/maven-releases"
+				credentials {
+					username properties.nexusUser
+					password properties.nexusPassword
+				}
+			}*/
+		}
+	}
 }

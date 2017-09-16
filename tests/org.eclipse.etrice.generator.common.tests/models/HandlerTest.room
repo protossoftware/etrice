@@ -26,7 +26,7 @@ RoomModel HandlerTest {
 		}
 		Behavior {
 			ctor {
-				"caseId = etUnit_openAll(\".\", \"HandlerTest\", \"org.eclipse.etrice.generator.common.tests.HandlerTest\", \"HandlerTest_case\");"
+				"caseId = etUnit_openAll(\"log\", \"HandlerTest\", \"org.eclipse.etrice.generator.common.tests.HandlerTest\", \"HandlerTest_case\");"
 			}
 			dtor {
 				"etUnit_closeAll(caseId);"

@@ -10,7 +10,7 @@ RoomModel OperationInheritanceTest {
 		}
 		Behavior {
 			ctor {
-				"caseId = etUnit_openAll(\".\", \"OperationInheritanceTest\", \"org.eclipse.etrice.generator.common.tests.OperationInheritanceTest\", \"OperationInheritanceTest_case\");"
+				"caseId = etUnit_openAll(\"log\", \"OperationInheritanceTest\", \"org.eclipse.etrice.generator.common.tests.OperationInheritanceTest\", \"OperationInheritanceTest_case\");"
 				"ctorRefine = 2;"
 			}
 			dtor {

@@ -186,7 +186,7 @@ RoomModel SendingDataTest {
 			StateMachine {
 				Transition init: initial -> tp0 of state0 {
 					action {
-						"caseId = etUnit_openAll(\".\", \"SendingDataTest\", \"org.eclipse.etrice.generator.c.tests.SendingDataTest\", \"SendingDataTest_case\");"
+						"caseId = etUnit_openAll(\"log\", \"SendingDataTest\", \"org.eclipse.etrice.generator.c.tests.SendingDataTest\", \"SendingDataTest_case\");"
 						"EXPECT_ORDER_START(caseId,resultlist,23);"
 						"EXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 1);"
 						"/* send the default values */"

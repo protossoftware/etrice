@@ -32,7 +32,7 @@ RoomModel EnumTest {
 		}
 		Behavior {
 			ctor {
-				"caseId = etUnit_openAll(\".\", \"EnumTest\", \"org.eclipse.etrice.generator.common.tests.EnumTest\", \"EnumTest_case\");"
+				"caseId = etUnit_openAll(\"log\", \"EnumTest\", \"org.eclipse.etrice.generator.common.tests.EnumTest\", \"EnumTest_case\");"
 			}
 			dtor {
 				"etUnit_closeAll(caseId);"

@@ -8,3 +8,8 @@ ext {
 	etGenerator = "$rootDir/plugins/org.eclipse.etrice.generator/etGenerator.gradle"
 	etTest = "$rootDir/tests/org.eclipse.etrice.generator.common.tests/etTest.gradle"
 }
+
+allprojects {
+	group = 'org.eclipse.etrice'
+	version = '1.0.0-SNAPSHOT'
+}

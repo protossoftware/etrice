@@ -19,7 +19,7 @@ using namespace etRuntime;
 
 void MSCFunctionObjectTest::test() {
 	DebuggingService::getInstance().getSyncLogger().setMSC(
-			"MSCFunctionObjectTest", "log/testlog/");
+			"MSCFunctionObjectTest", "log/");
 	DebuggingService::getInstance().getSyncLogger().open();
 	DebuggingService::getInstance().getSyncLogger().setObjectName("main");
 	MSCFunctionObject* obj = new MSCFunctionObject("MSCFunctionObjectTest",

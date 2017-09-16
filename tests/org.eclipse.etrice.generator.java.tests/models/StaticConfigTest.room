@@ -22,7 +22,7 @@ RoomModel StaticConfigTest {
 		}
 		Behavior {
 			ctor {
-				"etUnit_open(\".\", \"StaticConfigTest\");"
+				"etUnit_open(\"log\", \"StaticConfigTest\");"
 				"etUnit_openTestSuite(\"org.eclipse.etrice.generator.java.tests.StaticConfigTest\");"
 			}
 			dtor {

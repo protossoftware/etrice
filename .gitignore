@@ -8,3 +8,4 @@ target/
 xtend-gen/
 build/
 .gradle/
+log/

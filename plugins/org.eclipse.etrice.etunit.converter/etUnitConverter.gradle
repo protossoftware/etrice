@@ -5,15 +5,15 @@ evaluationDependsOn(etUnitConverter)
 /**
  * Creates a tasks that converts etu files to xml files
  * @param name: The name of the new task
- * @param etuFiles: The etu files to be converted
+ * @param options: The options passed to the converter
  */
-ext.createEtUnitConverterTask = { name, etuFiles, suiteName = null ->
+ext.createEtUnitConverterTask = { name, etuFiles, options = [] ->
 	def xmlFiles = etuFiles.collect { it.replace('.etu', '.xml') }
 
 	return tasks.create(name: name, type: JavaExec, dependsOn: "$etUnitConverter:classes") {
 		main = project(etUnitConverter).mainClassName
 		classpath = project(etUnitConverter).sourceSets.main.runtimeClasspath
-		if(suiteName != null) args '-suite', suiteName
+		args options
 		args etuFiles
 		inputs.files etuFiles
 		outputs.files xmlFiles

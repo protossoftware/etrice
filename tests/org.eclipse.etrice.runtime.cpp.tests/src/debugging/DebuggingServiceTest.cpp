@@ -32,7 +32,7 @@ void DebuggingServiceTest::testLogging() {
 	Port port1(&actor1, "TestPort1");
 	Port port2(&actor2, "TestPort2");
 	DebuggingService& dbgSvc = DebuggingService::getInstance();
-	dbgSvc.getAsyncLogger().setMSC("DebuggingServiceTest", "log/testlog/");
+	dbgSvc.getAsyncLogger().setMSC("DebuggingServiceTest", "log/");
 	dbgSvc.getAsyncLogger().open();
 
 	InterfaceItemBase::connect(&subSystem, port1.getInstancePath(),

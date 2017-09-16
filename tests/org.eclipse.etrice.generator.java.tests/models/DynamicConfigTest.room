@@ -49,7 +49,7 @@ RoomModel DynamicConfigTest {
 		}
 		Behavior {
 			ctor {
-				"etUnit_open(\".\", \"DynamicConfigTest\");"
+				"etUnit_open(\"log\", \"DynamicConfigTest\");"
 				"etUnit_openTestSuite(\"org.eclipse.etrice.generator.java.tests.DynamicConfigTest\");"
 				"caseId = etUnit_openTestCase(\"DynamicConfigTest_case_Testee_ac\");"
 			}

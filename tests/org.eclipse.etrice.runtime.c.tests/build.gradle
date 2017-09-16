@@ -17,13 +17,16 @@ model {
 				}
 				lib project: ':runtime:org.eclipse.etrice.runtime.c', library: 'etrice_runtime_c', linkage: 'static'
 			}
+			binaries {
+				all { cppCompiler.args '-g3' }
+			}
 		}
 	}
 }
 
 def exeFile = "$buildDir/exe/etrice_runtime_c_tests/etrice_runtime_c_tests"
-def etuFileRuntimeTest = 'log/testlog/TestCRuntime.etu'
-def etuFileEtUnitTest = 'log/testlog/TestEtUnitSpecial.etu'
+def etuFileRuntimeTest = 'log/TestCRuntime.etu'
+def etuFileEtUnitTest = 'log/TestEtUnitSpecial.etu'
 
 clean.delete 'log'
 
@@ -32,7 +35,7 @@ task run(type: Exec, dependsOn: assemble, group: 'verification') {
 	inputs.file exeFile
 	outputs.files etuFileRuntimeTest, etuFileEtUnitTest
 	
-	doFirst { file('log/testlog').mkdirs() }
+	doFirst { file('log').mkdirs() }
 }
 
 createEtUnitConverterTask('convert', [etuFileRuntimeTest, etuFileEtUnitTest])

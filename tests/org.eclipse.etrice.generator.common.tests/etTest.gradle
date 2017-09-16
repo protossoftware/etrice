@@ -1,7 +1,7 @@
 apply from: etGenerator
 apply from: etUnitConverter
 
-def outputDir = 'output'
+def outputDir = 'log'
 def srcGenDir = 'src-gen'
 
 clean.delete srcGenDir, outputDir
@@ -34,7 +34,7 @@ ext.createTest = { lang, name, models, options = [] ->
 	def suiteName = "${project.name}.$testNameCap"
 	def genDir = "$srcGenDir/$testName"
 	def workingDir = "$outputDir/$testName"
-	def etuFile = "$workingDir/${nameCap}.etu"
+	def etuFile = "$workingDir/log/${nameCap}.etu"
 	
 	def generateTask = createGeneratorTask("generate$testNameCap", lang, models, genDir, options)
 	generateTask.environment 'etModellib', "org.eclipse.etrice.modellib.$lang"
@@ -101,7 +101,7 @@ ext.createTest = { lang, name, models, options = [] ->
 	
 	runTask.doFirst { file("$workingDir/log").mkdirs() }
 	
-	def convertTask = createEtUnitConverterTask("convert$testNameCap", etuFile, suiteName)
+	def convertTask = createEtUnitConverterTask("convert$testNameCap", etuFile, ['-suite', suiteName])
 	convertTask.dependsOn runTask
 	
 	check.dependsOn tasks.create(name: testName, dependsOn: convertTask, group: 'verification')

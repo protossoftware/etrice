@@ -14,3 +14,6 @@ dependencies {
 sourceSets.test.java.srcDirs = ['src']
 
 test.reports.html.enabled = false
+test.reports.junitXml.destination = file('log')
+
+clean.delete 'log'

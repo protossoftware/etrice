@@ -18,12 +18,15 @@ model {
 				lib project: ':runtime:org.eclipse.etrice.runtime.cpp', library: 'etrice_runtime_cpp', linkage: 'static'
 				lib project: ':runtime:org.eclipse.etrice.runtime.c', library: 'etrice_runtime_c', linkage: 'static'
 			}
+			binaries {
+				all { cppCompiler.args '-g3' }
+			}
 		}
 	}
 }
 
 def exeFile = "$buildDir/exe/etrice_runtime_cpp_tests/etrice_runtime_cpp_tests"
-def etuFile = 'log/testlog/TestCppRuntime.etu'
+def etuFile = 'log/TestCppRuntime.etu'
 
 clean.delete 'log'
 
@@ -32,7 +35,7 @@ task run(type: Exec, dependsOn: assemble, group: 'verification') {
 	inputs.file exeFile
 	outputs.files etuFile
 	
-	doFirst { file('log/testlog').mkdirs() }
+	doFirst { file('log').mkdirs() }
 }
 
 createEtUnitConverterTask('convert', etuFile)

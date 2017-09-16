@@ -45,7 +45,7 @@ RoomModel InitializationTest {
 		}
 		Behavior {
 			ctor {
-				"caseId = etUnit_openAll(\".\", \"InitializationTest\", \"org.eclipse.etrice.generator.cpp.tests.InitializationTest\", \"InitializationTest_case\");"
+				"caseId = etUnit_openAll(\"log\", \"InitializationTest\", \"org.eclipse.etrice.generator.cpp.tests.InitializationTest\", \"InitializationTest_case\");"
 				"testInitValues(caseId);"
 			}
 			dtor {

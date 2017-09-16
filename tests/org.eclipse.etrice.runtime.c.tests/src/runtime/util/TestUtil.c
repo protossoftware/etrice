@@ -49,7 +49,7 @@ static void TestRandomGenerator (etInt16 id) {
 #endif
 
 void TestUtil_runSuite(void){
-	etUnit_openTestSuite("TestUtil");
+	etUnit_openTestSuite("org.eclipse.etrice.runtime.c.TestUtil");
 
 #ifdef ET_FLOAT64
 	ADD_TESTCASE(TestRandomGenerator);
