@@ -1,3 +1,5 @@
+import static org.apache.tools.ant.taskdefs.condition.Os.*
+
 plugins {
 	id 'c'
 }
@@ -18,7 +20,10 @@ model {
 				lib project: ':runtime:org.eclipse.etrice.runtime.c', library: 'etrice_runtime_c', linkage: 'static'
 			}
 			binaries {
-				all { cppCompiler.args '-g3' }
+				all {
+					cCompiler.args '-g3'
+					if(isFamily(FAMILY_UNIX)) { linker.args '-lpthread', '-lrt', '-lm' }
+				}
 			}
 		}
 	}

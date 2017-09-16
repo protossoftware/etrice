@@ -1,3 +1,5 @@
+import static org.apache.tools.ant.taskdefs.condition.Os.*
+
 apply from: etGenerator
 apply from: etUnitConverter
 
@@ -61,6 +63,7 @@ ext.createTest = { lang, name, models, options = [] ->
 					binaries.all { 
 						cCompiler.args '-g3'
 						cppCompiler.args '-g3'
+						if(isFamily(FAMILY_UNIX)) { linker.args '-lpthread', '-lrt', '-lm' }
 					}
 				}
 			}

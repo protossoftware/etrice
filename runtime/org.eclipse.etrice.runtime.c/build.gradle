@@ -5,7 +5,6 @@ plugins {
 }
 
 def platform = ''
-
 if(isFamily(FAMILY_WINDOWS)) { platform = 'MT_WIN_MinGW' }
 else if(isFamily(FAMILY_UNIX)) { platform = 'MT_POSIX_GENERIC_GCC' }
 
