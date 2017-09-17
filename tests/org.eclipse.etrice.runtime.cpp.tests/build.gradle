@@ -43,7 +43,7 @@ task run(type: Exec, dependsOn: assemble, group: 'verification') {
 	doFirst { file('log').mkdirs() }
 }
 
-createEtUnitConverterTask('convert', etuFile)
+createEtUnitConverterTask('convert', [etuFile])
 convert.dependsOn run
 
 check.dependsOn convert

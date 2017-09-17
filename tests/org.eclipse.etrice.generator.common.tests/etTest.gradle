@@ -104,7 +104,7 @@ ext.createTest = { lang, name, models, options = [] ->
 	
 	runTask.doFirst { file("$workingDir/log").mkdirs() }
 	
-	def convertTask = createEtUnitConverterTask("convert$testNameCap", etuFile, ['-suite', suiteName])
+	def convertTask = createEtUnitConverterTask("convert$testNameCap", [etuFile], ['-suite', suiteName])
 	convertTask.dependsOn runTask
 	
 	check.dependsOn tasks.create(name: testName, dependsOn: convertTask, group: 'verification')

@@ -5,6 +5,7 @@ evaluationDependsOn(etUnitConverter)
 /**
  * Creates a tasks that converts etu files to xml files
  * @param name: The name of the new task
+ * @param etuFiles: A list of etu files
  * @param options: The options passed to the converter
  */
 ext.createEtUnitConverterTask = { name, etuFiles, options = [] ->
@@ -17,5 +18,7 @@ ext.createEtUnitConverterTask = { name, etuFiles, options = [] ->
 		args etuFiles
 		inputs.files etuFiles
 		outputs.files xmlFiles
+		inputs.files.each { println it }
+		outputs.files.each { println it }
 	}
 }

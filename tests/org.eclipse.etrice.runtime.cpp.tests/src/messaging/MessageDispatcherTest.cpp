@@ -15,6 +15,8 @@
 #include "common/messaging/MessageDispatcher.h"
 #include "common/messaging/MessageService.h"
 #include "common/messaging/StaticMessageMemory.h"
+#include "common/messaging/MessageServiceController.h"
+#include "common/messaging/RTServices.h"
 
 using namespace etRuntime;
 
@@ -70,8 +72,11 @@ void MessageDispatcherTest::testDispatching() {
 	const char *failMsg = "MessageDispatcher dispatching test failed";
 
 	// Test dispatching Messages
+	MessageServiceController& msgSvcCtrl = RTServices::getInstance().getMsgSvcCtrl();
 	MessageService msgSvc(NULL, IMessageService::BLOCKED, 1, 2,
 				"Test MessageService", new StaticMessageMemory(NULL, "TestMemory", 64, 100));
+	msgSvcCtrl.addMsgSvc(msgSvc);
+	msgSvcCtrl.start();
 	MessageDispatcher msgDisp(&msgSvc, Address(1, 2, 0), "TestMessageDispatcher");
 	Address addr1 = msgDisp.getFreeAddress();
 	Address addr2 = msgDisp.getFreeAddress();
@@ -133,6 +138,8 @@ void MessageDispatcherTest::testDispatching() {
 	msgDisp.removePollingMessageReceiver(recv1);
 	msgDisp.removePollingMessageReceiver(recv2);
 	msgDisp.removePollingMessageReceiver(recv3);
+	msgSvcCtrl.stop();
+	msgSvcCtrl.removeMsgSvc(msgSvc);
 }
 
 void MessageDispatcherTest::runAllTestCases() {

@@ -3,10 +3,10 @@ plugins {
 }
 
 dependencies {
-	compile "org.eclipse.platform:org.eclipse.core.runtime:$core_version"
-	compile "org.eclipse.emf:org.eclipse.emf.common:$emf_version"
-	compile "org.eclipse.emf:org.eclipse.emf.ecore:$emf_version"
-	compile "org.eclipse.emf:org.eclipse.emf.ecore.xmi:$emf_version"
+	compile "org.eclipse.platform:org.eclipse.core.runtime:$core_runtime_version"
+	compile "org.eclipse.emf:org.eclipse.emf.common:$xtext_version"
+	compile "org.eclipse.emf:org.eclipse.emf.ecore:$xtext_version"
+	compile "org.eclipse.emf:org.eclipse.emf.ecore.xmi:$xtext_version"
 }
 
 sourceSets {
