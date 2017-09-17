@@ -2,7 +2,7 @@ plugins {
 	id 'cpp'
 }
 
-apply from: etGenerator
+apply from: "$rootDir/gradle/etGenerator.gradle"
 
 def models = [
 	'model/TimingService.room'

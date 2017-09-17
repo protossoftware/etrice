@@ -1,7 +1,7 @@
 import static org.apache.tools.ant.taskdefs.condition.Os.*
 
-apply from: etGenerator
-apply from: etUnitConverter
+apply from: "$rootDir/gradle/etGenerator.gradle"
+apply from: "$rootDir/gradle/etUnitConverter.gradle"
 
 def outputDir = 'log'
 def srcGenDir = 'src-gen'

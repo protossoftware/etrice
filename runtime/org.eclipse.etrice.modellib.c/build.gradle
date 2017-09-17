@@ -2,7 +2,7 @@ plugins {
 	id 'c'
 }
 
-apply from: etGenerator
+apply from: "$rootDir/gradle/etGenerator.gradle"
 
 def models = [
 	'model/PInterrupt.room',

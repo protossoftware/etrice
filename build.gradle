@@ -3,10 +3,6 @@ ext {
 	core_resources_version = '3.11.1'
 	xtext_version = '2.12.0'
 	commons_io_version = '2.5'
-
-	etUnitConverter = "$rootDir/plugins/org.eclipse.etrice.etunit.converter/etUnitConverter.gradle"
-	etGenerator = "$rootDir/plugins/org.eclipse.etrice.generator/etGenerator.gradle"
-	etTest = "$rootDir/tests/org.eclipse.etrice.generator.common.tests/etTest.gradle"
 }
 
 allprojects {

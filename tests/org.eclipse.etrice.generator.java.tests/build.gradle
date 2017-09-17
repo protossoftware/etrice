@@ -2,7 +2,7 @@ plugins {
 	id 'java-base'
 }
 
-apply from: etTest
+apply from: "$rootDir/gradle/etTest.gradle"
 
 def genericPhysical = '../org.eclipse.etrice.generator.common.tests/models/GenericPhysical.etphys'
 

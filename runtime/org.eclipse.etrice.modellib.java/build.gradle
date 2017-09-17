@@ -2,7 +2,7 @@ plugins {
 	id 'java'
 }
 
-apply from: etGenerator
+apply from: "$rootDir/gradle/etGenerator.gradle"
 
 def models = [
 	'model/ALogService.room',
