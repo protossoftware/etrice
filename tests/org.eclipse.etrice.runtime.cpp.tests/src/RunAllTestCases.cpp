@@ -35,7 +35,7 @@
 
 int main() {
 
-	etUnit_open("log/testlog", "TestCppRuntime");
+	etUnit_open("log", "TestCppRuntime");
 
 	// Test containers
 	StaticArrayTest staticArrayTest;

@@ -23,7 +23,7 @@ using namespace etRuntime;
 class DebuggingServiceTest: public etTestSuite {
 public:
 	DebuggingServiceTest() :
-			etTestSuite("DebuggingServiceTest") {
+			etTestSuite("org.eclipse.etrice.runtime.cpp.tests.DebuggingServiceTest") {
 	}
 
 protected:

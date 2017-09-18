@@ -1,0 +1,97 @@
+RoomModel DynamicActorTest4 {
+	
+	import room.basic.test.* from "../../../runtime/org.eclipse.etrice.modellib.java/model/Tests.room"
+	import room.basic.types.* from "../../../runtime/org.eclipse.etrice.modellib.java/model/Types.room"
+	
+	ActorClass Appl {
+		@TestInstance
+		Structure {
+			ActorRef cont: Container
+		}
+		Behavior { }
+	}
+	
+	ActorClass Container {
+		Structure {
+			conjugated Port p0: PC
+			Attribute caseId: int32
+			optional ActorRef opt: Optional
+			
+			Binding p0 and opt.p0
+		}
+		Behavior {
+			ctor {
+				"caseId = etUnit_openAll(\"log\", \"DynamicActorTest4\", \"org.eclipse.etrice.generator.java.tests.DynamicActorTest4\", \"DynamicActorTest4_case\");"
+			}
+			dtor {
+				"etUnit_closeAll(caseId);"
+			}
+			
+			// this method prints the passed message and then dumps the object tree consisting of actors and ports
+			Operation dumpTree(msg: string) {
+				"System.out.println(msg);"
+				"System.out.println(((org.eclipse.etrice.runtime.java.messaging.RTObject)getRoot()).toStringRecursive());"
+			}
+			
+			StateMachine {
+				Transition init: initial -> CreateOptional { }
+				Transition tr0: CreateOptional -> Done {
+					triggers {
+						<hello: p0>
+					}
+					action {
+						"System.out.println(txt+\"\\n\");"
+						"opt.destroyOptionalActor();"
+						"dumpTree(\"after deletion of Optional2\");"
+					}
+				}
+				State CreateOptional {
+					entry {
+						"opt.createOptionalActor(\"Optional\", getThread());"
+						"p0.sayHello();"
+					}
+				}
+				State Done {
+					entry {
+						"etUnit_testFinished(caseId);"
+					}
+				}
+			}
+		}
+	}
+	
+	// the class that is referenced as optional by the Container
+	// It has an external end port and implements the behavior itself
+	ActorClass Optional {
+		Interface {
+			Port p0: PC
+		}
+		Structure {
+			external Port p0
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> Ready { }
+				Transition tr0: Ready -> Ready {
+					triggers {
+						<sayHello: p0>
+					}
+					action {
+						"p0.hello(\"this is AC1, instance \"+getInstancePath());"
+					}
+				}
+				State Ready
+			}
+		}
+	}
+	
+	// a simple protocol that is used to demonstrate that actors are connected
+	ProtocolClass PC {
+		incoming {
+			Message sayHello()
+		}
+		outgoing {
+			Message hello(txt: string)
+		}
+	}
+}

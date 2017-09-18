@@ -1,0 +1,17 @@
+ext {
+	core_runtime_version = '3.12.0'
+	core_resources_version = '3.11.1'
+	xtext_version = '2.12.0'
+	commons_io_version = '2.5'
+}
+
+allprojects {
+	group = 'org.eclipse.etrice'
+	version = '1.1.1-SNAPSHOT'
+	
+	repositories {
+		maven {
+			url 'https://repo.eclipse.org/content/repositories/maven_central/'
+		}
+	}
+}

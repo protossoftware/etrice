@@ -92,7 +92,7 @@ void TestEtMessageQueue_testMassiveMessaging(etInt16 id){
 }
 
 void TestEtMessageQueue_runSuite(void){
-	etUnit_openTestSuite("TestEtMessageQueue");
+	etUnit_openTestSuite("org.eclipse.etrice.runtime.c.tests.TestEtMessageQueue");
 	ADD_TESTCASE(TestEtMessageQueue_testPushPop);
 	ADD_TESTCASE(TestEtMessageQueue_testMassiveMessaging);
 	etUnit_closeTestSuite();

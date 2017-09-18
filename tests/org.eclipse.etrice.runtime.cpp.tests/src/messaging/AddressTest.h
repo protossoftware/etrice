@@ -20,7 +20,7 @@ class AddressTest: public etTestSuite {
 
 public:
 	AddressTest(void) :
-			etTestSuite("AddressTest") {
+			etTestSuite("org.eclipse.etrice.runtime.cpp.tests.AddressTest") {
 	}
 
 protected:

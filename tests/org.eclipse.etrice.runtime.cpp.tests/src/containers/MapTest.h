@@ -20,7 +20,7 @@ class MapTest : public etTestSuite {
 
 public:
 	MapTest() :
-		etTestSuite("MapTest"){
+		etTestSuite("org.eclipse.etrice.runtime.cpp.tests.MapTest"){
 	}
 
 protected:

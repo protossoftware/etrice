@@ -1,0 +1,49 @@
+import static org.apache.tools.ant.taskdefs.condition.Os.*
+
+plugins {
+	id 'cpp'
+}
+
+apply from: "$rootDir/gradle/etUnitConverter.gradle"
+
+model {
+	components {
+		etrice_runtime_cpp_tests(NativeExecutableSpec) {
+			sources.cpp {
+				source {
+					srcDirs = ['src']
+					include '**/*.cpp'
+				}
+				exportedHeaders {
+					srcDirs = ['src']
+				}
+				lib project: ':runtime:org.eclipse.etrice.runtime.cpp', library: 'etrice_runtime_cpp', linkage: 'static'
+				lib project: ':runtime:org.eclipse.etrice.runtime.c', library: 'etrice_runtime_c', linkage: 'static'
+			}
+			binaries {
+				all {
+					cppCompiler.args '-g3'
+					if(isFamily(FAMILY_UNIX)) { linker.args '-lpthread', '-lrt', '-lm' }
+				}
+			}
+		}
+	}
+}
+
+def exeFile = "$buildDir/exe/etrice_runtime_cpp_tests/etrice_runtime_cpp_tests"
+def etuFile = 'log/TestCppRuntime.etu'
+
+clean.delete 'log'
+
+task run(type: Exec, dependsOn: assemble, group: 'verification') {
+	commandLine exeFile
+	inputs.file exeFile
+	outputs.files etuFile
+	
+	doFirst { file('log').mkdirs() }
+}
+
+createEtUnitConverterTask('convert', [etuFile])
+convert.dependsOn run
+
+check.dependsOn convert

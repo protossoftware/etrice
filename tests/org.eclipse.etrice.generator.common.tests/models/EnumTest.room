@@ -1,7 +1,7 @@
 RoomModel EnumTest {
 
-	import room.basic.test.* from "Tests.room"
-	import room.basic.types.* from "Types.room"
+	import room.basic.types.* from "../../../runtime/${etModellib}/model/Types.room"
+	import room.basic.test.* from "../../../runtime/${etModellib}/model/Tests.room"
 
 	ActorClass EnumTest_Top {
 		@TestInstance
@@ -32,7 +32,7 @@ RoomModel EnumTest {
 		}
 		Behavior {
 			ctor {
-				"caseId = etUnit_openAll(\"log/testlog\", \"EnumTest\", \"org.eclipse.etrice.generator.common.tests.EnumTest\", \"EnumTest_case\");"
+				"caseId = etUnit_openAll(\"log\", \"EnumTest\", \"org.eclipse.etrice.generator.common.tests.EnumTest\", \"EnumTest_case\");"
 			}
 			dtor {
 				"etUnit_closeAll(caseId);"

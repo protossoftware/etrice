@@ -1,0 +1,22 @@
+plugins {
+	id 'java'
+}
+
+dependencies {
+	compile project(':plugins:org.eclipse.etrice.core.common')
+	compile project(':plugins:org.eclipse.etrice.core.room')
+	compile project(':plugins:org.eclipse.etrice.core.genmodel')
+	compile project(':plugins:org.eclipse.etrice.core.genmodel.fsm')
+	compile project(':plugins:org.eclipse.etrice.core.config')
+	compile project(':plugins:org.eclipse.etrice.generator')
+	
+	compile "org.eclipse.xtext:org.eclipse.xtext:$xtext_version"
+}
+
+sourceSets {
+	main {
+		java {
+			srcDirs = ['src', 'xtend-gen']
+		}
+	}
+}

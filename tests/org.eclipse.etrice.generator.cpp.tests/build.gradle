@@ -1,0 +1,10 @@
+plugins {
+	id 'cpp'
+}
+
+apply from: "$rootDir/gradle/etTest.gradle"
+
+def genericPhysical = '../org.eclipse.etrice.generator.common.tests/models/GenericPhysical.etphys'
+
+createTest('cpp', 'sendingDataTest', ['models/SendingDataTest.room', genericPhysical])
+createTest('cpp', 'initializationTest', ['models/InitializationTest.room', genericPhysical])

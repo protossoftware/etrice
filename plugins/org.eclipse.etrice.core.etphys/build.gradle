@@ -1,0 +1,19 @@
+plugins {
+	id 'java'
+}
+
+dependencies {
+	compile project(':plugins:org.eclipse.etrice.core.common')
+}
+
+sourceSets {
+	main {
+		java {
+			srcDirs = ['src', 'src-gen', 'xtend-gen']
+		}
+		resources {
+			srcDirs = ['src', 'src-gen']
+			include '**/*.xtextbin', '**/*.tokens'
+		}
+	}
+}

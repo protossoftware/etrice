@@ -1,0 +1,30 @@
+plugins {
+	id 'application'
+}
+
+dependencies {
+	compile project(':plugins:org.eclipse.etrice.core.room')
+	compile project(':plugins:org.eclipse.etrice.core.etphys')
+	compile project(':plugins:org.eclipse.etrice.core.etmap')
+	compile project(':plugins:org.eclipse.etrice.core.fsm')
+	compile project(':plugins:org.eclipse.etrice.core.genmodel')
+	compile project(':plugins:org.eclipse.etrice.generator')
+	compile project(':plugins:org.eclipse.etrice.generator.fsm')
+	compile project(':plugins:org.eclipse.etrice.generator.config')
+	compile project(':plugins:org.eclipse.etrice.generator.doc')
+	compile project(':plugins:org.eclipse.etrice.generator.gnuplot')
+	
+	compile "org.eclipse.xtext:org.eclipse.xtext:$xtext_version"
+}
+
+sourceSets {
+	main {
+		java {
+			srcDirs = ['src', 'xtend-gen']
+		}
+	}
+}
+
+mainClassName = 'org.eclipse.etrice.generator.c.Main'
+
+distTar.enabled = false

@@ -20,7 +20,7 @@ class SetTest : public etTestSuite {
 
 public:
 	SetTest() :
-		etTestSuite("SetTest"){
+		etTestSuite("org.eclipse.etrice.runtime.cpp.tests.SetTest"){
 	}
 
 protected:

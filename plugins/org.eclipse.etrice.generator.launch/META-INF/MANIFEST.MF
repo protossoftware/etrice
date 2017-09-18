@@ -19,6 +19,7 @@ Require-Bundle: org.eclipse.etrice.generator;bundle-version="1.1.1",
  org.eclipse.core.variables,
  org.eclipse.jdt.launching,
  org.eclipse.ui.ide
+Import-Package: org.eclipse.xtext.xbase.lib
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-Vendor: Eclipse eTrice

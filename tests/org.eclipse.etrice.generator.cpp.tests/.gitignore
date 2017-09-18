@@ -1,6 +1,1 @@
-bin
-models
-output
-results
-src-gen
-log
+src-gen/

@@ -1,0 +1,111 @@
+import static org.apache.tools.ant.taskdefs.condition.Os.*
+
+apply from: "$rootDir/gradle/etGenerator.gradle"
+apply from: "$rootDir/gradle/etUnitConverter.gradle"
+
+def outputDir = 'log'
+def srcGenDir = 'src-gen'
+
+clean.delete srcGenDir, outputDir
+
+def getMainClass(String genDir) {
+	// search for SubSystemRunner java file
+	def mainFile = fileTree(genDir, { include '**/*Runner.java' }).getSingleFile()
+	// relativize path to generation directory
+	def relPath = file(genDir).toPath().relativize(mainFile.toPath()).normalize().toString()
+	// remove '.java' at the end
+	def path = relPath.substring(0, relPath.length() - 5)
+	// replace all separators with '.'
+	def mainClass = path.replace(File.separatorChar, '.' as char)
+	return mainClass
+}
+
+/**
+ * Creates all needed tasks for one test execution
+ * @param lang: The eTrice generator type ('c', 'cpp', 'java')
+ * @param name: The test name starting with a lower case letter
+ * @param models: Models that are passed to the eTrice generator
+ * @param options: Options that are passed to the eTrice generator
+ */
+ext.createTest = { lang, name, models, options = [] ->
+
+	def nameCap = name.capitalize()
+	def langCap = lang.capitalize()
+	def testName = "$name$langCap"
+	def testNameCap = testName.capitalize()
+	def suiteName = "${project.name}.$testNameCap"
+	def genDir = "$srcGenDir/$testName"
+	def workingDir = "$outputDir/$testName"
+	def etuFile = "$workingDir/log/${nameCap}.etu"
+	
+	def generateTask = createGeneratorTask("generate$testNameCap", lang, models, genDir, options)
+	generateTask.environment 'etModellib', "org.eclipse.etrice.modellib.$lang"
+		
+	def runTask
+	
+	if(lang == 'c' || lang == 'cpp') {
+		model {
+			components {
+				"$testName"(NativeExecutableSpec) {
+					sources."$lang" {
+						builtBy generateTask
+						source {
+							srcDirs = [genDir]
+							include "**/*.$lang"
+						}
+						exportedHeaders {
+							srcDirs = [genDir]
+						}
+						lib project: ":runtime:org.eclipse.etrice.modellib.$lang", library: "etrice_modellib_$lang", linkage: 'static'
+						if(lang == 'cpp') lib project: ':runtime:org.eclipse.etrice.runtime.cpp', library: 'etrice_runtime_cpp', linkage: 'static'
+						lib project: ':runtime:org.eclipse.etrice.runtime.c', library: 'etrice_runtime_c', linkage: 'static'
+					}
+					binaries.all { 
+						cCompiler.args '-g3'
+						cppCompiler.args '-g3'
+						if(isFamily(FAMILY_UNIX)) { linker.args '-lpthread', '-lrt', '-lm' }
+					}
+				}
+			}
+		}
+		
+		def exeFile = "$buildDir/exe/$testName/$testName"
+		runTask = tasks.create(name: "run$testNameCap", type: Exec) {
+			dependsOn "${testName}Executable"
+			commandLine exeFile, '-run_as_test'
+			inputs.file exeFile
+			outputs.file etuFile
+			it.workingDir = workingDir
+		}
+	}
+	
+	else if(lang == 'java') {
+		def testSourceSet = sourceSets.create(name) {
+			java.srcDirs = [genDir]
+		}
+		
+		dependencies {
+			add "${name}Compile", project(':runtime:org.eclipse.etrice.modellib.java')
+			add "${name}Compile", project(':runtime:org.eclipse.etrice.runtime.java')
+		}
+		
+		tasks.getByName("compile${nameCap}Java").dependsOn generateTask
+		
+		runTask = tasks.create(name: "run$testNameCap", type: JavaExec) {
+			dependsOn "${name}Classes"
+			classpath = testSourceSet.runtimeClasspath
+			args '-run_as_test'
+			outputs.file etuFile
+			it.workingDir = workingDir
+			
+			doFirst { main = getMainClass(genDir) }
+		}
+	}
+	
+	runTask.doFirst { file("$workingDir/log").mkdirs() }
+	
+	def convertTask = createEtUnitConverterTask("convert$testNameCap", [etuFile], ['-suite', suiteName])
+	convertTask.dependsOn runTask
+	
+	check.dependsOn tasks.create(name: testName, dependsOn: convertTask, group: 'verification')
+}

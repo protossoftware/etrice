@@ -1,10 +1,10 @@
 RoomModel DataDrivenTest {
 	
-	import room.basic.test.* from "Tests.room"
-	import room.basic.types.* from "Types.room"
-	import room.basic.service.timing.* from "TimingService.room"
+	import room.basic.types.* from "../../../runtime/${etModellib}/model/Types.room"
+	import room.basic.test.* from "../../../runtime/${etModellib}/model/Tests.room"
+	import room.basic.service.timing.* from "../../../runtime/${etModellib}/model/TimingService.room"
 	
-	SubSystemClass SubSystem_DataDriven {
+	SubSystemClass SubSystem_DataDrivenTest {
 		@TestInstance
 		ActorRef appl: Appl
 		ActorRef timing: ATimingService
@@ -68,7 +68,7 @@ RoomModel DataDrivenTest {
 		}
 		Behavior {
 			ctor {
-				"caseId = etUnit_openAll(\"log/testlog\", \"DataDrivenTest\", \"org.eclipse.etrice.generator.common.tests.DataDrivenTest\", \"DataDrivenTest_case\");"
+				"caseId = etUnit_openAll(\"log\", \"DataDrivenTest\", \"org.eclipse.etrice.generator.common.tests.DataDrivenTest\", \"DataDrivenTest_case\");"
 			}
 			dtor {
 				"etUnit_closeAll(caseId);"

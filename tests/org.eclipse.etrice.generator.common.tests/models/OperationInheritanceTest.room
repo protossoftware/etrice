@@ -1,8 +1,7 @@
 RoomModel OperationInheritanceTest {
 
-	import room.basic.types.* from "Types.room"
-
-	import room.basic.test.* from "Tests.room"
+	import room.basic.types.* from "../../../runtime/${etModellib}/model/Types.room"
+	import room.basic.test.* from "../../../runtime/${etModellib}/model/Tests.room"
 
 	async ActorClass OperationInheritanceTest extends BaseActor {
 		@TestInstance
@@ -11,7 +10,7 @@ RoomModel OperationInheritanceTest {
 		}
 		Behavior {
 			ctor {
-				"caseId = etUnit_openAll(\"log/testlog\", \"OperationInheritanceTest\", \"org.eclipse.etrice.generator.common.tests.OperationInheritanceTest\", \"OperationInheritanceTest_case\");"
+				"caseId = etUnit_openAll(\"log\", \"OperationInheritanceTest\", \"org.eclipse.etrice.generator.common.tests.OperationInheritanceTest\", \"OperationInheritanceTest_case\");"
 				"ctorRefine = 2;"
 			}
 			dtor {

@@ -80,7 +80,7 @@ public class EtUnitTest extends TestCase {
 	}
 
 	public void testSuite() throws IOException {
-		etUnit_open(null, "test");
+		etUnit_open("log", "test");
 		etUnit_openTestSuite("TestEtUnit");
 		
 		int id = etUnit_openTestCase("doTestExpect");
@@ -96,7 +96,7 @@ public class EtUnitTest extends TestCase {
 		
 		ArrayList<String> lines = new ArrayList<String>();
 		{
-			FileReader fr = new FileReader("test.etu");
+			FileReader fr = new FileReader("log/test.etu");
 			BufferedReader br = new BufferedReader(fr);
 			String line;
 			while ((line=br.readLine())!=null)

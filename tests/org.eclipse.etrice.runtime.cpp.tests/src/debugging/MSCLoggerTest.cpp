@@ -19,7 +19,7 @@ using namespace etRuntime;
 void MSCLoggerTest::testLogger() {
 
 	MSCLogger logger;
-	logger.setMSC("MSCTest", "log/testlog/");
+	logger.setMSC("MSCTest", "log/");
 	logger.open();
 	logger.addMessageAsyncOut("Source", "Target", "MessageAsync");
 	logger.addMessageAsyncIn("Source", "Target", "MessageAsync");

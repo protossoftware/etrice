@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>org.eclipse.etrice</groupId>
+	<artifactId>java-generator</artifactId>
+	<version>1.1.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>eTrice Java generator</name>
+
+	<description>code generator from ROOM (Real-Time Object Oriented Modeling)
+  models to the Java target language</description>
+	<url>http://eclipse.org/etrice</url>
+	<inceptionYear>2010</inceptionYear>
+
+	<properties>
+		<project.build.sourceEncoding>Cp1252</project.build.sourceEncoding>
+
+		<etrice.version>${project.version}</etrice.version>
+
+		<tycho.version>0.19.0</tycho.version>
+		<tycho-extras.version>${tycho.version}</tycho-extras.version>
+
+		<!-- eclipse version etrice is built against -->
+		<eclipse-repo.url>http://download.eclipse.org/releases/luna</eclipse-repo.url>
+
+		<orbit-site>http://download.eclipse.org/tools/orbit/downloads/drops/R20130118183705/repository</orbit-site>
+	</properties>
+
+	<organization>
+		<name>Protos Software GmbH</name>
+		<url>http://www.protos.de</url>
+	</organization>
+
+	<licenses>
+		<license>
+			<name>Eclipse Public License - v 1.0</name>
+			<url>http://www.eclipse.org/legal/epl-v10.html</url>
+		</license>
+	</licenses>
+
+	<issueManagement>
+		<system>Bugzilla</system>
+		<url>https://bugs.eclipse.org/bugs/enter_bug.cgi?product=eTrice</url>
+	</issueManagement>
+	
+	<ciManagement>
+		<system>Hudson</system>
+		<url>https://hudson.eclipse.org/etrice/job/etrice-maven3/</url>
+	</ciManagement>
+
+	<scm>
+		<url>http://git.eclipse.org/c/etrice/org.eclipse.etrice.git/</url>
+		<connection>http://git.eclipse.org/gitroot/etrice/org.eclipse.etrice.git</connection>
+		<developerConnection>ssh://userid@git.eclipse.org/gitroot/etrice/org.eclipse.etrice.git</developerConnection>
+	</scm>
+
+	<developers>
+		<developer>
+			<name>Thomas Schuetz</name>
+		</developer>
+		<developer>
+			<name>Henrik Rentz-Reichert</name>
+		</developer>
+		<developer>
+			<name>Thomas Jung</name>
+		</developer>
+		<developer>
+			<name>Juergen Haug</name>
+		</developer>
+		<developer>
+			<name>Eyrak Paen</name>
+		</developer>
+		<developer>
+			<name>Peter Karlitschek</name>
+		</developer>
+	</developers>
+
+	<repositories>
+		<repository>
+			<id>eclipse</id>
+			<layout>p2</layout>
+			<url>${eclipse-repo.url}</url>
+		</repository>
+		<repository>
+			<id>orbit</id>
+			<layout>p2</layout>
+			<url>${orbit-site}</url>
+		</repository>
+		<repository>
+			<id>repository.jboss.org-public</id>
+			<name>JBoss.org Maven repository</name>
+			<url>https://repository.jboss.org/nexus/content/groups/public</url>
+		</repository>
+	</repositories>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>repo.eclipse.org.cbi-releases</id>
+			<url>https://repo.eclipse.org/content/repositories/cbi-releases/</url>
+		</pluginRepository>
+	</pluginRepositories>
+
+	<modules>
+		<module>../../plugins/org.eclipse.etrice.core.common</module>
+		<module>../../plugins/org.eclipse.etrice.core.fsm</module>
+		<module>../../plugins/org.eclipse.etrice.core.room</module>
+		<module>../../plugins/org.eclipse.etrice.core.config</module>
+		<module>../../plugins/org.eclipse.etrice.core.etphys</module>
+		<module>../../plugins/org.eclipse.etrice.core.etmap</module>
+		<module>../../plugins/org.eclipse.etrice.core.genmodel.fsm</module>
+		<module>../../plugins/org.eclipse.etrice.core.genmodel</module>
+		<module>../../plugins/org.eclipse.etrice.generator.fsm</module>
+		<module>../../plugins/org.eclipse.etrice.generator</module>
+		<module>../../plugins/org.eclipse.etrice.generator.config</module>
+		<module>../../plugins/org.eclipse.etrice.generator.doc</module>
+		<module>../../plugins/org.eclipse.etrice.generator.java</module>
+		<module>../../plugins/org.eclipse.etrice.generator.java.mvn</module>
+		<module>../../runtime/org.eclipse.etrice.modellib.java</module>
+		<module>../../runtime/org.eclipse.etrice.runtime.java</module>
+	</modules>
+
+	<profiles>
+		<profile>
+			<id>fast</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile>
+		<profile>
+			<id>full</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-source-plugin</artifactId>
+						<version>2.2.1</version>
+						<executions>
+							<execution>
+								<id>attach-sources</id>
+								<goals>
+									<goal>jar</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-javadoc-plugin</artifactId>
+						<version>2.9.1</version>
+						<configuration>
+							<tags>
+								<tag>
+									<name>generated</name>
+									<placement>a</placement>
+									<head>Generated:</head>
+								</tag>
+								<tag>
+									<name>ordered</name>
+									<placement>X</placement>
+									<head>Ordered:</head>
+								</tag>
+								<tag>
+									<name>model</name>
+									<placement>X</placement>
+									<head>Model:</head>
+								</tag>
+								<tag>
+									<name>parameter</name>
+									<placement>X</placement>
+									<head>Parameter:</head>
+								</tag>
+							</tags>
+						</configuration>
+						<executions>
+							<execution>
+								<id>attach-javadocs</id>
+								<goals>
+									<goal>jar</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-maven-plugin</artifactId>
+				<version>${tycho.version}</version>
+				<extensions>true</extensions>
+			</plugin>
+		</plugins>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.1</version>
+					<configuration>
+						<source>1.6</source>
+						<target>1.6</target>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.eclipse.tycho</groupId>
+					<artifactId>target-platform-configuration</artifactId>
+					<version>${tycho.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.eclipse.tycho</groupId>
+					<artifactId>tycho-compiler-plugin</artifactId>
+					<version>${tycho.version}</version>
+					<configuration>
+						<excludeResources>
+							<!-- avoid error markers in the target folder by excluding ecore models -->
+							<excludeResource>**/*.ecore</excludeResource>
+						</excludeResources>
+						<compilerArguments>
+							<enableJavadoc />
+							<encoding>ISO-8859-1</encoding>
+						</compilerArguments>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.eclipse.tycho</groupId>
+					<artifactId>tycho-packaging-plugin</artifactId>
+					<version>${tycho.version}</version>
+					<dependencies>
+						<dependency>
+							<groupId>org.eclipse.tycho.extras</groupId>
+							<artifactId>tycho-buildtimestamp-jgit</artifactId>
+							<version>${tycho-extras.version}</version>
+						</dependency>
+					</dependencies>
+					<configuration>
+						<strictBinIncludes>false</strictBinIncludes>
+						<format>'v'yyyyMMdd-HHmm</format>
+						<timestampProvider>jgit</timestampProvider>
+						<jgit.ignore>
+						</jgit.ignore>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.eclipse.tycho</groupId>
+					<artifactId>tycho-p2-director-plugin</artifactId>
+					<version>${tycho.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.eclipse.tycho</groupId>
+					<artifactId>tycho-p2-repository-plugin</artifactId>
+					<version>${tycho.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.eclipse.tycho</groupId>
+					<artifactId>tycho-p2-plugin</artifactId>
+					<version>${tycho.version}</version>
+					<configuration>
+						<baselineMode>warn</baselineMode>
+						<baselineReplace>none</baselineReplace>
+						<baselineRepositories>
+							<repository>
+								<url>http://download.eclipse.org/eclipse/updates/4.2</url>
+							</repository>
+						</baselineRepositories>
+					</configuration>
+				</plugin>
+				<!--This plugin's configuration is used to store Eclipse m2e settings 
+					only. It has no influence on the Maven build itself. -->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.eclipse.tycho
+										</groupId>
+										<artifactId>
+											tycho-packaging-plugin
+										</artifactId>
+										<versionRange>
+											[0.19.0,)
+										</versionRange>
+										<goals>
+											<goal>validate-id</goal>
+											<goal>validate-version</goal>
+											<goal>build-qualifier</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.eclipse.tycho
+										</groupId>
+										<artifactId>
+											tycho-compiler-plugin
+										</artifactId>
+										<versionRange>
+											[0.19.0,)
+										</versionRange>
+										<goals>
+											<goal>compile</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+	<distributionManagement>
+		<repository>
+			<id>repo.eclipse.org</id>
+			<name>eTrice Repository - Releases</name>
+			<url>https://repo.eclipse.org/content/repositories/etrice-releases/</url>
+		</repository>
+		<snapshotRepository>
+			<id>repo.eclipse.org</id>
+			<name>eTrice Repository - Snapshots</name>
+			<url>https://repo.eclipse.org/content/repositories/etrice-snapshots/</url>
+			<uniqueVersion>true</uniqueVersion>
+		</snapshotRepository>
+	</distributionManagement>
+</project>

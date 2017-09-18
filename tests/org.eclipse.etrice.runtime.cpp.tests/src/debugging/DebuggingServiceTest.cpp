@@ -13,6 +13,7 @@
 #include "debugging/DebuggingServiceTest.h"
 #include "common/debugging/DebuggingService.h"
 #include "common/messaging/MessageService.h"
+#include "common/messaging/MessageServiceController.h"
 #include "common/messaging/RTServices.h"
 #include "common/messaging/StaticMessageMemory.h"
 #include "etUnit/etUnit.h"
@@ -22,17 +23,18 @@ using namespace etRuntime;
 
 void DebuggingServiceTest::testLogging() {
 
+	MessageServiceController& msgSvcCtrl = RTServices::getInstance().getMsgSvcCtrl();
 	MessageService msgSvc(NULL, IMessageService::BLOCKED, 0, 0,
 			"TestMessageService", new StaticMessageMemory(NULL, "TestMemory", 64, 100));
-	RTServices::getInstance().getMsgSvcCtrl().addMsgSvc(msgSvc);
-	RTServices::getInstance().getMsgSvcCtrl().start();
+	msgSvcCtrl.addMsgSvc(msgSvc);
+	msgSvcCtrl.start();
 	SubSystemClass subSystem(NULL, "TestSubSystem");
 	ActorClass actor1(&subSystem, "TestActor1");
 	ActorClass actor2(&subSystem, "TestActor2");
 	Port port1(&actor1, "TestPort1");
 	Port port2(&actor2, "TestPort2");
 	DebuggingService& dbgSvc = DebuggingService::getInstance();
-	dbgSvc.getAsyncLogger().setMSC("DebuggingServiceTest", "log/testlog/");
+	dbgSvc.getAsyncLogger().setMSC("DebuggingServiceTest", "log/");
 	dbgSvc.getAsyncLogger().open();
 
 	InterfaceItemBase::connect(&subSystem, port1.getInstancePath(),
@@ -59,7 +61,8 @@ void DebuggingServiceTest::testLogging() {
 	dbgSvc.removePortInstance(port2);
 
 	dbgSvc.getAsyncLogger().close();
-	RTServices::getInstance().getMsgSvcCtrl().stop();
+	msgSvcCtrl.stop();
+	msgSvcCtrl.removeMsgSvc(msgSvc);
 
 	const char* failMsg = "DebuggingServiceTest failed";
 	Vector<String>& result = dbgSvc.getAsyncLogger().getCommandList();

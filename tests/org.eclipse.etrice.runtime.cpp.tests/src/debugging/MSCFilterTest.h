@@ -18,7 +18,7 @@
 class MSCFilterTest: public etTestSuite {
 public:
 	MSCFilterTest() :
-			etTestSuite("MSCFilterTest") {
+			etTestSuite("org.eclipse.etrice.runtime.cpp.tests.MSCFilterTest") {
 	}
 
 protected:

@@ -1,0 +1,29 @@
+plugins {
+	id 'java'
+}
+
+apply from: "$rootDir/gradle/etGenerator.gradle"
+
+def models = [
+	'model/ALogService.room',
+	'model/TcpService.room',
+	'model/TimingService.room'
+]
+
+dependencies {
+	compile project(':runtime:org.eclipse.etrice.runtime.java')
+}
+
+sourceSets {
+	main {
+		java {
+			srcDirs = ['src-gen']
+		}
+	}
+}
+
+createGeneratorTask('generate', 'java', models, 'src-gen', '-lib')
+
+compileJava.dependsOn generate
+
+clean.delete 'src-gen'

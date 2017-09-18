@@ -1,0 +1,36 @@
+plugins {
+	id 'cpp'
+}
+
+apply from: "$rootDir/gradle/etGenerator.gradle"
+
+def models = [
+	'model/TimingService.room'
+]
+
+createGeneratorTask('generate', 'cpp', models, 'src-gen', '-lib')
+
+model {
+	components {
+		etrice_modellib_cpp(NativeLibrarySpec) {
+			sources.cpp {
+				builtBy generate
+				source {
+					srcDirs = ['src-gen']
+					include '**/*.cpp'
+				}
+				exportedHeaders {
+					srcDirs = ['src-gen']
+				}
+				lib project: ':runtime:org.eclipse.etrice.runtime.cpp', library: 'etrice_runtime_cpp', linkage: 'api'
+				lib project: ':runtime:org.eclipse.etrice.runtime.c', library: 'etrice_runtime_c', linkage: 'api'
+			}
+			binaries {
+				withType(SharedLibraryBinarySpec) { buildable = false }
+				all { cppCompiler.args '-g3' }
+			}
+		}
+	}
+}
+
+clean.delete 'src-gen'

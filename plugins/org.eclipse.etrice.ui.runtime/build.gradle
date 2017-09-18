@@ -1,0 +1,31 @@
+!!!! This script is currently not in use, see maven pom instead !!!!
+
+plugins {
+	id 'base'
+}
+
+def projects = [
+	'org.eclipse.etrice.runtime.c': '../../runtime',
+	'org.eclipse.etrice.modellib.c': '../../runtime',
+	'org.eclipse.etrice.tutorials.c': '../../examples',
+	'org.eclipse.etrice.examples.c': '../../examples',
+	'org.eclipse.etrice.template.c': '../../examples',
+
+	'org.eclipse.etrice.runtime.cpp': '../../runtime',
+	'org.eclipse.etrice.modellib.cpp': '../../runtime',
+	'org.eclipse.etrice.tutorials.cpp': '../../examples',
+	'org.eclipse.etrice.template.cpp': '../../examples',
+
+	'org.eclipse.etrice.runtime.java': '../../runtime',
+	'org.eclipse.etrice.modellib.java': '../../runtime',
+	'org.eclipse.etrice.tutorials.java': '../../examples',
+	'org.eclipse.etrice.examples.java': '../../examples'
+]
+
+projects.each { name, path ->
+	build.dependsOn tasks.create(name: "zip_$name", type: Zip) {
+		destinationDir = file('contents')
+		archiveName = "${name}.zip"
+		from "$path/$name"
+	}
+}

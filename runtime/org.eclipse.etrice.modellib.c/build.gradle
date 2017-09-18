@@ -1,0 +1,37 @@
+plugins {
+	id 'c'
+}
+
+apply from: "$rootDir/gradle/etGenerator.gradle"
+
+def models = [
+	'model/PInterrupt.room',
+	'model/TcpService.room',
+	'model/TimingService.room'
+]
+
+createGeneratorTask('generate', 'c', models, 'src-gen', '-lib')
+
+model {
+	components {
+		etrice_modellib_c(NativeLibrarySpec) {
+			sources.c {
+				builtBy generate
+				source {
+					srcDirs = ['src-gen']
+					include '**/*.c'
+				}
+				exportedHeaders {
+					srcDirs = ['src-gen']
+				}
+				lib project: ':runtime:org.eclipse.etrice.runtime.c', library: 'etrice_runtime_c', linkage: 'api'
+			}
+			binaries {
+				withType(SharedLibraryBinarySpec) { buildable = false }
+				all { cCompiler.args '-g3' }
+			}
+		}
+	}
+}
+
+clean.delete 'src-gen'

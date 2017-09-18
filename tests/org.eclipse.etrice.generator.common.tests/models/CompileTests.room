@@ -1,7 +1,7 @@
-RoomModel CompileTestsModel {
+RoomModel CompileTests {
 
-	import room.basic.types.* from "Types.room"
-	import room.basic.test.* from "Tests.room"
+	import room.basic.types.* from "../../../runtime/${etModellib}/model/Types.room"
+	import room.basic.test.* from "../../../runtime/${etModellib}/model/Tests.room"
 	import DetailExpressionTestModel.DetailExpressionTest from "DetailExpressionTest.room"
 	import StatemachineInterfaceTestModel.StatemachineInterfaceTest from "StatemachineInterfaceTest.room"
 	import StatemachineInterfaceTestInheritedModel.StatemachineInterfaceInheritedTest from "StatemachineInterfaceInheritedTest.room"
@@ -20,7 +20,7 @@ RoomModel CompileTestsModel {
 		}
 		Behavior {
 			ctor {
-				"caseId = etUnit_openAll(\"log/testlog\", \"CompileTests\", \"org.eclipse.etrice.generator.common.tests.CompileTests\", \"CompileTests_case\");"
+				"caseId = etUnit_openAll(\"log\", \"CompileTests\", \"org.eclipse.etrice.generator.common.tests.CompileTests\", \"CompileTests_case\");"
 			}
 			dtor {
 				"etUnit_closeAll(caseId);"

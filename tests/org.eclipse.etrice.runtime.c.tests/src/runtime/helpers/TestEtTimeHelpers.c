@@ -171,7 +171,7 @@ static void TestEtTimeHelpers_subtract (etInt16 id) {
 }
 
 void TestEtTimeHelpers_runSuite(void){
-	etUnit_openTestSuite("TestEtTimeHelpers");
+	etUnit_openTestSuite("org.eclipse.etrice.runtime.c.tests.TestEtTimeHelpers");
 	ADD_TESTCASE(TestEtTimeHelpers_convertToMSec);
 	ADD_TESTCASE(TestEtTimeHelpers_convertToEtTime);
 	ADD_TESTCASE(TestEtTimeHelpers_copy);

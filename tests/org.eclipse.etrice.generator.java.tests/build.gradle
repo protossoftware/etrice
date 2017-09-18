@@ -1,0 +1,29 @@
+plugins {
+	id 'java-base'
+}
+
+apply from: "$rootDir/gradle/etTest.gradle"
+
+def genericPhysical = '../org.eclipse.etrice.generator.common.tests/models/GenericPhysical.etphys'
+
+createTest('java', 'sendingDataTest', ['models/SendingDataTest.room', genericPhysical])
+createTest('java', 'staticConfigTest', ['models/StaticConfigTest.etmap', 'models/StaticConfigTest.room', 'models/StaticConfigTest.config'])
+sourceSets.staticConfigTest.java.srcDir 'src/staticConfigTest'
+
+createTest('java', 'dynamicActorTest1', ['models/DynamicActorTest1.etmap', 'models/DynamicActorTest1.room'])
+createTest('java', 'dynamicActorTest2', ['models/DynamicActorTest2.etmap', 'models/DynamicActorTest2.room'])
+createTest('java', 'dynamicActorTest3', ['models/DynamicActorTest3.room', genericPhysical])
+createTest('java', 'dynamicActorTest4', ['models/DynamicActorTest4.room', genericPhysical])
+createTest('java', 'dynamicActorTest5', ['models/DynamicActorTest5.room', genericPhysical])
+createTest('java', 'dynamicActorTest6', ['models/DynamicActorTest6.room', genericPhysical])
+
+createTest('java', 'tCPTest', ['models/TCPTest.room', genericPhysical])
+
+/* These are not working yet (problem when genererating with -persistable -storeObjects the Modellib is overriden)	:((
+def genOptions = ['-persistable', '-storeDataObj']
+createTest('java', 'dynamicActorTest7', ['models/DynamicActorTest7.etmap', 'models/DynamicActorTest7.room'], genOptions)
+sourceSets.dynamicActorTest7.java.srcDir 'src/dynamicActorTest7'
+createTest('java', 'dynamicConfigTest', ['models/DynamicConfigTest.etmap', 'models/DynamicConfigTest.room'], genOptions)
+sourceSets.dynamicConfigTest.java.srcDir 'src/dynamicConfigTest'
+createTest('java', 'storeRestoreTest', ['models/StoreRestoreTest.room', genericPhysical], genOptions)
+sourceSets.storeRestoreTest.java.srcDir 'src/storeRestoreTest'	*/

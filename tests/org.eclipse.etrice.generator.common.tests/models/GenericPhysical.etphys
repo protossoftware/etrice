@@ -1,0 +1,43 @@
+PhysicalModel room.generic.physical {
+	
+	PhysicalSystem GenericPhysicalSystem {
+		NodeRef node : GenericNodeClass
+	}
+	
+	NodeClass GenericNodeClass {
+		runtime = DefaultRuntimeClass
+		priomin = 1
+		priomax = 10
+		
+		DefaultThread DefaultPhysicalThread {
+			execmode = mixed
+			interval = 100ms
+			prio = 5
+			stacksize = 1024
+			msgblocksize = 128
+			msgpoolsize = 100
+		}
+		
+		Thread BlockedThread {
+			execmode = blocked
+			prio = 5
+			stacksize = 1024
+			msgblocksize = 128
+			msgpoolsize = 100
+		}
+		
+		Thread PolledThread {
+			execmode = polled
+			interval = 100ms
+			prio = 5
+			stacksize = 1024
+			msgblocksize = 128
+			msgpoolsize = 100
+		}
+	}
+
+	RuntimeClass DefaultRuntimeClass {
+		model = multiThreaded
+	} 
+	
+}

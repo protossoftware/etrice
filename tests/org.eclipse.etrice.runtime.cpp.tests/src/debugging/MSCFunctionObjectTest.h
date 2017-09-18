@@ -18,7 +18,7 @@
 class MSCFunctionObjectTest: public etTestSuite {
 public:
 	MSCFunctionObjectTest() :
-			etTestSuite("MSFunctionObjectTest") {
+			etTestSuite("org.eclipse.etrice.runtime.cpp.tests.MSFunctionObjectTest") {
 	}
 
 protected:

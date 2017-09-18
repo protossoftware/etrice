@@ -16,7 +16,7 @@ public class MSCLoggerTest extends TestCase {
 
 	public void testMSCLogger() {
 		MSCLogger logger = new MSCLogger();
-		logger.setMSC("MSC1", ".\\");
+		logger.setMSC("MSC1", "./");
 		logger.open();
 		logger.addMessageAsyncOut("Inst1", "Inst2", "msg1");
 		logger.addMessageAsyncIn("Inst1", "Inst2", "msg1");

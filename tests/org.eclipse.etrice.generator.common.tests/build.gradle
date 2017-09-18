@@ -1,0 +1,32 @@
+plugins {
+	id 'c'
+	id 'cpp'
+	id 'java-base'
+}
+
+apply from: "$rootDir/gradle/etTest.gradle"
+
+def genericPhysical = 'models/GenericPhysical.etphys'
+
+def tests = [
+	actorCommunicationTest: 	['models/ActorCommunicationTest.room', genericPhysical],
+	choicePointTest: 			['models/ChoicePointTest.room', genericPhysical],
+	choicePointTestExtended: 	['models/ChoicePointTestExtended.room', genericPhysical],
+	dataDrivenTest:				['models/DataDrivenTest.room', genericPhysical],
+	/* enumTest:				['models/EnumTest.room', genericPhysical],		not supported in c++	*/
+	compileTests:				['models/CompileTests.room', genericPhysical, 'models/DetailExpressionTest.room', 'models/StatemachineInterfaceTest.room', 'models/StatemachineInterfaceInheritedTest.room', 'models/StatemachineInterfaceTest.room', 'models/ContinuationTransitionTest.room'],
+	handlerTest:				['models/HandlerTest.room', genericPhysical],
+	operationInheritanceTest:	['models/OperationInheritanceTest.room', genericPhysical],
+	pingPongThreadTest:			['models/PingPongThreadTest.etmap', 'models/PingPongThreadTest.room'],
+	pingPongThreadReplPortTest:	['models/PingPongThreadReplPortTest.etmap', 'models/PingPongThreadReplPortTest.room']
+]
+
+tests.each { name, models ->
+	createTest('c', name, models)
+	createTest('cpp', name, models)
+	createTest('java', name, models)
+}
+
+// Enum Test
+createTest('c', 'enumTest', ['models/EnumTest.room', genericPhysical])
+createTest('java', 'enumTest', ['models/EnumTest.room', genericPhysical])

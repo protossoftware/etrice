@@ -1,8 +1,8 @@
 RoomModel ActorCommunicationTest {
 
-	import room.basic.types.* from "Types.room"
-	import room.basic.test.* from "Tests.room"
-	import room.basic.service.timing.* from "TimingService.room"
+	import room.basic.types.* from "../../../runtime/${etModellib}/model/Types.room"
+	import room.basic.test.* from "../../../runtime/${etModellib}/model/Tests.room"
+	import room.basic.service.timing.* from "../../../runtime/${etModellib}/model/TimingService.room"
 
 	SubSystemClass SubSystem_ActorCommunicationTest {
 		@TestInstance
@@ -63,8 +63,8 @@ RoomModel ActorCommunicationTest {
 		}
 		Behavior {
 			ctor {
-				"etUnit_open(\"log/testlog\", \"ActorCommunicationTest\");"
-				"etUnit_openTestSuite(\"org.eclipse.etrice.generator.common.tests\");"
+				"etUnit_open(\"log\", \"ActorCommunicationTest\");"
+				"etUnit_openTestSuite(\"org.eclipse.etrice.generator.common.tests.ActorCommunicationTest\");"
 			}
 			dtor {
 				"etUnit_closeTestSuite();"

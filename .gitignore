@@ -4,3 +4,8 @@ gerritKeys.pub
 *._trace
 *.xtendbin
 language.settings.xml
+target/
+xtend-gen/
+build/
+.gradle/
+log/

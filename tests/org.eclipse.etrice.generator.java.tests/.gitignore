@@ -1,8 +1,1 @@
-bin
-models
-output
-results
-src-gen
-log
-/tmp/
-/*.obj
+src-gen/

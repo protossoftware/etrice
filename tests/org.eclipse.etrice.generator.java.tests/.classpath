@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="src/dynamicActorTest7"/>
+	<classpathentry kind="src" path="src/storeRestoreTest"/>
+	<classpathentry kind="src" path="src/staticConfigTest"/>
+	<classpathentry kind="src" path="src/dynamicConfigTest"/>
+	<classpathentry kind="lib" path="build/libs/org.eclipse.etrice.generator.java.tests.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.eclipse.etrice.modellib.java"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.eclipse.etrice.runtime.java"/>
-	<classpathentry kind="output" path="bin"/>
+	<classpathentry kind="output" path="build/classes/main"/>
 </classpath>
