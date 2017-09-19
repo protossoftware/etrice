@@ -38,7 +38,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class ActorClassWithBindings extends TestBase {
+public class TestActorClassWithBindings extends TestBase {
 
 	private ActorClass ac = null;
 

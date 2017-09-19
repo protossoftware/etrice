@@ -222,14 +222,15 @@ public class EtUnitReportConverter {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		new EtUnitReportConverter().run(args);
+		int result = new EtUnitReportConverter().run(args);
+		System.exit(result);
 	}
 
-	protected void run(String[] args) {
+	public int run(String[] args) {
 		// check options and create file list
 		Options options = parseOptions(args);
 		if (options==null)
-			System.exit(1);
+			return 1;
 
 		doEMFRegistration();
 		
@@ -241,7 +242,9 @@ public class EtUnitReportConverter {
 			success = false;
 		
 		if (!success)
-			System.exit(2);
+			return 2;
+		
+		return 0;
 	}
 	
 	/**
