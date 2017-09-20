@@ -1,6 +1,9 @@
 plugins {
 	id 'application'
+	id 'maven-publish'
 }
+
+apply from: "$rootDir/gradle/publish.gradle"
 
 dependencies {
 	compile project(':plugins:org.eclipse.etrice.core.room')

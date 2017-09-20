@@ -1,8 +1,6 @@
-apply plugin: 'maven-publish'
-	
 publishing {
 	publications {
-		mavenJava(MavenPublication) {
+		etrice(MavenPublication) {
 			from components.java
 		}
 	}
@@ -21,6 +19,14 @@ publishing {
 			credentials {
 				username project.properties.eclipseRepoUsername
 				password project.properties.eclipseRepoPassword
+			}
+		}
+		maven {
+			name 'protos'
+			url 'http://10.8.1.101:8081/artifactory/maven-protos'
+			credentials {
+				username project.properties.protosArtifactoryUsername
+				password project.properties.protosArtifactoryPassword
 			}
 		}
 	}

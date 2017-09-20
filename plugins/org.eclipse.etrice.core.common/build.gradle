@@ -1,6 +1,9 @@
 plugins {
 	id 'java'
+	id 'maven-publish'
 }
+
+apply from: "$rootDir/gradle/publish.gradle"
 
 dependencies {
 	compile "org.eclipse.platform:org.eclipse.core.runtime:$core_runtime_version"

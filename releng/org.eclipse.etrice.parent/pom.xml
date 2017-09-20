@@ -85,7 +85,7 @@
 				<artifactId>tycho-packaging-plugin</artifactId>
 				<version>${tycho.version}</version>
 				<configuration>
-					<format>'${build.type}'YYYYMMDDHHMM</format>
+					<format>'${build.type}'yyyyMMddHHmm</format>
 				</configuration>
 			</plugin>
 			<plugin>
