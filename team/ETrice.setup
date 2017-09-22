@@ -64,7 +64,7 @@
     <requirement
         name="org.eclipse.egit.feature.group"/>
     <requirement
-        name="org.apache.commons.io.feature.group"/>
+        name="org.apache.commons.io"/>
     <repository
         url="http://download.eclipse.org/tools/orbit/R-builds/R20170307180635/repository"/>
     <description>Install the tools needed in the IDE to work with the source code for ${scope.project.label}</description>
