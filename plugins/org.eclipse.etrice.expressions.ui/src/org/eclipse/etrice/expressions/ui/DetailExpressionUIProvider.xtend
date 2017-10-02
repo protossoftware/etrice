@@ -13,6 +13,7 @@ package org.eclipse.etrice.expressions.ui
 
 import com.google.common.base.Strings
 import com.google.inject.Inject
+import com.google.inject.Singleton
 import org.eclipse.core.runtime.Assert
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.etrice.core.room.Attribute
@@ -30,8 +31,6 @@ import org.eclipse.etrice.expressions.detailcode.RuntimeDetailExpressionProvider
 import org.eclipse.jface.viewers.ILabelProvider
 import org.eclipse.swt.graphics.Image
 import org.eclipse.swt.graphics.Point
-import com.google.inject.Singleton
-import org.eclipse.swt.graphics.RGB
 
 @Singleton
 class DetailExpressionUIProvider{
@@ -45,7 +44,7 @@ class DetailExpressionUIProvider{
 	protected RoomHelpers roomHelpers
 
 	/**
-	 * Return postfix string and its selection (relative start, length)
+	 * Return postfix string and its selection (relative start, length), e.g. <code>[argument]</code>
 	 */
 	def Pair<String, Point> getPostfixReplacement(ExpressionFeature feature) {
 		feature.assertNotNull

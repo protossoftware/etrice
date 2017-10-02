@@ -21,6 +21,9 @@ import org.eclipse.jface.text.rules.IWordDetector
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.util.Strings
 
+/**
+ *  Parser for concrete syntax
+ */
 @FinalFieldsConstructor
 class DetailExpressionAssistParser {
 

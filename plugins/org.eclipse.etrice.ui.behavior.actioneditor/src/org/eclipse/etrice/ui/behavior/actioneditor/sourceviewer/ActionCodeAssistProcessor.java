@@ -15,18 +15,12 @@ package org.eclipse.etrice.ui.behavior.actioneditor.sourceviewer;
 
 import org.eclipse.etrice.core.ui.RoomUiActivator;
 import org.eclipse.etrice.expressions.detailcode.IDetailExpressionProvider;
-import org.eclipse.etrice.expressions.detailcode.IDetailExpressionProvider.ExpressionFeature;
-import org.eclipse.etrice.expressions.ui.contentassist.RoomExpressionProposals;
-import org.eclipse.jface.text.BadLocationException;
+import org.eclipse.etrice.expressions.ui.contentassist.RoomExpressionProposalProvider;
 import org.eclipse.jface.text.ITextViewer;
-import org.eclipse.jface.text.contentassist.CompletionProposal;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.text.contentassist.IContextInformation;
 import org.eclipse.jface.text.contentassist.IContextInformationValidator;
-import org.eclipse.swt.graphics.Point;
-import org.eclipse.xtext.util.Strings;
-import org.eclipse.xtext.xbase.lib.Pair;
 
 import com.google.inject.Inject;
 
@@ -45,7 +39,7 @@ public class ActionCodeAssistProcessor implements IContentAssistProcessor {
 	private DetailExpressionUIProvider exprProvider;
 	
 	@Inject
-	RoomExpressionProposals proposals;
+	RoomExpressionProposalProvider proposals;
 	
 	public ActionCodeAssistProcessor(ActionCodeEditorConfiguration configuration) {
 		super();

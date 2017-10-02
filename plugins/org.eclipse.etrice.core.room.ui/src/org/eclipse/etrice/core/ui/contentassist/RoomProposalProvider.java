@@ -36,7 +36,7 @@ import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.expressions.detailcode.DefaultDetailExpressionProvider;
 import org.eclipse.etrice.expressions.detailcode.IDetailExpressionProvider;
-import org.eclipse.etrice.expressions.ui.contentassist.RoomExpressionProposals;
+import org.eclipse.etrice.expressions.ui.contentassist.RoomExpressionProposalProvider;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;
@@ -225,7 +225,7 @@ public class RoomProposalProvider extends AbstractRoomProposalProvider {
 	}
 	
 	@Inject
-	RoomExpressionProposals expressionProposals;
+	RoomExpressionProposalProvider expressionProposalAdapter;
 	
 	@Override
 	public void complete_CC_STRING(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
@@ -240,7 +240,7 @@ public class RoomProposalProvider extends AbstractRoomProposalProvider {
 		int globalOffset = context.getOffset();
 		if (context.getCurrentNode().getSemanticElement() instanceof DetailCode) {
 			IDetailExpressionProvider exprPovider = new DefaultDetailExpressionProvider(ac);
-			for(ICompletionProposal proposal : expressionProposals.createProposals(exprPovider, text, localOffset, globalOffset))
+			for(ICompletionProposal proposal : expressionProposalAdapter.createProposals(exprPovider, text, localOffset, globalOffset))
 				acceptor.accept(proposal);
 		}
 

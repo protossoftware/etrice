@@ -14,10 +14,8 @@ package org.eclipse.etrice.expressions.ui.contentassist
 
 import com.google.inject.Inject
 import java.util.List
-import org.eclipse.emf.ecore.EObject
-import org.eclipse.etrice.core.room.ActorClass
-import org.eclipse.etrice.expressions.detailcode.DefaultDetailExpressionProvider
 import org.eclipse.etrice.expressions.detailcode.DetailExpressionAssistParser
+import org.eclipse.etrice.expressions.detailcode.IDetailExpressionProvider
 import org.eclipse.etrice.expressions.detailcode.IDetailExpressionProvider.ExpressionFeature
 import org.eclipse.etrice.expressions.ui.DetailExpressionUIProvider
 import org.eclipse.jface.text.Document
@@ -27,9 +25,12 @@ import org.eclipse.swt.graphics.Image
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal
 import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher
 import org.eclipse.xtext.util.Strings
-import org.eclipse.etrice.expressions.detailcode.IDetailExpressionProvider
 
-class RoomExpressionProposals {
+/**
+ *  Create {@link ICompletionProposal}s for current position.
+ *  Uses DetailExpressionAssistParser to parse expressions and DetailExpressionUIProvider for decoration.
+ */
+class RoomExpressionProposalProvider {
 	
 	@Inject
 	DetailExpressionUIProvider uiExpressionProvider
@@ -38,7 +39,9 @@ class RoomExpressionProposals {
 	PrefixMatcher prefixMatcher
 	
 	def List<ICompletionProposal> createProposals(IDetailExpressionProvider exprProvider, String text, int offset, int globalOffset) {
-		val parser = new DetailExpressionAssistParser(new Document(text), offset, exprProvider)			
+		// parser to use
+		val parser = new DetailExpressionAssistParser(new Document(text), offset, exprProvider)
+		// get features that follow last completed feature			
 		val availableFeatures = newArrayList => [
 			if(parser.isContextExpression) {
 				val contextFeature = parser?.resolveLatestCompleted
@@ -47,7 +50,7 @@ class RoomExpressionProposals {
 				it += exprProvider.initialFeatures
 			}	
 		]
-		
+		// filter by incomplete text prefix
 		val prefix = parser.computeIdentifierPrefix(offset)
 		availableFeatures.filter[id.startsWith(prefix)].map[ feature | 
 			val displayString = new StyledString(uiExpressionProvider.getDisplayString(feature))

@@ -16,6 +16,7 @@ import com.google.inject.Inject
 import java.util.List
 import org.eclipse.etrice.expressions.ui.DetailExpressionUIProvider
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.etrice.expressions.detailcode.IDetailExpressionProvider
 
 class RoomExpressionHighlighter {
 	
@@ -27,15 +28,11 @@ class RoomExpressionHighlighter {
 	}
 	
 	@Inject
-	DetailExpressionUIProvider expressionProvider
+	DetailExpressionUIProvider uiProvider
 	
-	def List<HighlightResult> getHighlighting(String text, int offset) {
+	def List<HighlightResult> getHighlighting(IDetailExpressionProvider exprProvider, String text) {
 		val result = newArrayList
-		
-	
-		
-		
-		
+		// TODO
 		result
 	}
 }

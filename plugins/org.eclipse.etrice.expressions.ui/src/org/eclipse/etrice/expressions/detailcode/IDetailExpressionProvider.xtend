@@ -17,7 +17,7 @@ import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
 
 /**
- * Defines detail expressions = <i>ExpressionFeature ('.' ExpressionFeature)* </i>
+ * Defines abstract syntax of detail expressions = <i>ExpressionFeature ('.' ExpressionFeature)* </i>
  */
 interface IDetailExpressionProvider {
 
@@ -41,9 +41,9 @@ interface IDetailExpressionProvider {
 	 */
 	@Accessors // @Data
 	static class ExpressionFeature {
-		val String id
-		val ExpressionPostfix postfix
-		Object data
+		val String id 					// name
+		val ExpressionPostfix postfix	// follows name
+		Object data						// business object
 	}
 
 	enum ExpressionPostfix {
