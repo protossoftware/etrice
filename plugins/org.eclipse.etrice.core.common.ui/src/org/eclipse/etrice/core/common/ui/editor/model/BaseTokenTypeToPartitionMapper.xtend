@@ -18,6 +18,8 @@ class BaseTokenTypeToPartitionMapper extends TerminalsTokenTypeToPartitionMapper
 		
 	override protected calculateId(String tokenName, int tokenType) {
 		switch tokenName {
+			// cc_string has same behavior as string partition
+			// -> activates text sensitive double click support
 			case 'RULE_CC_STRING': STRING_LITERAL_PARTITION
 			default: super.calculateId(tokenName, tokenType)
 		}

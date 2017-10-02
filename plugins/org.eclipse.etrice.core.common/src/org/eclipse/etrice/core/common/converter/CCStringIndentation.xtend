@@ -19,7 +19,9 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.util.Strings
 
 /**
- *  TODO: Handling mixed line endings
+ *  Implementation of "smart strings". Support of text manipulation operations. 
+ *  Editor whitespace (indentation and line break) can be removed, replaced and validated.
+ *  Central operation is highlight(), which computes the actual text without editor whitespace.
  *  
  *  Improvement: Too much strings matching => use token scanner
  */

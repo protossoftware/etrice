@@ -16,6 +16,9 @@ import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.conversion.impl.AbstractLexerBasedConverter;
 import org.eclipse.xtext.nodemodel.INode;
 
+/**
+ *  Convert CC_STRING to text and vice-versa. Remove or add delimiters and editor indentation.
+ */
 public class CCStringConverter extends AbstractLexerBasedConverter<String> {
 	
 	static public String addDelim(final String text, String delim) {

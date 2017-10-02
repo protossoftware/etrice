@@ -37,6 +37,26 @@ public class RoomSemanticHighlightingCalculator extends BaseSemanticHighlighter 
 	@Inject
 	RoomGrammarAccess grammar;
 	
+	@Override
+	protected void provideHighlightingFor(INode node, XtextResource resource, IHighlightedPositionAcceptor acceptor) {
+		super.provideHighlightingFor(node, resource, acceptor);
+		
+		EObject obj = node.getGrammarElement();
+		if (obj instanceof RuleCall) {
+			RuleCall ruleCall = (RuleCall) obj;
+			if(ruleCall.getRule() == grammar.getAnnotationRule()){
+				acceptor.addPosition(
+						node.getOffset(),
+						node.getLength(),
+						RoomHighlightingConfiguration.HL_ANNOTATION_ID);
+			}
+			else if(node.getParent().getSemanticElement() instanceof DetailCode && ruleCall.getRule() == grammar.getCC_STRINGRule()) {
+				keywordHighlight(node, acceptor);
+			}
+		}
+		
+	}
+	
 	private static String[] fgKeywords = { "while", "do", "for", "if", "else",
 			"break", "continue", "switch", "case", "default", "static", "return",
 			"struct", "union", "sizeof", "explicit", "export", "extern", "goto",
@@ -57,34 +77,18 @@ public class RoomSemanticHighlightingCalculator extends BaseSemanticHighlighter 
 		return keywordPattern;
 	}
 	
-	@Override
-	protected void provideHighlightingFor(INode node, XtextResource resource, IHighlightedPositionAcceptor acceptor) {
-		super.provideHighlightingFor(node, resource, acceptor);
-		
-		EObject obj = node.getGrammarElement();
-		if (obj instanceof RuleCall) {
-			RuleCall ruleCall = (RuleCall) obj;
-			if(ruleCall.getRule() == grammar.getAnnotationRule()){
-				acceptor.addPosition(
-						node.getOffset(),
-						node.getLength(),
-						RoomHighlightingConfiguration.HL_ANNOTATION_ID);
-			}
-			else if(node.getParent().getSemanticElement() instanceof DetailCode && ruleCall.getRule() == grammar.getCC_STRINGRule()) {
-				final String text = node.getText();
-				for(Pattern keywordPattern : getKeywordPatterns()){							
-					Matcher matcher = keywordPattern.matcher(text);
-					while(matcher.find()){
-						boolean leftNotId = !Character.isJavaIdentifierPart(text.charAt(matcher.start()-1));
-						boolean rightNotId = !Character.isJavaIdentifierPart(text.charAt(matcher.end()));
-						if(leftNotId && rightNotId){
-							acceptor.addPosition(node.getOffset() + matcher.start(), matcher.end() - matcher.start(), RoomHighlightingConfiguration.HL_TARGET_LANG_KEYWORD_ID);
-						}
-					}
+	protected void keywordHighlight(INode node, IHighlightedPositionAcceptor acceptor) {
+		final String text = node.getText();
+		for(Pattern keywordPattern : getKeywordPatterns()){							
+			Matcher matcher = keywordPattern.matcher(text);
+			while(matcher.find()){
+				boolean leftNotId = !Character.isJavaIdentifierPart(text.charAt(matcher.start()-1));
+				boolean rightNotId = !Character.isJavaIdentifierPart(text.charAt(matcher.end()));
+				if(leftNotId && rightNotId){
+					acceptor.addPosition(node.getOffset() + matcher.start(), matcher.end() - matcher.start(), RoomHighlightingConfiguration.HL_TARGET_LANG_KEYWORD_ID);
 				}
 			}
 		}
-		
 	}
 	
 }
