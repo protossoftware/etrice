@@ -50,6 +50,7 @@ typedef DWORD etOSThreadId;
 typedef HANDLE etOSSemaData;
 typedef HANDLE etOSTimerData;
 typedef DWORD etOSTimerId;
+typedef SOCKET etOSSocketData;
 
 /*-----------------------------------------------------------*/
 
