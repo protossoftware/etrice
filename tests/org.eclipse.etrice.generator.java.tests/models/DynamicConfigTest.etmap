@@ -1,7 +1,7 @@
 MappingModel DynamicConfigTest {
 
 	import DynamicConfigTest.* from "DynamicConfigTest.room"
-	import room.generic.physical.* from "GenericPhysical.etphys"
+	import room.generic.physical.* from "../../org.eclipse.etrice.generator.common.tests/models/GenericPhysical.etphys"
 
 	Mapping System_DynamicConfigTest -> GenericPhysicalSystem {
 			SubSystemMapping main -> node {}

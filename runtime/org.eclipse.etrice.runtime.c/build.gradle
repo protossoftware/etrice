@@ -1,8 +1,6 @@
 import static org.apache.tools.ant.taskdefs.condition.Os.*
 
-plugins {
-	id 'c'
-}
+apply plugin: 'c'
 
 def platform = ''
 if(isFamily(FAMILY_WINDOWS)) { platform = 'MT_WIN_MinGW' }

@@ -9,7 +9,7 @@ public class ConfigSourceTestInstance {
 	
 	public static IConfigSource getInstance(){
 		if(instance == null){
-			instance = new ConfigSourceFile("models/DynamicConfigTest_Java.rt-config");
+			instance = new ConfigSourceFile("DynamicConfigTest.rt-config");
 		}
 		return instance;
 	}

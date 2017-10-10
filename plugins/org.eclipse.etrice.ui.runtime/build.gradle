@@ -1,8 +1,6 @@
 !!!! This script is currently not in use, see maven pom instead !!!!
 
-plugins {
-	id 'base'
-}
+apply plugin: 'base'
 
 def projects = [
 	'org.eclipse.etrice.runtime.c': '../../runtime',

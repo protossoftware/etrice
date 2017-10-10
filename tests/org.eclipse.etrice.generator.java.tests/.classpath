@@ -4,7 +4,6 @@
 	<classpathentry kind="src" path="src/storeRestoreTest"/>
 	<classpathentry kind="src" path="src/staticConfigTest"/>
 	<classpathentry kind="src" path="src/dynamicConfigTest"/>
-	<classpathentry kind="lib" path="build/libs/org.eclipse.etrice.generator.java.tests.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.eclipse.etrice.modellib.java"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.eclipse.etrice.runtime.java"/>

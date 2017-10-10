@@ -1,8 +1,6 @@
 import static org.apache.tools.ant.taskdefs.condition.Os.*
 
-plugins {
-	id 'cpp'
-}
+apply plugin: 'cpp'
 
 apply from: "$rootDir/gradle/etUnitConverter.gradle"
 

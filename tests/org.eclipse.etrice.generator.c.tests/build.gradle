@@ -1,6 +1,4 @@
-plugins {
-	id 'c'
-}
+apply plugin: 'c'
 
 apply from: "$rootDir/gradle/etTest.gradle"
 

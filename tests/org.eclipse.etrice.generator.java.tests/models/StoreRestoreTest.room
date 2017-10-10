@@ -17,7 +17,7 @@ RoomModel StoreRestoreTest {
 			Port prt: PC
 		}
 		Structure {
-			usercode1 { "import StoreRestore.ObjectHolder;" }
+			usercode1 { "import StoreRestoreTest.ObjectHolder;" }
 			
 			external Port prt
 			

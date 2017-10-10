@@ -1,6 +1,4 @@
-plugins {
-	id 'application'
-}
+apply plugin: 'application'
 
 apply from: "$rootDir/gradle/publish.gradle"
 
