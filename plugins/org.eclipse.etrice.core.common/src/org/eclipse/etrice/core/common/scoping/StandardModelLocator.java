@@ -227,8 +227,9 @@ public class StandardModelLocator implements IModelLocator {
 			return null;
 		IPath extBasePath = new Path(baseUri.toPlatformString(true));
 		IFile extBaseFile = root.getFile(extBasePath);
-		URI extBaseURI = URI.createFileURI(extBaseFile.getLocationURI()
-				.getPath());
+		if(extBaseFile.getLocationURI() == null)
+			return null;
+		URI extBaseURI = URI.createFileURI(extBaseFile.getLocationURI().getPath());
 		URI fileUri = target.resolve(extBaseURI, true);
 		return fileUri;
 	}
