@@ -68,12 +68,10 @@ class DataClassGen {
 		
 		#include "etDatatypes.h"
 
+		/* include all referenced room classes */
 «««		TODO: includes only for used DataClasses, also for other models
-		«FOR dataClass : root.getReferencedDataClasses(dc)»
-			#include «dataClass.includePath»
-		«ENDFOR»
-		«FOR enumClass : root.getReferencedEnumClasses(dc)»
-			#include «enumClass.includePath»
+		«FOR rc : (root.getReferencedDataClasses(dc) + root.getReferencedEnumClasses(dc)).sortBy[name]»
+			#include «rc.includePath»
 		«ENDFOR»
 		
 		«dc.userCode(1)»

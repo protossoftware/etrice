@@ -90,14 +90,9 @@ class ActorClassGen extends GenericActorClassGenerator {
 		#include "etDatatypes.h"
 		#include "messaging/etMessage.h"
 
-		«FOR dataClass : root.getReferencedDataClasses(ac)»
-			#include «dataClass.includePath»
-		«ENDFOR»
-		«FOR enumClass : root.getReferencedEnumClasses(ac)»
-			#include «enumClass.includePath»
-		«ENDFOR»
-		«FOR pc : root.getReferencedProtocolClasses(ac)»
-			#include «pc.includePath»
+		/* include all referenced room classes */
+		«FOR rc : (root.getReferencedDataClasses(ac) + root.getReferencedEnumClasses(ac) + root.getReferencedProtocolClasses(ac)).sortBy[name]»
+			#include «rc.includePath»
 		«ENDFOR»
 
 		«ac.userCode(1, true)»
