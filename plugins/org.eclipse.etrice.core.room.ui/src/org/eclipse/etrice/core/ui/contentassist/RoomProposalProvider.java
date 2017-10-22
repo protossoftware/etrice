@@ -34,6 +34,7 @@ import org.eclipse.etrice.core.room.RoomAnnotationTargetEnum;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
+import org.eclipse.etrice.core.ui.util.UIExpressionUtil;
 import org.eclipse.etrice.expressions.detailcode.DefaultDetailExpressionProvider;
 import org.eclipse.etrice.expressions.detailcode.IDetailExpressionProvider;
 import org.eclipse.etrice.expressions.ui.contentassist.RoomExpressionProposalProvider;
@@ -229,34 +230,16 @@ public class RoomProposalProvider extends AbstractRoomProposalProvider {
 	
 	@Override
 	public void complete_CC_STRING(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		ActorClass ac = findActorClass(model);
-		if (ac == null) {
-			super.complete_CC_STRING(model, ruleCall, context, acceptor);
-			return;
-		}
-
 		String text = context.getCurrentNode().getText();
 		int localOffset = context.getOffset() - context.getCurrentNode().getOffset();
 		int globalOffset = context.getOffset();
 		if (context.getCurrentNode().getSemanticElement() instanceof DetailCode) {
-			IDetailExpressionProvider exprPovider = new DefaultDetailExpressionProvider(ac);
+			IDetailExpressionProvider exprPovider = UIExpressionUtil.selectExpressionProvider(model);
 			for(ICompletionProposal proposal : expressionProposalAdapter.createProposals(exprPovider, text, localOffset, globalOffset))
 				acceptor.accept(proposal);
 		}
 
 		super.complete_CC_STRING(model, ruleCall, context, acceptor);
-	}
-	
-	private ActorClass findActorClass(EObject model) {
-		EObject parent = model;
-		while(parent != null) {
-			if(parent instanceof ActorClass){
-				return (ActorClass) parent;
-			}
-			parent = parent.eContainer();
-		}
-		
-		return null;
 	}
 
 }

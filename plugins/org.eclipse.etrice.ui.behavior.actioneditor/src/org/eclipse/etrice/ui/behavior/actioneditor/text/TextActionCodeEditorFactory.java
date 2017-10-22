@@ -31,8 +31,7 @@ public class TextActionCodeEditorFactory implements IActionCodeEditorFactory {
 	ArrayList<TextActionCodeEditor> constructedEditors = new ArrayList<TextActionCodeEditor>();
 
 	@Override
-	public IActionCodeEditor createActionCodeEditor(Composite parent, String detailCode,
-			IDetailExpressionProvider exprProvider) {
+	public IActionCodeEditor createActionCodeEditor(Composite parent, String detailCode, IDetailExpressionProvider exprProvider) {
 		TextActionCodeEditor textActionCodeEditor = new TextActionCodeEditor();
 		textActionCodeEditor.createControl(parent);
 		textActionCodeEditor.init(detailCode);

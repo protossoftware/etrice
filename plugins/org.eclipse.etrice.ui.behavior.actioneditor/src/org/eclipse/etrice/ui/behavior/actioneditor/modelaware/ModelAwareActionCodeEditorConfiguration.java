@@ -14,20 +14,24 @@
 package org.eclipse.etrice.ui.behavior.actioneditor.modelaware;
 
 import org.eclipse.etrice.expressions.detailcode.IDetailExpressionProvider;
+import org.eclipse.etrice.expressions.ui.highlight.ExpressionRuleFactory;
+import org.eclipse.etrice.expressions.ui.highlight.TargetLanguageRuleFactory;
 import org.eclipse.etrice.ui.behavior.actioneditor.sourceviewer.ActionCodeAssistProcessor;
-import org.eclipse.etrice.ui.behavior.actioneditor.sourceviewer.ActionCodeColorManager;
-import org.eclipse.etrice.ui.behavior.actioneditor.sourceviewer.ActionCodeEditorConfiguration;
 import org.eclipse.jface.text.IDocument;
-import org.eclipse.jface.text.TextAttribute;
 import org.eclipse.jface.text.contentassist.ContentAssistant;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.text.contentassist.IContentAssistant;
 import org.eclipse.jface.text.presentation.IPresentationReconciler;
 import org.eclipse.jface.text.presentation.PresentationReconciler;
 import org.eclipse.jface.text.rules.DefaultDamagerRepairer;
+import org.eclipse.jface.text.rules.IRule;
 import org.eclipse.jface.text.rules.ITokenScanner;
+import org.eclipse.jface.text.rules.RuleBasedScanner;
 import org.eclipse.jface.text.rules.Token;
 import org.eclipse.jface.text.source.ISourceViewer;
+import org.eclipse.jface.text.source.SourceViewerConfiguration;
+
+import com.google.common.collect.Iterables;
 
 /**
  * An extension of {@link ActionCodeEditorConfiguration} with adds to it a model
@@ -35,16 +39,17 @@ import org.eclipse.jface.text.source.ISourceViewer;
  * 
  * @author jayant
  */
-public class ModelAwareActionCodeEditorConfiguration extends ActionCodeEditorConfiguration {
+public class ModelAwareActionCodeEditorConfiguration extends SourceViewerConfiguration {
 
 	/** token scanner for syntax highlighting */
-	private GeneralActionCodeScanner generalActionCodeScanner;
+	private RuleBasedScanner tokenScanner;
 	/** content assist processor for content assistance */
 	private ActionCodeAssistProcessor actionCodeAssistProcessor;
+	
+	private IDetailExpressionProvider exprProvider;
 
-	public ModelAwareActionCodeEditorConfiguration(ActionCodeColorManager colorManager,
-			IDetailExpressionProvider exprProvider) {
-		super(colorManager, exprProvider);
+	public ModelAwareActionCodeEditorConfiguration(IDetailExpressionProvider exprProvider) {
+		this.exprProvider = exprProvider;
 	}
 
 	/**
@@ -53,13 +58,18 @@ public class ModelAwareActionCodeEditorConfiguration extends ActionCodeEditorCon
 	 * 
 	 * @return the token scanner for the configuration
 	 */
-	private GeneralActionCodeScanner getTokenScanner() {
-		if (generalActionCodeScanner == null) {
-			generalActionCodeScanner = new GeneralActionCodeScanner(this);
-			generalActionCodeScanner.setDefaultReturnToken(new Token(new TextAttribute(getColorManager().getColor(
-					ActionCodeColorManager.DEFAULT))));
+	private RuleBasedScanner getTokenScanner() {
+		if (tokenScanner == null) {
+			JFaceHighlightStyles styles = new JFaceHighlightStyles();
+			tokenScanner = new RuleBasedScanner();
+			tokenScanner.setRules(Iterables.toArray(Iterables.concat(
+					TargetLanguageRuleFactory.getGeneralLiteralRules(styles),
+					ExpressionRuleFactory.getInitialExpressionRules(exprProvider, styles),
+					TargetLanguageRuleFactory.getGeneralKeywordRules(styles))
+			, IRule.class));
+			tokenScanner.setDefaultReturnToken(new Token(styles.getDefault()));
 		}
-		return generalActionCodeScanner;
+		return tokenScanner;
 	}
 
 	/**
@@ -70,17 +80,11 @@ public class ModelAwareActionCodeEditorConfiguration extends ActionCodeEditorCon
 	 */
 	private ActionCodeAssistProcessor getContextAssistProcessor() {
 		if (actionCodeAssistProcessor == null) {
-			actionCodeAssistProcessor = new ActionCodeAssistProcessor(this);
+			actionCodeAssistProcessor = new ActionCodeAssistProcessor(exprProvider);
 		}
 		return actionCodeAssistProcessor;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 * 
-	 * @author jayant
-	 */
-	@Override
 	public IPresentationReconciler getPresentationReconciler(ISourceViewer sourceViewer) {
 		PresentationReconciler reconciler = new PresentationReconciler();
 
@@ -91,12 +95,6 @@ public class ModelAwareActionCodeEditorConfiguration extends ActionCodeEditorCon
 		return reconciler;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 * 
-	 * @author jayant
-	 */
-	@Override
 	public IContentAssistant getContentAssistant(ISourceViewer sourceViewer) {
 
 		ContentAssistant assistant = new ContentAssistant();

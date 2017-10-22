@@ -38,7 +38,7 @@ class RuntimeDetailExpressionProvider extends DefaultDetailExpressionProvider {
 			}
 		}
 
-		return scope
+		return scope.filterNull.filter[id !== null].toList
 	}
 
 	protected def createRtMethodExprFeature(String methodName, EObject eObj) {

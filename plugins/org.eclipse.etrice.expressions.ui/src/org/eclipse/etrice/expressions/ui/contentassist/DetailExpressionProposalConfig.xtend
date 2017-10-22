@@ -9,7 +9,7 @@
  * 		Juergen Haug (initial contribution)
  * 
  *******************************************************************************/
-package org.eclipse.etrice.expressions.ui
+package org.eclipse.etrice.expressions.ui.contentassist
 
 import com.google.common.base.Strings
 import com.google.inject.Inject
@@ -33,7 +33,7 @@ import org.eclipse.swt.graphics.Image
 import org.eclipse.swt.graphics.Point
 
 @Singleton
-class DetailExpressionUIProvider{
+class DetailExpressionProposalConfig{
 
 	static val String IMAGE_RT_METHOD = "icons/rt_method.png"
 
@@ -57,7 +57,7 @@ class DetailExpressionUIProvider{
 		var String replacement = switch data : feature.data {
 			Operation:
 				data.arguments.map[name].join(', ')
-			Message case data.data != null:
+			Message case data.data !== null:
 				data.data.name
 			Attribute, // fall through
 			InterfaceItem:
@@ -82,23 +82,6 @@ class DetailExpressionUIProvider{
 			point.x += feature.id.length
 
 		return feature.id + postfix.key -> point
-	}
-
-	def String getID(ExpressionFeature feature) {
-		feature.assertNotNull
-
-		return switch feature.data {
-			InterfaceItem:
-				HighlightConstants.INTERFACE_ITEM
-			Attribute:
-				HighlightConstants.ATTRIBUTE
-			Operation:
-				HighlightConstants.OPERATION
-			EObject:
-				HighlightConstants.SPECIAL_FEATURE // unknown model object == special
-			RuntimeMethodExpressionData:
-				HighlightConstants.OPERATION
-		}
 	}
 
 	/**
@@ -135,7 +118,7 @@ class DetailExpressionUIProvider{
 		// mark port as broadcast
 		if (feature.postfix == ExpressionPostfix.NONE) {
 			switch data {
-				SPP case data.isEventDriven/* fall through */,
+				SPP case data.isEventDriven /* fall through */ ,
 				Port case data.isReplicated && data.isEventDriven:
 					completionInfo = completionInfo + " (broadcast)"
 			}

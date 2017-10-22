@@ -12,7 +12,6 @@ Require-Bundle: org.eclipse.jface.text,
  org.eclipse.etrice.core.room,
  org.eclipse.etrice.core.fsm
 Export-Package: org.eclipse.etrice.expressions.detailcode,
- org.eclipse.etrice.expressions.ui,
  org.eclipse.etrice.expressions.ui.contentassist,
  org.eclipse.etrice.expressions.ui.highlight
 

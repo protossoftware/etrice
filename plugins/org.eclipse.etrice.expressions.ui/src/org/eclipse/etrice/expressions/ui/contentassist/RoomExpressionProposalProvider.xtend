@@ -17,7 +17,6 @@ import java.util.List
 import org.eclipse.etrice.expressions.detailcode.DetailExpressionAssistParser
 import org.eclipse.etrice.expressions.detailcode.IDetailExpressionProvider
 import org.eclipse.etrice.expressions.detailcode.IDetailExpressionProvider.ExpressionFeature
-import org.eclipse.etrice.expressions.ui.DetailExpressionUIProvider
 import org.eclipse.jface.text.Document
 import org.eclipse.jface.text.contentassist.ICompletionProposal
 import org.eclipse.jface.viewers.StyledString
@@ -33,7 +32,7 @@ import org.eclipse.xtext.util.Strings
 class RoomExpressionProposalProvider {
 	
 	@Inject
-	DetailExpressionUIProvider uiExpressionProvider
+	DetailExpressionProposalConfig uiExpressionProvider
 	
 	@Inject
 	PrefixMatcher prefixMatcher
@@ -76,7 +75,7 @@ class RoomExpressionProposalProvider {
 		proposal => [
 			val postfix = uiExpressionProvider.getPostfixReplacement(feature)
 			if(!Strings.isEmpty(postfix.key)) {
-				if(postfix.value != null) {
+				if(postfix.value !== null) {
 					selectionStart = replacementOffset + replacementString.length + postfix.value.x
 					cursorPosition = cursorPosition + postfix.value.x
 					selectionLength =  postfix.value.y

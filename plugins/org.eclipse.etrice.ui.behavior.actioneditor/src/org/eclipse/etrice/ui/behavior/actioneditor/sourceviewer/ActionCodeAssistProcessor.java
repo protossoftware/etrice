@@ -33,18 +33,13 @@ import com.google.inject.Inject;
  */
 public class ActionCodeAssistProcessor implements IContentAssistProcessor {
 
-	/** the local reference of the associated configuration */
-	private ActionCodeEditorConfiguration fConfiguration;
-
-	private DetailExpressionUIProvider exprProvider;
+	@Inject RoomExpressionProposalProvider proposals;
 	
-	@Inject
-	RoomExpressionProposalProvider proposals;
+	private IDetailExpressionProvider exprProvider;
 	
-	public ActionCodeAssistProcessor(ActionCodeEditorConfiguration configuration) {
+	public ActionCodeAssistProcessor(IDetailExpressionProvider exprProvider) {
 		super();
-		fConfiguration = configuration;
-		exprProvider = fConfiguration.getDetailExpressionProvider();
+		this.exprProvider = exprProvider;
 		RoomUiActivator.getDefault().getInjector(RoomUiActivator.ORG_ECLIPSE_ETRICE_CORE_ROOM).injectMembers(this);
 	}
 
