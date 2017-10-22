@@ -32,6 +32,8 @@
 #include "helpers/TestEtTimeHelpers.h"
 #include "util/TestUtil.h"
 
+#include "container/TestEtStaticDeque.h"
+
 #include "etUnit/etUnit.h"
 #include "debugging/etMSCLogger.h"
 
@@ -51,6 +53,8 @@ void RunCRuntimeTestcases(void){
 	TestEtDatatypes_runSuite();
 	TestEtTimeHelpers_runSuite();
 	TestUtil_runSuite();
+
+	TestEtStaticDeque_runSuite();
 
 	etUnit_close();
 

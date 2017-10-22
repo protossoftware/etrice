@@ -1,0 +1,39 @@
+= eTrice C Runtime
+:toc:
+
+== Container
+
+=== etStaticDeque
+
+etStaticDeque is a data structure for storing objects of equal size in order.
+The size of the deque is limited by the memory provided by the user.
+Pushing/Popping elements to/from the front and the back as well as arbitrary access is supported in constant time.
+
+The data structure relies on a circular buffer implemented as an array.
+
+.Example etStaticDeque
+[source, c]
+----
+typedef struct Data {
+    int i;
+    float f
+} Data;
+
+#define DEQUE_SIZE 100
+
+Data deque_memory[DEQUE_SIZE];
+etStaticDeque deque;
+etStaticDeque_construct(&deque, deque_memory, DEQUE_SIZE, sizeof(Data));    // Construct deque and hand over memory for the objects
+
+Data d = { 1, 0.1f };
+etStaticDeque_push_front(&deque, &d);   // Push to the front
+
+d = { 2, 0.2f };
+etStaticDeque_push_back(&deque, &d);    // Push to the end
+
+etStaticDeque_get(&deque, 0);   // Returns pointer to { 1, 0.1f }
+etStaticDeque_get(&deque, 1);   // Returns pointer to { 2, 0.2f }
+
+etStaticDeque_pop_front(&deque) // Pop from the the front
+etStaticDeque_pop_back(&deque)  // Pop from the back
+----
