@@ -14,11 +14,15 @@ package org.eclipse.etrice.core.ui.linking;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.common.ui.linking.ImportAwareHyperlinkHelper;
+import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.ActorInstanceMapping;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.RefSegment;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
+import org.eclipse.etrice.core.services.RoomGrammarAccess;
+import org.eclipse.etrice.core.ui.util.UIExpressionUtil;
+import org.eclipse.etrice.expressions.detailcode.IDetailExpressionProvider.ExpressionFeature;
 import org.eclipse.jface.text.Region;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.RuleCall;
@@ -36,15 +40,14 @@ import com.google.inject.Inject;
  */
 public class RoomHyperlinkHelper extends ImportAwareHyperlinkHelper {
 
-	@Inject
-	private RoomHelpers roomHelpers = new RoomHelpers();
+	@Inject private RoomGrammarAccess grammar;
+	@Inject private RoomHelpers roomHelpers;
 	
 	@Override
 	public void createHyperlinksByOffset(XtextResource resource, int offset, IHyperlinkAcceptor acceptor) {
 		IParseResult parseResult = resource.getParseResult();
 		if (parseResult != null && parseResult.getRootNode() != null) {
-			ILeafNode leaf = NodeModelUtils.findLeafNodeAtOffset(
-					parseResult.getRootNode(), offset);
+			ILeafNode leaf = NodeModelUtils.findLeafNodeAtOffset(parseResult.getRootNode(), offset);
 			EObject grammarElement = leaf.getParent().getGrammarElement();
 			if (grammarElement instanceof RuleCall) {
 				RuleCall rc = (RuleCall) grammarElement;
@@ -61,6 +64,16 @@ public class RoomHyperlinkHelper extends ImportAwareHyperlinkHelper {
 				if (crossLinkedEObject != null) {
 					Region region = new Region(leaf.getOffset(), leaf.getLength());
 					createHyperlinksTo(resource, region, crossLinkedEObject, acceptor);
+				}
+			}
+			
+			if(leaf.getGrammarElement() instanceof RuleCall) {
+				if(((RuleCall) leaf.getGrammarElement()).getRule() == grammar.getCC_STRINGRule() && leaf.getSemanticElement() instanceof DetailCode) {
+					ExpressionFeature exprFeature = UIExpressionUtil.findAtOffset(leaf, offset);
+					if(exprFeature != null && exprFeature.getData() instanceof EObject) {
+						Region region = new Region(leaf.getOffset(), leaf.getLength());
+						createHyperlinksTo(resource, region, (EObject) exprFeature.getData(), acceptor);
+					}
 				}
 			}
 		}

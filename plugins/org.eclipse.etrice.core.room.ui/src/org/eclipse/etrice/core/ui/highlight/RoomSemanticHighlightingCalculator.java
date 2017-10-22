@@ -12,20 +12,25 @@
 
 package org.eclipse.etrice.core.ui.highlight;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.common.ui.highlight.BaseSemanticHighlighter;
 import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.etrice.core.services.RoomGrammarAccess;
+import org.eclipse.etrice.core.ui.util.UIExpressionUtil;
+import org.eclipse.etrice.expressions.detailcode.IDetailExpressionProvider;
+import org.eclipse.etrice.expressions.ui.highlight.ExpressionRuleFactory;
+import org.eclipse.etrice.expressions.ui.highlight.TargetLanguageRuleFactory;
+import org.eclipse.jface.text.Document;
+import org.eclipse.jface.text.rules.IRule;
+import org.eclipse.jface.text.rules.IToken;
+import org.eclipse.jface.text.rules.RuleBasedScanner;
+import org.eclipse.jface.text.rules.Token;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.resource.XtextResource;
 
+import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 
 /**
@@ -53,40 +58,29 @@ public class RoomSemanticHighlightingCalculator extends BaseSemanticHighlighter 
 			else if(node.getParent().getSemanticElement() instanceof DetailCode && ruleCall.getRule() == grammar.getCC_STRINGRule()) {
 				keywordHighlight(node, acceptor);
 			}
+			
 		}
 		
-	}
-	
-	private static String[] fgKeywords = { "while", "do", "for", "if", "else",
-			"break", "continue", "switch", "case", "default", "static", "return",
-			"struct", "union", "sizeof", "explicit", "export", "extern", "goto",
-			"this", "throw", "try", "catch", "new", "delete",
-			"public", "private", "protected", "sizeof",
-			"typedef", "virtual", "class", "using", "template", "volatile", "mutable", "friend", "inline",
-			"typeid", "typename", "namespace",
-			"const", "int", "float", "double", "short", "long", "unsigned", "signed", "void", "true", "false"};
-	
-	private List<Pattern> keywordPattern = new ArrayList<Pattern>();
-	
-	protected List<Pattern> getKeywordPatterns() {
-		if(keywordPattern.isEmpty()) {
-			for(String keyword : fgKeywords)
-				keywordPattern.add(Pattern.compile(keyword));
-		}
-		
-		return keywordPattern;
 	}
 	
 	protected void keywordHighlight(INode node, IHighlightedPositionAcceptor acceptor) {
 		final String text = node.getText();
-		for(Pattern keywordPattern : getKeywordPatterns()){							
-			Matcher matcher = keywordPattern.matcher(text);
-			while(matcher.find()){
-				boolean leftNotId = !Character.isJavaIdentifierPart(text.charAt(matcher.start()-1));
-				boolean rightNotId = !Character.isJavaIdentifierPart(text.charAt(matcher.end()));
-				if(leftNotId && rightNotId){
-					acceptor.addPosition(node.getOffset() + matcher.start(), matcher.end() - matcher.start(), RoomHighlightingConfiguration.HL_TARGET_LANG_KEYWORD_ID);
-				}
+		final int offset = node.getOffset();
+		IDetailExpressionProvider exprProvider = UIExpressionUtil.selectExpressionProvider(node.getSemanticElement().eContainer());
+		XtextHighlightStyles styles = new XtextHighlightStyles();
+		RuleBasedScanner scanner = new RuleBasedScanner();
+		scanner.setRules(Iterables.toArray(Iterables.concat(
+				TargetLanguageRuleFactory.getGeneralLiteralRules(styles),
+				ExpressionRuleFactory.getInitialExpressionRules(exprProvider, styles),
+				TargetLanguageRuleFactory.getGeneralKeywordRules(styles))
+		, IRule.class));
+		scanner.setRange(new Document(text), 0, text.length());
+		
+		IToken lastToken = null;
+		while(lastToken != Token.EOF) {
+			lastToken = scanner.nextToken();
+			if(lastToken != null && lastToken.getData() != null) {
+				acceptor.addPosition(offset + scanner.getTokenOffset(), scanner.getTokenLength(), (String) lastToken.getData());
 			}
 		}
 	}

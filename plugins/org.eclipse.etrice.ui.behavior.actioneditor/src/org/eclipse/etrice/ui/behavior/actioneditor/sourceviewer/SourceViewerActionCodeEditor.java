@@ -150,8 +150,7 @@ public class SourceViewerActionCodeEditor extends AbstractActionCodeEditor {
 	 * @param configuration
 	 *            the source viewer configuration object
 	 */
-	protected void setSourceViewerConfiguration(
-			SourceViewerConfiguration configuration) {
+	protected void setSourceViewerConfiguration(SourceViewerConfiguration configuration) {
 		Assert.isNotNull(configuration);
 		fConfiguration = configuration;
 	}

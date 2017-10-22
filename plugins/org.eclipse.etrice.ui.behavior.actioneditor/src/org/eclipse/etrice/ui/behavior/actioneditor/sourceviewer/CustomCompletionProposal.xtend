@@ -27,6 +27,6 @@ class CustomCompletionProposal implements ICompletionProposal {
 	val Point selection
 	
 	override Point getSelection(IDocument document){
-		if(selection != null) selection else delegate.getSelection(document)
+		if(selection !== null) selection else delegate.getSelection(document)
 	}
 }

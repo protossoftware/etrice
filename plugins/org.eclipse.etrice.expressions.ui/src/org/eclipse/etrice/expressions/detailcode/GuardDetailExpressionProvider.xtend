@@ -11,7 +11,6 @@
  *******************************************************************************/
 package org.eclipse.etrice.expressions.detailcode
 
-import com.google.common.base.Function
 import com.google.common.base.Strings
 import java.util.List
 import org.eclipse.core.runtime.Assert
@@ -54,7 +53,7 @@ class GuardDetailExpressionProvider implements IDetailExpressionProvider {
 	override getInitialFeatures() {
 		val List<ExpressionFeature> scope = newArrayList
 
-		if(transitionEventData != null) { 
+		if(transitionEventData !== null) { 
 			scope += transitionEventData.createExprFeature(IDetailExpressionProvider.ExpressionPostfix.NONE)
 		}
 		scope += actorClass.allInterfaceItems.filter[isEventDriven || !isConjugated].map[
@@ -65,7 +64,7 @@ class GuardDetailExpressionProvider implements IDetailExpressionProvider {
 		scope += actorClass.latestOperations.map[createExprFeature]
 		scope += actorClass.allAttributes.map[createExprFeature]
 
-		return scope
+		return scope.filterNull.filter[id !== null].toList
 	}
 
 	override getContextFeatures(ExpressionFeature ctx) {
@@ -94,7 +93,7 @@ class GuardDetailExpressionProvider implements IDetailExpressionProvider {
 			}
 		}
 
-		return scope
+		return scope.filterNull.filter[id !== null].toList
 	}
 	
 	def ExpressionFeature createExprFeature(Operation it){

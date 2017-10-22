@@ -28,7 +28,7 @@ public class BaseHighlightingConfig extends DefaultHighlightingConfiguration {
 	}
 
 	public TextStyle detailCodeStringStyle() {
-		TextStyle textStyle = stringTextStyle().copy();
+		TextStyle textStyle = defaultTextStyle().copy();
 		textStyle.setBackgroundColor(new RGB(220, 220, 220));
 		return textStyle;
 	}

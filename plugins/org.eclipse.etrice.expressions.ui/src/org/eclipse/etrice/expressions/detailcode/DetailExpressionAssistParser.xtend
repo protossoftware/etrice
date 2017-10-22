@@ -12,7 +12,6 @@
 
 package org.eclipse.etrice.expressions.detailcode
 
-import org.eclipse.etrice.expressions.detailcode.IDetailExpressionProvider
 import org.eclipse.etrice.expressions.detailcode.IDetailExpressionProvider.ExpressionFeature
 import org.eclipse.etrice.expressions.detailcode.IDetailExpressionProvider.ExpressionPostfix
 import org.eclipse.jface.text.BadLocationException
@@ -133,7 +132,7 @@ class DetailExpressionAssistParser {
 		// forward matching
 		val firstParseResult = parsedFeatures.pop
 		var lastMatch = provider.initialFeatures.findFirst[matches(firstParseResult)]
-		while (lastMatch != null && !parsedFeatures.isEmpty()) {
+		while (lastMatch !== null && !parsedFeatures.isEmpty()) {
 			val nextParseResult = parsedFeatures.pop
 			lastMatch = provider.getContextFeatures(lastMatch).findFirst[matches(nextParseResult)]
 		}
@@ -154,7 +153,7 @@ class DetailExpressionAssistParser {
 	 * non-empty id + not-null suffix
 	 */
 	private def boolean isValid(ExpressionFeature feature) {
-		!Strings.isEmpty(feature.id) && feature.postfix != null
+		!Strings.isEmpty(feature.id) && feature.postfix !== null
 	}
 
 	private def boolean matches(ExpressionFeature f1, ExpressionFeature f2) {

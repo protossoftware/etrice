@@ -33,7 +33,7 @@ class DefaultDetailExpressionProvider extends GuardDetailExpressionProvider {
 		// no super call, keep it simple
 		val List<ExpressionFeature> scope = newArrayList
 
-		if(transitionEventData != null) { 
+		if(transitionEventData !== null) { 
 			scope += transitionEventData.createExprFeature(ExpressionPostfix.NONE)
 		}
 		scope += actorClass.latestOperations.map[createExprFeature]
@@ -53,7 +53,7 @@ class DefaultDetailExpressionProvider extends GuardDetailExpressionProvider {
 			}
 		]
 
-		return scope
+		return scope.filterNull.filter[id !== null].toList
 	}
 
 	override getContextFeatures(ExpressionFeature ctx) {
@@ -90,7 +90,7 @@ class DefaultDetailExpressionProvider extends GuardDetailExpressionProvider {
 			}
 		}
 
-		return scope
+		return scope.filterNull.filter[id !== null].toList
 	}
 
 }
