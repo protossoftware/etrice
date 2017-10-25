@@ -14,6 +14,7 @@ package org.eclipse.etrice.core.ui.highlight;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.common.ui.highlight.BaseSemanticHighlighter;
+import org.eclipse.etrice.core.converter.RoomValueConverterService;
 import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.etrice.core.services.RoomGrammarAccess;
 import org.eclipse.etrice.core.ui.util.UIExpressionUtil;
@@ -42,6 +43,9 @@ public class RoomSemanticHighlightingCalculator extends BaseSemanticHighlighter 
 	@Inject
 	RoomGrammarAccess grammar;
 	
+	@Inject
+	RoomValueConverterService converterService;
+	
 	@Override
 	protected void provideHighlightingFor(INode node, XtextResource resource, IHighlightedPositionAcceptor acceptor) {
 		super.provideHighlightingFor(node, resource, acceptor);
@@ -56,16 +60,16 @@ public class RoomSemanticHighlightingCalculator extends BaseSemanticHighlighter 
 						RoomHighlightingConfiguration.HL_ANNOTATION_ID);
 			}
 			else if(node.getParent().getSemanticElement() instanceof DetailCode && ruleCall.getRule() == grammar.getCC_STRINGRule()) {
-				keywordHighlight(node, acceptor);
+				detailCodeHighlight(node, acceptor);
 			}
 			
 		}
 		
 	}
 	
-	protected void keywordHighlight(INode node, IHighlightedPositionAcceptor acceptor) {
-		final String text = node.getText();
-		final int offset = node.getOffset();
+	protected void detailCodeHighlight(INode node, IHighlightedPositionAcceptor acceptor) {
+		final String text = converterService.getCC_StringConverter().stripDelim(node.getText());
+		final int offset = node.getOffset() + converterService.getCC_StringConverter().getDelim().length();
 		IDetailExpressionProvider exprProvider = UIExpressionUtil.selectExpressionProvider(node.getSemanticElement().eContainer());
 		XtextHighlightStyles styles = new XtextHighlightStyles();
 		RuleBasedScanner scanner = new RuleBasedScanner();
