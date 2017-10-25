@@ -29,4 +29,28 @@ public class BaseAutoEditStrategyProvider extends DefaultAutoEditStrategyProvide
 		acceptor.accept(partitionInsert.newInstance("'''", "'''"), IDocument.DEFAULT_CONTENT_TYPE);
 		super.configureStringLiteral(acceptor);
 	}
+	
+	protected void configureCompoundBracesBlocks(IEditStrategyAcceptor acceptor) {
+		acceptor.accept(compoundMultiLineTerminals.newInstanceFor("{", "}").and("[", "]").and("(", ")"), BaseTokenTypeToPartitionMapper.STRING_LITERAL_PARTITION);
+		super.configureCompoundBracesBlocks(acceptor);
+	}
+	
+	@Override
+	protected void configureCurlyBracesBlock(IEditStrategyAcceptor acceptor) {
+		acceptor.accept(singleLineTerminals.newInstance("{", "}"), BaseTokenTypeToPartitionMapper.STRING_LITERAL_PARTITION);
+		super.configureCurlyBracesBlock(acceptor);
+	}
+
+	@Override
+	protected void configureSquareBrackets(IEditStrategyAcceptor acceptor) {
+		acceptor.accept(singleLineTerminals.newInstance("[", "]"), BaseTokenTypeToPartitionMapper.STRING_LITERAL_PARTITION);
+		super.configureSquareBrackets(acceptor);
+	}
+
+	@Override
+	protected void configureParenthesis(IEditStrategyAcceptor acceptor) {
+		acceptor.accept(singleLineTerminals.newInstance("(", ")"), BaseTokenTypeToPartitionMapper.STRING_LITERAL_PARTITION);
+		super.configureParenthesis(acceptor);
+	}
+	
 }
