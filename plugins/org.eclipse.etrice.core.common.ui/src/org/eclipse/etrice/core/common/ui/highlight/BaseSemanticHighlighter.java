@@ -19,6 +19,7 @@ import org.eclipse.etrice.core.common.converter.BaseConverterService;
 import org.eclipse.etrice.core.common.converter.CCStringConverter;
 import org.eclipse.etrice.core.common.converter.CCStringIndentation;
 import org.eclipse.etrice.core.common.services.BaseGrammarAccess;
+import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator;
@@ -55,8 +56,12 @@ public class BaseSemanticHighlighter implements	ISemanticHighlightingCalculator 
 	protected void provideHighlightingFor(INode node, XtextResource resource, IHighlightedPositionAcceptor acceptor) {
 		EObject obj = node.getGrammarElement();
 		if (obj instanceof RuleCall) {
-			if(((RuleCall) obj).getRule() == grammar.getCC_STRINGRule()) {
+			AbstractRule rule = ((RuleCall) obj).getRule();
+			if(rule == grammar.getCC_STRINGRule()) {
 				ccStringHighlight(node, acceptor, converterService.getCC_StringConverter());
+			}
+			else if(rule == grammar.getNumberLiteralRule()) {
+				acceptor.addPosition(node.getOffset(), node.getLength() , DefaultHighlightingConfiguration.NUMBER_ID);
 			}
 		}
 	}
