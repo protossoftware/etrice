@@ -47,20 +47,22 @@ public class TargetLanguageRuleFactory {
 	// TODO split into different languages
 	// general language keywords
 	private static String[] fgKeywords = { "while", "do", "for", "if", "else",
-		"break", "continue", "switch", "case", "default", "static", "return",
-		"struct", "union", "sizeof", "explicit", "export", "extern", "goto",
-		"this", "throw", "try", "catch", "new", "delete",
-		"public", "private", "protected", "sizeof",
-		"typedef", "virtual", "class", "using", "template", "volatile", "mutable", "friend", "inline",
-		"typeid", "typename", "namespace",
-		"const", "int", "float", "double", "short", "char", "long", "unsigned", "signed", "void", "true", "false"};
-	
+			"break", "continue", "switch", "case", "default", "static", "return",
+			"struct", "union", "sizeof", "explicit", "export", "extern", "goto",
+			"this", "throw", "try", "catch", "new", "delete",
+			"public", "private", "protected", "sizeof",
+			"typedef", "virtual", "class", "using", "template", "volatile", "mutable", "friend", "inline",
+			"typeid", "typename", "namespace",
+			"const", "int", "float", "double", "short", "char", "long", "unsigned", "signed", "void", "true", "false",
+			"#include", "#define", "#ifdef", "#endif", "#if", "#else", "#ifndef", "#undef", "#pragma"
+		};
+		
 	protected static IWordDetector getKeywordDetector() {
 		return new IWordDetector() {
 
 			@Override
 			public boolean isWordStart(char c) {
-				return Character.isJavaIdentifierStart(c);
+				return Character.isJavaIdentifierStart(c) || c == '#';
 			}
 	
 			@Override
@@ -69,7 +71,7 @@ public class TargetLanguageRuleFactory {
 			}
 		};
 	}
-	
+		
 	// TODO split into different languages
 	public static List<IRule> getGeneralKeywordRules(AbstractHighlightStyles highlightStyle) {
 		IToken defaultToken = new Token(highlightStyle.getDefault());
