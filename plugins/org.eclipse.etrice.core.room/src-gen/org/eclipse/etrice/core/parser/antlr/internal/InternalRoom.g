@@ -2430,16 +2430,34 @@ ruleMessage returns [EObject current=null]
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getMessageAccess().getDocuDocumentationParserRuleCall_6_0()); 
+	        newCompositeNode(grammarAccess.getMessageAccess().getAnnotationsAnnotationParserRuleCall_6_0()); 
 	    }
-		lv_docu_6_0=ruleDocumentation		{
+		lv_annotations_6_0=ruleAnnotation		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getMessageRule());
+	        }
+       		add(
+       			$current, 
+       			"annotations",
+        		lv_annotations_6_0, 
+        		"org.eclipse.etrice.core.common.Base.Annotation");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)*(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getMessageAccess().getDocuDocumentationParserRuleCall_7_0()); 
+	    }
+		lv_docu_7_0=ruleDocumentation		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getMessageRule());
 	        }
        		set(
        			$current, 
        			"docu",
-        		lv_docu_6_0, 
+        		lv_docu_7_0, 
         		"org.eclipse.etrice.core.common.Base.Documentation");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -3474,16 +3492,34 @@ rulePort returns [EObject current=null]
 )(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getPortAccess().getDocuDocumentationParserRuleCall_6_0()); 
+	        newCompositeNode(grammarAccess.getPortAccess().getAnnotationsAnnotationParserRuleCall_6_0()); 
 	    }
-		lv_docu_6_0=ruleDocumentation		{
+		lv_annotations_6_0=ruleAnnotation		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getPortRule());
+	        }
+       		add(
+       			$current, 
+       			"annotations",
+        		lv_annotations_6_0, 
+        		"org.eclipse.etrice.core.common.Base.Annotation");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)*(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getPortAccess().getDocuDocumentationParserRuleCall_7_0()); 
+	    }
+		lv_docu_7_0=ruleDocumentation		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getPortRule());
 	        }
        		set(
        			$current, 
        			"docu",
-        		lv_docu_6_0, 
+        		lv_docu_7_0, 
         		"org.eclipse.etrice.core.common.Base.Documentation");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -5056,6 +5092,20 @@ ruleAnnotationTargetType returns [AntlrDatatypeRuleToken current=new AntlrDataty
     {
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getAnnotationTargetTypeAccess().getLogicalSystemKeyword_6()); 
+    }
+
+    |
+	kw='Port' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getAnnotationTargetTypeAccess().getPortKeyword_7()); 
+    }
+
+    |
+	kw='Message' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getAnnotationTargetTypeAccess().getMessageKeyword_8()); 
     }
 )
     ;

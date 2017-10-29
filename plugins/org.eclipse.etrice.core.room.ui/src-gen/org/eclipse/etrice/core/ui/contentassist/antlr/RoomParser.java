@@ -345,7 +345,8 @@ public class RoomParser extends AbstractContentAssistParser {
 					put(grammarAccess.getMessageAccess().getPrivAssignment_0(), "rule__Message__PrivAssignment_0");
 					put(grammarAccess.getMessageAccess().getNameAssignment_2(), "rule__Message__NameAssignment_2");
 					put(grammarAccess.getMessageAccess().getDataAssignment_4(), "rule__Message__DataAssignment_4");
-					put(grammarAccess.getMessageAccess().getDocuAssignment_6(), "rule__Message__DocuAssignment_6");
+					put(grammarAccess.getMessageAccess().getAnnotationsAssignment_6(), "rule__Message__AnnotationsAssignment_6");
+					put(grammarAccess.getMessageAccess().getDocuAssignment_7(), "rule__Message__DocuAssignment_7");
 					put(grammarAccess.getPortClassAccess().getUserCodeAssignment_2_1(), "rule__PortClass__UserCodeAssignment_2_1");
 					put(grammarAccess.getPortClassAccess().getMsgHandlersAssignment_3_0(), "rule__PortClass__MsgHandlersAssignment_3_0");
 					put(grammarAccess.getPortClassAccess().getOperationsAssignment_3_1(), "rule__PortClass__OperationsAssignment_3_1");
@@ -383,7 +384,8 @@ public class RoomParser extends AbstractContentAssistParser {
 					put(grammarAccess.getPortAccess().getNameAssignment_2(), "rule__Port__NameAssignment_2");
 					put(grammarAccess.getPortAccess().getMultiplicityAssignment_3(), "rule__Port__MultiplicityAssignment_3");
 					put(grammarAccess.getPortAccess().getProtocolAssignment_5(), "rule__Port__ProtocolAssignment_5");
-					put(grammarAccess.getPortAccess().getDocuAssignment_6(), "rule__Port__DocuAssignment_6");
+					put(grammarAccess.getPortAccess().getAnnotationsAssignment_6(), "rule__Port__AnnotationsAssignment_6");
+					put(grammarAccess.getPortAccess().getDocuAssignment_7(), "rule__Port__DocuAssignment_7");
 					put(grammarAccess.getExternalPortAccess().getInterfacePortAssignment_2(), "rule__ExternalPort__InterfacePortAssignment_2");
 					put(grammarAccess.getSAPAccess().getNameAssignment_1(), "rule__SAP__NameAssignment_1");
 					put(grammarAccess.getSAPAccess().getProtocolAssignment_3(), "rule__SAP__ProtocolAssignment_3");

@@ -2,14 +2,22 @@
  */
 package org.eclipse.etrice.core.room.impl;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+
+import org.eclipse.etrice.core.common.base.Annotation;
 import org.eclipse.etrice.core.common.base.Documentation;
 
 import org.eclipse.etrice.core.room.GeneralProtocolClass;
@@ -27,6 +35,7 @@ import org.eclipse.etrice.core.room.RoomPackage;
  *   <li>{@link org.eclipse.etrice.core.room.impl.PortImpl#isConjugated <em>Conjugated</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.PortImpl#getMultiplicity <em>Multiplicity</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.PortImpl#getProtocol <em>Protocol</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.PortImpl#getAnnotations <em>Annotations</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.PortImpl#getDocu <em>Docu</em>}</li>
  * </ul>
  *
@@ -83,6 +92,16 @@ public class PortImpl extends InterfaceItemImpl implements Port
    * @ordered
    */
   protected GeneralProtocolClass protocol;
+
+  /**
+   * The cached value of the '{@link #getAnnotations() <em>Annotations</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getAnnotations()
+   * @generated
+   * @ordered
+   */
+  protected EList<Annotation> annotations;
 
   /**
    * The cached value of the '{@link #getDocu() <em>Docu</em>}' containment reference.
@@ -209,6 +228,20 @@ public class PortImpl extends InterfaceItemImpl implements Port
    * <!-- end-user-doc -->
    * @generated
    */
+  public EList<Annotation> getAnnotations()
+  {
+    if (annotations == null)
+    {
+      annotations = new EObjectContainmentEList<Annotation>(Annotation.class, this, RoomPackage.PORT__ANNOTATIONS);
+    }
+    return annotations;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public Documentation getDocu()
   {
     return docu;
@@ -272,6 +305,8 @@ public class PortImpl extends InterfaceItemImpl implements Port
   {
     switch (featureID)
     {
+      case RoomPackage.PORT__ANNOTATIONS:
+        return ((InternalEList<?>)getAnnotations()).basicRemove(otherEnd, msgs);
       case RoomPackage.PORT__DOCU:
         return basicSetDocu(null, msgs);
     }
@@ -295,6 +330,8 @@ public class PortImpl extends InterfaceItemImpl implements Port
       case RoomPackage.PORT__PROTOCOL:
         if (resolve) return getProtocol();
         return basicGetProtocol();
+      case RoomPackage.PORT__ANNOTATIONS:
+        return getAnnotations();
       case RoomPackage.PORT__DOCU:
         return getDocu();
     }
@@ -306,6 +343,7 @@ public class PortImpl extends InterfaceItemImpl implements Port
    * <!-- end-user-doc -->
    * @generated
    */
+  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
@@ -319,6 +357,10 @@ public class PortImpl extends InterfaceItemImpl implements Port
         return;
       case RoomPackage.PORT__PROTOCOL:
         setProtocol((GeneralProtocolClass)newValue);
+        return;
+      case RoomPackage.PORT__ANNOTATIONS:
+        getAnnotations().clear();
+        getAnnotations().addAll((Collection<? extends Annotation>)newValue);
         return;
       case RoomPackage.PORT__DOCU:
         setDocu((Documentation)newValue);
@@ -346,6 +388,9 @@ public class PortImpl extends InterfaceItemImpl implements Port
       case RoomPackage.PORT__PROTOCOL:
         setProtocol((GeneralProtocolClass)null);
         return;
+      case RoomPackage.PORT__ANNOTATIONS:
+        getAnnotations().clear();
+        return;
       case RoomPackage.PORT__DOCU:
         setDocu((Documentation)null);
         return;
@@ -369,6 +414,8 @@ public class PortImpl extends InterfaceItemImpl implements Port
         return multiplicity != MULTIPLICITY_EDEFAULT;
       case RoomPackage.PORT__PROTOCOL:
         return protocol != null;
+      case RoomPackage.PORT__ANNOTATIONS:
+        return annotations != null && !annotations.isEmpty();
       case RoomPackage.PORT__DOCU:
         return docu != null;
     }

@@ -87,7 +87,27 @@ public enum RoomAnnotationTargetEnum implements Enumerator
    * @generated
    * @ordered
    */
-  LOGICAL_SYSTEM_CLASS(6, "LOGICAL_SYSTEM_CLASS", "LogicalSystem");
+  LOGICAL_SYSTEM_CLASS(6, "LOGICAL_SYSTEM_CLASS", "LogicalSystem"),
+
+  /**
+   * The '<em><b>PORT</b></em>' literal object.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #PORT_VALUE
+   * @generated
+   * @ordered
+   */
+  PORT(7, "PORT", "Port"),
+
+  /**
+   * The '<em><b>MESSAGE</b></em>' literal object.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #MESSAGE_VALUE
+   * @generated
+   * @ordered
+   */
+  MESSAGE(8, "MESSAGE", "Message");
 
   /**
    * The '<em><b>DATA CLASS</b></em>' literal value.
@@ -195,6 +215,36 @@ public enum RoomAnnotationTargetEnum implements Enumerator
   public static final int LOGICAL_SYSTEM_CLASS_VALUE = 6;
 
   /**
+   * The '<em><b>PORT</b></em>' literal value.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of '<em><b>PORT</b></em>' literal object isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @see #PORT
+   * @model literal="Port"
+   * @generated
+   * @ordered
+   */
+  public static final int PORT_VALUE = 7;
+
+  /**
+   * The '<em><b>MESSAGE</b></em>' literal value.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of '<em><b>MESSAGE</b></em>' literal object isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @see #MESSAGE
+   * @model literal="Message"
+   * @generated
+   * @ordered
+   */
+  public static final int MESSAGE_VALUE = 8;
+
+  /**
    * An array of all the '<em><b>Annotation Target Enum</b></em>' enumerators.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -210,6 +260,8 @@ public enum RoomAnnotationTargetEnum implements Enumerator
       COMPOUND_PROTOCOL_CLASS,
       SUBSYSTEM_CLASS,
       LOGICAL_SYSTEM_CLASS,
+      PORT,
+      MESSAGE,
     };
 
   /**
@@ -281,6 +333,8 @@ public enum RoomAnnotationTargetEnum implements Enumerator
       case COMPOUND_PROTOCOL_CLASS_VALUE: return COMPOUND_PROTOCOL_CLASS;
       case SUBSYSTEM_CLASS_VALUE: return SUBSYSTEM_CLASS;
       case LOGICAL_SYSTEM_CLASS_VALUE: return LOGICAL_SYSTEM_CLASS;
+      case PORT_VALUE: return PORT;
+      case MESSAGE_VALUE: return MESSAGE;
     }
     return null;
   }

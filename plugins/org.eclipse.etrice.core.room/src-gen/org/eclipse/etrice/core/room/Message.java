@@ -2,8 +2,11 @@
  */
 package org.eclipse.etrice.core.room;
 
+import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EObject;
 
+import org.eclipse.etrice.core.common.base.Annotation;
 import org.eclipse.etrice.core.common.base.Documentation;
 
 /**
@@ -28,6 +31,7 @@ import org.eclipse.etrice.core.common.base.Documentation;
  *   <li>{@link org.eclipse.etrice.core.room.Message#isPriv <em>Priv</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.Message#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.Message#getData <em>Data</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.Message#getAnnotations <em>Annotations</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.Message#getDocu <em>Docu</em>}</li>
  * </ul>
  *
@@ -115,6 +119,22 @@ public interface Message extends EObject
    * @generated
    */
   void setData(VarDecl value);
+
+  /**
+   * Returns the value of the '<em><b>Annotations</b></em>' containment reference list.
+   * The list contents are of type {@link org.eclipse.etrice.core.common.base.Annotation}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Annotations</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Annotations</em>' containment reference list.
+   * @see org.eclipse.etrice.core.room.RoomPackage#getMessage_Annotations()
+   * @model containment="true"
+   * @generated
+   */
+  EList<Annotation> getAnnotations();
 
   /**
    * Returns the value of the '<em><b>Docu</b></em>' containment reference.

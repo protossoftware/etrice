@@ -727,6 +727,12 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 		else if(parent instanceof SubSystemClass && !targetList.contains(RoomAnnotationTargetEnum.SUBSYSTEM_CLASS.getLiteral())) {
 			invalidTargetType = RoomAnnotationTargetEnum.SUBSYSTEM_CLASS;
 		}
+		else if(parent instanceof Port && !targetList.contains(RoomAnnotationTargetEnum.PORT.getLiteral())) {
+			invalidTargetType = RoomAnnotationTargetEnum.PORT;
+		}
+		else if(parent instanceof Message && !targetList.contains(RoomAnnotationTargetEnum.MESSAGE.getLiteral())) {
+			invalidTargetType = RoomAnnotationTargetEnum.MESSAGE;
+		}
 		if(invalidTargetType != null) {
 			error("AnnotationType " + a.getType().getName() + " is not allowed for target " + invalidTargetType.getLiteral(),
 					a,
