@@ -97,7 +97,6 @@ class ProjectFileFragments {
 			<stringAttribute key="MainMethodName" value="«mainMethodName»"/>
 			<listAttribute key="ModelFiles">
 			<listEntry value="${workspace_loc:«modelPath»/Mapping.etmap}"/>
-			<listEntry value="${workspace_loc:«modelPath»/TemplateModel.room}"/>
 			</listAttribute>
 			<listAttribute key="org.eclipse.debug.ui.favoriteGroups">
 			<listEntry value="org.eclipse.debug.ui.launchGroup.run"/>
