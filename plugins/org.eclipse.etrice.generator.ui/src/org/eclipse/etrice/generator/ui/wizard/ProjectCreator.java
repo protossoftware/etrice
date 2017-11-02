@@ -363,9 +363,9 @@ public class ProjectCreator {
 		}
 	}
 
-	public static void createLaunchGeneratorConfig(URI uri,
-			String targetLanguage, String modelPath, String mainMethodName, String[] addLines) {
-		writeFile(uri, ProjectFileFragments.getGeneratorLaunchConfig(targetLanguage, modelPath, mainMethodName, addLines));
+	public static void createLaunchGeneratorConfig(URI uri, String targetLanguage, String modelPath, String mappingName,
+			String mainMethodName, String[] addLines) {
+		writeFile(uri, ProjectFileFragments.getGeneratorLaunchConfig(targetLanguage, modelPath, mappingName, mainMethodName, addLines));
 	}
 
 	public static void createLaunchJavaApplicationConfig(URI uri,
@@ -383,14 +383,11 @@ public class ProjectCreator {
 
 		if (project.hasNature(JavaCore.NATURE_ID)) {
 			ProjectCreator.createLaunchGeneratorConfig(
-					URI.createPlatformResourceURI("/" + project.getName()
-							+ "/gen_" + baseName + ".launch", true), "java",
-					mdlPath, mainMethodName, additionalLaunchConfigLines);
+					URI.createPlatformResourceURI("/" + project.getName() + "/gen_" + baseName + ".launch", true), "java",
+					mdlPath, baseName, mainMethodName, additionalLaunchConfigLines);
 			ProjectCreator.createLaunchJavaApplicationConfig(
-					URI.createPlatformResourceURI("/" + project.getName()
-							+ "/run_" + baseName + ".launch", true),
-					project.getName(), baseName,
-					"Node_nodeRef1_mainRunner");
+					URI.createPlatformResourceURI("/" + project.getName() + "/run_" + baseName + ".launch", true),
+					project.getName(), baseName, "Node_nodeRef1_mainRunner");
 		} else if (project.hasNature("org.eclipse.cdt.core.cnature")) {
 			String language = "c";
 			
@@ -399,12 +396,10 @@ public class ProjectCreator {
 				language = "cpp";
 			
 			ProjectCreator.createLaunchGeneratorConfig(
-					URI.createPlatformResourceURI("/" + project.getName()
-							+ "/gen_" + baseName + ".launch", true), language,
-					mdlPath, mainMethodName, additionalLaunchConfigLines);
+					URI.createPlatformResourceURI("/" + project.getName() + "/gen_" + baseName + ".launch", true), language,
+					mdlPath, baseName, mainMethodName, additionalLaunchConfigLines);
 			ProjectCreator.createLaunchCApplicationConfig(
-					URI.createPlatformResourceURI("/" + project.getName()
-							+ "/run_" + baseName + ".launch", true),
+					URI.createPlatformResourceURI("/" + project.getName() + "/run_" + baseName + ".launch", true),
 					project.getName());
 		}
 	}
