@@ -24,6 +24,8 @@
       <genEnumLiterals ecoreEnumLiteral="Room.ecore#//RoomAnnotationTargetEnum/COMPOUND_PROTOCOL_CLASS"/>
       <genEnumLiterals ecoreEnumLiteral="Room.ecore#//RoomAnnotationTargetEnum/SUBSYSTEM_CLASS"/>
       <genEnumLiterals ecoreEnumLiteral="Room.ecore#//RoomAnnotationTargetEnum/LOGICAL_SYSTEM_CLASS"/>
+      <genEnumLiterals ecoreEnumLiteral="Room.ecore#//RoomAnnotationTargetEnum/PORT"/>
+      <genEnumLiterals ecoreEnumLiteral="Room.ecore#//RoomAnnotationTargetEnum/MESSAGE"/>
     </genEnums>
     <genClasses ecoreClass="Room.ecore#//RoomModel">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//RoomModel/name"/>
@@ -146,6 +148,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//Message/priv"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//Message/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//Message/data"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//Message/annotations"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//Message/docu"/>
     </genClasses>
     <genClasses ecoreClass="Room.ecore#//PortClass">
@@ -191,6 +194,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//Port/conjugated"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//Port/multiplicity"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//Port/protocol"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//Port/annotations"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//Port/docu"/>
       <genOperations ecoreOperation="Room.ecore#//Port/isReplicated"/>
     </genClasses>

@@ -1496,13 +1496,22 @@ public interface RoomPackage extends EPackage
   int MESSAGE__DATA = 2;
 
   /**
+   * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MESSAGE__ANNOTATIONS = 3;
+
+  /**
    * The feature id for the '<em><b>Docu</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MESSAGE__DOCU = 3;
+  int MESSAGE__DOCU = 4;
 
   /**
    * The number of structural features of the '<em>Message</em>' class.
@@ -1511,7 +1520,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int MESSAGE_FEATURE_COUNT = 4;
+  int MESSAGE_FEATURE_COUNT = 5;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.PortClassImpl <em>Port Class</em>}' class.
@@ -2007,13 +2016,22 @@ public interface RoomPackage extends EPackage
   int PORT__PROTOCOL = INTERFACE_ITEM_FEATURE_COUNT + 2;
 
   /**
+   * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PORT__ANNOTATIONS = INTERFACE_ITEM_FEATURE_COUNT + 3;
+
+  /**
    * The feature id for the '<em><b>Docu</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int PORT__DOCU = INTERFACE_ITEM_FEATURE_COUNT + 3;
+  int PORT__DOCU = INTERFACE_ITEM_FEATURE_COUNT + 4;
 
   /**
    * The number of structural features of the '<em>Port</em>' class.
@@ -2022,7 +2040,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int PORT_FEATURE_COUNT = INTERFACE_ITEM_FEATURE_COUNT + 4;
+  int PORT_FEATURE_COUNT = INTERFACE_ITEM_FEATURE_COUNT + 5;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.ExternalPortImpl <em>External Port</em>}' class.
@@ -3968,6 +3986,17 @@ public interface RoomPackage extends EPackage
   EReference getMessage_Data();
 
   /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.Message#getAnnotations <em>Annotations</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Annotations</em>'.
+   * @see org.eclipse.etrice.core.room.Message#getAnnotations()
+   * @see #getMessage()
+   * @generated
+   */
+  EReference getMessage_Annotations();
+
+  /**
    * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.room.Message#getDocu <em>Docu</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -4267,6 +4296,17 @@ public interface RoomPackage extends EPackage
    * @generated
    */
   EReference getPort_Protocol();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.Port#getAnnotations <em>Annotations</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Annotations</em>'.
+   * @see org.eclipse.etrice.core.room.Port#getAnnotations()
+   * @see #getPort()
+   * @generated
+   */
+  EReference getPort_Annotations();
 
   /**
    * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.room.Port#getDocu <em>Docu</em>}'.
@@ -5715,6 +5755,14 @@ public interface RoomPackage extends EPackage
     EReference MESSAGE__DATA = eINSTANCE.getMessage_Data();
 
     /**
+     * The meta object literal for the '<em><b>Annotations</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MESSAGE__ANNOTATIONS = eINSTANCE.getMessage_Annotations();
+
+    /**
      * The meta object literal for the '<em><b>Docu</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -5951,6 +5999,14 @@ public interface RoomPackage extends EPackage
      * @generated
      */
     EReference PORT__PROTOCOL = eINSTANCE.getPort_Protocol();
+
+    /**
+     * The meta object literal for the '<em><b>Annotations</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference PORT__ANNOTATIONS = eINSTANCE.getPort_Annotations();
 
     /**
      * The meta object literal for the '<em><b>Docu</b></em>' containment reference feature.

@@ -143,7 +143,7 @@ CompoundProtocolClass:
 SubProtocol: 'SubProtocol' name=ID ':' protocol=[GeneralProtocolClass|FQN];
 
 Message:
-	(priv?='private')? 'Message' name=ID '(' (data=VarDecl)? ')'
+	(priv?='private')? 'Message' name=ID '(' (data=VarDecl)? ')' annotations+=Annotation*
 	(docu=Documentation)?;
 
 PortClass:
@@ -220,7 +220,7 @@ ActorClass:
 InterfaceItem: Port | SAP | SPP;
 
 Port:
-	(conjugated?='conjugated')? 'Port' name=ID (multiplicity=MULTIPLICITY)? ':' protocol=[GeneralProtocolClass|FQN] (docu=Documentation)?;
+	(conjugated?='conjugated')? 'Port' name=ID (multiplicity=MULTIPLICITY)? ':' protocol=[GeneralProtocolClass|FQN] annotations+=Annotation* (docu=Documentation)?;
 ExternalPort:
 	'external' 'Port' interfacePort=[Port|ID] ;
 
@@ -334,7 +334,9 @@ AnnotationTargetType:
 	'ProtocolClass' |
 	'CompoundProtocolClass' |
 	'SubSystemClass' |
-	'LogicalSystem'
+	'LogicalSystem' |
+	'Port' |
+	'Message'
 ;
 
 enum RoomAnnotationTargetEnum:
@@ -344,5 +346,7 @@ enum RoomAnnotationTargetEnum:
 	PROTOCOL_CLASS='ProtocolClass' |
 	COMPOUND_PROTOCOL_CLASS='CompoundProtocolClass' |
 	SUBSYSTEM_CLASS='SubSystemClass' |
-	LOGICAL_SYSTEM_CLASS='LogicalSystem'
+	LOGICAL_SYSTEM_CLASS='LogicalSystem' |
+	PORT='Port' |
+	MESSAGE='Message'
 ;

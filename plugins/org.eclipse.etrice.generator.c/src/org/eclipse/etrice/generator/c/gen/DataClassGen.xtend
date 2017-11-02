@@ -51,7 +51,7 @@ class DataClassGen {
 			
 			// source file
 			file = dc.getCSourceFileName
-			fileIO.generateFile("generating DataClass header", path, infopath, file, root.generateSourceFile(dc))
+			fileIO.generateFile("generating DataClass source", path, infopath, file, root.generateSourceFile(dc))
 			
 		}
 	}
