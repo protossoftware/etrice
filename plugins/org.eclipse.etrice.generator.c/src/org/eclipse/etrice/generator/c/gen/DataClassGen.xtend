@@ -15,16 +15,15 @@ package org.eclipse.etrice.generator.c.gen
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
-import org.eclipse.etrice.core.genmodel.fsm.base.ILogger
 import org.eclipse.etrice.core.genmodel.etricegen.Root
+import org.eclipse.etrice.core.genmodel.fsm.ILogger
 import org.eclipse.etrice.core.room.DataClass
+import org.eclipse.etrice.core.room.Operation
+import org.eclipse.etrice.core.room.RoomModel
+import org.eclipse.etrice.core.room.util.RoomHelpers
 import org.eclipse.etrice.generator.fsm.base.IGeneratorFileIo
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
-
-import org.eclipse.etrice.core.room.util.RoomHelpers
-import org.eclipse.etrice.core.room.RoomModel
-import org.eclipse.etrice.core.room.Operation
 
 @Singleton
 class DataClassGen {

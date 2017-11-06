@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="ASCII"?>
+<fsmgen:GraphContainer xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:fsmgen="http://www.eclipse.org/etrice/generator/fsm">
+  <graph>
+    <nodes outgoing="//@graph/@links.2 //@graph/@links.3" incoming="//@graph/@links.1">
+      <stateGraphNode href="file:/C:/Users/hrentz.PROTOS/git/newfsmgen/org.eclipse.etrice/tests/org.eclipse.etrice.ui.behavior.tests/models/InheritedStateMachine.room#ChoicePoint:Base$cp0"/>
+    </nodes>
+    <nodes>
+      <stateGraphNode href="file:/C:/Users/hrentz.PROTOS/git/newfsmgen/org.eclipse.etrice/tests/org.eclipse.etrice.ui.behavior.tests/models/InheritedStateMachine.room#TransitionPoint:Base$tp0"/>
+    </nodes>
+    <nodes outgoing="//@graph/@links.1" incoming="//@graph/@links.0">
+      <stateGraphNode href="file:/C:/Users/hrentz.PROTOS/git/newfsmgen/org.eclipse.etrice/tests/org.eclipse.etrice.ui.behavior.tests/models/InheritedStateMachine.room#SimpleState:Base$b0"/>
+    </nodes>
+    <nodes>
+      <subgraph>
+        <nodes incoming="//@graph/@links.3">
+          <stateGraphNode href="file:/C:/Users/hrentz.PROTOS/git/newfsmgen/org.eclipse.etrice/tests/org.eclipse.etrice.ui.behavior.tests/models/InheritedStateMachine.room#EntryPoint:Base$b1$tp0"/>
+        </nodes>
+        <nodes outgoing="//@graph/@links.4">
+          <stateGraphNode href="file:/C:/Users/hrentz.PROTOS/git/newfsmgen/org.eclipse.etrice/tests/org.eclipse.etrice.ui.behavior.tests/models/InheritedStateMachine.room#ExitPoint:Base$b1$tp1"/>
+        </nodes>
+        <stateGraph href="file:/C:/Users/hrentz.PROTOS/git/newfsmgen/org.eclipse.etrice/tests/org.eclipse.etrice.ui.behavior.tests/models/InheritedStateMachine.room#StateGraph:Base$b1$sg"/>
+      </subgraph>
+      <stateGraphNode href="file:/C:/Users/hrentz.PROTOS/git/newfsmgen/org.eclipse.etrice/tests/org.eclipse.etrice.ui.behavior.tests/models/InheritedStateMachine.room#SimpleState:Base$b1"/>
+    </nodes>
+    <nodes incoming="//@graph/@links.2 //@graph/@links.4">
+      <stateGraphNode href="file:/C:/Users/hrentz.PROTOS/git/newfsmgen/org.eclipse.etrice/tests/org.eclipse.etrice.ui.behavior.tests/models/InheritedStateMachine.room#SimpleState:Base$b2"/>
+    </nodes>
+    <links target="//@graph/@nodes.2">
+      <transition href="file:/C:/Users/hrentz.PROTOS/git/newfsmgen/org.eclipse.etrice/tests/org.eclipse.etrice.ui.behavior.tests/models/InheritedStateMachine.room#InitialTransition:Base$initial"/>
+    </links>
+    <links source="//@graph/@nodes.2" target="//@graph/@nodes.0">
+      <transition href="file:/C:/Users/hrentz.PROTOS/git/newfsmgen/org.eclipse.etrice/tests/org.eclipse.etrice.ui.behavior.tests/models/InheritedStateMachine.room#TriggeredTransition:Base$tr0"/>
+    </links>
+    <links source="//@graph/@nodes.0" target="//@graph/@nodes.4">
+      <transition href="file:/C:/Users/hrentz.PROTOS/git/newfsmgen/org.eclipse.etrice/tests/org.eclipse.etrice.ui.behavior.tests/models/InheritedStateMachine.room#ContinuationTransition:Base$tr1"/>
+    </links>
+    <links source="//@graph/@nodes.0" target="//@graph/@nodes.3/@subgraph/@nodes.0">
+      <transition href="file:/C:/Users/hrentz.PROTOS/git/newfsmgen/org.eclipse.etrice/tests/org.eclipse.etrice.ui.behavior.tests/models/InheritedStateMachine.room#CPBranchTransition:Base$tr2"/>
+    </links>
+    <links source="//@graph/@nodes.3/@subgraph/@nodes.1" target="//@graph/@nodes.4">
+      <transition href="file:/C:/Users/hrentz.PROTOS/git/newfsmgen/org.eclipse.etrice/tests/org.eclipse.etrice.ui.behavior.tests/models/InheritedStateMachine.room#ContinuationTransition:Base$tr3"/>
+    </links>
+    <stateGraph href="file:/C:/Users/hrentz.PROTOS/git/newfsmgen/org.eclipse.etrice/tests/org.eclipse.etrice.ui.behavior.tests/models/InheritedStateMachine.room#StateGraph:Base$sg"/>
+  </graph>
+  <component href="file:/C:/Users/hrentz.PROTOS/git/newfsmgen/org.eclipse.etrice/tests/org.eclipse.etrice.ui.behavior.tests/models/InheritedStateMachine.room#ActorClass:Base"/>
+</fsmgen:GraphContainer>

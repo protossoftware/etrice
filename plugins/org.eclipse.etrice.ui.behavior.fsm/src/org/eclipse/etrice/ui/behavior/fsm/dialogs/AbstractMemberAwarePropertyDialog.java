@@ -29,7 +29,7 @@ import org.eclipse.etrice.ui.behavior.fsm.actioneditor.ActionCodeEditorRegistry;
 import org.eclipse.etrice.ui.behavior.fsm.actioneditor.ActionCodeEditorRegistry.ActionCodeEditorRegistryEntry;
 import org.eclipse.etrice.ui.behavior.fsm.actioneditor.IActionCodeEditor;
 import org.eclipse.etrice.ui.behavior.fsm.actioneditor.preferences.PreferenceConstants;
-import org.eclipse.etrice.ui.behavior.fsm.support.FSMSupportUtil;
+import org.eclipse.etrice.ui.behavior.fsm.support.util.FSMSupportUtil;
 import org.eclipse.etrice.ui.common.base.dialogs.AbstractPropertyDialog;
 import org.eclipse.etrice.ui.common.base.dialogs.MultiValidator2;
 import org.eclipse.jface.preference.IPreferenceStore;

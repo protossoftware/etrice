@@ -9,7 +9,7 @@ import org.eclipse.etrice.core.fsm.fSM.ChoicePoint;
 import org.eclipse.etrice.core.fsm.fSM.FSMPackage;
 import org.eclipse.etrice.core.fsm.validation.FSMValidationUtilXtend.Result;
 import org.eclipse.etrice.ui.behavior.fsm.Activator;
-import org.eclipse.etrice.ui.behavior.fsm.support.FSMSupportUtil;
+import org.eclipse.etrice.ui.behavior.fsm.support.util.FSMSupportUtil;
 import org.eclipse.etrice.ui.common.base.dialogs.AbstractPropertyDialog;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;

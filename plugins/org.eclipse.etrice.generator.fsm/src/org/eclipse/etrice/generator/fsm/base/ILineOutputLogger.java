@@ -12,7 +12,7 @@
 
 package org.eclipse.etrice.generator.fsm.base;
 
-import org.eclipse.etrice.core.genmodel.fsm.base.ILogger;
+import org.eclipse.etrice.core.genmodel.fsm.ILogger;
 
 
 /**

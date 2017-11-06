@@ -70,6 +70,7 @@
 		<module>tests/org.eclipse.etrice.core.etphys.tests</module>
 		<module>tests/org.eclipse.etrice.core.fsm.tests</module>
 		<module>tests/org.eclipse.etrice.core.genmodel.tests</module>
+		<module>tests/org.eclipse.etrice.core.genmodel.fsm.tests</module>
 		<module>tests/org.eclipse.etrice.core.room.tests</module>
 		<module>tests/org.eclipse.etrice.etunit.converter.tests</module>
 		<module>tests/org.eclipse.etrice.generator.fsmtest.tests</module>

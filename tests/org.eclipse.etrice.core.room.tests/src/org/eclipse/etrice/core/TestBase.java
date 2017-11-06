@@ -28,6 +28,7 @@ import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.validation.CancelableDiagnostician;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.impl.ConcreteSyntaxEValidator;
+import org.osgi.framework.Bundle;
 
 import com.google.common.collect.Maps;
 
@@ -41,9 +42,9 @@ public class TestBase {
 
 	private String basePath;
 
-	protected void prepare() {
+	protected void prepare(Bundle bundle) {
 		try {
-			URL modelsDir = CoreTestsActivator.getInstance().getBundle().getEntry("models");
+			URL modelsDir = bundle.getEntry("models");
 			URL fileURL = FileLocator.toFileURL(modelsDir);
 			basePath = fileURL.getFile();
 		} catch (IOException e) {

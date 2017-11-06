@@ -37,7 +37,7 @@ RoomModel room.basic.service.timing {
 						"// start timer"
 						"taskCount++;"
 						"if (taskCount>PURGE_LIMIT) timerService.purge();"
-						"int t = td.getTime();"
+						"int t = transitionData.getTime();"
 						"timerService.scheduleAtFixedRate(((PTimerPort)ifitem).getTask(),t,t);"
 					}
 				}
@@ -49,7 +49,7 @@ RoomModel room.basic.service.timing {
 						"// start timeout"
 						"taskCount++;"
 						"if (taskCount>PURGE_LIMIT) timerService.purge();"
-						"timerService.schedule(((PTimerPort)ifitem).getTask(), ((TimerData)td).getTime());"
+						"timerService.schedule(((PTimerPort)ifitem).getTask(), transitionData.getTime());"
 					}
 				}
 				Transition tr4: Operational -> Operational {

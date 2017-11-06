@@ -18,7 +18,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance;
-import org.eclipse.etrice.core.genmodel.fsm.base.ILogger;
+import org.eclipse.etrice.core.genmodel.fsm.ILogger;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.PortClass;

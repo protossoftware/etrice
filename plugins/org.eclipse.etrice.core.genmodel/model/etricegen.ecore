@@ -215,11 +215,13 @@
   <eClassifiers xsi:type="ecore:EClass" name="WiredSubSystemClass" eSuperTypes="#//WiredStructureClass">
     <eStructuralFeatures xsi:type="ecore:EReference" name="subSystemClass" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//SubSystemClass"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ExpandedActorClass" eSuperTypes="../../org.eclipse.etrice.core.genmodel.fsm/model/fsmgen.ecore#//ExpandedModelComponent">
-    <eOperations name="getVarDeclData" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//VarDecl">
-      <eParameters name="trans" eType="ecore:EClass ../../org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//Transition"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ExpandedActorClass">
+    <eOperations name="getInterfaceItemLocalId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+      <eParameters name="ifitem" eType="ecore:EClass ../../org.eclipse.etrice.core.fsm/model/generated/FSM.ecore#//AbstractInterfaceItem"/>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="actorClass" eType="ecore:EClass ../../org.eclipse.etrice.core.room/src-gen/org/eclipse/etrice/core/Room.ecore#//ActorClass"
         changeable="false" volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="graphContainer" eType="ecore:EClass ../../org.eclipse.etrice.core.genmodel.fsm/model/fsmgen.ecore#//GraphContainer"
+        containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

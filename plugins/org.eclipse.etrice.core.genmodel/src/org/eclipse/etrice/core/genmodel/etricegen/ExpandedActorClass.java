@@ -12,10 +12,10 @@
 
 package org.eclipse.etrice.core.genmodel.etricegen;
 
-import org.eclipse.etrice.core.fsm.fSM.Transition;
-import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ExpandedModelComponent;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.GraphContainer;
 import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.VarDecl;
 
 /**
  * <!-- begin-user-doc -->
@@ -29,13 +29,14 @@ import org.eclipse.etrice.core.room.VarDecl;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass#getActorClass <em>Actor Class</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass#getGraphContainer <em>Graph Container</em>}</li>
  * </ul>
  *
  * @see org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage#getExpandedActorClass()
  * @model
  * @generated
  */
-public interface ExpandedActorClass extends ExpandedModelComponent {
+public interface ExpandedActorClass extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Actor Class</b></em>' reference.
 	 * <!-- begin-user-doc -->
@@ -51,11 +52,37 @@ public interface ExpandedActorClass extends ExpandedModelComponent {
 	ActorClass getActorClass();
 
 	/**
+	 * Returns the value of the '<em><b>Graph Container</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Graph Container</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Graph Container</em>' containment reference.
+	 * @see #setGraphContainer(GraphContainer)
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage#getExpandedActorClass_GraphContainer()
+	 * @model containment="true"
+	 * @generated
+	 */
+	GraphContainer getGraphContainer();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass#getGraphContainer <em>Graph Container</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Graph Container</em>' containment reference.
+	 * @see #getGraphContainer()
+	 * @generated
+	 */
+	void setGraphContainer(GraphContainer value);
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model
 	 * @generated
 	 */
-	VarDecl getVarDeclData(Transition trans);
+	int getInterfaceItemLocalId(AbstractInterfaceItem ifitem);
 
 } // ExpandedActorClass

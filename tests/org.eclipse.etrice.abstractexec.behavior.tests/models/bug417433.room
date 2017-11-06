@@ -74,9 +74,9 @@ RoomModel org.franca.examples [ "Generated from Franca IDL model org.franca.exam
 		Attribute z: UInt16
 	}
 
-	PrimitiveType UInt16: ptInteger -> java.lang.Integer(java.lang.Integer) default "0"
-	PrimitiveType UInt32: ptInteger -> java.lang.Integer(java.lang.Integer) default "0"
-	PrimitiveType Double: ptReal -> java.lang.Double(java.lang.Double) default "0.0"
-	PrimitiveType Boolean: ptBoolean -> java.lang.Boolean(java.lang.Boolean) default "false"
+	PrimitiveType UInt16: ptInteger -> "java.lang.Integer(java.lang.Integer)" default "0"
+	PrimitiveType UInt32: ptInteger -> "java.lang.Integer(java.lang.Integer)" default "0"
+	PrimitiveType Double: ptReal -> "java.lang.Double(java.lang.Double)" default "0.0"
+	PrimitiveType Boolean: ptBoolean -> "java.lang.Boolean(java.lang.Boolean)" default "false"
 }
 

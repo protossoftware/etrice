@@ -59,22 +59,29 @@ public abstract class DiagramAccessBase {
 	@Inject
 	private IResourceSetProvider resourceSetProvider;
 	
-	/**
-	 * 
-	 */
 	public DiagramAccessBase() {
 		super();
 		injectMembers();
 	}
+	
+	/**
+	 *  Load diagram based on rootObjects resource URI
+	 */
+	public Diagram getDiagram(EObject rootObject){
+		ResourceSet rs = newResourceSet(EcoreUtil.getURI(rootObject));
+		
+		return getDiagram(rootObject, rs);
+	}
 
-	public Diagram getDiagram(EObject rootObject) {
+	/**
+	 * Load diagram based on rootObjects resource URI into given resourceSet
+	 */
+	public Diagram getDiagram(EObject rootObject, ResourceSet rs) {
 		Resource resource = rootObject.eResource();
 		if (resource==null)
 			return null;
 		
 		URI uri = resource.getURI();
-		
-		ResourceSet rs = newResourceSet(uri);
 		
 		URI diagURI = null;
 		boolean exists = false;
@@ -144,33 +151,34 @@ public abstract class DiagramAccessBase {
 	}
 
 	private ResourceSet newResourceSet(URI uri) {
-		ResourceSet rs;
 		if (uri.isPlatformResource()) {
 			IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(uri.toPlatformString(true)));
 			IProject project = file.getProject();
-			rs = resourceSetProvider.get(project);
+			return resourceSetProvider.get(project);
 		}
-		else {
-			rs = new XtextResourceSet();
-		}
-		return rs;
+		
+		return new XtextResourceSet();
 	}
 	
 	private void populateDiagram(EObject rootObject, Diagram diagram) {
-		ResourceSet rs = newResourceSet(rootObject.eResource().getURI());
+		ResourceSet rs = diagram.eResource().getResourceSet();
 		
+		// IMPORTANT STEP: this resolves the object and creates a new resource in the resource set
+		URI boUri = EcoreUtil.getURI(rootObject);
+		rootObject = rs.getEObject(boUri, true);
+		
+		boolean editingDomainOwner = false;
 		TransactionalEditingDomain editingDomain = TransactionUtil.getEditingDomain(rs);
 		if (editingDomain == null) {
 			// Not yet existing, create one
 			editingDomain = TransactionalEditingDomain.Factory.INSTANCE.createEditingDomain(rs);
+			editingDomainOwner = true;
 		}
-	
-		// IMPORTANT STEP: this resolves the object and creates a new resource in the resource set
-		URI boUri = EcoreUtil.getURI(rootObject);
-		rootObject = editingDomain.getResourceSet().getEObject(boUri, true);
 		
 		editingDomain.getCommandStack().execute(getInitialCommand(rootObject, diagram, editingDomain));
-		editingDomain.dispose();
+		if(editingDomainOwner){
+			editingDomain.dispose();
+		}
 	}
 
 	/**
@@ -178,11 +186,13 @@ public abstract class DiagramAccessBase {
 	 */
 	private void updateDiagram(Diagram diagram, boolean doSave) {
 		ResourceSet rs = diagram.eResource().getResourceSet();
+		boolean editingDomainOwner = false;
 		TransactionalEditingDomain editingDomain = TransactionUtil.getEditingDomain(rs);
 		try {
 			if (editingDomain == null) {
 				// Not yet existing, create one and start a write transaction
 				editingDomain = TransactionalEditingDomain.Factory.INSTANCE.createEditingDomain(rs);
+				editingDomainOwner = true;
 				((TransactionalEditingDomainImpl)editingDomain).startTransaction(false, null);
 			}
 			
@@ -202,7 +212,9 @@ public abstract class DiagramAccessBase {
 		catch (InterruptedException e) {
 		}
 		
-		editingDomain.dispose();
+		if(editingDomainOwner){
+			editingDomain.dispose();
+		}
 	}
 
 	public DiagramEditorBase findDiagramEditor(EObject rootObject) {

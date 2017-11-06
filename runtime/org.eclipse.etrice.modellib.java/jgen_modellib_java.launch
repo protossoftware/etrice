@@ -18,5 +18,4 @@
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="org.eclipse.etrice.generator.java.Main"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="${workspace_loc:org.eclipse.etrice.modellib.java}/model/ALogService.room&#13;&#10;${workspace_loc:org.eclipse.etrice.modellib.java}/model/TimingService.room&#13;&#10;${workspace_loc:org.eclipse.etrice.modellib.java}/model/TcpService.room&#13;&#10;-lib&#13;&#10;-msc_instr"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="org.eclipse.etrice.generator.java"/>
-<stringAttribute key="org.eclipse.jdt.launching.SOURCE_PATH_PROVIDER" value="org.eclipse.m2e.launchconfig.sourcepathProvider"/>
 </launchConfiguration>

@@ -38,7 +38,7 @@ import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.core.genmodel.etricegen.StructureInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.SystemInstance;
-import org.eclipse.etrice.core.genmodel.fsm.fsmgen.IDiagnostician;
+import org.eclipse.etrice.core.genmodel.fsm.IDiagnostician;
 import org.eclipse.etrice.core.room.ActorInstanceMapping;
 import org.eclipse.etrice.core.room.LogicalThread;
 import org.eclipse.etrice.core.room.RefPath;

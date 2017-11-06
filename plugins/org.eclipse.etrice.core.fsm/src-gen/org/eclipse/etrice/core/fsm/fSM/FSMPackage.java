@@ -692,7 +692,7 @@ public interface FSMPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TRANSITION_BASE__DOCU = 0;
+  int TRANSITION_BASE__DOCU = STATE_GRAPH_ITEM_FEATURE_COUNT + 0;
 
   /**
    * The feature id for the '<em><b>Action</b></em>' containment reference.
@@ -701,7 +701,7 @@ public interface FSMPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TRANSITION_BASE__ACTION = 1;
+  int TRANSITION_BASE__ACTION = STATE_GRAPH_ITEM_FEATURE_COUNT + 1;
 
   /**
    * The number of structural features of the '<em>Transition Base</em>' class.
@@ -710,7 +710,7 @@ public interface FSMPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TRANSITION_BASE_FEATURE_COUNT = 2;
+  int TRANSITION_BASE_FEATURE_COUNT = STATE_GRAPH_ITEM_FEATURE_COUNT + 2;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.core.fsm.fSM.impl.TransitionImpl <em>Transition</em>}' class.
@@ -729,7 +729,7 @@ public interface FSMPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TRANSITION__DOCU = STATE_GRAPH_ITEM_FEATURE_COUNT + 0;
+  int TRANSITION__DOCU = TRANSITION_BASE__DOCU;
 
   /**
    * The feature id for the '<em><b>Action</b></em>' containment reference.
@@ -738,7 +738,7 @@ public interface FSMPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TRANSITION__ACTION = STATE_GRAPH_ITEM_FEATURE_COUNT + 1;
+  int TRANSITION__ACTION = TRANSITION_BASE__ACTION;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -747,7 +747,7 @@ public interface FSMPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TRANSITION__NAME = STATE_GRAPH_ITEM_FEATURE_COUNT + 2;
+  int TRANSITION__NAME = TRANSITION_BASE_FEATURE_COUNT + 0;
 
   /**
    * The feature id for the '<em><b>To</b></em>' containment reference.
@@ -756,7 +756,7 @@ public interface FSMPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TRANSITION__TO = STATE_GRAPH_ITEM_FEATURE_COUNT + 3;
+  int TRANSITION__TO = TRANSITION_BASE_FEATURE_COUNT + 1;
 
   /**
    * The number of structural features of the '<em>Transition</em>' class.
@@ -765,7 +765,7 @@ public interface FSMPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TRANSITION_FEATURE_COUNT = STATE_GRAPH_ITEM_FEATURE_COUNT + 4;
+  int TRANSITION_FEATURE_COUNT = TRANSITION_BASE_FEATURE_COUNT + 2;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.core.fsm.fSM.impl.NonInitialTransitionImpl <em>Non Initial Transition</em>}' class.

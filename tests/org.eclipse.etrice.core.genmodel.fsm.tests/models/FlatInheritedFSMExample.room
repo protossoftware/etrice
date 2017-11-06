@@ -1,0 +1,73 @@
+RoomModel TemplateModel {
+
+	ActorClass TestActor extends Base {
+		Behavior {
+			StateMachine {
+				State state3
+				RefinedState state1 {
+					entry {
+						"//refined"
+					}
+				}
+				Transition tr2: state1 -> state3 {
+					triggers {
+						<in1: p0>
+					}
+				}
+				RefinedTransition tr0 {
+					action {
+						"//refined"
+					}
+				}
+				State state4
+				State state5
+				Transition tr3: state3 -> state4 {
+					triggers {
+						<in1: p0>
+					}
+				}
+				Transition tr4: state3 -> state5 {
+					triggers {
+						<in2: p0>
+					}
+				}
+			}
+		}
+	}
+
+	ActorClass Base {
+		Interface {
+			Port p0: PC
+		}
+		Structure {
+			external Port p0
+		}
+		Behavior {
+			StateMachine {
+				State state0
+				State state1
+				State state2
+				Transition init0: initial -> state0
+				Transition tr0: state0 -> state1 {
+					triggers {
+						<in1: p0>
+					}
+				}
+				Transition tr1: state1 -> state2 {
+					triggers {
+						<in1: p0>
+					}
+				}
+			}
+		}
+	}
+
+	ProtocolClass PC {
+		incoming {
+			Message in1()
+			Message in2()
+		}
+		outgoing { }
+	}
+
+}

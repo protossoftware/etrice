@@ -1,0 +1,235 @@
+RoomModel DynamicActorTest3 {
+	
+	import room.basic.etunit.* from "Tests.room"
+	import room.basic.types.* from "Types.room"
+	
+	ActorClass Appl {
+		@TestInstance
+		Structure {
+			ActorRef cont: Controller
+		}
+		Behavior { }
+	}
+	
+	ActorClass Controller {
+		Structure {
+			conjugated Port pwrk: PWorker
+			conjugated Port opt: PC
+			Attribute caseId: int32
+			ActorRef worker: Worker
+			Binding pwrk and worker.fct
+			Binding opt and worker.opt
+		}
+		Behavior {
+			ctor {
+				"caseId = etUnit_openAll(\"log/testlog\", \"DynamicActorTest3\", \"org.eclipse.etrice.generator.common.tests.DynamicActorTest3\", \"DynamicActorTest3_case\");"
+			}
+			dtor {
+				"etUnit_closeAll(caseId);"
+			}
+			StateMachine {
+				Transition init: initial -> createOpt1 { }
+				Transition tr0: createOpt1 -> SendHello {
+					triggers {
+						<ok: pwrk>
+					}
+				}
+				Transition tr1: SendHello -> TryCreateInvalid {
+					triggers {
+						<hello: opt>
+					}
+					action {
+						"System.out.println(\"controller received \"+transitionData);"
+					}
+				}
+				Transition tr2: createOpt1 -> UnexpectedError {
+					triggers {
+						<error: pwrk>
+					}
+				}
+				Transition tr3: TryCreateInvalid -> ExpectedError {
+					triggers {
+						<error: pwrk>
+					}
+				}
+				State createOpt1 {
+					entry {
+						"pwrk.create(\"Optional1\");"
+					}
+				}
+				State SendHello {
+					entry {
+						"opt.sayHello();"
+					}
+				}
+				State TryCreateInvalid {
+					entry {
+						"pwrk.create(\"Optional\");"
+					}
+				}
+				State UnexpectedError
+				State ExpectedError {
+					entry {
+						"etUnit_testFinished(caseId);"
+					}
+				}
+			}
+		}
+	}
+	
+	ActorClass Worker {
+		Interface {
+			Port fct: PWorker
+			Port opt: PC
+		}
+		Structure {
+			external Port fct
+			optional ActorRef optRef: Optional
+			Binding opt and optRef.p0
+		}
+		Behavior {
+			// this method prints the passed message and then dumps the object tree consisting of actors and ports
+			Operation dumpTree(msg: string) {
+				"System.out.println(msg);"
+				"System.out.println(((org.eclipse.etrice.runtime.java.messaging.RTObject)getRoot()).toStringRecursive());"
+			}
+			
+			StateMachine {
+				Transition init: initial -> Ready { }
+				Transition tr0: Ready -> Ready {
+					triggers {
+						<create: fct>
+					}
+					action {
+						"if (optRef.createOptionalActor(transitionData, getThread()))"
+						"\tfct.ok();"
+						"else"
+						"\tfct.error();"
+					}
+				}
+				State Ready
+			}
+		}
+	}
+	
+	// the class that is referenced as optional by the Worker
+	// since it is abstract it just serves as an interface
+	abstract ActorClass Optional {
+		Interface {
+			Port p0: PC
+		}
+		Structure { }
+		Behavior { }
+	}
+	
+	// a sub class of Optional which is valid as optional actor
+	ActorClass Optional1 extends Optional {
+		Structure {
+			ActorRef sub1: AC1
+			Binding p0 and sub1.p0
+		}
+		Behavior { }
+	}
+	
+	// a sub class of Optional which is valid as optional actor
+	ActorClass Optional2 extends Optional {
+		Structure {
+			ActorRef sub2: AC2
+			Binding p0 and sub2.p0
+		}
+		Behavior { }
+	}
+	
+	// the following actor classes are part of the possible optional instance sub trees
+	
+	ActorClass AC1 {
+		Interface {
+			Port p0: PC
+		}
+		Structure {
+			external Port p0
+			conjugated Port hlp: PC
+			ActorRef helper: AC3
+			Binding hlp and helper.p0
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> Ready { }
+				Transition tr0: Ready -> AskHelper {
+					triggers {
+						<sayHello: p0>
+					}
+				}
+				Transition tr1: AskHelper -> Ready {
+					triggers {
+						<hello: hlp>
+					}
+					action {
+						"System.out.println(\"helper said \"+transitionData);"
+						"p0.hello(\"this is AC1, instance \"+getInstancePath());"
+					}
+				}
+				State Ready
+				State AskHelper {
+					entry {
+						"hlp.sayHello();"
+					}
+				}
+			}
+		}
+	}
+	
+	ActorClass AC2 {
+		Interface {
+			Port p0: PC
+		}
+		Structure {
+			ActorRef deep_sub: AC3
+			Binding p0 and deep_sub.p0
+		}
+		Behavior { }
+	}
+	
+	ActorClass AC3 {
+		Interface {
+			Port p0: PC
+		}
+		Structure {
+			external Port p0
+		}
+		Behavior {
+			StateMachine {
+				Transition init: initial -> Ready { }
+				Transition tr0: Ready -> Ready {
+					triggers {
+						<sayHello: p0>
+					}
+					action {
+						"p0.hello(\"this is AC3, instance \"+getInstancePath());"
+					}
+				}
+				State Ready
+			}
+		}
+	}
+	
+	// a simple protocol that is used to demonstrate that actors are connected
+	ProtocolClass PC {
+		incoming {
+			Message sayHello()
+		}
+		outgoing {
+			Message hello(txt: string)
+		}
+	}
+	
+	ProtocolClass PWorker {
+		incoming {
+			Message create(ac: string)
+		}
+		outgoing {
+			Message ok()
+			Message error()
+		}
+	}
+}

@@ -19,7 +19,7 @@ import org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem;
 import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.etrice.core.fsm.naming.FSMNameProvider;
 import org.eclipse.etrice.core.fsm.util.FSMHelpers;
-import org.eclipse.etrice.core.genmodel.fsm.base.ILogger;
+import org.eclipse.etrice.core.genmodel.fsm.ILogger;
 
 import com.google.inject.Inject;
 

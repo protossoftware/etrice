@@ -1,1 +1,10 @@
 src-gen/
+bin
+models
+output
+results
+src-gen
+log
+/tmp/
+/firstOpt.obj
+/secondOpt.obj

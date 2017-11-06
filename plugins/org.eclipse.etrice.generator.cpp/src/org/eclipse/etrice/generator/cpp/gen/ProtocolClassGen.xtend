@@ -16,7 +16,7 @@ import com.google.inject.Inject
 import com.google.inject.Singleton
 import java.util.List
 import org.eclipse.etrice.core.genmodel.etricegen.Root
-import org.eclipse.etrice.core.genmodel.fsm.base.ILogger
+import org.eclipse.etrice.core.genmodel.fsm.ILogger
 import org.eclipse.etrice.core.room.CommunicationType
 import org.eclipse.etrice.core.room.InterfaceItem
 import org.eclipse.etrice.core.room.Message

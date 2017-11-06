@@ -21,16 +21,24 @@ import java.util.Set;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.etrice.abstractexec.behavior.util.AbstractExecutionRuntimeModule;
 import org.eclipse.etrice.abstractexec.behavior.util.AbstractExecutionUtil;
 import org.eclipse.etrice.core.common.validation.ICustomValidator;
-import org.eclipse.etrice.core.genmodel.fsm.base.NullDiagnostician;
-import org.eclipse.etrice.core.genmodel.fsm.base.NullLogger;
-import org.eclipse.etrice.core.genmodel.fsm.builder.FSMGeneratorModelBuilder;
-import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ExpandedModelComponent;
 import org.eclipse.etrice.core.fsm.fSM.FSMPackage;
 import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
-import org.eclipse.etrice.core.fsm.fSM.StateGraphItem;
+import org.eclipse.etrice.core.genmodel.fsm.ExtendedFsmGenBuilder;
+import org.eclipse.etrice.core.genmodel.fsm.FsmGenChecker;
+import org.eclipse.etrice.core.genmodel.fsm.FsmGenExtensions;
+import org.eclipse.etrice.core.genmodel.fsm.NullDiagnostician;
+import org.eclipse.etrice.core.genmodel.fsm.NullLogger;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.GraphContainer;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.GraphItem;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.Link;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.Node;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
+
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 
 
 public class ReachabilityValidator implements ICustomValidator {
@@ -60,38 +68,47 @@ public class ReachabilityValidator implements ICustomValidator {
 			// is checked elsewhere
 			return;
 
+		Injector injector = Guice.createInjector(new AbstractExecutionRuntimeModule());
 		NullDiagnostician diagnostician = new NullDiagnostician();
-		FSMGeneratorModelBuilder builder = new FSMGeneratorModelBuilder(new NullLogger(), diagnostician);
-		ExpandedModelComponent xpac = null;
+		ExtendedFsmGenBuilder builder = new ExtendedFsmGenBuilder(injector, diagnostician);
+		GraphContainer gc;
 		try {
-			xpac = builder.createExpandedModelComponent(mc);
+			gc = builder.createTransformedModel(mc);
+			NullLogger logger = new NullLogger();
+			FsmGenChecker.check(gc, logger);
+			if (logger.hasErrors()) {
+				return;
+			}
+			builder.withTriggersInStates(gc);
 		}
 		catch (Throwable t) {
 			return;
 		}
 		
-		if (xpac != null && !diagnostician.isFailed()) {
-			ReachabilityCheck checker = new ReachabilityCheck(xpac);
+		if (gc != null && gc.getGraph()!=null && !diagnostician.isFailed()) {
+			ReachabilityCheck checker = new ReachabilityCheck(gc);
 			checker.computeReachability();
-			TreeIterator<EObject> it = xpac.getStateMachine().eAllContents();
+			TreeIterator<EObject> it = gc.eAllContents();
 			while (it.hasNext()) {
 				EObject item = it.next();
-				if (item instanceof StateGraphItem)
+				if (item instanceof GraphItem)
 				{
-					StateGraphItem toCheck = (StateGraphItem) item;
+					GraphItem toCheck = (GraphItem) item;
 					if (!checker.isReachable(toCheck)) {
-						EObject orig = xpac.getOrig(toCheck);
-						if (toCheck.getName()==null)
-							// we cannot create an error message
-							continue;
-						
-						EObject container = orig.eContainer();
+						String name = FsmGenExtensions.getName(toCheck);
+						if (name==null) {
+							name = "<no name>";
+						}
+						EObject stateGraphItem = (toCheck instanceof Node) ?
+								((Node) toCheck).getStateGraphNode() : ((Link) toCheck).getTransition();
+								
+						EObject container = stateGraphItem.eContainer();
 						@SuppressWarnings("unchecked")
-						int idx = ((List<? extends EObject>)container.eGet(orig.eContainingFeature())).indexOf(orig);
+						int idx = ((List<? extends EObject>)container.eGet(stateGraphItem.eContainingFeature())).indexOf(stateGraphItem);
 						messageAcceptor.acceptWarning(
 								"Unreachable state/point of graph",
-								xpac.getOrig(toCheck).eContainer(), xpac.getOrig(toCheck).eContainingFeature(), idx,
-								DIAG_CODE_UNREACHABLE, toCheck.getName());
+								stateGraphItem.eContainer(), stateGraphItem.eContainingFeature(), idx,
+								DIAG_CODE_UNREACHABLE, name);
 					}
 				}
 			}

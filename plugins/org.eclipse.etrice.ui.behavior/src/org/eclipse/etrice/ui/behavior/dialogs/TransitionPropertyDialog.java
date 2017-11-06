@@ -11,6 +11,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.etrice.core.RoomStandaloneSetup;
 import org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem;
 import org.eclipse.etrice.core.fsm.fSM.CPBranchTransition;
 import org.eclipse.etrice.core.fsm.fSM.DetailCode;
@@ -22,10 +23,11 @@ import org.eclipse.etrice.core.fsm.fSM.Transition;
 import org.eclipse.etrice.core.fsm.fSM.TriggeredTransition;
 import org.eclipse.etrice.core.fsm.util.FSMHelpers;
 import org.eclipse.etrice.core.fsm.validation.FSMValidationUtilXtend.Result;
-import org.eclipse.etrice.core.genmodel.builder.GeneratorModelBuilder;
-import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
-import org.eclipse.etrice.core.genmodel.fsm.base.NullDiagnostician;
-import org.eclipse.etrice.core.genmodel.fsm.base.NullLogger;
+import org.eclipse.etrice.core.genmodel.fsm.ExtendedFsmGenBuilder;
+import org.eclipse.etrice.core.genmodel.fsm.FsmGenExtensions;
+import org.eclipse.etrice.core.genmodel.fsm.NullDiagnostician;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.GraphContainer;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.Link;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.CommunicationType;
 import org.eclipse.etrice.core.room.InterfaceItem;
@@ -52,6 +54,8 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.IManagedForm;
+
+import com.google.inject.Injector;
 
 public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog implements ITransitionPropertyDialog {
 
@@ -184,12 +188,9 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 			triggerError = !triggerCompartment.triggersAvailable();
 		}
 		
+		VarDecl transitionEventData = getCommonData();
+		
 		FSMHelpers fsmHelpers = SupportUtil.getInstance().getFSMHelpers();
-
-		VarDecl transitionEventData = null;
-		ExpandedActorClass xpac = new GeneratorModelBuilder(new NullLogger(), new NullDiagnostician()).createExpandedActorClass(ac);
-		if(xpac != null && xpac.getCopy(trans) instanceof Transition)
-			transitionEventData = xpac.getVarDeclData((Transition) xpac.getCopy(trans));
 		
 		if (trans instanceof GuardedTransition) {
 			GuardedTransition guardedTrans = (GuardedTransition) trans;
@@ -267,6 +268,19 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 				}
 			});
 		}
+	}
+
+	private VarDecl getCommonData() {
+		VarDecl transitionEventData = null;
+		Injector injector = new RoomStandaloneSetup().createInjectorAndDoEMFRegistration();
+		ExtendedFsmGenBuilder builder = new ExtendedFsmGenBuilder(injector, new NullDiagnostician());
+		GraphContainer gc = builder.createTransformedModel(ac);
+		builder.withCommonData(gc);
+		Link l = FsmGenExtensions.getLinkFor(gc, trans);
+		if (l != null && l.getCommonData() instanceof VarDecl) {
+			transitionEventData = (VarDecl) l.getCommonData();
+		}
+		return transitionEventData;
 	}
 
 	/* (non-Javadoc)

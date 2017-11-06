@@ -29,7 +29,7 @@ RoomModel ChoicePointTestExtended {
 						<testInitialCP0: testPort0>
 					}
 					action {
-						"testValue = value;"
+						"testValue = transitionData;"
 					}
 				}
 				Transition tr1: waiting -> waiting {
@@ -37,7 +37,7 @@ RoomModel ChoicePointTestExtended {
 						<setCaseId: navPort>
 					}
 					action {
-						"caseId = id;"
+						"caseId = transitionData;"
 					}
 				}
 				State testSubState {
@@ -59,7 +59,7 @@ RoomModel ChoicePointTestExtended {
 								<testTrCP0: testPort0>
 							}
 							action {
-								"testValue = value;"
+								"testValue = transitionData;"
 							}
 						}
 						
@@ -68,7 +68,7 @@ RoomModel ChoicePointTestExtended {
 								<testTrCP0: testPort1>
 							}
 							action {
-								"testValue = value;"
+								"testValue = transitionData;"
 							}
 						}
 						Transition tr7: my tp0 -> cp cp0 {
@@ -76,7 +76,7 @@ RoomModel ChoicePointTestExtended {
 								<testTrCP1: testPort1>
 							}
 							action {
-								"testValue = value;"
+								"testValue = transitionData;"
 							}
 						}
 						
@@ -120,7 +120,7 @@ RoomModel ChoicePointTestExtended {
 						Transition tr4: my tp1 -> simpleState {
 							triggers {
 								<toNode: navPort guard {
-									"id == 1"
+									"transitionData == 1"
 								}>
 							}
 						}
@@ -129,7 +129,7 @@ RoomModel ChoicePointTestExtended {
 								<testCP0: testPort0>
 							}
 							action {
-								"testValue = value;"
+								"testValue = transitionData;"
 								""
 								"navPort.onProtocol(10);"
 								"navPort.onMessage(100);"
@@ -140,7 +140,7 @@ RoomModel ChoicePointTestExtended {
 								<testCP0: testPort1>
 							}
 							action {
-								"testValue = value;"
+								"testValue = transitionData;"
 								""
 								"navPort.onProtocol(11);"
 								"navPort.onMessage(100);"
@@ -151,7 +151,7 @@ RoomModel ChoicePointTestExtended {
 								<testCP1: testPort1>
 							}
 							action {
-								"testValue = value;"
+								"testValue = transitionData;"
 								""
 								"navPort.onProtocol(11);"
 								"navPort.onMessage(101);"
@@ -162,7 +162,7 @@ RoomModel ChoicePointTestExtended {
 								<testCP0: testPort0>
 							}
 							action {
-								"testValue = value;"
+								"testValue = transitionData;"
 								""
 								"navPort.onProtocol(10);"
 								"navPort.onMessage(100);"
@@ -173,7 +173,7 @@ RoomModel ChoicePointTestExtended {
 								<testCP0: testPort1>
 							}
 							action {
-								"testValue = value;"
+								"testValue = transitionData;"
 								""
 								"navPort.onProtocol(11);"
 								"navPort.onMessage(100);"
@@ -184,7 +184,7 @@ RoomModel ChoicePointTestExtended {
 								<testCP1: testPort1>
 							}
 							action {
-								"testValue = value;"
+								"testValue = transitionData;"
 								""
 								"navPort.onProtocol(11);"
 								"navPort.onMessage(101);"
@@ -193,14 +193,14 @@ RoomModel ChoicePointTestExtended {
 						Transition tr13: my tp1 -> subState {
 							triggers {
 								<toNode: navPort guard {
-									"id == 2"
+									"transitionData == 2"
 								}>
 							}
 						}
 						Transition tr14: my tp1 -> tp1 of exitPoints {
 							triggers {
 								<toNode: navPort guard {
-									"id == 3"
+									"transitionData == 3"
 								}>
 							}
 						}
@@ -208,7 +208,7 @@ RoomModel ChoicePointTestExtended {
 						Transition tr16: my tp1 -> choicePoint {
 							triggers {
 								<toNode: navPort guard {
-									"id==4"
+									"transitionData == 4"
 								}>
 							}
 						}
@@ -218,7 +218,7 @@ RoomModel ChoicePointTestExtended {
 								<testCP0: testPort0>
 							}
 							action {
-								"testValue = value;"
+								"testValue = transitionData;"
 								""
 								"navPort.onProtocol(10);"
 								"navPort.onMessage(100);"
@@ -239,7 +239,7 @@ RoomModel ChoicePointTestExtended {
 								<testCP0: testPort1>
 							}
 							action {
-								"testValue = value;"
+								"testValue = transitionData;"
 								""
 								"navPort.onProtocol(11);"
 								"navPort.onMessage(100);"
@@ -250,7 +250,7 @@ RoomModel ChoicePointTestExtended {
 								<testCP1: testPort1>
 							}
 							action {
-								"testValue = value;"
+								"testValue = transitionData;"
 								""
 								"navPort.onProtocol(11);"
 								"navPort.onMessage(101);"
@@ -280,7 +280,7 @@ RoomModel ChoicePointTestExtended {
 										<testCP0: testPort0>
 									}
 									action {
-										"testValue = value;"
+										"testValue = transitionData;"
 										""
 										"navPort.onProtocol(10);"
 										"navPort.onMessage(100);"
@@ -291,7 +291,7 @@ RoomModel ChoicePointTestExtended {
 										<testCP0: testPort1>
 									}
 									action {
-										"testValue = value;"
+										"testValue = transitionData;"
 										""
 										"navPort.onProtocol(11);"
 										"navPort.onMessage(100);"
@@ -302,7 +302,7 @@ RoomModel ChoicePointTestExtended {
 										<testCP1: testPort1>
 									}
 									action {
-										"testValue = value;"
+										"testValue = transitionData;"
 										""
 										"navPort.onProtocol(11);"
 										"navPort.onMessage(101);"
@@ -406,7 +406,7 @@ RoomModel ChoicePointTestExtended {
 						<resultCP: navPort>
 					}
 					action {
-						"check(value);"
+						"check(transitionData);"
 					}
 				}
 				Transition tr7: testTr -> testTr1 {
@@ -414,7 +414,7 @@ RoomModel ChoicePointTestExtended {
 						<resultCP: navPort>
 					}
 					action {
-						"check(value);"
+						"check(transitionData);"
 					}
 				}
 				Transition tr8: testTr1 -> testTr2 {
@@ -422,7 +422,7 @@ RoomModel ChoicePointTestExtended {
 						<resultCP: navPort>
 					}
 					action {
-						"check(value);"
+						"check(transitionData);"
 					}
 				}
 				Transition tr1: testTr2 -> triggerTest {
@@ -430,7 +430,7 @@ RoomModel ChoicePointTestExtended {
 						<onNode: navPort>
 					}
 					action {
-						"check(id);"
+						"check(transitionData);"
 					}
 				}
 				Transition tr4: testPath -> testPath {
@@ -438,7 +438,7 @@ RoomModel ChoicePointTestExtended {
 						<onMessage: navPort>
 					}
 					action {
-						"check(id);"
+						"check(transitionData);"
 					}
 				}
 				Transition tr5: testPath -> onCP {
@@ -446,7 +446,7 @@ RoomModel ChoicePointTestExtended {
 						<resultCP: navPort>
 					}
 					action {
-						"check(value);"
+						"check(transitionData);"
 					}
 				}
 				Transition tr9: onCP -> triggerTest {
@@ -454,7 +454,7 @@ RoomModel ChoicePointTestExtended {
 						<onNode: navPort>
 					}
 					action {
-						"check(id);"
+						"check(transitionData);"
 					}
 				}
 				Transition tr10: triggerTest -> testPath {
@@ -462,7 +462,7 @@ RoomModel ChoicePointTestExtended {
 						<onProtocol: navPort>
 					}
 					action {
-						"check(id);"
+						"check(transitionData);"
 					}
 				}
 				State testInitial {

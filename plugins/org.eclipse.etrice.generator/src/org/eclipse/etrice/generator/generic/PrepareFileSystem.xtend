@@ -15,14 +15,13 @@ package org.eclipse.etrice.generator.generic
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import java.io.File
+import java.util.Collection
 import java.util.HashSet
 import java.util.Set
 import org.eclipse.emf.ecore.resource.Resource
-import org.eclipse.etrice.core.genmodel.fsm.base.ILogger
 import org.eclipse.etrice.core.genmodel.etricegen.Root
+import org.eclipse.etrice.core.genmodel.fsm.ILogger
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
-import org.eclipse.etrice.generator.generic.RoomExtensions
-import java.util.Collection
 
 /**
  * A class that is used to recursively erase all folders receiving generated code

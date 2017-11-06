@@ -41,6 +41,8 @@ import org.eclipse.etrice.ui.behavior.fsm.editor.AbstractFSMEditor;
 import org.eclipse.etrice.ui.behavior.fsm.editor.DecoratorUtil;
 import org.eclipse.etrice.ui.behavior.fsm.provider.IInjectorProvider;
 import org.eclipse.etrice.ui.behavior.fsm.provider.ImageProvider;
+import org.eclipse.etrice.ui.behavior.fsm.support.util.FSMSupportUtil;
+import org.eclipse.etrice.ui.behavior.fsm.support.util.ModelEditingUtil;
 import org.eclipse.etrice.ui.common.base.UIBaseActivator;
 import org.eclipse.etrice.ui.common.base.preferences.UIBasePreferenceConstants;
 import org.eclipse.etrice.ui.common.base.support.CantRemoveFeature;
@@ -267,9 +269,8 @@ public class TransitionSupport {
 					}
 
 					ContainerShape targetContainer = FSMSupportUtil.getInstance().getStateGraphContainer((ContainerShape) context.getSourcePictogramElement().eContainer());
-					boolean inherited = FSMSupportUtil.getInstance().isInherited(getDiagram(), sg);
-					if (inherited) {
-						sg = FSMSupportUtil.getInstance().insertRefinedState(sg, mc, targetContainer, getFeatureProvider());
+					if (!FSMSupportUtil.getInstance().isOwnedBy(mc, sg)) {
+						sg = ModelEditingUtil.insertRefinedState(sg, mc, targetContainer, getFeatureProvider());
 					}
 
 					sg.getTransitions().add(trans);

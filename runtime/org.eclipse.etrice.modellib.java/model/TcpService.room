@@ -102,7 +102,7 @@ RoomModel room.basic.service.tcp {
 					action {
 						"lastError=0;"
 						"try{"
-						"socket = new ServerSocket(data.TcpPort);"
+						"socket = new ServerSocket(transitionData.TcpPort);"
 						"(new ServerAcceptThread(PayloadPort, socket, this)).start();"
 						"}catch(IOException e){"
 						"System.err.println(e.toString());"
@@ -148,7 +148,7 @@ RoomModel room.basic.service.tcp {
 					}
 					action {
 						"try{"
-						"outStreams.get(data.getConnectionId()).write(data.getData(),0,data.length);"
+						"outStreams.get(transitionData.getConnectionId()).write(transitionData.getData(),0,transitionData.length);"
 						"}catch(IOException e){"
 						"System.err.println(e.toString());"
 						"}"
@@ -229,7 +229,7 @@ RoomModel room.basic.service.tcp {
 					action {
 						"lastError=0;"
 						"try{"
-						"socket = new Socket(data.IPAddr,data.TcpPort);"
+						"socket = new Socket(transitionData.IPAddr,transitionData.TcpPort);"
 						"(new ClientRxThread(PayloadPort, socket)).start();"
 						"out = socket.getOutputStream();"
 						"}catch(IOException e){"
@@ -276,7 +276,7 @@ RoomModel room.basic.service.tcp {
 					}
 					action {
 						"try{"
-						"\tout.write(data.getData(),0,data.length);"
+						"\tout.write(transitionData.getData(),0,transitionData.length);"
 						"\t}catch(IOException e){"
 						"\t\tSystem.err.println(e.toString());"
 						"\t}"

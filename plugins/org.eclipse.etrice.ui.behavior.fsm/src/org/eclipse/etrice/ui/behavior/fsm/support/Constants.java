@@ -20,5 +20,6 @@ public interface Constants {
 	static final String STATE_TYPE = "state";
 	static final String CP_TYPE = "cp";
 	static final String TRP_TYPE = "trp";
+	static final String INI_TYPE = "ini";
 	static final String TRANS_TYPE = "trans";
 }

@@ -450,6 +450,32 @@ finally {
 
 
 
+// Entry rule entryRuleTransitionBase
+entryRuleTransitionBase 
+:
+{ before(grammarAccess.getTransitionBaseRule()); }
+	 ruleTransitionBase
+{ after(grammarAccess.getTransitionBaseRule()); } 
+	 EOF 
+;
+
+// Rule TransitionBase
+ruleTransitionBase
+    @init {
+		int stackSize = keepStackSize();
+    }
+	:
+(
+{ before(grammarAccess.getTransitionBaseAccess().getAlternatives()); }
+(rule__TransitionBase__Alternatives)
+{ after(grammarAccess.getTransitionBaseAccess().getAlternatives()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
 
 
 // Entry rule entryRuleTransition
@@ -1766,6 +1792,27 @@ finally {
 	restoreStackSize(stackSize);
 }
 
+rule__TransitionBase__Alternatives
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getTransitionBaseAccess().getTransitionParserRuleCall_0()); }
+	ruleTransition
+{ after(grammarAccess.getTransitionBaseAccess().getTransitionParserRuleCall_0()); }
+)
+
+    |(
+{ before(grammarAccess.getTransitionBaseAccess().getRefinedTransitionParserRuleCall_1()); }
+	ruleRefinedTransition
+{ after(grammarAccess.getTransitionBaseAccess().getRefinedTransitionParserRuleCall_1()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
 
 rule__Transition__Alternatives
     @init {

@@ -21,7 +21,6 @@ import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.ui.behavior.editor.BehaviorEditor;
 import org.eclipse.etrice.ui.behavior.fsm.commands.PopulateDiagramCommand;
 import org.eclipse.etrice.ui.behavior.fsm.editor.BehaviorExporter;
-import org.eclipse.etrice.ui.behavior.fsm.support.DiagramUpdateFeature;
 import org.eclipse.etrice.ui.common.base.commands.UpdateCommand;
 import org.eclipse.etrice.ui.common.base.export.IBulkDiagramExporter;
 import org.eclipse.etrice.ui.common.base.support.DiagramAccessBase;
@@ -92,7 +91,7 @@ public class DiagramAccess extends DiagramAccessBase {
 	@Override
 	protected Command getInitialCommand(EObject rootObject, Diagram diagram, TransactionalEditingDomain editingDomain) {
 		if (rootObject instanceof ModelComponent) {
-			return new PopulateDiagramCommand("org.eclipse.etrice.ui.behavior.diagramTypeProvider", diagram, (ModelComponent) rootObject, Activator.getDefault().getInjector(), editingDomain);
+			return new PopulateDiagramCommand(DiagramTypeProvider.PROVIDER_ID, diagram, (ModelComponent) rootObject, editingDomain);
 		}
 		return null;
 	}
@@ -103,8 +102,7 @@ public class DiagramAccess extends DiagramAccessBase {
 	@Override
 	protected Command getUpdateCommand(Diagram diagram, TransactionalEditingDomain editingDomain) {
 		IDiagramTypeProvider dtp = GraphitiUi.getExtensionManager().createDiagramTypeProvider(diagram, DiagramTypeProvider.PROVIDER_ID); //$NON-NLS-1$
-		IFeatureProvider featureProvider = dtp.getFeatureProvider();
-		UpdateCommand cmd = new UpdateCommand(diagram, editingDomain, new DiagramUpdateFeature(featureProvider));
+		UpdateCommand cmd = new UpdateCommand(DiagramTypeProvider.PROVIDER_ID, diagram, editingDomain);
 		if (cmd.updateNeeded())
 			return cmd;
 		

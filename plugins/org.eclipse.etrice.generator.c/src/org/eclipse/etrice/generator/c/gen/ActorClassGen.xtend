@@ -18,7 +18,8 @@ import com.google.inject.Singleton
 import org.eclipse.etrice.core.fsm.fSM.ComponentCommunicationType
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass
 import org.eclipse.etrice.core.genmodel.etricegen.Root
-import org.eclipse.etrice.core.genmodel.fsm.base.ILogger
+import org.eclipse.etrice.core.genmodel.fsm.FsmGenExtensions
+import org.eclipse.etrice.core.genmodel.fsm.ILogger
 import org.eclipse.etrice.core.room.CommunicationType
 import org.eclipse.etrice.core.room.Operation
 import org.eclipse.etrice.core.room.ProtocolClass
@@ -75,7 +76,8 @@ class ActorClassGen extends GenericActorClassGenerator {
 		val async = ac.commType==ComponentCommunicationType::ASYNCHRONOUS
 		val hasConstData = !(eventPorts.empty && recvPorts.empty && ac.allSAPs.empty && ac.allServiceImplementations.empty)
 							|| Main::settings.generateMSCInstrumentation
-		val hasVarData = !(sendPorts.empty && ac.allAttributes.empty && xpac.stateMachine.empty && !hasConstData)
+		val isEmptyStateGraph = FsmGenExtensions.isEmpty(xpac.graphContainer.graph)
+		val hasVarData = !(sendPorts.empty && ac.allAttributes.empty && isEmptyStateGraph && !hasConstData)
 
 	'''
 		/**
@@ -141,7 +143,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 			/* this actor class has no ports and thus no constant data */
 		«ENDIF»
 
-		«IF !xpac.stateMachine.empty»
+		«IF !isEmptyStateGraph»
 
 			«xpac.genHeaderConstants»
 		«ENDIF»
@@ -162,7 +164,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 
 				«ac.allAttributes.attributes»
 
-				«IF !xpac.stateMachine.empty»
+				«IF !isEmptyStateGraph»
 
 					«xpac.genDataMembers»
 				«ENDIF»
@@ -312,6 +314,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 		val eventDriven = ac.commType==ComponentCommunicationType::EVENT_DRIVEN
 		val dataDriven = ac.commType==ComponentCommunicationType::DATA_DRIVEN
 		val handleEvents = async || eventDriven
+		val isEmptyStateGraph = FsmGenExtensions.isEmpty(xpac.graphContainer.graph)
 
 	'''
 		/**
@@ -340,13 +343,13 @@ class ActorClassGen extends GenericActorClassGenerator {
 		/* interface item IDs */
 		«xpac.genInterfaceItemConstants»
 
-		«IF !xpac.stateMachine.empty»
-			«xpac.genStateMachine()»
+		«IF !isEmptyStateGraph»
+			«xpac.graphContainer.genStateMachine»
 		«ENDIF»
 
 		void «ac.name»_init(«ac.name»* self){
 			ET_MSC_LOGGER_SYNC_ENTRY("«ac.name»", "init")
-			«IF !xpac.stateMachine.empty»
+			«IF !isEmptyStateGraph»
 				«xpac.genInitialization»
 			«ENDIF»
 			ET_MSC_LOGGER_SYNC_EXIT
@@ -355,7 +358,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 
 		void «ac.name»_receiveMessage(void* self, const void* ifitem, const etMessage* msg){
 			ET_MSC_LOGGER_SYNC_ENTRY("«ac.name»", "_receiveMessage")
-			«IF !xpac.stateMachine.empty»
+			«IF !isEmptyStateGraph»
 				«IF handleEvents»
 					«langExt.operationScope(ac.name, false)»receiveEvent(self, (etPort*)ifitem, msg->evtID, (void*)(((char*)msg)+MEM_CEIL(sizeof(etMessage))));
 				«ELSE»
@@ -369,7 +372,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 		«IF dataDriven || async»
 			void «ac.name»_execute(«ac.name»* self) {
 				ET_MSC_LOGGER_SYNC_ENTRY("«ac.name»", "_execute")
-				«IF !xpac.stateMachine.empty»
+				«IF !isEmptyStateGraph»
 
 					«IF handleEvents»
 						«langExt.operationScope(ac.name, false)»receiveEvent(self, NULL, 0, NULL);

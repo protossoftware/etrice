@@ -13,37 +13,35 @@
 package org.eclipse.etrice.generator.java.gen
 
 import com.google.inject.Singleton
-import java.util.ArrayList
-import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass
+import java.util.Comparator
 import org.eclipse.etrice.core.fsm.fSM.State
+import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.GraphContainer
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.Node
 import org.eclipse.etrice.generator.generic.GenericStateMachineGenerator
 import org.eclipse.etrice.generator.java.Main
-import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ExpandedModelComponent
+
+import static extension org.eclipse.etrice.core.genmodel.fsm.FsmGenExtensions.*
 
 @Singleton
 class StateMachineGen extends GenericStateMachineGenerator {
 
+	val nodeComparator = new NodeComparator
+
 	/**
 	 * @param generateImplementation NOT used
 	 */
-	override genExtra(ExpandedModelComponent xpac, boolean generateImplementation) {
-		val states = new ArrayList<State>()
-		var ac = xpac.modelComponent
+	override genExtra(GraphContainer gc, boolean generateImplementation) {
+		val orderedStateNodes = gc.graph.allStateNodes.toList.sortWith(nodeComparator)
 
-//		it is crucial that we obey the order that is used for state IDs
-//		that means we have to collect base classes first and each base class list with leaf states last
-		while (ac!=null) {
-			states.addAll(0, ac.allBaseStates.leafStatesLast)
-			ac = ac.base
-		}
 	'''
 		«IF Main::settings.generateMSCInstrumentation || Main::settings.generateWithVerboseOutput»
 			// state names
 			protected static final String stateStrings[] = {
 				"<no state>",
 				"<top>",
-				«FOR state : states SEPARATOR ","»
-					"«state.genStatePathName»"
+				«FOR node : orderedStateNodes SEPARATOR ","»
+					"«(node.stateGraphNode as State).genStatePathName»"
 				«ENDFOR»
 			};
 
@@ -54,7 +52,7 @@ class StateMachineGen extends GenericStateMachineGenerator {
 «««				history[i] = NO_STATE;
 «««			}
 		// history
-		protected int history[] = {NO_STATE, NO_STATE«FOR state : states», NO_STATE«ENDFOR»};
+		protected int history[] = {NO_STATE, NO_STATE«FOR state : orderedStateNodes», NO_STATE«ENDFOR»};
 
 		private void setState(int new_state) {
 			«IF Main::settings.generateMSCInstrumentation»
@@ -83,5 +81,29 @@ class StateMachineGen extends GenericStateMachineGenerator {
 
 	def getHistorySize(ExpandedActorClass xpac) {
 		xpac.actorClass.getAllBaseStates().size+2
+	}
+
+	private static class NodeComparator implements Comparator<Node> {
+		
+		// it is crucial that we obey the order that is used for state IDs
+		// that means we have to collect base classes first and each base class list with leaf states last
+		override int compare(Node o1, Node o2) {
+			if (o1.inheritanceLevel==o2.inheritanceLevel) {
+				if (o1.isLeaf && o2.isLeaf) {
+					return 0
+				}
+				if (o1.isLeaf) {
+					return 1
+				}
+				if (o2.isLeaf) {
+					return -1
+				}
+				return 0
+			}
+			else {
+				return Integer.compare(o1.inheritanceLevel, o1.inheritanceLevel)
+			}
+		}
+		
 	}
 }

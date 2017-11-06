@@ -10,12 +10,8 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.eclipse.etrice.core.common.base.Documentation;
-
-import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.etrice.core.fsm.fSM.FSMPackage;
 import org.eclipse.etrice.core.fsm.fSM.Transition;
-import org.eclipse.etrice.core.fsm.fSM.TransitionBase;
 import org.eclipse.etrice.core.fsm.fSM.TransitionTerminal;
 
 /**
@@ -26,36 +22,14 @@ import org.eclipse.etrice.core.fsm.fSM.TransitionTerminal;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.etrice.core.fsm.fSM.impl.TransitionImpl#getDocu <em>Docu</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.fsm.fSM.impl.TransitionImpl#getAction <em>Action</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.fsm.fSM.impl.TransitionImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.fsm.fSM.impl.TransitionImpl#getTo <em>To</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class TransitionImpl extends StateGraphItemImpl implements Transition
+public class TransitionImpl extends TransitionBaseImpl implements Transition
 {
-  /**
-   * The cached value of the '{@link #getDocu() <em>Docu</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getDocu()
-   * @generated
-   * @ordered
-   */
-  protected Documentation docu;
-
-  /**
-   * The cached value of the '{@link #getAction() <em>Action</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getAction()
-   * @generated
-   * @ordered
-   */
-  protected DetailCode action;
-
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
@@ -105,102 +79,6 @@ public class TransitionImpl extends StateGraphItemImpl implements Transition
   protected EClass eStaticClass()
   {
     return FSMPackage.Literals.TRANSITION;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Documentation getDocu()
-  {
-    return docu;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetDocu(Documentation newDocu, NotificationChain msgs)
-  {
-    Documentation oldDocu = docu;
-    docu = newDocu;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, FSMPackage.TRANSITION__DOCU, oldDocu, newDocu);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setDocu(Documentation newDocu)
-  {
-    if (newDocu != docu)
-    {
-      NotificationChain msgs = null;
-      if (docu != null)
-        msgs = ((InternalEObject)docu).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - FSMPackage.TRANSITION__DOCU, null, msgs);
-      if (newDocu != null)
-        msgs = ((InternalEObject)newDocu).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - FSMPackage.TRANSITION__DOCU, null, msgs);
-      msgs = basicSetDocu(newDocu, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, FSMPackage.TRANSITION__DOCU, newDocu, newDocu));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public DetailCode getAction()
-  {
-    return action;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetAction(DetailCode newAction, NotificationChain msgs)
-  {
-    DetailCode oldAction = action;
-    action = newAction;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, FSMPackage.TRANSITION__ACTION, oldAction, newAction);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setAction(DetailCode newAction)
-  {
-    if (newAction != action)
-    {
-      NotificationChain msgs = null;
-      if (action != null)
-        msgs = ((InternalEObject)action).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - FSMPackage.TRANSITION__ACTION, null, msgs);
-      if (newAction != null)
-        msgs = ((InternalEObject)newAction).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - FSMPackage.TRANSITION__ACTION, null, msgs);
-      msgs = basicSetAction(newAction, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, FSMPackage.TRANSITION__ACTION, newAction, newAction));
   }
 
   /**
@@ -284,10 +162,6 @@ public class TransitionImpl extends StateGraphItemImpl implements Transition
   {
     switch (featureID)
     {
-      case FSMPackage.TRANSITION__DOCU:
-        return basicSetDocu(null, msgs);
-      case FSMPackage.TRANSITION__ACTION:
-        return basicSetAction(null, msgs);
       case FSMPackage.TRANSITION__TO:
         return basicSetTo(null, msgs);
     }
@@ -304,10 +178,6 @@ public class TransitionImpl extends StateGraphItemImpl implements Transition
   {
     switch (featureID)
     {
-      case FSMPackage.TRANSITION__DOCU:
-        return getDocu();
-      case FSMPackage.TRANSITION__ACTION:
-        return getAction();
       case FSMPackage.TRANSITION__NAME:
         return getName();
       case FSMPackage.TRANSITION__TO:
@@ -326,12 +196,6 @@ public class TransitionImpl extends StateGraphItemImpl implements Transition
   {
     switch (featureID)
     {
-      case FSMPackage.TRANSITION__DOCU:
-        setDocu((Documentation)newValue);
-        return;
-      case FSMPackage.TRANSITION__ACTION:
-        setAction((DetailCode)newValue);
-        return;
       case FSMPackage.TRANSITION__NAME:
         setName((String)newValue);
         return;
@@ -352,12 +216,6 @@ public class TransitionImpl extends StateGraphItemImpl implements Transition
   {
     switch (featureID)
     {
-      case FSMPackage.TRANSITION__DOCU:
-        setDocu((Documentation)null);
-        return;
-      case FSMPackage.TRANSITION__ACTION:
-        setAction((DetailCode)null);
-        return;
       case FSMPackage.TRANSITION__NAME:
         setName(NAME_EDEFAULT);
         return;
@@ -378,56 +236,12 @@ public class TransitionImpl extends StateGraphItemImpl implements Transition
   {
     switch (featureID)
     {
-      case FSMPackage.TRANSITION__DOCU:
-        return docu != null;
-      case FSMPackage.TRANSITION__ACTION:
-        return action != null;
       case FSMPackage.TRANSITION__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case FSMPackage.TRANSITION__TO:
         return to != null;
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass)
-  {
-    if (baseClass == TransitionBase.class)
-    {
-      switch (derivedFeatureID)
-      {
-        case FSMPackage.TRANSITION__DOCU: return FSMPackage.TRANSITION_BASE__DOCU;
-        case FSMPackage.TRANSITION__ACTION: return FSMPackage.TRANSITION_BASE__ACTION;
-        default: return -1;
-      }
-    }
-    return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass)
-  {
-    if (baseClass == TransitionBase.class)
-    {
-      switch (baseFeatureID)
-      {
-        case FSMPackage.TRANSITION_BASE__DOCU: return FSMPackage.TRANSITION__DOCU;
-        case FSMPackage.TRANSITION_BASE__ACTION: return FSMPackage.TRANSITION__ACTION;
-        default: return -1;
-      }
-    }
-    return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
   }
 
   /**

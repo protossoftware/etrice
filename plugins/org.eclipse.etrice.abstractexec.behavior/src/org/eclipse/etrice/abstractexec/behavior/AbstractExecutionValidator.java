@@ -18,9 +18,9 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.etrice.abstractexec.behavior.util.AbstractExecutionRuntimeModule;
 import org.eclipse.etrice.abstractexec.behavior.util.AbstractExecutionUtil;
 import org.eclipse.etrice.core.common.validation.ICustomValidator;
 import org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem;
@@ -29,16 +29,22 @@ import org.eclipse.etrice.core.fsm.fSM.FSMPackage;
 import org.eclipse.etrice.core.fsm.fSM.MessageFromIf;
 import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
 import org.eclipse.etrice.core.fsm.fSM.State;
-import org.eclipse.etrice.core.fsm.fSM.StateGraphItem;
 import org.eclipse.etrice.core.fsm.fSM.Trigger;
 import org.eclipse.etrice.core.fsm.fSM.TriggeredTransition;
 import org.eclipse.etrice.core.fsm.naming.FSMNameProvider;
-import org.eclipse.etrice.core.genmodel.fsm.base.NullDiagnostician;
-import org.eclipse.etrice.core.genmodel.fsm.base.NullLogger;
-import org.eclipse.etrice.core.genmodel.fsm.builder.FSMGeneratorModelBuilder;
-import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ActiveTrigger;
-import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ExpandedModelComponent;
+import org.eclipse.etrice.core.genmodel.fsm.ExtendedFsmGenBuilder;
+import org.eclipse.etrice.core.genmodel.fsm.FsmGenExtensions;
+import org.eclipse.etrice.core.genmodel.fsm.NullDiagnostician;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.CommonTrigger;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.GraphContainer;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.GraphItem;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.Link;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.Node;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
+import org.eclipse.xtext.xbase.lib.IteratorExtensions;
+
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 
 /**
  * @author rentzhnr
@@ -78,7 +84,7 @@ public class AbstractExecutionValidator implements ICustomValidator {
 		if (!(object instanceof ModelComponent))
 			return;
 		
-		if(context.isGeneration())
+		if (context.isGeneration())
 			return;
 		
 		ModelComponent mc = (ModelComponent) object;
@@ -111,46 +117,42 @@ public class AbstractExecutionValidator implements ICustomValidator {
 		}
 		if (oneProtocolsWithSemantics) {
 			// begin abstract execution on state machine of expanded actor class
-			if (traceExec)
+			if (traceExec) {
 				System.out.println("  Reached where at least one interface items has semantics");
+			}
+			Injector injector = Guice.createInjector(new AbstractExecutionRuntimeModule());
 			NullDiagnostician diagnostician = new NullDiagnostician();
-			FSMGeneratorModelBuilder builder = new FSMGeneratorModelBuilder(
-					new NullLogger(), diagnostician);
-			ExpandedModelComponent xpac;
+			ExtendedFsmGenBuilder builder = new ExtendedFsmGenBuilder(injector, diagnostician);
+			GraphContainer gc;
 			try {
-				xpac = builder.createExpandedModelComponent(mc);
+				gc = builder.createTransformedModel(mc);
+				builder.withTriggersInStates(gc);
 			}
 			catch (Throwable t) {
 				return;
 			}
 
-			if (xpac != null && !diagnostician.isFailed()) {
-				SemanticsCheck checker = new SemanticsCheck(xpac);
+			if (gc != null && gc.getGraph()!=null && !diagnostician.isFailed()) {
+				SemanticsCheck checker = new SemanticsCheck(gc);
 				checker.checkSemantics();
 
 				if (traceExec)
 					System.out.println("  Rule checking for "
-							+ xpac.getModelComponent().getComponentName() + " is over");
+							+ mc.getComponentName() + " is over");
 
-				TreeIterator<EObject> it = xpac.getStateMachine()
-						.eAllContents();
-				while (it.hasNext()) {
-					EObject obj = it.next();
-					if (obj instanceof State) {
-						ProposalGenerator propGen = new ProposalGenerator(xpac,
-								checker);
-						State st = (State) obj;
-						propGen.createProposals(st);
-						createMarkersForProposals(propGen, messageAcceptor, st,
-								xpac);
-					}
-					// the following part takes care of all the warnings
-					if (obj instanceof StateGraphItem) {
-						StateGraphItem item = (StateGraphItem) obj;
-						createMarkersForWarnings(checker, messageAcceptor,
-								item, xpac);
+				for (Node node : IteratorExtensions.toList(FsmGenExtensions.getAllNodes(gc.getGraph()))) {
+					if (node.getStateGraphNode() instanceof State) {
+						ProposalGenerator propGen = new ProposalGenerator(checker);
+						propGen.createProposals(node);
+						createMarkersForProposals(propGen, messageAcceptor, node, gc);
 					}
 				}
+				
+				// the following part takes care of all the warnings
+				for (Link link : IteratorExtensions.toList(FsmGenExtensions.getAllLinks(gc.getGraph()))) {
+					createMarkersForWarnings(checker, messageAcceptor, link, gc);
+				}
+				
 				if (traceExec)
 					System.out
 							.println("AbstractExecutionValidator done checking class "
@@ -178,10 +180,11 @@ public class AbstractExecutionValidator implements ICustomValidator {
 	}
 
 	private void createMarkersForProposals(ProposalGenerator propGen,
-			ValidationMessageAcceptor messageAcceptor, State st,
-			ExpandedModelComponent xpac) {
+			ValidationMessageAcceptor messageAcceptor, Node node,
+			GraphContainer gc) {
 		List<MessageFromIf> incoming = propGen.getIncomingProposals();
-		EObject orig = xpac.getOrig(st);
+		String name = FsmGenExtensions.getName(node);
+		EObject orig = node.getStateGraphNode();
 		EObject container = orig.eContainer();
 		@SuppressWarnings("unchecked")
 		int idx = ((List<? extends EObject>) container.eGet(orig
@@ -191,8 +194,8 @@ public class AbstractExecutionValidator implements ICustomValidator {
 			messageAcceptor.acceptWarning("State should handle the message "
 					+ fsmNameProvider.getMessageName(msg.getMessage()) + " from port "
 					+ msg.getFrom().getName() + " ", container, orig
-					.eContainingFeature(), idx, DIAG_CODE_MISSING_TRIGGER, st
-					.getName(), fsmNameProvider.getMessageName(msg.getMessage()), msg.getFrom()
+					.eContainingFeature(), idx, DIAG_CODE_MISSING_TRIGGER, name,
+					fsmNameProvider.getMessageName(msg.getMessage()), msg.getFrom()
 					.getName());
 		}
 		List<MessageFromIf> outgoing = propGen.getOutgoingProposals();
@@ -201,31 +204,29 @@ public class AbstractExecutionValidator implements ICustomValidator {
 			messageAcceptor.acceptInfo("State should send the message "
 					+ fsmNameProvider.getMessageName(msg.getMessage()) + " to port "
 					+ msg.getFrom().getName() + " ", container, orig
-					.eContainingFeature(), idx, DIAG_CODE_MISSING_MESSAGESEND,
-					st.getName(), fsmNameProvider.getMessageName(msg.getMessage()), msg.getFrom()
+					.eContainingFeature(), idx, DIAG_CODE_MISSING_MESSAGESEND, name,
+					fsmNameProvider.getMessageName(msg.getMessage()), msg.getFrom()
 							.getName());
 		}
 
 	}
 
 	private void createMarkersForWarnings(SemanticsCheck checker,
-			ValidationMessageAcceptor messageAcceptor, StateGraphItem item,
-			ExpandedModelComponent xpac) {
+			ValidationMessageAcceptor messageAcceptor, GraphItem item,
+			GraphContainer gc) {
 		List<HandledMessage> warningList = checker.getWarningMsg(item);
 		if (traceExec && warningList != null) {
+			String name = FsmGenExtensions.getName(item);
 			System.out.println("Messages in the warning list for item "
-					+ item.getName());
+					+ name);
 		}
 		if (warningList != null)
 			for (HandledMessage msg : warningList) {
 				EObject origin = msg.getOrigin();
-				if (origin instanceof ActiveTrigger) {
-					ActiveTrigger trigger = (ActiveTrigger) origin;
-					for (TriggeredTransition trans : trigger.getTransitions()) {
-						// have to translate back the transition to our original
-						// model
-						TriggeredTransition orig = (TriggeredTransition) xpac
-								.getOrig(trans);
+				if (origin instanceof CommonTrigger) {
+					CommonTrigger trigger = (CommonTrigger) origin;
+					for (Link trans : trigger.getLinks()) {
+						TriggeredTransition orig = (TriggeredTransition) trans.getTransition();
 						for (Trigger trig : orig.getTriggers()) {
 							for (MessageFromIf mif : trig.getMsgFromIfPairs()) {
 								// messages haven't been copied, so all point to
@@ -233,9 +234,13 @@ public class AbstractExecutionValidator implements ICustomValidator {
 								// pointers
 								if (mif.getMessage() == msg.getMsg()
 										&& mif.getFrom() == msg.getIfitem()) {
+									String txt = "The message violates the semantic rule";
+									if (msg.getReason()!=null) {
+										txt += "\n" + msg.getReason();
+									}
 									messageAcceptor
 											.acceptWarning(
-													"The message violates the semantic rule",
+													txt,
 													trig,
 													mif.eContainingFeature(),
 													trig.getMsgFromIfPairs().indexOf(trig),
@@ -249,10 +254,13 @@ public class AbstractExecutionValidator implements ICustomValidator {
 					}
 				} else if (origin instanceof DetailCode) {
 					DetailCode dc = (DetailCode) origin;
-					EObject orig = xpac.getOrig(dc);
+					String txt = "The message violates the semantic rule";
+					if (msg.getReason()!=null) {
+						txt += "\n" + msg.getReason();
+					}
 					messageAcceptor.acceptWarning(
-							"The message violates the semantic rule",
-							orig.eContainer(), orig.eContainingFeature(),
+							txt,
+							dc.eContainer(), dc.eContainingFeature(),
 							ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
 							DIAG_CODE_VIOLATION_MESSAGESEND,
 							fsmNameProvider.getMessageName(msg.getMsg()),

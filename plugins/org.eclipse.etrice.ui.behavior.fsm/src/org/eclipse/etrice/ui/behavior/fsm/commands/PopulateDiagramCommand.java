@@ -16,42 +16,33 @@ import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
 import org.eclipse.etrice.ui.behavior.fsm.support.ContextSwitcher;
-import org.eclipse.etrice.ui.behavior.fsm.support.FSMSupportUtil;
 import org.eclipse.graphiti.dt.IDiagramTypeProvider;
-import org.eclipse.graphiti.features.IFeatureProvider;
+import org.eclipse.graphiti.features.context.impl.UpdateContext;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.graphiti.ui.services.GraphitiUi;
-
-import com.google.inject.Injector;
 
 
 public class PopulateDiagramCommand extends RecordingCommand {
 
+	private String providerId;
 	private ModelComponent mc;
 	private Diagram diagram;
-	private IFeatureProvider fp;
-	private Injector injector;
 
-	public PopulateDiagramCommand(String providerId, Diagram diag, ModelComponent mc, Injector injector, TransactionalEditingDomain domain) {
+	public PopulateDiagramCommand(String providerId, Diagram diag, ModelComponent mc, TransactionalEditingDomain domain) {
 		super(domain);
+		this.providerId = providerId;
 		this.diagram = diag;
 		this.mc = mc;
-		this.injector = injector;
-
-		IDiagramTypeProvider dtp = GraphitiUi.getExtensionManager().createDiagramTypeProvider(diagram, providerId); //$NON-NLS-1$
-		fp = dtp.getFeatureProvider();
 	}
 
 	@Override
 	protected void doExecute() {
+		IDiagramTypeProvider dtp = GraphitiUi.getExtensionManager().createDiagramTypeProvider(diagram, providerId); //$NON-NLS-1$
 		
-		fp.link(diagram, mc);
-		
-		// we use a temporary structure to create the whole tree
-		StateGraphContext tree = StateGraphContext.createContextTree(mc, injector);
-		//System.out.println(tree);
-		
-		FSMSupportUtil.getInstance().addStateGraph(tree, diagram, fp);
+		dtp.getFeatureProvider().link(diagram, mc);
+
+		UpdateContext ctx = new UpdateContext(diagram);
+		dtp.getFeatureProvider().getUpdateFeature(ctx).update(ctx);
 		
 		ContextSwitcher.switchTop(diagram);
 	}

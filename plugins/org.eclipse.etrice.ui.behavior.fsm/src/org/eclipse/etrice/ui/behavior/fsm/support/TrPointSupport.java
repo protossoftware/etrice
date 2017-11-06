@@ -32,6 +32,8 @@ import org.eclipse.etrice.ui.behavior.fsm.editor.AbstractFSMEditor;
 import org.eclipse.etrice.ui.behavior.fsm.editor.DecoratorUtil;
 import org.eclipse.etrice.ui.behavior.fsm.provider.IInjectorProvider;
 import org.eclipse.etrice.ui.behavior.fsm.provider.ImageProvider;
+import org.eclipse.etrice.ui.behavior.fsm.support.util.FSMSupportUtil;
+import org.eclipse.etrice.ui.behavior.fsm.support.util.ModelEditingUtil;
 import org.eclipse.etrice.ui.common.base.support.ChangeAwareCreateFeature;
 import org.eclipse.etrice.ui.common.base.support.ChangeAwareCustomFeature;
 import org.eclipse.etrice.ui.common.base.support.CommonSupportUtil;
@@ -145,9 +147,9 @@ public class TrPointSupport {
 				ContainerShape targetContainer = context.getTargetContainer();
 		        ModelComponent mc = FSMSupportUtil.getInstance().getModelComponent(getDiagram());
 				StateGraph sg = (StateGraph) targetContainer.getLink().getBusinessObjects().get(0);
-				boolean inherited = FSMSupportUtil.getInstance().isInherited(getDiagram(), sg);
-				if (inherited) {
-					sg = FSMSupportUtil.getInstance().insertRefinedState(sg, mc, targetContainer, getFeatureProvider());
+				
+				if (!FSMSupportUtil.getInstance().isOwnedBy(mc, sg)) {
+					sg = ModelEditingUtil.insertRefinedState(sg, mc, targetContainer, getFeatureProvider());
 				}
 				
 		        // create transition point

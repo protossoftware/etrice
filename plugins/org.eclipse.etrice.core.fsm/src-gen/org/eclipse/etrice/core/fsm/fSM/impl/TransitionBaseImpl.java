@@ -9,7 +9,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.etrice.core.common.base.Documentation;
 
@@ -31,7 +30,7 @@ import org.eclipse.etrice.core.fsm.fSM.TransitionBase;
  *
  * @generated
  */
-public class TransitionBaseImpl extends MinimalEObjectImpl.Container implements TransitionBase
+public class TransitionBaseImpl extends StateGraphItemImpl implements TransitionBase
 {
   /**
    * The cached value of the '{@link #getDocu() <em>Docu</em>}' containment reference.

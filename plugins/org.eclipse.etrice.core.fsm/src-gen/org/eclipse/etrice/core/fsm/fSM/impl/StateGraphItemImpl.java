@@ -8,6 +8,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.etrice.core.fsm.fSM.ChoicePoint;
 import org.eclipse.etrice.core.fsm.fSM.FSMPackage;
+import org.eclipse.etrice.core.fsm.fSM.RefinedTransition;
 import org.eclipse.etrice.core.fsm.fSM.State;
 import org.eclipse.etrice.core.fsm.fSM.StateGraphItem;
 import org.eclipse.etrice.core.fsm.fSM.TrPoint;
@@ -58,6 +59,8 @@ public class StateGraphItemImpl extends MinimalEObjectImpl.Container implements 
       return ((ChoicePoint)this).getName();
     else if (this instanceof Transition)
       return ((Transition)this).getName();
+    else if (this instanceof RefinedTransition)
+      return ((RefinedTransition)this).getTarget().getName();
     return "";
     
   }

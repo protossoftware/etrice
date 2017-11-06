@@ -6119,6 +6119,44 @@ ruleChoicePoint returns [EObject current=null]
 
 
 
+// Entry rule entryRuleTransitionBase
+entryRuleTransitionBase returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getTransitionBaseRule()); }
+	 iv_ruleTransitionBase=ruleTransitionBase 
+	 { $current=$iv_ruleTransitionBase.current; } 
+	 EOF 
+;
+
+// Rule TransitionBase
+ruleTransitionBase returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(
+    { 
+        newCompositeNode(grammarAccess.getTransitionBaseAccess().getTransitionParserRuleCall_0()); 
+    }
+    this_Transition_0=ruleTransition
+    { 
+        $current = $this_Transition_0.current; 
+        afterParserOrEnumRuleCall();
+    }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getTransitionBaseAccess().getRefinedTransitionParserRuleCall_1()); 
+    }
+    this_RefinedTransition_1=ruleRefinedTransition
+    { 
+        $current = $this_RefinedTransition_1.current; 
+        afterParserOrEnumRuleCall();
+    }
+)
+;
+
+
+
 
 
 // Entry rule entryRuleTransition

@@ -29,7 +29,7 @@ package org.eclipse.etrice.core.fsm.fSM;
  * @model
  * @generated
  */
-public interface Transition extends StateGraphItem, TransitionBase
+public interface Transition extends TransitionBase
 {
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.

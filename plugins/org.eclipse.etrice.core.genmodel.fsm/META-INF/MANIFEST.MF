@@ -4,17 +4,16 @@ Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.etrice.core.genmodel.fsm;singleton:=true
 Bundle-Version: 1.1.1.qualifier
 Bundle-ClassPath: .
-Bundle-Vendor: %providerName
-Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Export-Package: org.eclipse.etrice.core.genmodel.fsm,
+ org.eclipse.etrice.core.genmodel.fsm.fsmgen,
+ org.eclipse.etrice.core.genmodel.fsm.fsmgen.impl,
+ org.eclipse.etrice.core.genmodel.fsm.fsmgen.util
 Require-Bundle: org.eclipse.etrice.core.common;visibility:=reexport,
  org.eclipse.etrice.core.fsm;bundle-version="1.1.1";visibility:=reexport,
  org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
  org.eclipse.emf.ecore.xmi;visibility:=reexport
 Bundle-ActivationPolicy: lazy
-Export-Package: org.eclipse.etrice.core.genmodel.fsm.base,
- org.eclipse.etrice.core.genmodel.fsm.builder,
- org.eclipse.etrice.core.genmodel.fsm.fsmgen,
- org.eclipse.etrice.core.genmodel.fsm.fsmgen.impl,
- org.eclipse.etrice.core.genmodel.fsm.fsmgen.util
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin

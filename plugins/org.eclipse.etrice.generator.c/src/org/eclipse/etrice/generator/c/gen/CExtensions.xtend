@@ -21,26 +21,25 @@ package org.eclipse.etrice.generator.c.gen
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import java.util.List
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.etrice.core.common.base.LiteralType
 import org.eclipse.etrice.core.etphys.eTPhys.NodeRef
-import org.eclipse.etrice.core.genmodel.fsm.fsmgen.IDiagnostician
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance
+import org.eclipse.etrice.core.genmodel.fsm.IDiagnostician
 import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.core.room.DataClass
 import org.eclipse.etrice.core.room.DataType
+import org.eclipse.etrice.core.room.EnumLiteral
+import org.eclipse.etrice.core.room.EnumerationType
 import org.eclipse.etrice.core.room.ExternalType
-import org.eclipse.etrice.core.common.base.LiteralType
 import org.eclipse.etrice.core.room.Message
 import org.eclipse.etrice.core.room.PrimitiveType
 import org.eclipse.etrice.core.room.RoomClass
 import org.eclipse.etrice.core.room.RoomModel
 import org.eclipse.etrice.core.room.VarDecl
+import org.eclipse.etrice.core.room.util.RoomHelpers
 import org.eclipse.etrice.generator.generic.ILanguageExtension
 import org.eclipse.xtext.util.Pair
-import org.eclipse.etrice.core.room.EnumerationType
-
-import org.eclipse.etrice.core.room.util.RoomHelpers
-import org.eclipse.etrice.core.room.EnumLiteral
-import org.eclipse.emf.ecore.EObject
 
 @Singleton
 class CExtensions implements ILanguageExtension {
@@ -50,7 +49,7 @@ class CExtensions implements ILanguageExtension {
 
 	override String getTypedDataDefinition(EObject msg) {
 	    if (msg instanceof Message) {
-    		generateArglistAndTypedData((msg as Message).data).get(1)
+    		generateArglistAndTypedData((msg as Message).data).get(TypedDataKind.DECLARATION_AND_INITIALIZATION.ordinal)
 	    }
 	    else {
 	        ""
@@ -341,10 +340,9 @@ class CExtensions implements ILanguageExtension {
 			}
 		}
 
-		val typedData = typeName+" "+data.getName() + " = "+deRef+"(("+castTypeName+") generic_data__et);\n"
-
-		val dataArg = ", "+data.getName()
-		val typedArgList = ", "+typeName+" "+data.getName()
+		val dataArg = ", "+GENERIC_DATA_NAME
+		val typedData = typeName+" "+GENERIC_DATA_NAME + " = "+deRef+"(("+castTypeName+") generic_data__et);\n"
+		val typedArgList = ", "+typeName+" "+GENERIC_DATA_NAME
 
 		return newArrayList(dataArg, typedData, typedArgList);
 	}

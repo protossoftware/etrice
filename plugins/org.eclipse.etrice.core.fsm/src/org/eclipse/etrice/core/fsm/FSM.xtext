@@ -41,7 +41,7 @@ ModelComponent:
 
 // the building blocks of a state machine: nodes and items
 StateGraphNode: State | ChoicePoint | TrPoint;
-StateGraphItem: StateGraphNode | Transition;
+StateGraphItem: StateGraphNode | TransitionBase;
 
 // state graph and state machine are two rules for the same model class
 StateGraph:

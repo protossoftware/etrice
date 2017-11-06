@@ -11,33 +11,21 @@
  */
 package org.eclipse.etrice.core.genmodel.etricegen.impl;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
-import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem;
-import org.eclipse.etrice.core.fsm.fSM.FSMPackage;
-import org.eclipse.etrice.core.fsm.fSM.MessageFromIf;
-import org.eclipse.etrice.core.fsm.fSM.Transition;
-import org.eclipse.etrice.core.fsm.fSM.Trigger;
-import org.eclipse.etrice.core.fsm.fSM.TriggeredTransition;
+import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
 import org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
-import org.eclipse.etrice.core.genmodel.fsm.fsmgen.TransitionChain;
-import org.eclipse.etrice.core.genmodel.fsm.fsmgen.impl.ExpandedModelComponentImpl;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.GraphContainer;
 import org.eclipse.etrice.core.room.ActorClass;
-import org.eclipse.etrice.core.room.InterfaceItem;
-import org.eclipse.etrice.core.room.Message;
-import org.eclipse.etrice.core.room.Port;
-import org.eclipse.etrice.core.room.RefableType;
-import org.eclipse.etrice.core.room.RoomFactory;
-import org.eclipse.etrice.core.room.SAP;
-import org.eclipse.etrice.core.room.SPP;
-import org.eclipse.etrice.core.room.VarDecl;
-import org.eclipse.etrice.core.room.util.RoomHelpers;
 
 /**
  * <!-- begin-user-doc -->
@@ -48,14 +36,23 @@ import org.eclipse.etrice.core.room.util.RoomHelpers;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.ExpandedActorClassImpl#getActorClass <em>Actor Class</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.genmodel.etricegen.impl.ExpandedActorClassImpl#getGraphContainer <em>Graph Container</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class ExpandedActorClassImpl extends ExpandedModelComponentImpl implements ExpandedActorClass {
+public class ExpandedActorClassImpl extends EObjectImpl implements ExpandedActorClass {
 	
-	private RoomHelpers roomHelpers = new RoomHelpers();
-	
+	/**
+	 * The cached value of the '{@link #getGraphContainer() <em>Graph Container</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getGraphContainer()
+	 * @generated
+	 * @ordered
+	 */
+	protected GraphContainer graphContainer;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -91,7 +88,73 @@ public class ExpandedActorClassImpl extends ExpandedModelComponentImpl implement
 	 * @generated NOT
 	 */
 	public ActorClass basicGetActorClass() {
-		return (ActorClass) getModelComponent();
+		return (ActorClass) getGraphContainer().getComponent();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public GraphContainer getGraphContainer() {
+		return graphContainer;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetGraphContainer(GraphContainer newGraphContainer, NotificationChain msgs) {
+		GraphContainer oldGraphContainer = graphContainer;
+		graphContainer = newGraphContainer;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ETriceGenPackage.EXPANDED_ACTOR_CLASS__GRAPH_CONTAINER, oldGraphContainer, newGraphContainer);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * we maintain a map of local IDs for interface items
+	 */
+	private HashMap<AbstractInterfaceItem, Integer> ifitem2localId;
+	
+	/**
+	 * the recursive computation of the local IDs of interface items
+	 */
+    private int computeInterfaceItemLocalIds(ModelComponent mc, int offset) {
+		if (mc.getBase()!=null) {
+			// first recurse into base class
+			offset = computeInterfaceItemLocalIds(mc.getBase(), offset);
+		}
+		
+		EList<AbstractInterfaceItem> items = mc.getAbstractInterfaceItems();
+		for (AbstractInterfaceItem item : items) {
+			ifitem2localId.put(item, offset);
+			++offset;
+		}
+		
+		return offset;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setGraphContainer(GraphContainer newGraphContainer) {
+		if (newGraphContainer != graphContainer) {
+			NotificationChain msgs = null;
+			if (graphContainer != null)
+				msgs = ((InternalEObject)graphContainer).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ETriceGenPackage.EXPANDED_ACTOR_CLASS__GRAPH_CONTAINER, null, msgs);
+			if (newGraphContainer != null)
+				msgs = ((InternalEObject)newGraphContainer).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ETriceGenPackage.EXPANDED_ACTOR_CLASS__GRAPH_CONTAINER, null, msgs);
+			msgs = basicSetGraphContainer(newGraphContainer, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ETriceGenPackage.EXPANDED_ACTOR_CLASS__GRAPH_CONTAINER, newGraphContainer, newGraphContainer));
 	}
 
 	/**
@@ -99,8 +162,31 @@ public class ExpandedActorClassImpl extends ExpandedModelComponentImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public VarDecl getVarDeclData(Transition trans) {
-		return (VarDecl) getData(trans);
+	public int getInterfaceItemLocalId(AbstractInterfaceItem ifitem) {
+		if (ifitem2localId==null) {
+			ifitem2localId = new HashMap<AbstractInterfaceItem, Integer>();
+			computeInterfaceItemLocalIds(getActorClass(), 0);
+		}
+		
+		Integer localId = ifitem2localId.get(ifitem);
+		if (localId!=null)
+			return localId.intValue();
+		else
+			return -1;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case ETriceGenPackage.EXPANDED_ACTOR_CLASS__GRAPH_CONTAINER:
+				return basicSetGraphContainer(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -114,8 +200,40 @@ public class ExpandedActorClassImpl extends ExpandedModelComponentImpl implement
 			case ETriceGenPackage.EXPANDED_ACTOR_CLASS__ACTOR_CLASS:
 				if (resolve) return getActorClass();
 				return basicGetActorClass();
+			case ETriceGenPackage.EXPANDED_ACTOR_CLASS__GRAPH_CONTAINER:
+				return getGraphContainer();
 		}
 		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
+			case ETriceGenPackage.EXPANDED_ACTOR_CLASS__GRAPH_CONTAINER:
+				setGraphContainer((GraphContainer)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+		switch (featureID) {
+			case ETriceGenPackage.EXPANDED_ACTOR_CLASS__GRAPH_CONTAINER:
+				setGraphContainer((GraphContainer)null);
+				return;
+		}
+		super.eUnset(featureID);
 	}
 
 	/**
@@ -128,123 +246,10 @@ public class ExpandedActorClassImpl extends ExpandedModelComponentImpl implement
 		switch (featureID) {
 			case ETriceGenPackage.EXPANDED_ACTOR_CLASS__ACTOR_CLASS:
 				return basicGetActorClass() != null;
+			case ETriceGenPackage.EXPANDED_ACTOR_CLASS__GRAPH_CONTAINER:
+				return graphContainer != null;
 		}
 		return super.eIsSet(featureID);
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.eclipse.etrice.core.genmodel.fsm.fsmgen.impl.ExpandedModelComponentImpl#addTransitionChain(org.eclipse.etrice.core.fsm.fSM.Transition)
-	 */
-	@Override
-	public TransitionChain addTransitionChain(Transition t) {
-		TransitionChain tc = super.addTransitionChain(t);
-		
-		if (t instanceof TriggeredTransition) {
-			VarDecl data = null;
-			
-			// TODO: after introduction of VarDecl after 'action' leave this to validation
-			
-			boolean first = true;
-			for (Trigger tr : ((TriggeredTransition)t).getTriggers()) {
-				for (MessageFromIf mif : tr.getMsgFromIfPairs()) {
-					VarDecl msgData = ((Message)mif.getMessage()).getData();
-					if (first) {
-						first = false;
-						data = msgData;
-					}
-					else {
-						if (data!=null) {
-							if (msgData==null) {
-								validationError("If one MessageFromIf has data all have to have data for a given transition!", t, FSMPackage.eINSTANCE.getTriggeredTransition_Triggers());
-							}
-							else {
-								VarDecl a = msgData;
-								if (data.getRefType().getType()!=a.getRefType().getType())
-									validationError("The data types of all MessageFromIf have to be the same!", t, FSMPackage.eINSTANCE.getTriggeredTransition_Triggers());
-								if (data.getRefType().isRef() !=a.getRefType().isRef())
-									validationError("The data types of all MessageFromIf have to be the same ref type!", t, FSMPackage.eINSTANCE.getTriggeredTransition_Triggers());
-							}
-						}
-						else {
-							if (msgData!=null)
-								validationError("If one MessageFromIf has no data all have to have no data for a given transition!", t, FSMPackage.eINSTANCE.getTriggeredTransition_Triggers());
-						}
-					}
-				}
-			}
-	
-			if (first)
-				validationError("Triggered transition has to have a message from interface!", t, FSMPackage.eINSTANCE.getTriggeredTransition_Triggers());
-			
-			tc.setData(data);
-		}
-		
-		return tc;
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.eclipse.etrice.core.genmodel.fsm.fsmgen.impl.ExpandedModelComponentImpl#getIncomingMessages(org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem)
-	 */
-	@Override
-	public EList<EObject> getIncomingMessages(AbstractInterfaceItem ifitem) {
-		return new BasicEList<EObject>(roomHelpers.getMessageListDeep((InterfaceItem) ifitem, false));
-	}
-
-	/* (non-Javadoc)
-	 * @see org.eclipse.etrice.core.genmodel.fsm.fsmgen.impl.ExpandedModelComponentImpl#getMessageID(org.eclipse.etrice.core.fsm.fSM.MessageFromIf)
-	 */
-	@Override
-	public String getMessageID(MessageFromIf mif) {
-		if (mif.getFrom() instanceof Port) {
-			Port p = (Port) mif.getFrom();
-			return p.getProtocol().getName()+(p.isConjugated()?".OUT_":".IN_")+fsmNameProvider.getMessageName(mif.getMessage());
-		}
-		else if (mif.getFrom() instanceof SAP) {
-			SAP sap = (SAP) mif.getFrom();
-			return sap.getProtocol().getName()+".OUT_"+fsmNameProvider.getMessageName(mif.getMessage());
-		}
-		else if (mif.getFrom() instanceof SPP) {
-			SPP spp = (SPP) mif.getFrom();
-			return spp.getProtocol().getName()+".IN_"+fsmNameProvider.getMessageName(mif.getMessage());
-		}
-
-		return "unknown interface item";
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.eclipse.etrice.core.genmodel.fsm.fsmgen.impl.ExpandedModelComponentImpl#computeCommonChainData(org.eclipse.emf.common.util.EList)
-	 */
-	@Override
-	public EObject computeCommonChainData(EList<TransitionChain> chains) {
-		if (chains.size()==1)
-			return chains.get(0).getData();
-		else {
-			ArrayList<RefableType> types = new ArrayList<RefableType>();
-			for (TransitionChain chain : chains) {
-				if (chain.getData()!=null)
-					types.add(((VarDecl) chain.getData()).getRefType());
-				else
-					types.add(null);
-			}
-			RefableType rt = roomHelpers.getLastCommonSuperType(types);
-			if (rt!=null) {
-				VarDecl vd = RoomFactory.eINSTANCE.createVarDecl();
-				vd.setName("data");
-				vd.setRefType(rt);
-				return vd;
-			}
-			else {
-				return null;
-			}
-		}
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.eclipse.etrice.core.genmodel.fsm.fsmgen.impl.ExpandedModelComponentImpl#getModelComponentName()
-	 */
-	@Override
-	public String getModelComponentName() {
-		return getActorClass().getName();
 	}
 	
 } //ExpandedActorClassImpl

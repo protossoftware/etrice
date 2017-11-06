@@ -122,7 +122,7 @@ RoomModel ActorCommunicationTest {
 					}
 					action {
 
-					//"System.out.println(\"Finish data\");"
+					//"System.out.println(\"Finish transitionData\");"
 						"data_finish_flag = true;"
 						"EXPECT_ORDER_END(data_caseId,\"<|MODEL_LOCATION|>\", 10);"
 						"etUnit_closeTestCase(data_caseId);"
@@ -178,18 +178,18 @@ RoomModel ActorCommunicationTest {
 					action {
 						"counter = data_counter.in1;"
 
-						//"System.out.println(\"Async data \"+counter);"
+						//"System.out.println(\"Async transitionData \"+counter);"
 						"EXPECT_ORDER(data_counter.caseId,\"<|MODEL_LOCATION|>\", counter + 1050);"
 					}
 				}
 				Transition tr1: Idle -> Idle {
 					triggers {
 						<in1: event_counter guard {
-							"data % 2 == 0 && data < 10"
+							"transitionData % 2 == 0 && transitionData < 10"
 						}>
 					}
 					action {
-						"counter = data;"
+						"counter = transitionData;"
 
 						//"System.out.println(\"Async event \"+counter);"
 						"EXPECT_ORDER(data_counter.caseId,\"<|MODEL_LOCATION|>\", counter + 1000);"
@@ -198,7 +198,7 @@ RoomModel ActorCommunicationTest {
 				Transition tr2: Idle -> state0 {
 					triggers {
 						<in1: event_counter guard {
-							"data == 10"
+							"transitionData == 10"
 						}>
 					}
 					action {
@@ -230,19 +230,19 @@ RoomModel ActorCommunicationTest {
 				Transition tr0: state0 -> state0 {
 					triggers {
 						<in1: event_counter guard {
-							"data < 10"
+							"transitionData < 10"
 						}>
 					}
 					action {
 
-					//"System.out.println(\"event \"+data);"
-						"EXPECT_ORDER(caseId, \"<|MODEL_LOCATION|>\", data+100);"
+					//"System.out.println(\"event \"+transitionData);"
+						"EXPECT_ORDER(caseId, \"<|MODEL_LOCATION|>\", transitionData+100);"
 					}
 				}
 				Transition tr1: state0 -> state1 {
 					triggers {
 						<in1: event_counter guard {
-							"data == 10"
+							"transitionData == 10"
 						}>
 					}
 					action {
@@ -254,7 +254,7 @@ RoomModel ActorCommunicationTest {
 						<caseId: event_counter>
 					}
 					action {
-						"caseId = data;"
+						"caseId = transitionData;"
 					}
 				}
 				State state0
@@ -296,7 +296,7 @@ RoomModel ActorCommunicationTest {
 					action {
 						"counter = data_counter.in1;"
 
-						//"System.out.println(\"data \"+counter);"
+						//"System.out.println(\"transitionData \"+counter);"
 						"EXPECT_ORDER(data_counter.caseId, \"<|MODEL_LOCATION|>\", counter);"
 					}
 				}

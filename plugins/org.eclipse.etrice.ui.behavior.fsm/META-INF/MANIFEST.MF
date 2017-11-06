@@ -5,10 +5,11 @@ Bundle-SymbolicName: org.eclipse.etrice.ui.behavior.fsm;singleton:=true
 Bundle-Version: 1.1.1.qualifier
 Bundle-Activator: org.eclipse.etrice.ui.behavior.fsm.Activator
 Bundle-Vendor: eTrice
-Require-Bundle: org.eclipse.etrice.core.common.ui;bundle-version="1.1.1",
- org.eclipse.etrice.ui.common.base;bundle-version="1.1.1",
- org.eclipse.etrice.core.fsm;bundle-version="1.1.1",
- org.eclipse.etrice.core.fsm.ui;bundle-version="1.1.1",
+Require-Bundle: org.eclipse.etrice.core.common.ui;bundle-version="1.1.0",
+ org.eclipse.etrice.ui.common.base;bundle-version="1.1.0",
+ org.eclipse.etrice.core.fsm;bundle-version="1.1.0",
+ org.eclipse.etrice.core.genmodel.fsm;bundle-version="1.1.0",
+ org.eclipse.etrice.core.fsm.ui;bundle-version="1.1.0",
  org.eclipse.graphiti;bundle-version="0.8.0",
  org.eclipse.graphiti.ui;bundle-version="0.8.0",
  org.eclipse.ui.views.properties.tabbed;bundle-version="3.5.100",
@@ -18,7 +19,8 @@ Require-Bundle: org.eclipse.etrice.core.common.ui;bundle-version="1.1.1",
  org.eclipse.xtext.ui;bundle-version="2.7.0",
  org.eclipse.xtend.lib;bundle-version="2.7.0",
  org.eclipse.xtext.ui.shared;bundle-version="2.7.0",
- org.eclipse.etrice.expressions.ui;bundle-version="1.1.1"
+ org.eclipse.etrice.expressions.ui;bundle-version="1.1.1",
+ org.eclipse.xtext.ui.shared;bundle-version="2.7.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Export-Package: org.eclipse.etrice.ui.behavior.fsm.actioneditor,
@@ -27,4 +29,5 @@ Export-Package: org.eclipse.etrice.ui.behavior.fsm.actioneditor,
  org.eclipse.etrice.ui.behavior.fsm.dialogs,
  org.eclipse.etrice.ui.behavior.fsm.editor,
  org.eclipse.etrice.ui.behavior.fsm.provider,
- org.eclipse.etrice.ui.behavior.fsm.support
+ org.eclipse.etrice.ui.behavior.fsm.support,
+ org.eclipse.etrice.ui.behavior.fsm.support.util

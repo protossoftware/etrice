@@ -24,7 +24,7 @@ import java.util.List
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.etrice.core.etphys.eTPhys.NodeRef
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance
-import org.eclipse.etrice.core.genmodel.fsm.fsmgen.IDiagnostician
+import org.eclipse.etrice.core.genmodel.fsm.IDiagnostician
 import org.eclipse.etrice.core.room.ActorClass
 import org.eclipse.etrice.core.room.DataType
 import org.eclipse.etrice.core.room.EnumLiteral
@@ -50,7 +50,7 @@ class CppExtensions implements ILanguageExtension {
 	@Inject extension RoomExtensions
 
 	override String getTypedDataDefinition(EObject msg) {
-		generateArglistAndTypedData((msg as Message).data).get(1)
+		generateArglistAndTypedData((msg as Message).data).get(TypedDataKind.DECLARATION_AND_INITIALIZATION.ordinal)
 	}
 
 	def String getCppHeaderFileName(RoomClass rc) { rc.name + ".h" }
@@ -219,9 +219,9 @@ class CppExtensions implements ILanguageExtension {
 		}
 		var deRef = if(!data.refType.ref) '*' else ''
 
-		val typedData = '''«typeExpr» «data.name» = «deRef»(static_cast<«castExpr»>(generic_data__et));''' + NEWLINE
-		val dataArg = ''', «data.name»'''
-		val typedArgList = ''', «typeExpr» «data.name»'''
+		val dataArg = ''', «GENERIC_DATA_NAME»'''
+		val typedData = '''«typeExpr» «GENERIC_DATA_NAME» = «deRef»(static_cast<«castExpr»>(generic_data__et));''' + NEWLINE
+		val typedArgList = ''', «typeExpr» «GENERIC_DATA_NAME»'''
 
 		return #[dataArg, typedData, typedArgList]
 	}

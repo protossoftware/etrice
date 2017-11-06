@@ -165,12 +165,6 @@
     </genClasses>
     <genClasses ecoreClass="etricegen.ecore#//ExpandedActorClass">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference etricegen.ecore#//ExpandedActorClass/actorClass"/>
-      <genOperations ecoreOperation="etricegen.ecore#//ExpandedActorClass/getData">
-        <genParameters ecoreParameter="etricegen.ecore#//ExpandedActorClass/getData/trans"/>
-      </genOperations>
-    </genClasses>
-    <genClasses ecoreClass="etricegen.ecore#//TransitionChain">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference etricegen.ecore#//TransitionChain/data"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

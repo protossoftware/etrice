@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.abstractexec.behavior.ReachabilityValidator;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.fsm.fSM.InitialTransition;
+import org.eclipse.etrice.core.fsm.fSM.RefinedTransition;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.fsm.fSM.State;
 import org.eclipse.etrice.core.fsm.fSM.StateGraph;
@@ -93,13 +94,12 @@ public class TestReachability extends TestBase {
 	}
 
 	private void checkUnreachable(StateGraphItem item) {
-		if (item instanceof InitialTransition) {
-			Assert.assertTrue(
-					item + " is incorrectly marked UNreachable (or name doesn't end with '_0' ?)",
-					item.getName().endsWith("_0"));
-		} else
-			Assert.assertTrue(
-					item + " is incorrectly marked UNreachable (or name doesn't end with '_0' ?)",
-					item.getName().endsWith("_0"));
+		String name = item.getName();
+		if (item instanceof RefinedTransition) {
+			name = ((RefinedTransition) item).getTarget().getName();
+		}
+		Assert.assertTrue(
+				name + " is incorrectly marked UNreachable (or name doesn't end with '_0' ?)",
+				name.endsWith("_0"));
 	}
 }

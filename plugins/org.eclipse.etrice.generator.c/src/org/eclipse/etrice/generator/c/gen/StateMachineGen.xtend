@@ -18,7 +18,10 @@ import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass
 import org.eclipse.etrice.generator.c.Main
 import org.eclipse.etrice.generator.generic.GenericStateMachineGenerator
 import org.eclipse.etrice.generator.generic.RoomExtensions
-import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ExpandedModelComponent
+
+import static extension org.eclipse.etrice.core.genmodel.fsm.FsmGenExtensions.*
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.GraphContainer
+import org.eclipse.etrice.core.fsm.fSM.State
 
 @Singleton
 class StateMachineGen extends GenericStateMachineGenerator {
@@ -28,7 +31,7 @@ class StateMachineGen extends GenericStateMachineGenerator {
 	def genHeaderConstants(ExpandedActorClass xpac) {
 		val ac = xpac.actorClass
 		/* TODO: can save one entry if NO_STATE=-1 but influences Java */
-		val historySize = xpac.stateMachine.baseStateList.size - xpac.stateMachine.leafStateList.size + 2
+		val historySize = xpac.graphContainer.graph.allStateNodes.filter[!inherited].size - xpac.graphContainer.graph.allStateNodes.filter[isLeaf].size + 2
 		'''
 			/* constant for state machine data */
 			#define «ac.name.toUpperCase»_HISTORY_SIZE «historySize»
@@ -60,9 +63,10 @@ class StateMachineGen extends GenericStateMachineGenerator {
 	/**
 	 * @param generateImplementation NOT used
 	 */
-	override public genExtra(ExpandedModelComponent xpmc, boolean generateImplementation) {
-		val mc = xpmc.modelComponent
-		val states = xpmc.stateMachine.baseStateList.getLeafStatesLast
+	override public genExtra(GraphContainer gc, boolean generateImplementation) {
+		val mc = gc.component
+		val allStates = gc.graph.allStateNodes.map[stateGraphNode].filter(typeof(State)).toList
+		val states = allStates.getLeafStatesLast
 		'''
 			«IF Main::settings.generateMSCInstrumentation»
 				/* state names */

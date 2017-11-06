@@ -32,7 +32,7 @@ public class TestEnumerations extends TestBase {
 
 	@Before
 	public void SetUp() {
-		prepare();
+		prepare(CoreTestsActivator.getInstance().getBundle());
 		res = getResource("EnumExample.room");
 	}
 

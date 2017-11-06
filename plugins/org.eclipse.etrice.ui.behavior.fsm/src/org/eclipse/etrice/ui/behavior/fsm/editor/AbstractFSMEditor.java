@@ -13,6 +13,7 @@
 package org.eclipse.etrice.ui.behavior.fsm.editor;
 
 import java.util.ArrayList;
+import java.util.EventObject;
 import java.util.Map;
 
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -28,7 +29,7 @@ import org.eclipse.etrice.core.fsm.fSM.State;
 import org.eclipse.etrice.core.fsm.fSM.StateGraph;
 import org.eclipse.etrice.core.fsm.util.FSMHelpers;
 import org.eclipse.etrice.ui.behavior.fsm.support.ContextSwitcher;
-import org.eclipse.etrice.ui.behavior.fsm.support.FSMSupportUtil;
+import org.eclipse.etrice.ui.behavior.fsm.support.util.FSMSupportUtil;
 import org.eclipse.etrice.ui.common.base.editor.DiagramEditorBase;
 import org.eclipse.graphiti.dt.IDiagramTypeProvider;
 import org.eclipse.graphiti.features.IFeatureProvider;
@@ -269,5 +270,11 @@ public abstract class AbstractFSMEditor extends DiagramEditorBase {
 		IUpdateContext updateCtx = new UpdateContext(diagram);
 		featureProvider.updateIfPossible(updateCtx);
 		diagramTypeProvider.getDiagramBehavior().refresh();
+	}
+	
+	@Override
+	public void commandStackChanged(EventObject event) {
+		// TODO Auto-generated method stub
+		super.commandStackChanged(event);
 	}
 }

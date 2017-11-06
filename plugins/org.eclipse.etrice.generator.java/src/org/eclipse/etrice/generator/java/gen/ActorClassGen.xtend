@@ -32,6 +32,7 @@ import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.TypeHelpers
 import org.eclipse.etrice.generator.java.Main
+import static extension org.eclipse.etrice.core.genmodel.fsm.FsmGenExtensions.*
 
 @Singleton
 class ActorClassGen extends GenericActorClassGenerator {
@@ -279,7 +280,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 				public abstract void executeInitTransition();
 			«ELSE»
 				«IF ac.hasNonEmptyStateMachine»
-					«xpac.genStateMachine()»
+					«xpac.graphContainer.genStateMachine»
 					«IF ac.commType == ComponentCommunicationType::DATA_DRIVEN»
 						public void receiveEvent(InterfaceItemBase ifitem, int evt, Object generic_data) {
 							handleSystemEvent(ifitem, evt, generic_data);
@@ -295,7 +296,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 							«ENDIF»
 						}
 					«ENDIF»
-				«ELSEIF xpac.stateMachine.empty»
+				«ELSEIF xpac.graphContainer.graph.empty»
 «««					no state machine in the super classes
 					//--------------------- no state machine
 					public void receiveEvent(InterfaceItemBase ifitem, int evt, Object data) {
@@ -310,7 +311,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 
 				@Override
 				public void saveObject(ObjectOutput output) throws IOException {
-					«IF xpac.hasStateMachine()»
+					«IF !xpac.graphContainer.graph.empty»
 						// state and history
 						output.writeInt(getState());
 						for (int h: history) output.writeInt(h);
@@ -325,7 +326,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 
 				@Override
 				public void loadObject(ObjectInput input) throws IOException, ClassNotFoundException {
-					«IF xpac.hasStateMachine()»
+					«IF !xpac.graphContainer.graph.empty»
 						// state and history
 						setState(input.readInt());
 						for (int i=0; i<history.length; ++i) history[i] = input.readInt();

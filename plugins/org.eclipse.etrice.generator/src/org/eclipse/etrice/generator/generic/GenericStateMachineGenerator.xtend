@@ -12,13 +12,17 @@
 
 package org.eclipse.etrice.generator.generic
 
+import com.google.inject.Inject
 import org.eclipse.etrice.core.fsm.fSM.GuardedTransition
 import org.eclipse.etrice.core.fsm.fSM.NonInitialTransition
+import org.eclipse.etrice.core.fsm.fSM.RefinedState
 import org.eclipse.etrice.core.fsm.fSM.State
-import org.eclipse.etrice.core.fsm.fSM.Transition
 import org.eclipse.etrice.core.fsm.fSM.TriggeredTransition
-import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ExpandedModelComponent
-import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ExpandedRefinedState
+import org.eclipse.etrice.core.fsm.util.FSMHelpers
+import org.eclipse.etrice.core.genmodel.fsm.TriggerExtensions
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.GraphContainer
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.Link
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.Node
 import org.eclipse.etrice.generator.fsm.generic.AbstractStateMachineGenerator
 
 /**
@@ -26,30 +30,36 @@ import org.eclipse.etrice.generator.fsm.generic.AbstractStateMachineGenerator
  */
 class GenericStateMachineGenerator extends AbstractStateMachineGenerator {
 
+	@Inject
+	protected extension TriggerExtensions
+	
+	@Inject
+	protected extension FSMHelpers
+	
 	/**
 	 * generates the code of the whole state machine, consisting of constants + methods
 	 *
 	 * @param xpmc the {@link ExpandedModelComponent}
 	 * @return the generated code
 	 */
-	def genStateMachine(ExpandedModelComponent xpmc) '''
-		«genStateMachineConstants(xpmc)»
+	def genStateMachine(GraphContainer gc) '''
+		«genStateMachineConstants(gc)»
 
-		«genStateMachineMethods(xpmc, true)»
+		«genStateMachineMethods(gc, true)»
 	'''
 
 	/**
 	 * generates the constants for the state machine
 	 */
-	def genStateMachineConstants(ExpandedModelComponent xpmc) '''
+	def genStateMachineConstants(GraphContainer gc) '''
 		/* state IDs */
-		«xpmc.genStateIdConstants»
+		«gc.genStateIdConstants»
 
 		/* transition chains */
-		«xpmc.genTransitionChainConstants»
+		«gc.genTransitionChainConstants»
 
 		/* triggers */
-		«xpmc.genTriggerConstants»
+		«gc.genTriggerConstants»
 	'''
 
 	/**
@@ -59,17 +69,17 @@ class GenericStateMachineGenerator extends AbstractStateMachineGenerator {
 	 * @param generateImplemenation or declaration only
 	 * @return the generated code
 	 */
-	def genStateMachineMethods(ExpandedModelComponent xpmc, boolean generateImplementation) '''
-		«genExtra(xpmc, generateImplementation)»
+	def genStateMachineMethods(GraphContainer gc, boolean generateImplementation) '''
+		«genExtra(gc, generateImplementation)»
 
 		/* Entry and Exit Codes */
-		«xpmc.genEntryAndExitCodes(generateImplementation)»
+		«gc.genEntryAndExitCodes(generateImplementation)»
 
 		/* Action Codes */
-		«xpmc.genActionCodes(generateImplementation)»
+		«gc.genActionCodes(generateImplementation)»
 
 		/* State Switch Methods */
-		«xpmc.genStateSwitchMethods(generateImplementation)»
+		«gc.genStateSwitchMethods(generateImplementation)»
 	'''
 
 	/**
@@ -80,8 +90,8 @@ class GenericStateMachineGenerator extends AbstractStateMachineGenerator {
 	 * @param xpmc an expanded actor class
 	 * @return the generated code
 	 */
-	override String guard(TriggeredTransition tt, String trigger, ExpandedModelComponent mc) {
-		val tr = tt.triggers.findFirst(e|mc.isMatching(e, trigger))
+	override String genTriggeredTransitionGuard(Link tt, String trigger, GraphContainer gc) {
+		val tr = (tt.transition as TriggeredTransition).triggers.findFirst(trig|trig.isMatching(trigger))
 	'''
 		«IF tr.hasGuard()»
 			if («translator.getTranslatedCode(tr.guard.guard)»)
@@ -89,16 +99,15 @@ class GenericStateMachineGenerator extends AbstractStateMachineGenerator {
 	'''
 	}
 
-    override String guard(GuardedTransition tt, String trigger, ExpandedModelComponent mc) {
+    override String genGuardedTransitionGuard(Link link, String trigger, GraphContainer gc) {
         '''
-            «translator.getTranslatedCode(tt.guard)»
+            «translator.getTranslatedCode((link.transition as GuardedTransition).guard)»
         '''
     }
 
-	override String genActionCodeMethod(ExpandedModelComponent xpmc, Transition tr, boolean generateImplementation) {
-        var chain = xpmc.getChains(tr)
-        var hasArgs = !chain.empty && chain.forall[it.transition instanceof NonInitialTransition && !(it.transition instanceof GuardedTransition)]
-        val opScope = langExt.operationScope(xpmc.getClassName, false)
+	override String genActionCodeMethod(GraphContainer gc, Link link, boolean generateImplementation) {
+        var hasArgs = !link.chainHeads.empty && link.chainHeads.forall[transition instanceof NonInitialTransition && !(transition instanceof GuardedTransition)]
+        val opScope = langExt.operationScope(gc.className, false)
         val opScopePriv = if (langExt.usesInheritance) opScope else ""
         val ifItemPtr = "InterfaceItemBase"+langExt.pointerLiteral()
         val constIfItemPtr = if (langExt.usesPointers)
@@ -108,14 +117,14 @@ class GenericStateMachineGenerator extends AbstractStateMachineGenerator {
 
         if (generateImplementation) {
     	    '''
-                «langExt.accessLevelProtected»void «opScopePriv»«tr.getActionCodeOperationName()»(«langExt.selfPointer(xpmc.className, hasArgs)»«IF hasArgs»«constIfItemPtr» ifitem«transitionChainGenerator.generateArgumentList(xpmc, tr)»«ENDIF») {
-                    «translator.getTranslatedCode(tr.action)»
+                «langExt.accessLevelProtected»void «opScopePriv»«link.transition.getActionCodeOperationName()»(«langExt.selfPointer(gc.className, hasArgs)»«IF hasArgs»«constIfItemPtr» ifitem«transitionChainGenerator.generateArgumentList(gc, link)»«ENDIF») {
+                    «translator.getTranslatedCode(link.transition.action)»
                 }
     	    '''
         }
         else {
             '''
-                «langExt.accessLevelProtected»«langExt.makeOverridable»void «tr.getActionCodeOperationName()»(«langExt.selfPointer(xpmc.className, hasArgs)»«IF hasArgs»«constIfItemPtr» ifitem«transitionChainGenerator.generateArgumentList(xpmc, tr)»«ENDIF»);
+                «langExt.accessLevelProtected»«langExt.makeOverridable»void «link.transition.getActionCodeOperationName()»(«langExt.selfPointer(gc.className, hasArgs)»«IF hasArgs»«constIfItemPtr» ifitem«transitionChainGenerator.generateArgumentList(gc, link)»«ENDIF»);
             '''
         }
 	}
@@ -128,33 +137,33 @@ class GenericStateMachineGenerator extends AbstractStateMachineGenerator {
 	 * @param generateImplementation if only declarations should be generated then <code>false</code> has to be passed
 	 * @return the generated code
 	 */
-	override String genActionCodeMethods(ExpandedModelComponent xpmc, State state, boolean generateImplementation) {
-		val mc = xpmc.modelComponent
-		val selfPtr = langExt.selfPointer(mc.className, false)
-		val opScope = langExt.operationScope(mc.className, false)
+	override String genActionCodeMethods(GraphContainer gc, Node node, boolean generateImplementation) {
+		val mc = gc.modelComponent
+		val selfPtr = langExt.selfPointer(gc.className, false)
+		val opScope = langExt.operationScope(gc.className, false)
 		val opScopePriv = if (langExt.usesInheritance)
 							opScope
 						else
 							""
+		val state = node.stateGraphNode as State
 		val entryOp = state.getEntryCodeOperationName()
 		val exitOp = state.getExitCodeOperationName()
 		val doOp = state.getDoCodeOperationName()
 		var entry = translator.getTranslatedCode(state.entryCode)
 		var exit = translator.getTranslatedCode(state.exitCode)
 		var docode = translator.getTranslatedCode(state.doCode)
-		if (state instanceof ExpandedRefinedState) {
-			val rs = state as ExpandedRefinedState
-			val inhEntry = translator.getTranslatedCode(rs.inheritedEntry)
-			val inhExit = translator.getTranslatedCode(rs.inheritedExit)
-			val inhDo = translator.getTranslatedCode(rs.inheritedDo)
+		if (state instanceof RefinedState) {
+			val inhEntry = translator.getTranslatedCode(state.inheritedEntryCode)
+			val inhExit = translator.getTranslatedCode(state.inheritedExitCode)
+			val inhDo = translator.getTranslatedCode(state.inheritedDoCode)
 			if (langExt.usesInheritance) {
 				// we call the super method in the generated code
 				val baseName = mc.base.className
-				if (rs.inheritedEntry.hasDetailCode)
+				if (state.inheritedEntryCode.hasDetailCode)
 					entry = langExt.superCall(baseName, entryOp, "") + entry
-				if (rs.inheritedExit.hasDetailCode)
+				if (state.inheritedExitCode.hasDetailCode)
 					exit = exit + langExt.superCall(baseName, exitOp, "")
-				if (rs.inheritedDo.hasDetailCode)
+				if (state.inheritedDoCode.hasDetailCode)
 					docode = langExt.superCall(baseName, doOp, "") + docode
 			}
 			else {
@@ -202,5 +211,5 @@ class GenericStateMachineGenerator extends AbstractStateMachineGenerator {
      * @param generateImplementation or declaration only
      * @return the generated code
      */
-    def public genExtra(ExpandedModelComponent xpmc, boolean generateImplementation) {''''''}
+    def public genExtra(GraphContainer gc, boolean generateImplementation) {''''''}
 }

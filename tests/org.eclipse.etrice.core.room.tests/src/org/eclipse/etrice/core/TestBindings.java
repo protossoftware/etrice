@@ -33,7 +33,7 @@ public class TestBindings extends TestBase {
 
 	@Before
 	public void setUp() {
-		prepare();
+		prepare(CoreTestsActivator.getInstance().getBundle());
 		
 		resource = getResource("TestBindings.room");
 	}

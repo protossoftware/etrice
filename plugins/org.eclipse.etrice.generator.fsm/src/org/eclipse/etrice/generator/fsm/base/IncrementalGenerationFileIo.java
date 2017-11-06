@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.util.zip.CRC32;
 
 import org.apache.commons.io.FileUtils;
-import org.eclipse.etrice.core.genmodel.fsm.base.ILogger;
+import org.eclipse.etrice.core.genmodel.fsm.ILogger;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.util.RuntimeIOException;
 

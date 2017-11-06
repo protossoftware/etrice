@@ -25,7 +25,7 @@ import org.eclipse.etrice.core.fsm.fSM.Transition;
 import org.eclipse.etrice.core.fsm.fSM.Trigger;
 import org.eclipse.etrice.core.fsm.fSM.TriggeredTransition;
 import org.eclipse.etrice.core.fsm.naming.FSMNameProvider;
-import org.eclipse.etrice.ui.behavior.fsm.support.FSMSupportUtil;
+import org.eclipse.etrice.ui.behavior.fsm.support.util.FSMSupportUtil;
 import org.eclipse.etrice.ui.common.base.dialogs.AbstractPropertyDialog;
 import org.eclipse.jface.viewers.IBaseLabelProvider;
 import org.eclipse.jface.viewers.ISelectionChangedListener;

@@ -18,7 +18,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
 import org.eclipse.etrice.core.fsm.fSM.State;
 import org.eclipse.etrice.core.fsm.fSM.StateGraph;
-import org.eclipse.etrice.ui.behavior.fsm.support.FSMSupportUtil;
+import org.eclipse.etrice.ui.behavior.fsm.support.util.FSMSupportUtil;
 import org.eclipse.etrice.ui.common.base.export.DiagramExporter;
 import org.eclipse.etrice.ui.common.base.export.IBulkDiagramExporter;
 import org.eclipse.etrice.ui.common.base.support.DiagramAccessBase;

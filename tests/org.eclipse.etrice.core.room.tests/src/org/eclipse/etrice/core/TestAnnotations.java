@@ -28,7 +28,7 @@ public class TestAnnotations extends TestBase {
 	
 	@Before
 	public void SetUp() {
-		prepare();
+		prepare(CoreTestsActivator.getInstance().getBundle());
 		res = getResource("AnnotationExample.room");
 	}
 	

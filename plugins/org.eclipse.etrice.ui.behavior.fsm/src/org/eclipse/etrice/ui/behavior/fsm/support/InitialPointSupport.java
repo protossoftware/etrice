@@ -13,11 +13,14 @@
 package org.eclipse.etrice.ui.behavior.fsm.support;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.core.fsm.fSM.InitialTransition;
 import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
 import org.eclipse.etrice.core.fsm.fSM.StateGraph;
 import org.eclipse.etrice.core.fsm.fSM.Transition;
 import org.eclipse.etrice.ui.behavior.fsm.provider.ImageProvider;
+import org.eclipse.etrice.ui.behavior.fsm.support.util.FSMSupportUtil;
+import org.eclipse.etrice.ui.behavior.fsm.support.util.ModelEditingUtil;
 import org.eclipse.etrice.ui.common.base.support.CommonSupportUtil;
 import org.eclipse.etrice.ui.common.base.support.DeleteWithoutConfirmFeature;
 import org.eclipse.etrice.ui.common.base.support.NoResizeFeature;
@@ -28,8 +31,10 @@ import org.eclipse.graphiti.features.ICreateFeature;
 import org.eclipse.graphiti.features.IDeleteFeature;
 import org.eclipse.graphiti.features.IFeatureProvider;
 import org.eclipse.graphiti.features.IMoveShapeFeature;
+import org.eclipse.graphiti.features.IReason;
 import org.eclipse.graphiti.features.IRemoveFeature;
 import org.eclipse.graphiti.features.IResizeShapeFeature;
+import org.eclipse.graphiti.features.IUpdateFeature;
 import org.eclipse.graphiti.features.context.IAddContext;
 import org.eclipse.graphiti.features.context.ICreateContext;
 import org.eclipse.graphiti.features.context.IDeleteContext;
@@ -37,11 +42,15 @@ import org.eclipse.graphiti.features.context.IMoveShapeContext;
 import org.eclipse.graphiti.features.context.IPictogramElementContext;
 import org.eclipse.graphiti.features.context.IRemoveContext;
 import org.eclipse.graphiti.features.context.IResizeShapeContext;
+import org.eclipse.graphiti.features.context.IUpdateContext;
 import org.eclipse.graphiti.features.context.impl.CreateConnectionContext;
+import org.eclipse.graphiti.features.context.impl.RemoveContext;
 import org.eclipse.graphiti.features.impl.AbstractAddFeature;
 import org.eclipse.graphiti.features.impl.AbstractCreateFeature;
+import org.eclipse.graphiti.features.impl.AbstractUpdateFeature;
 import org.eclipse.graphiti.features.impl.DefaultMoveShapeFeature;
 import org.eclipse.graphiti.features.impl.DefaultRemoveFeature;
+import org.eclipse.graphiti.features.impl.Reason;
 import org.eclipse.graphiti.mm.algorithms.Ellipse;
 import org.eclipse.graphiti.mm.algorithms.GraphicsAlgorithm;
 import org.eclipse.graphiti.mm.algorithms.Rectangle;
@@ -93,10 +102,9 @@ public class InitialPointSupport {
 				ContainerShape targetContainer = context.getTargetContainer();
 				StateGraph sg = (StateGraph) targetContainer.getLink().getBusinessObjects().get(0);
 
-				boolean inherited = FSMSupportUtil.getInstance().isInherited(getDiagram(), sg);
-				if (inherited) {
-					ModelComponent mc = FSMSupportUtil.getInstance().getModelComponent(getDiagram());
-					sg = FSMSupportUtil.getInstance().insertRefinedState(sg, mc, targetContainer, getFeatureProvider());
+				ModelComponent mc = FSMSupportUtil.getInstance().getModelComponent(getDiagram());
+				if (!FSMSupportUtil.getInstance().isOwnedBy(mc, sg)) {
+					sg = ModelEditingUtil.insertRefinedState(sg, mc, targetContainer, getFeatureProvider());
 				}
 		        
 				// We don't create anything here since in the model the initial point is
@@ -155,14 +163,15 @@ public class InitialPointSupport {
 				ContainerShape sgShape = context.getTargetContainer();
 				StateGraph sg = (StateGraph) context.getNewObject();
 	
-				boolean inherited = FSMSupportUtil.getInstance().isInherited(getDiagram(), sg);
+				Transition initTransition = FSMSupportUtil.getInstance().getFSMHelpers().getInitTransition(sg);
+				boolean inherited = FSMSupportUtil.getInstance().isInherited(getDiagram(), initTransition);
 				
 				// CONTAINER SHAPE WITH RECTANGLE
 				IPeCreateService peCreateService = Graphiti.getPeCreateService();
 				ContainerShape containerShape =
 					peCreateService.createContainerShape(sgShape, true);
 	
-				Graphiti.getPeService().setPropertyValue(containerShape, Constants.TYPE_KEY, Constants.TRP_TYPE);
+				Graphiti.getPeService().setPropertyValue(containerShape, Constants.TYPE_KEY, Constants.INI_TYPE);
 				
 				int x = context.getX()-ITEM_SIZE;
 				int y = context.getY()-ITEM_SIZE;
@@ -215,13 +224,66 @@ public class InitialPointSupport {
 				if (canMove) {
 					Object bo = getBusinessObjectForPictogramElement(context.getPictogramElement());
 					if (bo instanceof StateGraph) {
-						return !FSMSupportUtil.getInstance().isInherited(getDiagram(), (StateGraph)bo);
+						Transition initTransition = FSMSupportUtil.getInstance().getFSMHelpers().getInitTransition((StateGraph) bo);
+						return !FSMSupportUtil.getInstance().isInherited(getDiagram(), initTransition);
 					}
 					return false;
 				}
 				
 				return canMove;
 			}
+		}
+		
+		private class UpdateFeature extends AbstractUpdateFeature {
+
+			public UpdateFeature(IFeatureProvider fp) {
+				super(fp);
+			}
+
+			@Override
+			public boolean canUpdate(IUpdateContext context) {
+				Object bo = getBusinessObjectForPictogramElement(context.getPictogramElement());
+				if (bo instanceof EObject && ((EObject)bo).eIsProxy())
+					return true;
+				
+				return bo instanceof StateGraph;
+			}
+
+			@Override
+			public IReason updateNeeded(IUpdateContext context) {
+				Object bo = getBusinessObjectForPictogramElement(context.getPictogramElement());
+				if (bo instanceof EObject && ((EObject)bo).eIsProxy()) {
+					return Reason.createTrueReason("InitialPoint deleted from model");
+				}
+				
+				return Reason.createFalseReason();
+			}
+
+			@Override
+			public boolean update(IUpdateContext context) {
+				ContainerShape containerShape = (ContainerShape)context.getPictogramElement();
+				Object bo = getBusinessObjectForPictogramElement(containerShape);
+				if (bo instanceof EObject && ((EObject)bo).eIsProxy()) {
+					IRemoveContext rc = new RemoveContext(containerShape);
+					IFeatureProvider featureProvider = getFeatureProvider();
+					IRemoveFeature removeFeature = featureProvider.getRemoveFeature(rc);
+					if (removeFeature != null) {
+						removeFeature.remove(rc);
+					}
+					EcoreUtil.delete((EObject) bo);
+					return true;
+				}
+				
+				if (bo instanceof StateGraph) {
+					Transition initTransition = FSMSupportUtil.getInstance().getFSMHelpers().getInitTransition((StateGraph) bo);
+					boolean inherited = FSMSupportUtil.getInstance().isInherited(getDiagram(), initTransition);
+					
+					Color dark = manageColor(inherited? INHERITED_COLOR:DARK_COLOR);
+					updateFigure(containerShape, dark, manageColor(BRIGHT_COLOR));
+				}
+				return true;
+			}
+			
 		}
 		
 		protected static class RemoveFeature extends DefaultRemoveFeature {
@@ -233,7 +295,8 @@ public class InitialPointSupport {
 			public boolean canRemove(IRemoveContext context) {
 				Object bo = getBusinessObjectForPictogramElement(context.getPictogramElement());
 				if (bo instanceof StateGraph) {
-					return !FSMSupportUtil.getInstance().isInherited(getDiagram(), (StateGraph) bo);
+					Transition initTransition = FSMSupportUtil.getInstance().getFSMHelpers().getInitTransition((StateGraph) bo);
+					return !FSMSupportUtil.getInstance().isInherited(getDiagram(), initTransition);
 				}
 				return false;
 			}
@@ -300,6 +363,11 @@ public class InitialPointSupport {
 			return new DeleteFeature(fp);
 		}
 		
+		@Override
+		public IUpdateFeature getUpdateFeature(IUpdateContext context) {
+			return new UpdateFeature(fp);
+		}
+		
 		protected static void createFigure( 
 				ContainerShape containerShape,
 				GraphicsAlgorithm invisibleRectangle, Color darkColor, Color brightColor) {
@@ -325,7 +393,18 @@ public class InitialPointSupport {
 				//containerShape.getAnchors().get(0).setReferencedGraphicsAlgorithm(rect);
 			}
 		}
-		
+
+		private static void updateFigure(PictogramElement pe, Color dark, Color bright) {
+			ContainerShape container = (ContainerShape)pe;
+			
+			// we clear the figure and rebuild it
+			GraphicsAlgorithm borderRect = pe.getGraphicsAlgorithm();
+			while (!borderRect.getGraphicsAlgorithmChildren().isEmpty()) {
+				EcoreUtil.delete(borderRect.getGraphicsAlgorithmChildren().get(0), true);
+			}
+			
+			createFigure(container, borderRect, dark, bright);
+		}
 	}
 
 	private class BehaviorProvider extends DefaultToolBehaviorProvider {

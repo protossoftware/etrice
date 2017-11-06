@@ -1,0 +1,52 @@
+RoomModel TemplateModel {
+
+	ActorClass TestActor {
+		Interface {
+			Port p0: PC
+		}
+		Structure {
+			external Port p0
+		}
+		Behavior {
+			StateMachine {
+				State state0
+				State state1
+				State state2
+				State state3
+				TransitionPoint tr4
+				ChoicePoint cp0
+				Transition init0: initial -> state0
+				Transition tr0: state0 -> state1 {
+					triggers {
+						<in1: p0>
+					}
+				}
+				Transition tr1: state1 -> cp cp0 {
+					triggers {
+						<in1: p0>
+					}
+				}
+				Transition tr2: cp cp0 -> state3
+				Transition tr3: cp cp0 -> state2 {
+					cond {
+						"true"
+					}
+				}
+				Transition tr5:  my tr4 -> state0 {
+					triggers {
+						<in2: p0>
+					}
+				}
+			}
+		}
+	}
+
+	ProtocolClass PC {
+		incoming {
+			Message in1()
+			Message in2()
+		}
+		outgoing { }
+	}
+
+}

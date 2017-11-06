@@ -518,7 +518,7 @@ public class ConfigJavaValidator extends AbstractConfigJavaValidator {
 				ProtocolClass protocol = (ProtocolClass) generalProtocol;
 				for (ProtocolClassConfig cf : model.getProtocolClassConfigs()) {
 					if (cf.getProtocol().equals(protocol)) {
-						if (protocol.getRegular().equals(configUtil.getPortClass(portInstanceConfig)))
+						if (protocol.getRegular()!=null && protocol.getRegular().equals(configUtil.getPortClass(portInstanceConfig)))
 							portClassConfig = cf.getRegular();
 						else
 							portClassConfig = cf.getConjugated();

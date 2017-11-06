@@ -26,7 +26,7 @@ import org.eclipse.etrice.core.genmodel.etricegen.PortInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.PortKind;
 import org.eclipse.etrice.core.genmodel.etricegen.StructureInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance;
-import org.eclipse.etrice.core.genmodel.fsm.fsmgen.IDiagnostician;
+import org.eclipse.etrice.core.genmodel.fsm.IDiagnostician;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.ActorRef;

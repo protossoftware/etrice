@@ -647,9 +647,12 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 
 	@Check
 	public void checkMessageFromIf(MessageFromIf mfi){
-		if(mfi.getFrom() != null){
-			if(roomHelpers.getProtocol((InterfaceItem)mfi.getFrom()).getCommType() != CommunicationType.EVENT_DRIVEN)
-				error("port must have event driven protocol", mfi, FSMPackage.eINSTANCE.getMessageFromIf_From());
+		if (mfi.getFrom() != null){
+			ProtocolClass protocol = roomHelpers.getProtocol((InterfaceItem)mfi.getFrom());
+			if (protocol!=null && !protocol.eIsProxy()) {
+				if (protocol.getCommType() != CommunicationType.EVENT_DRIVEN)
+					error("port must have event driven protocol", mfi, FSMPackage.eINSTANCE.getMessageFromIf_From());
+			}
 		}
 	}
 

@@ -16,7 +16,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.etrice.core.genmodel.fsm.fsmgen.FsmGenPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -2061,40 +2060,22 @@ public interface ETriceGenPackage extends EPackage {
 	int WIRED_SUB_SYSTEM_CLASS_FEATURE_COUNT = WIRED_STRUCTURE_CLASS_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Model Component</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXPANDED_ACTOR_CLASS__MODEL_COMPONENT = FsmGenPackage.EXPANDED_MODEL_COMPONENT__MODEL_COMPONENT;
-
-	/**
-	 * The feature id for the '<em><b>State Machine</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXPANDED_ACTOR_CLASS__STATE_MACHINE = FsmGenPackage.EXPANDED_MODEL_COMPONENT__STATE_MACHINE;
-
-	/**
-	 * The feature id for the '<em><b>Transition Chains</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXPANDED_ACTOR_CLASS__TRANSITION_CHAINS = FsmGenPackage.EXPANDED_MODEL_COMPONENT__TRANSITION_CHAINS;
-
-	/**
 	 * The feature id for the '<em><b>Actor Class</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXPANDED_ACTOR_CLASS__ACTOR_CLASS = FsmGenPackage.EXPANDED_MODEL_COMPONENT_FEATURE_COUNT + 0;
+	int EXPANDED_ACTOR_CLASS__ACTOR_CLASS = 0;
+
+	/**
+	 * The feature id for the '<em><b>Graph Container</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPANDED_ACTOR_CLASS__GRAPH_CONTAINER = 1;
 
 	/**
 	 * The number of structural features of the '<em>Expanded Actor Class</em>' class.
@@ -2103,7 +2084,7 @@ public interface ETriceGenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXPANDED_ACTOR_CLASS_FEATURE_COUNT = FsmGenPackage.EXPANDED_MODEL_COMPONENT_FEATURE_COUNT + 1;
+	int EXPANDED_ACTOR_CLASS_FEATURE_COUNT = 2;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.etrice.core.genmodel.etricegen.PortKind <em>Port Kind</em>}' enum.
@@ -2934,6 +2915,17 @@ public interface ETriceGenPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getExpandedActorClass_ActorClass();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass#getGraphContainer <em>Graph Container</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Graph Container</em>'.
+	 * @see org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass#getGraphContainer()
+	 * @see #getExpandedActorClass()
+	 * @generated
+	 */
+	EReference getExpandedActorClass_GraphContainer();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.etrice.core.genmodel.etricegen.WiredStructureClass <em>Wired Structure Class</em>}'.
@@ -3811,6 +3803,14 @@ public interface ETriceGenPackage extends EPackage {
 		 * @generated
 		 */
 		EReference EXPANDED_ACTOR_CLASS__ACTOR_CLASS = eINSTANCE.getExpandedActorClass_ActorClass();
+
+		/**
+		 * The meta object literal for the '<em><b>Graph Container</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EXPANDED_ACTOR_CLASS__GRAPH_CONTAINER = eINSTANCE.getExpandedActorClass_GraphContainer();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.etrice.core.genmodel.etricegen.impl.WiredStructureClassImpl <em>Wired Structure Class</em>}' class.

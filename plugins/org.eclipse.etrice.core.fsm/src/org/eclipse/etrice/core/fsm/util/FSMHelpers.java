@@ -45,6 +45,9 @@ import org.eclipse.etrice.core.fsm.fSM.SubStateTrPointTerminal;
 import org.eclipse.etrice.core.fsm.fSM.TrPoint;
 import org.eclipse.etrice.core.fsm.fSM.TrPointTerminal;
 import org.eclipse.etrice.core.fsm.fSM.Transition;
+import org.eclipse.etrice.core.fsm.fSM.TransitionBase;
+import org.eclipse.etrice.core.fsm.fSM.TransitionChainStartTransition;
+import org.eclipse.etrice.core.fsm.fSM.TransitionPoint;
 import org.eclipse.etrice.core.fsm.fSM.TransitionTerminal;
 import org.eclipse.etrice.core.fsm.fSM.Trigger;
 import org.eclipse.etrice.core.fsm.naming.FSMNameProvider;
@@ -76,6 +79,38 @@ public class FSMHelpers extends BaseHelpers {
 		return false;
 	}
 
+	/**
+	 * returns the actual state machine of this model class. I.e. the own state machine if it has
+	 * one or otherwise the first state machine in the super class hierarchy
+	 */
+	public StateGraph getActualStateMachine(ModelComponent mc) {
+		// we go up in the inheritance hierarchy until we find a model class with a state machine
+		while (mc!=null) {
+			if (mc.getStateMachine()!=null) {
+				return mc.getStateMachine();
+			}
+			
+			mc = mc.getBase();
+		}
+		
+		return null;
+	}
+	
+	public StateGraph getSuperStateMachine(ModelComponent mc) {
+		StateGraph stateMachine = getActualStateMachine(mc);
+		
+		// this component is not necessarily the one that was passed in
+		mc = getModelComponent(stateMachine);
+		
+		// now return the actual state machine of the base class...
+		if (mc!=null && mc.getBase()!=null) {
+			return getActualStateMachine(mc.getBase());
+		}
+		
+		// ...or null if no such one
+		return null;
+	}
+	
 	/**
 	 * Returns the parent {@link ModelComponent} of a {@link StateGraphItem}.
 	 * 
@@ -208,12 +243,21 @@ public class FSMHelpers extends BaseHelpers {
 	}
 	
 	/**
+	 * @param sg a {@link StateGraph}
+	 * @return <code>true</code> if the state graph represents the top level (i.e.
+	 * is the actor's state machine)
+	 */
+	public boolean isTopLevel(StateGraph sg) {
+		return !(sg.eContainer() instanceof State);
+	}
+	
+	/**
 	 * @param s a {@link State}
 	 * @return <code>true</code> if the state resides in the top level (i.e.
 	 * directly in the actor's state machine)
 	 */
 	public boolean isTopLevel(StateGraphNode s) {
-		return !(s.eContainer().eContainer() instanceof State);
+		return isTopLevel((StateGraph) s.eContainer());
 	}
 	
 	/**
@@ -330,6 +374,21 @@ public class FSMHelpers extends BaseHelpers {
 			}
 		}
 		return targetting;
+	}
+	
+	public SimpleState getFinalTarget(RefinedState state)  {
+		State target = state.getTarget();
+		if (target instanceof SimpleState) {
+			return (SimpleState) target;
+		}
+		else if (target instanceof RefinedState) {
+			return getFinalTarget((RefinedState) target);
+		}
+		else {
+			// must never happen
+			assert(false) : "unexpected sub type";
+			return null;
+		}
 	}
 	
 	/**
@@ -532,7 +591,37 @@ public class FSMHelpers extends BaseHelpers {
 	 * @return whether a {@link Trigger} contains a guard
 	 */
 	public boolean isGuarded(Trigger trig) {
-		return trig.getGuard()!=null && hasDetailCode(trig.getGuard().getGuard());
+		// TODO: remove this redundant method
+		return hasGuard(trig);
+	}
+	
+	public boolean isHandler(Transition tr) {
+		if (tr instanceof TransitionChainStartTransition) {
+			TransitionChainStartTransition trans = (TransitionChainStartTransition) tr;
+			if (trans.getFrom() instanceof TrPointTerminal) {
+				TrPoint tp = ((TrPointTerminal)trans.getFrom()).getTrPoint();
+				if (tp instanceof TransitionPoint)
+					return ((TransitionPoint)tp).isHandler();
+			}
+			else if (trans.getFrom() instanceof SubStateTrPointTerminal) {
+				TrPoint tp = ((SubStateTrPointTerminal)trans.getFrom()).getTrPoint();
+				if (tp instanceof TransitionPoint)
+					assert(false): "not allowed to connect TransitionPoint to exterior";
+			}
+		}
+		return false;
+	}
+	
+	public State getSuperState(TransitionBase tr) {
+		if (tr instanceof RefinedTransition) {
+			return getSuperState(((RefinedTransition) tr).getTarget());
+		}
+		
+		if (tr.eContainer().eContainer() instanceof State) {
+			return (State) tr.eContainer().eContainer();
+		}
+
+		return null;
 	}
 
 	/**

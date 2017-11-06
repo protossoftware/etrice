@@ -30,6 +30,9 @@ import org.eclipse.etrice.ui.behavior.fsm.editor.AbstractFSMEditor;
 import org.eclipse.etrice.ui.behavior.fsm.editor.DecoratorUtil;
 import org.eclipse.etrice.ui.behavior.fsm.provider.IInjectorProvider;
 import org.eclipse.etrice.ui.behavior.fsm.provider.ImageProvider;
+import org.eclipse.etrice.ui.behavior.fsm.support.util.DiagramEditingUtil;
+import org.eclipse.etrice.ui.behavior.fsm.support.util.FSMSupportUtil;
+import org.eclipse.etrice.ui.behavior.fsm.support.util.ModelEditingUtil;
 import org.eclipse.etrice.ui.common.base.support.ChangeAwareCreateFeature;
 import org.eclipse.etrice.ui.common.base.support.ChangeAwareCustomFeature;
 import org.eclipse.etrice.ui.common.base.support.CommonSupportUtil;
@@ -153,12 +156,11 @@ public class StateSupport {
 			public Object[] doCreate(ICreateContext context) {
 		        
 		        ContainerShape targetContainer = context.getTargetContainer();
-		        ModelComponent ac = FSMSupportUtil.getInstance().getModelComponent(getDiagram());
+		        ModelComponent mc = FSMSupportUtil.getInstance().getModelComponent(getDiagram());
 				StateGraph sg = (StateGraph) targetContainer.getLink().getBusinessObjects().get(0);
-		        
-				boolean inherited = FSMSupportUtil.getInstance().isInherited(getDiagram(), sg);
-				if (inherited) {
-					sg = FSMSupportUtil.getInstance().insertRefinedState(sg, ac, targetContainer, getFeatureProvider());
+				
+				if (!FSMSupportUtil.getInstance().isOwnedBy(mc, sg)) {
+					sg = ModelEditingUtil.insertRefinedState(sg, mc, targetContainer, getFeatureProvider());
 				}
 				
 				// create new State and add it
@@ -169,7 +171,7 @@ public class StateSupport {
 	        	Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 	        	Injector injector = ((IInjectorProvider) getFeatureProvider()).getInjector();
 	        	IFSMDialogFactory factory = injector.getInstance(IFSMDialogFactory.class);
-	        	IStatePropertyDialog dlg = factory.createStatePropertyDialog(shell, ac, s, true);
+	        	IStatePropertyDialog dlg = factory.createStatePropertyDialog(shell, mc, s, true);
 				if (dlg.open()==Window.OK) {
 					addGraphicalRepresentation(context, s);
 				
@@ -525,7 +527,7 @@ public class StateSupport {
 					
 					boolean isBaseClassState = FSMSupportUtil.getInstance().getFSMHelpers().getModelComponent(s)!=FSMSupportUtil.getInstance().getModelComponent(getDiagram());
 					if (isBaseClassState) {
-						newSG = FSMSupportUtil.getInstance().getSubGraphOfRefinedStateFor(s, FSMSupportUtil.getInstance().getModelComponent(getDiagram()));
+						newSG = ModelEditingUtil.getOrCreateSubGraphOfRefinedStateFor(s, FSMSupportUtil.getInstance().getModelComponent(getDiagram()));
 						s = (State) newSG.eContainer();
 						
 						// replace old business object with new refined state
@@ -588,7 +590,7 @@ public class StateSupport {
 				ContainerShape container = (ContainerShape)context.getPictogramElements()[0];
 				Object bo = getBusinessObjectForPictogramElement(container);
 				State s = (State) bo;
-				RefinedState rs = FSMSupportUtil.getInstance().getRefinedStateFor(s, FSMSupportUtil.getInstance().getModelComponent(getDiagram()));
+				RefinedState rs = ModelEditingUtil.getOrCreateRefinedStateFor(s, FSMSupportUtil.getInstance().getModelComponent(getDiagram()));
 				
 				// replace old business object with new refined state
 				link(container, rs);
@@ -828,7 +830,7 @@ public class StateSupport {
 				IFeatureProvider fp = getFeatureProvider();
 				Diagram diagram = getDiagram();
 				ModelComponent mc = FSMSupportUtil.getInstance().getFSMHelpers().getModelComponent(s);
-				FSMSupportUtil.getInstance().deleteSubStructureRecursive(s, mc, diagram, fp);
+				DiagramEditingUtil.getInstance().deleteSubStructureRecursive(s, mc, diagram, fp);
 				
 				ContainerShape container = (ContainerShape) context.getPictogramElement();
 				CommonSupportUtil.deleteConnectionsRecursive(container, fp);

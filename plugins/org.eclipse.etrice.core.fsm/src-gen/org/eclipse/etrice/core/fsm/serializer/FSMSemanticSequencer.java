@@ -511,6 +511,7 @@ public class FSMSemanticSequencer extends BaseSemanticSequencer {
 	
 	/**
 	 * Contexts:
+	 *     StateGraphItem returns RefinedTransition
 	 *     TransitionBase returns RefinedTransition
 	 *     RefinedTransition returns RefinedTransition
 	 *
