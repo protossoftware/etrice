@@ -124,10 +124,10 @@ public class ALogService extends ActorClassBase {
 	/* Entry and Exit Codes */
 	
 	/* Action Codes */
-	protected void action_TRANS_open_FROM_closed_TO_opened_BY_openlog(InterfaceItemBase ifitem, String fileName) {
+	protected void action_TRANS_open_FROM_closed_TO_opened_BY_openlog(InterfaceItemBase ifitem, String transitionData) {
 	    Date d=new Date(tStart);
 	    try{
-	    file=new FileOutputStream(fileName);
+	    file=new FileOutputStream(transitionData);
 	    p=new PrintStream(file);
 	    p.println("Log opened at "+ d.toString());
 	    p.println("--------------------------------------------------");
@@ -140,12 +140,12 @@ public class ALogService extends ActorClassBase {
 	    p.close();
 	    p=null;
 	}
-	protected void action_TRANS_tr1_FROM_opened_TO_opened_BY_internalLoglog_tr1(InterfaceItemBase ifitem, InternalLogData data) {
-	    p.println("Timestamp: " + Long.toString(data.timeStamp-tStart) + "ms");
-	    p.println("SenderInstance: "+ data.sender);
-	    p.println("UserString: " + data.userString);
+	protected void action_TRANS_tr1_FROM_opened_TO_opened_BY_internalLoglog_tr1(InterfaceItemBase ifitem, InternalLogData transitionData) {
+	    p.println("Timestamp: " + Long.toString(transitionData.timeStamp-tStart) + "ms");
+	    p.println("SenderInstance: "+ transitionData.sender);
+	    p.println("UserString: " + transitionData.userString);
 	    p.println("--------------------------------------------------");
-	    System.out.printf(data.userString);
+	    System.out.printf(transitionData.userString);
 	}
 	
 	/* State Switch Methods */
@@ -188,8 +188,8 @@ public class ALogService extends ActorClassBase {
 			}
 			case ALogService.CHAIN_TRANS_open_FROM_closed_TO_opened_BY_openlog:
 			{
-				String fileName = (String) generic_data__et;
-				action_TRANS_open_FROM_closed_TO_opened_BY_openlog(ifitem, fileName);
+				String transitionData = (String) generic_data__et;
+				action_TRANS_open_FROM_closed_TO_opened_BY_openlog(ifitem, transitionData);
 				return STATE_opened;
 			}
 			case ALogService.CHAIN_TRANS_tr0_FROM_opened_TO_closed_BY_closelog:
@@ -199,8 +199,8 @@ public class ALogService extends ActorClassBase {
 			}
 			case ALogService.CHAIN_TRANS_tr1_FROM_opened_TO_opened_BY_internalLoglog_tr1:
 			{
-				InternalLogData data = (InternalLogData) generic_data__et;
-				action_TRANS_tr1_FROM_opened_TO_opened_BY_internalLoglog_tr1(ifitem, data);
+				InternalLogData transitionData = (InternalLogData) generic_data__et;
+				action_TRANS_tr1_FROM_opened_TO_opened_BY_internalLoglog_tr1(ifitem, transitionData);
 				return STATE_opened;
 			}
 				default:
@@ -253,41 +253,41 @@ public class ALogService extends ActorClassBase {
 	
 		if (!handleSystemEvent(ifitem, evt, generic_data__et)) {
 			switch (getState()) {
-			    case STATE_closed:
-			        switch(trigger__et) {
-			                case TRIG_log__open:
-			                    {
-			                        chain__et = ALogService.CHAIN_TRANS_open_FROM_closed_TO_opened_BY_openlog;
-			                        catching_state__et = STATE_TOP;
-			                    }
-			                break;
-			                default:
-			                    /* should not occur */
-			                    break;
-			        }
-			        break;
-			    case STATE_opened:
-			        switch(trigger__et) {
-			                case TRIG_log__close:
-			                    {
-			                        chain__et = ALogService.CHAIN_TRANS_tr0_FROM_opened_TO_closed_BY_closelog;
-			                        catching_state__et = STATE_TOP;
-			                    }
-			                break;
-			                case TRIG_log__internalLog:
-			                    {
-			                        chain__et = ALogService.CHAIN_TRANS_tr1_FROM_opened_TO_opened_BY_internalLoglog_tr1;
-			                        catching_state__et = STATE_TOP;
-			                    }
-			                break;
-			                default:
-			                    /* should not occur */
-			                    break;
-			        }
-			        break;
-			    default:
-			        /* should not occur */
-			        break;
+				case STATE_closed:
+					switch(trigger__et) {
+						case TRIG_log__open:
+							{
+								chain__et = ALogService.CHAIN_TRANS_open_FROM_closed_TO_opened_BY_openlog;
+								catching_state__et = STATE_TOP;
+							}
+						break;
+						default:
+							/* should not occur */
+							break;
+					}
+					break;
+				case STATE_opened:
+					switch(trigger__et) {
+						case TRIG_log__close:
+							{
+								chain__et = ALogService.CHAIN_TRANS_tr0_FROM_opened_TO_closed_BY_closelog;
+								catching_state__et = STATE_TOP;
+							}
+						break;
+						case TRIG_log__internalLog:
+							{
+								chain__et = ALogService.CHAIN_TRANS_tr1_FROM_opened_TO_opened_BY_internalLoglog_tr1;
+								catching_state__et = STATE_TOP;
+							}
+						break;
+						default:
+							/* should not occur */
+							break;
+					}
+					break;
+				default:
+					/* should not occur */
+					break;
 			}
 		}
 		if (chain__et != NOT_CAUGHT) {

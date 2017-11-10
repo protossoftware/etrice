@@ -11,6 +11,7 @@
 #include "etDatatypes.h"
 #include "messaging/etMessage.h"
 
+/* include all referenced room classes */
 #include "room/basic/service/timing/PTimer.h"
 
 /*--------------------- begin user code ---------------------*/

@@ -11,6 +11,7 @@
 #include "etDatatypes.h"
 #include "messaging/etMessage.h"
 
+/* include all referenced room classes */
 #include "room/basic/service/tcp/DTcpPayload.h"
 #include "room/basic/service/tcp/PTcpControl.h"
 #include "room/basic/service/tcp/PTcpPayload.h"

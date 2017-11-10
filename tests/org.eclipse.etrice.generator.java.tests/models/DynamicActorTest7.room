@@ -59,7 +59,7 @@ RoomModel DynamicActorTest7 {
 						<hello: op>
 					}
 					action {
-						"System.out.println(\"received \"+txt);"
+						"System.out.println(\"received \"+transitionData);"
 					}
 				}
 				Transition tr1: DestroyAndCreate -> DestroyAndRestore {
@@ -67,7 +67,7 @@ RoomModel DynamicActorTest7 {
 						<hello: op>
 					}
 					action {
-						"System.out.println(\"received \"+txt);"
+						"System.out.println(\"received \"+transitionData);"
 					}
 				}
 				Transition tr2: DestroyAndRestore -> LoadInArray {
@@ -75,7 +75,7 @@ RoomModel DynamicActorTest7 {
 						<hello: op>
 					}
 					action {
-						"System.out.println(\"received \"+txt);"
+						"System.out.println(\"received \"+transitionData);"
 					}
 				}
 				Transition tr3: LoadInArray -> ReceivedHello {
@@ -83,7 +83,7 @@ RoomModel DynamicActorTest7 {
 						<hello: opa>
 					}
 					action {
-						"System.out.println(\"received \"+txt);"
+						"System.out.println(\"received \"+transitionData);"
 					}
 				}
 				Transition tr4: ReceivedHello -> Done {
@@ -91,7 +91,7 @@ RoomModel DynamicActorTest7 {
 						<hello: opa>
 					}
 					action {
-						"System.out.println(\"received \"+txt);"
+						"System.out.println(\"received \"+transitionData);"
 					}
 				}
 				State Init {

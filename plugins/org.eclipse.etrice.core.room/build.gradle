@@ -5,6 +5,7 @@ apply from: "$rootDir/gradle/publish.gradle"
 dependencies {
 	compile project(':plugins:org.eclipse.etrice.core.common')
 	compile project(':plugins:org.eclipse.etrice.core.fsm')
+	compile project(':plugins:org.eclipse.etrice.core.genmodel.fsm')
 	runtime project(':plugins:org.eclipse.etrice.abstractexec.behavior')
 	
 	compile "org.eclipse.platform:org.eclipse.core.runtime:$core_runtime_version"

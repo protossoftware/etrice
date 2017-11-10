@@ -122,18 +122,18 @@ public class ATimingService extends ActorClassBase {
 	protected void action_TRANS_INITIAL_TO__Operational() {
 	    timerService = new Timer();
 	}
-	protected void action_TRANS_tr1_FROM_Operational_TO_Operational_BY_internalStartTimertimer_tr1(InterfaceItemBase ifitem, TimerData td) {
+	protected void action_TRANS_tr1_FROM_Operational_TO_Operational_BY_internalStartTimertimer_tr1(InterfaceItemBase ifitem, TimerData transitionData) {
 	    // start timer
 	    taskCount++;
 	    if (taskCount>PURGE_LIMIT) timerService.purge();
-	    int t = td.getTime();
+	    int t = transitionData.getTime();
 	    timerService.scheduleAtFixedRate(((PTimerPort)ifitem).getTask(),t,t);
 	}
-	protected void action_TRANS_tr3_FROM_Operational_TO_Operational_BY_internalStartTimeouttimer_tr3(InterfaceItemBase ifitem, TimerData td) {
+	protected void action_TRANS_tr3_FROM_Operational_TO_Operational_BY_internalStartTimeouttimer_tr3(InterfaceItemBase ifitem, TimerData transitionData) {
 	    // start timeout
 	    taskCount++;
 	    if (taskCount>PURGE_LIMIT) timerService.purge();
-	    timerService.schedule(((PTimerPort)ifitem).getTask(), ((TimerData)td).getTime());
+	    timerService.schedule(((PTimerPort)ifitem).getTask(), transitionData.getTime());
 	}
 	protected void action_TRANS_tr4_FROM_Operational_TO_Operational_BY_killtimer_tr4(InterfaceItemBase ifitem) {
 	    // nothing to do to kill timer (handled by timer)
@@ -176,14 +176,14 @@ public class ATimingService extends ActorClassBase {
 			}
 			case ATimingService.CHAIN_TRANS_tr1_FROM_Operational_TO_Operational_BY_internalStartTimertimer_tr1:
 			{
-				TimerData td = (TimerData) generic_data__et;
-				action_TRANS_tr1_FROM_Operational_TO_Operational_BY_internalStartTimertimer_tr1(ifitem, td);
+				TimerData transitionData = (TimerData) generic_data__et;
+				action_TRANS_tr1_FROM_Operational_TO_Operational_BY_internalStartTimertimer_tr1(ifitem, transitionData);
 				return STATE_Operational;
 			}
 			case ATimingService.CHAIN_TRANS_tr3_FROM_Operational_TO_Operational_BY_internalStartTimeouttimer_tr3:
 			{
-				TimerData td = (TimerData) generic_data__et;
-				action_TRANS_tr3_FROM_Operational_TO_Operational_BY_internalStartTimeouttimer_tr3(ifitem, td);
+				TimerData transitionData = (TimerData) generic_data__et;
+				action_TRANS_tr3_FROM_Operational_TO_Operational_BY_internalStartTimeouttimer_tr3(ifitem, transitionData);
 				return STATE_Operational;
 			}
 			case ATimingService.CHAIN_TRANS_tr4_FROM_Operational_TO_Operational_BY_killtimer_tr4:
@@ -242,34 +242,34 @@ public class ATimingService extends ActorClassBase {
 	
 		if (!handleSystemEvent(ifitem, evt, generic_data__et)) {
 			switch (getState()) {
-			    case STATE_Operational:
-			        switch(trigger__et) {
-			                case TRIG_timer__internalStartTimer:
-			                    {
-			                        chain__et = ATimingService.CHAIN_TRANS_tr1_FROM_Operational_TO_Operational_BY_internalStartTimertimer_tr1;
-			                        catching_state__et = STATE_TOP;
-			                    }
-			                break;
-			                case TRIG_timer__internalStartTimeout:
-			                    {
-			                        chain__et = ATimingService.CHAIN_TRANS_tr3_FROM_Operational_TO_Operational_BY_internalStartTimeouttimer_tr3;
-			                        catching_state__et = STATE_TOP;
-			                    }
-			                break;
-			                case TRIG_timer__kill:
-			                    {
-			                        chain__et = ATimingService.CHAIN_TRANS_tr4_FROM_Operational_TO_Operational_BY_killtimer_tr4;
-			                        catching_state__et = STATE_TOP;
-			                    }
-			                break;
-			                default:
-			                    /* should not occur */
-			                    break;
-			        }
-			        break;
-			    default:
-			        /* should not occur */
-			        break;
+				case STATE_Operational:
+					switch(trigger__et) {
+						case TRIG_timer__internalStartTimeout:
+							{
+								chain__et = ATimingService.CHAIN_TRANS_tr3_FROM_Operational_TO_Operational_BY_internalStartTimeouttimer_tr3;
+								catching_state__et = STATE_TOP;
+							}
+						break;
+						case TRIG_timer__internalStartTimer:
+							{
+								chain__et = ATimingService.CHAIN_TRANS_tr1_FROM_Operational_TO_Operational_BY_internalStartTimertimer_tr1;
+								catching_state__et = STATE_TOP;
+							}
+						break;
+						case TRIG_timer__kill:
+							{
+								chain__et = ATimingService.CHAIN_TRANS_tr4_FROM_Operational_TO_Operational_BY_killtimer_tr4;
+								catching_state__et = STATE_TOP;
+							}
+						break;
+						default:
+							/* should not occur */
+							break;
+					}
+					break;
+				default:
+					/* should not occur */
+					break;
 			}
 		}
 		if (chain__et != NOT_CAUGHT) {

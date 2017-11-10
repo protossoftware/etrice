@@ -170,10 +170,10 @@ public class ATcpClient extends ActorClassBase {
 	protected void action_TRANS_INITIAL_TO__closed() {
 	    System.out.println("Client Init !");
 	}
-	protected void action_TRANS_tr0_FROM_closed_TO_cp0_BY_openControlPort(InterfaceItemBase ifitem, DTcpControl data) {
+	protected void action_TRANS_tr0_FROM_closed_TO_cp0_BY_openControlPort(InterfaceItemBase ifitem, DTcpControl transitionData) {
 	    lastError=0;
 	    try{
-	    socket = new Socket(data.IPAddr,data.TcpPort);
+	    socket = new Socket(transitionData.IPAddr,transitionData.TcpPort);
 	    (new ClientRxThread(PayloadPort, socket)).start();
 	    out = socket.getOutputStream();
 	    }catch(IOException e){
@@ -190,10 +190,10 @@ public class ATcpClient extends ActorClassBase {
 	    System.err.println(e.toString());
 	    }
 	}
-	protected void action_TRANS_tr2_FROM_cp0_TO_opened(InterfaceItemBase ifitem, DTcpControl data) {
+	protected void action_TRANS_tr2_FROM_cp0_TO_opened(InterfaceItemBase ifitem, DTcpControl transitionData) {
 	    ControlPort.established();
 	}
-	protected void action_TRANS_socketError_FROM_cp0_TO_error_COND_socketError(InterfaceItemBase ifitem, DTcpControl data) {
+	protected void action_TRANS_socketError_FROM_cp0_TO_error_COND_socketError(InterfaceItemBase ifitem, DTcpControl transitionData) {
 	    ControlPort.error();
 	    try{
 	    socket.close();
@@ -201,9 +201,9 @@ public class ATcpClient extends ActorClassBase {
 	    System.err.println(e.toString());
 	    }
 	}
-	protected void action_TRANS_tr3_FROM_opened_TO_opened_BY_sendPayloadPort_tr3(InterfaceItemBase ifitem, DTcpPayload data) {
+	protected void action_TRANS_tr3_FROM_opened_TO_opened_BY_sendPayloadPort_tr3(InterfaceItemBase ifitem, DTcpPayload transitionData) {
 	    try{
-	    	out.write(data.getData(),0,data.length);
+	    	out.write(transitionData.getData(),0,transitionData.length);
 	    	}catch(IOException e){
 	    		System.err.println(e.toString());
 	    	}
@@ -223,12 +223,12 @@ public class ATcpClient extends ActorClassBase {
 					this.history[STATE_TOP] = STATE_closed;
 					current__et = STATE_TOP;
 					break;
-				case STATE_opened:
-					this.history[STATE_TOP] = STATE_opened;
-					current__et = STATE_TOP;
-					break;
 				case STATE_error:
 					this.history[STATE_TOP] = STATE_error;
+					current__et = STATE_TOP;
+					break;
+				case STATE_opened:
+					this.history[STATE_TOP] = STATE_opened;
 					current__et = STATE_TOP;
 					break;
 				default:
@@ -254,13 +254,13 @@ public class ATcpClient extends ActorClassBase {
 			}
 			case ATcpClient.CHAIN_TRANS_tr0_FROM_closed_TO_cp0_BY_openControlPort:
 			{
-				DTcpControl data = (DTcpControl) generic_data__et;
-				action_TRANS_tr0_FROM_closed_TO_cp0_BY_openControlPort(ifitem, data);
+				DTcpControl transitionData = (DTcpControl) generic_data__et;
+				action_TRANS_tr0_FROM_closed_TO_cp0_BY_openControlPort(ifitem, transitionData);
 				if (lastError!=0) {
-				action_TRANS_socketError_FROM_cp0_TO_error_COND_socketError(ifitem, data);
+				action_TRANS_socketError_FROM_cp0_TO_error_COND_socketError(ifitem, transitionData);
 				return STATE_error;}
 				else {
-				action_TRANS_tr2_FROM_cp0_TO_opened(ifitem, data);
+				action_TRANS_tr2_FROM_cp0_TO_opened(ifitem, transitionData);
 				return STATE_opened;}
 			}
 			case ATcpClient.CHAIN_TRANS_tr1_FROM_opened_TO_closed_BY_closeControlPort:
@@ -270,8 +270,8 @@ public class ATcpClient extends ActorClassBase {
 			}
 			case ATcpClient.CHAIN_TRANS_tr3_FROM_opened_TO_opened_BY_sendPayloadPort_tr3:
 			{
-				DTcpPayload data = (DTcpPayload) generic_data__et;
-				action_TRANS_tr3_FROM_opened_TO_opened_BY_sendPayloadPort_tr3(ifitem, data);
+				DTcpPayload transitionData = (DTcpPayload) generic_data__et;
+				action_TRANS_tr3_FROM_opened_TO_opened_BY_sendPayloadPort_tr3(ifitem, transitionData);
 				return STATE_opened;
 			}
 				default:
@@ -295,12 +295,12 @@ public class ATcpClient extends ActorClassBase {
 				case STATE_closed:
 					/* in leaf state: return state id */
 					return STATE_closed;
-				case STATE_opened:
-					/* in leaf state: return state id */
-					return STATE_opened;
 				case STATE_error:
 					/* in leaf state: return state id */
 					return STATE_error;
+				case STATE_opened:
+					/* in leaf state: return state id */
+					return STATE_opened;
 				case STATE_TOP:
 					state__et = this.history[STATE_TOP];
 					break;
@@ -327,43 +327,43 @@ public class ATcpClient extends ActorClassBase {
 	
 		if (!handleSystemEvent(ifitem, evt, generic_data__et)) {
 			switch (getState()) {
-			    case STATE_closed:
-			        switch(trigger__et) {
-			                case TRIG_ControlPort__open:
-			                    {
-			                        chain__et = ATcpClient.CHAIN_TRANS_tr0_FROM_closed_TO_cp0_BY_openControlPort;
-			                        catching_state__et = STATE_TOP;
-			                    }
-			                break;
-			                default:
-			                    /* should not occur */
-			                    break;
-			        }
-			        break;
-			    case STATE_opened:
-			        switch(trigger__et) {
-			                case TRIG_ControlPort__close:
-			                    {
-			                        chain__et = ATcpClient.CHAIN_TRANS_tr1_FROM_opened_TO_closed_BY_closeControlPort;
-			                        catching_state__et = STATE_TOP;
-			                    }
-			                break;
-			                case TRIG_PayloadPort__send:
-			                    {
-			                        chain__et = ATcpClient.CHAIN_TRANS_tr3_FROM_opened_TO_opened_BY_sendPayloadPort_tr3;
-			                        catching_state__et = STATE_TOP;
-			                    }
-			                break;
-			                default:
-			                    /* should not occur */
-			                    break;
-			        }
-			        break;
-			    case STATE_error:
-			        break;
-			    default:
-			        /* should not occur */
-			        break;
+				case STATE_closed:
+					switch(trigger__et) {
+						case TRIG_ControlPort__open:
+							{
+								chain__et = ATcpClient.CHAIN_TRANS_tr0_FROM_closed_TO_cp0_BY_openControlPort;
+								catching_state__et = STATE_TOP;
+							}
+						break;
+						default:
+							/* should not occur */
+							break;
+					}
+					break;
+				case STATE_error:
+					break;
+				case STATE_opened:
+					switch(trigger__et) {
+						case TRIG_ControlPort__close:
+							{
+								chain__et = ATcpClient.CHAIN_TRANS_tr1_FROM_opened_TO_closed_BY_closeControlPort;
+								catching_state__et = STATE_TOP;
+							}
+						break;
+						case TRIG_PayloadPort__send:
+							{
+								chain__et = ATcpClient.CHAIN_TRANS_tr3_FROM_opened_TO_opened_BY_sendPayloadPort_tr3;
+								catching_state__et = STATE_TOP;
+							}
+						break;
+						default:
+							/* should not occur */
+							break;
+					}
+					break;
+				default:
+					/* should not occur */
+					break;
 			}
 		}
 		if (chain__et != NOT_CAUGHT) {

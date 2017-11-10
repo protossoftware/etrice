@@ -119,8 +119,8 @@ class ATimingService : public etRuntime::ActorClassBase {
 		
 		/* Action Codes */
 		virtual void action_TRANS_INITIAL_TO__Operational();
-		virtual void action_TRANS_tr1_FROM_Operational_TO_Operational_BY_startTimeouttimer_tr1(const InterfaceItemBase* ifitem, uint32 time);
-		virtual void action_TRANS_tr3_FROM_Operational_TO_Operational_BY_startTimertimer_tr3(const InterfaceItemBase* ifitem, uint32 time);
+		virtual void action_TRANS_tr1_FROM_Operational_TO_Operational_BY_startTimeouttimer_tr1(const InterfaceItemBase* ifitem, uint32 transitionData);
+		virtual void action_TRANS_tr3_FROM_Operational_TO_Operational_BY_startTimertimer_tr3(const InterfaceItemBase* ifitem, uint32 transitionData);
 		virtual void action_TRANS_tr4_FROM_Operational_TO_Operational_BY_killtimer_tr4(const InterfaceItemBase* ifitem);
 		
 		/* State Switch Methods */

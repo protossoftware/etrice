@@ -39,7 +39,7 @@ RoomModel DynamicActorTest3 {
 						<hello: opt>
 					}
 					action {
-						"System.out.println(\"controller received \"+txt);"
+						"System.out.println(\"controller received \"+transitionData);"
 					}
 				}
 				Transition tr2: createOpt1 -> UnexpectedError {
@@ -101,7 +101,7 @@ RoomModel DynamicActorTest3 {
 						<create: fct>
 					}
 					action {
-						"if (optRef.createOptionalActor(ac, getThread()))"
+						"if (optRef.createOptionalActor(transitionData, getThread()))"
 						"\tfct.ok();"
 						"else"
 						"\tfct.error();"
@@ -165,7 +165,7 @@ RoomModel DynamicActorTest3 {
 						<hello: hlp>
 					}
 					action {
-						"System.out.println(\"helper said \"+txt);"
+						"System.out.println(\"helper said \"+transitionData);"
 						"p0.hello(\"this is AC1, instance \"+getInstancePath());"
 					}
 				}

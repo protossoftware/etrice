@@ -34,23 +34,23 @@ class FsmGenChecker {
 	}
 	
 	private static def void checkLink(Link it, ILogger logger) {
-		if (transition==null) {
+		if (transition===null) {
 			logger.logError("graph doesn't point to ROOM transition")
 		}
 		else if (transition.eIsProxy) {
 			logger.logError("unresolved ROOM transition")
 		}
-		else if (transition.eContainer==null) {
+		else if (transition.eContainer===null) {
 			logger.logError("dangling ROOM transition")
 		}
-		else if (target==null) {
+		else if (target===null) {
 			logger.logError("link without target")
 		}
-		else if (source==null && transition instanceof NonInitialTransition) {
+		else if (source===null && transition instanceof NonInitialTransition) {
 			logger.logError("non-initial link without source")
 		}
 
-		if (source!=null) {
+		if (source!==null) {
 			checkLinkEnd(it, it.source, logger)
 		}
 		checkLinkEnd(it, it.target, logger)
@@ -77,19 +77,19 @@ class FsmGenChecker {
 	}
 	
 	private static def void checkNode(Node it, ILogger logger) {
-		if (stateGraphNode==null) {
+		if (stateGraphNode===null) {
 			logger.logError("graph doesn't point to ROOM state graph node")
 		}
 		else if (stateGraphNode.eIsProxy) {
 			logger.logError("unresolved ROOM graph node")
 		}
-		else if (stateGraphNode.eContainer==null) {
+		else if (stateGraphNode.eContainer===null) {
 			logger.logError("dangling ROOM graph node")
 		}
-		else if (stateGraphNode.getName()==null) {
+		else if (stateGraphNode.getName()===null) {
 			logger.logError("ROOM graph node without name")
 		}
-		else if (graph==null) {
+		else if (graph===null) {
 			logger.logError("node isn't contained in a graph")
 		}
 		
@@ -109,13 +109,13 @@ class FsmGenChecker {
 	}
 	
 	private static def void checkGraph(Graph it, ILogger logger) {
-		if (stateGraph==null) {
+		if (stateGraph===null) {
 			logger.logError("graph doesn't point to ROOM state graph")
 		}
 		else if (stateGraph.eIsProxy) {
 			logger.logError("unresolved ROOM graph")
 		}
-		else if (stateGraph.eContainer==null) {
+		else if (stateGraph.eContainer===null) {
 			logger.logError("dangling ROOM graph")
 		}
 	}

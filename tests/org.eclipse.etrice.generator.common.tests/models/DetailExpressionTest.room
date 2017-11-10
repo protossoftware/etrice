@@ -29,12 +29,8 @@ RoomModel DetailExpressionTestModel {
 					triggers {
 						<out1: cPortEvent guard {
 							"/* TODO activate action code editor */"
-<<<<<<< Upstream, based on origin/master
-							"rPortData.in1 == numberArray[3] && accessibleMessageData && infoData.flag && actorOp(32)  && rPortEvent.regularOp(32) && cPortEvent.conjugatedOp(32)"
-=======
 							"rPortData.in1 == numberArray[3] &&"
 							"transitionData && infoData.flag"
->>>>>>> ff1be2e Bug 511330 - [core.genmodel.fsm] introduce simplified generator model for state machines
 						}>
 					}
 					action 

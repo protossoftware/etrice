@@ -35,7 +35,7 @@ RoomModel room.basic.service.logging {
 					action {
 						"Date d=new Date(tStart);"
 						"try{"
-						"file=new FileOutputStream(fileName);"
+						"file=new FileOutputStream(transitionData);"
 						"p=new PrintStream(file);"
 						"p.println(\"Log opened at \"+ d.toString());"
 						"p.println(\"--------------------------------------------------\");"
@@ -59,11 +59,11 @@ RoomModel room.basic.service.logging {
 						<internalLog: log>
 					}
 					action {
-						"p.println(\"Timestamp: \" + Long.toString(data.timeStamp-tStart) + \"ms\");"
-						"p.println(\"SenderInstance: \"+ data.sender);"
-						"p.println(\"UserString: \" + data.userString);"
+						"p.println(\"Timestamp: \" + Long.toString(transitionData.timeStamp-tStart) + \"ms\");"
+						"p.println(\"SenderInstance: \"+ transitionData.sender);"
+						"p.println(\"UserString: \" + transitionData.userString);"
 						"p.println(\"--------------------------------------------------\");"
-						"System.out.printf(data.userString);"
+						"System.out.printf(transitionData.userString);"
 					}
 				}
 				State closed

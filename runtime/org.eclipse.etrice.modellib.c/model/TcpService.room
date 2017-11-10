@@ -61,7 +61,7 @@ RoomModel room.basic.service.tcp {
 					}
 					action {
 						"/* send payload to connection */"
-						"setErrorCode(etWriteServerSocket(server, data->connectionId, data->length, data->data));"
+						"setErrorCode(etWriteServerSocket(server, transitionData->connectionId, transitionData->length, transitionData->data));"
 						"if(hasError())"
 						"\tcontrolPort.error();"
 					}
@@ -84,7 +84,7 @@ RoomModel room.basic.service.tcp {
 					}
 					action {
 						"/* start accept thread */"
-						"setErrorCode(etStartListening(server, data->TcpPort));"
+						"setErrorCode(etStartListening(server, transitionData->TcpPort));"
 					}
 				}
 				Transition tr4: cp cp1 -> connected {
@@ -187,7 +187,7 @@ RoomModel room.basic.service.tcp {
 					}
 					action {
 						"/* connect to server */"
-						"setErrorCode(etConnectServer(client, data->IPAddr, data->TcpPort));"
+						"setErrorCode(etConnectServer(client, transitionData->IPAddr, transitionData->TcpPort));"
 					}
 				}
 				Transition tr1: connected -> unconnected {
@@ -219,7 +219,7 @@ RoomModel room.basic.service.tcp {
 						<dataPackage: payloadPort>
 					}
 					action {
-						"setErrorCode(etWriteSocket(client, data->length, data->data));"
+						"setErrorCode(etWriteSocket(client, transitionData->length, transitionData->data));"
 						"if(hasError())"
 						"\tcontrolPort.error();"
 					}
