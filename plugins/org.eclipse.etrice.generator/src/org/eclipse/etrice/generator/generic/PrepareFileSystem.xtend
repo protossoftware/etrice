@@ -15,14 +15,14 @@ package org.eclipse.etrice.generator.generic
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import java.io.File
+import java.util.Collection
 import java.util.HashSet
 import java.util.Set
 import org.eclipse.emf.ecore.resource.Resource
-import org.eclipse.etrice.core.genmodel.fsm.base.ILogger
 import org.eclipse.etrice.core.genmodel.etricegen.Root
+import org.eclipse.etrice.core.genmodel.fsm.base.ILogger
+import org.eclipse.etrice.generator.fsm.base.IncrementalGenerationFileIo
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
-import org.eclipse.etrice.generator.generic.RoomExtensions
-import java.util.Collection
 
 /**
  * A class that is used to recursively erase all folders receiving generated code
@@ -47,6 +47,31 @@ class PrepareFileSystem {
 			}
 		}
 		prepare(pathes)
+	}
+	
+	def void prepareInfoTargetPaths(Resource resource) {
+		if(!IncrementalGenerationFileIo.generateIncremental) 
+			return;
+			
+		var Set<String> pathes = new HashSet<String>();
+		for (e: resource.contents){
+			if (e instanceof Root) {
+				for (mdl : (e as Root).models) {
+					val tgtpath = mdl.generationInfoPath
+					if (tgtpath!=null && !tgtpath.empty)
+						pathes.add(tgtpath)
+				}
+			}
+		}
+		pathes.forEach[ path |
+			fileAccess.setOutputPath(path)
+			fileAccess.generateFile("readme.txt", '''
+				This directory is an eTrice code generation target.
+				It contains auxiliary files for the incremental generation feature.
+				
+				DO NOT MODIFY THIS PLACE!
+			''')
+		]
 	}
 	
 	def void prepareDocTargetPaths(Resource resource) {

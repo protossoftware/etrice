@@ -100,12 +100,12 @@ public class IncrementalGenerationFileIo implements IGeneratorFileIo {
 			if (genInc) {
 				// save a copy in the info directory which is not cleared (and not compiled)
 				fileAccess.setOutputPath(infopath);
-				fileAccess.generateFile(file, contents);
+				fileAccess.generateFile(file + ".incgen.txt", contents);
 			}
 		}
 		else {
 			logger.logInfo(desc+" (unchanged) '"+file+"' in '"+path+"'");
-			File src = new File(infopath+file);
+			File src = new File(infopath+file + ".incgen.txt");
 			File dst = new File(path+file);
 			try {
 				FileUtils.copyFile(src, dst, true);
