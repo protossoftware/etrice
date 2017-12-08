@@ -57,17 +57,20 @@ void etMSCLogger_syncReturn(const char* sourceName, const char* targetName){
 void etMSCLogger_asyncOut(const char* sourceName, const char* messageName, const char* targetName){
 	if (etMSCLogger_fileHandle != NULL) {
 		etLogger_fprintf(etMSCLogger_fileHandle, "%s >-- %s %s\n", sourceName, targetName, messageName);
+		fflush(etMSCLogger_fileHandle);
 	}
 }
 
 void etMSCLogger_asyncIn(const char* sourceName, const char* messageName, const char* targetName){
 	if (etMSCLogger_fileHandle != NULL) {
 		etLogger_fprintf(etMSCLogger_fileHandle, "%s --> %s %s\n", sourceName, targetName, messageName);
+		fflush(etMSCLogger_fileHandle);
 	}
 }
 
 void etMSCLogger_setState(const char* objectName, const char* stateName){
 	if (etMSCLogger_fileHandle != NULL) {
 		etLogger_fprintf(etMSCLogger_fileHandle, "%s >>> %s\n", objectName, stateName);
+		fflush(etMSCLogger_fileHandle);
 	}
 }
