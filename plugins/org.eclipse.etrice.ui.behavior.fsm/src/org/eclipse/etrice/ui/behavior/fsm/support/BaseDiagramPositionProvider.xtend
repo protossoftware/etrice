@@ -68,7 +68,7 @@ class BaseDiagramPositionProvider implements IPositionProvider {
 	override getGraphPosAndSize(StateGraph sg) {
 		// graph is child of border shape, see initial point
 		val pe = baseDiagram.getPictograms(sg).findFirst[parentBo instanceof ModelComponent]
-		if(pe != null){
+		if (pe !== null){
 			val visibleGa = pe.graphicsAlgorithm.graphicsAlgorithmChildren.head
 			new PosAndSize(pe.graphicsAlgorithm.x, pe.graphicsAlgorithm.y, visibleGa.width, visibleGa.height)
 		}
@@ -82,18 +82,18 @@ class BaseDiagramPositionProvider implements IPositionProvider {
 				baseDiagram.getPictograms(trans).head
 		}
 		newArrayList => [ pointList | 
-			if(pe instanceof Connection){
+			if (pe instanceof Connection){
 				val graphPosAndSize = getGraphPosAndSize(trans.eContainer as StateGraph)
 				val text = pe.connectionDecorators.map[graphicsAlgorithm].filter(Text).head
-				if(text != null){		
+				if (text !== null){		
 					pointList += new Pos(
-						((text.x / graphPosAndSize.width as double) * sx) as int, 
-						((text.y / graphPosAndSize.height as double) * sy) as int
+						(((text.x / graphPosAndSize.width as double) * sx) as int), 
+						(((text.y / graphPosAndSize.height as double) * sy) as int)
 					)
-					if(pe instanceof FreeFormConnection){
-						pointList += pe.bendpoints.map[new Pos(
-							((text.x / graphPosAndSize.width as double) * sx + x) as int, 
-							((text.y / graphPosAndSize.height as double) * sy + y) as int
+					if (pe instanceof FreeFormConnection){
+						pointList += pe.bendpoints.map[pt | new Pos(
+							(((pt.x / graphPosAndSize.width as double) * sx + x) as int) - StateGraphSupport.MARGIN, 
+							(((pt.y / graphPosAndSize.height as double) * sy + y) as int) - StateGraphSupport.MARGIN
 						)]
 					}
 				}
@@ -122,7 +122,7 @@ class BaseDiagramPositionProvider implements IPositionProvider {
 		}
 	}
 	
-	// TODO: better naming, this is initial point
+	// TODO: better naming, this is the initial point
 	override getPosition(StateGraph graph) {
 		// initial point bo is graph and it is child of border shape
 		baseDiagram.getPictograms(graph).findFirst[parentBo instanceof StateGraph]?.toPosAndSize(graph.margin)
@@ -134,7 +134,7 @@ class BaseDiagramPositionProvider implements IPositionProvider {
 	
 	override getSubPosition(StateGraphNode subNode) {
 		val pe = baseDiagram.getPictograms(subNode).findFirst[parentBo instanceof State]
-		if(pe != null){
+		if (pe !== null){
 			val parentPe = pe.eContainer as PictogramElement
 			val relX = pe.graphicsAlgorithm.getX() as double / (parentPe.graphicsAlgorithm.getWidth() - 2 * StateSupport.MARGIN)
 			val relY  = pe.graphicsAlgorithm.getY() as double / (parentPe.graphicsAlgorithm.getHeight() - 2 * StateSupport.MARGIN)

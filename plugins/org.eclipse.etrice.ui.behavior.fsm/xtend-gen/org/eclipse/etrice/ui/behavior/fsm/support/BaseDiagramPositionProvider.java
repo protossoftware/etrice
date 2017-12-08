@@ -10,7 +10,6 @@
  */
 package org.eclipse.etrice.ui.behavior.fsm.support;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +25,7 @@ import org.eclipse.etrice.core.fsm.fSM.TrPoint;
 import org.eclipse.etrice.core.fsm.fSM.Transition;
 import org.eclipse.etrice.ui.behavior.fsm.provider.BaseDiagramProvider;
 import org.eclipse.etrice.ui.behavior.fsm.support.IPositionProvider;
+import org.eclipse.etrice.ui.behavior.fsm.support.StateGraphSupport;
 import org.eclipse.etrice.ui.behavior.fsm.support.StateSupport;
 import org.eclipse.etrice.ui.behavior.fsm.support.TrPointSupport;
 import org.eclipse.graphiti.mm.algorithms.GraphicsAlgorithm;
@@ -117,8 +117,7 @@ public class BaseDiagramPositionProvider implements IPositionProvider {
       };
       final PictogramElement pe = IterableExtensions.<PictogramElement>findFirst(this.baseDiagram.getPictograms(sg), _function);
       IPositionProvider.PosAndSize _xifexpression = null;
-      boolean _notEquals = (!Objects.equal(pe, null));
-      if (_notEquals) {
+      if ((pe != null)) {
         IPositionProvider.PosAndSize _xblockexpression_1 = null;
         {
           final GraphicsAlgorithm visibleGa = IterableExtensions.<GraphicsAlgorithm>head(pe.getGraphicsAlgorithm().getGraphicsAlgorithmChildren());
@@ -155,8 +154,7 @@ public class BaseDiagramPositionProvider implements IPositionProvider {
             return it.getGraphicsAlgorithm();
           };
           final Text text = IterableExtensions.<Text>head(Iterables.<Text>filter(ListExtensions.<ConnectionDecorator, GraphicsAlgorithm>map(((Connection)pe).getConnectionDecorators(), _function_1), Text.class));
-          boolean _notEquals = (!Objects.equal(text, null));
-          if (_notEquals) {
+          if ((text != null)) {
             int _x = text.getX();
             int _width = graphPosAndSize.getWidth();
             double _divide = (_x / ((double) _width));
@@ -165,25 +163,23 @@ public class BaseDiagramPositionProvider implements IPositionProvider {
             int _height = graphPosAndSize.getHeight();
             double _divide_1 = (_y / ((double) _height));
             double _multiply_1 = (_divide_1 * this.sy);
-            IPositionProvider.Pos _pos = new IPositionProvider.Pos(
-              ((int) _multiply), 
-              ((int) _multiply_1));
+            IPositionProvider.Pos _pos = new IPositionProvider.Pos(((int) _multiply), ((int) _multiply_1));
             pointList.add(_pos);
             if ((pe instanceof FreeFormConnection)) {
-              final Function1<Point, IPositionProvider.Pos> _function_2 = (Point it) -> {
-                int _x_1 = text.getX();
+              final Function1<Point, IPositionProvider.Pos> _function_2 = (Point pt) -> {
+                int _x_1 = pt.getX();
                 int _width_1 = graphPosAndSize.getWidth();
                 double _divide_2 = (_x_1 / ((double) _width_1));
                 double _multiply_2 = (_divide_2 * this.sx);
                 double _plus = (_multiply_2 + this.x);
-                int _y_1 = text.getY();
+                int _minus = (((int) _plus) - StateGraphSupport.MARGIN);
+                int _y_1 = pt.getY();
                 int _height_1 = graphPosAndSize.getHeight();
                 double _divide_3 = (_y_1 / ((double) _height_1));
                 double _multiply_3 = (_divide_3 * this.sy);
                 double _plus_1 = (_multiply_3 + this.y);
-                return new IPositionProvider.Pos(
-                  ((int) _plus), 
-                  ((int) _plus_1));
+                int _minus_1 = (((int) _plus_1) - StateGraphSupport.MARGIN);
+                return new IPositionProvider.Pos(_minus, _minus_1);
               };
               List<IPositionProvider.Pos> _map = ListExtensions.<Point, IPositionProvider.Pos>map(((FreeFormConnection)pe).getBendpoints(), _function_2);
               Iterables.<IPositionProvider.Pos>addAll(pointList, _map);
@@ -274,8 +270,7 @@ public class BaseDiagramPositionProvider implements IPositionProvider {
       return Boolean.valueOf((_parentBo instanceof State));
     };
     final PictogramElement pe = IterableExtensions.<PictogramElement>findFirst(this.baseDiagram.getPictograms(subNode), _function);
-    boolean _notEquals = (!Objects.equal(pe, null));
-    if (_notEquals) {
+    if ((pe != null)) {
       EObject _eContainer = pe.eContainer();
       final PictogramElement parentPe = ((PictogramElement) _eContainer);
       int _x = pe.getGraphicsAlgorithm().getX();

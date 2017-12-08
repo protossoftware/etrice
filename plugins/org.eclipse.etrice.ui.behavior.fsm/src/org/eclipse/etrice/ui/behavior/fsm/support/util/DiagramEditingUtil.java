@@ -474,7 +474,7 @@ public class DiagramEditingUtil {
 				n++;
 		}
 
-		int delta = (int) (scaleX * (n+1));
+		int delta = (int) (scaleX / (n+1));
 		int pos = delta;
 		
 		int h = StateGraphSupport.MARGIN;
@@ -508,7 +508,7 @@ public class DiagramEditingUtil {
 	private void addStateGraphNodes(List<? extends StateGraphNode> nodes, IPositionProvider positionProvider, ContainerShape sgShape,
 			IFeatureProvider fp, HashMap<String, Anchor> node2anchor) {
 				
-		List<PosAndSize> positions = getPositions(nodes, positionProvider, sgShape.getGraphicsAlgorithm().getX());
+		List<PosAndSize> positions = getPositions(nodes, positionProvider, sgShape.getGraphicsAlgorithm().getWidth());
 		
 		int idx = 0;
 		for (StateGraphNode node : nodes) {
