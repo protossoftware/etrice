@@ -1,0 +1,41 @@
+def xtextProjects = [
+	'org.eclipse.etrice.core.common',
+	'org.eclipse.etrice.core.config',
+	'org.eclipse.etrice.core.etmap',
+	'org.eclipse.etrice.core.etphys',
+	'org.eclipse.etrice.core.fsm',
+	'org.eclipse.etrice.core.room'
+].collect { project it }
+
+subprojects {
+	apply plugin: 'java'
+	apply plugin: 'org.xtext.xtend'
+	
+	apply from: "$rootDir/gradle/publish.gradle"
+	
+	sourceSets {
+		main {
+			java {
+				srcDir 'src'
+			}
+		}
+	}
+	
+	tasks.withType(JavaCompile) {
+		options.encoding = 'cp1252'
+	}
+}
+
+configure(xtextProjects) {
+	sourceSets {
+		main {
+			java {
+				srcDir 'src-gen'
+			}
+			resources {
+				srcDirs = ['src', 'src-gen']
+				include '**/*.xtextbin', '**/*.tokens'
+			}
+		}
+	}
+}

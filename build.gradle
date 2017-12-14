@@ -1,3 +1,12 @@
+buildscript {
+	repositories {
+		jcenter()
+	}
+	dependencies {
+		classpath 'org.xtext:xtext-gradle-plugin:1.0.19'
+	}
+}
+
 ext {
 	core_runtime_version = '3.12.0'
 	core_resources_version = '3.11.1'

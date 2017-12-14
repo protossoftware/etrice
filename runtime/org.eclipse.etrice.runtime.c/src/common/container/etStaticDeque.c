@@ -12,6 +12,8 @@
 
 #include "etStaticDeque.h"
 
+#include <string.h>
+
 void etStaticDeque_construct(etStaticDeque* const self, void* memory, int size, int objectSize) {
 	self->size = 0;
 	self->first = 0;
@@ -28,12 +30,12 @@ void etStaticDeque_clear(etStaticDeque* const self) {
 }
 
 void* etStaticDeque_get(const etStaticDeque* const self, int position) {
-	// TODO JB: Handle position out of bounds exception
+	/* TODO JB: Handle position out of bounds exception */
 	return (void*) &self->memory[(self->first + position * self->objectSize) % (self->objectSize * self->maxSize)];
 }
 
 void etStaticDeque_push_front(etStaticDeque* const self, void* object) {
-	// TODO JB: Handle out of memory exception
+	/* TODO JB: Handle out of memory exception */
 	if(self->size < self->maxSize) {
 		++self->size;
 		self->first = (self->first + (self->maxSize - 1) * self->objectSize) % (self->objectSize * self->maxSize);
@@ -42,7 +44,7 @@ void etStaticDeque_push_front(etStaticDeque* const self, void* object) {
 }
 
 void etStaticDeque_push_back(etStaticDeque* const self, void* object) {
-	// TODO JB: Handle out of memory exception
+	/* TODO JB: Handle out of memory exception */
 	if(self->size < self->maxSize) {
 		++self->size;
 		memcpy(etStaticDeque_back(self), object, self->objectSize);
@@ -50,7 +52,7 @@ void etStaticDeque_push_back(etStaticDeque* const self, void* object) {
 }
 
 void etStaticDeque_pop_front(etStaticDeque* const self) {
-	// TODO JB: Handle deque empty exception
+	/* TODO JB: Handle deque empty exception */
 	if(self->size > 0) {
 		self->first = (self->first + self->objectSize) % (self->objectSize * self->maxSize);
 		--self->size;
@@ -58,7 +60,7 @@ void etStaticDeque_pop_front(etStaticDeque* const self) {
 }
 
 void etStaticDeque_pop_back(etStaticDeque* const self) {
-	// TODO JB: Handle deque empty exception
+	/* TODO JB: Handle deque empty exception */
 	if(self->size > 0) {
 		--self->size;
 	}

@@ -1,17 +1,5 @@
-apply plugin: 'java'
-
-apply from: "$rootDir/gradle/publish.gradle"
-
 dependencies {
 	compile project(':plugins:org.eclipse.etrice.core.fsm')
 	
 	compile "org.eclipse.xtext:org.eclipse.xtext:$xtext_version"
-}
-
-sourceSets {
-	main {
-		java {
-			srcDirs = ['src']
-		}
-	}
 }
