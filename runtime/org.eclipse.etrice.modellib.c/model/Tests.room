@@ -124,7 +124,7 @@ RoomModel room.basic.test {
 				Transition init0: initial -> execute {
 					action '''
 						current = 0;
-						etUnit_open('log', 'results');
+						etUnit_open("log", "results");
 					'''
 				}
 				Transition tr0: execute -> execute {
