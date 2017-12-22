@@ -445,7 +445,8 @@ public abstract class AbstractGenerator implements IDetailCodeTranslator {
 	 */
 	protected Root createGeneratorModel(boolean asLibrary, String genModelPath) {
 		// create instance and mapping for test instances
-		List<Resource> testInstanceResources = new TestInstanceCreator(logger).createInstancesAndMapping(getResourceSet());
+		List<Resource> testInstanceResources = new TestInstanceCreator(logger).createInstancesAndMapping(
+				modelLoader.getMainModelURIs(), getResourceSet());
 		if (testInstanceResources==null) {
 			logger.logError("-- terminating", null);
 			return null;

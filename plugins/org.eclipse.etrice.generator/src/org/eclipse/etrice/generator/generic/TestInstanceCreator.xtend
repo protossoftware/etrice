@@ -11,6 +11,8 @@ import org.eclipse.etrice.core.room.RoomFactory
 import org.eclipse.etrice.core.room.RoomModel
 import org.eclipse.etrice.core.room.StructureClass
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
+import java.util.Collection
+import org.eclipse.emf.common.util.URI
 
 @FinalFieldsConstructor
 class TestInstanceCreator {
@@ -37,13 +39,18 @@ class TestInstanceCreator {
 	 * @param rs ResourceSet for new resources
 	 * @return false, if creation failed and generation should stop
 	 */
-	def List<Resource> createInstancesAndMapping(ResourceSet rs) {
+	def List<Resource> createInstancesAndMapping(Collection<URI> modelsURIs, ResourceSet rs) {
 		val roomModels = newArrayList
 		val physModels = newArrayList
-		rs.resources.forEach[contents.forall[switch it { RoomModel: roomModels += it PhysicalModel: physModels += it }]]
+		rs.resources.forEach[contents.forEach[switch it { 
+			RoomModel: if(modelsURIs.contains(eResource.URI)) roomModels += it 
+			PhysicalModel: physModels += it
+		}]]
 
 		// try find annotated SubSystemClass
-		val allTestSubSystems = roomModels.fold(newArrayList, [list, model | list += model.subSystemClasses.filter[hasTestAnnotation] return list])
+		val allTestSubSystems = roomModels.fold(newArrayList, [list, model | 
+			list += model.subSystemClasses.filter[hasTestAnnotation] return list
+		])
 		val List<StructureClass> allAnnotatedClasses = newArrayList(allTestSubSystems)
 		val result = newArrayList
 
