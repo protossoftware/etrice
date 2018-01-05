@@ -25,6 +25,7 @@ class CommonDataCalculator implements ICommonDataCalculator {
 	
 	RoomHelpers roomHelpers = new RoomHelpers
 	
+	// TODO 529445: return a RefableType, not MessageData
 	override EObject calculateCommonData(Link l) {
 		if (!l.isIfitemTriggered) {
 			return null
@@ -45,9 +46,10 @@ class CommonDataCalculator implements ICommonDataCalculator {
 			else {
 				val types = varDeclarations.map[it?.refType].toList
 				val rt = roomHelpers.getLastCommonSuperType(types);
-				if (rt!=null) {
-					val vd = RoomFactory.eINSTANCE.createVarDecl
-					vd.name = "data"
+				if (rt!==null) {
+					// artificial variable declaration
+					val vd = RoomFactory.eINSTANCE.createMessageData
+					vd.deprecatedName = "data"
 					vd.refType = rt
 					return vd
 				}

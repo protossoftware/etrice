@@ -1,10 +1,10 @@
 RoomModel states_inheritance.t {
 
-	PrimitiveType int32: ptInteger -> int32 (Integer) default "0"
+	PrimitiveType int32: ptInteger -> "int32" (Integer) default "0"
 	
 	ProtocolClass PTimer {
 		incoming {
-			Message start (time_ms : int32)
+			Message start (int32)
 			Message kill ()
 		}
 		outgoing {
@@ -14,7 +14,7 @@ RoomModel states_inheritance.t {
 	
 	ProtocolClass PTimeout {
 		incoming {
-			Message start (time_ms : int32)
+			Message start (int32)
 			Message kill ()
 		}
 		outgoing {
@@ -36,7 +36,7 @@ RoomModel states_inheritance.t {
 	ProtocolClass PTest1 {
 		incoming {
 			Message a ()
-			Message b (x : int32)
+			Message b (int32)
 			Message c ()
 		}
 		outgoing {
@@ -138,9 +138,7 @@ RoomModel states_inheritance.t {
 				}
 				Transition tr3: cp CP1 -> State1 {}
 				Transition tr4: cp CP1 -> State3 {
-					cond {
-						"data==2"
-					}
+					cond '''data==2'''
 				}
 				Transition tr5: my tp0 -> tp1 of State3 {
 					triggers {
@@ -148,9 +146,7 @@ RoomModel states_inheritance.t {
 					}
 				}
 				Transition tr6: cp CP1 -> State4 {
-					cond {
-						"data==3"
-					}
+					cond '''data==3'''
 				}
 				Transition tr7: tp3 of State3 -> State2 {}
 				Transition tr8: State3 -> State2 {
@@ -218,9 +214,7 @@ RoomModel states_inheritance.t {
 					}
 				}
 				Transition tr11: cp CP1 -> State5 {
-					cond {
-						"data==4"
-					}
+					cond '''data==4'''
 				}
 				Transition tr12: State5 -> tp6 of State3 {
 					triggers {

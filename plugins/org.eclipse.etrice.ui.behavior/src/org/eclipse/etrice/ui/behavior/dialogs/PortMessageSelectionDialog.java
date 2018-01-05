@@ -25,6 +25,7 @@ import org.eclipse.etrice.core.room.PortClass;
 import org.eclipse.etrice.core.room.PortOperation;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.core.ui.RoomUiModule;
+import org.eclipse.etrice.generator.generic.ILanguageExtension;
 import org.eclipse.etrice.ui.behavior.Activator;
 import org.eclipse.etrice.ui.behavior.fsm.dialogs.ISelectionDialog;
 import org.eclipse.etrice.ui.behavior.support.SupportUtil;
@@ -221,7 +222,7 @@ public class PortMessageSelectionDialog extends FormDialog implements ISelection
 				if (element instanceof MsgItemPair) {
 					Message msg = ((MsgItemPair) element).msg;
 					if (msg.getData()!=null)
-						return msg.getData().getName()+" : "+msg.getData().getRefType().getType().getName();
+						return msg.getData().getRefType().getType().getName();
 				}
 				else if (element instanceof OperationItemPair) {
 					String sig = SupportUtil.getInstance().getRoomNameProvider().getTypedArgumentList(((OperationItemPair) element).op);
@@ -329,7 +330,7 @@ public class PortMessageSelectionDialog extends FormDialog implements ISelection
 			if (element instanceof MsgItemPair) {
 				MsgItemPair pair = (MsgItemPair) element;
 				if (pair.out) {
-					String data = pair.msg.getData()!=null? pair.msg.getData().getName() : "";
+					String data = pair.msg.getData()!=null? ILanguageExtension.GENERIC_DATA_NAME : "";
 					String index = "";
 					if (pair.item instanceof Port && ((Port)pair.item).getMultiplicity()!=1)
 						index = "[idx]";

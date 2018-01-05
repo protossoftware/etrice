@@ -158,7 +158,7 @@ public class FSMJavaValidator extends org.eclipse.etrice.core.fsm.validation.Abs
 		}
 		if(isPlainStyle) {
 			// TODO quickfix here does not work yet, see FSMQuickfixProvider
-//			warning("old style line string", dc, null, PLAIN_STRING_DETAILCODE);
+			warning("old style line string", dc, null, PLAIN_STRING_DETAILCODE);
 		}
 		
 	}

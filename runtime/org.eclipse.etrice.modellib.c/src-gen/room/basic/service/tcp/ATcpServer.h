@@ -41,7 +41,7 @@ typedef struct ATcpServer_const {
 
 
 /* constant for state machine data */
-#define ATCPSERVER_HISTORY_SIZE 2
+#define ATCPSERVER_HISTORY_SIZE 5
 
 /* variable part of ActorClass (RAM) */
 struct ATcpServer {

@@ -7,12 +7,10 @@ import com.google.inject.Inject
 import org.eclipse.etrice.core.fsm.fSM.DetailCode
 import org.eclipse.etrice.core.fsm.validation.FSMJavaValidator
 import org.eclipse.xtext.formatting.IWhitespaceInformationProvider
-import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider
 import org.eclipse.xtext.ui.editor.quickfix.Fix
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor
 import org.eclipse.xtext.validation.Issue
-import org.eclipse.etrice.core.common.converter.BaseConverterService
 
 /**
  * Custom quickfixes.
@@ -20,9 +18,6 @@ import org.eclipse.etrice.core.common.converter.BaseConverterService
  * see http://www.eclipse.org/Xtext/documentation.html#quickfixes
  */
 class FSMQuickfixProvider extends DefaultQuickfixProvider {
-
-	@Inject
-	BaseConverterService converterService
 
 	@Inject
 	IWhitespaceInformationProvider whitespaceProvider;
@@ -33,16 +28,9 @@ class FSMQuickfixProvider extends DefaultQuickfixProvider {
 			element as DetailCode => [
 				val ccString = lines.join(whitespaceProvider.getLineSeparatorInformation(eResource.URI).lineSeparator)
 				
-				// xtext bug: serializer freezes in many situations (manual serialization via ISerializer does not work either)
-				// semantic change can trigger formatting, activate in RoomUiModule (https://www.eclipse.org/forums/index.php/t/1067512/)
-//				used = false
-//				lines.clear
-//				lines += ccString
-			
-				// workaround, TODO do formatting manually
-				NodeModelUtils.findActualNodeFor(it) => [
-					context.xtextDocument.replace(offset, length, converterService.CC_StringConverter.addDelim(ccString))
-				]
+				used = false
+				lines.clear
+				lines += ccString
 			]			
 		])
 	}

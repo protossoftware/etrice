@@ -31,9 +31,9 @@ import org.eclipse.etrice.core.room.EnumLiteral
 import org.eclipse.etrice.core.room.EnumerationType
 import org.eclipse.etrice.core.room.ExternalType
 import org.eclipse.etrice.core.room.Message
+import org.eclipse.etrice.core.room.MessageData
 import org.eclipse.etrice.core.room.PrimitiveType
 import org.eclipse.etrice.core.room.RoomClass
-import org.eclipse.etrice.core.room.VarDecl
 import org.eclipse.etrice.core.room.util.RoomHelpers
 import org.eclipse.etrice.generator.generic.ILanguageExtension
 import org.eclipse.etrice.generator.generic.RoomExtensions
@@ -202,10 +202,11 @@ class CppExtensions implements ILanguageExtension {
 	}
 
 	override generateArglistAndTypedData(EObject d) {
-		if (d==null || !(d instanceof VarDecl))
+		// TODO 529445: d will be a RefableType, not MessageData
+		if (d===null || !(d instanceof MessageData))
 			return newArrayList("", "", "")
 
-		val data = d as VarDecl
+		val data = d as MessageData
 
 		val castExpr = switch it : data.refType.type {
 			PrimitiveType case !Strings.isEmpty(castName): castName
@@ -227,7 +228,7 @@ class CppExtensions implements ILanguageExtension {
 	}
 
 	override getTargetType(EnumerationType type) {
-		if (type.getPrimitiveType()!=null)
+		if (type.getPrimitiveType()!==null)
 			type.getPrimitiveType().getTargetName()
 		else
 			type.getName()
@@ -237,14 +238,14 @@ class CppExtensions implements ILanguageExtension {
 		val type = literal.eContainer() as EnumerationType
 		val cast = type.targetType
 
-		if (type.primitiveType!=null)
+		if (type.primitiveType!==null)
 			Long.toString(literal.getLiteralValue())
 		else
 			"(("+cast+")"+Long.toString(literal.getLiteralValue())+")"
 	}
 
 	override getCastType(EnumerationType type) {
-		if (type.getPrimitiveType()!=null)
+		if (type.getPrimitiveType()!==null)
 			type.getPrimitiveType().getCastName()
 		else
 			type.getName()

@@ -31,11 +31,12 @@ import org.eclipse.etrice.expressions.detailcode.RuntimeDetailExpressionProvider
 import org.eclipse.jface.viewers.ILabelProvider
 import org.eclipse.swt.graphics.Image
 import org.eclipse.swt.graphics.Point
+import org.eclipse.etrice.generator.generic.ILanguageExtension
 
 @Singleton
 class DetailExpressionProposalConfig{
 
-	static val String IMAGE_RT_METHOD = "icons/rt_method.png"
+//	static val String IMAGE_RT_METHOD = "icons/rt_method.png"
 
 	@Inject
 	protected ILabelProvider labelProvider
@@ -58,7 +59,7 @@ class DetailExpressionProposalConfig{
 			Operation:
 				data.arguments.map[name].join(', ')
 			Message case data.data !== null:
-				data.data.name
+				ILanguageExtension.GENERIC_DATA_NAME
 			Attribute, // fall through
 			InterfaceItem:
 				'0'
@@ -78,7 +79,7 @@ class DetailExpressionProposalConfig{
 
 		var postfix = getPostfixReplacement(feature)
 		var point = postfix.value
-		if (point != null)
+		if (point !== null)
 			point.x += feature.id.length
 
 		return feature.id + postfix.key -> point

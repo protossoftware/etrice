@@ -5,9 +5,7 @@ RoomModel TemplateModel {
 			StateMachine {
 				State state3
 				RefinedState state1 {
-					entry {
-						"//refined"
-					}
+					entry '''//refined'''
 				}
 				Transition tr2: state1 -> state3 {
 					triggers {
@@ -15,9 +13,7 @@ RoomModel TemplateModel {
 					}
 				}
 				RefinedTransition tr0 {
-					action {
-						"//refined"
-					}
+					action '''//refined'''
 				}
 				State state4
 				State state5

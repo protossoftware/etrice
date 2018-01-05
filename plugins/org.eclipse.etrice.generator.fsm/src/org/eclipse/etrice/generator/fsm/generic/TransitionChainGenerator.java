@@ -17,7 +17,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.etrice.core.fsm.fSM.CPBranchTransition;
 import org.eclipse.etrice.core.fsm.fSM.ChoicePoint;
 import org.eclipse.etrice.core.fsm.fSM.ContinuationTransition;

@@ -30,6 +30,7 @@ import static org.junit.Assert.assertNotNull
 import static org.junit.Assert.assertTrue
 
 import static extension org.eclipse.etrice.core.genmodel.fsm.FsmGenExtensions.*
+import org.eclipse.etrice.core.room.MessageData
 
 class TestMultipleConnectedChoicepoint extends FsmGenTestBase {
 	
@@ -73,7 +74,7 @@ class TestMultipleConnectedChoicepoint extends FsmGenTestBase {
 		var tr = gc.graph.links.filter[(transition as Transition).name.equals("tr0")].head
 		assertNotNull("transition found", tr)
 		assertTrue("transition is TriggeredTransition", tr.transition instanceof TriggeredTransition)
-		var data = tr.commonData as VarDecl
+		var data = tr.commonData as MessageData
 		assertTrue("data is DataClass", data.refType.type instanceof DataClass)
 		assertEquals("data is of type", "DC2", data.refType.type.name)
 		
@@ -82,34 +83,34 @@ class TestMultipleConnectedChoicepoint extends FsmGenTestBase {
 		
 		tr = s.subgraph.links.filter[(transition as Transition).name.equals("tr2")].head
 		assertTrue("transition is TriggeredTransition", tr.transition instanceof TriggeredTransition)
-		data = tr.commonData as VarDecl
+		data = tr.commonData as MessageData
 		assertTrue("data is DataClass", data.refType.type instanceof DataClass)
 		assertEquals("data is of type", "DC2", data.refType.type.name)
 		
 		tr = s.subgraph.links.filter[(transition as Transition).name.equals("tr3")].head
 		assertTrue("transition is TriggeredTransition", tr.transition instanceof TriggeredTransition)
-		data = tr.commonData as VarDecl
+		data = tr.commonData as MessageData
 		assertTrue("data is DataClass", data.refType.type instanceof DataClass)
 		assertEquals("data is of type", "DC4", data.refType.type.name)
 		
  		tr = gc.graph.links.filter[(transition as Transition).name.equals("tr1")].head
 		assertNotNull("transition found", tr)
 		assertTrue("transition is TriggeredTransition", tr.transition instanceof TriggeredTransition)
-		data = tr.commonData as VarDecl
+		data = tr.commonData as MessageData
 		assertTrue("data is DataClass", data.refType.type instanceof DataClass)
 		assertEquals("data is of type", "DC3", data.refType.type.name)
 		
  		tr = gc.graph.links.filter[(transition as Transition).name.equals("tr3")].head
 		assertNotNull("transition found", tr)
 		assertTrue("transition is ContinuationTransition", tr.transition instanceof ContinuationTransition)
-		data = tr.commonData as VarDecl
+		data = tr.commonData as MessageData
 		assertTrue("data is DataClass", data.refType.type instanceof DataClass)
 		assertEquals("data is of type", "DC", data.refType.type.name)
 		
  		tr = gc.graph.links.filter[(transition as Transition).name.equals("tr4")].head
 		assertNotNull("transition found", tr)
 		assertTrue("transition is CPBranchTransition", tr.transition instanceof CPBranchTransition)
-		data = tr.commonData as VarDecl
+		data = tr.commonData as MessageData
 		assertTrue("data is DataClass", data.refType.type instanceof DataClass)
 		assertEquals("data is of type", "DC", data.refType.type.name)
 	}

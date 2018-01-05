@@ -37,6 +37,7 @@ import org.eclipse.etrice.core.room.EnumerationType;
 import org.eclipse.etrice.core.room.ExternalType;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
+import org.eclipse.etrice.core.room.MessageData;
 import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.PortOperation;
@@ -168,8 +169,8 @@ public class TestDetailCodeTranslator {
 		out1.setName("out1");
 		Message out2 = RoomFactory.eINSTANCE.createMessage();
 		out2.setName("out2");
-		VarDecl typedID = RoomFactory.eINSTANCE.createVarDecl();
-		typedID.setName("param");
+		MessageData typedID = RoomFactory.eINSTANCE.createMessageData();
+		typedID.setDeprecatedName("param");
 		PrimitiveType type = RoomFactory.eINSTANCE.createPrimitiveType();
 		type.setName("int32");
 		type.setCastName("Integer");

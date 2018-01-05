@@ -18,6 +18,7 @@
 /*--------------------- begin user code ---------------------*/
 #define ET_TIMER_RUNNING	0x01
 #define ET_TIMER_PERIODIC	0x02
+
 /*--------------------- end user code ---------------------*/
 
 
@@ -34,7 +35,7 @@ class PTimer {
 		} msg_ids;
 
 		/*--------------------- begin user code ---------------------*/
-		//uc2		
+		//uc2
 		/*--------------------- end user code ---------------------*/
 
 		static bool isValidEvtID(int evtId) {
@@ -109,10 +110,10 @@ class PTimerConjPort : public etRuntime::PortBase {
 	/*--------------------- operations ---------------------*/
 
 	 // sent messages
-	public: void startTimer(uint32 time);
-	private: void startTimer_impl(uint32 time);
-	public: void startTimeout(uint32 time);
-	private: void startTimeout_impl(uint32 time);
+	public: void startTimer(uint32 transitionData);
+	private: void startTimer_impl(uint32 transitionData);
+	public: void startTimeout(uint32 transitionData);
+	private: void startTimeout_impl(uint32 transitionData);
 	public: void kill();
 	private: void kill_impl();
 };
@@ -130,8 +131,8 @@ class PTimerConjReplPort : public etRuntime::ReplicatedPortBase {
 		PTimerConjPort& get(int idx) const { return *dynamic_cast<PTimerConjPort*>(getInterfaceItem(idx)); }
 
 		// incoming messages
-		public: void startTimer(uint32 time);
-		public: void startTimeout(uint32 time);
+		public: void startTimer(uint32 transitionData);
+		public: void startTimeout(uint32 transitionData);
 		public: void kill();
 
 	protected:

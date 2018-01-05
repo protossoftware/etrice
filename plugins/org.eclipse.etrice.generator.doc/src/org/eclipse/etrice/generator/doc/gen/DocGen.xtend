@@ -276,7 +276,7 @@ class DocGen {
 	'''
 		\level{2} {«dc.name.escapedString»}
 		«dc.docu.generateDocText»
-		«IF dc.primitiveType!=null»
+		«IF dc.primitiveType!==null»
 			The literals of this enumeration are based on PrimitiveType «dc.primitiveType.name.escapedString».
 		«ELSE»
 			The literals of this enumeration are of type \texttt{int}.
@@ -311,24 +311,24 @@ class DocGen {
 		«IF !pc.allIncomingMessages.empty»
 			\level{3}{Incoming Messages}
 			
-			\begin{tabular}[ht]{|l|l|l|p{8cm}|}
+			\begin{tabular}[ht]{|l|l|p{8cm}|}
 			\hline
-			Message & Data & Type & Description\\
+			Message & Type & Description\\
 			«FOR ims : pc.allIncomingMessages»
 				\hline
-				«ims.name.escapedString» & «IF ims.data != null» «ims.data.name.escapedString» «ENDIF» & «IF ims.data != null» «ims.data.refType.type.name.escapedString» «ENDIF» & «ims.docu.generateDocText»\\
+				«ims.name.escapedString» & «IF ims.data !== null» «ims.data.refType.type.name.escapedString» «ENDIF» & «ims.docu.generateDocText»\\
 			«ENDFOR»
 			\hline
 			\end{tabular}
 		«ENDIF»
 		«IF !pc.allOutgoingMessages.empty»
 			\level{3}{Outgoing Messages}
-			\begin{tabular}[ht]{|l|l|l|p{8cm}|}
+			\begin{tabular}[ht]{|l|l|p{8cm}|}
 			\hline
-			Message & Data & Type & Description\\
+			Message & Type & Description\\
 			«FOR oms : pc.allOutgoingMessages»
 				\hline
-				«oms.name.escapedString» & «IF oms.data != null» «oms.data.name.escapedString» «ENDIF» & «IF oms.data != null» «oms.data.refType.type.name.escapedString» «ENDIF» & «oms.docu.generateDocText»\\
+				«oms.name.escapedString» & «IF oms.data !== null» «oms.data.refType.type.name.escapedString» «ENDIF» & «oms.docu.generateDocText»\\
 			«ENDFOR»
 			\hline
 			\end{tabular}
@@ -363,7 +363,7 @@ class DocGen {
 			\level{3}{Structure}
 			«ac.structureDocu.generateDocText»
 			«includeGraphics(filename.imagePath,IMGWIDTH_DEFAULT,ac.name + " Structure")»
-		«ELSEIF ac.structureDocu != null»
+		«ELSEIF ac.structureDocu !== null»
 			\level{3}{Structure}
 			«ac.structureDocu.generateDocText»
 		«ENDIF»
@@ -381,7 +381,7 @@ class DocGen {
 			\level{3}{Behavior}
 			«ac.behaviorDocu.generateDocText»
 			«generateFsmDoc(ctx.model, ac)»
-		«ELSEIF ac.behaviorDocu != null»
+		«ELSEIF ac.behaviorDocu !== null»
 			\level{3}{Behavior}
 			«ac.behaviorDocu.generateDocText»
 		«ENDIF»
@@ -408,7 +408,7 @@ class DocGen {
 		
 		\begin{par}
 		«FOR s : ac.stateMachine.states»
-			«IF s.docu != null»	
+			«IF s.docu !== null»	
 				\textbf{State description} \textit{«s.genStatePathName.replaceAll("_","\\\\_")»}:
 				\newline
 				«generateDocText(s.docu)»
@@ -417,7 +417,7 @@ class DocGen {
 		«ENDFOR»
 
 		«FOR c : ac.stateMachine.chPoints»
-			«IF c.docu != null»
+			«IF c.docu !== null»
 				\textbf{Choicepoint description} \textit{«c.name.escapedString»}:
 				\newline
 				«generateDocText(c.docu)»
@@ -482,7 +482,7 @@ class DocGen {
 		
 		\begin{par}
 		«FOR s : state.subgraph.states»
-			«IF s.docu != null»	
+			«IF s.docu !== null»	
 				\textbf{State description} \textit{«s.genStatePathName.replaceAll("_","\\\\_")»}:
 				\newline
 				«generateDocText(s.docu)»
@@ -491,7 +491,7 @@ class DocGen {
 		«ENDFOR»
 
 		«FOR c : state.subgraph.chPoints»
-			«IF c.docu != null»
+			«IF c.docu !== null»
 				\textbf{Choicepoint description} \textit{«c.name.escapedString»}:
 				\newline
 				«generateDocText(c.docu)»
@@ -531,10 +531,10 @@ class DocGen {
 			\hline		
 				Name: & «op.name.escapedString»\\
 				\hline
-				ReturnType: &  «IF op.returnType != null»«op.returnType.type.name.escapedString»«ELSE»void«ENDIF»\\
+				ReturnType: &  «IF op.returnType !== null»«op.returnType.type.name.escapedString»«ELSE»void«ENDIF»\\
 				\hline
 				Arguments: & «FOR pa : op.arguments SEPARATOR ", "»«pa.name.escapedString»:«pa.refType.type.name.escapedString»«ENDFOR»\\
-				«IF op.docu != null»
+				«IF op.docu !== null»
 					\hline
 					«IF op.docu.toString.length > 85»
 						\multicolumn{2} {|p{13cm}|} {«generateDocText(op.docu)»}\\
@@ -551,7 +551,7 @@ class DocGen {
 	
 	def private generateDocText(Documentation doc){
 		'''
-		«IF doc!=null»
+		«IF doc!==null»
 			% begin text from user Documentation
 			«FOR line: doc.lines»
 				«line.escapedString»

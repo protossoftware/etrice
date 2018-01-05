@@ -464,6 +464,67 @@ ruleVarDecl returns [EObject current=null]
 
 
 
+// Entry rule entryRuleMessageData
+entryRuleMessageData returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getMessageDataRule()); }
+	 iv_ruleMessageData=ruleMessageData 
+	 { $current=$iv_ruleMessageData.current; } 
+	 EOF 
+;
+
+// Rule MessageData
+ruleMessageData returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(((
+(
+		lv_deprecatedName_0_0=RULE_ID
+		{
+			newLeafNode(lv_deprecatedName_0_0, grammarAccess.getMessageDataAccess().getDeprecatedNameIDTerminalRuleCall_0_0_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getMessageDataRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"deprecatedName",
+        		lv_deprecatedName_0_0, 
+        		"org.eclipse.xtext.common.Terminals.ID");
+	    }
+
+)
+)	otherlv_1=':' 
+    {
+    	newLeafNode(otherlv_1, grammarAccess.getMessageDataAccess().getColonKeyword_0_1());
+    }
+)?(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getMessageDataAccess().getRefTypeRefableTypeParserRuleCall_1_0()); 
+	    }
+		lv_refType_2_0=ruleRefableType		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getMessageDataRule());
+	        }
+       		set(
+       			$current, 
+       			"refType",
+        		lv_refType_2_0, 
+        		"org.eclipse.etrice.core.Room.RefableType");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))
+;
+
+
+
+
+
 // Entry rule entryRuleRefableType
 entryRuleRefableType returns [EObject current=null] 
 	:
@@ -2408,9 +2469,9 @@ ruleMessage returns [EObject current=null]
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getMessageAccess().getDataVarDeclParserRuleCall_4_0()); 
+	        newCompositeNode(grammarAccess.getMessageAccess().getDataMessageDataParserRuleCall_4_0()); 
 	    }
-		lv_data_4_0=ruleVarDecl		{
+		lv_data_4_0=ruleMessageData		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getMessageRule());
 	        }
@@ -2418,7 +2479,7 @@ ruleMessage returns [EObject current=null]
        			$current, 
        			"data",
         		lv_data_4_0, 
-        		"org.eclipse.etrice.core.Room.VarDecl");
+        		"org.eclipse.etrice.core.Room.MessageData");
 	        afterParserOrEnumRuleCall();
 	    }
 

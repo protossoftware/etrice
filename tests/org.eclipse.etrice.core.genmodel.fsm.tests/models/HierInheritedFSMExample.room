@@ -98,14 +98,10 @@ RoomModel TemplateModel {
 		Behavior {
 			StateMachine {
 				RefinedState state0 {
-					entry {
-						""
-					}
+					entry ''''''
 				}
 				RefinedTransition tr3 {
-					action {
-						""
-					}
+					action ''''''
 				}
 			}
 		}

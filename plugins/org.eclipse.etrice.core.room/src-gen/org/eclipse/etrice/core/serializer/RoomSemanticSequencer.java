@@ -65,6 +65,7 @@ import org.eclipse.etrice.core.room.LayerConnection;
 import org.eclipse.etrice.core.room.LogicalSystem;
 import org.eclipse.etrice.core.room.LogicalThread;
 import org.eclipse.etrice.core.room.Message;
+import org.eclipse.etrice.core.room.MessageData;
 import org.eclipse.etrice.core.room.OutMessageHandler;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.PortClass;
@@ -287,6 +288,9 @@ public class RoomSemanticSequencer extends FSMSemanticSequencer {
 			case RoomPackage.MESSAGE:
 				sequence_Message(context, (Message) semanticObject); 
 				return; 
+			case RoomPackage.MESSAGE_DATA:
+				sequence_MessageData(context, (MessageData) semanticObject); 
+				return; 
 			case RoomPackage.OUT_MESSAGE_HANDLER:
 				sequence_OutMessageHandler(context, (OutMessageHandler) semanticObject); 
 				return; 
@@ -370,24 +374,24 @@ public class RoomSemanticSequencer extends FSMSemanticSequencer {
 	 *         docu=Documentation? 
 	 *         base=[ActorClass|FQN]? 
 	 *         annotations+=Annotation* 
-	 *         serviceProvisionPoints+=SPP? 
-	 *         (interfacePorts+=Port? serviceProvisionPoints+=SPP?)* 
+	 *         interfacePorts+=Port? 
+	 *         (serviceProvisionPoints+=SPP? interfacePorts+=Port?)* 
 	 *         structureDocu=Documentation? 
 	 *         userCode1=DetailCode? 
 	 *         userCode2=DetailCode? 
 	 *         userCode3=DetailCode? 
-	 *         connections+=LayerConnection? 
+	 *         internalPorts+=Port? 
 	 *         (
 	 *             (
+	 *                 connections+=LayerConnection | 
 	 *                 bindings+=Binding | 
 	 *                 serviceImplementations+=ServiceImplementation | 
 	 *                 attributes+=Attribute | 
 	 *                 actorRefs+=ActorRef | 
 	 *                 serviceAccessPoints+=SAP | 
-	 *                 internalPorts+=Port | 
 	 *                 externalPorts+=ExternalPort
 	 *             )? 
-	 *             connections+=LayerConnection?
+	 *             internalPorts+=Port?
 	 *         )* 
 	 *         behaviorDocu=Documentation? 
 	 *         behaviorAnnotations+=Annotation* 
@@ -559,7 +563,7 @@ public class RoomSemanticSequencer extends FSMSemanticSequencer {
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RoomPackage.Literals.EXTERNAL_PORT__INTERFACE_PORT));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getExternalPortAccess().getInterfacePortPortIDTerminalRuleCall_2_0_1(), semanticObject.getInterfacePort());
+		feeder.accept(grammarAccess.getExternalPortAccess().getInterfacePortPortIDTerminalRuleCall_2_0_1(), semanticObject.eGet(RoomPackage.Literals.EXTERNAL_PORT__INTERFACE_PORT, false));
 		feeder.finish();
 	}
 	
@@ -595,7 +599,7 @@ public class RoomSemanticSequencer extends FSMSemanticSequencer {
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RoomPackage.Literals.MESSAGE_HANDLER__DETAIL_CODE));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getInMessageHandlerAccess().getMsgMessageIDTerminalRuleCall_2_0_1(), semanticObject.getMsg());
+		feeder.accept(grammarAccess.getInMessageHandlerAccess().getMsgMessageIDTerminalRuleCall_2_0_1(), semanticObject.eGet(RoomPackage.Literals.MESSAGE_HANDLER__MSG, false));
 		feeder.accept(grammarAccess.getInMessageHandlerAccess().getDetailCodeDetailCodeParserRuleCall_3_0(), semanticObject.getDetailCode());
 		feeder.finish();
 	}
@@ -656,10 +660,22 @@ public class RoomSemanticSequencer extends FSMSemanticSequencer {
 	
 	/**
 	 * Contexts:
+	 *     MessageData returns MessageData
+	 *
+	 * Constraint:
+	 *     (deprecatedName=ID? refType=RefableType)
+	 */
+	protected void sequence_MessageData(ISerializationContext context, MessageData semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     Message returns Message
 	 *
 	 * Constraint:
-	 *     (priv?='private'? name=ID data=VarDecl? annotations+=Annotation* docu=Documentation?)
+	 *     (priv?='private'? name=ID data=MessageData? annotations+=Annotation* docu=Documentation?)
 	 */
 	protected void sequence_Message(ISerializationContext context, Message semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -682,7 +698,7 @@ public class RoomSemanticSequencer extends FSMSemanticSequencer {
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RoomPackage.Literals.MESSAGE_HANDLER__DETAIL_CODE));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getOutMessageHandlerAccess().getMsgMessageIDTerminalRuleCall_2_0_1(), semanticObject.getMsg());
+		feeder.accept(grammarAccess.getOutMessageHandlerAccess().getMsgMessageIDTerminalRuleCall_2_0_1(), semanticObject.eGet(RoomPackage.Literals.MESSAGE_HANDLER__MSG, false));
 		feeder.accept(grammarAccess.getOutMessageHandlerAccess().getDetailCodeDetailCodeParserRuleCall_3_0(), semanticObject.getDetailCode());
 		feeder.finish();
 	}
@@ -809,7 +825,7 @@ public class RoomSemanticSequencer extends FSMSemanticSequencer {
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RoomPackage.Literals.REF_SA_POINT__REF));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getRefSAPointAccess().getRefActorContainerRefIDTerminalRuleCall_1_0_1(), semanticObject.getRef());
+		feeder.accept(grammarAccess.getRefSAPointAccess().getRefActorContainerRefIDTerminalRuleCall_1_0_1(), semanticObject.eGet(RoomPackage.Literals.REF_SA_POINT__REF, false));
 		feeder.finish();
 	}
 	
@@ -852,7 +868,7 @@ public class RoomSemanticSequencer extends FSMSemanticSequencer {
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RoomPackage.Literals.RELAY_SA_POINT__RELAY));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getRelaySAPointAccess().getRelaySPPIDTerminalRuleCall_1_0_1(), semanticObject.getRelay());
+		feeder.accept(grammarAccess.getRelaySAPointAccess().getRelaySPPIDTerminalRuleCall_1_0_1(), semanticObject.eGet(RoomPackage.Literals.RELAY_SA_POINT__RELAY, false));
 		feeder.finish();
 	}
 	
@@ -902,7 +918,7 @@ public class RoomSemanticSequencer extends FSMSemanticSequencer {
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getSAPAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
-		feeder.accept(grammarAccess.getSAPAccess().getProtocolProtocolClassFQNParserRuleCall_3_0_1(), semanticObject.getProtocol());
+		feeder.accept(grammarAccess.getSAPAccess().getProtocolProtocolClassFQNParserRuleCall_3_0_1(), semanticObject.eGet(RoomPackage.Literals.SAP__PROTOCOL, false));
 		feeder.finish();
 	}
 	
@@ -925,7 +941,7 @@ public class RoomSemanticSequencer extends FSMSemanticSequencer {
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getSPPAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
-		feeder.accept(grammarAccess.getSPPAccess().getProtocolProtocolClassFQNParserRuleCall_3_0_1(), semanticObject.getProtocol());
+		feeder.accept(grammarAccess.getSPPAccess().getProtocolProtocolClassFQNParserRuleCall_3_0_1(), semanticObject.eGet(RoomPackage.Literals.SPP__PROTOCOL, false));
 		feeder.finish();
 	}
 	
@@ -945,8 +961,8 @@ public class RoomSemanticSequencer extends FSMSemanticSequencer {
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RoomPackage.Literals.SP_POINT__SERVICE));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getSPPointAccess().getRefActorContainerRefIDTerminalRuleCall_0_0_1(), semanticObject.getRef());
-		feeder.accept(grammarAccess.getSPPointAccess().getServiceSPPIDTerminalRuleCall_2_0_1(), semanticObject.getService());
+		feeder.accept(grammarAccess.getSPPointAccess().getRefActorContainerRefIDTerminalRuleCall_0_0_1(), semanticObject.eGet(RoomPackage.Literals.SP_POINT__REF, false));
+		feeder.accept(grammarAccess.getSPPointAccess().getServiceSPPIDTerminalRuleCall_2_0_1(), semanticObject.eGet(RoomPackage.Literals.SP_POINT__SERVICE, false));
 		feeder.finish();
 	}
 	
@@ -964,7 +980,7 @@ public class RoomSemanticSequencer extends FSMSemanticSequencer {
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RoomPackage.Literals.SERVICE_IMPLEMENTATION__SPP));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getServiceImplementationAccess().getSppSPPIDTerminalRuleCall_2_0_1(), semanticObject.getSpp());
+		feeder.accept(grammarAccess.getServiceImplementationAccess().getSppSPPIDTerminalRuleCall_2_0_1(), semanticObject.eGet(RoomPackage.Literals.SERVICE_IMPLEMENTATION__SPP, false));
 		feeder.finish();
 	}
 	
@@ -1005,7 +1021,7 @@ public class RoomSemanticSequencer extends FSMSemanticSequencer {
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getSubProtocolAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
-		feeder.accept(grammarAccess.getSubProtocolAccess().getProtocolGeneralProtocolClassFQNParserRuleCall_3_0_1(), semanticObject.getProtocol());
+		feeder.accept(grammarAccess.getSubProtocolAccess().getProtocolGeneralProtocolClassFQNParserRuleCall_3_0_1(), semanticObject.eGet(RoomPackage.Literals.SUB_PROTOCOL__PROTOCOL, false));
 		feeder.finish();
 	}
 	

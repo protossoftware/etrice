@@ -19,9 +19,7 @@ RoomModel Semantics_basic {
 				}
 				Transition tr2: state0 -> tp0 of state2 {
 					triggers {
-						<in1: p0 guard {
-							"if(true)"
-						}>
+						<in1: p0 guard '''if(true)'''>
 					}
 				}
 				Transition tr3: tp1 of state2 -> state0
@@ -36,9 +34,7 @@ RoomModel Semantics_basic {
 					}
 				}
 				State state0 {
-					entry {
-						"p0.out3();"
-					}
+					entry '''p0.out3();'''
 				}
 				State state1 {
 					subgraph {
@@ -47,9 +43,7 @@ RoomModel Semantics_basic {
 							subgraph {
 								Transition init: initial -> state1_0_0_vm { }
 								State state1_0_0_vm {
-									entry {
-										"p0.out2();"
-									}
+									entry '''p0.out2();'''
 								}
 							}
 						}
@@ -60,9 +54,7 @@ RoomModel Semantics_basic {
 						Transition tr0: my tp0 -> state0
 						Transition tr1: state0 -> my tp1 {
 							triggers {
-								<in2: p0 guard {
-									"if(true)"
-								}>
+								<in2: p0 guard '''if(true)'''>
 							}
 						}
 						EntryPoint tp0
@@ -93,9 +85,7 @@ RoomModel Semantics_basic {
 				}
 				Transition tr2: state2 -> state3 {
 					triggers {
-						<in3: p0 guard {
-							"if(true)"
-						}>
+						<in3: p0 guard '''if(true)'''>
 					}
 				}
 				Transition tr3: state1 -> state3 {
@@ -119,9 +109,7 @@ RoomModel Semantics_basic {
 					}
 				}
 				State state0 {
-					entry {
-						"p0.out1();"
-					}
+					entry '''p0.out1();'''
 				}
 				State state1
 				State state2
@@ -139,9 +127,7 @@ RoomModel Semantics_basic {
 		Behavior {
 			StateMachine {
 				Transition init: initial -> state0 {
-					action {
-						"p0.out1();"
-					}
+					action '''p0.out1();'''
 				}
 				Transition tr0: state0 -> state1 {
 					triggers {
@@ -156,9 +142,7 @@ RoomModel Semantics_basic {
 				TransitionPoint tp0
 				State state0
 				State state1 {
-					entry {
-						"p0.out1()"
-					}
+					entry '''p0.out1()'''
 				}
 			}
 		}

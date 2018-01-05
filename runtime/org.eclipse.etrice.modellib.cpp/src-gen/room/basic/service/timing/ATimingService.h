@@ -32,6 +32,7 @@ struct etTCB {
 	int32 portIdx;
 	etTimerControlBlock* next;
 };
+
 /*--------------------- end user code ---------------------*/
 
 using namespace etRuntime;

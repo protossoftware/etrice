@@ -170,6 +170,34 @@ finally {
 
 
 
+// Entry rule entryRuleMessageData
+entryRuleMessageData 
+:
+{ before(grammarAccess.getMessageDataRule()); }
+	 ruleMessageData
+{ after(grammarAccess.getMessageDataRule()); } 
+	 EOF 
+;
+
+// Rule MessageData
+ruleMessageData
+    @init {
+		int stackSize = keepStackSize();
+    }
+	:
+(
+{ before(grammarAccess.getMessageDataAccess().getGroup()); }
+(rule__MessageData__Group__0)
+{ after(grammarAccess.getMessageDataAccess().getGroup()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+
 // Entry rule entryRuleRefableType
 entryRuleRefableType 
 :
@@ -4958,6 +4986,130 @@ finally {
 }
 
 
+
+
+
+
+
+
+rule__MessageData__Group__0
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__MessageData__Group__0__Impl
+	rule__MessageData__Group__1
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__MessageData__Group__0__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getMessageDataAccess().getGroup_0()); }
+(rule__MessageData__Group_0__0)?
+{ after(grammarAccess.getMessageDataAccess().getGroup_0()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+rule__MessageData__Group__1
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__MessageData__Group__1__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__MessageData__Group__1__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getMessageDataAccess().getRefTypeAssignment_1()); }
+(rule__MessageData__RefTypeAssignment_1)
+{ after(grammarAccess.getMessageDataAccess().getRefTypeAssignment_1()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+
+
+
+
+rule__MessageData__Group_0__0
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__MessageData__Group_0__0__Impl
+	rule__MessageData__Group_0__1
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__MessageData__Group_0__0__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getMessageDataAccess().getDeprecatedNameAssignment_0_0()); }
+(rule__MessageData__DeprecatedNameAssignment_0_0)
+{ after(grammarAccess.getMessageDataAccess().getDeprecatedNameAssignment_0_0()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+rule__MessageData__Group_0__1
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__MessageData__Group_0__1__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__MessageData__Group_0__1__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getMessageDataAccess().getColonKeyword_0_1()); }
+
+	':' 
+
+{ after(grammarAccess.getMessageDataAccess().getColonKeyword_0_1()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
 
 
 
@@ -23593,6 +23745,36 @@ finally {
 	restoreStackSize(stackSize);
 }
 
+rule__MessageData__DeprecatedNameAssignment_0_0
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getMessageDataAccess().getDeprecatedNameIDTerminalRuleCall_0_0_0()); }
+	RULE_ID{ after(grammarAccess.getMessageDataAccess().getDeprecatedNameIDTerminalRuleCall_0_0_0()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__MessageData__RefTypeAssignment_1
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getMessageDataAccess().getRefTypeRefableTypeParserRuleCall_1_0()); }
+	ruleRefableType{ after(grammarAccess.getMessageDataAccess().getRefTypeRefableTypeParserRuleCall_1_0()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
 rule__RefableType__TypeAssignment_0
     @init {
 		int stackSize = keepStackSize();
@@ -24713,8 +24895,8 @@ rule__Message__DataAssignment_4
     }
 :
 (
-{ before(grammarAccess.getMessageAccess().getDataVarDeclParserRuleCall_4_0()); }
-	ruleVarDecl{ after(grammarAccess.getMessageAccess().getDataVarDeclParserRuleCall_4_0()); }
+{ before(grammarAccess.getMessageAccess().getDataMessageDataParserRuleCall_4_0()); }
+	ruleMessageData{ after(grammarAccess.getMessageAccess().getDataMessageDataParserRuleCall_4_0()); }
 )
 
 ;

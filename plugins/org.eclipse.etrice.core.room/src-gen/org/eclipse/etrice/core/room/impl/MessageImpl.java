@@ -22,8 +22,8 @@ import org.eclipse.etrice.core.common.base.Annotation;
 import org.eclipse.etrice.core.common.base.Documentation;
 
 import org.eclipse.etrice.core.room.Message;
+import org.eclipse.etrice.core.room.MessageData;
 import org.eclipse.etrice.core.room.RoomPackage;
-import org.eclipse.etrice.core.room.VarDecl;
 
 /**
  * <!-- begin-user-doc -->
@@ -92,7 +92,7 @@ public class MessageImpl extends MinimalEObjectImpl.Container implements Message
    * @generated
    * @ordered
    */
-  protected VarDecl data;
+  protected MessageData data;
 
   /**
    * The cached value of the '{@link #getAnnotations() <em>Annotations</em>}' containment reference list.
@@ -186,7 +186,7 @@ public class MessageImpl extends MinimalEObjectImpl.Container implements Message
    * <!-- end-user-doc -->
    * @generated
    */
-  public VarDecl getData()
+  public MessageData getData()
   {
     return data;
   }
@@ -196,9 +196,9 @@ public class MessageImpl extends MinimalEObjectImpl.Container implements Message
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetData(VarDecl newData, NotificationChain msgs)
+  public NotificationChain basicSetData(MessageData newData, NotificationChain msgs)
   {
-    VarDecl oldData = data;
+    MessageData oldData = data;
     data = newData;
     if (eNotificationRequired())
     {
@@ -213,7 +213,7 @@ public class MessageImpl extends MinimalEObjectImpl.Container implements Message
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setData(VarDecl newData)
+  public void setData(MessageData newData)
   {
     if (newData != data)
     {
@@ -353,7 +353,7 @@ public class MessageImpl extends MinimalEObjectImpl.Container implements Message
         setName((String)newValue);
         return;
       case RoomPackage.MESSAGE__DATA:
-        setData((VarDecl)newValue);
+        setData((MessageData)newValue);
         return;
       case RoomPackage.MESSAGE__ANNOTATIONS:
         getAnnotations().clear();
@@ -383,7 +383,7 @@ public class MessageImpl extends MinimalEObjectImpl.Container implements Message
         setName(NAME_EDEFAULT);
         return;
       case RoomPackage.MESSAGE__DATA:
-        setData((VarDecl)null);
+        setData((MessageData)null);
         return;
       case RoomPackage.MESSAGE__ANNOTATIONS:
         getAnnotations().clear();

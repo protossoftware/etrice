@@ -46,7 +46,7 @@ typedef struct ATimingService_const {
 
 
 /* constant for state machine data */
-#define ATIMINGSERVICE_HISTORY_SIZE 2
+#define ATIMINGSERVICE_HISTORY_SIZE 3
 
 /* variable part of ActorClass (RAM) */
 struct ATimingService {

@@ -142,7 +142,71 @@
                 </reference>
             </activeWhen>
         </handler>
+    </extension>
+     
+    <extension
+         point="org.eclipse.ui.commands">
+      <command
+            description="Migrate model to transition data with generic name"
+            id="org.eclipse.etrice.core.room.ui.migratetransitiondata"
+            name="Migrate Transition Data Style">
+      </command>
+    </extension>
+    <extension point="org.eclipse.ui.menus">
+		<menuContribution locationURI="popup:#TextEditorContext?after=org.eclipse.etrice.core.Room.validate">
+			<command
+         commandId="org.eclipse.etrice.core.room.ui.migratetransitiondata"
+         icon="icons/correction_change.gif">
+				<visibleWhen checkEnabled="false">
+                	<reference definitionId="org.eclipse.etrice.core.Room.Editor.opened">
+                	</reference>
+            	</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+	<extension point="org.eclipse.ui.handlers">
+	    <handler
+            class="org.eclipse.etrice.core.ui.RoomExecutableExtensionFactory:org.eclipse.etrice.core.ui.handlers.MigrateTransitionData"
+            commandId="org.eclipse.etrice.core.room.ui.migratetransitiondata">
+            <activeWhen>
+                <reference
+                    definitionId="org.eclipse.etrice.core.Room.Editor.opened">
+                </reference>
+            </activeWhen>
+        </handler>
     </extension>   
+     
+    <extension
+         point="org.eclipse.ui.commands">
+      <command
+            description="Migrate model to smart action codes"
+            id="org.eclipse.etrice.core.room.ui.migrateactioncodes"
+            name="Migrate to Smart Action Codes">
+      </command>
+    </extension>
+    <extension point="org.eclipse.ui.menus">
+		<menuContribution locationURI="popup:#TextEditorContext?after=org.eclipse.etrice.core.fsm.FSM.validate">
+			<command
+         commandId="org.eclipse.etrice.core.room.ui.migrateactioncodes"
+         icon="icons/correction_change.gif">
+				<visibleWhen checkEnabled="false">
+                	<reference definitionId="org.eclipse.etrice.core.Room.Editor.opened">
+                	</reference>
+            	</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+	<extension point="org.eclipse.ui.handlers">
+	    <handler
+            class="org.eclipse.etrice.core.ui.RoomExecutableExtensionFactory:org.eclipse.etrice.core.ui.handlers.MigrateActionCodes"
+            commandId="org.eclipse.etrice.core.room.ui.migrateactioncodes">
+            <activeWhen>
+                <reference
+                    definitionId="org.eclipse.etrice.core.Room.Editor.opened">
+                </reference>
+            </activeWhen>
+        </handler>
+    </extension>
 
 <!-- adding resource factories -->
 

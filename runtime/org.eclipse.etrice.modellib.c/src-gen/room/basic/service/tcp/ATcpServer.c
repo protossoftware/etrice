@@ -31,6 +31,7 @@ static int socketReceiver(void* slf, int channel, int size, const int8* data) {
 	payloadPort_dataPackage(&payloadRecvBuffer);
 	return ETSOCKET_OK;
 }
+
 /*--------------------- end user code ---------------------*/
 
 /* interface item IDs */

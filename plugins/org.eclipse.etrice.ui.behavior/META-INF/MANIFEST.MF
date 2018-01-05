@@ -21,7 +21,8 @@ Require-Bundle: org.eclipse.etrice.core.room.ui;bundle-version="1.1.1",
  org.eclipse.xtext.ui.shared;bundle-version="2.6.0",
  org.eclipse.etrice.abstractexec.behavior;bundle-version="1.1.1",
  org.eclipse.etrice.core.genmodel;bundle-version="1.1.1",
- org.eclipse.etrice.expressions.ui;bundle-version="1.1.1"
+ org.eclipse.etrice.expressions.ui;bundle-version="1.1.1",
+ org.eclipse.etrice.generator
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-Vendor: Eclipse eTrice

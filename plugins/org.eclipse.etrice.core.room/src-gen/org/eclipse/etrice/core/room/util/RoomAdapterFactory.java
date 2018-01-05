@@ -104,6 +104,11 @@ public class RoomAdapterFactory extends AdapterFactoryImpl
         return createVarDeclAdapter();
       }
       @Override
+      public Adapter caseMessageData(MessageData object)
+      {
+        return createMessageDataAdapter();
+      }
+      @Override
       public Adapter caseRefableType(RefableType object)
       {
         return createRefableTypeAdapter();
@@ -436,6 +441,21 @@ public class RoomAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createVarDeclAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.MessageData <em>Message Data</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.etrice.core.room.MessageData
+   * @generated
+   */
+  public Adapter createMessageDataAdapter()
   {
     return null;
   }

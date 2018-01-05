@@ -55,6 +55,7 @@ import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.LayerConnection;
 import org.eclipse.etrice.core.room.LogicalSystem;
 import org.eclipse.etrice.core.room.Message;
+import org.eclipse.etrice.core.room.MessageData;
 import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.PortClass;
@@ -114,6 +115,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	public static final String OPERATION_MISSING_OVERRIDE = "RoomJavaValidator.OperationMissingOverride";
 	public static final String OPERATION_EXTRANEOUS_OVERRIDE = "RoomJavaValidator.OperationExtraneousOverride";
 	public static final String INCONSISTENT_COMMUNICATION_TYPE = "RoomJavaValidator.InconsistentCommType";
+	public static final String DEPRECATED_MESSAGE_DATA_NAME = "RoomJavaValidator.DeprecatedMessageDataName";
 
 	@Inject ImportUriResolver importUriResolver;
 
@@ -228,7 +230,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 			if (ar.getMultiplicity()>1) {
 				for (Port p : ac.getInterfacePorts()) {
 					if (p.getMultiplicity()<0) {
-						int idx = ((ActorContainerClass)ar.eContainer()).getActorRefs().indexOf(ar);
+						//int idx = ((ActorContainerClass)ar.eContainer()).getActorRefs().indexOf(ar);
 						error("replicated actor must not have replicated port with arbitrary multiplicity", null);
 					}
 				}
@@ -829,6 +831,13 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 
 			if(!roomHelpers.matchingReturnType(baseOp, op))
 				error("Return type  must be identical to overriden operation " +baseOpFQN, op, RoomPackage.Literals.OPERATION__RETURN_TYPE);
+		}
+	}
+	
+	@Check
+	public void checkMessageData(MessageData m) {
+		if (m.getDeprecatedName()!=null) {
+			warning("The data name of messages is deprecated", RoomPackage.Literals.MESSAGE_DATA__DEPRECATED_NAME, DEPRECATED_MESSAGE_DATA_NAME);
 		}
 	}
 }

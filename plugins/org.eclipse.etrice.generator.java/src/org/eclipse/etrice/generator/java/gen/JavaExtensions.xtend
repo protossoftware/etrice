@@ -30,9 +30,9 @@ import org.eclipse.etrice.core.room.EnumLiteral
 import org.eclipse.etrice.core.room.EnumerationType
 import org.eclipse.etrice.core.room.ExternalType
 import org.eclipse.etrice.core.room.Message
+import org.eclipse.etrice.core.room.MessageData
 import org.eclipse.etrice.core.room.PrimitiveType
 import org.eclipse.etrice.core.room.RoomClass
-import org.eclipse.etrice.core.room.VarDecl
 import org.eclipse.etrice.generator.generic.ILanguageExtension
 import org.eclipse.etrice.generator.generic.TypeHelpers
 import org.eclipse.xtext.util.Pair
@@ -241,16 +241,17 @@ class JavaExtensions implements ILanguageExtension {
 	}
 
 	override generateArglistAndTypedData(EObject d) {
-		if (d==null || !(d instanceof VarDecl))
+		// TODO 529445: d will be a RefableType, not MessageData
+		if (d===null || !(d instanceof MessageData))
 			return newArrayList("", "", "")
 
-		val data = d as VarDecl
+		val data = d as MessageData
 		var typeName = data.refType.type.name
 		var castTypeName = typeName
 		if (data.refType.type instanceof PrimitiveType) {
 			typeName = (data.refType.type as PrimitiveType).targetName
 			val ct = (data.refType.type as PrimitiveType).castName
-			if (ct!=null && !ct.isEmpty())
+			if (ct!==null && !ct.isEmpty())
 				castTypeName = ct
 		}
 		else if (data.refType.type instanceof EnumerationType) {
@@ -266,7 +267,7 @@ class JavaExtensions implements ILanguageExtension {
 	}
 
 	override getTargetType(EnumerationType type) {
-		if (type.primitiveType!=null)
+		if (type.primitiveType!==null)
 			type.primitiveType.targetName
 		else
 			"int"
@@ -276,14 +277,14 @@ class JavaExtensions implements ILanguageExtension {
 		val type = literal.eContainer() as EnumerationType
 		val cast = type.targetType
 
-		if (type.primitiveType==null)
+		if (type.primitiveType===null)
 			Long.toString(literal.literalValue)
 		else
 			"(("+cast+")"+Long.toString(literal.literalValue)+")"
 	}
 
 	override getCastType(EnumerationType type) {
-		if (type.primitiveType!=null)
+		if (type.primitiveType!==null)
 			type.primitiveType.castName
 		else
 			"int"

@@ -153,20 +153,20 @@ public class Log {
 		}
 	
 		// sent messages
-		public void open(String fileName) {
+		public void open(String transitionData) {
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_open]);
 			if (getPeerAddress()!=null)
-				getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), IN_open, fileName));
+				getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), IN_open, transitionData));
 		}
 		public void close() {
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_close]);
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), IN_close));
 		}
-		private void internalLog(InternalLogData data) {
+		private void internalLog(InternalLogData transitionData) {
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_internalLog]);
 			if (getPeerAddress()!=null)
-				getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), IN_internalLog, data.deepCopy()));
+				getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), IN_internalLog, transitionData.deepCopy()));
 		}
 		public void internalLog(String userString, String sender, long timeStamp) {
 			internalLog(new InternalLogData(userString, sender, timeStamp));
@@ -197,9 +197,9 @@ public class Log {
 		}
 	
 		// incoming messages
-		public void open(String fileName){
+		public void open(String transitionData){
 			for (InterfaceItemBase item : getItems()) {
-				((LogConjPort)item).open( fileName);
+				((LogConjPort)item).open( transitionData);
 			}
 		}
 		public void close(){
@@ -207,9 +207,9 @@ public class Log {
 				((LogConjPort)item).close();
 			}
 		}
-		private void internalLog(InternalLogData data){
+		private void internalLog(InternalLogData transitionData){
 			for (InterfaceItemBase item : getItems()) {
-				((LogConjPort)item).internalLog( data);
+				((LogConjPort)item).internalLog( transitionData);
 			}
 		}
 	}

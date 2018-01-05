@@ -114,6 +114,13 @@ public class RoomSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case RoomPackage.MESSAGE_DATA:
+      {
+        MessageData messageData = (MessageData)theEObject;
+        T result = caseMessageData(messageData);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case RoomPackage.REFABLE_TYPE:
       {
         RefableType refableType = (RefableType)theEObject;
@@ -552,6 +559,22 @@ public class RoomSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseVarDecl(VarDecl object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Message Data</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Message Data</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseMessageData(MessageData object)
   {
     return null;
   }

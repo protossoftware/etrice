@@ -103,30 +103,30 @@ static void action_TRANS_INITIAL_TO__Operational(ATimingService* self) {
     	}
 }
 static void action_TRANS_tr1_FROM_Operational_TO_Operational_BY_startTimeouttimer_tr1(ATimingService* self, const InterfaceItemBase* ifitem, uint32 transitionData) {
-    etTimerControlBlock* timer = getTcb();
+    etTimerControlBlock* transitionDatar = getTcb();
     etTime t;
-    if (timer!= 0){
+    if (transitionDatar!= 0){
     	t.sec=transitionData/1000;
     	t.nSec=(transitionData%1000)*1000000L;
-    	timer->pTime.sec = 0;
-    	timer->pTime.nSec = 0;
-    	timer->portIdx=((etReplSubPort*)ifitem)->index;
-    	getTimeFromTarget(&(timer->expTime));
-    	addTime(&(timer->expTime),&t);
-    	putTcbToUsedList(timer);
+    	transitionDatar->pTime.sec = 0;
+    	transitionDatar->pTime.nSec = 0;
+    	transitionDatar->portIdx=((etReplSubPort*)ifitem)->index;
+    	getTimeFromTarget(&(transitionDatar->expTime));
+    	addTime(&(transitionDatar->expTime),&t);
+    	putTcbToUsedList(transitionDatar);
     	}
 }
 static void action_TRANS_tr3_FROM_Operational_TO_Operational_BY_startTimertimer_tr3(ATimingService* self, const InterfaceItemBase* ifitem, uint32 transitionData) {
-    etTimerControlBlock* timer = getTcb();
+    etTimerControlBlock* transitionDatar = getTcb();
     etTime t;
-    if (timer!= 0){
+    if (transitionDatar!= 0){
     	t.sec=transitionData/1000;
     	t.nSec=(transitionData%1000)*1000000L;
-    	timer->pTime = t;
-    	timer->portIdx=((etReplSubPort*)ifitem)->index;
-    	getTimeFromTarget(&(timer->expTime));
-    	addTime(&(timer->expTime),&t);
-    	putTcbToUsedList(timer);
+    	transitionDatar->pTime = t;
+    	transitionDatar->portIdx=((etReplSubPort*)ifitem)->index;
+    	getTimeFromTarget(&(transitionDatar->expTime));
+    	addTime(&(transitionDatar->expTime),&t);
+    	putTcbToUsedList(transitionDatar);
     	}
 }
 static void action_TRANS_tr4_FROM_Operational_TO_Operational_BY_killtimer_tr4(ATimingService* self, const InterfaceItemBase* ifitem) {

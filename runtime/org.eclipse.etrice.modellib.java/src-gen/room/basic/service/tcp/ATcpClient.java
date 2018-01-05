@@ -30,7 +30,8 @@ class ClientRxThread extends Thread{
 				d.setLength(c);
 				port.receive(d);
 			}
-		}catch (IOException e){
+		}
+		catch (IOException e){
 			System.err.println("ClientRx: " + e.toString());
 		}
 	
@@ -173,12 +174,13 @@ public class ATcpClient extends ActorClassBase {
 	protected void action_TRANS_tr0_FROM_closed_TO_cp0_BY_openControlPort(InterfaceItemBase ifitem, DTcpControl transitionData) {
 	    lastError=0;
 	    try{
-	    socket = new Socket(transitionData.IPAddr,transitionData.TcpPort);
-	    (new ClientRxThread(PayloadPort, socket)).start();
-	    out = socket.getOutputStream();
-	    }catch(IOException e){
-	    System.err.println(e.toString());
-	    lastError=1;
+	    	socket = new Socket(transitionData.IPAddr,transitionData.TcpPort);
+	    	(new ClientRxThread(PayloadPort, socket)).start();
+	    	out = socket.getOutputStream();
+	    }
+	    catch(IOException e){
+	    	System.err.println(e.toString());
+	    	lastError=1;
 	    }
 	}
 	protected void action_TRANS_tr1_FROM_opened_TO_closed_BY_closeControlPort(InterfaceItemBase ifitem) {
@@ -186,8 +188,9 @@ public class ATcpClient extends ActorClassBase {
 	    	if (socket!=null){
 	    		socket.close();
 	    	}
-	    } catch (IOException e){
-	    System.err.println(e.toString());
+	    }
+	    catch (IOException e){
+	    	System.err.println(e.toString());
 	    }
 	}
 	protected void action_TRANS_tr2_FROM_cp0_TO_opened(InterfaceItemBase ifitem, DTcpControl transitionData) {
@@ -196,17 +199,19 @@ public class ATcpClient extends ActorClassBase {
 	protected void action_TRANS_socketError_FROM_cp0_TO_error_COND_socketError(InterfaceItemBase ifitem, DTcpControl transitionData) {
 	    ControlPort.error();
 	    try{
-	    socket.close();
-	    } catch(IOException e){
-	    System.err.println(e.toString());
+	    	socket.close();
+	    }
+	    catch(IOException e){
+	    	System.err.println(e.toString());
 	    }
 	}
 	protected void action_TRANS_tr3_FROM_opened_TO_opened_BY_sendPayloadPort_tr3(InterfaceItemBase ifitem, DTcpPayload transitionData) {
 	    try{
 	    	out.write(transitionData.getData(),0,transitionData.length);
-	    	}catch(IOException e){
-	    		System.err.println(e.toString());
-	    	}
+	    }
+	    catch(IOException e){
+	    	System.err.println(e.toString());
+	    }
 	}
 	
 	/* State Switch Methods */

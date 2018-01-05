@@ -100,6 +100,8 @@ public class RoomParser extends AbstractContentAssistParser {
 					put(grammarAccess.getLiteralTypeAccess().getAlternatives(), "rule__LiteralType__Alternatives");
 					put(grammarAccess.getRoomModelAccess().getGroup(), "rule__RoomModel__Group__0");
 					put(grammarAccess.getVarDeclAccess().getGroup(), "rule__VarDecl__Group__0");
+					put(grammarAccess.getMessageDataAccess().getGroup(), "rule__MessageData__Group__0");
+					put(grammarAccess.getMessageDataAccess().getGroup_0(), "rule__MessageData__Group_0__0");
 					put(grammarAccess.getRefableTypeAccess().getGroup(), "rule__RefableType__Group__0");
 					put(grammarAccess.getPrimitiveTypeAccess().getGroup(), "rule__PrimitiveType__Group__0");
 					put(grammarAccess.getPrimitiveTypeAccess().getGroup_6(), "rule__PrimitiveType__Group_6__0");
@@ -273,6 +275,8 @@ public class RoomParser extends AbstractContentAssistParser {
 					put(grammarAccess.getRoomModelAccess().getAnnotationTypesAssignment_5_8(), "rule__RoomModel__AnnotationTypesAssignment_5_8");
 					put(grammarAccess.getVarDeclAccess().getNameAssignment_0(), "rule__VarDecl__NameAssignment_0");
 					put(grammarAccess.getVarDeclAccess().getRefTypeAssignment_2(), "rule__VarDecl__RefTypeAssignment_2");
+					put(grammarAccess.getMessageDataAccess().getDeprecatedNameAssignment_0_0(), "rule__MessageData__DeprecatedNameAssignment_0_0");
+					put(grammarAccess.getMessageDataAccess().getRefTypeAssignment_1(), "rule__MessageData__RefTypeAssignment_1");
 					put(grammarAccess.getRefableTypeAccess().getTypeAssignment_0(), "rule__RefableType__TypeAssignment_0");
 					put(grammarAccess.getRefableTypeAccess().getRefAssignment_1(), "rule__RefableType__RefAssignment_1");
 					put(grammarAccess.getPrimitiveTypeAccess().getNameAssignment_1(), "rule__PrimitiveType__NameAssignment_1");

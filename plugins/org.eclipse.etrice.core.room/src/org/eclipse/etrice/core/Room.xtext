@@ -53,6 +53,9 @@ ActorContainerClass: ActorClass | SubSystemClass;
 VarDecl:
 	name=ID ':' refType=RefableType;
 
+MessageData:
+	(deprecatedName=ID ':')? refType=RefableType;
+
 RefableType: type=[DataType|FQN] (ref?='ref')?;
 
 DataType: PrimitiveType | EnumerationType | ComplexType;
@@ -143,7 +146,7 @@ CompoundProtocolClass:
 SubProtocol: 'SubProtocol' name=ID ':' protocol=[GeneralProtocolClass|FQN];
 
 Message:
-	(priv?='private')? 'Message' name=ID '(' (data=VarDecl)? ')' annotations+=Annotation*
+	(priv?='private')? 'Message' name=ID '(' (data=MessageData)? ')' annotations+=Annotation*
 	(docu=Documentation)?;
 
 PortClass:
@@ -172,6 +175,7 @@ OutMessageHandler:
 // **************************************************************
 // actor class
 
+@Override 
 ModelComponent: ActorClass;
 
 // some notes on ports
@@ -318,6 +322,7 @@ enum ReferenceType:
 // concrete message and interface item for state machines
 
 //AbstractMessage: Message;
+@Override 
 AbstractInterfaceItem: InterfaceItem;
 
 // **************************************************************
@@ -327,6 +332,7 @@ AbstractInterfaceItem: InterfaceItem;
 // (because then the lexer already would find this in places where it is not expected, e.g. in an Attribute)
 MULTIPLICITY returns ecore::EInt : '[' ('*'|INT) ']';
 
+@Override 
 AnnotationTargetType:
 	'DataClass' |
 	'ActorClass' |

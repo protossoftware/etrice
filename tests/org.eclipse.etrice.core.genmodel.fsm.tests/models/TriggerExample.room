@@ -38,9 +38,7 @@ RoomModel TemplateModel {
 						}
 						Transition in1wGuard: state1_1 -> state1_0 {
 							triggers {
-								<in1: p0 guard {
-									"condA"
-								}>
+								<in1: p0 guard '''condA'''>
 							}
 						}
 					}
@@ -55,9 +53,7 @@ RoomModel TemplateModel {
 				}
 				Transition in1withGuard: state1 -> state2 {
 					triggers {
-						<in1: p0 guard {
-							"condA"
-						}>
+						<in1: p0 guard '''condA'''>
 					}
 				}
 				Transition in2: my tr2 -> my tr2 {
