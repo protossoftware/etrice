@@ -31,8 +31,8 @@ import org.eclipse.etrice.core.genmodel.fsm.fsmgen.Link;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.CommunicationType;
 import org.eclipse.etrice.core.room.InterfaceItem;
+import org.eclipse.etrice.core.room.MessageData;
 import org.eclipse.etrice.core.room.ProtocolClass;
-import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.expressions.detailcode.GuardDetailExpressionProvider;
 import org.eclipse.etrice.expressions.detailcode.IDetailExpressionProvider;
@@ -188,7 +188,7 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 			triggerError = !triggerCompartment.triggersAvailable();
 		}
 		
-		VarDecl transitionEventData = getCommonData();
+		MessageData transitionEventData = getCommonData();
 		
 		FSMHelpers fsmHelpers = SupportUtil.getInstance().getFSMHelpers();
 		
@@ -240,7 +240,7 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 			}
 		}
 		
-		GuardDetailExpressionProvider exprProvider = new RuntimeDetailExpressionProvider(ac);
+		RuntimeDetailExpressionProvider exprProvider = new RuntimeDetailExpressionProvider(ac);
 		exprProvider.setTransitionEventData(transitionEventData);
 
 		if (inherited) {
@@ -270,15 +270,15 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 		}
 	}
 
-	private VarDecl getCommonData() {
-		VarDecl transitionEventData = null;
+	private MessageData getCommonData() {
+		MessageData transitionEventData = null;
 		Injector injector = new RoomStandaloneSetup().createInjectorAndDoEMFRegistration();
 		ExtendedFsmGenBuilder builder = new ExtendedFsmGenBuilder(injector, new NullDiagnostician());
 		GraphContainer gc = builder.createTransformedModel(ac);
 		builder.withCommonData(gc);
 		Link l = FsmGenExtensions.getLinkFor(gc, trans);
-		if (l != null && l.getCommonData() instanceof VarDecl) {
-			transitionEventData = (VarDecl) l.getCommonData();
+		if (l != null && l.getCommonData() instanceof MessageData) {
+			transitionEventData = (MessageData) l.getCommonData();
 		}
 		return transitionEventData;
 	}

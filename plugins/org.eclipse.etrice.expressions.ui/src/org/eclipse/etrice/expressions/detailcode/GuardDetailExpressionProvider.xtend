@@ -20,10 +20,10 @@ import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.core.room.DataClass
 import org.eclipse.etrice.core.room.InterfaceItem
 import org.eclipse.etrice.core.room.Message
+import org.eclipse.etrice.core.room.MessageData
 import org.eclipse.etrice.core.room.Operation
 import org.eclipse.etrice.core.room.Port
 import org.eclipse.etrice.core.room.SAP
-import org.eclipse.etrice.core.room.VarDecl
 import org.eclipse.etrice.core.room.util.RoomHelpers
 import org.eclipse.xtend.lib.annotations.AccessorType
 import org.eclipse.xtend.lib.annotations.Accessors
@@ -48,7 +48,7 @@ class GuardDetailExpressionProvider implements IDetailExpressionProvider {
 	protected val nameProvider = SimpleAttributeResolver.NAME_RESOLVER
 	
 	// optional
-	@Accessors(AccessorType.PUBLIC_SETTER) protected VarDecl transitionEventData
+	@Accessors(AccessorType.PUBLIC_SETTER) protected MessageData transitionEventData
 
 	override getInitialFeatures() {
 		val List<ExpressionFeature> scope = newArrayList
