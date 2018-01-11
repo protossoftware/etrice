@@ -11,7 +11,6 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.etrice.core.RoomStandaloneSetup;
 import org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem;
 import org.eclipse.etrice.core.fsm.fSM.CPBranchTransition;
 import org.eclipse.etrice.core.fsm.fSM.DetailCode;
@@ -23,20 +22,13 @@ import org.eclipse.etrice.core.fsm.fSM.Transition;
 import org.eclipse.etrice.core.fsm.fSM.TriggeredTransition;
 import org.eclipse.etrice.core.fsm.util.FSMHelpers;
 import org.eclipse.etrice.core.fsm.validation.FSMValidationUtilXtend.Result;
-import org.eclipse.etrice.core.genmodel.fsm.ExtendedFsmGenBuilder;
-import org.eclipse.etrice.core.genmodel.fsm.FsmGenExtensions;
-import org.eclipse.etrice.core.genmodel.fsm.NullDiagnostician;
-import org.eclipse.etrice.core.genmodel.fsm.fsmgen.GraphContainer;
-import org.eclipse.etrice.core.genmodel.fsm.fsmgen.Link;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.CommunicationType;
 import org.eclipse.etrice.core.room.InterfaceItem;
-import org.eclipse.etrice.core.room.MessageData;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
-import org.eclipse.etrice.expressions.detailcode.GuardDetailExpressionProvider;
+import org.eclipse.etrice.core.ui.util.UIExpressionUtil;
 import org.eclipse.etrice.expressions.detailcode.IDetailExpressionProvider;
-import org.eclipse.etrice.expressions.detailcode.RuntimeDetailExpressionProvider;
 import org.eclipse.etrice.ui.behavior.Activator;
 import org.eclipse.etrice.ui.behavior.fsm.actioneditor.IActionCodeEditor;
 import org.eclipse.etrice.ui.behavior.fsm.dialogs.AbstractMemberAwarePropertyDialog;
@@ -54,8 +46,6 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.IManagedForm;
-
-import com.google.inject.Injector;
 
 public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog implements ITransitionPropertyDialog {
 
@@ -103,7 +93,9 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 		}
 	}
 	
+	@SuppressWarnings("unused")
 	private ActorClass ac;
+	
 	private Transition trans;
 	private List<AbstractInterfaceItem> interfaceItems = new ArrayList<AbstractInterfaceItem>();
 	private DetailCodeToString m2s;
@@ -188,8 +180,6 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 			triggerError = !triggerCompartment.triggersAvailable();
 		}
 		
-		MessageData transitionEventData = getCommonData();
-		
 		FSMHelpers fsmHelpers = SupportUtil.getInstance().getFSMHelpers();
 		
 		if (trans instanceof GuardedTransition) {
@@ -200,14 +190,12 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 			}
 			else {
 				GuardValidator gv = new GuardValidator("guard must not be empty");
-				GuardDetailExpressionProvider exprProvider = new GuardDetailExpressionProvider(ac);
-				exprProvider.setTransitionEventData(transitionEventData);
 		
 				createActionCodeEditor(body, "&Guard:", guardedTrans.getGuard(),
 						trans,
 						FSMPackage.eINSTANCE.getGuardedTransition_Guard(), gv,
 						s2m_not_null, m2s_null_empty, true, true, true,
-						"empty guard", exprProvider);
+						"empty guard", UIExpressionUtil.selectExpressionProvider(guardedTrans.getGuard()));
 			}
 		}
 		
@@ -218,8 +206,6 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 			}
 			else {
 				GuardValidator gv = new GuardValidator("condition must not be empty");
-				GuardDetailExpressionProvider exprProvider = new GuardDetailExpressionProvider(ac);
-				exprProvider.setTransitionEventData(transitionEventData);
 
 				createActionCodeEditor(
 						body,
@@ -228,7 +214,7 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 						trans,
 						FSMPackage.eINSTANCE.getCPBranchTransition_Condition(),
 						gv, s2m_not_null, m2s_null_empty, true, true, true,
-						"empty condition", exprProvider);
+						"empty condition", UIExpressionUtil.selectExpressionProvider(trans.getAction()));
 			}
 		}
 
@@ -239,23 +225,20 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 				setTextSelectionAndFocus(baseActionCode, codeSelectionString);
 			}
 		}
-		
-		RuntimeDetailExpressionProvider exprProvider = new RuntimeDetailExpressionProvider(ac);
-		exprProvider.setTransitionEventData(transitionEventData);
 
 		if (inherited) {
 			if (refined!=null) {
 				createActionCodeEditor(body, "&Action Code:",
 						refined.getAction(), refined,
 						FSMPackage.eINSTANCE.getTransitionBase_Action(),
-						null, s2m, m2s, true, true, false, null, exprProvider);
+						null, s2m, m2s, true, true, false, null, UIExpressionUtil.selectExpressionProvider(refined.getAction()));
 			}
 		}
 		else
 		{
 			createActionCodeEditor(body, "&Action Code:", trans.getAction(),
 					trans, FSMPackage.eINSTANCE.getTransitionBase_Action(), null,
-					s2m, m2s, true, true, false, null, exprProvider);
+					s2m, m2s, true, true, false, null, UIExpressionUtil.selectExpressionProvider(trans.getAction()));
 		}
 		
 		createMembersAndMessagesButtons(body);
@@ -269,20 +252,7 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 			});
 		}
 	}
-
-	private MessageData getCommonData() {
-		MessageData transitionEventData = null;
-		Injector injector = new RoomStandaloneSetup().createInjectorAndDoEMFRegistration();
-		ExtendedFsmGenBuilder builder = new ExtendedFsmGenBuilder(injector, new NullDiagnostician());
-		GraphContainer gc = builder.createTransformedModel(ac);
-		builder.withCommonData(gc);
-		Link l = FsmGenExtensions.getLinkFor(gc, trans);
-		if (l != null && l.getCommonData() instanceof MessageData) {
-			transitionEventData = (MessageData) l.getCommonData();
-		}
-		return transitionEventData;
-	}
-
+	
 	/* (non-Javadoc)
 	 * @see org.eclipse.etrice.ui.common.dialogs.AbstractPropertyDialog#updateValidationFeedback(boolean)
 	 */

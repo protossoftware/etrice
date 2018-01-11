@@ -874,22 +874,24 @@ DataClass TCPConnectionData {
 
 **Example**:
 
-```room
-DataClass SimpleDataClass {
-	Attribute attribute1: uint16
-	Attribute attribute2: uint32
-}
+¦¦¦
+		```room
+		DataClass SimpleDataClass {
+			Attribute attribute1: uint16
+			Attribute attribute2: uint32
+		}
 
-DataClass DataClassExample {
-	Attribute attribute1: uint32
-	Attribute attribute2: SimpleDataClass
-	Attribute attribute3: voidType ref
-	
-	Operation operation1(param1: uint32, param2: uint16): boolean '''
-		return true;
-	'''
-}
-```
+		DataClass DataClassExample {
+			Attribute attribute1: uint32
+			Attribute attribute2: SimpleDataClass
+			Attribute attribute3: voidType ref
+			
+			Operation operation1(param1: uint32, param2: uint16): boolean '''
+				return true;
+			'''
+		}
+		```
+	¦¦¦
 
 ---
 
@@ -1178,25 +1180,27 @@ An ExternalType is used to make an target language type accessible in ROOM
 
 **Example**:
 
-```room
-// Include is needed when used (e.g. in ActorClassWithExternalType)
-ExternalType someStructType -> "struct FILE_HANDLE"
-
-ActorClass ActorClassWithExternalType{
-	Structure {
-		usercode1 '''
-			// #include <___.h> /* User includes here*/
-		'''
-		Attribute someHandle : someStructType ref // needs include
-	}
-	Behavior {
-		Operation operation1(param1: charPtr) '''
-			// external calls or casts may need includes
-			write(someHandle, param1);
-		'''
-	}
-}
-```
+¦¦¦
+		```room
+		// Include is needed when used (e.g. in ActorClassWithExternalType)
+		ExternalType someStructType -> "struct FILE_HANDLE"
+		
+		ActorClass ActorClassWithExternalType{
+			Structure {
+				usercode1 '''
+					// #include <___.h> /* User includes here*/
+				'''
+				Attribute someHandle : someStructType ref // needs include
+			}
+			Behavior {
+				Operation operation1(param1: charPtr) '''
+					// external calls or casts may need includes
+					write(someHandle, param1);
+				'''
+			}
+		}
+		```
+	¦¦¦
 
 ---
 
@@ -1266,43 +1270,45 @@ UserCode <==> non-accessible implicit late refinement
 
 **Example**:
 
-```room
-ActorClass ActorSubClass extends ActorBaseClass {
-	// inherits all elements from super type hierarchy
-}
-
-ActorClass ActorBaseClass {
-	Interface {
-		Port port1 : ProtocolBaseClass
-	}
-	Structure {
-		Attribute attribute1 : uint32
-	}
-	Behavior {
-		Operation operation1() '''
-			return;
-		'''
-	}
-}
-
-ProtocolClass ProtocolSubClass extends ProtocolBaseClass {
-	// inherits all elements from super type hierarchy
-}
-
-ProtocolClass ProtocolBaseClass {
-	incoming {
-		Message message1()
-	}
-}
-
-DataClass DataSubClass extends DataBaseClass {
-	// inherits all elements from super type hierarchy
-}
-
-DataClass DataBaseClass {
-	Attribute attribute1 : uint32
-}
-```
+¦¦¦
+		```room
+		ActorClass ActorSubClass extends ActorBaseClass {
+			// inherits all elements from super type hierarchy
+		}
+		
+		ActorClass ActorBaseClass {
+			Interface {
+				Port port1 : ProtocolBaseClass
+			}
+			Structure {
+				Attribute attribute1 : uint32
+			}
+			Behavior {
+				Operation operation1() '''
+					return;
+				'''
+			}
+		}
+		
+		ProtocolClass ProtocolSubClass extends ProtocolBaseClass {
+			// inherits all elements from super type hierarchy
+		}
+		
+		ProtocolClass ProtocolBaseClass {
+			incoming {
+				Message message1()
+			}
+		}
+		
+		DataClass DataSubClass extends DataBaseClass {
+			// inherits all elements from super type hierarchy
+		}
+		
+		DataClass DataBaseClass {
+			Attribute attribute1 : uint32
+		}
+		```
+		¦¦¦
 
 ---
 
@@ -1538,43 +1544,45 @@ Operations can be used to define a piece of reusable logic. The definition consi
 
 **Example**:
 
-```room
-import room.basic.types.* from "../../../org.eclipse.etrice.modellib.c/model/Types.room"
-
-DataClass DataClassWithOperation {
-	Attribute attribute1 : uint32
-	
-	Operation operation1(param1: uint32, param2: int32): boolean '''
-		return attribute1 > (param1 - param2);
-	'''
-}
-
-ActorClass ActorClassWithOperation {
-	Structure {
-		Attribute attribute1 : uint32
-	}
-	Behavior {
-		Operation operation1(param1: uint32, param2: int32): boolean '''
-			return attribute1 > (param1 - param2);
-		'''
-	}
-}
-
-ActorClass ActorClassWithOperation2 {
-	Structure {
-		usercode1 '''
-			// #include <___.h> /* User includes here */
-		'''
-		Attribute someHandle : voidType ref
-	}
-	Behavior {
-		Operation operation1(param1: charPtr) '''
-			// external calls or casts may need includes
-			write(someHandle, param1);
-		'''
-	}
-}
-```
+¦¦¦
+		```room
+		import room.basic.types.* from "../../../org.eclipse.etrice.modellib.c/model/Types.room"
+		
+		DataClass DataClassWithOperation {
+			Attribute attribute1 : uint32
+			
+			Operation operation1(param1: uint32, param2: int32): boolean '''
+				return attribute1 > (param1 - param2);
+			'''
+		}
+		
+		ActorClass ActorClassWithOperation {
+			Structure {
+				Attribute attribute1 : uint32
+			}
+			Behavior {
+				Operation operation1(param1: uint32, param2: int32): boolean '''
+					return attribute1 > (param1 - param2);
+				'''
+			}
+		}
+		
+		ActorClass ActorClassWithOperation2 {
+			Structure {
+				usercode1 '''
+					// #include <___.h> /* User includes here */
+				'''
+				Attribute someHandle : voidType ref
+			}
+			Behavior {
+				Operation operation1(param1: charPtr) '''
+					// external calls or casts may need includes
+					write(someHandle, param1);
+				'''
+			}
+		}
+		```
+	¦¦¦
 
 ---
 
@@ -3109,12 +3117,6 @@ The MSCLogging is activated by default, but can be set manually in the [Generati
 
 
 
-[CCodeGenerator]: #ccodegenerator
-[JavaCodeGenerator]: #javacodegenerator
-[CPPCodeGenerator]: #cppcodegenerator
-[GenerationOptions]: #generationoptions
-[MSCLogging]: #msclogging
-[DataLogging]: #datalogging
 [TextualROOMEditor]: #textualroomeditor
 [OutlineView]: #outlineview
 [GraphicalBehaviorEditor]: #graphicalbehavioreditor
@@ -3156,3 +3158,9 @@ The MSCLogging is activated by default, but can be set manually in the [Generati
 [SAP]: #sap
 [ServiceImplementation]: #serviceimplementation
 [SPP]: #spp
+[CCodeGenerator]: #ccodegenerator
+[JavaCodeGenerator]: #javacodegenerator
+[CPPCodeGenerator]: #cppcodegenerator
+[GenerationOptions]: #generationoptions
+[MSCLogging]: #msclogging
+[DataLogging]: #datalogging

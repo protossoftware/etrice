@@ -179,11 +179,11 @@ Protocol classes have only textual notation. The example defines a protocol clas
 ```room
 ProtocolClass ProtocolClass1 {
 	incoming {
-		Message m1(data: int32}
+		Message m1(int32}
 		Message m2()
 	}
 	outgoing {
-		Message m3(data: DataClass1}
+		Message m3(DataClass1}
 		Message m4()
 	}
 }

@@ -27,6 +27,7 @@ Eclipse Help
 ## HowTo Edit
 
 To update/publish everything run *make.xml*. Logs can be found in folder */tmp*.
+Prerequisite: Make at least a dummy change in featuremodel/etrice.featurizer to force code generation to folder */feature-gen*.
 
 ### FeatureModel
 

@@ -43,10 +43,14 @@ class ExtendedFsmGenBuilder extends BasicFsmGenBuilder {
 	
 	val factory = FsmGenFactory.eINSTANCE
 	
+	new(Injector injector) {
+		this(injector, null)
+	}
+	
 	new(Injector injector, IDiagnostician validator) {
 		super()
 		injector.injectMembers(this)
-		this.validator = validator
+		this.validator = if(validator === null) new NullDiagnostician else validator
 	}
 	
 	/**

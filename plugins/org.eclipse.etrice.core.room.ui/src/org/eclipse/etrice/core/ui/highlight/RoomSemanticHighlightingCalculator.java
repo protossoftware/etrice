@@ -18,6 +18,7 @@ import org.eclipse.etrice.core.converter.RoomValueConverterService;
 import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.etrice.core.services.RoomGrammarAccess;
 import org.eclipse.etrice.core.ui.util.UIExpressionUtil;
+import org.eclipse.etrice.core.ui.util.UIExpressionUtil.GenModelAccess;
 import org.eclipse.etrice.expressions.detailcode.IDetailExpressionProvider;
 import org.eclipse.etrice.expressions.ui.highlight.ExpressionRuleFactory;
 import org.eclipse.etrice.expressions.ui.highlight.TargetLanguageRuleFactory;
@@ -30,6 +31,7 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.util.CancelIndicator;
 
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
@@ -47,30 +49,37 @@ public class RoomSemanticHighlightingCalculator extends BaseSemanticHighlighter 
 	RoomValueConverterService converterService;
 	
 	@Override
-	protected void provideHighlightingFor(INode node, XtextResource resource, IHighlightedPositionAcceptor acceptor) {
-		super.provideHighlightingFor(node, resource, acceptor);
-		
-		EObject obj = node.getGrammarElement();
-		if (obj instanceof RuleCall) {
-			RuleCall ruleCall = (RuleCall) obj;
-			if(ruleCall.getRule() == grammar.getAnnotationRule()){
-				acceptor.addPosition(
-						node.getOffset(),
-						node.getLength(),
-						RoomHighlightingConfiguration.HL_ANNOTATION_ID);
-			}
-			else if(node.getParent().getSemanticElement() instanceof DetailCode && ruleCall.getRule() == grammar.getCC_STRINGRule()) {
-				detailCodeHighlight(node, acceptor);
-			}
+	public void provideHighlightingFor(XtextResource resource, IHighlightedPositionAcceptor acceptor, CancelIndicator cancelIndicator) {
+		if (resource == null || resource.getParseResult() == null)
+			return;
+
+		GenModelAccess genModelAccess = new GenModelAccess();
+		INode root = resource.getParseResult().getRootNode();
+		for (INode node : root.getAsTreeIterable()) {
+			if(cancelIndicator.isCanceled()) 
+				break;
 			
+			super.provideHighlightingFor(node, resource, acceptor);	
+			
+			EObject obj = node.getGrammarElement();
+			if (obj instanceof RuleCall) {
+				RuleCall ruleCall = (RuleCall) obj;
+				if(ruleCall.getRule() == grammar.getAnnotationRule()){
+					acceptor.addPosition(node.getOffset(), node.getLength(), RoomHighlightingConfiguration.HL_ANNOTATION_ID);
+				}
+				else if(node.getParent().getSemanticElement() instanceof DetailCode && ruleCall.getRule() == grammar.getCC_STRINGRule()) {
+					detailCodeHighlight(node, acceptor, genModelAccess);
+				}
+			}
+
 		}
-		
 	}
 	
-	protected void detailCodeHighlight(INode node, IHighlightedPositionAcceptor acceptor) {
+	protected void detailCodeHighlight(INode node, IHighlightedPositionAcceptor acceptor, GenModelAccess genModelAccess) {
 		final String text = converterService.getCC_StringConverter().stripDelim(node.getText());
 		final int offset = node.getOffset() + converterService.getCC_StringConverter().getDelim().length();
-		IDetailExpressionProvider exprProvider = UIExpressionUtil.selectExpressionProvider(node.getSemanticElement().eContainer());
+		IDetailExpressionProvider exprProvider = UIExpressionUtil.selectExpressionProvider(
+				node.getSemanticElement(), genModelAccess);
 		XtextHighlightStyles styles = new XtextHighlightStyles();
 		RuleBasedScanner scanner = new RuleBasedScanner();
 		scanner.setRules(Iterables.toArray(Iterables.concat(

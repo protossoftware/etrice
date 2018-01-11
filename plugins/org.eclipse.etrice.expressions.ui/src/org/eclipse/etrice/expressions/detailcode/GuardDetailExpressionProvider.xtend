@@ -54,7 +54,9 @@ class GuardDetailExpressionProvider implements IDetailExpressionProvider {
 		val List<ExpressionFeature> scope = newArrayList
 
 		if(transitionEventData !== null) { 
-			scope += transitionEventData.createExprFeature(IDetailExpressionProvider.ExpressionPostfix.NONE)
+			scope += new ExpressionFeature('transitionData', ExpressionPostfix.NONE) => [
+				data = transitionEventData
+			]
 		}
 		scope += actorClass.allInterfaceItems.filter[isEventDriven || !isConjugated].map[
 			switch it {

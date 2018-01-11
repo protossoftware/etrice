@@ -34,7 +34,9 @@ class DefaultDetailExpressionProvider extends GuardDetailExpressionProvider {
 		val List<ExpressionFeature> scope = newArrayList
 
 		if(transitionEventData !== null) { 
-			scope += transitionEventData.createExprFeature(ExpressionPostfix.NONE)
+			scope += new ExpressionFeature('transitionData', ExpressionPostfix.NONE) => [
+				data = transitionEventData
+			]
 		}
 		scope += actorClass.latestOperations.map[createExprFeature]
 		scope += actorClass.allAttributes.map[createExprFeature]

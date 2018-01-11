@@ -32,6 +32,7 @@ import org.eclipse.jface.viewers.ILabelProvider
 import org.eclipse.swt.graphics.Image
 import org.eclipse.swt.graphics.Point
 import org.eclipse.etrice.generator.generic.ILanguageExtension
+import org.eclipse.etrice.core.room.MessageData
 
 @Singleton
 class DetailExpressionProposalConfig{
@@ -99,20 +100,23 @@ class DetailExpressionProposalConfig{
 		var classInfo = if(data instanceof EObject) data.eClass.name else ""
 		switch data {
 			Attribute:
-				typedInfo = data.type.type.name
+				typedInfo = data?.type?.type?.name
 			InterfaceItem:
-				typedInfo = roomHelpers.getProtocol(data).name
+				typedInfo = roomHelpers.getProtocol(data)?.name
 			RuntimeMethodExpressionData case feature.id == RuntimeDetailExpressionProvider.RT_METHOD_GET_REPLICATION:
 				typedInfo = 'int'
 			VarDecl: {
-				typedInfo = data.refType.type.name
+				typedInfo = data?.refType?.type?.name
 				classInfo = ""
+			}
+			MessageData: {
+				typedInfo = data?.refType?.type?.name
 			}
 			default: {
 				val label = labelProvider.getText(data)
 
 				// if label starts with completion then label might be better
-				if(!Strings.commonPrefix(label, completionInfo).empty) completionInfo = label
+				if(label !== null && !Strings.commonPrefix(label, completionInfo).empty) completionInfo = label
 			}
 		}
 
