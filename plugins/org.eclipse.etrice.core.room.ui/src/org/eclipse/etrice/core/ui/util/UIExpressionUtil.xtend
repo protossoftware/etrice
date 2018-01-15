@@ -23,6 +23,8 @@ import org.eclipse.etrice.expressions.detailcode.IDetailExpressionProvider
 import org.eclipse.jface.text.Document
 import org.eclipse.xtext.nodemodel.ILeafNode
 import org.eclipse.etrice.expressions.detailcode.IDetailExpressionProvider.ExpressionFeature
+import org.eclipse.etrice.core.room.Operation
+import org.eclipse.etrice.core.room.ClassStructor
 
 class UIExpressionUtil {
 
@@ -30,6 +32,8 @@ class UIExpressionUtil {
 		switch it {
 			Guard: new GuardDetailExpressionProvider(findActorClass)
 			StateGraphItem: new DefaultDetailExpressionProvider(findActorClass)
+			Operation: new DefaultDetailExpressionProvider(findActorClass)
+			ClassStructor: new GuardDetailExpressionProvider(findActorClass)
 			default: new IDetailExpressionProvider.EmptyDetailExpressionProvider
 		}
 	}
