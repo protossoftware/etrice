@@ -36,22 +36,24 @@ class DefaultDetailExpressionProvider extends GuardDetailExpressionProvider {
 		if(transitionEventData !== null) { 
 			scope += transitionEventData.createExprFeature(ExpressionPostfix.NONE)
 		}
-		scope += actorClass.latestOperations.map[createExprFeature]
-		scope += actorClass.allAttributes.map[createExprFeature]
-		actorClass.allInterfaceItems.forEach [
-			switch it {
-				SPP case isEventDriven/* fall through */,
-				Port case isEventDriven && isReplicated: {
-					scope += createExprFeature(ExpressionPostfix.NONE) // additional feature for broadcast 
-					scope += createExprFeature(ExpressionPostfix.BRACKETS)
+		if (actorClass!==null) {
+			scope += actorClass.latestOperations.map[createExprFeature]
+			scope += actorClass.allAttributes.map[createExprFeature]
+			actorClass.allInterfaceItems.forEach [
+				switch it {
+					SPP case isEventDriven/* fall through */,
+					Port case isEventDriven && isReplicated: {
+						scope += createExprFeature(ExpressionPostfix.NONE) // additional feature for broadcast 
+						scope += createExprFeature(ExpressionPostfix.BRACKETS)
+					}
+					Port case isReplicated/* fall through  */,
+					SPP:
+						scope += createExprFeature(ExpressionPostfix.BRACKETS)
+					default:
+						scope += createExprFeature(ExpressionPostfix.NONE)
 				}
-				Port case isReplicated/* fall through  */,
-				SPP:
-					scope += createExprFeature(ExpressionPostfix.BRACKETS)
-				default:
-					scope += createExprFeature(ExpressionPostfix.NONE)
-			}
-		]
+			]
+		}
 
 		return scope.filterNull.filter[id !== null].toList
 	}
