@@ -696,11 +696,12 @@ public class TransitionSupport {
 				Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 	        	Injector injector = ((IInjectorProvider) getFeatureProvider()).getInjector();
 	        	IFSMDialogFactory factory = injector.getInstance(IFSMDialogFactory.class);
-				ITransitionPropertyDialog dlg = factory.createTransitionPropertyDialog(shell, FSMSupportUtil.getInstance().getModelComponent(getDiagram()), trans);
+	        	ModelComponent mc = FSMSupportUtil.getInstance().getModelComponent(getDiagram());
+				ITransitionPropertyDialog dlg = factory.createTransitionPropertyDialog(shell, mc, trans);
 				if (dlg.open()==Window.OK){
 					boolean inherited = FSMSupportUtil.getInstance().isInherited(getDiagram(), trans);
 					Color lineColor = inherited? manageColor(INHERITED_COLOR):manageColor(LINE_COLOR);
-			        Color fillColor = FSMSupportUtil.getInstance().getFSMHelpers().hasDetailCode(trans.getAction())?
+			        Color fillColor = FSMSupportUtil.getInstance().getFSMHelpers().hasActionCode(trans, mc)?
 			        		lineColor:manageColor(FILL_COLOR);
 					updateLabel(trans, conn, fillColor);
 				
