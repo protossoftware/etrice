@@ -69,7 +69,7 @@ class BaseFormatter extends AbstractFormatter2 {
 	
 	def dispatch void format(Annotation it, extension IFormattableDocument document) {
 		regionFor.keyword(annotationAccess.commercialAtKeyword_0).append[noSpace]
-		attributes.forEach[prepend[newLine]]
+		if(attributes.size > 1) attributes.forEach[prepend[newLine]]	// separate lines for attributes only for more than one present attribute
 		eContents.forEach[format] // format children
 	}
 	
