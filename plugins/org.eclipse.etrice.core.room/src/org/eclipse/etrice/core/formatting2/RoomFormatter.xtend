@@ -63,22 +63,23 @@ class RoomFormatter extends FSMFormatter {
 		eContents.tail.filter(EnumerationType).forEach[prependDefaultNewLines(document)]
 		eContents.tail.filter(ExternalType).forEach[prependDefaultNewLines(document)]
 		
-		eAllContents.forEach[
-			format	// recursive
-		]
+		eContents.forEach[format] // format children
 	}	
 	
 	def dispatch void format(RoomClass it, extension IFormattableDocument document) {
 		eContents.filter[!(it instanceof DetailCode || it instanceof Documentation)].forEach[prependDefaultNewLines(document)]
 		regionFor.keywords('usercode1', 'usercode2', 'usercode3', 'incoming', 'outgoing', 'regular', 'conjugated', 'Interface', 'Structure', 'Behavior').forEach[prependDefaultNewLines(document)]
+		eContents.forEach[format] // format children
 	}
 	
 	def dispatch void format(PortClass it, extension IFormattableDocument document) {
 		eContents.filter[!(it instanceof DetailCode || it instanceof Documentation)].forEach[prependDefaultNewLines(document)]
+		eContents.forEach[format] // format children
 	}
 	
 	def dispatch void format(Operation it, extension IFormattableDocument document) {
 		arguments.forEach[append[noSpace]]
+		eContents.forEach[format] // format children
 	}
 	
 	def dispatch void format(Attribute it, extension IFormattableDocument document) {
@@ -86,5 +87,6 @@ class RoomFormatter extends FSMFormatter {
 			key.prepend[oneSpace]
 			interior[noSpace]
 		]
+		eContents.forEach[format] // format children
 	}
 }
