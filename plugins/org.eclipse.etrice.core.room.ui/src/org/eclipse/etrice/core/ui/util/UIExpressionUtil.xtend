@@ -12,26 +12,22 @@
 
 package org.eclipse.etrice.core.ui.util
 
+import java.util.Map
 import org.eclipse.emf.ecore.EObject
-import org.eclipse.etrice.core.fsm.fSM.Guard
-import org.eclipse.etrice.core.fsm.fSM.StateGraphItem
+import org.eclipse.etrice.core.fsm.fSM.ModelComponent
 import org.eclipse.etrice.core.fsm.fSM.TransitionBase
+import org.eclipse.etrice.core.genmodel.fsm.ExtendedFsmGenBuilder
 import org.eclipse.etrice.core.genmodel.fsm.FsmGenExtensions
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.GraphContainer
 import org.eclipse.etrice.core.room.ActorClass
-import org.eclipse.etrice.expressions.detailcode.DefaultDetailExpressionProvider
+import org.eclipse.etrice.core.room.MessageData
+import org.eclipse.etrice.core.ui.RoomUiModule
 import org.eclipse.etrice.expressions.detailcode.DetailExpressionAssistParser
-import org.eclipse.etrice.expressions.detailcode.GuardDetailExpressionProvider
+import org.eclipse.etrice.expressions.detailcode.DetailExpressionProvider
 import org.eclipse.etrice.expressions.detailcode.IDetailExpressionProvider
 import org.eclipse.etrice.expressions.detailcode.IDetailExpressionProvider.ExpressionFeature
 import org.eclipse.jface.text.Document
 import org.eclipse.xtext.nodemodel.ILeafNode
-import org.eclipse.etrice.core.room.MessageData
-import org.eclipse.etrice.core.genmodel.fsm.ExtendedFsmGenBuilder
-import java.util.Map
-import org.eclipse.etrice.core.fsm.fSM.ModelComponent
-import org.eclipse.etrice.core.ui.RoomUiModule
-
 
 import static org.eclipse.xtext.EcoreUtil2.getContainerOfType
 
@@ -54,19 +50,15 @@ class UIExpressionUtil {
 	
 	}
 	
-	static def IDetailExpressionProvider selectExpressionProvider(EObject it, GenModelAccess genModelAccess) {		
-		val ac = getContainerOfType(it, ActorClass) 		
-		val exprProvider = switch it {
-			case getContainerOfType(it, Guard) !== null && ac !== null: new GuardDetailExpressionProvider(ac)
-			case getContainerOfType(it, StateGraphItem) !== null && ac !== null: new DefaultDetailExpressionProvider(ac)
-			default: new IDetailExpressionProvider.EmptyDetailExpressionProvider
-		}
-		if(exprProvider instanceof GuardDetailExpressionProvider) {
-			val transition = getContainerOfType(it, TransitionBase)
-			if(transition !== null) {
-				val commonData = FsmGenExtensions.getLinkFor(genModelAccess.get(ac), transition)?.commonData
-				if(commonData instanceof MessageData)
-					exprProvider.transitionEventData = commonData
+	static def IDetailExpressionProvider selectExpressionProvider(EObject it, GenModelAccess genModelAccess) {			
+		val exprProvider = new DetailExpressionProvider(it)
+		val transition = getContainerOfType(it, TransitionBase)
+		if(transition !== null) {
+			val ac = getContainerOfType(it, ActorClass)
+			if(ac !== null) {
+			val commonData = FsmGenExtensions.getLinkFor(genModelAccess.get(ac), transition)?.commonData
+			if(commonData instanceof MessageData)
+				exprProvider.transitionEventData = commonData	
 			}
 		}
 		

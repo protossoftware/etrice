@@ -17,7 +17,7 @@ import org.eclipse.etrice.core.fsm.fSM.State;
 import org.eclipse.etrice.core.fsm.validation.FSMValidationUtilXtend.Result;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
-import org.eclipse.etrice.expressions.detailcode.RuntimeDetailExpressionProvider;
+import org.eclipse.etrice.core.ui.util.UIExpressionUtil;
 import org.eclipse.etrice.ui.behavior.Activator;
 import org.eclipse.etrice.ui.behavior.fsm.actioneditor.IActionCodeEditor;
 import org.eclipse.etrice.ui.behavior.fsm.dialogs.AbstractMemberAwarePropertyDialog;
@@ -210,7 +210,7 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog imple
 			StringToDetailCode s2m, DetailCodeToString m2s) {
 
 		IActionCodeEditor entry = super.createActionCodeEditor(parent, label,
-				detailCode, state, feat, s2m, m2s, new RuntimeDetailExpressionProvider(ac));
+				detailCode, state, feat, s2m, m2s, UIExpressionUtil.selectExpressionProvider(detailCode));
 
 		Control control;
 		if (entry != null)

@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EObject
 import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.core.room.InterfaceItem
 import org.eclipse.etrice.core.room.Message
+import org.eclipse.etrice.core.room.MessageData
 import org.eclipse.etrice.core.room.Operation
 import org.eclipse.etrice.core.room.Port
 import org.eclipse.etrice.core.room.SPP
@@ -26,13 +27,10 @@ import org.eclipse.etrice.core.room.VarDecl
 import org.eclipse.etrice.core.room.util.RoomHelpers
 import org.eclipse.etrice.expressions.detailcode.IDetailExpressionProvider.ExpressionFeature
 import org.eclipse.etrice.expressions.detailcode.IDetailExpressionProvider.ExpressionPostfix
-import org.eclipse.etrice.expressions.detailcode.RuntimeDetailExpressionProvider
-import org.eclipse.etrice.expressions.detailcode.RuntimeDetailExpressionProvider.RuntimeMethodExpressionData
+import org.eclipse.etrice.generator.generic.ILanguageExtension
 import org.eclipse.jface.viewers.ILabelProvider
 import org.eclipse.swt.graphics.Image
 import org.eclipse.swt.graphics.Point
-import org.eclipse.etrice.generator.generic.ILanguageExtension
-import org.eclipse.etrice.core.room.MessageData
 
 @Singleton
 class DetailExpressionProposalConfig{
@@ -103,8 +101,8 @@ class DetailExpressionProposalConfig{
 				typedInfo = data?.type?.type?.name
 			InterfaceItem:
 				typedInfo = roomHelpers.getProtocol(data)?.name
-			RuntimeMethodExpressionData case feature.id == RuntimeDetailExpressionProvider.RT_METHOD_GET_REPLICATION:
-				typedInfo = 'int'
+//			RuntimeMethodExpressionData case feature.id == RuntimeDetailExpressionProvider.RT_METHOD_GET_REPLICATION:
+//				typedInfo = 'int'
 			VarDecl: {
 				typedInfo = data?.refType?.type?.name
 				classInfo = ""

@@ -17,7 +17,6 @@ import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.core.room.InterfaceItem
 import org.eclipse.etrice.core.room.Operation
 import org.eclipse.etrice.expressions.detailcode.IDetailExpressionProvider.ExpressionFeature
-import org.eclipse.etrice.expressions.detailcode.RuntimeDetailExpressionProvider.RuntimeMethodExpressionData
 import org.eclipse.swt.graphics.RGB
 
 /** Enables re-usability of scanner for xtext and jface editor */
@@ -56,8 +55,8 @@ abstract class AbstractHighlightStyles {
 				operation
 			EObject:
 				specialFeature // unknown model object == special
-			RuntimeMethodExpressionData:
-				operation
+//			RuntimeMethodExpressionData:
+//				operation
 		}
 	}
 	
