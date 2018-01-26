@@ -10,11 +10,11 @@
  */
 package org.eclipse.etrice.ui.behavior.fsm.support;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.util.List;
 import org.eclipse.etrice.core.fsm.fSM.ChoicePoint;
 import org.eclipse.etrice.core.fsm.fSM.InitialTransition;
+import org.eclipse.etrice.core.fsm.fSM.RefinedTransition;
 import org.eclipse.etrice.core.fsm.fSM.State;
 import org.eclipse.etrice.core.fsm.fSM.StateGraph;
 import org.eclipse.etrice.core.fsm.fSM.StateGraphNode;
@@ -71,7 +71,7 @@ public class GenModelStateGraphContext implements IStateGraphContext {
   public List<IStateGraphContext> getChildren() {
     final Function1<Node, Boolean> _function = (Node it) -> {
       Graph _subgraph = it.getSubgraph();
-      return Boolean.valueOf((!Objects.equal(_subgraph, null)));
+      return Boolean.valueOf((_subgraph != null));
     };
     final Function1<Node, IStateGraphContext> _function_1 = (Node it) -> {
       Graph _subgraph = it.getSubgraph();
@@ -129,9 +129,19 @@ public class GenModelStateGraphContext implements IStateGraphContext {
   
   @Override
   public List<Transition> getTransitions() {
-    final Function1<Link, TransitionBase> _function = (Link it) -> {
-      return it.getTransition();
-    };
-    return IterableExtensions.<Transition>toList(Iterables.<Transition>filter(ListExtensions.<Link, TransitionBase>map(this.graph.getLinks(), _function), Transition.class));
+    List<Transition> _xblockexpression = null;
+    {
+      final Function1<Link, TransitionBase> _function = (Link it) -> {
+        return it.getTransition();
+      };
+      final List<TransitionBase> baseTransitions = ListExtensions.<Link, TransitionBase>map(this.graph.getLinks(), _function);
+      Iterable<Transition> _filter = Iterables.<Transition>filter(baseTransitions, Transition.class);
+      final Function1<RefinedTransition, Transition> _function_1 = (RefinedTransition it) -> {
+        return it.getTarget();
+      };
+      Iterable<Transition> _map = IterableExtensions.<RefinedTransition, Transition>map(Iterables.<RefinedTransition>filter(baseTransitions, RefinedTransition.class), _function_1);
+      _xblockexpression = IterableExtensions.<Transition>toList(Iterables.<Transition>concat(_filter, _map));
+    }
+    return _xblockexpression;
   }
 }
