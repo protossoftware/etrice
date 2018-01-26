@@ -56,13 +56,15 @@ class GuardDetailExpressionProvider implements IDetailExpressionProvider {
 		if(transitionEventData !== null) { 
 			scope += transitionEventData.createExprFeature(IDetailExpressionProvider.ExpressionPostfix.NONE)
 		}
-		scope += actorClass.allInterfaceItems.filter[isEventDriven || !isConjugated].map[
-			switch it {
-				Port case isReplicated: createExprFeature(IDetailExpressionProvider.ExpressionPostfix.BRACKETS)
-				default: createExprFeature(IDetailExpressionProvider.ExpressionPostfix.NONE)
-		}]
-		scope += actorClass.latestOperations.map[createExprFeature]
-		scope += actorClass.allAttributes.map[createExprFeature]
+		if(actorClass !== null) {
+			scope += actorClass.allInterfaceItems.filter[isEventDriven || !isConjugated].map[
+				switch it {
+					Port case isReplicated: createExprFeature(IDetailExpressionProvider.ExpressionPostfix.BRACKETS)
+					default: createExprFeature(IDetailExpressionProvider.ExpressionPostfix.NONE)
+			}]
+			scope += actorClass.latestOperations.map[createExprFeature]
+			scope += actorClass.allAttributes.map[createExprFeature]
+		}
 
 		return scope.filterNull.filter[id !== null].toList
 	}
