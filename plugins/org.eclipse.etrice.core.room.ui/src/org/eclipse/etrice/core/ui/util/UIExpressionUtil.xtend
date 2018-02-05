@@ -47,7 +47,7 @@ class UIExpressionUtil {
 			
 			return cache.get(mc)
 		}
-	
+		
 	}
 	
 	static def IDetailExpressionProvider selectExpressionProvider(EObject it, GenModelAccess genModelAccess) {			
@@ -56,9 +56,9 @@ class UIExpressionUtil {
 		if(transition !== null) {
 			val ac = getContainerOfType(it, ActorClass)
 			if(ac !== null) {
-			val commonData = FsmGenExtensions.getLinkFor(genModelAccess.get(ac), transition)?.commonData
-			if(commonData instanceof MessageData)
-				exprProvider.transitionEventData = commonData	
+				val commonData = FsmGenExtensions.getLinkFor(genModelAccess.get(ac), transition)?.commonData
+				if(commonData instanceof MessageData)
+					exprProvider.transitionEventData = commonData	
 			}
 		}
 		
@@ -72,7 +72,7 @@ class UIExpressionUtil {
 	
 	static def ExpressionFeature findAtOffset(ILeafNode leafNode, int offset) {
 		// work in progress - show eObject for detail code
-		val exprProvider = UIExpressionUtil.selectExpressionProvider(leafNode.semanticElement)
+		val exprProvider = selectExpressionProvider(leafNode.semanticElement)
 		
 		// TODO explicit support for hover info in DetailExpressionAssistParser
 		val text = leafNode.text

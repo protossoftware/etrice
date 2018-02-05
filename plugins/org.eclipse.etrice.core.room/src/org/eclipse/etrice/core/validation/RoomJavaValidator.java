@@ -16,22 +16,20 @@ package org.eclipse.etrice.core.validation;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.etrice.core.common.base.Annotation;
 import org.eclipse.etrice.core.common.base.BasePackage;
 import org.eclipse.etrice.core.common.base.Import;
 import org.eclipse.etrice.core.common.base.LiteralType;
+import org.eclipse.etrice.core.common.base.util.ImportHelpers;
 import org.eclipse.etrice.core.common.validation.ValidationHelpers;
 import org.eclipse.etrice.core.common.validation.ValidationHelpers.NamedObject;
 import org.eclipse.etrice.core.common.validation.ValidationHelpers.NamedObjectList;
@@ -65,24 +63,22 @@ import org.eclipse.etrice.core.room.RefPath;
 import org.eclipse.etrice.core.room.ReferenceType;
 import org.eclipse.etrice.core.room.RoomAnnotationTargetEnum;
 import org.eclipse.etrice.core.room.RoomClass;
-import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
-import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.resource.IResourceDescription;
-import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.scoping.impl.ImportUriResolver;
 import org.eclipse.xtext.validation.Check;
 
 import com.google.common.base.Function;
-import com.google.common.collect.Lists;
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
@@ -96,6 +92,8 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	@Inject protected ValidationUtil validationUtil;
 
 	@Inject protected IQualifiedNameProvider fqnProvider;
+	
+	@Inject ImportUriResolver importUriResolver;
 
 	/* message strings */
 	public static final String OPTIONAL_REFS_HAVE_TO_HAVE_MULTIPLICITY_ANY = "optional refs have to have multiplicity any [*]";
@@ -117,84 +115,56 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	public static final String INCONSISTENT_COMMUNICATION_TYPE = "RoomJavaValidator.InconsistentCommType";
 	public static final String DEPRECATED_MESSAGE_DATA_NAME = "RoomJavaValidator.DeprecatedMessageDataName";
 
-	@Inject ImportUriResolver importUriResolver;
-
 	@Check
-	public void checkImportedNamespace(Import imp) {
-		if (imp.getImportURI()==null)
+	public void checkRoomImportedNamespace(Import imp) {
+		QualifiedName importedFQN = ImportHelpers.toFQN(imp);
+		if(importedFQN == null)
 			return;
+		
+		Predicate<IEObjectDescription> nameMatcher = new Predicate<IEObjectDescription>() {
 
-		IQualifiedNameConverter nameConverter = new IQualifiedNameConverter.DefaultImpl();
-		QualifiedName importedFQN;
-		boolean isWildcard = false;
-		try {
-			QualifiedName orig = nameConverter.toQualifiedName(imp.getImportedNamespace());
-			isWildcard = orig.getLastSegment().equals("*");
-			importedFQN = (isWildcard) ? orig.skipLast(1) : orig;
-		} catch(IllegalArgumentException e){
-			return;
-		}
-
-		String uriString = importUriResolver.resolve(imp);
-		if(uriString == null) {
-			warning("could not load referenced model", BasePackage.Literals.IMPORT__IMPORT_URI);
-			return;
-		}
-
-		URI uri = URI.createURI(uriString);
-		ResourceSet rs = imp.eResource().getResourceSet();
-
-		List<RoomModel> importedModels = Lists.newArrayList();
-		try {
-			Resource res = rs.getResource(uri, true);
-			if (res==null)
-				return;
-
-			if (res.getContents().isEmpty()) {
-				error("referenced model is empty", BasePackage.Literals.IMPORT__IMPORT_URI);
-				return;
-			}
-
-			for(EObject content : res.getContents()) {
-				if(content instanceof RoomModel) {
-					importedModels.add((RoomModel) content);
-				}
+			@Override
+			public boolean apply(IEObjectDescription input) {
+				return importedFQN.equals(input.getQualifiedName());
 			}
 			
-			if (importedModels.isEmpty()) {
-				if (uri.fileExtension().equals("room"))
-					error("referenced model is no ROOM model (but has .room extension)", BasePackage.Literals.IMPORT__IMPORT_URI);
-				else
-					warning("referenced model is no ROOM model", BasePackage.Literals.IMPORT__IMPORT_URI);
-				return;
-			}
-		}
-		catch (RuntimeException re) {
-			warning("could not load referenced model", BasePackage.Literals.IMPORT__IMPORT_URI);
-			return;
-		}
+		};	
+		Predicate<IEObjectDescription> candidateMatcher = new Predicate<IEObjectDescription>() {
 
-		final IResourceServiceProvider resourceServiceProvider = IResourceServiceProvider.Registry.INSTANCE.getResourceServiceProvider(uri);
-		if (resourceServiceProvider==null)
-			return;
-		IResourceDescription.Manager manager = resourceServiceProvider.getResourceDescriptionManager();
-		IResourceDescription description = manager.getResourceDescription(importedModels.get(0).eResource());
-
-		// TODO check for empty namespace
-		boolean exportedNameMatch = false;
-		if (description != null) {
-			Iterator<IEObjectDescription> iter = description.getExportedObjects().iterator();
-			while(iter.hasNext()){
-				QualifiedName exportedFQN = iter.next().getQualifiedName();
-				if(exportedNameMatch |= importedFQN.equals(exportedFQN))
-					break;
+			@Override
+			public boolean apply(IEObjectDescription input) {
+				return input.getEClass() == RoomPackage.Literals.ROOM_MODEL;
 			}
+			
+		};	
+		Predicate<IEObjectDescription> allowedClasses = new Predicate<IEObjectDescription>() {
+
+			@Override
+			public boolean apply(IEObjectDescription input) {
+				return input.getEClass() == RoomPackage.Literals.ROOM_MODEL || 
+						RoomPackage.Literals.ROOM_CLASS.isSuperTypeOf(input.getEClass());
+			}
+			
+		};	
+		Optional<List<IEObjectDescription>> importCandidates = ImportHelpers.getImportedObjectsFor(imp, importUriResolver, candidateMatcher);
+		if(!importCandidates.isPresent())
+			return;
+		
+		List<IEObjectDescription> candidates = importCandidates.get();
+		if(Iterables.any(candidates, Predicates.and(nameMatcher, candidateMatcher)))
+			return;
+		
+		Set<String> candidatesNames = Sets.newLinkedHashSet();
+		for(IEObjectDescription eObjDesc : candidates) {
+			candidatesNames.add(eObjDesc.getQualifiedName().toString() + ".*");
 		}
-		if(!exportedNameMatch) {
-			error("no match for imported namespace", BasePackage.Literals.IMPORT__IMPORTED_NAMESPACE, WRONG_NAMESPACE, importedModels.get(0).getName()+".*");
-		}
+		
+		if(!Iterables.any(candidates, nameMatcher))		
+			error("no match for imported namespace", BasePackage.Literals.IMPORT__IMPORTED_NAMESPACE, WRONG_NAMESPACE, candidatesNames.toArray(new String[0]));
+		else if(!Iterables.any(Iterables.filter(candidates, nameMatcher), allowedClasses))
+			error("referenced model is not supported", BasePackage.Literals.IMPORT__IMPORTED_NAMESPACE, WRONG_NAMESPACE, candidatesNames.toArray(new String[0]));
 	}
-
+	
 	@Check
 	public void checkActorRef(ActorRef ar) {
 		if (ar.eContainer() instanceof ActorClass) {

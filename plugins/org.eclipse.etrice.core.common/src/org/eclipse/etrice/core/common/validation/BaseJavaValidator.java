@@ -15,6 +15,9 @@ package org.eclipse.etrice.core.common.validation;
 import java.util.HashSet;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.etrice.core.common.base.Annotation;
 import org.eclipse.etrice.core.common.base.AnnotationAttribute;
 import org.eclipse.etrice.core.common.base.AnnotationType;
@@ -22,12 +25,16 @@ import org.eclipse.etrice.core.common.base.BasePackage;
 import org.eclipse.etrice.core.common.base.BooleanLiteral;
 import org.eclipse.etrice.core.common.base.Documentation;
 import org.eclipse.etrice.core.common.base.EnumAnnotationAttribute;
+import org.eclipse.etrice.core.common.base.Import;
 import org.eclipse.etrice.core.common.base.IntLiteral;
 import org.eclipse.etrice.core.common.base.KeyValue;
 import org.eclipse.etrice.core.common.base.RealLiteral;
 import org.eclipse.etrice.core.common.base.SimpleAnnotationAttribute;
 import org.eclipse.etrice.core.common.base.StringLiteral;
+import org.eclipse.xtext.scoping.impl.ImportUriResolver;
 import org.eclipse.xtext.validation.Check;
+
+import com.google.inject.Inject;
 
 /**
  * Custom validation rules. 
@@ -41,6 +48,8 @@ public class BaseJavaValidator extends org.eclipse.etrice.core.common.validation
 	public static final String UNDEFINED_ANNOTATION_ATTRIBUTE = "BaseJavaValidator.UndfinedAnnotationAttribute";
 	public static final String UNDEFINED_ANNOTATION_ATTRIBUTE_VALUE = "BaseJavaValidator.UndfinedAnnotationAttributeValue";
 	public static final String DUPLICATE_ANNOTATION_ATTRIBUTE = "BaseJavaValidator.DuplicateAnnotationAttribute";
+	
+	@Inject ImportUriResolver importUriResolver;
 	
 	@Check
 	public void checkDocumentation(Documentation doc) {
@@ -169,4 +178,32 @@ public class BaseJavaValidator extends org.eclipse.etrice.core.common.validation
 			}
 		}
 	}
+
+	@Check
+	public void checkImportedURI(Import imp) {
+		String uriString = importUriResolver.resolve(imp);
+		if (uriString == null) {
+			warning("could not load referenced model", BasePackage.Literals.IMPORT__IMPORT_URI);
+			return;
+		}
+
+		URI uri = URI.createURI(uriString);
+		ResourceSet rs = imp.eResource().getResourceSet();
+
+		try {
+			Resource importedResource = rs.getResource(uri, true);
+			if (importedResource == null)
+				return;
+
+			if (importedResource.getContents().isEmpty()) {
+				// importedResource is empty after being loaded the first time (<=> RuntimeException below)
+				warning("could not load referenced model", BasePackage.Literals.IMPORT__IMPORT_URI);
+				return;
+			}
+		} catch (RuntimeException re) {
+			warning("could not load referenced model", BasePackage.Literals.IMPORT__IMPORT_URI);
+			return;
+		}
+	}
+	
 }

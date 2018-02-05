@@ -1,7 +1,7 @@
 RoomModel room.basic.test {
-	
+
 	import room.basic.service.timing.* from "TimingService.room"
-	import room.basic.types.* from "Types.room"	
+	import room.basic.types.* from "Types.room"
 
 	/**
 	 * A SubSystemClass or ActorClass having this annotation is construed as an instance.<br>
@@ -11,68 +11,155 @@ RoomModel room.basic.test {
 	 * </p>
 	 */
 	AnnotationType TestInstance {
-		target = { SubSystemClass, ActorClass }
+		target = { SubSystemClass, ActorClass
+		}
 	}
 
+	/**
+	 * SequentialTestExecutor that can started/aborted via exeControl.
+	 */
+	ActorClass ControllableSequentialTestExecutor {
+		Interface {
+
+			// control execution
+			Port exeControl: PTestControl
+
+			// tests
+			conjugated Port control[*]: PTestControl
+		}
+		Structure {
+			external Port exeControl
+			external Port control
+			Attribute current: int16
+			Attribute overallSuccess: boolean
+		}
+		Behavior {
+			StateMachine {
+				State execute {
+				}
+
+				Transition init0: initial -> idle
+				State idle {
+					entry '''
+						current = 0;
+						overallSuccess = true;
+					'''
+				}
+				Transition tr0: idle -> cp cp1 {
+					triggers {
+						<start: exeControl>
+					}
+				}
+				Transition tr1: execute -> aborted {
+					triggers {
+						<abort: exeControl>
+					}
+					action '''
+						control[current].abort();
+					'''
+				}
+				State aborted
+				ChoicePoint cp0
+				ChoicePoint cp1
+				Transition tr2: execute -> cp cp0 {
+					triggers {
+						<done: control>
+					}
+					action '''
+						overallSuccess &= success;
+						current++;'''
+				}
+				Transition tr3: cp cp0 -> idle {
+					action '''exeControl.done(overallSuccess);'''
+				}
+				Transition tr4: cp cp0 -> execute {
+					cond '''current < self->constData->control.size'''
+					action '''control[current].start();'''
+				}
+				Transition tr5: cp cp1 -> idle {
+					action '''exeControl.done(overallSuccess);'''
+				}
+				Transition tr6: cp cp1 -> execute {
+					cond '''current < self->constData->control.size'''
+					action '''control[current].start();'''
+				}
+				Transition tr7: aborted -> idle {
+					triggers {
+						<done: control>
+					}
+					action '''
+						exeControl.done(false);
+					'''
+				}
+			}
+		}
+	}
+
+	/**
+	 * SequentialTestExecutor that starts automatically.
+	 */
 	ActorClass SequentialTestExecutor {
 		Interface {
 			conjugated Port control[*]: PTestControl
-			
 		}
 		Structure {
 			usercode3 {
 				"#include \"etUnit/etUnit.h\""
 			}
-			external Port control	
-			Attribute next : int16
+			external Port control
+			Attribute current: int16
 		}
 		Behavior {
 			StateMachine {
 				State execute {
-					entry 
-				
-				{
-						"if(next < self->constData->control.size){"
-						"\tcontrol[next++].start();"
-						"} else {"
-						"\tetUnit_testFinished(0);"
-						"}"
-					}
+					entry '''
+						if(current < self->constData->control.size){
+							control[current].start();
+						} else {
+							etUnit_close();
+							etUnit_testFinished(0);
+						}
+					'''
 				}
-				Transition init0: initial -> execute
-			{
-					}
+				Transition init0: initial -> execute {
+					action '''
+						current = 0;
+						etUnit_open("log", "results");
+					'''
+				}
 				Transition tr0: execute -> execute {
 					triggers {
 						<done: control>
 					}
+					action '''current++;'''
 				}
 			}
 		}
 	}
-	
+
 	ProtocolClass PTestControl {
 		incoming {
+
 			/**
 			 *  Start test execution.
 			 */
 			Message start()
-			
+
 			/**
 			 *  Abort test execution.
 			 */
 			Message abort()
 		}
 		outgoing {
+
 			/**
 			 *  Test execution finished or aborted.
 			 */
-			Message done(success : boolean)
+			Message done(success: boolean)
 		}
 //		semantics {
 //			in:start -> out:done
 //			in:abort -> out:done
 //		}
 	}
-
 }

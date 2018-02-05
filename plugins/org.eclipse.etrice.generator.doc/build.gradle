@@ -1,19 +1,9 @@
-apply plugin: 'java'
-
-apply from: "$rootDir/gradle/publish.gradle"
-
 dependencies {
 	compile project(':plugins:org.eclipse.etrice.core.etmap')
 	compile project(':plugins:org.eclipse.etrice.core.genmodel')
 	compile project(':plugins:org.eclipse.etrice.core.genmodel.fsm')
 	compile project(':plugins:org.eclipse.etrice.generator')
 	compile project(':plugins:org.eclipse.etrice.generator.fsm')
-}
-
-sourceSets {
-	main {
-		java {
-			srcDirs = ['src', 'xtend-gen']
-		}
-	}
+	
+	compile "org.eclipse.xtend:org.eclipse.xtend.lib:$versions.xtext"
 }

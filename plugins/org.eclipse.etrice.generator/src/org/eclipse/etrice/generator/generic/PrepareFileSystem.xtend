@@ -21,6 +21,7 @@ import java.util.Set
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.etrice.core.genmodel.fsm.ILogger
+import org.eclipse.etrice.generator.fsm.base.IncrementalGenerationFileIo
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 
 /**
@@ -40,12 +41,37 @@ class PrepareFileSystem {
 			if (e instanceof Root) {
 				for (mdl : (e as Root).models) {
 					val tgtpath = mdl.generationTargetPath
-					if (tgtpath!=null && !tgtpath.empty)
+					if (tgtpath!==null && !tgtpath.empty)
 						pathes.add(tgtpath)
 				}
 			}
 		}
 		prepare(pathes)
+	}
+	
+	def void prepareInfoTargetPaths(Resource resource) {
+		if(!IncrementalGenerationFileIo.generateIncremental) 
+			return;
+			
+		var Set<String> pathes = new HashSet<String>();
+		for (e: resource.contents){
+			if (e instanceof Root) {
+				for (mdl : (e as Root).models) {
+					val tgtpath = mdl.generationInfoPath
+					if (tgtpath!==null && !tgtpath.empty)
+						pathes.add(tgtpath)
+				}
+			}
+		}
+		pathes.forEach[ path |
+			fileAccess.setOutputPath(path)
+			fileAccess.generateFile("readme.txt", '''
+				This directory is an eTrice code generation target.
+				It contains auxiliary files for the incremental generation feature.
+				
+				DO NOT MODIFY THIS PLACE!
+			''')
+		]
 	}
 	
 	def void prepareDocTargetPaths(Resource resource) {
@@ -54,7 +80,7 @@ class PrepareFileSystem {
 			if (e instanceof Root) {
 				for (mdl : (e as Root).models) {
 					val tgtpath = mdl.docGenerationTargetPath
-					if (tgtpath!=null && !tgtpath.empty)
+					if (tgtpath!==null && !tgtpath.empty)
 						pathes.add(tgtpath)
 				}
 			}

@@ -57,17 +57,20 @@ class BaseFormatter extends AbstractFormatter2 {
 	def dispatch void format(Import it, extension IFormattableDocument document) {
 		regionFor.keywords(importAccess.importKeyword_0, importAccess.modelKeyword_1_1).forEach[append[oneSpace]]
 		regionFor.keyword(importAccess.fromKeyword_1_0_1).surround[oneSpace]
+		eContents.forEach[format] // format children
 	}
 	
 	def dispatch void format(AnnotationType it, extension IFormattableDocument document) {
 		regionFor.keyword(annotationTypeAccess.annotationTypeKeyword_0).append[oneSpace]
 		regionFor.keyword(annotationTypeAccess.targetKeyword_4).prepend[newLine]
 		attributes.forEach[prepend[newLine]]
+		eContents.forEach[format] // format children
 	}
 	
 	def dispatch void format(Annotation it, extension IFormattableDocument document) {
 		regionFor.keyword(annotationAccess.commercialAtKeyword_0).append[noSpace]
-		attributes.forEach[prepend[newLine]]
+		if(attributes.size > 1) attributes.forEach[prepend[newLine]]	// separate lines for attributes only for more than one present attribute
+		eContents.forEach[format] // format children
 	}
 	
 }

@@ -1,20 +1,6 @@
-apply plugin: 'java'
-
-apply from: "$rootDir/gradle/publish.gradle"
-
 dependencies {
 	compile project(':plugins:org.eclipse.etrice.core.common')
 	compile project(':plugins:org.eclipse.etrice.core.room')
-}
-
-sourceSets {
-	main {
-		java {
-			srcDirs = ['src', 'src-gen', 'xtend-gen']
-		}
-		resources {
-			srcDirs = ['src', 'src-gen']
-			include '**/*.xtextbin', '**/*.tokens'
-		}
-	}
+	
+	compile "org.eclipse.xtend:org.eclipse.xtend.lib:$versions.xtext"
 }

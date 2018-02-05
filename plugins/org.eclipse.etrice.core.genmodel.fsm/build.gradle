@@ -1,17 +1,13 @@
-apply plugin: 'java'
-
-apply from: "$rootDir/gradle/publish.gradle"
-
 dependencies {
 	compile project(':plugins:org.eclipse.etrice.core.fsm')
 	
-	compile "org.eclipse.xtext:org.eclipse.xtext:$xtext_version"
+	compile "org.eclipse.xtext:org.eclipse.xtext:$versions.xtext"
 }
 
 sourceSets {
 	main {
 		java {
-			srcDirs = ['src', 'src-gen', 'xtend-gen']
+			srcDirs 'src-gen'
 		}
 	}
 }

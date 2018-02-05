@@ -13,6 +13,7 @@
 package org.eclipse.etrice.core.ui;
 
 import org.eclipse.etrice.core.common.ui.autoedit.BaseAutoEditStrategyProvider;
+import org.eclipse.etrice.core.common.ui.editor.BaseDoubleClickStrategyProvider;
 import org.eclipse.etrice.core.common.ui.editor.model.BaseTokenTypeToPartitionMapper;
 import org.eclipse.etrice.core.common.ui.hover.IKeywordHoverContentProvider;
 import org.eclipse.etrice.core.common.ui.hover.KeywordHoverProvider;
@@ -28,6 +29,7 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategyProvider;
+import org.eclipse.xtext.ui.editor.doubleClicking.DoubleClickStrategyProvider;
 import org.eclipse.xtext.ui.editor.hover.IEObjectHover;
 import org.eclipse.xtext.ui.editor.hover.IEObjectHoverProvider;
 import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper;
@@ -93,8 +95,12 @@ public class RoomUiModule extends org.eclipse.etrice.core.ui.AbstractRoomUiModul
 		return BaseAutoEditStrategyProvider.class;
 	}
 	
-	public Class<? extends ITokenTypeToPartitionTypeMapper> bindITokenTypeToPartitionTypeMapper(){
+	public Class<? extends ITokenTypeToPartitionTypeMapper> bindITokenTypeToPartitionTypeMapper() {
 		return BaseTokenTypeToPartitionMapper.class;
+	}
+	
+	public Class<? extends DoubleClickStrategyProvider> bindDoubleClickStrategyProvider() {
+		return BaseDoubleClickStrategyProvider.class;
 	}
 	
 	// auto format for quick fix

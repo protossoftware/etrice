@@ -1,7 +1,5 @@
 apply plugin: 'application'
 
-apply from: "$rootDir/gradle/publish.gradle"
-
 dependencies {
 	compile project(':plugins:org.eclipse.etrice.core.room')
 	compile project(':plugins:org.eclipse.etrice.core.etphys')
@@ -14,15 +12,8 @@ dependencies {
 	compile project(':plugins:org.eclipse.etrice.generator.doc')
 	compile project(':plugins:org.eclipse.etrice.generator.gnuplot')
 	
-	compile "org.eclipse.xtext:org.eclipse.xtext:$xtext_version"
-}
-
-sourceSets {
-	main {
-		java {
-			srcDirs = ['src', 'xtend-gen']
-		}
-	}
+	compile "org.eclipse.xtend:org.eclipse.xtend.lib:$versions.xtext"
+	compile "org.eclipse.xtext:org.eclipse.xtext:$versions.xtext"
 }
 
 mainClassName = 'org.eclipse.etrice.generator.c.Main'

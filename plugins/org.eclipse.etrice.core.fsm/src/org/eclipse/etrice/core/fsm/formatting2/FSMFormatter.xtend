@@ -27,6 +27,8 @@ import org.eclipse.etrice.core.fsm.fSM.TriggeredTransition
 import org.eclipse.etrice.core.fsm.services.FSMGrammarAccess
 import org.eclipse.xtext.formatting2.IFormattableDocument
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion
+import org.eclipse.etrice.core.fsm.fSM.RefinedTransition
+import org.eclipse.etrice.core.fsm.fSM.TransitionBase
 
 class FSMFormatter extends BaseFormatter {
 	
@@ -48,29 +50,31 @@ class FSMFormatter extends BaseFormatter {
 	
 	def dispatch void format(StateGraph it, extension IFormattableDocument document) {
 		eContents.forEach[prependDefaultNewLines(document)]
+		eContents.forEach[format] // format children
 	}
 	
 	def dispatch void format(State it, extension IFormattableDocument document) {
 		regionFor.keywords('entry', 'exit', 'do', 'subgraph').forEach[prependDefaultNewLines(document) append[oneSpace]]
+		eContents.forEach[format] // format children
 	}
 	
-	def dispatch void format(Transition it, extension IFormattableDocument document) {
-		regionFor.keywords('action', 'guard', 'cond').forEach[prependDefaultNewLines(document) append[oneSpace]]
-	}
-	
-	def dispatch void format(TriggeredTransition it, extension IFormattableDocument document) {
-		regionFor.keywords('action', 'guard', 'cond', 'triggers').forEach[prependDefaultNewLines(document) append[oneSpace]]
-		
-		triggers.head.prepend[newLine]
-		triggers.tail.forEach[prepend[oneSpace]]
+	def dispatch void format(TransitionBase it, extension IFormattableDocument document) {
+		regionFor.keywords('action', 'guard', 'cond', 'triggers').forEach[prependDefaultNewLines(document) append[oneSpace]]	
+		if(it instanceof TriggeredTransition) {
+			triggers.head.prepend[newLine]
+			triggers.tail.forEach[prepend[oneSpace]]
+		}
+		eContents.forEach[format] // format children
 	}
 	
 	def dispatch void format(Trigger it, extension IFormattableDocument document) {
 		regionFor.keywordPairs('<', '>').forEach[interior[noSpace]]
+		eContents.forEach[format] // format children
 	}
 	
 	def dispatch void format(ProtocolSemantics it, extension IFormattableDocument document) {
 		rules.forEach[prependDefaultNewLines(document)]
+		eContents.forEach[format] // format children
 	}
 	
 	@Inject

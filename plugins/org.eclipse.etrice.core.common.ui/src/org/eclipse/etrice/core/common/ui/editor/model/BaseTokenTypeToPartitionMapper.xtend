@@ -15,12 +15,13 @@ package org.eclipse.etrice.core.common.ui.editor.model
 import org.eclipse.xtext.ui.editor.model.TerminalsTokenTypeToPartitionMapper
 
 class BaseTokenTypeToPartitionMapper extends TerminalsTokenTypeToPartitionMapper {
+	
+	public val static String CCSTRING_LITERAL_PARTITION = "__ccstring";
 		
 	override protected calculateId(String tokenName, int tokenType) {
 		switch tokenName {
-			// cc_string has same behavior as string partition
-			// -> activates text sensitive double click support
-			case 'RULE_CC_STRING': STRING_LITERAL_PARTITION
+			// custom behavior for ccstring
+			case 'RULE_CC_STRING': CCSTRING_LITERAL_PARTITION
 			default: super.calculateId(tokenName, tokenType)
 		}
 	}
