@@ -12,8 +12,8 @@ dependencies {
 	compile project(':plugins:org.eclipse.etrice.generator.doc')
 	compile project(':plugins:org.eclipse.etrice.generator.gnuplot')
 	
-	compile "org.eclipse.xtend:org.eclipse.xtend.lib:$xtext_version"
-	compile "org.eclipse.xtext:org.eclipse.xtext:$xtext_version"
+	compile "org.eclipse.xtend:org.eclipse.xtend.lib:$versions.xtext"
+	compile "org.eclipse.xtext:org.eclipse.xtext:$versions.xtext"
 }
 
 mainClassName = 'org.eclipse.etrice.generator.c.Main'

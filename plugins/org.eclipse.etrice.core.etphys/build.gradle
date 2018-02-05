@@ -1,5 +1,5 @@
 dependencies {
 	compile project(':plugins:org.eclipse.etrice.core.common')
 	
-	compile "org.eclipse.xtend:org.eclipse.xtend.lib:$xtext_version"
+	compile "org.eclipse.xtend:org.eclipse.xtend.lib:$versions.xtext"
 }
