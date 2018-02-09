@@ -5,7 +5,7 @@ Bundle-Vendor: Eclipse eTrice
 Bundle-Version: 1.1.2.qualifier
 Bundle-SymbolicName: org.eclipse.etrice.core.etphys.tests; singleton:=true
 Bundle-ActivationPolicy: lazy
-Require-Bundle: org.eclipse.etrice.core.etphys;bundle-version="1.1.1",
+Require-Bundle: org.eclipse.etrice.core.etphys;bundle-version="1.1.2",
  org.eclipse.etrice.core.etphys.ui,
  org.eclipse.core.runtime,
  org.eclipse.xtext.junit4;bundle-version="2.6.0",

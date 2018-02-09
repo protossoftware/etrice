@@ -5,12 +5,12 @@ Bundle-Vendor: Eclipse eTrice
 Bundle-Version: 1.1.2.qualifier
 Bundle-SymbolicName: org.eclipse.etrice.generator.doc;singleton:=true
 Bundle-ActivationPolicy: lazy
-Require-Bundle: org.eclipse.etrice.core.genmodel;bundle-version="1.1.1",
- org.eclipse.etrice.core.genmodel.fsm;bundle-version="1.1.1",
- org.eclipse.etrice.generator.fsm;bundle-version="1.1.1",
- org.eclipse.etrice.generator;bundle-version="1.1.1",
- org.eclipse.etrice.core.etmap;bundle-version="1.1.1",
- org.eclipse.etrice.core.etphys;bundle-version="1.1.1",
+Require-Bundle: org.eclipse.etrice.core.genmodel;bundle-version="1.1.2",
+ org.eclipse.etrice.core.genmodel.fsm;bundle-version="1.1.2",
+ org.eclipse.etrice.generator.fsm;bundle-version="1.1.2",
+ org.eclipse.etrice.generator;bundle-version="1.1.2",
+ org.eclipse.etrice.core.etmap;bundle-version="1.1.2",
+ org.eclipse.etrice.core.etphys;bundle-version="1.1.2",
  org.eclipse.core.resources;bundle-version="3.6.0",
  org.eclipse.core.runtime;bundle-version="3.6.0",
  org.eclipse.ui;bundle-version="3.7.0",
