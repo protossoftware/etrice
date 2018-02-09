@@ -8,7 +8,7 @@
 	<parent>
 		<groupId>org.eclipse.etrice</groupId>
 		<artifactId>java-generator</artifactId>
-		<version>1.1.1-SNAPSHOT</version>
+		<version>1.1.2-SNAPSHOT</version>
 		<relativePath>../../releng/org.eclipse.etrice.parent/pom.xml</relativePath>
 	</parent>
 
@@ -188,67 +188,67 @@
 		<dependency>
 			<groupId>org.eclipse.etrice</groupId>
 			<artifactId>org.eclipse.etrice.generator.java</artifactId>
-			<version>1.1.1-SNAPSHOT</version>
+			<version>1.1.2-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.etrice</groupId>
 			<artifactId>org.eclipse.etrice.generator.config</artifactId>
-			<version>1.1.1-SNAPSHOT</version>
+			<version>1.1.2-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.etrice</groupId>
 			<artifactId>org.eclipse.etrice.generator.doc</artifactId>
-			<version>1.1.1-SNAPSHOT</version>
+			<version>1.1.2-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.etrice</groupId>
 			<artifactId>org.eclipse.etrice.generator.fsm</artifactId>
-			<version>1.1.1-SNAPSHOT</version>
+			<version>1.1.2-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.etrice</groupId>
 			<artifactId>org.eclipse.etrice.generator</artifactId>
-			<version>1.1.1-SNAPSHOT</version>
+			<version>1.1.2-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.etrice</groupId>
 			<artifactId>org.eclipse.etrice.core.common</artifactId>
-			<version>1.1.1-SNAPSHOT</version>
+			<version>1.1.2-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.etrice</groupId>
 			<artifactId>org.eclipse.etrice.core.fsm</artifactId>
-			<version>1.1.1-SNAPSHOT</version>
+			<version>1.1.2-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.etrice</groupId>
 			<artifactId>org.eclipse.etrice.core.room</artifactId>
-			<version>1.1.1-SNAPSHOT</version>
+			<version>1.1.2-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.etrice</groupId>
 			<artifactId>org.eclipse.etrice.core.etphys</artifactId>
-			<version>1.1.1-SNAPSHOT</version>
+			<version>1.1.2-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.etrice</groupId>
 			<artifactId>org.eclipse.etrice.core.etmap</artifactId>
-			<version>1.1.1-SNAPSHOT</version>
+			<version>1.1.2-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.etrice</groupId>
 			<artifactId>org.eclipse.etrice.core.config</artifactId>
-			<version>1.1.1-SNAPSHOT</version>
+			<version>1.1.2-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.etrice</groupId>
 			<artifactId>org.eclipse.etrice.core.genmodel.fsm</artifactId>
-			<version>1.1.1-SNAPSHOT</version>
+			<version>1.1.2-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.etrice</groupId>
 			<artifactId>org.eclipse.etrice.core.genmodel</artifactId>
-			<version>1.1.1-SNAPSHOT</version>
+			<version>1.1.2-SNAPSHOT</version>
 		</dependency>
 
 		<!-- IMPORTANT: runtime-assembler-cli uses another version of com.google.guava 

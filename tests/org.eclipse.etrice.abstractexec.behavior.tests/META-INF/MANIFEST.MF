@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Abstract Execution for Behavior Tests
 Bundle-SymbolicName: org.eclipse.etrice.abstractexec.behavior.tests
-Bundle-Version: 1.1.1.qualifier
+Bundle-Version: 1.1.2.qualifier
 Bundle-Activator: org.eclipse.etrice.abstractexec.behavior.tests.Activator
 Bundle-Vendor: Eclipse eTrice
 Require-Bundle: org.eclipse.etrice.core.fsm;bundle-version="1.1.1",

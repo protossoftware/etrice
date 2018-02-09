@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: eTrice C Generator Launcher
 Bundle-SymbolicName: org.eclipse.etrice.generator.launch.c;singleton:=true
-Bundle-Version: 1.1.1.qualifier
+Bundle-Version: 1.1.2.qualifier
 Bundle-Activator: org.eclipse.etrice.generator.launch.c.Activator
 Require-Bundle: org.eclipse.etrice.generator;bundle-version="1.1.1",
  org.eclipse.etrice.generator.fsm;bundle-version="1.1.1",

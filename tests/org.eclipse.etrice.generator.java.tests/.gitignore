@@ -1,1 +1,6 @@
 src-gen/
+bin
+models/*
+output
+results
+*.obj
