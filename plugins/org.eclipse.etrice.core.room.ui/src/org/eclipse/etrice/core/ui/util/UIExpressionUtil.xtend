@@ -12,6 +12,7 @@
 
 package org.eclipse.etrice.core.ui.util
 
+import com.google.common.collect.ImmutableList
 import java.util.Map
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.etrice.core.fsm.fSM.ModelComponent
@@ -21,6 +22,7 @@ import org.eclipse.etrice.core.genmodel.fsm.FsmGenExtensions
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.GraphContainer
 import org.eclipse.etrice.core.room.ActorClass
 import org.eclipse.etrice.core.room.MessageData
+import org.eclipse.etrice.core.room.RoomClass
 import org.eclipse.etrice.core.ui.RoomUiModule
 import org.eclipse.etrice.expressions.detailcode.DetailExpressionAssistParser
 import org.eclipse.etrice.expressions.detailcode.DetailExpressionProvider
@@ -31,7 +33,15 @@ import org.eclipse.xtext.nodemodel.ILeafNode
 
 import static org.eclipse.xtext.EcoreUtil2.getContainerOfType
 
+/** 
+ * Utility to create and cache DetailExpressionProvider
+ */
 class UIExpressionUtil {
+
+	static class ExpressionCache {
+		val genModelAccess = new GenModelAccess
+		val Map<RoomClass, ImmutableList<ExpressionFeature>> classScopeCache = newHashMap
+	}
 
 	static class GenModelAccess {
 	
@@ -50,13 +60,22 @@ class UIExpressionUtil {
 		
 	}
 	
-	static def IDetailExpressionProvider selectExpressionProvider(EObject it, GenModelAccess genModelAccess) {			
-		val exprProvider = new DetailExpressionProvider(it)
-		val transition = getContainerOfType(it, TransitionBase)
+	static def IDetailExpressionProvider selectExpressionProvider(EObject ctx, ExpressionCache cache) {			
+		val exprProvider = RoomUiModule.getInjector().getInstance(DetailExpressionProvider) => [ prov |
+			prov.model = ctx
+		]
+		// set cache
+		val roomClass = getContainerOfType(ctx, RoomClass)
+		if(roomClass !== null) {
+			exprProvider.classScopeCache = cache.classScopeCache.get(roomClass)
+			if(exprProvider.classScopeCache === null)
+				cache.classScopeCache.put(roomClass, exprProvider.createAndSetClassScopeCache)
+		}
+		// set transitionData
+		val transition = getContainerOfType(ctx, TransitionBase)
 		if(transition !== null) {
-			val ac = getContainerOfType(it, ActorClass)
-			if(ac !== null) {
-				val commonData = FsmGenExtensions.getLinkFor(genModelAccess.get(ac), transition)?.commonData
+			if(roomClass instanceof ActorClass) {
+				val commonData = FsmGenExtensions.getLinkFor(cache.genModelAccess.get(roomClass), transition)?.commonData
 				if(commonData instanceof MessageData)
 					exprProvider.transitionEventData = commonData	
 			}
@@ -66,7 +85,7 @@ class UIExpressionUtil {
 	}
 	
 	static def IDetailExpressionProvider selectExpressionProvider(EObject it) {
-		return selectExpressionProvider(it, new GenModelAccess)
+		return selectExpressionProvider(it, new ExpressionCache)
 	}
 
 	

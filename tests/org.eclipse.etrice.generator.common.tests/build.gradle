@@ -12,7 +12,10 @@ def tests = [
 	choicePointTestExtended: 	['models/ChoicePointTestExtended.room', genericPhysical],
 	dataDrivenTest:				['models/DataDrivenTest.room', genericPhysical],
 	/* enumTest:				['models/EnumTest.room', genericPhysical],		not supported in c++	*/
+	
+	// to add 'models/DetailExpressionEnum.room', 'models/DetailExpressionTypes.room'
 	compileTests:				['models/CompileTests.room', genericPhysical, 'models/DetailExpressionTest.room', 'models/StatemachineInterfaceTest.room', 'models/StatemachineInterfaceInheritedTest.room', 'models/StatemachineInterfaceTest.room', 'models/ContinuationTransitionTest.room'],
+	
 	handlerTest:				['models/HandlerTest.room', genericPhysical],
 	operationInheritanceTest:	['models/OperationInheritanceTest.room', genericPhysical],
 	pingPongThreadTest:			['models/PingPongThreadTest.etmap', 'models/PingPongThreadTest.room'],

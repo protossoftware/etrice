@@ -13,78 +13,168 @@
 package org.eclipse.etrice.expressions.detailcode
 
 import com.google.common.base.Strings
+import com.google.common.collect.ImmutableList
+import com.google.common.collect.Sets
+import com.google.inject.Inject
 import java.util.List
+import java.util.Set
 import org.eclipse.core.runtime.Assert
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.etrice.core.fsm.fSM.Guard
 import org.eclipse.etrice.core.fsm.fSM.StateGraphItem
 import org.eclipse.etrice.core.room.ActorClass
 import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.core.room.DataClass
+import org.eclipse.etrice.core.room.DataType
+import org.eclipse.etrice.core.room.EnumerationType
 import org.eclipse.etrice.core.room.InterfaceItem
 import org.eclipse.etrice.core.room.Message
 import org.eclipse.etrice.core.room.MessageData
 import org.eclipse.etrice.core.room.Operation
 import org.eclipse.etrice.core.room.Port
 import org.eclipse.etrice.core.room.PortClass
+import org.eclipse.etrice.core.room.ProtocolClass
+import org.eclipse.etrice.core.room.RefableType
+import org.eclipse.etrice.core.room.RoomClass
+import org.eclipse.etrice.core.room.RoomPackage
 import org.eclipse.etrice.core.room.SAP
 import org.eclipse.etrice.core.room.SPP
 import org.eclipse.etrice.core.room.util.RoomHelpers
-import org.eclipse.xtend.lib.annotations.AccessorType
 import org.eclipse.xtend.lib.annotations.Accessors
-import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
+import org.eclipse.xtext.EcoreUtil2
+import org.eclipse.xtext.scoping.IGlobalScopeProvider
 import org.eclipse.xtext.util.SimpleAttributeResolver
 
-import static extension org.eclipse.xtend.lib.annotations.AccessorType.*
+import static com.google.common.base.Verify.*
+
 import static extension org.eclipse.xtext.EcoreUtil2.getContainerOfType
 
-@FinalFieldsConstructor
 class DetailExpressionProvider implements IDetailExpressionProvider {
 	
-	// ctor
-	protected val EObject model
+	@Inject IGlobalScopeProvider globalScopeProvider
+	
 	protected val extension RoomHelpers roomHelpers = new RoomHelpers
 	protected val nameProvider = SimpleAttributeResolver.NAME_RESOLVER
 	
-	// optional
-	@Accessors(AccessorType.PUBLIC_SETTER) protected MessageData transitionEventData
-
+	/* Context element TODO could be typed to DetailCode */
+	@Accessors
+	EObject model
+	
+	//
+	// Logic for IDetailExpressionProvider.getInitialFeatures()
+	//
+	
+	/* Special transitionData in FSM context */
+	@Accessors
+	MessageData transitionEventData = null
+	
+	/* Cache for expressions in RoomClass context. Can be shared among multiple instance. */
+	@Accessors
+	ImmutableList<ExpressionFeature> classScopeCache = null
+	
+	def ImmutableList<ExpressionFeature> createAndSetClassScopeCache() {
+		if(classScopeCache === null) {
+			val classScope = newArrayList
+			
+			val roomClass = model.getContainerOfType(RoomClass)
+			if(roomClass !== null) {
+				initialClassFeatures(roomClass, classScope)
+			}
+		
+			classScopeCache = ImmutableList.copyOf(classScope.filterNull.filter[id !== null])
+		}
+		
+		return classScopeCache
+	}
+	
 	override getInitialFeatures() {
-		val scope = newArrayList
+		verifyNotNull(model)
+		verifyNotNull(globalScopeProvider)
+		
+		val elementScope = newArrayList
 
 		if(transitionEventData !== null) { 
-			scope += new ExpressionFeature('transitionData', ExpressionPostfix.NONE) => [
+			elementScope += new ExpressionFeature('transitionData', ExpressionPostfix.NONE) => [
 				data = transitionEventData
 			]
 		}
 		if(model.isInContainment(Operation)) {
-			scope += model.getContainerOfType(Operation).arguments.map[createExprFeature(ExpressionPostfix.NONE)]
+			elementScope += model.getContainerOfType(Operation).arguments.map[createExprFeature(ExpressionPostfix.NONE)]
 		}
-		switch model {
-			case model.isInContainment(ActorClass): {
-				val ac = model.getContainerOfType(ActorClass)
-				scope += initialFsmExpression(ac)
-				scope += ac.latestOperations.map[createExprFeature]
-				scope += ac.allAttributes.map[createExprFeature]
-			}
-			case model.isInContainment(PortClass): {
-				val pc = model.getContainerOfType(PortClass)
-				// TODO operations
-				// TODO inherited attributes
-				scope += pc.attributes.map[createExprFeature]
-			}
-			case model.isInContainment(DataClass): {
-				val dc = model.getContainerOfType(DataClass)
-				scope += dc.latestOperations.map[createExprFeature]
-				scope += dc.allAttributes.map[createExprFeature]
-			}
+		if(model.isInContainment(ActorClass)) {
+			initialFsmExpression(model, model.getContainerOfType(ActorClass), elementScope)
 		}
-
-		return scope.filterNull.filter[id !== null].toList
+	
+		return {
+			if(elementScope.empty)
+				 createAndSetClassScopeCache
+			else 
+				(elementScope.filterNull.filter[id !== null] + createAndSetClassScopeCache).toList
+		}
 	}
 	
-	protected def List<ExpressionFeature> initialFsmExpression(ActorClass ac) {
-		val scope = newArrayList
+	protected def void initialClassFeatures(RoomClass cls, List<ExpressionFeature> scope) {
+		switch cls {
+			ActorClass: {
+				scope += cls.latestOperations.map[createExprFeature]
+				scope += cls.allAttributes.map[createExprFeature]
+			}
+			PortClass: {
+				// TODO operations
+				// TODO inherited attributes
+				scope += cls.attributes.map[createExprFeature]
+			}
+			DataClass: {
+				scope += cls.latestOperations.map[createExprFeature]
+				scope += cls.allAttributes.map[createExprFeature]
+			}
+		}
+				
+		classTypes(cls, scope)
+	}
+	
+	/**
+	 *  TODO align with generator
+	 */
+	protected def void classTypes(RoomClass cls, List<ExpressionFeature> scope) {
+		val types = <DataType>newHashSet
+		
+		// imported types
+		types += globalScopeProvider.getScope(cls.eResource, RoomPackage.Literals.REFABLE_TYPE__TYPE, null)
+					.allElements.map[EObjectOrProxy].filter(DataType)
+		// local types
+		types += EcoreUtil.getRootContainer(cls).eContents.filter(DataType)
+		
+		// indirectly referenced types	
+		types += {
+			// everything that contains RefableType
+			val refableContainers = switch cls {
+				ActorClass:
+					cls.interfaceItems.map[protocol].filterNull.toHashSet.map[classHierarchy].flatten + cls.attributes + cls.operations
+				ProtocolClass:
+					#[cls] + cls.classHierarchy
+				DataClass:
+					#[cls] + cls.classHierarchy
+				default:
+					emptyList
+			}
+			// get all data types
+			refableContainers.map[EcoreUtil2.eAllOfType(it, RefableType)].flatten.map[type]
+		}
+		
+		// nested + class hierarchy of DataClasses
+		var toResolve = types.filter(DataClass).toList
+		while(!toResolve.empty) {
+			val newTypes = toResolve.map[EcoreUtil2.eAllOfType(it, RefableType)].flatten.map[type].toHashSet
+			toResolve = Sets.difference(newTypes, types).filter(DataClass).map[base].filterNull.map[classHierarchy].flatten.toList
+			types += newTypes
+		}
+		
+		scope += types.map[createExprFeature(it, ExpressionPostfix.NONE)]
+	}
+	
+	protected def void initialFsmExpression(EObject model, ActorClass ac, List<ExpressionFeature> scope) {
 		switch model {
 			case model.isInContainment(Guard): {
 				scope += ac.allInterfaceItems.filter[isEventDriven || !isConjugated].map[
@@ -110,12 +200,44 @@ class DetailExpressionProvider implements IDetailExpressionProvider {
 				]	
 			}
 		}
-		
-		return scope
 	}
 	
-	protected def List<ExpressionFeature> contextFsmMessages(InterfaceItem ifItem, ExpressionFeature ctx) {
-		val scope = newArrayList
+	//
+	// Logic for IDetailExpressionProvider.getContextFeatures()
+	//
+	
+	override getContextFeatures(ExpressionFeature ctx) {
+		val List<ExpressionFeature> scope = newArrayList
+		
+		switch obj : ctx.data {
+			Port case obj.multiplicity == 1/* fall through  */,
+			SAP: scope +=
+				obj.protocol.getAllOperations(!obj.conjugated).map[createExprFeature]
+		}
+		switch obj : ctx.data {
+			InterfaceItem:
+				contextFsmMessages(obj, ctx, scope)		
+			Attribute case obj.type?.type instanceof DataClass: {
+				val dc = obj.type.type as DataClass
+				scope += dc.allAttributes.map[createExprFeature]
+				scope += dc.latestOperations.map[createExprFeature]
+			}
+			EnumerationType: {
+				// from descriptions, have to be resolved
+				var enumType = obj
+				if(obj.eIsProxy) {
+					val resolved = EcoreUtil.resolve(obj, model)
+					if(resolved instanceof EnumerationType)
+						enumType = resolved
+				}
+				scope += enumType.literals.map[createExprFeature(it, ExpressionPostfix.NONE)]	
+			}
+		}
+
+		return scope.filterNull.filter[id !== null].toList
+	}
+	
+	protected def void contextFsmMessages(InterfaceItem ifItem, ExpressionFeature ctx, List<ExpressionFeature> scope) {
 		switch model {
 			case model.isInContainment(Guard): {
 				val pc = ifItem.protocol
@@ -140,33 +262,11 @@ class DetailExpressionProvider implements IDetailExpressionProvider {
 				}				
 			}
 		}
-		
-		return scope
 	}
 	
-	override getContextFeatures(ExpressionFeature ctx) {
-		val List<ExpressionFeature> scope = newArrayList
-		
-		switch obj : ctx.data {
-			Port case obj.multiplicity == 1/* fall through  */,
-			SAP: scope +=
-				obj.protocol.getAllOperations(!obj.conjugated).map[createExprFeature]
-		}
-		switch obj : ctx.data {
-			Port case obj.multiplicity == 1/* fall through  */,
-			SAP: scope +=
-				obj.protocol.getAllOperations(!obj.conjugated).map[createExprFeature]	
-			InterfaceItem:
-				scope += contextFsmMessages(obj, ctx)		
-			Attribute case obj.type?.type instanceof DataClass: {
-				val dc = obj.type.type as DataClass
-				scope += dc.allAttributes.map[createExprFeature]
-				scope += dc.latestOperations.map[createExprFeature]
-			}
-		}
-
-		return scope.filterNull.filter[id !== null].toList
-	}
+	//
+	// extensions
+	//
 	
 	def ExpressionFeature createExprFeature(Operation it){
 		// assuming all operations have parenthesis
@@ -201,6 +301,13 @@ class DetailExpressionProvider implements IDetailExpressionProvider {
 	
 	private def isInContainment(EObject it, Class<? extends EObject> clazz) {
 		getContainerOfType(clazz) !== null
+	}
+	
+	private def static <T> Set<T> toHashSet(Iterable<T> iterable) {
+		if (iterable instanceof Set<?>) {
+			return iterable as Set<T>
+		}
+		return Sets.newHashSet(iterable);
 	}
 	
 }

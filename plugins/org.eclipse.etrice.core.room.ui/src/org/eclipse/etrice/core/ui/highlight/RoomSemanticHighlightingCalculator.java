@@ -18,7 +18,7 @@ import org.eclipse.etrice.core.converter.RoomValueConverterService;
 import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.etrice.core.services.RoomGrammarAccess;
 import org.eclipse.etrice.core.ui.util.UIExpressionUtil;
-import org.eclipse.etrice.core.ui.util.UIExpressionUtil.GenModelAccess;
+import org.eclipse.etrice.core.ui.util.UIExpressionUtil.ExpressionCache;
 import org.eclipse.etrice.expressions.detailcode.IDetailExpressionProvider;
 import org.eclipse.etrice.expressions.ui.highlight.ExpressionRuleFactory;
 import org.eclipse.etrice.expressions.ui.highlight.TargetLanguageRuleFactory;
@@ -53,7 +53,7 @@ public class RoomSemanticHighlightingCalculator extends BaseSemanticHighlighter 
 		if (resource == null || resource.getParseResult() == null)
 			return;
 
-		GenModelAccess genModelAccess = new GenModelAccess();
+		ExpressionCache expressionCache = new ExpressionCache();
 		INode root = resource.getParseResult().getRootNode();
 		for (INode node : root.getAsTreeIterable()) {
 			if(cancelIndicator.isCanceled()) 
@@ -68,18 +68,17 @@ public class RoomSemanticHighlightingCalculator extends BaseSemanticHighlighter 
 					acceptor.addPosition(node.getOffset(), node.getLength(), RoomHighlightingConfiguration.HL_ANNOTATION_ID);
 				}
 				else if(node.getParent().getSemanticElement() instanceof DetailCode && ruleCall.getRule() == grammar.getCC_STRINGRule()) {
-					detailCodeHighlight(node, acceptor, genModelAccess);
+					detailCodeHighlight(node, acceptor, expressionCache);
 				}
 			}
 
 		}
 	}
 	
-	protected void detailCodeHighlight(INode node, IHighlightedPositionAcceptor acceptor, GenModelAccess genModelAccess) {
+	protected void detailCodeHighlight(INode node, IHighlightedPositionAcceptor acceptor, ExpressionCache cache) {
 		final String text = converterService.getCC_StringConverter().stripDelim(node.getText());
 		final int offset = node.getOffset() + converterService.getCC_StringConverter().getDelim().length();
-		IDetailExpressionProvider exprProvider = UIExpressionUtil.selectExpressionProvider(
-				node.getSemanticElement(), genModelAccess);
+		IDetailExpressionProvider exprProvider = UIExpressionUtil.selectExpressionProvider(node.getSemanticElement(), cache);
 		XtextHighlightStyles styles = new XtextHighlightStyles();
 		RuleBasedScanner scanner = new RuleBasedScanner();
 		scanner.setRules(Iterables.toArray(Iterables.concat(

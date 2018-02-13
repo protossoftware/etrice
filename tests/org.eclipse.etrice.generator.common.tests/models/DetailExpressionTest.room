@@ -2,14 +2,17 @@ RoomModel DetailExpressionTestModel {
 
 	import room.basic.types.* from "../../../runtime/${etModellib}/model/Types.room"
 	import room.basic.test.* from "../../../runtime/${etModellib}/model/Tests.room"
-	import room.basic.service.timing.* from "../../../runtime/${etModellib}/model/TimingService.room"
+//	import room.basic.service.timing.* from "../../../runtime/${etModellib}/model/TimingService.room"
+//	import DetailExpressionEnum.* from "DetailExpressionEnum.room"
 
+	Enumeration LocalEnum of int32 {
+		FIRST=1, SECOND=2, THIRD=3
+	}
 
-/**
- *  TODO define supported expression properly
- *  TODO sync UI and translation in generator
- */
- 
+	/**
+	 *  TODO define supported expression properly
+	 *  TODO sync UI and translation in generator
+	 */
 	async ActorClass DetailExpressionTest {
 		Interface {
 			SPP sppEvent: PEventdriven
@@ -25,6 +28,8 @@ RoomModel DetailExpressionTestModel {
 			conjugated Port cPortEvent: PEventdriven
 			conjugated Port cPortData: PDatadriven
 			conjugated Port cReplEvent [*]: PEventdriven
+			// no supported yet
+		//	conjugated Port enumEvent: PEnumProtocol
 		}
 		Behavior {
 			ctor '''
@@ -32,7 +37,7 @@ RoomModel DetailExpressionTestModel {
 			'''
 			dtor '''
 				numberArray[0] = 5;
-			'''		
+			'''
 			Operation actorOp(param: int32): boolean '''
 				return param == 0;
 			'''
@@ -43,8 +48,7 @@ RoomModel DetailExpressionTestModel {
 							/* TODO activate action code editor */
 							rPortData.in1 == numberArray[3] &&
 							transitionData && infoData.flag
-							'''
-						>
+						'''>
 					}
 					action '''
 						// TODO syntax highlighting
@@ -77,10 +81,15 @@ RoomModel DetailExpressionTestModel {
 						// DataClass operations:
 						// infoData.dataOp(32);
 						// infoData.nested.dataOp("127.0.0.1", 8080);
+						
+						// enum
+						// enumEvent.enumMsg(ProtocolEnum.ACK);
+						// enumEvent.enumMsg2(ColorEnum.WHITE);
+						// numberArray[0] = LocalEnum.FIRST;
 					'''
 				}
 				Transition guardedTrans: idle -> state2 {
-					guard '''
+					guard '''				
 						rPortData.in1 == numberArray[3] && infoData.flag && actorOp(32)  && rPortEvent.regularOp(32) && cPortEvent.conjOp(32)
 					'''
 				}
@@ -91,17 +100,20 @@ RoomModel DetailExpressionTestModel {
 			}
 		}
 	}
-
-	ProtocolClass PEventdriven {
+	
+	ProtocolClass PEventdrivenBase {
 		incoming {
 			Message in1()
 		}
+	}
+
+	ProtocolClass PEventdriven extends  PEventdrivenBase {
 		outgoing {
 			Message out1(accessibleMessageData: boolean)
 		}
 		regular PortClass
 		{
-			Attribute regularAttr : boolean = "true"
+			Attribute regularAttr: boolean = "true"
 			Operation regularOp(param: int32): boolean '''
 				// return regularOp2(param);
 				return true;
@@ -113,7 +125,7 @@ RoomModel DetailExpressionTestModel {
 		}
 		conjugated PortClass
 		{
-			Attribute conjAttr : boolean = "true"
+			Attribute conjAttr: boolean = "true"
 			Operation conjOp(param: int32): boolean '''
 				// return conjOp2(param);
 				return true;
@@ -149,11 +161,11 @@ RoomModel DetailExpressionTestModel {
 	}
 
 	DataClass DDataNested {
-		Operation dataOp(number: int32) : boolean '''
+		Operation dataOp(number: int32): boolean '''
 			// return dataOp2() && number;
 			return true;
 		'''
-		Operation dataOp2() : boolean '''
+		Operation dataOp2(): boolean '''
 			// nested.dataOp("", 0);
 			// return flag && nested.tcpPort;
 			return true;
@@ -164,8 +176,7 @@ RoomModel DetailExpressionTestModel {
 	}
 
 	DataClass DData {
-		Operation dataOp(ip: string, port: int32) '''
-		'''
+		Operation dataOp(ip: string, port: int32) '''		'''
 		Attribute iPAddr: string
 		Attribute tcpPort: int32
 	}

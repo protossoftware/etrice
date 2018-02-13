@@ -60,4 +60,20 @@ class XtextHighlightStyles extends AbstractHighlightStyles {
 		HL_EXPR_INTERFACE_ITEM_ID
 	}
 	
+	override getEnum() {
+		HL_EXPR_ENUM_ID
+	}
+	
+	override getDataClass() {
+		HL_EXPR_DATA_CLASS_ID
+	}
+	
+	override getPrimitiveType() {
+		HL_PRIMITIVE_TYPE_ID
+	}
+	
+	override getExternalType() {
+		HL_EXTERNAL_TYPE_ID
+	}
+	
 }

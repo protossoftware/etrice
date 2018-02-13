@@ -31,6 +31,10 @@ public class RoomHighlightingConfiguration extends BaseHighlightingConfig {
 	public static final String HL_EXPR_OPERATION_ID = "hl_expr_operation";
 	public static final String HL_EXPR_ATTRIBUTE_ID = "hl_expr_attribute";
 	public static final String HL_EXPR_INTERFACE_ITEM_ID = "hl_expr_interfaceitem";
+	public static final String HL_EXPR_ENUM_ID = "hl_expr_enum";
+	public static final String HL_EXPR_DATA_CLASS_ID = "hl_data_class";
+	public static final String HL_PRIMITIVE_TYPE_ID = "hl_primitve_type";
+	public static final String HL_EXTERNAL_TYPE_ID = "hl_external_type";
 
 	// default fonts used by this specific highlighting (defaults)
 	// private static FontData defaultAnnotationBlockFont = new
@@ -45,6 +49,10 @@ public class RoomHighlightingConfiguration extends BaseHighlightingConfig {
 		acceptor.acceptDefaultHighlighting(HL_EXPR_OPERATION_ID, "Expression Operation", expressionOperation());
 		acceptor.acceptDefaultHighlighting(HL_EXPR_ATTRIBUTE_ID, "Expression Attribute", expressionAttribute());
 		acceptor.acceptDefaultHighlighting(HL_EXPR_INTERFACE_ITEM_ID, "Expression Interface Item", expressionInterfaceItem());
+		acceptor.acceptDefaultHighlighting(HL_EXPR_ENUM_ID, "Expression Enum", expressionEnum());
+		acceptor.acceptDefaultHighlighting(HL_EXPR_DATA_CLASS_ID, "Expression Data Class", dataClass());
+		acceptor.acceptDefaultHighlighting(HL_PRIMITIVE_TYPE_ID, "Expression Primitive Type", primitiveType());
+		acceptor.acceptDefaultHighlighting(HL_EXTERNAL_TYPE_ID, "Expression External Type", externalType());
 	}
 
 	// method for calculating an actual text styles
@@ -78,6 +86,30 @@ public class RoomHighlightingConfiguration extends BaseHighlightingConfig {
 	public TextStyle expressionInterfaceItem() {
 		TextStyle textStyle = new TextStyle();
 		textStyle.setColor(AbstractHighlightStyles.INTERFACE_ITEM_RGB);
+		return textStyle;
+	}
+	
+	public TextStyle expressionEnum() {
+		TextStyle textStyle = new TextStyle();
+		textStyle.setColor(AbstractHighlightStyles.ENUM_RGB);
+		return textStyle;
+	}
+	
+	public TextStyle dataClass() {
+		TextStyle textStyle = new TextStyle();
+		textStyle.setColor(AbstractHighlightStyles.DATA_CLASS_RGB);
+		return textStyle;
+	}
+	
+	public TextStyle primitiveType() {
+		TextStyle textStyle = new TextStyle();
+		textStyle.setColor(AbstractHighlightStyles.PRIMITIVE_TYPE_RGB);
+		return textStyle;
+	}
+	
+	public TextStyle externalType() {
+		TextStyle textStyle = new TextStyle();
+		textStyle.setColor(AbstractHighlightStyles.EXTERNAL_TYPE_RGB);
 		return textStyle;
 	}
 
