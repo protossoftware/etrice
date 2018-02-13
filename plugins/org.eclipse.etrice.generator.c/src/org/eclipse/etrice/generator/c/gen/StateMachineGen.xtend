@@ -77,7 +77,7 @@ class StateMachineGen extends GenericStateMachineGenerator {
 			«langExt.accessLevelPrivate»void setState(«mc.componentName»* self, «stateType» new_state) {
 				self->state = new_state;
 				«IF Main::settings.generateMSCInstrumentation»
-					ET_MSC_LOGGER_CHANGE_STATE(self->constData->instName, stateStrings[new_state])
+					ET_MSC_LOGGER_CHANGE_STATE(self->constData->instName, stateStrings[new_state]);
 				«ENDIF»
 			}
 
