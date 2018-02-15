@@ -56,7 +56,7 @@ static char* stateStrings[] = {"<no state>","<top>","Operational"
 
 static void setState(ATimingService* self, etInt16 new_state) {
 	self->state = new_state;
-	ET_MSC_LOGGER_CHANGE_STATE(self->constData->instName, stateStrings[new_state])
+	ET_MSC_LOGGER_CHANGE_STATE(self->constData->instName, stateStrings[new_state]);
 }
 
 static etInt16 getState(ATimingService* self) {

@@ -75,7 +75,7 @@ static char* stateStrings[] = {"<no state>","<top>","connected",
 
 static void setState(ATcpServer* self, etInt16 new_state) {
 	self->state = new_state;
-	ET_MSC_LOGGER_CHANGE_STATE(self->constData->instName, stateStrings[new_state])
+	ET_MSC_LOGGER_CHANGE_STATE(self->constData->instName, stateStrings[new_state]);
 }
 
 static etInt16 getState(ATcpServer* self) {
