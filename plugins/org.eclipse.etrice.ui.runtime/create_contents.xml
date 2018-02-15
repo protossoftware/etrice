@@ -15,7 +15,7 @@
 		<attribute name="source" default="default" />
 		<sequential>
 			<delete file="${target}/@{name}.zip" />
-			<zip destfile="${target}/@{name}.zip" basedir="@{source}/@{name}" excludes="pom.xml,bin/**,Debug/**,Release/**,*.cspec,jgen_*,target/**,WindowsMinGW/**,LinuxPosix/**"  />
+			<zip destfile="${target}/@{name}.zip" basedir="@{source}/@{name}" excludes="pom.xml,bin/**,Debug/**,Release/**,*.cspec,jgen_*,target/**,WindowsMinGW/**,LinuxPosix/**,build/**"  />
 			<echo message="zipped ${target}/@{name}.zip" />
 		</sequential>
 	</macrodef>
