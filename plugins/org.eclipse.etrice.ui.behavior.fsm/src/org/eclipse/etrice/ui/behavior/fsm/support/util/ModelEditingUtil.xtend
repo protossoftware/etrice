@@ -48,14 +48,14 @@ class ModelEditingUtil {
 				parent =  s.eContainer().eContainer() as State;
 				if (target2rs.containsKey(parent)) {
 					val bestFitting = target2rs.get(parent);
-					if (bestFitting.getSubgraph()==null)
+					if (bestFitting.getSubgraph()===null)
 						bestFitting.setSubgraph(FSMFactory.eINSTANCE.createStateGraph());
 					sg = bestFitting.getSubgraph();
 					break = true;
 				}
 			}
 			
-			if (sg==null)
+			if (sg===null)
 				sg = mc.getStateMachine();
 			
 			rs = FSMFactory.eINSTANCE.createRefinedState();
@@ -70,7 +70,7 @@ class ModelEditingUtil {
 	def static public StateGraph getOrCreateSubGraphOfRefinedStateFor(State s, ModelComponent mc) {
 		val rs = getOrCreateRefinedStateFor(s, mc);
 		
-		if (rs.getSubgraph()==null)
+		if (rs.getSubgraph()===null)
 			rs.setSubgraph(FSMFactory.eINSTANCE.createStateGraph());
 	
 		return rs.getSubgraph();

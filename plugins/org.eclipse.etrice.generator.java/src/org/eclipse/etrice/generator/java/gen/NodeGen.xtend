@@ -64,7 +64,7 @@ class NodeGen {
 		for (nr : ETMapUtil::getNodeRefs()) {
 			for (instpath : ETMapUtil::getSubSystemInstancePaths(nr)) {
 				val ssi = root.getInstance(instpath) as SubSystemInstance
-				if (ssi!=null && ssi.subSystemClass.validGenerationLocation) {
+				if (ssi!==null && ssi.subSystemClass.validGenerationLocation) {
 					val wired = sscc2wired.get(ssi.subSystemClass)
 					val path = ssi.subSystemClass.generationTargetPath+ssi.subSystemClass.getPath
 					val infopath = ssi.subSystemClass.generationInfoPath+ssi.subSystemClass.getPath

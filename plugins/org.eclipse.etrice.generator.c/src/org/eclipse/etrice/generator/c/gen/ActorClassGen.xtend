@@ -204,7 +204,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 		val replEventPorts = eventPorts.filter[multiplicity!=1]
 		val sendPorts = ac.allEndPorts.filter(p|(p.protocol as ProtocolClass).commType==CommunicationType::DATA_DRIVEN &&  p.conjugated && p.multiplicity==1)
 		val recvPorts = ac.allEndPorts.filter(p|(p.protocol as ProtocolClass).commType==CommunicationType::DATA_DRIVEN && !p.conjugated && p.multiplicity==1)
-		val portsWithOperations = ac.allInterfaceItems.filter(p|p.portClass!=null && p.portClass.operations.size>0)
+		val portsWithOperations = ac.allInterfaceItems.filter(p|p.portClass!==null && p.portClass.operations.size>0)
 		val filename = (ac.eContainer as RoomModel).name.replaceAll("\\.","_")+"_"+ac.name+"_Utils"
 
 	'''
@@ -226,8 +226,8 @@ class ActorClassGen extends GenericActorClassGenerator {
 		/* simple event ports */
 		«FOR ep : eventPorts.filter[multiplicity==1]»
 			«FOR msg : ep.outgoing»
-				«val data1 = if (msg.data!=null) "data" else ""»
-				«val data2 = if (msg.data!=null) ", data" else ""»
+				«val data1 = if (msg.data!==null) "data" else ""»
+				«val data2 = if (msg.data!==null) ", data" else ""»
 				#define «ep.name»_«msg.name»(«data1») «ep.portClassName»_«msg.name»(&self->constData->«ep.name»«data2»)
 			«ENDFOR»
 		«ENDFOR»
@@ -242,8 +242,8 @@ class ActorClassGen extends GenericActorClassGenerator {
 		/* data send ports */
 		«FOR ep : sendPorts»
 			«FOR msg : ep.outgoing»
-				«val data1 = if (msg.data!=null) "data" else ""»
-				«val data2 = if (msg.data!=null) ", data" else ""»
+				«val data1 = if (msg.data!==null) "data" else ""»
+				«val data2 = if (msg.data!==null) ", data" else ""»
 				#define «ep.name»_«msg.name»(«data1») «ep.portClassName»_«msg.name»_set(&self->«ep.name»«data2»)
 			«ENDFOR»
 		«ENDFOR»
@@ -251,8 +251,8 @@ class ActorClassGen extends GenericActorClassGenerator {
 		/* saps */
 		«FOR sap: ac.allSAPs»
 			«FOR msg : sap.outgoing»
-				«val data1 = if (msg.data!=null) "data" else ""»
-				«val data2 = if (msg.data!=null) ", data" else ""»
+				«val data1 = if (msg.data!==null) "data" else ""»
+				«val data2 = if (msg.data!==null) ", data" else ""»
 				#define «sap.name»_«msg.name»(«data1») «sap.portClassName»_«msg.name»(&self->constData->«sap.name»«data2»)
 			«ENDFOR»
 		«ENDFOR»
@@ -263,8 +263,8 @@ class ActorClassGen extends GenericActorClassGenerator {
 		«ENDIF»
 		«FOR ep : replEventPorts»
 			«FOR msg : ep.outgoing»
-				«val data1 = if (msg.data!=null) "data" else ""»
-				«val data2 = if (msg.data!=null) ", data" else ""»
+				«val data1 = if (msg.data!==null) "data" else ""»
+				«val data2 = if (msg.data!==null) ", data" else ""»
 				#define «ep.name»_«msg.name»_broadcast(«data1») «ep.portClassName»_«msg.name»_broadcast(&self->constData->«ep.name»«data2»)
 				#define «ep.name»_«msg.name»(idx«data2») «ep.portClassName»_«msg.name»(&self->constData->«ep.name», idx«data2»)
 			«ENDFOR»
@@ -273,8 +273,8 @@ class ActorClassGen extends GenericActorClassGenerator {
 		/* services */
 		«FOR svc : ac.allServiceImplementations»
 			«FOR msg : svc.spp.outgoing»
-				«val data1 = if (msg.data!=null) "data" else ""»
-				«val data2 = if (msg.data!=null) ", data" else ""»
+				«val data1 = if (msg.data!==null) "data" else ""»
+				«val data2 = if (msg.data!==null) ", data" else ""»
 				#define «svc.spp.name»_«msg.name»_broadcast(«data1») «svc.spp.portClassName»_«msg.name»_broadcast(&self->constData->«svc.spp.name»«data2»)
 				#define «svc.spp.name»_«msg.name»(idx«data2») «svc.spp.portClassName»_«msg.name»(&self->constData->«svc.spp.name», idx«data2»)
 			«ENDFOR»

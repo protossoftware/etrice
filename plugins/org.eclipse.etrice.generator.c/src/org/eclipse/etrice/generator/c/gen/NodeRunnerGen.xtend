@@ -36,7 +36,7 @@ class NodeRunnerGen {
 		for (nr : ETMapUtil::getNodeRefs()) {
 			for (instpath : ETMapUtil::getSubSystemInstancePaths(nr)) {
 				val ssi = root.getInstance(instpath) as SubSystemInstance
-				if (ssi!=null) {
+				if (ssi!==null) {
 					val clsname = nr.name+"_"+ssi.name
 					fileAccess.setOutputPath(ssi.subSystemClass.generationTargetPath+ssi.subSystemClass.getPath)
 					fileAccess.generateFile( clsname+"_Runner.c", root.generateSourceFile(ssi, first))

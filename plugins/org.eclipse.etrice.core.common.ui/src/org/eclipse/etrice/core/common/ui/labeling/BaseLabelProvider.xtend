@@ -47,7 +47,7 @@ class BaseLabelProvider extends org.eclipse.xtext.ui.label.DefaultEObjectLabelPr
 	}
 	
 	def StyledString text(Import im) {
-		if (im.getImportedNamespace() == null) {
+		if (im.getImportedNamespace() === null) {
 			var txt = new StyledString("import model " + im.getImportURI())
 			txt.setStyle(0, 12, getKeywordStyler())
 			return txt
@@ -59,7 +59,7 @@ class BaseLabelProvider extends org.eclipse.xtext.ui.label.DefaultEObjectLabelPr
 	}
 	
 	def protected Styler getKeywordStyler() {
-		if (keywordStyler==null) {
+		if (keywordStyler===null) {
 			var font = JFaceResources.getFontDescriptor(JFaceResources.TEXT_FONT)
 			var boldFont = font.setStyle(SWT.BOLD)
 			keywordStyler = stylerFactory.createStyler(boldFont, KEYWORD_COLOR, null)
@@ -68,7 +68,7 @@ class BaseLabelProvider extends org.eclipse.xtext.ui.label.DefaultEObjectLabelPr
 	}
 
 	def protected Styler getTypeStyler() {
-		if (typeStyler==null) {
+		if (typeStyler===null) {
 			var font = JFaceResources.getFontDescriptor(JFaceResources.TEXT_FONT)
 			var italicFont = font.setStyle(SWT.ITALIC)
 			typeStyler = stylerFactory.createStyler(italicFont, null, null)

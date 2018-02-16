@@ -103,7 +103,7 @@ class FSMExtensions {
      * @return the number of all inherited states
      */
     def int getNumberOfInheritedStates(ModelComponent mc) {
-        if (mc.base==null)
+        if (mc.base===null)
             return 0
         else
             return mc.base.stateMachine.stateList.size+mc.base.numberOfInheritedStates
@@ -114,7 +114,7 @@ class FSMExtensions {
      * @return the number of all inherited base (or simple) states
      */
     def int getNumberOfInheritedBaseStates(ModelComponent ac) {
-        if (ac.base==null)
+        if (ac.base===null)
             return 0
         else
             return ac.base.stateMachine.baseStateList.size+ac.base.numberOfInheritedBaseStates

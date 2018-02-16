@@ -52,7 +52,7 @@ class BaseDiagramProvider {
 		]
 		baseClasses.reverseView.forEach[ base |
 			val baseDiagram = diagramAccess.getDiagram(base, rs)	
-			if(baseDiagram != null) {
+			if(baseDiagram !== null) {
 				// create mapping from business object to pictogram elements
 				EcoreUtil.ExternalCrossReferencer.find(baseDiagram).forEach [ targetEObj, eFeatureSetting |
 					eFeatureSetting.map[getEObject].filter(PictogramLink).map[pictogramElement].forEach [ pe |
@@ -77,7 +77,7 @@ class BaseDiagramProvider {
 	}
 
 	def Collection<PictogramElement> getPictograms(EObject roomObj) {
-		if(roomObj == null) emptyList else baseDiagramBusinessObjs.get(roomObj)
+		if(roomObj === null) emptyList else baseDiagramBusinessObjs.get(roomObj)
 	}
 
 }

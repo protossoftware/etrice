@@ -146,7 +146,7 @@ CompoundProtocolClass:
 SubProtocol: 'SubProtocol' name=ID ':' protocol=[GeneralProtocolClass|FQN];
 
 Message:
-	(priv?='private')? 'Message' name=ID '(' (data=MessageData)? ')' annotations+=Annotation*
+	(priv?='private')? 'Message' name=ID ( '(' (data=MessageData)? ')' )? annotations+=Annotation*
 	(docu=Documentation)?;
 
 PortClass:

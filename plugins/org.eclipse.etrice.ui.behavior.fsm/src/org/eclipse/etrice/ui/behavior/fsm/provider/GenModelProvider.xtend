@@ -42,7 +42,7 @@ class GenModelProvider {
 		Graphiti.linkService.getBusinessObjectForLinkedPictogramElement(fsmDiagramProvider.diagram) => [
 			modelInstance = if(it instanceof ModelComponent) builder.createTransformedModel(it) else null
 		]
-		if (modelInstance != null) {
+		if (modelInstance !== null) {
 			graphMap.clear
 			modelInstance.eAllContents.forEach [
 				switch (it) {
@@ -55,7 +55,7 @@ class GenModelProvider {
 	}
 
 	def getModel() {
-		if (modelInstance == null) {
+		if (modelInstance === null) {
 			updateModel()
 		}
 

@@ -2462,14 +2462,14 @@ ruleMessage returns [EObject current=null]
 	    }
 
 )
-)	otherlv_3='(' 
+)(	otherlv_3='(' 
     {
-    	newLeafNode(otherlv_3, grammarAccess.getMessageAccess().getLeftParenthesisKeyword_3());
+    	newLeafNode(otherlv_3, grammarAccess.getMessageAccess().getLeftParenthesisKeyword_3_0());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getMessageAccess().getDataMessageDataParserRuleCall_4_0()); 
+	        newCompositeNode(grammarAccess.getMessageAccess().getDataMessageDataParserRuleCall_3_1_0()); 
 	    }
 		lv_data_4_0=ruleMessageData		{
 	        if ($current==null) {
@@ -2486,12 +2486,12 @@ ruleMessage returns [EObject current=null]
 )
 )?	otherlv_5=')' 
     {
-    	newLeafNode(otherlv_5, grammarAccess.getMessageAccess().getRightParenthesisKeyword_5());
+    	newLeafNode(otherlv_5, grammarAccess.getMessageAccess().getRightParenthesisKeyword_3_2());
     }
-(
+)?(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getMessageAccess().getAnnotationsAnnotationParserRuleCall_6_0()); 
+	        newCompositeNode(grammarAccess.getMessageAccess().getAnnotationsAnnotationParserRuleCall_4_0()); 
 	    }
 		lv_annotations_6_0=ruleAnnotation		{
 	        if ($current==null) {
@@ -2509,7 +2509,7 @@ ruleMessage returns [EObject current=null]
 )*(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getMessageAccess().getDocuDocumentationParserRuleCall_7_0()); 
+	        newCompositeNode(grammarAccess.getMessageAccess().getDocuDocumentationParserRuleCall_5_0()); 
 	    }
 		lv_docu_7_0=ruleDocumentation		{
 	        if ($current==null) {

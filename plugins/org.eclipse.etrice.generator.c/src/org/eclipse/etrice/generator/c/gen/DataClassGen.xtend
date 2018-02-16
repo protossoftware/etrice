@@ -80,7 +80,7 @@ class DataClassGen {
 		} «dc.name»;
 		
 		«FOR a:dc.allAttributes»
-			«IF a.defaultValueLiteral!=null»
+			«IF a.defaultValueLiteral!==null»
 				«logger.logInfo(dc.name+" "+a.name+": Attribute initialization not supported in C")»
 			«ENDIF»
 		«ENDFOR»

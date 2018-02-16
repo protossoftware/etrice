@@ -173,7 +173,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 				}
 		}
 
-			«IF pclass!=null»
+			«IF pclass!==null»
 				«pclass.attributes.attributes»
 «««				// TODO JH: Avoid collision attr getters/setter <-> user operations
 				«attributeSettersGettersImplementation(pclass.attributes, null)»

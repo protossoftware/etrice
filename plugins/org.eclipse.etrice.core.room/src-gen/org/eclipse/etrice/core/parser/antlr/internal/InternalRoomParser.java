@@ -6000,7 +6000,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleMessage"
-    // InternalRoom.g:2424:1: ruleMessage returns [EObject current=null] : ( ( (lv_priv_0_0= 'private' ) )? otherlv_1= 'Message' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= '(' ( (lv_data_4_0= ruleMessageData ) )? otherlv_5= ')' ( (lv_annotations_6_0= ruleAnnotation ) )* ( (lv_docu_7_0= ruleDocumentation ) )? ) ;
+    // InternalRoom.g:2424:1: ruleMessage returns [EObject current=null] : ( ( (lv_priv_0_0= 'private' ) )? otherlv_1= 'Message' ( (lv_name_2_0= RULE_ID ) ) (otherlv_3= '(' ( (lv_data_4_0= ruleMessageData ) )? otherlv_5= ')' )? ( (lv_annotations_6_0= ruleAnnotation ) )* ( (lv_docu_7_0= ruleDocumentation ) )? ) ;
     public final EObject ruleMessage() throws RecognitionException {
         EObject current = null;
 
@@ -6019,11 +6019,11 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // InternalRoom.g:2427:28: ( ( ( (lv_priv_0_0= 'private' ) )? otherlv_1= 'Message' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= '(' ( (lv_data_4_0= ruleMessageData ) )? otherlv_5= ')' ( (lv_annotations_6_0= ruleAnnotation ) )* ( (lv_docu_7_0= ruleDocumentation ) )? ) )
-            // InternalRoom.g:2428:1: ( ( (lv_priv_0_0= 'private' ) )? otherlv_1= 'Message' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= '(' ( (lv_data_4_0= ruleMessageData ) )? otherlv_5= ')' ( (lv_annotations_6_0= ruleAnnotation ) )* ( (lv_docu_7_0= ruleDocumentation ) )? )
+            // InternalRoom.g:2427:28: ( ( ( (lv_priv_0_0= 'private' ) )? otherlv_1= 'Message' ( (lv_name_2_0= RULE_ID ) ) (otherlv_3= '(' ( (lv_data_4_0= ruleMessageData ) )? otherlv_5= ')' )? ( (lv_annotations_6_0= ruleAnnotation ) )* ( (lv_docu_7_0= ruleDocumentation ) )? ) )
+            // InternalRoom.g:2428:1: ( ( (lv_priv_0_0= 'private' ) )? otherlv_1= 'Message' ( (lv_name_2_0= RULE_ID ) ) (otherlv_3= '(' ( (lv_data_4_0= ruleMessageData ) )? otherlv_5= ')' )? ( (lv_annotations_6_0= ruleAnnotation ) )* ( (lv_docu_7_0= ruleDocumentation ) )? )
             {
-            // InternalRoom.g:2428:1: ( ( (lv_priv_0_0= 'private' ) )? otherlv_1= 'Message' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= '(' ( (lv_data_4_0= ruleMessageData ) )? otherlv_5= ')' ( (lv_annotations_6_0= ruleAnnotation ) )* ( (lv_docu_7_0= ruleDocumentation ) )? )
-            // InternalRoom.g:2428:2: ( (lv_priv_0_0= 'private' ) )? otherlv_1= 'Message' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= '(' ( (lv_data_4_0= ruleMessageData ) )? otherlv_5= ')' ( (lv_annotations_6_0= ruleAnnotation ) )* ( (lv_docu_7_0= ruleDocumentation ) )?
+            // InternalRoom.g:2428:1: ( ( (lv_priv_0_0= 'private' ) )? otherlv_1= 'Message' ( (lv_name_2_0= RULE_ID ) ) (otherlv_3= '(' ( (lv_data_4_0= ruleMessageData ) )? otherlv_5= ')' )? ( (lv_annotations_6_0= ruleAnnotation ) )* ( (lv_docu_7_0= ruleDocumentation ) )? )
+            // InternalRoom.g:2428:2: ( (lv_priv_0_0= 'private' ) )? otherlv_1= 'Message' ( (lv_name_2_0= RULE_ID ) ) (otherlv_3= '(' ( (lv_data_4_0= ruleMessageData ) )? otherlv_5= ')' )? ( (lv_annotations_6_0= ruleAnnotation ) )* ( (lv_docu_7_0= ruleDocumentation ) )?
             {
             // InternalRoom.g:2428:2: ( (lv_priv_0_0= 'private' ) )?
             int alt60=2;
@@ -6068,7 +6068,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // InternalRoom.g:2448:1: (lv_name_2_0= RULE_ID )
             // InternalRoom.g:2449:3: lv_name_2_0= RULE_ID
             {
-            lv_name_2_0=(Token)match(input,RULE_ID,FOLLOW_39); 
+            lv_name_2_0=(Token)match(input,RULE_ID,FOLLOW_65); 
 
             			newLeafNode(lv_name_2_0, grammarAccess.getMessageAccess().getNameIDTerminalRuleCall_2_0()); 
             		
@@ -6088,68 +6088,85 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_3=(Token)match(input,20,FOLLOW_40); 
+            // InternalRoom.g:2465:2: (otherlv_3= '(' ( (lv_data_4_0= ruleMessageData ) )? otherlv_5= ')' )?
+            int alt62=2;
+            int LA62_0 = input.LA(1);
 
-                	newLeafNode(otherlv_3, grammarAccess.getMessageAccess().getLeftParenthesisKeyword_3());
-                
-            // InternalRoom.g:2469:1: ( (lv_data_4_0= ruleMessageData ) )?
-            int alt61=2;
-            int LA61_0 = input.LA(1);
-
-            if ( (LA61_0==RULE_ID) ) {
-                alt61=1;
+            if ( (LA62_0==20) ) {
+                alt62=1;
             }
-            switch (alt61) {
+            switch (alt62) {
                 case 1 :
-                    // InternalRoom.g:2470:1: (lv_data_4_0= ruleMessageData )
+                    // InternalRoom.g:2465:4: otherlv_3= '(' ( (lv_data_4_0= ruleMessageData ) )? otherlv_5= ')'
                     {
-                    // InternalRoom.g:2470:1: (lv_data_4_0= ruleMessageData )
-                    // InternalRoom.g:2471:3: lv_data_4_0= ruleMessageData
-                    {
-                     
-                    	        newCompositeNode(grammarAccess.getMessageAccess().getDataMessageDataParserRuleCall_4_0()); 
-                    	    
-                    pushFollow(FOLLOW_14);
-                    lv_data_4_0=ruleMessageData();
+                    otherlv_3=(Token)match(input,20,FOLLOW_40); 
 
-                    state._fsp--;
+                        	newLeafNode(otherlv_3, grammarAccess.getMessageAccess().getLeftParenthesisKeyword_3_0());
+                        
+                    // InternalRoom.g:2469:1: ( (lv_data_4_0= ruleMessageData ) )?
+                    int alt61=2;
+                    int LA61_0 = input.LA(1);
+
+                    if ( (LA61_0==RULE_ID) ) {
+                        alt61=1;
+                    }
+                    switch (alt61) {
+                        case 1 :
+                            // InternalRoom.g:2470:1: (lv_data_4_0= ruleMessageData )
+                            {
+                            // InternalRoom.g:2470:1: (lv_data_4_0= ruleMessageData )
+                            // InternalRoom.g:2471:3: lv_data_4_0= ruleMessageData
+                            {
+                             
+                            	        newCompositeNode(grammarAccess.getMessageAccess().getDataMessageDataParserRuleCall_3_1_0()); 
+                            	    
+                            pushFollow(FOLLOW_14);
+                            lv_data_4_0=ruleMessageData();
+
+                            state._fsp--;
 
 
-                    	        if (current==null) {
-                    	            current = createModelElementForParent(grammarAccess.getMessageRule());
-                    	        }
-                           		set(
-                           			current, 
-                           			"data",
-                            		lv_data_4_0, 
-                            		"org.eclipse.etrice.core.Room.MessageData");
-                    	        afterParserOrEnumRuleCall();
-                    	    
+                            	        if (current==null) {
+                            	            current = createModelElementForParent(grammarAccess.getMessageRule());
+                            	        }
+                                   		set(
+                                   			current, 
+                                   			"data",
+                                    		lv_data_4_0, 
+                                    		"org.eclipse.etrice.core.Room.MessageData");
+                            	        afterParserOrEnumRuleCall();
+                            	    
+
+                            }
+
+
+                            }
+                            break;
 
                     }
 
+                    otherlv_5=(Token)match(input,21,FOLLOW_66); 
+
+                        	newLeafNode(otherlv_5, grammarAccess.getMessageAccess().getRightParenthesisKeyword_3_2());
+                        
 
                     }
                     break;
 
             }
 
-            otherlv_5=(Token)match(input,21,FOLLOW_65); 
-
-                	newLeafNode(otherlv_5, grammarAccess.getMessageAccess().getRightParenthesisKeyword_5());
-                
-            // InternalRoom.g:2491:1: ( (lv_annotations_6_0= ruleAnnotation ) )*
-            loop62:
+            // InternalRoom.g:2491:3: ( (lv_annotations_6_0= ruleAnnotation ) )*
+            loop63:
             do {
-                int alt62=2;
-                int LA62_0 = input.LA(1);
+                int alt63=2;
+                int LA63_0 = input.LA(1);
 
-                if ( (LA62_0==108) ) {
-                    alt62=1;
+                if ( (LA63_0==108) ) {
+                    alt63=1;
                 }
 
 
-                switch (alt62) {
+                switch (alt63) {
             	case 1 :
             	    // InternalRoom.g:2492:1: (lv_annotations_6_0= ruleAnnotation )
             	    {
@@ -6157,9 +6174,9 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	    // InternalRoom.g:2493:3: lv_annotations_6_0= ruleAnnotation
             	    {
             	     
-            	    	        newCompositeNode(grammarAccess.getMessageAccess().getAnnotationsAnnotationParserRuleCall_6_0()); 
+            	    	        newCompositeNode(grammarAccess.getMessageAccess().getAnnotationsAnnotationParserRuleCall_4_0()); 
             	    	    
-            	    pushFollow(FOLLOW_65);
+            	    pushFollow(FOLLOW_66);
             	    lv_annotations_6_0=ruleAnnotation();
 
             	    state._fsp--;
@@ -6183,18 +6200,18 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    break loop62;
+            	    break loop63;
                 }
             } while (true);
 
             // InternalRoom.g:2509:3: ( (lv_docu_7_0= ruleDocumentation ) )?
-            int alt63=2;
-            int LA63_0 = input.LA(1);
+            int alt64=2;
+            int LA64_0 = input.LA(1);
 
-            if ( (LA63_0==34) ) {
-                alt63=1;
+            if ( (LA64_0==34) ) {
+                alt64=1;
             }
-            switch (alt63) {
+            switch (alt64) {
                 case 1 :
                     // InternalRoom.g:2510:1: (lv_docu_7_0= ruleDocumentation )
                     {
@@ -6202,7 +6219,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     // InternalRoom.g:2511:3: lv_docu_7_0= ruleDocumentation
                     {
                      
-                    	        newCompositeNode(grammarAccess.getMessageAccess().getDocuDocumentationParserRuleCall_7_0()); 
+                    	        newCompositeNode(grammarAccess.getMessageAccess().getDocuDocumentationParserRuleCall_5_0()); 
                     	    
                     pushFollow(FOLLOW_2);
                     lv_docu_7_0=ruleDocumentation();
@@ -6322,22 +6339,22 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,14,FOLLOW_66); 
+            otherlv_1=(Token)match(input,14,FOLLOW_67); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getPortClassAccess().getLeftCurlyBracketKeyword_1());
                 
             // InternalRoom.g:2558:1: (otherlv_2= 'usercode' ( (lv_userCode_3_0= ruleDetailCode ) ) )?
-            int alt64=2;
-            int LA64_0 = input.LA(1);
+            int alt65=2;
+            int LA65_0 = input.LA(1);
 
-            if ( (LA64_0==52) ) {
-                alt64=1;
+            if ( (LA65_0==52) ) {
+                alt65=1;
             }
-            switch (alt64) {
+            switch (alt65) {
                 case 1 :
                     // InternalRoom.g:2558:3: otherlv_2= 'usercode' ( (lv_userCode_3_0= ruleDetailCode ) )
                     {
-                    otherlv_2=(Token)match(input,52,FOLLOW_67); 
+                    otherlv_2=(Token)match(input,52,FOLLOW_68); 
 
                         	newLeafNode(otherlv_2, grammarAccess.getPortClassAccess().getUsercodeKeyword_2_0());
                         
@@ -6350,7 +6367,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getPortClassAccess().getUserCodeDetailCodeParserRuleCall_2_1_0()); 
                     	    
-                    pushFollow(FOLLOW_68);
+                    pushFollow(FOLLOW_69);
                     lv_userCode_3_0=ruleDetailCode();
 
                     state._fsp--;
@@ -6379,29 +6396,29 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             }
 
             // InternalRoom.g:2580:4: ( ( (lv_msgHandlers_4_0= ruleMessageHandler ) ) | ( (lv_operations_5_0= rulePortOperation ) ) | ( (lv_attributes_6_0= ruleAttribute ) ) )*
-            loop65:
+            loop66:
             do {
-                int alt65=4;
+                int alt66=4;
                 switch ( input.LA(1) ) {
                 case 53:
                     {
-                    alt65=1;
+                    alt66=1;
                     }
                     break;
                 case 37:
                     {
-                    alt65=2;
+                    alt66=2;
                     }
                     break;
                 case 33:
                     {
-                    alt65=3;
+                    alt66=3;
                     }
                     break;
 
                 }
 
-                switch (alt65) {
+                switch (alt66) {
             	case 1 :
             	    // InternalRoom.g:2580:5: ( (lv_msgHandlers_4_0= ruleMessageHandler ) )
             	    {
@@ -6414,7 +6431,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getPortClassAccess().getMsgHandlersMessageHandlerParserRuleCall_3_0_0()); 
             	    	    
-            	    pushFollow(FOLLOW_68);
+            	    pushFollow(FOLLOW_69);
             	    lv_msgHandlers_4_0=ruleMessageHandler();
 
             	    state._fsp--;
@@ -6451,7 +6468,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getPortClassAccess().getOperationsPortOperationParserRuleCall_3_1_0()); 
             	    	    
-            	    pushFollow(FOLLOW_68);
+            	    pushFollow(FOLLOW_69);
             	    lv_operations_5_0=rulePortOperation();
 
             	    state._fsp--;
@@ -6488,7 +6505,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getPortClassAccess().getAttributesAttributeParserRuleCall_3_2_0()); 
             	    	    
-            	    pushFollow(FOLLOW_68);
+            	    pushFollow(FOLLOW_69);
             	    lv_attributes_6_0=ruleAttribute();
 
             	    state._fsp--;
@@ -6515,7 +6532,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    break loop65;
+            	    break loop66;
                 }
             } while (true);
 
@@ -6596,32 +6613,32 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // InternalRoom.g:2661:1: (this_InMessageHandler_0= ruleInMessageHandler | this_OutMessageHandler_1= ruleOutMessageHandler )
             {
             // InternalRoom.g:2661:1: (this_InMessageHandler_0= ruleInMessageHandler | this_OutMessageHandler_1= ruleOutMessageHandler )
-            int alt66=2;
-            int LA66_0 = input.LA(1);
+            int alt67=2;
+            int LA67_0 = input.LA(1);
 
-            if ( (LA66_0==53) ) {
-                int LA66_1 = input.LA(2);
+            if ( (LA67_0==53) ) {
+                int LA67_1 = input.LA(2);
 
-                if ( (LA66_1==43) ) {
-                    alt66=1;
+                if ( (LA67_1==44) ) {
+                    alt67=2;
                 }
-                else if ( (LA66_1==44) ) {
-                    alt66=2;
+                else if ( (LA67_1==43) ) {
+                    alt67=1;
                 }
                 else {
                     NoViableAltException nvae =
-                        new NoViableAltException("", 66, 1, input);
+                        new NoViableAltException("", 67, 1, input);
 
                     throw nvae;
                 }
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 66, 0, input);
+                    new NoViableAltException("", 67, 0, input);
 
                 throw nvae;
             }
-            switch (alt66) {
+            switch (alt67) {
                 case 1 :
                     // InternalRoom.g:2662:5: this_InMessageHandler_0= ruleInMessageHandler
                     {
@@ -6734,7 +6751,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // InternalRoom.g:2701:1: (otherlv_0= 'handle' otherlv_1= 'incoming' ( (otherlv_2= RULE_ID ) ) ( (lv_detailCode_3_0= ruleDetailCode ) ) )
             // InternalRoom.g:2701:3: otherlv_0= 'handle' otherlv_1= 'incoming' ( (otherlv_2= RULE_ID ) ) ( (lv_detailCode_3_0= ruleDetailCode ) )
             {
-            otherlv_0=(Token)match(input,53,FOLLOW_69); 
+            otherlv_0=(Token)match(input,53,FOLLOW_70); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getInMessageHandlerAccess().getHandleKeyword_0());
                 
@@ -6870,7 +6887,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // InternalRoom.g:2761:1: (otherlv_0= 'handle' otherlv_1= 'outgoing' ( (otherlv_2= RULE_ID ) ) ( (lv_detailCode_3_0= ruleDetailCode ) ) )
             // InternalRoom.g:2761:3: otherlv_0= 'handle' otherlv_1= 'outgoing' ( (otherlv_2= RULE_ID ) ) ( (lv_detailCode_3_0= ruleDetailCode ) )
             {
-            otherlv_0=(Token)match(input,53,FOLLOW_70); 
+            otherlv_0=(Token)match(input,53,FOLLOW_71); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getOutMessageHandlerAccess().getHandleKeyword_0());
                 
@@ -7155,20 +7172,20 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // InternalRoom.g:2858:3: ( ({...}? => ( ({...}? => ( (lv_abstract_1_0= 'abstract' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_commType_2_0= ruleComponentCommunicationType ) ) ) ) ) )*
             {
             // InternalRoom.g:2858:3: ( ({...}? => ( ({...}? => ( (lv_abstract_1_0= 'abstract' ) ) ) ) ) | ({...}? => ( ({...}? => ( (lv_commType_2_0= ruleComponentCommunicationType ) ) ) ) ) )*
-            loop67:
+            loop68:
             do {
-                int alt67=3;
-                int LA67_0 = input.LA(1);
+                int alt68=3;
+                int LA68_0 = input.LA(1);
 
-                if ( LA67_0 == 54 && getUnorderedGroupHelper().canSelect(grammarAccess.getActorClassAccess().getUnorderedGroup_0(), 0) ) {
-                    alt67=1;
+                if ( LA68_0 == 54 && getUnorderedGroupHelper().canSelect(grammarAccess.getActorClassAccess().getUnorderedGroup_0(), 0) ) {
+                    alt68=1;
                 }
-                else if ( ( LA67_0 >= 124 && LA67_0 <= 126 || LA67_0 == 128 ) && getUnorderedGroupHelper().canSelect(grammarAccess.getActorClassAccess().getUnorderedGroup_0(), 1) ) {
-                    alt67=2;
+                else if ( ( LA68_0 >= 124 && LA68_0 <= 126 || LA68_0 == 128 ) && getUnorderedGroupHelper().canSelect(grammarAccess.getActorClassAccess().getUnorderedGroup_0(), 1) ) {
+                    alt68=2;
                 }
 
 
-                switch (alt67) {
+                switch (alt68) {
             	case 1 :
             	    // InternalRoom.g:2860:4: ({...}? => ( ({...}? => ( (lv_abstract_1_0= 'abstract' ) ) ) ) )
             	    {
@@ -7196,7 +7213,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	    // InternalRoom.g:2866:1: (lv_abstract_1_0= 'abstract' )
             	    // InternalRoom.g:2867:3: lv_abstract_1_0= 'abstract'
             	    {
-            	    lv_abstract_1_0=(Token)match(input,54,FOLLOW_71); 
+            	    lv_abstract_1_0=(Token)match(input,54,FOLLOW_72); 
 
             	            newLeafNode(lv_abstract_1_0, grammarAccess.getActorClassAccess().getAbstractAbstractKeyword_0_0_0());
             	        
@@ -7257,7 +7274,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getActorClassAccess().getCommTypeComponentCommunicationTypeEnumRuleCall_0_1_0()); 
             	    	    
-            	    pushFollow(FOLLOW_71);
+            	    pushFollow(FOLLOW_72);
             	    lv_commType_2_0=ruleComponentCommunicationType();
 
             	    state._fsp--;
@@ -7296,7 +7313,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    break loop67;
+            	    break loop68;
                 }
             } while (true);
 
@@ -7343,13 +7360,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             }
 
             // InternalRoom.g:2946:2: ( (lv_docu_5_0= ruleDocumentation ) )?
-            int alt68=2;
-            int LA68_0 = input.LA(1);
+            int alt69=2;
+            int LA69_0 = input.LA(1);
 
-            if ( (LA68_0==34) ) {
-                alt68=1;
+            if ( (LA69_0==34) ) {
+                alt69=1;
             }
-            switch (alt68) {
+            switch (alt69) {
                 case 1 :
                     // InternalRoom.g:2947:1: (lv_docu_5_0= ruleDocumentation )
                     {
@@ -7385,13 +7402,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             }
 
             // InternalRoom.g:2964:3: (otherlv_6= 'extends' ( ( ruleFQN ) ) )?
-            int alt69=2;
-            int LA69_0 = input.LA(1);
+            int alt70=2;
+            int LA70_0 = input.LA(1);
 
-            if ( (LA69_0==29) ) {
-                alt69=1;
+            if ( (LA70_0==29) ) {
+                alt70=1;
             }
-            switch (alt69) {
+            switch (alt70) {
                 case 1 :
                     // InternalRoom.g:2964:5: otherlv_6= 'extends' ( ( ruleFQN ) )
                     {
@@ -7433,22 +7450,22 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_8=(Token)match(input,14,FOLLOW_72); 
+            otherlv_8=(Token)match(input,14,FOLLOW_73); 
 
                 	newLeafNode(otherlv_8, grammarAccess.getActorClassAccess().getLeftCurlyBracketKeyword_5());
                 
             // InternalRoom.g:2987:1: ( (lv_annotations_9_0= ruleAnnotation ) )*
-            loop70:
+            loop71:
             do {
-                int alt70=2;
-                int LA70_0 = input.LA(1);
+                int alt71=2;
+                int LA71_0 = input.LA(1);
 
-                if ( (LA70_0==108) ) {
-                    alt70=1;
+                if ( (LA71_0==108) ) {
+                    alt71=1;
                 }
 
 
-                switch (alt70) {
+                switch (alt71) {
             	case 1 :
             	    // InternalRoom.g:2988:1: (lv_annotations_9_0= ruleAnnotation )
             	    {
@@ -7458,7 +7475,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getActorClassAccess().getAnnotationsAnnotationParserRuleCall_6_0()); 
             	    	    
-            	    pushFollow(FOLLOW_72);
+            	    pushFollow(FOLLOW_73);
             	    lv_annotations_9_0=ruleAnnotation();
 
             	    state._fsp--;
@@ -7482,18 +7499,18 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    break loop70;
+            	    break loop71;
                 }
             } while (true);
 
             // InternalRoom.g:3005:3: (otherlv_10= 'Interface' otherlv_11= '{' ( ( (lv_serviceProvisionPoints_12_0= ruleSPP ) ) | ( (lv_interfacePorts_13_0= rulePort ) ) )* otherlv_14= '}' )?
-            int alt72=2;
-            int LA72_0 = input.LA(1);
+            int alt73=2;
+            int LA73_0 = input.LA(1);
 
-            if ( (LA72_0==56) ) {
-                alt72=1;
+            if ( (LA73_0==56) ) {
+                alt73=1;
             }
-            switch (alt72) {
+            switch (alt73) {
                 case 1 :
                     // InternalRoom.g:3005:5: otherlv_10= 'Interface' otherlv_11= '{' ( ( (lv_serviceProvisionPoints_12_0= ruleSPP ) ) | ( (lv_interfacePorts_13_0= rulePort ) ) )* otherlv_14= '}'
                     {
@@ -7501,25 +7518,25 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
                         	newLeafNode(otherlv_10, grammarAccess.getActorClassAccess().getInterfaceKeyword_7_0());
                         
-                    otherlv_11=(Token)match(input,14,FOLLOW_73); 
+                    otherlv_11=(Token)match(input,14,FOLLOW_74); 
 
                         	newLeafNode(otherlv_11, grammarAccess.getActorClassAccess().getLeftCurlyBracketKeyword_7_1());
                         
                     // InternalRoom.g:3013:1: ( ( (lv_serviceProvisionPoints_12_0= ruleSPP ) ) | ( (lv_interfacePorts_13_0= rulePort ) ) )*
-                    loop71:
+                    loop72:
                     do {
-                        int alt71=3;
-                        int LA71_0 = input.LA(1);
+                        int alt72=3;
+                        int LA72_0 = input.LA(1);
 
-                        if ( (LA71_0==62) ) {
-                            alt71=1;
+                        if ( (LA72_0==62) ) {
+                            alt72=1;
                         }
-                        else if ( (LA71_0==47||LA71_0==59) ) {
-                            alt71=2;
+                        else if ( (LA72_0==47||LA72_0==59) ) {
+                            alt72=2;
                         }
 
 
-                        switch (alt71) {
+                        switch (alt72) {
                     	case 1 :
                     	    // InternalRoom.g:3013:2: ( (lv_serviceProvisionPoints_12_0= ruleSPP ) )
                     	    {
@@ -7532,7 +7549,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	     
                     	    	        newCompositeNode(grammarAccess.getActorClassAccess().getServiceProvisionPointsSPPParserRuleCall_7_2_0_0()); 
                     	    	    
-                    	    pushFollow(FOLLOW_73);
+                    	    pushFollow(FOLLOW_74);
                     	    lv_serviceProvisionPoints_12_0=ruleSPP();
 
                     	    state._fsp--;
@@ -7569,7 +7586,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	     
                     	    	        newCompositeNode(grammarAccess.getActorClassAccess().getInterfacePortsPortParserRuleCall_7_2_1_0()); 
                     	    	    
-                    	    pushFollow(FOLLOW_73);
+                    	    pushFollow(FOLLOW_74);
                     	    lv_interfacePorts_13_0=rulePort();
 
                     	    state._fsp--;
@@ -7596,11 +7613,11 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	    break;
 
                     	default :
-                    	    break loop71;
+                    	    break loop72;
                         }
                     } while (true);
 
-                    otherlv_14=(Token)match(input,15,FOLLOW_74); 
+                    otherlv_14=(Token)match(input,15,FOLLOW_75); 
 
                         	newLeafNode(otherlv_14, grammarAccess.getActorClassAccess().getRightCurlyBracketKeyword_7_3());
                         
@@ -7611,13 +7628,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             }
 
             // InternalRoom.g:3054:3: (otherlv_15= 'Structure' ( (lv_structureDocu_16_0= ruleDocumentation ) )? otherlv_17= '{' (otherlv_18= 'usercode1' ( (lv_userCode1_19_0= ruleDetailCode ) ) )? (otherlv_20= 'usercode2' ( (lv_userCode2_21_0= ruleDetailCode ) ) )? (otherlv_22= 'usercode3' ( (lv_userCode3_23_0= ruleDetailCode ) ) )? ( ( (lv_connections_24_0= ruleLayerConnection ) ) | ( (lv_bindings_25_0= ruleBinding ) ) | ( (lv_serviceImplementations_26_0= ruleServiceImplementation ) ) | ( (lv_attributes_27_0= ruleAttribute ) ) | ( (lv_actorRefs_28_0= ruleActorRef ) ) | ( (lv_serviceAccessPoints_29_0= ruleSAP ) ) | ( (lv_internalPorts_30_0= rulePort ) ) | ( (lv_externalPorts_31_0= ruleExternalPort ) ) )* otherlv_32= '}' )?
-            int alt78=2;
-            int LA78_0 = input.LA(1);
+            int alt79=2;
+            int LA79_0 = input.LA(1);
 
-            if ( (LA78_0==57) ) {
-                alt78=1;
+            if ( (LA79_0==57) ) {
+                alt79=1;
             }
-            switch (alt78) {
+            switch (alt79) {
                 case 1 :
                     // InternalRoom.g:3054:5: otherlv_15= 'Structure' ( (lv_structureDocu_16_0= ruleDocumentation ) )? otherlv_17= '{' (otherlv_18= 'usercode1' ( (lv_userCode1_19_0= ruleDetailCode ) ) )? (otherlv_20= 'usercode2' ( (lv_userCode2_21_0= ruleDetailCode ) ) )? (otherlv_22= 'usercode3' ( (lv_userCode3_23_0= ruleDetailCode ) ) )? ( ( (lv_connections_24_0= ruleLayerConnection ) ) | ( (lv_bindings_25_0= ruleBinding ) ) | ( (lv_serviceImplementations_26_0= ruleServiceImplementation ) ) | ( (lv_attributes_27_0= ruleAttribute ) ) | ( (lv_actorRefs_28_0= ruleActorRef ) ) | ( (lv_serviceAccessPoints_29_0= ruleSAP ) ) | ( (lv_internalPorts_30_0= rulePort ) ) | ( (lv_externalPorts_31_0= ruleExternalPort ) ) )* otherlv_32= '}'
                     {
@@ -7626,13 +7643,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                         	newLeafNode(otherlv_15, grammarAccess.getActorClassAccess().getStructureKeyword_8_0());
                         
                     // InternalRoom.g:3058:1: ( (lv_structureDocu_16_0= ruleDocumentation ) )?
-                    int alt73=2;
-                    int LA73_0 = input.LA(1);
+                    int alt74=2;
+                    int LA74_0 = input.LA(1);
 
-                    if ( (LA73_0==34) ) {
-                        alt73=1;
+                    if ( (LA74_0==34) ) {
+                        alt74=1;
                     }
-                    switch (alt73) {
+                    switch (alt74) {
                         case 1 :
                             // InternalRoom.g:3059:1: (lv_structureDocu_16_0= ruleDocumentation )
                             {
@@ -7667,22 +7684,22 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    otherlv_17=(Token)match(input,14,FOLLOW_75); 
+                    otherlv_17=(Token)match(input,14,FOLLOW_76); 
 
                         	newLeafNode(otherlv_17, grammarAccess.getActorClassAccess().getLeftCurlyBracketKeyword_8_2());
                         
                     // InternalRoom.g:3080:1: (otherlv_18= 'usercode1' ( (lv_userCode1_19_0= ruleDetailCode ) ) )?
-                    int alt74=2;
-                    int LA74_0 = input.LA(1);
+                    int alt75=2;
+                    int LA75_0 = input.LA(1);
 
-                    if ( (LA74_0==30) ) {
-                        alt74=1;
+                    if ( (LA75_0==30) ) {
+                        alt75=1;
                     }
-                    switch (alt74) {
+                    switch (alt75) {
                         case 1 :
                             // InternalRoom.g:3080:3: otherlv_18= 'usercode1' ( (lv_userCode1_19_0= ruleDetailCode ) )
                             {
-                            otherlv_18=(Token)match(input,30,FOLLOW_76); 
+                            otherlv_18=(Token)match(input,30,FOLLOW_77); 
 
                                 	newLeafNode(otherlv_18, grammarAccess.getActorClassAccess().getUsercode1Keyword_8_3_0());
                                 
@@ -7695,7 +7712,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                              
                             	        newCompositeNode(grammarAccess.getActorClassAccess().getUserCode1DetailCodeParserRuleCall_8_3_1_0()); 
                             	    
-                            pushFollow(FOLLOW_77);
+                            pushFollow(FOLLOW_78);
                             lv_userCode1_19_0=ruleDetailCode();
 
                             state._fsp--;
@@ -7724,17 +7741,17 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     }
 
                     // InternalRoom.g:3102:4: (otherlv_20= 'usercode2' ( (lv_userCode2_21_0= ruleDetailCode ) ) )?
-                    int alt75=2;
-                    int LA75_0 = input.LA(1);
+                    int alt76=2;
+                    int LA76_0 = input.LA(1);
 
-                    if ( (LA75_0==31) ) {
-                        alt75=1;
+                    if ( (LA76_0==31) ) {
+                        alt76=1;
                     }
-                    switch (alt75) {
+                    switch (alt76) {
                         case 1 :
                             // InternalRoom.g:3102:6: otherlv_20= 'usercode2' ( (lv_userCode2_21_0= ruleDetailCode ) )
                             {
-                            otherlv_20=(Token)match(input,31,FOLLOW_78); 
+                            otherlv_20=(Token)match(input,31,FOLLOW_79); 
 
                                 	newLeafNode(otherlv_20, grammarAccess.getActorClassAccess().getUsercode2Keyword_8_4_0());
                                 
@@ -7747,7 +7764,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                              
                             	        newCompositeNode(grammarAccess.getActorClassAccess().getUserCode2DetailCodeParserRuleCall_8_4_1_0()); 
                             	    
-                            pushFollow(FOLLOW_79);
+                            pushFollow(FOLLOW_80);
                             lv_userCode2_21_0=ruleDetailCode();
 
                             state._fsp--;
@@ -7776,17 +7793,17 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     }
 
                     // InternalRoom.g:3124:4: (otherlv_22= 'usercode3' ( (lv_userCode3_23_0= ruleDetailCode ) ) )?
-                    int alt76=2;
-                    int LA76_0 = input.LA(1);
+                    int alt77=2;
+                    int LA77_0 = input.LA(1);
 
-                    if ( (LA76_0==32) ) {
-                        alt76=1;
+                    if ( (LA77_0==32) ) {
+                        alt77=1;
                     }
-                    switch (alt76) {
+                    switch (alt77) {
                         case 1 :
                             // InternalRoom.g:3124:6: otherlv_22= 'usercode3' ( (lv_userCode3_23_0= ruleDetailCode ) )
                             {
-                            otherlv_22=(Token)match(input,32,FOLLOW_80); 
+                            otherlv_22=(Token)match(input,32,FOLLOW_81); 
 
                                 	newLeafNode(otherlv_22, grammarAccess.getActorClassAccess().getUsercode3Keyword_8_5_0());
                                 
@@ -7799,7 +7816,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                              
                             	        newCompositeNode(grammarAccess.getActorClassAccess().getUserCode3DetailCodeParserRuleCall_8_5_1_0()); 
                             	    
-                            pushFollow(FOLLOW_81);
+                            pushFollow(FOLLOW_82);
                             lv_userCode3_23_0=ruleDetailCode();
 
                             state._fsp--;
@@ -7828,57 +7845,57 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     }
 
                     // InternalRoom.g:3146:4: ( ( (lv_connections_24_0= ruleLayerConnection ) ) | ( (lv_bindings_25_0= ruleBinding ) ) | ( (lv_serviceImplementations_26_0= ruleServiceImplementation ) ) | ( (lv_attributes_27_0= ruleAttribute ) ) | ( (lv_actorRefs_28_0= ruleActorRef ) ) | ( (lv_serviceAccessPoints_29_0= ruleSAP ) ) | ( (lv_internalPorts_30_0= rulePort ) ) | ( (lv_externalPorts_31_0= ruleExternalPort ) ) )*
-                    loop77:
+                    loop78:
                     do {
-                        int alt77=9;
+                        int alt78=9;
                         switch ( input.LA(1) ) {
                         case 74:
                             {
-                            alt77=1;
+                            alt78=1;
                             }
                             break;
                         case 70:
                             {
-                            alt77=2;
+                            alt78=2;
                             }
                             break;
                         case 63:
                             {
-                            alt77=3;
+                            alt78=3;
                             }
                             break;
                         case 33:
                             {
-                            alt77=4;
+                            alt78=4;
                             }
                             break;
                         case 77:
                         case 111:
                         case 127:
                             {
-                            alt77=5;
+                            alt78=5;
                             }
                             break;
                         case 61:
                             {
-                            alt77=6;
+                            alt78=6;
                             }
                             break;
                         case 47:
                         case 59:
                             {
-                            alt77=7;
+                            alt78=7;
                             }
                             break;
                         case 60:
                             {
-                            alt77=8;
+                            alt78=8;
                             }
                             break;
 
                         }
 
-                        switch (alt77) {
+                        switch (alt78) {
                     	case 1 :
                     	    // InternalRoom.g:3146:5: ( (lv_connections_24_0= ruleLayerConnection ) )
                     	    {
@@ -7891,7 +7908,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	     
                     	    	        newCompositeNode(grammarAccess.getActorClassAccess().getConnectionsLayerConnectionParserRuleCall_8_6_0_0()); 
                     	    	    
-                    	    pushFollow(FOLLOW_81);
+                    	    pushFollow(FOLLOW_82);
                     	    lv_connections_24_0=ruleLayerConnection();
 
                     	    state._fsp--;
@@ -7928,7 +7945,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	     
                     	    	        newCompositeNode(grammarAccess.getActorClassAccess().getBindingsBindingParserRuleCall_8_6_1_0()); 
                     	    	    
-                    	    pushFollow(FOLLOW_81);
+                    	    pushFollow(FOLLOW_82);
                     	    lv_bindings_25_0=ruleBinding();
 
                     	    state._fsp--;
@@ -7965,7 +7982,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	     
                     	    	        newCompositeNode(grammarAccess.getActorClassAccess().getServiceImplementationsServiceImplementationParserRuleCall_8_6_2_0()); 
                     	    	    
-                    	    pushFollow(FOLLOW_81);
+                    	    pushFollow(FOLLOW_82);
                     	    lv_serviceImplementations_26_0=ruleServiceImplementation();
 
                     	    state._fsp--;
@@ -8002,7 +8019,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	     
                     	    	        newCompositeNode(grammarAccess.getActorClassAccess().getAttributesAttributeParserRuleCall_8_6_3_0()); 
                     	    	    
-                    	    pushFollow(FOLLOW_81);
+                    	    pushFollow(FOLLOW_82);
                     	    lv_attributes_27_0=ruleAttribute();
 
                     	    state._fsp--;
@@ -8039,7 +8056,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	     
                     	    	        newCompositeNode(grammarAccess.getActorClassAccess().getActorRefsActorRefParserRuleCall_8_6_4_0()); 
                     	    	    
-                    	    pushFollow(FOLLOW_81);
+                    	    pushFollow(FOLLOW_82);
                     	    lv_actorRefs_28_0=ruleActorRef();
 
                     	    state._fsp--;
@@ -8076,7 +8093,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	     
                     	    	        newCompositeNode(grammarAccess.getActorClassAccess().getServiceAccessPointsSAPParserRuleCall_8_6_5_0()); 
                     	    	    
-                    	    pushFollow(FOLLOW_81);
+                    	    pushFollow(FOLLOW_82);
                     	    lv_serviceAccessPoints_29_0=ruleSAP();
 
                     	    state._fsp--;
@@ -8113,7 +8130,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	     
                     	    	        newCompositeNode(grammarAccess.getActorClassAccess().getInternalPortsPortParserRuleCall_8_6_6_0()); 
                     	    	    
-                    	    pushFollow(FOLLOW_81);
+                    	    pushFollow(FOLLOW_82);
                     	    lv_internalPorts_30_0=rulePort();
 
                     	    state._fsp--;
@@ -8150,7 +8167,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	     
                     	    	        newCompositeNode(grammarAccess.getActorClassAccess().getExternalPortsExternalPortParserRuleCall_8_6_7_0()); 
                     	    	    
-                    	    pushFollow(FOLLOW_81);
+                    	    pushFollow(FOLLOW_82);
                     	    lv_externalPorts_31_0=ruleExternalPort();
 
                     	    state._fsp--;
@@ -8177,11 +8194,11 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	    break;
 
                     	default :
-                    	    break loop77;
+                    	    break loop78;
                         }
                     } while (true);
 
-                    otherlv_32=(Token)match(input,15,FOLLOW_82); 
+                    otherlv_32=(Token)match(input,15,FOLLOW_83); 
 
                         	newLeafNode(otherlv_32, grammarAccess.getActorClassAccess().getRightCurlyBracketKeyword_8_7());
                         
@@ -8192,13 +8209,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             }
 
             // InternalRoom.g:3301:3: (otherlv_33= 'Behavior' ( (lv_behaviorDocu_34_0= ruleDocumentation ) )? otherlv_35= '{' ( (lv_behaviorAnnotations_36_0= ruleAnnotation ) )* ( ( (lv_operations_37_0= ruleStandardOperation ) ) | ( (lv_structors_38_0= ruleClassStructor ) ) )* ( (lv_stateMachine_39_0= ruleStateMachine ) )? otherlv_40= '}' )?
-            int alt83=2;
-            int LA83_0 = input.LA(1);
+            int alt84=2;
+            int LA84_0 = input.LA(1);
 
-            if ( (LA83_0==58) ) {
-                alt83=1;
+            if ( (LA84_0==58) ) {
+                alt84=1;
             }
-            switch (alt83) {
+            switch (alt84) {
                 case 1 :
                     // InternalRoom.g:3301:5: otherlv_33= 'Behavior' ( (lv_behaviorDocu_34_0= ruleDocumentation ) )? otherlv_35= '{' ( (lv_behaviorAnnotations_36_0= ruleAnnotation ) )* ( ( (lv_operations_37_0= ruleStandardOperation ) ) | ( (lv_structors_38_0= ruleClassStructor ) ) )* ( (lv_stateMachine_39_0= ruleStateMachine ) )? otherlv_40= '}'
                     {
@@ -8207,13 +8224,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                         	newLeafNode(otherlv_33, grammarAccess.getActorClassAccess().getBehaviorKeyword_9_0());
                         
                     // InternalRoom.g:3305:1: ( (lv_behaviorDocu_34_0= ruleDocumentation ) )?
-                    int alt79=2;
-                    int LA79_0 = input.LA(1);
+                    int alt80=2;
+                    int LA80_0 = input.LA(1);
 
-                    if ( (LA79_0==34) ) {
-                        alt79=1;
+                    if ( (LA80_0==34) ) {
+                        alt80=1;
                     }
-                    switch (alt79) {
+                    switch (alt80) {
                         case 1 :
                             // InternalRoom.g:3306:1: (lv_behaviorDocu_34_0= ruleDocumentation )
                             {
@@ -8248,22 +8265,22 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    otherlv_35=(Token)match(input,14,FOLLOW_83); 
+                    otherlv_35=(Token)match(input,14,FOLLOW_84); 
 
                         	newLeafNode(otherlv_35, grammarAccess.getActorClassAccess().getLeftCurlyBracketKeyword_9_2());
                         
                     // InternalRoom.g:3327:1: ( (lv_behaviorAnnotations_36_0= ruleAnnotation ) )*
-                    loop80:
+                    loop81:
                     do {
-                        int alt80=2;
-                        int LA80_0 = input.LA(1);
+                        int alt81=2;
+                        int LA81_0 = input.LA(1);
 
-                        if ( (LA80_0==108) ) {
-                            alt80=1;
+                        if ( (LA81_0==108) ) {
+                            alt81=1;
                         }
 
 
-                        switch (alt80) {
+                        switch (alt81) {
                     	case 1 :
                     	    // InternalRoom.g:3328:1: (lv_behaviorAnnotations_36_0= ruleAnnotation )
                     	    {
@@ -8273,7 +8290,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	     
                     	    	        newCompositeNode(grammarAccess.getActorClassAccess().getBehaviorAnnotationsAnnotationParserRuleCall_9_3_0()); 
                     	    	    
-                    	    pushFollow(FOLLOW_83);
+                    	    pushFollow(FOLLOW_84);
                     	    lv_behaviorAnnotations_36_0=ruleAnnotation();
 
                     	    state._fsp--;
@@ -8297,25 +8314,25 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	    break;
 
                     	default :
-                    	    break loop80;
+                    	    break loop81;
                         }
                     } while (true);
 
                     // InternalRoom.g:3345:3: ( ( (lv_operations_37_0= ruleStandardOperation ) ) | ( (lv_structors_38_0= ruleClassStructor ) ) )*
-                    loop81:
+                    loop82:
                     do {
-                        int alt81=3;
-                        int LA81_0 = input.LA(1);
+                        int alt82=3;
+                        int LA82_0 = input.LA(1);
 
-                        if ( ((LA81_0>=36 && LA81_0<=37)) ) {
-                            alt81=1;
+                        if ( ((LA82_0>=36 && LA82_0<=37)) ) {
+                            alt82=1;
                         }
-                        else if ( ((LA81_0>=40 && LA81_0<=41)) ) {
-                            alt81=2;
+                        else if ( ((LA82_0>=40 && LA82_0<=41)) ) {
+                            alt82=2;
                         }
 
 
-                        switch (alt81) {
+                        switch (alt82) {
                     	case 1 :
                     	    // InternalRoom.g:3345:4: ( (lv_operations_37_0= ruleStandardOperation ) )
                     	    {
@@ -8328,7 +8345,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	     
                     	    	        newCompositeNode(grammarAccess.getActorClassAccess().getOperationsStandardOperationParserRuleCall_9_4_0_0()); 
                     	    	    
-                    	    pushFollow(FOLLOW_84);
+                    	    pushFollow(FOLLOW_85);
                     	    lv_operations_37_0=ruleStandardOperation();
 
                     	    state._fsp--;
@@ -8365,7 +8382,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	     
                     	    	        newCompositeNode(grammarAccess.getActorClassAccess().getStructorsClassStructorParserRuleCall_9_4_1_0()); 
                     	    	    
-                    	    pushFollow(FOLLOW_84);
+                    	    pushFollow(FOLLOW_85);
                     	    lv_structors_38_0=ruleClassStructor();
 
                     	    state._fsp--;
@@ -8392,18 +8409,18 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	    break;
 
                     	default :
-                    	    break loop81;
+                    	    break loop82;
                         }
                     } while (true);
 
                     // InternalRoom.g:3382:4: ( (lv_stateMachine_39_0= ruleStateMachine ) )?
-                    int alt82=2;
-                    int LA82_0 = input.LA(1);
+                    int alt83=2;
+                    int LA83_0 = input.LA(1);
 
-                    if ( (LA82_0==80) ) {
-                        alt82=1;
+                    if ( (LA83_0==80) ) {
+                        alt83=1;
                     }
-                    switch (alt82) {
+                    switch (alt83) {
                         case 1 :
                             // InternalRoom.g:3383:1: (lv_stateMachine_39_0= ruleStateMachine )
                             {
@@ -8527,32 +8544,32 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // InternalRoom.g:3429:1: (this_Port_0= rulePort | this_SAP_1= ruleSAP | this_SPP_2= ruleSPP )
             {
             // InternalRoom.g:3429:1: (this_Port_0= rulePort | this_SAP_1= ruleSAP | this_SPP_2= ruleSPP )
-            int alt84=3;
+            int alt85=3;
             switch ( input.LA(1) ) {
             case 47:
             case 59:
                 {
-                alt84=1;
+                alt85=1;
                 }
                 break;
             case 61:
                 {
-                alt84=2;
+                alt85=2;
                 }
                 break;
             case 62:
                 {
-                alt84=3;
+                alt85=3;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 84, 0, input);
+                    new NoViableAltException("", 85, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt84) {
+            switch (alt85) {
                 case 1 :
                     // InternalRoom.g:3430:5: this_Port_0= rulePort
                     {
@@ -8689,20 +8706,20 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // InternalRoom.g:3479:2: ( (lv_conjugated_0_0= 'conjugated' ) )? otherlv_1= 'Port' ( (lv_name_2_0= RULE_ID ) ) ( (lv_multiplicity_3_0= ruleMULTIPLICITY ) )? otherlv_4= ':' ( ( ruleFQN ) ) ( (lv_annotations_6_0= ruleAnnotation ) )* ( (lv_docu_7_0= ruleDocumentation ) )?
             {
             // InternalRoom.g:3479:2: ( (lv_conjugated_0_0= 'conjugated' ) )?
-            int alt85=2;
-            int LA85_0 = input.LA(1);
+            int alt86=2;
+            int LA86_0 = input.LA(1);
 
-            if ( (LA85_0==47) ) {
-                alt85=1;
+            if ( (LA86_0==47) ) {
+                alt86=1;
             }
-            switch (alt85) {
+            switch (alt86) {
                 case 1 :
                     // InternalRoom.g:3480:1: (lv_conjugated_0_0= 'conjugated' )
                     {
                     // InternalRoom.g:3480:1: (lv_conjugated_0_0= 'conjugated' )
                     // InternalRoom.g:3481:3: lv_conjugated_0_0= 'conjugated'
                     {
-                    lv_conjugated_0_0=(Token)match(input,47,FOLLOW_85); 
+                    lv_conjugated_0_0=(Token)match(input,47,FOLLOW_86); 
 
                             newLeafNode(lv_conjugated_0_0, grammarAccess.getPortAccess().getConjugatedConjugatedKeyword_0_0());
                         
@@ -8752,13 +8769,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             }
 
             // InternalRoom.g:3516:2: ( (lv_multiplicity_3_0= ruleMULTIPLICITY ) )?
-            int alt86=2;
-            int LA86_0 = input.LA(1);
+            int alt87=2;
+            int LA87_0 = input.LA(1);
 
-            if ( (LA86_0==34) ) {
-                alt86=1;
+            if ( (LA87_0==34) ) {
+                alt87=1;
             }
-            switch (alt86) {
+            switch (alt87) {
                 case 1 :
                     // InternalRoom.g:3517:1: (lv_multiplicity_3_0= ruleMULTIPLICITY )
                     {
@@ -8811,7 +8828,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
              
             	        newCompositeNode(grammarAccess.getPortAccess().getProtocolGeneralProtocolClassCrossReference_5_0()); 
             	    
-            pushFollow(FOLLOW_65);
+            pushFollow(FOLLOW_66);
             ruleFQN();
 
             state._fsp--;
@@ -8826,17 +8843,17 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             }
 
             // InternalRoom.g:3553:2: ( (lv_annotations_6_0= ruleAnnotation ) )*
-            loop87:
+            loop88:
             do {
-                int alt87=2;
-                int LA87_0 = input.LA(1);
+                int alt88=2;
+                int LA88_0 = input.LA(1);
 
-                if ( (LA87_0==108) ) {
-                    alt87=1;
+                if ( (LA88_0==108) ) {
+                    alt88=1;
                 }
 
 
-                switch (alt87) {
+                switch (alt88) {
             	case 1 :
             	    // InternalRoom.g:3554:1: (lv_annotations_6_0= ruleAnnotation )
             	    {
@@ -8846,7 +8863,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getPortAccess().getAnnotationsAnnotationParserRuleCall_6_0()); 
             	    	    
-            	    pushFollow(FOLLOW_65);
+            	    pushFollow(FOLLOW_66);
             	    lv_annotations_6_0=ruleAnnotation();
 
             	    state._fsp--;
@@ -8870,18 +8887,18 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    break loop87;
+            	    break loop88;
                 }
             } while (true);
 
             // InternalRoom.g:3571:3: ( (lv_docu_7_0= ruleDocumentation ) )?
-            int alt88=2;
-            int LA88_0 = input.LA(1);
+            int alt89=2;
+            int LA89_0 = input.LA(1);
 
-            if ( (LA88_0==34) ) {
-                alt88=1;
+            if ( (LA89_0==34) ) {
+                alt89=1;
             }
-            switch (alt88) {
+            switch (alt89) {
                 case 1 :
                     // InternalRoom.g:3572:1: (lv_docu_7_0= ruleDocumentation )
                     {
@@ -8990,7 +9007,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // InternalRoom.g:3610:1: (otherlv_0= 'external' otherlv_1= 'Port' ( (otherlv_2= RULE_ID ) ) )
             // InternalRoom.g:3610:3: otherlv_0= 'external' otherlv_1= 'Port' ( (otherlv_2= RULE_ID ) )
             {
-            otherlv_0=(Token)match(input,60,FOLLOW_85); 
+            otherlv_0=(Token)match(input,60,FOLLOW_86); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getExternalPortAccess().getExternalKeyword_0());
                 
@@ -9365,7 +9382,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // InternalRoom.g:3776:1: (otherlv_0= 'ServiceImplementation' otherlv_1= 'of' ( (otherlv_2= RULE_ID ) ) )
             // InternalRoom.g:3776:3: otherlv_0= 'ServiceImplementation' otherlv_1= 'of' ( (otherlv_2= RULE_ID ) )
             {
-            otherlv_0=(Token)match(input,63,FOLLOW_86); 
+            otherlv_0=(Token)match(input,63,FOLLOW_87); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getServiceImplementationAccess().getServiceImplementationKeyword_0());
                 
@@ -9510,13 +9527,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             }
 
             // InternalRoom.g:3840:2: ( (lv_docu_2_0= ruleDocumentation ) )?
-            int alt89=2;
-            int LA89_0 = input.LA(1);
+            int alt90=2;
+            int LA90_0 = input.LA(1);
 
-            if ( (LA89_0==34) ) {
-                alt89=1;
+            if ( (LA90_0==34) ) {
+                alt90=1;
             }
-            switch (alt89) {
+            switch (alt90) {
                 case 1 :
                     // InternalRoom.g:3841:1: (lv_docu_2_0= ruleDocumentation )
                     {
@@ -9551,22 +9568,22 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_3=(Token)match(input,14,FOLLOW_87); 
+            otherlv_3=(Token)match(input,14,FOLLOW_88); 
 
                 	newLeafNode(otherlv_3, grammarAccess.getLogicalSystemAccess().getLeftCurlyBracketKeyword_3());
                 
             // InternalRoom.g:3862:1: ( (lv_annotations_4_0= ruleAnnotation ) )*
-            loop90:
+            loop91:
             do {
-                int alt90=2;
-                int LA90_0 = input.LA(1);
+                int alt91=2;
+                int LA91_0 = input.LA(1);
 
-                if ( (LA90_0==108) ) {
-                    alt90=1;
+                if ( (LA91_0==108) ) {
+                    alt91=1;
                 }
 
 
-                switch (alt90) {
+                switch (alt91) {
             	case 1 :
             	    // InternalRoom.g:3863:1: (lv_annotations_4_0= ruleAnnotation )
             	    {
@@ -9576,7 +9593,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getLogicalSystemAccess().getAnnotationsAnnotationParserRuleCall_4_0()); 
             	    	    
-            	    pushFollow(FOLLOW_87);
+            	    pushFollow(FOLLOW_88);
             	    lv_annotations_4_0=ruleAnnotation();
 
             	    state._fsp--;
@@ -9600,34 +9617,34 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    break loop90;
+            	    break loop91;
                 }
             } while (true);
 
             // InternalRoom.g:3880:3: ( ( (lv_connections_5_0= ruleLayerConnection ) ) | ( (lv_bindings_6_0= ruleBinding ) ) | ( (lv_subSystems_7_0= ruleSubSystemRef ) ) )*
-            loop91:
+            loop92:
             do {
-                int alt91=4;
+                int alt92=4;
                 switch ( input.LA(1) ) {
                 case 74:
                     {
-                    alt91=1;
+                    alt92=1;
                     }
                     break;
                 case 70:
                     {
-                    alt91=2;
+                    alt92=2;
                     }
                     break;
                 case 65:
                     {
-                    alt91=3;
+                    alt92=3;
                     }
                     break;
 
                 }
 
-                switch (alt91) {
+                switch (alt92) {
             	case 1 :
             	    // InternalRoom.g:3880:4: ( (lv_connections_5_0= ruleLayerConnection ) )
             	    {
@@ -9640,7 +9657,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getLogicalSystemAccess().getConnectionsLayerConnectionParserRuleCall_5_0_0()); 
             	    	    
-            	    pushFollow(FOLLOW_88);
+            	    pushFollow(FOLLOW_89);
             	    lv_connections_5_0=ruleLayerConnection();
 
             	    state._fsp--;
@@ -9677,7 +9694,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getLogicalSystemAccess().getBindingsBindingParserRuleCall_5_1_0()); 
             	    	    
-            	    pushFollow(FOLLOW_88);
+            	    pushFollow(FOLLOW_89);
             	    lv_bindings_6_0=ruleBinding();
 
             	    state._fsp--;
@@ -9714,7 +9731,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getLogicalSystemAccess().getSubSystemsSubSystemRefParserRuleCall_5_2_0()); 
             	    	    
-            	    pushFollow(FOLLOW_88);
+            	    pushFollow(FOLLOW_89);
             	    lv_subSystems_7_0=ruleSubSystemRef();
 
             	    state._fsp--;
@@ -9741,7 +9758,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    break loop91;
+            	    break loop92;
                 }
             } while (true);
 
@@ -9888,13 +9905,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             }
 
             // InternalRoom.g:4004:2: ( (lv_docu_4_0= ruleDocumentation ) )?
-            int alt92=2;
-            int LA92_0 = input.LA(1);
+            int alt93=2;
+            int LA93_0 = input.LA(1);
 
-            if ( (LA92_0==34) ) {
-                alt92=1;
+            if ( (LA93_0==34) ) {
+                alt93=1;
             }
-            switch (alt92) {
+            switch (alt93) {
                 case 1 :
                     // InternalRoom.g:4005:1: (lv_docu_4_0= ruleDocumentation )
                     {
@@ -10062,13 +10079,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             }
 
             // InternalRoom.g:4065:2: ( (lv_docu_2_0= ruleDocumentation ) )?
-            int alt93=2;
-            int LA93_0 = input.LA(1);
+            int alt94=2;
+            int LA94_0 = input.LA(1);
 
-            if ( (LA93_0==34) ) {
-                alt93=1;
+            if ( (LA94_0==34) ) {
+                alt94=1;
             }
-            switch (alt93) {
+            switch (alt94) {
                 case 1 :
                     // InternalRoom.g:4066:1: (lv_docu_2_0= ruleDocumentation )
                     {
@@ -10103,22 +10120,22 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_3=(Token)match(input,14,FOLLOW_89); 
+            otherlv_3=(Token)match(input,14,FOLLOW_90); 
 
                 	newLeafNode(otherlv_3, grammarAccess.getSubSystemClassAccess().getLeftCurlyBracketKeyword_3());
                 
             // InternalRoom.g:4087:1: ( (lv_annotations_4_0= ruleAnnotation ) )*
-            loop94:
+            loop95:
             do {
-                int alt94=2;
-                int LA94_0 = input.LA(1);
+                int alt95=2;
+                int LA95_0 = input.LA(1);
 
-                if ( (LA94_0==108) ) {
-                    alt94=1;
+                if ( (LA95_0==108) ) {
+                    alt95=1;
                 }
 
 
-                switch (alt94) {
+                switch (alt95) {
             	case 1 :
             	    // InternalRoom.g:4088:1: (lv_annotations_4_0= ruleAnnotation )
             	    {
@@ -10128,7 +10145,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getSubSystemClassAccess().getAnnotationsAnnotationParserRuleCall_4_0()); 
             	    	    
-            	    pushFollow(FOLLOW_89);
+            	    pushFollow(FOLLOW_90);
             	    lv_annotations_4_0=ruleAnnotation();
 
             	    state._fsp--;
@@ -10152,22 +10169,22 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    break loop94;
+            	    break loop95;
                 }
             } while (true);
 
             // InternalRoom.g:4105:3: (otherlv_5= 'usercode1' ( (lv_userCode1_6_0= ruleDetailCode ) ) )?
-            int alt95=2;
-            int LA95_0 = input.LA(1);
+            int alt96=2;
+            int LA96_0 = input.LA(1);
 
-            if ( (LA95_0==30) ) {
-                alt95=1;
+            if ( (LA96_0==30) ) {
+                alt96=1;
             }
-            switch (alt95) {
+            switch (alt96) {
                 case 1 :
                     // InternalRoom.g:4105:5: otherlv_5= 'usercode1' ( (lv_userCode1_6_0= ruleDetailCode ) )
                     {
-                    otherlv_5=(Token)match(input,30,FOLLOW_90); 
+                    otherlv_5=(Token)match(input,30,FOLLOW_91); 
 
                         	newLeafNode(otherlv_5, grammarAccess.getSubSystemClassAccess().getUsercode1Keyword_5_0());
                         
@@ -10180,7 +10197,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getSubSystemClassAccess().getUserCode1DetailCodeParserRuleCall_5_1_0()); 
                     	    
-                    pushFollow(FOLLOW_91);
+                    pushFollow(FOLLOW_92);
                     lv_userCode1_6_0=ruleDetailCode();
 
                     state._fsp--;
@@ -10209,17 +10226,17 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             }
 
             // InternalRoom.g:4127:4: (otherlv_7= 'usercode2' ( (lv_userCode2_8_0= ruleDetailCode ) ) )?
-            int alt96=2;
-            int LA96_0 = input.LA(1);
+            int alt97=2;
+            int LA97_0 = input.LA(1);
 
-            if ( (LA96_0==31) ) {
-                alt96=1;
+            if ( (LA97_0==31) ) {
+                alt97=1;
             }
-            switch (alt96) {
+            switch (alt97) {
                 case 1 :
                     // InternalRoom.g:4127:6: otherlv_7= 'usercode2' ( (lv_userCode2_8_0= ruleDetailCode ) )
                     {
-                    otherlv_7=(Token)match(input,31,FOLLOW_92); 
+                    otherlv_7=(Token)match(input,31,FOLLOW_93); 
 
                         	newLeafNode(otherlv_7, grammarAccess.getSubSystemClassAccess().getUsercode2Keyword_6_0());
                         
@@ -10232,7 +10249,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getSubSystemClassAccess().getUserCode2DetailCodeParserRuleCall_6_1_0()); 
                     	    
-                    pushFollow(FOLLOW_93);
+                    pushFollow(FOLLOW_94);
                     lv_userCode2_8_0=ruleDetailCode();
 
                     state._fsp--;
@@ -10261,17 +10278,17 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             }
 
             // InternalRoom.g:4149:4: (otherlv_9= 'usercode3' ( (lv_userCode3_10_0= ruleDetailCode ) ) )?
-            int alt97=2;
-            int LA97_0 = input.LA(1);
+            int alt98=2;
+            int LA98_0 = input.LA(1);
 
-            if ( (LA97_0==32) ) {
-                alt97=1;
+            if ( (LA98_0==32) ) {
+                alt98=1;
             }
-            switch (alt97) {
+            switch (alt98) {
                 case 1 :
                     // InternalRoom.g:4149:6: otherlv_9= 'usercode3' ( (lv_userCode3_10_0= ruleDetailCode ) )
                     {
-                    otherlv_9=(Token)match(input,32,FOLLOW_94); 
+                    otherlv_9=(Token)match(input,32,FOLLOW_95); 
 
                         	newLeafNode(otherlv_9, grammarAccess.getSubSystemClassAccess().getUsercode3Keyword_7_0());
                         
@@ -10284,7 +10301,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getSubSystemClassAccess().getUserCode3DetailCodeParserRuleCall_7_1_0()); 
                     	    
-                    pushFollow(FOLLOW_95);
+                    pushFollow(FOLLOW_96);
                     lv_userCode3_10_0=ruleDetailCode();
 
                     state._fsp--;
@@ -10313,52 +10330,52 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             }
 
             // InternalRoom.g:4171:4: ( ( (lv_actorInstanceMappings_11_0= ruleActorInstanceMapping ) ) | ( (lv_threads_12_0= ruleLogicalThread ) ) | ( (lv_connections_13_0= ruleLayerConnection ) ) | ( (lv_bindings_14_0= ruleBinding ) ) | ( (lv_actorRefs_15_0= ruleActorRef ) ) | ( (lv_serviceProvisionPoints_16_0= ruleSPP ) ) | ( (lv_relayPorts_17_0= rulePort ) ) )*
-            loop98:
+            loop99:
             do {
-                int alt98=8;
+                int alt99=8;
                 switch ( input.LA(1) ) {
                 case 68:
                     {
-                    alt98=1;
+                    alt99=1;
                     }
                     break;
                 case 67:
                     {
-                    alt98=2;
+                    alt99=2;
                     }
                     break;
                 case 74:
                     {
-                    alt98=3;
+                    alt99=3;
                     }
                     break;
                 case 70:
                     {
-                    alt98=4;
+                    alt99=4;
                     }
                     break;
                 case 77:
                 case 111:
                 case 127:
                     {
-                    alt98=5;
+                    alt99=5;
                     }
                     break;
                 case 62:
                     {
-                    alt98=6;
+                    alt99=6;
                     }
                     break;
                 case 47:
                 case 59:
                     {
-                    alt98=7;
+                    alt99=7;
                     }
                     break;
 
                 }
 
-                switch (alt98) {
+                switch (alt99) {
             	case 1 :
             	    // InternalRoom.g:4171:5: ( (lv_actorInstanceMappings_11_0= ruleActorInstanceMapping ) )
             	    {
@@ -10371,7 +10388,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getSubSystemClassAccess().getActorInstanceMappingsActorInstanceMappingParserRuleCall_8_0_0()); 
             	    	    
-            	    pushFollow(FOLLOW_95);
+            	    pushFollow(FOLLOW_96);
             	    lv_actorInstanceMappings_11_0=ruleActorInstanceMapping();
 
             	    state._fsp--;
@@ -10408,7 +10425,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getSubSystemClassAccess().getThreadsLogicalThreadParserRuleCall_8_1_0()); 
             	    	    
-            	    pushFollow(FOLLOW_95);
+            	    pushFollow(FOLLOW_96);
             	    lv_threads_12_0=ruleLogicalThread();
 
             	    state._fsp--;
@@ -10445,7 +10462,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getSubSystemClassAccess().getConnectionsLayerConnectionParserRuleCall_8_2_0()); 
             	    	    
-            	    pushFollow(FOLLOW_95);
+            	    pushFollow(FOLLOW_96);
             	    lv_connections_13_0=ruleLayerConnection();
 
             	    state._fsp--;
@@ -10482,7 +10499,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getSubSystemClassAccess().getBindingsBindingParserRuleCall_8_3_0()); 
             	    	    
-            	    pushFollow(FOLLOW_95);
+            	    pushFollow(FOLLOW_96);
             	    lv_bindings_14_0=ruleBinding();
 
             	    state._fsp--;
@@ -10519,7 +10536,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getSubSystemClassAccess().getActorRefsActorRefParserRuleCall_8_4_0()); 
             	    	    
-            	    pushFollow(FOLLOW_95);
+            	    pushFollow(FOLLOW_96);
             	    lv_actorRefs_15_0=ruleActorRef();
 
             	    state._fsp--;
@@ -10556,7 +10573,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getSubSystemClassAccess().getServiceProvisionPointsSPPParserRuleCall_8_5_0()); 
             	    	    
-            	    pushFollow(FOLLOW_95);
+            	    pushFollow(FOLLOW_96);
             	    lv_serviceProvisionPoints_16_0=ruleSPP();
 
             	    state._fsp--;
@@ -10593,7 +10610,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getSubSystemClassAccess().getRelayPortsPortParserRuleCall_8_6_0()); 
             	    	    
-            	    pushFollow(FOLLOW_95);
+            	    pushFollow(FOLLOW_96);
             	    lv_relayPorts_17_0=rulePort();
 
             	    state._fsp--;
@@ -10620,7 +10637,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    break loop98;
+            	    break loop99;
                 }
             } while (true);
 
@@ -10861,7 +10878,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	            current = createModelElement(grammarAccess.getActorInstanceMappingRule());
             	        }
                     
-            otherlv_3=(Token)match(input,RULE_ID,FOLLOW_96); 
+            otherlv_3=(Token)match(input,RULE_ID,FOLLOW_97); 
 
             		newLeafNode(otherlv_3, grammarAccess.getActorInstanceMappingAccess().getThreadLogicalThreadCrossReference_3_0()); 
             	
@@ -10872,32 +10889,32 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             }
 
             // InternalRoom.g:4410:2: (otherlv_4= '{' ( (lv_actorInstanceMappings_5_0= ruleActorInstanceMapping ) )* otherlv_6= '}' )?
-            int alt100=2;
-            int LA100_0 = input.LA(1);
+            int alt101=2;
+            int LA101_0 = input.LA(1);
 
-            if ( (LA100_0==14) ) {
-                alt100=1;
+            if ( (LA101_0==14) ) {
+                alt101=1;
             }
-            switch (alt100) {
+            switch (alt101) {
                 case 1 :
                     // InternalRoom.g:4410:4: otherlv_4= '{' ( (lv_actorInstanceMappings_5_0= ruleActorInstanceMapping ) )* otherlv_6= '}'
                     {
-                    otherlv_4=(Token)match(input,14,FOLLOW_97); 
+                    otherlv_4=(Token)match(input,14,FOLLOW_98); 
 
                         	newLeafNode(otherlv_4, grammarAccess.getActorInstanceMappingAccess().getLeftCurlyBracketKeyword_4_0());
                         
                     // InternalRoom.g:4414:1: ( (lv_actorInstanceMappings_5_0= ruleActorInstanceMapping ) )*
-                    loop99:
+                    loop100:
                     do {
-                        int alt99=2;
-                        int LA99_0 = input.LA(1);
+                        int alt100=2;
+                        int LA100_0 = input.LA(1);
 
-                        if ( (LA99_0==68) ) {
-                            alt99=1;
+                        if ( (LA100_0==68) ) {
+                            alt100=1;
                         }
 
 
-                        switch (alt99) {
+                        switch (alt100) {
                     	case 1 :
                     	    // InternalRoom.g:4415:1: (lv_actorInstanceMappings_5_0= ruleActorInstanceMapping )
                     	    {
@@ -10907,7 +10924,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	     
                     	    	        newCompositeNode(grammarAccess.getActorInstanceMappingAccess().getActorInstanceMappingsActorInstanceMappingParserRuleCall_4_1_0()); 
                     	    	    
-                    	    pushFollow(FOLLOW_97);
+                    	    pushFollow(FOLLOW_98);
                     	    lv_actorInstanceMappings_5_0=ruleActorInstanceMapping();
 
                     	    state._fsp--;
@@ -10931,7 +10948,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	    break;
 
                     	default :
-                    	    break loop99;
+                    	    break loop100;
                         }
                     } while (true);
 
@@ -11030,7 +11047,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
              
             	        newCompositeNode(grammarAccess.getRefPathAccess().getRefsRefSegmentParserRuleCall_0_0()); 
             	    
-            pushFollow(FOLLOW_98);
+            pushFollow(FOLLOW_99);
             lv_refs_0_0=ruleRefSegment();
 
             state._fsp--;
@@ -11053,17 +11070,17 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             }
 
             // InternalRoom.g:4475:2: (otherlv_1= '/' ( (lv_refs_2_0= ruleRefSegment ) ) )*
-            loop101:
+            loop102:
             do {
-                int alt101=2;
-                int LA101_0 = input.LA(1);
+                int alt102=2;
+                int LA102_0 = input.LA(1);
 
-                if ( (LA101_0==69) ) {
-                    alt101=1;
+                if ( (LA102_0==69) ) {
+                    alt102=1;
                 }
 
 
-                switch (alt101) {
+                switch (alt102) {
             	case 1 :
             	    // InternalRoom.g:4475:4: otherlv_1= '/' ( (lv_refs_2_0= ruleRefSegment ) )
             	    {
@@ -11080,7 +11097,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getRefPathAccess().getRefsRefSegmentParserRuleCall_1_1_0()); 
             	    	    
-            	    pushFollow(FOLLOW_98);
+            	    pushFollow(FOLLOW_99);
             	    lv_refs_2_0=ruleRefSegment();
 
             	    state._fsp--;
@@ -11107,7 +11124,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    break loop101;
+            	    break loop102;
                 }
             } while (true);
 
@@ -11191,7 +11208,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // InternalRoom.g:4519:1: (lv_ref_0_0= RULE_ID )
             // InternalRoom.g:4520:3: lv_ref_0_0= RULE_ID
             {
-            lv_ref_0_0=(Token)match(input,RULE_ID,FOLLOW_99); 
+            lv_ref_0_0=(Token)match(input,RULE_ID,FOLLOW_100); 
 
             			newLeafNode(lv_ref_0_0, grammarAccess.getRefSegmentAccess().getRefIDTerminalRuleCall_0_0()); 
             		
@@ -11212,13 +11229,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             }
 
             // InternalRoom.g:4536:2: (otherlv_1= ':' ( (lv_idx_2_0= RULE_INT ) ) )?
-            int alt102=2;
-            int LA102_0 = input.LA(1);
+            int alt103=2;
+            int LA103_0 = input.LA(1);
 
-            if ( (LA102_0==16) ) {
-                alt102=1;
+            if ( (LA103_0==16) ) {
+                alt103=1;
             }
-            switch (alt102) {
+            switch (alt103) {
                 case 1 :
                     // InternalRoom.g:4536:4: otherlv_1= ':' ( (lv_idx_2_0= RULE_INT ) )
                     {
@@ -11348,7 +11365,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
              
             	        newCompositeNode(grammarAccess.getBindingAccess().getEndpoint1BindingEndPointParserRuleCall_1_0()); 
             	    
-            pushFollow(FOLLOW_100);
+            pushFollow(FOLLOW_101);
             lv_endpoint1_1_0=ruleBindingEndPoint();
 
             state._fsp--;
@@ -11482,17 +11499,17 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // InternalRoom.g:4644:2: ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '.' )? ( (otherlv_2= RULE_ID ) ) (otherlv_3= 'sub' ( (otherlv_4= RULE_ID ) ) )?
             {
             // InternalRoom.g:4644:2: ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '.' )?
-            int alt103=2;
-            int LA103_0 = input.LA(1);
+            int alt104=2;
+            int LA104_0 = input.LA(1);
 
-            if ( (LA103_0==RULE_ID) ) {
-                int LA103_1 = input.LA(2);
+            if ( (LA104_0==RULE_ID) ) {
+                int LA104_1 = input.LA(2);
 
-                if ( (LA103_1==72) ) {
-                    alt103=1;
+                if ( (LA104_1==72) ) {
+                    alt104=1;
                 }
             }
-            switch (alt103) {
+            switch (alt104) {
                 case 1 :
                     // InternalRoom.g:4644:3: ( (otherlv_0= RULE_ID ) ) otherlv_1= '.'
                     {
@@ -11507,7 +11524,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	            current = createModelElement(grammarAccess.getBindingEndPointRule());
                     	        }
                             
-                    otherlv_0=(Token)match(input,RULE_ID,FOLLOW_101); 
+                    otherlv_0=(Token)match(input,RULE_ID,FOLLOW_102); 
 
                     		newLeafNode(otherlv_0, grammarAccess.getBindingEndPointAccess().getActorRefActorContainerRefCrossReference_0_0_0()); 
                     	
@@ -11538,7 +11555,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	            current = createModelElement(grammarAccess.getBindingEndPointRule());
             	        }
                     
-            otherlv_2=(Token)match(input,RULE_ID,FOLLOW_102); 
+            otherlv_2=(Token)match(input,RULE_ID,FOLLOW_103); 
 
             		newLeafNode(otherlv_2, grammarAccess.getBindingEndPointAccess().getPortPortCrossReference_1_0()); 
             	
@@ -11549,13 +11566,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             }
 
             // InternalRoom.g:4674:2: (otherlv_3= 'sub' ( (otherlv_4= RULE_ID ) ) )?
-            int alt104=2;
-            int LA104_0 = input.LA(1);
+            int alt105=2;
+            int LA105_0 = input.LA(1);
 
-            if ( (LA104_0==73) ) {
-                alt104=1;
+            if ( (LA105_0==73) ) {
+                alt105=1;
             }
-            switch (alt104) {
+            switch (alt105) {
                 case 1 :
                     // InternalRoom.g:4674:4: otherlv_3= 'sub' ( (otherlv_4= RULE_ID ) )
                     {
@@ -11667,7 +11684,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // InternalRoom.g:4712:1: (otherlv_0= 'LayerConnection' ( (lv_from_1_0= ruleSAPoint ) ) otherlv_2= 'satisfied_by' ( (lv_to_3_0= ruleSPPoint ) ) )
             // InternalRoom.g:4712:3: otherlv_0= 'LayerConnection' ( (lv_from_1_0= ruleSAPoint ) ) otherlv_2= 'satisfied_by' ( (lv_to_3_0= ruleSPPoint ) )
             {
-            otherlv_0=(Token)match(input,74,FOLLOW_103); 
+            otherlv_0=(Token)match(input,74,FOLLOW_104); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getLayerConnectionAccess().getLayerConnectionKeyword_0());
                 
@@ -11680,7 +11697,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
              
             	        newCompositeNode(grammarAccess.getLayerConnectionAccess().getFromSAPointParserRuleCall_1_0()); 
             	    
-            pushFollow(FOLLOW_104);
+            pushFollow(FOLLOW_105);
             lv_from_1_0=ruleSAPoint();
 
             state._fsp--;
@@ -11810,22 +11827,22 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // InternalRoom.g:4777:1: (this_RefSAPoint_0= ruleRefSAPoint | this_RelaySAPoint_1= ruleRelaySAPoint )
             {
             // InternalRoom.g:4777:1: (this_RefSAPoint_0= ruleRefSAPoint | this_RelaySAPoint_1= ruleRelaySAPoint )
-            int alt105=2;
-            int LA105_0 = input.LA(1);
+            int alt106=2;
+            int LA106_0 = input.LA(1);
 
-            if ( (LA105_0==17) ) {
-                alt105=1;
+            if ( (LA106_0==17) ) {
+                alt106=1;
             }
-            else if ( (LA105_0==76) ) {
-                alt105=2;
+            else if ( (LA106_0==76) ) {
+                alt106=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 105, 0, input);
+                    new NoViableAltException("", 106, 0, input);
 
                 throw nvae;
             }
-            switch (alt105) {
+            switch (alt106) {
                 case 1 :
                     // InternalRoom.g:4778:5: this_RefSAPoint_0= ruleRefSAPoint
                     {
@@ -12143,7 +12160,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	            current = createModelElement(grammarAccess.getSPPointRule());
             	        }
                     
-            otherlv_0=(Token)match(input,RULE_ID,FOLLOW_101); 
+            otherlv_0=(Token)match(input,RULE_ID,FOLLOW_102); 
 
             		newLeafNode(otherlv_0, grammarAccess.getSPPointAccess().getRefActorContainerRefCrossReference_0_0()); 
             	
@@ -12259,13 +12276,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // InternalRoom.g:4944:2: ( (lv_refType_0_0= ruleReferenceType ) )? otherlv_1= 'ActorRef' ( (lv_name_2_0= RULE_ID ) ) ( (lv_multiplicity_3_0= ruleMULTIPLICITY ) )? otherlv_4= ':' ( ( ruleFQN ) ) ( (lv_docu_6_0= ruleDocumentation ) )?
             {
             // InternalRoom.g:4944:2: ( (lv_refType_0_0= ruleReferenceType ) )?
-            int alt106=2;
-            int LA106_0 = input.LA(1);
+            int alt107=2;
+            int LA107_0 = input.LA(1);
 
-            if ( (LA106_0==111||LA106_0==127) ) {
-                alt106=1;
+            if ( (LA107_0==111||LA107_0==127) ) {
+                alt107=1;
             }
-            switch (alt106) {
+            switch (alt107) {
                 case 1 :
                     // InternalRoom.g:4945:1: (lv_refType_0_0= ruleReferenceType )
                     {
@@ -12275,7 +12292,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getActorRefAccess().getRefTypeReferenceTypeEnumRuleCall_0_0()); 
                     	    
-                    pushFollow(FOLLOW_105);
+                    pushFollow(FOLLOW_106);
                     lv_refType_0_0=ruleReferenceType();
 
                     state._fsp--;
@@ -12331,13 +12348,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             }
 
             // InternalRoom.g:4984:2: ( (lv_multiplicity_3_0= ruleMULTIPLICITY ) )?
-            int alt107=2;
-            int LA107_0 = input.LA(1);
+            int alt108=2;
+            int LA108_0 = input.LA(1);
 
-            if ( (LA107_0==34) ) {
-                alt107=1;
+            if ( (LA108_0==34) ) {
+                alt108=1;
             }
-            switch (alt107) {
+            switch (alt108) {
                 case 1 :
                     // InternalRoom.g:4985:1: (lv_multiplicity_3_0= ruleMULTIPLICITY )
                     {
@@ -12405,13 +12422,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             }
 
             // InternalRoom.g:5021:2: ( (lv_docu_6_0= ruleDocumentation ) )?
-            int alt108=2;
-            int LA108_0 = input.LA(1);
+            int alt109=2;
+            int LA109_0 = input.LA(1);
 
-            if ( (LA108_0==34) ) {
-                alt108=1;
+            if ( (LA109_0==34) ) {
+                alt109=1;
             }
-            switch (alt108) {
+            switch (alt109) {
                 case 1 :
                     // InternalRoom.g:5022:1: (lv_docu_6_0= ruleDocumentation )
                     {
@@ -12519,28 +12536,28 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // InternalRoom.g:5062:1: (kw= '[' (kw= '*' | this_INT_2= RULE_INT ) kw= ']' )
             // InternalRoom.g:5063:2: kw= '[' (kw= '*' | this_INT_2= RULE_INT ) kw= ']'
             {
-            kw=(Token)match(input,34,FOLLOW_106); 
+            kw=(Token)match(input,34,FOLLOW_107); 
 
                     current.merge(kw);
                     newLeafNode(kw, grammarAccess.getMULTIPLICITYAccess().getLeftSquareBracketKeyword_0()); 
                 
             // InternalRoom.g:5068:1: (kw= '*' | this_INT_2= RULE_INT )
-            int alt109=2;
-            int LA109_0 = input.LA(1);
+            int alt110=2;
+            int LA110_0 = input.LA(1);
 
-            if ( (LA109_0==78) ) {
-                alt109=1;
+            if ( (LA110_0==78) ) {
+                alt110=1;
             }
-            else if ( (LA109_0==RULE_INT) ) {
-                alt109=2;
+            else if ( (LA110_0==RULE_INT) ) {
+                alt110=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 109, 0, input);
+                    new NoViableAltException("", 110, 0, input);
 
                 throw nvae;
             }
-            switch (alt109) {
+            switch (alt110) {
                 case 1 :
                     // InternalRoom.g:5069:2: kw= '*'
                     {
@@ -12643,61 +12660,61 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // InternalRoom.g:5109:1: (kw= 'DataClass' | kw= 'ActorClass' | kw= 'ActorBehavior' | kw= 'ProtocolClass' | kw= 'CompoundProtocolClass' | kw= 'SubSystemClass' | kw= 'LogicalSystem' | kw= 'Port' | kw= 'Message' )
             {
             // InternalRoom.g:5109:1: (kw= 'DataClass' | kw= 'ActorClass' | kw= 'ActorBehavior' | kw= 'ProtocolClass' | kw= 'CompoundProtocolClass' | kw= 'SubSystemClass' | kw= 'LogicalSystem' | kw= 'Port' | kw= 'Message' )
-            int alt110=9;
+            int alt111=9;
             switch ( input.LA(1) ) {
             case 28:
                 {
-                alt110=1;
+                alt111=1;
                 }
                 break;
             case 55:
                 {
-                alt110=2;
+                alt111=2;
                 }
                 break;
             case 79:
                 {
-                alt110=3;
+                alt111=3;
                 }
                 break;
             case 42:
                 {
-                alt110=4;
+                alt111=4;
                 }
                 break;
             case 48:
                 {
-                alt110=5;
+                alt111=5;
                 }
                 break;
             case 66:
                 {
-                alt110=6;
+                alt111=6;
                 }
                 break;
             case 64:
                 {
-                alt110=7;
+                alt111=7;
                 }
                 break;
             case 59:
                 {
-                alt110=8;
+                alt111=8;
                 }
                 break;
             case 51:
                 {
-                alt110=9;
+                alt111=9;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 110, 0, input);
+                    new NoViableAltException("", 111, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt110) {
+            switch (alt111) {
                 case 1 :
                     // InternalRoom.g:5110:2: kw= 'DataClass'
                     {
@@ -12872,17 +12889,17 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // InternalRoom.g:5194:1: (this_State_0= ruleState | this_ChoicePoint_1= ruleChoicePoint | this_TrPoint_2= ruleTrPoint )
             {
             // InternalRoom.g:5194:1: (this_State_0= ruleState | this_ChoicePoint_1= ruleChoicePoint | this_TrPoint_2= ruleTrPoint )
-            int alt111=3;
+            int alt112=3;
             switch ( input.LA(1) ) {
             case 81:
             case 86:
                 {
-                alt111=1;
+                alt112=1;
                 }
                 break;
             case 91:
                 {
-                alt111=2;
+                alt112=2;
                 }
                 break;
             case 87:
@@ -12890,17 +12907,17 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             case 89:
             case 90:
                 {
-                alt111=3;
+                alt112=3;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 111, 0, input);
+                    new NoViableAltException("", 112, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt111) {
+            switch (alt112) {
                 case 1 :
                     // InternalRoom.g:5195:5: this_State_0= ruleState
                     {
@@ -13049,19 +13066,19 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,14,FOLLOW_107); 
+            otherlv_1=(Token)match(input,14,FOLLOW_108); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getStateGraphAccess().getLeftCurlyBracketKeyword_1());
                 
             // InternalRoom.g:5256:1: ( ( (lv_states_2_0= ruleState ) ) | ( (lv_trPoints_3_0= ruleTrPoint ) ) | ( (lv_chPoints_4_0= ruleChoicePoint ) ) | ( (lv_transitions_5_0= ruleTransition ) ) | ( (lv_refinedTransitions_6_0= ruleRefinedTransition ) ) )*
-            loop112:
+            loop113:
             do {
-                int alt112=6;
+                int alt113=6;
                 switch ( input.LA(1) ) {
                 case 81:
                 case 86:
                     {
-                    alt112=1;
+                    alt113=1;
                     }
                     break;
                 case 87:
@@ -13069,28 +13086,28 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 89:
                 case 90:
                     {
-                    alt112=2;
+                    alt113=2;
                     }
                     break;
                 case 91:
                     {
-                    alt112=3;
+                    alt113=3;
                     }
                     break;
                 case 92:
                     {
-                    alt112=4;
+                    alt113=4;
                     }
                     break;
                 case 99:
                     {
-                    alt112=5;
+                    alt113=5;
                     }
                     break;
 
                 }
 
-                switch (alt112) {
+                switch (alt113) {
             	case 1 :
             	    // InternalRoom.g:5256:2: ( (lv_states_2_0= ruleState ) )
             	    {
@@ -13103,7 +13120,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getStateGraphAccess().getStatesStateParserRuleCall_2_0_0()); 
             	    	    
-            	    pushFollow(FOLLOW_107);
+            	    pushFollow(FOLLOW_108);
             	    lv_states_2_0=ruleState();
 
             	    state._fsp--;
@@ -13140,7 +13157,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getStateGraphAccess().getTrPointsTrPointParserRuleCall_2_1_0()); 
             	    	    
-            	    pushFollow(FOLLOW_107);
+            	    pushFollow(FOLLOW_108);
             	    lv_trPoints_3_0=ruleTrPoint();
 
             	    state._fsp--;
@@ -13177,7 +13194,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getStateGraphAccess().getChPointsChoicePointParserRuleCall_2_2_0()); 
             	    	    
-            	    pushFollow(FOLLOW_107);
+            	    pushFollow(FOLLOW_108);
             	    lv_chPoints_4_0=ruleChoicePoint();
 
             	    state._fsp--;
@@ -13214,7 +13231,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getStateGraphAccess().getTransitionsTransitionParserRuleCall_2_3_0()); 
             	    	    
-            	    pushFollow(FOLLOW_107);
+            	    pushFollow(FOLLOW_108);
             	    lv_transitions_5_0=ruleTransition();
 
             	    state._fsp--;
@@ -13251,7 +13268,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getStateGraphAccess().getRefinedTransitionsRefinedTransitionParserRuleCall_2_4_0()); 
             	    	    
-            	    pushFollow(FOLLOW_107);
+            	    pushFollow(FOLLOW_108);
             	    lv_refinedTransitions_6_0=ruleRefinedTransition();
 
             	    state._fsp--;
@@ -13278,7 +13295,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    break loop112;
+            	    break loop113;
                 }
             } while (true);
 
@@ -13385,19 +13402,19 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
                 	newLeafNode(otherlv_1, grammarAccess.getStateMachineAccess().getStateMachineKeyword_1());
                 
-            otherlv_2=(Token)match(input,14,FOLLOW_107); 
+            otherlv_2=(Token)match(input,14,FOLLOW_108); 
 
                 	newLeafNode(otherlv_2, grammarAccess.getStateMachineAccess().getLeftCurlyBracketKeyword_2());
                 
             // InternalRoom.g:5389:1: ( ( (lv_states_3_0= ruleState ) ) | ( (lv_trPoints_4_0= ruleTrPoint ) ) | ( (lv_chPoints_5_0= ruleChoicePoint ) ) | ( (lv_transitions_6_0= ruleTransition ) ) | ( (lv_refinedTransitions_7_0= ruleRefinedTransition ) ) )*
-            loop113:
+            loop114:
             do {
-                int alt113=6;
+                int alt114=6;
                 switch ( input.LA(1) ) {
                 case 81:
                 case 86:
                     {
-                    alt113=1;
+                    alt114=1;
                     }
                     break;
                 case 87:
@@ -13405,28 +13422,28 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 89:
                 case 90:
                     {
-                    alt113=2;
+                    alt114=2;
                     }
                     break;
                 case 91:
                     {
-                    alt113=3;
+                    alt114=3;
                     }
                     break;
                 case 92:
                     {
-                    alt113=4;
+                    alt114=4;
                     }
                     break;
                 case 99:
                     {
-                    alt113=5;
+                    alt114=5;
                     }
                     break;
 
                 }
 
-                switch (alt113) {
+                switch (alt114) {
             	case 1 :
             	    // InternalRoom.g:5389:2: ( (lv_states_3_0= ruleState ) )
             	    {
@@ -13439,7 +13456,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getStateMachineAccess().getStatesStateParserRuleCall_3_0_0()); 
             	    	    
-            	    pushFollow(FOLLOW_107);
+            	    pushFollow(FOLLOW_108);
             	    lv_states_3_0=ruleState();
 
             	    state._fsp--;
@@ -13476,7 +13493,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getStateMachineAccess().getTrPointsTrPointParserRuleCall_3_1_0()); 
             	    	    
-            	    pushFollow(FOLLOW_107);
+            	    pushFollow(FOLLOW_108);
             	    lv_trPoints_4_0=ruleTrPoint();
 
             	    state._fsp--;
@@ -13513,7 +13530,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getStateMachineAccess().getChPointsChoicePointParserRuleCall_3_2_0()); 
             	    	    
-            	    pushFollow(FOLLOW_107);
+            	    pushFollow(FOLLOW_108);
             	    lv_chPoints_5_0=ruleChoicePoint();
 
             	    state._fsp--;
@@ -13550,7 +13567,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getStateMachineAccess().getTransitionsTransitionParserRuleCall_3_3_0()); 
             	    	    
-            	    pushFollow(FOLLOW_107);
+            	    pushFollow(FOLLOW_108);
             	    lv_transitions_6_0=ruleTransition();
 
             	    state._fsp--;
@@ -13587,7 +13604,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getStateMachineAccess().getRefinedTransitionsRefinedTransitionParserRuleCall_3_4_0()); 
             	    	    
-            	    pushFollow(FOLLOW_107);
+            	    pushFollow(FOLLOW_108);
             	    lv_refinedTransitions_7_0=ruleRefinedTransition();
 
             	    state._fsp--;
@@ -13614,7 +13631,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    break loop113;
+            	    break loop114;
                 }
             } while (true);
 
@@ -13695,22 +13712,22 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // InternalRoom.g:5508:1: (this_SimpleState_0= ruleSimpleState | this_RefinedState_1= ruleRefinedState )
             {
             // InternalRoom.g:5508:1: (this_SimpleState_0= ruleSimpleState | this_RefinedState_1= ruleRefinedState )
-            int alt114=2;
-            int LA114_0 = input.LA(1);
+            int alt115=2;
+            int LA115_0 = input.LA(1);
 
-            if ( (LA114_0==81) ) {
-                alt114=1;
+            if ( (LA115_0==81) ) {
+                alt115=1;
             }
-            else if ( (LA114_0==86) ) {
-                alt114=2;
+            else if ( (LA115_0==86) ) {
+                alt115=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 114, 0, input);
+                    new NoViableAltException("", 115, 0, input);
 
                 throw nvae;
             }
-            switch (alt114) {
+            switch (alt115) {
                 case 1 :
                     // InternalRoom.g:5509:5: this_SimpleState_0= ruleSimpleState
                     {
@@ -13846,7 +13863,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // InternalRoom.g:5553:1: (lv_name_1_0= RULE_ID )
             // InternalRoom.g:5554:3: lv_name_1_0= RULE_ID
             {
-            lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_108); 
+            lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_109); 
 
             			newLeafNode(lv_name_1_0, grammarAccess.getSimpleStateAccess().getNameIDTerminalRuleCall_1_0()); 
             		
@@ -13867,13 +13884,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             }
 
             // InternalRoom.g:5570:2: ( (lv_docu_2_0= ruleDocumentation ) )?
-            int alt115=2;
-            int LA115_0 = input.LA(1);
+            int alt116=2;
+            int LA116_0 = input.LA(1);
 
-            if ( (LA115_0==34) ) {
-                alt115=1;
+            if ( (LA116_0==34) ) {
+                alt116=1;
             }
-            switch (alt115) {
+            switch (alt116) {
                 case 1 :
                     // InternalRoom.g:5571:1: (lv_docu_2_0= ruleDocumentation )
                     {
@@ -13883,7 +13900,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getSimpleStateAccess().getDocuDocumentationParserRuleCall_2_0()); 
                     	    
-                    pushFollow(FOLLOW_96);
+                    pushFollow(FOLLOW_97);
                     lv_docu_2_0=ruleDocumentation();
 
                     state._fsp--;
@@ -13909,32 +13926,32 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             }
 
             // InternalRoom.g:5588:3: (otherlv_3= '{' (otherlv_4= 'entry' ( (lv_entryCode_5_0= ruleDetailCode ) ) )? (otherlv_6= 'exit' ( (lv_exitCode_7_0= ruleDetailCode ) ) )? (otherlv_8= 'do' ( (lv_doCode_9_0= ruleDetailCode ) ) )? (otherlv_10= 'subgraph' ( (lv_subgraph_11_0= ruleStateGraph ) ) )? otherlv_12= '}' )?
-            int alt120=2;
-            int LA120_0 = input.LA(1);
+            int alt121=2;
+            int LA121_0 = input.LA(1);
 
-            if ( (LA120_0==14) ) {
-                alt120=1;
+            if ( (LA121_0==14) ) {
+                alt121=1;
             }
-            switch (alt120) {
+            switch (alt121) {
                 case 1 :
                     // InternalRoom.g:5588:5: otherlv_3= '{' (otherlv_4= 'entry' ( (lv_entryCode_5_0= ruleDetailCode ) ) )? (otherlv_6= 'exit' ( (lv_exitCode_7_0= ruleDetailCode ) ) )? (otherlv_8= 'do' ( (lv_doCode_9_0= ruleDetailCode ) ) )? (otherlv_10= 'subgraph' ( (lv_subgraph_11_0= ruleStateGraph ) ) )? otherlv_12= '}'
                     {
-                    otherlv_3=(Token)match(input,14,FOLLOW_109); 
+                    otherlv_3=(Token)match(input,14,FOLLOW_110); 
 
                         	newLeafNode(otherlv_3, grammarAccess.getSimpleStateAccess().getLeftCurlyBracketKeyword_3_0());
                         
                     // InternalRoom.g:5592:1: (otherlv_4= 'entry' ( (lv_entryCode_5_0= ruleDetailCode ) ) )?
-                    int alt116=2;
-                    int LA116_0 = input.LA(1);
+                    int alt117=2;
+                    int LA117_0 = input.LA(1);
 
-                    if ( (LA116_0==82) ) {
-                        alt116=1;
+                    if ( (LA117_0==82) ) {
+                        alt117=1;
                     }
-                    switch (alt116) {
+                    switch (alt117) {
                         case 1 :
                             // InternalRoom.g:5592:3: otherlv_4= 'entry' ( (lv_entryCode_5_0= ruleDetailCode ) )
                             {
-                            otherlv_4=(Token)match(input,82,FOLLOW_110); 
+                            otherlv_4=(Token)match(input,82,FOLLOW_111); 
 
                                 	newLeafNode(otherlv_4, grammarAccess.getSimpleStateAccess().getEntryKeyword_3_1_0());
                                 
@@ -13947,7 +13964,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                              
                             	        newCompositeNode(grammarAccess.getSimpleStateAccess().getEntryCodeDetailCodeParserRuleCall_3_1_1_0()); 
                             	    
-                            pushFollow(FOLLOW_111);
+                            pushFollow(FOLLOW_112);
                             lv_entryCode_5_0=ruleDetailCode();
 
                             state._fsp--;
@@ -13976,17 +13993,17 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     }
 
                     // InternalRoom.g:5614:4: (otherlv_6= 'exit' ( (lv_exitCode_7_0= ruleDetailCode ) ) )?
-                    int alt117=2;
-                    int LA117_0 = input.LA(1);
+                    int alt118=2;
+                    int LA118_0 = input.LA(1);
 
-                    if ( (LA117_0==83) ) {
-                        alt117=1;
+                    if ( (LA118_0==83) ) {
+                        alt118=1;
                     }
-                    switch (alt117) {
+                    switch (alt118) {
                         case 1 :
                             // InternalRoom.g:5614:6: otherlv_6= 'exit' ( (lv_exitCode_7_0= ruleDetailCode ) )
                             {
-                            otherlv_6=(Token)match(input,83,FOLLOW_112); 
+                            otherlv_6=(Token)match(input,83,FOLLOW_113); 
 
                                 	newLeafNode(otherlv_6, grammarAccess.getSimpleStateAccess().getExitKeyword_3_2_0());
                                 
@@ -13999,7 +14016,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                              
                             	        newCompositeNode(grammarAccess.getSimpleStateAccess().getExitCodeDetailCodeParserRuleCall_3_2_1_0()); 
                             	    
-                            pushFollow(FOLLOW_113);
+                            pushFollow(FOLLOW_114);
                             lv_exitCode_7_0=ruleDetailCode();
 
                             state._fsp--;
@@ -14028,17 +14045,17 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     }
 
                     // InternalRoom.g:5636:4: (otherlv_8= 'do' ( (lv_doCode_9_0= ruleDetailCode ) ) )?
-                    int alt118=2;
-                    int LA118_0 = input.LA(1);
+                    int alt119=2;
+                    int LA119_0 = input.LA(1);
 
-                    if ( (LA118_0==84) ) {
-                        alt118=1;
+                    if ( (LA119_0==84) ) {
+                        alt119=1;
                     }
-                    switch (alt118) {
+                    switch (alt119) {
                         case 1 :
                             // InternalRoom.g:5636:6: otherlv_8= 'do' ( (lv_doCode_9_0= ruleDetailCode ) )
                             {
-                            otherlv_8=(Token)match(input,84,FOLLOW_114); 
+                            otherlv_8=(Token)match(input,84,FOLLOW_115); 
 
                                 	newLeafNode(otherlv_8, grammarAccess.getSimpleStateAccess().getDoKeyword_3_3_0());
                                 
@@ -14051,7 +14068,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                              
                             	        newCompositeNode(grammarAccess.getSimpleStateAccess().getDoCodeDetailCodeParserRuleCall_3_3_1_0()); 
                             	    
-                            pushFollow(FOLLOW_115);
+                            pushFollow(FOLLOW_116);
                             lv_doCode_9_0=ruleDetailCode();
 
                             state._fsp--;
@@ -14080,13 +14097,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     }
 
                     // InternalRoom.g:5658:4: (otherlv_10= 'subgraph' ( (lv_subgraph_11_0= ruleStateGraph ) ) )?
-                    int alt119=2;
-                    int LA119_0 = input.LA(1);
+                    int alt120=2;
+                    int LA120_0 = input.LA(1);
 
-                    if ( (LA119_0==85) ) {
-                        alt119=1;
+                    if ( (LA120_0==85) ) {
+                        alt120=1;
                     }
-                    switch (alt119) {
+                    switch (alt120) {
                         case 1 :
                             // InternalRoom.g:5658:6: otherlv_10= 'subgraph' ( (lv_subgraph_11_0= ruleStateGraph ) )
                             {
@@ -14262,13 +14279,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             }
 
             // InternalRoom.g:5724:2: ( (lv_docu_2_0= ruleDocumentation ) )?
-            int alt121=2;
-            int LA121_0 = input.LA(1);
+            int alt122=2;
+            int LA122_0 = input.LA(1);
 
-            if ( (LA121_0==34) ) {
-                alt121=1;
+            if ( (LA122_0==34) ) {
+                alt122=1;
             }
-            switch (alt121) {
+            switch (alt122) {
                 case 1 :
                     // InternalRoom.g:5725:1: (lv_docu_2_0= ruleDocumentation )
                     {
@@ -14303,22 +14320,22 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_3=(Token)match(input,14,FOLLOW_109); 
+            otherlv_3=(Token)match(input,14,FOLLOW_110); 
 
                 	newLeafNode(otherlv_3, grammarAccess.getRefinedStateAccess().getLeftCurlyBracketKeyword_3());
                 
             // InternalRoom.g:5746:1: (otherlv_4= 'entry' ( (lv_entryCode_5_0= ruleDetailCode ) ) )?
-            int alt122=2;
-            int LA122_0 = input.LA(1);
+            int alt123=2;
+            int LA123_0 = input.LA(1);
 
-            if ( (LA122_0==82) ) {
-                alt122=1;
+            if ( (LA123_0==82) ) {
+                alt123=1;
             }
-            switch (alt122) {
+            switch (alt123) {
                 case 1 :
                     // InternalRoom.g:5746:3: otherlv_4= 'entry' ( (lv_entryCode_5_0= ruleDetailCode ) )
                     {
-                    otherlv_4=(Token)match(input,82,FOLLOW_110); 
+                    otherlv_4=(Token)match(input,82,FOLLOW_111); 
 
                         	newLeafNode(otherlv_4, grammarAccess.getRefinedStateAccess().getEntryKeyword_4_0());
                         
@@ -14331,7 +14348,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getRefinedStateAccess().getEntryCodeDetailCodeParserRuleCall_4_1_0()); 
                     	    
-                    pushFollow(FOLLOW_111);
+                    pushFollow(FOLLOW_112);
                     lv_entryCode_5_0=ruleDetailCode();
 
                     state._fsp--;
@@ -14360,17 +14377,17 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             }
 
             // InternalRoom.g:5768:4: (otherlv_6= 'exit' ( (lv_exitCode_7_0= ruleDetailCode ) ) )?
-            int alt123=2;
-            int LA123_0 = input.LA(1);
+            int alt124=2;
+            int LA124_0 = input.LA(1);
 
-            if ( (LA123_0==83) ) {
-                alt123=1;
+            if ( (LA124_0==83) ) {
+                alt124=1;
             }
-            switch (alt123) {
+            switch (alt124) {
                 case 1 :
                     // InternalRoom.g:5768:6: otherlv_6= 'exit' ( (lv_exitCode_7_0= ruleDetailCode ) )
                     {
-                    otherlv_6=(Token)match(input,83,FOLLOW_112); 
+                    otherlv_6=(Token)match(input,83,FOLLOW_113); 
 
                         	newLeafNode(otherlv_6, grammarAccess.getRefinedStateAccess().getExitKeyword_5_0());
                         
@@ -14383,7 +14400,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getRefinedStateAccess().getExitCodeDetailCodeParserRuleCall_5_1_0()); 
                     	    
-                    pushFollow(FOLLOW_113);
+                    pushFollow(FOLLOW_114);
                     lv_exitCode_7_0=ruleDetailCode();
 
                     state._fsp--;
@@ -14412,17 +14429,17 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             }
 
             // InternalRoom.g:5790:4: (otherlv_8= 'do' ( (lv_doCode_9_0= ruleDetailCode ) ) )?
-            int alt124=2;
-            int LA124_0 = input.LA(1);
+            int alt125=2;
+            int LA125_0 = input.LA(1);
 
-            if ( (LA124_0==84) ) {
-                alt124=1;
+            if ( (LA125_0==84) ) {
+                alt125=1;
             }
-            switch (alt124) {
+            switch (alt125) {
                 case 1 :
                     // InternalRoom.g:5790:6: otherlv_8= 'do' ( (lv_doCode_9_0= ruleDetailCode ) )
                     {
-                    otherlv_8=(Token)match(input,84,FOLLOW_114); 
+                    otherlv_8=(Token)match(input,84,FOLLOW_115); 
 
                         	newLeafNode(otherlv_8, grammarAccess.getRefinedStateAccess().getDoKeyword_6_0());
                         
@@ -14435,7 +14452,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getRefinedStateAccess().getDoCodeDetailCodeParserRuleCall_6_1_0()); 
                     	    
-                    pushFollow(FOLLOW_115);
+                    pushFollow(FOLLOW_116);
                     lv_doCode_9_0=ruleDetailCode();
 
                     state._fsp--;
@@ -14464,13 +14481,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             }
 
             // InternalRoom.g:5812:4: (otherlv_10= 'subgraph' ( (lv_subgraph_11_0= ruleStateGraph ) ) )?
-            int alt125=2;
-            int LA125_0 = input.LA(1);
+            int alt126=2;
+            int LA126_0 = input.LA(1);
 
-            if ( (LA125_0==85) ) {
-                alt125=1;
+            if ( (LA126_0==85) ) {
+                alt126=1;
             }
-            switch (alt125) {
+            switch (alt126) {
                 case 1 :
                     // InternalRoom.g:5812:6: otherlv_10= 'subgraph' ( (lv_subgraph_11_0= ruleStateGraph ) )
                     {
@@ -14592,22 +14609,22 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // InternalRoom.g:5859:1: ( ( () ( (lv_lines_1_0= RULE_CC_STRING ) )? ) | ( ( (lv_used_2_0= '{' ) ) ( (lv_lines_3_0= RULE_STRING ) )* otherlv_4= '}' ) )
             {
             // InternalRoom.g:5859:1: ( ( () ( (lv_lines_1_0= RULE_CC_STRING ) )? ) | ( ( (lv_used_2_0= '{' ) ) ( (lv_lines_3_0= RULE_STRING ) )* otherlv_4= '}' ) )
-            int alt128=2;
-            int LA128_0 = input.LA(1);
+            int alt129=2;
+            int LA129_0 = input.LA(1);
 
-            if ( (LA128_0==EOF||LA128_0==RULE_CC_STRING||LA128_0==15||(LA128_0>=31 && LA128_0<=33)||(LA128_0>=36 && LA128_0<=37)||(LA128_0>=40 && LA128_0<=41)||(LA128_0>=43 && LA128_0<=45)||LA128_0==47||LA128_0==53||(LA128_0>=59 && LA128_0<=63)||(LA128_0>=67 && LA128_0<=68)||LA128_0==70||LA128_0==74||LA128_0==77||LA128_0==80||(LA128_0>=83 && LA128_0<=85)||LA128_0==94||(LA128_0>=104 && LA128_0<=105)||LA128_0==111||LA128_0==127) ) {
-                alt128=1;
+            if ( (LA129_0==EOF||LA129_0==RULE_CC_STRING||LA129_0==15||(LA129_0>=31 && LA129_0<=33)||(LA129_0>=36 && LA129_0<=37)||(LA129_0>=40 && LA129_0<=41)||(LA129_0>=43 && LA129_0<=45)||LA129_0==47||LA129_0==53||(LA129_0>=59 && LA129_0<=63)||(LA129_0>=67 && LA129_0<=68)||LA129_0==70||LA129_0==74||LA129_0==77||LA129_0==80||(LA129_0>=83 && LA129_0<=85)||LA129_0==94||(LA129_0>=104 && LA129_0<=105)||LA129_0==111||LA129_0==127) ) {
+                alt129=1;
             }
-            else if ( (LA128_0==14) ) {
-                alt128=2;
+            else if ( (LA129_0==14) ) {
+                alt129=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 128, 0, input);
+                    new NoViableAltException("", 129, 0, input);
 
                 throw nvae;
             }
-            switch (alt128) {
+            switch (alt129) {
                 case 1 :
                     // InternalRoom.g:5859:2: ( () ( (lv_lines_1_0= RULE_CC_STRING ) )? )
                     {
@@ -14626,13 +14643,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     }
 
                     // InternalRoom.g:5865:2: ( (lv_lines_1_0= RULE_CC_STRING ) )?
-                    int alt126=2;
-                    int LA126_0 = input.LA(1);
+                    int alt127=2;
+                    int LA127_0 = input.LA(1);
 
-                    if ( (LA126_0==RULE_CC_STRING) ) {
-                        alt126=1;
+                    if ( (LA127_0==RULE_CC_STRING) ) {
+                        alt127=1;
                     }
-                    switch (alt126) {
+                    switch (alt127) {
                         case 1 :
                             // InternalRoom.g:5866:1: (lv_lines_1_0= RULE_CC_STRING )
                             {
@@ -14680,7 +14697,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     // InternalRoom.g:5885:1: (lv_used_2_0= '{' )
                     // InternalRoom.g:5886:3: lv_used_2_0= '{'
                     {
-                    lv_used_2_0=(Token)match(input,14,FOLLOW_116); 
+                    lv_used_2_0=(Token)match(input,14,FOLLOW_117); 
 
                             newLeafNode(lv_used_2_0, grammarAccess.getDetailCodeAccess().getUsedLeftCurlyBracketKeyword_1_0_0());
                         
@@ -14697,24 +14714,24 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     }
 
                     // InternalRoom.g:5899:2: ( (lv_lines_3_0= RULE_STRING ) )*
-                    loop127:
+                    loop128:
                     do {
-                        int alt127=2;
-                        int LA127_0 = input.LA(1);
+                        int alt128=2;
+                        int LA128_0 = input.LA(1);
 
-                        if ( (LA127_0==RULE_STRING) ) {
-                            alt127=1;
+                        if ( (LA128_0==RULE_STRING) ) {
+                            alt128=1;
                         }
 
 
-                        switch (alt127) {
+                        switch (alt128) {
                     	case 1 :
                     	    // InternalRoom.g:5900:1: (lv_lines_3_0= RULE_STRING )
                     	    {
                     	    // InternalRoom.g:5900:1: (lv_lines_3_0= RULE_STRING )
                     	    // InternalRoom.g:5901:3: lv_lines_3_0= RULE_STRING
                     	    {
-                    	    lv_lines_3_0=(Token)match(input,RULE_STRING,FOLLOW_116); 
+                    	    lv_lines_3_0=(Token)match(input,RULE_STRING,FOLLOW_117); 
 
                     	    			newLeafNode(lv_lines_3_0, grammarAccess.getDetailCodeAccess().getLinesSTRINGTerminalRuleCall_1_1_0()); 
                     	    		
@@ -14736,7 +14753,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	    break;
 
                     	default :
-                    	    break loop127;
+                    	    break loop128;
                         }
                     } while (true);
 
@@ -14825,32 +14842,32 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // InternalRoom.g:5942:1: (this_TransitionPoint_0= ruleTransitionPoint | this_EntryPoint_1= ruleEntryPoint | this_ExitPoint_2= ruleExitPoint )
             {
             // InternalRoom.g:5942:1: (this_TransitionPoint_0= ruleTransitionPoint | this_EntryPoint_1= ruleEntryPoint | this_ExitPoint_2= ruleExitPoint )
-            int alt129=3;
+            int alt130=3;
             switch ( input.LA(1) ) {
             case 87:
             case 88:
                 {
-                alt129=1;
+                alt130=1;
                 }
                 break;
             case 89:
                 {
-                alt129=2;
+                alt130=2;
                 }
                 break;
             case 90:
                 {
-                alt129=3;
+                alt130=3;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 129, 0, input);
+                    new NoViableAltException("", 130, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt129) {
+            switch (alt130) {
                 case 1 :
                     // InternalRoom.g:5943:5: this_TransitionPoint_0= ruleTransitionPoint
                     {
@@ -14980,20 +14997,20 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // InternalRoom.g:5992:2: ( (lv_handler_0_0= 'handler' ) )? otherlv_1= 'TransitionPoint' ( (lv_name_2_0= RULE_ID ) )
             {
             // InternalRoom.g:5992:2: ( (lv_handler_0_0= 'handler' ) )?
-            int alt130=2;
-            int LA130_0 = input.LA(1);
+            int alt131=2;
+            int LA131_0 = input.LA(1);
 
-            if ( (LA130_0==87) ) {
-                alt130=1;
+            if ( (LA131_0==87) ) {
+                alt131=1;
             }
-            switch (alt130) {
+            switch (alt131) {
                 case 1 :
                     // InternalRoom.g:5993:1: (lv_handler_0_0= 'handler' )
                     {
                     // InternalRoom.g:5993:1: (lv_handler_0_0= 'handler' )
                     // InternalRoom.g:5994:3: lv_handler_0_0= 'handler'
                     {
-                    lv_handler_0_0=(Token)match(input,87,FOLLOW_117); 
+                    lv_handler_0_0=(Token)match(input,87,FOLLOW_118); 
 
                             newLeafNode(lv_handler_0_0, grammarAccess.getTransitionPointAccess().getHandlerHandlerKeyword_0_0());
                         
@@ -15354,13 +15371,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             }
 
             // InternalRoom.g:6158:2: ( (lv_docu_2_0= ruleDocumentation ) )?
-            int alt131=2;
-            int LA131_0 = input.LA(1);
+            int alt132=2;
+            int LA132_0 = input.LA(1);
 
-            if ( (LA131_0==34) ) {
-                alt131=1;
+            if ( (LA132_0==34) ) {
+                alt132=1;
             }
-            switch (alt131) {
+            switch (alt132) {
                 case 1 :
                     // InternalRoom.g:6159:1: (lv_docu_2_0= ruleDocumentation )
                     {
@@ -15468,22 +15485,22 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // InternalRoom.g:6197:1: (this_Transition_0= ruleTransition | this_RefinedTransition_1= ruleRefinedTransition )
             {
             // InternalRoom.g:6197:1: (this_Transition_0= ruleTransition | this_RefinedTransition_1= ruleRefinedTransition )
-            int alt132=2;
-            int LA132_0 = input.LA(1);
+            int alt133=2;
+            int LA133_0 = input.LA(1);
 
-            if ( (LA132_0==92) ) {
-                alt132=1;
+            if ( (LA133_0==92) ) {
+                alt133=1;
             }
-            else if ( (LA132_0==99) ) {
-                alt132=2;
+            else if ( (LA133_0==99) ) {
+                alt133=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 132, 0, input);
+                    new NoViableAltException("", 133, 0, input);
 
                 throw nvae;
             }
-            switch (alt132) {
+            switch (alt133) {
                 case 1 :
                     // InternalRoom.g:6198:5: this_Transition_0= ruleTransition
                     {
@@ -15593,68 +15610,68 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // InternalRoom.g:6237:1: (this_InitialTransition_0= ruleInitialTransition | this_NonInitialTransition_1= ruleNonInitialTransition )
             {
             // InternalRoom.g:6237:1: (this_InitialTransition_0= ruleInitialTransition | this_NonInitialTransition_1= ruleNonInitialTransition )
-            int alt133=2;
-            int LA133_0 = input.LA(1);
+            int alt134=2;
+            int LA134_0 = input.LA(1);
 
-            if ( (LA133_0==92) ) {
-                int LA133_1 = input.LA(2);
+            if ( (LA134_0==92) ) {
+                int LA134_1 = input.LA(2);
 
-                if ( (LA133_1==RULE_ID) ) {
-                    int LA133_2 = input.LA(3);
+                if ( (LA134_1==RULE_ID) ) {
+                    int LA134_2 = input.LA(3);
 
-                    if ( (LA133_2==16) ) {
-                        int LA133_3 = input.LA(4);
+                    if ( (LA134_2==16) ) {
+                        int LA134_3 = input.LA(4);
 
-                        if ( (LA133_3==RULE_ID||(LA133_3>=100 && LA133_3<=101)) ) {
-                            alt133=2;
+                        if ( (LA134_3==93) ) {
+                            alt134=1;
                         }
-                        else if ( (LA133_3==93) ) {
-                            alt133=1;
+                        else if ( (LA134_3==RULE_ID||(LA134_3>=100 && LA134_3<=101)) ) {
+                            alt134=2;
                         }
                         else {
                             NoViableAltException nvae =
-                                new NoViableAltException("", 133, 3, input);
+                                new NoViableAltException("", 134, 3, input);
 
                             throw nvae;
                         }
                     }
                     else {
                         NoViableAltException nvae =
-                            new NoViableAltException("", 133, 2, input);
+                            new NoViableAltException("", 134, 2, input);
 
                         throw nvae;
                     }
                 }
-                else if ( (LA133_1==16) ) {
-                    int LA133_3 = input.LA(3);
+                else if ( (LA134_1==16) ) {
+                    int LA134_3 = input.LA(3);
 
-                    if ( (LA133_3==RULE_ID||(LA133_3>=100 && LA133_3<=101)) ) {
-                        alt133=2;
+                    if ( (LA134_3==93) ) {
+                        alt134=1;
                     }
-                    else if ( (LA133_3==93) ) {
-                        alt133=1;
+                    else if ( (LA134_3==RULE_ID||(LA134_3>=100 && LA134_3<=101)) ) {
+                        alt134=2;
                     }
                     else {
                         NoViableAltException nvae =
-                            new NoViableAltException("", 133, 3, input);
+                            new NoViableAltException("", 134, 3, input);
 
                         throw nvae;
                     }
                 }
                 else {
                     NoViableAltException nvae =
-                        new NoViableAltException("", 133, 1, input);
+                        new NoViableAltException("", 134, 1, input);
 
                     throw nvae;
                 }
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 133, 0, input);
+                    new NoViableAltException("", 134, 0, input);
 
                 throw nvae;
             }
-            switch (alt133) {
+            switch (alt134) {
                 case 1 :
                     // InternalRoom.g:6238:5: this_InitialTransition_0= ruleInitialTransition
                     {
@@ -15766,9 +15783,9 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // InternalRoom.g:6277:1: (this_TransitionChainStartTransition_0= ruleTransitionChainStartTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )
             {
             // InternalRoom.g:6277:1: (this_TransitionChainStartTransition_0= ruleTransitionChainStartTransition | this_ContinuationTransition_1= ruleContinuationTransition | this_CPBranchTransition_2= ruleCPBranchTransition )
-            int alt134=3;
-            alt134 = dfa134.predict(input);
-            switch (alt134) {
+            int alt135=3;
+            alt135 = dfa135.predict(input);
+            switch (alt135) {
                 case 1 :
                     // InternalRoom.g:6278:5: this_TransitionChainStartTransition_0= ruleTransitionChainStartTransition
                     {
@@ -15896,9 +15913,9 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // InternalRoom.g:6327:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_GuardedTransition_1= ruleGuardedTransition )
             {
             // InternalRoom.g:6327:1: (this_TriggeredTransition_0= ruleTriggeredTransition | this_GuardedTransition_1= ruleGuardedTransition )
-            int alt135=2;
-            alt135 = dfa135.predict(input);
-            switch (alt135) {
+            int alt136=2;
+            alt136 = dfa136.predict(input);
+            switch (alt136) {
                 case 1 :
                     // InternalRoom.g:6328:5: this_TriggeredTransition_0= ruleTriggeredTransition
                     {
@@ -16020,18 +16037,18 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // InternalRoom.g:6367:1: (otherlv_0= 'Transition' ( (lv_name_1_0= RULE_ID ) )? otherlv_2= ':' otherlv_3= 'initial' otherlv_4= '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( (lv_docu_6_0= ruleDocumentation ) )? (otherlv_7= '{' (otherlv_8= 'action' ( (lv_action_9_0= ruleDetailCode ) ) )? otherlv_10= '}' )? )
             // InternalRoom.g:6367:3: otherlv_0= 'Transition' ( (lv_name_1_0= RULE_ID ) )? otherlv_2= ':' otherlv_3= 'initial' otherlv_4= '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( (lv_docu_6_0= ruleDocumentation ) )? (otherlv_7= '{' (otherlv_8= 'action' ( (lv_action_9_0= ruleDetailCode ) ) )? otherlv_10= '}' )?
             {
-            otherlv_0=(Token)match(input,92,FOLLOW_118); 
+            otherlv_0=(Token)match(input,92,FOLLOW_119); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getInitialTransitionAccess().getTransitionKeyword_0());
                 
             // InternalRoom.g:6371:1: ( (lv_name_1_0= RULE_ID ) )?
-            int alt136=2;
-            int LA136_0 = input.LA(1);
+            int alt137=2;
+            int LA137_0 = input.LA(1);
 
-            if ( (LA136_0==RULE_ID) ) {
-                alt136=1;
+            if ( (LA137_0==RULE_ID) ) {
+                alt137=1;
             }
-            switch (alt136) {
+            switch (alt137) {
                 case 1 :
                     // InternalRoom.g:6372:1: (lv_name_1_0= RULE_ID )
                     {
@@ -16061,7 +16078,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_2=(Token)match(input,16,FOLLOW_119); 
+            otherlv_2=(Token)match(input,16,FOLLOW_120); 
 
                 	newLeafNode(otherlv_2, grammarAccess.getInitialTransitionAccess().getColonKeyword_2());
                 
@@ -16069,7 +16086,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
                 	newLeafNode(otherlv_3, grammarAccess.getInitialTransitionAccess().getInitialKeyword_3());
                 
-            otherlv_4=(Token)match(input,19,FOLLOW_120); 
+            otherlv_4=(Token)match(input,19,FOLLOW_121); 
 
                 	newLeafNode(otherlv_4, grammarAccess.getInitialTransitionAccess().getHyphenMinusGreaterThanSignKeyword_4());
                 
@@ -16082,7 +16099,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
              
             	        newCompositeNode(grammarAccess.getInitialTransitionAccess().getToTransitionTerminalParserRuleCall_5_0()); 
             	    
-            pushFollow(FOLLOW_108);
+            pushFollow(FOLLOW_109);
             lv_to_5_0=ruleTransitionTerminal();
 
             state._fsp--;
@@ -16105,13 +16122,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             }
 
             // InternalRoom.g:6419:2: ( (lv_docu_6_0= ruleDocumentation ) )?
-            int alt137=2;
-            int LA137_0 = input.LA(1);
+            int alt138=2;
+            int LA138_0 = input.LA(1);
 
-            if ( (LA137_0==34) ) {
-                alt137=1;
+            if ( (LA138_0==34) ) {
+                alt138=1;
             }
-            switch (alt137) {
+            switch (alt138) {
                 case 1 :
                     // InternalRoom.g:6420:1: (lv_docu_6_0= ruleDocumentation )
                     {
@@ -16121,7 +16138,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getInitialTransitionAccess().getDocuDocumentationParserRuleCall_6_0()); 
                     	    
-                    pushFollow(FOLLOW_96);
+                    pushFollow(FOLLOW_97);
                     lv_docu_6_0=ruleDocumentation();
 
                     state._fsp--;
@@ -16147,32 +16164,32 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             }
 
             // InternalRoom.g:6437:3: (otherlv_7= '{' (otherlv_8= 'action' ( (lv_action_9_0= ruleDetailCode ) ) )? otherlv_10= '}' )?
-            int alt139=2;
-            int LA139_0 = input.LA(1);
+            int alt140=2;
+            int LA140_0 = input.LA(1);
 
-            if ( (LA139_0==14) ) {
-                alt139=1;
+            if ( (LA140_0==14) ) {
+                alt140=1;
             }
-            switch (alt139) {
+            switch (alt140) {
                 case 1 :
                     // InternalRoom.g:6437:5: otherlv_7= '{' (otherlv_8= 'action' ( (lv_action_9_0= ruleDetailCode ) ) )? otherlv_10= '}'
                     {
-                    otherlv_7=(Token)match(input,14,FOLLOW_121); 
+                    otherlv_7=(Token)match(input,14,FOLLOW_122); 
 
                         	newLeafNode(otherlv_7, grammarAccess.getInitialTransitionAccess().getLeftCurlyBracketKeyword_7_0());
                         
                     // InternalRoom.g:6441:1: (otherlv_8= 'action' ( (lv_action_9_0= ruleDetailCode ) ) )?
-                    int alt138=2;
-                    int LA138_0 = input.LA(1);
+                    int alt139=2;
+                    int LA139_0 = input.LA(1);
 
-                    if ( (LA138_0==94) ) {
-                        alt138=1;
+                    if ( (LA139_0==94) ) {
+                        alt139=1;
                     }
-                    switch (alt138) {
+                    switch (alt139) {
                         case 1 :
                             // InternalRoom.g:6441:3: otherlv_8= 'action' ( (lv_action_9_0= ruleDetailCode ) )
                             {
-                            otherlv_8=(Token)match(input,94,FOLLOW_122); 
+                            otherlv_8=(Token)match(input,94,FOLLOW_123); 
 
                                 	newLeafNode(otherlv_8, grammarAccess.getInitialTransitionAccess().getActionKeyword_7_1_0());
                                 
@@ -16309,18 +16326,18 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // InternalRoom.g:6488:1: (otherlv_0= 'Transition' ( (lv_name_1_0= RULE_ID ) )? otherlv_2= ':' ( (lv_from_3_0= ruleTransitionTerminal ) ) otherlv_4= '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( (lv_docu_6_0= ruleDocumentation ) )? (otherlv_7= '{' (otherlv_8= 'action' ( (lv_action_9_0= ruleDetailCode ) ) )? otherlv_10= '}' )? )
             // InternalRoom.g:6488:3: otherlv_0= 'Transition' ( (lv_name_1_0= RULE_ID ) )? otherlv_2= ':' ( (lv_from_3_0= ruleTransitionTerminal ) ) otherlv_4= '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( (lv_docu_6_0= ruleDocumentation ) )? (otherlv_7= '{' (otherlv_8= 'action' ( (lv_action_9_0= ruleDetailCode ) ) )? otherlv_10= '}' )?
             {
-            otherlv_0=(Token)match(input,92,FOLLOW_118); 
+            otherlv_0=(Token)match(input,92,FOLLOW_119); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getContinuationTransitionAccess().getTransitionKeyword_0());
                 
             // InternalRoom.g:6492:1: ( (lv_name_1_0= RULE_ID ) )?
-            int alt140=2;
-            int LA140_0 = input.LA(1);
+            int alt141=2;
+            int LA141_0 = input.LA(1);
 
-            if ( (LA140_0==RULE_ID) ) {
-                alt140=1;
+            if ( (LA141_0==RULE_ID) ) {
+                alt141=1;
             }
-            switch (alt140) {
+            switch (alt141) {
                 case 1 :
                     // InternalRoom.g:6493:1: (lv_name_1_0= RULE_ID )
                     {
@@ -16350,7 +16367,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_2=(Token)match(input,16,FOLLOW_120); 
+            otherlv_2=(Token)match(input,16,FOLLOW_121); 
 
                 	newLeafNode(otherlv_2, grammarAccess.getContinuationTransitionAccess().getColonKeyword_2());
                 
@@ -16385,7 +16402,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_4=(Token)match(input,19,FOLLOW_120); 
+            otherlv_4=(Token)match(input,19,FOLLOW_121); 
 
                 	newLeafNode(otherlv_4, grammarAccess.getContinuationTransitionAccess().getHyphenMinusGreaterThanSignKeyword_4());
                 
@@ -16398,7 +16415,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
              
             	        newCompositeNode(grammarAccess.getContinuationTransitionAccess().getToTransitionTerminalParserRuleCall_5_0()); 
             	    
-            pushFollow(FOLLOW_108);
+            pushFollow(FOLLOW_109);
             lv_to_5_0=ruleTransitionTerminal();
 
             state._fsp--;
@@ -16421,13 +16438,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             }
 
             // InternalRoom.g:6554:2: ( (lv_docu_6_0= ruleDocumentation ) )?
-            int alt141=2;
-            int LA141_0 = input.LA(1);
+            int alt142=2;
+            int LA142_0 = input.LA(1);
 
-            if ( (LA141_0==34) ) {
-                alt141=1;
+            if ( (LA142_0==34) ) {
+                alt142=1;
             }
-            switch (alt141) {
+            switch (alt142) {
                 case 1 :
                     // InternalRoom.g:6555:1: (lv_docu_6_0= ruleDocumentation )
                     {
@@ -16437,7 +16454,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getContinuationTransitionAccess().getDocuDocumentationParserRuleCall_6_0()); 
                     	    
-                    pushFollow(FOLLOW_96);
+                    pushFollow(FOLLOW_97);
                     lv_docu_6_0=ruleDocumentation();
 
                     state._fsp--;
@@ -16463,32 +16480,32 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             }
 
             // InternalRoom.g:6572:3: (otherlv_7= '{' (otherlv_8= 'action' ( (lv_action_9_0= ruleDetailCode ) ) )? otherlv_10= '}' )?
-            int alt143=2;
-            int LA143_0 = input.LA(1);
+            int alt144=2;
+            int LA144_0 = input.LA(1);
 
-            if ( (LA143_0==14) ) {
-                alt143=1;
+            if ( (LA144_0==14) ) {
+                alt144=1;
             }
-            switch (alt143) {
+            switch (alt144) {
                 case 1 :
                     // InternalRoom.g:6572:5: otherlv_7= '{' (otherlv_8= 'action' ( (lv_action_9_0= ruleDetailCode ) ) )? otherlv_10= '}'
                     {
-                    otherlv_7=(Token)match(input,14,FOLLOW_121); 
+                    otherlv_7=(Token)match(input,14,FOLLOW_122); 
 
                         	newLeafNode(otherlv_7, grammarAccess.getContinuationTransitionAccess().getLeftCurlyBracketKeyword_7_0());
                         
                     // InternalRoom.g:6576:1: (otherlv_8= 'action' ( (lv_action_9_0= ruleDetailCode ) ) )?
-                    int alt142=2;
-                    int LA142_0 = input.LA(1);
+                    int alt143=2;
+                    int LA143_0 = input.LA(1);
 
-                    if ( (LA142_0==94) ) {
-                        alt142=1;
+                    if ( (LA143_0==94) ) {
+                        alt143=1;
                     }
-                    switch (alt142) {
+                    switch (alt143) {
                         case 1 :
                             // InternalRoom.g:6576:3: otherlv_8= 'action' ( (lv_action_9_0= ruleDetailCode ) )
                             {
-                            otherlv_8=(Token)match(input,94,FOLLOW_122); 
+                            otherlv_8=(Token)match(input,94,FOLLOW_123); 
 
                                 	newLeafNode(otherlv_8, grammarAccess.getContinuationTransitionAccess().getActionKeyword_7_1_0());
                                 
@@ -16633,18 +16650,18 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // InternalRoom.g:6623:1: (otherlv_0= 'Transition' ( (lv_name_1_0= RULE_ID ) )? otherlv_2= ':' ( (lv_from_3_0= ruleTransitionTerminal ) ) otherlv_4= '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( (lv_docu_6_0= ruleDocumentation ) )? otherlv_7= '{' otherlv_8= 'triggers' otherlv_9= '{' ( (lv_triggers_10_0= ruleTrigger ) ) (otherlv_11= 'or' ( (lv_triggers_12_0= ruleTrigger ) ) )* otherlv_13= '}' (otherlv_14= 'action' ( (lv_action_15_0= ruleDetailCode ) ) )? otherlv_16= '}' )
             // InternalRoom.g:6623:3: otherlv_0= 'Transition' ( (lv_name_1_0= RULE_ID ) )? otherlv_2= ':' ( (lv_from_3_0= ruleTransitionTerminal ) ) otherlv_4= '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( (lv_docu_6_0= ruleDocumentation ) )? otherlv_7= '{' otherlv_8= 'triggers' otherlv_9= '{' ( (lv_triggers_10_0= ruleTrigger ) ) (otherlv_11= 'or' ( (lv_triggers_12_0= ruleTrigger ) ) )* otherlv_13= '}' (otherlv_14= 'action' ( (lv_action_15_0= ruleDetailCode ) ) )? otherlv_16= '}'
             {
-            otherlv_0=(Token)match(input,92,FOLLOW_118); 
+            otherlv_0=(Token)match(input,92,FOLLOW_119); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getTriggeredTransitionAccess().getTransitionKeyword_0());
                 
             // InternalRoom.g:6627:1: ( (lv_name_1_0= RULE_ID ) )?
-            int alt144=2;
-            int LA144_0 = input.LA(1);
+            int alt145=2;
+            int LA145_0 = input.LA(1);
 
-            if ( (LA144_0==RULE_ID) ) {
-                alt144=1;
+            if ( (LA145_0==RULE_ID) ) {
+                alt145=1;
             }
-            switch (alt144) {
+            switch (alt145) {
                 case 1 :
                     // InternalRoom.g:6628:1: (lv_name_1_0= RULE_ID )
                     {
@@ -16674,7 +16691,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_2=(Token)match(input,16,FOLLOW_120); 
+            otherlv_2=(Token)match(input,16,FOLLOW_121); 
 
                 	newLeafNode(otherlv_2, grammarAccess.getTriggeredTransitionAccess().getColonKeyword_2());
                 
@@ -16709,7 +16726,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_4=(Token)match(input,19,FOLLOW_120); 
+            otherlv_4=(Token)match(input,19,FOLLOW_121); 
 
                 	newLeafNode(otherlv_4, grammarAccess.getTriggeredTransitionAccess().getHyphenMinusGreaterThanSignKeyword_4());
                 
@@ -16745,13 +16762,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             }
 
             // InternalRoom.g:6689:2: ( (lv_docu_6_0= ruleDocumentation ) )?
-            int alt145=2;
-            int LA145_0 = input.LA(1);
+            int alt146=2;
+            int LA146_0 = input.LA(1);
 
-            if ( (LA145_0==34) ) {
-                alt145=1;
+            if ( (LA146_0==34) ) {
+                alt146=1;
             }
-            switch (alt145) {
+            switch (alt146) {
                 case 1 :
                     // InternalRoom.g:6690:1: (lv_docu_6_0= ruleDocumentation )
                     {
@@ -16786,7 +16803,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_7=(Token)match(input,14,FOLLOW_123); 
+            otherlv_7=(Token)match(input,14,FOLLOW_124); 
 
                 	newLeafNode(otherlv_7, grammarAccess.getTriggeredTransitionAccess().getLeftCurlyBracketKeyword_7());
                 
@@ -16794,7 +16811,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
                 	newLeafNode(otherlv_8, grammarAccess.getTriggeredTransitionAccess().getTriggersKeyword_8());
                 
-            otherlv_9=(Token)match(input,14,FOLLOW_124); 
+            otherlv_9=(Token)match(input,14,FOLLOW_125); 
 
                 	newLeafNode(otherlv_9, grammarAccess.getTriggeredTransitionAccess().getLeftCurlyBracketKeyword_9());
                 
@@ -16807,7 +16824,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
              
             	        newCompositeNode(grammarAccess.getTriggeredTransitionAccess().getTriggersTriggerParserRuleCall_10_0()); 
             	    
-            pushFollow(FOLLOW_125);
+            pushFollow(FOLLOW_126);
             lv_triggers_10_0=ruleTrigger();
 
             state._fsp--;
@@ -16830,21 +16847,21 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             }
 
             // InternalRoom.g:6737:2: (otherlv_11= 'or' ( (lv_triggers_12_0= ruleTrigger ) ) )*
-            loop146:
+            loop147:
             do {
-                int alt146=2;
-                int LA146_0 = input.LA(1);
+                int alt147=2;
+                int LA147_0 = input.LA(1);
 
-                if ( (LA146_0==96) ) {
-                    alt146=1;
+                if ( (LA147_0==96) ) {
+                    alt147=1;
                 }
 
 
-                switch (alt146) {
+                switch (alt147) {
             	case 1 :
             	    // InternalRoom.g:6737:4: otherlv_11= 'or' ( (lv_triggers_12_0= ruleTrigger ) )
             	    {
-            	    otherlv_11=(Token)match(input,96,FOLLOW_124); 
+            	    otherlv_11=(Token)match(input,96,FOLLOW_125); 
 
             	        	newLeafNode(otherlv_11, grammarAccess.getTriggeredTransitionAccess().getOrKeyword_11_0());
             	        
@@ -16857,7 +16874,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getTriggeredTransitionAccess().getTriggersTriggerParserRuleCall_11_1_0()); 
             	    	    
-            	    pushFollow(FOLLOW_125);
+            	    pushFollow(FOLLOW_126);
             	    lv_triggers_12_0=ruleTrigger();
 
             	    state._fsp--;
@@ -16884,26 +16901,26 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    break loop146;
+            	    break loop147;
                 }
             } while (true);
 
-            otherlv_13=(Token)match(input,15,FOLLOW_121); 
+            otherlv_13=(Token)match(input,15,FOLLOW_122); 
 
                 	newLeafNode(otherlv_13, grammarAccess.getTriggeredTransitionAccess().getRightCurlyBracketKeyword_12());
                 
             // InternalRoom.g:6763:1: (otherlv_14= 'action' ( (lv_action_15_0= ruleDetailCode ) ) )?
-            int alt147=2;
-            int LA147_0 = input.LA(1);
+            int alt148=2;
+            int LA148_0 = input.LA(1);
 
-            if ( (LA147_0==94) ) {
-                alt147=1;
+            if ( (LA148_0==94) ) {
+                alt148=1;
             }
-            switch (alt147) {
+            switch (alt148) {
                 case 1 :
                     // InternalRoom.g:6763:3: otherlv_14= 'action' ( (lv_action_15_0= ruleDetailCode ) )
                     {
-                    otherlv_14=(Token)match(input,94,FOLLOW_122); 
+                    otherlv_14=(Token)match(input,94,FOLLOW_123); 
 
                         	newLeafNode(otherlv_14, grammarAccess.getTriggeredTransitionAccess().getActionKeyword_13_0());
                         
@@ -17037,18 +17054,18 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // InternalRoom.g:6810:1: (otherlv_0= 'Transition' ( (lv_name_1_0= RULE_ID ) )? otherlv_2= ':' ( (lv_from_3_0= ruleTransitionTerminal ) ) otherlv_4= '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( (lv_docu_6_0= ruleDocumentation ) )? otherlv_7= '{' otherlv_8= 'guard' ( (lv_guard_9_0= ruleDetailCode ) ) (otherlv_10= 'action' ( (lv_action_11_0= ruleDetailCode ) ) )? otherlv_12= '}' )
             // InternalRoom.g:6810:3: otherlv_0= 'Transition' ( (lv_name_1_0= RULE_ID ) )? otherlv_2= ':' ( (lv_from_3_0= ruleTransitionTerminal ) ) otherlv_4= '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( (lv_docu_6_0= ruleDocumentation ) )? otherlv_7= '{' otherlv_8= 'guard' ( (lv_guard_9_0= ruleDetailCode ) ) (otherlv_10= 'action' ( (lv_action_11_0= ruleDetailCode ) ) )? otherlv_12= '}'
             {
-            otherlv_0=(Token)match(input,92,FOLLOW_118); 
+            otherlv_0=(Token)match(input,92,FOLLOW_119); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getGuardedTransitionAccess().getTransitionKeyword_0());
                 
             // InternalRoom.g:6814:1: ( (lv_name_1_0= RULE_ID ) )?
-            int alt148=2;
-            int LA148_0 = input.LA(1);
+            int alt149=2;
+            int LA149_0 = input.LA(1);
 
-            if ( (LA148_0==RULE_ID) ) {
-                alt148=1;
+            if ( (LA149_0==RULE_ID) ) {
+                alt149=1;
             }
-            switch (alt148) {
+            switch (alt149) {
                 case 1 :
                     // InternalRoom.g:6815:1: (lv_name_1_0= RULE_ID )
                     {
@@ -17078,7 +17095,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_2=(Token)match(input,16,FOLLOW_120); 
+            otherlv_2=(Token)match(input,16,FOLLOW_121); 
 
                 	newLeafNode(otherlv_2, grammarAccess.getGuardedTransitionAccess().getColonKeyword_2());
                 
@@ -17113,7 +17130,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_4=(Token)match(input,19,FOLLOW_120); 
+            otherlv_4=(Token)match(input,19,FOLLOW_121); 
 
                 	newLeafNode(otherlv_4, grammarAccess.getGuardedTransitionAccess().getHyphenMinusGreaterThanSignKeyword_4());
                 
@@ -17149,13 +17166,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             }
 
             // InternalRoom.g:6876:2: ( (lv_docu_6_0= ruleDocumentation ) )?
-            int alt149=2;
-            int LA149_0 = input.LA(1);
+            int alt150=2;
+            int LA150_0 = input.LA(1);
 
-            if ( (LA149_0==34) ) {
-                alt149=1;
+            if ( (LA150_0==34) ) {
+                alt150=1;
             }
-            switch (alt149) {
+            switch (alt150) {
                 case 1 :
                     // InternalRoom.g:6877:1: (lv_docu_6_0= ruleDocumentation )
                     {
@@ -17190,11 +17207,11 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_7=(Token)match(input,14,FOLLOW_126); 
+            otherlv_7=(Token)match(input,14,FOLLOW_127); 
 
                 	newLeafNode(otherlv_7, grammarAccess.getGuardedTransitionAccess().getLeftCurlyBracketKeyword_7());
                 
-            otherlv_8=(Token)match(input,97,FOLLOW_127); 
+            otherlv_8=(Token)match(input,97,FOLLOW_128); 
 
                 	newLeafNode(otherlv_8, grammarAccess.getGuardedTransitionAccess().getGuardKeyword_8());
                 
@@ -17207,7 +17224,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
              
             	        newCompositeNode(grammarAccess.getGuardedTransitionAccess().getGuardDetailCodeParserRuleCall_9_0()); 
             	    
-            pushFollow(FOLLOW_121);
+            pushFollow(FOLLOW_122);
             lv_guard_9_0=ruleDetailCode();
 
             state._fsp--;
@@ -17230,17 +17247,17 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             }
 
             // InternalRoom.g:6920:2: (otherlv_10= 'action' ( (lv_action_11_0= ruleDetailCode ) ) )?
-            int alt150=2;
-            int LA150_0 = input.LA(1);
+            int alt151=2;
+            int LA151_0 = input.LA(1);
 
-            if ( (LA150_0==94) ) {
-                alt150=1;
+            if ( (LA151_0==94) ) {
+                alt151=1;
             }
-            switch (alt150) {
+            switch (alt151) {
                 case 1 :
                     // InternalRoom.g:6920:4: otherlv_10= 'action' ( (lv_action_11_0= ruleDetailCode ) )
                     {
-                    otherlv_10=(Token)match(input,94,FOLLOW_122); 
+                    otherlv_10=(Token)match(input,94,FOLLOW_123); 
 
                         	newLeafNode(otherlv_10, grammarAccess.getGuardedTransitionAccess().getActionKeyword_10_0());
                         
@@ -17374,18 +17391,18 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // InternalRoom.g:6967:1: (otherlv_0= 'Transition' ( (lv_name_1_0= RULE_ID ) )? otherlv_2= ':' ( (lv_from_3_0= ruleTransitionTerminal ) ) otherlv_4= '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( (lv_docu_6_0= ruleDocumentation ) )? otherlv_7= '{' otherlv_8= 'cond' ( (lv_condition_9_0= ruleDetailCode ) ) (otherlv_10= 'action' ( (lv_action_11_0= ruleDetailCode ) ) )? otherlv_12= '}' )
             // InternalRoom.g:6967:3: otherlv_0= 'Transition' ( (lv_name_1_0= RULE_ID ) )? otherlv_2= ':' ( (lv_from_3_0= ruleTransitionTerminal ) ) otherlv_4= '->' ( (lv_to_5_0= ruleTransitionTerminal ) ) ( (lv_docu_6_0= ruleDocumentation ) )? otherlv_7= '{' otherlv_8= 'cond' ( (lv_condition_9_0= ruleDetailCode ) ) (otherlv_10= 'action' ( (lv_action_11_0= ruleDetailCode ) ) )? otherlv_12= '}'
             {
-            otherlv_0=(Token)match(input,92,FOLLOW_118); 
+            otherlv_0=(Token)match(input,92,FOLLOW_119); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getCPBranchTransitionAccess().getTransitionKeyword_0());
                 
             // InternalRoom.g:6971:1: ( (lv_name_1_0= RULE_ID ) )?
-            int alt151=2;
-            int LA151_0 = input.LA(1);
+            int alt152=2;
+            int LA152_0 = input.LA(1);
 
-            if ( (LA151_0==RULE_ID) ) {
-                alt151=1;
+            if ( (LA152_0==RULE_ID) ) {
+                alt152=1;
             }
-            switch (alt151) {
+            switch (alt152) {
                 case 1 :
                     // InternalRoom.g:6972:1: (lv_name_1_0= RULE_ID )
                     {
@@ -17415,7 +17432,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_2=(Token)match(input,16,FOLLOW_120); 
+            otherlv_2=(Token)match(input,16,FOLLOW_121); 
 
                 	newLeafNode(otherlv_2, grammarAccess.getCPBranchTransitionAccess().getColonKeyword_2());
                 
@@ -17450,7 +17467,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_4=(Token)match(input,19,FOLLOW_120); 
+            otherlv_4=(Token)match(input,19,FOLLOW_121); 
 
                 	newLeafNode(otherlv_4, grammarAccess.getCPBranchTransitionAccess().getHyphenMinusGreaterThanSignKeyword_4());
                 
@@ -17486,13 +17503,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             }
 
             // InternalRoom.g:7033:2: ( (lv_docu_6_0= ruleDocumentation ) )?
-            int alt152=2;
-            int LA152_0 = input.LA(1);
+            int alt153=2;
+            int LA153_0 = input.LA(1);
 
-            if ( (LA152_0==34) ) {
-                alt152=1;
+            if ( (LA153_0==34) ) {
+                alt153=1;
             }
-            switch (alt152) {
+            switch (alt153) {
                 case 1 :
                     // InternalRoom.g:7034:1: (lv_docu_6_0= ruleDocumentation )
                     {
@@ -17527,11 +17544,11 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_7=(Token)match(input,14,FOLLOW_128); 
+            otherlv_7=(Token)match(input,14,FOLLOW_129); 
 
                 	newLeafNode(otherlv_7, grammarAccess.getCPBranchTransitionAccess().getLeftCurlyBracketKeyword_7());
                 
-            otherlv_8=(Token)match(input,98,FOLLOW_127); 
+            otherlv_8=(Token)match(input,98,FOLLOW_128); 
 
                 	newLeafNode(otherlv_8, grammarAccess.getCPBranchTransitionAccess().getCondKeyword_8());
                 
@@ -17544,7 +17561,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
              
             	        newCompositeNode(grammarAccess.getCPBranchTransitionAccess().getConditionDetailCodeParserRuleCall_9_0()); 
             	    
-            pushFollow(FOLLOW_121);
+            pushFollow(FOLLOW_122);
             lv_condition_9_0=ruleDetailCode();
 
             state._fsp--;
@@ -17567,17 +17584,17 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             }
 
             // InternalRoom.g:7077:2: (otherlv_10= 'action' ( (lv_action_11_0= ruleDetailCode ) ) )?
-            int alt153=2;
-            int LA153_0 = input.LA(1);
+            int alt154=2;
+            int LA154_0 = input.LA(1);
 
-            if ( (LA153_0==94) ) {
-                alt153=1;
+            if ( (LA154_0==94) ) {
+                alt154=1;
             }
-            switch (alt153) {
+            switch (alt154) {
                 case 1 :
                     // InternalRoom.g:7077:4: otherlv_10= 'action' ( (lv_action_11_0= ruleDetailCode ) )
                     {
-                    otherlv_10=(Token)match(input,94,FOLLOW_122); 
+                    otherlv_10=(Token)match(input,94,FOLLOW_123); 
 
                         	newLeafNode(otherlv_10, grammarAccess.getCPBranchTransitionAccess().getActionKeyword_10_0());
                         
@@ -17734,13 +17751,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             }
 
             // InternalRoom.g:7143:2: ( (lv_docu_2_0= ruleDocumentation ) )?
-            int alt154=2;
-            int LA154_0 = input.LA(1);
+            int alt155=2;
+            int LA155_0 = input.LA(1);
 
-            if ( (LA154_0==34) ) {
-                alt154=1;
+            if ( (LA155_0==34) ) {
+                alt155=1;
             }
-            switch (alt154) {
+            switch (alt155) {
                 case 1 :
                     // InternalRoom.g:7144:1: (lv_docu_2_0= ruleDocumentation )
                     {
@@ -17775,11 +17792,11 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_3=(Token)match(input,14,FOLLOW_129); 
+            otherlv_3=(Token)match(input,14,FOLLOW_130); 
 
                 	newLeafNode(otherlv_3, grammarAccess.getRefinedTransitionAccess().getLeftCurlyBracketKeyword_3());
                 
-            otherlv_4=(Token)match(input,94,FOLLOW_122); 
+            otherlv_4=(Token)match(input,94,FOLLOW_123); 
 
                 	newLeafNode(otherlv_4, grammarAccess.getRefinedTransitionAccess().getActionKeyword_4());
                 
@@ -17895,21 +17912,21 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // InternalRoom.g:7212:1: (this_StateTerminal_0= ruleStateTerminal | this_TrPointTerminal_1= ruleTrPointTerminal | this_SubStateTrPointTerminal_2= ruleSubStateTrPointTerminal | this_ChoicepointTerminal_3= ruleChoicepointTerminal )
             {
             // InternalRoom.g:7212:1: (this_StateTerminal_0= ruleStateTerminal | this_TrPointTerminal_1= ruleTrPointTerminal | this_SubStateTrPointTerminal_2= ruleSubStateTrPointTerminal | this_ChoicepointTerminal_3= ruleChoicepointTerminal )
-            int alt155=4;
+            int alt156=4;
             switch ( input.LA(1) ) {
             case RULE_ID:
                 {
-                int LA155_1 = input.LA(2);
+                int LA156_1 = input.LA(2);
 
-                if ( (LA155_1==24) ) {
-                    alt155=3;
+                if ( (LA156_1==24) ) {
+                    alt156=3;
                 }
-                else if ( (LA155_1==EOF||(LA155_1>=14 && LA155_1<=15)||LA155_1==19||LA155_1==34||LA155_1==81||(LA155_1>=86 && LA155_1<=92)||LA155_1==99) ) {
-                    alt155=1;
+                else if ( (LA156_1==EOF||(LA156_1>=14 && LA156_1<=15)||LA156_1==19||LA156_1==34||LA156_1==81||(LA156_1>=86 && LA156_1<=92)||LA156_1==99) ) {
+                    alt156=1;
                 }
                 else {
                     NoViableAltException nvae =
-                        new NoViableAltException("", 155, 1, input);
+                        new NoViableAltException("", 156, 1, input);
 
                     throw nvae;
                 }
@@ -17917,22 +17934,22 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 break;
             case 100:
                 {
-                alt155=2;
+                alt156=2;
                 }
                 break;
             case 101:
                 {
-                alt155=4;
+                alt156=4;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 155, 0, input);
+                    new NoViableAltException("", 156, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt155) {
+            switch (alt156) {
                 case 1 :
                     // InternalRoom.g:7213:5: this_StateTerminal_0= ruleStateTerminal
                     {
@@ -18275,7 +18292,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	            current = createModelElement(grammarAccess.getSubStateTrPointTerminalRule());
             	        }
                     
-            otherlv_0=(Token)match(input,RULE_ID,FOLLOW_86); 
+            otherlv_0=(Token)match(input,RULE_ID,FOLLOW_87); 
 
             		newLeafNode(otherlv_0, grammarAccess.getSubStateTrPointTerminalAccess().getTrPointTrPointCrossReference_0_0()); 
             	
@@ -18501,7 +18518,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
              
             	        newCompositeNode(grammarAccess.getTriggerAccess().getMsgFromIfPairsMessageFromIfParserRuleCall_1_0()); 
             	    
-            pushFollow(FOLLOW_130);
+            pushFollow(FOLLOW_131);
             lv_msgFromIfPairs_1_0=ruleMessageFromIf();
 
             state._fsp--;
@@ -18524,17 +18541,17 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             }
 
             // InternalRoom.g:7455:2: (otherlv_2= '|' ( (lv_msgFromIfPairs_3_0= ruleMessageFromIf ) ) )*
-            loop156:
+            loop157:
             do {
-                int alt156=2;
-                int LA156_0 = input.LA(1);
+                int alt157=2;
+                int LA157_0 = input.LA(1);
 
-                if ( (LA156_0==103) ) {
-                    alt156=1;
+                if ( (LA157_0==103) ) {
+                    alt157=1;
                 }
 
 
-                switch (alt156) {
+                switch (alt157) {
             	case 1 :
             	    // InternalRoom.g:7455:4: otherlv_2= '|' ( (lv_msgFromIfPairs_3_0= ruleMessageFromIf ) )
             	    {
@@ -18551,7 +18568,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getTriggerAccess().getMsgFromIfPairsMessageFromIfParserRuleCall_2_1_0()); 
             	    	    
-            	    pushFollow(FOLLOW_130);
+            	    pushFollow(FOLLOW_131);
             	    lv_msgFromIfPairs_3_0=ruleMessageFromIf();
 
             	    state._fsp--;
@@ -18578,18 +18595,18 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    break loop156;
+            	    break loop157;
                 }
             } while (true);
 
             // InternalRoom.g:7477:4: ( (lv_guard_4_0= ruleGuard ) )?
-            int alt157=2;
-            int LA157_0 = input.LA(1);
+            int alt158=2;
+            int LA158_0 = input.LA(1);
 
-            if ( (LA157_0==97) ) {
-                alt157=1;
+            if ( (LA158_0==97) ) {
+                alt158=1;
             }
-            switch (alt157) {
+            switch (alt158) {
                 case 1 :
                     // InternalRoom.g:7478:1: (lv_guard_4_0= ruleGuard )
                     {
@@ -18599,7 +18616,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getTriggerAccess().getGuardGuardParserRuleCall_3_0()); 
                     	    
-                    pushFollow(FOLLOW_131);
+                    pushFollow(FOLLOW_132);
                     lv_guard_4_0=ruleGuard();
 
                     state._fsp--;
@@ -18948,22 +18965,22 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
                 	newLeafNode(otherlv_1, grammarAccess.getProtocolSemanticsAccess().getSemanticsKeyword_1());
                 
-            otherlv_2=(Token)match(input,14,FOLLOW_132); 
+            otherlv_2=(Token)match(input,14,FOLLOW_133); 
 
                 	newLeafNode(otherlv_2, grammarAccess.getProtocolSemanticsAccess().getLeftCurlyBracketKeyword_2());
                 
             // InternalRoom.g:7628:1: ( (lv_rules_3_0= ruleSemanticsRule ) )*
-            loop158:
+            loop159:
             do {
-                int alt158=2;
-                int LA158_0 = input.LA(1);
+                int alt159=2;
+                int LA159_0 = input.LA(1);
 
-                if ( ((LA158_0>=106 && LA158_0<=107)) ) {
-                    alt158=1;
+                if ( ((LA159_0>=106 && LA159_0<=107)) ) {
+                    alt159=1;
                 }
 
 
-                switch (alt158) {
+                switch (alt159) {
             	case 1 :
             	    // InternalRoom.g:7629:1: (lv_rules_3_0= ruleSemanticsRule )
             	    {
@@ -18973,7 +18990,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getProtocolSemanticsAccess().getRulesSemanticsRuleParserRuleCall_3_0()); 
             	    	    
-            	    pushFollow(FOLLOW_132);
+            	    pushFollow(FOLLOW_133);
             	    lv_rules_3_0=ruleSemanticsRule();
 
             	    state._fsp--;
@@ -18997,7 +19014,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    break loop158;
+            	    break loop159;
                 }
             } while (true);
 
@@ -19078,22 +19095,22 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // InternalRoom.g:7671:1: (this_InSemanticsRule_0= ruleInSemanticsRule | this_OutSemanticsRule_1= ruleOutSemanticsRule )
             {
             // InternalRoom.g:7671:1: (this_InSemanticsRule_0= ruleInSemanticsRule | this_OutSemanticsRule_1= ruleOutSemanticsRule )
-            int alt159=2;
-            int LA159_0 = input.LA(1);
+            int alt160=2;
+            int LA160_0 = input.LA(1);
 
-            if ( (LA159_0==106) ) {
-                alt159=1;
+            if ( (LA160_0==106) ) {
+                alt160=1;
             }
-            else if ( (LA159_0==107) ) {
-                alt159=2;
+            else if ( (LA160_0==107) ) {
+                alt160=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 159, 0, input);
+                    new NoViableAltException("", 160, 0, input);
 
                 throw nvae;
             }
-            switch (alt159) {
+            switch (alt160) {
                 case 1 :
                     // InternalRoom.g:7672:5: this_InSemanticsRule_0= ruleInSemanticsRule
                     {
@@ -19233,7 +19250,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	            current = createModelElement(grammarAccess.getInSemanticsRuleRule());
             	        }
                     
-            otherlv_2=(Token)match(input,RULE_ID,FOLLOW_133); 
+            otherlv_2=(Token)match(input,RULE_ID,FOLLOW_134); 
 
             		newLeafNode(otherlv_2, grammarAccess.getInSemanticsRuleAccess().getMsgEObjectCrossReference_2_0()); 
             	
@@ -19244,37 +19261,37 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             }
 
             // InternalRoom.g:7732:2: (otherlv_3= '->' ( ( (lv_followUps_4_0= ruleSemanticsRule ) ) | (otherlv_5= '(' ( (lv_followUps_6_0= ruleSemanticsRule ) ) (otherlv_7= ',' ( (lv_followUps_8_0= ruleSemanticsRule ) ) )+ otherlv_9= ')' ) ) )?
-            int alt162=2;
-            int LA162_0 = input.LA(1);
+            int alt163=2;
+            int LA163_0 = input.LA(1);
 
-            if ( (LA162_0==19) ) {
-                alt162=1;
+            if ( (LA163_0==19) ) {
+                alt163=1;
             }
-            switch (alt162) {
+            switch (alt163) {
                 case 1 :
                     // InternalRoom.g:7732:4: otherlv_3= '->' ( ( (lv_followUps_4_0= ruleSemanticsRule ) ) | (otherlv_5= '(' ( (lv_followUps_6_0= ruleSemanticsRule ) ) (otherlv_7= ',' ( (lv_followUps_8_0= ruleSemanticsRule ) ) )+ otherlv_9= ')' ) )
                     {
-                    otherlv_3=(Token)match(input,19,FOLLOW_134); 
+                    otherlv_3=(Token)match(input,19,FOLLOW_135); 
 
                         	newLeafNode(otherlv_3, grammarAccess.getInSemanticsRuleAccess().getHyphenMinusGreaterThanSignKeyword_3_0());
                         
                     // InternalRoom.g:7736:1: ( ( (lv_followUps_4_0= ruleSemanticsRule ) ) | (otherlv_5= '(' ( (lv_followUps_6_0= ruleSemanticsRule ) ) (otherlv_7= ',' ( (lv_followUps_8_0= ruleSemanticsRule ) ) )+ otherlv_9= ')' ) )
-                    int alt161=2;
-                    int LA161_0 = input.LA(1);
+                    int alt162=2;
+                    int LA162_0 = input.LA(1);
 
-                    if ( ((LA161_0>=106 && LA161_0<=107)) ) {
-                        alt161=1;
+                    if ( ((LA162_0>=106 && LA162_0<=107)) ) {
+                        alt162=1;
                     }
-                    else if ( (LA161_0==20) ) {
-                        alt161=2;
+                    else if ( (LA162_0==20) ) {
+                        alt162=2;
                     }
                     else {
                         NoViableAltException nvae =
-                            new NoViableAltException("", 161, 0, input);
+                            new NoViableAltException("", 162, 0, input);
 
                         throw nvae;
                     }
-                    switch (alt161) {
+                    switch (alt162) {
                         case 1 :
                             // InternalRoom.g:7736:2: ( (lv_followUps_4_0= ruleSemanticsRule ) )
                             {
@@ -19318,7 +19335,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                             // InternalRoom.g:7755:6: (otherlv_5= '(' ( (lv_followUps_6_0= ruleSemanticsRule ) ) (otherlv_7= ',' ( (lv_followUps_8_0= ruleSemanticsRule ) ) )+ otherlv_9= ')' )
                             // InternalRoom.g:7755:8: otherlv_5= '(' ( (lv_followUps_6_0= ruleSemanticsRule ) ) (otherlv_7= ',' ( (lv_followUps_8_0= ruleSemanticsRule ) ) )+ otherlv_9= ')'
                             {
-                            otherlv_5=(Token)match(input,20,FOLLOW_135); 
+                            otherlv_5=(Token)match(input,20,FOLLOW_136); 
 
                                 	newLeafNode(otherlv_5, grammarAccess.getInSemanticsRuleAccess().getLeftParenthesisKeyword_3_1_1_0());
                                 
@@ -19331,7 +19348,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                              
                             	        newCompositeNode(grammarAccess.getInSemanticsRuleAccess().getFollowUpsSemanticsRuleParserRuleCall_3_1_1_1_0()); 
                             	    
-                            pushFollow(FOLLOW_136);
+                            pushFollow(FOLLOW_137);
                             lv_followUps_6_0=ruleSemanticsRule();
 
                             state._fsp--;
@@ -19354,22 +19371,22 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                             }
 
                             // InternalRoom.g:7777:2: (otherlv_7= ',' ( (lv_followUps_8_0= ruleSemanticsRule ) ) )+
-                            int cnt160=0;
-                            loop160:
+                            int cnt161=0;
+                            loop161:
                             do {
-                                int alt160=2;
-                                int LA160_0 = input.LA(1);
+                                int alt161=2;
+                                int LA161_0 = input.LA(1);
 
-                                if ( (LA160_0==25) ) {
-                                    alt160=1;
+                                if ( (LA161_0==25) ) {
+                                    alt161=1;
                                 }
 
 
-                                switch (alt160) {
+                                switch (alt161) {
                             	case 1 :
                             	    // InternalRoom.g:7777:4: otherlv_7= ',' ( (lv_followUps_8_0= ruleSemanticsRule ) )
                             	    {
-                            	    otherlv_7=(Token)match(input,25,FOLLOW_135); 
+                            	    otherlv_7=(Token)match(input,25,FOLLOW_136); 
 
                             	        	newLeafNode(otherlv_7, grammarAccess.getInSemanticsRuleAccess().getCommaKeyword_3_1_1_2_0());
                             	        
@@ -19409,12 +19426,12 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                             	    break;
 
                             	default :
-                            	    if ( cnt160 >= 1 ) break loop160;
+                            	    if ( cnt161 >= 1 ) break loop161;
                                         EarlyExitException eee =
-                                            new EarlyExitException(160, input);
+                                            new EarlyExitException(161, input);
                                         throw eee;
                                 }
-                                cnt160++;
+                                cnt161++;
                             } while (true);
 
                             otherlv_9=(Token)match(input,21,FOLLOW_2); 
@@ -19539,7 +19556,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	            current = createModelElement(grammarAccess.getOutSemanticsRuleRule());
             	        }
                     
-            otherlv_2=(Token)match(input,RULE_ID,FOLLOW_133); 
+            otherlv_2=(Token)match(input,RULE_ID,FOLLOW_134); 
 
             		newLeafNode(otherlv_2, grammarAccess.getOutSemanticsRuleAccess().getMsgEObjectCrossReference_2_0()); 
             	
@@ -19550,37 +19567,37 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             }
 
             // InternalRoom.g:7845:2: (otherlv_3= '->' ( ( (lv_followUps_4_0= ruleSemanticsRule ) ) | (otherlv_5= '(' ( (lv_followUps_6_0= ruleSemanticsRule ) ) (otherlv_7= ',' ( (lv_followUps_8_0= ruleSemanticsRule ) ) )+ otherlv_9= ')' ) ) )?
-            int alt165=2;
-            int LA165_0 = input.LA(1);
+            int alt166=2;
+            int LA166_0 = input.LA(1);
 
-            if ( (LA165_0==19) ) {
-                alt165=1;
+            if ( (LA166_0==19) ) {
+                alt166=1;
             }
-            switch (alt165) {
+            switch (alt166) {
                 case 1 :
                     // InternalRoom.g:7845:4: otherlv_3= '->' ( ( (lv_followUps_4_0= ruleSemanticsRule ) ) | (otherlv_5= '(' ( (lv_followUps_6_0= ruleSemanticsRule ) ) (otherlv_7= ',' ( (lv_followUps_8_0= ruleSemanticsRule ) ) )+ otherlv_9= ')' ) )
                     {
-                    otherlv_3=(Token)match(input,19,FOLLOW_134); 
+                    otherlv_3=(Token)match(input,19,FOLLOW_135); 
 
                         	newLeafNode(otherlv_3, grammarAccess.getOutSemanticsRuleAccess().getHyphenMinusGreaterThanSignKeyword_3_0());
                         
                     // InternalRoom.g:7849:1: ( ( (lv_followUps_4_0= ruleSemanticsRule ) ) | (otherlv_5= '(' ( (lv_followUps_6_0= ruleSemanticsRule ) ) (otherlv_7= ',' ( (lv_followUps_8_0= ruleSemanticsRule ) ) )+ otherlv_9= ')' ) )
-                    int alt164=2;
-                    int LA164_0 = input.LA(1);
+                    int alt165=2;
+                    int LA165_0 = input.LA(1);
 
-                    if ( ((LA164_0>=106 && LA164_0<=107)) ) {
-                        alt164=1;
+                    if ( ((LA165_0>=106 && LA165_0<=107)) ) {
+                        alt165=1;
                     }
-                    else if ( (LA164_0==20) ) {
-                        alt164=2;
+                    else if ( (LA165_0==20) ) {
+                        alt165=2;
                     }
                     else {
                         NoViableAltException nvae =
-                            new NoViableAltException("", 164, 0, input);
+                            new NoViableAltException("", 165, 0, input);
 
                         throw nvae;
                     }
-                    switch (alt164) {
+                    switch (alt165) {
                         case 1 :
                             // InternalRoom.g:7849:2: ( (lv_followUps_4_0= ruleSemanticsRule ) )
                             {
@@ -19624,7 +19641,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                             // InternalRoom.g:7868:6: (otherlv_5= '(' ( (lv_followUps_6_0= ruleSemanticsRule ) ) (otherlv_7= ',' ( (lv_followUps_8_0= ruleSemanticsRule ) ) )+ otherlv_9= ')' )
                             // InternalRoom.g:7868:8: otherlv_5= '(' ( (lv_followUps_6_0= ruleSemanticsRule ) ) (otherlv_7= ',' ( (lv_followUps_8_0= ruleSemanticsRule ) ) )+ otherlv_9= ')'
                             {
-                            otherlv_5=(Token)match(input,20,FOLLOW_135); 
+                            otherlv_5=(Token)match(input,20,FOLLOW_136); 
 
                                 	newLeafNode(otherlv_5, grammarAccess.getOutSemanticsRuleAccess().getLeftParenthesisKeyword_3_1_1_0());
                                 
@@ -19637,7 +19654,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                              
                             	        newCompositeNode(grammarAccess.getOutSemanticsRuleAccess().getFollowUpsSemanticsRuleParserRuleCall_3_1_1_1_0()); 
                             	    
-                            pushFollow(FOLLOW_136);
+                            pushFollow(FOLLOW_137);
                             lv_followUps_6_0=ruleSemanticsRule();
 
                             state._fsp--;
@@ -19660,22 +19677,22 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                             }
 
                             // InternalRoom.g:7890:2: (otherlv_7= ',' ( (lv_followUps_8_0= ruleSemanticsRule ) ) )+
-                            int cnt163=0;
-                            loop163:
+                            int cnt164=0;
+                            loop164:
                             do {
-                                int alt163=2;
-                                int LA163_0 = input.LA(1);
+                                int alt164=2;
+                                int LA164_0 = input.LA(1);
 
-                                if ( (LA163_0==25) ) {
-                                    alt163=1;
+                                if ( (LA164_0==25) ) {
+                                    alt164=1;
                                 }
 
 
-                                switch (alt163) {
+                                switch (alt164) {
                             	case 1 :
                             	    // InternalRoom.g:7890:4: otherlv_7= ',' ( (lv_followUps_8_0= ruleSemanticsRule ) )
                             	    {
-                            	    otherlv_7=(Token)match(input,25,FOLLOW_135); 
+                            	    otherlv_7=(Token)match(input,25,FOLLOW_136); 
 
                             	        	newLeafNode(otherlv_7, grammarAccess.getOutSemanticsRuleAccess().getCommaKeyword_3_1_1_2_0());
                             	        
@@ -19715,12 +19732,12 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                             	    break;
 
                             	default :
-                            	    if ( cnt163 >= 1 ) break loop163;
+                            	    if ( cnt164 >= 1 ) break loop164;
                                         EarlyExitException eee =
-                                            new EarlyExitException(163, input);
+                                            new EarlyExitException(164, input);
                                         throw eee;
                                 }
-                                cnt163++;
+                                cnt164++;
                             } while (true);
 
                             otherlv_9=(Token)match(input,21,FOLLOW_2); 
@@ -19839,7 +19856,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
              
             	        newCompositeNode(grammarAccess.getAnnotationAccess().getTypeAnnotationTypeCrossReference_1_0()); 
             	    
-            pushFollow(FOLLOW_137);
+            pushFollow(FOLLOW_138);
             ruleFQN();
 
             state._fsp--;
@@ -19854,13 +19871,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             }
 
             // InternalRoom.g:7956:2: (otherlv_2= '(' ( (lv_attributes_3_0= ruleKeyValue ) ) (otherlv_4= ',' ( (lv_attributes_5_0= ruleKeyValue ) ) )* otherlv_6= ')' )?
-            int alt167=2;
-            int LA167_0 = input.LA(1);
+            int alt168=2;
+            int LA168_0 = input.LA(1);
 
-            if ( (LA167_0==20) ) {
-                alt167=1;
+            if ( (LA168_0==20) ) {
+                alt168=1;
             }
-            switch (alt167) {
+            switch (alt168) {
                 case 1 :
                     // InternalRoom.g:7956:4: otherlv_2= '(' ( (lv_attributes_3_0= ruleKeyValue ) ) (otherlv_4= ',' ( (lv_attributes_5_0= ruleKeyValue ) ) )* otherlv_6= ')'
                     {
@@ -19900,17 +19917,17 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     }
 
                     // InternalRoom.g:7978:2: (otherlv_4= ',' ( (lv_attributes_5_0= ruleKeyValue ) ) )*
-                    loop166:
+                    loop167:
                     do {
-                        int alt166=2;
-                        int LA166_0 = input.LA(1);
+                        int alt167=2;
+                        int LA167_0 = input.LA(1);
 
-                        if ( (LA166_0==25) ) {
-                            alt166=1;
+                        if ( (LA167_0==25) ) {
+                            alt167=1;
                         }
 
 
-                        switch (alt166) {
+                        switch (alt167) {
                     	case 1 :
                     	    // InternalRoom.g:7978:4: otherlv_4= ',' ( (lv_attributes_5_0= ruleKeyValue ) )
                     	    {
@@ -19954,7 +19971,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	    break;
 
                     	default :
-                    	    break loop166;
+                    	    break loop167;
                         }
                     } while (true);
 
@@ -20049,7 +20066,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // InternalRoom.g:8026:1: (lv_key_0_0= RULE_ID )
             // InternalRoom.g:8027:3: lv_key_0_0= RULE_ID
             {
-            lv_key_0_0=(Token)match(input,RULE_ID,FOLLOW_138); 
+            lv_key_0_0=(Token)match(input,RULE_ID,FOLLOW_139); 
 
             			newLeafNode(lv_key_0_0, grammarAccess.getKeyValueAccess().getKeyIDTerminalRuleCall_0_0()); 
             		
@@ -20069,7 +20086,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,26,FOLLOW_139); 
+            otherlv_1=(Token)match(input,26,FOLLOW_140); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getKeyValueAccess().getEqualsSignKeyword_1());
                 
@@ -20225,13 +20242,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             }
 
             // InternalRoom.g:8108:2: ( (lv_docu_2_0= ruleDocumentation ) )?
-            int alt168=2;
-            int LA168_0 = input.LA(1);
+            int alt169=2;
+            int LA169_0 = input.LA(1);
 
-            if ( (LA168_0==34) ) {
-                alt168=1;
+            if ( (LA169_0==34) ) {
+                alt169=1;
             }
-            switch (alt168) {
+            switch (alt169) {
                 case 1 :
                     // InternalRoom.g:8109:1: (lv_docu_2_0= ruleDocumentation )
                     {
@@ -20266,35 +20283,35 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_3=(Token)match(input,14,FOLLOW_140); 
+            otherlv_3=(Token)match(input,14,FOLLOW_141); 
 
                 	newLeafNode(otherlv_3, grammarAccess.getAnnotationTypeAccess().getLeftCurlyBracketKeyword_3());
                 
-            otherlv_4=(Token)match(input,110,FOLLOW_138); 
+            otherlv_4=(Token)match(input,110,FOLLOW_139); 
 
                 	newLeafNode(otherlv_4, grammarAccess.getAnnotationTypeAccess().getTargetKeyword_4());
                 
-            otherlv_5=(Token)match(input,26,FOLLOW_141); 
+            otherlv_5=(Token)match(input,26,FOLLOW_142); 
 
                 	newLeafNode(otherlv_5, grammarAccess.getAnnotationTypeAccess().getEqualsSignKeyword_5());
                 
             // InternalRoom.g:8138:1: ( ( (lv_targets_6_0= ruleAnnotationTargetType ) ) | (otherlv_7= '{' ( (lv_targets_8_0= ruleAnnotationTargetType ) ) (otherlv_9= ',' ( (lv_targets_10_0= ruleAnnotationTargetType ) ) )* otherlv_11= '}' ) )
-            int alt170=2;
-            int LA170_0 = input.LA(1);
+            int alt171=2;
+            int LA171_0 = input.LA(1);
 
-            if ( (LA170_0==28||LA170_0==42||LA170_0==48||LA170_0==51||LA170_0==55||LA170_0==59||LA170_0==64||LA170_0==66||LA170_0==79) ) {
-                alt170=1;
+            if ( (LA171_0==28||LA171_0==42||LA171_0==48||LA171_0==51||LA171_0==55||LA171_0==59||LA171_0==64||LA171_0==66||LA171_0==79) ) {
+                alt171=1;
             }
-            else if ( (LA170_0==14) ) {
-                alt170=2;
+            else if ( (LA171_0==14) ) {
+                alt171=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 170, 0, input);
+                    new NoViableAltException("", 171, 0, input);
 
                 throw nvae;
             }
-            switch (alt170) {
+            switch (alt171) {
                 case 1 :
                     // InternalRoom.g:8138:2: ( (lv_targets_6_0= ruleAnnotationTargetType ) )
                     {
@@ -20307,7 +20324,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getAnnotationTypeAccess().getTargetsAnnotationTargetTypeParserRuleCall_6_0_0()); 
                     	    
-                    pushFollow(FOLLOW_142);
+                    pushFollow(FOLLOW_143);
                     lv_targets_6_0=ruleAnnotationTargetType();
 
                     state._fsp--;
@@ -20338,7 +20355,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     // InternalRoom.g:8157:6: (otherlv_7= '{' ( (lv_targets_8_0= ruleAnnotationTargetType ) ) (otherlv_9= ',' ( (lv_targets_10_0= ruleAnnotationTargetType ) ) )* otherlv_11= '}' )
                     // InternalRoom.g:8157:8: otherlv_7= '{' ( (lv_targets_8_0= ruleAnnotationTargetType ) ) (otherlv_9= ',' ( (lv_targets_10_0= ruleAnnotationTargetType ) ) )* otherlv_11= '}'
                     {
-                    otherlv_7=(Token)match(input,14,FOLLOW_143); 
+                    otherlv_7=(Token)match(input,14,FOLLOW_144); 
 
                         	newLeafNode(otherlv_7, grammarAccess.getAnnotationTypeAccess().getLeftCurlyBracketKeyword_6_1_0());
                         
@@ -20374,21 +20391,21 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     }
 
                     // InternalRoom.g:8179:2: (otherlv_9= ',' ( (lv_targets_10_0= ruleAnnotationTargetType ) ) )*
-                    loop169:
+                    loop170:
                     do {
-                        int alt169=2;
-                        int LA169_0 = input.LA(1);
+                        int alt170=2;
+                        int LA170_0 = input.LA(1);
 
-                        if ( (LA169_0==25) ) {
-                            alt169=1;
+                        if ( (LA170_0==25) ) {
+                            alt170=1;
                         }
 
 
-                        switch (alt169) {
+                        switch (alt170) {
                     	case 1 :
                     	    // InternalRoom.g:8179:4: otherlv_9= ',' ( (lv_targets_10_0= ruleAnnotationTargetType ) )
                     	    {
-                    	    otherlv_9=(Token)match(input,25,FOLLOW_143); 
+                    	    otherlv_9=(Token)match(input,25,FOLLOW_144); 
 
                     	        	newLeafNode(otherlv_9, grammarAccess.getAnnotationTypeAccess().getCommaKeyword_6_1_2_0());
                     	        
@@ -20428,11 +20445,11 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     	    break;
 
                     	default :
-                    	    break loop169;
+                    	    break loop170;
                         }
                     } while (true);
 
-                    otherlv_11=(Token)match(input,15,FOLLOW_142); 
+                    otherlv_11=(Token)match(input,15,FOLLOW_143); 
 
                         	newLeafNode(otherlv_11, grammarAccess.getAnnotationTypeAccess().getRightCurlyBracketKeyword_6_1_3());
                         
@@ -20446,17 +20463,17 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             }
 
             // InternalRoom.g:8205:3: ( (lv_attributes_12_0= ruleAnnotationAttribute ) )*
-            loop171:
+            loop172:
             do {
-                int alt171=2;
-                int LA171_0 = input.LA(1);
+                int alt172=2;
+                int LA172_0 = input.LA(1);
 
-                if ( ((LA171_0>=111 && LA171_0<=112)) ) {
-                    alt171=1;
+                if ( ((LA172_0>=111 && LA172_0<=112)) ) {
+                    alt172=1;
                 }
 
 
-                switch (alt171) {
+                switch (alt172) {
             	case 1 :
             	    // InternalRoom.g:8206:1: (lv_attributes_12_0= ruleAnnotationAttribute )
             	    {
@@ -20466,7 +20483,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getAnnotationTypeAccess().getAttributesAnnotationAttributeParserRuleCall_7_0()); 
             	    	    
-            	    pushFollow(FOLLOW_142);
+            	    pushFollow(FOLLOW_143);
             	    lv_attributes_12_0=ruleAnnotationAttribute();
 
             	    state._fsp--;
@@ -20490,7 +20507,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    break loop171;
+            	    break loop172;
                 }
             } while (true);
 
@@ -20571,108 +20588,108 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // InternalRoom.g:8248:1: (this_SimpleAnnotationAttribute_0= ruleSimpleAnnotationAttribute | this_EnumAnnotationAttribute_1= ruleEnumAnnotationAttribute )
             {
             // InternalRoom.g:8248:1: (this_SimpleAnnotationAttribute_0= ruleSimpleAnnotationAttribute | this_EnumAnnotationAttribute_1= ruleEnumAnnotationAttribute )
-            int alt172=2;
-            int LA172_0 = input.LA(1);
+            int alt173=2;
+            int LA173_0 = input.LA(1);
 
-            if ( (LA172_0==111) ) {
-                int LA172_1 = input.LA(2);
+            if ( (LA173_0==111) ) {
+                int LA173_1 = input.LA(2);
 
-                if ( (LA172_1==113) ) {
-                    int LA172_3 = input.LA(3);
+                if ( (LA173_1==113) ) {
+                    int LA173_3 = input.LA(3);
 
-                    if ( (LA172_3==RULE_ID) ) {
-                        int LA172_4 = input.LA(4);
+                    if ( (LA173_3==RULE_ID) ) {
+                        int LA173_4 = input.LA(4);
 
-                        if ( (LA172_4==16) ) {
-                            int LA172_5 = input.LA(5);
+                        if ( (LA173_4==16) ) {
+                            int LA173_5 = input.LA(5);
 
-                            if ( ((LA172_5>=129 && LA172_5<=132)) ) {
-                                alt172=1;
+                            if ( (LA173_5==14) ) {
+                                alt173=2;
                             }
-                            else if ( (LA172_5==14) ) {
-                                alt172=2;
+                            else if ( ((LA173_5>=129 && LA173_5<=132)) ) {
+                                alt173=1;
                             }
                             else {
                                 NoViableAltException nvae =
-                                    new NoViableAltException("", 172, 5, input);
+                                    new NoViableAltException("", 173, 5, input);
 
                                 throw nvae;
                             }
                         }
                         else {
                             NoViableAltException nvae =
-                                new NoViableAltException("", 172, 4, input);
+                                new NoViableAltException("", 173, 4, input);
 
                             throw nvae;
                         }
                     }
                     else {
                         NoViableAltException nvae =
-                            new NoViableAltException("", 172, 3, input);
+                            new NoViableAltException("", 173, 3, input);
 
                         throw nvae;
                     }
                 }
                 else {
                     NoViableAltException nvae =
-                        new NoViableAltException("", 172, 1, input);
+                        new NoViableAltException("", 173, 1, input);
 
                     throw nvae;
                 }
             }
-            else if ( (LA172_0==112) ) {
-                int LA172_2 = input.LA(2);
+            else if ( (LA173_0==112) ) {
+                int LA173_2 = input.LA(2);
 
-                if ( (LA172_2==113) ) {
-                    int LA172_3 = input.LA(3);
+                if ( (LA173_2==113) ) {
+                    int LA173_3 = input.LA(3);
 
-                    if ( (LA172_3==RULE_ID) ) {
-                        int LA172_4 = input.LA(4);
+                    if ( (LA173_3==RULE_ID) ) {
+                        int LA173_4 = input.LA(4);
 
-                        if ( (LA172_4==16) ) {
-                            int LA172_5 = input.LA(5);
+                        if ( (LA173_4==16) ) {
+                            int LA173_5 = input.LA(5);
 
-                            if ( ((LA172_5>=129 && LA172_5<=132)) ) {
-                                alt172=1;
+                            if ( (LA173_5==14) ) {
+                                alt173=2;
                             }
-                            else if ( (LA172_5==14) ) {
-                                alt172=2;
+                            else if ( ((LA173_5>=129 && LA173_5<=132)) ) {
+                                alt173=1;
                             }
                             else {
                                 NoViableAltException nvae =
-                                    new NoViableAltException("", 172, 5, input);
+                                    new NoViableAltException("", 173, 5, input);
 
                                 throw nvae;
                             }
                         }
                         else {
                             NoViableAltException nvae =
-                                new NoViableAltException("", 172, 4, input);
+                                new NoViableAltException("", 173, 4, input);
 
                             throw nvae;
                         }
                     }
                     else {
                         NoViableAltException nvae =
-                            new NoViableAltException("", 172, 3, input);
+                            new NoViableAltException("", 173, 3, input);
 
                         throw nvae;
                     }
                 }
                 else {
                     NoViableAltException nvae =
-                        new NoViableAltException("", 172, 2, input);
+                        new NoViableAltException("", 173, 2, input);
 
                     throw nvae;
                 }
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 172, 0, input);
+                    new NoViableAltException("", 173, 0, input);
 
                 throw nvae;
             }
-            switch (alt172) {
+            switch (alt173) {
                 case 1 :
                     // InternalRoom.g:8249:5: this_SimpleAnnotationAttribute_0= ruleSimpleAnnotationAttribute
                     {
@@ -20788,22 +20805,22 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // InternalRoom.g:8288:2: ( ( (lv_optional_0_0= 'optional' ) ) | otherlv_1= 'mandatory' ) otherlv_2= 'attribute' ( (lv_name_3_0= RULE_ID ) ) otherlv_4= ':' ( (lv_type_5_0= ruleLiteralType ) )
             {
             // InternalRoom.g:8288:2: ( ( (lv_optional_0_0= 'optional' ) ) | otherlv_1= 'mandatory' )
-            int alt173=2;
-            int LA173_0 = input.LA(1);
+            int alt174=2;
+            int LA174_0 = input.LA(1);
 
-            if ( (LA173_0==111) ) {
-                alt173=1;
+            if ( (LA174_0==111) ) {
+                alt174=1;
             }
-            else if ( (LA173_0==112) ) {
-                alt173=2;
+            else if ( (LA174_0==112) ) {
+                alt174=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 173, 0, input);
+                    new NoViableAltException("", 174, 0, input);
 
                 throw nvae;
             }
-            switch (alt173) {
+            switch (alt174) {
                 case 1 :
                     // InternalRoom.g:8288:3: ( (lv_optional_0_0= 'optional' ) )
                     {
@@ -20813,7 +20830,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     // InternalRoom.g:8289:1: (lv_optional_0_0= 'optional' )
                     // InternalRoom.g:8290:3: lv_optional_0_0= 'optional'
                     {
-                    lv_optional_0_0=(Token)match(input,111,FOLLOW_144); 
+                    lv_optional_0_0=(Token)match(input,111,FOLLOW_145); 
 
                             newLeafNode(lv_optional_0_0, grammarAccess.getSimpleAnnotationAttributeAccess().getOptionalOptionalKeyword_0_0_0());
                         
@@ -20835,7 +20852,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 2 :
                     // InternalRoom.g:8304:7: otherlv_1= 'mandatory'
                     {
-                    otherlv_1=(Token)match(input,112,FOLLOW_144); 
+                    otherlv_1=(Token)match(input,112,FOLLOW_145); 
 
                         	newLeafNode(otherlv_1, grammarAccess.getSimpleAnnotationAttributeAccess().getMandatoryKeyword_0_1());
                         
@@ -20992,22 +21009,22 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // InternalRoom.g:8373:2: ( ( (lv_optional_0_0= 'optional' ) ) | otherlv_1= 'mandatory' ) otherlv_2= 'attribute' ( (lv_name_3_0= RULE_ID ) ) otherlv_4= ':' otherlv_5= '{' ( (lv_values_6_0= RULE_STRING ) ) (otherlv_7= ',' ( (lv_values_8_0= RULE_STRING ) ) )* otherlv_9= '}'
             {
             // InternalRoom.g:8373:2: ( ( (lv_optional_0_0= 'optional' ) ) | otherlv_1= 'mandatory' )
-            int alt174=2;
-            int LA174_0 = input.LA(1);
+            int alt175=2;
+            int LA175_0 = input.LA(1);
 
-            if ( (LA174_0==111) ) {
-                alt174=1;
+            if ( (LA175_0==111) ) {
+                alt175=1;
             }
-            else if ( (LA174_0==112) ) {
-                alt174=2;
+            else if ( (LA175_0==112) ) {
+                alt175=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 174, 0, input);
+                    new NoViableAltException("", 175, 0, input);
 
                 throw nvae;
             }
-            switch (alt174) {
+            switch (alt175) {
                 case 1 :
                     // InternalRoom.g:8373:3: ( (lv_optional_0_0= 'optional' ) )
                     {
@@ -21017,7 +21034,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     // InternalRoom.g:8374:1: (lv_optional_0_0= 'optional' )
                     // InternalRoom.g:8375:3: lv_optional_0_0= 'optional'
                     {
-                    lv_optional_0_0=(Token)match(input,111,FOLLOW_144); 
+                    lv_optional_0_0=(Token)match(input,111,FOLLOW_145); 
 
                             newLeafNode(lv_optional_0_0, grammarAccess.getEnumAnnotationAttributeAccess().getOptionalOptionalKeyword_0_0_0());
                         
@@ -21039,7 +21056,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 2 :
                     // InternalRoom.g:8389:7: otherlv_1= 'mandatory'
                     {
-                    otherlv_1=(Token)match(input,112,FOLLOW_144); 
+                    otherlv_1=(Token)match(input,112,FOLLOW_145); 
 
                         	newLeafNode(otherlv_1, grammarAccess.getEnumAnnotationAttributeAccess().getMandatoryKeyword_0_1());
                         
@@ -21114,17 +21131,17 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             }
 
             // InternalRoom.g:8441:2: (otherlv_7= ',' ( (lv_values_8_0= RULE_STRING ) ) )*
-            loop175:
+            loop176:
             do {
-                int alt175=2;
-                int LA175_0 = input.LA(1);
+                int alt176=2;
+                int LA176_0 = input.LA(1);
 
-                if ( (LA175_0==25) ) {
-                    alt175=1;
+                if ( (LA176_0==25) ) {
+                    alt176=1;
                 }
 
 
-                switch (alt175) {
+                switch (alt176) {
             	case 1 :
             	    // InternalRoom.g:8441:4: otherlv_7= ',' ( (lv_values_8_0= RULE_STRING ) )
             	    {
@@ -21163,7 +21180,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    break loop175;
+            	    break loop176;
                 }
             } while (true);
 
@@ -21248,27 +21265,27 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // InternalRoom.g:8488:1: (otherlv_0= 'import' ( ( ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) otherlv_2= 'from' ) | otherlv_3= 'model' ) ( (lv_importURI_4_0= RULE_STRING ) ) )
             // InternalRoom.g:8488:3: otherlv_0= 'import' ( ( ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) otherlv_2= 'from' ) | otherlv_3= 'model' ) ( (lv_importURI_4_0= RULE_STRING ) )
             {
-            otherlv_0=(Token)match(input,114,FOLLOW_145); 
+            otherlv_0=(Token)match(input,114,FOLLOW_146); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getImportAccess().getImportKeyword_0());
                 
             // InternalRoom.g:8492:1: ( ( ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) otherlv_2= 'from' ) | otherlv_3= 'model' )
-            int alt176=2;
-            int LA176_0 = input.LA(1);
+            int alt177=2;
+            int LA177_0 = input.LA(1);
 
-            if ( (LA176_0==RULE_ID) ) {
-                alt176=1;
+            if ( (LA177_0==RULE_ID) ) {
+                alt177=1;
             }
-            else if ( (LA176_0==116) ) {
-                alt176=2;
+            else if ( (LA177_0==116) ) {
+                alt177=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 176, 0, input);
+                    new NoViableAltException("", 177, 0, input);
 
                 throw nvae;
             }
-            switch (alt176) {
+            switch (alt177) {
                 case 1 :
                     // InternalRoom.g:8492:2: ( ( (lv_importedNamespace_1_0= ruleImportedFQN ) ) otherlv_2= 'from' )
                     {
@@ -21284,7 +21301,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getImportAccess().getImportedNamespaceImportedFQNParserRuleCall_1_0_0_0()); 
                     	    
-                    pushFollow(FOLLOW_146);
+                    pushFollow(FOLLOW_147);
                     lv_importedNamespace_1_0=ruleImportedFQN();
 
                     state._fsp--;
@@ -21432,7 +21449,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
              
                     newCompositeNode(grammarAccess.getImportedFQNAccess().getFQNParserRuleCall_0()); 
                 
-            pushFollow(FOLLOW_147);
+            pushFollow(FOLLOW_148);
             this_FQN_0=ruleFQN();
 
             state._fsp--;
@@ -21444,13 +21461,13 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     afterParserOrEnumRuleCall();
                 
             // InternalRoom.g:8569:1: (kw= '.*' )?
-            int alt177=2;
-            int LA177_0 = input.LA(1);
+            int alt178=2;
+            int LA178_0 = input.LA(1);
 
-            if ( (LA177_0==117) ) {
-                alt177=1;
+            if ( (LA178_0==117) ) {
+                alt178=1;
             }
-            switch (alt177) {
+            switch (alt178) {
                 case 1 :
                     // InternalRoom.g:8570:2: kw= '.*'
                     {
@@ -21550,29 +21567,29 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,34,FOLLOW_148); 
+            otherlv_1=(Token)match(input,34,FOLLOW_149); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getDocumentationAccess().getLeftSquareBracketKeyword_1());
                 
             // InternalRoom.g:8606:1: ( (lv_lines_2_0= RULE_STRING ) )*
-            loop178:
+            loop179:
             do {
-                int alt178=2;
-                int LA178_0 = input.LA(1);
+                int alt179=2;
+                int LA179_0 = input.LA(1);
 
-                if ( (LA178_0==RULE_STRING) ) {
-                    alt178=1;
+                if ( (LA179_0==RULE_STRING) ) {
+                    alt179=1;
                 }
 
 
-                switch (alt178) {
+                switch (alt179) {
             	case 1 :
             	    // InternalRoom.g:8607:1: (lv_lines_2_0= RULE_STRING )
             	    {
             	    // InternalRoom.g:8607:1: (lv_lines_2_0= RULE_STRING )
             	    // InternalRoom.g:8608:3: lv_lines_2_0= RULE_STRING
             	    {
-            	    lv_lines_2_0=(Token)match(input,RULE_STRING,FOLLOW_148); 
+            	    lv_lines_2_0=(Token)match(input,RULE_STRING,FOLLOW_149); 
 
             	    			newLeafNode(lv_lines_2_0, grammarAccess.getDocumentationAccess().getLinesSTRINGTerminalRuleCall_2_0()); 
             	    		
@@ -21594,7 +21611,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    break loop178;
+            	    break loop179;
                 }
             } while (true);
 
@@ -21677,12 +21694,12 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // InternalRoom.g:8653:1: (this_BooleanLiteral_0= ruleBooleanLiteral | this_NumberLiteral_1= ruleNumberLiteral | this_StringLiteral_2= ruleStringLiteral )
             {
             // InternalRoom.g:8653:1: (this_BooleanLiteral_0= ruleBooleanLiteral | this_NumberLiteral_1= ruleNumberLiteral | this_StringLiteral_2= ruleStringLiteral )
-            int alt179=3;
+            int alt180=3;
             switch ( input.LA(1) ) {
             case 118:
             case 119:
                 {
-                alt179=1;
+                alt180=1;
                 }
                 break;
             case RULE_INT:
@@ -21690,22 +21707,22 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             case 120:
             case 121:
                 {
-                alt179=2;
+                alt180=2;
                 }
                 break;
             case RULE_STRING:
                 {
-                alt179=3;
+                alt180=3;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 179, 0, input);
+                    new NoViableAltException("", 180, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt179) {
+            switch (alt180) {
                 case 1 :
                     // InternalRoom.g:8654:5: this_BooleanLiteral_0= ruleBooleanLiteral
                     {
@@ -21845,22 +21862,22 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             }
 
             // InternalRoom.g:8709:2: (otherlv_1= 'false' | ( (lv_isTrue_2_0= 'true' ) ) )
-            int alt180=2;
-            int LA180_0 = input.LA(1);
+            int alt181=2;
+            int LA181_0 = input.LA(1);
 
-            if ( (LA180_0==118) ) {
-                alt180=1;
+            if ( (LA181_0==118) ) {
+                alt181=1;
             }
-            else if ( (LA180_0==119) ) {
-                alt180=2;
+            else if ( (LA181_0==119) ) {
+                alt181=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 180, 0, input);
+                    new NoViableAltException("", 181, 0, input);
 
                 throw nvae;
             }
-            switch (alt180) {
+            switch (alt181) {
                 case 1 :
                     // InternalRoom.g:8709:4: otherlv_1= 'false'
                     {
@@ -21975,31 +21992,31 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // InternalRoom.g:8750:1: (this_IntLiteral_0= ruleIntLiteral | this_RealLiteral_1= ruleRealLiteral )
             {
             // InternalRoom.g:8750:1: (this_IntLiteral_0= ruleIntLiteral | this_RealLiteral_1= ruleRealLiteral )
-            int alt181=2;
+            int alt182=2;
             switch ( input.LA(1) ) {
             case 120:
                 {
-                int LA181_1 = input.LA(2);
+                int LA182_1 = input.LA(2);
 
-                if ( (LA181_1==RULE_INT) ) {
-                    int LA181_3 = input.LA(3);
+                if ( (LA182_1==RULE_INT) ) {
+                    int LA182_3 = input.LA(3);
 
-                    if ( (LA181_3==72) ) {
-                        alt181=2;
+                    if ( (LA182_3==EOF||LA182_3==21||LA182_3==25) ) {
+                        alt182=1;
                     }
-                    else if ( (LA181_3==EOF||LA181_3==21||LA181_3==25) ) {
-                        alt181=1;
+                    else if ( (LA182_3==72) ) {
+                        alt182=2;
                     }
                     else {
                         NoViableAltException nvae =
-                            new NoViableAltException("", 181, 3, input);
+                            new NoViableAltException("", 182, 3, input);
 
                         throw nvae;
                     }
                 }
                 else {
                     NoViableAltException nvae =
-                        new NoViableAltException("", 181, 1, input);
+                        new NoViableAltException("", 182, 1, input);
 
                     throw nvae;
                 }
@@ -22007,27 +22024,27 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 break;
             case 121:
                 {
-                int LA181_2 = input.LA(2);
+                int LA182_2 = input.LA(2);
 
-                if ( (LA181_2==RULE_INT) ) {
-                    int LA181_3 = input.LA(3);
+                if ( (LA182_2==RULE_INT) ) {
+                    int LA182_3 = input.LA(3);
 
-                    if ( (LA181_3==72) ) {
-                        alt181=2;
+                    if ( (LA182_3==EOF||LA182_3==21||LA182_3==25) ) {
+                        alt182=1;
                     }
-                    else if ( (LA181_3==EOF||LA181_3==21||LA181_3==25) ) {
-                        alt181=1;
+                    else if ( (LA182_3==72) ) {
+                        alt182=2;
                     }
                     else {
                         NoViableAltException nvae =
-                            new NoViableAltException("", 181, 3, input);
+                            new NoViableAltException("", 182, 3, input);
 
                         throw nvae;
                     }
                 }
                 else {
                     NoViableAltException nvae =
-                        new NoViableAltException("", 181, 2, input);
+                        new NoViableAltException("", 182, 2, input);
 
                     throw nvae;
                 }
@@ -22035,17 +22052,17 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 break;
             case RULE_INT:
                 {
-                int LA181_3 = input.LA(2);
+                int LA182_3 = input.LA(2);
 
-                if ( (LA181_3==72) ) {
-                    alt181=2;
+                if ( (LA182_3==EOF||LA182_3==21||LA182_3==25) ) {
+                    alt182=1;
                 }
-                else if ( (LA181_3==EOF||LA181_3==21||LA181_3==25) ) {
-                    alt181=1;
+                else if ( (LA182_3==72) ) {
+                    alt182=2;
                 }
                 else {
                     NoViableAltException nvae =
-                        new NoViableAltException("", 181, 3, input);
+                        new NoViableAltException("", 182, 3, input);
 
                     throw nvae;
                 }
@@ -22053,17 +22070,17 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 break;
             case RULE_HEX:
                 {
-                alt181=1;
+                alt182=1;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 181, 0, input);
+                    new NoViableAltException("", 182, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt181) {
+            switch (alt182) {
                 case 1 :
                     // InternalRoom.g:8751:5: this_IntLiteral_0= ruleIntLiteral
                     {
@@ -22511,22 +22528,22 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // InternalRoom.g:8925:1: ( ( (kw= '+' | kw= '-' )? this_INT_2= RULE_INT ) | this_HEX_3= RULE_HEX )
             {
             // InternalRoom.g:8925:1: ( ( (kw= '+' | kw= '-' )? this_INT_2= RULE_INT ) | this_HEX_3= RULE_HEX )
-            int alt183=2;
-            int LA183_0 = input.LA(1);
+            int alt184=2;
+            int LA184_0 = input.LA(1);
 
-            if ( (LA183_0==RULE_INT||(LA183_0>=120 && LA183_0<=121)) ) {
-                alt183=1;
+            if ( (LA184_0==RULE_INT||(LA184_0>=120 && LA184_0<=121)) ) {
+                alt184=1;
             }
-            else if ( (LA183_0==RULE_HEX) ) {
-                alt183=2;
+            else if ( (LA184_0==RULE_HEX) ) {
+                alt184=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 183, 0, input);
+                    new NoViableAltException("", 184, 0, input);
 
                 throw nvae;
             }
-            switch (alt183) {
+            switch (alt184) {
                 case 1 :
                     // InternalRoom.g:8925:2: ( (kw= '+' | kw= '-' )? this_INT_2= RULE_INT )
                     {
@@ -22534,16 +22551,16 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     // InternalRoom.g:8925:3: (kw= '+' | kw= '-' )? this_INT_2= RULE_INT
                     {
                     // InternalRoom.g:8925:3: (kw= '+' | kw= '-' )?
-                    int alt182=3;
-                    int LA182_0 = input.LA(1);
+                    int alt183=3;
+                    int LA183_0 = input.LA(1);
 
-                    if ( (LA182_0==120) ) {
-                        alt182=1;
+                    if ( (LA183_0==120) ) {
+                        alt183=1;
                     }
-                    else if ( (LA182_0==121) ) {
-                        alt182=2;
+                    else if ( (LA183_0==121) ) {
+                        alt183=2;
                     }
-                    switch (alt182) {
+                    switch (alt183) {
                         case 1 :
                             // InternalRoom.g:8926:2: kw= '+'
                             {
@@ -22668,51 +22685,51 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // InternalRoom.g:8974:1: (this_Decimal_0= ruleDecimal | this_DecimalExp_1= ruleDecimalExp )
             {
             // InternalRoom.g:8974:1: (this_Decimal_0= ruleDecimal | this_DecimalExp_1= ruleDecimalExp )
-            int alt184=2;
+            int alt185=2;
             switch ( input.LA(1) ) {
             case 120:
                 {
-                int LA184_1 = input.LA(2);
+                int LA185_1 = input.LA(2);
 
-                if ( (LA184_1==RULE_INT) ) {
-                    int LA184_3 = input.LA(3);
+                if ( (LA185_1==RULE_INT) ) {
+                    int LA185_3 = input.LA(3);
 
-                    if ( (LA184_3==72) ) {
-                        int LA184_4 = input.LA(4);
+                    if ( (LA185_3==72) ) {
+                        int LA185_4 = input.LA(4);
 
-                        if ( (LA184_4==RULE_INT) ) {
-                            int LA184_5 = input.LA(5);
+                        if ( (LA185_4==RULE_INT) ) {
+                            int LA185_5 = input.LA(5);
 
-                            if ( (LA184_5==EOF||LA184_5==21||LA184_5==25) ) {
-                                alt184=1;
+                            if ( (LA185_5==EOF||LA185_5==21||LA185_5==25) ) {
+                                alt185=1;
                             }
-                            else if ( ((LA184_5>=122 && LA184_5<=123)) ) {
-                                alt184=2;
+                            else if ( ((LA185_5>=122 && LA185_5<=123)) ) {
+                                alt185=2;
                             }
                             else {
                                 NoViableAltException nvae =
-                                    new NoViableAltException("", 184, 5, input);
+                                    new NoViableAltException("", 185, 5, input);
 
                                 throw nvae;
                             }
                         }
                         else {
                             NoViableAltException nvae =
-                                new NoViableAltException("", 184, 4, input);
+                                new NoViableAltException("", 185, 4, input);
 
                             throw nvae;
                         }
                     }
                     else {
                         NoViableAltException nvae =
-                            new NoViableAltException("", 184, 3, input);
+                            new NoViableAltException("", 185, 3, input);
 
                         throw nvae;
                     }
                 }
                 else {
                     NoViableAltException nvae =
-                        new NoViableAltException("", 184, 1, input);
+                        new NoViableAltException("", 185, 1, input);
 
                     throw nvae;
                 }
@@ -22720,47 +22737,47 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 break;
             case 121:
                 {
-                int LA184_2 = input.LA(2);
+                int LA185_2 = input.LA(2);
 
-                if ( (LA184_2==RULE_INT) ) {
-                    int LA184_3 = input.LA(3);
+                if ( (LA185_2==RULE_INT) ) {
+                    int LA185_3 = input.LA(3);
 
-                    if ( (LA184_3==72) ) {
-                        int LA184_4 = input.LA(4);
+                    if ( (LA185_3==72) ) {
+                        int LA185_4 = input.LA(4);
 
-                        if ( (LA184_4==RULE_INT) ) {
-                            int LA184_5 = input.LA(5);
+                        if ( (LA185_4==RULE_INT) ) {
+                            int LA185_5 = input.LA(5);
 
-                            if ( (LA184_5==EOF||LA184_5==21||LA184_5==25) ) {
-                                alt184=1;
+                            if ( (LA185_5==EOF||LA185_5==21||LA185_5==25) ) {
+                                alt185=1;
                             }
-                            else if ( ((LA184_5>=122 && LA184_5<=123)) ) {
-                                alt184=2;
+                            else if ( ((LA185_5>=122 && LA185_5<=123)) ) {
+                                alt185=2;
                             }
                             else {
                                 NoViableAltException nvae =
-                                    new NoViableAltException("", 184, 5, input);
+                                    new NoViableAltException("", 185, 5, input);
 
                                 throw nvae;
                             }
                         }
                         else {
                             NoViableAltException nvae =
-                                new NoViableAltException("", 184, 4, input);
+                                new NoViableAltException("", 185, 4, input);
 
                             throw nvae;
                         }
                     }
                     else {
                         NoViableAltException nvae =
-                            new NoViableAltException("", 184, 3, input);
+                            new NoViableAltException("", 185, 3, input);
 
                         throw nvae;
                     }
                 }
                 else {
                     NoViableAltException nvae =
-                        new NoViableAltException("", 184, 2, input);
+                        new NoViableAltException("", 185, 2, input);
 
                     throw nvae;
                 }
@@ -22768,37 +22785,37 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 break;
             case RULE_INT:
                 {
-                int LA184_3 = input.LA(2);
+                int LA185_3 = input.LA(2);
 
-                if ( (LA184_3==72) ) {
-                    int LA184_4 = input.LA(3);
+                if ( (LA185_3==72) ) {
+                    int LA185_4 = input.LA(3);
 
-                    if ( (LA184_4==RULE_INT) ) {
-                        int LA184_5 = input.LA(4);
+                    if ( (LA185_4==RULE_INT) ) {
+                        int LA185_5 = input.LA(4);
 
-                        if ( (LA184_5==EOF||LA184_5==21||LA184_5==25) ) {
-                            alt184=1;
+                        if ( (LA185_5==EOF||LA185_5==21||LA185_5==25) ) {
+                            alt185=1;
                         }
-                        else if ( ((LA184_5>=122 && LA184_5<=123)) ) {
-                            alt184=2;
+                        else if ( ((LA185_5>=122 && LA185_5<=123)) ) {
+                            alt185=2;
                         }
                         else {
                             NoViableAltException nvae =
-                                new NoViableAltException("", 184, 5, input);
+                                new NoViableAltException("", 185, 5, input);
 
                             throw nvae;
                         }
                     }
                     else {
                         NoViableAltException nvae =
-                            new NoViableAltException("", 184, 4, input);
+                            new NoViableAltException("", 185, 4, input);
 
                         throw nvae;
                     }
                 }
                 else {
                     NoViableAltException nvae =
-                        new NoViableAltException("", 184, 3, input);
+                        new NoViableAltException("", 185, 3, input);
 
                     throw nvae;
                 }
@@ -22806,12 +22823,12 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 184, 0, input);
+                    new NoViableAltException("", 185, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt184) {
+            switch (alt185) {
                 case 1 :
                     // InternalRoom.g:8975:5: this_Decimal_0= ruleDecimal
                     {
@@ -22934,16 +22951,16 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // InternalRoom.g:9025:2: (kw= '+' | kw= '-' )? this_INT_2= RULE_INT kw= '.' this_INT_4= RULE_INT
             {
             // InternalRoom.g:9025:2: (kw= '+' | kw= '-' )?
-            int alt185=3;
-            int LA185_0 = input.LA(1);
+            int alt186=3;
+            int LA186_0 = input.LA(1);
 
-            if ( (LA185_0==120) ) {
-                alt185=1;
+            if ( (LA186_0==120) ) {
+                alt186=1;
             }
-            else if ( (LA185_0==121) ) {
-                alt185=2;
+            else if ( (LA186_0==121) ) {
+                alt186=2;
             }
-            switch (alt185) {
+            switch (alt186) {
                 case 1 :
                     // InternalRoom.g:9026:2: kw= '+'
                     {
@@ -22969,7 +22986,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            this_INT_2=(Token)match(input,RULE_INT,FOLLOW_101); 
+            this_INT_2=(Token)match(input,RULE_INT,FOLLOW_102); 
 
             		current.merge(this_INT_2);
                 
@@ -23074,16 +23091,16 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // InternalRoom.g:9089:2: (kw= '+' | kw= '-' )? this_INT_2= RULE_INT kw= '.' this_INT_4= RULE_INT (kw= 'e' | kw= 'E' ) (kw= '+' | kw= '-' )? this_INT_9= RULE_INT
             {
             // InternalRoom.g:9089:2: (kw= '+' | kw= '-' )?
-            int alt186=3;
-            int LA186_0 = input.LA(1);
+            int alt187=3;
+            int LA187_0 = input.LA(1);
 
-            if ( (LA186_0==120) ) {
-                alt186=1;
+            if ( (LA187_0==120) ) {
+                alt187=1;
             }
-            else if ( (LA186_0==121) ) {
-                alt186=2;
+            else if ( (LA187_0==121) ) {
+                alt187=2;
             }
-            switch (alt186) {
+            switch (alt187) {
                 case 1 :
                     // InternalRoom.g:9090:2: kw= '+'
                     {
@@ -23109,7 +23126,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
             }
 
-            this_INT_2=(Token)match(input,RULE_INT,FOLLOW_101); 
+            this_INT_2=(Token)match(input,RULE_INT,FOLLOW_102); 
 
             		current.merge(this_INT_2);
                 
@@ -23121,7 +23138,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                     current.merge(kw);
                     newLeafNode(kw, grammarAccess.getDecimalExpAccess().getFullStopKeyword_2()); 
                 
-            this_INT_4=(Token)match(input,RULE_INT,FOLLOW_149); 
+            this_INT_4=(Token)match(input,RULE_INT,FOLLOW_150); 
 
             		current.merge(this_INT_4);
                 
@@ -23129,26 +23146,26 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 newLeafNode(this_INT_4, grammarAccess.getDecimalExpAccess().getINTTerminalRuleCall_3()); 
                 
             // InternalRoom.g:9122:1: (kw= 'e' | kw= 'E' )
-            int alt187=2;
-            int LA187_0 = input.LA(1);
+            int alt188=2;
+            int LA188_0 = input.LA(1);
 
-            if ( (LA187_0==122) ) {
-                alt187=1;
+            if ( (LA188_0==122) ) {
+                alt188=1;
             }
-            else if ( (LA187_0==123) ) {
-                alt187=2;
+            else if ( (LA188_0==123) ) {
+                alt188=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 187, 0, input);
+                    new NoViableAltException("", 188, 0, input);
 
                 throw nvae;
             }
-            switch (alt187) {
+            switch (alt188) {
                 case 1 :
                     // InternalRoom.g:9123:2: kw= 'e'
                     {
-                    kw=(Token)match(input,122,FOLLOW_150); 
+                    kw=(Token)match(input,122,FOLLOW_151); 
 
                             current.merge(kw);
                             newLeafNode(kw, grammarAccess.getDecimalExpAccess().getEKeyword_4_0()); 
@@ -23159,7 +23176,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 case 2 :
                     // InternalRoom.g:9130:2: kw= 'E'
                     {
-                    kw=(Token)match(input,123,FOLLOW_150); 
+                    kw=(Token)match(input,123,FOLLOW_151); 
 
                             current.merge(kw);
                             newLeafNode(kw, grammarAccess.getDecimalExpAccess().getEKeyword_4_1()); 
@@ -23171,16 +23188,16 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             }
 
             // InternalRoom.g:9135:2: (kw= '+' | kw= '-' )?
-            int alt188=3;
-            int LA188_0 = input.LA(1);
+            int alt189=3;
+            int LA189_0 = input.LA(1);
 
-            if ( (LA188_0==120) ) {
-                alt188=1;
+            if ( (LA189_0==120) ) {
+                alt189=1;
             }
-            else if ( (LA188_0==121) ) {
-                alt188=2;
+            else if ( (LA189_0==121) ) {
+                alt189=2;
             }
-            switch (alt188) {
+            switch (alt189) {
                 case 1 :
                     // InternalRoom.g:9136:2: kw= '+'
                     {
@@ -23290,7 +23307,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // InternalRoom.g:9179:1: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
             // InternalRoom.g:9179:6: this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )*
             {
-            this_ID_0=(Token)match(input,RULE_ID,FOLLOW_151); 
+            this_ID_0=(Token)match(input,RULE_ID,FOLLOW_152); 
 
             		current.merge(this_ID_0);
                 
@@ -23298,17 +23315,17 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
                 newLeafNode(this_ID_0, grammarAccess.getFQNAccess().getIDTerminalRuleCall_0()); 
                 
             // InternalRoom.g:9186:1: (kw= '.' this_ID_2= RULE_ID )*
-            loop189:
+            loop190:
             do {
-                int alt189=2;
-                int LA189_0 = input.LA(1);
+                int alt190=2;
+                int LA190_0 = input.LA(1);
 
-                if ( (LA189_0==72) ) {
-                    alt189=1;
+                if ( (LA190_0==72) ) {
+                    alt190=1;
                 }
 
 
-                switch (alt189) {
+                switch (alt190) {
             	case 1 :
             	    // InternalRoom.g:9187:2: kw= '.' this_ID_2= RULE_ID
             	    {
@@ -23317,7 +23334,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	            current.merge(kw);
             	            newLeafNode(kw, grammarAccess.getFQNAccess().getFullStopKeyword_1_0()); 
             	        
-            	    this_ID_2=(Token)match(input,RULE_ID,FOLLOW_151); 
+            	    this_ID_2=(Token)match(input,RULE_ID,FOLLOW_152); 
 
             	    		current.merge(this_ID_2);
             	        
@@ -23329,7 +23346,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    break loop189;
+            	    break loop190;
                 }
             } while (true);
 
@@ -23368,31 +23385,31 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // InternalRoom.g:9210:1: ( (enumLiteral_0= 'eventdriven' ) | (enumLiteral_1= 'datadriven' ) | (enumLiteral_2= 'sync' ) )
             {
             // InternalRoom.g:9210:1: ( (enumLiteral_0= 'eventdriven' ) | (enumLiteral_1= 'datadriven' ) | (enumLiteral_2= 'sync' ) )
-            int alt190=3;
+            int alt191=3;
             switch ( input.LA(1) ) {
             case 124:
                 {
-                alt190=1;
+                alt191=1;
                 }
                 break;
             case 125:
                 {
-                alt190=2;
+                alt191=2;
                 }
                 break;
             case 126:
                 {
-                alt190=3;
+                alt191=3;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 190, 0, input);
+                    new NoViableAltException("", 191, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt190) {
+            switch (alt191) {
                 case 1 :
                     // InternalRoom.g:9210:2: (enumLiteral_0= 'eventdriven' )
                     {
@@ -23478,22 +23495,22 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // InternalRoom.g:9235:1: ( (enumLiteral_0= 'fixed' ) | (enumLiteral_1= 'optional' ) )
             {
             // InternalRoom.g:9235:1: ( (enumLiteral_0= 'fixed' ) | (enumLiteral_1= 'optional' ) )
-            int alt191=2;
-            int LA191_0 = input.LA(1);
+            int alt192=2;
+            int LA192_0 = input.LA(1);
 
-            if ( (LA191_0==127) ) {
-                alt191=1;
+            if ( (LA192_0==127) ) {
+                alt192=1;
             }
-            else if ( (LA191_0==111) ) {
-                alt191=2;
+            else if ( (LA192_0==111) ) {
+                alt192=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 191, 0, input);
+                    new NoViableAltException("", 192, 0, input);
 
                 throw nvae;
             }
-            switch (alt191) {
+            switch (alt192) {
                 case 1 :
                     // InternalRoom.g:9235:2: (enumLiteral_0= 'fixed' )
                     {
@@ -23564,36 +23581,36 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // InternalRoom.g:9256:1: ( (enumLiteral_0= 'eventdriven' ) | (enumLiteral_1= 'datadriven' ) | (enumLiteral_2= 'async' ) | (enumLiteral_3= 'sync' ) )
             {
             // InternalRoom.g:9256:1: ( (enumLiteral_0= 'eventdriven' ) | (enumLiteral_1= 'datadriven' ) | (enumLiteral_2= 'async' ) | (enumLiteral_3= 'sync' ) )
-            int alt192=4;
+            int alt193=4;
             switch ( input.LA(1) ) {
             case 124:
                 {
-                alt192=1;
+                alt193=1;
                 }
                 break;
             case 125:
                 {
-                alt192=2;
+                alt193=2;
                 }
                 break;
             case 128:
                 {
-                alt192=3;
+                alt193=3;
                 }
                 break;
             case 126:
                 {
-                alt192=4;
+                alt193=4;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 192, 0, input);
+                    new NoViableAltException("", 193, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt192) {
+            switch (alt193) {
                 case 1 :
                     // InternalRoom.g:9256:2: (enumLiteral_0= 'eventdriven' )
                     {
@@ -23698,36 +23715,36 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             // InternalRoom.g:9287:1: ( (enumLiteral_0= 'ptBoolean' ) | (enumLiteral_1= 'ptInteger' ) | (enumLiteral_2= 'ptReal' ) | (enumLiteral_3= 'ptCharacter' ) )
             {
             // InternalRoom.g:9287:1: ( (enumLiteral_0= 'ptBoolean' ) | (enumLiteral_1= 'ptInteger' ) | (enumLiteral_2= 'ptReal' ) | (enumLiteral_3= 'ptCharacter' ) )
-            int alt193=4;
+            int alt194=4;
             switch ( input.LA(1) ) {
             case 129:
                 {
-                alt193=1;
+                alt194=1;
                 }
                 break;
             case 130:
                 {
-                alt193=2;
+                alt194=2;
                 }
                 break;
             case 131:
                 {
-                alt193=3;
+                alt194=3;
                 }
                 break;
             case 132:
                 {
-                alt193=4;
+                alt194=4;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 193, 0, input);
+                    new NoViableAltException("", 194, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt193) {
+            switch (alt194) {
                 case 1 :
                     // InternalRoom.g:9287:2: (enumLiteral_0= 'ptBoolean' )
                     {
@@ -23819,8 +23836,8 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
 
 
     protected DFA3 dfa3 = new DFA3(this);
-    protected DFA134 dfa134 = new DFA134(this);
     protected DFA135 dfa135 = new DFA135(this);
+    protected DFA136 dfa136 = new DFA136(this);
     static final String dfa_1s = "\16\uffff";
     static final String dfa_2s = "\1\17\5\uffff\3\52\5\uffff";
     static final String dfa_3s = "\1\u0080\5\uffff\3\u0080\5\uffff";
@@ -23871,7 +23888,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
     static final String dfa_8s = "\14\uffff\1\22\6\uffff\3\22\1\uffff\1\22\2\uffff";
     static final String dfa_9s = "\1\134\1\4\1\20\1\4\1\23\4\4\3\23\1\16\3\4\1\5\1\17\1\uffff\3\16\1\5\1\16\2\uffff";
     static final String dfa_10s = "\1\134\2\20\1\145\1\30\3\4\1\145\3\23\1\143\3\4\1\43\1\142\1\uffff\3\143\1\43\1\143\2\uffff";
-    static final String dfa_11s = "\22\uffff\1\2\5\uffff\1\3\1\1";
+    static final String dfa_11s = "\22\uffff\1\2\5\uffff\1\1\1\3";
     static final String dfa_12s = "\32\uffff}>";
     static final String[] dfa_13s = {
             "\1\1",
@@ -23891,7 +23908,7 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             "\1\24",
             "\1\25",
             "\1\26\35\uffff\1\27",
-            "\1\22\116\uffff\1\22\1\31\1\uffff\1\31\1\30",
+            "\1\22\116\uffff\1\22\1\30\1\uffff\1\30\1\31",
             "",
             "\1\21\1\22\22\uffff\1\20\56\uffff\1\22\4\uffff\7\22\6\uffff\1\22",
             "\1\21\1\22\22\uffff\1\20\56\uffff\1\22\4\uffff\7\22\6\uffff\1\22",
@@ -23910,11 +23927,11 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
     static final short[] dfa_12 = DFA.unpackEncodedString(dfa_12s);
     static final short[][] dfa_13 = unpackEncodedStringArray(dfa_13s);
 
-    class DFA134 extends DFA {
+    class DFA135 extends DFA {
 
-        public DFA134(BaseRecognizer recognizer) {
+        public DFA135(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
-            this.decisionNumber = 134;
+            this.decisionNumber = 135;
             this.eot = dfa_7;
             this.eof = dfa_8;
             this.min = dfa_9;
@@ -23928,8 +23945,8 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
         }
     }
     static final String dfa_14s = "\31\uffff";
-    static final String dfa_15s = "\1\134\1\4\1\20\1\4\1\23\4\4\2\23\1\16\2\4\1\23\1\4\1\5\1\137\3\16\1\5\1\16\2\uffff";
-    static final String dfa_16s = "\1\134\2\20\1\145\1\30\2\4\1\145\1\4\2\23\1\42\2\4\1\23\1\4\1\43\1\141\3\42\1\43\1\16\2\uffff";
+    static final String dfa_15s = "\1\134\1\4\1\20\1\4\1\23\4\4\3\23\1\16\3\4\1\5\1\137\3\16\1\5\1\16\2\uffff";
+    static final String dfa_16s = "\1\134\2\20\1\145\1\30\3\4\1\145\3\23\1\42\3\4\1\43\1\141\3\42\1\43\1\16\2\uffff";
     static final String dfa_17s = "\27\uffff\1\1\1\2";
     static final String dfa_18s = "\31\uffff}>";
     static final String[] dfa_19s = {
@@ -23937,17 +23954,17 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
             "\1\2\13\uffff\1\3",
             "\1\3",
             "\1\4\137\uffff\1\5\1\6",
-            "\1\7\4\uffff\1\10",
+            "\1\10\4\uffff\1\7",
             "\1\11",
             "\1\12",
-            "\1\13\137\uffff\1\14\1\15",
-            "\1\16",
-            "\1\7",
-            "\1\7",
+            "\1\13",
+            "\1\14\137\uffff\1\15\1\16",
+            "\1\10",
+            "\1\10",
+            "\1\10",
             "\1\21\11\uffff\1\17\11\uffff\1\20",
             "\1\22",
             "\1\23",
-            "\1\7",
             "\1\24",
             "\1\25\35\uffff\1\26",
             "\1\27\1\uffff\1\30",
@@ -23967,11 +23984,11 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
     static final short[] dfa_18 = DFA.unpackEncodedString(dfa_18s);
     static final short[][] dfa_19 = unpackEncodedStringArray(dfa_19s);
 
-    class DFA135 extends DFA {
+    class DFA136 extends DFA {
 
-        public DFA135(BaseRecognizer recognizer) {
+        public DFA136(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
-            this.decisionNumber = 135;
+            this.decisionNumber = 136;
             this.eot = dfa_14;
             this.eof = dfa_14;
             this.min = dfa_15;
@@ -24050,92 +24067,93 @@ public class InternalRoomParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_62 = new BitSet(new long[]{0x0002000000008000L,0x0000100000000000L});
     public static final BitSet FOLLOW_63 = new BitSet(new long[]{0x0002000000008000L});
     public static final BitSet FOLLOW_64 = new BitSet(new long[]{0x0008000000000000L});
-    public static final BitSet FOLLOW_65 = new BitSet(new long[]{0x0000000400000002L,0x0000100000000000L});
-    public static final BitSet FOLLOW_66 = new BitSet(new long[]{0x0030033200008000L});
-    public static final BitSet FOLLOW_67 = new BitSet(new long[]{0x002003320000C080L});
-    public static final BitSet FOLLOW_68 = new BitSet(new long[]{0x0020033200008000L});
-    public static final BitSet FOLLOW_69 = new BitSet(new long[]{0x0000080000000000L});
-    public static final BitSet FOLLOW_70 = new BitSet(new long[]{0x0000100000000000L});
-    public static final BitSet FOLLOW_71 = new BitSet(new long[]{0x00C0000000000000L,0x7000000000000000L,0x0000000000000001L});
-    public static final BitSet FOLLOW_72 = new BitSet(new long[]{0x0700000000008000L,0x0000100000000000L});
-    public static final BitSet FOLLOW_73 = new BitSet(new long[]{0x4800800000008000L});
-    public static final BitSet FOLLOW_74 = new BitSet(new long[]{0x0600000000008000L});
-    public static final BitSet FOLLOW_75 = new BitSet(new long[]{0xF8008333C0008000L,0x8000800000002440L});
-    public static final BitSet FOLLOW_76 = new BitSet(new long[]{0xF80083338000C080L,0x8000800000002440L});
-    public static final BitSet FOLLOW_77 = new BitSet(new long[]{0xF800833380008000L,0x8000800000002440L});
-    public static final BitSet FOLLOW_78 = new BitSet(new long[]{0xF80083330000C080L,0x8000800000002440L});
-    public static final BitSet FOLLOW_79 = new BitSet(new long[]{0xF800833300008000L,0x8000800000002440L});
-    public static final BitSet FOLLOW_80 = new BitSet(new long[]{0xF80083320000C080L,0x8000800000002440L});
-    public static final BitSet FOLLOW_81 = new BitSet(new long[]{0xF800833200008000L,0x8000800000002440L});
-    public static final BitSet FOLLOW_82 = new BitSet(new long[]{0x0400000000008000L});
-    public static final BitSet FOLLOW_83 = new BitSet(new long[]{0x0000033000008000L,0x0000100000010000L});
-    public static final BitSet FOLLOW_84 = new BitSet(new long[]{0x0000033000008000L,0x0000000000010000L});
-    public static final BitSet FOLLOW_85 = new BitSet(new long[]{0x0800000000000000L});
-    public static final BitSet FOLLOW_86 = new BitSet(new long[]{0x0000000001000000L});
-    public static final BitSet FOLLOW_87 = new BitSet(new long[]{0x0000000000008000L,0x0000100000000442L});
-    public static final BitSet FOLLOW_88 = new BitSet(new long[]{0x0000000000008000L,0x0000000000000442L});
-    public static final BitSet FOLLOW_89 = new BitSet(new long[]{0x48008001C0008000L,0x8000900000002458L});
-    public static final BitSet FOLLOW_90 = new BitSet(new long[]{0x480080018000C080L,0x8000800000002458L});
-    public static final BitSet FOLLOW_91 = new BitSet(new long[]{0x4800800180008000L,0x8000800000002458L});
-    public static final BitSet FOLLOW_92 = new BitSet(new long[]{0x480080010000C080L,0x8000800000002458L});
-    public static final BitSet FOLLOW_93 = new BitSet(new long[]{0x4800800100008000L,0x8000800000002458L});
-    public static final BitSet FOLLOW_94 = new BitSet(new long[]{0x480080000000C080L,0x8000800000002458L});
-    public static final BitSet FOLLOW_95 = new BitSet(new long[]{0x4800800000008000L,0x8000800000002458L});
-    public static final BitSet FOLLOW_96 = new BitSet(new long[]{0x0000000000004002L});
-    public static final BitSet FOLLOW_97 = new BitSet(new long[]{0x0000000000008000L,0x0000000000000010L});
-    public static final BitSet FOLLOW_98 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000020L});
-    public static final BitSet FOLLOW_99 = new BitSet(new long[]{0x0000000000010002L});
-    public static final BitSet FOLLOW_100 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000080L});
-    public static final BitSet FOLLOW_101 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000100L});
-    public static final BitSet FOLLOW_102 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000200L});
-    public static final BitSet FOLLOW_103 = new BitSet(new long[]{0x0000000000020000L,0x0000000000001000L});
-    public static final BitSet FOLLOW_104 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000800L});
-    public static final BitSet FOLLOW_105 = new BitSet(new long[]{0x0000000000000000L,0x0000000000002000L});
-    public static final BitSet FOLLOW_106 = new BitSet(new long[]{0x0000000000000040L,0x0000000000004000L});
-    public static final BitSet FOLLOW_107 = new BitSet(new long[]{0x0000000000008000L,0x000000081FC20000L});
-    public static final BitSet FOLLOW_108 = new BitSet(new long[]{0x0000000400004002L});
-    public static final BitSet FOLLOW_109 = new BitSet(new long[]{0x0000000000008000L,0x00000000003C0000L});
-    public static final BitSet FOLLOW_110 = new BitSet(new long[]{0x000000000000C080L,0x0000000000380000L});
-    public static final BitSet FOLLOW_111 = new BitSet(new long[]{0x0000000000008000L,0x0000000000380000L});
-    public static final BitSet FOLLOW_112 = new BitSet(new long[]{0x000000000000C080L,0x0000000000300000L});
-    public static final BitSet FOLLOW_113 = new BitSet(new long[]{0x0000000000008000L,0x0000000000300000L});
-    public static final BitSet FOLLOW_114 = new BitSet(new long[]{0x000000000000C080L,0x0000000000200000L});
-    public static final BitSet FOLLOW_115 = new BitSet(new long[]{0x0000000000008000L,0x0000000000200000L});
-    public static final BitSet FOLLOW_116 = new BitSet(new long[]{0x0000000000008020L});
-    public static final BitSet FOLLOW_117 = new BitSet(new long[]{0x0000000000000000L,0x0000000001000000L});
-    public static final BitSet FOLLOW_118 = new BitSet(new long[]{0x0000000000010010L});
-    public static final BitSet FOLLOW_119 = new BitSet(new long[]{0x0000000000000000L,0x0000000020000000L});
-    public static final BitSet FOLLOW_120 = new BitSet(new long[]{0x0000000000000010L,0x0000003000000000L});
-    public static final BitSet FOLLOW_121 = new BitSet(new long[]{0x0000000000008000L,0x0000000040000000L});
-    public static final BitSet FOLLOW_122 = new BitSet(new long[]{0x000000000000C080L});
-    public static final BitSet FOLLOW_123 = new BitSet(new long[]{0x0000000000000000L,0x0000000080000000L});
-    public static final BitSet FOLLOW_124 = new BitSet(new long[]{0x0000000000000000L,0x0000004000000000L});
-    public static final BitSet FOLLOW_125 = new BitSet(new long[]{0x0000000000008000L,0x0000000100000000L});
-    public static final BitSet FOLLOW_126 = new BitSet(new long[]{0x0000000000000000L,0x0000000200000000L});
-    public static final BitSet FOLLOW_127 = new BitSet(new long[]{0x000000000000C080L,0x0000000040000000L});
-    public static final BitSet FOLLOW_128 = new BitSet(new long[]{0x0000000000000000L,0x0000000400000000L});
-    public static final BitSet FOLLOW_129 = new BitSet(new long[]{0x0000000000000000L,0x0000000040000000L});
-    public static final BitSet FOLLOW_130 = new BitSet(new long[]{0x0000000000000000L,0x0000018200000000L});
-    public static final BitSet FOLLOW_131 = new BitSet(new long[]{0x0000000000000000L,0x0000010000000000L});
-    public static final BitSet FOLLOW_132 = new BitSet(new long[]{0x0000000000008000L,0x00000C0000000000L});
-    public static final BitSet FOLLOW_133 = new BitSet(new long[]{0x0000000000080002L});
-    public static final BitSet FOLLOW_134 = new BitSet(new long[]{0x0000000000100000L,0x00000C0000000000L});
-    public static final BitSet FOLLOW_135 = new BitSet(new long[]{0x0000000000000000L,0x00000C0000000000L});
-    public static final BitSet FOLLOW_136 = new BitSet(new long[]{0x0000000002000000L});
-    public static final BitSet FOLLOW_137 = new BitSet(new long[]{0x0000000000100002L});
-    public static final BitSet FOLLOW_138 = new BitSet(new long[]{0x0000000004000000L});
-    public static final BitSet FOLLOW_139 = new BitSet(new long[]{0x0000000000000160L,0x03C0000000000000L});
-    public static final BitSet FOLLOW_140 = new BitSet(new long[]{0x0000000000000000L,0x0000400000000000L});
-    public static final BitSet FOLLOW_141 = new BitSet(new long[]{0x0889040010004000L,0x0000000000008005L});
-    public static final BitSet FOLLOW_142 = new BitSet(new long[]{0x0000000000008000L,0x0001800000000000L});
-    public static final BitSet FOLLOW_143 = new BitSet(new long[]{0x0889040010000000L,0x0000000000008005L});
-    public static final BitSet FOLLOW_144 = new BitSet(new long[]{0x0000000000000000L,0x0002000000000000L});
-    public static final BitSet FOLLOW_145 = new BitSet(new long[]{0x0000000000000010L,0x0010000000000000L});
-    public static final BitSet FOLLOW_146 = new BitSet(new long[]{0x0000000000000000L,0x0008000000000000L});
-    public static final BitSet FOLLOW_147 = new BitSet(new long[]{0x0000000000000002L,0x0020000000000000L});
-    public static final BitSet FOLLOW_148 = new BitSet(new long[]{0x0000000800000020L});
-    public static final BitSet FOLLOW_149 = new BitSet(new long[]{0x0000000000000000L,0x0C00000000000000L});
-    public static final BitSet FOLLOW_150 = new BitSet(new long[]{0x0000000000000040L,0x0300000000000000L});
-    public static final BitSet FOLLOW_151 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000100L});
+    public static final BitSet FOLLOW_65 = new BitSet(new long[]{0x0000000400100002L,0x0000100000000000L});
+    public static final BitSet FOLLOW_66 = new BitSet(new long[]{0x0000000400000002L,0x0000100000000000L});
+    public static final BitSet FOLLOW_67 = new BitSet(new long[]{0x0030033200008000L});
+    public static final BitSet FOLLOW_68 = new BitSet(new long[]{0x002003320000C080L});
+    public static final BitSet FOLLOW_69 = new BitSet(new long[]{0x0020033200008000L});
+    public static final BitSet FOLLOW_70 = new BitSet(new long[]{0x0000080000000000L});
+    public static final BitSet FOLLOW_71 = new BitSet(new long[]{0x0000100000000000L});
+    public static final BitSet FOLLOW_72 = new BitSet(new long[]{0x00C0000000000000L,0x7000000000000000L,0x0000000000000001L});
+    public static final BitSet FOLLOW_73 = new BitSet(new long[]{0x0700000000008000L,0x0000100000000000L});
+    public static final BitSet FOLLOW_74 = new BitSet(new long[]{0x4800800000008000L});
+    public static final BitSet FOLLOW_75 = new BitSet(new long[]{0x0600000000008000L});
+    public static final BitSet FOLLOW_76 = new BitSet(new long[]{0xF8008333C0008000L,0x8000800000002440L});
+    public static final BitSet FOLLOW_77 = new BitSet(new long[]{0xF80083338000C080L,0x8000800000002440L});
+    public static final BitSet FOLLOW_78 = new BitSet(new long[]{0xF800833380008000L,0x8000800000002440L});
+    public static final BitSet FOLLOW_79 = new BitSet(new long[]{0xF80083330000C080L,0x8000800000002440L});
+    public static final BitSet FOLLOW_80 = new BitSet(new long[]{0xF800833300008000L,0x8000800000002440L});
+    public static final BitSet FOLLOW_81 = new BitSet(new long[]{0xF80083320000C080L,0x8000800000002440L});
+    public static final BitSet FOLLOW_82 = new BitSet(new long[]{0xF800833200008000L,0x8000800000002440L});
+    public static final BitSet FOLLOW_83 = new BitSet(new long[]{0x0400000000008000L});
+    public static final BitSet FOLLOW_84 = new BitSet(new long[]{0x0000033000008000L,0x0000100000010000L});
+    public static final BitSet FOLLOW_85 = new BitSet(new long[]{0x0000033000008000L,0x0000000000010000L});
+    public static final BitSet FOLLOW_86 = new BitSet(new long[]{0x0800000000000000L});
+    public static final BitSet FOLLOW_87 = new BitSet(new long[]{0x0000000001000000L});
+    public static final BitSet FOLLOW_88 = new BitSet(new long[]{0x0000000000008000L,0x0000100000000442L});
+    public static final BitSet FOLLOW_89 = new BitSet(new long[]{0x0000000000008000L,0x0000000000000442L});
+    public static final BitSet FOLLOW_90 = new BitSet(new long[]{0x48008001C0008000L,0x8000900000002458L});
+    public static final BitSet FOLLOW_91 = new BitSet(new long[]{0x480080018000C080L,0x8000800000002458L});
+    public static final BitSet FOLLOW_92 = new BitSet(new long[]{0x4800800180008000L,0x8000800000002458L});
+    public static final BitSet FOLLOW_93 = new BitSet(new long[]{0x480080010000C080L,0x8000800000002458L});
+    public static final BitSet FOLLOW_94 = new BitSet(new long[]{0x4800800100008000L,0x8000800000002458L});
+    public static final BitSet FOLLOW_95 = new BitSet(new long[]{0x480080000000C080L,0x8000800000002458L});
+    public static final BitSet FOLLOW_96 = new BitSet(new long[]{0x4800800000008000L,0x8000800000002458L});
+    public static final BitSet FOLLOW_97 = new BitSet(new long[]{0x0000000000004002L});
+    public static final BitSet FOLLOW_98 = new BitSet(new long[]{0x0000000000008000L,0x0000000000000010L});
+    public static final BitSet FOLLOW_99 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000020L});
+    public static final BitSet FOLLOW_100 = new BitSet(new long[]{0x0000000000010002L});
+    public static final BitSet FOLLOW_101 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000080L});
+    public static final BitSet FOLLOW_102 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000100L});
+    public static final BitSet FOLLOW_103 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000200L});
+    public static final BitSet FOLLOW_104 = new BitSet(new long[]{0x0000000000020000L,0x0000000000001000L});
+    public static final BitSet FOLLOW_105 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000800L});
+    public static final BitSet FOLLOW_106 = new BitSet(new long[]{0x0000000000000000L,0x0000000000002000L});
+    public static final BitSet FOLLOW_107 = new BitSet(new long[]{0x0000000000000040L,0x0000000000004000L});
+    public static final BitSet FOLLOW_108 = new BitSet(new long[]{0x0000000000008000L,0x000000081FC20000L});
+    public static final BitSet FOLLOW_109 = new BitSet(new long[]{0x0000000400004002L});
+    public static final BitSet FOLLOW_110 = new BitSet(new long[]{0x0000000000008000L,0x00000000003C0000L});
+    public static final BitSet FOLLOW_111 = new BitSet(new long[]{0x000000000000C080L,0x0000000000380000L});
+    public static final BitSet FOLLOW_112 = new BitSet(new long[]{0x0000000000008000L,0x0000000000380000L});
+    public static final BitSet FOLLOW_113 = new BitSet(new long[]{0x000000000000C080L,0x0000000000300000L});
+    public static final BitSet FOLLOW_114 = new BitSet(new long[]{0x0000000000008000L,0x0000000000300000L});
+    public static final BitSet FOLLOW_115 = new BitSet(new long[]{0x000000000000C080L,0x0000000000200000L});
+    public static final BitSet FOLLOW_116 = new BitSet(new long[]{0x0000000000008000L,0x0000000000200000L});
+    public static final BitSet FOLLOW_117 = new BitSet(new long[]{0x0000000000008020L});
+    public static final BitSet FOLLOW_118 = new BitSet(new long[]{0x0000000000000000L,0x0000000001000000L});
+    public static final BitSet FOLLOW_119 = new BitSet(new long[]{0x0000000000010010L});
+    public static final BitSet FOLLOW_120 = new BitSet(new long[]{0x0000000000000000L,0x0000000020000000L});
+    public static final BitSet FOLLOW_121 = new BitSet(new long[]{0x0000000000000010L,0x0000003000000000L});
+    public static final BitSet FOLLOW_122 = new BitSet(new long[]{0x0000000000008000L,0x0000000040000000L});
+    public static final BitSet FOLLOW_123 = new BitSet(new long[]{0x000000000000C080L});
+    public static final BitSet FOLLOW_124 = new BitSet(new long[]{0x0000000000000000L,0x0000000080000000L});
+    public static final BitSet FOLLOW_125 = new BitSet(new long[]{0x0000000000000000L,0x0000004000000000L});
+    public static final BitSet FOLLOW_126 = new BitSet(new long[]{0x0000000000008000L,0x0000000100000000L});
+    public static final BitSet FOLLOW_127 = new BitSet(new long[]{0x0000000000000000L,0x0000000200000000L});
+    public static final BitSet FOLLOW_128 = new BitSet(new long[]{0x000000000000C080L,0x0000000040000000L});
+    public static final BitSet FOLLOW_129 = new BitSet(new long[]{0x0000000000000000L,0x0000000400000000L});
+    public static final BitSet FOLLOW_130 = new BitSet(new long[]{0x0000000000000000L,0x0000000040000000L});
+    public static final BitSet FOLLOW_131 = new BitSet(new long[]{0x0000000000000000L,0x0000018200000000L});
+    public static final BitSet FOLLOW_132 = new BitSet(new long[]{0x0000000000000000L,0x0000010000000000L});
+    public static final BitSet FOLLOW_133 = new BitSet(new long[]{0x0000000000008000L,0x00000C0000000000L});
+    public static final BitSet FOLLOW_134 = new BitSet(new long[]{0x0000000000080002L});
+    public static final BitSet FOLLOW_135 = new BitSet(new long[]{0x0000000000100000L,0x00000C0000000000L});
+    public static final BitSet FOLLOW_136 = new BitSet(new long[]{0x0000000000000000L,0x00000C0000000000L});
+    public static final BitSet FOLLOW_137 = new BitSet(new long[]{0x0000000002000000L});
+    public static final BitSet FOLLOW_138 = new BitSet(new long[]{0x0000000000100002L});
+    public static final BitSet FOLLOW_139 = new BitSet(new long[]{0x0000000004000000L});
+    public static final BitSet FOLLOW_140 = new BitSet(new long[]{0x0000000000000160L,0x03C0000000000000L});
+    public static final BitSet FOLLOW_141 = new BitSet(new long[]{0x0000000000000000L,0x0000400000000000L});
+    public static final BitSet FOLLOW_142 = new BitSet(new long[]{0x0889040010004000L,0x0000000000008005L});
+    public static final BitSet FOLLOW_143 = new BitSet(new long[]{0x0000000000008000L,0x0001800000000000L});
+    public static final BitSet FOLLOW_144 = new BitSet(new long[]{0x0889040010000000L,0x0000000000008005L});
+    public static final BitSet FOLLOW_145 = new BitSet(new long[]{0x0000000000000000L,0x0002000000000000L});
+    public static final BitSet FOLLOW_146 = new BitSet(new long[]{0x0000000000000010L,0x0010000000000000L});
+    public static final BitSet FOLLOW_147 = new BitSet(new long[]{0x0000000000000000L,0x0008000000000000L});
+    public static final BitSet FOLLOW_148 = new BitSet(new long[]{0x0000000000000002L,0x0020000000000000L});
+    public static final BitSet FOLLOW_149 = new BitSet(new long[]{0x0000000800000020L});
+    public static final BitSet FOLLOW_150 = new BitSet(new long[]{0x0000000000000000L,0x0C00000000000000L});
+    public static final BitSet FOLLOW_151 = new BitSet(new long[]{0x0000000000000040L,0x0300000000000000L});
+    public static final BitSet FOLLOW_152 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000100L});
 
 }

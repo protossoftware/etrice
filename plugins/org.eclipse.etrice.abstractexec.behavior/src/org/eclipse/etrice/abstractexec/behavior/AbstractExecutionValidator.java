@@ -243,7 +243,7 @@ public class AbstractExecutionValidator implements ICustomValidator {
 													txt,
 													trig,
 													mif.eContainingFeature(),
-													trig.getMsgFromIfPairs().indexOf(trig),
+													trig.getMsgFromIfPairs().indexOf(mif),
 													DIAG_CODE_VIOLATION_TRIGGER,
 													fsmNameProvider.getMessageName(trigger.getMsg()),
 													fsmNameProvider.getMessageName(mif.getMessage()),

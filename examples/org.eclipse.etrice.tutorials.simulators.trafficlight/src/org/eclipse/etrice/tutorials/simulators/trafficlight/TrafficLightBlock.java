@@ -81,63 +81,72 @@ public class TrafficLightBlock extends Container implements Runnable {
 	}
 
 	private void loopSocket(int ipPort) {
-		ServerSocket socketServer;
+		ServerSocket socketServer = null;
 		try {
 			// open Socket
 			System.out.println("listening on port "+ipPort);
 			socketServer = new ServerSocket(ipPort);
-		} catch (IOException e1) {
+			
+			while (true) {
+				// open and close socket endlessly
+				try {
+					// wait blocking for client to connect
+					Socket socket = socketServer.accept();
+					socket.setKeepAlive(true);
+					statusLine.setText("accepting commands at port "+ipPort);
+					
+					// prepare input and output streams
+					BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+					OutputStream out = socket.getOutputStream();
+					
+					// add listener for outgoing command
+					buttonListener = new ButtonActionListener(out);
+					requestButton.addActionListener(buttonListener);
+					requestButton.setEnabled(true);
+					
+					resetLights();
+					
+					// read blocking until socket is disconnected 
+					String cmd;
+					while ((cmd = in.readLine()) != null) {
+						System.out.println("Received Command:" + cmd);
+						
+						if (cmd.equals("disconnect"))
+							break;
+						
+						dispatchCommand(requestButton, cmd);
+					}
+					statusLine.setText("listening");
+					
+					// deactivate button
+					requestButton.removeActionListener(buttonListener);
+					requestButton.setEnabled(false);
+					
+					resetLights();
+					
+					// clean up socket
+					socket.close();
+					
+				} catch (IOException e) {
+					//System.err.println(e.toString());
+					//System.exit(1);
+				}
+			}
+		}
+		catch (IOException e1) {
 			e1.printStackTrace();
 			return;
 		}
-		
-		while (true) {
-			// open and close socket endlessly
-			try {
-				// wait blocking for client to connect
-				Socket socket = socketServer.accept();
-				socket.setKeepAlive(true);
-				statusLine.setText("accepting commands at port "+ipPort);
-
-				// prepare input and output streams
-				BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-				OutputStream out = socket.getOutputStream();
-
-				// add listener for outgoing command
-				buttonListener = new ButtonActionListener(out);
-				requestButton.addActionListener(buttonListener);
-				requestButton.setEnabled(true);
-
-				resetLights();
-
-				// read blocking until socket is disconnected 
-				String cmd;
-				while ((cmd = in.readLine()) != null) {
-					System.out.println("Received Command:" + cmd);
-					
-					if (cmd.equals("disconnect"))
-						break;
-					
-					dispatchCommand(requestButton, cmd);
+		finally {
+			 try {
+				if (socketServer != null) {
+					socketServer.close();
 				}
-				statusLine.setText("listening");
-
-				// deactivate button
-				requestButton.removeActionListener(buttonListener);
-				requestButton.setEnabled(false);
-
-				resetLights();
-
-				// clean up socket
-				socket.close();
-				
 			} catch (IOException e) {
-				//System.err.println(e.toString());
-				//System.exit(1);
+				e.printStackTrace();
 			}
 		}
-		// no need to close the server socket because of endless loop
-		// socketServer.close();
+		
 	}
 
 	private void dispatchCommand(Button requestButton, String cmd) {

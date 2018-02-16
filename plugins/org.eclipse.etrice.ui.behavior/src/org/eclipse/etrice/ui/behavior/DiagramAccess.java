@@ -24,8 +24,6 @@ import org.eclipse.etrice.ui.behavior.fsm.editor.BehaviorExporter;
 import org.eclipse.etrice.ui.common.base.commands.UpdateCommand;
 import org.eclipse.etrice.ui.common.base.export.IBulkDiagramExporter;
 import org.eclipse.etrice.ui.common.base.support.DiagramAccessBase;
-import org.eclipse.graphiti.dt.IDiagramTypeProvider;
-import org.eclipse.graphiti.features.IFeatureProvider;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.graphiti.ui.services.GraphitiUi;
 
@@ -101,7 +99,7 @@ public class DiagramAccess extends DiagramAccessBase {
 	 */
 	@Override
 	protected Command getUpdateCommand(Diagram diagram, TransactionalEditingDomain editingDomain) {
-		IDiagramTypeProvider dtp = GraphitiUi.getExtensionManager().createDiagramTypeProvider(diagram, DiagramTypeProvider.PROVIDER_ID); //$NON-NLS-1$
+		GraphitiUi.getExtensionManager().createDiagramTypeProvider(diagram, DiagramTypeProvider.PROVIDER_ID);
 		UpdateCommand cmd = new UpdateCommand(DiagramTypeProvider.PROVIDER_ID, diagram, editingDomain);
 		if (cmd.updateNeeded())
 			return cmd;

@@ -87,13 +87,13 @@ class FSMScopeProvider extends AbstractDeclarativeScopeProvider {
 		val List<IEObjectDescription> scopes = newArrayList
 		
 		val parent = getStateGraph(ep)
-		if (ep.state!=null) {
+		if (ep.state!==null) {
 			var epState = ep.state
 			
 			// check if there is a refined state for this state
 			epState = parent.getRefinedStateFor(epState)
 			
-			if (epState.getSubgraph()!=null) {
+			if (epState.getSubgraph()!==null) {
 				val tps = epState.subgraph.getAllTrPoints
 				for (tp : tps) {
 					scopes.add(EObjectDescription.create(tp.name, tp))
@@ -149,11 +149,11 @@ class FSMScopeProvider extends AbstractDeclarativeScopeProvider {
 		var sg = getStateGraph(rs)
 		if (sg.eContainer instanceof ModelComponent) {
 			var comp = sg.eContainer as ModelComponent
-			if (comp.base != null && !comp.isCircularClassHierarchy) {
+			if (comp.base !== null && !comp.isCircularClassHierarchy) {
 				comp = comp.base
 				val HashSet<State> covered = newHashSet
 				val ArrayList<State> states = newArrayList
-				while (comp!=null) {
+				while (comp!==null) {
 					recursivelyAddStates(comp.stateMachine, covered, states)
 					comp = comp.base
 				}
@@ -164,7 +164,7 @@ class FSMScopeProvider extends AbstractDeclarativeScopeProvider {
 		}
 		else if (sg.eContainer instanceof RefinedState) {
 			sg = (sg.eContainer as RefinedState).target.subgraph
-			if (sg!=null)
+			if (sg!==null)
 				for (s : sg.states) {
 					scopes.add(EObjectDescription.create(s.name, s))
 				}
@@ -185,8 +185,8 @@ class FSMScopeProvider extends AbstractDeclarativeScopeProvider {
 		var comp = trans.eContainer.eContainer as ModelComponent
 		if(!comp.isCircularClassHierarchy){
 			comp = comp.base
-			while (comp!=null) {
-				if (comp.stateMachine!=null) {
+			while (comp!==null) {
+				if (comp.stateMachine!==null) {
 					val acNameSegments = comp.fullyQualifiedName.segmentCount
 					val iter = comp.stateMachine.eAllContents
 					while (iter.hasNext) {
@@ -221,7 +221,7 @@ class FSMScopeProvider extends AbstractDeclarativeScopeProvider {
 		
 		// recursion
 		for (s : sg.states) {
-			if (s.getSubgraph()!=null)
+			if (s.getSubgraph()!==null)
 				recursivelyAddStates(s.getSubgraph(), covered, states)
 		}
 	}
@@ -233,7 +233,7 @@ class FSMScopeProvider extends AbstractDeclarativeScopeProvider {
 	 */
 	def private StateGraph getStateGraph(EObject obj) {
 		var EObject ctx = obj.eContainer
-		while (!(ctx instanceof StateGraph) && ctx.eContainer!=null) {
+		while (!(ctx instanceof StateGraph) && ctx.eContainer!==null) {
 			ctx = ctx.eContainer
 		}
 		if (ctx instanceof StateGraph)
@@ -253,7 +253,7 @@ class FSMScopeProvider extends AbstractDeclarativeScopeProvider {
 			return getStatePath(parent as SimpleState).append(bs.name)
 		else if (parent instanceof RefinedState) {
 			val State target = (parent as RefinedState).target
-			if (target!=null)
+			if (target!==null)
 				return getStatePath(target).append(bs.name)
 		}
 		return QualifiedName.create(bs.name)

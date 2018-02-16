@@ -30,8 +30,10 @@ class StateMachineGen extends GenericStateMachineGenerator {
 
 	def genHeaderConstants(ExpandedActorClass xpac) {
 		val ac = xpac.actorClass
-		// number of all all states + 2 for TOP and NO_STATE
-		val historySize = xpac.graphContainer.graph.allStateNodes.size + 2
+		
+		// this is the C generator and thus we have all states and they are enumerated with non-leaf states first
+		// starting with the NUM_PREDEF_STATE_CONSTANTS for TOP and NO_STATE
+		val historySize = xpac.graphContainer.graph.allStateNodes.filter[!isLeaf].size + NUM_PREDEF_STATE_CONSTANTS
 		'''
 			/* constant for state machine data */
 			#define «ac.name.toUpperCase»_HISTORY_SIZE «historySize»

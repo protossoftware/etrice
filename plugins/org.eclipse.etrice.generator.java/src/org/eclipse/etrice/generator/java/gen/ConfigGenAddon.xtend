@@ -46,7 +46,7 @@ class ConfigGenAddon {
 			«ENDFOR»
 			«FOR pi : ai.orderedIfItemInstances»
 				«var attribs = getPortClass(pi.interfaceItem)?.attributes»
-				«IF attribs != null»
+				«IF attribs !== null»
 					«FOR a : attribs»
 						«applyInstanceConfig(pi, aiVariableName+"."+invokeGetter(pi.name, null), new ArrayList<Attribute>().union(a))»
 					«ENDFOR»
@@ -61,12 +61,12 @@ class ConfigGenAddon {
 		switch aType {
 			PrimitiveType: {
 				var value = typeHelpers.getAttrInstanceConfigValue(path, instance)
-				if(value != null)
+				if(value !== null)
 					initGen.genAttributeInitializer(a, toValueLiteral(aType, value), invokes)	
 			}
 			EnumerationType: {
 				var value = typeHelpers.getAttrInstanceConfigValue(path, instance)
-				if(value != null)
+				if(value !== null)
 					initGen.genAttributeInitializer(a, value, invokes)
 			}
 			DataClass:
@@ -133,10 +133,10 @@ class ConfigGenAddon {
 			PrimitiveType:{
 				var temp = null as String
 				'''
-					«IF (temp = dataConfigExt.getAttrClassConfigMinValue(ac, path)) != null»
+					«IF (temp = dataConfigExt.getAttrClassConfigMinValue(ac, path)) !== null»
 						public static «aType.minMaxType» MIN_«varNamePath» = «aType.toValueLiteral(temp)»;
 					«ENDIF»
-					«IF (temp = dataConfigExt.getAttrClassConfigMaxValue(ac, path)) != null»
+					«IF (temp = dataConfigExt.getAttrClassConfigMaxValue(ac, path)) !== null»
 						public static «aType.minMaxType» MAX_«varNamePath» = «aType.toValueLiteral(temp)»;
 					«ENDIF»
 				'''

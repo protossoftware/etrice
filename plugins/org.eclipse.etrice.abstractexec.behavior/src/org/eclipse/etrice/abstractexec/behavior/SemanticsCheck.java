@@ -24,7 +24,6 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.etrice.core.fsm.fSM.InitialTransition;
 import org.eclipse.etrice.core.fsm.fSM.State;
 import org.eclipse.etrice.core.fsm.fSM.StateGraph;
-import org.eclipse.etrice.core.fsm.fSM.StateGraphNode;
 import org.eclipse.etrice.core.fsm.naming.FSMNameProvider;
 import org.eclipse.etrice.core.genmodel.fsm.FsmGenExtensions;
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.CommonTrigger;
@@ -89,10 +88,10 @@ public class SemanticsCheck {
 		List<Link> links = graph.getLinks();
 		for (Link link : links)
 			if (link.getTransition() instanceof InitialTransition) {
-				StateGraphNode cur = link.getTarget().getStateGraphNode();
+				Node cur = link.getTarget();
 				List<HandledMessage> msgList = codeAnalyzer.analyze(link.getTransition().getAction());
-				if (cur instanceof State) {
-					msgList.addAll(codeAnalyzer.analyze(((State) cur).getEntryCode()));
+				if (cur.getStateGraphNode() instanceof State) {
+					msgList.addAll(codeAnalyzer.analyze(((State) cur.getStateGraphNode()).getEntryCode()));
 				}
 				List<HandledMessage> wrongMsgList = localRules.consumeMessages(msgList);
 				if (!wrongMsgList.isEmpty()) {

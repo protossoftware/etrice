@@ -41,6 +41,8 @@ import java.util.ArrayList
  */
 abstract class AbstractStateMachineGenerator {
 
+	protected static val NUM_PREDEF_STATE_CONSTANTS = 2
+	
 	@Inject public extension FSMHelpers
 	@Inject public extension CodegenHelpers
 	@Inject public extension FSMExtensions
@@ -114,19 +116,26 @@ abstract class AbstractStateMachineGenerator {
 	def public genStateIdConstants(GraphContainer gc, boolean omitBase) {
 		// with inheritance we exclude inherited states
 		val allStateNodes = gc.graph.allStateNodes.toList // TODO: without toList this didn't work - why?
-		var offset = 2 + if (omitBase)
+		
+		// omitBase: base class constants are inherited, so we start at an offset of
+		//         NUM_PREDEF_STATE_CONSTANTS + #(inherited states)
+		// !omitBase: nothing is inherited, offset is just NUM_PREDEF_STATE_CONSTANTS
+		var offset = NUM_PREDEF_STATE_CONSTANTS + if (omitBase)
 			allStateNodes.filter[inherited].size else 0
-		var baseStates = (if (omitBase)
+		
+		// considered are all states (case of !omitBase) or just the ones which are not inherited (case of omitBase)
+		var consideredStates = (if (omitBase)
 			allStateNodes.filter[!inherited] else allStateNodes).map[stateGraphNode].filter(typeof(State)).toList
 
-		baseStates = baseStates.leafStatesLast.toList
+		// we sort them with the non leaf states last to have the history as short as possible
+		consideredStates = consideredStates.leafStatesLast.toList
 
 		var list = <Pair<String, String>>newArrayList
 		if (!omitBase) {
 			list.add(pair("NO_STATE","0"))
 			list.add(pair("STATE_TOP","1"))
 		}
-		for (state : baseStates) {
+		for (state : consideredStates) {
 			list.add(pair(state.getGenStateId, offset.toString))
 			offset = offset+1;
 		}

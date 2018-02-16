@@ -52,7 +52,6 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog imple
 		}
 	}
 
-	private ActorClass ac;
 	private State state;
 	private boolean inherited;
 
@@ -75,7 +74,6 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog imple
 
 	public StatePropertyDialog(Shell shell, ActorClass ac, State s, boolean edit) {
 		super(shell, edit?"Edit State":"View State", ac);
-		this.ac = ac;
 		this.state = s;
 
 		Activator.getDefault().getInjector().injectMembers(this);

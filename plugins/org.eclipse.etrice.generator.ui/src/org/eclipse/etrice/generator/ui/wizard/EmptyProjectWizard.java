@@ -24,7 +24,7 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.core.runtime.SubProgressMonitor;
+import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.ui.dialogs.DiagnosticDialog;
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.BasicMonitor;
@@ -261,7 +261,7 @@ public class EmptyProjectWizard extends Wizard implements INewWizard {
 			
 			if(importOperation != null){
 				importOperation.setContext(getShell());
-				importOperation.run(new SubProgressMonitor(progressMonitor, 1));
+				importOperation.run(SubMonitor.convert(progressMonitor, 1));
 			}
 		}
 		catch (Exception e) {

@@ -1523,21 +1523,22 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cMessageKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
-		private final Keyword cLeftParenthesisKeyword_3 = (Keyword)cGroup.eContents().get(3);
-		private final Assignment cDataAssignment_4 = (Assignment)cGroup.eContents().get(4);
-		private final RuleCall cDataMessageDataParserRuleCall_4_0 = (RuleCall)cDataAssignment_4.eContents().get(0);
-		private final Keyword cRightParenthesisKeyword_5 = (Keyword)cGroup.eContents().get(5);
-		private final Assignment cAnnotationsAssignment_6 = (Assignment)cGroup.eContents().get(6);
-		private final RuleCall cAnnotationsAnnotationParserRuleCall_6_0 = (RuleCall)cAnnotationsAssignment_6.eContents().get(0);
-		private final Assignment cDocuAssignment_7 = (Assignment)cGroup.eContents().get(7);
-		private final RuleCall cDocuDocumentationParserRuleCall_7_0 = (RuleCall)cDocuAssignment_7.eContents().get(0);
+		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
+		private final Keyword cLeftParenthesisKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
+		private final Assignment cDataAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
+		private final RuleCall cDataMessageDataParserRuleCall_3_1_0 = (RuleCall)cDataAssignment_3_1.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_3_2 = (Keyword)cGroup_3.eContents().get(2);
+		private final Assignment cAnnotationsAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cAnnotationsAnnotationParserRuleCall_4_0 = (RuleCall)cAnnotationsAssignment_4.eContents().get(0);
+		private final Assignment cDocuAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cDocuDocumentationParserRuleCall_5_0 = (RuleCall)cDocuAssignment_5.eContents().get(0);
 		
 		//Message:
-		//	priv?='private'? 'Message' name=ID '(' data=MessageData? ')' annotations+=Annotation*
+		//	priv?='private'? 'Message' name=ID ('(' data=MessageData? ')')? annotations+=Annotation*
 		//	docu=Documentation?;
 		@Override public ParserRule getRule() { return rule; }
 
-		//priv?='private'? 'Message' name=ID '(' data=MessageData? ')' annotations+=Annotation* docu=Documentation?
+		//priv?='private'? 'Message' name=ID ('(' data=MessageData? ')')? annotations+=Annotation* docu=Documentation?
 		public Group getGroup() { return cGroup; }
 
 		//priv?='private'?
@@ -1555,29 +1556,32 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
 
+		//('(' data=MessageData? ')')?
+		public Group getGroup_3() { return cGroup_3; }
+
 		//'('
-		public Keyword getLeftParenthesisKeyword_3() { return cLeftParenthesisKeyword_3; }
+		public Keyword getLeftParenthesisKeyword_3_0() { return cLeftParenthesisKeyword_3_0; }
 
 		//data=MessageData?
-		public Assignment getDataAssignment_4() { return cDataAssignment_4; }
+		public Assignment getDataAssignment_3_1() { return cDataAssignment_3_1; }
 
 		//MessageData
-		public RuleCall getDataMessageDataParserRuleCall_4_0() { return cDataMessageDataParserRuleCall_4_0; }
+		public RuleCall getDataMessageDataParserRuleCall_3_1_0() { return cDataMessageDataParserRuleCall_3_1_0; }
 
 		//')'
-		public Keyword getRightParenthesisKeyword_5() { return cRightParenthesisKeyword_5; }
+		public Keyword getRightParenthesisKeyword_3_2() { return cRightParenthesisKeyword_3_2; }
 
 		//annotations+=Annotation*
-		public Assignment getAnnotationsAssignment_6() { return cAnnotationsAssignment_6; }
+		public Assignment getAnnotationsAssignment_4() { return cAnnotationsAssignment_4; }
 
 		//Annotation
-		public RuleCall getAnnotationsAnnotationParserRuleCall_6_0() { return cAnnotationsAnnotationParserRuleCall_6_0; }
+		public RuleCall getAnnotationsAnnotationParserRuleCall_4_0() { return cAnnotationsAnnotationParserRuleCall_4_0; }
 
 		//docu=Documentation?
-		public Assignment getDocuAssignment_7() { return cDocuAssignment_7; }
+		public Assignment getDocuAssignment_5() { return cDocuAssignment_5; }
 
 		//Documentation
-		public RuleCall getDocuDocumentationParserRuleCall_7_0() { return cDocuDocumentationParserRuleCall_7_0; }
+		public RuleCall getDocuDocumentationParserRuleCall_5_0() { return cDocuDocumentationParserRuleCall_5_0; }
 	}
 
 	public class PortClassElements extends AbstractParserRuleElementFinder {
@@ -3864,7 +3868,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Message:
-	//	priv?='private'? 'Message' name=ID '(' data=MessageData? ')' annotations+=Annotation*
+	//	priv?='private'? 'Message' name=ID ('(' data=MessageData? ')')? annotations+=Annotation*
 	//	docu=Documentation?;
 	public MessageElements getMessageAccess() {
 		return pMessage;

@@ -32,7 +32,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.core.runtime.SubProgressMonitor;
+import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.BasicMonitor;
 import org.eclipse.emf.common.util.Monitor;
 import org.eclipse.emf.common.util.URI;
@@ -108,12 +108,11 @@ public class ProjectCreator {
 					projectDescription.setLocationURI(new java.net.URI(
 							projectLocationURI.toString()));
 				}
-				project.create(projectDescription, new SubProgressMonitor(
-						progressMonitor, 1));
-				project.open(new SubProgressMonitor(progressMonitor, 1));
+				project.create(projectDescription, SubMonitor.convert(progressMonitor, 1));
+				project.open(SubMonitor.convert(progressMonitor, 1));
 			} else {
 				projectDescription = project.getDescription();
-				project.open(new SubProgressMonitor(progressMonitor, 1));
+				project.open(SubMonitor.convert(progressMonitor, 1));
 				if (project.hasNature(JavaCore.NATURE_ID)) {
 					classpathEntries.addAll(Arrays.asList(javaProject
 							.getRawClasspath()));
@@ -140,7 +139,7 @@ public class ProjectCreator {
 				addBuilders(projectDescription, buildersToAdd);
 
 				project.setDescription(projectDescription,
-						new SubProgressMonitor(progressMonitor, 1));
+						SubMonitor.convert(progressMonitor, 1));
 
 				createSrcFolder(progressMonitor, project, classpathEntries,
 						javaSource);
@@ -174,23 +173,23 @@ public class ProjectCreator {
 				
 				javaProject.setRawClasspath(classpathEntries
 						.toArray(new IClasspathEntry[classpathEntries.size()]),
-						new SubProgressMonitor(progressMonitor, 1));
+						SubMonitor.convert(progressMonitor, 1));
 			}
 
 			if (isInitiallyEmpty) {
 				javaProject.setOutputLocation(
 						new Path("/" + javaSource.segment(0) + "/bin"),
-						new SubProgressMonitor(progressMonitor, 1));
+						SubMonitor.convert(progressMonitor, 1));
 			}
 
 			javaProject.setRawClasspath(classpathEntries
 					.toArray(new IClasspathEntry[classpathEntries.size()]),
-					new SubProgressMonitor(progressMonitor, 1));
+					SubMonitor.convert(progressMonitor, 1));
 
 			if (isInitiallyEmpty) {
 				javaProject.setOutputLocation(
 						new Path("/" + javaSource.segment(0) + "/bin"),
-						new SubProgressMonitor(progressMonitor, 1));
+						SubMonitor.convert(progressMonitor, 1));
 			}
 
 		} catch (Exception e) {
@@ -264,7 +263,7 @@ public class ProjectCreator {
 							.removeLastSegments(i));
 					if (!sourceContainer.exists()) {
 						((IFolder) sourceContainer).create(false, true,
-								new SubProgressMonitor(progressMonitor, 1));
+								SubMonitor.convert(progressMonitor, 1));
 					}
 				}
 			}
@@ -303,26 +302,23 @@ public class ProjectCreator {
 			IProject project = workspace.getRoot().getProject(path.segment(0));
 
 			if (forceRefresh) {
-				project.refreshLocal(IResource.DEPTH_INFINITE,
-						new SubProgressMonitor(progressMonitor, 1));
+				project.refreshLocal(IResource.DEPTH_INFINITE, SubMonitor.convert(progressMonitor, 1));
 			} else {
 				progressMonitor.worked(1);
 			}
 
 			if (!project.exists()) {
-				project.create(projectDescription, new SubProgressMonitor(
-						progressMonitor, 1));
-				project.open(new SubProgressMonitor(progressMonitor, 1));
+				project.create(projectDescription, SubMonitor.convert(progressMonitor, 1));
+				project.open(SubMonitor.convert(progressMonitor, 1));
 			} else {
-				project.open(new SubProgressMonitor(progressMonitor, 2));
+				project.open(SubMonitor.convert(progressMonitor, 2));
 			}
 
 			IContainer container = project;
 			for (int i = 1, length = path.segmentCount(); i < length; ++i) {
 				IFolder folder = container.getFolder(new Path(path.segment(i)));
 				if (!folder.exists()) {
-					folder.create(false, true, new SubProgressMonitor(
-							progressMonitor, 1));
+					folder.create(false, true, SubMonitor.convert(progressMonitor, 1));
 				} else {
 					progressMonitor.worked(1);
 				}
@@ -429,8 +425,7 @@ public class ProjectCreator {
 		ProjectCreator.addBuilders(description, Collections
 				.singletonList("org.eclipse.xtext.ui.shared.xtextBuilder"));
 
-		project.setDescription(description, new SubProgressMonitor(
-				progressMonitor, 1));
+		project.setDescription(description, SubMonitor.convert(progressMonitor, 1));
 	}
 
 	/**

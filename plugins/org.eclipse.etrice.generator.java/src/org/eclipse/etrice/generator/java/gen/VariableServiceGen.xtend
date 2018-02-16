@@ -167,8 +167,8 @@ class VariableServiceGen {
 	def private genMinMaxCheck(List<Attribute> path, ActorClass ac){
 		var a = path.last
 		var aVarName = path.toAbsolutePath("_")
-		var min = configExt.getAttrClassConfigMinValue(ac, path) != null
-		var max = configExt.getAttrClassConfigMaxValue(ac, path) != null
+		var min = configExt.getAttrClassConfigMinValue(ac, path) !== null
+		var max = configExt.getAttrClassConfigMaxValue(ac, path) !== null
 		if(min || max)
 			'''
 				«IF a.size>0»for(«a.type.type.typeName» e : «aVarName»)
