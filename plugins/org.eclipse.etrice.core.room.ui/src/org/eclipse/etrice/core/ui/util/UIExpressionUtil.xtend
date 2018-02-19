@@ -32,6 +32,7 @@ import org.eclipse.jface.text.Document
 import org.eclipse.xtext.nodemodel.ILeafNode
 
 import static org.eclipse.xtext.EcoreUtil2.getContainerOfType
+import org.eclipse.etrice.expressions.detailcode.IDetailExpressionProvider.EmptyDetailExpressionProvider
 
 /** 
  * Utility to create and cache DetailExpressionProvider
@@ -60,7 +61,11 @@ class UIExpressionUtil {
 		
 	}
 	
-	static def IDetailExpressionProvider selectExpressionProvider(EObject ctx, ExpressionCache cache) {			
+	static def IDetailExpressionProvider selectExpressionProvider(EObject ctx, ExpressionCache cache) {	
+		// TODO intermediate fix for null from Dialogs	
+		if(ctx === null)
+			return new EmptyDetailExpressionProvider
+			
 		val exprProvider = RoomUiModule.getInjector().getInstance(DetailExpressionProvider) => [ prov |
 			prov.model = ctx
 		]

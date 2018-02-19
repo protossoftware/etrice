@@ -49,6 +49,7 @@ import org.eclipse.xtext.util.SimpleAttributeResolver
 import static com.google.common.base.Verify.*
 
 import static extension org.eclipse.xtext.EcoreUtil2.getContainerOfType
+import org.eclipse.etrice.core.room.RoomModel
 
 class DetailExpressionProvider implements IDetailExpressionProvider {
 	
@@ -90,6 +91,7 @@ class DetailExpressionProvider implements IDetailExpressionProvider {
 	
 	override getInitialFeatures() {
 		verifyNotNull(model)
+		verify(model.isInContainment(RoomModel))
 		verifyNotNull(globalScopeProvider)
 		
 		val elementScope = newArrayList
