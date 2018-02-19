@@ -64,11 +64,12 @@ public class StandardModelLocator implements IModelLocator {
 			}
 			else {
 				resolve = canonical.toFileString();
-
-				resolve = resolve.replaceAll("\\\\", "/");
-				resolve = resolve.replaceAll("//", "/");
-				
-				resolve = URI.createFileURI(resolve).toString();
+				if(resolve != null) {
+					resolve = resolve.replaceAll("\\\\", "/");
+					resolve = resolve.replaceAll("//", "/");
+					
+					resolve = URI.createFileURI(resolve).toString();
+				}
 			}
 		} catch (IOException e) {
 			return null;

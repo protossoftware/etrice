@@ -38,7 +38,7 @@ class CommonDataCalculator implements ICommonDataCalculator {
 			val triggers = transitions.map[triggers].flatten
 			
 			// and we have data which may be null
-			val varDeclarations = triggers.map[msgFromIfPairs].flatten.map[(message as Message).data]
+			val varDeclarations = triggers.map[msgFromIfPairs].flatten.map[message].filter(Message).map[data]
 			val allData = varDeclarations.map[it?.refType?.type].toSet
 			if (allData.size==1) {
 				return varDeclarations.head
