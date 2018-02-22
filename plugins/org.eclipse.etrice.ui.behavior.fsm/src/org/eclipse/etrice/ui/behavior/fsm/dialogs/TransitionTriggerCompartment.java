@@ -475,7 +475,7 @@ public class TransitionTriggerCompartment {
 								idx = pos;
 							++pos;
 						}
-						if (idx==-1) {
+						if (idx==-1 && !currentMsgs.isEmpty()) {
 							idx = 0;
 							mif.setMessage(currentMsgs.get(idx));
 							triggerViewer.refresh();
