@@ -135,8 +135,9 @@ class DetailExpressionProvider implements IDetailExpressionProvider {
 			switch reference {
 				case CP_BRANCH_TRANSITION__CONDITION,
 				case GUARDED_TRANSITION__GUARD,
-				case GUARD__GUARD: {				
-					ImmutableList.of // no types
+				case GUARD__GUARD: {	
+					// enums only			
+					createAndSetSharedCache.filter[data instanceof EnumerationType]
 				}
 				default: createAndSetSharedCache
 			}
