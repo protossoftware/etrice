@@ -67,7 +67,7 @@ public class RoomSemanticHighlightingCalculator extends BaseSemanticHighlighter 
 				if(ruleCall.getRule() == grammar.getAnnotationRule()){
 					acceptor.addPosition(node.getOffset(), node.getLength(), RoomHighlightingConfiguration.HL_ANNOTATION_ID);
 				}
-				else if(node.getParent().getSemanticElement() instanceof DetailCode && ruleCall.getRule() == grammar.getCC_STRINGRule()) {
+				else if(ruleCall.getRule() == grammar.getCC_STRINGRule()) {
 					detailCodeHighlight(node, acceptor, expressionCache);
 				}
 			}
@@ -75,10 +75,15 @@ public class RoomSemanticHighlightingCalculator extends BaseSemanticHighlighter 
 		}
 	}
 	
-	protected void detailCodeHighlight(INode node, IHighlightedPositionAcceptor acceptor, ExpressionCache cache) {
+	protected void detailCodeHighlight(INode node, IHighlightedPositionAcceptor acceptor, ExpressionCache cache) {		
 		final String text = converterService.getCC_StringConverter().stripDelim(node.getText());
 		final int offset = node.getOffset() + converterService.getCC_StringConverter().getDelim().length();
-		IDetailExpressionProvider exprProvider = UIExpressionUtil.selectExpressionProvider(node.getSemanticElement(), cache);
+		
+		DetailCode dc = null;
+		if(node.getParent().getSemanticElement() instanceof DetailCode) {
+			dc = (DetailCode) node.getParent().getSemanticElement();
+		}
+		IDetailExpressionProvider exprProvider = UIExpressionUtil.getExpressionProvider(dc, null, cache);
 		XtextHighlightStyles styles = new XtextHighlightStyles();
 		RuleBasedScanner scanner = new RuleBasedScanner();
 		scanner.setRules(Iterables.toArray(Iterables.concat(
@@ -95,6 +100,7 @@ public class RoomSemanticHighlightingCalculator extends BaseSemanticHighlighter 
 				acceptor.addPosition(offset + scanner.getTokenOffset(), scanner.getTokenLength(), (String) lastToken.getData());
 			}
 		}
+		
 	}
 	
 }

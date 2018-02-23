@@ -1,5 +1,9 @@
 package org.eclipse.etrice.ui.behavior.dialogs;
 
+import static org.eclipse.etrice.core.fsm.fSM.FSMPackage.Literals.STATE__DO_CODE;
+import static org.eclipse.etrice.core.fsm.fSM.FSMPackage.Literals.STATE__ENTRY_CODE;
+import static org.eclipse.etrice.core.ui.util.UIExpressionUtil.getExpressionProvider;
+
 import java.util.EnumSet;
 
 import org.eclipse.core.databinding.DataBindingContext;
@@ -17,7 +21,7 @@ import org.eclipse.etrice.core.fsm.fSM.State;
 import org.eclipse.etrice.core.fsm.validation.FSMValidationUtilXtend.Result;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
-import org.eclipse.etrice.core.ui.util.UIExpressionUtil;
+import org.eclipse.etrice.expressions.detailcode.IDetailExpressionProvider;
 import org.eclipse.etrice.ui.behavior.Activator;
 import org.eclipse.etrice.ui.behavior.fsm.actioneditor.IActionCodeEditor;
 import org.eclipse.etrice.ui.behavior.fsm.dialogs.AbstractMemberAwarePropertyDialog;
@@ -139,7 +143,7 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog imple
 			}
 
 			createActionCodeEditor(body, "&Entry Code:", state.getEntryCode(),
-					FSMPackage.eINSTANCE.getState_EntryCode(), s2m, m2s);
+					FSMPackage.eINSTANCE.getState_EntryCode(), s2m, m2s, getExpressionProvider(state, STATE__ENTRY_CODE));
 		}
 
 		if (inherited) {
@@ -153,7 +157,7 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog imple
 		}
 		else {
 			createActionCodeEditor(body, "E&xit Code:", state.getExitCode(),
-					FSMPackage.eINSTANCE.getState_ExitCode(), s2m, m2s);
+					FSMPackage.eINSTANCE.getState_ExitCode(), s2m, m2s, getExpressionProvider(state, STATE__ENTRY_CODE));
 
 			if (state instanceof RefinedState)
 			{
@@ -168,7 +172,7 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog imple
 		ActorClass ac = roomHelpers.getActorClass(state);
 		if (ac.getCommType()!=ComponentCommunicationType.EVENT_DRIVEN)
 			createActionCodeEditor(body, "&Do Code:", state.getDoCode(),
-					FSMPackage.eINSTANCE.getState_DoCode(), s2m, m2s);
+					FSMPackage.eINSTANCE.getState_DoCode(), s2m, m2s, getExpressionProvider(state, STATE__DO_CODE));
 
 		createMembersAndMessagesButtons(body);
 
@@ -205,10 +209,10 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog imple
 	 */
 	private void createActionCodeEditor(Composite parent, String label,
 			DetailCode detailCode, EStructuralFeature feat,
-			StringToDetailCode s2m, DetailCodeToString m2s) {
+			StringToDetailCode s2m, DetailCodeToString m2s, IDetailExpressionProvider detailExpr) {
 
 		IActionCodeEditor entry = super.createActionCodeEditor(parent, label,
-				detailCode, state, feat, s2m, m2s, UIExpressionUtil.selectExpressionProvider(detailCode));
+				detailCode, state, feat, s2m, m2s, detailExpr);
 
 		Control control;
 		if (entry != null)

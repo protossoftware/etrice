@@ -33,6 +33,10 @@ import org.eclipse.xtext.nodemodel.ILeafNode
 
 import static org.eclipse.xtext.EcoreUtil2.getContainerOfType
 import org.eclipse.etrice.expressions.detailcode.IDetailExpressionProvider.EmptyDetailExpressionProvider
+import org.eclipse.emf.ecore.EReference
+import org.eclipse.etrice.core.fsm.fSM.DetailCode
+
+import static com.google.common.base.Verify.*
 
 /** 
  * Utility to create and cache DetailExpressionProvider
@@ -41,7 +45,7 @@ class UIExpressionUtil {
 
 	static class ExpressionCache {
 		val genModelAccess = new GenModelAccess
-		val Map<RoomClass, ImmutableList<ExpressionFeature>> classScopeCache = newHashMap
+		val Map<RoomClass, ImmutableList<ExpressionFeature>> sharedCaches = newHashMap
 	}
 
 	static class GenModelAccess {
@@ -61,20 +65,30 @@ class UIExpressionUtil {
 		
 	}
 	
-	static def IDetailExpressionProvider selectExpressionProvider(EObject ctx, ExpressionCache cache) {	
-		// TODO intermediate fix for null from Dialogs	
+	/**
+	 *  DetailCode or eContainer + eContainmentReference
+	 */
+	static def IDetailExpressionProvider getExpressionProvider(EObject ctx, EReference ref, ExpressionCache cache) {	
+		verifyNotNull(cache)
+			
 		if(ctx === null)
 			return new EmptyDetailExpressionProvider
 			
 		val exprProvider = RoomUiModule.getInjector().getInstance(DetailExpressionProvider) => [ prov |
-			prov.model = ctx
+			if(ctx instanceof DetailCode) {
+				prov.owner = ctx.eContainer
+				prov.reference = ctx.eContainmentFeature as EReference
+			} else {
+				prov.owner = ctx
+				prov.reference = ref		
+			}
 		]
 		// set cache
 		val roomClass = getContainerOfType(ctx, RoomClass)
 		if(roomClass !== null) {
-			exprProvider.classScopeCache = cache.classScopeCache.get(roomClass)
-			if(exprProvider.classScopeCache === null)
-				cache.classScopeCache.put(roomClass, exprProvider.createAndSetClassScopeCache)
+			exprProvider.sharedCache = cache.sharedCaches.get(roomClass)
+			if(exprProvider.sharedCache === null)
+				cache.sharedCaches.put(roomClass, exprProvider.createAndSetSharedCache)
 		}
 		// set transitionData
 		val transition = getContainerOfType(ctx, TransitionBase)
@@ -89,14 +103,18 @@ class UIExpressionUtil {
 		return exprProvider
 	}
 	
-	static def IDetailExpressionProvider selectExpressionProvider(EObject it) {
-		return selectExpressionProvider(it, new ExpressionCache)
+	static def IDetailExpressionProvider getExpressionProvider(DetailCode dc) {
+		return getExpressionProvider(dc, null, new ExpressionCache)
+	}
+	
+	static def IDetailExpressionProvider getExpressionProvider(EObject dcOwner, EReference dcRole) {
+		return getExpressionProvider(dcOwner, dcRole, new ExpressionCache)
 	}
 
 	
 	static def ExpressionFeature findAtOffset(ILeafNode leafNode, int offset) {
 		// work in progress - show eObject for detail code
-		val exprProvider = selectExpressionProvider(leafNode.semanticElement)
+		val exprProvider = getExpressionProvider(leafNode.semanticElement, null)
 		
 		// TODO explicit support for hover info in DetailExpressionAssistParser
 		val text = leafNode.text

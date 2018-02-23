@@ -20,8 +20,8 @@ import java.util.List
 import java.util.Set
 import org.eclipse.core.runtime.Assert
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.emf.ecore.EReference
 import org.eclipse.emf.ecore.util.EcoreUtil
-import org.eclipse.etrice.core.fsm.fSM.Guard
 import org.eclipse.etrice.core.fsm.fSM.StateGraphItem
 import org.eclipse.etrice.core.room.ActorClass
 import org.eclipse.etrice.core.room.Attribute
@@ -47,6 +47,7 @@ import org.eclipse.xtext.scoping.IGlobalScopeProvider
 import org.eclipse.xtext.util.SimpleAttributeResolver
 
 import static com.google.common.base.Verify.*
+import static org.eclipse.etrice.core.fsm.fSM.FSMPackage.Literals.*
 
 import static extension org.eclipse.xtext.EcoreUtil2.getContainerOfType
 
@@ -57,9 +58,11 @@ class DetailExpressionProvider implements IDetailExpressionProvider {
 	protected val extension RoomHelpers roomHelpers = new RoomHelpers
 	protected val nameProvider = SimpleAttributeResolver.NAME_RESOLVER
 	
-	/* Context element TODO could be typed to DetailCode */
-	@Accessors
-	EObject model
+	/* DetailCode owner */
+	@Accessors EObject owner	
+	
+	/* Role of DetailCode */
+	@Accessors EReference reference	
 	
 	//
 	// Logic for IDetailExpressionProvider.getInitialFeatures()
@@ -69,28 +72,33 @@ class DetailExpressionProvider implements IDetailExpressionProvider {
 	@Accessors
 	MessageData transitionEventData = null
 	
-	/* Cache for expressions in RoomClass context. Can be shared among multiple instance. */
+	/* Cache for expressions in RoomClass context. Can be shared among multiple instance.
+	 * Currently all available DataTypes.
+	 */
 	@Accessors
-	ImmutableList<ExpressionFeature> classScopeCache = null
+	ImmutableList<ExpressionFeature> sharedCache = null
 	
-	def ImmutableList<ExpressionFeature> createAndSetClassScopeCache() {
-		verifyNotNull(model)
-		if(classScopeCache === null) {
+	def ImmutableList<ExpressionFeature> createAndSetSharedCache() {
+		verifyNotNull(owner)
+		
+		if(sharedCache === null) {
 			val classScope = newArrayList
 			
-			val roomClass = model.getContainerOfType(RoomClass)
+			val roomClass = owner.getContainerOfType(RoomClass)
 			if(roomClass !== null) {
 				classTypes(roomClass, classScope)
 			}
 		
-			classScopeCache = ImmutableList.copyOf(classScope.filterNull.filter[id !== null])
+			sharedCache = ImmutableList.copyOf(classScope.filterNull.filter[id !== null])
 		}
 		
-		return classScopeCache
+		return sharedCache
 	}
 	
 	override getInitialFeatures() {
-		verifyNotNull(model)
+		verifyNotNull(owner)
+		verifyNotNull(owner.eContainer)
+		verifyNotNull(reference)
 		verifyNotNull(globalScopeProvider)
 		
 		val elementScope = newArrayList
@@ -100,16 +108,16 @@ class DetailExpressionProvider implements IDetailExpressionProvider {
 				data = transitionEventData
 			]
 		}
-		if(model.isInContainment(Operation)) {
-			elementScope += model.getContainerOfType(Operation).arguments.map[createExprFeature(ExpressionPostfix.NONE)]
+		if(owner.isInContainment(Operation)) {
+			elementScope += owner.getContainerOfType(Operation).arguments.map[createExprFeature(ExpressionPostfix.NONE)]
 		}
-		if(!model.eContainmentFeature.name.contains('userCode')) {
-			val roomClass = model.getContainerOfType(RoomClass)
+		if(!reference.name.contains('userCode')) {
+			val roomClass = owner.getContainerOfType(RoomClass)
 			switch cls: roomClass {
 				ActorClass: {
 					elementScope += cls.latestOperations.map[createExprFeature]
 					elementScope += cls.allAttributes.map[createExprFeature]
-					initialFsmExpression(model, cls, elementScope)
+					initialFsmExpression(owner, cls, elementScope)
 				}
 				PortClass: {
 					// TODO operations
@@ -122,13 +130,19 @@ class DetailExpressionProvider implements IDetailExpressionProvider {
 				}
 			}	
 		}	
-	
-		return {
-			if(elementScope.empty)
-				 createAndSetClassScopeCache
-			else 
-				(elementScope.filterNull.filter[id !== null] + createAndSetClassScopeCache).toList
+		
+		val typesScope = {
+			switch reference {
+				case CP_BRANCH_TRANSITION__CONDITION,
+				case GUARDED_TRANSITION__GUARD,
+				case GUARD__GUARD: {				
+					ImmutableList.of // no types
+				}
+				default: createAndSetSharedCache
+			}
 		}
+		
+		return (elementScope.filterNull.filter[id !== null] + typesScope).toList
 	}
 	
 	/**
@@ -171,9 +185,10 @@ class DetailExpressionProvider implements IDetailExpressionProvider {
 		scope += types.map[createExprFeature(it, ExpressionPostfix.NONE)]
 	}
 	
-	protected def void initialFsmExpression(EObject model, ActorClass ac, List<ExpressionFeature> scope) {
-		switch model {
-			case model.isInContainment(Guard): {
+	protected def void initialFsmExpression(EObject model, ActorClass ac, List<ExpressionFeature> scope) {		
+		switch reference {
+			case CP_BRANCH_TRANSITION__CONDITION,
+			case GUARDED_TRANSITION__GUARD: {
 				scope += ac.allInterfaceItems.filter[isEventDriven || !isConjugated].map[
 					switch it {
 						Port case isReplicated: createExprFeature(IDetailExpressionProvider.ExpressionPostfix.BRACKETS)
@@ -205,13 +220,14 @@ class DetailExpressionProvider implements IDetailExpressionProvider {
 	
 	override getContextFeatures(ExpressionFeature ctx) {
 		verifyNotNull(ctx)
+		verifyNotNull(owner)
+		verifyNotNull(reference)
 		
 		val List<ExpressionFeature> scope = newArrayList
 		
 		switch obj : ctx.data {
 			Port case obj.multiplicity == 1/* fall through  */,
-			SAP: scope +=
-				obj.protocol.getAllOperations(!obj.conjugated).map[createExprFeature]
+			SAP: scope += obj.protocol.getAllOperations(!obj.conjugated).map[createExprFeature]
 		}
 		switch obj : ctx.data {
 			InterfaceItem:
@@ -230,7 +246,7 @@ class DetailExpressionProvider implements IDetailExpressionProvider {
 				// from descriptions, have to be resolved
 				var enumType = obj
 				if(obj.eIsProxy) {
-					val resolved = EcoreUtil.resolve(obj, model)
+					val resolved = EcoreUtil.resolve(obj, owner)
 					if(resolved instanceof EnumerationType)
 						enumType = resolved
 				}
@@ -241,9 +257,11 @@ class DetailExpressionProvider implements IDetailExpressionProvider {
 		return scope.filterNull.filter[id !== null].toList
 	}
 	
-	protected def void contextFsmMessages(InterfaceItem ifItem, ExpressionFeature ctx, List<ExpressionFeature> scope) {
-		switch model {
-			case model.isInContainment(Guard): {
+	protected def void contextFsmMessages(InterfaceItem ifItem, ExpressionFeature ctx, List<ExpressionFeature> scope) {				
+		switch reference {
+			case CP_BRANCH_TRANSITION__CONDITION,
+			case GUARDED_TRANSITION__GUARD,
+			case GUARD__GUARD: {
 				val pc = ifItem.protocol
 				switch pc?.commType {
 					case DATA_DRIVEN:
@@ -252,7 +270,7 @@ class DetailExpressionProvider implements IDetailExpressionProvider {
 					case SYNCHRONOUS: {}
 				}
 			}
-			case model.isInContainment(StateGraphItem): {
+			case owner.isInContainment(StateGraphItem): {
 				val pc = ifItem.protocol
 				switch pc?.commType {
 					case EVENT_DRIVEN:

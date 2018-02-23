@@ -13,7 +13,7 @@
 
 package org.eclipse.etrice.ui.behavior.actioneditor.sourceviewer;
 
-import org.eclipse.etrice.core.ui.RoomUiActivator;
+import org.eclipse.etrice.core.ui.RoomUiModule;
 import org.eclipse.etrice.expressions.detailcode.IDetailExpressionProvider;
 import org.eclipse.etrice.expressions.ui.contentassist.RoomExpressionProposalProvider;
 import org.eclipse.jface.text.ITextViewer;
@@ -40,7 +40,7 @@ public class ActionCodeAssistProcessor implements IContentAssistProcessor {
 	public ActionCodeAssistProcessor(IDetailExpressionProvider exprProvider) {
 		super();
 		this.exprProvider = exprProvider;
-		RoomUiActivator.getDefault().getInjector(RoomUiActivator.ORG_ECLIPSE_ETRICE_CORE_ROOM).injectMembers(this);
+		RoomUiModule.getInjector().injectMembers(this);
 	}
 
 	/**
