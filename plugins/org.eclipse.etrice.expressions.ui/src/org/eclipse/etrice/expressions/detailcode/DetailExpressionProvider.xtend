@@ -80,7 +80,7 @@ class DetailExpressionProvider implements IDetailExpressionProvider {
 			
 			val roomClass = model.getContainerOfType(RoomClass)
 			if(roomClass !== null) {
-				initialClassFeatures(roomClass, classScope)
+				classTypes(roomClass, classScope)
 			}
 		
 			classScopeCache = ImmutableList.copyOf(classScope.filterNull.filter[id !== null])
@@ -103,9 +103,25 @@ class DetailExpressionProvider implements IDetailExpressionProvider {
 		if(model.isInContainment(Operation)) {
 			elementScope += model.getContainerOfType(Operation).arguments.map[createExprFeature(ExpressionPostfix.NONE)]
 		}
-		if(model.isInContainment(ActorClass)) {
-			initialFsmExpression(model, model.getContainerOfType(ActorClass), elementScope)
-		}
+		if(!model.eContainmentFeature.name.contains('userCode')) {
+			val roomClass = model.getContainerOfType(RoomClass)
+			switch cls: roomClass {
+				ActorClass: {
+					elementScope += cls.latestOperations.map[createExprFeature]
+					elementScope += cls.allAttributes.map[createExprFeature]
+					initialFsmExpression(model, cls, elementScope)
+				}
+				PortClass: {
+					// TODO operations
+					// TODO inherited attributes
+					elementScope += cls.attributes.map[createExprFeature]
+				}
+				DataClass: {
+					elementScope += cls.latestOperations.map[createExprFeature]
+					elementScope += cls.allAttributes.map[createExprFeature]
+				}
+			}	
+		}	
 	
 		return {
 			if(elementScope.empty)
@@ -113,26 +129,6 @@ class DetailExpressionProvider implements IDetailExpressionProvider {
 			else 
 				(elementScope.filterNull.filter[id !== null] + createAndSetClassScopeCache).toList
 		}
-	}
-	
-	protected def void initialClassFeatures(RoomClass cls, List<ExpressionFeature> scope) {
-		switch cls {
-			ActorClass: {
-				scope += cls.latestOperations.map[createExprFeature]
-				scope += cls.allAttributes.map[createExprFeature]
-			}
-			PortClass: {
-				// TODO operations
-				// TODO inherited attributes
-				scope += cls.attributes.map[createExprFeature]
-			}
-			DataClass: {
-				scope += cls.latestOperations.map[createExprFeature]
-				scope += cls.allAttributes.map[createExprFeature]
-			}
-		}
-				
-		classTypes(cls, scope)
 	}
 	
 	/**
@@ -152,7 +148,7 @@ class DetailExpressionProvider implements IDetailExpressionProvider {
 			// everything that contains RefableType
 			val refableContainers = switch cls {
 				ActorClass:
-					cls.interfaceItems.map[protocol].filterNull.toHashSet.map[classHierarchy].flatten + cls.attributes + cls.operations
+					cls.allInterfaceItems.map[protocol].filterNull.toHashSet.map[classHierarchy].flatten + cls.attributes + cls.operations
 				ProtocolClass:
 					#[cls] + cls.classHierarchy
 				DataClass:
@@ -222,6 +218,11 @@ class DetailExpressionProvider implements IDetailExpressionProvider {
 				contextFsmMessages(obj, ctx, scope)		
 			Attribute case obj.type?.type instanceof DataClass: {
 				val dc = obj.type.type as DataClass
+				scope += dc.allAttributes.map[createExprFeature]
+				scope += dc.latestOperations.map[createExprFeature]
+			}
+			MessageData case obj.refType?.type instanceof DataClass: {
+				val dc = obj.refType.type as DataClass
 				scope += dc.allAttributes.map[createExprFeature]
 				scope += dc.latestOperations.map[createExprFeature]
 			}

@@ -233,7 +233,8 @@ public class RoomProposalProvider extends AbstractRoomProposalProvider {
 		int localOffset = context.getOffset() - context.getCurrentNode().getOffset();
 		int globalOffset = context.getOffset();
 		if (context.getCurrentNode().getSemanticElement() instanceof DetailCode) {
-			IDetailExpressionProvider exprPovider = UIExpressionUtil.selectExpressionProvider(model);
+			DetailCode detailCode = (DetailCode) context.getCurrentNode().getSemanticElement();
+			IDetailExpressionProvider exprPovider = UIExpressionUtil.selectExpressionProvider(detailCode);
 			for(ICompletionProposal proposal : expressionProposalAdapter.createProposals(exprPovider, text, localOffset, globalOffset))
 				acceptor.accept(proposal);
 		}

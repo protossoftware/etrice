@@ -43,7 +43,7 @@ class RoomExpressionProposalProvider {
 		// get features that follow last completed feature			
 		val availableFeatures = newArrayList => [
 			if(parser.isContextExpression) {
-				val contextFeature = parser?.resolveLatestCompleted
+				val contextFeature = parser?.resolveLatestCompleted				
 				it += if(contextFeature !== null) exprProvider.getContextFeatures(contextFeature) else exprProvider.initialFeatures
 			} else {
 				it += exprProvider.initialFeatures
