@@ -41,12 +41,15 @@ class RoomExpressionProposalProvider {
 		// parser to use
 		val parser = new DetailExpressionAssistParser(new Document(text), offset, exprProvider)
 		// get features that follow last completed feature			
-		val availableFeatures = newArrayList => [
+		val availableFeatures = newArrayList => [ features |
 			if(parser.isContextExpression) {
-				val contextFeature = parser?.resolveLatestCompleted				
-				it += if(contextFeature !== null) exprProvider.getContextFeatures(contextFeature) else exprProvider.initialFeatures
-			} else {
-				it += exprProvider.initialFeatures
+				val contextFeature = parser?.resolveLatestCompleted
+				if(contextFeature !== null)				
+					features += exprProvider.getContextFeatures(contextFeature)
+				else if(parser.isInitialExpression)
+					features += exprProvider.initialFeatures
+			} else if(parser.isInitialExpression) {
+				features += exprProvider.initialFeatures
 			}	
 		]
 		// filter by incomplete text prefix
