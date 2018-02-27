@@ -119,14 +119,15 @@ class DetailExpressionProvider implements IDetailExpressionProvider {
 					elementScope += cls.allAttributes.map[createExprFeature]
 					initialFsmExpression(owner, cls, elementScope)
 				}
-				PortClass: {
-					// TODO operations
-					// TODO inherited attributes
-					elementScope += cls.attributes.map[createExprFeature]
-				}
 				DataClass: {
 					elementScope += cls.latestOperations.map[createExprFeature]
 					elementScope += cls.allAttributes.map[createExprFeature]
+				}
+				case owner.isInContainment(PortClass): {
+					val portClass = owner.getContainerOfType(PortClass)
+					// TODO inheritance
+					elementScope += portClass.operations.map[createExprFeature]
+					elementScope += portClass.attributes.map[createExprFeature]
 				}
 			}	
 		}	
