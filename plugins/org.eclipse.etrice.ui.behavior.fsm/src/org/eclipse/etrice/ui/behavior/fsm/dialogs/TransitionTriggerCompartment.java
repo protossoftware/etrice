@@ -364,7 +364,9 @@ public class TransitionTriggerCompartment {
 		memberAwareConfiguration.configureMemberAwareness(interfaceCombo);
 		
 		for (AbstractInterfaceItem item : interfaceItems) {
-			interfaceCombo.add(item.getDisplayName());
+			if (!item.getAllIncomingAbstractMessages().isEmpty()) {
+				interfaceCombo.add(item.getDisplayName());
+			}
 		}
 	}
 
