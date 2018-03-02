@@ -267,7 +267,9 @@ public class TransitionSupport {
 					}
 
 					ContainerShape targetContainer = FSMSupportUtil.getInstance().getStateGraphContainer((ContainerShape) context.getSourcePictogramElement().eContainer());
-					boolean inherited = FSMSupportUtil.getInstance().isInherited(getDiagram(), sg);
+					// hrr: was boolean inherited = FSMSupportUtil.getInstance().isInherited(getDiagram(), sg);
+					// but if we are inside our own refined state it is treated as inherited which is wrong
+					boolean inherited = !EcoreUtil.isAncestor(FSMSupportUtil.getInstance().getModelComponent(getDiagram()), sg);
 					if (inherited) {
 						sg = FSMSupportUtil.getInstance().insertRefinedState(sg, mc, targetContainer, getFeatureProvider());
 					}

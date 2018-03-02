@@ -156,7 +156,9 @@ public class StateSupport {
 		        ModelComponent ac = FSMSupportUtil.getInstance().getModelComponent(getDiagram());
 				StateGraph sg = (StateGraph) targetContainer.getLink().getBusinessObjects().get(0);
 		        
-				boolean inherited = FSMSupportUtil.getInstance().isInherited(getDiagram(), sg);
+				// hrr: was boolean inherited = FSMSupportUtil.getInstance().isInherited(getDiagram(), sg);
+				// but if we are inside our own refined state it is treated as inherited which is wrong
+				boolean inherited = !EcoreUtil.isAncestor(FSMSupportUtil.getInstance().getModelComponent(getDiagram()), sg);
 				if (inherited) {
 					sg = FSMSupportUtil.getInstance().insertRefinedState(sg, ac, targetContainer, getFeatureProvider());
 				}
