@@ -15,6 +15,8 @@ package org.eclipse.etrice.core.ui.util
 import com.google.common.collect.ImmutableList
 import java.util.Map
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.emf.ecore.EReference
+import org.eclipse.etrice.core.fsm.fSM.DetailCode
 import org.eclipse.etrice.core.fsm.fSM.ModelComponent
 import org.eclipse.etrice.core.fsm.fSM.TransitionBase
 import org.eclipse.etrice.core.genmodel.fsm.ExtendedFsmGenBuilder
@@ -27,16 +29,12 @@ import org.eclipse.etrice.core.ui.RoomUiModule
 import org.eclipse.etrice.expressions.detailcode.DetailExpressionAssistParser
 import org.eclipse.etrice.expressions.detailcode.DetailExpressionProvider
 import org.eclipse.etrice.expressions.detailcode.IDetailExpressionProvider
+import org.eclipse.etrice.expressions.detailcode.IDetailExpressionProvider.EmptyDetailExpressionProvider
 import org.eclipse.etrice.expressions.detailcode.IDetailExpressionProvider.ExpressionFeature
 import org.eclipse.jface.text.Document
 import org.eclipse.xtext.nodemodel.ILeafNode
 
 import static org.eclipse.xtext.EcoreUtil2.getContainerOfType
-import org.eclipse.etrice.expressions.detailcode.IDetailExpressionProvider.EmptyDetailExpressionProvider
-import org.eclipse.emf.ecore.EReference
-import org.eclipse.etrice.core.fsm.fSM.DetailCode
-
-import static com.google.common.base.Verify.*
 
 /** 
  * Utility to create and cache DetailExpressionProvider
@@ -68,9 +66,7 @@ class UIExpressionUtil {
 	/**
 	 *  DetailCode or eContainer + eContainmentReference
 	 */
-	static def IDetailExpressionProvider getExpressionProvider(EObject ctx, EReference ref, ExpressionCache cache) {	
-		verifyNotNull(cache)
-			
+	static def IDetailExpressionProvider getExpressionProvider(EObject ctx, EReference ref, ExpressionCache cache) {		
 		if(ctx === null)
 			return new EmptyDetailExpressionProvider
 			

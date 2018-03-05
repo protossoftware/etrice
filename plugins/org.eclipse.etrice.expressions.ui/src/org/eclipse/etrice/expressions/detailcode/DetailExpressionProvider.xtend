@@ -46,7 +46,6 @@ import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.scoping.IGlobalScopeProvider
 import org.eclipse.xtext.util.SimpleAttributeResolver
 
-import static com.google.common.base.Verify.*
 import static org.eclipse.etrice.core.fsm.fSM.FSMPackage.Literals.*
 
 import static extension org.eclipse.xtext.EcoreUtil2.getContainerOfType
@@ -332,6 +331,13 @@ class DetailExpressionProvider implements IDetailExpressionProvider {
 			return iterable as Set<T>
 		}
 		return Sets.newHashSet(iterable);
+	}
+	
+	private def <T> verifyNotNull(T ref) {
+		if(ref === null)
+			throw new NullPointerException
+		
+		return ref
 	}
 	
 }
