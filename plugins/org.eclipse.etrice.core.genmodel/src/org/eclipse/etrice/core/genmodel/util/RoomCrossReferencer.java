@@ -163,6 +163,9 @@ public class RoomCrossReferencer {
 			do {
 				getAttributeDataClasses(dataClasses, enumClasses, cls.getAttributes());
 				getOperationDataClasses(dataClasses, enumClasses, cls.getOperations());
+				for(ProtocolClass protocol : getReferencedProtocolClasses(cls)) {
+					enumClasses.addAll(getReferencedEnumClasses(protocol));
+				}
 				cls = cls.getActorBase();
 			}
 			while (cls!=null);

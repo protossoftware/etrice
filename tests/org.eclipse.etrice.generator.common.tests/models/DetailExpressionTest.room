@@ -3,7 +3,7 @@ RoomModel DetailExpressionTestModel {
 	import room.basic.types.* from "../../../runtime/${etModellib}/model/Types.room"
 	import room.basic.test.* from "../../../runtime/${etModellib}/model/Tests.room"
 //	import room.basic.service.timing.* from "../../../runtime/${etModellib}/model/TimingService.room"
-//	import DetailExpressionEnum.* from "DetailExpressionEnum.room"
+	import DetailExpressionEnum.* from "DetailExpressionEnum.room"
 
 	Enumeration LocalEnum of int32 {
 		FIRST=1, SECOND=2, THIRD=3
@@ -29,7 +29,7 @@ RoomModel DetailExpressionTestModel {
 			conjugated Port cPortData: PDatadriven
 			conjugated Port cReplEvent [*]: PEventdriven
 			// no supported yet
-		//	conjugated Port enumEvent: PEnumProtocol
+			conjugated Port enumEvent: PEnumProtocol
 		}
 		Behavior {
 			ctor '''
@@ -83,8 +83,8 @@ RoomModel DetailExpressionTestModel {
 						// infoData.nested.dataOp("127.0.0.1", 8080);
 						
 						// enum
-						// enumEvent.enumMsg(ProtocolEnum.ACK);
-						// enumEvent.enumMsg2(ColorEnum.WHITE);
+						enumEvent.enumMsg(ProtocolEnum.ACK);
+						enumEvent.enumMsg2(ColorEnum.WHITE);
 						// numberArray[0] = LocalEnum.FIRST;
 					'''
 				}
