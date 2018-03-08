@@ -6,91 +6,263 @@ RoomModel EnumTest {
 	ActorClass EnumTest_Top {
 		@TestInstance
 		Structure {
-			ActorRef user: EnumUser
+			ActorRef initTest: EnumInitialization
+			ActorRef translationTest: EnumTranslation
 		}
-		Behavior { }
+		Behavior {
+		}
 	}
-	
-	ActorClass EnumUser {
-		Interface {
-			Port prt: PC
-		}
+
+	ActorClass EnumInitialization {
 		Structure {
-			external Port prt
-			
 			Attribute caseId: int32
 			Attribute first: FirstEnum
 			Attribute second: SecondEnum = "two"
 			Attribute third: ThirdEnum
 			Attribute fourth: FourthEnum
 			Attribute fifth: FifthEnum
-			
-			Attribute arrayFirst[1] : FirstEnum
-			Attribute arrayFourth[65] : FourthEnum = "sixtyfive"
-			Attribute arrayFifth[2] : FifthEnum = "{f1, f2}"
-			
+
+			Attribute arrayFirst [1]: FirstEnum
+			Attribute arrayFourth [65]: FourthEnum = "sixtyfive"
+			Attribute arrayFifth [2]: FifthEnum = "{f1, f2}"
 		}
 		Behavior {
-			ctor {
-				"caseId = etUnit_openAll(\"log\", \"EnumTest\", \"org.eclipse.etrice.generator.common.tests.EnumTest\", \"EnumTest_case\");"
-			}
-			dtor {
-				"etUnit_closeAll(caseId);"
-			}
+			ctor '''
+				caseId = etUnit_openAll("log", "EnumTest", "org.eclipse.etrice.generator.common.tests.EnumTest", "EnumTest_case");
+			'''
+			dtor '''
+				etUnit_closeAll(caseId);
+			'''
+
 			StateMachine {
-				Transition init: initial -> state0 { }
-				State state0 {
-					entry {
-						"EXPECT_EQUAL_INT32(caseId, \"first: initialized value\", 0, first);"
-						"EXPECT_EQUAL_INT32(caseId, \"second: initialized value\", 2, second);"
-						""
-						"EXPECT_EQUAL_INT32(caseId, \"arrayFirst: initialized set value\", 0, arrayFirst[0]);"
-						"EXPECT_EQUAL_INT32(caseId, \"arrayFouth: initialized set value\", 0x41, arrayFourth[20]);"
-						"EXPECT_EQUAL_INT16(caseId, \"arrayFifth: initialized set value\", (short)0x01, arrayFifth[0]);"
-						"EXPECT_EQUAL_INT16(caseId, \"arrayFifth: initialized set value\", (short)0x02, arrayFifth[1]);"
-						""
-						"first = FirstEnum.zero;"
-						"second = SecondEnum.three;"
-						"third = ThirdEnum.five;"
-						"fourth = FourthEnum.sixtyfive;"
-						"fifth = FifthEnum.f3;"
-						""
-						"EXPECT_EQUAL_INT32(caseId, \"first: newly set value\", 0, first);"
-						"EXPECT_EQUAL_INT32(caseId, \"second: newly set value\", 3, second);"
-						"EXPECT_EQUAL_INT32(caseId, \"third: newly set value\", 5, third);"
-						"EXPECT_EQUAL_INT32(caseId, \"fourth: newly set value\", 0x41, fourth);"
-						"EXPECT_EQUAL_INT16(caseId, \"fifth: newly set value\", (short)0x4, fifth);"
-						""
-						"etUnit_testFinished(caseId);"
-					}
+				Transition init: initial -> attributeInit {
+				}
+				State attributeInit {
+					entry '''
+						EXPECT_EQUAL_INT32(caseId, "first: initialized value", 0, first);
+						EXPECT_EQUAL_INT32(caseId, "second: initialized value", 2, second);
+						
+						EXPECT_EQUAL_INT32(caseId, "arrayFirst: initialized set value", 0, arrayFirst[0]);
+						EXPECT_EQUAL_INT32(caseId, "arrayFouth: initialized set value", 0x41, arrayFourth[20]);
+						EXPECT_EQUAL_INT16(caseId, "arrayFifth: initialized set value", (short)0x01, arrayFifth[0]);
+						EXPECT_EQUAL_INT16(caseId, "arrayFifth: initialized set value", (short)0x02, arrayFifth[1]);
+						
+						first = FirstEnum.zero;
+						second = SecondEnum.three;
+						third = ThirdEnum.five;
+						fourth = FourthEnum.sixtyfive;
+						fifth = FifthEnum.f3;
+						
+						EXPECT_EQUAL_INT32(caseId, "first: newly set value", 0, first);
+						EXPECT_EQUAL_INT32(caseId, "second: newly set value", 3, second);
+						EXPECT_EQUAL_INT32(caseId, "third: newly set value", 5, third);
+						EXPECT_EQUAL_INT32(caseId, "fourth: newly set value", 0x41, fourth);
+						EXPECT_EQUAL_INT16(caseId, "fifth: newly set value", (short)0x4, fifth);
+						
+						etUnit_testFinished(caseId);
+					'''
 				}
 			}
 		}
 	}
-	
-	ProtocolClass PC {
-		incoming {
-			Message m1(d: FirstEnum)
-		}
-	}
-	
+
 	Enumeration FirstEnum {
-		zero, one, two, three
+		zero,
+		one,
+		two,
+		three
 	}
-	
+
 	Enumeration SecondEnum {
-		one=1, two, three
+		one = 1,
+		two,
+		three
 	}
-	
+
 	Enumeration ThirdEnum {
-		one=1, two, five=5
+		one = 1,
+		two,
+		five = 5
 	}
-	
+
 	Enumeration FourthEnum {
-		one=1, three=3, sixtyfive=0x41
+		one = 1,
+		three = 3,
+		sixtyfive = 0x41
 	}
 
 	Enumeration FifthEnum of int16 {
-		f1=0x1, f2=0x2, f3=0x4, f4=0x8
+		f1 = 0x1,
+		f2 = 0x2,
+		f3 = 0x4,
+		f4 = 0x8
+	}
+
+	ActorClass EnumTranslationBase {
+		Interface {
+			Port port: PEnum
+		}
+		Structure {
+			external Port port
+			Attribute attrEnum: AttributeEnum
+			Attribute attrData: DEnum
+		}
+		Behavior {
+			Operation enumOp(enumParam: OperationEnum): OperationEnum '''
+				return OperationEnum.zero;
+			'''
+		}
+	}
+
+	/**
+	 *  DetailCode place occurrences:
+	 *   - ActorClass: ctor/dtor, Operation, State(Entry/Do/Exit), Transition(Guard/Action/Condition)
+	 * 	 - DataClass: Operation
+	 *   - PortClass: Operation, handles
+	 * 
+	 *  Enum Providers:
+	 * 	 - ActorClass: Attribute, Operation, SPP/SAP/Ports
+	 * 	 - DataClass: Attribute, Operation
+	 *   - ProtocolClass: MessageData
+	 *   - PortClass: Attribute, Operation
+	 * 	 
+	 *  Inheritance: ActorClass, DataClass, ProtocolClass
+	 *  
+	 */
+	ActorClass EnumTranslation extends EnumTranslationBase {
+		Behavior {
+			ctor '''
+				attrEnum = AttributeEnum.zero;
+			'''
+			StateMachine {
+				Transition init: initial -> state {
+				}
+				Transition enumTransition: state -> state {
+					triggers {
+						<enumIn: port guard '''transitionData == MessageEnum.zero'''>
+					}
+					action '''
+						// Attribute->Enum
+						attrEnum = AttributeEnum.zero;
+						// Operation->Enum
+						enumOp(OperationEnum.zero);
+						// Port->Message->Enum
+						port.enumOut(MessageEnum.zero);
+						
+						// Port->Operation->Enum
+						/* port.enumOp(PortClassOperationEnum.zero); */
+						
+						/*
+						DEnum attrDataClass;
+						// Attribute->DataClass->Enum
+						attrDataClass.enumAttr = DataClassEnum.zero;
+						// Attribute->DataClass->DataClass->Enum
+						attrDataClass.enumNested = NestedDataClassEnum.zero;
+						attrData = attrDataClass;
+						
+						DMessageEnum messageDataClass;
+						// Port->Message->DataClass->Enum
+						messageDataClass.enumNested = MessageDataClassEnum.zero;
+						port.enumData(messageDataClass);
+						*/
+					'''
+				}
+				State state
+			}
+		}
+	}
+	
+	// Operation->Enum
+	Enumeration OperationEnum {
+		zero
+	}
+	
+	// Attribute->Enum
+	Enumeration AttributeEnum {
+		zero
+	}
+	
+	DataClass DEnumNested {
+		Attribute enumAttr: NestedDataClassEnum
+	}
+	
+	DataClass DEnumBase {
+		Attribute enumAttr: DataClassEnum
+		Attribute enumNested: DEnumNested
+		
+		Operation enumOp(enumPara: DataClassEnum) : DataClassEnum '''
+			/* enumNested.enumAttr = NestedDataClassEnum.zero; */
+			
+			return DataClassEnum.zero;
+		'''
+	}
+
+	DataClass DEnum extends DEnumBase {
+		Attribute dummy: FirstEnum
+	}
+	
+	// DataClass->Enum
+	Enumeration DataClassEnum {
+		zero
+	}
+	
+	// DataClass->DataClass->Enum
+	Enumeration NestedDataClassEnum {
+		zero
+	}
+
+	ProtocolClass PEnumBase {
+		incoming {
+			Message enumIn(MessageEnum)
+		}
+		outgoing {
+			Message enumOut(MessageEnum)
+			Message enumData(DMessageEnum)
+		}
+		regular PortClass
+		{
+			Attribute enumAttr: PortClassAttributeEnum
+
+			Operation enumOp(enumParam: PortClassOperationEnum): PortClassOperationEnum '''
+				enumAttr = PortClassAttributeEnum.zero;
+				
+				return PortClassOperationEnum.zero;
+			'''
+		}
+	}
+
+	ProtocolClass PEnum extends PEnumBase {
+		outgoing {
+			Message handled(FirstEnum)
+		}
+		regular PortClass {
+			handle outgoing handled '''
+				/* enumAttr = PortClassAttributeEnum.zero; */
+			'''
+		}
+	}
+	
+	// PortClass->Operation->Enum
+	Enumeration PortClassOperationEnum {
+		zero
+	}
+	
+	// PortClass->Attribute->Enum
+	Enumeration PortClassAttributeEnum {
+		zero
+	}
+
+	// Message->Enum
+	Enumeration MessageEnum {
+		zero
+	}
+	
+	// Message->DataClass->Enum
+	Enumeration MessageDataClassEnum {
+		zero
+	}
+	
+	DataClass DMessageEnum {
+		Attribute enumAttr: MessageDataClassEnum
 	}
 }

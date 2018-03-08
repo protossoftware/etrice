@@ -12,8 +12,7 @@ def tests = [
 	choicePointTestExtended: 	['models/ChoicePointTestExtended.room', genericPhysical],
 	dataDrivenTest:				['models/DataDrivenTest.room', genericPhysical],
 	/* enumTest:				['models/EnumTest.room', genericPhysical],		not supported in c++	*/
-	
-	compileTests:				['models/CompileTests.room', genericPhysical, 'models/DetailExpressionTest.room', 'models/DetailExpressionEnum.room', 'models/DetailExpressionTypes.room', 'models/StatemachineInterfaceTest.room', 'models/StatemachineInterfaceInheritedTest.room', 'models/StatemachineInterfaceTest.room', 'models/ContinuationTransitionTest.room'],
+	compileTests:				['models/CompileTests.room', genericPhysical, 'models/StatemachineInterfaceTest.room', 'models/StatemachineInterfaceInheritedTest.room', 'models/StatemachineInterfaceTest.room', 'models/ContinuationTransitionTest.room'],
 	
 	handlerTest:				['models/HandlerTest.room', genericPhysical],
 	operationInheritanceTest:	['models/OperationInheritanceTest.room', genericPhysical],
@@ -30,3 +29,7 @@ tests.each { name, models ->
 // Enum Test
 createTest('c', 'enumTest', ['models/EnumTest.room', genericPhysical])
 createTest('java', 'enumTest', ['models/EnumTest.room', genericPhysical])
+
+// DetailExpressionCompile Test
+createTest('c', 'detailExpressionCompileTest', [genericPhysical, 'models/DetailExpressionTest.room', 'models/DetailExpressionEnum.room', 'models/DetailExpressionTypes.room'])
+createTest('java', 'detailExpressionCompileTest', [genericPhysical, 'models/DetailExpressionTest.room', 'models/DetailExpressionEnum.room', 'models/DetailExpressionTypes.room'])

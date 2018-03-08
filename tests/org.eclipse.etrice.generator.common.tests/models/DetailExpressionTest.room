@@ -2,9 +2,27 @@ RoomModel DetailExpressionTestModel {
 
 	import room.basic.types.* from "../../../runtime/${etModellib}/model/Types.room"
 	import room.basic.test.* from "../../../runtime/${etModellib}/model/Tests.room"
-//	import room.basic.service.timing.* from "../../../runtime/${etModellib}/model/TimingService.room"
 	import DetailExpressionEnum.* from "DetailExpressionEnum.room"
-
+	
+	ActorClass DetailExpressionCompileTest {
+		@TestInstance
+		Structure {
+			// just compile
+			ActorRef ref0 : DetailExpressionTest
+			Attribute caseId : int32
+		}
+		Behavior {
+			ctor '''caseId = etUnit_openAll("log", "DetailExpressionCompileTest", "org.eclipse.etrice.generator.common.tests.DetailExpressionCompileTest", "DetailExpressionCompileTest_case");'''
+			dtor '''etUnit_closeAll(caseId);'''
+			StateMachine {
+				Transition init: initial -> finish
+				State finish {
+					entry '''etUnit_testFinished(caseId);'''
+				}
+			}
+		}
+	}
+	
 	Enumeration LocalEnum of int32 {
 		FIRST=1, SECOND=2, THIRD=3
 	}
