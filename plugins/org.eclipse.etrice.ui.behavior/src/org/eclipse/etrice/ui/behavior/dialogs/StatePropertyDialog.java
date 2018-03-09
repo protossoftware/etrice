@@ -5,6 +5,7 @@ import static org.eclipse.etrice.core.fsm.fSM.FSMPackage.Literals.STATE__ENTRY_C
 import static org.eclipse.etrice.core.ui.util.UIExpressionUtil.getExpressionProvider;
 
 import java.util.EnumSet;
+import java.util.List;
 
 import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.core.databinding.validation.IValidator;
@@ -30,6 +31,7 @@ import org.eclipse.etrice.ui.behavior.fsm.dialogs.IStatePropertyDialog;
 import org.eclipse.etrice.ui.behavior.fsm.dialogs.QuickFixDialog;
 import org.eclipse.etrice.ui.behavior.fsm.dialogs.StringToDetailCode;
 import org.eclipse.etrice.ui.behavior.support.SupportUtil;
+import org.eclipse.etrice.ui.common.base.dialogs.MultiValidator2;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
@@ -41,7 +43,7 @@ import org.eclipse.ui.forms.IManagedForm;
 
 public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog implements IStatePropertyDialog {
 
-	class NameValidator implements IValidator {
+	private class NameValidator implements IValidator {
 
 		@Override
 		public IStatus validate(Object value) {
@@ -54,6 +56,36 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog imple
 			}
 			return Status.OK_STATUS;
 		}
+	}
+	
+	private class NonEmptyRefinedStateValidator extends MultiValidator2 {
+		
+		public NonEmptyRefinedStateValidator(DataBindingContext bindingContext, int nActionCodes) {
+			super(bindingContext, nActionCodes);
+		}
+		
+		@Override
+		public IStatus validate(List<Object> values) {
+			if (state instanceof RefinedState) {
+				RefinedState rs = (RefinedState) state;
+				if (rs.getSubgraph()==null) {
+					RoomHelpers roomHelpers = SupportUtil.getInstance().getRoomHelpers();
+					boolean allEmpty = true;
+					for (Object value : values) {
+						String actionCode = roomHelpers.getDetailCode((DetailCode) value);
+						if (!actionCode.trim().isEmpty()) {
+							allEmpty = false;
+							break;
+						}
+					}
+					if (allEmpty) {
+						return ValidationStatus.error("Not all action codes must be empty if the refined state has no subgraph.");
+					}
+				}
+			}
+			return ValidationStatus.ok();
+		}
+		
 	}
 
 	private State state;
@@ -116,6 +148,11 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog imple
 		StringToDetailCode s2m = new StringToDetailCode();
 		
 		RoomHelpers roomHelpers = SupportUtil.getInstance().getRoomHelpers();
+		ActorClass ac = roomHelpers.getActorClass(state);
+		boolean hasDoCode = ac.getCommType()!=ComponentCommunicationType.EVENT_DRIVEN;
+		
+		int nActionCodes = hasDoCode ? 3 : 2;
+		NonEmptyRefinedStateValidator nonEmptyValidator = new NonEmptyRefinedStateValidator(bindingContext, nActionCodes);
 		
 		if (inherited) {
 			String code = roomHelpers.getDetailCode(state.getEntryCode());
@@ -142,8 +179,8 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog imple
 				}
 			}
 
-			createActionCodeEditor(body, "&Entry Code:", state.getEntryCode(),
-					FSMPackage.eINSTANCE.getState_EntryCode(), s2m, m2s, getExpressionProvider(state, STATE__ENTRY_CODE));
+			createActionCodeEditor(body, "&Entry Code:", state.getEntryCode(), FSMPackage.eINSTANCE.getState_EntryCode(), nonEmptyValidator, s2m,
+					m2s, getExpressionProvider(state, STATE__ENTRY_CODE));
 		}
 
 		if (inherited) {
@@ -156,8 +193,8 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog imple
 			entry.setLayoutData(gd);
 		}
 		else {
-			createActionCodeEditor(body, "E&xit Code:", state.getExitCode(),
-					FSMPackage.eINSTANCE.getState_ExitCode(), s2m, m2s, getExpressionProvider(state, STATE__ENTRY_CODE));
+			createActionCodeEditor(body, "E&xit Code:", state.getExitCode(), FSMPackage.eINSTANCE.getState_ExitCode(), nonEmptyValidator, s2m,
+					m2s, getExpressionProvider(state, STATE__ENTRY_CODE));
 
 			if (state instanceof RefinedState)
 			{
@@ -169,10 +206,9 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog imple
 			}
 		}
 
-		ActorClass ac = roomHelpers.getActorClass(state);
-		if (ac.getCommType()!=ComponentCommunicationType.EVENT_DRIVEN)
-			createActionCodeEditor(body, "&Do Code:", state.getDoCode(),
-					FSMPackage.eINSTANCE.getState_DoCode(), s2m, m2s, getExpressionProvider(state, STATE__DO_CODE));
+		if (hasDoCode)
+			createActionCodeEditor(body, "&Do Code:", state.getDoCode(), FSMPackage.eINSTANCE.getState_DoCode(), nonEmptyValidator, s2m,
+					m2s, getExpressionProvider(state, STATE__DO_CODE));
 
 		createMembersAndMessagesButtons(body);
 
@@ -191,7 +227,6 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog imple
 	 * {@link #state} and binds it with the model.
 	 * 
 	 * @author jayant
-	 * 
 	 * @param parent
 	 *            the {@link Composite} which will hold the editor
 	 * @param label
@@ -200,20 +235,20 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog imple
 	 *            the {@link DetailCode} object to be represented
 	 * @param feat
 	 *            the {@link EStructuralFeature} associated with the code
+	 * @param multiValidator 
 	 * @param s2m
 	 *            a String to Model converter
 	 * @param m2s
 	 *            a Model to string converter
-	 * 
 	 * @return the constructed instance of {@link IActionCodeEditor}
 	 */
-	private void createActionCodeEditor(Composite parent, String label,
-			DetailCode detailCode, EStructuralFeature feat,
-			StringToDetailCode s2m, DetailCodeToString m2s, IDetailExpressionProvider detailExpr) {
-
+	private void createActionCodeEditor(Composite parent, String label, DetailCode detailCode, EStructuralFeature feat,
+			MultiValidator2 multiValidator, StringToDetailCode s2m, DetailCodeToString m2s,
+			IDetailExpressionProvider detailExpr) {
+		
 		IActionCodeEditor entry = super.createActionCodeEditor(parent, label,
-				detailCode, state, feat, s2m, m2s, detailExpr);
-
+				detailCode, state, feat, null, multiValidator, s2m, m2s, true, true, false, detailExpr);
+		
 		Control control;
 		if (entry != null)
 			control = entry.getControl();
@@ -225,6 +260,7 @@ public class StatePropertyDialog extends AbstractMemberAwarePropertyDialog imple
 			configureMemberAwareness(textEntry, true, true);
 			control = textEntry;
 		}
+		createDecorator(control, "invalid text");
 
 		//set layout for the created control
 		GridData gd = new GridData(GridData.FILL_BOTH);

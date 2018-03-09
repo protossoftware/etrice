@@ -599,6 +599,11 @@ public class StateSupport {
 				for (ICustomFeature cf : features) {
 					if (cf instanceof PropertyFeature) {
 						cf.execute(context);
+						if (!cf.hasDoneChanges()) {
+							// roll back
+							link(container, s);
+							EcoreUtil.remove(rs);
+						}
 						break;
 					}
 				}
