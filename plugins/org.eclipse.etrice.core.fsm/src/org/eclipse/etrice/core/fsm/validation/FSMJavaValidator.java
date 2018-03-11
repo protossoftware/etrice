@@ -26,7 +26,6 @@ import org.eclipse.etrice.core.fsm.fSM.StateGraphItem;
 import org.eclipse.etrice.core.fsm.fSM.TrPoint;
 import org.eclipse.etrice.core.fsm.fSM.Transition;
 import org.eclipse.etrice.core.fsm.services.FSMGrammarAccess;
-import org.eclipse.etrice.core.fsm.util.FSMHelpers;
 import org.eclipse.etrice.core.fsm.validation.FSMValidationUtilXtend.Result;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.RuleCall;
@@ -52,9 +51,6 @@ public class FSMJavaValidator extends org.eclipse.etrice.core.fsm.validation.Abs
 	private FSMValidationUtil validationUtil;
 
 	@Inject
-	private FSMHelpers fsmHelpers;
-	
-	@Inject
 	FSMGrammarAccess grammar;
 	
 	@Inject
@@ -78,13 +74,8 @@ public class FSMJavaValidator extends org.eclipse.etrice.core.fsm.validation.Abs
 	
 	@Check
 	public void checkRefinedStateNotEmpty(RefinedState rs) {
-		if (rs.getSubgraph()==null) {
-			boolean entryEmpty = fsmHelpers.getDetailCode(rs.getEntryCode()).trim().isEmpty();
-			boolean exitEmpty = fsmHelpers.getDetailCode(rs.getExitCode()).trim().isEmpty();
-			boolean doEmpty = fsmHelpers.getDetailCode(rs.getDoCode()).trim().isEmpty();
-			if (entryEmpty && exitEmpty && doEmpty) {
-				error("Refined state must not be empty (needs to have at least one action code or a subgraph).", FSMPackage.Literals.STATE__ENTRY_CODE);
-			}
+		if (validationUtil.isRefinedStateEmpty(rs)) {
+			error("Refined state must not be empty (needs to have at least one action code or a subgraph).", FSMPackage.Literals.STATE__ENTRY_CODE);
 		}
 	}
 	
