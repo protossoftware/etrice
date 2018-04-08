@@ -153,10 +153,15 @@ public class ModelLoader {
 	 */
 	private boolean addResourceURI(String uri) {
 		URI can = null;
-		if (uri.startsWith("platform:/") || uri.startsWith("classpath:/") || uri.startsWith("file:/"))
+		try {
+			// try valid uri
 			can = URI.createURI(uri);
-		else
+		} catch(IllegalArgumentException e1) {
+		}
+		if(can == null || !(can.isFile() || can.isArchive() || can.isPlatform() || can.scheme() == "classpath")) {
+			// try file path
 			can = URI.createFileURI(uri);
+		}
 		
 		if (loadedModelURIs.contains(can))
 			return false;

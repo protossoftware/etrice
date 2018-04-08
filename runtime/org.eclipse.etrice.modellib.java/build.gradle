@@ -1,5 +1,6 @@
 apply plugin: 'java'
 
+apply from: "$rootDir/gradle/publish.gradle"
 apply from: "$rootDir/gradle/etGenerator.gradle"
 
 def models = [
@@ -17,6 +18,10 @@ sourceSets {
 		java {
 			srcDirs = ['src-gen']
 		}
+		resources {
+            srcDirs = [projectDir]
+            includes = ['model/*.room']
+        }
 	}
 }
 
