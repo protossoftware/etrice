@@ -12,7 +12,7 @@
 
 package org.eclipse.etrice.generator.base;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem;
 import org.eclipse.etrice.core.room.Attribute;
@@ -78,7 +78,7 @@ public interface ITranslationProvider extends IFSMTranslationProvider {
 	 * @param orig the original text
 	 * @return the translation
 	 */
-	String getOperationText(Operation op, ArrayList<String> args, String orig);
+	String getOperationText(Operation op, List<String> args, String orig);
 	
 	/**
 	 * yields a sequence that reads data from a <b>data driven</b> port.
@@ -115,5 +115,5 @@ public interface ITranslationProvider extends IFSMTranslationProvider {
 	 * @return the translation
 	 */
 	String getInterfaceItemOperationText(AbstractInterfaceItem item,
-			PortOperation op, ArrayList<String> args, String orig);
+			PortOperation op, List<String> args, String orig);
 }

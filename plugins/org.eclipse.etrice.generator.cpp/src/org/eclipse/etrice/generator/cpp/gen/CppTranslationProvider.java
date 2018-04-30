@@ -12,7 +12,7 @@
 
 package org.eclipse.etrice.generator.cpp.gen;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem;
@@ -39,7 +39,7 @@ public class CppTranslationProvider extends DefaultTranslationProvider {
 	}
 
 	@Override
-	public String getInterfaceItemMessageText(AbstractInterfaceItem item, EObject abstractMsg, ArrayList<String> args, String index, String orig) {
+	public String getInterfaceItemMessageText(AbstractInterfaceItem item, EObject abstractMsg, List<String> args, String index, String orig) {
 		if (index==null)
 			return orig;
 

@@ -12,13 +12,13 @@
 
 package org.eclipse.etrice.generator.c.gen;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.etrice.core.room.Attribute;
-import org.eclipse.etrice.core.room.CommunicationType;
 import org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem;
 import org.eclipse.etrice.core.fsm.fSM.DetailCode;
+import org.eclipse.etrice.core.room.Attribute;
+import org.eclipse.etrice.core.room.CommunicationType;
 import org.eclipse.etrice.core.room.EnumLiteral;
 import org.eclipse.etrice.core.room.EnumerationType;
 import org.eclipse.etrice.core.room.InterfaceItem;
@@ -51,7 +51,7 @@ public class CTranslationProvider extends DefaultTranslationProvider {
 	}
 
 	@Override
-	public String getInterfaceItemMessageText(AbstractInterfaceItem item, EObject abstractMsg, ArrayList<String> args, String index, String orig) {
+	public String getInterfaceItemMessageText(AbstractInterfaceItem item, EObject abstractMsg, List<String> args, String index, String orig) {
 		if (!(abstractMsg instanceof Message))
 			return orig;
 		
@@ -110,11 +110,11 @@ public class CTranslationProvider extends DefaultTranslationProvider {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.etrice.generator.base.DefaultTranslationProvider#getInterfaceItemOperationText(org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem, org.eclipse.etrice.core.room.PortOperation, java.util.ArrayList, java.lang.String)
+	 * @see org.eclipse.etrice.generator.base.DefaultTranslationProvider#getInterfaceItemOperationText(org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem, org.eclipse.etrice.core.room.PortOperation, java.util.List, java.lang.String)
 	 */
 	@Override
 	public String getInterfaceItemOperationText(AbstractInterfaceItem item,
-			PortOperation op, ArrayList<String> args, String orig) {
+			PortOperation op, List<String> args, String orig) {
 		
 		StringBuilder argtext = new StringBuilder();
 		for (String arg : args) {

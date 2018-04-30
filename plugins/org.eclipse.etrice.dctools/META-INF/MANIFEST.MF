@@ -1,0 +1,19 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Detail Code Tools
+Bundle-SymbolicName: org.eclipse.etrice.dctools
+Bundle-Version: 1.1.1.qualifier
+Bundle-Vendor: Eclipse eTrice
+Automatic-Module-Name: org.eclipse.etrice.dctools
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Require-Bundle: com.google.guava,
+ org.eclipse.emf.ecore,
+ org.eclipse.xtext.xbase.lib,
+ org.eclipse.xtend.lib,
+ org.eclipse.xtend.lib.macro,
+ org.eclipse.etrice.core.fsm,
+ org.eclipse.etrice.core.room,
+ org.eclipse.etrice.dctools.fsm;visibility:=reexport,
+ org.eclipse.etrice.generator.fsm
+Export-Package: org.eclipse.etrice.dctools.ast
+

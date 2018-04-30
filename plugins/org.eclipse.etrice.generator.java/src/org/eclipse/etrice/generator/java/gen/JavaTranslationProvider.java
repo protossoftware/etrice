@@ -12,12 +12,12 @@
 
 package org.eclipse.etrice.generator.java.gen;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem;
 import org.eclipse.etrice.core.fsm.fSM.DetailCode;
+import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
 import org.eclipse.etrice.generator.base.DefaultTranslationProvider;
@@ -47,7 +47,7 @@ public class JavaTranslationProvider extends DefaultTranslationProvider {
 	}
 	
 	@Override
-	public String getInterfaceItemMessageText(AbstractInterfaceItem item, EObject abstractMsg, ArrayList<String> args, String index, String orig) {
+	public String getInterfaceItemMessageText(AbstractInterfaceItem item, EObject abstractMsg, List<String> args, String index, String orig) {
 		if (index==null)
 			return orig;
 

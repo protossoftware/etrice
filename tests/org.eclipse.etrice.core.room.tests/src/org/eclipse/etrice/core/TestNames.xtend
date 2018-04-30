@@ -38,7 +38,7 @@ class TestNames extends TestBase {
 			if(it instanceof AbstractValidationDiagnostic){
 				val obj = it.sourceEObject
 				var nameError = nameErrorMap.get(obj)
-				if(nameError == null) nameError = false
+				if(nameError === null) nameError = false
 				nameErrorMap.put(obj, (nameError || it.isNameErrorMessage))
 			}
 		]

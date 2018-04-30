@@ -1,0 +1,103 @@
+RoomModel DCParserTests {
+
+	import room.basic.types.* from "Types.room"
+
+	async ActorClass AC {
+		Interface {
+			Port prt: PC
+			Port replPrt[2]: PC
+
+			Port dataPort: PCData
+		}
+		Structure {
+			external Port prt
+			external Port replPrt
+			external Port dataPort
+
+			Attribute p[2]: Point
+			Attribute pt: Point
+			Attribute c: Circle
+		}
+		Behavior {
+			Operation distance(p1: Point, p2: Point): float64 '''
+				return p1.distance(p2);
+			'''
+
+			StateMachine {
+				State first {
+					entry '''
+						prt.start();
+						
+						Point lpt = new Point(1,2);
+						prt.result(lpt);'''
+				}
+				State second {
+					entry '''
+						double d = c.diameter();
+						d = p[0].distance(p[1]);
+						d = distance(p[0], p[1]);
+						d = c.c.x;
+					'''
+					exit '''
+						replPrt[0].start();
+						replPrt.start();
+						prt[0].start();
+					'''
+				}
+				Transition init0: initial -> first
+				Transition tr0: first -> second {
+					triggers {
+						<circle: prt>
+					}
+					action '''transitionData.west().distance(transitionData.c);'''
+				}
+				State third
+				Transition tr1: second -> third {
+					guard '''true'''
+					action '''pt.set(dataPort.point);'''
+				}
+			}
+		}
+	}
+
+	datadriven ProtocolClass PCData {
+		incoming {
+			Message point(Point)
+		}
+	}
+
+	ProtocolClass PC {
+		incoming {
+			Message point(Point)
+			Message circle(Circle)
+		}
+		outgoing {
+			Message start()
+			Message result(Point)
+		}
+	}
+
+	DataClass Circle {
+		Operation diameter(): float64 '''
+			return 2*r;
+		'''
+		Operation west(): Point '''
+			return new Point(c.x + r, c.y);
+		'''
+		Operation isInside(other: Point): boolean '''
+			return c.distance(other) < r;
+		'''
+		Attribute r: float64
+		Attribute c: Point
+	}
+
+	DataClass Point {
+		Operation distance(other: Point): float64 '''
+			double dx = x - other.x;
+			double dy = y - other.y;
+			return Math.sqrt(dx*dx + dy*dy);
+		'''
+		Attribute x: float64
+		Attribute y: float64
+	}
+}
