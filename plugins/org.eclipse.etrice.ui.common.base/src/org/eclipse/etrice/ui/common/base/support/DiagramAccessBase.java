@@ -245,7 +245,7 @@ public abstract class DiagramAccessBase {
 
 	public abstract String getDiagramName(EObject rootObject);
 	public abstract IBulkDiagramExporter getDiagramExporter();
-	abstract protected String getDigramFileName(EObject rootObject);
+	public abstract String getDigramFileName(EObject rootObject);
 	abstract protected String getDiagramTypeId();
 	abstract protected String getEditorId();
 	abstract protected Command getInitialCommand(EObject rootObject, Diagram diagram, TransactionalEditingDomain editingDomain);

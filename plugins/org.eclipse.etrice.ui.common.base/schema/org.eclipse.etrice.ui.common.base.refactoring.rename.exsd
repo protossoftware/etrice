@@ -3,7 +3,7 @@
 <schema targetNamespace="org.eclipse.etrice.ui.common" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appinfo>
-         <meta.schema plugin="org.eclipse.etrice.ui.common" id="org.eclipse.etrice.ui.common.refactoring.rename" name="Diagram Rename Participant"/>
+         <meta.schema plugin="org.eclipse.etrice.ui.common.base" id="org.eclipse.etrice.ui.common.base.refactoring.rename" name="Diagram Rename Participant"/>
       </appinfo>
       <documentation>
          [Enter description of this extension point.]

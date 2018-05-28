@@ -11,8 +11,7 @@ import org.osgi.framework.Bundle;
 
 import com.google.inject.Injector;
 
-public class ExecutableExtensionFactory extends
-		AbstractGuiceAwareExecutableExtensionFactory {
+public class ExecutableExtensionFactory extends AbstractGuiceAwareExecutableExtensionFactory {
 
 	@Override
 	protected Bundle getBundle() {
@@ -21,9 +20,8 @@ public class ExecutableExtensionFactory extends
 
 	@Override
 	protected Injector getInjector() {
-		return createInjector(override(
-				override(new ResourceModule()).with(new SharedStateModule()))
-				.with(new EmfUiModule(Activator.getDefault())));
+		return createInjector(override(override(new SharedStateModule()).with(new EmfUiModule(Activator.getDefault())))
+				.with(new ResourceModule()));
 	}
 
 }

@@ -62,7 +62,7 @@ public class DiagramRenameParticipant extends RenameParticipant {
 	private static String[] diagramEditorsIds;
 	
 	static {
-		IConfigurationElement[] elements = Platform.getExtensionRegistry().getConfigurationElementsFor("org.eclipse.etrice.ui.common.refactoring.rename");
+		IConfigurationElement[] elements = Platform.getExtensionRegistry().getConfigurationElementsFor("org.eclipse.etrice.ui.common.base.refactoring.rename");
 		diagramExtensions = new String[elements.length];
 		diagramEditorsIds = new String[elements.length];
 		for(int i=0;i<elements.length;i++){

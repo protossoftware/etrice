@@ -21,6 +21,9 @@ import org.eclipse.etrice.core.common.scoping.RelativeFileURIHandler;
 
 import com.google.common.collect.Maps;
 
+/**
+ *  Customize load/save of diagram resources, e.g. serialized URIs to .room.
+ */
 public class DiagramResource extends XMIResourceImpl {
 
 	public DiagramResource() {

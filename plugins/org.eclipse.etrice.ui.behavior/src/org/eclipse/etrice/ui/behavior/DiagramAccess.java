@@ -77,7 +77,7 @@ public class DiagramAccess extends DiagramAccessBase {
 	 * @see org.eclipse.etrice.ui.common.DiagramAccessBase#getFileExtension()
 	 */
 	@Override
-	protected String getDigramFileName(EObject rootObject) {
+	public String getDigramFileName(EObject rootObject) {
 		if (rootObject instanceof ActorClass) {
 			ActorClass ac = (ActorClass) rootObject;
 			String modelName = ((RoomModel) ac.eContainer()).getName();
