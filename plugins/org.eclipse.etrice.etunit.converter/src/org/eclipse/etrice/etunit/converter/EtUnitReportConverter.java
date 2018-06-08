@@ -450,7 +450,8 @@ public class EtUnitReportConverter {
 						input.close();
 						return null;
 					}
-					tc.setTime(BigDecimal.valueOf(time));
+					// time was measured in ms. Convert to s
+					tc.setTime(BigDecimal.valueOf(time/1000.0));
 				}
 				line = bufRead.readLine();
 				++count;
