@@ -25,6 +25,7 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.xtext.resource.ClasspathUriResolutionException;
@@ -156,7 +157,18 @@ public class StandardModelLocator implements IModelLocator {
 				}
 			catch (Throwable e) {
 			}
+		} 
+		else if (uri.isPlatform()) {
+			String platformResourcePath = uri.toPlatformString(true);
+			
+			// if workspace is not available, convert platform URI to absolute URI
+			if (EcorePlugin.getWorkspaceRoot() == null) {
+				URI resolvedURI = EcorePlugin.resolvePlatformResourcePath(platformResourcePath);
+				if(resolvedURI != null)
+					resolve = resolvedURI.toString();
+			}
 		}
+		
 		return resolve;
 	}
 
