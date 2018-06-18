@@ -34,7 +34,7 @@ void TestEtStaticDeque_testConstruct(etInt16 caseId) {
 	// Test constructor StaticDeque(void)
 	etStaticDeque deque;
 	int memory[10];
-	etStaticDeque_construct(&deque, memory, 10, sizeof(int));
+	etStaticDeque_construct(&deque, memory, sizeof(memory), sizeof(int));
 	EXPECT_EQUAL_INT32(caseId, failMsg, 0, deque.size);
 	EXPECT_TRUE(caseId, failMsg, deque.size == 0);
 }
@@ -45,7 +45,7 @@ void TestEtStaticDeque_testPushPop(etInt16 caseId) {
 	// Test push_back and push_front with 6 objects of type DataClass
 	etStaticDeque deque;
 	DataClass memory[6];
-	etStaticDeque_construct(&deque, memory, 6, sizeof(DataClass));
+	etStaticDeque_construct(&deque, memory, sizeof(memory), sizeof(DataClass));
 	DataClass d1 = { 1, 1.5, "Data 1" };
 	DataClass d2 = { 2, 2.5, "Data 2" };
 	DataClass d3 = { 3, 3.5, "Data 3" };
