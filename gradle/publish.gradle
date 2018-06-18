@@ -25,10 +25,10 @@ publishing {
 		}
 		maven {
 			name 'protos'
-			url 'http://10.8.1.101:8081/artifactory/maven-protos'
+			url project.properties.protosPublicArtifactoryUrl
 			credentials {
-				username project.properties.protosArtifactoryUsername
-				password project.properties.protosArtifactoryPassword
+				username project.properties.protosPublicArtifactoryUsername
+				password project.properties.protosPublicArtifactoryPassword
 			}
 		}
 	}
