@@ -1,7 +1,5 @@
 src-gen/
 bin
-models
+models/*
 output
 results
-src-gen
-log

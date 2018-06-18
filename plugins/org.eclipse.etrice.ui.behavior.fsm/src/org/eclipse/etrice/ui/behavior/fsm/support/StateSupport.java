@@ -157,12 +157,11 @@ public class StateSupport {
 		        
 		        ContainerShape targetContainer = context.getTargetContainer();
 		        ModelComponent mc = FSMSupportUtil.getInstance().getModelComponent(getDiagram());
-				StateGraph sg = (StateGraph) targetContainer.getLink().getBusinessObjects().get(0);
-				
+				StateGraph sg = (StateGraph) targetContainer.getLink().getBusinessObjects().get(0);			
 				if (!FSMSupportUtil.getInstance().isOwnedBy(mc, sg)) {
 					sg = ModelEditingUtil.insertRefinedState(sg, mc, targetContainer, getFeatureProvider());
-				}
-				
+
+				}		
 				// create new State and add it
 				SimpleState s = FSMFactory.eINSTANCE.createSimpleState();
 				s.setName(FSMSupportUtil.getInstance().getFSMNewNamingUtil().getUniqueName("state", sg));

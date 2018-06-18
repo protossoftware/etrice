@@ -92,7 +92,7 @@ public abstract class AbstractPropertyDialog extends FormDialog {
 				if (!newStatus.getMessage().isEmpty())
 					validationText.setText(newStatus.getMessage());
 			
-			// iterate over all decoration and there validation status
+			// iterate over all decoration and their validation status
 			for(ControlDecoration decoration: decorations){
 				IObservableValue observableValue = decoratorMap.get(decoration);
 				IStatus status = (IStatus) observableValue.getValue();

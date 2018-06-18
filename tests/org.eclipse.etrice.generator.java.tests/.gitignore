@@ -1,10 +1,6 @@
 src-gen/
 bin
-models
+models/*
 output
 results
-src-gen
-log
-/tmp/
-/firstOpt.obj
-/secondOpt.obj
+*.obj

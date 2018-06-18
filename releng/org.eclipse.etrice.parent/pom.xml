@@ -5,14 +5,13 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.eclipse.etrice</groupId>
 	<artifactId>org.eclipse.etrice.parent</artifactId>
-	<version>1.1.1-SNAPSHOT</version>
+	<version>1.1.2-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	
 	<properties>
 		<project.build.sourceEncoding>Cp1252</project.build.sourceEncoding>
-	
-		<xtext.version>2.13.0</xtext.version>
-		<tycho.version>1.0.0</tycho.version>
+		<xtext.version>2.12.0</xtext.version>
+		<tycho.version>1.1.0</tycho.version>
 		<cbi.version>1.1.4</cbi.version>
 		
 		<eclipse.url>http://download.eclipse.org/releases/oxygen</eclipse.url>
@@ -20,7 +19,9 @@
 		<license.url>http://download.eclipse.org/cbi/updates/license</license.url>
 		<orbit.url>http://download.eclipse.org/tools/orbit/R-builds/R20170516192513/repository</orbit.url>
 		<cbi.url>https://repo.eclipse.org/content/repositories/cbi-releases</cbi.url>
+		<etrice.url>http://download.eclipse.org/etrice/updates/nightly</etrice.url>
 		
+		<build.alias></build.alias>
 		<build.type>N</build.type>
 	</properties>
 	
@@ -90,8 +91,29 @@
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-packaging-plugin</artifactId>
 				<version>${tycho.version}</version>
+				<dependencies>
+					<dependency>
+						<groupId>org.eclipse.tycho.extras</groupId>
+						<artifactId>tycho-buildtimestamp-jgit</artifactId>
+						<version>${tycho.version}</version>
+					</dependency>
+				</dependencies>
 				<configuration>
-					<format>'${build.type}'yyyyMMddHHmm</format>
+					<format>'${build.alias}${build.type}'yyyyMMddHHmm</format>
+					<timestampProvider>jgit</timestampProvider>
+					<jgit.dirtyWorkingTree>warning</jgit.dirtyWorkingTree>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-p2-plugin</artifactId>
+				<version>${tycho.version}</version>
+				<configuration>
+					<baselineRepositories>
+						<repository>
+							<url>${etrice.url}</url>
+						</repository>
+					</baselineRepositories>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -114,7 +136,7 @@
 					<outputDirectory>xtend-gen</outputDirectory>
 				</configuration>
 			</plugin>
-			<!-- plugin>
+			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>target-platform-configuration</artifactId>
 				<version>${tycho.version}</version>
@@ -147,7 +169,7 @@
 						</environment>
 					</environments>
 				</configuration>
-			</plugin -->
+			</plugin>
 		</plugins>
 	</build>	
 </project>

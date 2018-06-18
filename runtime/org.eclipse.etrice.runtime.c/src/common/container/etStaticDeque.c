@@ -14,11 +14,11 @@
 
 #include <string.h>
 
-void etStaticDeque_construct(etStaticDeque* const self, void* memory, int size, int objectSize) {
+void etStaticDeque_construct(etStaticDeque* const self, void* memory, int memorySize, int objectSize) {
 	self->size = 0;
 	self->first = 0;
 	self->memory = memory;
-	self->maxSize = size;
+	self->maxSize = memorySize / objectSize;
 	self->objectSize = objectSize;
 
 	etStaticDeque_clear(self);

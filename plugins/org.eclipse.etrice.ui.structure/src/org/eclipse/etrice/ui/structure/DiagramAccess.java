@@ -53,7 +53,7 @@ public class DiagramAccess extends DiagramAccessBase {
 		return StructureEditor.STRUCTURE_EDITOR_ID;
 	}
 
-	protected String getDigramFileName(EObject rootObject) {
+	public String getDigramFileName(EObject rootObject) {
 		if (rootObject instanceof StructureClass) {
 			StructureClass sc = (StructureClass) rootObject;
 			String modelName = ((RoomModel) sc.eContainer()).getName();

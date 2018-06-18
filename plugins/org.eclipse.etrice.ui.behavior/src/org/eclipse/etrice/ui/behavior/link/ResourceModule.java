@@ -8,14 +8,17 @@
 
 package org.eclipse.etrice.ui.behavior.link;
 
+import org.eclipse.etrice.ui.behavior.DiagramAccess;
+import org.eclipse.etrice.ui.common.base.refactoring.DiagramReferenceUpdater;
+import org.eclipse.etrice.ui.common.base.support.DiagramAccessBase;
 import org.eclipse.xtext.resource.generic.AbstractGenericResourceRuntimeModule;
+import org.eclipse.xtext.ui.refactoring.IReferenceUpdater;
 
 /**
  * @author Henrik Rentz-Reichert - initial contribution and API
  *
  */
-public class ResourceModule extends
-		AbstractGenericResourceRuntimeModule {
+public class ResourceModule extends AbstractGenericResourceRuntimeModule {
 
 	/* (non-Javadoc)
 	 * @see org.eclipse.xtext.resource.generic.AbstractGenericResourceRuntimeModule#getLanguageName()
@@ -31,6 +34,14 @@ public class ResourceModule extends
 	@Override
 	protected String getFileExtensions() {
 		return "behavior";
+	}
+	
+	public Class<? extends IReferenceUpdater> bindIReferenceUpdater() {
+		return DiagramReferenceUpdater.class;
+	}
+	
+	public Class<? extends DiagramAccessBase> bindDiagramAccess() {
+		return DiagramAccess.class;
 	}
 
 }
