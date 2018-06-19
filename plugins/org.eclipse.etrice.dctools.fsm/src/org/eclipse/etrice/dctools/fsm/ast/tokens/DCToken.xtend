@@ -10,7 +10,7 @@
  * 
  *******************************************************************************/
 
-package org.eclipse.etrice.dctools.fsm.ast.internal
+package org.eclipse.etrice.dctools.fsm.ast.tokens
 
 import org.eclipse.jface.text.rules.IToken
 import org.eclipse.xtend.lib.annotations.Data

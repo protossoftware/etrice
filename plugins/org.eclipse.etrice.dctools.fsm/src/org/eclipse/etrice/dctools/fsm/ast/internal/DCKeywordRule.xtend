@@ -12,16 +12,16 @@
 
 package org.eclipse.etrice.dctools.fsm.ast.internal
 
-import org.eclipse.etrice.dctools.fsm.ast.internal.DCToken.Kind
-import org.eclipse.jface.text.rules.WordRule
-import org.eclipse.etrice.dctools.fsm.ast.internal.DCKeywords
 import org.eclipse.etrice.dctools.fsm.ast.DCLanguage
+import org.eclipse.etrice.dctools.fsm.ast.tokens.DCToken
+import org.eclipse.etrice.dctools.fsm.ast.tokens.DCToken.Kind
+import org.eclipse.jface.text.rules.WordRule
 
 class DCKeywordRule extends WordRule {
 	
 	val keywordToken = new DCToken(Kind.KEYWORD)
 	
-	new(org.eclipse.etrice.dctools.fsm.ast.DCLanguage language) {
+	new(DCLanguage language) {
 		super(new DCWordDetector(language.isCFamily))
 		
 		switch language {
@@ -34,7 +34,7 @@ class DCKeywordRule extends WordRule {
 		}
 	}
 	
-	static def isCFamily(org.eclipse.etrice.dctools.fsm.ast.DCLanguage language) {
+	static def isCFamily(DCLanguage language) {
 		language==DCLanguage.C_LANGUAGE || language==DCLanguage.CPP_LANGUAGE
 	}
 }

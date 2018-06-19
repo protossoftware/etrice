@@ -13,24 +13,24 @@
 package org.eclipse.etrice.dctools.fsm.ast
 
 import com.google.common.collect.Iterables
+import org.eclipse.etrice.dctools.fsm.ast.internal.DCBracketRule
+import org.eclipse.etrice.dctools.fsm.ast.internal.DCIdentifierRule
 import org.eclipse.etrice.dctools.fsm.ast.internal.DCKeywordRule
-import org.eclipse.etrice.dctools.fsm.ast.internal.DCToken
-import org.eclipse.etrice.dctools.fsm.ast.internal.DCToken.Kind
+import org.eclipse.etrice.dctools.fsm.ast.internal.DCSpecialCharRule
 import org.eclipse.etrice.dctools.fsm.ast.internal.DCWhitespaceDetector
+import org.eclipse.etrice.dctools.fsm.ast.tokens.DCTextToken
+import org.eclipse.etrice.dctools.fsm.ast.tokens.DCToken
+import org.eclipse.etrice.dctools.fsm.ast.tokens.DCToken.Kind
+import org.eclipse.jface.text.Document
 import org.eclipse.jface.text.rules.EndOfLineRule
 import org.eclipse.jface.text.rules.IRule
+import org.eclipse.jface.text.rules.IToken
 import org.eclipse.jface.text.rules.MultiLineRule
 import org.eclipse.jface.text.rules.NumberRule
 import org.eclipse.jface.text.rules.RuleBasedScanner
 import org.eclipse.jface.text.rules.SingleLineRule
-import org.eclipse.jface.text.rules.WhitespaceRule
-import org.eclipse.etrice.dctools.fsm.ast.internal.DCIdentifierRule
-import org.eclipse.etrice.dctools.fsm.ast.internal.DCBracketRule
-import org.eclipse.etrice.dctools.fsm.ast.internal.DCSpecialCharRule
-import org.eclipse.jface.text.rules.IToken
 import org.eclipse.jface.text.rules.Token
-import org.eclipse.etrice.dctools.fsm.ast.internal.DCTextToken
-import org.eclipse.jface.text.Document
+import org.eclipse.jface.text.rules.WhitespaceRule
 
 class DCScanner {
 	

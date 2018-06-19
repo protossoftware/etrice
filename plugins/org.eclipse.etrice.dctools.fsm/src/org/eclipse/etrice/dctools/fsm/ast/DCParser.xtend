@@ -13,10 +13,6 @@
 package org.eclipse.etrice.dctools.fsm.ast
 
 import java.util.ArrayList
-import org.eclipse.etrice.dctools.fsm.ast.internal.DCBracketToken
-import org.eclipse.etrice.dctools.fsm.ast.internal.DCBracketToken.BracketKind
-import org.eclipse.etrice.dctools.fsm.ast.internal.DCTextToken
-import org.eclipse.etrice.dctools.fsm.ast.internal.DCToken.Kind
 import org.eclipse.etrice.dctools.fsm.ast.nodes.DCAstArrayAccessNode
 import org.eclipse.etrice.dctools.fsm.ast.nodes.DCAstBracketNode
 import org.eclipse.etrice.dctools.fsm.ast.nodes.DCAstBracketNode.BracketType
@@ -29,6 +25,10 @@ import org.eclipse.etrice.dctools.fsm.ast.nodes.DCAstOperationCallNode
 import org.eclipse.etrice.dctools.fsm.ast.nodes.DCAstOtherNode
 import org.eclipse.etrice.dctools.fsm.ast.nodes.DCAstPeriodNode
 import org.eclipse.etrice.dctools.fsm.ast.nodes.DCAstWhitespaceNode
+import org.eclipse.etrice.dctools.fsm.ast.tokens.DCBracketToken
+import org.eclipse.etrice.dctools.fsm.ast.tokens.DCBracketToken.BracketKind
+import org.eclipse.etrice.dctools.fsm.ast.tokens.DCTextToken
+import org.eclipse.etrice.dctools.fsm.ast.tokens.DCToken.Kind
 
 /**
  * 

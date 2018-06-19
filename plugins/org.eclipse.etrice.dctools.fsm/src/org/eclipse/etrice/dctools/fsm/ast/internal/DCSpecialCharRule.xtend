@@ -12,10 +12,11 @@
 
 package org.eclipse.etrice.dctools.fsm.ast.internal
 
-import org.eclipse.jface.text.rules.IRule
+import org.eclipse.etrice.dctools.fsm.ast.tokens.DCToken
+import org.eclipse.etrice.dctools.fsm.ast.tokens.DCToken.Kind
 import org.eclipse.jface.text.rules.ICharacterScanner
+import org.eclipse.jface.text.rules.IRule
 import org.eclipse.jface.text.rules.Token
-import org.eclipse.etrice.dctools.fsm.ast.internal.DCToken.Kind
 
 class DCSpecialCharRule implements IRule {
 	

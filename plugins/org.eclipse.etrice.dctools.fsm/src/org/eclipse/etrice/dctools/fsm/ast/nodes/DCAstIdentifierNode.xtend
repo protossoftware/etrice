@@ -12,9 +12,8 @@
 
 package org.eclipse.etrice.dctools.fsm.ast.nodes
 
-import org.eclipse.etrice.dctools.fsm.ast.nodes.DCAstNode
+import org.eclipse.etrice.dctools.fsm.ast.tokens.DCTextToken
 import org.eclipse.xtend.lib.annotations.Accessors
-import org.eclipse.etrice.dctools.fsm.ast.internal.DCTextToken
 
 @Accessors
 class DCAstIdentifierNode extends DCAstNode {

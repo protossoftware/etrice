@@ -10,9 +10,9 @@
  * 
  *******************************************************************************/
 
-package org.eclipse.etrice.dctools.fsm.ast.internal
+package org.eclipse.etrice.dctools.fsm.ast.tokens
 
-import org.eclipse.etrice.dctools.fsm.ast.internal.DCBracketToken.BracketKind
+import org.eclipse.etrice.dctools.fsm.ast.tokens.DCBracketToken.BracketKind
 import org.eclipse.xtend.lib.annotations.Data
 
 @Data

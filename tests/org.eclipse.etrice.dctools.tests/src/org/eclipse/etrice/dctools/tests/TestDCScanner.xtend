@@ -16,14 +16,14 @@ import org.eclipse.etrice.dctools.fsm.ast.DCLanguage
 import org.eclipse.etrice.dctools.fsm.ast.DCScanner
 import org.junit.Before
 import org.junit.Test
-import org.eclipse.etrice.dctools.fsm.ast.internal.DCBracketToken.BracketKind
-import org.eclipse.etrice.dctools.fsm.ast.internal.DCToken.Kind
 
 import static org.eclipse.etrice.dctools.tests.TestConstants.*
 import static org.hamcrest.CoreMatchers.*
 import static org.junit.Assert.*
-import org.eclipse.etrice.dctools.fsm.ast.internal.DCBracketToken
-import org.eclipse.etrice.dctools.fsm.ast.internal.DCToken
+import org.eclipse.etrice.dctools.fsm.ast.tokens.DCToken.Kind
+import org.eclipse.etrice.dctools.fsm.ast.tokens.DCBracketToken.BracketKind
+import org.eclipse.etrice.dctools.fsm.ast.tokens.DCToken
+import org.eclipse.etrice.dctools.fsm.ast.tokens.DCBracketToken
 
 class TestDCScanner {
 	

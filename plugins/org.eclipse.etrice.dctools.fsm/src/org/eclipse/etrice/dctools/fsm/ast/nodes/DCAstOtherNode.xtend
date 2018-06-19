@@ -12,7 +12,7 @@
 
 package org.eclipse.etrice.dctools.fsm.ast.nodes
 
-import org.eclipse.etrice.dctools.fsm.ast.internal.DCTextToken
+import org.eclipse.etrice.dctools.fsm.ast.tokens.DCTextToken
 import org.eclipse.xtend.lib.annotations.Accessors
 
 @Accessors

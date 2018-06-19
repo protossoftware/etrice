@@ -16,5 +16,6 @@ Require-Bundle: org.eclipse.jface.text,
 Export-Package: org.eclipse.etrice.dctools.fsm.ast,
  org.eclipse.etrice.dctools.fsm.ast.internal;x-friends:="org.eclipse.etrice.dctools.tests",
  org.eclipse.etrice.dctools.fsm.ast.nodes,
+ org.eclipse.etrice.dctools.fsm.ast.tokens,
  org.eclipse.etrice.dctools.fsm.ast.util
 
