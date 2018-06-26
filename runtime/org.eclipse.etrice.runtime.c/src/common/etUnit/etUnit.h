@@ -27,7 +27,10 @@ extern "C" {
 #define _ETUNIT_H_
 
 #include "etDatatypes.h"
+#include <string.h>
 
+// compile time evaluated
+#define ETUNIT_FILENAME (strrchr(__FILE__, '\\') ? strrchr(__FILE__, '\\') + 1 : (strrchr(__FILE__, '/') ? strrchr(__FILE__, '/') + 1 : __FILE__))
 
 /**
  * opens a file to protocol the test results
@@ -107,43 +110,43 @@ void etUnit_closeAll(etInt16 id);
 /**
  * calls \ref expectTrue()
  */
-#define EXPECT_TRUE(id, msg, condition)		expectTrue(id, msg, condition, __FILE__, __LINE__)
+#define EXPECT_TRUE(id, msg, condition)		expectTrue(id, msg, condition, ETUNIT_FILENAME, __LINE__)
 /** calls \ref expectFalse() */
-#define EXPECT_FALSE(id, msg, condition)	expectFalse(id, msg, condition, __FILE__, __LINE__)
+#define EXPECT_FALSE(id, msg, condition)	expectFalse(id, msg, condition, ETUNIT_FILENAME, __LINE__)
 
 /*
  * signed integer values
  */
 /** calls \ref expectEqualInt8() */
-#define EXPECT_EQUAL_INT8(id, msg, expected, actual)		expectEqualInt8(id, msg, expected, actual, __FILE__, __LINE__)
+#define EXPECT_EQUAL_INT8(id, msg, expected, actual)		expectEqualInt8(id, msg, expected, actual, ETUNIT_FILENAME, __LINE__)
 /** calls \ref expectEqualInt16() */
-#define EXPECT_EQUAL_INT16(id, msg, expected, actual)		expectEqualInt16(id, msg, expected, actual, __FILE__, __LINE__)
+#define EXPECT_EQUAL_INT16(id, msg, expected, actual)		expectEqualInt16(id, msg, expected, actual, ETUNIT_FILENAME, __LINE__)
 /** calls \ref expectEqualInt32() */
-#define EXPECT_EQUAL_INT32(id, msg, expected, actual)		expectEqualInt32(id, msg, expected, actual, __FILE__, __LINE__)
+#define EXPECT_EQUAL_INT32(id, msg, expected, actual)		expectEqualInt32(id, msg, expected, actual, ETUNIT_FILENAME, __LINE__)
 
 /*
  * unsigned integer values
  */
 /** calls \ref expectEqualUInt8() */
-#define EXPECT_EQUAL_UINT8(id, msg, expected, actual)		expectEqualUInt8(id, msg, expected, actual, __FILE__, __LINE__)
+#define EXPECT_EQUAL_UINT8(id, msg, expected, actual)		expectEqualUInt8(id, msg, expected, actual, ETUNIT_FILENAME, __LINE__)
 /** calls \ref expectEqualUInt16() */
-#define EXPECT_EQUAL_UINT16(id, msg, expected, actual)		expectEqualUInt16(id, msg, expected, actual, __FILE__, __LINE__)
+#define EXPECT_EQUAL_UINT16(id, msg, expected, actual)		expectEqualUInt16(id, msg, expected, actual, ETUNIT_FILENAME, __LINE__)
 /** calls \ref expectEqualUInt32() */
-#define EXPECT_EQUAL_UINT32(id, msg, expected, actual)		expectEqualUInt32(id, msg, expected, actual, __FILE__, __LINE__)
+#define EXPECT_EQUAL_UINT32(id, msg, expected, actual)		expectEqualUInt32(id, msg, expected, actual, ETUNIT_FILENAME, __LINE__)
 
 /*
  * float values
  */
 #ifdef ET_FLOAT32
 /** calls \ref expectEqualFloat32() */
-#define EXPECT_EQUAL_FLOAT32(id, msg, expected, actual, precision)		expectEqualFloat32(id, msg, expected, actual, precision, __FILE__, __LINE__)
-#define EXPECT_RANGE_FLOAT32(id, msg, min, max, actual)		expectRangeFloat32(id, msg, min, max, actual, __FILE__, __LINE__)
+#define EXPECT_EQUAL_FLOAT32(id, msg, expected, actual, precision)		expectEqualFloat32(id, msg, expected, actual, precision, ETUNIT_FILENAME, __LINE__)
+#define EXPECT_RANGE_FLOAT32(id, msg, min, max, actual)		expectRangeFloat32(id, msg, min, max, actual, ETUNIT_FILENAME, __LINE__)
 #endif
 
 #ifdef ET_FLOAT64
 /** calls \ref expectEqualFloat64() */
-#define EXPECT_EQUAL_FLOAT64(id, msg, expected, actual, precision)		expectEqualFloat64(id, msg, expected, actual, precision, __FILE__, __LINE__)
-#define EXPECT_RANGE_FLOAT64(id, msg, min, max, actual)		expectRangeFloat64(id, msg, min, max, actual, __FILE__, __LINE__)
+#define EXPECT_EQUAL_FLOAT64(id, msg, expected, actual, precision)		expectEqualFloat64(id, msg, expected, actual, precision, ETUNIT_FILENAME, __LINE__)
+#define EXPECT_RANGE_FLOAT64(id, msg, min, max, actual)		expectRangeFloat64(id, msg, min, max, actual, ETUNIT_FILENAME, __LINE__)
 #endif
 
 
@@ -152,26 +155,26 @@ void etUnit_closeAll(etInt16 id);
  */
 /** calls \ref expect_equal_void_ptr() */
 #define EXPECT_EQUAL_PTR(id, msg, expected, actual) \
-	expect_equal_void_ptr(id, msg, (const void*) expected, (const void*) actual, __FILE__, __LINE__)
+	expect_equal_void_ptr(id, msg, (const void*) expected, (const void*) actual, ETUNIT_FILENAME, __LINE__)
 
 /*
  *  Strings
  */
-#define EXPECT_EQUAL_STR(id, msg, expected, actual) expectEqualStr(id, msg, expected, actual, __FILE__, __LINE__)
+#define EXPECT_EQUAL_STR(id, msg, expected, actual) expectEqualStr(id, msg, expected, actual, ETUNIT_FILENAME, __LINE__)
 
 /*
  * more specialized functions
  */
 /** calls \ref expectOrderStart() */
 #ifdef __cplusplus
-#define EXPECT_ORDER_START(id, list, size)		expectOrderStart(id, list.getData(), size, __FILE__, __LINE__)
+#define EXPECT_ORDER_START(id, list, size)		expectOrderStart(id, list.getData(), size, ETUNIT_FILENAME, __LINE__)
 #else
-#define EXPECT_ORDER_START(id, list, size)		expectOrderStart(id, list, size, __FILE__, __LINE__)
+#define EXPECT_ORDER_START(id, list, size)		expectOrderStart(id, list, size, ETUNIT_FILENAME, __LINE__)
 #endif
 /** calls \ref expectOrder() */
-#define EXPECT_ORDER(id, msg, val)				expectOrder(id, msg, val, __FILE__, __LINE__)
+#define EXPECT_ORDER(id, msg, val)				expectOrder(id, msg, val, ETUNIT_FILENAME, __LINE__)
 /** calls \ref expectOrderEnd() */
-#define EXPECT_ORDER_END(id, msg, val)			expectOrderEnd(id, msg, val, __FILE__, __LINE__)
+#define EXPECT_ORDER_END(id, msg, val)			expectOrderEnd(id, msg, val, ETUNIT_FILENAME, __LINE__)
 
 
 /*

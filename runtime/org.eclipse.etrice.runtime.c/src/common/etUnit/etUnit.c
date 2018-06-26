@@ -65,7 +65,6 @@ typedef etFloat32 etUnitFloat;
 #endif
 #endif
 
-
 /* forward declarations of private functions */
 static void expect_equal_int(etInt16 id, const char* message, etInt32 expected, etInt32 actual, const char* file, int line);
 /* currently not used
@@ -93,9 +92,9 @@ void etUnit_open(const char* testResultPath, const char* testFileName) {
 		int i;
 
 		if (testResultPath != NULL)
-			sprintf(filename, "%s/%s.etu", testResultPath, testFileName);
+			snprintf(filename, sizeof(filename), "%s/%s.etu", testResultPath, testFileName);
 		else
-			sprintf(filename, "%s.etu", testFileName);
+			snprintf(filename, sizeof(filename),"%s.etu", testFileName);
 
 		/* init global data */
 		for (i = 0; i < ETUNIT_ORDER_MAX; ++i)
@@ -198,7 +197,7 @@ void etUnit_testFinished(etInt16 id) {
 void expectTrue(etInt16 id, const char* message, etBool condition, const char* file, int line) {
 	if (condition == ET_FALSE) {
 		char testresult[ETUNIT_FAILURE_TEXT_LEN];
-		sprintf(testresult, "%s: *** EXPECT_TRUE == FALSE", message);
+		snprintf(testresult, sizeof(testresult), "%s: *** EXPECT_TRUE == FALSE", message);
 		etUnit_handleExpect(id, ET_FALSE, testresult, "TRUE", "FALSE", file, line);
 	} else {
 		etUnit_handleExpect(id, ET_TRUE, "", NULL, NULL, file, line);
@@ -208,7 +207,7 @@ void expectTrue(etInt16 id, const char* message, etBool condition, const char* f
 void expectFalse(etInt16 id, const char* message, etBool condition, const char* file, int line) {
 	if (condition == ET_TRUE) {
 		char testresult[ETUNIT_FAILURE_TEXT_LEN];
-		sprintf(testresult, "%s: EXPECT_FALSE == TRUE", message);
+		snprintf(testresult, sizeof(testresult), "%s: EXPECT_FALSE == TRUE", message);
 		etUnit_handleExpect(id, ET_FALSE, testresult, "FALSE", "TRUE", file, line);
 	} else {
 		etUnit_handleExpect(id, ET_TRUE, "", NULL, NULL, file, line);
@@ -243,7 +242,7 @@ void expect_equal_void_ptr(etInt16 id, const char* message, const void* expected
 	if (expected != actual) {
 		char testresult[ETUNIT_FAILURE_TEXT_LEN];
 		char exp[16], act[16];
-		sprintf(testresult, "%s: expected=%ld, actual=%ld", message, (etUInt32) expected, (etUInt32) actual);
+		snprintf(testresult,  sizeof(testresult), "%s: expected=%ld, actual=%ld", message, (etUInt32) expected, (etUInt32) actual);
 		sprintf(exp, "%ld", (etUInt32) expected);
 		sprintf(act, "%ld", (etUInt32) actual);
 		etUnit_handleExpect(id, ET_FALSE, testresult, exp, act, file, line);
@@ -255,7 +254,7 @@ void expect_equal_void_ptr(etInt16 id, const char* message, const void* expected
 void expectEqualStr(etInt16 id, const char* message, const char* expected, const char* actual, const char* file, int line) {
 	if (!(expected || actual || strcmp(expected, actual) == 0)) {
 		char testresult[ETUNIT_FAILURE_TEXT_LEN];
-		sprintf(testresult, "%s: expected=%s, actual=%s", message, expected, actual);
+		snprintf(testresult,  sizeof(testresult), "%s: expected=%s, actual=%s", message, expected, actual);
 		etUnit_handleExpect(id, ET_FALSE, testresult, expected, actual, file, line);
 	} else {
 		etUnit_handleExpect(id, ET_TRUE, "", NULL, NULL, file, line);
@@ -301,7 +300,7 @@ void expectOrder(etInt16 id, const char* message, etInt16 identifier, const char
 			if (info->list[info->currentIndex] != identifier) {
 				char testresult[ETUNIT_FAILURE_TEXT_LEN];
 				char exp[16], act[16];
-				sprintf(testresult, "EXPECT_ORDER %s: index=%d, expected=%d, actual=%d", message, info->currentIndex, identifier,
+				snprintf(testresult,  sizeof(testresult), "EXPECT_ORDER %s: index=%d, expected=%d, actual=%d", message, info->currentIndex, identifier,
 						info->list[info->currentIndex]);
 				sprintf(exp, "%d", identifier);
 				sprintf(act, "%d", info->list[info->currentIndex]);
@@ -312,7 +311,7 @@ void expectOrder(etInt16 id, const char* message, etInt16 identifier, const char
 			}
 		} else {
 			char testresult[ETUNIT_FAILURE_TEXT_LEN];
-			sprintf(testresult, "EXPECT_ORDER: index(%d) is too big in %s", info->currentIndex, message);
+			snprintf(testresult, sizeof(testresult), "EXPECT_ORDER: index(%d) is too big in %s", info->currentIndex, message);
 			etUnit_handleExpect(id, ET_FALSE, testresult, NULL, NULL, file, line);
 			etLogger_logInfoF("EXPECT_ORDER: index too big in %s", message);
 		}
@@ -324,7 +323,7 @@ void expectOrderEnd(etInt16 id, const char* message, etInt16 identifier, const c
 	expectOrder(id, message, identifier, file, line);
 	if (info->currentIndex != info->size) {
 		char testresult[ETUNIT_FAILURE_TEXT_LEN];
-		sprintf(testresult, "EXPECT_ORDER_END %s: wrong index at the end: expected=%d, actual=%d", message, info->size, info->currentIndex);
+		snprintf(testresult,  sizeof(testresult), "EXPECT_ORDER_END %s: wrong index at the end: expected=%d, actual=%d", message, info->size, info->currentIndex);
 		etUnit_handleExpect(id, ET_FALSE, testresult, NULL, NULL, file, line);
 	}
 }
@@ -339,7 +338,7 @@ static void expect_equal_int(etInt16 id, const char* message, etInt32 expected, 
 	if (expected != actual) {
 		char testresult[ETUNIT_FAILURE_TEXT_LEN];
 		char exp[16], act[16];
-		sprintf(testresult, "%s: expected=%ld, actual=%ld", message, expected, actual);
+		snprintf(testresult, sizeof(testresult), "%s: expected=%ld, actual=%ld", message, expected, actual);
 		sprintf(exp, "%ld", expected);
 		sprintf(act, "%ld", actual);
 		etUnit_handleExpect(id, ET_FALSE, testresult, exp, act, file, line);
@@ -372,7 +371,7 @@ static void expect_equal_uint(etInt16 id, const char* message, etUInt32 expected
 	if (expected != actual) {
 		char testresult[ETUNIT_FAILURE_TEXT_LEN];
 		char exp[16], act[16];
-		sprintf(testresult, "%s: expected=%lu, actual=%lu", message, expected, actual);
+		snprintf(testresult, sizeof(testresult), "%s: expected=%lu, actual=%lu", message, expected, actual);
 		sprintf(exp, "%lu", expected);
 		sprintf(act, "%lu", actual);
 		etUnit_handleExpect(id, ET_FALSE, testresult, exp, act, file, line);
@@ -406,7 +405,7 @@ static void expect_equal_float(etInt16 id, const char* message, etUnitFloat expe
 	if (expected - actual < -precision || expected - actual > precision) {
 		char testresult[ETUNIT_FAILURE_TEXT_LEN];
 		char exp[16], act[16];
-		sprintf(testresult, "%s: expected=%f, actual=%f", message, expected, actual);
+		snprintf(testresult, sizeof(testresult), "%s: expected=%f, actual=%f", message, expected, actual);
 		sprintf(exp, "%f", expected);
 		sprintf(act, "%f", actual);
 		etUnit_handleExpect(id, ET_FALSE, testresult, exp, act, file, line);
@@ -419,7 +418,7 @@ static void expect_range_float(etInt16 id, const char* message, etUnitFloat min,
 	if (actual < min || actual > max) {
 		char testresult[ETUNIT_FAILURE_TEXT_LEN];
 		char exp[64], act[16];
-		sprintf(testresult, "%s: min=%f, max=%f, actual=%f", message, min, max, actual);
+		snprintf(testresult, sizeof(testresult), "%s: min=%f, max=%f, actual=%f", message, min, max, actual);
 		if (actual < min) {
 			sprintf(exp, ">=%f(min)", min);
 			sprintf(act, "%f", actual);
