@@ -16,7 +16,7 @@ import org.eclipse.etrice.dctools.fsm.ast.nodes.DCAstNode
 import org.eclipse.xtend.lib.annotations.Accessors
 
 @Accessors
-class DCAstBracketNode extends DCAstNode {
+class DCAstBracketNode extends DCAstTextNode {
 	
 	enum BracketType {
 		ROUND,
@@ -25,20 +25,22 @@ class DCAstBracketNode extends DCAstNode {
 	}
 	
 	BracketType type
+	int posClose
 	boolean closed
 	
-	new(DCAstNode parent, BracketType type, DCAstNode contents) {
-		this(parent, type, contents, true)
-	}
-	
-	new(DCAstNode parent, BracketType type, DCAstNode contents, boolean closed) {
-		super(parent, 2)
+	new(DCAstNode parent, BracketType type, DCAstNode contents, int posOpen, int posClose) {
+		super(parent, 2, posOpen, posOpen+1)
 		this.type = type
-		this.closed = closed
+		this.posClose = posClose
+		this.closed = posClose>=0
 		
 		if (contents!==null) {
 			contents.parent = this
 		}
+	}
+	
+	new(DCAstNode parent, BracketType type, DCAstNode contents, int posOpen) {
+		this(parent, type, contents, posOpen, -1)
 	}
 	
 	def left() {
@@ -69,4 +71,5 @@ class DCAstBracketNode extends DCAstNode {
 		println(indent + "DCAstBracketNode " + this.toString)
 	}
 	
+	override def String getText() { toString }
 }

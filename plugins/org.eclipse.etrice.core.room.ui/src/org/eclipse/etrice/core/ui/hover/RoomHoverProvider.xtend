@@ -13,11 +13,10 @@
 package org.eclipse.etrice.core.ui.hover
 
 import com.google.inject.Inject
-import org.eclipse.emf.ecore.EObject
 import org.eclipse.etrice.core.common.ui.hover.KeywordEObjectTextHover
 import org.eclipse.etrice.core.fsm.fSM.DetailCode
 import org.eclipse.etrice.core.services.RoomGrammarAccess
-import org.eclipse.etrice.core.ui.util.UIExpressionUtil
+import org.eclipse.etrice.dctools.ast.DCUtil
 import org.eclipse.jface.text.Region
 import org.eclipse.xtext.RuleCall
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils
@@ -26,8 +25,8 @@ import org.eclipse.xtext.util.Tuples
 
 class RoomHoverProvider extends KeywordEObjectTextHover {
 	
-	@Inject
-	RoomGrammarAccess grammar
+	@Inject RoomGrammarAccess grammar
+	@Inject DCUtil util
 	
 	override protected getXtextElementAt(XtextResource resource, int offset) {
 		// lookup expression
@@ -36,9 +35,13 @@ class RoomHoverProvider extends KeywordEObjectTextHover {
 			val leafNode = NodeModelUtils.findLeafNodeAtOffset(parseResult.rootNode, offset)
 			if(leafNode?.grammarElement instanceof RuleCall) {
 				if((leafNode.grammarElement as RuleCall).rule == grammar.CC_STRINGRule && leafNode.semanticElement instanceof DetailCode){
-					val exprFeature = UIExpressionUtil.findAtOffset(leafNode, offset)
-					if(exprFeature?.data instanceof EObject)
-						return Tuples.create(exprFeature.data as EObject, new Region(offset, exprFeature.id.length))
+//					println("RoomHoverProvider at offset " + offset + " " + leafNode.offset + " " + leafNode.text.substring(offset - leafNode.offset))
+					val result = util.findAtOffset(leafNode, offset)
+					if (result!==null) {
+//						val begin = result.begin
+//						println("RoomHoverProvider hit " + (leafNode.offset + result.begin) +" " + result.length + " " + leafNode.text.substring(begin, begin + result.length))
+						return Tuples.create(result.object, new Region(leafNode.offset + result.begin, result.length))
+					}
 				}
 			}
 		}

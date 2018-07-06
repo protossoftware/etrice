@@ -62,7 +62,7 @@ class DCTranslatorVisitor implements IDCAstNodeVisitor {
 		else {
 			if (!node.skipOutput) {
 				switch node {
-					DCAstIdentifierNode: currentSB.append(node.identifier)
+					DCAstIdentifierNode: currentSB.append(node.id)
 					DCAstPeriodNode: currentSB.append(".")
 					DCAstWhitespaceNode: currentSB.append(node.text)
 					DCAstOtherNode: currentSB.append(node.text)
@@ -159,7 +159,7 @@ class DCTranslatorVisitor implements IDCAstNodeVisitor {
 		val translated =
 			if (ifItemNode instanceof DCAstIdentifierNode) {
 				// accessed as scalar (means broadcast for replicated port)
-				val inst = ifItemNode.identifier
+				val inst = ifItemNode.id
 				translationProvider.getInterfaceItemMessageText(ifItem, msg, inst, args, null, msgNode.originalText)
 			}
 			else if (ifItemNode instanceof DCAstArrayAccessNode) {

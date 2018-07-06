@@ -166,8 +166,8 @@ class TestDCScanner {
 	}
 	
 	@Test
-	def void testSpacyArrayMemberAccessAndCall() {
-		val tokens = scanner.scan(TEST_SPACY_ARRAY_MEMBER_ACCESS_AND_CALL)
+	def void testSpaciousArrayMemberAccessAndCall() {
+		val tokens = scanner.scan(TEST_SPACIOUS_ARRAY_MEMBER_ACCESS_AND_CALL)
 		assertThat(tokens.size, is(23))
 		
 		var pos = 0

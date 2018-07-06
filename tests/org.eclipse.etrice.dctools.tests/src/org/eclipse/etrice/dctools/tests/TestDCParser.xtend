@@ -149,7 +149,7 @@ class TestDCParser {
 		// it is an identifier node
 		node = node.children.get(0)
 		assertTrue(node instanceof DCAstIdentifierNode)
-		assertThat((node as DCAstIdentifierNode).identifier, is(TEST_IDENTIFIER))
+		assertThat((node as DCAstIdentifierNode).id, is(TEST_IDENTIFIER))
 		
 		prettyPrint("testIdentifier", TEST_IDENTIFIER, result, 1, 3)
 	}
@@ -257,11 +257,11 @@ class TestDCParser {
 	}
 	
 	@Test
-	def void testSpacyArrayMemberAccessAndCall() {
-		val result = parser.parse(TEST_SPACY_ARRAY_MEMBER_ACCESS_AND_CALL)
+	def void testSpaciousArrayMemberAccessAndCall() {
+		val result = parser.parse(TEST_SPACIOUS_ARRAY_MEMBER_ACCESS_AND_CALL)
 		assertNotNull(result)
 		
-		prettyPrint("testSpacyArrayMemberAccessAndCall", TEST_SPACY_ARRAY_MEMBER_ACCESS_AND_CALL, result, 23, 27)
+		prettyPrint("testSpacyArrayMemberAccessAndCall", TEST_SPACIOUS_ARRAY_MEMBER_ACCESS_AND_CALL, result, 23, 27)
 	}
 	
 	@Test

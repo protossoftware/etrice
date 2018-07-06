@@ -31,7 +31,7 @@ class DCAstPrinter implements IDCAstNodeVisitor {
 		
 		switch node {
 			DCAstBracketNode: sb.append(node.left)
-			DCAstIdentifierNode: sb.append(node.identifier)
+			DCAstIdentifierNode: sb.append(node.id)
 			DCAstPeriodNode: sb.append(".")
 			DCAstWhitespaceNode: sb.append(node.text)
 			DCAstOtherNode: sb.append(node.text)

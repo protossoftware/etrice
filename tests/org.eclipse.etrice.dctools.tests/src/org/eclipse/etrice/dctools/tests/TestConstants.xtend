@@ -32,7 +32,7 @@ interface TestConstants {
 	static val TEST_MEMBER_ACCESS = "field.member"
 	static val TEST_ARRAY_MEMBER_ACCESS = "field[1+2].member"
 	static val TEST_ARRAY_MEMBER_ACCESS_AND_CALL = TEST_ARRAY_MEMBER_ACCESS + ".op()"
-	static val TEST_SPACY_ARRAY_MEMBER_ACCESS_AND_CALL = "field [ 1 + 2 ]\n\t. member . op ( )"
+	static val TEST_SPACIOUS_ARRAY_MEMBER_ACCESS_AND_CALL = "field [ 1 + 2 ]\n\t. member . op ( )"
 	static val TEST_CODE = "DC var = new DC(); port.message(var);"
 	static val TEST_CODE1 = "field.member1.member2[3].operation(x+4)"
 	static val TEST_CODE2 = '''

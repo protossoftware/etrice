@@ -166,19 +166,21 @@ class DCParser {
 				var b = token.token as DCBracketToken
 				if (b.bracketKind==left) {
 					val contents = Match(parent)
+					val leftPos = token.begin
 					token = read
 					if (token!==null) {
 						if (token.token instanceof DCBracketToken) {
+							val rightPos = token.begin
 							b = token.token as DCBracketToken
 							if (b.bracketKind==right) {
-								return new DCAstBracketNode(parent, type, contents)
+								return new DCAstBracketNode(parent, type, contents, leftPos, rightPos)
 							}
 						}
 						unread // second token
 					}
 					else {
 						// we reached the end without a matching right bracket
-						return new DCAstBracketNode(parent, type, contents, false)
+						return new DCAstBracketNode(parent, type, contents, leftPos)
 					}
 					unread(contents)
 				}
@@ -203,7 +205,7 @@ class DCParser {
 			var token = read
 			while (token!==null) {
 				if (token.token.kind==Kind.PERIOD) {
-					val pNode = new DCAstPeriodNode(null)
+					val pNode = new DCAstPeriodNode(null, token.begin)
 					val wsNode = Whitespace(null)
 					val cNode = Call(null)
 					val wsNode2 = Whitespace(null)
@@ -327,7 +329,7 @@ class DCParser {
 		
 		if (count>0) {
 			val ws = text.substring(begin, end)
-			return new DCAstWhitespaceNode(parent, count, ws)
+			return new DCAstWhitespaceNode(parent, count, begin, ws)
 		}
 		
 		return null

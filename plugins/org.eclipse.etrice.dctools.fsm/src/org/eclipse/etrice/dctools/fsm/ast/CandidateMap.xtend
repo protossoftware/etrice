@@ -17,4 +17,15 @@ import org.eclipse.emf.ecore.EObject
 
 class CandidateMap extends HashMap<String, EObject> {
 	
+	def CandidateMap getMatches(String prefix) {
+		val result = new CandidateMap
+		
+		for (entry : entrySet) {
+			if (entry.key.startsWith(prefix)) {
+				result.put(entry.key, entry.value)
+			}
+		}
+		
+		return result
+	}
 }
