@@ -21,6 +21,6 @@ eTrice provides a **migration action** which automatically applies the modificat
 <span class="label label-info">Note:</span> The migration assistant relies on the message data names, thus the names should not be removed until you have fully migrated your project and all dependent projects.
 
 <br/>
-In addition eTrice now uses the so-called *Smart Strings* for user code. This is not a breaking change, but it is recommended to migrate to this new syntax also. Using the Transition Data migration action will automatically convert all affected user codes into Smart Strings. Further there is a dedicated migration action for the Smart Strings, see **Migrate to Smart Action Codes** above. Additionally there is a quickfix available:
+In addition eTrice now uses the so-called **Smart Strings** for user code. This is not a breaking change, but it is recommended to migrate to this new syntax also. Using the Transition Data migration action will automatically convert all affected user codes into Smart Strings. Further there is a dedicated migration action for the Smart Strings, see *Migrate to Smart Action Codes* above. Additionally there is a quickfix available:
 
 ![image](images/600-DetailcodeMigration.png)
