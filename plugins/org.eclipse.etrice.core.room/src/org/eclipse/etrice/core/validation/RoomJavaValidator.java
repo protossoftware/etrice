@@ -807,7 +807,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	@Check
 	public void checkMessageData(MessageData m) {
 		if (m.getDeprecatedName()!=null) {
-			warning("The data name of messages is deprecated", RoomPackage.Literals.MESSAGE_DATA__DEPRECATED_NAME, DEPRECATED_MESSAGE_DATA_NAME);
+			warning("The data name of messages is deprecated (always named 'transitionData' in action code)", RoomPackage.Literals.MESSAGE_DATA__DEPRECATED_NAME, DEPRECATED_MESSAGE_DATA_NAME);
 		}
 	}
 }

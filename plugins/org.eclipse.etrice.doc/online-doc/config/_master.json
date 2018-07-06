@@ -47,5 +47,11 @@
 	{
 		"name" : "Developer's Reference",
 		"url"  : "developers-reference.html"
-	}]
+	},
+	{
+		"name" : "Release Notes",
+		"url"  : "release-notes.html"
+	}
+	
+	]
 }
