@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Detail Code Tools for FSM
 Bundle-SymbolicName: org.eclipse.etrice.dctools.fsm
-Bundle-Version: 1.1.3.qualifier
+Bundle-Version: 2.0.0.qualifier
 Automatic-Module-Name: org.eclipse.etrice.dctools.fsm
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-Vendor: Eclipse eTrice

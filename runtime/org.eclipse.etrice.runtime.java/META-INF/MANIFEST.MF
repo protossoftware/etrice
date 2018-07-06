@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: eTrice Java Runtime
 Bundle-SymbolicName: org.eclipse.etrice.runtime.java
-Bundle-Version: 1.1.3.qualifier
+Bundle-Version: 2.0.0.qualifier
 Export-Package: org.eclipse.etrice.runtime.java.config,
  org.eclipse.etrice.runtime.java.debugging,
  org.eclipse.etrice.runtime.java.etunit,
