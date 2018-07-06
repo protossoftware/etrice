@@ -4,7 +4,7 @@ Release Notes
 
 Noteworthy release changes are described here.
 
-1.1.3 Migration
+2.0.0 Migration
 --------------------------
 
 <span class="label label-danger">Breaking Changes:</span> This release contains a breaking change to models used with previous versions.
