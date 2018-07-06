@@ -16,13 +16,13 @@ import org.eclipse.etrice.dctools.fsm.ast.tokens.DCTextToken
 import org.eclipse.xtend.lib.annotations.Accessors
 
 @Accessors
-class DCAstOtherNode extends DCAstNode {
+class DCAstOtherNode extends DCAstTextNode {
 	
 	String text
 	DCTextToken token
 	
 	new(DCAstNode parent, String text, DCTextToken token) {
-		super(parent, 1)
+		super(parent, 1, token.begin, token.begin+token.length)
 		this.text = text
 		this.token = token
 	}

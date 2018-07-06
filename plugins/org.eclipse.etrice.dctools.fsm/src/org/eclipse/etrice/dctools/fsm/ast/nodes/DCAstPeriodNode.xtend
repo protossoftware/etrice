@@ -13,14 +13,17 @@
 package org.eclipse.etrice.dctools.fsm.ast.nodes
 
 import org.eclipse.etrice.dctools.fsm.ast.nodes.DCAstNode
+import org.eclipse.etrice.dctools.fsm.ast.internal.DCSpecialCharRule
 
-class DCAstPeriodNode extends DCAstNode {
+class DCAstPeriodNode extends DCAstTextNode {
 	
-	new(DCAstNode parent) {
-		super(parent, 1)
+	new(DCAstNode parent, int pos) {
+		super(parent, 1, pos, pos+1)
 	}
 	
 	override protected doPrint(String indent) {
 		println(indent + "DCAstPeriodNode")
 	}
+	
+	override String getText() { String.valueOf(DCSpecialCharRule.PERIOD) }
 }

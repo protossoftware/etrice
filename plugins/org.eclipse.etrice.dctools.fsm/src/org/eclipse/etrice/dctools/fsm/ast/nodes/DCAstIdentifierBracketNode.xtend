@@ -33,7 +33,7 @@ abstract class DCAstIdentifierBracketNode extends DCAstNode {
 	}
 	
 	def String id() {
-		idNode.identifier
+		idNode.id
 	}
 	
 	def String ws() {

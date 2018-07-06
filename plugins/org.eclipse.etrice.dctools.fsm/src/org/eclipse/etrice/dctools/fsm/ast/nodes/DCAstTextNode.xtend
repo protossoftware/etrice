@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018 protos software gmbh (http://www.protos.de).
+ * Copyright (c) 2011 protos software gmbh (http://www.protos.de).
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -12,22 +12,19 @@
 
 package org.eclipse.etrice.dctools.fsm.ast.nodes
 
-import org.eclipse.etrice.dctools.fsm.ast.nodes.DCAstNode
 import org.eclipse.xtend.lib.annotations.Accessors
 
 @Accessors
-class DCAstWhitespaceNode extends DCAstTextNode {
+abstract class DCAstTextNode extends DCAstNode {
 	
-	String text
+	int begin
+	int end
 	
-	new(DCAstNode parent, int readTokens, int pos, String text) {
-		super(parent, readTokens, pos, pos+text.length)
-		this.text = text
+	new(DCAstNode parent, int readTokens, int begin, int end) {
+		super(parent, readTokens)
+		this.begin = begin
+		this.end = end
 	}
 	
-	override protected doPrint(String indent) {
-		println(indent + "DCAstWhitespaceNode '" + text + "'")
-	}
-	
-	override getText() { text }
+	abstract def String getText()
 }

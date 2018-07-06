@@ -20,11 +20,11 @@ import org.eclipse.jface.text.rules.Token
 
 class DCSpecialCharRule implements IRule {
 	
+	public static val char SEP = ';'
+	public static val char PERIOD = '.'
+	
 	val period = new DCToken(Kind.PERIOD)
 	val sep = new DCToken(Kind.STATEMENT_SEP)
-	
-	val char SEP = ';'
-	val char PERIOD = '.'
 	
 	override evaluate(ICharacterScanner scanner) {
 		val c = scanner.read as char

@@ -226,17 +226,21 @@ public class RoomProposalProvider extends AbstractRoomProposalProvider {
 	
 	@Inject
 	RoomExpressionProposalProvider expressionProposalAdapter;
+	//@Inject private DCUtil util;
 	
 	@Override
 	public void complete_CC_STRING(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		String text = context.getCurrentNode().getText();
-		int localOffset = context.getOffset() - context.getCurrentNode().getOffset();
-		int globalOffset = context.getOffset();
 		if (context.getCurrentNode().getSemanticElement() instanceof DetailCode) {
+			String text = context.getCurrentNode().getText();
+			int localOffset = context.getOffset() - context.getCurrentNode().getOffset();
+			int globalOffset = context.getOffset();
 			DetailCode detailCode = (DetailCode) context.getCurrentNode().getSemanticElement();
 			IDetailExpressionProvider exprPovider = UIExpressionUtil.getExpressionProvider(detailCode);
 			for(ICompletionProposal proposal : expressionProposalAdapter.createProposals(exprPovider, text, localOffset, globalOffset))
 				acceptor.accept(proposal);
+			
+			// new implementation TODO
+			//util.getProposals(context.getCurrentNode(), context.getOffset());
 		}
 
 		super.complete_CC_STRING(model, ruleCall, context, acceptor);

@@ -99,20 +99,21 @@ class DCLinker implements IDCAstNodeVisitor {
 	}
 	
 	protected def dispatch void link(DCAstIdentifierNode node) {
-		val candidates = getCandidates(FeatureType.SCALAR)
-		node.linkedObject = candidates.get(node.identifier)
-		replaceContext(node.linkedObject)
+		node.doLink(FeatureType.SCALAR, node.id)
 	}
 	
 	protected def dispatch void link(DCAstArrayAccessNode node) {
-		val candidates = getCandidates(FeatureType.ARRAY)
-		node.linkedObject = candidates.get(node.id)
-		replaceContext(node.linkedObject)
+		node.doLink(FeatureType.ARRAY, node.id)
 	}
 	
 	protected def dispatch void link(DCAstOperationCallNode node) {
-		val candidates = getCandidates(FeatureType.OPERATION)
-		node.linkedObject = candidates.get(node.id)
+		node.doLink(FeatureType.OPERATION, node.id)
+	}
+	
+	protected def void doLink(DCAstNode node, FeatureType ft, String name) {
+		val candidates = getCandidates(ft)
+		node.linkedObject = candidates.get(name)
+		node.linkedData = candidates
 		replaceContext(node.linkedObject)
 	}
 	
