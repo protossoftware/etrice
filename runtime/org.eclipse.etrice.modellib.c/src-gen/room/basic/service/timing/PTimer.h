@@ -16,6 +16,7 @@
 #define ET_TIMER_PERIODIC	0x02
 /*--------------------- end user code ---------------------*/
 
+/* include all referenced room classes */
 
 
 /* message IDs */

@@ -24,7 +24,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.etrice.core.common.scoping.ModelLocatorUriResolver;
-import org.eclipse.etrice.core.genmodel.fsm.base.ILogger;
+import org.eclipse.etrice.core.genmodel.fsm.ILogger;
 import org.eclipse.etrice.generator.fsm.base.NullLogger;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.XtextResourceSet;
@@ -153,10 +153,15 @@ public class ModelLoader {
 	 */
 	private boolean addResourceURI(String uri) {
 		URI can = null;
-		if (uri.startsWith("platform:/") || uri.startsWith("classpath:/") || uri.startsWith("file:/"))
+		try {
+			// try valid uri
 			can = URI.createURI(uri);
-		else
+		} catch(IllegalArgumentException e1) {
+		}
+		if(can == null || !(can.isFile() || can.isArchive() || can.isPlatform() || can.scheme() == "classpath")) {
+			// try file path
 			can = URI.createFileURI(uri);
+		}
 		
 		if (loadedModelURIs.contains(can))
 			return false;

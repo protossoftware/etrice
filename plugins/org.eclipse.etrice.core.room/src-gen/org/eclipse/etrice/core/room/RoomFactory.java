@@ -68,6 +68,15 @@ public interface RoomFactory extends EFactory
   VarDecl createVarDecl();
 
   /**
+   * Returns a new object of class '<em>Message Data</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Message Data</em>'.
+   * @generated
+   */
+  MessageData createMessageData();
+
+  /**
    * Returns a new object of class '<em>Refable Type</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

@@ -11,6 +11,7 @@
 #include "etDatatypes.h"
 #include "messaging/etMessage.h"
 
+/* include all referenced room classes */
 #include "room/basic/service/tcp/DTcpPayload.h"
 #include "room/basic/service/tcp/PTcpControl.h"
 #include "room/basic/service/tcp/PTcpPayload.h"
@@ -40,7 +41,7 @@ typedef struct ATcpClient_const {
 
 
 /* constant for state machine data */
-#define ATCPCLIENT_HISTORY_SIZE 2
+#define ATCPCLIENT_HISTORY_SIZE 5
 
 /* variable part of ActorClass (RAM) */
 struct ATcpClient {

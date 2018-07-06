@@ -14,10 +14,12 @@ package org.eclipse.etrice.ui.behavior.fsm.support;
 
 import java.util.ArrayList;
 
+import org.eclipse.etrice.core.fsm.fSM.FSMFactory;
 import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
 import org.eclipse.etrice.core.fsm.fSM.StateGraph;
-import org.eclipse.etrice.ui.behavior.fsm.commands.StateGraphContext;
-import org.eclipse.etrice.ui.behavior.fsm.provider.IInjectorProvider;
+import org.eclipse.etrice.ui.behavior.fsm.editor.AbstractFSMDiagramTypeProvider;
+import org.eclipse.etrice.ui.behavior.fsm.support.util.DiagramEditingUtil;
+import org.eclipse.etrice.ui.behavior.fsm.support.util.FSMSupportUtil;
 import org.eclipse.graphiti.features.IFeatureProvider;
 import org.eclipse.graphiti.features.IReason;
 import org.eclipse.graphiti.features.IRemoveFeature;
@@ -32,8 +34,6 @@ import org.eclipse.graphiti.mm.pictograms.Connection;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
 import org.eclipse.graphiti.mm.pictograms.Shape;
 import org.eclipse.graphiti.platform.IDiagramBehavior;
-
-import com.google.inject.Injector;
 
 /**
  * @author Henrik Rentz-Reichert (initial contribution)
@@ -63,9 +63,7 @@ public class DiagramUpdateFeature extends AbstractUpdateFeature {
 	 */
 	@Override
 	public IReason updateNeeded(IUpdateContext context) {
-		ModelComponent mc = FSMSupportUtil.getInstance().getModelComponent(getDiagram());
-    	Injector injector = ((IInjectorProvider) getFeatureProvider()).getInjector();
-		StateGraphContext tree = StateGraphContext.createContextTree(mc, injector);
+		IStateGraphContext tree = createStateGraphContext();
 		
 		usedShapes.clear();
 		
@@ -108,9 +106,7 @@ public class DiagramUpdateFeature extends AbstractUpdateFeature {
 	 */
 	@Override
 	public boolean update(IUpdateContext context) {
-		ModelComponent mc = FSMSupportUtil.getInstance().getModelComponent(getDiagram());
-    	Injector injector = ((IInjectorProvider) getFeatureProvider()).getInjector();
-		StateGraphContext tree = StateGraphContext.createContextTree(mc, injector);
+		IStateGraphContext tree = createStateGraphContext();
 
 		StateGraph currentStateGraph = ContextSwitcher.getCurrentStateGraph(getDiagram());
 		
@@ -169,7 +165,7 @@ public class DiagramUpdateFeature extends AbstractUpdateFeature {
 	 * @param ctx
 	 * @return
 	 */
-	private IReason updateNeeded(StateGraphContext ctx) {
+	private IReason updateNeeded(IStateGraphContext ctx) {
 		StateGraph sg = ctx.getStateGraph();
 		ContainerShape cont = findStateGraphContainer(sg);
 		if (cont==null)
@@ -196,7 +192,7 @@ public class DiagramUpdateFeature extends AbstractUpdateFeature {
 		}
 		
 		// recursion
-		for (StateGraphContext child : ctx.getChildren()) {
+		for (IStateGraphContext child : ctx.getChildren()) {
 			IReason needUpdate = updateNeeded(child);
 			if (needUpdate.toBoolean())
 				return needUpdate;
@@ -209,14 +205,14 @@ public class DiagramUpdateFeature extends AbstractUpdateFeature {
 	 * @param ctx
 	 * @return
 	 */
-	private boolean update(StateGraphContext ctx) {
+	private boolean update(IStateGraphContext ctx) {
 		boolean changed = false;
 		
 		StateGraph sg = ctx.getStateGraph();
 		ContainerShape cont = findStateGraphContainer(sg);
 		if (cont==null) {
 			// create
-			cont = FSMSupportUtil.getInstance().addStateGraph(ctx, getDiagram(), getFeatureProvider());
+			cont = DiagramEditingUtil.getInstance().addStateGraph(ctx, getDiagram(), getFeatureProvider());
 			changed = true;
 			usedShapes.add(cont);
 		}
@@ -242,7 +238,7 @@ public class DiagramUpdateFeature extends AbstractUpdateFeature {
 		}
 		
 		// recursion
-		for (StateGraphContext child : ctx.getChildren()) {
+		for (IStateGraphContext child : ctx.getChildren()) {
 			if (update(child))
 				changed = true;
 		}
@@ -261,6 +257,21 @@ public class DiagramUpdateFeature extends AbstractUpdateFeature {
 				return (ContainerShape) child;
 		}
 		return null;
+	}
+	
+	private IStateGraphContext createStateGraphContext(){
+		ModelComponent mc = FSMSupportUtil.getInstance().getModelComponent(getDiagram());
+//    	Injector injector = ((IInjectorProvider) getFeatureProvider()).getInjector();
+//		StateGraphContext tree = StateGraphContext.createContextTree(mc, injector);
+		
+		// side effect on model, but diagram needs that for initial graph shape
+		if(mc.getStateMachine() == null || mc.getStateMachine().eIsProxy()){
+			mc.setStateMachine(FSMFactory.eINSTANCE.createStateGraph());
+		}
+		
+		IStateGraphContext tree = new GenModelStateGraphContext((AbstractFSMDiagramTypeProvider)getFeatureProvider().getDiagramTypeProvider());
+		
+		return tree;
 	}
 
 }

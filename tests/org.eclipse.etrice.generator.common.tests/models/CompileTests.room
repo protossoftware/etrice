@@ -13,7 +13,6 @@ RoomModel CompileTests {
 			Attribute caseId : int32
 
 			// just compile
-			ActorRef detailExpressionTest: DetailExpressionTest
 			ActorRef statemachineInterfaceTest : StatemachineInterfaceTest
 			ActorRef statemachineInterfaceInheritedTest : StatemachineInterfaceInheritedTest
 			ActorRef continuationTransitionTest : ContinuationTransitionTest

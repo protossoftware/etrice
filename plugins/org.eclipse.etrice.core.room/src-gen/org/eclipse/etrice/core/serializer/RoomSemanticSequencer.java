@@ -65,6 +65,7 @@ import org.eclipse.etrice.core.room.LayerConnection;
 import org.eclipse.etrice.core.room.LogicalSystem;
 import org.eclipse.etrice.core.room.LogicalThread;
 import org.eclipse.etrice.core.room.Message;
+import org.eclipse.etrice.core.room.MessageData;
 import org.eclipse.etrice.core.room.OutMessageHandler;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.PortClass;
@@ -287,6 +288,9 @@ public class RoomSemanticSequencer extends FSMSemanticSequencer {
 			case RoomPackage.MESSAGE:
 				sequence_Message(context, (Message) semanticObject); 
 				return; 
+			case RoomPackage.MESSAGE_DATA:
+				sequence_MessageData(context, (MessageData) semanticObject); 
+				return; 
 			case RoomPackage.OUT_MESSAGE_HANDLER:
 				sequence_OutMessageHandler(context, (OutMessageHandler) semanticObject); 
 				return; 
@@ -370,24 +374,24 @@ public class RoomSemanticSequencer extends FSMSemanticSequencer {
 	 *         docu=Documentation? 
 	 *         base=[ActorClass|FQN]? 
 	 *         annotations+=Annotation* 
-	 *         interfacePorts+=Port? 
-	 *         (serviceProvisionPoints+=SPP? interfacePorts+=Port?)* 
+	 *         serviceProvisionPoints+=SPP? 
+	 *         (interfacePorts+=Port? serviceProvisionPoints+=SPP?)* 
 	 *         structureDocu=Documentation? 
 	 *         userCode1=DetailCode? 
 	 *         userCode2=DetailCode? 
 	 *         userCode3=DetailCode? 
-	 *         attributes+=Attribute? 
+	 *         serviceImplementations+=ServiceImplementation? 
 	 *         (
 	 *             (
 	 *                 connections+=LayerConnection | 
 	 *                 bindings+=Binding | 
-	 *                 serviceImplementations+=ServiceImplementation | 
+	 *                 attributes+=Attribute | 
 	 *                 actorRefs+=ActorRef | 
 	 *                 serviceAccessPoints+=SAP | 
 	 *                 internalPorts+=Port | 
 	 *                 externalPorts+=ExternalPort
 	 *             )? 
-	 *             attributes+=Attribute?
+	 *             serviceImplementations+=ServiceImplementation?
 	 *         )* 
 	 *         behaviorDocu=Documentation? 
 	 *         behaviorAnnotations+=Annotation* 
@@ -656,10 +660,22 @@ public class RoomSemanticSequencer extends FSMSemanticSequencer {
 	
 	/**
 	 * Contexts:
+	 *     MessageData returns MessageData
+	 *
+	 * Constraint:
+	 *     (deprecatedName=ID? refType=RefableType)
+	 */
+	protected void sequence_MessageData(ISerializationContext context, MessageData semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     Message returns Message
 	 *
 	 * Constraint:
-	 *     (priv?='private'? name=ID data=VarDecl? annotations+=Annotation* docu=Documentation?)
+	 *     (priv?='private'? name=ID data=MessageData? annotations+=Annotation* docu=Documentation?)
 	 */
 	protected void sequence_Message(ISerializationContext context, Message semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

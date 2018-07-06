@@ -29,19 +29,13 @@ RoomModel org.franca.examples [ "Generated from Franca IDL model org.franca.exam
 					}
 				}
 				State waitingForMove {
-					entry {
-						"messageAPI.move(new StructPosition(0, 0, 0));"
-					}
+					entry '''messageAPI.move(new StructPosition(0, 0, 0));'''
 				}
 				State waitingForGrab {
-					entry {
-						"messageAPI.grab(0.0);"
-					}
+					entry '''messageAPI.grab(0.0);'''
 				}
 				State waitingForRelease {
-					entry {
-						"messageAPI.release();"
-					}
+					entry '''messageAPI.release();'''
 				}
 				State ready
 			}
@@ -50,15 +44,15 @@ RoomModel org.franca.examples [ "Generated from Franca IDL model org.franca.exam
 
 	ProtocolClass RobotArm {
 		incoming {
-			Message move(pos: StructPosition)
-			Message grab(gripAngle: Double)
+			Message move(StructPosition)
+			Message grab(Double)
 			Message release()
 		}
 		outgoing {
-			Message replyMove(ok: Boolean) [ "reply for move" ]
-			Message replyGrab(ok: Boolean) [ "reply for grab" ]
-			Message replyRelease(ok: Boolean) [ "reply for release" ]
-			Message operable(pos: StructPosition)
+			Message replyMove(Boolean) [ "reply for move" ]
+			Message replyGrab(Boolean) [ "reply for grab" ]
+			Message replyRelease(Boolean) [ "reply for release" ]
+			Message operable(StructPosition)
 		}
 		semantics {
 			in : grab -> out : replyGrab
@@ -74,9 +68,9 @@ RoomModel org.franca.examples [ "Generated from Franca IDL model org.franca.exam
 		Attribute z: UInt16
 	}
 
-	PrimitiveType UInt16: ptInteger -> java.lang.Integer(java.lang.Integer) default "0"
-	PrimitiveType UInt32: ptInteger -> java.lang.Integer(java.lang.Integer) default "0"
-	PrimitiveType Double: ptReal -> java.lang.Double(java.lang.Double) default "0.0"
-	PrimitiveType Boolean: ptBoolean -> java.lang.Boolean(java.lang.Boolean) default "false"
+	PrimitiveType UInt16: ptInteger -> "java.lang.Integer(java.lang.Integer)" default "0"
+	PrimitiveType UInt32: ptInteger -> "java.lang.Integer(java.lang.Integer)" default "0"
+	PrimitiveType Double: ptReal -> "java.lang.Double(java.lang.Double)" default "0.0"
+	PrimitiveType Boolean: ptBoolean -> "java.lang.Boolean(java.lang.Boolean)" default "false"
 }
 

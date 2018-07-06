@@ -58,6 +58,22 @@ class JFaceHighlightStyles extends AbstractHighlightStyles {
 		new TextAttribute(getColor(INTERFACE_ITEM_RGB))
 	}
 	
+	override getEnum() {
+		new TextAttribute(getColor(ENUM_RGB))
+	}
+	
+	override getDataClass() {
+		new TextAttribute(getColor(DATA_CLASS_RGB))
+	}
+	
+	override getPrimitiveType() {
+		new TextAttribute(getColor(PRIMITIVE_TYPE_RGB))
+	}
+	
+	override getExternalType() {
+		new TextAttribute(getColor(EXTERNAL_TYPE_RGB))
+	}
+	
 	protected Map<RGB, Color> fColorTable = newHashMap
 	
 	def private Color getColor(RGB rgb) {

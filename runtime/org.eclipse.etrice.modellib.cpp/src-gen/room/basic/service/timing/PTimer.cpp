@@ -124,16 +124,15 @@ void PTimerConjPort::receive(const Message* msg) {
 	switch (msg->getEvtId()) {
 		case PTimer::OUT_timeout:
 			{
-				
-							//TODO: clear active bit in case of single shot timer
-							if (status!=0){
-								if (status==ET_TIMER_RUNNING){
-									// single shot timer
-									status=0;
-								}
-								// msg to fsm
-								getActor()->receiveEvent(this, msg->getEvtId(),	msg->getData());
-							}
+				//TODO: clear active bit in case of single shot timer
+				if (status!=0){
+					if (status==ET_TIMER_RUNNING){
+						// single shot timer
+						status=0;
+					}
+					// msg to fsm
+					getActor()->receiveEvent(this, msg->getEvtId(),	msg->getData());
+				}
 			}
 			break;
 		default:
@@ -145,46 +144,45 @@ void PTimerConjPort::receive(const Message* msg) {
 /*--------------------- operations ---------------------*/
 
 // sent messages
-void PTimerConjPort::startTimer(uint32 time) {
+void PTimerConjPort::startTimer(uint32 transitionData) {
 		if (status==0){
 					status=ET_TIMER_RUNNING | ET_TIMER_PERIODIC;
-					startTimer_impl(time);
+					startTimer_impl(transitionData);
 				}
 }
 
-void PTimerConjPort::startTimer_impl(uint32 time) {
+void PTimerConjPort::startTimer_impl(uint32 transitionData) {
 	DebuggingService::getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(),
 		PTimer::getMessageString(PTimer::IN_startTimer).c_str());
 	if (getPeerAddress().isValid()) {
 		Message* buffer = dynamic_cast<IMessageService*>(getPeerMsgReceiver())->getMessageBuffer(sizeof(DataMessage<uint32>));
 		if (buffer) {
-			getPeerMsgReceiver()->receive(new (buffer) DataMessage<uint32>(getPeerAddress(), PTimer::IN_startTimer, time));
+			getPeerMsgReceiver()->receive(new (buffer) DataMessage<uint32>(getPeerAddress(), PTimer::IN_startTimer, transitionData));
 		}
 	}
 }
-void PTimerConjPort::startTimeout(uint32 time) {
+void PTimerConjPort::startTimeout(uint32 transitionData) {
 		if (status==0){
 					status = ET_TIMER_RUNNING;
-					startTimeout_impl(time);
+					startTimeout_impl(transitionData);
 				}
 }
 
-void PTimerConjPort::startTimeout_impl(uint32 time) {
+void PTimerConjPort::startTimeout_impl(uint32 transitionData) {
 	DebuggingService::getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(),
 		PTimer::getMessageString(PTimer::IN_startTimeout).c_str());
 	if (getPeerAddress().isValid()) {
 		Message* buffer = dynamic_cast<IMessageService*>(getPeerMsgReceiver())->getMessageBuffer(sizeof(DataMessage<uint32>));
 		if (buffer) {
-			getPeerMsgReceiver()->receive(new (buffer) DataMessage<uint32>(getPeerAddress(), PTimer::IN_startTimeout, time));
+			getPeerMsgReceiver()->receive(new (buffer) DataMessage<uint32>(getPeerAddress(), PTimer::IN_startTimeout, transitionData));
 		}
 	}
 }
 void PTimerConjPort::kill() {
-		
-				if (status!=0){
-					status=0;
-					kill_impl();
-				}
+		if (status!=0){
+		status=0;
+		kill_impl();
+	}
 }
 
 void PTimerConjPort::kill_impl() {
@@ -207,14 +205,14 @@ PTimerConjReplPort::PTimerConjReplPort(IInterfaceItemOwner* actor, const String&
 }
 
 // incoming messages
-void PTimerConjReplPort::startTimer(uint32 time){
+void PTimerConjReplPort::startTimer(uint32 transitionData){
 	for (Vector<etRuntime::InterfaceItemBase*>::iterator it = getItems().begin(); it != getItems().end(); ++it) {
-		(dynamic_cast<PTimerConjPort*>(*it))->startTimer( time);
+		(dynamic_cast<PTimerConjPort*>(*it))->startTimer( transitionData);
 	}
 }
-void PTimerConjReplPort::startTimeout(uint32 time){
+void PTimerConjReplPort::startTimeout(uint32 transitionData){
 	for (Vector<etRuntime::InterfaceItemBase*>::iterator it = getItems().begin(); it != getItems().end(); ++it) {
-		(dynamic_cast<PTimerConjPort*>(*it))->startTimeout( time);
+		(dynamic_cast<PTimerConjPort*>(*it))->startTimeout( transitionData);
 	}
 }
 void PTimerConjReplPort::kill(){

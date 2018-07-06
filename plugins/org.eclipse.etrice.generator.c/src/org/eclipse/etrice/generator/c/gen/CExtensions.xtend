@@ -21,26 +21,25 @@ package org.eclipse.etrice.generator.c.gen
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import java.util.List
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.etrice.core.common.base.LiteralType
 import org.eclipse.etrice.core.etphys.eTPhys.NodeRef
-import org.eclipse.etrice.core.genmodel.fsm.fsmgen.IDiagnostician
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance
+import org.eclipse.etrice.core.genmodel.fsm.IDiagnostician
 import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.core.room.DataClass
 import org.eclipse.etrice.core.room.DataType
+import org.eclipse.etrice.core.room.EnumLiteral
+import org.eclipse.etrice.core.room.EnumerationType
 import org.eclipse.etrice.core.room.ExternalType
-import org.eclipse.etrice.core.common.base.LiteralType
 import org.eclipse.etrice.core.room.Message
+import org.eclipse.etrice.core.room.MessageData
 import org.eclipse.etrice.core.room.PrimitiveType
 import org.eclipse.etrice.core.room.RoomClass
 import org.eclipse.etrice.core.room.RoomModel
-import org.eclipse.etrice.core.room.VarDecl
+import org.eclipse.etrice.core.room.util.RoomHelpers
 import org.eclipse.etrice.generator.generic.ILanguageExtension
 import org.eclipse.xtext.util.Pair
-import org.eclipse.etrice.core.room.EnumerationType
-
-import org.eclipse.etrice.core.room.util.RoomHelpers
-import org.eclipse.etrice.core.room.EnumLiteral
-import org.eclipse.emf.ecore.EObject
 
 @Singleton
 class CExtensions implements ILanguageExtension {
@@ -50,7 +49,7 @@ class CExtensions implements ILanguageExtension {
 
 	override String getTypedDataDefinition(EObject msg) {
 	    if (msg instanceof Message) {
-    		generateArglistAndTypedData((msg as Message).data).get(1)
+    		generateArglistAndTypedData((msg as Message).data).get(TypedDataKind.DECLARATION_AND_INITIALIZATION.ordinal)
 	    }
 	    else {
 	        ""
@@ -237,7 +236,7 @@ class CExtensions implements ILanguageExtension {
 			EnumerationType:
 				getDefaultValue(dt)
 			ExternalType:{
-				if (dt.defaultValueLiteral != null )
+				if (dt.defaultValueLiteral !== null )
 					return dt.getDefaultValueLiteral
 				diagnostician.error("external type "+dt.name + "has no default initialization", dt.eContainer, dt.eContainingFeature)
 				""
@@ -283,7 +282,7 @@ class CExtensions implements ILanguageExtension {
 
 	def initializationWithDefaultValues(Attribute att) {
 		val dv = att.defaultValueLiteral
-		if (dv!=null) {
+		if (dv!==null) {
 			if (dv.startsWith("{"))
 				dv
 			else
@@ -297,11 +296,12 @@ class CExtensions implements ILanguageExtension {
 	}
 
 	override generateArglistAndTypedData(EObject d) {
-		if (d==null || !(d instanceof VarDecl))
+		// TODO 529445: d will be a RefableType, not MessageData
+		if (d===null || !(d instanceof MessageData))
 			return newArrayList("", "", "")
 
-		val data = d as VarDecl
-		if (data==null)
+		val data = d as MessageData
+		if (data===null)
 			return newArrayList("", "", "")
 
 		var typeName = if (data.getRefType().getType() instanceof PrimitiveType)
@@ -315,7 +315,7 @@ class CExtensions implements ILanguageExtension {
 
 		var castTypeName = if (data.getRefType().getType() instanceof PrimitiveType) {
 			val ct = (data.getRefType().getType() as PrimitiveType).getCastName()
-			if (ct!=null && !ct.isEmpty())
+			if (ct!==null && !ct.isEmpty())
 				ct
 			else
 				typeName
@@ -341,10 +341,9 @@ class CExtensions implements ILanguageExtension {
 			}
 		}
 
-		val typedData = typeName+" "+data.getName() + " = "+deRef+"(("+castTypeName+") generic_data__et);\n"
-
-		val dataArg = ", "+data.getName()
-		val typedArgList = ", "+typeName+" "+data.getName()
+		val dataArg = ", "+GENERIC_DATA_NAME
+		val typedData = typeName+" "+GENERIC_DATA_NAME + " = "+deRef+"(("+castTypeName+") generic_data__et);\n"
+		val typedArgList = ", "+typeName+" "+GENERIC_DATA_NAME
 
 		return newArrayList(dataArg, typedData, typedArgList);
 	}
@@ -358,7 +357,7 @@ class CExtensions implements ILanguageExtension {
 	}
 
 	override getTargetType(EnumerationType type) {
-		if (type.getPrimitiveType()!=null)
+		if (type.getPrimitiveType()!==null)
 			type.getPrimitiveType().getTargetName()
 		else
 			type.getName()
@@ -368,14 +367,14 @@ class CExtensions implements ILanguageExtension {
 		val type = literal.eContainer() as EnumerationType
 		val cast = type.targetType
 
-		if (type.primitiveType==null)
+		if (type.primitiveType===null)
 			Long.toString(literal.getLiteralValue())
 		else
 			"(("+cast+")"+Long.toString(literal.getLiteralValue())+")"
 	}
 
 	override getCastType(EnumerationType type) {
-		if (type.getPrimitiveType()!=null)
+		if (type.getPrimitiveType()!==null)
 			type.getPrimitiveType().getCastName()
 		else
 			type.getName()

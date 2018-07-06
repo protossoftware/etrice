@@ -76,7 +76,7 @@ class ValidationHelpers {
 	def static <E extends EObject> saveRecursiveVisitor(E  start, Function<E , E> function){
 		val Set<E> visited = newHashSet
 		var E next = start
-		while(next != null && !next.eIsProxy && (visited += next))
+		while(next !== null && !next.eIsProxy && (visited += next))
 			next = function.apply(next)
 	}
 }

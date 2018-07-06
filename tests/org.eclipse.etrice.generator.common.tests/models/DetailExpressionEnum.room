@@ -1,0 +1,20 @@
+RoomModel DetailExpressionEnum {
+
+	import DetailExpressionTypes.* from "DetailExpressionTypes.room"
+
+	Enumeration ProtocolEnum {
+		RECV, ACK
+	}
+
+	ProtocolClass PEnumProtocolBase {
+		incoming {
+			Message enumMsg(ProtocolEnum)
+			Message enumMsg2(ColorEnum)
+		}
+	}
+
+	ProtocolClass PEnumProtocol extends PEnumProtocolBase {
+		
+	}
+}
+	

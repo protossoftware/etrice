@@ -194,10 +194,19 @@ public interface ILanguageExtensionBase {
 	String superCall(String baseClassName, String method, String arguments);
 
 	/**
+	 * the three results returned by {@link #org.eclipse.etrice.generator.fsm.generic.ILanguageExtensionBase.generateArglistAndTypedData(EObject)}
+	 */
+	enum TypedDataKind {
+		COMMA_SEPARATED_PARAM_IN_CALL,
+		DECLARATION_AND_INITIALIZATION,
+		COMMA_SEPARATED_PARAM_IN_DECLARATION
+	}
+	
+	/**
 	 * return three strings used by the generator
 	 *
 	 * @param data the variable declaration
-	 * @return an array of three strings
+	 * @return an array of three strings (see {@link #TypedDataKind})
 	 * <ol>
 	 *  <li>the string that performs the cast from generic_data to the correct type and assigns it to a new variable</li>
 	 *  <li>the data as it appears in a method call</li>

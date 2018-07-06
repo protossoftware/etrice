@@ -1322,6 +1322,10 @@ public class RoomHelpers extends FSMHelpers {
 	 * @return the last common super type of a list of types or <code>null</code> if no such exists
 	 */
 	public RefableType getLastCommonSuperType(List<RefableType> types) {
+		if (types.isEmpty()) {
+			return null;
+		}
+		
 		int nref = 0;
 		int ndc = 0;
 		for (RefableType rt : types) {

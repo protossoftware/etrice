@@ -1,0 +1,157 @@
+RoomModel TemplateModel {
+
+	PrimitiveType int32: ptInteger -> "int32" (Integer) default "0"
+
+	ProtocolClass PTimer {
+		incoming {
+			Message start (int32)
+			Message kill ()
+		}
+		outgoing {
+			Message timerTick ()
+		}
+	}
+	
+	ProtocolClass PTimeout {
+		incoming {
+			Message start (int32)
+			Message kill ()
+		}
+		outgoing {
+			Message timeoutTick ()
+		}
+	}
+
+	ActorClass ATimingService {
+		Interface {
+			SPP timerSPP: PTimer
+			SPP timeoutSPP: PTimeout
+		}
+		Structure {
+			ServiceImplementation of timerSPP
+			ServiceImplementation of timeoutSPP
+		}
+	}
+			
+	ProtocolClass PTest1 {
+		incoming {
+			Message a ()
+			Message b (int32)
+			Message c ()
+		}
+		outgoing {
+			Message x ()
+		}
+	}
+
+	ProtocolClass PTest2 {
+		incoming {
+			Message x ()
+			Message y ()
+			Message z ()
+		}
+		outgoing {
+			Message a ()
+		}
+	}
+
+	ActorClass TestActor {
+		Interface {
+			Port fct : PTest1
+		}
+		Structure {
+			external Port fct
+			Port subp : PTest2
+			SAP timer: PTimer
+			SAP timeout: PTimeout
+		}
+		Behavior {
+			StateMachine {
+				State State1 {}
+				State State2 {}
+				State State3 {
+				subgraph {
+						State State1 {}
+						State State2 {}
+						State State3 {}
+						EntryPoint tp1
+						TransitionPoint tp2
+						ExitPoint tp3
+						handler TransitionPoint tp5
+						Transition tr0: initial -> State1 {}
+						Transition tr1: my tp1 -> State3 {}
+						Transition tr2: State1 -> State2 {
+							triggers {
+								<b:fct>
+							}
+						}
+						Transition tr3: State2 -> State3 {
+							triggers {
+								<x:subp>
+							}
+						}
+						Transition tr4: State3 -> State1 {
+							triggers {
+								<a:fct>
+							}
+						}
+						Transition tr5: my tp2 -> State3 {
+							triggers {
+								<b:fct>
+							}
+						}
+						Transition tr6: State3 -> my tp3 {
+							triggers {
+								<y:subp>
+							}
+						}
+						Transition tr7: my tp5 -> my tp5 {
+							triggers {
+								<timeoutTick:timeout>
+							}
+						}
+					}
+				}
+				State State4 {}
+				TransitionPoint tp0
+				TransitionPoint tp1
+				ChoicePoint CP1
+				Transition tr0: initial -> State1 {}
+				Transition tr1: State1 -> State2 {
+					triggers {
+						<a:fct>
+					}
+				}
+				Transition tr2: State2 -> cp CP1 {
+					triggers {
+						<b:fct>
+					}
+				}
+				Transition tr3: cp CP1 -> State1 {}
+				Transition tr4: cp CP1 -> State3 {
+					cond '''data==2'''
+				}
+				Transition tr5: my tp0 -> tp1 of State3 {
+					triggers {
+						<a:fct>
+					}
+				}
+				Transition tr6: cp CP1 -> State4 {
+					cond '''data==3'''
+				}
+				Transition tr7: tp3 of State3 -> State2 {}
+				Transition tr8: State3 -> State2 {
+					triggers {
+						<c:fct>
+					}
+				}
+				Transition tr9: my tp1 -> State2 {
+					triggers {
+						<timerTick:timer>
+					}
+				}
+			}
+		}
+	}
+
+}

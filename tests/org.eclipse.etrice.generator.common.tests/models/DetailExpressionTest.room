@@ -2,8 +2,35 @@ RoomModel DetailExpressionTestModel {
 
 	import room.basic.types.* from "../../../runtime/${etModellib}/model/Types.room"
 	import room.basic.test.* from "../../../runtime/${etModellib}/model/Tests.room"
-	import room.basic.service.timing.* from "../../../runtime/${etModellib}/model/TimingService.room"
+	import DetailExpressionEnum.* from "DetailExpressionEnum.room"
+	
+	ActorClass DetailExpressionCompileTest {
+		@TestInstance
+		Structure {
+			// just compile
+			ActorRef ref0 : DetailExpressionTest
+			Attribute caseId : int32
+		}
+		Behavior {
+			ctor '''caseId = etUnit_openAll("log", "DetailExpressionCompileTest", "org.eclipse.etrice.generator.common.tests.DetailExpressionCompileTest", "DetailExpressionCompileTest_case");'''
+			dtor '''etUnit_closeAll(caseId);'''
+			StateMachine {
+				Transition init: initial -> finish
+				State finish {
+					entry '''etUnit_testFinished(caseId);'''
+				}
+			}
+		}
+	}
+	
+	Enumeration LocalEnum of int32 {
+		FIRST=1, SECOND=2, THIRD=3
+	}
 
+	/**
+	 *  TODO define supported expression properly
+	 *  TODO sync UI and translation in generator
+	 */
 	async ActorClass DetailExpressionTest {
 		Interface {
 			SPP sppEvent: PEventdriven
@@ -11,7 +38,7 @@ RoomModel DetailExpressionTestModel {
 		}
 		Structure {
 			ServiceImplementation of sppEvent
-			Attribute numberArray [ 5 ]: int32
+			Attribute numberArray [5]: int32
 			Attribute infoData: DDataNested
 			Port rPortEvent: PEventdriven
 			Port rPortData: PDatadriven
@@ -19,58 +46,70 @@ RoomModel DetailExpressionTestModel {
 			conjugated Port cPortEvent: PEventdriven
 			conjugated Port cPortData: PDatadriven
 			conjugated Port cReplEvent [*]: PEventdriven
+			// no supported yet
+			conjugated Port enumEvent: PEnumProtocol
 		}
 		Behavior {
-			Operation actorOp(param: int32): boolean {
-				"return true;"
-			}
+			ctor '''
+				numberArray[0] = 5;
+			'''
+			dtor '''
+				numberArray[0] = 5;
+			'''
+			Operation actorOp(param: int32): boolean '''
+				return param == 0;
+			'''
 			StateMachine {
 				Transition eventTrans: idle -> state1 {
 					triggers {
-						<out1: cPortEvent guard {
-							"/* TODO activate action code editor */"
-							"rPortData.in1 == numberArray[3] && accessibleMessageData && infoData.flag && actorOp(32)  && rPortEvent.regularOp(32) && cPortEvent.conjugatedOp(32)"
-						}>
+						<out1: cPortEvent guard '''
+							/* TODO activate action code editor */
+							rPortData.in1 == numberArray[3] &&
+							transitionData && infoData.flag
+						'''>
 					}
-					action 
-				{
-						"// TODO syntax highlightiing"
-						"rPortEvent.out1(true);"
-						"rPortData.in1;"
-						"rReplEvent[0].out1(true);"
-						"rReplEvent.out1(true); // broadcast"
-						"cPortEvent.in1();"
-						"cPortData.in1(32);"
-						"cReplEvent[1].in1();"
-						"cReplEvent.in1(); // broadcast"
-						"sppEvent[4].out1(true);"
-						"sppEvent.out1(true); // broadcast"
-						"rPortEvent.regularOp(32);"
-						"cPortEvent.conjugatedOp(32);"
-						"actorOp(32);"
-						"int number = numberArray[0];"
-						"DData nestedData = infoData.nested;"
-						"int port = infoData.nested.tcpPort;"
-						""
-						"// transition event data"
-						"int data = (accessibleMessageData)? 1 : 0;"
-						""
-						"// -- not supported yet by code translation --"
-						"// getReplication():"
-						"// int replSize1 = rReplEvent.getReplication();"
-						"// int replSize2 = cReplEvent.getReplication();"
-						"// int replSize2 = sppEvent.getReplication();"
-						""
-						"// DataClass operations:"
-						"// infoData.operation(32);"
-						"// infoData.nested.set(\"127.0.0.1\", 8080);"
-					}
+					action '''
+						// TODO syntax highlighting
+						rPortEvent.out1(true);
+						rPortData.in1;
+						rReplEvent[0].out1(true);
+						rReplEvent.out1(true); // broadcast
+						cPortEvent.in1();
+						cPortData.in1(32);
+						cReplEvent[1].in1();
+						cReplEvent.in1(); // broadcast
+						sppEvent[4].out1(true);
+						sppEvent.out1(true); // broadcast
+						rPortEvent.regularOp(32);
+						cPortEvent.conjOp(32);
+						actorOp(32);
+						int number = numberArray[0];
+						DData nestedData = infoData.nested;
+						int port = infoData.nested.tcpPort;
+						
+						// transition event data
+						int data = (transitionData)? 1 : 0;
+						
+						// -- not supported yet by code translation --
+						// getReplication():
+						// int replSize1 = rReplEvent.getReplication();
+						// int replSize2 = cReplEvent.getReplication();
+						// int replSize2 = sppEvent.getReplication();
+						
+						// DataClass operations:
+						// infoData.dataOp(32);
+						// infoData.nested.dataOp("127.0.0.1", 8080);
+						
+						// enum
+						enumEvent.enumMsg(ProtocolEnum.ACK);
+						enumEvent.enumMsg2(ColorEnum.WHITE);
+						// numberArray[0] = LocalEnum.FIRST;
+					'''
 				}
 				Transition guardedTrans: idle -> state2 {
-					guard 
-				{
-						"rPortData.in1 == numberArray[3] && infoData.flag && actorOp(32)  && rPortEvent.regularOp(32) && cPortEvent.conjugatedOp(32)"
-					}
+					guard '''				
+						rPortData.in1 == numberArray[3] && infoData.flag && actorOp(32)  && rPortEvent.regularOp(32) && cPortEvent.conjOp(32)
+					'''
 				}
 				Transition init: initial -> idle
 				State idle
@@ -79,27 +118,40 @@ RoomModel DetailExpressionTestModel {
 			}
 		}
 	}
-
-	ProtocolClass PEventdriven {
+	
+	ProtocolClass PEventdrivenBase {
 		incoming {
 			Message in1()
 		}
+	}
+
+	ProtocolClass PEventdriven extends  PEventdrivenBase {
 		outgoing {
 			Message out1(accessibleMessageData: boolean)
 		}
 		regular PortClass
 		{
-			Operation regularOp(param: int32): boolean {
-				"return true;"
-			}
-			Attribute regularAttr: int32
+			Attribute regularAttr: boolean = "true"
+			Operation regularOp(param: int32): boolean '''
+				// return regularOp2(param);
+				return true;
+			'''
+			Operation regularOp2(): boolean '''
+				// return regularAttr;
+				return true;
+			'''
 		}
 		conjugated PortClass
 		{
-			Operation conjugatedOp(param: int32): boolean {
-				"return true;"
-			}
-			Attribute conjugatedAttr: int32
+			Attribute conjAttr: boolean = "true"
+			Operation conjOp(param: int32): boolean '''
+				// return conjOp2(param);
+				return true;
+			'''
+			Operation conjOp2(): boolean '''
+				// return conjAttr;
+				return true;
+			'''
 		}
 	}
 
@@ -107,40 +159,43 @@ RoomModel DetailExpressionTestModel {
 		incoming {
 			Message in1(data: int32)
 		}
-		/* not supported yet
-		regular PortClass
-		{
-			Operation regularOp(param: int32): boolean {
-				""
-			}
-			Attribute regularAttr: int32
-		}
-		conjugated PortClass
-		{
-			Operation conjugatedOp(param: int32): boolean {
-				""
-			}
-			Attribute conjugatedAttr: int32
-		}
-		* /*
-		*/
+	/* not supported yet
+	 * regular PortClass
+	 * {
+	 * 	Operation regularOp(param: int32): boolean {
+	 * 		""
+	 * 	}
+	 * 	Attribute regularAttr: int32
+	 * }
+	 * conjugated PortClass
+	 * {
+	 * 	Operation conjugatedOp(param: int32): boolean {
+	 * 		""
+	 * 	}
+	 * 	Attribute conjugatedAttr: int32
+	 * }
+	 * /*
+	 */
 	}
 
 	DataClass DDataNested {
-		Operation dataOp(number: int32) {
-			""
-		}
+		Operation dataOp(number: int32): boolean '''
+			// return dataOp2() && number;
+			return true;
+		'''
+		Operation dataOp2(): boolean '''
+			// nested.dataOp("", 0);
+			// return flag && nested.tcpPort;
+			return true;
+		'''
 		Attribute flag: boolean
-		Attribute array [ 5 ]: int32
+		Attribute array [5]: int32
 		Attribute nested: DData
 	}
 
 	DataClass DData {
-		Operation dataOp(ip: string, port: int32) {
-			""
-		}
+		Operation dataOp(ip: string, port: int32) '''		'''
 		Attribute iPAddr: string
 		Attribute tcpPort: int32
 	}
-
 }

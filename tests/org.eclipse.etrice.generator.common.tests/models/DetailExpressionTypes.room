@@ -1,0 +1,7 @@
+RoomModel DetailExpressionTypes {
+	
+	Enumeration ColorEnum {
+		BLACK, WHITE
+	}
+}
+	

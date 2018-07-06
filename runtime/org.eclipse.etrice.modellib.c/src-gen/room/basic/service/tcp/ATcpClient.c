@@ -74,7 +74,7 @@ static char* stateStrings[] = {"<no state>","<top>","unconnected",
 
 static void setState(ATcpClient* self, etInt16 new_state) {
 	self->state = new_state;
-	ET_MSC_LOGGER_CHANGE_STATE(self->constData->instName, stateStrings[new_state])
+	ET_MSC_LOGGER_CHANGE_STATE(self->constData->instName, stateStrings[new_state]);
 }
 
 static etInt16 getState(ATcpClient* self) {
@@ -90,9 +90,9 @@ static void entry_initError(ATcpClient* self) {
 static void action_TRANS_INITIAL_TO__cp1(ATcpClient* self) {
     printf("Client Init!\n");
 }
-static void action_TRANS_tr0_FROM_unconnected_TO_cp0_BY_connectcontrolPort(ATcpClient* self, const InterfaceItemBase* ifitem, DTcpControl* data) {
+static void action_TRANS_tr0_FROM_unconnected_TO_cp0_BY_connectcontrolPort(ATcpClient* self, const InterfaceItemBase* ifitem, DTcpControl* transitionData) {
     /* connect to server */
-    setErrorCode(etConnectServer(client, data->IPAddr, data->TcpPort));
+    setErrorCode(etConnectServer(client, transitionData->IPAddr, transitionData->TcpPort));
 }
 static void action_TRANS_tr1_FROM_connected_TO_unconnected_BY_disconnectcontrolPort(ATcpClient* self, const InterfaceItemBase* ifitem) {
     /* close read thread */
@@ -100,14 +100,14 @@ static void action_TRANS_tr1_FROM_connected_TO_unconnected_BY_disconnectcontrolP
     
     controlPort_disconnected();
 }
-static void action_TRANS_tr2_FROM_cp0_TO_connected(ATcpClient* self, const InterfaceItemBase* ifitem, DTcpControl* data) {
+static void action_TRANS_tr2_FROM_cp0_TO_connected(ATcpClient* self, const InterfaceItemBase* ifitem, DTcpControl* transitionData) {
     controlPort_connected();
 }
-static void action_TRANS_tr7_FROM_cp0_TO_unconnected_COND_tr7(ATcpClient* self, const InterfaceItemBase* ifitem, DTcpControl* data) {
+static void action_TRANS_tr7_FROM_cp0_TO_unconnected_COND_tr7(ATcpClient* self, const InterfaceItemBase* ifitem, DTcpControl* transitionData) {
     controlPort_error();
 }
-static void action_TRANS_tr3_FROM_connected_TO_connected_BY_dataPackagepayloadPort_tr3(ATcpClient* self, const InterfaceItemBase* ifitem, DTcpPayload* data) {
-    setErrorCode(etWriteSocket(client, data->length, data->data));
+static void action_TRANS_tr3_FROM_connected_TO_connected_BY_dataPackagepayloadPort_tr3(ATcpClient* self, const InterfaceItemBase* ifitem, DTcpPayload* transitionData) {
+    setErrorCode(etWriteSocket(client, transitionData->length, transitionData->data));
     if(hasError())
     	controlPort_error();
 }
@@ -122,16 +122,16 @@ static void action_TRANS_tr3_FROM_connected_TO_connected_BY_dataPackagepayloadPo
 static void exitTo(ATcpClient* self, etInt16 current__et, etInt16 to) {
 	while (current__et!=to) {
 		switch (current__et) {
-			case STATE_unconnected:
-				self->history[STATE_TOP] = STATE_unconnected;
-				current__et = STATE_TOP;
-				break;
 			case STATE_connected:
 				self->history[STATE_TOP] = STATE_connected;
 				current__et = STATE_TOP;
 				break;
 			case STATE_initError:
 				self->history[STATE_TOP] = STATE_initError;
+				current__et = STATE_TOP;
+				break;
+			case STATE_unconnected:
+				self->history[STATE_TOP] = STATE_unconnected;
 				current__et = STATE_TOP;
 				break;
 			default:
@@ -160,13 +160,13 @@ static etInt16 executeTransitionChain(ATcpClient* self, int chain__et, const Int
 		}
 		case CHAIN_TRANS_tr0_FROM_unconnected_TO_cp0_BY_connectcontrolPort:
 		{
-			DTcpControl* data = ((DTcpControl*) generic_data__et);
-			action_TRANS_tr0_FROM_unconnected_TO_cp0_BY_connectcontrolPort(self, ifitem, data);
+			DTcpControl* transitionData = ((DTcpControl*) generic_data__et);
+			action_TRANS_tr0_FROM_unconnected_TO_cp0_BY_connectcontrolPort(self, ifitem, transitionData);
 			if (hasError()) {
-			action_TRANS_tr7_FROM_cp0_TO_unconnected_COND_tr7(self, ifitem, data);
+			action_TRANS_tr7_FROM_cp0_TO_unconnected_COND_tr7(self, ifitem, transitionData);
 			return STATE_unconnected;}
 			else {
-			action_TRANS_tr2_FROM_cp0_TO_connected(self, ifitem, data);
+			action_TRANS_tr2_FROM_cp0_TO_connected(self, ifitem, transitionData);
 			return STATE_connected;}
 		}
 		case CHAIN_TRANS_tr1_FROM_connected_TO_unconnected_BY_disconnectcontrolPort:
@@ -176,13 +176,13 @@ static etInt16 executeTransitionChain(ATcpClient* self, int chain__et, const Int
 		}
 		case CHAIN_TRANS_tr3_FROM_connected_TO_connected_BY_dataPackagepayloadPort_tr3:
 		{
-			DTcpPayload* data = ((DTcpPayload*) generic_data__et);
-			action_TRANS_tr3_FROM_connected_TO_connected_BY_dataPackagepayloadPort_tr3(self, ifitem, data);
+			DTcpPayload* transitionData = ((DTcpPayload*) generic_data__et);
+			action_TRANS_tr3_FROM_connected_TO_connected_BY_dataPackagepayloadPort_tr3(self, ifitem, transitionData);
 			return STATE_connected;
 		}
 		case CHAIN_TRANS_tr6_FROM_initError_TO_initError_BY_connectcontrolPort_tr6:
 		{
-			DTcpControl* data = ((DTcpControl*) generic_data__et);
+			DTcpControl* transitionData = ((DTcpControl*) generic_data__et);
 			return STATE_initError;
 		}
 			default:
@@ -205,9 +205,6 @@ static etInt16 enterHistory(ATcpClient* self, etInt16 state__et) {
 	}
 	while (ET_TRUE) {
 		switch (state__et) {
-			case STATE_unconnected:
-				/* in leaf state: return state id */
-				return STATE_unconnected;
 			case STATE_connected:
 				/* in leaf state: return state id */
 				return STATE_connected;
@@ -215,6 +212,9 @@ static etInt16 enterHistory(ATcpClient* self, etInt16 state__et) {
 				if (!(skip_entry__et)) entry_initError(self);
 				/* in leaf state: return state id */
 				return STATE_initError;
+			case STATE_unconnected:
+				/* in leaf state: return state id */
+				return STATE_unconnected;
 			case STATE_TOP:
 				state__et = self->history[STATE_TOP];
 				break;
@@ -243,54 +243,54 @@ static void ATcpClient_receiveEventInternal(ATcpClient* self, InterfaceItemBase*
 
 	if (!handleSystemEvent(ifitem, evt, generic_data__et)) {
 		switch (getState(self)) {
-		    case STATE_unconnected:
-		        switch(trigger__et) {
-		                case TRIG_controlPort__connect:
-		                    {
-		                        chain__et = CHAIN_TRANS_tr0_FROM_unconnected_TO_cp0_BY_connectcontrolPort;
-		                        catching_state__et = STATE_TOP;
-		                    }
-		                break;
-		                default:
-		                    /* should not occur */
-		                    break;
-		        }
-		        break;
-		    case STATE_connected:
-		        switch(trigger__et) {
-		                case TRIG_controlPort__disconnect:
-		                    {
-		                        chain__et = CHAIN_TRANS_tr1_FROM_connected_TO_unconnected_BY_disconnectcontrolPort;
-		                        catching_state__et = STATE_TOP;
-		                    }
-		                break;
-		                case TRIG_payloadPort__dataPackage:
-		                    {
-		                        chain__et = CHAIN_TRANS_tr3_FROM_connected_TO_connected_BY_dataPackagepayloadPort_tr3;
-		                        catching_state__et = STATE_TOP;
-		                    }
-		                break;
-		                default:
-		                    /* should not occur */
-		                    break;
-		        }
-		        break;
-		    case STATE_initError:
-		        switch(trigger__et) {
-		                case TRIG_controlPort__connect:
-		                    {
-		                        chain__et = CHAIN_TRANS_tr6_FROM_initError_TO_initError_BY_connectcontrolPort_tr6;
-		                        catching_state__et = STATE_TOP;
-		                    }
-		                break;
-		                default:
-		                    /* should not occur */
-		                    break;
-		        }
-		        break;
-		    default:
-		        /* should not occur */
-		        break;
+			case STATE_connected:
+				switch(trigger__et) {
+					case TRIG_controlPort__disconnect:
+						{
+							chain__et = CHAIN_TRANS_tr1_FROM_connected_TO_unconnected_BY_disconnectcontrolPort;
+							catching_state__et = STATE_TOP;
+						}
+					break;
+					case TRIG_payloadPort__dataPackage:
+						{
+							chain__et = CHAIN_TRANS_tr3_FROM_connected_TO_connected_BY_dataPackagepayloadPort_tr3;
+							catching_state__et = STATE_TOP;
+						}
+					break;
+					default:
+						/* should not occur */
+						break;
+				}
+				break;
+			case STATE_initError:
+				switch(trigger__et) {
+					case TRIG_controlPort__connect:
+						{
+							chain__et = CHAIN_TRANS_tr6_FROM_initError_TO_initError_BY_connectcontrolPort_tr6;
+							catching_state__et = STATE_TOP;
+						}
+					break;
+					default:
+						/* should not occur */
+						break;
+				}
+				break;
+			case STATE_unconnected:
+				switch(trigger__et) {
+					case TRIG_controlPort__connect:
+						{
+							chain__et = CHAIN_TRANS_tr0_FROM_unconnected_TO_cp0_BY_connectcontrolPort;
+							catching_state__et = STATE_TOP;
+						}
+					break;
+					default:
+						/* should not occur */
+						break;
+				}
+				break;
+			default:
+				/* should not occur */
+				break;
 		}
 	}
 	if (chain__et != NOT_CAUGHT) {

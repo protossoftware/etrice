@@ -26,6 +26,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.etrice.core.RoomStandaloneSetup;
 import org.eclipse.etrice.core.genmodel.etricegen.AbstractInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInterfaceInstance;
@@ -47,8 +48,10 @@ import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.SystemInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.impl.AbstractInstanceImpl;
 import org.eclipse.etrice.core.genmodel.etricegen.impl.StructureInstanceImpl;
-import org.eclipse.etrice.core.genmodel.fsm.base.ILogger;
-import org.eclipse.etrice.core.genmodel.fsm.fsmgen.IDiagnostician;
+import org.eclipse.etrice.core.genmodel.fsm.ExtendedFsmGenBuilder;
+import org.eclipse.etrice.core.genmodel.fsm.IDiagnostician;
+import org.eclipse.etrice.core.genmodel.fsm.ILogger;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.GraphContainer;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.ActorContainerRef;
@@ -73,6 +76,8 @@ import org.eclipse.etrice.core.room.SubProtocol;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.SubSystemRef;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
+
+import com.google.inject.Injector;
 
 /**
  * A class for the creation of an intermediate model combining all information needed by
@@ -1256,9 +1261,13 @@ public class GeneratorModelBuilder {
 					+" of "+((RoomModel)ac.eContainer()).getName());
 
 		ExpandedActorClass xpac = ETriceGenFactory.eINSTANCE.createExpandedActorClass();
-		xpac.setModelComponent(ac);
-		
-		xpac.prepare(diagnostician);
+		Injector injector = new RoomStandaloneSetup().createInjectorAndDoEMFRegistration();
+		ExtendedFsmGenBuilder builder = new ExtendedFsmGenBuilder(injector, diagnostician);
+		GraphContainer gc = builder.createTransformedModel(ac);
+		builder.withChainHeads(gc);
+		builder.withCommonData(gc);
+		builder.withTriggersInStates(gc);
+		xpac.setGraphContainer(gc);
 		
 		return xpac;
 	}

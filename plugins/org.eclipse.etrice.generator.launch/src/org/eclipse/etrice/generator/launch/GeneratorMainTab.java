@@ -134,7 +134,6 @@ public abstract class GeneratorMainTab extends AbstractLaunchConfigurationTab {
 	public void setDefaults(ILaunchConfigurationWorkingCopy configuration) {
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public void initializeFrom(ILaunchConfiguration configuration) {
 		try {

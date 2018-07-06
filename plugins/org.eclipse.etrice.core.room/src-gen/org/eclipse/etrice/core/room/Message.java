@@ -103,12 +103,12 @@ public interface Message extends EObject
    * 
    * <!-- end-model-doc -->
    * @return the value of the '<em>Data</em>' containment reference.
-   * @see #setData(VarDecl)
+   * @see #setData(MessageData)
    * @see org.eclipse.etrice.core.room.RoomPackage#getMessage_Data()
    * @model containment="true"
    * @generated
    */
-  VarDecl getData();
+  MessageData getData();
 
   /**
    * Sets the value of the '{@link org.eclipse.etrice.core.room.Message#getData <em>Data</em>}' containment reference.
@@ -118,7 +118,7 @@ public interface Message extends EObject
    * @see #getData()
    * @generated
    */
-  void setData(VarDecl value);
+  void setData(MessageData value);
 
   /**
    * Returns the value of the '<em><b>Annotations</b></em>' containment reference list.

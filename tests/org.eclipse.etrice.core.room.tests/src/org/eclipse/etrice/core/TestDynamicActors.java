@@ -34,7 +34,7 @@ public class TestDynamicActors extends TestBase {
 
 	@Before
 	public void setUp() {
-		prepare();
+		prepare(CoreTestsActivator.getInstance().getBundle());
 		
 		resource = getResource("TestDynamicActors.room");
 	}

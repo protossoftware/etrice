@@ -12,13 +12,13 @@
 
 package org.eclipse.etrice.core.common.postprocessing
 
-import org.eclipse.emf.ecore.EPackage
 import org.eclipse.emf.ecore.EClass
 import org.eclipse.emf.ecore.EClassifier
-import org.eclipse.emf.ecore.EcoreFactory
-import org.eclipse.emf.ecore.ETypedElement
-import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.emf.ecore.EModelElement
+import org.eclipse.emf.ecore.EPackage
+import org.eclipse.emf.ecore.ETypedElement
+import org.eclipse.emf.ecore.EcoreFactory
+import org.eclipse.emf.ecore.util.EcoreUtil
 
 class PostprocessingHelpers {
 	
@@ -55,7 +55,7 @@ class PostprocessingHelpers {
 		op.setEType(type)
 		op.setUpperBound(upperBound)
 		
-		if (body!=null) {
+		if (body !== null) {
 			val anno = EcoreFactory::eINSTANCE.createEAnnotation
 			anno.setSource("http://www.eclipse.org/emf/2002/GenModel")
 			anno.details.put("body", body)
@@ -63,6 +63,15 @@ class PostprocessingHelpers {
 		}
 		
 		owner.EOperations.add(op)
+	}
+	
+	def static addAttribute(EClass owner, String name, EClassifier type, Object defaultValue) {
+		val attr = EcoreFactory::eINSTANCE.createEAttribute
+		attr.setName(name)
+		attr.setEType(type)
+		attr.defaultValue = defaultValue
+		
+		owner.EStructuralFeatures.add(attr)
 	}
 	
 	def static addClass(EPackage pck, String name) {

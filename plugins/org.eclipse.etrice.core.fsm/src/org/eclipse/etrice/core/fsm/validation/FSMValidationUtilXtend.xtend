@@ -84,7 +84,7 @@ class FSMValidationUtilXtend {
 		val ArrayList<FSMValidationUtilXtend.Result> result = newArrayList
 		
 		for (Transition t:parent.transitions.filter(t|t instanceof TriggeredTransition && ((t as TriggeredTransition).from instanceof StateTerminal) && myState==((t as TriggeredTransition).from as StateTerminal).state)) {
-			for (Trigger k:(t as TriggeredTransition).triggers.filter(k|k.guard==null)) {
+			for (Trigger k:(t as TriggeredTransition).triggers.filter(k|k.guard===null)) {
 				for (specMethod:k.getMsgFromIfPairs) {
 					val triggerName = specMethod.triggerName
 					if (trig2trans.containsKey(triggerName)) {
@@ -105,7 +105,7 @@ class FSMValidationUtilXtend {
 	
 	def getStateGraph(EObject obj) {
 		var parent = obj.eContainer
-		while (parent!=null) {
+		while (parent!==null) {
 			if (parent instanceof StateGraph) {
 				return parent as StateGraph
 			}

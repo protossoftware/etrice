@@ -22,7 +22,6 @@ import org.eclipse.etrice.core.etphys.eTPhys.ExecMode
 import org.eclipse.etrice.core.etphys.eTPhys.PhysicalThread
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInterfaceInstance
-import org.eclipse.etrice.core.genmodel.fsm.fsmgen.IDiagnostician
 import org.eclipse.etrice.core.genmodel.etricegen.InstanceBase
 import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.etrice.core.genmodel.etricegen.StructureInstance
@@ -43,6 +42,7 @@ import static extension org.eclipse.etrice.generator.fsm.base.Indexed.*
 import com.google.common.collect.Lists
 import com.google.common.collect.Sets
 import org.eclipse.etrice.core.genmodel.builder.GenmodelConstants
+import org.eclipse.etrice.core.genmodel.fsm.IDiagnostician
 
 @Singleton
 class NodeGen {
@@ -64,7 +64,7 @@ class NodeGen {
 		for (nr : ETMapUtil::getNodeRefs()) {
 			for (instpath : ETMapUtil::getSubSystemInstancePaths(nr)) {
 				val ssi = root.getInstance(instpath) as SubSystemInstance
-				if (ssi!=null && ssi.subSystemClass.validGenerationLocation) {
+				if (ssi!==null && ssi.subSystemClass.validGenerationLocation) {
 					val wired = sscc2wired.get(ssi.subSystemClass)
 					val path = ssi.subSystemClass.generationTargetPath+ssi.subSystemClass.getPath
 					val infopath = ssi.subSystemClass.generationInfoPath+ssi.subSystemClass.getPath

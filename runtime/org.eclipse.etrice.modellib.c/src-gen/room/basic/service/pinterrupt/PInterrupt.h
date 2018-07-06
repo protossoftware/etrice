@@ -12,6 +12,7 @@
 #include "modelbase/etPort.h"
 
 
+/* include all referenced room classes */
 
 
 /* message IDs */

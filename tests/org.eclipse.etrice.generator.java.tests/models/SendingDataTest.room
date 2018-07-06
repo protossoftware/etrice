@@ -28,7 +28,7 @@ RoomModel SendingDataTest {
 						<pingInt16: PingPongPort>
 					}
 					action {
-						"PingPongPort.pongInt16(d);"
+						"PingPongPort.pongInt16(transitionData);"
 					}
 				}
 				Transition tr1: reply -> reply {
@@ -36,7 +36,7 @@ RoomModel SendingDataTest {
 						<pingInt8: PingPongPort>
 					}
 					action {
-						"PingPongPort.pongInt8(d);"
+						"PingPongPort.pongInt8(transitionData);"
 					}
 				}
 				Transition init: initial -> reply { }
@@ -45,7 +45,7 @@ RoomModel SendingDataTest {
 						<pingInt32: PingPongPort>
 					}
 					action {
-						"PingPongPort.pongInt32(d);"
+						"PingPongPort.pongInt32(transitionData);"
 					}
 				}
 				Transition tr3: reply -> reply {
@@ -53,7 +53,7 @@ RoomModel SendingDataTest {
 						<pingFloat32: PingPongPort>
 					}
 					action {
-						"PingPongPort.pongFloat32(d);"
+						"PingPongPort.pongFloat32(transitionData);"
 					}
 				}
 				Transition tr4: reply -> reply {
@@ -61,27 +61,27 @@ RoomModel SendingDataTest {
 						<pingFloat64: PingPongPort>
 					}
 					action {
-						"PingPongPort.pongFloat64(d);"
+						"PingPongPort.pongFloat64(transitionData);"
 					}
 				}
 				Transition tr7: reply -> cp cp0 {
 					triggers {
 						<pingInt32Ref: PingPongPort guard {
-							"d!=0"
+							"transitionData!=0"
 						}>
 					}
 				}
 				Transition tr8: cp cp0 -> reply {
 					action {
-						"PingPongPort.pongInt32(d+10);"
+						"PingPongPort.pongInt32(transitionData+10);"
 					}
 				}
 				Transition tr6: cp cp0 -> reply {
 					cond {
-						"d!=5"
+						"transitionData!=5"
 					}
 					action {
-						"PingPongPort.pongInt32(d);"
+						"PingPongPort.pongInt32(transitionData);"
 					}
 				}
 				Transition tr9: reply -> reply {
@@ -89,7 +89,7 @@ RoomModel SendingDataTest {
 						<pingComplex: PingPongPort>
 					}
 					action {
-						"PingPongPort.pongComplex(d);"
+						"PingPongPort.pongComplex(transitionData);"
 					}
 				}
 				Transition tr11: reply -> reply {
@@ -97,7 +97,7 @@ RoomModel SendingDataTest {
 						<pingComplexRef: PingPongPort>
 					}
 					action {
-						"PingPongPort.pongComplex(d);"
+						"PingPongPort.pongComplex(transitionData);"
 					}
 				}
 				Transition tr5: reply -> reply {
@@ -105,7 +105,7 @@ RoomModel SendingDataTest {
 						<pingInt64: PingPongPort>
 					}
 					action {
-						"PingPongPort.pongInt64(d);"
+						"PingPongPort.pongInt64(transitionData);"
 					}
 				}
 				Transition tr10: reply -> reply {
@@ -113,30 +113,30 @@ RoomModel SendingDataTest {
 						<pingInt16Ref: PingPongPort>
 					}
 					action {
-						"PingPongPort.pongInt16(d);"
+						"PingPongPort.pongInt16(transitionData);"
 					}
 				}
 				Transition tr12: reply -> cp cp1 {
 					triggers {
 						<pingComplexRef: PingPongPort guard {
-							"d.i8Val == 5"
+							"transitionData.i8Val == 5"
 						}>
 					}
 					action {
-						"PingPongPort.pongComplex(d);"
+						"PingPongPort.pongComplex(transitionData);"
 					}
 				}
 				Transition tr13: cp cp1 -> reply {
 					action {
-						"PingPongPort.pongComplex(d);"
+						"PingPongPort.pongComplex(transitionData);"
 					}
 				}
 				Transition tr14: cp cp1 -> reply {
 					cond {
-						"d.i8Val==7"
+						"transitionData.i8Val==7"
 					}
 					action {
-						"PingPongPort.pongComplex(d);"
+						"PingPongPort.pongComplex(transitionData);"
 					}
 				}
 				Transition tr15: reply -> reply {
@@ -144,7 +144,7 @@ RoomModel SendingDataTest {
 						<pingComplexDerived: PingPongPort>
 					}
 					action {
-						"PingPongPort.pongComplexDerived(d);"
+						"PingPongPort.pongComplexDerived(transitionData);"
 					}
 				}
 				ChoicePoint cp0
@@ -222,7 +222,7 @@ RoomModel SendingDataTest {
 							}
 							action {
 								"counter++;"
-								"if (d==5){"
+								"if (transitionData==5){"
 								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 2);"
 								"}else{"
 								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 0xFF);"
@@ -235,7 +235,7 @@ RoomModel SendingDataTest {
 							}
 							action {
 								"counter++;"
-								"if (d==19){"
+								"if (transitionData==19){"
 								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 3);"
 								"}else{"
 								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 0xFF);"
@@ -248,7 +248,7 @@ RoomModel SendingDataTest {
 							}
 							action {
 								"counter++;"
-								"if (d==4711){"
+								"if (transitionData==4711){"
 								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 4);"
 								"}else{"
 								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 0xFF);"
@@ -265,7 +265,7 @@ RoomModel SendingDataTest {
 								"counter=0;"
 								"if (lang == 1){"
 								"// Java cannot send references of primitive types"
-								"\tif (d==4711){\t"
+								"\tif (transitionData==4711){\t"
 								"\t\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 9);"
 								"\t}else{"
 								"\t\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 0xFF);"
@@ -273,7 +273,7 @@ RoomModel SendingDataTest {
 								"} "
 								"if (lang == 2){"
 								"// C"
-								"\tif (d==4712){\t"
+								"\tif (transitionData==4712){\t"
 								"\t\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 9);"
 								"\t}else{"
 								"\t\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 0xFF);"
@@ -287,7 +287,7 @@ RoomModel SendingDataTest {
 							}
 							action {
 								"counter++;"
-								"if (d==11470815){"
+								"if (transitionData==11470815){"
 								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 5);"
 								"}else{"
 								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 0xFF);"
@@ -300,7 +300,7 @@ RoomModel SendingDataTest {
 							}
 							action {
 								"counter++;"
-								"if ((d>3)&&(d<4)){"
+								"if ((transitionData>3)&&(transitionData<4)){"
 								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 6);"
 								"}else{"
 								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 0xFF);"
@@ -313,7 +313,7 @@ RoomModel SendingDataTest {
 							}
 							action {
 								"counter++;"
-								"if ((d>7)&&(d<8)){"
+								"if ((transitionData>7)&&(transitionData<8)){"
 								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 7);"
 								"}else{"
 								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 0xFF);"
@@ -326,7 +326,7 @@ RoomModel SendingDataTest {
 							}
 							action {
 								"counter++;"
-								"if (d==6){"
+								"if (transitionData==6){"
 								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 10);"
 								"}else{"
 								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 0xFF);"
@@ -339,7 +339,7 @@ RoomModel SendingDataTest {
 							}
 							action {
 								"counter++;"
-								"if (d==20){"
+								"if (transitionData==20){"
 								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 11);"
 								"}else{"
 								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 0xFF);"
@@ -352,7 +352,7 @@ RoomModel SendingDataTest {
 							}
 							action {
 								"counter++;"
-								"if (d==4712){"
+								"if (transitionData==4712){"
 								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 12);"
 								"}else{"
 								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 0xFF);"
@@ -365,7 +365,7 @@ RoomModel SendingDataTest {
 							}
 							action {
 								"counter++;"
-								"if (d==11470816){"
+								"if (transitionData==11470816){"
 								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 13);"
 								"}else{"
 								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 0xFF);"
@@ -378,7 +378,7 @@ RoomModel SendingDataTest {
 							}
 							action {
 								"counter++;"
-								"if ((d>13)&&(d<14)){"
+								"if ((transitionData>13)&&(transitionData<14)){"
 								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 14);"
 								"}else{"
 								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 0xFF);"
@@ -391,7 +391,7 @@ RoomModel SendingDataTest {
 							}
 							action {
 								"counter++;"
-								"if ((d>28)&&(d<29)){"
+								"if ((transitionData>28)&&(transitionData<29)){"
 								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 15);"
 								"}else{"
 								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 0xFF);"
@@ -405,7 +405,7 @@ RoomModel SendingDataTest {
 								}>
 							}
 							action {
-								"if (d==4712){\t"
+								"if (transitionData==4712){\t"
 								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 17);"
 								"}else{"
 								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 0xFF);"
@@ -422,7 +422,7 @@ RoomModel SendingDataTest {
 								"counter++;"
 								"if (lang == 1){"
 								"// Java cannot send references of primitive types"
-								"\tif (d==19){\t"
+								"\tif (transitionData==19){\t"
 								"\t\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 8);"
 								"\t}else{"
 								"\t\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 0xFF);"
@@ -430,7 +430,7 @@ RoomModel SendingDataTest {
 								"} "
 								"if (lang == 2){"
 								"// C"
-								"\tif (d==20){\t"
+								"\tif (transitionData==20){\t"
 								"\t\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 8);"
 								"\t}else{"
 								"\t\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 0xFF);"
@@ -446,7 +446,7 @@ RoomModel SendingDataTest {
 							}
 							action {
 								"counter++;"
-								"if (d==20){\t"
+								"if (transitionData==20){\t"
 								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 16);"
 								"}else{"
 								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 0xFF);"
@@ -484,13 +484,13 @@ RoomModel SendingDataTest {
 							}
 							action {
 								"counter=0;"
-								"if (d.i8Val==10){"
+								"if (transitionData.i8Val==10){"
 								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 19);"
 								"}else{"
 								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 0xFF);"
 								"}"
 								""
-								"if (d.complexVal.i32Val2==80){"
+								"if (transitionData.complexVal.i32Val2==80){"
 								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 20);"
 								"}else{"
 								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 0xFF);"
@@ -506,7 +506,7 @@ RoomModel SendingDataTest {
 							}
 							action {
 								"counter++;"
-								"if (d.i8Val==10){"
+								"if (transitionData.i8Val==10){"
 								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 18);"
 								"}else{"
 								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 0xFF);"
@@ -518,13 +518,13 @@ RoomModel SendingDataTest {
 								<pongComplexDerived: PingPongPort>
 							}
 							action {
-								"if (d.i8Val==11){"
+								"if (transitionData.i8Val==11){"
 								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 21);"
 								"}else{"
 								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 0xFF);"
 								"}"
 								""
-								"if (d.i32Val3==150){"
+								"if (transitionData.i32Val3==150){"
 								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 22);"
 								"}else{"
 								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 0xFF);"

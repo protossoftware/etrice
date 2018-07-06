@@ -1,5 +1,7 @@
 apply plugin: 'java'
 
+apply from: "$rootDir/gradle/publish.gradle"
+
 sourceSets {
 	main {
 		java {

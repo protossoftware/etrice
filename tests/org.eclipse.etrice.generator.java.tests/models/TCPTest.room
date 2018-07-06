@@ -125,7 +125,7 @@ RoomModel TCPTest {
 						<receive: p1>
 					}
 					action {
-						"p1.send(data);"
+						"p1.send(transitionData);"
 					}
 				}
 				Transition tr2: cp cp1 -> test_failed

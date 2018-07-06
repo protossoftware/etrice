@@ -1,5 +1,10 @@
 package org.eclipse.etrice.ui.behavior.dialogs;
 
+import static org.eclipse.etrice.core.fsm.fSM.FSMPackage.Literals.CP_BRANCH_TRANSITION__CONDITION;
+import static org.eclipse.etrice.core.fsm.fSM.FSMPackage.Literals.GUARDED_TRANSITION__GUARD;
+import static org.eclipse.etrice.core.fsm.fSM.FSMPackage.Literals.TRANSITION_BASE__ACTION;
+import static org.eclipse.etrice.core.ui.util.UIExpressionUtil.getExpressionProvider;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,19 +27,12 @@ import org.eclipse.etrice.core.fsm.fSM.Transition;
 import org.eclipse.etrice.core.fsm.fSM.TriggeredTransition;
 import org.eclipse.etrice.core.fsm.util.FSMHelpers;
 import org.eclipse.etrice.core.fsm.validation.FSMValidationUtilXtend.Result;
-import org.eclipse.etrice.core.genmodel.builder.GeneratorModelBuilder;
-import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
-import org.eclipse.etrice.core.genmodel.fsm.base.NullDiagnostician;
-import org.eclipse.etrice.core.genmodel.fsm.base.NullLogger;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.CommunicationType;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.ProtocolClass;
-import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
-import org.eclipse.etrice.expressions.detailcode.GuardDetailExpressionProvider;
 import org.eclipse.etrice.expressions.detailcode.IDetailExpressionProvider;
-import org.eclipse.etrice.expressions.detailcode.RuntimeDetailExpressionProvider;
 import org.eclipse.etrice.ui.behavior.Activator;
 import org.eclipse.etrice.ui.behavior.fsm.actioneditor.IActionCodeEditor;
 import org.eclipse.etrice.ui.behavior.fsm.dialogs.AbstractMemberAwarePropertyDialog;
@@ -99,7 +97,9 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 		}
 	}
 	
+	@SuppressWarnings("unused")
 	private ActorClass ac;
+	
 	private Transition trans;
 	private List<AbstractInterfaceItem> interfaceItems = new ArrayList<AbstractInterfaceItem>();
 	private DetailCodeToString m2s;
@@ -185,11 +185,6 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 		}
 		
 		FSMHelpers fsmHelpers = SupportUtil.getInstance().getFSMHelpers();
-
-		VarDecl transitionEventData = null;
-		ExpandedActorClass xpac = new GeneratorModelBuilder(new NullLogger(), new NullDiagnostician()).createExpandedActorClass(ac);
-		if(xpac != null && xpac.getCopy(trans) instanceof Transition)
-			transitionEventData = xpac.getVarDeclData((Transition) xpac.getCopy(trans));
 		
 		if (trans instanceof GuardedTransition) {
 			GuardedTransition guardedTrans = (GuardedTransition) trans;
@@ -199,14 +194,12 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 			}
 			else {
 				GuardValidator gv = new GuardValidator("guard must not be empty");
-				GuardDetailExpressionProvider exprProvider = new GuardDetailExpressionProvider(ac);
-				exprProvider.setTransitionEventData(transitionEventData);
 		
 				createActionCodeEditor(body, "&Guard:", guardedTrans.getGuard(),
 						trans,
 						FSMPackage.eINSTANCE.getGuardedTransition_Guard(), gv,
 						s2m_not_null, m2s_null_empty, true, true, true,
-						"empty guard", exprProvider);
+						"empty guard", getExpressionProvider(guardedTrans, GUARDED_TRANSITION__GUARD));
 			}
 		}
 		
@@ -217,8 +210,6 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 			}
 			else {
 				GuardValidator gv = new GuardValidator("condition must not be empty");
-				GuardDetailExpressionProvider exprProvider = new GuardDetailExpressionProvider(ac);
-				exprProvider.setTransitionEventData(transitionEventData);
 
 				createActionCodeEditor(
 						body,
@@ -227,7 +218,7 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 						trans,
 						FSMPackage.eINSTANCE.getCPBranchTransition_Condition(),
 						gv, s2m_not_null, m2s_null_empty, true, true, true,
-						"empty condition", exprProvider);
+						"empty condition", getExpressionProvider(trans, CP_BRANCH_TRANSITION__CONDITION));
 			}
 		}
 
@@ -238,23 +229,20 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 				setTextSelectionAndFocus(baseActionCode, codeSelectionString);
 			}
 		}
-		
-		GuardDetailExpressionProvider exprProvider = new RuntimeDetailExpressionProvider(ac);
-		exprProvider.setTransitionEventData(transitionEventData);
 
 		if (inherited) {
 			if (refined!=null) {
 				createActionCodeEditor(body, "&Action Code:",
 						refined.getAction(), refined,
 						FSMPackage.eINSTANCE.getTransitionBase_Action(),
-						null, s2m, m2s, true, true, false, null, exprProvider);
+						null, s2m, m2s, true, true, false, null, getExpressionProvider(refined, TRANSITION_BASE__ACTION));
 			}
 		}
 		else
 		{
 			createActionCodeEditor(body, "&Action Code:", trans.getAction(),
 					trans, FSMPackage.eINSTANCE.getTransitionBase_Action(), null,
-					s2m, m2s, true, true, false, null, exprProvider);
+					s2m, m2s, true, true, false, null, getExpressionProvider(trans, TRANSITION_BASE__ACTION));
 		}
 		
 		createMembersAndMessagesButtons(body);
@@ -268,7 +256,7 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 			});
 		}
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see org.eclipse.etrice.ui.common.dialogs.AbstractPropertyDialog#updateValidationFeedback(boolean)
 	 */

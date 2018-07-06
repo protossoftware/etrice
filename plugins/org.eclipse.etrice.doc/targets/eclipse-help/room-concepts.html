@@ -152,11 +152,11 @@
 <p>Protocol classes have only textual notation. The example defines a protocol class with 2 incoming and two outgoing messages. Messages can have data attached. The data can be of a primitive type (e.g. int32, float64, …) or a data class.</p>
 <pre><code class="room customHighlighted"><span class="keyword">ProtocolClass</span> ProtocolClass1 {
 	<span class="keyword">incoming</span> {
-		<span class="keyword">Message</span> m1(data: int32}
+		<span class="keyword">Message</span> m1(int32}
 		<span class="keyword">Message</span> m2()
 	}
 	<span class="keyword">outgoing</span> {
-		<span class="keyword">Message</span> m3(data: DataClass1}
+		<span class="keyword">Message</span> m3(DataClass1}
 		<span class="keyword">Message</span> m4()
 	}
 }

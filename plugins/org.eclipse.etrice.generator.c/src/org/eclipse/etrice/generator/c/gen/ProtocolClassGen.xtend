@@ -16,7 +16,7 @@ package org.eclipse.etrice.generator.c.gen
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import org.eclipse.etrice.core.genmodel.etricegen.Root
-import org.eclipse.etrice.core.genmodel.fsm.base.ILogger
+import org.eclipse.etrice.core.genmodel.fsm.ILogger
 import org.eclipse.etrice.core.room.CommunicationType
 import org.eclipse.etrice.core.room.Operation
 import org.eclipse.etrice.core.room.ProtocolClass
@@ -120,7 +120,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		
 		«generateIncludeGuardBegin(filename)»
 
-		«IF pc.base!=null»
+		«IF pc.base!==null»
 			// include base class utils
 			#include «pc.base.utilsIncludePath»
 			
@@ -143,7 +143,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		val portClass = pc.getPortClass(conj)
 		val portClassName = pc.getPortClassName(conj)
 	'''
-		«IF portClass!=null»
+		«IF portClass!==null»
 			/* «IF conj»conjugate«ELSE»regular«ENDIF» port class */
 			
 			/* operations */
@@ -214,14 +214,14 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 				«allAttributes.attributes»
 			};
 			«FOR a:allAttributes»
-				«IF a.defaultValueLiteral!=null»
+				«IF a.defaultValueLiteral!==null»
 					«logger.logInfo(portClassName+" "+a.name+": Attribute initialization not supported in C")»
 				«ENDIF»
 			«ENDFOR»
 		«ENDIF»
 		
 		«FOR message : messages»
-			«var hasData = message.data!=null»
+			«var hasData = message.data!==null»
 			«var typeName = if (hasData) message.data.refType.type.typeName else ""»
 			«var refp = if (hasData && (!(message.data.refType.type.enumerationOrPrimitive)||(message.data.refType.ref))) "*" else ""»
 			«var data = if (hasData) ", "+typeName+refp+" data" else ""»
@@ -246,7 +246,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 
 	
 	def private genDataDrivenPortHeaders(ProtocolClass pc) {
-		var sentMsgs = pc.allIncomingMessages.filter(m|m.data!=null)
+		var sentMsgs = pc.allIncomingMessages.filter(m|m.data!==null)
 		val enumMsgs = sentMsgs.filter(m|m.data.refType.type.isEnumeration)
 		val boolMsgs = sentMsgs.filter(m|m.data.refType.type.isBoolean)
 		val usesMSC = Main::settings.generateMSCInstrumentation && !(enumMsgs.empty && boolMsgs.empty)
@@ -292,7 +292,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 			«pc.getPortClassName(false)»;
 			
 			«FOR message : sentMsgs»
-				«var hasData = message.data!=null»
+				«var hasData = message.data!==null»
 				«var typeName = if (hasData) message.data.refType.type.typeName else ""»
 				«var refp = if (hasData && !(message.data.refType.type.enumerationOrPrimitive)) "*" else ""»
 				«var data = if (hasData) ", "+typeName+refp+" data" else ""»
@@ -304,7 +304,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 	}
 	
 	def private genDataDrivenPortSources(ProtocolClass pc) {
-		var messages = pc.allIncomingMessages.filter(m|m.data!=null)
+		var messages = pc.allIncomingMessages.filter(m|m.data!==null)
 		val enumMsgs = messages.filter(m|m.data.refType.type.isEnumeration)
 		val boolMsgs = messages.filter(m|m.data.refType.type.isBoolean)
 		val usesMSC = Main::settings.generateMSCInstrumentation && !(enumMsgs.empty && boolMsgs.empty)
@@ -358,7 +358,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 
 		'''
 			«FOR message : messages»
-				«var hasData = message.data!=null»
+				«var hasData = message.data!==null»
 				«var typeName = if (hasData) message.data.refType.type.typeName else ""»
 				«var refp = if (hasData && ((message.data.refType.ref))) "*" else ""»
 				«var refpd = if (hasData && (!(message.data.refType.type.enumerationOrPrimitive)||(message.data.refType.ref))) "*" else ""»
@@ -368,7 +368,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 				«var hdlr = message.getSendHandler(conj)»
 				
 				«messageSignature(portClassName, message.name, "", data)» {
-					«IF hdlr != null»
+					«IF hdlr !== null»
 						«AbstractGenerator::getInstance().getTranslatedCode(hdlr.detailCode)»
 					«ELSE»
 						ET_MSC_LOGGER_SYNC_ENTRY("«portClassName»", "«message.name»")
@@ -381,7 +381,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 				}
 				
 				«messageSignature(replPortClassName, message.name, "_broadcast", data)» {
-					«IF hdlr != null»
+					«IF hdlr !== null»
 						int i;
 						for (i=0; i<((etReplPort*)self)->size; ++i) {
 							«portClassName»_«message.name»(&((etReplPort*)self)->ports[i].port«dataCall»);
@@ -400,7 +400,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 				}
 				
 				«messageSignature(replPortClassName, message.name, "", ", int idx__et"+data)» {
-					«IF hdlr != null»
+					«IF hdlr !== null»
 						«portClassName»_«message.name»(&((etReplPort*)self)->ports[idx__et].port«dataCall»);
 					«ELSE»					
 						ET_MSC_LOGGER_SYNC_ENTRY("«replPortClassName»", "«message.name»")

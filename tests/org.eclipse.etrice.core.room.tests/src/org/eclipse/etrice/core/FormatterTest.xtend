@@ -8,9 +8,9 @@ import java.util.regex.Pattern
 import org.eclipse.core.runtime.FileLocator
 import org.eclipse.emf.common.util.URI
 import org.eclipse.etrice.core.room.tests.RoomInjectorProvider
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.junit4.XtextRunner
-import org.eclipse.xtext.junit4.formatter.FormatterTester
+import org.eclipse.xtext.testing.InjectWith
+import org.eclipse.xtext.testing.XtextRunner
+import org.eclipse.xtext.testing.formatter.FormatterTestHelper
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -19,7 +19,7 @@ import static org.junit.Assert.assertNotEquals
 
 @RunWith(XtextRunner)
 @InjectWith(RoomInjectorProvider)
-class FormatterTest extends FormatterTester {
+class FormatterTest extends FormatterTestHelper {
 	
 	// does not work with comments or ccstring
 	val patterns = #[

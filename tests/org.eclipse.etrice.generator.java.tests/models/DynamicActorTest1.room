@@ -43,7 +43,7 @@ RoomModel DynamicActorTest1 {
 						<hello: p0>
 					}
 					action {
-						"EXPECT_TRUE(caseId, \"<|MODEL_LOCATION|>\", txt.equals(\"AC3:/JavaGenTests/da1Test/appl/cont/opt/sub2/deep_sub\"));"
+						"EXPECT_TRUE(caseId, \"<|MODEL_LOCATION|>\", transitionData.equals(\"AC3:/JavaGenTests/da1Test/appl/cont/opt/sub2/deep_sub\"));"
 						"opt.destroyOptionalActor();"
 					}
 				}
@@ -52,7 +52,7 @@ RoomModel DynamicActorTest1 {
 						<hello: p0>
 					}
 					action {
-						"EXPECT_TRUE(caseId, \"<|MODEL_LOCATION|>\", txt.equals(\"AC1:/JavaGenTests/da1Test/appl/cont/opt/sub1\"));"
+						"EXPECT_TRUE(caseId, \"<|MODEL_LOCATION|>\", transitionData.equals(\"AC1:/JavaGenTests/da1Test/appl/cont/opt/sub1\"));"
 						"opt.destroyOptionalActor();"
 					}
 				}

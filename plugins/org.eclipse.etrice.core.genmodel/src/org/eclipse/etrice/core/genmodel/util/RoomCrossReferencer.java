@@ -28,6 +28,7 @@ import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.EnumerationType;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
+import org.eclipse.etrice.core.room.MessageData;
 import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.PortClass;
@@ -162,6 +163,9 @@ public class RoomCrossReferencer {
 			do {
 				getAttributeDataClasses(dataClasses, enumClasses, cls.getAttributes());
 				getOperationDataClasses(dataClasses, enumClasses, cls.getOperations());
+				for(ProtocolClass protocol : getReferencedProtocolClasses(cls)) {
+					enumClasses.addAll(getReferencedEnumClasses(protocol));
+				}
 				cls = cls.getActorBase();
 			}
 			while (cls!=null);
@@ -288,11 +292,11 @@ public class RoomCrossReferencer {
 		for (ProtocolClass pc : protocolClasses) {
 			for (Message m : pc.getIncomingMessages()) {
 				if (m.getData()!=null)
-					getVarDeclDataClasses(dataClasses, enumClasses, Collections.singleton(m.getData()));
+					getMessageDataClasses(dataClasses, enumClasses, Collections.singleton(m.getData()));
 			}
 			for (Message m : pc.getOutgoingMessages()) {
 				if (m.getData()!=null)
-					getVarDeclDataClasses(dataClasses, enumClasses, Collections.singleton(m.getData()));
+					getMessageDataClasses(dataClasses, enumClasses, Collections.singleton(m.getData()));
 			}
 			
 			if (pc.getRegular()!=null) {
@@ -362,6 +366,12 @@ public class RoomCrossReferencer {
 
 	private void getVarDeclDataClasses(Set<DataClass> dataClasses, Set<EnumerationType> enumClasses, Collection<VarDecl> decls) {
 		for (VarDecl vd : decls) {
+			getClasses(vd.getRefType().getType(), dataClasses, enumClasses);
+		}
+	}
+
+	private void getMessageDataClasses(Set<DataClass> dataClasses, Set<EnumerationType> enumClasses, Collection<MessageData> decls) {
+		for (MessageData vd : decls) {
 			getClasses(vd.getRefType().getType(), dataClasses, enumClasses);
 		}
 	}

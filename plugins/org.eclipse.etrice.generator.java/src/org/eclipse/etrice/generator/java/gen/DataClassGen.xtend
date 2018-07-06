@@ -60,7 +60,7 @@ class DataClassGen {
 		«dc.userCode(1)»
 
 
-		public class «dc.name»«IF dc.base!=null» extends «dc.base.name»«ENDIF» implements Serializable {
+		public class «dc.name»«IF dc.base!==null» extends «dc.base.name»«ENDIF» implements Serializable {
 
 			private static final long serialVersionUID = «(dc.package+dc.name).hashCode»L;
 
@@ -83,7 +83,7 @@ class DataClassGen {
 
 			// constructor using fields
 			public «dc.name»(«dc.argList») {
-				«IF dc.base!=null»
+				«IF dc.base!==null»
 				super(«dc.base.paramList»);
 				«ELSE»
 				super();
@@ -109,10 +109,10 @@ class DataClassGen {
 	def paramList(DataClass _dc) {
 		var result = ""
 		var dc = _dc
-		while (dc!=null) {
+		while (dc!==null) {
 			result = dc.attributes.paramList.toString + result
 			dc = dc.base
-			if (dc!=null)
+			if (dc!==null)
 				result = ", "+result
 		}
 		return result
@@ -129,7 +129,7 @@ class DataClassGen {
 	def private deepCopy(DataClass _dc) {
 		var result = ""
 		var dc = _dc
-		while (dc!=null) {
+		while (dc!==null) {
 			result = deepCopy(dc.attributes).toString + result
 			dc = dc.base
 		}

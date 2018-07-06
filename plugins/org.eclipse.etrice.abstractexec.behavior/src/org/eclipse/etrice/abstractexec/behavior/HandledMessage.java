@@ -20,6 +20,7 @@ public class HandledMessage {
 	private AbstractInterfaceItem ifitem;
 	private EObject msg;
 	private EObject origin;
+	private String reason;
 
 	public HandledMessage(AbstractInterfaceItem ifitem, EObject msg, EObject origin) {
 		this.ifitem = ifitem;
@@ -37,5 +38,13 @@ public class HandledMessage {
 
 	public EObject getOrigin() {
 		return origin;
+	}
+
+	public String getReason() {
+		return reason;
+	}
+
+	public void setReason(String reason) {
+		this.reason = reason;
 	}
 }

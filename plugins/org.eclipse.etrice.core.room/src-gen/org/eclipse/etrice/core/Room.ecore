@@ -162,6 +162,11 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MessageData">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="deprecatedName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="refType" eType="#//RefableType"
+        containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RefableType">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="&lt;br>This is a type with an optional reference attribute.&#xD;&#xA;If 'ref' is {@code true} then by reference semantic is chosen.&#xD;&#xA;"/>
@@ -529,7 +534,7 @@
         <details key="documentation" value="&lt;br>By this name the message is referred to in the model.&#xD;&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="data" eType="#//VarDecl"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="data" eType="#//MessageData"
         containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="&lt;br>This is a reference to optional message data.&#xD;&#xA;"/>
@@ -606,17 +611,17 @@
     </eAnnotations>
     <eOperations name="getExternalEndPorts" upperBound="-1" eType="#//Port">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="body" value="EList&lt;Port> ports = new BasicEList&lt;Port>();&#xD;&#xA;for (ExternalPort ep : getExternalPorts()) {&#xD;&#xA;&#x9;ports.add(ep.getInterfacePort());&#xD;&#xA;}&#xD;&#xA;return ports;&#xD;&#xA;"/>
+        <details key="body" value="EList&lt;Port> ports = new BasicEList&lt;Port>();&#xD;&#xA;for (ExternalPort ep : getExternalPorts()) {&#xD;&#xA;&#x9;if(ep.getInterfacePort() != null)&#xD;&#xA;&#x9;&#x9;ports.add(ep.getInterfacePort());&#xD;&#xA;}&#xD;&#xA;return ports;&#xD;&#xA;"/>
       </eAnnotations>
     </eOperations>
     <eOperations name="getRelayPorts" upperBound="-1" eType="#//Port">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="body" value="EList&lt;Port> ports = new BasicEList&lt;Port>(getInterfacePorts());&#xD;&#xA;for (ExternalPort ep : getExternalPorts()) {&#xD;&#xA;&#x9;ports.remove(ep.getInterfacePort());&#xD;&#xA;}&#xD;&#xA;return ports;&#xD;&#xA;"/>
+        <details key="body" value="EList&lt;Port> ports = new BasicEList&lt;Port>(getInterfacePorts());&#xD;&#xA;for (ExternalPort ep : getExternalPorts()) {&#xD;&#xA;&#x9;if(ep.getInterfacePort() != null)&#xD;&#xA;&#x9;&#x9;ports.remove(ep.getInterfacePort());&#xD;&#xA;}&#xD;&#xA;return ports;&#xD;&#xA;"/>
       </eAnnotations>
     </eOperations>
     <eOperations name="getImplementedSPPs" upperBound="-1" eType="#//SPP">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="body" value="EList&lt;SPP> spps = new BasicEList&lt;SPP>();&#xD;&#xA;for (ServiceImplementation spp : getServiceImplementations()) {&#xD;&#xA;&#x9;spps.add(spp.getSpp());&#xD;&#xA;}&#xD;&#xA;return spps;&#xD;&#xA;"/>
+        <details key="body" value="EList&lt;SPP> spps = new BasicEList&lt;SPP>();&#xD;&#xA;for (ServiceImplementation spp : getServiceImplementations()) {&#xD;&#xA;&#x9;if(spp.getSpp() != null)&#xD;&#xA;&#x9;&#x9;spps.add(spp.getSpp());&#xD;&#xA;}&#xD;&#xA;return spps;&#xD;&#xA;"/>
       </eAnnotations>
     </eOperations>
     <eOperations name="getActorBase" eType="#//ActorClass">

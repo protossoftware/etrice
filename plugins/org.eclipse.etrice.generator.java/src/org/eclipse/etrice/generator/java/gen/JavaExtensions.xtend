@@ -20,32 +20,31 @@ package org.eclipse.etrice.generator.java.gen
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import java.util.List
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.etrice.core.etphys.eTPhys.NodeRef
+import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance
+import org.eclipse.etrice.core.room.ActorClass
 import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.core.room.DataType
+import org.eclipse.etrice.core.room.EnumLiteral
+import org.eclipse.etrice.core.room.EnumerationType
 import org.eclipse.etrice.core.room.ExternalType
 import org.eclipse.etrice.core.room.Message
+import org.eclipse.etrice.core.room.MessageData
 import org.eclipse.etrice.core.room.PrimitiveType
 import org.eclipse.etrice.core.room.RoomClass
-import org.eclipse.etrice.core.room.VarDecl
 import org.eclipse.etrice.generator.generic.ILanguageExtension
 import org.eclipse.etrice.generator.generic.TypeHelpers
 import org.eclipse.xtext.util.Pair
-import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance
-import org.eclipse.etrice.core.etphys.eTPhys.NodeRef
-import org.eclipse.etrice.core.room.ActorClass
-import org.eclipse.etrice.core.room.EnumerationType
-
-import org.eclipse.etrice.core.room.EnumLiteral
-import org.eclipse.emf.ecore.EObject
 
 @Singleton
 class JavaExtensions implements ILanguageExtension {
-
+	
 	@Inject TypeHelpers typeHelpers
 
 	override String getTypedDataDefinition(EObject msg) {
 	    if (msg instanceof Message) {
-    		generateArglistAndTypedData((msg as Message).data).get(1)
+    		generateArglistAndTypedData((msg as Message).data).get(TypedDataKind.DECLARATION_AND_INITIALIZATION.ordinal)
 	    }
 	    else {
 	        ""
@@ -171,7 +170,7 @@ class JavaExtensions implements ILanguageExtension {
 			v = v.substring(type.name.length+1)
 		for(EnumLiteral l : type.literals)
 			if(l.name.equals(v))
-				return type.getName()+"."+l.getName()
+				return type.name+"."+l.name
 	}
 
 	def private castValue(PrimitiveType type, String value){
@@ -209,7 +208,7 @@ class JavaExtensions implements ILanguageExtension {
 			PrimitiveType:
 				toValueLiteral(dt, dt.defaultValueLiteral)
 			EnumerationType:
-				getDefaultValue(dt)
+				dt.defaultValue
 			ExternalType:
 				"new "+(dt as ExternalType).targetName+"()"
 			default:
@@ -242,16 +241,17 @@ class JavaExtensions implements ILanguageExtension {
 	}
 
 	override generateArglistAndTypedData(EObject d) {
-		if (d==null || !(d instanceof VarDecl))
+		// TODO 529445: d will be a RefableType, not MessageData
+		if (d===null || !(d instanceof MessageData))
 			return newArrayList("", "", "")
 
-		val data = d as VarDecl
-		var typeName = data.refType.type.getName();
-		var castTypeName = typeName;
+		val data = d as MessageData
+		var typeName = data.refType.type.name
+		var castTypeName = typeName
 		if (data.refType.type instanceof PrimitiveType) {
-			typeName = (data.refType.type as PrimitiveType).getTargetName()
-			val ct = (data.refType.type as PrimitiveType).getCastName()
-			if (ct!=null && !ct.isEmpty())
+			typeName = (data.refType.type as PrimitiveType).targetName
+			val ct = (data.refType.type as PrimitiveType).castName
+			if (ct!==null && !ct.isEmpty())
 				castTypeName = ct
 		}
 		else if (data.refType.type instanceof EnumerationType) {
@@ -259,16 +259,16 @@ class JavaExtensions implements ILanguageExtension {
 			castTypeName = (data.refType.type as EnumerationType).castType
 		}
 
-		val typedData = typeName+" "+data.getName() + " = ("+castTypeName+") generic_data__et;\n";
-		val dataArg = ", "+data.getName();
-		val typedArgList = ", "+typeName+" "+data.getName();
+		val dataArg = ", " + GENERIC_DATA_NAME
+		val typedData = typeName + " " + GENERIC_DATA_NAME + " = ("+castTypeName+") generic_data__et;\n"
+		val typedArgList = ", " + typeName + " " + GENERIC_DATA_NAME
 
-		return newArrayList(dataArg, typedData, typedArgList);
+		return newArrayList(dataArg, typedData, typedArgList)
 	}
 
 	override getTargetType(EnumerationType type) {
-		if (type.getPrimitiveType()!=null)
-			type.getPrimitiveType().getTargetName()
+		if (type.primitiveType!==null)
+			type.primitiveType.targetName
 		else
 			"int"
 	}
@@ -277,15 +277,15 @@ class JavaExtensions implements ILanguageExtension {
 		val type = literal.eContainer() as EnumerationType
 		val cast = type.targetType
 
-		if (type.primitiveType==null)
-			Long.toString(literal.getLiteralValue())
+		if (type.primitiveType===null)
+			Long.toString(literal.literalValue)
 		else
-			"(("+cast+")"+Long.toString(literal.getLiteralValue())+")"
+			"(("+cast+")"+Long.toString(literal.literalValue)+")"
 	}
 
 	override getCastType(EnumerationType type) {
-		if (type.getPrimitiveType()!=null)
-			type.getPrimitiveType().getCastName()
+		if (type.primitiveType!==null)
+			type.primitiveType.castName
 		else
 			"int"
 	}

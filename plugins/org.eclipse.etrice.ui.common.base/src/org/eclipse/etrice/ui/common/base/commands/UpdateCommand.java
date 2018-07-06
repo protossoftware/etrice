@@ -10,9 +10,10 @@ package org.eclipse.etrice.ui.common.base.commands;
 
 import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
+import org.eclipse.graphiti.dt.IDiagramTypeProvider;
 import org.eclipse.graphiti.features.context.impl.UpdateContext;
-import org.eclipse.graphiti.features.impl.AbstractUpdateFeature;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
+import org.eclipse.graphiti.ui.services.GraphitiUi;
 
 /**
  * @author Henrik Rentz-Reichert - initial contribution and API
@@ -20,26 +21,26 @@ import org.eclipse.graphiti.mm.pictograms.Diagram;
  */
 public class UpdateCommand extends RecordingCommand {
 
-	private Diagram diagram;
-	private AbstractUpdateFeature feature;
+	private IDiagramTypeProvider dtp;
 
-	public UpdateCommand(Diagram diag, TransactionalEditingDomain domain, AbstractUpdateFeature feature) {
-		super(domain);
-		this.feature = feature;
+	public UpdateCommand(String providerId, Diagram diagram, TransactionalEditingDomain editingDomain) {
+		super(editingDomain);
+		
+		dtp = GraphitiUi.getExtensionManager().createDiagramTypeProvider(diagram, providerId); //$NON-NLS-1$
 	}
 
 	public boolean updateNeeded() {
-		UpdateContext context = new UpdateContext(diagram);
-		return feature.updateNeeded(context).toBoolean();
+		UpdateContext ctx = new UpdateContext(dtp.getDiagram());
+		return dtp.getFeatureProvider().getUpdateFeature(ctx).updateNeeded(ctx).toBoolean();
 	}
 	
 	/* (non-Javadoc)
 	 * @see org.eclipse.emf.transaction.RecordingCommand#doExecute()
 	 */
 	@Override
-	protected void doExecute() {
-		UpdateContext context = new UpdateContext(diagram);
-		feature.update(context);
+	protected void doExecute() {	
+		UpdateContext ctx = new UpdateContext(dtp.getDiagram());
+		dtp.getFeatureProvider().getUpdateFeature(ctx).update(ctx);
 	}
 
 }

@@ -57,7 +57,7 @@ class Initialization {
 		var a = path.last
 		var aType = a.type.type
 		if(a.type.ref){
-			return if(a.defaultValueLiteral != null)
+			return if(a.defaultValueLiteral !== null)
 				a.defaultValueLiteral
 			else
 				languageExt.nullPointer
@@ -71,7 +71,7 @@ class Initialization {
 						«ENDFOR»
 					}'''
 			ExternalType:
-				if(a.defaultValueLiteral != null)
+				if(a.defaultValueLiteral !== null)
 					a.defaultValueLiteral
 				else
 					languageExt.defaultValue(aType)
@@ -96,17 +96,17 @@ class Initialization {
 	
 	def private getPrimitiveValue(InstanceBase instance, List<Attribute> path){
 		var value = path.getAttrInstanceConfigValue(instance)
-		if(value == null)
+		if(value === null)
 			value = switch instance {
 				ActorInstance: path.getAttrClassConfigValue(instance.actorClass, true)
 				InterfaceItemInstance: path.getAttrClassConfigValue(getPortClass(instance.interfaceItem))
 			}
-		if(value == null)
+		if(value === null)
 			value = path.last.defaultValueLiteral
 		
 		var type = path.last.type.type
-		return if(value != null && type.primitive) languageExt.toValueLiteral(type as PrimitiveType, value)
-				else if(value != null && type.enumeration) languageExt.toEnumLiteral(type as EnumerationType, value)
+		return if(value !== null && type.primitive) languageExt.toValueLiteral(type as PrimitiveType, value)
+				else if(value !== null && type.enumeration) languageExt.toEnumLiteral(type as EnumerationType, value)
 				else languageExt.defaultValue(type)
 	}
 }

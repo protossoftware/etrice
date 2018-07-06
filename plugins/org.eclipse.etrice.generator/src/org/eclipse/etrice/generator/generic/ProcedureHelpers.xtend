@@ -17,7 +17,7 @@ import com.google.inject.Inject
 import com.google.inject.Singleton
 import java.util.List
 import org.eclipse.etrice.core.fsm.fSM.DetailCode
-import org.eclipse.etrice.core.genmodel.fsm.base.ILogger
+import org.eclipse.etrice.core.genmodel.fsm.ILogger
 import org.eclipse.etrice.core.room.ActorClass
 import org.eclipse.etrice.core.room.ActorContainerClass
 import org.eclipse.etrice.core.room.Attribute
@@ -100,7 +100,7 @@ class ProcedureHelpers {
 
 	def private userCode(String code) {
 	'''
-		«IF code!=null && !code.empty»
+		«IF code!==null && !code.empty»
 			/*--------------------- begin user code ---------------------*/
 			«code»
 			/*--------------------- end user code ---------------------*/
@@ -136,7 +136,7 @@ class ProcedureHelpers {
 	 * @return the code for an array initializer
 	 */
 	def arrayInitializer(Attribute att) {
-		val dflt = if (att.defaultValueLiteral!=null) att.defaultValueLiteral else languageExt.defaultValue(att.type.type)
+		val dflt = if (att.defaultValueLiteral!==null) att.defaultValueLiteral else languageExt.defaultValue(att.type.type)
 
 		if (dflt.startsWith("{")) {
 			if (dflt.split(",").size!=att.size)

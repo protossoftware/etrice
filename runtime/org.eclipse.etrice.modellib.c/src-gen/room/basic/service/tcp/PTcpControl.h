@@ -12,6 +12,7 @@
 #include "modelbase/etPort.h"
 
 
+/* include all referenced room classes */
 #include "room/basic/service/tcp/DTcpControl.h"
 
 

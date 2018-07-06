@@ -24,6 +24,7 @@ import org.eclipse.etrice.core.fsm.fSM.TrPoint;
 import org.eclipse.etrice.core.fsm.fSM.Transition;
 import org.eclipse.etrice.core.fsm.fSM.util.FSMSwitch;
 import org.eclipse.etrice.core.fsm.naming.FSMFragmentProvider;
+import org.eclipse.etrice.ui.behavior.fsm.editor.AbstractFSMDiagramTypeProvider;
 import org.eclipse.etrice.ui.behavior.fsm.provider.IInjectorProvider;
 import org.eclipse.etrice.ui.common.base.support.CantDeleteFeature;
 import org.eclipse.etrice.ui.common.base.support.CantRemoveFeature;
@@ -78,7 +79,7 @@ import org.eclipse.graphiti.util.IColorConstant;
 
 import com.google.inject.Injector;
 
-public abstract class AbstractFSMProviderDispatcher implements IInjectorProvider {
+public class AbstractFSMProviderDispatcher {
 
 	private class FeatureProviderSwitch extends FSMSwitch<IFeatureProvider> {
 		private ContainerShape parent = null;
@@ -235,9 +236,9 @@ public abstract class AbstractFSMProviderDispatcher implements IInjectorProvider
 
 		private IInjectorProvider injectorProvider;
 
-		public DispatchingFeatureProvider(IDiagramTypeProvider dtp, IInjectorProvider injectorProvider) {
+		public DispatchingFeatureProvider(AbstractFSMDiagramTypeProvider dtp) {
 			super(dtp);
-			this.injectorProvider = injectorProvider;
+			this.injectorProvider = dtp;
 		}
 		
 		@Override
@@ -550,9 +551,9 @@ public abstract class AbstractFSMProviderDispatcher implements IInjectorProvider
 	private DispatchingToolBehaviorProvider dispatchingBP;
 	
 	
-	public AbstractFSMProviderDispatcher(IDiagramTypeProvider dtp) {
+	public AbstractFSMProviderDispatcher(AbstractFSMDiagramTypeProvider dtp) {
 		// create those first before using them
-		dispatchingFP = new DispatchingFeatureProvider(dtp, this);
+		dispatchingFP = new DispatchingFeatureProvider(dtp);
 		dispatchingBP = new DispatchingToolBehaviorProvider(dtp);
 
 		stateGraphSupport = new StateGraphSupport(dtp, dispatchingFP);
@@ -582,6 +583,7 @@ public abstract class AbstractFSMProviderDispatcher implements IInjectorProvider
 		return featureSwitch.getCreateConnectionFeatures();
 	}
 	
+	@SafeVarargs
 	private static <T> T[] concatAll(T[] first, T[]... rest) {
 		int totalLength = first.length;
 		for (T[] array : rest) {

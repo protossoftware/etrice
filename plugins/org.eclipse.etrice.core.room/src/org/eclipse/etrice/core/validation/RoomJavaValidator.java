@@ -53,6 +53,7 @@ import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.LayerConnection;
 import org.eclipse.etrice.core.room.LogicalSystem;
 import org.eclipse.etrice.core.room.Message;
+import org.eclipse.etrice.core.room.MessageData;
 import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.PortClass;
@@ -102,16 +103,17 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	/* tags for quick fixes */
 	public static final String THREAD_MISSING = "RoomJavaValidator.ThreadMissing";
 	public static final String DUPLICATE_ACTOR_INSTANCE_MAPPING = "RoomJavaValidator.DuplicateActorInstanceMapping";
+	public static final String WRONG_NAMESPACE = "RoomJavaValidator.WrongNamespace";
 	public static final String CIRCULAR_CONTAINMENT = "RoomJavaValidator.CircularContainment";
 	public static final String ACTOR_REF_CHANGE_REF_TYPE_TO_FIXED_OR_MULT_TO_ANY = "RoomJavaValidator.ActorRefChangeRefTypeToFixed";
 	public static final String ACTOR_REF_CHANGE_REF_TYPE_TO_OPTIONAL = "RoomJavaValidator.ActorRefChangeRefTypeToOptional";
-	public static final String WRONG_NAMESPACE = "RoomJavaValidator.WrongNamespace";
 	public static final String CHANGE_DESTRUCTOR_NAME = "RoomJavaValidator.ChangeDestructorName";
 	public static final String CHANGE_CONSTRUCTOR_NAME = "RoomJavaValidator.ChangeConstructorName";
 	public static final String INVALID_ANNOTATION_TARGET = "RoomJavaValidator.InvalidAnnotationTarget";
 	public static final String OPERATION_MISSING_OVERRIDE = "RoomJavaValidator.OperationMissingOverride";
 	public static final String OPERATION_EXTRANEOUS_OVERRIDE = "RoomJavaValidator.OperationExtraneousOverride";
-	public static final String INCONSISTENT_COMMUNICATION_TYPE = "RoomJavaValidator.InconsistentCommType";	
+	public static final String INCONSISTENT_COMMUNICATION_TYPE = "RoomJavaValidator.InconsistentCommType";
+	public static final String DEPRECATED_MESSAGE_DATA_NAME = "RoomJavaValidator.DeprecatedMessageDataName";
 
 	@Check
 	public void checkRoomImportedNamespace(Import imp) {
@@ -163,7 +165,6 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 			error("referenced model is not supported", BasePackage.Literals.IMPORT__IMPORTED_NAMESPACE, WRONG_NAMESPACE, candidatesNames.toArray(new String[0]));
 	}
 	
-
 	@Check
 	public void checkActorRef(ActorRef ar) {
 		if (ar.eContainer() instanceof ActorClass) {
@@ -199,7 +200,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 			if (ar.getMultiplicity()>1) {
 				for (Port p : ac.getInterfacePorts()) {
 					if (p.getMultiplicity()<0) {
-						int idx = ((ActorContainerClass)ar.eContainer()).getActorRefs().indexOf(ar);
+						//int idx = ((ActorContainerClass)ar.eContainer()).getActorRefs().indexOf(ar);
 						error("replicated actor must not have replicated port with arbitrary multiplicity", null);
 					}
 				}
@@ -618,9 +619,12 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 
 	@Check
 	public void checkMessageFromIf(MessageFromIf mfi){
-		if(mfi.getFrom() != null){
-			if(roomHelpers.getProtocol((InterfaceItem)mfi.getFrom()).getCommType() != CommunicationType.EVENT_DRIVEN)
-				error("port must have event driven protocol", mfi, FSMPackage.eINSTANCE.getMessageFromIf_From());
+		if (mfi.getFrom() != null){
+			ProtocolClass protocol = roomHelpers.getProtocol((InterfaceItem)mfi.getFrom());
+			if (protocol!=null && !protocol.eIsProxy()) {
+				if (protocol.getCommType() != CommunicationType.EVENT_DRIVEN)
+					error("port must have event driven protocol", mfi, FSMPackage.eINSTANCE.getMessageFromIf_From());
+			}
 		}
 	}
 
@@ -797,6 +801,13 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 
 			if(!roomHelpers.matchingReturnType(baseOp, op))
 				error("Return type  must be identical to overriden operation " +baseOpFQN, op, RoomPackage.Literals.OPERATION__RETURN_TYPE);
+		}
+	}
+	
+	@Check
+	public void checkMessageData(MessageData m) {
+		if (m.getDeprecatedName()!=null) {
+			warning("The data name of messages is deprecated (always named 'transitionData' in action code)", RoomPackage.Literals.MESSAGE_DATA__DEPRECATED_NAME, DEPRECATED_MESSAGE_DATA_NAME);
 		}
 	}
 }

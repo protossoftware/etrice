@@ -336,4 +336,15 @@ public class FSMValidationUtil extends FSMValidationUtilXtend {
 		return name.matches("\\^?[a-zA-Z_][a-zA-Z_0-9]*");
 	}
 
+	public boolean isRefinedStateEmpty(RefinedState rs) {
+		if (rs.getSubgraph()==null || fsmHelpers.isEmpty(rs.getSubgraph())) {
+			boolean entryEmpty = fsmHelpers.getDetailCode(rs.getEntryCode()).trim().isEmpty();
+			boolean exitEmpty = fsmHelpers.getDetailCode(rs.getExitCode()).trim().isEmpty();
+			boolean doEmpty = fsmHelpers.getDetailCode(rs.getDoCode()).trim().isEmpty();
+			if (entryEmpty && exitEmpty && doEmpty) {
+				return true;
+			}
+		}
+		return false;
+	}
 }

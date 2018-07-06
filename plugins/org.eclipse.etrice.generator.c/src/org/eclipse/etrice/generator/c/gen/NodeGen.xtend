@@ -30,8 +30,8 @@ import org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance
 import org.eclipse.etrice.core.genmodel.etricegen.PortInstance
 import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance
-import org.eclipse.etrice.core.genmodel.fsm.base.ILogger
-import org.eclipse.etrice.core.genmodel.fsm.fsmgen.IDiagnostician
+import org.eclipse.etrice.core.genmodel.fsm.IDiagnostician
+import org.eclipse.etrice.core.genmodel.fsm.ILogger
 import org.eclipse.etrice.core.room.CommunicationType
 import org.eclipse.etrice.core.room.EnumerationType
 import org.eclipse.etrice.core.room.Port
@@ -43,7 +43,6 @@ import org.eclipse.etrice.core.room.util.RoomHelpers
 import org.eclipse.etrice.generator.c.Main
 import org.eclipse.etrice.generator.fsm.base.IGeneratorFileIo
 import org.eclipse.etrice.generator.fsm.base.IntelligentSeparator
-import org.eclipse.etrice.generator.generic.ILanguageExtension
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.TypeHelpers
@@ -59,7 +58,6 @@ class NodeGen {
 
 	@Inject IGeneratorFileIo fileIO
 	@Inject Initialization attrInitGenAddon
-	@Inject ILanguageExtension languageExt
 	@Inject IDiagnostician diagnostician
 	@Inject ILogger logger;
 
@@ -67,7 +65,7 @@ class NodeGen {
 		for (nr : ETMapUtil::getNodeRefs()) {
 			for (instpath : ETMapUtil::getSubSystemInstancePaths(nr)) {
 				val ssi = root.getInstance(instpath) as SubSystemInstance
-				if (ssi!=null) {
+				if (ssi!==null) {
 					val filepath = ssi.subSystemClass.generationTargetPath+ssi.subSystemClass.getPath
 					val infopath = ssi.subSystemClass.generationInfoPath+ssi.subSystemClass.getPath
 					var file = nr.getCHeaderFileName(ssi)
@@ -418,7 +416,7 @@ class NodeGen {
 		// list of replicated interface items (all are event driven ports)
 		val replEventItems = new ArrayList<InterfaceItemInstance>()
 		replEventItems.addAll(ai.orderedIfItemInstances.filter(e|e.replicated))
-		val haveReplSubItems = replEventItems.findFirst(e|!e.peers.empty)!=null
+		val haveReplSubItems = replEventItems.findFirst(e|!e.peers.empty)!==null
 		val replEventPorts = replEventItems.filter(i|i.interfaceItem instanceof Port)
 		val replEventSPPs = replEventItems.filter(i|i.interfaceItem instanceof SPP)
 
@@ -555,7 +553,7 @@ class NodeGen {
 
 	def private genSendPortInitializer(InterfaceItemInstance pi) {
 		val pc = (pi as PortInstance).port.protocol as ProtocolClass
-		var messages = pc.allIncomingMessages.filter(m|m.data!=null)
+		var messages = pc.allIncomingMessages.filter(m|m.data!==null)
 		val enumMsgs = messages.filter(m|m.data.refType.type.isEnumeration)
 		val boolMsgs = messages.filter(m|m.data.refType.type.isBoolean)
 		val usesMSC = Main::settings.generateMSCInstrumentation && !(enumMsgs.empty && boolMsgs.empty)
@@ -577,7 +575,7 @@ class NodeGen {
 	}
 
 	def private getInterfaceItemInstanceData(InterfaceItemInstance pi){
-		if (pi.protocol.getPortClass(pi.conjugated)== null) return "NULL"
+		if (pi.protocol.getPortClass(pi.conjugated)=== null) return "NULL"
 		if (pi.protocol.getPortClass(pi.conjugated).attributes.empty){
 			return "NULL"
 		}else{
@@ -587,7 +585,7 @@ class NodeGen {
 
 
 	def private String genRecvPortInitializer(Root root, ActorInstance ai, InterfaceItemInstance pi) {
-		var sentMsgs = pi.interfaceItem.incoming.filter(m|m.data!=null)
+		var sentMsgs = pi.interfaceItem.incoming.filter(m|m.data!==null)
 		val enumMsgs = sentMsgs.filter(m|m.data.refType.type.isEnumeration)
 		val boolMsgs = sentMsgs.filter(m|m.data.refType.type.isBoolean)
 		val usesMSC = Main::settings.generateMSCInstrumentation && !(enumMsgs.empty && boolMsgs.empty)
@@ -777,7 +775,7 @@ class NodeGen {
 	}
 
 	def private createLoggerCall(PortInstance pi) {
-		val msg = pi.protocol.incomingMessages.filter(m|m.data!=null && m.data.refType.type.enumerationOrPrimitive).get(0)
+		val msg = pi.protocol.incomingMessages.filter(m|m.data!==null && m.data.refType.type.enumerationOrPrimitive).get(0)
 		val ai = pi.eContainer as ActorInstance
 		val data = ai.path.pathName+"."+pi.name+"."+msg.name
 		val type = if (msg.data.refType.type instanceof EnumerationType) LiteralType.INT
@@ -823,7 +821,7 @@ class NodeGen {
 								for (filter: filterList) {
 									if (path.matches(filter)) {
 										matched = true
-										if (!pi.protocol.incomingMessages.filter(m|m.data!=null && m.data.refType.type.enumerationOrPrimitive).empty) {
+										if (!pi.protocol.incomingMessages.filter(m|m.data!==null && m.data.refType.type.enumerationOrPrimitive).empty) {
 											result.add(pi)
 											primitive = true
 											logger.logInfo("    data driven port "+pi.path+" (matched "+filter+")");

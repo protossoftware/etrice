@@ -27,13 +27,25 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  */
 public class Logger implements ILineOutputLogger {
 
+	private int errors = 0;
 	private ILineOutput output = null;
+	
+	@Override
+	public boolean hasErrors() {
+		return errors!=0;
+	}
 
 	public void logInfo(String text) {
 		println("Info: " + text);
 	}
 
+	@Override
+	public void logError(String text) {
+		logError(text, null);
+	}
+
 	public void logError(String text, EObject obj) {
+		++errors;
 		if (obj == null)
 			println("Error: " + text);
 		else {

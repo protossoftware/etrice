@@ -27,6 +27,8 @@ import org.eclipse.etrice.ui.behavior.fsm.editor.AbstractFSMEditor;
 import org.eclipse.etrice.ui.behavior.fsm.editor.DecoratorUtil;
 import org.eclipse.etrice.ui.behavior.fsm.provider.IInjectorProvider;
 import org.eclipse.etrice.ui.behavior.fsm.provider.ImageProvider;
+import org.eclipse.etrice.ui.behavior.fsm.support.util.FSMSupportUtil;
+import org.eclipse.etrice.ui.behavior.fsm.support.util.ModelEditingUtil;
 import org.eclipse.etrice.ui.common.base.support.ChangeAwareCreateFeature;
 import org.eclipse.etrice.ui.common.base.support.ChangeAwareCustomFeature;
 import org.eclipse.etrice.ui.common.base.support.CommonSupportUtil;
@@ -92,7 +94,7 @@ import org.eclipse.ui.PlatformUI;
 import com.google.inject.Injector;
 
 public class ChoicePointSupport {
-	
+
 	public static final int ITEM_SIZE = (int) (StateGraphSupport.MARGIN*0.625);
 
 	protected static final int LINE_WIDTH = 2;
@@ -121,9 +123,8 @@ public class ChoicePointSupport {
 				StateGraph sg = (StateGraph) targetContainer.getLink().getBusinessObjects().get(0);
 				ModelComponent mc = FSMSupportUtil.getInstance().getModelComponent(getDiagram());
 
-				boolean inherited = FSMSupportUtil.getInstance().isInherited(getDiagram(), sg);
-				if (inherited) {
-					sg = FSMSupportUtil.getInstance().insertRefinedState(sg, mc, targetContainer, getFeatureProvider());
+				if (!FSMSupportUtil.getInstance().isOwnedBy(mc, sg)) {
+					sg = ModelEditingUtil.insertRefinedState(sg, mc, targetContainer, getFeatureProvider());
 				}
 
 				// create choice point and add it
@@ -193,7 +194,7 @@ public class ChoicePointSupport {
 				ContainerShape containerShape =
 					peCreateService.createContainerShape(sgShape, true);
 	
-				Graphiti.getPeService().setPropertyValue(containerShape, Constants.TYPE_KEY, Constants.TRP_TYPE);
+				Graphiti.getPeService().setPropertyValue(containerShape, Constants.TYPE_KEY, Constants.CP_TYPE);
 				
 				int x = context.getX()-ITEM_SIZE;
 				int y = context.getY()-ITEM_SIZE;

@@ -13,6 +13,7 @@
 package org.eclipse.etrice.ui.behavior.fsm.editor;
 
 import java.util.ArrayList;
+import java.util.EventObject;
 import java.util.Map;
 
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -27,8 +28,9 @@ import org.eclipse.etrice.core.fsm.fSM.RefinedState;
 import org.eclipse.etrice.core.fsm.fSM.State;
 import org.eclipse.etrice.core.fsm.fSM.StateGraph;
 import org.eclipse.etrice.core.fsm.util.FSMHelpers;
+import org.eclipse.etrice.core.fsm.validation.FSMValidationUtil;
 import org.eclipse.etrice.ui.behavior.fsm.support.ContextSwitcher;
-import org.eclipse.etrice.ui.behavior.fsm.support.FSMSupportUtil;
+import org.eclipse.etrice.ui.behavior.fsm.support.util.FSMSupportUtil;
 import org.eclipse.etrice.ui.common.base.editor.DiagramEditorBase;
 import org.eclipse.graphiti.dt.IDiagramTypeProvider;
 import org.eclipse.graphiti.features.IFeatureProvider;
@@ -38,6 +40,8 @@ import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.graphiti.mm.pictograms.Shape;
 import org.eclipse.graphiti.services.Graphiti;
 import org.eclipse.graphiti.ui.editor.DiagramBehavior;
+import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.swt.widgets.Display;
 
 import com.google.common.base.Function;
 
@@ -139,6 +143,23 @@ public abstract class AbstractFSMEditor extends DiagramEditorBase {
 
 	@Override
 	public void doSave(IProgressMonitor monitor) {
+		
+		FSMValidationUtil fsmValidationUtil = FSMSupportUtil.getInstance().getFSMValidationUtil();
+		Diagram diagram = getDiagramTypeProvider().getDiagram();
+		ModelComponent mc = FSMSupportUtil.getInstance().getModelComponent(diagram);
+		if (mc.getStateMachine()!=null) {
+			for (State s : mc.getStateMachine().getStates()) {
+				if (s instanceof RefinedState) {
+					if (fsmValidationUtil.isRefinedStateEmpty((RefinedState) s)) {
+						MessageDialog.openError(Display.getCurrent().getActiveShell(),
+								"Check of Refined State",
+								"A Refined State with empty action codes must have a non-empty sub state graph.");
+						return;
+					}
+				}
+			}
+		}
+
 		getEditingDomain().getCommandStack().execute(new RecordingCommand(getEditingDomain()) {
 			protected void doExecute() {
 				cleanupBeforeSave();
@@ -269,5 +290,11 @@ public abstract class AbstractFSMEditor extends DiagramEditorBase {
 		IUpdateContext updateCtx = new UpdateContext(diagram);
 		featureProvider.updateIfPossible(updateCtx);
 		diagramTypeProvider.getDiagramBehavior().refresh();
+	}
+	
+	@Override
+	public void commandStackChanged(EventObject event) {
+		// TODO Auto-generated method stub
+		super.commandStackChanged(event);
 	}
 }

@@ -19,13 +19,16 @@ import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.fsm.fSM.ChoicePoint;
+import org.eclipse.etrice.core.fsm.fSM.RefinedState;
 import org.eclipse.etrice.core.fsm.fSM.State;
 import org.eclipse.etrice.core.fsm.fSM.StateGraph;
 import org.eclipse.etrice.core.fsm.fSM.TrPoint;
 import org.eclipse.etrice.core.fsm.fSM.Transition;
-import org.eclipse.etrice.ui.behavior.fsm.commands.StateGraphContext;
+import org.eclipse.etrice.core.fsm.util.FSMHelpers;
 import org.eclipse.etrice.ui.behavior.fsm.editor.AbstractFSMEditor;
 import org.eclipse.etrice.ui.behavior.fsm.editor.DecoratorUtil;
+import org.eclipse.etrice.ui.behavior.fsm.support.util.DiagramEditingUtil;
+import org.eclipse.etrice.ui.behavior.fsm.support.util.FSMSupportUtil;
 import org.eclipse.etrice.ui.common.base.support.DeleteWithoutConfirmFeature;
 import org.eclipse.graphiti.dt.IDiagramTypeProvider;
 import org.eclipse.graphiti.features.IAddFeature;
@@ -72,6 +75,8 @@ import org.eclipse.graphiti.tb.ImageDecorator;
 import org.eclipse.graphiti.ui.features.DefaultFeatureProvider;
 import org.eclipse.graphiti.util.ColorConstant;
 import org.eclipse.graphiti.util.IColorConstant;
+import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.swt.widgets.Display;
 
 import com.google.common.collect.Sets;
 
@@ -273,6 +278,22 @@ public class StateGraphSupport {
 				Object bo = getBusinessObjectForPictogramElement(container);
 				if (bo instanceof StateGraph) {
 					StateGraph sg = (StateGraph) bo;
+					if (sg.eContainer() instanceof RefinedState) {
+						RefinedState rs = (RefinedState) sg.eContainer();
+						FSMHelpers fsmHelpers = FSMSupportUtil.getInstance().getFSMHelpers();
+						if (fsmHelpers.isEmpty(sg)) {
+							// check action codes
+							boolean entryEmpty = fsmHelpers.getDetailCode(rs.getEntryCode()).trim().isEmpty();
+							boolean exitEmpty = fsmHelpers.getDetailCode(rs.getExitCode()).trim().isEmpty();
+							boolean doEmpty = fsmHelpers.getDetailCode(rs.getDoCode()).trim().isEmpty();
+							if (entryEmpty && exitEmpty && doEmpty) {
+								MessageDialog.openInformation(Display.getCurrent().getActiveShell(),
+										"Check of Refined State",
+										"A Refined State with empty action codes must have a non-empty sub state graph.");
+								return;
+							}
+						}
+					}
 					getDiagramBehavior().getDiagramContainer().selectPictogramElements(new PictogramElement[] {});
 					ContextSwitcher.goUp(getDiagram(), sg);
 				}
@@ -314,12 +335,12 @@ public class StateGraphSupport {
 				int obsolete = 0;
 				
 				if (context instanceof StateGraphUpdateContext) {
-					StateGraphContext ctx = ((StateGraphUpdateContext)context).getContext();
+					IStateGraphContext ctx = ((StateGraphUpdateContext)context).getContext();
 					
 					// check for states added in model not present in diagram (including inherited)
 					{
 						Set<State> expected = Sets.newHashSet(ctx.getStates());
-						Set<State> present = Sets.newHashSet(FSMSupportUtil.getInstance().getStates(shape, fp));
+						Set<State> present = Sets.newHashSet(DiagramEditingUtil.getInstance().getStates(shape, fp));
 						
 						if((missing = Sets.difference(expected, present).size()) > 0)
 							reason += missing+" missing states\n";	
@@ -331,7 +352,7 @@ public class StateGraphSupport {
 					{
 						missing = obsolete = 0;
 						Set<TrPoint> expected = Sets.newHashSet(ctx.getTrPoints());
-						Set<TrPoint> present = Sets.newHashSet(FSMSupportUtil.getInstance().getTrPoints(sg, shape, fp));
+						Set<TrPoint> present = Sets.newHashSet(DiagramEditingUtil.getInstance().getTrPoints(sg, shape, fp));
 						
 						if((missing = Sets.difference(expected, present).size()) > 0)
 							reason += missing+" missing transition points\n";	
@@ -343,7 +364,7 @@ public class StateGraphSupport {
 					{
 						missing = obsolete = 0;
 						Set<ChoicePoint> expected = Sets.newHashSet(ctx.getChPoints());
-						Set<ChoicePoint> present = Sets.newHashSet(FSMSupportUtil.getInstance().getChoicePoints(shape, fp));
+						Set<ChoicePoint> present = Sets.newHashSet(DiagramEditingUtil.getInstance().getChoicePoints(shape, fp));
 						
 						if((missing = Sets.difference(expected, present).size()) > 0)
 							reason += missing+" missing choice points\n";	
@@ -401,9 +422,9 @@ public class StateGraphSupport {
 				StateGraph sg = (StateGraph) bo;
 				
 				if (context instanceof StateGraphUpdateContext) {
-					StateGraphContext ctx = ((StateGraphUpdateContext)context).getContext();
+					IStateGraphContext ctx = ((StateGraphUpdateContext)context).getContext();
 
-					FSMSupportUtil.getInstance().updateStateGraph(sg, ctx, sgShape, fp);
+					DiagramEditingUtil.getInstance().updateStateGraph(sg, ctx, sgShape, fp);
 				}
 				
 				if (!sgShape.getChildren().isEmpty()) {

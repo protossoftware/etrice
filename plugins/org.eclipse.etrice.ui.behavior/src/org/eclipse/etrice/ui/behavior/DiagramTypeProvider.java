@@ -14,9 +14,10 @@ package org.eclipse.etrice.ui.behavior;
 
 import org.eclipse.etrice.ui.behavior.fsm.editor.AbstractFSMDiagramTypeProvider;
 import org.eclipse.etrice.ui.behavior.fsm.support.AbstractFSMProviderDispatcher;
-import org.eclipse.etrice.ui.behavior.support.ProviderDispatcher;
 import org.eclipse.etrice.ui.common.base.support.DiagramAccessBase;
 import org.eclipse.graphiti.tb.IToolBehaviorProvider;
+
+import com.google.inject.Injector;
 
 public class DiagramTypeProvider extends AbstractFSMDiagramTypeProvider {
 
@@ -29,7 +30,7 @@ public class DiagramTypeProvider extends AbstractFSMDiagramTypeProvider {
 
 	public DiagramTypeProvider() {
 		super();
-		dispatcher = new ProviderDispatcher(this);
+		dispatcher = new AbstractFSMProviderDispatcher(this);
 		setFeatureProvider(dispatcher.getFeatureProvider());
 	}
 
@@ -65,6 +66,11 @@ public class DiagramTypeProvider extends AbstractFSMDiagramTypeProvider {
 	@Override
 	public boolean isAutoUpdateAtRuntime() {
 		return USE_AUTO_UPDATE;
+	}
+	
+	@Override
+	public Injector getInjector() {
+		return Activator.getDefault().getInjector();
 	}
 
 	@Override

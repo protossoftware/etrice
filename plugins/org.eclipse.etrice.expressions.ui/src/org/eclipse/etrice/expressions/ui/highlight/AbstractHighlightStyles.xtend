@@ -12,13 +12,18 @@
 
 package org.eclipse.etrice.expressions.ui.highlight
 
-import org.eclipse.emf.ecore.EObject
 import org.eclipse.etrice.core.room.Attribute
+import org.eclipse.etrice.core.room.DataClass
+import org.eclipse.etrice.core.room.EnumLiteral
+import org.eclipse.etrice.core.room.EnumerationType
 import org.eclipse.etrice.core.room.InterfaceItem
+import org.eclipse.etrice.core.room.MessageData
 import org.eclipse.etrice.core.room.Operation
+import org.eclipse.etrice.core.room.VarDecl
 import org.eclipse.etrice.expressions.detailcode.IDetailExpressionProvider.ExpressionFeature
-import org.eclipse.etrice.expressions.detailcode.RuntimeDetailExpressionProvider.RuntimeMethodExpressionData
 import org.eclipse.swt.graphics.RGB
+import org.eclipse.etrice.core.room.PrimitiveType
+import org.eclipse.etrice.core.room.ExternalType
 
 /** Enables re-usability of scanner for xtext and jface editor */
 abstract class AbstractHighlightStyles {
@@ -34,6 +39,10 @@ abstract class AbstractHighlightStyles {
 	public static val OPERATION_RGB = new RGB(204, 153, 0)
 	public static val ATTRIBUTE_RGB = new RGB(105, 185, 0)
 	public static val INTERFACE_ITEM_RGB = new RGB(200, 100, 0)
+	public static val ENUM_RGB = new RGB(90, 95, 180)
+	public static val DATA_CLASS_RGB = new RGB(0, 125, 0)
+	public static val PRIMITIVE_TYPE_RGB = new RGB(60, 135, 130)
+	public static val EXTERNAL_TYPE_RGB = new RGB(140, 125, 0)
 	
 	def Object getDefault()
 	def Object getTargetKeyword()
@@ -44,6 +53,10 @@ abstract class AbstractHighlightStyles {
 	def Object getOperation()
 	def Object getAttribute()
 	def Object getInterfaceItem()
+	def Object getEnum()
+	def Object getDataClass()
+	def Object getPrimitiveType()
+	def Object getExternalType()
 	
 	def Object getStyle(ExpressionFeature feature) {
 		// xtext uses ID
@@ -54,10 +67,20 @@ abstract class AbstractHighlightStyles {
 				attribute
 			Operation:
 				operation
-			EObject:
-				specialFeature // unknown model object == special
-			RuntimeMethodExpressionData:
-				operation
+			EnumerationType,
+			EnumLiteral:
+				enum
+			DataClass:
+				dataClass
+			PrimitiveType:
+				primitiveType
+			ExternalType:
+				externalType
+			MessageData,
+			VarDecl:
+				specialFeature
+//			RuntimeMethodExpressionData:
+//				operation
 		}
 	}
 	

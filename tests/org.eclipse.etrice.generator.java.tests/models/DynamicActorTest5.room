@@ -42,7 +42,7 @@ RoomModel DynamicActorTest5 {
 					action {
 						"dumpTree(\"after received hello\");"
 						""
-						"System.out.println(\"received \"+txt);"
+						"System.out.println(\"received \"+transitionData);"
 						""
 						"etUnit_testFinished(caseId);"
 					}

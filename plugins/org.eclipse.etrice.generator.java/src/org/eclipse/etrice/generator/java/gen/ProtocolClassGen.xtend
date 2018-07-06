@@ -14,7 +14,6 @@ package org.eclipse.etrice.generator.java.gen
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
-import org.eclipse.etrice.core.genmodel.fsm.base.ILogger
 import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.etrice.core.room.CommunicationType
 import org.eclipse.etrice.core.room.DataClass
@@ -27,6 +26,8 @@ import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.TypeHelpers
 import org.eclipse.etrice.generator.java.Main
+import org.eclipse.etrice.core.genmodel.fsm.ILogger
+import org.eclipse.etrice.generator.generic.ILanguageExtension
 
 @Singleton
 class ProtocolClassGen extends GenericProtocolClassGenerator {
@@ -116,7 +117,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 
 		// port class
 		static public class «portClassName» extends PortBase {
-			«IF pclass!=null»
+			«IF pclass!==null»
 				«pclass.userCode.userCode»
 			«ENDIF»
 			// constructors
@@ -125,7 +126,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 			}
 			public «portClassName»(IInterfaceItemOwner actor, String name, int localId, int idx) {
 				super(actor, name, localId, idx);
-				«IF pclass!=null»
+				«IF pclass!==null»
 					«pclass.attributes.attributeInitialization(pclass, true)»
 				«ENDIF»
 				«IF Main::settings.generateMSCInstrumentation»
@@ -172,7 +173,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 				}
 		}
 
-			«IF pclass!=null»
+			«IF pclass!==null»
 				«pclass.attributes.attributes»
 «««				// TODO JH: Avoid collision attr getters/setter <-> user operations
 				«attributeSettersGettersImplementation(pclass.attributes, null)»
@@ -245,7 +246,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 	}
 
 	def messageSignature(Message m) {
-		'''«IF m.priv»private«ELSE»public«ENDIF» void «m.name»(«IF m.data!=null»«m.data.refType.type.typeName» «m.data.name»«ENDIF»)'''
+		'''«IF m.priv»private«ELSE»public«ENDIF» void «m.name»(«IF m.data!==null»«m.data.refType.type.typeName» «ILanguageExtension.GENERIC_DATA_NAME»«ENDIF»)'''
 	}
 
 	def messageSignatureExplicit(Message m) {
@@ -254,7 +255,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 	}
 
 	def messageCall(Message m) {
-		'''«m.name»(«IF m.data!=null» «m.data.name»«ENDIF»)'''
+		'''«m.name»(«IF m.data!==null» «ILanguageExtension.GENERIC_DATA_NAME»«ENDIF»)'''
 	}
 
 	def sendMessage(Message m, boolean conj) {
@@ -262,7 +263,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		var hdlr = m.getSendHandler(conj)
 		'''
 			«messageSignature(m)» {
-				«IF hdlr!=null»
+				«IF hdlr!==null»
 					«FOR command : hdlr.detailCode.lines»	«command»
 					«ENDFOR»
 				«ELSE»
@@ -270,14 +271,14 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 						DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[«dir»_«m.name»]);
 					«ENDIF»
 					if (getPeerAddress()!=null)
-						«IF m.data==null»
+						«IF m.data===null»
 							getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), «dir»_«m.name»));
 						«ELSE»
-							getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), «dir»_«m.name», «m.data.name»«IF (!m.data.refType.ref && !(m.data.refType.type.enumerationOrPrimitive))».deepCopy()«ENDIF»));
+							getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), «dir»_«m.name», «ILanguageExtension.GENERIC_DATA_NAME»«IF (!m.data.refType.ref && !(m.data.refType.type.enumerationOrPrimitive))».deepCopy()«ENDIF»));
 						«ENDIF»
 				«ENDIF»
 			}
-			«IF m.data!=null && m.data.refType.type instanceof DataClass»
+			«IF m.data!==null && m.data.refType.type instanceof DataClass»
 				«messageSignatureExplicit(m)» {
 					«m.name»(new «m.data.refType.type.name»(«(m.data.refType.type as DataClass).paramList»));
 				}
@@ -286,7 +287,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 	}
 
 	def generateDataDriven(Root root, ProtocolClass pc) {
-		val sentMsgs = pc.allIncomingMessages.filter(m|m.data!=null)
+		val sentMsgs = pc.allIncomingMessages.filter(m|m.data!==null)
 		val models = root.getReferencedModels(pc)
 		'''
 			package «pc.getPackage()»;

@@ -28,6 +28,8 @@ import org.eclipse.etrice.generator.fsm.generic.ILanguageExtensionBase;
  * @author Henrik Rentz-Reichert
  */
 public interface ILanguageExtension extends ILanguageExtensionBase {
+
+	static final String GENERIC_DATA_NAME = "transitionData";
 	
 	/**
 	 * Produces necessary casts or data type keys for an attribute (array) value statement

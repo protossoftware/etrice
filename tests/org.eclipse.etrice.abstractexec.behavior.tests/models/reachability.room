@@ -161,9 +161,7 @@ RoomModel Reachability {
 										Transition tr0_1: my tp0_1 -> cp cp0_1
 										Transition tr3_1: cp cp0_1 -> state0_1
 										Transition tr4_1: cp cp0_1 -> state1_1 {
-											cond {
-												"true"
-											}
+											cond '''true'''
 										}
 										Transition tr2_1: state1_1 -> my tp1_1 {
 											triggers {
@@ -265,9 +263,7 @@ RoomModel Reachability {
 		Behavior {
 			StateMachine {
 				RefinedTransition state0_1.sg.tr4zzz_0 {
-					action {
-						""
-					}
+					action ''''''
 				}
 				Transition tr_new_0: state_new1_0 -> state_new2_0 {
 					triggers {

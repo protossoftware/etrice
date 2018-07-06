@@ -25,12 +25,12 @@ import org.junit.Test
 class TestNames extends TestBase {
 
 	val Map<EObject, Boolean> nameErrorMap = Maps.newHashMap
-	Resource res;
+	Resource res
 
 	@Before
 	def void SetUp() {
-		prepare();
-		res = getResource("NamesAreUnique.room");
+		prepare(CoreTestsActivator.getInstance().getBundle())
+		res = getResource("NamesAreUnique.room")
 		
 		val model = res.contents.head
 		val diag = getDiag(model)
@@ -38,7 +38,7 @@ class TestNames extends TestBase {
 			if(it instanceof AbstractValidationDiagnostic){
 				val obj = it.sourceEObject
 				var nameError = nameErrorMap.get(obj)
-				if(nameError == null) nameError = false
+				if(nameError === null) nameError = false
 				nameErrorMap.put(obj, (nameError || it.isNameErrorMessage))
 			}
 		]
@@ -61,7 +61,7 @@ class TestNames extends TestBase {
 		val items = newArrayList(ac, dc)
 		items += ac.eContents
 		items += dc.eContents
-		Assert.assertEquals("Unexpected item count", 15, items.size);
+		Assert.assertEquals("Unexpected item count", 15, items.size)
 		items.forEach[
 			Assert.assertFalse("expected no name error: " + it, it.hasNameErrorMessage)
 		]
@@ -75,7 +75,7 @@ class TestNames extends TestBase {
 		val items = newArrayList(ac, dc)
 		items += ac.eContents
 		items += dc.eContents
-		Assert.assertEquals("Unexpected item count", 9, items.size);
+		Assert.assertEquals("Unexpected item count", 9, items.size)
 		items.forEach[
 			Assert.assertFalse("expected no name error: " + it, it.hasNameErrorMessage)
 		]
@@ -89,7 +89,7 @@ class TestNames extends TestBase {
 		val items = newArrayList()
 		items += ac.eContents.filter[!(it instanceof ExternalPort)]
 		items += dc.eContents
-		Assert.assertEquals("Unexpected item count", 13, items.size);
+		Assert.assertEquals("Unexpected item count", 13, items.size)
 		items.forEach[
 			Assert.assertTrue("expected name error: " + it, it.hasNameErrorMessage)
 		]
@@ -109,7 +109,7 @@ class TestNames extends TestBase {
 		items += lc.eContents
 		items += sc.eContents
 		items += enum.eContents
-		Assert.assertEquals("Unexpected item count", 16, items.size);
+		Assert.assertEquals("Unexpected item count", 16, items.size)
 		items.forEach[
 			Assert.assertTrue("expected name error: " + it, it.hasNameErrorMessage)
 		]
@@ -121,6 +121,6 @@ class TestNames extends TestBase {
 
 	protected def boolean isNameErrorMessage(Diagnostic diag) {
 		val message = diag.message
-		return diag.severity >= Diagnostic.ERROR && (message.contains("Duplicate name") || (message.contains("Name") && message.contains("is already assigned to")));
+		return diag.severity >= Diagnostic.ERROR && (message.contains("Duplicate name") || (message.contains("Name") && message.contains("is already assigned to")))
 	}
 }

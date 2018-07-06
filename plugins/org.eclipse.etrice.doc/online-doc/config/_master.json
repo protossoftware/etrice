@@ -1,6 +1,6 @@
 {
     "title": "eTrice Documentation",
-    "version": "1.0",
+    "version": "2.x",
 	"xtext-langs" : {
 		"room" : "xtext_keyword_files/InternalRoom.tokens",
 		"etconfig" : "xtext_keyword_files/InternalConfig.tokens",
@@ -47,5 +47,11 @@
 	{
 		"name" : "Developer's Reference",
 		"url"  : "developers-reference.html"
-	}]
+	},
+	{
+		"name" : "Release Notes",
+		"url"  : "release-notes.html"
+	}
+	
+	]
 }

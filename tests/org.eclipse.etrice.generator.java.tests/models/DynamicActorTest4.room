@@ -40,7 +40,7 @@ RoomModel DynamicActorTest4 {
 						<hello: p0>
 					}
 					action {
-						"System.out.println(txt+\"\\n\");"
+						"System.out.println(transitionData+\"\\n\");"
 						"opt.destroyOptionalActor();"
 						"dumpTree(\"after deletion of Optional2\");"
 					}

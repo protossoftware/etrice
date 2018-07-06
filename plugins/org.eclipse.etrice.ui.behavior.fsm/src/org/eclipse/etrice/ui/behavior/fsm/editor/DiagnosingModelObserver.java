@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.emf.ecore.util.EContentAdapter;
+import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.etrice.core.fsm.fSM.StateGraph;
 import org.eclipse.etrice.core.fsm.fSM.Trigger;
 import org.eclipse.xtext.validation.FeatureBasedDiagnostic;
@@ -116,10 +117,13 @@ public class DiagnosingModelObserver extends EContentAdapter {
 		super.notifyChanged(notification);
 
 		// Re-Validate on each notification except Adapter Removal.
-		// This prevents the editor to hang on dispose (since all adapters are
-		// then removed).
+		// This prevents the editor to hang on dispose (since all adapters are then removed).
 		if (notification.getEventType() < Notification.REMOVING_ADAPTER) {
-			updateElementDiagnosticMap();
+			if(!(notification.getNewValue() instanceof EObject) || notification.getNewValue() instanceof DetailCode) {
+				// Bug 531689: skip validation when user is typing in DetailCode or text field to prevent delay
+			} else {
+				updateElementDiagnosticMap();
+			}
 		}
 	}
 

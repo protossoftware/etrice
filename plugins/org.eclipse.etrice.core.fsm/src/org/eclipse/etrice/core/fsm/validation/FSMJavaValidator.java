@@ -48,8 +48,8 @@ public class FSMJavaValidator extends org.eclipse.etrice.core.fsm.validation.Abs
 	public static final String PLAIN_STRING_DETAILCODE = "RoomJavaValidator.PlainStringDetailCode";
 	
 	@Inject
-	private FSMValidationUtil ValidationUtil;
-	
+	private FSMValidationUtil validationUtil;
+
 	@Inject
 	FSMGrammarAccess grammar;
 	
@@ -73,36 +73,43 @@ public class FSMJavaValidator extends org.eclipse.etrice.core.fsm.validation.Abs
 	}
 	
 	@Check
+	public void checkRefinedStateNotEmpty(RefinedState rs) {
+		if (validationUtil.isRefinedStateEmpty(rs)) {
+			error("Refined state must not be empty (needs to have at least one action code or a subgraph).", FSMPackage.Literals.STATE__ENTRY_CODE);
+		}
+	}
+	
+	@Check
 	public void checkStateNameUnique(SimpleState s) {
-//		Result result = ValidationUtil.isUniqueName(s, s.getName());
+//		Result result = validationUtil.isUniqueName(s, s.getName());
 //		if (!result.isOk())
 //			error(result.getMsg(), FSMPackage.Literals.SIMPLE_STATE__NAME);
 	}
 	
 	@Check
 	public void checkTrPoint(TrPoint tp) {
-		Result result = ValidationUtil.isValid(tp);
+		Result result = validationUtil.isValid(tp);
 		if (!result.isOk())
 			error(result);
 	}
 	
 	@Check
 	public void checkChoicePoint(ChoicePoint cp) {
-//		if (!ValidationUtil.isUniqueName(cp, cp.getName()).isOk())
+//		if (!validationUtil.isUniqueName(cp, cp.getName()).isOk())
 //			error("name is not unique", FSMPackage.Literals.CHOICE_POINT__NAME);
 	}
 	
 	@Check
 	public void checkTransition(Transition trans) {
-		Result result = ValidationUtil.checkTransition(trans);
+		Result result = validationUtil.checkTransition(trans);
 		if (!result.isOk())
 			error(result);
 
 		if (trans instanceof InitialTransition) {
-			result = ValidationUtil.isConnectable(null, trans.getTo(), trans, (StateGraph)trans.eContainer());
+			result = validationUtil.isConnectable(null, trans.getTo(), trans, (StateGraph)trans.eContainer());
 		}
 		else {
-			result = ValidationUtil.isConnectable(((NonInitialTransition)trans).getFrom(), trans.getTo(), trans, (StateGraph)trans.eContainer());
+			result = validationUtil.isConnectable(((NonInitialTransition)trans).getFrom(), trans.getTo(), trans, (StateGraph)trans.eContainer());
 		}
 		if (!result.isOk())
 			error(result);
@@ -112,11 +119,11 @@ public class FSMJavaValidator extends org.eclipse.etrice.core.fsm.validation.Abs
 	
 	@Check
 	public void checkState(org.eclipse.etrice.core.fsm.fSM.State state) {
-		Result result = ValidationUtil.checkState(state);
+		Result result = validationUtil.checkState(state);
 		if (!result.isOk())
 			error(result);
 	
-		ArrayList<Result> res = ValidationUtil.uniqueOriginTriggers(state);
+		ArrayList<Result> res = validationUtil.uniqueOriginTriggers(state);
 		for (Result r : res) {
 			error(r);
 		}
@@ -158,7 +165,7 @@ public class FSMJavaValidator extends org.eclipse.etrice.core.fsm.validation.Abs
 		}
 		if(isPlainStyle) {
 			// TODO quickfix here does not work yet, see FSMQuickfixProvider
-//			warning("old style line string", dc, null, PLAIN_STRING_DETAILCODE);
+			warning("old style line string", dc, null, PLAIN_STRING_DETAILCODE);
 		}
 		
 	}

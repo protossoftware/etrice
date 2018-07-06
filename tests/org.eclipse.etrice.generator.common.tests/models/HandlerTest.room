@@ -43,7 +43,7 @@ RoomModel HandlerTest {
 				Transition tr1: my tp1 -> my tp1 {
 					triggers {
 						<msg1: TestPort1 guard {
-							"p1==3"
+							"transitionData==3"
 						}>
 					}
 					action {
@@ -58,7 +58,7 @@ RoomModel HandlerTest {
 				Transition tr9: state0 -> cp cp1 {
 					triggers {
 						<msg1: TestPort1 guard {
-							"p1==4"
+							"transitionData==4"
 						}>
 					}
 					action {
@@ -68,7 +68,7 @@ RoomModel HandlerTest {
 				Transition tr5: my tp1 -> my tp1 {
 					triggers {
 						<msg2: TestPort1 guard {
-							"p1==4"
+							"transitionData==4"
 						}>
 					}
 					action {
@@ -78,7 +78,7 @@ RoomModel HandlerTest {
 				Transition tr7: my tp0 -> state0 {
 					triggers {
 						<msg1: TestPort1 guard {
-							"p1==7"
+							"transitionData==7"
 						}>
 					}
 					action {
@@ -88,7 +88,7 @@ RoomModel HandlerTest {
 				Transition tr6: my tp0 -> my tp0 {
 					triggers {
 						<msg1: TestPort1 guard {
-							"p1==12"
+							"transitionData==12"
 						}>
 					}
 					action {
@@ -102,7 +102,7 @@ RoomModel HandlerTest {
 				}
 				Transition tr10: cp cp1 -> state0 {
 					cond {
-						"p1!=4"
+						"transitionData!=4"
 					}
 					action {
 						"EXPECT_ORDER(caseId, \"<|MODEL_LOCATION|>\", 115);"
@@ -164,7 +164,7 @@ RoomModel HandlerTest {
 						Transition tr5: my tp0 -> my tp0 {
 							triggers {
 								<msg1: TestPort1 guard {
-									"p1==5"
+									"transitionData==5"
 								}>
 							}
 							action {
@@ -179,7 +179,7 @@ RoomModel HandlerTest {
 						Transition tr6: state1 -> state1 {
 							triggers {
 								<msg1: TestPort1 guard {
-									"p1==8"
+									"transitionData==8"
 								}>
 							}
 							action {
@@ -189,7 +189,7 @@ RoomModel HandlerTest {
 						Transition tr7: my tp1 -> state1 {
 							triggers {
 								<msg2: TestPort1 guard {
-									"p1==5"
+									"transitionData==5"
 								}>
 							}
 							action {
@@ -199,7 +199,7 @@ RoomModel HandlerTest {
 						Transition tr8: my tp1 -> state2 {
 							triggers {
 								<msg2: TestPort1 guard {
-									"p1==6"
+									"transitionData==6"
 								}>
 							}
 							action {

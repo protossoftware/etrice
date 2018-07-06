@@ -212,31 +212,31 @@ void ATimingService::action_TRANS_INITIAL_TO__Operational() {
     	tcbs[i].next = &tcbs[i + 1];
     }
 }
-void ATimingService::action_TRANS_tr1_FROM_Operational_TO_Operational_BY_startTimeouttimer_tr1(const InterfaceItemBase* ifitem, uint32 time) {
-    etTimerControlBlock* timer = getTcb();
+void ATimingService::action_TRANS_tr1_FROM_Operational_TO_Operational_BY_startTimeouttimer_tr1(const InterfaceItemBase* ifitem, uint32 transitionData) {
+    etTimerControlBlock* transitionDatar = getTcb();
     etTime t;
-    if (timer != 0) {
-    	t.sec = time / 1000;
-    	t.nSec = (time % 1000) * 1000000L;
-    	timer->pTime.sec = 0;
-    	timer->pTime.nSec = 0;
-    	timer->portIdx = ifitem->getIdx();
-    	getTimeFromTarget(&(timer->expTime));
-    	addTime(&(timer->expTime), &t);
-    	putTcbToUsedList(timer);
+    if (transitionDatar != 0) {
+    	t.sec = transitionData / 1000;
+    	t.nSec = (transitionData % 1000) * 1000000L;
+    	transitionDatar->pTime.sec = 0;
+    	transitionDatar->pTime.nSec = 0;
+    	transitionDatar->portIdx = ifitem->getIdx();
+    	getTimeFromTarget(&(transitionDatar->expTime));
+    	addTime(&(transitionDatar->expTime), &t);
+    	putTcbToUsedList(transitionDatar);
     }
 }
-void ATimingService::action_TRANS_tr3_FROM_Operational_TO_Operational_BY_startTimertimer_tr3(const InterfaceItemBase* ifitem, uint32 time) {
-    etTimerControlBlock* timer = getTcb();
+void ATimingService::action_TRANS_tr3_FROM_Operational_TO_Operational_BY_startTimertimer_tr3(const InterfaceItemBase* ifitem, uint32 transitionData) {
+    etTimerControlBlock* transitionDatar = getTcb();
     etTime t;
-    if (timer != 0) {
-    	t.sec = time / 1000;
-    	t.nSec = (time % 1000) * 1000000L;
-    	timer->pTime = t;
-    	timer->portIdx = ifitem->getIdx();
-    	getTimeFromTarget(&(timer->expTime));
-    	addTime(&(timer->expTime), &t);
-    	putTcbToUsedList(timer);
+    if (transitionDatar != 0) {
+    	t.sec = transitionData / 1000;
+    	t.nSec = (transitionData % 1000) * 1000000L;
+    	transitionDatar->pTime = t;
+    	transitionDatar->portIdx = ifitem->getIdx();
+    	getTimeFromTarget(&(transitionDatar->expTime));
+    	addTime(&(transitionDatar->expTime), &t);
+    	putTcbToUsedList(transitionDatar);
     }
 }
 void ATimingService::action_TRANS_tr4_FROM_Operational_TO_Operational_BY_killtimer_tr4(const InterfaceItemBase* ifitem) {
@@ -280,14 +280,14 @@ etInt16 ATimingService::executeTransitionChain(int chain__et, const InterfaceIte
 		}
 		case ATimingService::CHAIN_TRANS_tr1_FROM_Operational_TO_Operational_BY_startTimeouttimer_tr1:
 		{
-			uint32 time = *(static_cast<uint32*>(generic_data__et));
-			action_TRANS_tr1_FROM_Operational_TO_Operational_BY_startTimeouttimer_tr1(ifitem, time);
+			uint32 transitionData = *(static_cast<uint32*>(generic_data__et));
+			action_TRANS_tr1_FROM_Operational_TO_Operational_BY_startTimeouttimer_tr1(ifitem, transitionData);
 			return STATE_Operational;
 		}
 		case ATimingService::CHAIN_TRANS_tr3_FROM_Operational_TO_Operational_BY_startTimertimer_tr3:
 		{
-			uint32 time = *(static_cast<uint32*>(generic_data__et));
-			action_TRANS_tr3_FROM_Operational_TO_Operational_BY_startTimertimer_tr3(ifitem, time);
+			uint32 transitionData = *(static_cast<uint32*>(generic_data__et));
+			action_TRANS_tr3_FROM_Operational_TO_Operational_BY_startTimertimer_tr3(ifitem, transitionData);
 			return STATE_Operational;
 		}
 		case ATimingService::CHAIN_TRANS_tr4_FROM_Operational_TO_Operational_BY_killtimer_tr4:
@@ -346,37 +346,37 @@ void ATimingService::receiveEventInternal(InterfaceItemBase* ifitem, int localId
 
 	if (!handleSystemEvent(ifitem, evt, generic_data__et)) {
 		switch (getState()) {
-		    case STATE_Operational:
-		        switch(trigger__et) {
-		            case POLLING:
-		                do_Operational();
-		                break;
-		            case TRIG_timer__startTimeout:
-		                {
-		                    chain__et = ATimingService::CHAIN_TRANS_tr1_FROM_Operational_TO_Operational_BY_startTimeouttimer_tr1;
-		                    catching_state__et = STATE_TOP;
-		                }
-		            break;
-		            case TRIG_timer__startTimer:
-		                {
-		                    chain__et = ATimingService::CHAIN_TRANS_tr3_FROM_Operational_TO_Operational_BY_startTimertimer_tr3;
-		                    catching_state__et = STATE_TOP;
-		                }
-		            break;
-		            case TRIG_timer__kill:
-		                {
-		                    chain__et = ATimingService::CHAIN_TRANS_tr4_FROM_Operational_TO_Operational_BY_killtimer_tr4;
-		                    catching_state__et = STATE_TOP;
-		                }
-		            break;
-		            default:
-		                /* should not occur */
-		                break;
-		        }
-		        break;
-		    default:
-		        /* should not occur */
-		        break;
+			case STATE_Operational:
+				switch(trigger__et) {
+					case POLLING:
+						do_Operational();
+						break;
+					case TRIG_timer__kill:
+						{
+							chain__et = ATimingService::CHAIN_TRANS_tr4_FROM_Operational_TO_Operational_BY_killtimer_tr4;
+							catching_state__et = STATE_TOP;
+						}
+					break;
+					case TRIG_timer__startTimeout:
+						{
+							chain__et = ATimingService::CHAIN_TRANS_tr1_FROM_Operational_TO_Operational_BY_startTimeouttimer_tr1;
+							catching_state__et = STATE_TOP;
+						}
+					break;
+					case TRIG_timer__startTimer:
+						{
+							chain__et = ATimingService::CHAIN_TRANS_tr3_FROM_Operational_TO_Operational_BY_startTimertimer_tr3;
+							catching_state__et = STATE_TOP;
+						}
+					break;
+					default:
+						/* should not occur */
+						break;
+				}
+				break;
+			default:
+				/* should not occur */
+				break;
 		}
 	}
 	if (chain__et != NOT_CAUGHT) {

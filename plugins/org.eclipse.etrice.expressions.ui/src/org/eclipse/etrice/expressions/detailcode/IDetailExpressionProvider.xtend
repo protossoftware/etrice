@@ -15,6 +15,7 @@ package org.eclipse.etrice.expressions.detailcode
 import com.google.common.collect.ImmutableList
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.emf.ecore.EObject
 
 /**
  * Defines abstract syntax of detail expressions = <i>ExpressionFeature ('.' ExpressionFeature)* </i>
@@ -44,6 +45,14 @@ interface IDetailExpressionProvider {
 		val String id 					// name
 		val ExpressionPostfix postfix	// follows name
 		Object data						// business object
+		
+		override toString() {
+			id + switch postfix {
+				case PARENTHESES: '()'
+				case BRACKETS: '[]'
+				default: ''
+			} + ' - ' + if(data instanceof EObject) data.eClass.name else data
+		}
 	}
 
 	enum ExpressionPostfix {

@@ -464,6 +464,67 @@ ruleVarDecl returns [EObject current=null]
 
 
 
+// Entry rule entryRuleMessageData
+entryRuleMessageData returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getMessageDataRule()); }
+	 iv_ruleMessageData=ruleMessageData 
+	 { $current=$iv_ruleMessageData.current; } 
+	 EOF 
+;
+
+// Rule MessageData
+ruleMessageData returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(((
+(
+		lv_deprecatedName_0_0=RULE_ID
+		{
+			newLeafNode(lv_deprecatedName_0_0, grammarAccess.getMessageDataAccess().getDeprecatedNameIDTerminalRuleCall_0_0_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getMessageDataRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"deprecatedName",
+        		lv_deprecatedName_0_0, 
+        		"org.eclipse.xtext.common.Terminals.ID");
+	    }
+
+)
+)	otherlv_1=':' 
+    {
+    	newLeafNode(otherlv_1, grammarAccess.getMessageDataAccess().getColonKeyword_0_1());
+    }
+)?(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getMessageDataAccess().getRefTypeRefableTypeParserRuleCall_1_0()); 
+	    }
+		lv_refType_2_0=ruleRefableType		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getMessageDataRule());
+	        }
+       		set(
+       			$current, 
+       			"refType",
+        		lv_refType_2_0, 
+        		"org.eclipse.etrice.core.Room.RefableType");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))
+;
+
+
+
+
+
 // Entry rule entryRuleRefableType
 entryRuleRefableType returns [EObject current=null] 
 	:
@@ -2401,16 +2462,16 @@ ruleMessage returns [EObject current=null]
 	    }
 
 )
-)	otherlv_3='(' 
+)(	otherlv_3='(' 
     {
-    	newLeafNode(otherlv_3, grammarAccess.getMessageAccess().getLeftParenthesisKeyword_3());
+    	newLeafNode(otherlv_3, grammarAccess.getMessageAccess().getLeftParenthesisKeyword_3_0());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getMessageAccess().getDataVarDeclParserRuleCall_4_0()); 
+	        newCompositeNode(grammarAccess.getMessageAccess().getDataMessageDataParserRuleCall_3_1_0()); 
 	    }
-		lv_data_4_0=ruleVarDecl		{
+		lv_data_4_0=ruleMessageData		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getMessageRule());
 	        }
@@ -2418,19 +2479,19 @@ ruleMessage returns [EObject current=null]
        			$current, 
        			"data",
         		lv_data_4_0, 
-        		"org.eclipse.etrice.core.Room.VarDecl");
+        		"org.eclipse.etrice.core.Room.MessageData");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
 )?	otherlv_5=')' 
     {
-    	newLeafNode(otherlv_5, grammarAccess.getMessageAccess().getRightParenthesisKeyword_5());
+    	newLeafNode(otherlv_5, grammarAccess.getMessageAccess().getRightParenthesisKeyword_3_2());
     }
-(
+)?(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getMessageAccess().getAnnotationsAnnotationParserRuleCall_6_0()); 
+	        newCompositeNode(grammarAccess.getMessageAccess().getAnnotationsAnnotationParserRuleCall_4_0()); 
 	    }
 		lv_annotations_6_0=ruleAnnotation		{
 	        if ($current==null) {
@@ -2448,7 +2509,7 @@ ruleMessage returns [EObject current=null]
 )*(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getMessageAccess().getDocuDocumentationParserRuleCall_7_0()); 
+	        newCompositeNode(grammarAccess.getMessageAccess().getDocuDocumentationParserRuleCall_5_0()); 
 	    }
 		lv_docu_7_0=ruleDocumentation		{
 	        if ($current==null) {
@@ -6116,6 +6177,44 @@ ruleChoicePoint returns [EObject current=null]
 ;
 
 
+
+
+
+// Entry rule entryRuleTransitionBase
+entryRuleTransitionBase returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getTransitionBaseRule()); }
+	 iv_ruleTransitionBase=ruleTransitionBase 
+	 { $current=$iv_ruleTransitionBase.current; } 
+	 EOF 
+;
+
+// Rule TransitionBase
+ruleTransitionBase returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(
+    { 
+        newCompositeNode(grammarAccess.getTransitionBaseAccess().getTransitionParserRuleCall_0()); 
+    }
+    this_Transition_0=ruleTransition
+    { 
+        $current = $this_Transition_0.current; 
+        afterParserOrEnumRuleCall();
+    }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getTransitionBaseAccess().getRefinedTransitionParserRuleCall_1()); 
+    }
+    this_RefinedTransition_1=ruleRefinedTransition
+    { 
+        $current = $this_RefinedTransition_1.current; 
+        afterParserOrEnumRuleCall();
+    }
+)
+;
 
 
 

@@ -32,6 +32,7 @@ import org.eclipse.etrice.core.fsm.fSM.ComponentCommunicationType;
 import org.eclipse.etrice.core.fsm.ui.quickfix.FSMQuickfixProvider;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorRef;
+import org.eclipse.etrice.core.room.MessageData;
 import org.eclipse.etrice.core.room.ReferenceType;
 import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.validation.RoomJavaValidator;
@@ -327,6 +328,17 @@ public class RoomQuickfixProvider extends FSMQuickfixProvider {
 			public void apply(EObject element, IModificationContext context) throws Exception {
 				ActorClass ac = (ActorClass) element;
 				ac.setCommType(ComponentCommunicationType.get(issue.getData()[0]));
+			}
+		});
+	}
+	
+	@Fix(RoomJavaValidator.DEPRECATED_MESSAGE_DATA_NAME)
+	public void removeDeprecatedMessageDataName(final Issue issue, IssueResolutionAcceptor acceptor) {
+		acceptor.accept(issue, "Omit message data name.", "Remove the deprecated name for the message data.", "correction_change.gif", new ISemanticModification() {
+			@Override
+			public void apply(EObject element, IModificationContext context) throws Exception {
+				MessageData d = (MessageData) element;
+				d.setDeprecatedName(null);
 			}
 		});
 	}

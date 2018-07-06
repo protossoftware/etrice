@@ -148,10 +148,10 @@ public class PTcpControl {
 	
 	
 		// sent messages
-		public void open(DTcpControl data) {
+		public void open(DTcpControl transitionData) {
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_open]);
 			if (getPeerAddress()!=null)
-				getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), IN_open, data.deepCopy()));
+				getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), IN_open, transitionData.deepCopy()));
 		}
 		public void open(String IPAddr, int TcpPort) {
 			open(new DTcpControl(IPAddr, TcpPort));
@@ -187,9 +187,9 @@ public class PTcpControl {
 		}
 	
 		// incoming messages
-		public void open(DTcpControl data){
+		public void open(DTcpControl transitionData){
 			for (InterfaceItemBase item : getItems()) {
-				((PTcpControlConjPort)item).open( data);
+				((PTcpControlConjPort)item).open( transitionData);
 			}
 		}
 		public void close(){

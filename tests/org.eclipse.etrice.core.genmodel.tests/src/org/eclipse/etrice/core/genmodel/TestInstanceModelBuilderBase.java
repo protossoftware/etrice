@@ -29,30 +29,18 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.etrice.core.genmodel.etricegen.InstanceBase;
-import org.eclipse.etrice.core.genmodel.etricegen.Root;
-import org.eclipse.etrice.core.genmodel.fsm.base.ILogger;
-import org.eclipse.etrice.core.genmodel.fsm.fsmgen.IDiagnostician;
-import org.eclipse.etrice.core.naming.RoomNameProvider;
-import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.resource.XtextResourceSet;
-import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.fsm.fSM.StateGraphItem;
 import org.eclipse.etrice.core.genmodel.builder.GeneratorModelBuilder;
+import org.eclipse.etrice.core.genmodel.etricegen.InstanceBase;
+import org.eclipse.etrice.core.genmodel.etricegen.Root;
+import org.eclipse.etrice.core.genmodel.fsm.IDiagnostician;
+import org.eclipse.etrice.core.genmodel.fsm.NullLogger;
+import org.eclipse.etrice.core.naming.RoomNameProvider;
+import org.eclipse.etrice.core.room.RoomModel;
+import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.resource.XtextResourceSet;
 
 public class TestInstanceModelBuilderBase {
-
-	class Logger implements ILogger {
-
-		@Override
-		public void logInfo(String text) {
-		}
-
-		@Override
-		public void logError(String text, EObject obj) {
-		}
-		
-	}
 	
 	class Diagnostician implements IDiagnostician {
 
@@ -112,7 +100,7 @@ public class TestInstanceModelBuilderBase {
 	}
 
 	protected Root buildInstanceModel(String modelName) {
-		GeneratorModelBuilder builder = new GeneratorModelBuilder(new Logger(), new Diagnostician());
+		GeneratorModelBuilder builder = new GeneratorModelBuilder(new NullLogger(), new Diagnostician());
 		LinkedList<RoomModel> models = getModels(modelName);
 		ArrayList<RoomModel> importedModels = new ArrayList<>();
 		Root root = builder.createGeneratorModel(models, importedModels, false);

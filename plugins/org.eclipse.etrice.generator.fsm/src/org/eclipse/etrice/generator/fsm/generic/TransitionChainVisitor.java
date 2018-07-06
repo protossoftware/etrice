@@ -16,13 +16,15 @@ import org.eclipse.etrice.core.fsm.fSM.CPBranchTransition;
 import org.eclipse.etrice.core.fsm.fSM.ContinuationTransition;
 import org.eclipse.etrice.core.fsm.fSM.GuardedTransition;
 import org.eclipse.etrice.core.fsm.fSM.InitialTransition;
+import org.eclipse.etrice.core.fsm.fSM.RefinedTransition;
 import org.eclipse.etrice.core.fsm.fSM.State;
-import org.eclipse.etrice.core.fsm.fSM.Transition;
+import org.eclipse.etrice.core.fsm.fSM.TransitionBase;
 import org.eclipse.etrice.core.fsm.util.FSMHelpers;
-import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ExpandedModelComponent;
-import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ITransitionChainVisitor;
-import org.eclipse.etrice.core.genmodel.fsm.fsmgen.TransitionChain;
+import org.eclipse.etrice.core.genmodel.fsm.FsmGenExtensions;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.GraphContainer;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.Link;
 import org.eclipse.etrice.generator.fsm.base.CodegenHelpers;
+import org.eclipse.etrice.generator.fsm.generic.ILanguageExtensionBase.TypedDataKind;
 
 /**
  * Implementation of the {@link org.eclipse.etrice.core.genmodel.fsm.fsmgen.ITransitionChainVisitor ITransitionChainVisitor} interface.
@@ -36,12 +38,11 @@ public class TransitionChainVisitor implements ITransitionChainVisitor {
 	private FSMHelpers fsmHelpers = new FSMHelpers();
 	
 	// Initialized in constructor
-	private ExpandedModelComponent xpac;
+	private GraphContainer gc;
 	private ILanguageExtensionBase langExt;
 	private CodegenHelpers codegenHelpers;
 	private IDetailCodeTranslator translationProvider;
 	
-	private TransitionChain tc = null;
 	private boolean dataDriven = false;
 
 	/**
@@ -52,42 +53,45 @@ public class TransitionChainVisitor implements ITransitionChainVisitor {
 	 * @param languageExt 
 	 */
 	protected TransitionChainVisitor(
-			ExpandedModelComponent xpac,
+			GraphContainer gc,
 			ILanguageExtensionBase languageExt,
 			CodegenHelpers codegenHelpers,
 			IDetailCodeTranslator translationProvider
 	) {
-		this.xpac = xpac;
+		this.gc = gc;
 		this.langExt = languageExt;
 		this.codegenHelpers = codegenHelpers;
 		this.translationProvider = translationProvider;
 	}
 	
-	protected void init(TransitionChain tc) {
-		this.tc = tc;
-		
-		if (tc.getTransition() instanceof GuardedTransition) {
+	protected void init(TransitionBase tr) {
+		while (tr instanceof RefinedTransition) {
+			tr = ((RefinedTransition) tr).getTarget();
+		}
+		if (tr instanceof GuardedTransition) {
 			dataDriven = true;
 		}
-		else if (tc.getTransition() instanceof InitialTransition) {
+		else if (tr instanceof InitialTransition) {
 			dataDriven = true;
 		}
 	}
 
 	// ITransitionChainVisitor interface
 	
-	public String genActionOperationCall(Transition tr) {
+	public String genActionOperationCall(TransitionBase tr) {
 		boolean noIfItem = dataDriven;
-		for(TransitionChain tc : xpac.getChains(tr))
-			noIfItem |= tc.getTransition() instanceof InitialTransition;
+		Link l = FsmGenExtensions.getLinkFor(gc, tr);
+		for (Link ch : l.getChainHeads()) {
+			noIfItem |= ch.getTransition() instanceof InitialTransition;
+		}
 		
 		if (fsmHelpers.hasDetailCode(tr.getAction())) {
 			if (noIfItem)
 				return codegenHelpers.getActionCodeOperationName(tr)+"("+langExt.selfPointer(false)+");\n";
 			else {
 				String dataArg = "";
-				if(xpac.getData(tr) != null)
-					dataArg = langExt.generateArglistAndTypedData(tc.getData())[0];
+				if (l.getCommonData() != null)
+					dataArg = langExt.generateArglistAndTypedData(l.getCommonData())[TypedDataKind.COMMA_SEPARATED_PARAM_IN_CALL.ordinal()];
 				return codegenHelpers.getActionCodeOperationName(tr)+"("+langExt.selfPointer(true)+"ifitem"+dataArg+");\n";
 			}
 		}
@@ -129,9 +133,9 @@ public class TransitionChainVisitor implements ITransitionChainVisitor {
 			return "return " + codegenHelpers.getGenStateId(state) + " + STATE_MAX;";
 	}
 
-	public String genTypedData(TransitionChain tc) {
-		String[] result = langExt.generateArglistAndTypedData(tc.getData());
-		return result[1];
+	public String genTypedData(TransitionBase tr) {
+		Link l = FsmGenExtensions.getLinkFor(gc, tr);
+		return langExt.generateArglistAndTypedData(l.getCommonData())[TypedDataKind.DECLARATION_AND_INITIALIZATION.ordinal()];
 	}
 
 }

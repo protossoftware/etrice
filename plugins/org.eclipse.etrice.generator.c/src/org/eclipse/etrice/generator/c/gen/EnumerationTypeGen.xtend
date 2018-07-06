@@ -58,7 +58,7 @@ class EnumerationTypeGen {
 		
 		#include "etDatatypes.h"
 		
-		«IF et.getPrimitiveType()!=null»
+		«IF et.getPrimitiveType()!==null»
 			«FOR lit: et.literals»
 				#define «et.name»_«lit.name» «lit.castedValue»
 			«ENDFOR»

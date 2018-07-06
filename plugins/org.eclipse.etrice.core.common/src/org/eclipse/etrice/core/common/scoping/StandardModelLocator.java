@@ -60,16 +60,18 @@ public class StandardModelLocator implements IModelLocator {
 		try {
 			URIConverter converter = resource==null? null : resource.getResourceSet().getURIConverter();
 			URI canonical = getCanonicalFileURI(resolve, converter);
-			if (canonical.isPlatform()) {
-				resolve = "platform:/resource" + canonical.toPlatformString(true);
+			// TODO handle non-file URIs more generically
+			if(canonical != null && (canonical.isFile() || canonical.isArchive() || canonical.isPlatform() || canonical.scheme() == "classpath")) {
+				resolve = canonical.toString();
 			}
 			else {
 				resolve = canonical.toFileString();
-
-				resolve = resolve.replaceAll("\\\\", "/");
-				resolve = resolve.replaceAll("//", "/");
-				
-				resolve = URI.createFileURI(resolve).toString();
+				if(resolve != null) {
+					resolve = resolve.replaceAll("\\\\", "/");
+					resolve = resolve.replaceAll("//", "/");
+					
+					resolve = URI.createFileURI(resolve).toString();
+				}
 			}
 		} catch (IOException e) {
 			return null;
@@ -291,17 +293,15 @@ public class StandardModelLocator implements IModelLocator {
 	}
 	
 	private URI getCanonicalFileURI(String uriString, URIConverter uriConverter) throws IOException {
-		URI uri;
-		if (uriString.startsWith(CLASSPATH) || uriString.startsWith("platform:/") || uriString.startsWith("file:/")) {
+		URI uri = null;
+		try {
+			// try valid uri
 			uri = URI.createURI(uriString);
+		} catch(IllegalArgumentException e1) {
 		}
-		else {
-			try {
-				uri = URI.createFileURI(uriString);
-			}
-			catch (IllegalArgumentException e) {
-				throw new IOException();
-			}
+		if(uri == null || !(uri.isFile() || uri.isArchive() || uri.isPlatform() || uri.scheme() == "classpath")) {
+			// try file path
+			uri = URI.createFileURI(uriString);
 		}
 		
 		URI normalized = uri;

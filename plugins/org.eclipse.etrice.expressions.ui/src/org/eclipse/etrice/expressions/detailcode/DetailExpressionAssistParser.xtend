@@ -148,6 +148,15 @@ class DetailExpressionAssistParser {
 			false
 		}
 	}
+	
+	def boolean isInitialExpression() {
+		try {
+			document.getChar(invocationOffset - 1) != IDetailExpressionProvider.SEPARATOR && document.get(invocationOffset - 2, 2) != '->'
+		}
+		catch (BadLocationException e) {
+			true
+		}		
+	}
 
 	/**
 	 * non-empty id + not-null suffix

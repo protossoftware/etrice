@@ -15,8 +15,30 @@ package org.eclipse.etrice.core.genmodel.etricegen.util;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
-import org.eclipse.etrice.core.genmodel.etricegen.*;
-import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ExpandedModelComponent;
+import org.eclipse.etrice.core.genmodel.etricegen.AbstractInstance;
+import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance;
+import org.eclipse.etrice.core.genmodel.etricegen.ActorInterfaceInstance;
+import org.eclipse.etrice.core.genmodel.etricegen.BindingInstance;
+import org.eclipse.etrice.core.genmodel.etricegen.ConnectionInstance;
+import org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage;
+import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
+import org.eclipse.etrice.core.genmodel.etricegen.InstanceBase;
+import org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance;
+import org.eclipse.etrice.core.genmodel.etricegen.OpenBinding;
+import org.eclipse.etrice.core.genmodel.etricegen.OpenServiceConnection;
+import org.eclipse.etrice.core.genmodel.etricegen.OptionalActorInstance;
+import org.eclipse.etrice.core.genmodel.etricegen.PortInstance;
+import org.eclipse.etrice.core.genmodel.etricegen.Root;
+import org.eclipse.etrice.core.genmodel.etricegen.SAPInstance;
+import org.eclipse.etrice.core.genmodel.etricegen.SPPInstance;
+import org.eclipse.etrice.core.genmodel.etricegen.ServiceImplInstance;
+import org.eclipse.etrice.core.genmodel.etricegen.StructureInstance;
+import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance;
+import org.eclipse.etrice.core.genmodel.etricegen.SystemInstance;
+import org.eclipse.etrice.core.genmodel.etricegen.Wire;
+import org.eclipse.etrice.core.genmodel.etricegen.WiredActorClass;
+import org.eclipse.etrice.core.genmodel.etricegen.WiredStructureClass;
+import org.eclipse.etrice.core.genmodel.etricegen.WiredSubSystemClass;
 
 /**
  * <!-- begin-user-doc -->
@@ -235,7 +257,6 @@ public class ETriceGenSwitch<T> extends Switch<T> {
 			case ETriceGenPackage.EXPANDED_ACTOR_CLASS: {
 				ExpandedActorClass expandedActorClass = (ExpandedActorClass)theEObject;
 				T result = caseExpandedActorClass(expandedActorClass);
-				if (result == null) result = caseExpandedModelComponent(expandedActorClass);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -495,21 +516,6 @@ public class ETriceGenSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseExpandedActorClass(ExpandedActorClass object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Expanded Model Component</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Expanded Model Component</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseExpandedModelComponent(ExpandedModelComponent object) {
 		return null;
 	}
 

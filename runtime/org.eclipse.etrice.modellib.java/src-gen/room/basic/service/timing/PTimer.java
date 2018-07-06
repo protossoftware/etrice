@@ -107,17 +107,17 @@ public class PTimer {
 					case IN_internalStartTimer:
 					{
 						EventWithDataMessage dataMsg = (EventWithDataMessage) msg;
-						TimerData td = (TimerData)dataMsg.getData();
-						task = new FireTimeoutTask(td.time, td.id, true, this);
-						getActor().receiveEvent(this, IN_internalStartTimer, td);
+						TimerData transitionData = (TimerData)dataMsg.getData();
+						task = new FireTimeoutTask(transitionData.time, transitionData.id, true, this);
+						getActor().receiveEvent(this, IN_internalStartTimer, transitionData);
 					}
 					break;
 					case IN_internalStartTimeout:
 					{
 						EventWithDataMessage dataMsg = (EventWithDataMessage) msg;
-						TimerData td = (TimerData)dataMsg.getData();
-						task = new FireTimeoutTask(td.time, td.id, false, this);
-						getActor().receiveEvent(this, IN_internalStartTimeout, td);
+						TimerData transitionData = (TimerData)dataMsg.getData();
+						task = new FireTimeoutTask(transitionData.time, transitionData.id, false, this);
+						getActor().receiveEvent(this, IN_internalStartTimeout, transitionData);
 					}
 					break;
 					case IN_kill:
@@ -149,18 +149,18 @@ public class PTimer {
 			if (getPeerAddress()!=null)
 				getPeerMsgReceiver().receive(new EventMessage(getPeerAddress(), OUT_timeout));
 		}
-		private void internalTimer(TimerData td) {
+		private void internalTimer(TimerData transitionData) {
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_internalTimer]);
 			if (getPeerAddress()!=null)
-				getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), OUT_internalTimer, td.deepCopy()));
+				getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), OUT_internalTimer, transitionData.deepCopy()));
 		}
 		public void internalTimer(int time, int id) {
 			internalTimer(new TimerData(time, id));
 		}
-		private void internalTimeout(TimerData td) {
+		private void internalTimeout(TimerData transitionData) {
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_internalTimeout]);
 			if (getPeerAddress()!=null)
-				getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), OUT_internalTimeout, td.deepCopy()));
+				getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), OUT_internalTimeout, transitionData.deepCopy()));
 		}
 		public void internalTimeout(int time, int id) {
 			internalTimeout(new TimerData(time, id));
@@ -196,14 +196,14 @@ public class PTimer {
 				((PTimerPort)item).timeout();
 			}
 		}
-		private void internalTimer(TimerData td){
+		private void internalTimer(TimerData transitionData){
 			for (InterfaceItemBase item : getItems()) {
-				((PTimerPort)item).internalTimer( td);
+				((PTimerPort)item).internalTimer( transitionData);
 			}
 		}
-		private void internalTimeout(TimerData td){
+		private void internalTimeout(TimerData transitionData){
 			for (InterfaceItemBase item : getItems()) {
-				((PTimerPort)item).internalTimeout( td);
+				((PTimerPort)item).internalTimeout( transitionData);
 			}
 		}
 	}
@@ -242,8 +242,8 @@ public class PTimer {
 					{
 						//conjugated PortClass handle timer
 						EventWithDataMessage dataMsg = (EventWithDataMessage) msg;
-						TimerData td = (TimerData) dataMsg.getData();
-						if (active && td.getId()==currentId) {
+						TimerData transitionData = (TimerData) dataMsg.getData();
+						if (active && transitionData.getId()==currentId) {
 							getActor().receiveEvent(this, OUT_timeout, null);
 						}
 					}
@@ -252,8 +252,8 @@ public class PTimer {
 					{
 						//conjugated PortClass handle timeout
 						EventWithDataMessage dataMsg = (EventWithDataMessage) msg;
-						TimerData td = (TimerData) dataMsg.getData();
-						if (active && td.getId()==currentId) {
+						TimerData transitionData = (TimerData) dataMsg.getData();
+						if (active && transitionData.getId()==currentId) {
 							active = false;
 							getActor().receiveEvent(this, OUT_timeout, null);
 						}
@@ -299,18 +299,18 @@ public class PTimer {
 						new EventWithDataMessage(getPeerAddress(), IN_kill, td));
 			}
 		}
-		private void internalStartTimer(TimerData td) {
+		private void internalStartTimer(TimerData transitionData) {
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_internalStartTimer]);
 			if (getPeerAddress()!=null)
-				getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), IN_internalStartTimer, td.deepCopy()));
+				getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), IN_internalStartTimer, transitionData.deepCopy()));
 		}
 		public void internalStartTimer(int time, int id) {
 			internalStartTimer(new TimerData(time, id));
 		}
-		private void internalStartTimeout(TimerData td) {
+		private void internalStartTimeout(TimerData transitionData) {
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_internalStartTimeout]);
 			if (getPeerAddress()!=null)
-				getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), IN_internalStartTimeout, td.deepCopy()));
+				getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), IN_internalStartTimeout, transitionData.deepCopy()));
 		}
 		public void internalStartTimeout(int time, int id) {
 			internalStartTimeout(new TimerData(time, id));
@@ -346,14 +346,14 @@ public class PTimer {
 				((PTimerConjPort)item).kill();
 			}
 		}
-		private void internalStartTimer(TimerData td){
+		private void internalStartTimer(TimerData transitionData){
 			for (InterfaceItemBase item : getItems()) {
-				((PTimerConjPort)item).internalStartTimer( td);
+				((PTimerConjPort)item).internalStartTimer( transitionData);
 			}
 		}
-		private void internalStartTimeout(TimerData td){
+		private void internalStartTimeout(TimerData transitionData){
 			for (InterfaceItemBase item : getItems()) {
-				((PTimerConjPort)item).internalStartTimeout( td);
+				((PTimerConjPort)item).internalStartTimeout( transitionData);
 			}
 		}
 	}

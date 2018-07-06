@@ -17,11 +17,9 @@ import java.net.URL;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.fsm.fSM.ChoicePoint;
 import org.eclipse.etrice.core.fsm.fSM.EntryPoint;
 import org.eclipse.etrice.core.fsm.fSM.ExitPoint;
-import org.eclipse.etrice.core.fsm.fSM.InitialTransition;
 import org.eclipse.etrice.core.fsm.fSM.RefinedState;
 import org.eclipse.etrice.core.fsm.fSM.State;
 import org.eclipse.etrice.core.fsm.fSM.StateGraph;
@@ -29,6 +27,8 @@ import org.eclipse.etrice.core.fsm.fSM.StateGraphItem;
 import org.eclipse.etrice.core.fsm.fSM.TrPoint;
 import org.eclipse.etrice.core.fsm.fSM.Transition;
 import org.eclipse.etrice.core.fsm.fSM.TransitionPoint;
+import org.eclipse.etrice.core.fsm.util.FSMHelpers;
+import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.tests.base.TestBase;
 import org.eclipse.etrice.ui.behavior.BehaviorTestActivator;
 import org.eclipse.etrice.ui.behavior.fsm.support.StateSupport;
@@ -49,6 +49,8 @@ import org.eclipse.graphiti.services.Graphiti;
  */
 public abstract class AbstractStateMachineTest extends TestBase {
 
+	private FSMHelpers fsmHelpers = new FSMHelpers();
+	
 	/**
 	 * test general conditions for state graphs
 	 * @param diagram the diagram
@@ -60,15 +62,24 @@ public abstract class AbstractStateMachineTest extends TestBase {
 
 		ActorClass ac = (ActorClass) bo;
 		
-		boolean hasInitialTransition = false;
-		for (Transition trans : sg.getTransitions()) {
-			if (trans instanceof InitialTransition) {
-				hasInitialTransition = true;
-				break;
+		List<PictogramElement> elements;
+		
+		// check initial transition
+		{
+			boolean hasInitialTransition = fsmHelpers.hasInitTransition(sg);
+			
+			// if this is the top level and we have an inherited initial transition we count that
+			// too since its pe is also linked to the current state graph
+			if (sg==ac.getStateMachine()) {
+				ActorClass theAC = ac.getActorBase();
+				while (theAC!=null) {
+					hasInitialTransition |= fsmHelpers.hasInitTransition(theAC.getStateMachine());
+					theAC = theAC.getActorBase();
+				}
 			}
+			elements = Graphiti.getLinkService().getPictogramElements(diagram, sg);
+			assertEquals("PEs for our state graph: sg and initial point", hasInitialTransition? 2:1, elements.size());
 		}
-		List<PictogramElement> elements = Graphiti.getLinkService().getPictogramElements(diagram, sg);
-		assertEquals("PEs for our state graph: sg and initial point", hasInitialTransition? 2:1, elements.size());
 		
 		for (State s : sg.getStates()) {
 			elements = Graphiti.getLinkService().getPictogramElements(diagram, s);

@@ -12,7 +12,7 @@
 
 package org.eclipse.etrice.generator.fsm.base;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem;
@@ -49,7 +49,7 @@ public interface IFSMTranslationProvider {
 	void setContainerClass(EObject container);
 	
 	/**
-	 * @return true if translation should be applied to members (attributes, operations and port.msg
+	 * @return true if translation should be applied to members (attributes, operations and port.msg)
 	 */
 	boolean translateMembers();
 	
@@ -66,7 +66,7 @@ public interface IFSMTranslationProvider {
 	 * @param orig the original text
 	 * @return the translation
 	 */
-	String getInterfaceItemMessageText(AbstractInterfaceItem item, EObject msg, ArrayList<String> args, String index, String orig);
+	String getInterfaceItemMessageText(AbstractInterfaceItem item, EObject msg, List<String> args, String index, String orig);
 
 	/**
 	 * @return true if translations are provided for tags

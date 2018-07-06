@@ -11,6 +11,7 @@
 #include "etDatatypes.h"
 #include "messaging/etMessage.h"
 
+/* include all referenced room classes */
 #include "room/basic/service/timing/PTimer.h"
 
 /*--------------------- begin user code ---------------------*/
@@ -45,7 +46,7 @@ typedef struct ATimingService_const {
 
 
 /* constant for state machine data */
-#define ATIMINGSERVICE_HISTORY_SIZE 2
+#define ATIMINGSERVICE_HISTORY_SIZE 3
 
 /* variable part of ActorClass (RAM) */
 struct ATimingService {

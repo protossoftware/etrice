@@ -144,9 +144,9 @@ class TypeHelpers {
 	
 	def String getAttrClassConfigValue(List<Attribute> attributePath, ActorClass actor, boolean inherite){
 		var result = dataConfigExt.getAttrClassConfigValue(actor, attributePath)
-		if(result == null && inherite){
+		if(result === null && inherite){
 			var base = actor.actorBase
-			while(base != null && result == null){
+			while(base !== null && result === null){
 				result = dataConfigExt.getAttrClassConfigValue(base, attributePath)
 				base = base.actorBase
 			}
@@ -157,7 +157,7 @@ class TypeHelpers {
 	
 	def String getAttrClassConfigValue(List<Attribute> attributePath, PortClass port){
 		var pc = port.protocolClass
-		if(pc == null)
+		if(pc === null)
 			return null
 		return dataConfigExt.getAttrClassConfigValue(pc, port.equals(pc.regular), attributePath)
 	}

@@ -32,7 +32,8 @@ import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.etrice.core.genmodel.builder.GeneratorModelBuilder;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
-import org.eclipse.etrice.core.genmodel.fsm.fsmgen.IDiagnostician;
+import org.eclipse.etrice.core.genmodel.fsm.FsmGenExtensions;
+import org.eclipse.etrice.core.genmodel.fsm.IDiagnostician;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RoomModel;
@@ -585,7 +586,10 @@ public abstract class AbstractGenerator implements IDetailCodeTranslator {
 		for (ExpandedActorClass xpac : gmRoot.getXpActorClasses()) {
 			DetailCodeTranslator dct = new DetailCodeTranslator(xpac.getActorClass(), translationProvider, doTranslate);
 			translateDetailCodesOfTree(xpac.getActorClass(), dct);
-			translateDetailCodesOfTree(xpac.getStateMachine(), dct);
+			List<DetailCode> allDetailCodes = FsmGenExtensions.getAllDetailCodes(xpac.getGraphContainer().getGraph());
+			for (DetailCode dc : allDetailCodes) {
+				detailcode2string.put(dc, dct.translateDetailCode(dc));
+			}
 		}
 		
 		for (DataClass dc : gmRoot.getDataClasses()) {

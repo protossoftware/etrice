@@ -72,7 +72,8 @@ class ImplPostprocessor {
 			'''
 				EList<Port> ports = new BasicEList<Port>();
 				for (ExternalPort ep : getExternalPorts()) {
-					ports.add(ep.getInterfacePort());
+					if(ep.getInterfacePort() != null)
+						ports.add(ep.getInterfacePort());
 				}
 				return ports;
 			'''
@@ -81,7 +82,8 @@ class ImplPostprocessor {
 			'''
 				EList<Port> ports = new BasicEList<Port>(getInterfacePorts());
 				for (ExternalPort ep : getExternalPorts()) {
-					ports.remove(ep.getInterfacePort());
+					if(ep.getInterfacePort() != null)
+						ports.remove(ep.getInterfacePort());
 				}
 				return ports;
 			'''
@@ -90,7 +92,8 @@ class ImplPostprocessor {
 			'''
 				EList<SPP> spps = new BasicEList<SPP>();
 				for (ServiceImplementation spp : getServiceImplementations()) {
-					spps.add(spp.getSpp());
+					if(spp.getSpp() != null)
+						spps.add(spp.getSpp());
 				}
 				return spps;
 			'''

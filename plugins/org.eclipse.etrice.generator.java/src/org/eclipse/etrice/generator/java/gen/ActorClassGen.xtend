@@ -32,6 +32,8 @@ import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.TypeHelpers
 import org.eclipse.etrice.generator.java.Main
+import static extension org.eclipse.etrice.core.genmodel.fsm.FsmGenExtensions.*
+import org.eclipse.etrice.generator.generic.ILanguageExtension
 
 @Singleton
 class ActorClassGen extends GenericActorClassGenerator {
@@ -74,7 +76,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 		val models = root.getReferencedModels(ac)
 		val impPersist = if (Main::settings.generatePersistenceInterface) "implements IPersistable " else ""
 		val dataObjClass = ac.name+"_DataObject"
-		val baseClass = if (ac.actorBase!=null) ac.actorBase.name
+		val baseClass = if (ac.actorBase!==null) ac.actorBase.name
 			else if (!ac.getAttribute("ActorBaseClass", "class").empty) ac.getAttribute("ActorBaseClass", "class")
 			else if (Main::settings.generateStoreDataObj) "ActorClassFinalActionBase"
 			else "ActorClassBase"
@@ -257,12 +259,12 @@ class ActorClassGen extends GenericActorClassGenerator {
 							switch (evt) {
 								«FOR msg: ifitem.incoming»
 									case «msg.protocolClass.name».«if (msg.incoming) "IN_" else "OUT_"»«msg.name»:
-										«IF (msg.data!=null)»
+										«IF (msg.data!==null)»
 											{«msg.typedDataDefinition»
 										«ENDIF»
-										on_«ifitem.name»_«msg.name»(ifitem«IF (msg.data!=null)», «msg.data.name»«ENDIF»);
+										on_«ifitem.name»_«msg.name»(ifitem«IF (msg.data!==null)», «ILanguageExtension.GENERIC_DATA_NAME»«ENDIF»);
 										break;
-										«IF (msg.data!=null)»
+										«IF (msg.data!==null)»
 											}
 										«ENDIF»
 								«ENDFOR»
@@ -272,14 +274,14 @@ class ActorClassGen extends GenericActorClassGenerator {
 				}
 				«FOR ifitem : ac.allInterfaceItems»
 					«FOR msg: ifitem.incoming»
-						protected void on_«ifitem.name»_«msg.name»(InterfaceItemBase ifitem«IF msg.data!=null»«msg.data.generateArglistAndTypedData.get(2)»«ENDIF») {}
+						protected void on_«ifitem.name»_«msg.name»(InterfaceItemBase ifitem«IF msg.data!==null»«msg.data.generateArglistAndTypedData.get(2)»«ENDIF») {}
 					«ENDFOR»
 				«ENDFOR»
 
 				public abstract void executeInitTransition();
 			«ELSE»
 				«IF ac.hasNonEmptyStateMachine»
-					«xpac.genStateMachine()»
+					«xpac.graphContainer.genStateMachine»
 					«IF ac.commType == ComponentCommunicationType::DATA_DRIVEN»
 						public void receiveEvent(InterfaceItemBase ifitem, int evt, Object generic_data) {
 							handleSystemEvent(ifitem, evt, generic_data);
@@ -295,7 +297,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 							«ENDIF»
 						}
 					«ENDIF»
-				«ELSEIF xpac.stateMachine.empty»
+				«ELSEIF xpac.graphContainer.graph.empty»
 «««					no state machine in the super classes
 					//--------------------- no state machine
 					public void receiveEvent(InterfaceItemBase ifitem, int evt, Object data) {
@@ -310,7 +312,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 
 				@Override
 				public void saveObject(ObjectOutput output) throws IOException {
-					«IF xpac.hasStateMachine()»
+					«IF !xpac.graphContainer.graph.empty»
 						// state and history
 						output.writeInt(getState());
 						for (int h: history) output.writeInt(h);
@@ -325,7 +327,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 
 				@Override
 				public void loadObject(ObjectInput input) throws IOException, ClassNotFoundException {
-					«IF xpac.hasStateMachine()»
+					«IF !xpac.graphContainer.graph.empty»
 						// state and history
 						setState(input.readInt());
 						for (int i=0; i<history.length; ++i) history[i] = input.readInt();
@@ -345,7 +347,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 						return;
 
 					«dataObjClass» dataObject = («dataObjClass») obj;
-					«IF ac.actorBase!=null»
+					«IF ac.actorBase!==null»
 
 						super.store(dataObject);
 					«ENDIF»
@@ -384,7 +386,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 						return;
 
 					«dataObjClass» dataObject = («dataObjClass») obj;
-					«IF ac.actorBase!=null»
+					«IF ac.actorBase!==null»
 
 						super.restore(dataObject);
 					«ENDIF»
@@ -429,7 +431,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 	private def genSaveImpl(ExpandedActorClass xpac) {
 		val ac = xpac.actorClass
 		'''
-			«IF ac.actorBase!=null»
+			«IF ac.actorBase!==null»
 				super.saveAttributes(output);
 
 			«ENDIF»
@@ -453,7 +455,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 	private def genLoadImpl(ExpandedActorClass xpac) {
 		val ac = xpac.actorClass
 		'''
-			«IF ac.actorBase!=null»
+			«IF ac.actorBase!==null»
 				super.loadAttributes(input);
 
 			«ENDIF»
@@ -475,7 +477,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 	}
 
 	private def genSavePrimitive(Attribute att) {
-		val type = if (att.type.type instanceof EnumerationType && (att.type.type as EnumerationType).primitiveType==null)
+		val type = if (att.type.type instanceof EnumerationType && (att.type.type as EnumerationType).primitiveType===null)
 			"int"
 		else
 			att.type.type.typeName
@@ -502,7 +504,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 	}
 
 	private def genLoadPrimitive(Attribute att) {
-		val type = if (att.type.type instanceof EnumerationType && (att.type.type as EnumerationType).primitiveType==null)
+		val type = if (att.type.type instanceof EnumerationType && (att.type.type as EnumerationType).primitiveType===null)
 			"int"
 		else
 			att.type.type.typeName

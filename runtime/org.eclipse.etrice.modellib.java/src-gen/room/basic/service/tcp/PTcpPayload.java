@@ -65,10 +65,10 @@ public class PTcpPayload {
 	
 	
 		// sent messages
-		public void receive(DTcpPayload data) {
+		public void receive(DTcpPayload transitionData) {
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[OUT_receive]);
 			if (getPeerAddress()!=null)
-				getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), OUT_receive, data.deepCopy()));
+				getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), OUT_receive, transitionData.deepCopy()));
 		}
 		public void receive(int connectionId, int length, byte[] data) {
 			receive(new DTcpPayload(connectionId, length, data));
@@ -99,9 +99,9 @@ public class PTcpPayload {
 		}
 	
 		// outgoing messages
-		public void receive(DTcpPayload data){
+		public void receive(DTcpPayload transitionData){
 			for (InterfaceItemBase item : getItems()) {
-				((PTcpPayloadPort)item).receive( data);
+				((PTcpPayloadPort)item).receive( transitionData);
 			}
 		}
 	}
@@ -139,10 +139,10 @@ public class PTcpPayload {
 	
 	
 		// sent messages
-		public void send(DTcpPayload data) {
+		public void send(DTcpPayload transitionData) {
 			DebuggingService.getInstance().addMessageAsyncOut(getAddress(), getPeerAddress(), messageStrings[IN_send]);
 			if (getPeerAddress()!=null)
-				getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), IN_send, data.deepCopy()));
+				getPeerMsgReceiver().receive(new EventWithDataMessage(getPeerAddress(), IN_send, transitionData.deepCopy()));
 		}
 		public void send(int connectionId, int length, byte[] data) {
 			send(new DTcpPayload(connectionId, length, data));
@@ -173,9 +173,9 @@ public class PTcpPayload {
 		}
 	
 		// incoming messages
-		public void send(DTcpPayload data){
+		public void send(DTcpPayload transitionData){
 			for (InterfaceItemBase item : getItems()) {
-				((PTcpPayloadConjPort)item).send( data);
+				((PTcpPayloadConjPort)item).send( transitionData);
 			}
 		}
 	}

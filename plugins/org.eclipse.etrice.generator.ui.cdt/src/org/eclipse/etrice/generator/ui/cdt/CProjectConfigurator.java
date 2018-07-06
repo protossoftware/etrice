@@ -36,7 +36,7 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.SubProgressMonitor;
+import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import org.eclipse.etrice.generator.ui.wizard.WizardHelpers;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
@@ -178,7 +178,7 @@ public class CProjectConfigurator extends ProjectConfigurator {
 
 			if (importOperation != null) {
 				importOperation.setContext(null);
-				importOperation.run(new SubProgressMonitor(progressMonitor, 1));
+				importOperation.run(SubMonitor.convert(progressMonitor, 1));
 				
 				IFolder folder = project.getFolder(C_RUNTIME_FOLDER_NAME);
 				folder = folder.getFolder("src");
@@ -270,7 +270,7 @@ public class CProjectConfigurator extends ProjectConfigurator {
 										structureProvider,
 										OVERWRITE_ALL_QUERY);
 								importOperation.setContext(null);
-								importOperation.run(new SubProgressMonitor(progressMonitor, 1));
+								importOperation.run(SubMonitor.convert(progressMonitor, 1));
 							}
 						}
 					}

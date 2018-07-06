@@ -1,0 +1,21 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Detail Code Tools for FSM
+Bundle-SymbolicName: org.eclipse.etrice.dctools.fsm
+Bundle-Version: 1.1.3.qualifier
+Automatic-Module-Name: org.eclipse.etrice.dctools.fsm
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-Vendor: Eclipse eTrice
+Require-Bundle: org.eclipse.jface.text,
+ org.eclipse.xtext.xbase.lib;bundle-version="2.6.0",
+ org.eclipse.xtend.lib;bundle-version="2.6.0",
+ org.eclipse.xtend.lib.macro;bundle-version="2.6.0",
+ org.eclipse.xtext.ui,
+ org.eclipse.etrice.core.fsm,
+ org.eclipse.etrice.generator
+Export-Package: org.eclipse.etrice.dctools.fsm.ast,
+ org.eclipse.etrice.dctools.fsm.ast.internal;x-friends:="org.eclipse.etrice.dctools.tests",
+ org.eclipse.etrice.dctools.fsm.ast.nodes,
+ org.eclipse.etrice.dctools.fsm.ast.tokens,
+ org.eclipse.etrice.dctools.fsm.ast.util
+

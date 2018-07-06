@@ -32,16 +32,16 @@ public class ActionCodeAnalyzer {
 		
 		private ArrayList<HandledMessage> mifs = new ArrayList<HandledMessage>();
 		
-		public ArrayList<HandledMessage> getMifs() {
+		public List<HandledMessage> getMifs() {
 			return mifs;
 		}
 
 		/* (non-Javadoc)
-		 * @see org.eclipse.etrice.generator.base.DefaultTranslationProvider#getInterfaceItemMessageText(org.eclipse.etrice.core.room.InterfaceItem, org.eclipse.etrice.core.room.Message, java.util.ArrayList, java.lang.String, java.lang.String)
+		 * @see org.eclipse.etrice.generator.base.DefaultTranslationProvider#getInterfaceItemMessageText(org.eclipse.etrice.core.room.InterfaceItem, org.eclipse.etrice.core.room.Message, java.util.List, java.lang.String, java.lang.String)
 		 */
 		@Override
 		public String getInterfaceItemMessageText(AbstractInterfaceItem item,
-				EObject msg, ArrayList<String> args, String index, String orig) {
+				EObject msg, List<String> args, String index, String orig) {
 			
 			HandledMessage sm = new HandledMessage(item, msg, origin);
 			mifs.add(sm);

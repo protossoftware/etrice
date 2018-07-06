@@ -29,7 +29,7 @@ public class TestBug505406 extends TestBase {
 
 	@Before
 	public void SetUp() {
-		prepare();
+		prepare(CoreTestsActivator.getInstance().getBundle());
 		res = getResource("bug505406.room");
 	}
 

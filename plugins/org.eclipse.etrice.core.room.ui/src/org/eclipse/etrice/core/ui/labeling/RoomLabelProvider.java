@@ -36,6 +36,7 @@ import org.eclipse.etrice.core.room.ExternalType;
 import org.eclipse.etrice.core.room.LogicalSystem;
 import org.eclipse.etrice.core.room.LogicalThread;
 import org.eclipse.etrice.core.room.Message;
+import org.eclipse.etrice.core.room.MessageData;
 import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.PortOperation;
@@ -48,7 +49,6 @@ import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.SubProtocol;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.SubSystemRef;
-import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.jface.viewers.StyledString;
 
@@ -332,8 +332,8 @@ public class RoomLabelProvider extends FSMLabelProvider {
 	String text(Message m) {
 		String signature = "";
 		if (m.getData()!=null) {
-			VarDecl data = m.getData();
-			signature = data.getName()+":"+data.getRefType().getType().getName() + (data.getRefType().isRef() ? " ref" : "");
+			MessageData data = m.getData();
+			signature = data.getRefType().getType().getName() + (data.getRefType().isRef() ? " ref" : "");
 		}
 		signature = "("+signature+")";
 		return m.getName()+signature;

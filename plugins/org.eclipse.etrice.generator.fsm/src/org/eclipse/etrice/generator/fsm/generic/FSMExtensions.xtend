@@ -12,19 +12,15 @@
 
 package org.eclipse.etrice.generator.fsm.generic
 
-import org.eclipse.etrice.core.fsm.fSM.Transition
-import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ExpandedModelComponent
-import java.util.List
-import org.eclipse.etrice.core.fsm.fSM.State
-import java.util.ArrayList
-import org.eclipse.etrice.core.fsm.fSM.StateGraph
-import org.eclipse.etrice.core.fsm.fSM.TransitionPoint
-import org.eclipse.etrice.core.fsm.fSM.ModelComponent
-import org.eclipse.etrice.core.fsm.util.FSMHelpers
 import com.google.inject.Inject
+import java.util.ArrayList
+import java.util.List
+import org.eclipse.etrice.core.fsm.fSM.CPBranchTransition
 import org.eclipse.etrice.core.fsm.fSM.DetailCode
 import org.eclipse.etrice.core.fsm.fSM.Guard
-import org.eclipse.etrice.core.fsm.fSM.CPBranchTransition
+import org.eclipse.etrice.core.fsm.fSM.ModelComponent
+import org.eclipse.etrice.core.fsm.fSM.State
+import org.eclipse.etrice.core.fsm.util.FSMHelpers
 
 /**
  * @author Henrik Rentz-Reichert
@@ -75,36 +71,6 @@ class FSMExtensions {
 		return ret;
 	}
 
-    //-------------------------------------------------------
-    // state graph related methods
-
-	/**
-	 * @param ac an {@link ExpandedActorClass}
-	 * @param s a {@link State}
-	 * @return a list of {@link Transition}s starting at the state and going up in the hierarchy
-	 * 		following the logic of evaluation of firing conditions
-	 */
-	def List<Transition> getOutgoingTransitionsHierarchical(ExpandedModelComponent ac, State s) {
-		var result = new ArrayList<Transition>()
-		
-		// own transitions
-		result.addAll(ac.getOutgoingTransitions(s))
-
-		// transition points on same level
-		var sg = s.eContainer() as StateGraph
-		for (tp : sg.getTrPoints()) {
-			if (tp instanceof TransitionPoint)
-				result.addAll(ac.getOutgoingTransitions(tp))
-		}
-		
-		// recurse to super states
-		if (sg.eContainer() instanceof State) {
-			result.addAll(getOutgoingTransitionsHierarchical(ac, sg.eContainer() as State))
-		}
-		
-		return result;
-	}
-
     /**
      * @param states a list of {@link State}s
      * @return a list ordered such that leaf states are last
@@ -113,7 +79,7 @@ class FSMExtensions {
         val leaf = states.filter(s|s.leaf)
         val nonLeaf = states.filter(s|!s.leaf)
         
-        nonLeaf.union(leaf)
+        nonLeaf + leaf
     }
 
     /**
@@ -129,7 +95,7 @@ class FSMExtensions {
      * @return a list of simple states with leaf states last
      */
     def List<State> getAllBaseStatesLeavesLast(ModelComponent mc) {
-        mc.allBaseStates.getLeafStatesLast
+        mc.allBaseStates.getLeafStatesLast.toList
     }
 
     /**
@@ -137,7 +103,7 @@ class FSMExtensions {
      * @return the number of all inherited states
      */
     def int getNumberOfInheritedStates(ModelComponent mc) {
-        if (mc.base==null)
+        if (mc.base===null)
             return 0
         else
             return mc.base.stateMachine.stateList.size+mc.base.numberOfInheritedStates
@@ -148,7 +114,7 @@ class FSMExtensions {
      * @return the number of all inherited base (or simple) states
      */
     def int getNumberOfInheritedBaseStates(ModelComponent ac) {
-        if (ac.base==null)
+        if (ac.base===null)
             return 0
         else
             return ac.base.stateMachine.baseStateList.size+ac.base.numberOfInheritedBaseStates

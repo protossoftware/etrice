@@ -41,7 +41,7 @@ RoomModel DynamicActorTest6 {
 						<hello: pin>
 					}
 					action {
-						"System.out.println(\"Controller received: \"+txt);"
+						"System.out.println(\"Controller received: \"+transitionData);"
 					}
 				}
 				Transition tr2: Destroy -> CreateAgain {
@@ -59,7 +59,7 @@ RoomModel DynamicActorTest6 {
 						<hello: pin>
 					}
 					action {
-						"System.out.println(\"Controller received: \"+txt);"
+						"System.out.println(\"Controller received: \"+transitionData);"
 					}
 				}
 				State CreateOptionals {
@@ -212,9 +212,9 @@ RoomModel DynamicActorTest6 {
 						<hello: pin>
 					}
 					action {
-						"System.out.println(\"AC2 received \"+txt);"
+						"System.out.println(\"AC2 received \"+transitionData);"
 						""
-						"pout.hello(\"AC2: forwarding \"+txt);"
+						"pout.hello(\"AC2: forwarding \"+transitionData);"
 					}
 				}
 				State Ready

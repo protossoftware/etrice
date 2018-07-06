@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EObject
 import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.core.room.InterfaceItem
 import org.eclipse.etrice.core.room.Message
+import org.eclipse.etrice.core.room.MessageData
 import org.eclipse.etrice.core.room.Operation
 import org.eclipse.etrice.core.room.Port
 import org.eclipse.etrice.core.room.SPP
@@ -26,8 +27,7 @@ import org.eclipse.etrice.core.room.VarDecl
 import org.eclipse.etrice.core.room.util.RoomHelpers
 import org.eclipse.etrice.expressions.detailcode.IDetailExpressionProvider.ExpressionFeature
 import org.eclipse.etrice.expressions.detailcode.IDetailExpressionProvider.ExpressionPostfix
-import org.eclipse.etrice.expressions.detailcode.RuntimeDetailExpressionProvider
-import org.eclipse.etrice.expressions.detailcode.RuntimeDetailExpressionProvider.RuntimeMethodExpressionData
+import org.eclipse.etrice.generator.generic.ILanguageExtension
 import org.eclipse.jface.viewers.ILabelProvider
 import org.eclipse.swt.graphics.Image
 import org.eclipse.swt.graphics.Point
@@ -35,7 +35,7 @@ import org.eclipse.swt.graphics.Point
 @Singleton
 class DetailExpressionProposalConfig{
 
-	static val String IMAGE_RT_METHOD = "icons/rt_method.png"
+//	static val String IMAGE_RT_METHOD = "icons/rt_method.png"
 
 	@Inject
 	protected ILabelProvider labelProvider
@@ -58,7 +58,7 @@ class DetailExpressionProposalConfig{
 			Operation:
 				data.arguments.map[name].join(', ')
 			Message case data.data !== null:
-				data.data.name
+				ILanguageExtension.GENERIC_DATA_NAME
 			Attribute, // fall through
 			InterfaceItem:
 				'0'
@@ -78,7 +78,7 @@ class DetailExpressionProposalConfig{
 
 		var postfix = getPostfixReplacement(feature)
 		var point = postfix.value
-		if (point != null)
+		if (point !== null)
 			point.x += feature.id.length
 
 		return feature.id + postfix.key -> point
@@ -98,20 +98,23 @@ class DetailExpressionProposalConfig{
 		var classInfo = if(data instanceof EObject) data.eClass.name else ""
 		switch data {
 			Attribute:
-				typedInfo = data.type.type.name
+				typedInfo = data?.type?.type?.name
 			InterfaceItem:
-				typedInfo = roomHelpers.getProtocol(data).name
-			RuntimeMethodExpressionData case feature.id == RuntimeDetailExpressionProvider.RT_METHOD_GET_REPLICATION:
-				typedInfo = 'int'
+				typedInfo = roomHelpers.getProtocol(data)?.name
+//			RuntimeMethodExpressionData case feature.id == RuntimeDetailExpressionProvider.RT_METHOD_GET_REPLICATION:
+//				typedInfo = 'int'
 			VarDecl: {
-				typedInfo = data.refType.type.name
+				typedInfo = data?.refType?.type?.name
 				classInfo = ""
+			}
+			MessageData: {
+				typedInfo = data?.refType?.type?.name
 			}
 			default: {
 				val label = labelProvider.getText(data)
 
 				// if label starts with completion then label might be better
-				if(!Strings.commonPrefix(label, completionInfo).empty) completionInfo = label
+				if(label !== null && !Strings.commonPrefix(label, completionInfo).empty) completionInfo = label
 			}
 		}
 

@@ -122,7 +122,7 @@ class RoomExtensions extends FSMExtensions {
 	 */
 	def String getModelPath(EObject e) {
 		var res = e.eResource;
-		if (res==null) {
+		if (res===null) {
 			return ""
 		}
 		else {
@@ -174,7 +174,7 @@ class RoomExtensions extends FSMExtensions {
 	 */
 	def String getProjectPath(EObject e) {
 		val res = FileSystemHelpers::getProjectURI(e)
-		if (res==null) {
+		if (res===null) {
 			return ""
 		}
 
@@ -304,13 +304,13 @@ class RoomExtensions extends FSMExtensions {
 		val ArrayList<PortClass> result = newArrayList()
 		
 		var protocol = pc
-		while (protocol!=null) {
+		while (protocol!==null) {
 			if (conj) {
-				if (protocol.conjugated!=null)
+				if (protocol.conjugated!==null)
 					result.add(protocol.conjugated)
 			}
 			else {
-				if (protocol.regular!=null)
+				if (protocol.regular!==null)
 					result.add(protocol.regular)
 			}
 			
@@ -326,7 +326,7 @@ class RoomExtensions extends FSMExtensions {
 	 * @return <code>true</code> if a send handler is specified for this direction
 	 */
 	def boolean handlesSend(ProtocolClass pc, boolean conj) {
-		if (pc.getPortClass(conj)==null)
+		if (pc.getPortClass(conj)===null)
 			return false
 		else {
 			val allMessages = pc.getAllMessages(conj)
@@ -343,7 +343,7 @@ class RoomExtensions extends FSMExtensions {
 	 * @return <code>true</code> if a receive handler is specified for this direction
 	 */
 	def boolean handlesReceive(ProtocolClass pc, boolean conj) {
-		if (pc.getPortClass(conj)==null)
+		if (pc.getPortClass(conj)===null)
 			return false
 		else {
 			val allMessages = pc.getAllMessages(!conj)
@@ -396,7 +396,7 @@ class RoomExtensions extends FSMExtensions {
 	 */
 	def List<MessageHandler> getReceiveHandlers(ProtocolClass pc, boolean conj) {
 		val res = new ArrayList<MessageHandler>()
-		if (pc.getPortClass(conj)!=null) {
+		if (pc.getPortClass(conj)!==null) {
 			val allMessages = pc.getAllMessages(!conj)
 			for (hdlr : getSafeList(pc.getPortClass(conj).msgHandlers)) {
 				if (allMessages.contains(hdlr.msg))
@@ -430,7 +430,7 @@ class RoomExtensions extends FSMExtensions {
 	 * @return a list of defined send {@link MessageHandler} for this direction
 	 */
 	def List<MessageHandler> getSendHandlers(ProtocolClass pc, boolean conj) {
-		if (pc.getPortClass(conj)==null)
+		if (pc.getPortClass(conj)===null)
 			return Collections.emptyList
 		else {
 			val res = new ArrayList<MessageHandler>()
@@ -478,8 +478,8 @@ class RoomExtensions extends FSMExtensions {
 	 * 		void return type
 	 */
 	def boolean overridesStop(ActorClass ac) {
-		ac.operations.exists(e|e.name=="stop" && e.arguments.isEmpty && e.returnType==null)
-			|| (ac.actorBase!=null && ac.actorBase.overridesStop())
+		ac.operations.exists(e|e.name=="stop" && e.arguments.isEmpty && e.returnType===null)
+			|| (ac.actorBase!==null && ac.actorBase.overridesStop())
 	}
 
 	def getAllSubInstances(StructureInstance ssi) {
@@ -494,7 +494,7 @@ class RoomExtensions extends FSMExtensions {
 	}
 
 	def static List<MessageHandler> getSafeList(List<MessageHandler> msgHandlers) {
-		return if (msgHandlers==null) Collections.emptyList else msgHandlers 
+		return if (msgHandlers===null) Collections.emptyList else msgHandlers 
 	}
 
 }

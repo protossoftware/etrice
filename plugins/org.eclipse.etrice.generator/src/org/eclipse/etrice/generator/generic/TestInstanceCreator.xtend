@@ -6,7 +6,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.etrice.core.etmap.eTMap.ETMapFactory
 import org.eclipse.etrice.core.etphys.eTPhys.PhysicalModel
 import org.eclipse.etrice.core.etphys.eTPhys.PhysicalSystem
-import org.eclipse.etrice.core.genmodel.fsm.base.ILogger
+import org.eclipse.etrice.core.genmodel.fsm.ILogger
 import org.eclipse.etrice.core.room.RoomFactory
 import org.eclipse.etrice.core.room.RoomModel
 import org.eclipse.etrice.core.room.StructureClass

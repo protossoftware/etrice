@@ -15,7 +15,6 @@ package org.eclipse.etrice.generator.doc.gen
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import java.io.File
-import org.eclipse.etrice.core.genmodel.fsm.base.ILogger
 import org.eclipse.etrice.core.genmodel.etricegen.AbstractInstance
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInterfaceInstance
@@ -27,6 +26,7 @@ import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 
 import static java.lang.Runtime.*
 import org.eclipse.etrice.core.etmap.util.ETMapUtil
+import org.eclipse.etrice.core.genmodel.fsm.ILogger
 
 @Singleton
 class InstanceDiagramGen {

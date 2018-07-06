@@ -39,32 +39,34 @@ public class SuperClassListener implements IPartListener, ResourceSetListener, I
 	private List<TransactionalEditingDomain> domains;
 	private List<IXtextDocument> xtextDocuments;
 	private boolean changeInSuperClass;
-	
+
 	public SuperClassListener(DiagramEditorBase diagramEditor, Object editorClass) {
 		this.diagramEditor = diagramEditor;
 		this.editorClass = editorClass;
 		domains = new ArrayList<TransactionalEditingDomain>();
 		xtextDocuments = new ArrayList<IXtextDocument>();
 		changeInSuperClass = false;
-		
-		assert(editorClass instanceof Class) : "Class expected";
+
+		assert (editorClass instanceof Class) : "Class expected";
 	}
-	
+
 	public boolean isChangeInSuperClass() {
 		return changeInSuperClass;
 	}
 
-	public void dispose(){
-		for(TransactionalEditingDomain domain : domains){
-			if(domain != null)
+	public void dispose() {
+		for (TransactionalEditingDomain domain : domains) {
+			if (domain != null)
 				domain.removeResourceSetListener(this);
 		}
-		for(IXtextDocument document : xtextDocuments){
-			if(document != null)
+		for (IXtextDocument document : xtextDocuments) {
+			if (document != null)
 				document.removeModelListener(this);
 		}
+		domains.clear();
+		xtextDocuments.clear();
 	}
-	
+
 	// ---
 	// IPartListener
 	// ---
@@ -81,18 +83,22 @@ public class SuperClassListener implements IPartListener, ResourceSetListener, I
 
 	@Override
 	public void partClosed(IWorkbenchPart part) {
-		if(part instanceof DiagramEditorBase){
-			DiagramEditorBase editor = (DiagramEditorBase)part;
+		if (part == diagramEditor) {
+			dispose();
+			return;
+		}
+
+		if (part instanceof DiagramEditorBase) {
+			DiagramEditorBase editor = (DiagramEditorBase) part;
 			TransactionalEditingDomain toRemove = editor.getEditingDomain();
-			if(toRemove != null){
+			if (toRemove != null) {
 				toRemove.removeResourceSetListener(this);
 				domains.remove(toRemove);
 			}
 		}
-		
-		if (((Class<?>)editorClass).isInstance(part)) {
+		if (((Class<?>) editorClass).isInstance(part)) {
 			IXtextDocument toRemove = ((XtextEditor) part).getDocument();
-			if(toRemove != null){
+			if (toRemove != null) {
 				toRemove.removeModelListener(this);
 				xtextDocuments.remove(toRemove);
 			}
@@ -101,43 +107,43 @@ public class SuperClassListener implements IPartListener, ResourceSetListener, I
 
 	@Override
 	public void partDeactivated(IWorkbenchPart part) {
-		if(part == diagramEditor)
+		if (part == diagramEditor)
 			changeInSuperClass = false;
 	}
 
 	@Override
 	public void partOpened(IWorkbenchPart part) {
 		// initial
-		if(part==diagramEditor){
+		if (part == diagramEditor) {
 			IWorkbenchPage activePage = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
 			for (IEditorReference editorRef : activePage.getEditorReferences()) {
 				IEditorPart editor = editorRef.getEditor(false);
-				if (editor != null && editor!=diagramEditor) 
+				if (editor != null && editor != diagramEditor)
 					partOpened(editor);
 			}
 			return;
 		}
-		
-		if(part instanceof DiagramEditorBase){
-			DiagramEditorBase editor = (DiagramEditorBase)part;
+
+		if (part instanceof DiagramEditorBase) {
+			DiagramEditorBase editor = (DiagramEditorBase) part;
 			TransactionalEditingDomain domain = editor.getEditingDomain();
-			if(!domains.contains(domain) && diagramEditor.registerSuperClassListener(editor)){
+			if (!domains.contains(domain) && diagramEditor.registerSuperClassListener(editor)) {
 				domain.addResourceSetListener(this);
 				domains.add(domain);
 			}
 		}
-		
-		if (((Class<?>)editorClass).isInstance(part)) {
+
+		if (((Class<?>) editorClass).isInstance(part)) {
 			XtextEditor editor = (XtextEditor) part;
 			IXtextDocument document = editor.getDocument();
-						
-			if(!xtextDocuments.contains(document) && diagramEditor.registerSuperClassListener(editor)){
+
+			if (!xtextDocuments.contains(document) && diagramEditor.registerSuperClassListener(editor)) {
 				editor.getDocument().addModelListener(this);
 				xtextDocuments.add(document);
 			}
 		}
 	}
-	
+
 	// ---
 	// ResourceSetListener
 	// ---
@@ -148,8 +154,7 @@ public class SuperClassListener implements IPartListener, ResourceSetListener, I
 	}
 
 	@Override
-	public Command transactionAboutToCommit(ResourceSetChangeEvent event)
-			throws RollbackException {
+	public Command transactionAboutToCommit(ResourceSetChangeEvent event) throws RollbackException {
 		return null;
 	}
 
@@ -173,7 +178,7 @@ public class SuperClassListener implements IPartListener, ResourceSetListener, I
 	public boolean isPostcommitOnly() {
 		return true;
 	}
-	
+
 	// ---
 	// IXtextModelListener
 	// ---

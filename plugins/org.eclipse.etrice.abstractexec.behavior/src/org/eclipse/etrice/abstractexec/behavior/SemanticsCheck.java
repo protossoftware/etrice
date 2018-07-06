@@ -21,25 +21,25 @@ import java.util.Queue;
 import java.util.Set;
 
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.etrice.abstractexec.behavior.util.AbstractExecutionUtil;
 import org.eclipse.etrice.core.fsm.fSM.InitialTransition;
 import org.eclipse.etrice.core.fsm.fSM.State;
 import org.eclipse.etrice.core.fsm.fSM.StateGraph;
-import org.eclipse.etrice.core.fsm.fSM.StateGraphItem;
-import org.eclipse.etrice.core.fsm.fSM.StateGraphNode;
-import org.eclipse.etrice.core.fsm.fSM.Transition;
 import org.eclipse.etrice.core.fsm.naming.FSMNameProvider;
-import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ActiveTrigger;
-import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ExpandedModelComponent;
+import org.eclipse.etrice.core.genmodel.fsm.FsmGenExtensions;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.CommonTrigger;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.Graph;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.GraphContainer;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.GraphItem;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.Link;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.Node;
 
 public class SemanticsCheck {
-	private Queue<StateGraphNode> queue;
-	private Set<StateGraphNode> visited;
-	private ExpandedModelComponent xpAct;
-	private HashMap<StateGraphItem, ActiveRules> mapToRules = new HashMap<StateGraphItem, ActiveRules>();
+	private GraphContainer gc;
+	private Queue<Node> queue = new LinkedList<Node>();
+	private Set<Node> visited = new HashSet<Node>();;
+	private HashMap<GraphItem, ActiveRules> mapToRules = new HashMap<GraphItem, ActiveRules>();
 	private ActionCodeAnalyzer codeAnalyzer;
-	private HashMap<StateGraphItem, List<HandledMessage>> mapToWarnings = new HashMap<StateGraphItem, List<HandledMessage>>();
+	private HashMap<GraphItem, List<HandledMessage>> mapToWarnings = new HashMap<GraphItem, List<HandledMessage>>();
 	private FSMNameProvider fsmNameProvider = new FSMNameProvider();
 	
 	private static boolean traceChecks = false;
@@ -60,51 +60,52 @@ public class SemanticsCheck {
 	private static final int TRACE_RESULT = 1;
 	private static final int TRACE_DETAILS = 2;
 	
-	public SemanticsCheck(ExpandedModelComponent xpac) {
-		queue = new LinkedList<StateGraphNode>();
-		xpAct = xpac;
-		visited = new HashSet<StateGraphNode>();
-		codeAnalyzer = new ActionCodeAnalyzer(xpac.getModelComponent());
+	public SemanticsCheck(GraphContainer gc) {
+		this.gc = gc;
+		this.codeAnalyzer = new ActionCodeAnalyzer(gc.getComponent());
 	}
 
 	public void checkSemantics() {
-		if (traceChecks)
-			System.out.println("checkSemantics: check of ActorClass "+xpAct.getModelComponent().getComponentName());
+		if (traceChecks) {
+			System.out.println("checkSemantics: check of ActorClass "+gc.getComponent().getComponentName());
+		}
 		
-		StateGraph graph = xpAct.getStateMachine();
 		ActiveRules localRules = new ActiveRules();
-		localRules.buildInitLocalRules(xpAct);
-		addStartingPoints(graph, localRules);
+		localRules.buildInitLocalRules(gc.getComponent());
+		addStartingPoints(gc.getGraph(), localRules);
 		doTraversal();
 		
 		if (traceChecks) {
-			if (traceLevel>=TRACE_RESULT)
+			if (traceLevel>=TRACE_RESULT) {
 				printRules();
+			}
 			
-			System.out.println("checkSemantics: done with check of ActorClass "+xpAct.getModelComponent().getComponentName());
+			System.out.println("checkSemantics: done with check of ActorClass "+gc.getComponent().getComponentName());
 		}
 	}
 
-	private void addStartingPoints(StateGraph graph, ActiveRules localRules) {
-		EList<Transition> transitions = graph.getTransitions();
-		for (Transition trans : transitions)
-			if (trans instanceof InitialTransition) {
-				StateGraphNode cur = AbstractExecutionUtil.getInstance().getRoomHelpers().getNode(trans.getTo());
-				List<HandledMessage> msgList = codeAnalyzer.analyze(trans.getAction());
-				if (cur instanceof State) {
-					msgList.addAll(codeAnalyzer.analyze(((State) cur).getEntryCode()));
+	private void addStartingPoints(Graph graph, ActiveRules localRules) {
+		List<Link> links = graph.getLinks();
+		for (Link link : links)
+			if (link.getTransition() instanceof InitialTransition) {
+				Node cur = link.getTarget();
+				List<HandledMessage> msgList = codeAnalyzer.analyze(link.getTransition().getAction());
+				if (cur.getStateGraphNode() instanceof State) {
+					msgList.addAll(codeAnalyzer.analyze(((State) cur.getStateGraphNode()).getEntryCode()));
 				}
 				List<HandledMessage> wrongMsgList = localRules.consumeMessages(msgList);
-				addToWarning(trans, wrongMsgList);
+				if (!wrongMsgList.isEmpty()) {
+					addToWarning(link, wrongMsgList);
+				}
 				boolean rulesChanged = false;
 				if (mapToRules.containsKey(cur)) {
 					rulesChanged = mapToRules.get(cur).merge(localRules);
 				} else {
-					mapToRules.put(cur, localRules);
+					mapToRules.put(link.getTarget(), localRules);
 					rulesChanged = true;
 				}
-				if (!visited.contains(cur) || rulesChanged)
-					queue.add(cur);
+				if (!visited.contains(link.getTarget()) || rulesChanged)
+					queue.add(link.getTarget());
 
 				break;
 			}
@@ -112,31 +113,31 @@ public class SemanticsCheck {
 
 	private void doTraversal() {
 		while (!queue.isEmpty()) {
-			Visit(queue.poll());
+			visit(queue.poll());
 		}
 	}
 
-	private void Visit(StateGraphNode node) {
+	private void visit(Node node) {
 		visited.add(node);
-		if (node instanceof State) {
-			State st = (State) node;
-			if (AbstractExecutionUtil.getInstance().getRoomHelpers().hasDirectSubStructure(st)) {
-				addStartingPoints(st.getSubgraph(), mapToRules.get(st));
+		if (node.getStateGraphNode() instanceof State) {
+			State st = (State) node.getStateGraphNode();
+			if (node.getSubgraph()!=null) {
+				addStartingPoints(node.getSubgraph(), mapToRules.get(node));
 			}
 			else {
-				for (ActiveTrigger trigger : xpAct.getActiveTriggers(st)) {
+				for (CommonTrigger trigger : node.getCaughtTriggers()) {
 					if (traceChecks && traceLevel>=TRACE_DETAILS) {
 						System.out.println("  Currently visiting: " + st.getName());
 						System.out.println("  Trigger: " + fsmNameProvider.getMessageName(trigger.getMsg()));
 					}
 					
-					for (Transition trans : trigger.getTransitions()) {
-						StateGraphNode target = AbstractExecutionUtil.getInstance().getRoomHelpers().getNode(trans.getTo());
+					for (Link link : trigger.getLinks()) {
+						Node target = link.getTarget();
 						List<HandledMessage> msgList = new LinkedList<HandledMessage>();
 						// create a list of codes here in the order
 						// trigger, exit, action, entry
 						msgList.add(new HandledMessage(trigger.getIfitem(), trigger.getMsg(), trigger));
-						StateGraph triggerContext = (StateGraph) trans.eContainer();
+						StateGraph triggerContext = link.getGraph().getStateGraph();
 						State exitCalled = st;
 						while (true) {
 							// this is where all the exit code is added
@@ -145,9 +146,9 @@ public class SemanticsCheck {
 								break;
 							exitCalled = (State) exitCalled.eContainer().eContainer();
 						}
-						msgList.addAll(codeAnalyzer.analyze(trans.getAction()));
-						if (target instanceof State) {
-							msgList.addAll(codeAnalyzer.analyze(((State) target).getEntryCode()));
+						msgList.addAll(codeAnalyzer.analyze(link.getTransition().getAction()));
+						if (target.getStateGraphNode() instanceof State) {
+							msgList.addAll(codeAnalyzer.analyze(((State) target.getStateGraphNode()).getEntryCode()));
 						}
 						ActiveRules tempRule = mapToRules.get(node).createCopy();
 						
@@ -162,10 +163,13 @@ public class SemanticsCheck {
 							printRules();
 						}
 						List<HandledMessage> wrongMsgList = tempRule.consumeMessages(msgList);
-						addToWarning(node, wrongMsgList);
+						if (!wrongMsgList.isEmpty()) {
+							addToWarning(link, wrongMsgList);
+						}
 															
-						if (traceChecks && traceLevel>=TRACE_DETAILS)
+						if (traceChecks && traceLevel>=TRACE_DETAILS) {
 							System.out.println("  Messages consumed");
+						}
 						
 						addAndMergeRules(target, tempRule);
 						
@@ -181,28 +185,30 @@ public class SemanticsCheck {
 			/*
 			 * If the current node is an Entry/Exit/Transition/Choice pt , then
 			 * only the action code in the outgoing transition needs to be
-			 * considered For this, a copy of the ActiveRules of the current
+			 * considered. For this, a copy of the ActiveRules of the current
 			 * node is created and is checked against each outgoing transition
-			 * for Rule changes If there is any rule change or if the
+			 * for Rule changes. If there is any rule change or if the
 			 * destination state hasn't been visited then the destination rules
 			 * are merged with the current rules and destination node is added
 			 * to the current queue.
 			 */
-			for (Transition trans : xpAct.getOutgoingTransitions(node)) {
+			for (Link link : node.getOutgoing()) {
 				ActiveRules tempRule = mapToRules.get(node).createCopy();
-				List<HandledMessage> msgList = codeAnalyzer.analyze(trans.getAction());
-				StateGraphNode target = AbstractExecutionUtil.getInstance().getRoomHelpers().getNode(trans.getTo());
-				if (target instanceof State) {
-					msgList.addAll(codeAnalyzer.analyze(((State) target).getEntryCode()));
+				List<HandledMessage> msgList = codeAnalyzer.analyze(link.getTransition().getAction());
+				Node target = link.getTarget();
+				if (target.getStateGraphNode() instanceof State) {
+					msgList.addAll(codeAnalyzer.analyze(((State) target.getStateGraphNode()).getEntryCode()));
 				}
 				List<HandledMessage> wrongMsgList = tempRule.consumeMessages(msgList);
-				addToWarning(node, wrongMsgList);
+				if (!wrongMsgList.isEmpty()) {
+					addToWarning(link, wrongMsgList);
+				}
 				addAndMergeRules(target, tempRule);
 			}
 		}
 	}
 
-	private void addToWarning(StateGraphItem item,
+	private void addToWarning(GraphItem item,
 			List<HandledMessage> wrongMsgList) {
 		if (mapToWarnings.containsKey(item)) {
 			mapToWarnings.get(item).addAll(wrongMsgList);
@@ -210,7 +216,7 @@ public class SemanticsCheck {
 			mapToWarnings.put(item, wrongMsgList);
 		}
 	}
-	private void addAndMergeRules(StateGraphNode target, ActiveRules tempRule) {
+	private void addAndMergeRules(Node target, ActiveRules tempRule) {
 		boolean rulesChanged = false;
 		if (mapToRules.containsKey(target)) {
 			rulesChanged = mapToRules.get(target).merge(tempRule);
@@ -227,17 +233,18 @@ public class SemanticsCheck {
 	public void printRules() {
 		System.out.println("  Current Rules: ");
 		System.out.println("    MapToRules size: " + this.mapToRules.size());
-		for (StateGraphItem item : this.mapToRules.keySet()) {
-			System.out.println("    Rules for " + item.getName() + " : ");
+		for (GraphItem item : this.mapToRules.keySet()) {
+			
+			System.out.println("    Rules for " + FsmGenExtensions.getName(item) + " : ");
 			mapToRules.get(item).print();
 		}
 	}
 
-	public ActiveRules getActiveRules(StateGraphItem item) {
+	public ActiveRules getActiveRules(GraphItem item) {
 		return mapToRules.get(item);
 	}
-	public List<HandledMessage> getWarningMsg (StateGraphItem item)
-	{
+	
+	public List<HandledMessage> getWarningMsg (GraphItem item) {
 		return mapToWarnings.get(item);
 	}
 }

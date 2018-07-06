@@ -51,20 +51,20 @@ class Initialization {
 
 		switch (aType) {
 			case (a.type.ref):
-				if (a.defaultValueLiteral != null)
+				if (a.defaultValueLiteral !== null)
 					attributeInit(a, a.defaultValueLiteral)
 				else if (languageExt.needsInitialization(a))
 					attributeInit(a, languageExt.nullPointer)
 			PrimitiveType: {
 				var value = getDataConfigValue(new ArrayList<Attribute>.union(a), roomClass)
-				if(value == null) value = a.defaultValueLiteral
-				if(value != null) attributeInit(a, languageExt.toValueLiteral(aType, value)) else if(!useClassDefaultsOnly ||
+				if(value === null) value = a.defaultValueLiteral
+				if(value !== null) attributeInit(a, languageExt.toValueLiteral(aType, value)) else if(!useClassDefaultsOnly ||
 					languageExt.needsInitialization(a)) attributeInit(a, languageExt.defaultValue(aType))
 			}
 			EnumerationType: {
 				var value = getDataConfigValue(new ArrayList<Attribute>.union(a), roomClass)
-				if(value == null) value = a.defaultValueLiteral
-				if(value != null) attributeInit(a, languageExt.toEnumLiteral(aType, value)) else if(!useClassDefaultsOnly ||
+				if(value === null) value = a.defaultValueLiteral
+				if(value !== null) attributeInit(a, languageExt.toEnumLiteral(aType, value)) else if(!useClassDefaultsOnly ||
 					languageExt.needsInitialization(a)) attributeInit(a, languageExt.defaultValue(aType))
 			}
 			default:
@@ -85,11 +85,11 @@ class Initialization {
 				'''
 			PrimitiveType: {
 				var value = getDataConfigValue(path, roomClass)
-				return if(value != null) attributeInit(path, languageExt.toValueLiteral(aType, value))
+				return if(value !== null) attributeInit(path, languageExt.toValueLiteral(aType, value))
 			}
 			EnumerationType: {
 				var value = getDataConfigValue(path, roomClass)
-				return if(value != null) attributeInit(path, languageExt.toEnumLiteral(aType, value))
+				return if(value !== null) attributeInit(path, languageExt.toEnumLiteral(aType, value))
 			}
 		}
 	}

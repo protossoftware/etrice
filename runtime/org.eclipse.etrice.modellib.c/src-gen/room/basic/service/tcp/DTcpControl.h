@@ -10,6 +10,7 @@
 
 #include "etDatatypes.h"
 
+/* include all referenced room classes */
 
 		
 typedef struct {

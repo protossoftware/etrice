@@ -12,7 +12,6 @@
 
 package org.eclipse.etrice.ui.behavior.fsm.support;
 
-import org.eclipse.etrice.ui.behavior.fsm.commands.StateGraphContext;
 import org.eclipse.graphiti.features.context.impl.UpdateContext;
 import org.eclipse.graphiti.mm.pictograms.PictogramElement;
 
@@ -22,12 +21,12 @@ import org.eclipse.graphiti.mm.pictograms.PictogramElement;
  */
 public class StateGraphUpdateContext extends UpdateContext {
 
-	private StateGraphContext context;
+	private IStateGraphContext context;
 
 	/**
 	 * @param pictogramElement
 	 */
-	public StateGraphUpdateContext(PictogramElement pe, StateGraphContext ctx) {
+	public StateGraphUpdateContext(PictogramElement pe, IStateGraphContext ctx) {
 		super(pe);
 		
 		this.context = ctx;
@@ -36,7 +35,7 @@ public class StateGraphUpdateContext extends UpdateContext {
 	/**
 	 * @return the context
 	 */
-	public StateGraphContext getContext() {
+	public IStateGraphContext getContext() {
 		return context;
 	}
 

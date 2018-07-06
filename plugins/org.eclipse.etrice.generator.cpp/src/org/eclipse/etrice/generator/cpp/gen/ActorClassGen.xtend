@@ -19,6 +19,7 @@ import org.eclipse.etrice.core.fsm.fSM.ComponentCommunicationType
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass
 import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.etrice.core.genmodel.etricegen.WiredActorClass
+import org.eclipse.etrice.core.genmodel.fsm.FsmGenExtensions
 import org.eclipse.etrice.core.room.ActorClass
 import org.eclipse.etrice.generator.cpp.Main
 import org.eclipse.etrice.generator.fsm.base.FileSystemHelpers
@@ -158,16 +159,16 @@ class ActorClassGen extends GenericActorClassGenerator {
 				virtual void destroy();
 
 				«IF ac.hasNonEmptyStateMachine»
-					«xpac.genStateMachineConstants»
+					«xpac.graphContainer.genStateMachineConstants»
 
-					«xpac.genStateMachineMethods(false)»
+					«xpac.graphContainer.genStateMachineMethods(false)»
 					«IF ac.commType == ComponentCommunicationType::DATA_DRIVEN»
 						void receiveEvent(etRuntime::InterfaceItemBase* ifitem, int evt, void* generic_data);
 					«ENDIF»
 					«IF ac.commType == ComponentCommunicationType::ASYNCHRONOUS || ac.commType == ComponentCommunicationType::DATA_DRIVEN»
 						virtual void receive(const etRuntime::Message* msg);
 					«ENDIF»
-				«ELSEIF xpac.stateMachine.empty»
+				«ELSEIF FsmGenExtensions.isEmpty(xpac.graphContainer.graph)»
 «««					no state machine in the super classes
 					//--------------------- no state machine
 					virtual void receiveEvent(etRuntime::InterfaceItemBase* ifitem, int evt, void* data);
@@ -347,7 +348,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 		«operationsImplementation(ac.operations, ac.name)»
 
 		«IF ac.hasNonEmptyStateMachine»
-			«xpac.genStateMachineMethods(true)»
+			«xpac.graphContainer.genStateMachineMethods(true)»
 			«IF ac.commType == ComponentCommunicationType::DATA_DRIVEN»
 				void «ac.name»::receiveEvent(InterfaceItemBase* ifitem, int evt, void* generic_data) {
 					handleSystemEvent(ifitem, evt, generic_data);
@@ -362,7 +363,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 					«ENDIF»
 				}
 			«ENDIF»
-		«ELSEIF xpac.stateMachine.empty»
+		«ELSEIF FsmGenExtensions.isEmpty(xpac.graphContainer.graph)»
 «««			no state machine in the super classes
 			//--------------------- no state machine
 			void «ac.name»::receiveEvent(InterfaceItemBase* ifitem, int evt, void* data) {

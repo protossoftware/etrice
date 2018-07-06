@@ -12,7 +12,7 @@
 
 package org.eclipse.etrice.generator.base;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem;
 import org.eclipse.etrice.core.fsm.fSM.DetailCode;
@@ -72,7 +72,7 @@ public class DefaultTranslationProvider extends DefaultFSMTranslationProvider im
 	 * @see org.eclipse.etrice.generator.base.ITranslationProvider#getOperationText(org.eclipse.etrice.core.room.Operation, java.util.ArrayList, java.lang.String)
 	 */
 	@Override
-	public String getOperationText(Operation op, ArrayList<String> args, String orig) {
+	public String getOperationText(Operation op, List<String> args, String orig) {
 		return orig;
 	}
 
@@ -122,7 +122,7 @@ public class DefaultTranslationProvider extends DefaultFSMTranslationProvider im
 	 */
 	@Override
 	public String getInterfaceItemOperationText(AbstractInterfaceItem item,
-			PortOperation op, ArrayList<String> args, String orig) {
+			PortOperation op, List<String> args, String orig) {
 		return orig;
 	}
 

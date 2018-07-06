@@ -10,8 +10,10 @@ Require-Bundle: org.eclipse.jface.text,
  org.eclipse.xtend.lib.macro,
  org.eclipse.xtext.ui,
  org.eclipse.etrice.core.room,
- org.eclipse.etrice.core.fsm
+ org.eclipse.etrice.core.fsm,
+ org.eclipse.etrice.generator
 Export-Package: org.eclipse.etrice.expressions.detailcode,
  org.eclipse.etrice.expressions.ui.contentassist,
  org.eclipse.etrice.expressions.ui.highlight
+Bundle-Vendor: Eclipse eTrice
 

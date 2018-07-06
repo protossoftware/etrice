@@ -20,7 +20,7 @@ import java.util.HashSet
 import java.util.Set
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.etrice.core.genmodel.etricegen.Root
-import org.eclipse.etrice.core.genmodel.fsm.base.ILogger
+import org.eclipse.etrice.core.genmodel.fsm.ILogger
 import org.eclipse.etrice.generator.fsm.base.IncrementalGenerationFileIo
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 
@@ -41,7 +41,7 @@ class PrepareFileSystem {
 			if (e instanceof Root) {
 				for (mdl : (e as Root).models) {
 					val tgtpath = mdl.generationTargetPath
-					if (tgtpath!=null && !tgtpath.empty)
+					if (tgtpath!==null && !tgtpath.empty)
 						pathes.add(tgtpath)
 				}
 			}
@@ -58,7 +58,7 @@ class PrepareFileSystem {
 			if (e instanceof Root) {
 				for (mdl : (e as Root).models) {
 					val tgtpath = mdl.generationInfoPath
-					if (tgtpath!=null && !tgtpath.empty)
+					if (tgtpath!==null && !tgtpath.empty)
 						pathes.add(tgtpath)
 				}
 			}
@@ -80,7 +80,7 @@ class PrepareFileSystem {
 			if (e instanceof Root) {
 				for (mdl : (e as Root).models) {
 					val tgtpath = mdl.docGenerationTargetPath
-					if (tgtpath!=null && !tgtpath.empty)
+					if (tgtpath!==null && !tgtpath.empty)
 						pathes.add(tgtpath)
 				}
 			}

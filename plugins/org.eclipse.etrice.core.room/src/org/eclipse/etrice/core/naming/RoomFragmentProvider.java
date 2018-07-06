@@ -123,7 +123,12 @@ public class RoomFragmentProvider extends FSMFragmentProvider {
 		}
 
 		private String caseSPPointShort(SPPoint sppt) {
-			return sppt.getRef().getName()+EP_SEP+sppt.getService().getName();
+			if(sppt == null || (sppt.getRef() == null && sppt.getService() == null))
+				return "null";
+			String ref = (sppt.getRef() == null) ? "null" : sppt.getRef().getName();
+			String service = (sppt.getService() == null) ? "null" : sppt.getService().getName();
+			
+			return ref+EP_SEP+service;
 		}
 	}
 

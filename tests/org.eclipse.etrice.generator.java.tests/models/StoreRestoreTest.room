@@ -141,7 +141,7 @@ RoomModel StoreRestoreTest {
 						<valueIs: prt>
 					}
 					action {
-						"EXPECT_EQUAL_INT16(caseId, \"check old value <|MODEL_LOCATION|>\", (short)3, val);"
+						"EXPECT_EQUAL_INT16(caseId, \"check old value <|MODEL_LOCATION|>\", (short)3, transitionData);"
 					}
 				}
 				Transition tr4: Prepare2 -> Loop {
@@ -154,7 +154,7 @@ RoomModel StoreRestoreTest {
 						<valueIs: prt>
 					}
 					action {
-						"EXPECT_EQUAL_INT16(caseId, \"check old value <|MODEL_LOCATION|>\", (short)3, val);"
+						"EXPECT_EQUAL_INT16(caseId, \"check old value <|MODEL_LOCATION|>\", (short)3, transitionData);"
 					}
 				}
 				ChoicePoint cp0

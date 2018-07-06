@@ -2,8 +2,6 @@
  */
 package org.eclipse.etrice.core.fsm.fSM;
 
-import org.eclipse.emf.ecore.EObject;
-
 import org.eclipse.etrice.core.common.base.Documentation;
 
 /**
@@ -23,7 +21,7 @@ import org.eclipse.etrice.core.common.base.Documentation;
  * @model
  * @generated
  */
-public interface TransitionBase extends EObject
+public interface TransitionBase extends StateGraphItem
 {
   /**
    * Returns the value of the '<em><b>Docu</b></em>' containment reference.

@@ -15,37 +15,30 @@ RoomModel Semantics {
 					triggers {
 						<in1: p0>
 					}
-					action {
-						"p0.out1();"
-					}
+					action '''p0.out1();'''
 				}
 				Transition tr1: state1 -> state2 {
 					triggers {
 						<in2: p0>
 					}
-					action {
-						"p0.out2();"
-					}
+					action '''p0.out2();'''
 				}
 				Transition tr2: state2 -> state3 {
 					triggers {
 						<in3: p0>
 					}
-					action {
-						"p0.out3();"
-					}
+					action '''p0.out3();'''
 				}
 				Transition tr3: state3 -> state4 {
 					triggers {
 						<in4: p0>
 					}
-					action {
-						"p0.out4();"
-					}
+					action '''p0.out4();'''
 				}
 				Transition tr4: state1 -> wrong {
 					triggers {
-						// this trigger receives a warning
+						// this trigger receives a warning:
+						// The message violates the semantic rule
 						<in1: p0>
 					}
 				}
@@ -53,7 +46,11 @@ RoomModel Semantics {
 				State state1
 				State state2
 				State state3
+				
+				// State should handle the message in1 from port p0
 				State state4
+				
+				// State should handle the message in2 from port p0
 				State wrong
 			}
 		}
@@ -81,18 +78,13 @@ RoomModel Semantics {
 					triggers {
 						<someEvent1: dummy>
 					}
-					action {
-						"motor1.start();"
-					}
+					action '''motor1.start();'''
 				}
 				Transition tr1: MotorStarted -> Idle {
 					triggers {
 						<done: motor1>
 					}
-					action {
-						// this action code receives a warning
-						"motor1.start();"
-					}
+					action '''motor1.start();'''
 				}
 				Transition tr2: MotorStarted -> Idle {
 					triggers {
@@ -122,9 +114,7 @@ RoomModel Semantics {
 					triggers {
 						<someEvent1: dummy>
 					}
-					action {
-						"motor1.start();"
-					}
+					action '''motor1.start();'''
 				}
 				Transition tr2: MotorStarted -> Idle {
 					triggers {
@@ -156,10 +146,9 @@ RoomModel Semantics {
 					triggers {
 						<someEvent1: dummy>
 					}
-					action {
-						"motor1.start();"
-						"motor2.start();"
-					}
+					action '''
+	motor1.start();
+	motor2.start();'''
 				}
 				Transition tr1: MotorStarted -> Motor1done {
 					triggers {

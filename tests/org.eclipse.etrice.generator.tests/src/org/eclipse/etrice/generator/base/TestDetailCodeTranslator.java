@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.util.ArrayList;
+import java.util.List;
 
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.emf.ecore.EObject;
@@ -37,6 +37,7 @@ import org.eclipse.etrice.core.room.EnumerationType;
 import org.eclipse.etrice.core.room.ExternalType;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Message;
+import org.eclipse.etrice.core.room.MessageData;
 import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.PortOperation;
@@ -87,12 +88,12 @@ public class TestDetailCodeTranslator {
 		}
 
 		@Override
-		public String getOperationText(Operation op, ArrayList<String> args, String orig) {
+		public String getOperationText(Operation op, List<String> args, String orig) {
 			return ">"+op.getName()+"("+getArgList(args)+")<";
 		}
 
 		@Override
-		public String getInterfaceItemMessageText(AbstractInterfaceItem item, EObject abstractMsg, ArrayList<String> args, String index, String orig) {
+		public String getInterfaceItemMessageText(AbstractInterfaceItem item, EObject abstractMsg, List<String> args, String index, String orig) {
 			if (!(abstractMsg instanceof Message))
 				return orig;
 			
@@ -109,7 +110,7 @@ public class TestDetailCodeTranslator {
 			return ">"+item.getName()+"."+msg.getName()+"<";
 		}
 
-		private String getArgList(ArrayList<String> args) {
+		private String getArgList(List<String> args) {
 			StringBuilder result = new StringBuilder();
 			for (String string : args) {
 				result.append(string+", ");
@@ -144,11 +145,11 @@ public class TestDetailCodeTranslator {
 		}
 
 		/* (non-Javadoc)
-		 * @see org.eclipse.etrice.generator.base.ITranslationProvider#getInterfaceItemOperationText(org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem, org.eclipse.etrice.core.room.PortOperation, java.util.ArrayList, java.lang.String)
+		 * @see org.eclipse.etrice.generator.base.ITranslationProvider#getInterfaceItemOperationText(org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem, org.eclipse.etrice.core.room.PortOperation, java.util.List, java.lang.String)
 		 */
 		@Override
 		public String getInterfaceItemOperationText(AbstractInterfaceItem item,
-				PortOperation op, ArrayList<String> args, String orig) {
+				PortOperation op, List<String> args, String orig) {
 			return null;
 		}
 	}
@@ -168,8 +169,8 @@ public class TestDetailCodeTranslator {
 		out1.setName("out1");
 		Message out2 = RoomFactory.eINSTANCE.createMessage();
 		out2.setName("out2");
-		VarDecl typedID = RoomFactory.eINSTANCE.createVarDecl();
-		typedID.setName("param");
+		MessageData typedID = RoomFactory.eINSTANCE.createMessageData();
+		typedID.setDeprecatedName("param");
 		PrimitiveType type = RoomFactory.eINSTANCE.createPrimitiveType();
 		type.setName("int32");
 		type.setCastName("Integer");

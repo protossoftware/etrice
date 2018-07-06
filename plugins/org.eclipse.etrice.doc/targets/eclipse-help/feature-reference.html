@@ -712,22 +712,20 @@
 </tbody>
 </table>
 <p><strong>Example</strong>:</p>
-<pre><code class="room customHighlighted"><span class="keyword">DataClass</span> SimpleDataClass {
-	<span class="keyword">Attribute</span> attribute1: uint16
-	<span class="keyword">Attribute</span> attribute2: uint32
-}
+<p>¦¦¦<br> ```room&lt;br/&gt; DataClass SimpleDataClass {&lt;br/&gt; Attribute attribute1: uint16&lt;br/&gt; Attribute attribute2: uint32&lt;br/&gt; }&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;    DataClass DataClassExample {
+       Attribute attribute1: uint32
+       Attribute attribute2: SimpleDataClass
+       Attribute attribute3: voidType ref
 
-<span class="keyword">DataClass</span> DataClassExample {
-	<span class="keyword">Attribute</span> attribute1: uint32
-	<span class="keyword">Attribute</span> attribute2: SimpleDataClass
-	<span class="keyword">Attribute</span> attribute3: voidType <span class="keyword">ref</span>
-	
-	<span class="keyword">Operation</span> operation1(param1: uint32, param2: uint16): boolean <span class="string">'''
-		return true;
-	'''</span>
-}
-</code></pre>
-<hr>
+       Operation operation1(param1: uint32, param2: uint16): boolean &amp;#39;&amp;#39;&amp;#39;
+         return true;
+       &amp;#39;&amp;#39;&amp;#39;
+    }
+    ```
+¦¦¦
+
+</p><hr>
 <h3><a href="#datatype" name="datatype"></a>DataType</h3>
 <p>A DataType can take 4 forms and types data elements like an Attribute or Operation argument</p>
 <table style="vertical-align: middle;" class="table">
@@ -950,25 +948,25 @@
 </tbody>
 </table>
 <p><strong>Example</strong>:</p>
-<pre><code class="room customHighlighted"><span class="comment">// Include is needed when used (e.g. in ActorClassWithExternalType)
-</span><span class="keyword">ExternalType</span> someStructType -&gt; <span class="string">"struct FILE_HANDLE"</span>
+<p>¦¦¦<br> ```room&lt;br/&gt; // Include is needed when used (e.g. in ActorClassWithExternalType)&lt;br/&gt; ExternalType someStructType -&amp;gt; &amp;ldquo;struct FILE_HANDLE&amp;rdquo;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;    ActorClass ActorClassWithExternalType{
+       Structure {
+         usercode1 &amp;#39;&amp;#39;&amp;#39;
+          // #include &amp;lt;___.h&amp;gt; /* User includes here*/
+         &amp;#39;&amp;#39;&amp;#39;
+         Attribute someHandle : someStructType ref // needs include
+       }
+       Behavior {
+         Operation operation1(param1: charPtr) &amp;#39;&amp;#39;&amp;#39;
+          // external calls or casts may need includes
+          write(someHandle, param1);
+         &amp;#39;&amp;#39;&amp;#39;
+       }
+    }
+    ```
+¦¦¦
 
-<span class="keyword">ActorClass</span> ActorClassWithExternalType{
-	<span class="keyword">Structure</span> {
-		<span class="keyword">usercode1</span> <span class="string">'''
-			// #include &lt;___.h&gt; /* User includes here*/
-		'''</span>
-		<span class="keyword">Attribute</span> someHandle : someStructType <span class="keyword">ref</span> <span class="comment">// needs include
-</span>	}
-	<span class="keyword">Behavior</span> {
-		<span class="keyword">Operation</span> operation1(param1: charPtr) <span class="string">'''
-			// external calls or casts may need includes
-			write(someHandle, param1);
-		'''</span>
-	}
-}
-</code></pre>
-<hr>
+</p><hr>
 <h3><a href="#inheritance" name="inheritance"></a>Inheritance</h3>
 <p>A class can specify a super class and inherits elements from the super class hierarchy</p>
 <p>When a ROOM class specifies a super class, it generally inherits all elements and properties.<br>In several cases, it is possible, to override these inherited elements. Generally, eTrice has two semantics of overriding: refinement and replacement.<br>Refinement is used in most cases (e.g. StateMachine) and realizes an extension of the overridden elements.<br>In this case, if a sub class overrides a piece of logic from a super class, it will always be executed subsequently to the inherited.<br>Contrary to this, replacement is applied to overridden Operations, similar to programming languages C++ and Java.</p>
@@ -1008,43 +1006,42 @@
 </tbody>
 </table>
 <p><strong>Example</strong>:</p>
-<pre><code class="room customHighlighted"><span class="keyword">ActorClass</span> ActorSubClass <span class="keyword">extends</span> ActorBaseClass {
-	<span class="comment">// inherits all elements from super type hierarchy
-</span>}
+<p>¦¦¦<br> ```room&lt;br/&gt; ActorClass ActorSubClass extends ActorBaseClass {&lt;br/&gt; // inherits all elements from super type hierarchy&lt;br/&gt; }&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;    ActorClass ActorBaseClass {
+       Interface {
+         Port port1 : ProtocolBaseClass
+       }
+       Structure {
+         Attribute attribute1 : uint32
+       }
+       Behavior {
+         Operation operation1() &amp;#39;&amp;#39;&amp;#39;
+          return;
+         &amp;#39;&amp;#39;&amp;#39;
+       }
+    }
 
-<span class="keyword">ActorClass</span> ActorBaseClass {
-	<span class="keyword">Interface</span> {
-		<span class="keyword">Port</span> port1 : ProtocolBaseClass
-	}
-	<span class="keyword">Structure</span> {
-		<span class="keyword">Attribute</span> attribute1 : uint32
-	}
-	<span class="keyword">Behavior</span> {
-		<span class="keyword">Operation</span> operation1() <span class="string">'''
-			return;
-		'''</span>
-	}
-}
+    ProtocolClass ProtocolSubClass extends ProtocolBaseClass {
+       // inherits all elements from super type hierarchy
+    }
 
-<span class="keyword">ProtocolClass</span> ProtocolSubClass <span class="keyword">extends</span> ProtocolBaseClass {
-	<span class="comment">// inherits all elements from super type hierarchy
-</span>}
+    ProtocolClass ProtocolBaseClass {
+       incoming {
+         Message message1()
+       }
+    }
 
-<span class="keyword">ProtocolClass</span> ProtocolBaseClass {
-	<span class="keyword">incoming</span> {
-		<span class="keyword">Message</span> message1()
-	}
-}
+    DataClass DataSubClass extends DataBaseClass {
+       // inherits all elements from super type hierarchy
+    }
 
-<span class="keyword">DataClass</span> DataSubClass <span class="keyword">extends</span> DataBaseClass {
-	<span class="comment">// inherits all elements from super type hierarchy
-</span>}
+    DataClass DataBaseClass {
+       Attribute attribute1 : uint32
+    }
+    ```
+    ¦¦¦
 
-<span class="keyword">DataClass</span> DataBaseClass {
-	<span class="keyword">Attribute</span> attribute1 : uint32
-}
-</code></pre>
-<hr>
+</p><hr>
 <h3><a href="#internalendport" name="internalendport"></a>InternalEndPort</h3>
 <p>A InternalEndPort is an local Port, that is declared in the internal interface of an ActorClass</p>
 <pre><code class="room customHighlighted"><span class="keyword">ActorClass</span> InternalEndPortExample {
@@ -1231,43 +1228,44 @@
 </tbody>
 </table>
 <p><strong>Example</strong>:</p>
-<pre><code class="room customHighlighted"><span class="keyword">import</span> room.basic.types.* <span class="keyword">from</span> <span class="string">"../../../org.eclipse.etrice.modellib.c/model/Types.room"</span>
+<p>¦¦¦<br> ```room&lt;br/&gt; import room.basic.types.* from &amp;ldquo;../../../org.eclipse.etrice.modellib.c/model/Types.room&amp;rdquo;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;    DataClass DataClassWithOperation {
+       Attribute attribute1 : uint32
 
-<span class="keyword">DataClass</span> DataClassWithOperation {
-	<span class="keyword">Attribute</span> attribute1 : uint32
-	
-	<span class="keyword">Operation</span> operation1(param1: uint32, param2: int32): boolean <span class="string">'''
-		return attribute1 &gt; (param1 - param2);
-	'''</span>
-}
+       Operation operation1(param1: uint32, param2: int32): boolean &amp;#39;&amp;#39;&amp;#39;
+         return attribute1 &amp;gt; (param1 - param2);
+       &amp;#39;&amp;#39;&amp;#39;
+    }
 
-<span class="keyword">ActorClass</span> ActorClassWithOperation {
-	<span class="keyword">Structure</span> {
-		<span class="keyword">Attribute</span> attribute1 : uint32
-	}
-	<span class="keyword">Behavior</span> {
-		<span class="keyword">Operation</span> operation1(param1: uint32, param2: int32): boolean <span class="string">'''
-			return attribute1 &gt; (param1 - param2);
-		'''</span>
-	}
-}
+    ActorClass ActorClassWithOperation {
+       Structure {
+         Attribute attribute1 : uint32
+       }
+       Behavior {
+         Operation operation1(param1: uint32, param2: int32): boolean &amp;#39;&amp;#39;&amp;#39;
+          return attribute1 &amp;gt; (param1 - param2);
+         &amp;#39;&amp;#39;&amp;#39;
+       }
+    }
 
-<span class="keyword">ActorClass</span> ActorClassWithOperation2 {
-	<span class="keyword">Structure</span> {
-		<span class="keyword">usercode1</span> <span class="string">'''
-			// #include &lt;___.h&gt; /* User includes here */
-		'''</span>
-		<span class="keyword">Attribute</span> someHandle : voidType <span class="keyword">ref</span>
-	}
-	<span class="keyword">Behavior</span> {
-		<span class="keyword">Operation</span> operation1(param1: charPtr) <span class="string">'''
-			// external calls or casts may need includes
-			write(someHandle, param1);
-		'''</span>
-	}
-}
-</code></pre>
-<hr>
+    ActorClass ActorClassWithOperation2 {
+       Structure {
+         usercode1 &amp;#39;&amp;#39;&amp;#39;
+          // #include &amp;lt;___.h&amp;gt; /* User includes here */
+         &amp;#39;&amp;#39;&amp;#39;
+         Attribute someHandle : voidType ref
+       }
+       Behavior {
+         Operation operation1(param1: charPtr) &amp;#39;&amp;#39;&amp;#39;
+          // external calls or casts may need includes
+          write(someHandle, param1);
+         &amp;#39;&amp;#39;&amp;#39;
+       }
+    }
+    ```
+¦¦¦
+
+</p><hr>
 <h3><a href="#port" name="port"></a>Port</h3>
 <p>A Port is an instance of a ProtocolClass and the interface for an ActorClass</p>
 <p>Once a ProtocolClass has been created, it can be used to define actor interfaces. This is accomplished by means of Ports.<br>A Port is a declaration that the set of messages defined by its ProtocolClass is now part of the actor’s interface.<br>It provides strong decoupling of ActorClasses from each other, thus enabling easy testability, reusability and deployment of actors to different threads or nodes.</p>

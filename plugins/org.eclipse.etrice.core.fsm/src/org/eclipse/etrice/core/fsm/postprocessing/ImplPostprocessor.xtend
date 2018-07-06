@@ -39,6 +39,8 @@ class ImplPostprocessor {
 				return ((ChoicePoint)this).getName();
 			else if (this instanceof <%org.eclipse.etrice.core.fsm.fSM.Transition%>)
 				return ((Transition)this).getName();
+			else if (this instanceof <%org.eclipse.etrice.core.fsm.fSM.RefinedTransition%>)
+				return ((RefinedTransition)this).getTarget().getName();
 			return "";
 			''')
 		

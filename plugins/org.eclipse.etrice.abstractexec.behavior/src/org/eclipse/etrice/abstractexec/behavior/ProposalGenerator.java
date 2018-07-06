@@ -19,18 +19,16 @@ import java.util.Set;
 
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.etrice.abstractexec.behavior.util.AbstractExecutionUtil;
 import org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem;
 import org.eclipse.etrice.core.fsm.fSM.FSMFactory;
 import org.eclipse.etrice.core.fsm.fSM.MessageFromIf;
-import org.eclipse.etrice.core.fsm.fSM.State;
-import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ActiveTrigger;
-import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ExpandedModelComponent;
 import org.eclipse.etrice.core.fsm.fSM.SemanticsRule;
 import org.eclipse.etrice.core.fsm.naming.FSMNameProvider;
+import org.eclipse.etrice.core.genmodel.fsm.FsmGenExtensions;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.CommonTrigger;
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.Node;
 
 public class ProposalGenerator {
-	private ExpandedModelComponent xpac;
 	private SemanticsCheck checker;
 	private List<MessageFromIf> outgoingProposal = new LinkedList<MessageFromIf>();
 	private List<MessageFromIf> incomingProposal = new LinkedList<MessageFromIf>();
@@ -47,9 +45,8 @@ public class ProposalGenerator {
 		}
 	}
 
-	public ProposalGenerator(ExpandedModelComponent xp, SemanticsCheck chk) {
-		xpac = xp;
-		checker = chk;
+	public ProposalGenerator(SemanticsCheck chk) {
+		this.checker = chk;
 	}
 
 	public List<MessageFromIf> getIncomingProposals() {
@@ -60,32 +57,34 @@ public class ProposalGenerator {
 		return outgoingProposal;
 	}
 
-	public void createProposals(State st) {
-		ActiveRules rules = checker.getActiveRules(st);
+	public void createProposals(Node node) {
+		ActiveRules rules = checker.getActiveRules(node);
 
 		// in case the state is disconnected component of the graph
 		if (rules == null)
 			return;
 
 		// ignore substates
-		if (AbstractExecutionUtil.getInstance().getRoomHelpers().hasDirectSubStructure(st))
+		if (node.getSubgraph()!=null)
 			return;
 
 		outgoingProposal.clear();
 		incomingProposal.clear();
 
 		for (AbstractInterfaceItem port : rules.getPortList()) {
-			// collect all messages from active triggers
+			// collect all messages from caught triggers
 			Set<EObject> messages = new HashSet<EObject>();
-			for (ActiveTrigger t : xpac.getActiveTriggers(st))
-				if (t.getIfitem().equals(port))
+			for (CommonTrigger t : node.getCaughtTriggers()) {
+				if (t.getIfitem().equals(port)) {
 					messages.add((EObject)t.getMsg());
+				}
+			}
+			
 			// check if every rule has its messages
 			if (rules.getPortList().contains(port)) {
 				for (SemanticsRule curRule : rules.getRulesForPort(port)) {
 					if (!messages.contains(curRule.getMsg())) {
-						MessageFromIf mif = FSMFactory.eINSTANCE
-								.createMessageFromIf();
+						MessageFromIf mif = FSMFactory.eINSTANCE.createMessageFromIf();
 						mif.setFrom(port);
 						mif.setMessage(curRule.getMsg());
 						boolean isOutgoing = port.getAllOutgoingAbstractMessages().contains(curRule.getMsg());
@@ -100,7 +99,7 @@ public class ProposalGenerator {
 		}
 
 		if (traceProposals) {
-			System.out.println("  Proposals for : " + st.getName());
+			System.out.println("  Proposals for : " + FsmGenExtensions.getName(node));
 
 			for (MessageFromIf msg : outgoingProposal) {
 				System.out.println("    Outgoing msg proposal : "

@@ -23,6 +23,7 @@ import org.eclipse.etrice.core.fsm.fSM.InitialTransition;
 import org.eclipse.etrice.core.fsm.fSM.MessageFromIf;
 import org.eclipse.etrice.core.fsm.fSM.NonInitialTransition;
 import org.eclipse.etrice.core.fsm.fSM.RefinedState;
+import org.eclipse.etrice.core.fsm.fSM.RefinedTransition;
 import org.eclipse.etrice.core.fsm.fSM.State;
 import org.eclipse.etrice.core.fsm.fSM.StateGraph;
 import org.eclipse.etrice.core.fsm.fSM.StateGraphItem;
@@ -65,6 +66,8 @@ public class FSMNameProvider {
 		public String caseTrPoint(TrPoint object) { return object.getName(); }
 		@Override
 		public String caseTransition(Transition object) { return getTransitionName(object); }
+		@Override
+		public String caseRefinedTransition(RefinedTransition object) { return getTransitionName(object.getTarget()); }
 	}
 	
 	private FSMNameProviderSwitch fsmNameProvider = new FSMNameProviderSwitch();

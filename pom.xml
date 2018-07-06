@@ -10,6 +10,7 @@
 	<packaging>pom</packaging>
 
 	<modules>
+	
 		<!-- Plugins -->
 		<module>plugins/org.eclipse.etrice.abstractexec.behavior</module>
 		<module>plugins/org.eclipse.etrice.core.common</module>
@@ -26,6 +27,8 @@
 		<module>plugins/org.eclipse.etrice.core.genmodel.fsm</module>
 		<module>plugins/org.eclipse.etrice.core.room</module>
 		<module>plugins/org.eclipse.etrice.core.room.ui</module>
+		<module>plugins/org.eclipse.etrice.dctools.fsm</module>
+		<module>plugins/org.eclipse.etrice.dctools</module>
 		<module>plugins/org.eclipse.etrice.doc</module>
 		<module>plugins/org.eclipse.etrice.etunit.converter</module>
 		<module>plugins/org.eclipse.etrice.expressions.ui</module>
@@ -63,7 +66,9 @@
 		<module>tests/org.eclipse.etrice.core.etphys.tests</module>
 		<module>tests/org.eclipse.etrice.core.fsm.tests</module>
 		<module>tests/org.eclipse.etrice.core.genmodel.tests</module>
+		<module>tests/org.eclipse.etrice.core.genmodel.fsm.tests</module>
 		<module>tests/org.eclipse.etrice.core.room.tests</module>
+		<module>tests/org.eclipse.etrice.dctools.tests</module>
 		<module>tests/org.eclipse.etrice.etunit.converter.tests</module>
 		<module>tests/org.eclipse.etrice.generator.fsmtest.tests</module>
 		<module>tests/org.eclipse.etrice.generator.tests</module>

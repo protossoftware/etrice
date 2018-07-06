@@ -18,7 +18,8 @@ import com.google.inject.Singleton
 import org.eclipse.etrice.core.fsm.fSM.ComponentCommunicationType
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass
 import org.eclipse.etrice.core.genmodel.etricegen.Root
-import org.eclipse.etrice.core.genmodel.fsm.base.ILogger
+import org.eclipse.etrice.core.genmodel.fsm.FsmGenExtensions
+import org.eclipse.etrice.core.genmodel.fsm.ILogger
 import org.eclipse.etrice.core.room.CommunicationType
 import org.eclipse.etrice.core.room.Operation
 import org.eclipse.etrice.core.room.ProtocolClass
@@ -75,7 +76,8 @@ class ActorClassGen extends GenericActorClassGenerator {
 		val async = ac.commType==ComponentCommunicationType::ASYNCHRONOUS
 		val hasConstData = !(eventPorts.empty && recvPorts.empty && ac.allSAPs.empty && ac.allServiceImplementations.empty)
 							|| Main::settings.generateMSCInstrumentation
-		val hasVarData = !(sendPorts.empty && ac.allAttributes.empty && xpac.stateMachine.empty && !hasConstData)
+		val isEmptyStateGraph = FsmGenExtensions.isEmpty(xpac.graphContainer.graph)
+		val hasVarData = !(sendPorts.empty && ac.allAttributes.empty && isEmptyStateGraph && !hasConstData)
 
 	'''
 		/**
@@ -141,7 +143,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 			/* this actor class has no ports and thus no constant data */
 		«ENDIF»
 
-		«IF !xpac.stateMachine.empty»
+		«IF !isEmptyStateGraph»
 
 			«xpac.genHeaderConstants»
 		«ENDIF»
@@ -162,7 +164,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 
 				«ac.allAttributes.attributes»
 
-				«IF !xpac.stateMachine.empty»
+				«IF !isEmptyStateGraph»
 
 					«xpac.genDataMembers»
 				«ENDIF»
@@ -202,7 +204,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 		val replEventPorts = eventPorts.filter[multiplicity!=1]
 		val sendPorts = ac.allEndPorts.filter(p|(p.protocol as ProtocolClass).commType==CommunicationType::DATA_DRIVEN &&  p.conjugated && p.multiplicity==1)
 		val recvPorts = ac.allEndPorts.filter(p|(p.protocol as ProtocolClass).commType==CommunicationType::DATA_DRIVEN && !p.conjugated && p.multiplicity==1)
-		val portsWithOperations = ac.allInterfaceItems.filter(p|p.portClass!=null && p.portClass.operations.size>0)
+		val portsWithOperations = ac.allInterfaceItems.filter(p|p.portClass!==null && p.portClass.operations.size>0)
 		val filename = (ac.eContainer as RoomModel).name.replaceAll("\\.","_")+"_"+ac.name+"_Utils"
 
 	'''
@@ -224,8 +226,8 @@ class ActorClassGen extends GenericActorClassGenerator {
 		/* simple event ports */
 		«FOR ep : eventPorts.filter[multiplicity==1]»
 			«FOR msg : ep.outgoing»
-				«val data1 = if (msg.data!=null) "data" else ""»
-				«val data2 = if (msg.data!=null) ", data" else ""»
+				«val data1 = if (msg.data!==null) "data" else ""»
+				«val data2 = if (msg.data!==null) ", data" else ""»
 				#define «ep.name»_«msg.name»(«data1») «ep.portClassName»_«msg.name»(&self->constData->«ep.name»«data2»)
 			«ENDFOR»
 		«ENDFOR»
@@ -240,8 +242,8 @@ class ActorClassGen extends GenericActorClassGenerator {
 		/* data send ports */
 		«FOR ep : sendPorts»
 			«FOR msg : ep.outgoing»
-				«val data1 = if (msg.data!=null) "data" else ""»
-				«val data2 = if (msg.data!=null) ", data" else ""»
+				«val data1 = if (msg.data!==null) "data" else ""»
+				«val data2 = if (msg.data!==null) ", data" else ""»
 				#define «ep.name»_«msg.name»(«data1») «ep.portClassName»_«msg.name»_set(&self->«ep.name»«data2»)
 			«ENDFOR»
 		«ENDFOR»
@@ -249,8 +251,8 @@ class ActorClassGen extends GenericActorClassGenerator {
 		/* saps */
 		«FOR sap: ac.allSAPs»
 			«FOR msg : sap.outgoing»
-				«val data1 = if (msg.data!=null) "data" else ""»
-				«val data2 = if (msg.data!=null) ", data" else ""»
+				«val data1 = if (msg.data!==null) "data" else ""»
+				«val data2 = if (msg.data!==null) ", data" else ""»
 				#define «sap.name»_«msg.name»(«data1») «sap.portClassName»_«msg.name»(&self->constData->«sap.name»«data2»)
 			«ENDFOR»
 		«ENDFOR»
@@ -261,8 +263,8 @@ class ActorClassGen extends GenericActorClassGenerator {
 		«ENDIF»
 		«FOR ep : replEventPorts»
 			«FOR msg : ep.outgoing»
-				«val data1 = if (msg.data!=null) "data" else ""»
-				«val data2 = if (msg.data!=null) ", data" else ""»
+				«val data1 = if (msg.data!==null) "data" else ""»
+				«val data2 = if (msg.data!==null) ", data" else ""»
 				#define «ep.name»_«msg.name»_broadcast(«data1») «ep.portClassName»_«msg.name»_broadcast(&self->constData->«ep.name»«data2»)
 				#define «ep.name»_«msg.name»(idx«data2») «ep.portClassName»_«msg.name»(&self->constData->«ep.name», idx«data2»)
 			«ENDFOR»
@@ -271,8 +273,8 @@ class ActorClassGen extends GenericActorClassGenerator {
 		/* services */
 		«FOR svc : ac.allServiceImplementations»
 			«FOR msg : svc.spp.outgoing»
-				«val data1 = if (msg.data!=null) "data" else ""»
-				«val data2 = if (msg.data!=null) ", data" else ""»
+				«val data1 = if (msg.data!==null) "data" else ""»
+				«val data2 = if (msg.data!==null) ", data" else ""»
 				#define «svc.spp.name»_«msg.name»_broadcast(«data1») «svc.spp.portClassName»_«msg.name»_broadcast(&self->constData->«svc.spp.name»«data2»)
 				#define «svc.spp.name»_«msg.name»(idx«data2») «svc.spp.portClassName»_«msg.name»(&self->constData->«svc.spp.name», idx«data2»)
 			«ENDFOR»
@@ -312,6 +314,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 		val eventDriven = ac.commType==ComponentCommunicationType::EVENT_DRIVEN
 		val dataDriven = ac.commType==ComponentCommunicationType::DATA_DRIVEN
 		val handleEvents = async || eventDriven
+		val isEmptyStateGraph = FsmGenExtensions.isEmpty(xpac.graphContainer.graph)
 
 	'''
 		/**
@@ -340,13 +343,13 @@ class ActorClassGen extends GenericActorClassGenerator {
 		/* interface item IDs */
 		«xpac.genInterfaceItemConstants»
 
-		«IF !xpac.stateMachine.empty»
-			«xpac.genStateMachine()»
+		«IF !isEmptyStateGraph»
+			«xpac.graphContainer.genStateMachine»
 		«ENDIF»
 
 		void «ac.name»_init(«ac.name»* self){
 			ET_MSC_LOGGER_SYNC_ENTRY("«ac.name»", "init")
-			«IF !xpac.stateMachine.empty»
+			«IF !isEmptyStateGraph»
 				«xpac.genInitialization»
 			«ENDIF»
 			ET_MSC_LOGGER_SYNC_EXIT
@@ -355,7 +358,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 
 		void «ac.name»_receiveMessage(void* self, const void* ifitem, const etMessage* msg){
 			ET_MSC_LOGGER_SYNC_ENTRY("«ac.name»", "_receiveMessage")
-			«IF !xpac.stateMachine.empty»
+			«IF !isEmptyStateGraph»
 				«IF handleEvents»
 					«langExt.operationScope(ac.name, false)»receiveEvent(self, (etPort*)ifitem, msg->evtID, (void*)(((char*)msg)+MEM_CEIL(sizeof(etMessage))));
 				«ELSE»
@@ -369,7 +372,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 		«IF dataDriven || async»
 			void «ac.name»_execute(«ac.name»* self) {
 				ET_MSC_LOGGER_SYNC_ENTRY("«ac.name»", "_execute")
-				«IF !xpac.stateMachine.empty»
+				«IF !isEmptyStateGraph»
 
 					«IF handleEvents»
 						«langExt.operationScope(ac.name, false)»receiveEvent(self, NULL, 0, NULL);

@@ -27,6 +27,7 @@ public class RoomSyntacticSequencer extends AbstractSyntacticSequencer {
 	protected AbstractElementAlias match_ActorInstanceMapping___LeftCurlyBracketKeyword_4_0_RightCurlyBracketKeyword_4_2__q;
 	protected AbstractElementAlias match_ContinuationTransition___LeftCurlyBracketKeyword_7_0_RightCurlyBracketKeyword_7_2__q;
 	protected AbstractElementAlias match_InitialTransition___LeftCurlyBracketKeyword_7_0_RightCurlyBracketKeyword_7_2__q;
+	protected AbstractElementAlias match_Message___LeftParenthesisKeyword_3_0_RightParenthesisKeyword_3_2__q;
 	protected AbstractElementAlias match_PortOperation___ColonKeyword_5_0_0_VoidKeyword_5_0_1_0__q;
 	protected AbstractElementAlias match_ProtocolClass___IncomingKeyword_10_0_LeftCurlyBracketKeyword_10_1_RightCurlyBracketKeyword_10_3__q;
 	protected AbstractElementAlias match_ProtocolClass___OutgoingKeyword_11_0_LeftCurlyBracketKeyword_11_1_RightCurlyBracketKeyword_11_3__q;
@@ -42,6 +43,7 @@ public class RoomSyntacticSequencer extends AbstractSyntacticSequencer {
 		match_ActorInstanceMapping___LeftCurlyBracketKeyword_4_0_RightCurlyBracketKeyword_4_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getActorInstanceMappingAccess().getLeftCurlyBracketKeyword_4_0()), new TokenAlias(false, false, grammarAccess.getActorInstanceMappingAccess().getRightCurlyBracketKeyword_4_2()));
 		match_ContinuationTransition___LeftCurlyBracketKeyword_7_0_RightCurlyBracketKeyword_7_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getContinuationTransitionAccess().getLeftCurlyBracketKeyword_7_0()), new TokenAlias(false, false, grammarAccess.getContinuationTransitionAccess().getRightCurlyBracketKeyword_7_2()));
 		match_InitialTransition___LeftCurlyBracketKeyword_7_0_RightCurlyBracketKeyword_7_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getInitialTransitionAccess().getLeftCurlyBracketKeyword_7_0()), new TokenAlias(false, false, grammarAccess.getInitialTransitionAccess().getRightCurlyBracketKeyword_7_2()));
+		match_Message___LeftParenthesisKeyword_3_0_RightParenthesisKeyword_3_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getMessageAccess().getLeftParenthesisKeyword_3_0()), new TokenAlias(false, false, grammarAccess.getMessageAccess().getRightParenthesisKeyword_3_2()));
 		match_PortOperation___ColonKeyword_5_0_0_VoidKeyword_5_0_1_0__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getPortOperationAccess().getColonKeyword_5_0_0()), new TokenAlias(false, false, grammarAccess.getPortOperationAccess().getVoidKeyword_5_0_1_0()));
 		match_ProtocolClass___IncomingKeyword_10_0_LeftCurlyBracketKeyword_10_1_RightCurlyBracketKeyword_10_3__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getProtocolClassAccess().getIncomingKeyword_10_0()), new TokenAlias(false, false, grammarAccess.getProtocolClassAccess().getLeftCurlyBracketKeyword_10_1()), new TokenAlias(false, false, grammarAccess.getProtocolClassAccess().getRightCurlyBracketKeyword_10_3()));
 		match_ProtocolClass___OutgoingKeyword_11_0_LeftCurlyBracketKeyword_11_1_RightCurlyBracketKeyword_11_3__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getProtocolClassAccess().getOutgoingKeyword_11_0()), new TokenAlias(false, false, grammarAccess.getProtocolClassAccess().getLeftCurlyBracketKeyword_11_1()), new TokenAlias(false, false, grammarAccess.getProtocolClassAccess().getRightCurlyBracketKeyword_11_3()));
@@ -73,6 +75,8 @@ public class RoomSyntacticSequencer extends AbstractSyntacticSequencer {
 				emit_ContinuationTransition___LeftCurlyBracketKeyword_7_0_RightCurlyBracketKeyword_7_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_InitialTransition___LeftCurlyBracketKeyword_7_0_RightCurlyBracketKeyword_7_2__q.equals(syntax))
 				emit_InitialTransition___LeftCurlyBracketKeyword_7_0_RightCurlyBracketKeyword_7_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_Message___LeftParenthesisKeyword_3_0_RightParenthesisKeyword_3_2__q.equals(syntax))
+				emit_Message___LeftParenthesisKeyword_3_0_RightParenthesisKeyword_3_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_PortOperation___ColonKeyword_5_0_0_VoidKeyword_5_0_1_0__q.equals(syntax))
 				emit_PortOperation___ColonKeyword_5_0_0_VoidKeyword_5_0_1_0__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_ProtocolClass___IncomingKeyword_10_0_LeftCurlyBracketKeyword_10_1_RightCurlyBracketKeyword_10_3__q.equals(syntax))
@@ -275,6 +279,19 @@ public class RoomSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     to=TransitionTerminal (ambiguity) (rule end)
 	 */
 	protected void emit_InitialTransition___LeftCurlyBracketKeyword_7_0_RightCurlyBracketKeyword_7_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     ('(' ')')?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     name=ID (ambiguity) (rule end)
+	 *     name=ID (ambiguity) annotations+=Annotation
+	 *     name=ID (ambiguity) docu=Documentation
+	 */
+	protected void emit_Message___LeftParenthesisKeyword_3_0_RightParenthesisKeyword_3_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	

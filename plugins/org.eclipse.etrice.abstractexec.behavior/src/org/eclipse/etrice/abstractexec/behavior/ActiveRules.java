@@ -19,18 +19,20 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem;
 import org.eclipse.etrice.core.fsm.fSM.InSemanticsRule;
+import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
 import org.eclipse.etrice.core.fsm.fSM.ProtocolSemantics;
 import org.eclipse.etrice.core.fsm.fSM.SemanticsRule;
 import org.eclipse.etrice.core.fsm.naming.FSMNameProvider;
-import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ExpandedModelComponent;
 
 public class ActiveRules {
 	private HashMap<AbstractInterfaceItem, List<SemanticsRule>> rules;
 	private static boolean traceRules = false;
 	private static int traceLevel = 0;
 	private FSMNameProvider fsmNameProvider = new FSMNameProvider();
+	private EAttribute nameAttribute = null;
 	
 	// HOWTO: use debug options to configure tracing (see also the .options file in the plug-in)
 	static {
@@ -52,11 +54,25 @@ public class ActiveRules {
 	private static final int TRACE_DETAILS = 2;
 
 	public ActiveRules() {
-		rules = new HashMap<AbstractInterfaceItem, List<SemanticsRule>>();
+		this(new HashMap<AbstractInterfaceItem, List<SemanticsRule>>());
 	}
 
 	private ActiveRules(HashMap<AbstractInterfaceItem, List<SemanticsRule>> r) {
 		rules = r;
+		
+		// determine the name attribute of our abstract message
+		if (!rules.isEmpty()) {
+			List<SemanticsRule> ruleList = rules.values().iterator().next();
+			if (!ruleList.isEmpty()) {
+				SemanticsRule rule = ruleList.get(0);
+				for (EAttribute att : rule.getMsg().eClass().getEAllAttributes()) {
+					if (att.getName().equals("name")) {
+						nameAttribute = att;
+						break;
+					}
+				}
+			}
+		}
 	}
 
 	public Set<AbstractInterfaceItem> getPortList() {
@@ -102,7 +118,15 @@ public class ActiveRules {
 					}
 					
 				} else {
-					// TODO: issue a warning?
+					StringBuilder sb = new StringBuilder("Valid messages at this point:");
+					for (SemanticsRule rule : localRules) {
+						String name = rule.getMsg().toString();
+						if (nameAttribute!=null) {
+							name = (String) rule.getMsg().eGet(nameAttribute);
+						}
+						sb.append("\n"+ name);
+					}
+					msg.setReason(sb.toString());
 					wrongMsgList.add(msg);
 				}
 			}
@@ -146,10 +170,8 @@ public class ActiveRules {
 		return new ActiveRules(newRules);
 	}
 
-	public void buildInitLocalRules(ExpandedModelComponent xpAct) {
-		// HashMap<AbstractInterfaceItem, EList<SemanticsRule>> locals = new
-		// HashMap<AbstractInterfaceItem, EList<SemanticsRule>>();
-		List<AbstractInterfaceItem> portList = xpAct.getModelComponent().getAllAbstractInterfaceItems();
+	public void buildInitLocalRules(ModelComponent mc) {
+		List<AbstractInterfaceItem> portList = mc.getAllAbstractInterfaceItems();
 		for (AbstractInterfaceItem ifitem : portList) {
 			if (ifitem.getSemantics()!=null) {
 				rules.put(ifitem, new ArrayList<SemanticsRule>(ifitem.getSemantics().getRules()));

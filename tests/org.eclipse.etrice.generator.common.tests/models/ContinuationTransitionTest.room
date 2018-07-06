@@ -93,7 +93,7 @@ RoomModel ContinuationTransitionTest {
 				}
 				Transition continuationExit: exitPoint of substate -> endExit {
 					action {
-						"EXPECT_EQUAL_INT32(caseId, \"<|MODEL_LOCATION|>\", 2, data);"
+						"EXPECT_EQUAL_INT32(caseId, \"<|MODEL_LOCATION|>\", 2, transitionData);"
 					}
 				}
 				Transition tr0: startEntry2 -> entryPoint of substate {
@@ -106,7 +106,7 @@ RoomModel ContinuationTransitionTest {
 					subgraph {
 						Transition continuationEntry: my entryPoint -> cp choicePoint {
 							action {
-								"EXPECT_EQUAL_INT32(caseId, \"<|MODEL_LOCATION|>\", 1, data);"
+								"EXPECT_EQUAL_INT32(caseId, \"<|MODEL_LOCATION|>\", 1, transitionData);"
 							}
 						}
 						Transition triggerExit: startExit1 -> my exitPoint {
@@ -116,7 +116,7 @@ RoomModel ContinuationTransitionTest {
 						}
 						Transition continuationCpElse: cp choicePoint -> startExit1 {
 							action {
-								"EXPECT_EQUAL_INT32(caseId, \"<|MODEL_LOCATION|>\", 1, data);"
+								"EXPECT_EQUAL_INT32(caseId, \"<|MODEL_LOCATION|>\", 1, transitionData);"
 							}
 						}
 						Transition continuationCpCond: cp choicePoint -> startExit2 {
@@ -124,7 +124,7 @@ RoomModel ContinuationTransitionTest {
 								"true"
 							}
 							action {
-								"EXPECT_EQUAL_INT32(caseId, \"<|MODEL_LOCATION|>\", 1, data);"
+								"EXPECT_EQUAL_INT32(caseId, \"<|MODEL_LOCATION|>\", 1, transitionData);"
 							}
 						}
 						Transition triggerChoicePoint: my startChoicePoint -> cp choicePoint {
@@ -166,7 +166,7 @@ RoomModel ContinuationTransitionTest {
 				}
 				Transition continuationExit: exitPoint of substate -> endExit {
 					action {
-						"EXPECT_EQUAL_INT32(caseId, \"<|MODEL_LOCATION|>\", 2, data);"
+						"EXPECT_EQUAL_INT32(caseId, \"<|MODEL_LOCATION|>\", 2, transitionData);"
 					}
 				}
 				Transition tr0: startEntry2 -> entryPoint of substate {
@@ -179,7 +179,7 @@ RoomModel ContinuationTransitionTest {
 					subgraph {
 						Transition continuationEntry: my entryPoint -> cp choicePoint {
 							action {
-								"EXPECT_EQUAL_INT32(caseId, \"<|MODEL_LOCATION|>\", 1, data);"
+								"EXPECT_EQUAL_INT32(caseId, \"<|MODEL_LOCATION|>\", 1, transitionData);"
 							}
 						}
 						Transition triggerExit: startExit1 -> my exitPoint {
@@ -189,7 +189,7 @@ RoomModel ContinuationTransitionTest {
 						}
 						Transition continuationCpElse: cp choicePoint -> startExit1 {
 							action {
-								"EXPECT_EQUAL_INT32(caseId, \"<|MODEL_LOCATION|>\", 1, data);"
+								"EXPECT_EQUAL_INT32(caseId, \"<|MODEL_LOCATION|>\", 1, transitionData);"
 							}
 						}
 						Transition continuationCpCond: cp choicePoint -> startExit2 {
@@ -197,7 +197,7 @@ RoomModel ContinuationTransitionTest {
 								"true"
 							}
 							action {
-								"EXPECT_EQUAL_INT32(caseId, \"<|MODEL_LOCATION|>\", 1, data);"
+								"EXPECT_EQUAL_INT32(caseId, \"<|MODEL_LOCATION|>\", 1, transitionData);"
 							}
 						}
 						Transition triggerChoicePoint: my startChoicePoint -> cp choicePoint {
@@ -311,7 +311,7 @@ RoomModel ContinuationTransitionTest {
 				}
 				Transition tr1: cp cp0 -> state1 {
 					action {
-						"int x = data1;"
+						"int x = transitionData;"
 					}
 				}
 				Transition tr2: cp cp0 -> state2 {
@@ -319,7 +319,7 @@ RoomModel ContinuationTransitionTest {
 						"true"
 					}
 					action {
-						"int x = data1;"
+						"int x = transitionData;"
 					}
 				}
 				ChoicePoint cp0

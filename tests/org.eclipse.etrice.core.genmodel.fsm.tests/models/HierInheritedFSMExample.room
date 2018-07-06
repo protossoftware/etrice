@@ -1,0 +1,118 @@
+RoomModel TemplateModel {
+
+
+	abstract ActorClass Base {
+		Interface {
+			Port p0: PC
+		}
+		Structure {
+			external Port p0
+		}
+		Behavior {
+			StateMachine {
+				State state0
+				State state2
+				State state1 {
+					subgraph {
+						EntryPoint tr0
+						ExitPoint tr1
+						Transition init0: initial -> state1_0
+						State state1_0
+						State state1_1
+						Transition tr2: state1_0 -> state1_1 {
+							triggers {
+								<in1: p0>
+							}
+						}
+					}
+				}
+				Transition init0: initial -> state0
+				Transition tr0: state0 -> tr0 of state1 {
+					triggers {
+						<in1: p0>
+					}
+				}
+				Transition tr1: tr1 of state1 -> state2
+				Transition tr2: state2 -> state1 {
+					triggers {
+						<in1: p0>
+					}
+				}
+			}
+		}
+	}
+
+	ActorClass TestActor extends Base {
+		Behavior {
+			StateMachine {
+				RefinedState state1 {
+					subgraph {
+						State state1_2
+						Transition tr4: my tr0 -> state1_2
+						Transition tr5: state1_2 -> my tr1 {
+							triggers {
+								<in1: p0>
+							}
+						}
+						Transition tr6: state1_2 -> state1_0 {
+							triggers {
+								<in2: p0>
+							}
+						}
+						RefinedState state1_1 {
+							subgraph {
+								State state1_1_0
+								State state1_1_1
+								Transition tr1: initial -> state1_1_0
+								Transition tr2: state1_1_0 -> state1_1_1 {
+									triggers {
+										<in1: p0>
+									}
+								}
+							}
+						}
+					}
+				}
+				RefinedState state0 {
+					subgraph {
+						State state0_0
+						Transition tr1: initial -> state0_0
+					}
+				}
+				State state3
+				Transition tr3: state0 -> state3 {
+					triggers {
+						<in2: p0>
+					}
+				}
+				Transition tr4: state3 -> tr0 of state1 {
+					triggers {
+						<in1: p0>
+					}
+				}
+			}
+		}
+	}
+	
+	ActorClass TestActor2 extends TestActor {
+		Behavior {
+			StateMachine {
+				RefinedState state0 {
+					entry ''''''
+				}
+				RefinedTransition tr3 {
+					action ''''''
+				}
+			}
+		}
+	}
+
+	ProtocolClass PC {
+		incoming {
+			Message in1()
+			Message in2()
+		}
+		outgoing { }
+	}
+
+}

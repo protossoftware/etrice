@@ -3,3 +3,11 @@ dependencies {
 	
 	compile "org.eclipse.xtext:org.eclipse.xtext:$versions.xtext"
 }
+
+sourceSets {
+	main {
+		java {
+			srcDirs 'src-gen'
+		}
+	}
+}

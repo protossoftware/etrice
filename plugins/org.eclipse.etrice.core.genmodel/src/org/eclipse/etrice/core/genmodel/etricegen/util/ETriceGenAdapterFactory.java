@@ -16,8 +16,30 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.etrice.core.genmodel.etricegen.*;
-import org.eclipse.etrice.core.genmodel.fsm.fsmgen.ExpandedModelComponent;
+import org.eclipse.etrice.core.genmodel.etricegen.AbstractInstance;
+import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance;
+import org.eclipse.etrice.core.genmodel.etricegen.ActorInterfaceInstance;
+import org.eclipse.etrice.core.genmodel.etricegen.BindingInstance;
+import org.eclipse.etrice.core.genmodel.etricegen.ConnectionInstance;
+import org.eclipse.etrice.core.genmodel.etricegen.ETriceGenPackage;
+import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
+import org.eclipse.etrice.core.genmodel.etricegen.InstanceBase;
+import org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance;
+import org.eclipse.etrice.core.genmodel.etricegen.OpenBinding;
+import org.eclipse.etrice.core.genmodel.etricegen.OpenServiceConnection;
+import org.eclipse.etrice.core.genmodel.etricegen.OptionalActorInstance;
+import org.eclipse.etrice.core.genmodel.etricegen.PortInstance;
+import org.eclipse.etrice.core.genmodel.etricegen.Root;
+import org.eclipse.etrice.core.genmodel.etricegen.SAPInstance;
+import org.eclipse.etrice.core.genmodel.etricegen.SPPInstance;
+import org.eclipse.etrice.core.genmodel.etricegen.ServiceImplInstance;
+import org.eclipse.etrice.core.genmodel.etricegen.StructureInstance;
+import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance;
+import org.eclipse.etrice.core.genmodel.etricegen.SystemInstance;
+import org.eclipse.etrice.core.genmodel.etricegen.Wire;
+import org.eclipse.etrice.core.genmodel.etricegen.WiredActorClass;
+import org.eclipse.etrice.core.genmodel.etricegen.WiredStructureClass;
+import org.eclipse.etrice.core.genmodel.etricegen.WiredSubSystemClass;
 
 /**
  * <!-- begin-user-doc -->
@@ -166,10 +188,6 @@ public class ETriceGenAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseExpandedActorClass(ExpandedActorClass object) {
 				return createExpandedActorClassAdapter();
-			}
-			@Override
-			public Adapter caseExpandedModelComponent(ExpandedModelComponent object) {
-				return createExpandedModelComponentAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -412,20 +430,6 @@ public class ETriceGenAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createConnectionInstanceAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.genmodel.fsm.fsmgen.ExpandedModelComponent <em>Expanded Model Component</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.etrice.core.genmodel.fsm.fsmgen.ExpandedModelComponent
-	 * @generated
-	 */
-	public Adapter createExpandedModelComponentAdapter() {
 		return null;
 	}
 

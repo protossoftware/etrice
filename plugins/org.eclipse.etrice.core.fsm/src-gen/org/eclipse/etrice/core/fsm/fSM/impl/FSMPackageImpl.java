@@ -1460,7 +1460,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
     entryPointEClass.getESuperTypes().add(this.getTrPoint());
     exitPointEClass.getESuperTypes().add(this.getTrPoint());
     choicePointEClass.getESuperTypes().add(this.getStateGraphNode());
-    transitionEClass.getESuperTypes().add(this.getStateGraphItem());
+    transitionBaseEClass.getESuperTypes().add(this.getStateGraphItem());
     transitionEClass.getESuperTypes().add(this.getTransitionBase());
     nonInitialTransitionEClass.getESuperTypes().add(this.getTransition());
     transitionChainStartTransitionEClass.getESuperTypes().add(this.getNonInitialTransition());

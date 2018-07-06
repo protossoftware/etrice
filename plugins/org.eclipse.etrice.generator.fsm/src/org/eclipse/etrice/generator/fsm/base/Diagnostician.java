@@ -15,7 +15,7 @@ package org.eclipse.etrice.generator.fsm.base;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.etrice.core.fsm.naming.FSMNameProvider;
-import org.eclipse.etrice.core.genmodel.fsm.fsmgen.IDiagnostician;
+import org.eclipse.etrice.core.genmodel.fsm.IDiagnostician;
 
 import com.google.inject.Inject;
 
