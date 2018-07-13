@@ -22,6 +22,10 @@ class GenModelAccess {
 	
 		Map<ModelComponent, GraphContainer> cache = newHashMap
 		
+		def public clearCache() {
+			cache.clear
+		}
+		
 		def public GraphContainer get(ModelComponent mc) {
 			if(!cache.containsKey(mc)) {
 				val injector = new RoomStandaloneSetup().createInjector

@@ -46,8 +46,8 @@ class DCUtil {
 	
 	@Inject RoomValueConverterService converterService
 	@Inject DCProposalConfig proposalConfig
+	@Inject GenModelAccess genModelAccess
 	
-	val genModelAccess = new GenModelAccess
 	DCLanguage language = DCLanguage.C_LANGUAGE
 	
 	new() {
@@ -88,6 +88,7 @@ class DCUtil {
 			if (transition!==null) {
 				val roomClass = EcoreUtil2.getContainerOfType(dc, RoomClass)
 				if (roomClass instanceof ActorClass) {
+					genModelAccess.clearCache
 					val gc = genModelAccess.get(roomClass)
 					val link = FsmGenExtensions.getLinkFor(gc, transition)
 					if (link!==null) {
