@@ -109,7 +109,7 @@
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-p2-plugin</artifactId>
 				<version>${tycho.version}</version>
-				<!-- This line causes tycho to package artifacts from ${etrice.url} to the built jars! 
+				<!-- Bug 537127. This line causes tycho to package artifacts from ${etrice.url} to the built jars! 
 					 The current built artifacts are just ignored !!!!1
 				<configuration> 
 					<baselineRepositories> 
