@@ -1,10 +1,9 @@
 apply plugin: 'application'
 
 dependencies {
-	compile "org.eclipse.platform:org.eclipse.core.runtime:$versions.core_runtime"
-	compile "org.eclipse.emf:org.eclipse.emf.common:$versions.xtext"
-	compile "org.eclipse.emf:org.eclipse.emf.ecore:$versions.xtext"
-	compile "org.eclipse.emf:org.eclipse.emf.ecore.xmi:$versions.xtext"
+	implementation "org.eclipse.emf:org.eclipse.emf.common:$versions.xtext"
+	implementation "org.eclipse.emf:org.eclipse.emf.ecore:$versions.xtext"
+	implementation "org.eclipse.emf:org.eclipse.emf.ecore.xmi:$versions.xtext"
 }
 
 ext.classpath = sourceSets.main.runtimeClasspath
