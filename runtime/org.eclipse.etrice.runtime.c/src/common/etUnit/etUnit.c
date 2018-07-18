@@ -167,12 +167,7 @@ etInt16 etUnit_openTestCase(const char* testCaseName) {
 }
 
 void etUnit_closeTestCase(etInt16 id) {
-	etTime time;
-	OrderInfo* info;
-	getTimeFromTarget(&time);
-	etTimeHelpers_subtract(&time, &etUnit_lastTestCaseTime);
-
-	info = getOrderInfo(id);
+	OrderInfo* info = getOrderInfo(id);
 	if(info != NULL){
 		if (info->currentIndex != info->size) {
 			etUnit_handleExpect(id, ET_FALSE, "EXPECT_ORDER was not completed", NULL, NULL, 0, 0);
@@ -180,6 +175,9 @@ void etUnit_closeTestCase(etInt16 id) {
 	}
 
 	if (etUnit_reportfile != NULL) {
+		etTime time;
+		getTimeFromTarget(&time);
+		etTimeHelpers_subtract(&time, &etUnit_lastTestCaseTime);
 		etLogger_fprintf(etUnit_reportfile, "tc end %d: %d\n", id, etTimeHelpers_convertToMSec(&time));
 	}
 }
