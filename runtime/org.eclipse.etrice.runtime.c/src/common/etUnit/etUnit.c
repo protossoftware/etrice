@@ -35,6 +35,11 @@ static etBool etUnit_testcaseSuccess[ETUNIT_MAX_TEST_CASES];
 
 /* time measuring */
 static etTime etUnit_startTime;
+static etTime etUnit_lastTestCaseTime;
+
+etInt16 getCurrentEtUnitId() {
+	return etUnit_nextCaseId - 1;
+}
 
 /* order */
 #define ETUNIT_ORDER_MAX	16
@@ -155,6 +160,7 @@ etInt16 etUnit_openTestCase(const char* testCaseName) {
 	}
 	if (etUnit_reportfile != NULL) {
 		etLogger_fprintf(etUnit_reportfile, "tc start %d: %s\n", caseId, testCaseName);
+		getTimeFromTarget(&etUnit_lastTestCaseTime);
 	}
 
 	return caseId;
@@ -164,7 +170,7 @@ void etUnit_closeTestCase(etInt16 id) {
 	etTime time;
 	OrderInfo* info;
 	getTimeFromTarget(&time);
-	etTimeHelpers_subtract(&time, &etUnit_startTime);
+	etTimeHelpers_subtract(&time, &etUnit_lastTestCaseTime);
 
 	info = getOrderInfo(id);
 	if(info != NULL){
