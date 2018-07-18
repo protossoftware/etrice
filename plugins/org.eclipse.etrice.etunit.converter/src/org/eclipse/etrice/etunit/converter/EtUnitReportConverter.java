@@ -7,20 +7,26 @@
  * 
  * CONTRIBUTORS:
  * 		Henrik Rentz-Reichert (initial contribution)
+ * 		Juergen Haug - added support for in-memory conversion
  * 
  *******************************************************************************/
 
 package org.eclipse.etrice.etunit.converter;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.math.BigDecimal;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
+import java.util.UUID;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
@@ -42,8 +48,8 @@ import org.eclipse.etrice.etunit.converter.Etunit.util.EtunitResourceFactoryImpl
  *
  */
 public class EtUnitReportConverter {
-
-	protected static class Options {
+	
+	public static class BaseOptions {
 		private boolean combinedResults = false;
 		private boolean replaceSuiteName = false;
 		private boolean prefixSuiteName = false;
@@ -51,7 +57,9 @@ public class EtUnitReportConverter {
 		private String combinedFile = null;
 		private String suiteName = null;
 		private String suiteNamePrefix = null;
-		private ArrayList<String> files = new ArrayList<String>();
+		
+		/** check that etUnit header line is present */
+		private boolean checkEtUnitHeader = true;
 		
 		public boolean isCombinedResults() {
 			return combinedResults;
@@ -108,7 +116,23 @@ public class EtUnitReportConverter {
 		public void setSuiteNamePrefix(String suiteNamePrefix) {
 			this.suiteNamePrefix = suiteNamePrefix;
 		}
-
+		
+		public boolean needCombined() {
+			return combinedResults;
+		}
+		
+		public boolean checkEtUnitHeader() {
+			return checkEtUnitHeader;
+		}
+		
+		public void setCheckEtUnitHeader(boolean checkEtUnitHeader) {
+			this.checkEtUnitHeader = checkEtUnitHeader;
+		}
+	}
+	
+	protected static class Options extends BaseOptions {
+		private ArrayList<String> files = new ArrayList<String>();
+			
 		public ArrayList<String> getFiles() {
 			return files;
 		}
@@ -117,10 +141,6 @@ public class EtUnitReportConverter {
 			this.files = files;
 		}
 		
-		public boolean needCombined() {
-			return combinedResults;
-		}
-
 		public boolean parseOptions(String[] args) {
 			for (int i=0; i<args.length; ++i) {
 				if (args[i].equals(OPTION_COMBINED)) {
@@ -218,14 +238,14 @@ public class EtUnitReportConverter {
 			);
 	}
 	
-	/**
-	 * @param args
-	 */
 	public static void main(String[] args) {
 		int result = new EtUnitReportConverter().run(args);
 		System.exit(result);
 	}
 
+	/**
+	 * Can be used for testing.
+	 */
 	public int run(String[] args) {
 		// check options and create file list
 		Options options = parseOptions(args);
@@ -238,13 +258,46 @@ public class EtUnitReportConverter {
 		rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xml", new EtunitResourceFactoryImpl());
 
 		boolean success = saveReports(options, rs);
-		if (!saveCombinedReport(options, rs))
-			success = false;
+		if (options.needCombined()) {
+			success &= saveCombined(createCombinedReport(rs), options, rs);
+		}
 		
-		if (!success)
-			return 2;
+		return (success) ? 0 : 2;
+	}
+	
+	/**
+	 *  In-memory conversion. Returns a list of all successful converted reports.
+	 *  TODO don't report errors on stderr.
+	 */
+	public List<String> convert(BaseOptions options, Iterable<InputStream> etUnitStreams) {
+		ResourceSet rs = new ResourceSetImpl();
+		rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xml", new EtunitResourceFactoryImpl());
 		
-		return 0;
+		boolean success = saveReports(options, etUnitStreams, rs);
+		final List<Resource> resources = new ArrayList<Resource>();
+		if (options.needCombined()) {
+			DocumentRoot root = createCombinedReport(rs);
+			Resource res = rs.createResource(URI.createURI("dummy:/" + UUID.randomUUID() + ".xml"));
+			res.getContents().add(root);
+			resources.add(res);
+		} else {
+			resources.addAll(rs.getResources());
+		}
+		
+		List<String> result = new ArrayList<String>();
+		for(Resource res : resources) {
+			ByteArrayOutputStream output = new ByteArrayOutputStream();
+			try {
+				res.save(output, null);
+				result.add(output.toString(StandardCharsets.UTF_8.name()));
+			} catch (IOException e) {
+				System.err.println("Error: could not serialize report");
+				e.printStackTrace();
+				success = false;
+			}
+		}
+		
+		return (success) ? result : Collections.emptyList();
 	}
 	
 	/**
@@ -261,22 +314,19 @@ public class EtUnitReportConverter {
 		return options;
 	}
 
-	protected boolean saveCombinedReport(Options options, ResourceSet rs) {
-		if (options.needCombined()) {
-			DocumentRoot root = EtunitFactory.eINSTANCE.createDocumentRoot();
-			TestsuitesType testsuites = EtunitFactory.eINSTANCE.createTestsuitesType();
-			root.setTestsuites(testsuites);
+	private DocumentRoot createCombinedReport(ResourceSet rs) {
+		DocumentRoot root = EtunitFactory.eINSTANCE.createDocumentRoot();
+		TestsuitesType testsuites = EtunitFactory.eINSTANCE.createTestsuitesType();
+		root.setTestsuites(testsuites);
 
-			for (Resource res : rs.getResources()) {
-				DocumentRoot r = (DocumentRoot) res.getContents().get(0);
-				testsuites.getTestsuite().addAll(r.getTestsuites().getTestsuite());
-			}
-			
-			computeAndSetInfo(testsuites);
-			
-			return saveCombined(root, options, rs);
+		for (Resource res : rs.getResources()) {
+			DocumentRoot r = (DocumentRoot) res.getContents().get(0);
+			testsuites.getTestsuite().addAll(r.getTestsuites().getTestsuite());
 		}
-		return true;
+		
+		computeAndSetInfo(testsuites);
+		
+		return root;
 	}
 
 	protected boolean saveCombined(DocumentRoot root, Options options, ResourceSet rs) {
@@ -286,38 +336,26 @@ public class EtUnitReportConverter {
 		}
 		return true;
 	}
-
+	
+	protected boolean saveReports(BaseOptions options, Iterable<InputStream> etUnitStreams, ResourceSet rs) {
+		boolean success = true;
+		for (InputStream stream : etUnitStreams) {
+			DocumentRoot root = applyOptions(options, createParseTree(stream, options));
+			if((success &= root != null)) {
+				Resource resource = rs.createResource(URI.createURI("dummy:/" + UUID.randomUUID() + ".xml"));
+				resource.getContents().add(root);
+			}
+		}
+		return success;
+	}
+	
 	protected boolean saveReports(Options options, ResourceSet rs) {
 		boolean success = true;
 		for (String file : options.getFiles()) {
 			File report = new File(file);
 			if (report.exists()) {
-				DocumentRoot root = createParseTree(report);
-				if (root!=null && options.isReplaceSuiteName()) {
-					if (root.getTestsuites()!=null) {
-						if (root.getTestsuites().getTestsuite().size()==1) {
-							root.getTestsuites().getTestsuite().get(0).setName(options.getSuiteName());
-						}
-						else {
-							int i=0;
-							for (TestsuiteType suite : root.getTestsuites().getTestsuite()) {
-								suite.setName(options.getSuiteName()+i);
-								++i;
-							}
-						}
-					}
-				}
-				if(root != null && options.isPrefixSuiteName()) {
-					if(root.getTestsuites() != null) {
-						for(TestsuiteType suite : root.getTestsuites().getTestsuite()) {
-							suite.setName(options.getSuiteNamePrefix() + suite.getName());
-						}
-					}
-				}
-				if (root!=null) {
-					if (!saveJUnitReport(root, report, rs, !options.isCombinedResults()))
-						success = false;
-				}
+				DocumentRoot root = applyOptions(options, createParseTree(report, options));
+				success &= root != null && saveJUnitReport(root, report, rs, !options.isCombinedResults());
 			}
 			else {
 				System.err.println("Error: report "+file+" does not exist");
@@ -326,21 +364,31 @@ public class EtUnitReportConverter {
 		}
 		return success;
 	}
-
-	private void computeAndSetInfo(TestsuitesType testsuites) {
-		for (TestsuiteType ts : testsuites.getTestsuite()) {
-			int failures = 0;
-			BigDecimal time = new BigDecimal(0);
-			for (TestcaseType tc : ts.getTestcase()) {
-				if (tc.getTime()!=null)
-					time = time.add(tc.getTime());
-				if (tc.getFailure()!=null)
-					++failures;
+	
+	protected DocumentRoot applyOptions(BaseOptions options, DocumentRoot root) {
+		if (root!=null && options.isReplaceSuiteName()) {
+			if (root.getTestsuites()!=null) {
+				if (root.getTestsuites().getTestsuite().size()==1) {
+					root.getTestsuites().getTestsuite().get(0).setName(options.getSuiteName());
+				}
+				else {
+					int i=0;
+					for (TestsuiteType suite : root.getTestsuites().getTestsuite()) {
+						suite.setName(options.getSuiteName()+i);
+						++i;
+					}
+				}
 			}
-			ts.setTests(ts.getTestcase().size());
-			ts.setFailures(failures);
-			ts.setTime(time);
 		}
+		if(root != null && options.isPrefixSuiteName()) {
+			if(root.getTestsuites() != null) {
+				for(TestsuiteType suite : root.getTestsuites().getTestsuite()) {
+					suite.setName(options.getSuiteNamePrefix() + suite.getName());
+				}
+			}
+		}
+		
+		return root;
 	}
 
 	private boolean saveJUnitReport(DocumentRoot root, File report, ResourceSet rs, boolean save) {
@@ -362,40 +410,60 @@ public class EtUnitReportConverter {
 		return true;
 	}
 
-	/**
-	 * @param string
-	 * @return
-	 */
-	private DocumentRoot createParseTree(File report) {
+	private DocumentRoot createParseTree(File report, BaseOptions options) {
 		
-		int count = 0;
+		FileReader input = null;	
 		try {
-			FileReader input = new FileReader(report.toString());
+			input = new FileReader(report.toString());
 			BufferedReader bufRead = new BufferedReader(input);
+			return createParseTree(bufRead, options);
+		} catch (IOException e) {
+			System.err.println("Error: file "+report+" could not be read ("+e.getMessage()+")");
+			e.printStackTrace();
+		} 
+		finally {			
+			try {			
+				if(input != null)
+					input.close();
+			} catch (IOException e) {}
+		}
 
+		return null;
+	}
+	
+	private DocumentRoot createParseTree(InputStream etUnitStream, BaseOptions options) {
+		try {
+			return createParseTree(new BufferedReader(new InputStreamReader(etUnitStream)), options);
+		} catch (IOException e) {
+			return null;
+		}
+	}
+	
+	private DocumentRoot createParseTree(BufferedReader bufRead, BaseOptions options) throws IOException {
+		int count = 0;
+		
+		try {		
+			if(options.checkEtUnitHeader) {
+				String line = bufRead.readLine();
+				++count;
+				if (line==null) {
+					System.err.println("Error: etUnit report is empty - no etunit file");
+					return null;
+				}
+				if (!line.equals("etUnit report")) {
+					System.err.println("Error: in etUnt report line "+line+" is missing header line - no etunit file");
+					return null;
+				}
+			}
+			
 			HashMap<Integer, TestcaseType> id2case = new HashMap<Integer, TestcaseType>();
 			TestsuiteType currentSuite = null;
-			String line = bufRead.readLine();
-			++count;
-			if (line==null) {
-				System.err.println("Error: file "+report+", is empty - no etunit file");
-				bufRead.close();
-				input.close();
-				return null;
-			}
-			if (!line.equals("etUnit report")) {
-				System.err.println("Error: file "+report+", line "+line+" is missing header line - no etunit file");
-				bufRead.close();
-				input.close();
-				return null;
-			}
-
 			DocumentRoot root = EtunitFactory.eINSTANCE.createDocumentRoot();
 			TestsuitesType testsuites = EtunitFactory.eINSTANCE.createTestsuitesType();
 			root.setTestsuites(testsuites);
 			
-			line = bufRead.readLine();
-			++count;
+			String line = bufRead.readLine();
+			++count;		
 			while (line!=null) {
 				if (line.startsWith(TS_START)) {
 					currentSuite = EtunitFactory.eINSTANCE.createTestsuiteType();
@@ -415,9 +483,7 @@ public class EtUnitReportConverter {
 					int id = Integer.parseInt(line.substring(8, pos));
 					TestcaseType tc = id2case.get(id);
 					if (tc==null) {
-						System.err.println("Error: in file "+report+", line "+count+" - unknown test case id");
-						bufRead.close();
-						input.close();
+						System.err.println("Error: in etUnit report line "+count+" - unknown test case id");
 						return null;
 					}
 					FailureType fail = EtunitFactory.eINSTANCE.createFailureType();
@@ -445,9 +511,7 @@ public class EtUnitReportConverter {
 					int time = Integer.parseInt(line.substring(pos+2));
 					TestcaseType tc = id2case.get(id);
 					if (tc==null) {
-						System.err.println("Error: in file "+report+", line "+count+" - unknown test case id");
-						bufRead.close();
-						input.close();
+						System.err.println("Error: in etUnit report line "+count+" - unknown test case id");
 						return null;
 					}
 					// time was measured in ms. Convert to s
@@ -457,22 +521,29 @@ public class EtUnitReportConverter {
 				++count;
 			}
 			
-			bufRead.close();
-			
 			computeAndSetInfo(testsuites);
 			
 			return root;
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-			System.err.println("Error: file "+report+" could not be read ("+e.getMessage()+")");
-		} catch (IOException e) {
-			System.err.println("Error: file "+report+" could not be read ("+e.getMessage()+")");
-			e.printStackTrace();
 		} catch (NumberFormatException e) {
-			System.err.println("Error: in file "+report+", line "+count+" - could not read number");
+			System.err.println("Error: in etUnit report line "+count+" - could not read number");
+			return null;
+		}			
+	}
+	
+	private void computeAndSetInfo(TestsuitesType testsuites) {
+		for (TestsuiteType ts : testsuites.getTestsuite()) {
+			int failures = 0;
+			BigDecimal time = new BigDecimal(0);
+			for (TestcaseType tc : ts.getTestcase()) {
+				if (tc.getTime()!=null)
+					time = time.add(tc.getTime());
+				if (tc.getFailure()!=null)
+					++failures;
+			}
+			ts.setTests(ts.getTestcase().size());
+			ts.setFailures(failures);
+			ts.setTime(time);
 		}
-		
-		return null;
 	}
 
 	private void doEMFRegistration() {

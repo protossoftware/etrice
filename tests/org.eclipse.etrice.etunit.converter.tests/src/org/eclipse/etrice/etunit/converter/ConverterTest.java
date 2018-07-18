@@ -12,14 +12,24 @@
 
 package org.eclipse.etrice.etunit.converter;
 
+import static org.junit.Assert.assertEquals;
+
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.etrice.etunit.converter.EtUnitReportConverter.BaseOptions;
 import org.eclipse.etrice.etunit.converter.tests.Activator;
 import org.junit.Before;
 import org.junit.Test;
+
+import com.google.common.base.Charsets;
+import com.google.common.io.Files;
 
 /**
  * @author Henrik Rentz-Reichert
@@ -28,6 +38,7 @@ import org.junit.Test;
 public class ConverterTest {
 
 	private String basePath;
+	private String expectsPath;
 
 	@Before
 	public void prepare() {
@@ -38,16 +49,26 @@ public class ConverterTest {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		try {
+			URL modelsDir = Activator.getInstance().getBundle().getEntry("expects");
+			URL fileURL = FileLocator.toFileURL(modelsDir);
+			expectsPath = fileURL.getFile();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Test
-	public void testConversion() {
+	public void testConversion() throws IOException {
 		ArrayList<String> args = new ArrayList<String>();
 		args.add(basePath+"report1.etu");
 		
 		String[] arguments = new String[args.size()];
-		EtUnitReportConverter.main(args.toArray(arguments));
+		new EtUnitReportConverter().run(args.toArray(arguments));
+		
+		assertEquals(Files.toString(new File(expectsPath+"report1.xml"), Charsets.UTF_8), Files.toString(new File(basePath+"report1.xml"), Charsets.UTF_8));
 	}
+	
 
 	@Test
 	public void testDoubleConversion() {
@@ -56,7 +77,7 @@ public class ConverterTest {
 		args.add(basePath+"report2.etu");
 		
 		String[] arguments = new String[args.size()];
-		EtUnitReportConverter.main(args.toArray(arguments));
+		new EtUnitReportConverter().run(args.toArray(arguments));
 	}
 
 	@Test
@@ -68,7 +89,7 @@ public class ConverterTest {
 		args.add(basePath+"combined.xml");
 		
 		String[] arguments = new String[args.size()];
-		EtUnitReportConverter.main(args.toArray(arguments));
+		new EtUnitReportConverter().run(args.toArray(arguments));
 	}
 
 	@Test
@@ -80,7 +101,7 @@ public class ConverterTest {
 		args.add(basePath+"only_combined.xml");
 		
 		String[] arguments = new String[args.size()];
-		EtUnitReportConverter.main(args.toArray(arguments));
+		new EtUnitReportConverter().run(args.toArray(arguments));
 	}
 
 	@Test
@@ -91,7 +112,7 @@ public class ConverterTest {
 		args.add("new.suite.name");
 		
 		String[] arguments = new String[args.size()];
-		EtUnitReportConverter.main(args.toArray(arguments));
+		new EtUnitReportConverter().run(args.toArray(arguments));
 	}
 
 	@Test
@@ -100,6 +121,16 @@ public class ConverterTest {
 		args.add(basePath+"report6.etu");
 		
 		String[] arguments = new String[args.size()];
-		EtUnitReportConverter.main(args.toArray(arguments));
+		new EtUnitReportConverter().run(args.toArray(arguments));
+	}
+	
+	@Test
+	public void testInMemory() throws IOException {
+		List<InputStream> streams = new ArrayList<InputStream>();
+		streams.add(new FileInputStream(new File(basePath+"report1.etu")));
+		
+		List<String> results = new EtUnitReportConverter().convert(new BaseOptions(), streams);
+		assertEquals(1,  results.size());
+		assertEquals(Files.toString(new File(expectsPath+"report1.xml"), Charsets.UTF_8), results.get(0));
 	}
 }
