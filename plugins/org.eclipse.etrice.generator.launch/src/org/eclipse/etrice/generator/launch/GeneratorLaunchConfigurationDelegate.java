@@ -260,4 +260,10 @@ public abstract class GeneratorLaunchConfigurationDelegate extends AbstractJavaL
 	 * @return the name of the console for the generator output
 	 */
 	protected abstract String getConsoleName();
+	
+	@Override
+	public boolean buildForLaunch(ILaunchConfiguration configuration, String mode, IProgressMonitor monitor) throws CoreException {
+		// never build before launch
+		return false;
+	}
 }
