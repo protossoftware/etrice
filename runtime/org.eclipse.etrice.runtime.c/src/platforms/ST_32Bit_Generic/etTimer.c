@@ -21,7 +21,7 @@ etTimer * singleThreadedTimer = 0;
 void etTimer_construct(etTimer* self, etTime* timerInterval, etTimerFunction timerFunction, void* timerFunctionData){
 	ET_MSC_LOGGER_SYNC_ENTRY("etTimer", "construct")
 	{
-		self->osTimerData = NULL;
+		self->osTimerData = 0;
 		self->timerInterval.sec = timerInterval->sec;
 		self->timerInterval.nSec = timerInterval->nSec;
 		self->timerFunction = timerFunction;
