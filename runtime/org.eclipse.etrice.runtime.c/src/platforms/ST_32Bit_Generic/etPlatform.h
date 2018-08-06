@@ -8,6 +8,4 @@
 #ifndef ETPLATFORM_H_
 #define ETPLATFORM_H_
 
-void initHw(void);
-
 #endif /* ETPLATFORM_H_ */
