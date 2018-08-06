@@ -13,8 +13,3 @@
 #include "etPlatform.h"
 #include "etDatatypes.h"
 #include "osal/etTime.h"
-
-void initHw(void) {
-
-	etTime_init();
-}
