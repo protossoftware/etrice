@@ -22,17 +22,19 @@
 /* noThread contains the pointer to the one and only execute function */
 /* in the single threaded environment */
 extern etThread * noThread;
-/*void etThread_execute(etThread* self); */
+
+extern void etTimeInit(void);
+extern void etThread_execute(etThread* self);
 
 /* must be implemented projectspecific */
 extern void etSingleThreadedProjectSpecificUserEntry();
+
 void etUserEntry(void){
 
 	etTimeInit();
 	etSingleThreadedProjectSpecificUserEntry();
 /*	DAVE_Init(); */
 /*	DAVE_InstallTickHandler(); */
-/*	initHw(); */
 }
 
 void etUserPreRun(void){
