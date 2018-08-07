@@ -130,7 +130,7 @@ public class EtUnitReportConverter {
 		}
 	}
 	
-	protected static class Options extends BaseOptions {
+	public static class Options extends BaseOptions {
 		private ArrayList<String> files = new ArrayList<String>();
 			
 		public ArrayList<String> getFiles() {
