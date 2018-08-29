@@ -1,0 +1,4 @@
+dependencies {
+	compile "commons-io:commons-io:$versions.commons_io"
+	compile "org.eclipse.xtext:org.eclipse.xtext:$versions.xtext"
+}

@@ -4,6 +4,7 @@ gerritKeys.pub
 *._trace
 *.xtendbin
 language.settings.xml
+bin/
 target/
 xtend-gen/
 build/

@@ -33,6 +33,7 @@
 		<module>plugins/org.eclipse.etrice.etunit.converter</module>
 		<module>plugins/org.eclipse.etrice.expressions.ui</module>
 		<module>plugins/org.eclipse.etrice.generator</module>
+		<module>plugins/org.eclipse.etrice.generator.base</module>
 		<module>plugins/org.eclipse.etrice.generator.c</module>
 		<module>plugins/org.eclipse.etrice.generator.config</module>
 		<module>plugins/org.eclipse.etrice.generator.cpp</module>
