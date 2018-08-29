@@ -14,7 +14,7 @@ package my.etrice.generator.launch;
 
 import my.etrice.generator.DerivedGenerator;
 
-import org.eclipse.etrice.generator.fsm.base.ILineOutput;
+import org.eclipse.etrice.generator.base.io.ILineOutput;
 import org.eclipse.etrice.generator.launch.java.JavaGeneratorLaunchConfigurationDelegate;
 
 /**
@@ -40,8 +40,7 @@ public class DerivedGeneratorLaunchConfigurationDelegate extends
 	 */
 	protected void runGenerator(String[] args, ILineOutput out) {
 		DerivedGenerator.setOutput(out);
-		DerivedGenerator.setTerminateOnError(false);
-		DerivedGenerator.main(args);
+		DerivedGenerator.run(args);
 	}
 
 }

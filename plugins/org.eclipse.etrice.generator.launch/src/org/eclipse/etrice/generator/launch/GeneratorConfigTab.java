@@ -20,7 +20,7 @@ import org.eclipse.core.variables.VariablesPlugin;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.debug.ui.AbstractLaunchConfigurationTab;
-import org.eclipse.etrice.generator.base.AbstractGenerator;
+import org.eclipse.etrice.generator.base.AbstractGeneratorOptions;
 import org.eclipse.etrice.generator.ui.preferences.PreferenceConstants;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
@@ -338,7 +338,7 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 			genModelPath.setEnabled(save);
 			browsePath.setEnabled(save);
 			genModelPath.setText(configuration.getAttribute(GEN_MODEL_PATH, ""));
-			mainMethodName.setText(configuration.getAttribute(MAIN_METHOD_NAME, AbstractGenerator.DEFAULT_MAIN_NAME));
+			mainMethodName.setText(configuration.getAttribute(MAIN_METHOD_NAME, AbstractGeneratorOptions.MAIN_NAME.getDefaultValue()));
 			boolean genDocu = configuration.getAttribute(GEN_DOCUMENTATION, false);
 			if (configuration.getAttribute(GEN_INSTANCE_DIAGRAM, false))
 				genDocu = true;

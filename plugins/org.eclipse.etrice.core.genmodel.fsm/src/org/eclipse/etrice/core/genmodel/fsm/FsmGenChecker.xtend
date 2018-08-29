@@ -19,6 +19,7 @@ import org.eclipse.etrice.core.genmodel.fsm.fsmgen.Link
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.Node
 import org.eclipse.etrice.core.fsm.fSM.TrPoint
 import org.eclipse.etrice.core.fsm.fSM.State
+import org.eclipse.etrice.generator.base.logging.ILogger
 
 class FsmGenChecker {
 	

@@ -19,17 +19,18 @@ import org.eclipse.etrice.core.fsm.fSM.ComponentCommunicationType
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass
 import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.etrice.core.genmodel.fsm.FsmGenExtensions
-import org.eclipse.etrice.core.genmodel.fsm.ILogger
 import org.eclipse.etrice.core.room.CommunicationType
 import org.eclipse.etrice.core.room.Operation
 import org.eclipse.etrice.core.room.ProtocolClass
 import org.eclipse.etrice.core.room.RoomModel
 import org.eclipse.etrice.generator.c.Main
-import org.eclipse.etrice.generator.fsm.base.IGeneratorFileIo
 import org.eclipse.etrice.generator.generic.GenericActorClassGenerator
 import org.eclipse.etrice.generator.generic.ILanguageExtension
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
+import org.eclipse.etrice.generator.base.io.IGeneratorFileIO
+import org.eclipse.etrice.generator.c.setup.GeneratorOptionsHelper
+import org.eclipse.etrice.generator.base.logging.ILogger
 
 @Singleton
 class ActorClassGen extends GenericActorClassGenerator {
@@ -38,9 +39,10 @@ class ActorClassGen extends GenericActorClassGenerator {
 	@Inject protected extension CExtensions
 	@Inject protected extension ProcedureHelpers
 	@Inject protected extension StateMachineGen
+	@Inject protected extension GeneratorOptionsHelper
 
 	@Inject protected ILanguageExtension langExt
-	@Inject protected IGeneratorFileIo fileIO
+	@Inject protected IGeneratorFileIO fileIO
 	@Inject protected ILogger logger
 
 	def doGenerate(Root root) {

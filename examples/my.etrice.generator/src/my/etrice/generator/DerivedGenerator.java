@@ -26,7 +26,6 @@ public class DerivedGenerator extends Main {
 
 	public static void main(String[] args) {
 		int ret = createAndRunGenerator(new DerivedGeneratorModule(), args);
-		if (isTerminateOnError() && ret!=GENERATOR_OK)
-			System.exit(ret);
+		System.exit(ret);
 	}
 }

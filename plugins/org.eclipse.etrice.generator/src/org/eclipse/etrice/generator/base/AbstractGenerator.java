@@ -14,21 +14,23 @@ package org.eclipse.etrice.generator.base;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
-import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.etrice.core.common.scoping.ModelLocatorUriResolver;
+import org.eclipse.etrice.core.ConfigStandaloneSetup;
+import org.eclipse.etrice.core.RoomStandaloneSetup;
+import org.eclipse.etrice.core.etmap.ETMapStandaloneSetup;
+import org.eclipse.etrice.core.etphys.ETPhysStandaloneSetup;
 import org.eclipse.etrice.core.fsm.fSM.DetailCode;
+import org.eclipse.etrice.core.genmodel.SetupGenmodel;
 import org.eclipse.etrice.core.genmodel.builder.GeneratorModelBuilder;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
@@ -37,24 +39,16 @@ import org.eclipse.etrice.core.genmodel.fsm.IDiagnostician;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RoomModel;
-import org.eclipse.etrice.generator.fsm.base.ILineOutput;
-import org.eclipse.etrice.generator.fsm.base.ILineOutputLogger;
-import org.eclipse.etrice.generator.fsm.base.IncrementalGenerationFileIo;
-import org.eclipse.etrice.generator.fsm.base.StdLineOutput;
+import org.eclipse.etrice.generator.base.args.Arguments;
+import org.eclipse.etrice.generator.base.io.IGeneratorFileIO;
+import org.eclipse.etrice.generator.base.io.ILineOutput;
+import org.eclipse.etrice.generator.base.io.LineOutput;
+import org.eclipse.etrice.generator.base.logging.ILogger;
 import org.eclipse.etrice.generator.fsm.generic.IDetailCodeTranslator;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.etrice.generator.generic.TestInstanceCreator;
-import org.eclipse.xtext.diagnostics.Severity;
-import org.eclipse.xtext.util.CancelIndicator;
-import org.eclipse.xtext.validation.CheckMode;
-import org.eclipse.xtext.validation.IResourceValidator;
-import org.eclipse.xtext.validation.Issue;
-
-import com.google.inject.Guice;
 import com.google.inject.Inject;
-import com.google.inject.Injector;
 import com.google.inject.Module;
-import com.google.inject.Provider;
 
 /**
  * A base class for generators of ROOM models.
@@ -71,81 +65,23 @@ import com.google.inject.Provider;
  * @author Henrik Rentz-Reichert
  *
  */
-public abstract class AbstractGenerator implements IDetailCodeTranslator {
-	
-	public static final String OPTION_LIB = "-lib";
-	public static final String OPTION_NOEXIT = "-noexit";
-	public static final String OPTION_DOCUMENTATION = "-genDocu";
-	public static final String OPTION_SAVE_GEN_MODEL = "-saveGenModel";
-	public static final String OPTION_MAIN_NAME = "-mainName";
-	public static final String DEFAULT_MAIN_NAME = "main";
-	public static final String OPTION_GEN_INCREMENTAL = "-inc";
-	public static final String OPTION_GEN_DIR = "-genDir";
-	public static final String OPTION_GEN_INFO_DIR = "-genInfoDir";
-	public static final String OPTION_GEN_DOC_DIR = "-genDocDir";
-	public static final String OPTION_MSC_INSTR = "-msc_instr";
-	public static final String OPTION_DATA_INSTR = "-data_instr";
-	public static final String OPTION_VERBOSE_RT = "-gen_as_verbose";
-	public static final String OPTION_DEBUG = "-debug";
-	public static final String OPTION_NOTRANSLATE = "-notranslate";
-	public static final String OPTION_HELP = "-help";
+public abstract class AbstractGenerator implements IGenerator, IDetailCodeTranslator {
 
 	/**
 	 * constant used as return value of {@link #runGenerator())}
 	 * @see #GENERATOR_ERROR
 	 */
 	public static final int GENERATOR_OK = 0;
+	
 	/**
 	 * constant used as return value of {@link #runGenerator()}
 	 * @see #GENERATOR_OK
 	 */
 	public static final int GENERATOR_ERROR = 1;
 	
-	private static boolean terminateOnError = true;
+	protected static ILineOutput output = new LineOutput();
 	private static AbstractGenerator instance = null;
-
-	protected static ILineOutput output = new StdLineOutput();
-	private static Injector injector;
-	
-	private HashMap<DetailCode, String> detailcode2string = new HashMap<DetailCode, String>();
-
-	/**
-	 * determines the behavior of the generator on exit
-	 * 
-	 * @param terminateOnError a flag that determines shut down behavior
-	 * (this behavior is implemented in the concrete generator defining <code>main()</code>)
-	 * 
-	 * @see #isTerminateOnError()
-	 */
-	public static void setTerminateOnError(boolean terminateOnError) {
-		AbstractGenerator.terminateOnError = terminateOnError;
-	}
-	
-	/**
-	 * If ran in stand alone mode in a separate JVM e.g. in a makefile then it is desirable to terminate
-	 * the JVM with an error code to let the make program fail.
-	 * 
-	 * <p>
-	 * If ran inside Eclipse we better don't terminate the JVM in case of an error because this
-	 * would also shut down Eclipse.
-	 * </p>
-	 * 
-	 * @return <code>true</code> if the JVM should be terminated on exit with an error code.
-	 */
-	public static boolean isTerminateOnError() {
-		return terminateOnError;
-	}
-
-	/**
-	 * This method can be used to achieve different output behavior: in stand alone mode this might
-	 * be just the console, inside Eclipse this rather would be the console view
-	 * 
-	 * @param out an {@link ILineOutput}
-	 */
-	public static void setOutput(ILineOutput out) {
-		if (out!=null)
-			output = out;
-	}
+	private static Arguments settings = null;
 	
 	/**
 	 * It is assumed (though not enforced) that the generator is a singleton.
@@ -157,242 +93,49 @@ public abstract class AbstractGenerator implements IDetailCodeTranslator {
 	}
 	
 	/**
-	 * The protected constructor is setting the {@link #instance} static member
+	 * The generator settings can also be statically accessed using {@link #getInstance()} followed
+	 * by a call to this method.
+	 * 
+	 * @return the {@link #generatorSettings}
 	 */
-	protected AbstractGenerator() {
-		instance = this;
+	public static Arguments getSettings() {
+		return settings;
 	}
-
+	
+	/**
+	 * This method can be used to achieve different output behavior: in stand alone mode this might
+	 * be just the console, inside Eclipse this rather would be the console view
+	 * 
+	 * @param out an {@link ILineOutput}
+	 */
+	public static void setOutput(ILineOutput out) {
+		if (out != null)
+			output = out;
+	}
+	
 	/**
 	 * creates an instance of the generator and invokes the {@link #runGenerator(String[])} method
 	 * @param generatorModule a Guice module from which the {@link com.google.inject.Injector Injector} is created
 	 * @param args the command line arguments
 	 * @return GENERATOR_OK or GENERATOR_ERROR
 	 */
-	protected static int createAndRunGenerator(Module generatorModule, String[] args) {
-		injector = Guice.createInjector(generatorModule);
-		AbstractGenerator generator = injector.getInstance(AbstractGenerator.class);
-		generator.logger.setOutput(output);
-		
-		if (!generator.parseOptions(args))
-			return GENERATOR_ERROR;
-		
-		return generator.runGenerator();
-	}
-
-	/**
-	 * Initialize {@link GlobalGeneratorSettings} and parse all options by calling
-	 * {@link #parseOption(String, Iterator)}.
-	 * 
-	 * @param args the command line arguments
-	 * @return {@code true} if all options could be parsed successfully
-	 */
-	protected boolean parseOptions(String[] args) {
-		if (args.length == 0) {
-			return usageError("no arguments!");
+	public static int createAndRunGenerator(Module generatorModule, String[] args) {
+		int ret = GENERATOR_OK;
+		GeneratorApplication genAppl = GeneratorApplication.create(generatorModule);
+		try {
+			genAppl.run(args, output);
 		}
-		
-		// default settings
-		RoomExtensions.setDefaultGenDir();
-		RoomExtensions.setDefaultGenInfoDir();
-		RoomExtensions.setDefaultGenDocDir();
-		IncrementalGenerationFileIo.setGenerateIncremental(false);
-		
-		List<String> argList = Arrays.asList(args);
-		for (Iterator<String> it = argList.iterator(); it.hasNext();) {
-			if (!parseOption(it.next(), it))
-				return false;
+		catch(GeneratorException e) {
+			ret = GENERATOR_ERROR;
 		}
-		
-		return true;
-	}
-
-	/**
-	 * This method may be overridden by the concrete generator. After checking options super should be called
-	 * and its return value should be returned.
-	 * 
-	 * <p>
-	 * The following options are recognized
-	 * <ul>
-	 * <li>{@value #OPTION_DEBUG}</li>
-	 * <li>{@value #OPTION_NOTRANSLATE}</li>
-	 * <li>{@value #OPTION_DOCUMENTATION}</li>
-	 * <li>{@value #OPTION_GEN_DIR}</li>
-	 * <li>{@value #OPTION_GEN_DOC_DIR}</li>
-	 * <li>{@value #OPTION_GEN_INCREMENTAL}</li>
-	 * <li>{@value #OPTION_GEN_INFO_DIR}</li>
-	 * <li>{@value #OPTION_LIB}</li>
-	 * <li>{@value #OPTION_MSC_INSTR}</li>
-	 * <li>{@value #OPTION_NOEXIT}</li>
-	 * <li>{@value #OPTION_SAVE_GEN_MODEL}</li>
-	 * <li>{@value #OPTION_MAIN_NAME}</li>
-	 * <li>{@value #OPTION_VERBOSE_RT}</li>
-	 * <li>{@value #OPTION_HELP}</li>
-	 * </ul>
-	 * </p>
-	 * 
-	 * @param arg the current argument
-	 * @param it an iterator to retrieve subsequent arguments
-	 * @return {@code true} if the option was parsed successfully
-	 */
-	protected boolean parseOption(String arg, Iterator<String> it) {
-		if (arg.equals(OPTION_SAVE_GEN_MODEL)) {
-			if (it.hasNext()) {
-				generatorSettings.setGeneratorModelPath(it.next()+"/genmodel.egm");
-			}
-			else {
-				return usageError(OPTION_SAVE_GEN_MODEL+" needs path");
-			}
-		}
-		else if (arg.equals(OPTION_MAIN_NAME)) {
-			if (it.hasNext()) {
-				generatorSettings.setMainMethodName(it.next());
-			}
-			else {
-				return usageError(OPTION_MAIN_NAME+" needs a name for the main method");
-			}
-		}
-		else if (arg.equals(OPTION_GEN_DIR)) {
-			if (it.hasNext()) {
-				RoomExtensions.setGenDir(it.next());
-			}
-			else {
-				return usageError(OPTION_GEN_DIR+" needs directory");
-			}
-		}
-		else if (arg.equals(OPTION_GEN_INFO_DIR)) {
-			if (it.hasNext()) {
-				RoomExtensions.setGenInfoDir(it.next());
-			}
-			else {
-				return usageError(OPTION_GEN_INFO_DIR+" needs directory");
-			}
-		}
-		else if (arg.equals(OPTION_GEN_DOC_DIR)) {
-			if (it.hasNext()) {
-				RoomExtensions.setGenDocDir(it.next());
-			}
-			else {
-				return usageError(OPTION_GEN_DOC_DIR+" needs directory");
-			}
-		}
-		else if (arg.equals(OPTION_GEN_INCREMENTAL)) {
-			IncrementalGenerationFileIo.setGenerateIncremental(true);
-		}
-		else if (arg.equals(OPTION_DOCUMENTATION)) {
-			generatorSettings.setGenerateDocumentation(true);
-		}
-		else if (arg.equals(OPTION_LIB)) {
-			generatorSettings.setGenerateAsLibrary(true);
-		}
-		else if (arg.equals(OPTION_NOEXIT)) {
-			setTerminateOnError(false);
-		}
-		else if (arg.equals(OPTION_MSC_INSTR)) {
-			generatorSettings.setGenerateMSCInstrumentation(true);
-		}
-		else if (arg.equals(OPTION_DATA_INSTR)) {
-			generatorSettings.setGenerateDataInstrumentation(true);
-		}
-		else if (arg.equals(OPTION_NOTRANSLATE)) {
-			generatorSettings.setNoTranslation(true);
-		}
-		else if (arg.equals(OPTION_VERBOSE_RT)) {
-			generatorSettings.setGenerateWithVerboseOutput(true);
-		}
-		else if (arg.equals(OPTION_DEBUG)) {
-			generatorSettings.setDebugMode(true);
-		}
-		else if (arg.equals(OPTION_HELP)) {
-			printUsage();
-			return false;
-		}
-		else if (arg.startsWith("-")) {
-			return usageError("unrecognized option '"+arg+"'");
-		}
-		else if(!arg.isEmpty()){
-			generatorSettings.getInputModelURIs().add(arg);
-		}
-		
-		return true;
-	}
-
-	/**
-	 * This method logs an error followed by a call to {@link #printUsage()}.
-	 * 
-	 * @param text the error text to be shown
-	 * @return {@code false}
-	 */
-	protected boolean usageError(String text) {
-		logger.logError(this.getClass().getName() + " - aborting: " + text, null);
-		printUsage();
-		return false;
-	}
-
-	/**
-	 * This method should show all possible command line options together with a
-	 * description. It is supposed to use {@link #getCommonOptions()} and
-	 * {@link #getCommonOptionDescriptions()}.
-	 */
-	protected abstract void printUsage();
-
-	protected String getCommonOptions() {
-		return " ["+OPTION_SAVE_GEN_MODEL+" <genmodel path>]"
-				+" ["+OPTION_DOCUMENTATION+"]"
-				+" ["+OPTION_LIB+"]"
-				+" ["+OPTION_NOEXIT+"]"
-				+" ["+OPTION_SAVE_GEN_MODEL+" <genmodel path>]"
-				+" ["+OPTION_GEN_INCREMENTAL
-				+" ["+OPTION_GEN_DIR+" <generation directory>]"
-				+" ["+OPTION_GEN_INFO_DIR+" <generation info directory>]"
-				+" ["+OPTION_GEN_DOC_DIR+" <gen documentation directory>]"
-				+" ["+OPTION_DEBUG+"]"
-				+" ["+OPTION_MSC_INSTR+"]"
-				+" ["+OPTION_VERBOSE_RT+"]"
-				+" ["+OPTION_HELP+"]"
-				;
+		return ret;
 	}
 	
-	protected String getCommonOptionDescriptions() {
-		return
-			 "      <list of model file paths>         # model file paths may be specified as\n"
-			+"                                         # e.g. C:\\path\\to\\model\\mymodel.room\n"
-			+"      -genDocu                           # if specified documentation is created\n"
-			+"      -lib                               # if specified all classes are generated and no instances\n"
-			+"      -noexit                            # if specified the JVM is not exited\n"
-			+"      -saveGenModel <genmodel path>      # if specified the generator model will be saved to this location\n"
-			+"      -inc                               # if specified the generation is incremental\n"
-			+"      -genDir <generation directory>     # the directory for generated files\n"
-			+"      -genInfoDir <generation info dir>  # the directory for generated info files\n"
-			+"      -genDocDir <gen documentation dir> # the directory for generated documentation files\n"
-			+"      -debug                             # if specified create debug output\n"
-			+"      -msc_instr                         # generate instrumentation for MSC generation\n"
-			+"      -gen_as_verbose                    # generate instrumentation for verbose console output\n"
-			+"      -help                              # display this help text\n"
-			;
-	}
-	
-	/**
-	 * Provides access to the Guice injector of the generator.
-	 * This is useful if classes with injected dependencies are instantiated manually.
-	 * 
-	 * @return the Guice {@link com.google.inject.Injector Injector}
-	 */
-	public static Injector getInjector() {
-		return injector;
-	}
-	
-	/**
-	 * The injected resource set provider
-	 */
-	@Inject
-	protected Provider<ResourceSet> resourceSetProvider;
-
 	/**
 	 * The injected logger
 	 */
 	@Inject
-	protected ILineOutputLogger logger;
+	protected ILogger logger;
 	
 	/**
 	 * The injected diagnostician
@@ -401,60 +144,89 @@ public abstract class AbstractGenerator implements IDetailCodeTranslator {
 	protected IDiagnostician diagnostician;
 	
 	/**
-	 * The injected platform relative URI resolver
-	 */
-	@Inject
-	protected ModelLocatorUriResolver uriResolver;
-	
-	/**
 	 * The injected translation provider
 	 */
 	@Inject
 	protected ITranslationProvider translationProvider;
 	
-	@Inject
-	protected GlobalGeneratorSettings generatorSettings;
+	private HashMap<DetailCode, String> detailcode2string = new HashMap<DetailCode, String>();
+	private ResourceSet resourceSet = null;
 	
-	@Inject
-	protected ModelLoader modelLoader;
+	/**
+	 * The protected constructor is setting the {@link #instance} static member
+	 */
+	protected AbstractGenerator() {
+		instance = this;
+	}
 	
-	@Inject
-	protected IResourceValidator validator;
+	@Override
+	public void doEMFRegistration() {
+		RoomStandaloneSetup.doSetup();
+		SetupGenmodel.doSetup();
+		ConfigStandaloneSetup.doSetup();
+		ETMapStandaloneSetup.doSetup();
+		ETPhysStandaloneSetup.doSetup();
+	}
+	
+	@Override
+	public void generate(List<Resource> resources, Arguments arguments, IGeneratorFileIO fileIO, ILogger logger) {
+		AbstractGenerator.settings = arguments;
+		RoomExtensions.setGenDir(arguments.get(AbstractGeneratorOptions.GEN_DIR));
+		RoomExtensions.setGenInfoDir(arguments.get(AbstractGeneratorOptions.GEN_INFO_DIR));
+		RoomExtensions.setGenDocDir(arguments.get(AbstractGeneratorOptions.GEN_DOC_DIR));
+		
+		if(resources.isEmpty()) {
+			logger.logError("no input files");
+			logger.logInfo("-- terminating");
+			throw new GeneratorException("can't determine resource set without input files");
+		}
+		resourceSet = resources.get(0).getResourceSet();
+		
+		int ret = runGenerator(resources, arguments);
+		if(ret == GENERATOR_OK) {
+			logger.logInfo("-- finished");
+		}
+		else {
+			logger.logInfo("-- terminating");
+			throw new GeneratorException("generator error");
+		}
+	}
+	
+	/**
+	 * abstract method which is finally called by {@link #createAndRunGenerator(Module, String[])}
+	 * @param resources a list of the main models
+	 * @param arguments the generator arguments
+	 * @return GENERATOR_OK or GENERATOR_ERROR
+	 */
+	protected abstract int runGenerator(List<Resource> resources, Arguments arguments);
 
 	/**
 	 * This resource set combines all resources processed by the generator
 	 * @return the resource set for the input models
 	 */
 	protected ResourceSet getResourceSet() {
-		return modelLoader.getResourceSet();
+		return resourceSet;
 	}
 
 	/**
-	 * setup the ROOM core model plug-in and create a validator using injection
-	 */
-	protected void setupRoomModel() {
-		if (!EMFPlugin.IS_ECLIPSE_RUNNING)
-			new org.eclipse.etrice.core.RoomStandaloneSetup().createInjectorAndDoEMFRegistration();
-		
-		org.eclipse.etrice.core.genmodel.SetupGenmodel.doSetup();
-	}
-
-	/**
-	 * @param genModelPath path to store the generator model (not stored if {@code null})
-	 * 
+	 * @param resources the list of models
+	 * @param arguments the generator arguments
 	 * @return the {@link Root} object of the generator model (is added to a new Resource also)
 	 */
-	protected Root createGeneratorModel(boolean asLibrary, String genModelPath) {
+	protected Root createGeneratorModel(List<Resource> resources, Arguments arguments) {
+		boolean doTranslate = !arguments.get(AbstractGeneratorOptions.NOTRANSLATE);
+		boolean asLibrary = arguments.get(AbstractGeneratorOptions.LIB);
+		String genModelPath = arguments.get(AbstractGeneratorOptions.SAVE_GEN_MODEL);
+		Set<URI> mainModelURIs = resources.stream().map(m -> m.getURI()).collect(Collectors.toSet());
+		
 		// create instance and mapping for test instances
-		List<Resource> testInstanceResources = new TestInstanceCreator(logger).createInstancesAndMapping(
-				modelLoader.getMainModelURIs(), getResourceSet());
+		List<Resource> testInstanceResources = new TestInstanceCreator(logger, diagnostician).createInstancesAndMapping(
+				mainModelURIs, getResourceSet());
 		if (testInstanceResources==null) {
-			logger.logError("-- terminating", null);
 			return null;
 		}
 		
 		// create a list of ROOM models
-		HashSet<URI> mainModelURIs = modelLoader.getMainModelURIs();
 		List<RoomModel> mainModels = new ArrayList<RoomModel>();
 		List<RoomModel> importedModels = new ArrayList<RoomModel>();
 		for (Resource resource : getResourceSet().getResources()) {
@@ -480,8 +252,7 @@ public abstract class AbstractGenerator implements IDetailCodeTranslator {
 			}
 		}
 		if (importedModels.isEmpty() && mainModels.isEmpty()) {
-			logger.logError("no ROOM models found", null);
-			logger.logError("-- terminating", null);
+			logger.logError("no ROOM models found");
 			return null;
 		}
 		else {			
@@ -489,83 +260,27 @@ public abstract class AbstractGenerator implements IDetailCodeTranslator {
 			GeneratorModelBuilder gmb = new GeneratorModelBuilder(logger, diagnostician);
 			Root gmRoot = gmb.createGeneratorModel(mainModels, importedModels, asLibrary);
 			if (diagnostician.isFailed()) {
-				logger.logError("validation failed during build of generator model", null);
-				logger.logError("-- terminating", null);
+				logger.logError("validation failed during build of generator model");
 				return null;
 			}
 			
-			translateDetailCodes(gmRoot);
+			translateDetailCodes(gmRoot, doTranslate);
 			
-			URI genModelURI = genModelPath!=null? URI.createFileURI(genModelPath) : URI.createFileURI("tmp.rim");
+			URI genModelURI = !genModelPath.isEmpty() ? URI.createFileURI(genModelPath) : URI.createFileURI("tmp.rim");
 			Resource genResource = getResourceSet().createResource(genModelURI);
 			genResource.getContents().add(gmRoot);
-			if (genModelPath!=null) {
+			if (!genModelPath.isEmpty()) {
 				try {
 					logger.logInfo("saving genmodel to "+genModelPath);
 					genResource.save(Collections.EMPTY_MAP);
 				}
 				catch (IOException e) {
-					logger.logError(e.getMessage(), null);
-					logger.logError("-- terminating", null);
+					logger.logError(e.getMessage());
 					return null;
 				}
 			}
 			return gmRoot;
 		}
-	}
-
-	protected void activateModelLocator() {
-	}
-	
-	/**
-	 * validate the models
-	 * 
-	 */
-	protected boolean validateModels() {
-		logger.logInfo("-- validating models");
-		
-		int errors = 0;
-		int warnings = 0;
-		ArrayList<Resource> resources = new ArrayList<Resource>(getResourceSet().getResources());
-		for (Resource resource : resources) {
-			List<Issue> list = validator.validate(resource, CheckMode.ALL, CancelIndicator.NullImpl);
-			if (!list.isEmpty()) {
-				for (Issue issue : list) {
-					if (issue.getSeverity()==Severity.ERROR) {
-						++errors;
-						logger.logError(issue.toString(), null);
-					}
-					else {
-						++warnings;
-						logger.logInfo(issue.toString());
-					}
-				}
-			}
-		}
-		logger.logInfo("validation finished with "+errors+" errors and "+warnings+" warnings");
-		if (errors>0) {
-			logger.logError("-- terminating", null);
-			return false;
-		}
-		
-		return true;
-	}
-	
-	
-	/**
-	 * load all models into a {@link ResourceSet} which is created by this method and
-	 * maintained in this object (cf. {@link #getResourceSet()})
-	 * 
-	 * @param uriList a list of {@link URI}s as Strings
-	 * 
-	 */
-	protected boolean loadModels(List<String> uriList) {
-		logger.logInfo("-- reading models");
-		
-		return modelLoader.loadModels(uriList, logger);
-	}
-	
-	protected void deactivateModelLocator() {
 	}
 
 	/**
@@ -580,8 +295,7 @@ public abstract class AbstractGenerator implements IDetailCodeTranslator {
 	 * 
 	 * @param gmRoot
 	 */
-	protected void translateDetailCodes(Root gmRoot) {
-		boolean doTranslate = !generatorSettings.isNoTranslation();
+	protected void translateDetailCodes(Root gmRoot, boolean doTranslate) {
 		
 		for (ExpandedActorClass xpac : gmRoot.getXpActorClasses()) {
 			DetailCodeTranslator dct = new DetailCodeTranslator(xpac.getActorClass(), translationProvider, doTranslate);
@@ -649,21 +363,5 @@ public abstract class AbstractGenerator implements IDetailCodeTranslator {
 			return "";
 		return code;
 	}
-	
-	/**
-	 * abstract method which is finally called by {@link #createAndRunGenerator(Module, String[])}
-	 * @return GENERATOR_OK or GENERATOR_ERROR
-	 */
-	protected abstract int runGenerator();
-
-	/**
-	 * The generator settings can also be statically accessed using {@link #getInstance()} followed
-	 * by a call to this method.
-	 * 
-	 * @return the {@link #generatorSettings}
-	 */
-	public GlobalGeneratorSettings getGeneratorSettings() {
-		return generatorSettings;
-	}	
 
 }

@@ -28,8 +28,8 @@ import org.eclipse.core.variables.VariablesPlugin;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.ui.RefreshTab;
-import org.eclipse.etrice.generator.base.AbstractGenerator;
-import org.eclipse.etrice.generator.fsm.base.ILineOutput;
+import org.eclipse.etrice.generator.base.AbstractGeneratorOptions;
+import org.eclipse.etrice.generator.base.io.ILineOutput;
 import org.eclipse.etrice.generator.ui.preferences.PreferenceConstants;
 import org.eclipse.jdt.launching.AbstractJavaLaunchConfigurationDelegate;
 import org.eclipse.swt.widgets.Display;
@@ -195,38 +195,39 @@ public abstract class GeneratorLaunchConfigurationDelegate extends AbstractJavaL
 	@SuppressWarnings("deprecation")	// keep compatible
 	protected void addArguments(ILaunchConfiguration configuration, StringBuffer argString) throws CoreException {
 		if (configuration.getAttribute(GeneratorConfigTab.LIB, false)) {
-			argString.append(" "+AbstractGenerator.OPTION_LIB);
+			argString.append(" -"+AbstractGeneratorOptions.LIB.getName());
 		}
 		if (configuration.getAttribute(GeneratorConfigTab.SAVE_GEN_MODEL, false)) {
-			argString.append(" "+AbstractGenerator.OPTION_SAVE_GEN_MODEL);
+			argString.append(" -"+AbstractGeneratorOptions.SAVE_GEN_MODEL.getName());
 			argString.append(" "+configuration.getAttribute(GeneratorConfigTab.GEN_MODEL_PATH, "?"));
 		}
-		if (!configuration.getAttribute(GeneratorConfigTab.MAIN_METHOD_NAME, AbstractGenerator.DEFAULT_MAIN_NAME).equals(AbstractGenerator.DEFAULT_MAIN_NAME)) {
-			argString.append(" "+AbstractGenerator.OPTION_MAIN_NAME);
-			argString.append(" "+configuration.getAttribute(GeneratorConfigTab.MAIN_METHOD_NAME, AbstractGenerator.DEFAULT_MAIN_NAME));
+		if (!configuration.getAttribute(GeneratorConfigTab.MAIN_METHOD_NAME, AbstractGeneratorOptions.MAIN_NAME.getDefaultValue()).equals(AbstractGeneratorOptions.MAIN_NAME.getDefaultValue())) {
+			argString.append(" -"+AbstractGeneratorOptions.MAIN_NAME.getName());
+			argString.append(" "+configuration.getAttribute(GeneratorConfigTab.MAIN_METHOD_NAME, AbstractGeneratorOptions.MAIN_NAME.getDefaultValue()));
 		}
 		if (configuration.getAttribute(GeneratorConfigTab.GEN_DOCUMENTATION, false)
 				|| configuration.getAttribute(GeneratorConfigTab.GEN_INSTANCE_DIAGRAM, false))
-			argString.append(" "+AbstractGenerator.OPTION_DOCUMENTATION);
+			argString.append(" -"+AbstractGeneratorOptions.DOCUMENTATION.getName());
 		if (configuration.getAttribute(GeneratorConfigTab.DEBUG, false)) {
-			argString.append(" "+AbstractGenerator.OPTION_DEBUG);
+			argString.append(" -"+AbstractGeneratorOptions.LOGLEVEL.getName());
+			argString.append(" debug");
 		}
 		if (configuration.getAttribute(GeneratorConfigTab.MSC_INSTR, false)) {
-			argString.append(" "+AbstractGenerator.OPTION_MSC_INSTR);
+			argString.append(" -"+AbstractGeneratorOptions.MSC_INSTR.getName());
 		}
 		if (configuration.getAttribute(GeneratorConfigTab.DATA_INSTR, false)) {
-			argString.append(" "+AbstractGenerator.OPTION_DATA_INSTR);
+			argString.append(" -"+AbstractGeneratorOptions.DATA_INSTR.getName());
 		}
 		if (configuration.getAttribute(GeneratorConfigTab.VERBOSE, false)) {
-			argString.append(" "+AbstractGenerator.OPTION_VERBOSE_RT);
+			argString.append(" -"+AbstractGeneratorOptions.VERBOSE_RT.getName());
 		}
 		if (!configuration.getAttribute(GeneratorConfigTab.USE_TRAANSLATION, true)) {
-			argString.append(" "+AbstractGenerator.OPTION_NOTRANSLATE);
+			argString.append(" -"+AbstractGeneratorOptions.NOTRANSLATE.getName());
 		}
 		
 		ScopedPreferenceStore prefStore = new ScopedPreferenceStore(InstanceScope.INSTANCE, "org.eclipse.etrice.generator.ui");
 		if (prefStore.getBoolean(PreferenceConstants.GEN_INCREMENTAL)) {
-			argString.append(" "+AbstractGenerator.OPTION_GEN_INCREMENTAL);
+			argString.append(" -"+AbstractGeneratorOptions.GEN_INCREMENTAL.getName());
 		}
 		
 		boolean override = configuration.getAttribute(GeneratorConfigTab.OVERRIDE_DIRECTORIES, false);
@@ -238,13 +239,13 @@ public abstract class GeneratorLaunchConfigurationDelegate extends AbstractJavaL
 			infoDir = configuration.getAttribute(GeneratorConfigTab.INFO_PATH, infoDir);
 			docDir = configuration.getAttribute(GeneratorConfigTab.DOC_PATH, docDir);
 		}
-		argString.append(" "+AbstractGenerator.OPTION_GEN_DIR);
+		argString.append(" -"+AbstractGeneratorOptions.GEN_DIR.getName());
 		argString.append(" "+srcgenDir);
 		
-		argString.append(" "+AbstractGenerator.OPTION_GEN_INFO_DIR);
+		argString.append(" -"+AbstractGeneratorOptions.GEN_INFO_DIR.getName());
 		argString.append(" "+infoDir);
 		
-		argString.append(" "+AbstractGenerator.OPTION_GEN_DOC_DIR);
+		argString.append(" -"+AbstractGeneratorOptions.GEN_DOC_DIR.getName());
 		argString.append(" "+docDir);
 	}
 	

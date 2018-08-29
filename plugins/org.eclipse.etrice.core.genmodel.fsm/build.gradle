@@ -1,5 +1,6 @@
 dependencies {
 	compile project(':plugins:org.eclipse.etrice.core.fsm')
+	compile project(':plugins:org.eclipse.etrice.generator.base')
 	
 	compile "org.eclipse.xtext:org.eclipse.xtext:$versions.xtext"
 }

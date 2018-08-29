@@ -26,7 +26,7 @@ import org.eclipse.etrice.core.room.EnumerationType
 import org.eclipse.etrice.core.room.ReferenceType
 import org.eclipse.etrice.generator.base.IDataConfiguration
 import org.eclipse.etrice.generator.fsm.base.FileSystemHelpers
-import org.eclipse.etrice.generator.fsm.base.IGeneratorFileIo
+import org.eclipse.etrice.generator.base.io.IGeneratorFileIO
 import org.eclipse.etrice.generator.generic.GenericActorClassGenerator
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
@@ -34,11 +34,12 @@ import org.eclipse.etrice.generator.generic.TypeHelpers
 import org.eclipse.etrice.generator.java.Main
 import static extension org.eclipse.etrice.core.genmodel.fsm.FsmGenExtensions.*
 import org.eclipse.etrice.generator.generic.ILanguageExtension
+import org.eclipse.etrice.generator.java.setup.GeneratorOptionsHelper
 
 @Singleton
 class ActorClassGen extends GenericActorClassGenerator {
 
-	@Inject protected IGeneratorFileIo fileIO
+	@Inject protected IGeneratorFileIO fileIO
 	@Inject protected extension JavaExtensions
 	@Inject protected extension RoomExtensions
 	@Inject protected IDataConfiguration dataConfigExt
@@ -49,6 +50,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 	@Inject protected extension StateMachineGen
 	@Inject protected extension TypeHelpers
 	@Inject protected extension FileSystemHelpers
+	@Inject protected extension GeneratorOptionsHelper
 
 	@Inject
 	new (ConfigGenAddon configGenAddon) {

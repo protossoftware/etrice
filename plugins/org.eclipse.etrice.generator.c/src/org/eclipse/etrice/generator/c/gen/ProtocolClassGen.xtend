@@ -16,27 +16,29 @@ package org.eclipse.etrice.generator.c.gen
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import org.eclipse.etrice.core.genmodel.etricegen.Root
-import org.eclipse.etrice.core.genmodel.fsm.ILogger
 import org.eclipse.etrice.core.room.CommunicationType
 import org.eclipse.etrice.core.room.Operation
 import org.eclipse.etrice.core.room.ProtocolClass
 import org.eclipse.etrice.core.room.RoomModel
+import org.eclipse.etrice.generator.base.io.IGeneratorFileIO
+import org.eclipse.etrice.generator.base.logging.ILogger
 import org.eclipse.etrice.generator.base.AbstractGenerator
 import org.eclipse.etrice.generator.c.Main
-import org.eclipse.etrice.generator.fsm.base.IGeneratorFileIo
 import org.eclipse.etrice.generator.generic.GenericProtocolClassGenerator
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.TypeHelpers
+import org.eclipse.etrice.generator.c.setup.GeneratorOptionsHelper
 
 @Singleton
 class ProtocolClassGen extends GenericProtocolClassGenerator {
 
-	@Inject IGeneratorFileIo fileIO
+	@Inject IGeneratorFileIO fileIO
 	@Inject extension CExtensions
 	@Inject extension RoomExtensions
 	@Inject extension ProcedureHelpers
 	@Inject extension TypeHelpers
+	@Inject protected extension GeneratorOptionsHelper
 	@Inject ILogger logger
 	
 	def doGenerate(Root root) {

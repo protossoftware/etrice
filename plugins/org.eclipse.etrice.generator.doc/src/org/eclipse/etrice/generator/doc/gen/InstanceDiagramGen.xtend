@@ -26,7 +26,7 @@ import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 
 import static java.lang.Runtime.*
 import org.eclipse.etrice.core.etmap.util.ETMapUtil
-import org.eclipse.etrice.core.genmodel.fsm.ILogger
+import org.eclipse.etrice.generator.base.logging.ILogger
 
 @Singleton
 class InstanceDiagramGen {

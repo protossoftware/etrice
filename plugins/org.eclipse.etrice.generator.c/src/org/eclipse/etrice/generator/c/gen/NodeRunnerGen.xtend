@@ -22,6 +22,7 @@ import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.core.etmap.util.ETMapUtil
 import org.eclipse.etrice.core.common.base.util.BaseHelpers
 import org.eclipse.etrice.generator.c.Main
+import org.eclipse.etrice.generator.c.setup.GeneratorOptionsHelper
 
 @Singleton
 class NodeRunnerGen {
@@ -30,6 +31,7 @@ class NodeRunnerGen {
 	@Inject extension JavaIoFileSystemAccess fileAccess
 	@Inject extension CExtensions
 	@Inject extension RoomExtensions
+	@Inject protected extension GeneratorOptionsHelper
 	
 	def doGenerate(Root root) {
 		var first = true

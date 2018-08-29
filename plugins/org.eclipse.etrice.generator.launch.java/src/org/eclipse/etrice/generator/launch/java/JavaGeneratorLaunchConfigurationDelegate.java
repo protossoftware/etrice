@@ -14,8 +14,9 @@ package org.eclipse.etrice.generator.launch.java;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
-import org.eclipse.etrice.generator.fsm.base.ILineOutput;
+import org.eclipse.etrice.generator.base.io.ILineOutput;
 import org.eclipse.etrice.generator.java.Main;
+import org.eclipse.etrice.generator.java.setup.GeneratorOptions;
 import org.eclipse.etrice.generator.launch.GeneratorLaunchConfigurationDelegate;
 
 /**
@@ -32,11 +33,11 @@ public class JavaGeneratorLaunchConfigurationDelegate extends GeneratorLaunchCon
 		super.addArguments(configuration, argString);
 		
 		if (configuration.getAttribute(JavaGeneratorConfigTab.PERSIST, false)) {
-			argString.append(" "+Main.OPTION_GEN_PERSIST);
+			argString.append(" -"+GeneratorOptions.GEN_PERSIST.getName());
 		}
 		
 		if (configuration.getAttribute(JavaGeneratorConfigTab.DATA_OBJ, false)) {
-			argString.append(" "+Main.OPTION_GEN_STORE_DATA_OBJ);
+			argString.append(" -"+GeneratorOptions.GEN_STORE_DATA_OBJ.getName());
 		}
 	}
 
@@ -45,9 +46,8 @@ public class JavaGeneratorLaunchConfigurationDelegate extends GeneratorLaunchCon
 	 */
 	@Override
 	protected void runGenerator(String[] args, ILineOutput out) {
-		org.eclipse.etrice.generator.java.Main.setOutput(out);
-		org.eclipse.etrice.generator.java.Main.setTerminateOnError(false);
-		org.eclipse.etrice.generator.java.Main.main(args);
+		Main.setOutput(out);
+		Main.run(args);
 	}
 
 	/* (non-Javadoc)

@@ -12,31 +12,23 @@
 
 package org.eclipse.etrice.ui.common.base.refactoring
 
+import com.google.common.collect.ArrayListMultimap
+import com.google.common.collect.Multimap
+import com.google.inject.Inject
+import org.eclipse.core.resources.ResourcesPlugin
 import org.eclipse.core.runtime.IProgressMonitor
+import org.eclipse.core.runtime.Path
+import org.eclipse.emf.common.util.URI
+import org.eclipse.emf.ecore.resource.ResourceSet
+import org.eclipse.etrice.core.fsm.fSM.ModelComponent
+import org.eclipse.etrice.ui.common.base.support.DiagramAccessBase
+import org.eclipse.graphiti.mm.pictograms.Diagram
+import org.eclipse.ltk.core.refactoring.resource.RenameResourceChange
 import org.eclipse.xtext.resource.IReferenceDescription
 import org.eclipse.xtext.ui.refactoring.ElementRenameArguments
 import org.eclipse.xtext.ui.refactoring.IRefactoringUpdateAcceptor
-import org.eclipse.xtext.ui.refactoring.impl.EmfResourceReferenceUpdater
-import com.google.common.collect.Multimap
-import org.eclipse.emf.common.util.URI
-import org.eclipse.emf.ecore.resource.ResourceSet
-import org.eclipse.graphiti.mm.pictograms.Diagram
-import org.eclipse.graphiti.services.Graphiti
-import org.eclipse.emf.ecore.util.EcoreUtil
-import org.eclipse.etrice.core.fsm.fSM.ModelComponent
-import com.google.inject.Inject
-import org.eclipse.etrice.ui.common.base.support.DiagramAccessBase
-import org.eclipse.graphiti.ui.internal.GraphitiUIPlugin
-import org.eclipse.graphiti.internal.GraphitiPlugin
 import org.eclipse.xtext.ui.refactoring.impl.EmfResourceChangeUtil
-import org.eclipse.ltk.core.refactoring.resource.RenameResourceChange
-import org.eclipse.etrice.core.common.scoping.StandardModelLocator
-import org.eclipse.core.runtime.Path
-import org.eclipse.core.runtime.Platform
-import org.eclipse.core.resources.ResourcesPlugin
-import com.google.common.collect.Multimaps
-import com.google.common.collect.MultimapBuilder
-import com.google.common.collect.ArrayListMultimap
+import org.eclipse.xtext.ui.refactoring.impl.EmfResourceReferenceUpdater
 
 /**
  *  Update diagrams in case of xtext rename refactoring

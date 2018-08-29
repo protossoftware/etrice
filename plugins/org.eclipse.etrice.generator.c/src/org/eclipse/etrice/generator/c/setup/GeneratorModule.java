@@ -14,6 +14,7 @@ package org.eclipse.etrice.generator.c.setup;
 
 import org.eclipse.etrice.generator.base.AbstractGenerator;
 import org.eclipse.etrice.generator.base.AbstractGeneratorBaseModule;
+import org.eclipse.etrice.generator.base.AbstractGeneratorOptions;
 import org.eclipse.etrice.generator.base.IDataConfiguration;
 import org.eclipse.etrice.generator.base.ITranslationProvider;
 import org.eclipse.etrice.generator.c.Main;
@@ -30,12 +31,14 @@ import com.google.inject.Binder;
 
 public class GeneratorModule extends AbstractGeneratorBaseModule {
 
-//	@Override
+	@Override
 	public void configure(Binder binder) {
 		super.configure(binder);
 
 		binder.bind(GenericProtocolClassGenerator.class).to(ProtocolClassGen.class);
 		binder.bind(GenericActorClassGenerator.class).to(ActorClassGen.class);
+		
+		binder.bind(AbstractGeneratorOptions.class).to(GeneratorOptions.class);
 	}
 	
 	@Override

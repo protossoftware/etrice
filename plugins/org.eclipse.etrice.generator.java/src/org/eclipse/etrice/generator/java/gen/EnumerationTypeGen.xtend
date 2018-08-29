@@ -12,7 +12,7 @@
 
 package org.eclipse.etrice.generator.java.gen
 
-import org.eclipse.etrice.generator.fsm.base.IGeneratorFileIo
+import org.eclipse.etrice.generator.base.io.IGeneratorFileIO
 import com.google.inject.Inject
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.core.genmodel.etricegen.Root
@@ -26,7 +26,7 @@ import org.eclipse.etrice.generator.fsm.base.FileSystemHelpers
  */
 class EnumerationTypeGen {
 
-	@Inject IGeneratorFileIo fileIO
+	@Inject IGeneratorFileIO fileIO
 	@Inject extension JavaExtensions
 	@Inject extension RoomExtensions
 	@Inject extension FileSystemHelpers

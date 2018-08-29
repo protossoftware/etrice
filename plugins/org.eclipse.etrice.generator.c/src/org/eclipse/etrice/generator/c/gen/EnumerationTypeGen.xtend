@@ -12,11 +12,11 @@
 
 package org.eclipse.etrice.generator.c.gen
 
-import org.eclipse.etrice.generator.fsm.base.IGeneratorFileIo
 import com.google.inject.Inject
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.etrice.core.room.EnumerationType
+import org.eclipse.etrice.generator.base.io.IGeneratorFileIO
 import org.eclipse.etrice.generator.generic.TypeHelpers
 
 /**
@@ -25,7 +25,7 @@ import org.eclipse.etrice.generator.generic.TypeHelpers
  */
 class EnumerationTypeGen {
 
-	@Inject IGeneratorFileIo fileIO
+	@Inject IGeneratorFileIO fileIO
 	@Inject extension CExtensions
 	@Inject extension RoomExtensions
 	@Inject extension TypeHelpers

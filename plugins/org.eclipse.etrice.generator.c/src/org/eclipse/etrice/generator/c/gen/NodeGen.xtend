@@ -30,8 +30,6 @@ import org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance
 import org.eclipse.etrice.core.genmodel.etricegen.PortInstance
 import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance
-import org.eclipse.etrice.core.genmodel.fsm.IDiagnostician
-import org.eclipse.etrice.core.genmodel.fsm.ILogger
 import org.eclipse.etrice.core.room.CommunicationType
 import org.eclipse.etrice.core.room.EnumerationType
 import org.eclipse.etrice.core.room.Port
@@ -40,12 +38,14 @@ import org.eclipse.etrice.core.room.ProtocolClass
 import org.eclipse.etrice.core.room.SAP
 import org.eclipse.etrice.core.room.SPP
 import org.eclipse.etrice.core.room.util.RoomHelpers
+import org.eclipse.etrice.generator.base.io.IGeneratorFileIO
+import org.eclipse.etrice.generator.base.logging.ILogger
 import org.eclipse.etrice.generator.c.Main
-import org.eclipse.etrice.generator.fsm.base.IGeneratorFileIo
 import org.eclipse.etrice.generator.fsm.base.IntelligentSeparator
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.TypeHelpers
+import org.eclipse.etrice.generator.c.setup.GeneratorOptionsHelper
 
 @Singleton
 class NodeGen {
@@ -55,10 +55,10 @@ class NodeGen {
 	@Inject extension RoomExtensions
 	@Inject extension TypeHelpers
 	@Inject extension ProcedureHelpers helpers
+	@Inject protected extension GeneratorOptionsHelper
 
-	@Inject IGeneratorFileIo fileIO
+	@Inject IGeneratorFileIO fileIO
 	@Inject Initialization attrInitGenAddon
-	@Inject IDiagnostician diagnostician
 	@Inject ILogger logger;
 
 	def doGenerate(Root root) {

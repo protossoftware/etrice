@@ -21,14 +21,14 @@ import org.eclipse.etrice.core.room.ComplexType
 import org.eclipse.etrice.core.room.DataClass
 import org.eclipse.etrice.core.room.util.RoomHelpers
 import org.eclipse.etrice.generator.fsm.base.FileSystemHelpers
-import org.eclipse.etrice.generator.fsm.base.IGeneratorFileIo
+import org.eclipse.etrice.generator.base.io.IGeneratorFileIO
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
 
 @Singleton
 class DataClassGen {
 
-	@Inject IGeneratorFileIo fileIO
+	@Inject IGeneratorFileIO fileIO
 	@Inject extension JavaExtensions
 	@Inject extension RoomExtensions
 	@Inject extension ProcedureHelpers

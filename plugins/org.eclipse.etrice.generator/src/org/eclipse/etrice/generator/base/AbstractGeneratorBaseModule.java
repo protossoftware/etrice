@@ -15,10 +15,13 @@ package org.eclipse.etrice.generator.base;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.etrice.core.genmodel.fsm.IDiagnostician;
-import org.eclipse.etrice.core.genmodel.fsm.ILogger;
+import org.eclipse.etrice.generator.base.io.IGeneratorResourceLoader;
+import org.eclipse.etrice.generator.base.io.IncrementalGeneratorFileIO;
+import org.eclipse.etrice.generator.base.logging.Logger;
+import org.eclipse.etrice.generator.base.setup.GeneratorBaseModule;
+import org.eclipse.etrice.generator.base.setup.GeneratorBaseOptions;
+import org.eclipse.etrice.generator.base.validation.IGeneratorResourceValidator;
 import org.eclipse.etrice.generator.fsm.base.Diagnostician;
-import org.eclipse.etrice.generator.fsm.base.ILineOutputLogger;
-import org.eclipse.etrice.generator.fsm.base.Logger;
 import org.eclipse.etrice.generator.fsm.generic.IDetailCodeTranslator;
 import org.eclipse.etrice.generator.fsm.generic.IIfItemIdGenerator;
 import org.eclipse.etrice.generator.fsm.generic.ILanguageExtensionBase;
@@ -30,7 +33,6 @@ import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.XtextResourceSet;
 
 import com.google.inject.Binder;
-import com.google.inject.Module;
 import com.google.inject.Singleton;
 
 /**
@@ -39,7 +41,7 @@ import com.google.inject.Singleton;
  * 
  * @author Henrik Rentz-Reichert
  */
-public abstract class AbstractGeneratorBaseModule implements Module {
+public abstract class AbstractGeneratorBaseModule extends GeneratorBaseModule {
 
 	/**
 	 * Configuration of
@@ -56,11 +58,17 @@ public abstract class AbstractGeneratorBaseModule implements Module {
 	 */
 	@Override
 	public void configure(Binder binder) {
+		super.configure(binder);
+		
 		binder.bind(ResourceSet.class).to(XtextResourceSet.class);
 
 		binder.bind(Logger.class).in(Singleton.class);
-		binder.bind(ILineOutputLogger.class).to(Logger.class);
-		binder.bind(ILogger.class).to(Logger.class);
+		binder.bind(IncrementalGeneratorFileIO.class).in(Singleton.class);
+		
+		binder.bind(GeneratorBaseOptions.class).to(AbstractGeneratorOptions.class);
+		
+		binder.bind(IGeneratorResourceLoader.class).to(ModelLoader.class);
+		binder.bind(IGeneratorResourceValidator.class).to(ModelValidator.class);
 		
 		binder.bind(Diagnostician.class).in(Singleton.class);
 		binder.bind(IDiagnostician.class).to(Diagnostician.class);
@@ -70,10 +78,10 @@ public abstract class AbstractGeneratorBaseModule implements Module {
 		binder.bind(IMessageIdGenerator.class).to(GenericProtocolClassGenerator.class);
 		binder.bind(IIfItemIdGenerator.class).to(GenericActorClassGenerator.class);
 		
-		if(bindAbstractGenerator() != null)
-			binder.bind(AbstractGenerator.class).to(bindAbstractGenerator());
 		binder.bind(IDetailCodeTranslator.class).to(AbstractGenerator.class);
 		
+		if(bindAbstractGenerator() != null)
+			binder.bind(AbstractGenerator.class).to(bindAbstractGenerator());
 		binder.bind(ILanguageExtensionBase.class).to(ILanguageExtension.class);
 		
 		if (bindILanguageExtension()!=null)
@@ -86,13 +94,19 @@ public abstract class AbstractGeneratorBaseModule implements Module {
 		binder.bind(EValidator.Registry.class).toInstance(EValidator.Registry.INSTANCE);
 		binder.bind(org.eclipse.emf.ecore.util.Diagnostician.class).to(GenerationEMFDiagnostician.class).asEagerSingleton();
 	}
+
+	@Override
+	public Class<? extends IGenerator> bindIGenerator() {
+		return AbstractGenerator.class;
+	}
 	
 	/**
 	 * Abstract method that retrieves a class to which {@link AbstractGenerator} is bound
 	 * @return a Class extending {@link AbstractGenerator}
 	 */
 	public abstract Class<? extends AbstractGenerator> bindAbstractGenerator();
-
+	
+	
 	/**
 	 * Abstract method that retrieves a class to which {@link ILanguageExtension} is bound
 	 * @return a Class extending {@link ILanguageExtension}

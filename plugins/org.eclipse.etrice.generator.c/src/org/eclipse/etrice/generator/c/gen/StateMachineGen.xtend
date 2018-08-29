@@ -22,11 +22,13 @@ import org.eclipse.etrice.generator.generic.RoomExtensions
 import static extension org.eclipse.etrice.core.genmodel.fsm.FsmGenExtensions.*
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.GraphContainer
 import org.eclipse.etrice.core.fsm.fSM.State
+import org.eclipse.etrice.generator.c.setup.GeneratorOptionsHelper
 
 @Singleton
 class StateMachineGen extends GenericStateMachineGenerator {
 
 	@Inject extension RoomExtensions
+	@Inject protected extension GeneratorOptionsHelper
 
 	def genHeaderConstants(ExpandedActorClass xpac) {
 		val ac = xpac.actorClass

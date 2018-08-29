@@ -32,7 +32,7 @@ import org.eclipse.etrice.core.room.CommunicationType
 import org.eclipse.etrice.core.room.SubSystemClass
 import org.eclipse.etrice.generator.fsm.base.FileSystemHelpers
 import org.eclipse.etrice.generator.base.IDataConfiguration
-import org.eclipse.etrice.generator.fsm.base.IGeneratorFileIo
+import org.eclipse.etrice.generator.base.io.IGeneratorFileIO
 import org.eclipse.etrice.generator.fsm.base.IntelligentSeparator
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
@@ -43,6 +43,7 @@ import com.google.common.collect.Lists
 import com.google.common.collect.Sets
 import org.eclipse.etrice.core.genmodel.builder.GenmodelConstants
 import org.eclipse.etrice.core.genmodel.fsm.IDiagnostician
+import org.eclipse.etrice.generator.java.setup.GeneratorOptionsHelper
 
 @Singleton
 class NodeGen {
@@ -53,8 +54,9 @@ class NodeGen {
 	@Inject ConfigGenAddon configGenAddon
 	@Inject extension ProcedureHelpers
 	@Inject extension FileSystemHelpers
+	@Inject protected extension GeneratorOptionsHelper
 
-	@Inject IGeneratorFileIo fileIO
+	@Inject IGeneratorFileIO fileIO
 	@Inject VariableServiceGen varService
 	@Inject IDiagnostician diagnostician
 

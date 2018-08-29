@@ -20,7 +20,7 @@ import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.etrice.core.genmodel.etricegen.WiredActorClass
 import org.eclipse.etrice.core.room.ActorClass
 import org.eclipse.etrice.generator.fsm.base.FileSystemHelpers
-import org.eclipse.etrice.generator.fsm.base.IGeneratorFileIo
+import org.eclipse.etrice.generator.base.io.IGeneratorFileIO
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
 
@@ -29,7 +29,7 @@ import org.eclipse.etrice.core.room.util.RoomHelpers
 @Singleton
 class ActorClassDataGen {
 	
-	@Inject IGeneratorFileIo fileIO
+	@Inject IGeneratorFileIO fileIO
 	@Inject extension RoomHelpers
 	@Inject extension RoomExtensions
 	@Inject extension FileSystemHelpers

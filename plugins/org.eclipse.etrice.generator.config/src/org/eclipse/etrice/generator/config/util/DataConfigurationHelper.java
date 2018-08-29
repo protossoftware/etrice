@@ -30,11 +30,11 @@ import org.eclipse.etrice.core.config.PortInstanceConfig;
 import org.eclipse.etrice.core.config.ProtocolClassConfig;
 import org.eclipse.etrice.core.config.SubSystemConfig;
 import org.eclipse.etrice.core.config.util.ConfigUtil;
-import org.eclipse.etrice.core.genmodel.fsm.ILogger;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.ProtocolClass;
+import org.eclipse.etrice.generator.base.logging.ILogger;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -83,7 +83,7 @@ public class DataConfigurationHelper {
 			for (ActorClassConfig classConfig : config.getActorClassConfigs()) {
 				if (actorClasses.contains(classConfig.getActor())) {
 					logger.logError("Multiple configurations for actor class "
-							+ classConfig.getActor().getName() + " found", null);
+							+ classConfig.getActor().getName() + " found");
 					error = true;
 				} else {
 					actorClasses.add(classConfig.getActor());
@@ -96,7 +96,7 @@ public class DataConfigurationHelper {
 					logger.logError(
 							"Multiple configurations for protocol class "
 									+ protocolConfig.getProtocol().getName()
-									+ " found", null);
+									+ " found");
 					error = true;
 				} else {
 					protocolClasses.add(protocolConfig.getProtocol());
@@ -109,7 +109,7 @@ public class DataConfigurationHelper {
 				if (actorInstances.contains(path)) {
 					logger.logError(
 							"Multiple configurations for actor instance "
-									+ path + " found", null);
+									+ path + " found");
 				} else {
 					actorInstances.add(path);
 					collectConfigs(instanceConfig, path, actorInstanceAttrMap);
@@ -119,7 +119,7 @@ public class DataConfigurationHelper {
 				String path = ConfigUtil.getPath(ssConfig);
 				if (subSystemConfigMap.containsKey(path)) {
 					logger.logError("Multiple configurations for subSystem"
-							+ path + " found", null);
+							+ path + " found");
 					error = true;
 				} else
 					subSystemConfigMap.put(path, ssConfig);

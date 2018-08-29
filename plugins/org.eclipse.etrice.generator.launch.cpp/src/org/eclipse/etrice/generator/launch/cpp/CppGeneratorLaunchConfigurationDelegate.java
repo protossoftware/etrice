@@ -12,8 +12,8 @@
 
 package org.eclipse.etrice.generator.launch.cpp;
 
+import org.eclipse.etrice.generator.base.io.ILineOutput;
 import org.eclipse.etrice.generator.cpp.Main;
-import org.eclipse.etrice.generator.fsm.base.ILineOutput;
 import org.eclipse.etrice.generator.launch.GeneratorLaunchConfigurationDelegate;
 
 /**
@@ -28,8 +28,7 @@ public class CppGeneratorLaunchConfigurationDelegate extends GeneratorLaunchConf
 	@Override
 	protected void runGenerator(String[] args, ILineOutput out) {
 		Main.setOutput(out);
-		Main.setTerminateOnError(false);
-		Main.main(args);
+		Main.run(args);
 	}
 
 	/* (non-Javadoc)

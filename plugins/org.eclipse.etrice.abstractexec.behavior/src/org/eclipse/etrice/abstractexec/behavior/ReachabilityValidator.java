@@ -1,4 +1,3 @@
-
 /*******************************************************************************
  * Copyright (c) 2012 Rohit Agrawal
  * This program and the accompanying materials
@@ -30,11 +29,11 @@ import org.eclipse.etrice.core.genmodel.fsm.ExtendedFsmGenBuilder;
 import org.eclipse.etrice.core.genmodel.fsm.FsmGenChecker;
 import org.eclipse.etrice.core.genmodel.fsm.FsmGenExtensions;
 import org.eclipse.etrice.core.genmodel.fsm.NullDiagnostician;
-import org.eclipse.etrice.core.genmodel.fsm.NullLogger;
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.GraphContainer;
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.GraphItem;
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.Link;
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.Node;
+import org.eclipse.etrice.generator.base.logging.NullLogger;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 
 import com.google.inject.Guice;

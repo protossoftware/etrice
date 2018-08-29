@@ -23,8 +23,8 @@ import static org.junit.Assert.assertTrue
 import static org.junit.Assert.assertFalse
 
 import static extension org.eclipse.etrice.core.genmodel.fsm.FsmGenExtensions.*
-import org.eclipse.etrice.core.genmodel.fsm.NullLogger
 import org.eclipse.etrice.core.genmodel.fsm.FsmGenChecker
+import org.eclipse.etrice.generator.base.logging.NullLogger
 
 class TestFlatInheritedFSM extends FsmGenTestBase {
 	

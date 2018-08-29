@@ -23,7 +23,7 @@ import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
-import org.eclipse.etrice.generator.base.AbstractGenerator;
+import org.eclipse.etrice.generator.base.AbstractGeneratorOptions;
 import org.eclipse.etrice.generator.ui.wizard.WizardHelpers;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
@@ -93,7 +93,7 @@ public class COptionsPage extends WizardPage {
 		
 		mainMethodName = new Text(buttonComposite, SWT.SINGLE | SWT.BORDER);
 		mainMethodName.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		mainMethodName.setText(AbstractGenerator.DEFAULT_MAIN_NAME);
+		mainMethodName.setText(AbstractGeneratorOptions.MAIN_NAME.getDefaultValue());
 		
 		setErrorMessage(null);
 		setMessage(null);
@@ -210,6 +210,6 @@ public class COptionsPage extends WizardPage {
 			return mainMethodName.getText();
 		}
 		
-		return AbstractGenerator.DEFAULT_MAIN_NAME;
+		return AbstractGeneratorOptions.MAIN_NAME.getDefaultValue();
 	}
 }

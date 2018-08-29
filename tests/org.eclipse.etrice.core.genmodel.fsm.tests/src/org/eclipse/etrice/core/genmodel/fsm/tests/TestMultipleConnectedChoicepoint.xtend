@@ -17,10 +17,10 @@ import org.eclipse.etrice.core.fsm.fSM.ContinuationTransition
 import org.eclipse.etrice.core.fsm.fSM.Transition
 import org.eclipse.etrice.core.fsm.fSM.TriggeredTransition
 import org.eclipse.etrice.core.genmodel.fsm.FsmGenChecker
-import org.eclipse.etrice.core.genmodel.fsm.NullLogger
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.GraphContainer
 import org.eclipse.etrice.core.room.DataClass
-import org.eclipse.etrice.core.room.VarDecl
+import org.eclipse.etrice.core.room.MessageData
+import org.eclipse.etrice.generator.base.logging.NullLogger
 import org.junit.Before
 import org.junit.Test
 
@@ -30,7 +30,6 @@ import static org.junit.Assert.assertNotNull
 import static org.junit.Assert.assertTrue
 
 import static extension org.eclipse.etrice.core.genmodel.fsm.FsmGenExtensions.*
-import org.eclipse.etrice.core.room.MessageData
 
 class TestMultipleConnectedChoicepoint extends FsmGenTestBase {
 	

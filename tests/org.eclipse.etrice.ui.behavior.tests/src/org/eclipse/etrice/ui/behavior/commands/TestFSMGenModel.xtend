@@ -24,7 +24,6 @@ import org.eclipse.etrice.core.genmodel.fsm.ExtendedFsmGenBuilder
 import org.eclipse.etrice.core.genmodel.fsm.FsmGenChecker
 import org.eclipse.etrice.core.genmodel.fsm.IDiagnostician
 import org.eclipse.etrice.core.genmodel.fsm.NullDiagnostician
-import org.eclipse.etrice.core.genmodel.fsm.NullLogger
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.GraphContainer
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.Link
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.Node
@@ -37,6 +36,7 @@ import static org.junit.Assert.assertEquals
 import static org.junit.Assert.assertFalse
 import static org.junit.Assert.assertNotNull
 import static org.junit.Assert.assertTrue
+import org.eclipse.etrice.generator.base.logging.NullLogger
 
 class TestFSMGenModel extends TestBase {
 

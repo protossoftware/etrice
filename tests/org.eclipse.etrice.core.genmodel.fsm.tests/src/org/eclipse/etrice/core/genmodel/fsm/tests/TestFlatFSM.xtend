@@ -16,7 +16,6 @@ import org.eclipse.etrice.core.fsm.fSM.ChoicePoint
 import org.eclipse.etrice.core.fsm.fSM.State
 import org.eclipse.etrice.core.fsm.fSM.TrPoint
 import org.eclipse.etrice.core.genmodel.fsm.FsmGenChecker
-import org.eclipse.etrice.core.genmodel.fsm.NullLogger
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.GraphContainer
 import org.junit.Before
 import org.junit.Test
@@ -26,6 +25,7 @@ import static org.junit.Assert.assertFalse
 import static org.junit.Assert.assertNotNull
 
 import static extension org.eclipse.etrice.core.genmodel.fsm.FsmGenExtensions.*
+import org.eclipse.etrice.generator.base.logging.NullLogger
 
 class TestFlatFSM extends FsmGenTestBase {
 

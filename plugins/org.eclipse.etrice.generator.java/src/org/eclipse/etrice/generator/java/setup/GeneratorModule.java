@@ -15,7 +15,7 @@ package org.eclipse.etrice.generator.java.setup;
 import org.eclipse.etrice.core.common.scoping.ModelLocatorUriResolver;
 import org.eclipse.etrice.generator.base.AbstractGenerator;
 import org.eclipse.etrice.generator.base.AbstractGeneratorBaseModule;
-import org.eclipse.etrice.generator.base.GlobalGeneratorSettings;
+import org.eclipse.etrice.generator.base.AbstractGeneratorOptions;
 import org.eclipse.etrice.generator.base.IDataConfiguration;
 import org.eclipse.etrice.generator.base.ITranslationProvider;
 import org.eclipse.etrice.generator.generic.GenericActorClassGenerator;
@@ -23,7 +23,6 @@ import org.eclipse.etrice.generator.generic.GenericProtocolClassGenerator;
 import org.eclipse.etrice.generator.generic.ILanguageExtension;
 import org.eclipse.etrice.generator.java.Main;
 import org.eclipse.etrice.generator.java.gen.ActorClassGen;
-import org.eclipse.etrice.generator.java.gen.GlobalSettings;
 import org.eclipse.etrice.generator.java.gen.JavaExtensions;
 import org.eclipse.etrice.generator.java.gen.JavaTranslationProvider;
 import org.eclipse.etrice.generator.java.gen.ProtocolClassGen;
@@ -33,16 +32,16 @@ import com.google.inject.Binder;
 
 public class GeneratorModule extends AbstractGeneratorBaseModule {
 
-//	@Override
+	@Override
 	public void configure(Binder binder) {
 		super.configure(binder);
-
+		
 		binder.bind(GenericProtocolClassGenerator.class).to(ProtocolClassGen.class);
 		binder.bind(GenericActorClassGenerator.class).to(ActorClassGen.class);
 
 		binder.bind(ImportUriResolver.class).to(ModelLocatorUriResolver.class);
-
-		binder.bind(GlobalGeneratorSettings.class).to(GlobalSettings.class);
+		
+		binder.bind(AbstractGeneratorOptions.class).to(GeneratorOptions.class);
 	}
 	
 	@Override

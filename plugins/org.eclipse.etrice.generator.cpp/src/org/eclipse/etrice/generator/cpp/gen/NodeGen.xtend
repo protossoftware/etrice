@@ -26,11 +26,12 @@ import org.eclipse.etrice.core.genmodel.etricegen.WiredSubSystemClass
 import org.eclipse.etrice.core.room.SubSystemClass
 import org.eclipse.etrice.generator.cpp.Main
 import org.eclipse.etrice.generator.fsm.base.FileSystemHelpers
-import org.eclipse.etrice.generator.fsm.base.IGeneratorFileIo
+import org.eclipse.etrice.generator.base.io.IGeneratorFileIO
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
 
 import static extension org.eclipse.etrice.generator.fsm.base.Indexed.*
+import org.eclipse.etrice.generator.cpp.setup.GeneratorOptionsHelper
 
 @Singleton
 class NodeGen {
@@ -39,8 +40,9 @@ class NodeGen {
 	@Inject extension RoomExtensions
 	@Inject extension ProcedureHelpers
 	@Inject extension FileSystemHelpers
+	@Inject extension GeneratorOptionsHelper
 	
-	@Inject IGeneratorFileIo fileIO
+	@Inject IGeneratorFileIO fileIO
 	@Inject Initialization initHelper
 
 	def doGenerate(Root root) {

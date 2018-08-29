@@ -12,10 +12,13 @@
 
 package org.eclipse.etrice.generator.fsm.base;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.core.fsm.naming.FSMNameProvider;
 import org.eclipse.etrice.core.genmodel.fsm.IDiagnostician;
+import org.eclipse.etrice.generator.base.logging.ILogger;
 
 import com.google.inject.Inject;
 
@@ -29,11 +32,15 @@ public class Diagnostician implements IDiagnostician {
 
 	private boolean validationFailed = false;
 
-	@Inject
-	private ILineOutputLogger logger;
+	private ILogger logger;
+	
+	private FSMNameProvider fsmNameProvider;
 	
 	@Inject
-	private FSMNameProvider fsmNameProvider;
+	public Diagnostician(ILogger logger, FSMNameProvider fsmNameProvider) {
+		this.logger = logger;
+		this.fsmNameProvider = fsmNameProvider;
+	}
 	
 	public void warning(String msg, EObject source, EStructuralFeature feature) {
 		logger.logInfo("Validation warning: " + getMsgTxt(msg, source, feature, INSIGNIFICANT_INDEX));
@@ -45,12 +52,12 @@ public class Diagnostician implements IDiagnostician {
 
 	public void error(String msg, EObject source, EStructuralFeature feature) {
 		validationFailed = true;
-		logger.logError("Validation error: "+ getMsgTxt(msg, source, feature, INSIGNIFICANT_INDEX), source);
+		logger.logError("Validation error: "+ getMsgTxt(msg, source, feature, INSIGNIFICANT_INDEX));
 	}
 
 	public void error(String msg, EObject source, EStructuralFeature feature, int idx) {
 		validationFailed = true;
-		logger.logError("Validation error: " + getMsgTxt(msg, source, feature, idx), source);
+		logger.logError("Validation error: " + getMsgTxt(msg, source, feature, idx));
 	}
 
 	public boolean isFailed() {
@@ -58,15 +65,26 @@ public class Diagnostician implements IDiagnostician {
 	}
 
 	private String getMsgTxt(String msg, EObject source, EStructuralFeature feature, int idx) {
-		if (source==null || feature==null)
-			return msg;
-
-		if (idx==INSIGNIFICANT_INDEX)
-			return msg + " (" + fsmNameProvider.getName(source) + ", "
-							+ feature.getName()+")";
-		else
-			return msg + " (" + fsmNameProvider.getName(source) + ", "
-							+ feature.getName() + " at index "+idx+")";
+		StringBuilder result = new StringBuilder(msg);
+		
+		if(source != null) {
+			result.append(" ");
+			
+			if(feature != null) {
+				result.append("(" + fsmNameProvider.getName(source) + ", " + feature.getName());
+				if(idx != INSIGNIFICANT_INDEX) {
+					result.append(" at index " + idx);
+				}
+				result.append(")");
+			}
+			
+			// prefer location to toString()
+			URI uri = EcoreUtil.getURI(source);
+			String objInfo = (uri != null && !source.eIsProxy()) ? uri.toString() : source.toString();
+			result.append(objInfo);
+		}
+		
+		return result.toString();
 	}
 
 }

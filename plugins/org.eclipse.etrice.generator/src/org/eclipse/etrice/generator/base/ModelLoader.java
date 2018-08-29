@@ -18,14 +18,17 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.etrice.core.common.scoping.ModelLocatorUriResolver;
-import org.eclipse.etrice.core.genmodel.fsm.ILogger;
-import org.eclipse.etrice.generator.fsm.base.NullLogger;
+import org.eclipse.etrice.generator.base.args.Arguments;
+import org.eclipse.etrice.generator.base.io.IGeneratorResourceLoader;
+import org.eclipse.etrice.generator.base.logging.ILogger;
+import org.eclipse.etrice.generator.base.logging.NullLogger;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.CancelIndicator;
@@ -38,7 +41,7 @@ import com.google.inject.Provider;
  * @author Henrik Rentz-Reichert
  *
  */
-public class ModelLoader {
+public class ModelLoader implements IGeneratorResourceLoader {
 
 	protected ILogger logger;
 	
@@ -59,6 +62,20 @@ public class ModelLoader {
 	private HashSet<URI> mainModelURIs = new HashSet<URI>();
 	private HashSet<URI> loadedModelURIs = new HashSet<URI>();
 
+	@Override
+	public List<Resource> load(Arguments arguments, ILogger logger) {
+		logger.logInfo("-- reading models");
+		
+		if(loadModels(arguments.getFiles(), logger)) {
+			List<Resource> resources = getResourceSet().getResources().stream()
+					.filter(r -> getMainModelURIs().contains(r.getURI())).collect(Collectors.toList());
+			return resources;
+		}
+		else {
+			throw new GeneratorException("reading models failed");
+		}
+	}
+	
     public boolean loadModels(List<String> uriList) {
         return loadModels(uriList, null);
     }
@@ -105,11 +122,11 @@ public class ModelLoader {
 			catch (Exception e) {
 				ok = false;
 				if (e instanceof FileNotFoundException)
-					logger.logError("couldn't load '"+uri+"' (file not found)", null);
+					logger.logError("couldn't load '"+uri+"' (file not found)");
 				if(e instanceof SAXException)
-					logger.logError("couldn't load '"+uri+"' (maybe unknown or wrong file extension, eTrice file extensions have to be lower case)", null);
+					logger.logError("couldn't load '"+uri+"' (maybe unknown or wrong file extension, eTrice file extensions have to be lower case)");
 				else
-					logger.logError(e.getMessage(), null);
+					logger.logError(e.getMessage());
 			}
 			modelURIs.remove(uri);
 		}

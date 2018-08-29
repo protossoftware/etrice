@@ -1,10 +1,12 @@
 dependencies {
 	compile project(':plugins:org.eclipse.etrice.core.common')
+	compile project(':plugins:org.eclipse.etrice.core.config')
 	compile project(':plugins:org.eclipse.etrice.core.fsm')
 	compile project(':plugins:org.eclipse.etrice.core.genmodel')
 	compile project(':plugins:org.eclipse.etrice.core.room')
 	compile project(':plugins:org.eclipse.etrice.core.etphys')
 	compile project(':plugins:org.eclipse.etrice.core.etmap')
+	compile project(':plugins:org.eclipse.etrice.generator.base')
 	compile project(':plugins:org.eclipse.etrice.generator.fsm')
 	
 	compile "org.eclipse.xtend:org.eclipse.xtend.lib:$versions.xtext"

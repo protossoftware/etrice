@@ -50,7 +50,6 @@ import org.eclipse.etrice.core.genmodel.etricegen.impl.AbstractInstanceImpl;
 import org.eclipse.etrice.core.genmodel.etricegen.impl.StructureInstanceImpl;
 import org.eclipse.etrice.core.genmodel.fsm.ExtendedFsmGenBuilder;
 import org.eclipse.etrice.core.genmodel.fsm.IDiagnostician;
-import org.eclipse.etrice.core.genmodel.fsm.ILogger;
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.GraphContainer;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerClass;
@@ -76,6 +75,7 @@ import org.eclipse.etrice.core.room.SubProtocol;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.SubSystemRef;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
+import org.eclipse.etrice.generator.base.logging.ILogger;
 
 import com.google.inject.Injector;
 

@@ -21,14 +21,14 @@ import org.eclipse.etrice.core.common.base.RealLiteral
 import org.eclipse.etrice.core.common.base.StringLiteral
 import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance
-import org.eclipse.etrice.generator.fsm.base.IGeneratorFileIo
+import org.eclipse.etrice.generator.base.io.IGeneratorFileIO
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import com.google.inject.Singleton
 
 @Singleton
 class GnuplotScriptGenerator { 
 	@Inject
-	IGeneratorFileIo fileIo
+	IGeneratorFileIO fileIo
 
 	@Inject
 	extension RoomExtensions roomExtensions

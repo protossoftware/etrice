@@ -19,8 +19,9 @@ import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance
 import org.eclipse.etrice.core.genmodel.etricegen.SystemInstance
 import org.eclipse.etrice.generator.cpp.Main
 import org.eclipse.etrice.generator.fsm.base.FileSystemHelpers
-import org.eclipse.etrice.generator.fsm.base.IGeneratorFileIo
+import org.eclipse.etrice.generator.base.io.IGeneratorFileIO
 import org.eclipse.etrice.generator.generic.RoomExtensions
+import org.eclipse.etrice.generator.cpp.setup.GeneratorOptionsHelper
 
 @Singleton
 class NodeRunnerGen {
@@ -28,8 +29,9 @@ class NodeRunnerGen {
 	@Inject extension RoomExtensions roomExt
 	@Inject extension CppExtensions
 	@Inject extension FileSystemHelpers
+	@Inject extension GeneratorOptionsHelper
 
-	@Inject IGeneratorFileIo fileIO
+	@Inject IGeneratorFileIO fileIO
 
 	def doGenerate(Root root) {
 		for (nr : ETMapUtil::getNodeRefs()) {

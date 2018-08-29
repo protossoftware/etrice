@@ -17,7 +17,7 @@ import com.google.inject.Singleton
 import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance
 import org.eclipse.etrice.core.genmodel.etricegen.SystemInstance
-import org.eclipse.etrice.generator.fsm.base.IGeneratorFileIo
+import org.eclipse.etrice.generator.base.io.IGeneratorFileIO
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.core.etmap.util.ETMapUtil
 import org.eclipse.etrice.generator.fsm.base.FileSystemHelpers
@@ -29,7 +29,7 @@ class NodeRunnerGen {
 	@Inject extension JavaExtensions
 	@Inject extension FileSystemHelpers
 	
-	@Inject IGeneratorFileIo fileIO
+	@Inject IGeneratorFileIO fileIO
 	
 	def doGenerate(Root root) {
 		for (nr : ETMapUtil::getNodeRefs()) {

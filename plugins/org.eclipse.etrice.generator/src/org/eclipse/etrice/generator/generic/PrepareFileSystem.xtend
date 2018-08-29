@@ -20,9 +20,10 @@ import java.util.HashSet
 import java.util.Set
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.etrice.core.genmodel.etricegen.Root
-import org.eclipse.etrice.core.genmodel.fsm.ILogger
-import org.eclipse.etrice.generator.fsm.base.IncrementalGenerationFileIo
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
+import org.eclipse.etrice.generator.base.logging.ILogger
+import org.eclipse.etrice.generator.base.AbstractGenerator
+import org.eclipse.etrice.generator.base.AbstractGeneratorOptions
 
 /**
  * A class that is used to recursively erase all folders receiving generated code
@@ -50,7 +51,7 @@ class PrepareFileSystem {
 	}
 	
 	def void prepareInfoTargetPaths(Resource resource) {
-		if(!IncrementalGenerationFileIo.generateIncremental) 
+		if(!AbstractGenerator.settings.get(AbstractGeneratorOptions.GEN_INCREMENTAL)) 
 			return;
 			
 		var Set<String> pathes = new HashSet<String>();

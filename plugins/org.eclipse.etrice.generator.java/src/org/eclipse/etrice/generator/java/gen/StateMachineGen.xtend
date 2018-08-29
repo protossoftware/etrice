@@ -22,9 +22,13 @@ import org.eclipse.etrice.generator.generic.GenericStateMachineGenerator
 import org.eclipse.etrice.generator.java.Main
 
 import static extension org.eclipse.etrice.core.genmodel.fsm.FsmGenExtensions.*
+import com.google.inject.Inject
+import org.eclipse.etrice.generator.java.setup.GeneratorOptionsHelper
 
 @Singleton
 class StateMachineGen extends GenericStateMachineGenerator {
+
+	@Inject protected extension GeneratorOptionsHelper
 
 	val nodeComparator = new NodeComparator
 

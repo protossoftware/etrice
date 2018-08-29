@@ -12,19 +12,19 @@
 
 package org.eclipse.etrice.generator.java;
 
-import java.util.Iterator;
+import java.util.List;
 
-import org.eclipse.emf.common.EMFPlugin;
-import org.eclipse.etrice.core.etmap.ETMapStandaloneSetup;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.etrice.core.etmap.util.ETMapUtil;
-import org.eclipse.etrice.core.etphys.ETPhysStandaloneSetup;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.generator.base.AbstractGenerator;
 import org.eclipse.etrice.generator.base.IDataConfiguration;
-import org.eclipse.etrice.generator.java.gen.GlobalSettings;
+import org.eclipse.etrice.generator.base.args.Arguments;
+import org.eclipse.etrice.generator.base.logging.Loglevel;
 import org.eclipse.etrice.generator.java.gen.MainGen;
 import org.eclipse.etrice.generator.java.gen.Validator;
 import org.eclipse.etrice.generator.java.setup.GeneratorModule;
+import org.eclipse.etrice.generator.java.setup.GeneratorOptions;
 import org.eclipse.xtext.scoping.impl.ImportUriResolver;
 
 import com.google.inject.Inject;
@@ -32,23 +32,11 @@ import com.google.inject.Singleton;
 
 @Singleton
 public class Main extends AbstractGenerator {
-	
-	public static final String OPTION_GEN_PERSIST = "-persistable";
-	public static final String OPTION_GEN_STORE_DATA_OBJ = "-storeDataObj";
-	
-	/**
-	 * print usage message to output/console
-	 */
-	protected void printUsage() {
-		output.println(this.getClass().getName()+getCommonOptions()
-				+" ["+OPTION_GEN_PERSIST+"]"
-				+" ["+OPTION_GEN_STORE_DATA_OBJ+"]"
-				+" <list of model file paths>");
-		output.println(getCommonOptionDescriptions());
-		output.println("      -persistable                       # if specified make actor classes persistable");
-		output.println("      -storeDataObj                      # if specified equip actor classes with store/restore using POJOs");
-	}
 
+	public static int run(String[] args) {
+		return createAndRunGenerator(new GeneratorModule(), args);
+	}
+	
 	/**
 	 * The main method delegates to {@link #createAndRunGenerator(com.google.inject.Module, String[])}
 	 * and calls {@link System#exit(int)} if an error occurred and {@link #isTerminateOnError()}.
@@ -56,9 +44,8 @@ public class Main extends AbstractGenerator {
 	 * @param args the command line arguments
 	 */
 	public static void main(String[] args) {
-		int ret = createAndRunGenerator(new GeneratorModule(), args);
-		if (isTerminateOnError() && ret!=GENERATOR_OK)
-			System.exit(ret);
+		int ret = run(args);
+		System.exit(ret);
 	}
 
 	@Inject
@@ -75,122 +62,49 @@ public class Main extends AbstractGenerator {
 	
 	@Inject
 	protected ImportUriResolver uriResolver;
-	
-	/**
-	 * This method recognizes the option {@value #OPTION_GEN_PERSIST} and delegates all
-	 * other cases to super.
-	 * 
-	 * @see org.eclipse.etrice.generator.base.AbstractGenerator#parseOption(java.util.Iterator)
-	 */
-	@Override
-	protected boolean parseOption(String arg, Iterator<String> it) {
-		if (arg.equals(OPTION_GEN_PERSIST)) {
-			getSettings().setGeneratePersistenceInterface(true);
-			return true;
-		}
-		else if (arg.equals(OPTION_GEN_STORE_DATA_OBJ)) {
-			getSettings().setGenerateStoreDataObj(true);
-			return true;
-		}
-		
-		return super.parseOption(arg, it);
-	}
-
-	/**
-	 * @return the unique {@link GlobalSettings}
-	 */
-	public static GlobalSettings getSettings() {
-		return (GlobalSettings) getInstance().getGeneratorSettings();
-	}
-
-	/**
-	 * setup the eTrice mapping model plug-in
-	 */
-	protected void setupMappingModel() {
-		if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
-			ETMapStandaloneSetup.doSetup();
-		}
-	}
-
-	/**
-	 * setup the eTrice mapping model plug-in
-	 */
-	protected void setupPhysicalModel() {
-		if (!EMFPlugin.IS_ECLIPSE_RUNNING)
-			ETPhysStandaloneSetup.doSetup();
-	}
 
 	/* (non-Javadoc)
 	 * @see org.eclipse.etrice.generator.base.AbstractGenerator#runGenerator()
 	 */
-	protected int runGenerator() {
-		setupRoomModel();
-		dataConfig.doSetup();
-		setupMappingModel();
-		setupPhysicalModel();
+	protected int runGenerator(List<Resource> resources, Arguments arguments) {
 		
-		try {
-			activateModelLocator();
-			
-			if (!loadModels(getSettings().getInputModelURIs())) {
-				logger.logInfo("loading of models failed");
-				logger.logError("-- terminating", null);
-				return GENERATOR_ERROR;
-			}
-			
-			if (!validateModels()) {
-				logger.logInfo("validation failed");
-				logger.logError("-- terminating", null);
-				return GENERATOR_ERROR;
-			}
-			
-			if (!dataConfig.setResources(getResourceSet(), logger)) {
-				logger.logInfo("configuration errors");
-				logger.logError("-- terminating", null);
-				return GENERATOR_ERROR;
-			}
-			
-			Root genModel = createGeneratorModel(getSettings().isGenerateAsLibrary(), getSettings().getGeneratorModelPath());
-			if (diagnostician.isFailed() || genModel==null) {
-				logger.logInfo("errors during build of generator model");
-				logger.logError("-- terminating", null);
-				return GENERATOR_ERROR;
-			}
-			
-			if (!validator.validate(genModel)) {
-				logger.logInfo("validation failed during build of generator model");
-				logger.logError("-- terminating", null);
-				return GENERATOR_ERROR;
-			}
-			
-			ETMapUtil.processModels(genModel, getResourceSet(), diagnostician);
-			if (getSettings().isDebugMode()) {
-				logger.logInfo("-- begin dump of mappings");
-				logger.logInfo(ETMapUtil.dumpMappings());
-				logger.logInfo("-- end dump of mappings");
-			}
-			if (diagnostician.isFailed() || genModel==null) {
-				logger.logInfo("errors in mapping");
-				logger.logError("-- terminating", null);
-				return GENERATOR_ERROR;
-			}
-			
-			logger.logInfo("-- starting code generation");
-			mainGenerator.doGenerate(genModel.eResource());
-			
-			if (getSettings().isGenerateDocumentation()) {
-				mainDocGenerator.doGenerate(genModel.eResource());
-			}
-			
-			if (diagnostician.isFailed()) {
-				logger.logInfo("errors during code generation");
-				logger.logError("-- terminating", null);
-				return GENERATOR_ERROR;
-			}
-			logger.logInfo("-- finished code generation");
+		if (!dataConfig.setResources(getResourceSet(), logger)) {
+			logger.logError("configuration errors");
+			return GENERATOR_ERROR;
 		}
-		finally {
-			deactivateModelLocator();
+		
+		Root genModel = createGeneratorModel(resources, arguments);
+		if (diagnostician.isFailed() || genModel==null) {
+			logger.logError("errors during build of generator model");
+			return GENERATOR_ERROR;
+		}
+		
+		if (!validator.validate(genModel)) {
+			logger.logError("validation failed during build of generator model");
+			return GENERATOR_ERROR;
+		}
+		
+		ETMapUtil.processModels(genModel, getResourceSet(), diagnostician);
+		if (Loglevel.DEBUG.compareTo(logger.getLoglevel()) >= 0) {
+			logger.logInfo("-- begin dump of mappings");
+			logger.logInfo(ETMapUtil.dumpMappings());
+			logger.logInfo("-- end dump of mappings");
+		}
+		if (diagnostician.isFailed() || genModel==null) {
+			logger.logError("errors in mapping");
+			return GENERATOR_ERROR;
+		}
+		
+		logger.logInfo("-- starting code generation");
+		mainGenerator.doGenerate(genModel.eResource());
+		
+		if (arguments.get(GeneratorOptions.DOCUMENTATION)) {
+			mainDocGenerator.doGenerate(genModel.eResource());
+		}
+		
+		if (diagnostician.isFailed()) {
+			logger.logError("errors during code generation");
+			return GENERATOR_ERROR;
 		}
 		
 		return GENERATOR_OK;

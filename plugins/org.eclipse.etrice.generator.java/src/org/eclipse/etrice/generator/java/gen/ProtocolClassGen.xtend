@@ -20,19 +20,20 @@ import org.eclipse.etrice.core.room.DataClass
 import org.eclipse.etrice.core.room.Message
 import org.eclipse.etrice.core.room.ProtocolClass
 import org.eclipse.etrice.generator.fsm.base.FileSystemHelpers
-import org.eclipse.etrice.generator.fsm.base.IGeneratorFileIo
+import org.eclipse.etrice.generator.base.io.IGeneratorFileIO
 import org.eclipse.etrice.generator.generic.GenericProtocolClassGenerator
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.TypeHelpers
 import org.eclipse.etrice.generator.java.Main
-import org.eclipse.etrice.core.genmodel.fsm.ILogger
 import org.eclipse.etrice.generator.generic.ILanguageExtension
+import org.eclipse.etrice.core.genmodel.fsm.IDiagnostician
+import org.eclipse.etrice.generator.java.setup.GeneratorOptionsHelper
 
 @Singleton
 class ProtocolClassGen extends GenericProtocolClassGenerator {
 
-	@Inject IGeneratorFileIo fileIO
+	@Inject IGeneratorFileIO fileIO
 	@Inject extension JavaExtensions
 	@Inject extension RoomExtensions
 	@Inject extension ProcedureHelpers
@@ -40,7 +41,8 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 	@Inject extension TypeHelpers
 	@Inject extension DataClassGen
 	@Inject extension FileSystemHelpers
-	@Inject ILogger logger
+	@Inject protected extension GeneratorOptionsHelper
+	@Inject IDiagnostician diagnostician
 
 	def doGenerate(Root root) {
 		for (pc: root.protocolClasses.filter(cl|cl.isValidGenerationLocation)) {
@@ -57,7 +59,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 					""
 			}
 			if (contents.toString.empty)
-				logger.logError("synchronous protocols not supported yet", pc)
+				diagnostician.error("synchronous protocols not supported yet", pc, null)
 			else
 				fileIO.generateFile("generating ProtocolClass implementation", path, infopath, file, contents)
 		}

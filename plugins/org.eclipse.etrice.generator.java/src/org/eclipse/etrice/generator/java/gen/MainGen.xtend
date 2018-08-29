@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.etrice.generator.generic.PrepareFileSystem
 import org.eclipse.etrice.generator.java.Main
+import org.eclipse.etrice.generator.java.setup.GeneratorOptionsHelper
 
 @Singleton
 class MainGen {
@@ -32,6 +33,8 @@ class MainGen {
 	@Inject NodeGen nodeGen
 	@Inject NodeRunnerGen nodeRunnerGen
 	@Inject PrepareFileSystem prepFS
+	
+	@Inject protected extension GeneratorOptionsHelper
 	
 	def void doGenerate(Resource resource) {
 		prepFS.prepareCodeTargetPaths(resource)

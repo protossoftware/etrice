@@ -30,7 +30,7 @@ import org.eclipse.etrice.core.config.LiteralConfigValue
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance
 import org.eclipse.etrice.core.genmodel.etricegen.InterfaceItemInstance
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance
-import org.eclipse.etrice.core.genmodel.fsm.ILogger
+import org.eclipse.etrice.generator.base.logging.ILogger
 import org.eclipse.etrice.core.room.ActorClass
 import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.core.room.ProtocolClass

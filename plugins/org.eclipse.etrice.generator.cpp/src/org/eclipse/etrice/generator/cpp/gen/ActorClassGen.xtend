@@ -23,15 +23,16 @@ import org.eclipse.etrice.core.genmodel.fsm.FsmGenExtensions
 import org.eclipse.etrice.core.room.ActorClass
 import org.eclipse.etrice.generator.cpp.Main
 import org.eclipse.etrice.generator.fsm.base.FileSystemHelpers
-import org.eclipse.etrice.generator.fsm.base.IGeneratorFileIo
+import org.eclipse.etrice.generator.base.io.IGeneratorFileIO
 import org.eclipse.etrice.generator.generic.GenericActorClassGenerator
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
+import org.eclipse.etrice.generator.cpp.setup.GeneratorOptionsHelper
 
 @Singleton
 class ActorClassGen extends GenericActorClassGenerator {
 
-	@Inject protected IGeneratorFileIo fileIO
+	@Inject protected IGeneratorFileIO fileIO
 	@Inject protected extension CppExtensions
 	@Inject protected extension RoomExtensions
 
@@ -39,6 +40,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 	@Inject protected Initialization initHelper
 	@Inject protected extension StateMachineGen
 	@Inject protected extension FileSystemHelpers
+	@Inject protected extension GeneratorOptionsHelper
 
 	def doGenerate(Root root) {
 		val Map<ActorClass, WiredActorClass> ac2wired = newHashMap

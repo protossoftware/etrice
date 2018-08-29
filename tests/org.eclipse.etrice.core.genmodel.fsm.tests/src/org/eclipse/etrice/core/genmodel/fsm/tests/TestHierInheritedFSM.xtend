@@ -14,7 +14,6 @@ package org.eclipse.etrice.core.genmodel.fsm.tests
 
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.etrice.core.genmodel.fsm.FsmGenChecker
-import org.eclipse.etrice.core.genmodel.fsm.NullLogger
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.GraphContainer
 import org.junit.Before
 import org.junit.Test
@@ -24,6 +23,7 @@ import static org.junit.Assert.assertFalse
 import static org.junit.Assert.assertNotNull
 
 import static extension org.eclipse.etrice.core.genmodel.fsm.FsmGenExtensions.*
+import org.eclipse.etrice.generator.base.logging.NullLogger
 
 class TestHierInheritedFSM extends FsmGenTestBase {
 	

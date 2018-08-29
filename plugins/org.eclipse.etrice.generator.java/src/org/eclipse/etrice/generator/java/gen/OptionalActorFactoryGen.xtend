@@ -8,13 +8,13 @@ import org.eclipse.etrice.core.genmodel.etricegen.WiredActorClass
 import org.eclipse.etrice.core.room.ActorClass
 import org.eclipse.etrice.core.room.CommunicationType
 import org.eclipse.etrice.core.room.util.RoomHelpers
-import org.eclipse.etrice.generator.fsm.base.IGeneratorFileIo
+import org.eclipse.etrice.generator.base.io.IGeneratorFileIO
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.fsm.base.FileSystemHelpers
 
 class OptionalActorFactoryGen {
 
-	@Inject IGeneratorFileIo fileIO
+	@Inject IGeneratorFileIO fileIO
 	@Inject extension RoomHelpers
 	@Inject extension JavaExtensions
 	@Inject extension RoomExtensions

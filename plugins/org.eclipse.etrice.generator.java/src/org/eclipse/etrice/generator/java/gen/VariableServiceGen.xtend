@@ -28,7 +28,7 @@ import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.core.room.DataClass
 import org.eclipse.etrice.core.room.RoomModel
 import org.eclipse.etrice.generator.base.IDataConfiguration
-import org.eclipse.etrice.generator.fsm.base.IGeneratorFileIo
+import org.eclipse.etrice.generator.base.io.IGeneratorFileIO
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.TypeHelpers
@@ -40,7 +40,7 @@ import org.eclipse.etrice.core.common.converter.TimeConverter
 @Singleton
 class VariableServiceGen {
 	
-	@Inject IGeneratorFileIo fileIO
+	@Inject IGeneratorFileIO fileIO
 	@Inject extension JavaExtensions stdExt
 	@Inject extension RoomExtensions roomExt
 	@Inject IDataConfiguration configExt

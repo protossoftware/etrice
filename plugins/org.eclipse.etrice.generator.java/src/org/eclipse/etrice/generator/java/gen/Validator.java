@@ -13,7 +13,7 @@
 package org.eclipse.etrice.generator.java.gen;
 
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
-import org.eclipse.etrice.core.genmodel.fsm.ILogger;
+import org.eclipse.etrice.generator.base.logging.ILogger;
 
 import com.google.inject.Inject;
 
@@ -40,7 +40,7 @@ public class Validator {
 //		}
 		
 		if (errorCount>0) {
-			logger.logError("Java generator detected "+errorCount+" error(s) - terminating", null);
+			logger.logError("Java generator detected "+errorCount+" error(s) - terminating");
 			return false;
 		}
 		

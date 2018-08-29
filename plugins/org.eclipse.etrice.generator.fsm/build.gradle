@@ -5,5 +5,4 @@ dependencies {
 	compile "org.eclipse.xtend:org.eclipse.xtend.lib:$versions.xtext"
 	compile "org.eclipse.platform:org.eclipse.core.runtime:$versions.core_runtime"
 	compile "org.eclipse.platform:org.eclipse.core.resources:$versions.core_resources"
-	compile "commons-io:commons-io:$versions.commons_io"
 }

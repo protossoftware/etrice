@@ -6,13 +6,14 @@ import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.etrice.core.etmap.eTMap.ETMapFactory
 import org.eclipse.etrice.core.etphys.eTPhys.PhysicalModel
 import org.eclipse.etrice.core.etphys.eTPhys.PhysicalSystem
-import org.eclipse.etrice.core.genmodel.fsm.ILogger
 import org.eclipse.etrice.core.room.RoomFactory
 import org.eclipse.etrice.core.room.RoomModel
 import org.eclipse.etrice.core.room.StructureClass
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import java.util.Collection
 import org.eclipse.emf.common.util.URI
+import org.eclipse.etrice.generator.base.logging.ILogger
+import org.eclipse.etrice.core.genmodel.fsm.IDiagnostician
 
 @FinalFieldsConstructor
 class TestInstanceCreator {
@@ -24,6 +25,7 @@ class TestInstanceCreator {
 
 	// ctor
 	val ILogger logger
+	val IDiagnostician diagnostician
 
 	/**
 	 * Creates instance and mapping for classes having <code>@TestInstance</code> annotation:
@@ -82,14 +84,14 @@ class TestInstanceCreator {
 		// validation
 		if (allAnnotatedClasses.size > 1) {
 			allAnnotatedClasses.forEach[roomCls|
-				logger.logError('''TestInstanceCreator: mapping failed, multiple test instances present''', roomCls)]
+				diagnostician.error('''TestInstanceCreator: mapping failed, multiple test instances present''', roomCls, null)]
 			return null
 		}
 
 		// get physical system
 		val List<PhysicalSystem> allPhysSystems = physModels.fold(newArrayList,[list, model|list += model.systems return list])
 		if (allPhysSystems.size != 1) {
-			logger.logError('''TestInstanceCreator: mapping failed, found «allPhysSystems.size» physical systems''', null)
+			logger.logError('''TestInstanceCreator: mapping failed, found «allPhysSystems.size» physical systems''')
 			return null
 		}
 
