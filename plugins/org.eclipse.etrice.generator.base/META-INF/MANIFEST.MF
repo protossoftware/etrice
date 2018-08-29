@@ -11,6 +11,11 @@ Require-Bundle: org.eclipse.emf.ecore,
  org.eclipse.core.resources,
  org.eclipse.core.runtime,
  org.apache.commons.io
-Export-Package: org.eclipse.etrice.generator.base.args,
- org.eclipse.etrice.generator.base.cli
+Export-Package: org.eclipse.etrice.generator.base,
+ org.eclipse.etrice.generator.base.args,
+ org.eclipse.etrice.generator.base.cli,
+ org.eclipse.etrice.generator.base.io,
+ org.eclipse.etrice.generator.base.logging,
+ org.eclipse.etrice.generator.base.setup,
+ org.eclipse.etrice.generator.base.validation
 Bundle-Name: Base Generator
