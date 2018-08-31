@@ -70,34 +70,33 @@ public class MessageService extends AbstractMessageService {
 	public void run() {
 		running = true;
 
-		if(pollingScheduler != null)
+		if(pollingScheduler != null) {
 			pollingScheduler.scheduleAtFixedRate(new PollingTask(), pollingInterval, pollingInterval, TimeUnit.NANOSECONDS);
+		}
 
-		while (running) {
+		while(true) {
 			Message msg = null;
-
-			// get next Message from Queue
+			
 			synchronized(this) {
-				msg = getMessageQueue().pop();
-			}
-
-			if (msg == null) {
-				// no message in queue -> wait until Thread is notified
-				try {
-					synchronized(this) {
-						if (!running)
-							return;
+				while(getMessageQueue().isEmpty() && running) {
+					// no message in queue -> wait until Thread is notified
+					try {
 						wait();
 					}
+					catch (InterruptedException e) {}
 				}
-				catch (InterruptedException e) {
+				if(!running) {
+					return;
+				}
+				else {
+					// get next Message from Queue
+					msg = getMessageQueue().pop();
 				}
 			}
-			else {
-				// process message
-				lastMessageTimestamp = System.currentTimeMillis();
-				getMessageDispatcher().receive(msg);
-			}
+			
+			// process message
+			lastMessageTimestamp = System.currentTimeMillis();
+			getMessageDispatcher().receive(msg);
 		}
 	}
 

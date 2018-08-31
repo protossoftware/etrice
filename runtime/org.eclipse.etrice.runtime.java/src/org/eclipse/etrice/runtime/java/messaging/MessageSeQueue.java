@@ -74,8 +74,12 @@ public class MessageSeQueue extends RTObject{
 		return last;
 	}
 	
+	public boolean isEmpty() {
+		return last == null;
+	}
+	
 	public boolean isNotEmpty(){
-		return last != null;
+		return !isEmpty();
 	}
 
 	public long getHightWaterMark() {
