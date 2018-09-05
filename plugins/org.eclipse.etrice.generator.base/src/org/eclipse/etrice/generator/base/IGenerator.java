@@ -26,12 +26,7 @@ import org.eclipse.etrice.generator.base.logging.ILogger;
  * A generator that produces code from an emf resource.
  */
 public interface IGenerator {
-	
-	/**
-	 * Registers the required EMF packages of the generator.
-	 */
-	void doEMFRegistration();
-	
+		
 	/**
 	 * Generates code for the passed resources.
 	 * 

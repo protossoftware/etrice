@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
@@ -41,14 +42,22 @@ import com.google.inject.Provider;
 public class GeneratorResourceLoader implements IGeneratorResourceLoader {
 	
 	private Provider<ResourceSet> resourceSetProvider;
+	private IGeneratorEMFSetup emfSetup;
+	
+	private boolean initializedEMF;
 	
 	@Inject
-	public GeneratorResourceLoader(Provider<ResourceSet> resourceSetProvider) {
+	public GeneratorResourceLoader(Provider<ResourceSet> resourceSetProvider, IGeneratorEMFSetup emfSetup) {
 		this.resourceSetProvider = resourceSetProvider;
+		this.emfSetup = emfSetup;
+		
+		initializedEMF = EMFPlugin.IS_ECLIPSE_RUNNING;
 	}
 	
 	@Override
 	public List<Resource> load(Arguments arguments, ILogger logger) throws GeneratorException {
+		doEMFRegistration();
+		
 		List<Resource> models = new ArrayList<>(arguments.getFiles().size());
 		ResourceSet resourceSet = resourceSetProvider.get();
 		Adapter resourceAddedAdapter = new ResourceAddedAdapter(logger);
@@ -62,6 +71,13 @@ public class GeneratorResourceLoader implements IGeneratorResourceLoader {
 		EcoreUtil.resolveAll(resourceSet);
 		
 		return models;
+	}
+	
+	private void doEMFRegistration() {
+		if(!initializedEMF) {
+			emfSetup.doEMFRegistration();
+			initializedEMF = true;
+		}
 	}
 	
 	private Resource loadResource(String file, ResourceSet rs, ILogger logger) {

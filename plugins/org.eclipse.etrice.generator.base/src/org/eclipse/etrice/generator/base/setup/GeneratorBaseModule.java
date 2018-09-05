@@ -16,7 +16,6 @@
 package org.eclipse.etrice.generator.base.setup;
 
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.etrice.generator.base.IGenerator;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.XtextResourceSet;
 
@@ -32,15 +31,6 @@ public abstract class GeneratorBaseModule implements Module {
 	public void configure(Binder binder) {
 		binder.bind(ResourceSet.class).to(XtextResourceSet.class);
 		binder.bind(IEncodingProvider.class).to(IEncodingProvider.Runtime.class);
-		
-		binder.bind(IGenerator.class).to(bindIGenerator());
 	}
-	
-	/**
-	 * Binds the {@link IGenerator}.
-	 * 
-	 * @return the class of the generator implementation
-	 */
-	public abstract Class<? extends IGenerator> bindIGenerator();
 
 }

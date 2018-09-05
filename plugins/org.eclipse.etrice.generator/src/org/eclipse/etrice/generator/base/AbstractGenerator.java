@@ -27,12 +27,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.etrice.core.ConfigStandaloneSetup;
-import org.eclipse.etrice.core.RoomStandaloneSetup;
-import org.eclipse.etrice.core.etmap.ETMapStandaloneSetup;
-import org.eclipse.etrice.core.etphys.ETPhysStandaloneSetup;
 import org.eclipse.etrice.core.fsm.fSM.DetailCode;
-import org.eclipse.etrice.core.genmodel.SetupGenmodel;
 import org.eclipse.etrice.core.genmodel.builder.GeneratorModelBuilder;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
@@ -49,6 +44,7 @@ import org.eclipse.etrice.generator.base.logging.ILogger;
 import org.eclipse.etrice.generator.fsm.generic.IDetailCodeTranslator;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.etrice.generator.generic.TestInstanceCreator;
+
 import com.google.inject.Inject;
 import com.google.inject.Module;
 
@@ -134,12 +130,6 @@ public abstract class AbstractGenerator implements IGenerator, IDetailCodeTransl
 	}
 	
 	/**
-	 * The injected logger
-	 */
-	@Inject
-	protected ILogger logger;
-	
-	/**
 	 * The injected diagnostician
 	 */
 	@Inject
@@ -162,15 +152,6 @@ public abstract class AbstractGenerator implements IGenerator, IDetailCodeTransl
 	}
 	
 	@Override
-	public void doEMFRegistration() {
-		RoomStandaloneSetup.doSetup();
-		SetupGenmodel.doSetup();
-		ConfigStandaloneSetup.doSetup();
-		ETMapStandaloneSetup.doSetup();
-		ETPhysStandaloneSetup.doSetup();
-	}
-	
-	@Override
 	public void generate(List<Resource> resources, Arguments arguments, IGeneratorFileIO fileIO, ILogger logger) {
 		AbstractGenerator.settings = arguments;
 		RoomExtensions.setGenDir(arguments.get(AbstractGeneratorOptions.GEN_DIR));
@@ -184,7 +165,7 @@ public abstract class AbstractGenerator implements IGenerator, IDetailCodeTransl
 		}
 		resourceSet = resources.get(0).getResourceSet();
 		
-		int ret = runGenerator(resources, arguments);
+		int ret = runGenerator(resources, arguments, fileIO, logger);
 		if(ret == GENERATOR_OK) {
 			logger.logInfo("-- finished");
 		}
@@ -200,7 +181,7 @@ public abstract class AbstractGenerator implements IGenerator, IDetailCodeTransl
 	 * @param arguments the generator arguments
 	 * @return GENERATOR_OK or GENERATOR_ERROR
 	 */
-	protected abstract int runGenerator(List<Resource> resources, Arguments arguments);
+	protected abstract int runGenerator(List<Resource> resources, Arguments arguments, IGeneratorFileIO fileIO, ILogger logger);
 
 	/**
 	 * This resource set combines all resources processed by the generator
@@ -215,7 +196,7 @@ public abstract class AbstractGenerator implements IGenerator, IDetailCodeTransl
 	 * @param arguments the generator arguments
 	 * @return the {@link Root} object of the generator model (is added to a new Resource also)
 	 */
-	protected Root createGeneratorModel(List<Resource> resources, Arguments arguments) {
+	protected Root createGeneratorModel(List<Resource> resources, Arguments arguments, ILogger logger) {
 		boolean doTranslate = !arguments.get(AbstractGeneratorOptions.NOTRANSLATE);
 		boolean asLibrary = arguments.get(AbstractGeneratorOptions.LIB);
 		String genModelPath = arguments.get(AbstractGeneratorOptions.SAVE_GEN_MODEL);

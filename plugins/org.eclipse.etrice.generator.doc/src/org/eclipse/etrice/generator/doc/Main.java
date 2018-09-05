@@ -20,6 +20,8 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.generator.base.AbstractGenerator;
 import org.eclipse.etrice.generator.base.args.Arguments;
+import org.eclipse.etrice.generator.base.io.IGeneratorFileIO;
+import org.eclipse.etrice.generator.base.logging.ILogger;
 import org.eclipse.etrice.generator.doc.gen.InstanceDiagramGen;
 import org.eclipse.etrice.generator.doc.gen.MainGen;
 import org.eclipse.etrice.generator.doc.setup.GeneratorModule;
@@ -44,9 +46,9 @@ public class Main extends AbstractGenerator {
 	@Inject
 	protected InstanceDiagramGen instanceDiagramGenerator;
 	
-	protected int runGenerator(List<Resource> resources, Arguments arguments) {
+	protected int runGenerator(List<Resource> resources, Arguments arguments, IGeneratorFileIO fileIO, ILogger logger) {
 
-		Root genModel = createGeneratorModel(resources, arguments);
+		Root genModel = createGeneratorModel(resources, arguments, logger);
 		if (diagnostician.isFailed() || genModel==null) {
 			logger.logError("errors during build of generator model");
 			return GENERATOR_ERROR;

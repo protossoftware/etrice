@@ -19,7 +19,6 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.List;
 
-import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.etrice.generator.base.args.Arguments;
 import org.eclipse.etrice.generator.base.args.Options;
@@ -71,7 +70,6 @@ public class GeneratorApplication {
 	}
 
 	private final Options options;
-	private boolean initializedEMF = EMFPlugin.IS_ECLIPSE_RUNNING;
 	private ICommandLineParser commandLineParser;
 	private IHelpFormatter helpFormatter;
 	private Provider<Logger> loggerProvider;
@@ -86,7 +84,6 @@ public class GeneratorApplication {
 			Provider<IncrementalGeneratorFileIO> fileIOProvider, Provider<IGenerator> generatorProvider,
 			IGeneratorResourceLoader resourceLoader, IGeneratorResourceValidator resourceValidator) {
 		this.options = new Options(optionsModule);
-		this.initializedEMF = EMFPlugin.IS_ECLIPSE_RUNNING;
 		this.commandLineParser = commandLineParser;
 		this.helpFormatter = helpFormatter;
 		this.loggerProvider = loggerProvider;
@@ -164,16 +161,11 @@ public class GeneratorApplication {
 		try {
 			logger.logDebug(arguments.toString());
 
-			// Create new generator to avoid problems with static states in eTrice AbstractGenerator
-			IGenerator generator = generatorProvider.get();
-
-			doEMFRegistration(generator);
-
 			List<Resource> resources = load(arguments.getFiles(), arguments, logger);
 
 			validate(resources, arguments, logger);
 
-			generate(generator, resources, arguments, fileIO, logger);
+			generate(resources, arguments, fileIO, logger);
 		}
 		catch (Exception e) {
 			logException(e, logger);
@@ -202,13 +194,6 @@ public class GeneratorApplication {
 		return fileIO;
 	}
 
-	private void doEMFRegistration(IGenerator generator) {
-		if(!initializedEMF) {
-			generator.doEMFRegistration();
-			initializedEMF = true;
-		}
-	}
-
 	private List<Resource> load(List<String> files, Arguments arguments, ILogger logger) {
 		return resourceLoader.load(arguments, logger);
 	}
@@ -217,7 +202,9 @@ public class GeneratorApplication {
 		resourceValidator.validate(models, arguments, logger);
 	}
 
-	private void generate(IGenerator generator, List<Resource> resources, Arguments arguments, IGeneratorFileIO fileIO, ILogger logger) {
+	private void generate(List<Resource> resources, Arguments arguments, IGeneratorFileIO fileIO, ILogger logger) {
+		// Create new generator to avoid problems with static states in eTrice AbstractGenerator
+		IGenerator generator = generatorProvider.get();
 		generator.generate(resources, arguments, fileIO, logger);
 	}
 

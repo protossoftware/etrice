@@ -22,6 +22,8 @@ import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.generator.base.AbstractGenerator;
 import org.eclipse.etrice.generator.base.IDataConfiguration;
 import org.eclipse.etrice.generator.base.args.Arguments;
+import org.eclipse.etrice.generator.base.io.IGeneratorFileIO;
+import org.eclipse.etrice.generator.base.logging.ILogger;
 import org.eclipse.etrice.generator.base.logging.Loglevel;
 import org.eclipse.etrice.generator.cpp.gen.MainGen;
 import org.eclipse.etrice.generator.cpp.gen.Validator;
@@ -53,14 +55,14 @@ public class Main extends AbstractGenerator {
 	@Inject
 	protected IDataConfiguration dataConfig;
 
-	protected int runGenerator(List<Resource> resources, Arguments arguments) {
+	protected int runGenerator(List<Resource> resources, Arguments arguments, IGeneratorFileIO fileIO, ILogger logger) {
 
 		if (!dataConfig.setResources(getResourceSet(), logger)) {
 			logger.logError("configuration errors");
 			return GENERATOR_ERROR;
 		}
 
-		Root genModel = createGeneratorModel(resources, arguments);
+		Root genModel = createGeneratorModel(resources, arguments, logger);
 		if (diagnostician.isFailed() || genModel==null) {
 			logger.logError("errors during build of generator model");
 			return GENERATOR_ERROR;

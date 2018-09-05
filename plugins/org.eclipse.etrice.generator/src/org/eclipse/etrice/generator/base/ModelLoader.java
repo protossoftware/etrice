@@ -22,12 +22,14 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.etrice.core.common.scoping.ModelLocatorUriResolver;
 import org.eclipse.etrice.generator.base.args.Arguments;
+import org.eclipse.etrice.generator.base.io.IGeneratorEMFSetup;
 import org.eclipse.etrice.generator.base.io.IGeneratorResourceLoader;
 import org.eclipse.etrice.generator.base.logging.ILogger;
 import org.eclipse.etrice.generator.base.logging.NullLogger;
@@ -44,8 +46,6 @@ import com.google.inject.Provider;
  *
  */
 public class ModelLoader implements IGeneratorResourceLoader {
-
-	protected ILogger logger;
 	
 	/**
 	 * The injected resource set provider
@@ -59,6 +59,11 @@ public class ModelLoader implements IGeneratorResourceLoader {
 	@Inject
 	protected ModelLocatorUriResolver uriResolver;
 	
+	@Inject
+	private IGeneratorEMFSetup emfSetup;
+	
+	protected ILogger logger;
+	private boolean initializedEMF = EMFPlugin.IS_ECLIPSE_RUNNING;
 	private ResourceSet resourceSet;
 	private HashSet<URI> modelURIs = new HashSet<URI>();
 	private HashSet<URI> mainModelURIs = new HashSet<URI>();
@@ -66,6 +71,10 @@ public class ModelLoader implements IGeneratorResourceLoader {
 
 	@Override
 	public List<Resource> load(Arguments arguments, ILogger logger) {
+		if(!initializedEMF) {
+			emfSetup.doEMFRegistration();
+		}
+		
 		logger.logInfo("-- reading models");
 		
 		if(loadModels(arguments.getFiles(), logger)) {

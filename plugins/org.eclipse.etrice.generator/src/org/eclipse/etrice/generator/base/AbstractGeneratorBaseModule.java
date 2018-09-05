@@ -17,6 +17,7 @@ package org.eclipse.etrice.generator.base;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.etrice.core.genmodel.fsm.IDiagnostician;
+import org.eclipse.etrice.generator.base.io.IGeneratorEMFSetup;
 import org.eclipse.etrice.generator.base.io.IGeneratorResourceLoader;
 import org.eclipse.etrice.generator.base.io.IncrementalGeneratorFileIO;
 import org.eclipse.etrice.generator.base.logging.Logger;
@@ -67,8 +68,9 @@ public abstract class AbstractGeneratorBaseModule extends GeneratorBaseModule {
 		binder.bind(Logger.class).in(Singleton.class);
 		binder.bind(IncrementalGeneratorFileIO.class).in(Singleton.class);
 		
+		binder.bind(IGenerator.class).to(AbstractGenerator.class);
 		binder.bind(GeneratorBaseOptions.class).to(AbstractGeneratorOptions.class);
-		
+		binder.bind(IGeneratorEMFSetup.class).to(EMFSetup.class);
 		binder.bind(IGeneratorResourceLoader.class).to(ModelLoader.class);
 		binder.bind(IGeneratorResourceValidator.class).to(ModelValidator.class);
 		
@@ -95,11 +97,6 @@ public abstract class AbstractGeneratorBaseModule extends GeneratorBaseModule {
 		
 		binder.bind(EValidator.Registry.class).toInstance(EValidator.Registry.INSTANCE);
 		binder.bind(org.eclipse.emf.ecore.util.Diagnostician.class).to(GenerationEMFDiagnostician.class).asEagerSingleton();
-	}
-
-	@Override
-	public Class<? extends IGenerator> bindIGenerator() {
-		return AbstractGenerator.class;
 	}
 	
 	/**
