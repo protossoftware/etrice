@@ -157,7 +157,6 @@ public abstract class AbstractGenerator implements IGenerator, IDetailCodeTransl
 		AbstractGenerator.settings = arguments;
 		RoomExtensions.setGenDir(arguments.get(GeneratorApplicationOptions.GEN_DIR));
 		RoomExtensions.setGenInfoDir(arguments.get(GeneratorApplicationOptions.GEN_INFO_DIR));
-		RoomExtensions.setGenDocDir(arguments.get(AbstractGeneratorOptions.GEN_DOC_DIR));
 		
 		if(resources.isEmpty()) {
 			logger.logError("no input files");

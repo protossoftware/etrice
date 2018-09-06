@@ -195,7 +195,6 @@ public abstract class GeneratorLaunchConfigurationDelegate extends AbstractJavaL
 	 * @param argString
 	 * @throws CoreException
 	 */
-	@SuppressWarnings("deprecation")	// keep compatible
 	protected void addArguments(ILaunchConfiguration configuration, StringBuffer argString) throws CoreException {
 		if (configuration.getAttribute(GeneratorConfigTab.LIB, false)) {
 			argString.append(" -"+AbstractGeneratorOptions.LIB.getName());
@@ -208,9 +207,6 @@ public abstract class GeneratorLaunchConfigurationDelegate extends AbstractJavaL
 			argString.append(" -"+AbstractGeneratorOptions.MAIN_NAME.getName());
 			argString.append(" "+configuration.getAttribute(GeneratorConfigTab.MAIN_METHOD_NAME, AbstractGeneratorOptions.MAIN_NAME.getDefaultValue()));
 		}
-		if (configuration.getAttribute(GeneratorConfigTab.GEN_DOCUMENTATION, false)
-				|| configuration.getAttribute(GeneratorConfigTab.GEN_INSTANCE_DIAGRAM, false))
-			argString.append(" -"+AbstractGeneratorOptions.DOCUMENTATION.getName());
 		if (configuration.getAttribute(GeneratorConfigTab.DEBUG, false)) {
 			argString.append(" -"+GeneratorApplicationOptions.LOGLEVEL.getName());
 			argString.append(" debug");
@@ -236,11 +232,9 @@ public abstract class GeneratorLaunchConfigurationDelegate extends AbstractJavaL
 		boolean override = configuration.getAttribute(GeneratorConfigTab.OVERRIDE_DIRECTORIES, false);
 		String srcgenDir = prefStore.getString(PreferenceConstants.GEN_DIR);
 		String infoDir = prefStore.getString(PreferenceConstants.GEN_INFO_DIR);
-		String docDir = prefStore.getString(PreferenceConstants.GEN_DOC_DIR);
 		if (override) {
 			srcgenDir = configuration.getAttribute(GeneratorConfigTab.SRCGEN_PATH, srcgenDir);
 			infoDir = configuration.getAttribute(GeneratorConfigTab.INFO_PATH, infoDir);
-			docDir = configuration.getAttribute(GeneratorConfigTab.DOC_PATH, docDir);
 		}
 		argString.append(" -"+GeneratorApplicationOptions.GEN_DIR.getName());
 		argString.append(" "+srcgenDir);
@@ -248,8 +242,6 @@ public abstract class GeneratorLaunchConfigurationDelegate extends AbstractJavaL
 		argString.append(" -"+GeneratorApplicationOptions.GEN_INFO_DIR.getName());
 		argString.append(" "+infoDir);
 		
-		argString.append(" -"+AbstractGeneratorOptions.GEN_DOC_DIR.getName());
-		argString.append(" "+docDir);
 	}
 	
 	/**

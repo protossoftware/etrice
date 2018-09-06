@@ -82,9 +82,6 @@ public class Main extends AbstractGenerator {
 	
 	@Inject
 	private MainGen mainGenerator;
-
-	@Inject
-	protected org.eclipse.etrice.generator.doc.gen.MainGen mainDocGenerator; 
 	
 	@Inject
 	protected org.eclipse.etrice.generator.gnuplot.GnuplotScriptGenerator gnuPlotGenerator; 
@@ -135,10 +132,6 @@ public class Main extends AbstractGenerator {
 		
 		logger.logInfo("-- starting code generation");
 		mainGenerator.doGenerate(genModel.eResource());
-		
-		if (arguments.get(GeneratorOptions.DOCUMENTATION)) {
-			mainDocGenerator.doGenerate(genModel.eResource());
-		}
 		
 		if(arguments.get(GeneratorOptions.DATA_INSTR)){
 			gnuPlotGenerator.doGenerate(genModel);

@@ -44,10 +44,6 @@ public class AbstractGeneratorOptionsHelper extends GeneratorBaseOptionsHelper {
 		return args.get(AbstractGeneratorOptions.SAVE_GEN_MODEL);
 	}
 	
-	public boolean isGenerateDocumentation(Arguments args) {
-		return args.get(AbstractGeneratorOptions.DOCUMENTATION);
-	}
-	
 	public boolean isGenerateWithVerboseOutput(Arguments args) {
 		return args.get(AbstractGeneratorOptions.VERBOSE_RT);
 	}

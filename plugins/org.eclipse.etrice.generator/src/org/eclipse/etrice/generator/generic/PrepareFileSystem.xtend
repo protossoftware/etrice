@@ -77,20 +77,6 @@ class PrepareFileSystem {
 		]
 	}
 	
-	def void prepareDocTargetPaths(Resource resource) {
-		var Set<String> pathes = new HashSet<String>();
-		for (e: resource.contents){
-			if (e instanceof Root) {
-				for (mdl : (e as Root).models) {
-					val tgtpath = mdl.docGenerationTargetPath
-					if (tgtpath!==null && !tgtpath.empty)
-						pathes.add(tgtpath)
-				}
-			}
-		}
-		prepare(pathes)
-	}
-	
 	/**
 	 * Recursively erase all folders receiving generated code
 	 * and place a readme file in those folders.

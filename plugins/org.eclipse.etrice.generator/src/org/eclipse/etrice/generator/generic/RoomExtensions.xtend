@@ -54,7 +54,6 @@ class RoomExtensions extends FSMExtensions {
 
 	private static String genDir = "/src-gen/"
 	private static String genInfoDir = "/src-gen-info/"
-	private static String genDocDir = "/doc-gen/"
 
 	@Inject protected extension RoomHelpers
 
@@ -64,17 +63,11 @@ class RoomExtensions extends FSMExtensions {
 	def static setDefaultGenInfoDir() {
 		genInfoDir = "/src-gen-info/"
 	}
-	def static setDefaultGenDocDir() {
-		genDocDir = "/doc-gen/"
-	}
 	def static setGenDir(String dir) {
 		genDir = "/"+dir+"/"
 	}
 	def static setGenInfoDir(String dir) {
 		genInfoDir = "/"+dir+"/"
-	}
-	def static setGenDocDir(String dir) {
-		genDocDir = "/"+dir+"/"
 	}
 
 	//-------------------------------------------------------
@@ -108,13 +101,6 @@ class RoomExtensions extends FSMExtensions {
 	 */
 	def String getGenerationInfoSegment() {
 		genInfoDir
-	}
-
-	/**
-	 * @return the relative path to the destination folder for the generated documentation
-	 */
-	def String getDocGenerationPathSegment() {
-		genDocDir
 	}
 
 	/**
@@ -199,15 +185,6 @@ class RoomExtensions extends FSMExtensions {
 	 */
 	def String getGenerationInfoPath(EObject e){
 		return getProjectPath(e)+getGenerationInfoSegment()
-	}
-
-	/**
-	 * @param e an {@link EObject}
-	 * @return the concatenation of the objects project path
-	 * 		with the {@link #getDocGenerationPathSegment()}
-	 */
-	def String getDocGenerationTargetPath(EObject e){
-		return getProjectPath(e)+getDocGenerationPathSegment()
 	}
 
 	/**

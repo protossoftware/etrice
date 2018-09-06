@@ -28,7 +28,6 @@ import org.eclipse.etrice.generator.base.logging.Loglevel;
 import org.eclipse.etrice.generator.java.gen.MainGen;
 import org.eclipse.etrice.generator.java.gen.Validator;
 import org.eclipse.etrice.generator.java.setup.GeneratorModule;
-import org.eclipse.etrice.generator.java.setup.GeneratorOptions;
 import org.eclipse.xtext.scoping.impl.ImportUriResolver;
 
 import com.google.inject.Inject;
@@ -54,9 +53,6 @@ public class Main extends AbstractGenerator {
 
 	@Inject
 	private MainGen mainGenerator;
-
-	@Inject
-	protected org.eclipse.etrice.generator.doc.gen.MainGen mainDocGenerator; 
 	
 	@Inject
 	private Validator validator;
@@ -101,10 +97,6 @@ public class Main extends AbstractGenerator {
 		
 		logger.logInfo("-- starting code generation");
 		mainGenerator.doGenerate(genModel.eResource());
-		
-		if (arguments.get(GeneratorOptions.DOCUMENTATION)) {
-			mainDocGenerator.doGenerate(genModel.eResource());
-		}
 		
 		if (diagnostician.isFailed()) {
 			logger.logError("errors during code generation");

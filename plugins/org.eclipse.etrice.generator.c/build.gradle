@@ -9,7 +9,6 @@ dependencies {
 	compile project(':plugins:org.eclipse.etrice.generator')
 	compile project(':plugins:org.eclipse.etrice.generator.fsm')
 	compile project(':plugins:org.eclipse.etrice.generator.config')
-	compile project(':plugins:org.eclipse.etrice.generator.doc')
 	compile project(':plugins:org.eclipse.etrice.generator.gnuplot')
 	
 	compile "org.eclipse.xtend:org.eclipse.xtend.lib:$versions.xtext"

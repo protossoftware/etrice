@@ -33,13 +33,6 @@ public class AbstractGeneratorOptions extends GeneratorBaseOptions {
 			"if specified all classes are generated, not only instanciated ones",
 			false);
 	
-	public static final BooleanOption DOCUMENTATION = new BooleanOption(
-			GROUP_ETRICE,
-			"genDocu",
-			"generateDocumentation",
-			"if specified documentation is created",
-			false);
-	
 	public static final StringOption SAVE_GEN_MODEL = new StringOption(
 			GROUP_ETRICE,
 			"saveGenModel",
@@ -53,13 +46,6 @@ public class AbstractGeneratorOptions extends GeneratorBaseOptions {
 			"name",
 			"if specified the generated main method will be named as stated",
 			"main");
-	
-	public static final StringOption GEN_DOC_DIR = new StringOption(
-			GROUP_ETRICE,
-			"genDocDir",
-			"directory",
-			"the directory for generated documentation files",
-			"doc-gen");
 	
 	public static final BooleanOption MSC_INSTR = new BooleanOption(
 			GROUP_ETRICE,
@@ -94,10 +80,8 @@ public class AbstractGeneratorOptions extends GeneratorBaseOptions {
 		super.configure(options);
 		
 		options.add(LIB);
-		options.add(DOCUMENTATION);
 		options.add(SAVE_GEN_MODEL);
 		options.add(MAIN_NAME);
-		options.add(GEN_DOC_DIR);
 		options.add(MSC_INSTR);
 		options.add(DATA_INSTR);
 		options.add(VERBOSE_RT);

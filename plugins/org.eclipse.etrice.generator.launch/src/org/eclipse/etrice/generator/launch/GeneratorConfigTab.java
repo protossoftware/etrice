@@ -61,13 +61,6 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 		}
 	}
 
-	/**
-	 * @deprecated
-	 * @see GEN_DOCUMENTATION
-	 */
-	public static final String GEN_INSTANCE_DIAGRAM = "GenInstanceDiagram";
-	public static final String GEN_DOCUMENTATION = "GenDocumentation";
-	
 	public static final String GEN_MODEL_PATH = "GenModelPath";
 	public static final String SAVE_GEN_MODEL = "SaveGenModel";
 	public static final String MAIN_METHOD_NAME = "MainMethodName";
@@ -81,10 +74,8 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 	public static final String GEN_DEPS_WITHIN_PROJECT = "GenerateDepsWithinProject";
 	public static final String SRCGEN_PATH = "SrcgenPath";
 	public static final String INFO_PATH = "InfoPath";
-	public static final String DOC_PATH = "DocPath";
 	
 	private Button libButton;
-	private Button documentationButton;
 	private Button saveGenModel;
 	private Text genModelPath;
 	private Button browsePath;
@@ -96,7 +87,6 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 	private Button overrideDirectories;
 	private Text srcgenPath;
 	private Text infoPath;
-	private Text docPath;
 	protected Button dataButton;
 	private Text mainMethodName;
 
@@ -154,9 +144,6 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 				handlePathButtonSelected();
 			}
 		});
-		documentationButton = createCheckButton(mainComposite, "generate documentation");
-		documentationButton.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 2, 1));
-		documentationButton.addSelectionListener(new UpdateConfig());
 
 		useTranslationButton = createCheckButton(mainComposite, "perform code translation");
 		useTranslationButton.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 2, 1));
@@ -238,19 +225,6 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 			}
 		});
 		
-		label = new Label(mainComposite, SWT.NONE);
-		label.setText("The directory for generated &documentation:");
-		docPath = new Text(mainComposite, SWT.SINGLE | SWT.BORDER);
-		docPath.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		docPath.addModifyListener(new ModifyListener() {
-			@Override
-			public void modifyText(ModifyEvent e) {
-				validate();
-				setDirty(true);
-				updateLaunchConfigurationDialog();
-			}
-		});
-		
 		addFurtherControls(mainComposite);
 	}
 
@@ -273,12 +247,10 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 		boolean override = overrideDirectories.getSelection();
 		srcgenPath.setEnabled(override);
 		infoPath.setEnabled(override);
-		docPath.setEnabled(override);
 		if (!override) {
 			ScopedPreferenceStore prefStore = new ScopedPreferenceStore(InstanceScope.INSTANCE, "org.eclipse.etrice.generator.ui");
 			srcgenPath.setText(prefStore.getString(PreferenceConstants.GEN_DIR));
 			infoPath.setText(prefStore.getString(PreferenceConstants.GEN_INFO_DIR));
-			docPath.setText(prefStore.getString(PreferenceConstants.GEN_DOC_DIR));
 		}
 		validate();
 		setDirty(true);
@@ -341,10 +313,6 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 			browsePath.setEnabled(save);
 			genModelPath.setText(configuration.getAttribute(GEN_MODEL_PATH, ""));
 			mainMethodName.setText(configuration.getAttribute(MAIN_METHOD_NAME, AbstractGeneratorOptions.MAIN_NAME.getDefaultValue()));
-			boolean genDocu = configuration.getAttribute(GEN_DOCUMENTATION, false);
-			if (configuration.getAttribute(GEN_INSTANCE_DIAGRAM, false))
-				genDocu = true;
-			documentationButton.setSelection(genDocu);
 			debugButton.setSelection(configuration.getAttribute(DEBUG, false));
 			mscButton.setSelection(configuration.getAttribute(MSC_INSTR, false));
 			dataButton.setSelection(configuration.getAttribute(DATA_INSTR, false));
@@ -357,20 +325,16 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 			boolean override = configuration.getAttribute(OVERRIDE_DIRECTORIES, false);
 			String srcgenDir = prefStore.getString(PreferenceConstants.GEN_DIR);
 			String infoDir = prefStore.getString(PreferenceConstants.GEN_INFO_DIR);
-			String docDir = prefStore.getString(PreferenceConstants.GEN_DOC_DIR);
 			overrideDirectories.setSelection(override);
 			srcgenPath.setEnabled(override);
 			infoPath.setEnabled(override);
-			docPath.setEnabled(override);
 			if (override) {
 				srcgenPath.setText(configuration.getAttribute(SRCGEN_PATH, srcgenDir));
 				infoPath.setText(configuration.getAttribute(INFO_PATH, infoDir));
-				docPath.setText(configuration.getAttribute(DOC_PATH, docDir));
 			}
 			else {
 				srcgenPath.setText(srcgenDir);
 				infoPath.setText(infoDir);
-				docPath.setText(docDir);
 			}
 			
 			generateDepsWithinProject.setSelection(configuration.getAttribute(GEN_DEPS_WITHIN_PROJECT, true));
@@ -389,8 +353,6 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 		configuration.setAttribute(SAVE_GEN_MODEL, saveGenModel.getSelection());
 		configuration.setAttribute(GEN_MODEL_PATH, genModelPath.getText());
 		configuration.setAttribute(MAIN_METHOD_NAME, mainMethodName.getText());
-		configuration.setAttribute(GEN_INSTANCE_DIAGRAM, documentationButton.getSelection());
-		configuration.setAttribute(GEN_DOCUMENTATION, documentationButton.getSelection());
 		configuration.setAttribute(DEBUG, debugButton.getSelection());
 		configuration.setAttribute(MSC_INSTR, mscButton.getSelection());
 		configuration.setAttribute(DATA_INSTR, dataButton.getSelection());
@@ -402,7 +364,6 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 		if (override) {
 			configuration.setAttribute(SRCGEN_PATH, srcgenPath.getText());
 			configuration.setAttribute(INFO_PATH, infoPath.getText());
-			configuration.setAttribute(DOC_PATH, docPath.getText());
 		}
 		
 		configuration.setAttribute(GEN_DEPS_WITHIN_PROJECT, generateDepsWithinProject.getSelection());

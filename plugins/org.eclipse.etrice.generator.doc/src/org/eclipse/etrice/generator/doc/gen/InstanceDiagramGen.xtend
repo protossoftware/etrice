@@ -39,7 +39,7 @@ class InstanceDiagramGen {
 	
 	def doGenerate(Root root) {
 		for (model: root.models) {
-			var path = model.docGenerationTargetPath+ "/images"
+			var path = model.generationTargetPath + "/images"
 			fileAccess.setOutputPath(path)
 			var batchFile = "dot2jpg.bat"
 			for (sys : root.systemInstances) {
@@ -82,9 +82,9 @@ class InstanceDiagramGen {
 	def private String instance(AbstractInstance ai) {
 		val parent = ai.eContainer as StructureInstance
 		val pthread = ETMapUtil::getMappedThread(ai)
-		val tname = if (pthread==null) "?" else pthread.thread.name
+		val tname = if (pthread===null) "?" else pthread.thread.name
 		val node = ETMapUtil::getNodeRef(ai)
-		val nname = if (node==null) "?" else node.name
+		val nname = if (node===null) "?" else node.name
 		val optional = if (ai instanceof ActorInterfaceInstance) "optional " else ""
 		val clsname = if (ai instanceof ActorInstance) (ai as ActorInstance).actorClass.name
 			else if (ai instanceof ActorInterfaceInstance) (ai as ActorInterfaceInstance).actorClass.name else "?"

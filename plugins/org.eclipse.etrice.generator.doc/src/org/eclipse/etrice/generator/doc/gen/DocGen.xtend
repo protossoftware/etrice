@@ -67,7 +67,7 @@ class DocGen {
 	def doGenerate(Root root) {
 		for (model: root.models) {
 			val ctx = new DocGen.DocGenContext(root,model)
-			var path = model.docGenerationTargetPath
+			var path = model.generationTargetPath
 			var file = model.name+".tex"
 			val Set<RoomModel> referencedModels = newHashSet
 			logger.logInfo("generating LaTeX documentation: '"+file+"' in '"+path+"'")
@@ -192,7 +192,7 @@ class DocGen {
 			\begin{itemize}
 			«FOR refModel : referencedModels.sortBy[name]»
 				«val relPath = RelativePathHelpers.getRelativePath(
-					model.docGenerationTargetPath.removeLast, refModel.docGenerationTargetPath.removeLast, true).appendIfNotEmpty("/")»
+					model.generationTargetPath.removeLast, refModel.generationTargetPath.removeLast, true).appendIfNotEmpty("/")»
 				\item \href{«(relPath.replace("\\", "/")+refModel.name).escapedString».pdf}{«refModel.name.escapedString»}
 			«ENDFOR»
 			\end{itemize}
@@ -564,7 +564,7 @@ class DocGen {
 	}
 	
 	def private fileExists(RoomModel model, String f){
-		val absPath = model.docGenerationTargetPath + f
+		val absPath = model.generationTargetPath + f
 		val file = new File(absPath);
 		val exist = file.exists();
 			if (exist == true) {
