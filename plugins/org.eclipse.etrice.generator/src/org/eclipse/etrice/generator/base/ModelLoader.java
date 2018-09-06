@@ -70,14 +70,14 @@ public class ModelLoader implements IGeneratorResourceLoader {
 	private HashSet<URI> loadedModelURIs = new HashSet<URI>();
 
 	@Override
-	public List<Resource> load(Arguments arguments, ILogger logger) {
+	public List<Resource> load(List<String> files, Arguments arguments, ILogger logger) {
 		if(!initializedEMF) {
 			emfSetup.doEMFRegistration();
 		}
 		
 		logger.logInfo("-- reading models");
 		
-		if(loadModels(arguments.getFiles(), logger)) {
+		if(loadModels(files, logger)) {
 			List<Resource> resources = getResourceSet().getResources().stream()
 					.filter(r -> getMainModelURIs().contains(r.getURI())).collect(Collectors.toList());
 			return resources;

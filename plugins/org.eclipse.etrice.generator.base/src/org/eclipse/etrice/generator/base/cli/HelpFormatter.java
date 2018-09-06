@@ -19,6 +19,7 @@ import java.util.Formatter;
 
 import org.eclipse.etrice.generator.base.args.Option;
 import org.eclipse.etrice.generator.base.args.Options;
+import org.eclipse.etrice.generator.base.args.StringListOption;
 
 /**
  * Simple implementation for command line help formatting.
@@ -29,16 +30,18 @@ public class HelpFormatter implements IHelpFormatter {
 	}
 	
 	@Override
-	public String getHelp(Options options) {
+	public String getHelp(Options options, StringListOption defaultOption) {
 		try(Formatter formatter = new Formatter()) {
-			formatter.format("Usage: [options] files...%n");
+			formatter.format("Usage: [options] %s...%n", defaultOption.getName());
 			formatter.format("Options:%n");
 			for(Option<?> opt: options) {
-				String optStr = "-" + opt.getName();
-				if(!opt.getType().equals(Boolean.class)) {
-					optStr += " <" + opt.getParameterName() + ">";
+				if(opt != defaultOption) {
+					String optStr = "-" + opt.getName();
+					if(!opt.getType().equals(Boolean.class)) {
+						optStr += " <" + opt.getArgumentName() + ">";
+					}
+					formatter.format(" %-30s %s%n", optStr, opt.getDescription());
 				}
-				formatter.format(" %-30s %s%n", optStr, opt.getDescription());
 			}
 			return formatter.toString();
 		}

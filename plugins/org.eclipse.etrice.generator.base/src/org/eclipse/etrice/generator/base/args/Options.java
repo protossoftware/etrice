@@ -25,37 +25,32 @@ import java.util.List;
 /**
  * Encapsulates an immutable set of options.
  */
-public class Options implements Iterable<Option<?>>  {
+public class Options implements IOptionModule, Iterable<Option<?>> {
 	
-	private LinkedHashMap<String, Option<?>> name2Option;
+	private final LinkedHashMap<String, Option<?>> name2Option;
 	
 	/**
-	 * Creates a new set of options that contains the passed options.
+	 * Creates a new set of options that contains the options configured by the passed modules.
 	 * 
-	 * @param options the options
+	 * @param modules the options modules
 	 */
-	public  Options(Option<?>... options) {
-		init(Arrays.asList(options));
+	public Options(IOptionModule... modules) {
+		this(Arrays.asList(modules));
 	}
 	
 	/**
-	 * Creates a new set of options that contains the passed options.
+	 * Creates a new set of options that contains the options configured by the passed modules.
 	 * 
-	 * @param options the options
+	 * @param modules the options modules
 	 */
-	public Options(List<Option<?>> options) {
-		init(options);
-	}
-	
-	/**
-	 * Creates a new set of options that contains the options configured by the passed module.
-	 * 
-	 * @param module the options module
-	 */
-	public Options(IOptionsModule module) {
+	public Options(Iterable<IOptionModule> modules) {
 		List<Option<?>> options = new LinkedList<>();
-		module.configure(options);
-		init(options);
+		for(IOptionModule module: modules) {
+			module.configure(options);
+		}
+		
+		name2Option = new LinkedHashMap<>();
+		options.forEach(opt -> name2Option.put(opt.getName(), opt));
 	}
 	
 	/**
@@ -77,12 +72,15 @@ public class Options implements Iterable<Option<?>>  {
 	}
 	
 	@Override
+	public final void configure(List<Option<?>> options) {
+		for(Option<?> opt: this) {
+			options.add(opt);
+		}
+	}
+	
+	@Override
 	public String toString() {
 		return name2Option.values().toString();
 	}
 	
-	private final void init(List<Option<?>> options) {
-		name2Option = new LinkedHashMap<>(options.size());
-		options.forEach(opt -> name2Option.put(opt.getName(), opt));
-	}
 }

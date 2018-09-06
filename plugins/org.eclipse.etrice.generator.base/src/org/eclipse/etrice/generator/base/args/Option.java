@@ -25,7 +25,8 @@ public class Option<T> {
 	
 	private final Class<T> type;
 	private final String name;
-	private final String parameterName;
+	private final String argumentName;
+	private final String group;
 	private final String description;
 	private final T defaultValue;
 	
@@ -38,10 +39,11 @@ public class Option<T> {
 	 * @param description a description for this option
 	 * @param defaultValue a default value for this option
 	 */
-	public Option(Class<T> type, String name, String parameterName, String description, T defaultValue) {
+	public Option(Class<T> type, String group, String name, String argumentName, String description, T defaultValue) {
 		this.type = type;
+		this.group = group;
 		this.name = name;
-		this.parameterName = parameterName;
+		this.argumentName = argumentName;
 		this.description = description;
 		this.defaultValue = defaultValue;
 	}
@@ -56,6 +58,15 @@ public class Option<T> {
 	}
 	
 	/**
+	 * Returns the group that this option is associated to.
+	 * 
+	 * @return the group name
+	 */
+	public final String getGroup() {
+		return group;
+	}
+	
+	/**
 	 * Returns the name of this option.
 	 * Its name uniquely identifies an option.
 	 * 
@@ -66,12 +77,12 @@ public class Option<T> {
 	}
 	
 	/**
-	 * Returns the parameter name of this option.
+	 * Returns the argument name of this option.
 	 * 
-	 * @return the parameter name
+	 * @return the argument name
 	 */
-	public final String getParameterName() {
-		return parameterName;
+	public final String getArgumentName() {
+		return argumentName;
 	}
 	
 	/**
@@ -90,26 +101,6 @@ public class Option<T> {
 	 */
 	public final T getDefaultValue() {
 		return defaultValue;
-	}
-	
-	/**
-	 * Checks whether the passed value is assignable to this option.
-	 * 
-	 * @param value the value to be checked
-	 * @return whether the value is assignable to this option
-	 */
-	public boolean checkValue(Object value) {
-		return type.isInstance(value);
-	}
-	
-	/**
-	 * Parses a value for this option from the passed string.
-	 * 
-	 * @param str the string to be parsed
-	 * @return the parsed value
-	 */
-	public T parseValue(String str) throws IllegalArgumentException, UnsupportedOperationException {
-		throw new UnsupportedOperationException();
 	}
 	
 	@Override

@@ -15,17 +15,15 @@
 
 package org.eclipse.etrice.generator.base.args;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * Encapsulates a set of arguments.
  */
 public class Arguments {
+	
 	private Options options;
 	private HashMap<String, Object> option2Arg;
-	private List<String> fileList;
 	
 	/**
 	 * Creates a new set of arguments initialized to their default values.
@@ -35,7 +33,6 @@ public class Arguments {
 	public Arguments(Options options) {
 		this.options = options;
 		option2Arg = new HashMap<>();
-		fileList = new ArrayList<>();
 		
 		for(Option<?> option: options) {
 			option2Arg.put(option.getName(), option.getDefaultValue());
@@ -74,7 +71,7 @@ public class Arguments {
 	 */
 	public void set(String name, Object value) throws IllegalArgumentException {
 		Option<?> opt = options.get(name);
-		if(!opt.checkValue(value)) {
+		if(!opt.getType().isInstance(value)) {
 			throw new IllegalArgumentException("value " + value.toString() + " is not assignable to Option " + opt.toString());
 		}
 		option2Arg.put(name, value);
@@ -91,15 +88,6 @@ public class Arguments {
 	}
 	
 	/**
-	 * Returns the list of input file paths.
-	 * 
-	 * @return the list of paths
-	 */
-	public List<String> getFiles() {
-		return fileList;
-	}
-	
-	/**
 	 * Returns the options for the arguments.
 	 * 
 	 * @return options the options
@@ -110,6 +98,6 @@ public class Arguments {
 	
 	@Override
 	public String toString() {
-		return option2Arg.toString() + ", " + fileList.toString();
+		return option2Arg.toString();
 	}
 }

@@ -23,12 +23,8 @@ public class StringOption extends Option<String> {
 	/**
 	 * @see Option#Option
 	 */
-	public StringOption(String name, String parameterName, String description, String defaultValue) {
-		super(String.class, name, parameterName, description, defaultValue);
+	public StringOption(String group, String name, String argumentName, String description, String defaultValue) {
+		super(String.class, group, name, argumentName, description, defaultValue);
 	}
 	
-	@Override
-	public String parseValue(String str) {
-		return str;
-	}
 }

@@ -33,10 +33,11 @@ public interface IGeneratorResourceLoader {
 	/**
 	 * Loads the specified files.
 	 * 
+	 * @param files the files to load
 	 * @param arguments the generator arguments
 	 * @param logger the logger
 	 * @return the loaded resources
 	 */
-	List<Resource> load(Arguments arguments, ILogger logger) throws GeneratorException;
+	List<Resource> load(List<String> files, Arguments arguments, ILogger logger) throws GeneratorException;
 	
 }

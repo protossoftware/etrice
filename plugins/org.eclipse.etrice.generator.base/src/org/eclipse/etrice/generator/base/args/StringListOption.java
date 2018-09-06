@@ -15,13 +15,16 @@
 
 package org.eclipse.etrice.generator.base.args;
 
-/**
- * Describes an option that takes a {@link Boolean} value.
- */
-public class BooleanOption extends Option<Boolean> {
+import java.util.List;
+
+public class StringListOption extends Option<List<String>> {
 	
-	public BooleanOption(String group, String name, String argumentName, String description, boolean defaultValue) {
-		super(Boolean.class, group, name, argumentName, description, defaultValue);
+	/**
+	 * @see Option#Option
+	 */
+	@SuppressWarnings("unchecked")
+	public StringListOption(String group, String name, String argumentName, String description, List<String> defaultValue) {
+		super((Class<List<String>>)(Class<?>) List.class, group, name, argumentName, description, defaultValue);
 	}
 	
 }

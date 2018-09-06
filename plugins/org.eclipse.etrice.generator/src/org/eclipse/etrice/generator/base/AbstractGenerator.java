@@ -41,6 +41,7 @@ import org.eclipse.etrice.generator.base.io.IGeneratorFileIO;
 import org.eclipse.etrice.generator.base.io.ILineOutput;
 import org.eclipse.etrice.generator.base.io.LineOutput;
 import org.eclipse.etrice.generator.base.logging.ILogger;
+import org.eclipse.etrice.generator.base.setup.GeneratorApplicationOptions;
 import org.eclipse.etrice.generator.fsm.generic.IDetailCodeTranslator;
 import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.etrice.generator.generic.TestInstanceCreator;
@@ -154,8 +155,8 @@ public abstract class AbstractGenerator implements IGenerator, IDetailCodeTransl
 	@Override
 	public void generate(List<Resource> resources, Arguments arguments, IGeneratorFileIO fileIO, ILogger logger) {
 		AbstractGenerator.settings = arguments;
-		RoomExtensions.setGenDir(arguments.get(AbstractGeneratorOptions.GEN_DIR));
-		RoomExtensions.setGenInfoDir(arguments.get(AbstractGeneratorOptions.GEN_INFO_DIR));
+		RoomExtensions.setGenDir(arguments.get(GeneratorApplicationOptions.GEN_DIR));
+		RoomExtensions.setGenInfoDir(arguments.get(GeneratorApplicationOptions.GEN_INFO_DIR));
 		RoomExtensions.setGenDocDir(arguments.get(AbstractGeneratorOptions.GEN_DOC_DIR));
 		
 		if(resources.isEmpty()) {

@@ -23,9 +23,9 @@ import com.google.inject.Binder;
 import com.google.inject.Module;
 
 /**
- * An abstract base module for generators that configures standard implementations.
+ * A  base module for generator applications that configures standard implementations.
  */
-public abstract class GeneratorBaseModule implements Module {
+public abstract class GeneratorApplicationModule implements Module {
 
 	@Override
 	public void configure(Binder binder) {

@@ -24,55 +24,66 @@ import org.eclipse.etrice.generator.base.setup.GeneratorBaseOptions;
 
 public class AbstractGeneratorOptions extends GeneratorBaseOptions {
 	
+	public static final String GROUP_ETRICE = "eTrice";
+	
 	public static final BooleanOption LIB = new BooleanOption(
+			GROUP_ETRICE,
 			"lib",
 			"generateAsLibrary",
 			"if specified all classes are generated, not only instanciated ones",
 			false);
 	
 	public static final BooleanOption DOCUMENTATION = new BooleanOption(
+			GROUP_ETRICE,
 			"genDocu",
 			"generateDocumentation",
 			"if specified documentation is created",
 			false);
 	
 	public static final StringOption SAVE_GEN_MODEL = new StringOption(
+			GROUP_ETRICE,
 			"saveGenModel",
 			"genmodel path",
 			"if specified the generator model will be saved to this location",
 			"");
 	
 	public static final StringOption MAIN_NAME = new StringOption(
+			GROUP_ETRICE,
 			"mainName",
 			"name",
 			"if specified the generated main method will be named as stated",
 			"main");
 	
 	public static final StringOption GEN_DOC_DIR = new StringOption(
+			GROUP_ETRICE,
 			"genDocDir",
 			"directory",
 			"the directory for generated documentation files",
 			"doc-gen");
 	
 	public static final BooleanOption MSC_INSTR = new BooleanOption(
+			GROUP_ETRICE,
 			"msc_instr",
 			"generateMSCInstrumentation",
 			"generate instrumentation for MSC generation",
 			false);
 	
 	public static final BooleanOption DATA_INSTR = new BooleanOption(
+			GROUP_ETRICE,
 			"data_instr",
 			"generateDataInstrumentation",
 			"generate instrumentation for data logging",
 			false);
 	
 	public static final BooleanOption VERBOSE_RT = new BooleanOption(
+			GROUP_ETRICE,
 			"gen_as_verbose",
 			"generateWithVerboseOutput",
 			"generate instrumentation for verbose console output",
 			false);
 	
 	public static final BooleanOption NOTRANSLATE = new BooleanOption(
+			GROUP_ETRICE,
 			"notranslate",
 			"noTranslation",
 			"if specified the detail codes won't be translated",

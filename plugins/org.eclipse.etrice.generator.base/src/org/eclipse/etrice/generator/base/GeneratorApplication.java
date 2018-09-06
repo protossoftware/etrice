@@ -33,7 +33,8 @@ import org.eclipse.etrice.generator.base.io.LineOutput;
 import org.eclipse.etrice.generator.base.logging.ILogger;
 import org.eclipse.etrice.generator.base.logging.Logger;
 import org.eclipse.etrice.generator.base.logging.Loglevel;
-import org.eclipse.etrice.generator.base.setup.GeneratorBaseOptions;
+import org.eclipse.etrice.generator.base.setup.GeneratorApplicationOptions;
+import org.eclipse.etrice.generator.base.setup.IGeneratorOptions;
 import org.eclipse.etrice.generator.base.validation.IGeneratorResourceValidator;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
@@ -79,11 +80,11 @@ public class GeneratorApplication {
 	private IGeneratorResourceValidator resourceValidator;
 
 	@Inject
-	public GeneratorApplication(GeneratorBaseOptions optionsModule, ICommandLineParser commandLineParser,
+	public GeneratorApplication(IGeneratorOptions optionsModule, ICommandLineParser commandLineParser,
 			IHelpFormatter helpFormatter, Provider<Logger> loggerProvider,
 			Provider<IncrementalGeneratorFileIO> fileIOProvider, Provider<IGenerator> generatorProvider,
 			IGeneratorResourceLoader resourceLoader, IGeneratorResourceValidator resourceValidator) {
-		this.options = new Options(optionsModule);
+		this.options = new Options(new GeneratorApplicationOptions(), optionsModule);
 		this.commandLineParser = commandLineParser;
 		this.helpFormatter = helpFormatter;
 		this.loggerProvider = loggerProvider;
@@ -110,9 +111,9 @@ public class GeneratorApplication {
 	 */
 	public void run(String[] args, ILineOutput out) throws GeneratorException {
 		try {
-			Arguments arguments = commandLineParser.parseArgs(options, args);
+			Arguments arguments = commandLineParser.parseArgs(options, GeneratorApplicationOptions.FILES, args);
 
-			if(arguments.get(GeneratorBaseOptions.HELP)) {
+			if(arguments.get(GeneratorApplicationOptions.HELP)) {
 				printHelp(out);
 			}
 			else {
@@ -161,7 +162,7 @@ public class GeneratorApplication {
 		try {
 			logger.logDebug(arguments.toString());
 
-			List<Resource> resources = load(arguments.getFiles(), arguments, logger);
+			List<Resource> resources = load(arguments.get(GeneratorApplicationOptions.FILES), arguments, logger);
 
 			validate(resources, arguments, logger);
 
@@ -174,28 +175,28 @@ public class GeneratorApplication {
 	}
 
 	private void printHelp(ILineOutput out) {
-		String help = helpFormatter.getHelp(options);
+		String help = helpFormatter.getHelp(options, GeneratorApplicationOptions.FILES);
 		out.println(help);
 	}
 
 	private ILogger createLogger(Arguments arguments, ILineOutput out) {
 		Logger logger = loggerProvider.get();
-		logger.setLoglevel(arguments.get(GeneratorBaseOptions.LOGLEVEL));
+		logger.setLoglevel(arguments.get(GeneratorApplicationOptions.LOGLEVEL));
 		logger.setOutput(out);
 		return logger;
 	}
 
 	private IGeneratorFileIO createGeneratorFileIO(Arguments arguments, ILogger logger) {
 		IncrementalGeneratorFileIO fileIO = fileIOProvider.get();
-		fileIO.setGenDir(arguments.get(GeneratorBaseOptions.GEN_DIR));
-		fileIO.setGenInfoDir(arguments.get(GeneratorBaseOptions.GEN_INFO_DIR));
-		fileIO.setGenerateIncremental(arguments.get(GeneratorBaseOptions.GEN_INCREMENTAL));
+		fileIO.setGenDir(arguments.get(GeneratorApplicationOptions.GEN_DIR));
+		fileIO.setGenInfoDir(arguments.get(GeneratorApplicationOptions.GEN_INFO_DIR));
+		fileIO.setGenerateIncremental(arguments.get(GeneratorApplicationOptions.GEN_INCREMENTAL));
 		fileIO.setLogger(logger);
 		return fileIO;
 	}
 
 	private List<Resource> load(List<String> files, Arguments arguments, ILogger logger) {
-		return resourceLoader.load(arguments, logger);
+		return resourceLoader.load(files, arguments, logger);
 	}
 
 	private void validate(List<Resource> models, Arguments arguments, ILogger logger) {

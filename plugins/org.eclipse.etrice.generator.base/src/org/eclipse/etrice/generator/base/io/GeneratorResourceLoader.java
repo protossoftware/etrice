@@ -55,15 +55,15 @@ public class GeneratorResourceLoader implements IGeneratorResourceLoader {
 	}
 	
 	@Override
-	public List<Resource> load(Arguments arguments, ILogger logger) throws GeneratorException {
+	public List<Resource> load(List<String> files, Arguments arguments, ILogger logger) throws GeneratorException {
 		doEMFRegistration();
 		
-		List<Resource> models = new ArrayList<>(arguments.getFiles().size());
+		List<Resource> models = new ArrayList<>(files.size());
 		ResourceSet resourceSet = resourceSetProvider.get();
 		Adapter resourceAddedAdapter = new ResourceAddedAdapter(logger);
 		resourceSet.eAdapters().add(resourceAddedAdapter);
 				
-		for(String f: arguments.getFiles()) {
+		for(String f: files) {
 			Resource r = loadResource(f, resourceSet, logger);
 			models.add(r);
 		}

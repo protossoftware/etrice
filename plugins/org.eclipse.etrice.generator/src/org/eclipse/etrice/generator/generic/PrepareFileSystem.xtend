@@ -25,7 +25,7 @@ import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 import org.eclipse.etrice.generator.base.logging.ILogger
 import org.eclipse.etrice.generator.base.AbstractGenerator
-import org.eclipse.etrice.generator.base.AbstractGeneratorOptions
+import org.eclipse.etrice.generator.base.setup.GeneratorApplicationOptions
 
 /**
  * A class that is used to recursively erase all folders receiving generated code
@@ -53,7 +53,7 @@ class PrepareFileSystem {
 	}
 	
 	def void prepareInfoTargetPaths(Resource resource) {
-		if(!AbstractGenerator.settings.get(AbstractGeneratorOptions.GEN_INCREMENTAL)) 
+		if(!AbstractGenerator.settings.get(GeneratorApplicationOptions.GEN_INCREMENTAL)) 
 			return;
 			
 		var Set<String> pathes = new HashSet<String>();

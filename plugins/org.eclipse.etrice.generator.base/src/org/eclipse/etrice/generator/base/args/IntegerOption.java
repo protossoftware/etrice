@@ -23,18 +23,8 @@ public class IntegerOption extends Option<Integer> {
 	/**
 	 * @see Option#Option
 	 */
-	public IntegerOption(String name, String parameterName, String description, int defaultValue) {
-		super(Integer.class, name, parameterName, description, defaultValue);
+	public IntegerOption(String group, String name, String argumentName, String description, int defaultValue) {
+		super(Integer.class, group, name, argumentName, description, defaultValue);
 	}
 
-	@Override
-	public Integer parseValue(String str) throws IllegalArgumentException {
-		try {
-			return Integer.parseInt(str);
-		}
-		catch(NumberFormatException e) {
-			throw new IllegalArgumentException(e);
-		}
-	}
-	
 }

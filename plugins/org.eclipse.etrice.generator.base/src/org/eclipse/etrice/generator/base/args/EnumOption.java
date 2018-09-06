@@ -20,23 +20,11 @@ package org.eclipse.etrice.generator.base.args;
  */
 public class EnumOption<T extends Enum<?>> extends Option<T> {
 	
-	private T[] enumConstants;
-	
 	/**
 	 * @see Option#Option
 	 */
-	public EnumOption(Class<T> enumClass, String name, String parameterName, String description, T defaultValue) {
-		super(enumClass, name, parameterName, description, defaultValue);
-		enumConstants = enumClass.getEnumConstants();
+	public EnumOption(Class<T> enumClass, String group, String name, String argumentName, String description, T defaultValue) {
+		super(enumClass, group, name, argumentName, description, defaultValue);
 	}
 	
-	@Override
-	public T parseValue(String str) throws IllegalArgumentException {
-		for(T c: enumConstants) {
-			if(c.toString().equalsIgnoreCase(str)) {
-				return c;
-			}
-		}
-		throw new IllegalArgumentException("Argument " + str + " not allowed for option " + getName());
-	}
 }

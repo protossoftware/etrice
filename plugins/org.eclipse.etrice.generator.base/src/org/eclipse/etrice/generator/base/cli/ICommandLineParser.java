@@ -20,6 +20,7 @@ import java.util.List;
 
 import org.eclipse.etrice.generator.base.args.Arguments;
 import org.eclipse.etrice.generator.base.args.Options;
+import org.eclipse.etrice.generator.base.args.StringListOption;
 
 import com.google.inject.ImplementedBy;
 
@@ -33,14 +34,20 @@ public interface ICommandLineParser {
 	 * Parses the specified command line arguments using the passed options.
 	 * 
 	 * @param options the options
+	 * @param defaultOption the option for arguments without option identifier
 	 * @param args the command line arguments
 	 */
-	Arguments parseArgs(Options options, List<String> args) throws CommandLineParseException;
+	Arguments parseArgs(Options options, StringListOption defaultOption, List<String> args) throws CommandLineParseException;
+	
 	
 	/**
-	 * @see ICommandLineParser#parseArgs(Options, List)
+	 * Parses the specified command line arguments using the passed options.
+	 * 
+	 * @param options the options
+	 * @param defaultOption the option to store arguments without identifier
+	 * @param args the command line arguments
 	 */
-	default Arguments parseArgs(Options options, String[] args) throws CommandLineParseException {
-		return parseArgs(options, Arrays.asList(args));
+	default Arguments parseArgs(Options options, StringListOption defaultOption, String[] args) throws CommandLineParseException {
+		return parseArgs(options, defaultOption, Arrays.asList(args));
 	}
 }

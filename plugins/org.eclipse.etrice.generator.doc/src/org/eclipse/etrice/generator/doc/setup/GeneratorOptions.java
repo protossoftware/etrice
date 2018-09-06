@@ -23,7 +23,10 @@ import org.eclipse.etrice.generator.base.args.Option;
 
 public class GeneratorOptions extends AbstractGeneratorOptions {
 	
+	public static final String GROUP_ETRICE_DOC = "eTrice Documentation";
+	
 	public static final BooleanOption GEN_INST_DIAG = new BooleanOption(
+			GROUP_ETRICE_DOC,
 			"genInstDiag",
 			"generateInstanceDiagram",
 			"if specified then an instance diagram is created for each subsystem",

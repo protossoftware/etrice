@@ -23,13 +23,17 @@ import org.eclipse.etrice.generator.base.args.Option;
 
 public class GeneratorOptions extends AbstractGeneratorOptions {
 	
+	public static final String GROUP_ETRICE_JAVA = "eTrice Java";
+	
 	public static final BooleanOption GEN_PERSIST = new BooleanOption(
+			GROUP_ETRICE_JAVA,
 			"persistable",
 			"generatePersistenceInterface",
 			"if specified make actor classes persistable",
 			false);
 	
 	public static final BooleanOption GEN_STORE_DATA_OBJ = new BooleanOption(
+			GROUP_ETRICE_JAVA,
 			"storeDataObj",
 			"generateStoreDataObj",
 			"if specified equip actor classes with store/restore using POJOs",

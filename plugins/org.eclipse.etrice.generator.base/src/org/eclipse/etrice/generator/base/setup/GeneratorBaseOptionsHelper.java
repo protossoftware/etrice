@@ -15,31 +15,9 @@
 
 package org.eclipse.etrice.generator.base.setup;
 
-import org.eclipse.etrice.generator.base.args.Arguments;
-import org.eclipse.etrice.generator.base.logging.Loglevel;
-
 /**
  * Helper class for {@link GeneratorBaseOptions}.
  */
 public class GeneratorBaseOptionsHelper {
 	
-	public boolean isHelp(Arguments args) {
-		return args.get(GeneratorBaseOptions.HELP);
-	}
-	
-	public boolean isIncremental(Arguments args) {
-		return args.get(GeneratorBaseOptions.GEN_INCREMENTAL);
-	}
-	
-	public String getGenDir(Arguments args) {
-		return args.get(GeneratorBaseOptions.GEN_DIR);
-	}
-	
-	public String getGenInfoDir(Arguments args) {
-		return args.get(GeneratorBaseOptions.GEN_INFO_DIR);
-	}
-	
-	public Loglevel getLoglevel(Arguments args) {
-		return args.get(GeneratorBaseOptions.LOGLEVEL);
-	}
 }

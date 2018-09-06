@@ -32,6 +32,7 @@ import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.ui.RefreshTab;
 import org.eclipse.etrice.generator.base.AbstractGeneratorOptions;
 import org.eclipse.etrice.generator.base.io.ILineOutput;
+import org.eclipse.etrice.generator.base.setup.GeneratorApplicationOptions;
 import org.eclipse.etrice.generator.ui.preferences.PreferenceConstants;
 import org.eclipse.jdt.launching.AbstractJavaLaunchConfigurationDelegate;
 import org.eclipse.swt.widgets.Display;
@@ -211,7 +212,7 @@ public abstract class GeneratorLaunchConfigurationDelegate extends AbstractJavaL
 				|| configuration.getAttribute(GeneratorConfigTab.GEN_INSTANCE_DIAGRAM, false))
 			argString.append(" -"+AbstractGeneratorOptions.DOCUMENTATION.getName());
 		if (configuration.getAttribute(GeneratorConfigTab.DEBUG, false)) {
-			argString.append(" -"+AbstractGeneratorOptions.LOGLEVEL.getName());
+			argString.append(" -"+GeneratorApplicationOptions.LOGLEVEL.getName());
 			argString.append(" debug");
 		}
 		if (configuration.getAttribute(GeneratorConfigTab.MSC_INSTR, false)) {
@@ -229,7 +230,7 @@ public abstract class GeneratorLaunchConfigurationDelegate extends AbstractJavaL
 		
 		ScopedPreferenceStore prefStore = new ScopedPreferenceStore(InstanceScope.INSTANCE, "org.eclipse.etrice.generator.ui");
 		if (prefStore.getBoolean(PreferenceConstants.GEN_INCREMENTAL)) {
-			argString.append(" -"+AbstractGeneratorOptions.GEN_INCREMENTAL.getName());
+			argString.append(" -"+GeneratorApplicationOptions.GEN_INCREMENTAL.getName());
 		}
 		
 		boolean override = configuration.getAttribute(GeneratorConfigTab.OVERRIDE_DIRECTORIES, false);
@@ -241,10 +242,10 @@ public abstract class GeneratorLaunchConfigurationDelegate extends AbstractJavaL
 			infoDir = configuration.getAttribute(GeneratorConfigTab.INFO_PATH, infoDir);
 			docDir = configuration.getAttribute(GeneratorConfigTab.DOC_PATH, docDir);
 		}
-		argString.append(" -"+AbstractGeneratorOptions.GEN_DIR.getName());
+		argString.append(" -"+GeneratorApplicationOptions.GEN_DIR.getName());
 		argString.append(" "+srcgenDir);
 		
-		argString.append(" -"+AbstractGeneratorOptions.GEN_INFO_DIR.getName());
+		argString.append(" -"+GeneratorApplicationOptions.GEN_INFO_DIR.getName());
 		argString.append(" "+infoDir);
 		
 		argString.append(" -"+AbstractGeneratorOptions.GEN_DOC_DIR.getName());

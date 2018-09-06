@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * Describes options that can be used to create a new {@link Options} set.
  */
-public interface IOptionsModule {
+public interface IOptionModule {
 	
 	/**
 	 * Configures options on the passed collection.

@@ -13,15 +13,16 @@
 *
  *******************************************************************************/
 
-package org.eclipse.etrice.generator.base.args;
+package org.eclipse.etrice.generator.base.setup;
+
+import org.eclipse.etrice.generator.base.args.IOptionModule;
+
+import com.google.inject.ImplementedBy;
 
 /**
- * Describes an option that takes a {@link Boolean} value.
+ * Interface for generator options.
  */
-public class BooleanOption extends Option<Boolean> {
-	
-	public BooleanOption(String group, String name, String argumentName, String description, boolean defaultValue) {
-		super(Boolean.class, group, name, argumentName, description, defaultValue);
-	}
-	
+@ImplementedBy(GeneratorBaseOptions.class)
+public interface IGeneratorOptions extends IOptionModule {
+
 }

@@ -15,6 +15,7 @@
 
 package org.eclipse.etrice.generator.base.cli;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
@@ -22,6 +23,7 @@ import java.util.ListIterator;
 import org.eclipse.etrice.generator.base.args.Arguments;
 import org.eclipse.etrice.generator.base.args.Option;
 import org.eclipse.etrice.generator.base.args.Options;
+import org.eclipse.etrice.generator.base.args.StringListOption;
 
 /**
  * Simple implementation of a command line parser.
@@ -38,24 +40,29 @@ public class CommandLineParser implements ICommandLineParser {
 	}
 	
 	@Override
-	public Arguments parseArgs(Options options, List<String> args) throws CommandLineParseException {
-		Arguments parameters = new Arguments(options);
+	public Arguments parseArgs(Options options, StringListOption defaultOption, List<String> args) throws CommandLineParseException {
+		Arguments parsedArgs = new Arguments(options);
 		List<String> nArgs = normalize(args);
 		ListIterator<String> iterator = nArgs.listIterator();
+		ArrayList<String> defaultArgs = new ArrayList<>();
 		
 		while(iterator.hasNext()) {
 			String str = iterator.next().trim();
 			if(str.startsWith("-")) {
 				Option<?> opt = parseOption(options, str);
 				Object value = parseValue(opt, iterator);
-				parameters.set(opt.getName(), value);
+				parsedArgs.set(opt.getName(), value);
 			}
 			else {
-				parameters.getFiles().add(str);
+				defaultArgs.add(str);
 			}
 		}
 		
-		return parameters;
+		if(!defaultArgs.isEmpty()) {
+			parsedArgs.set(defaultOption, defaultArgs);
+		}
+		
+		return parsedArgs;
 	}
 	
 	private List<String> normalize(List<String> args) throws CommandLineParseException {
@@ -65,31 +72,50 @@ public class CommandLineParser implements ICommandLineParser {
 	
 	private Option<?> parseOption(Options options, String str) throws CommandLineParseException {
 		try {
-			Option<?> opt = options.get(str.substring(1));
+			String optionName = str.substring(1);
+			Option<?> opt = options.get(optionName);
 			return opt;
 		}
 		catch(IllegalArgumentException e) {
-			throw new CommandLineParseException(e);
+			throw new CommandLineParseException("Option " + str + " not recognized");
 		}
 	}
 	
 	private Object parseValue(Option<?> opt, ListIterator<String> iterator) throws CommandLineParseException {
-		if(opt.getType().equals(Boolean.class)) {
+		Class<?> type = opt.getType();
+		
+		if(type == Boolean.class) {
 			return true;
 		}
-		else if(iterator.hasNext()) {
-			try {
-				return opt.parseValue(iterator.next());
+		
+		if(iterator.hasNext()) {
+			String str = iterator.next();
+			
+			if(type == String.class) {
+				return str;
 			}
-			catch(IllegalArgumentException e) {
-				throw new CommandLineParseException(e);
+			else if(type.isEnum()) {
+				return parseEnum(opt, str);
 			}
-			catch(UnsupportedOperationException e) {
-				throw new CommandLineParseException(e);
+			else {
+				throw new CommandLineParseException("Option " + opt.getName() + " is not supported on the command line");
 			}
+			
 		}
 		else {
 			throw new CommandLineParseException("Expected one argument for option " + opt.getName());
 		}
+	}
+	
+	private Object parseEnum(Option<?> opt, String str) {
+		Object[] constants = opt.getType().getEnumConstants();
+		
+		for(Object c: constants) {
+			if(c.toString().equalsIgnoreCase(str)) {
+				return c;
+			}
+		}
+		
+		throw new CommandLineParseException("Argument " + str + " not allowed for option " + opt.getName());
 	}
 }

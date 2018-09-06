@@ -21,7 +21,7 @@ import org.eclipse.etrice.generator.base.io.IGeneratorEMFSetup;
 import org.eclipse.etrice.generator.base.io.IGeneratorResourceLoader;
 import org.eclipse.etrice.generator.base.io.IncrementalGeneratorFileIO;
 import org.eclipse.etrice.generator.base.logging.Logger;
-import org.eclipse.etrice.generator.base.setup.GeneratorBaseModule;
+import org.eclipse.etrice.generator.base.setup.GeneratorApplicationModule;
 import org.eclipse.etrice.generator.base.setup.GeneratorBaseOptions;
 import org.eclipse.etrice.generator.base.validation.IGeneratorResourceValidator;
 import org.eclipse.etrice.generator.fsm.base.Diagnostician;
@@ -44,7 +44,7 @@ import com.google.inject.Singleton;
  * 
  * @author Henrik Rentz-Reichert
  */
-public abstract class AbstractGeneratorBaseModule extends GeneratorBaseModule {
+public abstract class AbstractGeneratorBaseModule extends GeneratorApplicationModule {
 
 	/**
 	 * Configuration of
