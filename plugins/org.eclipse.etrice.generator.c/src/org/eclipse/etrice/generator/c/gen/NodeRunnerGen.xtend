@@ -44,7 +44,7 @@ class NodeRunnerGen {
 					val clsname = nr.name+"_"+ssi.name
 					val path = ssi.subSystemClass.getPath
 					val file = clsname + "_Runner.c"
-					fileIO.generateFile(path + file, root.generateSourceFile(ssi, first))
+					fileIO.generateFile("generating Node runner file", path + file, root.generateSourceFile(ssi, first))
 					first = false
 				}
 			}

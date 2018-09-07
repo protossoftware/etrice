@@ -17,9 +17,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 	public void initializeDefaultPreferences() {
 		IPreferenceStore store = Activator.getInstance().getPreferenceStore();
 		store.setDefault(PreferenceConstants.BUILD_KIND, PreferenceConstants.JDT);
-		store.setDefault(PreferenceConstants.GEN_INCREMENTAL, true);
 		store.setDefault(PreferenceConstants.GEN_DIR, "src-gen");
-		store.setDefault(PreferenceConstants.GEN_INFO_DIR, "src-gen-info");
 		store.setDefault(PreferenceConstants.GEN_DOC_DIR, "doc-gen");
 		store.setDefault(PreferenceConstants.GEN_USE_TRANSLATION, true);
 	}

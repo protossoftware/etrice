@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.etrice.core.genmodel.fsm.IDiagnostician;
 import org.eclipse.etrice.generator.base.io.IGeneratorEMFSetup;
 import org.eclipse.etrice.generator.base.io.IGeneratorResourceLoader;
-import org.eclipse.etrice.generator.base.io.IncrementalGeneratorFileIO;
+import org.eclipse.etrice.generator.base.io.GeneratorFileIO;
 import org.eclipse.etrice.generator.base.logging.Logger;
 import org.eclipse.etrice.generator.base.setup.GeneratorApplicationModule;
 import org.eclipse.etrice.generator.base.setup.GeneratorBaseOptions;
@@ -66,7 +66,7 @@ public abstract class AbstractGeneratorBaseModule extends GeneratorApplicationMo
 		binder.bind(ResourceSet.class).to(XtextResourceSet.class);
 
 		binder.bind(Logger.class).in(Singleton.class);
-		binder.bind(IncrementalGeneratorFileIO.class).in(Singleton.class);
+		binder.bind(GeneratorFileIO.class).in(Singleton.class);
 		
 		binder.bind(IGenerator.class).to(AbstractGenerator.class);
 		binder.bind(GeneratorBaseOptions.class).to(AbstractGeneratorOptions.class);

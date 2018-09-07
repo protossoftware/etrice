@@ -47,26 +47,35 @@ public class GeneratorApplicationOptions implements IOptionModule {
 			"display this help text",
 			false);
 	
+	@Deprecated
 	public static final BooleanOption GEN_INCREMENTAL = new BooleanOption(
 			GROUP_APPLICATION,
 			"inc",
 			"isInc",
-			"if specified the generation is incremental",
+			"if specified the generation is incremental (deprecated)",
 			false);
 	
 	public static final StringOption GEN_DIR = new StringOption(
 			GROUP_APPLICATION,
 			"genDir",
 			"directory",
-			"the directory for generated files",
+			"the output directory for generated files",
 			"src-gen");
 	
+	@Deprecated
 	public static final StringOption GEN_INFO_DIR = new StringOption(
 			GROUP_APPLICATION,
 			"genInfoDir",
 			"directory",
-			"the directory for generated info files",
+			"the directory for generated info files (deprecated)",
 			"src-gen-info");
+	
+	public static final BooleanOption CLEAN = new BooleanOption(
+			GROUP_APPLICATION,
+			"clean",
+			"isClean",
+			"if specified obsolete files in the output directory are removed",
+			false);
 	
 	public static final EnumOption<Loglevel> LOGLEVEL = new EnumOption<>(
 			Loglevel.class,
@@ -83,6 +92,7 @@ public class GeneratorApplicationOptions implements IOptionModule {
 		options.add(GEN_INCREMENTAL);
 		options.add(GEN_DIR);
 		options.add(GEN_INFO_DIR);
+		options.add(CLEAN);
 		options.add(LOGLEVEL);
 	}
 

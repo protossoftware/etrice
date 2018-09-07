@@ -16,7 +16,6 @@
 package org.eclipse.etrice.generator.base.setup;
 
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.XtextResourceSet;
 
 import com.google.inject.Binder;
@@ -30,7 +29,6 @@ public abstract class GeneratorApplicationModule implements Module {
 	@Override
 	public void configure(Binder binder) {
 		binder.bind(ResourceSet.class).to(XtextResourceSet.class);
-		binder.bind(IEncodingProvider.class).to(IEncodingProvider.Runtime.class);
 	}
 
 }

@@ -25,17 +25,16 @@ import org.eclipse.etrice.generator.base.args.Options;
 import org.eclipse.etrice.generator.base.cli.CommandLineParseException;
 import org.eclipse.etrice.generator.base.cli.ICommandLineParser;
 import org.eclipse.etrice.generator.base.cli.IHelpFormatter;
-import org.eclipse.etrice.generator.base.io.IGeneratorFileIO;
+import org.eclipse.etrice.generator.base.io.GeneratorFileIO;
 import org.eclipse.etrice.generator.base.io.ILineOutput;
 import org.eclipse.etrice.generator.base.io.IGeneratorResourceLoader;
-import org.eclipse.etrice.generator.base.io.IncrementalGeneratorFileIO;
 import org.eclipse.etrice.generator.base.io.LineOutput;
-import org.eclipse.etrice.generator.base.logging.ILogger;
 import org.eclipse.etrice.generator.base.logging.Logger;
 import org.eclipse.etrice.generator.base.logging.Loglevel;
 import org.eclipse.etrice.generator.base.setup.GeneratorApplicationOptions;
 import org.eclipse.etrice.generator.base.setup.IGeneratorOptions;
 import org.eclipse.etrice.generator.base.validation.IGeneratorResourceValidator;
+
 import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
@@ -74,7 +73,7 @@ public class GeneratorApplication {
 	private ICommandLineParser commandLineParser;
 	private IHelpFormatter helpFormatter;
 	private Provider<Logger> loggerProvider;
-	private Provider<IncrementalGeneratorFileIO> fileIOProvider;
+	private Provider<GeneratorFileIO> fileIOProvider;
 	private Provider<IGenerator> generatorProvider;
 	private IGeneratorResourceLoader resourceLoader;
 	private IGeneratorResourceValidator resourceValidator;
@@ -82,7 +81,7 @@ public class GeneratorApplication {
 	@Inject
 	public GeneratorApplication(IGeneratorOptions optionsModule, ICommandLineParser commandLineParser,
 			IHelpFormatter helpFormatter, Provider<Logger> loggerProvider,
-			Provider<IncrementalGeneratorFileIO> fileIOProvider, Provider<IGenerator> generatorProvider,
+			Provider<GeneratorFileIO> fileIOProvider, Provider<IGenerator> generatorProvider,
 			IGeneratorResourceLoader resourceLoader, IGeneratorResourceValidator resourceValidator) {
 		this.options = new Options(new GeneratorApplicationOptions(), optionsModule);
 		this.commandLineParser = commandLineParser;
@@ -134,10 +133,25 @@ public class GeneratorApplication {
 	 * @param out the output
 	 */
 	public void run(Arguments arguments, ILineOutput out) throws GeneratorException {
-		ILogger logger = createLogger(arguments, out);
-		IGeneratorFileIO fileIO = createGeneratorFileIO(arguments, logger);
+		Logger logger = createLogger(arguments, out);
+		
+		try {
+			GeneratorFileIO fileIO = createGeneratorFileIO(arguments, logger);
+			
+			logArguments(arguments, fileIO, logger);
 
-		execute(arguments, fileIO, logger);
+			List<Resource> resources = load(arguments, logger);
+
+			validate(resources, arguments, logger);
+
+			generate(resources, arguments, fileIO, logger);
+			
+			cleanOutputDirectory(arguments, fileIO, logger);
+		}
+		catch (Exception e) {
+			logException(e, logger);
+			throw e;
+		}
 	}
 
 	/**
@@ -157,59 +171,53 @@ public class GeneratorApplication {
 	public Arguments createArguments() {
 		return new Arguments(getOptions());
 	}
-	
-	private void execute(Arguments arguments, IGeneratorFileIO fileIO, ILogger logger) throws GeneratorException {
-		try {
-			logger.logDebug(arguments.toString());
-
-			List<Resource> resources = load(arguments.get(GeneratorApplicationOptions.FILES), arguments, logger);
-
-			validate(resources, arguments, logger);
-
-			generate(resources, arguments, fileIO, logger);
-		}
-		catch (Exception e) {
-			logException(e, logger);
-			throw e;
-		}
-	}
 
 	private void printHelp(ILineOutput out) {
 		String help = helpFormatter.getHelp(options, GeneratorApplicationOptions.FILES);
 		out.println(help);
 	}
 
-	private ILogger createLogger(Arguments arguments, ILineOutput out) {
+	private Logger createLogger(Arguments arguments, ILineOutput out) {
 		Logger logger = loggerProvider.get();
 		logger.setLoglevel(arguments.get(GeneratorApplicationOptions.LOGLEVEL));
 		logger.setOutput(out);
 		return logger;
 	}
 
-	private IGeneratorFileIO createGeneratorFileIO(Arguments arguments, ILogger logger) {
-		IncrementalGeneratorFileIO fileIO = fileIOProvider.get();
-		fileIO.setGenDir(arguments.get(GeneratorApplicationOptions.GEN_DIR));
-		fileIO.setGenInfoDir(arguments.get(GeneratorApplicationOptions.GEN_INFO_DIR));
-		fileIO.setGenerateIncremental(arguments.get(GeneratorApplicationOptions.GEN_INCREMENTAL));
+	private GeneratorFileIO createGeneratorFileIO(Arguments arguments, Logger logger) {
+		GeneratorFileIO fileIO = fileIOProvider.get();
+		fileIO.setOutputDirectory(arguments.get(GeneratorApplicationOptions.GEN_DIR));
 		fileIO.setLogger(logger);
 		return fileIO;
 	}
 
-	private List<Resource> load(List<String> files, Arguments arguments, ILogger logger) {
+	private List<Resource> load(Arguments arguments, Logger logger) {
+		List<String> files = arguments.get(GeneratorApplicationOptions.FILES);
 		return resourceLoader.load(files, arguments, logger);
 	}
 
-	private void validate(List<Resource> models, Arguments arguments, ILogger logger) {
+	private void validate(List<Resource> models, Arguments arguments, Logger logger) {
 		resourceValidator.validate(models, arguments, logger);
 	}
 
-	private void generate(List<Resource> resources, Arguments arguments, IGeneratorFileIO fileIO, ILogger logger) {
+	private void generate(List<Resource> resources, Arguments arguments, GeneratorFileIO fileIO, Logger logger) {
 		// Create new generator to avoid problems with static states in eTrice AbstractGenerator
 		IGenerator generator = generatorProvider.get();
 		generator.generate(resources, arguments, fileIO, logger);
 	}
-
-	private void logException(Exception e, ILogger logger) {
+	
+	private void cleanOutputDirectory(Arguments arguments, GeneratorFileIO fileIO, Logger logger) {
+		if(arguments.get(GeneratorApplicationOptions.CLEAN)) {
+			fileIO.cleanOutputDirectory();
+		}
+	}
+	
+	private void logArguments(Arguments arguments, GeneratorFileIO fileIO, Logger logger) {
+		logger.logDebug("Arguments: " + arguments);
+		logger.logDebug("Output directory: " + fileIO.getOutputDirectory().toAbsolutePath());
+	}
+	
+	private void logException(Exception e, Logger logger) {
 		if(Loglevel.DEBUG.compareTo(logger.getLoglevel()) >= 0) {
 			StringWriter sw = new StringWriter();
 			PrintWriter pw = new PrintWriter(sw);

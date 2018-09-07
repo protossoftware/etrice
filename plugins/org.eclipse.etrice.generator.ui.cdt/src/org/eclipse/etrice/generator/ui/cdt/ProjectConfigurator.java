@@ -15,18 +15,13 @@ import org.eclipse.cdt.core.settings.model.ICLanguageSettingEntry;
 import org.eclipse.cdt.core.settings.model.ICProjectDescription;
 import org.eclipse.cdt.core.settings.model.ICSettingEntry;
 import org.eclipse.cdt.managedbuilder.core.IConfiguration;
-import org.eclipse.cdt.managedbuilder.core.IFolderInfo;
 import org.eclipse.cdt.managedbuilder.core.ManagedBuildManager;
-import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.etrice.generator.ui.configurator.IProjectConfigurator;
-import org.eclipse.etrice.generator.ui.preferences.PreferenceConstants;
-import org.eclipse.ui.preferences.ScopedPreferenceStore;
 
 /*
  * Docs:
@@ -113,15 +108,8 @@ public abstract class ProjectConfigurator implements IProjectConfigurator {
 		
 		ICProjectDescription projectDescription = CoreModel.getDefault().getProjectDescription(project, true);
 		
-		ScopedPreferenceStore prefStore = new ScopedPreferenceStore(InstanceScope.INSTANCE, "org.eclipse.etrice.generator.ui");
-		String infoDir = prefStore.getString(PreferenceConstants.GEN_INFO_DIR);
-		IFolder srcGenInfoFolder = project.getFolder(infoDir);
-		
 		// it is not necessary to actually create this folder here
 //		srcGenInfoFolder.create(false, true, new SubProgressMonitor(progressMonitor, 1));
-		
-		IPath srcGenInfoPath = srcGenInfoFolder.getFullPath();
-		srcGenInfoPath = srcGenInfoPath.removeFirstSegments(1);
 		
 		// all build configurations e.g. Debug, Release
 		for (ICConfigurationDescription configDescription : projectDescription.getConfigurations()) {
@@ -135,11 +123,6 @@ public abstract class ProjectConfigurator implements IProjectConfigurator {
 				toolChain = MINGW_TOOLCHAIN;
 			else if (POSIX_TOOLCHAIN.equals(toolChainName))
 				toolChain = POSIX_TOOLCHAIN;
-
-			IFolderInfo folderInfo = buildConfig.createFolderInfo(srcGenInfoPath);
-			if (folderInfo!=null) {
-				folderInfo.setExclude(true);
-			}
 
 			customizeBuildConfig(project, buildConfig);
 			

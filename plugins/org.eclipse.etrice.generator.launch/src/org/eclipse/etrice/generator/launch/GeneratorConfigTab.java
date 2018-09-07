@@ -73,7 +73,6 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 	public static final String OVERRIDE_DIRECTORIES = "OverrideDirectories";
 	public static final String GEN_DEPS_WITHIN_PROJECT = "GenerateDepsWithinProject";
 	public static final String SRCGEN_PATH = "SrcgenPath";
-	public static final String INFO_PATH = "InfoPath";
 	
 	private Button libButton;
 	private Button saveGenModel;
@@ -86,7 +85,6 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 	private Button generateDepsWithinProject;
 	private Button overrideDirectories;
 	private Text srcgenPath;
-	private Text infoPath;
 	protected Button dataButton;
 	private Text mainMethodName;
 
@@ -212,19 +210,6 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 			}
 		});
 		
-		label = new Label(mainComposite, SWT.NONE);
-		label.setText("The directory for i&nformation about generated code:");
-		infoPath = new Text(mainComposite, SWT.SINGLE | SWT.BORDER);
-		infoPath.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		infoPath.addModifyListener(new ModifyListener() {
-			@Override
-			public void modifyText(ModifyEvent e) {
-				validate();
-				setDirty(true);
-				updateLaunchConfigurationDialog();
-			}
-		});
-		
 		addFurtherControls(mainComposite);
 	}
 
@@ -246,11 +231,9 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 	protected void handleOverrideDirectories() {
 		boolean override = overrideDirectories.getSelection();
 		srcgenPath.setEnabled(override);
-		infoPath.setEnabled(override);
 		if (!override) {
 			ScopedPreferenceStore prefStore = new ScopedPreferenceStore(InstanceScope.INSTANCE, "org.eclipse.etrice.generator.ui");
 			srcgenPath.setText(prefStore.getString(PreferenceConstants.GEN_DIR));
-			infoPath.setText(prefStore.getString(PreferenceConstants.GEN_INFO_DIR));
 		}
 		validate();
 		setDirty(true);
@@ -324,17 +307,13 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 			
 			boolean override = configuration.getAttribute(OVERRIDE_DIRECTORIES, false);
 			String srcgenDir = prefStore.getString(PreferenceConstants.GEN_DIR);
-			String infoDir = prefStore.getString(PreferenceConstants.GEN_INFO_DIR);
 			overrideDirectories.setSelection(override);
 			srcgenPath.setEnabled(override);
-			infoPath.setEnabled(override);
 			if (override) {
 				srcgenPath.setText(configuration.getAttribute(SRCGEN_PATH, srcgenDir));
-				infoPath.setText(configuration.getAttribute(INFO_PATH, infoDir));
 			}
 			else {
 				srcgenPath.setText(srcgenDir);
-				infoPath.setText(infoDir);
 			}
 			
 			generateDepsWithinProject.setSelection(configuration.getAttribute(GEN_DEPS_WITHIN_PROJECT, true));
@@ -363,7 +342,6 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 		configuration.setAttribute(OVERRIDE_DIRECTORIES, override);
 		if (override) {
 			configuration.setAttribute(SRCGEN_PATH, srcgenPath.getText());
-			configuration.setAttribute(INFO_PATH, infoPath.getText());
 		}
 		
 		configuration.setAttribute(GEN_DEPS_WITHIN_PROJECT, generateDepsWithinProject.getSelection());
