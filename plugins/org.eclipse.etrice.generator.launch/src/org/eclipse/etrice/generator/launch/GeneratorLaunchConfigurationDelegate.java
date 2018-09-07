@@ -17,7 +17,10 @@ package org.eclipse.etrice.generator.launch;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -72,64 +75,25 @@ public abstract class GeneratorLaunchConfigurationDelegate extends AbstractJavaL
 			return;
 		}
 		try {
-			StringBuffer argString = new StringBuffer();
-
-			// constructing program arguments
-			addModels(configuration, argString);
-			addArguments(configuration, argString);
-
-			String pgmArgs = argString.toString().trim();
-			pgmArgs = VariablesPlugin.getDefault().getStringVariableManager()
-					.performStringSubstitution(pgmArgs);
-
-			// split at single spaces but keep strings in double quotes as single argument
-			// (with double quotes removed)
-			ArrayList<String> res = new ArrayList<String>();
-			int begin = 0;
-			int end = pgmArgs.indexOf(' ');
-			boolean inQuotes = false;
-			while (end>0) {
-				if (pgmArgs.charAt(begin)=='\"')
-					inQuotes = true;
-				if ((inQuotes && pgmArgs.charAt(end-1)=='\"')) {
-					inQuotes = false;
-				}
-				
-				if (!inQuotes) {
-					res.add(pgmArgs.substring(begin, end).replace("\"", ""));
-					begin = end+1;
-				}
-				end = pgmArgs.indexOf(' ', end+1);
-			}
-			res.add(pgmArgs.substring(begin).replace("\"", ""));
+			ConsoleOutput output = getConsoleOutput();
 			
-			String[] args = new String[res.size()];
-			res.toArray(args);
-
-			final MessageConsole myConsole = findConsole(getConsoleName());
-			Display.getDefault().syncExec(new Runnable() {
-				@Override
-				public void run() {
-					try {
-						IWorkbench wb = PlatformUI.getWorkbench();
-						IWorkbenchWindow win = wb.getActiveWorkbenchWindow();
-						IWorkbenchPage page = win.getActivePage();
-						String id = IConsoleConstants.ID_CONSOLE_VIEW;
-						IConsoleView view = (IConsoleView) page.showView(id);
-						view.display(myConsole);
-					} catch (PartInitException e) {
-						e.printStackTrace();
-					}
+			List<String> models = getModels(configuration);
+			Map<IProject, List<String>> project2Models = GeneratorLaunchHelper.groupByProject(models);
+			for(Entry<IProject, List<String>> entry: project2Models.entrySet()) {
+				
+				// constructing program arguments
+				StringBuffer argString = new StringBuffer();
+				addModels(configuration, entry.getValue(), argString);
+				addArguments(configuration, entry.getKey(), argString);
+				String[] args = splitCommandLine(argString.toString());
+				
+				output.println("\n*** generating project " + entry.getKey().getName() + " ***");
+				runGenerator(args, output);
+				
+				// check for cancellation
+				if (monitor.isCanceled()) {
+					return;
 				}
-			});
-			MessageConsoleStream out = myConsole.newMessageStream();
-			out.getConsole().clearConsole();
-			ConsoleOutput output = new ConsoleOutput(out);
-			runGenerator(args, output);
-
-			// check for cancellation
-			if (monitor.isCanceled()) {
-				return;
 			}
 		} finally {
 			monitor.done();
@@ -166,14 +130,30 @@ public abstract class GeneratorLaunchConfigurationDelegate extends AbstractJavaL
 		conMan.addConsoles(new IConsole[] { myConsole });
 		return myConsole;
 	}
+	
+	protected ConsoleOutput getConsoleOutput() {
+		final MessageConsole myConsole = findConsole(getConsoleName());
+		Display.getDefault().syncExec(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					IWorkbench wb = PlatformUI.getWorkbench();
+					IWorkbenchWindow win = wb.getActiveWorkbenchWindow();
+					IWorkbenchPage page = win.getActivePage();
+					String id = IConsoleConstants.ID_CONSOLE_VIEW;
+					IConsoleView view = (IConsoleView) page.showView(id);
+					view.display(myConsole);
+				} catch (PartInitException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		MessageConsoleStream out = myConsole.newMessageStream();
+		out.getConsole().clearConsole();
+		return new ConsoleOutput(out);
+	}
 
-	protected void addModels(ILaunchConfiguration configuration, StringBuffer argString) throws CoreException {
-		IStringVariableManager variableManager = VariablesPlugin.getDefault().getStringVariableManager();
-		
-		List<String> models = Lists.newArrayList();
-		for(String model : getModels(configuration)) {
-			models.add(variableManager.performStringSubstitution(model));
-		}
+	protected void addModels(ILaunchConfiguration configuration, List<String> models, StringBuffer argString) throws CoreException {
 		if(configuration.getAttribute(GeneratorConfigTab.GEN_DEPS_WITHIN_PROJECT, true)) {
 			// generate all dependencies within project for .etmap
 			models = Lists.newArrayList(GeneratorLaunchHelper.getAllDependenciesWithinProjects(models));
@@ -185,7 +165,13 @@ public abstract class GeneratorLaunchConfigurationDelegate extends AbstractJavaL
 	
 	@SuppressWarnings("unchecked")
 	protected List<String> getModels(ILaunchConfiguration configuration) throws CoreException {
-		return configuration.getAttribute("ModelFiles", Collections.EMPTY_LIST);
+		IStringVariableManager variableManager = VariablesPlugin.getDefault().getStringVariableManager();
+		List<String> models = configuration.getAttribute("ModelFiles", Collections.EMPTY_LIST);
+		List<String> substitutedModels = Lists.newArrayList();
+		for(String model : models) {
+			substitutedModels.add(variableManager.performStringSubstitution(model));
+		}
+		return substitutedModels;
 	}
 	
 	/**
@@ -195,7 +181,7 @@ public abstract class GeneratorLaunchConfigurationDelegate extends AbstractJavaL
 	 * @param argString
 	 * @throws CoreException
 	 */
-	protected void addArguments(ILaunchConfiguration configuration, StringBuffer argString) throws CoreException {
+	protected void addArguments(ILaunchConfiguration configuration, IProject project, StringBuffer argString) throws CoreException {
 		if (configuration.getAttribute(GeneratorConfigTab.LIB, false)) {
 			argString.append(" -"+AbstractGeneratorOptions.LIB.getName());
 		}
@@ -229,6 +215,7 @@ public abstract class GeneratorLaunchConfigurationDelegate extends AbstractJavaL
 			argString.append(" -"+GeneratorApplicationOptions.GEN_INCREMENTAL.getName());
 		}
 		
+		String projectDir = project.getLocation().toString() + "/";
 		boolean override = configuration.getAttribute(GeneratorConfigTab.OVERRIDE_DIRECTORIES, false);
 		String srcgenDir = prefStore.getString(PreferenceConstants.GEN_DIR);
 		String infoDir = prefStore.getString(PreferenceConstants.GEN_INFO_DIR);
@@ -236,12 +223,42 @@ public abstract class GeneratorLaunchConfigurationDelegate extends AbstractJavaL
 			srcgenDir = configuration.getAttribute(GeneratorConfigTab.SRCGEN_PATH, srcgenDir);
 			infoDir = configuration.getAttribute(GeneratorConfigTab.INFO_PATH, infoDir);
 		}
+
 		argString.append(" -"+GeneratorApplicationOptions.GEN_DIR.getName());
-		argString.append(" "+srcgenDir);
-		
+		argString.append(" \""+projectDir+srcgenDir+"\"");
+
 		argString.append(" -"+GeneratorApplicationOptions.GEN_INFO_DIR.getName());
-		argString.append(" "+infoDir);
+		argString.append(" \""+projectDir+infoDir+"\"");
 		
+	}
+	
+	/**
+	 *  split at single spaces but keep strings in double quotes as single argument
+	 *  (with double quotes removed)
+	 */
+	protected String[] splitCommandLine(String cl) {
+		cl = cl.trim();
+		ArrayList<String> res = new ArrayList<String>();
+		int begin = 0;
+		int end = cl.indexOf(' ');
+		boolean inQuotes = false;
+		while (end>0) {
+			if (cl.charAt(begin)=='\"')
+				inQuotes = true;
+			if ((inQuotes && cl.charAt(end-1)=='\"')) {
+				inQuotes = false;
+			}
+			
+			if (!inQuotes) {
+				res.add(cl.substring(begin, end).replace("\"", ""));
+				begin = end+1;
+			}
+			end = cl.indexOf(' ', end+1);
+		}
+		res.add(cl.substring(begin).replace("\"", ""));
+		
+		String[] args = new String[res.size()];
+		return res.toArray(args);
 	}
 	
 	/**

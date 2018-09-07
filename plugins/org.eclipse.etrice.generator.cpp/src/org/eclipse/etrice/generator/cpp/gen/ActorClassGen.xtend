@@ -50,11 +50,10 @@ class ActorClassGen extends GenericActorClassGenerator {
 		for (xpac: root.actorClasses.filter[isValidGenerationLocation].map[root.getExpandedActorClass(it)]) {
 			val wired = ac2wired.get(xpac.actorClass)
 			val manualBehavior = xpac.actorClass.isBehaviorAnnotationPresent("BehaviorManual")
-			val path = xpac.actorClass.generationTargetPath+xpac.actorClass.getPath
-			val infopath = xpac.actorClass.generationInfoPath+xpac.actorClass.getPath
+			val path = xpac.actorClass.getPath
 			var file = if (manualBehavior) 'Abstract' else ''
-			fileIO.generateFile("generating ActorClass declaration", path, infopath, file + xpac.actorClass.getCppHeaderFileName, root.generateHeaderFile(xpac, wired, manualBehavior))
-			fileIO.generateFile("generating ActorClass implementation", path, infopath, file + xpac.actorClass.getCppSourceFileName, root.generateSourceFile(xpac, wired, manualBehavior))
+			fileIO.generateFile("generating ActorClass declaration", path + file + xpac.actorClass.getCppHeaderFileName, root.generateHeaderFile(xpac, wired, manualBehavior))
+			fileIO.generateFile("generating ActorClass implementation", path + file + xpac.actorClass.getCppSourceFileName, root.generateSourceFile(xpac, wired, manualBehavior))
 		}
 	}
 
@@ -91,7 +90,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 			#include "«dc.path»«dc.name».h"
 		«ENDFOR»
 
-		«IF ac.actorBase==null»
+		«IF ac.actorBase===null»
 			#include "common/modelbase/ActorClassBase.h"
 		«ELSE»
 			#include "«ac.actorBase.path»«ac.actorBase.name».h"

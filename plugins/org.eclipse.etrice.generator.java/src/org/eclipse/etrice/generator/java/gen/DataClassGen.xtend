@@ -40,10 +40,9 @@ class DataClassGen {
 
 	def doGenerate(Root root) {
 		for (dc: root.dataClasses.filter(cl|cl.isValidGenerationLocation)) {
-			var path = dc.generationTargetPath+dc.getPath
-			var infopath = dc.generationInfoPath+dc.getPath
+			var path = dc.getPath
 			var file = dc.getJavaFileName
-			fileIO.generateFile("generating DataClass implementation", path, infopath, file, root.generate(dc))
+			fileIO.generateFile("generating DataClass implementation", path + file, root.generate(dc))
 		}
 	}
 

@@ -14,6 +14,7 @@
 
 package org.eclipse.etrice.generator.launch.java;
 
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.etrice.generator.base.io.ILineOutput;
@@ -31,8 +32,8 @@ public class JavaGeneratorLaunchConfigurationDelegate extends GeneratorLaunchCon
 	 * @see org.eclipse.etrice.generator.launch.GeneratorLaunchConfigurationDelegate#addArguments(org.eclipse.debug.core.ILaunchConfiguration, java.lang.StringBuffer)
 	 */
 	@Override
-	protected void addArguments(ILaunchConfiguration configuration, StringBuffer argString) throws CoreException {
-		super.addArguments(configuration, argString);
+	protected void addArguments(ILaunchConfiguration configuration, IProject project, StringBuffer argString) throws CoreException {
+		super.addArguments(configuration, project, argString);
 		
 		if (configuration.getAttribute(JavaGeneratorConfigTab.PERSIST, false)) {
 			argString.append(" -"+GeneratorOptions.GEN_PERSIST.getName());

@@ -45,20 +45,19 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 	
 	def doGenerate(Root root) {
 		for (pc: root.protocolClasses) {
-			val path = pc.generationTargetPath+pc.getPath
-			val infopath = pc.generationInfoPath+pc.getPath
+			val path = pc.getPath
 			var file = pc.getCHeaderFileName
 
 			// header file
-			fileIO.generateFile("generating ProtocolClass header", path, infopath, file, root.generateHeaderFile(pc))
+			fileIO.generateFile("generating ProtocolClass header", path + file, root.generateHeaderFile(pc))
 			
 			// utils file
 			file = pc.getCUtilsFileName
-			fileIO.generateFile("generating ProtocolClass utils", path, infopath, file, root.generateUtilsFile(pc))
+			fileIO.generateFile("generating ProtocolClass utils", path + file, root.generateUtilsFile(pc))
 
 			// source file
 			file = pc.getCSourceFileName
-			fileIO.generateFile("generating ProtocolClass source", path, infopath, file, root.generateSourceFile(pc))
+			fileIO.generateFile("generating ProtocolClass source", path + file, root.generateSourceFile(pc))
 		}
 	}
 

@@ -40,7 +40,6 @@ import org.eclipse.etrice.core.room.SAP
 import org.eclipse.etrice.core.room.SPP
 import org.eclipse.etrice.core.room.ServiceImplementation
 import org.eclipse.etrice.core.room.util.RoomHelpers
-import org.eclipse.etrice.generator.fsm.base.FileSystemHelpers
 import org.eclipse.etrice.generator.fsm.generic.FSMExtensions
 import java.util.Collections
 
@@ -52,23 +51,7 @@ class RoomExtensions extends FSMExtensions {
 
 	public val NEWLINE = System.getProperty("line.separator")
 
-	private static String genDir = "/src-gen/"
-	private static String genInfoDir = "/src-gen-info/"
-
 	@Inject protected extension RoomHelpers
-
-	def static setDefaultGenDir() {
-		genDir = "/src-gen/"
-	}
-	def static setDefaultGenInfoDir() {
-		genInfoDir = "/src-gen-info/"
-	}
-	def static setGenDir(String dir) {
-		genDir = "/"+dir+"/"
-	}
-	def static setGenInfoDir(String dir) {
-		genInfoDir = "/"+dir+"/"
-	}
 
 	//-------------------------------------------------------
 	// union methods
@@ -90,20 +73,6 @@ class RoomExtensions extends FSMExtensions {
 	// path related methods
 
 	/**
-	 * @return the relative path to the destination folder for the generated code
-	 */
-	def String getGenerationPathSegment() {
-		genDir
-	}
-
-	/**
-	 * @return the relative path to the destination folder for the generated code
-	 */
-	def String getGenerationInfoSegment() {
-		genInfoDir
-	}
-
-	/**
 	 * @param e an {@link EObject}
 	 * @return the URI of the EObject's resource as file string
 	 * 		(or an empty string if no such resource exists)
@@ -117,7 +86,6 @@ class RoomExtensions extends FSMExtensions {
 			return res.URI.toFileString
 		}
 	}
-
 
 	//-------------------------------------------------------
 	// packages and paths
@@ -153,38 +121,6 @@ class RoomExtensions extends FSMExtensions {
 	 */
 	def String getPath(RoomClass rc) {
 		getPathFromPackage(getPackage(rc))
-	}
-
-	// a directory is a eclipse project if it contains a ".project" file
-	/**
-	 * @param e an {@link EObject}
-	 * @return the path of the Eclipse project containing the EObject's resource
-	 */
-	def String getProjectPath(EObject e) {
-		val res = FileSystemHelpers::getProjectURI(e)
-		if (res===null) {
-			return ""
-		}
-
-		return res.toFileString
-	}
-
-	/**
-	 * @param e an {@link EObject}
-	 * @return the concatenation of the object's project path
-	 * 		with the {@link #getGenerationPathSegment()}
-	 */
-	def String getGenerationTargetPath(EObject e){
-		return getProjectPath(e)+getGenerationPathSegment()
-	}
-
-	/**
-	 * @param e an {@link EObject}
-	 * @return the concatenation of the object's project path
-	 * 		with the {@link #getGenerationInfoSegment()}
-	 */
-	def String getGenerationInfoPath(EObject e){
-		return getProjectPath(e)+getGenerationInfoSegment()
 	}
 
 	/**

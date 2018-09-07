@@ -53,16 +53,15 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 	def doGenerate(Root root) {
 
 		for (pc: root.protocolClasses.filter(cl|cl.isValidGenerationLocation)) {
-			val path = pc.generationTargetPath+pc.getPath
-			val infopath = pc.generationInfoPath+pc.getPath
+			val path = pc.getPath
 			switch (pc.commType) {
 				case CommunicationType::EVENT_DRIVEN:{
-					fileIO.generateFile("generating ProtocolClass declaration", path, infopath, pc.cppHeaderFileName, root.generateHeaderFile(pc))
-					fileIO.generateFile("generating ProtocolClass implementation", path, infopath, pc.cppSourceFileName, root.generateSourceFile(pc))
+					fileIO.generateFile("generating ProtocolClass declaration", path + pc.cppHeaderFileName, root.generateHeaderFile(pc))
+					fileIO.generateFile("generating ProtocolClass implementation", path + pc.cppSourceFileName, root.generateSourceFile(pc))
 				}
 				case CommunicationType::DATA_DRIVEN:{
-					fileIO.generateFile("generating ProtocolClass declaration", path, infopath, pc.cppHeaderFileName, root.generateDataDrivenHeaderFile(pc))
-					fileIO.generateFile("generating ProtocolClass implementation", path, infopath, pc.cppSourceFileName, root.generateDataDrivenSourceFile(pc))
+					fileIO.generateFile("generating ProtocolClass declaration", path + pc.cppHeaderFileName, root.generateDataDrivenHeaderFile(pc))
+					fileIO.generateFile("generating ProtocolClass implementation", path + pc.cppSourceFileName, root.generateDataDrivenSourceFile(pc))
 				}
 				case CommunicationType::SYNCHRONOUS:
 					diagnostician.error("synchronous protocols not supported yet", pc, null)

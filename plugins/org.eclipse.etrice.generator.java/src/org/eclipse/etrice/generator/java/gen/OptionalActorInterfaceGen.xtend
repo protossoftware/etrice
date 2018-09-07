@@ -36,13 +36,12 @@ class OptionalActorInterfaceGen extends GenericActorClassGenerator {
 	
 	def doGenerate(Root root) {
 		for (ac: root.optionalActorClasses.filter(cl|cl.isValidGenerationLocation)) {
-			val path = ac.generationTargetPath+ac.path
-			val infopath = ac.generationInfoPath+ac.path
+			val path = ac.path
 			var file = ac.getJavaInterfaceFileName(false)
-			fileIO.generateFile("generating ActorClass Interface implementation", path, infopath, file, root.generate(ac, false))
+			fileIO.generateFile("generating ActorClass Interface implementation", path + file, root.generate(ac, false))
 
 			file = ac.getJavaInterfaceFileName(true)
-			fileIO.generateFile("generating ActorClass Interface implementation", path, infopath, file, root.generate(ac, true))
+			fileIO.generateFile("generating ActorClass Interface implementation", path + file, root.generate(ac, true))
 		}
 	}
 	

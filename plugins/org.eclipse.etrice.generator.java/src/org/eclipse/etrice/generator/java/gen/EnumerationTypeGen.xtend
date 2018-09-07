@@ -35,10 +35,9 @@ class EnumerationTypeGen {
 	
 	def doGenerate(Root root) {
 		for (et: root.enumClasses.filter(cl|cl.isValidGenerationLocation)) {
-			var path = et.generationTargetPath+et.getPath
-			var infopath = et.generationInfoPath+et.getPath
+			var path = et.getPath
 			var file = et.getJavaFileName
-			fileIO.generateFile("generating Enumeration implementation", path, infopath, file, root.generate(et))
+			fileIO.generateFile("generating Enumeration implementation", path + file, root.generate(et))
 		}
 	}
 	

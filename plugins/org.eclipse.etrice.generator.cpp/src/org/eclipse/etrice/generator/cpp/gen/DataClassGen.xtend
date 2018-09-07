@@ -24,12 +24,12 @@ import org.eclipse.etrice.core.room.ComplexType
 import org.eclipse.etrice.core.room.DataClass
 import org.eclipse.etrice.core.room.util.RoomHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
-import org.eclipse.xtext.generator.JavaIoFileSystemAccess
+import org.eclipse.etrice.generator.base.io.IGeneratorFileIO
 
 @Singleton
 class DataClassGen {
 
-	@Inject extension JavaIoFileSystemAccess fileAccess
+	@Inject extension IGeneratorFileIO fileIO
 	@Inject extension CppExtensions stdExt
 	@Inject extension RoomExtensions roomExt
 	@Inject extension CppProcedureHelpers helpers
@@ -41,17 +41,13 @@ class DataClassGen {
 	def doGenerate(Root root) {
 		logger.logInfo("generating code")
 		for (dc: root.dataClasses) {
-			var path = dc.generationTargetPath + dc.getPath
+			var path = dc.getPath
 
 			// header file
-			logger.logInfo("generating DataClass header '"+dc.getCppHeaderFileName+"' in '"+path+"'")
-			fileAccess.setOutputPath(path)
-			fileAccess.generateFile(dc.getCppHeaderFileName, root.generateHeaderFile(dc))
+			fileIO.generateFile("generating DataClass header", path + dc.getCppHeaderFileName, root.generateHeaderFile(dc))
 
 			// source file
-			logger.logInfo("generating DataClass source '"+dc.getCppSourceFileName+"' in '"+path+"'")
-			fileAccess.setOutputPath(path)
-			fileAccess.generateFile(dc.getCppSourceFileName, root.generateSourceFile(dc))
+			fileIO.generateFile("generating DataClass source", path + dc.getCppSourceFileName, root.generateSourceFile(dc))
 
 		}
 

@@ -86,7 +86,7 @@ public class GeneratorResourceLoader implements IGeneratorResourceLoader {
 			return rs.getResource(uri, true);
 		}
 		catch(RuntimeException | IOException e) {
-			logger.logError("couldn't load resource " + file + "; " + e.getMessage());
+			logger.logError("couldn't load file " + file + "; " + e.getMessage());
 			throw new GeneratorException(e);
 		}
 	}
@@ -112,7 +112,7 @@ public class GeneratorResourceLoader implements IGeneratorResourceLoader {
 		public void notifyChanged(Notification msg) {
 			if(msg.getEventType() == Notification.ADD) {
 				Resource addedResource = (Resource) msg.getNewValue();
-				logger.logInfo("added resource " + addedResource.getURI());
+				logger.logDebug("added resource " + addedResource.getURI());
 			}
 		}
 	}

@@ -78,4 +78,11 @@ class GeneratorLaunchHelper {
 			}
 		].filterNull
 	}
+	
+	def static groupByProject(Collection<String> files) {
+		val ws = ResourcesPlugin.workspace.root
+		val m = files.groupBy[ws.getFileForLocation(new Path(it))?.project]
+		m.remove(null)
+		return m
+	}
 }

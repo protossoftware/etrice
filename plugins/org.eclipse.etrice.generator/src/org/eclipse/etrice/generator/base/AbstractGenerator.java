@@ -41,9 +41,7 @@ import org.eclipse.etrice.generator.base.io.IGeneratorFileIO;
 import org.eclipse.etrice.generator.base.io.ILineOutput;
 import org.eclipse.etrice.generator.base.io.LineOutput;
 import org.eclipse.etrice.generator.base.logging.ILogger;
-import org.eclipse.etrice.generator.base.setup.GeneratorApplicationOptions;
 import org.eclipse.etrice.generator.fsm.generic.IDetailCodeTranslator;
-import org.eclipse.etrice.generator.generic.RoomExtensions;
 import org.eclipse.etrice.generator.generic.TestInstanceCreator;
 
 import com.google.inject.Inject;
@@ -155,8 +153,6 @@ public abstract class AbstractGenerator implements IGenerator, IDetailCodeTransl
 	@Override
 	public void generate(List<Resource> resources, Arguments arguments, IGeneratorFileIO fileIO, ILogger logger) {
 		AbstractGenerator.settings = arguments;
-		RoomExtensions.setGenDir(arguments.get(GeneratorApplicationOptions.GEN_DIR));
-		RoomExtensions.setGenInfoDir(arguments.get(GeneratorApplicationOptions.GEN_INFO_DIR));
 		
 		if(resources.isEmpty()) {
 			logger.logError("no input files");
@@ -179,6 +175,8 @@ public abstract class AbstractGenerator implements IGenerator, IDetailCodeTransl
 	 * abstract method which is finally called by {@link #createAndRunGenerator(Module, String[])}
 	 * @param resources a list of the main models
 	 * @param arguments the generator arguments
+	 * @param fileIO the generator file io
+	 * @param logger the logger
 	 * @return GENERATOR_OK or GENERATOR_ERROR
 	 */
 	protected abstract int runGenerator(List<Resource> resources, Arguments arguments, IGeneratorFileIO fileIO, ILogger logger);

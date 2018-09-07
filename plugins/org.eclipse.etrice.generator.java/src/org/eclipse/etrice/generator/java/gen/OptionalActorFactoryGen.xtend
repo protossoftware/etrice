@@ -26,10 +26,9 @@ class OptionalActorFactoryGen {
 		for (oi: root.optionalInstances.filter(cl|cl.actorClass.isValidGenerationLocation)) {
 			val ac = oi.actorClass
 			val wired = ac2wired.get(ac)
-			val path = ac.generationTargetPath+ac.path
-			val infopath = ac.generationInfoPath+ac.path
+			val path = ac.path
 			val file = ac.getJavaFactoryFileName
-			fileIO.generateFile("generating ActorClass Interface implementation", path, infopath, file, root.generate(oi, wired))
+			fileIO.generateFile("generating ActorClass Interface implementation", path + file, root.generate(oi, wired))
 		}
 	}
 	

@@ -24,16 +24,12 @@ import org.eclipse.etrice.core.common.base.StringLiteral
 import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance
 import org.eclipse.etrice.generator.base.io.IGeneratorFileIO
-import org.eclipse.etrice.generator.generic.RoomExtensions
 import com.google.inject.Singleton
 
 @Singleton
 class GnuplotScriptGenerator { 
 	@Inject
 	IGeneratorFileIO fileIo
-
-	@Inject
-	extension RoomExtensions roomExtensions
 
 	def doGenerate(Root root) {
 		if (root.subSystemInstances.empty)
@@ -44,13 +40,9 @@ class GnuplotScriptGenerator {
 		if(!ssi.subSystemClass.annotations.exists[a |a.type.name == "Gnuplot"])
 			return;
 		
-		val path = ssi.subSystemClass.getGenerationTargetPath
-		val infoPath = ssi.subSystemClass.generationInfoPath
 		try {
-			fileIo.generateFile("Generating gnuplot script for subsystem " + ssi.name, path, infoPath,
-				"/gnuplot/main.data.csv-script.plt", ssi.generatePlotScript)
-			fileIo.generateFile("Generating gnuplot launch configuration", path, infoPath,
-				"/gnuplot/create_gnuplot.launch", gnuPlotLaunchFile)
+			fileIo.generateFile("Generating gnuplot script for subsystem " + ssi.name, "/gnuplot/main.data.csv-script.plt", ssi.generatePlotScript)
+			fileIo.generateFile("Generating gnuplot launch configuration", "/gnuplot/create_gnuplot.launch", gnuPlotLaunchFile)
 		} catch (Exception e) {
 			//e.printStackTrace
 		}

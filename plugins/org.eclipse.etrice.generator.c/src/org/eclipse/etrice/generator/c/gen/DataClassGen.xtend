@@ -39,20 +39,19 @@ class DataClassGen {
 	
 	def doGenerate(Root root) {
 		for (dc: root.dataClasses) {
-			val path = dc.generationTargetPath+dc.getPath
-			val infopath = dc.generationInfoPath+dc.getPath
+			val path = dc.getPath
 			var file = dc.getCHeaderFileName
 
 			// header file
-			fileIO.generateFile("generating DataClass header", path, infopath, file, root.generateHeaderFile(dc))
+			fileIO.generateFile("generating DataClass header", path + file, root.generateHeaderFile(dc))
 			
 			// utils file
 			file = dc.getCUtilsFileName
-			fileIO.generateFile("generating ProtocolClass utils", path, infopath, file, root.generateUtilsFile(dc))
+			fileIO.generateFile("generating ProtocolClass utils", path + file, root.generateUtilsFile(dc))
 			
 			// source file
 			file = dc.getCSourceFileName
-			fileIO.generateFile("generating DataClass source", path, infopath, file, root.generateSourceFile(dc))
+			fileIO.generateFile("generating DataClass source", path + file, root.generateSourceFile(dc))
 			
 		}
 	}

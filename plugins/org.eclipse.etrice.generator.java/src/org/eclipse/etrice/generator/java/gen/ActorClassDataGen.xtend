@@ -42,10 +42,9 @@ class ActorClassDataGen {
 		root.wiredInstances.filter(w|w instanceof WiredActorClass).forEach[w|ac2wired.put((w as WiredActorClass).actorClass, w as WiredActorClass)]
 		for (xpac: root.actorClasses.filter[isValidGenerationLocation].map[root.getExpandedActorClass(it)]) {
 			val wired = ac2wired.get(xpac.actorClass)
-			val path = xpac.actorClass.generationTargetPath+xpac.actorClass.getPath
-			val infopath = xpac.actorClass.generationInfoPath+xpac.actorClass.getPath
+			val path = xpac.actorClass.getPath
 			var file = xpac.actorClass.name+"_DataObject.java"
-			fileIO.generateFile("generating ActorClass implementation", path, infopath, file, root.generate(xpac, wired))
+			fileIO.generateFile("generating ActorClass implementation", path + file, root.generate(xpac, wired))
 		}
 	}
 	

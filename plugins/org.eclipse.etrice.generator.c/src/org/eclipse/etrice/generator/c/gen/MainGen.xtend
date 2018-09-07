@@ -33,8 +33,7 @@ class MainGen {
 	@Inject PrepareFileSystem prepFS
 	
 	def void doGenerate(Resource resource) {
-		prepFS.prepareCodeTargetPaths(resource)
-		prepFS.prepareInfoTargetPaths(resource)
+		prepFS.prepare
 		for (e: resource.contents){
 			if (e instanceof Root) {
 				doGenerate(e as Root)

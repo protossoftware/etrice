@@ -53,10 +53,9 @@ class VariableServiceGen {
 	def doGenerate(Root root, SubSystemInstance ssi) {
 		val nr = ETMapUtil::getNodeRef(ssi)
 		val clsname = nr.getJavaClassName(ssi)
-		val path = ssi.subSystemClass.generationTargetPath+ssi.subSystemClass.getPath
-		val infopath = ssi.subSystemClass.generationInfoPath+ssi.subSystemClass.getPath
+		val path = ssi.subSystemClass.getPath
 		val file = clsname+"VariableService.java"
-		fileIO.generateFile("generating VariableService implementation", path, infopath, file, root.generate(ssi))
+		fileIO.generateFile("generating VariableService implementation", path + file, root.generate(ssi))
 	}
 	
 	def private generate(Root root, SubSystemInstance comp) {

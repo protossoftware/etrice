@@ -25,18 +25,22 @@ import com.google.inject.ImplementedBy;
 public interface IGeneratorFileIO {
 
 	/**
-	 * This method saves the contents in a file in the given path.
-	 * Implementations may use the infopath for extra information like a hash key
-	 * for incremental generation.
+	 * Saves the contents in a file at the given path.
 	 * 
-	 * @param desc a description which is may be logged
-	 * @param path the file system path for the generated file
-	 * @param infopath the file system path for the generated info file (if used by the implementation)
-	 * @param file the file name of the generated file
+	 * @param filePath the file path of the generated file
 	 * @param contents the contents of the generated file
 	 */
-	void generateFile(String desc, String path, String infopath, String file, CharSequence contents);
+	void generateFile(String filePath, CharSequence contents);
 	
-	void generateFile(String file, CharSequence contents);
+	/**
+	 * This method saves the contents in a file in the given path.
+	 * 
+	 * @param description a description which may be logged
+	 * @param filePath the file path name of the generated file
+	 * @param contents the contents of the generated file
+	 */
+	default void generateFile(String description, String filePath, CharSequence contents) {
+		generateFile(filePath, contents);
+	}
 	
 }

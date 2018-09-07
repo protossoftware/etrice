@@ -34,16 +34,15 @@ class EnumerationTypeGen {
 	
 	def doGenerate(Root root) {
 		for (et: root.enumClasses) {
-			val path = et.generationTargetPath+et.getPath
-			val infopath = et.generationInfoPath+et.getPath
+			val path = et.getPath
 			var file = et.getCHeaderFileName
 
 			// header file
-			fileIO.generateFile("generating Enumeration header", path, infopath, file, root.generateHeaderFile(et))
+			fileIO.generateFile("generating Enumeration header", path + file, root.generateHeaderFile(et))
 
 			// header file
 			file = et.getCSourceFileName
-			fileIO.generateFile("generating Enumeration source", path, infopath, file, root.generateSourceFile(et))
+			fileIO.generateFile("generating Enumeration source", path + file, root.generateSourceFile(et))
 		}
 	}
 	

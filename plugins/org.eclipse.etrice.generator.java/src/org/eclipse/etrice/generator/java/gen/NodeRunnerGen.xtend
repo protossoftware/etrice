@@ -39,9 +39,8 @@ class NodeRunnerGen {
 				val ssi = root.getInstance(instpath) as SubSystemInstance
 				if (ssi!==null && ssi.subSystemClass.validGenerationLocation) {
 					val file = nr.getJavaClassName(ssi)+"Runner.java"
-					val filepath = ssi.subSystemClass.generationTargetPath+ssi.subSystemClass.getPath
-					val infopath = ssi.subSystemClass.generationInfoPath+ssi.subSystemClass.getPath
-					fileIO.generateFile("generating SubSystemRunner implementation", filepath, infopath, file, root.generate(ssi))
+					val filepath = ssi.subSystemClass.getPath
+					fileIO.generateFile("generating SubSystemRunner implementation", filepath + file, root.generate(ssi))
 				}
 			}
 		}

@@ -57,7 +57,7 @@ public class IncrementalGeneratorFileIO implements IGeneratorFileIO {
 	 * In the other case the key is stored and the file is stored to {@code infopath} and {@code path}.
 	 */
 	@Override
-	public void generateFile(String desc, String path, String infopath, String file, CharSequence contents) {
+	public void generateFile(String desc, String file, CharSequence contents) {
 		
 		long oldCRC = 0;
 		
@@ -66,7 +66,7 @@ public class IncrementalGeneratorFileIO implements IGeneratorFileIO {
 		
 		if (genInc) {
 			// read old CRC value
-			fileAccess.setOutputPath(infopath);
+			fileAccess.setOutputPath(genInfoDir);
 			try {
 				CharSequence val = fileAccess.readTextFile(file+".info", JavaIoFileSystemAccess.DEFAULT_OUTPUT);
 				oldCRC = Long.parseLong(val.toString());
@@ -93,25 +93,25 @@ public class IncrementalGeneratorFileIO implements IGeneratorFileIO {
 		}
 		
 		if (write) {
-			logger.logInfo(desc+" '"+file+"' in '"+path+"'");
-			fileAccess.setOutputPath(path);
+			logger.logInfo(desc+" '"+file+"'");
+			fileAccess.setOutputPath(genDir);
 			fileAccess.generateFile(file, contents);
 			
 			if (genInc) {
 				// save a copy in the info directory which is not cleared (and not compiled)
-				fileAccess.setOutputPath(infopath);
+				fileAccess.setOutputPath(genInfoDir);
 				fileAccess.generateFile(file + ".incgen.txt", contents);
 			}
 		}
 		else {
-			logger.logInfo(desc+" (unchanged) '"+file+"' in '"+path+"'");
-			File src = new File(infopath+file + ".incgen.txt");
-			File dst = new File(path+file);
+			logger.logInfo(desc+" (unchanged) '"+file+"'");
+			File src = new File(genInfoDir+file + ".incgen.txt");
+			File dst = new File(genDir+file);
 			try {
 				FileUtils.copyFile(src, dst, true);
 			}
 			catch (IOException e) {
-				fileAccess.setOutputPath(path);
+				fileAccess.setOutputPath(genDir);
 				fileAccess.generateFile(file, contents);
 			}
 		}
@@ -119,7 +119,7 @@ public class IncrementalGeneratorFileIO implements IGeneratorFileIO {
 
 	@Override
 	public void generateFile(String file, CharSequence contents) {
-		generateFile("generating file", genDir, genInfoDir, file, contents);
+		generateFile("generating file", file, contents);
 	}
 
 	public void setGenDir(String genDir) {

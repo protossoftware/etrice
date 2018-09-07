@@ -29,7 +29,6 @@ import org.eclipse.etrice.generator.c.Main
 import org.eclipse.etrice.generator.generic.GenericActorClassGenerator
 import org.eclipse.etrice.generator.generic.ILanguageExtension
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
-import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.base.io.IGeneratorFileIO
 import org.eclipse.etrice.generator.c.setup.GeneratorOptionsHelper
 import org.eclipse.etrice.generator.base.logging.ILogger
@@ -37,7 +36,6 @@ import org.eclipse.etrice.generator.base.logging.ILogger
 @Singleton
 class ActorClassGen extends GenericActorClassGenerator {
 
-	@Inject protected extension RoomExtensions
 	@Inject protected extension CExtensions
 	@Inject protected extension ProcedureHelpers
 	@Inject protected extension StateMachineGen
@@ -49,24 +47,23 @@ class ActorClassGen extends GenericActorClassGenerator {
 
 	def doGenerate(Root root) {
 		for (xpac: root.actorClasses.map[root.getExpandedActorClass(it)]) {
-			val path = xpac.actorClass.generationTargetPath+xpac.actorClass.getPath
-			val infopath = xpac.actorClass.generationInfoPath+xpac.actorClass.getPath
+			val path = xpac.actorClass.getPath
 			var file = xpac.actorClass.getCHeaderFileName
 
 			// header file
-			fileIO.generateFile("generating ActorClass header", path, infopath, file, root.generateHeaderFile(xpac))
+			fileIO.generateFile("generating ActorClass header", path + file, root.generateHeaderFile(xpac))
 
 			// utils file
 			file = xpac.actorClass.getCUtilsFileName
-			fileIO.generateFile("generating ActorClass utils", path, infopath, file, root.generateUtilsFile(xpac))
+			fileIO.generateFile("generating ActorClass utils", path + file, root.generateUtilsFile(xpac))
 
 			// source file
 			if (xpac.actorClass.isBehaviorAnnotationPresent("BehaviorManual")) {
-				logger.logInfo("omitting ActorClass source for '"+xpac.actorClass.name+"' since @BehaviorManual is specified")
+				logger.logInfo("omitting ActorClass source for '" + xpac.actorClass.name + "' since @BehaviorManual is specified")
 			}
 			else {
 				file = xpac.actorClass.getCSourceFileName
-				fileIO.generateFile("generating ActorClass source", path, infopath, file, root.generateSourceFile(xpac))
+				fileIO.generateFile("generating ActorClass source", path + file, root.generateSourceFile(xpac))
 			}
 		}
 	}

@@ -56,15 +56,14 @@ class NodeGen {
 				val ssi = root.getInstance(instpath) as SubSystemInstance
 				if (ssi!=null && ssi.subSystemClass.validGenerationLocation) {
 					val wired = sscc2wired.get(ssi.subSystemClass)
-					val path = ssi.subSystemClass.generationTargetPath+ssi.subSystemClass.getPath
-					val infopath = ssi.subSystemClass.generationInfoPath+ssi.subSystemClass.getPath
+					val path = ssi.subSystemClass.getPath
 
 					//checkDataPorts(ssi)
 
 					val usedThreads = ETMapUtil::getUsedThreads(nr, ssi)
 
-					fileIO.generateFile("generating Node declaration", path, infopath, getCppHeaderFileName(nr, ssi), root.generateHeaderFile(ssi, wired, usedThreads))
-					fileIO.generateFile("generating Node implementation", path, infopath, getCppSourceFileName(nr, ssi), root.generateSourceFile(ssi, wired, usedThreads))
+					fileIO.generateFile("generating Node declaration", path + getCppHeaderFileName(nr, ssi), root.generateHeaderFile(ssi, wired, usedThreads))
+					fileIO.generateFile("generating Node implementation", path + getCppSourceFileName(nr, ssi), root.generateSourceFile(ssi, wired, usedThreads))
 				}
 			}
 		}

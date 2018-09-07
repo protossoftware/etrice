@@ -73,6 +73,7 @@ public class ModelLoader implements IGeneratorResourceLoader {
 	public List<Resource> load(List<String> files, Arguments arguments, ILogger logger) {
 		if(!initializedEMF) {
 			emfSetup.doEMFRegistration();
+			initializedEMF = true;
 		}
 		
 		logger.logInfo("-- reading models");
@@ -83,6 +84,8 @@ public class ModelLoader implements IGeneratorResourceLoader {
 			return resources;
 		}
 		else {
+			logger.logError("reading models failed");
+			logger.logInfo("-- terminating");
 			throw new GeneratorException("reading models failed");
 		}
 	}

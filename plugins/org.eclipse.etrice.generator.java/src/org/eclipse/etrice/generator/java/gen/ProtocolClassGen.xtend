@@ -48,8 +48,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 
 	def doGenerate(Root root) {
 		for (pc: root.protocolClasses.filter(cl|cl.isValidGenerationLocation)) {
-			val path = pc.generationTargetPath+pc.getPath
-			val infopath = pc.generationInfoPath+pc.getPath
+			val path = pc.getPath
 			val file = pc.getJavaFileName
 			val contents =
 			switch (pc.commType) {
@@ -63,7 +62,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 			if (contents.toString.empty)
 				diagnostician.error("synchronous protocols not supported yet", pc, null)
 			else
-				fileIO.generateFile("generating ProtocolClass implementation", path, infopath, file, contents)
+				fileIO.generateFile("generating ProtocolClass implementation", path + file, contents)
 		}
 	}
 

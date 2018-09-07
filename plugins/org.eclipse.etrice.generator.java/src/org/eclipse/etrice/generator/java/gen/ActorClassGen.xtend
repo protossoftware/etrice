@@ -65,12 +65,11 @@ class ActorClassGen extends GenericActorClassGenerator {
 		for (xpac: root.actorClasses.filter[isValidGenerationLocation].map[root.getExpandedActorClass(it)]) {
 			val wired = ac2wired.get(xpac.actorClass)
 			val manualBehavior = xpac.actorClass.isBehaviorAnnotationPresent("BehaviorManual")
-			val path = xpac.actorClass.generationTargetPath+xpac.actorClass.getPath
-			val infopath = xpac.actorClass.generationInfoPath+xpac.actorClass.getPath
+			val path = xpac.actorClass.getPath
 			var file = xpac.actorClass.getJavaFileName
 			if (manualBehavior)
 				file = "Abstract"+file
-			fileIO.generateFile("generating ActorClass implementation", path, infopath, file, root.generate(xpac, wired, manualBehavior))
+			fileIO.generateFile("generating ActorClass implementation", path + file, root.generate(xpac, wired, manualBehavior))
 		}
 	}
 

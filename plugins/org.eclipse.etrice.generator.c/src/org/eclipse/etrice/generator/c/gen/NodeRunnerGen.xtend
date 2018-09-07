@@ -19,18 +19,18 @@ import com.google.inject.Inject
 import com.google.inject.Singleton
 import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance
-import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.core.etmap.util.ETMapUtil
 import org.eclipse.etrice.core.common.base.util.BaseHelpers
 import org.eclipse.etrice.generator.c.Main
 import org.eclipse.etrice.generator.c.setup.GeneratorOptionsHelper
+import org.eclipse.etrice.generator.base.io.IGeneratorFileIO
 
 @Singleton
 class NodeRunnerGen {
 
 	@Inject extension BaseHelpers
-	@Inject extension JavaIoFileSystemAccess fileAccess
+	@Inject extension IGeneratorFileIO fileIO
 	@Inject extension CExtensions
 	@Inject extension RoomExtensions
 	@Inject protected extension GeneratorOptionsHelper
@@ -42,8 +42,9 @@ class NodeRunnerGen {
 				val ssi = root.getInstance(instpath) as SubSystemInstance
 				if (ssi!==null) {
 					val clsname = nr.name+"_"+ssi.name
-					fileAccess.setOutputPath(ssi.subSystemClass.generationTargetPath+ssi.subSystemClass.getPath)
-					fileAccess.generateFile( clsname+"_Runner.c", root.generateSourceFile(ssi, first))
+					val path = ssi.subSystemClass.getPath
+					val file = clsname + "_Runner.c"
+					fileIO.generateFile(path + file, root.generateSourceFile(ssi, first))
 					first = false
 				}
 			}

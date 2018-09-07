@@ -28,7 +28,7 @@ class MainGen {
 	@Inject DocGen docGen
 	
 	def void doGenerate(Resource resource) {
-		prepFS.prepareCodeTargetPaths(resource)
+		prepFS.prepare
 		for (e: resource.contents){
 			if (e instanceof Root) {
 				doGenerate(e as Root)

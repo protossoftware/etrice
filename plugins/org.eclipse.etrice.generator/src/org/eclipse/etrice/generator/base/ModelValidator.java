@@ -43,12 +43,18 @@ public class ModelValidator extends GeneratorResourceValidator {
 		if(!resources.isEmpty()) {
 			ResourceSet rs = resources.get(0).getResourceSet();
 			if(rs != null) {
-				super.validate(rs.getResources(), arguments, logger);
-				return;
+				resources = rs.getResources();
 			}
 		}
 		
-		super.validate(resources, arguments, logger);
+		try {
+			super.validate(resources, arguments, logger);
+		}
+		catch(Exception e) {
+			logger.logError("validation failed");
+			logger.logInfo("-- terminating");
+			throw e;
+		}
 	}
 	
 }

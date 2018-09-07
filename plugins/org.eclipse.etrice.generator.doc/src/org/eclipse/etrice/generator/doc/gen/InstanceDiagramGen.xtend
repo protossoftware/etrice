@@ -24,30 +24,29 @@ import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.etrice.core.genmodel.etricegen.StructureInstance
 import org.eclipse.etrice.core.genmodel.etricegen.SystemInstance
 import org.eclipse.etrice.generator.generic.RoomExtensions
-import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 
 import static java.lang.Runtime.*
 import org.eclipse.etrice.core.etmap.util.ETMapUtil
 import org.eclipse.etrice.generator.base.logging.ILogger
+import org.eclipse.etrice.generator.base.io.IGeneratorFileIO
 
 @Singleton
 class InstanceDiagramGen {
 
-	@Inject extension JavaIoFileSystemAccess fileAccess
+	@Inject extension IGeneratorFileIO fileIO
 	@Inject extension RoomExtensions roomExt
 	@Inject ILogger logger
 	
 	def doGenerate(Root root) {
 		for (model: root.models) {
-			var path = model.generationTargetPath + "/images"
-			fileAccess.setOutputPath(path)
+			var path = "images/"
 			var batchFile = "dot2jpg.bat"
 			for (sys : root.systemInstances) {
 				var file = sys.name+"_instanceTree.dot"
 				logger.logInfo("generating instance tree diagram: '"+file+"' in '"+path+"'")
-				fileAccess.generateFile(file, root.generate(sys))
+				fileIO.generateFile(path + file, root.generate(sys))
 			}
-			fileAccess.generateFile(batchFile, root.generate2jpg())
+			fileIO.generateFile(path + batchFile, root.generate2jpg())
 			runDot2Jpg(path, batchFile)
 		}
 	}

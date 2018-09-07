@@ -37,17 +37,15 @@ import org.eclipse.etrice.core.room.StandardOperation
 import org.eclipse.etrice.core.room.SubSystemClass
 import org.eclipse.etrice.core.room.util.RoomHelpers
 import org.eclipse.etrice.generator.fsm.base.CodegenHelpers
-import org.eclipse.etrice.generator.generic.RoomExtensions
-import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 import org.eclipse.etrice.generator.base.logging.ILogger
+import org.eclipse.etrice.generator.base.io.IGeneratorFileIO
 
 @Singleton
 class DocGen {
 
 	@Inject extension RoomHelpers
 	@Inject extension CodegenHelpers
-	@Inject extension JavaIoFileSystemAccess fileAccess
-	@Inject extension RoomExtensions roomExt
+	@Inject IGeneratorFileIO fileIO
 	@Inject ILogger logger
 	
 	final val IMGDIR_DEFAULT = "./images"
@@ -67,28 +65,25 @@ class DocGen {
 	def doGenerate(Root root) {
 		for (model: root.models) {
 			val ctx = new DocGen.DocGenContext(root,model)
-			var path = model.generationTargetPath
 			var file = model.name+".tex"
 			val Set<RoomModel> referencedModels = newHashSet
-			logger.logInfo("generating LaTeX documentation: '"+file+"' in '"+path+"'")
+			logger.logInfo("generating LaTeX documentation: '"+file+"'")
 			
 			// Save documentation fragments for RoomModel children
-			fileAccess.setOutputPath(path+model.name)
-			model.systems.forEach[generateDoc(ctx).saveAs(docFragmentName)]
+			model.systems.forEach[generateDoc(ctx).saveAs(model.name+docFragmentName)]
 			model.systems.forEach[referencedModels.addAll(root.getReferencedModels(it))]
-			model.subSystemClasses.forEach[generateDoc(ctx).saveAs(docFragmentName)]
+			model.subSystemClasses.forEach[generateDoc(ctx).saveAs(model.name+docFragmentName)]
 			model.subSystemClasses.forEach[referencedModels.addAll(root.getReferencedModels(it))]
-			model.protocolClasses.forEach[generateDoc(ctx).saveAs(docFragmentName)]
+			model.protocolClasses.forEach[generateDoc(ctx).saveAs(model.name+docFragmentName)]
 			model.protocolClasses.forEach[referencedModels.addAll(root.getReferencedModels(it))]
-			model.enumerationTypes.forEach[generateDoc(ctx).saveAs(docFragmentName)]
+			model.enumerationTypes.forEach[generateDoc(ctx).saveAs(model.name+docFragmentName)]
 			model.enumerationTypes.forEach[referencedModels.addAll(root.getReferencedModels(it))]
-			model.dataClasses.forEach[generateDoc(ctx).saveAs(docFragmentName)]
+			model.dataClasses.forEach[generateDoc(ctx).saveAs(model.name+docFragmentName)]
 			model.dataClasses.forEach[referencedModels.addAll(root.getReferencedModels(it))]
-			model.actorClasses.forEach[generateDoc(ctx).saveAs(docFragmentName)]
+			model.actorClasses.forEach[generateDoc(ctx).saveAs(model.name+docFragmentName)]
 			model.actorClasses.forEach[referencedModels.addAll(root.getReferencedModels(it))]
 			
 			// Save top-level documentation for RoomModel
-			fileAccess.setOutputPath(path)
 			generateModelDoc(ctx, referencedModels).saveAs(file)
 			
 //			logger.logInfo("main path "+model.docGenerationTargetPath)
@@ -191,9 +186,10 @@ class DocGen {
 			
 			\begin{itemize}
 			«FOR refModel : referencedModels.sortBy[name]»
-				«val relPath = RelativePathHelpers.getRelativePath(
-					model.generationTargetPath.removeLast, refModel.generationTargetPath.removeLast, true).appendIfNotEmpty("/")»
-				\item \href{«(relPath.replace("\\", "/")+refModel.name).escapedString».pdf}{«refModel.name.escapedString»}
+«««				«val relPath = RelativePathHelpers.getRelativePath(
+«««					model.generationTargetPath.removeLast, refModel.generationTargetPath.removeLast, true).appendIfNotEmpty("/")»
+«««				\item \href{«(relPath.replace("\\", "/")+refModel.name).escapedString».pdf}{«refModel.name.escapedString»}
+				\item «refModel.name.escapedString»
 			«ENDFOR»
 			\end{itemize}
 			\newpage
@@ -564,18 +560,21 @@ class DocGen {
 	}
 	
 	def private fileExists(RoomModel model, String f){
-		val absPath = model.generationTargetPath + f
-		val file = new File(absPath);
-		val exist = file.exists();
-			if (exist == true) {
-				// File or directory exists
-				logger.logInfo("File found ! " + f); 
-				return "true"
-			} else {
-				// File or directory does not exist
-				logger.logInfo("File not found ! " + f);
-				return "false"
-		}
+//		val absPath = model.generationTargetPath + f
+//		val file = new File(absPath);
+//		val exist = file.exists();
+//			if (exist == true) {
+//				// File or directory exists
+//				logger.logInfo("File found ! " + f); 
+//				return "true"
+//			} else {
+//				// File or directory does not exist
+//				logger.logInfo("File not found ! " + f);
+//				return "false"
+//		}
+
+ 
+		return "false"
 	}
 	
 	def private includeGraphics(String filename, String width, String caption){
@@ -600,7 +599,7 @@ class DocGen {
 	}
 	
 	def private saveAs(CharSequence content, String filename) {
-		fileAccess.generateFile(filename, content)
+		fileIO.generateFile(filename, content)
 	}
 	
 	def private docFragmentName(RoomClass rc) {
