@@ -101,6 +101,7 @@ public class Main extends AbstractGenerator {
 		return genModelResult;
 	}
 
+	@Override
 	protected int runGenerator(List<Resource> resources, Arguments arguments, IGeneratorFileIO fileIO, ILogger logger) {
 		
 		if (!dataConfig.setResources(getResourceSet(), logger)) {
