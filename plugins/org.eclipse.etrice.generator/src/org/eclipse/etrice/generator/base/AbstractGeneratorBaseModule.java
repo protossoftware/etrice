@@ -17,9 +17,9 @@ package org.eclipse.etrice.generator.base;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.etrice.core.genmodel.fsm.IDiagnostician;
+import org.eclipse.etrice.generator.base.io.GeneratorFileIO;
 import org.eclipse.etrice.generator.base.io.IGeneratorEMFSetup;
 import org.eclipse.etrice.generator.base.io.IGeneratorResourceLoader;
-import org.eclipse.etrice.generator.base.io.GeneratorFileIO;
 import org.eclipse.etrice.generator.base.logging.Logger;
 import org.eclipse.etrice.generator.base.setup.GeneratorApplicationModule;
 import org.eclipse.etrice.generator.base.setup.GeneratorBaseOptions;
@@ -70,10 +70,11 @@ public abstract class AbstractGeneratorBaseModule extends GeneratorApplicationMo
 		
 		binder.bind(IGenerator.class).to(AbstractGenerator.class);
 		binder.bind(GeneratorBaseOptions.class).to(AbstractGeneratorOptions.class);
-		binder.bind(IGeneratorEMFSetup.class).to(EMFSetup.class);
+		if(bindIGeneratorEMFSetup() != null) {
+			binder.bind(IGeneratorEMFSetup.class).to(bindIGeneratorEMFSetup());
+		}
 		binder.bind(IGeneratorResourceLoader.class).to(ModelLoader.class);
 		binder.bind(IGeneratorResourceValidator.class).to(ModelValidator.class);
-		
 		binder.bind(Diagnostician.class).in(Singleton.class);
 		binder.bind(IDiagnostician.class).to(Diagnostician.class);
 		
@@ -123,5 +124,9 @@ public abstract class AbstractGeneratorBaseModule extends GeneratorApplicationMo
 	 * @return a Class extending {@link IDataConfiguration}
 	 */
 	public abstract Class<? extends IDataConfiguration> bindIDataConfiguration();
+	
+	public Class<? extends IGeneratorEMFSetup> bindIGeneratorEMFSetup() {
+		return EMFSetup.class;
+	}
 
 }
