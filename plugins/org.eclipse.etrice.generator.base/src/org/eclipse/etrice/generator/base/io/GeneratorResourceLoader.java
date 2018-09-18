@@ -15,8 +15,8 @@
 
 package org.eclipse.etrice.generator.base.io;
 
-import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -92,9 +92,8 @@ public class GeneratorResourceLoader implements IGeneratorResourceLoader {
 	}
 	
 	private URI createURI(String file) throws IOException {
-		File f = new File(file);
-		String canonicalPath = f.getCanonicalPath();
-		URI uri = URI.createFileURI(canonicalPath);
+		String realPath = Paths.get(file).toRealPath().toString();
+		URI uri = URI.createFileURI(realPath);
 		return uri;
 	}
 	

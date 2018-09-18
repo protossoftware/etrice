@@ -45,8 +45,6 @@ public class GeneratorModule extends AbstractGeneratorBaseModule {
 		binder.bind(GenericActorClassGenerator.class).to(ActorClassGen.class);
 
 		binder.bind(ImportUriResolver.class).to(ModelLocatorUriResolver.class);
-		
-		binder.bind(AbstractGeneratorOptions.class).to(GeneratorOptions.class);
 	}
 	
 	@Override
@@ -67,6 +65,16 @@ public class GeneratorModule extends AbstractGeneratorBaseModule {
 	@Override
 	public Class<? extends IDataConfiguration> bindIDataConfiguration() {
 		return org.eclipse.etrice.generator.config.DataConfiguration.class;
+	}
+	
+	@Override
+	public String bindGeneratorName() {
+		return "eTrice C++ Generator";
+	}
+	
+	@Override
+	public Class<? extends AbstractGeneratorOptions> bindGeneratorOptions() {
+		return GeneratorOptions.class;
 	}
 
 }

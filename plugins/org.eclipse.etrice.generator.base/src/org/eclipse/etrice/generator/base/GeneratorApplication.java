@@ -21,6 +21,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.etrice.generator.base.args.Arguments;
+import org.eclipse.etrice.generator.base.args.IOptionModule;
 import org.eclipse.etrice.generator.base.args.Options;
 import org.eclipse.etrice.generator.base.cli.CommandLineParseException;
 import org.eclipse.etrice.generator.base.cli.ICommandLineParser;
@@ -32,7 +33,8 @@ import org.eclipse.etrice.generator.base.io.LineOutput;
 import org.eclipse.etrice.generator.base.logging.Logger;
 import org.eclipse.etrice.generator.base.logging.Loglevel;
 import org.eclipse.etrice.generator.base.setup.GeneratorApplicationOptions;
-import org.eclipse.etrice.generator.base.setup.IGeneratorOptions;
+import org.eclipse.etrice.generator.base.setup.GeneratorName;
+import org.eclipse.etrice.generator.base.setup.GeneratorOptions;
 import org.eclipse.etrice.generator.base.validation.IGeneratorResourceValidator;
 
 import com.google.inject.Guice;
@@ -69,7 +71,8 @@ public class GeneratorApplication {
 		return create(module);
 	}
 
-	private final Options options;
+	private String name;
+	private Options options;
 	private ICommandLineParser commandLineParser;
 	private IHelpFormatter helpFormatter;
 	private Provider<Logger> loggerProvider;
@@ -79,10 +82,12 @@ public class GeneratorApplication {
 	private IGeneratorResourceValidator resourceValidator;
 
 	@Inject
-	public GeneratorApplication(IGeneratorOptions optionsModule, ICommandLineParser commandLineParser,
+	public GeneratorApplication(@GeneratorName String name,
+			@GeneratorOptions IOptionModule optionsModule, ICommandLineParser commandLineParser,
 			IHelpFormatter helpFormatter, Provider<Logger> loggerProvider,
 			Provider<GeneratorFileIO> fileIOProvider, Provider<IGenerator> generatorProvider,
 			IGeneratorResourceLoader resourceLoader, IGeneratorResourceValidator resourceValidator) {
+		this.name = name;
 		this.options = new Options(new GeneratorApplicationOptions(), optionsModule);
 		this.commandLineParser = commandLineParser;
 		this.helpFormatter = helpFormatter;
@@ -155,11 +160,20 @@ public class GeneratorApplication {
 	}
 
 	/**
+	 * Returns the name of this generator.
+	 * 
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+	
+	/**
 	 * Returns the options of this generator.
 	 * 
 	 * @return the options
 	 */
-	public final Options getOptions() {
+	public Options getOptions() {
 		return options;
 	}
 	
@@ -173,7 +187,7 @@ public class GeneratorApplication {
 	}
 
 	private void printHelp(ILineOutput out) {
-		String help = helpFormatter.getHelp(options, GeneratorApplicationOptions.FILES);
+		String help = helpFormatter.getHelp(name, options, GeneratorApplicationOptions.FILES);
 		out.println(help);
 	}
 

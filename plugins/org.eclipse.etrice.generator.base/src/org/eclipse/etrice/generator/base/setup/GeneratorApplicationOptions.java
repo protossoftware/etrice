@@ -60,7 +60,7 @@ public class GeneratorApplicationOptions implements IOptionModule {
 			"genDir",
 			"directory",
 			"the output directory for generated files",
-			"src-gen");
+			"");
 	
 	@Deprecated
 	public static final StringOption GEN_INFO_DIR = new StringOption(

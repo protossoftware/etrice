@@ -29,10 +29,11 @@ public interface IHelpFormatter {
 	/**
 	 * Produces a help message for the passed options.
 	 * 
+	 * @param name the name of the application
 	 * @param options the options
 	 * @param defaultOption the option for arguments without option identifier
 	 * @return the help message
 	 */
-	String getHelp(Options options, StringListOption defaultOption);
+	String getHelp(String name, Options options, StringListOption defaultOption);
 	
 }

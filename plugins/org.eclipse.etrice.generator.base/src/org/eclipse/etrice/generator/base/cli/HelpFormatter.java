@@ -30,9 +30,9 @@ public class HelpFormatter implements IHelpFormatter {
 	}
 	
 	@Override
-	public String getHelp(Options options, StringListOption defaultOption) {
+	public String getHelp(String name, Options options, StringListOption defaultOption) {
 		try(Formatter formatter = new Formatter()) {
-			formatter.format("Usage: [options] %s...%n", defaultOption.getName());
+			formatter.format("%s usage: [options] %s...%n", name, defaultOption.getName());
 			formatter.format("Options:%n");
 			for(Option<?> opt: options) {
 				if(opt != defaultOption) {

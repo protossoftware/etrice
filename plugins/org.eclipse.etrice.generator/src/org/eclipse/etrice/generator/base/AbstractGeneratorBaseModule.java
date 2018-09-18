@@ -17,12 +17,13 @@ package org.eclipse.etrice.generator.base;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.etrice.core.genmodel.fsm.IDiagnostician;
+import org.eclipse.etrice.generator.base.args.IOptionModule;
 import org.eclipse.etrice.generator.base.io.GeneratorFileIO;
 import org.eclipse.etrice.generator.base.io.IGeneratorEMFSetup;
 import org.eclipse.etrice.generator.base.io.IGeneratorResourceLoader;
 import org.eclipse.etrice.generator.base.logging.Logger;
-import org.eclipse.etrice.generator.base.setup.GeneratorApplicationModule;
-import org.eclipse.etrice.generator.base.setup.GeneratorBaseOptions;
+import org.eclipse.etrice.generator.base.setup.GeneratorName;
+import org.eclipse.etrice.generator.base.setup.GeneratorOptions;
 import org.eclipse.etrice.generator.base.validation.IGeneratorResourceValidator;
 import org.eclipse.etrice.generator.fsm.base.Diagnostician;
 import org.eclipse.etrice.generator.fsm.generic.IDetailCodeTranslator;
@@ -36,6 +37,7 @@ import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.XtextResourceSet;
 
 import com.google.inject.Binder;
+import com.google.inject.Module;
 import com.google.inject.Singleton;
 
 /**
@@ -44,7 +46,7 @@ import com.google.inject.Singleton;
  * 
  * @author Henrik Rentz-Reichert
  */
-public abstract class AbstractGeneratorBaseModule extends GeneratorApplicationModule {
+public abstract class AbstractGeneratorBaseModule implements Module {
 
 	/**
 	 * Configuration of
@@ -61,18 +63,17 @@ public abstract class AbstractGeneratorBaseModule extends GeneratorApplicationMo
 	 */
 	@Override
 	public void configure(Binder binder) {
-		super.configure(binder);
-		
 		binder.bind(ResourceSet.class).to(XtextResourceSet.class);
 
 		binder.bind(Logger.class).in(Singleton.class);
 		binder.bind(GeneratorFileIO.class).in(Singleton.class);
 		
 		binder.bind(IGenerator.class).to(AbstractGenerator.class);
-		binder.bind(GeneratorBaseOptions.class).to(AbstractGeneratorOptions.class);
 		if(bindIGeneratorEMFSetup() != null) {
 			binder.bind(IGeneratorEMFSetup.class).to(bindIGeneratorEMFSetup());
 		}
+		binder.bind(String.class).annotatedWith(GeneratorName.class).toInstance(bindGeneratorName());
+		binder.bind(IOptionModule.class).annotatedWith(GeneratorOptions.class).to(bindGeneratorOptions());
 		binder.bind(IGeneratorResourceLoader.class).to(ModelLoader.class);
 		binder.bind(IGeneratorResourceValidator.class).to(ModelValidator.class);
 		binder.bind(Diagnostician.class).in(Singleton.class);
@@ -124,9 +125,17 @@ public abstract class AbstractGeneratorBaseModule extends GeneratorApplicationMo
 	 * @return a Class extending {@link IDataConfiguration}
 	 */
 	public abstract Class<? extends IDataConfiguration> bindIDataConfiguration();
-	
+		
 	public Class<? extends IGeneratorEMFSetup> bindIGeneratorEMFSetup() {
 		return EMFSetup.class;
 	}
+	
+	public String bindGeneratorName() {
+		return "eTrice Generator";
+	}
 
+	public Class<? extends AbstractGeneratorOptions> bindGeneratorOptions() {
+		return AbstractGeneratorOptions.class;
+	}
+	
 }

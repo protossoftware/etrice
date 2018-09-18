@@ -65,5 +65,14 @@ public class GeneratorModule extends AbstractGeneratorBaseModule {
 	public Class<? extends IDataConfiguration> bindIDataConfiguration() {
 		return org.eclipse.etrice.generator.config.DataConfiguration.class;
 	}
+	
+	@Override
+	public String bindGeneratorName() {
+		return "eTrice Java Generator";
+	}
 
+	@Override
+	public Class<? extends AbstractGeneratorOptions> bindGeneratorOptions() {
+		return GeneratorOptions.class;
+	}
 }

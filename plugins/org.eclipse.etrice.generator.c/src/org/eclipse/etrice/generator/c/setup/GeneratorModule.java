@@ -32,15 +32,13 @@ import org.eclipse.etrice.generator.generic.ILanguageExtension;
 import com.google.inject.Binder;
 
 public class GeneratorModule extends AbstractGeneratorBaseModule {
-
+	
 	@Override
 	public void configure(Binder binder) {
 		super.configure(binder);
-
+		
 		binder.bind(GenericProtocolClassGenerator.class).to(ProtocolClassGen.class);
 		binder.bind(GenericActorClassGenerator.class).to(ActorClassGen.class);
-		
-		binder.bind(AbstractGeneratorOptions.class).to(GeneratorOptions.class);
 	}
 	
 	@Override
@@ -61,6 +59,16 @@ public class GeneratorModule extends AbstractGeneratorBaseModule {
 	@Override
 	public Class<? extends IDataConfiguration> bindIDataConfiguration() {
 		return DataConfiguration.class;
+	}
+	
+	@Override
+	public String bindGeneratorName() {
+		return "eTrice C Generator";
+	}
+	
+	@Override
+	public Class<? extends AbstractGeneratorOptions> bindGeneratorOptions() {
+		return GeneratorOptions.class;
 	}
 
 }

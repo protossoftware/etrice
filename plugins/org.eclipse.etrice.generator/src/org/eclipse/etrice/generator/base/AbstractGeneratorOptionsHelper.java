@@ -16,9 +16,8 @@
 package org.eclipse.etrice.generator.base;
 
 import org.eclipse.etrice.generator.base.args.Arguments;
-import org.eclipse.etrice.generator.base.setup.GeneratorBaseOptionsHelper;
 
-public class AbstractGeneratorOptionsHelper extends GeneratorBaseOptionsHelper {
+public class AbstractGeneratorOptionsHelper {
 
 	public boolean isGenerateAsLibrary(Arguments args) {
 		return args.get(AbstractGeneratorOptions.LIB);
