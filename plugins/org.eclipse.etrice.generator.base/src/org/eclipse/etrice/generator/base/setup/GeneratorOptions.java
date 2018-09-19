@@ -15,19 +15,16 @@
 
 package org.eclipse.etrice.generator.base.setup;
 
-import static java.lang.annotation.ElementType.FIELD;
-import static java.lang.annotation.ElementType.PARAMETER;
-import static java.lang.annotation.ElementType.METHOD;
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
+import java.util.List;
 
-import java.lang.annotation.Retention;
-import java.lang.annotation.Target;
+import org.eclipse.etrice.generator.base.args.IOptionModule;
+import org.eclipse.etrice.generator.base.args.Option;
 
-import com.google.inject.BindingAnnotation;
+public class GeneratorOptions implements IOptionModule {
 
-@BindingAnnotation
-@Retention(RUNTIME)
-@Target({ FIELD, PARAMETER, METHOD })
-public @interface GeneratorOptions {
+	@Override
+	public void configure(List<Option<?>> options) {
+		
+	}
 
 }

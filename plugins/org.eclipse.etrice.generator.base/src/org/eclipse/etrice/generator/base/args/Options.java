@@ -27,8 +27,6 @@ import java.util.List;
  */
 public class Options implements IOptionModule, Iterable<Option<?>> {
 	
-	public static class EmptyOptions extends Options {}
-	
 	private final LinkedHashMap<String, Option<?>> name2Option;
 	
 	/**

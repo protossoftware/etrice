@@ -25,7 +25,7 @@ import org.eclipse.etrice.generator.base.logging.ILogger;
 import org.eclipse.etrice.generator.doc.gen.InstanceDiagramGen;
 import org.eclipse.etrice.generator.doc.gen.MainGen;
 import org.eclipse.etrice.generator.doc.setup.GeneratorModule;
-import org.eclipse.etrice.generator.doc.setup.GeneratorOptions;
+import org.eclipse.etrice.generator.doc.setup.DocGeneratorOptions;
 
 import com.google.inject.Inject;
 
@@ -57,7 +57,7 @@ public class Main extends AbstractGenerator {
 		logger.logInfo("-- starting code generation");
 		mainGenerator.doGenerate(genModel.eResource());
 		
-		if (arguments.get(GeneratorOptions.GEN_INST_DIAG)) {
+		if (arguments.get(DocGeneratorOptions.GEN_INST_DIAG)) {
 			instanceDiagramGenerator.doGenerate(genModel);
 		}
 		

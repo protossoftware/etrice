@@ -43,8 +43,7 @@ class InstanceDiagramGen {
 			var batchFile = "dot2jpg.bat"
 			for (sys : root.systemInstances) {
 				var file = sys.name+"_instanceTree.dot"
-				logger.logInfo("generating instance tree diagram: '"+file+"' in '"+path+"'")
-				fileIO.generateFile(path + file, root.generate(sys))
+				fileIO.generateFile("generating instance tree diagram", path + file, root.generate(sys))
 			}
 			fileIO.generateFile(path + batchFile, root.generate2jpg())
 			runDot2Jpg(path, batchFile)

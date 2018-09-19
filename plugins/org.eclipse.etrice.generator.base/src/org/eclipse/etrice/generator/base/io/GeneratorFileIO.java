@@ -156,7 +156,10 @@ public class GeneratorFileIO implements IGeneratorFileIO {
 	
 	private void writeFile(Path path, String content) {
 		try {
-			Files.createDirectories(path.getParent());
+			Path parent = path.getParent();
+			if(parent != null) {
+				Files.createDirectories(parent);
+			}
 			BufferedWriter writer = Files.newBufferedWriter(path, StandardCharsets.UTF_8);
 			writer.append(content);
 			writer.close();

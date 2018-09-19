@@ -21,7 +21,7 @@ import org.eclipse.etrice.generator.base.AbstractGeneratorOptions;
 import org.eclipse.etrice.generator.base.args.BooleanOption;
 import org.eclipse.etrice.generator.base.args.Option;
 
-public class GeneratorOptions extends AbstractGeneratorOptions {
+public class DocGeneratorOptions extends AbstractGeneratorOptions {
 	
 	public static final String GROUP_ETRICE_DOC = "eTrice Documentation";
 	

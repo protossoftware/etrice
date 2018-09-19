@@ -21,7 +21,6 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.etrice.generator.base.args.Arguments;
-import org.eclipse.etrice.generator.base.args.IOptionModule;
 import org.eclipse.etrice.generator.base.args.Options;
 import org.eclipse.etrice.generator.base.cli.CommandLineParseException;
 import org.eclipse.etrice.generator.base.cli.ICommandLineParser;
@@ -83,7 +82,7 @@ public class GeneratorApplication {
 
 	@Inject
 	public GeneratorApplication(@GeneratorName String name,
-			@GeneratorOptions IOptionModule optionsModule, ICommandLineParser commandLineParser,
+			GeneratorOptions optionsModule, ICommandLineParser commandLineParser,
 			IHelpFormatter helpFormatter, Provider<Logger> loggerProvider,
 			Provider<GeneratorFileIO> fileIOProvider, Provider<IGenerator> generatorProvider,
 			IGeneratorResourceLoader resourceLoader, IGeneratorResourceValidator resourceValidator) {

@@ -18,11 +18,11 @@ package org.eclipse.etrice.generator.base;
 import java.util.List;
 
 import org.eclipse.etrice.generator.base.args.BooleanOption;
-import org.eclipse.etrice.generator.base.args.IOptionModule;
 import org.eclipse.etrice.generator.base.args.Option;
 import org.eclipse.etrice.generator.base.args.StringOption;
+import org.eclipse.etrice.generator.base.setup.GeneratorOptions;
 
-public class AbstractGeneratorOptions implements IOptionModule {
+public class AbstractGeneratorOptions extends GeneratorOptions {
 	
 	public static final String GROUP_ETRICE = "eTrice";
 	
@@ -77,6 +77,8 @@ public class AbstractGeneratorOptions implements IOptionModule {
 	
 	@Override
 	public void configure(List<Option<?>> options) {
+		super.configure(options);
+		
 		options.add(LIB);
 		options.add(SAVE_GEN_MODEL);
 		options.add(MAIN_NAME);

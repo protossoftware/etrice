@@ -128,8 +128,10 @@ public class GeneratorModelBuilder {
 	 * an instance of a diagnostician
 	 */
 	private IDiagnostician diagnostician;
-
+	
 	private boolean debug;
+	
+	private Injector roomInjector = new RoomStandaloneSetup().createInjectorAndDoEMFRegistration();
 
 	/**
 	 * the only constructor takes a logger and a diagnostician as arguments
@@ -1263,12 +1265,11 @@ public class GeneratorModelBuilder {
 					+" of "+((RoomModel)ac.eContainer()).getName());
 
 		ExpandedActorClass xpac = ETriceGenFactory.eINSTANCE.createExpandedActorClass();
-		Injector injector = new RoomStandaloneSetup().createInjectorAndDoEMFRegistration();
-		ExtendedFsmGenBuilder builder = new ExtendedFsmGenBuilder(injector, diagnostician);
-		GraphContainer gc = builder.createTransformedModel(ac);
-		builder.withChainHeads(gc);
-		builder.withCommonData(gc);
-		builder.withTriggersInStates(gc);
+		ExtendedFsmGenBuilder fsmGenBuilder = new ExtendedFsmGenBuilder(roomInjector, diagnostician);
+		GraphContainer gc = fsmGenBuilder.createTransformedModel(ac);
+		fsmGenBuilder.withChainHeads(gc);
+		fsmGenBuilder.withCommonData(gc);
+		fsmGenBuilder.withTriggersInStates(gc);
 		xpac.setGraphContainer(gc);
 		
 		return xpac;

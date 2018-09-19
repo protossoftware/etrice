@@ -18,9 +18,9 @@ package org.eclipse.etrice.generator.doc.setup;
 import org.eclipse.etrice.generator.base.AbstractGeneratorOptionsHelper;
 import org.eclipse.etrice.generator.base.args.Arguments;
 
-public class GeneratorOptionsHelper extends AbstractGeneratorOptionsHelper {
+public class DocGeneratorOptionsHelper extends AbstractGeneratorOptionsHelper {
 	
 	public boolean isGenerateInstanceDiagram(Arguments args) {
-		return args.get(GeneratorOptions.GEN_INST_DIAG);
+		return args.get(DocGeneratorOptions.GEN_INST_DIAG);
 	}
 }

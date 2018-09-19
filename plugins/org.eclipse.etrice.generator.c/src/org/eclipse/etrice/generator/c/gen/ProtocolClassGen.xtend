@@ -24,13 +24,13 @@ import org.eclipse.etrice.core.room.ProtocolClass
 import org.eclipse.etrice.core.room.RoomModel
 import org.eclipse.etrice.generator.base.io.IGeneratorFileIO
 import org.eclipse.etrice.generator.base.logging.ILogger
-import org.eclipse.etrice.generator.base.AbstractGenerator
 import org.eclipse.etrice.generator.c.Main
 import org.eclipse.etrice.generator.generic.GenericProtocolClassGenerator
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.TypeHelpers
 import org.eclipse.etrice.generator.c.setup.GeneratorOptionsHelper
+import org.eclipse.etrice.generator.fsm.generic.IDetailCodeTranslator
 
 @Singleton
 class ProtocolClassGen extends GenericProtocolClassGenerator {
@@ -41,6 +41,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 	@Inject extension ProcedureHelpers
 	@Inject extension TypeHelpers
 	@Inject protected extension GeneratorOptionsHelper
+	@Inject protected extension IDetailCodeTranslator
 	@Inject ILogger logger
 	
 	def doGenerate(Root root) {
@@ -372,7 +373,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 				
 				«messageSignature(portClassName, message.name, "", data)» {
 					«IF hdlr !== null»
-						«AbstractGenerator::getInstance().getTranslatedCode(hdlr.detailCode)»
+						«hdlr.detailCode.translatedCode»
 					«ELSE»
 						ET_MSC_LOGGER_SYNC_ENTRY("«portClassName»", "«message.name»")
 							«sendMessageCall(hasData, "self", memberInUse(pc.name, dir+message.name), typeName+refp, refa+"data__et")»
@@ -480,7 +481,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 	/* receiver handlers */
 	«FOR h:pc.getReceiveHandlers(conj)»
 		void «portClassName»_«h.msg.name»_receiveHandler(«portClassName»* self, const etMessage* msg, void * actor, etActorReceiveMessage receiveMessageFunc){
-			«AbstractGenerator::getInstance().getTranslatedCode(h.detailCode)»
+			«h.detailCode.translatedCode»
 			/* hand over the message to the actor:      */
 			/* (*receiveMessageFunc)(actor, self, msg); */
 		}

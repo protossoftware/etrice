@@ -17,7 +17,6 @@ package org.eclipse.etrice.generator.base;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.etrice.core.genmodel.fsm.IDiagnostician;
-import org.eclipse.etrice.generator.base.args.IOptionModule;
 import org.eclipse.etrice.generator.base.io.GeneratorFileIO;
 import org.eclipse.etrice.generator.base.io.IGeneratorEMFSetup;
 import org.eclipse.etrice.generator.base.io.IGeneratorResourceLoader;
@@ -73,7 +72,7 @@ public abstract class AbstractGeneratorBaseModule implements Module {
 			binder.bind(IGeneratorEMFSetup.class).to(bindIGeneratorEMFSetup());
 		}
 		binder.bind(String.class).annotatedWith(GeneratorName.class).toInstance(bindGeneratorName());
-		binder.bind(IOptionModule.class).annotatedWith(GeneratorOptions.class).to(bindGeneratorOptions());
+		binder.bind(GeneratorOptions.class).to(bindGeneratorOptions());
 		binder.bind(IGeneratorResourceLoader.class).to(ModelLoader.class);
 		binder.bind(IGeneratorResourceValidator.class).to(ModelValidator.class);
 		binder.bind(Diagnostician.class).in(Singleton.class);

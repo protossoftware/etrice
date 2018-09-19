@@ -28,8 +28,8 @@ import org.eclipse.etrice.core.room.ProtocolClass
 import org.eclipse.etrice.core.room.RefableType
 import org.eclipse.etrice.core.room.RoomClass
 import org.eclipse.etrice.core.room.util.RoomHelpers
-import org.eclipse.etrice.generator.base.AbstractGenerator
 import org.eclipse.etrice.generator.base.logging.ILogger
+import org.eclipse.etrice.generator.fsm.generic.IDetailCodeTranslator
 
 /**
  * A collection of methods for generation of user code, attributes with getters and setters
@@ -42,6 +42,7 @@ class ProcedureHelpers {
 
 	@Inject protected extension RoomHelpers
 	@Inject protected extension TypeHelpers
+	@Inject protected extension IDetailCodeTranslator
 	@Inject protected ILanguageExtension languageExt
 	@Inject protected ILogger logger
 
@@ -286,7 +287,7 @@ class ProcedureHelpers {
 		/*--------------------- operations ---------------------*/
 		«FOR operation : operations»
 			«operationSignature(operation, classname, false)» {
-				«AbstractGenerator::getInstance().getTranslatedCode(operation.detailCode)»
+				«operation.detailCode.translatedCode»
 			}
 		«ENDFOR»
 	'''
@@ -363,8 +364,7 @@ class ProcedureHelpers {
 		val comment = '''/* user defined «IF ctor»con«ELSE»de«ENDIF»structor body */'''
 
 		val implementedStructors = cls.getStructors(!languageExt.usesInheritance).filter[isConstructor == ctor]
-		val translatedCodes = implementedStructors.map[detailCode].map[
-			AbstractGenerator::getInstance().getTranslatedCode(it)]
+		val translatedCodes = implementedStructors.map[detailCode].map[getTranslatedCode]
 
 		return comment + NEWLINE + translatedCodes.map[if(translatedCodes.size > 1) asBlock else it].join
 	}
