@@ -21,7 +21,6 @@ import org.eclipse.emf.ecore.EReference
 import org.eclipse.etrice.core.fsm.fSM.DetailCode
 import org.eclipse.etrice.core.fsm.fSM.ModelComponent
 import org.eclipse.etrice.core.fsm.fSM.TransitionBase
-import org.eclipse.etrice.core.genmodel.fsm.ExtendedFsmGenBuilder
 import org.eclipse.etrice.core.genmodel.fsm.FsmGenExtensions
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.GraphContainer
 import org.eclipse.etrice.core.room.ActorClass
@@ -37,6 +36,7 @@ import org.eclipse.jface.text.Document
 import org.eclipse.xtext.nodemodel.ILeafNode
 
 import static org.eclipse.xtext.EcoreUtil2.getContainerOfType
+import org.eclipse.etrice.core.genmodel.fsm.ExtendedFsmGenBuilderFactory
 
 /** 
  * Utility to create and cache DetailExpressionProvider
@@ -50,11 +50,12 @@ class UIExpressionUtil {
 
 	static class GenModelAccess {
 	
+		val fsmGenBuilderFactory = RoomUiModule.injector.getInstance(ExtendedFsmGenBuilderFactory)
 		Map<ModelComponent, GraphContainer> cache = newHashMap
 		
 		def public GraphContainer get(ModelComponent mc) {
 			if(!cache.containsKey(mc)) {
-				val builder = new ExtendedFsmGenBuilder(RoomUiModule.injector);
+				val builder = fsmGenBuilderFactory.create()
 				val gc = builder.createTransformedModel(mc)
 				builder.withCommonData(gc)
 				cache.put(mc, gc)

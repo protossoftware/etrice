@@ -14,8 +14,6 @@
 
 package org.eclipse.etrice.core.genmodel.fsm
 
-import com.google.inject.Inject
-import com.google.inject.Injector
 import org.eclipse.etrice.core.fsm.fSM.ChoicepointTerminal
 import org.eclipse.etrice.core.fsm.fSM.ModelComponent
 import org.eclipse.etrice.core.fsm.fSM.NonInitialTransition
@@ -38,20 +36,15 @@ import org.eclipse.etrice.core.genmodel.fsm.fsmgen.Node
 
 class BasicFsmGenBuilder {
 	
-	@Inject
 	protected extension FSMHelpers fsmHelpers
 	
 	protected val factory = FsmGenFactory.eINSTANCE
 	private var int inheritanceLevel = 0
 	
-	new(Injector injector) {
-		injector.injectMembers(this)
+	new(FSMHelpers fsmHelpers) {
+		this.fsmHelpers = fsmHelpers
 	}
-
-	// protected constructor leaves injection to super class
-	protected new() {
-	}
-		
+	
 	def GraphContainer createTransformedModel(ModelComponent mc) {
 		mc.createContainer
 	}

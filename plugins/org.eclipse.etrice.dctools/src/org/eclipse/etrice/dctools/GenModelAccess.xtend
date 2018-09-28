@@ -15,28 +15,31 @@
 package org.eclipse.etrice.dctools
 
 import java.util.Map
-import org.eclipse.etrice.core.RoomStandaloneSetup
 import org.eclipse.etrice.core.fsm.fSM.ModelComponent
-import org.eclipse.etrice.core.genmodel.fsm.ExtendedFsmGenBuilder
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.GraphContainer
+import com.google.inject.Inject
+import org.eclipse.etrice.core.genmodel.fsm.ExtendedFsmGenBuilderFactory
+import org.eclipse.etrice.core.genmodel.fsm.NullDiagnostician
 
 class GenModelAccess {
 	
-		Map<ModelComponent, GraphContainer> cache = newHashMap
-		
-		def public clearCache() {
-			cache.clear
+	@Inject
+	private ExtendedFsmGenBuilderFactory fsmGenBuilderFactory
+	
+	Map<ModelComponent, GraphContainer> cache = newHashMap
+	
+	def public clearCache() {
+		cache.clear
+	}
+	
+	def public GraphContainer get(ModelComponent mc) {
+		if(!cache.containsKey(mc)) {
+			val builder = fsmGenBuilderFactory.create(new NullDiagnostician)
+			val gc = builder.createTransformedModel(mc)
+			builder.withCommonData(gc)
+			cache.put(mc, gc)
 		}
 		
-		def public GraphContainer get(ModelComponent mc) {
-			if(!cache.containsKey(mc)) {
-				val injector = new RoomStandaloneSetup().createInjector
-				val builder = new ExtendedFsmGenBuilder(injector);
-				val gc = builder.createTransformedModel(mc)
-				builder.withCommonData(gc)
-				cache.put(mc, gc)
-			}
-			
-			return cache.get(mc)
-		}
+		return cache.get(mc)
+	}
 }

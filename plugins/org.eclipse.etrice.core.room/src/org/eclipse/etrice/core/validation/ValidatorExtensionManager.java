@@ -21,7 +21,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.EMFPlugin;
@@ -37,6 +36,10 @@ import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.CheckType;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
+import org.osgi.framework.Bundle;
+
+import com.google.inject.Inject;
+import com.google.inject.Injector;
 
 /**
  * Custom validator manager for room language, that provides registration via an
@@ -97,7 +100,7 @@ public class ValidatorExtensionManager extends CustomValidatorManager {
 					&& Platform.getExtensionRegistry().getExtensionPoint(IVALIDATOR_ID) != null;
 		}
 
-		public void loadValidatorExtensions() {
+		public void loadValidatorExtensions(Injector injector) {
 			IConfigurationElement[] config = Platform.getExtensionRegistry().getConfigurationElementsFor(IVALIDATOR_ID);
 
 			// we use parent-package.class-name as key in our tables
@@ -120,7 +123,11 @@ public class ValidatorExtensionManager extends CustomValidatorManager {
 			// now we add each extension to our maps
 			for (IConfigurationElement e : config) {
 				try {
-					final Object ext = e.createExecutableExtension("class");
+					final String extContributor = e.getContributor().getName();
+					final Bundle extBundle = Platform.getBundle(extContributor);
+					final String extClassName = e.getAttribute("class");
+					final Class<?> extClass = extBundle.loadClass(extClassName);
+					final Object ext = injector.getInstance(extClass);
 					if (ext instanceof ICustomValidator) {
 						ICustomValidator validator = (ICustomValidator) ext;
 						infos.add(new ValidatorInfo(validator, e.getName() + ValidatorInfo.SEP
@@ -148,8 +155,8 @@ public class ValidatorExtensionManager extends CustomValidatorManager {
 						System.out.println("ValidatorExtensionManager: unexpected extension");
 					}
 				}
-				catch (CoreException ex) {
-					System.out.println(ex.getMessage());
+				catch (ClassNotFoundException ex) {
+					System.out.println(ex.toString());
 				}
 			}
 		}
@@ -253,6 +260,13 @@ public class ValidatorExtensionManager extends CustomValidatorManager {
 	public ValidatorExtensionManager(){
 		super();
 		isRegistryAvailable = Registry.isAvailable();
+	}
+	
+	@Inject
+	public void registerExtensionValidators(Injector injector) {
+		if(isRegistryAvailable) {
+			Registry.getInstance().loadValidatorExtensions(injector);
+		}
 	}
 	
 	@Check

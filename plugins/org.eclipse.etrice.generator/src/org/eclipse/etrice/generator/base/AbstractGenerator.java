@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.etrice.core.genmodel.builder.GeneratorModelBuilder;
+import org.eclipse.etrice.core.genmodel.builder.GeneratorModelBuilderFactory;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.core.genmodel.fsm.FsmGenExtensions;
@@ -140,6 +141,9 @@ public abstract class AbstractGenerator implements IGenerator, IDetailCodeTransl
 	@Inject
 	protected ITranslationProvider translationProvider;
 	
+	@Inject
+	private GeneratorModelBuilderFactory genModelBuilderFactory;
+	
 	private HashMap<DetailCode, String> detailcode2string = new HashMap<DetailCode, String>();
 	private ResourceSet resourceSet = null;
 	
@@ -238,7 +242,7 @@ public abstract class AbstractGenerator implements IGenerator, IDetailCodeTransl
 		}
 		else {			
 			logger.logInfo("-- creating generator model");
-			GeneratorModelBuilder gmb = new GeneratorModelBuilder(logger, diagnostician);
+			GeneratorModelBuilder gmb = genModelBuilderFactory.create(logger, diagnostician);
 			Root gmRoot = gmb.createGeneratorModel(mainModels, importedModels, asLibrary);
 			if (diagnostician.isFailed()) {
 				logger.logError("validation failed during build of generator model");

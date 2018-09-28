@@ -26,6 +26,7 @@ import org.eclipse.etrice.ui.behavior.fsm.editor.AbstractFSMDiagramTypeProvider
 import org.eclipse.graphiti.dt.IDiagramTypeProvider
 import org.eclipse.graphiti.services.Graphiti
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.FSMGenElement
+import org.eclipse.etrice.core.genmodel.fsm.BasicFsmGenBuilderFactory
 
 class GenModelProvider {
 
@@ -37,7 +38,7 @@ class GenModelProvider {
 
 	new(AbstractFSMDiagramTypeProvider fsmDiagramProvider) {
 		this.fsmDiagramProvider = fsmDiagramProvider
-		builder = new BasicFsmGenBuilder(fsmDiagramProvider.injector)
+		builder = fsmDiagramProvider.injector.getInstance(BasicFsmGenBuilderFactory).create
 	}
 
 	def updateModel() {

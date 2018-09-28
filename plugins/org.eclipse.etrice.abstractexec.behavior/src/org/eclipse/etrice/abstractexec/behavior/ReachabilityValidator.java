@@ -22,12 +22,12 @@ import java.util.Set;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.etrice.abstractexec.behavior.util.AbstractExecutionRuntimeModule;
-import org.eclipse.etrice.abstractexec.behavior.util.AbstractExecutionUtil;
 import org.eclipse.etrice.core.common.validation.ICustomValidator;
 import org.eclipse.etrice.core.fsm.fSM.FSMPackage;
 import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
+import org.eclipse.etrice.core.fsm.util.FSMHelpers;
 import org.eclipse.etrice.core.genmodel.fsm.ExtendedFsmGenBuilder;
+import org.eclipse.etrice.core.genmodel.fsm.ExtendedFsmGenBuilderFactory;
 import org.eclipse.etrice.core.genmodel.fsm.FsmGenChecker;
 import org.eclipse.etrice.core.genmodel.fsm.FsmGenExtensions;
 import org.eclipse.etrice.core.genmodel.fsm.NullDiagnostician;
@@ -38,9 +38,7 @@ import org.eclipse.etrice.core.genmodel.fsm.fsmgen.Node;
 import org.eclipse.etrice.generator.base.logging.NullLogger;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 
-import com.google.inject.Guice;
-import com.google.inject.Injector;
-
+import com.google.inject.Inject;
 
 public class ReachabilityValidator implements ICustomValidator {
 
@@ -50,6 +48,12 @@ public class ReachabilityValidator implements ICustomValidator {
 	{
 		classesToCheck.add(FSMPackage.Literals.MODEL_COMPONENT);
 	}
+	
+	@Inject
+	private FSMHelpers fsmHelpers;
+	
+	@Inject
+	private ExtendedFsmGenBuilderFactory fsmGenBuilderFactory;
 	
 	@Override
 	public void validate(EObject object, ValidationMessageAcceptor messageAcceptor, ICustomValidator.ValidationContext context) {
@@ -65,13 +69,12 @@ public class ReachabilityValidator implements ICustomValidator {
 		if (mc.isAbstract())
 			return;
 		
-		if (AbstractExecutionUtil.getInstance().getRoomHelpers().isCircularClassHierarchy(mc))
+		if (fsmHelpers.isCircularClassHierarchy(mc))
 			// is checked elsewhere
 			return;
 
-		Injector injector = Guice.createInjector(new AbstractExecutionRuntimeModule());
 		NullDiagnostician diagnostician = new NullDiagnostician();
-		ExtendedFsmGenBuilder builder = new ExtendedFsmGenBuilder(injector, diagnostician);
+		ExtendedFsmGenBuilder builder = fsmGenBuilderFactory.create(diagnostician);
 		GraphContainer gc;
 		try {
 			gc = builder.createTransformedModel(mc);

@@ -31,8 +31,10 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.etrice.core.RoomStandaloneSetup;
 import org.eclipse.etrice.core.fsm.fSM.StateGraphItem;
 import org.eclipse.etrice.core.genmodel.builder.GeneratorModelBuilder;
+import org.eclipse.etrice.core.genmodel.builder.GeneratorModelBuilderFactory;
 import org.eclipse.etrice.core.genmodel.etricegen.InstanceBase;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.core.genmodel.fsm.IDiagnostician;
@@ -74,6 +76,7 @@ public class TestInstanceModelBuilderBase {
 	private String basePath;
 	protected HashMap<EClass, ArrayList<EObject>> instances;
 	private RoomNameProvider roomNameProvider = new RoomNameProvider();
+	private GeneratorModelBuilderFactory genModelFactory = new RoomStandaloneSetup().createInjector().getInstance(GeneratorModelBuilderFactory.class);
 	
 	protected void prepare() {
 		try {
@@ -102,7 +105,7 @@ public class TestInstanceModelBuilderBase {
 	}
 
 	protected Root buildInstanceModel(String modelName) {
-		GeneratorModelBuilder builder = new GeneratorModelBuilder(new NullLogger(), new Diagnostician());
+		GeneratorModelBuilder builder = genModelFactory.create(new NullLogger(), new Diagnostician());
 		LinkedList<RoomModel> models = getModels(modelName);
 		ArrayList<RoomModel> importedModels = new ArrayList<>();
 		Root root = builder.createGeneratorModel(models, importedModels, false);

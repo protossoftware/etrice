@@ -28,7 +28,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.etrice.core.RoomStandaloneSetup;
 import org.eclipse.etrice.core.genmodel.etricegen.AbstractInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInterfaceInstance;
@@ -51,6 +50,7 @@ import org.eclipse.etrice.core.genmodel.etricegen.SystemInstance;
 import org.eclipse.etrice.core.genmodel.etricegen.impl.AbstractInstanceImpl;
 import org.eclipse.etrice.core.genmodel.etricegen.impl.StructureInstanceImpl;
 import org.eclipse.etrice.core.genmodel.fsm.ExtendedFsmGenBuilder;
+import org.eclipse.etrice.core.genmodel.fsm.ExtendedFsmGenBuilderFactory;
 import org.eclipse.etrice.core.genmodel.fsm.IDiagnostician;
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.GraphContainer;
 import org.eclipse.etrice.core.room.ActorClass;
@@ -78,8 +78,6 @@ import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.SubSystemRef;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.base.logging.ILogger;
-
-import com.google.inject.Injector;
 
 /**
  * A class for the creation of an intermediate model combining all information needed by
@@ -129,18 +127,19 @@ public class GeneratorModelBuilder {
 	 */
 	private IDiagnostician diagnostician;
 	
+	private ExtendedFsmGenBuilderFactory fsmGenBuilderFactory;
+	
 	private boolean debug;
 	
-	private Injector roomInjector = new RoomStandaloneSetup().createInjectorAndDoEMFRegistration();
-
 	/**
 	 * the only constructor takes a logger and a diagnostician as arguments
 	 * @param logger
 	 * @param diagnostician
 	 */
-	public GeneratorModelBuilder(ILogger logger, IDiagnostician diagnostician) {
+	public GeneratorModelBuilder(ExtendedFsmGenBuilderFactory fsmGenBuilderFactory, ILogger logger, IDiagnostician diagnostician) {
 		this.logger = logger;
 		this.diagnostician = diagnostician;
+		this.fsmGenBuilderFactory = fsmGenBuilderFactory;
 	}
 	
 	public Root createGeneratorModel(List<RoomModel> mainModels, List<RoomModel> importedModels, boolean asLibrary) {
@@ -1265,7 +1264,7 @@ public class GeneratorModelBuilder {
 					+" of "+((RoomModel)ac.eContainer()).getName());
 
 		ExpandedActorClass xpac = ETriceGenFactory.eINSTANCE.createExpandedActorClass();
-		ExtendedFsmGenBuilder fsmGenBuilder = new ExtendedFsmGenBuilder(roomInjector, diagnostician);
+		ExtendedFsmGenBuilder fsmGenBuilder = fsmGenBuilderFactory.create(diagnostician);
 		GraphContainer gc = fsmGenBuilder.createTransformedModel(ac);
 		fsmGenBuilder.withChainHeads(gc);
 		fsmGenBuilder.withCommonData(gc);

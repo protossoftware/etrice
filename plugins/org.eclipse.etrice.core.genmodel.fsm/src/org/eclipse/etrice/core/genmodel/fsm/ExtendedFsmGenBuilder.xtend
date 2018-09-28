@@ -14,8 +14,6 @@
 
 package org.eclipse.etrice.core.genmodel.fsm
 
-import com.google.inject.Inject
-import com.google.inject.Injector
 import java.util.HashMap
 import java.util.List
 import org.eclipse.emf.ecore.EObject
@@ -33,25 +31,21 @@ import org.eclipse.etrice.core.genmodel.fsm.fsmgen.Link
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.Node
 
 import static extension org.eclipse.etrice.core.genmodel.fsm.FsmGenExtensions.*
+import org.eclipse.etrice.core.fsm.util.FSMHelpers
 
 class ExtendedFsmGenBuilder extends BasicFsmGenBuilder {
 
-	@Inject
-	protected extension ICommonDataCalculator
-	@Inject
-	protected extension TriggerExtensions
+	protected extension ICommonDataCalculator commonDataCalculator
+	protected extension TriggerExtensions triggerExtensions
 	
 	protected IDiagnostician validator
 	
 	val factory = FsmGenFactory.eINSTANCE
 	
-	new(Injector injector) {
-		this(injector, null)
-	}
-	
-	new(Injector injector, IDiagnostician validator) {
-		super()
-		injector.injectMembers(this)
+	new(FSMHelpers fsmHelpers, ICommonDataCalculator commonDataCalculator, TriggerExtensions triggerExtensions, IDiagnostician validator) {
+		super(fsmHelpers)
+		this.commonDataCalculator = commonDataCalculator
+		this.triggerExtensions = triggerExtensions
 		this.validator = if(validator === null) new NullDiagnostician else validator
 	}
 	

@@ -39,12 +39,13 @@ import static org.junit.Assert.assertFalse
 import static org.junit.Assert.assertNotNull
 import static org.junit.Assert.assertTrue
 import org.eclipse.etrice.generator.base.logging.NullLogger
+import org.eclipse.etrice.core.genmodel.fsm.ExtendedFsmGenBuilderFactory
 
 class TestFSMGenModel extends TestBase {
 
 	val injector = new RoomStandaloneSetup().createInjectorAndDoEMFRegistration()
 	protected IDiagnostician diagnostician = new NullDiagnostician
-	protected extension ExtendedFsmGenBuilder builder = new ExtendedFsmGenBuilder(injector, diagnostician)
+	protected extension ExtendedFsmGenBuilder builder = injector.getInstance(ExtendedFsmGenBuilderFactory).create(diagnostician)
 
 	protected def createResourceSetWithGc(String roomFile, String actorName) {
 		prepare(BehaviorTestActivator.^default.getBundle())
@@ -116,7 +117,7 @@ class TestFSMGenModel extends TestBase {
 		assertEquals(stateGraphItemsNames, namesFromGenModel)
 	}
 	
-	private def <T extends Comparable> toSortedSet(Iterable<T> iterable) {
+	private def <T extends Comparable<?>> toSortedSet(Iterable<T> iterable) {
 		 Sets.<T>newTreeSet(iterable)
 	}
 	

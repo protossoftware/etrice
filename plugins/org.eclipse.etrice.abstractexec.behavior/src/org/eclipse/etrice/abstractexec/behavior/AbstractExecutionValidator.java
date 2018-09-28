@@ -22,8 +22,6 @@ import java.util.Set;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.etrice.abstractexec.behavior.util.AbstractExecutionRuntimeModule;
-import org.eclipse.etrice.abstractexec.behavior.util.AbstractExecutionUtil;
 import org.eclipse.etrice.core.common.validation.ICustomValidator;
 import org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem;
 import org.eclipse.etrice.core.fsm.fSM.DetailCode;
@@ -34,7 +32,9 @@ import org.eclipse.etrice.core.fsm.fSM.State;
 import org.eclipse.etrice.core.fsm.fSM.Trigger;
 import org.eclipse.etrice.core.fsm.fSM.TriggeredTransition;
 import org.eclipse.etrice.core.fsm.naming.FSMNameProvider;
+import org.eclipse.etrice.core.fsm.util.FSMHelpers;
 import org.eclipse.etrice.core.genmodel.fsm.ExtendedFsmGenBuilder;
+import org.eclipse.etrice.core.genmodel.fsm.ExtendedFsmGenBuilderFactory;
 import org.eclipse.etrice.core.genmodel.fsm.FsmGenExtensions;
 import org.eclipse.etrice.core.genmodel.fsm.NullDiagnostician;
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.CommonTrigger;
@@ -45,8 +45,7 @@ import org.eclipse.etrice.core.genmodel.fsm.fsmgen.Node;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 
-import com.google.inject.Guice;
-import com.google.inject.Injector;
+import com.google.inject.Inject;
 
 /**
  * @author rentzhnr
@@ -59,6 +58,12 @@ public class AbstractExecutionValidator implements ICustomValidator {
 	public static final String DIAG_CODE_VIOLATION_MESSAGESEND = "etrice.violation_messagesend";
 	public static final String DIAG_CODE_MISSING_TRIGGER = "etrice.receive_message";
 	public static final String DIAG_CODE_MISSING_MESSAGESEND = "etrice.send_message";
+	
+	@Inject
+	private FSMHelpers fsmHelpers;
+	
+	@Inject
+	private ExtendedFsmGenBuilderFactory fsmGenBuilderFactory;
 	
 	private static final Set<EClass> classesToCheck = new HashSet<EClass>();
 	private static boolean traceExec = false;
@@ -101,7 +106,7 @@ public class AbstractExecutionValidator implements ICustomValidator {
 		if (mc.isAbstract())
 			return;
 		
-		if (AbstractExecutionUtil.getInstance().getRoomHelpers().isCircularClassHierarchy(mc))
+		if (fsmHelpers.isCircularClassHierarchy(mc))
 			// is checked elsewhere
 			return;
 
@@ -122,9 +127,8 @@ public class AbstractExecutionValidator implements ICustomValidator {
 			if (traceExec) {
 				System.out.println("  Reached where at least one interface items has semantics");
 			}
-			Injector injector = Guice.createInjector(new AbstractExecutionRuntimeModule());
 			NullDiagnostician diagnostician = new NullDiagnostician();
-			ExtendedFsmGenBuilder builder = new ExtendedFsmGenBuilder(injector, diagnostician);
+			ExtendedFsmGenBuilder builder = fsmGenBuilderFactory.create(diagnostician);
 			GraphContainer gc;
 			try {
 				gc = builder.createTransformedModel(mc);

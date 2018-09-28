@@ -26,12 +26,15 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.core.common.validation.ICustomValidator;
 import org.eclipse.etrice.core.genmodel.builder.GeneratorModelBuilder;
+import org.eclipse.etrice.core.genmodel.builder.GeneratorModelBuilderFactory;
 import org.eclipse.etrice.core.genmodel.fsm.IDiagnostician;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.generator.base.logging.NullLogger;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
+
+import com.google.inject.Inject;
 
 
 public class RoomGenmodelValidator implements ICustomValidator {
@@ -73,6 +76,9 @@ public class RoomGenmodelValidator implements ICustomValidator {
 			return false;
 		}
 	}
+	
+	@Inject
+	private GeneratorModelBuilderFactory genModelBuilderFactory;
 	
 	
 	@Override
@@ -125,7 +131,7 @@ public class RoomGenmodelValidator implements ICustomValidator {
 			}
 
 			Diag diagnostician = new Diag(messageAcceptor);
-			GeneratorModelBuilder builder = new GeneratorModelBuilder(new NullLogger(), diagnostician);
+			GeneratorModelBuilder builder = genModelBuilderFactory.create(new NullLogger(), diagnostician);
 			builder.createGeneratorModel(models, importedModels, true);
 
 //			System.out.println("done checking model " + model.getName() + " with result: "
