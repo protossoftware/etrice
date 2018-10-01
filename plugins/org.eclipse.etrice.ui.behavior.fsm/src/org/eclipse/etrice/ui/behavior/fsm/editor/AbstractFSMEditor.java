@@ -134,7 +134,10 @@ public abstract class AbstractFSMEditor extends DiagramEditorBase {
 	@Override
 	public void dispose() {
 		// Stop observing the diagram business model
-		diagnosingModelObserver.removeObserver();
+		if(diagnosingModelObserver != null) {
+			diagnosingModelObserver.removeObserver();
+		}
+		
 		super.dispose();
 	}
 	

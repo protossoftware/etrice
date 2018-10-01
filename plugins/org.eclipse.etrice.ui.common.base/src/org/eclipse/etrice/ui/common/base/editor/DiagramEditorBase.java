@@ -122,9 +122,11 @@ public abstract class DiagramEditorBase extends DiagramEditor implements IInputU
 	
 	public ModelComponent getModelComponent() {
 		Diagram diagram = getDiagramTypeProvider().getDiagram();
-		EObject bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(diagram);
-		if (bo instanceof ModelComponent)
-			return (ModelComponent) bo;
+		if(diagram != null) {
+			EObject bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(diagram);
+			if (bo instanceof ModelComponent)
+				return (ModelComponent) bo;
+		}
 		
 		return null;
 	}
