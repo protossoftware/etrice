@@ -18,6 +18,7 @@ package org.eclipse.etrice.ui.behavior.actioneditor.modelaware;
 import org.eclipse.etrice.expressions.detailcode.IDetailExpressionProvider;
 import org.eclipse.etrice.expressions.ui.highlight.ExpressionRuleFactory;
 import org.eclipse.etrice.expressions.ui.highlight.TargetLanguageRuleFactory;
+import org.eclipse.etrice.ui.behavior.actioneditor.Activator;
 import org.eclipse.etrice.ui.behavior.actioneditor.sourceviewer.ActionCodeAssistProcessor;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.contentassist.ContentAssistant;
@@ -31,7 +32,7 @@ import org.eclipse.jface.text.rules.ITokenScanner;
 import org.eclipse.jface.text.rules.RuleBasedScanner;
 import org.eclipse.jface.text.rules.Token;
 import org.eclipse.jface.text.source.ISourceViewer;
-import org.eclipse.jface.text.source.SourceViewerConfiguration;
+import org.eclipse.ui.editors.text.TextSourceViewerConfiguration;
 
 import com.google.common.collect.Iterables;
 
@@ -41,7 +42,7 @@ import com.google.common.collect.Iterables;
  * 
  * @author jayant
  */
-public class ModelAwareActionCodeEditorConfiguration extends SourceViewerConfiguration {
+public class ModelAwareActionCodeEditorConfiguration extends TextSourceViewerConfiguration {
 
 	/** token scanner for syntax highlighting */
 	private RuleBasedScanner tokenScanner;
@@ -51,6 +52,8 @@ public class ModelAwareActionCodeEditorConfiguration extends SourceViewerConfigu
 	private IDetailExpressionProvider exprProvider;
 
 	public ModelAwareActionCodeEditorConfiguration(IDetailExpressionProvider exprProvider) {
+		// preference from behavior.fsm (preferences: eTrice->Action Editor)
+		super(Activator.getDefault().getReadonlyEditorPreferenceStore());
 		this.exprProvider = exprProvider;
 	}
 

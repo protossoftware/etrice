@@ -28,10 +28,13 @@ import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.etrice.ui.behavior.fsm.actioneditor.IActionCodeEditor;
 import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jface.text.BadLocationException;
+import org.eclipse.jface.text.DefaultLineTracker;
 import org.eclipse.jface.text.Document;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextListener;
 import org.eclipse.jface.text.ITextOperationTarget;
+import org.eclipse.jface.text.ITextViewerExtension7;
+import org.eclipse.jface.text.TabsToSpacesConverter;
 import org.eclipse.jface.text.TextEvent;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.text.source.IVerticalRuler;
@@ -53,6 +56,7 @@ import org.eclipse.ui.contexts.IContextActivation;
 import org.eclipse.ui.contexts.IContextService;
 import org.eclipse.ui.handlers.IHandlerActivation;
 import org.eclipse.ui.handlers.IHandlerService;
+import org.eclipse.ui.texteditor.AbstractTextEditor;
 
 /**
  * An Implementation of the {@link IActionCodeEditor} interface using the JFace
@@ -223,6 +227,7 @@ public class SourceViewerActionCodeEditor extends AbstractActionCodeEditor {
 		if (fConfiguration == null)
 			fConfiguration = new SourceViewerConfiguration();
 		fSourceViewer.configure(fConfiguration);
+		installTabsToSpacesConverter();
 
 		StyledText styledText = fSourceViewer.getTextWidget();
 		
@@ -421,6 +426,22 @@ public class SourceViewerActionCodeEditor extends AbstractActionCodeEditor {
 		if (handlerService != null && activatedHandlers != null) {
 			handlerService.deactivateHandler(activatedHandlers.get(commandId));
 			activatedHandlers.remove(commandId);
+		}
+	}
+	
+	// Bug 539577 - Model editors do not obey the Eclipse setting 'insert spaces for tabs'
+	/** 
+	 * Eclipse SourceViewer does not consider tab/spaces preference.
+	 * Copied from {@link AbstractTextEditor#installTabsToSpacesConverter} 
+	 */
+	protected void installTabsToSpacesConverter() {
+		SourceViewerConfiguration config= getSourceViewerConfiguration();
+		if (config != null && fSourceViewer instanceof ITextViewerExtension7) {
+			int tabWidth= config.getTabWidth(fSourceViewer);
+			TabsToSpacesConverter tabToSpacesConverter= new TabsToSpacesConverter();
+			tabToSpacesConverter.setLineTracker(new DefaultLineTracker());
+			tabToSpacesConverter.setNumberOfSpacesPerTab(tabWidth);
+			((ITextViewerExtension7)fSourceViewer).setTabsToSpacesConverter(tabToSpacesConverter);
 		}
 	}
 }

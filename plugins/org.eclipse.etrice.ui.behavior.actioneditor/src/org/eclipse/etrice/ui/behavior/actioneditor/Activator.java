@@ -15,9 +15,12 @@
 
 package org.eclipse.etrice.ui.behavior.actioneditor;
 
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.ui.editors.text.EditorsUI;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.ui.texteditor.ChainedPreferenceStore;
 import org.osgi.framework.BundleContext;
 
 /**
@@ -82,5 +85,14 @@ public class Activator extends AbstractUIPlugin {
 			}
 		}
 		return img;
+	}
+	
+	/** IPreferenceStore with all preferences from eTrice and Eclipse Editors */
+	public IPreferenceStore getReadonlyEditorPreferenceStore() {
+		return new ChainedPreferenceStore(
+			new IPreferenceStore[] { 
+				org.eclipse.etrice.ui.behavior.fsm.Activator.getDefault().getPreferenceStore(), 
+				EditorsUI.getPreferenceStore()
+		});
 	}
 }
