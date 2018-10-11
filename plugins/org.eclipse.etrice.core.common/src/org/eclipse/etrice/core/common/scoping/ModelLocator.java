@@ -16,12 +16,14 @@ package org.eclipse.etrice.core.common.scoping;
 
 import java.util.ArrayList;
 
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.osgi.framework.Bundle;
 
 import com.google.inject.Inject;
+import com.google.inject.Injector;
 import com.google.inject.Singleton;
 
 /**
@@ -39,20 +41,27 @@ public class ModelLocator {
 		addLocator(defaultLocator);
 	}
 	
-	public void loadExtensions() {
-		IConfigurationElement[] config = Platform.getExtensionRegistry()
-				.getConfigurationElementsFor(IMODEL_LOCATOR_ID);
-		
-		for (IConfigurationElement e : config) {
-			try {
-				final Object ext = e.createExecutableExtension("class");
-				if (ext instanceof IModelLocator) {
-					IModelLocator locator = (IModelLocator) ext;
-					locators.add(locator);
+	@Inject
+	public void loadExtensions(Injector injector) {
+		if(EMFPlugin.IS_ECLIPSE_RUNNING && Platform.getExtensionRegistry() != null) {
+			IConfigurationElement[] config = Platform.getExtensionRegistry()
+					.getConfigurationElementsFor(IMODEL_LOCATOR_ID);
+			
+			for (IConfigurationElement e : config) {
+				try {
+					final String extContributor = e.getContributor().getName();
+					final Bundle extBundle = Platform.getBundle(extContributor);
+					final String extClassName = e.getAttribute("class");
+					final Class<?> extClass = extBundle.loadClass(extClassName);
+					final Object ext = injector.getInstance(extClass);
+					if (ext instanceof IModelLocator) {
+						IModelLocator locator = (IModelLocator) ext;
+						locators.add(locator);
+					}
 				}
-			}
-			catch (CoreException ex) {
-				System.out.println(ex.getMessage());
+				catch (ClassNotFoundException ex) {
+					System.out.println(ex.getMessage());
+				}
 			}
 		}
 	}

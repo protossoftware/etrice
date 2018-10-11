@@ -85,7 +85,8 @@ public class StandardModelLocator implements IModelLocator {
 	private String resolve(String resolve, URI baseUri, Resource res) {
 		resolve = substituteEnvVars(resolve);
 		
-		// replace (double) slashes and backslashes with single slashes
+		// replace (double/triple) slashes and backslashes with single slashes
+		resolve = resolve.replaceAll("///", "/");
 		resolve = resolve.replaceAll("\\\\", "/");
 		resolve = resolve.replaceAll("//", "/");
 		

@@ -33,6 +33,7 @@ import org.eclipse.graphiti.ui.internal.editor.GFWorkspaceCommandStackImpl;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 
+import com.google.inject.Inject;
 import com.google.inject.Injector;
 
 /**
@@ -42,7 +43,8 @@ import com.google.inject.Injector;
 @SuppressWarnings("restriction")
 public class CustomUpdateBehavior extends DefaultUpdateBehavior {
 	
-	private IResourceSetProvider resourceSetProvider = new CustomResourceSetProvider();
+	@Inject
+	private IResourceSetProvider resourceSetProvider;
 
 	/**
 	 * @param diagramBehavior
@@ -51,7 +53,7 @@ public class CustomUpdateBehavior extends DefaultUpdateBehavior {
 		super(diagramBehavior);
 
 		Injector injector = FSMUiModule.getInjector();
-        injector.injectMembers(resourceSetProvider);
+        injector.injectMembers(this);
 	}
 	
 	/* (non-Javadoc)

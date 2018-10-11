@@ -14,7 +14,10 @@
 
 package org.eclipse.etrice.core;
 
+import org.eclipse.etrice.core.common.scoping.CompoundGlobalScopeProvider;
 import org.eclipse.etrice.core.common.scoping.ModelLocatorUriResolver;
+import org.eclipse.etrice.core.common.scoping.ModelPathFileExtensionFilter;
+import org.eclipse.etrice.core.common.scoping.ModelPathGlobalScopeProvider.IModelPathFileFilter;
 import org.eclipse.etrice.core.common.validation.CustomValidatorManager.StandaloneValidatorExtension;
 import org.eclipse.etrice.core.converter.RoomValueConverterService;
 import org.eclipse.etrice.core.genmodel.fsm.ICommonDataCalculator;
@@ -27,6 +30,7 @@ import org.eclipse.etrice.core.validation.ValidatorExtensionManager;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.IFragmentProvider;
+import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.impl.ImportUriResolver;
 import org.eclipse.xtext.validation.INamesAreUniqueValidationHelper;
 
@@ -74,19 +78,17 @@ public class RoomRuntimeModule extends org.eclipse.etrice.core.AbstractRoomRunti
 		return RoomFragmentProvider.class;
 	}
 	
-	/* (non-Javadoc)
-	 * @see org.eclipse.etrice.core.AbstractRoomRuntimeModule#configureIScopeProviderDelegate(com.google.inject.Binder)
-	 */
-	@Override
-	public void configureIScopeProviderDelegate(Binder binder) {
-		binder.bind(org.eclipse.xtext.scoping.IScopeProvider.class).annotatedWith(
-				com.google.inject.name.Names.named(org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider.NAMED_DELEGATE)).to(
-						org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider.class);
-	}
-	
 	// HOWTO: use URI imports - need special URI resolver
 	public Class<? extends ImportUriResolver> bindImportUriResolver() {
 		return ModelLocatorUriResolver.class;
+	}
+	
+	public Class<? extends IGlobalScopeProvider> bindIGlobalScopeProvider() {
+		return CompoundGlobalScopeProvider.class;
+	}
+	
+	public IModelPathFileFilter bindIModelPathFileFilter() {
+		return new ModelPathFileExtensionFilter("room", "cage", "actortest");
 	}
 
 	// HOWTO: add a value converter

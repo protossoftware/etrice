@@ -15,7 +15,9 @@
 
 package org.eclipse.etrice.generator.base.args;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.StringJoiner;
 
 /**
  * Encapsulates a set of arguments.
@@ -98,6 +100,23 @@ public class Arguments {
 	
 	@Override
 	public String toString() {
-		return option2Arg.toString();
+		StringJoiner joiner = new StringJoiner(", ");
+		for(Option<?> opt: options) {
+			joiner.add(argToString(opt));
+		}
+		return joiner.toString();
+	}
+	
+	private String argToString(Option<?> opt) {
+		String result = opt.getName() + "=";
+		Object obj = option2Arg.get(opt.getName());
+		if(opt.getType().isArray()) {
+			Object[] objArr = (Object[]) obj;
+			result += Arrays.toString(objArr);
+		}
+		else {
+			result += obj.toString();
+		}
+		return result;
 	}
 }

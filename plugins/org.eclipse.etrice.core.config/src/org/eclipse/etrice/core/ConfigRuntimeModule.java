@@ -14,12 +14,14 @@
 
 package org.eclipse.etrice.core;
 
+import org.eclipse.etrice.core.common.scoping.CompoundGlobalScopeProvider;
 import org.eclipse.etrice.core.common.scoping.ModelLocatorUriResolver;
+import org.eclipse.etrice.core.common.scoping.ModelPathFileExtensionFilter;
+import org.eclipse.etrice.core.common.scoping.ModelPathGlobalScopeProvider.IModelPathFileFilter;
 import org.eclipse.etrice.core.converter.ConfigValueConverterService;
 import org.eclipse.xtext.conversion.IValueConverterService;
+import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.impl.ImportUriResolver;
-
-import com.google.inject.Binder;
 
 /**
  * Use this class to register components to be used at runtime / without the
@@ -28,19 +30,13 @@ import com.google.inject.Binder;
 public class ConfigRuntimeModule extends
 		org.eclipse.etrice.core.AbstractConfigRuntimeModule {
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.eclipse.etrice.core.AbstractRoomRuntimeModule#
-	 * configureIScopeProviderDelegate(com.google.inject.Binder)
-	 */
 	@Override
-	public void configureIScopeProviderDelegate(Binder binder) {
-		binder.bind(org.eclipse.xtext.scoping.IScopeProvider.class)
-				.annotatedWith(
-						com.google.inject.name.Names
-								.named(org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider.NAMED_DELEGATE))
-				.to(org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider.class);
+	public Class<? extends IGlobalScopeProvider> bindIGlobalScopeProvider() {
+		return CompoundGlobalScopeProvider.class;
+	}
+	
+	public IModelPathFileFilter bindIModelPathFileFilter() {
+		return new ModelPathFileExtensionFilter("room");
 	}
 
 	// HOWTO: use URI imports - need special URI resolver

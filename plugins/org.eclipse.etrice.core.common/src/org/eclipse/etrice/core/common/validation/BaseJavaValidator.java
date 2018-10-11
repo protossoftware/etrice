@@ -18,6 +18,9 @@ import java.util.HashSet;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EcoreFactory;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.etrice.core.common.base.Annotation;
@@ -33,9 +36,15 @@ import org.eclipse.etrice.core.common.base.KeyValue;
 import org.eclipse.etrice.core.common.base.RealLiteral;
 import org.eclipse.etrice.core.common.base.SimpleAnnotationAttribute;
 import org.eclipse.etrice.core.common.base.StringLiteral;
+import org.eclipse.xtext.naming.IQualifiedNameConverter;
+import org.eclipse.xtext.naming.QualifiedName;
+import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.scoping.IGlobalScopeProvider;
+import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.ImportUriResolver;
 import org.eclipse.xtext.validation.Check;
 
+import com.google.common.base.Predicates;
 import com.google.inject.Inject;
 
 /**
@@ -52,6 +61,8 @@ public class BaseJavaValidator extends org.eclipse.etrice.core.common.validation
 	public static final String DUPLICATE_ANNOTATION_ATTRIBUTE = "BaseJavaValidator.DuplicateAnnotationAttribute";
 	
 	@Inject ImportUriResolver importUriResolver;
+	@Inject IGlobalScopeProvider globalScopeProvider;
+	@Inject IQualifiedNameConverter nameConverter;
 	
 	@Check
 	public void checkDocumentation(Documentation doc) {
@@ -183,6 +194,10 @@ public class BaseJavaValidator extends org.eclipse.etrice.core.common.validation
 
 	@Check
 	public void checkImportedURI(Import imp) {
+		if(imp.getImportURI() == null) {
+			return;
+		}
+		
 		String uriString = importUriResolver.resolve(imp);
 		if (uriString == null) {
 			warning("could not load referenced model", BasePackage.Literals.IMPORT__IMPORT_URI);
@@ -214,4 +229,26 @@ public class BaseJavaValidator extends org.eclipse.etrice.core.common.validation
 		}
 	}
 	
+	/**
+	 * Check that the imported namespace can be found by the global scope provider.
+	 * 
+	 * @param imp the import to check
+	 */
+	@Check
+	public void checkImportedNamespace(Import imp) {
+		String name = imp.getImportedNamespace();
+		if(name != null) {
+			QualifiedName importedNamespace = nameConverter.toQualifiedName(name);
+			if(!importedNamespace.getLastSegment().equals("*")) {
+				Resource context = imp.eResource();
+				EReference reference = EcoreFactory.eINSTANCE.createEReference();
+				reference.setEType(EcorePackage.eINSTANCE.getEObject());
+				IScope scope = globalScopeProvider.getScope(context, reference, Predicates.alwaysTrue());
+				IEObjectDescription eod = scope.getSingleElement(importedNamespace);
+				if(eod == null) {
+					error("could not find imported namespace " + importedNamespace, BasePackage.Literals.IMPORT__IMPORTED_NAMESPACE);
+				}
+			}
+		}
+	}
 }

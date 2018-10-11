@@ -14,6 +14,8 @@
 
 package org.eclipse.etrice.generator.base;
 
+import java.nio.file.Path;
+
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.etrice.core.common.scoping.ModelLocatorUriResolver;
@@ -38,8 +40,8 @@ public class ModelLoader extends GeneratorResourceLoader {
 	}
 	
 	@Override
-	protected URI createURI(String file) {
-		String uri = uriResolver.resolve(file, null);
+	protected URI createURI(Path path) {
+		String uri = uriResolver.resolve(path.toString(), null);
 		return URI.createURI(uri);
 	}
 }

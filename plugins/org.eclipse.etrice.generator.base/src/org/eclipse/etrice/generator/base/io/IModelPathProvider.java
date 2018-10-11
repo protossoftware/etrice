@@ -15,30 +15,19 @@
 
 package org.eclipse.etrice.generator.base.io;
 
-import java.util.List;
-
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.etrice.generator.base.GeneratorException;
-import org.eclipse.etrice.generator.base.args.Arguments;
-import org.eclipse.etrice.generator.base.logging.ILogger;
 
 import com.google.inject.ImplementedBy;
 
-/**
- * Loads and resolves resources.
- */
-@ImplementedBy(GeneratorResourceLoader.class)
-public interface IGeneratorResourceLoader {
+@ImplementedBy(ResourceSetModelPathProvider.class)
+public interface IModelPathProvider {
 	
 	/**
-	 * Loads the specified files.
+	 * Requests the modelpath for the specified resource.
 	 * 
-	 * @param files the files to load
-	 * @param modelpath the modelpath entries
-	 * @param arguments the generator arguments
-	 * @param logger the logger
-	 * @return the loaded resources
+	 * @param resource the resource that requested modelpath is for
+	 * @return the modelpath for the resource
 	 */
-	List<Resource> load(List<String> files, List<String> modelpath, Arguments arguments, ILogger logger) throws GeneratorException;
+	public IModelPath get(Resource resource);
 	
 }

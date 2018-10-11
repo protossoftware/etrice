@@ -392,5 +392,11 @@
             extensions="etbase">
     </provider>
   </extension>
+  <extension
+        point="org.eclipse.xtext.ui.shared.sharedStateContributingModule">
+     <module
+           class="org.eclipse.etrice.core.common.ui.SharedContributionModule">
+     </module>
+ org.eclipse.etrice.core.common.ui.SharedContributionModule </extension>
 
 </plugin>

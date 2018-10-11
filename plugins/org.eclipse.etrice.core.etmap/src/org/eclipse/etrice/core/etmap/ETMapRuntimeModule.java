@@ -14,10 +14,12 @@
 
 package org.eclipse.etrice.core.etmap;
 
+import org.eclipse.etrice.core.common.scoping.CompoundGlobalScopeProvider;
 import org.eclipse.etrice.core.common.scoping.ModelLocatorUriResolver;
+import org.eclipse.etrice.core.common.scoping.ModelPathFileExtensionFilter;
+import org.eclipse.etrice.core.common.scoping.ModelPathGlobalScopeProvider.IModelPathFileFilter;
+import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.impl.ImportUriResolver;
-
-import com.google.inject.Binder;
 
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
@@ -25,12 +27,12 @@ import com.google.inject.Binder;
 public class ETMapRuntimeModule extends org.eclipse.etrice.core.etmap.AbstractETMapRuntimeModule {
 	
 	@Override
-	public void configureIScopeProviderDelegate(Binder binder) {
-		binder.bind(org.eclipse.xtext.scoping.IScopeProvider.class)
-				.annotatedWith(
-						com.google.inject.name.Names
-								.named(org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider.NAMED_DELEGATE))
-				.to(org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider.class);
+	public Class<? extends IGlobalScopeProvider> bindIGlobalScopeProvider() {
+		return CompoundGlobalScopeProvider.class;
+	}
+	
+	public IModelPathFileFilter bindIModelPathFileFilter() {
+		return new ModelPathFileExtensionFilter("room", "etphys");
 	}
 
 	// HOWTO: use URI imports - need special URI resolver

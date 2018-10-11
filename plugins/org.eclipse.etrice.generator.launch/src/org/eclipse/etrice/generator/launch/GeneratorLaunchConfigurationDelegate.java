@@ -20,6 +20,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Objects;
 
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IProject;
@@ -36,6 +37,8 @@ import org.eclipse.core.variables.VariablesPlugin;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.ui.RefreshTab;
+import org.eclipse.etrice.core.common.ui.modelpath.ModelPathManager;
+import org.eclipse.etrice.core.common.ui.modelpath.WorkspaceModelPath;
 import org.eclipse.etrice.generator.base.AbstractGeneratorOptions;
 import org.eclipse.etrice.generator.base.io.ILineOutput;
 import org.eclipse.etrice.generator.base.setup.GeneratorApplicationOptions;
@@ -88,9 +91,10 @@ public abstract class GeneratorLaunchConfigurationDelegate extends AbstractJavaL
 				StringBuffer argString = new StringBuffer();
 				addModels(configuration, entry.getValue(), argString);
 				addArguments(configuration, entry.getKey(), argString);
+				addModelpath(entry.getKey(), argString);
 				String[] args = splitCommandLine(argString.toString());
 				
-				output.println("\n*** generating project " + entry.getKey().getName() + " ***");
+				output.println("\n*** generating project " + entry.getKey().getName() + " ***\n");
 				runGenerator(args, output);
 				
 				// check for cancellation
@@ -243,6 +247,23 @@ public abstract class GeneratorLaunchConfigurationDelegate extends AbstractJavaL
 		argString.append(" \""+projectDir+srcgenDir+"\"");
 		
 		argString.append(" -clean");
+	}
+	
+	/**
+	 * Parses the modelpath of the specified project and appends it to the generator arguments.
+	 */
+	protected void addModelpath(IProject project, StringBuffer argString) throws CoreException {
+		WorkspaceModelPath modelpath = ModelPathManager.INSTANCE.getModelPath(project);
+		String[] paths = modelpath.getPaths().stream()
+			.map(container -> container.getLocation())
+			.filter(Objects::nonNull)
+			.map(path -> path.toOSString())
+			.toArray(size -> new String[size]);
+		
+		if(paths.length > 0) {
+			String modelpathArg = String.join(";", paths);
+			argString.append(" -modelpath \"").append(modelpathArg).append('"');
+		}
 	}
 	
 	/**

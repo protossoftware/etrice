@@ -16,7 +16,14 @@
 package org.eclipse.etrice.generator.base.io;
 
 import java.io.IOException;
+import java.io.UncheckedIOException;
+import java.nio.file.FileSystem;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.LinkOption;
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.ProviderNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,18 +62,17 @@ public class GeneratorResourceLoader implements IGeneratorResourceLoader {
 	}
 	
 	@Override
-	public List<Resource> load(List<String> files, Arguments arguments, ILogger logger) throws GeneratorException {
+	public List<Resource> load(List<String> files, List<String> modelpath, Arguments arguments, ILogger logger) throws GeneratorException {
 		doEMFRegistration();
 		
-		List<Resource> resources = new ArrayList<>(files.size());
 		ResourceSet resourceSet = resourceSetProvider.get();
 		Adapter resourceAddedAdapter = new ResourceAddedAdapter(logger);
 		resourceSet.eAdapters().add(resourceAddedAdapter);
-				
-		for(String f: files) {
-			Resource r = loadResource(f, resourceSet, logger);
-			resources.add(r);
-		}
+		
+		IModelPath mp = createModelPath(modelpath, logger);
+		resourceSet.getLoadOptions().putIfAbsent(ResourceSetModelPathProvider.LOAD_OPTION_MODELPATH, mp);
+		
+		List<Resource> resources = loadResources(files, resourceSet, logger);
 		
 		EcoreUtil.resolveAll(resourceSet);
 		
@@ -80,21 +86,83 @@ public class GeneratorResourceLoader implements IGeneratorResourceLoader {
 		}
 	}
 	
-	private Resource loadResource(String file, ResourceSet rs, ILogger logger) {
-		try {
-			URI uri = createURI(file);
-			return rs.getResource(uri, true);
+	private List<Resource> loadResources(List<String> files, ResourceSet resourceSet, ILogger logger) {
+		List<Resource> resources = new ArrayList<>(files.size());
+		for(String f: files) {
+			Resource r = loadResource(f, resourceSet, logger);
+			resources.add(r);
 		}
-		catch(RuntimeException | IOException e) {
-			logger.logError("couldn't load file " + file + "; " + e.getMessage());
-			throw new GeneratorException(e);
+		return resources;
+	}
+	
+	private Resource loadResource(String file, ResourceSet rs, ILogger logger) {
+		Path normalizedPath = Paths.get(file).normalize();
+		if(Files.exists(normalizedPath)) {
+			Path realPath = toRealPath(normalizedPath);
+			URI uri = createURI(realPath);
+			try {
+				return rs.getResource(uri, true);
+			}
+			catch(RuntimeException e) {
+				logger.logError("could not load file " + file + "; " + e.getMessage());
+				throw new GeneratorException(e);
+			}
+		}
+		else {
+			logger.logError("could not find file " + file);
+			throw new GeneratorException();
 		}
 	}
 	
-	protected URI createURI(String file) throws IOException {
-		String realPath = Paths.get(file).toRealPath().toString();
-		URI uri = URI.createFileURI(realPath);
-		return uri;
+	private IModelPath createModelPath(List<String> pathStrings, ILogger logger) {
+		ArrayList<Path> paths = new ArrayList<>(pathStrings.size());
+		for(String pathString: pathStrings) {
+			Path path = Paths.get(pathString).normalize();
+			if(Files.exists(path)) {
+				Path realPath = toRealPath(path);
+				if(Files.isDirectory(realPath)) {
+					paths.add(realPath);
+				}
+				else if(Files.isRegularFile(realPath)) {
+					FileSystem fileSystem = getFileSystem(realPath, logger);
+					for(Path rootDir: fileSystem.getRootDirectories()) {
+						paths.add(rootDir);
+					}
+				}
+			}
+			else {
+				logger.logWarning("could not find modelpath entry " + pathString);
+			}
+		}
+		
+		FileSystemModelPath modelpath = new FileSystemModelPath(paths);
+		return modelpath;
+	}
+	
+	private FileSystem getFileSystem(Path path, ILogger logger) {
+		try {
+			return FileSystems.newFileSystem(path, null);
+		}
+		catch(ProviderNotFoundException e) {
+			logger.logError("could not read modelpath entry " + path.toString());
+			throw new GeneratorException(e);
+		}
+		catch(IOException e) {
+			throw new UncheckedIOException(e);
+		}
+	}
+	
+	protected URI createURI(Path path) {
+		return URI.createURI(path.toUri().toString());
+	}
+		
+	private Path toRealPath(Path path, LinkOption... options) {
+		try {
+			return path.toRealPath(options);
+		}
+		catch(IOException e) {
+			throw new UncheckedIOException(e);
+		}
 	}
 	
 	private class ResourceAddedAdapter extends AdapterImpl {

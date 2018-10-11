@@ -29,13 +29,7 @@ import com.google.inject.Binder;
 public class ETPhysRuntimeModule extends org.eclipse.etrice.core.etphys.AbstractETPhysRuntimeModule {
 
 	@SuppressWarnings("restriction")
-	@Override
-	public void configureIScopeProviderDelegate(Binder binder) {
-		binder.bind(org.eclipse.xtext.scoping.IScopeProvider.class)
-				.annotatedWith(
-						com.google.inject.name.Names
-								.named(org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider.NAMED_DELEGATE))
-				.to(org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider.class);
+	public void configureITransientValueService(Binder binder) {
 		binder.bind(org.eclipse.xtext.serializer.sequencer.ITransientValueService.class).to(
 				ETPhysTransientValueService.class);
 	}

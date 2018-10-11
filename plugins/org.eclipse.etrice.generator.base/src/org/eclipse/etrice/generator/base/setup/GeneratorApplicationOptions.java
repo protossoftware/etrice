@@ -39,6 +39,13 @@ public class GeneratorApplicationOptions implements IOptionModule {
 			"input files for the generator",
 			new String[0]);
 	
+	public static final StringArrayOption MODELPATH = new StringArrayOption(
+			GROUP_APPLICATION,
+			"modelpath",
+			"paths",
+			"model imported paths separated by ';'",
+			new String[0]);
+	
 	public static final BooleanOption HELP = new BooleanOption(
 			GROUP_APPLICATION,
 			"help",
@@ -87,6 +94,7 @@ public class GeneratorApplicationOptions implements IOptionModule {
 	@Override
 	public void configure(List<Option<?>> options) {
 		options.add(FILES);
+		options.add(MODELPATH);
 		options.add(HELP);
 		options.add(GEN_INCREMENTAL);
 		options.add(GEN_DIR);

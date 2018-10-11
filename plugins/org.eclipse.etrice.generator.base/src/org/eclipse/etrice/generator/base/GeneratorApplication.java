@@ -207,7 +207,8 @@ public class GeneratorApplication {
 
 	private List<Resource> load(Arguments arguments, Logger logger) {
 		List<String> files = Arrays.asList(arguments.get(GeneratorApplicationOptions.FILES));
-		return resourceLoader.load(files, arguments, logger);
+		List<String> modelpath = Arrays.asList(arguments.get(GeneratorApplicationOptions.MODELPATH));
+		return resourceLoader.load(files, modelpath, arguments, logger);
 	}
 
 	private void validate(List<Resource> models, Arguments arguments, Logger logger) {

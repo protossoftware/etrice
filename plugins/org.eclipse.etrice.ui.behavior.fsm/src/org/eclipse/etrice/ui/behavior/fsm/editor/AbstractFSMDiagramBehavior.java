@@ -15,6 +15,7 @@
 package org.eclipse.etrice.ui.behavior.fsm.editor;
 
 import org.eclipse.etrice.ui.common.base.editor.CustomDiagramBehavior;
+import org.eclipse.etrice.ui.common.base.editor.CustomUpdateBehavior;
 import org.eclipse.gef.EditPart;
 import org.eclipse.graphiti.ui.editor.DefaultRefreshBehavior;
 import org.eclipse.graphiti.ui.editor.DefaultUpdateBehavior;
@@ -75,7 +76,7 @@ public class AbstractFSMDiagramBehavior extends CustomDiagramBehavior {
 		return new RefreshBehavior(this);
 	}
 	
-	static class UpdateBehavior extends DefaultUpdateBehavior {
+	static class UpdateBehavior extends CustomUpdateBehavior {
 		public UpdateBehavior(DiagramBehavior diagramBehavior) {
 			super(diagramBehavior);
 		}

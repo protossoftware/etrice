@@ -4,4 +4,6 @@ dependencies {
 	compile "org.eclipse.platform:org.eclipse.core.resources:$versions.core_resources"
 	compile "org.eclipse.xtext:org.eclipse.xtext:$versions.xtext"
 	compile "com.google.guava:guava:$versions.guava"
+	
+	compile project(':plugins:org.eclipse.etrice.generator.base')
 }
