@@ -50,27 +50,30 @@ public class GeneratorResourceValidator implements IGeneratorResourceValidator {
 	public void validate(List<Resource> resources, Arguments arguments, ILogger logger) throws GeneratorException {
 		int errors = 0;
 		int warnings = 0;
+		
 		for (Resource resource : resources) {
 			List<Issue> list = resourceValidator.validate(resource, CheckMode.ALL, CancelIndicator.NullImpl);
-			if (!list.isEmpty()) {
-				for (Issue issue : list) {
-					if (issue.getSeverity() == Severity.ERROR) {
-						++errors;
-						logger.logError(issue.toString());
-					}
-					else if(issue.getSeverity() == Severity.WARNING) {
-						++warnings;
-						logger.logWarning(issue.toString());
-					}
-					else {
-						logger.logInfo(issue.toString());
-					}
+			
+			for (Issue issue : list) {
+				if (issue.getSeverity() == Severity.ERROR) {
+					++errors;
+					logger.logError(issue.toString());
+				}
+				else if(issue.getSeverity() == Severity.WARNING) {
+					++warnings;
+					logger.logWarning(issue.toString());
+				}
+				else {
+					logger.logInfo(issue.toString());
 				}
 			}
 		}
-		logger.logInfo("validation finished with " + errors + " errors and " + warnings + " warnings");
 		
-		if (errors > 0) {
+		if(warnings > 0) {
+			logger.logWarning(warnings + " warnings");
+		}
+		if(errors > 0) {
+			logger.logError(errors + " errors");
 			throw new GeneratorException("validation failed");
 		}
 	}

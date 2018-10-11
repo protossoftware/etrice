@@ -15,16 +15,13 @@
 
 package org.eclipse.etrice.generator.base.args;
 
-import java.util.List;
-
-public class StringListOption extends Option<List<String>> {
+public class StringArrayOption extends Option<String[]> {
 	
 	/**
 	 * @see Option#Option
 	 */
-	@SuppressWarnings("unchecked")
-	public StringListOption(String group, String name, String argumentName, String description, List<String> defaultValue) {
-		super((Class<List<String>>)(Class<?>) List.class, group, name, argumentName, description, defaultValue);
+	public StringArrayOption(String group, String name, String argumentName, String description, String[] defaultValue) {
+		super(String[].class, group, name, argumentName, description, defaultValue);
 	}
 	
 }

@@ -17,6 +17,7 @@ package org.eclipse.etrice.generator.base;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.Arrays;
 import java.util.List;
 
 import org.eclipse.emf.ecore.resource.Resource;
@@ -205,7 +206,7 @@ public class GeneratorApplication {
 	}
 
 	private List<Resource> load(Arguments arguments, Logger logger) {
-		List<String> files = arguments.get(GeneratorApplicationOptions.FILES);
+		List<String> files = Arrays.asList(arguments.get(GeneratorApplicationOptions.FILES));
 		return resourceLoader.load(files, arguments, logger);
 	}
 
@@ -226,8 +227,8 @@ public class GeneratorApplication {
 	}
 	
 	private void logArguments(Arguments arguments, GeneratorFileIO fileIO, Logger logger) {
-		logger.logDebug("Arguments: " + arguments);
-		logger.logDebug("Output directory: " + fileIO.getOutputDirectory().toAbsolutePath());
+		logger.logDebug("arguments: " + arguments);
+		logger.logDebug("output directory: " + fileIO.getOutputDirectory().toAbsolutePath());
 	}
 	
 	private void logException(Exception e, Logger logger) {

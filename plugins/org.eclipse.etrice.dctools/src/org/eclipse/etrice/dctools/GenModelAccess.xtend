@@ -23,10 +23,14 @@ import org.eclipse.etrice.core.genmodel.fsm.NullDiagnostician
 
 class GenModelAccess {
 	
-	@Inject
 	private ExtendedFsmGenBuilderFactory fsmGenBuilderFactory
 	
 	Map<ModelComponent, GraphContainer> cache = newHashMap
+	
+	@Inject
+	new(ExtendedFsmGenBuilderFactory fsmGenBuilderFactory) {
+		this.fsmGenBuilderFactory = fsmGenBuilderFactory
+	}
 	
 	def public clearCache() {
 		cache.clear

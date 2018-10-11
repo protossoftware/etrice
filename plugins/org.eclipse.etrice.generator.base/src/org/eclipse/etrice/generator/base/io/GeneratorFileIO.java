@@ -116,26 +116,25 @@ public class GeneratorFileIO implements IGeneratorFileIO {
 	
 	@Override
 	public void generateFile(String file, CharSequence content) {
+		generateFile("generating file", file, content);
+	}
+
+	@Override
+	public void generateFile(String desc, String file, CharSequence content) {
 		Path path = getPath(file);
 		String contentStr = content.toString();
 		long checksum = getContentChecksum(contentStr);
 		
 		if(!isUnchanged(path, checksum)) {
-			logger.logDebug("writing file " + path);
+			logger.logInfo(desc + " " + file);
 			writeFile(path, contentStr);
 			setChecksumAttribute(path, checksum);
 		}
 		else {
-			logger.logDebug("file unchanged " + path);
+			logger.logInfo(desc + " (unchanged) " + file);
 		}
 		
 		generatedFiles.add(path);
-	}
-
-	@Override
-	public void generateFile(String desc, String file, CharSequence content) {
-		logger.logInfo(desc + " " + file);
-		generateFile(file, content);
 	}
 	
 	/**

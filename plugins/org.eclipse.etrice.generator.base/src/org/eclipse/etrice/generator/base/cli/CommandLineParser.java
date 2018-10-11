@@ -15,7 +15,6 @@
 
 package org.eclipse.etrice.generator.base.cli;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
@@ -23,7 +22,7 @@ import java.util.ListIterator;
 import org.eclipse.etrice.generator.base.args.Arguments;
 import org.eclipse.etrice.generator.base.args.Option;
 import org.eclipse.etrice.generator.base.args.Options;
-import org.eclipse.etrice.generator.base.args.StringListOption;
+import org.eclipse.etrice.generator.base.args.StringArrayOption;
 
 /**
  * Simple implementation of a command line parser.
@@ -40,11 +39,11 @@ public class CommandLineParser implements ICommandLineParser {
 	}
 	
 	@Override
-	public Arguments parseArgs(Options options, StringListOption defaultOption, List<String> args) throws CommandLineParseException {
+	public Arguments parseArgs(Options options, StringArrayOption defaultOption, List<String> args) throws CommandLineParseException {
 		Arguments parsedArgs = new Arguments(options);
 		List<String> nArgs = normalize(args);
 		ListIterator<String> iterator = nArgs.listIterator();
-		ArrayList<String> defaultArgs = new ArrayList<>();
+		LinkedList<String> defaultArgs = new LinkedList<>();
 		
 		while(iterator.hasNext()) {
 			String str = iterator.next().trim();
@@ -59,7 +58,7 @@ public class CommandLineParser implements ICommandLineParser {
 		}
 		
 		if(!defaultArgs.isEmpty()) {
-			parsedArgs.set(defaultOption, defaultArgs);
+			parsedArgs.set(defaultOption, defaultArgs.toArray(new String[0]));
 		}
 		
 		return parsedArgs;
@@ -94,17 +93,18 @@ public class CommandLineParser implements ICommandLineParser {
 			if(type == String.class) {
 				return str;
 			}
+			else if(type == String[].class) {
+				String[] strArray = str.split(";");
+				return strArray;
+			}
 			else if(type.isEnum()) {
 				return parseEnum(opt, str);
 			}
-			else {
-				throw new CommandLineParseException("Option " + opt.getName() + " is not supported on the command line");
-			}
 			
+			throw new CommandLineParseException("Option " + opt.getName() + " is not supported on the command line");
 		}
-		else {
-			throw new CommandLineParseException("Expected one argument for option " + opt.getName());
-		}
+		
+		throw new CommandLineParseException("Expected one argument for option " + opt.getName());
 	}
 	
 	private Object parseEnum(Option<?> opt, String str) {

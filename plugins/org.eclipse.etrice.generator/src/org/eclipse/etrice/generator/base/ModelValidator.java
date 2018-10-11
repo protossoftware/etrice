@@ -51,7 +51,7 @@ public class ModelValidator extends GeneratorResourceValidator {
 			super.validate(resources, arguments, logger);
 		}
 		catch(Exception e) {
-			logger.logError("validation failed");
+			logger.logInfo("validation failed");
 			logger.logInfo("-- terminating");
 			throw e;
 		}

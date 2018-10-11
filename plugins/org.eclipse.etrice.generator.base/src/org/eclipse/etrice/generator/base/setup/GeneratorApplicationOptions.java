@@ -15,14 +15,13 @@
 
 package org.eclipse.etrice.generator.base.setup;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.etrice.generator.base.args.BooleanOption;
 import org.eclipse.etrice.generator.base.args.EnumOption;
 import org.eclipse.etrice.generator.base.args.IOptionModule;
 import org.eclipse.etrice.generator.base.args.Option;
-import org.eclipse.etrice.generator.base.args.StringListOption;
+import org.eclipse.etrice.generator.base.args.StringArrayOption;
 import org.eclipse.etrice.generator.base.args.StringOption;
 import org.eclipse.etrice.generator.base.logging.Loglevel;
 
@@ -33,12 +32,12 @@ public class GeneratorApplicationOptions implements IOptionModule {
 
 	public static final String GROUP_APPLICATION = "application";
 	
-	public static final StringListOption FILES = new StringListOption(
+	public static final StringArrayOption FILES = new StringArrayOption(
 			GROUP_APPLICATION,
 			"files",
 			"input files",
 			"input files for the generator",
-			new ArrayList<>());
+			new String[0]);
 	
 	public static final BooleanOption HELP = new BooleanOption(
 			GROUP_APPLICATION,
