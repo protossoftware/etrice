@@ -14,6 +14,7 @@ scmVersion {
 		prefix = 'v'
 		versionSeparator = '_'
 	}
+	versionIncrementer 'incrementPrerelease'
     versionCreator 'versionWithBranch'
 //	localOnly = false
   	checks { 
