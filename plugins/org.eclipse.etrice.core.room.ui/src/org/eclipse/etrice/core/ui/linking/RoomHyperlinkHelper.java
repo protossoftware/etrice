@@ -21,8 +21,8 @@ import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.RefSegment;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.core.services.RoomGrammarAccess;
-import org.eclipse.etrice.dctools.ast.DCUtil;
-import org.eclipse.etrice.dctools.ast.DCUtil.FindResult;
+import org.eclipse.etrice.core.ui.util.UIExpressionUtil;
+import org.eclipse.etrice.expressions.detailcode.IDetailExpressionProvider.ExpressionFeature;
 import org.eclipse.jface.text.Region;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.RuleCall;
@@ -42,7 +42,6 @@ public class RoomHyperlinkHelper extends ImportAwareHyperlinkHelper {
 
 	@Inject private RoomGrammarAccess grammar;
 	@Inject private RoomHelpers roomHelpers;
-	@Inject private DCUtil util;
 	
 	@Override
 	public void createHyperlinksByOffset(XtextResource resource, int offset, IHyperlinkAcceptor acceptor) {
@@ -68,16 +67,12 @@ public class RoomHyperlinkHelper extends ImportAwareHyperlinkHelper {
 				}
 			}
 			
-			if (leaf.getGrammarElement() instanceof RuleCall) {
-				if (((RuleCall) leaf.getGrammarElement()).getRule() == grammar.getCC_STRINGRule()
-						&& leaf.getSemanticElement() instanceof DetailCode) {
-					// System.out.println("RoomHyperlinkHelper at offset " + offset + " " + leaf.getOffset() + " " + leaf.getText().substring(offset - leaf.getOffset()));
-					FindResult result = util.findAtOffset(leaf, offset);
-					if (result != null) {
-						// int begin = result.getBegin();
-						// System.out.println("RoomHyperlinkHelper hit " + (leaf.getOffset() + result.getBegin()) +" " + result.getLength() + " " + leaf.getText().substring(begin, begin + result.getLength()));
-						Region region = new Region(leaf.getOffset() + result.getBegin(), result.getLength());
-						createHyperlinksTo(resource, region, result.getObject(), acceptor);
+			if(leaf.getGrammarElement() instanceof RuleCall) {
+				if(((RuleCall) leaf.getGrammarElement()).getRule() == grammar.getCC_STRINGRule() && leaf.getSemanticElement() instanceof DetailCode) {
+					ExpressionFeature exprFeature = UIExpressionUtil.findAtOffset(leaf, offset);
+					if(exprFeature != null && exprFeature.getData() instanceof EObject) {
+						Region region = new Region(leaf.getOffset(), leaf.getLength());
+						createHyperlinksTo(resource, region, (EObject) exprFeature.getData(), acceptor);
 					}
 				}
 			}
@@ -90,13 +85,12 @@ public class RoomHyperlinkHelper extends ImportAwareHyperlinkHelper {
 		ActorContainerClass lastAcContainer = roomHelpers.getParentContainer(aim);
 		ActorRef lastRef = null;
 		for (RefSegment ref : aim.getPath().getRefs()) {
-			for (ActorRef r : lastAcContainer.getActorRefs()) {
+			for (ActorRef r : lastAcContainer.getActorRefs())
 				if (r.getName().equals(ref.getRef())) {
 					lastRef = r;
 					lastAcContainer = lastRef.getType();
 					break;
 				}
-			}
 		}
 
 		return lastRef;
