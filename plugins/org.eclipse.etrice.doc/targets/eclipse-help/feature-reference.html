@@ -651,7 +651,7 @@
 	<span class="comment">// explicit: eventdriven ProtocolClass EventdrivenProtocolClass {
 </span>	<span class="keyword">incoming</span> {
 		<span class="keyword">Message</span> msg1() [<span class="string">"message without data"</span>]
-		<span class="keyword">Message</span> msg2(data: int32) [<span class="string">"message with data"</span>]
+		<span class="keyword">Message</span> msg2(int32) [<span class="string">"message with data"</span>]
 	}
 	<span class="keyword">outgoing</span> {
 		<span class="keyword">Message</span> msg4()  [<span class="string">"eventdriven ProtocolClass can have message into two directions"</span>]
@@ -660,7 +660,7 @@
 
 <span class="keyword">datadriven</span> <span class="keyword">ProtocolClass</span> DatadrivenProtocolClass {
 	<span class="keyword">incoming</span> {
-		<span class="keyword">Message</span> signal1 (data: int32) [<span class="string">"a datadriven message needs data"</span>]
+		<span class="keyword">Message</span> signal1 (int32) [<span class="string">"a datadriven message needs data"</span>]
 	}
 	<span class="comment">// datadriven ProtocolClass can only have incoming messages (signals)
 </span>}
@@ -1404,11 +1404,11 @@
 <p>A ProtocolClass provides a reusable interface specification for ports. It defines a set of incoming and outgoing Messages that can be exchanged between two ports.<br>The exact semantics of a message is defined by the CommunicationType.<br>Protocol classes have only textual notation.</p>
 <pre><code class="room customHighlighted"><span class="keyword">ProtocolClass</span> SimpleProtocolClass {
 	<span class="keyword">incoming</span> {
-		<span class="keyword">Message</span> msg1(data: int32}
+		<span class="keyword">Message</span> msg1(int32}
 		<span class="keyword">Message</span> msg2()
 	}
 	<span class="keyword">outgoing</span> {
-		<span class="keyword">Message</span> msg3(data: DataClass1}
+		<span class="keyword">Message</span> msg3(DataClass1}
 		<span class="keyword">Message</span> msg4()
 	}
 }
@@ -1480,13 +1480,13 @@
 </span>	<span class="keyword">incoming</span> {
 		<span class="comment">// incoming means incoming for a regular port and outgoing for a conjugated port
 </span>		<span class="keyword">Message</span> message1() <span class="comment">// message without data
-</span>		<span class="keyword">Message</span> message2(data: int32) <span class="comment">// message with simple data
-</span>		<span class="keyword">Message</span> message3(data: DMessageData) <span class="comment">// message with complex data (DataClass)
+</span>		<span class="keyword">Message</span> message2(int32) <span class="comment">// message with simple data
+</span>		<span class="keyword">Message</span> message3(DMessageData) <span class="comment">// message with complex data (DataClass)
 </span>
 	}
 	<span class="keyword">outgoing</span> {
 	<span class="comment">// outgoing means outgoing for a regular port and incoming for a conjugated port
-</span>		<span class="keyword">Message</span> message1(data: int32) <span class="comment">// incoming and outgoing Messages can have the same name to enable symmetric protocols
+</span>		<span class="keyword">Message</span> message1(int32) <span class="comment">// incoming and outgoing Messages can have the same name to enable symmetric protocols
 </span>	}
 }
 
@@ -1500,9 +1500,9 @@
 </span><span class="keyword">datadriven</span> <span class="keyword">ProtocolClass</span> ProtocolClassData {
 	<span class="keyword">incoming</span> {
 		<span class="comment">// incoming means incoming for a regular port and outgoing for a conjugated port
-</span>		<span class="keyword">Message</span> value1(value: int32) <span class="comment">// a datadriven message (signal) always needs data
-</span>		<span class="keyword">Message</span> value2(value: int16) <span class="comment">// datadriven message with simple data
-</span>		<span class="keyword">Message</span> value3(value: DMessageData) <span class="comment">// datadriven message with complex data (DataClass)
+</span>		<span class="keyword">Message</span> value1(int32) <span class="comment">// a datadriven message (signal) always needs data
+</span>		<span class="keyword">Message</span> value2(int16) <span class="comment">// datadriven message with simple data
+</span>		<span class="keyword">Message</span> value3(DMessageData) <span class="comment">// datadriven message with complex data (DataClass)
 </span>
 	}
 	<span class="comment">// no outgoing messages for datadriven ports allowed 

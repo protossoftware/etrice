@@ -797,7 +797,7 @@ ProtocolClass EventdrivenProtocolClass1 [ "default is eventdriven" ] {
 	// explicit: eventdriven ProtocolClass EventdrivenProtocolClass {
 	incoming {
 		Message msg1() ["message without data"]
-		Message msg2(data: int32) ["message with data"]
+		Message msg2(int32) ["message with data"]
 	}
 	outgoing {
 		Message msg4()  ["eventdriven ProtocolClass can have message into two directions"]
@@ -806,7 +806,7 @@ ProtocolClass EventdrivenProtocolClass1 [ "default is eventdriven" ] {
 
 datadriven ProtocolClass DatadrivenProtocolClass {
 	incoming {
-		Message signal1 (data: int32) ["a datadriven message needs data"]
+		Message signal1 (int32) ["a datadriven message needs data"]
 	}
 	// datadriven ProtocolClass can only have incoming messages (signals)
 }
@@ -1771,11 +1771,11 @@ Protocol classes have only textual notation.
 ```room
 ProtocolClass SimpleProtocolClass {
 	incoming {
-		Message msg1(data: int32}
+		Message msg1(int32}
 		Message msg2()
 	}
 	outgoing {
-		Message msg3(data: DataClass1}
+		Message msg3(DataClass1}
 		Message msg4()
 	}
 }
@@ -1862,13 +1862,13 @@ eventdriven ProtocolClass ProtocolClassEvt {
 	incoming {
 		// incoming means incoming for a regular port and outgoing for a conjugated port
 		Message message1() // message without data
-		Message message2(data: int32) // message with simple data
-		Message message3(data: DMessageData) // message with complex data (DataClass)
+		Message message2(int32) // message with simple data
+		Message message3(DMessageData) // message with complex data (DataClass)
 
 	}
 	outgoing {
 	// outgoing means outgoing for a regular port and incoming for a conjugated port
-		Message message1(data: int32) // incoming and outgoing Messages can have the same name to enable symmetric protocols
+		Message message1(int32) // incoming and outgoing Messages can have the same name to enable symmetric protocols
 	}
 }
 
@@ -1882,9 +1882,9 @@ DataClass DMessageData {
 datadriven ProtocolClass ProtocolClassData {
 	incoming {
 		// incoming means incoming for a regular port and outgoing for a conjugated port
-		Message value1(value: int32) // a datadriven message (signal) always needs data
-		Message value2(value: int16) // datadriven message with simple data
-		Message value3(value: DMessageData) // datadriven message with complex data (DataClass)
+		Message value1(int32) // a datadriven message (signal) always needs data
+		Message value2(int16) // datadriven message with simple data
+		Message value3(DMessageData) // datadriven message with complex data (DataClass)
 
 	}
 	// no outgoing messages for datadriven ports allowed 
@@ -3117,20 +3117,6 @@ The MSCLogging is activated by default, but can be set manually in the [Generati
 
 
 
-[CCodeGenerator]: #ccodegenerator
-[JavaCodeGenerator]: #javacodegenerator
-[CPPCodeGenerator]: #cppcodegenerator
-[GenerationOptions]: #generationoptions
-[MSCLogging]: #msclogging
-[DataLogging]: #datalogging
-[TextualROOMEditor]: #textualroomeditor
-[OutlineView]: #outlineview
-[GraphicalBehaviorEditor]: #graphicalbehavioreditor
-[GraphicalStructureEditor]: #graphicalstructureeditor
-[StructureEditorPalette]: #structureeditorpalette
-[ActorRefPropertyDialog]: #actorrefpropertydialog
-[PortPropertyDialog]: #portpropertydialog
-[SPPPropertyDialog]: #spppropertydialog
 [AnnotationType]: #annotationtype
 [Annotation]: #annotation
 [Inheritance]: #inheritance
@@ -3164,3 +3150,17 @@ The MSCLogging is activated by default, but can be set manually in the [Generati
 [SAP]: #sap
 [ServiceImplementation]: #serviceimplementation
 [SPP]: #spp
+[TextualROOMEditor]: #textualroomeditor
+[OutlineView]: #outlineview
+[GraphicalBehaviorEditor]: #graphicalbehavioreditor
+[GraphicalStructureEditor]: #graphicalstructureeditor
+[StructureEditorPalette]: #structureeditorpalette
+[ActorRefPropertyDialog]: #actorrefpropertydialog
+[PortPropertyDialog]: #portpropertydialog
+[SPPPropertyDialog]: #spppropertydialog
+[CCodeGenerator]: #ccodegenerator
+[JavaCodeGenerator]: #javacodegenerator
+[CPPCodeGenerator]: #cppcodegenerator
+[GenerationOptions]: #generationoptions
+[MSCLogging]: #msclogging
+[DataLogging]: #datalogging

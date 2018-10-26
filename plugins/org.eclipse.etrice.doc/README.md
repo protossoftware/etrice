@@ -6,6 +6,7 @@ eTrice documentation + help
 
 - Featurizer (Download from Bitbucket and install)
 - Stagen (Download .jar from Bitbucket and put it to folder */xternalLibs*, **Java 8 **)
+- saxon9he.jar (in folder */xternalLibs*)
 
 ## Project Structure
 
@@ -35,6 +36,17 @@ All artifacts are automatically generated to folder */feature-gen* on change. *m
 
 - *feature-reference.md* to folder */online-doc/content*
 - else to folder */targets*
+
+### Build
+
+To build the documentation there are two use cases:
+
+- incremental build during editing of the *.md sources. To do so run-online-doc has to be executed. It starts a background
+process which never terminates (when finished kill the Java process using the Windows Task Manager)
+- one time build e.g. after pulling the repo. To do so launch make-doc
+
+*Note:* In both cases the featurizer should have generated so that its generated code in folder "feature-gen" is available.
+To force a re-generation open a *.featurizer file, make a change and save.
 
 ### Online Help Site
 
