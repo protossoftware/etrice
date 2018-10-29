@@ -27,5 +27,12 @@ class BaseTokenTypeToPartitionMapper extends TerminalsTokenTypeToPartitionMapper
 			default: super.calculateId(tokenName, tokenType)
 		}
 	}
+	
+	override getSupportedPartitionTypes() {
+		<String>newArrayList => [
+			it += super.getSupportedPartitionTypes() 
+			it += CCSTRING_LITERAL_PARTITION
+		]
+	}
 
 }
