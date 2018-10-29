@@ -8,16 +8,10 @@ publishing {
 	}
 	repositories {
 		maven {
-			name 'snapshots'
-			url 'https://repo.eclipse.org/content/repositories/etrice-snapshots'
-			credentials {
-				username project.properties.eclipseRepoUsername
-				password project.properties.eclipseRepoPassword
-			}
-		}
-		maven {
-			name 'releases'
-			url 'https://repo.eclipse.org/content/repositories/etrice-releases'
+			name 'eclipse'
+			def releaseRepoUrl = 'https://repo.eclipse.org/content/repositories/etrice-releases'
+            def snapshotRepoUrl = 'https://repo.eclipse.org/content/repositories/etrice-snapshots'
+            url = version.endsWith('SNAPSHOT') ? snapshotRepoUrl : releaseRepoUrl
 			credentials {
 				username project.properties.eclipseRepoUsername
 				password project.properties.eclipseRepoPassword
