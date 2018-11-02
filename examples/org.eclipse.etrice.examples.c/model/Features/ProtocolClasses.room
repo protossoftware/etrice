@@ -1,20 +1,22 @@
 RoomModel ProtocolClasses {
 
-	import room.basic.types.* from "../../../org.eclipse.etrice.modellib.c/model/Types.room"
+	import room.basic.types.* from "platform:/resource/org.eclipse.etrice.modellib.c/model/Types.room"
 
 	// eventdriven ProtocolClass (asynchronous message passing, bidirectional)
 	eventdriven ProtocolClass ProtocolClassEvt {
+
 		// ProtocolClass ProtocolClassEvt { // same like above because eventdriven is default 
 		incoming {
+
 			// incoming means incoming for a regular port and outging for a conjugated port
 			Message message1() // message without data
-			Message message2(data: int32) // message with simple data
-			Message message3(data: DMessageData) // message with complex data (DataClass)
-
+			Message message2(int32) // message with simple data
+			Message message3(DMessageData) // message with complex data (DataClass)
 		}
 		outgoing {
-		// outgoing means outging for a regular port and incoming for a conjugated port
-			Message message1(data: int32) // incoming and outgoing Messages can have the same name to enable symmetric protocols
+
+			// outgoing means outging for a regular port and incoming for a conjugated port
+			Message message1(int32) // incoming and outgoing Messages can have the same name to enable symmetric protocols
 		}
 	}
 
@@ -27,24 +29,21 @@ RoomModel ProtocolClasses {
 	// datadriven ProtocolClass (asynchronous data flow, unidirectional)
 	datadriven ProtocolClass ProtocolClassData {
 		incoming {
+
 			// incoming means incoming for a regular port and outging for a conjugated port
-			Message value1(value: int32) // a datadriven message (signal) always needs data
-			Message value2(value: int16) // datadriven message with simple data
-			Message value3(value: DMessageData) // datadriven message with complex data (DataClass)
-
+			Message value1(int32) // a datadriven message (signal) always needs data
+			Message value2(int16) // datadriven message with simple data
+			Message value3(DMessageData) // datadriven message with complex data (DataClass)
 		}
-		// no outgoing messages for datadriven ports allowed 
-
+	// no outgoing messages for datadriven ports allowed 
 	}
-
-	// sync ProtocolClass (synchronous function calls, unidirectional)
-	// not implemented yet
-	//	sync ProtocolClass ProtocolClassSync {
-	//		incoming {
-	//			Message value1(value: int32) 		// a datadriven message (signal) always needs data
-	//			Message value2(value: int16)		// datadriven message with simple data
-	//			Message value3(value: DMessageData)	// datadriven message with complex data (DataClass)
-	//		}
-	//	}
-
+// sync ProtocolClass (synchronous function calls, unidirectional)
+// not implemented yet
+// sync ProtocolClass ProtocolClassSync {
+// incoming {
+// Message value1(value: int32) 		// a datadriven message (signal) always needs data
+// Message value2(value: int16)		// datadriven message with simple data
+// Message value3(value: DMessageData)	// datadriven message with complex data (DataClass)
+// }
+// }
 }

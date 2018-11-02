@@ -1,6 +1,6 @@
 RoomModel Multiplicity {
 
-	import room.basic.types.* from "../../../org.eclipse.etrice.modellib.c/model/Types.room"
+	import room.basic.types.* from "platform:/resource/org.eclipse.etrice.modellib.c/model/Types.room"
 
 	ActorClass ExampleMultiplicity {
 		Structure {
@@ -26,7 +26,8 @@ RoomModel Multiplicity {
 			Binding multiSender5.dataPort and multiReceiverMultiPort5.dataPort
 			Binding multiSender4.dataPort and multiReceiverMultiPort4.dataPort
 		}
-		Behavior { }
+		Behavior {
+		}
 	}
 
 	ActorClass Sender {
@@ -44,27 +45,24 @@ RoomModel Multiplicity {
 					triggers {
 						<receivedData: dataPort>
 					}
-					action {
-						"static int counter = 0;"
-						"counter++;"
-						"printf(\"%d: length=%d, buffer=%s\\n\", counter, data->length, data->buffer);"
-					}
+					action '''
+						static int counter = 0;
+						counter++;
+						printf("%d: length=%d, buffer=%s\n", counter, transitionData->length, transitionData->buffer);'''
 				}
 				Transition tr1: ReceivedData -> ReceivedData {
 					triggers {
 						<receivedData: dataPort>
 					}
-					action {
-						"static int counter = 0;"
-						"counter++;"
-						"printf(\"second receivedData: %d: length=%d, buffer=%s\\n\", counter, data->length, data->buffer);"
-					}
+					action '''
+						static int counter = 0;
+						counter++;
+						printf("second receivedData: %d: length=%d, buffer=%s\n", counter, transitionData->length, transitionData->buffer);'''
 				}
 				State SendData {
-					entry {
-						"DDataBuffer buf = {16, \"123456789012345\"};"
-						"dataPort.sendData(&buf);"
-					}
+					entry '''
+						DDataBuffer buf = {16, "123456789012345"};
+						dataPort.sendData(&buf);'''
 				}
 				State ReceivedData
 			}
@@ -85,10 +83,9 @@ RoomModel Multiplicity {
 					triggers {
 						<sendData: dataPort>
 					}
-					action {
-						"data->buffer[14] = \'x\';"
-						"dataPort.receivedData(data);"
-					}
+					action '''
+						transitionData->buffer[14] = 'x';
+						dataPort.receivedData(transitionData);'''
 				}
 				State Idle
 			}
@@ -109,11 +106,10 @@ RoomModel Multiplicity {
 					triggers {
 						<sendData: dataPort>
 					}
-					action {
-						"data->buffer[14] = \'x\';"
-						"dataPort[ifitem_index].receivedData(data);"
-						"dataPort.receivedData(data);"
-					}
+					action '''
+						transitionData->buffer[14] = 'x';
+						dataPort[ifitem_index].receivedData(transitionData);
+						dataPort.receivedData(transitionData);'''
 				}
 				State Idle
 			}
@@ -122,16 +118,15 @@ RoomModel Multiplicity {
 
 	ProtocolClass PSendData {
 		incoming {
-			Message sendData(data: DDataBuffer)
+			Message sendData(DDataBuffer)
 		}
 		outgoing {
-			Message receivedData(data: DDataBuffer)
+			Message receivedData(DDataBuffer)
 		}
 	}
 
 	DataClass DDataBuffer {
 		Attribute length: int16
-		Attribute buffer [ 16 ]: char
+		Attribute buffer [16]: char
 	}
-
 }

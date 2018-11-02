@@ -8,8 +8,8 @@
  */
 RoomModel PingPongModel {
 
-	import room.basic.types.* from "../../../org.eclipse.etrice.modellib.c/model/Types.room"
-	import room.basic.service.timing.* from "../../../org.eclipse.etrice.modellib.c/model/TimingService.room"
+	import room.basic.types.* from "platform:/resource/org.eclipse.etrice.modellib.c/model/Types.room"
+	import room.basic.service.timing.* from "platform:/resource//org.eclipse.etrice.modellib.c/model/TimingService.room"
 
 	LogicalSystem LogSys {
 		SubSystemRef subSystemRef: SubSysClass
@@ -25,17 +25,15 @@ RoomModel PingPongModel {
 	// - build your application from here
 	ActorClass TopActor {
 		Structure {
-			ActorRef sender : Sender
-			ActorRef receiver : Receiver
+			ActorRef sender: Sender
+			ActorRef receiver: Receiver
 			Binding sender.sendPort and receiver.recvPort
 		}
 		Behavior {
-
 		}
 	}
 
 	// - PingPong building kit
-
 	ActorClass Sender {
 		Interface {
 			conjugated Port sendPort: PingPongProtocol
@@ -52,9 +50,7 @@ RoomModel PingPongModel {
 					}
 				}
 				State sendingPing {
-					entry {
-						"sendPort.ping();"
-					}
+					entry '''sendPort.ping();'''
 				}
 				State receivedPong
 			}
@@ -84,14 +80,10 @@ RoomModel PingPongModel {
 				}
 				State waitingForPing
 				State receivedPing {
-					entry {
-						"timingService.startTimeout(500);"
-					}
+					entry '''timingService.startTimeout(500);'''
 				}
 				State sentPong {
-					entry {
-						"recvPort.pong();"
-					}
+					entry '''recvPort.pong();'''
 				}
 			}
 		}
@@ -105,5 +97,4 @@ RoomModel PingPongModel {
 			Message pong()
 		}
 	}
-
 }

@@ -1,8 +1,8 @@
 RoomModel TrafficLight {
 
-	import room.basic.service.timing.* from "../../../org.eclipse.etrice.modellib.c/model/TimingService.room"
-	import room.basic.service.tcp.* from "../../../org.eclipse.etrice.modellib.c/model/TcpService.room"
-	import room.basic.types.* from "../../../org.eclipse.etrice.modellib.c/model/Types.room"
+	import room.basic.service.timing.* from "platform:/resource//org.eclipse.etrice.modellib.c/model/TimingService.room"
+	import room.basic.service.tcp.* from "platform:/resource/org.eclipse.etrice.modellib.c/model/TcpService.room"
+	import room.basic.types.* from "platform:/resource/org.eclipse.etrice.modellib.c/model/Types.room"
 
 	ActorClass TestApplication ["The TestApplication contains the PedestrianTrafficLightController and its test harness."] {
 		Structure {
@@ -11,7 +11,8 @@ RoomModel TrafficLight {
 			Binding controllerTestHarness.fct and controller.fct
 			Binding controller.tlInterface and controllerTestHarness.tlInterface
 		}
-		Behavior { }
+		Behavior {
+		}
 	}
 
 	ActorClass SingleTrafficLight ["OneTrafficLight contains the PedestrianTrafficLightController which is connected via a SocketClient Actor to the traffic light GUI."] {
@@ -25,7 +26,8 @@ RoomModel TrafficLight {
 			Binding ref0.payload and tcpClient.payloadPort
 			Binding ref0.fct and controller.tlInterface
 		}
-		Behavior { }
+		Behavior {
+		}
 	}
 
 	ActorClass FlatReplication ["FlatReplication uses several replicated Actors in a row to control 2 traffic lights."] {
@@ -39,16 +41,18 @@ RoomModel TrafficLight {
 			Binding tlInterface.ctrl and tcpClient.controlPort
 			Binding tlInterface.payload and tcpClient.payloadPort
 		}
-		Behavior { }
+		Behavior {
+		}
 	}
 
 	ActorClass HierarchicalReplication ["HierarchicalReplication structural hierarchy to combine several actors and replicate them 'en bloc'. It controls 2 traffic lights."] {
 		Structure {
-			ActorRef controllerWithInfrastructure [2]: TrafficLightControllerWithInfrastructure ["This is replicated "]   
+			ActorRef controllerWithInfrastructure [2]: TrafficLightControllerWithInfrastructure ["This is replicated "]
 			ActorRef headquarters2: TrafficLightHeadquarters
 			Binding controllerWithInfrastructure.fct and headquarters2.controllers
 		}
-		Behavior { }
+		Behavior {
+		}
 	}
 
 	ActorClass TrafficLightControllerWithInfrastructure ["The TrafficLightControllerWithInfrastructure encapsulates the PedestrianTrafficLightController, the TrafficLightInterface and the SocketClient."] {
@@ -64,9 +68,9 @@ RoomModel TrafficLight {
 			Binding tlInterface.ctrl and tcpClient.controlPort
 			Binding tlInterface.payload and tcpClient.payloadPort
 		}
-		Behavior { }
+		Behavior {
+		}
 	}
-
 
 	ActorClass TrafficLightControllerTestHarness [
 	"Test harness for the TrafficLightController. It has the same ports, but conjugated. It can run test cases for the TrafficLightController by completely simulating its environment."
@@ -77,8 +81,8 @@ RoomModel TrafficLight {
 		}
 		Structure {
 			external Port fct
-			external Port tlInterface 
-			SAP to: PTimer  
+			external Port tlInterface
+			SAP to: PTimer
 			Attribute counter: int32 ["FEATURE: Attribute of an ActorClass"]
 		}
 		Behavior {
@@ -86,17 +90,15 @@ RoomModel TrafficLight {
 				Transition init: initial -> SetStandby
 				Transition tr0: SetStandby -> InStandby {
 					triggers {
-						<doneStandby: fct>
+						<connect: tlInterface>
 					}
-					action {
-						"counter=0;"
-					}
+					action '''
+						counter=0;
+						tlInterface.connected();'''
 				}
 				Transition tr1: InStandby -> SetStart {
 					triggers {
-						<setCarYellow: tlInterface guard {
-							"++counter==5"
-						}>
+						<setCarYellow: tlInterface guard '''++counter==5'''>
 					}
 				}
 				Transition tr2: SetStart -> InRunning {
@@ -106,9 +108,7 @@ RoomModel TrafficLight {
 				}
 				Transition tr3: InRunning -> CarGreen {
 					triggers {
-						<setCarGreen: tlInterface guard {
-							"status==1"
-						}>
+						<setCarGreen: tlInterface guard '''transitionData==1'''>
 					}
 				}
 				Transition tr4: CarGreen -> PressButton {
@@ -118,26 +118,18 @@ RoomModel TrafficLight {
 				}
 				Transition tr5: PressButton -> CarGreenAgain {
 					triggers {
-						<setCarGreen: tlInterface guard {
-							"status==1"
-						}>
+						<setCarGreen: tlInterface guard '''transitionData==1'''>
 					}
 				}
 				Transition tr6: CarGreenAgain -> CarYellow {
 					triggers {
-						<setCarYellow: tlInterface guard {
-							"status==1"
-						}>
+						<setCarYellow: tlInterface guard '''transitionData==1'''>
 					}
-					action {
-						"counter=0;"
-					}
+					action '''counter=0;'''
 				}
 				Transition tr7: CarYellow -> SetStop {
 					triggers {
-						<setPedRed: tlInterface guard {
-							"++counter==5"
-						}>
+						<setPedRed: tlInterface guard '''++counter==5'''>
 					}
 				}
 				Transition tr8: SetStop -> Done {
@@ -146,46 +138,51 @@ RoomModel TrafficLight {
 					}
 				}
 				State SetStandby {
-					entry {
-						"fct.standby(0); // dummy port not used"
-					}
+					entry '''fct.standby(0); // dummy port not used'''
 				}
-				State InStandby
+				State InStandby {
+					entry '''printf("InStandby\n");'''
+				}
 				State SetStart {
-					entry {
-						"fct.start();"
-					}
+					entry '''
+						fct.start();
+						printf("SetStart\n");'''
 				}
-				State InRunning
+				State InRunning {
+					entry '''printf("InRunning\n");'''
+				}
 				State CarGreen {
-					entry {
-						"to.startTimeout(1*10);"
-					}
+					entry '''
+						to.startTimeout(1*10);
+						printf("CarGreen\n");'''
 				}
 				State PressButton {
-					entry {
-						"tlInterface.pressedRequestButton();"
-					}
+					entry '''
+						tlInterface.pressedRequestButton();
+						printf("PressButton\n");'''
 				}
 				State CarGreenAgain {
-					entry {
-						"fct.standby(0); // dummy port"
-					}
+					entry '''
+						fct.standby(0); // dummy port
+						printf("CarGreenAgain\n");'''
 				}
-				State CarYellow
+				State CarYellow {
+					entry '''printf("CarYellow\n");'''
+				}
 				State SetStop {
-					entry {
-						"fct.stop();"
-					}
+					entry '''
+						fct.stop();
+						printf("SetStop\n");'''
 				}
-				State Done
+				State Done {
+					entry '''printf("Done\n");'''
+				}
 			}
 		}
 	}
 
 	ActorClass PedestrianTrafficLightController [
-	"Control of a traffic light at a pedestrian crossing with one car traffic light and one pedestrian traffic light." ]
-	{
+	"Control of a traffic light at a pedestrian crossing with one car traffic light and one pedestrian traffic light." ] {
 		Interface {
 			Port fct: PTrafficLightController
 			conjugated Port tlInterface: PTrafficLightInterface
@@ -199,18 +196,16 @@ RoomModel TrafficLight {
 		Behavior {
 			StateMachine {
 				Transition init: initial -> Stopped {
-					action {
-						"timeBase = 100;"
-					}
+					action '''timeBase = 100;'''
 				}
 				Transition tr0: Stopped -> Connecting {
 					triggers {
 						<standby: fct>
 					}
-					action {
-						"printf(\"ptlc: connecting to port %d\\n\", (int)port);"
-						"tlInterface.connect(port);"
-					}
+					action '''
+						printf("ptlc: connecting to port %d\n", (int)transitionData);
+						tlInterface.connect(transitionData);
+					'''
 				}
 				Transition tr1: Standby -> tpStart of Running {
 					triggers {
@@ -239,19 +234,16 @@ RoomModel TrafficLight {
 					}
 				}
 				State Stopped {
-					entry {
-						"tlInterface.setCarRed(0);"
-						"tlInterface.setCarYellow(0);"
-						"tlInterface.setCarGreen(0);"
-						"tlInterface.setPedRed(0);"
-						"tlInterface.setPedGreen(0);"
-						"fct.doneStop();"
-					}
+					entry '''
+						tlInterface.setCarRed(0);
+						tlInterface.setCarYellow(0);
+						tlInterface.setCarGreen(0);
+						tlInterface.setPedRed(0);
+						tlInterface.setPedGreen(0);
+						fct.doneStop();'''
 				}
 				State Standby {
-					entry {
-						"fct.doneStandby();"
-					}
+					entry '''fct.doneStandby();'''
 					subgraph {
 						Transition tr0: my tp0 -> On
 						Transition tr1: On -> Off {
@@ -266,43 +258,33 @@ RoomModel TrafficLight {
 						}
 						EntryPoint tp0
 						State On {
-							entry {
-								"// turn two lights on"
-								"tlInterface.setCarYellow(1);"
-								"tlInterface.setPedRed(1);"
-								""
-								"// start timeout (fire once) for blinking"
-								"// startTimer would start a cyclic timer"
-								"to.startTimeout(5*timeBase);"
-							}
-							exit {
-								"// TIP: turn off lights here in the exit code of state On instead of the entry code of state Off "
-								"// to make sure they are turned off if the superstate Standby is left by a group transition"
-								"tlInterface.setCarYellow(0);"
-								"tlInterface.setPedRed(0);"
-								""
-								"// TIP: kill timer here to make sure it is killed if the state is left by a group transition or any other transition than a timeout"
-								"// ALTERNATIVE: kill() could also be placed in the exit code of the superstate StandbyBlinking and so replacing the two calls in On:exit and Off:exit"
-								"to.kill();"
-							}
+							entry '''
+								// turn two lights on
+								tlInterface.setCarYellow(1);
+								tlInterface.setPedRed(1);
+								
+								// start timeout (fire once) for blinking
+								// startTimer would start a cyclic timer
+								to.startTimeout(5*timeBase);'''
+							exit '''
+								// TIP: turn off lights here in the exit code of state On instead of the entry code of state Off 
+								// to make sure they are turned off if the superstate Standby is left by a group transition
+								tlInterface.setCarYellow(0);
+								tlInterface.setPedRed(0);
+								
+								// TIP: kill timer here to make sure it is killed if the state is left by a group transition or any other transition than a timeout
+								// ALTERNATIVE: kill() could also be placed in the exit code of the superstate StandbyBlinking and so replacing the two calls in On:exit and Off:exit
+								to.kill();'''
 						}
 						State Off {
-							entry {
-								"to.startTimeout(5*timeBase);"
-							}
-							exit {
-								"to.kill();"
-							}
+							entry '''to.startTimeout(5*timeBase);'''
+							exit '''to.kill();'''
 						}
 					}
 				}
 				State Running {
-					entry {
-						"fct.doneStart();"
-					}
-					exit {
-						"to.kill();"
-					}
+					entry '''fct.doneStart();'''
+					exit '''to.kill();'''
 					subgraph {
 						Transition tr0: my tpStart -> AllRed
 						Transition tr1: AllRed -> CarRedYellow {
@@ -348,63 +330,55 @@ RoomModel TrafficLight {
 						EntryPoint tpStart
 						ExitPoint tpStandby
 						State AllRed {
-							entry {
-								"tlInterface.setCarRed(1);"
-								"tlInterface.setPedRed(1);"
-								"tlInterface.setPedGreen(0);"
-								""
-								"to.startTimeout(10*timeBase);"
-							}
+							entry '''
+								tlInterface.setCarRed(1);
+								tlInterface.setPedRed(1);
+								tlInterface.setPedGreen(0);
+								
+								to.startTimeout(10*timeBase);'''
 						}
 						State CarYellow {
-							entry {
-								"tlInterface.setCarGreen(0);"
-								"tlInterface.setCarYellow(1);"
-								"to.startTimeout(10*timeBase);"
-							}
+							entry '''
+								tlInterface.setCarGreen(0);
+								tlInterface.setCarYellow(1);
+								to.startTimeout(10*timeBase);'''
 						}
 						State CarGreen {
-							entry {
-								"tlInterface.setCarRed(0);"
-								"tlInterface.setCarYellow(0);"
-								"tlInterface.setCarGreen(1);"
-							}
+							entry '''
+								tlInterface.setCarRed(0);
+								tlInterface.setCarYellow(0);
+								tlInterface.setCarGreen(1);'''
 						}
 						State CarRed {
-							entry {
-								"tlInterface.setCarYellow(0);"
-								"tlInterface.setCarRed(1);"
-								"to.startTimeout(10*timeBase);"
-							}
+							entry '''
+								tlInterface.setCarYellow(0);
+								tlInterface.setCarRed(1);
+								to.startTimeout(10*timeBase);'''
 						}
 						State PedGreen {
-							entry {
-								"tlInterface.setPedRed(0);"
-								"tlInterface.setPedGreen(1);"
-								"to.startTimeout(20*timeBase);"
-							}
+							entry '''
+								tlInterface.setPedRed(0);
+								tlInterface.setPedGreen(1);
+								to.startTimeout(20*timeBase);'''
 						}
 						State CarYellowBeforeStandby {
-							entry {
-								"tlInterface.setCarGreen(0);"
-								"tlInterface.setCarYellow(1);"
-								"to.startTimeout(10*timeBase);"
-							}
+							entry '''
+								tlInterface.setCarGreen(0);
+								tlInterface.setCarYellow(1);
+								to.startTimeout(10*timeBase);'''
 						}
 						State CarRedYellow {
-							entry {
-								"tlInterface.setCarYellow(1);"
-								"to.startTimeout(10*timeBase);"
-							}
+							entry '''
+								tlInterface.setCarYellow(1);
+								to.startTimeout(10*timeBase);'''
 						}
 					}
 				}
 				State AllRedBeforeStandby {
-					entry {
-						"tlInterface.setCarRed(1);"
-						"tlInterface.setPedRed(1);"
-						"to.startTimeout(30*timeBase);"
-					}
+					entry '''
+						tlInterface.setCarRed(1);
+						tlInterface.setPedRed(1);
+						to.startTimeout(30*timeBase);'''
 				}
 				State Connecting
 			}
@@ -423,103 +397,85 @@ RoomModel TrafficLight {
 			external Port payload
 		}
 		Behavior {
-			Operation sendPayloadString(data: char ref){
-				"DTcpPayload package;"
-				"DTcpPayload_setAsString(&package, data);"
-				"payload.dataPackage(&package);"
-			}
-			Operation sendOnOffCommand(lightString: char ref, status: boolean){
-				"DTcpPayload package;"
-				"strcpy(package.data, lightString);"
-				"if (status==0){"
-				"	strcat(package.data, \"=off\\n\");"
-				"}"
-				"else {"
-				"	strcat(package.data, \"=on\\n\");"
-				"}"
-				"printf(\"package=%s\", package.data);"
-				"package.length = strlen(package.data);"
-				"payload_dataPackage(&package);"
-			}
+			Operation sendPayloadString(data: char ref) '''
+				DTcpPayload package;
+				DTcpPayload_setAsString(&package, data);
+				payload.dataPackage(&package);'''
+			Operation sendOnOffCommand(lightString: char ref, status: boolean) '''
+				DTcpPayload package;
+				strcpy(package.data, lightString);
+				if (status==0){
+					strcat(package.data, "=off\n");
+				}
+				else {
+					strcat(package.data, "=on\n");
+				}
+				printf("package=%s", package.data);
+				package.length = strlen(package.data);
+				payload_dataPackage(&package);'''
 			StateMachine {
 				Transition init: initial -> Disconnected
 				Transition tr0: Connected -> Connected {
 					triggers {
 						<setCarRed: fct>
 					}
-					action {
-						"sendOnOffCommand(\"setCarLightRed\", status);"
-					}
+					action '''sendOnOffCommand("setCarLightRed", transitionData);'''
 				}
 				Transition tr1: Connecting -> Connected {
 					triggers {
 						<connected: ctrl>
 					}
-					action {
-						"fct.connected();"
-					}
+					action '''fct.connected();'''
 				}
 				Transition tr2: Disconnected -> Connecting {
 					triggers {
 						<connect: fct>
 					}
-					action {
-						"printf(\"tli: connecting to port %d\\n\", (int)port);"
-						"DTcpControl config = {\"localhost\", port};"
-						"ctrl.connect(&config);"
-					}
+					action '''
+						printf("tli: connecting to port %d\n", (int)transitionData);
+						DTcpControl config = {"localhost", transitionData};
+						ctrl.connect(&config);'''
 				}
 				Transition tr3: Connected -> Connected {
 					triggers {
 						<setCarYellow: fct>
 					}
-					action {
-						"sendOnOffCommand(\"setCarLightYellow\", status);"
-					}
+					action '''sendOnOffCommand("setCarLightYellow", transitionData);'''
 				}
 				Transition tr4: Connected -> Connected {
 					triggers {
 						<setCarGreen: fct>
 					}
-					action {
-						"sendOnOffCommand(\"setCarLightGreen\", status);"
-					}
+					action '''sendOnOffCommand("setCarLightGreen", transitionData);'''
 				}
 				Transition tr5: Connected -> Connected {
 					triggers {
 						<setPedRed: fct>
 					}
-					action {
-						"sendOnOffCommand(\"setPedLightRed\", status);"
-					}
+					action '''sendOnOffCommand("setPedLightRed", transitionData);'''
 				}
 				Transition tr6: Connected -> Connected {
 					triggers {
 						<setPedGreen: fct>
 					}
-					action {
-						"sendOnOffCommand(\"setPedLightGreen\", status);"
-					}
+					action '''sendOnOffCommand("setPedLightGreen", transitionData);'''
 				}
 				Transition tr7: Connected -> Connected {
 					triggers {
 						<dataPackage: payload>
 					}
-					action {
-						"char *pressedRequestButtonString = {\"pressedRequestButton\\n\"};"
-						"int32 len = strlen(pressedRequestButtonString);"
-						"if ( (data->length == len) && memcmp(data->data, \"pressedRequestButton\", len)){"
-						"\tfct.pressedRequestButton();"
-						"}"
-					}
+					action '''
+						char *pressedRequestButtonString = {"pressedRequestButton\n"};
+						int32 len = strlen(pressedRequestButtonString);
+						if ( (transitionData->length == len) && memcmp(transitionData->data, "pressedRequestButton", len)){
+							fct.pressedRequestButton();
+						}'''
 				}
 				Transition tr8: Connected -> Connected {
 					triggers {
 						<setRequestButtonActive: fct>
 					}
-					action {
-						"sendOnOffCommand(\"setRequestButtonActive\", status);"
-					}
+					action '''sendOnOffCommand("setRequestButtonActive", transitionData);'''
 				}
 				State Connecting
 				State Connected
@@ -545,15 +501,12 @@ RoomModel TrafficLight {
 					}
 				}
 				State WaitingABit {
-					entry {
-						"to.startTimeout(80*10);"
-					}
+					entry '''to.startTimeout(80*10);'''
 				}
 				State PressButton {
-					entry {
-						"fct.pressedRequestButton();"
-						"fct.releasedRequestButton();"
-					}
+					entry '''
+						fct.pressedRequestButton();
+					'''
 				}
 			}
 		}
@@ -581,28 +534,24 @@ RoomModel TrafficLight {
 					}
 				}
 				State Standby {
-					entry {
-						"int n = PTrafficLightControllerReplPort_getReplication(&self->constData->controllers);"
-						"int i;"
-						""
-						"printf(\"hq: number of connections is %d\\n\", n);"
-						""
-						"for (i=0; i<n; ++i)"
-						"\tcontrollers[i].standby(4441+i);"
-						""
-						"to.startTimeout(200*10);"
-					}
+					entry '''
+						int n = PTrafficLightControllerReplPort_getReplication(&self->constData->controllers);
+						int i;
+						
+						printf("hq: number of connections is %d\n", n);
+						
+						for (i=0; i<n; ++i)
+							controllers[i].standby(4441+i);
+						
+						to.startTimeout(200*10);'''
 				}
 				State Running {
-					entry {
-						"controllers.start();"
-						"to.startTimeout(200*10);"
-					}
+					entry '''
+						controllers.start();
+						to.startTimeout(200*10);'''
 				}
 				State Stopped {
-					entry {
-						"controllers.stop();"
-					}
+					entry '''controllers.stop();'''
 				}
 			}
 		}
@@ -610,7 +559,7 @@ RoomModel TrafficLight {
 
 	ProtocolClass PTrafficLightController {
 		incoming {
-			Message standby(port: int32)
+			Message standby(int32)
 			Message start()
 			Message stop()
 		}
@@ -623,18 +572,17 @@ RoomModel TrafficLight {
 
 	ProtocolClass PTrafficLightInterface {
 		incoming {
-			Message connect(port: int32)
-			Message setCarRed(status: boolean)
-			Message setCarYellow(status: boolean)
-			Message setCarGreen(status: boolean)
-			Message setPedRed(status: boolean)
-			Message setPedGreen(status: boolean)
-			Message setRequestButtonActive(status: boolean)
+			Message connect(int32)
+			Message setCarRed(boolean)
+			Message setCarYellow(boolean)
+			Message setCarGreen(boolean)
+			Message setPedRed(boolean)
+			Message setPedGreen(boolean)
+			Message setRequestButtonActive(boolean)
 		}
 		outgoing {
 			Message connected()
 			Message pressedRequestButton()
 		}
 	}
-
 }

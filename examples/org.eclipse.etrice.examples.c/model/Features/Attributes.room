@@ -1,6 +1,6 @@
 RoomModel Attributes {
 
-	import room.basic.types.* from "../../../org.eclipse.etrice.modellib.c/model/Types.room"
+	import room.basic.types.* from "platform:/resource/org.eclipse.etrice.modellib.c/model/Types.room"
 
 	DataClass SimpleDataClass {
 		Attribute attribute1: int16
@@ -15,11 +15,10 @@ RoomModel Attributes {
 	DataClass DataClassWithAttributesAndOperations {
 		Attribute attribute1: uint32 [ "attribute of a PrimitiveType" ]
 		Attribute attribute2: SimpleDataClass [ "attribute of another DataClass" ]
-		
-		Operation operation1(par1: boolean): uint32 {
-			"// your operation code"
-			"return attribute1; // returning a member variable"
-		}
+
+		Operation operation1(par1: boolean): uint32 '''
+			// your operation code
+			return attribute1; // returning a member variable'''
 	}
 
 	ActorClass ActorClassWithAttributes {
@@ -29,38 +28,34 @@ RoomModel Attributes {
 		}
 	}
 
-	ActorClass ActorClassWithAttributesAndOperations{
+	ActorClass ActorClassWithAttributesAndOperations {
 
 		Structure {
 			Attribute attribute1: uint32 [ "attribute of a PrimitiveType" ]
 			Attribute attribute2: SimpleDataClass [ "attribute of a DataClass" ]
 		}
 		Behavior {
-			Operation operation1(par1: boolean): uint32 {
-				"// your operation code"
-				"return attribute1; // returning a member variable"
-			}
+			Operation operation1(par1: boolean): uint32 '''
+				// your operation code
+				return attribute1; // returning a member variable'''
 		}
 	}
-	
+
 	ActorClass ActorClassWithAttributes2 {
 		Structure {
-			Attribute arrayAttribute[8] : uint32 [ "attribute with multiplicity"]
-			Attribute refAttribue : voidType ref [ "attribute as a reference (void pointer)"]
+			Attribute arrayAttribute [8]: uint32 [ "attribute with multiplicity"]
+			Attribute refAttribue: voidType ref [ "attribute as a reference (void pointer)"]
 		}
 	}
-	
+
 	ActorClass ActorClassWithAttributeInitialization {
 		Structure {
 			Attribute attribute1: uint32 = "3"
 			Attribute attribute2: SimpleDataClass = "{1, 2}"
-			Attribute arrayAttribute[8] : uint32 = "0" // or {0,0,0, ...}
-			Attribute refAttribue : voidType ref = "NULL" // set reference in constructor or in state machine
+			Attribute arrayAttribute [8]: uint32 = "0" // or {0,0,0, ...}
+			Attribute refAttribue: voidType ref = "NULL" // set reference in constructor or in state machine
 		}
 	}
-	
-	
-	
 }
 
 	

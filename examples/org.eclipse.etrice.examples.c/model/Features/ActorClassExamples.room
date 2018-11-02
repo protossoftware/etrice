@@ -1,8 +1,7 @@
 RoomModel ActorClassExamples {
 
-	import room.basic.service.timing.* from "../../../org.eclipse.etrice.modellib.c/model/TimingService.room"
-
-	import room.basic.types.* from "../../../org.eclipse.etrice.modellib.c/model/Types.room"
+	import room.basic.service.timing.* from "platform:/resource//org.eclipse.etrice.modellib.c/model/TimingService.room"
+	import room.basic.types.* from "platform:/resource/org.eclipse.etrice.modellib.c/model/Types.room"
 
 	ActorClass SimpleActorClass {
 		Interface {
@@ -33,7 +32,8 @@ RoomModel ActorClassExamples {
 			external Port port2
 			external Port port1
 		}
-		Behavior { }
+		Behavior {
+		}
 	}
 
 	ActorClass ActorClass2 {
@@ -43,7 +43,8 @@ RoomModel ActorClassExamples {
 		Structure {
 			external Port port1
 		}
-		Behavior { }
+		Behavior {
+		}
 	}
 
 	ProtocolClass PSimpleProtocolClass {
@@ -54,5 +55,4 @@ RoomModel ActorClassExamples {
 			Message msg2()
 		}
 	}
-
 }

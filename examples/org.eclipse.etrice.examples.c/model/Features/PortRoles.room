@@ -1,12 +1,11 @@
 RoomModel PortRoles {
-	
+
 	// Port role distinction only
-		
 	ActorClass InternalEndPortExample {
 		Structure {
-			Port internalEndPort : PSimpleProtocol
-			ActorRef actorRef1 : SimpleActorClass1
-			
+			Port internalEndPort: PSimpleProtocol
+			ActorRef actorRef1: SimpleActorClass1
+
 			// internalEndPort lives 'local' 
 			// and thus needs a Binding to port of an ActorRef
 			Binding internalEndPort and actorRef1.externalPort
@@ -15,12 +14,13 @@ RoomModel PortRoles {
 			// send/receive messages from internalEndPorts
 		}
 	}
-	
+
 	ActorClass ExternalEndPortExample {
 		Interface {
+
 			// externalEndPort is connect from 'outside'
 			// and thus needs a Binding from containing ActorClass
-			Port externalEndPort : PSimpleProtocol
+			Port externalEndPort: PSimpleProtocol
 		}
 		Structure {
 			external Port externalEndPort
@@ -29,14 +29,14 @@ RoomModel PortRoles {
 			// send/receive messages from externalEndPort
 		}
 	}
-	
-	ActorClass RelayPortExample{
+
+	ActorClass RelayPortExample {
 		Interface {
-			Port relayPort : PSimpleProtocol
+			Port relayPort: PSimpleProtocol
 		}
 		Structure {
-			ActorRef actorRef1 : SimpleActorClass2
-			
+			ActorRef actorRef1: SimpleActorClass2
+
 			// relayPort can be directed to port of an ActorRef
 			Binding relayPort and actorRef1.externalPort
 		}
@@ -44,7 +44,7 @@ RoomModel PortRoles {
 			// relayPort not available !
 		}
 	}
-	
+
 	eventdriven ProtocolClass PSimpleProtocol {
 		incoming {
 			Message message1()
@@ -53,16 +53,16 @@ RoomModel PortRoles {
 			Message message2()
 		}
 	}
-	
+
 	ActorClass SimpleActorClass2 {
 		Interface {
-			Port externalPort : PSimpleProtocol
+			Port externalPort: PSimpleProtocol
 		}
 	}
-	
+
 	ActorClass SimpleActorClass1 {
 		Interface {
-			conjugated Port externalPort : PSimpleProtocol
+			conjugated Port externalPort: PSimpleProtocol
 		}
-	}	
+	}
 }

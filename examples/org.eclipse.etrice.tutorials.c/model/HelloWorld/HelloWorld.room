@@ -8,8 +8,8 @@
  */
 RoomModel HelloWorldModel {
 
-	import room.basic.types.* from "../../../org.eclipse.etrice.modellib.c/model/Types.room"
-	import room.basic.service.timing.* from "../../../org.eclipse.etrice.modellib.c/model/TimingService.room"
+	import room.basic.types.* from "platform:/resource/org.eclipse.etrice.modellib.c/model/Types.room"
+	import room.basic.service.timing.* from "platform:/resource//org.eclipse.etrice.modellib.c/model/TimingService.room"
 
 	LogicalSystem LogSys {
 		SubSystemRef subSystemRef: SubSysClass
@@ -25,18 +25,16 @@ RoomModel HelloWorldModel {
 	// - build your application from here
 	ActorClass TopActor {
 		Structure {
-
 		}
 		Behavior {
 			StateMachine {
 				Transition init: initial -> helloState
 				State helloState {
-					entry {
-						"printf(\"### Hello World! ###\\n\");"
-					}
+					entry '''
+						printf("### Hello World! ###\n");
+					'''
 				}
 			}
 		}
 	}
-
 }

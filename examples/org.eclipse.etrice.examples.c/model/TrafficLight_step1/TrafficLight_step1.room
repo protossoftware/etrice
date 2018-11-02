@@ -1,7 +1,7 @@
 RoomModel TrafficLight_step1 {
-	
+
 	import TrafficLight.* from "../TrafficLight/TrafficLight.room"
-	import room.basic.service.timing.* from "../../../org.eclipse.etrice.modellib.c/model/TimingService.room"
+	import room.basic.service.timing.* from "platform:/resource//org.eclipse.etrice.modellib.c/model/TimingService.room"
 
 	LogicalSystem TrafficLight {
 		SubSystemRef subSystem: TrafficLightStep1_Test

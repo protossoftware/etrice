@@ -1,14 +1,13 @@
 PhysicalModel Features {
-	
+
 	PhysicalSystem FeaturesPhysicalSystem {
 		NodeRef node1 : StandardNode
 	}
-	
+
 	NodeClass StandardNode {
 		runtime = RuntimeMultiThreaded
 		priomin = -10
 		priomax = 10
-		
 		DefaultThread PhysicalThread1 {
 			execmode = mixed
 			interval = 100ms
@@ -21,5 +20,6 @@ PhysicalModel Features {
 
 	RuntimeClass RuntimeMultiThreaded {
 		model = multiThreaded
-	} 
+	}
+
 }

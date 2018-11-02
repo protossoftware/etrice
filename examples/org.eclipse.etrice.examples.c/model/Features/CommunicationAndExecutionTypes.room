@@ -1,6 +1,6 @@
 RoomModel CommunicationAndExecutionTypes {
 
-	import room.basic.types.* from "../../../org.eclipse.etrice.modellib.c/model/Types.room"
+	import room.basic.types.* from "platform:/resource/org.eclipse.etrice.modellib.c/model/Types.room"
 
 	DataClass AnotherSimpleDataClass {
 		Attribute attribute1: int16
@@ -8,10 +8,11 @@ RoomModel CommunicationAndExecutionTypes {
 	}
 
 	ProtocolClass EventdrivenProtocolClass1 [ "default is eventdriven" ] {
+
 		// explicit: eventdriven ProtocolClass EventdrivenProtocolClass {
 		incoming {
 			Message msg1() ["message without data"]
-			Message msg2(data: int32) ["message with data"]
+			Message msg2(int32) ["message with data"]
 		}
 		outgoing {
 			Message msg4()  ["eventdriven ProtocolClass can have message into two directions"]
@@ -20,7 +21,7 @@ RoomModel CommunicationAndExecutionTypes {
 
 	datadriven ProtocolClass DatadrivenProtocolClass {
 		incoming {
-			Message signal1 (data: int32) ["a datadriven message needs data"]
+			Message signal1 (int32) ["a datadriven message needs data"]
 		}
 		// datadriven ProtocolClass can only have incoming messages (signals)
 	}
@@ -28,13 +29,12 @@ RoomModel CommunicationAndExecutionTypes {
 	eventdriven ActorClass EventdrivenActor ["default is eventdriven"] {
 		// only event-driven Ports and ActorRefs allowed
 	}
-	
+
 	datadriven ActorClass DatadrivenActor {
 		// only data-driven Ports and ActorRefs allowed
 	}
-	
-	async ActorClass MixedActor{
+
+	async ActorClass MixedActor {
 		// both data/event-driven Ports and ActorRefs allowed
 	}
-
 }
