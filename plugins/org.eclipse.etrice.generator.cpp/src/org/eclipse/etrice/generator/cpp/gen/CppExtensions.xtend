@@ -42,6 +42,8 @@ import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.TypeHelpers
 import org.eclipse.xtext.util.Pair
 import org.eclipse.xtext.util.Strings
+import org.eclipse.etrice.generator.cpp.Main
+import org.eclipse.etrice.generator.cpp.setup.GeneratorOptionsHelper
 
 @Singleton
 class CppExtensions implements ILanguageExtension {
@@ -50,6 +52,7 @@ class CppExtensions implements ILanguageExtension {
 	@Inject extension TypeHelpers
 	@Inject extension RoomHelpers
 	@Inject extension RoomExtensions
+	@Inject protected extension GeneratorOptionsHelper
 
 	override String getTypedDataDefinition(EObject msg) {
 		generateArglistAndTypedData((msg as Message).data).get(TypedDataKind.DECLARATION_AND_INITIALIZATION.ordinal)
@@ -222,9 +225,13 @@ class CppExtensions implements ILanguageExtension {
 		}
 		var deRef = if(!data.refType.ref) '*' else ''
 
-		val dataArg = ''', «GENERIC_DATA_NAME»'''
-		val typedData = '''«typeExpr» «GENERIC_DATA_NAME» = «deRef»(static_cast<«castExpr»>(generic_data__et));''' + NEWLINE
-		val typedArgList = ''', «typeExpr» «GENERIC_DATA_NAME»'''
+		val dataName = if (Main.settings.isOldStyleTransitionData && data.deprecatedName!==null && !data.deprecatedName.trim.empty)
+				data.deprecatedName
+			else
+				GENERIC_DATA_NAME
+		val dataArg = ''', «dataName»'''
+		val typedData = '''«typeExpr» «dataName» = «deRef»(static_cast<«castExpr»>(generic_data__et));''' + NEWLINE
+		val typedArgList = ''', «typeExpr» «dataName»'''
 
 		return #[dataArg, typedData, typedArgList]
 	}

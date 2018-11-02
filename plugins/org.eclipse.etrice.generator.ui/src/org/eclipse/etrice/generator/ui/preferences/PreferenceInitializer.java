@@ -20,6 +20,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		store.setDefault(PreferenceConstants.GEN_DIR, "src-gen");
 		store.setDefault(PreferenceConstants.GEN_DOC_DIR, "doc-gen");
 		store.setDefault(PreferenceConstants.GEN_USE_TRANSLATION, true);
+		store.setDefault(PreferenceConstants.GEN_OLD_STYLE_TRANSITION_DATA, false);
 	}
 
 }

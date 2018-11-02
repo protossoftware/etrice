@@ -8,6 +8,7 @@ public class PreferenceConstants {
 	public static final String GEN_DIR = "GenerationDirectory";
 	public static final String GEN_DOC_DIR = "GeneratedDocuDirectory";
 	public static final String GEN_USE_TRANSLATION = "GenerateUsingTranslation";
+	public static final String GEN_OLD_STYLE_TRANSITION_DATA = "GenerateOldStyleTransitionData";
 	
 	/**
 	 * The kind of build with the two possibilities {@link #MAVEN} and {@link #JDT}

@@ -209,6 +209,9 @@ public abstract class GeneratorLaunchConfigurationDelegate extends AbstractJavaL
 		if (!configuration.getAttribute(GeneratorConfigTab.USE_TRAANSLATION, true)) {
 			argString.append(" -"+AbstractGeneratorOptions.NOTRANSLATE.getName());
 		}
+		if (!configuration.getAttribute(GeneratorConfigTab.OLD_STYLE_TRANSITION_DATA, true)) {
+			argString.append(" -"+AbstractGeneratorOptions.OLD_STYLE_TRANSITION_DATA.getName());
+		}
 		
 		ScopedPreferenceStore prefStore = new ScopedPreferenceStore(InstanceScope.INSTANCE, "org.eclipse.etrice.generator.ui");
 		

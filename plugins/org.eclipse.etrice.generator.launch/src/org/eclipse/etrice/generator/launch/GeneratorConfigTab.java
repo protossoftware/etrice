@@ -70,6 +70,7 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 	public static final String DATA_INSTR = "DataLogging";
 	public static final String VERBOSE = "Verbose";
 	public static final String USE_TRAANSLATION = "UseTranslation";
+	public static final String OLD_STYLE_TRANSITION_DATA = "OldStyleTransitionData";
 	public static final String OVERRIDE_DIRECTORIES = "OverrideDirectories";
 	public static final String GEN_DEPS_WITHIN_PROJECT = "GenerateDepsWithinProject";
 	public static final String SRCGEN_PATH = "SrcgenPath";
@@ -87,6 +88,7 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 	private Text srcgenPath;
 	protected Button dataButton;
 	private Text mainMethodName;
+	private Button useOldStyleTransitionDataButton;
 
 	/* (non-Javadoc)
 	 * @see org.eclipse.debug.ui.ILaunchConfigurationTab#createControl(org.eclipse.swt.widgets.Composite)
@@ -146,6 +148,10 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 		useTranslationButton = createCheckButton(mainComposite, "perform code translation");
 		useTranslationButton.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 2, 1));
 		useTranslationButton.addSelectionListener(new UpdateConfig());
+
+		useOldStyleTransitionDataButton = createCheckButton(mainComposite, "use old style transition data names");
+		useOldStyleTransitionDataButton.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 2, 1));
+		useOldStyleTransitionDataButton.addSelectionListener(new UpdateConfig());
 
 		debugButton = createCheckButton(mainComposite, "generate debug output");
 		debugButton.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 2, 1));
@@ -305,6 +311,9 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 			boolean useTranslation = prefStore.getBoolean(PreferenceConstants.GEN_USE_TRANSLATION);
 			useTranslationButton.setSelection(configuration.getAttribute(USE_TRAANSLATION, useTranslation));
 			
+			boolean useOldStyleTransitionData = prefStore.getBoolean(PreferenceConstants.GEN_OLD_STYLE_TRANSITION_DATA);
+			useOldStyleTransitionDataButton.setSelection(configuration.getAttribute(OLD_STYLE_TRANSITION_DATA, useOldStyleTransitionData));
+			
 			boolean override = configuration.getAttribute(OVERRIDE_DIRECTORIES, false);
 			String srcgenDir = prefStore.getString(PreferenceConstants.GEN_DIR);
 			overrideDirectories.setSelection(override);
@@ -337,6 +346,7 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 		configuration.setAttribute(DATA_INSTR, dataButton.getSelection());
 		configuration.setAttribute(VERBOSE, verboseButton.getSelection());
 		configuration.setAttribute(USE_TRAANSLATION, useTranslationButton.getSelection());
+		configuration.setAttribute(OLD_STYLE_TRANSITION_DATA, useOldStyleTransitionDataButton.getSelection());
 		
 		boolean override = overrideDirectories.getSelection();
 		configuration.setAttribute(OVERRIDE_DIRECTORIES, override);

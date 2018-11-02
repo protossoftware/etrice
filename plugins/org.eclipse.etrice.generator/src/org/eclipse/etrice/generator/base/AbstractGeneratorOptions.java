@@ -75,6 +75,13 @@ public class AbstractGeneratorOptions extends GeneratorOptions {
 			"if specified the detail codes won't be translated",
 			false);
 	
+	public static final BooleanOption OLD_STYLE_TRANSITION_DATA = new BooleanOption(
+			GROUP_ETRICE,
+			"oldtransitiondata",
+			"oldStyleTransitionData",
+			"if specified the transition data are named like the message data (if specified), not 'transitionData'",
+			false);
+	
 	@Override
 	public void configure(List<Option<?>> options) {
 		super.configure(options);
@@ -86,5 +93,6 @@ public class AbstractGeneratorOptions extends GeneratorOptions {
 		options.add(DATA_INSTR);
 		options.add(VERBOSE_RT);
 		options.add(NOTRANSLATE);
+		options.add(OLD_STYLE_TRANSITION_DATA);
 	}
 }

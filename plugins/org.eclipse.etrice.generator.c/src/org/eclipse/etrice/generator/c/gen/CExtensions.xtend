@@ -42,12 +42,15 @@ import org.eclipse.etrice.core.room.RoomModel
 import org.eclipse.etrice.core.room.util.RoomHelpers
 import org.eclipse.etrice.generator.generic.ILanguageExtension
 import org.eclipse.xtext.util.Pair
+import org.eclipse.etrice.generator.c.setup.GeneratorOptionsHelper
+import org.eclipse.etrice.generator.c.Main
 
 @Singleton
 class CExtensions implements ILanguageExtension {
 
 	@Inject protected IDiagnostician diagnostician
 	@Inject protected extension RoomHelpers
+	@Inject protected extension GeneratorOptionsHelper
 
 	override String getTypedDataDefinition(EObject msg) {
 	    if (msg instanceof Message) {
@@ -343,9 +346,13 @@ class CExtensions implements ILanguageExtension {
 			}
 		}
 
-		val dataArg = ", "+GENERIC_DATA_NAME
-		val typedData = typeName+" "+GENERIC_DATA_NAME + " = "+deRef+"(("+castTypeName+") generic_data__et);\n"
-		val typedArgList = ", "+typeName+" "+GENERIC_DATA_NAME
+		val dataName = if (Main.settings.isOldStyleTransitionData && data.deprecatedName!==null && !data.deprecatedName.trim.empty)
+				data.deprecatedName
+			else
+				GENERIC_DATA_NAME
+		val dataArg = ", "+dataName
+		val typedData = typeName+" "+dataName + " = "+deRef+"(("+castTypeName+") generic_data__et);\n"
+		val typedArgList = ", "+typeName+" "+dataName
 
 		return newArrayList(dataArg, typedData, typedArgList);
 	}

@@ -46,4 +46,8 @@ public class AbstractGeneratorOptionsHelper {
 	public boolean isGenerateWithVerboseOutput(Arguments args) {
 		return args.get(AbstractGeneratorOptions.VERBOSE_RT);
 	}
+	
+	public boolean isOldStyleTransitionData(Arguments args) {
+		return args.get(AbstractGeneratorOptions.OLD_STYLE_TRANSITION_DATA);
+	}
 }

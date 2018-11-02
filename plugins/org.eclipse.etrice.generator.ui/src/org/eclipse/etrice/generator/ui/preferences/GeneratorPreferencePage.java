@@ -39,6 +39,11 @@ public class GeneratorPreferencePage
 						"Let wizard create new launchers with detail code translation on initially",
 						getFieldEditorParent()));
 		addField(
+				new BooleanFieldEditor(
+						PreferenceConstants.GEN_OLD_STYLE_TRANSITION_DATA,
+						"Let wizard create new launchers with old style transition data generation on initially",
+						getFieldEditorParent()));
+		addField(
 				new StringFieldEditor(
 						PreferenceConstants.GEN_DIR,
 						"The directory for &generated code:",
