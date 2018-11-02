@@ -5,7 +5,6 @@ package org.eclipse.etrice.core.room;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.etrice.core.common.base.Annotation;
-import org.eclipse.etrice.core.common.base.Documentation;
 
 /**
  * <!-- begin-user-doc -->
@@ -47,7 +46,6 @@ import org.eclipse.etrice.core.common.base.Documentation;
  *   <li>{@link org.eclipse.etrice.core.room.Port#getMultiplicity <em>Multiplicity</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.Port#getProtocol <em>Protocol</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.Port#getAnnotations <em>Annotations</em>}</li>
- *   <li>{@link org.eclipse.etrice.core.room.Port#getDocu <em>Docu</em>}</li>
  * </ul>
  *
  * @see org.eclipse.etrice.core.room.RoomPackage#getPort()
@@ -151,32 +149,6 @@ public interface Port extends InterfaceItem
    * @generated
    */
   EList<Annotation> getAnnotations();
-
-  /**
-   * Returns the value of the '<em><b>Docu</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * <!-- begin-model-doc -->
-   * <br>This is an optional documentation.
-   * 
-   * <!-- end-model-doc -->
-   * @return the value of the '<em>Docu</em>' containment reference.
-   * @see #setDocu(Documentation)
-   * @see org.eclipse.etrice.core.room.RoomPackage#getPort_Docu()
-   * @model containment="true"
-   * @generated
-   */
-  Documentation getDocu();
-
-  /**
-   * Sets the value of the '{@link org.eclipse.etrice.core.room.Port#getDocu <em>Docu</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Docu</em>' containment reference.
-   * @see #getDocu()
-   * @generated
-   */
-  void setDocu(Documentation value);
 
   /**
    * <!-- begin-user-doc -->

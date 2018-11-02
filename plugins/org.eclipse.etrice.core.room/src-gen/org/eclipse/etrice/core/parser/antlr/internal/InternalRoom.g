@@ -3690,7 +3690,25 @@ ruleSAP returns [EObject current=null]
 	    }
 
 )
-))
+)(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getSAPAccess().getDocuDocumentationParserRuleCall_4_0()); 
+	    }
+		lv_docu_4_0=ruleDocumentation		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getSAPRule());
+	        }
+       		set(
+       			$current, 
+       			"docu",
+        		lv_docu_4_0, 
+        		"org.eclipse.etrice.core.common.Base.Documentation");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)?)
 ;
 
 
@@ -3752,7 +3770,25 @@ ruleSPP returns [EObject current=null]
 	    }
 
 )
-))
+)(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getSPPAccess().getDocuDocumentationParserRuleCall_4_0()); 
+	    }
+		lv_docu_4_0=ruleDocumentation		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getSPPRule());
+	        }
+       		set(
+       			$current, 
+       			"docu",
+        		lv_docu_4_0, 
+        		"org.eclipse.etrice.core.common.Base.Documentation");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)?)
 ;
 
 

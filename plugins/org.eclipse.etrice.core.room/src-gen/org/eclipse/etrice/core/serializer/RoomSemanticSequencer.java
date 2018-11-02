@@ -374,24 +374,24 @@ public class RoomSemanticSequencer extends FSMSemanticSequencer {
 	 *         docu=Documentation? 
 	 *         base=[ActorClass|FQN]? 
 	 *         annotations+=Annotation* 
-	 *         serviceProvisionPoints+=SPP? 
-	 *         (interfacePorts+=Port? serviceProvisionPoints+=SPP?)* 
+	 *         interfacePorts+=Port? 
+	 *         (serviceProvisionPoints+=SPP? interfacePorts+=Port?)* 
 	 *         structureDocu=Documentation? 
 	 *         userCode1=DetailCode? 
 	 *         userCode2=DetailCode? 
 	 *         userCode3=DetailCode? 
-	 *         serviceImplementations+=ServiceImplementation? 
+	 *         actorRefs+=ActorRef? 
 	 *         (
 	 *             (
 	 *                 connections+=LayerConnection | 
 	 *                 bindings+=Binding | 
+	 *                 serviceImplementations+=ServiceImplementation | 
 	 *                 attributes+=Attribute | 
-	 *                 actorRefs+=ActorRef | 
 	 *                 serviceAccessPoints+=SAP | 
 	 *                 internalPorts+=Port | 
 	 *                 externalPorts+=ExternalPort
 	 *             )? 
-	 *             serviceImplementations+=ServiceImplementation?
+	 *             actorRefs+=ActorRef?
 	 *         )* 
 	 *         behaviorDocu=Documentation? 
 	 *         behaviorAnnotations+=Annotation* 
@@ -907,19 +907,10 @@ public class RoomSemanticSequencer extends FSMSemanticSequencer {
 	 *     AbstractInterfaceItem returns SAP
 	 *
 	 * Constraint:
-	 *     (name=ID protocol=[ProtocolClass|FQN])
+	 *     (name=ID protocol=[ProtocolClass|FQN] docu=Documentation?)
 	 */
 	protected void sequence_SAP(ISerializationContext context, SAP semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, FSMPackage.Literals.ABSTRACT_INTERFACE_ITEM__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FSMPackage.Literals.ABSTRACT_INTERFACE_ITEM__NAME));
-			if (transientValues.isValueTransient(semanticObject, RoomPackage.Literals.SAP__PROTOCOL) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RoomPackage.Literals.SAP__PROTOCOL));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getSAPAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
-		feeder.accept(grammarAccess.getSAPAccess().getProtocolProtocolClassFQNParserRuleCall_3_0_1(), semanticObject.eGet(RoomPackage.Literals.SAP__PROTOCOL, false));
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -930,19 +921,10 @@ public class RoomSemanticSequencer extends FSMSemanticSequencer {
 	 *     AbstractInterfaceItem returns SPP
 	 *
 	 * Constraint:
-	 *     (name=ID protocol=[ProtocolClass|FQN])
+	 *     (name=ID protocol=[ProtocolClass|FQN] docu=Documentation?)
 	 */
 	protected void sequence_SPP(ISerializationContext context, SPP semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, FSMPackage.Literals.ABSTRACT_INTERFACE_ITEM__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FSMPackage.Literals.ABSTRACT_INTERFACE_ITEM__NAME));
-			if (transientValues.isValueTransient(semanticObject, RoomPackage.Literals.SPP__PROTOCOL) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RoomPackage.Literals.SPP__PROTOCOL));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getSPPAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
-		feeder.accept(grammarAccess.getSPPAccess().getProtocolProtocolClassFQNParserRuleCall_3_0_1(), semanticObject.eGet(RoomPackage.Literals.SPP__PROTOCOL, false));
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	

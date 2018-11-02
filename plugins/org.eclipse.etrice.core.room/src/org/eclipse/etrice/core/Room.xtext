@@ -231,10 +231,10 @@ ExternalPort:
 	'external' 'Port' interfacePort=[Port|ID] ;
 
 SAP:
-	'SAP' name=ID ':' protocol=[ProtocolClass|FQN] ;
+	'SAP' name=ID ':' protocol=[ProtocolClass|FQN] (docu=Documentation)? ;
 
 SPP:
-	'SPP' name=ID ':' protocol=[ProtocolClass|FQN] ;
+	'SPP' name=ID ':' protocol=[ProtocolClass|FQN] (docu=Documentation)? ;
 ServiceImplementation:
 	'ServiceImplementation' 'of' spp=[SPP|ID];
 

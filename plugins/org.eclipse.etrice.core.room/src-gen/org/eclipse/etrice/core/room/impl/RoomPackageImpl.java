@@ -1787,6 +1787,16 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EReference getInterfaceItem_Docu()
+  {
+    return (EReference)interfaceItemEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getPort()
   {
     return portEClass;
@@ -1830,16 +1840,6 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
   public EReference getPort_Annotations()
   {
     return (EReference)portEClass.getEStructuralFeatures().get(3);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getPort_Docu()
-  {
-    return (EReference)portEClass.getEStructuralFeatures().get(4);
   }
 
   /**
@@ -2577,13 +2577,13 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     createEReference(actorClassEClass, ACTOR_CLASS__STRUCTORS);
 
     interfaceItemEClass = createEClass(INTERFACE_ITEM);
+    createEReference(interfaceItemEClass, INTERFACE_ITEM__DOCU);
 
     portEClass = createEClass(PORT);
     createEAttribute(portEClass, PORT__CONJUGATED);
     createEAttribute(portEClass, PORT__MULTIPLICITY);
     createEReference(portEClass, PORT__PROTOCOL);
     createEReference(portEClass, PORT__ANNOTATIONS);
-    createEReference(portEClass, PORT__DOCU);
 
     externalPortEClass = createEClass(EXTERNAL_PORT);
     createEReference(externalPortEClass, EXTERNAL_PORT__INTERFACE_PORT);
@@ -2900,6 +2900,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     addEOperation(actorClassEClass, theFSMPackage.getAbstractInterfaceItem(), "getAllAbstractInterfaceItems", 0, -1, IS_UNIQUE, IS_ORDERED);
 
     initEClass(interfaceItemEClass, InterfaceItem.class, "InterfaceItem", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getInterfaceItem_Docu(), theBasePackage.getDocumentation(), null, "docu", null, 0, 1, InterfaceItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     addEOperation(interfaceItemEClass, this.getGeneralProtocolClass(), "getGeneralProtocol", 0, 1, IS_UNIQUE, IS_ORDERED);
 
@@ -2916,7 +2917,6 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     initEAttribute(getPort_Multiplicity(), ecorePackage.getEInt(), "multiplicity", "1", 0, 1, Port.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getPort_Protocol(), this.getGeneralProtocolClass(), null, "protocol", null, 0, 1, Port.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getPort_Annotations(), theBasePackage.getAnnotation(), null, "annotations", null, 0, -1, Port.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getPort_Docu(), theBasePackage.getDocumentation(), null, "docu", null, 0, 1, Port.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     addEOperation(portEClass, ecorePackage.getEBoolean(), "isReplicated", 0, 1, IS_UNIQUE, IS_ORDERED);
 

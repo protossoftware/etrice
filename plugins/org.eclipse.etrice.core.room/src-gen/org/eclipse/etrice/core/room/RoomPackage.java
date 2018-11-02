@@ -1998,13 +1998,22 @@ public interface RoomPackage extends EPackage
   int INTERFACE_ITEM__NAME = FSMPackage.ABSTRACT_INTERFACE_ITEM__NAME;
 
   /**
+   * The feature id for the '<em><b>Docu</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int INTERFACE_ITEM__DOCU = FSMPackage.ABSTRACT_INTERFACE_ITEM_FEATURE_COUNT + 0;
+
+  /**
    * The number of structural features of the '<em>Interface Item</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int INTERFACE_ITEM_FEATURE_COUNT = FSMPackage.ABSTRACT_INTERFACE_ITEM_FEATURE_COUNT + 0;
+  int INTERFACE_ITEM_FEATURE_COUNT = FSMPackage.ABSTRACT_INTERFACE_ITEM_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.PortImpl <em>Port</em>}' class.
@@ -2024,6 +2033,15 @@ public interface RoomPackage extends EPackage
    * @ordered
    */
   int PORT__NAME = INTERFACE_ITEM__NAME;
+
+  /**
+   * The feature id for the '<em><b>Docu</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PORT__DOCU = INTERFACE_ITEM__DOCU;
 
   /**
    * The feature id for the '<em><b>Conjugated</b></em>' attribute.
@@ -2062,22 +2080,13 @@ public interface RoomPackage extends EPackage
   int PORT__ANNOTATIONS = INTERFACE_ITEM_FEATURE_COUNT + 3;
 
   /**
-   * The feature id for the '<em><b>Docu</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int PORT__DOCU = INTERFACE_ITEM_FEATURE_COUNT + 4;
-
-  /**
    * The number of structural features of the '<em>Port</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int PORT_FEATURE_COUNT = INTERFACE_ITEM_FEATURE_COUNT + 5;
+  int PORT_FEATURE_COUNT = INTERFACE_ITEM_FEATURE_COUNT + 4;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.ExternalPortImpl <em>External Port</em>}' class.
@@ -2127,6 +2136,15 @@ public interface RoomPackage extends EPackage
   int SAP__NAME = INTERFACE_ITEM__NAME;
 
   /**
+   * The feature id for the '<em><b>Docu</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SAP__DOCU = INTERFACE_ITEM__DOCU;
+
+  /**
    * The feature id for the '<em><b>Protocol</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2162,6 +2180,15 @@ public interface RoomPackage extends EPackage
    * @ordered
    */
   int SPP__NAME = INTERFACE_ITEM__NAME;
+
+  /**
+   * The feature id for the '<em><b>Docu</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SPP__DOCU = INTERFACE_ITEM__DOCU;
 
   /**
    * The feature id for the '<em><b>Protocol</b></em>' reference.
@@ -4324,6 +4351,17 @@ public interface RoomPackage extends EPackage
   EClass getInterfaceItem();
 
   /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.room.InterfaceItem#getDocu <em>Docu</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Docu</em>'.
+   * @see org.eclipse.etrice.core.room.InterfaceItem#getDocu()
+   * @see #getInterfaceItem()
+   * @generated
+   */
+  EReference getInterfaceItem_Docu();
+
+  /**
    * Returns the meta object for class '{@link org.eclipse.etrice.core.room.Port <em>Port</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -4376,17 +4414,6 @@ public interface RoomPackage extends EPackage
    * @generated
    */
   EReference getPort_Annotations();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.room.Port#getDocu <em>Docu</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Docu</em>'.
-   * @see org.eclipse.etrice.core.room.Port#getDocu()
-   * @see #getPort()
-   * @generated
-   */
-  EReference getPort_Docu();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.etrice.core.room.ExternalPort <em>External Port</em>}'.
@@ -6062,6 +6089,14 @@ public interface RoomPackage extends EPackage
     EClass INTERFACE_ITEM = eINSTANCE.getInterfaceItem();
 
     /**
+     * The meta object literal for the '<em><b>Docu</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference INTERFACE_ITEM__DOCU = eINSTANCE.getInterfaceItem_Docu();
+
+    /**
      * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.PortImpl <em>Port</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -6102,14 +6137,6 @@ public interface RoomPackage extends EPackage
      * @generated
      */
     EReference PORT__ANNOTATIONS = eINSTANCE.getPort_Annotations();
-
-    /**
-     * The meta object literal for the '<em><b>Docu</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference PORT__DOCU = eINSTANCE.getPort_Docu();
 
     /**
      * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.ExternalPortImpl <em>External Port</em>}' class.

@@ -12345,6 +12345,7 @@ rule__SAP__Group__3
     }
 :
 	rule__SAP__Group__3__Impl
+	rule__SAP__Group__4
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -12365,6 +12366,36 @@ rule__SAP__Group__3__Impl
 finally {
 	restoreStackSize(stackSize);
 }
+
+
+rule__SAP__Group__4
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__SAP__Group__4__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__SAP__Group__4__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getSAPAccess().getDocuAssignment_4()); }
+(rule__SAP__DocuAssignment_4)?
+{ after(grammarAccess.getSAPAccess().getDocuAssignment_4()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
 
 
 
@@ -12472,6 +12503,7 @@ rule__SPP__Group__3
     }
 :
 	rule__SPP__Group__3__Impl
+	rule__SPP__Group__4
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -12492,6 +12524,36 @@ rule__SPP__Group__3__Impl
 finally {
 	restoreStackSize(stackSize);
 }
+
+
+rule__SPP__Group__4
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__SPP__Group__4__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__SPP__Group__4__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getSPPAccess().getDocuAssignment_4()); }
+(rule__SPP__DocuAssignment_4)?
+{ after(grammarAccess.getSPPAccess().getDocuAssignment_4()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
 
 
 
@@ -25634,6 +25696,21 @@ finally {
 	restoreStackSize(stackSize);
 }
 
+rule__SAP__DocuAssignment_4
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getSAPAccess().getDocuDocumentationParserRuleCall_4_0()); }
+	ruleDocumentation{ after(grammarAccess.getSAPAccess().getDocuDocumentationParserRuleCall_4_0()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
 rule__SPP__NameAssignment_1
     @init {
 		int stackSize = keepStackSize();
@@ -25661,6 +25738,21 @@ rule__SPP__ProtocolAssignment_3
 	ruleFQN{ after(grammarAccess.getSPPAccess().getProtocolProtocolClassFQNParserRuleCall_3_0_1()); }
 )
 { after(grammarAccess.getSPPAccess().getProtocolProtocolClassCrossReference_3_0()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__SPP__DocuAssignment_4
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getSPPAccess().getDocuDocumentationParserRuleCall_4_0()); }
+	ruleDocumentation{ after(grammarAccess.getSPPAccess().getDocuDocumentationParserRuleCall_4_0()); }
 )
 
 ;

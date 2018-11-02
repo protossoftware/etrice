@@ -394,8 +394,10 @@ public class RoomParser extends AbstractContentAssistParser {
 					put(grammarAccess.getExternalPortAccess().getInterfacePortAssignment_2(), "rule__ExternalPort__InterfacePortAssignment_2");
 					put(grammarAccess.getSAPAccess().getNameAssignment_1(), "rule__SAP__NameAssignment_1");
 					put(grammarAccess.getSAPAccess().getProtocolAssignment_3(), "rule__SAP__ProtocolAssignment_3");
+					put(grammarAccess.getSAPAccess().getDocuAssignment_4(), "rule__SAP__DocuAssignment_4");
 					put(grammarAccess.getSPPAccess().getNameAssignment_1(), "rule__SPP__NameAssignment_1");
 					put(grammarAccess.getSPPAccess().getProtocolAssignment_3(), "rule__SPP__ProtocolAssignment_3");
+					put(grammarAccess.getSPPAccess().getDocuAssignment_4(), "rule__SPP__DocuAssignment_4");
 					put(grammarAccess.getServiceImplementationAccess().getSppAssignment_2(), "rule__ServiceImplementation__SppAssignment_2");
 					put(grammarAccess.getLogicalSystemAccess().getNameAssignment_1(), "rule__LogicalSystem__NameAssignment_1");
 					put(grammarAccess.getLogicalSystemAccess().getDocuAssignment_2(), "rule__LogicalSystem__DocuAssignment_2");

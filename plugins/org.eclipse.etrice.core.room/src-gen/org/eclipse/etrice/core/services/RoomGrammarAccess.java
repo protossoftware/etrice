@@ -2264,12 +2264,14 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cProtocolAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final CrossReference cProtocolProtocolClassCrossReference_3_0 = (CrossReference)cProtocolAssignment_3.eContents().get(0);
 		private final RuleCall cProtocolProtocolClassFQNParserRuleCall_3_0_1 = (RuleCall)cProtocolProtocolClassCrossReference_3_0.eContents().get(1);
+		private final Assignment cDocuAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cDocuDocumentationParserRuleCall_4_0 = (RuleCall)cDocuAssignment_4.eContents().get(0);
 		
 		//SAP:
-		//	'SAP' name=ID ':' protocol=[ProtocolClass|FQN];
+		//	'SAP' name=ID ':' protocol=[ProtocolClass|FQN] docu=Documentation?;
 		@Override public ParserRule getRule() { return rule; }
 
-		//'SAP' name=ID ':' protocol=[ProtocolClass|FQN]
+		//'SAP' name=ID ':' protocol=[ProtocolClass|FQN] docu=Documentation?
 		public Group getGroup() { return cGroup; }
 
 		//'SAP'
@@ -2292,6 +2294,12 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 
 		//FQN
 		public RuleCall getProtocolProtocolClassFQNParserRuleCall_3_0_1() { return cProtocolProtocolClassFQNParserRuleCall_3_0_1; }
+
+		//docu=Documentation?
+		public Assignment getDocuAssignment_4() { return cDocuAssignment_4; }
+
+		//Documentation
+		public RuleCall getDocuDocumentationParserRuleCall_4_0() { return cDocuDocumentationParserRuleCall_4_0; }
 	}
 
 	public class SPPElements extends AbstractParserRuleElementFinder {
@@ -2304,12 +2312,14 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cProtocolAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final CrossReference cProtocolProtocolClassCrossReference_3_0 = (CrossReference)cProtocolAssignment_3.eContents().get(0);
 		private final RuleCall cProtocolProtocolClassFQNParserRuleCall_3_0_1 = (RuleCall)cProtocolProtocolClassCrossReference_3_0.eContents().get(1);
+		private final Assignment cDocuAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cDocuDocumentationParserRuleCall_4_0 = (RuleCall)cDocuAssignment_4.eContents().get(0);
 		
 		//SPP:
-		//	'SPP' name=ID ':' protocol=[ProtocolClass|FQN];
+		//	'SPP' name=ID ':' protocol=[ProtocolClass|FQN] docu=Documentation?;
 		@Override public ParserRule getRule() { return rule; }
 
-		//'SPP' name=ID ':' protocol=[ProtocolClass|FQN]
+		//'SPP' name=ID ':' protocol=[ProtocolClass|FQN] docu=Documentation?
 		public Group getGroup() { return cGroup; }
 
 		//'SPP'
@@ -2332,6 +2342,12 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 
 		//FQN
 		public RuleCall getProtocolProtocolClassFQNParserRuleCall_3_0_1() { return cProtocolProtocolClassFQNParserRuleCall_3_0_1; }
+
+		//docu=Documentation?
+		public Assignment getDocuAssignment_4() { return cDocuAssignment_4; }
+
+		//Documentation
+		public RuleCall getDocuDocumentationParserRuleCall_4_0() { return cDocuDocumentationParserRuleCall_4_0; }
 	}
 
 	public class ServiceImplementationElements extends AbstractParserRuleElementFinder {
@@ -3991,7 +4007,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//SAP:
-	//	'SAP' name=ID ':' protocol=[ProtocolClass|FQN];
+	//	'SAP' name=ID ':' protocol=[ProtocolClass|FQN] docu=Documentation?;
 	public SAPElements getSAPAccess() {
 		return pSAP;
 	}
@@ -4001,7 +4017,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//SPP:
-	//	'SPP' name=ID ':' protocol=[ProtocolClass|FQN];
+	//	'SPP' name=ID ':' protocol=[ProtocolClass|FQN] docu=Documentation?;
 	public SPPElements getSPPAccess() {
 		return pSPP;
 	}
