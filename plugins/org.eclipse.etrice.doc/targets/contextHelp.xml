@@ -270,6 +270,44 @@
 <topic href="targets/eclipse-help/feature-reference.html#spp" label="SPPPropertyDialog"/>
 </context>
 
+<context id="featureContextHelp_CCodeGenerator" title="CCodeGenerator">
+<description></description>
+<topic href="targets/eclipse-help/feature-reference.html#ccodegenerator" label="CCodeGenerator"/>
+</context>
+
+<context id="featureContextHelp_JavaCodeGenerator" title="JavaCodeGenerator">
+<description></description>
+<topic href="targets/eclipse-help/feature-reference.html#javacodegenerator" label="JavaCodeGenerator"/>
+</context>
+
+<context id="featureContextHelp_CPPCodeGenerator" title="CPPCodeGenerator">
+<description></description>
+<topic href="targets/eclipse-help/feature-reference.html#cppcodegenerator" label="CPPCodeGenerator"/>
+</context>
+
+<context id="featureContextHelp_GenerationOptions" title="GenerationOptions">
+<description>Mechanism to adjust the generation.</description>
+<topic href="targets/eclipse-help/feature-reference.html#generationoptions" label="GenerationOptions"/>
+<topic href="targets/eclipse-help/feature-reference.html#generationoptions" label="CCodeGenerator"/>
+<topic href="targets/eclipse-help/feature-reference.html#generationoptions" label="JavaCodeGenerator"/>
+<topic href="targets/eclipse-help/feature-reference.html#generationoptions" label="MSCLogging"/>
+</context>
+
+<context id="featureContextHelp_MSCLogging" title="MSCLogging">
+<description>Runtime logger for event-driven Messages, represented as a Message Sequence Chart.</description>
+<topic href="targets/eclipse-help/feature-reference.html#msclogging" label="MSCLogging"/>
+<topic href="targets/eclipse-help/feature-reference.html#msclogging" label="GenerationOptions"/>
+<topic href="targets/eclipse-help/feature-reference.html#msclogging" label="CCodeGenerator"/>
+<topic href="targets/eclipse-help/feature-reference.html#msclogging" label="JavaCodeGenerator"/>
+</context>
+
+<context id="featureContextHelp_DataLogging" title="DataLogging">
+<description>Runtime logger for data-driven Messages with primitive data.</description>
+<topic href="targets/eclipse-help/feature-reference.html#datalogging" label="DataLogging"/>
+<topic href="targets/eclipse-help/feature-reference.html#datalogging" label="Annotation"/>
+<topic href="targets/eclipse-help/feature-reference.html#datalogging" label="CCodeGenerator"/>
+</context>
+
 <context id="featureContextHelp_TextualROOMEditor" title="TextualROOMEditor">
 <description>Textual model editor</description>
 <topic href="targets/eclipse-help/feature-reference.html#textualroomeditor" label="TextualROOMEditor"/>
@@ -324,43 +362,5 @@
 <topic href="targets/eclipse-help/feature-reference.html#spppropertydialog" label="SPPPropertyDialog"/>
 <topic href="targets/eclipse-help/feature-reference.html#spppropertydialog" label="SPP"/>
 <topic href="targets/eclipse-help/feature-reference.html#spppropertydialog" label="GraphicalStructureEditor"/>
-</context>
-
-<context id="featureContextHelp_CCodeGenerator" title="CCodeGenerator">
-<description></description>
-<topic href="targets/eclipse-help/feature-reference.html#ccodegenerator" label="CCodeGenerator"/>
-</context>
-
-<context id="featureContextHelp_JavaCodeGenerator" title="JavaCodeGenerator">
-<description></description>
-<topic href="targets/eclipse-help/feature-reference.html#javacodegenerator" label="JavaCodeGenerator"/>
-</context>
-
-<context id="featureContextHelp_CPPCodeGenerator" title="CPPCodeGenerator">
-<description></description>
-<topic href="targets/eclipse-help/feature-reference.html#cppcodegenerator" label="CPPCodeGenerator"/>
-</context>
-
-<context id="featureContextHelp_GenerationOptions" title="GenerationOptions">
-<description>Mechanism to adjust the generation.</description>
-<topic href="targets/eclipse-help/feature-reference.html#generationoptions" label="GenerationOptions"/>
-<topic href="targets/eclipse-help/feature-reference.html#generationoptions" label="CCodeGenerator"/>
-<topic href="targets/eclipse-help/feature-reference.html#generationoptions" label="JavaCodeGenerator"/>
-<topic href="targets/eclipse-help/feature-reference.html#generationoptions" label="MSCLogging"/>
-</context>
-
-<context id="featureContextHelp_MSCLogging" title="MSCLogging">
-<description>Runtime logger for event-driven Messages, represented as a Message Sequence Chart.</description>
-<topic href="targets/eclipse-help/feature-reference.html#msclogging" label="MSCLogging"/>
-<topic href="targets/eclipse-help/feature-reference.html#msclogging" label="GenerationOptions"/>
-<topic href="targets/eclipse-help/feature-reference.html#msclogging" label="CCodeGenerator"/>
-<topic href="targets/eclipse-help/feature-reference.html#msclogging" label="JavaCodeGenerator"/>
-</context>
-
-<context id="featureContextHelp_DataLogging" title="DataLogging">
-<description>Runtime logger for data-driven Messages with primitive data.</description>
-<topic href="targets/eclipse-help/feature-reference.html#datalogging" label="DataLogging"/>
-<topic href="targets/eclipse-help/feature-reference.html#datalogging" label="Annotation"/>
-<topic href="targets/eclipse-help/feature-reference.html#datalogging" label="CCodeGenerator"/>
 </context>
 </contexts>
