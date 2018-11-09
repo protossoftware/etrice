@@ -3,9 +3,10 @@ plugins {
 }
 
 apply from: "$rootDir/gradle/scmVersion.gradle"
+apply from: "$rootDir/gradle/versions.gradle"
 
 allprojects {
-	apply from: "$rootDir/gradle/versions.gradle"
+	apply plugin: 'base'
 
 	group = 'org.eclipse.etrice'
 	version = scmVersion.version

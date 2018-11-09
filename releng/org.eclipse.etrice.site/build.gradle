@@ -1,0 +1,8 @@
+configurations {
+	archive
+}
+
+artifacts {
+	archive fileTree(dir: 'target', include: 'org.eclipse.etrice.site-*.zip').singleFile
+}
+

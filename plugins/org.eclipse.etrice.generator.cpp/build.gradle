@@ -1,5 +1,9 @@
 apply plugin: 'application'
 
+configurations {
+	archive
+}
+
 dependencies {
 	compile project(':plugins:org.eclipse.etrice.core.room')
 	compile project(':plugins:org.eclipse.etrice.core.etphys')
@@ -12,6 +16,10 @@ dependencies {
 	
 	compile "org.eclipse.xtend:org.eclipse.xtend.lib:$versions.xtext"
 	compile "org.eclipse.xtext:org.eclipse.xtext:$versions.xtext"
+}
+
+artifacts {
+	archive distZip
 }
 
 mainClassName = 'org.eclipse.etrice.generator.cpp.Main'

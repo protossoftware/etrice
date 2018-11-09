@@ -32,4 +32,7 @@ include	'plugins:org.eclipse.etrice.core.common',
 	'tests:org.eclipse.etrice.generator.common.tests',
 	'tests:org.eclipse.etrice.generator.c.tests',
 	'tests:org.eclipse.etrice.generator.cpp.tests',
-	'tests:org.eclipse.etrice.generator.java.tests'
+	'tests:org.eclipse.etrice.generator.java.tests',
+	
+	'releng:org.eclipse.etrice.releng',
+	'releng:org.eclipse.etrice.site'

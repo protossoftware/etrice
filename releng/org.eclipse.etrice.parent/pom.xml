@@ -33,7 +33,6 @@
 		<cbi.url>https://repo.eclipse.org/content/repositories/cbi-releases</cbi.url>
 		<etrice.url>http://download.eclipse.org/etrice/updates/nightly</etrice.url>
 
-		<build.alias></build.alias>
 		<build.type>N</build.type>
 	</properties>
 
@@ -111,7 +110,7 @@
 					</dependency>
 				</dependencies>
 				<configuration>
-					<format>'${build.alias}${build.type}'yyyyMMddHHmm</format>
+					<format>'${build.type}'yyyyMMddHHmm</format>
 					<timestampProvider>jgit</timestampProvider>
 					<jgit.dirtyWorkingTree>warning</jgit.dirtyWorkingTree>
 				</configuration>

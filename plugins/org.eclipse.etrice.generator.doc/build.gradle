@@ -1,3 +1,9 @@
+apply plugin: 'application'
+
+configurations {
+	archive
+}
+
 dependencies {
 	compile project(':plugins:org.eclipse.etrice.core.etmap')
 	compile project(':plugins:org.eclipse.etrice.core.genmodel')
@@ -7,3 +13,11 @@ dependencies {
 	
 	compile "org.eclipse.xtend:org.eclipse.xtend.lib:$versions.xtext"
 }
+
+artifacts {
+	archive distZip
+}
+
+mainClassName = 'org.eclipse.etrice.generator.doc.Main'
+
+distTar.enabled = false

@@ -1,0 +1,32 @@
+configurations {
+	archives
+	updates
+}
+
+dependencies {
+	archives project(path: ':plugins:org.eclipse.etrice.generator.c', configuration: 'archive')
+	archives project(path: ':plugins:org.eclipse.etrice.generator.cpp', configuration: 'archive')
+	archives project(path: ':plugins:org.eclipse.etrice.generator.java', configuration: 'archive')
+	archives project(path: ':plugins:org.eclipse.etrice.generator.doc', configuration: 'archive')
+	
+	updates project(path: ':releng:org.eclipse.etrice.site', configuration: 'archive')
+}
+
+
+def downloadDir = '/home/data/httpd/download.eclipse.org/etrice'
+// downloadDir = "$buildDir/download"
+def versionDir = version
+if(version.endsWith('SNAPSHOT')) {
+	versionDir = 'nightly'
+}
+def promoteDir = "$downloadDir/$versionDir"
+
+task promote(type: Sync) {
+	from([configurations.archives, configurations.updates]) {
+		into 'archives'
+	}
+	from(zipTree(configurations.updates.singleFile)) {
+		into 'updates'
+	}
+	into promoteDir
+}
