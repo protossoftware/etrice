@@ -22,8 +22,8 @@ import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.core.room.ComplexType
 import org.eclipse.etrice.core.room.DataClass
 import org.eclipse.etrice.core.room.util.RoomHelpers
-import org.eclipse.etrice.generator.fsm.base.FileSystemHelpers
 import org.eclipse.etrice.generator.base.io.IGeneratorFileIO
+import org.eclipse.etrice.generator.fsm.base.FileSystemHelpers
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
 
@@ -52,6 +52,7 @@ class DataClassGen {
 
 		import static org.eclipse.etrice.runtime.java.etunit.EtUnit.*;
 		import java.io.Serializable;
+		import java.util.Objects;
 
 		«var models = root.getReferencedModels(dc)»
 		«FOR model : models»
@@ -103,6 +104,12 @@ class DataClassGen {
 				«deepCopy(dc)»
 				return copy;
 			}
+			
+			// deep equals
+			«dc.deepEquals»
+			
+			// deep hashCode
+			«dc.deepHashCode»
 		};
 	'''
 	}
@@ -164,4 +171,26 @@ class DataClassGen {
 		«ENDFOR»
 		'''
 	}
+	
+	def protected deepEquals(DataClass it) '''
+		@Override
+		public boolean equals(Object other) {
+			if (this == other) {
+				return true;
+			}
+			if(other == null || this.getClass() != other.getClass()) {
+				return false;
+			}
+
+			«name» casted = («name») other;
+			return «roomHelpers.getAllAttributes(it).map[ attr | '''Objects.deepEquals(this.«attr.name», casted.«attr.name»)'''].join(' && ')»;
+		}
+	'''
+	
+	def protected deepHashCode(DataClass it) '''
+		@Override
+		public int hashCode() {
+			return Objects.hash(«roomHelpers.getAllAttributes(it).map[ attr | '''this.«attr.name»'''].join(', ')»);
+		}
+	'''
 }
