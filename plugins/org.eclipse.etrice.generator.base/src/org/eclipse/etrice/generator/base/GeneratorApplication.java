@@ -77,7 +77,7 @@ public class GeneratorApplication {
 	private IHelpFormatter helpFormatter;
 	private Provider<Logger> loggerProvider;
 	private Provider<GeneratorFileIO> fileIOProvider;
-	private Provider<IGenerator> generatorProvider;
+	private IGenerator generator;
 	private IGeneratorResourceLoader resourceLoader;
 	private IGeneratorResourceValidator resourceValidator;
 
@@ -85,7 +85,7 @@ public class GeneratorApplication {
 	public GeneratorApplication(@GeneratorName String name,
 			GeneratorOptions optionsModule, ICommandLineParser commandLineParser,
 			IHelpFormatter helpFormatter, Provider<Logger> loggerProvider,
-			Provider<GeneratorFileIO> fileIOProvider, Provider<IGenerator> generatorProvider,
+			Provider<GeneratorFileIO> fileIOProvider, IGenerator generator,
 			IGeneratorResourceLoader resourceLoader, IGeneratorResourceValidator resourceValidator) {
 		this.name = name;
 		this.options = new Options(new GeneratorApplicationOptions(), optionsModule);
@@ -93,7 +93,7 @@ public class GeneratorApplication {
 		this.helpFormatter = helpFormatter;
 		this.loggerProvider = loggerProvider;
 		this.fileIOProvider = fileIOProvider;
-		this.generatorProvider = generatorProvider;
+		this.generator = generator;
 		this.resourceLoader = resourceLoader;
 		this.resourceValidator = resourceValidator;
 	}
@@ -215,8 +215,6 @@ public class GeneratorApplication {
 	}
 
 	private void generate(List<Resource> resources, Arguments arguments, GeneratorFileIO fileIO, Logger logger) {
-		// Create new generator to avoid problems with static states in eTrice AbstractGenerator
-		IGenerator generator = generatorProvider.get();
 		generator.generate(resources, arguments, fileIO, logger);
 	}
 	

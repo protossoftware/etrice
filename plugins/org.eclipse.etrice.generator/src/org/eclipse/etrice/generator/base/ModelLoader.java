@@ -105,6 +105,7 @@ public class ModelLoader implements IGeneratorResourceLoader {
 			((XtextResourceSet) resourceSet).setClasspathURIContext(getClass().getClassLoader());
 		}
 		modelURIs.clear();
+		mainModelURIs.clear();
 		loadedModelURIs.clear();
 		
 		for (String uri : uriList) {

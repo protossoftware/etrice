@@ -78,17 +78,7 @@ public abstract class AbstractGenerator implements IGenerator, IDetailCodeTransl
 	public static final int GENERATOR_ERROR = 1;
 	
 	protected static ILineOutput output = new LineOutput();
-	private static AbstractGenerator instance = null;
 	private static Arguments settings = null;
-	
-	/**
-	 * It is assumed (though not enforced) that the generator is a singleton.
-	 * 
-	 * @return the singleton {@link AbstractGenerator}
-	 */
-	public static AbstractGenerator getInstance() {
-		return instance;
-	}
 	
 	/**
 	 * The generator settings can also be statically accessed using {@link #getInstance()} followed
@@ -147,13 +137,6 @@ public abstract class AbstractGenerator implements IGenerator, IDetailCodeTransl
 	private HashMap<DetailCode, String> detailcode2string = new HashMap<DetailCode, String>();
 	private ResourceSet resourceSet = null;
 	
-	/**
-	 * The protected constructor is setting the {@link #instance} static member
-	 */
-	protected AbstractGenerator() {
-		instance = this;
-	}
-	
 	@Override
 	public void generate(List<Resource> resources, Arguments arguments, IGeneratorFileIO fileIO, ILogger logger) {
 		AbstractGenerator.settings = arguments;
@@ -173,6 +156,8 @@ public abstract class AbstractGenerator implements IGenerator, IDetailCodeTransl
 			logger.logInfo("-- terminating");
 			throw new GeneratorException("generator error");
 		}
+		
+		detailcode2string.clear();
 	}
 	
 	/**
