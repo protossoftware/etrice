@@ -261,9 +261,73 @@
       <description>${scope.project.label}</description>
     </setupTask>
     <setupTask
+        xsi:type="git:GitCloneTask"
+        id="git.clone.website"
+        remoteName="gerrit"
+        remoteURI="www.eclipse.org/etrice"
+        checkoutBranch="master">
+      <annotation
+          source="http://www.eclipse.org/oomph/setup/InducedChoices">
+        <detail
+            key="inherit">
+          <value>eclipse.gerrit.remoteURIs</value>
+        </detail>
+        <detail
+            key="label">
+          <value>${scope.project.label} Website repository</value>
+        </detail>
+        <detail
+            key="target">
+          <value>remoteURI</value>
+        </detail>
+      </annotation>
+      <configSections
+          name="core">
+        <properties
+            key="autocrlf"
+            value="true"/>
+      </configSections>
+      <configSections
+          name="branch &quot;master&quot;">
+        <properties
+            key="rebase"
+            value="true"/>
+      </configSections>
+      <configSections
+          name="user">
+        <properties
+            key="name"
+            value="${git.author.name}"/>
+        <properties
+            key="email"
+            value="${git.author.email}"/>
+      </configSections>
+      <configSections
+          name="remote &quot;gerrit ssh&quot;">
+        <properties
+            key="pushurl"
+            value="ssh://${git.user.id}@git.eclipse.org:29418/www.eclipse.org/etrice.git "/>
+        <properties
+            key="push"
+            value="HEAD:refs/heads/master"/>
+      </configSections>
+      <configSections
+          name="remote &quot;gerrit bypass ssh&quot;">
+        <properties
+            key="pushurl"
+            value="ssh://${git.user.id}@git.eclipse.org:29418/www.eclipse.org/etrice.git "/>
+        <properties
+            key="push"
+            value="HEAD:refs/heads/master"/>
+      </configSections>
+      <description>${scope.project.label} website</description>
+    </setupTask>
+    <setupTask
         xsi:type="projects:ProjectsImportTask">
       <sourceLocator
           rootFolder="${git.clone.location}"/>
+      <sourceLocator
+          rootFolder="${git.clone.website.location}"/>
     </setupTask>
     <setupTask
         xsi:type="setup.workingsets:WorkingSetTask"
@@ -330,6 +394,12 @@
               xsi:type="predicates:RepositoryPredicate"
               project="org.eclipse.etrice.core.common"/>
         </predicate>
+      </workingSet>
+      <workingSet
+          name="${scope.project.label} Website">
+        <predicate
+            xsi:type="predicates:NamePredicate"
+            pattern="etrice"/>
       </workingSet>
       <description>The dynamic working sets for ${scope.project.label}</description>
     </setupTask>
