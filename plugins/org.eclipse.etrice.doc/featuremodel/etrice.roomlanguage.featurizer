@@ -1109,7 +1109,7 @@ abstract Feature Port
 		```room
 		Port portName : ProtocolClass1			["generated doc"]
 		Port portName[4] : ProtocolClass1		["generated doc"]
-		conjugated portName : ProtocolClass1	["generated doc"]
+		Port conjugated portName : ProtocolClass1	["generated doc"]
 		```
 	'''
 	isOfType ProtocolClass

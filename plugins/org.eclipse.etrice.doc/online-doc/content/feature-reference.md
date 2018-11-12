@@ -3109,6 +3109,14 @@ The MSCLogging is activated by default, but can be set manually in the [Generati
 
 
 
+[TextualROOMEditor]: #textualroomeditor
+[OutlineView]: #outlineview
+[GraphicalBehaviorEditor]: #graphicalbehavioreditor
+[GraphicalStructureEditor]: #graphicalstructureeditor
+[StructureEditorPalette]: #structureeditorpalette
+[ActorRefPropertyDialog]: #actorrefpropertydialog
+[PortPropertyDialog]: #portpropertydialog
+[SPPPropertyDialog]: #spppropertydialog
 [AnnotationType]: #annotationtype
 [Annotation]: #annotation
 [Inheritance]: #inheritance
@@ -3148,11 +3156,3 @@ The MSCLogging is activated by default, but can be set manually in the [Generati
 [GenerationOptions]: #generationoptions
 [MSCLogging]: #msclogging
 [DataLogging]: #datalogging
-[TextualROOMEditor]: #textualroomeditor
-[OutlineView]: #outlineview
-[GraphicalBehaviorEditor]: #graphicalbehavioreditor
-[GraphicalStructureEditor]: #graphicalstructureeditor
-[StructureEditorPalette]: #structureeditorpalette
-[ActorRefPropertyDialog]: #actorrefpropertydialog
-[PortPropertyDialog]: #portpropertydialog
-[SPPPropertyDialog]: #spppropertydialog
