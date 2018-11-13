@@ -97,7 +97,7 @@ After installation of eTrice in Eclipse, we can use the wizard to create the *te
 
 ![image](images/013-wizard.png)
 
-This will add three projects into your workspace:
+This will add the three projects into your workspace:
 
 - the library projects *runtime.c* and *modellib.c*
 - our application project *template.c*.
