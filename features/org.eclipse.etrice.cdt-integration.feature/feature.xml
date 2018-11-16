@@ -46,6 +46,8 @@ http://www.eclipse.org/legal/epl-v20.html
       <import plugin="org.eclipse.cdt.managedbuilder.core" version="8.2.1" match="greaterOrEqual"/>
       <import plugin="org.eclipse.equinox.common" version="3.6.200" match="greaterOrEqual"/>
       <import plugin="org.eclipse.core.resources"/>
+      <import plugin="org.eclipse.ant.launching"/>
+      <import feature="org.eclipse.cdt" version="8.0.0"/>
    </requires>
 
    <plugin
