@@ -632,5 +632,5 @@
           url="http://download.eclipse.org/etrice/updates/releases/2.0.0-RC6"/>
     </setupTask>
   </version>
-  <description>An IDE for C/C++ developers with Mylyn integration.</description>
+  <description>An IDE for C/C++ developers with the eTrice modeling tool.</description>
 </setup:Product>
