@@ -15,7 +15,7 @@
    
  -->
 <feature
-      id="org.eclipse.etrice.cdt-integration.feature"
+      id="org.eclipse.etrice.cdt_integration.feature"
       label="%featureName"
       version="2.0.0.qualifier"
       provider-name="%providerName"
@@ -47,7 +47,10 @@ http://www.eclipse.org/legal/epl-v20.html
       <import plugin="org.eclipse.equinox.common" version="3.6.200" match="greaterOrEqual"/>
       <import plugin="org.eclipse.core.resources"/>
       <import plugin="org.eclipse.ant.launching"/>
-      <import feature="org.eclipse.cdt" version="8.0.0"/>
+      <import feature="org.eclipse.cdt" version="8.0.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ant.core"/>
+      <import plugin="org.eclipse.ant.ui"/>
+      <import plugin="org.eclipse.core.externaltools"/>
    </requires>
 
    <plugin
