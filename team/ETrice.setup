@@ -306,7 +306,7 @@
           name="remote &quot;gerrit ssh&quot;">
         <properties
             key="pushurl"
-            value="ssh://${git.user.id}@git.eclipse.org:29418/www.eclipse.org/etrice.git "/>
+            value="ssh://${git.user.id}@git.eclipse.org:29418/www.eclipse.org/etrice.git"/>
         <properties
             key="push"
             value="HEAD:refs/heads/master"/>
@@ -315,7 +315,7 @@
           name="remote &quot;gerrit bypass ssh&quot;">
         <properties
             key="pushurl"
-            value="ssh://${git.user.id}@git.eclipse.org:29418/www.eclipse.org/etrice.git "/>
+            value="ssh://${git.user.id}@git.eclipse.org:29418/www.eclipse.org/etrice.git"/>
         <properties
             key="push"
             value="HEAD:refs/heads/master"/>
