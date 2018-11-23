@@ -236,7 +236,7 @@ public abstract class AbstractGenerator implements IGenerator, IDetailCodeTransl
 			
 			translateDetailCodes(gmRoot, doTranslate);
 			
-			URI genModelURI = !genModelPath.isEmpty() ? URI.createFileURI(genModelPath) : URI.createFileURI("tmp.rim");
+			URI genModelURI = !genModelPath.isEmpty() ? URI.createPlatformResourceURI(genModelPath, true) : URI.createFileURI("tmp.rim");
 			Resource genResource = getResourceSet().createResource(genModelURI);
 			genResource.getContents().add(gmRoot);
 			if (!genModelPath.isEmpty()) {
