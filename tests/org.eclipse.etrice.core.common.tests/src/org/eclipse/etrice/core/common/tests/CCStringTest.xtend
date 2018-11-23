@@ -222,7 +222,7 @@ text
 			assertEquals('''
 			   
 			
-			
+					 
 			text
 			'''.toString, toValue(text))
 			assertFalse(new CCStringIndentation(text).hasConsistentIndentation)
