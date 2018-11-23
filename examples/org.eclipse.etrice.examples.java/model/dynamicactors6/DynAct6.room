@@ -28,10 +28,9 @@ RoomModel org.eclipse.etrice.examples.dynamicactors6 {
 		}
 		Behavior {
 			// this method prints the passed message and then dumps the object tree consisting of actors and ports
-			Operation dumpTree(msg: string) {
-				"System.out.println(msg);"
-				"System.out.println(((org.eclipse.etrice.runtime.java.messaging.RTObject)getRoot()).toStringRecursive());"
-			}
+			Operation dumpTree(msg: string) '''
+				System.out.println(msg);
+				System.out.println(((org.eclipse.etrice.runtime.java.messaging.RTObject)getRoot()).toStringRecursive());'''
 			
 			StateMachine {
 				Transition init: initial -> CreateOptional2 { }
@@ -39,23 +38,20 @@ RoomModel org.eclipse.etrice.examples.dynamicactors6 {
 					triggers {
 						<hello: p0>
 					}
-					action {
-						"dumpTree(\"after received hello\");"
-						""
-						"System.out.println(\"received \"+txt);"
-						"System.out.println(\"Done, enter \'quit\' to exit\");"
-					}
-				}
+					action '''
+						dumpTree("after received hello");
+						
+						System.out.println("received "+transitionData);
+						System.out.println("Done, enter 'quit' to exit");''' }
 				State CreateOptional2 {
-					entry {
-						"opt.createOptionalActor(\"Optional2\", getThread());"
-						"dumpTree(\"after creation of Optional2\");"
-						""
-						"// at this point the port isn\'t connected since"
-						"// the init message isn\'t processed yet"
-						"// - so no peer port exists"
-						"p0.sayHello();"
-					}
+					entry '''
+						opt.createOptionalActor("Optional2", getThread());
+						dumpTree("after creation of Optional2");
+						
+						// at this point the port isn't connected since
+						// the init message isn't processed yet
+						// - so no peer port exists
+						p0.sayHello();'''
 				}
 				State Done
 			}
@@ -97,9 +93,7 @@ RoomModel org.eclipse.etrice.examples.dynamicactors6 {
 			StateMachine {
 				Transition init: initial -> Ready { }
 				State Ready {
-					entry {
-						"p0.hello(\"this is AC1, instance \"+getInstancePath());"
-					}
+					entry '''p0.hello("this is AC1, instance "+getInstancePath());'''
 				}
 			}
 		}
@@ -128,9 +122,7 @@ RoomModel org.eclipse.etrice.examples.dynamicactors6 {
 			StateMachine {
 				Transition init: initial -> Ready { }
 				State Ready {
-					entry {
-						"nestedOpt.createOptionalActor(\"Optional1\", getThread());"
-					}
+					entry '''nestedOpt.createOptionalActor("Optional1", getThread());'''
 				}
 			}
 		}
@@ -142,7 +134,7 @@ RoomModel org.eclipse.etrice.examples.dynamicactors6 {
 			Message sayHello()
 		}
 		outgoing {
-			Message hello(txt: string)
+			Message hello(string)
 		}
 	}
 }

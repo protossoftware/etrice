@@ -41,10 +41,7 @@ RoomModel org.eclipse.etrice.examples.dynamicactors7 {
 					triggers {
 						<hello: pin>
 					}
-					action {
-						"System.out.println(\"Controller received: \"+txt);"
-					}
-				}
+					action '''System.out.println("Controller received: "+transitionData);''' }
 				Transition tr2: Destroy -> CreateAgain {
 					triggers {
 						<done: pcont>
@@ -59,39 +56,24 @@ RoomModel org.eclipse.etrice.examples.dynamicactors7 {
 					triggers {
 						<hello: pin>
 					}
-					action {
-						"System.out.println(\"Controller received: \"+txt);"
-					}
-				}
+					action '''System.out.println("Controller received: "+transitionData);''' }
 				State CreateOptionals {
-					entry {
-						"pcont.createOpts();"
-					}
+					entry '''pcont.createOpts();'''
 				}
 				State Sending {
-					entry {
-						"pout.sayHello();"
-					}
+					entry '''pout.sayHello();'''
 				}
 				State Done {
-					entry {
-						"System.out.println(\"Done, enter \'quit\' to exit\");"
-					}
+					entry '''System.out.println("Done, enter 'quit' to exit");'''
 				}
 				State Destroy {
-					entry {
-						"pcont.destroyOpts();"
-					}
+					entry '''pcont.destroyOpts();'''
 				}
 				State CreateAgain {
-					entry {
-						"pcont.createOpts();"
-					}
+					entry '''pcont.createOpts();'''
 				}
 				State SendAgain {
-					entry {
-						"pout.sayHello();"
-					}
+					entry '''pout.sayHello();'''
 				}
 			}
 		}
@@ -113,32 +95,29 @@ RoomModel org.eclipse.etrice.examples.dynamicactors7 {
 		}
 		Behavior {
 			// this method prints the passed message and then dumps the object tree consisting of actors and ports
-			Operation dumpTree(msg: string) {
-				"System.out.println(msg);"
-				"System.out.println(((org.eclipse.etrice.runtime.java.messaging.RTObject)getRoot()).toStringRecursive());"
-			}
+			Operation dumpTree(msg: string) '''
+				System.out.println(msg);
+				System.out.println(((org.eclipse.etrice.runtime.java.messaging.RTObject)getRoot()).toStringRecursive());'''
 			StateMachine {
 				Transition init: initial -> Ready { }
 				Transition tr0: Ready -> Ready {
 					triggers {
 						<createOpts: fct>
 					}
-					action {
-						"opt1.createOptionalActor(\"Optional1\", getThread());"
-						"opt2.createOptionalActor(\"Optional2\", getThread());"
-						"dumpTree(\"after creation of op1 and opt2\");"
-						"fct.done();"
-					}
+					action '''
+						opt1.createOptionalActor("Optional1", getThread());
+						opt2.createOptionalActor("Optional2", getThread());
+						dumpTree("after creation of op1 and opt2");
+						fct.done();'''
 				}
 				Transition tr1: Ready -> Ready {
 					triggers {
 						<destroyOpts: fct>
 					}
-					action {
-						"opt1.destroyOptionalActor();"
-						"opt2.destroyOptionalActor();"
-						"fct.done();"
-					}
+					action '''
+						opt1.destroyOptionalActor();
+						opt2.destroyOptionalActor();
+						fct.done();'''
 				}
 				State Ready
 			}
@@ -187,9 +166,7 @@ RoomModel org.eclipse.etrice.examples.dynamicactors7 {
 					triggers {
 						<sayHello: pin>
 					}
-					action {
-						"pout.hello(\"this is AC1, instance \"+getInstancePath());"
-					}
+					action '''pout.hello("this is AC1, instance "+getInstancePath());'''
 				}
 				State Ready
 			}
@@ -212,11 +189,10 @@ RoomModel org.eclipse.etrice.examples.dynamicactors7 {
 					triggers {
 						<hello: pin>
 					}
-					action {
-						"System.out.println(\"AC2 received \"+txt);"
-						""
-						"pout.hello(\"AC2: forwarding \"+txt);"
-					}
+					action '''
+						System.out.println("AC2 received "+transitionData);
+						
+						pout.hello("AC2: forwarding "+transitionData);'''
 				}
 				State Ready
 			}
@@ -228,7 +204,7 @@ RoomModel org.eclipse.etrice.examples.dynamicactors7 {
 			Message sayHello()
 		}
 		outgoing {
-			Message hello(txt: string)
+			Message hello(string)
 		}
 	}
 

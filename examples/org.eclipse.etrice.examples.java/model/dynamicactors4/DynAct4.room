@@ -39,10 +39,7 @@ RoomModel org.eclipse.etrice.examples.dynamicactors4 {
 					triggers {
 						<hello: opt>
 					}
-					action {
-						"System.out.println(\"controller received \"+txt);"
-					}
-				}
+					action '''System.out.println("controller received "+transitionData);''' }
 				Transition tr2: createOpt1 -> UnexpectedError {
 					triggers {
 						<error: wrk>
@@ -54,25 +51,17 @@ RoomModel org.eclipse.etrice.examples.dynamicactors4 {
 					}
 				}
 				State createOpt1 {
-					entry {
-						"wrk.create(\"Optional1\");"
-					}
+					entry '''wrk.create("Optional1");'''
 				}
 				State SendHello {
-					entry {
-						"opt.sayHello();"
-					}
+					entry '''opt.sayHello();'''
 				}
 				State TryCreateInvalid {
-					entry {
-						"wrk.create(\"Optional\");"
-					}
+					entry '''wrk.create("Optional");'''
 				}
 				State UnexpectedError
 				State ExpectedError {
-					entry {
-						"System.out.println(\"Done, enter 'quit' to exit\"); "
-					}
+					entry '''System.out.println("Done, enter 'quit' to exit"); '''
 				}
 			}
 		}
@@ -90,10 +79,9 @@ RoomModel org.eclipse.etrice.examples.dynamicactors4 {
 		}
 		Behavior {
 			// this method prints the passed message and then dumps the object tree consisting of actors and ports
-			Operation dumpTree(msg: string) {
-				"System.out.println(msg);"
-				"System.out.println(((org.eclipse.etrice.runtime.java.messaging.RTObject)getRoot()).toStringRecursive());"
-			}
+			Operation dumpTree(msg: string) '''
+				System.out.println(msg);
+				System.out.println(((org.eclipse.etrice.runtime.java.messaging.RTObject)getRoot()).toStringRecursive());'''
 			
 			StateMachine {
 				Transition init: initial -> Ready { }
@@ -101,13 +89,11 @@ RoomModel org.eclipse.etrice.examples.dynamicactors4 {
 					triggers {
 						<create: fct>
 					}
-					action {
-						"if (optRef.createOptionalActor(ac, getThread()))"
-						"\tfct.ok();"
-						"else"
-						"\tfct.error();"
-					}
-				}
+					action '''
+						if (optRef.createOptionalActor(transitionData, getThread()))
+							fct.ok();
+						else
+							fct.error();''' }
 				State Ready
 			}
 		}
@@ -165,16 +151,12 @@ RoomModel org.eclipse.etrice.examples.dynamicactors4 {
 					triggers {
 						<hello: hlp>
 					}
-					action {
-						"System.out.println(\"helper said \"+txt);"
-						"p0.hello(\"this is AC1, instance \"+getInstancePath());"
-					}
-				}
+					action '''
+						System.out.println("helper said "+transitionData);
+						p0.hello("this is AC1, instance "+getInstancePath());''' }
 				State Ready
 				State AskHelper {
-					entry {
-						"hlp.sayHello();"
-					}
+					entry '''hlp.sayHello();'''
 				}
 			}
 		}
@@ -205,9 +187,7 @@ RoomModel org.eclipse.etrice.examples.dynamicactors4 {
 					triggers {
 						<sayHello: p0>
 					}
-					action {
-						"p0.hello(\"this is AC3, instance \"+getInstancePath());"
-					}
+					action '''p0.hello("this is AC3, instance "+getInstancePath());'''
 				}
 				State Ready
 			}
@@ -220,13 +200,13 @@ RoomModel org.eclipse.etrice.examples.dynamicactors4 {
 			Message sayHello()
 		}
 		outgoing {
-			Message hello(txt: string)
+			Message hello(string)
 		}
 	}
 	
 	ProtocolClass PWorker {
 		incoming {
-			Message create(ac: string)
+			Message create(string)
 		}
 		outgoing {
 			Message ok()

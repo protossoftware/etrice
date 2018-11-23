@@ -28,10 +28,9 @@ RoomModel org.eclipse.etrice.examples.dynamicactors5 {
 		}
 		Behavior {
 			// this method prints the passed message and then dumps the object tree consisting of actors and ports
-			Operation dumpTree(msg: string) {
-				"System.out.println(msg);"
-				"System.out.println(((org.eclipse.etrice.runtime.java.messaging.RTObject)getRoot()).toStringRecursive());"
-			}
+			Operation dumpTree(msg: string) '''
+				System.out.println(msg);
+				System.out.println(((org.eclipse.etrice.runtime.java.messaging.RTObject)getRoot()).toStringRecursive());'''
 			
 			StateMachine {
 				Transition init: initial -> CreateOptional { }
@@ -39,22 +38,17 @@ RoomModel org.eclipse.etrice.examples.dynamicactors5 {
 					triggers {
 						<hello: p0>
 					}
-					action {
-						"System.out.println(txt+\"\\n\");"
-						"opt.destroyOptionalActor();"
-						"dumpTree(\"after deletion of Optional2\");"
-					}
-				}
+					action '''
+						System.out.println(transitionData+"\n");
+						opt.destroyOptionalActor();
+						dumpTree("after deletion of Optional2");''' }
 				State CreateOptional {
-					entry {
-						"opt.createOptionalActor(\"Optional\", getThread());"
-						"p0.sayHello();"
-					}
+					entry '''
+						opt.createOptionalActor("Optional", getThread());
+						p0.sayHello();'''
 				}
 				State Done {
-					entry {
-						"System.out.println(\"Done, enter 'quit' to exit\"); "
-					}
+					entry '''System.out.println("Done, enter 'quit' to exit"); '''
 				}
 			}
 		}
@@ -76,9 +70,7 @@ RoomModel org.eclipse.etrice.examples.dynamicactors5 {
 					triggers {
 						<sayHello: p0>
 					}
-					action {
-						"p0.hello(\"this is AC1, instance \"+getInstancePath());"
-					}
+					action '''p0.hello("this is AC1, instance "+getInstancePath());'''
 				}
 				State Ready
 			}
@@ -91,7 +83,7 @@ RoomModel org.eclipse.etrice.examples.dynamicactors5 {
 			Message sayHello()
 		}
 		outgoing {
-			Message hello(txt: string)
+			Message hello(string)
 		}
 	}
 }

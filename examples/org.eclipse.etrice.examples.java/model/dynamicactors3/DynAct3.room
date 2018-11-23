@@ -28,10 +28,9 @@ RoomModel org.eclipse.etrice.examples.dynamicactors3 {
 		}
 		Behavior {
 			// this method prints the passed message and then dumps the object tree consisting of actors and ports
-			Operation dumpTree(msg: string) {
-				"System.out.println(msg);"
-				"System.out.println(((org.eclipse.etrice.runtime.java.messaging.RTObject)getRoot()).toStringRecursive());"
-			}
+			Operation dumpTree(msg: string) '''
+				System.out.println(msg);
+				System.out.println(((org.eclipse.etrice.runtime.java.messaging.RTObject)getRoot()).toStringRecursive());'''
 			
 			StateMachine {
 				Transition init: initial -> CreateOptional2 { }
@@ -39,79 +38,58 @@ RoomModel org.eclipse.etrice.examples.dynamicactors3 {
 					triggers {
 						<hello: p0>
 					}
-					action {
-						"System.out.println(txt+\"\\n\");"
-					}
-				}
+					action '''System.out.println(transitionData+"\n");''' }
 				Transition tr2: CreateOptional1 -> ReceivedHelloAgain {
 					triggers {
 						<hello: p0>
 					}
-					action {
-						"System.out.println(txt+\"\\n\");"
-					}
-				}
+					action '''System.out.println(transitionData+"\n");''' }
 				Transition tr1: ReceivedHelloAgain -> Destroy0 {
 					triggers {
 						<hello: p0>
 					}
-					action {
-						"System.out.println(txt+\"\\n\");"
-					}
-				}
+					action '''System.out.println(transitionData+"\n");''' }
 				Transition tr3: Destroy0 -> Destroy1Create2 {
 					triggers {
 						<hello: p0>
 					}
-					action {
-						"System.out.println(txt+\"\\n\");"
-					}
-				}
+					action '''System.out.println(transitionData+"\n");''' }
 				Transition tr4: Destroy1Create2 -> Done {
 					triggers {
 						<hello: p0>
 					}
-					action {
-						"System.out.println(txt+\"\\n\");"
-					}
-				}
+					action '''System.out.println(transitionData+"\n");''' }
 				State CreateOptional2 {
-					entry {
-						"dumpTree(\"before creation of Optional2\");"
-						"optarray.createOptionalActor(\"Optional2\", getThread());"
-						"dumpTree(\"after creation of Optional2\");"
-						"p0.sayHello();"
-					}
+					entry '''
+						dumpTree("before creation of Optional2");
+						optarray.createOptionalActor("Optional2", getThread());
+						dumpTree("after creation of Optional2");
+						p0.sayHello();'''
 				}
 				State CreateOptional1 {
-					entry {
-						"optarray.createOptionalActor(\"Optional1\", getThread());"
-						"p0.sayHello();"
-						"dumpTree(\"after creation of Optional1\");"
-					}
+					entry '''
+						optarray.createOptionalActor("Optional1", getThread());
+						p0.sayHello();
+						dumpTree("after creation of Optional1");'''
 				}
 				State ReceivedHelloAgain
 				State Destroy0 {
-					entry {
-						"optarray.destroyOptionalActor(0);"
-						"dumpTree(\"after deletion of Optional2\");"
-						"p0.sayHello();"
-					}
+					entry '''
+						optarray.destroyOptionalActor(0);
+						dumpTree("after deletion of Optional2");
+						p0.sayHello();'''
 				}
 				State Destroy1Create2 {
-					entry {
-						"optarray.destroyOptionalActor(1);"
-						"dumpTree(\"after deletion of Optional1\");"
-						""
-						"optarray.createOptionalActor(\"Optional2\", getThread());"
-						"dumpTree(\"after second creation of Optional2\");"
-						"p0.sayHello();"
-					}
+					entry '''
+						optarray.destroyOptionalActor(1);
+						dumpTree("after deletion of Optional1");
+						
+						optarray.createOptionalActor("Optional2", getThread());
+						dumpTree("after second creation of Optional2");
+						p0.sayHello();'''
 				}
 				State Done {
-					entry {
-						"System.out.println(\"Done, enter 'quit' to exit\"); "
-					}
+					entry '''System.out.println("Done, enter 'quit' to exit"); '''
 				}
 			}
 		}
@@ -169,16 +147,12 @@ RoomModel org.eclipse.etrice.examples.dynamicactors3 {
 					triggers {
 						<hello: hlp>
 					}
-					action {
-						"System.out.println(\"helper said \"+txt);"
-						"p0.hello(\"this is AC1, instance \"+getInstancePath());"
-					}
-				}
+					action '''
+						System.out.println("helper said "+transitionData);
+						p0.hello("this is AC1, instance "+getInstancePath());''' }
 				State Ready
 				State AskHelper {
-					entry {
-						"hlp.sayHello();"
-					}
+					entry '''hlp.sayHello();'''
 				}
 			}
 		}
@@ -209,9 +183,7 @@ RoomModel org.eclipse.etrice.examples.dynamicactors3 {
 					triggers {
 						<sayHello: p0>
 					}
-					action {
-						"p0.hello(\"this is AC3, instance \"+getInstancePath());"
-					}
+					action '''p0.hello("this is AC3, instance "+getInstancePath());'''
 				}
 				State Ready
 			}
@@ -224,7 +196,7 @@ RoomModel org.eclipse.etrice.examples.dynamicactors3 {
 			Message sayHello()
 		}
 		outgoing {
-			Message hello(txt: string)
+			Message hello(string)
 		}
 	}
 }

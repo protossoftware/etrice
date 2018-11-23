@@ -31,68 +31,55 @@ RoomModel org.eclipse.etrice.examples.dynamicactors2 {
 		}
 		Behavior {
 			// this method prints the passed message and then dumps the object tree consisting of actors and ports
-			Operation printMemory(msg: string) {
-				"System.out.println(msg);"
-				"System.out.println(\"memory,\"+(counter++)+\",\"+Runtime.getRuntime().freeMemory());"
-			}
+			Operation printMemory(msg: string) '''
+				System.out.println(msg);
+				System.out.println("memory,"+(counter++)+","+Runtime.getRuntime().freeMemory());'''
 			
 			StateMachine {
 				Transition init: initial -> CreateOptional2 {
-					action {
-						"long lDateTime = new java.util.Date().getTime();"
-						"System.out.println(\"begin: \" + lDateTime);"
-						"printMemory(\"initial\");"
-					}
+					action '''
+						long lDateTime = new java.util.Date().getTime();
+						System.out.println("begin: " + lDateTime);
+						printMemory("initial");'''
 				}
 				Transition tr0: CreateOptional2 -> CreateOptional1 {
 					triggers {
 						<hello: p0>
 					}
-					action {
-						"System.out.println(txt+\"\\n\");"
-						"opt.destroyOptionalActor();"
-						"printMemory(\"after deletion of Optional2\");"
-					}
-				}
+					action '''
+						System.out.println(transitionData+"\n");
+						opt.destroyOptionalActor();
+						printMemory("after deletion of Optional2");''' }
 				Transition tr2: CreateOptional1 -> cp cp0 {
 					triggers {
 						<hello: p0>
 					}
-					action {
-						"System.out.println(txt+\"\\n\");"
-						"opt.destroyOptionalActor();"
-						"printMemory(\"after deletion of Optional1\");"
-					}
-				}
+					action '''
+						System.out.println(transitionData+"\n");
+						opt.destroyOptionalActor();
+						printMemory("after deletion of Optional1");''' }
 				Transition tr1: cp cp0 -> CreateOptional2
 				Transition tr3: cp cp0 -> Done {
-					cond {
-						"counter>1200"
-					}
-					action {
-						"long lDateTime = new java.util.Date().getTime();"
-						"System.out.println(\"end: \" + lDateTime);"
-					}
+					cond '''counter>1200'''
+					action '''
+						long lDateTime = new java.util.Date().getTime();
+						System.out.println("end: " + lDateTime);'''
 				}
 				ChoicePoint cp0
 				State CreateOptional2 {
-					entry {
-						"opt.createOptionalActor(\"Optional2\", getThread());"
-						"p0.sayHello();"
-						"printMemory(\"after creation of Optional2\");"
-					}
+					entry '''
+						opt.createOptionalActor("Optional2", getThread());
+						p0.sayHello();
+						printMemory("after creation of Optional2");'''
 				}
 				State CreateOptional1 {
-					entry {
-						"opt.createOptionalActor(\"Optional1\", getThread());"
-						"p0.sayHello();"
-						"printMemory(\"after creation of Optional1\");"
-					}
+					entry '''
+						opt.createOptionalActor("Optional1", getThread());
+						p0.sayHello();
+						printMemory("after creation of Optional1");'''
 				}
 				State Done {
-					entry {
-						"System.out.println(\"Done, enter 'quit' to exit\"); "
-					}
+					entry '''System.out.println("Done, enter 'quit' to exit"); '''
 				}
 			}
 		}
@@ -142,9 +129,7 @@ RoomModel org.eclipse.etrice.examples.dynamicactors2 {
 					triggers {
 						<sayHello: p0>
 					}
-					action {
-						"p0.hello(\"this is AC1, instance \"+getInstancePath());"
-					}
+					action '''p0.hello("this is AC1, instance "+getInstancePath());'''
 				}
 				State Ready
 			}
@@ -176,9 +161,7 @@ RoomModel org.eclipse.etrice.examples.dynamicactors2 {
 					triggers {
 						<sayHello: p0>
 					}
-					action {
-						"p0.hello(\"this is AC3, instance \"+getInstancePath());"
-					}
+					action '''p0.hello("this is AC3, instance "+getInstancePath());'''
 				}
 				State Ready
 			}
@@ -191,7 +174,7 @@ RoomModel org.eclipse.etrice.examples.dynamicactors2 {
 			Message sayHello()
 		}
 		outgoing {
-			Message hello(txt: string)
+			Message hello(string)
 		}
 	}
 }

@@ -20,13 +20,10 @@ RoomModel org.eclipse.etrice.examples.dynamicactors8 {
 
 	ActorClass Container {
 		Structure {
-			usercode1 {
-				"import java.io.File;"
-			}
-			usercode2 {
-				"private static final String FIRST_OPT_OBJ = \"firstOpt.obj\";"
-				"private static final String SECOND_OPT_OBJ = \"secondOpt.obj\";"
-			}
+			usercode1 '''import java.io.File;'''
+			usercode2 '''
+				private static final String FIRST_OPT_OBJ = "firstOpt.obj";
+				private static final String SECOND_OPT_OBJ = "secondOpt.obj";'''
 			conjugated Port op: PStep
 			conjugated Port opa [*]: PStep
 			optional ActorRef opt: Optional
@@ -35,89 +32,67 @@ RoomModel org.eclipse.etrice.examples.dynamicactors8 {
 			Binding opa and optarr.fct
 		}
 		Behavior {
-			Operation clean() {
-				"File f = new File(FIRST_OPT_OBJ);"
-				"if (f.exists())"
-				"\tf.delete();"
-			}
+			Operation clean() '''
+				File f = new File(FIRST_OPT_OBJ);
+				if (f.exists())
+					f.delete();'''
 			StateMachine {
 				Transition init: initial -> Init { }
 				Transition tr0: Init -> DestroyAndCreate {
 					triggers {
 						<hello: op>
 					}
-					action {
-						"System.out.println(\"received \"+txt);"
-					}
-				}
+					action '''System.out.println("received "+transitionData);''' }
 				Transition tr1: DestroyAndCreate -> DestroyAndRestore {
 					triggers {
 						<hello: op>
 					}
-					action {
-						"System.out.println(\"received \"+txt);"
-					}
-				}
+					action '''System.out.println("received "+transitionData);''' }
 				Transition tr2: DestroyAndRestore -> LoadInArray {
 					triggers {
 						<hello: op>
 					}
-					action {
-						"System.out.println(\"received \"+txt);"
-					}
-				}
+					action '''System.out.println("received "+transitionData);''' }
 				Transition tr3: LoadInArray -> ReceivedHello {
 					triggers {
 						<hello: opa>
 					}
-					action {
-						"System.out.println(\"received \"+txt);"
-					}
-				}
+					action '''System.out.println("received "+transitionData);''' }
 				Transition tr4: ReceivedHello -> Done {
 					triggers {
 						<hello: opa>
 					}
-					action {
-						"System.out.println(\"received \"+txt);"
-					}
-				}
+					action '''System.out.println("received "+transitionData);''' }
 				State Init {
-					entry {
-						"clean();"
-						"FilePersistor.createAndLoad(opt, getThread(), FIRST_OPT_OBJ, \"Optional1\");"
-						"op.step();"
-						"op.step();"
-						"op.sayHello();"
-					}
+					entry '''
+						clean();
+						FilePersistor.createAndLoad(opt, getThread(), FIRST_OPT_OBJ, "Optional1");
+						op.step();
+						op.step();
+						op.sayHello();'''
 				}
 				State DestroyAndCreate {
-					entry {
-						"FilePersistor.saveAndDestroy(opt, FIRST_OPT_OBJ);"
-						"FilePersistor.createAndLoad(opt, getThread(), SECOND_OPT_OBJ, \"Optional2\");"
-						"op.step();"
-						"op.step();"
-						"op.sayHello();"
-					}
+					entry '''
+						FilePersistor.saveAndDestroy(opt, FIRST_OPT_OBJ);
+						FilePersistor.createAndLoad(opt, getThread(), SECOND_OPT_OBJ, "Optional2");
+						op.step();
+						op.step();
+						op.sayHello();'''
 				}
 				State DestroyAndRestore {
-					entry {
-						"FilePersistor.saveAndDestroy(opt, SECOND_OPT_OBJ);"
-						"FilePersistor.createAndLoad(opt, getThread(), FIRST_OPT_OBJ, \"Optional1\");"
-						"op.sayHello();"
-					}
+					entry '''
+						FilePersistor.saveAndDestroy(opt, SECOND_OPT_OBJ);
+						FilePersistor.createAndLoad(opt, getThread(), FIRST_OPT_OBJ, "Optional1");
+						op.sayHello();'''
 				}
 				State Done {
-					entry {
-						"System.out.println(\"Done, enter 'quit' to exit\");"
-					}
+					entry '''System.out.println("Done, enter 'quit' to exit");'''
 				}
 				State LoadInArray {
-					entry {
-						"FilePersistor.createAndLoad(optarr, getThread(), FIRST_OPT_OBJ, \"Optional1\");"
-						"FilePersistor.createAndLoad(optarr, getThread(), SECOND_OPT_OBJ, \"Optional2\");"
-						"opa.sayHello();"
-					}
+					entry '''
+						FilePersistor.createAndLoad(optarr, getThread(), FIRST_OPT_OBJ, "Optional1");
+						FilePersistor.createAndLoad(optarr, getThread(), SECOND_OPT_OBJ, "Optional2");
+						opa.sayHello();'''
 				}
 				State ReceivedHello
 			}
@@ -173,38 +148,29 @@ RoomModel org.eclipse.etrice.examples.dynamicactors8 {
 					triggers {
 						<step: fct>
 					}
-					action {
-						"dp.step();"
-					}
+					action '''dp.step();'''
 				}
 				Transition tr1: Step2 -> Step3 {
 					triggers {
 						<step: fct>
 					}
-					action {
-						"dp.step();"
-					}
+					action '''dp.step();'''
 				}
 				Transition tr2: my tp0 -> my tp0 {
 					triggers {
 						<sayHello: fct>
 					}
-					action {
-						"fct.hello(getClassName()+\", state=\"+stateStrings[getState()]+\", path= \"+getInstancePath());"
-					}
+					action '''fct.hello(getClassName()+", state="+stateStrings[getState()]+", path= "+getInstancePath());'''
 				}
 				handler TransitionPoint tp0
 				State Step1 {
-					entry {
-						"ival = 1;"
-						"sval = 2;"
-						"bval = 3;"
-					}
+					entry '''
+						ival = 1;
+						sval = 2;
+						bval = 3;'''
 				}
 				State Step2 {
-					entry {
-						"ival = 123;"
-					}
+					entry '''ival = 123;'''
 				}
 				State Step3 {
 					subgraph {
@@ -213,27 +179,19 @@ RoomModel org.eclipse.etrice.examples.dynamicactors8 {
 							triggers {
 								<step: fct>
 							}
-							action {
-								"dp.step();"
-							}
+							action '''dp.step();'''
 						}
 						Transition tr1: StepB -> StepC {
 							triggers {
 								<step: fct>
 							}
-							action {
-								"dp.step();"
-							}
+							action '''dp.step();'''
 						}
 						State StepA {
-							entry {
-								"sval = 456;"
-							}
+							entry '''sval = 456;'''
 						}
 						State StepB {
-							entry {
-								"bval = 13;"
-							}
+							entry '''bval = 13;'''
 						}
 						State StepC
 					}
@@ -306,9 +264,7 @@ RoomModel org.eclipse.etrice.examples.dynamicactors8 {
 					triggers {
 						<sayHello: fct>
 					}
-					action {
-						"fct.hello(getClassName()+\", state=\"+stateStrings[getState()]+\", path= \"+getInstancePath());"
-					}
+					action '''fct.hello(getClassName()+", state="+stateStrings[getState()]+", path= "+getInstancePath());'''
 				}
 				State Ready
 			}
@@ -321,7 +277,7 @@ RoomModel org.eclipse.etrice.examples.dynamicactors8 {
 			Message sayHello()
 		}
 		outgoing {
-			Message hello(txt: string)
+			Message hello(string)
 		}
 	}
 

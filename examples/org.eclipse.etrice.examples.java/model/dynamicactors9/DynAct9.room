@@ -28,9 +28,7 @@ RoomModel org.eclipse.etrice.examples.dynamicactors9 {
 			StateMachine {
 				Transition init: initial -> Running { }
 				State Running {
-					entry {
-						"pp.createOptionalActor(\"PingPong\", getThread());"
-					}
+					entry '''pp.createOptionalActor("PingPong", getThread());'''
 				}
 			}
 		}
@@ -60,14 +58,10 @@ RoomModel org.eclipse.etrice.examples.dynamicactors9 {
 					}
 				}
 				State SendingPing {
-					entry {
-						"receiver.ping();"
-					}
+					entry '''receiver.ping();'''
 				}
 				State ReceivedPong {
-					entry {
-						"System.out.println(\"Done, enter \'quit\' to exit\");"
-					}
+					entry '''System.out.println("Done, enter 'quit' to exit");'''
 				}
 			}
 		}
@@ -96,14 +90,10 @@ RoomModel org.eclipse.etrice.examples.dynamicactors9 {
 				}
 				State WaitingForPing
 				State WaitingForAWhile {
-					entry {
-						"timing.startTimeout(1000);"
-					}
+					entry '''timing.startTimeout(1000);'''
 				}
 				State SentPong {
-					entry {
-						"sender.pong();"
-					}
+					entry '''sender.pong();'''
 				}
 			}
 		}
