@@ -87,11 +87,19 @@ public class RoomEditor extends XtextEditor implements IValidatingEditor {
 	}
 	
 	@Override
-	public <T> T getAdapter(Class<T> key) {
+	public Object getAdapter(@SuppressWarnings("rawtypes") Class key) {
 		if (key.equals(IContextProvider.class)) {
-			return key.cast(new SelectedModelHelpProvider(this));
+			return new SelectedModelHelpProvider(this);
 		}
 		return super.getAdapter(key);
 
 	}
+	// TODO: with Xtext 2.15 replace with implementation below
+//	public <T> T getAdapter(Class<T> key) {
+//	if (key.equals(IContextProvider.class)) {
+//		return key.cast(new SelectedModelHelpProvider(this));
+//	}
+//	return super.getAdapter(key);
+//
+//}
 }
