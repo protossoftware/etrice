@@ -58,7 +58,8 @@ public class KeywordHoverProvider extends DefaultEObjectHoverProvider {
 			Keyword keyword = (Keyword) element;
 			String html = contentProvider.getHTMLContent(keyword.getValue());
 			if (html != null) {
-				StringBuilder buffer = new StringBuilder(html);
+				// TODO: in Xtext 2.15 replace with StringBuilder
+				StringBuffer buffer = new StringBuffer(html);
 				HTMLPrinter.insertPageProlog(buffer, 0, getKeywordStyleSheet());
 				HTMLPrinter.addPageEpilog(buffer);
 				return new XtextBrowserInformationControlInput(previous, element, buffer.toString(), labelProvider);
