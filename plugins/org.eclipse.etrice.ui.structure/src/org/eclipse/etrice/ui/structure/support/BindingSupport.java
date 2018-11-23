@@ -359,7 +359,7 @@ public class BindingSupport {
 					
 					GeneralProtocolClass srcGPC = src.getProtocol();
 					GeneralProtocolClass dstGPC = dst.getProtocol();
-					if (srcGPC instanceof GeneralProtocolClass || dstGPC instanceof GeneralProtocolClass) {
+					if (srcGPC != null || dstGPC != null) {
 				        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 						SubProtocolSelectionDialog dlg = new SubProtocolSelectionDialog(shell, src, ar1, dst, ar2, bind, sc);
 						if (dlg.open()!=Window.OK)

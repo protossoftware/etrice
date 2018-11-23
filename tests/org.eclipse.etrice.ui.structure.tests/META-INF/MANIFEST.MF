@@ -18,3 +18,4 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-Vendor: Eclipse eTrice
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: org.eclipse.etrice.ui.structure.StructureTestActivator
+Automatic-Module-Name: org.eclipse.etrice.ui.structure.tests

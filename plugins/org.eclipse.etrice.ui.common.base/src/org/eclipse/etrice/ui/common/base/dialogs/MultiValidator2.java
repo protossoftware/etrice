@@ -36,6 +36,7 @@ import org.eclipse.core.runtime.IStatus;
  * But is aware of converters and pre-validators and treats a last valid state of any value as failure.
  *
  */
+@SuppressWarnings({"rawtypes", "unchecked"})
 public abstract class MultiValidator2 extends MultiValidator {
 
 	private int targetCount;

@@ -19,3 +19,4 @@ Require-Bundle: org.eclipse.etrice.core.room;bundle-version="2.0.0",
 Bundle-Activator: org.eclipse.etrice.core.CoreTestsActivator
 Bundle-ActivationPolicy: lazy
 Export-Package: org.eclipse.etrice.core
+Automatic-Module-Name: org.eclipse.etrice.core.room.tests

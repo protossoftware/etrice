@@ -40,10 +40,10 @@ import org.eclipse.etrice.core.room.PrimitiveType
 import org.eclipse.etrice.core.room.RoomClass
 import org.eclipse.etrice.core.room.RoomModel
 import org.eclipse.etrice.core.room.util.RoomHelpers
+import org.eclipse.etrice.generator.c.Main
+import org.eclipse.etrice.generator.c.setup.GeneratorOptionsHelper
 import org.eclipse.etrice.generator.generic.ILanguageExtension
 import org.eclipse.xtext.util.Pair
-import org.eclipse.etrice.generator.c.setup.GeneratorOptionsHelper
-import org.eclipse.etrice.generator.c.Main
 
 @Singleton
 class CExtensions implements ILanguageExtension {
@@ -54,7 +54,7 @@ class CExtensions implements ILanguageExtension {
 
 	override String getTypedDataDefinition(EObject msg) {
 	    if (msg instanceof Message) {
-    		generateArglistAndTypedData((msg as Message).data).get(TypedDataKind.DECLARATION_AND_INITIALIZATION.ordinal)
+    		generateArglistAndTypedData(msg.data).get(TypedDataKind.DECLARATION_AND_INITIALIZATION.ordinal)
 	    }
 	    else {
 	        ""

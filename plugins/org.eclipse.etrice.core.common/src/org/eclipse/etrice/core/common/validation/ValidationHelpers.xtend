@@ -27,7 +27,7 @@ import com.google.common.base.Function
  */
 class ValidationHelpers {
 
-	public static class NamedObject {
+	static class NamedObject {
 		@Property String name
 		@Property EObject obj
 		@Property EStructuralFeature feature
@@ -39,7 +39,7 @@ class ValidationHelpers {
 		}
 	}
 
-	public static class NamedObjectList extends ArrayList<NamedObject> {
+	static class NamedObjectList extends ArrayList<NamedObject> {
 		def addAll(List<? extends EObject> items, EStructuralFeature feature) {
 			items.forEach[this.add(new NamedObject(it.eGet(feature) as String, it, feature))]
 		}

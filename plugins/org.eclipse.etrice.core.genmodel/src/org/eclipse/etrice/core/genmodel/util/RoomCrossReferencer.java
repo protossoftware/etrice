@@ -110,7 +110,7 @@ public class RoomCrossReferencer {
 			getReferencedClassesAndModels(dataClasses, enumClasses, protocolClasses,
 					actorClasses, models);
 
-			protocolClasses.remove((ProtocolClass) rc);
+			protocolClasses.remove(rc);
 		}
 		return protocolClasses;
 	}

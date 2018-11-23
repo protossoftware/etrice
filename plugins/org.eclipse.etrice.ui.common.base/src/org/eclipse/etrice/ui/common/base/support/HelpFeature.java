@@ -41,10 +41,9 @@ public class HelpFeature extends AbstractCustomFeature {
 	}
 
 	public String getFeatureId(ICustomContext context) {
-		if (context instanceof ICustomContext) {
-			ICustomContext peContext = (ICustomContext) context;
-			if (peContext.getPictogramElements() != null && peContext.getPictogramElements().length == 1){
-				PictogramElement pe = peContext.getPictogramElements()[0];
+		if (context != null) {
+			if (context.getPictogramElements() != null && context.getPictogramElements().length == 1){
+				PictogramElement pe = context.getPictogramElements()[0];
 				// don't show help for diagram input
 				if(getBusinessObjectForPictogramElement(pe) == getBusinessObjectForPictogramElement(getDiagram()))
 					return null;
@@ -70,7 +69,7 @@ public class HelpFeature extends AbstractCustomFeature {
 
 			@Override
 			public IStatus runInUIThread(IProgressMonitor monitor) {
-				ContextHelpProvider.showHelp(getBoClassName(((ICustomContext) context).getPictogramElements()[0]));
+				ContextHelpProvider.showHelp(getBoClassName(context.getPictogramElements()[0]));
 				return Status.OK_STATUS;
 			}
 

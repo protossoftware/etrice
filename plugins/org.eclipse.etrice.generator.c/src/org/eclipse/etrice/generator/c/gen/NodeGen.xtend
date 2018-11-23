@@ -43,11 +43,11 @@ import org.eclipse.etrice.core.room.util.RoomHelpers
 import org.eclipse.etrice.generator.base.io.IGeneratorFileIO
 import org.eclipse.etrice.generator.base.logging.ILogger
 import org.eclipse.etrice.generator.c.Main
+import org.eclipse.etrice.generator.c.setup.GeneratorOptionsHelper
 import org.eclipse.etrice.generator.fsm.base.IntelligentSeparator
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.TypeHelpers
-import org.eclipse.etrice.generator.c.setup.GeneratorOptionsHelper
 
 @Singleton
 class NodeGen {
@@ -388,7 +388,7 @@ class NodeGen {
 				/* nothing to do */
 			«ELSE»
 				«FOR pi:ai.orderedIfItemInstances»
-					«IF pi.protocol.getPortClass(pi.conjugated)?.attributes?.size > 0»
+					«IF pi.portClassAttributesSize > 0»
 						static «pi.protocol.getPortClassName(pi.conjugated)»_var «pi.path.pathName»_var«IF pi.replicated»[«pi.peers.size»]«ENDIF»={
 							«FOR Integer i:1.. if(pi.peers.size==0)1 else pi.peers.size SEPARATOR ', '»
 								«attrInitGenAddon.generateAttributeInit(pi, pi.interfaceItem.portClass.attributes)»
@@ -409,6 +409,16 @@ class NodeGen {
 		«ENDFOR»
 
 	'''
+	}
+	
+	private def int getPortClassAttributesSize(InterfaceItemInstance pi) {
+		val attribs = pi.protocol.getPortClass(pi.conjugated)?.attributes
+		if (attribs===null) {
+			0
+		}
+		else {
+			attribs.size
+		}
 	}
 
 	def private genActorInstanceInitializer(Root root, ActorInstance ai) {
@@ -810,7 +820,7 @@ class NodeGen {
 			while (iter.hasNext) {
 				val obj = iter.next
 				if (obj instanceof PortInstance) {
-					val pi = obj as PortInstance
+					val pi = obj
 					if (!pi.port.relay) {
 						// only data driven
 						if (pi.protocol.commType==CommunicationType::DATA_DRIVEN) {

@@ -40,3 +40,4 @@ Export-Package: org.eclipse.etrice.ui.common.base,
  org.eclipse.etrice.ui.common.base.refactoring,
  org.eclipse.etrice.ui.common.base.resource,
  org.eclipse.etrice.ui.common.base.support
+Automatic-Module-Name: org.eclipse.etrice.ui.common.base

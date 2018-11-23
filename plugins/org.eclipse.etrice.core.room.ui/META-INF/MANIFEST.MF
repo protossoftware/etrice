@@ -38,3 +38,4 @@ Export-Package: org.eclipse.etrice.core.ui,
  org.eclipse.etrice.core.ui.quickfix,
  org.eclipse.etrice.core.ui.util
 Bundle-Activator: org.eclipse.etrice.core.ui.RoomUiActivator
+Automatic-Module-Name: org.eclipse.etrice.core.room.ui

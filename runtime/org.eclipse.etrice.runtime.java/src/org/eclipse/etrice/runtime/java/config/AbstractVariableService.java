@@ -560,7 +560,7 @@ public abstract class AbstractVariableService implements IVariableService {
 					+ ((id != null) ? "   (" + id + ")" : ""));
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings({ "rawtypes" })
 	private static final Set<Class> PRIMITIVE_TYPES = new HashSet<Class>(
 			Arrays.asList(Boolean.class, Character.class, String.class,
 					Byte.class, Short.class, Integer.class, Long.class,

@@ -64,7 +64,7 @@ public class TestOptionalActors extends TestInstanceModelBuilderBase {
 		SAPInstance sap = (SAPInstance) getInstance(saps, "/OptionalForSvcOK/ref0/sap1");
 		assertNotNull("sap expected", sap);
 		assertEquals("SAP has one peer", 1, sap.getPeers().size());
-		InterfaceItemInstance peer = ((SAPInstance)sap).getPeers().get(0);
+		InterfaceItemInstance peer = sap.getPeers().get(0);
 		assertTrue("peer is a service", (peer instanceof ServiceImplInstance));
 		ServiceImplInstance svc = (ServiceImplInstance) peer;
 		assertEquals("number of service peers", 1, svc.getPeers().size());

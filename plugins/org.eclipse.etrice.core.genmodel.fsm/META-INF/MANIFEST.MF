@@ -19,3 +19,4 @@ Require-Bundle: org.eclipse.etrice.core.common;visibility:=reexport,
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
+Automatic-Module-Name: org.eclipse.etrice.core.genmodel.fsm

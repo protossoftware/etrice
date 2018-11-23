@@ -529,17 +529,14 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 
 	override getMessageID(Message msg, InterfaceItem item) {
 		if (item instanceof Port) {
-			var p = item as Port;
-			var direction = if (p.isConjugated())"OUT_" else "IN_"
-			return enumInUse(p.getProtocol().getName(), direction+msg.getName())
+			var direction = if (item.isConjugated())"OUT_" else "IN_"
+			return enumInUse(item.getProtocol().getName(), direction+msg.getName())
 		}
 		else if (item instanceof SAP) {
-			var sap = item as SAP;
-			return enumInUse(sap.getProtocol().getName(), "OUT_"+msg.getName())
+			return enumInUse(item.getProtocol().getName(), "OUT_"+msg.getName())
 		}
 		else if (item instanceof SPP) {
-			var spp = item as SPP;
-			return enumInUse(spp.getProtocol().getName(), "IN_"+msg.getName())
+			return enumInUse(item.getProtocol().getName(), "IN_"+msg.getName())
 		}
 
 		return "unknown interface item";

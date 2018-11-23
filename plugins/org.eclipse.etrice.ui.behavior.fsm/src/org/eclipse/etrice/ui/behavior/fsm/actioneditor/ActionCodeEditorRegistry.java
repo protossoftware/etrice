@@ -210,7 +210,7 @@ public class ActionCodeEditorRegistry {
 				found.add(entry);
 		}
 
-		return (ActionCodeEditorRegistryEntry[]) found
+		return found
 				.toArray(new ActionCodeEditorRegistryEntry[found.size()]);
 	}
 
@@ -241,7 +241,7 @@ public class ActionCodeEditorRegistry {
 			}
 		}
 
-		cachedEditorEntries = (ActionCodeEditorRegistryEntry[]) found
+		cachedEditorEntries = found
 				.toArray(new ActionCodeEditorRegistryEntry[found.size()]);
 		return cachedEditorEntries;
 	}

@@ -57,7 +57,7 @@ public class TestLayers extends TestInstanceModelBuilderBase {
 		
 		SAPInstance sap = (SAPInstance) getInstance(saps, "/CMain/app/subsysA/userX/sap");
 		assertNotNull("sap expected", sap);
-		InterfaceItemInstance peer = ((SAPInstance)sap).getPeers().get(0);
+		InterfaceItemInstance peer = sap.getPeers().get(0);
 		assertTrue("peer is a service", (peer instanceof ServiceImplInstance));
 		ServiceImplInstance svc = (ServiceImplInstance) peer;
 		assertEquals("number of serviceA peers", 3, svc.getPeers().size());

@@ -68,7 +68,7 @@ class Initialization {
 			DataClass:
 				'''
 					{
-						«FOR subA : (aType as DataClass).allAttributes SEPARATOR ','»
+						«FOR subA :aType.allAttributes SEPARATOR ','»
 							«initAttributeArray(instance, path.union(subA))»
 						«ENDFOR»
 					}'''

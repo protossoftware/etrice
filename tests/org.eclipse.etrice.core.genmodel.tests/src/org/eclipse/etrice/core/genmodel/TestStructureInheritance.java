@@ -85,7 +85,7 @@ public class TestStructureInheritance extends TestInstanceModelBuilderBase {
 		
 		SAPInstance sap = (SAPInstance) getInstance(saps, "/CMain/application/fcta/sub2/timeout");
 		assertNotNull("sap expected", sap);
-		InterfaceItemInstance peer = ((SAPInstance)sap).getPeers().get(0);
+		InterfaceItemInstance peer = sap.getPeers().get(0);
 		assertTrue("peer is a service", (peer instanceof ServiceImplInstance));
 		ServiceImplInstance svc = (ServiceImplInstance) peer;
 		assertEquals("number of serviceA peers", 8, svc.getPeers().size());

@@ -213,5 +213,5 @@ class GenericStateMachineGenerator extends AbstractStateMachineGenerator {
      * @param generateImplementation or declaration only
      * @return the generated code
      */
-    def public genExtra(GraphContainer gc, boolean generateImplementation) {''''''}
+    def genExtra(GraphContainer gc, boolean generateImplementation) {''''''}
 }

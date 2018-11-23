@@ -24,3 +24,4 @@ Import-Package: org.apache.log4j
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.eclipse.etrice.generator.doc;uses:="org.eclipse.etrice.generator.base",
  org.eclipse.etrice.generator.doc.gen
+Automatic-Module-Name: org.eclipse.etrice.generator.doc

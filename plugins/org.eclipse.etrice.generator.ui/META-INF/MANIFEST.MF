@@ -32,3 +32,4 @@ Bundle-Activator: org.eclipse.etrice.generator.ui.Activator
 Export-Package: org.eclipse.etrice.generator.ui.configurator,
  org.eclipse.etrice.generator.ui.preferences,
  org.eclipse.etrice.generator.ui.wizard
+Automatic-Module-Name: org.eclipse.etrice.generator.ui

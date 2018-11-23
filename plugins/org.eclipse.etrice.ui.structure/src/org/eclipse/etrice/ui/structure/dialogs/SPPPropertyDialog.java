@@ -43,6 +43,7 @@ import org.eclipse.xtext.scoping.IScope;
 
 public class SPPPropertyDialog extends AbstractPropertyDialog {
 
+	@SuppressWarnings("rawtypes")
 	class NameValidator implements IValidator {
 
 		@Override
@@ -60,6 +61,7 @@ public class SPPPropertyDialog extends AbstractPropertyDialog {
 		}
 	}
 	
+	@SuppressWarnings("rawtypes")
 	class ProtocolValidator implements IValidator {
 
 		@Override

@@ -32,4 +32,5 @@ Export-Package: org.eclipse.etrice.generator,
  org.eclipse.etrice.generator.scoping,
  org.eclipse.etrice.generator.generator,
  org.eclipse.etrice.generator.formatting
+Automatic-Module-Name: org.eclipse.etrice.generator.fsmtest
 

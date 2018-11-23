@@ -54,7 +54,7 @@ class NodeGen {
 		for (nr : ETMapUtil::getNodeRefs()) {
 			for (instpath : ETMapUtil::getSubSystemInstancePaths(nr)) {
 				val ssi = root.getInstance(instpath) as SubSystemInstance
-				if (ssi!=null && ssi.subSystemClass.validGenerationLocation) {
+				if (ssi!==null && ssi.subSystemClass.validGenerationLocation) {
 					val wired = sscc2wired.get(ssi.subSystemClass)
 					val path = ssi.subSystemClass.getPath
 
@@ -71,7 +71,7 @@ class NodeGen {
 
 	def generateHeaderFile(Root root, SubSystemInstance comp, WiredSubSystemClass wired, Collection<PhysicalThread> usedThreads) {
 		val cc = comp.subSystemClass
-		val models = root.getReferencedModels(cc)
+//		val models = root.getReferencedModels(cc)
 		val nr = ETMapUtil::getNodeRef(comp)
 		val clsname = nr.getCppClassName(comp)
 		val threads = nr.type.threads.filter(t|usedThreads.contains(t))
@@ -170,7 +170,7 @@ class NodeGen {
 
 	def generateSourceFile(Root root, SubSystemInstance comp, WiredSubSystemClass wired, Collection<PhysicalThread> usedThreads) {
 		val cc = comp.subSystemClass
-		val models = root.getReferencedModels(cc)
+//		val models = root.getReferencedModels(cc)
 		val nr = ETMapUtil::getNodeRef(comp)
 		val clsname = nr.getCppClassName(comp)
 		val threads = nr.type.threads.filter(t|usedThreads.contains(t))

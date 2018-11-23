@@ -250,9 +250,9 @@ class FSMScopeProvider extends AbstractDeclarativeScopeProvider {
 	def private QualifiedName getStatePath(State bs) {
 		val EObject parent = bs.eContainer.eContainer
 		if (parent instanceof SimpleState)
-			return getStatePath(parent as SimpleState).append(bs.name)
+			return getStatePath(parent).append(bs.name)
 		else if (parent instanceof RefinedState) {
-			val State target = (parent as RefinedState).target
+			val State target = parent.target
 			if (target!==null)
 				return getStatePath(target).append(bs.name)
 		}

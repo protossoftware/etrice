@@ -4,10 +4,10 @@
 <plugin>
 
   <extension point="org.eclipse.emf.ecore.generated_package">
-    <package 
+    <package
        uri = "http://www.eclipse.org/etrice/generator/FSMtest" 
        class = "org.eclipse.etrice.generator.fsmtest.FsmtestPackage"
-       genModel = "org/eclipse/etrice/generator/FSMtest.genmodel" /> 
+       genModel = "src-gen/org/eclipse/etrice/generator/FSMtest.genmodel" /> 
 	
   </extension>
 

@@ -22,3 +22,4 @@ Require-Bundle: org.eclipse.etrice.core.common;bundle-version="2.0.0";visibility
  org.eclipse.emf.ecore.xmi;visibility:=reexport,
  org.eclipse.etrice.generator.base;bundle-version="2.0.0"
 Bundle-ActivationPolicy: lazy
+Automatic-Module-Name: org.eclipse.etrice.core.genmodel

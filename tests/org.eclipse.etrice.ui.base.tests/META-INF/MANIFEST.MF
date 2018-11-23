@@ -17,4 +17,5 @@ Require-Bundle: org.junit;bundle-version="4.8.1",
 Bundle-Vendor: Eclipse eTrice
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.eclipse.etrice.tests.base
+Automatic-Module-Name: org.eclipse.etrice.ui.base.tests
 

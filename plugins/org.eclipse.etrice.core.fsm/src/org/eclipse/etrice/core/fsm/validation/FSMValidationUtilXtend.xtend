@@ -32,12 +32,12 @@ import org.eclipse.etrice.core.fsm.naming.FSMNameProvider
 class FSMValidationUtilXtend {
 
 
-	public static class Result {
-		private boolean ok;
-		private String msg;
-		private EObject source;
-		private EStructuralFeature feature;
-		private int index;
+	static class Result {
+		boolean ok;
+		String msg;
+		EObject source;
+		EStructuralFeature feature;
+		int index;
 
 		def static FSMValidationUtilXtend.Result ok() {
 			return new FSMValidationUtilXtend.Result(true, "", null, null, 0);
@@ -109,7 +109,7 @@ class FSMValidationUtilXtend {
 		var parent = obj.eContainer
 		while (parent!==null) {
 			if (parent instanceof StateGraph) {
-				return parent as StateGraph
+				return parent
 			}
 			parent = parent.eContainer
 		}

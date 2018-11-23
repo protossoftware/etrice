@@ -78,7 +78,7 @@ public class ProposalGenerator {
 			Set<EObject> messages = new HashSet<EObject>();
 			for (CommonTrigger t : node.getCaughtTriggers()) {
 				if (t.getIfitem().equals(port)) {
-					messages.add((EObject)t.getMsg());
+					messages.add(t.getMsg());
 				}
 			}
 			

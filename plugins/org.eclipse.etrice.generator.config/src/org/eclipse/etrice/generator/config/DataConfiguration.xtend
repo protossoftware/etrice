@@ -100,7 +100,7 @@ class DataConfiguration implements IDataConfiguration {
 	// dynamic
 	override getPollingTimerUser(SubSystemInstance subsystem) {
 		val dynConf = subsystem.config?.dynConfig
-		if (dynConf == null)
+		if (dynConf === null)
 			0
 		else
 			dynConf.polling
@@ -108,7 +108,7 @@ class DataConfiguration implements IDataConfiguration {
 
 	override getUserCode1(SubSystemInstance subsystem) {
 		var dynConfig = subsystem.config?.dynConfig
-		return if (dynConfig?.filePath != null)
+		return if (dynConfig?.filePath !== null)
 			"import org.eclipse.etrice.runtime.java.config.ConfigSourceFile;" // TODO JH make lang independent
 		else
 			dynConfig?.userCode1
@@ -116,7 +116,7 @@ class DataConfiguration implements IDataConfiguration {
 
 	override getUserCode2(SubSystemInstance subsystem) {
 		var dynConfig = subsystem.config?.dynConfig
-		return if (dynConfig?.filePath != null) '''new ConfigSourceFile("«dynConfig.filePath»")''' else
+		return if (dynConfig?.filePath !== null) '''new ConfigSourceFile("«dynConfig.filePath»")''' else
 			dynConfig?.userCode2
 	}
 
@@ -137,7 +137,7 @@ class DataConfiguration implements IDataConfiguration {
 	}
 
 	override hasVariableService(SubSystemInstance subsystem) {
-		subsystem.config?.dynConfig != null
+		subsystem.config?.dynConfig !== null
 	}
 
 	def private toStringExpr(ConfigValueArray literal) {

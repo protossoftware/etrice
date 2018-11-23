@@ -69,7 +69,7 @@ class StateMachineGen extends GenericStateMachineGenerator {
 	/**
 	 * @param generateImplementation NOT used
 	 */
-	override public genExtra(GraphContainer gc, boolean generateImplementation) {
+	override genExtra(GraphContainer gc, boolean generateImplementation) {
 		val mc = gc.component
 		val allStates = gc.graph.allStateNodes.map[stateGraphNode].filter(typeof(State)).toList
 		val states = allStates.getLeafStatesLast
@@ -93,7 +93,7 @@ class StateMachineGen extends GenericStateMachineGenerator {
 		'''
 	}
 
-	override public stateType() {
+	override stateType() {
 		"etInt16"
 	}
 
@@ -106,7 +106,7 @@ class StateMachineGen extends GenericStateMachineGenerator {
 			((void)trigger__et);	/* avoids unused warning */
 		'''
 	}
-	override public unreachableReturn() {
+	override unreachableReturn() {
 		"/* return NO_STATE; // required by CDT but detected as unreachable by JDT because of while (true) */"
 	}
 

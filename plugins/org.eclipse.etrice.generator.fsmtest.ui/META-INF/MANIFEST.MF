@@ -22,3 +22,4 @@ Export-Package: org.eclipse.etrice.generator.ui.contentassist,
  org.eclipse.etrice.generator.ui.contentassist.antlr,
  org.eclipse.etrice.generator.ui.internal
 Bundle-Activator: org.eclipse.etrice.generator.ui.internal.FSMtestActivator
+Automatic-Module-Name: org.eclipse.etrice.generator.fsmtest.ui

@@ -42,7 +42,7 @@ class MainGen {
 		prepFS.prepare
 		for (e: resource.contents){
 			if (e instanceof Root) {
-				doGenerate(e as Root)
+				doGenerate(e)
 			}
 		}
 	}

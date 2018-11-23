@@ -32,3 +32,4 @@ Export-Package: org.eclipse.etrice.ui.behavior.fsm,
  org.eclipse.etrice.ui.behavior.fsm.provider,
  org.eclipse.etrice.ui.behavior.fsm.support,
  org.eclipse.etrice.ui.behavior.fsm.support.util
+Automatic-Module-Name: org.eclipse.etrice.ui.behavior.fsm

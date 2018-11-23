@@ -29,7 +29,6 @@ import org.eclipse.ltk.core.refactoring.resource.RenameResourceChange
 import org.eclipse.xtext.resource.IReferenceDescription
 import org.eclipse.xtext.ui.refactoring.ElementRenameArguments
 import org.eclipse.xtext.ui.refactoring.IRefactoringUpdateAcceptor
-import org.eclipse.xtext.ui.refactoring.impl.EmfResourceChangeUtil
 import org.eclipse.xtext.ui.refactoring.impl.EmfResourceReferenceUpdater
 
 /**
@@ -38,7 +37,6 @@ import org.eclipse.xtext.ui.refactoring.impl.EmfResourceReferenceUpdater
 class DiagramReferenceUpdater extends EmfResourceReferenceUpdater {
 	
 	@Inject DiagramAccessBase diagramAccess
-	@Inject EmfResourceChangeUtil changeUtil
 
 	
 	override protected createReferenceUpdates(ElementRenameArguments elementRenameArguments, Multimap<URI, IReferenceDescription> resource2references, ResourceSet resourceSet, IRefactoringUpdateAcceptor updateAcceptor, IProgressMonitor monitor) {

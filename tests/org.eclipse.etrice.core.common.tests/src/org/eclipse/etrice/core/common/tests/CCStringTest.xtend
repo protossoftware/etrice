@@ -18,8 +18,10 @@ import com.google.inject.Inject
 import org.eclipse.etrice.core.common.BaseTestInjectorProvider
 import org.eclipse.etrice.core.common.converter.BaseConverterService
 import org.eclipse.etrice.core.common.converter.CCStringIndentation
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.junit4.XtextRunner
+import org.eclipse.xtext.testing.InjectWith
+import org.eclipse.xtext.testing.XtextRunner
+//import org.eclipse.xtext.junit4.InjectWith
+//import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.util.Strings
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -220,7 +222,7 @@ text
 			assertEquals('''
 			   
 			
-		 
+			
 			text
 			'''.toString, toValue(text))
 			assertFalse(new CCStringIndentation(text).hasConsistentIndentation)

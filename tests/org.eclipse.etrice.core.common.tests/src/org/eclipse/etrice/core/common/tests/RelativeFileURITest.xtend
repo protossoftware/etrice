@@ -62,7 +62,7 @@ class RelativeFileURITest {
 	]
 
 	// require ResourcePlugin and actual files to test
-	val static ENCODED_PLATFORM_PATH_URIS = #[
+	package val static ENCODED_PLATFORM_PATH_URIS = #[
 		"platform:/resource/project/myfile.txt",
 		"platform:/resource/My%20Project%20%231/My%20File.txt",
 		"platform:/resource/are%20you%20there%3F",

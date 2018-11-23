@@ -14,7 +14,7 @@ Require-Bundle: org.eclipse.xtext;bundle-version="2.6.0";visibility:=reexport,
  org.eclipse.emf.codegen.ecore;resolution:=optional,
  org.eclipse.emf.mwe.utils;resolution:=optional,
  org.eclipse.emf.mwe2.launch;resolution:=optional,
- org.objectweb.asm;bundle-version="[5.0.1,6.0.0)";resolution:=optional,
+ org.objectweb.asm;bundle-version="[5.0.0,7.0.0)";resolution:=optional,
  org.eclipse.emf.ecore,
  org.eclipse.emf.common,
  org.antlr.runtime,
@@ -42,4 +42,5 @@ Export-Package: org.eclipse.etrice.core.common,
  org.eclipse.etrice.core.common.serializer,
  org.eclipse.etrice.core.common.services,
  org.eclipse.etrice.core.common.validation
+Automatic-Module-Name: org.eclipse.etrice.core.common
 

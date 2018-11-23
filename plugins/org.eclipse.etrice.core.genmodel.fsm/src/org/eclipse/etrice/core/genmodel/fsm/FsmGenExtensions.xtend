@@ -36,103 +36,103 @@ import org.eclipse.etrice.core.genmodel.fsm.fsmgen.Node
 
 class FsmGenExtensions {
 	
-	public static def dispatch getName(Node nd) {
+	static def dispatch getName(Node nd) {
 		nd.stateGraphNode.name
 	}
 	
-	public static def dispatch getName(Link l) {
+	static def dispatch getName(Link l) {
 		l.transition.name
 	}
 	
-	public static def getStateNodes(Graph g) {
+	static def getStateNodes(Graph g) {
 		g.nodes.filter[stateGraphNode instanceof State]
 	}
 	
-	public static def getAllNodes(Graph g) {
+	static def getAllNodes(Graph g) {
 		g.eAllContents.filter(typeof(Node))
 	}
 	
-	public static def getAllStateNodes(Graph g) {
+	static def getAllStateNodes(Graph g) {
 		g.allNodes.filter[stateGraphNode instanceof State]
 	}
 	
-	public static def getChoicePointNodes(Graph g) {
+	static def getChoicePointNodes(Graph g) {
 		g.nodes.filter[stateGraphNode instanceof ChoicePoint]
 	}
 	
-	public static def getAllChoicePointNodes(Graph g) {
+	static def getAllChoicePointNodes(Graph g) {
 		g.allNodes.filter[stateGraphNode instanceof ChoicePoint]
 	}
 	
-	public static def getTrPointNodes(Graph g) {
+	static def getTrPointNodes(Graph g) {
 		g.nodes.filter[stateGraphNode instanceof TrPoint]
 	}
 	
-	public static def getAllTrPointNodes(Graph g) {
+	static def getAllTrPointNodes(Graph g) {
 		g.allNodes.filter[stateGraphNode instanceof TrPoint]
 	}
 	
-	public static def getTransitionPointNodes(Graph g) {
+	static def getTransitionPointNodes(Graph g) {
 		g.nodes.filter[stateGraphNode instanceof TransitionPoint]
 	}
 	
-	public static def getAllTransitionPointNodes(Graph g) {
+	static def getAllTransitionPointNodes(Graph g) {
 		g.allNodes.filter[stateGraphNode instanceof TransitionPoint]
 	}
 	
-	public static def getEntryPointNodes(Graph g) {
+	static def getEntryPointNodes(Graph g) {
 		g.nodes.filter[stateGraphNode instanceof EntryPoint]
 	}
 	
-	public static def getAllEntryPointNodes(Graph g) {
+	static def getAllEntryPointNodes(Graph g) {
 		g.allNodes.filter[stateGraphNode instanceof EntryPoint]
 	}
 	
-	public static def getExitPointNodes(Graph g) {
+	static def getExitPointNodes(Graph g) {
 		g.nodes.filter[stateGraphNode instanceof ExitPoint]
 	}
 	
-	public static def getAllExitPointNodes(Graph g) {
+	static def getAllExitPointNodes(Graph g) {
 		g.allNodes.filter[stateGraphNode instanceof ExitPoint]
 	}
 	
-	public static def getStates(Graph g) {
+	static def getStates(Graph g) {
 		g.stateNodes.map[stateGraphNode].filter(typeof(State))
 	}
 	
-	public static def getAllStates(Graph g) {
+	static def getAllStates(Graph g) {
 		g.allStateNodes.map[stateGraphNode].filter(typeof(State))
 	}
 	
-	public static def getChoicePoints(Graph g) {
+	static def getChoicePoints(Graph g) {
 		g.choicePointNodes.map[stateGraphNode].filter(typeof(ChoicePoint))
 	}
 	
-	public static def getTrPoints(Graph g) {
+	static def getTrPoints(Graph g) {
 		g.trPointNodes.map[stateGraphNode].filter(typeof(TrPoint))
 	}
 	
-	public static def getInitialTransition(Graph g) {
+	static def getInitialTransition(Graph g) {
 		g.links.map[transition].filter(typeof(InitialTransition)).head
 	}
 	
-	public static def getAllLinks(Graph g) {
+	static def getAllLinks(Graph g) {
 		g.eAllContents.filter(typeof(Link))
 	}
 	
-	public static def getAllInitialTranisitionLinks(Graph g) {
+	static def getAllInitialTranisitionLinks(Graph g) {
 		g.allLinks.filter[transition instanceof InitialTransition]
 	}
 	
-	public static def getAllTriggeredTranisitionLinks(Graph g) {
+	static def getAllTriggeredTranisitionLinks(Graph g) {
 		g.allLinks.filter[transition instanceof TriggeredTransition]
 	}
 	
-	public static def getAllContinuationTranisitionLinks(Graph g) {
+	static def getAllContinuationTranisitionLinks(Graph g) {
 		g.allLinks.filter[transition instanceof ContinuationTransition]
 	}
 	
-	public static def getAllCPBranchTranisitionLinks(Graph g) {
+	static def getAllCPBranchTranisitionLinks(Graph g) {
 		g.allLinks.filter[transition instanceof CPBranchTransition]
 	}
 	
@@ -144,7 +144,7 @@ class FsmGenExtensions {
 	 * 
      * @see #isChainHead(Link))
 	 */
-	public static def getAllChainHeads(Graph g) {
+	static def getAllChainHeads(Graph g) {
 		g.allLinks.filter[isChainHead]
 	}
 	
@@ -154,7 +154,7 @@ class FsmGenExtensions {
 	 * 
      * @see #isChainHead(TransitionBase))
 	 */
-	public static def isChainHead(Link l) {
+	static def isChainHead(Link l) {
 		l.transition.isChainHead
 	}
 	
@@ -164,7 +164,7 @@ class FsmGenExtensions {
 	 * @param l a link
 	 * @return {@code true} if this transition is of one of the above types
 	 */
-	public static def boolean isChainHead(TransitionBase t) {
+	static def boolean isChainHead(TransitionBase t) {
 		if (t instanceof RefinedTransition) {
 			t.target.isChainHead
 		}
@@ -175,19 +175,19 @@ class FsmGenExtensions {
 		}
 	}
 	
-	public static def getOutgoingTriggeredTransitionLinks(Node s) {
+	static def getOutgoingTriggeredTransitionLinks(Node s) {
 		s.outgoing.filter[transition instanceof TriggeredTransition]
 	}
 	
-	public static def getOutgoingTriggeredTransitions(Node s) {
+	static def getOutgoingTriggeredTransitions(Node s) {
 		s.getOutgoingTriggeredTransitionLinks.map[transition].filter(typeof(TriggeredTransition))
 	}
 	
-	public static def getOutgoingTransitionsHierarchically(Node s) {
+	static def getOutgoingTransitionsHierarchically(Node s) {
 		s.getOutgoingLinksHierarchically.map[transition]
 	}
 	
-	public static def getOutgoingLinksHierarchically(Node s) {
+	static def getOutgoingLinksHierarchically(Node s) {
 		val result = newArrayList
 		
 		var current = s
@@ -205,26 +205,26 @@ class FsmGenExtensions {
 		return result
 	}
 	
-	public static def isTopLevel(Graph g) {
+	static def isTopLevel(Graph g) {
 		if (g!==null) {
 			g.eContainer instanceof GraphContainer
 		}
 		else true
 	}
 	
-	public static def isEmpty(Graph g) {
+	static def isEmpty(Graph g) {
 		g===null || (g.nodes.empty && g.links.empty)
 	}
 	
-	public static def isLeaf(Node n) {
+	static def isLeaf(Node n) {
 		n.subgraph===null
 	}
 	
-	public static def isTopLevel(Node n) {
+	static def isTopLevel(Node n) {
 		n.graph.isTopLevel
 	}
 	
-	public static def getParentState(Node n) {
+	static def getParentState(Node n) {
 		if (n.isTopLevel) {
 			null
 		}
@@ -233,7 +233,7 @@ class FsmGenExtensions {
 		}
 	}
 	
-	public static def getChoicepointDefaultBranch(Node n) {
+	static def getChoicepointDefaultBranch(Node n) {
 		if (!(n.stateGraphNode instanceof ChoicePoint)) {
 			return null
 		}
@@ -241,7 +241,7 @@ class FsmGenExtensions {
 		return n.outgoing.filter[transition instanceof ContinuationTransition].head
 	}
 	
-	public static def getParentState(Link l) {
+	static def getParentState(Link l) {
 		if (l.graph.isTopLevel) {
 			null
 		}
@@ -250,7 +250,7 @@ class FsmGenExtensions {
 		}
 	}
 	
-	public static def isHandler(Link l) {
+	static def isHandler(Link l) {
 		val sourceNode = l.source.stateGraphNode
 		if (sourceNode instanceof TransitionPoint) {
 			sourceNode.isHandler
@@ -260,7 +260,7 @@ class FsmGenExtensions {
 		}
 	}
 	
-	public static def List<DetailCode> getAllDetailCodes(Graph graph) {
+	static def List<DetailCode> getAllDetailCodes(Graph graph) {
 		val detailCodes = <DetailCode>newArrayList
 		
 		if (graph!==null) {
@@ -276,7 +276,7 @@ class FsmGenExtensions {
 		return detailCodes
 	}
 	
-	public static def getLinkFor(GraphContainer gc, TransitionBase t) {
+	static def getLinkFor(GraphContainer gc, TransitionBase t) {
 		gc.graph.allLinks.findFirst[transition===t]
 	}
 }

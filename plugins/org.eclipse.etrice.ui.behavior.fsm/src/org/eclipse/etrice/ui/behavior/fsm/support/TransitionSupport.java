@@ -1052,7 +1052,7 @@ public class TransitionSupport {
 						i++;
 					}
 					
-					return (IDecorator[]) decorators
+					return decorators
 							.toArray(new IDecorator[decorators.size()]);
 				}
 			}

@@ -34,4 +34,5 @@ Export-Package: org.eclipse.etrice.core.etphys,
  org.eclipse.etrice.core.etphys.serializer,
  org.eclipse.etrice.core.etphys.services,
  org.eclipse.etrice.core.etphys.validation
+Automatic-Module-Name: org.eclipse.etrice.core.etphys
 

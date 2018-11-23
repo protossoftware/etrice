@@ -62,7 +62,7 @@ abstract class AbstractStateMachineGenerator {
 	 * @param gc the {@link GraphContainer}
 	 * @return the generated code
 	 */
-	def public String genTriggerConstants(GraphContainer gc) {
+	def String genTriggerConstants(GraphContainer gc) {
 		gc.genTriggerConstants(langExt.usesInheritance)
 	}
 
@@ -75,7 +75,7 @@ abstract class AbstractStateMachineGenerator {
 	 *
 	 * @return the generated code
 	 */
-	def public String genTriggerConstants(GraphContainer gc, boolean omitBase) {
+	def String genTriggerConstants(GraphContainer gc, boolean omitBase) {
 		val triggers = if (omitBase)
 					gc.component.ownMessagesFromInterfaces
 					else gc.component.allMessagesFromInterfaces
@@ -102,7 +102,7 @@ abstract class AbstractStateMachineGenerator {
 	 * @param gc the {@link GraphContainer}
 	 * @return the generated code
 	 */
-	def public genStateIdConstants(GraphContainer gc) {
+	def genStateIdConstants(GraphContainer gc) {
 		gc.genStateIdConstants(langExt.usesInheritance)
 	}
 
@@ -115,7 +115,7 @@ abstract class AbstractStateMachineGenerator {
 	 *
 	 * @return the generated code
 	 */
-	def public genStateIdConstants(GraphContainer gc, boolean omitBase) {
+	def genStateIdConstants(GraphContainer gc, boolean omitBase) {
 		// with inheritance we exclude inherited states
 		val allStateNodes = gc.graph.allStateNodes.toList // TODO: without toList this didn't work - why?
 		
@@ -155,7 +155,7 @@ abstract class AbstractStateMachineGenerator {
 	 *
 	 * @return the generated code
 	 */
-	def public genTransitionChainConstants(GraphContainer gc) {
+	def genTransitionChainConstants(GraphContainer gc) {
 		gc.genTransitionChainConstants(false/*langExt.usesInheritance*/)
 	}
 
@@ -170,7 +170,7 @@ abstract class AbstractStateMachineGenerator {
 	 *
 	 * @return the generated code
 	 */
-	def public genTransitionChainConstants(GraphContainer gc, boolean omitBase) {
+	def genTransitionChainConstants(GraphContainer gc, boolean omitBase) {
 		val chains = (if (omitBase)
 			gc.graph.allLinks.filter[!inherited] else gc.graph.allLinks).map[transition].filter[isChainHead].filter(typeof(Transition)).toList
 		var offset = if (omitBase)
@@ -193,7 +193,7 @@ abstract class AbstractStateMachineGenerator {
 	 *
 	 * @return the generated code
 	 */
-	def public String genEntryAndExitCodes(GraphContainer gc, boolean generateImplementation) {
+	def String genEntryAndExitCodes(GraphContainer gc, boolean generateImplementation) {
 		gc.genEntryAndExitCodes(generateImplementation, langExt.usesInheritance)
 	}
 
@@ -206,7 +206,7 @@ abstract class AbstractStateMachineGenerator {
 	 *
 	 * @return the generated code
 	 */
-	def public String genEntryAndExitCodes(GraphContainer gc, boolean generateImplementation, boolean omitBase) {
+	def String genEntryAndExitCodes(GraphContainer gc, boolean generateImplementation, boolean omitBase) {
 		val states = gc.graph.allStateNodes.filter[!omitBase || !inherited].toList
 		'''
 		«FOR state : states»
@@ -223,7 +223,7 @@ abstract class AbstractStateMachineGenerator {
 	 *
 	 * @return the generated code
 	 */
-	def public String genActionCodes(GraphContainer gc, boolean generateImplementation) {
+	def String genActionCodes(GraphContainer gc, boolean generateImplementation) {
 		gc.genActionCodes(generateImplementation, langExt.usesInheritance)
 	}
 
@@ -236,7 +236,7 @@ abstract class AbstractStateMachineGenerator {
 	 *
 	 * @return the generated code
 	 */
-	def public String genActionCodes(GraphContainer gc, boolean generateImplementation, boolean omitBase) {
+	def String genActionCodes(GraphContainer gc, boolean generateImplementation, boolean omitBase) {
 		val transitions = gc.graph.allLinks.filter[!omitBase || !inherited].filter[transition.action.hasDetailCode].toList
 		'''
 		«FOR tr : transitions»
@@ -245,7 +245,7 @@ abstract class AbstractStateMachineGenerator {
 		'''
 	}
 
-	def public String genStateSwitchMethods(GraphContainer gc, boolean generateImplementation) {
+	def String genStateSwitchMethods(GraphContainer gc, boolean generateImplementation) {
 		val mc = gc.component
 		val async = mc.commType==ComponentCommunicationType::ASYNCHRONOUS
 		val eventDriven = mc.commType==ComponentCommunicationType::EVENT_DRIVEN
@@ -470,7 +470,7 @@ abstract class AbstractStateMachineGenerator {
 	 * @param state the {@link State}
 	 * @return the generated code
 	 */
-	def public String genDoCodes(State state) {'''
+	def String genDoCodes(State state) {'''
 		«IF state.hasDoCode(true)»
 			«state.doCodeOperationName»(«langExt.selfPointer(false)»);
 		«ENDIF»
@@ -488,7 +488,7 @@ abstract class AbstractStateMachineGenerator {
 	 *	  at all then unused variables can be avoided by passing <code>true</code>
 	 * @return the generated code
 	 */
-	def public genStateSwitch(GraphContainer gc, boolean usesHdlr) {
+	def genStateSwitch(GraphContainer gc, boolean usesHdlr) {
 		var async = gc.component.commType==ComponentCommunicationType::ASYNCHRONOUS
 		var eventDriven = gc.component.commType==ComponentCommunicationType::EVENT_DRIVEN
 		var dataDriven = gc.component.commType==ComponentCommunicationType::DATA_DRIVEN
@@ -537,7 +537,7 @@ abstract class AbstractStateMachineGenerator {
 	 *	  at all then unused variables can be avoided by passing <code>true</code>
 	 * @return the generated code
 	 */
-	def public genDataDrivenTriggers(GraphContainer gc, Node stateNode, boolean usesHdlr) {
+	def genDataDrivenTriggers(GraphContainer gc, Node stateNode, boolean usesHdlr) {
 		val chainIDScope = if (langExt.usesInheritance) gc.className+langExt.scopeSeparator else ""
 		val state = stateNode.stateGraphNode as State
 		'''
@@ -568,7 +568,7 @@ abstract class AbstractStateMachineGenerator {
 	 *	  at all then unused variables can be avoided by passing <code>true</code>
 	 * @return the generated code
 	 */
-	def public genEventDrivenTriggers(GraphContainer gc, Node stateNode, boolean usesHdlr) {
+	def genEventDrivenTriggers(GraphContainer gc, Node stateNode, boolean usesHdlr) {
 		val caughtTriggers = new ArrayList(stateNode.caughtTriggers).sortBy[triggerCodeName]
 		val chainIDScope = if (langExt.usesInheritance) gc.className+langExt.scopeSeparator else ""
 		'''
@@ -595,11 +595,11 @@ abstract class AbstractStateMachineGenerator {
 		'''
 	}
 
-	def public getClassName(GraphContainer gc) {
+	def getClassName(GraphContainer gc) {
 		gc.component.className
 	}
 
-	def public getClassName(ModelComponent mc) {
+	def getClassName(ModelComponent mc) {
 		mc.componentName
 	}
 
@@ -614,7 +614,7 @@ abstract class AbstractStateMachineGenerator {
 	 * @param state the ID of the history state
 	 * @return the generated code
 	 */
-	def public getHistory(String state) {
+	def getHistory(String state) {
 		langExt.memberAccess+"history["+state+"]"
 	}
 
@@ -625,7 +625,7 @@ abstract class AbstractStateMachineGenerator {
 	 * @param historyState the ID of the state that should be assigned
 	 * @return the generated code
 	 */
-	def public setHistory(String state, String historyState) {
+	def setHistory(String state, String historyState) {
 		langExt.memberAccess+"history["+state+"] = "+historyState
 	}
 
@@ -633,7 +633,7 @@ abstract class AbstractStateMachineGenerator {
 	 * @return the type of (temporary) state variables (defaults to "int")
 	 * and has to be signed
 	 */
-	def public stateType() {
+	def stateType() {
 		"int"
 	}
 
@@ -642,7 +642,7 @@ abstract class AbstractStateMachineGenerator {
 	 * The default is just a comment.
 	 * @return the generated code
 	 */
-	def public unreachableReturn() {
+	def unreachableReturn() {
 		"/* return NO_STATE; // required by CDT but detected as unreachable by JDT because of while (true) */"
 	}
 
@@ -650,21 +650,21 @@ abstract class AbstractStateMachineGenerator {
 	 * type of (temporary) boolean variables (defaults to "boolean")
 	 * @return the generated code
 	 */
-	def public boolType() {
+	def boolType() {
 		return "boolean"
 	}
 
 	/**
 	 * empty, but may be overridden
 	 */
-	def public finalAction() {
+	def finalAction() {
 		''''''
 	}
 
 	/**
 	 * the type of the interface item passed into the receiveEvent() method
 	 */
-	def public interfaceItemType() {
+	def interfaceItemType() {
 		"InterfaceItemBase"
 	}
 
@@ -682,12 +682,12 @@ abstract class AbstractStateMachineGenerator {
 	 * @param xpax the {@link GraphContainer}
 	 * @return <code>true</code> if the state machine uses handler transition points
 	 */
-	def public usesHandlerTrPoints(GraphContainer gc) {
+	def usesHandlerTrPoints(GraphContainer gc) {
 		!gc.graph.allTransitionPointNodes.filter(t|((t.stateGraphNode as TransitionPoint).handler)).empty
 	}
 
-	def public String genTriggeredTransitionGuard(Link link, String trigger, GraphContainer mc)
-	def public String genGuardedTransitionGuard(Link link, String trigger, GraphContainer mc)
-	def public String genActionCodeMethod(GraphContainer gc, Link link, boolean generateImplementation)
-	def public String genActionCodeMethods(GraphContainer gc, Node node, boolean generateImplementation)
+	def String genTriggeredTransitionGuard(Link link, String trigger, GraphContainer mc)
+	def String genGuardedTransitionGuard(Link link, String trigger, GraphContainer mc)
+	def String genActionCodeMethod(GraphContainer gc, Link link, boolean generateImplementation)
+	def String genActionCodeMethods(GraphContainer gc, Node node, boolean generateImplementation)
 }

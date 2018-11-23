@@ -24,17 +24,17 @@
 		<category
 			id="org.eclipse.etrice.core.ui.libraryCCategory"
 			name="Libraries"
-			parentCategory="org.eclipse.etrice.core.ui.wizardCategory/org.eclipse.etrice.core.ui.wizardCCategory">
+			parentCategory="org.eclipse.etrice.core.ui.wizardCCategory">
 		</category>
 		<category
 			id="org.eclipse.etrice.core.ui.libraryCppCategory"
 			name="Libraries"
-			parentCategory="org.eclipse.etrice.core.ui.wizardCategory/org.eclipse.etrice.core.ui.wizardCppCategory">
+			parentCategory="org.eclipse.etrice.core.ui.wizardCppCategory">
 		</category>
 		<category
 			id="org.eclipse.etrice.core.ui.libraryJavaCategory"
 			name="Libraries"
-			parentCategory="org.eclipse.etrice.core.ui.wizardCategory/org.eclipse.etrice.core.ui.wizardJavaCategory">
+			parentCategory="org.eclipse.etrice.core.ui.wizardJavaCategory">
 		</category>
 	</extension>
 

@@ -56,7 +56,7 @@ class DataClassGen {
 		«generateIncludeGuardBegin(dc, '')»
 
 		#include "common/etDatatypesCpp.hpp"
-		«IF dc.base!=null»#include "«dc.base.path»«dc.base.name».h"«ENDIF»
+		«IF dc.base!==null»#include "«dc.base.path»«dc.base.name».h"«ENDIF»
 		«FOR classes : root.getReferencedDataClasses(dc)»
 			#include "«classes.path»«classes.name».h"
 		«ENDFOR»
@@ -72,7 +72,7 @@ class DataClassGen {
 
 		«dc.generateNamespaceBegin»
 
-		class «dc.name»«IF dc.base!=null» : public «dc.base.name»«ENDIF» {
+		class «dc.name»«IF dc.base!==null» : public «dc.base.name»«ENDIF» {
 
 		public:
 			«helpers.userCode(dc.userCode2)»
@@ -143,7 +143,7 @@ class DataClassGen {
 		«dc.name»& «dc.name»::operator=(const «dc.name»& rhs)
 		{
 			if (this == &rhs) { return *this; };
-			«IF dc.base!=null»«dc.base.name»::operator=(rhs);«ENDIF»
+			«IF dc.base!==null»«dc.base.name»::operator=(rhs);«ENDIF»
 			«FOR attr : dc.attributes»
 				this->«attr.name» = rhs.«attr.name»;
 			«ENDFOR»
@@ -160,7 +160,7 @@ class DataClassGen {
 		val extension initHelper = initHelper
 		var initList = <CharSequence>newArrayList
 
-		if(dataClass.base != null) initList += dataClass.base.name + '()'
+		if(dataClass.base !== null) initList += dataClass.base.name + '()'
 		initList += dataClass.attributes.map['''«name»(«initializerListValue»)''']
 
 		initList.generateCtorInitializerList
@@ -170,7 +170,7 @@ class DataClassGen {
 		val extension initHelper = initHelper
 		var initList = <CharSequence>newArrayList
 
-		if(dataClass.base != null) initList += dataClass.base.name + '(rhs)'
+		if(dataClass.base !== null) initList += dataClass.base.name + '(rhs)'
 		initList += dataClass.attributes.map['''«name»(rhs.«name»)''']
 
 		initList.generateCtorInitializerList
@@ -180,7 +180,7 @@ class DataClassGen {
 		val extension initHelper = initHelper
 		var initList = <CharSequence>newArrayList
 
-		if(dataClass.base != null)
+		if(dataClass.base !== null)
 			initList += '''«dataClass.base.name»(«dataClass.base.allAttributes.map[name].join(', ')»)'''
 		initList += dataClass.attributes.map['''«name»(«name»)''']
 
@@ -222,7 +222,7 @@ class DataClassGen {
 	def deepCopy(DataClass _dc) {
 		var result = ""
 		var dc = _dc
-		while (dc!=null) {
+		while (dc!==null) {
 			result = deepCopy(dc.attributes).toString + result
 			dc = dc.base
 		}

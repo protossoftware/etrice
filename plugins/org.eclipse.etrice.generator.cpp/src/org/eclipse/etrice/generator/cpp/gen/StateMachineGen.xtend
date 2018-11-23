@@ -78,7 +78,7 @@ class StateMachineGen extends GenericStateMachineGenerator {
 			'''
 	}
 
-	override public stateType() {
+	override stateType() {
 		"etInt16"
 	}
 

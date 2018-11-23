@@ -363,7 +363,7 @@ public class SourceViewerActionCodeEditor extends AbstractActionCodeEditor {
 	 * commands.
 	 */
 	protected void activateContext() {
-		IContextService contextService = (IContextService) PlatformUI
+		IContextService contextService = PlatformUI
 				.getWorkbench().getService(IContextService.class);
 		if (contextService != null)
 			fActivation = contextService
@@ -379,12 +379,12 @@ public class SourceViewerActionCodeEditor extends AbstractActionCodeEditor {
 	 * Deactivate editors context and command handlers.
 	 */
 	protected void deactivateContext() {
-		IContextService contextService = (IContextService) PlatformUI
+		IContextService contextService = PlatformUI
 				.getWorkbench().getService(IContextService.class);
 		if (contextService != null)
 			contextService.deactivateContext(fActivation);
 
-		IHandlerService handlerService = (IHandlerService) PlatformUI
+		IHandlerService handlerService = PlatformUI
 				.getWorkbench().getService(IHandlerService.class);
 		if (handlerService != null && activatedHandlers != null) {
 			handlerService.deactivateHandlers(activatedHandlers.values());
@@ -402,7 +402,7 @@ public class SourceViewerActionCodeEditor extends AbstractActionCodeEditor {
 	 *            the operation code for the required operation to be performed
 	 */
 	protected void activateHandler(String commandId, int operation) {
-		IHandlerService handlerService = (IHandlerService) PlatformUI
+		IHandlerService handlerService = PlatformUI
 				.getWorkbench().getService(IHandlerService.class);
 		if (handlerService != null) {
 			IHandlerActivation contentAssistHandlerActivation = handlerService
@@ -421,7 +421,7 @@ public class SourceViewerActionCodeEditor extends AbstractActionCodeEditor {
 	 *            the Id of the command.
 	 */
 	protected void deactivateHandler(String commandId) {
-		IHandlerService handlerService = (IHandlerService) PlatformUI
+		IHandlerService handlerService = PlatformUI
 				.getWorkbench().getService(IHandlerService.class);
 		if (handlerService != null && activatedHandlers != null) {
 			handlerService.deactivateHandler(activatedHandlers.get(commandId));

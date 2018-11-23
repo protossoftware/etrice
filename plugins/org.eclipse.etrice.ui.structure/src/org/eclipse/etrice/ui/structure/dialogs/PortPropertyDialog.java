@@ -58,6 +58,7 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 
+@SuppressWarnings({"rawtypes", "unchecked", "deprecation"})
 public class PortPropertyDialog extends AbstractPropertyDialog {
 
 	class NameValidator implements IValidator {

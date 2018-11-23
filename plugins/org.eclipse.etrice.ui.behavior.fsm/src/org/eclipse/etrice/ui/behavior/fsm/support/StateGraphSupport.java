@@ -114,7 +114,7 @@ public class StateGraphSupport {
 			@Override
 			public PictogramElement add(IAddContext context) {
 				StateGraph sg = (StateGraph) context.getNewObject();
-				ContainerShape targetContainer = (ContainerShape) context.getTargetContainer();
+				ContainerShape targetContainer = context.getTargetContainer();
 	
 				// CONTAINER SHAPE WITH RECTANGLE
 				IPeCreateService peCreateService = Graphiti.getPeCreateService();
@@ -674,7 +674,7 @@ public class StateGraphSupport {
 					i++;
 				}
 				
-				return (IDecorator[]) decorators
+				return decorators
 						.toArray(new IDecorator[decorators.size()]);
 			}
 		}

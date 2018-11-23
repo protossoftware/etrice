@@ -29,3 +29,4 @@ Export-Package: org.eclipse.etrice.ui.common,
 Bundle-Activator: org.eclipse.etrice.ui.common.Activator
 Bundle-ActivationPolicy: lazy
 Import-Package: org.apache.log4j
+Automatic-Module-Name: org.eclipse.etrice.ui.common

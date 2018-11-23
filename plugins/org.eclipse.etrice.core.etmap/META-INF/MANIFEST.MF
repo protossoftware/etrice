@@ -40,4 +40,5 @@ Export-Package: org.eclipse.etrice.core.etmap,
  org.eclipse.etrice.core.etmap.services,
  org.eclipse.etrice.core.etmap.util,
  org.eclipse.etrice.core.etmap.validation
+Automatic-Module-Name: org.eclipse.etrice.core.etmap
 

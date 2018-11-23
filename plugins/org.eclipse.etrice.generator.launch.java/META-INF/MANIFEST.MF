@@ -23,3 +23,4 @@ Import-Package: org.eclipse.jdt.launching,
  org.eclipse.ui.dialogs
 Bundle-Vendor: Eclipse eTrice
 Export-Package: org.eclipse.etrice.generator.launch.java
+Automatic-Module-Name: org.eclipse.etrice.generator.launch.java

@@ -26,3 +26,4 @@ Export-Package: org.eclipse.etrice.ui.structure,
  org.eclipse.etrice.ui.structure.editor,
  org.eclipse.etrice.ui.structure.support
 Import-Package: org.eclipse.etrice.ui.commands
+Automatic-Module-Name: org.eclipse.etrice.ui.structure

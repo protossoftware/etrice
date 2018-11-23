@@ -28,3 +28,4 @@ Export-Package: org.eclipse.etrice.core.etmap.ui,
  org.eclipse.etrice.core.etmap.ui.internal,
  org.eclipse.etrice.core.etmap.ui.quickfix
 Bundle-Activator: org.eclipse.etrice.core.etmap.ui.internal.ETMapActivator
+Automatic-Module-Name: org.eclipse.etrice.core.etmap.ui

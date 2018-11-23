@@ -39,7 +39,7 @@ class BasicFsmGenBuilder {
 	protected extension FSMHelpers fsmHelpers
 	
 	protected val factory = FsmGenFactory.eINSTANCE
-	private var int inheritanceLevel = 0
+	var int inheritanceLevel = 0
 	
 	new(FSMHelpers fsmHelpers) {
 		this.fsmHelpers = fsmHelpers

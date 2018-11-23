@@ -28,11 +28,11 @@ import org.eclipse.graphiti.mm.pictograms.ContainerShape
  */
 class ModelEditingUtil {
 	
-	def static public RefinedState getOrCreateRefinedStateFor(State s, ModelComponent mc) {
+	def static RefinedState getOrCreateRefinedStateFor(State s, ModelComponent mc) {
 		val target2rs = new HashMap<State, RefinedState>();
 		for (State st : mc.getStateMachine().getStates()) {
 			if (st instanceof RefinedState)
-				target2rs.put((st as RefinedState).getTarget(), st as RefinedState);
+				target2rs.put(st.getTarget(), st);
 		}
 		
 		var RefinedState rs = null;
@@ -69,7 +69,7 @@ class ModelEditingUtil {
 	
 	
 	
-	def static public StateGraph getOrCreateSubGraphOfRefinedStateFor(State s, ModelComponent mc) {
+	def static StateGraph getOrCreateSubGraphOfRefinedStateFor(State s, ModelComponent mc) {
 		val rs = getOrCreateRefinedStateFor(s, mc);
 		
 		if (rs.getSubgraph()===null)
@@ -78,7 +78,7 @@ class ModelEditingUtil {
 		return rs.getSubgraph();
 	}
 	
-	def static public StateGraph insertRefinedState(StateGraph sg, ModelComponent mc, ContainerShape targetContainer, IFeatureProvider fp) {
+	def static StateGraph insertRefinedState(StateGraph sg, ModelComponent mc, ContainerShape targetContainer, IFeatureProvider fp) {
 		val sg2 = getOrCreateSubGraphOfRefinedStateFor(sg.eContainer() as State, mc);
 		fp.link(targetContainer, sg2);
 		return sg2;

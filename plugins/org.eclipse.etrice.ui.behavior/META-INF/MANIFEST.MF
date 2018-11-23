@@ -29,3 +29,4 @@ Bundle-Vendor: Eclipse eTrice
 Export-Package: org.eclipse.etrice.ui.behavior,
  org.eclipse.etrice.ui.behavior.editor,
  org.eclipse.etrice.ui.behavior.support
+Automatic-Module-Name: org.eclipse.etrice.ui.behavior

@@ -37,9 +37,9 @@ import org.eclipse.etrice.core.room.PrimitiveType
 import org.eclipse.etrice.core.room.RoomClass
 import org.eclipse.etrice.generator.generic.ILanguageExtension
 import org.eclipse.etrice.generator.generic.TypeHelpers
-import org.eclipse.xtext.util.Pair
 import org.eclipse.etrice.generator.java.Main
 import org.eclipse.etrice.generator.java.setup.GeneratorOptionsHelper
+import org.eclipse.xtext.util.Pair
 
 @Singleton
 class JavaExtensions implements ILanguageExtension {
@@ -49,7 +49,7 @@ class JavaExtensions implements ILanguageExtension {
 
 	override String getTypedDataDefinition(EObject msg) {
 	    if (msg instanceof Message) {
-    		generateArglistAndTypedData((msg as Message).data).get(TypedDataKind.DECLARATION_AND_INITIALIZATION.ordinal)
+    		generateArglistAndTypedData(msg.data).get(TypedDataKind.DECLARATION_AND_INITIALIZATION.ordinal)
 	    }
 	    else {
 	        ""
@@ -215,9 +215,9 @@ class JavaExtensions implements ILanguageExtension {
 			EnumerationType:
 				dt.defaultValue
 			ExternalType:
-				"new "+(dt as ExternalType).targetName+"()"
+				"new "+ dt.targetName+"()"
 			default:
-				"new "+dt.name+"()"
+				"new "+ dt.name+"()"
 		}
 	}
 

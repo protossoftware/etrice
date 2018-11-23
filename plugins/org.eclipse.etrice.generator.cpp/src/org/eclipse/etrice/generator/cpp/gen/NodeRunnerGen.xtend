@@ -39,7 +39,7 @@ class NodeRunnerGen {
 		for (nr : ETMapUtil::getNodeRefs()) {
 			for (instpath : ETMapUtil::getSubSystemInstancePaths(nr)) {
 				val ssi = root.getInstance(instpath) as SubSystemInstance
-				if (ssi!=null && ssi.subSystemClass.validGenerationLocation) {
+				if (ssi!==null && ssi.subSystemClass.validGenerationLocation) {
 					val filepath = ssi.subSystemClass.getPath
 					fileIO.generateFile("generating SubSystemRunner declaration", filepath + nr.getCppClassName(ssi)+"Runner.h", root.generateHeaderFile(ssi))
 					fileIO.generateFile("generating SubSystemRunner implementation", filepath + nr.getCppClassName(ssi)+"Runner.cpp", root.generateSourceFile(ssi))

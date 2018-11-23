@@ -23,7 +23,7 @@ import org.eclipse.etrice.core.genmodel.fsm.NullDiagnostician
 
 class GenModelAccess {
 	
-	private ExtendedFsmGenBuilderFactory fsmGenBuilderFactory
+	ExtendedFsmGenBuilderFactory fsmGenBuilderFactory
 	
 	Map<ModelComponent, GraphContainer> cache = newHashMap
 	
@@ -32,11 +32,11 @@ class GenModelAccess {
 		this.fsmGenBuilderFactory = fsmGenBuilderFactory
 	}
 	
-	def public clearCache() {
+	def clearCache() {
 		cache.clear
 	}
 	
-	def public GraphContainer get(ModelComponent mc) {
+	def GraphContainer get(ModelComponent mc) {
 		if(!cache.containsKey(mc)) {
 			val builder = fsmGenBuilderFactory.create(new NullDiagnostician)
 			val gc = builder.createTransformedModel(mc)

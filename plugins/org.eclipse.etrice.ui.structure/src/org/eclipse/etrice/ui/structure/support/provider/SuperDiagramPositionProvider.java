@@ -192,7 +192,7 @@ public class SuperDiagramPositionProvider implements IPositionProvider {
 		parent.inner = acInner;
 		
 		// refs & interface items
-		for (Shape shape : ((ContainerShape) acShape).getChildren()) {
+		for (Shape shape : acShape.getChildren()) {
 			EObject obj = linkService.getBusinessObjectForLinkedPictogramElement(shape);
 			
 			// positions

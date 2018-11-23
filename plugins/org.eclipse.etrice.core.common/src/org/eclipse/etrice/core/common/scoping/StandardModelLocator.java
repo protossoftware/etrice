@@ -37,7 +37,7 @@ import org.eclipse.xtext.resource.ClasspathUriResolutionException;
  */
 public class StandardModelLocator implements IModelLocator {
 
-	private static final String CLASSPATH = "classpath:/";
+	private static final String CLASSPATH = "classpath";
 	private static final Map<String, String> env = System.getenv();
 
 	/**
@@ -63,7 +63,7 @@ public class StandardModelLocator implements IModelLocator {
 			URIConverter converter = resource==null? null : resource.getResourceSet().getURIConverter();
 			URI canonical = getCanonicalFileURI(resolve, converter);
 			// TODO handle non-file URIs more generically
-			if(canonical != null && (canonical.isFile() || canonical.isArchive() || canonical.isPlatform() || canonical.scheme() == "classpath")) {
+			if(canonical != null && (canonical.isFile() || canonical.isArchive() || canonical.isPlatform() || canonical.scheme() == CLASSPATH)) {
 				resolve = canonical.toString();
 			}
 			else {
@@ -203,7 +203,7 @@ public class StandardModelLocator implements IModelLocator {
 	 *         exists, or false if platUri is mapped to a different URI
 	 *         than fileUri.
 	 */
-	private boolean updateURIMapEntry(Resource res, URI platUri, URI fileUri) {
+	boolean updateURIMapEntry(Resource res, URI platUri, URI fileUri) {
 		// map the absolute file uri to a platform resource path
 		if(res == null) return false;
 		Map<URI, URI> uriMap = res.getResourceSet().getURIConverter()
@@ -260,7 +260,7 @@ public class StandardModelLocator implements IModelLocator {
 	 *         if the URI is not a platform URI, or if the Eclipse WorkspaceRoot
 	 *         cannot be accessed. Otherwise true.
 	 */
-	private boolean existsInPlatform(URI uri) {
+	boolean existsInPlatform(URI uri) {
 		if(!EMFPlugin.IS_ECLIPSE_RUNNING)
 			return false;
 		
@@ -287,7 +287,7 @@ public class StandardModelLocator implements IModelLocator {
 	 * @return false if the URI does not point to an existing file resource or
 	 *         if the URI is not a file URI. Otherwise true.
 	 */
-	private boolean existsInFileSys(URI uri) {
+	boolean existsInFileSys(URI uri) {
 		if (!uri.isFile())
 			return false;
 		java.io.File extFile = new File(uri.toFileString());
@@ -301,7 +301,7 @@ public class StandardModelLocator implements IModelLocator {
 			uri = URI.createURI(uriString);
 		} catch(IllegalArgumentException e1) {
 		}
-		if(uri == null || !(uri.isFile() || uri.isArchive() || uri.isPlatform() || uri.scheme() == "classpath")) {
+		if(uri == null || !(uri.isFile() || uri.isArchive() || uri.isPlatform() || uri.scheme() == CLASSPATH)) {
 			// try file path
 			uri = URI.createFileURI(uriString);
 		}

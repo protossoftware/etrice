@@ -25,3 +25,4 @@ Export-Package: org.eclipse.etrice.core.etphys.ui.contentassist,
  org.eclipse.etrice.core.etphys.ui.quickfix,
  org.eclipse.etrice.core.etphys.ui.contentassist.antlr.internal
 Bundle-Activator: org.eclipse.etrice.core.etphys.ui.internal.ETPhysActivator
+Automatic-Module-Name: org.eclipse.etrice.core.etphys.ui

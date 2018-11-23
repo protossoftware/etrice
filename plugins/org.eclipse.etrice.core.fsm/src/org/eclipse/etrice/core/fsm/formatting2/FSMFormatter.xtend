@@ -23,14 +23,12 @@ import org.eclipse.etrice.core.fsm.fSM.DetailCode
 import org.eclipse.etrice.core.fsm.fSM.ProtocolSemantics
 import org.eclipse.etrice.core.fsm.fSM.State
 import org.eclipse.etrice.core.fsm.fSM.StateGraph
-import org.eclipse.etrice.core.fsm.fSM.Transition
+import org.eclipse.etrice.core.fsm.fSM.TransitionBase
 import org.eclipse.etrice.core.fsm.fSM.Trigger
 import org.eclipse.etrice.core.fsm.fSM.TriggeredTransition
 import org.eclipse.etrice.core.fsm.services.FSMGrammarAccess
 import org.eclipse.xtext.formatting2.IFormattableDocument
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion
-import org.eclipse.etrice.core.fsm.fSM.RefinedTransition
-import org.eclipse.etrice.core.fsm.fSM.TransitionBase
 
 class FSMFormatter extends BaseFormatter {
 	

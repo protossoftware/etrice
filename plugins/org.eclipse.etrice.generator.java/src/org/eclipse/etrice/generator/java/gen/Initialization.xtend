@@ -81,7 +81,7 @@ class Initialization {
 		switch (aType) {
 			DataClass:
 				return '''
-					«FOR e : (aType as DataClass).allAttributes»
+					«FOR e : aType.allAttributes»
 						«attributeInitPrimitiveRec(path.union(e), roomClass)»
 					«ENDFOR»
 				'''

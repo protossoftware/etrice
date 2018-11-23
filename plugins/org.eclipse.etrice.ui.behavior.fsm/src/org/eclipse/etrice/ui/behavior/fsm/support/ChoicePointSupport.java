@@ -603,7 +603,7 @@ public class ChoicePointSupport {
 					i++;
 				}
 				
-				return (IDecorator[]) decorators
+				return decorators
 						.toArray(new IDecorator[decorators.size()]);
 			}
 		}

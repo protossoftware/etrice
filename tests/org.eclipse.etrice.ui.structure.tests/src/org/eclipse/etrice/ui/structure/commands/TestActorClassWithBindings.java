@@ -112,7 +112,7 @@ public class TestActorClassWithBindings extends TestBase {
 
 			// the second ref is represented once in the diagram
 			assertNotNull("second ref", b.getEndpoint2().getActorRef());
-			pes = Graphiti.getLinkService().getPictogramElements(diagram, ((ActorRef)b.getEndpoint2().getActorRef()));
+			pes = Graphiti.getLinkService().getPictogramElements(diagram, b.getEndpoint2().getActorRef());
 			assertEquals("instances of second ref", 1, pes.size());
 		}
 	}

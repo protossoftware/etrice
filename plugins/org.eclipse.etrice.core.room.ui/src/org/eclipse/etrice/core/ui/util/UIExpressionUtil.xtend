@@ -53,7 +53,7 @@ class UIExpressionUtil {
 		val fsmGenBuilderFactory = RoomUiModule.injector.getInstance(ExtendedFsmGenBuilderFactory)
 		Map<ModelComponent, GraphContainer> cache = newHashMap
 		
-		def public GraphContainer get(ModelComponent mc) {
+		def GraphContainer get(ModelComponent mc) {
 			if(!cache.containsKey(mc)) {
 				val builder = fsmGenBuilderFactory.create()
 				val gc = builder.createTransformedModel(mc)
@@ -76,7 +76,7 @@ class UIExpressionUtil {
 		val exprProvider = RoomUiModule.getInjector().getInstance(DetailExpressionProvider) => [ prov |
 			if(ctx instanceof DetailCode) {
 				prov.owner = ctx.eContainer
-				prov.reference = ctx.eContainmentFeature as EReference
+				prov.reference = ctx.eContainmentFeature
 			} else {
 				prov.owner = ctx
 				prov.reference = ref		

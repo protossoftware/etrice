@@ -90,7 +90,7 @@ class NodeGen {
 	 */
 	def private HashSet<ActorClass> getOptionalActorClasses(Root root, StructureInstance si) {
 		val aifs = Lists::newArrayList(si.eAllContents.filter(i|i instanceof ActorInterfaceInstance).map[aii|aii as ActorInterfaceInstance])
-		val result = Sets::newHashSet(aifs.map[aii|(aii as ActorInterfaceInstance).actorClass])
+		val result = Sets::newHashSet(aifs.map[aii|aii.actorClass])
 		for (ai : aifs) {
 			for (oi : ai.optionalInstances) {
 				result.addAll(root.getOptionalActorClasses(oi))

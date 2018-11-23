@@ -42,7 +42,7 @@ class ConfigGenAddon {
 	
 	// For SubSystemClassGen
 	
-	def public genActorInstanceConfig(ActorInstance ai, String aiVariableName){'''
+	def genActorInstanceConfig(ActorInstance ai, String aiVariableName){'''
 			«FOR a : ai.actorClass.allAttributes»
 				«applyInstanceConfig(ai, aiVariableName, new ArrayList<Attribute>().union(a))»
 			«ENDFOR»
@@ -73,7 +73,7 @@ class ConfigGenAddon {
 			}
 			DataClass:
 				'''
-					«FOR e : (aType as DataClass).allAttributes»
+					«FOR e : aType.allAttributes»
 						«applyInstanceConfig(instance, invokes+"."+a.name.invokeGetter(null), path.union(e))»
 					«ENDFOR»
 				'''	
@@ -82,7 +82,7 @@ class ConfigGenAddon {
 	
 	// For ActorClassGen
 	
-	def public genDynConfigGetterSetter(ActorClass ac){'''
+	def genDynConfigGetterSetter(ActorClass ac){'''
 		«FOR a : dataConfigExt.getDynConfigReadAttributes(ac)»
 			public «a.type.type.typeName»«IF a.size>0»[]«ENDIF» get«a.name.toFirstUpper»(){
 				if(lock_«a.name» == null)
@@ -112,7 +112,7 @@ class ConfigGenAddon {
 		«ENDFOR»
 	'''}
 	
-	def public genMinMaxConstants(ActorClass ac){
+	def genMinMaxConstants(ActorClass ac){
 		var result = '''
 			«FOR a : ac.allAttributes»
 				«genMinMaxConstantsRec(ac, a.name, new ArrayList<Attribute>().union(a))»
@@ -128,7 +128,7 @@ class ConfigGenAddon {
 		switch aType {
 			DataClass:
 				'''
-					«FOR e : (aType as DataClass).allAttributes»
+					«FOR e : aType.allAttributes»
 						«genMinMaxConstantsRec(ac, varNamePath+"_"+e.name, path.union(e))»
 					«ENDFOR»
 				'''

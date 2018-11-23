@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.EcorePackage
 
 import static extension org.eclipse.etrice.core.common.postprocessing.PostprocessingHelpers.*
 
-class ImplPostProcessing {
+class ImplPostProcessor {
 	
 	def process(GeneratedMetamodel metamodel) {
 		val configPackage = metamodel.EPackage

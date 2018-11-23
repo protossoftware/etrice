@@ -90,22 +90,22 @@ class GnuplotScriptGenerator {
 	def protected generatePlotScript(SubSystemInstance ssi) {
 
 		// TODO: warn if more than one GnuPlot annotation
-		val plotAnnotation = ssi.subSystemClass.annotations.filter [ a |
-			a.type.name == "Gnuplot"
-		].head
-
-		val defaultFontsize = 10
+//		val plotAnnotation = ssi.subSystemClass.annotations.filter [ a |
+//			a.type.name == "Gnuplot"
+//		].head
+//
+//		val defaultFontsize = 10
 
 		// TODO: error checking
-		val format = plotAnnotation?.getAttribute("format")?.asString
-		val outputfile = plotAnnotation?.getAttribute("outputfile")?.asString
-		val width = plotAnnotation?.getAttribute("width")?.asInteger
-		val height = plotAnnotation?.getAttribute("height")?.asInteger
-		val fontsize = plotAnnotation?.getAttribute("fontsize")?.asInteger ?: defaultFontsize
-
-		val graphAnnotations = ssi.subSystemClass.annotations.filter [ a |
-			a.type.name == "GnuplotGraph"
-		].toList
+//		val format = plotAnnotation?.getAttribute("format")?.asString
+//		val outputfile = plotAnnotation?.getAttribute("outputfile")?.asString
+//		val width = plotAnnotation?.getAttribute("width")?.asInteger
+//		val height = plotAnnotation?.getAttribute("height")?.asInteger
+//		val fontsize = plotAnnotation?.getAttribute("fontsize")?.asInteger ?: defaultFontsize
+//
+//		val graphAnnotations = ssi.subSystemClass.annotations.filter [ a |
+//			a.type.name == "GnuplotGraph"
+//		].toList
 
 		'''
 			#!/gnuplot
@@ -120,18 +120,18 @@ class GnuplotScriptGenerator {
 			
 			cd 'log'
 			set datafile separator comma
-			set terminal «format» size «width»,«height» font ",«fontsize»" background "white"
-			set output '«outputfile»'
+			set terminal ï¿½formatï¿½ size ï¿½widthï¿½,ï¿½heightï¿½ font ",ï¿½fontsizeï¿½" background "white"
+			set output 'ï¿½outputfileï¿½'
 			set size 1,1
-			set multiplot layout «graphAnnotations.size»,1
+			set multiplot layout ï¿½graphAnnotations.sizeï¿½,1
 			set grid
 			show grid
 			set format y "% 5.3f"
-			«var i = 0»
-			«FOR a : graphAnnotations»
+			ï¿½var i = 0ï¿½
+			ï¿½FOR a : graphAnnotationsï¿½
 				
-				«ssi.generateGraph(a, i++, graphAnnotations.size)»
-			«ENDFOR»
+				ï¿½ssi.generateGraph(a, i++, graphAnnotations.size)ï¿½
+			ï¿½ENDFORï¿½
 			
 			unset multiplot
 			unset output
@@ -142,28 +142,28 @@ class GnuplotScriptGenerator {
 	def protected generateGraph(SubSystemInstance ssi, Annotation graph, int index, int total) {
 
 		// TODO: handle multiple paths in the same graph
-		val paths = graph.getAttribute("paths")?.asString
+//		val paths = graph.getAttribute("paths")?.asString
 
 		// TODO: take interval from physical thread associated with actor instance instead of annotation attribute
-		val interval = graph.getAttribute("interval")?.asInteger ?: 20
-		val xtics = graph.getAttribute("xtics")?.asReal ?: 100
-		val mxtics = graph.getAttribute("mxtics")?.asInteger ?: 4
-		val ymin = graph.getAttribute("ymin")?.asReal
-		val ymax = graph.getAttribute("ymax")?.asReal
-
-		val vertOrigin = ((total - (index + 1)) as double) / total
-		val vertSize = 1.0F / total
+//		val interval = graph.getAttribute("interval")?.asInteger ?: 20
+//		val xtics = graph.getAttribute("xtics")?.asReal ?: 100
+//		val mxtics = graph.getAttribute("mxtics")?.asInteger ?: 4
+//		val ymin = graph.getAttribute("ymin")?.asReal
+//		val ymax = graph.getAttribute("ymax")?.asReal
+//
+//		val vertOrigin = ((total - (index + 1)) as double) / total
+//		val vertSize = 1.0F / total
 
 		'''
-			set yrange [«ymin ?: "*"» : «ymax ?: "*"»]
-			set xtics rotate «xtics»
-			set mxtics «mxtics»
+			set yrange [ï¿½ymin ?: "*"ï¿½ : ï¿½ymax ?: "*"ï¿½]
+			set xtics rotate ï¿½xticsï¿½
+			set mxtics ï¿½mxticsï¿½
 			set ylabel
 			set xlabel "time (ms)"
-			timeInMs(x) = «interval» * x
-			set origin 0,«vertOrigin»
-			set size 1,«vertSize»
-			plot 'main.data.csv' using (timeInMs(column(1))):(column("«paths»")) with lines
+			timeInMs(x) = ï¿½intervalï¿½ * x
+			set origin 0,ï¿½vertOriginï¿½
+			set size 1,ï¿½vertSizeï¿½
+			plot 'main.data.csv' using (timeInMs(column(1))):(column("ï¿½pathsï¿½")) with lines
 		'''
 	}
 }

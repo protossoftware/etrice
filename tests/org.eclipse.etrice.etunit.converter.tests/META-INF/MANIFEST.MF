@@ -12,3 +12,4 @@ Require-Bundle: org.eclipse.etrice.etunit.converter;bundle-version="2.0.0",
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Import-Package: com.google.common.io
+Automatic-Module-Name: org.eclipse.etrice.etunit.converter.tests

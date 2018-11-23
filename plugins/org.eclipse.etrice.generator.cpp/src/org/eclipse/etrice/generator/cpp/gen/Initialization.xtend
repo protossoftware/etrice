@@ -40,7 +40,7 @@ class Initialization {
 	 *  Generate array and struct initialization
 	 */
 	def genExtraInitializers(Iterable<Attribute> attributes) {
-		val extraInitAttrs = attributes.filter[initializerListValue == null && initValue != null && initValue.startsWith('{')]
+		val extraInitAttrs = attributes.filter[initializerListValue === null && initValue !== null && initValue.startsWith('{')]
 		if(extraInitAttrs.empty) return ''
 		'''
 			// extra initialization
@@ -57,12 +57,12 @@ class Initialization {
 
 	def String getInitializerListValue(Attribute attribute) {
 		val initValue = attribute.initValue
-		return if(initValue != null && initValue.startsWith('{')) null else initValue
+		return if(initValue !== null && initValue.startsWith('{')) null else initValue
 	}
 
 	def protected getInitValue(Attribute attribute) {
 		switch it : attribute {
-			case defaultValueLiteral != null: defaultValueLiteral
+			case defaultValueLiteral !== null: defaultValueLiteral
 			case type.ref: languageExt.nullPointer
 			default: languageExt.defaultValue(type.type)
 		}

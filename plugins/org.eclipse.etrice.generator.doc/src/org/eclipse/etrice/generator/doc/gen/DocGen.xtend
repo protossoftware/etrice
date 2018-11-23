@@ -16,11 +16,9 @@ package org.eclipse.etrice.generator.doc.gen
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
-import java.io.File
 import java.util.List
 import java.util.Set
 import org.eclipse.etrice.core.common.base.Documentation
-import org.eclipse.etrice.core.common.base.util.RelativePathHelpers
 import org.eclipse.etrice.core.fsm.fSM.State
 import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.etrice.core.room.ActorClass
@@ -36,9 +34,9 @@ import org.eclipse.etrice.core.room.RoomModel
 import org.eclipse.etrice.core.room.StandardOperation
 import org.eclipse.etrice.core.room.SubSystemClass
 import org.eclipse.etrice.core.room.util.RoomHelpers
-import org.eclipse.etrice.generator.fsm.base.CodegenHelpers
-import org.eclipse.etrice.generator.base.logging.ILogger
 import org.eclipse.etrice.generator.base.io.IGeneratorFileIO
+import org.eclipse.etrice.generator.base.logging.ILogger
+import org.eclipse.etrice.generator.fsm.base.CodegenHelpers
 
 @Singleton
 class DocGen {
@@ -48,15 +46,13 @@ class DocGen {
 	@Inject IGeneratorFileIO fileIO
 	@Inject ILogger logger
 	
-	final val IMGDIR_DEFAULT = "./images"
-	final val IMGWIDTH_DEFAULT = "1.0\\textwidth"
+	val IMGDIR_DEFAULT = "./images"
+	val IMGWIDTH_DEFAULT = "1.0\\textwidth"
 	
 	static class DocGenContext {
-		val Root root
 		val RoomModel model
 		
 		new(Root r, RoomModel m) {
-			root = r
 			model = m
 		}
 		
@@ -94,11 +90,11 @@ class DocGen {
 		}
 	}
 	
-	def private removeLast(String str) {
+	def package removeLast(String str) {
 		str.substring(0, str.length-1)
 	}
 	
-	def private appendIfNotEmpty(String txt, String suffix) {
+	def package appendIfNotEmpty(String txt, String suffix) {
 		if (txt.empty)
 			txt
 		else

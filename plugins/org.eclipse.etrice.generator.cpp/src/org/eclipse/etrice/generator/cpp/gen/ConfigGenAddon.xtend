@@ -43,13 +43,13 @@ class ConfigGenAddon {
 	
 	// For SubSystemClassGen
 	
-	def public genActorInstanceConfig(ActorInstance ai, String aiVariableName){'''
+	def genActorInstanceConfig(ActorInstance ai, String aiVariableName){'''
 			«FOR a : ai.actorClass.allAttributes»
 				«applyInstanceConfig(ai, aiVariableName, new ArrayList<Attribute>().union(a))»
 			«ENDFOR»
 			«FOR pi : ai.orderedIfItemInstances»
 				«var attribs = getPortClass(pi.interfaceItem)?.attributes»
-				«IF attribs != null»
+				«IF attribs !== null»
 					«FOR a : attribs»
 						«applyInstanceConfig(pi, aiVariableName+"."+invokeGetter(pi.name, null), new ArrayList<Attribute>().union(a))»
 					«ENDFOR»
@@ -77,7 +77,7 @@ class ConfigGenAddon {
 		// TODO-Enum
 		if(aType.primitive){
 			var value = typeHelpers.getAttrInstanceConfigValue(path, instance)
-			if(value == null)
+			if(value === null)
 				''''''
 			else if(a.size == 0 || aType.characterType)
 				'''«invokes».«a.name.invokeSetter(null, (aType as PrimitiveType).toValueLiteral(value))»;'''
@@ -100,7 +100,7 @@ class ConfigGenAddon {
 	
 	// For ActorClassGen
 	
-	def public genDynConfigGetterSetter(ActorClass ac){'''
+	def genDynConfigGetterSetter(ActorClass ac){'''
 		«FOR a : dataConfigExt.getDynConfigReadAttributes(ac)»
 			public «a.type.type.typeName»«IF a.size>0»[]«ENDIF» get«a.name.toFirstUpper»(){
 				if(lock_«a.name» == null)
@@ -130,7 +130,7 @@ class ConfigGenAddon {
 		«ENDFOR»
 	'''}
 	
-	def public genMinMaxConstants(ActorClass ac){
+	def genMinMaxConstants(ActorClass ac){
 		var result = '''
 			«FOR a : ac.attributes»
 				«genMinMaxConstantsRec(ac, a.name, new ArrayList<Attribute>().union(a))»
@@ -159,10 +159,10 @@ class ConfigGenAddon {
 		{
 			var aType = (path.last.type.type as PrimitiveType)
 			'''
-				«IF (temp = dataConfigExt.getAttrClassConfigMinValue(ac, path)) != null»
+				«IF (temp = dataConfigExt.getAttrClassConfigMinValue(ac, path)) !== null»
 					public static «aType.minMaxType» MIN_«varNamePath» = «aType.toValueLiteral(temp)»;
 				«ENDIF»
-				«IF (temp = dataConfigExt.getAttrClassConfigMaxValue(ac, path)) != null»
+				«IF (temp = dataConfigExt.getAttrClassConfigMaxValue(ac, path)) !== null»
 					public static «aType.minMaxType» MAX_«varNamePath» = «aType.toValueLiteral(temp)»;
 				«ENDIF»
 			'''

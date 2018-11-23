@@ -39,3 +39,4 @@ Export-Package: org.eclipse.etrice.core,
  org.eclipse.etrice.core.serializer,
  org.eclipse.etrice.core.services,
  org.eclipse.etrice.core.validation
+Automatic-Module-Name: org.eclipse.etrice.core.room

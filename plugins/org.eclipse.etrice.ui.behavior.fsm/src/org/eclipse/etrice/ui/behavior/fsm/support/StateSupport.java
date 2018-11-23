@@ -685,7 +685,7 @@ public class StateSupport {
 					GraphicsAlgorithm invisibleRect = containerShape.getGraphicsAlgorithm();
 					if (!invisibleRect.getGraphicsAlgorithmChildren().isEmpty()) {
 						GraphicsAlgorithm borderRect = invisibleRect.getGraphicsAlgorithmChildren().get(0);
-						updateHints(s, (RoundedRectangle) borderRect);
+						updateHints(s, borderRect);
 					}
 				}
 				
@@ -1108,7 +1108,7 @@ public class StateSupport {
 					i++;
 				}
 
-				return (IDecorator[]) decorators
+				return decorators
 						.toArray(new IDecorator[decorators.size()]);
 			}
 		}

@@ -83,7 +83,7 @@ public class ActionEditorPreferencePage extends FieldEditorPreferencePage
 			editorChoices.add(choice);
 		}
 
-		return (String[][]) editorChoices.toArray(new String[editorChoices
+		return editorChoices.toArray(new String[editorChoices
 				.size()][]);
 	}
 

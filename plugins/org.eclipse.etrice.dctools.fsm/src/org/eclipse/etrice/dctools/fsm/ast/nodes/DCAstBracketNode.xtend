@@ -73,5 +73,5 @@ class DCAstBracketNode extends DCAstTextNode {
 		println(indent + "DCAstBracketNode " + this.toString)
 	}
 	
-	override def String getText() { toString }
+	override String getText() { toString }
 }
