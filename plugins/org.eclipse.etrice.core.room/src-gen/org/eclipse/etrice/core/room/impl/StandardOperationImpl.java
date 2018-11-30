@@ -166,7 +166,7 @@ public class StandardOperationImpl extends OperationImpl implements StandardOper
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (override: ");
     result.append(override);
     result.append(')');

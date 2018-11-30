@@ -29,7 +29,14 @@ class DocuPostprocessor {
 		val pckg = metamodel.EPackage
 		
 		//------------------------------------------------------------------
-		var cls = pckg.getClass("RoomModel")
+		var cls = pckg.getClass("RoomElement")
+		cls.setDocumentation(
+			'''
+				The marker interface for all classes belonging to the ROOM model.
+			''')
+			
+		//------------------------------------------------------------------
+		cls = pckg.getClass("RoomModel")
 		cls.setDocumentation(
 			'''
 				The root object for the ROOM model. It gives access to {@link Import imports} and

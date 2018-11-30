@@ -2,7 +2,6 @@
  */
 package org.eclipse.etrice.core.room;
 
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -26,7 +25,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface SPPoint extends EObject
+public interface SPPoint extends RoomElement
 {
   /**
    * Returns the value of the '<em><b>Ref</b></em>' reference.

@@ -2,7 +2,6 @@
  */
 package org.eclipse.etrice.core.room;
 
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -27,7 +26,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface RefableType extends EObject
+public interface RefableType extends RoomElement
 {
   /**
    * Returns the value of the '<em><b>Type</b></em>' reference.

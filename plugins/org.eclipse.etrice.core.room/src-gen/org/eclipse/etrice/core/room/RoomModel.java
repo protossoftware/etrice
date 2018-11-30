@@ -4,8 +4,6 @@ package org.eclipse.etrice.core.room;
 
 import org.eclipse.emf.common.util.EList;
 
-import org.eclipse.emf.ecore.EObject;
-
 import org.eclipse.etrice.core.common.base.AnnotationType;
 import org.eclipse.etrice.core.common.base.Documentation;
 import org.eclipse.etrice.core.common.base.Import;
@@ -45,7 +43,7 @@ import org.eclipse.etrice.core.common.base.Import;
  * @model
  * @generated
  */
-public interface RoomModel extends EObject
+public interface RoomModel extends RoomElement
 {
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.

@@ -19,11 +19,23 @@ import org.eclipse.etrice.core.fsm.fSM.FSMPackage
 import org.eclipse.xtext.GeneratedMetamodel
 
 import static extension org.eclipse.etrice.core.common.postprocessing.PostprocessingHelpers.*
+import org.eclipse.emf.ecore.EClass
+import org.eclipse.emf.ecore.EcoreFactory
 
 class ImplPostprocessor {
 	
 	def process(GeneratedMetamodel metamodel) {
 		val roomPackage = metamodel.EPackage
+		
+		// marker interface 'RoomElement'
+		val roomElementClass = EcoreFactory::eINSTANCE.createEClass => [
+			name = 'RoomElement'
+			interface = true		
+		]
+		roomPackage.EClassifiers.filter(EClass).filter[!ESuperTypes.exists[EPackage == roomPackage]].forEach [
+			ESuperTypes += roomElementClass
+		]
+		roomPackage.EClassifiers += roomElementClass
 		
 		val port = roomPackage.getClass("Port")
 		port.getAttribute("multiplicity").setDefaultValueLiteral("1")

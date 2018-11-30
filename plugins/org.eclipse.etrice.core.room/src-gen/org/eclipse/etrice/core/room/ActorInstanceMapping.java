@@ -4,8 +4,6 @@ package org.eclipse.etrice.core.room;
 
 import org.eclipse.emf.common.util.EList;
 
-import org.eclipse.emf.ecore.EObject;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Actor Instance Mapping</b></em>'.
@@ -30,7 +28,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface ActorInstanceMapping extends EObject
+public interface ActorInstanceMapping extends RoomElement
 {
   /**
    * Returns the value of the '<em><b>Path</b></em>' containment reference.

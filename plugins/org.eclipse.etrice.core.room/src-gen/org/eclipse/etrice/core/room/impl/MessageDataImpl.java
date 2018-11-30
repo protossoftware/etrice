@@ -255,7 +255,7 @@ public class MessageDataImpl extends MinimalEObjectImpl.Container implements Mes
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (deprecatedName: ");
     result.append(deprecatedName);
     result.append(')');

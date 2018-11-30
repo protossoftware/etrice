@@ -4,8 +4,6 @@ package org.eclipse.etrice.core.room;
 
 import org.eclipse.emf.common.util.EList;
 
-import org.eclipse.emf.ecore.EObject;
-
 import org.eclipse.etrice.core.common.base.Documentation;
 
 import org.eclipse.etrice.core.fsm.fSM.DetailCode;
@@ -39,7 +37,7 @@ import org.eclipse.etrice.core.fsm.fSM.DetailCode;
  * @model
  * @generated
  */
-public interface Operation extends EObject
+public interface Operation extends RoomElement
 {
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.

@@ -4,8 +4,6 @@ package org.eclipse.etrice.core.room;
 
 import org.eclipse.emf.common.util.EList;
 
-import org.eclipse.emf.ecore.EObject;
-
 import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 
 /**
@@ -38,7 +36,7 @@ import org.eclipse.etrice.core.fsm.fSM.DetailCode;
  * @model
  * @generated
  */
-public interface PortClass extends EObject
+public interface PortClass extends RoomElement
 {
   /**
    * Returns the value of the '<em><b>User Code</b></em>' containment reference.

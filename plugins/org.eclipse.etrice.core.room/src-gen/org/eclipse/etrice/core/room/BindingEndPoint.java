@@ -2,7 +2,6 @@
  */
 package org.eclipse.etrice.core.room;
 
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -29,7 +28,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface BindingEndPoint extends EObject
+public interface BindingEndPoint extends RoomElement
 {
   /**
    * Returns the value of the '<em><b>Actor Ref</b></em>' reference.

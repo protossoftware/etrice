@@ -80,6 +80,7 @@ public class RoomSwitch<T> extends Switch<T>
       {
         RoomModel roomModel = (RoomModel)theEObject;
         T result = caseRoomModel(roomModel);
+        if (result == null) result = caseRoomElement(roomModel);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -87,6 +88,7 @@ public class RoomSwitch<T> extends Switch<T>
       {
         RoomClass roomClass = (RoomClass)theEObject;
         T result = caseRoomClass(roomClass);
+        if (result == null) result = caseRoomElement(roomClass);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -95,6 +97,7 @@ public class RoomSwitch<T> extends Switch<T>
         StructureClass structureClass = (StructureClass)theEObject;
         T result = caseStructureClass(structureClass);
         if (result == null) result = caseRoomClass(structureClass);
+        if (result == null) result = caseRoomElement(structureClass);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -104,6 +107,7 @@ public class RoomSwitch<T> extends Switch<T>
         T result = caseActorContainerClass(actorContainerClass);
         if (result == null) result = caseStructureClass(actorContainerClass);
         if (result == null) result = caseRoomClass(actorContainerClass);
+        if (result == null) result = caseRoomElement(actorContainerClass);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -111,6 +115,7 @@ public class RoomSwitch<T> extends Switch<T>
       {
         VarDecl varDecl = (VarDecl)theEObject;
         T result = caseVarDecl(varDecl);
+        if (result == null) result = caseRoomElement(varDecl);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -118,6 +123,7 @@ public class RoomSwitch<T> extends Switch<T>
       {
         MessageData messageData = (MessageData)theEObject;
         T result = caseMessageData(messageData);
+        if (result == null) result = caseRoomElement(messageData);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -125,6 +131,7 @@ public class RoomSwitch<T> extends Switch<T>
       {
         RefableType refableType = (RefableType)theEObject;
         T result = caseRefableType(refableType);
+        if (result == null) result = caseRoomElement(refableType);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -133,6 +140,7 @@ public class RoomSwitch<T> extends Switch<T>
         DataType dataType = (DataType)theEObject;
         T result = caseDataType(dataType);
         if (result == null) result = caseRoomClass(dataType);
+        if (result == null) result = caseRoomElement(dataType);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -142,6 +150,7 @@ public class RoomSwitch<T> extends Switch<T>
         T result = caseComplexType(complexType);
         if (result == null) result = caseDataType(complexType);
         if (result == null) result = caseRoomClass(complexType);
+        if (result == null) result = caseRoomElement(complexType);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -151,6 +160,7 @@ public class RoomSwitch<T> extends Switch<T>
         T result = casePrimitiveType(primitiveType);
         if (result == null) result = caseDataType(primitiveType);
         if (result == null) result = caseRoomClass(primitiveType);
+        if (result == null) result = caseRoomElement(primitiveType);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -160,6 +170,7 @@ public class RoomSwitch<T> extends Switch<T>
         T result = caseEnumerationType(enumerationType);
         if (result == null) result = caseDataType(enumerationType);
         if (result == null) result = caseRoomClass(enumerationType);
+        if (result == null) result = caseRoomElement(enumerationType);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -167,6 +178,7 @@ public class RoomSwitch<T> extends Switch<T>
       {
         EnumLiteral enumLiteral = (EnumLiteral)theEObject;
         T result = caseEnumLiteral(enumLiteral);
+        if (result == null) result = caseRoomElement(enumLiteral);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -177,6 +189,7 @@ public class RoomSwitch<T> extends Switch<T>
         if (result == null) result = caseComplexType(externalType);
         if (result == null) result = caseDataType(externalType);
         if (result == null) result = caseRoomClass(externalType);
+        if (result == null) result = caseRoomElement(externalType);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -187,6 +200,7 @@ public class RoomSwitch<T> extends Switch<T>
         if (result == null) result = caseComplexType(dataClass);
         if (result == null) result = caseDataType(dataClass);
         if (result == null) result = caseRoomClass(dataClass);
+        if (result == null) result = caseRoomElement(dataClass);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -194,6 +208,7 @@ public class RoomSwitch<T> extends Switch<T>
       {
         Attribute attribute = (Attribute)theEObject;
         T result = caseAttribute(attribute);
+        if (result == null) result = caseRoomElement(attribute);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -201,6 +216,7 @@ public class RoomSwitch<T> extends Switch<T>
       {
         Operation operation = (Operation)theEObject;
         T result = caseOperation(operation);
+        if (result == null) result = caseRoomElement(operation);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -209,6 +225,7 @@ public class RoomSwitch<T> extends Switch<T>
         StandardOperation standardOperation = (StandardOperation)theEObject;
         T result = caseStandardOperation(standardOperation);
         if (result == null) result = caseOperation(standardOperation);
+        if (result == null) result = caseRoomElement(standardOperation);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -217,6 +234,7 @@ public class RoomSwitch<T> extends Switch<T>
         PortOperation portOperation = (PortOperation)theEObject;
         T result = casePortOperation(portOperation);
         if (result == null) result = caseOperation(portOperation);
+        if (result == null) result = caseRoomElement(portOperation);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -224,6 +242,7 @@ public class RoomSwitch<T> extends Switch<T>
       {
         ClassStructor classStructor = (ClassStructor)theEObject;
         T result = caseClassStructor(classStructor);
+        if (result == null) result = caseRoomElement(classStructor);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -232,6 +251,7 @@ public class RoomSwitch<T> extends Switch<T>
         GeneralProtocolClass generalProtocolClass = (GeneralProtocolClass)theEObject;
         T result = caseGeneralProtocolClass(generalProtocolClass);
         if (result == null) result = caseRoomClass(generalProtocolClass);
+        if (result == null) result = caseRoomElement(generalProtocolClass);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -241,6 +261,7 @@ public class RoomSwitch<T> extends Switch<T>
         T result = caseProtocolClass(protocolClass);
         if (result == null) result = caseGeneralProtocolClass(protocolClass);
         if (result == null) result = caseRoomClass(protocolClass);
+        if (result == null) result = caseRoomElement(protocolClass);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -250,6 +271,7 @@ public class RoomSwitch<T> extends Switch<T>
         T result = caseCompoundProtocolClass(compoundProtocolClass);
         if (result == null) result = caseGeneralProtocolClass(compoundProtocolClass);
         if (result == null) result = caseRoomClass(compoundProtocolClass);
+        if (result == null) result = caseRoomElement(compoundProtocolClass);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -257,6 +279,7 @@ public class RoomSwitch<T> extends Switch<T>
       {
         SubProtocol subProtocol = (SubProtocol)theEObject;
         T result = caseSubProtocol(subProtocol);
+        if (result == null) result = caseRoomElement(subProtocol);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -264,6 +287,7 @@ public class RoomSwitch<T> extends Switch<T>
       {
         Message message = (Message)theEObject;
         T result = caseMessage(message);
+        if (result == null) result = caseRoomElement(message);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -271,6 +295,7 @@ public class RoomSwitch<T> extends Switch<T>
       {
         PortClass portClass = (PortClass)theEObject;
         T result = casePortClass(portClass);
+        if (result == null) result = caseRoomElement(portClass);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -278,6 +303,7 @@ public class RoomSwitch<T> extends Switch<T>
       {
         MessageHandler messageHandler = (MessageHandler)theEObject;
         T result = caseMessageHandler(messageHandler);
+        if (result == null) result = caseRoomElement(messageHandler);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -286,6 +312,7 @@ public class RoomSwitch<T> extends Switch<T>
         InMessageHandler inMessageHandler = (InMessageHandler)theEObject;
         T result = caseInMessageHandler(inMessageHandler);
         if (result == null) result = caseMessageHandler(inMessageHandler);
+        if (result == null) result = caseRoomElement(inMessageHandler);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -294,6 +321,7 @@ public class RoomSwitch<T> extends Switch<T>
         OutMessageHandler outMessageHandler = (OutMessageHandler)theEObject;
         T result = caseOutMessageHandler(outMessageHandler);
         if (result == null) result = caseMessageHandler(outMessageHandler);
+        if (result == null) result = caseRoomElement(outMessageHandler);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -306,6 +334,7 @@ public class RoomSwitch<T> extends Switch<T>
         if (result == null) result = caseStructureClass(actorClass);
         if (result == null) result = caseIInterfaceItemOwner(actorClass);
         if (result == null) result = caseRoomClass(actorClass);
+        if (result == null) result = caseRoomElement(actorClass);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -314,6 +343,7 @@ public class RoomSwitch<T> extends Switch<T>
         InterfaceItem interfaceItem = (InterfaceItem)theEObject;
         T result = caseInterfaceItem(interfaceItem);
         if (result == null) result = caseAbstractInterfaceItem(interfaceItem);
+        if (result == null) result = caseRoomElement(interfaceItem);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -323,6 +353,7 @@ public class RoomSwitch<T> extends Switch<T>
         T result = casePort(port);
         if (result == null) result = caseInterfaceItem(port);
         if (result == null) result = caseAbstractInterfaceItem(port);
+        if (result == null) result = caseRoomElement(port);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -330,6 +361,7 @@ public class RoomSwitch<T> extends Switch<T>
       {
         ExternalPort externalPort = (ExternalPort)theEObject;
         T result = caseExternalPort(externalPort);
+        if (result == null) result = caseRoomElement(externalPort);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -339,6 +371,7 @@ public class RoomSwitch<T> extends Switch<T>
         T result = caseSAP(sap);
         if (result == null) result = caseInterfaceItem(sap);
         if (result == null) result = caseAbstractInterfaceItem(sap);
+        if (result == null) result = caseRoomElement(sap);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -348,6 +381,7 @@ public class RoomSwitch<T> extends Switch<T>
         T result = caseSPP(spp);
         if (result == null) result = caseInterfaceItem(spp);
         if (result == null) result = caseAbstractInterfaceItem(spp);
+        if (result == null) result = caseRoomElement(spp);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -355,6 +389,7 @@ public class RoomSwitch<T> extends Switch<T>
       {
         ServiceImplementation serviceImplementation = (ServiceImplementation)theEObject;
         T result = caseServiceImplementation(serviceImplementation);
+        if (result == null) result = caseRoomElement(serviceImplementation);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -364,6 +399,7 @@ public class RoomSwitch<T> extends Switch<T>
         T result = caseLogicalSystem(logicalSystem);
         if (result == null) result = caseStructureClass(logicalSystem);
         if (result == null) result = caseRoomClass(logicalSystem);
+        if (result == null) result = caseRoomElement(logicalSystem);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -371,6 +407,7 @@ public class RoomSwitch<T> extends Switch<T>
       {
         ActorContainerRef actorContainerRef = (ActorContainerRef)theEObject;
         T result = caseActorContainerRef(actorContainerRef);
+        if (result == null) result = caseRoomElement(actorContainerRef);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -379,6 +416,7 @@ public class RoomSwitch<T> extends Switch<T>
         SubSystemRef subSystemRef = (SubSystemRef)theEObject;
         T result = caseSubSystemRef(subSystemRef);
         if (result == null) result = caseActorContainerRef(subSystemRef);
+        if (result == null) result = caseRoomElement(subSystemRef);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -389,6 +427,7 @@ public class RoomSwitch<T> extends Switch<T>
         if (result == null) result = caseActorContainerClass(subSystemClass);
         if (result == null) result = caseStructureClass(subSystemClass);
         if (result == null) result = caseRoomClass(subSystemClass);
+        if (result == null) result = caseRoomElement(subSystemClass);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -396,6 +435,7 @@ public class RoomSwitch<T> extends Switch<T>
       {
         LogicalThread logicalThread = (LogicalThread)theEObject;
         T result = caseLogicalThread(logicalThread);
+        if (result == null) result = caseRoomElement(logicalThread);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -403,6 +443,7 @@ public class RoomSwitch<T> extends Switch<T>
       {
         ActorInstanceMapping actorInstanceMapping = (ActorInstanceMapping)theEObject;
         T result = caseActorInstanceMapping(actorInstanceMapping);
+        if (result == null) result = caseRoomElement(actorInstanceMapping);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -410,6 +451,7 @@ public class RoomSwitch<T> extends Switch<T>
       {
         RefPath refPath = (RefPath)theEObject;
         T result = caseRefPath(refPath);
+        if (result == null) result = caseRoomElement(refPath);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -417,6 +459,7 @@ public class RoomSwitch<T> extends Switch<T>
       {
         RefSegment refSegment = (RefSegment)theEObject;
         T result = caseRefSegment(refSegment);
+        if (result == null) result = caseRoomElement(refSegment);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -424,6 +467,7 @@ public class RoomSwitch<T> extends Switch<T>
       {
         Binding binding = (Binding)theEObject;
         T result = caseBinding(binding);
+        if (result == null) result = caseRoomElement(binding);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -431,6 +475,7 @@ public class RoomSwitch<T> extends Switch<T>
       {
         BindingEndPoint bindingEndPoint = (BindingEndPoint)theEObject;
         T result = caseBindingEndPoint(bindingEndPoint);
+        if (result == null) result = caseRoomElement(bindingEndPoint);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -438,6 +483,7 @@ public class RoomSwitch<T> extends Switch<T>
       {
         LayerConnection layerConnection = (LayerConnection)theEObject;
         T result = caseLayerConnection(layerConnection);
+        if (result == null) result = caseRoomElement(layerConnection);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -445,6 +491,7 @@ public class RoomSwitch<T> extends Switch<T>
       {
         SAPoint saPoint = (SAPoint)theEObject;
         T result = caseSAPoint(saPoint);
+        if (result == null) result = caseRoomElement(saPoint);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -453,6 +500,7 @@ public class RoomSwitch<T> extends Switch<T>
         RefSAPoint refSAPoint = (RefSAPoint)theEObject;
         T result = caseRefSAPoint(refSAPoint);
         if (result == null) result = caseSAPoint(refSAPoint);
+        if (result == null) result = caseRoomElement(refSAPoint);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -461,6 +509,7 @@ public class RoomSwitch<T> extends Switch<T>
         RelaySAPoint relaySAPoint = (RelaySAPoint)theEObject;
         T result = caseRelaySAPoint(relaySAPoint);
         if (result == null) result = caseSAPoint(relaySAPoint);
+        if (result == null) result = caseRoomElement(relaySAPoint);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -468,6 +517,7 @@ public class RoomSwitch<T> extends Switch<T>
       {
         SPPoint spPoint = (SPPoint)theEObject;
         T result = caseSPPoint(spPoint);
+        if (result == null) result = caseRoomElement(spPoint);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -476,6 +526,14 @@ public class RoomSwitch<T> extends Switch<T>
         ActorRef actorRef = (ActorRef)theEObject;
         T result = caseActorRef(actorRef);
         if (result == null) result = caseActorContainerRef(actorRef);
+        if (result == null) result = caseRoomElement(actorRef);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case RoomPackage.ROOM_ELEMENT:
+      {
+        RoomElement roomElement = (RoomElement)theEObject;
+        T result = caseRoomElement(roomElement);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -1295,6 +1353,22 @@ public class RoomSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseActorRef(ActorRef object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Element</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Element</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseRoomElement(RoomElement object)
   {
     return null;
   }

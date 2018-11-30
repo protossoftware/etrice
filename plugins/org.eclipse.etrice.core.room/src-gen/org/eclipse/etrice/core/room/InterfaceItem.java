@@ -39,7 +39,7 @@ import org.eclipse.etrice.core.fsm.fSM.ProtocolSemantics;
  * @model
  * @generated
  */
-public interface InterfaceItem extends AbstractInterfaceItem
+public interface InterfaceItem extends AbstractInterfaceItem, RoomElement
 {
   /**
    * Returns the value of the '<em><b>Docu</b></em>' containment reference.

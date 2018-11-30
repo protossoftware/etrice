@@ -2,8 +2,6 @@
  */
 package org.eclipse.etrice.core.room;
 
-import org.eclipse.emf.ecore.EObject;
-
 import org.eclipse.etrice.core.common.base.IntLiteral;
 
 /**
@@ -29,7 +27,7 @@ import org.eclipse.etrice.core.common.base.IntLiteral;
  * @model
  * @generated
  */
-public interface EnumLiteral extends EObject
+public interface EnumLiteral extends RoomElement
 {
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
