@@ -16,7 +16,6 @@ package org.eclipse.etrice.generator.doc.gen
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
-import java.io.File
 import org.eclipse.etrice.core.genmodel.etricegen.AbstractInstance
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInstance
 import org.eclipse.etrice.core.genmodel.etricegen.ActorInterfaceInstance
@@ -25,57 +24,36 @@ import org.eclipse.etrice.core.genmodel.etricegen.StructureInstance
 import org.eclipse.etrice.core.genmodel.etricegen.SystemInstance
 import org.eclipse.etrice.generator.generic.RoomExtensions
 
-import static java.lang.Runtime.*
 import org.eclipse.etrice.core.etmap.util.ETMapUtil
-import org.eclipse.etrice.generator.base.logging.ILogger
 import org.eclipse.etrice.generator.base.io.IGeneratorFileIO
 
 @Singleton
 class InstanceDiagramGen {
 
-	@Inject extension IGeneratorFileIO fileIO
 	@Inject extension RoomExtensions roomExt
-	@Inject ILogger logger
 	
-	def doGenerate(Root root) {
-		for (model: root.models) {
-			var path = "images/"
-			var batchFile = "dot2jpg.bat"
-			for (sys : root.systemInstances) {
-				var file = sys.name+"_instanceTree.dot"
-				fileIO.generateFile("generating instance tree diagram", path + file, root.generate(sys))
-			}
-			fileIO.generateFile(path + batchFile, root.generate2jpg())
-			runDot2Jpg(path, batchFile)
+	def doGenerate(Root root, IGeneratorFileIO fileIO) {
+		var path = "images/"
+		for (sys : root.systemInstances) {
+			var file = sys.name+"_instanceTree.dot"
+			fileIO.generateFile("generating instance tree diagram", path + file, root.generate(sys))
 		}
 	}
 	
-	// generate batch file to convert .dot to .jpg
-	// dot -Tjpg -oSS.jpg SS.dot	
-	def private generate2jpg(Root root){
-		'''
-			«FOR sys : root.systemInstances»
-				dot -Tjpg -o «sys.name»_instanceTree.jpg «sys.name»_instanceTree.dot
-			«ENDFOR»
-		'''
-	}
-	
-	def private generate(Root root, SystemInstance sys) {
-		'''
-			digraph «sys.name» {
-				rankdir=LR;
-				node [shape=box];
-				«sys.path.getPathName()» [label="«sys.name»\n(«sys.name»)" style=filled color=red];
-				«FOR ssi : sys.instances»
-					«ssi.path.getPathName()» [label="«ssi.name»\n(«ssi.subSystemClass.name»)" style=filled color=yellow];
-					«sys.path.getPathName()» -> «ssi.path.getPathName()»;  
-					«FOR ai : ssi.instances»
-						«instance(ai)»
-					«ENDFOR»
+	def private generate(Root root, SystemInstance sys) '''
+		digraph «sys.name» {
+			rankdir=LR;
+			node [shape=box];
+			«sys.path.getPathName()» [label="«sys.name»\n(«sys.name»)" style=filled color=red];
+			«FOR ssi : sys.instances»
+				«ssi.path.getPathName()» [label="«ssi.name»\n(«ssi.subSystemClass.name»)" style=filled color=yellow];
+				«sys.path.getPathName()» -> «ssi.path.getPathName()»;
+				«FOR ai : ssi.instances»
+					«instance(ai)»
 				«ENDFOR»
-			}
-		'''
-	}
+			«ENDFOR»
+		}
+	'''
 	
 	def private String instance(AbstractInstance ai) {
 		val parent = ai.eContainer as StructureInstance
@@ -97,17 +75,6 @@ class InstanceDiagramGen {
 			«ENDIF» 
 		'''
 	}
-
- 	def private runDot2Jpg(String path, String bat){
- 		var wdir = new File(path)
- 		try {
-			val p = getRuntime.exec("cmd /C "+bat, null, wdir)
-			logger.logInfo(bat+" finished with "+p.waitFor)
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-
-	}
+	
 }
 	

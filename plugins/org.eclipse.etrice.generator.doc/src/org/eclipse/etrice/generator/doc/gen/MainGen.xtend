@@ -16,28 +16,22 @@ package org.eclipse.etrice.generator.doc.gen
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
-import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.etrice.core.genmodel.etricegen.Root
-import org.eclipse.etrice.generator.generic.PrepareFileSystem
+import org.eclipse.etrice.generator.base.io.IGeneratorFileIO
+import org.eclipse.etrice.generator.base.args.Arguments
+
+import static org.eclipse.etrice.generator.doc.setup.DocGeneratorOptions.INCLUDE_IMAGES
 
 @Singleton
 class MainGen {
 	
 	@Inject InstanceDiagramGen instanceDiagramGen
-	@Inject PrepareFileSystem prepFS
-	@Inject DocGen docGen
+	@Inject AsciiDocGen docGen
 	
-	def void doGenerate(Resource resource) {
-		prepFS.prepare
-		for (e: resource.contents){
-			if (e instanceof Root) {
-				doGenerate(e as Root)
-			}
-		}
-	}
-	
-	def private void doGenerate(Root e) {
-		instanceDiagramGen.doGenerate(e);
-		docGen.doGenerate(e);
+	def void doGenerate(Root root, Arguments args, IGeneratorFileIO fileIO) {
+		val includeImages = args.get(INCLUDE_IMAGES)
+		
+		instanceDiagramGen.doGenerate(root, fileIO);
+		docGen.doGenerate(root, fileIO, includeImages);
 	}
 }

@@ -25,7 +25,6 @@ import org.eclipse.etrice.generator.base.logging.ILogger;
 import org.eclipse.etrice.generator.doc.gen.InstanceDiagramGen;
 import org.eclipse.etrice.generator.doc.gen.MainGen;
 import org.eclipse.etrice.generator.doc.setup.GeneratorModule;
-import org.eclipse.etrice.generator.doc.setup.DocGeneratorOptions;
 
 import com.google.inject.Inject;
 
@@ -47,24 +46,13 @@ public class Main extends AbstractGenerator {
 	protected InstanceDiagramGen instanceDiagramGenerator;
 	
 	protected int runGenerator(List<Resource> resources, Arguments arguments, IGeneratorFileIO fileIO, ILogger logger) {
-
 		Root genModel = createGeneratorModel(resources, arguments, logger);
 		if (diagnostician.isFailed() || genModel==null) {
 			logger.logError("errors during build of generator model");
 			return GENERATOR_ERROR;
 		}
 		
-		logger.logInfo("-- starting code generation");
-		mainGenerator.doGenerate(genModel.eResource());
-		
-		if (arguments.get(DocGeneratorOptions.GEN_INST_DIAG)) {
-			instanceDiagramGenerator.doGenerate(genModel);
-		}
-		
-		if (diagnostician.isFailed()) {
-			logger.logError("errors during code generation");
-			return GENERATOR_ERROR;
-		}
+		mainGenerator.doGenerate(genModel, arguments, fileIO);
 		
 		return GENERATOR_OK;
 	}

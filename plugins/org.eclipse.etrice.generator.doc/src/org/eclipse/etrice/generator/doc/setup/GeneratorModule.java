@@ -17,17 +17,17 @@ package org.eclipse.etrice.generator.doc.setup;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.etrice.core.genmodel.fsm.ICommonDataCalculator;
 import org.eclipse.etrice.core.genmodel.fsm.IDiagnostician;
+import org.eclipse.etrice.core.room.util.CommonDataCalculator;
 import org.eclipse.etrice.generator.base.EMFSetup;
 import org.eclipse.etrice.generator.base.GenerationEMFDiagnostician;
 import org.eclipse.etrice.generator.base.IGenerator;
 import org.eclipse.etrice.generator.base.ITranslationProvider;
 import org.eclipse.etrice.generator.base.ModelLoader;
 import org.eclipse.etrice.generator.base.ModelValidator;
-import org.eclipse.etrice.generator.base.io.GeneratorFileIO;
 import org.eclipse.etrice.generator.base.io.IGeneratorEMFSetup;
 import org.eclipse.etrice.generator.base.io.IGeneratorResourceLoader;
-import org.eclipse.etrice.generator.base.logging.Logger;
 import org.eclipse.etrice.generator.base.setup.GeneratorName;
 import org.eclipse.etrice.generator.base.setup.GeneratorOptions;
 import org.eclipse.etrice.generator.base.validation.IGeneratorResourceValidator;
@@ -53,11 +53,10 @@ public class GeneratorModule implements Module {
 		binder.bind(IGenerator.class).to(Main.class);
 		
 		binder.bind(ResourceSet.class).to(ResourceSetImpl.class);
-		binder.bind(Logger.class).in(Singleton.class);
-		binder.bind(GeneratorFileIO.class).in(Singleton.class);
 		binder.bind(IDiagnostician.class).to(Diagnostician.class);
 		binder.bind(Diagnostician.class).in(Singleton.class);
 		binder.bind(ITranslationProvider.class).to(DocTranslationProvider.class);
+		binder.bind(ICommonDataCalculator.class).to(CommonDataCalculator.class);
 		
 		binder.bind(EValidator.Registry.class).toInstance(EValidator.Registry.INSTANCE);
 		binder.bind(org.eclipse.emf.ecore.util.Diagnostician.class).to(GenerationEMFDiagnostician.class).asEagerSingleton();

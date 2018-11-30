@@ -25,17 +25,17 @@ public class DocGeneratorOptions extends AbstractGeneratorOptions {
 	
 	public static final String GROUP_ETRICE_DOC = "eTrice Documentation";
 	
-	public static final BooleanOption GEN_INST_DIAG = new BooleanOption(
+	public static final BooleanOption INCLUDE_IMAGES = new BooleanOption(
 			GROUP_ETRICE_DOC,
-			"genInstDiag",
-			"generateInstanceDiagram",
-			"if specified then an instance diagram is created for each subsystem",
+			"include_images",
+			"includeImages",
+			"If specified images are included in the generated documentation",
 			false);
 	
 	@Override
 	public void configure(List<Option<?>> options) {
 		super.configure(options);
 		
-		options.add(GEN_INST_DIAG);
+		options.add(INCLUDE_IMAGES);
 	}
 }
