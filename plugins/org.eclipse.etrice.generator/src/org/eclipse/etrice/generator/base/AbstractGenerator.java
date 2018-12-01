@@ -33,7 +33,6 @@ import org.eclipse.etrice.core.genmodel.builder.GeneratorModelBuilderFactory;
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.core.genmodel.fsm.FsmGenExtensions;
-import org.eclipse.etrice.core.genmodel.fsm.IDiagnostician;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RoomModel;
@@ -42,6 +41,7 @@ import org.eclipse.etrice.generator.base.io.IGeneratorFileIO;
 import org.eclipse.etrice.generator.base.io.ILineOutput;
 import org.eclipse.etrice.generator.base.io.LineOutput;
 import org.eclipse.etrice.generator.base.logging.ILogger;
+import org.eclipse.etrice.generator.fsm.base.Diagnostician;
 import org.eclipse.etrice.generator.fsm.generic.IDetailCodeTranslator;
 import org.eclipse.etrice.generator.generic.TestInstanceCreator;
 
@@ -123,7 +123,7 @@ public abstract class AbstractGenerator implements IGenerator, IDetailCodeTransl
 	 * The injected diagnostician
 	 */
 	@Inject
-	protected IDiagnostician diagnostician;
+	protected Diagnostician diagnostician;
 	
 	/**
 	 * The injected translation provider
@@ -140,6 +140,7 @@ public abstract class AbstractGenerator implements IGenerator, IDetailCodeTransl
 	@Override
 	public void generate(List<Resource> resources, Arguments arguments, IGeneratorFileIO fileIO, ILogger logger) {
 		AbstractGenerator.settings = arguments;
+		diagnostician.setFailed(false);
 		
 		if(resources.isEmpty()) {
 			logger.logError("no input files");

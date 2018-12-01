@@ -65,6 +65,10 @@ public class Diagnostician implements IDiagnostician {
 	public boolean isFailed() {
 		return validationFailed;
 	}
+	
+	public void setFailed(boolean failed) {
+		validationFailed = failed;
+	}
 
 	private String getMsgTxt(String msg, EObject source, EStructuralFeature feature, int idx) {
 		StringBuilder result = new StringBuilder(msg);
