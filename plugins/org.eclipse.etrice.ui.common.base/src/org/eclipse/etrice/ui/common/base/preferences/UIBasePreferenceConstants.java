@@ -32,7 +32,7 @@ public interface UIBasePreferenceConstants {
 	
 	public static final String MAX_LABEL_LINE_LENGTH = "MaxLabelLineLength";
 	public static final String MAX_LABEL_LINES = "MaxLabelLines";
-	public static final int MAX_LINE_LENGTH_DEFAULT = 20;
+	public static final int MAX_LINE_LENGTH_DEFAULT = 30;
 	public static final int MAX_LINES_DEFAULT = 1;
 	
 	// possible values for EXPORT_DIAGRAM_PATH_RELATIVE_TO
