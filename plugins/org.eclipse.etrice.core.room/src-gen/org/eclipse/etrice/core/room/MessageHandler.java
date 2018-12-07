@@ -2,8 +2,6 @@
  */
 package org.eclipse.etrice.core.room;
 
-import org.eclipse.emf.ecore.EObject;
-
 import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 
 /**
@@ -32,7 +30,7 @@ import org.eclipse.etrice.core.fsm.fSM.DetailCode;
  * @model
  * @generated
  */
-public interface MessageHandler extends EObject
+public interface MessageHandler extends RoomElement
 {
   /**
    * Returns the value of the '<em><b>Msg</b></em>' reference.

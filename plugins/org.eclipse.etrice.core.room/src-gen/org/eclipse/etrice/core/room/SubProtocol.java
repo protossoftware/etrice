@@ -2,7 +2,6 @@
  */
 package org.eclipse.etrice.core.room;
 
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -28,7 +27,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface SubProtocol extends EObject
+public interface SubProtocol extends RoomElement
 {
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.

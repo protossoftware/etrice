@@ -2,7 +2,6 @@
  */
 package org.eclipse.etrice.core.room;
 
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -21,7 +20,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface MessageData extends EObject
+public interface MessageData extends RoomElement
 {
   /**
    * Returns the value of the '<em><b>Deprecated Name</b></em>' attribute.

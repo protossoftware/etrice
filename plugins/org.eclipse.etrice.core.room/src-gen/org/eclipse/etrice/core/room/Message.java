@@ -4,8 +4,6 @@ package org.eclipse.etrice.core.room;
 
 import org.eclipse.emf.common.util.EList;
 
-import org.eclipse.emf.ecore.EObject;
-
 import org.eclipse.etrice.core.common.base.Annotation;
 import org.eclipse.etrice.core.common.base.Documentation;
 
@@ -39,7 +37,7 @@ import org.eclipse.etrice.core.common.base.Documentation;
  * @model
  * @generated
  */
-public interface Message extends EObject
+public interface Message extends RoomElement
 {
   /**
    * Returns the value of the '<em><b>Priv</b></em>' attribute.

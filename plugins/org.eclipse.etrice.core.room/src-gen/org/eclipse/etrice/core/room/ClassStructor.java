@@ -2,8 +2,6 @@
  */
 package org.eclipse.etrice.core.room;
 
-import org.eclipse.emf.ecore.EObject;
-
 import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 
 /**
@@ -28,7 +26,7 @@ import org.eclipse.etrice.core.fsm.fSM.DetailCode;
  * @model
  * @generated
  */
-public interface ClassStructor extends EObject
+public interface ClassStructor extends RoomElement
 {
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.

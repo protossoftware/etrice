@@ -334,6 +334,11 @@ public class RoomAdapterFactory extends AdapterFactoryImpl
         return createActorRefAdapter();
       }
       @Override
+      public Adapter caseRoomElement(RoomElement object)
+      {
+        return createRoomElementAdapter();
+      }
+      @Override
       public Adapter caseIInterfaceItemOwner(IInterfaceItemOwner object)
       {
         return createIInterfaceItemOwnerAdapter();
@@ -1131,6 +1136,21 @@ public class RoomAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createActorRefAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.etrice.core.room.RoomElement <em>Element</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.etrice.core.room.RoomElement
+   * @generated
+   */
+  public Adapter createRoomElementAdapter()
   {
     return null;
   }

@@ -4,8 +4,6 @@ package org.eclipse.etrice.core.room;
 
 import org.eclipse.emf.common.util.EList;
 
-import org.eclipse.emf.ecore.EObject;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Ref Path</b></em>'.
@@ -27,7 +25,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface RefPath extends EObject
+public interface RefPath extends RoomElement
 {
   /**
    * Returns the value of the '<em><b>Refs</b></em>' containment reference list.

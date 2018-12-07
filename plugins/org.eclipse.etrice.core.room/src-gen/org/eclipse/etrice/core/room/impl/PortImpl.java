@@ -360,7 +360,7 @@ public class PortImpl extends InterfaceItemImpl implements Port
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (conjugated: ");
     result.append(conjugated);
     result.append(", multiplicity: ");

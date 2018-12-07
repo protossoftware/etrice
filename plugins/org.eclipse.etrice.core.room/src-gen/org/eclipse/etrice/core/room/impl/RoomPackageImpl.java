@@ -56,6 +56,7 @@ import org.eclipse.etrice.core.room.ReferenceType;
 import org.eclipse.etrice.core.room.RelaySAPoint;
 import org.eclipse.etrice.core.room.RoomAnnotationTargetEnum;
 import org.eclipse.etrice.core.room.RoomClass;
+import org.eclipse.etrice.core.room.RoomElement;
 import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.RoomPackage;
@@ -439,6 +440,13 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass roomElementEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EEnum communicationTypeEEnum = null;
 
   /**
@@ -484,7 +492,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link RoomPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -499,7 +507,8 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     if (isInited) return (RoomPackage)EPackage.Registry.INSTANCE.getEPackage(RoomPackage.eNS_URI);
 
     // Obtain or create and register package
-    RoomPackageImpl theRoomPackage = (RoomPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof RoomPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new RoomPackageImpl());
+    Object registeredRoomPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    RoomPackageImpl theRoomPackage = registeredRoomPackage instanceof RoomPackageImpl ? (RoomPackageImpl)registeredRoomPackage : new RoomPackageImpl();
 
     isInited = true;
 
@@ -516,7 +525,6 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     // Mark meta-data to indicate it can't be changed
     theRoomPackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(RoomPackage.eNS_URI, theRoomPackage);
     return theRoomPackage;
@@ -2367,6 +2375,16 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getRoomElement()
+  {
+    return roomElementEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EEnum getCommunicationType()
   {
     return communicationTypeEEnum;
@@ -2657,6 +2675,8 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     createEAttribute(actorRefEClass, ACTOR_REF__MULTIPLICITY);
     createEReference(actorRefEClass, ACTOR_REF__TYPE);
 
+    roomElementEClass = createEClass(ROOM_ELEMENT);
+
     // Create enums
     communicationTypeEEnum = createEEnum(COMMUNICATION_TYPE);
     referenceTypeEEnum = createEEnum(REFERENCE_TYPE);
@@ -2696,32 +2716,58 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     // Set bounds for type parameters
 
     // Add supertypes to classes
+    roomModelEClass.getESuperTypes().add(this.getRoomElement());
+    roomClassEClass.getESuperTypes().add(this.getRoomElement());
     structureClassEClass.getESuperTypes().add(this.getRoomClass());
     actorContainerClassEClass.getESuperTypes().add(this.getStructureClass());
+    varDeclEClass.getESuperTypes().add(this.getRoomElement());
+    messageDataEClass.getESuperTypes().add(this.getRoomElement());
+    refableTypeEClass.getESuperTypes().add(this.getRoomElement());
     dataTypeEClass.getESuperTypes().add(this.getRoomClass());
     complexTypeEClass.getESuperTypes().add(this.getDataType());
     primitiveTypeEClass.getESuperTypes().add(this.getDataType());
     enumerationTypeEClass.getESuperTypes().add(this.getDataType());
+    enumLiteralEClass.getESuperTypes().add(this.getRoomElement());
     externalTypeEClass.getESuperTypes().add(this.getComplexType());
     dataClassEClass.getESuperTypes().add(this.getComplexType());
+    attributeEClass.getESuperTypes().add(this.getRoomElement());
+    operationEClass.getESuperTypes().add(this.getRoomElement());
     standardOperationEClass.getESuperTypes().add(this.getOperation());
     portOperationEClass.getESuperTypes().add(this.getOperation());
+    classStructorEClass.getESuperTypes().add(this.getRoomElement());
     generalProtocolClassEClass.getESuperTypes().add(this.getRoomClass());
     protocolClassEClass.getESuperTypes().add(this.getGeneralProtocolClass());
     compoundProtocolClassEClass.getESuperTypes().add(this.getGeneralProtocolClass());
+    subProtocolEClass.getESuperTypes().add(this.getRoomElement());
+    messageEClass.getESuperTypes().add(this.getRoomElement());
+    portClassEClass.getESuperTypes().add(this.getRoomElement());
+    messageHandlerEClass.getESuperTypes().add(this.getRoomElement());
     inMessageHandlerEClass.getESuperTypes().add(this.getMessageHandler());
     outMessageHandlerEClass.getESuperTypes().add(this.getMessageHandler());
     actorClassEClass.getESuperTypes().add(this.getActorContainerClass());
     actorClassEClass.getESuperTypes().add(theFSMPackage.getModelComponent());
     interfaceItemEClass.getESuperTypes().add(theFSMPackage.getAbstractInterfaceItem());
+    interfaceItemEClass.getESuperTypes().add(this.getRoomElement());
     portEClass.getESuperTypes().add(this.getInterfaceItem());
+    externalPortEClass.getESuperTypes().add(this.getRoomElement());
     sapEClass.getESuperTypes().add(this.getInterfaceItem());
     sppEClass.getESuperTypes().add(this.getInterfaceItem());
+    serviceImplementationEClass.getESuperTypes().add(this.getRoomElement());
     logicalSystemEClass.getESuperTypes().add(this.getStructureClass());
+    actorContainerRefEClass.getESuperTypes().add(this.getRoomElement());
     subSystemRefEClass.getESuperTypes().add(this.getActorContainerRef());
     subSystemClassEClass.getESuperTypes().add(this.getActorContainerClass());
+    logicalThreadEClass.getESuperTypes().add(this.getRoomElement());
+    actorInstanceMappingEClass.getESuperTypes().add(this.getRoomElement());
+    refPathEClass.getESuperTypes().add(this.getRoomElement());
+    refSegmentEClass.getESuperTypes().add(this.getRoomElement());
+    bindingEClass.getESuperTypes().add(this.getRoomElement());
+    bindingEndPointEClass.getESuperTypes().add(this.getRoomElement());
+    layerConnectionEClass.getESuperTypes().add(this.getRoomElement());
+    saPointEClass.getESuperTypes().add(this.getRoomElement());
     refSAPointEClass.getESuperTypes().add(this.getSAPoint());
     relaySAPointEClass.getESuperTypes().add(this.getSAPoint());
+    spPointEClass.getESuperTypes().add(this.getRoomElement());
     actorRefEClass.getESuperTypes().add(this.getActorContainerRef());
 
     // Initialize classes and features; add operations and parameters
@@ -2997,6 +3043,8 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     initEAttribute(getActorRef_RefType(), this.getReferenceType(), "refType", null, 0, 1, ActorRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getActorRef_Multiplicity(), ecorePackage.getEInt(), "multiplicity", "1", 0, 1, ActorRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getActorRef_Type(), this.getActorClass(), null, "type", null, 0, 1, ActorRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(roomElementEClass, RoomElement.class, "RoomElement", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     // Initialize enums and add enum literals
     initEEnum(communicationTypeEEnum, CommunicationType.class, "CommunicationType");

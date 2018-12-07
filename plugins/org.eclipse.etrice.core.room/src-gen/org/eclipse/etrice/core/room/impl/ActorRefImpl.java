@@ -288,7 +288,7 @@ public class ActorRefImpl extends ActorContainerRefImpl implements ActorRef
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (refType: ");
     result.append(refType);
     result.append(", multiplicity: ");

@@ -4,7 +4,7 @@
     editorDirectory="/org.eclipse.etrice.core.room.editor/src" modelPluginID="org.eclipse.etrice.core.room"
     forceOverwrite="true" modelName="Room" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="6.0" copyrightFields="false" editPluginID="org.eclipse.etrice.core.room.edit"
-    editorPluginID="org.eclipse.etrice.core.room.editor" runtimeVersion="2.13" usedGenPackages="platform:/resource/org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.genmodel#//base platform:/resource/org.eclipse.etrice.core.fsm/model/generated/FSM.genmodel#//fSM">
+    editorPluginID="org.eclipse.etrice.core.room.editor" runtimeVersion="2.14" usedGenPackages="platform:/resource/org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.genmodel#//base platform:/resource/org.eclipse.etrice.core.fsm/model/generated/FSM.genmodel#//fSM">
   <genPackages prefix="Room" basePackage="org.eclipse.etrice.core" disposableProviderFactory="true"
       ecorePackage="Room.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="Room.ecore#//CommunicationType">
@@ -276,5 +276,6 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//ActorRef/multiplicity"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Room.ecore#//ActorRef/type"/>
     </genClasses>
+    <genClasses ecoreClass="Room.ecore#//RoomElement"/>
   </genPackages>
 </genmodel:GenModel>
