@@ -71,25 +71,64 @@
     </ul>
   </li>
 </ul>
+<h4><a href="#how-to-install-the-mingw-compiler-on-windows-10" name="how-to-install-the-mingw-compiler-on-windows-10"></a>How to install the MinGW compiler on Windows 10</h4>
+<ol>
+  <li>
+  <p>Download the setup executable “mingw-get-setup” from <a href="https://osdn.net/projects/mingw/releases/p15522">here</a></p></li>
+  <li>
+  <p>Run the executable file and follow the prompts given by the install wizard. </p></li>
+  <li>
+  <p>When you are prompted to set the installation directory, try not to install it under “Program Files” or “Desktop”. Instead, it is recommended to use the default location specified by the installer, “C:/MinGW”.</p></li>
+  <li>
+  <p>In the basic setup tab, mark all packages for installation by right clicking each package and selecting “Mark for installation”.</p></li>
+  <li>
+  <p>Once all the packages are selected, click on the menu called “Installation -&gt; Apply Changes”. </p></li>
+  <li>
+  <p>When the confirmation window appears, select “Apply”. The package download/installation process will now begin. It should take about 5-10 minutes to completely finish, so ensure that you have a reliable internet connection during this time.</p></li>
+  <li>
+    <p>Once the installation process has completely finished, you need to set the environment variable path to include the MinGW directory. Open the windows menu with “windows key”, type “Control Panel” and press Enter. </p>
+    <ul>
+      <li>
+      <p>At the top right of the control panel window there should be a search box. Select it and type “Advanced system settings” and then click on the search result “View advanced system settings”.</p></li>
+      <li>
+      <p>Click on “Environment Variables” and double click on the user variable “Path”. In the new Edit environment variable window, enter a new variable under “C:/MinGW/bin” if you used the recommended install path. Otherwise change the install path accordingly. Press OK on all open settings windows to close them.</p></li>
+    </ul>
+  </li>
+  <li>
+  <p>To verify that your installation is working, run the following commands and confirm that the outputs match as follows. It is possible that a restart may necessary to confirm the changes.</p></li>
+</ol>
+<pre><code class="console">&gt; gcc --version
+g++ (GCC) X.X.X
+......
+ 
+&gt; g++ --version
+g++ (GCC) X.X.X
+......
+ 
+&gt; gdb --version
+GNU gdb (GDB) X.X.X
+......
+</code></pre>
 <h4><a href="#create-template-project" name="create-template-project"></a>Create template project</h4>
 <p>After installation of eTrice in Eclipse, we can use the wizard to create the <em>template.c</em> project, which is a good starting point for new ROOM applications. Select the menu <em>File -&gt; New -&gt; Other</em> (Ctrl+N) and choose <em>eTrice C Template Project</em>. To complete the wizard press <em>Next</em> and on the next page <em>Finish</em>.</p>
 <p><img src="images/013-wizard.png" alt="image"></p>
-<p>This will add three projects into your workspace:</p>
+<p>This will add the three projects into your workspace:</p>
 <ul>
   <li>the library projects <em>runtime.c</em> and <em>modellib.c</em></li>
   <li>our application project <em>template.c</em>.</li>
 </ul>
 <p>Now open the <em>TemplateModel.room</em> in the model folder of <em>template.c</em>.</p>
 <p><img src="images/013-after-wizard.png" alt="image"></p>
-<p>The model contains an ActorClass <em>TopActor</em>, which is currently the only active actor. TopActor has a state machine that is intended to output a simple HelloWorld statement. To inspect its behavior graphically, we can open the behavior diagram by right click on <em>Outline View -&gt; TopActor -&gt; Edit Behavior</em>. Alternatively we can place the cursor within the textual notation and press Alt+B.</p>
+<p>In this step we are introduced to the concept of Actors, a fundamental building block in ROOM, and how they are used in eTrice. In essence, an Actor is a representation of an object as a logical machine with defined behavior. Its structure, behavior and protocols are all defined with in an element called an ActorClass. See <a href="room-concepts.html#actors">here</a> for further information.</p>
+<p>The model contains an ActorClass <em>TopActor</em>, which is currently the only active actor. TopActor has a state machine that is intended to output a simple HelloWorld statement. To inspect its behavior graphically, we can open the behavior diagram by right clicking on <em>Outline View -&gt; TopActor -&gt; Edit Behavior</em>. Alternatively we can place the cursor within the textual notation and press Alt+B.</p>
 <p><img src="images/013-open-hello-fsm.png" alt="image"></p>
 <p>The state machine has an initial transition that leads to <em>helloState</em>. The state defines an entry code, which is executed during the transition. We can view the details by hovering over the state and edit the code with a double-click or right click and <em>Edit State</em>.</p>
 <p><img src="images/013-hello-fsm.png" alt="image"></p>
 <h4><a href="#generate-and-run-application" name="generate-and-run-application"></a>Generate and run application</h4>
-<p>Now we are ready to translate the model into an executable application. The first step is to generate source files from the model. Therefore we run the eTrice model generator by right click on file</p>
-<span class="uiElement"><img src="icons/obj16/file_obj.gif"> generate_Template.launch → Run As → generate_TemplateModel.</span>
-<p>After that we can build and run the application by right click on file</p>
-<span class="uiElement"><img src="icons/obj16/file_obj.gif"> run_Template_Windows.launch → Run As → run_Template_Windows.</span>
+<p>Now we are ready to translate the model into an executable application. The first step is to generate source files from the model. Therefore we run the eTrice model generator by right clicking on file</p>
+<span class="uiElement"><img src="icons/obj16/file_obj.gif"> generate_Template.launch --&gt; Run As --&gt; generate_Template</span>
+<p>After that we can build and run the application by right clicking on file</p>
+<span class="uiElement"><img src="icons/obj16/file_obj.gif"> run_Template_Windows.launch --&gt; Run As --&gt; run_Template_Windows</span>
 <p>This will trigger the build process, carried out by Eclipse CDT and then subsequently start our application.</p>
 <table>
   <thead>
@@ -153,18 +192,18 @@
   <li>our application project <em>template.cpp</em>.</li>
 </ul>
 <p>Now open the <em>TemplateModel.room</em> in the model folder of <em>template.c</em>.</p>
-<p><img src="images/013-after-wizard-cpp.png" alt="image"></p>
+<p><img src="images/013-after-wizard-cpp.png" alt="image"><br>In this step we are introduced to the concept of Actors, a fundamental building block in ROOM, and how they are used in eTrice. In essence, an Actor is a representation of an object as a logical machine with defined behavior. Its structure, behavior and protocols are all defined with in an element called an ActorClass. See <a href="room-concepts.html#actors">here</a> for further information.</p>
 <p>The model contains an ActorClass <em>TopActor</em>, which is currently the only active actor.<br>TopActor has a state machine that is intended to output a simple HelloWorld statement.<br>To inspect its behavior graphically, we can open the behavior diagram by right click on<br><em>Outline View -&gt; TopActor -&gt; Edit Behavior</em>. Alternatively we can place the cursor<br>within the textual notation and press Alt+B.</p>
 <p><img src="images/013-open-hello-fsm.png" alt="image"></p>
 <p>The state machine has an initial transition that leads to <em>helloState</em>.<br>The state defines an entry code, which is executed during the transition.<br>We can view the details by hovering over the state and edit the code with a double-click or<br>right click and <em>Edit State</em>.</p>
 <p><img src="images/013-hello-fsm.png" alt="image"></p>
 <h4><a href="#generate-and-run-application" name="generate-and-run-application"></a>Generate and run application</h4>
 <p>Now we are ready to translate the model into an executable application. The first step is to generate source files from the model. Therefore we run the eTrice model generator by right click on file</p>
-<span class="uiElement"><img src="icons/obj16/file_obj.gif"> generate_Template.launch → Run As → generate_TemplateModel.</span>
+<span class="uiElement"><img src="icons/obj16/file_obj.gif"> generate_Template.launch --&gt; Run As --&gt; generate_TemplateModel</span>
 <p>After that we can build and run the application by right click on file (depending on your operating system, here we chose Windows).</p>
 <p><span class="label label-info">Note:</span> Using MinGW it is necessary to have <em>&lt;MinGW installation dir&gt;\bin</em> in the system PATH.</p>
 <p><span class="label label-info">Note:</span> Your CDT preferences might not enforce a build before launch. In this case you have to invoke the build before launching.</p>
-<span class="uiElement"><img src="icons/obj16/file_obj.gif"> run_Template_Windows.launch → Run As → run_Template_Windows.</span>
+<span class="uiElement"><img src="icons/obj16/file_obj.gif"> run_Template_Windows.launch --&gt; Run As --&gt; run_Template_Windows</span>
 <p>This will trigger the build process, carried out by Eclipse CDT and then subsequently start our application.</p>
 <table>
   <thead>
@@ -218,16 +257,16 @@
 <p>After installation of eTrice in Eclipse, we can use the wizard to create the template project, which is a good starting point for new ROOM applications. Select the menu <em>File -&gt; New -&gt; Other</em> (Ctrl+N) and choose <em>eTrice Java Template Project</em>. Name the project <em>TemplateModel</em> and press <em>Next</em>. On the next page select <em>use Eclipse JDT build</em> and press <em>Finish</em>.</p>
 <p><img src="images/014-wizard.png" alt="image"></p>
 <p>This will add three projects into your workspace, the library projects <em>runtime.java</em> and <em>modellib.java</em> and our application project <em>TemplateModel</em>. Now open the <em>TemplateModel.room</em> in the model folder of our project.</p>
-<p><img src="images/014-after-wizard.png" alt="image"></p>
+<p><img src="images/014-after-wizard.png" alt="image"><br>In this step we are introduced to the concept of Actors, a fundamental building block in ROOM, and how they are used in eTrice. In essence, an Actor is a representation of an object as a logical machine with defined behavior. Its structure, behavior and protocols are all defined with in an element called an ActorClass. See <a href="room-concepts.html#actors">here</a> for further information.</p>
 <p>The model contains an ActorClass <em>TopActor</em>, which is currently the only active actor. TopActor has a state machine that is intended to output a simple HelloWorld statement. To inspect its behavior graphically, we can open the behavior diagram by right click on <em>Outline View -&gt; TopActor -&gt; Edit Behavior</em>. Alternatively we can place the cursor within the textual notation and press Alt+B.</p>
 <p><img src="images/014-open-hello-fsm.png" alt="image"></p>
 <p>The state machine has an initial transition that leads to <em>helloState</em>. The state defines an entry code, which is executed during the transition. We can view the details by hovering over the state and edit the code with a double-click or right click and <em>Edit State</em>.</p>
 <p><img src="images/014-hello-fsm.png" alt="image"></p>
 <h4><a href="#generate-and-run-application" name="generate-and-run-application"></a>Generate and run application</h4>
 <p>Now we are ready to translate the model into an executable application. The first step is to generate source files from the model. Therefore we run the eTrice model generator by right click on file</p>
-<span class="uiElement"><img src="icons/obj16/file_obj.gif"> generate_Template.launch → Run As → generate_TemplateModel</span>
+<span class="uiElement"><img src="icons/obj16/file_obj.gif"> generate_Template.launch --&gt; Run As --&gt; generate_Template</span>
 <p>After that we can build and run the application by right click on file</p>
-<span class="uiElement"><img src="icons/obj16/file_obj.gif"> run_TemplateModel.launch → Run As → run_TemplateModell</span>
+<span class="uiElement"><img src="icons/obj16/file_obj.gif"> run_TemplateModel.launch --&gt; Run As --&gt; run_TemplateModel</span>
 <p>This will trigger the build process, carried out by Eclipse JDT and then subsequently start our application.</p>
 <table>
   <thead>
