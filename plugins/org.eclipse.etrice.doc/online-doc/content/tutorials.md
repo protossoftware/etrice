@@ -36,7 +36,7 @@ Additional functionality is provided as model library (Modellib):
 -   standard types
 
 Getting Started C
------------------
+-------------------
 
 In this tutorial you will have a first look at a very simple eTrice model. The goal is to learn the work flow of eTrice and to understand a few basic features of ROOM.
 
@@ -56,6 +56,41 @@ In this tutorial you will have a first look at a very simple eTrice model. The g
 	- [Windows download site](http://trace2uml.tigris.org/servlets/ProjectDocumentList?folderID=6208)
 	- [Linux package](http://apt.astade.de/)
 
+#### How to install the MinGW compiler on Windows 10
+
+1. Download the setup executable "mingw-get-setup" from [here](https://osdn.net/projects/mingw/releases/p15522)
+
+2. Run the executable file and follow the prompts given by the install wizard. 
+
+3. When you are prompted to set the installation directory, try not to install it under "Program Files" or "Desktop". Instead, it is recommended to use the default location specified by the installer, "C:/MinGW".
+
+4. In the basic setup tab, mark all packages for installation by right clicking each package and selecting "Mark for installation".
+
+5. Once all the packages are selected, click on the menu called "Installation -> Apply Changes". 
+
+6. When the confirmation window appears, select "Apply". The package download/installation process will now begin. It should take about 5-10 minutes to completely finish, so ensure that you have a reliable internet connection during this time.
+
+7. Once the installation process has completely finished, you need to set the environment variable path to include the MinGW directory. Open the windows menu with "windows key", type "Control Panel" and press Enter. 
+	- At the top right of the control panel window there should be a search box. Select it and type "Advanced system settings" and then click on the search result "View advanced system settings".
+	
+	- Click on "Environment Variables" and double click on the user variable "Path". In the new Edit environment variable window, enter a new variable under "C:/MinGW/bin" if you used the recommended install path. Otherwise change the install path accordingly. Press OK on all open settings windows to close them.
+
+8. To verify that your installation is working, run the following commands and confirm that the outputs match as follows. It is possible that a restart may necessary to confirm the changes.
+
+```console
+> gcc --version
+g++ (GCC) X.X.X
+......
+ 
+> g++ --version
+g++ (GCC) X.X.X
+......
+ 
+> gdb --version
+GNU gdb (GDB) X.X.X
+......
+```
+
 #### Create template project
 
 After installation of eTrice in Eclipse, we can use the wizard to create the *template.c* project, which is a good starting point for new ROOM applications. Select the menu *File -&gt; New -&gt; Other* (Ctrl+N) and choose *eTrice C Template Project*. To complete the wizard press *Next* and on the next page *Finish*.
@@ -71,7 +106,9 @@ Now open the *TemplateModel.room* in the model folder of *template.c*.
 
 ![image](images/013-after-wizard.png)
 
-The model contains an ActorClass *TopActor*, which is currently the only active actor. TopActor has a state machine that is intended to output a simple HelloWorld statement. To inspect its behavior graphically, we can open the behavior diagram by right click on *Outline View -&gt; TopActor -&gt; Edit Behavior*. Alternatively we can place the cursor within the textual notation and press Alt+B.
+In this step we are introduced to the concept of Actors, a fundamental building block in ROOM, and how they are used in eTrice. In essence, an Actor is a representation of an object as a logical machine with defined behavior. Its structure, behavior and protocols are all defined with in an element called an ActorClass. See [here](room-concepts.html#actors) for further information.
+
+The model contains an ActorClass *TopActor*, which is currently the only active actor. TopActor has a state machine that is intended to output a simple HelloWorld statement. To inspect its behavior graphically, we can open the behavior diagram by right clicking on *Outline View -&gt; TopActor -&gt; Edit Behavior*. Alternatively we can place the cursor within the textual notation and press Alt+B.
 
 ![image](images/013-open-hello-fsm.png)
 
@@ -81,13 +118,13 @@ The state machine has an initial transition that leads to *helloState*. The stat
 
 #### Generate and run application
 
-Now we are ready to translate the model into an executable application. The first step is to generate source files from the model. Therefore we run the eTrice model generator by right click on file
+Now we are ready to translate the model into an executable application. The first step is to generate source files from the model. Therefore we run the eTrice model generator by right clicking on file
 
-<span class="uiElement"><img src="icons/obj16/file_obj.gif"> generate_Template.launch → Run As → generate_TemplateModel.</span>
+<span class="uiElement"><img src="icons/obj16/file_obj.gif"> generate_Template.launch --> Run As --> generate_Template</span>
 
-After that we can build and run the application by right click on file
+After that we can build and run the application by right clicking on file
 
-<span class="uiElement"><img src="icons/obj16/file_obj.gif"> run_Template_Windows.launch → Run As → run_Template_Windows.</span>
+<span class="uiElement"><img src="icons/obj16/file_obj.gif"> run_Template_Windows.launch --> Run As --> run_Template_Windows</span>
 
 This will trigger the build process, carried out by Eclipse CDT and then subsequently start our application.
 
@@ -97,7 +134,7 @@ This will trigger the build process, carried out by Eclipse CDT and then subsequ
 | <center>1. Invoke generator</center> | <center>2. Build and run application</center> |
 
 
-The output of our application is logged in the Console View and it shows the “Hello World”. By typing “quit” on the prompt and pressing enter the application terminates regularly.
+The output of our application is logged in the Console View and it shows the "Hello World". By typing "quit" on the prompt and pressing enter the application terminates regularly.
 
 ![image](images/013-quit-hello-msc.png)
 
@@ -151,6 +188,7 @@ This will add four projects into your workspace:
 Now open the *TemplateModel.room* in the model folder of *template.c*.
 
 ![image](images/013-after-wizard-cpp.png)
+In this step we are introduced to the concept of Actors, a fundamental building block in ROOM, and how they are used in eTrice. In essence, an Actor is a representation of an object as a logical machine with defined behavior. Its structure, behavior and protocols are all defined with in an element called an ActorClass. See [here](room-concepts.html#actors) for further information.
 
 The model contains an ActorClass *TopActor*, which is currently the only active actor.
 TopActor has a state machine that is intended to output a simple HelloWorld statement.
@@ -171,7 +209,7 @@ right click and *Edit State*.
 
 Now we are ready to translate the model into an executable application. The first step is to generate source files from the model. Therefore we run the eTrice model generator by right click on file
 
-<span class="uiElement"><img src="icons/obj16/file_obj.gif"> generate_Template.launch → Run As → generate_TemplateModel.</span>
+<span class="uiElement"><img src="icons/obj16/file_obj.gif"> generate_Template.launch --> Run As --> generate_TemplateModel</span>
 
 After that we can build and run the application by right click on file (depending on your operating system, here we chose Windows).
 
@@ -179,7 +217,7 @@ After that we can build and run the application by right click on file (dependin
 
 <span class="label label-info">Note:</span> Your CDT preferences might not enforce a build before launch. In this case you have to invoke the build before launching.
 
-<span class="uiElement"><img src="icons/obj16/file_obj.gif"> run_Template_Windows.launch → Run As → run_Template_Windows.</span>
+<span class="uiElement"><img src="icons/obj16/file_obj.gif"> run_Template_Windows.launch --> Run As --> run_Template_Windows</span>
 
 This will trigger the build process, carried out by Eclipse CDT and then subsequently start our application.
 
@@ -189,8 +227,8 @@ This will trigger the build process, carried out by Eclipse CDT and then subsequ
 | <center>1. Invoke generator</center>  | <center>2. Build and run application</center>  |
 
 
-The output of our application is logged in the Console View and it shows the “Hello World”.
-By typing “quit” on the prompt and pressing enter the application terminates regularly.
+The output of our application is logged in the Console View and it shows the "Hello World".
+By typing "quit" on the prompt and pressing enter the application terminates regularly.
 
 ![image](images/014-quit-hello-msc-cpp.png)
 
@@ -239,6 +277,7 @@ After installation of eTrice in Eclipse, we can use the wizard to create the tem
 This will add three projects into your workspace, the library projects *runtime.java* and *modellib.java* and our application project *TemplateModel*. Now open the *TemplateModel.room* in the model folder of our project.
 
 ![image](images/014-after-wizard.png)
+In this step we are introduced to the concept of Actors, a fundamental building block in ROOM, and how they are used in eTrice. In essence, an Actor is a representation of an object as a logical machine with defined behavior. Its structure, behavior and protocols are all defined with in an element called an ActorClass. See [here](room-concepts.html#actors) for further information.
 
 The model contains an ActorClass *TopActor*, which is currently the only active actor. TopActor has a state machine that is intended to output a simple HelloWorld statement. To inspect its behavior graphically, we can open the behavior diagram by right click on *Outline View -&gt; TopActor -&gt; Edit Behavior*. Alternatively we can place the cursor within the textual notation and press Alt+B.
 
@@ -252,11 +291,11 @@ The state machine has an initial transition that leads to *helloState*. The stat
 
 Now we are ready to translate the model into an executable application. The first step is to generate source files from the model. Therefore we run the eTrice model generator by right click on file
 
-<span class="uiElement"><img src="icons/obj16/file_obj.gif"> generate_Template.launch → Run As → generate_TemplateModel</span>
+<span class="uiElement"><img src="icons/obj16/file_obj.gif"> generate_Template.launch --> Run As --> generate_Template</span>
 
 After that we can build and run the application by right click on file
 
-<span class="uiElement"><img src="icons/obj16/file_obj.gif"> run_TemplateModel.launch → Run As → run_TemplateModell</span>
+<span class="uiElement"><img src="icons/obj16/file_obj.gif"> run_TemplateModel.launch --> Run As --> run_TemplateModel</span>
 
 This will trigger the build process, carried out by Eclipse JDT and then subsequently start our application.
 
@@ -265,7 +304,7 @@ This will trigger the build process, carried out by Eclipse JDT and then subsequ
 | ![image](images/014-generate.png)    | ![image](images/014-build_run.png)   		   |
 | <center>1. Invoke generator</center> | <center>2. Build and run application</center> |
 
-The output of our application is logged in the Console View and it shows the “Hello World”. By typing “quit” on the prompt and pressing enter the application terminates regularly.
+The output of our application is logged in the Console View and it shows the "Hello World". By typing "quit" on the prompt and pressing enter the application terminates regularly.
 
 ![image](images/014-quit-hello-msc-cpp.png)
 
