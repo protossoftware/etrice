@@ -124,6 +124,8 @@ public class StandardModelLocator implements IModelLocator {
 			URI base = baseUri.trimSegments(1);
 			if (base.isPlatformResource() && EMFPlugin.IS_ECLIPSE_RUNNING) {
 				URI fileUri = resolveFileUriFromPlatformBase(uri, baseUri); // relative path ?-> baseFileURI => absolute file uri
+//				if(fileUri == null)
+//					return resolve;
 				URI platUri = getPlatformURI(fileUri);						// absolute file uri => accessible platform uri
 				if(platUri == null){
 					// JH: Fix this here ? Why need we an URI mapping ? Room import does not support any logicals URIs ?
