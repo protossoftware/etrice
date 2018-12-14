@@ -54,9 +54,12 @@ public class ValidatorExtensionManager extends CustomValidatorManager {
 		private ICustomValidator validator;
 		private String id;
 
-		public ValidatorInfo(ICustomValidator validator, String id) {
+		private String mode;
+
+		public ValidatorInfo(ICustomValidator validator, String mode, String id) {
 			super();
 			this.validator = validator;
+			this.mode = mode;
 			this.id = id;
 		}
 
@@ -70,6 +73,10 @@ public class ValidatorExtensionManager extends CustomValidatorManager {
 
 		public String getDescription() {
 			return validator.getDescription();
+		}
+
+		public String getMode() {
+			return mode;
 		}
 
 		public String getId() {
@@ -114,7 +121,7 @@ public class ValidatorExtensionManager extends CustomValidatorManager {
 						for (EClass sup : superTypes) {
 							EPackage pckg = (EPackage) sup.eContainer();
 							String path = pckg.getName();
-							put(path+"."+sup.getName(), ((EClass) cls).getName(), cls2sub);
+							put(path+"."+sup.getName(), cls.getEPackage().getName()+"."+((EClass) cls).getName(), cls2sub);
 						}
 					}
 				}
@@ -130,9 +137,9 @@ public class ValidatorExtensionManager extends CustomValidatorManager {
 					final Object ext = injector.getInstance(extClass);
 					if (ext instanceof ICustomValidator) {
 						ICustomValidator validator = (ICustomValidator) ext;
-						infos.add(new ValidatorInfo(validator, e.getName() + ValidatorInfo.SEP
-								+ e.getNamespaceIdentifier()));
 						String mode = e.getAttribute("mode");
+						infos.add(new ValidatorInfo(validator, mode, e.getName() + ValidatorInfo.SEP
+								+ e.getNamespaceIdentifier()));
 						String classToCheck = e.getAttribute("classToCheck");
 						int pos = classToCheck.lastIndexOf('.');
 						if (pos>=0) {
@@ -212,7 +219,7 @@ public class ValidatorExtensionManager extends CustomValidatorManager {
 				HashMap<String, ArrayList<ICustomValidator>> map, HashSet<ICustomValidator> executed) {
 			ArrayList<ICustomValidator> result = new ArrayList<ICustomValidator>();
 
-			ArrayList<ICustomValidator> validators = map.get(object.eClass().getName());
+			ArrayList<ICustomValidator> validators = map.get(object.eClass().getEPackage().getName() + "." + object.eClass().getName());
 			if (validators != null)
 				for (ICustomValidator validator : validators) {
 					if (!executed.contains(validator)) {

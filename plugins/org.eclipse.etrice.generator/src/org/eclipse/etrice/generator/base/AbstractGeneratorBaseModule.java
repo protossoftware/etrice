@@ -16,8 +16,10 @@ package org.eclipse.etrice.generator.base;
 
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.etrice.core.fsm.naming.FSMNameProvider;
 import org.eclipse.etrice.core.genmodel.fsm.ICommonDataCalculator;
 import org.eclipse.etrice.core.genmodel.fsm.IDiagnostician;
+import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.util.CommonDataCalculator;
 import org.eclipse.etrice.generator.base.io.GeneratorFileIO;
 import org.eclipse.etrice.generator.base.io.IGeneratorEMFSetup;
@@ -79,6 +81,7 @@ public abstract class AbstractGeneratorBaseModule implements Module {
 		binder.bind(IGeneratorResourceValidator.class).to(ModelValidator.class);
 		binder.bind(Diagnostician.class).in(Singleton.class);
 		binder.bind(IDiagnostician.class).to(Diagnostician.class);
+		binder.bind(FSMNameProvider.class).to(RoomNameProvider.class);
 		
 		binder.bind(IEncodingProvider.class).to(IEncodingProvider.Runtime.class);
 

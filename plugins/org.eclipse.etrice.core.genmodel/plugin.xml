@@ -29,6 +29,11 @@
             classToCheck="org.eclipse.etrice.core.room.RoomModel"
             mode="FAST">
       </validator>
+      <validator
+            class="org.eclipse.etrice.core.genmodel.RoomGenmodelValidator"
+            classToCheck="org.eclipse.etrice.core.room.SubSystemClass"
+            mode="NORMAL">
+      </validator>
    </extension>
 
 </plugin>

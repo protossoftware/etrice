@@ -109,7 +109,8 @@ public class ValidationExtensionPreferences extends PreferencePage implements IW
 				
 				switch (columnIndex) {
 				case 0: return info.getName();
-				case 1: return info.getDescription();
+				case 1: return info.getMode();
+				case 2: return info.getDescription();
 				}
 			}
 			return null;
@@ -156,7 +157,9 @@ public class ValidationExtensionPreferences extends PreferencePage implements IW
 
 		TableColumn nameColumn= new TableColumn(table, SWT.NONE, 0);
 		nameColumn.setText("Name");
-		TableColumn descColumn= new TableColumn(table, SWT.NONE, 1);
+		TableColumn modeColumn= new TableColumn(table, SWT.NONE, 1);
+		modeColumn.setText("Mode");
+		TableColumn descColumn= new TableColumn(table, SWT.NONE, 2);
 		descColumn.setText("Description");
 		
 		viewer = new CheckboxTableViewer(table);
@@ -171,6 +174,7 @@ public class ValidationExtensionPreferences extends PreferencePage implements IW
 		tableArea.setLayout(layout);
 
 		layout.setColumnData(nameColumn, new ColumnWeightData(20));
+		layout.setColumnData(modeColumn, new ColumnWeightData(20));
 		layout.setColumnData(descColumn, new ColumnWeightData(80));
 
 		GridLayout compositeLayout = new GridLayout(1, false);

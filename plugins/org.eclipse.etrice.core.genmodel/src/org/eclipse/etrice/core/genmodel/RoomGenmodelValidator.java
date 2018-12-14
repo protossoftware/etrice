@@ -31,7 +31,7 @@ import org.eclipse.etrice.core.genmodel.fsm.IDiagnostician;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.generator.base.logging.NullLogger;
-import org.eclipse.xtext.validation.CheckMode;
+import org.eclipse.xtext.validation.CheckType;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 
 import com.google.inject.Inject;
@@ -42,6 +42,7 @@ public class RoomGenmodelValidator implements ICustomValidator {
 	private static final Set<EClass> classesToCheck = new HashSet<EClass>();
 	{
 		classesToCheck.add(RoomPackage.Literals.ROOM_MODEL);
+		classesToCheck.add(RoomPackage.Literals.SUB_SYSTEM_CLASS);
 	}
 	
 	private class Diag implements IDiagnostician {
@@ -101,41 +102,38 @@ public class RoomGenmodelValidator implements ICustomValidator {
 
 	@Override
 	public void validate(EObject object, ValidationMessageAcceptor messageAcceptor, ValidationContext context) {
-		if(!(object instanceof RoomModel))
+		if (!(getClassesToCheck().contains(object.eClass())))
 			return;
 		
-		if(context.isGeneration())
+		if (context.isGeneration())
 			return;
 		
-		RoomModel model = (RoomModel) object;
-		if (context.getCheckMode() == CheckMode.ALL) {
-//			System.out.println("checking model " + model.getName());
-
-			ArrayList<RoomModel> models = new ArrayList<RoomModel>();
-			ArrayList<RoomModel> importedModels = new ArrayList<RoomModel>();
-
-			models.add(model);
-			
-			Resource resource = model.eResource();
-			if (resource != null) {
-				ResourceSet rs = resource.getResourceSet();
-				if (rs != null) {
-					EcoreUtil.resolveAll(rs);
-					for (Resource res : rs.getResources()) {
-						for (EObject obj : res.getContents()) {
-							if (obj instanceof RoomModel && obj!=model)
-								importedModels.add((RoomModel) obj);
+		if (object instanceof RoomModel) {
+			RoomModel model = (RoomModel) object;
+			if (context.getCheckMode().shouldCheck(CheckType.NORMAL)) {
+				ArrayList<RoomModel> models = new ArrayList<RoomModel>();
+				ArrayList<RoomModel> importedModels = new ArrayList<RoomModel>();
+				
+				models.add(model);
+				
+				Resource resource = model.eResource();
+				if (resource != null) {
+					ResourceSet rs = resource.getResourceSet();
+					if (rs != null) {
+						EcoreUtil.resolveAll(rs);
+						for (Resource res : rs.getResources()) {
+							for (EObject obj : res.getContents()) {
+								if (obj instanceof RoomModel && obj!=model)
+									importedModels.add((RoomModel) obj);
+							}
 						}
 					}
 				}
+				
+				Diag diagnostician = new Diag(messageAcceptor);
+				GeneratorModelBuilder builder = genModelBuilderFactory.create(new NullLogger(), diagnostician);
+				builder.createGeneratorModel(models, importedModels, model.getSystems().isEmpty());
 			}
-
-			Diag diagnostician = new Diag(messageAcceptor);
-			GeneratorModelBuilder builder = genModelBuilderFactory.create(new NullLogger(), diagnostician);
-			builder.createGeneratorModel(models, importedModels, true);
-
-//			System.out.println("done checking model " + model.getName() + " with result: "
-//					+ (diagnostician.isFailed() ? "failed" : "ok"));
 		}
 		
 	}

@@ -31,6 +31,7 @@ import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Binding;
 import org.eclipse.etrice.core.room.BindingEndPoint;
+import org.eclipse.etrice.core.room.LogicalSystem;
 import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.PortOperation;
 import org.eclipse.etrice.core.room.RoomClass;
@@ -70,7 +71,11 @@ public class RoomNameProvider extends FSMNameProvider {
 		@Override
 		public String caseActorClass(ActorClass object) { return "ActorClass "+object.getName(); }
 		@Override
-		public String caseSubSystemClass(SubSystemClass object) { return "SubsystemClass "+object.getName(); }
+		public String caseSubSystemClass(SubSystemClass object) { return "SubSystemClass "+object.getName(); }
+		@Override
+		public String caseLogicalSystem(LogicalSystem object) { return "LogicalSystem "+object.getName(); }
+		@Override
+		public String caseRoomModel(RoomModel object) { return "RoomModel " + object.getName(); }
 	}
 	
 	private class CombinedProvider  extends ComposedSwitch<String> {

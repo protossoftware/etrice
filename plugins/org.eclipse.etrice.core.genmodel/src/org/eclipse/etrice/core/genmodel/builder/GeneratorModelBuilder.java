@@ -78,6 +78,7 @@ import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.SubSystemRef;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.base.logging.ILogger;
+import org.eclipse.xtext.EcoreUtil2;
 
 /**
  * A class for the creation of an intermediate model combining all information needed by
@@ -543,6 +544,16 @@ public class GeneratorModelBuilder {
 			ActorClass ac = (ActorClass) sap.getSap().eContainer();
 			int idx = ac.getServiceAccessPoints().indexOf(sap.getSap());
 			diagnostician.error("SAP "+sap.getPath()+" not satisfied!", ac, RoomPackage.eINSTANCE.getActorClass_ServiceAccessPoints(), idx);
+			
+			SubSystemInstance subSystemInstance = EcoreUtil2.getContainerOfType(sap, SubSystemInstance.class);
+			if (subSystemInstance!=null) {
+				EObject container = subSystemInstance.eContainer();
+				if (container instanceof SystemInstance) {
+					SystemInstance systemInstance = (SystemInstance) container;
+					idx = systemInstance.getInstances().indexOf(subSystemInstance);
+					diagnostician.error("SAP "+sap.getPath()+" not satisfied!", systemInstance.getLogicalSystem(), RoomPackage.eINSTANCE.getLogicalSystem_SubSystems(), idx);
+				}
+			}
 		}
 	}
 
