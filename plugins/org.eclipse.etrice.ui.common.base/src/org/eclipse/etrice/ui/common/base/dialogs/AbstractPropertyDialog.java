@@ -14,10 +14,13 @@
 
 package org.eclipse.etrice.ui.common.base.dialogs;
 
+import static com.google.common.base.Verify.verify;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 import java.util.Stack;
 
 import org.eclipse.core.databinding.AggregateValidationStatus;
@@ -44,12 +47,18 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.doc.ContextHelpProvider;
 import org.eclipse.etrice.ui.common.base.UIBaseActivator;
+import org.eclipse.jface.bindings.keys.KeyStroke;
 import org.eclipse.jface.databinding.swt.WidgetProperties;
 import org.eclipse.jface.dialogs.IDialogConstants;
+import org.eclipse.jface.fieldassist.ComboContentAdapter;
+import org.eclipse.jface.fieldassist.ContentProposalAdapter;
 import org.eclipse.jface.fieldassist.ControlDecoration;
 import org.eclipse.jface.fieldassist.FieldDecoration;
 import org.eclipse.jface.fieldassist.FieldDecorationRegistry;
+import org.eclipse.jface.fieldassist.SimpleContentProposalProvider;
+import org.eclipse.jface.fieldassist.TextContentAdapter;
 import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.events.ControlEvent;
@@ -71,6 +80,8 @@ import org.eclipse.ui.forms.IManagedForm;
 import org.eclipse.ui.forms.widgets.Form;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.xtext.resource.IEObjectDescription;
+
+import com.google.common.collect.Sets;
 
 // note: the FormDialog of org.eclipse.ui.forms.source_3.7.0 requires JavaSE-1.8
 // therefore we need to set the BREE of this plug-in also to Java 8
@@ -487,17 +498,19 @@ public abstract class AbstractPropertyDialog extends FormDialog {
 	
 	protected Combo createComboUsingDesc(Composite parent, String label, EObject obj, Object type, EReference ref, List<IEObjectDescription> candidates, EAttribute nameAttr, IValidator validator, MultiValidator2 multiValidator) {
 		Label l = toolkit.createLabel(parent, label, SWT.NONE);
-		l.setLayoutData(new GridData(SWT.NONE));
-
-		Combo combo = new Combo(parent, SWT.READ_ONLY);
+		l.setLayoutData(new GridData(SWT.NONE));		
+		
+		ComboViewer comboViewer = new ComboViewer(parent, SWT.BORDER);
+		Combo combo = comboViewer.getCombo();
+		toolkit.adapt(comboViewer.getCombo(), true, true);
 		combo.setLayoutData(new GridData(SWT.HORIZONTAL));
 		combo.setVisibleItemCount(10);
-		toolkit.adapt(combo, true, true);
-		
 		DescriptionBased_Reference2StringConverter r2s = new DescriptionBased_Reference2StringConverter(type, nameAttr);
 		for (IEObjectDescription desc : candidates) {
-			combo.add(r2s.convert(desc).toString());
+			comboViewer.add(r2s.convert(desc).toString());
 		}
+		
+		enableContentProposal(combo, combo.getItems());
 		
 		DescriptionBased_String2ReferenceConverter s2r = new DescriptionBased_String2ReferenceConverter(type, obj, candidates);
 		UpdateValueStrategy t2m = new UpdateValueStrategy().setConverter(s2r);
@@ -512,6 +525,57 @@ public abstract class AbstractPropertyDialog extends FormDialog {
 		createBinding(combo, obj, ref, type, t2m, m2t, multiValidator);
 		
 		return combo;
+	}
+	
+	static void enableContentProposal(Control control, String[] items) {
+		verify(control instanceof Combo || control instanceof Text);
+		
+		// create the decoration for the text component
+		// using an predefined image
+		final ControlDecoration deco = new ControlDecoration(control, SWT.BOTTOM | SWT.LEFT);
+		Image image = FieldDecorationRegistry.getDefault().getFieldDecoration(FieldDecorationRegistry.DEC_INFORMATION).getImage();
+		// set description and image
+		deco.setDescriptionText("Use CTRL + SPACE to see possible values");
+		deco.setImage(image);
+		// always show decoration
+		deco.setShowOnlyOnFocus(false);
+		control.addPaintListener(e -> {
+			if(e.getSource() instanceof Control && !((Control)e.getSource()).isEnabled()) {
+				deco.hide();
+			}
+		});
+		
+		SimpleContentProposalProvider proposalProvider = null;
+		ContentProposalAdapter proposalAdapter = null;
+		KeyStroke keyStroke = KeyStroke.getInstance(SWT.CTRL, SWT.SPACE);
+		if (control instanceof Combo) {
+			final Combo combo = (Combo) control;
+			final Set<String> comboItems = Sets.newHashSet(combo.getItems());
+			combo.addModifyListener(e -> {
+				if(comboItems.contains(combo.getText())) {
+					deco.hide();
+				} else {
+					deco.show();
+				}
+			});
+			proposalProvider = new SimpleContentProposalProvider(combo.getItems());
+			proposalAdapter = new ContentProposalAdapter(combo, new ComboContentAdapter(), proposalProvider, keyStroke, null);
+		} else if (control instanceof Text) {
+			final Text text = (Text) control;
+			text.addModifyListener(e -> {
+				if(text.getText().isEmpty()) {
+					deco.show();
+				} else {
+					deco.hide();
+				}	
+			});
+			proposalProvider = new SimpleContentProposalProvider(items);
+			proposalAdapter = new ContentProposalAdapter(text, new TextContentAdapter(), proposalProvider, keyStroke, null);
+		}
+		
+		proposalProvider.setFiltering(true);
+		proposalAdapter.setPropagateKeys(true);
+		proposalAdapter.setProposalAcceptanceStyle(ContentProposalAdapter.PROPOSAL_REPLACE);
 	}
 	
 	protected Combo createCombo(Composite parent, String label, EObject obj, Object type, EAttribute att, List<? extends Enumerator> choices) {
@@ -544,6 +608,8 @@ public abstract class AbstractPropertyDialog extends FormDialog {
 		return combo;
 	}
 	
+
+		
 	protected void createBinding(Widget widget, EObject obj, EStructuralFeature feature, Object objType, UpdateValueStrategy t2m, UpdateValueStrategy m2t, MultiValidator2 multiValidator){
 		IObservableValue observableWidget = null;
 		if(widget instanceof Text || widget instanceof StyledText)
