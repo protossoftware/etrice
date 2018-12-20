@@ -58,6 +58,7 @@
 		<module>plugins/org.eclipse.etrice.generator.launch.c</module>
 		<module>plugins/org.eclipse.etrice.generator.launch.cpp</module>
 		<module>plugins/org.eclipse.etrice.generator.launch.java</module>
+		<module>plugins/org.eclipse.etrice.generator.launch.doc</module>
 		<module>plugins/org.eclipse.etrice.generator.ui</module>
 		<module>plugins/org.eclipse.etrice.generator.ui.cdt</module>
 		<module>plugins/org.eclipse.etrice.logging</module>

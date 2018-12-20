@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.debug.core.launchConfigurationTypes">
+      <launchConfigurationType
+            delegate="org.eclipse.etrice.generator.launch.doc.DocGeneratorLaunchConfigurationDelegate"
+            delegateDescription="Generates Documentation from ROOM models"
+            delegateName="eTrice Doc Generator Delegate"
+            id="org.eclipse.etrice.generator.launch.doc.launchConfigurationType"
+            modes="run,debug"
+            name="eTrice Doc Generator">
+      </launchConfigurationType>
+   </extension>
+   <extension
+         point="org.eclipse.debug.ui.launchConfigurationTypeImages">
+      <launchConfigurationTypeImage
+            configTypeID="org.eclipse.etrice.generator.launch.doc.launchConfigurationType"
+            icon="icons/eTrice-launch.gif"
+            id="org.eclipse.etrice.generator.launch.doc.launchConfigurationTypeImage">
+      </launchConfigurationTypeImage>
+   </extension>
+   <extension
+         point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+      <launchConfigurationTabGroup
+            class="org.eclipse.etrice.generator.launch.doc.DocGeneratorLaunchConfigurationTabGroup"
+            description="Tab Group for eTrice Doc Generator Launch Configurations"
+            id="org.eclipse.etrice.generator.launch.doc.launchConfigurationTabGroup"
+            type="org.eclipse.etrice.generator.launch.doc.launchConfigurationType">
+      </launchConfigurationTabGroup>
+   </extension>
+</plugin>
