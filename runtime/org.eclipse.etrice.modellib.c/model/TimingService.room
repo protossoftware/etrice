@@ -200,17 +200,24 @@ RoomModel room.basic.service.timing {
 		}
 	}
 
+	/*
+	 * Protocol for periodic timers and single shot timeouts
+	 */
 	ProtocolClass PTimer {
 		usercode1 '''
 			#define ET_TIMER_RUNNING	0x01
 			#define ET_TIMER_PERIODIC	0x02'''
 		usercode2 '''/*uc2*/'''
 		incoming {
+			/* starts a periodic timer (time in milliseconds) */
 			Message startTimer(uint32)
+			/* starts a single shot timeout (time in milliseconds) */
 			Message startTimeout(uint32)
+			/* kills single shot timeouts and periodic timers */
 			Message kill()
 		}
 		outgoing {
+			/* fires when timeout or timer has expired */			
 			Message timeout()
 		}
 		conjugated PortClass
