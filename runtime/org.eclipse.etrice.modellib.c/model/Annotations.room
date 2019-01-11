@@ -1,5 +1,7 @@
 RoomModel room.basic.annotations {
-	
+	/**
+	 * BehaviorManual suppresses the generation of the implementation file (.c) for an ActorClass
+	 */
 	AnnotationType BehaviorManual {
 		target = ActorBehavior
 	}
