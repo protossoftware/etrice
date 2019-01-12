@@ -91,6 +91,7 @@ public class ActorContainerRefImpl extends MinimalEObjectImpl.Container implemen
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -101,6 +102,7 @@ public class ActorContainerRefImpl extends MinimalEObjectImpl.Container implemen
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setName(String newName)
   {
     String oldName = name;
@@ -114,6 +116,7 @@ public class ActorContainerRefImpl extends MinimalEObjectImpl.Container implemen
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Documentation getDocu()
   {
     return docu;
@@ -141,6 +144,7 @@ public class ActorContainerRefImpl extends MinimalEObjectImpl.Container implemen
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setDocu(Documentation newDocu)
   {
     if (newDocu != docu)
@@ -162,6 +166,7 @@ public class ActorContainerRefImpl extends MinimalEObjectImpl.Container implemen
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public StructureClass getStructureClass()
   {
     if (this instanceof ActorRef)

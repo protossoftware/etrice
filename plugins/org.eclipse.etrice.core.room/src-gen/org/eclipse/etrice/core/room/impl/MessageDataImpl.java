@@ -87,6 +87,7 @@ public class MessageDataImpl extends MinimalEObjectImpl.Container implements Mes
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getDeprecatedName()
   {
     return deprecatedName;
@@ -97,6 +98,7 @@ public class MessageDataImpl extends MinimalEObjectImpl.Container implements Mes
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setDeprecatedName(String newDeprecatedName)
   {
     String oldDeprecatedName = deprecatedName;
@@ -110,6 +112,7 @@ public class MessageDataImpl extends MinimalEObjectImpl.Container implements Mes
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public RefableType getRefType()
   {
     return refType;
@@ -137,6 +140,7 @@ public class MessageDataImpl extends MinimalEObjectImpl.Container implements Mes
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setRefType(RefableType newRefType)
   {
     if (newRefType != refType)

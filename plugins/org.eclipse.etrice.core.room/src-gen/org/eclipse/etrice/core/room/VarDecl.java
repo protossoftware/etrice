@@ -19,6 +19,7 @@ package org.eclipse.etrice.core.room;
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.VarDecl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.VarDecl#getRefType <em>Ref Type</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.VarDecl#isVarargs <em>Varargs</em>}</li>
  * </ul>
  *
  * @see org.eclipse.etrice.core.room.RoomPackage#getVarDecl()
@@ -78,5 +79,31 @@ public interface VarDecl extends RoomElement
    * @generated
    */
   void setRefType(RefableType value);
+
+  /**
+   * Returns the value of the '<em><b>Varargs</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Varargs</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Varargs</em>' attribute.
+   * @see #setVarargs(boolean)
+   * @see org.eclipse.etrice.core.room.RoomPackage#getVarDecl_Varargs()
+   * @model
+   * @generated
+   */
+  boolean isVarargs();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.etrice.core.room.VarDecl#isVarargs <em>Varargs</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Varargs</em>' attribute.
+   * @see #isVarargs()
+   * @generated
+   */
+  void setVarargs(boolean value);
 
 } // VarDecl

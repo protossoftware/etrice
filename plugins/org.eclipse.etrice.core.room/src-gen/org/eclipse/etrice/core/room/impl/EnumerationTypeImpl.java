@@ -84,6 +84,7 @@ public class EnumerationTypeImpl extends DataTypeImpl implements EnumerationType
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public PrimitiveType getPrimitiveType()
   {
     if (primitiveType != null && primitiveType.eIsProxy())
@@ -114,6 +115,7 @@ public class EnumerationTypeImpl extends DataTypeImpl implements EnumerationType
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setPrimitiveType(PrimitiveType newPrimitiveType)
   {
     PrimitiveType oldPrimitiveType = primitiveType;
@@ -127,6 +129,7 @@ public class EnumerationTypeImpl extends DataTypeImpl implements EnumerationType
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<EnumLiteral> getLiterals()
   {
     if (literals == null)

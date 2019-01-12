@@ -78,6 +78,7 @@ public class LayerConnectionImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SAPoint getFrom()
   {
     return from;
@@ -105,6 +106,7 @@ public class LayerConnectionImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setFrom(SAPoint newFrom)
   {
     if (newFrom != from)
@@ -126,6 +128,7 @@ public class LayerConnectionImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SPPoint getTo()
   {
     return to;
@@ -153,6 +156,7 @@ public class LayerConnectionImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setTo(SPPoint newTo)
   {
     if (newTo != to)

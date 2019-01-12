@@ -4964,6 +4964,7 @@ rule__VarDecl__Group__2
     }
 :
 	rule__VarDecl__Group__2__Impl
+	rule__VarDecl__Group__3
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -4984,6 +4985,36 @@ rule__VarDecl__Group__2__Impl
 finally {
 	restoreStackSize(stackSize);
 }
+
+
+rule__VarDecl__Group__3
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__VarDecl__Group__3__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__VarDecl__Group__3__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getVarDeclAccess().getVarargsAssignment_3()); }
+(rule__VarDecl__VarargsAssignment_3)?
+{ after(grammarAccess.getVarDeclAccess().getVarargsAssignment_3()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
 
 
 
@@ -23830,6 +23861,29 @@ rule__VarDecl__RefTypeAssignment_2
 (
 { before(grammarAccess.getVarDeclAccess().getRefTypeRefableTypeParserRuleCall_2_0()); }
 	ruleRefableType{ after(grammarAccess.getVarDeclAccess().getRefTypeRefableTypeParserRuleCall_2_0()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__VarDecl__VarargsAssignment_3
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getVarDeclAccess().getVarargsVarargsKeyword_3_0()); }
+(
+{ before(grammarAccess.getVarDeclAccess().getVarargsVarargsKeyword_3_0()); }
+
+	'varargs' 
+
+{ after(grammarAccess.getVarDeclAccess().getVarargsVarargsKeyword_3_0()); }
+)
+
+{ after(grammarAccess.getVarDeclAccess().getVarargsVarargsKeyword_3_0()); }
 )
 
 ;

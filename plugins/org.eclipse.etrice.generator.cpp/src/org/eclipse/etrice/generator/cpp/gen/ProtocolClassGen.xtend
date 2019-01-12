@@ -351,11 +351,11 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 
 
 	def protected messageSignature(Message m, boolean impl) {
-		'''«IF m.priv||impl»private:«ELSE»public:«ENDIF» void «m.name»«IF impl»_impl«ENDIF»(«IF m.data!==null»«m.data.refType.signatureString» «ILanguageExtension.GENERIC_DATA_NAME»«ENDIF»)'''
+		'''«IF m.priv||impl»private:«ELSE»public:«ENDIF» void «m.name»«IF impl»_impl«ENDIF»(«IF m.data!==null»«m.data.refType.typeSignature» «ILanguageExtension.GENERIC_DATA_NAME»«ENDIF»)'''
 	}
 
 	def protected messageSignatureDefinition(Message m, String classPrefix, boolean impl) {
-		'''void «classPrefix»::«m.name»«IF impl»_impl«ENDIF»(«IF m.data!==null»«m.data.refType.signatureString» «ILanguageExtension.GENERIC_DATA_NAME»«ENDIF»)'''
+		'''void «classPrefix»::«m.name»«IF impl»_impl«ENDIF»(«IF m.data!==null»«m.data.refType.typeSignature» «ILanguageExtension.GENERIC_DATA_NAME»«ENDIF»)'''
 	}
 
 	def protected sendMessage(Message m, String portClassName, String classPrefix, boolean conj) {

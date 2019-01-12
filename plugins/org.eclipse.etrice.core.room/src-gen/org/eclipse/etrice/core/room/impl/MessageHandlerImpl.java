@@ -79,6 +79,7 @@ public class MessageHandlerImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Message getMsg()
   {
     if (msg != null && msg.eIsProxy())
@@ -109,6 +110,7 @@ public class MessageHandlerImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setMsg(Message newMsg)
   {
     Message oldMsg = msg;
@@ -122,6 +124,7 @@ public class MessageHandlerImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public DetailCode getDetailCode()
   {
     return detailCode;
@@ -149,6 +152,7 @@ public class MessageHandlerImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setDetailCode(DetailCode newDetailCode)
   {
     if (newDetailCode != detailCode)

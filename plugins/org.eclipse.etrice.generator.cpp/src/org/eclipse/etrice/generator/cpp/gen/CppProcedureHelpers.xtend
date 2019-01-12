@@ -2,7 +2,6 @@ package org.eclipse.etrice.generator.cpp.gen
 
 import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
-import org.eclipse.etrice.core.room.RefableType
 
 class CppProcedureHelpers extends ProcedureHelpers {
 
@@ -15,22 +14,14 @@ class CppProcedureHelpers extends ProcedureHelpers {
 		switch it : attribute {
 			// no reference
 			case size > 0: super.declarationString(it)
-			default: super.signatureString(type) + ' ' + name
-		}
-	}
-
-	override signatureString(RefableType type) {
-		switch it : type {
-			case null: 'void'
-			case !(isRef || type.type.primitive): super.signatureString(type) + '&'
-			default: super.signatureString(type)
+			default: languageExt.getTypeSignature(type) + ' ' + name
 		}
 	}
 
 	override signatureString(Attribute attribute) {
 		switch it : attribute {
 			case size > 0: super.signatureString(attribute) + '&'
-			default: type.signatureString
+			default: languageExt.getTypeSignature(type)
 		}
 	}
 

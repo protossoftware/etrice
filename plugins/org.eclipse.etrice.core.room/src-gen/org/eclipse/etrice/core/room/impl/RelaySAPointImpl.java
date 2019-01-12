@@ -64,6 +64,7 @@ public class RelaySAPointImpl extends SAPointImpl implements RelaySAPoint
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SPP getRelay()
   {
     if (relay != null && relay.eIsProxy())
@@ -94,6 +95,7 @@ public class RelaySAPointImpl extends SAPointImpl implements RelaySAPoint
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setRelay(SPP newRelay)
   {
     SPP oldRelay = relay;

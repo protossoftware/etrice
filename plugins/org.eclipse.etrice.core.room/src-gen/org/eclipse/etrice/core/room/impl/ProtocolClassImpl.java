@@ -186,6 +186,7 @@ public class ProtocolClassImpl extends GeneralProtocolClassImpl implements Proto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public CommunicationType getCommType()
   {
     return commType;
@@ -196,6 +197,7 @@ public class ProtocolClassImpl extends GeneralProtocolClassImpl implements Proto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setCommType(CommunicationType newCommType)
   {
     CommunicationType oldCommType = commType;
@@ -209,6 +211,7 @@ public class ProtocolClassImpl extends GeneralProtocolClassImpl implements Proto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ProtocolClass getBase()
   {
     if (base != null && base.eIsProxy())
@@ -239,6 +242,7 @@ public class ProtocolClassImpl extends GeneralProtocolClassImpl implements Proto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setBase(ProtocolClass newBase)
   {
     ProtocolClass oldBase = base;
@@ -252,6 +256,7 @@ public class ProtocolClassImpl extends GeneralProtocolClassImpl implements Proto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public DetailCode getUserCode1()
   {
     return userCode1;
@@ -279,6 +284,7 @@ public class ProtocolClassImpl extends GeneralProtocolClassImpl implements Proto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setUserCode1(DetailCode newUserCode1)
   {
     if (newUserCode1 != userCode1)
@@ -300,6 +306,7 @@ public class ProtocolClassImpl extends GeneralProtocolClassImpl implements Proto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public DetailCode getUserCode2()
   {
     return userCode2;
@@ -327,6 +334,7 @@ public class ProtocolClassImpl extends GeneralProtocolClassImpl implements Proto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setUserCode2(DetailCode newUserCode2)
   {
     if (newUserCode2 != userCode2)
@@ -348,6 +356,7 @@ public class ProtocolClassImpl extends GeneralProtocolClassImpl implements Proto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public DetailCode getUserCode3()
   {
     return userCode3;
@@ -375,6 +384,7 @@ public class ProtocolClassImpl extends GeneralProtocolClassImpl implements Proto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setUserCode3(DetailCode newUserCode3)
   {
     if (newUserCode3 != userCode3)
@@ -396,6 +406,7 @@ public class ProtocolClassImpl extends GeneralProtocolClassImpl implements Proto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Message> getIncomingMessages()
   {
     if (incomingMessages == null)
@@ -410,6 +421,7 @@ public class ProtocolClassImpl extends GeneralProtocolClassImpl implements Proto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Message> getOutgoingMessages()
   {
     if (outgoingMessages == null)
@@ -424,6 +436,7 @@ public class ProtocolClassImpl extends GeneralProtocolClassImpl implements Proto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public PortClass getRegular()
   {
     return regular;
@@ -451,6 +464,7 @@ public class ProtocolClassImpl extends GeneralProtocolClassImpl implements Proto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setRegular(PortClass newRegular)
   {
     if (newRegular != regular)
@@ -472,6 +486,7 @@ public class ProtocolClassImpl extends GeneralProtocolClassImpl implements Proto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public PortClass getConjugated()
   {
     return conjugated;
@@ -499,6 +514,7 @@ public class ProtocolClassImpl extends GeneralProtocolClassImpl implements Proto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setConjugated(PortClass newConjugated)
   {
     if (newConjugated != conjugated)
@@ -520,6 +536,7 @@ public class ProtocolClassImpl extends GeneralProtocolClassImpl implements Proto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ProtocolSemantics getSemantics()
   {
     return semantics;
@@ -547,6 +564,7 @@ public class ProtocolClassImpl extends GeneralProtocolClassImpl implements Proto
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setSemantics(ProtocolSemantics newSemantics)
   {
     if (newSemantics != semantics)

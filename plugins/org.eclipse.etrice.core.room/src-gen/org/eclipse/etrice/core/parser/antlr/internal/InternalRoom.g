@@ -457,7 +457,22 @@ ruleVarDecl returns [EObject current=null]
 	    }
 
 )
-))
+)(
+(
+		lv_varargs_3_0=	'varargs' 
+    {
+        newLeafNode(lv_varargs_3_0, grammarAccess.getVarDeclAccess().getVarargsVarargsKeyword_3_0());
+    }
+ 
+	    {
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getVarDeclRule());
+	        }
+       		setWithLastConsumed($current, "varargs", true, "varargs");
+	    }
+
+)
+)?)
 ;
 
 

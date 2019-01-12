@@ -444,13 +444,22 @@ public interface RoomPackage extends EPackage
   int VAR_DECL__REF_TYPE = ROOM_ELEMENT_FEATURE_COUNT + 1;
 
   /**
+   * The feature id for the '<em><b>Varargs</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VAR_DECL__VARARGS = ROOM_ELEMENT_FEATURE_COUNT + 2;
+
+  /**
    * The number of structural features of the '<em>Var Decl</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int VAR_DECL_FEATURE_COUNT = ROOM_ELEMENT_FEATURE_COUNT + 2;
+  int VAR_DECL_FEATURE_COUNT = ROOM_ELEMENT_FEATURE_COUNT + 3;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.MessageDataImpl <em>Message Data</em>}' class.
@@ -3328,6 +3337,17 @@ public interface RoomPackage extends EPackage
   EReference getVarDecl_RefType();
 
   /**
+   * Returns the meta object for the attribute '{@link org.eclipse.etrice.core.room.VarDecl#isVarargs <em>Varargs</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Varargs</em>'.
+   * @see org.eclipse.etrice.core.room.VarDecl#isVarargs()
+   * @see #getVarDecl()
+   * @generated
+   */
+  EAttribute getVarDecl_Varargs();
+
+  /**
    * Returns the meta object for class '{@link org.eclipse.etrice.core.room.MessageData <em>Message Data</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -5290,6 +5310,14 @@ public interface RoomPackage extends EPackage
      * @generated
      */
     EReference VAR_DECL__REF_TYPE = eINSTANCE.getVarDecl_RefType();
+
+    /**
+     * The meta object literal for the '<em><b>Varargs</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute VAR_DECL__VARARGS = eINSTANCE.getVarDecl_Varargs();
 
     /**
      * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.MessageDataImpl <em>Message Data</em>}' class.

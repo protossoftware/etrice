@@ -36,6 +36,7 @@ import org.eclipse.etrice.core.room.RoomAnnotationTargetEnum;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
+import org.eclipse.etrice.core.services.RoomGrammarAccess;
 import org.eclipse.etrice.core.ui.util.UIExpressionUtil;
 import org.eclipse.etrice.expressions.detailcode.IDetailExpressionProvider;
 import org.eclipse.etrice.expressions.ui.contentassist.RoomExpressionProposalProvider;
@@ -43,6 +44,7 @@ import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
@@ -117,6 +119,9 @@ public class RoomProposalProvider extends AbstractRoomProposalProvider {
 		}
 		
 	}
+	
+	@Inject
+	protected RoomGrammarAccess grammar;
 
 	@Inject
 	protected RoomHelpers roomHelpers;
@@ -130,6 +135,16 @@ public class RoomProposalProvider extends AbstractRoomProposalProvider {
 		
 		// delegate to default
 		return super.getProposalFactory(ruleName, contentAssistContext);
+	}
+	
+	@Override
+	public void completeKeyword(Keyword keyword, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		if(keyword == grammar.getVarDeclAccess().getVarargsVarargsKeyword_3_0()) {
+			// hide keyword from user
+			return;
+		}
+		
+		super.completeKeyword(keyword, context, acceptor);
 	}
 	
 	@Override

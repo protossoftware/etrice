@@ -1,0 +1,36 @@
+RoomModel VarargsTest {
+
+	import room.basic.types.* from "../../../runtime/${etModellib}/model/Types.room"
+
+	ActorClass AVarargs {
+		Structure {
+			Port port: PVarargs
+			Attribute attr: DVarargs
+		}
+		Behavior {
+
+			// varargs keyword is hidden in proposals -> internal use
+			Operation log(format: string, args: string varargs) ''''''
+			Operation single(args: string varargs) ''''''
+		}
+	}
+
+	ProtocolClass PVarargs {
+		incoming {
+			Message dummy()
+		}
+		regular PortClass
+		{
+			Operation log(format: string, args: string varargs) ''''''
+			Operation single(args: string varargs) ''''''
+		}
+	}
+
+	DataClass DVarargs {
+		Attribute dummy: boolean
+
+		// varargs keyword is hidden in proposals -> internal use
+		Operation log(format: string, args: string varargs) ''''''
+		Operation single(args: string varargs) ''''''
+	}
+}
