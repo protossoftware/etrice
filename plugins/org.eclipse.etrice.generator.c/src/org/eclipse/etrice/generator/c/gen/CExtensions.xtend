@@ -44,6 +44,8 @@ import org.eclipse.etrice.generator.c.Main
 import org.eclipse.etrice.generator.c.setup.GeneratorOptionsHelper
 import org.eclipse.etrice.generator.generic.ILanguageExtension
 import org.eclipse.xtext.util.Pair
+import org.eclipse.etrice.core.room.VarDecl
+import org.eclipse.etrice.core.room.RefableType
 
 @Singleton
 class CExtensions implements ILanguageExtension {
@@ -392,6 +394,30 @@ class CExtensions implements ILanguageExtension {
 	override makeOverridable() {
 		// not possible for C: empty string
 		""
+	}
+	
+	override String getTypeSignature(RefableType type) {
+		switch it : type {
+			case null: 'void'
+			case isRef: type.type.dataTypeName + pointerLiteral
+			default: type.type.dataTypeName
+		}
+	}
+	
+	override String getDataTypeName(DataType it) {
+		switch it {
+			PrimitiveType: targetName
+			EnumerationType: targetType
+			ExternalType: targetName
+			default: name
+		}
+	}
+	
+	override toParameterDecl(VarDecl it) {
+		switch it {
+			case varargs : '...'
+			default: refType.typeSignature + ' ' + name 
+		}
 	}
 
 }

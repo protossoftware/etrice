@@ -225,14 +225,16 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cColonKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cRefTypeAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cRefTypeRefableTypeParserRuleCall_2_0 = (RuleCall)cRefTypeAssignment_2.eContents().get(0);
+		private final Assignment cVarargsAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final Keyword cVarargsVarargsKeyword_3_0 = (Keyword)cVarargsAssignment_3.eContents().get(0);
 		
 		//// **************************************************************
 		//// data class
 		//VarDecl:
-		//	name=ID ':' refType=RefableType;
+		//	name=ID ':' refType=RefableType varargs?='varargs'?;
 		@Override public ParserRule getRule() { return rule; }
 
-		//name=ID ':' refType=RefableType
+		//name=ID ':' refType=RefableType varargs?='varargs'?
 		public Group getGroup() { return cGroup; }
 
 		//name=ID
@@ -249,6 +251,12 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 
 		//RefableType
 		public RuleCall getRefTypeRefableTypeParserRuleCall_2_0() { return cRefTypeRefableTypeParserRuleCall_2_0; }
+
+		//varargs?='varargs'?
+		public Assignment getVarargsAssignment_3() { return cVarargsAssignment_3; }
+
+		//'varargs'
+		public Keyword getVarargsVarargsKeyword_3_0() { return cVarargsVarargsKeyword_3_0; }
 	}
 
 	public class MessageDataElements extends AbstractParserRuleElementFinder {
@@ -3660,7 +3668,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//// **************************************************************
 	//// data class
 	//VarDecl:
-	//	name=ID ':' refType=RefableType;
+	//	name=ID ':' refType=RefableType varargs?='varargs'?;
 	public VarDeclElements getVarDeclAccess() {
 		return pVarDecl;
 	}

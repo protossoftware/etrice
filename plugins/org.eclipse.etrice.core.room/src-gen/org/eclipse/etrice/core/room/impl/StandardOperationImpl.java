@@ -72,6 +72,7 @@ public class StandardOperationImpl extends OperationImpl implements StandardOper
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isOverride()
   {
     return override;
@@ -82,6 +83,7 @@ public class StandardOperationImpl extends OperationImpl implements StandardOper
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setOverride(boolean newOverride)
   {
     boolean oldOverride = override;

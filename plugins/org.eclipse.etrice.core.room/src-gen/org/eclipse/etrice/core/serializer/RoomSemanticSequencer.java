@@ -374,24 +374,24 @@ public class RoomSemanticSequencer extends FSMSemanticSequencer {
 	 *         docu=Documentation? 
 	 *         base=[ActorClass|FQN]? 
 	 *         annotations+=Annotation* 
-	 *         serviceProvisionPoints+=SPP? 
-	 *         (interfacePorts+=Port? serviceProvisionPoints+=SPP?)* 
+	 *         interfacePorts+=Port? 
+	 *         (serviceProvisionPoints+=SPP? interfacePorts+=Port?)* 
 	 *         structureDocu=Documentation? 
 	 *         userCode1=DetailCode? 
 	 *         userCode2=DetailCode? 
 	 *         userCode3=DetailCode? 
-	 *         serviceImplementations+=ServiceImplementation? 
+	 *         serviceAccessPoints+=SAP? 
 	 *         (
 	 *             (
 	 *                 connections+=LayerConnection | 
 	 *                 bindings+=Binding | 
+	 *                 serviceImplementations+=ServiceImplementation | 
 	 *                 attributes+=Attribute | 
 	 *                 actorRefs+=ActorRef | 
-	 *                 serviceAccessPoints+=SAP | 
 	 *                 internalPorts+=Port | 
 	 *                 externalPorts+=ExternalPort
 	 *             )? 
-	 *             serviceImplementations+=ServiceImplementation?
+	 *             serviceAccessPoints+=SAP?
 	 *         )* 
 	 *         behaviorDocu=Documentation? 
 	 *         behaviorAnnotations+=Annotation* 
@@ -1057,19 +1057,10 @@ public class RoomSemanticSequencer extends FSMSemanticSequencer {
 	 *     VarDecl returns VarDecl
 	 *
 	 * Constraint:
-	 *     (name=ID refType=RefableType)
+	 *     (name=ID refType=RefableType varargs?='varargs'?)
 	 */
 	protected void sequence_VarDecl(ISerializationContext context, VarDecl semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, RoomPackage.Literals.VAR_DECL__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RoomPackage.Literals.VAR_DECL__NAME));
-			if (transientValues.isValueTransient(semanticObject, RoomPackage.Literals.VAR_DECL__REF_TYPE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RoomPackage.Literals.VAR_DECL__REF_TYPE));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getVarDeclAccess().getNameIDTerminalRuleCall_0_0(), semanticObject.getName());
-		feeder.accept(grammarAccess.getVarDeclAccess().getRefTypeRefableTypeParserRuleCall_2_0(), semanticObject.getRefType());
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	

@@ -25,7 +25,6 @@ import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.core.room.DataClass
 import org.eclipse.etrice.core.room.Operation
 import org.eclipse.etrice.core.room.ProtocolClass
-import org.eclipse.etrice.core.room.RefableType
 import org.eclipse.etrice.core.room.RoomClass
 import org.eclipse.etrice.core.room.util.RoomHelpers
 import org.eclipse.etrice.generator.base.logging.ILogger
@@ -384,27 +383,15 @@ class ProcedureHelpers {
 	 * 		constructor and destructor
 	 */
 	def protected operationSignature(Operation operation, String classname, boolean isDeclaration) {
-		val arguments = '''«FOR argument : operation.arguments SEPARATOR ", "»«argument.refType.signatureString» «argument.name»«ENDFOR»'''
-		val returnType = operation.returnType.signatureString
+		val arguments = operation.arguments.map[arg | languageExt.toParameterDecl(arg)].join(', ')
+		val returnType = languageExt.getTypeSignature(operation.returnType)
 		functionSignature(classname, languageExt.operationScope(classname, isDeclaration)+operation.name, returnType, arguments)
-	}
-
-	/**
-	 * @param type a {@link RefableType}
-	 * @return a string for the type (also for pointers)
-	 */
-	def String signatureString(RefableType type) {
-		switch it : type {
-			case null: 'void'
-			case isRef: type.type.typeName + languageExt.pointerLiteral
-			default: type.type.typeName
-		}
 	}
 
 	def String signatureString(Attribute attribute){
 		switch it : attribute {
 			case size > 0: languageExt.arrayType(type.type.typeName, size, type.ref)
-			default: type.signatureString
+			default: languageExt.getTypeSignature(type)
 		}
 	}
 
@@ -415,7 +402,7 @@ class ProcedureHelpers {
 	def String declarationString(Attribute attribute){
 		switch it : attribute {
 			case size > 0: languageExt.arrayDeclaration(type.type.typeName, size, type.isRef, name)
-			default: type.signatureString + ' ' + name
+			default: languageExt.getTypeSignature(type) + ' ' + name
 		}
 	}
 

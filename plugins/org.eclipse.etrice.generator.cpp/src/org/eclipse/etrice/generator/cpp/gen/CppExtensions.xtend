@@ -35,15 +35,17 @@ import org.eclipse.etrice.core.room.ExternalType
 import org.eclipse.etrice.core.room.Message
 import org.eclipse.etrice.core.room.MessageData
 import org.eclipse.etrice.core.room.PrimitiveType
+import org.eclipse.etrice.core.room.RefableType
 import org.eclipse.etrice.core.room.RoomClass
+import org.eclipse.etrice.core.room.VarDecl
 import org.eclipse.etrice.core.room.util.RoomHelpers
+import org.eclipse.etrice.generator.cpp.Main
+import org.eclipse.etrice.generator.cpp.setup.GeneratorOptionsHelper
 import org.eclipse.etrice.generator.generic.ILanguageExtension
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.TypeHelpers
 import org.eclipse.xtext.util.Pair
 import org.eclipse.xtext.util.Strings
-import org.eclipse.etrice.generator.cpp.Main
-import org.eclipse.etrice.generator.cpp.setup.GeneratorOptionsHelper
 
 @Singleton
 class CppExtensions implements ILanguageExtension {
@@ -297,6 +299,30 @@ class CppExtensions implements ILanguageExtension {
 	            path.head.value.literalToString
 	        }
 	    }
+	}
+	
+	override String getTypeSignature(RefableType type) {
+		switch it : type {
+			case null: 'void'
+			case isRef: type.type.dataTypeName + pointerLiteral
+			default: type.type.dataTypeName
+		}
+	}
+	
+	override String getDataTypeName(DataType it) {
+		switch it {
+			PrimitiveType: targetName
+			EnumerationType: targetType
+			ExternalType: targetName
+			default: name
+		}
+	}
+	
+	override toParameterDecl(VarDecl it) {
+		switch it {
+			case varargs : refType.typeSignature + ' ' + name + '...'
+			default: refType.typeSignature + ' ' + name 
+		}
 	}
 
 //	def targetFQN(RoomClass roomClass){

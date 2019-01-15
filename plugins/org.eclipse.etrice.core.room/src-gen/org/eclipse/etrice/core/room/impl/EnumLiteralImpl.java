@@ -89,6 +89,7 @@ public class EnumLiteralImpl extends MinimalEObjectImpl.Container implements Enu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -99,6 +100,7 @@ public class EnumLiteralImpl extends MinimalEObjectImpl.Container implements Enu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setName(String newName)
   {
     String oldName = name;
@@ -112,6 +114,7 @@ public class EnumLiteralImpl extends MinimalEObjectImpl.Container implements Enu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public IntLiteral getLiteral()
   {
     return literal;
@@ -139,6 +142,7 @@ public class EnumLiteralImpl extends MinimalEObjectImpl.Container implements Enu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setLiteral(IntLiteral newLiteral)
   {
     if (newLiteral != literal)
@@ -160,6 +164,7 @@ public class EnumLiteralImpl extends MinimalEObjectImpl.Container implements Enu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public long getLiteralValue()
   {
     if (this.getLiteral() != null)
@@ -180,6 +185,7 @@ public class EnumLiteralImpl extends MinimalEObjectImpl.Container implements Enu
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getFullName()
   {
     EnumerationType et = ((EnumerationType) this.eContainer());

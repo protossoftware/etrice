@@ -1632,12 +1632,14 @@ public class RoomHelpers extends FSMHelpers {
 	public boolean matchingArguments(Operation op1, Operation op2){
 		List sig1 = Lists.newArrayList();
 		for(VarDecl varDecl : op1.getArguments()){
+			sig1.add(varDecl.isVarargs());
 			sig1.add(varDecl.getName());
 			sig1.add(varDecl.getRefType().getType());
 			sig1.add(varDecl.getRefType().isRef());
 		}
 		List sig2 = Lists.newArrayList();
 		for(VarDecl varDecl : op2.getArguments()){
+			sig2.add(varDecl.isVarargs());
 			sig2.add(varDecl.getName());
 			sig2.add(varDecl.getRefType().getType());
 			sig2.add(varDecl.getRefType().isRef());

@@ -94,6 +94,7 @@ public class RefSegmentImpl extends MinimalEObjectImpl.Container implements RefS
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getRef()
   {
     return ref;
@@ -104,6 +105,7 @@ public class RefSegmentImpl extends MinimalEObjectImpl.Container implements RefS
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setRef(String newRef)
   {
     String oldRef = ref;
@@ -117,6 +119,7 @@ public class RefSegmentImpl extends MinimalEObjectImpl.Container implements RefS
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public int getIdx()
   {
     return idx;
@@ -127,6 +130,7 @@ public class RefSegmentImpl extends MinimalEObjectImpl.Container implements RefS
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setIdx(int newIdx)
   {
     int oldIdx = idx;
@@ -140,6 +144,7 @@ public class RefSegmentImpl extends MinimalEObjectImpl.Container implements RefS
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String toString()
   {
     return getRef() + ((getIdx()>=0)? ":"+getIdx() : "");

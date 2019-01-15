@@ -276,6 +276,7 @@ public class RoomParser extends AbstractContentAssistParser {
 					put(grammarAccess.getRoomModelAccess().getAnnotationTypesAssignment_5_8(), "rule__RoomModel__AnnotationTypesAssignment_5_8");
 					put(grammarAccess.getVarDeclAccess().getNameAssignment_0(), "rule__VarDecl__NameAssignment_0");
 					put(grammarAccess.getVarDeclAccess().getRefTypeAssignment_2(), "rule__VarDecl__RefTypeAssignment_2");
+					put(grammarAccess.getVarDeclAccess().getVarargsAssignment_3(), "rule__VarDecl__VarargsAssignment_3");
 					put(grammarAccess.getMessageDataAccess().getDeprecatedNameAssignment_0_0(), "rule__MessageData__DeprecatedNameAssignment_0_0");
 					put(grammarAccess.getMessageDataAccess().getRefTypeAssignment_1(), "rule__MessageData__RefTypeAssignment_1");
 					put(grammarAccess.getRefableTypeAccess().getTypeAssignment_0(), "rule__RefableType__TypeAssignment_0");

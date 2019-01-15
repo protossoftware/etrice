@@ -18,6 +18,8 @@ import org.eclipse.etrice.core.room.DataType;
 import org.eclipse.etrice.core.room.EnumLiteral;
 import org.eclipse.etrice.core.room.EnumerationType;
 import org.eclipse.etrice.core.room.PrimitiveType;
+import org.eclipse.etrice.core.room.RefableType;
+import org.eclipse.etrice.core.room.VarDecl;
 import org.eclipse.etrice.generator.fsm.generic.ILanguageExtensionBase;
 
 
@@ -86,4 +88,25 @@ public interface ILanguageExtension extends ILanguageExtensionBase {
 	 * @return the cast type of an enumeration type
 	 */
 	String getCastType(EnumerationType type);
+	
+	/**
+	 * returns type signature of refable type based on data type and ref options
+	 * @param refable type
+	 * @result target signature as string
+	 */
+	String getTypeSignature(RefableType type);
+	
+	/**
+	 * returns target type name
+	 * @param data type
+	 * @result target name as string
+	 */
+	String getDataTypeName(DataType type);
+	
+	/**
+	 * returns paramater signature for var decl of an operation
+	 * @param vardecl
+	 * @result target signature of parameter as string
+	 */
+	String toParameterDecl(VarDecl decl);
 }

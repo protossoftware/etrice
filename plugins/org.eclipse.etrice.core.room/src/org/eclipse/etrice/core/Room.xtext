@@ -53,7 +53,7 @@ ActorContainerClass: ActorClass | SubSystemClass;
 // data class
 
 VarDecl:
-	name=ID ':' refType=RefableType;
+	name=ID ':' refType=RefableType (varargs?='varargs')?;
 
 MessageData:
 	(deprecatedName=ID ':')? refType=RefableType;

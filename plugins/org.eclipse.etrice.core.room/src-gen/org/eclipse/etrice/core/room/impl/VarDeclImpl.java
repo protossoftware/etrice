@@ -25,6 +25,7 @@ import org.eclipse.etrice.core.room.VarDecl;
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.impl.VarDeclImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.impl.VarDeclImpl#getRefType <em>Ref Type</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.impl.VarDeclImpl#isVarargs <em>Varargs</em>}</li>
  * </ul>
  *
  * @generated
@@ -62,6 +63,26 @@ public class VarDeclImpl extends MinimalEObjectImpl.Container implements VarDecl
   protected RefableType refType;
 
   /**
+   * The default value of the '{@link #isVarargs() <em>Varargs</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isVarargs()
+   * @generated
+   * @ordered
+   */
+  protected static final boolean VARARGS_EDEFAULT = false;
+
+  /**
+   * The cached value of the '{@link #isVarargs() <em>Varargs</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isVarargs()
+   * @generated
+   * @ordered
+   */
+  protected boolean varargs = VARARGS_EDEFAULT;
+
+  /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -87,6 +108,7 @@ public class VarDeclImpl extends MinimalEObjectImpl.Container implements VarDecl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -97,6 +119,7 @@ public class VarDeclImpl extends MinimalEObjectImpl.Container implements VarDecl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setName(String newName)
   {
     String oldName = name;
@@ -110,6 +133,7 @@ public class VarDeclImpl extends MinimalEObjectImpl.Container implements VarDecl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public RefableType getRefType()
   {
     return refType;
@@ -137,6 +161,7 @@ public class VarDeclImpl extends MinimalEObjectImpl.Container implements VarDecl
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setRefType(RefableType newRefType)
   {
     if (newRefType != refType)
@@ -151,6 +176,31 @@ public class VarDeclImpl extends MinimalEObjectImpl.Container implements VarDecl
     }
     else if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.VAR_DECL__REF_TYPE, newRefType, newRefType));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public boolean isVarargs()
+  {
+    return varargs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setVarargs(boolean newVarargs)
+  {
+    boolean oldVarargs = varargs;
+    varargs = newVarargs;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, RoomPackage.VAR_DECL__VARARGS, oldVarargs, varargs));
   }
 
   /**
@@ -183,6 +233,8 @@ public class VarDeclImpl extends MinimalEObjectImpl.Container implements VarDecl
         return getName();
       case RoomPackage.VAR_DECL__REF_TYPE:
         return getRefType();
+      case RoomPackage.VAR_DECL__VARARGS:
+        return isVarargs();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -202,6 +254,9 @@ public class VarDeclImpl extends MinimalEObjectImpl.Container implements VarDecl
         return;
       case RoomPackage.VAR_DECL__REF_TYPE:
         setRefType((RefableType)newValue);
+        return;
+      case RoomPackage.VAR_DECL__VARARGS:
+        setVarargs((Boolean)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -223,6 +278,9 @@ public class VarDeclImpl extends MinimalEObjectImpl.Container implements VarDecl
       case RoomPackage.VAR_DECL__REF_TYPE:
         setRefType((RefableType)null);
         return;
+      case RoomPackage.VAR_DECL__VARARGS:
+        setVarargs(VARARGS_EDEFAULT);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -241,6 +299,8 @@ public class VarDeclImpl extends MinimalEObjectImpl.Container implements VarDecl
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case RoomPackage.VAR_DECL__REF_TYPE:
         return refType != null;
+      case RoomPackage.VAR_DECL__VARARGS:
+        return varargs != VARARGS_EDEFAULT;
     }
     return super.eIsSet(featureID);
   }
@@ -258,6 +318,8 @@ public class VarDeclImpl extends MinimalEObjectImpl.Container implements VarDecl
     StringBuilder result = new StringBuilder(super.toString());
     result.append(" (name: ");
     result.append(name);
+    result.append(", varargs: ");
+    result.append(varargs);
     result.append(')');
     return result.toString();
   }

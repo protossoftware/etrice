@@ -86,6 +86,7 @@ public class SubProtocolImpl extends MinimalEObjectImpl.Container implements Sub
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -96,6 +97,7 @@ public class SubProtocolImpl extends MinimalEObjectImpl.Container implements Sub
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setName(String newName)
   {
     String oldName = name;
@@ -109,6 +111,7 @@ public class SubProtocolImpl extends MinimalEObjectImpl.Container implements Sub
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public GeneralProtocolClass getProtocol()
   {
     if (protocol != null && protocol.eIsProxy())
@@ -139,6 +142,7 @@ public class SubProtocolImpl extends MinimalEObjectImpl.Container implements Sub
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setProtocol(GeneralProtocolClass newProtocol)
   {
     GeneralProtocolClass oldProtocol = protocol;

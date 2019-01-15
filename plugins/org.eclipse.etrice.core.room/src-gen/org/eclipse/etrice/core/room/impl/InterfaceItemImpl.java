@@ -82,6 +82,7 @@ public class InterfaceItemImpl extends AbstractInterfaceItemImpl implements Inte
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Documentation getDocu()
   {
     return docu;
@@ -109,6 +110,7 @@ public class InterfaceItemImpl extends AbstractInterfaceItemImpl implements Inte
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setDocu(Documentation newDocu)
   {
     if (newDocu != docu)
@@ -130,6 +132,7 @@ public class InterfaceItemImpl extends AbstractInterfaceItemImpl implements Inte
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public GeneralProtocolClass getGeneralProtocol()
   {
     if (this instanceof Port)
@@ -147,6 +150,7 @@ public class InterfaceItemImpl extends AbstractInterfaceItemImpl implements Inte
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ProtocolSemantics getSemantics()
   {
     if (getGeneralProtocol() instanceof ProtocolClass)
@@ -161,6 +165,7 @@ public class InterfaceItemImpl extends AbstractInterfaceItemImpl implements Inte
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<EObject> getAllIncomingAbstractMessages()
   {
     return new BasicEList<EObject>(new RoomHelpers().getMessageListDeep(this, false));
@@ -172,6 +177,7 @@ public class InterfaceItemImpl extends AbstractInterfaceItemImpl implements Inte
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<EObject> getAllOutgoingAbstractMessages()
   {
     return new BasicEList<EObject>(new RoomHelpers().getMessageListDeep(this, true));
@@ -183,6 +189,7 @@ public class InterfaceItemImpl extends AbstractInterfaceItemImpl implements Inte
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isEventDriven()
   {
     if (getGeneralProtocol() instanceof ProtocolClass)

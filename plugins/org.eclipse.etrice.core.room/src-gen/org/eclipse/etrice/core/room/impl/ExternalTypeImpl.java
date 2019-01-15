@@ -93,6 +93,7 @@ public class ExternalTypeImpl extends ComplexTypeImpl implements ExternalType
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getTargetName()
   {
     return targetName;
@@ -103,6 +104,7 @@ public class ExternalTypeImpl extends ComplexTypeImpl implements ExternalType
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setTargetName(String newTargetName)
   {
     String oldTargetName = targetName;
@@ -116,6 +118,7 @@ public class ExternalTypeImpl extends ComplexTypeImpl implements ExternalType
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getDefaultValueLiteral()
   {
     return defaultValueLiteral;
@@ -126,6 +129,7 @@ public class ExternalTypeImpl extends ComplexTypeImpl implements ExternalType
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setDefaultValueLiteral(String newDefaultValueLiteral)
   {
     String oldDefaultValueLiteral = defaultValueLiteral;
