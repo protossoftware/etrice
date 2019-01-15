@@ -70,7 +70,6 @@ public class GeneralProtocolClassImpl extends RoomClassImpl implements GeneralPr
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EList<Annotation> getAnnotations()
   {
     if (annotations == null)

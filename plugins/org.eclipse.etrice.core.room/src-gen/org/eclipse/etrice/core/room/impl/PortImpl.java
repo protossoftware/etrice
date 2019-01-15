@@ -127,7 +127,6 @@ public class PortImpl extends InterfaceItemImpl implements Port
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public boolean isConjugated()
   {
     return conjugated;
@@ -138,7 +137,6 @@ public class PortImpl extends InterfaceItemImpl implements Port
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setConjugated(boolean newConjugated)
   {
     boolean oldConjugated = conjugated;
@@ -152,7 +150,6 @@ public class PortImpl extends InterfaceItemImpl implements Port
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public int getMultiplicity()
   {
     return multiplicity;
@@ -163,7 +160,6 @@ public class PortImpl extends InterfaceItemImpl implements Port
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setMultiplicity(int newMultiplicity)
   {
     int oldMultiplicity = multiplicity;
@@ -177,7 +173,6 @@ public class PortImpl extends InterfaceItemImpl implements Port
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public GeneralProtocolClass getProtocol()
   {
     if (protocol != null && protocol.eIsProxy())
@@ -208,7 +203,6 @@ public class PortImpl extends InterfaceItemImpl implements Port
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setProtocol(GeneralProtocolClass newProtocol)
   {
     GeneralProtocolClass oldProtocol = protocol;
@@ -222,7 +216,6 @@ public class PortImpl extends InterfaceItemImpl implements Port
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EList<Annotation> getAnnotations()
   {
     if (annotations == null)
@@ -237,7 +230,6 @@ public class PortImpl extends InterfaceItemImpl implements Port
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public boolean isReplicated()
   {
     return multiplicity>1 || multiplicity==-1;
@@ -368,7 +360,7 @@ public class PortImpl extends InterfaceItemImpl implements Port
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuilder result = new StringBuilder(super.toString());
+    StringBuffer result = new StringBuffer(super.toString());
     result.append(" (conjugated: ");
     result.append(conjugated);
     result.append(", multiplicity: ");

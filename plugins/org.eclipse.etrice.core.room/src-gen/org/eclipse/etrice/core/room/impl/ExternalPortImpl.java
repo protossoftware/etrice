@@ -65,7 +65,6 @@ public class ExternalPortImpl extends MinimalEObjectImpl.Container implements Ex
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public Port getInterfacePort()
   {
     if (interfacePort != null && interfacePort.eIsProxy())
@@ -96,7 +95,6 @@ public class ExternalPortImpl extends MinimalEObjectImpl.Container implements Ex
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setInterfacePort(Port newInterfacePort)
   {
     Port oldInterfacePort = interfacePort;

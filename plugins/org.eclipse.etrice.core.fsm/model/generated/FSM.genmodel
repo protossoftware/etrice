@@ -36,6 +36,7 @@
     </genClasses>
     <genClasses ecoreClass="FSM.ecore#//State">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSM.ecore#//State/docu"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSM.ecore#//State/annotations"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSM.ecore#//State/entryCode"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSM.ecore#//State/exitCode"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSM.ecore#//State/doCode"/>
@@ -66,6 +67,7 @@
     </genClasses>
     <genClasses ecoreClass="FSM.ecore#//TransitionBase">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSM.ecore#//TransitionBase/docu"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSM.ecore#//TransitionBase/annotations"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FSM.ecore#//TransitionBase/action"/>
     </genClasses>
     <genClasses ecoreClass="FSM.ecore#//Transition">

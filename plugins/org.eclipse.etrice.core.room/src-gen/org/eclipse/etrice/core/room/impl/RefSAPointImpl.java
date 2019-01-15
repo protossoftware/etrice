@@ -64,7 +64,6 @@ public class RefSAPointImpl extends SAPointImpl implements RefSAPoint
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public ActorContainerRef getRef()
   {
     if (ref != null && ref.eIsProxy())
@@ -95,7 +94,6 @@ public class RefSAPointImpl extends SAPointImpl implements RefSAPoint
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setRef(ActorContainerRef newRef)
   {
     ActorContainerRef oldRef = ref;

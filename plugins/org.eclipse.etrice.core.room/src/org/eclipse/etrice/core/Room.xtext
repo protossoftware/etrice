@@ -344,7 +344,9 @@ AnnotationTargetType:
 	'SubSystemClass' |
 	'LogicalSystem' |
 	'Port' |
-	'Message'
+	'Message' |
+	'State' |
+	'Transition' 
 ;
 
 enum RoomAnnotationTargetEnum:
@@ -356,5 +358,7 @@ enum RoomAnnotationTargetEnum:
 	SUBSYSTEM_CLASS='SubSystemClass' |
 	LOGICAL_SYSTEM_CLASS='LogicalSystem' |
 	PORT='Port' |
-	MESSAGE='Message'
+	MESSAGE='Message' |
+	STATE='State' |
+	TRANSITION='Transition'
 ;

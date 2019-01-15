@@ -290,13 +290,22 @@ public interface FSMPackage extends EPackage
   int STATE__DOCU = STATE_GRAPH_NODE_FEATURE_COUNT + 0;
 
   /**
+   * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int STATE__ANNOTATIONS = STATE_GRAPH_NODE_FEATURE_COUNT + 1;
+
+  /**
    * The feature id for the '<em><b>Entry Code</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int STATE__ENTRY_CODE = STATE_GRAPH_NODE_FEATURE_COUNT + 1;
+  int STATE__ENTRY_CODE = STATE_GRAPH_NODE_FEATURE_COUNT + 2;
 
   /**
    * The feature id for the '<em><b>Exit Code</b></em>' containment reference.
@@ -305,7 +314,7 @@ public interface FSMPackage extends EPackage
    * @generated
    * @ordered
    */
-  int STATE__EXIT_CODE = STATE_GRAPH_NODE_FEATURE_COUNT + 2;
+  int STATE__EXIT_CODE = STATE_GRAPH_NODE_FEATURE_COUNT + 3;
 
   /**
    * The feature id for the '<em><b>Do Code</b></em>' containment reference.
@@ -314,7 +323,7 @@ public interface FSMPackage extends EPackage
    * @generated
    * @ordered
    */
-  int STATE__DO_CODE = STATE_GRAPH_NODE_FEATURE_COUNT + 3;
+  int STATE__DO_CODE = STATE_GRAPH_NODE_FEATURE_COUNT + 4;
 
   /**
    * The feature id for the '<em><b>Subgraph</b></em>' containment reference.
@@ -323,7 +332,7 @@ public interface FSMPackage extends EPackage
    * @generated
    * @ordered
    */
-  int STATE__SUBGRAPH = STATE_GRAPH_NODE_FEATURE_COUNT + 4;
+  int STATE__SUBGRAPH = STATE_GRAPH_NODE_FEATURE_COUNT + 5;
 
   /**
    * The number of structural features of the '<em>State</em>' class.
@@ -332,7 +341,7 @@ public interface FSMPackage extends EPackage
    * @generated
    * @ordered
    */
-  int STATE_FEATURE_COUNT = STATE_GRAPH_NODE_FEATURE_COUNT + 5;
+  int STATE_FEATURE_COUNT = STATE_GRAPH_NODE_FEATURE_COUNT + 6;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.core.fsm.fSM.impl.SimpleStateImpl <em>Simple State</em>}' class.
@@ -352,6 +361,15 @@ public interface FSMPackage extends EPackage
    * @ordered
    */
   int SIMPLE_STATE__DOCU = STATE__DOCU;
+
+  /**
+   * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SIMPLE_STATE__ANNOTATIONS = STATE__ANNOTATIONS;
 
   /**
    * The feature id for the '<em><b>Entry Code</b></em>' containment reference.
@@ -425,6 +443,15 @@ public interface FSMPackage extends EPackage
    * @ordered
    */
   int REFINED_STATE__DOCU = STATE__DOCU;
+
+  /**
+   * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int REFINED_STATE__ANNOTATIONS = STATE__ANNOTATIONS;
 
   /**
    * The feature id for the '<em><b>Entry Code</b></em>' containment reference.
@@ -695,13 +722,22 @@ public interface FSMPackage extends EPackage
   int TRANSITION_BASE__DOCU = STATE_GRAPH_ITEM_FEATURE_COUNT + 0;
 
   /**
+   * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TRANSITION_BASE__ANNOTATIONS = STATE_GRAPH_ITEM_FEATURE_COUNT + 1;
+
+  /**
    * The feature id for the '<em><b>Action</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int TRANSITION_BASE__ACTION = STATE_GRAPH_ITEM_FEATURE_COUNT + 1;
+  int TRANSITION_BASE__ACTION = STATE_GRAPH_ITEM_FEATURE_COUNT + 2;
 
   /**
    * The number of structural features of the '<em>Transition Base</em>' class.
@@ -710,7 +746,7 @@ public interface FSMPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TRANSITION_BASE_FEATURE_COUNT = STATE_GRAPH_ITEM_FEATURE_COUNT + 2;
+  int TRANSITION_BASE_FEATURE_COUNT = STATE_GRAPH_ITEM_FEATURE_COUNT + 3;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.core.fsm.fSM.impl.TransitionImpl <em>Transition</em>}' class.
@@ -730,6 +766,15 @@ public interface FSMPackage extends EPackage
    * @ordered
    */
   int TRANSITION__DOCU = TRANSITION_BASE__DOCU;
+
+  /**
+   * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TRANSITION__ANNOTATIONS = TRANSITION_BASE__ANNOTATIONS;
 
   /**
    * The feature id for the '<em><b>Action</b></em>' containment reference.
@@ -785,6 +830,15 @@ public interface FSMPackage extends EPackage
    * @ordered
    */
   int NON_INITIAL_TRANSITION__DOCU = TRANSITION__DOCU;
+
+  /**
+   * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int NON_INITIAL_TRANSITION__ANNOTATIONS = TRANSITION__ANNOTATIONS;
 
   /**
    * The feature id for the '<em><b>Action</b></em>' containment reference.
@@ -851,6 +905,15 @@ public interface FSMPackage extends EPackage
   int TRANSITION_CHAIN_START_TRANSITION__DOCU = NON_INITIAL_TRANSITION__DOCU;
 
   /**
+   * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TRANSITION_CHAIN_START_TRANSITION__ANNOTATIONS = NON_INITIAL_TRANSITION__ANNOTATIONS;
+
+  /**
    * The feature id for the '<em><b>Action</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -915,6 +978,15 @@ public interface FSMPackage extends EPackage
   int INITIAL_TRANSITION__DOCU = TRANSITION__DOCU;
 
   /**
+   * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int INITIAL_TRANSITION__ANNOTATIONS = TRANSITION__ANNOTATIONS;
+
+  /**
    * The feature id for the '<em><b>Action</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -968,6 +1040,15 @@ public interface FSMPackage extends EPackage
    * @ordered
    */
   int CONTINUATION_TRANSITION__DOCU = NON_INITIAL_TRANSITION__DOCU;
+
+  /**
+   * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CONTINUATION_TRANSITION__ANNOTATIONS = NON_INITIAL_TRANSITION__ANNOTATIONS;
 
   /**
    * The feature id for the '<em><b>Action</b></em>' containment reference.
@@ -1032,6 +1113,15 @@ public interface FSMPackage extends EPackage
    * @ordered
    */
   int TRIGGERED_TRANSITION__DOCU = TRANSITION_CHAIN_START_TRANSITION__DOCU;
+
+  /**
+   * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TRIGGERED_TRANSITION__ANNOTATIONS = TRANSITION_CHAIN_START_TRANSITION__ANNOTATIONS;
 
   /**
    * The feature id for the '<em><b>Action</b></em>' containment reference.
@@ -1107,6 +1197,15 @@ public interface FSMPackage extends EPackage
   int GUARDED_TRANSITION__DOCU = TRANSITION_CHAIN_START_TRANSITION__DOCU;
 
   /**
+   * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GUARDED_TRANSITION__ANNOTATIONS = TRANSITION_CHAIN_START_TRANSITION__ANNOTATIONS;
+
+  /**
    * The feature id for the '<em><b>Action</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1180,6 +1279,15 @@ public interface FSMPackage extends EPackage
   int CP_BRANCH_TRANSITION__DOCU = NON_INITIAL_TRANSITION__DOCU;
 
   /**
+   * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CP_BRANCH_TRANSITION__ANNOTATIONS = NON_INITIAL_TRANSITION__ANNOTATIONS;
+
+  /**
    * The feature id for the '<em><b>Action</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1251,6 +1359,15 @@ public interface FSMPackage extends EPackage
    * @ordered
    */
   int REFINED_TRANSITION__DOCU = TRANSITION_BASE__DOCU;
+
+  /**
+   * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int REFINED_TRANSITION__ANNOTATIONS = TRANSITION_BASE__ANNOTATIONS;
 
   /**
    * The feature id for the '<em><b>Action</b></em>' containment reference.
@@ -1892,6 +2009,17 @@ public interface FSMPackage extends EPackage
   EReference getState_Docu();
 
   /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.fsm.fSM.State#getAnnotations <em>Annotations</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Annotations</em>'.
+   * @see org.eclipse.etrice.core.fsm.fSM.State#getAnnotations()
+   * @see #getState()
+   * @generated
+   */
+  EReference getState_Annotations();
+
+  /**
    * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.fsm.fSM.State#getEntryCode <em>Entry Code</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2123,6 +2251,17 @@ public interface FSMPackage extends EPackage
    * @generated
    */
   EReference getTransitionBase_Docu();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.fsm.fSM.TransitionBase#getAnnotations <em>Annotations</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Annotations</em>'.
+   * @see org.eclipse.etrice.core.fsm.fSM.TransitionBase#getAnnotations()
+   * @see #getTransitionBase()
+   * @generated
+   */
+  EReference getTransitionBase_Annotations();
 
   /**
    * Returns the meta object for the containment reference '{@link org.eclipse.etrice.core.fsm.fSM.TransitionBase#getAction <em>Action</em>}'.
@@ -2786,6 +2925,14 @@ public interface FSMPackage extends EPackage
     EReference STATE__DOCU = eINSTANCE.getState_Docu();
 
     /**
+     * The meta object literal for the '<em><b>Annotations</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference STATE__ANNOTATIONS = eINSTANCE.getState_Annotations();
+
+    /**
      * The meta object literal for the '<em><b>Entry Code</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -2978,6 +3125,14 @@ public interface FSMPackage extends EPackage
      * @generated
      */
     EReference TRANSITION_BASE__DOCU = eINSTANCE.getTransitionBase_Docu();
+
+    /**
+     * The meta object literal for the '<em><b>Annotations</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference TRANSITION_BASE__ANNOTATIONS = eINSTANCE.getTransitionBase_Annotations();
 
     /**
      * The meta object literal for the '<em><b>Action</b></em>' containment reference feature.

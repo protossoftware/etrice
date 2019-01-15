@@ -107,7 +107,27 @@ public enum RoomAnnotationTargetEnum implements Enumerator
    * @generated
    * @ordered
    */
-  MESSAGE(8, "MESSAGE", "Message");
+  MESSAGE(8, "MESSAGE", "Message"),
+
+  /**
+   * The '<em><b>STATE</b></em>' literal object.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #STATE_VALUE
+   * @generated
+   * @ordered
+   */
+  STATE(9, "STATE", "State"),
+
+  /**
+   * The '<em><b>TRANSITION</b></em>' literal object.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #TRANSITION_VALUE
+   * @generated
+   * @ordered
+   */
+  TRANSITION(10, "TRANSITION", "Transition");
 
   /**
    * The '<em><b>DATA CLASS</b></em>' literal value.
@@ -245,6 +265,36 @@ public enum RoomAnnotationTargetEnum implements Enumerator
   public static final int MESSAGE_VALUE = 8;
 
   /**
+   * The '<em><b>STATE</b></em>' literal value.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of '<em><b>STATE</b></em>' literal object isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @see #STATE
+   * @model literal="State"
+   * @generated
+   * @ordered
+   */
+  public static final int STATE_VALUE = 9;
+
+  /**
+   * The '<em><b>TRANSITION</b></em>' literal value.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of '<em><b>TRANSITION</b></em>' literal object isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @see #TRANSITION
+   * @model literal="Transition"
+   * @generated
+   * @ordered
+   */
+  public static final int TRANSITION_VALUE = 10;
+
+  /**
    * An array of all the '<em><b>Annotation Target Enum</b></em>' enumerators.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -262,6 +312,8 @@ public enum RoomAnnotationTargetEnum implements Enumerator
       LOGICAL_SYSTEM_CLASS,
       PORT,
       MESSAGE,
+      STATE,
+      TRANSITION,
     };
 
   /**
@@ -335,6 +387,8 @@ public enum RoomAnnotationTargetEnum implements Enumerator
       case LOGICAL_SYSTEM_CLASS_VALUE: return LOGICAL_SYSTEM_CLASS;
       case PORT_VALUE: return PORT;
       case MESSAGE_VALUE: return MESSAGE;
+      case STATE_VALUE: return STATE;
+      case TRANSITION_VALUE: return TRANSITION;
     }
     return null;
   }
@@ -378,7 +432,6 @@ public enum RoomAnnotationTargetEnum implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public int getValue()
   {
     return value;
@@ -389,7 +442,6 @@ public enum RoomAnnotationTargetEnum implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public String getName()
   {
     return name;
@@ -400,7 +452,6 @@ public enum RoomAnnotationTargetEnum implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public String getLiteral()
   {
     return literal;

@@ -25,13 +25,13 @@ public class RoomSyntacticSequencer extends AbstractSyntacticSequencer {
 	protected AbstractElementAlias match_ActorClass___InterfaceKeyword_7_0_LeftCurlyBracketKeyword_7_1_RightCurlyBracketKeyword_7_3__q;
 	protected AbstractElementAlias match_ActorClass___StructureKeyword_8_0_LeftCurlyBracketKeyword_8_2_RightCurlyBracketKeyword_8_7__q;
 	protected AbstractElementAlias match_ActorInstanceMapping___LeftCurlyBracketKeyword_4_0_RightCurlyBracketKeyword_4_2__q;
-	protected AbstractElementAlias match_ContinuationTransition___LeftCurlyBracketKeyword_7_0_RightCurlyBracketKeyword_7_2__q;
-	protected AbstractElementAlias match_InitialTransition___LeftCurlyBracketKeyword_7_0_RightCurlyBracketKeyword_7_2__q;
+	protected AbstractElementAlias match_ContinuationTransition___LeftCurlyBracketKeyword_7_0_RightCurlyBracketKeyword_7_3__q;
+	protected AbstractElementAlias match_InitialTransition___LeftCurlyBracketKeyword_7_0_RightCurlyBracketKeyword_7_3__q;
 	protected AbstractElementAlias match_Message___LeftParenthesisKeyword_3_0_RightParenthesisKeyword_3_2__q;
 	protected AbstractElementAlias match_PortOperation___ColonKeyword_5_0_0_VoidKeyword_5_0_1_0__q;
 	protected AbstractElementAlias match_ProtocolClass___IncomingKeyword_10_0_LeftCurlyBracketKeyword_10_1_RightCurlyBracketKeyword_10_3__q;
 	protected AbstractElementAlias match_ProtocolClass___OutgoingKeyword_11_0_LeftCurlyBracketKeyword_11_1_RightCurlyBracketKeyword_11_3__q;
-	protected AbstractElementAlias match_SimpleState___LeftCurlyBracketKeyword_3_0_RightCurlyBracketKeyword_3_5__q;
+	protected AbstractElementAlias match_SimpleState___LeftCurlyBracketKeyword_3_0_RightCurlyBracketKeyword_3_6__q;
 	protected AbstractElementAlias match_StandardOperation___ColonKeyword_6_0_VoidKeyword_6_1_0__q;
 	
 	@Inject
@@ -41,13 +41,13 @@ public class RoomSyntacticSequencer extends AbstractSyntacticSequencer {
 		match_ActorClass___InterfaceKeyword_7_0_LeftCurlyBracketKeyword_7_1_RightCurlyBracketKeyword_7_3__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getActorClassAccess().getInterfaceKeyword_7_0()), new TokenAlias(false, false, grammarAccess.getActorClassAccess().getLeftCurlyBracketKeyword_7_1()), new TokenAlias(false, false, grammarAccess.getActorClassAccess().getRightCurlyBracketKeyword_7_3()));
 		match_ActorClass___StructureKeyword_8_0_LeftCurlyBracketKeyword_8_2_RightCurlyBracketKeyword_8_7__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getActorClassAccess().getStructureKeyword_8_0()), new TokenAlias(false, false, grammarAccess.getActorClassAccess().getLeftCurlyBracketKeyword_8_2()), new TokenAlias(false, false, grammarAccess.getActorClassAccess().getRightCurlyBracketKeyword_8_7()));
 		match_ActorInstanceMapping___LeftCurlyBracketKeyword_4_0_RightCurlyBracketKeyword_4_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getActorInstanceMappingAccess().getLeftCurlyBracketKeyword_4_0()), new TokenAlias(false, false, grammarAccess.getActorInstanceMappingAccess().getRightCurlyBracketKeyword_4_2()));
-		match_ContinuationTransition___LeftCurlyBracketKeyword_7_0_RightCurlyBracketKeyword_7_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getContinuationTransitionAccess().getLeftCurlyBracketKeyword_7_0()), new TokenAlias(false, false, grammarAccess.getContinuationTransitionAccess().getRightCurlyBracketKeyword_7_2()));
-		match_InitialTransition___LeftCurlyBracketKeyword_7_0_RightCurlyBracketKeyword_7_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getInitialTransitionAccess().getLeftCurlyBracketKeyword_7_0()), new TokenAlias(false, false, grammarAccess.getInitialTransitionAccess().getRightCurlyBracketKeyword_7_2()));
+		match_ContinuationTransition___LeftCurlyBracketKeyword_7_0_RightCurlyBracketKeyword_7_3__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getContinuationTransitionAccess().getLeftCurlyBracketKeyword_7_0()), new TokenAlias(false, false, grammarAccess.getContinuationTransitionAccess().getRightCurlyBracketKeyword_7_3()));
+		match_InitialTransition___LeftCurlyBracketKeyword_7_0_RightCurlyBracketKeyword_7_3__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getInitialTransitionAccess().getLeftCurlyBracketKeyword_7_0()), new TokenAlias(false, false, grammarAccess.getInitialTransitionAccess().getRightCurlyBracketKeyword_7_3()));
 		match_Message___LeftParenthesisKeyword_3_0_RightParenthesisKeyword_3_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getMessageAccess().getLeftParenthesisKeyword_3_0()), new TokenAlias(false, false, grammarAccess.getMessageAccess().getRightParenthesisKeyword_3_2()));
 		match_PortOperation___ColonKeyword_5_0_0_VoidKeyword_5_0_1_0__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getPortOperationAccess().getColonKeyword_5_0_0()), new TokenAlias(false, false, grammarAccess.getPortOperationAccess().getVoidKeyword_5_0_1_0()));
 		match_ProtocolClass___IncomingKeyword_10_0_LeftCurlyBracketKeyword_10_1_RightCurlyBracketKeyword_10_3__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getProtocolClassAccess().getIncomingKeyword_10_0()), new TokenAlias(false, false, grammarAccess.getProtocolClassAccess().getLeftCurlyBracketKeyword_10_1()), new TokenAlias(false, false, grammarAccess.getProtocolClassAccess().getRightCurlyBracketKeyword_10_3()));
 		match_ProtocolClass___OutgoingKeyword_11_0_LeftCurlyBracketKeyword_11_1_RightCurlyBracketKeyword_11_3__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getProtocolClassAccess().getOutgoingKeyword_11_0()), new TokenAlias(false, false, grammarAccess.getProtocolClassAccess().getLeftCurlyBracketKeyword_11_1()), new TokenAlias(false, false, grammarAccess.getProtocolClassAccess().getRightCurlyBracketKeyword_11_3()));
-		match_SimpleState___LeftCurlyBracketKeyword_3_0_RightCurlyBracketKeyword_3_5__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getSimpleStateAccess().getLeftCurlyBracketKeyword_3_0()), new TokenAlias(false, false, grammarAccess.getSimpleStateAccess().getRightCurlyBracketKeyword_3_5()));
+		match_SimpleState___LeftCurlyBracketKeyword_3_0_RightCurlyBracketKeyword_3_6__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getSimpleStateAccess().getLeftCurlyBracketKeyword_3_0()), new TokenAlias(false, false, grammarAccess.getSimpleStateAccess().getRightCurlyBracketKeyword_3_6()));
 		match_StandardOperation___ColonKeyword_6_0_VoidKeyword_6_1_0__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getStandardOperationAccess().getColonKeyword_6_0()), new TokenAlias(false, false, grammarAccess.getStandardOperationAccess().getVoidKeyword_6_1_0()));
 	}
 	
@@ -71,10 +71,10 @@ public class RoomSyntacticSequencer extends AbstractSyntacticSequencer {
 				emit_ActorClass___StructureKeyword_8_0_LeftCurlyBracketKeyword_8_2_RightCurlyBracketKeyword_8_7__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_ActorInstanceMapping___LeftCurlyBracketKeyword_4_0_RightCurlyBracketKeyword_4_2__q.equals(syntax))
 				emit_ActorInstanceMapping___LeftCurlyBracketKeyword_4_0_RightCurlyBracketKeyword_4_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if (match_ContinuationTransition___LeftCurlyBracketKeyword_7_0_RightCurlyBracketKeyword_7_2__q.equals(syntax))
-				emit_ContinuationTransition___LeftCurlyBracketKeyword_7_0_RightCurlyBracketKeyword_7_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if (match_InitialTransition___LeftCurlyBracketKeyword_7_0_RightCurlyBracketKeyword_7_2__q.equals(syntax))
-				emit_InitialTransition___LeftCurlyBracketKeyword_7_0_RightCurlyBracketKeyword_7_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_ContinuationTransition___LeftCurlyBracketKeyword_7_0_RightCurlyBracketKeyword_7_3__q.equals(syntax))
+				emit_ContinuationTransition___LeftCurlyBracketKeyword_7_0_RightCurlyBracketKeyword_7_3__q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_InitialTransition___LeftCurlyBracketKeyword_7_0_RightCurlyBracketKeyword_7_3__q.equals(syntax))
+				emit_InitialTransition___LeftCurlyBracketKeyword_7_0_RightCurlyBracketKeyword_7_3__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_Message___LeftParenthesisKeyword_3_0_RightParenthesisKeyword_3_2__q.equals(syntax))
 				emit_Message___LeftParenthesisKeyword_3_0_RightParenthesisKeyword_3_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_PortOperation___ColonKeyword_5_0_0_VoidKeyword_5_0_1_0__q.equals(syntax))
@@ -83,8 +83,8 @@ public class RoomSyntacticSequencer extends AbstractSyntacticSequencer {
 				emit_ProtocolClass___IncomingKeyword_10_0_LeftCurlyBracketKeyword_10_1_RightCurlyBracketKeyword_10_3__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_ProtocolClass___OutgoingKeyword_11_0_LeftCurlyBracketKeyword_11_1_RightCurlyBracketKeyword_11_3__q.equals(syntax))
 				emit_ProtocolClass___OutgoingKeyword_11_0_LeftCurlyBracketKeyword_11_1_RightCurlyBracketKeyword_11_3__q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if (match_SimpleState___LeftCurlyBracketKeyword_3_0_RightCurlyBracketKeyword_3_5__q.equals(syntax))
-				emit_SimpleState___LeftCurlyBracketKeyword_3_0_RightCurlyBracketKeyword_3_5__q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_SimpleState___LeftCurlyBracketKeyword_3_0_RightCurlyBracketKeyword_3_6__q.equals(syntax))
+				emit_SimpleState___LeftCurlyBracketKeyword_3_0_RightCurlyBracketKeyword_3_6__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_StandardOperation___ColonKeyword_6_0_VoidKeyword_6_1_0__q.equals(syntax))
 				emit_StandardOperation___ColonKeyword_6_0_VoidKeyword_6_1_0__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
@@ -266,7 +266,7 @@ public class RoomSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     docu=Documentation (ambiguity) (rule end)
 	 *     to=TransitionTerminal (ambiguity) (rule end)
 	 */
-	protected void emit_ContinuationTransition___LeftCurlyBracketKeyword_7_0_RightCurlyBracketKeyword_7_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_ContinuationTransition___LeftCurlyBracketKeyword_7_0_RightCurlyBracketKeyword_7_3__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
@@ -278,7 +278,7 @@ public class RoomSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     docu=Documentation (ambiguity) (rule end)
 	 *     to=TransitionTerminal (ambiguity) (rule end)
 	 */
-	protected void emit_InitialTransition___LeftCurlyBracketKeyword_7_0_RightCurlyBracketKeyword_7_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_InitialTransition___LeftCurlyBracketKeyword_7_0_RightCurlyBracketKeyword_7_3__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
@@ -404,7 +404,7 @@ public class RoomSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     docu=Documentation (ambiguity) (rule end)
 	 *     name=ID (ambiguity) (rule end)
 	 */
-	protected void emit_SimpleState___LeftCurlyBracketKeyword_3_0_RightCurlyBracketKeyword_3_5__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_SimpleState___LeftCurlyBracketKeyword_3_0_RightCurlyBracketKeyword_3_6__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	

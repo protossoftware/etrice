@@ -132,7 +132,6 @@ public class OperationImpl extends MinimalEObjectImpl.Container implements Opera
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public String getName()
   {
     return name;
@@ -143,7 +142,6 @@ public class OperationImpl extends MinimalEObjectImpl.Container implements Opera
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setName(String newName)
   {
     String oldName = name;
@@ -157,7 +155,6 @@ public class OperationImpl extends MinimalEObjectImpl.Container implements Opera
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EList<VarDecl> getArguments()
   {
     if (arguments == null)
@@ -172,7 +169,6 @@ public class OperationImpl extends MinimalEObjectImpl.Container implements Opera
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public RefableType getReturnType()
   {
     return returnType;
@@ -200,7 +196,6 @@ public class OperationImpl extends MinimalEObjectImpl.Container implements Opera
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setReturnType(RefableType newReturnType)
   {
     if (newReturnType != returnType)
@@ -222,7 +217,6 @@ public class OperationImpl extends MinimalEObjectImpl.Container implements Opera
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public Documentation getDocu()
   {
     return docu;
@@ -250,7 +244,6 @@ public class OperationImpl extends MinimalEObjectImpl.Container implements Opera
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setDocu(Documentation newDocu)
   {
     if (newDocu != docu)
@@ -272,7 +265,6 @@ public class OperationImpl extends MinimalEObjectImpl.Container implements Opera
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public DetailCode getDetailCode()
   {
     return detailCode;
@@ -300,7 +292,6 @@ public class OperationImpl extends MinimalEObjectImpl.Container implements Opera
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setDetailCode(DetailCode newDetailCode)
   {
     if (newDetailCode != detailCode)
@@ -457,7 +448,7 @@ public class OperationImpl extends MinimalEObjectImpl.Container implements Opera
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuilder result = new StringBuilder(super.toString());
+    StringBuffer result = new StringBuffer(super.toString());
     result.append(" (name: ");
     result.append(name);
     result.append(')');

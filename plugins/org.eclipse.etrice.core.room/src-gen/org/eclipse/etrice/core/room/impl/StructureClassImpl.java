@@ -94,7 +94,6 @@ public class StructureClassImpl extends RoomClassImpl implements StructureClass
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EList<Annotation> getAnnotations()
   {
     if (annotations == null)
@@ -109,7 +108,6 @@ public class StructureClassImpl extends RoomClassImpl implements StructureClass
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EList<LayerConnection> getConnections()
   {
     if (connections == null)
@@ -124,7 +122,6 @@ public class StructureClassImpl extends RoomClassImpl implements StructureClass
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EList<Binding> getBindings()
   {
     if (bindings == null)

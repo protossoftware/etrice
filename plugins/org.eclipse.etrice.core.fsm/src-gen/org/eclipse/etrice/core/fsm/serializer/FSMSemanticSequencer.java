@@ -235,6 +235,7 @@ public class FSMSemanticSequencer extends BaseSemanticSequencer {
 	 *         from=TransitionTerminal 
 	 *         to=TransitionTerminal 
 	 *         docu=Documentation? 
+	 *         annotations+=Annotation* 
 	 *         condition=DetailCode 
 	 *         action=DetailCode?
 	 *     )
@@ -272,7 +273,7 @@ public class FSMSemanticSequencer extends BaseSemanticSequencer {
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FSMPackage.Literals.CHOICEPOINT_TERMINAL__CP));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getChoicepointTerminalAccess().getCpChoicePointIDTerminalRuleCall_1_0_1(), semanticObject.getCp());
+		feeder.accept(grammarAccess.getChoicepointTerminalAccess().getCpChoicePointIDTerminalRuleCall_1_0_1(), semanticObject.eGet(FSMPackage.Literals.CHOICEPOINT_TERMINAL__CP, false));
 		feeder.finish();
 	}
 	
@@ -286,7 +287,14 @@ public class FSMSemanticSequencer extends BaseSemanticSequencer {
 	 *     ContinuationTransition returns ContinuationTransition
 	 *
 	 * Constraint:
-	 *     (name=ID? from=TransitionTerminal to=TransitionTerminal docu=Documentation? action=DetailCode?)
+	 *     (
+	 *         name=ID? 
+	 *         from=TransitionTerminal 
+	 *         to=TransitionTerminal 
+	 *         docu=Documentation? 
+	 *         annotations+=Annotation* 
+	 *         action=DetailCode?
+	 *     )
 	 */
 	protected void sequence_ContinuationTransition(ISerializationContext context, ContinuationTransition semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -392,6 +400,7 @@ public class FSMSemanticSequencer extends BaseSemanticSequencer {
 	 *         from=TransitionTerminal 
 	 *         to=TransitionTerminal 
 	 *         docu=Documentation? 
+	 *         annotations+=Annotation* 
 	 *         guard=DetailCode 
 	 *         action=DetailCode?
 	 *     )
@@ -422,7 +431,7 @@ public class FSMSemanticSequencer extends BaseSemanticSequencer {
 	 *     InitialTransition returns InitialTransition
 	 *
 	 * Constraint:
-	 *     (name=ID? to=TransitionTerminal docu=Documentation? action=DetailCode?)
+	 *     (name=ID? to=TransitionTerminal docu=Documentation? annotations+=Annotation* action=DetailCode?)
 	 */
 	protected void sequence_InitialTransition(ISerializationContext context, InitialTransition semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -444,8 +453,8 @@ public class FSMSemanticSequencer extends BaseSemanticSequencer {
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FSMPackage.Literals.MESSAGE_FROM_IF__FROM));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getMessageFromIfAccess().getMessageEObjectIDTerminalRuleCall_0_0_1(), semanticObject.getMessage());
-		feeder.accept(grammarAccess.getMessageFromIfAccess().getFromAbstractInterfaceItemIDTerminalRuleCall_2_0_1(), semanticObject.getFrom());
+		feeder.accept(grammarAccess.getMessageFromIfAccess().getMessageEObjectIDTerminalRuleCall_0_0_1(), semanticObject.eGet(FSMPackage.Literals.MESSAGE_FROM_IF__MESSAGE, false));
+		feeder.accept(grammarAccess.getMessageFromIfAccess().getFromAbstractInterfaceItemIDTerminalRuleCall_2_0_1(), semanticObject.eGet(FSMPackage.Literals.MESSAGE_FROM_IF__FROM, false));
 		feeder.finish();
 	}
 	
@@ -498,6 +507,7 @@ public class FSMSemanticSequencer extends BaseSemanticSequencer {
 	 *     (
 	 *         target=[State|FQN] 
 	 *         docu=Documentation? 
+	 *         annotations+=Annotation* 
 	 *         entryCode=DetailCode? 
 	 *         exitCode=DetailCode? 
 	 *         doCode=DetailCode? 
@@ -516,7 +526,7 @@ public class FSMSemanticSequencer extends BaseSemanticSequencer {
 	 *     RefinedTransition returns RefinedTransition
 	 *
 	 * Constraint:
-	 *     (target=[Transition|FQN] docu=Documentation? action=DetailCode)
+	 *     (target=[Transition|FQN] docu=Documentation? annotations+=Annotation* action=DetailCode)
 	 */
 	protected void sequence_RefinedTransition(ISerializationContext context, RefinedTransition semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -534,6 +544,7 @@ public class FSMSemanticSequencer extends BaseSemanticSequencer {
 	 *     (
 	 *         name=ID 
 	 *         docu=Documentation? 
+	 *         annotations+=Annotation* 
 	 *         entryCode=DetailCode? 
 	 *         exitCode=DetailCode? 
 	 *         doCode=DetailCode? 
@@ -583,7 +594,7 @@ public class FSMSemanticSequencer extends BaseSemanticSequencer {
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FSMPackage.Literals.STATE_TERMINAL__STATE));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getStateTerminalAccess().getStateStateIDTerminalRuleCall_0_1(), semanticObject.getState());
+		feeder.accept(grammarAccess.getStateTerminalAccess().getStateStateIDTerminalRuleCall_0_1(), semanticObject.eGet(FSMPackage.Literals.STATE_TERMINAL__STATE, false));
 		feeder.finish();
 	}
 	
@@ -604,8 +615,8 @@ public class FSMSemanticSequencer extends BaseSemanticSequencer {
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FSMPackage.Literals.SUB_STATE_TR_POINT_TERMINAL__STATE));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getSubStateTrPointTerminalAccess().getTrPointTrPointIDTerminalRuleCall_0_0_1(), semanticObject.getTrPoint());
-		feeder.accept(grammarAccess.getSubStateTrPointTerminalAccess().getStateStateIDTerminalRuleCall_2_0_1(), semanticObject.getState());
+		feeder.accept(grammarAccess.getSubStateTrPointTerminalAccess().getTrPointTrPointIDTerminalRuleCall_0_0_1(), semanticObject.eGet(FSMPackage.Literals.SUB_STATE_TR_POINT_TERMINAL__TR_POINT, false));
+		feeder.accept(grammarAccess.getSubStateTrPointTerminalAccess().getStateStateIDTerminalRuleCall_2_0_1(), semanticObject.eGet(FSMPackage.Literals.SUB_STATE_TR_POINT_TERMINAL__STATE, false));
 		feeder.finish();
 	}
 	
@@ -624,7 +635,7 @@ public class FSMSemanticSequencer extends BaseSemanticSequencer {
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FSMPackage.Literals.TR_POINT_TERMINAL__TR_POINT));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getTrPointTerminalAccess().getTrPointTrPointIDTerminalRuleCall_1_0_1(), semanticObject.getTrPoint());
+		feeder.accept(grammarAccess.getTrPointTerminalAccess().getTrPointTrPointIDTerminalRuleCall_1_0_1(), semanticObject.eGet(FSMPackage.Literals.TR_POINT_TERMINAL__TR_POINT, false));
 		feeder.finish();
 	}
 	
@@ -671,6 +682,7 @@ public class FSMSemanticSequencer extends BaseSemanticSequencer {
 	 *         from=TransitionTerminal 
 	 *         to=TransitionTerminal 
 	 *         docu=Documentation? 
+	 *         annotations+=Annotation* 
 	 *         triggers+=Trigger 
 	 *         triggers+=Trigger* 
 	 *         action=DetailCode?

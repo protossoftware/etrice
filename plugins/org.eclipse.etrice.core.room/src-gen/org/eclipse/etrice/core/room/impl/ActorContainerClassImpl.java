@@ -119,7 +119,6 @@ public class ActorContainerClassImpl extends StructureClassImpl implements Actor
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EList<SPP> getServiceProvisionPoints()
   {
     if (serviceProvisionPoints == null)
@@ -134,7 +133,6 @@ public class ActorContainerClassImpl extends StructureClassImpl implements Actor
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public DetailCode getUserCode1()
   {
     return userCode1;
@@ -162,7 +160,6 @@ public class ActorContainerClassImpl extends StructureClassImpl implements Actor
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setUserCode1(DetailCode newUserCode1)
   {
     if (newUserCode1 != userCode1)
@@ -184,7 +181,6 @@ public class ActorContainerClassImpl extends StructureClassImpl implements Actor
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public DetailCode getUserCode2()
   {
     return userCode2;
@@ -212,7 +208,6 @@ public class ActorContainerClassImpl extends StructureClassImpl implements Actor
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setUserCode2(DetailCode newUserCode2)
   {
     if (newUserCode2 != userCode2)
@@ -234,7 +229,6 @@ public class ActorContainerClassImpl extends StructureClassImpl implements Actor
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public DetailCode getUserCode3()
   {
     return userCode3;
@@ -262,7 +256,6 @@ public class ActorContainerClassImpl extends StructureClassImpl implements Actor
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setUserCode3(DetailCode newUserCode3)
   {
     if (newUserCode3 != userCode3)
@@ -284,7 +277,6 @@ public class ActorContainerClassImpl extends StructureClassImpl implements Actor
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EList<ActorRef> getActorRefs()
   {
     if (actorRefs == null)

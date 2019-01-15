@@ -586,7 +586,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getState_EntryCode()
+  public EReference getState_Annotations()
   {
     return (EReference)stateEClass.getEStructuralFeatures().get(1);
   }
@@ -596,7 +596,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getState_ExitCode()
+  public EReference getState_EntryCode()
   {
     return (EReference)stateEClass.getEStructuralFeatures().get(2);
   }
@@ -606,7 +606,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getState_DoCode()
+  public EReference getState_ExitCode()
   {
     return (EReference)stateEClass.getEStructuralFeatures().get(3);
   }
@@ -616,9 +616,19 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getState_Subgraph()
+  public EReference getState_DoCode()
   {
     return (EReference)stateEClass.getEStructuralFeatures().get(4);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getState_Subgraph()
+  {
+    return (EReference)stateEClass.getEStructuralFeatures().get(5);
   }
 
   /**
@@ -806,9 +816,19 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getTransitionBase_Action()
+  public EReference getTransitionBase_Annotations()
   {
     return (EReference)transitionBaseEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getTransitionBase_Action()
+  {
+    return (EReference)transitionBaseEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -1314,6 +1334,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
 
     stateEClass = createEClass(STATE);
     createEReference(stateEClass, STATE__DOCU);
+    createEReference(stateEClass, STATE__ANNOTATIONS);
     createEReference(stateEClass, STATE__ENTRY_CODE);
     createEReference(stateEClass, STATE__EXIT_CODE);
     createEReference(stateEClass, STATE__DO_CODE);
@@ -1345,6 +1366,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
 
     transitionBaseEClass = createEClass(TRANSITION_BASE);
     createEReference(transitionBaseEClass, TRANSITION_BASE__DOCU);
+    createEReference(transitionBaseEClass, TRANSITION_BASE__ANNOTATIONS);
     createEReference(transitionBaseEClass, TRANSITION_BASE__ACTION);
 
     transitionEClass = createEClass(TRANSITION);
@@ -1503,6 +1525,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
 
     initEClass(stateEClass, State.class, "State", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getState_Docu(), theBasePackage.getDocumentation(), null, "docu", null, 0, 1, State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getState_Annotations(), theBasePackage.getAnnotation(), null, "annotations", null, 0, -1, State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getState_EntryCode(), this.getDetailCode(), null, "entryCode", null, 0, 1, State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getState_ExitCode(), this.getDetailCode(), null, "exitCode", null, 0, 1, State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getState_DoCode(), this.getDetailCode(), null, "doCode", null, 0, 1, State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1536,6 +1559,7 @@ public class FSMPackageImpl extends EPackageImpl implements FSMPackage
 
     initEClass(transitionBaseEClass, TransitionBase.class, "TransitionBase", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getTransitionBase_Docu(), theBasePackage.getDocumentation(), null, "docu", null, 0, 1, TransitionBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getTransitionBase_Annotations(), theBasePackage.getAnnotation(), null, "annotations", null, 0, -1, TransitionBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getTransitionBase_Action(), this.getDetailCode(), null, "action", null, 0, 1, TransitionBase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(transitionEClass, Transition.class, "Transition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

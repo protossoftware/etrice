@@ -140,7 +140,6 @@ public class MessageImpl extends MinimalEObjectImpl.Container implements Message
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public boolean isPriv()
   {
     return priv;
@@ -151,7 +150,6 @@ public class MessageImpl extends MinimalEObjectImpl.Container implements Message
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setPriv(boolean newPriv)
   {
     boolean oldPriv = priv;
@@ -165,7 +163,6 @@ public class MessageImpl extends MinimalEObjectImpl.Container implements Message
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public String getName()
   {
     return name;
@@ -176,7 +173,6 @@ public class MessageImpl extends MinimalEObjectImpl.Container implements Message
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setName(String newName)
   {
     String oldName = name;
@@ -190,7 +186,6 @@ public class MessageImpl extends MinimalEObjectImpl.Container implements Message
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public MessageData getData()
   {
     return data;
@@ -218,7 +213,6 @@ public class MessageImpl extends MinimalEObjectImpl.Container implements Message
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setData(MessageData newData)
   {
     if (newData != data)
@@ -240,7 +234,6 @@ public class MessageImpl extends MinimalEObjectImpl.Container implements Message
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EList<Annotation> getAnnotations()
   {
     if (annotations == null)
@@ -255,7 +248,6 @@ public class MessageImpl extends MinimalEObjectImpl.Container implements Message
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public Documentation getDocu()
   {
     return docu;
@@ -283,7 +275,6 @@ public class MessageImpl extends MinimalEObjectImpl.Container implements Message
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setDocu(Documentation newDocu)
   {
     if (newDocu != docu)
@@ -438,7 +429,7 @@ public class MessageImpl extends MinimalEObjectImpl.Container implements Message
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuilder result = new StringBuilder(super.toString());
+    StringBuffer result = new StringBuffer(super.toString());
     result.append(" (priv: ");
     result.append(priv);
     result.append(", name: ");
