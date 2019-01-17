@@ -283,8 +283,9 @@ class ActorClassGen extends GenericActorClassGenerator {
 
 		/* operations */
 		«FOR op : ac.latestOperations»
-			«val args = op.argList»
-			#define «op.name»(«args») «ac.name»_«op.name»(self«IF !op.arguments.empty», «args»«ENDIF»)
+			«val params = op.operationParams»
+			«val args = op.operationArgs»
+			#define «op.name»(«params») «ac.name»_«op.name»(self«IF !op.arguments.empty», «args»«ENDIF»)
 		«ENDFOR»
 
 		/* attributes */
@@ -295,8 +296,9 @@ class ActorClassGen extends GenericActorClassGenerator {
 		/* port operations */
 		«FOR p : portsWithOperations»
 			«FOR op : p.portClass.operations»
-				«val args = op.argList»
-				#define «p.name»_«op.name»(«args») «p.portClassName»_«op.name»((«p.portClassName»*)&self->constData->«p.name»«IF !op.arguments.empty», «args»«ENDIF»)
+				«val params = op.operationParams»
+				«val args = op.operationArgs»
+				#define «p.name»_«op.name»(«params») «p.portClassName»_«op.name»((«p.portClassName»*)&self->constData->«p.name»«IF !op.arguments.empty», «args»«ENDIF»)
 			«ENDFOR»
 		«ENDFOR»
 
@@ -305,8 +307,22 @@ class ActorClassGen extends GenericActorClassGenerator {
 	'''
 	}
 
-	private def argList(Operation op) {
-		'''«FOR a : op.arguments SEPARATOR ", "»«a.name»«ENDFOR»'''
+	private def operationParams(Operation op) {
+		op.arguments.map[
+			switch it {
+				case isVarargs: '...'
+				default: name
+			}
+		].join(', ')
+	}
+	
+	private def operationArgs(Operation op) {
+		op.arguments.map[
+			switch it {
+				case isVarargs: '__VA_ARGS__'
+				default: name
+			}
+		].join(', ')
 	}
 
 	def protected generateSourceFile(Root root, ExpandedActorClass xpac) {

@@ -6,7 +6,6 @@ RoomModel CompileTests {
 	import StatemachineInterfaceTestModel.StatemachineInterfaceTest from "StatemachineInterfaceTest.room"
 	import StatemachineInterfaceTestInheritedModel.StatemachineInterfaceInheritedTest from "StatemachineInterfaceInheritedTest.room"
 	import ContinuationTransitionTest.ContinuationTransitionTest from "ContinuationTransitionTest.room"
-	import VarargsTest.* from "VarargsTest.room"
 
 	ActorClass CompileTests {
 		@TestInstance
@@ -17,7 +16,6 @@ RoomModel CompileTests {
 			ActorRef statemachineInterfaceTest : StatemachineInterfaceTest
 			ActorRef statemachineInterfaceInheritedTest : StatemachineInterfaceInheritedTest
 			ActorRef continuationTransitionTest : ContinuationTransitionTest
-			ActorRef varargsTest : AVarargs
 		}
 		Behavior {
 			ctor {

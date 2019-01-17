@@ -120,8 +120,9 @@ class DataClassGen {
 		
 		/* operations */
 		«FOR op : dc.allOperations»
-			«val args = op.argList»
-			#define «op.name»(«args») «dc.name»_«op.name»(self«IF !op.arguments.empty», «args»«ENDIF»)
+			«val params = op.operationParams»
+			«val args = op.operationArgs»
+			#define «op.name»(«params») «dc.name»_«op.name»(self«IF !op.arguments.empty», «args»«ENDIF»)
 		«ENDFOR»
 		
 		/* attributes */
@@ -134,8 +135,22 @@ class DataClassGen {
 	'''
 	}
 	
-	private def argList(Operation op) {
-		'''«FOR a : op.arguments SEPARATOR ", "»«a.name»«ENDFOR»'''
+	private def operationParams(Operation op) {
+		op.arguments.map[
+			switch it {
+				case isVarargs: '...'
+				default: name
+			}
+		].join(', ')
+	}
+	
+	private def operationArgs(Operation op) {
+		op.arguments.map[
+			switch it {
+				case isVarargs: '__VA_ARGS__'
+				default: name
+			}
+		].join(', ')
 	}
 	
 	def generateSourceFile(Root root, DataClass dc) {'''

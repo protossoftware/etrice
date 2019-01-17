@@ -152,8 +152,9 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 			
 			/* operations */
 			«FOR op : portClass.operations»
-				«val args = op.argList»
-				#define «op.name»(«args») «portClassName»_«op.name»(self«IF !op.arguments.empty», «args»«ENDIF»)
+				«val params = op.operationParams»
+				«val args = op.operationArgs»
+				#define «op.name»(«params») «portClassName»_«op.name»(self«IF !op.arguments.empty», «args»«ENDIF»)
 			«ENDFOR»
 			
 			/* attributes */
@@ -164,8 +165,22 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 	'''
 	}
 	
-	private def argList(Operation op) {
-		'''«FOR a : op.arguments SEPARATOR ", "»«a.name»«ENDFOR»'''
+	private def operationParams(Operation op) {
+		op.arguments.map[
+			switch it {
+				case isVarargs: '...'
+				default: name
+			}
+		].join(', ')
+	}
+	
+	private def operationArgs(Operation op) {
+		op.arguments.map[
+			switch it {
+				case isVarargs: '__VA_ARGS__'
+				default: name
+			}
+		].join(', ')
 	}
 	
 	def private generateSourceFile(Root root, ProtocolClass pc) {'''

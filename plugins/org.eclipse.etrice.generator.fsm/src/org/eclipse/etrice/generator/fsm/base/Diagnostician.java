@@ -87,17 +87,21 @@ public class Diagnostician implements IDiagnostician {
 			}
 			
 			EObject errorObject = null;
-			Object obj = source.eGet(feature);
-			if (feature.isMany() && obj instanceof List<?>) {
-				if (idx>=0) {
-					List<?> list = (List<?>) obj;
-					if (list.size()>idx) {
-						errorObject = (EObject) list.get(idx);
+			if(feature != null) {
+				Object obj = source.eGet(feature);
+				if (feature.isMany() && obj instanceof List<?>) {
+					if (idx>=0) {
+						List<?> list = (List<?>) obj;
+						if (list.size()>idx) {
+							errorObject = (EObject) list.get(idx);
+						}
 					}
 				}
-			}
-			else {
-				errorObject = (EObject) obj;
+				else {
+					errorObject = (EObject) obj;
+				}
+			} else {
+				errorObject = source;
 			}
 			if (errorObject!=null) {
 				// prefer location to toString()

@@ -1,17 +1,66 @@
 RoomModel VarargsTest {
 
 	import room.basic.types.* from "../../../runtime/${etModellib}/model/Types.room"
+	import room.basic.test.* from "../../../runtime/${etModellib}/model/Tests.room"
 
 	ActorClass AVarargs {
+		@TestInstance
 		Structure {
+			Attribute caseId : int32
+			
 			Port port: PVarargs
 			Attribute attr: DVarargs
+			Attribute text : string = "text"
 		}
 		Behavior {
 
 			// varargs keyword is hidden in proposals -> internal use
 			Operation log(format: string, args: string varargs) ''''''
 			Operation single(args: string varargs) ''''''
+			Operation callTest() '''
+				//log("text");
+				log("text %d", "5");
+				log("text %d, %s", "5", text);
+				//single();
+				single("5");
+				single("5", "txt");
+				
+				// not supported by translation
+				/*
+				port.callTest();
+				attr.callTest();
+				
+				//port.log("text");
+				port.log("text %d", "5");
+				port.log("text %d, %s", "5", "txt");
+				//port.single();
+				port.single("5");
+				port.single("5", "txt");
+				
+				//attr.log("text");
+				attr.log("text %d", "5");
+				attr.log("text %d, %s", "5", "txt");
+				//attr.single();
+				attr.single("5");
+				attr.single("5", "txt");
+				*/
+			'''
+			
+			ctor '''
+				caseId = etUnit_openAll("log", "VarargsTest", "org.eclipse.etrice.generator.common.tests.VarargsTest", "VarargsTest_case");
+			'''
+			dtor '''
+				etUnit_closeAll(caseId);
+			'''
+			StateMachine {
+				Transition init: initial -> finish
+				State finish {
+					entry '''
+						callTest();
+						etUnit_testFinished(caseId);
+					'''
+				}
+			}
 		}
 	}
 
@@ -23,6 +72,14 @@ RoomModel VarargsTest {
 		{
 			Operation log(format: string, args: string varargs) ''''''
 			Operation single(args: string varargs) ''''''
+			Operation callTest() '''
+				//log("text");
+				log("text %d", "5");
+				log("text %d, %s", "5", "txt");
+				//single();
+				single("5");
+				single("5", "txt");
+			'''
 		}
 	}
 
@@ -32,5 +89,13 @@ RoomModel VarargsTest {
 		// varargs keyword is hidden in proposals -> internal use
 		Operation log(format: string, args: string varargs) ''''''
 		Operation single(args: string varargs) ''''''
+		Operation callTest() '''
+			//log("text");
+			log("text %d", "5");
+			log("text %d, %s", "5", "txt");
+			//single();
+			single("5");
+			single("5", "txt");
+		'''
 	}
 }

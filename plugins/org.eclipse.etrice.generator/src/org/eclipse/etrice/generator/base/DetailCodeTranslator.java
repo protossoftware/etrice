@@ -157,7 +157,8 @@ public class DetailCodeTranslator extends FSMDetailCodeTranslator {
 			Operation operation = name2op.get(token);
 			if (operation!=null && (operation.eContainer() instanceof ActorClass || operation.eContainer() instanceof DataClass)) {
 				ArrayList<String> args = getArgs(text, curr);
-				if (args!=null && operation.getArguments().size()==args.size()) {
+				boolean isVarargs = operation.getArguments().stream().anyMatch(arg -> arg.isVarargs());
+				if (args!=null && (operation.getArguments().size()==args.size() || isVarargs)) {
 					// recursively apply this algorithm to each argument
 					for (int i=0; i<args.size(); ++i) {
 						String transArg = translateText(args.remove(i));
