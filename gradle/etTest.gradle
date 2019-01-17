@@ -63,8 +63,8 @@ ext.createTest = { lang, name, models, options = [] ->
 						lib project: ':runtime:org.eclipse.etrice.runtime.c', library: 'etrice_runtime_c', linkage: 'static'
 					}
 					binaries.all { 
-						cCompiler.args '-g3'
-						cppCompiler.args '-g3'
+						cCompiler.args '-g3', '-std=c99'
+						cppCompiler.args '-g3', '-std=c99'
 						if(isFamily(FAMILY_UNIX)) { linker.args '-lpthread', '-lrt', '-lm' }
 					}
 				}

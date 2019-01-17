@@ -26,7 +26,7 @@ model {
 			}
 			binaries {
 				withType(SharedLibraryBinarySpec) { buildable = false }
-				all { cCompiler.args '-g3' }
+				all { cCompiler.args '-g3', '-std=c99' }
 			}
 		}
 	}

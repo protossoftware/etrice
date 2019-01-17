@@ -33,6 +33,7 @@ extern "C" {
 
 #include <stddef.h>
 #include <stdint.h>
+#include <inttypes.h>
 #include <stdbool.h>
 
 /* --- Data types for room.basic.types */
