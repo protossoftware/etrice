@@ -17,28 +17,28 @@ package org.eclipse.etrice.generator.doc.gen
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import java.util.List
+import org.eclipse.emf.ecore.EObject
 import org.eclipse.etrice.core.common.base.Documentation
 import org.eclipse.etrice.core.fsm.fSM.State
+import org.eclipse.etrice.core.fsm.fSM.StateGraph
 import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.etrice.core.room.ActorClass
 import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.core.room.CompoundProtocolClass
 import org.eclipse.etrice.core.room.DataClass
 import org.eclipse.etrice.core.room.EnumerationType
+import org.eclipse.etrice.core.room.GeneralProtocolClass
 import org.eclipse.etrice.core.room.LogicalSystem
+import org.eclipse.etrice.core.room.Operation
 import org.eclipse.etrice.core.room.Port
 import org.eclipse.etrice.core.room.ProtocolClass
 import org.eclipse.etrice.core.room.RoomClass
 import org.eclipse.etrice.core.room.RoomModel
-import org.eclipse.etrice.core.room.StandardOperation
 import org.eclipse.etrice.core.room.SubSystemClass
 import org.eclipse.etrice.core.room.util.RoomHelpers
 import org.eclipse.etrice.generator.base.io.IGeneratorFileIO
 import org.eclipse.etrice.generator.fsm.base.CodegenHelpers
-import org.eclipse.etrice.core.room.GeneralProtocolClass
-import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider
-import org.eclipse.etrice.core.fsm.fSM.StateGraph
 
 @Singleton
 class AsciiDocGen {
@@ -254,6 +254,7 @@ class AsciiDocGen {
 				| «ims.docText»
 			«ENDFOR»
 			|===
+			
 		«ENDIF»
 		«IF !pc.allOutgoingMessages.empty»
 			
@@ -267,6 +268,17 @@ class AsciiDocGen {
 				| «oms.docText»
 			«ENDFOR»
 			|===
+			
+		«ENDIF»
+		
+		«IF !pc.getAllOperations(true).empty»
+			==== Regular PortClass
+			«pc.getAllOperations(true).generateOperationsDoc»
+		«ENDIF»
+		
+		«IF !pc.getAllOperations(false).empty»
+			==== Conjugated PortClass
+			«pc.getAllOperations(false).generateOperationsDoc»
 		«ENDIF»
 	'''
 	
@@ -374,7 +386,7 @@ class AsciiDocGen {
 		|===
 	'''
 	
-	def private generateOperationsDoc(List<StandardOperation> operations) '''
+	def private generateOperationsDoc(List<? extends Operation> operations) '''
 		.Operations
 		|===
 		| Name | Return type | Arguments | Description

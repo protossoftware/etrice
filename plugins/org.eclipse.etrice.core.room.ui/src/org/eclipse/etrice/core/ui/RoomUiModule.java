@@ -15,6 +15,7 @@
 package org.eclipse.etrice.core.ui;
 
 import org.eclipse.etrice.core.common.ui.autoedit.BaseAutoEditStrategyProvider;
+import org.eclipse.etrice.core.common.ui.documentation.CommentDocumentationProvider;
 import org.eclipse.etrice.core.common.ui.editor.BaseDoubleClickStrategyProvider;
 import org.eclipse.etrice.core.common.ui.editor.model.BaseTokenTypeToPartitionMapper;
 import org.eclipse.etrice.core.common.ui.hover.IKeywordHoverContentProvider;
@@ -29,6 +30,7 @@ import org.eclipse.etrice.core.ui.outline.RoomOutlinePage;
 import org.eclipse.etrice.doc.KeywordHoverContentProvider;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
+import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategyProvider;
 import org.eclipse.xtext.ui.editor.doubleClicking.DoubleClickStrategyProvider;
@@ -103,6 +105,10 @@ public class RoomUiModule extends org.eclipse.etrice.core.ui.AbstractRoomUiModul
 	
 	public Class<? extends DoubleClickStrategyProvider> bindDoubleClickStrategyProvider() {
 		return BaseDoubleClickStrategyProvider.class;
+	}
+	
+	public Class<? extends IEObjectDocumentationProvider> bindIEObjectDocumentationProvider() {
+		return CommentDocumentationProvider.class;
 	}
 	
 	// auto format for quick fix
