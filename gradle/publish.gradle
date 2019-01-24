@@ -1,29 +1,34 @@
 apply plugin: 'maven-publish'
 
-publishing {
-	publications {
-		etrice(MavenPublication) {
-			from components.java
+ext.publishRepos = {
+	maven {
+		name 'eclipse'
+		def releaseRepoUrl = 'https://repo.eclipse.org/content/repositories/etrice-releases'
+		def snapshotRepoUrl = 'https://repo.eclipse.org/content/repositories/etrice-snapshots'
+		url = version.endsWith('SNAPSHOT') ? snapshotRepoUrl : releaseRepoUrl
+		credentials {
+			username project.properties.eclipseRepoUsername
+			password project.properties.eclipseRepoPassword
 		}
 	}
-	repositories {
-		maven {
-			name 'eclipse'
-			def releaseRepoUrl = 'https://repo.eclipse.org/content/repositories/etrice-releases'
-            def snapshotRepoUrl = 'https://repo.eclipse.org/content/repositories/etrice-snapshots'
-            url = version.endsWith('SNAPSHOT') ? snapshotRepoUrl : releaseRepoUrl
-			credentials {
-				username project.properties.eclipseRepoUsername
-				password project.properties.eclipseRepoPassword
+	maven {
+		name 'protos'
+		url project.properties.protosPublicArtifactoryUrl
+		credentials {
+			username project.properties.protosPublicArtifactoryUsername
+			password project.properties.protosPublicArtifactoryPassword
+		}
+	}
+}
+
+// default for java projects
+if (project.plugins.hasPlugin('java')) { 
+	publishing {
+		publications {
+			etrice(MavenPublication) {
+				from components.java
 			}
 		}
-		maven {
-			name 'protos'
-			url project.properties.protosPublicArtifactoryUrl
-			credentials {
-				username project.properties.protosPublicArtifactoryUsername
-				password project.properties.protosPublicArtifactoryPassword
-			}
-		}
+		repositories publishRepos
 	}
 }

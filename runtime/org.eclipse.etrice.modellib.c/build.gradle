@@ -1,5 +1,5 @@
 apply plugin: 'c'
-
+apply from: "$rootDir/gradle/publish.gradle"
 apply from: "$rootDir/gradle/etGenerator.gradle"
 
 def models = [
@@ -33,3 +33,21 @@ model {
 }
 
 clean.delete 'src-gen'
+
+task zipModellib(type: Zip, dependsOn: generate) {
+    archiveName = project.name + "-${version}.zip"
+    destinationDir = buildDir
+    from projectDir
+	include 'src-gen/**', 'model/**/*.room'
+	includeEmptyDirs false
+}
+build.dependsOn zipModellib
+
+publishing {
+    publications {
+        gradle(MavenPublication) {
+            artifact zipModellib
+        }
+    }
+	repositories publishRepos
+}
