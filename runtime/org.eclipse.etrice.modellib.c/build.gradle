@@ -45,7 +45,7 @@ build.dependsOn zipModellib
 
 publishing {
     publications {
-        gradle(MavenPublication) {
+        etrice(MavenPublication) {
             artifact zipModellib
         }
     }
