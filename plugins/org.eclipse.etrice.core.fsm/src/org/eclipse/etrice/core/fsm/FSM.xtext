@@ -78,6 +78,7 @@ State: SimpleState | RefinedState;
 
 SimpleState:
 	'State' name=ID (docu=Documentation)? ('{'
+		annotations+=Annotation*
 		('entry' entryCode=DetailCode)?
 		('exit' exitCode=DetailCode)?
 		('do' doCode=DetailCode)?
@@ -86,6 +87,7 @@ SimpleState:
 
 RefinedState:
 	'RefinedState' target=[State|FQN] (docu=Documentation)? '{'
+		annotations+=Annotation*
 		('entry' entryCode=DetailCode)?
 		('exit' exitCode=DetailCode)?
 		('do' doCode=DetailCode)?
@@ -133,6 +135,7 @@ InitialTransition:
 	'Transition' (name=ID)? ':' 'initial' '->' to=TransitionTerminal 
 	(docu=Documentation)?
 	('{'
+		annotations+=Annotation*
 		('action' action=DetailCode)? 
 	'}')?;
 
@@ -140,6 +143,7 @@ ContinuationTransition:
 	'Transition' (name=ID)? ':' from=TransitionTerminal '->' to=TransitionTerminal
 	(docu=Documentation)?
 	('{'
+		annotations+=Annotation*
 		('action' action=DetailCode)? 
 	'}')?;
 
@@ -148,6 +152,7 @@ TriggeredTransition:
 	(docu=Documentation)?
 	'{'
 		'triggers' '{'
+			annotations+=Annotation*
 			triggers+=Trigger ('or' triggers+=Trigger)*
 		'}'
 		('action' action=DetailCode)? 
@@ -157,6 +162,7 @@ GuardedTransition:
 	'Transition' (name=ID)? ':' from=TransitionTerminal '->' to=TransitionTerminal
 	(docu=Documentation)?
 	'{'
+		annotations+=Annotation*
 		'guard' guard=DetailCode
 		('action' action=DetailCode)? 
 	'}';
@@ -165,6 +171,7 @@ CPBranchTransition:
 	'Transition' (name=ID)? ':' from=TransitionTerminal '->' to=TransitionTerminal
 	(docu=Documentation)?
 	'{'
+		annotations+=Annotation*
 		'cond' condition=DetailCode
 		('action' action=DetailCode)? 
 	'}';
@@ -174,6 +181,7 @@ RefinedTransition:
 	'RefinedTransition' target=[Transition|FQN]
 	(docu=Documentation)?
 	'{'
+		annotations+=Annotation*
 		'action' action=DetailCode
 	'}'
 ;

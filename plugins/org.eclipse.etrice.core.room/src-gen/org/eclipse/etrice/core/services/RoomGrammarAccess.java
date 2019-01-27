@@ -3241,6 +3241,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cLogicalSystemKeyword_6 = (Keyword)cAlternatives.eContents().get(6);
 		private final Keyword cPortKeyword_7 = (Keyword)cAlternatives.eContents().get(7);
 		private final Keyword cMessageKeyword_8 = (Keyword)cAlternatives.eContents().get(8);
+		private final Keyword cStateKeyword_9 = (Keyword)cAlternatives.eContents().get(9);
+		private final Keyword cTransitionKeyword_10 = (Keyword)cAlternatives.eContents().get(10);
 		
 		//@ Override AnnotationTargetType:
 		//	'DataClass' |
@@ -3251,11 +3253,13 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//	'SubSystemClass' |
 		//	'LogicalSystem' |
 		//	'Port' |
-		//	'Message';
+		//	'Message' |
+		//	'State' |
+		//	'Transition';
 		@Override public ParserRule getRule() { return rule; }
 
 		//'DataClass' | 'ActorClass' | 'ActorBehavior' | 'ProtocolClass' | 'CompoundProtocolClass' | 'SubSystemClass' |
-		//'LogicalSystem' | 'Port' | 'Message'
+		//'LogicalSystem' | 'Port' | 'Message' | 'State' | 'Transition'
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//'DataClass'
@@ -3284,6 +3288,12 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 
 		//'Message'
 		public Keyword getMessageKeyword_8() { return cMessageKeyword_8; }
+
+		//'State'
+		public Keyword getStateKeyword_9() { return cStateKeyword_9; }
+
+		//'Transition'
+		public Keyword getTransitionKeyword_10() { return cTransitionKeyword_10; }
 	}
 	
 	
@@ -3377,6 +3387,10 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cPORTPortKeyword_7_0 = (Keyword)cPORTEnumLiteralDeclaration_7.eContents().get(0);
 		private final EnumLiteralDeclaration cMESSAGEEnumLiteralDeclaration_8 = (EnumLiteralDeclaration)cAlternatives.eContents().get(8);
 		private final Keyword cMESSAGEMessageKeyword_8_0 = (Keyword)cMESSAGEEnumLiteralDeclaration_8.eContents().get(0);
+		private final EnumLiteralDeclaration cSTATEEnumLiteralDeclaration_9 = (EnumLiteralDeclaration)cAlternatives.eContents().get(9);
+		private final Keyword cSTATEStateKeyword_9_0 = (Keyword)cSTATEEnumLiteralDeclaration_9.eContents().get(0);
+		private final EnumLiteralDeclaration cTRANSITIONEnumLiteralDeclaration_10 = (EnumLiteralDeclaration)cAlternatives.eContents().get(10);
+		private final Keyword cTRANSITIONTransitionKeyword_10_0 = (Keyword)cTRANSITIONEnumLiteralDeclaration_10.eContents().get(0);
 		
 		//enum RoomAnnotationTargetEnum:
 		//	DATA_CLASS='DataClass' |
@@ -3387,12 +3401,14 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//	SUBSYSTEM_CLASS='SubSystemClass' |
 		//	LOGICAL_SYSTEM_CLASS='LogicalSystem' |
 		//	PORT='Port' |
-		//	MESSAGE='Message';
+		//	MESSAGE='Message' |
+		//	STATE='State' |
+		//	TRANSITION='Transition';
 		public EnumRule getRule() { return rule; }
 
 		//DATA_CLASS='DataClass' | ACTOR_CLASS='ActorClass' | ACTOR_BEHAVIOR='ActorBehavior' | PROTOCOL_CLASS='ProtocolClass' |
 		//COMPOUND_PROTOCOL_CLASS='CompoundProtocolClass' | SUBSYSTEM_CLASS='SubSystemClass' |
-		//LOGICAL_SYSTEM_CLASS='LogicalSystem' | PORT='Port' | MESSAGE='Message'
+		//LOGICAL_SYSTEM_CLASS='LogicalSystem' | PORT='Port' | MESSAGE='Message' | STATE='State' | TRANSITION='Transition'
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//DATA_CLASS='DataClass'
@@ -3448,6 +3464,18 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 
 		//'Message'
 		public Keyword getMESSAGEMessageKeyword_8_0() { return cMESSAGEMessageKeyword_8_0; }
+
+		//STATE='State'
+		public EnumLiteralDeclaration getSTATEEnumLiteralDeclaration_9() { return cSTATEEnumLiteralDeclaration_9; }
+
+		//'State'
+		public Keyword getSTATEStateKeyword_9_0() { return cSTATEStateKeyword_9_0; }
+
+		//TRANSITION='Transition'
+		public EnumLiteralDeclaration getTRANSITIONEnumLiteralDeclaration_10() { return cTRANSITIONEnumLiteralDeclaration_10; }
+
+		//'Transition'
+		public Keyword getTRANSITIONTransitionKeyword_10_0() { return cTRANSITIONTransitionKeyword_10_0; }
 	}
 	
 	private final RoomModelElements pRoomModel;
@@ -4259,7 +4287,9 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//	'SubSystemClass' |
 	//	'LogicalSystem' |
 	//	'Port' |
-	//	'Message';
+	//	'Message' |
+	//	'State' |
+	//	'Transition';
 	public AnnotationTargetTypeElements getAnnotationTargetTypeAccess() {
 		return pAnnotationTargetType;
 	}
@@ -4277,7 +4307,9 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//	SUBSYSTEM_CLASS='SubSystemClass' |
 	//	LOGICAL_SYSTEM_CLASS='LogicalSystem' |
 	//	PORT='Port' |
-	//	MESSAGE='Message';
+	//	MESSAGE='Message' |
+	//	STATE='State' |
+	//	TRANSITION='Transition';
 	public RoomAnnotationTargetEnumElements getRoomAnnotationTargetEnumAccess() {
 		return eRoomAnnotationTargetEnum;
 	}
@@ -4374,8 +4406,9 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//SimpleState:
-	//	'State' name=ID docu=Documentation? ('{' ('entry' entryCode=DetailCode)? ('exit' exitCode=DetailCode)? ('do'
-	//	doCode=DetailCode)? ('subgraph' subgraph=StateGraph)?
+	//	'State' name=ID docu=Documentation? ('{'
+	//	annotations+=Annotation* ('entry' entryCode=DetailCode)? ('exit' exitCode=DetailCode)? ('do' doCode=DetailCode)?
+	//	('subgraph' subgraph=StateGraph)?
 	//	'}')?;
 	public FSMGrammarAccess.SimpleStateElements getSimpleStateAccess() {
 		return gaFSM.getSimpleStateAccess();
@@ -4386,8 +4419,9 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//RefinedState:
-	//	'RefinedState' target=[State|FQN] docu=Documentation? '{' ('entry' entryCode=DetailCode)? ('exit'
-	//	exitCode=DetailCode)? ('do' doCode=DetailCode)? ('subgraph' subgraph=StateGraph)?
+	//	'RefinedState' target=[State|FQN] docu=Documentation? '{'
+	//	annotations+=Annotation* ('entry' entryCode=DetailCode)? ('exit' exitCode=DetailCode)? ('do' doCode=DetailCode)?
+	//	('subgraph' subgraph=StateGraph)?
 	//	'}';
 	public FSMGrammarAccess.RefinedStateElements getRefinedStateAccess() {
 		return gaFSM.getRefinedStateAccess();
@@ -4510,7 +4544,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 
 	//InitialTransition:
 	//	'Transition' name=ID? ':' 'initial' '->' to=TransitionTerminal
-	//	docu=Documentation? ('{' ('action' action=DetailCode)?
+	//	docu=Documentation? ('{'
+	//	annotations+=Annotation* ('action' action=DetailCode)?
 	//	'}')?;
 	public FSMGrammarAccess.InitialTransitionElements getInitialTransitionAccess() {
 		return gaFSM.getInitialTransitionAccess();
@@ -4522,7 +4557,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 
 	//ContinuationTransition:
 	//	'Transition' name=ID? ':' from=TransitionTerminal '->' to=TransitionTerminal
-	//	docu=Documentation? ('{' ('action' action=DetailCode)?
+	//	docu=Documentation? ('{'
+	//	annotations+=Annotation* ('action' action=DetailCode)?
 	//	'}')?;
 	public FSMGrammarAccess.ContinuationTransitionElements getContinuationTransitionAccess() {
 		return gaFSM.getContinuationTransitionAccess();
@@ -4537,6 +4573,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//	docu=Documentation?
 	//	'{'
 	//	'triggers' '{'
+	//	annotations+=Annotation*
 	//	triggers+=Trigger ('or' triggers+=Trigger)*
 	//	'}' ('action' action=DetailCode)?
 	//	'}';
@@ -4552,6 +4589,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//	'Transition' name=ID? ':' from=TransitionTerminal '->' to=TransitionTerminal
 	//	docu=Documentation?
 	//	'{'
+	//	annotations+=Annotation*
 	//	'guard' guard=DetailCode ('action' action=DetailCode)?
 	//	'}';
 	public FSMGrammarAccess.GuardedTransitionElements getGuardedTransitionAccess() {
@@ -4566,6 +4604,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//	'Transition' name=ID? ':' from=TransitionTerminal '->' to=TransitionTerminal
 	//	docu=Documentation?
 	//	'{'
+	//	annotations+=Annotation*
 	//	'cond' condition=DetailCode ('action' action=DetailCode)?
 	//	'}';
 	public FSMGrammarAccess.CPBranchTransitionElements getCPBranchTransitionAccess() {
@@ -4580,6 +4619,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//RefinedTransition:
 	//	'RefinedTransition' target=[Transition|FQN] docu=Documentation?
 	//	'{'
+	//	annotations+=Annotation*
 	//	'action' action=DetailCode
 	//	'}';
 	public FSMGrammarAccess.RefinedTransitionElements getRefinedTransitionAccess() {

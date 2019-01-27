@@ -72,7 +72,6 @@ public class StandardOperationImpl extends OperationImpl implements StandardOper
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public boolean isOverride()
   {
     return override;
@@ -83,7 +82,6 @@ public class StandardOperationImpl extends OperationImpl implements StandardOper
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setOverride(boolean newOverride)
   {
     boolean oldOverride = override;
@@ -168,7 +166,7 @@ public class StandardOperationImpl extends OperationImpl implements StandardOper
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuilder result = new StringBuilder(super.toString());
+    StringBuffer result = new StringBuffer(super.toString());
     result.append(" (override: ");
     result.append(override);
     result.append(')');

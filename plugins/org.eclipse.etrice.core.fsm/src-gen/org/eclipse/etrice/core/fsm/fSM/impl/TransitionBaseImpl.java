@@ -2,14 +2,22 @@
  */
 package org.eclipse.etrice.core.fsm.fSM.impl;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+
+import org.eclipse.etrice.core.common.base.Annotation;
 import org.eclipse.etrice.core.common.base.Documentation;
 
 import org.eclipse.etrice.core.fsm.fSM.DetailCode;
@@ -25,6 +33,7 @@ import org.eclipse.etrice.core.fsm.fSM.TransitionBase;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.fsm.fSM.impl.TransitionBaseImpl#getDocu <em>Docu</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.fsm.fSM.impl.TransitionBaseImpl#getAnnotations <em>Annotations</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.fsm.fSM.impl.TransitionBaseImpl#getAction <em>Action</em>}</li>
  * </ul>
  *
@@ -41,6 +50,16 @@ public class TransitionBaseImpl extends StateGraphItemImpl implements Transition
    * @ordered
    */
   protected Documentation docu;
+
+  /**
+   * The cached value of the '{@link #getAnnotations() <em>Annotations</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getAnnotations()
+   * @generated
+   * @ordered
+   */
+  protected EList<Annotation> annotations;
 
   /**
    * The cached value of the '{@link #getAction() <em>Action</em>}' containment reference.
@@ -126,6 +145,20 @@ public class TransitionBaseImpl extends StateGraphItemImpl implements Transition
    * <!-- end-user-doc -->
    * @generated
    */
+  public EList<Annotation> getAnnotations()
+  {
+    if (annotations == null)
+    {
+      annotations = new EObjectContainmentEList<Annotation>(Annotation.class, this, FSMPackage.TRANSITION_BASE__ANNOTATIONS);
+    }
+    return annotations;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public DetailCode getAction()
   {
     return action;
@@ -181,6 +214,8 @@ public class TransitionBaseImpl extends StateGraphItemImpl implements Transition
     {
       case FSMPackage.TRANSITION_BASE__DOCU:
         return basicSetDocu(null, msgs);
+      case FSMPackage.TRANSITION_BASE__ANNOTATIONS:
+        return ((InternalEList<?>)getAnnotations()).basicRemove(otherEnd, msgs);
       case FSMPackage.TRANSITION_BASE__ACTION:
         return basicSetAction(null, msgs);
     }
@@ -199,6 +234,8 @@ public class TransitionBaseImpl extends StateGraphItemImpl implements Transition
     {
       case FSMPackage.TRANSITION_BASE__DOCU:
         return getDocu();
+      case FSMPackage.TRANSITION_BASE__ANNOTATIONS:
+        return getAnnotations();
       case FSMPackage.TRANSITION_BASE__ACTION:
         return getAction();
     }
@@ -210,6 +247,7 @@ public class TransitionBaseImpl extends StateGraphItemImpl implements Transition
    * <!-- end-user-doc -->
    * @generated
    */
+  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
@@ -217,6 +255,10 @@ public class TransitionBaseImpl extends StateGraphItemImpl implements Transition
     {
       case FSMPackage.TRANSITION_BASE__DOCU:
         setDocu((Documentation)newValue);
+        return;
+      case FSMPackage.TRANSITION_BASE__ANNOTATIONS:
+        getAnnotations().clear();
+        getAnnotations().addAll((Collection<? extends Annotation>)newValue);
         return;
       case FSMPackage.TRANSITION_BASE__ACTION:
         setAction((DetailCode)newValue);
@@ -238,6 +280,9 @@ public class TransitionBaseImpl extends StateGraphItemImpl implements Transition
       case FSMPackage.TRANSITION_BASE__DOCU:
         setDocu((Documentation)null);
         return;
+      case FSMPackage.TRANSITION_BASE__ANNOTATIONS:
+        getAnnotations().clear();
+        return;
       case FSMPackage.TRANSITION_BASE__ACTION:
         setAction((DetailCode)null);
         return;
@@ -257,6 +302,8 @@ public class TransitionBaseImpl extends StateGraphItemImpl implements Transition
     {
       case FSMPackage.TRANSITION_BASE__DOCU:
         return docu != null;
+      case FSMPackage.TRANSITION_BASE__ANNOTATIONS:
+        return annotations != null && !annotations.isEmpty();
       case FSMPackage.TRANSITION_BASE__ACTION:
         return action != null;
     }

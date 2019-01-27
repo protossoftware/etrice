@@ -89,7 +89,6 @@ public class BindingEndPointImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public ActorContainerRef getActorRef()
   {
     if (actorRef != null && actorRef.eIsProxy())
@@ -120,7 +119,6 @@ public class BindingEndPointImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setActorRef(ActorContainerRef newActorRef)
   {
     ActorContainerRef oldActorRef = actorRef;
@@ -134,7 +132,6 @@ public class BindingEndPointImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public Port getPort()
   {
     if (port != null && port.eIsProxy())
@@ -165,7 +162,6 @@ public class BindingEndPointImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setPort(Port newPort)
   {
     Port oldPort = port;
@@ -179,7 +175,6 @@ public class BindingEndPointImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public SubProtocol getSub()
   {
     if (sub != null && sub.eIsProxy())
@@ -210,7 +205,6 @@ public class BindingEndPointImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setSub(SubProtocol newSub)
   {
     SubProtocol oldSub = sub;

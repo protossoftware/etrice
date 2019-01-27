@@ -155,7 +155,6 @@ public class DataClassImpl extends ComplexTypeImpl implements DataClass
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public DataClass getBase()
   {
     if (base != null && base.eIsProxy())
@@ -186,7 +185,6 @@ public class DataClassImpl extends ComplexTypeImpl implements DataClass
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setBase(DataClass newBase)
   {
     DataClass oldBase = base;
@@ -200,7 +198,6 @@ public class DataClassImpl extends ComplexTypeImpl implements DataClass
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EList<Annotation> getAnnotations()
   {
     if (annotations == null)
@@ -215,7 +212,6 @@ public class DataClassImpl extends ComplexTypeImpl implements DataClass
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public DetailCode getUserCode1()
   {
     return userCode1;
@@ -243,7 +239,6 @@ public class DataClassImpl extends ComplexTypeImpl implements DataClass
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setUserCode1(DetailCode newUserCode1)
   {
     if (newUserCode1 != userCode1)
@@ -265,7 +260,6 @@ public class DataClassImpl extends ComplexTypeImpl implements DataClass
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public DetailCode getUserCode2()
   {
     return userCode2;
@@ -293,7 +287,6 @@ public class DataClassImpl extends ComplexTypeImpl implements DataClass
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setUserCode2(DetailCode newUserCode2)
   {
     if (newUserCode2 != userCode2)
@@ -315,7 +308,6 @@ public class DataClassImpl extends ComplexTypeImpl implements DataClass
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public DetailCode getUserCode3()
   {
     return userCode3;
@@ -343,7 +335,6 @@ public class DataClassImpl extends ComplexTypeImpl implements DataClass
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setUserCode3(DetailCode newUserCode3)
   {
     if (newUserCode3 != userCode3)
@@ -365,7 +356,6 @@ public class DataClassImpl extends ComplexTypeImpl implements DataClass
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EList<StandardOperation> getOperations()
   {
     if (operations == null)
@@ -380,7 +370,6 @@ public class DataClassImpl extends ComplexTypeImpl implements DataClass
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EList<ClassStructor> getStructors()
   {
     if (structors == null)
@@ -395,7 +384,6 @@ public class DataClassImpl extends ComplexTypeImpl implements DataClass
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EList<Attribute> getAttributes()
   {
     if (attributes == null)

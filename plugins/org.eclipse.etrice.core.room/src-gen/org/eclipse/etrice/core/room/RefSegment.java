@@ -85,7 +85,7 @@ public interface RefSegment extends RoomElement
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='return getRef() + ((getIdx()&gt;=0)? \":\"+getIdx() : \"\");\r\n'"
+   * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='return getRef() + ((getIdx()>=0)? \":\"+getIdx() : \"\");\r\n'"
    * @generated
    */
   String toString();

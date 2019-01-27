@@ -1073,6 +1073,8 @@
     <eLiterals name="LOGICAL_SYSTEM_CLASS" value="6" literal="LogicalSystem"/>
     <eLiterals name="PORT" value="7" literal="Port"/>
     <eLiterals name="MESSAGE" value="8" literal="Message"/>
+    <eLiterals name="STATE" value="9" literal="State"/>
+    <eLiterals name="TRANSITION" value="10" literal="Transition"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RoomElement" interface="true">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

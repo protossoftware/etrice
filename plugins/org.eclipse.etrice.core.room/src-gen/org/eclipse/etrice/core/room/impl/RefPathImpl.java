@@ -71,7 +71,6 @@ public class RefPathImpl extends MinimalEObjectImpl.Container implements RefPath
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EList<RefSegment> getRefs()
   {
     if (refs == null)
@@ -86,7 +85,6 @@ public class RefPathImpl extends MinimalEObjectImpl.Container implements RefPath
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public String toString()
   {
     StringBuilder sb = new StringBuilder();

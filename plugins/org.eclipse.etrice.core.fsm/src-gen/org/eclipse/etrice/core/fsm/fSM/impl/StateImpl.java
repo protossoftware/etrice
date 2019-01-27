@@ -2,14 +2,22 @@
  */
 package org.eclipse.etrice.core.fsm.fSM.impl;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+
+import org.eclipse.etrice.core.common.base.Annotation;
 import org.eclipse.etrice.core.common.base.Documentation;
 
 import org.eclipse.etrice.core.fsm.fSM.DetailCode;
@@ -28,6 +36,7 @@ import org.eclipse.etrice.core.fsm.fSM.StateGraph;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.fsm.fSM.impl.StateImpl#getDocu <em>Docu</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.fsm.fSM.impl.StateImpl#getAnnotations <em>Annotations</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.fsm.fSM.impl.StateImpl#getEntryCode <em>Entry Code</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.fsm.fSM.impl.StateImpl#getExitCode <em>Exit Code</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.fsm.fSM.impl.StateImpl#getDoCode <em>Do Code</em>}</li>
@@ -47,6 +56,16 @@ public class StateImpl extends StateGraphNodeImpl implements State
    * @ordered
    */
   protected Documentation docu;
+
+  /**
+   * The cached value of the '{@link #getAnnotations() <em>Annotations</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getAnnotations()
+   * @generated
+   * @ordered
+   */
+  protected EList<Annotation> annotations;
 
   /**
    * The cached value of the '{@link #getEntryCode() <em>Entry Code</em>}' containment reference.
@@ -155,6 +174,20 @@ public class StateImpl extends StateGraphNodeImpl implements State
     }
     else if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, FSMPackage.STATE__DOCU, newDocu, newDocu));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EList<Annotation> getAnnotations()
+  {
+    if (annotations == null)
+    {
+      annotations = new EObjectContainmentEList<Annotation>(Annotation.class, this, FSMPackage.STATE__ANNOTATIONS);
+    }
+    return annotations;
   }
 
   /**
@@ -371,6 +404,8 @@ public class StateImpl extends StateGraphNodeImpl implements State
     {
       case FSMPackage.STATE__DOCU:
         return basicSetDocu(null, msgs);
+      case FSMPackage.STATE__ANNOTATIONS:
+        return ((InternalEList<?>)getAnnotations()).basicRemove(otherEnd, msgs);
       case FSMPackage.STATE__ENTRY_CODE:
         return basicSetEntryCode(null, msgs);
       case FSMPackage.STATE__EXIT_CODE:
@@ -395,6 +430,8 @@ public class StateImpl extends StateGraphNodeImpl implements State
     {
       case FSMPackage.STATE__DOCU:
         return getDocu();
+      case FSMPackage.STATE__ANNOTATIONS:
+        return getAnnotations();
       case FSMPackage.STATE__ENTRY_CODE:
         return getEntryCode();
       case FSMPackage.STATE__EXIT_CODE:
@@ -412,6 +449,7 @@ public class StateImpl extends StateGraphNodeImpl implements State
    * <!-- end-user-doc -->
    * @generated
    */
+  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
@@ -419,6 +457,10 @@ public class StateImpl extends StateGraphNodeImpl implements State
     {
       case FSMPackage.STATE__DOCU:
         setDocu((Documentation)newValue);
+        return;
+      case FSMPackage.STATE__ANNOTATIONS:
+        getAnnotations().clear();
+        getAnnotations().addAll((Collection<? extends Annotation>)newValue);
         return;
       case FSMPackage.STATE__ENTRY_CODE:
         setEntryCode((DetailCode)newValue);
@@ -449,6 +491,9 @@ public class StateImpl extends StateGraphNodeImpl implements State
       case FSMPackage.STATE__DOCU:
         setDocu((Documentation)null);
         return;
+      case FSMPackage.STATE__ANNOTATIONS:
+        getAnnotations().clear();
+        return;
       case FSMPackage.STATE__ENTRY_CODE:
         setEntryCode((DetailCode)null);
         return;
@@ -477,6 +522,8 @@ public class StateImpl extends StateGraphNodeImpl implements State
     {
       case FSMPackage.STATE__DOCU:
         return docu != null;
+      case FSMPackage.STATE__ANNOTATIONS:
+        return annotations != null && !annotations.isEmpty();
       case FSMPackage.STATE__ENTRY_CODE:
         return entryCode != null;
       case FSMPackage.STATE__EXIT_CODE:

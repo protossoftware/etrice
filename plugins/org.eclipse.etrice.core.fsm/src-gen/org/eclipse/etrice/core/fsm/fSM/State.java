@@ -2,6 +2,9 @@
  */
 package org.eclipse.etrice.core.fsm.fSM;
 
+import org.eclipse.emf.common.util.EList;
+
+import org.eclipse.etrice.core.common.base.Annotation;
 import org.eclipse.etrice.core.common.base.Documentation;
 
 /**
@@ -23,6 +26,7 @@ import org.eclipse.etrice.core.common.base.Documentation;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.fsm.fSM.State#getDocu <em>Docu</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.fsm.fSM.State#getAnnotations <em>Annotations</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.fsm.fSM.State#getEntryCode <em>Entry Code</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.fsm.fSM.State#getExitCode <em>Exit Code</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.fsm.fSM.State#getDoCode <em>Do Code</em>}</li>
@@ -60,6 +64,22 @@ public interface State extends StateGraphNode
    * @generated
    */
   void setDocu(Documentation value);
+
+  /**
+   * Returns the value of the '<em><b>Annotations</b></em>' containment reference list.
+   * The list contents are of type {@link org.eclipse.etrice.core.common.base.Annotation}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Annotations</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Annotations</em>' containment reference list.
+   * @see org.eclipse.etrice.core.fsm.fSM.FSMPackage#getState_Annotations()
+   * @model containment="true"
+   * @generated
+   */
+  EList<Annotation> getAnnotations();
 
   /**
    * Returns the value of the '<em><b>Entry Code</b></em>' containment reference.

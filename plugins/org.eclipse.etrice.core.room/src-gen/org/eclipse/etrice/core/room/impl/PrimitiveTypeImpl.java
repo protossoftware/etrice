@@ -137,7 +137,6 @@ public class PrimitiveTypeImpl extends DataTypeImpl implements PrimitiveType
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public LiteralType getType()
   {
     return type;
@@ -148,7 +147,6 @@ public class PrimitiveTypeImpl extends DataTypeImpl implements PrimitiveType
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setType(LiteralType newType)
   {
     LiteralType oldType = type;
@@ -162,7 +160,6 @@ public class PrimitiveTypeImpl extends DataTypeImpl implements PrimitiveType
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public String getTargetName()
   {
     return targetName;
@@ -173,7 +170,6 @@ public class PrimitiveTypeImpl extends DataTypeImpl implements PrimitiveType
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setTargetName(String newTargetName)
   {
     String oldTargetName = targetName;
@@ -187,7 +183,6 @@ public class PrimitiveTypeImpl extends DataTypeImpl implements PrimitiveType
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public String getCastName()
   {
     return castName;
@@ -198,7 +193,6 @@ public class PrimitiveTypeImpl extends DataTypeImpl implements PrimitiveType
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setCastName(String newCastName)
   {
     String oldCastName = castName;
@@ -212,7 +206,6 @@ public class PrimitiveTypeImpl extends DataTypeImpl implements PrimitiveType
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public String getDefaultValueLiteral()
   {
     return defaultValueLiteral;
@@ -223,7 +216,6 @@ public class PrimitiveTypeImpl extends DataTypeImpl implements PrimitiveType
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setDefaultValueLiteral(String newDefaultValueLiteral)
   {
     String oldDefaultValueLiteral = defaultValueLiteral;
@@ -338,7 +330,7 @@ public class PrimitiveTypeImpl extends DataTypeImpl implements PrimitiveType
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuilder result = new StringBuilder(super.toString());
+    StringBuffer result = new StringBuffer(super.toString());
     result.append(" (type: ");
     result.append(type);
     result.append(", targetName: ");
