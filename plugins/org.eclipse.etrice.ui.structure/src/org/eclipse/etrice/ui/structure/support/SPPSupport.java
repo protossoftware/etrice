@@ -15,7 +15,9 @@
 package org.eclipse.etrice.ui.structure.support;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature.Setting;
@@ -314,7 +316,11 @@ public class SPPSupport extends InterfaceItemSupport {
 	
 		@Override
 		public ICustomFeature[] getCustomFeatures(ICustomContext context) {
-			return new ICustomFeature[] { new PropertyFeature(fp) };
+			List<ICustomFeature> features = new ArrayList<>();
+			features.add(new PropertyFeature(fp));
+			Arrays.stream(super.getCustomFeatures(context)).forEach(e -> features.add(e));
+			
+			return features.toArray(new ICustomFeature[0]);
 		}
 		
 		@Override

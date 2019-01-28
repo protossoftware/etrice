@@ -34,5 +34,12 @@
             class="org.eclipse.etrice.ui.common.base.preferences.UIBasePreferenceInitializer">
       </initializer>
    </extension>
+   <extension
+         point="org.eclipse.ui.contexts">
+      <context
+            id="org.eclipse.etrice.ui.common.base.context"
+            name="eTrice Diagram Context">
+      </context>
+   </extension>
 
 </plugin>

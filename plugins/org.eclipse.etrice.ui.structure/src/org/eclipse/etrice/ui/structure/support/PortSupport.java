@@ -15,18 +15,20 @@
 package org.eclipse.etrice.ui.structure.support;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.etrice.core.fsm.fSM.MessageFromIf;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.Binding;
 import org.eclipse.etrice.core.room.BindingEndPoint;
 import org.eclipse.etrice.core.room.ExternalPort;
 import org.eclipse.etrice.core.room.InterfaceItem;
-import org.eclipse.etrice.core.fsm.fSM.MessageFromIf;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.RoomPackage;
@@ -354,7 +356,11 @@ public class PortSupport extends InterfaceItemSupport {
 	
 		@Override
 		public ICustomFeature[] getCustomFeatures(ICustomContext context) {
-			return new ICustomFeature[] { new PropertyFeature(fp) };
+			List<ICustomFeature> features = new ArrayList<>();
+			features.add(new PropertyFeature(fp));
+			Arrays.stream(super.getCustomFeatures(context)).forEach(e -> features.add(e));
+			
+			return features.toArray(new ICustomFeature[0]);
 		}
 		
 		@Override

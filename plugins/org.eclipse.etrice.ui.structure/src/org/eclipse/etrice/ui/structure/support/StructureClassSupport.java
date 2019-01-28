@@ -263,6 +263,56 @@ public class StructureClassSupport {
 				return false;
 			}
 		}
+		
+		private class OpenClassModel extends AbstractCustomFeature {
+
+			public OpenClassModel(IFeatureProvider fp) {
+				super(fp);
+			}
+
+			@Override
+			public String getName() {
+				return "Open Class Model";
+			}
+
+			@Override
+			public boolean canExecute(ICustomContext context) {
+				PictogramElement[] pes = context.getPictogramElements();
+				if (pes != null && pes.length == 1) {
+					Object bo = getBusinessObjectForPictogramElement(pes[0]);
+					if (bo instanceof StructureClass) {
+						return true;
+					}
+				}
+				return false;
+			}
+
+			/* (non-Javadoc)
+			 * @see org.eclipse.graphiti.features.custom.ICustomFeature#execute(org.eclipse.graphiti.features.context.ICustomContext)
+			 */
+			@Override
+			public void execute(ICustomContext context) {
+				PictogramElement[] pes = context.getPictogramElements();
+				if (pes != null && pes.length == 1) {
+					Object bo = getBusinessObjectForPictogramElement(pes[0]);
+					if (bo instanceof StructureClass) {
+						final StructureClass ac = (StructureClass) bo;
+				        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+				        shell.getDisplay().asyncExec(new Runnable() {
+							@Override
+							public void run() {
+								RoomOpeningHelper.showInTextualEditor(ac);
+							}
+				        });
+					}
+				}
+			}
+
+			@Override
+			public boolean hasDoneChanges() {
+				return false;
+			}
+		}
 
 		private class ReconnectToModel extends AbstractCustomFeature {
 
@@ -423,7 +473,9 @@ public class StructureClassSupport {
 		@Override
 		public ICustomFeature[] getCustomFeatures(ICustomContext context) {
 			return new ICustomFeature[] {
-					new OpenBehaviorDiagram(fp), new ReconnectToModel(fp)};
+					new OpenBehaviorDiagram(fp),
+					new OpenClassModel(fp),
+					new ReconnectToModel(fp)}; // referenced by index below
 		}
 
 		@Override
@@ -472,7 +524,7 @@ public class StructureClassSupport {
 			IContextButtonPadData data = super.getContextButtonPad(context);
 
 			ICustomContext customContext = new CustomContext();
-			ICustomFeature reconnectToModel = afp.getCustomFeatures(customContext)[1];
+			ICustomFeature reconnectToModel = afp.getCustomFeatures(customContext)[2];
 			if(reconnectToModel.isAvailable(customContext)){
 				IContextButtonEntry entry = new ContextButtonEntry(reconnectToModel, customContext);
 				entry.setIconId(IPlatformImageConstants.IMG_ECLIPSE_QUICKASSIST);

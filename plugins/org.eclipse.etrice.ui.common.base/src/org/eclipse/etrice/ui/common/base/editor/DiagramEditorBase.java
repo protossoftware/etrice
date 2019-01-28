@@ -39,9 +39,12 @@ import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorSite;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.contexts.IContextService;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
+
+import static org.eclipse.ui.PlatformUI.getWorkbench;
 
 import com.google.inject.Injector;
 
@@ -51,6 +54,8 @@ import com.google.inject.Injector;
  */
 public abstract class DiagramEditorBase extends DiagramEditor implements IInputUriHolder {
 
+	private final static String CONTEXT_ID = "org.eclipse.etrice.ui.common.base.context";
+	
 	protected ModificationTrackingEnabler mte = new ModificationTrackingEnabler();
 	protected URI inputUri;
 	private Object textEditorClass;
@@ -78,6 +83,8 @@ public abstract class DiagramEditorBase extends DiagramEditor implements IInputU
 			this.inputUri = ((IDiagramEditorInput) newInput).getUri();
 		
 		super.init(site, input);
+		
+		getWorkbench().getService(IContextService.class).activateContext(CONTEXT_ID);
 	}
 
 	@Override
@@ -116,8 +123,9 @@ public abstract class DiagramEditorBase extends DiagramEditor implements IInputU
 		
 		Diagram diagram = getDiagramTypeProvider().getDiagram();
 		EObject diagramBo = diagram.getLink().getBusinessObjects().iterator().next();
-		if(diagramBo == null || diagramBo.eIsProxy())
+		if(diagramBo == null || diagramBo.eIsProxy()) {
 			handleMissingDiagramBo(diagram);
+		}
 	}
 	
 	public ModelComponent getModelComponent() {

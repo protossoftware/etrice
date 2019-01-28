@@ -68,5 +68,13 @@
           editor_id="org.eclipse.etrice.ui.structure.editor.StructureEditor">
     </participant>
  </extension>
+ <extension
+       point="org.eclipse.ui.contexts">
+    <context
+          id="org.eclipse.etrice.ui.structure.editor.structureEditor"
+          name="ROOM Structure Editor"
+          parentId="org.eclipse.graphiti.ui.diagramEditor">
+    </context>
+ </extension>
 
 </plugin>

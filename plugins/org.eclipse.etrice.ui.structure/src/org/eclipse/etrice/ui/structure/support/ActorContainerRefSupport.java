@@ -736,6 +736,61 @@ public class ActorContainerRefSupport {
 			}
 		}
 		
+		private static class OpenRefModel extends AbstractCustomFeature {
+
+			public OpenRefModel(IFeatureProvider fp) {
+				super(fp);
+			}
+
+			@Override
+			public String getName() {
+				return "Open Ref Model";
+			}
+			
+			@Override
+			public boolean canExecute(ICustomContext context) {
+				PictogramElement[] pes = context.getPictogramElements();
+				if (pes != null && pes.length == 1) {
+					Object bo = getBusinessObjectForPictogramElement(pes[0]);
+					if (bo instanceof ActorRef) {
+						return true;
+					}
+				}
+				return false;
+			}
+
+			/* (non-Javadoc)
+			 * @see org.eclipse.graphiti.features.custom.ICustomFeature#execute(org.eclipse.graphiti.features.context.ICustomContext)
+			 */
+			@Override
+			public void execute(ICustomContext context) {
+				PictogramElement[] pes = context.getPictogramElements();
+				if (pes != null && pes.length == 1) {
+					Object bo = getBusinessObjectForPictogramElement(pes[0]);
+					if (bo instanceof ActorRef) {
+						final ActorClass ac = ((ActorRef)bo).getType();
+				        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+				        shell.getDisplay().asyncExec(new Runnable() {
+							@Override
+							public void run() {
+								RoomOpeningHelper.showInTextualEditor(ac);
+							}
+				        });
+					}
+				}
+			}
+			
+			@Override
+			public boolean hasDoneChanges() {
+				ScopedPreferenceStore store = new ScopedPreferenceStore(InstanceScope.INSTANCE, "org.eclipse.etrice.ui.common");
+				boolean autoSave = store.getBoolean(UIBasePreferenceConstants.SAVE_DIAG_ON_FOCUS_LOST);
+				if (autoSave)
+					return true;	// this is needed to trigger the save via a CommandStackListener after this command is completed
+				else
+					return false;
+			}
+		}
+		
 		private class UpdateFeature extends ShapeUpdateFeature {
 
 			public UpdateFeature(IFeatureProvider fp) {
@@ -1061,7 +1116,8 @@ public class ActorContainerRefSupport {
 			return new ICustomFeature[] {
 					new PropertyFeature(fp),
 					new OpenRefStructureDiagram(fp),
-					new OpenRefBehaviorDiagram(fp)};
+					new OpenRefBehaviorDiagram(fp),
+					new OpenRefModel(fp)};
 		}
 		
 		protected static boolean isInherited(ActorContainerRef ar, EObject parent) {

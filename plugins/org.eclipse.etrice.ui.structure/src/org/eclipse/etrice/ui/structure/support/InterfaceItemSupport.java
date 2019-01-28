@@ -14,15 +14,19 @@
 
 package org.eclipse.etrice.ui.structure.support;
 
+import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorContainerClass;
 import org.eclipse.etrice.core.room.ActorContainerRef;
 import org.eclipse.etrice.core.room.ActorRef;
+import org.eclipse.etrice.core.room.GeneralProtocolClass;
 import org.eclipse.etrice.core.room.InterfaceItem;
 import org.eclipse.etrice.core.room.Port;
 import org.eclipse.etrice.core.room.SPP;
 import org.eclipse.etrice.core.room.SubSystemRef;
+import org.eclipse.etrice.ui.commands.RoomOpeningHelper;
+import org.eclipse.etrice.ui.common.base.preferences.UIBasePreferenceConstants;
 import org.eclipse.etrice.ui.common.base.support.BaseToolBehaviorProvider;
 import org.eclipse.etrice.ui.common.base.support.CantRemoveFeature;
 import org.eclipse.etrice.ui.common.base.support.ChangeAwareCreateFeature;
@@ -50,6 +54,8 @@ import org.eclipse.graphiti.features.context.IRemoveContext;
 import org.eclipse.graphiti.features.context.IResizeShapeContext;
 import org.eclipse.graphiti.features.context.ITargetContext;
 import org.eclipse.graphiti.features.context.IUpdateContext;
+import org.eclipse.graphiti.features.custom.AbstractCustomFeature;
+import org.eclipse.graphiti.features.custom.ICustomFeature;
 import org.eclipse.graphiti.features.impl.AbstractAddFeature;
 import org.eclipse.graphiti.features.impl.AbstractLayoutFeature;
 import org.eclipse.graphiti.features.impl.DefaultMoveShapeFeature;
@@ -68,6 +74,9 @@ import org.eclipse.graphiti.services.IPeCreateService;
 import org.eclipse.graphiti.ui.features.DefaultFeatureProvider;
 import org.eclipse.graphiti.util.ColorConstant;
 import org.eclipse.graphiti.util.IColorConstant;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.preferences.ScopedPreferenceStore;
 
 public class InterfaceItemSupport {
 	
@@ -469,6 +478,61 @@ public class InterfaceItemSupport {
 			
 		}
 		
+		protected static class OpenProtocolClass extends AbstractCustomFeature {
+
+			public OpenProtocolClass(IFeatureProvider fp) {
+				super(fp);
+			}
+
+			@Override
+			public String getName() {
+				return "Open Protocol Class";
+			}
+			
+			@Override
+			public boolean canExecute(ICustomContext context) {
+				PictogramElement[] pes = context.getPictogramElements();
+				if (pes != null && pes.length == 1) {
+					Object bo = getBusinessObjectForPictogramElement(pes[0]);
+					if (bo instanceof InterfaceItem) {
+						return true;
+					}
+				}
+				return false;
+			}
+
+			/* (non-Javadoc)
+			 * @see org.eclipse.graphiti.features.custom.ICustomFeature#execute(org.eclipse.graphiti.features.context.ICustomContext)
+			 */
+			@Override
+			public void execute(ICustomContext context) {
+				PictogramElement[] pes = context.getPictogramElements();
+				if (pes != null && pes.length == 1) {
+					Object bo = getBusinessObjectForPictogramElement(pes[0]);
+					if (bo instanceof InterfaceItem) {
+						final GeneralProtocolClass pc = ((InterfaceItem)bo).getGeneralProtocol();
+				        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+				        shell.getDisplay().asyncExec(new Runnable() {
+							@Override
+							public void run() {
+								RoomOpeningHelper.showInTextualEditor(pc);
+							}
+				        });
+					}
+				}
+			}
+			
+			@Override
+			public boolean hasDoneChanges() {
+				ScopedPreferenceStore store = new ScopedPreferenceStore(InstanceScope.INSTANCE, "org.eclipse.etrice.ui.common");
+				boolean autoSave = store.getBoolean(UIBasePreferenceConstants.SAVE_DIAG_ON_FOCUS_LOST);
+				if (autoSave)
+					return true;	// this is needed to trigger the save via a CommandStackListener after this command is completed
+				else
+					return false;
+			}
+		}
+		
 		protected IFeatureProvider fp;
 		
 		protected FeatureProvider(IDiagramTypeProvider dtp, IFeatureProvider fp) {
@@ -647,6 +711,11 @@ public class InterfaceItemSupport {
 		@Override
 		public ILayoutFeature getLayoutFeature(ILayoutContext context) {
 			return new LayoutFeature(fp);
+		}
+		
+		@Override
+		public ICustomFeature[] getCustomFeatures(ICustomContext context) {
+			return new ICustomFeature[] { new OpenProtocolClass(fp) };
 		}
 		
 		protected static void adjustLabel(Text label, int x, int y, int width, int margin, int size) {

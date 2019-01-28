@@ -36,7 +36,7 @@ public class RoomOpeningHelper {
 	static public void openBehavior(EObject object) {
 		if (object instanceof ActorClass) {
 			ActorClass ac = (ActorClass) object;
-			boolean hasManualBehavior = ac.getBehaviorAnnotations().parallelStream().anyMatch(new Predicate<Annotation>() {
+			boolean hasManualBehavior = ac.getBehaviorAnnotations().stream().anyMatch(new Predicate<Annotation>() {
 
 				@Override
 				public boolean test(Annotation annotation) {
