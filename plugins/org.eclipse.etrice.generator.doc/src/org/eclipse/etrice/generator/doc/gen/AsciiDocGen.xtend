@@ -179,29 +179,34 @@ class AsciiDocGen {
 		'''
 		«defineAnchor(system)»
 		=== «system.name»
+		«tagStart(system)»
 		
 		«system.docText»
 		«IF includeImages»
 			
 			«includeImage(system.name + "_instanceTree.jpg")»
 		«ENDIF»
+		«tagEnd(system)»
 		'''
 	}
 	
 	def private generateSubSystemDoc(SubSystemClass ssc, boolean includeImages) '''
 		«defineAnchor(ssc)»
 		=== «ssc.name»
+		«tagStart(ssc)»
 		
 		«ssc.docText»
 		«IF includeImages»
 			
 			«includeImage(ssc.name + "_structure.jpg")»
 		«ENDIF»
+		«tagEnd(ssc)»
 	'''
 	
 	def private generateEnumerationDoc(EnumerationType en) '''
 		«defineAnchor(en)»
 		=== «en.name»
+		«tagStart(en)»
 		
 		«en.docText»
 		
@@ -222,11 +227,13 @@ class AsciiDocGen {
 			| «Long.toBinaryString(lit.literalValue)»
 		«ENDFOR»
 		|===
+		«tagEnd(en)»
 	'''
 	
 	def private generateDataDoc(DataClass dc) '''
 		«defineAnchor(dc)»
 		=== «dc.name»
+		«tagStart(dc)»
 		
 		«dc.docText»
 		
@@ -235,11 +242,13 @@ class AsciiDocGen {
 			
 			«dc.operations.generateOperationsDoc»
 		«ENDIF»
+		«tagEnd(dc)»
 	'''
 	
 	def private dispatch generateProtocolDoc(ProtocolClass pc) '''
 		«defineAnchor(pc)»
 		=== «pc.name»
+		«tagStart(pc)»
 		
 		«pc.docText»
 		«IF !pc.allIncomingMessages.empty»
@@ -272,19 +281,23 @@ class AsciiDocGen {
 		«ENDIF»
 		
 		«IF !pc.getAllOperations(true).empty»
+			[discrete]
 			==== Regular PortClass
 			«pc.getAllOperations(true).generateOperationsDoc»
 		«ENDIF»
 		
 		«IF !pc.getAllOperations(false).empty»
+			[discrete]
 			==== Conjugated PortClass
 			«pc.getAllOperations(false).generateOperationsDoc»
 		«ENDIF»
+		«tagEnd(pc)»
 	'''
 	
 	def private dispatch generateProtocolDoc(CompoundProtocolClass pc) '''
 		«defineAnchor(pc)»
 		=== «pc.name»
+		«tagStart(pc)»
 		
 		«pc.docText»
 		
@@ -297,14 +310,17 @@ class AsciiDocGen {
 			| «sub.protocol.name»
 		«ENDFOR»
 		|===
+		«tagEnd(pc)»
 	'''
 	
 	def private generateActorDoc(ActorClass ac, boolean includeImages) '''
 		«defineAnchor(ac)»
 		=== «ac.name»
+		«tagStart(ac)»
 		
 		«ac.docText»
 		
+		[discrete]
 		==== Structure
 		«IF includeImages»
 			
@@ -320,6 +336,7 @@ class AsciiDocGen {
 		«ENDIF»
 		«IF ac.hasNonEmptyStateMachine || !ac.operations.empty || ac.isBehaviorAnnotationPresent("BehaviorManual")»
 			
+			[discrete]
 			==== Behavior
 			«IF !ac.operations.empty»
 				
@@ -333,6 +350,7 @@ class AsciiDocGen {
 				«generateFsmDoc(ac, includeImages)»
 			«ENDIF»
 		«ENDIF»
+		«tagEnd(ac)»
 	'''
 
 	def private generateFsmDoc(ActorClass ac, boolean includeImages) '''
@@ -441,7 +459,7 @@ class AsciiDocGen {
 	}
 	
 	def private static crossReference(RoomClass rc) {
-		crossReference(rc.anchor)
+		crossReference(rc.FQN)
 	}
 	
 	def private static crossReference(CharSequence anchor) {
@@ -449,16 +467,20 @@ class AsciiDocGen {
 	}
 	
 	def private static defineAnchor(RoomClass rc) {
-		defineAnchor(rc.anchor)
+		defineAnchor(rc.FQN)
 	}
 	
 	def private static defineAnchor(CharSequence anchor) {
 		'''[[«anchor»]]'''
 	}
 	
-	def private static getAnchor(RoomClass rc) {
+	def private static getFQN(RoomClass rc) {
 		'''«(rc.eContainer as RoomModel).name».«rc.name»'''
 	}
+	
+	def private static tagStart(RoomClass rc) '''tag::«rc.FQN»[]'''
+	
+	def private static tagEnd(RoomClass rc) '''end::«rc.FQN»[]'''
 	
 	def private static String fill(char c, int length) {
 		val builder = new StringBuilder(length)
