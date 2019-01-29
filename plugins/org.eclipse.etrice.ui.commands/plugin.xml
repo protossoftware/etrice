@@ -96,6 +96,23 @@
             </with>
          </activeWhen>
       </handler>
+      <handler
+            class="org.eclipse.etrice.ui.commands.handlers.OpenDeclaration"
+            commandId="org.eclipse.jdt.ui.edit.text.java.open.editor">
+         <activeWhen>
+            <with
+                  variable="activeEditorId">
+               <or>
+                  <equals
+                        value="org.eclipse.etrice.ui.behavior.editor.BehaviorEditor">
+                  </equals>
+                  <equals
+                        value="org.eclipse.etrice.ui.structure.editor.StructureEditor">
+                  </equals>
+               </or>
+            </with>
+         </activeWhen>
+      </handler>
    </extension>
    <extension
          point="org.eclipse.ui.bindings">
@@ -116,12 +133,6 @@
             contextId="org.eclipse.ui.contexts.window"
             sequence="M3+M"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration">
-      </key>
-      <key
-            commandId="org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclaration"
-            contextId="org.eclipse.etrice.ui.common.base.context"
-            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
-            sequence="F3">
       </key>
    </extension>
    <extension
@@ -209,26 +220,6 @@
         </visibleWhen>
      </command>
   </menuContribution>
-   </extension>
-   <extension
-         point="org.eclipse.ui.handlers">
-      <handler
-            class="org.eclipse.etrice.ui.commands.handlers.OpenDeclaration"
-            commandId="org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclaration">
-         <activeWhen>
-            <with
-                  variable="activeEditorId">
-               <or>
-                  <equals
-                        value="org.eclipse.etrice.ui.behavior.editor.BehaviorEditor">
-                  </equals>
-                  <equals
-                        value="org.eclipse.etrice.ui.structure.editor.StructureEditor">
-                  </equals>
-               </or>
-            </with>
-         </activeWhen>
-      </handler>
    </extension>
 
 </plugin>

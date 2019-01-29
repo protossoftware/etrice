@@ -83,8 +83,6 @@ public abstract class DiagramEditorBase extends DiagramEditor implements IInputU
 			this.inputUri = ((IDiagramEditorInput) newInput).getUri();
 		
 		super.init(site, input);
-		
-		getWorkbench().getService(IContextService.class).activateContext(CONTEXT_ID);
 	}
 
 	@Override
@@ -160,7 +158,8 @@ public abstract class DiagramEditorBase extends DiagramEditor implements IInputU
 		}
 		
 		superClassListener = new SuperClassListener(this, textEditorClass);
-		PlatformUI.getWorkbench().getActiveWorkbenchWindow().getPartService().addPartListener(superClassListener);
+		getWorkbench().getActiveWorkbenchWindow().getPartService().addPartListener(superClassListener);
+		getWorkbench().getService(IContextService.class).activateContext(CONTEXT_ID);
 		
 		/* we have to save here whether changes have been done or not to get rid of the dirty state
 		 * CAUTION: save in
