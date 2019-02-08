@@ -307,7 +307,7 @@ public class DetailCodeTranslator extends FSMDetailCodeTranslator {
 		if (op.getArguments().size()==args.size())
 			return true;
 		
-		return false;
+		return op.getArguments().stream().anyMatch(arg -> arg.isVarargs());
 	}
 	
 	@Override
