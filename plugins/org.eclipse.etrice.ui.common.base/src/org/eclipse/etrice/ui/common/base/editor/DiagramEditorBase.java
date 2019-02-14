@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.core.common.ui.linking.GlobalNonPlatformURIEditorOpener;
 import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
 import org.eclipse.etrice.core.fsm.ui.FSMUiModule;
+import org.eclipse.graphiti.dt.IDiagramTypeProvider;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.graphiti.services.Graphiti;
 import org.eclipse.graphiti.ui.editor.DiagramBehavior;
@@ -127,11 +128,14 @@ public abstract class DiagramEditorBase extends DiagramEditor implements IInputU
 	}
 	
 	public ModelComponent getModelComponent() {
-		Diagram diagram = getDiagramTypeProvider().getDiagram();
-		if(diagram != null) {
-			EObject bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(diagram);
-			if (bo instanceof ModelComponent)
-				return (ModelComponent) bo;
+		IDiagramTypeProvider diagramTypeProvider = getDiagramTypeProvider();
+		if(diagramTypeProvider != null) {
+			Diagram diagram = diagramTypeProvider.getDiagram();	
+			if(diagram != null) {
+				EObject bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(diagram);
+				if (bo instanceof ModelComponent)
+					return (ModelComponent) bo;
+			}
 		}
 		
 		return null;
