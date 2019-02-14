@@ -27,6 +27,7 @@ import org.eclipse.etrice.core.ui.hover.RoomHoverProvider;
 import org.eclipse.etrice.core.ui.internal.RoomActivator;
 import org.eclipse.etrice.core.ui.linking.RoomHyperlinkHelper;
 import org.eclipse.etrice.core.ui.outline.RoomOutlinePage;
+import org.eclipse.etrice.core.ui.quickfix.RoomQuickFixProviderXtend;
 import org.eclipse.etrice.doc.KeywordHoverContentProvider;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
@@ -109,6 +110,11 @@ public class RoomUiModule extends org.eclipse.etrice.core.ui.AbstractRoomUiModul
 	
 	public Class<? extends IEObjectDocumentationProvider> bindIEObjectDocumentationProvider() {
 		return CommentDocumentationProvider.class;
+	}
+	
+	@Override
+	public Class<? extends org.eclipse.xtext.ui.editor.quickfix.IssueResolutionProvider> bindIssueResolutionProvider() {
+		return RoomQuickFixProviderXtend.class;
 	}
 	
 	// auto format for quick fix
