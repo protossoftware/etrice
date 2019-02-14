@@ -15,6 +15,7 @@
 package org.eclipse.etrice.ui.common.base.editor;
 
 import org.eclipse.gef.ContextMenuProvider;
+import org.eclipse.graphiti.ui.editor.DefaultMarkerBehavior;
 import org.eclipse.graphiti.ui.editor.DefaultPersistencyBehavior;
 import org.eclipse.graphiti.ui.editor.DefaultUpdateBehavior;
 import org.eclipse.graphiti.ui.editor.DiagramBehavior;
@@ -51,5 +52,23 @@ public class CustomDiagramBehavior extends DiagramBehavior {
 	@Override
 	protected DefaultPersistencyBehavior createPersistencyBehavior() {
 		return new CustomPersistencyBehavior(this);
+	}
+	
+	@Override
+	protected DefaultMarkerBehavior createMarkerBehavior() {
+		DefaultMarkerBehavior markerBehavior = super.createMarkerBehavior();
+		
+		// Bug 542660
+		markerBehavior.disableProblemIndicationUpdate();
+		
+		return markerBehavior;
+	}
+	
+	@Override
+	public void enableAdapters() {
+		super.enableAdapters();
+		
+		// Bug 542660
+		getMarkerBehavior().disableProblemIndicationUpdate();
 	}
 }
