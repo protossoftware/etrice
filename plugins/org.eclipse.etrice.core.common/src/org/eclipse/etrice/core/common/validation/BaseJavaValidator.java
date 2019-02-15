@@ -203,6 +203,11 @@ public class BaseJavaValidator extends org.eclipse.etrice.core.common.validation
 			if (importedResource == null)
 				return;
 
+			if (importedResource.getContents().isEmpty()) {
+				// importedResource is empty after being loaded the first time (<=> RuntimeException below)
+				warning("could not load referenced model", BasePackage.Literals.IMPORT__IMPORT_URI);
+				return;
+			}
 		} catch (RuntimeException re) {
 			warning("could not load referenced model", BasePackage.Literals.IMPORT__IMPORT_URI);
 			return;

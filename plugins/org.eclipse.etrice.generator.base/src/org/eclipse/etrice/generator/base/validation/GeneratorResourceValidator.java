@@ -27,6 +27,7 @@ import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
 
+import com.google.common.collect.ImmutableList;
 import com.google.inject.Inject;
 
 /**
@@ -51,7 +52,8 @@ public class GeneratorResourceValidator implements IGeneratorResourceValidator {
 		int errors = 0;
 		int warnings = 0;
 		
-		for (Resource resource : resources) {
+		ImmutableList<Resource> toValidate = ImmutableList.copyOf(resources);
+		for (Resource resource : toValidate) {
 			List<Issue> list = resourceValidator.validate(resource, CheckMode.ALL, CancelIndicator.NullImpl);
 			
 			for (Issue issue : list) {
@@ -67,6 +69,11 @@ public class GeneratorResourceValidator implements IGeneratorResourceValidator {
 					logger.logInfo(issue.toString());
 				}
 			}
+		}
+		
+		// Bug 544504
+		if(toValidate.size() != resources.size()) {
+			throw new IllegalStateException("List of resources has changed during validation");
 		}
 		
 		if(warnings > 0) {

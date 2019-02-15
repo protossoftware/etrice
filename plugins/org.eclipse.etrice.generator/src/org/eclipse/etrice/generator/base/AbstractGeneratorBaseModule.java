@@ -23,7 +23,6 @@ import org.eclipse.etrice.core.naming.RoomNameProvider;
 import org.eclipse.etrice.core.room.util.CommonDataCalculator;
 import org.eclipse.etrice.generator.base.io.GeneratorFileIO;
 import org.eclipse.etrice.generator.base.io.IGeneratorEMFSetup;
-import org.eclipse.etrice.generator.base.io.IGeneratorResourceLoader;
 import org.eclipse.etrice.generator.base.logging.Logger;
 import org.eclipse.etrice.generator.base.setup.GeneratorName;
 import org.eclipse.etrice.generator.base.setup.GeneratorOptions;
@@ -77,7 +76,7 @@ public abstract class AbstractGeneratorBaseModule implements Module {
 		}
 		binder.bind(String.class).annotatedWith(GeneratorName.class).toInstance(bindGeneratorName());
 		binder.bind(GeneratorOptions.class).to(bindGeneratorOptions());
-		binder.bind(IGeneratorResourceLoader.class).to(ModelLoader.class);
+//		binder.bind(IGeneratorResourceLoader.class).to(ModelLoader.class);
 		binder.bind(IGeneratorResourceValidator.class).to(ModelValidator.class);
 		binder.bind(Diagnostician.class).in(Singleton.class);
 		binder.bind(IDiagnostician.class).to(Diagnostician.class);
