@@ -149,23 +149,27 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 			
 		};	
 		Optional<List<IEObjectDescription>> importCandidates = ImportHelpers.getImportedObjectsFor(imp, importUriResolver, candidateMatcher);
-		if(!importCandidates.isPresent())
+		if(!importCandidates.isPresent()) {
 			return;
-		
+		}
 		List<IEObjectDescription> candidates = importCandidates.get();
-		if(Iterables.any(candidates, Predicates.and(nameMatcher, candidateMatcher)))
+		if(Iterables.any(candidates, Predicates.and(nameMatcher, candidateMatcher))) {
 			return;
+		}
 		
 		Set<String> candidatesNames = Sets.newLinkedHashSet();
 		for(IEObjectDescription eObjDesc : candidates) {
 			candidatesNames.add(eObjDesc.getQualifiedName().toString() + ".*");
 		}
 		
-		if(!Iterables.any(candidates, nameMatcher))		
+		if(candidates.isEmpty()) {
+			error("no match for imported namespace", BasePackage.Literals.IMPORT__IMPORTED_NAMESPACE);
+		} else if(!Iterables.any(candidates, nameMatcher))	{	
 			error("no match for imported namespace", BasePackage.Literals.IMPORT__IMPORTED_NAMESPACE, WRONG_NAMESPACE, candidatesNames.toArray(new String[0]));
-		else if(!Iterables.any(Iterables.filter(candidates, nameMatcher), allowedClasses))
+		} else if(!Iterables.any(Iterables.filter(candidates, nameMatcher), allowedClasses)) {
 			error("referenced model is not supported", BasePackage.Literals.IMPORT__IMPORTED_NAMESPACE, WRONG_NAMESPACE, candidatesNames.toArray(new String[0]));
-	}
+		}
+	}	
 	
 	@Check
 	public void checkActorRef(ActorRef ar) {

@@ -20,6 +20,7 @@ import java.util.Optional;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.etrice.core.common.base.Import;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -53,7 +54,13 @@ public class ImportHelpers {
 		URI uri = URI.createURI(uriString);
 		Resource importedResource = null;
 		try {
-			importedResource = imp.eResource().getResourceSet().getResource(uri, true);
+			if(imp.eResource().getResourceSet() instanceof ResourceSetImpl) {
+				ResourceSetImpl rs = (ResourceSetImpl) imp.eResource().getResourceSet();
+				importedResource = rs.getURIResourceMap().get(uri);
+			}
+			if(importedResource == null) {
+				importedResource = new ResourceSetImpl().getResource(uri, true);
+			}
 		} catch (RuntimeException re) {
 			return Optional.empty();
 		}

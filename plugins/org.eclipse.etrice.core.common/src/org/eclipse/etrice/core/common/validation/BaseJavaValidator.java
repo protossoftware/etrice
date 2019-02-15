@@ -19,7 +19,7 @@ import java.util.HashSet;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.etrice.core.common.base.Annotation;
 import org.eclipse.etrice.core.common.base.AnnotationAttribute;
 import org.eclipse.etrice.core.common.base.AnnotationType;
@@ -190,18 +190,19 @@ public class BaseJavaValidator extends org.eclipse.etrice.core.common.validation
 		}
 
 		URI uri = URI.createURI(uriString);
-		ResourceSet rs = imp.eResource().getResourceSet();
+				
+		if(imp.eResource().getResourceSet() instanceof ResourceSetImpl) {
+			ResourceSetImpl rs = (ResourceSetImpl) imp.eResource().getResourceSet();
+			if(rs.getURIResourceMap().containsKey(uri)) {
+				return;
+			}
+		}
 
-		try {
-			Resource importedResource = rs.getResource(uri, true);
+		try {			
+			Resource importedResource = new ResourceSetImpl().getResource(uri, true);
 			if (importedResource == null)
 				return;
 
-			if (importedResource.getContents().isEmpty()) {
-				// importedResource is empty after being loaded the first time (<=> RuntimeException below)
-				warning("could not load referenced model", BasePackage.Literals.IMPORT__IMPORT_URI);
-				return;
-			}
 		} catch (RuntimeException re) {
 			warning("could not load referenced model", BasePackage.Literals.IMPORT__IMPORT_URI);
 			return;
