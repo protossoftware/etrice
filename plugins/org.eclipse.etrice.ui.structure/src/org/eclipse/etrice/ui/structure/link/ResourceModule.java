@@ -16,6 +16,9 @@ import org.eclipse.etrice.ui.common.base.support.DiagramAccessBase;
 import org.eclipse.etrice.ui.structure.DiagramAccess;
 import org.eclipse.xtext.resource.generic.AbstractGenericResourceRuntimeModule;
 import org.eclipse.xtext.ui.refactoring.IReferenceUpdater;
+import org.eclipse.xtext.validation.IResourceValidator;
+
+import com.google.inject.Binder;
 
 /**
  * @author Henrik Rentz-Reichert - initial contribution and API
@@ -23,6 +26,13 @@ import org.eclipse.xtext.ui.refactoring.IReferenceUpdater;
  */
 public class ResourceModule extends AbstractGenericResourceRuntimeModule {
 
+	@Override
+	public void configure(Binder binder) {
+		super.configure(binder);
+		
+		binder.bind(IResourceValidator.class).toInstance(IResourceValidator.NULL);
+	}
+	
 	/* (non-Javadoc)
 	 * @see org.eclipse.xtext.resource.generic.AbstractGenericResourceRuntimeModule#getLanguageName()
 	 */
@@ -45,6 +55,6 @@ public class ResourceModule extends AbstractGenericResourceRuntimeModule {
 	
 	public Class<? extends DiagramAccessBase> bindDiagramAccess() {
 		return DiagramAccess.class;
-	}
+	}	
 
 }
