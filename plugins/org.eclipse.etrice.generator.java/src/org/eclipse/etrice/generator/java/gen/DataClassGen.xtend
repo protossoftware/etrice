@@ -23,7 +23,6 @@ import org.eclipse.etrice.core.room.ComplexType
 import org.eclipse.etrice.core.room.DataClass
 import org.eclipse.etrice.core.room.util.RoomHelpers
 import org.eclipse.etrice.generator.base.io.IGeneratorFileIO
-import org.eclipse.etrice.generator.fsm.base.FileSystemHelpers
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
 
@@ -35,15 +34,15 @@ class DataClassGen {
 	@Inject extension RoomExtensions
 	@Inject extension ProcedureHelpers
 	@Inject extension Initialization
-	@Inject extension FileSystemHelpers
+	@Inject extension RoomHelpers
 	@Inject RoomHelpers roomHelpers
 
 	def doGenerate(Root root) {
-		for (dc: root.dataClasses.filter(cl|cl.isValidGenerationLocation)) {
+		root.dataClasses.filter[!isDeprecatedGeneration].forEach[dc |
 			var path = dc.getPath
 			var file = dc.getJavaFileName
 			fileIO.generateFile("generating DataClass implementation", path + file, root.generate(dc))
-		}
+		]
 	}
 
 	def generate(Root root, DataClass dc) {

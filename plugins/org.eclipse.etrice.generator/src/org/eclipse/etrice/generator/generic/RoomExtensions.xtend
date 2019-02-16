@@ -16,6 +16,7 @@ package org.eclipse.etrice.generator.generic
 
 import com.google.inject.Singleton
 import java.util.ArrayList
+import java.util.Collections
 import java.util.List
 import javax.inject.Inject
 import org.eclipse.emf.common.util.BasicEList
@@ -41,7 +42,6 @@ import org.eclipse.etrice.core.room.SPP
 import org.eclipse.etrice.core.room.ServiceImplementation
 import org.eclipse.etrice.core.room.util.RoomHelpers
 import org.eclipse.etrice.generator.fsm.generic.FSMExtensions
-import java.util.Collections
 
 /**
 	collection of convenience functions for code generation

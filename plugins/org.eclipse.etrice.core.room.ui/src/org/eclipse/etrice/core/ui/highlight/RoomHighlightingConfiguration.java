@@ -16,6 +16,7 @@ package org.eclipse.etrice.core.ui.highlight;
 
 import org.eclipse.etrice.core.common.ui.highlight.BaseHighlightingConfig;
 import org.eclipse.etrice.expressions.ui.highlight.AbstractHighlightStyles;
+import org.eclipse.jface.text.TextAttribute;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfigurationAcceptor;
@@ -37,6 +38,7 @@ public class RoomHighlightingConfiguration extends BaseHighlightingConfig {
 	public static final String HL_EXPR_DATA_CLASS_ID = "hl_data_class";
 	public static final String HL_PRIMITIVE_TYPE_ID = "hl_primitve_type";
 	public static final String HL_EXTERNAL_TYPE_ID = "hl_external_type";
+	public static final String HL_DEPRECATED_ID = "hl_deprecated_type";
 
 	// default fonts used by this specific highlighting (defaults)
 	// private static FontData defaultAnnotationBlockFont = new
@@ -55,6 +57,7 @@ public class RoomHighlightingConfiguration extends BaseHighlightingConfig {
 		acceptor.acceptDefaultHighlighting(HL_EXPR_DATA_CLASS_ID, "Expression Data Class", dataClass());
 		acceptor.acceptDefaultHighlighting(HL_PRIMITIVE_TYPE_ID, "Expression Primitive Type", primitiveType());
 		acceptor.acceptDefaultHighlighting(HL_EXTERNAL_TYPE_ID, "Expression External Type", externalType());
+		acceptor.acceptDefaultHighlighting(HL_DEPRECATED_ID, "Deprecated", deprecated());
 	}
 
 	// method for calculating an actual text styles
@@ -112,6 +115,12 @@ public class RoomHighlightingConfiguration extends BaseHighlightingConfig {
 	public TextStyle externalType() {
 		TextStyle textStyle = new TextStyle();
 		textStyle.setColor(AbstractHighlightStyles.EXTERNAL_TYPE_RGB);
+		return textStyle;
+	}
+	
+	public TextStyle deprecated() {
+		TextStyle textStyle = defaultTextStyle().copy();
+		textStyle.setStyle(TextAttribute.STRIKETHROUGH);
 		return textStyle;
 	}
 

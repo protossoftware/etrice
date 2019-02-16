@@ -20,6 +20,7 @@ import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.etrice.core.room.EnumerationType
 import org.eclipse.etrice.generator.base.io.IGeneratorFileIO
 import org.eclipse.etrice.generator.generic.TypeHelpers
+import org.eclipse.etrice.core.room.util.RoomHelpers
 
 /**
  * @author Henrik Rentz-Reichert
@@ -28,12 +29,13 @@ import org.eclipse.etrice.generator.generic.TypeHelpers
 class EnumerationTypeGen {
 
 	@Inject IGeneratorFileIO fileIO
+	@Inject extension RoomHelpers
 	@Inject extension CExtensions
 	@Inject extension RoomExtensions
 	@Inject extension TypeHelpers
 	
 	def doGenerate(Root root) {
-		for (et: root.enumClasses) {
+		root.enumClasses.filter[!isDeprecatedGeneration].forEach[et |
 			val path = et.getPath
 			var file = et.getCHeaderFileName
 
@@ -43,7 +45,7 @@ class EnumerationTypeGen {
 			// header file
 			file = et.getCSourceFileName
 			fileIO.generateFile("generating Enumeration source", path + file, root.generateSourceFile(et))
-		}
+		]
 	}
 	
 	private def generateHeaderFile(Root root, EnumerationType et) {

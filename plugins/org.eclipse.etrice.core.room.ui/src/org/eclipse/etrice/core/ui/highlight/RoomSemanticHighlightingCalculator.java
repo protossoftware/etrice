@@ -14,10 +14,20 @@
 
 package org.eclipse.etrice.core.ui.highlight;
 
+import static org.eclipse.etrice.core.ui.highlight.RoomHighlightingConfiguration.HL_ANNOTATION_ID;
+import static org.eclipse.etrice.core.ui.highlight.RoomHighlightingConfiguration.HL_DEPRECATED_ID;
+
+import java.util.Map;
+
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.etrice.core.common.base.Annotation;
 import org.eclipse.etrice.core.common.ui.highlight.BaseSemanticHighlighter;
 import org.eclipse.etrice.core.converter.RoomValueConverterService;
 import org.eclipse.etrice.core.fsm.fSM.DetailCode;
+import org.eclipse.etrice.core.room.RoomElement;
+import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.core.services.RoomGrammarAccess;
 import org.eclipse.etrice.core.ui.util.UIExpressionUtil;
 import org.eclipse.etrice.core.ui.util.UIExpressionUtil.ExpressionCache;
@@ -29,13 +39,18 @@ import org.eclipse.jface.text.rules.IRule;
 import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.RuleBasedScanner;
 import org.eclipse.jface.text.rules.Token;
+import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.CancelIndicator;
 
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 
 /**
@@ -44,11 +59,9 @@ import com.google.inject.Inject;
  */
 public class RoomSemanticHighlightingCalculator extends BaseSemanticHighlighter {
 
-	@Inject
-	RoomGrammarAccess grammar;
-	
-	@Inject
-	RoomValueConverterService converterService;
+	@Inject RoomGrammarAccess grammar;
+	@Inject RoomValueConverterService converterService;
+	@Inject RoomHelpers roomHelpers;
 	
 	@Override
 	public void provideHighlightingFor(XtextResource resource, IHighlightedPositionAcceptor acceptor, CancelIndicator cancelIndicator) {
@@ -67,13 +80,18 @@ public class RoomSemanticHighlightingCalculator extends BaseSemanticHighlighter 
 			if (obj instanceof RuleCall) {
 				RuleCall ruleCall = (RuleCall) obj;
 				if(ruleCall.getRule() == grammar.getAnnotationRule()){
-					acceptor.addPosition(node.getOffset(), node.getLength(), RoomHighlightingConfiguration.HL_ANNOTATION_ID);
+					acceptor.addPosition(node.getOffset(), node.getLength(), HL_ANNOTATION_ID);
 				}
 				else if(ruleCall.getRule() == grammar.getCC_STRINGRule()) {
 					detailCodeHighlight(node, acceptor, expressionCache);
 				}
+				else if(ruleCall.getRule() == grammar.getIDRule() || ruleCall.getRule() == grammar.getFQNRule()) {
+					highlightDeprecated(node, acceptor);
+				}
 			}
-
+			else if(obj instanceof CrossReference) {
+				highlightDeprecated(node, acceptor);
+			}
 		}
 	}
 	
@@ -103,6 +121,35 @@ public class RoomSemanticHighlightingCalculator extends BaseSemanticHighlighter 
 			}
 		}
 		
+	}
+	
+	Map<EClass, Boolean> annotatedClasses = Maps.newHashMap();
+	
+	protected void highlightDeprecated(INode node, IHighlightedPositionAcceptor acceptor) {	
+		if(node.getGrammarElement() instanceof CrossReference) {
+			EReference ref = GrammarUtil.getReference((CrossReference) node.getGrammarElement(), node.getSemanticElement().eClass());
+			EObject annotatedElement = (ref != null) ? (EObject) node.getSemanticElement().eGet(ref) : null;
+			if(annotatedElement instanceof RoomElement) {
+				Annotation annotation = roomHelpers.findDeprecatedAnnotation((RoomElement) annotatedElement);		
+				if(annotation != null) {
+					acceptor.addPosition(node.getOffset(), node.getLength(), HL_DEPRECATED_ID);
+				}
+			}
+		} else {
+			EObject annotatedElement = node.getSemanticElement();
+			if(annotatedElement instanceof RoomElement) {
+				Annotation annotation = roomHelpers.findDeprecatedAnnotation((RoomElement) annotatedElement);		
+				if(annotation != null) {
+					boolean noGenerate = roomHelpers.isDeprecatedGeneration((RoomElement) annotatedElement);
+					if(noGenerate) {
+						ICompositeNode completeNode = NodeModelUtils.findActualNodeFor(annotatedElement);
+						acceptor.addPosition(completeNode.getOffset(), completeNode.getLength(), HL_DEPRECATED_ID);
+					} else {
+						acceptor.addPosition(node.getOffset(), node.getLength(), HL_DEPRECATED_ID);	
+					}
+				}
+			}
+		}
 	}
 	
 }

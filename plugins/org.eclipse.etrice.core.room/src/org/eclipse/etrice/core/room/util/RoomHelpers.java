@@ -19,10 +19,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.core.common.base.Annotation;
+import org.eclipse.etrice.core.common.base.BooleanLiteral;
 import org.eclipse.etrice.core.common.base.KeyValue;
 import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.etrice.core.fsm.fSM.StateGraphItem;
@@ -53,6 +55,7 @@ import org.eclipse.etrice.core.room.RefPath;
 import org.eclipse.etrice.core.room.RefSegment;
 import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.RoomClass;
+import org.eclipse.etrice.core.room.RoomElement;
 import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.SAP;
@@ -1098,6 +1101,64 @@ public class RoomHelpers extends FSMHelpers {
 	 */
 	public boolean isBehaviorAttributePresent(ActorClass ac, String name, String key) {
 		return isAttributePresent(ac.getBehaviorAnnotations(), name, key);
+	}
+	
+	private static final Map<EClass, Boolean> annotatedClasses = Maps.newHashMap(); // table of room classes which can be annotated (static)
+	
+	/**
+	 * Checks if eObjs can be annotated.
+	 * 
+	 * @return <code>true</code> if eObjs class has feature 'annotations'
+	 */
+	public boolean canHaveAnnotations(RoomElement eObj) {
+		if(!annotatedClasses.containsKey(eObj.eClass())) {
+			EStructuralFeature annotationFeature = eObj.eClass().getEStructuralFeature("annotations");
+			annotatedClasses.put(eObj.eClass(), annotationFeature != null);
+		}
+		
+		return annotatedClasses.get(eObj.eClass());		
+	}
+	
+	/**
+	 * Returns list of {@link Annotation}s for this particular element if present and {@link #canHaveAnnotations(RoomElement)}.
+	 * 
+	 * @returns list of annotations
+	 */
+	@SuppressWarnings("unchecked")
+	public List<Annotation> getAnnotations(RoomElement eObj) {
+		if(canHaveAnnotations(eObj)) {
+			EStructuralFeature annotationFeature = eObj.eClass().getEStructuralFeature("annotations");
+			return (List<Annotation>) eObj.eGet(annotationFeature);
+		}
+		
+		return Collections.emptyList();
+	}
+	
+	/**
+	 * Returns "Deprecated" {@link Annotation} for this particular element.
+	 * 
+	 * @returns annotation
+	 */
+	public Annotation findDeprecatedAnnotation(RoomElement eObj) {
+		return getAnnotations(eObj).stream()
+				.filter(anno -> anno.getType() != null && "Deprecated".equals(anno.getType().getName())).findFirst()
+				.orElse(null);
+	}
+	
+	/**
+	 * Checks if element should not be generated due deprecation.
+	 * 
+	 * @returns noGenerate = true
+	 */
+	public boolean isDeprecatedGeneration(RoomElement eObj) {
+		Annotation annotation = findDeprecatedAnnotation(eObj);
+		if(annotation != null) {
+			return annotation.getAttributes().stream().anyMatch(keyValue ->
+				"noGenerate".equals(keyValue.getKey()) && ((BooleanLiteral)keyValue.getValue()).isIsTrue()
+			);
+		} else {
+			return false;
+		}
 	}
 
 	/**

@@ -45,7 +45,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 	@Inject ILogger logger
 	
 	def doGenerate(Root root) {
-		for (pc: root.protocolClasses) {
+		root.protocolClasses.filter[!isDeprecatedGeneration].forEach[pc |
 			val path = pc.getPath
 			var file = pc.getCHeaderFileName
 
@@ -59,7 +59,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 			// source file
 			file = pc.getCSourceFileName
 			fileIO.generateFile("generating ProtocolClass source", path + file, root.generateSourceFile(pc))
-		}
+		]
 	}
 
 	

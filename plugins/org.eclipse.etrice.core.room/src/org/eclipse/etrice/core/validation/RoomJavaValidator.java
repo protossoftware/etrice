@@ -13,10 +13,10 @@
  *
  *******************************************************************************/
 
-
 package org.eclipse.etrice.core.validation;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -27,8 +27,11 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.EStructuralFeature.Setting;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.core.common.base.Annotation;
 import org.eclipse.etrice.core.common.base.BasePackage;
+import org.eclipse.etrice.core.common.base.BooleanLiteral;
 import org.eclipse.etrice.core.common.base.Import;
 import org.eclipse.etrice.core.common.base.LiteralType;
 import org.eclipse.etrice.core.common.base.util.ImportHelpers;
@@ -65,6 +68,8 @@ import org.eclipse.etrice.core.room.RefPath;
 import org.eclipse.etrice.core.room.ReferenceType;
 import org.eclipse.etrice.core.room.RoomAnnotationTargetEnum;
 import org.eclipse.etrice.core.room.RoomClass;
+import org.eclipse.etrice.core.room.RoomElement;
+import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.StandardOperation;
@@ -76,19 +81,19 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.impl.ImportUriResolver;
 import org.eclipse.xtext.validation.Check;
+import org.eclipse.xtext.validation.CheckType;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
+import com.google.common.collect.FluentIterable;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
-
-
 public class RoomJavaValidator extends AbstractRoomJavaValidator {
-
+	
 	@Inject protected RoomHelpers roomHelpers;
 
 	@Inject protected ValidationUtil validationUtil;
@@ -815,5 +820,36 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 		if (m.getDeprecatedName()!=null) {
 			warning("The data name of messages is deprecated (always named 'transitionData' in action code)", RoomPackage.Literals.MESSAGE_DATA__DEPRECATED_NAME, DEPRECATED_MESSAGE_DATA_NAME);
 		}
+	}
+	
+	/* Validate cross references for "Deprecated" annotation. Check on resource save. */
+	@Check(CheckType.NORMAL)
+	public void checkDeprecatedRefs(RoomModel container) {
+		final Map<EObject, Annotation> deprecatedCandidates = Maps.newHashMap(); // cache instances of annotatable elements
+		Function<EObject, Annotation> findDeprecatedAnnotation = (eObj) -> {
+			if(eObj instanceof RoomElement && roomHelpers.canHaveAnnotations((RoomElement) eObj)) {
+				if(!deprecatedCandidates.containsKey(eObj)) {
+					Annotation annotation = roomHelpers.findDeprecatedAnnotation((RoomElement) eObj);	
+					deprecatedCandidates.put(eObj, annotation);
+				}
+			}
+			return deprecatedCandidates.get(eObj);
+		};
+		Predicate<Annotation> isError = (anno) -> {
+			return anno.getAttributes().stream().anyMatch(keyValue -> "error".equals(keyValue.getKey()) && ((BooleanLiteral)keyValue.getValue()).isIsTrue());
+		};
+		// traverse all cross references of model
+		Map<EObject, Collection<Setting>> intCrossRefs = EcoreUtil.CrossReferencer.find(container.eContents());
+		Map<EObject, Collection<Setting>> extCrossRef = EcoreUtil.ExternalCrossReferencer.find(container);
+		FluentIterable.concat(intCrossRefs.entrySet(), extCrossRef.entrySet()).forEach(entry -> {
+			Annotation annotation = findDeprecatedAnnotation.apply(entry.getKey());
+			if(annotation != null) {
+				if(isError.apply(annotation)) {
+					entry.getValue().forEach(setting -> error("Deprecated - this element cannot be used anymore", setting.getEObject(), setting.getEStructuralFeature()));				
+				} else {
+					entry.getValue().forEach(setting -> warning("Deprecated", setting.getEObject(), setting.getEStructuralFeature()));				
+				}
+			}
+		});
 	}
 }

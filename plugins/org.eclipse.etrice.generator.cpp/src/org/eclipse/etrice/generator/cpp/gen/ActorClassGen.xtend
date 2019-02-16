@@ -47,14 +47,14 @@ class ActorClassGen extends GenericActorClassGenerator {
 	def doGenerate(Root root) {
 		val Map<ActorClass, WiredActorClass> ac2wired = newHashMap
 		root.wiredInstances.filter(typeof(WiredActorClass)).forEach[ac2wired.put(actorClass, it)]
-		for (xpac: root.actorClasses.filter[isValidGenerationLocation].map[root.getExpandedActorClass(it)]) {
+		root.actorClasses.filter[!isDeprecatedGeneration].map[root.getExpandedActorClass(it)].forEach[xpac |
 			val wired = ac2wired.get(xpac.actorClass)
 			val manualBehavior = xpac.actorClass.isBehaviorAnnotationPresent("BehaviorManual")
 			val path = xpac.actorClass.getPath
 			var file = if (manualBehavior) 'Abstract' else ''
 			fileIO.generateFile("generating ActorClass declaration", path + file + xpac.actorClass.getCppHeaderFileName, root.generateHeaderFile(xpac, wired, manualBehavior))
 			fileIO.generateFile("generating ActorClass implementation", path + file + xpac.actorClass.getCppSourceFileName, root.generateSourceFile(xpac, wired, manualBehavior))
-		}
+		]
 	}
 
 	def protected generateHeaderFile(Root root, ExpandedActorClass xpac, WiredActorClass wired, boolean manualBehavior) {

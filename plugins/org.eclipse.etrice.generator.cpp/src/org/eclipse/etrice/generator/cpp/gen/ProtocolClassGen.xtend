@@ -18,6 +18,7 @@ import com.google.inject.Inject
 import com.google.inject.Singleton
 import java.util.List
 import org.eclipse.etrice.core.genmodel.etricegen.Root
+import org.eclipse.etrice.core.genmodel.fsm.IDiagnostician
 import org.eclipse.etrice.core.room.CommunicationType
 import org.eclipse.etrice.core.room.InterfaceItem
 import org.eclipse.etrice.core.room.Message
@@ -26,16 +27,14 @@ import org.eclipse.etrice.core.room.PortClass
 import org.eclipse.etrice.core.room.ProtocolClass
 import org.eclipse.etrice.core.room.SAP
 import org.eclipse.etrice.core.room.SPP
-import org.eclipse.etrice.generator.cpp.Main
-import org.eclipse.etrice.generator.fsm.base.FileSystemHelpers
 import org.eclipse.etrice.generator.base.io.IGeneratorFileIO
+import org.eclipse.etrice.generator.cpp.Main
+import org.eclipse.etrice.generator.cpp.setup.GeneratorOptionsHelper
 import org.eclipse.etrice.generator.generic.GenericProtocolClassGenerator
+import org.eclipse.etrice.generator.generic.ILanguageExtension
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.TypeHelpers
-import org.eclipse.etrice.generator.generic.ILanguageExtension
-import org.eclipse.etrice.core.genmodel.fsm.IDiagnostician
-import org.eclipse.etrice.generator.cpp.setup.GeneratorOptionsHelper
 
 @Singleton
 class ProtocolClassGen extends GenericProtocolClassGenerator {
@@ -45,14 +44,12 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 	@Inject extension RoomExtensions roomExt
 	@Inject extension ProcedureHelpers helpers
 	@Inject extension TypeHelpers
-	@Inject extension FileSystemHelpers
 	@Inject extension GeneratorOptionsHelper
 	@Inject Initialization initHelper
 	@Inject IDiagnostician diagnostician
 
 	def doGenerate(Root root) {
-
-		for (pc: root.protocolClasses.filter(cl|cl.isValidGenerationLocation)) {
+		root.protocolClasses.filter[!isDeprecatedGeneration].forEach[pc |
 			val path = pc.getPath
 			switch (pc.commType) {
 				case CommunicationType::EVENT_DRIVEN:{
@@ -66,7 +63,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 				case CommunicationType::SYNCHRONOUS:
 					diagnostician.error("synchronous protocols not supported yet", pc, null)
 			}
-		}
+		]
 	}
 
 

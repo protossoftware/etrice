@@ -17,19 +17,18 @@ package org.eclipse.etrice.generator.java.gen
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import org.eclipse.etrice.core.genmodel.etricegen.Root
+import org.eclipse.etrice.core.genmodel.fsm.IDiagnostician
 import org.eclipse.etrice.core.room.CommunicationType
 import org.eclipse.etrice.core.room.DataClass
 import org.eclipse.etrice.core.room.Message
 import org.eclipse.etrice.core.room.ProtocolClass
-import org.eclipse.etrice.generator.fsm.base.FileSystemHelpers
 import org.eclipse.etrice.generator.base.io.IGeneratorFileIO
 import org.eclipse.etrice.generator.generic.GenericProtocolClassGenerator
+import org.eclipse.etrice.generator.generic.ILanguageExtension
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.generic.TypeHelpers
 import org.eclipse.etrice.generator.java.Main
-import org.eclipse.etrice.generator.generic.ILanguageExtension
-import org.eclipse.etrice.core.genmodel.fsm.IDiagnostician
 import org.eclipse.etrice.generator.java.setup.GeneratorOptionsHelper
 
 @Singleton
@@ -42,12 +41,11 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 	@Inject extension Initialization
 	@Inject extension TypeHelpers
 	@Inject extension DataClassGen
-	@Inject extension FileSystemHelpers
 	@Inject protected extension GeneratorOptionsHelper
 	@Inject IDiagnostician diagnostician
 
 	def doGenerate(Root root) {
-		for (pc: root.protocolClasses.filter(cl|cl.isValidGenerationLocation)) {
+		root.protocolClasses.filter[!isDeprecatedGeneration].forEach[pc |
 			val path = pc.getPath
 			val file = pc.getJavaFileName
 			val contents =
@@ -63,7 +61,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 				diagnostician.error("synchronous protocols not supported yet", pc, null)
 			else
 				fileIO.generateFile("generating ProtocolClass implementation", path + file, contents)
-		}
+		]
 	}
 
 	def generate(Root root, ProtocolClass pc) {'''

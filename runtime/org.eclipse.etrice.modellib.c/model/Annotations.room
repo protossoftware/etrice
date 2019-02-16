@@ -6,6 +6,17 @@ RoomModel room.basic.annotations {
 		target = ActorBehavior
 	}
 	
+	/**
+	 * Marks elements as deprecated.
+	 */
+	AnnotationType Deprecated {
+		target = {
+			ActorClass, DataClass, Message, Port, ProtocolClass, SubSystemClass
+		}
+		optional attribute error: ptBoolean
+		optional attribute noGenerate: ptBoolean
+	}
+	
 	AnnotationType DataLogging {
 		target = SubSystemClass
 		mandatory attribute pathlist: ptCharacter

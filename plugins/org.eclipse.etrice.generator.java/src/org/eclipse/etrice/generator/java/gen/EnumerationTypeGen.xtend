@@ -14,13 +14,12 @@
 
 package org.eclipse.etrice.generator.java.gen
 
-import org.eclipse.etrice.generator.base.io.IGeneratorFileIO
 import com.google.inject.Inject
-import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.etrice.core.room.EnumerationType
-
-import org.eclipse.etrice.generator.fsm.base.FileSystemHelpers
+import org.eclipse.etrice.core.room.util.RoomHelpers
+import org.eclipse.etrice.generator.base.io.IGeneratorFileIO
+import org.eclipse.etrice.generator.generic.RoomExtensions
 
 /**
  * @author Henrik Rentz-Reichert
@@ -31,14 +30,14 @@ class EnumerationTypeGen {
 	@Inject IGeneratorFileIO fileIO
 	@Inject extension JavaExtensions
 	@Inject extension RoomExtensions
-	@Inject extension FileSystemHelpers
+	@Inject extension RoomHelpers
 	
 	def doGenerate(Root root) {
-		for (et: root.enumClasses.filter(cl|cl.isValidGenerationLocation)) {
+		root.enumClasses.filter[!isDeprecatedGeneration].forEach[ et |
 			var path = et.getPath
 			var file = et.getJavaFileName
 			fileIO.generateFile("generating Enumeration implementation", path + file, root.generate(et))
-		}
+		]
 	}
 	
 	def generate(Root root, EnumerationType et) {

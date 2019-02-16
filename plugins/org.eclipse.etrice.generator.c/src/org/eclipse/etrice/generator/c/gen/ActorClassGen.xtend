@@ -46,7 +46,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 	@Inject protected ILogger logger
 
 	def doGenerate(Root root) {
-		for (xpac: root.actorClasses.map[root.getExpandedActorClass(it)]) {
+		root.actorClasses.filter[!isDeprecatedGeneration].map[root.getExpandedActorClass(it)].forEach[xpac |
 			val path = xpac.actorClass.getPath
 			var file = xpac.actorClass.getCHeaderFileName
 
@@ -65,7 +65,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 				file = xpac.actorClass.getCSourceFileName
 				fileIO.generateFile("generating ActorClass source", path + file, root.generateSourceFile(xpac))
 			}
-		}
+		]
 	}
 
 	def protected generateHeaderFile(Root root, ExpandedActorClass xpac) {

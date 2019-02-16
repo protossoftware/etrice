@@ -38,7 +38,7 @@ class DataClassGen {
 	@Inject ILogger logger
 	
 	def doGenerate(Root root) {
-		for (dc: root.dataClasses) {
+		root.dataClasses.filter[!isDeprecatedGeneration].forEach[dc |
 			val path = dc.getPath
 			var file = dc.getCHeaderFileName
 
@@ -52,8 +52,7 @@ class DataClassGen {
 			// source file
 			file = dc.getCSourceFileName
 			fileIO.generateFile("generating DataClass source", path + file, root.generateSourceFile(dc))
-			
-		}
+		]
 	}
 	
 	def generateHeaderFile(Root root, DataClass dc) {'''

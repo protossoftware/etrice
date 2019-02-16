@@ -21,12 +21,10 @@ import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass
 import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.etrice.core.genmodel.etricegen.WiredActorClass
 import org.eclipse.etrice.core.room.ActorClass
-import org.eclipse.etrice.generator.fsm.base.FileSystemHelpers
+import org.eclipse.etrice.core.room.util.RoomHelpers
 import org.eclipse.etrice.generator.base.io.IGeneratorFileIO
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
-
-import org.eclipse.etrice.core.room.util.RoomHelpers
 
 @Singleton
 class ActorClassDataGen {
@@ -34,18 +32,17 @@ class ActorClassDataGen {
 	@Inject IGeneratorFileIO fileIO
 	@Inject extension RoomHelpers
 	@Inject extension RoomExtensions
-	@Inject extension FileSystemHelpers
 	@Inject extension ProcedureHelpers
 	
 	def doGenerate(Root root) {
 		val HashMap<ActorClass, WiredActorClass> ac2wired = new HashMap<ActorClass, WiredActorClass>
 		root.wiredInstances.filter(w|w instanceof WiredActorClass).forEach[w|ac2wired.put((w as WiredActorClass).actorClass, w as WiredActorClass)]
-		for (xpac: root.actorClasses.filter[isValidGenerationLocation].map[root.getExpandedActorClass(it)]) {
+		root.actorClasses.filter[!isDeprecatedGeneration].map[root.getExpandedActorClass(it)].forEach[xpac |
 			val wired = ac2wired.get(xpac.actorClass)
 			val path = xpac.actorClass.getPath
 			var file = xpac.actorClass.name+"_DataObject.java"
 			fileIO.generateFile("generating ActorClass implementation", path + file, root.generate(xpac, wired))
-		}
+		]
 	}
 	
 	def generate(Root root, ExpandedActorClass xpac, WiredActorClass wired) {

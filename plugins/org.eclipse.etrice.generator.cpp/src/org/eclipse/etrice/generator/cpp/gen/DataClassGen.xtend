@@ -37,7 +37,7 @@ class DataClassGen {
 	@Inject extension RoomHelpers
 
 	def doGenerate(Root root) {
-		for (dc: root.dataClasses) {
+		root.dataClasses.filter[!isDeprecatedGeneration].forEach[dc |
 			var path = dc.getPath
 
 			// header file
@@ -46,8 +46,7 @@ class DataClassGen {
 			// source file
 			fileIO.generateFile("generating DataClass source", path + dc.getCppSourceFileName, root.generateSourceFile(dc))
 
-		}
-
+		]
 	}
 
 	def generateHeaderFile(Root root, DataClass dc) {
