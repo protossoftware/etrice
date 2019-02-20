@@ -58,19 +58,19 @@ public class GeneratorResourceLoader implements IGeneratorResourceLoader {
 	public List<Resource> load(List<String> files, Arguments arguments, ILogger logger) throws GeneratorException {
 		doEMFRegistration();
 		
-		List<Resource> models = new ArrayList<>(files.size());
+		List<Resource> resources = new ArrayList<>(files.size());
 		ResourceSet resourceSet = resourceSetProvider.get();
 		Adapter resourceAddedAdapter = new ResourceAddedAdapter(logger);
 		resourceSet.eAdapters().add(resourceAddedAdapter);
 				
 		for(String f: files) {
 			Resource r = loadResource(f, resourceSet, logger);
-			models.add(r);
+			resources.add(r);
 		}
 		
 		EcoreUtil.resolveAll(resourceSet);
 		
-		return models;
+		return resources;
 	}
 	
 	private void doEMFRegistration() {
@@ -91,13 +91,11 @@ public class GeneratorResourceLoader implements IGeneratorResourceLoader {
 		}
 	}
 	
-	private URI createURI(String file) throws IOException {
+	protected URI createURI(String file) throws IOException {
 		String realPath = Paths.get(file).toRealPath().toString();
 		URI uri = URI.createFileURI(realPath);
 		return uri;
 	}
-	
-	
 	
 	private class ResourceAddedAdapter extends AdapterImpl {
 		
