@@ -15,6 +15,7 @@
 
 package org.eclipse.etrice.generator.base;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.ecore.resource.Resource;
@@ -40,6 +41,7 @@ public class ModelValidator extends GeneratorResourceValidator {
 	public void validate(List<Resource> resources, Arguments arguments, ILogger logger) {
 		logger.logInfo("-- validating models");
 		
+		// Validate all resources in the resource set
 		if(!resources.isEmpty()) {
 			ResourceSet rs = resources.get(0).getResourceSet();
 			if(rs != null) {
@@ -48,7 +50,14 @@ public class ModelValidator extends GeneratorResourceValidator {
 		}
 		
 		try {
-			super.validate(resources, arguments, logger);
+			List<Resource> toValidate = new ArrayList<>(resources);
+			
+			super.validate(toValidate, arguments, logger);
+			
+			// Bug 544504
+			if(toValidate.size() != resources.size()) {
+				throw new IllegalStateException("List of resources has changed during validation");
+			}
 		}
 		catch(Exception e) {
 			logger.logInfo("validation failed");
