@@ -198,6 +198,7 @@ class DetailExpressionProvider implements IDetailExpressionProvider {
 						default: createExprFeature(IDetailExpressionProvider.ExpressionPostfix.NONE)
 				}]
 			}
+			case model.isInContainment(Operation),
 			case model.isInContainment(StateGraphItem): {
 				ac.allInterfaceItems.forEach [
 					switch it {

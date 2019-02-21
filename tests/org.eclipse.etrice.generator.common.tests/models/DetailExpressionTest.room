@@ -56,7 +56,43 @@ RoomModel DetailExpressionTestModel {
 			dtor '''
 				numberArray[0] = 5;
 			'''
-			Operation actorOp(param: int32): boolean '''
+			Operation actorOp(param: int32): boolean '''		
+				/*
+				 * below copied from StateMachine state
+				 */
+				
+				rPortEvent.out1(true);
+				rPortData.in1;
+				rReplEvent[0].out1(true);
+				rReplEvent.out1(true); // broadcast
+				cPortEvent.in1();
+				cPortData.in1(32);
+				cReplEvent[1].in1();
+				cReplEvent.in1(); // broadcast
+				sppEvent[4].out1(true);
+				sppEvent.out1(true); // broadcast
+				rPortEvent.regularOp(32);
+				cPortEvent.conjOp(32);
+				actorOp(32);
+				int number = numberArray[0];
+				DData nestedData = infoData.nested;
+				int port = infoData.nested.tcpPort;
+				
+				// -- not supported yet by code translation --
+				// getReplication():
+				// int replSize1 = rReplEvent.getReplication();
+				// int replSize2 = cReplEvent.getReplication();
+				// int replSize2 = sppEvent.getReplication();
+				
+				// DataClass operations:
+				// infoData.dataOp(32);
+				// infoData.nested.dataOp("127.0.0.1", 8080);
+				
+				// enum
+				enumEvent.enumMsg(ProtocolEnum.ACK);
+				enumEvent.enumMsg2(ColorEnum.WHITE);
+				// numberArray[0] = LocalEnum.FIRST;
+
 				return param == 0;
 			'''
 			StateMachine {
@@ -69,7 +105,12 @@ RoomModel DetailExpressionTestModel {
 						'''>
 					}
 					action '''
-						// TODO syntax highlighting
+						// transition event data
+						int data = (transitionData)? 1 : 0;
+						
+						/*
+						 * below copied from StateMachine state
+						 */
 						rPortEvent.out1(true);
 						rPortData.in1;
 						rReplEvent[0].out1(true);
@@ -86,9 +127,6 @@ RoomModel DetailExpressionTestModel {
 						int number = numberArray[0];
 						DData nestedData = infoData.nested;
 						int port = infoData.nested.tcpPort;
-						
-						// transition event data
-						int data = (transitionData)? 1 : 0;
 						
 						// -- not supported yet by code translation --
 						// getReplication():
@@ -115,6 +153,42 @@ RoomModel DetailExpressionTestModel {
 				State idle
 				State state1
 				State state2
+				State state {
+					entry '''
+						// TODO syntax highlighting
+						rPortEvent.out1(true);
+						rPortData.in1;
+						rReplEvent[0].out1(true);
+						rReplEvent.out1(true); // broadcast
+						cPortEvent.in1();
+						cPortData.in1(32);
+						cReplEvent[1].in1();
+						cReplEvent.in1(); // broadcast
+						sppEvent[4].out1(true);
+						sppEvent.out1(true); // broadcast
+						rPortEvent.regularOp(32);
+						cPortEvent.conjOp(32);
+						actorOp(32);
+						int number = numberArray[0];
+						DData nestedData = infoData.nested;
+						int port = infoData.nested.tcpPort;
+						
+						// -- not supported yet by code translation --
+						// getReplication():
+						// int replSize1 = rReplEvent.getReplication();
+						// int replSize2 = cReplEvent.getReplication();
+						// int replSize2 = sppEvent.getReplication();
+						
+						// DataClass operations:
+						// infoData.dataOp(32);
+						// infoData.nested.dataOp("127.0.0.1", 8080);
+						
+						// enum
+						enumEvent.enumMsg(ProtocolEnum.ACK);
+						enumEvent.enumMsg2(ColorEnum.WHITE);
+						// numberArray[0] = LocalEnum.FIRST;
+					'''
+				}
 			}
 		}
 	}
