@@ -25,7 +25,8 @@ ext.createGeneratorTask = { name, lang, models, genDir = 'src-gen', options = []
 		args '-clean', '-msc_instr', '-genDir', genDir
 		args options
 		args models
-		inputs.files models
-		outputs.dir genDir
+		// not incremental (modellib input files missing)
+		// inputs.files models
+		// outputs.dir genDir
 	}
 }

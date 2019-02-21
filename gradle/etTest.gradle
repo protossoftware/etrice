@@ -75,9 +75,9 @@ ext.createTest = { lang, name, models, options = [] ->
 		runTask = tasks.create(name: "run$testNameCap", type: Exec) {
 			dependsOn "${testName}Executable"
 			commandLine exeFile, '-run_as_test'
-			inputs.file exeFile
-			outputs.file etuFile
 			it.workingDir = workingDir
+			// inputs.file exeFile
+			// outputs.file etuFile
 		}
 	}
 	
@@ -97,8 +97,8 @@ ext.createTest = { lang, name, models, options = [] ->
 			dependsOn "${name}Classes"
 			classpath = testSourceSet.runtimeClasspath
 			args '-run_as_test'
-			outputs.file etuFile
 			it.workingDir = workingDir
+			// outputs.file etuFile
 			
 			doFirst { main = getMainClass(genDir) }
 		}
