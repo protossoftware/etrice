@@ -1347,20 +1347,15 @@ ruleImport returns [EObject current=null]
 	    }
 
 )
-)	otherlv_2='from' 
+)(	otherlv_2='from' 
     {
-    	newLeafNode(otherlv_2, grammarAccess.getImportAccess().getFromKeyword_1_0_1());
+    	newLeafNode(otherlv_2, grammarAccess.getImportAccess().getFromKeyword_1_0_1_0());
     }
-)
-    |	otherlv_3='model' 
-    {
-    	newLeafNode(otherlv_3, grammarAccess.getImportAccess().getModelKeyword_1_1());
-    }
-)(
 (
-		lv_importURI_4_0=RULE_STRING
+(
+		lv_importURI_3_0=RULE_STRING
 		{
-			newLeafNode(lv_importURI_4_0, grammarAccess.getImportAccess().getImportURISTRINGTerminalRuleCall_2_0()); 
+			newLeafNode(lv_importURI_3_0, grammarAccess.getImportAccess().getImportURISTRINGTerminalRuleCall_1_0_1_1_0()); 
 		}
 		{
 	        if ($current==null) {
@@ -1369,12 +1364,35 @@ ruleImport returns [EObject current=null]
        		setWithLastConsumed(
        			$current, 
        			"importURI",
-        		lv_importURI_4_0, 
+        		lv_importURI_3_0, 
         		"org.eclipse.xtext.common.Terminals.STRING");
 	    }
 
 )
-))
+))?)
+    |(	otherlv_4='model' 
+    {
+    	newLeafNode(otherlv_4, grammarAccess.getImportAccess().getModelKeyword_1_1_0());
+    }
+(
+(
+		lv_importURI_5_0=RULE_STRING
+		{
+			newLeafNode(lv_importURI_5_0, grammarAccess.getImportAccess().getImportURISTRINGTerminalRuleCall_1_1_1_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getImportRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"importURI",
+        		lv_importURI_5_0, 
+        		"org.eclipse.xtext.common.Terminals.STRING");
+	    }
+
+)
+))))
 ;
 
 
@@ -2193,6 +2211,8 @@ ruleLiteralType returns [Enumerator current=null]
 
 
 RULE_HEX : ('0x'|'0X') ('0'..'9'|'a'..'f'|'A'..'F')+;
+
+RULE_CC_STRING : '\'\'\'' ( options {greedy=false;} : . )*'\'\'\'';
 
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 

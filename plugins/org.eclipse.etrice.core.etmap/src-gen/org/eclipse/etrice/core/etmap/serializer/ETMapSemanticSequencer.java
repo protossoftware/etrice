@@ -155,8 +155,8 @@ public class ETMapSemanticSequencer extends BaseSemanticSequencer {
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ETMapPackage.Literals.THREAD_MAPPING__PHYSICAL_THREAD));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getThreadMappingAccess().getLogicalThreadLogicalThreadIDTerminalRuleCall_1_0_1(), semanticObject.getLogicalThread());
-		feeder.accept(grammarAccess.getThreadMappingAccess().getPhysicalThreadPhysicalThreadIDTerminalRuleCall_3_0_1(), semanticObject.getPhysicalThread());
+		feeder.accept(grammarAccess.getThreadMappingAccess().getLogicalThreadLogicalThreadIDTerminalRuleCall_1_0_1(), semanticObject.eGet(ETMapPackage.Literals.THREAD_MAPPING__LOGICAL_THREAD, false));
+		feeder.accept(grammarAccess.getThreadMappingAccess().getPhysicalThreadPhysicalThreadIDTerminalRuleCall_3_0_1(), semanticObject.eGet(ETMapPackage.Literals.THREAD_MAPPING__PHYSICAL_THREAD, false));
 		feeder.finish();
 	}
 	

@@ -4,7 +4,7 @@
     editorDirectory="/org.eclipse.etrice.core.common.editor/src" modelPluginID="org.eclipse.etrice.core.common"
     forceOverwrite="true" modelName="Base" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="6.0" copyrightFields="false" editPluginID="org.eclipse.etrice.core.common.edit"
-    editorPluginID="org.eclipse.etrice.core.common.editor" runtimeVersion="2.12">
+    editorPluginID="org.eclipse.etrice.core.common.editor" runtimeVersion="2.13">
   <genPackages prefix="Base" basePackage="org.eclipse.etrice.core.common" disposableProviderFactory="true"
       fileExtensions="__etbase" ecorePackage="Base.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="Base.ecore#//LiteralType">

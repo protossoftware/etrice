@@ -252,8 +252,8 @@ public class ConfigSemanticSequencer extends BaseSemanticSequencer {
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ConfigPackage.Literals.ENUM_CONFIG_VALUE__VALUE));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getEnumConfigValueAccess().getTypeEnumerationTypeIDTerminalRuleCall_0_0_1(), semanticObject.getType());
-		feeder.accept(grammarAccess.getEnumConfigValueAccess().getValueEnumLiteralIDTerminalRuleCall_2_0_1(), semanticObject.getValue());
+		feeder.accept(grammarAccess.getEnumConfigValueAccess().getTypeEnumerationTypeIDTerminalRuleCall_0_0_1(), semanticObject.eGet(ConfigPackage.Literals.ENUM_CONFIG_VALUE__TYPE, false));
+		feeder.accept(grammarAccess.getEnumConfigValueAccess().getValueEnumLiteralIDTerminalRuleCall_2_0_1(), semanticObject.eGet(ConfigPackage.Literals.ENUM_CONFIG_VALUE__VALUE, false));
 		feeder.finish();
 	}
 	
@@ -356,8 +356,8 @@ public class ConfigSemanticSequencer extends BaseSemanticSequencer {
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ConfigPackage.Literals.SUB_SYSTEM_CONFIG__DYN_CONFIG));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getSubSystemConfigAccess().getRootLogicalSystemFQNParserRuleCall_1_0_1(), semanticObject.getRoot());
-		feeder.accept(grammarAccess.getSubSystemConfigAccess().getSubSystemSubSystemRefIDTerminalRuleCall_3_0_1(), semanticObject.getSubSystem());
+		feeder.accept(grammarAccess.getSubSystemConfigAccess().getRootLogicalSystemFQNParserRuleCall_1_0_1(), semanticObject.eGet(ConfigPackage.Literals.SUB_SYSTEM_CONFIG__ROOT, false));
+		feeder.accept(grammarAccess.getSubSystemConfigAccess().getSubSystemSubSystemRefIDTerminalRuleCall_3_0_1(), semanticObject.eGet(ConfigPackage.Literals.SUB_SYSTEM_CONFIG__SUB_SYSTEM, false));
 		feeder.accept(grammarAccess.getSubSystemConfigAccess().getDynConfigDynamicConfigParserRuleCall_5_0(), semanticObject.getDynConfig());
 		feeder.finish();
 	}

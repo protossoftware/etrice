@@ -156,7 +156,7 @@ public class BaseSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     Import returns Import
 	 *
 	 * Constraint:
-	 *     (importedNamespace=ImportedFQN? importURI=STRING)
+	 *     ((importedNamespace=ImportedFQN importURI=STRING?) | importURI=STRING)
 	 */
 	protected void sequence_Import(ISerializationContext context, Import semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

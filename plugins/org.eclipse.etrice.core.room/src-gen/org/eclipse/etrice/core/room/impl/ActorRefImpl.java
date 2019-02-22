@@ -107,7 +107,6 @@ public class ActorRefImpl extends ActorContainerRefImpl implements ActorRef
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public ReferenceType getRefType()
   {
     return refType;
@@ -118,7 +117,6 @@ public class ActorRefImpl extends ActorContainerRefImpl implements ActorRef
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setRefType(ReferenceType newRefType)
   {
     ReferenceType oldRefType = refType;
@@ -132,7 +130,6 @@ public class ActorRefImpl extends ActorContainerRefImpl implements ActorRef
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public int getMultiplicity()
   {
     return multiplicity;
@@ -143,7 +140,6 @@ public class ActorRefImpl extends ActorContainerRefImpl implements ActorRef
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setMultiplicity(int newMultiplicity)
   {
     int oldMultiplicity = multiplicity;
@@ -157,7 +153,6 @@ public class ActorRefImpl extends ActorContainerRefImpl implements ActorRef
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public ActorClass getType()
   {
     if (type != null && type.eIsProxy())
@@ -188,7 +183,6 @@ public class ActorRefImpl extends ActorContainerRefImpl implements ActorRef
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setType(ActorClass newType)
   {
     ActorClass oldType = type;
@@ -294,7 +288,7 @@ public class ActorRefImpl extends ActorContainerRefImpl implements ActorRef
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuilder result = new StringBuilder(super.toString());
+    StringBuffer result = new StringBuffer(super.toString());
     result.append(" (refType: ");
     result.append(refType);
     result.append(", multiplicity: ");

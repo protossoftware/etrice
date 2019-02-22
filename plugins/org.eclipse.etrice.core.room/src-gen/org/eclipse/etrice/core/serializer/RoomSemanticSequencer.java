@@ -380,18 +380,18 @@ public class RoomSemanticSequencer extends FSMSemanticSequencer {
 	 *         userCode1=DetailCode? 
 	 *         userCode2=DetailCode? 
 	 *         userCode3=DetailCode? 
-	 *         serviceImplementations+=ServiceImplementation? 
+	 *         attributes+=Attribute? 
 	 *         (
 	 *             (
 	 *                 connections+=LayerConnection | 
 	 *                 bindings+=Binding | 
-	 *                 attributes+=Attribute | 
+	 *                 serviceImplementations+=ServiceImplementation | 
 	 *                 actorRefs+=ActorRef | 
 	 *                 serviceAccessPoints+=SAP | 
 	 *                 internalPorts+=Port | 
 	 *                 externalPorts+=ExternalPort
 	 *             )? 
-	 *             serviceImplementations+=ServiceImplementation?
+	 *             attributes+=Attribute?
 	 *         )* 
 	 *         behaviorDocu=Documentation? 
 	 *         behaviorAnnotations+=Annotation* 

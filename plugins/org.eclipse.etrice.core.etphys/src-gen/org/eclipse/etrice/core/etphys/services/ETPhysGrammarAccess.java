@@ -247,7 +247,7 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
 
-		//('runtime' '=' runtime=[RuntimeClass|FQN] & 'priomin' '=' priomin=Integer & 'priomax' '=' priomax=Integer)
+		//'runtime' '=' runtime=[RuntimeClass|FQN] & 'priomin' '=' priomin=Integer & 'priomax' '=' priomax=Integer
 		public UnorderedGroup getUnorderedGroup_4() { return cUnorderedGroup_4; }
 
 		//'runtime' '=' runtime=[RuntimeClass|FQN]
@@ -365,7 +365,7 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		//msgpoolsize=INT) '}'
 		public Group getGroup() { return cGroup; }
 
-		//(default?='DefaultThread' | 'Thread')
+		//default?='DefaultThread' | 'Thread'
 		public Alternatives getAlternatives_0() { return cAlternatives_0; }
 
 		//default?='DefaultThread'
@@ -386,8 +386,8 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
 
-		//('execmode' '=' execmode=ExecMode & ('interval' '=' time=TIME)? & 'prio' '=' prio=Integer & 'stacksize' '='
-		//stacksize=INT & 'msgblocksize' '=' msgblocksize=INT & 'msgpoolsize' '=' msgpoolsize=INT)
+		//'execmode' '=' execmode=ExecMode & ('interval' '=' time=TIME)? & 'prio' '=' prio=Integer & 'stacksize' '=' stacksize=INT
+		//& 'msgblocksize' '=' msgblocksize=INT & 'msgpoolsize' '=' msgpoolsize=INT
 		public UnorderedGroup getUnorderedGroup_3() { return cUnorderedGroup_3; }
 
 		//'execmode' '=' execmode=ExecMode
@@ -874,7 +874,7 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 	//// the attribute 'importedNamespace' is picked up by the ImportedNamespaceAwareLocalScopeProvider
 	//// the attribute 'importURI' is picked up by the ImportUriGlobalScopeProvider
 	//Import:
-	//	'import' (importedNamespace=ImportedFQN 'from' | 'model') importURI=STRING;
+	//	'import' (importedNamespace=ImportedFQN ('from' importURI=STRING)? | 'model' importURI=STRING);
 	public BaseGrammarAccess.ImportElements getImportAccess() {
 		return gaBase.getImportAccess();
 	}
@@ -911,7 +911,7 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 	//// **************************************************************
 	//// Time Rule
 	//TIME ecore::ELong:
-	//	INT 's' | INT 'ms' | INT 'us' | INT 'ns'
+	//	INT 's' | INT 'ms' | INT 'us' | INT 'ns';
 	public BaseGrammarAccess.TIMEElements getTIMEAccess() {
 		return gaBase.getTIMEAccess();
 	}
@@ -1005,7 +1005,7 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Integer ecore::ELong:
-	//	('+' | '-')? INT | HEX
+	//	('+' | '-')? INT | HEX;
 	public BaseGrammarAccess.IntegerElements getIntegerAccess() {
 		return gaBase.getIntegerAccess();
 	}
@@ -1015,7 +1015,7 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Real ecore::EDouble:
-	//	Decimal | DecimalExp
+	//	Decimal | DecimalExp;
 	public BaseGrammarAccess.RealElements getRealAccess() {
 		return gaBase.getRealAccess();
 	}
@@ -1065,6 +1065,12 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 		return gaBase.getHEXRule();
 	} 
 
+	//terminal CC_STRING:
+	//	"'''"->"'''";
+	public TerminalRule getCC_STRINGRule() {
+		return gaBase.getCC_STRINGRule();
+	} 
+
 	//terminal ID:
 	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
@@ -1084,7 +1090,7 @@ public class ETPhysGrammarAccess extends AbstractGrammarElementFinder {
 	} 
 
 	//terminal ML_COMMENT:
-	//	'/ *'->'* /';
+	//	'/*'->'*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 

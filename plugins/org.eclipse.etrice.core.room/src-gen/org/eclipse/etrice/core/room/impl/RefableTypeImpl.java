@@ -86,7 +86,6 @@ public class RefableTypeImpl extends MinimalEObjectImpl.Container implements Ref
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public DataType getType()
   {
     if (type != null && type.eIsProxy())
@@ -117,7 +116,6 @@ public class RefableTypeImpl extends MinimalEObjectImpl.Container implements Ref
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setType(DataType newType)
   {
     DataType oldType = type;
@@ -131,7 +129,6 @@ public class RefableTypeImpl extends MinimalEObjectImpl.Container implements Ref
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public boolean isRef()
   {
     return ref;
@@ -142,7 +139,6 @@ public class RefableTypeImpl extends MinimalEObjectImpl.Container implements Ref
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setRef(boolean newRef)
   {
     boolean oldRef = ref;
@@ -238,7 +234,7 @@ public class RefableTypeImpl extends MinimalEObjectImpl.Container implements Ref
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuilder result = new StringBuilder(super.toString());
+    StringBuffer result = new StringBuffer(super.toString());
     result.append(" (ref: ");
     result.append(ref);
     result.append(')');

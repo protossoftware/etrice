@@ -32,6 +32,8 @@ import org.eclipse.etrice.core.config.RefPath;
 import org.eclipse.etrice.core.config.RefSegment;
 import org.eclipse.etrice.core.config.SubSystemConfig;
 
+import org.eclipse.etrice.core.fsm.fSM.FSMPackage;
+
 import org.eclipse.etrice.core.room.RoomPackage;
 
 /**
@@ -217,7 +219,9 @@ public class ConfigPackageImpl extends EPackageImpl implements ConfigPackage
     isInited = true;
 
     // Initialize simple dependencies
+    BasePackage.eINSTANCE.eClass();
     RoomPackage.eINSTANCE.eClass();
+    FSMPackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
     theConfigPackage.createPackageContents();

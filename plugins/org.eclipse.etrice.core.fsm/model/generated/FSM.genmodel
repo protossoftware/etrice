@@ -4,7 +4,7 @@
     editorDirectory="/org.eclipse.etrice.core.fsm.editor/src" modelPluginID="org.eclipse.etrice.core.fsm"
     forceOverwrite="true" modelName="FSM" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="6.0" copyrightFields="false" editPluginID="org.eclipse.etrice.core.fsm.edit"
-    editorPluginID="org.eclipse.etrice.core.fsm.editor" runtimeVersion="2.12" usedGenPackages="platform:/resource/org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.genmodel#//base">
+    editorPluginID="org.eclipse.etrice.core.fsm.editor" runtimeVersion="2.13" usedGenPackages="platform:/resource/org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.genmodel#//base">
   <genPackages prefix="FSM" basePackage="org.eclipse.etrice.core.fsm" disposableProviderFactory="true"
       fileExtensions="fsm" ecorePackage="FSM.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="FSM.ecore#//ComponentCommunicationType">

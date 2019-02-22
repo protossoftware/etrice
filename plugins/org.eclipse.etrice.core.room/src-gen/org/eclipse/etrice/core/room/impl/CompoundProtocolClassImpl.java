@@ -69,7 +69,6 @@ public class CompoundProtocolClassImpl extends GeneralProtocolClassImpl implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EList<SubProtocol> getSubProtocols()
   {
     if (subProtocols == null)

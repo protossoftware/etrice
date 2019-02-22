@@ -65,7 +65,6 @@ public class ServiceImplementationImpl extends MinimalEObjectImpl.Container impl
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public SPP getSpp()
   {
     if (spp != null && spp.eIsProxy())
@@ -96,7 +95,6 @@ public class ServiceImplementationImpl extends MinimalEObjectImpl.Container impl
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setSpp(SPP newSpp)
   {
     SPP oldSpp = spp;

@@ -57,8 +57,8 @@ class BaseFormatter extends AbstractFormatter2 {
 	}
 	
 	def dispatch void format(Import it, extension IFormattableDocument document) {
-		regionFor.keywords(importAccess.importKeyword_0, importAccess.modelKeyword_1_1).forEach[append[oneSpace]]
-		regionFor.keyword(importAccess.fromKeyword_1_0_1).surround[oneSpace]
+		regionFor.keywords(importAccess.importKeyword_0, importAccess.modelKeyword_1_1_0).forEach[append[oneSpace]]
+		regionFor.keyword(importAccess.fromKeyword_1_0_1_0).surround[oneSpace]
 		eContents.forEach[format] // format children
 	}
 	

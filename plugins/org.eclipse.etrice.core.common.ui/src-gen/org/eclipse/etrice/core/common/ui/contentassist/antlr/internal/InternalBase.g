@@ -1852,6 +1852,8 @@ finally {
 
 
 
+
+
 rule__ImportedFQN__Group__0
     @init {
 		int stackSize = keepStackSize();
@@ -3036,6 +3038,7 @@ rule__EnumAnnotationAttribute__ValuesAssignment_6_1
 finally {
 	restoreStackSize(stackSize);
 }
+
 
 
 

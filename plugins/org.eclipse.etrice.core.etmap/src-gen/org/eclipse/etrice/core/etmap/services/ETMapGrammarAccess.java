@@ -451,7 +451,7 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 	//// the attribute 'importedNamespace' is picked up by the ImportedNamespaceAwareLocalScopeProvider
 	//// the attribute 'importURI' is picked up by the ImportUriGlobalScopeProvider
 	//Import:
-	//	'import' (importedNamespace=ImportedFQN 'from' | 'model') importURI=STRING;
+	//	'import' (importedNamespace=ImportedFQN ('from' importURI=STRING)? | 'model' importURI=STRING);
 	public BaseGrammarAccess.ImportElements getImportAccess() {
 		return gaBase.getImportAccess();
 	}
@@ -488,7 +488,7 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 	//// **************************************************************
 	//// Time Rule
 	//TIME ecore::ELong:
-	//	INT 's' | INT 'ms' | INT 'us' | INT 'ns'
+	//	INT 's' | INT 'ms' | INT 'us' | INT 'ns';
 	public BaseGrammarAccess.TIMEElements getTIMEAccess() {
 		return gaBase.getTIMEAccess();
 	}
@@ -582,7 +582,7 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Integer ecore::ELong:
-	//	('+' | '-')? INT | HEX
+	//	('+' | '-')? INT | HEX;
 	public BaseGrammarAccess.IntegerElements getIntegerAccess() {
 		return gaBase.getIntegerAccess();
 	}
@@ -592,7 +592,7 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Real ecore::EDouble:
-	//	Decimal | DecimalExp
+	//	Decimal | DecimalExp;
 	public BaseGrammarAccess.RealElements getRealAccess() {
 		return gaBase.getRealAccess();
 	}
@@ -642,6 +642,12 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 		return gaBase.getHEXRule();
 	} 
 
+	//terminal CC_STRING:
+	//	"'''"->"'''";
+	public TerminalRule getCC_STRINGRule() {
+		return gaBase.getCC_STRINGRule();
+	} 
+
 	//terminal ID:
 	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
@@ -661,7 +667,7 @@ public class ETMapGrammarAccess extends AbstractGrammarElementFinder {
 	} 
 
 	//terminal ML_COMMENT:
-	//	'/ *'->'* /';
+	//	'/*'->'*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 

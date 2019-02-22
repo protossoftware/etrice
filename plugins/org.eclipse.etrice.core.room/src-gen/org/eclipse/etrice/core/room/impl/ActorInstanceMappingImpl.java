@@ -96,7 +96,6 @@ public class ActorInstanceMappingImpl extends MinimalEObjectImpl.Container imple
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public RefPath getPath()
   {
     return path;
@@ -124,7 +123,6 @@ public class ActorInstanceMappingImpl extends MinimalEObjectImpl.Container imple
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setPath(RefPath newPath)
   {
     if (newPath != path)
@@ -146,7 +144,6 @@ public class ActorInstanceMappingImpl extends MinimalEObjectImpl.Container imple
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public LogicalThread getThread()
   {
     if (thread != null && thread.eIsProxy())
@@ -177,7 +174,6 @@ public class ActorInstanceMappingImpl extends MinimalEObjectImpl.Container imple
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setThread(LogicalThread newThread)
   {
     LogicalThread oldThread = thread;
@@ -191,7 +187,6 @@ public class ActorInstanceMappingImpl extends MinimalEObjectImpl.Container imple
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EList<ActorInstanceMapping> getActorInstanceMappings()
   {
     if (actorInstanceMappings == null)

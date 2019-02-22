@@ -110,7 +110,6 @@ public class PortClassImpl extends MinimalEObjectImpl.Container implements PortC
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public DetailCode getUserCode()
   {
     return userCode;
@@ -138,7 +137,6 @@ public class PortClassImpl extends MinimalEObjectImpl.Container implements PortC
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setUserCode(DetailCode newUserCode)
   {
     if (newUserCode != userCode)
@@ -160,7 +158,6 @@ public class PortClassImpl extends MinimalEObjectImpl.Container implements PortC
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EList<MessageHandler> getMsgHandlers()
   {
     if (msgHandlers == null)
@@ -175,7 +172,6 @@ public class PortClassImpl extends MinimalEObjectImpl.Container implements PortC
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EList<PortOperation> getOperations()
   {
     if (operations == null)
@@ -190,7 +186,6 @@ public class PortClassImpl extends MinimalEObjectImpl.Container implements PortC
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EList<Attribute> getAttributes()
   {
     if (attributes == null)

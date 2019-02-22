@@ -4881,7 +4881,7 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//// the attribute 'importedNamespace' is picked up by the ImportedNamespaceAwareLocalScopeProvider
 	//// the attribute 'importURI' is picked up by the ImportUriGlobalScopeProvider
 	//Import:
-	//	'import' (importedNamespace=ImportedFQN 'from' | 'model') importURI=STRING;
+	//	'import' (importedNamespace=ImportedFQN ('from' importURI=STRING)? | 'model' importURI=STRING);
 	public BaseGrammarAccess.ImportElements getImportAccess() {
 		return gaBase.getImportAccess();
 	}

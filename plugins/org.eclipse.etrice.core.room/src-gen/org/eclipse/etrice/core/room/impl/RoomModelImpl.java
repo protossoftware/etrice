@@ -227,7 +227,6 @@ public class RoomModelImpl extends MinimalEObjectImpl.Container implements RoomM
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public String getName()
   {
     return name;
@@ -238,7 +237,6 @@ public class RoomModelImpl extends MinimalEObjectImpl.Container implements RoomM
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setName(String newName)
   {
     String oldName = name;
@@ -252,7 +250,6 @@ public class RoomModelImpl extends MinimalEObjectImpl.Container implements RoomM
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public Documentation getDocu()
   {
     return docu;
@@ -280,7 +277,6 @@ public class RoomModelImpl extends MinimalEObjectImpl.Container implements RoomM
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setDocu(Documentation newDocu)
   {
     if (newDocu != docu)
@@ -302,7 +298,6 @@ public class RoomModelImpl extends MinimalEObjectImpl.Container implements RoomM
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EList<Annotation> getAnnotations()
   {
     if (annotations == null)
@@ -317,7 +312,6 @@ public class RoomModelImpl extends MinimalEObjectImpl.Container implements RoomM
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EList<Import> getImports()
   {
     if (imports == null)
@@ -332,7 +326,6 @@ public class RoomModelImpl extends MinimalEObjectImpl.Container implements RoomM
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EList<PrimitiveType> getPrimitiveTypes()
   {
     if (primitiveTypes == null)
@@ -347,7 +340,6 @@ public class RoomModelImpl extends MinimalEObjectImpl.Container implements RoomM
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EList<EnumerationType> getEnumerationTypes()
   {
     if (enumerationTypes == null)
@@ -362,7 +354,6 @@ public class RoomModelImpl extends MinimalEObjectImpl.Container implements RoomM
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EList<ExternalType> getExternalTypes()
   {
     if (externalTypes == null)
@@ -377,7 +368,6 @@ public class RoomModelImpl extends MinimalEObjectImpl.Container implements RoomM
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EList<DataClass> getDataClasses()
   {
     if (dataClasses == null)
@@ -392,7 +382,6 @@ public class RoomModelImpl extends MinimalEObjectImpl.Container implements RoomM
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EList<GeneralProtocolClass> getProtocolClasses()
   {
     if (protocolClasses == null)
@@ -407,7 +396,6 @@ public class RoomModelImpl extends MinimalEObjectImpl.Container implements RoomM
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EList<ActorClass> getActorClasses()
   {
     if (actorClasses == null)
@@ -422,7 +410,6 @@ public class RoomModelImpl extends MinimalEObjectImpl.Container implements RoomM
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EList<SubSystemClass> getSubSystemClasses()
   {
     if (subSystemClasses == null)
@@ -437,7 +424,6 @@ public class RoomModelImpl extends MinimalEObjectImpl.Container implements RoomM
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EList<LogicalSystem> getSystems()
   {
     if (systems == null)
@@ -452,7 +438,6 @@ public class RoomModelImpl extends MinimalEObjectImpl.Container implements RoomM
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public EList<AnnotationType> getAnnotationTypes()
   {
     if (annotationTypes == null)
@@ -708,7 +693,7 @@ public class RoomModelImpl extends MinimalEObjectImpl.Container implements RoomM
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuilder result = new StringBuilder(super.toString());
+    StringBuffer result = new StringBuffer(super.toString());
     result.append(" (name: ");
     result.append(name);
     result.append(')');

@@ -64,7 +64,6 @@ public class PortOperationImpl extends OperationImpl implements PortOperation
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public Message getSendsMsg()
   {
     if (sendsMsg != null && sendsMsg.eIsProxy())
@@ -95,7 +94,6 @@ public class PortOperationImpl extends OperationImpl implements PortOperation
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setSendsMsg(Message newSendsMsg)
   {
     Message oldSendsMsg = sendsMsg;

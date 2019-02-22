@@ -178,7 +178,7 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 		//'='
 		public Keyword getEqualsSignKeyword_5() { return cEqualsSignKeyword_5; }
 
-		//(targets+=AnnotationTargetType | '{' targets+=AnnotationTargetType (',' targets+=AnnotationTargetType)* '}')
+		//targets+=AnnotationTargetType | '{' targets+=AnnotationTargetType (',' targets+=AnnotationTargetType)* '}'
 		public Alternatives getAlternatives_6() { return cAlternatives_6; }
 
 		//targets+=AnnotationTargetType
@@ -285,7 +285,7 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 		//(optional?='optional' | 'mandatory') 'attribute' name=ID ':' type=LiteralType
 		public Group getGroup() { return cGroup; }
 
-		//(optional?='optional' | 'mandatory')
+		//optional?='optional' | 'mandatory'
 		public Alternatives getAlternatives_0() { return cAlternatives_0; }
 
 		//optional?='optional'
@@ -343,7 +343,7 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 		//(optional?='optional' | 'mandatory') 'attribute' name=ID ':' '{' values+=STRING (',' values+=STRING)* '}'
 		public Group getGroup() { return cGroup; }
 
-		//(optional?='optional' | 'mandatory')
+		//optional?='optional' | 'mandatory'
 		public Alternatives getAlternatives_0() { return cAlternatives_0; }
 
 		//optional?='optional'
@@ -400,10 +400,14 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup_1_0 = (Group)cAlternatives_1.eContents().get(0);
 		private final Assignment cImportedNamespaceAssignment_1_0_0 = (Assignment)cGroup_1_0.eContents().get(0);
 		private final RuleCall cImportedNamespaceImportedFQNParserRuleCall_1_0_0_0 = (RuleCall)cImportedNamespaceAssignment_1_0_0.eContents().get(0);
-		private final Keyword cFromKeyword_1_0_1 = (Keyword)cGroup_1_0.eContents().get(1);
-		private final Keyword cModelKeyword_1_1 = (Keyword)cAlternatives_1.eContents().get(1);
-		private final Assignment cImportURIAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cImportURISTRINGTerminalRuleCall_2_0 = (RuleCall)cImportURIAssignment_2.eContents().get(0);
+		private final Group cGroup_1_0_1 = (Group)cGroup_1_0.eContents().get(1);
+		private final Keyword cFromKeyword_1_0_1_0 = (Keyword)cGroup_1_0_1.eContents().get(0);
+		private final Assignment cImportURIAssignment_1_0_1_1 = (Assignment)cGroup_1_0_1.eContents().get(1);
+		private final RuleCall cImportURISTRINGTerminalRuleCall_1_0_1_1_0 = (RuleCall)cImportURIAssignment_1_0_1_1.eContents().get(0);
+		private final Group cGroup_1_1 = (Group)cAlternatives_1.eContents().get(1);
+		private final Keyword cModelKeyword_1_1_0 = (Keyword)cGroup_1_1.eContents().get(0);
+		private final Assignment cImportURIAssignment_1_1_1 = (Assignment)cGroup_1_1.eContents().get(1);
+		private final RuleCall cImportURISTRINGTerminalRuleCall_1_1_1_0 = (RuleCall)cImportURIAssignment_1_1_1.eContents().get(0);
 		
 		//// **************************************************************
 		//// Import rules
@@ -426,19 +430,19 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 		//// the attribute 'importedNamespace' is picked up by the ImportedNamespaceAwareLocalScopeProvider
 		//// the attribute 'importURI' is picked up by the ImportUriGlobalScopeProvider
 		//Import:
-		//	'import' (importedNamespace=ImportedFQN 'from' | 'model') importURI=STRING;
+		//	'import' (importedNamespace=ImportedFQN ('from' importURI=STRING)? | 'model' importURI=STRING);
 		@Override public ParserRule getRule() { return rule; }
 
-		//'import' (importedNamespace=ImportedFQN 'from' | 'model') importURI=STRING
+		//'import' (importedNamespace=ImportedFQN ('from' importURI=STRING)? | 'model' importURI=STRING)
 		public Group getGroup() { return cGroup; }
 
 		//'import'
 		public Keyword getImportKeyword_0() { return cImportKeyword_0; }
 
-		//(importedNamespace=ImportedFQN 'from' | 'model')
+		//importedNamespace=ImportedFQN ('from' importURI=STRING)? | 'model' importURI=STRING
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
-		//importedNamespace=ImportedFQN 'from'
+		//importedNamespace=ImportedFQN ('from' importURI=STRING)?
 		public Group getGroup_1_0() { return cGroup_1_0; }
 
 		//importedNamespace=ImportedFQN
@@ -447,17 +451,29 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 		//ImportedFQN
 		public RuleCall getImportedNamespaceImportedFQNParserRuleCall_1_0_0_0() { return cImportedNamespaceImportedFQNParserRuleCall_1_0_0_0; }
 
-		//'from'
-		public Keyword getFromKeyword_1_0_1() { return cFromKeyword_1_0_1; }
+		//('from' importURI=STRING)?
+		public Group getGroup_1_0_1() { return cGroup_1_0_1; }
 
-		//'model'
-		public Keyword getModelKeyword_1_1() { return cModelKeyword_1_1; }
+		//'from'
+		public Keyword getFromKeyword_1_0_1_0() { return cFromKeyword_1_0_1_0; }
 
 		//importURI=STRING
-		public Assignment getImportURIAssignment_2() { return cImportURIAssignment_2; }
+		public Assignment getImportURIAssignment_1_0_1_1() { return cImportURIAssignment_1_0_1_1; }
 
 		//STRING
-		public RuleCall getImportURISTRINGTerminalRuleCall_2_0() { return cImportURISTRINGTerminalRuleCall_2_0; }
+		public RuleCall getImportURISTRINGTerminalRuleCall_1_0_1_1_0() { return cImportURISTRINGTerminalRuleCall_1_0_1_1_0; }
+
+		//'model' importURI=STRING
+		public Group getGroup_1_1() { return cGroup_1_1; }
+
+		//'model'
+		public Keyword getModelKeyword_1_1_0() { return cModelKeyword_1_1_0; }
+
+		//importURI=STRING
+		public Assignment getImportURIAssignment_1_1_1() { return cImportURIAssignment_1_1_1; }
+
+		//STRING
+		public RuleCall getImportURISTRINGTerminalRuleCall_1_1_1_0() { return cImportURISTRINGTerminalRuleCall_1_1_1_0; }
 	}
 
 	public class ImportedFQNElements extends AbstractParserRuleElementFinder {
@@ -536,7 +552,7 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 		//// **************************************************************
 		//// Time Rule
 		//TIME ecore::ELong:
-		//	INT 's' | INT 'ms' | INT 'us' | INT 'ns'
+		//	INT 's' | INT 'ms' | INT 'us' | INT 'ns';
 		@Override public ParserRule getRule() { return rule; }
 
 		//INT 's' | INT 'ms' | INT 'us' | INT 'ns'
@@ -659,7 +675,7 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 		//{BooleanLiteral}
 		public Action getBooleanLiteralAction_0() { return cBooleanLiteralAction_0; }
 
-		//('false' | isTrue?='true')
+		//'false' | isTrue?='true'
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//'false'
@@ -775,7 +791,7 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cHEXTerminalRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//Integer ecore::ELong:
-		//	('+' | '-')? INT | HEX
+		//	('+' | '-')? INT | HEX;
 		@Override public ParserRule getRule() { return rule; }
 
 		//('+' | '-')? INT | HEX
@@ -807,7 +823,7 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cDecimalExpParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//Real ecore::EDouble:
-		//	Decimal | DecimalExp
+		//	Decimal | DecimalExp;
 		@Override public ParserRule getRule() { return rule; }
 
 		//Decimal | DecimalExp
@@ -816,7 +832,7 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 		//Decimal
 		public RuleCall getDecimalParserRuleCall_0() { return cDecimalParserRuleCall_0; }
 
-		/// *DotDecimal | DecimalDot |* / DecimalExp
+		///*DotDecimal | DecimalDot |*/ DecimalExp
 		public RuleCall getDecimalExpParserRuleCall_1() { return cDecimalExpParserRuleCall_1; }
 	}
 
@@ -903,7 +919,7 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 		//INT
 		public RuleCall getINTTerminalRuleCall_3() { return cINTTerminalRuleCall_3; }
 
-		//('e' | 'E')
+		//'e' | 'E'
 		public Alternatives getAlternatives_4() { return cAlternatives_4; }
 
 		//'e'
@@ -1196,7 +1212,7 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 	//// the attribute 'importedNamespace' is picked up by the ImportedNamespaceAwareLocalScopeProvider
 	//// the attribute 'importURI' is picked up by the ImportUriGlobalScopeProvider
 	//Import:
-	//	'import' (importedNamespace=ImportedFQN 'from' | 'model') importURI=STRING;
+	//	'import' (importedNamespace=ImportedFQN ('from' importURI=STRING)? | 'model' importURI=STRING);
 	public ImportElements getImportAccess() {
 		return pImport;
 	}
@@ -1233,7 +1249,7 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 	//// **************************************************************
 	//// Time Rule
 	//TIME ecore::ELong:
-	//	INT 's' | INT 'ms' | INT 'us' | INT 'ns'
+	//	INT 's' | INT 'ms' | INT 'us' | INT 'ns';
 	public TIMEElements getTIMEAccess() {
 		return pTIME;
 	}
@@ -1327,7 +1343,7 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Integer ecore::ELong:
-	//	('+' | '-')? INT | HEX
+	//	('+' | '-')? INT | HEX;
 	public IntegerElements getIntegerAccess() {
 		return pInteger;
 	}
@@ -1337,7 +1353,7 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Real ecore::EDouble:
-	//	Decimal | DecimalExp
+	//	Decimal | DecimalExp;
 	public RealElements getRealAccess() {
 		return pReal;
 	}
@@ -1412,7 +1428,7 @@ public class BaseGrammarAccess extends AbstractGrammarElementFinder {
 	} 
 
 	//terminal ML_COMMENT:
-	//	'/ *'->'* /';
+	//	'/*'->'*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 

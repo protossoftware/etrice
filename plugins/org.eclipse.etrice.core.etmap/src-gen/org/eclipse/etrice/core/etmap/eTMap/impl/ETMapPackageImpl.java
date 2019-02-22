@@ -20,6 +20,8 @@ import org.eclipse.etrice.core.etmap.eTMap.ThreadMapping;
 
 import org.eclipse.etrice.core.etphys.eTPhys.ETPhysPackage;
 
+import org.eclipse.etrice.core.fsm.fSM.FSMPackage;
+
 import org.eclipse.etrice.core.room.RoomPackage;
 
 /**
@@ -107,8 +109,10 @@ public class ETMapPackageImpl extends EPackageImpl implements ETMapPackage
     isInited = true;
 
     // Initialize simple dependencies
+    BasePackage.eINSTANCE.eClass();
     ETPhysPackage.eINSTANCE.eClass();
     RoomPackage.eINSTANCE.eClass();
+    FSMPackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
     theETMapPackage.createPackageContents();

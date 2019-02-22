@@ -108,7 +108,6 @@ public class VarDeclImpl extends MinimalEObjectImpl.Container implements VarDecl
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public String getName()
   {
     return name;
@@ -119,7 +118,6 @@ public class VarDeclImpl extends MinimalEObjectImpl.Container implements VarDecl
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setName(String newName)
   {
     String oldName = name;
@@ -133,7 +131,6 @@ public class VarDeclImpl extends MinimalEObjectImpl.Container implements VarDecl
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public RefableType getRefType()
   {
     return refType;
@@ -161,7 +158,6 @@ public class VarDeclImpl extends MinimalEObjectImpl.Container implements VarDecl
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setRefType(RefableType newRefType)
   {
     if (newRefType != refType)
@@ -183,7 +179,6 @@ public class VarDeclImpl extends MinimalEObjectImpl.Container implements VarDecl
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public boolean isVarargs()
   {
     return varargs;
@@ -194,7 +189,6 @@ public class VarDeclImpl extends MinimalEObjectImpl.Container implements VarDecl
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void setVarargs(boolean newVarargs)
   {
     boolean oldVarargs = varargs;
@@ -315,7 +309,7 @@ public class VarDeclImpl extends MinimalEObjectImpl.Container implements VarDecl
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuilder result = new StringBuilder(super.toString());
+    StringBuffer result = new StringBuffer(super.toString());
     result.append(" (name: ");
     result.append(name);
     result.append(", varargs: ");

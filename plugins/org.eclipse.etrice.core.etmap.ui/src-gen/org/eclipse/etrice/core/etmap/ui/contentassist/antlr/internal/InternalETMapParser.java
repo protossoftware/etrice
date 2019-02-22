@@ -22,12 +22,13 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalETMapParser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_HEX", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'mandatory'", "'model'", "'false'", "'+'", "'-'", "'e'", "'E'", "'ptBoolean'", "'ptInteger'", "'ptReal'", "'ptCharacter'", "'MappingModel'", "'{'", "'}'", "'Mapping'", "'->'", "'SubSystemMapping'", "'ThreadMapping'", "'='", "'attribute'", "':'", "','", "'import'", "'from'", "'.*'", "'['", "']'", "'.'", "'optional'", "'true'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_HEX", "RULE_INT", "RULE_STRING", "RULE_CC_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'mandatory'", "'false'", "'+'", "'-'", "'e'", "'E'", "'ptBoolean'", "'ptInteger'", "'ptReal'", "'ptCharacter'", "'MappingModel'", "'{'", "'}'", "'Mapping'", "'->'", "'SubSystemMapping'", "'ThreadMapping'", "'='", "'attribute'", "':'", "','", "'import'", "'from'", "'model'", "'.*'", "'['", "']'", "'.'", "'optional'", "'true'"
     };
     public static final int RULE_HEX=5;
     public static final int RULE_STRING=7;
-    public static final int RULE_SL_COMMENT=9;
+    public static final int RULE_SL_COMMENT=10;
     public static final int T__19=19;
+    public static final int RULE_CC_STRING=8;
     public static final int T__15=15;
     public static final int T__37=37;
     public static final int T__16=16;
@@ -36,7 +37,6 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
     public static final int T__39=39;
     public static final int T__18=18;
     public static final int T__33=33;
-    public static final int T__12=12;
     public static final int T__34=34;
     public static final int T__13=13;
     public static final int T__35=35;
@@ -47,21 +47,22 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
     public static final int T__31=31;
     public static final int T__32=32;
     public static final int RULE_ID=4;
-    public static final int RULE_WS=10;
-    public static final int RULE_ANY_OTHER=11;
+    public static final int RULE_WS=11;
+    public static final int RULE_ANY_OTHER=12;
     public static final int T__26=26;
     public static final int T__27=27;
     public static final int T__28=28;
     public static final int RULE_INT=6;
     public static final int T__29=29;
     public static final int T__22=22;
-    public static final int RULE_ML_COMMENT=8;
+    public static final int RULE_ML_COMMENT=9;
     public static final int T__23=23;
     public static final int T__24=24;
     public static final int T__25=25;
     public static final int T__40=40;
     public static final int T__41=41;
     public static final int T__20=20;
+    public static final int T__42=42;
     public static final int T__21=21;
 
     // delegates
@@ -1936,7 +1937,7 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
             int alt1=2;
             int LA1_0 = input.LA(1);
 
-            if ( (LA1_0==40) ) {
+            if ( (LA1_0==41) ) {
                 int LA1_1 = input.LA(2);
 
                 if ( (LA1_1==31) ) {
@@ -1948,11 +1949,11 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
                         if ( (LA1_4==32) ) {
                             int LA1_5 = input.LA(5);
 
-                            if ( (LA1_5==24) ) {
-                                alt1=2;
-                            }
-                            else if ( ((LA1_5>=19 && LA1_5<=22)) ) {
+                            if ( ((LA1_5>=19 && LA1_5<=22)) ) {
                                 alt1=1;
+                            }
+                            else if ( (LA1_5==24) ) {
+                                alt1=2;
                             }
                             else {
                                 NoViableAltException nvae =
@@ -1982,7 +1983,7 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
                     throw nvae;
                 }
             }
-            else if ( (LA1_0==12) ) {
+            else if ( (LA1_0==13) ) {
                 int LA1_2 = input.LA(2);
 
                 if ( (LA1_2==31) ) {
@@ -1994,11 +1995,11 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
                         if ( (LA1_4==32) ) {
                             int LA1_5 = input.LA(5);
 
-                            if ( (LA1_5==24) ) {
-                                alt1=2;
-                            }
-                            else if ( ((LA1_5>=19 && LA1_5<=22)) ) {
+                            if ( ((LA1_5>=19 && LA1_5<=22)) ) {
                                 alt1=1;
+                            }
+                            else if ( (LA1_5==24) ) {
+                                alt1=2;
                             }
                             else {
                                 NoViableAltException nvae =
@@ -2101,10 +2102,10 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
             int alt2=2;
             int LA2_0 = input.LA(1);
 
-            if ( (LA2_0==40) ) {
+            if ( (LA2_0==41) ) {
                 alt2=1;
             }
-            else if ( (LA2_0==12) ) {
+            else if ( (LA2_0==13) ) {
                 alt2=2;
             }
             else {
@@ -2146,7 +2147,7 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
                     // InternalETMap.g:782:1: 'mandatory'
                     {
                      before(grammarAccess.getSimpleAnnotationAttributeAccess().getMandatoryKeyword_0_1()); 
-                    match(input,12,FOLLOW_2); 
+                    match(input,13,FOLLOW_2); 
                      after(grammarAccess.getSimpleAnnotationAttributeAccess().getMandatoryKeyword_0_1()); 
 
                     }
@@ -2182,10 +2183,10 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
             int alt3=2;
             int LA3_0 = input.LA(1);
 
-            if ( (LA3_0==40) ) {
+            if ( (LA3_0==41) ) {
                 alt3=1;
             }
-            else if ( (LA3_0==12) ) {
+            else if ( (LA3_0==13) ) {
                 alt3=2;
             }
             else {
@@ -2227,7 +2228,7 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
                     // InternalETMap.g:806:1: 'mandatory'
                     {
                      before(grammarAccess.getEnumAnnotationAttributeAccess().getMandatoryKeyword_0_1()); 
-                    match(input,12,FOLLOW_2); 
+                    match(input,13,FOLLOW_2); 
                      after(grammarAccess.getEnumAnnotationAttributeAccess().getMandatoryKeyword_0_1()); 
 
                     }
@@ -2253,20 +2254,20 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Import__Alternatives_1"
-    // InternalETMap.g:818:1: rule__Import__Alternatives_1 : ( ( ( rule__Import__Group_1_0__0 ) ) | ( 'model' ) );
+    // InternalETMap.g:818:1: rule__Import__Alternatives_1 : ( ( ( rule__Import__Group_1_0__0 ) ) | ( ( rule__Import__Group_1_1__0 ) ) );
     public final void rule__Import__Alternatives_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:822:1: ( ( ( rule__Import__Group_1_0__0 ) ) | ( 'model' ) )
+            // InternalETMap.g:822:1: ( ( ( rule__Import__Group_1_0__0 ) ) | ( ( rule__Import__Group_1_1__0 ) ) )
             int alt4=2;
             int LA4_0 = input.LA(1);
 
             if ( (LA4_0==RULE_ID) ) {
                 alt4=1;
             }
-            else if ( (LA4_0==13) ) {
+            else if ( (LA4_0==36) ) {
                 alt4=2;
             }
             else {
@@ -2302,14 +2303,24 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 2 :
-                    // InternalETMap.g:829:6: ( 'model' )
+                    // InternalETMap.g:829:6: ( ( rule__Import__Group_1_1__0 ) )
                     {
-                    // InternalETMap.g:829:6: ( 'model' )
-                    // InternalETMap.g:830:1: 'model'
+                    // InternalETMap.g:829:6: ( ( rule__Import__Group_1_1__0 ) )
+                    // InternalETMap.g:830:1: ( rule__Import__Group_1_1__0 )
                     {
-                     before(grammarAccess.getImportAccess().getModelKeyword_1_1()); 
-                    match(input,13,FOLLOW_2); 
-                     after(grammarAccess.getImportAccess().getModelKeyword_1_1()); 
+                     before(grammarAccess.getImportAccess().getGroup_1_1()); 
+                    // InternalETMap.g:831:1: ( rule__Import__Group_1_1__0 )
+                    // InternalETMap.g:831:2: rule__Import__Group_1_1__0
+                    {
+                    pushFollow(FOLLOW_2);
+                    rule__Import__Group_1_1__0();
+
+                    state._fsp--;
+
+
+                    }
+
+                     after(grammarAccess.getImportAccess().getGroup_1_1()); 
 
                     }
 
@@ -2334,17 +2345,17 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Literal__Alternatives"
-    // InternalETMap.g:843:1: rule__Literal__Alternatives : ( ( ruleBooleanLiteral ) | ( ruleNumberLiteral ) | ( ruleStringLiteral ) );
+    // InternalETMap.g:841:1: rule__Literal__Alternatives : ( ( ruleBooleanLiteral ) | ( ruleNumberLiteral ) | ( ruleStringLiteral ) );
     public final void rule__Literal__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:847:1: ( ( ruleBooleanLiteral ) | ( ruleNumberLiteral ) | ( ruleStringLiteral ) )
+            // InternalETMap.g:845:1: ( ( ruleBooleanLiteral ) | ( ruleNumberLiteral ) | ( ruleStringLiteral ) )
             int alt5=3;
             switch ( input.LA(1) ) {
             case 14:
-            case 41:
+            case 42:
                 {
                 alt5=1;
                 }
@@ -2371,10 +2382,10 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
             switch (alt5) {
                 case 1 :
-                    // InternalETMap.g:848:1: ( ruleBooleanLiteral )
+                    // InternalETMap.g:846:1: ( ruleBooleanLiteral )
                     {
-                    // InternalETMap.g:848:1: ( ruleBooleanLiteral )
-                    // InternalETMap.g:849:1: ruleBooleanLiteral
+                    // InternalETMap.g:846:1: ( ruleBooleanLiteral )
+                    // InternalETMap.g:847:1: ruleBooleanLiteral
                     {
                      before(grammarAccess.getLiteralAccess().getBooleanLiteralParserRuleCall_0()); 
                     pushFollow(FOLLOW_2);
@@ -2390,10 +2401,10 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 2 :
-                    // InternalETMap.g:854:6: ( ruleNumberLiteral )
+                    // InternalETMap.g:852:6: ( ruleNumberLiteral )
                     {
-                    // InternalETMap.g:854:6: ( ruleNumberLiteral )
-                    // InternalETMap.g:855:1: ruleNumberLiteral
+                    // InternalETMap.g:852:6: ( ruleNumberLiteral )
+                    // InternalETMap.g:853:1: ruleNumberLiteral
                     {
                      before(grammarAccess.getLiteralAccess().getNumberLiteralParserRuleCall_1()); 
                     pushFollow(FOLLOW_2);
@@ -2409,10 +2420,10 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 3 :
-                    // InternalETMap.g:860:6: ( ruleStringLiteral )
+                    // InternalETMap.g:858:6: ( ruleStringLiteral )
                     {
-                    // InternalETMap.g:860:6: ( ruleStringLiteral )
-                    // InternalETMap.g:861:1: ruleStringLiteral
+                    // InternalETMap.g:858:6: ( ruleStringLiteral )
+                    // InternalETMap.g:859:1: ruleStringLiteral
                     {
                      before(grammarAccess.getLiteralAccess().getStringLiteralParserRuleCall_2()); 
                     pushFollow(FOLLOW_2);
@@ -2445,20 +2456,20 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__BooleanLiteral__Alternatives_1"
-    // InternalETMap.g:871:1: rule__BooleanLiteral__Alternatives_1 : ( ( 'false' ) | ( ( rule__BooleanLiteral__IsTrueAssignment_1_1 ) ) );
+    // InternalETMap.g:869:1: rule__BooleanLiteral__Alternatives_1 : ( ( 'false' ) | ( ( rule__BooleanLiteral__IsTrueAssignment_1_1 ) ) );
     public final void rule__BooleanLiteral__Alternatives_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:875:1: ( ( 'false' ) | ( ( rule__BooleanLiteral__IsTrueAssignment_1_1 ) ) )
+            // InternalETMap.g:873:1: ( ( 'false' ) | ( ( rule__BooleanLiteral__IsTrueAssignment_1_1 ) ) )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
             if ( (LA6_0==14) ) {
                 alt6=1;
             }
-            else if ( (LA6_0==41) ) {
+            else if ( (LA6_0==42) ) {
                 alt6=2;
             }
             else {
@@ -2469,10 +2480,10 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
             }
             switch (alt6) {
                 case 1 :
-                    // InternalETMap.g:876:1: ( 'false' )
+                    // InternalETMap.g:874:1: ( 'false' )
                     {
-                    // InternalETMap.g:876:1: ( 'false' )
-                    // InternalETMap.g:877:1: 'false'
+                    // InternalETMap.g:874:1: ( 'false' )
+                    // InternalETMap.g:875:1: 'false'
                     {
                      before(grammarAccess.getBooleanLiteralAccess().getFalseKeyword_1_0()); 
                     match(input,14,FOLLOW_2); 
@@ -2484,14 +2495,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 2 :
-                    // InternalETMap.g:884:6: ( ( rule__BooleanLiteral__IsTrueAssignment_1_1 ) )
+                    // InternalETMap.g:882:6: ( ( rule__BooleanLiteral__IsTrueAssignment_1_1 ) )
                     {
-                    // InternalETMap.g:884:6: ( ( rule__BooleanLiteral__IsTrueAssignment_1_1 ) )
-                    // InternalETMap.g:885:1: ( rule__BooleanLiteral__IsTrueAssignment_1_1 )
+                    // InternalETMap.g:882:6: ( ( rule__BooleanLiteral__IsTrueAssignment_1_1 ) )
+                    // InternalETMap.g:883:1: ( rule__BooleanLiteral__IsTrueAssignment_1_1 )
                     {
                      before(grammarAccess.getBooleanLiteralAccess().getIsTrueAssignment_1_1()); 
-                    // InternalETMap.g:886:1: ( rule__BooleanLiteral__IsTrueAssignment_1_1 )
-                    // InternalETMap.g:886:2: rule__BooleanLiteral__IsTrueAssignment_1_1
+                    // InternalETMap.g:884:1: ( rule__BooleanLiteral__IsTrueAssignment_1_1 )
+                    // InternalETMap.g:884:2: rule__BooleanLiteral__IsTrueAssignment_1_1
                     {
                     pushFollow(FOLLOW_2);
                     rule__BooleanLiteral__IsTrueAssignment_1_1();
@@ -2526,13 +2537,13 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__NumberLiteral__Alternatives"
-    // InternalETMap.g:895:1: rule__NumberLiteral__Alternatives : ( ( ruleIntLiteral ) | ( ruleRealLiteral ) );
+    // InternalETMap.g:893:1: rule__NumberLiteral__Alternatives : ( ( ruleIntLiteral ) | ( ruleRealLiteral ) );
     public final void rule__NumberLiteral__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:899:1: ( ( ruleIntLiteral ) | ( ruleRealLiteral ) )
+            // InternalETMap.g:897:1: ( ( ruleIntLiteral ) | ( ruleRealLiteral ) )
             int alt7=2;
             switch ( input.LA(1) ) {
             case 15:
@@ -2542,11 +2553,11 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
                 if ( (LA7_1==RULE_INT) ) {
                     int LA7_3 = input.LA(3);
 
-                    if ( (LA7_3==EOF) ) {
-                        alt7=1;
-                    }
-                    else if ( (LA7_3==39) ) {
+                    if ( (LA7_3==40) ) {
                         alt7=2;
+                    }
+                    else if ( (LA7_3==EOF) ) {
+                        alt7=1;
                     }
                     else {
                         NoViableAltException nvae =
@@ -2570,11 +2581,11 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
                 if ( (LA7_2==RULE_INT) ) {
                     int LA7_3 = input.LA(3);
 
-                    if ( (LA7_3==EOF) ) {
-                        alt7=1;
-                    }
-                    else if ( (LA7_3==39) ) {
+                    if ( (LA7_3==40) ) {
                         alt7=2;
+                    }
+                    else if ( (LA7_3==EOF) ) {
+                        alt7=1;
                     }
                     else {
                         NoViableAltException nvae =
@@ -2595,11 +2606,11 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
                 {
                 int LA7_3 = input.LA(2);
 
-                if ( (LA7_3==EOF) ) {
-                    alt7=1;
-                }
-                else if ( (LA7_3==39) ) {
+                if ( (LA7_3==40) ) {
                     alt7=2;
+                }
+                else if ( (LA7_3==EOF) ) {
+                    alt7=1;
                 }
                 else {
                     NoViableAltException nvae =
@@ -2623,10 +2634,10 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
             switch (alt7) {
                 case 1 :
-                    // InternalETMap.g:900:1: ( ruleIntLiteral )
+                    // InternalETMap.g:898:1: ( ruleIntLiteral )
                     {
-                    // InternalETMap.g:900:1: ( ruleIntLiteral )
-                    // InternalETMap.g:901:1: ruleIntLiteral
+                    // InternalETMap.g:898:1: ( ruleIntLiteral )
+                    // InternalETMap.g:899:1: ruleIntLiteral
                     {
                      before(grammarAccess.getNumberLiteralAccess().getIntLiteralParserRuleCall_0()); 
                     pushFollow(FOLLOW_2);
@@ -2642,10 +2653,10 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 2 :
-                    // InternalETMap.g:906:6: ( ruleRealLiteral )
+                    // InternalETMap.g:904:6: ( ruleRealLiteral )
                     {
-                    // InternalETMap.g:906:6: ( ruleRealLiteral )
-                    // InternalETMap.g:907:1: ruleRealLiteral
+                    // InternalETMap.g:904:6: ( ruleRealLiteral )
+                    // InternalETMap.g:905:1: ruleRealLiteral
                     {
                      before(grammarAccess.getNumberLiteralAccess().getRealLiteralParserRuleCall_1()); 
                     pushFollow(FOLLOW_2);
@@ -2678,13 +2689,13 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Integer__Alternatives"
-    // InternalETMap.g:917:1: rule__Integer__Alternatives : ( ( ( rule__Integer__Group_0__0 ) ) | ( RULE_HEX ) );
+    // InternalETMap.g:915:1: rule__Integer__Alternatives : ( ( ( rule__Integer__Group_0__0 ) ) | ( RULE_HEX ) );
     public final void rule__Integer__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:921:1: ( ( ( rule__Integer__Group_0__0 ) ) | ( RULE_HEX ) )
+            // InternalETMap.g:919:1: ( ( ( rule__Integer__Group_0__0 ) ) | ( RULE_HEX ) )
             int alt8=2;
             int LA8_0 = input.LA(1);
 
@@ -2702,14 +2713,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
             }
             switch (alt8) {
                 case 1 :
-                    // InternalETMap.g:922:1: ( ( rule__Integer__Group_0__0 ) )
+                    // InternalETMap.g:920:1: ( ( rule__Integer__Group_0__0 ) )
                     {
-                    // InternalETMap.g:922:1: ( ( rule__Integer__Group_0__0 ) )
-                    // InternalETMap.g:923:1: ( rule__Integer__Group_0__0 )
+                    // InternalETMap.g:920:1: ( ( rule__Integer__Group_0__0 ) )
+                    // InternalETMap.g:921:1: ( rule__Integer__Group_0__0 )
                     {
                      before(grammarAccess.getIntegerAccess().getGroup_0()); 
-                    // InternalETMap.g:924:1: ( rule__Integer__Group_0__0 )
-                    // InternalETMap.g:924:2: rule__Integer__Group_0__0
+                    // InternalETMap.g:922:1: ( rule__Integer__Group_0__0 )
+                    // InternalETMap.g:922:2: rule__Integer__Group_0__0
                     {
                     pushFollow(FOLLOW_2);
                     rule__Integer__Group_0__0();
@@ -2727,10 +2738,10 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 2 :
-                    // InternalETMap.g:928:6: ( RULE_HEX )
+                    // InternalETMap.g:926:6: ( RULE_HEX )
                     {
-                    // InternalETMap.g:928:6: ( RULE_HEX )
-                    // InternalETMap.g:929:1: RULE_HEX
+                    // InternalETMap.g:926:6: ( RULE_HEX )
+                    // InternalETMap.g:927:1: RULE_HEX
                     {
                      before(grammarAccess.getIntegerAccess().getHEXTerminalRuleCall_1()); 
                     match(input,RULE_HEX,FOLLOW_2); 
@@ -2759,13 +2770,13 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Integer__Alternatives_0_0"
-    // InternalETMap.g:939:1: rule__Integer__Alternatives_0_0 : ( ( '+' ) | ( '-' ) );
+    // InternalETMap.g:937:1: rule__Integer__Alternatives_0_0 : ( ( '+' ) | ( '-' ) );
     public final void rule__Integer__Alternatives_0_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:943:1: ( ( '+' ) | ( '-' ) )
+            // InternalETMap.g:941:1: ( ( '+' ) | ( '-' ) )
             int alt9=2;
             int LA9_0 = input.LA(1);
 
@@ -2783,10 +2794,10 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
             }
             switch (alt9) {
                 case 1 :
-                    // InternalETMap.g:944:1: ( '+' )
+                    // InternalETMap.g:942:1: ( '+' )
                     {
-                    // InternalETMap.g:944:1: ( '+' )
-                    // InternalETMap.g:945:1: '+'
+                    // InternalETMap.g:942:1: ( '+' )
+                    // InternalETMap.g:943:1: '+'
                     {
                      before(grammarAccess.getIntegerAccess().getPlusSignKeyword_0_0_0()); 
                     match(input,15,FOLLOW_2); 
@@ -2798,10 +2809,10 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 2 :
-                    // InternalETMap.g:952:6: ( '-' )
+                    // InternalETMap.g:950:6: ( '-' )
                     {
-                    // InternalETMap.g:952:6: ( '-' )
-                    // InternalETMap.g:953:1: '-'
+                    // InternalETMap.g:950:6: ( '-' )
+                    // InternalETMap.g:951:1: '-'
                     {
                      before(grammarAccess.getIntegerAccess().getHyphenMinusKeyword_0_0_1()); 
                     match(input,16,FOLLOW_2); 
@@ -2830,13 +2841,13 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Real__Alternatives"
-    // InternalETMap.g:965:1: rule__Real__Alternatives : ( ( ruleDecimal ) | ( ruleDecimalExp ) );
+    // InternalETMap.g:963:1: rule__Real__Alternatives : ( ( ruleDecimal ) | ( ruleDecimalExp ) );
     public final void rule__Real__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:969:1: ( ( ruleDecimal ) | ( ruleDecimalExp ) )
+            // InternalETMap.g:967:1: ( ( ruleDecimal ) | ( ruleDecimalExp ) )
             int alt10=2;
             switch ( input.LA(1) ) {
             case 15:
@@ -2846,7 +2857,7 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
                 if ( (LA10_1==RULE_INT) ) {
                     int LA10_3 = input.LA(3);
 
-                    if ( (LA10_3==39) ) {
+                    if ( (LA10_3==40) ) {
                         int LA10_4 = input.LA(4);
 
                         if ( (LA10_4==RULE_INT) ) {
@@ -2894,7 +2905,7 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
                 if ( (LA10_2==RULE_INT) ) {
                     int LA10_3 = input.LA(3);
 
-                    if ( (LA10_3==39) ) {
+                    if ( (LA10_3==40) ) {
                         int LA10_4 = input.LA(4);
 
                         if ( (LA10_4==RULE_INT) ) {
@@ -2939,7 +2950,7 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
                 {
                 int LA10_3 = input.LA(2);
 
-                if ( (LA10_3==39) ) {
+                if ( (LA10_3==40) ) {
                     int LA10_4 = input.LA(3);
 
                     if ( (LA10_4==RULE_INT) ) {
@@ -2982,10 +2993,10 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
             switch (alt10) {
                 case 1 :
-                    // InternalETMap.g:970:1: ( ruleDecimal )
+                    // InternalETMap.g:968:1: ( ruleDecimal )
                     {
-                    // InternalETMap.g:970:1: ( ruleDecimal )
-                    // InternalETMap.g:971:1: ruleDecimal
+                    // InternalETMap.g:968:1: ( ruleDecimal )
+                    // InternalETMap.g:969:1: ruleDecimal
                     {
                      before(grammarAccess.getRealAccess().getDecimalParserRuleCall_0()); 
                     pushFollow(FOLLOW_2);
@@ -3001,10 +3012,10 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 2 :
-                    // InternalETMap.g:976:6: ( ruleDecimalExp )
+                    // InternalETMap.g:974:6: ( ruleDecimalExp )
                     {
-                    // InternalETMap.g:976:6: ( ruleDecimalExp )
-                    // InternalETMap.g:977:1: ruleDecimalExp
+                    // InternalETMap.g:974:6: ( ruleDecimalExp )
+                    // InternalETMap.g:975:1: ruleDecimalExp
                     {
                      before(grammarAccess.getRealAccess().getDecimalExpParserRuleCall_1()); 
                     pushFollow(FOLLOW_2);
@@ -3037,13 +3048,13 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Decimal__Alternatives_0"
-    // InternalETMap.g:987:1: rule__Decimal__Alternatives_0 : ( ( '+' ) | ( '-' ) );
+    // InternalETMap.g:985:1: rule__Decimal__Alternatives_0 : ( ( '+' ) | ( '-' ) );
     public final void rule__Decimal__Alternatives_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:991:1: ( ( '+' ) | ( '-' ) )
+            // InternalETMap.g:989:1: ( ( '+' ) | ( '-' ) )
             int alt11=2;
             int LA11_0 = input.LA(1);
 
@@ -3061,10 +3072,10 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
             }
             switch (alt11) {
                 case 1 :
-                    // InternalETMap.g:992:1: ( '+' )
+                    // InternalETMap.g:990:1: ( '+' )
                     {
-                    // InternalETMap.g:992:1: ( '+' )
-                    // InternalETMap.g:993:1: '+'
+                    // InternalETMap.g:990:1: ( '+' )
+                    // InternalETMap.g:991:1: '+'
                     {
                      before(grammarAccess.getDecimalAccess().getPlusSignKeyword_0_0()); 
                     match(input,15,FOLLOW_2); 
@@ -3076,10 +3087,10 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 2 :
-                    // InternalETMap.g:1000:6: ( '-' )
+                    // InternalETMap.g:998:6: ( '-' )
                     {
-                    // InternalETMap.g:1000:6: ( '-' )
-                    // InternalETMap.g:1001:1: '-'
+                    // InternalETMap.g:998:6: ( '-' )
+                    // InternalETMap.g:999:1: '-'
                     {
                      before(grammarAccess.getDecimalAccess().getHyphenMinusKeyword_0_1()); 
                     match(input,16,FOLLOW_2); 
@@ -3108,13 +3119,13 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__DecimalExp__Alternatives_0"
-    // InternalETMap.g:1013:1: rule__DecimalExp__Alternatives_0 : ( ( '+' ) | ( '-' ) );
+    // InternalETMap.g:1011:1: rule__DecimalExp__Alternatives_0 : ( ( '+' ) | ( '-' ) );
     public final void rule__DecimalExp__Alternatives_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:1017:1: ( ( '+' ) | ( '-' ) )
+            // InternalETMap.g:1015:1: ( ( '+' ) | ( '-' ) )
             int alt12=2;
             int LA12_0 = input.LA(1);
 
@@ -3132,10 +3143,10 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
             }
             switch (alt12) {
                 case 1 :
-                    // InternalETMap.g:1018:1: ( '+' )
+                    // InternalETMap.g:1016:1: ( '+' )
                     {
-                    // InternalETMap.g:1018:1: ( '+' )
-                    // InternalETMap.g:1019:1: '+'
+                    // InternalETMap.g:1016:1: ( '+' )
+                    // InternalETMap.g:1017:1: '+'
                     {
                      before(grammarAccess.getDecimalExpAccess().getPlusSignKeyword_0_0()); 
                     match(input,15,FOLLOW_2); 
@@ -3147,10 +3158,10 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 2 :
-                    // InternalETMap.g:1026:6: ( '-' )
+                    // InternalETMap.g:1024:6: ( '-' )
                     {
-                    // InternalETMap.g:1026:6: ( '-' )
-                    // InternalETMap.g:1027:1: '-'
+                    // InternalETMap.g:1024:6: ( '-' )
+                    // InternalETMap.g:1025:1: '-'
                     {
                      before(grammarAccess.getDecimalExpAccess().getHyphenMinusKeyword_0_1()); 
                     match(input,16,FOLLOW_2); 
@@ -3179,13 +3190,13 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__DecimalExp__Alternatives_4"
-    // InternalETMap.g:1039:1: rule__DecimalExp__Alternatives_4 : ( ( 'e' ) | ( 'E' ) );
+    // InternalETMap.g:1037:1: rule__DecimalExp__Alternatives_4 : ( ( 'e' ) | ( 'E' ) );
     public final void rule__DecimalExp__Alternatives_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:1043:1: ( ( 'e' ) | ( 'E' ) )
+            // InternalETMap.g:1041:1: ( ( 'e' ) | ( 'E' ) )
             int alt13=2;
             int LA13_0 = input.LA(1);
 
@@ -3203,10 +3214,10 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
             }
             switch (alt13) {
                 case 1 :
-                    // InternalETMap.g:1044:1: ( 'e' )
+                    // InternalETMap.g:1042:1: ( 'e' )
                     {
-                    // InternalETMap.g:1044:1: ( 'e' )
-                    // InternalETMap.g:1045:1: 'e'
+                    // InternalETMap.g:1042:1: ( 'e' )
+                    // InternalETMap.g:1043:1: 'e'
                     {
                      before(grammarAccess.getDecimalExpAccess().getEKeyword_4_0()); 
                     match(input,17,FOLLOW_2); 
@@ -3218,10 +3229,10 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 2 :
-                    // InternalETMap.g:1052:6: ( 'E' )
+                    // InternalETMap.g:1050:6: ( 'E' )
                     {
-                    // InternalETMap.g:1052:6: ( 'E' )
-                    // InternalETMap.g:1053:1: 'E'
+                    // InternalETMap.g:1050:6: ( 'E' )
+                    // InternalETMap.g:1051:1: 'E'
                     {
                      before(grammarAccess.getDecimalExpAccess().getEKeyword_4_1()); 
                     match(input,18,FOLLOW_2); 
@@ -3250,13 +3261,13 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__DecimalExp__Alternatives_5"
-    // InternalETMap.g:1065:1: rule__DecimalExp__Alternatives_5 : ( ( '+' ) | ( '-' ) );
+    // InternalETMap.g:1063:1: rule__DecimalExp__Alternatives_5 : ( ( '+' ) | ( '-' ) );
     public final void rule__DecimalExp__Alternatives_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:1069:1: ( ( '+' ) | ( '-' ) )
+            // InternalETMap.g:1067:1: ( ( '+' ) | ( '-' ) )
             int alt14=2;
             int LA14_0 = input.LA(1);
 
@@ -3274,10 +3285,10 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
             }
             switch (alt14) {
                 case 1 :
-                    // InternalETMap.g:1070:1: ( '+' )
+                    // InternalETMap.g:1068:1: ( '+' )
                     {
-                    // InternalETMap.g:1070:1: ( '+' )
-                    // InternalETMap.g:1071:1: '+'
+                    // InternalETMap.g:1068:1: ( '+' )
+                    // InternalETMap.g:1069:1: '+'
                     {
                      before(grammarAccess.getDecimalExpAccess().getPlusSignKeyword_5_0()); 
                     match(input,15,FOLLOW_2); 
@@ -3289,10 +3300,10 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 2 :
-                    // InternalETMap.g:1078:6: ( '-' )
+                    // InternalETMap.g:1076:6: ( '-' )
                     {
-                    // InternalETMap.g:1078:6: ( '-' )
-                    // InternalETMap.g:1079:1: '-'
+                    // InternalETMap.g:1076:6: ( '-' )
+                    // InternalETMap.g:1077:1: '-'
                     {
                      before(grammarAccess.getDecimalExpAccess().getHyphenMinusKeyword_5_1()); 
                     match(input,16,FOLLOW_2); 
@@ -3321,13 +3332,13 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__LiteralType__Alternatives"
-    // InternalETMap.g:1091:1: rule__LiteralType__Alternatives : ( ( ( 'ptBoolean' ) ) | ( ( 'ptInteger' ) ) | ( ( 'ptReal' ) ) | ( ( 'ptCharacter' ) ) );
+    // InternalETMap.g:1089:1: rule__LiteralType__Alternatives : ( ( ( 'ptBoolean' ) ) | ( ( 'ptInteger' ) ) | ( ( 'ptReal' ) ) | ( ( 'ptCharacter' ) ) );
     public final void rule__LiteralType__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:1095:1: ( ( ( 'ptBoolean' ) ) | ( ( 'ptInteger' ) ) | ( ( 'ptReal' ) ) | ( ( 'ptCharacter' ) ) )
+            // InternalETMap.g:1093:1: ( ( ( 'ptBoolean' ) ) | ( ( 'ptInteger' ) ) | ( ( 'ptReal' ) ) | ( ( 'ptCharacter' ) ) )
             int alt15=4;
             switch ( input.LA(1) ) {
             case 19:
@@ -3359,14 +3370,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
             switch (alt15) {
                 case 1 :
-                    // InternalETMap.g:1096:1: ( ( 'ptBoolean' ) )
+                    // InternalETMap.g:1094:1: ( ( 'ptBoolean' ) )
                     {
-                    // InternalETMap.g:1096:1: ( ( 'ptBoolean' ) )
-                    // InternalETMap.g:1097:1: ( 'ptBoolean' )
+                    // InternalETMap.g:1094:1: ( ( 'ptBoolean' ) )
+                    // InternalETMap.g:1095:1: ( 'ptBoolean' )
                     {
                      before(grammarAccess.getLiteralTypeAccess().getBOOLEnumLiteralDeclaration_0()); 
-                    // InternalETMap.g:1098:1: ( 'ptBoolean' )
-                    // InternalETMap.g:1098:3: 'ptBoolean'
+                    // InternalETMap.g:1096:1: ( 'ptBoolean' )
+                    // InternalETMap.g:1096:3: 'ptBoolean'
                     {
                     match(input,19,FOLLOW_2); 
 
@@ -3380,14 +3391,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 2 :
-                    // InternalETMap.g:1103:6: ( ( 'ptInteger' ) )
+                    // InternalETMap.g:1101:6: ( ( 'ptInteger' ) )
                     {
-                    // InternalETMap.g:1103:6: ( ( 'ptInteger' ) )
-                    // InternalETMap.g:1104:1: ( 'ptInteger' )
+                    // InternalETMap.g:1101:6: ( ( 'ptInteger' ) )
+                    // InternalETMap.g:1102:1: ( 'ptInteger' )
                     {
                      before(grammarAccess.getLiteralTypeAccess().getINTEnumLiteralDeclaration_1()); 
-                    // InternalETMap.g:1105:1: ( 'ptInteger' )
-                    // InternalETMap.g:1105:3: 'ptInteger'
+                    // InternalETMap.g:1103:1: ( 'ptInteger' )
+                    // InternalETMap.g:1103:3: 'ptInteger'
                     {
                     match(input,20,FOLLOW_2); 
 
@@ -3401,14 +3412,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 3 :
-                    // InternalETMap.g:1110:6: ( ( 'ptReal' ) )
+                    // InternalETMap.g:1108:6: ( ( 'ptReal' ) )
                     {
-                    // InternalETMap.g:1110:6: ( ( 'ptReal' ) )
-                    // InternalETMap.g:1111:1: ( 'ptReal' )
+                    // InternalETMap.g:1108:6: ( ( 'ptReal' ) )
+                    // InternalETMap.g:1109:1: ( 'ptReal' )
                     {
                      before(grammarAccess.getLiteralTypeAccess().getREALEnumLiteralDeclaration_2()); 
-                    // InternalETMap.g:1112:1: ( 'ptReal' )
-                    // InternalETMap.g:1112:3: 'ptReal'
+                    // InternalETMap.g:1110:1: ( 'ptReal' )
+                    // InternalETMap.g:1110:3: 'ptReal'
                     {
                     match(input,21,FOLLOW_2); 
 
@@ -3422,14 +3433,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 4 :
-                    // InternalETMap.g:1117:6: ( ( 'ptCharacter' ) )
+                    // InternalETMap.g:1115:6: ( ( 'ptCharacter' ) )
                     {
-                    // InternalETMap.g:1117:6: ( ( 'ptCharacter' ) )
-                    // InternalETMap.g:1118:1: ( 'ptCharacter' )
+                    // InternalETMap.g:1115:6: ( ( 'ptCharacter' ) )
+                    // InternalETMap.g:1116:1: ( 'ptCharacter' )
                     {
                      before(grammarAccess.getLiteralTypeAccess().getCHAREnumLiteralDeclaration_3()); 
-                    // InternalETMap.g:1119:1: ( 'ptCharacter' )
-                    // InternalETMap.g:1119:3: 'ptCharacter'
+                    // InternalETMap.g:1117:1: ( 'ptCharacter' )
+                    // InternalETMap.g:1117:3: 'ptCharacter'
                     {
                     match(input,22,FOLLOW_2); 
 
@@ -3460,14 +3471,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__MappingModel__Group__0"
-    // InternalETMap.g:1131:1: rule__MappingModel__Group__0 : rule__MappingModel__Group__0__Impl rule__MappingModel__Group__1 ;
+    // InternalETMap.g:1129:1: rule__MappingModel__Group__0 : rule__MappingModel__Group__0__Impl rule__MappingModel__Group__1 ;
     public final void rule__MappingModel__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:1135:1: ( rule__MappingModel__Group__0__Impl rule__MappingModel__Group__1 )
-            // InternalETMap.g:1136:2: rule__MappingModel__Group__0__Impl rule__MappingModel__Group__1
+            // InternalETMap.g:1133:1: ( rule__MappingModel__Group__0__Impl rule__MappingModel__Group__1 )
+            // InternalETMap.g:1134:2: rule__MappingModel__Group__0__Impl rule__MappingModel__Group__1
             {
             pushFollow(FOLLOW_3);
             rule__MappingModel__Group__0__Impl();
@@ -3498,17 +3509,17 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__MappingModel__Group__0__Impl"
-    // InternalETMap.g:1143:1: rule__MappingModel__Group__0__Impl : ( 'MappingModel' ) ;
+    // InternalETMap.g:1141:1: rule__MappingModel__Group__0__Impl : ( 'MappingModel' ) ;
     public final void rule__MappingModel__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:1147:1: ( ( 'MappingModel' ) )
-            // InternalETMap.g:1148:1: ( 'MappingModel' )
+            // InternalETMap.g:1145:1: ( ( 'MappingModel' ) )
+            // InternalETMap.g:1146:1: ( 'MappingModel' )
             {
-            // InternalETMap.g:1148:1: ( 'MappingModel' )
-            // InternalETMap.g:1149:1: 'MappingModel'
+            // InternalETMap.g:1146:1: ( 'MappingModel' )
+            // InternalETMap.g:1147:1: 'MappingModel'
             {
              before(grammarAccess.getMappingModelAccess().getMappingModelKeyword_0()); 
             match(input,23,FOLLOW_2); 
@@ -3535,14 +3546,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__MappingModel__Group__1"
-    // InternalETMap.g:1162:1: rule__MappingModel__Group__1 : rule__MappingModel__Group__1__Impl rule__MappingModel__Group__2 ;
+    // InternalETMap.g:1160:1: rule__MappingModel__Group__1 : rule__MappingModel__Group__1__Impl rule__MappingModel__Group__2 ;
     public final void rule__MappingModel__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:1166:1: ( rule__MappingModel__Group__1__Impl rule__MappingModel__Group__2 )
-            // InternalETMap.g:1167:2: rule__MappingModel__Group__1__Impl rule__MappingModel__Group__2
+            // InternalETMap.g:1164:1: ( rule__MappingModel__Group__1__Impl rule__MappingModel__Group__2 )
+            // InternalETMap.g:1165:2: rule__MappingModel__Group__1__Impl rule__MappingModel__Group__2
             {
             pushFollow(FOLLOW_4);
             rule__MappingModel__Group__1__Impl();
@@ -3573,21 +3584,21 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__MappingModel__Group__1__Impl"
-    // InternalETMap.g:1174:1: rule__MappingModel__Group__1__Impl : ( ( rule__MappingModel__NameAssignment_1 ) ) ;
+    // InternalETMap.g:1172:1: rule__MappingModel__Group__1__Impl : ( ( rule__MappingModel__NameAssignment_1 ) ) ;
     public final void rule__MappingModel__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:1178:1: ( ( ( rule__MappingModel__NameAssignment_1 ) ) )
-            // InternalETMap.g:1179:1: ( ( rule__MappingModel__NameAssignment_1 ) )
+            // InternalETMap.g:1176:1: ( ( ( rule__MappingModel__NameAssignment_1 ) ) )
+            // InternalETMap.g:1177:1: ( ( rule__MappingModel__NameAssignment_1 ) )
             {
-            // InternalETMap.g:1179:1: ( ( rule__MappingModel__NameAssignment_1 ) )
-            // InternalETMap.g:1180:1: ( rule__MappingModel__NameAssignment_1 )
+            // InternalETMap.g:1177:1: ( ( rule__MappingModel__NameAssignment_1 ) )
+            // InternalETMap.g:1178:1: ( rule__MappingModel__NameAssignment_1 )
             {
              before(grammarAccess.getMappingModelAccess().getNameAssignment_1()); 
-            // InternalETMap.g:1181:1: ( rule__MappingModel__NameAssignment_1 )
-            // InternalETMap.g:1181:2: rule__MappingModel__NameAssignment_1
+            // InternalETMap.g:1179:1: ( rule__MappingModel__NameAssignment_1 )
+            // InternalETMap.g:1179:2: rule__MappingModel__NameAssignment_1
             {
             pushFollow(FOLLOW_2);
             rule__MappingModel__NameAssignment_1();
@@ -3620,14 +3631,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__MappingModel__Group__2"
-    // InternalETMap.g:1191:1: rule__MappingModel__Group__2 : rule__MappingModel__Group__2__Impl rule__MappingModel__Group__3 ;
+    // InternalETMap.g:1189:1: rule__MappingModel__Group__2 : rule__MappingModel__Group__2__Impl rule__MappingModel__Group__3 ;
     public final void rule__MappingModel__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:1195:1: ( rule__MappingModel__Group__2__Impl rule__MappingModel__Group__3 )
-            // InternalETMap.g:1196:2: rule__MappingModel__Group__2__Impl rule__MappingModel__Group__3
+            // InternalETMap.g:1193:1: ( rule__MappingModel__Group__2__Impl rule__MappingModel__Group__3 )
+            // InternalETMap.g:1194:2: rule__MappingModel__Group__2__Impl rule__MappingModel__Group__3
             {
             pushFollow(FOLLOW_5);
             rule__MappingModel__Group__2__Impl();
@@ -3658,17 +3669,17 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__MappingModel__Group__2__Impl"
-    // InternalETMap.g:1203:1: rule__MappingModel__Group__2__Impl : ( '{' ) ;
+    // InternalETMap.g:1201:1: rule__MappingModel__Group__2__Impl : ( '{' ) ;
     public final void rule__MappingModel__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:1207:1: ( ( '{' ) )
-            // InternalETMap.g:1208:1: ( '{' )
+            // InternalETMap.g:1205:1: ( ( '{' ) )
+            // InternalETMap.g:1206:1: ( '{' )
             {
-            // InternalETMap.g:1208:1: ( '{' )
-            // InternalETMap.g:1209:1: '{'
+            // InternalETMap.g:1206:1: ( '{' )
+            // InternalETMap.g:1207:1: '{'
             {
              before(grammarAccess.getMappingModelAccess().getLeftCurlyBracketKeyword_2()); 
             match(input,24,FOLLOW_2); 
@@ -3695,14 +3706,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__MappingModel__Group__3"
-    // InternalETMap.g:1222:1: rule__MappingModel__Group__3 : rule__MappingModel__Group__3__Impl rule__MappingModel__Group__4 ;
+    // InternalETMap.g:1220:1: rule__MappingModel__Group__3 : rule__MappingModel__Group__3__Impl rule__MappingModel__Group__4 ;
     public final void rule__MappingModel__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:1226:1: ( rule__MappingModel__Group__3__Impl rule__MappingModel__Group__4 )
-            // InternalETMap.g:1227:2: rule__MappingModel__Group__3__Impl rule__MappingModel__Group__4
+            // InternalETMap.g:1224:1: ( rule__MappingModel__Group__3__Impl rule__MappingModel__Group__4 )
+            // InternalETMap.g:1225:2: rule__MappingModel__Group__3__Impl rule__MappingModel__Group__4
             {
             pushFollow(FOLLOW_5);
             rule__MappingModel__Group__3__Impl();
@@ -3733,20 +3744,20 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__MappingModel__Group__3__Impl"
-    // InternalETMap.g:1234:1: rule__MappingModel__Group__3__Impl : ( ( rule__MappingModel__ImportsAssignment_3 )* ) ;
+    // InternalETMap.g:1232:1: rule__MappingModel__Group__3__Impl : ( ( rule__MappingModel__ImportsAssignment_3 )* ) ;
     public final void rule__MappingModel__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:1238:1: ( ( ( rule__MappingModel__ImportsAssignment_3 )* ) )
-            // InternalETMap.g:1239:1: ( ( rule__MappingModel__ImportsAssignment_3 )* )
+            // InternalETMap.g:1236:1: ( ( ( rule__MappingModel__ImportsAssignment_3 )* ) )
+            // InternalETMap.g:1237:1: ( ( rule__MappingModel__ImportsAssignment_3 )* )
             {
-            // InternalETMap.g:1239:1: ( ( rule__MappingModel__ImportsAssignment_3 )* )
-            // InternalETMap.g:1240:1: ( rule__MappingModel__ImportsAssignment_3 )*
+            // InternalETMap.g:1237:1: ( ( rule__MappingModel__ImportsAssignment_3 )* )
+            // InternalETMap.g:1238:1: ( rule__MappingModel__ImportsAssignment_3 )*
             {
              before(grammarAccess.getMappingModelAccess().getImportsAssignment_3()); 
-            // InternalETMap.g:1241:1: ( rule__MappingModel__ImportsAssignment_3 )*
+            // InternalETMap.g:1239:1: ( rule__MappingModel__ImportsAssignment_3 )*
             loop16:
             do {
                 int alt16=2;
@@ -3759,7 +3770,7 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
                 switch (alt16) {
             	case 1 :
-            	    // InternalETMap.g:1241:2: rule__MappingModel__ImportsAssignment_3
+            	    // InternalETMap.g:1239:2: rule__MappingModel__ImportsAssignment_3
             	    {
             	    pushFollow(FOLLOW_6);
             	    rule__MappingModel__ImportsAssignment_3();
@@ -3798,14 +3809,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__MappingModel__Group__4"
-    // InternalETMap.g:1251:1: rule__MappingModel__Group__4 : rule__MappingModel__Group__4__Impl rule__MappingModel__Group__5 ;
+    // InternalETMap.g:1249:1: rule__MappingModel__Group__4 : rule__MappingModel__Group__4__Impl rule__MappingModel__Group__5 ;
     public final void rule__MappingModel__Group__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:1255:1: ( rule__MappingModel__Group__4__Impl rule__MappingModel__Group__5 )
-            // InternalETMap.g:1256:2: rule__MappingModel__Group__4__Impl rule__MappingModel__Group__5
+            // InternalETMap.g:1253:1: ( rule__MappingModel__Group__4__Impl rule__MappingModel__Group__5 )
+            // InternalETMap.g:1254:2: rule__MappingModel__Group__4__Impl rule__MappingModel__Group__5
             {
             pushFollow(FOLLOW_5);
             rule__MappingModel__Group__4__Impl();
@@ -3836,20 +3847,20 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__MappingModel__Group__4__Impl"
-    // InternalETMap.g:1263:1: rule__MappingModel__Group__4__Impl : ( ( rule__MappingModel__MappingsAssignment_4 )* ) ;
+    // InternalETMap.g:1261:1: rule__MappingModel__Group__4__Impl : ( ( rule__MappingModel__MappingsAssignment_4 )* ) ;
     public final void rule__MappingModel__Group__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:1267:1: ( ( ( rule__MappingModel__MappingsAssignment_4 )* ) )
-            // InternalETMap.g:1268:1: ( ( rule__MappingModel__MappingsAssignment_4 )* )
+            // InternalETMap.g:1265:1: ( ( ( rule__MappingModel__MappingsAssignment_4 )* ) )
+            // InternalETMap.g:1266:1: ( ( rule__MappingModel__MappingsAssignment_4 )* )
             {
-            // InternalETMap.g:1268:1: ( ( rule__MappingModel__MappingsAssignment_4 )* )
-            // InternalETMap.g:1269:1: ( rule__MappingModel__MappingsAssignment_4 )*
+            // InternalETMap.g:1266:1: ( ( rule__MappingModel__MappingsAssignment_4 )* )
+            // InternalETMap.g:1267:1: ( rule__MappingModel__MappingsAssignment_4 )*
             {
              before(grammarAccess.getMappingModelAccess().getMappingsAssignment_4()); 
-            // InternalETMap.g:1270:1: ( rule__MappingModel__MappingsAssignment_4 )*
+            // InternalETMap.g:1268:1: ( rule__MappingModel__MappingsAssignment_4 )*
             loop17:
             do {
                 int alt17=2;
@@ -3862,7 +3873,7 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
                 switch (alt17) {
             	case 1 :
-            	    // InternalETMap.g:1270:2: rule__MappingModel__MappingsAssignment_4
+            	    // InternalETMap.g:1268:2: rule__MappingModel__MappingsAssignment_4
             	    {
             	    pushFollow(FOLLOW_7);
             	    rule__MappingModel__MappingsAssignment_4();
@@ -3901,14 +3912,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__MappingModel__Group__5"
-    // InternalETMap.g:1280:1: rule__MappingModel__Group__5 : rule__MappingModel__Group__5__Impl ;
+    // InternalETMap.g:1278:1: rule__MappingModel__Group__5 : rule__MappingModel__Group__5__Impl ;
     public final void rule__MappingModel__Group__5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:1284:1: ( rule__MappingModel__Group__5__Impl )
-            // InternalETMap.g:1285:2: rule__MappingModel__Group__5__Impl
+            // InternalETMap.g:1282:1: ( rule__MappingModel__Group__5__Impl )
+            // InternalETMap.g:1283:2: rule__MappingModel__Group__5__Impl
             {
             pushFollow(FOLLOW_2);
             rule__MappingModel__Group__5__Impl();
@@ -3934,17 +3945,17 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__MappingModel__Group__5__Impl"
-    // InternalETMap.g:1291:1: rule__MappingModel__Group__5__Impl : ( '}' ) ;
+    // InternalETMap.g:1289:1: rule__MappingModel__Group__5__Impl : ( '}' ) ;
     public final void rule__MappingModel__Group__5__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:1295:1: ( ( '}' ) )
-            // InternalETMap.g:1296:1: ( '}' )
+            // InternalETMap.g:1293:1: ( ( '}' ) )
+            // InternalETMap.g:1294:1: ( '}' )
             {
-            // InternalETMap.g:1296:1: ( '}' )
-            // InternalETMap.g:1297:1: '}'
+            // InternalETMap.g:1294:1: ( '}' )
+            // InternalETMap.g:1295:1: '}'
             {
              before(grammarAccess.getMappingModelAccess().getRightCurlyBracketKeyword_5()); 
             match(input,25,FOLLOW_2); 
@@ -3971,14 +3982,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Mapping__Group__0"
-    // InternalETMap.g:1322:1: rule__Mapping__Group__0 : rule__Mapping__Group__0__Impl rule__Mapping__Group__1 ;
+    // InternalETMap.g:1320:1: rule__Mapping__Group__0 : rule__Mapping__Group__0__Impl rule__Mapping__Group__1 ;
     public final void rule__Mapping__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:1326:1: ( rule__Mapping__Group__0__Impl rule__Mapping__Group__1 )
-            // InternalETMap.g:1327:2: rule__Mapping__Group__0__Impl rule__Mapping__Group__1
+            // InternalETMap.g:1324:1: ( rule__Mapping__Group__0__Impl rule__Mapping__Group__1 )
+            // InternalETMap.g:1325:2: rule__Mapping__Group__0__Impl rule__Mapping__Group__1
             {
             pushFollow(FOLLOW_3);
             rule__Mapping__Group__0__Impl();
@@ -4009,17 +4020,17 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Mapping__Group__0__Impl"
-    // InternalETMap.g:1334:1: rule__Mapping__Group__0__Impl : ( 'Mapping' ) ;
+    // InternalETMap.g:1332:1: rule__Mapping__Group__0__Impl : ( 'Mapping' ) ;
     public final void rule__Mapping__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:1338:1: ( ( 'Mapping' ) )
-            // InternalETMap.g:1339:1: ( 'Mapping' )
+            // InternalETMap.g:1336:1: ( ( 'Mapping' ) )
+            // InternalETMap.g:1337:1: ( 'Mapping' )
             {
-            // InternalETMap.g:1339:1: ( 'Mapping' )
-            // InternalETMap.g:1340:1: 'Mapping'
+            // InternalETMap.g:1337:1: ( 'Mapping' )
+            // InternalETMap.g:1338:1: 'Mapping'
             {
              before(grammarAccess.getMappingAccess().getMappingKeyword_0()); 
             match(input,26,FOLLOW_2); 
@@ -4046,14 +4057,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Mapping__Group__1"
-    // InternalETMap.g:1353:1: rule__Mapping__Group__1 : rule__Mapping__Group__1__Impl rule__Mapping__Group__2 ;
+    // InternalETMap.g:1351:1: rule__Mapping__Group__1 : rule__Mapping__Group__1__Impl rule__Mapping__Group__2 ;
     public final void rule__Mapping__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:1357:1: ( rule__Mapping__Group__1__Impl rule__Mapping__Group__2 )
-            // InternalETMap.g:1358:2: rule__Mapping__Group__1__Impl rule__Mapping__Group__2
+            // InternalETMap.g:1355:1: ( rule__Mapping__Group__1__Impl rule__Mapping__Group__2 )
+            // InternalETMap.g:1356:2: rule__Mapping__Group__1__Impl rule__Mapping__Group__2
             {
             pushFollow(FOLLOW_8);
             rule__Mapping__Group__1__Impl();
@@ -4084,21 +4095,21 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Mapping__Group__1__Impl"
-    // InternalETMap.g:1365:1: rule__Mapping__Group__1__Impl : ( ( rule__Mapping__LogicalSysAssignment_1 ) ) ;
+    // InternalETMap.g:1363:1: rule__Mapping__Group__1__Impl : ( ( rule__Mapping__LogicalSysAssignment_1 ) ) ;
     public final void rule__Mapping__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:1369:1: ( ( ( rule__Mapping__LogicalSysAssignment_1 ) ) )
-            // InternalETMap.g:1370:1: ( ( rule__Mapping__LogicalSysAssignment_1 ) )
+            // InternalETMap.g:1367:1: ( ( ( rule__Mapping__LogicalSysAssignment_1 ) ) )
+            // InternalETMap.g:1368:1: ( ( rule__Mapping__LogicalSysAssignment_1 ) )
             {
-            // InternalETMap.g:1370:1: ( ( rule__Mapping__LogicalSysAssignment_1 ) )
-            // InternalETMap.g:1371:1: ( rule__Mapping__LogicalSysAssignment_1 )
+            // InternalETMap.g:1368:1: ( ( rule__Mapping__LogicalSysAssignment_1 ) )
+            // InternalETMap.g:1369:1: ( rule__Mapping__LogicalSysAssignment_1 )
             {
              before(grammarAccess.getMappingAccess().getLogicalSysAssignment_1()); 
-            // InternalETMap.g:1372:1: ( rule__Mapping__LogicalSysAssignment_1 )
-            // InternalETMap.g:1372:2: rule__Mapping__LogicalSysAssignment_1
+            // InternalETMap.g:1370:1: ( rule__Mapping__LogicalSysAssignment_1 )
+            // InternalETMap.g:1370:2: rule__Mapping__LogicalSysAssignment_1
             {
             pushFollow(FOLLOW_2);
             rule__Mapping__LogicalSysAssignment_1();
@@ -4131,14 +4142,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Mapping__Group__2"
-    // InternalETMap.g:1382:1: rule__Mapping__Group__2 : rule__Mapping__Group__2__Impl rule__Mapping__Group__3 ;
+    // InternalETMap.g:1380:1: rule__Mapping__Group__2 : rule__Mapping__Group__2__Impl rule__Mapping__Group__3 ;
     public final void rule__Mapping__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:1386:1: ( rule__Mapping__Group__2__Impl rule__Mapping__Group__3 )
-            // InternalETMap.g:1387:2: rule__Mapping__Group__2__Impl rule__Mapping__Group__3
+            // InternalETMap.g:1384:1: ( rule__Mapping__Group__2__Impl rule__Mapping__Group__3 )
+            // InternalETMap.g:1385:2: rule__Mapping__Group__2__Impl rule__Mapping__Group__3
             {
             pushFollow(FOLLOW_3);
             rule__Mapping__Group__2__Impl();
@@ -4169,17 +4180,17 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Mapping__Group__2__Impl"
-    // InternalETMap.g:1394:1: rule__Mapping__Group__2__Impl : ( '->' ) ;
+    // InternalETMap.g:1392:1: rule__Mapping__Group__2__Impl : ( '->' ) ;
     public final void rule__Mapping__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:1398:1: ( ( '->' ) )
-            // InternalETMap.g:1399:1: ( '->' )
+            // InternalETMap.g:1396:1: ( ( '->' ) )
+            // InternalETMap.g:1397:1: ( '->' )
             {
-            // InternalETMap.g:1399:1: ( '->' )
-            // InternalETMap.g:1400:1: '->'
+            // InternalETMap.g:1397:1: ( '->' )
+            // InternalETMap.g:1398:1: '->'
             {
              before(grammarAccess.getMappingAccess().getHyphenMinusGreaterThanSignKeyword_2()); 
             match(input,27,FOLLOW_2); 
@@ -4206,14 +4217,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Mapping__Group__3"
-    // InternalETMap.g:1413:1: rule__Mapping__Group__3 : rule__Mapping__Group__3__Impl rule__Mapping__Group__4 ;
+    // InternalETMap.g:1411:1: rule__Mapping__Group__3 : rule__Mapping__Group__3__Impl rule__Mapping__Group__4 ;
     public final void rule__Mapping__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:1417:1: ( rule__Mapping__Group__3__Impl rule__Mapping__Group__4 )
-            // InternalETMap.g:1418:2: rule__Mapping__Group__3__Impl rule__Mapping__Group__4
+            // InternalETMap.g:1415:1: ( rule__Mapping__Group__3__Impl rule__Mapping__Group__4 )
+            // InternalETMap.g:1416:2: rule__Mapping__Group__3__Impl rule__Mapping__Group__4
             {
             pushFollow(FOLLOW_4);
             rule__Mapping__Group__3__Impl();
@@ -4244,21 +4255,21 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Mapping__Group__3__Impl"
-    // InternalETMap.g:1425:1: rule__Mapping__Group__3__Impl : ( ( rule__Mapping__PhysicalSysAssignment_3 ) ) ;
+    // InternalETMap.g:1423:1: rule__Mapping__Group__3__Impl : ( ( rule__Mapping__PhysicalSysAssignment_3 ) ) ;
     public final void rule__Mapping__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:1429:1: ( ( ( rule__Mapping__PhysicalSysAssignment_3 ) ) )
-            // InternalETMap.g:1430:1: ( ( rule__Mapping__PhysicalSysAssignment_3 ) )
+            // InternalETMap.g:1427:1: ( ( ( rule__Mapping__PhysicalSysAssignment_3 ) ) )
+            // InternalETMap.g:1428:1: ( ( rule__Mapping__PhysicalSysAssignment_3 ) )
             {
-            // InternalETMap.g:1430:1: ( ( rule__Mapping__PhysicalSysAssignment_3 ) )
-            // InternalETMap.g:1431:1: ( rule__Mapping__PhysicalSysAssignment_3 )
+            // InternalETMap.g:1428:1: ( ( rule__Mapping__PhysicalSysAssignment_3 ) )
+            // InternalETMap.g:1429:1: ( rule__Mapping__PhysicalSysAssignment_3 )
             {
              before(grammarAccess.getMappingAccess().getPhysicalSysAssignment_3()); 
-            // InternalETMap.g:1432:1: ( rule__Mapping__PhysicalSysAssignment_3 )
-            // InternalETMap.g:1432:2: rule__Mapping__PhysicalSysAssignment_3
+            // InternalETMap.g:1430:1: ( rule__Mapping__PhysicalSysAssignment_3 )
+            // InternalETMap.g:1430:2: rule__Mapping__PhysicalSysAssignment_3
             {
             pushFollow(FOLLOW_2);
             rule__Mapping__PhysicalSysAssignment_3();
@@ -4291,14 +4302,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Mapping__Group__4"
-    // InternalETMap.g:1442:1: rule__Mapping__Group__4 : rule__Mapping__Group__4__Impl rule__Mapping__Group__5 ;
+    // InternalETMap.g:1440:1: rule__Mapping__Group__4 : rule__Mapping__Group__4__Impl rule__Mapping__Group__5 ;
     public final void rule__Mapping__Group__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:1446:1: ( rule__Mapping__Group__4__Impl rule__Mapping__Group__5 )
-            // InternalETMap.g:1447:2: rule__Mapping__Group__4__Impl rule__Mapping__Group__5
+            // InternalETMap.g:1444:1: ( rule__Mapping__Group__4__Impl rule__Mapping__Group__5 )
+            // InternalETMap.g:1445:2: rule__Mapping__Group__4__Impl rule__Mapping__Group__5
             {
             pushFollow(FOLLOW_9);
             rule__Mapping__Group__4__Impl();
@@ -4329,17 +4340,17 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Mapping__Group__4__Impl"
-    // InternalETMap.g:1454:1: rule__Mapping__Group__4__Impl : ( '{' ) ;
+    // InternalETMap.g:1452:1: rule__Mapping__Group__4__Impl : ( '{' ) ;
     public final void rule__Mapping__Group__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:1458:1: ( ( '{' ) )
-            // InternalETMap.g:1459:1: ( '{' )
+            // InternalETMap.g:1456:1: ( ( '{' ) )
+            // InternalETMap.g:1457:1: ( '{' )
             {
-            // InternalETMap.g:1459:1: ( '{' )
-            // InternalETMap.g:1460:1: '{'
+            // InternalETMap.g:1457:1: ( '{' )
+            // InternalETMap.g:1458:1: '{'
             {
              before(grammarAccess.getMappingAccess().getLeftCurlyBracketKeyword_4()); 
             match(input,24,FOLLOW_2); 
@@ -4366,14 +4377,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Mapping__Group__5"
-    // InternalETMap.g:1473:1: rule__Mapping__Group__5 : rule__Mapping__Group__5__Impl rule__Mapping__Group__6 ;
+    // InternalETMap.g:1471:1: rule__Mapping__Group__5 : rule__Mapping__Group__5__Impl rule__Mapping__Group__6 ;
     public final void rule__Mapping__Group__5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:1477:1: ( rule__Mapping__Group__5__Impl rule__Mapping__Group__6 )
-            // InternalETMap.g:1478:2: rule__Mapping__Group__5__Impl rule__Mapping__Group__6
+            // InternalETMap.g:1475:1: ( rule__Mapping__Group__5__Impl rule__Mapping__Group__6 )
+            // InternalETMap.g:1476:2: rule__Mapping__Group__5__Impl rule__Mapping__Group__6
             {
             pushFollow(FOLLOW_9);
             rule__Mapping__Group__5__Impl();
@@ -4404,20 +4415,20 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Mapping__Group__5__Impl"
-    // InternalETMap.g:1485:1: rule__Mapping__Group__5__Impl : ( ( rule__Mapping__SubsysMappingsAssignment_5 )* ) ;
+    // InternalETMap.g:1483:1: rule__Mapping__Group__5__Impl : ( ( rule__Mapping__SubsysMappingsAssignment_5 )* ) ;
     public final void rule__Mapping__Group__5__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:1489:1: ( ( ( rule__Mapping__SubsysMappingsAssignment_5 )* ) )
-            // InternalETMap.g:1490:1: ( ( rule__Mapping__SubsysMappingsAssignment_5 )* )
+            // InternalETMap.g:1487:1: ( ( ( rule__Mapping__SubsysMappingsAssignment_5 )* ) )
+            // InternalETMap.g:1488:1: ( ( rule__Mapping__SubsysMappingsAssignment_5 )* )
             {
-            // InternalETMap.g:1490:1: ( ( rule__Mapping__SubsysMappingsAssignment_5 )* )
-            // InternalETMap.g:1491:1: ( rule__Mapping__SubsysMappingsAssignment_5 )*
+            // InternalETMap.g:1488:1: ( ( rule__Mapping__SubsysMappingsAssignment_5 )* )
+            // InternalETMap.g:1489:1: ( rule__Mapping__SubsysMappingsAssignment_5 )*
             {
              before(grammarAccess.getMappingAccess().getSubsysMappingsAssignment_5()); 
-            // InternalETMap.g:1492:1: ( rule__Mapping__SubsysMappingsAssignment_5 )*
+            // InternalETMap.g:1490:1: ( rule__Mapping__SubsysMappingsAssignment_5 )*
             loop18:
             do {
                 int alt18=2;
@@ -4430,7 +4441,7 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
                 switch (alt18) {
             	case 1 :
-            	    // InternalETMap.g:1492:2: rule__Mapping__SubsysMappingsAssignment_5
+            	    // InternalETMap.g:1490:2: rule__Mapping__SubsysMappingsAssignment_5
             	    {
             	    pushFollow(FOLLOW_10);
             	    rule__Mapping__SubsysMappingsAssignment_5();
@@ -4469,14 +4480,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Mapping__Group__6"
-    // InternalETMap.g:1502:1: rule__Mapping__Group__6 : rule__Mapping__Group__6__Impl ;
+    // InternalETMap.g:1500:1: rule__Mapping__Group__6 : rule__Mapping__Group__6__Impl ;
     public final void rule__Mapping__Group__6() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:1506:1: ( rule__Mapping__Group__6__Impl )
-            // InternalETMap.g:1507:2: rule__Mapping__Group__6__Impl
+            // InternalETMap.g:1504:1: ( rule__Mapping__Group__6__Impl )
+            // InternalETMap.g:1505:2: rule__Mapping__Group__6__Impl
             {
             pushFollow(FOLLOW_2);
             rule__Mapping__Group__6__Impl();
@@ -4502,17 +4513,17 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Mapping__Group__6__Impl"
-    // InternalETMap.g:1513:1: rule__Mapping__Group__6__Impl : ( '}' ) ;
+    // InternalETMap.g:1511:1: rule__Mapping__Group__6__Impl : ( '}' ) ;
     public final void rule__Mapping__Group__6__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:1517:1: ( ( '}' ) )
-            // InternalETMap.g:1518:1: ( '}' )
+            // InternalETMap.g:1515:1: ( ( '}' ) )
+            // InternalETMap.g:1516:1: ( '}' )
             {
-            // InternalETMap.g:1518:1: ( '}' )
-            // InternalETMap.g:1519:1: '}'
+            // InternalETMap.g:1516:1: ( '}' )
+            // InternalETMap.g:1517:1: '}'
             {
              before(grammarAccess.getMappingAccess().getRightCurlyBracketKeyword_6()); 
             match(input,25,FOLLOW_2); 
@@ -4539,14 +4550,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SubSystemMapping__Group__0"
-    // InternalETMap.g:1546:1: rule__SubSystemMapping__Group__0 : rule__SubSystemMapping__Group__0__Impl rule__SubSystemMapping__Group__1 ;
+    // InternalETMap.g:1544:1: rule__SubSystemMapping__Group__0 : rule__SubSystemMapping__Group__0__Impl rule__SubSystemMapping__Group__1 ;
     public final void rule__SubSystemMapping__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:1550:1: ( rule__SubSystemMapping__Group__0__Impl rule__SubSystemMapping__Group__1 )
-            // InternalETMap.g:1551:2: rule__SubSystemMapping__Group__0__Impl rule__SubSystemMapping__Group__1
+            // InternalETMap.g:1548:1: ( rule__SubSystemMapping__Group__0__Impl rule__SubSystemMapping__Group__1 )
+            // InternalETMap.g:1549:2: rule__SubSystemMapping__Group__0__Impl rule__SubSystemMapping__Group__1
             {
             pushFollow(FOLLOW_3);
             rule__SubSystemMapping__Group__0__Impl();
@@ -4577,17 +4588,17 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SubSystemMapping__Group__0__Impl"
-    // InternalETMap.g:1558:1: rule__SubSystemMapping__Group__0__Impl : ( 'SubSystemMapping' ) ;
+    // InternalETMap.g:1556:1: rule__SubSystemMapping__Group__0__Impl : ( 'SubSystemMapping' ) ;
     public final void rule__SubSystemMapping__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:1562:1: ( ( 'SubSystemMapping' ) )
-            // InternalETMap.g:1563:1: ( 'SubSystemMapping' )
+            // InternalETMap.g:1560:1: ( ( 'SubSystemMapping' ) )
+            // InternalETMap.g:1561:1: ( 'SubSystemMapping' )
             {
-            // InternalETMap.g:1563:1: ( 'SubSystemMapping' )
-            // InternalETMap.g:1564:1: 'SubSystemMapping'
+            // InternalETMap.g:1561:1: ( 'SubSystemMapping' )
+            // InternalETMap.g:1562:1: 'SubSystemMapping'
             {
              before(grammarAccess.getSubSystemMappingAccess().getSubSystemMappingKeyword_0()); 
             match(input,28,FOLLOW_2); 
@@ -4614,14 +4625,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SubSystemMapping__Group__1"
-    // InternalETMap.g:1577:1: rule__SubSystemMapping__Group__1 : rule__SubSystemMapping__Group__1__Impl rule__SubSystemMapping__Group__2 ;
+    // InternalETMap.g:1575:1: rule__SubSystemMapping__Group__1 : rule__SubSystemMapping__Group__1__Impl rule__SubSystemMapping__Group__2 ;
     public final void rule__SubSystemMapping__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:1581:1: ( rule__SubSystemMapping__Group__1__Impl rule__SubSystemMapping__Group__2 )
-            // InternalETMap.g:1582:2: rule__SubSystemMapping__Group__1__Impl rule__SubSystemMapping__Group__2
+            // InternalETMap.g:1579:1: ( rule__SubSystemMapping__Group__1__Impl rule__SubSystemMapping__Group__2 )
+            // InternalETMap.g:1580:2: rule__SubSystemMapping__Group__1__Impl rule__SubSystemMapping__Group__2
             {
             pushFollow(FOLLOW_8);
             rule__SubSystemMapping__Group__1__Impl();
@@ -4652,21 +4663,21 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SubSystemMapping__Group__1__Impl"
-    // InternalETMap.g:1589:1: rule__SubSystemMapping__Group__1__Impl : ( ( rule__SubSystemMapping__LogicalSubSysAssignment_1 ) ) ;
+    // InternalETMap.g:1587:1: rule__SubSystemMapping__Group__1__Impl : ( ( rule__SubSystemMapping__LogicalSubSysAssignment_1 ) ) ;
     public final void rule__SubSystemMapping__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:1593:1: ( ( ( rule__SubSystemMapping__LogicalSubSysAssignment_1 ) ) )
-            // InternalETMap.g:1594:1: ( ( rule__SubSystemMapping__LogicalSubSysAssignment_1 ) )
+            // InternalETMap.g:1591:1: ( ( ( rule__SubSystemMapping__LogicalSubSysAssignment_1 ) ) )
+            // InternalETMap.g:1592:1: ( ( rule__SubSystemMapping__LogicalSubSysAssignment_1 ) )
             {
-            // InternalETMap.g:1594:1: ( ( rule__SubSystemMapping__LogicalSubSysAssignment_1 ) )
-            // InternalETMap.g:1595:1: ( rule__SubSystemMapping__LogicalSubSysAssignment_1 )
+            // InternalETMap.g:1592:1: ( ( rule__SubSystemMapping__LogicalSubSysAssignment_1 ) )
+            // InternalETMap.g:1593:1: ( rule__SubSystemMapping__LogicalSubSysAssignment_1 )
             {
              before(grammarAccess.getSubSystemMappingAccess().getLogicalSubSysAssignment_1()); 
-            // InternalETMap.g:1596:1: ( rule__SubSystemMapping__LogicalSubSysAssignment_1 )
-            // InternalETMap.g:1596:2: rule__SubSystemMapping__LogicalSubSysAssignment_1
+            // InternalETMap.g:1594:1: ( rule__SubSystemMapping__LogicalSubSysAssignment_1 )
+            // InternalETMap.g:1594:2: rule__SubSystemMapping__LogicalSubSysAssignment_1
             {
             pushFollow(FOLLOW_2);
             rule__SubSystemMapping__LogicalSubSysAssignment_1();
@@ -4699,14 +4710,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SubSystemMapping__Group__2"
-    // InternalETMap.g:1606:1: rule__SubSystemMapping__Group__2 : rule__SubSystemMapping__Group__2__Impl rule__SubSystemMapping__Group__3 ;
+    // InternalETMap.g:1604:1: rule__SubSystemMapping__Group__2 : rule__SubSystemMapping__Group__2__Impl rule__SubSystemMapping__Group__3 ;
     public final void rule__SubSystemMapping__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:1610:1: ( rule__SubSystemMapping__Group__2__Impl rule__SubSystemMapping__Group__3 )
-            // InternalETMap.g:1611:2: rule__SubSystemMapping__Group__2__Impl rule__SubSystemMapping__Group__3
+            // InternalETMap.g:1608:1: ( rule__SubSystemMapping__Group__2__Impl rule__SubSystemMapping__Group__3 )
+            // InternalETMap.g:1609:2: rule__SubSystemMapping__Group__2__Impl rule__SubSystemMapping__Group__3
             {
             pushFollow(FOLLOW_3);
             rule__SubSystemMapping__Group__2__Impl();
@@ -4737,17 +4748,17 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SubSystemMapping__Group__2__Impl"
-    // InternalETMap.g:1618:1: rule__SubSystemMapping__Group__2__Impl : ( '->' ) ;
+    // InternalETMap.g:1616:1: rule__SubSystemMapping__Group__2__Impl : ( '->' ) ;
     public final void rule__SubSystemMapping__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:1622:1: ( ( '->' ) )
-            // InternalETMap.g:1623:1: ( '->' )
+            // InternalETMap.g:1620:1: ( ( '->' ) )
+            // InternalETMap.g:1621:1: ( '->' )
             {
-            // InternalETMap.g:1623:1: ( '->' )
-            // InternalETMap.g:1624:1: '->'
+            // InternalETMap.g:1621:1: ( '->' )
+            // InternalETMap.g:1622:1: '->'
             {
              before(grammarAccess.getSubSystemMappingAccess().getHyphenMinusGreaterThanSignKeyword_2()); 
             match(input,27,FOLLOW_2); 
@@ -4774,14 +4785,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SubSystemMapping__Group__3"
-    // InternalETMap.g:1637:1: rule__SubSystemMapping__Group__3 : rule__SubSystemMapping__Group__3__Impl rule__SubSystemMapping__Group__4 ;
+    // InternalETMap.g:1635:1: rule__SubSystemMapping__Group__3 : rule__SubSystemMapping__Group__3__Impl rule__SubSystemMapping__Group__4 ;
     public final void rule__SubSystemMapping__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:1641:1: ( rule__SubSystemMapping__Group__3__Impl rule__SubSystemMapping__Group__4 )
-            // InternalETMap.g:1642:2: rule__SubSystemMapping__Group__3__Impl rule__SubSystemMapping__Group__4
+            // InternalETMap.g:1639:1: ( rule__SubSystemMapping__Group__3__Impl rule__SubSystemMapping__Group__4 )
+            // InternalETMap.g:1640:2: rule__SubSystemMapping__Group__3__Impl rule__SubSystemMapping__Group__4
             {
             pushFollow(FOLLOW_4);
             rule__SubSystemMapping__Group__3__Impl();
@@ -4812,21 +4823,21 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SubSystemMapping__Group__3__Impl"
-    // InternalETMap.g:1649:1: rule__SubSystemMapping__Group__3__Impl : ( ( rule__SubSystemMapping__NodeAssignment_3 ) ) ;
+    // InternalETMap.g:1647:1: rule__SubSystemMapping__Group__3__Impl : ( ( rule__SubSystemMapping__NodeAssignment_3 ) ) ;
     public final void rule__SubSystemMapping__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:1653:1: ( ( ( rule__SubSystemMapping__NodeAssignment_3 ) ) )
-            // InternalETMap.g:1654:1: ( ( rule__SubSystemMapping__NodeAssignment_3 ) )
+            // InternalETMap.g:1651:1: ( ( ( rule__SubSystemMapping__NodeAssignment_3 ) ) )
+            // InternalETMap.g:1652:1: ( ( rule__SubSystemMapping__NodeAssignment_3 ) )
             {
-            // InternalETMap.g:1654:1: ( ( rule__SubSystemMapping__NodeAssignment_3 ) )
-            // InternalETMap.g:1655:1: ( rule__SubSystemMapping__NodeAssignment_3 )
+            // InternalETMap.g:1652:1: ( ( rule__SubSystemMapping__NodeAssignment_3 ) )
+            // InternalETMap.g:1653:1: ( rule__SubSystemMapping__NodeAssignment_3 )
             {
              before(grammarAccess.getSubSystemMappingAccess().getNodeAssignment_3()); 
-            // InternalETMap.g:1656:1: ( rule__SubSystemMapping__NodeAssignment_3 )
-            // InternalETMap.g:1656:2: rule__SubSystemMapping__NodeAssignment_3
+            // InternalETMap.g:1654:1: ( rule__SubSystemMapping__NodeAssignment_3 )
+            // InternalETMap.g:1654:2: rule__SubSystemMapping__NodeAssignment_3
             {
             pushFollow(FOLLOW_2);
             rule__SubSystemMapping__NodeAssignment_3();
@@ -4859,14 +4870,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SubSystemMapping__Group__4"
-    // InternalETMap.g:1666:1: rule__SubSystemMapping__Group__4 : rule__SubSystemMapping__Group__4__Impl ;
+    // InternalETMap.g:1664:1: rule__SubSystemMapping__Group__4 : rule__SubSystemMapping__Group__4__Impl ;
     public final void rule__SubSystemMapping__Group__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:1670:1: ( rule__SubSystemMapping__Group__4__Impl )
-            // InternalETMap.g:1671:2: rule__SubSystemMapping__Group__4__Impl
+            // InternalETMap.g:1668:1: ( rule__SubSystemMapping__Group__4__Impl )
+            // InternalETMap.g:1669:2: rule__SubSystemMapping__Group__4__Impl
             {
             pushFollow(FOLLOW_2);
             rule__SubSystemMapping__Group__4__Impl();
@@ -4892,20 +4903,20 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SubSystemMapping__Group__4__Impl"
-    // InternalETMap.g:1677:1: rule__SubSystemMapping__Group__4__Impl : ( ( rule__SubSystemMapping__Group_4__0 )? ) ;
+    // InternalETMap.g:1675:1: rule__SubSystemMapping__Group__4__Impl : ( ( rule__SubSystemMapping__Group_4__0 )? ) ;
     public final void rule__SubSystemMapping__Group__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:1681:1: ( ( ( rule__SubSystemMapping__Group_4__0 )? ) )
-            // InternalETMap.g:1682:1: ( ( rule__SubSystemMapping__Group_4__0 )? )
+            // InternalETMap.g:1679:1: ( ( ( rule__SubSystemMapping__Group_4__0 )? ) )
+            // InternalETMap.g:1680:1: ( ( rule__SubSystemMapping__Group_4__0 )? )
             {
-            // InternalETMap.g:1682:1: ( ( rule__SubSystemMapping__Group_4__0 )? )
-            // InternalETMap.g:1683:1: ( rule__SubSystemMapping__Group_4__0 )?
+            // InternalETMap.g:1680:1: ( ( rule__SubSystemMapping__Group_4__0 )? )
+            // InternalETMap.g:1681:1: ( rule__SubSystemMapping__Group_4__0 )?
             {
              before(grammarAccess.getSubSystemMappingAccess().getGroup_4()); 
-            // InternalETMap.g:1684:1: ( rule__SubSystemMapping__Group_4__0 )?
+            // InternalETMap.g:1682:1: ( rule__SubSystemMapping__Group_4__0 )?
             int alt19=2;
             int LA19_0 = input.LA(1);
 
@@ -4914,7 +4925,7 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
             }
             switch (alt19) {
                 case 1 :
-                    // InternalETMap.g:1684:2: rule__SubSystemMapping__Group_4__0
+                    // InternalETMap.g:1682:2: rule__SubSystemMapping__Group_4__0
                     {
                     pushFollow(FOLLOW_2);
                     rule__SubSystemMapping__Group_4__0();
@@ -4950,14 +4961,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SubSystemMapping__Group_4__0"
-    // InternalETMap.g:1704:1: rule__SubSystemMapping__Group_4__0 : rule__SubSystemMapping__Group_4__0__Impl rule__SubSystemMapping__Group_4__1 ;
+    // InternalETMap.g:1702:1: rule__SubSystemMapping__Group_4__0 : rule__SubSystemMapping__Group_4__0__Impl rule__SubSystemMapping__Group_4__1 ;
     public final void rule__SubSystemMapping__Group_4__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:1708:1: ( rule__SubSystemMapping__Group_4__0__Impl rule__SubSystemMapping__Group_4__1 )
-            // InternalETMap.g:1709:2: rule__SubSystemMapping__Group_4__0__Impl rule__SubSystemMapping__Group_4__1
+            // InternalETMap.g:1706:1: ( rule__SubSystemMapping__Group_4__0__Impl rule__SubSystemMapping__Group_4__1 )
+            // InternalETMap.g:1707:2: rule__SubSystemMapping__Group_4__0__Impl rule__SubSystemMapping__Group_4__1
             {
             pushFollow(FOLLOW_11);
             rule__SubSystemMapping__Group_4__0__Impl();
@@ -4988,17 +4999,17 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SubSystemMapping__Group_4__0__Impl"
-    // InternalETMap.g:1716:1: rule__SubSystemMapping__Group_4__0__Impl : ( '{' ) ;
+    // InternalETMap.g:1714:1: rule__SubSystemMapping__Group_4__0__Impl : ( '{' ) ;
     public final void rule__SubSystemMapping__Group_4__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:1720:1: ( ( '{' ) )
-            // InternalETMap.g:1721:1: ( '{' )
+            // InternalETMap.g:1718:1: ( ( '{' ) )
+            // InternalETMap.g:1719:1: ( '{' )
             {
-            // InternalETMap.g:1721:1: ( '{' )
-            // InternalETMap.g:1722:1: '{'
+            // InternalETMap.g:1719:1: ( '{' )
+            // InternalETMap.g:1720:1: '{'
             {
              before(grammarAccess.getSubSystemMappingAccess().getLeftCurlyBracketKeyword_4_0()); 
             match(input,24,FOLLOW_2); 
@@ -5025,14 +5036,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SubSystemMapping__Group_4__1"
-    // InternalETMap.g:1735:1: rule__SubSystemMapping__Group_4__1 : rule__SubSystemMapping__Group_4__1__Impl rule__SubSystemMapping__Group_4__2 ;
+    // InternalETMap.g:1733:1: rule__SubSystemMapping__Group_4__1 : rule__SubSystemMapping__Group_4__1__Impl rule__SubSystemMapping__Group_4__2 ;
     public final void rule__SubSystemMapping__Group_4__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:1739:1: ( rule__SubSystemMapping__Group_4__1__Impl rule__SubSystemMapping__Group_4__2 )
-            // InternalETMap.g:1740:2: rule__SubSystemMapping__Group_4__1__Impl rule__SubSystemMapping__Group_4__2
+            // InternalETMap.g:1737:1: ( rule__SubSystemMapping__Group_4__1__Impl rule__SubSystemMapping__Group_4__2 )
+            // InternalETMap.g:1738:2: rule__SubSystemMapping__Group_4__1__Impl rule__SubSystemMapping__Group_4__2
             {
             pushFollow(FOLLOW_11);
             rule__SubSystemMapping__Group_4__1__Impl();
@@ -5063,20 +5074,20 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SubSystemMapping__Group_4__1__Impl"
-    // InternalETMap.g:1747:1: rule__SubSystemMapping__Group_4__1__Impl : ( ( rule__SubSystemMapping__ThreadMappingsAssignment_4_1 )* ) ;
+    // InternalETMap.g:1745:1: rule__SubSystemMapping__Group_4__1__Impl : ( ( rule__SubSystemMapping__ThreadMappingsAssignment_4_1 )* ) ;
     public final void rule__SubSystemMapping__Group_4__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:1751:1: ( ( ( rule__SubSystemMapping__ThreadMappingsAssignment_4_1 )* ) )
-            // InternalETMap.g:1752:1: ( ( rule__SubSystemMapping__ThreadMappingsAssignment_4_1 )* )
+            // InternalETMap.g:1749:1: ( ( ( rule__SubSystemMapping__ThreadMappingsAssignment_4_1 )* ) )
+            // InternalETMap.g:1750:1: ( ( rule__SubSystemMapping__ThreadMappingsAssignment_4_1 )* )
             {
-            // InternalETMap.g:1752:1: ( ( rule__SubSystemMapping__ThreadMappingsAssignment_4_1 )* )
-            // InternalETMap.g:1753:1: ( rule__SubSystemMapping__ThreadMappingsAssignment_4_1 )*
+            // InternalETMap.g:1750:1: ( ( rule__SubSystemMapping__ThreadMappingsAssignment_4_1 )* )
+            // InternalETMap.g:1751:1: ( rule__SubSystemMapping__ThreadMappingsAssignment_4_1 )*
             {
              before(grammarAccess.getSubSystemMappingAccess().getThreadMappingsAssignment_4_1()); 
-            // InternalETMap.g:1754:1: ( rule__SubSystemMapping__ThreadMappingsAssignment_4_1 )*
+            // InternalETMap.g:1752:1: ( rule__SubSystemMapping__ThreadMappingsAssignment_4_1 )*
             loop20:
             do {
                 int alt20=2;
@@ -5089,7 +5100,7 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
                 switch (alt20) {
             	case 1 :
-            	    // InternalETMap.g:1754:2: rule__SubSystemMapping__ThreadMappingsAssignment_4_1
+            	    // InternalETMap.g:1752:2: rule__SubSystemMapping__ThreadMappingsAssignment_4_1
             	    {
             	    pushFollow(FOLLOW_12);
             	    rule__SubSystemMapping__ThreadMappingsAssignment_4_1();
@@ -5128,14 +5139,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SubSystemMapping__Group_4__2"
-    // InternalETMap.g:1764:1: rule__SubSystemMapping__Group_4__2 : rule__SubSystemMapping__Group_4__2__Impl ;
+    // InternalETMap.g:1762:1: rule__SubSystemMapping__Group_4__2 : rule__SubSystemMapping__Group_4__2__Impl ;
     public final void rule__SubSystemMapping__Group_4__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:1768:1: ( rule__SubSystemMapping__Group_4__2__Impl )
-            // InternalETMap.g:1769:2: rule__SubSystemMapping__Group_4__2__Impl
+            // InternalETMap.g:1766:1: ( rule__SubSystemMapping__Group_4__2__Impl )
+            // InternalETMap.g:1767:2: rule__SubSystemMapping__Group_4__2__Impl
             {
             pushFollow(FOLLOW_2);
             rule__SubSystemMapping__Group_4__2__Impl();
@@ -5161,17 +5172,17 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SubSystemMapping__Group_4__2__Impl"
-    // InternalETMap.g:1775:1: rule__SubSystemMapping__Group_4__2__Impl : ( '}' ) ;
+    // InternalETMap.g:1773:1: rule__SubSystemMapping__Group_4__2__Impl : ( '}' ) ;
     public final void rule__SubSystemMapping__Group_4__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:1779:1: ( ( '}' ) )
-            // InternalETMap.g:1780:1: ( '}' )
+            // InternalETMap.g:1777:1: ( ( '}' ) )
+            // InternalETMap.g:1778:1: ( '}' )
             {
-            // InternalETMap.g:1780:1: ( '}' )
-            // InternalETMap.g:1781:1: '}'
+            // InternalETMap.g:1778:1: ( '}' )
+            // InternalETMap.g:1779:1: '}'
             {
              before(grammarAccess.getSubSystemMappingAccess().getRightCurlyBracketKeyword_4_2()); 
             match(input,25,FOLLOW_2); 
@@ -5198,14 +5209,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ThreadMapping__Group__0"
-    // InternalETMap.g:1800:1: rule__ThreadMapping__Group__0 : rule__ThreadMapping__Group__0__Impl rule__ThreadMapping__Group__1 ;
+    // InternalETMap.g:1798:1: rule__ThreadMapping__Group__0 : rule__ThreadMapping__Group__0__Impl rule__ThreadMapping__Group__1 ;
     public final void rule__ThreadMapping__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:1804:1: ( rule__ThreadMapping__Group__0__Impl rule__ThreadMapping__Group__1 )
-            // InternalETMap.g:1805:2: rule__ThreadMapping__Group__0__Impl rule__ThreadMapping__Group__1
+            // InternalETMap.g:1802:1: ( rule__ThreadMapping__Group__0__Impl rule__ThreadMapping__Group__1 )
+            // InternalETMap.g:1803:2: rule__ThreadMapping__Group__0__Impl rule__ThreadMapping__Group__1
             {
             pushFollow(FOLLOW_3);
             rule__ThreadMapping__Group__0__Impl();
@@ -5236,17 +5247,17 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ThreadMapping__Group__0__Impl"
-    // InternalETMap.g:1812:1: rule__ThreadMapping__Group__0__Impl : ( 'ThreadMapping' ) ;
+    // InternalETMap.g:1810:1: rule__ThreadMapping__Group__0__Impl : ( 'ThreadMapping' ) ;
     public final void rule__ThreadMapping__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:1816:1: ( ( 'ThreadMapping' ) )
-            // InternalETMap.g:1817:1: ( 'ThreadMapping' )
+            // InternalETMap.g:1814:1: ( ( 'ThreadMapping' ) )
+            // InternalETMap.g:1815:1: ( 'ThreadMapping' )
             {
-            // InternalETMap.g:1817:1: ( 'ThreadMapping' )
-            // InternalETMap.g:1818:1: 'ThreadMapping'
+            // InternalETMap.g:1815:1: ( 'ThreadMapping' )
+            // InternalETMap.g:1816:1: 'ThreadMapping'
             {
              before(grammarAccess.getThreadMappingAccess().getThreadMappingKeyword_0()); 
             match(input,29,FOLLOW_2); 
@@ -5273,14 +5284,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ThreadMapping__Group__1"
-    // InternalETMap.g:1831:1: rule__ThreadMapping__Group__1 : rule__ThreadMapping__Group__1__Impl rule__ThreadMapping__Group__2 ;
+    // InternalETMap.g:1829:1: rule__ThreadMapping__Group__1 : rule__ThreadMapping__Group__1__Impl rule__ThreadMapping__Group__2 ;
     public final void rule__ThreadMapping__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:1835:1: ( rule__ThreadMapping__Group__1__Impl rule__ThreadMapping__Group__2 )
-            // InternalETMap.g:1836:2: rule__ThreadMapping__Group__1__Impl rule__ThreadMapping__Group__2
+            // InternalETMap.g:1833:1: ( rule__ThreadMapping__Group__1__Impl rule__ThreadMapping__Group__2 )
+            // InternalETMap.g:1834:2: rule__ThreadMapping__Group__1__Impl rule__ThreadMapping__Group__2
             {
             pushFollow(FOLLOW_8);
             rule__ThreadMapping__Group__1__Impl();
@@ -5311,21 +5322,21 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ThreadMapping__Group__1__Impl"
-    // InternalETMap.g:1843:1: rule__ThreadMapping__Group__1__Impl : ( ( rule__ThreadMapping__LogicalThreadAssignment_1 ) ) ;
+    // InternalETMap.g:1841:1: rule__ThreadMapping__Group__1__Impl : ( ( rule__ThreadMapping__LogicalThreadAssignment_1 ) ) ;
     public final void rule__ThreadMapping__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:1847:1: ( ( ( rule__ThreadMapping__LogicalThreadAssignment_1 ) ) )
-            // InternalETMap.g:1848:1: ( ( rule__ThreadMapping__LogicalThreadAssignment_1 ) )
+            // InternalETMap.g:1845:1: ( ( ( rule__ThreadMapping__LogicalThreadAssignment_1 ) ) )
+            // InternalETMap.g:1846:1: ( ( rule__ThreadMapping__LogicalThreadAssignment_1 ) )
             {
-            // InternalETMap.g:1848:1: ( ( rule__ThreadMapping__LogicalThreadAssignment_1 ) )
-            // InternalETMap.g:1849:1: ( rule__ThreadMapping__LogicalThreadAssignment_1 )
+            // InternalETMap.g:1846:1: ( ( rule__ThreadMapping__LogicalThreadAssignment_1 ) )
+            // InternalETMap.g:1847:1: ( rule__ThreadMapping__LogicalThreadAssignment_1 )
             {
              before(grammarAccess.getThreadMappingAccess().getLogicalThreadAssignment_1()); 
-            // InternalETMap.g:1850:1: ( rule__ThreadMapping__LogicalThreadAssignment_1 )
-            // InternalETMap.g:1850:2: rule__ThreadMapping__LogicalThreadAssignment_1
+            // InternalETMap.g:1848:1: ( rule__ThreadMapping__LogicalThreadAssignment_1 )
+            // InternalETMap.g:1848:2: rule__ThreadMapping__LogicalThreadAssignment_1
             {
             pushFollow(FOLLOW_2);
             rule__ThreadMapping__LogicalThreadAssignment_1();
@@ -5358,14 +5369,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ThreadMapping__Group__2"
-    // InternalETMap.g:1860:1: rule__ThreadMapping__Group__2 : rule__ThreadMapping__Group__2__Impl rule__ThreadMapping__Group__3 ;
+    // InternalETMap.g:1858:1: rule__ThreadMapping__Group__2 : rule__ThreadMapping__Group__2__Impl rule__ThreadMapping__Group__3 ;
     public final void rule__ThreadMapping__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:1864:1: ( rule__ThreadMapping__Group__2__Impl rule__ThreadMapping__Group__3 )
-            // InternalETMap.g:1865:2: rule__ThreadMapping__Group__2__Impl rule__ThreadMapping__Group__3
+            // InternalETMap.g:1862:1: ( rule__ThreadMapping__Group__2__Impl rule__ThreadMapping__Group__3 )
+            // InternalETMap.g:1863:2: rule__ThreadMapping__Group__2__Impl rule__ThreadMapping__Group__3
             {
             pushFollow(FOLLOW_3);
             rule__ThreadMapping__Group__2__Impl();
@@ -5396,17 +5407,17 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ThreadMapping__Group__2__Impl"
-    // InternalETMap.g:1872:1: rule__ThreadMapping__Group__2__Impl : ( '->' ) ;
+    // InternalETMap.g:1870:1: rule__ThreadMapping__Group__2__Impl : ( '->' ) ;
     public final void rule__ThreadMapping__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:1876:1: ( ( '->' ) )
-            // InternalETMap.g:1877:1: ( '->' )
+            // InternalETMap.g:1874:1: ( ( '->' ) )
+            // InternalETMap.g:1875:1: ( '->' )
             {
-            // InternalETMap.g:1877:1: ( '->' )
-            // InternalETMap.g:1878:1: '->'
+            // InternalETMap.g:1875:1: ( '->' )
+            // InternalETMap.g:1876:1: '->'
             {
              before(grammarAccess.getThreadMappingAccess().getHyphenMinusGreaterThanSignKeyword_2()); 
             match(input,27,FOLLOW_2); 
@@ -5433,14 +5444,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ThreadMapping__Group__3"
-    // InternalETMap.g:1891:1: rule__ThreadMapping__Group__3 : rule__ThreadMapping__Group__3__Impl ;
+    // InternalETMap.g:1889:1: rule__ThreadMapping__Group__3 : rule__ThreadMapping__Group__3__Impl ;
     public final void rule__ThreadMapping__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:1895:1: ( rule__ThreadMapping__Group__3__Impl )
-            // InternalETMap.g:1896:2: rule__ThreadMapping__Group__3__Impl
+            // InternalETMap.g:1893:1: ( rule__ThreadMapping__Group__3__Impl )
+            // InternalETMap.g:1894:2: rule__ThreadMapping__Group__3__Impl
             {
             pushFollow(FOLLOW_2);
             rule__ThreadMapping__Group__3__Impl();
@@ -5466,21 +5477,21 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ThreadMapping__Group__3__Impl"
-    // InternalETMap.g:1902:1: rule__ThreadMapping__Group__3__Impl : ( ( rule__ThreadMapping__PhysicalThreadAssignment_3 ) ) ;
+    // InternalETMap.g:1900:1: rule__ThreadMapping__Group__3__Impl : ( ( rule__ThreadMapping__PhysicalThreadAssignment_3 ) ) ;
     public final void rule__ThreadMapping__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:1906:1: ( ( ( rule__ThreadMapping__PhysicalThreadAssignment_3 ) ) )
-            // InternalETMap.g:1907:1: ( ( rule__ThreadMapping__PhysicalThreadAssignment_3 ) )
+            // InternalETMap.g:1904:1: ( ( ( rule__ThreadMapping__PhysicalThreadAssignment_3 ) ) )
+            // InternalETMap.g:1905:1: ( ( rule__ThreadMapping__PhysicalThreadAssignment_3 ) )
             {
-            // InternalETMap.g:1907:1: ( ( rule__ThreadMapping__PhysicalThreadAssignment_3 ) )
-            // InternalETMap.g:1908:1: ( rule__ThreadMapping__PhysicalThreadAssignment_3 )
+            // InternalETMap.g:1905:1: ( ( rule__ThreadMapping__PhysicalThreadAssignment_3 ) )
+            // InternalETMap.g:1906:1: ( rule__ThreadMapping__PhysicalThreadAssignment_3 )
             {
              before(grammarAccess.getThreadMappingAccess().getPhysicalThreadAssignment_3()); 
-            // InternalETMap.g:1909:1: ( rule__ThreadMapping__PhysicalThreadAssignment_3 )
-            // InternalETMap.g:1909:2: rule__ThreadMapping__PhysicalThreadAssignment_3
+            // InternalETMap.g:1907:1: ( rule__ThreadMapping__PhysicalThreadAssignment_3 )
+            // InternalETMap.g:1907:2: rule__ThreadMapping__PhysicalThreadAssignment_3
             {
             pushFollow(FOLLOW_2);
             rule__ThreadMapping__PhysicalThreadAssignment_3();
@@ -5513,14 +5524,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__KeyValue__Group__0"
-    // InternalETMap.g:1930:1: rule__KeyValue__Group__0 : rule__KeyValue__Group__0__Impl rule__KeyValue__Group__1 ;
+    // InternalETMap.g:1928:1: rule__KeyValue__Group__0 : rule__KeyValue__Group__0__Impl rule__KeyValue__Group__1 ;
     public final void rule__KeyValue__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:1934:1: ( rule__KeyValue__Group__0__Impl rule__KeyValue__Group__1 )
-            // InternalETMap.g:1935:2: rule__KeyValue__Group__0__Impl rule__KeyValue__Group__1
+            // InternalETMap.g:1932:1: ( rule__KeyValue__Group__0__Impl rule__KeyValue__Group__1 )
+            // InternalETMap.g:1933:2: rule__KeyValue__Group__0__Impl rule__KeyValue__Group__1
             {
             pushFollow(FOLLOW_13);
             rule__KeyValue__Group__0__Impl();
@@ -5551,21 +5562,21 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__KeyValue__Group__0__Impl"
-    // InternalETMap.g:1942:1: rule__KeyValue__Group__0__Impl : ( ( rule__KeyValue__KeyAssignment_0 ) ) ;
+    // InternalETMap.g:1940:1: rule__KeyValue__Group__0__Impl : ( ( rule__KeyValue__KeyAssignment_0 ) ) ;
     public final void rule__KeyValue__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:1946:1: ( ( ( rule__KeyValue__KeyAssignment_0 ) ) )
-            // InternalETMap.g:1947:1: ( ( rule__KeyValue__KeyAssignment_0 ) )
+            // InternalETMap.g:1944:1: ( ( ( rule__KeyValue__KeyAssignment_0 ) ) )
+            // InternalETMap.g:1945:1: ( ( rule__KeyValue__KeyAssignment_0 ) )
             {
-            // InternalETMap.g:1947:1: ( ( rule__KeyValue__KeyAssignment_0 ) )
-            // InternalETMap.g:1948:1: ( rule__KeyValue__KeyAssignment_0 )
+            // InternalETMap.g:1945:1: ( ( rule__KeyValue__KeyAssignment_0 ) )
+            // InternalETMap.g:1946:1: ( rule__KeyValue__KeyAssignment_0 )
             {
              before(grammarAccess.getKeyValueAccess().getKeyAssignment_0()); 
-            // InternalETMap.g:1949:1: ( rule__KeyValue__KeyAssignment_0 )
-            // InternalETMap.g:1949:2: rule__KeyValue__KeyAssignment_0
+            // InternalETMap.g:1947:1: ( rule__KeyValue__KeyAssignment_0 )
+            // InternalETMap.g:1947:2: rule__KeyValue__KeyAssignment_0
             {
             pushFollow(FOLLOW_2);
             rule__KeyValue__KeyAssignment_0();
@@ -5598,14 +5609,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__KeyValue__Group__1"
-    // InternalETMap.g:1959:1: rule__KeyValue__Group__1 : rule__KeyValue__Group__1__Impl rule__KeyValue__Group__2 ;
+    // InternalETMap.g:1957:1: rule__KeyValue__Group__1 : rule__KeyValue__Group__1__Impl rule__KeyValue__Group__2 ;
     public final void rule__KeyValue__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:1963:1: ( rule__KeyValue__Group__1__Impl rule__KeyValue__Group__2 )
-            // InternalETMap.g:1964:2: rule__KeyValue__Group__1__Impl rule__KeyValue__Group__2
+            // InternalETMap.g:1961:1: ( rule__KeyValue__Group__1__Impl rule__KeyValue__Group__2 )
+            // InternalETMap.g:1962:2: rule__KeyValue__Group__1__Impl rule__KeyValue__Group__2
             {
             pushFollow(FOLLOW_14);
             rule__KeyValue__Group__1__Impl();
@@ -5636,17 +5647,17 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__KeyValue__Group__1__Impl"
-    // InternalETMap.g:1971:1: rule__KeyValue__Group__1__Impl : ( '=' ) ;
+    // InternalETMap.g:1969:1: rule__KeyValue__Group__1__Impl : ( '=' ) ;
     public final void rule__KeyValue__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:1975:1: ( ( '=' ) )
-            // InternalETMap.g:1976:1: ( '=' )
+            // InternalETMap.g:1973:1: ( ( '=' ) )
+            // InternalETMap.g:1974:1: ( '=' )
             {
-            // InternalETMap.g:1976:1: ( '=' )
-            // InternalETMap.g:1977:1: '='
+            // InternalETMap.g:1974:1: ( '=' )
+            // InternalETMap.g:1975:1: '='
             {
              before(grammarAccess.getKeyValueAccess().getEqualsSignKeyword_1()); 
             match(input,30,FOLLOW_2); 
@@ -5673,14 +5684,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__KeyValue__Group__2"
-    // InternalETMap.g:1990:1: rule__KeyValue__Group__2 : rule__KeyValue__Group__2__Impl ;
+    // InternalETMap.g:1988:1: rule__KeyValue__Group__2 : rule__KeyValue__Group__2__Impl ;
     public final void rule__KeyValue__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:1994:1: ( rule__KeyValue__Group__2__Impl )
-            // InternalETMap.g:1995:2: rule__KeyValue__Group__2__Impl
+            // InternalETMap.g:1992:1: ( rule__KeyValue__Group__2__Impl )
+            // InternalETMap.g:1993:2: rule__KeyValue__Group__2__Impl
             {
             pushFollow(FOLLOW_2);
             rule__KeyValue__Group__2__Impl();
@@ -5706,21 +5717,21 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__KeyValue__Group__2__Impl"
-    // InternalETMap.g:2001:1: rule__KeyValue__Group__2__Impl : ( ( rule__KeyValue__ValueAssignment_2 ) ) ;
+    // InternalETMap.g:1999:1: rule__KeyValue__Group__2__Impl : ( ( rule__KeyValue__ValueAssignment_2 ) ) ;
     public final void rule__KeyValue__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:2005:1: ( ( ( rule__KeyValue__ValueAssignment_2 ) ) )
-            // InternalETMap.g:2006:1: ( ( rule__KeyValue__ValueAssignment_2 ) )
+            // InternalETMap.g:2003:1: ( ( ( rule__KeyValue__ValueAssignment_2 ) ) )
+            // InternalETMap.g:2004:1: ( ( rule__KeyValue__ValueAssignment_2 ) )
             {
-            // InternalETMap.g:2006:1: ( ( rule__KeyValue__ValueAssignment_2 ) )
-            // InternalETMap.g:2007:1: ( rule__KeyValue__ValueAssignment_2 )
+            // InternalETMap.g:2004:1: ( ( rule__KeyValue__ValueAssignment_2 ) )
+            // InternalETMap.g:2005:1: ( rule__KeyValue__ValueAssignment_2 )
             {
              before(grammarAccess.getKeyValueAccess().getValueAssignment_2()); 
-            // InternalETMap.g:2008:1: ( rule__KeyValue__ValueAssignment_2 )
-            // InternalETMap.g:2008:2: rule__KeyValue__ValueAssignment_2
+            // InternalETMap.g:2006:1: ( rule__KeyValue__ValueAssignment_2 )
+            // InternalETMap.g:2006:2: rule__KeyValue__ValueAssignment_2
             {
             pushFollow(FOLLOW_2);
             rule__KeyValue__ValueAssignment_2();
@@ -5753,14 +5764,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SimpleAnnotationAttribute__Group__0"
-    // InternalETMap.g:2027:1: rule__SimpleAnnotationAttribute__Group__0 : rule__SimpleAnnotationAttribute__Group__0__Impl rule__SimpleAnnotationAttribute__Group__1 ;
+    // InternalETMap.g:2025:1: rule__SimpleAnnotationAttribute__Group__0 : rule__SimpleAnnotationAttribute__Group__0__Impl rule__SimpleAnnotationAttribute__Group__1 ;
     public final void rule__SimpleAnnotationAttribute__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:2031:1: ( rule__SimpleAnnotationAttribute__Group__0__Impl rule__SimpleAnnotationAttribute__Group__1 )
-            // InternalETMap.g:2032:2: rule__SimpleAnnotationAttribute__Group__0__Impl rule__SimpleAnnotationAttribute__Group__1
+            // InternalETMap.g:2029:1: ( rule__SimpleAnnotationAttribute__Group__0__Impl rule__SimpleAnnotationAttribute__Group__1 )
+            // InternalETMap.g:2030:2: rule__SimpleAnnotationAttribute__Group__0__Impl rule__SimpleAnnotationAttribute__Group__1
             {
             pushFollow(FOLLOW_15);
             rule__SimpleAnnotationAttribute__Group__0__Impl();
@@ -5791,21 +5802,21 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SimpleAnnotationAttribute__Group__0__Impl"
-    // InternalETMap.g:2039:1: rule__SimpleAnnotationAttribute__Group__0__Impl : ( ( rule__SimpleAnnotationAttribute__Alternatives_0 ) ) ;
+    // InternalETMap.g:2037:1: rule__SimpleAnnotationAttribute__Group__0__Impl : ( ( rule__SimpleAnnotationAttribute__Alternatives_0 ) ) ;
     public final void rule__SimpleAnnotationAttribute__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:2043:1: ( ( ( rule__SimpleAnnotationAttribute__Alternatives_0 ) ) )
-            // InternalETMap.g:2044:1: ( ( rule__SimpleAnnotationAttribute__Alternatives_0 ) )
+            // InternalETMap.g:2041:1: ( ( ( rule__SimpleAnnotationAttribute__Alternatives_0 ) ) )
+            // InternalETMap.g:2042:1: ( ( rule__SimpleAnnotationAttribute__Alternatives_0 ) )
             {
-            // InternalETMap.g:2044:1: ( ( rule__SimpleAnnotationAttribute__Alternatives_0 ) )
-            // InternalETMap.g:2045:1: ( rule__SimpleAnnotationAttribute__Alternatives_0 )
+            // InternalETMap.g:2042:1: ( ( rule__SimpleAnnotationAttribute__Alternatives_0 ) )
+            // InternalETMap.g:2043:1: ( rule__SimpleAnnotationAttribute__Alternatives_0 )
             {
              before(grammarAccess.getSimpleAnnotationAttributeAccess().getAlternatives_0()); 
-            // InternalETMap.g:2046:1: ( rule__SimpleAnnotationAttribute__Alternatives_0 )
-            // InternalETMap.g:2046:2: rule__SimpleAnnotationAttribute__Alternatives_0
+            // InternalETMap.g:2044:1: ( rule__SimpleAnnotationAttribute__Alternatives_0 )
+            // InternalETMap.g:2044:2: rule__SimpleAnnotationAttribute__Alternatives_0
             {
             pushFollow(FOLLOW_2);
             rule__SimpleAnnotationAttribute__Alternatives_0();
@@ -5838,14 +5849,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SimpleAnnotationAttribute__Group__1"
-    // InternalETMap.g:2056:1: rule__SimpleAnnotationAttribute__Group__1 : rule__SimpleAnnotationAttribute__Group__1__Impl rule__SimpleAnnotationAttribute__Group__2 ;
+    // InternalETMap.g:2054:1: rule__SimpleAnnotationAttribute__Group__1 : rule__SimpleAnnotationAttribute__Group__1__Impl rule__SimpleAnnotationAttribute__Group__2 ;
     public final void rule__SimpleAnnotationAttribute__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:2060:1: ( rule__SimpleAnnotationAttribute__Group__1__Impl rule__SimpleAnnotationAttribute__Group__2 )
-            // InternalETMap.g:2061:2: rule__SimpleAnnotationAttribute__Group__1__Impl rule__SimpleAnnotationAttribute__Group__2
+            // InternalETMap.g:2058:1: ( rule__SimpleAnnotationAttribute__Group__1__Impl rule__SimpleAnnotationAttribute__Group__2 )
+            // InternalETMap.g:2059:2: rule__SimpleAnnotationAttribute__Group__1__Impl rule__SimpleAnnotationAttribute__Group__2
             {
             pushFollow(FOLLOW_3);
             rule__SimpleAnnotationAttribute__Group__1__Impl();
@@ -5876,17 +5887,17 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SimpleAnnotationAttribute__Group__1__Impl"
-    // InternalETMap.g:2068:1: rule__SimpleAnnotationAttribute__Group__1__Impl : ( 'attribute' ) ;
+    // InternalETMap.g:2066:1: rule__SimpleAnnotationAttribute__Group__1__Impl : ( 'attribute' ) ;
     public final void rule__SimpleAnnotationAttribute__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:2072:1: ( ( 'attribute' ) )
-            // InternalETMap.g:2073:1: ( 'attribute' )
+            // InternalETMap.g:2070:1: ( ( 'attribute' ) )
+            // InternalETMap.g:2071:1: ( 'attribute' )
             {
-            // InternalETMap.g:2073:1: ( 'attribute' )
-            // InternalETMap.g:2074:1: 'attribute'
+            // InternalETMap.g:2071:1: ( 'attribute' )
+            // InternalETMap.g:2072:1: 'attribute'
             {
              before(grammarAccess.getSimpleAnnotationAttributeAccess().getAttributeKeyword_1()); 
             match(input,31,FOLLOW_2); 
@@ -5913,14 +5924,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SimpleAnnotationAttribute__Group__2"
-    // InternalETMap.g:2087:1: rule__SimpleAnnotationAttribute__Group__2 : rule__SimpleAnnotationAttribute__Group__2__Impl rule__SimpleAnnotationAttribute__Group__3 ;
+    // InternalETMap.g:2085:1: rule__SimpleAnnotationAttribute__Group__2 : rule__SimpleAnnotationAttribute__Group__2__Impl rule__SimpleAnnotationAttribute__Group__3 ;
     public final void rule__SimpleAnnotationAttribute__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:2091:1: ( rule__SimpleAnnotationAttribute__Group__2__Impl rule__SimpleAnnotationAttribute__Group__3 )
-            // InternalETMap.g:2092:2: rule__SimpleAnnotationAttribute__Group__2__Impl rule__SimpleAnnotationAttribute__Group__3
+            // InternalETMap.g:2089:1: ( rule__SimpleAnnotationAttribute__Group__2__Impl rule__SimpleAnnotationAttribute__Group__3 )
+            // InternalETMap.g:2090:2: rule__SimpleAnnotationAttribute__Group__2__Impl rule__SimpleAnnotationAttribute__Group__3
             {
             pushFollow(FOLLOW_16);
             rule__SimpleAnnotationAttribute__Group__2__Impl();
@@ -5951,21 +5962,21 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SimpleAnnotationAttribute__Group__2__Impl"
-    // InternalETMap.g:2099:1: rule__SimpleAnnotationAttribute__Group__2__Impl : ( ( rule__SimpleAnnotationAttribute__NameAssignment_2 ) ) ;
+    // InternalETMap.g:2097:1: rule__SimpleAnnotationAttribute__Group__2__Impl : ( ( rule__SimpleAnnotationAttribute__NameAssignment_2 ) ) ;
     public final void rule__SimpleAnnotationAttribute__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:2103:1: ( ( ( rule__SimpleAnnotationAttribute__NameAssignment_2 ) ) )
-            // InternalETMap.g:2104:1: ( ( rule__SimpleAnnotationAttribute__NameAssignment_2 ) )
+            // InternalETMap.g:2101:1: ( ( ( rule__SimpleAnnotationAttribute__NameAssignment_2 ) ) )
+            // InternalETMap.g:2102:1: ( ( rule__SimpleAnnotationAttribute__NameAssignment_2 ) )
             {
-            // InternalETMap.g:2104:1: ( ( rule__SimpleAnnotationAttribute__NameAssignment_2 ) )
-            // InternalETMap.g:2105:1: ( rule__SimpleAnnotationAttribute__NameAssignment_2 )
+            // InternalETMap.g:2102:1: ( ( rule__SimpleAnnotationAttribute__NameAssignment_2 ) )
+            // InternalETMap.g:2103:1: ( rule__SimpleAnnotationAttribute__NameAssignment_2 )
             {
              before(grammarAccess.getSimpleAnnotationAttributeAccess().getNameAssignment_2()); 
-            // InternalETMap.g:2106:1: ( rule__SimpleAnnotationAttribute__NameAssignment_2 )
-            // InternalETMap.g:2106:2: rule__SimpleAnnotationAttribute__NameAssignment_2
+            // InternalETMap.g:2104:1: ( rule__SimpleAnnotationAttribute__NameAssignment_2 )
+            // InternalETMap.g:2104:2: rule__SimpleAnnotationAttribute__NameAssignment_2
             {
             pushFollow(FOLLOW_2);
             rule__SimpleAnnotationAttribute__NameAssignment_2();
@@ -5998,14 +6009,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SimpleAnnotationAttribute__Group__3"
-    // InternalETMap.g:2116:1: rule__SimpleAnnotationAttribute__Group__3 : rule__SimpleAnnotationAttribute__Group__3__Impl rule__SimpleAnnotationAttribute__Group__4 ;
+    // InternalETMap.g:2114:1: rule__SimpleAnnotationAttribute__Group__3 : rule__SimpleAnnotationAttribute__Group__3__Impl rule__SimpleAnnotationAttribute__Group__4 ;
     public final void rule__SimpleAnnotationAttribute__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:2120:1: ( rule__SimpleAnnotationAttribute__Group__3__Impl rule__SimpleAnnotationAttribute__Group__4 )
-            // InternalETMap.g:2121:2: rule__SimpleAnnotationAttribute__Group__3__Impl rule__SimpleAnnotationAttribute__Group__4
+            // InternalETMap.g:2118:1: ( rule__SimpleAnnotationAttribute__Group__3__Impl rule__SimpleAnnotationAttribute__Group__4 )
+            // InternalETMap.g:2119:2: rule__SimpleAnnotationAttribute__Group__3__Impl rule__SimpleAnnotationAttribute__Group__4
             {
             pushFollow(FOLLOW_17);
             rule__SimpleAnnotationAttribute__Group__3__Impl();
@@ -6036,17 +6047,17 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SimpleAnnotationAttribute__Group__3__Impl"
-    // InternalETMap.g:2128:1: rule__SimpleAnnotationAttribute__Group__3__Impl : ( ':' ) ;
+    // InternalETMap.g:2126:1: rule__SimpleAnnotationAttribute__Group__3__Impl : ( ':' ) ;
     public final void rule__SimpleAnnotationAttribute__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:2132:1: ( ( ':' ) )
-            // InternalETMap.g:2133:1: ( ':' )
+            // InternalETMap.g:2130:1: ( ( ':' ) )
+            // InternalETMap.g:2131:1: ( ':' )
             {
-            // InternalETMap.g:2133:1: ( ':' )
-            // InternalETMap.g:2134:1: ':'
+            // InternalETMap.g:2131:1: ( ':' )
+            // InternalETMap.g:2132:1: ':'
             {
              before(grammarAccess.getSimpleAnnotationAttributeAccess().getColonKeyword_3()); 
             match(input,32,FOLLOW_2); 
@@ -6073,14 +6084,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SimpleAnnotationAttribute__Group__4"
-    // InternalETMap.g:2147:1: rule__SimpleAnnotationAttribute__Group__4 : rule__SimpleAnnotationAttribute__Group__4__Impl ;
+    // InternalETMap.g:2145:1: rule__SimpleAnnotationAttribute__Group__4 : rule__SimpleAnnotationAttribute__Group__4__Impl ;
     public final void rule__SimpleAnnotationAttribute__Group__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:2151:1: ( rule__SimpleAnnotationAttribute__Group__4__Impl )
-            // InternalETMap.g:2152:2: rule__SimpleAnnotationAttribute__Group__4__Impl
+            // InternalETMap.g:2149:1: ( rule__SimpleAnnotationAttribute__Group__4__Impl )
+            // InternalETMap.g:2150:2: rule__SimpleAnnotationAttribute__Group__4__Impl
             {
             pushFollow(FOLLOW_2);
             rule__SimpleAnnotationAttribute__Group__4__Impl();
@@ -6106,21 +6117,21 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SimpleAnnotationAttribute__Group__4__Impl"
-    // InternalETMap.g:2158:1: rule__SimpleAnnotationAttribute__Group__4__Impl : ( ( rule__SimpleAnnotationAttribute__TypeAssignment_4 ) ) ;
+    // InternalETMap.g:2156:1: rule__SimpleAnnotationAttribute__Group__4__Impl : ( ( rule__SimpleAnnotationAttribute__TypeAssignment_4 ) ) ;
     public final void rule__SimpleAnnotationAttribute__Group__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:2162:1: ( ( ( rule__SimpleAnnotationAttribute__TypeAssignment_4 ) ) )
-            // InternalETMap.g:2163:1: ( ( rule__SimpleAnnotationAttribute__TypeAssignment_4 ) )
+            // InternalETMap.g:2160:1: ( ( ( rule__SimpleAnnotationAttribute__TypeAssignment_4 ) ) )
+            // InternalETMap.g:2161:1: ( ( rule__SimpleAnnotationAttribute__TypeAssignment_4 ) )
             {
-            // InternalETMap.g:2163:1: ( ( rule__SimpleAnnotationAttribute__TypeAssignment_4 ) )
-            // InternalETMap.g:2164:1: ( rule__SimpleAnnotationAttribute__TypeAssignment_4 )
+            // InternalETMap.g:2161:1: ( ( rule__SimpleAnnotationAttribute__TypeAssignment_4 ) )
+            // InternalETMap.g:2162:1: ( rule__SimpleAnnotationAttribute__TypeAssignment_4 )
             {
              before(grammarAccess.getSimpleAnnotationAttributeAccess().getTypeAssignment_4()); 
-            // InternalETMap.g:2165:1: ( rule__SimpleAnnotationAttribute__TypeAssignment_4 )
-            // InternalETMap.g:2165:2: rule__SimpleAnnotationAttribute__TypeAssignment_4
+            // InternalETMap.g:2163:1: ( rule__SimpleAnnotationAttribute__TypeAssignment_4 )
+            // InternalETMap.g:2163:2: rule__SimpleAnnotationAttribute__TypeAssignment_4
             {
             pushFollow(FOLLOW_2);
             rule__SimpleAnnotationAttribute__TypeAssignment_4();
@@ -6153,14 +6164,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EnumAnnotationAttribute__Group__0"
-    // InternalETMap.g:2185:1: rule__EnumAnnotationAttribute__Group__0 : rule__EnumAnnotationAttribute__Group__0__Impl rule__EnumAnnotationAttribute__Group__1 ;
+    // InternalETMap.g:2183:1: rule__EnumAnnotationAttribute__Group__0 : rule__EnumAnnotationAttribute__Group__0__Impl rule__EnumAnnotationAttribute__Group__1 ;
     public final void rule__EnumAnnotationAttribute__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:2189:1: ( rule__EnumAnnotationAttribute__Group__0__Impl rule__EnumAnnotationAttribute__Group__1 )
-            // InternalETMap.g:2190:2: rule__EnumAnnotationAttribute__Group__0__Impl rule__EnumAnnotationAttribute__Group__1
+            // InternalETMap.g:2187:1: ( rule__EnumAnnotationAttribute__Group__0__Impl rule__EnumAnnotationAttribute__Group__1 )
+            // InternalETMap.g:2188:2: rule__EnumAnnotationAttribute__Group__0__Impl rule__EnumAnnotationAttribute__Group__1
             {
             pushFollow(FOLLOW_15);
             rule__EnumAnnotationAttribute__Group__0__Impl();
@@ -6191,21 +6202,21 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EnumAnnotationAttribute__Group__0__Impl"
-    // InternalETMap.g:2197:1: rule__EnumAnnotationAttribute__Group__0__Impl : ( ( rule__EnumAnnotationAttribute__Alternatives_0 ) ) ;
+    // InternalETMap.g:2195:1: rule__EnumAnnotationAttribute__Group__0__Impl : ( ( rule__EnumAnnotationAttribute__Alternatives_0 ) ) ;
     public final void rule__EnumAnnotationAttribute__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:2201:1: ( ( ( rule__EnumAnnotationAttribute__Alternatives_0 ) ) )
-            // InternalETMap.g:2202:1: ( ( rule__EnumAnnotationAttribute__Alternatives_0 ) )
+            // InternalETMap.g:2199:1: ( ( ( rule__EnumAnnotationAttribute__Alternatives_0 ) ) )
+            // InternalETMap.g:2200:1: ( ( rule__EnumAnnotationAttribute__Alternatives_0 ) )
             {
-            // InternalETMap.g:2202:1: ( ( rule__EnumAnnotationAttribute__Alternatives_0 ) )
-            // InternalETMap.g:2203:1: ( rule__EnumAnnotationAttribute__Alternatives_0 )
+            // InternalETMap.g:2200:1: ( ( rule__EnumAnnotationAttribute__Alternatives_0 ) )
+            // InternalETMap.g:2201:1: ( rule__EnumAnnotationAttribute__Alternatives_0 )
             {
              before(grammarAccess.getEnumAnnotationAttributeAccess().getAlternatives_0()); 
-            // InternalETMap.g:2204:1: ( rule__EnumAnnotationAttribute__Alternatives_0 )
-            // InternalETMap.g:2204:2: rule__EnumAnnotationAttribute__Alternatives_0
+            // InternalETMap.g:2202:1: ( rule__EnumAnnotationAttribute__Alternatives_0 )
+            // InternalETMap.g:2202:2: rule__EnumAnnotationAttribute__Alternatives_0
             {
             pushFollow(FOLLOW_2);
             rule__EnumAnnotationAttribute__Alternatives_0();
@@ -6238,14 +6249,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EnumAnnotationAttribute__Group__1"
-    // InternalETMap.g:2214:1: rule__EnumAnnotationAttribute__Group__1 : rule__EnumAnnotationAttribute__Group__1__Impl rule__EnumAnnotationAttribute__Group__2 ;
+    // InternalETMap.g:2212:1: rule__EnumAnnotationAttribute__Group__1 : rule__EnumAnnotationAttribute__Group__1__Impl rule__EnumAnnotationAttribute__Group__2 ;
     public final void rule__EnumAnnotationAttribute__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:2218:1: ( rule__EnumAnnotationAttribute__Group__1__Impl rule__EnumAnnotationAttribute__Group__2 )
-            // InternalETMap.g:2219:2: rule__EnumAnnotationAttribute__Group__1__Impl rule__EnumAnnotationAttribute__Group__2
+            // InternalETMap.g:2216:1: ( rule__EnumAnnotationAttribute__Group__1__Impl rule__EnumAnnotationAttribute__Group__2 )
+            // InternalETMap.g:2217:2: rule__EnumAnnotationAttribute__Group__1__Impl rule__EnumAnnotationAttribute__Group__2
             {
             pushFollow(FOLLOW_3);
             rule__EnumAnnotationAttribute__Group__1__Impl();
@@ -6276,17 +6287,17 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EnumAnnotationAttribute__Group__1__Impl"
-    // InternalETMap.g:2226:1: rule__EnumAnnotationAttribute__Group__1__Impl : ( 'attribute' ) ;
+    // InternalETMap.g:2224:1: rule__EnumAnnotationAttribute__Group__1__Impl : ( 'attribute' ) ;
     public final void rule__EnumAnnotationAttribute__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:2230:1: ( ( 'attribute' ) )
-            // InternalETMap.g:2231:1: ( 'attribute' )
+            // InternalETMap.g:2228:1: ( ( 'attribute' ) )
+            // InternalETMap.g:2229:1: ( 'attribute' )
             {
-            // InternalETMap.g:2231:1: ( 'attribute' )
-            // InternalETMap.g:2232:1: 'attribute'
+            // InternalETMap.g:2229:1: ( 'attribute' )
+            // InternalETMap.g:2230:1: 'attribute'
             {
              before(grammarAccess.getEnumAnnotationAttributeAccess().getAttributeKeyword_1()); 
             match(input,31,FOLLOW_2); 
@@ -6313,14 +6324,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EnumAnnotationAttribute__Group__2"
-    // InternalETMap.g:2245:1: rule__EnumAnnotationAttribute__Group__2 : rule__EnumAnnotationAttribute__Group__2__Impl rule__EnumAnnotationAttribute__Group__3 ;
+    // InternalETMap.g:2243:1: rule__EnumAnnotationAttribute__Group__2 : rule__EnumAnnotationAttribute__Group__2__Impl rule__EnumAnnotationAttribute__Group__3 ;
     public final void rule__EnumAnnotationAttribute__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:2249:1: ( rule__EnumAnnotationAttribute__Group__2__Impl rule__EnumAnnotationAttribute__Group__3 )
-            // InternalETMap.g:2250:2: rule__EnumAnnotationAttribute__Group__2__Impl rule__EnumAnnotationAttribute__Group__3
+            // InternalETMap.g:2247:1: ( rule__EnumAnnotationAttribute__Group__2__Impl rule__EnumAnnotationAttribute__Group__3 )
+            // InternalETMap.g:2248:2: rule__EnumAnnotationAttribute__Group__2__Impl rule__EnumAnnotationAttribute__Group__3
             {
             pushFollow(FOLLOW_16);
             rule__EnumAnnotationAttribute__Group__2__Impl();
@@ -6351,21 +6362,21 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EnumAnnotationAttribute__Group__2__Impl"
-    // InternalETMap.g:2257:1: rule__EnumAnnotationAttribute__Group__2__Impl : ( ( rule__EnumAnnotationAttribute__NameAssignment_2 ) ) ;
+    // InternalETMap.g:2255:1: rule__EnumAnnotationAttribute__Group__2__Impl : ( ( rule__EnumAnnotationAttribute__NameAssignment_2 ) ) ;
     public final void rule__EnumAnnotationAttribute__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:2261:1: ( ( ( rule__EnumAnnotationAttribute__NameAssignment_2 ) ) )
-            // InternalETMap.g:2262:1: ( ( rule__EnumAnnotationAttribute__NameAssignment_2 ) )
+            // InternalETMap.g:2259:1: ( ( ( rule__EnumAnnotationAttribute__NameAssignment_2 ) ) )
+            // InternalETMap.g:2260:1: ( ( rule__EnumAnnotationAttribute__NameAssignment_2 ) )
             {
-            // InternalETMap.g:2262:1: ( ( rule__EnumAnnotationAttribute__NameAssignment_2 ) )
-            // InternalETMap.g:2263:1: ( rule__EnumAnnotationAttribute__NameAssignment_2 )
+            // InternalETMap.g:2260:1: ( ( rule__EnumAnnotationAttribute__NameAssignment_2 ) )
+            // InternalETMap.g:2261:1: ( rule__EnumAnnotationAttribute__NameAssignment_2 )
             {
              before(grammarAccess.getEnumAnnotationAttributeAccess().getNameAssignment_2()); 
-            // InternalETMap.g:2264:1: ( rule__EnumAnnotationAttribute__NameAssignment_2 )
-            // InternalETMap.g:2264:2: rule__EnumAnnotationAttribute__NameAssignment_2
+            // InternalETMap.g:2262:1: ( rule__EnumAnnotationAttribute__NameAssignment_2 )
+            // InternalETMap.g:2262:2: rule__EnumAnnotationAttribute__NameAssignment_2
             {
             pushFollow(FOLLOW_2);
             rule__EnumAnnotationAttribute__NameAssignment_2();
@@ -6398,14 +6409,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EnumAnnotationAttribute__Group__3"
-    // InternalETMap.g:2274:1: rule__EnumAnnotationAttribute__Group__3 : rule__EnumAnnotationAttribute__Group__3__Impl rule__EnumAnnotationAttribute__Group__4 ;
+    // InternalETMap.g:2272:1: rule__EnumAnnotationAttribute__Group__3 : rule__EnumAnnotationAttribute__Group__3__Impl rule__EnumAnnotationAttribute__Group__4 ;
     public final void rule__EnumAnnotationAttribute__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:2278:1: ( rule__EnumAnnotationAttribute__Group__3__Impl rule__EnumAnnotationAttribute__Group__4 )
-            // InternalETMap.g:2279:2: rule__EnumAnnotationAttribute__Group__3__Impl rule__EnumAnnotationAttribute__Group__4
+            // InternalETMap.g:2276:1: ( rule__EnumAnnotationAttribute__Group__3__Impl rule__EnumAnnotationAttribute__Group__4 )
+            // InternalETMap.g:2277:2: rule__EnumAnnotationAttribute__Group__3__Impl rule__EnumAnnotationAttribute__Group__4
             {
             pushFollow(FOLLOW_4);
             rule__EnumAnnotationAttribute__Group__3__Impl();
@@ -6436,17 +6447,17 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EnumAnnotationAttribute__Group__3__Impl"
-    // InternalETMap.g:2286:1: rule__EnumAnnotationAttribute__Group__3__Impl : ( ':' ) ;
+    // InternalETMap.g:2284:1: rule__EnumAnnotationAttribute__Group__3__Impl : ( ':' ) ;
     public final void rule__EnumAnnotationAttribute__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:2290:1: ( ( ':' ) )
-            // InternalETMap.g:2291:1: ( ':' )
+            // InternalETMap.g:2288:1: ( ( ':' ) )
+            // InternalETMap.g:2289:1: ( ':' )
             {
-            // InternalETMap.g:2291:1: ( ':' )
-            // InternalETMap.g:2292:1: ':'
+            // InternalETMap.g:2289:1: ( ':' )
+            // InternalETMap.g:2290:1: ':'
             {
              before(grammarAccess.getEnumAnnotationAttributeAccess().getColonKeyword_3()); 
             match(input,32,FOLLOW_2); 
@@ -6473,14 +6484,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EnumAnnotationAttribute__Group__4"
-    // InternalETMap.g:2305:1: rule__EnumAnnotationAttribute__Group__4 : rule__EnumAnnotationAttribute__Group__4__Impl rule__EnumAnnotationAttribute__Group__5 ;
+    // InternalETMap.g:2303:1: rule__EnumAnnotationAttribute__Group__4 : rule__EnumAnnotationAttribute__Group__4__Impl rule__EnumAnnotationAttribute__Group__5 ;
     public final void rule__EnumAnnotationAttribute__Group__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:2309:1: ( rule__EnumAnnotationAttribute__Group__4__Impl rule__EnumAnnotationAttribute__Group__5 )
-            // InternalETMap.g:2310:2: rule__EnumAnnotationAttribute__Group__4__Impl rule__EnumAnnotationAttribute__Group__5
+            // InternalETMap.g:2307:1: ( rule__EnumAnnotationAttribute__Group__4__Impl rule__EnumAnnotationAttribute__Group__5 )
+            // InternalETMap.g:2308:2: rule__EnumAnnotationAttribute__Group__4__Impl rule__EnumAnnotationAttribute__Group__5
             {
             pushFollow(FOLLOW_18);
             rule__EnumAnnotationAttribute__Group__4__Impl();
@@ -6511,17 +6522,17 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EnumAnnotationAttribute__Group__4__Impl"
-    // InternalETMap.g:2317:1: rule__EnumAnnotationAttribute__Group__4__Impl : ( '{' ) ;
+    // InternalETMap.g:2315:1: rule__EnumAnnotationAttribute__Group__4__Impl : ( '{' ) ;
     public final void rule__EnumAnnotationAttribute__Group__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:2321:1: ( ( '{' ) )
-            // InternalETMap.g:2322:1: ( '{' )
+            // InternalETMap.g:2319:1: ( ( '{' ) )
+            // InternalETMap.g:2320:1: ( '{' )
             {
-            // InternalETMap.g:2322:1: ( '{' )
-            // InternalETMap.g:2323:1: '{'
+            // InternalETMap.g:2320:1: ( '{' )
+            // InternalETMap.g:2321:1: '{'
             {
              before(grammarAccess.getEnumAnnotationAttributeAccess().getLeftCurlyBracketKeyword_4()); 
             match(input,24,FOLLOW_2); 
@@ -6548,14 +6559,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EnumAnnotationAttribute__Group__5"
-    // InternalETMap.g:2336:1: rule__EnumAnnotationAttribute__Group__5 : rule__EnumAnnotationAttribute__Group__5__Impl rule__EnumAnnotationAttribute__Group__6 ;
+    // InternalETMap.g:2334:1: rule__EnumAnnotationAttribute__Group__5 : rule__EnumAnnotationAttribute__Group__5__Impl rule__EnumAnnotationAttribute__Group__6 ;
     public final void rule__EnumAnnotationAttribute__Group__5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:2340:1: ( rule__EnumAnnotationAttribute__Group__5__Impl rule__EnumAnnotationAttribute__Group__6 )
-            // InternalETMap.g:2341:2: rule__EnumAnnotationAttribute__Group__5__Impl rule__EnumAnnotationAttribute__Group__6
+            // InternalETMap.g:2338:1: ( rule__EnumAnnotationAttribute__Group__5__Impl rule__EnumAnnotationAttribute__Group__6 )
+            // InternalETMap.g:2339:2: rule__EnumAnnotationAttribute__Group__5__Impl rule__EnumAnnotationAttribute__Group__6
             {
             pushFollow(FOLLOW_19);
             rule__EnumAnnotationAttribute__Group__5__Impl();
@@ -6586,21 +6597,21 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EnumAnnotationAttribute__Group__5__Impl"
-    // InternalETMap.g:2348:1: rule__EnumAnnotationAttribute__Group__5__Impl : ( ( rule__EnumAnnotationAttribute__ValuesAssignment_5 ) ) ;
+    // InternalETMap.g:2346:1: rule__EnumAnnotationAttribute__Group__5__Impl : ( ( rule__EnumAnnotationAttribute__ValuesAssignment_5 ) ) ;
     public final void rule__EnumAnnotationAttribute__Group__5__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:2352:1: ( ( ( rule__EnumAnnotationAttribute__ValuesAssignment_5 ) ) )
-            // InternalETMap.g:2353:1: ( ( rule__EnumAnnotationAttribute__ValuesAssignment_5 ) )
+            // InternalETMap.g:2350:1: ( ( ( rule__EnumAnnotationAttribute__ValuesAssignment_5 ) ) )
+            // InternalETMap.g:2351:1: ( ( rule__EnumAnnotationAttribute__ValuesAssignment_5 ) )
             {
-            // InternalETMap.g:2353:1: ( ( rule__EnumAnnotationAttribute__ValuesAssignment_5 ) )
-            // InternalETMap.g:2354:1: ( rule__EnumAnnotationAttribute__ValuesAssignment_5 )
+            // InternalETMap.g:2351:1: ( ( rule__EnumAnnotationAttribute__ValuesAssignment_5 ) )
+            // InternalETMap.g:2352:1: ( rule__EnumAnnotationAttribute__ValuesAssignment_5 )
             {
              before(grammarAccess.getEnumAnnotationAttributeAccess().getValuesAssignment_5()); 
-            // InternalETMap.g:2355:1: ( rule__EnumAnnotationAttribute__ValuesAssignment_5 )
-            // InternalETMap.g:2355:2: rule__EnumAnnotationAttribute__ValuesAssignment_5
+            // InternalETMap.g:2353:1: ( rule__EnumAnnotationAttribute__ValuesAssignment_5 )
+            // InternalETMap.g:2353:2: rule__EnumAnnotationAttribute__ValuesAssignment_5
             {
             pushFollow(FOLLOW_2);
             rule__EnumAnnotationAttribute__ValuesAssignment_5();
@@ -6633,14 +6644,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EnumAnnotationAttribute__Group__6"
-    // InternalETMap.g:2365:1: rule__EnumAnnotationAttribute__Group__6 : rule__EnumAnnotationAttribute__Group__6__Impl rule__EnumAnnotationAttribute__Group__7 ;
+    // InternalETMap.g:2363:1: rule__EnumAnnotationAttribute__Group__6 : rule__EnumAnnotationAttribute__Group__6__Impl rule__EnumAnnotationAttribute__Group__7 ;
     public final void rule__EnumAnnotationAttribute__Group__6() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:2369:1: ( rule__EnumAnnotationAttribute__Group__6__Impl rule__EnumAnnotationAttribute__Group__7 )
-            // InternalETMap.g:2370:2: rule__EnumAnnotationAttribute__Group__6__Impl rule__EnumAnnotationAttribute__Group__7
+            // InternalETMap.g:2367:1: ( rule__EnumAnnotationAttribute__Group__6__Impl rule__EnumAnnotationAttribute__Group__7 )
+            // InternalETMap.g:2368:2: rule__EnumAnnotationAttribute__Group__6__Impl rule__EnumAnnotationAttribute__Group__7
             {
             pushFollow(FOLLOW_19);
             rule__EnumAnnotationAttribute__Group__6__Impl();
@@ -6671,20 +6682,20 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EnumAnnotationAttribute__Group__6__Impl"
-    // InternalETMap.g:2377:1: rule__EnumAnnotationAttribute__Group__6__Impl : ( ( rule__EnumAnnotationAttribute__Group_6__0 )* ) ;
+    // InternalETMap.g:2375:1: rule__EnumAnnotationAttribute__Group__6__Impl : ( ( rule__EnumAnnotationAttribute__Group_6__0 )* ) ;
     public final void rule__EnumAnnotationAttribute__Group__6__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:2381:1: ( ( ( rule__EnumAnnotationAttribute__Group_6__0 )* ) )
-            // InternalETMap.g:2382:1: ( ( rule__EnumAnnotationAttribute__Group_6__0 )* )
+            // InternalETMap.g:2379:1: ( ( ( rule__EnumAnnotationAttribute__Group_6__0 )* ) )
+            // InternalETMap.g:2380:1: ( ( rule__EnumAnnotationAttribute__Group_6__0 )* )
             {
-            // InternalETMap.g:2382:1: ( ( rule__EnumAnnotationAttribute__Group_6__0 )* )
-            // InternalETMap.g:2383:1: ( rule__EnumAnnotationAttribute__Group_6__0 )*
+            // InternalETMap.g:2380:1: ( ( rule__EnumAnnotationAttribute__Group_6__0 )* )
+            // InternalETMap.g:2381:1: ( rule__EnumAnnotationAttribute__Group_6__0 )*
             {
              before(grammarAccess.getEnumAnnotationAttributeAccess().getGroup_6()); 
-            // InternalETMap.g:2384:1: ( rule__EnumAnnotationAttribute__Group_6__0 )*
+            // InternalETMap.g:2382:1: ( rule__EnumAnnotationAttribute__Group_6__0 )*
             loop21:
             do {
                 int alt21=2;
@@ -6697,7 +6708,7 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
                 switch (alt21) {
             	case 1 :
-            	    // InternalETMap.g:2384:2: rule__EnumAnnotationAttribute__Group_6__0
+            	    // InternalETMap.g:2382:2: rule__EnumAnnotationAttribute__Group_6__0
             	    {
             	    pushFollow(FOLLOW_20);
             	    rule__EnumAnnotationAttribute__Group_6__0();
@@ -6736,14 +6747,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EnumAnnotationAttribute__Group__7"
-    // InternalETMap.g:2394:1: rule__EnumAnnotationAttribute__Group__7 : rule__EnumAnnotationAttribute__Group__7__Impl ;
+    // InternalETMap.g:2392:1: rule__EnumAnnotationAttribute__Group__7 : rule__EnumAnnotationAttribute__Group__7__Impl ;
     public final void rule__EnumAnnotationAttribute__Group__7() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:2398:1: ( rule__EnumAnnotationAttribute__Group__7__Impl )
-            // InternalETMap.g:2399:2: rule__EnumAnnotationAttribute__Group__7__Impl
+            // InternalETMap.g:2396:1: ( rule__EnumAnnotationAttribute__Group__7__Impl )
+            // InternalETMap.g:2397:2: rule__EnumAnnotationAttribute__Group__7__Impl
             {
             pushFollow(FOLLOW_2);
             rule__EnumAnnotationAttribute__Group__7__Impl();
@@ -6769,17 +6780,17 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EnumAnnotationAttribute__Group__7__Impl"
-    // InternalETMap.g:2405:1: rule__EnumAnnotationAttribute__Group__7__Impl : ( '}' ) ;
+    // InternalETMap.g:2403:1: rule__EnumAnnotationAttribute__Group__7__Impl : ( '}' ) ;
     public final void rule__EnumAnnotationAttribute__Group__7__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:2409:1: ( ( '}' ) )
-            // InternalETMap.g:2410:1: ( '}' )
+            // InternalETMap.g:2407:1: ( ( '}' ) )
+            // InternalETMap.g:2408:1: ( '}' )
             {
-            // InternalETMap.g:2410:1: ( '}' )
-            // InternalETMap.g:2411:1: '}'
+            // InternalETMap.g:2408:1: ( '}' )
+            // InternalETMap.g:2409:1: '}'
             {
              before(grammarAccess.getEnumAnnotationAttributeAccess().getRightCurlyBracketKeyword_7()); 
             match(input,25,FOLLOW_2); 
@@ -6806,14 +6817,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EnumAnnotationAttribute__Group_6__0"
-    // InternalETMap.g:2440:1: rule__EnumAnnotationAttribute__Group_6__0 : rule__EnumAnnotationAttribute__Group_6__0__Impl rule__EnumAnnotationAttribute__Group_6__1 ;
+    // InternalETMap.g:2438:1: rule__EnumAnnotationAttribute__Group_6__0 : rule__EnumAnnotationAttribute__Group_6__0__Impl rule__EnumAnnotationAttribute__Group_6__1 ;
     public final void rule__EnumAnnotationAttribute__Group_6__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:2444:1: ( rule__EnumAnnotationAttribute__Group_6__0__Impl rule__EnumAnnotationAttribute__Group_6__1 )
-            // InternalETMap.g:2445:2: rule__EnumAnnotationAttribute__Group_6__0__Impl rule__EnumAnnotationAttribute__Group_6__1
+            // InternalETMap.g:2442:1: ( rule__EnumAnnotationAttribute__Group_6__0__Impl rule__EnumAnnotationAttribute__Group_6__1 )
+            // InternalETMap.g:2443:2: rule__EnumAnnotationAttribute__Group_6__0__Impl rule__EnumAnnotationAttribute__Group_6__1
             {
             pushFollow(FOLLOW_18);
             rule__EnumAnnotationAttribute__Group_6__0__Impl();
@@ -6844,17 +6855,17 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EnumAnnotationAttribute__Group_6__0__Impl"
-    // InternalETMap.g:2452:1: rule__EnumAnnotationAttribute__Group_6__0__Impl : ( ',' ) ;
+    // InternalETMap.g:2450:1: rule__EnumAnnotationAttribute__Group_6__0__Impl : ( ',' ) ;
     public final void rule__EnumAnnotationAttribute__Group_6__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:2456:1: ( ( ',' ) )
-            // InternalETMap.g:2457:1: ( ',' )
+            // InternalETMap.g:2454:1: ( ( ',' ) )
+            // InternalETMap.g:2455:1: ( ',' )
             {
-            // InternalETMap.g:2457:1: ( ',' )
-            // InternalETMap.g:2458:1: ','
+            // InternalETMap.g:2455:1: ( ',' )
+            // InternalETMap.g:2456:1: ','
             {
              before(grammarAccess.getEnumAnnotationAttributeAccess().getCommaKeyword_6_0()); 
             match(input,33,FOLLOW_2); 
@@ -6881,14 +6892,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EnumAnnotationAttribute__Group_6__1"
-    // InternalETMap.g:2471:1: rule__EnumAnnotationAttribute__Group_6__1 : rule__EnumAnnotationAttribute__Group_6__1__Impl ;
+    // InternalETMap.g:2469:1: rule__EnumAnnotationAttribute__Group_6__1 : rule__EnumAnnotationAttribute__Group_6__1__Impl ;
     public final void rule__EnumAnnotationAttribute__Group_6__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:2475:1: ( rule__EnumAnnotationAttribute__Group_6__1__Impl )
-            // InternalETMap.g:2476:2: rule__EnumAnnotationAttribute__Group_6__1__Impl
+            // InternalETMap.g:2473:1: ( rule__EnumAnnotationAttribute__Group_6__1__Impl )
+            // InternalETMap.g:2474:2: rule__EnumAnnotationAttribute__Group_6__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__EnumAnnotationAttribute__Group_6__1__Impl();
@@ -6914,21 +6925,21 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EnumAnnotationAttribute__Group_6__1__Impl"
-    // InternalETMap.g:2482:1: rule__EnumAnnotationAttribute__Group_6__1__Impl : ( ( rule__EnumAnnotationAttribute__ValuesAssignment_6_1 ) ) ;
+    // InternalETMap.g:2480:1: rule__EnumAnnotationAttribute__Group_6__1__Impl : ( ( rule__EnumAnnotationAttribute__ValuesAssignment_6_1 ) ) ;
     public final void rule__EnumAnnotationAttribute__Group_6__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:2486:1: ( ( ( rule__EnumAnnotationAttribute__ValuesAssignment_6_1 ) ) )
-            // InternalETMap.g:2487:1: ( ( rule__EnumAnnotationAttribute__ValuesAssignment_6_1 ) )
+            // InternalETMap.g:2484:1: ( ( ( rule__EnumAnnotationAttribute__ValuesAssignment_6_1 ) ) )
+            // InternalETMap.g:2485:1: ( ( rule__EnumAnnotationAttribute__ValuesAssignment_6_1 ) )
             {
-            // InternalETMap.g:2487:1: ( ( rule__EnumAnnotationAttribute__ValuesAssignment_6_1 ) )
-            // InternalETMap.g:2488:1: ( rule__EnumAnnotationAttribute__ValuesAssignment_6_1 )
+            // InternalETMap.g:2485:1: ( ( rule__EnumAnnotationAttribute__ValuesAssignment_6_1 ) )
+            // InternalETMap.g:2486:1: ( rule__EnumAnnotationAttribute__ValuesAssignment_6_1 )
             {
              before(grammarAccess.getEnumAnnotationAttributeAccess().getValuesAssignment_6_1()); 
-            // InternalETMap.g:2489:1: ( rule__EnumAnnotationAttribute__ValuesAssignment_6_1 )
-            // InternalETMap.g:2489:2: rule__EnumAnnotationAttribute__ValuesAssignment_6_1
+            // InternalETMap.g:2487:1: ( rule__EnumAnnotationAttribute__ValuesAssignment_6_1 )
+            // InternalETMap.g:2487:2: rule__EnumAnnotationAttribute__ValuesAssignment_6_1
             {
             pushFollow(FOLLOW_2);
             rule__EnumAnnotationAttribute__ValuesAssignment_6_1();
@@ -6961,14 +6972,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Import__Group__0"
-    // InternalETMap.g:2503:1: rule__Import__Group__0 : rule__Import__Group__0__Impl rule__Import__Group__1 ;
+    // InternalETMap.g:2501:1: rule__Import__Group__0 : rule__Import__Group__0__Impl rule__Import__Group__1 ;
     public final void rule__Import__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:2507:1: ( rule__Import__Group__0__Impl rule__Import__Group__1 )
-            // InternalETMap.g:2508:2: rule__Import__Group__0__Impl rule__Import__Group__1
+            // InternalETMap.g:2505:1: ( rule__Import__Group__0__Impl rule__Import__Group__1 )
+            // InternalETMap.g:2506:2: rule__Import__Group__0__Impl rule__Import__Group__1
             {
             pushFollow(FOLLOW_21);
             rule__Import__Group__0__Impl();
@@ -6999,17 +7010,17 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Import__Group__0__Impl"
-    // InternalETMap.g:2515:1: rule__Import__Group__0__Impl : ( 'import' ) ;
+    // InternalETMap.g:2513:1: rule__Import__Group__0__Impl : ( 'import' ) ;
     public final void rule__Import__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:2519:1: ( ( 'import' ) )
-            // InternalETMap.g:2520:1: ( 'import' )
+            // InternalETMap.g:2517:1: ( ( 'import' ) )
+            // InternalETMap.g:2518:1: ( 'import' )
             {
-            // InternalETMap.g:2520:1: ( 'import' )
-            // InternalETMap.g:2521:1: 'import'
+            // InternalETMap.g:2518:1: ( 'import' )
+            // InternalETMap.g:2519:1: 'import'
             {
              before(grammarAccess.getImportAccess().getImportKeyword_0()); 
             match(input,34,FOLLOW_2); 
@@ -7036,22 +7047,17 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Import__Group__1"
-    // InternalETMap.g:2534:1: rule__Import__Group__1 : rule__Import__Group__1__Impl rule__Import__Group__2 ;
+    // InternalETMap.g:2532:1: rule__Import__Group__1 : rule__Import__Group__1__Impl ;
     public final void rule__Import__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:2538:1: ( rule__Import__Group__1__Impl rule__Import__Group__2 )
-            // InternalETMap.g:2539:2: rule__Import__Group__1__Impl rule__Import__Group__2
+            // InternalETMap.g:2536:1: ( rule__Import__Group__1__Impl )
+            // InternalETMap.g:2537:2: rule__Import__Group__1__Impl
             {
-            pushFollow(FOLLOW_18);
-            rule__Import__Group__1__Impl();
-
-            state._fsp--;
-
             pushFollow(FOLLOW_2);
-            rule__Import__Group__2();
+            rule__Import__Group__1__Impl();
 
             state._fsp--;
 
@@ -7074,21 +7080,21 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Import__Group__1__Impl"
-    // InternalETMap.g:2546:1: rule__Import__Group__1__Impl : ( ( rule__Import__Alternatives_1 ) ) ;
+    // InternalETMap.g:2543:1: rule__Import__Group__1__Impl : ( ( rule__Import__Alternatives_1 ) ) ;
     public final void rule__Import__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:2550:1: ( ( ( rule__Import__Alternatives_1 ) ) )
-            // InternalETMap.g:2551:1: ( ( rule__Import__Alternatives_1 ) )
+            // InternalETMap.g:2547:1: ( ( ( rule__Import__Alternatives_1 ) ) )
+            // InternalETMap.g:2548:1: ( ( rule__Import__Alternatives_1 ) )
             {
-            // InternalETMap.g:2551:1: ( ( rule__Import__Alternatives_1 ) )
-            // InternalETMap.g:2552:1: ( rule__Import__Alternatives_1 )
+            // InternalETMap.g:2548:1: ( ( rule__Import__Alternatives_1 ) )
+            // InternalETMap.g:2549:1: ( rule__Import__Alternatives_1 )
             {
              before(grammarAccess.getImportAccess().getAlternatives_1()); 
-            // InternalETMap.g:2553:1: ( rule__Import__Alternatives_1 )
-            // InternalETMap.g:2553:2: rule__Import__Alternatives_1
+            // InternalETMap.g:2550:1: ( rule__Import__Alternatives_1 )
+            // InternalETMap.g:2550:2: rule__Import__Alternatives_1
             {
             pushFollow(FOLLOW_2);
             rule__Import__Alternatives_1();
@@ -7120,95 +7126,15 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__Import__Group__1__Impl"
 
 
-    // $ANTLR start "rule__Import__Group__2"
-    // InternalETMap.g:2563:1: rule__Import__Group__2 : rule__Import__Group__2__Impl ;
-    public final void rule__Import__Group__2() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // InternalETMap.g:2567:1: ( rule__Import__Group__2__Impl )
-            // InternalETMap.g:2568:2: rule__Import__Group__2__Impl
-            {
-            pushFollow(FOLLOW_2);
-            rule__Import__Group__2__Impl();
-
-            state._fsp--;
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__Import__Group__2"
-
-
-    // $ANTLR start "rule__Import__Group__2__Impl"
-    // InternalETMap.g:2574:1: rule__Import__Group__2__Impl : ( ( rule__Import__ImportURIAssignment_2 ) ) ;
-    public final void rule__Import__Group__2__Impl() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // InternalETMap.g:2578:1: ( ( ( rule__Import__ImportURIAssignment_2 ) ) )
-            // InternalETMap.g:2579:1: ( ( rule__Import__ImportURIAssignment_2 ) )
-            {
-            // InternalETMap.g:2579:1: ( ( rule__Import__ImportURIAssignment_2 ) )
-            // InternalETMap.g:2580:1: ( rule__Import__ImportURIAssignment_2 )
-            {
-             before(grammarAccess.getImportAccess().getImportURIAssignment_2()); 
-            // InternalETMap.g:2581:1: ( rule__Import__ImportURIAssignment_2 )
-            // InternalETMap.g:2581:2: rule__Import__ImportURIAssignment_2
-            {
-            pushFollow(FOLLOW_2);
-            rule__Import__ImportURIAssignment_2();
-
-            state._fsp--;
-
-
-            }
-
-             after(grammarAccess.getImportAccess().getImportURIAssignment_2()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__Import__Group__2__Impl"
-
-
     // $ANTLR start "rule__Import__Group_1_0__0"
-    // InternalETMap.g:2597:1: rule__Import__Group_1_0__0 : rule__Import__Group_1_0__0__Impl rule__Import__Group_1_0__1 ;
+    // InternalETMap.g:2564:1: rule__Import__Group_1_0__0 : rule__Import__Group_1_0__0__Impl rule__Import__Group_1_0__1 ;
     public final void rule__Import__Group_1_0__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:2601:1: ( rule__Import__Group_1_0__0__Impl rule__Import__Group_1_0__1 )
-            // InternalETMap.g:2602:2: rule__Import__Group_1_0__0__Impl rule__Import__Group_1_0__1
+            // InternalETMap.g:2568:1: ( rule__Import__Group_1_0__0__Impl rule__Import__Group_1_0__1 )
+            // InternalETMap.g:2569:2: rule__Import__Group_1_0__0__Impl rule__Import__Group_1_0__1
             {
             pushFollow(FOLLOW_22);
             rule__Import__Group_1_0__0__Impl();
@@ -7239,21 +7165,21 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Import__Group_1_0__0__Impl"
-    // InternalETMap.g:2609:1: rule__Import__Group_1_0__0__Impl : ( ( rule__Import__ImportedNamespaceAssignment_1_0_0 ) ) ;
+    // InternalETMap.g:2576:1: rule__Import__Group_1_0__0__Impl : ( ( rule__Import__ImportedNamespaceAssignment_1_0_0 ) ) ;
     public final void rule__Import__Group_1_0__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:2613:1: ( ( ( rule__Import__ImportedNamespaceAssignment_1_0_0 ) ) )
-            // InternalETMap.g:2614:1: ( ( rule__Import__ImportedNamespaceAssignment_1_0_0 ) )
+            // InternalETMap.g:2580:1: ( ( ( rule__Import__ImportedNamespaceAssignment_1_0_0 ) ) )
+            // InternalETMap.g:2581:1: ( ( rule__Import__ImportedNamespaceAssignment_1_0_0 ) )
             {
-            // InternalETMap.g:2614:1: ( ( rule__Import__ImportedNamespaceAssignment_1_0_0 ) )
-            // InternalETMap.g:2615:1: ( rule__Import__ImportedNamespaceAssignment_1_0_0 )
+            // InternalETMap.g:2581:1: ( ( rule__Import__ImportedNamespaceAssignment_1_0_0 ) )
+            // InternalETMap.g:2582:1: ( rule__Import__ImportedNamespaceAssignment_1_0_0 )
             {
              before(grammarAccess.getImportAccess().getImportedNamespaceAssignment_1_0_0()); 
-            // InternalETMap.g:2616:1: ( rule__Import__ImportedNamespaceAssignment_1_0_0 )
-            // InternalETMap.g:2616:2: rule__Import__ImportedNamespaceAssignment_1_0_0
+            // InternalETMap.g:2583:1: ( rule__Import__ImportedNamespaceAssignment_1_0_0 )
+            // InternalETMap.g:2583:2: rule__Import__ImportedNamespaceAssignment_1_0_0
             {
             pushFollow(FOLLOW_2);
             rule__Import__ImportedNamespaceAssignment_1_0_0();
@@ -7286,14 +7212,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Import__Group_1_0__1"
-    // InternalETMap.g:2626:1: rule__Import__Group_1_0__1 : rule__Import__Group_1_0__1__Impl ;
+    // InternalETMap.g:2593:1: rule__Import__Group_1_0__1 : rule__Import__Group_1_0__1__Impl ;
     public final void rule__Import__Group_1_0__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:2630:1: ( rule__Import__Group_1_0__1__Impl )
-            // InternalETMap.g:2631:2: rule__Import__Group_1_0__1__Impl
+            // InternalETMap.g:2597:1: ( rule__Import__Group_1_0__1__Impl )
+            // InternalETMap.g:2598:2: rule__Import__Group_1_0__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__Import__Group_1_0__1__Impl();
@@ -7319,21 +7245,42 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Import__Group_1_0__1__Impl"
-    // InternalETMap.g:2637:1: rule__Import__Group_1_0__1__Impl : ( 'from' ) ;
+    // InternalETMap.g:2604:1: rule__Import__Group_1_0__1__Impl : ( ( rule__Import__Group_1_0_1__0 )? ) ;
     public final void rule__Import__Group_1_0__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:2641:1: ( ( 'from' ) )
-            // InternalETMap.g:2642:1: ( 'from' )
+            // InternalETMap.g:2608:1: ( ( ( rule__Import__Group_1_0_1__0 )? ) )
+            // InternalETMap.g:2609:1: ( ( rule__Import__Group_1_0_1__0 )? )
             {
-            // InternalETMap.g:2642:1: ( 'from' )
-            // InternalETMap.g:2643:1: 'from'
+            // InternalETMap.g:2609:1: ( ( rule__Import__Group_1_0_1__0 )? )
+            // InternalETMap.g:2610:1: ( rule__Import__Group_1_0_1__0 )?
             {
-             before(grammarAccess.getImportAccess().getFromKeyword_1_0_1()); 
-            match(input,35,FOLLOW_2); 
-             after(grammarAccess.getImportAccess().getFromKeyword_1_0_1()); 
+             before(grammarAccess.getImportAccess().getGroup_1_0_1()); 
+            // InternalETMap.g:2611:1: ( rule__Import__Group_1_0_1__0 )?
+            int alt22=2;
+            int LA22_0 = input.LA(1);
+
+            if ( (LA22_0==35) ) {
+                alt22=1;
+            }
+            switch (alt22) {
+                case 1 :
+                    // InternalETMap.g:2611:2: rule__Import__Group_1_0_1__0
+                    {
+                    pushFollow(FOLLOW_2);
+                    rule__Import__Group_1_0_1__0();
+
+                    state._fsp--;
+
+
+                    }
+                    break;
+
+            }
+
+             after(grammarAccess.getImportAccess().getGroup_1_0_1()); 
 
             }
 
@@ -7355,15 +7302,325 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__Import__Group_1_0__1__Impl"
 
 
+    // $ANTLR start "rule__Import__Group_1_0_1__0"
+    // InternalETMap.g:2625:1: rule__Import__Group_1_0_1__0 : rule__Import__Group_1_0_1__0__Impl rule__Import__Group_1_0_1__1 ;
+    public final void rule__Import__Group_1_0_1__0() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // InternalETMap.g:2629:1: ( rule__Import__Group_1_0_1__0__Impl rule__Import__Group_1_0_1__1 )
+            // InternalETMap.g:2630:2: rule__Import__Group_1_0_1__0__Impl rule__Import__Group_1_0_1__1
+            {
+            pushFollow(FOLLOW_18);
+            rule__Import__Group_1_0_1__0__Impl();
+
+            state._fsp--;
+
+            pushFollow(FOLLOW_2);
+            rule__Import__Group_1_0_1__1();
+
+            state._fsp--;
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Import__Group_1_0_1__0"
+
+
+    // $ANTLR start "rule__Import__Group_1_0_1__0__Impl"
+    // InternalETMap.g:2637:1: rule__Import__Group_1_0_1__0__Impl : ( 'from' ) ;
+    public final void rule__Import__Group_1_0_1__0__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // InternalETMap.g:2641:1: ( ( 'from' ) )
+            // InternalETMap.g:2642:1: ( 'from' )
+            {
+            // InternalETMap.g:2642:1: ( 'from' )
+            // InternalETMap.g:2643:1: 'from'
+            {
+             before(grammarAccess.getImportAccess().getFromKeyword_1_0_1_0()); 
+            match(input,35,FOLLOW_2); 
+             after(grammarAccess.getImportAccess().getFromKeyword_1_0_1_0()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Import__Group_1_0_1__0__Impl"
+
+
+    // $ANTLR start "rule__Import__Group_1_0_1__1"
+    // InternalETMap.g:2656:1: rule__Import__Group_1_0_1__1 : rule__Import__Group_1_0_1__1__Impl ;
+    public final void rule__Import__Group_1_0_1__1() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // InternalETMap.g:2660:1: ( rule__Import__Group_1_0_1__1__Impl )
+            // InternalETMap.g:2661:2: rule__Import__Group_1_0_1__1__Impl
+            {
+            pushFollow(FOLLOW_2);
+            rule__Import__Group_1_0_1__1__Impl();
+
+            state._fsp--;
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Import__Group_1_0_1__1"
+
+
+    // $ANTLR start "rule__Import__Group_1_0_1__1__Impl"
+    // InternalETMap.g:2667:1: rule__Import__Group_1_0_1__1__Impl : ( ( rule__Import__ImportURIAssignment_1_0_1_1 ) ) ;
+    public final void rule__Import__Group_1_0_1__1__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // InternalETMap.g:2671:1: ( ( ( rule__Import__ImportURIAssignment_1_0_1_1 ) ) )
+            // InternalETMap.g:2672:1: ( ( rule__Import__ImportURIAssignment_1_0_1_1 ) )
+            {
+            // InternalETMap.g:2672:1: ( ( rule__Import__ImportURIAssignment_1_0_1_1 ) )
+            // InternalETMap.g:2673:1: ( rule__Import__ImportURIAssignment_1_0_1_1 )
+            {
+             before(grammarAccess.getImportAccess().getImportURIAssignment_1_0_1_1()); 
+            // InternalETMap.g:2674:1: ( rule__Import__ImportURIAssignment_1_0_1_1 )
+            // InternalETMap.g:2674:2: rule__Import__ImportURIAssignment_1_0_1_1
+            {
+            pushFollow(FOLLOW_2);
+            rule__Import__ImportURIAssignment_1_0_1_1();
+
+            state._fsp--;
+
+
+            }
+
+             after(grammarAccess.getImportAccess().getImportURIAssignment_1_0_1_1()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Import__Group_1_0_1__1__Impl"
+
+
+    // $ANTLR start "rule__Import__Group_1_1__0"
+    // InternalETMap.g:2688:1: rule__Import__Group_1_1__0 : rule__Import__Group_1_1__0__Impl rule__Import__Group_1_1__1 ;
+    public final void rule__Import__Group_1_1__0() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // InternalETMap.g:2692:1: ( rule__Import__Group_1_1__0__Impl rule__Import__Group_1_1__1 )
+            // InternalETMap.g:2693:2: rule__Import__Group_1_1__0__Impl rule__Import__Group_1_1__1
+            {
+            pushFollow(FOLLOW_18);
+            rule__Import__Group_1_1__0__Impl();
+
+            state._fsp--;
+
+            pushFollow(FOLLOW_2);
+            rule__Import__Group_1_1__1();
+
+            state._fsp--;
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Import__Group_1_1__0"
+
+
+    // $ANTLR start "rule__Import__Group_1_1__0__Impl"
+    // InternalETMap.g:2700:1: rule__Import__Group_1_1__0__Impl : ( 'model' ) ;
+    public final void rule__Import__Group_1_1__0__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // InternalETMap.g:2704:1: ( ( 'model' ) )
+            // InternalETMap.g:2705:1: ( 'model' )
+            {
+            // InternalETMap.g:2705:1: ( 'model' )
+            // InternalETMap.g:2706:1: 'model'
+            {
+             before(grammarAccess.getImportAccess().getModelKeyword_1_1_0()); 
+            match(input,36,FOLLOW_2); 
+             after(grammarAccess.getImportAccess().getModelKeyword_1_1_0()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Import__Group_1_1__0__Impl"
+
+
+    // $ANTLR start "rule__Import__Group_1_1__1"
+    // InternalETMap.g:2719:1: rule__Import__Group_1_1__1 : rule__Import__Group_1_1__1__Impl ;
+    public final void rule__Import__Group_1_1__1() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // InternalETMap.g:2723:1: ( rule__Import__Group_1_1__1__Impl )
+            // InternalETMap.g:2724:2: rule__Import__Group_1_1__1__Impl
+            {
+            pushFollow(FOLLOW_2);
+            rule__Import__Group_1_1__1__Impl();
+
+            state._fsp--;
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Import__Group_1_1__1"
+
+
+    // $ANTLR start "rule__Import__Group_1_1__1__Impl"
+    // InternalETMap.g:2730:1: rule__Import__Group_1_1__1__Impl : ( ( rule__Import__ImportURIAssignment_1_1_1 ) ) ;
+    public final void rule__Import__Group_1_1__1__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // InternalETMap.g:2734:1: ( ( ( rule__Import__ImportURIAssignment_1_1_1 ) ) )
+            // InternalETMap.g:2735:1: ( ( rule__Import__ImportURIAssignment_1_1_1 ) )
+            {
+            // InternalETMap.g:2735:1: ( ( rule__Import__ImportURIAssignment_1_1_1 ) )
+            // InternalETMap.g:2736:1: ( rule__Import__ImportURIAssignment_1_1_1 )
+            {
+             before(grammarAccess.getImportAccess().getImportURIAssignment_1_1_1()); 
+            // InternalETMap.g:2737:1: ( rule__Import__ImportURIAssignment_1_1_1 )
+            // InternalETMap.g:2737:2: rule__Import__ImportURIAssignment_1_1_1
+            {
+            pushFollow(FOLLOW_2);
+            rule__Import__ImportURIAssignment_1_1_1();
+
+            state._fsp--;
+
+
+            }
+
+             after(grammarAccess.getImportAccess().getImportURIAssignment_1_1_1()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Import__Group_1_1__1__Impl"
+
+
     // $ANTLR start "rule__ImportedFQN__Group__0"
-    // InternalETMap.g:2660:1: rule__ImportedFQN__Group__0 : rule__ImportedFQN__Group__0__Impl rule__ImportedFQN__Group__1 ;
+    // InternalETMap.g:2751:1: rule__ImportedFQN__Group__0 : rule__ImportedFQN__Group__0__Impl rule__ImportedFQN__Group__1 ;
     public final void rule__ImportedFQN__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:2664:1: ( rule__ImportedFQN__Group__0__Impl rule__ImportedFQN__Group__1 )
-            // InternalETMap.g:2665:2: rule__ImportedFQN__Group__0__Impl rule__ImportedFQN__Group__1
+            // InternalETMap.g:2755:1: ( rule__ImportedFQN__Group__0__Impl rule__ImportedFQN__Group__1 )
+            // InternalETMap.g:2756:2: rule__ImportedFQN__Group__0__Impl rule__ImportedFQN__Group__1
             {
             pushFollow(FOLLOW_23);
             rule__ImportedFQN__Group__0__Impl();
@@ -7394,17 +7651,17 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ImportedFQN__Group__0__Impl"
-    // InternalETMap.g:2672:1: rule__ImportedFQN__Group__0__Impl : ( ruleFQN ) ;
+    // InternalETMap.g:2763:1: rule__ImportedFQN__Group__0__Impl : ( ruleFQN ) ;
     public final void rule__ImportedFQN__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:2676:1: ( ( ruleFQN ) )
-            // InternalETMap.g:2677:1: ( ruleFQN )
+            // InternalETMap.g:2767:1: ( ( ruleFQN ) )
+            // InternalETMap.g:2768:1: ( ruleFQN )
             {
-            // InternalETMap.g:2677:1: ( ruleFQN )
-            // InternalETMap.g:2678:1: ruleFQN
+            // InternalETMap.g:2768:1: ( ruleFQN )
+            // InternalETMap.g:2769:1: ruleFQN
             {
              before(grammarAccess.getImportedFQNAccess().getFQNParserRuleCall_0()); 
             pushFollow(FOLLOW_2);
@@ -7435,14 +7692,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ImportedFQN__Group__1"
-    // InternalETMap.g:2689:1: rule__ImportedFQN__Group__1 : rule__ImportedFQN__Group__1__Impl ;
+    // InternalETMap.g:2780:1: rule__ImportedFQN__Group__1 : rule__ImportedFQN__Group__1__Impl ;
     public final void rule__ImportedFQN__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:2693:1: ( rule__ImportedFQN__Group__1__Impl )
-            // InternalETMap.g:2694:2: rule__ImportedFQN__Group__1__Impl
+            // InternalETMap.g:2784:1: ( rule__ImportedFQN__Group__1__Impl )
+            // InternalETMap.g:2785:2: rule__ImportedFQN__Group__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__ImportedFQN__Group__1__Impl();
@@ -7468,31 +7725,31 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ImportedFQN__Group__1__Impl"
-    // InternalETMap.g:2700:1: rule__ImportedFQN__Group__1__Impl : ( ( '.*' )? ) ;
+    // InternalETMap.g:2791:1: rule__ImportedFQN__Group__1__Impl : ( ( '.*' )? ) ;
     public final void rule__ImportedFQN__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:2704:1: ( ( ( '.*' )? ) )
-            // InternalETMap.g:2705:1: ( ( '.*' )? )
+            // InternalETMap.g:2795:1: ( ( ( '.*' )? ) )
+            // InternalETMap.g:2796:1: ( ( '.*' )? )
             {
-            // InternalETMap.g:2705:1: ( ( '.*' )? )
-            // InternalETMap.g:2706:1: ( '.*' )?
+            // InternalETMap.g:2796:1: ( ( '.*' )? )
+            // InternalETMap.g:2797:1: ( '.*' )?
             {
              before(grammarAccess.getImportedFQNAccess().getFullStopAsteriskKeyword_1()); 
-            // InternalETMap.g:2707:1: ( '.*' )?
-            int alt22=2;
-            int LA22_0 = input.LA(1);
+            // InternalETMap.g:2798:1: ( '.*' )?
+            int alt23=2;
+            int LA23_0 = input.LA(1);
 
-            if ( (LA22_0==36) ) {
-                alt22=1;
+            if ( (LA23_0==37) ) {
+                alt23=1;
             }
-            switch (alt22) {
+            switch (alt23) {
                 case 1 :
-                    // InternalETMap.g:2708:2: '.*'
+                    // InternalETMap.g:2799:2: '.*'
                     {
-                    match(input,36,FOLLOW_2); 
+                    match(input,37,FOLLOW_2); 
 
                     }
                     break;
@@ -7522,14 +7779,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Documentation__Group__0"
-    // InternalETMap.g:2723:1: rule__Documentation__Group__0 : rule__Documentation__Group__0__Impl rule__Documentation__Group__1 ;
+    // InternalETMap.g:2814:1: rule__Documentation__Group__0 : rule__Documentation__Group__0__Impl rule__Documentation__Group__1 ;
     public final void rule__Documentation__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:2727:1: ( rule__Documentation__Group__0__Impl rule__Documentation__Group__1 )
-            // InternalETMap.g:2728:2: rule__Documentation__Group__0__Impl rule__Documentation__Group__1
+            // InternalETMap.g:2818:1: ( rule__Documentation__Group__0__Impl rule__Documentation__Group__1 )
+            // InternalETMap.g:2819:2: rule__Documentation__Group__0__Impl rule__Documentation__Group__1
             {
             pushFollow(FOLLOW_24);
             rule__Documentation__Group__0__Impl();
@@ -7560,21 +7817,21 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Documentation__Group__0__Impl"
-    // InternalETMap.g:2735:1: rule__Documentation__Group__0__Impl : ( () ) ;
+    // InternalETMap.g:2826:1: rule__Documentation__Group__0__Impl : ( () ) ;
     public final void rule__Documentation__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:2739:1: ( ( () ) )
-            // InternalETMap.g:2740:1: ( () )
+            // InternalETMap.g:2830:1: ( ( () ) )
+            // InternalETMap.g:2831:1: ( () )
             {
-            // InternalETMap.g:2740:1: ( () )
-            // InternalETMap.g:2741:1: ()
+            // InternalETMap.g:2831:1: ( () )
+            // InternalETMap.g:2832:1: ()
             {
              before(grammarAccess.getDocumentationAccess().getDocumentationAction_0()); 
-            // InternalETMap.g:2742:1: ()
-            // InternalETMap.g:2744:1: 
+            // InternalETMap.g:2833:1: ()
+            // InternalETMap.g:2835:1: 
             {
             }
 
@@ -7597,14 +7854,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Documentation__Group__1"
-    // InternalETMap.g:2754:1: rule__Documentation__Group__1 : rule__Documentation__Group__1__Impl rule__Documentation__Group__2 ;
+    // InternalETMap.g:2845:1: rule__Documentation__Group__1 : rule__Documentation__Group__1__Impl rule__Documentation__Group__2 ;
     public final void rule__Documentation__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:2758:1: ( rule__Documentation__Group__1__Impl rule__Documentation__Group__2 )
-            // InternalETMap.g:2759:2: rule__Documentation__Group__1__Impl rule__Documentation__Group__2
+            // InternalETMap.g:2849:1: ( rule__Documentation__Group__1__Impl rule__Documentation__Group__2 )
+            // InternalETMap.g:2850:2: rule__Documentation__Group__1__Impl rule__Documentation__Group__2
             {
             pushFollow(FOLLOW_25);
             rule__Documentation__Group__1__Impl();
@@ -7635,20 +7892,20 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Documentation__Group__1__Impl"
-    // InternalETMap.g:2766:1: rule__Documentation__Group__1__Impl : ( '[' ) ;
+    // InternalETMap.g:2857:1: rule__Documentation__Group__1__Impl : ( '[' ) ;
     public final void rule__Documentation__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:2770:1: ( ( '[' ) )
-            // InternalETMap.g:2771:1: ( '[' )
+            // InternalETMap.g:2861:1: ( ( '[' ) )
+            // InternalETMap.g:2862:1: ( '[' )
             {
-            // InternalETMap.g:2771:1: ( '[' )
-            // InternalETMap.g:2772:1: '['
+            // InternalETMap.g:2862:1: ( '[' )
+            // InternalETMap.g:2863:1: '['
             {
              before(grammarAccess.getDocumentationAccess().getLeftSquareBracketKeyword_1()); 
-            match(input,37,FOLLOW_2); 
+            match(input,38,FOLLOW_2); 
              after(grammarAccess.getDocumentationAccess().getLeftSquareBracketKeyword_1()); 
 
             }
@@ -7672,14 +7929,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Documentation__Group__2"
-    // InternalETMap.g:2785:1: rule__Documentation__Group__2 : rule__Documentation__Group__2__Impl rule__Documentation__Group__3 ;
+    // InternalETMap.g:2876:1: rule__Documentation__Group__2 : rule__Documentation__Group__2__Impl rule__Documentation__Group__3 ;
     public final void rule__Documentation__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:2789:1: ( rule__Documentation__Group__2__Impl rule__Documentation__Group__3 )
-            // InternalETMap.g:2790:2: rule__Documentation__Group__2__Impl rule__Documentation__Group__3
+            // InternalETMap.g:2880:1: ( rule__Documentation__Group__2__Impl rule__Documentation__Group__3 )
+            // InternalETMap.g:2881:2: rule__Documentation__Group__2__Impl rule__Documentation__Group__3
             {
             pushFollow(FOLLOW_25);
             rule__Documentation__Group__2__Impl();
@@ -7710,33 +7967,33 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Documentation__Group__2__Impl"
-    // InternalETMap.g:2797:1: rule__Documentation__Group__2__Impl : ( ( rule__Documentation__LinesAssignment_2 )* ) ;
+    // InternalETMap.g:2888:1: rule__Documentation__Group__2__Impl : ( ( rule__Documentation__LinesAssignment_2 )* ) ;
     public final void rule__Documentation__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:2801:1: ( ( ( rule__Documentation__LinesAssignment_2 )* ) )
-            // InternalETMap.g:2802:1: ( ( rule__Documentation__LinesAssignment_2 )* )
+            // InternalETMap.g:2892:1: ( ( ( rule__Documentation__LinesAssignment_2 )* ) )
+            // InternalETMap.g:2893:1: ( ( rule__Documentation__LinesAssignment_2 )* )
             {
-            // InternalETMap.g:2802:1: ( ( rule__Documentation__LinesAssignment_2 )* )
-            // InternalETMap.g:2803:1: ( rule__Documentation__LinesAssignment_2 )*
+            // InternalETMap.g:2893:1: ( ( rule__Documentation__LinesAssignment_2 )* )
+            // InternalETMap.g:2894:1: ( rule__Documentation__LinesAssignment_2 )*
             {
              before(grammarAccess.getDocumentationAccess().getLinesAssignment_2()); 
-            // InternalETMap.g:2804:1: ( rule__Documentation__LinesAssignment_2 )*
-            loop23:
+            // InternalETMap.g:2895:1: ( rule__Documentation__LinesAssignment_2 )*
+            loop24:
             do {
-                int alt23=2;
-                int LA23_0 = input.LA(1);
+                int alt24=2;
+                int LA24_0 = input.LA(1);
 
-                if ( (LA23_0==RULE_STRING) ) {
-                    alt23=1;
+                if ( (LA24_0==RULE_STRING) ) {
+                    alt24=1;
                 }
 
 
-                switch (alt23) {
+                switch (alt24) {
             	case 1 :
-            	    // InternalETMap.g:2804:2: rule__Documentation__LinesAssignment_2
+            	    // InternalETMap.g:2895:2: rule__Documentation__LinesAssignment_2
             	    {
             	    pushFollow(FOLLOW_26);
             	    rule__Documentation__LinesAssignment_2();
@@ -7748,7 +8005,7 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
             	    break;
 
             	default :
-            	    break loop23;
+            	    break loop24;
                 }
             } while (true);
 
@@ -7775,14 +8032,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Documentation__Group__3"
-    // InternalETMap.g:2814:1: rule__Documentation__Group__3 : rule__Documentation__Group__3__Impl ;
+    // InternalETMap.g:2905:1: rule__Documentation__Group__3 : rule__Documentation__Group__3__Impl ;
     public final void rule__Documentation__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:2818:1: ( rule__Documentation__Group__3__Impl )
-            // InternalETMap.g:2819:2: rule__Documentation__Group__3__Impl
+            // InternalETMap.g:2909:1: ( rule__Documentation__Group__3__Impl )
+            // InternalETMap.g:2910:2: rule__Documentation__Group__3__Impl
             {
             pushFollow(FOLLOW_2);
             rule__Documentation__Group__3__Impl();
@@ -7808,20 +8065,20 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Documentation__Group__3__Impl"
-    // InternalETMap.g:2825:1: rule__Documentation__Group__3__Impl : ( ']' ) ;
+    // InternalETMap.g:2916:1: rule__Documentation__Group__3__Impl : ( ']' ) ;
     public final void rule__Documentation__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:2829:1: ( ( ']' ) )
-            // InternalETMap.g:2830:1: ( ']' )
+            // InternalETMap.g:2920:1: ( ( ']' ) )
+            // InternalETMap.g:2921:1: ( ']' )
             {
-            // InternalETMap.g:2830:1: ( ']' )
-            // InternalETMap.g:2831:1: ']'
+            // InternalETMap.g:2921:1: ( ']' )
+            // InternalETMap.g:2922:1: ']'
             {
              before(grammarAccess.getDocumentationAccess().getRightSquareBracketKeyword_3()); 
-            match(input,38,FOLLOW_2); 
+            match(input,39,FOLLOW_2); 
              after(grammarAccess.getDocumentationAccess().getRightSquareBracketKeyword_3()); 
 
             }
@@ -7845,14 +8102,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__BooleanLiteral__Group__0"
-    // InternalETMap.g:2858:1: rule__BooleanLiteral__Group__0 : rule__BooleanLiteral__Group__0__Impl rule__BooleanLiteral__Group__1 ;
+    // InternalETMap.g:2949:1: rule__BooleanLiteral__Group__0 : rule__BooleanLiteral__Group__0__Impl rule__BooleanLiteral__Group__1 ;
     public final void rule__BooleanLiteral__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:2862:1: ( rule__BooleanLiteral__Group__0__Impl rule__BooleanLiteral__Group__1 )
-            // InternalETMap.g:2863:2: rule__BooleanLiteral__Group__0__Impl rule__BooleanLiteral__Group__1
+            // InternalETMap.g:2953:1: ( rule__BooleanLiteral__Group__0__Impl rule__BooleanLiteral__Group__1 )
+            // InternalETMap.g:2954:2: rule__BooleanLiteral__Group__0__Impl rule__BooleanLiteral__Group__1
             {
             pushFollow(FOLLOW_27);
             rule__BooleanLiteral__Group__0__Impl();
@@ -7883,21 +8140,21 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__BooleanLiteral__Group__0__Impl"
-    // InternalETMap.g:2870:1: rule__BooleanLiteral__Group__0__Impl : ( () ) ;
+    // InternalETMap.g:2961:1: rule__BooleanLiteral__Group__0__Impl : ( () ) ;
     public final void rule__BooleanLiteral__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:2874:1: ( ( () ) )
-            // InternalETMap.g:2875:1: ( () )
+            // InternalETMap.g:2965:1: ( ( () ) )
+            // InternalETMap.g:2966:1: ( () )
             {
-            // InternalETMap.g:2875:1: ( () )
-            // InternalETMap.g:2876:1: ()
+            // InternalETMap.g:2966:1: ( () )
+            // InternalETMap.g:2967:1: ()
             {
              before(grammarAccess.getBooleanLiteralAccess().getBooleanLiteralAction_0()); 
-            // InternalETMap.g:2877:1: ()
-            // InternalETMap.g:2879:1: 
+            // InternalETMap.g:2968:1: ()
+            // InternalETMap.g:2970:1: 
             {
             }
 
@@ -7920,14 +8177,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__BooleanLiteral__Group__1"
-    // InternalETMap.g:2889:1: rule__BooleanLiteral__Group__1 : rule__BooleanLiteral__Group__1__Impl ;
+    // InternalETMap.g:2980:1: rule__BooleanLiteral__Group__1 : rule__BooleanLiteral__Group__1__Impl ;
     public final void rule__BooleanLiteral__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:2893:1: ( rule__BooleanLiteral__Group__1__Impl )
-            // InternalETMap.g:2894:2: rule__BooleanLiteral__Group__1__Impl
+            // InternalETMap.g:2984:1: ( rule__BooleanLiteral__Group__1__Impl )
+            // InternalETMap.g:2985:2: rule__BooleanLiteral__Group__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__BooleanLiteral__Group__1__Impl();
@@ -7953,21 +8210,21 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__BooleanLiteral__Group__1__Impl"
-    // InternalETMap.g:2900:1: rule__BooleanLiteral__Group__1__Impl : ( ( rule__BooleanLiteral__Alternatives_1 ) ) ;
+    // InternalETMap.g:2991:1: rule__BooleanLiteral__Group__1__Impl : ( ( rule__BooleanLiteral__Alternatives_1 ) ) ;
     public final void rule__BooleanLiteral__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:2904:1: ( ( ( rule__BooleanLiteral__Alternatives_1 ) ) )
-            // InternalETMap.g:2905:1: ( ( rule__BooleanLiteral__Alternatives_1 ) )
+            // InternalETMap.g:2995:1: ( ( ( rule__BooleanLiteral__Alternatives_1 ) ) )
+            // InternalETMap.g:2996:1: ( ( rule__BooleanLiteral__Alternatives_1 ) )
             {
-            // InternalETMap.g:2905:1: ( ( rule__BooleanLiteral__Alternatives_1 ) )
-            // InternalETMap.g:2906:1: ( rule__BooleanLiteral__Alternatives_1 )
+            // InternalETMap.g:2996:1: ( ( rule__BooleanLiteral__Alternatives_1 ) )
+            // InternalETMap.g:2997:1: ( rule__BooleanLiteral__Alternatives_1 )
             {
              before(grammarAccess.getBooleanLiteralAccess().getAlternatives_1()); 
-            // InternalETMap.g:2907:1: ( rule__BooleanLiteral__Alternatives_1 )
-            // InternalETMap.g:2907:2: rule__BooleanLiteral__Alternatives_1
+            // InternalETMap.g:2998:1: ( rule__BooleanLiteral__Alternatives_1 )
+            // InternalETMap.g:2998:2: rule__BooleanLiteral__Alternatives_1
             {
             pushFollow(FOLLOW_2);
             rule__BooleanLiteral__Alternatives_1();
@@ -8000,14 +8257,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__RealLiteral__Group__0"
-    // InternalETMap.g:2921:1: rule__RealLiteral__Group__0 : rule__RealLiteral__Group__0__Impl rule__RealLiteral__Group__1 ;
+    // InternalETMap.g:3012:1: rule__RealLiteral__Group__0 : rule__RealLiteral__Group__0__Impl rule__RealLiteral__Group__1 ;
     public final void rule__RealLiteral__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:2925:1: ( rule__RealLiteral__Group__0__Impl rule__RealLiteral__Group__1 )
-            // InternalETMap.g:2926:2: rule__RealLiteral__Group__0__Impl rule__RealLiteral__Group__1
+            // InternalETMap.g:3016:1: ( rule__RealLiteral__Group__0__Impl rule__RealLiteral__Group__1 )
+            // InternalETMap.g:3017:2: rule__RealLiteral__Group__0__Impl rule__RealLiteral__Group__1
             {
             pushFollow(FOLLOW_28);
             rule__RealLiteral__Group__0__Impl();
@@ -8038,21 +8295,21 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__RealLiteral__Group__0__Impl"
-    // InternalETMap.g:2933:1: rule__RealLiteral__Group__0__Impl : ( () ) ;
+    // InternalETMap.g:3024:1: rule__RealLiteral__Group__0__Impl : ( () ) ;
     public final void rule__RealLiteral__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:2937:1: ( ( () ) )
-            // InternalETMap.g:2938:1: ( () )
+            // InternalETMap.g:3028:1: ( ( () ) )
+            // InternalETMap.g:3029:1: ( () )
             {
-            // InternalETMap.g:2938:1: ( () )
-            // InternalETMap.g:2939:1: ()
+            // InternalETMap.g:3029:1: ( () )
+            // InternalETMap.g:3030:1: ()
             {
              before(grammarAccess.getRealLiteralAccess().getRealLiteralAction_0()); 
-            // InternalETMap.g:2940:1: ()
-            // InternalETMap.g:2942:1: 
+            // InternalETMap.g:3031:1: ()
+            // InternalETMap.g:3033:1: 
             {
             }
 
@@ -8075,14 +8332,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__RealLiteral__Group__1"
-    // InternalETMap.g:2952:1: rule__RealLiteral__Group__1 : rule__RealLiteral__Group__1__Impl ;
+    // InternalETMap.g:3043:1: rule__RealLiteral__Group__1 : rule__RealLiteral__Group__1__Impl ;
     public final void rule__RealLiteral__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:2956:1: ( rule__RealLiteral__Group__1__Impl )
-            // InternalETMap.g:2957:2: rule__RealLiteral__Group__1__Impl
+            // InternalETMap.g:3047:1: ( rule__RealLiteral__Group__1__Impl )
+            // InternalETMap.g:3048:2: rule__RealLiteral__Group__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__RealLiteral__Group__1__Impl();
@@ -8108,21 +8365,21 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__RealLiteral__Group__1__Impl"
-    // InternalETMap.g:2963:1: rule__RealLiteral__Group__1__Impl : ( ( rule__RealLiteral__ValueAssignment_1 ) ) ;
+    // InternalETMap.g:3054:1: rule__RealLiteral__Group__1__Impl : ( ( rule__RealLiteral__ValueAssignment_1 ) ) ;
     public final void rule__RealLiteral__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:2967:1: ( ( ( rule__RealLiteral__ValueAssignment_1 ) ) )
-            // InternalETMap.g:2968:1: ( ( rule__RealLiteral__ValueAssignment_1 ) )
+            // InternalETMap.g:3058:1: ( ( ( rule__RealLiteral__ValueAssignment_1 ) ) )
+            // InternalETMap.g:3059:1: ( ( rule__RealLiteral__ValueAssignment_1 ) )
             {
-            // InternalETMap.g:2968:1: ( ( rule__RealLiteral__ValueAssignment_1 ) )
-            // InternalETMap.g:2969:1: ( rule__RealLiteral__ValueAssignment_1 )
+            // InternalETMap.g:3059:1: ( ( rule__RealLiteral__ValueAssignment_1 ) )
+            // InternalETMap.g:3060:1: ( rule__RealLiteral__ValueAssignment_1 )
             {
              before(grammarAccess.getRealLiteralAccess().getValueAssignment_1()); 
-            // InternalETMap.g:2970:1: ( rule__RealLiteral__ValueAssignment_1 )
-            // InternalETMap.g:2970:2: rule__RealLiteral__ValueAssignment_1
+            // InternalETMap.g:3061:1: ( rule__RealLiteral__ValueAssignment_1 )
+            // InternalETMap.g:3061:2: rule__RealLiteral__ValueAssignment_1
             {
             pushFollow(FOLLOW_2);
             rule__RealLiteral__ValueAssignment_1();
@@ -8155,14 +8412,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__IntLiteral__Group__0"
-    // InternalETMap.g:2984:1: rule__IntLiteral__Group__0 : rule__IntLiteral__Group__0__Impl rule__IntLiteral__Group__1 ;
+    // InternalETMap.g:3075:1: rule__IntLiteral__Group__0 : rule__IntLiteral__Group__0__Impl rule__IntLiteral__Group__1 ;
     public final void rule__IntLiteral__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:2988:1: ( rule__IntLiteral__Group__0__Impl rule__IntLiteral__Group__1 )
-            // InternalETMap.g:2989:2: rule__IntLiteral__Group__0__Impl rule__IntLiteral__Group__1
+            // InternalETMap.g:3079:1: ( rule__IntLiteral__Group__0__Impl rule__IntLiteral__Group__1 )
+            // InternalETMap.g:3080:2: rule__IntLiteral__Group__0__Impl rule__IntLiteral__Group__1
             {
             pushFollow(FOLLOW_28);
             rule__IntLiteral__Group__0__Impl();
@@ -8193,21 +8450,21 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__IntLiteral__Group__0__Impl"
-    // InternalETMap.g:2996:1: rule__IntLiteral__Group__0__Impl : ( () ) ;
+    // InternalETMap.g:3087:1: rule__IntLiteral__Group__0__Impl : ( () ) ;
     public final void rule__IntLiteral__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:3000:1: ( ( () ) )
-            // InternalETMap.g:3001:1: ( () )
+            // InternalETMap.g:3091:1: ( ( () ) )
+            // InternalETMap.g:3092:1: ( () )
             {
-            // InternalETMap.g:3001:1: ( () )
-            // InternalETMap.g:3002:1: ()
+            // InternalETMap.g:3092:1: ( () )
+            // InternalETMap.g:3093:1: ()
             {
              before(grammarAccess.getIntLiteralAccess().getIntLiteralAction_0()); 
-            // InternalETMap.g:3003:1: ()
-            // InternalETMap.g:3005:1: 
+            // InternalETMap.g:3094:1: ()
+            // InternalETMap.g:3096:1: 
             {
             }
 
@@ -8230,14 +8487,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__IntLiteral__Group__1"
-    // InternalETMap.g:3015:1: rule__IntLiteral__Group__1 : rule__IntLiteral__Group__1__Impl ;
+    // InternalETMap.g:3106:1: rule__IntLiteral__Group__1 : rule__IntLiteral__Group__1__Impl ;
     public final void rule__IntLiteral__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:3019:1: ( rule__IntLiteral__Group__1__Impl )
-            // InternalETMap.g:3020:2: rule__IntLiteral__Group__1__Impl
+            // InternalETMap.g:3110:1: ( rule__IntLiteral__Group__1__Impl )
+            // InternalETMap.g:3111:2: rule__IntLiteral__Group__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__IntLiteral__Group__1__Impl();
@@ -8263,21 +8520,21 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__IntLiteral__Group__1__Impl"
-    // InternalETMap.g:3026:1: rule__IntLiteral__Group__1__Impl : ( ( rule__IntLiteral__ValueAssignment_1 ) ) ;
+    // InternalETMap.g:3117:1: rule__IntLiteral__Group__1__Impl : ( ( rule__IntLiteral__ValueAssignment_1 ) ) ;
     public final void rule__IntLiteral__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:3030:1: ( ( ( rule__IntLiteral__ValueAssignment_1 ) ) )
-            // InternalETMap.g:3031:1: ( ( rule__IntLiteral__ValueAssignment_1 ) )
+            // InternalETMap.g:3121:1: ( ( ( rule__IntLiteral__ValueAssignment_1 ) ) )
+            // InternalETMap.g:3122:1: ( ( rule__IntLiteral__ValueAssignment_1 ) )
             {
-            // InternalETMap.g:3031:1: ( ( rule__IntLiteral__ValueAssignment_1 ) )
-            // InternalETMap.g:3032:1: ( rule__IntLiteral__ValueAssignment_1 )
+            // InternalETMap.g:3122:1: ( ( rule__IntLiteral__ValueAssignment_1 ) )
+            // InternalETMap.g:3123:1: ( rule__IntLiteral__ValueAssignment_1 )
             {
              before(grammarAccess.getIntLiteralAccess().getValueAssignment_1()); 
-            // InternalETMap.g:3033:1: ( rule__IntLiteral__ValueAssignment_1 )
-            // InternalETMap.g:3033:2: rule__IntLiteral__ValueAssignment_1
+            // InternalETMap.g:3124:1: ( rule__IntLiteral__ValueAssignment_1 )
+            // InternalETMap.g:3124:2: rule__IntLiteral__ValueAssignment_1
             {
             pushFollow(FOLLOW_2);
             rule__IntLiteral__ValueAssignment_1();
@@ -8310,14 +8567,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__StringLiteral__Group__0"
-    // InternalETMap.g:3047:1: rule__StringLiteral__Group__0 : rule__StringLiteral__Group__0__Impl rule__StringLiteral__Group__1 ;
+    // InternalETMap.g:3138:1: rule__StringLiteral__Group__0 : rule__StringLiteral__Group__0__Impl rule__StringLiteral__Group__1 ;
     public final void rule__StringLiteral__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:3051:1: ( rule__StringLiteral__Group__0__Impl rule__StringLiteral__Group__1 )
-            // InternalETMap.g:3052:2: rule__StringLiteral__Group__0__Impl rule__StringLiteral__Group__1
+            // InternalETMap.g:3142:1: ( rule__StringLiteral__Group__0__Impl rule__StringLiteral__Group__1 )
+            // InternalETMap.g:3143:2: rule__StringLiteral__Group__0__Impl rule__StringLiteral__Group__1
             {
             pushFollow(FOLLOW_14);
             rule__StringLiteral__Group__0__Impl();
@@ -8348,21 +8605,21 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__StringLiteral__Group__0__Impl"
-    // InternalETMap.g:3059:1: rule__StringLiteral__Group__0__Impl : ( () ) ;
+    // InternalETMap.g:3150:1: rule__StringLiteral__Group__0__Impl : ( () ) ;
     public final void rule__StringLiteral__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:3063:1: ( ( () ) )
-            // InternalETMap.g:3064:1: ( () )
+            // InternalETMap.g:3154:1: ( ( () ) )
+            // InternalETMap.g:3155:1: ( () )
             {
-            // InternalETMap.g:3064:1: ( () )
-            // InternalETMap.g:3065:1: ()
+            // InternalETMap.g:3155:1: ( () )
+            // InternalETMap.g:3156:1: ()
             {
              before(grammarAccess.getStringLiteralAccess().getStringLiteralAction_0()); 
-            // InternalETMap.g:3066:1: ()
-            // InternalETMap.g:3068:1: 
+            // InternalETMap.g:3157:1: ()
+            // InternalETMap.g:3159:1: 
             {
             }
 
@@ -8385,14 +8642,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__StringLiteral__Group__1"
-    // InternalETMap.g:3078:1: rule__StringLiteral__Group__1 : rule__StringLiteral__Group__1__Impl ;
+    // InternalETMap.g:3169:1: rule__StringLiteral__Group__1 : rule__StringLiteral__Group__1__Impl ;
     public final void rule__StringLiteral__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:3082:1: ( rule__StringLiteral__Group__1__Impl )
-            // InternalETMap.g:3083:2: rule__StringLiteral__Group__1__Impl
+            // InternalETMap.g:3173:1: ( rule__StringLiteral__Group__1__Impl )
+            // InternalETMap.g:3174:2: rule__StringLiteral__Group__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__StringLiteral__Group__1__Impl();
@@ -8418,21 +8675,21 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__StringLiteral__Group__1__Impl"
-    // InternalETMap.g:3089:1: rule__StringLiteral__Group__1__Impl : ( ( rule__StringLiteral__ValueAssignment_1 ) ) ;
+    // InternalETMap.g:3180:1: rule__StringLiteral__Group__1__Impl : ( ( rule__StringLiteral__ValueAssignment_1 ) ) ;
     public final void rule__StringLiteral__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:3093:1: ( ( ( rule__StringLiteral__ValueAssignment_1 ) ) )
-            // InternalETMap.g:3094:1: ( ( rule__StringLiteral__ValueAssignment_1 ) )
+            // InternalETMap.g:3184:1: ( ( ( rule__StringLiteral__ValueAssignment_1 ) ) )
+            // InternalETMap.g:3185:1: ( ( rule__StringLiteral__ValueAssignment_1 ) )
             {
-            // InternalETMap.g:3094:1: ( ( rule__StringLiteral__ValueAssignment_1 ) )
-            // InternalETMap.g:3095:1: ( rule__StringLiteral__ValueAssignment_1 )
+            // InternalETMap.g:3185:1: ( ( rule__StringLiteral__ValueAssignment_1 ) )
+            // InternalETMap.g:3186:1: ( rule__StringLiteral__ValueAssignment_1 )
             {
              before(grammarAccess.getStringLiteralAccess().getValueAssignment_1()); 
-            // InternalETMap.g:3096:1: ( rule__StringLiteral__ValueAssignment_1 )
-            // InternalETMap.g:3096:2: rule__StringLiteral__ValueAssignment_1
+            // InternalETMap.g:3187:1: ( rule__StringLiteral__ValueAssignment_1 )
+            // InternalETMap.g:3187:2: rule__StringLiteral__ValueAssignment_1
             {
             pushFollow(FOLLOW_2);
             rule__StringLiteral__ValueAssignment_1();
@@ -8465,14 +8722,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Integer__Group_0__0"
-    // InternalETMap.g:3110:1: rule__Integer__Group_0__0 : rule__Integer__Group_0__0__Impl rule__Integer__Group_0__1 ;
+    // InternalETMap.g:3201:1: rule__Integer__Group_0__0 : rule__Integer__Group_0__0__Impl rule__Integer__Group_0__1 ;
     public final void rule__Integer__Group_0__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:3114:1: ( rule__Integer__Group_0__0__Impl rule__Integer__Group_0__1 )
-            // InternalETMap.g:3115:2: rule__Integer__Group_0__0__Impl rule__Integer__Group_0__1
+            // InternalETMap.g:3205:1: ( rule__Integer__Group_0__0__Impl rule__Integer__Group_0__1 )
+            // InternalETMap.g:3206:2: rule__Integer__Group_0__0__Impl rule__Integer__Group_0__1
             {
             pushFollow(FOLLOW_29);
             rule__Integer__Group_0__0__Impl();
@@ -8503,29 +8760,29 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Integer__Group_0__0__Impl"
-    // InternalETMap.g:3122:1: rule__Integer__Group_0__0__Impl : ( ( rule__Integer__Alternatives_0_0 )? ) ;
+    // InternalETMap.g:3213:1: rule__Integer__Group_0__0__Impl : ( ( rule__Integer__Alternatives_0_0 )? ) ;
     public final void rule__Integer__Group_0__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:3126:1: ( ( ( rule__Integer__Alternatives_0_0 )? ) )
-            // InternalETMap.g:3127:1: ( ( rule__Integer__Alternatives_0_0 )? )
+            // InternalETMap.g:3217:1: ( ( ( rule__Integer__Alternatives_0_0 )? ) )
+            // InternalETMap.g:3218:1: ( ( rule__Integer__Alternatives_0_0 )? )
             {
-            // InternalETMap.g:3127:1: ( ( rule__Integer__Alternatives_0_0 )? )
-            // InternalETMap.g:3128:1: ( rule__Integer__Alternatives_0_0 )?
+            // InternalETMap.g:3218:1: ( ( rule__Integer__Alternatives_0_0 )? )
+            // InternalETMap.g:3219:1: ( rule__Integer__Alternatives_0_0 )?
             {
              before(grammarAccess.getIntegerAccess().getAlternatives_0_0()); 
-            // InternalETMap.g:3129:1: ( rule__Integer__Alternatives_0_0 )?
-            int alt24=2;
-            int LA24_0 = input.LA(1);
+            // InternalETMap.g:3220:1: ( rule__Integer__Alternatives_0_0 )?
+            int alt25=2;
+            int LA25_0 = input.LA(1);
 
-            if ( ((LA24_0>=15 && LA24_0<=16)) ) {
-                alt24=1;
+            if ( ((LA25_0>=15 && LA25_0<=16)) ) {
+                alt25=1;
             }
-            switch (alt24) {
+            switch (alt25) {
                 case 1 :
-                    // InternalETMap.g:3129:2: rule__Integer__Alternatives_0_0
+                    // InternalETMap.g:3220:2: rule__Integer__Alternatives_0_0
                     {
                     pushFollow(FOLLOW_2);
                     rule__Integer__Alternatives_0_0();
@@ -8561,14 +8818,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Integer__Group_0__1"
-    // InternalETMap.g:3139:1: rule__Integer__Group_0__1 : rule__Integer__Group_0__1__Impl ;
+    // InternalETMap.g:3230:1: rule__Integer__Group_0__1 : rule__Integer__Group_0__1__Impl ;
     public final void rule__Integer__Group_0__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:3143:1: ( rule__Integer__Group_0__1__Impl )
-            // InternalETMap.g:3144:2: rule__Integer__Group_0__1__Impl
+            // InternalETMap.g:3234:1: ( rule__Integer__Group_0__1__Impl )
+            // InternalETMap.g:3235:2: rule__Integer__Group_0__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__Integer__Group_0__1__Impl();
@@ -8594,17 +8851,17 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Integer__Group_0__1__Impl"
-    // InternalETMap.g:3150:1: rule__Integer__Group_0__1__Impl : ( RULE_INT ) ;
+    // InternalETMap.g:3241:1: rule__Integer__Group_0__1__Impl : ( RULE_INT ) ;
     public final void rule__Integer__Group_0__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:3154:1: ( ( RULE_INT ) )
-            // InternalETMap.g:3155:1: ( RULE_INT )
+            // InternalETMap.g:3245:1: ( ( RULE_INT ) )
+            // InternalETMap.g:3246:1: ( RULE_INT )
             {
-            // InternalETMap.g:3155:1: ( RULE_INT )
-            // InternalETMap.g:3156:1: RULE_INT
+            // InternalETMap.g:3246:1: ( RULE_INT )
+            // InternalETMap.g:3247:1: RULE_INT
             {
              before(grammarAccess.getIntegerAccess().getINTTerminalRuleCall_0_1()); 
             match(input,RULE_INT,FOLLOW_2); 
@@ -8631,14 +8888,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Decimal__Group__0"
-    // InternalETMap.g:3171:1: rule__Decimal__Group__0 : rule__Decimal__Group__0__Impl rule__Decimal__Group__1 ;
+    // InternalETMap.g:3262:1: rule__Decimal__Group__0 : rule__Decimal__Group__0__Impl rule__Decimal__Group__1 ;
     public final void rule__Decimal__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:3175:1: ( rule__Decimal__Group__0__Impl rule__Decimal__Group__1 )
-            // InternalETMap.g:3176:2: rule__Decimal__Group__0__Impl rule__Decimal__Group__1
+            // InternalETMap.g:3266:1: ( rule__Decimal__Group__0__Impl rule__Decimal__Group__1 )
+            // InternalETMap.g:3267:2: rule__Decimal__Group__0__Impl rule__Decimal__Group__1
             {
             pushFollow(FOLLOW_29);
             rule__Decimal__Group__0__Impl();
@@ -8669,29 +8926,29 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Decimal__Group__0__Impl"
-    // InternalETMap.g:3183:1: rule__Decimal__Group__0__Impl : ( ( rule__Decimal__Alternatives_0 )? ) ;
+    // InternalETMap.g:3274:1: rule__Decimal__Group__0__Impl : ( ( rule__Decimal__Alternatives_0 )? ) ;
     public final void rule__Decimal__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:3187:1: ( ( ( rule__Decimal__Alternatives_0 )? ) )
-            // InternalETMap.g:3188:1: ( ( rule__Decimal__Alternatives_0 )? )
+            // InternalETMap.g:3278:1: ( ( ( rule__Decimal__Alternatives_0 )? ) )
+            // InternalETMap.g:3279:1: ( ( rule__Decimal__Alternatives_0 )? )
             {
-            // InternalETMap.g:3188:1: ( ( rule__Decimal__Alternatives_0 )? )
-            // InternalETMap.g:3189:1: ( rule__Decimal__Alternatives_0 )?
+            // InternalETMap.g:3279:1: ( ( rule__Decimal__Alternatives_0 )? )
+            // InternalETMap.g:3280:1: ( rule__Decimal__Alternatives_0 )?
             {
              before(grammarAccess.getDecimalAccess().getAlternatives_0()); 
-            // InternalETMap.g:3190:1: ( rule__Decimal__Alternatives_0 )?
-            int alt25=2;
-            int LA25_0 = input.LA(1);
+            // InternalETMap.g:3281:1: ( rule__Decimal__Alternatives_0 )?
+            int alt26=2;
+            int LA26_0 = input.LA(1);
 
-            if ( ((LA25_0>=15 && LA25_0<=16)) ) {
-                alt25=1;
+            if ( ((LA26_0>=15 && LA26_0<=16)) ) {
+                alt26=1;
             }
-            switch (alt25) {
+            switch (alt26) {
                 case 1 :
-                    // InternalETMap.g:3190:2: rule__Decimal__Alternatives_0
+                    // InternalETMap.g:3281:2: rule__Decimal__Alternatives_0
                     {
                     pushFollow(FOLLOW_2);
                     rule__Decimal__Alternatives_0();
@@ -8727,14 +8984,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Decimal__Group__1"
-    // InternalETMap.g:3200:1: rule__Decimal__Group__1 : rule__Decimal__Group__1__Impl rule__Decimal__Group__2 ;
+    // InternalETMap.g:3291:1: rule__Decimal__Group__1 : rule__Decimal__Group__1__Impl rule__Decimal__Group__2 ;
     public final void rule__Decimal__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:3204:1: ( rule__Decimal__Group__1__Impl rule__Decimal__Group__2 )
-            // InternalETMap.g:3205:2: rule__Decimal__Group__1__Impl rule__Decimal__Group__2
+            // InternalETMap.g:3295:1: ( rule__Decimal__Group__1__Impl rule__Decimal__Group__2 )
+            // InternalETMap.g:3296:2: rule__Decimal__Group__1__Impl rule__Decimal__Group__2
             {
             pushFollow(FOLLOW_30);
             rule__Decimal__Group__1__Impl();
@@ -8765,17 +9022,17 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Decimal__Group__1__Impl"
-    // InternalETMap.g:3212:1: rule__Decimal__Group__1__Impl : ( RULE_INT ) ;
+    // InternalETMap.g:3303:1: rule__Decimal__Group__1__Impl : ( RULE_INT ) ;
     public final void rule__Decimal__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:3216:1: ( ( RULE_INT ) )
-            // InternalETMap.g:3217:1: ( RULE_INT )
+            // InternalETMap.g:3307:1: ( ( RULE_INT ) )
+            // InternalETMap.g:3308:1: ( RULE_INT )
             {
-            // InternalETMap.g:3217:1: ( RULE_INT )
-            // InternalETMap.g:3218:1: RULE_INT
+            // InternalETMap.g:3308:1: ( RULE_INT )
+            // InternalETMap.g:3309:1: RULE_INT
             {
              before(grammarAccess.getDecimalAccess().getINTTerminalRuleCall_1()); 
             match(input,RULE_INT,FOLLOW_2); 
@@ -8802,14 +9059,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Decimal__Group__2"
-    // InternalETMap.g:3229:1: rule__Decimal__Group__2 : rule__Decimal__Group__2__Impl rule__Decimal__Group__3 ;
+    // InternalETMap.g:3320:1: rule__Decimal__Group__2 : rule__Decimal__Group__2__Impl rule__Decimal__Group__3 ;
     public final void rule__Decimal__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:3233:1: ( rule__Decimal__Group__2__Impl rule__Decimal__Group__3 )
-            // InternalETMap.g:3234:2: rule__Decimal__Group__2__Impl rule__Decimal__Group__3
+            // InternalETMap.g:3324:1: ( rule__Decimal__Group__2__Impl rule__Decimal__Group__3 )
+            // InternalETMap.g:3325:2: rule__Decimal__Group__2__Impl rule__Decimal__Group__3
             {
             pushFollow(FOLLOW_31);
             rule__Decimal__Group__2__Impl();
@@ -8840,20 +9097,20 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Decimal__Group__2__Impl"
-    // InternalETMap.g:3241:1: rule__Decimal__Group__2__Impl : ( '.' ) ;
+    // InternalETMap.g:3332:1: rule__Decimal__Group__2__Impl : ( '.' ) ;
     public final void rule__Decimal__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:3245:1: ( ( '.' ) )
-            // InternalETMap.g:3246:1: ( '.' )
+            // InternalETMap.g:3336:1: ( ( '.' ) )
+            // InternalETMap.g:3337:1: ( '.' )
             {
-            // InternalETMap.g:3246:1: ( '.' )
-            // InternalETMap.g:3247:1: '.'
+            // InternalETMap.g:3337:1: ( '.' )
+            // InternalETMap.g:3338:1: '.'
             {
              before(grammarAccess.getDecimalAccess().getFullStopKeyword_2()); 
-            match(input,39,FOLLOW_2); 
+            match(input,40,FOLLOW_2); 
              after(grammarAccess.getDecimalAccess().getFullStopKeyword_2()); 
 
             }
@@ -8877,14 +9134,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Decimal__Group__3"
-    // InternalETMap.g:3260:1: rule__Decimal__Group__3 : rule__Decimal__Group__3__Impl ;
+    // InternalETMap.g:3351:1: rule__Decimal__Group__3 : rule__Decimal__Group__3__Impl ;
     public final void rule__Decimal__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:3264:1: ( rule__Decimal__Group__3__Impl )
-            // InternalETMap.g:3265:2: rule__Decimal__Group__3__Impl
+            // InternalETMap.g:3355:1: ( rule__Decimal__Group__3__Impl )
+            // InternalETMap.g:3356:2: rule__Decimal__Group__3__Impl
             {
             pushFollow(FOLLOW_2);
             rule__Decimal__Group__3__Impl();
@@ -8910,17 +9167,17 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Decimal__Group__3__Impl"
-    // InternalETMap.g:3271:1: rule__Decimal__Group__3__Impl : ( RULE_INT ) ;
+    // InternalETMap.g:3362:1: rule__Decimal__Group__3__Impl : ( RULE_INT ) ;
     public final void rule__Decimal__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:3275:1: ( ( RULE_INT ) )
-            // InternalETMap.g:3276:1: ( RULE_INT )
+            // InternalETMap.g:3366:1: ( ( RULE_INT ) )
+            // InternalETMap.g:3367:1: ( RULE_INT )
             {
-            // InternalETMap.g:3276:1: ( RULE_INT )
-            // InternalETMap.g:3277:1: RULE_INT
+            // InternalETMap.g:3367:1: ( RULE_INT )
+            // InternalETMap.g:3368:1: RULE_INT
             {
              before(grammarAccess.getDecimalAccess().getINTTerminalRuleCall_3()); 
             match(input,RULE_INT,FOLLOW_2); 
@@ -8947,14 +9204,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__DecimalExp__Group__0"
-    // InternalETMap.g:3296:1: rule__DecimalExp__Group__0 : rule__DecimalExp__Group__0__Impl rule__DecimalExp__Group__1 ;
+    // InternalETMap.g:3387:1: rule__DecimalExp__Group__0 : rule__DecimalExp__Group__0__Impl rule__DecimalExp__Group__1 ;
     public final void rule__DecimalExp__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:3300:1: ( rule__DecimalExp__Group__0__Impl rule__DecimalExp__Group__1 )
-            // InternalETMap.g:3301:2: rule__DecimalExp__Group__0__Impl rule__DecimalExp__Group__1
+            // InternalETMap.g:3391:1: ( rule__DecimalExp__Group__0__Impl rule__DecimalExp__Group__1 )
+            // InternalETMap.g:3392:2: rule__DecimalExp__Group__0__Impl rule__DecimalExp__Group__1
             {
             pushFollow(FOLLOW_28);
             rule__DecimalExp__Group__0__Impl();
@@ -8985,29 +9242,29 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__DecimalExp__Group__0__Impl"
-    // InternalETMap.g:3308:1: rule__DecimalExp__Group__0__Impl : ( ( rule__DecimalExp__Alternatives_0 )? ) ;
+    // InternalETMap.g:3399:1: rule__DecimalExp__Group__0__Impl : ( ( rule__DecimalExp__Alternatives_0 )? ) ;
     public final void rule__DecimalExp__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:3312:1: ( ( ( rule__DecimalExp__Alternatives_0 )? ) )
-            // InternalETMap.g:3313:1: ( ( rule__DecimalExp__Alternatives_0 )? )
+            // InternalETMap.g:3403:1: ( ( ( rule__DecimalExp__Alternatives_0 )? ) )
+            // InternalETMap.g:3404:1: ( ( rule__DecimalExp__Alternatives_0 )? )
             {
-            // InternalETMap.g:3313:1: ( ( rule__DecimalExp__Alternatives_0 )? )
-            // InternalETMap.g:3314:1: ( rule__DecimalExp__Alternatives_0 )?
+            // InternalETMap.g:3404:1: ( ( rule__DecimalExp__Alternatives_0 )? )
+            // InternalETMap.g:3405:1: ( rule__DecimalExp__Alternatives_0 )?
             {
              before(grammarAccess.getDecimalExpAccess().getAlternatives_0()); 
-            // InternalETMap.g:3315:1: ( rule__DecimalExp__Alternatives_0 )?
-            int alt26=2;
-            int LA26_0 = input.LA(1);
+            // InternalETMap.g:3406:1: ( rule__DecimalExp__Alternatives_0 )?
+            int alt27=2;
+            int LA27_0 = input.LA(1);
 
-            if ( ((LA26_0>=15 && LA26_0<=16)) ) {
-                alt26=1;
+            if ( ((LA27_0>=15 && LA27_0<=16)) ) {
+                alt27=1;
             }
-            switch (alt26) {
+            switch (alt27) {
                 case 1 :
-                    // InternalETMap.g:3315:2: rule__DecimalExp__Alternatives_0
+                    // InternalETMap.g:3406:2: rule__DecimalExp__Alternatives_0
                     {
                     pushFollow(FOLLOW_2);
                     rule__DecimalExp__Alternatives_0();
@@ -9043,14 +9300,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__DecimalExp__Group__1"
-    // InternalETMap.g:3325:1: rule__DecimalExp__Group__1 : rule__DecimalExp__Group__1__Impl rule__DecimalExp__Group__2 ;
+    // InternalETMap.g:3416:1: rule__DecimalExp__Group__1 : rule__DecimalExp__Group__1__Impl rule__DecimalExp__Group__2 ;
     public final void rule__DecimalExp__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:3329:1: ( rule__DecimalExp__Group__1__Impl rule__DecimalExp__Group__2 )
-            // InternalETMap.g:3330:2: rule__DecimalExp__Group__1__Impl rule__DecimalExp__Group__2
+            // InternalETMap.g:3420:1: ( rule__DecimalExp__Group__1__Impl rule__DecimalExp__Group__2 )
+            // InternalETMap.g:3421:2: rule__DecimalExp__Group__1__Impl rule__DecimalExp__Group__2
             {
             pushFollow(FOLLOW_30);
             rule__DecimalExp__Group__1__Impl();
@@ -9081,17 +9338,17 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__DecimalExp__Group__1__Impl"
-    // InternalETMap.g:3337:1: rule__DecimalExp__Group__1__Impl : ( RULE_INT ) ;
+    // InternalETMap.g:3428:1: rule__DecimalExp__Group__1__Impl : ( RULE_INT ) ;
     public final void rule__DecimalExp__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:3341:1: ( ( RULE_INT ) )
-            // InternalETMap.g:3342:1: ( RULE_INT )
+            // InternalETMap.g:3432:1: ( ( RULE_INT ) )
+            // InternalETMap.g:3433:1: ( RULE_INT )
             {
-            // InternalETMap.g:3342:1: ( RULE_INT )
-            // InternalETMap.g:3343:1: RULE_INT
+            // InternalETMap.g:3433:1: ( RULE_INT )
+            // InternalETMap.g:3434:1: RULE_INT
             {
              before(grammarAccess.getDecimalExpAccess().getINTTerminalRuleCall_1()); 
             match(input,RULE_INT,FOLLOW_2); 
@@ -9118,14 +9375,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__DecimalExp__Group__2"
-    // InternalETMap.g:3354:1: rule__DecimalExp__Group__2 : rule__DecimalExp__Group__2__Impl rule__DecimalExp__Group__3 ;
+    // InternalETMap.g:3445:1: rule__DecimalExp__Group__2 : rule__DecimalExp__Group__2__Impl rule__DecimalExp__Group__3 ;
     public final void rule__DecimalExp__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:3358:1: ( rule__DecimalExp__Group__2__Impl rule__DecimalExp__Group__3 )
-            // InternalETMap.g:3359:2: rule__DecimalExp__Group__2__Impl rule__DecimalExp__Group__3
+            // InternalETMap.g:3449:1: ( rule__DecimalExp__Group__2__Impl rule__DecimalExp__Group__3 )
+            // InternalETMap.g:3450:2: rule__DecimalExp__Group__2__Impl rule__DecimalExp__Group__3
             {
             pushFollow(FOLLOW_31);
             rule__DecimalExp__Group__2__Impl();
@@ -9156,20 +9413,20 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__DecimalExp__Group__2__Impl"
-    // InternalETMap.g:3366:1: rule__DecimalExp__Group__2__Impl : ( '.' ) ;
+    // InternalETMap.g:3457:1: rule__DecimalExp__Group__2__Impl : ( '.' ) ;
     public final void rule__DecimalExp__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:3370:1: ( ( '.' ) )
-            // InternalETMap.g:3371:1: ( '.' )
+            // InternalETMap.g:3461:1: ( ( '.' ) )
+            // InternalETMap.g:3462:1: ( '.' )
             {
-            // InternalETMap.g:3371:1: ( '.' )
-            // InternalETMap.g:3372:1: '.'
+            // InternalETMap.g:3462:1: ( '.' )
+            // InternalETMap.g:3463:1: '.'
             {
              before(grammarAccess.getDecimalExpAccess().getFullStopKeyword_2()); 
-            match(input,39,FOLLOW_2); 
+            match(input,40,FOLLOW_2); 
              after(grammarAccess.getDecimalExpAccess().getFullStopKeyword_2()); 
 
             }
@@ -9193,14 +9450,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__DecimalExp__Group__3"
-    // InternalETMap.g:3385:1: rule__DecimalExp__Group__3 : rule__DecimalExp__Group__3__Impl rule__DecimalExp__Group__4 ;
+    // InternalETMap.g:3476:1: rule__DecimalExp__Group__3 : rule__DecimalExp__Group__3__Impl rule__DecimalExp__Group__4 ;
     public final void rule__DecimalExp__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:3389:1: ( rule__DecimalExp__Group__3__Impl rule__DecimalExp__Group__4 )
-            // InternalETMap.g:3390:2: rule__DecimalExp__Group__3__Impl rule__DecimalExp__Group__4
+            // InternalETMap.g:3480:1: ( rule__DecimalExp__Group__3__Impl rule__DecimalExp__Group__4 )
+            // InternalETMap.g:3481:2: rule__DecimalExp__Group__3__Impl rule__DecimalExp__Group__4
             {
             pushFollow(FOLLOW_32);
             rule__DecimalExp__Group__3__Impl();
@@ -9231,17 +9488,17 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__DecimalExp__Group__3__Impl"
-    // InternalETMap.g:3397:1: rule__DecimalExp__Group__3__Impl : ( RULE_INT ) ;
+    // InternalETMap.g:3488:1: rule__DecimalExp__Group__3__Impl : ( RULE_INT ) ;
     public final void rule__DecimalExp__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:3401:1: ( ( RULE_INT ) )
-            // InternalETMap.g:3402:1: ( RULE_INT )
+            // InternalETMap.g:3492:1: ( ( RULE_INT ) )
+            // InternalETMap.g:3493:1: ( RULE_INT )
             {
-            // InternalETMap.g:3402:1: ( RULE_INT )
-            // InternalETMap.g:3403:1: RULE_INT
+            // InternalETMap.g:3493:1: ( RULE_INT )
+            // InternalETMap.g:3494:1: RULE_INT
             {
              before(grammarAccess.getDecimalExpAccess().getINTTerminalRuleCall_3()); 
             match(input,RULE_INT,FOLLOW_2); 
@@ -9268,14 +9525,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__DecimalExp__Group__4"
-    // InternalETMap.g:3414:1: rule__DecimalExp__Group__4 : rule__DecimalExp__Group__4__Impl rule__DecimalExp__Group__5 ;
+    // InternalETMap.g:3505:1: rule__DecimalExp__Group__4 : rule__DecimalExp__Group__4__Impl rule__DecimalExp__Group__5 ;
     public final void rule__DecimalExp__Group__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:3418:1: ( rule__DecimalExp__Group__4__Impl rule__DecimalExp__Group__5 )
-            // InternalETMap.g:3419:2: rule__DecimalExp__Group__4__Impl rule__DecimalExp__Group__5
+            // InternalETMap.g:3509:1: ( rule__DecimalExp__Group__4__Impl rule__DecimalExp__Group__5 )
+            // InternalETMap.g:3510:2: rule__DecimalExp__Group__4__Impl rule__DecimalExp__Group__5
             {
             pushFollow(FOLLOW_29);
             rule__DecimalExp__Group__4__Impl();
@@ -9306,21 +9563,21 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__DecimalExp__Group__4__Impl"
-    // InternalETMap.g:3426:1: rule__DecimalExp__Group__4__Impl : ( ( rule__DecimalExp__Alternatives_4 ) ) ;
+    // InternalETMap.g:3517:1: rule__DecimalExp__Group__4__Impl : ( ( rule__DecimalExp__Alternatives_4 ) ) ;
     public final void rule__DecimalExp__Group__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:3430:1: ( ( ( rule__DecimalExp__Alternatives_4 ) ) )
-            // InternalETMap.g:3431:1: ( ( rule__DecimalExp__Alternatives_4 ) )
+            // InternalETMap.g:3521:1: ( ( ( rule__DecimalExp__Alternatives_4 ) ) )
+            // InternalETMap.g:3522:1: ( ( rule__DecimalExp__Alternatives_4 ) )
             {
-            // InternalETMap.g:3431:1: ( ( rule__DecimalExp__Alternatives_4 ) )
-            // InternalETMap.g:3432:1: ( rule__DecimalExp__Alternatives_4 )
+            // InternalETMap.g:3522:1: ( ( rule__DecimalExp__Alternatives_4 ) )
+            // InternalETMap.g:3523:1: ( rule__DecimalExp__Alternatives_4 )
             {
              before(grammarAccess.getDecimalExpAccess().getAlternatives_4()); 
-            // InternalETMap.g:3433:1: ( rule__DecimalExp__Alternatives_4 )
-            // InternalETMap.g:3433:2: rule__DecimalExp__Alternatives_4
+            // InternalETMap.g:3524:1: ( rule__DecimalExp__Alternatives_4 )
+            // InternalETMap.g:3524:2: rule__DecimalExp__Alternatives_4
             {
             pushFollow(FOLLOW_2);
             rule__DecimalExp__Alternatives_4();
@@ -9353,14 +9610,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__DecimalExp__Group__5"
-    // InternalETMap.g:3443:1: rule__DecimalExp__Group__5 : rule__DecimalExp__Group__5__Impl rule__DecimalExp__Group__6 ;
+    // InternalETMap.g:3534:1: rule__DecimalExp__Group__5 : rule__DecimalExp__Group__5__Impl rule__DecimalExp__Group__6 ;
     public final void rule__DecimalExp__Group__5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:3447:1: ( rule__DecimalExp__Group__5__Impl rule__DecimalExp__Group__6 )
-            // InternalETMap.g:3448:2: rule__DecimalExp__Group__5__Impl rule__DecimalExp__Group__6
+            // InternalETMap.g:3538:1: ( rule__DecimalExp__Group__5__Impl rule__DecimalExp__Group__6 )
+            // InternalETMap.g:3539:2: rule__DecimalExp__Group__5__Impl rule__DecimalExp__Group__6
             {
             pushFollow(FOLLOW_29);
             rule__DecimalExp__Group__5__Impl();
@@ -9391,29 +9648,29 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__DecimalExp__Group__5__Impl"
-    // InternalETMap.g:3455:1: rule__DecimalExp__Group__5__Impl : ( ( rule__DecimalExp__Alternatives_5 )? ) ;
+    // InternalETMap.g:3546:1: rule__DecimalExp__Group__5__Impl : ( ( rule__DecimalExp__Alternatives_5 )? ) ;
     public final void rule__DecimalExp__Group__5__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:3459:1: ( ( ( rule__DecimalExp__Alternatives_5 )? ) )
-            // InternalETMap.g:3460:1: ( ( rule__DecimalExp__Alternatives_5 )? )
+            // InternalETMap.g:3550:1: ( ( ( rule__DecimalExp__Alternatives_5 )? ) )
+            // InternalETMap.g:3551:1: ( ( rule__DecimalExp__Alternatives_5 )? )
             {
-            // InternalETMap.g:3460:1: ( ( rule__DecimalExp__Alternatives_5 )? )
-            // InternalETMap.g:3461:1: ( rule__DecimalExp__Alternatives_5 )?
+            // InternalETMap.g:3551:1: ( ( rule__DecimalExp__Alternatives_5 )? )
+            // InternalETMap.g:3552:1: ( rule__DecimalExp__Alternatives_5 )?
             {
              before(grammarAccess.getDecimalExpAccess().getAlternatives_5()); 
-            // InternalETMap.g:3462:1: ( rule__DecimalExp__Alternatives_5 )?
-            int alt27=2;
-            int LA27_0 = input.LA(1);
+            // InternalETMap.g:3553:1: ( rule__DecimalExp__Alternatives_5 )?
+            int alt28=2;
+            int LA28_0 = input.LA(1);
 
-            if ( ((LA27_0>=15 && LA27_0<=16)) ) {
-                alt27=1;
+            if ( ((LA28_0>=15 && LA28_0<=16)) ) {
+                alt28=1;
             }
-            switch (alt27) {
+            switch (alt28) {
                 case 1 :
-                    // InternalETMap.g:3462:2: rule__DecimalExp__Alternatives_5
+                    // InternalETMap.g:3553:2: rule__DecimalExp__Alternatives_5
                     {
                     pushFollow(FOLLOW_2);
                     rule__DecimalExp__Alternatives_5();
@@ -9449,14 +9706,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__DecimalExp__Group__6"
-    // InternalETMap.g:3472:1: rule__DecimalExp__Group__6 : rule__DecimalExp__Group__6__Impl ;
+    // InternalETMap.g:3563:1: rule__DecimalExp__Group__6 : rule__DecimalExp__Group__6__Impl ;
     public final void rule__DecimalExp__Group__6() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:3476:1: ( rule__DecimalExp__Group__6__Impl )
-            // InternalETMap.g:3477:2: rule__DecimalExp__Group__6__Impl
+            // InternalETMap.g:3567:1: ( rule__DecimalExp__Group__6__Impl )
+            // InternalETMap.g:3568:2: rule__DecimalExp__Group__6__Impl
             {
             pushFollow(FOLLOW_2);
             rule__DecimalExp__Group__6__Impl();
@@ -9482,17 +9739,17 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__DecimalExp__Group__6__Impl"
-    // InternalETMap.g:3483:1: rule__DecimalExp__Group__6__Impl : ( RULE_INT ) ;
+    // InternalETMap.g:3574:1: rule__DecimalExp__Group__6__Impl : ( RULE_INT ) ;
     public final void rule__DecimalExp__Group__6__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:3487:1: ( ( RULE_INT ) )
-            // InternalETMap.g:3488:1: ( RULE_INT )
+            // InternalETMap.g:3578:1: ( ( RULE_INT ) )
+            // InternalETMap.g:3579:1: ( RULE_INT )
             {
-            // InternalETMap.g:3488:1: ( RULE_INT )
-            // InternalETMap.g:3489:1: RULE_INT
+            // InternalETMap.g:3579:1: ( RULE_INT )
+            // InternalETMap.g:3580:1: RULE_INT
             {
              before(grammarAccess.getDecimalExpAccess().getINTTerminalRuleCall_6()); 
             match(input,RULE_INT,FOLLOW_2); 
@@ -9519,14 +9776,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__FQN__Group__0"
-    // InternalETMap.g:3514:1: rule__FQN__Group__0 : rule__FQN__Group__0__Impl rule__FQN__Group__1 ;
+    // InternalETMap.g:3605:1: rule__FQN__Group__0 : rule__FQN__Group__0__Impl rule__FQN__Group__1 ;
     public final void rule__FQN__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:3518:1: ( rule__FQN__Group__0__Impl rule__FQN__Group__1 )
-            // InternalETMap.g:3519:2: rule__FQN__Group__0__Impl rule__FQN__Group__1
+            // InternalETMap.g:3609:1: ( rule__FQN__Group__0__Impl rule__FQN__Group__1 )
+            // InternalETMap.g:3610:2: rule__FQN__Group__0__Impl rule__FQN__Group__1
             {
             pushFollow(FOLLOW_30);
             rule__FQN__Group__0__Impl();
@@ -9557,17 +9814,17 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__FQN__Group__0__Impl"
-    // InternalETMap.g:3526:1: rule__FQN__Group__0__Impl : ( RULE_ID ) ;
+    // InternalETMap.g:3617:1: rule__FQN__Group__0__Impl : ( RULE_ID ) ;
     public final void rule__FQN__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:3530:1: ( ( RULE_ID ) )
-            // InternalETMap.g:3531:1: ( RULE_ID )
+            // InternalETMap.g:3621:1: ( ( RULE_ID ) )
+            // InternalETMap.g:3622:1: ( RULE_ID )
             {
-            // InternalETMap.g:3531:1: ( RULE_ID )
-            // InternalETMap.g:3532:1: RULE_ID
+            // InternalETMap.g:3622:1: ( RULE_ID )
+            // InternalETMap.g:3623:1: RULE_ID
             {
              before(grammarAccess.getFQNAccess().getIDTerminalRuleCall_0()); 
             match(input,RULE_ID,FOLLOW_2); 
@@ -9594,14 +9851,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__FQN__Group__1"
-    // InternalETMap.g:3543:1: rule__FQN__Group__1 : rule__FQN__Group__1__Impl ;
+    // InternalETMap.g:3634:1: rule__FQN__Group__1 : rule__FQN__Group__1__Impl ;
     public final void rule__FQN__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:3547:1: ( rule__FQN__Group__1__Impl )
-            // InternalETMap.g:3548:2: rule__FQN__Group__1__Impl
+            // InternalETMap.g:3638:1: ( rule__FQN__Group__1__Impl )
+            // InternalETMap.g:3639:2: rule__FQN__Group__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__FQN__Group__1__Impl();
@@ -9627,33 +9884,33 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__FQN__Group__1__Impl"
-    // InternalETMap.g:3554:1: rule__FQN__Group__1__Impl : ( ( rule__FQN__Group_1__0 )* ) ;
+    // InternalETMap.g:3645:1: rule__FQN__Group__1__Impl : ( ( rule__FQN__Group_1__0 )* ) ;
     public final void rule__FQN__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:3558:1: ( ( ( rule__FQN__Group_1__0 )* ) )
-            // InternalETMap.g:3559:1: ( ( rule__FQN__Group_1__0 )* )
+            // InternalETMap.g:3649:1: ( ( ( rule__FQN__Group_1__0 )* ) )
+            // InternalETMap.g:3650:1: ( ( rule__FQN__Group_1__0 )* )
             {
-            // InternalETMap.g:3559:1: ( ( rule__FQN__Group_1__0 )* )
-            // InternalETMap.g:3560:1: ( rule__FQN__Group_1__0 )*
+            // InternalETMap.g:3650:1: ( ( rule__FQN__Group_1__0 )* )
+            // InternalETMap.g:3651:1: ( rule__FQN__Group_1__0 )*
             {
              before(grammarAccess.getFQNAccess().getGroup_1()); 
-            // InternalETMap.g:3561:1: ( rule__FQN__Group_1__0 )*
-            loop28:
+            // InternalETMap.g:3652:1: ( rule__FQN__Group_1__0 )*
+            loop29:
             do {
-                int alt28=2;
-                int LA28_0 = input.LA(1);
+                int alt29=2;
+                int LA29_0 = input.LA(1);
 
-                if ( (LA28_0==39) ) {
-                    alt28=1;
+                if ( (LA29_0==40) ) {
+                    alt29=1;
                 }
 
 
-                switch (alt28) {
+                switch (alt29) {
             	case 1 :
-            	    // InternalETMap.g:3561:2: rule__FQN__Group_1__0
+            	    // InternalETMap.g:3652:2: rule__FQN__Group_1__0
             	    {
             	    pushFollow(FOLLOW_33);
             	    rule__FQN__Group_1__0();
@@ -9665,7 +9922,7 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
             	    break;
 
             	default :
-            	    break loop28;
+            	    break loop29;
                 }
             } while (true);
 
@@ -9692,14 +9949,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__FQN__Group_1__0"
-    // InternalETMap.g:3575:1: rule__FQN__Group_1__0 : rule__FQN__Group_1__0__Impl rule__FQN__Group_1__1 ;
+    // InternalETMap.g:3666:1: rule__FQN__Group_1__0 : rule__FQN__Group_1__0__Impl rule__FQN__Group_1__1 ;
     public final void rule__FQN__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:3579:1: ( rule__FQN__Group_1__0__Impl rule__FQN__Group_1__1 )
-            // InternalETMap.g:3580:2: rule__FQN__Group_1__0__Impl rule__FQN__Group_1__1
+            // InternalETMap.g:3670:1: ( rule__FQN__Group_1__0__Impl rule__FQN__Group_1__1 )
+            // InternalETMap.g:3671:2: rule__FQN__Group_1__0__Impl rule__FQN__Group_1__1
             {
             pushFollow(FOLLOW_3);
             rule__FQN__Group_1__0__Impl();
@@ -9730,20 +9987,20 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__FQN__Group_1__0__Impl"
-    // InternalETMap.g:3587:1: rule__FQN__Group_1__0__Impl : ( '.' ) ;
+    // InternalETMap.g:3678:1: rule__FQN__Group_1__0__Impl : ( '.' ) ;
     public final void rule__FQN__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:3591:1: ( ( '.' ) )
-            // InternalETMap.g:3592:1: ( '.' )
+            // InternalETMap.g:3682:1: ( ( '.' ) )
+            // InternalETMap.g:3683:1: ( '.' )
             {
-            // InternalETMap.g:3592:1: ( '.' )
-            // InternalETMap.g:3593:1: '.'
+            // InternalETMap.g:3683:1: ( '.' )
+            // InternalETMap.g:3684:1: '.'
             {
              before(grammarAccess.getFQNAccess().getFullStopKeyword_1_0()); 
-            match(input,39,FOLLOW_2); 
+            match(input,40,FOLLOW_2); 
              after(grammarAccess.getFQNAccess().getFullStopKeyword_1_0()); 
 
             }
@@ -9767,14 +10024,14 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__FQN__Group_1__1"
-    // InternalETMap.g:3606:1: rule__FQN__Group_1__1 : rule__FQN__Group_1__1__Impl ;
+    // InternalETMap.g:3697:1: rule__FQN__Group_1__1 : rule__FQN__Group_1__1__Impl ;
     public final void rule__FQN__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:3610:1: ( rule__FQN__Group_1__1__Impl )
-            // InternalETMap.g:3611:2: rule__FQN__Group_1__1__Impl
+            // InternalETMap.g:3701:1: ( rule__FQN__Group_1__1__Impl )
+            // InternalETMap.g:3702:2: rule__FQN__Group_1__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__FQN__Group_1__1__Impl();
@@ -9800,17 +10057,17 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__FQN__Group_1__1__Impl"
-    // InternalETMap.g:3617:1: rule__FQN__Group_1__1__Impl : ( RULE_ID ) ;
+    // InternalETMap.g:3708:1: rule__FQN__Group_1__1__Impl : ( RULE_ID ) ;
     public final void rule__FQN__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:3621:1: ( ( RULE_ID ) )
-            // InternalETMap.g:3622:1: ( RULE_ID )
+            // InternalETMap.g:3712:1: ( ( RULE_ID ) )
+            // InternalETMap.g:3713:1: ( RULE_ID )
             {
-            // InternalETMap.g:3622:1: ( RULE_ID )
-            // InternalETMap.g:3623:1: RULE_ID
+            // InternalETMap.g:3713:1: ( RULE_ID )
+            // InternalETMap.g:3714:1: RULE_ID
             {
              before(grammarAccess.getFQNAccess().getIDTerminalRuleCall_1_1()); 
             match(input,RULE_ID,FOLLOW_2); 
@@ -9837,17 +10094,17 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__MappingModel__NameAssignment_1"
-    // InternalETMap.g:3639:1: rule__MappingModel__NameAssignment_1 : ( ruleFQN ) ;
+    // InternalETMap.g:3730:1: rule__MappingModel__NameAssignment_1 : ( ruleFQN ) ;
     public final void rule__MappingModel__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:3643:1: ( ( ruleFQN ) )
-            // InternalETMap.g:3644:1: ( ruleFQN )
+            // InternalETMap.g:3734:1: ( ( ruleFQN ) )
+            // InternalETMap.g:3735:1: ( ruleFQN )
             {
-            // InternalETMap.g:3644:1: ( ruleFQN )
-            // InternalETMap.g:3645:1: ruleFQN
+            // InternalETMap.g:3735:1: ( ruleFQN )
+            // InternalETMap.g:3736:1: ruleFQN
             {
              before(grammarAccess.getMappingModelAccess().getNameFQNParserRuleCall_1_0()); 
             pushFollow(FOLLOW_2);
@@ -9878,17 +10135,17 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__MappingModel__ImportsAssignment_3"
-    // InternalETMap.g:3654:1: rule__MappingModel__ImportsAssignment_3 : ( ruleImport ) ;
+    // InternalETMap.g:3745:1: rule__MappingModel__ImportsAssignment_3 : ( ruleImport ) ;
     public final void rule__MappingModel__ImportsAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:3658:1: ( ( ruleImport ) )
-            // InternalETMap.g:3659:1: ( ruleImport )
+            // InternalETMap.g:3749:1: ( ( ruleImport ) )
+            // InternalETMap.g:3750:1: ( ruleImport )
             {
-            // InternalETMap.g:3659:1: ( ruleImport )
-            // InternalETMap.g:3660:1: ruleImport
+            // InternalETMap.g:3750:1: ( ruleImport )
+            // InternalETMap.g:3751:1: ruleImport
             {
              before(grammarAccess.getMappingModelAccess().getImportsImportParserRuleCall_3_0()); 
             pushFollow(FOLLOW_2);
@@ -9919,17 +10176,17 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__MappingModel__MappingsAssignment_4"
-    // InternalETMap.g:3669:1: rule__MappingModel__MappingsAssignment_4 : ( ruleMapping ) ;
+    // InternalETMap.g:3760:1: rule__MappingModel__MappingsAssignment_4 : ( ruleMapping ) ;
     public final void rule__MappingModel__MappingsAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:3673:1: ( ( ruleMapping ) )
-            // InternalETMap.g:3674:1: ( ruleMapping )
+            // InternalETMap.g:3764:1: ( ( ruleMapping ) )
+            // InternalETMap.g:3765:1: ( ruleMapping )
             {
-            // InternalETMap.g:3674:1: ( ruleMapping )
-            // InternalETMap.g:3675:1: ruleMapping
+            // InternalETMap.g:3765:1: ( ruleMapping )
+            // InternalETMap.g:3766:1: ruleMapping
             {
              before(grammarAccess.getMappingModelAccess().getMappingsMappingParserRuleCall_4_0()); 
             pushFollow(FOLLOW_2);
@@ -9960,21 +10217,21 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Mapping__LogicalSysAssignment_1"
-    // InternalETMap.g:3684:1: rule__Mapping__LogicalSysAssignment_1 : ( ( ruleFQN ) ) ;
+    // InternalETMap.g:3775:1: rule__Mapping__LogicalSysAssignment_1 : ( ( ruleFQN ) ) ;
     public final void rule__Mapping__LogicalSysAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:3688:1: ( ( ( ruleFQN ) ) )
-            // InternalETMap.g:3689:1: ( ( ruleFQN ) )
+            // InternalETMap.g:3779:1: ( ( ( ruleFQN ) ) )
+            // InternalETMap.g:3780:1: ( ( ruleFQN ) )
             {
-            // InternalETMap.g:3689:1: ( ( ruleFQN ) )
-            // InternalETMap.g:3690:1: ( ruleFQN )
+            // InternalETMap.g:3780:1: ( ( ruleFQN ) )
+            // InternalETMap.g:3781:1: ( ruleFQN )
             {
              before(grammarAccess.getMappingAccess().getLogicalSysLogicalSystemCrossReference_1_0()); 
-            // InternalETMap.g:3691:1: ( ruleFQN )
-            // InternalETMap.g:3692:1: ruleFQN
+            // InternalETMap.g:3782:1: ( ruleFQN )
+            // InternalETMap.g:3783:1: ruleFQN
             {
              before(grammarAccess.getMappingAccess().getLogicalSysLogicalSystemFQNParserRuleCall_1_0_1()); 
             pushFollow(FOLLOW_2);
@@ -10009,21 +10266,21 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Mapping__PhysicalSysAssignment_3"
-    // InternalETMap.g:3703:1: rule__Mapping__PhysicalSysAssignment_3 : ( ( ruleFQN ) ) ;
+    // InternalETMap.g:3794:1: rule__Mapping__PhysicalSysAssignment_3 : ( ( ruleFQN ) ) ;
     public final void rule__Mapping__PhysicalSysAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:3707:1: ( ( ( ruleFQN ) ) )
-            // InternalETMap.g:3708:1: ( ( ruleFQN ) )
+            // InternalETMap.g:3798:1: ( ( ( ruleFQN ) ) )
+            // InternalETMap.g:3799:1: ( ( ruleFQN ) )
             {
-            // InternalETMap.g:3708:1: ( ( ruleFQN ) )
-            // InternalETMap.g:3709:1: ( ruleFQN )
+            // InternalETMap.g:3799:1: ( ( ruleFQN ) )
+            // InternalETMap.g:3800:1: ( ruleFQN )
             {
              before(grammarAccess.getMappingAccess().getPhysicalSysPhysicalSystemCrossReference_3_0()); 
-            // InternalETMap.g:3710:1: ( ruleFQN )
-            // InternalETMap.g:3711:1: ruleFQN
+            // InternalETMap.g:3801:1: ( ruleFQN )
+            // InternalETMap.g:3802:1: ruleFQN
             {
              before(grammarAccess.getMappingAccess().getPhysicalSysPhysicalSystemFQNParserRuleCall_3_0_1()); 
             pushFollow(FOLLOW_2);
@@ -10058,17 +10315,17 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Mapping__SubsysMappingsAssignment_5"
-    // InternalETMap.g:3722:1: rule__Mapping__SubsysMappingsAssignment_5 : ( ruleSubSystemMapping ) ;
+    // InternalETMap.g:3813:1: rule__Mapping__SubsysMappingsAssignment_5 : ( ruleSubSystemMapping ) ;
     public final void rule__Mapping__SubsysMappingsAssignment_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:3726:1: ( ( ruleSubSystemMapping ) )
-            // InternalETMap.g:3727:1: ( ruleSubSystemMapping )
+            // InternalETMap.g:3817:1: ( ( ruleSubSystemMapping ) )
+            // InternalETMap.g:3818:1: ( ruleSubSystemMapping )
             {
-            // InternalETMap.g:3727:1: ( ruleSubSystemMapping )
-            // InternalETMap.g:3728:1: ruleSubSystemMapping
+            // InternalETMap.g:3818:1: ( ruleSubSystemMapping )
+            // InternalETMap.g:3819:1: ruleSubSystemMapping
             {
              before(grammarAccess.getMappingAccess().getSubsysMappingsSubSystemMappingParserRuleCall_5_0()); 
             pushFollow(FOLLOW_2);
@@ -10099,21 +10356,21 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SubSystemMapping__LogicalSubSysAssignment_1"
-    // InternalETMap.g:3737:1: rule__SubSystemMapping__LogicalSubSysAssignment_1 : ( ( RULE_ID ) ) ;
+    // InternalETMap.g:3828:1: rule__SubSystemMapping__LogicalSubSysAssignment_1 : ( ( RULE_ID ) ) ;
     public final void rule__SubSystemMapping__LogicalSubSysAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:3741:1: ( ( ( RULE_ID ) ) )
-            // InternalETMap.g:3742:1: ( ( RULE_ID ) )
+            // InternalETMap.g:3832:1: ( ( ( RULE_ID ) ) )
+            // InternalETMap.g:3833:1: ( ( RULE_ID ) )
             {
-            // InternalETMap.g:3742:1: ( ( RULE_ID ) )
-            // InternalETMap.g:3743:1: ( RULE_ID )
+            // InternalETMap.g:3833:1: ( ( RULE_ID ) )
+            // InternalETMap.g:3834:1: ( RULE_ID )
             {
              before(grammarAccess.getSubSystemMappingAccess().getLogicalSubSysSubSystemRefCrossReference_1_0()); 
-            // InternalETMap.g:3744:1: ( RULE_ID )
-            // InternalETMap.g:3745:1: RULE_ID
+            // InternalETMap.g:3835:1: ( RULE_ID )
+            // InternalETMap.g:3836:1: RULE_ID
             {
              before(grammarAccess.getSubSystemMappingAccess().getLogicalSubSysSubSystemRefIDTerminalRuleCall_1_0_1()); 
             match(input,RULE_ID,FOLLOW_2); 
@@ -10144,21 +10401,21 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SubSystemMapping__NodeAssignment_3"
-    // InternalETMap.g:3756:1: rule__SubSystemMapping__NodeAssignment_3 : ( ( RULE_ID ) ) ;
+    // InternalETMap.g:3847:1: rule__SubSystemMapping__NodeAssignment_3 : ( ( RULE_ID ) ) ;
     public final void rule__SubSystemMapping__NodeAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:3760:1: ( ( ( RULE_ID ) ) )
-            // InternalETMap.g:3761:1: ( ( RULE_ID ) )
+            // InternalETMap.g:3851:1: ( ( ( RULE_ID ) ) )
+            // InternalETMap.g:3852:1: ( ( RULE_ID ) )
             {
-            // InternalETMap.g:3761:1: ( ( RULE_ID ) )
-            // InternalETMap.g:3762:1: ( RULE_ID )
+            // InternalETMap.g:3852:1: ( ( RULE_ID ) )
+            // InternalETMap.g:3853:1: ( RULE_ID )
             {
              before(grammarAccess.getSubSystemMappingAccess().getNodeNodeRefCrossReference_3_0()); 
-            // InternalETMap.g:3763:1: ( RULE_ID )
-            // InternalETMap.g:3764:1: RULE_ID
+            // InternalETMap.g:3854:1: ( RULE_ID )
+            // InternalETMap.g:3855:1: RULE_ID
             {
              before(grammarAccess.getSubSystemMappingAccess().getNodeNodeRefIDTerminalRuleCall_3_0_1()); 
             match(input,RULE_ID,FOLLOW_2); 
@@ -10189,17 +10446,17 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SubSystemMapping__ThreadMappingsAssignment_4_1"
-    // InternalETMap.g:3775:1: rule__SubSystemMapping__ThreadMappingsAssignment_4_1 : ( ruleThreadMapping ) ;
+    // InternalETMap.g:3866:1: rule__SubSystemMapping__ThreadMappingsAssignment_4_1 : ( ruleThreadMapping ) ;
     public final void rule__SubSystemMapping__ThreadMappingsAssignment_4_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:3779:1: ( ( ruleThreadMapping ) )
-            // InternalETMap.g:3780:1: ( ruleThreadMapping )
+            // InternalETMap.g:3870:1: ( ( ruleThreadMapping ) )
+            // InternalETMap.g:3871:1: ( ruleThreadMapping )
             {
-            // InternalETMap.g:3780:1: ( ruleThreadMapping )
-            // InternalETMap.g:3781:1: ruleThreadMapping
+            // InternalETMap.g:3871:1: ( ruleThreadMapping )
+            // InternalETMap.g:3872:1: ruleThreadMapping
             {
              before(grammarAccess.getSubSystemMappingAccess().getThreadMappingsThreadMappingParserRuleCall_4_1_0()); 
             pushFollow(FOLLOW_2);
@@ -10230,21 +10487,21 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ThreadMapping__LogicalThreadAssignment_1"
-    // InternalETMap.g:3790:1: rule__ThreadMapping__LogicalThreadAssignment_1 : ( ( RULE_ID ) ) ;
+    // InternalETMap.g:3881:1: rule__ThreadMapping__LogicalThreadAssignment_1 : ( ( RULE_ID ) ) ;
     public final void rule__ThreadMapping__LogicalThreadAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:3794:1: ( ( ( RULE_ID ) ) )
-            // InternalETMap.g:3795:1: ( ( RULE_ID ) )
+            // InternalETMap.g:3885:1: ( ( ( RULE_ID ) ) )
+            // InternalETMap.g:3886:1: ( ( RULE_ID ) )
             {
-            // InternalETMap.g:3795:1: ( ( RULE_ID ) )
-            // InternalETMap.g:3796:1: ( RULE_ID )
+            // InternalETMap.g:3886:1: ( ( RULE_ID ) )
+            // InternalETMap.g:3887:1: ( RULE_ID )
             {
              before(grammarAccess.getThreadMappingAccess().getLogicalThreadLogicalThreadCrossReference_1_0()); 
-            // InternalETMap.g:3797:1: ( RULE_ID )
-            // InternalETMap.g:3798:1: RULE_ID
+            // InternalETMap.g:3888:1: ( RULE_ID )
+            // InternalETMap.g:3889:1: RULE_ID
             {
              before(grammarAccess.getThreadMappingAccess().getLogicalThreadLogicalThreadIDTerminalRuleCall_1_0_1()); 
             match(input,RULE_ID,FOLLOW_2); 
@@ -10275,21 +10532,21 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ThreadMapping__PhysicalThreadAssignment_3"
-    // InternalETMap.g:3809:1: rule__ThreadMapping__PhysicalThreadAssignment_3 : ( ( RULE_ID ) ) ;
+    // InternalETMap.g:3900:1: rule__ThreadMapping__PhysicalThreadAssignment_3 : ( ( RULE_ID ) ) ;
     public final void rule__ThreadMapping__PhysicalThreadAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:3813:1: ( ( ( RULE_ID ) ) )
-            // InternalETMap.g:3814:1: ( ( RULE_ID ) )
+            // InternalETMap.g:3904:1: ( ( ( RULE_ID ) ) )
+            // InternalETMap.g:3905:1: ( ( RULE_ID ) )
             {
-            // InternalETMap.g:3814:1: ( ( RULE_ID ) )
-            // InternalETMap.g:3815:1: ( RULE_ID )
+            // InternalETMap.g:3905:1: ( ( RULE_ID ) )
+            // InternalETMap.g:3906:1: ( RULE_ID )
             {
              before(grammarAccess.getThreadMappingAccess().getPhysicalThreadPhysicalThreadCrossReference_3_0()); 
-            // InternalETMap.g:3816:1: ( RULE_ID )
-            // InternalETMap.g:3817:1: RULE_ID
+            // InternalETMap.g:3907:1: ( RULE_ID )
+            // InternalETMap.g:3908:1: RULE_ID
             {
              before(grammarAccess.getThreadMappingAccess().getPhysicalThreadPhysicalThreadIDTerminalRuleCall_3_0_1()); 
             match(input,RULE_ID,FOLLOW_2); 
@@ -10320,17 +10577,17 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__KeyValue__KeyAssignment_0"
-    // InternalETMap.g:3831:1: rule__KeyValue__KeyAssignment_0 : ( RULE_ID ) ;
+    // InternalETMap.g:3922:1: rule__KeyValue__KeyAssignment_0 : ( RULE_ID ) ;
     public final void rule__KeyValue__KeyAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:3835:1: ( ( RULE_ID ) )
-            // InternalETMap.g:3836:1: ( RULE_ID )
+            // InternalETMap.g:3926:1: ( ( RULE_ID ) )
+            // InternalETMap.g:3927:1: ( RULE_ID )
             {
-            // InternalETMap.g:3836:1: ( RULE_ID )
-            // InternalETMap.g:3837:1: RULE_ID
+            // InternalETMap.g:3927:1: ( RULE_ID )
+            // InternalETMap.g:3928:1: RULE_ID
             {
              before(grammarAccess.getKeyValueAccess().getKeyIDTerminalRuleCall_0_0()); 
             match(input,RULE_ID,FOLLOW_2); 
@@ -10357,17 +10614,17 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__KeyValue__ValueAssignment_2"
-    // InternalETMap.g:3846:1: rule__KeyValue__ValueAssignment_2 : ( ruleLiteral ) ;
+    // InternalETMap.g:3937:1: rule__KeyValue__ValueAssignment_2 : ( ruleLiteral ) ;
     public final void rule__KeyValue__ValueAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:3850:1: ( ( ruleLiteral ) )
-            // InternalETMap.g:3851:1: ( ruleLiteral )
+            // InternalETMap.g:3941:1: ( ( ruleLiteral ) )
+            // InternalETMap.g:3942:1: ( ruleLiteral )
             {
-            // InternalETMap.g:3851:1: ( ruleLiteral )
-            // InternalETMap.g:3852:1: ruleLiteral
+            // InternalETMap.g:3942:1: ( ruleLiteral )
+            // InternalETMap.g:3943:1: ruleLiteral
             {
              before(grammarAccess.getKeyValueAccess().getValueLiteralParserRuleCall_2_0()); 
             pushFollow(FOLLOW_2);
@@ -10398,24 +10655,24 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SimpleAnnotationAttribute__OptionalAssignment_0_0"
-    // InternalETMap.g:3867:1: rule__SimpleAnnotationAttribute__OptionalAssignment_0_0 : ( ( 'optional' ) ) ;
+    // InternalETMap.g:3958:1: rule__SimpleAnnotationAttribute__OptionalAssignment_0_0 : ( ( 'optional' ) ) ;
     public final void rule__SimpleAnnotationAttribute__OptionalAssignment_0_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:3871:1: ( ( ( 'optional' ) ) )
-            // InternalETMap.g:3872:1: ( ( 'optional' ) )
+            // InternalETMap.g:3962:1: ( ( ( 'optional' ) ) )
+            // InternalETMap.g:3963:1: ( ( 'optional' ) )
             {
-            // InternalETMap.g:3872:1: ( ( 'optional' ) )
-            // InternalETMap.g:3873:1: ( 'optional' )
-            {
-             before(grammarAccess.getSimpleAnnotationAttributeAccess().getOptionalOptionalKeyword_0_0_0()); 
-            // InternalETMap.g:3874:1: ( 'optional' )
-            // InternalETMap.g:3875:1: 'optional'
+            // InternalETMap.g:3963:1: ( ( 'optional' ) )
+            // InternalETMap.g:3964:1: ( 'optional' )
             {
              before(grammarAccess.getSimpleAnnotationAttributeAccess().getOptionalOptionalKeyword_0_0_0()); 
-            match(input,40,FOLLOW_2); 
+            // InternalETMap.g:3965:1: ( 'optional' )
+            // InternalETMap.g:3966:1: 'optional'
+            {
+             before(grammarAccess.getSimpleAnnotationAttributeAccess().getOptionalOptionalKeyword_0_0_0()); 
+            match(input,41,FOLLOW_2); 
              after(grammarAccess.getSimpleAnnotationAttributeAccess().getOptionalOptionalKeyword_0_0_0()); 
 
             }
@@ -10443,17 +10700,17 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SimpleAnnotationAttribute__NameAssignment_2"
-    // InternalETMap.g:3890:1: rule__SimpleAnnotationAttribute__NameAssignment_2 : ( RULE_ID ) ;
+    // InternalETMap.g:3981:1: rule__SimpleAnnotationAttribute__NameAssignment_2 : ( RULE_ID ) ;
     public final void rule__SimpleAnnotationAttribute__NameAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:3894:1: ( ( RULE_ID ) )
-            // InternalETMap.g:3895:1: ( RULE_ID )
+            // InternalETMap.g:3985:1: ( ( RULE_ID ) )
+            // InternalETMap.g:3986:1: ( RULE_ID )
             {
-            // InternalETMap.g:3895:1: ( RULE_ID )
-            // InternalETMap.g:3896:1: RULE_ID
+            // InternalETMap.g:3986:1: ( RULE_ID )
+            // InternalETMap.g:3987:1: RULE_ID
             {
              before(grammarAccess.getSimpleAnnotationAttributeAccess().getNameIDTerminalRuleCall_2_0()); 
             match(input,RULE_ID,FOLLOW_2); 
@@ -10480,17 +10737,17 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SimpleAnnotationAttribute__TypeAssignment_4"
-    // InternalETMap.g:3905:1: rule__SimpleAnnotationAttribute__TypeAssignment_4 : ( ruleLiteralType ) ;
+    // InternalETMap.g:3996:1: rule__SimpleAnnotationAttribute__TypeAssignment_4 : ( ruleLiteralType ) ;
     public final void rule__SimpleAnnotationAttribute__TypeAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:3909:1: ( ( ruleLiteralType ) )
-            // InternalETMap.g:3910:1: ( ruleLiteralType )
+            // InternalETMap.g:4000:1: ( ( ruleLiteralType ) )
+            // InternalETMap.g:4001:1: ( ruleLiteralType )
             {
-            // InternalETMap.g:3910:1: ( ruleLiteralType )
-            // InternalETMap.g:3911:1: ruleLiteralType
+            // InternalETMap.g:4001:1: ( ruleLiteralType )
+            // InternalETMap.g:4002:1: ruleLiteralType
             {
              before(grammarAccess.getSimpleAnnotationAttributeAccess().getTypeLiteralTypeEnumRuleCall_4_0()); 
             pushFollow(FOLLOW_2);
@@ -10521,24 +10778,24 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EnumAnnotationAttribute__OptionalAssignment_0_0"
-    // InternalETMap.g:3920:1: rule__EnumAnnotationAttribute__OptionalAssignment_0_0 : ( ( 'optional' ) ) ;
+    // InternalETMap.g:4011:1: rule__EnumAnnotationAttribute__OptionalAssignment_0_0 : ( ( 'optional' ) ) ;
     public final void rule__EnumAnnotationAttribute__OptionalAssignment_0_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:3924:1: ( ( ( 'optional' ) ) )
-            // InternalETMap.g:3925:1: ( ( 'optional' ) )
+            // InternalETMap.g:4015:1: ( ( ( 'optional' ) ) )
+            // InternalETMap.g:4016:1: ( ( 'optional' ) )
             {
-            // InternalETMap.g:3925:1: ( ( 'optional' ) )
-            // InternalETMap.g:3926:1: ( 'optional' )
-            {
-             before(grammarAccess.getEnumAnnotationAttributeAccess().getOptionalOptionalKeyword_0_0_0()); 
-            // InternalETMap.g:3927:1: ( 'optional' )
-            // InternalETMap.g:3928:1: 'optional'
+            // InternalETMap.g:4016:1: ( ( 'optional' ) )
+            // InternalETMap.g:4017:1: ( 'optional' )
             {
              before(grammarAccess.getEnumAnnotationAttributeAccess().getOptionalOptionalKeyword_0_0_0()); 
-            match(input,40,FOLLOW_2); 
+            // InternalETMap.g:4018:1: ( 'optional' )
+            // InternalETMap.g:4019:1: 'optional'
+            {
+             before(grammarAccess.getEnumAnnotationAttributeAccess().getOptionalOptionalKeyword_0_0_0()); 
+            match(input,41,FOLLOW_2); 
              after(grammarAccess.getEnumAnnotationAttributeAccess().getOptionalOptionalKeyword_0_0_0()); 
 
             }
@@ -10566,17 +10823,17 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EnumAnnotationAttribute__NameAssignment_2"
-    // InternalETMap.g:3943:1: rule__EnumAnnotationAttribute__NameAssignment_2 : ( RULE_ID ) ;
+    // InternalETMap.g:4034:1: rule__EnumAnnotationAttribute__NameAssignment_2 : ( RULE_ID ) ;
     public final void rule__EnumAnnotationAttribute__NameAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:3947:1: ( ( RULE_ID ) )
-            // InternalETMap.g:3948:1: ( RULE_ID )
+            // InternalETMap.g:4038:1: ( ( RULE_ID ) )
+            // InternalETMap.g:4039:1: ( RULE_ID )
             {
-            // InternalETMap.g:3948:1: ( RULE_ID )
-            // InternalETMap.g:3949:1: RULE_ID
+            // InternalETMap.g:4039:1: ( RULE_ID )
+            // InternalETMap.g:4040:1: RULE_ID
             {
              before(grammarAccess.getEnumAnnotationAttributeAccess().getNameIDTerminalRuleCall_2_0()); 
             match(input,RULE_ID,FOLLOW_2); 
@@ -10603,17 +10860,17 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EnumAnnotationAttribute__ValuesAssignment_5"
-    // InternalETMap.g:3958:1: rule__EnumAnnotationAttribute__ValuesAssignment_5 : ( RULE_STRING ) ;
+    // InternalETMap.g:4049:1: rule__EnumAnnotationAttribute__ValuesAssignment_5 : ( RULE_STRING ) ;
     public final void rule__EnumAnnotationAttribute__ValuesAssignment_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:3962:1: ( ( RULE_STRING ) )
-            // InternalETMap.g:3963:1: ( RULE_STRING )
+            // InternalETMap.g:4053:1: ( ( RULE_STRING ) )
+            // InternalETMap.g:4054:1: ( RULE_STRING )
             {
-            // InternalETMap.g:3963:1: ( RULE_STRING )
-            // InternalETMap.g:3964:1: RULE_STRING
+            // InternalETMap.g:4054:1: ( RULE_STRING )
+            // InternalETMap.g:4055:1: RULE_STRING
             {
              before(grammarAccess.getEnumAnnotationAttributeAccess().getValuesSTRINGTerminalRuleCall_5_0()); 
             match(input,RULE_STRING,FOLLOW_2); 
@@ -10640,17 +10897,17 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__EnumAnnotationAttribute__ValuesAssignment_6_1"
-    // InternalETMap.g:3973:1: rule__EnumAnnotationAttribute__ValuesAssignment_6_1 : ( RULE_STRING ) ;
+    // InternalETMap.g:4064:1: rule__EnumAnnotationAttribute__ValuesAssignment_6_1 : ( RULE_STRING ) ;
     public final void rule__EnumAnnotationAttribute__ValuesAssignment_6_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:3977:1: ( ( RULE_STRING ) )
-            // InternalETMap.g:3978:1: ( RULE_STRING )
+            // InternalETMap.g:4068:1: ( ( RULE_STRING ) )
+            // InternalETMap.g:4069:1: ( RULE_STRING )
             {
-            // InternalETMap.g:3978:1: ( RULE_STRING )
-            // InternalETMap.g:3979:1: RULE_STRING
+            // InternalETMap.g:4069:1: ( RULE_STRING )
+            // InternalETMap.g:4070:1: RULE_STRING
             {
              before(grammarAccess.getEnumAnnotationAttributeAccess().getValuesSTRINGTerminalRuleCall_6_1_0()); 
             match(input,RULE_STRING,FOLLOW_2); 
@@ -10677,17 +10934,17 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Import__ImportedNamespaceAssignment_1_0_0"
-    // InternalETMap.g:3988:1: rule__Import__ImportedNamespaceAssignment_1_0_0 : ( ruleImportedFQN ) ;
+    // InternalETMap.g:4079:1: rule__Import__ImportedNamespaceAssignment_1_0_0 : ( ruleImportedFQN ) ;
     public final void rule__Import__ImportedNamespaceAssignment_1_0_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:3992:1: ( ( ruleImportedFQN ) )
-            // InternalETMap.g:3993:1: ( ruleImportedFQN )
+            // InternalETMap.g:4083:1: ( ( ruleImportedFQN ) )
+            // InternalETMap.g:4084:1: ( ruleImportedFQN )
             {
-            // InternalETMap.g:3993:1: ( ruleImportedFQN )
-            // InternalETMap.g:3994:1: ruleImportedFQN
+            // InternalETMap.g:4084:1: ( ruleImportedFQN )
+            // InternalETMap.g:4085:1: ruleImportedFQN
             {
              before(grammarAccess.getImportAccess().getImportedNamespaceImportedFQNParserRuleCall_1_0_0_0()); 
             pushFollow(FOLLOW_2);
@@ -10717,22 +10974,22 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__Import__ImportedNamespaceAssignment_1_0_0"
 
 
-    // $ANTLR start "rule__Import__ImportURIAssignment_2"
-    // InternalETMap.g:4003:1: rule__Import__ImportURIAssignment_2 : ( RULE_STRING ) ;
-    public final void rule__Import__ImportURIAssignment_2() throws RecognitionException {
+    // $ANTLR start "rule__Import__ImportURIAssignment_1_0_1_1"
+    // InternalETMap.g:4094:1: rule__Import__ImportURIAssignment_1_0_1_1 : ( RULE_STRING ) ;
+    public final void rule__Import__ImportURIAssignment_1_0_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:4007:1: ( ( RULE_STRING ) )
-            // InternalETMap.g:4008:1: ( RULE_STRING )
+            // InternalETMap.g:4098:1: ( ( RULE_STRING ) )
+            // InternalETMap.g:4099:1: ( RULE_STRING )
             {
-            // InternalETMap.g:4008:1: ( RULE_STRING )
-            // InternalETMap.g:4009:1: RULE_STRING
+            // InternalETMap.g:4099:1: ( RULE_STRING )
+            // InternalETMap.g:4100:1: RULE_STRING
             {
-             before(grammarAccess.getImportAccess().getImportURISTRINGTerminalRuleCall_2_0()); 
+             before(grammarAccess.getImportAccess().getImportURISTRINGTerminalRuleCall_1_0_1_1_0()); 
             match(input,RULE_STRING,FOLLOW_2); 
-             after(grammarAccess.getImportAccess().getImportURISTRINGTerminalRuleCall_2_0()); 
+             after(grammarAccess.getImportAccess().getImportURISTRINGTerminalRuleCall_1_0_1_1_0()); 
 
             }
 
@@ -10751,21 +11008,58 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__Import__ImportURIAssignment_2"
+    // $ANTLR end "rule__Import__ImportURIAssignment_1_0_1_1"
+
+
+    // $ANTLR start "rule__Import__ImportURIAssignment_1_1_1"
+    // InternalETMap.g:4109:1: rule__Import__ImportURIAssignment_1_1_1 : ( RULE_STRING ) ;
+    public final void rule__Import__ImportURIAssignment_1_1_1() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // InternalETMap.g:4113:1: ( ( RULE_STRING ) )
+            // InternalETMap.g:4114:1: ( RULE_STRING )
+            {
+            // InternalETMap.g:4114:1: ( RULE_STRING )
+            // InternalETMap.g:4115:1: RULE_STRING
+            {
+             before(grammarAccess.getImportAccess().getImportURISTRINGTerminalRuleCall_1_1_1_0()); 
+            match(input,RULE_STRING,FOLLOW_2); 
+             after(grammarAccess.getImportAccess().getImportURISTRINGTerminalRuleCall_1_1_1_0()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Import__ImportURIAssignment_1_1_1"
 
 
     // $ANTLR start "rule__Documentation__LinesAssignment_2"
-    // InternalETMap.g:4018:1: rule__Documentation__LinesAssignment_2 : ( RULE_STRING ) ;
+    // InternalETMap.g:4124:1: rule__Documentation__LinesAssignment_2 : ( RULE_STRING ) ;
     public final void rule__Documentation__LinesAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:4022:1: ( ( RULE_STRING ) )
-            // InternalETMap.g:4023:1: ( RULE_STRING )
+            // InternalETMap.g:4128:1: ( ( RULE_STRING ) )
+            // InternalETMap.g:4129:1: ( RULE_STRING )
             {
-            // InternalETMap.g:4023:1: ( RULE_STRING )
-            // InternalETMap.g:4024:1: RULE_STRING
+            // InternalETMap.g:4129:1: ( RULE_STRING )
+            // InternalETMap.g:4130:1: RULE_STRING
             {
              before(grammarAccess.getDocumentationAccess().getLinesSTRINGTerminalRuleCall_2_0()); 
             match(input,RULE_STRING,FOLLOW_2); 
@@ -10792,24 +11086,24 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__BooleanLiteral__IsTrueAssignment_1_1"
-    // InternalETMap.g:4035:1: rule__BooleanLiteral__IsTrueAssignment_1_1 : ( ( 'true' ) ) ;
+    // InternalETMap.g:4141:1: rule__BooleanLiteral__IsTrueAssignment_1_1 : ( ( 'true' ) ) ;
     public final void rule__BooleanLiteral__IsTrueAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:4039:1: ( ( ( 'true' ) ) )
-            // InternalETMap.g:4040:1: ( ( 'true' ) )
+            // InternalETMap.g:4145:1: ( ( ( 'true' ) ) )
+            // InternalETMap.g:4146:1: ( ( 'true' ) )
             {
-            // InternalETMap.g:4040:1: ( ( 'true' ) )
-            // InternalETMap.g:4041:1: ( 'true' )
-            {
-             before(grammarAccess.getBooleanLiteralAccess().getIsTrueTrueKeyword_1_1_0()); 
-            // InternalETMap.g:4042:1: ( 'true' )
-            // InternalETMap.g:4043:1: 'true'
+            // InternalETMap.g:4146:1: ( ( 'true' ) )
+            // InternalETMap.g:4147:1: ( 'true' )
             {
              before(grammarAccess.getBooleanLiteralAccess().getIsTrueTrueKeyword_1_1_0()); 
-            match(input,41,FOLLOW_2); 
+            // InternalETMap.g:4148:1: ( 'true' )
+            // InternalETMap.g:4149:1: 'true'
+            {
+             before(grammarAccess.getBooleanLiteralAccess().getIsTrueTrueKeyword_1_1_0()); 
+            match(input,42,FOLLOW_2); 
              after(grammarAccess.getBooleanLiteralAccess().getIsTrueTrueKeyword_1_1_0()); 
 
             }
@@ -10837,17 +11131,17 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__RealLiteral__ValueAssignment_1"
-    // InternalETMap.g:4058:1: rule__RealLiteral__ValueAssignment_1 : ( ruleReal ) ;
+    // InternalETMap.g:4164:1: rule__RealLiteral__ValueAssignment_1 : ( ruleReal ) ;
     public final void rule__RealLiteral__ValueAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:4062:1: ( ( ruleReal ) )
-            // InternalETMap.g:4063:1: ( ruleReal )
+            // InternalETMap.g:4168:1: ( ( ruleReal ) )
+            // InternalETMap.g:4169:1: ( ruleReal )
             {
-            // InternalETMap.g:4063:1: ( ruleReal )
-            // InternalETMap.g:4064:1: ruleReal
+            // InternalETMap.g:4169:1: ( ruleReal )
+            // InternalETMap.g:4170:1: ruleReal
             {
              before(grammarAccess.getRealLiteralAccess().getValueRealParserRuleCall_1_0()); 
             pushFollow(FOLLOW_2);
@@ -10878,17 +11172,17 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__IntLiteral__ValueAssignment_1"
-    // InternalETMap.g:4073:1: rule__IntLiteral__ValueAssignment_1 : ( ruleInteger ) ;
+    // InternalETMap.g:4179:1: rule__IntLiteral__ValueAssignment_1 : ( ruleInteger ) ;
     public final void rule__IntLiteral__ValueAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:4077:1: ( ( ruleInteger ) )
-            // InternalETMap.g:4078:1: ( ruleInteger )
+            // InternalETMap.g:4183:1: ( ( ruleInteger ) )
+            // InternalETMap.g:4184:1: ( ruleInteger )
             {
-            // InternalETMap.g:4078:1: ( ruleInteger )
-            // InternalETMap.g:4079:1: ruleInteger
+            // InternalETMap.g:4184:1: ( ruleInteger )
+            // InternalETMap.g:4185:1: ruleInteger
             {
              before(grammarAccess.getIntLiteralAccess().getValueIntegerParserRuleCall_1_0()); 
             pushFollow(FOLLOW_2);
@@ -10919,17 +11213,17 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__StringLiteral__ValueAssignment_1"
-    // InternalETMap.g:4088:1: rule__StringLiteral__ValueAssignment_1 : ( RULE_STRING ) ;
+    // InternalETMap.g:4194:1: rule__StringLiteral__ValueAssignment_1 : ( RULE_STRING ) ;
     public final void rule__StringLiteral__ValueAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalETMap.g:4092:1: ( ( RULE_STRING ) )
-            // InternalETMap.g:4093:1: ( RULE_STRING )
+            // InternalETMap.g:4198:1: ( ( RULE_STRING ) )
+            // InternalETMap.g:4199:1: ( RULE_STRING )
             {
-            // InternalETMap.g:4093:1: ( RULE_STRING )
-            // InternalETMap.g:4094:1: RULE_STRING
+            // InternalETMap.g:4199:1: ( RULE_STRING )
+            // InternalETMap.g:4200:1: RULE_STRING
             {
              before(grammarAccess.getStringLiteralAccess().getValueSTRINGTerminalRuleCall_1_0()); 
             match(input,RULE_STRING,FOLLOW_2); 
@@ -10972,25 +11266,25 @@ public class InternalETMapParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000000022000000L});
     public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x0000000020000002L});
     public static final BitSet FOLLOW_13 = new BitSet(new long[]{0x0000000040000000L});
-    public static final BitSet FOLLOW_14 = new BitSet(new long[]{0x000002000001C0E0L});
+    public static final BitSet FOLLOW_14 = new BitSet(new long[]{0x000004000001C0E0L});
     public static final BitSet FOLLOW_15 = new BitSet(new long[]{0x0000000080000000L});
     public static final BitSet FOLLOW_16 = new BitSet(new long[]{0x0000000100000000L});
     public static final BitSet FOLLOW_17 = new BitSet(new long[]{0x0000000000780000L});
     public static final BitSet FOLLOW_18 = new BitSet(new long[]{0x0000000000000080L});
     public static final BitSet FOLLOW_19 = new BitSet(new long[]{0x0000000202000000L});
     public static final BitSet FOLLOW_20 = new BitSet(new long[]{0x0000000200000002L});
-    public static final BitSet FOLLOW_21 = new BitSet(new long[]{0x0000000000002010L});
+    public static final BitSet FOLLOW_21 = new BitSet(new long[]{0x0000001000000010L});
     public static final BitSet FOLLOW_22 = new BitSet(new long[]{0x0000000800000000L});
-    public static final BitSet FOLLOW_23 = new BitSet(new long[]{0x0000001000000000L});
-    public static final BitSet FOLLOW_24 = new BitSet(new long[]{0x0000002000000000L});
-    public static final BitSet FOLLOW_25 = new BitSet(new long[]{0x0000004000000080L});
+    public static final BitSet FOLLOW_23 = new BitSet(new long[]{0x0000002000000000L});
+    public static final BitSet FOLLOW_24 = new BitSet(new long[]{0x0000004000000000L});
+    public static final BitSet FOLLOW_25 = new BitSet(new long[]{0x0000008000000080L});
     public static final BitSet FOLLOW_26 = new BitSet(new long[]{0x0000000000000082L});
-    public static final BitSet FOLLOW_27 = new BitSet(new long[]{0x0000020000004000L});
+    public static final BitSet FOLLOW_27 = new BitSet(new long[]{0x0000040000004000L});
     public static final BitSet FOLLOW_28 = new BitSet(new long[]{0x0000000000018060L});
     public static final BitSet FOLLOW_29 = new BitSet(new long[]{0x0000000000018040L});
-    public static final BitSet FOLLOW_30 = new BitSet(new long[]{0x0000008000000000L});
+    public static final BitSet FOLLOW_30 = new BitSet(new long[]{0x0000010000000000L});
     public static final BitSet FOLLOW_31 = new BitSet(new long[]{0x0000000000000040L});
     public static final BitSet FOLLOW_32 = new BitSet(new long[]{0x0000000000060000L});
-    public static final BitSet FOLLOW_33 = new BitSet(new long[]{0x0000008000000002L});
+    public static final BitSet FOLLOW_33 = new BitSet(new long[]{0x0000010000000002L});
 
 }

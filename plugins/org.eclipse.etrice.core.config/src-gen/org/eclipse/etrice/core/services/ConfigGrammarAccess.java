@@ -202,8 +202,8 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
 
-		//(('file path' filePath=STRING | ('user import' userCode1=STRING) ('user constructor' userCode2=STRING)) &
-		//('polling interval' polling=TIME)?)
+		//('file path' filePath=STRING | ('user import' userCode1=STRING) ('user constructor' userCode2=STRING)) &
+		//('polling interval' polling=TIME)?
 		public UnorderedGroup getUnorderedGroup_2() { return cUnorderedGroup_2; }
 
 		//('file path' filePath=STRING | ('user import' userCode1=STRING) ('user constructor' userCode2=STRING))
@@ -224,7 +224,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		//('user import' userCode1=STRING) ('user constructor' userCode2=STRING)
 		public Group getGroup_2_0_1() { return cGroup_2_0_1; }
 
-		//('user import' userCode1=STRING)
+		//'user import' userCode1=STRING
 		public Group getGroup_2_0_1_0() { return cGroup_2_0_1_0; }
 
 		//'user import'
@@ -236,7 +236,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		//STRING
 		public RuleCall getUserCode1STRINGTerminalRuleCall_2_0_1_0_1_0() { return cUserCode1STRINGTerminalRuleCall_2_0_1_0_1_0; }
 
-		//('user constructor' userCode2=STRING)
+		//'user constructor' userCode2=STRING
 		public Group getGroup_2_0_1_1() { return cGroup_2_0_1_1; }
 
 		//'user constructor'
@@ -378,7 +378,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_6() { return cLeftCurlyBracketKeyword_6; }
 
-		//(attributes+=AttrInstanceConfig* & ports+=PortInstanceConfig*)
+		//attributes+=AttrInstanceConfig* & ports+=PortInstanceConfig*
 		public UnorderedGroup getUnorderedGroup_7() { return cUnorderedGroup_7; }
 
 		//attributes+=AttrInstanceConfig*
@@ -443,7 +443,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
 
-		//(('regular' regular=PortClassConfig)? & (('conjugate' | 'conjugated') conjugated=PortClassConfig)?)
+		//('regular' regular=PortClassConfig)? & (('conjugate' | 'conjugated') conjugated=PortClassConfig)?
 		public UnorderedGroup getUnorderedGroup_3() { return cUnorderedGroup_3; }
 
 		//('regular' regular=PortClassConfig)?
@@ -461,7 +461,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		//(('conjugate' | 'conjugated') conjugated=PortClassConfig)?
 		public Group getGroup_3_1() { return cGroup_3_1; }
 
-		//('conjugate' | 'conjugated')
+		//'conjugate' | 'conjugated'
 		public Alternatives getAlternatives_3_1_0() { return cAlternatives_3_1_0; }
 
 		//'conjugate'
@@ -653,7 +653,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_3_0() { return cLeftCurlyBracketKeyword_3_0; }
 
-		//(('min' '=' min=NumberLiteral)? ('max' '=' max=NumberLiteral)? attributes+=AttrClassConfig*)
+		//('min' '=' min=NumberLiteral)? ('max' '=' max=NumberLiteral)? attributes+=AttrClassConfig*
 		public Group getGroup_3_1() { return cGroup_3_1; }
 
 		//('min' '=' min=NumberLiteral)?
@@ -762,7 +762,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_3_0() { return cLeftCurlyBracketKeyword_3_0; }
 
-		//((dynConfig?='dynamic configuration' (readOnly?='read' | 'write'))? attributes+=AttrInstanceConfig*)
+		//(dynConfig?='dynamic configuration' (readOnly?='read' | 'write'))? attributes+=AttrInstanceConfig*
 		public Group getGroup_3_1() { return cGroup_3_1; }
 
 		//(dynConfig?='dynamic configuration' (readOnly?='read' | 'write'))?
@@ -774,7 +774,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		//'dynamic configuration'
 		public Keyword getDynConfigDynamicConfigurationKeyword_3_1_0_0_0() { return cDynConfigDynamicConfigurationKeyword_3_1_0_0_0; }
 
-		//(readOnly?='read' | 'write')
+		//readOnly?='read' | 'write'
 		public Alternatives getAlternatives_3_1_0_1() { return cAlternatives_3_1_0_1; }
 
 		//readOnly?='read'
@@ -1371,7 +1371,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	//// the attribute 'importedNamespace' is picked up by the ImportedNamespaceAwareLocalScopeProvider
 	//// the attribute 'importURI' is picked up by the ImportUriGlobalScopeProvider
 	//Import:
-	//	'import' (importedNamespace=ImportedFQN 'from' | 'model') importURI=STRING;
+	//	'import' (importedNamespace=ImportedFQN ('from' importURI=STRING)? | 'model' importURI=STRING);
 	public BaseGrammarAccess.ImportElements getImportAccess() {
 		return gaBase.getImportAccess();
 	}
@@ -1408,7 +1408,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	//// **************************************************************
 	//// Time Rule
 	//TIME ecore::ELong:
-	//	INT 's' | INT 'ms' | INT 'us' | INT 'ns'
+	//	INT 's' | INT 'ms' | INT 'us' | INT 'ns';
 	public BaseGrammarAccess.TIMEElements getTIMEAccess() {
 		return gaBase.getTIMEAccess();
 	}
@@ -1502,7 +1502,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Integer ecore::ELong:
-	//	('+' | '-')? INT | HEX
+	//	('+' | '-')? INT | HEX;
 	public BaseGrammarAccess.IntegerElements getIntegerAccess() {
 		return gaBase.getIntegerAccess();
 	}
@@ -1512,7 +1512,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Real ecore::EDouble:
-	//	Decimal | DecimalExp
+	//	Decimal | DecimalExp;
 	public BaseGrammarAccess.RealElements getRealAccess() {
 		return gaBase.getRealAccess();
 	}
@@ -1562,6 +1562,12 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 		return gaBase.getHEXRule();
 	} 
 
+	//terminal CC_STRING:
+	//	"'''"->"'''";
+	public TerminalRule getCC_STRINGRule() {
+		return gaBase.getCC_STRINGRule();
+	} 
+
 	//terminal ID:
 	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
@@ -1581,7 +1587,7 @@ public class ConfigGrammarAccess extends AbstractGrammarElementFinder {
 	} 
 
 	//terminal ML_COMMENT:
-	//	'/ *'->'* /';
+	//	'/*'->'*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
