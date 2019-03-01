@@ -492,7 +492,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
 
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-   * 
+   *
    * <p>This method is used to initialize {@link RoomPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
@@ -507,11 +507,13 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     if (isInited) return (RoomPackage)EPackage.Registry.INSTANCE.getEPackage(RoomPackage.eNS_URI);
 
     // Obtain or create and register package
-    RoomPackageImpl theRoomPackage = (RoomPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof RoomPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new RoomPackageImpl());
+    Object registeredRoomPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+    RoomPackageImpl theRoomPackage = registeredRoomPackage instanceof RoomPackageImpl ? (RoomPackageImpl)registeredRoomPackage : new RoomPackageImpl();
 
     isInited = true;
 
     // Initialize simple dependencies
+    BasePackage.eINSTANCE.eClass();
     FSMPackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
@@ -523,7 +525,6 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     // Mark meta-data to indicate it can't be changed
     theRoomPackage.freeze();
 
-  
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(RoomPackage.eNS_URI, theRoomPackage);
     return theRoomPackage;
@@ -534,6 +535,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getRoomModel()
   {
     return roomModelEClass;
@@ -544,6 +546,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getRoomModel_Name()
   {
     return (EAttribute)roomModelEClass.getEStructuralFeatures().get(0);
@@ -554,6 +557,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getRoomModel_Docu()
   {
     return (EReference)roomModelEClass.getEStructuralFeatures().get(1);
@@ -564,7 +568,8 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getRoomModel_Imports()
+  @Override
+  public EReference getRoomModel_Annotations()
   {
     return (EReference)roomModelEClass.getEStructuralFeatures().get(2);
   }
@@ -574,7 +579,8 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getRoomModel_PrimitiveTypes()
+  @Override
+  public EReference getRoomModel_Imports()
   {
     return (EReference)roomModelEClass.getEStructuralFeatures().get(3);
   }
@@ -584,7 +590,8 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getRoomModel_EnumerationTypes()
+  @Override
+  public EReference getRoomModel_PrimitiveTypes()
   {
     return (EReference)roomModelEClass.getEStructuralFeatures().get(4);
   }
@@ -594,7 +601,8 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getRoomModel_ExternalTypes()
+  @Override
+  public EReference getRoomModel_EnumerationTypes()
   {
     return (EReference)roomModelEClass.getEStructuralFeatures().get(5);
   }
@@ -604,7 +612,8 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getRoomModel_DataClasses()
+  @Override
+  public EReference getRoomModel_ExternalTypes()
   {
     return (EReference)roomModelEClass.getEStructuralFeatures().get(6);
   }
@@ -614,7 +623,8 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getRoomModel_ProtocolClasses()
+  @Override
+  public EReference getRoomModel_DataClasses()
   {
     return (EReference)roomModelEClass.getEStructuralFeatures().get(7);
   }
@@ -624,7 +634,8 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getRoomModel_ActorClasses()
+  @Override
+  public EReference getRoomModel_ProtocolClasses()
   {
     return (EReference)roomModelEClass.getEStructuralFeatures().get(8);
   }
@@ -634,7 +645,8 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getRoomModel_SubSystemClasses()
+  @Override
+  public EReference getRoomModel_ActorClasses()
   {
     return (EReference)roomModelEClass.getEStructuralFeatures().get(9);
   }
@@ -644,7 +656,8 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getRoomModel_Systems()
+  @Override
+  public EReference getRoomModel_SubSystemClasses()
   {
     return (EReference)roomModelEClass.getEStructuralFeatures().get(10);
   }
@@ -654,7 +667,8 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getRoomModel_AnnotationTypes()
+  @Override
+  public EReference getRoomModel_Systems()
   {
     return (EReference)roomModelEClass.getEStructuralFeatures().get(11);
   }
@@ -664,6 +678,18 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
+  public EReference getRoomModel_AnnotationTypes()
+  {
+    return (EReference)roomModelEClass.getEStructuralFeatures().get(12);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EClass getRoomClass()
   {
     return roomClassEClass;
@@ -674,6 +700,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getRoomClass_Name()
   {
     return (EAttribute)roomClassEClass.getEStructuralFeatures().get(0);
@@ -684,6 +711,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getRoomClass_Docu()
   {
     return (EReference)roomClassEClass.getEStructuralFeatures().get(1);
@@ -694,6 +722,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getStructureClass()
   {
     return structureClassEClass;
@@ -704,6 +733,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getStructureClass_Annotations()
   {
     return (EReference)structureClassEClass.getEStructuralFeatures().get(0);
@@ -714,6 +744,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getStructureClass_Connections()
   {
     return (EReference)structureClassEClass.getEStructuralFeatures().get(1);
@@ -724,6 +755,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getStructureClass_Bindings()
   {
     return (EReference)structureClassEClass.getEStructuralFeatures().get(2);
@@ -734,6 +766,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getActorContainerClass()
   {
     return actorContainerClassEClass;
@@ -744,6 +777,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getActorContainerClass_ServiceProvisionPoints()
   {
     return (EReference)actorContainerClassEClass.getEStructuralFeatures().get(0);
@@ -754,6 +788,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getActorContainerClass_UserCode1()
   {
     return (EReference)actorContainerClassEClass.getEStructuralFeatures().get(1);
@@ -764,6 +799,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getActorContainerClass_UserCode2()
   {
     return (EReference)actorContainerClassEClass.getEStructuralFeatures().get(2);
@@ -774,6 +810,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getActorContainerClass_UserCode3()
   {
     return (EReference)actorContainerClassEClass.getEStructuralFeatures().get(3);
@@ -784,6 +821,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getActorContainerClass_ActorRefs()
   {
     return (EReference)actorContainerClassEClass.getEStructuralFeatures().get(4);
@@ -794,6 +832,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getVarDecl()
   {
     return varDeclEClass;
@@ -804,6 +843,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getVarDecl_Name()
   {
     return (EAttribute)varDeclEClass.getEStructuralFeatures().get(0);
@@ -814,6 +854,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getVarDecl_RefType()
   {
     return (EReference)varDeclEClass.getEStructuralFeatures().get(1);
@@ -824,6 +865,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getVarDecl_Varargs()
   {
     return (EAttribute)varDeclEClass.getEStructuralFeatures().get(2);
@@ -834,6 +876,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getMessageData()
   {
     return messageDataEClass;
@@ -844,6 +887,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getMessageData_DeprecatedName()
   {
     return (EAttribute)messageDataEClass.getEStructuralFeatures().get(0);
@@ -854,6 +898,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getMessageData_RefType()
   {
     return (EReference)messageDataEClass.getEStructuralFeatures().get(1);
@@ -864,6 +909,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getRefableType()
   {
     return refableTypeEClass;
@@ -874,6 +920,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getRefableType_Type()
   {
     return (EReference)refableTypeEClass.getEStructuralFeatures().get(0);
@@ -884,6 +931,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getRefableType_Ref()
   {
     return (EAttribute)refableTypeEClass.getEStructuralFeatures().get(1);
@@ -894,6 +942,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getDataType()
   {
     return dataTypeEClass;
@@ -904,6 +953,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getComplexType()
   {
     return complexTypeEClass;
@@ -914,6 +964,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getPrimitiveType()
   {
     return primitiveTypeEClass;
@@ -924,6 +975,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getPrimitiveType_Type()
   {
     return (EAttribute)primitiveTypeEClass.getEStructuralFeatures().get(0);
@@ -934,6 +986,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getPrimitiveType_TargetName()
   {
     return (EAttribute)primitiveTypeEClass.getEStructuralFeatures().get(1);
@@ -944,6 +997,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getPrimitiveType_CastName()
   {
     return (EAttribute)primitiveTypeEClass.getEStructuralFeatures().get(2);
@@ -954,6 +1008,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getPrimitiveType_DefaultValueLiteral()
   {
     return (EAttribute)primitiveTypeEClass.getEStructuralFeatures().get(3);
@@ -964,6 +1019,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getEnumerationType()
   {
     return enumerationTypeEClass;
@@ -974,6 +1030,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getEnumerationType_PrimitiveType()
   {
     return (EReference)enumerationTypeEClass.getEStructuralFeatures().get(0);
@@ -984,6 +1041,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getEnumerationType_Literals()
   {
     return (EReference)enumerationTypeEClass.getEStructuralFeatures().get(1);
@@ -994,6 +1052,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getEnumLiteral()
   {
     return enumLiteralEClass;
@@ -1004,6 +1063,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getEnumLiteral_Name()
   {
     return (EAttribute)enumLiteralEClass.getEStructuralFeatures().get(0);
@@ -1014,6 +1074,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getEnumLiteral_Literal()
   {
     return (EReference)enumLiteralEClass.getEStructuralFeatures().get(1);
@@ -1024,6 +1085,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getExternalType()
   {
     return externalTypeEClass;
@@ -1034,6 +1096,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getExternalType_TargetName()
   {
     return (EAttribute)externalTypeEClass.getEStructuralFeatures().get(0);
@@ -1044,6 +1107,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getExternalType_DefaultValueLiteral()
   {
     return (EAttribute)externalTypeEClass.getEStructuralFeatures().get(1);
@@ -1054,6 +1118,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getDataClass()
   {
     return dataClassEClass;
@@ -1064,6 +1129,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getDataClass_Base()
   {
     return (EReference)dataClassEClass.getEStructuralFeatures().get(0);
@@ -1074,6 +1140,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getDataClass_Annotations()
   {
     return (EReference)dataClassEClass.getEStructuralFeatures().get(1);
@@ -1084,6 +1151,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getDataClass_UserCode1()
   {
     return (EReference)dataClassEClass.getEStructuralFeatures().get(2);
@@ -1094,6 +1162,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getDataClass_UserCode2()
   {
     return (EReference)dataClassEClass.getEStructuralFeatures().get(3);
@@ -1104,6 +1173,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getDataClass_UserCode3()
   {
     return (EReference)dataClassEClass.getEStructuralFeatures().get(4);
@@ -1114,6 +1184,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getDataClass_Operations()
   {
     return (EReference)dataClassEClass.getEStructuralFeatures().get(5);
@@ -1124,6 +1195,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getDataClass_Structors()
   {
     return (EReference)dataClassEClass.getEStructuralFeatures().get(6);
@@ -1134,6 +1206,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getDataClass_Attributes()
   {
     return (EReference)dataClassEClass.getEStructuralFeatures().get(7);
@@ -1144,6 +1217,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getAttribute()
   {
     return attributeEClass;
@@ -1154,6 +1228,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getAttribute_Name()
   {
     return (EAttribute)attributeEClass.getEStructuralFeatures().get(0);
@@ -1164,6 +1239,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getAttribute_Size()
   {
     return (EAttribute)attributeEClass.getEStructuralFeatures().get(1);
@@ -1174,6 +1250,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getAttribute_Type()
   {
     return (EReference)attributeEClass.getEStructuralFeatures().get(2);
@@ -1184,6 +1261,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getAttribute_DefaultValueLiteral()
   {
     return (EAttribute)attributeEClass.getEStructuralFeatures().get(3);
@@ -1194,6 +1272,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getAttribute_Docu()
   {
     return (EReference)attributeEClass.getEStructuralFeatures().get(4);
@@ -1204,6 +1283,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getOperation()
   {
     return operationEClass;
@@ -1214,6 +1294,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getOperation_Name()
   {
     return (EAttribute)operationEClass.getEStructuralFeatures().get(0);
@@ -1224,6 +1305,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getOperation_Arguments()
   {
     return (EReference)operationEClass.getEStructuralFeatures().get(1);
@@ -1234,6 +1316,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getOperation_ReturnType()
   {
     return (EReference)operationEClass.getEStructuralFeatures().get(2);
@@ -1244,6 +1327,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getOperation_Docu()
   {
     return (EReference)operationEClass.getEStructuralFeatures().get(3);
@@ -1254,6 +1338,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getOperation_DetailCode()
   {
     return (EReference)operationEClass.getEStructuralFeatures().get(4);
@@ -1264,6 +1349,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getStandardOperation()
   {
     return standardOperationEClass;
@@ -1274,6 +1360,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getStandardOperation_Override()
   {
     return (EAttribute)standardOperationEClass.getEStructuralFeatures().get(0);
@@ -1284,6 +1371,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getPortOperation()
   {
     return portOperationEClass;
@@ -1294,6 +1382,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getPortOperation_SendsMsg()
   {
     return (EReference)portOperationEClass.getEStructuralFeatures().get(0);
@@ -1304,6 +1393,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getClassStructor()
   {
     return classStructorEClass;
@@ -1314,6 +1404,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getClassStructor_Name()
   {
     return (EAttribute)classStructorEClass.getEStructuralFeatures().get(0);
@@ -1324,6 +1415,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getClassStructor_DetailCode()
   {
     return (EReference)classStructorEClass.getEStructuralFeatures().get(1);
@@ -1334,6 +1426,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getGeneralProtocolClass()
   {
     return generalProtocolClassEClass;
@@ -1344,6 +1437,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getGeneralProtocolClass_Annotations()
   {
     return (EReference)generalProtocolClassEClass.getEStructuralFeatures().get(0);
@@ -1354,6 +1448,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getProtocolClass()
   {
     return protocolClassEClass;
@@ -1364,6 +1459,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getProtocolClass_CommType()
   {
     return (EAttribute)protocolClassEClass.getEStructuralFeatures().get(0);
@@ -1374,6 +1470,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getProtocolClass_Base()
   {
     return (EReference)protocolClassEClass.getEStructuralFeatures().get(1);
@@ -1384,6 +1481,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getProtocolClass_UserCode1()
   {
     return (EReference)protocolClassEClass.getEStructuralFeatures().get(2);
@@ -1394,6 +1492,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getProtocolClass_UserCode2()
   {
     return (EReference)protocolClassEClass.getEStructuralFeatures().get(3);
@@ -1404,6 +1503,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getProtocolClass_UserCode3()
   {
     return (EReference)protocolClassEClass.getEStructuralFeatures().get(4);
@@ -1414,6 +1514,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getProtocolClass_IncomingMessages()
   {
     return (EReference)protocolClassEClass.getEStructuralFeatures().get(5);
@@ -1424,6 +1525,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getProtocolClass_OutgoingMessages()
   {
     return (EReference)protocolClassEClass.getEStructuralFeatures().get(6);
@@ -1434,6 +1536,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getProtocolClass_Regular()
   {
     return (EReference)protocolClassEClass.getEStructuralFeatures().get(7);
@@ -1444,6 +1547,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getProtocolClass_Conjugated()
   {
     return (EReference)protocolClassEClass.getEStructuralFeatures().get(8);
@@ -1454,6 +1558,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getProtocolClass_Semantics()
   {
     return (EReference)protocolClassEClass.getEStructuralFeatures().get(9);
@@ -1464,6 +1569,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getCompoundProtocolClass()
   {
     return compoundProtocolClassEClass;
@@ -1474,6 +1580,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getCompoundProtocolClass_SubProtocols()
   {
     return (EReference)compoundProtocolClassEClass.getEStructuralFeatures().get(0);
@@ -1484,6 +1591,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getSubProtocol()
   {
     return subProtocolEClass;
@@ -1494,6 +1602,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getSubProtocol_Name()
   {
     return (EAttribute)subProtocolEClass.getEStructuralFeatures().get(0);
@@ -1504,6 +1613,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getSubProtocol_Protocol()
   {
     return (EReference)subProtocolEClass.getEStructuralFeatures().get(1);
@@ -1514,6 +1624,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getMessage()
   {
     return messageEClass;
@@ -1524,6 +1635,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getMessage_Priv()
   {
     return (EAttribute)messageEClass.getEStructuralFeatures().get(0);
@@ -1534,6 +1646,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getMessage_Name()
   {
     return (EAttribute)messageEClass.getEStructuralFeatures().get(1);
@@ -1544,6 +1657,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getMessage_Data()
   {
     return (EReference)messageEClass.getEStructuralFeatures().get(2);
@@ -1554,6 +1668,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getMessage_Annotations()
   {
     return (EReference)messageEClass.getEStructuralFeatures().get(3);
@@ -1564,6 +1679,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getMessage_Docu()
   {
     return (EReference)messageEClass.getEStructuralFeatures().get(4);
@@ -1574,6 +1690,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getPortClass()
   {
     return portClassEClass;
@@ -1584,6 +1701,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getPortClass_UserCode()
   {
     return (EReference)portClassEClass.getEStructuralFeatures().get(0);
@@ -1594,6 +1712,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getPortClass_MsgHandlers()
   {
     return (EReference)portClassEClass.getEStructuralFeatures().get(1);
@@ -1604,6 +1723,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getPortClass_Operations()
   {
     return (EReference)portClassEClass.getEStructuralFeatures().get(2);
@@ -1614,6 +1734,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getPortClass_Attributes()
   {
     return (EReference)portClassEClass.getEStructuralFeatures().get(3);
@@ -1624,6 +1745,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getMessageHandler()
   {
     return messageHandlerEClass;
@@ -1634,6 +1756,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getMessageHandler_Msg()
   {
     return (EReference)messageHandlerEClass.getEStructuralFeatures().get(0);
@@ -1644,6 +1767,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getMessageHandler_DetailCode()
   {
     return (EReference)messageHandlerEClass.getEStructuralFeatures().get(1);
@@ -1654,6 +1778,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getInMessageHandler()
   {
     return inMessageHandlerEClass;
@@ -1664,6 +1789,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getOutMessageHandler()
   {
     return outMessageHandlerEClass;
@@ -1674,6 +1800,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getActorClass()
   {
     return actorClassEClass;
@@ -1684,6 +1811,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getActorClass_InterfacePorts()
   {
     return (EReference)actorClassEClass.getEStructuralFeatures().get(0);
@@ -1694,6 +1822,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getActorClass_StructureDocu()
   {
     return (EReference)actorClassEClass.getEStructuralFeatures().get(1);
@@ -1704,6 +1833,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getActorClass_ServiceImplementations()
   {
     return (EReference)actorClassEClass.getEStructuralFeatures().get(2);
@@ -1714,6 +1844,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getActorClass_Attributes()
   {
     return (EReference)actorClassEClass.getEStructuralFeatures().get(3);
@@ -1724,6 +1855,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getActorClass_ServiceAccessPoints()
   {
     return (EReference)actorClassEClass.getEStructuralFeatures().get(4);
@@ -1734,6 +1866,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getActorClass_InternalPorts()
   {
     return (EReference)actorClassEClass.getEStructuralFeatures().get(5);
@@ -1744,6 +1877,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getActorClass_ExternalPorts()
   {
     return (EReference)actorClassEClass.getEStructuralFeatures().get(6);
@@ -1754,6 +1888,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getActorClass_BehaviorDocu()
   {
     return (EReference)actorClassEClass.getEStructuralFeatures().get(7);
@@ -1764,6 +1899,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getActorClass_BehaviorAnnotations()
   {
     return (EReference)actorClassEClass.getEStructuralFeatures().get(8);
@@ -1774,6 +1910,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getActorClass_Operations()
   {
     return (EReference)actorClassEClass.getEStructuralFeatures().get(9);
@@ -1784,6 +1921,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getActorClass_Structors()
   {
     return (EReference)actorClassEClass.getEStructuralFeatures().get(10);
@@ -1794,6 +1932,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getInterfaceItem()
   {
     return interfaceItemEClass;
@@ -1804,6 +1943,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getInterfaceItem_Docu()
   {
     return (EReference)interfaceItemEClass.getEStructuralFeatures().get(0);
@@ -1814,6 +1954,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getPort()
   {
     return portEClass;
@@ -1824,6 +1965,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getPort_Conjugated()
   {
     return (EAttribute)portEClass.getEStructuralFeatures().get(0);
@@ -1834,6 +1976,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getPort_Multiplicity()
   {
     return (EAttribute)portEClass.getEStructuralFeatures().get(1);
@@ -1844,6 +1987,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getPort_Protocol()
   {
     return (EReference)portEClass.getEStructuralFeatures().get(2);
@@ -1854,6 +1998,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getPort_Annotations()
   {
     return (EReference)portEClass.getEStructuralFeatures().get(3);
@@ -1864,6 +2009,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getExternalPort()
   {
     return externalPortEClass;
@@ -1874,6 +2020,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getExternalPort_InterfacePort()
   {
     return (EReference)externalPortEClass.getEStructuralFeatures().get(0);
@@ -1884,6 +2031,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getSAP()
   {
     return sapEClass;
@@ -1894,6 +2042,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getSAP_Protocol()
   {
     return (EReference)sapEClass.getEStructuralFeatures().get(0);
@@ -1904,6 +2053,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getSPP()
   {
     return sppEClass;
@@ -1914,6 +2064,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getSPP_Protocol()
   {
     return (EReference)sppEClass.getEStructuralFeatures().get(0);
@@ -1924,6 +2075,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getServiceImplementation()
   {
     return serviceImplementationEClass;
@@ -1934,6 +2086,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getServiceImplementation_Spp()
   {
     return (EReference)serviceImplementationEClass.getEStructuralFeatures().get(0);
@@ -1944,6 +2097,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getLogicalSystem()
   {
     return logicalSystemEClass;
@@ -1954,6 +2108,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getLogicalSystem_SubSystems()
   {
     return (EReference)logicalSystemEClass.getEStructuralFeatures().get(0);
@@ -1964,6 +2119,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getActorContainerRef()
   {
     return actorContainerRefEClass;
@@ -1974,6 +2130,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getActorContainerRef_Name()
   {
     return (EAttribute)actorContainerRefEClass.getEStructuralFeatures().get(0);
@@ -1984,6 +2141,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getActorContainerRef_Docu()
   {
     return (EReference)actorContainerRefEClass.getEStructuralFeatures().get(1);
@@ -1994,6 +2152,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getSubSystemRef()
   {
     return subSystemRefEClass;
@@ -2004,6 +2163,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getSubSystemRef_Type()
   {
     return (EReference)subSystemRefEClass.getEStructuralFeatures().get(0);
@@ -2014,6 +2174,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getSubSystemClass()
   {
     return subSystemClassEClass;
@@ -2024,6 +2185,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getSubSystemClass_ActorInstanceMappings()
   {
     return (EReference)subSystemClassEClass.getEStructuralFeatures().get(0);
@@ -2034,6 +2196,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getSubSystemClass_Threads()
   {
     return (EReference)subSystemClassEClass.getEStructuralFeatures().get(1);
@@ -2044,6 +2207,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getSubSystemClass_RelayPorts()
   {
     return (EReference)subSystemClassEClass.getEStructuralFeatures().get(2);
@@ -2054,6 +2218,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getLogicalThread()
   {
     return logicalThreadEClass;
@@ -2064,6 +2229,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getLogicalThread_Name()
   {
     return (EAttribute)logicalThreadEClass.getEStructuralFeatures().get(0);
@@ -2074,6 +2240,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getActorInstanceMapping()
   {
     return actorInstanceMappingEClass;
@@ -2084,6 +2251,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getActorInstanceMapping_Path()
   {
     return (EReference)actorInstanceMappingEClass.getEStructuralFeatures().get(0);
@@ -2094,6 +2262,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getActorInstanceMapping_Thread()
   {
     return (EReference)actorInstanceMappingEClass.getEStructuralFeatures().get(1);
@@ -2104,6 +2273,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getActorInstanceMapping_ActorInstanceMappings()
   {
     return (EReference)actorInstanceMappingEClass.getEStructuralFeatures().get(2);
@@ -2114,6 +2284,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getRefPath()
   {
     return refPathEClass;
@@ -2124,6 +2295,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getRefPath_Refs()
   {
     return (EReference)refPathEClass.getEStructuralFeatures().get(0);
@@ -2134,6 +2306,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getRefSegment()
   {
     return refSegmentEClass;
@@ -2144,6 +2317,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getRefSegment_Ref()
   {
     return (EAttribute)refSegmentEClass.getEStructuralFeatures().get(0);
@@ -2154,6 +2328,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getRefSegment_Idx()
   {
     return (EAttribute)refSegmentEClass.getEStructuralFeatures().get(1);
@@ -2164,6 +2339,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getBinding()
   {
     return bindingEClass;
@@ -2174,6 +2350,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getBinding_Endpoint1()
   {
     return (EReference)bindingEClass.getEStructuralFeatures().get(0);
@@ -2184,6 +2361,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getBinding_Endpoint2()
   {
     return (EReference)bindingEClass.getEStructuralFeatures().get(1);
@@ -2194,6 +2372,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getBindingEndPoint()
   {
     return bindingEndPointEClass;
@@ -2204,6 +2383,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getBindingEndPoint_ActorRef()
   {
     return (EReference)bindingEndPointEClass.getEStructuralFeatures().get(0);
@@ -2214,6 +2394,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getBindingEndPoint_Port()
   {
     return (EReference)bindingEndPointEClass.getEStructuralFeatures().get(1);
@@ -2224,6 +2405,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getBindingEndPoint_Sub()
   {
     return (EReference)bindingEndPointEClass.getEStructuralFeatures().get(2);
@@ -2234,6 +2416,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getLayerConnection()
   {
     return layerConnectionEClass;
@@ -2244,6 +2427,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getLayerConnection_From()
   {
     return (EReference)layerConnectionEClass.getEStructuralFeatures().get(0);
@@ -2254,6 +2438,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getLayerConnection_To()
   {
     return (EReference)layerConnectionEClass.getEStructuralFeatures().get(1);
@@ -2264,6 +2449,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getSAPoint()
   {
     return saPointEClass;
@@ -2274,6 +2460,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getRefSAPoint()
   {
     return refSAPointEClass;
@@ -2284,6 +2471,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getRefSAPoint_Ref()
   {
     return (EReference)refSAPointEClass.getEStructuralFeatures().get(0);
@@ -2294,6 +2482,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getRelaySAPoint()
   {
     return relaySAPointEClass;
@@ -2304,6 +2493,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getRelaySAPoint_Relay()
   {
     return (EReference)relaySAPointEClass.getEStructuralFeatures().get(0);
@@ -2314,6 +2504,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getSPPoint()
   {
     return spPointEClass;
@@ -2324,6 +2515,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getSPPoint_Ref()
   {
     return (EReference)spPointEClass.getEStructuralFeatures().get(0);
@@ -2334,6 +2526,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getSPPoint_Service()
   {
     return (EReference)spPointEClass.getEStructuralFeatures().get(1);
@@ -2344,6 +2537,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getActorRef()
   {
     return actorRefEClass;
@@ -2354,6 +2548,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getActorRef_RefType()
   {
     return (EAttribute)actorRefEClass.getEStructuralFeatures().get(0);
@@ -2364,6 +2559,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EAttribute getActorRef_Multiplicity()
   {
     return (EAttribute)actorRefEClass.getEStructuralFeatures().get(1);
@@ -2374,6 +2570,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EReference getActorRef_Type()
   {
     return (EReference)actorRefEClass.getEStructuralFeatures().get(2);
@@ -2384,6 +2581,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EClass getRoomElement()
   {
     return roomElementEClass;
@@ -2394,6 +2592,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EEnum getCommunicationType()
   {
     return communicationTypeEEnum;
@@ -2404,6 +2603,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EEnum getReferenceType()
   {
     return referenceTypeEEnum;
@@ -2414,6 +2614,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EEnum getRoomAnnotationTargetEnum()
   {
     return roomAnnotationTargetEnumEEnum;
@@ -2424,6 +2625,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public RoomFactory getRoomFactory()
   {
     return (RoomFactory)getEFactoryInstance();
@@ -2452,6 +2654,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     roomModelEClass = createEClass(ROOM_MODEL);
     createEAttribute(roomModelEClass, ROOM_MODEL__NAME);
     createEReference(roomModelEClass, ROOM_MODEL__DOCU);
+    createEReference(roomModelEClass, ROOM_MODEL__ANNOTATIONS);
     createEReference(roomModelEClass, ROOM_MODEL__IMPORTS);
     createEReference(roomModelEClass, ROOM_MODEL__PRIMITIVE_TYPES);
     createEReference(roomModelEClass, ROOM_MODEL__ENUMERATION_TYPES);
@@ -2784,6 +2987,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     initEClass(roomModelEClass, RoomModel.class, "RoomModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getRoomModel_Name(), ecorePackage.getEString(), "name", null, 0, 1, RoomModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getRoomModel_Docu(), theBasePackage.getDocumentation(), null, "docu", null, 0, 1, RoomModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getRoomModel_Annotations(), theBasePackage.getAnnotation(), null, "annotations", null, 0, -1, RoomModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getRoomModel_Imports(), theBasePackage.getImport(), null, "imports", null, 0, -1, RoomModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getRoomModel_PrimitiveTypes(), this.getPrimitiveType(), null, "primitiveTypes", null, 0, -1, RoomModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getRoomModel_EnumerationTypes(), this.getEnumerationType(), null, "enumerationTypes", null, 0, -1, RoomModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3079,6 +3283,7 @@ public class RoomPackageImpl extends EPackageImpl implements RoomPackage
     addEEnumLiteral(roomAnnotationTargetEnumEEnum, RoomAnnotationTargetEnum.MESSAGE);
     addEEnumLiteral(roomAnnotationTargetEnumEEnum, RoomAnnotationTargetEnum.STATE);
     addEEnumLiteral(roomAnnotationTargetEnumEEnum, RoomAnnotationTargetEnum.TRANSITION);
+    addEEnumLiteral(roomAnnotationTargetEnumEEnum, RoomAnnotationTargetEnum.ROOM_MODEL);
 
     // Create resource
     createResource(eNS_URI);

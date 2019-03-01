@@ -107,13 +107,22 @@ public interface RoomPackage extends EPackage
   int ROOM_MODEL__DOCU = ROOM_ELEMENT_FEATURE_COUNT + 1;
 
   /**
+   * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ROOM_MODEL__ANNOTATIONS = ROOM_ELEMENT_FEATURE_COUNT + 2;
+
+  /**
    * The feature id for the '<em><b>Imports</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ROOM_MODEL__IMPORTS = ROOM_ELEMENT_FEATURE_COUNT + 2;
+  int ROOM_MODEL__IMPORTS = ROOM_ELEMENT_FEATURE_COUNT + 3;
 
   /**
    * The feature id for the '<em><b>Primitive Types</b></em>' containment reference list.
@@ -122,7 +131,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ROOM_MODEL__PRIMITIVE_TYPES = ROOM_ELEMENT_FEATURE_COUNT + 3;
+  int ROOM_MODEL__PRIMITIVE_TYPES = ROOM_ELEMENT_FEATURE_COUNT + 4;
 
   /**
    * The feature id for the '<em><b>Enumeration Types</b></em>' containment reference list.
@@ -131,7 +140,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ROOM_MODEL__ENUMERATION_TYPES = ROOM_ELEMENT_FEATURE_COUNT + 4;
+  int ROOM_MODEL__ENUMERATION_TYPES = ROOM_ELEMENT_FEATURE_COUNT + 5;
 
   /**
    * The feature id for the '<em><b>External Types</b></em>' containment reference list.
@@ -140,7 +149,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ROOM_MODEL__EXTERNAL_TYPES = ROOM_ELEMENT_FEATURE_COUNT + 5;
+  int ROOM_MODEL__EXTERNAL_TYPES = ROOM_ELEMENT_FEATURE_COUNT + 6;
 
   /**
    * The feature id for the '<em><b>Data Classes</b></em>' containment reference list.
@@ -149,7 +158,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ROOM_MODEL__DATA_CLASSES = ROOM_ELEMENT_FEATURE_COUNT + 6;
+  int ROOM_MODEL__DATA_CLASSES = ROOM_ELEMENT_FEATURE_COUNT + 7;
 
   /**
    * The feature id for the '<em><b>Protocol Classes</b></em>' containment reference list.
@@ -158,7 +167,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ROOM_MODEL__PROTOCOL_CLASSES = ROOM_ELEMENT_FEATURE_COUNT + 7;
+  int ROOM_MODEL__PROTOCOL_CLASSES = ROOM_ELEMENT_FEATURE_COUNT + 8;
 
   /**
    * The feature id for the '<em><b>Actor Classes</b></em>' containment reference list.
@@ -167,7 +176,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ROOM_MODEL__ACTOR_CLASSES = ROOM_ELEMENT_FEATURE_COUNT + 8;
+  int ROOM_MODEL__ACTOR_CLASSES = ROOM_ELEMENT_FEATURE_COUNT + 9;
 
   /**
    * The feature id for the '<em><b>Sub System Classes</b></em>' containment reference list.
@@ -176,7 +185,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ROOM_MODEL__SUB_SYSTEM_CLASSES = ROOM_ELEMENT_FEATURE_COUNT + 9;
+  int ROOM_MODEL__SUB_SYSTEM_CLASSES = ROOM_ELEMENT_FEATURE_COUNT + 10;
 
   /**
    * The feature id for the '<em><b>Systems</b></em>' containment reference list.
@@ -185,7 +194,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ROOM_MODEL__SYSTEMS = ROOM_ELEMENT_FEATURE_COUNT + 10;
+  int ROOM_MODEL__SYSTEMS = ROOM_ELEMENT_FEATURE_COUNT + 11;
 
   /**
    * The feature id for the '<em><b>Annotation Types</b></em>' containment reference list.
@@ -194,7 +203,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ROOM_MODEL__ANNOTATION_TYPES = ROOM_ELEMENT_FEATURE_COUNT + 11;
+  int ROOM_MODEL__ANNOTATION_TYPES = ROOM_ELEMENT_FEATURE_COUNT + 12;
 
   /**
    * The number of structural features of the '<em>Model</em>' class.
@@ -203,7 +212,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ROOM_MODEL_FEATURE_COUNT = ROOM_ELEMENT_FEATURE_COUNT + 12;
+  int ROOM_MODEL_FEATURE_COUNT = ROOM_ELEMENT_FEATURE_COUNT + 13;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.RoomClassImpl <em>Class</em>}' class.
@@ -3055,6 +3064,17 @@ public interface RoomPackage extends EPackage
   EReference getRoomModel_Docu();
 
   /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.RoomModel#getAnnotations <em>Annotations</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Annotations</em>'.
+   * @see org.eclipse.etrice.core.room.RoomModel#getAnnotations()
+   * @see #getRoomModel()
+   * @generated
+   */
+  EReference getRoomModel_Annotations();
+
+  /**
    * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.RoomModel#getImports <em>Imports</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -5094,6 +5114,14 @@ public interface RoomPackage extends EPackage
      * @generated
      */
     EReference ROOM_MODEL__DOCU = eINSTANCE.getRoomModel_Docu();
+
+    /**
+     * The meta object literal for the '<em><b>Annotations</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ROOM_MODEL__ANNOTATIONS = eINSTANCE.getRoomModel_Annotations();
 
     /**
      * The meta object literal for the '<em><b>Imports</b></em>' containment reference list feature.

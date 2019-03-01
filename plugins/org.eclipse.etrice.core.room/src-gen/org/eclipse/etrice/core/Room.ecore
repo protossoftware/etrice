@@ -16,6 +16,9 @@
         <details key="documentation" value="&lt;br>This is an optional documentation.&#xD;&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="annotations" upperBound="-1"
+        eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.ecore#//Annotation"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="imports" upperBound="-1"
         eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.ecore#//Import"
         containment="true">
@@ -1075,6 +1078,7 @@
     <eLiterals name="MESSAGE" value="8" literal="Message"/>
     <eLiterals name="STATE" value="9" literal="State"/>
     <eLiterals name="TRANSITION" value="10" literal="Transition"/>
+    <eLiterals name="ROOM_MODEL" value="11" literal="RoomModel"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RoomElement" interface="true">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

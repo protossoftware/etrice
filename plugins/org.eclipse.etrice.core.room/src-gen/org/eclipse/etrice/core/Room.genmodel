@@ -4,7 +4,7 @@
     editorDirectory="/org.eclipse.etrice.core.room.editor/src" modelPluginID="org.eclipse.etrice.core.room"
     forceOverwrite="true" modelName="Room" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="6.0" copyrightFields="false" editPluginID="org.eclipse.etrice.core.room.edit"
-    editorPluginID="org.eclipse.etrice.core.room.editor" runtimeVersion="2.12" usedGenPackages="platform:/resource/org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.genmodel#//base platform:/resource/org.eclipse.etrice.core.fsm/model/generated/FSM.genmodel#//fSM">
+    editorPluginID="org.eclipse.etrice.core.room.editor" runtimeVersion="2.16" usedGenPackages="platform:/resource/org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.genmodel#//base platform:/resource/org.eclipse.etrice.core.fsm/model/generated/FSM.genmodel#//fSM">
   <genPackages prefix="Room" basePackage="org.eclipse.etrice.core" disposableProviderFactory="true"
       ecorePackage="Room.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="Room.ecore#//CommunicationType">
@@ -28,10 +28,12 @@
       <genEnumLiterals ecoreEnumLiteral="Room.ecore#//RoomAnnotationTargetEnum/MESSAGE"/>
       <genEnumLiterals ecoreEnumLiteral="Room.ecore#//RoomAnnotationTargetEnum/STATE"/>
       <genEnumLiterals ecoreEnumLiteral="Room.ecore#//RoomAnnotationTargetEnum/TRANSITION"/>
+      <genEnumLiterals ecoreEnumLiteral="Room.ecore#//RoomAnnotationTargetEnum/ROOM_MODEL"/>
     </genEnums>
     <genClasses ecoreClass="Room.ecore#//RoomModel">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Room.ecore#//RoomModel/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//RoomModel/docu"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//RoomModel/annotations"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//RoomModel/imports"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//RoomModel/primitiveTypes"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Room.ecore#//RoomModel/enumerationTypes"/>

@@ -64,6 +64,7 @@ public class SAPImpl extends InterfaceItemImpl implements SAP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ProtocolClass getProtocol()
   {
     if (protocol != null && protocol.eIsProxy())
@@ -94,6 +95,7 @@ public class SAPImpl extends InterfaceItemImpl implements SAP
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setProtocol(ProtocolClass newProtocol)
   {
     ProtocolClass oldProtocol = protocol;

@@ -168,6 +168,7 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public RoomModel createRoomModel()
   {
     RoomModelImpl roomModel = new RoomModelImpl();
@@ -179,6 +180,7 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public RoomClass createRoomClass()
   {
     RoomClassImpl roomClass = new RoomClassImpl();
@@ -190,6 +192,7 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public StructureClass createStructureClass()
   {
     StructureClassImpl structureClass = new StructureClassImpl();
@@ -201,6 +204,7 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ActorContainerClass createActorContainerClass()
   {
     ActorContainerClassImpl actorContainerClass = new ActorContainerClassImpl();
@@ -212,6 +216,7 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public VarDecl createVarDecl()
   {
     VarDeclImpl varDecl = new VarDeclImpl();
@@ -223,6 +228,7 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public MessageData createMessageData()
   {
     MessageDataImpl messageData = new MessageDataImpl();
@@ -234,6 +240,7 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public RefableType createRefableType()
   {
     RefableTypeImpl refableType = new RefableTypeImpl();
@@ -245,6 +252,7 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public DataType createDataType()
   {
     DataTypeImpl dataType = new DataTypeImpl();
@@ -256,6 +264,7 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ComplexType createComplexType()
   {
     ComplexTypeImpl complexType = new ComplexTypeImpl();
@@ -267,6 +276,7 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public PrimitiveType createPrimitiveType()
   {
     PrimitiveTypeImpl primitiveType = new PrimitiveTypeImpl();
@@ -278,6 +288,7 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EnumerationType createEnumerationType()
   {
     EnumerationTypeImpl enumerationType = new EnumerationTypeImpl();
@@ -289,6 +300,7 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EnumLiteral createEnumLiteral()
   {
     EnumLiteralImpl enumLiteral = new EnumLiteralImpl();
@@ -300,6 +312,7 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ExternalType createExternalType()
   {
     ExternalTypeImpl externalType = new ExternalTypeImpl();
@@ -311,6 +324,7 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public DataClass createDataClass()
   {
     DataClassImpl dataClass = new DataClassImpl();
@@ -322,6 +336,7 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Attribute createAttribute()
   {
     AttributeImpl attribute = new AttributeImpl();
@@ -333,6 +348,7 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Operation createOperation()
   {
     OperationImpl operation = new OperationImpl();
@@ -344,6 +360,7 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public StandardOperation createStandardOperation()
   {
     StandardOperationImpl standardOperation = new StandardOperationImpl();
@@ -355,6 +372,7 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public PortOperation createPortOperation()
   {
     PortOperationImpl portOperation = new PortOperationImpl();
@@ -366,6 +384,7 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ClassStructor createClassStructor()
   {
     ClassStructorImpl classStructor = new ClassStructorImpl();
@@ -377,6 +396,7 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public GeneralProtocolClass createGeneralProtocolClass()
   {
     GeneralProtocolClassImpl generalProtocolClass = new GeneralProtocolClassImpl();
@@ -388,6 +408,7 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ProtocolClass createProtocolClass()
   {
     ProtocolClassImpl protocolClass = new ProtocolClassImpl();
@@ -399,6 +420,7 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public CompoundProtocolClass createCompoundProtocolClass()
   {
     CompoundProtocolClassImpl compoundProtocolClass = new CompoundProtocolClassImpl();
@@ -410,6 +432,7 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SubProtocol createSubProtocol()
   {
     SubProtocolImpl subProtocol = new SubProtocolImpl();
@@ -421,6 +444,7 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Message createMessage()
   {
     MessageImpl message = new MessageImpl();
@@ -432,6 +456,7 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public PortClass createPortClass()
   {
     PortClassImpl portClass = new PortClassImpl();
@@ -443,6 +468,7 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public MessageHandler createMessageHandler()
   {
     MessageHandlerImpl messageHandler = new MessageHandlerImpl();
@@ -454,6 +480,7 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public InMessageHandler createInMessageHandler()
   {
     InMessageHandlerImpl inMessageHandler = new InMessageHandlerImpl();
@@ -465,6 +492,7 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public OutMessageHandler createOutMessageHandler()
   {
     OutMessageHandlerImpl outMessageHandler = new OutMessageHandlerImpl();
@@ -476,6 +504,7 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ActorClass createActorClass()
   {
     ActorClassImpl actorClass = new ActorClassImpl();
@@ -487,6 +516,7 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public InterfaceItem createInterfaceItem()
   {
     InterfaceItemImpl interfaceItem = new InterfaceItemImpl();
@@ -498,6 +528,7 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Port createPort()
   {
     PortImpl port = new PortImpl();
@@ -509,6 +540,7 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ExternalPort createExternalPort()
   {
     ExternalPortImpl externalPort = new ExternalPortImpl();
@@ -520,6 +552,7 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SAP createSAP()
   {
     SAPImpl sap = new SAPImpl();
@@ -531,6 +564,7 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SPP createSPP()
   {
     SPPImpl spp = new SPPImpl();
@@ -542,6 +576,7 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ServiceImplementation createServiceImplementation()
   {
     ServiceImplementationImpl serviceImplementation = new ServiceImplementationImpl();
@@ -553,6 +588,7 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public LogicalSystem createLogicalSystem()
   {
     LogicalSystemImpl logicalSystem = new LogicalSystemImpl();
@@ -564,6 +600,7 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ActorContainerRef createActorContainerRef()
   {
     ActorContainerRefImpl actorContainerRef = new ActorContainerRefImpl();
@@ -575,6 +612,7 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SubSystemRef createSubSystemRef()
   {
     SubSystemRefImpl subSystemRef = new SubSystemRefImpl();
@@ -586,6 +624,7 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SubSystemClass createSubSystemClass()
   {
     SubSystemClassImpl subSystemClass = new SubSystemClassImpl();
@@ -597,6 +636,7 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public LogicalThread createLogicalThread()
   {
     LogicalThreadImpl logicalThread = new LogicalThreadImpl();
@@ -608,6 +648,7 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ActorInstanceMapping createActorInstanceMapping()
   {
     ActorInstanceMappingImpl actorInstanceMapping = new ActorInstanceMappingImpl();
@@ -619,6 +660,7 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public RefPath createRefPath()
   {
     RefPathImpl refPath = new RefPathImpl();
@@ -630,6 +672,7 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public RefSegment createRefSegment()
   {
     RefSegmentImpl refSegment = new RefSegmentImpl();
@@ -641,6 +684,7 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Binding createBinding()
   {
     BindingImpl binding = new BindingImpl();
@@ -652,6 +696,7 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public BindingEndPoint createBindingEndPoint()
   {
     BindingEndPointImpl bindingEndPoint = new BindingEndPointImpl();
@@ -663,6 +708,7 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public LayerConnection createLayerConnection()
   {
     LayerConnectionImpl layerConnection = new LayerConnectionImpl();
@@ -674,6 +720,7 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SAPoint createSAPoint()
   {
     SAPointImpl saPoint = new SAPointImpl();
@@ -685,6 +732,7 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public RefSAPoint createRefSAPoint()
   {
     RefSAPointImpl refSAPoint = new RefSAPointImpl();
@@ -696,6 +744,7 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public RelaySAPoint createRelaySAPoint()
   {
     RelaySAPointImpl relaySAPoint = new RelaySAPointImpl();
@@ -707,6 +756,7 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SPPoint createSPPoint()
   {
     SPPointImpl spPoint = new SPPointImpl();
@@ -718,6 +768,7 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ActorRef createActorRef()
   {
     ActorRefImpl actorRef = new ActorRefImpl();
@@ -795,6 +846,7 @@ public class RoomFactoryImpl extends EFactoryImpl implements RoomFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public RoomPackage getRoomPackage()
   {
     return (RoomPackage)getEPackage();

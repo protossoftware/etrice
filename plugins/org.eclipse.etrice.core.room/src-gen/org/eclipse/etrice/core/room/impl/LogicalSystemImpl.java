@@ -69,6 +69,7 @@ public class LogicalSystemImpl extends StructureClassImpl implements LogicalSyst
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<SubSystemRef> getSubSystems()
   {
     if (subSystems == null)

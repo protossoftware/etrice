@@ -77,6 +77,7 @@ public class BindingImpl extends MinimalEObjectImpl.Container implements Binding
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public BindingEndPoint getEndpoint1()
   {
     return endpoint1;
@@ -104,6 +105,7 @@ public class BindingImpl extends MinimalEObjectImpl.Container implements Binding
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setEndpoint1(BindingEndPoint newEndpoint1)
   {
     if (newEndpoint1 != endpoint1)
@@ -125,6 +127,7 @@ public class BindingImpl extends MinimalEObjectImpl.Container implements Binding
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public BindingEndPoint getEndpoint2()
   {
     return endpoint2;
@@ -152,6 +155,7 @@ public class BindingImpl extends MinimalEObjectImpl.Container implements Binding
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setEndpoint2(BindingEndPoint newEndpoint2)
   {
     if (newEndpoint2 != endpoint2)

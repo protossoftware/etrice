@@ -125,16 +125,34 @@ ruleRoomModel returns [EObject current=null]
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getRoomModelAccess().getImportsImportParserRuleCall_4_0()); 
+	        newCompositeNode(grammarAccess.getRoomModelAccess().getAnnotationsAnnotationParserRuleCall_4_0()); 
 	    }
-		lv_imports_4_0=ruleImport		{
+		lv_annotations_4_0=ruleAnnotation		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getRoomModelRule());
+	        }
+       		add(
+       			$current, 
+       			"annotations",
+        		lv_annotations_4_0, 
+        		"org.eclipse.etrice.core.common.Base.Annotation");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)*(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getRoomModelAccess().getImportsImportParserRuleCall_5_0()); 
+	    }
+		lv_imports_5_0=ruleImport		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getRoomModelRule());
 	        }
        		add(
        			$current, 
        			"imports",
-        		lv_imports_4_0, 
+        		lv_imports_5_0, 
         		"org.eclipse.etrice.core.common.Base.Import");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -143,16 +161,16 @@ ruleRoomModel returns [EObject current=null]
 )*((
 (
 		{ 
-	        newCompositeNode(grammarAccess.getRoomModelAccess().getPrimitiveTypesPrimitiveTypeParserRuleCall_5_0_0()); 
+	        newCompositeNode(grammarAccess.getRoomModelAccess().getPrimitiveTypesPrimitiveTypeParserRuleCall_6_0_0()); 
 	    }
-		lv_primitiveTypes_5_0=rulePrimitiveType		{
+		lv_primitiveTypes_6_0=rulePrimitiveType		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getRoomModelRule());
 	        }
        		add(
        			$current, 
        			"primitiveTypes",
-        		lv_primitiveTypes_5_0, 
+        		lv_primitiveTypes_6_0, 
         		"org.eclipse.etrice.core.Room.PrimitiveType");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -162,16 +180,16 @@ ruleRoomModel returns [EObject current=null]
     |(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getRoomModelAccess().getEnumerationTypesEnumerationTypeParserRuleCall_5_1_0()); 
+	        newCompositeNode(grammarAccess.getRoomModelAccess().getEnumerationTypesEnumerationTypeParserRuleCall_6_1_0()); 
 	    }
-		lv_enumerationTypes_6_0=ruleEnumerationType		{
+		lv_enumerationTypes_7_0=ruleEnumerationType		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getRoomModelRule());
 	        }
        		add(
        			$current, 
        			"enumerationTypes",
-        		lv_enumerationTypes_6_0, 
+        		lv_enumerationTypes_7_0, 
         		"org.eclipse.etrice.core.Room.EnumerationType");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -181,16 +199,16 @@ ruleRoomModel returns [EObject current=null]
     |(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getRoomModelAccess().getExternalTypesExternalTypeParserRuleCall_5_2_0()); 
+	        newCompositeNode(grammarAccess.getRoomModelAccess().getExternalTypesExternalTypeParserRuleCall_6_2_0()); 
 	    }
-		lv_externalTypes_7_0=ruleExternalType		{
+		lv_externalTypes_8_0=ruleExternalType		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getRoomModelRule());
 	        }
        		add(
        			$current, 
        			"externalTypes",
-        		lv_externalTypes_7_0, 
+        		lv_externalTypes_8_0, 
         		"org.eclipse.etrice.core.Room.ExternalType");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -200,16 +218,16 @@ ruleRoomModel returns [EObject current=null]
     |(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getRoomModelAccess().getDataClassesDataClassParserRuleCall_5_3_0()); 
+	        newCompositeNode(grammarAccess.getRoomModelAccess().getDataClassesDataClassParserRuleCall_6_3_0()); 
 	    }
-		lv_dataClasses_8_0=ruleDataClass		{
+		lv_dataClasses_9_0=ruleDataClass		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getRoomModelRule());
 	        }
        		add(
        			$current, 
        			"dataClasses",
-        		lv_dataClasses_8_0, 
+        		lv_dataClasses_9_0, 
         		"org.eclipse.etrice.core.Room.DataClass");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -219,16 +237,16 @@ ruleRoomModel returns [EObject current=null]
     |(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getRoomModelAccess().getProtocolClassesGeneralProtocolClassParserRuleCall_5_4_0()); 
+	        newCompositeNode(grammarAccess.getRoomModelAccess().getProtocolClassesGeneralProtocolClassParserRuleCall_6_4_0()); 
 	    }
-		lv_protocolClasses_9_0=ruleGeneralProtocolClass		{
+		lv_protocolClasses_10_0=ruleGeneralProtocolClass		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getRoomModelRule());
 	        }
        		add(
        			$current, 
        			"protocolClasses",
-        		lv_protocolClasses_9_0, 
+        		lv_protocolClasses_10_0, 
         		"org.eclipse.etrice.core.Room.GeneralProtocolClass");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -238,16 +256,16 @@ ruleRoomModel returns [EObject current=null]
     |(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getRoomModelAccess().getActorClassesActorClassParserRuleCall_5_5_0()); 
+	        newCompositeNode(grammarAccess.getRoomModelAccess().getActorClassesActorClassParserRuleCall_6_5_0()); 
 	    }
-		lv_actorClasses_10_0=ruleActorClass		{
+		lv_actorClasses_11_0=ruleActorClass		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getRoomModelRule());
 	        }
        		add(
        			$current, 
        			"actorClasses",
-        		lv_actorClasses_10_0, 
+        		lv_actorClasses_11_0, 
         		"org.eclipse.etrice.core.Room.ActorClass");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -257,16 +275,16 @@ ruleRoomModel returns [EObject current=null]
     |(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getRoomModelAccess().getSubSystemClassesSubSystemClassParserRuleCall_5_6_0()); 
+	        newCompositeNode(grammarAccess.getRoomModelAccess().getSubSystemClassesSubSystemClassParserRuleCall_6_6_0()); 
 	    }
-		lv_subSystemClasses_11_0=ruleSubSystemClass		{
+		lv_subSystemClasses_12_0=ruleSubSystemClass		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getRoomModelRule());
 	        }
        		add(
        			$current, 
        			"subSystemClasses",
-        		lv_subSystemClasses_11_0, 
+        		lv_subSystemClasses_12_0, 
         		"org.eclipse.etrice.core.Room.SubSystemClass");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -276,16 +294,16 @@ ruleRoomModel returns [EObject current=null]
     |(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getRoomModelAccess().getSystemsLogicalSystemParserRuleCall_5_7_0()); 
+	        newCompositeNode(grammarAccess.getRoomModelAccess().getSystemsLogicalSystemParserRuleCall_6_7_0()); 
 	    }
-		lv_systems_12_0=ruleLogicalSystem		{
+		lv_systems_13_0=ruleLogicalSystem		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getRoomModelRule());
 	        }
        		add(
        			$current, 
        			"systems",
-        		lv_systems_12_0, 
+        		lv_systems_13_0, 
         		"org.eclipse.etrice.core.Room.LogicalSystem");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -295,24 +313,24 @@ ruleRoomModel returns [EObject current=null]
     |(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getRoomModelAccess().getAnnotationTypesAnnotationTypeParserRuleCall_5_8_0()); 
+	        newCompositeNode(grammarAccess.getRoomModelAccess().getAnnotationTypesAnnotationTypeParserRuleCall_6_8_0()); 
 	    }
-		lv_annotationTypes_13_0=ruleAnnotationType		{
+		lv_annotationTypes_14_0=ruleAnnotationType		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getRoomModelRule());
 	        }
        		add(
        			$current, 
        			"annotationTypes",
-        		lv_annotationTypes_13_0, 
+        		lv_annotationTypes_14_0, 
         		"org.eclipse.etrice.core.common.Base.AnnotationType");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-))*	otherlv_14='}' 
+))*	otherlv_15='}' 
     {
-    	newLeafNode(otherlv_14, grammarAccess.getRoomModelAccess().getRightCurlyBracketKeyword_6());
+    	newLeafNode(otherlv_15, grammarAccess.getRoomModelAccess().getRightCurlyBracketKeyword_7());
     }
 )
 ;
@@ -5232,6 +5250,13 @@ ruleAnnotationTargetType returns [AntlrDatatypeRuleToken current=new AntlrDataty
     {
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getAnnotationTargetTypeAccess().getTransitionKeyword_10()); 
+    }
+
+    |
+	kw='RoomModel' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getAnnotationTargetTypeAccess().getRoomModelKeyword_11()); 
     }
 )
     ;

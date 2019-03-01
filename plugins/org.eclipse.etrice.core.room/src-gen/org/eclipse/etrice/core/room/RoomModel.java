@@ -4,6 +4,7 @@ package org.eclipse.etrice.core.room;
 
 import org.eclipse.emf.common.util.EList;
 
+import org.eclipse.etrice.core.common.base.Annotation;
 import org.eclipse.etrice.core.common.base.AnnotationType;
 import org.eclipse.etrice.core.common.base.Documentation;
 import org.eclipse.etrice.core.common.base.Import;
@@ -27,6 +28,7 @@ import org.eclipse.etrice.core.common.base.Import;
  * <ul>
  *   <li>{@link org.eclipse.etrice.core.room.RoomModel#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.RoomModel#getDocu <em>Docu</em>}</li>
+ *   <li>{@link org.eclipse.etrice.core.room.RoomModel#getAnnotations <em>Annotations</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.RoomModel#getImports <em>Imports</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.RoomModel#getPrimitiveTypes <em>Primitive Types</em>}</li>
  *   <li>{@link org.eclipse.etrice.core.room.RoomModel#getEnumerationTypes <em>Enumeration Types</em>}</li>
@@ -98,6 +100,22 @@ public interface RoomModel extends RoomElement
    * @generated
    */
   void setDocu(Documentation value);
+
+  /**
+   * Returns the value of the '<em><b>Annotations</b></em>' containment reference list.
+   * The list contents are of type {@link org.eclipse.etrice.core.common.base.Annotation}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Annotations</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Annotations</em>' containment reference list.
+   * @see org.eclipse.etrice.core.room.RoomPackage#getRoomModel_Annotations()
+   * @model containment="true"
+   * @generated
+   */
+  EList<Annotation> getAnnotations();
 
   /**
    * Returns the value of the '<em><b>Imports</b></em>' containment reference list.

@@ -30,6 +30,7 @@ generate room "http://www.eclipse.org/etrice/Room"
 
 RoomModel :
 'RoomModel' name=FQN (docu=Documentation)? '{'
+	(annotations+=Annotation)*
 	(imports+=Import)*
 	(
 		primitiveTypes+=PrimitiveType	|
@@ -346,7 +347,8 @@ AnnotationTargetType:
 	'Port' |
 	'Message' |
 	'State' |
-	'Transition' 
+	'Transition' |
+	'RoomModel'
 ;
 
 enum RoomAnnotationTargetEnum:
@@ -360,5 +362,6 @@ enum RoomAnnotationTargetEnum:
 	PORT='Port' |
 	MESSAGE='Message' |
 	STATE='State' |
-	TRANSITION='Transition'
+	TRANSITION='Transition' |
+	ROOM_MODEL='RoomModel'
 ;

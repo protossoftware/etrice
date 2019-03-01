@@ -158,7 +158,12 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 			return;
 		}
 		List<IEObjectDescription> candidates = importCandidates.get();
-		if(Iterables.any(candidates, Predicates.and(nameMatcher, candidateMatcher))) {
+		Optional<IEObjectDescription> exactMatch = Iterables.tryFind(candidates, Predicates.and(nameMatcher, candidateMatcher)).toJavaUtil();
+		if(exactMatch.isPresent()) {
+			EObject importedElement = exactMatch.get().getEObjectOrProxy();
+			if(importedElement instanceof RoomElement && roomHelpers.findDeprecatedAnnotation((RoomElement) importedElement) != null) {
+				warning("Deprecated Element", null);
+			}
 			return;
 		}
 		
@@ -718,6 +723,9 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 		}
 		else if(parent instanceof Message && !targetList.contains(RoomAnnotationTargetEnum.MESSAGE.getLiteral())) {
 			invalidTargetType = RoomAnnotationTargetEnum.MESSAGE;
+		}
+		else if(parent instanceof RoomModel && !targetList.contains(RoomAnnotationTargetEnum.ROOM_MODEL.getLiteral())) {
+			invalidTargetType = RoomAnnotationTargetEnum.ROOM_MODEL;
 		}
 		if(invalidTargetType != null) {
 			error("AnnotationType " + a.getType().getName() + " is not allowed for target " + invalidTargetType.getLiteral(),

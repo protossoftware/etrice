@@ -127,7 +127,17 @@ public enum RoomAnnotationTargetEnum implements Enumerator
    * @generated
    * @ordered
    */
-  TRANSITION(10, "TRANSITION", "Transition");
+  TRANSITION(10, "TRANSITION", "Transition"),
+
+  /**
+   * The '<em><b>ROOM MODEL</b></em>' literal object.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #ROOM_MODEL_VALUE
+   * @generated
+   * @ordered
+   */
+  ROOM_MODEL(11, "ROOM_MODEL", "RoomModel");
 
   /**
    * The '<em><b>DATA CLASS</b></em>' literal value.
@@ -295,6 +305,21 @@ public enum RoomAnnotationTargetEnum implements Enumerator
   public static final int TRANSITION_VALUE = 10;
 
   /**
+   * The '<em><b>ROOM MODEL</b></em>' literal value.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of '<em><b>ROOM MODEL</b></em>' literal object isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @see #ROOM_MODEL
+   * @model literal="RoomModel"
+   * @generated
+   * @ordered
+   */
+  public static final int ROOM_MODEL_VALUE = 11;
+
+  /**
    * An array of all the '<em><b>Annotation Target Enum</b></em>' enumerators.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -314,6 +339,7 @@ public enum RoomAnnotationTargetEnum implements Enumerator
       MESSAGE,
       STATE,
       TRANSITION,
+      ROOM_MODEL,
     };
 
   /**
@@ -389,6 +415,7 @@ public enum RoomAnnotationTargetEnum implements Enumerator
       case MESSAGE_VALUE: return MESSAGE;
       case STATE_VALUE: return STATE;
       case TRANSITION_VALUE: return TRANSITION;
+      case ROOM_MODEL_VALUE: return ROOM_MODEL;
     }
     return null;
   }
@@ -432,6 +459,7 @@ public enum RoomAnnotationTargetEnum implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public int getValue()
   {
     return value;
@@ -442,6 +470,7 @@ public enum RoomAnnotationTargetEnum implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getName()
   {
     return name;
@@ -452,6 +481,7 @@ public enum RoomAnnotationTargetEnum implements Enumerator
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getLiteral()
   {
     return literal;

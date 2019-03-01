@@ -287,6 +287,7 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public boolean isAbstract()
   {
     return abstract_;
@@ -297,6 +298,7 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setAbstract(boolean newAbstract)
   {
     boolean oldAbstract = abstract_;
@@ -310,6 +312,7 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ComponentCommunicationType getCommType()
   {
     return commType;
@@ -320,6 +323,7 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setCommType(ComponentCommunicationType newCommType)
   {
     ComponentCommunicationType oldCommType = commType;
@@ -343,6 +347,7 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setComponentName(String newComponentName)
   {
     String oldComponentName = componentName;
@@ -356,6 +361,7 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ModelComponent getBase()
   {
     if (base != null && base.eIsProxy())
@@ -386,6 +392,7 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setBase(ModelComponent newBase)
   {
     ModelComponent oldBase = base;
@@ -399,6 +406,7 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public StateGraph getStateMachine()
   {
     return stateMachine;
@@ -426,6 +434,7 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setStateMachine(StateGraph newStateMachine)
   {
     if (newStateMachine != stateMachine)
@@ -447,6 +456,7 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Port> getInterfacePorts()
   {
     if (interfacePorts == null)
@@ -461,6 +471,7 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Documentation getStructureDocu()
   {
     return structureDocu;
@@ -488,6 +499,7 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setStructureDocu(Documentation newStructureDocu)
   {
     if (newStructureDocu != structureDocu)
@@ -509,6 +521,7 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<ServiceImplementation> getServiceImplementations()
   {
     if (serviceImplementations == null)
@@ -523,6 +536,7 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Attribute> getAttributes()
   {
     if (attributes == null)
@@ -537,6 +551,7 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<SAP> getServiceAccessPoints()
   {
     if (serviceAccessPoints == null)
@@ -551,6 +566,7 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Port> getInternalPorts()
   {
     if (internalPorts == null)
@@ -565,6 +581,7 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<ExternalPort> getExternalPorts()
   {
     if (externalPorts == null)
@@ -579,6 +596,7 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public Documentation getBehaviorDocu()
   {
     return behaviorDocu;
@@ -606,6 +624,7 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setBehaviorDocu(Documentation newBehaviorDocu)
   {
     if (newBehaviorDocu != behaviorDocu)
@@ -627,6 +646,7 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Annotation> getBehaviorAnnotations()
   {
     if (behaviorAnnotations == null)
@@ -641,6 +661,7 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<StandardOperation> getOperations()
   {
     if (operations == null)
@@ -655,6 +676,7 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<ClassStructor> getStructors()
   {
     if (structors == null)
@@ -669,6 +691,7 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Port> getExternalEndPorts()
   {
     EList<Port> ports = new BasicEList<Port>();
@@ -685,6 +708,7 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<Port> getRelayPorts()
   {
     EList<Port> ports = new BasicEList<Port>(getInterfacePorts());
@@ -701,6 +725,7 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<SPP> getImplementedSPPs()
   {
     EList<SPP> spps = new BasicEList<SPP>();
@@ -717,6 +742,7 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public ActorClass getActorBase()
   {
     return (ActorClass)getBase();
@@ -728,6 +754,7 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public String getComponentName()
   {
     return getName();
@@ -739,6 +766,7 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<AbstractInterfaceItem> getAbstractInterfaceItems()
   {
     return new BasicEList<AbstractInterfaceItem>(new RoomHelpers().getInterfaceItems(this));
@@ -750,6 +778,7 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public EList<AbstractInterfaceItem> getAllAbstractInterfaceItems()
   {
     return new BasicEList<AbstractInterfaceItem>(new RoomHelpers().getAllInterfaceItems(this));
@@ -1091,7 +1120,7 @@ public class ActorClassImpl extends ActorContainerClassImpl implements ActorClas
   {
     if (eIsProxy()) return super.toString();
 
-    StringBuffer result = new StringBuffer(super.toString());
+    StringBuilder result = new StringBuilder(super.toString());
     result.append(" (abstract: ");
     result.append(abstract_);
     result.append(", commType: ");

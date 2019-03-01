@@ -881,6 +881,7 @@ public class RoomSemanticSequencer extends FSMSemanticSequencer {
 	 *     (
 	 *         name=FQN 
 	 *         docu=Documentation? 
+	 *         annotations+=Annotation* 
 	 *         imports+=Import* 
 	 *         (
 	 *             primitiveTypes+=PrimitiveType | 

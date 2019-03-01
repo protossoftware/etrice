@@ -17,12 +17,16 @@ package org.eclipse.etrice.core.ui.highlight;
 import static org.eclipse.etrice.core.ui.highlight.RoomHighlightingConfiguration.HL_ANNOTATION_ID;
 import static org.eclipse.etrice.core.ui.highlight.RoomHighlightingConfiguration.HL_DEPRECATED_ID;
 
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.etrice.core.common.base.Annotation;
+import org.eclipse.etrice.core.common.base.Import;
+import org.eclipse.etrice.core.common.base.util.ImportHelpers;
 import org.eclipse.etrice.core.common.ui.highlight.BaseSemanticHighlighter;
 import org.eclipse.etrice.core.converter.RoomValueConverterService;
 import org.eclipse.etrice.core.fsm.fSM.DetailCode;
@@ -46,9 +50,12 @@ import org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.scoping.impl.ImportUriResolver;
 import org.eclipse.xtext.util.CancelIndicator;
 
+import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import com.google.inject.Inject;
@@ -62,6 +69,7 @@ public class RoomSemanticHighlightingCalculator extends BaseSemanticHighlighter 
 	@Inject RoomGrammarAccess grammar;
 	@Inject RoomValueConverterService converterService;
 	@Inject RoomHelpers roomHelpers;
+	@Inject ImportUriResolver importUriResolver;
 	
 	@Override
 	public void provideHighlightingFor(XtextResource resource, IHighlightedPositionAcceptor acceptor, CancelIndicator cancelIndicator) {
@@ -126,7 +134,24 @@ public class RoomSemanticHighlightingCalculator extends BaseSemanticHighlighter 
 	Map<EClass, Boolean> annotatedClasses = Maps.newHashMap();
 	
 	protected void highlightDeprecated(INode node, IHighlightedPositionAcceptor acceptor) {	
-		if(node.getGrammarElement() instanceof CrossReference) {
+		if(node.getSemanticElement() instanceof Import) {
+			Import importElement = (Import) node.getSemanticElement();
+			Predicate<IEObjectDescription> nameMatcher = (input) -> {
+				return importElement.getImportedNamespace().equals(input.getQualifiedName().toString());
+			};
+			Optional<List<IEObjectDescription>> matches = ImportHelpers.getImportedObjectsFor(importElement, importUriResolver, nameMatcher);
+			if(matches.isPresent() && matches.get().size() == 1) {
+				EObject annotatedElement = matches.get().get(0).getEObjectOrProxy();
+				if(annotatedElement instanceof RoomElement) {
+					Annotation annotation = roomHelpers.findDeprecatedAnnotation((RoomElement) annotatedElement);		
+					if(annotation != null) {
+						ICompositeNode importNode = NodeModelUtils.getNode(importElement);
+						acceptor.addPosition(importNode.getOffset(), importNode.getLength(), HL_DEPRECATED_ID);	
+					}
+				}
+			}
+		}
+		else if(node.getGrammarElement() instanceof CrossReference) {
 			EReference ref = GrammarUtil.getReference((CrossReference) node.getGrammarElement(), node.getSemanticElement().eClass());
 			EObject annotatedElement = (ref != null) ? (EObject) node.getSemanticElement().eGet(ref) : null;
 			if(annotatedElement instanceof RoomElement) {

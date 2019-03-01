@@ -37,7 +37,7 @@ public class RoomParser extends AbstractContentAssistParser {
 			nameMappings = new HashMap<AbstractElement, String>() {
 				private static final long serialVersionUID = 1L;
 				{
-					put(grammarAccess.getRoomModelAccess().getAlternatives_5(), "rule__RoomModel__Alternatives_5");
+					put(grammarAccess.getRoomModelAccess().getAlternatives_6(), "rule__RoomModel__Alternatives_6");
 					put(grammarAccess.getRoomClassAccess().getAlternatives(), "rule__RoomClass__Alternatives");
 					put(grammarAccess.getStructureClassAccess().getAlternatives(), "rule__StructureClass__Alternatives");
 					put(grammarAccess.getActorContainerClassAccess().getAlternatives(), "rule__ActorContainerClass__Alternatives");
@@ -264,16 +264,17 @@ public class RoomParser extends AbstractContentAssistParser {
 					put(grammarAccess.getFQNAccess().getGroup_1(), "rule__FQN__Group_1__0");
 					put(grammarAccess.getRoomModelAccess().getNameAssignment_1(), "rule__RoomModel__NameAssignment_1");
 					put(grammarAccess.getRoomModelAccess().getDocuAssignment_2(), "rule__RoomModel__DocuAssignment_2");
-					put(grammarAccess.getRoomModelAccess().getImportsAssignment_4(), "rule__RoomModel__ImportsAssignment_4");
-					put(grammarAccess.getRoomModelAccess().getPrimitiveTypesAssignment_5_0(), "rule__RoomModel__PrimitiveTypesAssignment_5_0");
-					put(grammarAccess.getRoomModelAccess().getEnumerationTypesAssignment_5_1(), "rule__RoomModel__EnumerationTypesAssignment_5_1");
-					put(grammarAccess.getRoomModelAccess().getExternalTypesAssignment_5_2(), "rule__RoomModel__ExternalTypesAssignment_5_2");
-					put(grammarAccess.getRoomModelAccess().getDataClassesAssignment_5_3(), "rule__RoomModel__DataClassesAssignment_5_3");
-					put(grammarAccess.getRoomModelAccess().getProtocolClassesAssignment_5_4(), "rule__RoomModel__ProtocolClassesAssignment_5_4");
-					put(grammarAccess.getRoomModelAccess().getActorClassesAssignment_5_5(), "rule__RoomModel__ActorClassesAssignment_5_5");
-					put(grammarAccess.getRoomModelAccess().getSubSystemClassesAssignment_5_6(), "rule__RoomModel__SubSystemClassesAssignment_5_6");
-					put(grammarAccess.getRoomModelAccess().getSystemsAssignment_5_7(), "rule__RoomModel__SystemsAssignment_5_7");
-					put(grammarAccess.getRoomModelAccess().getAnnotationTypesAssignment_5_8(), "rule__RoomModel__AnnotationTypesAssignment_5_8");
+					put(grammarAccess.getRoomModelAccess().getAnnotationsAssignment_4(), "rule__RoomModel__AnnotationsAssignment_4");
+					put(grammarAccess.getRoomModelAccess().getImportsAssignment_5(), "rule__RoomModel__ImportsAssignment_5");
+					put(grammarAccess.getRoomModelAccess().getPrimitiveTypesAssignment_6_0(), "rule__RoomModel__PrimitiveTypesAssignment_6_0");
+					put(grammarAccess.getRoomModelAccess().getEnumerationTypesAssignment_6_1(), "rule__RoomModel__EnumerationTypesAssignment_6_1");
+					put(grammarAccess.getRoomModelAccess().getExternalTypesAssignment_6_2(), "rule__RoomModel__ExternalTypesAssignment_6_2");
+					put(grammarAccess.getRoomModelAccess().getDataClassesAssignment_6_3(), "rule__RoomModel__DataClassesAssignment_6_3");
+					put(grammarAccess.getRoomModelAccess().getProtocolClassesAssignment_6_4(), "rule__RoomModel__ProtocolClassesAssignment_6_4");
+					put(grammarAccess.getRoomModelAccess().getActorClassesAssignment_6_5(), "rule__RoomModel__ActorClassesAssignment_6_5");
+					put(grammarAccess.getRoomModelAccess().getSubSystemClassesAssignment_6_6(), "rule__RoomModel__SubSystemClassesAssignment_6_6");
+					put(grammarAccess.getRoomModelAccess().getSystemsAssignment_6_7(), "rule__RoomModel__SystemsAssignment_6_7");
+					put(grammarAccess.getRoomModelAccess().getAnnotationTypesAssignment_6_8(), "rule__RoomModel__AnnotationTypesAssignment_6_8");
 					put(grammarAccess.getVarDeclAccess().getNameAssignment_0(), "rule__VarDecl__NameAssignment_0");
 					put(grammarAccess.getVarDeclAccess().getRefTypeAssignment_2(), "rule__VarDecl__RefTypeAssignment_2");
 					put(grammarAccess.getVarDeclAccess().getVarargsAssignment_3(), "rule__VarDecl__VarargsAssignment_3");
