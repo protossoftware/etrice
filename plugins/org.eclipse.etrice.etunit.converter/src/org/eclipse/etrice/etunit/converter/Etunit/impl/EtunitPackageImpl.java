@@ -1,19 +1,11 @@
 /**
- * <copyright>
- * </copyright>
- *
- * $Id$
  */
 package org.eclipse.etrice.etunit.converter.Etunit.impl;
 
-import javax.xml.datatype.XMLGregorianCalendar;
-
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.EValidator;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
@@ -24,12 +16,12 @@ import org.eclipse.etrice.etunit.converter.Etunit.ErrorType;
 import org.eclipse.etrice.etunit.converter.Etunit.EtunitFactory;
 import org.eclipse.etrice.etunit.converter.Etunit.EtunitPackage;
 import org.eclipse.etrice.etunit.converter.Etunit.FailureType;
+import org.eclipse.etrice.etunit.converter.Etunit.PropertiesType;
+import org.eclipse.etrice.etunit.converter.Etunit.PropertyType;
+import org.eclipse.etrice.etunit.converter.Etunit.SkippedType;
 import org.eclipse.etrice.etunit.converter.Etunit.TestcaseType;
-import org.eclipse.etrice.etunit.converter.Etunit.Testsuite;
 import org.eclipse.etrice.etunit.converter.Etunit.TestsuiteType;
 import org.eclipse.etrice.etunit.converter.Etunit.TestsuitesType;
-
-import org.eclipse.etrice.etunit.converter.Etunit.util.EtunitValidator;
 
 /**
  * <!-- begin-user-doc -->
@@ -64,14 +56,28 @@ public class EtunitPackageImpl extends EPackageImpl implements EtunitPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass testcaseTypeEClass = null;
+	private EClass propertiesTypeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass testsuiteEClass = null;
+	private EClass propertyTypeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass skippedTypeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass testcaseTypeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -86,27 +92,6 @@ public class EtunitPackageImpl extends EPackageImpl implements EtunitPackage {
 	 * @generated
 	 */
 	private EClass testsuiteTypeEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EDataType iso8601DATETIMEPATTERNEDataType = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EDataType nameTypeEDataType = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EDataType preStringEDataType = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -136,7 +121,7 @@ public class EtunitPackageImpl extends EPackageImpl implements EtunitPackage {
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link EtunitPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -150,7 +135,8 @@ public class EtunitPackageImpl extends EPackageImpl implements EtunitPackage {
 		if (isInited) return (EtunitPackage)EPackage.Registry.INSTANCE.getEPackage(EtunitPackage.eNS_URI);
 
 		// Obtain or create and register package
-		EtunitPackageImpl theEtunitPackage = (EtunitPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof EtunitPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new EtunitPackageImpl());
+		Object registeredEtunitPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		EtunitPackageImpl theEtunitPackage = registeredEtunitPackage instanceof EtunitPackageImpl ? (EtunitPackageImpl)registeredEtunitPackage : new EtunitPackageImpl();
 
 		isInited = true;
 
@@ -163,19 +149,9 @@ public class EtunitPackageImpl extends EPackageImpl implements EtunitPackage {
 		// Initialize created meta-data
 		theEtunitPackage.initializePackageContents();
 
-		// Register package validator
-		EValidator.Registry.INSTANCE.put
-			(theEtunitPackage, 
-			 new EValidator.Descriptor() {
-				 public EValidator getEValidator() {
-					 return EtunitValidator.INSTANCE;
-				 }
-			 });
-
 		// Mark meta-data to indicate it can't be changed
 		theEtunitPackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(EtunitPackage.eNS_URI, theEtunitPackage);
 		return theEtunitPackage;
@@ -186,6 +162,7 @@ public class EtunitPackageImpl extends EPackageImpl implements EtunitPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getDocumentRoot() {
 		return documentRootEClass;
 	}
@@ -195,6 +172,7 @@ public class EtunitPackageImpl extends EPackageImpl implements EtunitPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getDocumentRoot_Mixed() {
 		return (EAttribute)documentRootEClass.getEStructuralFeatures().get(0);
 	}
@@ -204,6 +182,7 @@ public class EtunitPackageImpl extends EPackageImpl implements EtunitPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getDocumentRoot_XMLNSPrefixMap() {
 		return (EReference)documentRootEClass.getEStructuralFeatures().get(1);
 	}
@@ -213,6 +192,7 @@ public class EtunitPackageImpl extends EPackageImpl implements EtunitPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getDocumentRoot_XSISchemaLocation() {
 		return (EReference)documentRootEClass.getEStructuralFeatures().get(2);
 	}
@@ -222,7 +202,8 @@ public class EtunitPackageImpl extends EPackageImpl implements EtunitPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getDocumentRoot_Testsuite() {
+	@Override
+	public EReference getDocumentRoot_Error() {
 		return (EReference)documentRootEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -231,7 +212,8 @@ public class EtunitPackageImpl extends EPackageImpl implements EtunitPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getDocumentRoot_Testsuites() {
+	@Override
+	public EReference getDocumentRoot_Failure() {
 		return (EReference)documentRootEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -240,6 +222,87 @@ public class EtunitPackageImpl extends EPackageImpl implements EtunitPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public EReference getDocumentRoot_Properties() {
+		return (EReference)documentRootEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getDocumentRoot_Property() {
+		return (EReference)documentRootEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getDocumentRoot_Skipped() {
+		return (EReference)documentRootEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getDocumentRoot_SystemErr() {
+		return (EAttribute)documentRootEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getDocumentRoot_SystemOut() {
+		return (EAttribute)documentRootEClass.getEStructuralFeatures().get(9);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getDocumentRoot_Testcase() {
+		return (EReference)documentRootEClass.getEStructuralFeatures().get(10);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getDocumentRoot_Testsuite() {
+		return (EReference)documentRootEClass.getEStructuralFeatures().get(11);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getDocumentRoot_Testsuites() {
+		return (EReference)documentRootEClass.getEStructuralFeatures().get(12);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getErrorType() {
 		return errorTypeEClass;
 	}
@@ -249,6 +312,7 @@ public class EtunitPackageImpl extends EPackageImpl implements EtunitPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getErrorType_Mixed() {
 		return (EAttribute)errorTypeEClass.getEStructuralFeatures().get(0);
 	}
@@ -258,7 +322,8 @@ public class EtunitPackageImpl extends EPackageImpl implements EtunitPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getErrorType_Expected() {
+	@Override
+	public EAttribute getErrorType_Message() {
 		return (EAttribute)errorTypeEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -267,7 +332,8 @@ public class EtunitPackageImpl extends EPackageImpl implements EtunitPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getErrorType_Actual() {
+	@Override
+	public EAttribute getErrorType_Type() {
 		return (EAttribute)errorTypeEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -276,6 +342,7 @@ public class EtunitPackageImpl extends EPackageImpl implements EtunitPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getFailureType() {
 		return failureTypeEClass;
 	}
@@ -285,6 +352,7 @@ public class EtunitPackageImpl extends EPackageImpl implements EtunitPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getFailureType_Mixed() {
 		return (EAttribute)failureTypeEClass.getEStructuralFeatures().get(0);
 	}
@@ -294,7 +362,8 @@ public class EtunitPackageImpl extends EPackageImpl implements EtunitPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getFailureType_Expected() {
+	@Override
+	public EAttribute getFailureType_Message() {
 		return (EAttribute)failureTypeEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -303,7 +372,8 @@ public class EtunitPackageImpl extends EPackageImpl implements EtunitPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getFailureType_Actual() {
+	@Override
+	public EAttribute getFailureType_Type() {
 		return (EAttribute)failureTypeEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -312,6 +382,87 @@ public class EtunitPackageImpl extends EPackageImpl implements EtunitPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public EClass getPropertiesType() {
+		return propertiesTypeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getPropertiesType_Property() {
+		return (EReference)propertiesTypeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getPropertyType() {
+		return propertyTypeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getPropertyType_Name() {
+		return (EAttribute)propertyTypeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getPropertyType_Value() {
+		return (EAttribute)propertyTypeEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getSkippedType() {
+		return skippedTypeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getSkippedType_Mixed() {
+		return (EAttribute)skippedTypeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getSkippedType_Message() {
+		return (EAttribute)skippedTypeEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getTestcaseType() {
 		return testcaseTypeEClass;
 	}
@@ -321,7 +472,8 @@ public class EtunitPackageImpl extends EPackageImpl implements EtunitPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getTestcaseType_Error() {
+	@Override
+	public EReference getTestcaseType_Skipped() {
 		return (EReference)testcaseTypeEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -330,7 +482,8 @@ public class EtunitPackageImpl extends EPackageImpl implements EtunitPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getTestcaseType_Failure() {
+	@Override
+	public EReference getTestcaseType_Error() {
 		return (EReference)testcaseTypeEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -339,8 +492,9 @@ public class EtunitPackageImpl extends EPackageImpl implements EtunitPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getTestcaseType_Classname() {
-		return (EAttribute)testcaseTypeEClass.getEStructuralFeatures().get(2);
+	@Override
+	public EReference getTestcaseType_Failure() {
+		return (EReference)testcaseTypeEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -348,7 +502,8 @@ public class EtunitPackageImpl extends EPackageImpl implements EtunitPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getTestcaseType_Name() {
+	@Override
+	public EAttribute getTestcaseType_SystemOut() {
 		return (EAttribute)testcaseTypeEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -357,7 +512,8 @@ public class EtunitPackageImpl extends EPackageImpl implements EtunitPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getTestcaseType_Time() {
+	@Override
+	public EAttribute getTestcaseType_SystemErr() {
 		return (EAttribute)testcaseTypeEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -366,8 +522,9 @@ public class EtunitPackageImpl extends EPackageImpl implements EtunitPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getTestsuite() {
-		return testsuiteEClass;
+	@Override
+	public EAttribute getTestcaseType_Assertions() {
+		return (EAttribute)testcaseTypeEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -375,8 +532,9 @@ public class EtunitPackageImpl extends EPackageImpl implements EtunitPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getTestsuite_Testcase() {
-		return (EReference)testsuiteEClass.getEStructuralFeatures().get(0);
+	@Override
+	public EAttribute getTestcaseType_Classname() {
+		return (EAttribute)testcaseTypeEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -384,8 +542,9 @@ public class EtunitPackageImpl extends EPackageImpl implements EtunitPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getTestsuite_Errors() {
-		return (EAttribute)testsuiteEClass.getEStructuralFeatures().get(1);
+	@Override
+	public EAttribute getTestcaseType_Name() {
+		return (EAttribute)testcaseTypeEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**
@@ -393,8 +552,9 @@ public class EtunitPackageImpl extends EPackageImpl implements EtunitPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getTestsuite_Failures() {
-		return (EAttribute)testsuiteEClass.getEStructuralFeatures().get(2);
+	@Override
+	public EAttribute getTestcaseType_Status() {
+		return (EAttribute)testcaseTypeEClass.getEStructuralFeatures().get(8);
 	}
 
 	/**
@@ -402,8 +562,9 @@ public class EtunitPackageImpl extends EPackageImpl implements EtunitPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getTestsuite_Name() {
-		return (EAttribute)testsuiteEClass.getEStructuralFeatures().get(3);
+	@Override
+	public EAttribute getTestcaseType_Time() {
+		return (EAttribute)testcaseTypeEClass.getEStructuralFeatures().get(9);
 	}
 
 	/**
@@ -411,42 +572,7 @@ public class EtunitPackageImpl extends EPackageImpl implements EtunitPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getTestsuite_Skipped() {
-		return (EAttribute)testsuiteEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getTestsuite_Tests() {
-		return (EAttribute)testsuiteEClass.getEStructuralFeatures().get(5);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getTestsuite_Time() {
-		return (EAttribute)testsuiteEClass.getEStructuralFeatures().get(6);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getTestsuite_Timestamp() {
-		return (EAttribute)testsuiteEClass.getEStructuralFeatures().get(7);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+	@Override
 	public EClass getTestsuitesType() {
 		return testsuitesTypeEClass;
 	}
@@ -456,6 +582,7 @@ public class EtunitPackageImpl extends EPackageImpl implements EtunitPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTestsuitesType_Testsuite() {
 		return (EReference)testsuitesTypeEClass.getEStructuralFeatures().get(0);
 	}
@@ -465,6 +592,67 @@ public class EtunitPackageImpl extends EPackageImpl implements EtunitPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public EAttribute getTestsuitesType_Disabled() {
+		return (EAttribute)testsuitesTypeEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getTestsuitesType_Errors() {
+		return (EAttribute)testsuitesTypeEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getTestsuitesType_Failures() {
+		return (EAttribute)testsuitesTypeEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getTestsuitesType_Name() {
+		return (EAttribute)testsuitesTypeEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getTestsuitesType_Tests() {
+		return (EAttribute)testsuitesTypeEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getTestsuitesType_Time() {
+		return (EAttribute)testsuitesTypeEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getTestsuiteType() {
 		return testsuiteTypeEClass;
 	}
@@ -474,8 +662,9 @@ public class EtunitPackageImpl extends EPackageImpl implements EtunitPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EDataType getISO8601DATETIMEPATTERN() {
-		return iso8601DATETIMEPATTERNEDataType;
+	@Override
+	public EReference getTestsuiteType_Properties() {
+		return (EReference)testsuiteTypeEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -483,8 +672,9 @@ public class EtunitPackageImpl extends EPackageImpl implements EtunitPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EDataType getNameType() {
-		return nameTypeEDataType;
+	@Override
+	public EReference getTestsuiteType_Testcase() {
+		return (EReference)testsuiteTypeEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -492,8 +682,9 @@ public class EtunitPackageImpl extends EPackageImpl implements EtunitPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EDataType getPreString() {
-		return preStringEDataType;
+	@Override
+	public EAttribute getTestsuiteType_SystemOut() {
+		return (EAttribute)testsuiteTypeEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -501,6 +692,127 @@ public class EtunitPackageImpl extends EPackageImpl implements EtunitPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public EAttribute getTestsuiteType_SystemErr() {
+		return (EAttribute)testsuiteTypeEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getTestsuiteType_Disabled() {
+		return (EAttribute)testsuiteTypeEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getTestsuiteType_Errors() {
+		return (EAttribute)testsuiteTypeEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getTestsuiteType_Failures() {
+		return (EAttribute)testsuiteTypeEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getTestsuiteType_Hostname() {
+		return (EAttribute)testsuiteTypeEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getTestsuiteType_Id() {
+		return (EAttribute)testsuiteTypeEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getTestsuiteType_Name() {
+		return (EAttribute)testsuiteTypeEClass.getEStructuralFeatures().get(9);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getTestsuiteType_Package() {
+		return (EAttribute)testsuiteTypeEClass.getEStructuralFeatures().get(10);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getTestsuiteType_Skipped() {
+		return (EAttribute)testsuiteTypeEClass.getEStructuralFeatures().get(11);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getTestsuiteType_Tests() {
+		return (EAttribute)testsuiteTypeEClass.getEStructuralFeatures().get(12);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getTestsuiteType_Time() {
+		return (EAttribute)testsuiteTypeEClass.getEStructuralFeatures().get(13);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getTestsuiteType_Timestamp() {
+		return (EAttribute)testsuiteTypeEClass.getEStructuralFeatures().get(14);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EtunitFactory getEtunitFactory() {
 		return (EtunitFactory)getEFactoryInstance();
 	}
@@ -528,45 +840,75 @@ public class EtunitPackageImpl extends EPackageImpl implements EtunitPackage {
 		createEAttribute(documentRootEClass, DOCUMENT_ROOT__MIXED);
 		createEReference(documentRootEClass, DOCUMENT_ROOT__XMLNS_PREFIX_MAP);
 		createEReference(documentRootEClass, DOCUMENT_ROOT__XSI_SCHEMA_LOCATION);
+		createEReference(documentRootEClass, DOCUMENT_ROOT__ERROR);
+		createEReference(documentRootEClass, DOCUMENT_ROOT__FAILURE);
+		createEReference(documentRootEClass, DOCUMENT_ROOT__PROPERTIES);
+		createEReference(documentRootEClass, DOCUMENT_ROOT__PROPERTY);
+		createEReference(documentRootEClass, DOCUMENT_ROOT__SKIPPED);
+		createEAttribute(documentRootEClass, DOCUMENT_ROOT__SYSTEM_ERR);
+		createEAttribute(documentRootEClass, DOCUMENT_ROOT__SYSTEM_OUT);
+		createEReference(documentRootEClass, DOCUMENT_ROOT__TESTCASE);
 		createEReference(documentRootEClass, DOCUMENT_ROOT__TESTSUITE);
 		createEReference(documentRootEClass, DOCUMENT_ROOT__TESTSUITES);
 
 		errorTypeEClass = createEClass(ERROR_TYPE);
 		createEAttribute(errorTypeEClass, ERROR_TYPE__MIXED);
-		createEAttribute(errorTypeEClass, ERROR_TYPE__EXPECTED);
-		createEAttribute(errorTypeEClass, ERROR_TYPE__ACTUAL);
+		createEAttribute(errorTypeEClass, ERROR_TYPE__MESSAGE);
+		createEAttribute(errorTypeEClass, ERROR_TYPE__TYPE);
 
 		failureTypeEClass = createEClass(FAILURE_TYPE);
 		createEAttribute(failureTypeEClass, FAILURE_TYPE__MIXED);
-		createEAttribute(failureTypeEClass, FAILURE_TYPE__EXPECTED);
-		createEAttribute(failureTypeEClass, FAILURE_TYPE__ACTUAL);
+		createEAttribute(failureTypeEClass, FAILURE_TYPE__MESSAGE);
+		createEAttribute(failureTypeEClass, FAILURE_TYPE__TYPE);
+
+		propertiesTypeEClass = createEClass(PROPERTIES_TYPE);
+		createEReference(propertiesTypeEClass, PROPERTIES_TYPE__PROPERTY);
+
+		propertyTypeEClass = createEClass(PROPERTY_TYPE);
+		createEAttribute(propertyTypeEClass, PROPERTY_TYPE__NAME);
+		createEAttribute(propertyTypeEClass, PROPERTY_TYPE__VALUE);
+
+		skippedTypeEClass = createEClass(SKIPPED_TYPE);
+		createEAttribute(skippedTypeEClass, SKIPPED_TYPE__MIXED);
+		createEAttribute(skippedTypeEClass, SKIPPED_TYPE__MESSAGE);
 
 		testcaseTypeEClass = createEClass(TESTCASE_TYPE);
+		createEReference(testcaseTypeEClass, TESTCASE_TYPE__SKIPPED);
 		createEReference(testcaseTypeEClass, TESTCASE_TYPE__ERROR);
 		createEReference(testcaseTypeEClass, TESTCASE_TYPE__FAILURE);
+		createEAttribute(testcaseTypeEClass, TESTCASE_TYPE__SYSTEM_OUT);
+		createEAttribute(testcaseTypeEClass, TESTCASE_TYPE__SYSTEM_ERR);
+		createEAttribute(testcaseTypeEClass, TESTCASE_TYPE__ASSERTIONS);
 		createEAttribute(testcaseTypeEClass, TESTCASE_TYPE__CLASSNAME);
 		createEAttribute(testcaseTypeEClass, TESTCASE_TYPE__NAME);
+		createEAttribute(testcaseTypeEClass, TESTCASE_TYPE__STATUS);
 		createEAttribute(testcaseTypeEClass, TESTCASE_TYPE__TIME);
-
-		testsuiteEClass = createEClass(TESTSUITE);
-		createEReference(testsuiteEClass, TESTSUITE__TESTCASE);
-		createEAttribute(testsuiteEClass, TESTSUITE__ERRORS);
-		createEAttribute(testsuiteEClass, TESTSUITE__FAILURES);
-		createEAttribute(testsuiteEClass, TESTSUITE__NAME);
-		createEAttribute(testsuiteEClass, TESTSUITE__SKIPPED);
-		createEAttribute(testsuiteEClass, TESTSUITE__TESTS);
-		createEAttribute(testsuiteEClass, TESTSUITE__TIME);
-		createEAttribute(testsuiteEClass, TESTSUITE__TIMESTAMP);
 
 		testsuitesTypeEClass = createEClass(TESTSUITES_TYPE);
 		createEReference(testsuitesTypeEClass, TESTSUITES_TYPE__TESTSUITE);
+		createEAttribute(testsuitesTypeEClass, TESTSUITES_TYPE__DISABLED);
+		createEAttribute(testsuitesTypeEClass, TESTSUITES_TYPE__ERRORS);
+		createEAttribute(testsuitesTypeEClass, TESTSUITES_TYPE__FAILURES);
+		createEAttribute(testsuitesTypeEClass, TESTSUITES_TYPE__NAME);
+		createEAttribute(testsuitesTypeEClass, TESTSUITES_TYPE__TESTS);
+		createEAttribute(testsuitesTypeEClass, TESTSUITES_TYPE__TIME);
 
 		testsuiteTypeEClass = createEClass(TESTSUITE_TYPE);
-
-		// Create data types
-		iso8601DATETIMEPATTERNEDataType = createEDataType(ISO8601DATETIMEPATTERN);
-		nameTypeEDataType = createEDataType(NAME_TYPE);
-		preStringEDataType = createEDataType(PRE_STRING);
+		createEReference(testsuiteTypeEClass, TESTSUITE_TYPE__PROPERTIES);
+		createEReference(testsuiteTypeEClass, TESTSUITE_TYPE__TESTCASE);
+		createEAttribute(testsuiteTypeEClass, TESTSUITE_TYPE__SYSTEM_OUT);
+		createEAttribute(testsuiteTypeEClass, TESTSUITE_TYPE__SYSTEM_ERR);
+		createEAttribute(testsuiteTypeEClass, TESTSUITE_TYPE__DISABLED);
+		createEAttribute(testsuiteTypeEClass, TESTSUITE_TYPE__ERRORS);
+		createEAttribute(testsuiteTypeEClass, TESTSUITE_TYPE__FAILURES);
+		createEAttribute(testsuiteTypeEClass, TESTSUITE_TYPE__HOSTNAME);
+		createEAttribute(testsuiteTypeEClass, TESTSUITE_TYPE__ID);
+		createEAttribute(testsuiteTypeEClass, TESTSUITE_TYPE__NAME);
+		createEAttribute(testsuiteTypeEClass, TESTSUITE_TYPE__PACKAGE);
+		createEAttribute(testsuiteTypeEClass, TESTSUITE_TYPE__SKIPPED);
+		createEAttribute(testsuiteTypeEClass, TESTSUITE_TYPE__TESTS);
+		createEAttribute(testsuiteTypeEClass, TESTSUITE_TYPE__TIME);
+		createEAttribute(testsuiteTypeEClass, TESTSUITE_TYPE__TIMESTAMP);
 	}
 
 	/**
@@ -600,52 +942,81 @@ public class EtunitPackageImpl extends EPackageImpl implements EtunitPackage {
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		testsuiteTypeEClass.getESuperTypes().add(this.getTestsuite());
 
-		// Initialize classes and features; add operations and parameters
+		// Initialize classes, features, and operations; add parameters
 		initEClass(documentRootEClass, DocumentRoot.class, "DocumentRoot", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDocumentRoot_Mixed(), ecorePackage.getEFeatureMapEntry(), "mixed", null, 0, -1, null, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDocumentRoot_XMLNSPrefixMap(), ecorePackage.getEStringToStringMapEntry(), null, "xMLNSPrefixMap", null, 0, -1, null, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDocumentRoot_XSISchemaLocation(), ecorePackage.getEStringToStringMapEntry(), null, "xSISchemaLocation", null, 0, -1, null, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getDocumentRoot_Testsuite(), this.getTestsuite(), null, "testsuite", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getDocumentRoot_Error(), this.getErrorType(), null, "error", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getDocumentRoot_Failure(), this.getFailureType(), null, "failure", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getDocumentRoot_Properties(), this.getPropertiesType(), null, "properties", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getDocumentRoot_Property(), this.getPropertyType(), null, "property", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getDocumentRoot_Skipped(), this.getSkippedType(), null, "skipped", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDocumentRoot_SystemErr(), theXMLTypePackage.getString(), "systemErr", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDocumentRoot_SystemOut(), theXMLTypePackage.getString(), "systemOut", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getDocumentRoot_Testcase(), this.getTestcaseType(), null, "testcase", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getDocumentRoot_Testsuite(), this.getTestsuiteType(), null, "testsuite", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getDocumentRoot_Testsuites(), this.getTestsuitesType(), null, "testsuites", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(errorTypeEClass, ErrorType.class, "ErrorType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getErrorType_Mixed(), ecorePackage.getEFeatureMapEntry(), "mixed", null, 0, -1, ErrorType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getErrorType_Expected(), theXMLTypePackage.getString(), "expected", null, 1, 1, ErrorType.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEAttribute(getErrorType_Actual(), theXMLTypePackage.getString(), "actual", null, 1, 1, ErrorType.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getErrorType_Message(), theXMLTypePackage.getString(), "message", null, 0, 1, ErrorType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getErrorType_Type(), theXMLTypePackage.getString(), "type", null, 0, 1, ErrorType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(failureTypeEClass, FailureType.class, "FailureType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getFailureType_Mixed(), ecorePackage.getEFeatureMapEntry(), "mixed", null, 0, -1, FailureType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getFailureType_Expected(), theXMLTypePackage.getString(), "expected", null, 1, 1, FailureType.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEAttribute(getFailureType_Actual(), theXMLTypePackage.getString(), "actual", null, 1, 1, FailureType.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getFailureType_Message(), theXMLTypePackage.getString(), "message", null, 0, 1, FailureType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getFailureType_Type(), theXMLTypePackage.getString(), "type", null, 0, 1, FailureType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(propertiesTypeEClass, PropertiesType.class, "PropertiesType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getPropertiesType_Property(), this.getPropertyType(), null, "property", null, 1, -1, PropertiesType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(propertyTypeEClass, PropertyType.class, "PropertyType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getPropertyType_Name(), theXMLTypePackage.getString(), "name", null, 1, 1, PropertyType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPropertyType_Value(), theXMLTypePackage.getString(), "value", null, 1, 1, PropertyType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(skippedTypeEClass, SkippedType.class, "SkippedType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getSkippedType_Mixed(), ecorePackage.getEFeatureMapEntry(), "mixed", null, 0, -1, SkippedType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSkippedType_Message(), theXMLTypePackage.getString(), "message", null, 0, 1, SkippedType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(testcaseTypeEClass, TestcaseType.class, "TestcaseType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getTestcaseType_Error(), this.getErrorType(), null, "error", null, 0, 1, TestcaseType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTestcaseType_Failure(), this.getFailureType(), null, "failure", null, 0, 1, TestcaseType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTestcaseType_Classname(), theXMLTypePackage.getToken(), "classname", null, 1, 1, TestcaseType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTestcaseType_Name(), theXMLTypePackage.getToken(), "name", null, 1, 1, TestcaseType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTestcaseType_Time(), theXMLTypePackage.getDecimal(), "time", null, 1, 1, TestcaseType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(testsuiteEClass, Testsuite.class, "Testsuite", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getTestsuite_Testcase(), this.getTestcaseType(), null, "testcase", null, 0, -1, Testsuite.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTestsuite_Errors(), theXMLTypePackage.getInt(), "errors", null, 1, 1, Testsuite.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTestsuite_Failures(), theXMLTypePackage.getInt(), "failures", null, 1, 1, Testsuite.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTestsuite_Name(), this.getNameType(), "name", null, 1, 1, Testsuite.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTestsuite_Skipped(), theXMLTypePackage.getInt(), "skipped", null, 0, 1, Testsuite.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTestsuite_Tests(), theXMLTypePackage.getInt(), "tests", null, 1, 1, Testsuite.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTestsuite_Time(), theXMLTypePackage.getDecimal(), "time", null, 1, 1, Testsuite.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTestsuite_Timestamp(), this.getISO8601DATETIMEPATTERN(), "timestamp", null, 1, 1, Testsuite.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTestcaseType_Skipped(), this.getSkippedType(), null, "skipped", null, 0, 1, TestcaseType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTestcaseType_Error(), this.getErrorType(), null, "error", null, 0, -1, TestcaseType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTestcaseType_Failure(), this.getFailureType(), null, "failure", null, 0, -1, TestcaseType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTestcaseType_SystemOut(), theXMLTypePackage.getString(), "systemOut", null, 0, -1, TestcaseType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTestcaseType_SystemErr(), theXMLTypePackage.getString(), "systemErr", null, 0, -1, TestcaseType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTestcaseType_Assertions(), theXMLTypePackage.getString(), "assertions", null, 0, 1, TestcaseType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTestcaseType_Classname(), theXMLTypePackage.getString(), "classname", null, 0, 1, TestcaseType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTestcaseType_Name(), theXMLTypePackage.getString(), "name", null, 1, 1, TestcaseType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTestcaseType_Status(), theXMLTypePackage.getString(), "status", null, 0, 1, TestcaseType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTestcaseType_Time(), theXMLTypePackage.getString(), "time", null, 0, 1, TestcaseType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(testsuitesTypeEClass, TestsuitesType.class, "TestsuitesType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTestsuitesType_Testsuite(), this.getTestsuiteType(), null, "testsuite", null, 0, -1, TestsuitesType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTestsuitesType_Disabled(), theXMLTypePackage.getString(), "disabled", null, 0, 1, TestsuitesType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTestsuitesType_Errors(), theXMLTypePackage.getString(), "errors", null, 0, 1, TestsuitesType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTestsuitesType_Failures(), theXMLTypePackage.getString(), "failures", null, 0, 1, TestsuitesType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTestsuitesType_Name(), theXMLTypePackage.getString(), "name", null, 0, 1, TestsuitesType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTestsuitesType_Tests(), theXMLTypePackage.getString(), "tests", null, 0, 1, TestsuitesType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTestsuitesType_Time(), theXMLTypePackage.getString(), "time", null, 0, 1, TestsuitesType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(testsuiteTypeEClass, TestsuiteType.class, "TestsuiteType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		// Initialize data types
-		initEDataType(iso8601DATETIMEPATTERNEDataType, XMLGregorianCalendar.class, "ISO8601DATETIMEPATTERN", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
-		initEDataType(nameTypeEDataType, String.class, "NameType", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
-		initEDataType(preStringEDataType, String.class, "PreString", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTestsuiteType_Properties(), this.getPropertiesType(), null, "properties", null, 0, 1, TestsuiteType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTestsuiteType_Testcase(), this.getTestcaseType(), null, "testcase", null, 0, -1, TestsuiteType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTestsuiteType_SystemOut(), theXMLTypePackage.getString(), "systemOut", null, 0, 1, TestsuiteType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTestsuiteType_SystemErr(), theXMLTypePackage.getString(), "systemErr", null, 0, 1, TestsuiteType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTestsuiteType_Disabled(), theXMLTypePackage.getString(), "disabled", null, 0, 1, TestsuiteType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTestsuiteType_Errors(), theXMLTypePackage.getString(), "errors", null, 0, 1, TestsuiteType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTestsuiteType_Failures(), theXMLTypePackage.getString(), "failures", null, 0, 1, TestsuiteType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTestsuiteType_Hostname(), theXMLTypePackage.getString(), "hostname", null, 0, 1, TestsuiteType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTestsuiteType_Id(), theXMLTypePackage.getString(), "id", null, 0, 1, TestsuiteType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTestsuiteType_Name(), theXMLTypePackage.getString(), "name", null, 1, 1, TestsuiteType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTestsuiteType_Package(), theXMLTypePackage.getString(), "package", null, 0, 1, TestsuiteType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTestsuiteType_Skipped(), theXMLTypePackage.getString(), "skipped", null, 0, 1, TestsuiteType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTestsuiteType_Tests(), theXMLTypePackage.getString(), "tests", null, 1, 1, TestsuiteType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTestsuiteType_Time(), theXMLTypePackage.getString(), "time", null, 0, 1, TestsuiteType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTestsuiteType_Timestamp(), theXMLTypePackage.getString(), "timestamp", null, 0, 1, TestsuiteType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -662,280 +1033,517 @@ public class EtunitPackageImpl extends EPackageImpl implements EtunitPackage {
 	 * @generated
 	 */
 	protected void createExtendedMetaDataAnnotations() {
-		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";			
+		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";
 		addAnnotation
-		  (this, 
-		   source, 
+		  (this,
+		   source,
 		   new String[] {
-			 "qualified", "false"
-		   });		
+			   "qualified", "false"
+		   });
 		addAnnotation
-		  (documentRootEClass, 
-		   source, 
+		  (documentRootEClass,
+		   source,
 		   new String[] {
-			 "name", "",
-			 "kind", "mixed"
-		   });		
+			   "name", "",
+			   "kind", "mixed"
+		   });
 		addAnnotation
-		  (getDocumentRoot_Mixed(), 
-		   source, 
+		  (getDocumentRoot_Mixed(),
+		   source,
 		   new String[] {
-			 "kind", "elementWildcard",
-			 "name", ":mixed"
-		   });		
+			   "kind", "elementWildcard",
+			   "name", ":mixed"
+		   });
 		addAnnotation
-		  (getDocumentRoot_XMLNSPrefixMap(), 
-		   source, 
+		  (getDocumentRoot_XMLNSPrefixMap(),
+		   source,
 		   new String[] {
-			 "kind", "attribute",
-			 "name", "xmlns:prefix"
-		   });		
+			   "kind", "attribute",
+			   "name", "xmlns:prefix"
+		   });
 		addAnnotation
-		  (getDocumentRoot_XSISchemaLocation(), 
-		   source, 
+		  (getDocumentRoot_XSISchemaLocation(),
+		   source,
 		   new String[] {
-			 "kind", "attribute",
-			 "name", "xsi:schemaLocation"
-		   });		
+			   "kind", "attribute",
+			   "name", "xsi:schemaLocation"
+		   });
 		addAnnotation
-		  (getDocumentRoot_Testsuite(), 
-		   source, 
+		  (getDocumentRoot_Error(),
+		   source,
 		   new String[] {
-			 "kind", "element",
-			 "name", "testsuite",
-			 "namespace", "##targetNamespace"
-		   });		
+			   "kind", "element",
+			   "name", "error",
+			   "namespace", "##targetNamespace"
+		   });
 		addAnnotation
-		  (getDocumentRoot_Testsuites(), 
-		   source, 
+		  (getDocumentRoot_Failure(),
+		   source,
 		   new String[] {
-			 "kind", "element",
-			 "name", "testsuites",
-			 "namespace", "##targetNamespace"
-		   });		
+			   "kind", "element",
+			   "name", "failure",
+			   "namespace", "##targetNamespace"
+		   });
 		addAnnotation
-		  (errorTypeEClass, 
-		   source, 
+		  (getDocumentRoot_Properties(),
+		   source,
 		   new String[] {
-			 "name", "error_._type",
-			 "kind", "mixed"
-		   });		
+			   "kind", "element",
+			   "name", "properties",
+			   "namespace", "##targetNamespace"
+		   });
 		addAnnotation
-		  (getErrorType_Mixed(), 
-		   source, 
+		  (getDocumentRoot_Property(),
+		   source,
 		   new String[] {
-			 "kind", "elementWildcard",
-			 "name", ":mixed"
-		   });		
+			   "kind", "element",
+			   "name", "property",
+			   "namespace", "##targetNamespace"
+		   });
 		addAnnotation
-		  (getErrorType_Expected(), 
-		   source, 
+		  (getDocumentRoot_Skipped(),
+		   source,
 		   new String[] {
-			 "kind", "element",
-			 "name", "expected",
-			 "namespace", "##targetNamespace"
-		   });		
+			   "kind", "element",
+			   "name", "skipped",
+			   "namespace", "##targetNamespace"
+		   });
 		addAnnotation
-		  (getErrorType_Actual(), 
-		   source, 
+		  (getDocumentRoot_SystemErr(),
+		   source,
 		   new String[] {
-			 "kind", "element",
-			 "name", "actual",
-			 "namespace", "##targetNamespace"
-		   });		
+			   "kind", "element",
+			   "name", "system-err",
+			   "namespace", "##targetNamespace"
+		   });
 		addAnnotation
-		  (failureTypeEClass, 
-		   source, 
+		  (getDocumentRoot_SystemOut(),
+		   source,
 		   new String[] {
-			 "name", "failure_._type",
-			 "kind", "mixed"
-		   });		
+			   "kind", "element",
+			   "name", "system-out",
+			   "namespace", "##targetNamespace"
+		   });
 		addAnnotation
-		  (getFailureType_Mixed(), 
-		   source, 
+		  (getDocumentRoot_Testcase(),
+		   source,
 		   new String[] {
-			 "kind", "elementWildcard",
-			 "name", ":mixed"
-		   });		
+			   "kind", "element",
+			   "name", "testcase",
+			   "namespace", "##targetNamespace"
+		   });
 		addAnnotation
-		  (getFailureType_Expected(), 
-		   source, 
+		  (getDocumentRoot_Testsuite(),
+		   source,
 		   new String[] {
-			 "kind", "element",
-			 "name", "expected",
-			 "namespace", "##targetNamespace"
-		   });		
+			   "kind", "element",
+			   "name", "testsuite",
+			   "namespace", "##targetNamespace"
+		   });
 		addAnnotation
-		  (getFailureType_Actual(), 
-		   source, 
+		  (getDocumentRoot_Testsuites(),
+		   source,
 		   new String[] {
-			 "kind", "element",
-			 "name", "actual",
-			 "namespace", "##targetNamespace"
-		   });		
+			   "kind", "element",
+			   "name", "testsuites",
+			   "namespace", "##targetNamespace"
+		   });
 		addAnnotation
-		  (iso8601DATETIMEPATTERNEDataType, 
-		   source, 
+		  (errorTypeEClass,
+		   source,
 		   new String[] {
-			 "name", "ISO8601_DATETIME_PATTERN",
-			 "baseType", "http://www.eclipse.org/emf/2003/XMLType#dateTime",
-			 "pattern", "[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}"
-		   });		
+			   "name", "error_._type",
+			   "kind", "mixed"
+		   });
 		addAnnotation
-		  (nameTypeEDataType, 
-		   source, 
+		  (getErrorType_Mixed(),
+		   source,
 		   new String[] {
-			 "name", "name_._type",
-			 "baseType", "http://www.eclipse.org/emf/2003/XMLType#token",
-			 "minLength", "1"
-		   });		
+			   "kind", "elementWildcard",
+			   "name", ":mixed"
+		   });
 		addAnnotation
-		  (preStringEDataType, 
-		   source, 
+		  (getErrorType_Message(),
+		   source,
 		   new String[] {
-			 "name", "pre-string",
-			 "baseType", "http://www.eclipse.org/emf/2003/XMLType#string",
-			 "whiteSpace", "preserve"
-		   });		
+			   "kind", "attribute",
+			   "name", "message",
+			   "namespace", "##targetNamespace"
+		   });
 		addAnnotation
-		  (testcaseTypeEClass, 
-		   source, 
+		  (getErrorType_Type(),
+		   source,
 		   new String[] {
-			 "name", "testcase_._type",
-			 "kind", "elementOnly"
-		   });		
+			   "kind", "attribute",
+			   "name", "type",
+			   "namespace", "##targetNamespace"
+		   });
 		addAnnotation
-		  (getTestcaseType_Error(), 
-		   source, 
+		  (failureTypeEClass,
+		   source,
 		   new String[] {
-			 "kind", "element",
-			 "name", "error",
-			 "namespace", "##targetNamespace"
-		   });		
+			   "name", "failure_._type",
+			   "kind", "mixed"
+		   });
 		addAnnotation
-		  (getTestcaseType_Failure(), 
-		   source, 
+		  (getFailureType_Mixed(),
+		   source,
 		   new String[] {
-			 "kind", "element",
-			 "name", "failure",
-			 "namespace", "##targetNamespace"
-		   });		
+			   "kind", "elementWildcard",
+			   "name", ":mixed"
+		   });
 		addAnnotation
-		  (getTestcaseType_Classname(), 
-		   source, 
+		  (getFailureType_Message(),
+		   source,
 		   new String[] {
-			 "kind", "attribute",
-			 "name", "classname",
-			 "namespace", "##targetNamespace"
-		   });		
+			   "kind", "attribute",
+			   "name", "message",
+			   "namespace", "##targetNamespace"
+		   });
 		addAnnotation
-		  (getTestcaseType_Name(), 
-		   source, 
+		  (getFailureType_Type(),
+		   source,
 		   new String[] {
-			 "kind", "attribute",
-			 "name", "name",
-			 "namespace", "##targetNamespace"
-		   });		
+			   "kind", "attribute",
+			   "name", "type",
+			   "namespace", "##targetNamespace"
+		   });
 		addAnnotation
-		  (getTestcaseType_Time(), 
-		   source, 
+		  (propertiesTypeEClass,
+		   source,
 		   new String[] {
-			 "kind", "attribute",
-			 "name", "time",
-			 "namespace", "##targetNamespace"
-		   });		
+			   "name", "properties_._type",
+			   "kind", "elementOnly"
+		   });
 		addAnnotation
-		  (testsuiteEClass, 
-		   source, 
+		  (getPropertiesType_Property(),
+		   source,
 		   new String[] {
-			 "name", "testsuite",
-			 "kind", "elementOnly"
-		   });		
+			   "kind", "element",
+			   "name", "property",
+			   "namespace", "##targetNamespace"
+		   });
 		addAnnotation
-		  (getTestsuite_Testcase(), 
-		   source, 
+		  (propertyTypeEClass,
+		   source,
 		   new String[] {
-			 "kind", "element",
-			 "name", "testcase",
-			 "namespace", "##targetNamespace"
-		   });		
+			   "name", "property_._type",
+			   "kind", "empty"
+		   });
 		addAnnotation
-		  (getTestsuite_Errors(), 
-		   source, 
+		  (getPropertyType_Name(),
+		   source,
 		   new String[] {
-			 "kind", "attribute",
-			 "name", "errors",
-			 "namespace", "##targetNamespace"
-		   });		
+			   "kind", "attribute",
+			   "name", "name",
+			   "namespace", "##targetNamespace"
+		   });
 		addAnnotation
-		  (getTestsuite_Failures(), 
-		   source, 
+		  (getPropertyType_Value(),
+		   source,
 		   new String[] {
-			 "kind", "attribute",
-			 "name", "failures",
-			 "namespace", "##targetNamespace"
-		   });		
+			   "kind", "attribute",
+			   "name", "value",
+			   "namespace", "##targetNamespace"
+		   });
 		addAnnotation
-		  (getTestsuite_Name(), 
-		   source, 
+		  (skippedTypeEClass,
+		   source,
 		   new String[] {
-			 "kind", "attribute",
-			 "name", "name",
-			 "namespace", "##targetNamespace"
-		   });		
+			   "name", "skipped_._type",
+			   "kind", "mixed"
+		   });
 		addAnnotation
-		  (getTestsuite_Skipped(), 
-		   source, 
+		  (getSkippedType_Mixed(),
+		   source,
 		   new String[] {
-			 "kind", "attribute",
-			 "name", "skipped",
-			 "namespace", "##targetNamespace"
-		   });		
+			   "kind", "elementWildcard",
+			   "name", ":mixed"
+		   });
 		addAnnotation
-		  (getTestsuite_Tests(), 
-		   source, 
+		  (getSkippedType_Message(),
+		   source,
 		   new String[] {
-			 "kind", "attribute",
-			 "name", "tests",
-			 "namespace", "##targetNamespace"
-		   });		
+			   "kind", "attribute",
+			   "name", "message",
+			   "namespace", "##targetNamespace"
+		   });
 		addAnnotation
-		  (getTestsuite_Time(), 
-		   source, 
+		  (testcaseTypeEClass,
+		   source,
 		   new String[] {
-			 "kind", "attribute",
-			 "name", "time",
-			 "namespace", "##targetNamespace"
-		   });		
+			   "name", "testcase_._type",
+			   "kind", "elementOnly"
+		   });
 		addAnnotation
-		  (getTestsuite_Timestamp(), 
-		   source, 
+		  (getTestcaseType_Skipped(),
+		   source,
 		   new String[] {
-			 "kind", "attribute",
-			 "name", "timestamp",
-			 "namespace", "##targetNamespace"
-		   });		
+			   "kind", "element",
+			   "name", "skipped",
+			   "namespace", "##targetNamespace"
+		   });
 		addAnnotation
-		  (testsuitesTypeEClass, 
-		   source, 
+		  (getTestcaseType_Error(),
+		   source,
 		   new String[] {
-			 "name", "testsuites_._type",
-			 "kind", "elementOnly"
-		   });		
+			   "kind", "element",
+			   "name", "error",
+			   "namespace", "##targetNamespace"
+		   });
 		addAnnotation
-		  (getTestsuitesType_Testsuite(), 
-		   source, 
+		  (getTestcaseType_Failure(),
+		   source,
 		   new String[] {
-			 "kind", "element",
-			 "name", "testsuite",
-			 "namespace", "##targetNamespace"
-		   });		
+			   "kind", "element",
+			   "name", "failure",
+			   "namespace", "##targetNamespace"
+		   });
 		addAnnotation
-		  (testsuiteTypeEClass, 
-		   source, 
+		  (getTestcaseType_SystemOut(),
+		   source,
 		   new String[] {
-			 "name", "testsuite_._type",
-			 "kind", "elementOnly"
+			   "kind", "element",
+			   "name", "system-out",
+			   "namespace", "##targetNamespace"
+		   });
+		addAnnotation
+		  (getTestcaseType_SystemErr(),
+		   source,
+		   new String[] {
+			   "kind", "element",
+			   "name", "system-err",
+			   "namespace", "##targetNamespace"
+		   });
+		addAnnotation
+		  (getTestcaseType_Assertions(),
+		   source,
+		   new String[] {
+			   "kind", "attribute",
+			   "name", "assertions",
+			   "namespace", "##targetNamespace"
+		   });
+		addAnnotation
+		  (getTestcaseType_Classname(),
+		   source,
+		   new String[] {
+			   "kind", "attribute",
+			   "name", "classname",
+			   "namespace", "##targetNamespace"
+		   });
+		addAnnotation
+		  (getTestcaseType_Name(),
+		   source,
+		   new String[] {
+			   "kind", "attribute",
+			   "name", "name",
+			   "namespace", "##targetNamespace"
+		   });
+		addAnnotation
+		  (getTestcaseType_Status(),
+		   source,
+		   new String[] {
+			   "kind", "attribute",
+			   "name", "status",
+			   "namespace", "##targetNamespace"
+		   });
+		addAnnotation
+		  (getTestcaseType_Time(),
+		   source,
+		   new String[] {
+			   "kind", "attribute",
+			   "name", "time",
+			   "namespace", "##targetNamespace"
+		   });
+		addAnnotation
+		  (testsuitesTypeEClass,
+		   source,
+		   new String[] {
+			   "name", "testsuites_._type",
+			   "kind", "elementOnly"
+		   });
+		addAnnotation
+		  (getTestsuitesType_Testsuite(),
+		   source,
+		   new String[] {
+			   "kind", "element",
+			   "name", "testsuite",
+			   "namespace", "##targetNamespace"
+		   });
+		addAnnotation
+		  (getTestsuitesType_Disabled(),
+		   source,
+		   new String[] {
+			   "kind", "attribute",
+			   "name", "disabled",
+			   "namespace", "##targetNamespace"
+		   });
+		addAnnotation
+		  (getTestsuitesType_Errors(),
+		   source,
+		   new String[] {
+			   "kind", "attribute",
+			   "name", "errors",
+			   "namespace", "##targetNamespace"
+		   });
+		addAnnotation
+		  (getTestsuitesType_Failures(),
+		   source,
+		   new String[] {
+			   "kind", "attribute",
+			   "name", "failures",
+			   "namespace", "##targetNamespace"
+		   });
+		addAnnotation
+		  (getTestsuitesType_Name(),
+		   source,
+		   new String[] {
+			   "kind", "attribute",
+			   "name", "name",
+			   "namespace", "##targetNamespace"
+		   });
+		addAnnotation
+		  (getTestsuitesType_Tests(),
+		   source,
+		   new String[] {
+			   "kind", "attribute",
+			   "name", "tests",
+			   "namespace", "##targetNamespace"
+		   });
+		addAnnotation
+		  (getTestsuitesType_Time(),
+		   source,
+		   new String[] {
+			   "kind", "attribute",
+			   "name", "time",
+			   "namespace", "##targetNamespace"
+		   });
+		addAnnotation
+		  (testsuiteTypeEClass,
+		   source,
+		   new String[] {
+			   "name", "testsuite_._type",
+			   "kind", "elementOnly"
+		   });
+		addAnnotation
+		  (getTestsuiteType_Properties(),
+		   source,
+		   new String[] {
+			   "kind", "element",
+			   "name", "properties",
+			   "namespace", "##targetNamespace"
+		   });
+		addAnnotation
+		  (getTestsuiteType_Testcase(),
+		   source,
+		   new String[] {
+			   "kind", "element",
+			   "name", "testcase",
+			   "namespace", "##targetNamespace"
+		   });
+		addAnnotation
+		  (getTestsuiteType_SystemOut(),
+		   source,
+		   new String[] {
+			   "kind", "element",
+			   "name", "system-out",
+			   "namespace", "##targetNamespace"
+		   });
+		addAnnotation
+		  (getTestsuiteType_SystemErr(),
+		   source,
+		   new String[] {
+			   "kind", "element",
+			   "name", "system-err",
+			   "namespace", "##targetNamespace"
+		   });
+		addAnnotation
+		  (getTestsuiteType_Disabled(),
+		   source,
+		   new String[] {
+			   "kind", "attribute",
+			   "name", "disabled",
+			   "namespace", "##targetNamespace"
+		   });
+		addAnnotation
+		  (getTestsuiteType_Errors(),
+		   source,
+		   new String[] {
+			   "kind", "attribute",
+			   "name", "errors",
+			   "namespace", "##targetNamespace"
+		   });
+		addAnnotation
+		  (getTestsuiteType_Failures(),
+		   source,
+		   new String[] {
+			   "kind", "attribute",
+			   "name", "failures",
+			   "namespace", "##targetNamespace"
+		   });
+		addAnnotation
+		  (getTestsuiteType_Hostname(),
+		   source,
+		   new String[] {
+			   "kind", "attribute",
+			   "name", "hostname",
+			   "namespace", "##targetNamespace"
+		   });
+		addAnnotation
+		  (getTestsuiteType_Id(),
+		   source,
+		   new String[] {
+			   "kind", "attribute",
+			   "name", "id",
+			   "namespace", "##targetNamespace"
+		   });
+		addAnnotation
+		  (getTestsuiteType_Name(),
+		   source,
+		   new String[] {
+			   "kind", "attribute",
+			   "name", "name",
+			   "namespace", "##targetNamespace"
+		   });
+		addAnnotation
+		  (getTestsuiteType_Package(),
+		   source,
+		   new String[] {
+			   "kind", "attribute",
+			   "name", "package",
+			   "namespace", "##targetNamespace"
+		   });
+		addAnnotation
+		  (getTestsuiteType_Skipped(),
+		   source,
+		   new String[] {
+			   "kind", "attribute",
+			   "name", "skipped",
+			   "namespace", "##targetNamespace"
+		   });
+		addAnnotation
+		  (getTestsuiteType_Tests(),
+		   source,
+		   new String[] {
+			   "kind", "attribute",
+			   "name", "tests",
+			   "namespace", "##targetNamespace"
+		   });
+		addAnnotation
+		  (getTestsuiteType_Time(),
+		   source,
+		   new String[] {
+			   "kind", "attribute",
+			   "name", "time",
+			   "namespace", "##targetNamespace"
+		   });
+		addAnnotation
+		  (getTestsuiteType_Timestamp(),
+		   source,
+		   new String[] {
+			   "kind", "attribute",
+			   "name", "timestamp",
+			   "namespace", "##targetNamespace"
 		   });
 	}
 

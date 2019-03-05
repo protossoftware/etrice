@@ -1,8 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
- * $Id$
  */
 package org.eclipse.etrice.etunit.converter.Etunit.util;
 
@@ -51,7 +47,7 @@ public class EtunitSwitch<T> extends Switch<T> {
 	 * Checks whether this is a switch for the given package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @parameter ePackage the package in question.
+	 * @param ePackage the package in question.
 	 * @return whether this is a switch for the given package.
 	 * @generated
 	 */
@@ -88,15 +84,27 @@ public class EtunitSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case EtunitPackage.TESTCASE_TYPE: {
-				TestcaseType testcaseType = (TestcaseType)theEObject;
-				T result = caseTestcaseType(testcaseType);
+			case EtunitPackage.PROPERTIES_TYPE: {
+				PropertiesType propertiesType = (PropertiesType)theEObject;
+				T result = casePropertiesType(propertiesType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case EtunitPackage.TESTSUITE: {
-				Testsuite testsuite = (Testsuite)theEObject;
-				T result = caseTestsuite(testsuite);
+			case EtunitPackage.PROPERTY_TYPE: {
+				PropertyType propertyType = (PropertyType)theEObject;
+				T result = casePropertyType(propertyType);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case EtunitPackage.SKIPPED_TYPE: {
+				SkippedType skippedType = (SkippedType)theEObject;
+				T result = caseSkippedType(skippedType);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case EtunitPackage.TESTCASE_TYPE: {
+				TestcaseType testcaseType = (TestcaseType)theEObject;
+				T result = caseTestcaseType(testcaseType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -109,7 +117,6 @@ public class EtunitSwitch<T> extends Switch<T> {
 			case EtunitPackage.TESTSUITE_TYPE: {
 				TestsuiteType testsuiteType = (TestsuiteType)theEObject;
 				T result = caseTestsuiteType(testsuiteType);
-				if (result == null) result = caseTestsuite(testsuiteType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -163,6 +170,51 @@ public class EtunitSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Properties Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Properties Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePropertiesType(PropertiesType object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Property Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Property Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePropertyType(PropertyType object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Skipped Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Skipped Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSkippedType(SkippedType object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Testcase Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -174,21 +226,6 @@ public class EtunitSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseTestcaseType(TestcaseType object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Testsuite</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Testsuite</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseTestsuite(Testsuite object) {
 		return null;
 	}
 

@@ -16,9 +16,9 @@ tc end 5: 0
 tc start 6: TestEtMessageService_GetReturn
 tc end 6: 16
 tc start 7: TestEtMessageService_execute
-tc end 7: 0
+tc skip 7: not "working"
 tc start 8: TestEtMessageService_getMessagePoolLowWaterMark
-tc end 8: 0
+tc skip 8:
 ts start: TestEtUnit
 tc start 9: TestEtUnit_Expect_Order
 tc end 9: 0

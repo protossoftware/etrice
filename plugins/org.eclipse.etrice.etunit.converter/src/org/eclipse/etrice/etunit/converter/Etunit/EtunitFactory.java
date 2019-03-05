@@ -1,8 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
- * $Id$
  */
 package org.eclipse.etrice.etunit.converter.Etunit;
 
@@ -53,6 +49,33 @@ public interface EtunitFactory extends EFactory {
 	FailureType createFailureType();
 
 	/**
+	 * Returns a new object of class '<em>Properties Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Properties Type</em>'.
+	 * @generated
+	 */
+	PropertiesType createPropertiesType();
+
+	/**
+	 * Returns a new object of class '<em>Property Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Property Type</em>'.
+	 * @generated
+	 */
+	PropertyType createPropertyType();
+
+	/**
+	 * Returns a new object of class '<em>Skipped Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Skipped Type</em>'.
+	 * @generated
+	 */
+	SkippedType createSkippedType();
+
+	/**
 	 * Returns a new object of class '<em>Testcase Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -60,15 +83,6 @@ public interface EtunitFactory extends EFactory {
 	 * @generated
 	 */
 	TestcaseType createTestcaseType();
-
-	/**
-	 * Returns a new object of class '<em>Testsuite</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Testsuite</em>'.
-	 * @generated
-	 */
-	Testsuite createTestsuite();
 
 	/**
 	 * Returns a new object of class '<em>Testsuites Type</em>'.
