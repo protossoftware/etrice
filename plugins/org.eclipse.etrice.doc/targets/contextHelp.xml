@@ -57,6 +57,44 @@
 <topic href="targets/eclipse-help/feature-reference.html#spppropertydialog" label="GraphicalStructureEditor"/>
 </context>
 
+<context id="featureContextHelp_CCodeGenerator" title="CCodeGenerator">
+<description></description>
+<topic href="targets/eclipse-help/feature-reference.html#ccodegenerator" label="CCodeGenerator"/>
+</context>
+
+<context id="featureContextHelp_JavaCodeGenerator" title="JavaCodeGenerator">
+<description></description>
+<topic href="targets/eclipse-help/feature-reference.html#javacodegenerator" label="JavaCodeGenerator"/>
+</context>
+
+<context id="featureContextHelp_CPPCodeGenerator" title="CPPCodeGenerator">
+<description></description>
+<topic href="targets/eclipse-help/feature-reference.html#cppcodegenerator" label="CPPCodeGenerator"/>
+</context>
+
+<context id="featureContextHelp_GenerationOptions" title="GenerationOptions">
+<description>Mechanism to adjust the generation.</description>
+<topic href="targets/eclipse-help/feature-reference.html#generationoptions" label="GenerationOptions"/>
+<topic href="targets/eclipse-help/feature-reference.html#generationoptions" label="CCodeGenerator"/>
+<topic href="targets/eclipse-help/feature-reference.html#generationoptions" label="JavaCodeGenerator"/>
+<topic href="targets/eclipse-help/feature-reference.html#generationoptions" label="MSCLogging"/>
+</context>
+
+<context id="featureContextHelp_MSCLogging" title="MSCLogging">
+<description>Runtime logger for event-driven Messages, represented as a Message Sequence Chart.</description>
+<topic href="targets/eclipse-help/feature-reference.html#msclogging" label="MSCLogging"/>
+<topic href="targets/eclipse-help/feature-reference.html#msclogging" label="GenerationOptions"/>
+<topic href="targets/eclipse-help/feature-reference.html#msclogging" label="CCodeGenerator"/>
+<topic href="targets/eclipse-help/feature-reference.html#msclogging" label="JavaCodeGenerator"/>
+</context>
+
+<context id="featureContextHelp_DataLogging" title="DataLogging">
+<description>Runtime logger for data-driven Messages with primitive data.</description>
+<topic href="targets/eclipse-help/feature-reference.html#datalogging" label="DataLogging"/>
+<topic href="targets/eclipse-help/feature-reference.html#datalogging" label="Annotation"/>
+<topic href="targets/eclipse-help/feature-reference.html#datalogging" label="CCodeGenerator"/>
+</context>
+
 <context id="featureContextHelp_AnnotationType" title="AnnotationType">
 <description>AnnotationTypes can be used to tag ROOM classes for further custom processing</description>
 <topic href="targets/eclipse-help/feature-reference.html#annotationtype" label="AnnotationType"/>
@@ -65,22 +103,27 @@
 </context>
 
 <context id="featureContextHelp_Annotation" title="Annotation">
-<description>An Annotation can be attached to a ROOM classes to apply the properties of its AnnotationType</description>
+<description>An Annotation can be attached to a ROOM class to specify the properties of its AnnotationType</description>
 <topic href="targets/eclipse-help/feature-reference.html#annotation" label="Annotation"/>
 <topic href="targets/eclipse-help/feature-reference.html#annotation" label="AnnotationType"/>
+<topic href="targets/eclipse-help/feature-reference.html#annotation" label="DataLogging"/>
 <topic href="targets/eclipse-help/feature-reference.html#annotation" label="LogicalSystem"/>
 <topic href="targets/eclipse-help/feature-reference.html#annotation" label="ActorClass"/>
 <topic href="targets/eclipse-help/feature-reference.html#annotation" label="SubSystemClass"/>
 <topic href="targets/eclipse-help/feature-reference.html#annotation" label="ProtocolClass"/>
 <topic href="targets/eclipse-help/feature-reference.html#annotation" label="DataClass"/>
-<topic href="targets/eclipse-help/feature-reference.html#annotation" label="DataLogging"/>
 </context>
 
 <context id="featureContextHelp_Inheritance" title="Inheritance">
-<description>A class can specify a super class and inherits elements from the super class hierarchy</description>
+<description>A class can specify a single super class and inherits elements from the super class hierarchy</description>
 <topic href="targets/eclipse-help/feature-reference.html#inheritance" label="Inheritance"/>
 <topic href="targets/eclipse-help/feature-reference.html#inheritance" label="ActorClass"/>
 <topic href="targets/eclipse-help/feature-reference.html#inheritance" label="StateMachine"/>
+<topic href="targets/eclipse-help/feature-reference.html#inheritance" label="StateGraphNode"/>
+<topic href="targets/eclipse-help/feature-reference.html#inheritance" label="State"/>
+<topic href="targets/eclipse-help/feature-reference.html#inheritance" label="State"/>
+<topic href="targets/eclipse-help/feature-reference.html#inheritance" label="RefinedState"/>
+<topic href="targets/eclipse-help/feature-reference.html#inheritance" label="Transition"/>
 <topic href="targets/eclipse-help/feature-reference.html#inheritance" label="ProtocolClass"/>
 <topic href="targets/eclipse-help/feature-reference.html#inheritance" label="DataClass"/>
 </context>
@@ -139,6 +182,90 @@
 <topic href="targets/eclipse-help/feature-reference.html#statemachine" label="Inheritance"/>
 <topic href="targets/eclipse-help/feature-reference.html#statemachine" label="GraphicalBehaviorEditor"/>
 <topic href="targets/eclipse-help/feature-reference.html#statemachine" label="ActorClass"/>
+<topic href="targets/eclipse-help/feature-reference.html#statemachine" label="State"/>
+<topic href="targets/eclipse-help/feature-reference.html#statemachine" label="RefinedState"/>
+</context>
+
+<context id="featureContextHelp_State" title="State">
+<description>A State is a node in the state graph representation of the state machine</description>
+<topic href="targets/eclipse-help/feature-reference.html#simplestate" label="State"/>
+<topic href="targets/eclipse-help/feature-reference.html#simplestate" label="Inheritance"/>
+<topic href="targets/eclipse-help/feature-reference.html#simplestate" label="StateMachine"/>
+<topic href="targets/eclipse-help/feature-reference.html#simplestate" label="State"/>
+</context>
+
+<context id="featureContextHelp_RefinedState" title="RefinedState">
+<description>A RefinedState refines a State of one of the Actor's base class state machines</description>
+<topic href="targets/eclipse-help/feature-reference.html#refinedstate" label="RefinedState"/>
+<topic href="targets/eclipse-help/feature-reference.html#refinedstate" label="Inheritance"/>
+<topic href="targets/eclipse-help/feature-reference.html#refinedstate" label="StateMachine"/>
+<topic href="targets/eclipse-help/feature-reference.html#refinedstate" label="State"/>
+</context>
+
+<context id="featureContextHelp_ChoicePoint" title="ChoicePoint">
+<description>a choice point is the state machine counterpart of a conditional statement</description>
+<topic href="targets/eclipse-help/feature-reference.html#choicepoint" label="ChoicePoint"/>
+<topic href="targets/eclipse-help/feature-reference.html#choicepoint" label="StateGraphNode"/>
+<topic href="targets/eclipse-help/feature-reference.html#choicepoint" label="ContinuationTransition"/>
+</context>
+
+<context id="featureContextHelp_TransitionPoint" title="TransitionPoint">
+<description>a transition point is the starting point of transitions that trigger for any state of this state machine</description>
+<topic href="targets/eclipse-help/feature-reference.html#transitionpoint" label="TransitionPoint"/>
+<topic href="targets/eclipse-help/feature-reference.html#transitionpoint" label="TrPoint"/>
+</context>
+
+<context id="featureContextHelp_EntryPoint" title="EntryPoint">
+<description>an entry point is an explicit entry point in a sub state machine to which transitions in the parent state graph can connect</description>
+<topic href="targets/eclipse-help/feature-reference.html#entrypoint" label="EntryPoint"/>
+<topic href="targets/eclipse-help/feature-reference.html#entrypoint" label="TrPoint"/>
+</context>
+
+<context id="featureContextHelp_ExitPoint" title="ExitPoint">
+<description>an exit point is an explicit exit point in a sub state machine from which transitions in the parent state graph can start</description>
+<topic href="targets/eclipse-help/feature-reference.html#exitpoint" label="ExitPoint"/>
+<topic href="targets/eclipse-help/feature-reference.html#exitpoint" label="TrPoint"/>
+</context>
+
+<context id="featureContextHelp_Transition" title="Transition">
+<description>A Transition is an edge in the state graph representation of the state machine</description>
+<topic href="targets/eclipse-help/feature-reference.html#transition" label="Transition"/>
+<topic href="targets/eclipse-help/feature-reference.html#transition" label="Inheritance"/>
+<topic href="targets/eclipse-help/feature-reference.html#transition" label="StateMachine"/>
+<topic href="targets/eclipse-help/feature-reference.html#transition" label="InitialTransition"/>
+<topic href="targets/eclipse-help/feature-reference.html#transition" label="ContinuationTransition"/>
+<topic href="targets/eclipse-help/feature-reference.html#transition" label="CPBranchTransition"/>
+<topic href="targets/eclipse-help/feature-reference.html#transition" label="TriggeredTransition"/>
+</context>
+
+<context id="featureContextHelp_InitialTransition" title="InitialTransition">
+<description>the initial transition is used to identify the initial state</description>
+<topic href="targets/eclipse-help/feature-reference.html#initialtransition" label="InitialTransition"/>
+<topic href="targets/eclipse-help/feature-reference.html#initialtransition" label="Transition"/>
+</context>
+
+<context id="featureContextHelp_GuardedTransition" title="GuardedTransition">
+<description>the guarded transition is used by data driven state machines to trigger state transitions</description>
+<topic href="targets/eclipse-help/feature-reference.html#guardedtransition" label="GuardedTransition"/>
+</context>
+
+<context id="featureContextHelp_ContinuationTransition" title="ContinuationTransition">
+<description>the continuation transition is a transition with just an optional action code</description>
+<topic href="targets/eclipse-help/feature-reference.html#continuationtransition" label="ContinuationTransition"/>
+<topic href="targets/eclipse-help/feature-reference.html#continuationtransition" label="Transition"/>
+<topic href="targets/eclipse-help/feature-reference.html#continuationtransition" label="ChoicePoint"/>
+</context>
+
+<context id="featureContextHelp_CPBranchTransition" title="CPBranchTransition">
+<description>a choice point branch transition is an outgoing transition from a choice point and is traversed if its conditions is evaluated to true</description>
+<topic href="targets/eclipse-help/feature-reference.html#cpbranchtransition" label="CPBranchTransition"/>
+<topic href="targets/eclipse-help/feature-reference.html#cpbranchtransition" label="Transition"/>
+</context>
+
+<context id="featureContextHelp_TriggeredTransition" title="TriggeredTransition">
+<description>a triggered transition is used in event driven state machines to trigger state transitions</description>
+<topic href="targets/eclipse-help/feature-reference.html#triggeredtransition" label="TriggeredTransition"/>
+<topic href="targets/eclipse-help/feature-reference.html#triggeredtransition" label="Transition"/>
 </context>
 
 <context id="featureContextHelp_SubSystemRef" title="SubSystemRef">
@@ -147,13 +274,6 @@
 <topic href="targets/eclipse-help/feature-reference.html#subsystemref" label="SubSystemClass"/>
 <topic href="targets/eclipse-help/feature-reference.html#subsystemref" label="MappingModel"/>
 <topic href="targets/eclipse-help/feature-reference.html#subsystemref" label="LogicalSystem"/>
-</context>
-
-<context id="featureContextHelp_Replication" title="Replication">
-<description>Replication is mechanism for multi-instantiation for ActorRefs and Ports</description>
-<topic href="targets/eclipse-help/feature-reference.html#replication" label="Replication"/>
-<topic href="targets/eclipse-help/feature-reference.html#replication" label="ActorRef"/>
-<topic href="targets/eclipse-help/feature-reference.html#replication" label="Port"/>
 </context>
 
 <context id="featureContextHelp_ActorRef" title="ActorRef">
@@ -211,18 +331,6 @@
 <topic href="targets/eclipse-help/feature-reference.html#protocolclass" label="SPP"/>
 </context>
 
-<context id="featureContextHelp_DataType" title="DataType">
-<description>A DataType can take 4 forms and types data elements like an Attribute or Operation argument</description>
-<topic href="targets/eclipse-help/feature-reference.html#datatype" label="DataType"/>
-<topic href="targets/eclipse-help/feature-reference.html#datatype" label="LogicalModel"/>
-<topic href="targets/eclipse-help/feature-reference.html#datatype" label="PrimitiveType"/>
-<topic href="targets/eclipse-help/feature-reference.html#datatype" label="Enumeration"/>
-<topic href="targets/eclipse-help/feature-reference.html#datatype" label="DataClass"/>
-<topic href="targets/eclipse-help/feature-reference.html#datatype" label="ExternalType"/>
-<topic href="targets/eclipse-help/feature-reference.html#datatype" label="Attribute"/>
-<topic href="targets/eclipse-help/feature-reference.html#datatype" label="Operation"/>
-</context>
-
 <context id="featureContextHelp_PrimitiveType" title="PrimitiveType">
 <description>A PrimitiveType is an abstraction of a target language's basic type (e.g. integer or boolean)</description>
 <topic href="targets/eclipse-help/feature-reference.html#primitivetype" label="PrimitiveType"/>
@@ -267,21 +375,6 @@
 <topic href="targets/eclipse-help/feature-reference.html#operation" label="DataClass"/>
 </context>
 
-<context id="featureContextHelp_Port" title="Port">
-<description>A Port is an instance of a ProtocolClass and the interface for an ActorClass</description>
-<topic href="targets/eclipse-help/feature-reference.html#port" label="Port"/>
-<topic href="targets/eclipse-help/feature-reference.html#port" label="ProtocolClass"/>
-<topic href="targets/eclipse-help/feature-reference.html#port" label="Replication"/>
-<topic href="targets/eclipse-help/feature-reference.html#port" label="GraphicalStructureEditor"/>
-<topic href="targets/eclipse-help/feature-reference.html#port" label="PortPropertyDialog"/>
-<topic href="targets/eclipse-help/feature-reference.html#port" label="ActorClass"/>
-<topic href="targets/eclipse-help/feature-reference.html#port" label="Binding"/>
-<topic href="targets/eclipse-help/feature-reference.html#port" label="Binding"/>
-<topic href="targets/eclipse-help/feature-reference.html#port" label="RelayPort"/>
-<topic href="targets/eclipse-help/feature-reference.html#port" label="ExternalEndPort"/>
-<topic href="targets/eclipse-help/feature-reference.html#port" label="InternalEndPort"/>
-</context>
-
 <context id="featureContextHelp_RelayPort" title="RelayPort">
 <description>A RelayPort forwards its messages without exposing them to the internal interface of the ActorClass</description>
 <topic href="targets/eclipse-help/feature-reference.html#relayport" label="RelayPort"/>
@@ -324,43 +417,5 @@
 <topic href="targets/eclipse-help/feature-reference.html#spp" label="ActorClass"/>
 <topic href="targets/eclipse-help/feature-reference.html#spp" label="LayerConnection"/>
 <topic href="targets/eclipse-help/feature-reference.html#spp" label="ServiceImplementation"/>
-</context>
-
-<context id="featureContextHelp_CCodeGenerator" title="CCodeGenerator">
-<description></description>
-<topic href="targets/eclipse-help/feature-reference.html#ccodegenerator" label="CCodeGenerator"/>
-</context>
-
-<context id="featureContextHelp_JavaCodeGenerator" title="JavaCodeGenerator">
-<description></description>
-<topic href="targets/eclipse-help/feature-reference.html#javacodegenerator" label="JavaCodeGenerator"/>
-</context>
-
-<context id="featureContextHelp_CPPCodeGenerator" title="CPPCodeGenerator">
-<description></description>
-<topic href="targets/eclipse-help/feature-reference.html#cppcodegenerator" label="CPPCodeGenerator"/>
-</context>
-
-<context id="featureContextHelp_GenerationOptions" title="GenerationOptions">
-<description>Mechanism to adjust the generation.</description>
-<topic href="targets/eclipse-help/feature-reference.html#generationoptions" label="GenerationOptions"/>
-<topic href="targets/eclipse-help/feature-reference.html#generationoptions" label="CCodeGenerator"/>
-<topic href="targets/eclipse-help/feature-reference.html#generationoptions" label="JavaCodeGenerator"/>
-<topic href="targets/eclipse-help/feature-reference.html#generationoptions" label="MSCLogging"/>
-</context>
-
-<context id="featureContextHelp_MSCLogging" title="MSCLogging">
-<description>Runtime logger for event-driven Messages, represented as a Message Sequence Chart.</description>
-<topic href="targets/eclipse-help/feature-reference.html#msclogging" label="MSCLogging"/>
-<topic href="targets/eclipse-help/feature-reference.html#msclogging" label="GenerationOptions"/>
-<topic href="targets/eclipse-help/feature-reference.html#msclogging" label="CCodeGenerator"/>
-<topic href="targets/eclipse-help/feature-reference.html#msclogging" label="JavaCodeGenerator"/>
-</context>
-
-<context id="featureContextHelp_DataLogging" title="DataLogging">
-<description>Runtime logger for data-driven Messages with primitive data.</description>
-<topic href="targets/eclipse-help/feature-reference.html#datalogging" label="DataLogging"/>
-<topic href="targets/eclipse-help/feature-reference.html#datalogging" label="Annotation"/>
-<topic href="targets/eclipse-help/feature-reference.html#datalogging" label="CCodeGenerator"/>
 </context>
 </contexts>

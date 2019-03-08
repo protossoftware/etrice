@@ -26,8 +26,8 @@ Package ROOMLanguage
 Feature AnnotationType
 description '''AnnotationTypes can be used to tag ROOM classes for further custom processing'''
 text '''
-	They provide the ability to associate custom properties to ROOM classes, that adjust or toogle features, like generation or the runtime behavior.
-	eTrice has some built-in annotations, which can be found in Annotations.room within the eTrice modellib.
+	They provide the ability to associate custom properties to ROOM classes, that adjust or toggle features, like generation or the runtime behavior.
+	eTrice comes with predefined annotations, which can be found in Annotations.room within the eTrice modellib.
 
 	See section Annotations for further reading.
 ''' 
@@ -44,7 +44,7 @@ stable
 ;
 
 Feature Annotation
-description '''An Annotation can be attached to a ROOM classes to apply the properties of its AnnotationType'''
+description '''An Annotation can be attached to a ROOM class to specify the properties of its AnnotationType'''
 text '''
 	It refers to an AnnotationType and may have to pass key value pairs. Its notation is similar to Java:
 
@@ -78,7 +78,7 @@ stable
 ;
 
 Feature Inheritance
-	description '''A class can specify a super class and inherits elements from the super class hierarchy'''
+	description '''A class can specify a single super class and inherits elements from the super class hierarchy'''
 	text '''
 		When a ROOM class specifies a super class, it generally inherits all elements and properties.
 		In several cases, it is possible, to override these inherited elements. Generally, eTrice has two semantics of overriding: refinement and replacement.
@@ -86,28 +86,28 @@ Feature Inheritance
 		In this case, if a sub class overrides a piece of logic from a super class, it will always be executed subsequently to the inherited.
 		Contrary to this, replacement is applied to overridden Operations, similar to programming languages C++ and Java.
 
-		A formal definition of overriding is given below:
+		A formal definition of several variants of overriding is given below:
 		
-		- early or late resolve - if element is overridden, which one should super class use by default - own or override ?
-		- replacing or refinement - ignore inherited code or prepend inherited code automatically ?
-		- (non-)accessible - if element is overridden, is super class' original accessible from sub class ? e.g. super.foo()
-		- implicit or explicit - does it use distinct model element / keyword?
+		- early or late resolve - if element is overridden, which one should the super class use by default - own or override?
+		- replacing or refining - ignore inherited code or prepend inherited code automatically?
+		- (non-)accessible - if element is overridden, is super class' original accessible from sub class? E.g. super.foo()
+		- implicit or explicit - does it use a distinct model element or keyword?
 		
 		
-		Examples programming languages:
-		c++ virtual function and java override  <==> accessible explicit late replacing
-		c++ function redefine <==> accessible implicit early replacing
-		c++ dtor <==> late refinement\\
+		Examples from programming languages:
+		C++ virtual function and Java override  <==> accessible, explicit, late, replacing
+		C++ function redefine <==> accessible, implicit, early, replacing
+		C++ destructor <==> late, refining\\
 		
 		eTrice override of model elements:
-		Operations (C generation)  <==> non\_accessible explicit late replacing
-		Operations (Java generation) <==> accessible explicit late replacing
-		State and Transitions <==> non-accessible explicit late refinement
-		ctor/dtor <==> non\_accessible implicit late refinement
-		StateMachine <==> non-accessible implicit late refinement
-		UserCode <==> non-accessible implicit late refinement
+		Operations (C generation)  <==> non-accessible, explicit, late, replacing
+		Operations (Java generation) <==> accessible, explicit, late, replacing
+		State and Transitions <==> non-accessible, explicit, late, refining
+		ctor/dtor <==> non-accessible, implicit, late, refining
+		StateMachine <==> non-accessible, implicit, late, refining
+		UserCode <==> non-accessible, implicit, late, refining
 	'''
-	example ¦¦¦
+	example |||
 		```room
 		ActorClass ActorSubClass extends ActorBaseClass {
 			// inherits all elements from super type hierarchy
@@ -145,7 +145,7 @@ Feature Inheritance
 			Attribute attribute1 : uint32
 		}
 		```
-		¦¦¦
+		|||
 	prototype	
 ;
 
@@ -353,7 +353,7 @@ Feature ActorClass
 	'''
 	
 	example ''''''
-	help ¦¦¦
+	help |||
 		```room
 		// prefixes: abstract and (eventdriven, datadriven, async, sync)
 		ActorClass ActorName ["An eventdriven ActorClass by default"] {
@@ -382,7 +382,7 @@ Feature ActorClass
 			}
 		}
 		```
-	¦¦¦
+	|||
 	
 	contains ExecutionType
 	contains ActorRef
@@ -430,7 +430,19 @@ Feature SubSystemClass
 Feature StateMachine
 	description '''A StateMachine describes the state based, event driven behavior of an ActorClass'''
 	text '''
-		In ROOM each actor class can implement its behavior using a state machine. Events occurring at the end ports of an actor will be forwarded to and processed by the state machine. Events possibly trigger state transitions.
+		In ROOM each actor class can implement its behavior using a state machine. Events occurring at the end ports of an actor will
+		be forwarded to and processed by the state machine. Events possibly trigger state transitions.
+		
+		ROOM state machines are hierarchical finite state machines. That means that each state in the state graph can contain another state graph.
+		This is possible to arbitrary depth.
+
+		A state graph consists of
+		
+		* states
+		* transitions
+		* transition points
+		* choice points
+		* initial point
 		
 		![PingPongReceiverFSM](images/300-PingPongReceiverFSM.png)
 		
@@ -448,8 +460,297 @@ Feature StateMachine
 		```
 	'''
 	uses Inheritance
+	contains StateGraphNode
+	contains Transition
 	stable
-	;
+;
+
+abstract Feature StateGraphNode
+	description '''A StateGraphNode is an abstract node of the state graph'''
+	text '''
+		A StateGraphNode can be a State, a TransitionPoint, a ChoicePoint or an InitialPoint.
+	'''
+	uses Inheritance
+	stable
+;
+
+abstract Feature State
+	description '''A State can be a plain State or a RefinedState'''
+	text '''
+		A State can be a plain State or a RefinedState.
+	'''
+	uses Inheritance
+	isA StateGraphNode
+	stable
+;
+
+Feature SimpleState
+	description '''A State is a node in the state graph representation of the state machine'''
+	text '''
+		A State has optional 'entry' and 'exit' codes. The entry code is executed when the state is entered, the exit code is executed
+		when it is left. In the case of an data driven (also known as polled) state machine, there also is a 'do' action code.
+		The do code is executed for the active state in each polling cycle.
+		A state can have a sub state machine. Starting at the top level state machine the states with their optional sub state machines
+		form a tree which is called a 'hierarchical state machine'.
+		A state machine always is in exactly one state which can only be a leaf state, i.e. a state which has no sub state machine.
+	'''
+	help keyword "State" |||
+		```room
+		ActorClass Example {
+			//...
+			Behavior {
+				StateMachine {
+					Transition init: initial -> Standby
+					Transition tr0: Standby -> Running {
+						triggers {
+							<timeout: to>
+						}
+					}
+					Transition tr1: Running -> Stopped {
+						triggers {
+							<timeout: to>
+						}
+					}
+					State Standby {
+						entry '''
+							to.startTimeout(200*10);'''
+					}
+					State Running {
+						entry '''
+							controllers.start();
+							to.startTimeout(200*10);'''
+					}
+					State Stopped {
+						entry '''controllers.stop();'''
+					}
+				}
+			}
+		}
+		```
+	|||
+	uses Inheritance
+	uses StateMachine
+	isA State
+	stable
+;
+
+Feature RefinedState
+	description '''A RefinedState refines a State of one of the Actor's base class state machines'''
+	text '''
+		A State can be a plain State or a RefinedState.
+	'''
+	help |||
+		```room
+			RefinedState BaseState {
+				exit '''// this is derived exit code'''
+				subgraph {
+					// add a sub state machine
+					Transition init: initial -> state0 { }
+					State state0
+				}
+			}
+		```
+	|||
+	uses Inheritance
+	uses StateMachine
+	isA State
+	stable
+;
+
+Feature ChoicePoint
+	description '''a choice point is the state machine counterpart of a conditional statement'''
+	text '''
+		A ChoicePoint in ROOM has one incoming transition and an arbitrary number of outgoing transitions.
+		One of the outgoing transitions has no condition (a ContinuationTransition). It is the default branch that is taken
+		if none of the transition conditions evaluated to true. All other transitions going out from the ChoicePoint
+		are CPBranchTransitions which have a mandatory condition (keyword 'cond'). The evaluation order of the conditions
+		is not deterministic.
+	'''
+	help |||
+		```room
+			StateMachine {
+				State state0
+				State state1
+				State state2
+				State state3
+				TransitionPoint tr4
+				ChoicePoint cp0
+				Transition init0: initial -> state0
+				Transition tr0: state0 -> state1 {
+					triggers {
+						<in1: p0>
+					}
+				}
+				Transition tr1: state1 -> cp cp0 {
+					triggers {
+						<in1: p0>
+					}
+				}
+				Transition tr2: cp cp0 -> state3
+				Transition tr3: cp cp0 -> state2 {
+					cond '''true'''
+				}
+				Transition tr5:  my tr4 -> state0 {
+					triggers {
+						<in2: p0>
+					}
+				}
+			}
+		```
+	|||
+	isA StateGraphNode
+	uses ContinuationTransition
+	stable
+;
+
+abstract Feature TrPoint
+	description '''a TrPoint can be an EntryPoint, an ExitPoint or a TransitionPoint'''
+	text '''text'''
+	help |||a TrPoint is an abstract element|||
+	isA StateGraphNode
+	stable
+;
+
+Feature TransitionPoint
+	description '''a transition point is the starting point of transitions that trigger for any state of this state machine'''
+	text '''text'''
+	help |||
+		```room
+			StateMachine {
+				TransitionPoint tp1
+				Transition tr1: my tp1 -> my tp1 {
+					triggers {
+						<msg: port>
+					}
+				}
+			}
+		```
+	|||
+	isA TrPoint
+	stable
+;
+
+Feature EntryPoint
+	description '''an entry point is an explicit entry point in a sub state machine to which transitions in the parent state graph can connect'''
+	text '''text'''
+	help |||
+		```room
+			StateMachine {
+				State state0 {
+					subgraph {
+						State state0
+						EntryPoint ep0
+						ExitPoint ep1
+						Transition tr0: my ep0 -> state0
+						Transition tr1: state0 -> my ep1 {
+							triggers {
+								<in1: p0>
+							}
+						}
+					}
+				}
+				State state1
+				Transition init0: initial -> ep0 of state0
+				Transition tr0: ep1 of state0 -> state1
+			}
+		```
+	|||
+	isA TrPoint
+	stable
+;
+
+Feature ExitPoint
+	description '''an exit point is an explicit exit point in a sub state machine from which transitions in the parent state graph can start'''
+	text '''text'''
+	help |||help|||
+	isA TrPoint
+	stable
+;
+
+Feature Transition
+	description '''A Transition is an edge in the state graph representation of the state machine'''
+	text '''
+		A transition connects StateGraphNodes in a state graph. A transition is allowed to connect a state or a transition point with itself.
+		Transition points can only be targets of transitions originating from the same transition point.
+		The initial point is the source of exactly one transition. In the textual model it is present only in an implicit way.
+	'''
+	help |||
+		```room
+			Transition init: initial -> Standby
+			Transition tr0: Standby -> Running {
+				triggers {
+					<timeout: to>
+				}
+			}
+		```
+	|||
+	uses Inheritance
+	stable
+;
+
+Feature InitialTransition
+	description '''the initial transition is used to identify the initial state'''
+	text '''The initial transition connects the initial point to a state. There can be at most one initial transition
+		in a state machine. Under special circumstances the initial transition can be omitted.
+	'''
+	help |||Transition init: initial -> state0|||
+	isA Transition
+	stable
+;
+
+Feature GuardedTransition
+	description '''the guarded transition is used by data driven state machines to trigger state transitions'''
+	text '''In data driven state machines guarded transitions fire whenever the guard condition evaluates to true.
+		The evaluation is performed in each polling cycle.
+	'''
+	help |||
+		Transition tr: running -> running {
+			guard '''data_counter_finish.finish == true && data_finish_flag == false'''
+			action '''++counter;'''
+		}
+	|||
+	idea
+;
+
+Feature ContinuationTransition
+	description '''the continuation transition is a transition with just an optional action code'''
+	text '''A continuation transition is used as default branch of a choice point or as outgoing transition of an entry point'''
+	help '''
+		State running {
+			subgraph {
+				EntryPoint ep0
+				State active
+				Transition tr0: my ep0 -> active
+			}
+		}
+	'''
+	isA Transition
+	idea
+;
+
+Feature CPBranchTransition
+	description '''a choice point branch transition is an outgoing transition from a choice point and is traversed if its conditions is evaluated to true'''
+	text '''A choice point together with its outgoing transitions can be thought of as a if, else-if, else cascade in traditional
+		programming languages. The choice point branch transition corresponds to an if clause while the final else is modeled as
+		a continuation transition. Coming from a choice point, a choice point branch transition is traversed whenever its
+		condition evaluates to true. No order of evaluations is guaranteed.
+	'''
+	help |||
+		Transition tr3: cp cp0 -> state1 {
+			cond '''0<=counter && counter<3'''
+		}
+	|||
+	isA Transition
+	idea
+;
+
+Feature TriggeredTransition
+	description '''a triggered transition is used in event driven state machines to trigger state transitions'''
+	text '''text'''
+	help |||help|||
+	isA Transition
+	stable
+;
 
 Feature SubSystemRef
  	description '''A Sub System Reference is an instance of an SubSystemClass'''
@@ -746,7 +1047,7 @@ Feature ProtocolClass
 		}
 		```
 	'''
-	help ¦¦¦
+	help |||
 		```room
 		// prefixes: (eventdriven, datadriven, sync)
 		ProtocolClass ProtocolName ["An eventdriven ProtocolClass by default"] {
@@ -774,7 +1075,7 @@ Feature ProtocolClass
 			// inherits all elements from super class
 		}
 		```
-	¦¦¦
+	|||
 	contains CommunicationType
 	contains Attribute
 	contains Operation
@@ -801,7 +1102,7 @@ Feature PrimitiveType
 	'''
 	help '''
 	```room
-	// java
+	// Java
 	PrimitiveType boolean: ptBoolean -> boolean (Boolean) default "false"
 	PrimitiveType int16: ptInteger -> short (Short) default "0"
 	
@@ -870,7 +1171,7 @@ Feature DataClass
 		}
 		```
 	'''
-	example ¦¦¦
+	example |||
 		```room
 		DataClass SimpleDataClass {
 			Attribute attribute1: uint16
@@ -887,8 +1188,8 @@ Feature DataClass
 			'''
 		}
 		```
-	¦¦¦
-	help ¦¦¦
+	|||
+	help |||
 		```room
 		DataClass DataClassName ["Documentation"] {
 			Attribute ... // nested DataClasses possible
@@ -902,7 +1203,7 @@ Feature DataClass
 			...
 		}
 		```
-	¦¦¦
+	|||
 	isA DataType
 	contains Attribute
 	contains Operation
@@ -912,7 +1213,7 @@ Feature DataClass
 
 Feature ExternalType 
 	description '''An ExternalType is used to make an target language type accessible in ROOM'''
-	example ¦¦¦
+	example |||
 		```room
 		// Include is needed when used (e.g. in ActorClassWithExternalType)
 		ExternalType someStructType -> "struct FILE_HANDLE"
@@ -932,7 +1233,7 @@ Feature ExternalType
 			}
 		}
 		```
-	¦¦¦
+	|||
 	help '''
 		```room
 		ExternalType voidType -> "void" default "NULL"
@@ -1015,7 +1316,7 @@ Feature Operation
 		- 'override' keyword, replaces the logic of the inherited operation having the same signature
 		
 	'''
-	example ¦¦¦
+	example |||
 		```room
 		import room.basic.types.* from "../../../org.eclipse.etrice.modellib.c/model/Types.room"
 		
@@ -1053,8 +1354,8 @@ Feature Operation
 			}
 		}
 		```
-	¦¦¦
-	help ¦¦¦
+	|||
+	help |||
 		```room
 		Operation operationName() ["A void operation"] '''
 			user code here;
@@ -1070,7 +1371,7 @@ Feature Operation
 		// becomes effective in entire inheritance hierarchy
 		override Operation operationName(param: int32) : boolean ''' '''
 		```
-	¦¦¦
+	|||
 	uses DataType
 	property returnType values { "DataType" }
 	property arguments values { "name : DataType" }

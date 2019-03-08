@@ -210,12 +210,12 @@
 </tr>
 <tr>
 	<td><p><a href="#annotation">Annotation</a></p></td>
-	<td><p>An Annotation can be attached to a ROOM classes to apply the properties of its AnnotationType</p></td>
+	<td><p>An Annotation can be attached to a ROOM class to specify the properties of its AnnotationType</p></td>
 </tr>
 <tr>
 	<td rowspan="1" style="white-space: nowrap;"><p>Uses:</p></td>
 	<td><p><a href="#inheritance">Inheritance</a></p></td>
-	<td><p>A class can specify a super class and inherits elements from the super class hierarchy</p></td>
+	<td><p>A class can specify a single super class and inherits elements from the super class hierarchy</p></td>
 </tr>
 </tbody>
 </table>
@@ -347,7 +347,7 @@
 <p>Instance hierarchy of ActorRef Example (*System(System)* not shown in code snippet)</p>
 <hr>
 <h3><a href="#annotation" name="annotation"></a>Annotation</h3>
-<p>An Annotation can be attached to a ROOM classes to apply the properties of its AnnotationType</p>
+<p>An Annotation can be attached to a ROOM class to specify the properties of its AnnotationType</p>
 <p>It refers to an AnnotationType and may have to pass key value pairs. Its notation is similar to Java:</p>
 <pre><code class="room customHighlighted">@AnnotationType1
 @AnnotationType2(key1=<span class="string">"STRING"</span>, key2=3, ...)
@@ -421,7 +421,7 @@
 <hr>
 <h3><a href="#annotationtype" name="annotationtype"></a>AnnotationType</h3>
 <p>AnnotationTypes can be used to tag ROOM classes for further custom processing</p>
-<p>They provide the ability to associate custom properties to ROOM classes, that adjust or toogle features, like generation or the runtime behavior.<br>eTrice has some built-in annotations, which can be found in Annotations.room within the eTrice modellib.</p>
+<p>They provide the ability to associate custom properties to ROOM classes, that adjust or toggle features, like generation or the runtime behavior.<br>eTrice comes with predefined annotations, which can be found in Annotations.room within the eTrice modellib.</p>
 <p>See section Annotations for further reading.</p>
 <table style="vertical-align: middle;" class="table">
 <thead>
@@ -433,7 +433,7 @@
 <tr>
 	<td rowspan="1" style="white-space: nowrap;"><p>Typecasts:</p></td>
 	<td><p><a href="#annotation">Annotation</a></p></td>
-	<td><p>An Annotation can be attached to a ROOM classes to apply the properties of its AnnotationType</p></td>
+	<td><p>An Annotation can be attached to a ROOM class to specify the properties of its AnnotationType</p></td>
 </tr>
 <tr>
 	<td rowspan="1" style="white-space: nowrap;"><p>Is contained in:</p></td>
@@ -600,6 +600,47 @@
 </tbody>
 </table>
 <hr>
+<h3><a href="#cpbranchtransition" name="cpbranchtransition"></a>CPBranchTransition</h3>
+<p>a choice point branch transition is an outgoing transition from a choice point and is traversed if its conditions is evaluated to true</p>
+<p>A choice point together with its outgoing transitions can be thought of as a if, else-if, else cascade in traditional<br> programming languages. The choice point branch transition corresponds to an if clause while the final else is modeled as<br> a continuation transition. Coming from a choice point, a choice point branch transition is traversed whenever its<br> condition evaluates to true. No order of evaluations is guaranteed.</p>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3">Features</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Is a:</p></td>
+	<td><p><a href="#transition">Transition</a></p></td>
+	<td><p>A Transition is an edge in the state graph representation of the state machine</p></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><a href="#choicepoint" name="choicepoint"></a>ChoicePoint</h3>
+<p>a choice point is the state machine counterpart of a conditional statement</p>
+<p>A ChoicePoint in ROOM has one incoming transition and an arbitrary number of outgoing transitions.<br>One of the outgoing transitions has no condition (a ContinuationTransition). It is the default branch that is taken<br>if none of the transition conditions evaluated to true. All other transitions going out from the ChoicePoint<br>are CPBranchTransitions which have a mandatory condition (keyword ‘cond’). The evaluation order of the conditions<br>is not deterministic.</p>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3">Features</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Is a:</p></td>
+	<td><p><a href="#stategraphnode">StateGraphNode</a></p></td>
+	<td><p>A StateGraphNode is an abstract node of the state graph</p></td>
+</tr>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Uses:</p></td>
+	<td><p><a href="#continuationtransition">ContinuationTransition</a></p></td>
+	<td><p>the continuation transition is a transition with just an optional action code</p></td>
+</tr>
+</tbody>
+</table>
+<hr>
 <h3><a href="#communicationtype" name="communicationtype"></a>CommunicationType</h3>
 <p>The CommunicationType defines the communication semantics of a ProtocolClass</p>
 <p>Since from ROOM models executable code can be generated, it is important to define the way the actors are executed and communicate with each other.<br>The combination of communication and execution is called the <em>execution model</em>. Therefore the ExecutionType of an actor and the CommunicationType of the ports has to be considered.</p>
@@ -671,6 +712,38 @@
 </span><span class="comment">//	}
 </span></code></pre>
 <hr>
+<h3><a href="#continuationtransition" name="continuationtransition"></a>ContinuationTransition</h3>
+<p>the continuation transition is a transition with just an optional action code</p>
+<p>A continuation transition is used as default branch of a choice point or as outgoing transition of an entry point</p>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3">Features</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Is a:</p></td>
+	<td><p><a href="#transition">Transition</a></p></td>
+	<td><p>A Transition is an edge in the state graph representation of the state machine</p></td>
+</tr>
+</tbody>
+</table>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3">Feature Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Is used by:</p></td>
+	<td><p><a href="#choicepoint">ChoicePoint</a></p></td>
+	<td><p>a choice point is the state machine counterpart of a conditional statement</p></td>
+</tr>
+</tbody>
+</table>
+<hr>
 <h3><a href="#dataclass" name="dataclass"></a>DataClass</h3>
 <p>A DataClass is a composition of Attributes</p>
 <p>Intended to model a type that primarily consists of data, which is usually grouped together in some manner. DataClasses roughly translate to Java classes without interaction or C <em>struct</em>s.</p>
@@ -702,30 +775,32 @@
 </tr>
 <tr>
 	<td><p><a href="#annotation">Annotation</a></p></td>
-	<td><p>An Annotation can be attached to a ROOM classes to apply the properties of its AnnotationType</p></td>
+	<td><p>An Annotation can be attached to a ROOM class to specify the properties of its AnnotationType</p></td>
 </tr>
 <tr>
 	<td rowspan="1" style="white-space: nowrap;"><p>Uses:</p></td>
 	<td><p><a href="#inheritance">Inheritance</a></p></td>
-	<td><p>A class can specify a super class and inherits elements from the super class hierarchy</p></td>
+	<td><p>A class can specify a single super class and inherits elements from the super class hierarchy</p></td>
 </tr>
 </tbody>
 </table>
 <p><strong>Example</strong>:</p>
-<p>¦¦¦<br> ```room&lt;br/&gt; DataClass SimpleDataClass {&lt;br/&gt; Attribute attribute1: uint16&lt;br/&gt; Attribute attribute2: uint32&lt;br/&gt; }&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;    DataClass DataClassExample {
-       Attribute attribute1: uint32
-       Attribute attribute2: SimpleDataClass
-       Attribute attribute3: voidType ref
+<pre><code class="room customHighlighted"><span class="keyword">DataClass</span> SimpleDataClass {
+	<span class="keyword">Attribute</span> attribute1: uint16
+	<span class="keyword">Attribute</span> attribute2: uint32
+}
 
-       Operation operation1(param1: uint32, param2: uint16): boolean &amp;#39;&amp;#39;&amp;#39;
-         return true;
-       &amp;#39;&amp;#39;&amp;#39;
-    }
-    ```
-¦¦¦
-
-</p><hr>
+<span class="keyword">DataClass</span> DataClassExample {
+	<span class="keyword">Attribute</span> attribute1: uint32
+	<span class="keyword">Attribute</span> attribute2: SimpleDataClass
+	<span class="keyword">Attribute</span> attribute3: voidType <span class="keyword">ref</span>
+	
+	<span class="keyword">Operation</span> operation1(param1: uint32, param2: uint16): boolean <span class="string">'''
+		return true;
+	'''</span>
+}
+</code></pre>
+<hr>
 <h3><a href="#datatype" name="datatype"></a>DataType</h3>
 <p>A DataType can take 4 forms and types data elements like an Attribute or Operation argument</p>
 <table style="vertical-align: middle;" class="table">
@@ -766,6 +841,24 @@
 	<td rowspan="1" style="white-space: nowrap;"><p>Is used by:</p></td>
 	<td><p><a href="#operation">Operation</a></p></td>
 	<td><p>An Operation is a member function of a class</p></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><a href="#entrypoint" name="entrypoint"></a>EntryPoint</h3>
+<p>an entry point is an explicit entry point in a sub state machine to which transitions in the parent state graph can connect</p>
+<p>text</p>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3">Features</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Is a:</p></td>
+	<td><p><a href="#trpoint">TrPoint</a></p></td>
+	<td><p>a TrPoint can be an EntryPoint, an ExitPoint or a TransitionPoint</p></td>
 </tr>
 </tbody>
 </table>
@@ -887,6 +980,24 @@
 </span>}
 </code></pre>
 <hr>
+<h3><a href="#exitpoint" name="exitpoint"></a>ExitPoint</h3>
+<p>an exit point is an explicit exit point in a sub state machine from which transitions in the parent state graph can start</p>
+<p>text</p>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3">Features</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Is a:</p></td>
+	<td><p><a href="#trpoint">TrPoint</a></p></td>
+	<td><p>a TrPoint can be an EntryPoint, an ExitPoint or a TransitionPoint</p></td>
+</tr>
+</tbody>
+</table>
+<hr>
 <h3><a href="#externalendport" name="externalendport"></a>ExternalEndPort</h3>
 <p>A ExternalEndPort is an interface Port, that is made accessible to the internal interface of an ActorClass</p>
 <pre><code class="room customHighlighted"><span class="keyword">ActorClass</span> ExternalEndPortExample {
@@ -948,37 +1059,37 @@
 </tbody>
 </table>
 <p><strong>Example</strong>:</p>
-<p>¦¦¦<br> ```room&lt;br/&gt; // Include is needed when used (e.g. in ActorClassWithExternalType)&lt;br/&gt; ExternalType someStructType -&amp;gt; &amp;ldquo;struct FILE_HANDLE&amp;rdquo;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;    ActorClass ActorClassWithExternalType{
-       Structure {
-         usercode1 &amp;#39;&amp;#39;&amp;#39;
-          // #include &amp;lt;___.h&amp;gt; /* User includes here*/
-         &amp;#39;&amp;#39;&amp;#39;
-         Attribute someHandle : someStructType ref // needs include
-       }
-       Behavior {
-         Operation operation1(param1: charPtr) &amp;#39;&amp;#39;&amp;#39;
-          // external calls or casts may need includes
-          write(someHandle, param1);
-         &amp;#39;&amp;#39;&amp;#39;
-       }
-    }
-    ```
-¦¦¦
+<pre><code class="room customHighlighted"><span class="comment">// Include is needed when used (e.g. in ActorClassWithExternalType)
+</span><span class="keyword">ExternalType</span> someStructType -&gt; <span class="string">"struct FILE_HANDLE"</span>
 
-</p><hr>
+<span class="keyword">ActorClass</span> ActorClassWithExternalType{
+	<span class="keyword">Structure</span> {
+		<span class="keyword">usercode1</span> <span class="string">'''
+			// #include &lt;___.h&gt; /* User includes here*/
+		'''</span>
+		<span class="keyword">Attribute</span> someHandle : someStructType <span class="keyword">ref</span> <span class="comment">// needs include
+</span>	}
+	<span class="keyword">Behavior</span> {
+		<span class="keyword">Operation</span> operation1(param1: charPtr) <span class="string">'''
+			// external calls or casts may need includes
+			write(someHandle, param1);
+		'''</span>
+	}
+}
+</code></pre>
+<hr>
 <h3><a href="#inheritance" name="inheritance"></a>Inheritance</h3>
-<p>A class can specify a super class and inherits elements from the super class hierarchy</p>
+<p>A class can specify a single super class and inherits elements from the super class hierarchy</p>
 <p>When a ROOM class specifies a super class, it generally inherits all elements and properties.<br>In several cases, it is possible, to override these inherited elements. Generally, eTrice has two semantics of overriding: refinement and replacement.<br>Refinement is used in most cases (e.g. StateMachine) and realizes an extension of the overridden elements.<br>In this case, if a sub class overrides a piece of logic from a super class, it will always be executed subsequently to the inherited.<br>Contrary to this, replacement is applied to overridden Operations, similar to programming languages C++ and Java.</p>
-<p>A formal definition of overriding is given below:</p>
+<p>A formal definition of several variants of overriding is given below:</p>
 <ul>
-  <li>early or late resolve - if element is overridden, which one should super class use by default - own or override ?</li>
-  <li>replacing or refinement - ignore inherited code or prepend inherited code automatically ?</li>
-  <li>(non-)accessible - if element is overridden, is super class’ original accessible from sub class ? e.g. super.foo()</li>
-  <li>implicit or explicit - does it use distinct model element / keyword?</li>
+  <li>early or late resolve - if element is overridden, which one should the super class use by default - own or override?</li>
+  <li>replacing or refining - ignore inherited code or prepend inherited code automatically?</li>
+  <li>(non-)accessible - if element is overridden, is super class’ original accessible from sub class? E.g. super.foo()</li>
+  <li>implicit or explicit - does it use a distinct model element or keyword?</li>
 </ul>
-<p>Examples programming languages:<br>c++ virtual function and java override &lt;==&gt; accessible explicit late replacing<br>c++ function redefine &lt;==&gt; accessible implicit early replacing<br>c++ dtor &lt;==&gt; late refinement\</p>
-<p>eTrice override of model elements:<br>Operations (C generation) &lt;==&gt; non_accessible explicit late replacing<br>Operations (Java generation) &lt;==&gt; accessible explicit late replacing<br>State and Transitions &lt;==&gt; non-accessible explicit late refinement<br>ctor/dtor &lt;==&gt; non_accessible implicit late refinement<br>StateMachine &lt;==&gt; non-accessible implicit late refinement<br>UserCode &lt;==&gt; non-accessible implicit late refinement</p>
+<p>Examples from programming languages:<br>C++ virtual function and Java override &lt;==&gt; accessible, explicit, late, replacing<br>C++ function redefine &lt;==&gt; accessible, implicit, early, replacing<br>C++ destructor &lt;==&gt; late, refining\</p>
+<p>eTrice override of model elements:<br>Operations (C generation) &lt;==&gt; non-accessible, explicit, late, replacing<br>Operations (Java generation) &lt;==&gt; accessible, explicit, late, replacing<br>State and Transitions &lt;==&gt; non-accessible, explicit, late, refining<br>ctor/dtor &lt;==&gt; non-accessible, implicit, late, refining<br>StateMachine &lt;==&gt; non-accessible, implicit, late, refining<br>UserCode &lt;==&gt; non-accessible, implicit, late, refining</p>
 <table style="vertical-align: middle;" class="table">
 <thead>
 <tr>
@@ -987,13 +1098,33 @@
 </thead>
 <tbody>
 <tr>
-	<td rowspan="4" style="white-space: nowrap;"><p>Is used by:</p></td>
+	<td rowspan="9" style="white-space: nowrap;"><p>Is used by:</p></td>
 	<td><p><a href="#actorclass">ActorClass</a></p></td>
 	<td><p>An actor is the basic structural building block for building systems with ROOM</p></td>
 </tr>
 <tr>
 	<td><p><a href="#statemachine">StateMachine</a></p></td>
 	<td><p>A StateMachine describes the state based, event driven behavior of an ActorClass</p></td>
+</tr>
+<tr>
+	<td><p><a href="#stategraphnode">StateGraphNode</a></p></td>
+	<td><p>A StateGraphNode is an abstract node of the state graph</p></td>
+</tr>
+<tr>
+	<td><p><a href="#state">State</a></p></td>
+	<td><p>A State can be a plain State or a RefinedState</p></td>
+</tr>
+<tr>
+	<td><p><a href="#simplestate">SimpleState</a></p></td>
+	<td><p>A State is a node in the state graph representation of the state machine</p></td>
+</tr>
+<tr>
+	<td><p><a href="#refinedstate">RefinedState</a></p></td>
+	<td><p>A RefinedState refines a State of one of the Actor’s base class state machines</p></td>
+</tr>
+<tr>
+	<td><p><a href="#transition">Transition</a></p></td>
+	<td><p>A Transition is an edge in the state graph representation of the state machine</p></td>
 </tr>
 <tr>
 	<td><p><a href="#protocolclass">ProtocolClass</a></p></td>
@@ -1006,42 +1137,61 @@
 </tbody>
 </table>
 <p><strong>Example</strong>:</p>
-<p>¦¦¦<br> ```room&lt;br/&gt; ActorClass ActorSubClass extends ActorBaseClass {&lt;br/&gt; // inherits all elements from super type hierarchy&lt;br/&gt; }&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;    ActorClass ActorBaseClass {
-       Interface {
-         Port port1 : ProtocolBaseClass
-       }
-       Structure {
-         Attribute attribute1 : uint32
-       }
-       Behavior {
-         Operation operation1() &amp;#39;&amp;#39;&amp;#39;
-          return;
-         &amp;#39;&amp;#39;&amp;#39;
-       }
-    }
+<pre><code class="room customHighlighted"><span class="keyword">ActorClass</span> ActorSubClass <span class="keyword">extends</span> ActorBaseClass {
+	<span class="comment">// inherits all elements from super type hierarchy
+</span>}
 
-    ProtocolClass ProtocolSubClass extends ProtocolBaseClass {
-       // inherits all elements from super type hierarchy
-    }
+<span class="keyword">ActorClass</span> ActorBaseClass {
+	<span class="keyword">Interface</span> {
+		<span class="keyword">Port</span> port1 : ProtocolBaseClass
+	}
+	<span class="keyword">Structure</span> {
+		<span class="keyword">Attribute</span> attribute1 : uint32
+	}
+	<span class="keyword">Behavior</span> {
+		<span class="keyword">Operation</span> operation1() <span class="string">'''
+			return;
+		'''</span>
+	}
+}
 
-    ProtocolClass ProtocolBaseClass {
-       incoming {
-         Message message1()
-       }
-    }
+<span class="keyword">ProtocolClass</span> ProtocolSubClass <span class="keyword">extends</span> ProtocolBaseClass {
+	<span class="comment">// inherits all elements from super type hierarchy
+</span>}
 
-    DataClass DataSubClass extends DataBaseClass {
-       // inherits all elements from super type hierarchy
-    }
+<span class="keyword">ProtocolClass</span> ProtocolBaseClass {
+	<span class="keyword">incoming</span> {
+		<span class="keyword">Message</span> message1()
+	}
+}
 
-    DataClass DataBaseClass {
-       Attribute attribute1 : uint32
-    }
-    ```
-    ¦¦¦
+<span class="keyword">DataClass</span> DataSubClass <span class="keyword">extends</span> DataBaseClass {
+	<span class="comment">// inherits all elements from super type hierarchy
+</span>}
 
-</p><hr>
+<span class="keyword">DataClass</span> DataBaseClass {
+	<span class="keyword">Attribute</span> attribute1 : uint32
+}
+</code></pre>
+<hr>
+<h3><a href="#initialtransition" name="initialtransition"></a>InitialTransition</h3>
+<p>the initial transition is used to identify the initial state</p>
+<p>The initial transition connects the initial point to a state. There can be at most one initial transition<br> in a state machine. Under special circumstances the initial transition can be omitted.</p>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3">Features</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Is a:</p></td>
+	<td><p><a href="#transition">Transition</a></p></td>
+	<td><p>A Transition is an edge in the state graph representation of the state machine</p></td>
+</tr>
+</tbody>
+</table>
+<hr>
 <h3><a href="#internalendport" name="internalendport"></a>InternalEndPort</h3>
 <p>A InternalEndPort is an local Port, that is declared in the internal interface of an ActorClass</p>
 <pre><code class="room customHighlighted"><span class="keyword">ActorClass</span> InternalEndPortExample {
@@ -1140,7 +1290,7 @@
 </tr>
 <tr>
 	<td><p><a href="#annotation">Annotation</a></p></td>
-	<td><p>An Annotation can be attached to a ROOM classes to apply the properties of its AnnotationType</p></td>
+	<td><p>An Annotation can be attached to a ROOM class to specify the properties of its AnnotationType</p></td>
 </tr>
 </tbody>
 </table>
@@ -1228,44 +1378,43 @@
 </tbody>
 </table>
 <p><strong>Example</strong>:</p>
-<p>¦¦¦<br> ```room&lt;br/&gt; import room.basic.types.* from &amp;ldquo;../../../org.eclipse.etrice.modellib.c/model/Types.room&amp;rdquo;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;    DataClass DataClassWithOperation {
-       Attribute attribute1 : uint32
+<pre><code class="room customHighlighted"><span class="keyword">import</span> room.basic.types.* <span class="keyword">from</span> <span class="string">"../../../org.eclipse.etrice.modellib.c/model/Types.room"</span>
 
-       Operation operation1(param1: uint32, param2: int32): boolean &amp;#39;&amp;#39;&amp;#39;
-         return attribute1 &amp;gt; (param1 - param2);
-       &amp;#39;&amp;#39;&amp;#39;
-    }
+<span class="keyword">DataClass</span> DataClassWithOperation {
+	<span class="keyword">Attribute</span> attribute1 : uint32
+	
+	<span class="keyword">Operation</span> operation1(param1: uint32, param2: int32): boolean <span class="string">'''
+		return attribute1 &gt; (param1 - param2);
+	'''</span>
+}
 
-    ActorClass ActorClassWithOperation {
-       Structure {
-         Attribute attribute1 : uint32
-       }
-       Behavior {
-         Operation operation1(param1: uint32, param2: int32): boolean &amp;#39;&amp;#39;&amp;#39;
-          return attribute1 &amp;gt; (param1 - param2);
-         &amp;#39;&amp;#39;&amp;#39;
-       }
-    }
+<span class="keyword">ActorClass</span> ActorClassWithOperation {
+	<span class="keyword">Structure</span> {
+		<span class="keyword">Attribute</span> attribute1 : uint32
+	}
+	<span class="keyword">Behavior</span> {
+		<span class="keyword">Operation</span> operation1(param1: uint32, param2: int32): boolean <span class="string">'''
+			return attribute1 &gt; (param1 - param2);
+		'''</span>
+	}
+}
 
-    ActorClass ActorClassWithOperation2 {
-       Structure {
-         usercode1 &amp;#39;&amp;#39;&amp;#39;
-          // #include &amp;lt;___.h&amp;gt; /* User includes here */
-         &amp;#39;&amp;#39;&amp;#39;
-         Attribute someHandle : voidType ref
-       }
-       Behavior {
-         Operation operation1(param1: charPtr) &amp;#39;&amp;#39;&amp;#39;
-          // external calls or casts may need includes
-          write(someHandle, param1);
-         &amp;#39;&amp;#39;&amp;#39;
-       }
-    }
-    ```
-¦¦¦
-
-</p><hr>
+<span class="keyword">ActorClass</span> ActorClassWithOperation2 {
+	<span class="keyword">Structure</span> {
+		<span class="keyword">usercode1</span> <span class="string">'''
+			// #include &lt;___.h&gt; /* User includes here */
+		'''</span>
+		<span class="keyword">Attribute</span> someHandle : voidType <span class="keyword">ref</span>
+	}
+	<span class="keyword">Behavior</span> {
+		<span class="keyword">Operation</span> operation1(param1: charPtr) <span class="string">'''
+			// external calls or casts may need includes
+			write(someHandle, param1);
+		'''</span>
+	}
+}
+</code></pre>
+<hr>
 <h3><a href="#port" name="port"></a>Port</h3>
 <p>A Port is an instance of a ProtocolClass and the interface for an ActorClass</p>
 <p>Once a ProtocolClass has been created, it can be used to define actor interfaces. This is accomplished by means of Ports.<br>A Port is a declaration that the set of messages defined by its ProtocolClass is now part of the actor’s interface.<br>It provides strong decoupling of ActorClasses from each other, thus enabling easy testability, reusability and deployment of actors to different threads or nodes.</p>
@@ -1435,12 +1584,12 @@
 </tr>
 <tr>
 	<td><p><a href="#annotation">Annotation</a></p></td>
-	<td><p>An Annotation can be attached to a ROOM classes to apply the properties of its AnnotationType</p></td>
+	<td><p>An Annotation can be attached to a ROOM class to specify the properties of its AnnotationType</p></td>
 </tr>
 <tr>
 	<td rowspan="1" style="white-space: nowrap;"><p>Uses:</p></td>
 	<td><p><a href="#inheritance">Inheritance</a></p></td>
-	<td><p>A class can specify a super class and inherits elements from the super class hierarchy</p></td>
+	<td><p>A class can specify a single super class and inherits elements from the super class hierarchy</p></td>
 </tr>
 </tbody>
 </table>
@@ -1508,6 +1657,33 @@
 	<span class="comment">// no outgoing messages for datadriven ports allowed 
 </span>}
 </code></pre>
+<hr>
+<h3><a href="#refinedstate" name="refinedstate"></a>RefinedState</h3>
+<p>A RefinedState refines a State of one of the Actor’s base class state machines</p>
+<p>A State can be a plain State or a RefinedState.</p>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3">Features</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Is a:</p></td>
+	<td><p><a href="#state">State</a></p></td>
+	<td><p>A State can be a plain State or a RefinedState</p></td>
+</tr>
+<tr>
+	<td rowspan="2" style="white-space: nowrap;"><p>Uses:</p></td>
+	<td><p><a href="#inheritance">Inheritance</a></p></td>
+	<td><p>A class can specify a single super class and inherits elements from the super class hierarchy</p></td>
+</tr>
+<tr>
+	<td><p><a href="#statemachine">StateMachine</a></p></td>
+	<td><p>A StateMachine describes the state based, event driven behavior of an ActorClass</p></td>
+</tr>
+</tbody>
+</table>
 <hr>
 <h3><a href="#relayport" name="relayport"></a>RelayPort</h3>
 <p>A RelayPort forwards its messages without exposing them to the internal interface of the ActorClass</p>
@@ -1700,10 +1876,77 @@
 </tbody>
 </table>
 <hr>
-<h3><a href="#statemachine" name="statemachine"></a>StateMachine</h3>
-<p>A StateMachine describes the state based, event driven behavior of an ActorClass</p>
-<p>In ROOM each actor class can implement its behavior using a state machine. Events occurring at the end ports of an actor will be forwarded to and processed by the state machine. Events possibly trigger state transitions.</p>
-<p><img src="images/300-PingPongReceiverFSM.png" alt="PingPongReceiverFSM"></p>
+<h3><a href="#simplestate" name="simplestate"></a>SimpleState</h3>
+<p>A State is a node in the state graph representation of the state machine</p>
+<p>A State has optional ‘entry’ and ‘exit’ codes. The entry code is executed when the state is entered, the exit code is executed<br>when it is left. In the case of an data driven (also known as polled) state machine, there also is a ‘do’ action code.<br>The do code is executed for the active state in each polling cycle.<br>A state can have a sub state machine. Starting at the top level state machine the states with their optional sub state machines<br>form a tree which is called a ‘hierarchical state machine’.<br>A state machine always is in exactly one state which can only be a leaf state, i.e. a state which has no sub state machine.</p>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3">Features</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Is a:</p></td>
+	<td><p><a href="#state">State</a></p></td>
+	<td><p>A State can be a plain State or a RefinedState</p></td>
+</tr>
+<tr>
+	<td rowspan="2" style="white-space: nowrap;"><p>Uses:</p></td>
+	<td><p><a href="#inheritance">Inheritance</a></p></td>
+	<td><p>A class can specify a single super class and inherits elements from the super class hierarchy</p></td>
+</tr>
+<tr>
+	<td><p><a href="#statemachine">StateMachine</a></p></td>
+	<td><p>A StateMachine describes the state based, event driven behavior of an ActorClass</p></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><a href="#state" name="state"></a>State</h3>
+<p>A State can be a plain State or a RefinedState</p>
+<p>A State can be a plain State or a RefinedState.</p>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3">Features</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Is a:</p></td>
+	<td><p><a href="#stategraphnode">StateGraphNode</a></p></td>
+	<td><p>A StateGraphNode is an abstract node of the state graph</p></td>
+</tr>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Uses:</p></td>
+	<td><p><a href="#inheritance">Inheritance</a></p></td>
+	<td><p>A class can specify a single super class and inherits elements from the super class hierarchy</p></td>
+</tr>
+</tbody>
+</table>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3">Feature Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="2" style="white-space: nowrap;"><p>Inheriting features:</p></td>
+	<td><p><a href="#simplestate">SimpleState</a></p></td>
+	<td><p>A State is a node in the state graph representation of the state machine</p></td>
+</tr>
+<tr>
+	<td><p><a href="#refinedstate">RefinedState</a></p></td>
+	<td><p>A RefinedState refines a State of one of the Actor’s base class state machines</p></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><a href="#stategraphnode" name="stategraphnode"></a>StateGraphNode</h3>
+<p>A StateGraphNode is an abstract node of the state graph</p>
+<p>A StateGraphNode can be a State, a TransitionPoint, a ChoicePoint or an InitialPoint.</p>
 <table style="vertical-align: middle;" class="table">
 <thead>
 <tr>
@@ -1714,7 +1957,71 @@
 <tr>
 	<td rowspan="1" style="white-space: nowrap;"><p>Uses:</p></td>
 	<td><p><a href="#inheritance">Inheritance</a></p></td>
-	<td><p>A class can specify a super class and inherits elements from the super class hierarchy</p></td>
+	<td><p>A class can specify a single super class and inherits elements from the super class hierarchy</p></td>
+</tr>
+</tbody>
+</table>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3">Feature Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="3" style="white-space: nowrap;"><p>Inheriting features:</p></td>
+	<td><p><a href="#state">State</a></p></td>
+	<td><p>A State can be a plain State or a RefinedState</p></td>
+</tr>
+<tr>
+	<td><p><a href="#choicepoint">ChoicePoint</a></p></td>
+	<td><p>a choice point is the state machine counterpart of a conditional statement</p></td>
+</tr>
+<tr>
+	<td><p><a href="#trpoint">TrPoint</a></p></td>
+	<td><p>a TrPoint can be an EntryPoint, an ExitPoint or a TransitionPoint</p></td>
+</tr>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Is contained in:</p></td>
+	<td><p><a href="#statemachine">StateMachine</a></p></td>
+	<td><p>A StateMachine describes the state based, event driven behavior of an ActorClass</p></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><a href="#statemachine" name="statemachine"></a>StateMachine</h3>
+<p>A StateMachine describes the state based, event driven behavior of an ActorClass</p>
+<p>In ROOM each actor class can implement its behavior using a state machine. Events occurring at the end ports of an actor will<br>be forwarded to and processed by the state machine. Events possibly trigger state transitions.</p>
+<p>ROOM state machines are hierarchical finite state machines. That means that each state in the state graph can contain another state graph.<br>This is possible to arbitrary depth.</p>
+<p>A state graph consists of</p>
+<ul>
+  <li>states</li>
+  <li>transitions</li>
+  <li>transition points</li>
+  <li>choice points</li>
+  <li>initial point</li>
+</ul>
+<p><img src="images/300-PingPongReceiverFSM.png" alt="PingPongReceiverFSM"></p>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3">Features</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="2" style="white-space: nowrap;"><p>Contains:</p></td>
+	<td><p><a href="#stategraphnode">StateGraphNode</a></p></td>
+	<td><p>A StateGraphNode is an abstract node of the state graph</p></td>
+</tr>
+<tr>
+	<td><p><a href="#transition">Transition</a></p></td>
+	<td><p>A Transition is an edge in the state graph representation of the state machine</p></td>
+</tr>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Uses:</p></td>
+	<td><p><a href="#inheritance">Inheritance</a></p></td>
+	<td><p>A class can specify a single super class and inherits elements from the super class hierarchy</p></td>
 </tr>
 </tbody>
 </table>
@@ -1734,6 +2041,15 @@
 	<td rowspan="1" style="white-space: nowrap;"><p>Is edited by:</p></td>
 	<td><p><a href="#graphicalbehavioreditor">GraphicalBehaviorEditor</a></p></td>
 	<td><p>The GraphicalBehaviorEditor allows to edit the ActorClass’ StateMachine. It is possible to create (hierarchical) states and transitions to model complex behavior in a convenient way.</p></td>
+</tr>
+<tr>
+	<td rowspan="2" style="white-space: nowrap;"><p>Is used by:</p></td>
+	<td><p><a href="#simplestate">SimpleState</a></p></td>
+	<td><p>A State is a node in the state graph representation of the state machine</p></td>
+</tr>
+<tr>
+	<td><p><a href="#refinedstate">RefinedState</a></p></td>
+	<td><p>A RefinedState refines a State of one of the Actor’s base class state machines</p></td>
 </tr>
 </tbody>
 </table>
@@ -1763,7 +2079,7 @@
 </tr>
 <tr>
 	<td><p><a href="#annotation">Annotation</a></p></td>
-	<td><p>An Annotation can be attached to a ROOM classes to apply the properties of its AnnotationType</p></td>
+	<td><p>An Annotation can be attached to a ROOM class to specify the properties of its AnnotationType</p></td>
 </tr>
 </tbody>
 </table>
@@ -1821,6 +2137,131 @@
 	<td rowspan="1" style="white-space: nowrap;"><p>Is used by:</p></td>
 	<td><p><a href="#mappingmodel">MappingModel</a></p></td>
 	<td><p>The MappingModel describes the mapping of elements of the LogicalModel to elements of the PhysicalModel</p></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><a href="#trpoint" name="trpoint"></a>TrPoint</h3>
+<p>a TrPoint can be an EntryPoint, an ExitPoint or a TransitionPoint</p>
+<p>text</p>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3">Features</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Is a:</p></td>
+	<td><p><a href="#stategraphnode">StateGraphNode</a></p></td>
+	<td><p>A StateGraphNode is an abstract node of the state graph</p></td>
+</tr>
+</tbody>
+</table>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3">Feature Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="3" style="white-space: nowrap;"><p>Inheriting features:</p></td>
+	<td><p><a href="#transitionpoint">TransitionPoint</a></p></td>
+	<td><p>a transition point is the starting point of transitions that trigger for any state of this state machine</p></td>
+</tr>
+<tr>
+	<td><p><a href="#entrypoint">EntryPoint</a></p></td>
+	<td><p>an entry point is an explicit entry point in a sub state machine to which transitions in the parent state graph can connect</p></td>
+</tr>
+<tr>
+	<td><p><a href="#exitpoint">ExitPoint</a></p></td>
+	<td><p>an exit point is an explicit exit point in a sub state machine from which transitions in the parent state graph can start</p></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><a href="#transition" name="transition"></a>Transition</h3>
+<p>A Transition is an edge in the state graph representation of the state machine</p>
+<p>A transition connects StateGraphNodes in a state graph. A transition is allowed to connect a state or a transition point with itself.<br>Transition points can only be targets of transitions originating from the same transition point.<br>The initial point is the source of exactly one transition. In the textual model it is present only in an implicit way.</p>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3">Features</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Uses:</p></td>
+	<td><p><a href="#inheritance">Inheritance</a></p></td>
+	<td><p>A class can specify a single super class and inherits elements from the super class hierarchy</p></td>
+</tr>
+</tbody>
+</table>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3">Feature Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="4" style="white-space: nowrap;"><p>Inheriting features:</p></td>
+	<td><p><a href="#initialtransition">InitialTransition</a></p></td>
+	<td><p>the initial transition is used to identify the initial state</p></td>
+</tr>
+<tr>
+	<td><p><a href="#continuationtransition">ContinuationTransition</a></p></td>
+	<td><p>the continuation transition is a transition with just an optional action code</p></td>
+</tr>
+<tr>
+	<td><p><a href="#cpbranchtransition">CPBranchTransition</a></p></td>
+	<td><p>a choice point branch transition is an outgoing transition from a choice point and is traversed if its conditions is evaluated to true</p></td>
+</tr>
+<tr>
+	<td><p><a href="#triggeredtransition">TriggeredTransition</a></p></td>
+	<td><p>a triggered transition is used in event driven state machines to trigger state transitions</p></td>
+</tr>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Is contained in:</p></td>
+	<td><p><a href="#statemachine">StateMachine</a></p></td>
+	<td><p>A StateMachine describes the state based, event driven behavior of an ActorClass</p></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><a href="#transitionpoint" name="transitionpoint"></a>TransitionPoint</h3>
+<p>a transition point is the starting point of transitions that trigger for any state of this state machine</p>
+<p>text</p>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3">Features</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Is a:</p></td>
+	<td><p><a href="#trpoint">TrPoint</a></p></td>
+	<td><p>a TrPoint can be an EntryPoint, an ExitPoint or a TransitionPoint</p></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><a href="#triggeredtransition" name="triggeredtransition"></a>TriggeredTransition</h3>
+<p>a triggered transition is used in event driven state machines to trigger state transitions</p>
+<p>text</p>
+<table style="vertical-align: middle;" class="table">
+<thead>
+<tr>
+	<th colspan="3">Features</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td rowspan="1" style="white-space: nowrap;"><p>Is a:</p></td>
+	<td><p><a href="#transition">Transition</a></p></td>
+	<td><p>A Transition is an edge in the state graph representation of the state machine</p></td>
 </tr>
 </tbody>
 </table>
@@ -2279,7 +2720,7 @@
 <tr>
 	<td rowspan="1" style="white-space: nowrap;"><p>Uses:</p></td>
 	<td><p><a href="#annotation">Annotation</a></p></td>
-	<td><p>An Annotation can be attached to a ROOM classes to apply the properties of its AnnotationType</p></td>
+	<td><p>An Annotation can be attached to a ROOM class to specify the properties of its AnnotationType</p></td>
 </tr>
 </tbody>
 </table>

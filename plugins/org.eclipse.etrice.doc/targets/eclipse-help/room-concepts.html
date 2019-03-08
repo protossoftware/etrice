@@ -120,21 +120,21 @@
 <pre><code class="room customHighlighted"><span class="keyword">ActorClass</span> ActorClass4 {
 	<span class="keyword">Behavior</span> {
 		<span class="comment">// no arguments, no return value
-</span>		<span class="keyword">Operation</span> operation1(): <span class="keyword">void</span> '''
+</span>		<span class="keyword">Operation</span> operation1(): <span class="keyword">void</span> <span class="string">'''
 			user code
-		'''
+		'''</span>
 		<span class="comment">// argument of primitive type, return value of primitive type
-</span>		<span class="keyword">Operation</span> operation2(Param1: int32, Param2: float64): uint16 '''
+</span>		<span class="keyword">Operation</span> operation2(Param1: int32, Param2: float64): uint16 <span class="string">'''
 			user code
-		'''
+		'''</span>
 		<span class="comment">// arguments and return value by value
-</span>		<span class="keyword">Operation</span> operation3(Param1: int32, Param2: DataClass1): DataClass1 '''
+</span>		<span class="keyword">Operation</span> operation3(Param1: int32, Param2: DataClass1): DataClass1 <span class="string">'''
 			user code
-		'''
+		'''</span>
 		<span class="comment">// arguments and return value by reference except for primitive types
-</span>		<span class="keyword">Operation</span> operation4(Param1: int32, Param2: DataClass1 ref): DataClass1 <span class="keyword">ref</span> '''
+</span>		<span class="keyword">Operation</span> operation4(Param1: int32, Param2: DataClass1 ref): DataClass1 <span class="keyword">ref</span> <span class="string">'''
 			user code
-		'''
+		'''</span>
 	}
 }
 </code></pre>
@@ -376,17 +376,17 @@
 </span>	<span class="keyword">Attribute</span> attribute2: float32  <span class="comment">// attribute of another primitive type
 </span>
 	<span class="comment">// no arguments, no return value
-</span>	<span class="keyword">Operation</span> operation1(): <span class="keyword">void</span> '''
+</span>	<span class="keyword">Operation</span> operation1(): <span class="keyword">void</span> <span class="string">'''
 		user code
-	'''
+	'''</span>
 	<span class="comment">// argument of primitive type, no return value
-</span>	<span class="keyword">Operation</span> operation2(Param1: int32): <span class="keyword">void</span> '''
+</span>	<span class="keyword">Operation</span> operation2(Param1: int32): <span class="keyword">void</span> <span class="string">'''
 		user code
-	'''
+	'''</span>
 	<span class="comment">// argument of primitive type, return value of primitive type
-</span>	<span class="keyword">Operation</span> operation3(Param1: int32): float64 '''
+</span>	<span class="keyword">Operation</span> operation3(Param1: int32): float64 <span class="string">'''
 		user code
-	'''
+	'''</span>
 }
 </code></pre>
 <p>Example: DataClass using other DataClasses:</p>
@@ -395,13 +395,13 @@
 </span>	<span class="keyword">Attribute</span> attribute2: DataClass1 <span class="comment">// attribute of DataClass
 </span>
 	<span class="comment">// arguments and return value by value
-</span>	<span class="keyword">Operation</span> operation1(Param1: int32, Param2: DataClass1): DataClass1 '''
+</span>	<span class="keyword">Operation</span> operation1(Param1: int32, Param2: DataClass1): DataClass1 <span class="string">'''
 		user code
-	'''
+	'''</span>
 	<span class="comment">// arguments and return value by reference except for primitive types
-</span>	<span class="keyword">Operation</span> operation2(Param1: int32, Param2: DataClass1 ref): DataClass1 <span class="keyword">ref</span> '''
+</span>	<span class="keyword">Operation</span> operation2(Param1: int32, Param2: DataClass1 ref): DataClass1 <span class="keyword">ref</span> <span class="string">'''
 		user code
-	'''
+	'''</span>
 }
 </code></pre>
 <h2><a href="#layering" name="layering"></a>Layering</h2>
