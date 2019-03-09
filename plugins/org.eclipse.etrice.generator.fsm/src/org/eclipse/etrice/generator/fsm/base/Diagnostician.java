@@ -14,8 +14,6 @@
 
 package org.eclipse.etrice.generator.fsm.base;
 
-import java.util.List;
-
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -86,29 +84,35 @@ public class Diagnostician implements IDiagnostician {
 				result.append(")");
 			}
 			
-			EObject errorObject = null;
-			if(feature != null) {
-				Object obj = source.eGet(feature);
-				if (feature.isMany() && obj instanceof List<?>) {
-					if (idx>=0) {
-						List<?> list = (List<?>) obj;
-						if (list.size()>idx) {
-							errorObject = (EObject) list.get(idx);
-						}
-					}
-				}
-				else {
-					errorObject = (EObject) obj;
-				}
-			} else {
-				errorObject = source;
-			}
-			if (errorObject!=null) {
-				// prefer location to toString()
-				URI uri = EcoreUtil.getURI(errorObject);
-				String objInfo = (uri != null && !errorObject.eIsProxy()) ? uri.toString() : errorObject.toString();
-				result.append(" " + objInfo);
-			}
+			// prefer location to toString()
+			URI uri = EcoreUtil.getURI(source);
+			String objInfo = (uri != null && !source.eIsProxy()) ? uri.toString() : source.toString();
+			result.append(" " + objInfo);
+			
+			// Bug 545232
+//			EObject errorObject = null;
+//			if(feature != null) {
+//				Object obj = source.eGet(feature);	// null pointer exception if the source doesn't have that feature
+//				if (feature.isMany() && obj instanceof List<?>) {
+//					if (idx>=0) {
+//						List<?> list = (List<?>) obj;
+//						if (list.size()>idx) {
+//							errorObject = (EObject) list.get(idx);	// unchecked cast?
+//						}
+//					}
+//				}
+//				else {
+//					errorObject = (EObject) obj;	// unchecked cast?
+//				}
+//			} else {
+//				errorObject = source;
+//			}
+//			if (errorObject!=null) {
+//				// prefer location to toString()
+//				URI uri = EcoreUtil.getURI(errorObject);
+//				String objInfo = (uri != null && !errorObject.eIsProxy()) ? uri.toString() : errorObject.toString();
+//				result.append(" " + objInfo);
+//			}
 		}
 		
 		return result.toString();
