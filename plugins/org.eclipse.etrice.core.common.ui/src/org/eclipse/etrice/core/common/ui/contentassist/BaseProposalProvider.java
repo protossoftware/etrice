@@ -17,9 +17,14 @@ package org.eclipse.etrice.core.common.ui.contentassist;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.naming.IQualifiedNameConverter;
+import org.eclipse.xtext.naming.QualifiedName;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
+
+import com.google.common.base.Function;
 
 /**
  * see http://www.eclipse.org/Xtext/documentation.html#contentAssist on how to
@@ -48,6 +53,27 @@ public class BaseProposalProvider extends org.eclipse.etrice.core.common.ui.cont
 			acceptor.accept(proposal);
 		}
 		super.complete_TIME(model, ruleCall, context, acceptor);
+	}
+	
+	@Override
+	protected Function<IEObjectDescription, ICompletionProposal> getProposalFactory(String ruleName,
+			ContentAssistContext contentAssistContext) {
+		// Proposal creator that always proposes unqualified names
+		return new DefaultProposalCreator(contentAssistContext, ruleName, new IQualifiedNameConverter() {
+			@Override
+			public String toString(QualifiedName name) {
+				// The converted string contains only the last segment of the qualified name
+				if(!name.isEmpty()) {
+					return name.getLastSegment();
+				}
+				return "";
+			}
+			
+			@Override
+			public QualifiedName toQualifiedName(String qualifiedNameAsText) {
+				return getQualifiedNameConverter().toQualifiedName(qualifiedNameAsText);
+			}
+		});
 	}
 	
 }

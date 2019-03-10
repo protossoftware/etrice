@@ -33,7 +33,6 @@ import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.Operation;
 import org.eclipse.etrice.core.room.RefPath;
 import org.eclipse.etrice.core.room.RoomAnnotationTargetEnum;
-import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.core.services.RoomGrammarAccess;
@@ -41,16 +40,15 @@ import org.eclipse.etrice.core.ui.util.UIExpressionUtil;
 import org.eclipse.etrice.expressions.detailcode.IDetailExpressionProvider;
 import org.eclipse.etrice.expressions.ui.contentassist.RoomExpressionProposalProvider;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
-import org.eclipse.jface.viewers.StyledString;
-import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 
-import com.google.common.base.Function;
+import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
@@ -58,70 +56,6 @@ import com.google.inject.Inject;
  * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#contentAssist on how to customize content assistant
  */
 public class RoomProposalProvider extends AbstractRoomProposalProvider {
-	
-	protected class FilteredProposalCreator implements Function<IEObjectDescription, ICompletionProposal> {
-		private IProposalFilter filter;
-		private final ContentAssistContext contentAssistContext;
-		private final String ruleName;
-
-		protected FilteredProposalCreator(IProposalFilter filter, ContentAssistContext contentAssistContext, String ruleName) {
-			this.filter = filter;
-			this.contentAssistContext = contentAssistContext;
-			this.ruleName = ruleName;
-		}
-
-		public ICompletionProposal apply(IEObjectDescription candidate) {
-			if (candidate == null)
-				return null;
-			ICompletionProposal result = null;
-			String proposal = candidate.getName().toString();
-			if (ruleName != null)
-				proposal = getValueConverter().toString(proposal, ruleName);
-			EObject objectOrProxy = candidate.getEObjectOrProxy();
-			
-			// three new lines in code taken from org.eclipse.xtext.ui.editor.contentassist.AbstractJavaBasedContentProposalProvider.DefaultProposalCreator
-			if (!objectOrProxy.eIsProxy() && filter!=null)
-				if (!filter.accept(contentAssistContext, candidate))
-					return null;
-			
-			StyledString displayString = getStyledDisplayString(objectOrProxy, candidate.getQualifiedName().toString(), candidate.getName().toString());
-			Image image = getImage(objectOrProxy);
-			result = createCompletionProposal(proposal, displayString, image, contentAssistContext);
-			getPriorityHelper().adjustCrossReferencePriority(result, contentAssistContext.getPrefix());			
-			return result;
-		}
-
-	}
-	
-	protected class ActorRefFilter implements IProposalFilter {
-
-		@Override
-		public boolean accept(ContentAssistContext context, IEObjectDescription candidate) {
-			if (!(context.getCurrentModel() instanceof ActorRef))
-				// unexpected call??
-				return false;
-			
-			ActorRef ar = (ActorRef) context.getCurrentModel();
-			if (!(ar.eContainer() instanceof ActorClass))
-				// can not filter due to lack of information
-				return true;
-			
-			ActorClass ac = (ActorClass) ar.eContainer();
-			
-			EObject objectOrProxy = candidate.getEObjectOrProxy();
-			
-			if (objectOrProxy instanceof ActorClass) {
-				ActorClass referenced = (ActorClass) objectOrProxy;
-				return !roomHelpers.isReferencing(referenced, ac);
-			}
-			
-			return false;
-		}
-		
-	}
-	
-	@Inject
-	protected RoomGrammarAccess grammar;
 
 	@Inject
 	protected RoomHelpers roomHelpers;
@@ -129,13 +63,8 @@ public class RoomProposalProvider extends AbstractRoomProposalProvider {
 	@Inject
 	protected RoomNameProvider roomNameProvider;
 	
-	protected Function<IEObjectDescription, ICompletionProposal> getProposalFactory(String ruleName, ContentAssistContext contentAssistContext) {
-		if (contentAssistContext!=null && contentAssistContext.getCurrentModel().eClass()==RoomPackage.eINSTANCE.getActorRef())
-			return new FilteredProposalCreator(new ActorRefFilter(), contentAssistContext, ruleName);
-		
-		// delegate to default
-		return super.getProposalFactory(ruleName, contentAssistContext);
-	}
+	@Inject
+	protected RoomGrammarAccess grammar;
 	
 	@Override
 	public void completeKeyword(Keyword keyword, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
@@ -145,6 +74,31 @@ public class RoomProposalProvider extends AbstractRoomProposalProvider {
 		}
 		
 		super.completeKeyword(keyword, context, acceptor);
+	}
+	
+	@Override
+	public void completeActorRef_Type(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		lookupCrossReference(((CrossReference)assignment.getTerminal()), context, acceptor, new Predicate<IEObjectDescription>() {
+			@Override
+			public boolean apply(IEObjectDescription candidate) {
+				ActorRef ar = (ActorRef) model;
+				if (!(ar.eContainer() instanceof ActorClass)) {
+					// can not filter due to lack of information
+					return true;
+				}
+				
+				ActorClass ac = (ActorClass) ar.eContainer();
+				
+				EObject objectOrProxy = candidate.getEObjectOrProxy();
+				
+				if (objectOrProxy instanceof ActorClass) {
+					ActorClass referenced = (ActorClass) objectOrProxy;
+					return !roomHelpers.isReferencing(referenced, ac);
+				}
+				
+				return false;
+			}
+		});
 	}
 	
 	@Override
