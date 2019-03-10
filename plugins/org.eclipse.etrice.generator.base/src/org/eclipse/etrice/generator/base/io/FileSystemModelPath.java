@@ -20,10 +20,13 @@ import java.io.UncheckedIOException;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -62,8 +65,20 @@ public class FileSystemModelPath implements IModelPath {
 	}
 	
 	@Override
+	public Optional<QualifiedName> getQualifiedName(URI uri) {
+		if(uri.isFile()) {
+			Path path = Paths.get(uri.toFileString());
+			return paths.stream().filter(p -> path.startsWith(p))
+				.map(p -> p.relativize(path))
+				.map(p -> createQualifiedName(p))
+				.findFirst();
+		}
+		return Optional.empty();
+	}
+	
+	@Override
 	public String toString() {
-		return packages.toString();
+		return paths.toString();
 	}
 	
 	/**
@@ -134,6 +149,37 @@ public class FileSystemModelPath implements IModelPath {
 			return packagePath;
 		}
 		return dir;
+	}
+	
+	/**
+	 * Converts a path to a qualified name.
+	 * Removes a possible file extension.
+	 * 
+	 * @param path the path to convert
+	 * @return a fully qualified name consisting of the path segments
+	 */
+	private QualifiedName createQualifiedName(Path path) {
+		String[] segments = StreamSupport.stream(path.spliterator(), false).map(p -> p.toString()).toArray(String[]::new);
+		if(segments.length > 0) {
+			int lastIndex = segments.length - 1;
+			segments[lastIndex] = trimFileExtension(segments[lastIndex]);
+		}
+		return QualifiedName.create(segments);
+	}
+	
+	/**
+	 * Searches for the last dot in the string and discards everything that follows it.
+	 * If the fileName doesn't contain a dot it is simply returned.
+	 * 
+	 * @param fileName the name of the file to trim the extension
+	 * @return the name of the file without a file extension
+	 */
+	private String trimFileExtension(String fileName) {
+		int periodIndex = fileName.lastIndexOf('.');
+		if(periodIndex != -1) {
+			return fileName.substring(0, periodIndex);
+		}
+		return fileName;
 	}
 	
 }

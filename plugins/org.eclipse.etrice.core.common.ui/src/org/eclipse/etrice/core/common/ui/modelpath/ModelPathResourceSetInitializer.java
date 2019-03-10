@@ -15,6 +15,7 @@
 
 package org.eclipse.etrice.core.common.ui.modelpath;
 
+import java.util.Optional;
 import java.util.stream.Stream;
 
 import org.eclipse.core.resources.IProject;
@@ -52,6 +53,11 @@ public class ModelPathResourceSetInitializer implements IResourceSetInitializer 
 		@Override
 		public Stream<URI> getAllFiles() {
 			return ModelPathManager.INSTANCE.getModelPath(project).getAllFiles();
+		}
+
+		@Override
+		public Optional<QualifiedName> getQualifiedName(URI uri) {
+			return ModelPathManager.INSTANCE.getModelPath(project).getQualifiedName(uri);
 		}
 	}
 }

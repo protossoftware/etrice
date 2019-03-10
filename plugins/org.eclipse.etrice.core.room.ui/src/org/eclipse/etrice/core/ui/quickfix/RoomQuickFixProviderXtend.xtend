@@ -31,9 +31,13 @@ import org.eclipse.xtext.validation.Issue
 
 import static org.eclipse.xtext.EcoreUtil2.getContainerOfType
 import static org.eclipse.etrice.core.room.RoomPackage.Literals.*
+import org.eclipse.etrice.core.common.scoping.ModelPathGlobalScopeProvider
+import org.eclipse.emf.ecore.resource.Resource
+import org.eclipse.emf.ecore.EReference
 
 class RoomQuickFixProviderXtend extends RoomQuickfixProvider {
 	
+	@Inject ModelPathGlobalScopeProvider modelPathGlobalScopeProvider
 	@Inject IResourceDescriptions resourceDescriptions
 	
 	// override xtext linking issues
@@ -56,6 +60,8 @@ class RoomQuickFixProviderXtend extends RoomQuickfixProvider {
 		val reference = getUnresolvedEReference(issue, target)		
 		
 		if(reference !== null) {
+			// import without uri by element
+			importQuickfixElementWithoutURI(issueString, resource, reference, issue, acceptor)
 			// import by namespace per default
 			importQuickfixNamespace(issueString, reference.EReferenceType, issue, acceptor)		
 			// import by element
@@ -63,6 +69,17 @@ class RoomQuickFixProviderXtend extends RoomQuickfixProvider {
 				importQuickfixElement(issueString, reference.EReferenceType, issue, acceptor)
 			}
 		}
+	}
+	
+	protected def void importQuickfixElementWithoutURI(String issueString, Resource resource, EReference reference, Issue issue, IssueResolutionAcceptor acceptor) {
+		modelPathGlobalScopeProvider.getScope(resource, reference, [name.lastSegment.equalsIgnoreCase(issueString)]).allElements.forEach[ eObjDesc |
+				acceptor.accept(issue, '''Import '«eObjDesc.qualifiedName»' ''', '', null) [elem, ctx |
+				val model = getContainerOfType(elem, RoomModel)
+				model.imports += BaseFactory.eINSTANCE.createImport => [
+					importedNamespace = eObjDesc.qualifiedName.toString
+				]
+			]
+		]
 	}
 	
 	protected def void importQuickfixNamespace(String issueString, EClass type, Issue issue, IssueResolutionAcceptor acceptor) {

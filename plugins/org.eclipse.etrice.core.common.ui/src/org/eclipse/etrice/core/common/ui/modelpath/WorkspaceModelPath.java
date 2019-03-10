@@ -15,6 +15,7 @@
 package org.eclipse.etrice.core.common.ui.modelpath;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 import org.eclipse.core.resources.IContainer;
@@ -22,6 +23,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.etrice.generator.base.io.IModelPath;
@@ -58,6 +60,19 @@ public class WorkspaceModelPath implements IModelPath {
 		return paths.stream()
 				.filter(container -> container.isAccessible())
 				.flatMap(container -> getAllFiles(container));
+	}
+	
+	@Override
+	public Optional<QualifiedName> getQualifiedName(URI uri) {
+		if(uri.isPlatform()) {
+			IPath path = new Path(uri.toPlatformString(true));
+			return paths.stream().map(container -> container.getFullPath())
+				.filter(p -> p.isPrefixOf(path))
+				.map(p -> path.makeRelativeTo(p).removeFileExtension())
+				.map(p -> QualifiedName.create(p.segments()))
+				.findFirst();
+		}
+		return Optional.empty();
 	}
 	
 	public List<IContainer> getPaths() {
@@ -122,8 +137,8 @@ public class WorkspaceModelPath implements IModelPath {
 	/**
 	 * Creates an uri for the passed file.
 	 */
-	private URI createURI(IFile file) {
-		return URI.createPlatformResourceURI(file.getFullPath().toString(), true);
+	private URI createURI(IResource resource) {
+		return URI.createPlatformResourceURI(resource.getFullPath().toString(), true);
 	}
 	
 	/**

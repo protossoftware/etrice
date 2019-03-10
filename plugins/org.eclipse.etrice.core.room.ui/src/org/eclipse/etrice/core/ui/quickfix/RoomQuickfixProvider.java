@@ -46,6 +46,7 @@ import org.eclipse.xtext.ui.editor.model.edit.ISemanticModification;
 import org.eclipse.xtext.ui.editor.quickfix.Fix;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolution;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor;
+import org.eclipse.xtext.ui.editor.quickfix.ReplaceModification;
 import org.eclipse.xtext.validation.Issue;
 
 public class RoomQuickfixProvider extends FSMQuickfixProvider {
@@ -87,6 +88,13 @@ public class RoomQuickfixProvider extends FSMQuickfixProvider {
 	@Override
 	public boolean hasResolutionFor(String issueCode) {
 		return super.hasResolutionFor(issueCode) || QuickfixExtensionManager.getInstance().hasResolutionFor(issueCode);
+	}
+	
+	@Fix(RoomJavaValidator.WRONG_MODEL_NAME)
+	public void renameModel(final Issue issue, IssueResolutionAcceptor acceptor) {
+		String replacement = issue.getData()[1];
+		acceptor.accept(issue, "Rename model", "Replace model name with its location on the modelpath \nfollowed by its file name",
+				"correction_change.gif", new ReplaceModification(issue, replacement));
 	}
 	
 	@Fix(RoomJavaValidator.THREAD_MISSING)

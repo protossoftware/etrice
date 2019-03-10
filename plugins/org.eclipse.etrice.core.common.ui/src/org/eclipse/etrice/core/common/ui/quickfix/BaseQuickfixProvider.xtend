@@ -14,6 +14,11 @@
 package org.eclipse.etrice.core.common.ui.quickfix
 
 import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider
+import org.eclipse.xtext.ui.editor.quickfix.Fix
+import org.eclipse.etrice.core.common.validation.BaseJavaValidator
+import org.eclipse.xtext.validation.Issue
+import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor
+import org.eclipse.etrice.core.common.base.Import
 
 //import org.eclipse.xtext.ui.editor.quickfix.Fix
 //import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor
@@ -25,6 +30,14 @@ import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider
  * see http://www.eclipse.org/Xtext/documentation.html#quickfixes
  */
 class BaseQuickfixProvider extends DefaultQuickfixProvider {
+
+	@Fix(BaseJavaValidator.DEPRECATED_IMPORT_URI)
+	def removeImportUri(Issue issue, IssueResolutionAcceptor acceptor) {
+		acceptor.accept(issue, 'Remove import uri', 'Remove the import uri', null) [ element, context |
+			val imp = element as Import
+			imp.importURI = null
+		]
+	}
 
 //	@Fix(MyDslValidator::INVALID_NAME)
 //	def capitalizeName(Issue issue, IssueResolutionAcceptor acceptor) {

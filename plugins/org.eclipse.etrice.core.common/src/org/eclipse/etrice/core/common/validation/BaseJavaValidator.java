@@ -59,6 +59,7 @@ public class BaseJavaValidator extends org.eclipse.etrice.core.common.validation
 	public static final String UNDEFINED_ANNOTATION_ATTRIBUTE = "BaseJavaValidator.UndfinedAnnotationAttribute";
 	public static final String UNDEFINED_ANNOTATION_ATTRIBUTE_VALUE = "BaseJavaValidator.UndfinedAnnotationAttributeValue";
 	public static final String DUPLICATE_ANNOTATION_ATTRIBUTE = "BaseJavaValidator.DuplicateAnnotationAttribute";
+	public static final String DEPRECATED_IMPORT_URI = "BaseJavaValidator.DeprecatedImportUri";
 	
 	@Inject ImportUriResolver importUriResolver;
 	@Inject IGlobalScopeProvider globalScopeProvider;
@@ -197,6 +198,7 @@ public class BaseJavaValidator extends org.eclipse.etrice.core.common.validation
 		if(imp.getImportURI() == null) {
 			return;
 		}
+		warning("import statements using uris are deprecated", BasePackage.Literals.IMPORT__IMPORT_URI, DEPRECATED_IMPORT_URI);
 		
 		String uriString = importUriResolver.resolve(imp);
 		if (uriString == null) {

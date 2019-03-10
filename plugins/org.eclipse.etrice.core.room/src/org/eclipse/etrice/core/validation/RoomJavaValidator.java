@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EStructuralFeature.Setting;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.core.common.base.Annotation;
 import org.eclipse.etrice.core.common.base.BasePackage;
@@ -76,6 +77,9 @@ import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
+import org.eclipse.etrice.generator.base.io.IModelPath;
+import org.eclipse.etrice.generator.base.io.IModelPathProvider;
+import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -100,7 +104,11 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 
 	@Inject protected IQualifiedNameProvider fqnProvider;
 	
+	@Inject protected IQualifiedNameConverter nameConverter;
+	
 	@Inject ImportUriResolver importUriResolver;
+	
+	@Inject private IModelPathProvider modelPathProvider;
 
 	/* message strings */
 	public static final String OPTIONAL_REFS_HAVE_TO_HAVE_MULTIPLICITY_ANY = "optional refs have to have multiplicity any [*]";
@@ -108,6 +116,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	public static final String A_REPLICATED_PORT_MUST_HAVE_AT_MOST_ONE_REPLICATED_PEER = "a replicated port must have at most one replicated peer (with arbitrary multiplicity each)";
 
 	/* tags for quick fixes */
+	public static final String WRONG_MODEL_NAME = "RoomJavaValidator.WrongModelName";
 	public static final String THREAD_MISSING = "RoomJavaValidator.ThreadMissing";
 	public static final String DUPLICATE_ACTOR_INSTANCE_MAPPING = "RoomJavaValidator.DuplicateActorInstanceMapping";
 	public static final String WRONG_NAMESPACE = "RoomJavaValidator.WrongNamespace";
@@ -122,6 +131,21 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	public static final String INCONSISTENT_COMMUNICATION_TYPE = "RoomJavaValidator.InconsistentCommType";
 	public static final String DEPRECATED_MESSAGE_DATA_NAME = "RoomJavaValidator.DeprecatedMessageDataName";
 
+	@Check
+	public void checkRoomModelName(RoomModel roomModel) {
+		QualifiedName modelName = fqnProvider.getFullyQualifiedName(roomModel);
+		if(modelName != null) {
+			Resource resource = roomModel.eResource();
+			IModelPath modelpath = modelPathProvider.get(resource);
+			modelpath.getQualifiedName(resource.getURI()).ifPresent(fileName -> {
+				if(!fileName.equals(modelName)) {
+					warning("model name doesn't match its file name and its location on the modelpath", RoomPackage.Literals.ROOM_MODEL__NAME,
+							WRONG_MODEL_NAME, nameConverter.toString(modelName), nameConverter.toString(fileName));
+				}
+			});
+		}
+	}
+	
 	@Check
 	public void checkRoomImportedNamespace(Import imp) {
 		QualifiedName importedFQN = ImportHelpers.toFQN(imp);

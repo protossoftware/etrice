@@ -15,6 +15,7 @@
 
 package org.eclipse.etrice.generator.base.io;
 
+import java.util.Optional;
 import java.util.stream.Stream;
 
 import org.eclipse.emf.common.util.URI;
@@ -39,6 +40,14 @@ public interface IModelPath {
 	 */
 	public Stream<URI> getAllFiles();
 	
+	/**
+	 * Returns a qualified name for the model objects in the file.
+	 * 
+	 * @param uri an uri to a file
+	 * @return the qualified name for the file or nothing if the file is not on the modelpath.
+	 */
+	public Optional<QualifiedName> getQualifiedName(URI uri);
+	
 	static class EmptyModelPath implements IModelPath {
 		
 		@Override
@@ -49,6 +58,11 @@ public interface IModelPath {
 		@Override
 		public Stream<URI> getAllFiles() {
 			return Stream.empty();
+		}
+
+		@Override
+		public Optional<QualifiedName> getQualifiedName(URI uri) {
+			return Optional.empty();
 		}
 	}
 }
