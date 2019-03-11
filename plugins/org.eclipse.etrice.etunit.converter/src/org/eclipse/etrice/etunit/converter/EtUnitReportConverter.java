@@ -551,14 +551,19 @@ public class EtUnitReportConverter {
 	private void computeAndSetInfo(TestsuitesType testsuites) {
 		for (TestsuiteType ts : testsuites.getTestsuite()) {
 			int failures = 0;
+			int skipped = 0;
 			BigDecimal time = new BigDecimal(0);
 			for (TestcaseType tc : ts.getTestcase()) {
 				if (tc.getTime()!=null)
 					time = time.add(new BigDecimal(tc.getTime()));
 				failures += tc.getFailure().size();
+				skipped += (tc.getSkipped() != null) ? 1 : 0;
 			}
 			ts.setTests(Integer.toString(ts.getTestcase().size()));
 			ts.setFailures(Integer.toString(failures));
+			if(skipped > 0) {
+				ts.setSkipped(Integer.toString(skipped));
+			}
 			ts.setTime(time.toString());
 		}
 	}

@@ -10,7 +10,7 @@
     </testcase>
     <testcase name="TestEtMessageQueue_testMassiveMessaging" time="0.187"/>
   </testsuite>
-  <testsuite failures="0" name="TestEtMessageService" tests="5" time="0.016">
+  <testsuite failures="0" name="TestEtMessageService" skipped="2" tests="5" time="0.016">
     <testcase name="TestEtMessageService_init" time="0.0"/>
     <testcase name="TestEtMessageService_GetPushPopReturn" time="0.0"/>
     <testcase name="TestEtMessageService_GetReturn" time="0.016"/>
