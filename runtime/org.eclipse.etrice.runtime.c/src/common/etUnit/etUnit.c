@@ -182,6 +182,12 @@ void etUnit_closeTestCase(etInt16 id) {
 	}
 }
 
+void etUnit_skipTestCase(etInt16 id, const char* msg) {
+	if (etUnit_reportfile != NULL) {
+		etLogger_fprintf(etUnit_reportfile, "tc skip %d: %s\n", id, msg);
+	}
+}
+
 etInt16 etUnit_openAll(const char* testResultPath, const char* testFileName, const char* testSuiteName, const char* testCaseName) {
 	etUnit_open(testResultPath, testFileName);
 	etUnit_openTestSuite(testSuiteName);

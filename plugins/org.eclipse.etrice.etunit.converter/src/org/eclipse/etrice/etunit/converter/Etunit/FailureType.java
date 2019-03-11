@@ -1,12 +1,9 @@
 /**
- * <copyright>
- * </copyright>
- *
- * $Id$
  */
 package org.eclipse.etrice.etunit.converter.Etunit;
 
 import org.eclipse.emf.ecore.EObject;
+
 import org.eclipse.emf.ecore.util.FeatureMap;
 
 /**
@@ -16,12 +13,12 @@ import org.eclipse.emf.ecore.util.FeatureMap;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.etunit.converter.Etunit.FailureType#getMixed <em>Mixed</em>}</li>
- *   <li>{@link org.eclipse.etrice.etunit.converter.Etunit.FailureType#getExpected <em>Expected</em>}</li>
- *   <li>{@link org.eclipse.etrice.etunit.converter.Etunit.FailureType#getActual <em>Actual</em>}</li>
+ *   <li>{@link org.eclipse.etrice.etunit.converter.Etunit.FailureType#getMessage <em>Message</em>}</li>
+ *   <li>{@link org.eclipse.etrice.etunit.converter.Etunit.FailureType#getType <em>Type</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.etrice.etunit.converter.Etunit.EtunitPackage#getFailureType()
  * @model extendedMetaData="name='failure_._type' kind='mixed'"
@@ -46,57 +43,57 @@ public interface FailureType extends EObject {
 	FeatureMap getMixed();
 
 	/**
-	 * Returns the value of the '<em><b>Expected</b></em>' attribute.
+	 * Returns the value of the '<em><b>Message</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Expected</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Message</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Expected</em>' attribute.
-	 * @see #setExpected(String)
-	 * @see org.eclipse.etrice.etunit.converter.Etunit.EtunitPackage#getFailureType_Expected()
-	 * @model dataType="org.eclipse.emf.ecore.xml.type.String" required="true" transient="true" volatile="true" derived="true"
-	 *        extendedMetaData="kind='element' name='expected' namespace='##targetNamespace'"
+	 * @return the value of the '<em>Message</em>' attribute.
+	 * @see #setMessage(String)
+	 * @see org.eclipse.etrice.etunit.converter.Etunit.EtunitPackage#getFailureType_Message()
+	 * @model dataType="org.eclipse.emf.ecore.xml.type.String"
+	 *        extendedMetaData="kind='attribute' name='message' namespace='##targetNamespace'"
 	 * @generated
 	 */
-	String getExpected();
+	String getMessage();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.etrice.etunit.converter.Etunit.FailureType#getExpected <em>Expected</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.etrice.etunit.converter.Etunit.FailureType#getMessage <em>Message</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Expected</em>' attribute.
-	 * @see #getExpected()
+	 * @param value the new value of the '<em>Message</em>' attribute.
+	 * @see #getMessage()
 	 * @generated
 	 */
-	void setExpected(String value);
+	void setMessage(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Actual</b></em>' attribute.
+	 * Returns the value of the '<em><b>Type</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Actual</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Type</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Actual</em>' attribute.
-	 * @see #setActual(String)
-	 * @see org.eclipse.etrice.etunit.converter.Etunit.EtunitPackage#getFailureType_Actual()
-	 * @model dataType="org.eclipse.emf.ecore.xml.type.String" required="true" transient="true" volatile="true" derived="true"
-	 *        extendedMetaData="kind='element' name='actual' namespace='##targetNamespace'"
+	 * @return the value of the '<em>Type</em>' attribute.
+	 * @see #setType(String)
+	 * @see org.eclipse.etrice.etunit.converter.Etunit.EtunitPackage#getFailureType_Type()
+	 * @model dataType="org.eclipse.emf.ecore.xml.type.String"
+	 *        extendedMetaData="kind='attribute' name='type' namespace='##targetNamespace'"
 	 * @generated
 	 */
-	String getActual();
+	String getType();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.etrice.etunit.converter.Etunit.FailureType#getActual <em>Actual</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.etrice.etunit.converter.Etunit.FailureType#getType <em>Type</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Actual</em>' attribute.
-	 * @see #getActual()
+	 * @param value the new value of the '<em>Type</em>' attribute.
+	 * @see #getType()
 	 * @generated
 	 */
-	void setActual(String value);
+	void setType(String value);
 
 } // FailureType

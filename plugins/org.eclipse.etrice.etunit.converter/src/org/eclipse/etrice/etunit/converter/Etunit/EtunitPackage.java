@@ -1,14 +1,9 @@
 /**
- * <copyright>
- * </copyright>
- *
- * $Id$
  */
 package org.eclipse.etrice.etunit.converter.Etunit;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -19,14 +14,11 @@ import org.eclipse.emf.ecore.EReference;
  * <ul>
  *   <li>each class,</li>
  *   <li>each feature of each class,</li>
+ *   <li>each operation of each class,</li>
  *   <li>each enum,</li>
  *   <li>and each data type</li>
  * </ul>
  * <!-- end-user-doc -->
- * <!-- begin-model-doc -->
- * etUnit test result schema.
- *     
- * <!-- end-model-doc -->
  * @see org.eclipse.etrice.etunit.converter.Etunit.EtunitFactory
  * @model kind="package"
  *        extendedMetaData="qualified='false'"
@@ -47,7 +39,7 @@ public interface EtunitPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "platform:/resource/org.eclipse.etrice.etunit.converter/model/etunit.xsd";
+	String eNS_URI = "http://www.eclipse.org/etrice/etunit/converter/etunit";
 
 	/**
 	 * The package namespace name.
@@ -103,13 +95,85 @@ public interface EtunitPackage extends EPackage {
 	int DOCUMENT_ROOT__XSI_SCHEMA_LOCATION = 2;
 
 	/**
+	 * The feature id for the '<em><b>Error</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOCUMENT_ROOT__ERROR = 3;
+
+	/**
+	 * The feature id for the '<em><b>Failure</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOCUMENT_ROOT__FAILURE = 4;
+
+	/**
+	 * The feature id for the '<em><b>Properties</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOCUMENT_ROOT__PROPERTIES = 5;
+
+	/**
+	 * The feature id for the '<em><b>Property</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOCUMENT_ROOT__PROPERTY = 6;
+
+	/**
+	 * The feature id for the '<em><b>Skipped</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOCUMENT_ROOT__SKIPPED = 7;
+
+	/**
+	 * The feature id for the '<em><b>System Err</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOCUMENT_ROOT__SYSTEM_ERR = 8;
+
+	/**
+	 * The feature id for the '<em><b>System Out</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOCUMENT_ROOT__SYSTEM_OUT = 9;
+
+	/**
+	 * The feature id for the '<em><b>Testcase</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOCUMENT_ROOT__TESTCASE = 10;
+
+	/**
 	 * The feature id for the '<em><b>Testsuite</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOCUMENT_ROOT__TESTSUITE = 3;
+	int DOCUMENT_ROOT__TESTSUITE = 11;
 
 	/**
 	 * The feature id for the '<em><b>Testsuites</b></em>' containment reference.
@@ -118,7 +182,7 @@ public interface EtunitPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DOCUMENT_ROOT__TESTSUITES = 4;
+	int DOCUMENT_ROOT__TESTSUITES = 12;
 
 	/**
 	 * The number of structural features of the '<em>Document Root</em>' class.
@@ -127,7 +191,16 @@ public interface EtunitPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DOCUMENT_ROOT_FEATURE_COUNT = 5;
+	int DOCUMENT_ROOT_FEATURE_COUNT = 13;
+
+	/**
+	 * The number of operations of the '<em>Document Root</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOCUMENT_ROOT_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.etrice.etunit.converter.Etunit.impl.ErrorTypeImpl <em>Error Type</em>}' class.
@@ -149,22 +222,22 @@ public interface EtunitPackage extends EPackage {
 	int ERROR_TYPE__MIXED = 0;
 
 	/**
-	 * The feature id for the '<em><b>Expected</b></em>' attribute.
+	 * The feature id for the '<em><b>Message</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ERROR_TYPE__EXPECTED = 1;
+	int ERROR_TYPE__MESSAGE = 1;
 
 	/**
-	 * The feature id for the '<em><b>Actual</b></em>' attribute.
+	 * The feature id for the '<em><b>Type</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ERROR_TYPE__ACTUAL = 2;
+	int ERROR_TYPE__TYPE = 2;
 
 	/**
 	 * The number of structural features of the '<em>Error Type</em>' class.
@@ -174,6 +247,15 @@ public interface EtunitPackage extends EPackage {
 	 * @ordered
 	 */
 	int ERROR_TYPE_FEATURE_COUNT = 3;
+
+	/**
+	 * The number of operations of the '<em>Error Type</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ERROR_TYPE_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.etrice.etunit.converter.Etunit.impl.FailureTypeImpl <em>Failure Type</em>}' class.
@@ -195,22 +277,22 @@ public interface EtunitPackage extends EPackage {
 	int FAILURE_TYPE__MIXED = 0;
 
 	/**
-	 * The feature id for the '<em><b>Expected</b></em>' attribute.
+	 * The feature id for the '<em><b>Message</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FAILURE_TYPE__EXPECTED = 1;
+	int FAILURE_TYPE__MESSAGE = 1;
 
 	/**
-	 * The feature id for the '<em><b>Actual</b></em>' attribute.
+	 * The feature id for the '<em><b>Type</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FAILURE_TYPE__ACTUAL = 2;
+	int FAILURE_TYPE__TYPE = 2;
 
 	/**
 	 * The number of structural features of the '<em>Failure Type</em>' class.
@@ -222,6 +304,144 @@ public interface EtunitPackage extends EPackage {
 	int FAILURE_TYPE_FEATURE_COUNT = 3;
 
 	/**
+	 * The number of operations of the '<em>Failure Type</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FAILURE_TYPE_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.etrice.etunit.converter.Etunit.impl.PropertiesTypeImpl <em>Properties Type</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.etrice.etunit.converter.Etunit.impl.PropertiesTypeImpl
+	 * @see org.eclipse.etrice.etunit.converter.Etunit.impl.EtunitPackageImpl#getPropertiesType()
+	 * @generated
+	 */
+	int PROPERTIES_TYPE = 3;
+
+	/**
+	 * The feature id for the '<em><b>Property</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTIES_TYPE__PROPERTY = 0;
+
+	/**
+	 * The number of structural features of the '<em>Properties Type</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTIES_TYPE_FEATURE_COUNT = 1;
+
+	/**
+	 * The number of operations of the '<em>Properties Type</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTIES_TYPE_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.etrice.etunit.converter.Etunit.impl.PropertyTypeImpl <em>Property Type</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.etrice.etunit.converter.Etunit.impl.PropertyTypeImpl
+	 * @see org.eclipse.etrice.etunit.converter.Etunit.impl.EtunitPackageImpl#getPropertyType()
+	 * @generated
+	 */
+	int PROPERTY_TYPE = 4;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_TYPE__NAME = 0;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_TYPE__VALUE = 1;
+
+	/**
+	 * The number of structural features of the '<em>Property Type</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_TYPE_FEATURE_COUNT = 2;
+
+	/**
+	 * The number of operations of the '<em>Property Type</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_TYPE_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.etrice.etunit.converter.Etunit.impl.SkippedTypeImpl <em>Skipped Type</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.etrice.etunit.converter.Etunit.impl.SkippedTypeImpl
+	 * @see org.eclipse.etrice.etunit.converter.Etunit.impl.EtunitPackageImpl#getSkippedType()
+	 * @generated
+	 */
+	int SKIPPED_TYPE = 5;
+
+	/**
+	 * The feature id for the '<em><b>Mixed</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SKIPPED_TYPE__MIXED = 0;
+
+	/**
+	 * The feature id for the '<em><b>Message</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SKIPPED_TYPE__MESSAGE = 1;
+
+	/**
+	 * The number of structural features of the '<em>Skipped Type</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SKIPPED_TYPE_FEATURE_COUNT = 2;
+
+	/**
+	 * The number of operations of the '<em>Skipped Type</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SKIPPED_TYPE_OPERATION_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.etrice.etunit.converter.Etunit.impl.TestcaseTypeImpl <em>Testcase Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -229,25 +449,61 @@ public interface EtunitPackage extends EPackage {
 	 * @see org.eclipse.etrice.etunit.converter.Etunit.impl.EtunitPackageImpl#getTestcaseType()
 	 * @generated
 	 */
-	int TESTCASE_TYPE = 3;
+	int TESTCASE_TYPE = 6;
 
 	/**
-	 * The feature id for the '<em><b>Error</b></em>' containment reference.
+	 * The feature id for the '<em><b>Skipped</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TESTCASE_TYPE__ERROR = 0;
+	int TESTCASE_TYPE__SKIPPED = 0;
 
 	/**
-	 * The feature id for the '<em><b>Failure</b></em>' containment reference.
+	 * The feature id for the '<em><b>Error</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TESTCASE_TYPE__FAILURE = 1;
+	int TESTCASE_TYPE__ERROR = 1;
+
+	/**
+	 * The feature id for the '<em><b>Failure</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TESTCASE_TYPE__FAILURE = 2;
+
+	/**
+	 * The feature id for the '<em><b>System Out</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TESTCASE_TYPE__SYSTEM_OUT = 3;
+
+	/**
+	 * The feature id for the '<em><b>System Err</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TESTCASE_TYPE__SYSTEM_ERR = 4;
+
+	/**
+	 * The feature id for the '<em><b>Assertions</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TESTCASE_TYPE__ASSERTIONS = 5;
 
 	/**
 	 * The feature id for the '<em><b>Classname</b></em>' attribute.
@@ -256,7 +512,7 @@ public interface EtunitPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TESTCASE_TYPE__CLASSNAME = 2;
+	int TESTCASE_TYPE__CLASSNAME = 6;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -265,7 +521,16 @@ public interface EtunitPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TESTCASE_TYPE__NAME = 3;
+	int TESTCASE_TYPE__NAME = 7;
+
+	/**
+	 * The feature id for the '<em><b>Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TESTCASE_TYPE__STATUS = 8;
 
 	/**
 	 * The feature id for the '<em><b>Time</b></em>' attribute.
@@ -274,7 +539,7 @@ public interface EtunitPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TESTCASE_TYPE__TIME = 4;
+	int TESTCASE_TYPE__TIME = 9;
 
 	/**
 	 * The number of structural features of the '<em>Testcase Type</em>' class.
@@ -283,98 +548,16 @@ public interface EtunitPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TESTCASE_TYPE_FEATURE_COUNT = 5;
+	int TESTCASE_TYPE_FEATURE_COUNT = 10;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.etrice.etunit.converter.Etunit.impl.TestsuiteImpl <em>Testsuite</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.etrice.etunit.converter.Etunit.impl.TestsuiteImpl
-	 * @see org.eclipse.etrice.etunit.converter.Etunit.impl.EtunitPackageImpl#getTestsuite()
-	 * @generated
-	 */
-	int TESTSUITE = 4;
-
-	/**
-	 * The feature id for the '<em><b>Testcase</b></em>' containment reference list.
+	 * The number of operations of the '<em>Testcase Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TESTSUITE__TESTCASE = 0;
-
-	/**
-	 * The feature id for the '<em><b>Errors</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TESTSUITE__ERRORS = 1;
-
-	/**
-	 * The feature id for the '<em><b>Failures</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TESTSUITE__FAILURES = 2;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TESTSUITE__NAME = 3;
-
-	/**
-	 * The feature id for the '<em><b>Skipped</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TESTSUITE__SKIPPED = 4;
-
-	/**
-	 * The feature id for the '<em><b>Tests</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TESTSUITE__TESTS = 5;
-
-	/**
-	 * The feature id for the '<em><b>Time</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TESTSUITE__TIME = 6;
-
-	/**
-	 * The feature id for the '<em><b>Timestamp</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TESTSUITE__TIMESTAMP = 7;
-
-	/**
-	 * The number of structural features of the '<em>Testsuite</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TESTSUITE_FEATURE_COUNT = 8;
+	int TESTCASE_TYPE_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.etrice.etunit.converter.Etunit.impl.TestsuitesTypeImpl <em>Testsuites Type</em>}' class.
@@ -384,7 +567,7 @@ public interface EtunitPackage extends EPackage {
 	 * @see org.eclipse.etrice.etunit.converter.Etunit.impl.EtunitPackageImpl#getTestsuitesType()
 	 * @generated
 	 */
-	int TESTSUITES_TYPE = 5;
+	int TESTSUITES_TYPE = 7;
 
 	/**
 	 * The feature id for the '<em><b>Testsuite</b></em>' containment reference list.
@@ -396,13 +579,76 @@ public interface EtunitPackage extends EPackage {
 	int TESTSUITES_TYPE__TESTSUITE = 0;
 
 	/**
+	 * The feature id for the '<em><b>Disabled</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TESTSUITES_TYPE__DISABLED = 1;
+
+	/**
+	 * The feature id for the '<em><b>Errors</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TESTSUITES_TYPE__ERRORS = 2;
+
+	/**
+	 * The feature id for the '<em><b>Failures</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TESTSUITES_TYPE__FAILURES = 3;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TESTSUITES_TYPE__NAME = 4;
+
+	/**
+	 * The feature id for the '<em><b>Tests</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TESTSUITES_TYPE__TESTS = 5;
+
+	/**
+	 * The feature id for the '<em><b>Time</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TESTSUITES_TYPE__TIME = 6;
+
+	/**
 	 * The number of structural features of the '<em>Testsuites Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TESTSUITES_TYPE_FEATURE_COUNT = 1;
+	int TESTSUITES_TYPE_FEATURE_COUNT = 7;
+
+	/**
+	 * The number of operations of the '<em>Testsuites Type</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TESTSUITES_TYPE_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.etrice.etunit.converter.Etunit.impl.TestsuiteTypeImpl <em>Testsuite Type</em>}' class.
@@ -412,7 +658,16 @@ public interface EtunitPackage extends EPackage {
 	 * @see org.eclipse.etrice.etunit.converter.Etunit.impl.EtunitPackageImpl#getTestsuiteType()
 	 * @generated
 	 */
-	int TESTSUITE_TYPE = 6;
+	int TESTSUITE_TYPE = 8;
+
+	/**
+	 * The feature id for the '<em><b>Properties</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TESTSUITE_TYPE__PROPERTIES = 0;
 
 	/**
 	 * The feature id for the '<em><b>Testcase</b></em>' containment reference list.
@@ -421,7 +676,34 @@ public interface EtunitPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TESTSUITE_TYPE__TESTCASE = TESTSUITE__TESTCASE;
+	int TESTSUITE_TYPE__TESTCASE = 1;
+
+	/**
+	 * The feature id for the '<em><b>System Out</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TESTSUITE_TYPE__SYSTEM_OUT = 2;
+
+	/**
+	 * The feature id for the '<em><b>System Err</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TESTSUITE_TYPE__SYSTEM_ERR = 3;
+
+	/**
+	 * The feature id for the '<em><b>Disabled</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TESTSUITE_TYPE__DISABLED = 4;
 
 	/**
 	 * The feature id for the '<em><b>Errors</b></em>' attribute.
@@ -430,7 +712,7 @@ public interface EtunitPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TESTSUITE_TYPE__ERRORS = TESTSUITE__ERRORS;
+	int TESTSUITE_TYPE__ERRORS = 5;
 
 	/**
 	 * The feature id for the '<em><b>Failures</b></em>' attribute.
@@ -439,7 +721,25 @@ public interface EtunitPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TESTSUITE_TYPE__FAILURES = TESTSUITE__FAILURES;
+	int TESTSUITE_TYPE__FAILURES = 6;
+
+	/**
+	 * The feature id for the '<em><b>Hostname</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TESTSUITE_TYPE__HOSTNAME = 7;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TESTSUITE_TYPE__ID = 8;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -448,7 +748,16 @@ public interface EtunitPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TESTSUITE_TYPE__NAME = TESTSUITE__NAME;
+	int TESTSUITE_TYPE__NAME = 9;
+
+	/**
+	 * The feature id for the '<em><b>Package</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TESTSUITE_TYPE__PACKAGE = 10;
 
 	/**
 	 * The feature id for the '<em><b>Skipped</b></em>' attribute.
@@ -457,7 +766,7 @@ public interface EtunitPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TESTSUITE_TYPE__SKIPPED = TESTSUITE__SKIPPED;
+	int TESTSUITE_TYPE__SKIPPED = 11;
 
 	/**
 	 * The feature id for the '<em><b>Tests</b></em>' attribute.
@@ -466,7 +775,7 @@ public interface EtunitPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TESTSUITE_TYPE__TESTS = TESTSUITE__TESTS;
+	int TESTSUITE_TYPE__TESTS = 12;
 
 	/**
 	 * The feature id for the '<em><b>Time</b></em>' attribute.
@@ -475,7 +784,7 @@ public interface EtunitPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TESTSUITE_TYPE__TIME = TESTSUITE__TIME;
+	int TESTSUITE_TYPE__TIME = 13;
 
 	/**
 	 * The feature id for the '<em><b>Timestamp</b></em>' attribute.
@@ -484,7 +793,7 @@ public interface EtunitPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TESTSUITE_TYPE__TIMESTAMP = TESTSUITE__TIMESTAMP;
+	int TESTSUITE_TYPE__TIMESTAMP = 14;
 
 	/**
 	 * The number of structural features of the '<em>Testsuite Type</em>' class.
@@ -493,37 +802,16 @@ public interface EtunitPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TESTSUITE_TYPE_FEATURE_COUNT = TESTSUITE_FEATURE_COUNT + 0;
+	int TESTSUITE_TYPE_FEATURE_COUNT = 15;
 
 	/**
-	 * The meta object id for the '<em>ISO8601DATETIMEPATTERN</em>' data type.
+	 * The number of operations of the '<em>Testsuite Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see javax.xml.datatype.XMLGregorianCalendar
-	 * @see org.eclipse.etrice.etunit.converter.Etunit.impl.EtunitPackageImpl#getISO8601DATETIMEPATTERN()
 	 * @generated
+	 * @ordered
 	 */
-	int ISO8601DATETIMEPATTERN = 7;
-
-	/**
-	 * The meta object id for the '<em>Name Type</em>' data type.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see java.lang.String
-	 * @see org.eclipse.etrice.etunit.converter.Etunit.impl.EtunitPackageImpl#getNameType()
-	 * @generated
-	 */
-	int NAME_TYPE = 8;
-
-	/**
-	 * The meta object id for the '<em>Pre String</em>' data type.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see java.lang.String
-	 * @see org.eclipse.etrice.etunit.converter.Etunit.impl.EtunitPackageImpl#getPreString()
-	 * @generated
-	 */
-	int PRE_STRING = 9;
+	int TESTSUITE_TYPE_OPERATION_COUNT = 0;
 
 
 	/**
@@ -570,6 +858,94 @@ public interface EtunitPackage extends EPackage {
 	EReference getDocumentRoot_XSISchemaLocation();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.etrice.etunit.converter.Etunit.DocumentRoot#getError <em>Error</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Error</em>'.
+	 * @see org.eclipse.etrice.etunit.converter.Etunit.DocumentRoot#getError()
+	 * @see #getDocumentRoot()
+	 * @generated
+	 */
+	EReference getDocumentRoot_Error();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.etrice.etunit.converter.Etunit.DocumentRoot#getFailure <em>Failure</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Failure</em>'.
+	 * @see org.eclipse.etrice.etunit.converter.Etunit.DocumentRoot#getFailure()
+	 * @see #getDocumentRoot()
+	 * @generated
+	 */
+	EReference getDocumentRoot_Failure();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.etrice.etunit.converter.Etunit.DocumentRoot#getProperties <em>Properties</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Properties</em>'.
+	 * @see org.eclipse.etrice.etunit.converter.Etunit.DocumentRoot#getProperties()
+	 * @see #getDocumentRoot()
+	 * @generated
+	 */
+	EReference getDocumentRoot_Properties();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.etrice.etunit.converter.Etunit.DocumentRoot#getProperty <em>Property</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Property</em>'.
+	 * @see org.eclipse.etrice.etunit.converter.Etunit.DocumentRoot#getProperty()
+	 * @see #getDocumentRoot()
+	 * @generated
+	 */
+	EReference getDocumentRoot_Property();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.etrice.etunit.converter.Etunit.DocumentRoot#getSkipped <em>Skipped</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Skipped</em>'.
+	 * @see org.eclipse.etrice.etunit.converter.Etunit.DocumentRoot#getSkipped()
+	 * @see #getDocumentRoot()
+	 * @generated
+	 */
+	EReference getDocumentRoot_Skipped();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.etrice.etunit.converter.Etunit.DocumentRoot#getSystemErr <em>System Err</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>System Err</em>'.
+	 * @see org.eclipse.etrice.etunit.converter.Etunit.DocumentRoot#getSystemErr()
+	 * @see #getDocumentRoot()
+	 * @generated
+	 */
+	EAttribute getDocumentRoot_SystemErr();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.etrice.etunit.converter.Etunit.DocumentRoot#getSystemOut <em>System Out</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>System Out</em>'.
+	 * @see org.eclipse.etrice.etunit.converter.Etunit.DocumentRoot#getSystemOut()
+	 * @see #getDocumentRoot()
+	 * @generated
+	 */
+	EAttribute getDocumentRoot_SystemOut();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.etrice.etunit.converter.Etunit.DocumentRoot#getTestcase <em>Testcase</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Testcase</em>'.
+	 * @see org.eclipse.etrice.etunit.converter.Etunit.DocumentRoot#getTestcase()
+	 * @see #getDocumentRoot()
+	 * @generated
+	 */
+	EReference getDocumentRoot_Testcase();
+
+	/**
 	 * Returns the meta object for the containment reference '{@link org.eclipse.etrice.etunit.converter.Etunit.DocumentRoot#getTestsuite <em>Testsuite</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -613,26 +989,26 @@ public interface EtunitPackage extends EPackage {
 	EAttribute getErrorType_Mixed();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.etrice.etunit.converter.Etunit.ErrorType#getExpected <em>Expected</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.etrice.etunit.converter.Etunit.ErrorType#getMessage <em>Message</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Expected</em>'.
-	 * @see org.eclipse.etrice.etunit.converter.Etunit.ErrorType#getExpected()
+	 * @return the meta object for the attribute '<em>Message</em>'.
+	 * @see org.eclipse.etrice.etunit.converter.Etunit.ErrorType#getMessage()
 	 * @see #getErrorType()
 	 * @generated
 	 */
-	EAttribute getErrorType_Expected();
+	EAttribute getErrorType_Message();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.etrice.etunit.converter.Etunit.ErrorType#getActual <em>Actual</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.etrice.etunit.converter.Etunit.ErrorType#getType <em>Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Actual</em>'.
-	 * @see org.eclipse.etrice.etunit.converter.Etunit.ErrorType#getActual()
+	 * @return the meta object for the attribute '<em>Type</em>'.
+	 * @see org.eclipse.etrice.etunit.converter.Etunit.ErrorType#getType()
 	 * @see #getErrorType()
 	 * @generated
 	 */
-	EAttribute getErrorType_Actual();
+	EAttribute getErrorType_Type();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.etrice.etunit.converter.Etunit.FailureType <em>Failure Type</em>}'.
@@ -656,26 +1032,111 @@ public interface EtunitPackage extends EPackage {
 	EAttribute getFailureType_Mixed();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.etrice.etunit.converter.Etunit.FailureType#getExpected <em>Expected</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.etrice.etunit.converter.Etunit.FailureType#getMessage <em>Message</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Expected</em>'.
-	 * @see org.eclipse.etrice.etunit.converter.Etunit.FailureType#getExpected()
+	 * @return the meta object for the attribute '<em>Message</em>'.
+	 * @see org.eclipse.etrice.etunit.converter.Etunit.FailureType#getMessage()
 	 * @see #getFailureType()
 	 * @generated
 	 */
-	EAttribute getFailureType_Expected();
+	EAttribute getFailureType_Message();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.etrice.etunit.converter.Etunit.FailureType#getActual <em>Actual</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.etrice.etunit.converter.Etunit.FailureType#getType <em>Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Actual</em>'.
-	 * @see org.eclipse.etrice.etunit.converter.Etunit.FailureType#getActual()
+	 * @return the meta object for the attribute '<em>Type</em>'.
+	 * @see org.eclipse.etrice.etunit.converter.Etunit.FailureType#getType()
 	 * @see #getFailureType()
 	 * @generated
 	 */
-	EAttribute getFailureType_Actual();
+	EAttribute getFailureType_Type();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.etrice.etunit.converter.Etunit.PropertiesType <em>Properties Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Properties Type</em>'.
+	 * @see org.eclipse.etrice.etunit.converter.Etunit.PropertiesType
+	 * @generated
+	 */
+	EClass getPropertiesType();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.etunit.converter.Etunit.PropertiesType#getProperty <em>Property</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Property</em>'.
+	 * @see org.eclipse.etrice.etunit.converter.Etunit.PropertiesType#getProperty()
+	 * @see #getPropertiesType()
+	 * @generated
+	 */
+	EReference getPropertiesType_Property();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.etrice.etunit.converter.Etunit.PropertyType <em>Property Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Property Type</em>'.
+	 * @see org.eclipse.etrice.etunit.converter.Etunit.PropertyType
+	 * @generated
+	 */
+	EClass getPropertyType();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.etrice.etunit.converter.Etunit.PropertyType#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see org.eclipse.etrice.etunit.converter.Etunit.PropertyType#getName()
+	 * @see #getPropertyType()
+	 * @generated
+	 */
+	EAttribute getPropertyType_Name();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.etrice.etunit.converter.Etunit.PropertyType#getValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Value</em>'.
+	 * @see org.eclipse.etrice.etunit.converter.Etunit.PropertyType#getValue()
+	 * @see #getPropertyType()
+	 * @generated
+	 */
+	EAttribute getPropertyType_Value();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.etrice.etunit.converter.Etunit.SkippedType <em>Skipped Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Skipped Type</em>'.
+	 * @see org.eclipse.etrice.etunit.converter.Etunit.SkippedType
+	 * @generated
+	 */
+	EClass getSkippedType();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link org.eclipse.etrice.etunit.converter.Etunit.SkippedType#getMixed <em>Mixed</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Mixed</em>'.
+	 * @see org.eclipse.etrice.etunit.converter.Etunit.SkippedType#getMixed()
+	 * @see #getSkippedType()
+	 * @generated
+	 */
+	EAttribute getSkippedType_Mixed();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.etrice.etunit.converter.Etunit.SkippedType#getMessage <em>Message</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Message</em>'.
+	 * @see org.eclipse.etrice.etunit.converter.Etunit.SkippedType#getMessage()
+	 * @see #getSkippedType()
+	 * @generated
+	 */
+	EAttribute getSkippedType_Message();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.etrice.etunit.converter.Etunit.TestcaseType <em>Testcase Type</em>}'.
@@ -688,10 +1149,21 @@ public interface EtunitPackage extends EPackage {
 	EClass getTestcaseType();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.etrice.etunit.converter.Etunit.TestcaseType#getError <em>Error</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.etrice.etunit.converter.Etunit.TestcaseType#getSkipped <em>Skipped</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Error</em>'.
+	 * @return the meta object for the containment reference '<em>Skipped</em>'.
+	 * @see org.eclipse.etrice.etunit.converter.Etunit.TestcaseType#getSkipped()
+	 * @see #getTestcaseType()
+	 * @generated
+	 */
+	EReference getTestcaseType_Skipped();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.etunit.converter.Etunit.TestcaseType#getError <em>Error</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Error</em>'.
 	 * @see org.eclipse.etrice.etunit.converter.Etunit.TestcaseType#getError()
 	 * @see #getTestcaseType()
 	 * @generated
@@ -699,15 +1171,48 @@ public interface EtunitPackage extends EPackage {
 	EReference getTestcaseType_Error();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.etrice.etunit.converter.Etunit.TestcaseType#getFailure <em>Failure</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.etunit.converter.Etunit.TestcaseType#getFailure <em>Failure</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Failure</em>'.
+	 * @return the meta object for the containment reference list '<em>Failure</em>'.
 	 * @see org.eclipse.etrice.etunit.converter.Etunit.TestcaseType#getFailure()
 	 * @see #getTestcaseType()
 	 * @generated
 	 */
 	EReference getTestcaseType_Failure();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link org.eclipse.etrice.etunit.converter.Etunit.TestcaseType#getSystemOut <em>System Out</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>System Out</em>'.
+	 * @see org.eclipse.etrice.etunit.converter.Etunit.TestcaseType#getSystemOut()
+	 * @see #getTestcaseType()
+	 * @generated
+	 */
+	EAttribute getTestcaseType_SystemOut();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link org.eclipse.etrice.etunit.converter.Etunit.TestcaseType#getSystemErr <em>System Err</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>System Err</em>'.
+	 * @see org.eclipse.etrice.etunit.converter.Etunit.TestcaseType#getSystemErr()
+	 * @see #getTestcaseType()
+	 * @generated
+	 */
+	EAttribute getTestcaseType_SystemErr();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.etrice.etunit.converter.Etunit.TestcaseType#getAssertions <em>Assertions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Assertions</em>'.
+	 * @see org.eclipse.etrice.etunit.converter.Etunit.TestcaseType#getAssertions()
+	 * @see #getTestcaseType()
+	 * @generated
+	 */
+	EAttribute getTestcaseType_Assertions();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.etrice.etunit.converter.Etunit.TestcaseType#getClassname <em>Classname</em>}'.
@@ -732,6 +1237,17 @@ public interface EtunitPackage extends EPackage {
 	EAttribute getTestcaseType_Name();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.etrice.etunit.converter.Etunit.TestcaseType#getStatus <em>Status</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Status</em>'.
+	 * @see org.eclipse.etrice.etunit.converter.Etunit.TestcaseType#getStatus()
+	 * @see #getTestcaseType()
+	 * @generated
+	 */
+	EAttribute getTestcaseType_Status();
+
+	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.etrice.etunit.converter.Etunit.TestcaseType#getTime <em>Time</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -741,104 +1257,6 @@ public interface EtunitPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getTestcaseType_Time();
-
-	/**
-	 * Returns the meta object for class '{@link org.eclipse.etrice.etunit.converter.Etunit.Testsuite <em>Testsuite</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Testsuite</em>'.
-	 * @see org.eclipse.etrice.etunit.converter.Etunit.Testsuite
-	 * @generated
-	 */
-	EClass getTestsuite();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.etunit.converter.Etunit.Testsuite#getTestcase <em>Testcase</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Testcase</em>'.
-	 * @see org.eclipse.etrice.etunit.converter.Etunit.Testsuite#getTestcase()
-	 * @see #getTestsuite()
-	 * @generated
-	 */
-	EReference getTestsuite_Testcase();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.etrice.etunit.converter.Etunit.Testsuite#getErrors <em>Errors</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Errors</em>'.
-	 * @see org.eclipse.etrice.etunit.converter.Etunit.Testsuite#getErrors()
-	 * @see #getTestsuite()
-	 * @generated
-	 */
-	EAttribute getTestsuite_Errors();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.etrice.etunit.converter.Etunit.Testsuite#getFailures <em>Failures</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Failures</em>'.
-	 * @see org.eclipse.etrice.etunit.converter.Etunit.Testsuite#getFailures()
-	 * @see #getTestsuite()
-	 * @generated
-	 */
-	EAttribute getTestsuite_Failures();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.etrice.etunit.converter.Etunit.Testsuite#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see org.eclipse.etrice.etunit.converter.Etunit.Testsuite#getName()
-	 * @see #getTestsuite()
-	 * @generated
-	 */
-	EAttribute getTestsuite_Name();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.etrice.etunit.converter.Etunit.Testsuite#getSkipped <em>Skipped</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Skipped</em>'.
-	 * @see org.eclipse.etrice.etunit.converter.Etunit.Testsuite#getSkipped()
-	 * @see #getTestsuite()
-	 * @generated
-	 */
-	EAttribute getTestsuite_Skipped();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.etrice.etunit.converter.Etunit.Testsuite#getTests <em>Tests</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Tests</em>'.
-	 * @see org.eclipse.etrice.etunit.converter.Etunit.Testsuite#getTests()
-	 * @see #getTestsuite()
-	 * @generated
-	 */
-	EAttribute getTestsuite_Tests();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.etrice.etunit.converter.Etunit.Testsuite#getTime <em>Time</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Time</em>'.
-	 * @see org.eclipse.etrice.etunit.converter.Etunit.Testsuite#getTime()
-	 * @see #getTestsuite()
-	 * @generated
-	 */
-	EAttribute getTestsuite_Time();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.etrice.etunit.converter.Etunit.Testsuite#getTimestamp <em>Timestamp</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Timestamp</em>'.
-	 * @see org.eclipse.etrice.etunit.converter.Etunit.Testsuite#getTimestamp()
-	 * @see #getTestsuite()
-	 * @generated
-	 */
-	EAttribute getTestsuite_Timestamp();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.etrice.etunit.converter.Etunit.TestsuitesType <em>Testsuites Type</em>}'.
@@ -862,6 +1280,72 @@ public interface EtunitPackage extends EPackage {
 	EReference getTestsuitesType_Testsuite();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.etrice.etunit.converter.Etunit.TestsuitesType#getDisabled <em>Disabled</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Disabled</em>'.
+	 * @see org.eclipse.etrice.etunit.converter.Etunit.TestsuitesType#getDisabled()
+	 * @see #getTestsuitesType()
+	 * @generated
+	 */
+	EAttribute getTestsuitesType_Disabled();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.etrice.etunit.converter.Etunit.TestsuitesType#getErrors <em>Errors</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Errors</em>'.
+	 * @see org.eclipse.etrice.etunit.converter.Etunit.TestsuitesType#getErrors()
+	 * @see #getTestsuitesType()
+	 * @generated
+	 */
+	EAttribute getTestsuitesType_Errors();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.etrice.etunit.converter.Etunit.TestsuitesType#getFailures <em>Failures</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Failures</em>'.
+	 * @see org.eclipse.etrice.etunit.converter.Etunit.TestsuitesType#getFailures()
+	 * @see #getTestsuitesType()
+	 * @generated
+	 */
+	EAttribute getTestsuitesType_Failures();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.etrice.etunit.converter.Etunit.TestsuitesType#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see org.eclipse.etrice.etunit.converter.Etunit.TestsuitesType#getName()
+	 * @see #getTestsuitesType()
+	 * @generated
+	 */
+	EAttribute getTestsuitesType_Name();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.etrice.etunit.converter.Etunit.TestsuitesType#getTests <em>Tests</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Tests</em>'.
+	 * @see org.eclipse.etrice.etunit.converter.Etunit.TestsuitesType#getTests()
+	 * @see #getTestsuitesType()
+	 * @generated
+	 */
+	EAttribute getTestsuitesType_Tests();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.etrice.etunit.converter.Etunit.TestsuitesType#getTime <em>Time</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Time</em>'.
+	 * @see org.eclipse.etrice.etunit.converter.Etunit.TestsuitesType#getTime()
+	 * @see #getTestsuitesType()
+	 * @generated
+	 */
+	EAttribute getTestsuitesType_Time();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.etrice.etunit.converter.Etunit.TestsuiteType <em>Testsuite Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -872,40 +1356,169 @@ public interface EtunitPackage extends EPackage {
 	EClass getTestsuiteType();
 
 	/**
-	 * Returns the meta object for data type '{@link javax.xml.datatype.XMLGregorianCalendar <em>ISO8601DATETIMEPATTERN</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.etrice.etunit.converter.Etunit.TestsuiteType#getProperties <em>Properties</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for data type '<em>ISO8601DATETIMEPATTERN</em>'.
-	 * @see javax.xml.datatype.XMLGregorianCalendar
-	 * @model instanceClass="javax.xml.datatype.XMLGregorianCalendar"
-	 *        extendedMetaData="name='ISO8601_DATETIME_PATTERN' baseType='http://www.eclipse.org/emf/2003/XMLType#dateTime' pattern='[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}'"
+	 * @return the meta object for the containment reference '<em>Properties</em>'.
+	 * @see org.eclipse.etrice.etunit.converter.Etunit.TestsuiteType#getProperties()
+	 * @see #getTestsuiteType()
 	 * @generated
 	 */
-	EDataType getISO8601DATETIMEPATTERN();
+	EReference getTestsuiteType_Properties();
 
 	/**
-	 * Returns the meta object for data type '{@link java.lang.String <em>Name Type</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.etunit.converter.Etunit.TestsuiteType#getTestcase <em>Testcase</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for data type '<em>Name Type</em>'.
-	 * @see java.lang.String
-	 * @model instanceClass="java.lang.String"
-	 *        extendedMetaData="name='name_._type' baseType='http://www.eclipse.org/emf/2003/XMLType#token' minLength='1'"
+	 * @return the meta object for the containment reference list '<em>Testcase</em>'.
+	 * @see org.eclipse.etrice.etunit.converter.Etunit.TestsuiteType#getTestcase()
+	 * @see #getTestsuiteType()
 	 * @generated
 	 */
-	EDataType getNameType();
+	EReference getTestsuiteType_Testcase();
 
 	/**
-	 * Returns the meta object for data type '{@link java.lang.String <em>Pre String</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.etrice.etunit.converter.Etunit.TestsuiteType#getSystemOut <em>System Out</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for data type '<em>Pre String</em>'.
-	 * @see java.lang.String
-	 * @model instanceClass="java.lang.String"
-	 *        extendedMetaData="name='pre-string' baseType='http://www.eclipse.org/emf/2003/XMLType#string' whiteSpace='preserve'"
+	 * @return the meta object for the attribute '<em>System Out</em>'.
+	 * @see org.eclipse.etrice.etunit.converter.Etunit.TestsuiteType#getSystemOut()
+	 * @see #getTestsuiteType()
 	 * @generated
 	 */
-	EDataType getPreString();
+	EAttribute getTestsuiteType_SystemOut();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.etrice.etunit.converter.Etunit.TestsuiteType#getSystemErr <em>System Err</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>System Err</em>'.
+	 * @see org.eclipse.etrice.etunit.converter.Etunit.TestsuiteType#getSystemErr()
+	 * @see #getTestsuiteType()
+	 * @generated
+	 */
+	EAttribute getTestsuiteType_SystemErr();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.etrice.etunit.converter.Etunit.TestsuiteType#getDisabled <em>Disabled</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Disabled</em>'.
+	 * @see org.eclipse.etrice.etunit.converter.Etunit.TestsuiteType#getDisabled()
+	 * @see #getTestsuiteType()
+	 * @generated
+	 */
+	EAttribute getTestsuiteType_Disabled();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.etrice.etunit.converter.Etunit.TestsuiteType#getErrors <em>Errors</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Errors</em>'.
+	 * @see org.eclipse.etrice.etunit.converter.Etunit.TestsuiteType#getErrors()
+	 * @see #getTestsuiteType()
+	 * @generated
+	 */
+	EAttribute getTestsuiteType_Errors();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.etrice.etunit.converter.Etunit.TestsuiteType#getFailures <em>Failures</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Failures</em>'.
+	 * @see org.eclipse.etrice.etunit.converter.Etunit.TestsuiteType#getFailures()
+	 * @see #getTestsuiteType()
+	 * @generated
+	 */
+	EAttribute getTestsuiteType_Failures();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.etrice.etunit.converter.Etunit.TestsuiteType#getHostname <em>Hostname</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Hostname</em>'.
+	 * @see org.eclipse.etrice.etunit.converter.Etunit.TestsuiteType#getHostname()
+	 * @see #getTestsuiteType()
+	 * @generated
+	 */
+	EAttribute getTestsuiteType_Hostname();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.etrice.etunit.converter.Etunit.TestsuiteType#getId <em>Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Id</em>'.
+	 * @see org.eclipse.etrice.etunit.converter.Etunit.TestsuiteType#getId()
+	 * @see #getTestsuiteType()
+	 * @generated
+	 */
+	EAttribute getTestsuiteType_Id();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.etrice.etunit.converter.Etunit.TestsuiteType#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see org.eclipse.etrice.etunit.converter.Etunit.TestsuiteType#getName()
+	 * @see #getTestsuiteType()
+	 * @generated
+	 */
+	EAttribute getTestsuiteType_Name();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.etrice.etunit.converter.Etunit.TestsuiteType#getPackage <em>Package</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Package</em>'.
+	 * @see org.eclipse.etrice.etunit.converter.Etunit.TestsuiteType#getPackage()
+	 * @see #getTestsuiteType()
+	 * @generated
+	 */
+	EAttribute getTestsuiteType_Package();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.etrice.etunit.converter.Etunit.TestsuiteType#getSkipped <em>Skipped</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Skipped</em>'.
+	 * @see org.eclipse.etrice.etunit.converter.Etunit.TestsuiteType#getSkipped()
+	 * @see #getTestsuiteType()
+	 * @generated
+	 */
+	EAttribute getTestsuiteType_Skipped();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.etrice.etunit.converter.Etunit.TestsuiteType#getTests <em>Tests</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Tests</em>'.
+	 * @see org.eclipse.etrice.etunit.converter.Etunit.TestsuiteType#getTests()
+	 * @see #getTestsuiteType()
+	 * @generated
+	 */
+	EAttribute getTestsuiteType_Tests();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.etrice.etunit.converter.Etunit.TestsuiteType#getTime <em>Time</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Time</em>'.
+	 * @see org.eclipse.etrice.etunit.converter.Etunit.TestsuiteType#getTime()
+	 * @see #getTestsuiteType()
+	 * @generated
+	 */
+	EAttribute getTestsuiteType_Time();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.etrice.etunit.converter.Etunit.TestsuiteType#getTimestamp <em>Timestamp</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Timestamp</em>'.
+	 * @see org.eclipse.etrice.etunit.converter.Etunit.TestsuiteType#getTimestamp()
+	 * @see #getTestsuiteType()
+	 * @generated
+	 */
+	EAttribute getTestsuiteType_Timestamp();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -922,6 +1535,7 @@ public interface EtunitPackage extends EPackage {
 	 * <ul>
 	 *   <li>each class,</li>
 	 *   <li>each feature of each class,</li>
+	 *   <li>each operation of each class,</li>
 	 *   <li>each enum,</li>
 	 *   <li>and each data type</li>
 	 * </ul>
@@ -964,6 +1578,70 @@ public interface EtunitPackage extends EPackage {
 		EReference DOCUMENT_ROOT__XSI_SCHEMA_LOCATION = eINSTANCE.getDocumentRoot_XSISchemaLocation();
 
 		/**
+		 * The meta object literal for the '<em><b>Error</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DOCUMENT_ROOT__ERROR = eINSTANCE.getDocumentRoot_Error();
+
+		/**
+		 * The meta object literal for the '<em><b>Failure</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DOCUMENT_ROOT__FAILURE = eINSTANCE.getDocumentRoot_Failure();
+
+		/**
+		 * The meta object literal for the '<em><b>Properties</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DOCUMENT_ROOT__PROPERTIES = eINSTANCE.getDocumentRoot_Properties();
+
+		/**
+		 * The meta object literal for the '<em><b>Property</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DOCUMENT_ROOT__PROPERTY = eINSTANCE.getDocumentRoot_Property();
+
+		/**
+		 * The meta object literal for the '<em><b>Skipped</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DOCUMENT_ROOT__SKIPPED = eINSTANCE.getDocumentRoot_Skipped();
+
+		/**
+		 * The meta object literal for the '<em><b>System Err</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DOCUMENT_ROOT__SYSTEM_ERR = eINSTANCE.getDocumentRoot_SystemErr();
+
+		/**
+		 * The meta object literal for the '<em><b>System Out</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DOCUMENT_ROOT__SYSTEM_OUT = eINSTANCE.getDocumentRoot_SystemOut();
+
+		/**
+		 * The meta object literal for the '<em><b>Testcase</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DOCUMENT_ROOT__TESTCASE = eINSTANCE.getDocumentRoot_Testcase();
+
+		/**
 		 * The meta object literal for the '<em><b>Testsuite</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -998,20 +1676,20 @@ public interface EtunitPackage extends EPackage {
 		EAttribute ERROR_TYPE__MIXED = eINSTANCE.getErrorType_Mixed();
 
 		/**
-		 * The meta object literal for the '<em><b>Expected</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Message</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute ERROR_TYPE__EXPECTED = eINSTANCE.getErrorType_Expected();
+		EAttribute ERROR_TYPE__MESSAGE = eINSTANCE.getErrorType_Message();
 
 		/**
-		 * The meta object literal for the '<em><b>Actual</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute ERROR_TYPE__ACTUAL = eINSTANCE.getErrorType_Actual();
+		EAttribute ERROR_TYPE__TYPE = eINSTANCE.getErrorType_Type();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.etrice.etunit.converter.Etunit.impl.FailureTypeImpl <em>Failure Type</em>}' class.
@@ -1032,20 +1710,90 @@ public interface EtunitPackage extends EPackage {
 		EAttribute FAILURE_TYPE__MIXED = eINSTANCE.getFailureType_Mixed();
 
 		/**
-		 * The meta object literal for the '<em><b>Expected</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Message</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute FAILURE_TYPE__EXPECTED = eINSTANCE.getFailureType_Expected();
+		EAttribute FAILURE_TYPE__MESSAGE = eINSTANCE.getFailureType_Message();
 
 		/**
-		 * The meta object literal for the '<em><b>Actual</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute FAILURE_TYPE__ACTUAL = eINSTANCE.getFailureType_Actual();
+		EAttribute FAILURE_TYPE__TYPE = eINSTANCE.getFailureType_Type();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.etrice.etunit.converter.Etunit.impl.PropertiesTypeImpl <em>Properties Type</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.etrice.etunit.converter.Etunit.impl.PropertiesTypeImpl
+		 * @see org.eclipse.etrice.etunit.converter.Etunit.impl.EtunitPackageImpl#getPropertiesType()
+		 * @generated
+		 */
+		EClass PROPERTIES_TYPE = eINSTANCE.getPropertiesType();
+
+		/**
+		 * The meta object literal for the '<em><b>Property</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PROPERTIES_TYPE__PROPERTY = eINSTANCE.getPropertiesType_Property();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.etrice.etunit.converter.Etunit.impl.PropertyTypeImpl <em>Property Type</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.etrice.etunit.converter.Etunit.impl.PropertyTypeImpl
+		 * @see org.eclipse.etrice.etunit.converter.Etunit.impl.EtunitPackageImpl#getPropertyType()
+		 * @generated
+		 */
+		EClass PROPERTY_TYPE = eINSTANCE.getPropertyType();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PROPERTY_TYPE__NAME = eINSTANCE.getPropertyType_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PROPERTY_TYPE__VALUE = eINSTANCE.getPropertyType_Value();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.etrice.etunit.converter.Etunit.impl.SkippedTypeImpl <em>Skipped Type</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.etrice.etunit.converter.Etunit.impl.SkippedTypeImpl
+		 * @see org.eclipse.etrice.etunit.converter.Etunit.impl.EtunitPackageImpl#getSkippedType()
+		 * @generated
+		 */
+		EClass SKIPPED_TYPE = eINSTANCE.getSkippedType();
+
+		/**
+		 * The meta object literal for the '<em><b>Mixed</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SKIPPED_TYPE__MIXED = eINSTANCE.getSkippedType_Mixed();
+
+		/**
+		 * The meta object literal for the '<em><b>Message</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SKIPPED_TYPE__MESSAGE = eINSTANCE.getSkippedType_Message();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.etrice.etunit.converter.Etunit.impl.TestcaseTypeImpl <em>Testcase Type</em>}' class.
@@ -1058,7 +1806,15 @@ public interface EtunitPackage extends EPackage {
 		EClass TESTCASE_TYPE = eINSTANCE.getTestcaseType();
 
 		/**
-		 * The meta object literal for the '<em><b>Error</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Skipped</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TESTCASE_TYPE__SKIPPED = eINSTANCE.getTestcaseType_Skipped();
+
+		/**
+		 * The meta object literal for the '<em><b>Error</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -1066,12 +1822,36 @@ public interface EtunitPackage extends EPackage {
 		EReference TESTCASE_TYPE__ERROR = eINSTANCE.getTestcaseType_Error();
 
 		/**
-		 * The meta object literal for the '<em><b>Failure</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Failure</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference TESTCASE_TYPE__FAILURE = eINSTANCE.getTestcaseType_Failure();
+
+		/**
+		 * The meta object literal for the '<em><b>System Out</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TESTCASE_TYPE__SYSTEM_OUT = eINSTANCE.getTestcaseType_SystemOut();
+
+		/**
+		 * The meta object literal for the '<em><b>System Err</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TESTCASE_TYPE__SYSTEM_ERR = eINSTANCE.getTestcaseType_SystemErr();
+
+		/**
+		 * The meta object literal for the '<em><b>Assertions</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TESTCASE_TYPE__ASSERTIONS = eINSTANCE.getTestcaseType_Assertions();
 
 		/**
 		 * The meta object literal for the '<em><b>Classname</b></em>' attribute feature.
@@ -1090,86 +1870,20 @@ public interface EtunitPackage extends EPackage {
 		EAttribute TESTCASE_TYPE__NAME = eINSTANCE.getTestcaseType_Name();
 
 		/**
+		 * The meta object literal for the '<em><b>Status</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TESTCASE_TYPE__STATUS = eINSTANCE.getTestcaseType_Status();
+
+		/**
 		 * The meta object literal for the '<em><b>Time</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EAttribute TESTCASE_TYPE__TIME = eINSTANCE.getTestcaseType_Time();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipse.etrice.etunit.converter.Etunit.impl.TestsuiteImpl <em>Testsuite</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.etrice.etunit.converter.Etunit.impl.TestsuiteImpl
-		 * @see org.eclipse.etrice.etunit.converter.Etunit.impl.EtunitPackageImpl#getTestsuite()
-		 * @generated
-		 */
-		EClass TESTSUITE = eINSTANCE.getTestsuite();
-
-		/**
-		 * The meta object literal for the '<em><b>Testcase</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TESTSUITE__TESTCASE = eINSTANCE.getTestsuite_Testcase();
-
-		/**
-		 * The meta object literal for the '<em><b>Errors</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute TESTSUITE__ERRORS = eINSTANCE.getTestsuite_Errors();
-
-		/**
-		 * The meta object literal for the '<em><b>Failures</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute TESTSUITE__FAILURES = eINSTANCE.getTestsuite_Failures();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute TESTSUITE__NAME = eINSTANCE.getTestsuite_Name();
-
-		/**
-		 * The meta object literal for the '<em><b>Skipped</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute TESTSUITE__SKIPPED = eINSTANCE.getTestsuite_Skipped();
-
-		/**
-		 * The meta object literal for the '<em><b>Tests</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute TESTSUITE__TESTS = eINSTANCE.getTestsuite_Tests();
-
-		/**
-		 * The meta object literal for the '<em><b>Time</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute TESTSUITE__TIME = eINSTANCE.getTestsuite_Time();
-
-		/**
-		 * The meta object literal for the '<em><b>Timestamp</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute TESTSUITE__TIMESTAMP = eINSTANCE.getTestsuite_Timestamp();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.etrice.etunit.converter.Etunit.impl.TestsuitesTypeImpl <em>Testsuites Type</em>}' class.
@@ -1190,6 +1904,54 @@ public interface EtunitPackage extends EPackage {
 		EReference TESTSUITES_TYPE__TESTSUITE = eINSTANCE.getTestsuitesType_Testsuite();
 
 		/**
+		 * The meta object literal for the '<em><b>Disabled</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TESTSUITES_TYPE__DISABLED = eINSTANCE.getTestsuitesType_Disabled();
+
+		/**
+		 * The meta object literal for the '<em><b>Errors</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TESTSUITES_TYPE__ERRORS = eINSTANCE.getTestsuitesType_Errors();
+
+		/**
+		 * The meta object literal for the '<em><b>Failures</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TESTSUITES_TYPE__FAILURES = eINSTANCE.getTestsuitesType_Failures();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TESTSUITES_TYPE__NAME = eINSTANCE.getTestsuitesType_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Tests</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TESTSUITES_TYPE__TESTS = eINSTANCE.getTestsuitesType_Tests();
+
+		/**
+		 * The meta object literal for the '<em><b>Time</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TESTSUITES_TYPE__TIME = eINSTANCE.getTestsuitesType_Time();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.etrice.etunit.converter.Etunit.impl.TestsuiteTypeImpl <em>Testsuite Type</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1200,34 +1962,124 @@ public interface EtunitPackage extends EPackage {
 		EClass TESTSUITE_TYPE = eINSTANCE.getTestsuiteType();
 
 		/**
-		 * The meta object literal for the '<em>ISO8601DATETIMEPATTERN</em>' data type.
+		 * The meta object literal for the '<em><b>Properties</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see javax.xml.datatype.XMLGregorianCalendar
-		 * @see org.eclipse.etrice.etunit.converter.Etunit.impl.EtunitPackageImpl#getISO8601DATETIMEPATTERN()
 		 * @generated
 		 */
-		EDataType ISO8601DATETIMEPATTERN = eINSTANCE.getISO8601DATETIMEPATTERN();
+		EReference TESTSUITE_TYPE__PROPERTIES = eINSTANCE.getTestsuiteType_Properties();
 
 		/**
-		 * The meta object literal for the '<em>Name Type</em>' data type.
+		 * The meta object literal for the '<em><b>Testcase</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see java.lang.String
-		 * @see org.eclipse.etrice.etunit.converter.Etunit.impl.EtunitPackageImpl#getNameType()
 		 * @generated
 		 */
-		EDataType NAME_TYPE = eINSTANCE.getNameType();
+		EReference TESTSUITE_TYPE__TESTCASE = eINSTANCE.getTestsuiteType_Testcase();
 
 		/**
-		 * The meta object literal for the '<em>Pre String</em>' data type.
+		 * The meta object literal for the '<em><b>System Out</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see java.lang.String
-		 * @see org.eclipse.etrice.etunit.converter.Etunit.impl.EtunitPackageImpl#getPreString()
 		 * @generated
 		 */
-		EDataType PRE_STRING = eINSTANCE.getPreString();
+		EAttribute TESTSUITE_TYPE__SYSTEM_OUT = eINSTANCE.getTestsuiteType_SystemOut();
+
+		/**
+		 * The meta object literal for the '<em><b>System Err</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TESTSUITE_TYPE__SYSTEM_ERR = eINSTANCE.getTestsuiteType_SystemErr();
+
+		/**
+		 * The meta object literal for the '<em><b>Disabled</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TESTSUITE_TYPE__DISABLED = eINSTANCE.getTestsuiteType_Disabled();
+
+		/**
+		 * The meta object literal for the '<em><b>Errors</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TESTSUITE_TYPE__ERRORS = eINSTANCE.getTestsuiteType_Errors();
+
+		/**
+		 * The meta object literal for the '<em><b>Failures</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TESTSUITE_TYPE__FAILURES = eINSTANCE.getTestsuiteType_Failures();
+
+		/**
+		 * The meta object literal for the '<em><b>Hostname</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TESTSUITE_TYPE__HOSTNAME = eINSTANCE.getTestsuiteType_Hostname();
+
+		/**
+		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TESTSUITE_TYPE__ID = eINSTANCE.getTestsuiteType_Id();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TESTSUITE_TYPE__NAME = eINSTANCE.getTestsuiteType_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Package</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TESTSUITE_TYPE__PACKAGE = eINSTANCE.getTestsuiteType_Package();
+
+		/**
+		 * The meta object literal for the '<em><b>Skipped</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TESTSUITE_TYPE__SKIPPED = eINSTANCE.getTestsuiteType_Skipped();
+
+		/**
+		 * The meta object literal for the '<em><b>Tests</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TESTSUITE_TYPE__TESTS = eINSTANCE.getTestsuiteType_Tests();
+
+		/**
+		 * The meta object literal for the '<em><b>Time</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TESTSUITE_TYPE__TIME = eINSTANCE.getTestsuiteType_Time();
+
+		/**
+		 * The meta object literal for the '<em><b>Timestamp</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TESTSUITE_TYPE__TIMESTAMP = eINSTANCE.getTestsuiteType_Timestamp();
 
 	}
 

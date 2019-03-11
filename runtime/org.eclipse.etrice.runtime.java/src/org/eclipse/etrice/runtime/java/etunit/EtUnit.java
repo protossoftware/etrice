@@ -130,6 +130,17 @@ public class EtUnit {
 			}
 		}
 	}
+	
+	public static void etUnit_skipTestCase(int id, String msg) {
+		if (out!=null) {
+			try {
+				out.write("tc skip "+id+": "+msg+"\n");
+				out.flush();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 
 	public static int etUnit_openAll(String testResultPath, String testFileName, String testSuiteName, String testCaseName){
 		etUnit_open(testResultPath, testFileName);

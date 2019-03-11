@@ -1,8 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
- * $Id$
  */
 package org.eclipse.etrice.etunit.converter.Etunit.util;
 
@@ -84,12 +80,20 @@ public class EtunitAdapterFactory extends AdapterFactoryImpl {
 				return createFailureTypeAdapter();
 			}
 			@Override
-			public Adapter caseTestcaseType(TestcaseType object) {
-				return createTestcaseTypeAdapter();
+			public Adapter casePropertiesType(PropertiesType object) {
+				return createPropertiesTypeAdapter();
 			}
 			@Override
-			public Adapter caseTestsuite(Testsuite object) {
-				return createTestsuiteAdapter();
+			public Adapter casePropertyType(PropertyType object) {
+				return createPropertyTypeAdapter();
+			}
+			@Override
+			public Adapter caseSkippedType(SkippedType object) {
+				return createSkippedTypeAdapter();
+			}
+			@Override
+			public Adapter caseTestcaseType(TestcaseType object) {
+				return createTestcaseTypeAdapter();
 			}
 			@Override
 			public Adapter caseTestsuitesType(TestsuitesType object) {
@@ -162,6 +166,48 @@ public class EtunitAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.etunit.converter.Etunit.PropertiesType <em>Properties Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.etrice.etunit.converter.Etunit.PropertiesType
+	 * @generated
+	 */
+	public Adapter createPropertiesTypeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.etunit.converter.Etunit.PropertyType <em>Property Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.etrice.etunit.converter.Etunit.PropertyType
+	 * @generated
+	 */
+	public Adapter createPropertyTypeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.etunit.converter.Etunit.SkippedType <em>Skipped Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.etrice.etunit.converter.Etunit.SkippedType
+	 * @generated
+	 */
+	public Adapter createSkippedTypeAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.etunit.converter.Etunit.TestcaseType <em>Testcase Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -172,20 +218,6 @@ public class EtunitAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTestcaseTypeAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.etrice.etunit.converter.Etunit.Testsuite <em>Testsuite</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.etrice.etunit.converter.Etunit.Testsuite
-	 * @generated
-	 */
-	public Adapter createTestsuiteAdapter() {
 		return null;
 	}
 

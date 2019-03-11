@@ -69,6 +69,13 @@ etInt16 etUnit_openTestCase(const char* testCaseName);
  */
 void etUnit_closeTestCase(etInt16 id);
 /**
+ * skips a test case
+ *
+ * \param id the test case id
+ * \param msg the message or reason
+ */
+void etUnit_skipTestCase(etInt16 id, const char* msg);
+/**
  * indicate success of a test case
  *
  * \param id the test case id

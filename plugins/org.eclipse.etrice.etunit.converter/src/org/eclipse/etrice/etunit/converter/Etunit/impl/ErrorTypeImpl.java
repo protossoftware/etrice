@@ -1,18 +1,20 @@
 /**
- * <copyright>
- * </copyright>
- *
- * $Id$
  */
 package org.eclipse.etrice.etunit.converter.Etunit.impl;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+
 import org.eclipse.emf.ecore.util.BasicFeatureMap;
 import org.eclipse.emf.ecore.util.FeatureMap;
 import org.eclipse.emf.ecore.util.InternalEList;
+
 import org.eclipse.etrice.etunit.converter.Etunit.ErrorType;
 import org.eclipse.etrice.etunit.converter.Etunit.EtunitPackage;
 
@@ -22,16 +24,16 @@ import org.eclipse.etrice.etunit.converter.Etunit.EtunitPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.etrice.etunit.converter.Etunit.impl.ErrorTypeImpl#getMixed <em>Mixed</em>}</li>
- *   <li>{@link org.eclipse.etrice.etunit.converter.Etunit.impl.ErrorTypeImpl#getExpected <em>Expected</em>}</li>
- *   <li>{@link org.eclipse.etrice.etunit.converter.Etunit.impl.ErrorTypeImpl#getActual <em>Actual</em>}</li>
+ *   <li>{@link org.eclipse.etrice.etunit.converter.Etunit.impl.ErrorTypeImpl#getMessage <em>Message</em>}</li>
+ *   <li>{@link org.eclipse.etrice.etunit.converter.Etunit.impl.ErrorTypeImpl#getType <em>Type</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
-public class ErrorTypeImpl extends EObjectImpl implements ErrorType {
+public class ErrorTypeImpl extends MinimalEObjectImpl.Container implements ErrorType {
 	/**
 	 * The cached value of the '{@link #getMixed() <em>Mixed</em>}' attribute list.
 	 * <!-- begin-user-doc -->
@@ -43,24 +45,44 @@ public class ErrorTypeImpl extends EObjectImpl implements ErrorType {
 	protected FeatureMap mixed;
 
 	/**
-	 * The default value of the '{@link #getExpected() <em>Expected</em>}' attribute.
+	 * The default value of the '{@link #getMessage() <em>Message</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getExpected()
+	 * @see #getMessage()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String EXPECTED_EDEFAULT = null;
+	protected static final String MESSAGE_EDEFAULT = null;
 
 	/**
-	 * The default value of the '{@link #getActual() <em>Actual</em>}' attribute.
+	 * The cached value of the '{@link #getMessage() <em>Message</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getActual()
+	 * @see #getMessage()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String ACTUAL_EDEFAULT = null;
+	protected String message = MESSAGE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getType() <em>Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getType()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String TYPE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getType() <em>Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getType()
+	 * @generated
+	 * @ordered
+	 */
+	protected String type = TYPE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -86,6 +108,7 @@ public class ErrorTypeImpl extends EObjectImpl implements ErrorType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public FeatureMap getMixed() {
 		if (mixed == null) {
 			mixed = new BasicFeatureMap(this, EtunitPackage.ERROR_TYPE__MIXED);
@@ -98,8 +121,9 @@ public class ErrorTypeImpl extends EObjectImpl implements ErrorType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getExpected() {
-		return (String)getMixed().get(EtunitPackage.Literals.ERROR_TYPE__EXPECTED, true);
+	@Override
+	public String getMessage() {
+		return message;
 	}
 
 	/**
@@ -107,8 +131,12 @@ public class ErrorTypeImpl extends EObjectImpl implements ErrorType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setExpected(String newExpected) {
-		((FeatureMap.Internal)getMixed()).set(EtunitPackage.Literals.ERROR_TYPE__EXPECTED, newExpected);
+	@Override
+	public void setMessage(String newMessage) {
+		String oldMessage = message;
+		message = newMessage;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, EtunitPackage.ERROR_TYPE__MESSAGE, oldMessage, message));
 	}
 
 	/**
@@ -116,8 +144,9 @@ public class ErrorTypeImpl extends EObjectImpl implements ErrorType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getActual() {
-		return (String)getMixed().get(EtunitPackage.Literals.ERROR_TYPE__ACTUAL, true);
+	@Override
+	public String getType() {
+		return type;
 	}
 
 	/**
@@ -125,8 +154,12 @@ public class ErrorTypeImpl extends EObjectImpl implements ErrorType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setActual(String newActual) {
-		((FeatureMap.Internal)getMixed()).set(EtunitPackage.Literals.ERROR_TYPE__ACTUAL, newActual);
+	@Override
+	public void setType(String newType) {
+		String oldType = type;
+		type = newType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, EtunitPackage.ERROR_TYPE__TYPE, oldType, type));
 	}
 
 	/**
@@ -154,10 +187,10 @@ public class ErrorTypeImpl extends EObjectImpl implements ErrorType {
 			case EtunitPackage.ERROR_TYPE__MIXED:
 				if (coreType) return getMixed();
 				return ((FeatureMap.Internal)getMixed()).getWrapper();
-			case EtunitPackage.ERROR_TYPE__EXPECTED:
-				return getExpected();
-			case EtunitPackage.ERROR_TYPE__ACTUAL:
-				return getActual();
+			case EtunitPackage.ERROR_TYPE__MESSAGE:
+				return getMessage();
+			case EtunitPackage.ERROR_TYPE__TYPE:
+				return getType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -173,11 +206,11 @@ public class ErrorTypeImpl extends EObjectImpl implements ErrorType {
 			case EtunitPackage.ERROR_TYPE__MIXED:
 				((FeatureMap.Internal)getMixed()).set(newValue);
 				return;
-			case EtunitPackage.ERROR_TYPE__EXPECTED:
-				setExpected((String)newValue);
+			case EtunitPackage.ERROR_TYPE__MESSAGE:
+				setMessage((String)newValue);
 				return;
-			case EtunitPackage.ERROR_TYPE__ACTUAL:
-				setActual((String)newValue);
+			case EtunitPackage.ERROR_TYPE__TYPE:
+				setType((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -194,11 +227,11 @@ public class ErrorTypeImpl extends EObjectImpl implements ErrorType {
 			case EtunitPackage.ERROR_TYPE__MIXED:
 				getMixed().clear();
 				return;
-			case EtunitPackage.ERROR_TYPE__EXPECTED:
-				setExpected(EXPECTED_EDEFAULT);
+			case EtunitPackage.ERROR_TYPE__MESSAGE:
+				setMessage(MESSAGE_EDEFAULT);
 				return;
-			case EtunitPackage.ERROR_TYPE__ACTUAL:
-				setActual(ACTUAL_EDEFAULT);
+			case EtunitPackage.ERROR_TYPE__TYPE:
+				setType(TYPE_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -214,10 +247,10 @@ public class ErrorTypeImpl extends EObjectImpl implements ErrorType {
 		switch (featureID) {
 			case EtunitPackage.ERROR_TYPE__MIXED:
 				return mixed != null && !mixed.isEmpty();
-			case EtunitPackage.ERROR_TYPE__EXPECTED:
-				return EXPECTED_EDEFAULT == null ? getExpected() != null : !EXPECTED_EDEFAULT.equals(getExpected());
-			case EtunitPackage.ERROR_TYPE__ACTUAL:
-				return ACTUAL_EDEFAULT == null ? getActual() != null : !ACTUAL_EDEFAULT.equals(getActual());
+			case EtunitPackage.ERROR_TYPE__MESSAGE:
+				return MESSAGE_EDEFAULT == null ? message != null : !MESSAGE_EDEFAULT.equals(message);
+			case EtunitPackage.ERROR_TYPE__TYPE:
+				return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -231,9 +264,13 @@ public class ErrorTypeImpl extends EObjectImpl implements ErrorType {
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (mixed: ");
 		result.append(mixed);
+		result.append(", message: ");
+		result.append(message);
+		result.append(", type: ");
+		result.append(type);
 		result.append(')');
 		return result.toString();
 	}

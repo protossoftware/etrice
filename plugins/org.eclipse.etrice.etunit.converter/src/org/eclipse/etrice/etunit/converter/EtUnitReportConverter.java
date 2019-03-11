@@ -40,6 +40,7 @@ import org.eclipse.etrice.etunit.converter.Etunit.DocumentRoot;
 import org.eclipse.etrice.etunit.converter.Etunit.EtunitFactory;
 import org.eclipse.etrice.etunit.converter.Etunit.EtunitPackage;
 import org.eclipse.etrice.etunit.converter.Etunit.FailureType;
+import org.eclipse.etrice.etunit.converter.Etunit.SkippedType;
 import org.eclipse.etrice.etunit.converter.Etunit.TestcaseType;
 import org.eclipse.etrice.etunit.converter.Etunit.TestsuiteType;
 import org.eclipse.etrice.etunit.converter.Etunit.TestsuitesType;
@@ -223,6 +224,7 @@ public class EtUnitReportConverter {
 	
 	private static final String TC_END = "tc end";
 	private static final String TC_FAIL = "tc fail";
+	private static final String TC_SKIP = "tc skip";
 	private static final String TC_START = "tc start";
 	private static final String TS_START = "ts start: ";
 	public static final String ETU_EXTENSION = ".etu";
@@ -491,12 +493,12 @@ public class EtUnitReportConverter {
 					FailureType fail = EtunitFactory.eINSTANCE.createFailureType();
 					pos = line.indexOf('#')+1;
 					int end = line.indexOf('#', pos);
-					if (end>pos)
-						fail.setExpected(line.substring(pos, end));
+					String expectedMsg = (end>pos) ? "expected=" + line.substring(pos, end) : "";
 					pos = end+1;
 					end = line.indexOf('#', pos);
-					if (end>pos)
-						fail.setActual(line.substring(pos, end));
+					String actualMsg = (end>pos) ? " actual=" + line.substring(pos, end) : "";
+					if(!(expectedMsg+actualMsg).isEmpty())
+						fail.setMessage(expectedMsg + actualMsg);
 					pos = end+1;
 					end = line.indexOf('#', pos);
 					String loc = (end>pos)? line.substring(pos, end) : null;
@@ -505,7 +507,7 @@ public class EtUnitReportConverter {
 					if (loc!=null)
 						trace += "\n at "+loc;
 					FeatureMapUtil.addText(fail.getMixed(), trace);
-					tc.setFailure(fail);
+					tc.getFailure().add(fail);
 				}
 				else if (line.startsWith(TC_END)) {
 					int pos = line.indexOf(':');
@@ -517,7 +519,21 @@ public class EtUnitReportConverter {
 						return null;
 					}
 					// time was measured in ms. Convert to s
-					tc.setTime(BigDecimal.valueOf(time/1000.0));
+					tc.setTime(BigDecimal.valueOf(time/1000.0).toString());
+				}
+				else if (line.startsWith(TC_SKIP)) {
+					int pos = line.indexOf(':');
+					int id = Integer.parseInt(line.substring(8, pos));
+					TestcaseType tc = id2case.get(id);
+					if (tc==null) {
+						System.err.println("Error: in etUnit report line "+count+" - unknown test case id");
+						return null;
+					}
+					SkippedType skip = EtunitFactory.eINSTANCE.createSkippedType();
+					String msg = line.substring(pos+1).trim();
+					if(!msg.isEmpty()) 
+						skip.setMessage(msg);
+					tc.setSkipped(skip);
 				}
 				line = bufRead.readLine();
 				++count;
@@ -538,13 +554,12 @@ public class EtUnitReportConverter {
 			BigDecimal time = new BigDecimal(0);
 			for (TestcaseType tc : ts.getTestcase()) {
 				if (tc.getTime()!=null)
-					time = time.add(tc.getTime());
-				if (tc.getFailure()!=null)
-					++failures;
+					time = time.add(new BigDecimal(tc.getTime()));
+				failures += tc.getFailure().size();
 			}
-			ts.setTests(ts.getTestcase().size());
-			ts.setFailures(failures);
-			ts.setTime(time);
+			ts.setTests(Integer.toString(ts.getTestcase().size()));
+			ts.setFailures(Integer.toString(failures));
+			ts.setTime(time.toString());
 		}
 	}
 
