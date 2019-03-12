@@ -207,8 +207,7 @@ public class ValidationUtil extends FSMValidationUtil {
 						return Result.error("protocols don't match");
 					}
 					else {
-						// under some circumstances the protocols are instances of GeneralProtocolClass
-						// (why?)
+						// RoomValidator circumvents this case because its is already a linker error
 						if (!(pc1 instanceof ProtocolClass && pc2 instanceof ProtocolClass))
 							return Result.error("protocols don't match");
 						
@@ -234,10 +233,14 @@ public class ValidationUtil extends FSMValidationUtil {
 								String ns1 = ((RoomModel)pc1.eContainer()).getName();
 								String ns2 = ((RoomModel)pc2.eContainer()).getName();
 								if (!ns1.equals(ns2))
-									return Result.error("protocols don't match (same name, different name spaces)");
+									return Result.error("protocols have different name spaces");
+								if(pc1.eResource() != pc2.eResource())
+									return Result.error("protocols were not loaded uniquely - check imports");
 								
+								// should not happen
 								return Result.error("protocols don't match (but have same name)");
 							}
+							
 							return Result.error("protocols don't match");
 						}
 					}
