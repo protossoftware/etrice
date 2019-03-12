@@ -14,7 +14,6 @@
 
 package org.eclipse.etrice.generator.launch;
 
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -22,13 +21,12 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Objects;
 
-import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.core.runtime.preferences.InstanceScope;
@@ -193,22 +191,11 @@ public abstract class GeneratorLaunchConfigurationDelegate extends AbstractJavaL
 			argString.append(" -"+AbstractGeneratorOptions.LIB.getName());
 		}
 		if (configuration.getAttribute(GeneratorConfigTab.SAVE_GEN_MODEL, false)) {
-			argString.append(" -"+AbstractGeneratorOptions.SAVE_GEN_MODEL.getName());
-			
-			// HOWTO: resolve path variables and convert to workspace relative path
 			String genModelPath = configuration.getAttribute(GeneratorConfigTab.GEN_MODEL_PATH, "?");
-			IStringVariableManager manager = VariablesPlugin.getDefault().getStringVariableManager();
-			String path = manager.performStringSubstitution(genModelPath);
-			java.nio.file.Path p = Paths.get(path);
-			IContainer[] containers = ResourcesPlugin.getWorkspace().getRoot().findContainersForLocationURI(p.toUri());
-			if (containers.length>0) {
-				String folder = containers[0].toString().substring(2); // cut off leading P/
-				argString.append(" "+folder);
-			}
-			else {
-				// fall back to verbatim value
-				argString.append(" "+genModelPath);
-			}
+			genModelPath = VariablesPlugin.getDefault().getStringVariableManager().performStringSubstitution(genModelPath);
+			String path = new Path(genModelPath).toOSString();
+			argString.append(" -"+AbstractGeneratorOptions.SAVE_GEN_MODEL.getName());
+			argString.append(" "+path);
 		}
 		if (!configuration.getAttribute(GeneratorConfigTab.MAIN_METHOD_NAME, AbstractGeneratorOptions.MAIN_NAME.getDefaultValue()).equals(AbstractGeneratorOptions.MAIN_NAME.getDefaultValue())) {
 			argString.append(" -"+AbstractGeneratorOptions.MAIN_NAME.getName());

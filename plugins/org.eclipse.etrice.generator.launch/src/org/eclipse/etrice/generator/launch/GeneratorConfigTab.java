@@ -14,9 +14,7 @@
 
 package org.eclipse.etrice.generator.launch;
 
-import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.core.variables.VariablesPlugin;
 import org.eclipse.debug.core.ILaunchConfiguration;
@@ -35,7 +33,7 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
-import org.eclipse.ui.dialogs.ContainerSelectionDialog;
+import org.eclipse.ui.dialogs.SaveAsDialog;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
 
 /**
@@ -262,23 +260,17 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 	 * 
 	 */
 	protected void handlePathButtonSelected() {
-		ContainerSelectionDialog dialog = new ContainerSelectionDialog(getShell(),
-				   ResourcesPlugin.getWorkspace().getRoot(),
-				   false,
-				   "select a container for the generator model");
-		dialog.showClosedProjects(false);
+		SaveAsDialog dialog = new SaveAsDialog(getShell());
+		dialog.setOriginalName("genmodel.rim");
 		dialog.open();
-		Object[] results = dialog.getResult();	
-		if ((results != null) && (results.length > 0) && (results[0] instanceof IPath)) {
-			IPath path = (IPath)results[0];
-			//path = path.append("genmodel.rim");
-			String fname = path.toString();
-			fname = VariablesPlugin.getDefault().getStringVariableManager().generateVariableExpression("workspace_loc", fname);
-			genModelPath.setText(fname);
+		if(dialog.getResult() != null) {
+			String fname = dialog.getResult().toString();
+			String path = VariablesPlugin.getDefault().getStringVariableManager().generateVariableExpression("workspace_loc", null) + fname;
+			genModelPath.setText(path);
 			setErrorMessage(null);
 			setDirty(true);
 			updateLaunchConfigurationDialog();
-		}		
+		}
 	}
 
 	/* (non-Javadoc)
