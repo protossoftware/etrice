@@ -16,7 +16,6 @@ package org.eclipse.etrice.generator.launch;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.preferences.InstanceScope;
-import org.eclipse.core.variables.VariablesPlugin;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.debug.ui.AbstractLaunchConfigurationTab;
@@ -33,7 +32,6 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
-import org.eclipse.ui.dialogs.SaveAsDialog;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
 
 /**
@@ -76,7 +74,6 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 	private Button libButton;
 	private Button saveGenModel;
 	private Text genModelPath;
-	private Button browsePath;
 	private Button debugButton;
 	private Button mscButton;
 	private Button verboseButton;
@@ -120,6 +117,8 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 			}
 			
 		});
+		Label label = new Label(mainComposite, SWT.NONE);
+		label.setText("The file name for the generator model:");
 		genModelPath = new Text(mainComposite, SWT.SINGLE | SWT.BORDER);
     	genModelPath.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		genModelPath.addModifyListener(new ModifyListener() {
@@ -128,18 +127,6 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 				validate();
 				setDirty(true);
 				updateLaunchConfigurationDialog();
-			}
-		});
-		browsePath = createPushButton(mainComposite, "Browse...", null);
-		//browsePath.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 1, 1));
-		browsePath.addSelectionListener(new SelectionListener() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				handlePathButtonSelected();
-			}
-			@Override
-			public void widgetDefaultSelected(SelectionEvent e) {
-				handlePathButtonSelected();
 			}
 		});
 
@@ -167,7 +154,7 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 		verboseButton.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 2, 1));
 		verboseButton.addSelectionListener(new UpdateConfig());
 		
-		Label label = new Label(mainComposite, SWT.NONE);
+		label = new Label(mainComposite, SWT.NONE);
 		label.setText("The main method name:");
 		mainMethodName = new Text(mainComposite, SWT.SINGLE | SWT.BORDER);
 		mainMethodName.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
@@ -226,7 +213,6 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 	protected void handleSaveGenModelSelected() {
 		boolean save = saveGenModel.getSelection();
 		genModelPath.setEnabled(save);
-		browsePath.setEnabled(save);
 		validate();
 		setDirty(true);
 		updateLaunchConfigurationDialog();
@@ -256,23 +242,6 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 		setErrorMessage(null);
 	}
 
-	/**
-	 * 
-	 */
-	protected void handlePathButtonSelected() {
-		SaveAsDialog dialog = new SaveAsDialog(getShell());
-		dialog.setOriginalName("genmodel.rim");
-		dialog.open();
-		if(dialog.getResult() != null) {
-			String fname = dialog.getResult().toString();
-			String path = VariablesPlugin.getDefault().getStringVariableManager().generateVariableExpression("workspace_loc", null) + fname;
-			genModelPath.setText(path);
-			setErrorMessage(null);
-			setDirty(true);
-			updateLaunchConfigurationDialog();
-		}
-	}
-
 	/* (non-Javadoc)
 	 * @see org.eclipse.debug.ui.ILaunchConfigurationTab#setDefaults(org.eclipse.debug.core.ILaunchConfigurationWorkingCopy)
 	 */
@@ -291,7 +260,6 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 			boolean save = configuration.getAttribute(SAVE_GEN_MODEL, false);
 			saveGenModel.setSelection(save);
 			genModelPath.setEnabled(save);
-			browsePath.setEnabled(save);
 			genModelPath.setText(configuration.getAttribute(GEN_MODEL_PATH, ""));
 			mainMethodName.setText(configuration.getAttribute(MAIN_METHOD_NAME, AbstractGeneratorOptions.MAIN_NAME.getDefaultValue()));
 			debugButton.setSelection(configuration.getAttribute(DEBUG, false));

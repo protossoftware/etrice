@@ -26,7 +26,6 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.core.runtime.preferences.InstanceScope;
@@ -187,15 +186,14 @@ public abstract class GeneratorLaunchConfigurationDelegate extends AbstractJavaL
 	 * @throws CoreException
 	 */
 	protected void addArguments(ILaunchConfiguration configuration, IProject project, StringBuffer argString) throws CoreException {
+		String projectDir = project.getLocation().toString() + "/";
 		if (configuration.getAttribute(GeneratorConfigTab.LIB, false)) {
 			argString.append(" -"+AbstractGeneratorOptions.LIB.getName());
 		}
 		if (configuration.getAttribute(GeneratorConfigTab.SAVE_GEN_MODEL, false)) {
 			String genModelPath = configuration.getAttribute(GeneratorConfigTab.GEN_MODEL_PATH, "?");
-			genModelPath = VariablesPlugin.getDefault().getStringVariableManager().performStringSubstitution(genModelPath);
-			String path = new Path(genModelPath).toOSString();
 			argString.append(" -"+AbstractGeneratorOptions.SAVE_GEN_MODEL.getName());
-			argString.append(" "+path);
+			argString.append(" "+projectDir + genModelPath);
 		}
 		if (!configuration.getAttribute(GeneratorConfigTab.MAIN_METHOD_NAME, AbstractGeneratorOptions.MAIN_NAME.getDefaultValue()).equals(AbstractGeneratorOptions.MAIN_NAME.getDefaultValue())) {
 			argString.append(" -"+AbstractGeneratorOptions.MAIN_NAME.getName());
@@ -223,7 +221,6 @@ public abstract class GeneratorLaunchConfigurationDelegate extends AbstractJavaL
 		
 		ScopedPreferenceStore prefStore = new ScopedPreferenceStore(InstanceScope.INSTANCE, "org.eclipse.etrice.generator.ui");
 		
-		String projectDir = project.getLocation().toString() + "/";
 		boolean override = configuration.getAttribute(GeneratorConfigTab.OVERRIDE_DIRECTORIES, false);
 		String srcgenDir = prefStore.getString(PreferenceConstants.GEN_DIR);
 		if (override) {
