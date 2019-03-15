@@ -67,6 +67,7 @@ import org.eclipse.etrice.core.room.PrimitiveType;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RefPath;
 import org.eclipse.etrice.core.room.ReferenceType;
+import org.eclipse.etrice.core.room.RelaySAPoint;
 import org.eclipse.etrice.core.room.RoomAnnotationTargetEnum;
 import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.RoomElement;
@@ -430,20 +431,34 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 
 	@Check
 	public void checkPortCompatibility(Binding bind) {
+		// don't validate if unresolved, this is already be an error
+		if(EcoreUtil.ExternalCrossReferencer.find(bind).keySet().stream().anyMatch(eObj -> eObj.eIsProxy()))
+			return;
+		// don't validate if protocols are missing or null (NPE), this is an error at the interface item
+		if(bind.getEndpoint1().getPort().getProtocol().eIsProxy() || bind.getEndpoint2().getPort().getProtocol().eIsProxy())
+			return;
+		
 		Result result = validationUtil.isValid(bind);
 		if (!result.isOk()) {
-			EObject sc = bind.eContainer();
-			@SuppressWarnings("unchecked")
-			int idx = ((List<EObject>)sc.eGet(bind.eContainingFeature())).indexOf(bind);
-			error(result.getMsg(), sc, bind.eContainingFeature(), idx);
+			error(result.getMsg(), bind, null);
 		}
 	}
 
 	@Check
 	public void checkServiceCompatibility(LayerConnection conn) {
+		// don't validate if unresolved, this is already an error
+		if(EcoreUtil.ExternalCrossReferencer.find(conn).keySet().stream().anyMatch(eObj -> eObj.eIsProxy()))
+			return;
+		// don't validate if protocols are missing or null (NPE), this is an error at the interface item
+		if(conn.getFrom() instanceof RelaySAPoint && ((RelaySAPoint) conn.getFrom()).getRelay().getProtocol().eIsProxy())
+			return;
+		if(conn.getTo().getService().getProtocol().eIsProxy()) 
+			return;
+		
 		Result result = validationUtil.isValid(conn);
-		if (!result.isOk())
+		if (!result.isOk()) {
 			error(result.getMsg(), RoomPackage.eINSTANCE.getLayerConnection_From());
+		}
 	}
 
 	@Check
@@ -678,6 +693,10 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	public void checkReplicatedPortBindingPatterns(StructureClass sc) {
 		HashSet<String> haveReplPeer = new HashSet<String>();
 		for (Binding bind : sc.getBindings()) {
+			// don't validate if unresolved, this is already be an error
+			if(EcoreUtil.ExternalCrossReferencer.find(bind).keySet().stream().anyMatch(eObj -> eObj.eIsProxy()))
+				continue;
+			
 			Port p1 = bind.getEndpoint1().getPort();
 			Port p2 = bind.getEndpoint2().getPort();
 			if (p1.getMultiplicity()<0 && p2.getMultiplicity()<0) {
