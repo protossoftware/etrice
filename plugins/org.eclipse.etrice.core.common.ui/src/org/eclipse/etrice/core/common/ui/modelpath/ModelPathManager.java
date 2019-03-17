@@ -46,7 +46,7 @@ public class ModelPathManager implements IResourceChangeListener {
 	
 	public static final ModelPathManager INSTANCE = new ModelPathManager();
 	
-	public static final Path MODELPATH_FILE = new Path(".modelpath");
+	public static final Path MODELPATH_FILE = new Path("modelpath");
 	
 	private HashMap<IProject, ModelPathDescription> descriptionCache;
 	private HashMap<IProject, WorkspaceModelPath> modelpathCache;
