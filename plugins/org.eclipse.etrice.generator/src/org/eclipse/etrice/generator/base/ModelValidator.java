@@ -16,10 +16,14 @@
 package org.eclipse.etrice.generator.base;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.generator.base.args.Arguments;
 import org.eclipse.etrice.generator.base.logging.ILogger;
 import org.eclipse.etrice.generator.base.validation.GeneratorResourceValidator;
@@ -28,7 +32,7 @@ import org.eclipse.xtext.validation.IResourceValidator;
 import com.google.inject.Inject;
 
 /**
- * Tries to validate all contents of the underlying resource set of the resources.
+ * Validates all resources in the transitive closure of the input files.
  */
 public class ModelValidator extends GeneratorResourceValidator {
 	
@@ -40,24 +44,8 @@ public class ModelValidator extends GeneratorResourceValidator {
 	@Override
 	public void validate(List<Resource> resources, Arguments arguments, ILogger logger) {
 		logger.logInfo("-- validating models");
-		
-		// Validate all resources in the resource set
-		if(!resources.isEmpty()) {
-			ResourceSet rs = resources.get(0).getResourceSet();
-			if(rs != null) {
-				resources = rs.getResources();
-			}
-		}
-		
 		try {
-			List<Resource> toValidate = new ArrayList<>(resources);
-			
-			super.validate(toValidate, arguments, logger);
-			
-			// Bug 544504
-			if(toValidate.size() != resources.size()) {
-				throw new IllegalStateException("List of resources has changed during validation");
-			}
+			validateTransitiveClosure(resources, arguments, logger);
 		}
 		catch(Exception e) {
 			logger.logInfo("validation failed");
@@ -66,4 +54,33 @@ public class ModelValidator extends GeneratorResourceValidator {
 		}
 	}
 	
+	/**
+	 * Validate all referenced models (including transitive references).
+	 * 
+	 * @param resources the resources to validate the transitive closure of
+	 * @param arguments the generator arguments
+	 * @param logger the logger to log issues
+	 */
+	private void validateTransitiveClosure(List<Resource> resources, Arguments arguments, ILogger logger) {
+		Set<Resource> transitiveClosure = new LinkedHashSet<>();
+		resources.forEach(r -> computeTransitiveClosure(r, transitiveClosure));
+		List<Resource> toValidate = new ArrayList<>(transitiveClosure);
+		
+		super.validate(toValidate, arguments, logger);
+	}
+	
+	/**
+	 * Computes the transitive closure of a resource, i.e. all directly and indirectly referenced resources.
+	 * 
+	 * @param resource the resource to compute the closure of
+	 * @praram closure the set to add referenced resources to
+	 */
+	private void computeTransitiveClosure(Resource resource, Set<Resource> closure) {
+		if(closure.add(resource)) {
+			EcoreUtil.ExternalCrossReferencer.find(resource).keySet().stream()
+				.map(EObject::eResource)
+				.filter(Objects::nonNull)
+				.forEach(r -> computeTransitiveClosure(r, closure));
+		}
+	}
 }
