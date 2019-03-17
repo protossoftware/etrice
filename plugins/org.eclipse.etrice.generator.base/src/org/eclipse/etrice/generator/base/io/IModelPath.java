@@ -48,6 +48,13 @@ public interface IModelPath {
 	 */
 	public Optional<QualifiedName> getQualifiedName(URI uri);
 	
+	/**
+	 * Checks whether the modelpath is empty.
+	 * 
+	 * @return true if the modelpath is empty.
+	 */
+	public boolean isEmpty();
+	
 	static class EmptyModelPath implements IModelPath {
 		
 		@Override
@@ -63,6 +70,11 @@ public interface IModelPath {
 		@Override
 		public Optional<QualifiedName> getQualifiedName(URI uri) {
 			return Optional.empty();
+		}
+		
+		@Override
+		public boolean isEmpty() {
+			return true;
 		}
 	}
 }

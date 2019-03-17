@@ -77,6 +77,11 @@ public class FileSystemModelPath implements IModelPath {
 	}
 	
 	@Override
+	public boolean isEmpty() {
+		return paths.isEmpty();
+	}
+	
+	@Override
 	public String toString() {
 		return paths.toString();
 	}

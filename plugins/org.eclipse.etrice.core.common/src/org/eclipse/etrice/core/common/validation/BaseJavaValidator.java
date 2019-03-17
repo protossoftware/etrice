@@ -19,7 +19,6 @@ import java.util.HashSet;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -36,6 +35,8 @@ import org.eclipse.etrice.core.common.base.KeyValue;
 import org.eclipse.etrice.core.common.base.RealLiteral;
 import org.eclipse.etrice.core.common.base.SimpleAnnotationAttribute;
 import org.eclipse.etrice.core.common.base.StringLiteral;
+import org.eclipse.emf.ecore.EcoreFactory;
+import org.eclipse.etrice.generator.base.io.IModelPathProvider;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -64,6 +65,7 @@ public class BaseJavaValidator extends org.eclipse.etrice.core.common.validation
 	@Inject ImportUriResolver importUriResolver;
 	@Inject IGlobalScopeProvider globalScopeProvider;
 	@Inject IQualifiedNameConverter nameConverter;
+	@Inject IModelPathProvider modelPathProvider;
 	
 	@Check
 	public void checkDocumentation(Documentation doc) {
@@ -198,7 +200,11 @@ public class BaseJavaValidator extends org.eclipse.etrice.core.common.validation
 		if(imp.getImportURI() == null) {
 			return;
 		}
-		warning("import statements using uris are deprecated", BasePackage.Literals.IMPORT__IMPORT_URI, DEPRECATED_IMPORT_URI);
+		
+		Resource resource = imp.eResource();
+		if(!modelPathProvider.get(resource).isEmpty()) {
+			warning("import statements using uris are deprecated", BasePackage.Literals.IMPORT__IMPORT_URI, DEPRECATED_IMPORT_URI);
+		}
 		
 		String uriString = importUriResolver.resolve(imp);
 		if (uriString == null) {
@@ -208,8 +214,8 @@ public class BaseJavaValidator extends org.eclipse.etrice.core.common.validation
 
 		URI uri = URI.createURI(uriString);
 				
-		if(imp.eResource().getResourceSet() instanceof ResourceSetImpl) {
-			ResourceSetImpl rs = (ResourceSetImpl) imp.eResource().getResourceSet();
+		if(resource.getResourceSet() instanceof ResourceSetImpl) {
+			ResourceSetImpl rs = (ResourceSetImpl) resource.getResourceSet();
 			if(rs.getURIResourceMap().containsKey(uri)) {
 				return;
 			}
@@ -238,17 +244,24 @@ public class BaseJavaValidator extends org.eclipse.etrice.core.common.validation
 	 */
 	@Check
 	public void checkImportedNamespace(Import imp) {
-		String name = imp.getImportedNamespace();
-		if(name != null) {
-			QualifiedName importedNamespace = nameConverter.toQualifiedName(name);
-			if(!importedNamespace.getLastSegment().equals("*")) {
-				Resource context = imp.eResource();
-				EReference reference = EcoreFactory.eINSTANCE.createEReference();
-				reference.setEType(EcorePackage.eINSTANCE.getEObject());
-				IScope scope = globalScopeProvider.getScope(context, reference, Predicates.alwaysTrue());
-				IEObjectDescription eod = scope.getSingleElement(importedNamespace);
-				if(eod == null) {
-					error("could not find imported namespace " + importedNamespace, BasePackage.Literals.IMPORT__IMPORTED_NAMESPACE);
+		if(imp.getImportURI() == null) {
+			if(modelPathProvider.get(imp.eResource()).isEmpty()) {
+				error("no modelpath definition present", BasePackage.Literals.IMPORT__IMPORTED_NAMESPACE);
+			}
+			else {
+				String name = imp.getImportedNamespace();
+				if(name != null) {
+					QualifiedName importedNamespace = nameConverter.toQualifiedName(name);
+					if(!importedNamespace.getLastSegment().equals("*")) {
+						Resource context = imp.eResource();
+						EReference reference = EcoreFactory.eINSTANCE.createEReference();
+						reference.setEType(EcorePackage.eINSTANCE.getEObject());
+						IScope scope = globalScopeProvider.getScope(context, reference, Predicates.alwaysTrue());
+						IEObjectDescription eod = scope.getSingleElement(importedNamespace);
+						if(eod == null) {
+							error("could not find imported namespace " + importedNamespace, BasePackage.Literals.IMPORT__IMPORTED_NAMESPACE);
+						}
+					}
 				}
 			}
 		}

@@ -75,6 +75,11 @@ public class WorkspaceModelPath implements IModelPath {
 		return Optional.empty();
 	}
 	
+	@Override
+	public boolean isEmpty() {
+		return paths.isEmpty();
+	}
+	
 	public List<IContainer> getPaths() {
 		return paths;
 	}

@@ -59,5 +59,10 @@ public class ModelPathResourceSetInitializer implements IResourceSetInitializer 
 		public Optional<QualifiedName> getQualifiedName(URI uri) {
 			return ModelPathManager.INSTANCE.getModelPath(project).getQualifiedName(uri);
 		}
+		
+		@Override
+		public boolean isEmpty() {
+			return ModelPathManager.INSTANCE.getModelPath(project).isEmpty();
+		}
 	}
 }
