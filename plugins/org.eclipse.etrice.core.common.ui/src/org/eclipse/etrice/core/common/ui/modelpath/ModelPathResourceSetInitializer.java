@@ -33,8 +33,10 @@ public class ModelPathResourceSetInitializer implements IResourceSetInitializer 
 
 	@Override
 	public void initialize(ResourceSet resourceSet, IProject project) {
-		ModelPathDelegate modelPath = new ModelPathDelegate(project);
-		resourceSet.getLoadOptions().put(ResourceSetModelPathProvider.LOAD_OPTION_MODELPATH, modelPath);
+		if(project != null) {
+			ModelPathDelegate modelPath = new ModelPathDelegate(project);
+			resourceSet.getLoadOptions().put(ResourceSetModelPathProvider.LOAD_OPTION_MODELPATH, modelPath);
+		}
 	}
 	
 	private class ModelPathDelegate implements IModelPath {
