@@ -54,7 +54,11 @@ public class StandardModelLocator implements IModelLocator {
 	public String resolve(String resolve, Resource resource) {
 		URI baseUri = resource==null? null : resource.getURI();
 		
-		resolve = resolve(resolve, baseUri, resource);
+		try {
+			resolve = resolve(resolve, baseUri, resource);
+		} catch(IllegalArgumentException e) {
+			return null;
+		}
 		if(resolve == null) {
 			return null;
 		}
