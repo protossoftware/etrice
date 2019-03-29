@@ -41,10 +41,13 @@ public class ModelPathDescription {
 	
 	private final List<IFolder> sourceDirectories;
 	private final List<IProject> projectDependencies;
+	private final List<IMarker> problemMarkers;
 	
-	private ModelPathDescription(List<IFolder> sourceDirectories, List<IProject> projectDependencies) {
+	private ModelPathDescription(List<IFolder> sourceDirectories, List<IProject> projectDependencies, List<IMarker> problemMarkers) {
 		this.sourceDirectories = sourceDirectories;
 		this.projectDependencies = projectDependencies;
+		
+		this.problemMarkers = problemMarkers;
 	}
 	
 	/**
@@ -59,6 +62,13 @@ public class ModelPathDescription {
 	 */
 	public List<IProject> getProjectDependencies() {
 		return projectDependencies;
+	}
+	
+	/**
+	 * @return the list of problem markers
+	 */
+	public List<IMarker> getProblemMarkers() {
+		return problemMarkers;
 	}
 	
 	/**
@@ -93,6 +103,7 @@ public class ModelPathDescription {
 		private IWorkspaceRoot root;
 		private List<IFolder> srcDirs;
 		private List<IProject> projects;
+		private List<IMarker> problemMarkers;
 		private int lineNumber;
 		
 		public ModelPathDescriptionLoader(IFile file) {
@@ -101,6 +112,7 @@ public class ModelPathDescription {
 			root = ResourcesPlugin.getWorkspace().getRoot();
 			srcDirs = new ArrayList<>();
 			projects = new ArrayList<>();
+			problemMarkers = new ArrayList<IMarker>();
 			lineNumber = 0;
 		}
 		
@@ -109,11 +121,14 @@ public class ModelPathDescription {
 			
 			try(BufferedReader reader = new BufferedReader(new InputStreamReader(file.getContents()))) {
 				for(String line = reader.readLine(); line != null; line = reader.readLine(), lineNumber++) {
+					line = trimComments(line);
 					parseLine(line);
 				}
 			}
 			
-			return new ModelPathDescription(Collections.unmodifiableList(srcDirs), Collections.unmodifiableList(projects));
+			return new ModelPathDescription(Collections.unmodifiableList(srcDirs),
+					Collections.unmodifiableList(projects),
+					Collections.unmodifiableList(problemMarkers));
 		}
 		
 		private void parseLine(String line) throws CoreException {
@@ -130,42 +145,59 @@ public class ModelPathDescription {
 					parseProject(str);
 					break;
 				default:
-					createProblemMarker(IMarker.SEVERITY_ERROR, "unexpected keyword " + keyword);
+					addProblemMarker(IMarker.SEVERITY_ERROR, "unexpected keyword " + keyword);
 				}
 			}
+		}
+		
+		private String trimComments(String line) {
+			int index = line.indexOf("//");
+			if(index != -1) {
+				line = line.substring(0, index);
+			}
+			return line;
 		}
 		
 		private void parseSrcDir(String str) throws CoreException {
-			if(Path.EMPTY.isValidPath(str)) {
-				IFolder dir = project.getFolder(str);
-				if(!dir.exists()) {
-					createProblemMarker(IMarker.SEVERITY_WARNING, "directory " + dir.getFullPath() + " doesn't exist");
-				}
-				srcDirs.add(dir);
+			if(str.isEmpty()) {
+				addProblemMarker(IMarker.SEVERITY_ERROR, "directory path is missing");
+				return;
 			}
-			else {
-				createProblemMarker(IMarker.SEVERITY_ERROR, str + " isn't a valid path");
+			if(!Path.EMPTY.isValidPath(str)) {
+				addProblemMarker(IMarker.SEVERITY_ERROR, str + " isn't a valid path");
+				return;
 			}
+			
+			IFolder dir = project.getFolder(str);
+			if(!dir.exists()) {
+				addProblemMarker(IMarker.SEVERITY_WARNING, "directory " + dir.getFullPath() + " doesn't exist");
+			}
+			srcDirs.add(dir);
 		}
 		
 		private void parseProject(String str) throws CoreException {
-			if(Path.EMPTY.isValidSegment(str)) {
-				IProject project = root.getProject(str);
-				if(!project.isAccessible()) {
-					createProblemMarker(IMarker.SEVERITY_WARNING, "project " + project.getName() + " doesn't exist");
-				}
-				projects.add(project);
+			if(str.isEmpty()) {
+				addProblemMarker(IMarker.SEVERITY_ERROR, "project name is missing");
+				return;
 			}
-			else {
-				createProblemMarker(IMarker.SEVERITY_ERROR, str + " isn't a valid project name");
+			if(!Path.EMPTY.isValidSegment(str)) {
+				addProblemMarker(IMarker.SEVERITY_ERROR, str + " isn't a valid project name");
+				return;
 			}
+			
+			IProject project = root.getProject(str);
+			if(!project.isAccessible()) {
+				addProblemMarker(IMarker.SEVERITY_WARNING, "project " + project.getName() + " doesn't exist");
+			}
+			projects.add(project);
 		}
 		
-		private void createProblemMarker(int severity, String message) throws CoreException {
+		private void addProblemMarker(int severity, String message) throws CoreException {
 			IMarker marker = file.createMarker(IMarker.PROBLEM);
 			marker.setAttribute(IMarker.SEVERITY, severity);
 			marker.setAttribute(IMarker.LINE_NUMBER, lineNumber + 1);
 			marker.setAttribute(IMarker.MESSAGE, message);
+			problemMarkers.add(marker);
 		}
 	}
 }
