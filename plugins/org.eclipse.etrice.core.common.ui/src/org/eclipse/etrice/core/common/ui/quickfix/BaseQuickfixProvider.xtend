@@ -19,6 +19,12 @@ import org.eclipse.etrice.core.common.validation.BaseJavaValidator
 import org.eclipse.xtext.validation.Issue
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor
 import org.eclipse.etrice.core.common.base.Import
+import org.eclipse.core.resources.ResourcesPlugin
+import org.eclipse.core.runtime.Path
+import org.eclipse.etrice.core.common.ui.modelpath.ModelPathManager
+import org.eclipse.ui.PlatformUI
+import org.eclipse.ui.ide.IDE
+import org.eclipse.xtext.util.StringInputStream
 
 //import org.eclipse.xtext.ui.editor.quickfix.Fix
 //import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor
@@ -37,6 +43,38 @@ class BaseQuickfixProvider extends DefaultQuickfixProvider {
 			val imp = element as Import
 			imp.importURI = null
 		]
+	}
+	
+	@Fix(BaseJavaValidator.MODELPATH_DESCRIPTION_MISSING)
+	@Fix(BaseJavaValidator.IMPORTED_NAMESPACE_MISSING)
+	def editModelpathDescription(Issue issue, IssueResolutionAcceptor acceptor) {
+		val resourceUri = issue.uriToProblem.trimFragment
+		if(resourceUri.platform) {
+			val path = new Path(resourceUri.toPlatformString(true))
+			val project = ResourcesPlugin.workspace.root.getFile(path).project
+			val file = project.getFile(ModelPathManager.MODELPATH_FILE)
+			if(!file.exists) {
+				acceptor.accept(issue, "Create modelpath description", "Create modelpath description file", null) [
+					val input = new StringInputStream('''
+						// modelpath description
+						
+						// HOWTO define source directory
+						// srcDir <directory path>
+						
+						// HOWTO define project dependency
+						// project <project name>
+					''')
+					file.create(input, false, null);
+					IDE.openEditor(PlatformUI.workbench.activeWorkbenchWindow.activePage, file)
+				]
+			}
+			else {
+				acceptor.accept(issue, "Edit modelpath description", "Edit modelpath description file to configure modelpath definitions", null) [
+					IDE.openEditor(PlatformUI.workbench.activeWorkbenchWindow.activePage, file)
+				]
+			}
+			
+		}
 	}
 
 //	@Fix(MyDslValidator::INVALID_NAME)

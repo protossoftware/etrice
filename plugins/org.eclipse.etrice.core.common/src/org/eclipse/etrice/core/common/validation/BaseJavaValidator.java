@@ -61,6 +61,8 @@ public class BaseJavaValidator extends org.eclipse.etrice.core.common.validation
 	public static final String UNDEFINED_ANNOTATION_ATTRIBUTE_VALUE = "BaseJavaValidator.UndfinedAnnotationAttributeValue";
 	public static final String DUPLICATE_ANNOTATION_ATTRIBUTE = "BaseJavaValidator.DuplicateAnnotationAttribute";
 	public static final String DEPRECATED_IMPORT_URI = "BaseJavaValidator.DeprecatedImportUri";
+	public static final String MODELPATH_DESCRIPTION_MISSING = "BaseJavaValidator.ModelpathDescriptionMissing";
+	public static final String IMPORTED_NAMESPACE_MISSING = "BaseJavaValidator.ImportedNamespaceMissing";
 	
 	@Inject ImportUriResolver importUriResolver;
 	@Inject IGlobalScopeProvider globalScopeProvider;
@@ -244,26 +246,30 @@ public class BaseJavaValidator extends org.eclipse.etrice.core.common.validation
 	 */
 	@Check
 	public void checkImportedNamespace(Import imp) {
-		if(imp.getImportURI() == null) {
-			if(modelPathProvider.get(imp.eResource()).isEmpty()) {
-				error("no modelpath definition present", BasePackage.Literals.IMPORT__IMPORTED_NAMESPACE);
-			}
-			else {
-				String name = imp.getImportedNamespace();
-				if(name != null) {
-					QualifiedName importedNamespace = nameConverter.toQualifiedName(name);
-					if(!importedNamespace.getLastSegment().equals("*")) {
-						Resource context = imp.eResource();
-						EReference reference = EcoreFactory.eINSTANCE.createEReference();
-						reference.setEType(EcorePackage.eINSTANCE.getEObject());
-						IScope scope = globalScopeProvider.getScope(context, reference, Predicates.alwaysTrue());
-						IEObjectDescription eod = scope.getSingleElement(importedNamespace);
-						if(eod == null) {
-							error("could not find imported namespace " + importedNamespace, BasePackage.Literals.IMPORT__IMPORTED_NAMESPACE);
-						}
-					}
-				}
-			}
+		if(imp.getImportURI() != null) {
+			return;
+		}
+		
+		String name = imp.getImportedNamespace();
+		if(name == null) {
+			return;
+		}
+		Resource resource = imp.eResource();
+		if(modelPathProvider.get(resource).isEmpty()) {
+			error("no modelpath definition present", BasePackage.Literals.IMPORT__IMPORTED_NAMESPACE, MODELPATH_DESCRIPTION_MISSING);
+			return;
+		}
+		QualifiedName importedNamespace = nameConverter.toQualifiedName(name);
+		if(importedNamespace.getLastSegment().equals("*")) {
+			return;
+		}
+		
+		EReference reference = EcoreFactory.eINSTANCE.createEReference();
+		reference.setEType(EcorePackage.eINSTANCE.getEObject());
+		IScope scope = globalScopeProvider.getScope(resource, reference, Predicates.alwaysTrue());
+		IEObjectDescription eod = scope.getSingleElement(importedNamespace);
+		if(eod == null) {
+			error("could not find imported namespace " + importedNamespace, BasePackage.Literals.IMPORT__IMPORTED_NAMESPACE, IMPORTED_NAMESPACE_MISSING);
 		}
 	}
 }
