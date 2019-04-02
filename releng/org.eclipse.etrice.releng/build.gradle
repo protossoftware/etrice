@@ -1,3 +1,7 @@
+plugins {
+	id 'org.hidetake.ssh' version '2.10.1'
+}
+
 configurations {
 	archives
 	updates
@@ -12,21 +16,52 @@ dependencies {
 	updates project(path: ':releng:org.eclipse.etrice.site', configuration: 'archive')
 }
 
-
-def downloadDir = '/home/data/httpd/download.eclipse.org/etrice'
-// downloadDir = "$buildDir/download"
+def isSnapshot = version.endsWith('SNAPSHOT')
 def versionDir = version
-if(version.endsWith('SNAPSHOT')) {
+if(isSnapshot) {
 	versionDir = 'nightly'
 }
+def downloadDir = '/home/data/httpd/download.eclipse.org/etrice'
 def promoteDir = "$downloadDir/$versionDir"
+def assembleDir = "$buildDir/$versionDir"
 
-task promote(type: Sync) {
+remotes {
+	projectsStorage {
+		host = 'projects-storage.eclipse.org'
+		user = 'genie.etrice'
+	}
+}
+
+ssh.settings {
+	agent = true
+	fileTransfer = 'scp'
+}
+
+task assembleArtifacts(type: Sync) {
 	from([configurations.archives, configurations.updates]) {
 		into 'archives'
 	}
 	from(zipTree(configurations.updates.singleFile)) {
 		into 'updates'
 	}
-	into promoteDir
+	into assembleDir
+}
+
+task promote {
+	dependsOn assembleArtifacts
+	doLast {
+		ssh.run {
+			session(remotes.projectsStorage) {
+				logger.info "clean download area"
+				remove promoteDir
+				execute "mkdir $promoteDir"
+				
+				logger.info "promote archives"
+				put from: "$assembleDir/archives", into: promoteDir
+				
+				logger.info "promote update site"
+				put from: "$assembleDir/updates", into: promoteDir
+			}
+		}
+	}
 }

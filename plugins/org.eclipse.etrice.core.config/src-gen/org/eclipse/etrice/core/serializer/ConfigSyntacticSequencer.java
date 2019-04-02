@@ -82,7 +82,7 @@ public class ConfigSyntacticSequencer extends AbstractSyntacticSequencer {
 	
 	/**
 	 * Ambiguous syntax:
-	 *     'conjugated' | 'conjugate'
+	 *     'conjugate' | 'conjugated'
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     conjugated=PortClassConfig (ambiguity) conjugated=PortClassConfig

@@ -1777,7 +1777,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.etrice.core.Room.ModelComponent");
 		private final RuleCall cActorClassParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
-		//@ Override ModelComponent:
+		//@Override
+		//ModelComponent:
 		//	ActorClass;
 		@Override public ParserRule getRule() { return rule; }
 
@@ -3194,7 +3195,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.etrice.core.Room.AbstractInterfaceItem");
 		private final RuleCall cInterfaceItemParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
-		//@ Override AbstractInterfaceItem:
+		//@Override
+		//AbstractInterfaceItem:
 		//	InterfaceItem;
 		@Override public ParserRule getRule() { return rule; }
 
@@ -3254,7 +3256,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cTransitionKeyword_10 = (Keyword)cAlternatives.eContents().get(10);
 		private final Keyword cRoomModelKeyword_11 = (Keyword)cAlternatives.eContents().get(11);
 		
-		//@ Override AnnotationTargetType:
+		//@Override
+		//AnnotationTargetType:
 		//	'DataClass' |
 		//	'ActorClass' |
 		//	'ActorBehavior' |
@@ -3998,7 +4001,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getOutMessageHandlerAccess().getRule();
 	}
 
-	//@ Override ModelComponent:
+	//@Override
+	//ModelComponent:
 	//	ActorClass;
 	public ModelComponentElements getModelComponentAccess() {
 		return pModelComponent;
@@ -4279,7 +4283,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getReferenceTypeAccess().getRule();
 	}
 
-	//@ Override AbstractInterfaceItem:
+	//@Override
+	//AbstractInterfaceItem:
 	//	InterfaceItem;
 	public AbstractInterfaceItemElements getAbstractInterfaceItemAccess() {
 		return pAbstractInterfaceItem;
@@ -4303,7 +4308,8 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		return getMULTIPLICITYAccess().getRule();
 	}
 
-	//@ Override AnnotationTargetType:
+	//@Override
+	//AnnotationTargetType:
 	//	'DataClass' |
 	//	'ActorClass' |
 	//	'ActorBehavior' |
