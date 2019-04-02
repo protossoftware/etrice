@@ -40,12 +40,14 @@ import org.eclipse.etrice.generator.base.io.IGeneratorFileIO
 import org.eclipse.etrice.generator.fsm.base.CodegenHelpers
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider
 
+import static org.eclipse.etrice.core.common.documentation.DocumentationMarkup.*
+
 @Singleton
 class AsciiDocGen {
 
 	@Inject extension RoomHelpers
 	@Inject extension CodegenHelpers
-	@Inject extension IEObjectDocumentationProvider
+	@Inject IEObjectDocumentationProvider eObjDocuProvider
 	
 	def doGenerate(Root root, IGeneratorFileIO fileIO, boolean includeImages) {
 		val packages = root.models.groupBy[name].entrySet.map[new RoomPackage(key, value)].sortBy[name]
@@ -488,6 +490,23 @@ class AsciiDocGen {
 			builder.append(c)
 		}
 		builder.toString
+	}
+	
+	def private String documentation(EObject obj) {
+		val raw = eObjDocuProvider.getDocumentation(obj)
+		if(raw === null)
+			return null;
+		
+		switch getMarkupType(raw) {
+			case MARKUP_HTML: '''
+				++++
+				<div class="paragraph"><p>«trimMarkupTag(raw)»</p></div>
+				++++
+			'''
+			default: {
+				trimMarkupTag(raw)
+			}
+		}
 	}
 		
 	private static class RoomPackage {
