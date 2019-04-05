@@ -40,6 +40,13 @@ void etTimeHelpers_subtract(etTime *first, const etTime* second){
 	etTimeHelpers_normalize(first);
 }
 
+etTimeDiff etTimeHelpers_delta(const etTime* first, const etTime* second) {
+	etTime result = { first->sec-second->sec, first->nSec-second->nSec };
+	etTimeHelpers_normalize(&result);
+
+	return result.nSec + _1E9 * result.sec;
+}
+
 void etTimeHelpers_add(etTime *first, const etTime* second){
 	first->sec += second->sec;
 	first->nSec += second->nSec;

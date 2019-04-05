@@ -39,6 +39,12 @@ typedef struct etTime {
 } etTime;
 
 /**
+ * small time difference, typically as difference of etTime that only differ by a small amount of time.
+ * Unit is nano seconds
+ */
+typedef etInt32 etTimeDiff;
+
+/**
  * get current time from target hardware
  * this is no real world clock time and date
  * should be used only for relative time measurement

@@ -25,16 +25,24 @@
 #include <stddef.h>
 
 /**
+ * a data structure for the queue statistics
+ */
+typedef struct etQueueStatistics {
+	etInt16 highWaterMark;			/**< high water mark */
+	etInt16 lowWaterMark;			/**< low water mark */
+}
+etQueueStatistics;
+
+/**
  * the message queue data structure
  */
 typedef struct etMessageQueue {
 	etMessage* first;				/**< the head of the list */
 	etMessage* last;				/**< the tail of the list */
-	etInt16 highWaterMark;			/**< high water mark for statistical purposes */
-	etInt16 lowWaterMark;			/**< low water mark for statistical purposes */
 	etInt16 size;					/**< the size of the list */
-
-} etMessageQueue;
+	etQueueStatistics statistics;	/**< high water mark for statistical purposes */
+}
+etMessageQueue;
 
 /**
  * initializes the queue data fields ("constructor")
@@ -88,12 +96,24 @@ etBool etMessageQueue_isNotEmpty(etMessageQueue* self);
  */
 etInt16 etMessageQueue_getSize(etMessageQueue* self);
 /**
+ * returns the statistics of the queue
+ * \param self the this pointer
+ * \return the statistics of the queue (immutable)
+ */
+const etQueueStatistics* etMessageQueue_getStatistics(etMessageQueue* self);
+/**
  * returns the high water mark of the message queue
  *
  * \param self the this pointer
  * \return the high water mark of the message queue
  */
 etInt16 etMessageQueue_getHighWaterMark(etMessageQueue* self);
+/**
+ * resets the high water mark of the message queue to 0
+ *
+ * \param self the this pointer
+ */
+void etMessageQueue_resetHighWaterMark(etMessageQueue* self);
 /**
  * returns the low water mark of the message queue
  *

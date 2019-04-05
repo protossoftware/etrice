@@ -15,6 +15,7 @@
 
 
 static etSema terminateSemaphore;
+static etMessageService* head = NULL;
 
 etSema* etRuntime_getTerminateSemaphore() {
 	static etBool initialized = ET_FALSE;
@@ -25,4 +26,85 @@ etSema* etRuntime_getTerminateSemaphore() {
 	}
 
 	return &terminateSemaphore;
+}
+
+int etRuntime_getMessageServiceCount() {
+	etMessageService* p = head;
+
+	int count = 0;
+	while (p!=null) {
+		++count;
+		p = p->next;
+	}
+	return count;
+}
+
+int etRuntime_getMessageServiceByName(const char* name) {
+	etMessageService* p = head;
+
+	int idx = 0;
+	while (p!=null) {
+		if (strcmp(p->name, name)==0) {
+			return idx;
+		}
+		++idx;
+		p = p->next;
+	}
+
+	return -1;
+}
+
+const etMessageServiceStatistics* etRuntime_getMessageServiceStatistics(unsigned int i) {
+	etMessageService* p = head;
+
+	int count = 0;
+	while (p!=null) {
+		if (count==i) {
+			return &p->statistics;
+		}
+		++count;
+		p = p->next;
+	}
+
+	return NULL;
+}
+
+void etRuntime_resetAllMessageServiceStatistics() {
+	etMessageService* p = head;
+
+	while (p!=null) {
+		p->resetStatistics = ET_TRUE;
+		p = p->next;
+	}
+}
+
+void etRuntime_registerMessageService(etMessageService* msgService) {
+	msgService->next = head;
+	head = msgService;
+
+	if (msgService->name==NULL) {
+		void* p = malloc(16);
+		sprintf(p, "MsgSvc_%d", etRuntime_getMessageServiceCount());
+		msgService->name = (const char*) p;
+	}
+}
+
+void etRuntime_unregisterMessageService(etMessageService* msgService) {
+	etMessageService* p = head;
+	etMessageService* last = NULL;
+
+	while (p!=null) {
+		if (p==msgService) {
+			if (last==NULL) {
+				/* remove the first one */
+				head = p->next;
+			}
+			else {
+				last->next = p->next;
+			}
+			break;
+		}
+		last = p;
+		p = p->next;
+	}
 }

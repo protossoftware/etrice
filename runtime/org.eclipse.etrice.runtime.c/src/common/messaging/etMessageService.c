@@ -17,6 +17,8 @@
 #include "etSystemProtocol.h"
 #include "debugging/etLogger.h"
 #include "debugging/etMSCLogger.h"
+#include "runtime/etRuntime.h"
+#include "helpers/etTimeHelpers.h"
 
 static void etMessageService_timerCallback(void* data);
 static void etMessageService_deliverAllMessages(etMessageService* self);
@@ -35,9 +37,28 @@ void etMessageService_init(
 		etTime interval,
 		etDispatcherReceiveMessage msgDispatcher,
 		etMessageService_execmode execmode){
+	etMessageService_initx(self, NULL, buffer, maxBlocks, blockSize, stacksize, priority, interval, msgDispatcher, execmode);
+}
+
+/*
+ * initialize message service with all needed data and initialize message queue and message pool
+ *
+ */
+void etMessageService_initx(
+		etMessageService* self,
+		const char* name,
+		etUInt8* buffer,
+		etUInt16 maxBlocks,
+		etUInt16 blockSize,
+		etStacksize stacksize,
+		etPriority priority,
+		etTime interval,
+		etDispatcherReceiveMessage msgDispatcher,
+		etMessageService_execmode execmode){
 	ET_MSC_LOGGER_SYNC_ENTRY("etMessageService", "init")
 
 	/* copy init data to self */
+	self->name = name;
 	self->messageBuffer.buffer = buffer;
 	self->messageBuffer.maxBlocks = maxBlocks;
 	self->messageBuffer.blockSize = blockSize;
@@ -64,6 +85,14 @@ void etMessageService_init(
 		/* init timer */
 		etTimer_construct(&self->timer, &interval, etMessageService_timerCallback, self);
 	}
+
+	/* init statistics */
+	self->statistics.highWaterMark = 0;
+	self->statistics.queueStatistics = &self->messageQueue.statistics;
+	self->resetStatistics = ET_FALSE;
+
+	/* register with runtime */
+	etRuntime_registerMessageService(self);
 
 	ET_MSC_LOGGER_SYNC_EXIT
 }
@@ -96,6 +125,10 @@ void etMessageService_stop(etMessageService* self){
 
 void etMessageService_destroy(etMessageService* self){
 	ET_MSC_LOGGER_SYNC_ENTRY("etMessageService", "destroy")
+
+	/* unregister from runtime */
+	etRuntime_unregisterMessageService(self);
+
 	etMutex_destruct( &(self->poolMutex) );
 	etMutex_destruct( &(self->queueMutex) );
 	etSema_destruct( &(self->executionSemaphore) );
@@ -206,16 +239,43 @@ static void etMessageService_callHighPrioFunc(etMessageService* self){
 	ET_MSC_LOGGER_SYNC_EXIT
 }
 
+static etBool etMessageService_dispatchMessage(etMessageService* self, const etMessage* msg) {
+	ET_MSC_LOGGER_SYNC_ENTRY("etMessageService", "dispatchMessages")
+	etBool success;
+	etTime startTime, endTime;
+	etTimeDiff delta;
+
+	getTimeFromTarget(&startTime);
+	success = self->msgDispatcher(msg);
+	getTimeFromTarget(&endTime);
+	delta = etTimeHelpers_delta(&endTime, &startTime);
+
+	if (delta > self->statistics.highWaterMark) {
+		self->statistics.highWaterMark = delta;
+	}
+
+	ET_MSC_LOGGER_SYNC_EXIT
+	return success;
+}
+
 static void etMessageService_deliverAllMessages(etMessageService* self){
 	ET_MSC_LOGGER_SYNC_ENTRY("etMessageService", "deliverAllMessages")
 	{
 		etBool cont = ET_TRUE;
 		while (cont){
 			etMessageService_callHighPrioFunc(self);
+
+			if (self->resetStatistics) {
+				self->resetStatistics = ET_FALSE;
+
+				self->statistics.highWaterMark = 0;
+				etMessageQueue_resetHighWaterMark(&self->messageQueue);
+				etMessageQueue_resetLowWaterMark(&self->messageQueue);
+			}
+
 			while (etMessageQueue_isNotEmpty(&self->messageQueue) && cont){
 				etMessage* msg = etMessageService_popMessage(self);
-				if (!self->msgDispatcher(msg))
-					cont = ET_FALSE;
+				cont &= etMessageService_dispatchMessage(self, msg);
 				etMessageService_returnMessageBuffer(self, msg);
 				etMessageService_callHighPrioFunc(self);
 			}

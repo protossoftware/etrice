@@ -39,6 +39,15 @@ void etTimeHelpers_normalize(etTime* self);
 void etTimeHelpers_subtract(etTime *self, const etTime* subtractValue);
 
 /**
+ * computes the difference of two times
+ *
+ * \param first the first operand
+ * \param second the second operand
+ * \return the result as a time diff
+ */
+etTimeDiff etTimeHelpers_delta(const etTime* first, const etTime* second);
+
+/**
  * computes the sum of two times
  *
  * \param self the this pointer
