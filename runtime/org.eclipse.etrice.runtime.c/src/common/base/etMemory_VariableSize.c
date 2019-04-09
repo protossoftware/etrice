@@ -76,7 +76,7 @@ etMemory* etMemory_VariableSize_init(void* heap, etUInt32 size) {
 
 	ET_MSC_LOGGER_SYNC_ENTRY("etMemory", "init")
 
-	if (heap!=NULL & size > data_size) {
+	if (heap!=NULL && size > data_size) {
 		result = &self->base;
 
 		etMemory_init(result, actual_size, etMemory_VariableSize_alloc, etMemory_VariableSize_free);

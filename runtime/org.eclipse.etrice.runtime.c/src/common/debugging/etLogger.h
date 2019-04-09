@@ -95,6 +95,93 @@ void etLogger_logInfoF(const char* format, ... );
  */
 void etLogger_fprintf(etFileHandle file, const char* format, ... );
 
+/***************************************************************************************************/
+/*
+ * new interface
+ */
+/***************************************************************************************************/
+
+#include <debugging/etBufferSender.h>
+#include "osal/etLock.h"
+
+typedef enum LogSeverity {
+	LOG_ERROR,
+	LOG_WARNING,
+	LOG_INFO
+}
+LogSeverity;
+
+typedef struct etLogger {
+	etBufferSender* sender;	/**< the configured sender */
+	etLock* lock;			/**< an optional lock for synchronization */
+	uint16 nDropped;		/**< number of unsent messages */
+	LogSeverity logLevel;	/**< filter away messages with larger level, default is LOG_ERROR */
+	etBool appendNewline;	/**< append a new line character to each message, default is false */
+	etBool usePrefix;		/**< prefix each message with the severity, default is true */
+	etBool useTimestamp;	/**< prefix each message with a timestamp, default is false */
+}
+etLogger;
+
+/**
+ * initializes the logger object with default values
+ *
+ * \param logger the logger object
+ * \param the sender to be used
+ */
+void etLogger_init(etLogger* logger, etBufferSender* sender);
+
+/**
+ * sets the value of the appendNewline flag
+ *
+ * \param logger the logger object
+ * \param appendNewline the flag
+ */
+void etLogger_setAppendNewline(etLogger* logger, etBool appendNewline);
+
+/**
+ * sets the value of the usePrefix flag
+ *
+ * \param logger the logger object
+ * \param usePrefix the flag
+ */
+void etLogger_setUsePrefix(etLogger* logger, etBool usePrefix);
+
+/**
+ * sets the value of the useTimestamp flag
+ *
+ * \param logger the logger object
+ * \param useTimestamp the flag
+ */
+void etLogger_setUseTimestamp(etLogger* logger, etBool useTimestamp);
+
+/**
+ * supply optional user lock/unlock functions for usage in a multi-threaded environment.
+ *
+ * \param mem pointer to the memory management struct
+ * \lock pointer to a user supplied locking struct
+ */
+void etLogger_setUserLock(etLogger* logger, etLock* lock);
+
+/**
+ * logs a message with a given severity level
+ *
+ * \param self the logger
+ * \param severity the severity level
+ * \param msg the message string
+ */
+void etLogger_log(etLogger* self, LogSeverity severity, const char* msg);
+
+/**
+ * logs a formatted message (like the printf family) with a given severity level
+ *
+ * \param self the logger
+ * \param severity the severity level
+ * \param format the format string
+ * \param ... parameters for the fields
+ */
+void etLogger_logF(etLogger* self, LogSeverity severity, const char* format, ... );
+
+
 #endif /* _ETLOGGER_H_ */
 
 #ifdef __cplusplus

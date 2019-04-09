@@ -202,7 +202,7 @@ etMemory* etMemory_FreeList_init(void* heap, etUInt32 size, etUInt16 nslots) {
 	etUInt32 actual_size = size - data_size;
 	etMemory* result = NULL;
 
-	if (heap!=NULL & size > data_size) {
+	if (heap!=NULL && size > data_size) {
 		result = &self->base;
 
 		etMemory_init(result, actual_size, etMemory_FreeList_alloc, etMemory_FreeList_free);
