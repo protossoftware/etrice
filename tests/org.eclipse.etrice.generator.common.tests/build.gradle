@@ -37,3 +37,6 @@ createTest('java', 'detailExpressionCompileTest', [genericPhysical, 'models/Deta
 // VarargsTTest
 createTest('c', 'varargsTest', [genericPhysical, 'models/VarargsTest.room'])
 createTest('java', 'varargsTest', [genericPhysical, 'models/VarargsTest.room'])
+
+// SubSystemUserCodeTest
+createTest('c', 'subSystemUserCodeTest', ['models/SubSystemUserCodeTest.room', genericPhysical])

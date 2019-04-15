@@ -22,6 +22,7 @@ import java.util.Collection
 import java.util.HashMap
 import java.util.HashSet
 import org.eclipse.etrice.core.common.base.LiteralType
+import org.eclipse.etrice.core.common.base.StringLiteral
 import org.eclipse.etrice.core.common.converter.TimeConverter
 import org.eclipse.etrice.core.etmap.util.ETMapUtil
 import org.eclipse.etrice.core.etphys.eTPhys.ExecMode
@@ -407,7 +408,9 @@ class NodeGen {
 				«genActorInstanceInitializer(root, ai)»
 			«ENDIF»
 		«ENDFOR»
-
+		
+		/* special user codes from annotation SubSystemUserCode */
+		«ssi.generateSubSystemUserCodes»
 	'''
 	}
 	
@@ -889,5 +892,11 @@ class NodeGen {
 				}
 			}
 		}
+	}
+	
+	private def generateSubSystemUserCodes(SubSystemInstance ssi) {
+		val acs = ssi.allContainedInstances.map[actorClass].toSet
+		val annotations = acs.map[annotations.filter[type.name == 'SubSystemUserCode']].flatten
+		annotations.map[attributes].flatten.map[value].filter(StringLiteral).map[value].join(NEWLINE)
 	}
 }

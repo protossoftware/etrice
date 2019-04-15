@@ -1,0 +1,32 @@
+RoomModel SubSystemUserCodeTest {
+
+	import room.basic.annotations.* from "../../../runtime/org.eclipse.etrice.modellib.c/model/Annotations.room"
+	import room.basic.test.* from "../../../runtime/org.eclipse.etrice.modellib.c/model/Tests.room"
+	import room.basic.types.* from "../../../runtime/org.eclipse.etrice.modellib.c/model/Types.room"
+
+	ActorClass AGeneratedUserCode {
+		@TestInstance
+		@SubSystemUserCode(userCode="
+			int inSubSystemInstance(){ return 99; }
+		")
+		Structure {		
+			usercode3 '''
+				extern int inSubSystemInstance();
+			'''
+		}
+		Behavior {
+			ctor '''
+				etInt16 caseId = etUnit_openAll("log", "SubSystemUserCodeTest", "org.eclipse.etrice.generator.c.tests.SubSystemUserCodeTest", "SubSystemUserCodeTest_case");
+				EXPECT_EQUAL_INT32(caseId, "", 99, inSubSystemInstance());
+				etUnit_testFinished(caseId);
+				etUnit_closeAll(caseId);
+			'''
+			
+		}
+	}
+	
+	// no instance => no sub system user code
+	ActorClass ANotGenerated {
+		@SubSystemUserCode(userCode="int inSubSystemInstance(){ return 0; }")	
+	}
+}

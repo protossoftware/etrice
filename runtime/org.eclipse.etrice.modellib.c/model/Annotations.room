@@ -17,6 +17,14 @@ RoomModel room.basic.annotations {
 		optional attribute noGenerate: ptBoolean
 	}
 	
+	/**
+	 * Special user code which is generated to the sub system instance.
+	 */
+	AnnotationType SubSystemUserCode {
+		target = ActorClass
+		mandatory attribute userCode: ptCharacter
+	}
+	
 	AnnotationType DataLogging {
 		target = SubSystemClass
 		mandatory attribute pathlist: ptCharacter
