@@ -30,6 +30,7 @@ extern "C" {
 
 #include <stdio.h>
 
+#undef WINVER
 #define WINVER 0x0500
 #include <windows.h>
 

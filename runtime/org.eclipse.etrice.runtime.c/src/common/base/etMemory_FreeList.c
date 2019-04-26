@@ -14,8 +14,19 @@
 #include "debugging/etLogger.h"
 #include "debugging/etMSCLogger.h"
 
-#define UNUSED_LIST		0
+#define UNUSED_LIST			0
 #define DEBUG_FREE_LISTS	1
+#define OBJ_OFFSET			etALIGNMENT
+
+#define DO_LOCK	\
+	if (self->lock!=NULL) {								\
+		self->lock->lockFct(self->lock->lockData);		\
+	}
+
+#define DO_UNLOCK	\
+	if (self->lock!=NULL) {								\
+		self->lock->unlockFct(self->lock->lockData);	\
+	}
 
 typedef struct etFreeListObj {
 	struct etFreeListObj* next;
@@ -35,30 +46,49 @@ typedef struct etFreeListMemory {
 	etMemory base;					/** the "base class" */
 	etUInt8* current;				/**< next free position on the heap */
 	etUInt16 nslots;				/**< number of free lists */
+	etLock* lock;					/**< user supplied lock functions */
+	roundUpSize* roundUp;			/**< rounding method (identity by default) */
 	etFreeListInfo freelists[1];	/**< array of free list infos (array used with size nslots) */
 } etFreeListMemory;
 
 /*
  * private functions
  */
-static void* etMemory_getHeapMem(etFreeListMemory* self, etUInt16 size) {
+static void* etMemory_FreeList_getHeapMem(etFreeListMemory* self, etUInt16 size) {
 	etUInt8* obj = NULL;
-	ET_MSC_LOGGER_SYNC_ENTRY("etMemory", "getHeapListMem")
+	ET_MSC_LOGGER_SYNC_ENTRY("etMemory_FreeList", "getHeapListMem")
 
 	if (self->current + size < ((etUInt8*)self) + self->base.size)
 	{
-		obj = self->current;
+		etUInt32 used;
+
+		// store size in the first bytes
+		*((etUInt16*)self->current) = size;
+
+		// object pointer at offset
+		obj = self->current + OBJ_OFFSET;
+
+		// shift current
 		self->current += size;
+
+		used = ((etUInt8*)self) + self->base.size - self->current;
+		if (used > self->base.statistics.maxUsed) {
+			self->base.statistics.maxUsed = used;
+		}
+	}
+
+	if (obj==NULL) {
+		self->base.statistics.nFailingRequests++;
 	}
 
 	ET_MSC_LOGGER_SYNC_EXIT
 	return obj;
 }
 
-static void* etMemory_getFreeListMem(etFreeListMemory* self, etUInt16 size) {
+static void* etMemory_FreeList_getFreeListMem(etFreeListMemory* self, etUInt16 size) {
 	etUInt8* mem = NULL;
 	int asize, slot_offset, slot, slot_size;
-	ET_MSC_LOGGER_SYNC_ENTRY("etMemory", "getFreeListMem")
+	ET_MSC_LOGGER_SYNC_ENTRY("etMemory_FreeList", "getFreeListMem")
 
 	asize = (size / etALIGNMENT);
 	for (slot_offset = 0; slot_offset < self->nslots; slot_offset++) {
@@ -82,10 +112,11 @@ static void* etMemory_getFreeListMem(etFreeListMemory* self, etUInt16 size) {
 	return mem;
 }
 
-static void etMemory_putFreeListMem(etFreeListMemory* self, void* obj, etUInt16 size) {
-	ET_MSC_LOGGER_SYNC_ENTRY("etMemory", "putFreeListMem")
+static void etMemory_FreeList_putFreeListMem(etFreeListMemory* self, void* obj) {
+	ET_MSC_LOGGER_SYNC_ENTRY("etMemory_FreeList", "putFreeListMem")
 	{
 		int asize, slot_offset, slot, slot_size;
+		etUInt16 size = *((etUInt16*) (((etUInt8*) obj) - OBJ_OFFSET));
 
 		asize = (size / etALIGNMENT);
 		for (slot_offset = 0; slot_offset < self->nslots; slot_offset++) {
@@ -115,27 +146,52 @@ static void etMemory_putFreeListMem(etFreeListMemory* self, void* obj, etUInt16 
 	ET_MSC_LOGGER_SYNC_EXIT
 }
 
-void* etMemory_FreeList_alloc(etMemory* heap, etUInt16 size) {
+static void* etMemory_FreeList_alloc(etMemory* heap, etUInt16 size) {
+	etFreeListMemory* self = (etFreeListMemory*) heap;
 	void* mem;
-	size = MEM_CEIL(size);
-	ET_MSC_LOGGER_SYNC_ENTRY("etMemory", "alloc")
 
-	mem = etMemory_getFreeListMem((etFreeListMemory*) heap, size);
-	if (mem==NULL)
-		mem = etMemory_getHeapMem((etFreeListMemory*) heap, size);
+	ET_MSC_LOGGER_SYNC_ENTRY("etMemory_FreeList", "alloc")
+
+	// rounded required size + space to store the size
+	size = MEM_CEIL(self->roundUp(size) + OBJ_OFFSET);
+
+	DO_LOCK
+	mem = etMemory_FreeList_getFreeListMem((etFreeListMemory*) heap, size);
+	if (mem==NULL) {
+		mem = etMemory_FreeList_getHeapMem((etFreeListMemory*) heap, size);
+	}
+	DO_UNLOCK
 
 	ET_MSC_LOGGER_SYNC_EXIT
 	return mem;
 }
 
-void etMemory_FreeList_free(etMemory* heap, void* obj, etUInt16 size) {
-	ET_MSC_LOGGER_SYNC_ENTRY("etMemory", "free")
-	{
-		size = MEM_CEIL(size);
-		etMemory_putFreeListMem((etFreeListMemory*) heap, obj, size);
-	}
+static void etMemory_FreeList_free(etMemory* heap, void* obj) {
+	etFreeListMemory* self = (etFreeListMemory*) heap;
+	ET_MSC_LOGGER_SYNC_ENTRY("etMemory_FreeList", "free")
+
+	DO_LOCK
+	etMemory_FreeList_putFreeListMem(self, obj);
+	DO_UNLOCK
+
 	ET_MSC_LOGGER_SYNC_EXIT
 }
+
+static etUInt16 etMemory_FreeList_identity(etUInt16 size) {
+	return size;
+}
+
+etUInt16 etMemory_FreeList_power2(etUInt16 v) {
+	/* https://graphics.stanford.edu/~seander/bithacks.html#RoundUpPowerOf2 */
+	v--;
+	v |= v >> 1;
+	v |= v >> 2;
+	v |= v >> 4;
+	v |= v >> 8;
+	v++;
+	return v;
+}
+
 
 /*
  * the public interface
@@ -143,56 +199,96 @@ void etMemory_FreeList_free(etMemory* heap, void* obj, etUInt16 size) {
 etMemory* etMemory_FreeList_init(void* heap, etUInt32 size, etUInt16 nslots) {
 	etFreeListMemory* self = (etFreeListMemory*) heap;
 	ET_MSC_LOGGER_SYNC_ENTRY("etMemory_FreeList_init", "init")
+	int data_size = MEM_CEIL(sizeof(etFreeListMemory)+(nslots-1)*sizeof(etFreeListInfo));
+	etMemory* result = NULL;
 
-	self->base.size = size;
-	self->base.alloc = etMemory_FreeList_alloc;
-	self->base.free = etMemory_FreeList_free;
-	self->nslots = nslots;
-	{
-		int used = sizeof(etFreeListMemory)+(self->nslots-1)*sizeof(etFreeListInfo);
-		self->current = ((etUInt8*)self)+MEM_CEIL(used);
+	if (size > data_size) {
+		self->base.size = size;
+		self->base.statistics.maxUsed = 0;
+		self->base.statistics.nFailingRequests = 0;
+		self->base.alloc = etMemory_FreeList_alloc;
+		self->base.free = etMemory_FreeList_free;
+		self->roundUp = etMemory_FreeList_identity;
+		self->lock = NULL;
+		self->nslots = nslots;
+		self->current = ((etUInt8*) self) + data_size;
+
+		/* initialize the free lists */
+		{
+			int i;
+			for (i=0; i<self->nslots; ++i)
+				self->freelists[i].objsize = UNUSED_LIST;
+		}
+
+		result = &self->base;
 	}
 
-	/* initialize the free lists */
-	{
-		int i;
-		for (i=0; i<self->nslots; ++i)
-			self->freelists[i].objsize = UNUSED_LIST;
-	}
 	ET_MSC_LOGGER_SYNC_EXIT
-
-	return &self->base;
+	return result;
 }
 
-etUInt32 etMemory_FreeList_freeHeapMem(void* heap) {
-	etFreeListMemory* self = (etFreeListMemory*) heap;
-	return ((etUInt8*)self)+self->base.size - self->current;
+void etMemory_FreeList_setUserLock(etMemory* mem, etLock* lock) {
+	etFreeListMemory* self = (etFreeListMemory*) mem;
+	ET_MSC_LOGGER_SYNC_ENTRY("etMemory_FreeList_init", "setUserLock")
+	self->lock = lock;
+	ET_MSC_LOGGER_SYNC_EXIT
 }
 
-etUInt16 etMemory_FreeList_freeSlots(void* heap) {
-	etFreeListMemory* self = (etFreeListMemory*) heap;
+void etMemory_FreeList_setUserRounding(etMemory* mem, roundUpSize* roundup) {
+	etFreeListMemory* self = (etFreeListMemory*) mem;
+	ET_MSC_LOGGER_SYNC_ENTRY("etMemory_FreeList_init", "setUserRounding")
+	self->roundUp = roundup;
+	ET_MSC_LOGGER_SYNC_EXIT
+}
+
+etUInt32 etMemory_FreeList_getFreeHeapMem(etMemory* mem) {
+	etFreeListMemory* self = (etFreeListMemory*) mem;
+
+	DO_LOCK
+	etUInt32 result = ((etUInt8*) self) + self->base.size - self->current;
+	DO_UNLOCK
+
+	return result;
+}
+
+etUInt16 etMemory_FreeList_freeSlots(etMemory* mem) {
+	etFreeListMemory* self = (etFreeListMemory*) mem;
 	etUInt16 free = 0;
 	int slot;
 
+	DO_LOCK
 	for (slot=0; slot<self->nslots; ++slot)
 		if (self->freelists[slot].objsize==UNUSED_LIST)
 			++free;
+	DO_UNLOCK
 
 	return free;
 }
 
-etUInt16 etMemory_FreeList_nObjects(void* heap, etUInt16 slot) {
+etUInt16 etMemory_FreeList_nObjects(etMemory* mem, etUInt16 slot) {
+	etUInt16 result = 0;
 #if DEBUG_FREE_LISTS
-	etFreeListMemory* self = (etFreeListMemory*) heap;
-	if (slot<self->nslots)
-		return self->freelists[slot].nobjects;
+	etFreeListMemory* self = (etFreeListMemory*) mem;
+	DO_LOCK
+	if (slot<self->nslots) {
+		result = self->freelists[slot].nobjects;
+	}
+	DO_UNLOCK
 #endif
-	return 0;
+	return result;
 }
 
-etUInt16 etMemory_FreeList_sizeObjects(void* heap, etUInt16 slot) {
-	etFreeListMemory* self = (etFreeListMemory*) heap;
-	if (slot<self->nslots)
-		return self->freelists[slot].objsize;
-	return 0;
+etUInt16 etMemory_FreeList_sizeObjects(etMemory* mem, etUInt16 slot) {
+	etFreeListMemory* self = (etFreeListMemory*) mem;
+	etUInt16 result = 0;
+	DO_LOCK
+	if (slot<self->nslots) {
+		result = self->freelists[slot].objsize - OBJ_OFFSET;
+	}
+	DO_UNLOCK
+	return result;
+}
+
+etUInt16 etMemory_FreeList_MgmtDataPerObject() {
+	return OBJ_OFFSET;
 }

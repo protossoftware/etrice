@@ -38,11 +38,22 @@ typedef void* etMemory_alloc(struct etMemory* heap, etUInt16 size);
  * \param obj pointer to the memory returned
  * \param size the size in bytes of the memory returned
  */
-typedef void etMemory_free(struct etMemory* heap, void* obj, etUInt16 size);
+typedef void etMemory_free(struct etMemory* heap, void* obj);
+
+typedef struct etMemoryStatistics {
+	const char* name;
+	etUInt32 maxUsed;
+	etUInt32 nFailingRequests;
+	struct etMemoryStatistics* next;
+}
+etMemoryStatistics;
 
 typedef struct etMemory {
 	/** size of the heap in bytes */
 	etUInt32 size;
+
+	/** statistical data made available through the runtime */
+	etMemoryStatistics statistics;
 
 	/** the configured allocation method */
 	etMemory_alloc* alloc;
