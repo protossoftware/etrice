@@ -2,6 +2,10 @@ apply plugin: 'cpp'
 
 apply from: "$rootDir/gradle/etGenerator.gradle"
 
+dependencies {
+	modelpath_cpp files('model')
+}
+
 def models = [
 	'model/TimingService.room'
 ]

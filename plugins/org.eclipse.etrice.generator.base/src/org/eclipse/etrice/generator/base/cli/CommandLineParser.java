@@ -15,14 +15,18 @@
 
 package org.eclipse.etrice.generator.base.cli;
 
+import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 
 import org.eclipse.etrice.generator.base.args.Arguments;
+import org.eclipse.etrice.generator.base.args.BooleanOption;
+import org.eclipse.etrice.generator.base.args.EnumOption;
 import org.eclipse.etrice.generator.base.args.Option;
 import org.eclipse.etrice.generator.base.args.Options;
-import org.eclipse.etrice.generator.base.args.StringArrayOption;
+import org.eclipse.etrice.generator.base.args.PathOption;
+import org.eclipse.etrice.generator.base.args.StringOption;
 
 /**
  * Simple implementation of a command line parser.
@@ -39,7 +43,7 @@ public class CommandLineParser implements ICommandLineParser {
 	}
 	
 	@Override
-	public Arguments parseArgs(Options options, StringArrayOption defaultOption, List<String> args) throws CommandLineParseException {
+	public Arguments parseArgs(Options options, Option<String[]> defaultOption, List<String> args) throws CommandLineParseException {
 		Arguments parsedArgs = new Arguments(options);
 		List<String> nArgs = normalize(args);
 		ListIterator<String> iterator = nArgs.listIterator();
@@ -81,23 +85,20 @@ public class CommandLineParser implements ICommandLineParser {
 	}
 	
 	private Object parseValue(Option<?> opt, ListIterator<String> iterator) throws CommandLineParseException {
-		Class<?> type = opt.getType();
-		
-		if(type == Boolean.class) {
+		if(opt instanceof BooleanOption) {
 			return true;
 		}
 		
 		if(iterator.hasNext()) {
 			String str = iterator.next();
 			
-			if(type == String.class) {
+			if(opt instanceof StringOption) {
 				return str;
 			}
-			else if(type == String[].class) {
-				String[] strArray = str.split(";");
-				return strArray;
+			else if(opt instanceof PathOption) {
+				return str.split(File.pathSeparator);
 			}
-			else if(type.isEnum()) {
+			else if(opt instanceof EnumOption<?>) {
 				return parseEnum(opt, str);
 			}
 			

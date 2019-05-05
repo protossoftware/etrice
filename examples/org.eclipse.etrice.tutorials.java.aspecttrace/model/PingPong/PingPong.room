@@ -30,9 +30,7 @@ RoomModel PingPong_Model {
 					}
 				}
 				State SendingPing {
-					entry {
-						"receiver.ping();"
-					}
+					entry '''receiver.ping();'''
 				}
 				State ReceivedPong
 			}
@@ -55,9 +53,7 @@ RoomModel PingPong_Model {
 				}
 				State WaingForPing
 				State ReceivedPing {
-					entry {
-						"sender.pong();"
-					}
+					entry '''sender.pong();'''
 				}
 			}
 		}

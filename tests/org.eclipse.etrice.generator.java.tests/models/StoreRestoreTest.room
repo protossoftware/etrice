@@ -1,7 +1,7 @@
 RoomModel StoreRestoreTest {
 
-	import room.basic.test.* from "../../../runtime/org.eclipse.etrice.modellib.java/model/Tests.room"
-	
+	import room.basic.test.TestInstance
+
 	ActorClass StoreRestore_Top {
 		@TestInstance
 		Structure {
@@ -9,7 +9,8 @@ RoomModel StoreRestoreTest {
 			ActorRef testee: Testee
 			Binding tester.prt and testee.prt
 		}
-		Behavior { }
+		Behavior {
+		}
 	}
 
 	ActorClass Testee {
@@ -17,35 +18,34 @@ RoomModel StoreRestoreTest {
 			Port prt: PC
 		}
 		Structure {
-			usercode1 { "import StoreRestoreTest.ObjectHolder;" }
-			
+			usercode1 '''import StoreRestoreTest.ObjectHolder;'''
+
 			external Port prt
-			
+
 			Attribute ival: int16
-			Attribute iarr [ 3 ]: int32
+			Attribute iarr [3]: int32
 			Attribute sdval: SomeData
-			Attribute sdarr [ 5 ]: SomeData
+			Attribute sdarr [5]: SomeData
 			Attribute cdval: ComplexData
 		}
 		Behavior {
-			Operation doStore() {
-				"System.out.println(\"doStore()\");"
-				"IActorClassDataObject dataObject = newDataObject();"
-				"store(dataObject);"
-				"ObjectHolder.setObject(dataObject);"
-			}
-			Operation doRestore() {
-				"System.out.println(\"doRestore()\");"
-				"IActorClassDataObject dataObject = ObjectHolder.getObject();"
-				"restore(dataObject);"
-			}
+			Operation doStore() '''
+				System.out.println("doStore()");
+				IActorClassDataObject dataObject = newDataObject();
+				store(dataObject);
+				ObjectHolder.setObject(dataObject);'''
+			Operation doRestore() '''
+				System.out.println("doRestore()");
+				IActorClassDataObject dataObject = ObjectHolder.getObject();
+				restore(dataObject);'''
 			StateMachine {
 				Transition tr0: my tp0 -> Restore {
 					triggers {
 						<restore: prt>
 					}
 				}
-				Transition init: initial -> Begin { }
+				Transition init: initial -> Begin {
+				}
 				Transition tr1: Begin -> Store {
 					triggers {
 						<step: prt>
@@ -63,68 +63,59 @@ RoomModel StoreRestoreTest {
 				}
 				TransitionPoint tp0
 				State Begin {
-					entry {
-						"ival = 3;"
-					}
+					entry '''ival = 3;'''
 				}
 				State Store {
-					entry {
-						"System.out.println(\"<|MODEL_LOCATION|>\");"
-						"setFinalAction(new SingleFinalAction() {"
-						"\tpublic void run() {"
-						"\t\tdoStore();"
-						"\t}"
-						"});"
-					}
+					entry '''
+						System.out.println("<|MODEL_LOCATION|>");
+						setFinalAction(new SingleFinalAction() {
+							public void run() {
+								doStore();
+							}
+						});'''
 				}
 				State state2 {
-					entry {
-						"prt.valueIs(ival);"
-						""
-						"ival = 123;"
-					}
+					entry '''
+						prt.valueIs(ival);
+						
+						ival = 123;'''
 				}
 				State Restore {
-					entry {
-						"System.out.println(\"<|MODEL_LOCATION|>\");"
-						"setFinalAction(new SingleFinalAction() {"
-						"\tpublic void run() {"
-						"\t\tdoRestore();"
-						"\t}"
-						"});"
-					}
+					entry '''
+						System.out.println("<|MODEL_LOCATION|>");
+						setFinalAction(new SingleFinalAction() {
+							public void run() {
+								doRestore();
+							}
+						});'''
 				}
 				State state3 {
-					entry {
-						"ival = 456;"
-						""
-						"prt.answer();"
-					}
+					entry '''
+						ival = 456;
+						
+						prt.answer();'''
 				}
 			}
 		}
 	}
-	
+
 	ActorClass Tester {
 		Interface {
 			conjugated Port prt: PC
 		}
 		Structure {
 			external Port prt
-			
+
 			Attribute caseId: int32
 			Attribute counter: int32 = "0"
 		}
 		Behavior {
-			ctor {
-				"caseId = etUnit_openAll(\"log\", \"StoreRestoreTest\", \"org.eclipse.etrice.generator.java.tests.StoreRestoreTest\", \"StoreRestoreTest_case\");"
-			}
-			dtor {
-				"etUnit_closeAll(caseId);"
-			}
-			
+			ctor '''caseId = etUnit_openAll("log", "StoreRestoreTest", "org.eclipse.etrice.generator.java.tests.StoreRestoreTest", "StoreRestoreTest_case");'''
+			dtor '''etUnit_closeAll(caseId);'''
+
 			StateMachine {
-				Transition init: initial -> Prepare { }
+				Transition init: initial -> Prepare {
+				}
 				Transition tr1: Loop2 -> cp cp0 {
 					triggers {
 						<answer: prt>
@@ -132,17 +123,13 @@ RoomModel StoreRestoreTest {
 				}
 				Transition tr2: cp cp0 -> Done
 				Transition tr3: cp cp0 -> Loop {
-					cond {
-						"++counter<10"
-					}
+					cond '''++counter<10'''
 				}
 				Transition tr0: Prepare -> Prepare2 {
 					triggers {
 						<valueIs: prt>
 					}
-					action {
-						"EXPECT_EQUAL_INT16(caseId, \"check old value <|MODEL_LOCATION|>\", (short)3, transitionData);"
-					}
+					action '''EXPECT_EQUAL_INT16(caseId, "check old value <|MODEL_LOCATION|>", (short)3, transitionData);'''
 				}
 				Transition tr4: Prepare2 -> Loop {
 					triggers {
@@ -153,39 +140,29 @@ RoomModel StoreRestoreTest {
 					triggers {
 						<valueIs: prt>
 					}
-					action {
-						"EXPECT_EQUAL_INT16(caseId, \"check old value <|MODEL_LOCATION|>\", (short)3, transitionData);"
-					}
+					action '''EXPECT_EQUAL_INT16(caseId, "check old value <|MODEL_LOCATION|>", (short)3, transitionData);'''
 				}
 				ChoicePoint cp0
 				State Prepare {
-					entry {
-						"prt.step();"
-						"prt.step();"
-					}
+					entry '''
+						prt.step();
+						prt.step();'''
 				}
 				State Loop {
-					entry {
-						"prt.restore();"
-						""
-						"prt.step();"
-						"prt.step();"
-					}
+					entry '''
+						prt.restore();
+						
+						prt.step();
+						prt.step();'''
 				}
 				State Done {
-					entry {
-						"etUnit_testFinished(caseId);"
-					}
+					entry '''etUnit_testFinished(caseId);'''
 				}
 				State Prepare2 {
-					entry {
-						"prt.step();"
-					}
+					entry '''prt.step();'''
 				}
 				State Loop2 {
-					entry {
-						"prt.step();"
-					}
+					entry '''prt.step();'''
 				}
 			}
 		}
@@ -198,18 +175,18 @@ RoomModel StoreRestoreTest {
 		}
 		outgoing {
 			Message answer()
-			Message valueIs(val: int16)
+			Message valueIs(int16)
 		}
 	}
 
 	DataClass SomeData {
 		Attribute ival: int16
-		Attribute iarr [ 3 ]: int32
+		Attribute iarr [3]: int32
 	}
 
 	DataClass ComplexData {
 		Attribute sdval: SomeData
-		Attribute sdarr [ 5 ]: SomeData
+		Attribute sdarr [5]: SomeData
 	}
 
 	PrimitiveType int16: ptInteger -> 'short' (Short) default '0'

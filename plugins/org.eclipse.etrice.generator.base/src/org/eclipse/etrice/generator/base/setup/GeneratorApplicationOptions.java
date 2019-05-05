@@ -21,7 +21,7 @@ import org.eclipse.etrice.generator.base.args.BooleanOption;
 import org.eclipse.etrice.generator.base.args.EnumOption;
 import org.eclipse.etrice.generator.base.args.IOptionModule;
 import org.eclipse.etrice.generator.base.args.Option;
-import org.eclipse.etrice.generator.base.args.StringArrayOption;
+import org.eclipse.etrice.generator.base.args.PathOption;
 import org.eclipse.etrice.generator.base.args.StringOption;
 import org.eclipse.etrice.generator.base.logging.Loglevel;
 
@@ -32,18 +32,19 @@ public class GeneratorApplicationOptions implements IOptionModule {
 
 	public static final String GROUP_APPLICATION = "application";
 	
-	public static final StringArrayOption FILES = new StringArrayOption(
+	public static final Option<String[]> FILES = new Option<String[]>(
+			String[].class,
 			GROUP_APPLICATION,
 			"files",
 			"input files",
 			"input files for the generator",
 			new String[0]);
 	
-	public static final StringArrayOption MODELPATH = new StringArrayOption(
+	public static final PathOption MODELPATH = new PathOption(
 			GROUP_APPLICATION,
 			"modelpath",
 			"paths",
-			"model imported paths separated by ';'",
+			"model import paths separated by path separators",
 			new String[0]);
 	
 	public static final BooleanOption HELP = new BooleanOption(

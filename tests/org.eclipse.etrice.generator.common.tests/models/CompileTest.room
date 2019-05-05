@@ -1,0 +1,31 @@
+RoomModel CompileTest {
+
+	import room.basic.types.int32
+	import room.basic.test.TestInstance
+	import DetailExpressionTest.DetailExpressionTest
+	import StatemachineInterfaceTest.StatemachineInterfaceTest
+	import StatemachineInterfaceInheritedTest.StatemachineInterfaceInheritedTest
+	import ContinuationTransitionTest.ContinuationTransitionTest
+
+	ActorClass CompileTests {
+		@TestInstance
+		Structure {
+			Attribute caseId : int32
+
+			// just compile
+			ActorRef statemachineInterfaceTest : StatemachineInterfaceTest
+			ActorRef statemachineInterfaceInheritedTest : StatemachineInterfaceInheritedTest
+			ActorRef continuationTransitionTest : ContinuationTransitionTest
+		}
+		Behavior {
+			ctor '''caseId = etUnit_openAll("log", "CompileTest", "org.eclipse.etrice.generator.common.tests.CompileTests", "CompileTests_case");'''
+			dtor '''etUnit_closeAll(caseId);'''
+			StateMachine {
+				Transition init: initial -> finish
+				State finish {
+					entry '''etUnit_testFinished(caseId);'''
+				}
+			}
+		}
+	}
+}

@@ -13,7 +13,7 @@
 <booleanAttribute key="default" value="true"/>
 <stringAttribute key="deselected_workspace_plugins" value="org.eclipse.etrice.example,org.eclipse.etrice.integration.tests"/>
 <booleanAttribute key="includeOptional" value="true"/>
-<stringAttribute key="location" value="${workspace_loc}/../eTrice-rt"/>
+<stringAttribute key="location" value=""/>
 <mapAttribute key="org.eclipse.debug.core.environmentVariables">
 <mapEntry key="etModellib" value="org.eclipse.etrice.modellib.c"/>
 </mapAttribute>

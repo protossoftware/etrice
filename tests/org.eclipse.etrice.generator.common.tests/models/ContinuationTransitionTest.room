@@ -1,31 +1,29 @@
 RoomModel ContinuationTransitionTest {
-	
-	import room.basic.types.* from "../../../runtime/${etModellib}/model/Types.room"
-	import room.basic.test.* from "../../../runtime/${etModellib}/model/Tests.room"
-	
+
+	import room.basic.types.boolean
+	import room.basic.types.int32
+	import room.basic.test.TestInstance
+
 	ActorClass ContinuationTransitionTest {
 		Structure {
 			ActorRef test1: TransitionChainsWithoutIfItem
 			ActorRef test2: TransitionChainsWithSameMsgData
 			ActorRef test3: TransitionChainsWithCompatibleData
 			ActorRef test4: TransitionChainsWithInCompatibleData
-			ActorRef test5 : TransitionChainWithoutIfItem_Sub
-			
-			// not supported yet, TODO
-			//ActorRef test6 : TransitionChainWithData_Sub
+			ActorRef test5: TransitionChainWithoutIfItem_Sub
+		// not supported yet, TODO
+		// ActorRef test6 : TransitionChainWithData_Sub
 		}
 	}
-	
+
 	ActorClass TransitionChainsWithoutIfItem {
 		Structure {
-			Port p0 : TestProtocol
+			Port p0: TestProtocol
 		}
 		Behavior {
 			StateMachine {
 				Transition continuationExit: exitPoint of substate -> endExit {
-					action {
-						"int x = 0;"
-					}
+					action '''int x = 0;'''
 				}
 				Transition init: initial -> entryPoint of substate
 				Transition tr0: my startEntry -> entryPoint of substate {
@@ -37,9 +35,7 @@ RoomModel ContinuationTransitionTest {
 				State substate {
 					subgraph {
 						Transition continuationEntry: my entryPoint -> cp choicePoint {
-							action {
-								"int x = 0;"
-							}
+							action '''int x = 0;'''
 						}
 						Transition init: initial -> my exitPoint
 						Transition triggerExit: startExit -> my exitPoint {
@@ -48,17 +44,11 @@ RoomModel ContinuationTransitionTest {
 							}
 						}
 						Transition continuationCpElse: cp choicePoint -> startExit {
-							action {
-								"int x = 0;"
-							}
+							action '''int x = 0;'''
 						}
 						Transition continuationCpCond: cp choicePoint -> endChoicePoint {
-							cond {
-								"true"
-							}
-							action {
-								"int x = 0;"
-							}
+							cond '''true'''
+							action '''int x = 0;'''
 						}
 						Transition triggerChoicePoint: my startChoicePoint -> cp choicePoint {
 							triggers {
@@ -77,11 +67,11 @@ RoomModel ContinuationTransitionTest {
 			}
 		}
 	}
-	
-		ActorClass TransitionChainsWithSameMsgData {
+
+	ActorClass TransitionChainsWithSameMsgData {
 		Structure {
-			Attribute caseId : int32
-			Port p0 : TestProtocol
+			Attribute caseId: int32
+			Port p0: TestProtocol
 		}
 		Behavior {
 			StateMachine {
@@ -92,9 +82,7 @@ RoomModel ContinuationTransitionTest {
 					}
 				}
 				Transition continuationExit: exitPoint of substate -> endExit {
-					action {
-						"EXPECT_EQUAL_INT32(caseId, \"<|MODEL_LOCATION|>\", 2, transitionData);"
-					}
+					action '''EXPECT_EQUAL_INT32(caseId, "<|MODEL_LOCATION|>", 2, transitionData);'''
 				}
 				Transition tr0: startEntry2 -> entryPoint of substate {
 					triggers {
@@ -105,9 +93,7 @@ RoomModel ContinuationTransitionTest {
 				State substate {
 					subgraph {
 						Transition continuationEntry: my entryPoint -> cp choicePoint {
-							action {
-								"EXPECT_EQUAL_INT32(caseId, \"<|MODEL_LOCATION|>\", 1, transitionData);"
-							}
+							action '''EXPECT_EQUAL_INT32(caseId, "<|MODEL_LOCATION|>", 1, transitionData);'''
 						}
 						Transition triggerExit: startExit1 -> my exitPoint {
 							triggers {
@@ -115,17 +101,11 @@ RoomModel ContinuationTransitionTest {
 							}
 						}
 						Transition continuationCpElse: cp choicePoint -> startExit1 {
-							action {
-								"EXPECT_EQUAL_INT32(caseId, \"<|MODEL_LOCATION|>\", 1, transitionData);"
-							}
+							action '''EXPECT_EQUAL_INT32(caseId, "<|MODEL_LOCATION|>", 1, transitionData);'''
 						}
 						Transition continuationCpCond: cp choicePoint -> startExit2 {
-							cond {
-								"true"
-							}
-							action {
-								"EXPECT_EQUAL_INT32(caseId, \"<|MODEL_LOCATION|>\", 1, transitionData);"
-							}
+							cond '''true'''
+							action '''EXPECT_EQUAL_INT32(caseId, "<|MODEL_LOCATION|>", 1, transitionData);'''
 						}
 						Transition triggerChoicePoint: my startChoicePoint -> cp choicePoint {
 							triggers {
@@ -150,11 +130,11 @@ RoomModel ContinuationTransitionTest {
 			}
 		}
 	}
-	
+
 	ActorClass TransitionChainsWithCompatibleData {
 		Structure {
-			Attribute caseId : int32
-			Port p0 : TestProtocol
+			Attribute caseId: int32
+			Port p0: TestProtocol
 		}
 		Behavior {
 			StateMachine {
@@ -165,9 +145,7 @@ RoomModel ContinuationTransitionTest {
 					}
 				}
 				Transition continuationExit: exitPoint of substate -> endExit {
-					action {
-						"EXPECT_EQUAL_INT32(caseId, \"<|MODEL_LOCATION|>\", 2, transitionData);"
-					}
+					action '''EXPECT_EQUAL_INT32(caseId, "<|MODEL_LOCATION|>", 2, transitionData);'''
 				}
 				Transition tr0: startEntry2 -> entryPoint of substate {
 					triggers {
@@ -178,9 +156,7 @@ RoomModel ContinuationTransitionTest {
 				State substate {
 					subgraph {
 						Transition continuationEntry: my entryPoint -> cp choicePoint {
-							action {
-								"EXPECT_EQUAL_INT32(caseId, \"<|MODEL_LOCATION|>\", 1, transitionData);"
-							}
+							action '''EXPECT_EQUAL_INT32(caseId, "<|MODEL_LOCATION|>", 1, transitionData);'''
 						}
 						Transition triggerExit: startExit1 -> my exitPoint {
 							triggers {
@@ -188,17 +164,11 @@ RoomModel ContinuationTransitionTest {
 							}
 						}
 						Transition continuationCpElse: cp choicePoint -> startExit1 {
-							action {
-								"EXPECT_EQUAL_INT32(caseId, \"<|MODEL_LOCATION|>\", 1, transitionData);"
-							}
+							action '''EXPECT_EQUAL_INT32(caseId, "<|MODEL_LOCATION|>", 1, transitionData);'''
 						}
 						Transition continuationCpCond: cp choicePoint -> startExit2 {
-							cond {
-								"true"
-							}
-							action {
-								"EXPECT_EQUAL_INT32(caseId, \"<|MODEL_LOCATION|>\", 1, transitionData);"
-							}
+							cond '''true'''
+							action '''EXPECT_EQUAL_INT32(caseId, "<|MODEL_LOCATION|>", 1, transitionData);'''
 						}
 						Transition triggerChoicePoint: my startChoicePoint -> cp choicePoint {
 							triggers {
@@ -223,19 +193,17 @@ RoomModel ContinuationTransitionTest {
 			}
 		}
 	}
-	
+
 	ActorClass TransitionChainsWithInCompatibleData {
 		Structure {
-			Attribute caseId : int32
-			Port p0 : TestProtocol
+			Attribute caseId: int32
+			Port p0: TestProtocol
 		}
 		Behavior {
 			StateMachine {
 				Transition init: initial -> startEntry2
 				Transition continuationExit: exitPoint of substate -> endExit {
-					action {
-						"int x = 0;"
-					}
+					action '''int x = 0;'''
 				}
 				Transition tr0: startEntry2 -> entryPoint of substate {
 					triggers {
@@ -251,9 +219,7 @@ RoomModel ContinuationTransitionTest {
 				State substate {
 					subgraph {
 						Transition continuationEntry: my entryPoint -> cp choicePoint {
-							action {
-								"int x = 0;"
-							}
+							action '''int x = 0;'''
 						}
 						Transition triggerExit: startExit1 -> my exitPoint {
 							triggers {
@@ -261,17 +227,11 @@ RoomModel ContinuationTransitionTest {
 							}
 						}
 						Transition continuationCpElse: cp choicePoint -> startExit1 {
-							action {
-								"int x = 0;"
-							}
+							action '''int x = 0;'''
 						}
 						Transition continuationCpCond: cp choicePoint -> startExit2 {
-							cond {
-								"caseId == 99"
-							}
-							action {
-								"int x = 0;"
-							}
+							cond '''caseId == 99'''
+							action '''int x = 0;'''
 						}
 						Transition triggerChoicePoint: my startChoicePoint -> cp choicePoint {
 							triggers {
@@ -296,10 +256,10 @@ RoomModel ContinuationTransitionTest {
 			}
 		}
 	}
-	
+
 	abstract ActorClass TransitionChainWithData_Base {
 		Structure {
-			Port p0 : TestProtocol
+			Port p0: TestProtocol
 		}
 		Behavior {
 			StateMachine {
@@ -310,17 +270,11 @@ RoomModel ContinuationTransitionTest {
 					}
 				}
 				Transition tr1: cp cp0 -> state1 {
-					action {
-						"int x = transitionData;"
-					}
+					action '''int x = transitionData;'''
 				}
 				Transition tr2: cp cp0 -> state2 {
-					cond {
-						"true"
-					}
-					action {
-						"int x = transitionData;"
-					}
+					cond '''true'''
+					action '''int x = transitionData;'''
 				}
 				ChoicePoint cp0
 				State state0
@@ -329,7 +283,7 @@ RoomModel ContinuationTransitionTest {
 			}
 		}
 	}
-	
+
 //	ActorClass TransitionChainWithData_Sub extends TransitionChainWithData_Base{
 //		Structure { }
 //		Behavior {
@@ -343,25 +297,18 @@ RoomModel ContinuationTransitionTest {
 //			}
 //		}
 //	}
-	
 	abstract ActorClass TransitionChainWithoutIfItem_Base {
 		Structure {
-			Port p0 : TestProtocol
+			Port p0: TestProtocol
 		}
 		Behavior {
 			StateMachine {
 				Transition continuationChoicePointElse: cp cp0 -> endChoicePoint1 {
-					action {
-						"int x = 0;"
-					}
+					action '''int x = 0;'''
 				}
 				Transition continuationChoicePointCond: cp cp0 -> endChoicePoint2 {
-					cond {
-						"true"
-					}
-					action {
-						"int x = 0;"
-					}
+					cond '''true'''
+					action '''int x = 0;'''
 				}
 				Transition init: initial -> cp cp0
 				ChoicePoint cp0
@@ -370,9 +317,10 @@ RoomModel ContinuationTransitionTest {
 			}
 		}
 	}
-	
+
 	ActorClass TransitionChainWithoutIfItem_Sub extends TransitionChainWithoutIfItem_Base {
-		Structure { }
+		Structure {
+		}
 		Behavior {
 			StateMachine {
 				Transition triggerChoicePoint: startChoicePoint -> cp cp0 {
@@ -384,14 +332,12 @@ RoomModel ContinuationTransitionTest {
 			}
 		}
 	}
-	
-	
-	
+
 	ProtocolClass TestProtocol {
 		incoming {
-			Message in1(data1 : int32)
-			Message in2(data2 : boolean)
-			Message in3(data3: int32)
+			Message in1(int32)
+			Message in2(boolean)
+			Message in3(int32)
 		}
 	}
 }

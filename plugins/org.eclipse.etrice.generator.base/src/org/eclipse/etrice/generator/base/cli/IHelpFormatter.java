@@ -15,8 +15,8 @@
 
 package org.eclipse.etrice.generator.base.cli;
 
+import org.eclipse.etrice.generator.base.args.Option;
 import org.eclipse.etrice.generator.base.args.Options;
-import org.eclipse.etrice.generator.base.args.StringArrayOption;
 
 import com.google.inject.ImplementedBy;
 
@@ -34,6 +34,6 @@ public interface IHelpFormatter {
 	 * @param defaultOption the option for arguments without option identifier
 	 * @return the help message
 	 */
-	String getHelp(String name, Options options, StringArrayOption defaultOption);
+	String getHelp(String name, Options options, Option<String[]> defaultOption);
 	
 }

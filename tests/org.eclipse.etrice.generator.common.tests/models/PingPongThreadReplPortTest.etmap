@@ -1,7 +1,7 @@
 MappingModel PingPongThreadReplPortTest {
 	
-	import PingPongThreadReplPortTest.* from "PingPongThreadReplPortTest.room"
-	import PingPongThread.* from "PingPongThread.etphys"
+	import PingPongThreadReplPortTest.System_PingPongReplPort
+	import PingPongThread.Sys
 	
 	Mapping System_PingPongReplPort -> Sys {
 		SubSystemMapping main -> node1 {

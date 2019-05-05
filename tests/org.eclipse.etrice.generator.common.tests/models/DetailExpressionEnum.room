@@ -1,6 +1,6 @@
 RoomModel DetailExpressionEnum {
 
-	import DetailExpressionTypes.* from "DetailExpressionTypes.room"
+	import DetailExpressionTypes.ColorEnum
 
 	Enumeration ProtocolEnum {
 		RECV, ACK

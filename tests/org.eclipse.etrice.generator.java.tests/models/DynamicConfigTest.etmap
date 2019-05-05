@@ -1,9 +1,11 @@
 MappingModel DynamicConfigTest {
 
-	import DynamicConfigTest.* from "DynamicConfigTest.room"
-	import room.generic.physical.* from "../../org.eclipse.etrice.generator.common.tests/models/GenericPhysical.etphys"
+	import DynamicConfigTest.System_DynamicConfigTest
+	import room.generic.physical.GenericPhysicalSystem
 
 	Mapping System_DynamicConfigTest -> GenericPhysicalSystem {
-			SubSystemMapping main -> node {}
+		SubSystemMapping main -> node {
+			ThreadMapping defaultThread -> DefaultPhysicalThread
+		}
 	}
 }

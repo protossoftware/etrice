@@ -1,7 +1,11 @@
-RoomModel StatemachineInterfaceTestInheritedModel {
+RoomModel StatemachineInterfaceInheritedTest {
 
-	import room.basic.types.* from "../../../runtime/${etModellib}/model/Types.room"
-	import StatemachineInterfaceTestModel.* from "StatemachineInterfaceTest.room"
+	import StatemachineInterfaceTest.AsyncApp
+	import StatemachineInterfaceTest.DataApp
+	import StatemachineInterfaceTest.EventApp
+	import StatemachineInterfaceTest.EmptyAsyncApp
+	import StatemachineInterfaceTest.EmptyDataApp
+	import StatemachineInterfaceTest.EmptyEventApp
 
 	ActorClass StatemachineInterfaceInheritedTest {
 		Structure {

@@ -1,118 +1,114 @@
 RoomModel DynamicActorTest1 {
-	
-	import room.basic.test.* from "../../../runtime/org.eclipse.etrice.modellib.java/model/Tests.room"
-	import room.basic.types.* from "../../../runtime/org.eclipse.etrice.modellib.java/model/Types.room"
+
+	import room.basic.types.int32
+	import room.basic.types.string
 	
 	LogicalSystem JavaGenTests {
-		SubSystemRef da1Test : SubSystem_DynamicActorTest1
+		SubSystemRef da1Test: SubSystem_DynamicActorTest1
 	}
-	
+
 	SubSystemClass SubSystem_DynamicActorTest1 {
-		ActorRef appl : Appl
-	
+		ActorRef appl: Appl
+
 		LogicalThread defaultThread
 	}
-	
+
 	ActorClass Appl {
 		Structure {
 			ActorRef cont: Container
 		}
-		Behavior { }
+		Behavior {
+		}
 	}
-	
+
 	ActorClass Container {
 		Structure {
 			conjugated Port p0: PC
 			Attribute caseId: int32
 			optional ActorRef opt: Optional
-			
+
 			Binding p0 and opt.p0
 		}
 		Behavior {
-			ctor {
-				"caseId = etUnit_openAll(\"log\", \"DynamicActorTest1\", \"org.eclipse.etrice.generator.java.tests.DynamicActorTest1\", \"DynamicActorTest1_case\");"
-			}
-			dtor {
-				"etUnit_closeAll(caseId);"
-			}
-			
+			ctor '''caseId = etUnit_openAll("log", "DynamicActorTest1", "org.eclipse.etrice.generator.java.tests.DynamicActorTest1", "DynamicActorTest1_case");'''
+			dtor '''etUnit_closeAll(caseId);'''
+
 			StateMachine {
-				Transition init: initial -> CreateOptional2 { }
+				Transition init: initial -> CreateOptional2 {
+				}
 				Transition tr0: CreateOptional2 -> CreateOptional1 {
 					triggers {
 						<hello: p0>
 					}
-					action {
-						"EXPECT_TRUE(caseId, \"<|MODEL_LOCATION|>\", transitionData.equals(\"AC3:/JavaGenTests/da1Test/appl/cont/opt/sub2/deep_sub\"));"
-						"opt.destroyOptionalActor();"
-					}
+					action '''
+						EXPECT_TRUE(caseId, "<|MODEL_LOCATION|>", transitionData.equals("AC3:/JavaGenTests/da1Test/appl/cont/opt/sub2/deep_sub"));
+						opt.destroyOptionalActor();'''
 				}
 				Transition tr2: CreateOptional1 -> ReceivedHelloAgain {
 					triggers {
 						<hello: p0>
 					}
-					action {
-						"EXPECT_TRUE(caseId, \"<|MODEL_LOCATION|>\", transitionData.equals(\"AC1:/JavaGenTests/da1Test/appl/cont/opt/sub1\"));"
-						"opt.destroyOptionalActor();"
-					}
+					action '''
+						EXPECT_TRUE(caseId, "<|MODEL_LOCATION|>", transitionData.equals("AC1:/JavaGenTests/da1Test/appl/cont/opt/sub1"));
+						opt.destroyOptionalActor();'''
 				}
 				State CreateOptional2 {
-					entry {
-						"opt.createOptionalActor(\"Optional2\", getThread());"
-						"p0.sayHello();"
-					}
+					entry '''
+						opt.createOptionalActor("Optional2", getThread());
+						p0.sayHello();'''
 				}
 				State CreateOptional1 {
-					entry {
-						"opt.createOptionalActor(\"Optional1\", getThread());"
-						"p0.sayHello();"
-					}
+					entry '''
+						opt.createOptionalActor("Optional1", getThread());
+						p0.sayHello();'''
 				}
 				State ReceivedHelloAgain {
-					entry {
-						"IRTObject opt = getChild(\"opt\");"
-						"int size = opt.getChildren().size();"
-						""
-						"// we expect the RTSystemPort and the InterfaceItemBroker"
-						"EXPECT_EQUAL_INT32(caseId, \"<|MODEL_LOCATION|>\", 2, size);"
-						""
-						"etUnit_testFinished(caseId);"
-					}
+					entry '''
+						IRTObject opt = getChild("opt");
+						int size = opt.getChildren().size();
+						
+						// we expect the RTSystemPort and the InterfaceItemBroker
+						EXPECT_EQUAL_INT32(caseId, "<|MODEL_LOCATION|>", 2, size);
+						
+						etUnit_testFinished(caseId);'''
 				}
 			}
 		}
 	}
-	
+
 	// the class that is referenced as optional by the Container
 	// since it is abstract it just serves as an interface
 	abstract ActorClass Optional {
 		Interface {
 			Port p0: PC
 		}
-		Structure { }
-		Behavior { }
+		Structure {
+		}
+		Behavior {
+		}
 	}
-	
+
 	// a sub class of Optional which is valid as optional actor
 	ActorClass Optional1 extends Optional {
 		Structure {
 			ActorRef sub1: AC1
 			Binding p0 and sub1.p0
 		}
-		Behavior { }
+		Behavior {
+		}
 	}
-	
+
 	// a sub class of Optional which is valid as optional actor
 	ActorClass Optional2 extends Optional {
 		Structure {
 			ActorRef sub2: AC2
 			Binding p0 and sub2.p0
 		}
-		Behavior { }
+		Behavior {
+		}
 	}
-	
+
 	// the following actor classes are part of the possible optional instance sub trees
-	
 	ActorClass AC1 {
 		Interface {
 			Port p0: PC
@@ -122,20 +118,19 @@ RoomModel DynamicActorTest1 {
 		}
 		Behavior {
 			StateMachine {
-				Transition init: initial -> Ready { }
+				Transition init: initial -> Ready {
+				}
 				Transition tr0: Ready -> Ready {
 					triggers {
 						<sayHello: p0>
 					}
-					action {
-						"p0.hello(\"AC1:\"+getInstancePath());"
-					}
+					action '''p0.hello("AC1:"+getInstancePath());'''
 				}
 				State Ready
 			}
 		}
 	}
-	
+
 	ActorClass AC2 {
 		Interface {
 			Port p0: PC
@@ -144,9 +139,10 @@ RoomModel DynamicActorTest1 {
 			ActorRef deep_sub: AC3
 			Binding p0 and deep_sub.p0
 		}
-		Behavior { }
+		Behavior {
+		}
 	}
-	
+
 	ActorClass AC3 {
 		Interface {
 			Port p0: PC
@@ -156,27 +152,26 @@ RoomModel DynamicActorTest1 {
 		}
 		Behavior {
 			StateMachine {
-				Transition init: initial -> Ready { }
+				Transition init: initial -> Ready {
+				}
 				Transition tr0: Ready -> Ready {
 					triggers {
 						<sayHello: p0>
 					}
-					action {
-						"p0.hello(\"AC3:\"+getInstancePath());"
-					}
+					action '''p0.hello("AC3:"+getInstancePath());'''
 				}
 				State Ready
 			}
 		}
 	}
-	
+
 	// a simple protocol that is used to demonstrate that actors are connected
 	ProtocolClass PC {
 		incoming {
 			Message sayHello()
 		}
 		outgoing {
-			Message hello(txt: string)
+			Message hello(string)
 		}
 	}
 }

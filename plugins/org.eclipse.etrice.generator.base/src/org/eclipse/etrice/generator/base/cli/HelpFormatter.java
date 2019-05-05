@@ -19,7 +19,6 @@ import java.util.Formatter;
 
 import org.eclipse.etrice.generator.base.args.Option;
 import org.eclipse.etrice.generator.base.args.Options;
-import org.eclipse.etrice.generator.base.args.StringArrayOption;
 
 /**
  * Simple implementation for command line help formatting.
@@ -30,7 +29,7 @@ public class HelpFormatter implements IHelpFormatter {
 	}
 	
 	@Override
-	public String getHelp(String name, Options options, StringArrayOption defaultOption) {
+	public String getHelp(String name, Options options, Option<String[]> defaultOption) {
 		try(Formatter formatter = new Formatter()) {
 			formatter.format("%s usage: [options] %s...%n", name, defaultOption.getName());
 			formatter.format("Options:%n");

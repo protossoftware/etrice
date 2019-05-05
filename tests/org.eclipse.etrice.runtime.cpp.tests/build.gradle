@@ -34,10 +34,7 @@ def etuFile = 'log/TestCppRuntime.etu'
 clean.delete 'log'
 
 task run(type: Exec, dependsOn: assemble, group: 'verification') {
-	commandLine exeFile
-	inputs.file exeFile
-	outputs.files etuFile
-	
+	executable exeFile
 	doFirst { file('log').mkdirs() }
 }
 

@@ -1,7 +1,8 @@
 RoomModel ChoicePointTest {
 
-	import room.basic.types.* from "../../../runtime/${etModellib}/model/Types.room"
-	import room.basic.test.* from "../../../runtime/${etModellib}/model/Tests.room"
+	import room.basic.types.int16
+	import room.basic.types.int32
+	import room.basic.test.TestInstance
 
 	ActorClass CPTest_Top {
 		@TestInstance
@@ -10,7 +11,8 @@ RoomModel ChoicePointTest {
 			ActorRef cp_user: CPUser
 			Binding cp_tester.TestPort1 and cp_user.TestPort1
 		}
-		Behavior { }
+		Behavior {
+		}
 	}
 
 	ActorClass CPUser {
@@ -21,97 +23,67 @@ RoomModel ChoicePointTest {
 			external Port TestPort1
 			Attribute counter: int32
 			Attribute caseId: int32
-			Attribute resultlist[29]: int16 = "{1,2,3,4,5,6,3,4,5,7,8,10,11,12,9,16,3,4,5,17,8,13,15,11,19,12,9,18,20}"
-			
+			Attribute resultlist [29]: int16 = "{1,2,3,4,5,6,3,4,5,7,8,10,11,12,9,16,3,4,5,17,8,13,15,11,19,12,9,18,20}"
 		}
 		Behavior {
-			ctor {
-				"caseId = etUnit_openAll(\"log\", \"ChoicePointTest\", \"org.eclipse.etrice.generator.common.tests.ChoicePointTest\", \"ChoicePointTest_case\");"
-			}
-			dtor {
-				"etUnit_closeAll(caseId);"
-			}
+			ctor '''caseId = etUnit_openAll("log", "ChoicePointTest", "org.eclipse.etrice.generator.common.tests.ChoicePointTest", "ChoicePointTest_case");'''
+			dtor '''etUnit_closeAll(caseId);'''
 			StateMachine {
 				Transition init: initial -> cp cp0 {
-					action {
-						"counter = 0;"
-						"EXPECT_ORDER_START(caseId,resultlist,29);"
-						"EXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 1);"
-					}
+					action '''
+						counter = 0;
+						EXPECT_ORDER_START(caseId,resultlist,29);
+						EXPECT_ORDER(caseId,"<|MODEL_LOCATION|>", 1);'''
 				}
 				Transition tr4: cp cp0 -> ENTRY3_EXIT4 {
-					action {
-						"EXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 0);"
-					}
+					action '''EXPECT_ORDER(caseId,"<|MODEL_LOCATION|>", 0);'''
 				}
 				Transition EXPECT2: cp cp0 -> ENTRY3_EXIT4 {
-					cond {
-						"counter == 0"
-					}
-					action {
-						"EXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 2);"
-					}
+					cond '''counter == 0'''
+					action '''EXPECT_ORDER(caseId,"<|MODEL_LOCATION|>", 2);'''
 				}
 				Transition EXPECT5: ENTRY3_EXIT4 -> cp cp1 {
 					triggers {
 						<msg1: TestPort1>
 					}
-					action {
-						"EXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 5);"
-					}
+					action '''EXPECT_ORDER(caseId,"<|MODEL_LOCATION|>", 5);'''
 				}
 				Transition EXPECT6: cp cp1 -> ENTRY3_EXIT4 {
-					action {
-						"counter=3;"
-						"EXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 6);"
-					}
+					action '''
+						counter=3;
+						EXPECT_ORDER(caseId,"<|MODEL_LOCATION|>", 6);'''
 				}
 				Transition EXPECT17: cp cp1 -> tp0 of ENTRY8_EXIT9 {
-					cond {
-						"counter == 4"
-					}
-					action {
-						"EXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 17);"
-					}
+					cond '''counter == 4'''
+					action '''EXPECT_ORDER(caseId,"<|MODEL_LOCATION|>", 17);'''
 				}
 				Transition EXPECT7: cp cp1 -> ENTRY8_EXIT9 {
-					cond {
-						"counter == 3"
-					}
-					action {
-						"counter = 1;"
-						"EXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 7);"
-					}
+					cond '''counter == 3'''
+					action '''
+						counter = 1;
+						EXPECT_ORDER(caseId,"<|MODEL_LOCATION|>", 7);'''
 				}
 				Transition EXPECT16: ENTRY8_EXIT9 -> ENTRY3_EXIT4 {
 					triggers {
-						<msg1: TestPort1 guard {
-							"counter==1"
-						}>
+						<msg1: TestPort1 guard '''counter==1'''>
 					}
-					action {
-						"counter=4;"
-						"EXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 16);"
-					}
+					action '''
+						counter=4;
+						EXPECT_ORDER(caseId,"<|MODEL_LOCATION|>", 16);'''
 				}
 				Transition EXPEXT19: my tp0 -> my tp0 {
 					triggers {
 						<msg1: TestPort1>
 					}
-					action {
-						"counter = 2;"
-						"EXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 19);"
-					}
+					action '''
+						counter = 2;
+						EXPECT_ORDER(caseId,"<|MODEL_LOCATION|>", 19);'''
 				}
 				Transition EXPECT18: ENTRY8_EXIT9 -> testOk {
 					triggers {
-						<msg1: TestPort1 guard {
-							"counter==2"
-						}>
+						<msg1: TestPort1 guard '''counter==2'''>
 					}
-					action {
-						"EXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 18);"
-					}
+					action '''EXPECT_ORDER(caseId,"<|MODEL_LOCATION|>", 18);'''
 				}
 				Transition tr0: ENTRY3_EXIT4 -> cp cp1 {
 					triggers {
@@ -122,61 +94,38 @@ RoomModel ChoicePointTest {
 				ChoicePoint cp1
 				handler TransitionPoint tp0
 				State ENTRY3_EXIT4 {
-					entry {
-						"EXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 3);"
-					}
-					exit {
-						"EXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 4);"
-					}
+					entry '''EXPECT_ORDER(caseId,"<|MODEL_LOCATION|>", 3);'''
+					exit '''EXPECT_ORDER(caseId,"<|MODEL_LOCATION|>", 4);'''
 				}
 				State ENTRY8_EXIT9 {
-					entry {
-						"EXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 8);"
-					}
-					exit {
-						"EXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 9);"
-					}
+					entry '''EXPECT_ORDER(caseId,"<|MODEL_LOCATION|>", 8);'''
+					exit '''EXPECT_ORDER(caseId,"<|MODEL_LOCATION|>", 9);'''
 					subgraph {
 						Transition EXPECT13: my tp0 -> cp cp0 {
-							action {
-								"EXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 13);"
-							}
+							action '''EXPECT_ORDER(caseId,"<|MODEL_LOCATION|>", 13);'''
 						}
 						Transition EXPECT14: cp cp0 -> ENTRY11_EXIT12 {
-							action {
-								"EXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 14);"
-							}
+							action '''EXPECT_ORDER(caseId,"<|MODEL_LOCATION|>", 14);'''
 						}
 						Transition EXPECT15: cp cp0 -> ENTRY11_EXIT12 {
-							cond {
-								"counter == 4"
-							}
-							action {
-								"EXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 15);"
-							}
+							cond '''counter == 4'''
+							action '''EXPECT_ORDER(caseId,"<|MODEL_LOCATION|>", 15);'''
 						}
 						Transition init: initial -> ENTRY11_EXIT12 {
-							action {
-								"EXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 10);"
-							}
+							action '''EXPECT_ORDER(caseId,"<|MODEL_LOCATION|>", 10);'''
 						}
 						ChoicePoint cp0
 						EntryPoint tp0
 						State ENTRY11_EXIT12 {
-							entry {
-								"EXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 11);"
-							}
-							exit {
-								"EXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 12);"
-							}
+							entry '''EXPECT_ORDER(caseId,"<|MODEL_LOCATION|>", 11);'''
+							exit '''EXPECT_ORDER(caseId,"<|MODEL_LOCATION|>", 12);'''
 						}
 					}
 				}
 				State testOk {
-					entry {
-						"EXPECT_ORDER_END(caseId,\"<|MODEL_LOCATION|>\", 20);"
-						"etUnit_testFinished(caseId);"
-					}
+					entry '''
+						EXPECT_ORDER_END(caseId,"<|MODEL_LOCATION|>", 20);
+						etUnit_testFinished(caseId);'''
 				}
 			}
 		}
@@ -192,14 +141,13 @@ RoomModel ChoicePointTest {
 		Behavior {
 			StateMachine {
 				Transition init: initial -> state0 {
-					action {
-						"TestPort1.msg1(1);"
-						"TestPort1.msg1(2);"
-						"TestPort1.msg1(3);"
-						"TestPort1.msg1(4);"
-						"TestPort1.msg1(5);"
-						"TestPort1.msg1(6);"
-					}
+					action '''
+						TestPort1.msg1(1);
+						TestPort1.msg1(2);
+						TestPort1.msg1(3);
+						TestPort1.msg1(4);
+						TestPort1.msg1(5);
+						TestPort1.msg1(6);'''
 				}
 				State state0
 			}
@@ -208,12 +156,11 @@ RoomModel ChoicePointTest {
 
 	ProtocolClass TestProtocol {
 		incoming {
-			Message msg1(data: int32)
-			Message msg2(data: int32)
-			Message msg3(data: int32)
-			Message msg4(data: int32)
-			Message msg5(data: int32)
+			Message msg1(int32)
+			Message msg2(int32)
+			Message msg3(int32)
+			Message msg4(int32)
+			Message msg5(int32)
 		}
 	}
-
 }

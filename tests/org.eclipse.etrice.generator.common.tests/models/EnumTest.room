@@ -1,7 +1,8 @@
 RoomModel EnumTest {
 
-	import room.basic.types.* from "../../../runtime/${etModellib}/model/Types.room"
-	import room.basic.test.* from "../../../runtime/${etModellib}/model/Tests.room"
+	import room.basic.types.int16
+	import room.basic.types.int32
+	import room.basic.test.TestInstance
 
 	ActorClass EnumTest_Top {
 		@TestInstance

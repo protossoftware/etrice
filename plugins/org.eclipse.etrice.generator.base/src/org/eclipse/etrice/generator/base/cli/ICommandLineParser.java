@@ -19,8 +19,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.eclipse.etrice.generator.base.args.Arguments;
+import org.eclipse.etrice.generator.base.args.Option;
 import org.eclipse.etrice.generator.base.args.Options;
-import org.eclipse.etrice.generator.base.args.StringArrayOption;
 
 import com.google.inject.ImplementedBy;
 
@@ -37,7 +37,7 @@ public interface ICommandLineParser {
 	 * @param defaultOption the option for arguments without option identifier
 	 * @param args the command line arguments
 	 */
-	Arguments parseArgs(Options options, StringArrayOption defaultOption, List<String> args) throws CommandLineParseException;
+	Arguments parseArgs(Options options, Option<String[]> defaultOption, List<String> args) throws CommandLineParseException;
 	
 	
 	/**
@@ -47,7 +47,7 @@ public interface ICommandLineParser {
 	 * @param defaultOption the option to store arguments without identifier
 	 * @param args the command line arguments
 	 */
-	default Arguments parseArgs(Options options, StringArrayOption defaultOption, String[] args) throws CommandLineParseException {
+	default Arguments parseArgs(Options options, Option<String[]> defaultOption, String[] args) throws CommandLineParseException {
 		return parseArgs(options, defaultOption, Arrays.asList(args));
 	}
 }

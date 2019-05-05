@@ -4,6 +4,15 @@ apply plugin: 'java-base'
 
 apply from: "$rootDir/gradle/etTest.gradle"
 
+dependencies {
+	modelpath_c project(path: ':runtime:org.eclipse.etrice.modellib.c', configuration: 'modelpath_c')
+	modelpath_cpp project(path: ':runtime:org.eclipse.etrice.modellib.cpp', configuration: 'modelpath_cpp')
+	modelpath_java project(path: ':runtime:org.eclipse.etrice.modellib.java', configuration: 'modelpath_java')
+	modelpath_c files('models')
+	modelpath_cpp files('models')
+	modelpath_java files('models')
+}
+
 def genericPhysical = 'models/GenericPhysical.etphys'
 
 def tests = [
@@ -12,7 +21,7 @@ def tests = [
 	choicePointTestExtended: 	['models/ChoicePointTestExtended.room', genericPhysical],
 	dataDrivenTest:				['models/DataDrivenTest.room', genericPhysical],
 	/* enumTest:				['models/EnumTest.room', genericPhysical],		not supported in c++	*/
-	compileTests:				['models/CompileTests.room', genericPhysical, 'models/StatemachineInterfaceTest.room', 'models/StatemachineInterfaceInheritedTest.room', 'models/StatemachineInterfaceTest.room', 'models/ContinuationTransitionTest.room'],
+	compileTest:				['models/CompileTest.room', genericPhysical, 'models/StatemachineInterfaceTest.room', 'models/StatemachineInterfaceInheritedTest.room', 'models/StatemachineInterfaceTest.room', 'models/ContinuationTransitionTest.room'],
 	
 	handlerTest:				['models/HandlerTest.room', genericPhysical],
 	operationInheritanceTest:	['models/OperationInheritanceTest.room', genericPhysical],
@@ -34,7 +43,7 @@ createTest('java', 'enumTest', ['models/EnumTest.room', genericPhysical])
 createTest('c', 'detailExpressionCompileTest', [genericPhysical, 'models/DetailExpressionTest.room', 'models/DetailExpressionEnum.room', 'models/DetailExpressionTypes.room'])
 createTest('java', 'detailExpressionCompileTest', [genericPhysical, 'models/DetailExpressionTest.room', 'models/DetailExpressionEnum.room', 'models/DetailExpressionTypes.room'])
 
-// VarargsTTest
+// VarargsTest
 createTest('c', 'varargsTest', [genericPhysical, 'models/VarargsTest.room'])
 createTest('java', 'varargsTest', [genericPhysical, 'models/VarargsTest.room'])
 

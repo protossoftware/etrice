@@ -1,8 +1,13 @@
 RoomModel SendingDataTest {
 
-	import room.basic.test.* from "../../../runtime/org.eclipse.etrice.modellib.java/model/Tests.room"
-	import room.basic.types.* from "../../../runtime/org.eclipse.etrice.modellib.java/model/Types.room"
-	import room.basic.language.* from "../../../runtime/org.eclipse.etrice.modellib.java/model/Language.room"
+	import room.basic.types.int8
+	import room.basic.types.int16
+	import room.basic.types.int32
+	import room.basic.types.int64
+	import room.basic.types.float32
+	import room.basic.types.float64
+	import room.basic.test.TestInstance
+	import room.basic.language.languageIndicator
 	
 	ActorClass SendingDataTop {
 		@TestInstance
@@ -27,125 +32,87 @@ RoomModel SendingDataTest {
 					triggers {
 						<pingInt16: PingPongPort>
 					}
-					action {
-						"PingPongPort.pongInt16(transitionData);"
-					}
+					action '''PingPongPort.pongInt16(transitionData);'''
 				}
 				Transition tr1: reply -> reply {
 					triggers {
 						<pingInt8: PingPongPort>
 					}
-					action {
-						"PingPongPort.pongInt8(transitionData);"
-					}
+					action '''PingPongPort.pongInt8(transitionData);'''
 				}
 				Transition init: initial -> reply { }
 				Transition tr2: reply -> reply {
 					triggers {
 						<pingInt32: PingPongPort>
 					}
-					action {
-						"PingPongPort.pongInt32(transitionData);"
-					}
+					action '''PingPongPort.pongInt32(transitionData);'''
 				}
 				Transition tr3: reply -> reply {
 					triggers {
 						<pingFloat32: PingPongPort>
 					}
-					action {
-						"PingPongPort.pongFloat32(transitionData);"
-					}
+					action '''PingPongPort.pongFloat32(transitionData);'''
 				}
 				Transition tr4: reply -> reply {
 					triggers {
 						<pingFloat64: PingPongPort>
 					}
-					action {
-						"PingPongPort.pongFloat64(transitionData);"
-					}
+					action '''PingPongPort.pongFloat64(transitionData);'''
 				}
 				Transition tr7: reply -> cp cp0 {
 					triggers {
-						<pingInt32Ref: PingPongPort guard {
-							"transitionData!=0"
-						}>
+						<pingInt32Ref: PingPongPort guard '''transitionData!=0'''>
 					}
 				}
 				Transition tr8: cp cp0 -> reply {
-					action {
-						"PingPongPort.pongInt32(transitionData+10);"
-					}
+					action '''PingPongPort.pongInt32(transitionData+10);'''
 				}
 				Transition tr6: cp cp0 -> reply {
-					cond {
-						"transitionData!=5"
-					}
-					action {
-						"PingPongPort.pongInt32(transitionData);"
-					}
+					cond '''transitionData!=5'''
+					action '''PingPongPort.pongInt32(transitionData);'''
 				}
 				Transition tr9: reply -> reply {
 					triggers {
 						<pingComplex: PingPongPort>
 					}
-					action {
-						"PingPongPort.pongComplex(transitionData);"
-					}
+					action '''PingPongPort.pongComplex(transitionData);'''
 				}
 				Transition tr11: reply -> reply {
 					triggers {
 						<pingComplexRef: PingPongPort>
 					}
-					action {
-						"PingPongPort.pongComplex(transitionData);"
-					}
+					action '''PingPongPort.pongComplex(transitionData);'''
 				}
 				Transition tr5: reply -> reply {
 					triggers {
 						<pingInt64: PingPongPort>
 					}
-					action {
-						"PingPongPort.pongInt64(transitionData);"
-					}
+					action '''PingPongPort.pongInt64(transitionData);'''
 				}
 				Transition tr10: reply -> reply {
 					triggers {
 						<pingInt16Ref: PingPongPort>
 					}
-					action {
-						"PingPongPort.pongInt16(transitionData);"
-					}
+					action '''PingPongPort.pongInt16(transitionData);'''
 				}
 				Transition tr12: reply -> cp cp1 {
 					triggers {
-						<pingComplexRef: PingPongPort guard {
-							"transitionData.i8Val == 5"
-						}>
+						<pingComplexRef: PingPongPort guard '''transitionData.i8Val == 5'''>
 					}
-					action {
-						"PingPongPort.pongComplex(transitionData);"
-					}
+					action '''PingPongPort.pongComplex(transitionData);'''
 				}
 				Transition tr13: cp cp1 -> reply {
-					action {
-						"PingPongPort.pongComplex(transitionData);"
-					}
+					action '''PingPongPort.pongComplex(transitionData);'''
 				}
 				Transition tr14: cp cp1 -> reply {
-					cond {
-						"transitionData.i8Val==7"
-					}
-					action {
-						"PingPongPort.pongComplex(transitionData);"
-					}
+					cond '''transitionData.i8Val==7'''
+					action '''PingPongPort.pongComplex(transitionData);'''
 				}
 				Transition tr15: reply -> reply {
 					triggers {
 						<pingComplexDerived: PingPongPort>
 					}
-					action {
-						"PingPongPort.pongComplexDerived(transitionData);"
-					}
+					action '''PingPongPort.pongComplexDerived(transitionData);'''
 				}
 				ChoicePoint cp0
 				ChoicePoint cp1
@@ -177,281 +144,254 @@ RoomModel SendingDataTest {
 		Behavior {
 			StateMachine {
 				Transition init: initial -> tp0 of state0 {
-					action {
-						"caseId = etUnit_openAll(\"log\", \"SendingDataTest\", \"org.eclipse.etrice.generator.java.tests.SendingDataTest\", \"SendingDataTest_case\");"
-						"EXPECT_ORDER_START(caseId,resultlist,23);"
-						"EXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 1);"
-						"// send the default values"
-						""
-						"PingPongPort.pingInt8(i8Val);"
-						"PingPongPort.pingInt16(i16Val);"
-						"PingPongPort.pingInt32(i32Val);"
-						"PingPongPort.pingInt64(i64Val);"
-						"PingPongPort.pingFloat32(f32Val);"
-						"PingPongPort.pingFloat64(f64Val);"
-						"PingPongPort.pingInt16Ref(i16Val);"
-						"PingPongPort.pingInt32Ref(i32Val);"
-						"i8Val++;"
-						"i16Val++;"
-						"i32Val++;"
-						"i64Val++;"
-						"f32Val+=10.1;"
-						"f64Val+=20.2;"
-						"PingPongPort.pingInt8(i8Val);"
-						"PingPongPort.pingInt16(i16Val);"
-						"PingPongPort.pingInt32(i32Val);"
-						"PingPongPort.pingInt64(i64Val);"
-						"PingPongPort.pingFloat32(f32Val);"
-						"PingPongPort.pingFloat64(f64Val);"
-						"PingPongPort.pingInt16Ref(i16Val);"
-						"PingPongPort.pingInt32Ref(i32Val);"
-					}
+					action '''
+	caseId = etUnit_openAll("log", "SendingDataTest", "org.eclipse.etrice.generator.java.tests.SendingDataTest", "SendingDataTest_case");
+	EXPECT_ORDER_START(caseId,resultlist,23);
+	EXPECT_ORDER(caseId,"<|MODEL_LOCATION|>", 1);
+	// send the default values
+	
+	PingPongPort.pingInt8(i8Val);
+	PingPongPort.pingInt16(i16Val);
+	PingPongPort.pingInt32(i32Val);
+	PingPongPort.pingInt64(i64Val);
+	PingPongPort.pingFloat32(f32Val);
+	PingPongPort.pingFloat64(f64Val);
+	PingPongPort.pingInt16Ref(i16Val);
+	PingPongPort.pingInt32Ref(i32Val);
+	i8Val++;
+	i16Val++;
+	i32Val++;
+	i64Val++;
+	f32Val+=10.1;
+	f64Val+=20.2;
+	PingPongPort.pingInt8(i8Val);
+	PingPongPort.pingInt16(i16Val);
+	PingPongPort.pingInt32(i32Val);
+	PingPongPort.pingInt64(i64Val);
+	PingPongPort.pingFloat32(f32Val);
+	PingPongPort.pingFloat64(f64Val);
+	PingPongPort.pingInt16Ref(i16Val);
+	PingPongPort.pingInt32Ref(i32Val);'''
 				}
 				Transition tr0: tp1 of state0 -> tp0 of state1
 				Transition tr1: tp1 of state1 -> test_finished
 				State state0 {
 					subgraph {
 						Transition tr0: my tp0 -> receiveFirst7 {
-							action {
-								"counter=0;"
-							}
+							action '''counter=0;'''
 						}
 						Transition tr1: receiveFirst7 -> receiveFirst7 {
 							triggers {
 								<pongInt8: PingPongPort>
 							}
-							action {
-								"counter++;"
-								"if (transitionData==5){"
-								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 2);"
-								"}else{"
-								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 0xFF);"
-								"}"
-							}
+							action '''
+	counter++;
+	if (transitionData==5){
+		EXPECT_ORDER(caseId,"<|MODEL_LOCATION|>", 2);
+	}else{
+		EXPECT_ORDER(caseId,"<|MODEL_LOCATION|>", 0xFF);
+	}'''
 						}
 						Transition tr2: receiveFirst7 -> receiveFirst7 {
 							triggers {
 								<pongInt16: PingPongPort>
 							}
-							action {
-								"counter++;"
-								"if (transitionData==19){"
-								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 3);"
-								"}else{"
-								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 0xFF);"
-								"}"
-							}
+							action '''
+	counter++;
+	if (transitionData==19){
+		EXPECT_ORDER(caseId,"<|MODEL_LOCATION|>", 3);
+	}else{
+		EXPECT_ORDER(caseId,"<|MODEL_LOCATION|>", 0xFF);
+	}'''
 						}
 						Transition tr3: receiveFirst7 -> receiveFirst7 {
 							triggers {
 								<pongInt32: PingPongPort>
 							}
-							action {
-								"counter++;"
-								"if (transitionData==4711){"
-								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 4);"
-								"}else{"
-								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 0xFF);"
-								"}"
-							}
+							action '''
+	counter++;
+	if (transitionData==4711){
+		EXPECT_ORDER(caseId,"<|MODEL_LOCATION|>", 4);
+	}else{
+		EXPECT_ORDER(caseId,"<|MODEL_LOCATION|>", 0xFF);
+	}'''
 						}						
 						Transition tr4: receiveFirst7 -> receiveSecond7 {
 							triggers {
-								<pongInt32: PingPongPort guard {
-									"counter==7"
-								}>
+								<pongInt32: PingPongPort guard '''counter==7'''>
 							}
-							action {
-								"counter=0;"
-								"if (lang == 1){"
-								"// Java cannot send references of primitive types"
-								"\tif (transitionData==4711){\t"
-								"\t\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 9);"
-								"\t}else{"
-								"\t\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 0xFF);"
-								"\t}"
-								"} "
-								"if (lang == 2){"
-								"// C"
-								"\tif (transitionData==4712){\t"
-								"\t\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 9);"
-								"\t}else{"
-								"\t\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 0xFF);"
-								"\t}"
-								"}"
-							}
+							action '''
+	counter=0;
+	if (lang == 1){
+	// Java cannot send references of primitive types
+		if (transitionData==4711){	
+			EXPECT_ORDER(caseId,"<|MODEL_LOCATION|>", 9);
+		}else{
+			EXPECT_ORDER(caseId,"<|MODEL_LOCATION|>", 0xFF);
+		}
+	} 
+	if (lang == 2){
+	// C
+		if (transitionData==4712){	
+			EXPECT_ORDER(caseId,"<|MODEL_LOCATION|>", 9);
+		}else{
+			EXPECT_ORDER(caseId,"<|MODEL_LOCATION|>", 0xFF);
+		}
+	}'''
 						}
 						Transition tr6: receiveFirst7 -> receiveFirst7 {
 							triggers {
 								<pongInt64: PingPongPort>
 							}
-							action {
-								"counter++;"
-								"if (transitionData==11470815){"
-								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 5);"
-								"}else{"
-								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 0xFF);"
-								"}"
-							}
+							action '''
+	counter++;
+	if (transitionData==11470815){
+		EXPECT_ORDER(caseId,"<|MODEL_LOCATION|>", 5);
+	}else{
+		EXPECT_ORDER(caseId,"<|MODEL_LOCATION|>", 0xFF);
+	}'''
 						}
 						Transition tr5: receiveFirst7 -> receiveFirst7 {
 							triggers {
 								<pongFloat32: PingPongPort>
 							}
-							action {
-								"counter++;"
-								"if ((transitionData>3)&&(transitionData<4)){"
-								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 6);"
-								"}else{"
-								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 0xFF);"
-								"}"
-							}
+							action '''
+	counter++;
+	if ((transitionData>3)&&(transitionData<4)){
+		EXPECT_ORDER(caseId,"<|MODEL_LOCATION|>", 6);
+	}else{
+		EXPECT_ORDER(caseId,"<|MODEL_LOCATION|>", 0xFF);
+	}'''
 						}
 						Transition tr7: receiveFirst7 -> receiveFirst7 {
 							triggers {
 								<pongFloat64: PingPongPort>
 							}
-							action {
-								"counter++;"
-								"if ((transitionData>7)&&(transitionData<8)){"
-								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 7);"
-								"}else{"
-								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 0xFF);"
-								"}"
-							}
+							action '''
+	counter++;
+	if ((transitionData>7)&&(transitionData<8)){
+		EXPECT_ORDER(caseId,"<|MODEL_LOCATION|>", 7);
+	}else{
+		EXPECT_ORDER(caseId,"<|MODEL_LOCATION|>", 0xFF);
+	}'''
 						}
 						Transition tr8: receiveSecond7 -> receiveSecond7 {
 							triggers {
 								<pongInt8: PingPongPort>
 							}
-							action {
-								"counter++;"
-								"if (transitionData==6){"
-								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 10);"
-								"}else{"
-								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 0xFF);"
-								"}"
-							}
+							action '''
+	counter++;
+	if (transitionData==6){
+		EXPECT_ORDER(caseId,"<|MODEL_LOCATION|>", 10);
+	}else{
+		EXPECT_ORDER(caseId,"<|MODEL_LOCATION|>", 0xFF);
+	}'''
 						}
 						Transition tr9: receiveSecond7 -> receiveSecond7 {
 							triggers {
 								<pongInt16: PingPongPort>
 							}
-							action {
-								"counter++;"
-								"if (transitionData==20){"
-								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 11);"
-								"}else{"
-								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 0xFF);"
-								"}"
-							}
+							action '''
+	counter++;
+	if (transitionData==20){
+		EXPECT_ORDER(caseId,"<|MODEL_LOCATION|>", 11);
+	}else{
+		EXPECT_ORDER(caseId,"<|MODEL_LOCATION|>", 0xFF);
+	}'''
 						}
 						Transition tr10: receiveSecond7 -> receiveSecond7 {
 							triggers {
 								<pongInt32: PingPongPort>
 							}
-							action {
-								"counter++;"
-								"if (transitionData==4712){"
-								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 12);"
-								"}else{"
-								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 0xFF);"
-								"}"
-							}
+							action '''
+	counter++;
+	if (transitionData==4712){
+		EXPECT_ORDER(caseId,"<|MODEL_LOCATION|>", 12);
+	}else{
+		EXPECT_ORDER(caseId,"<|MODEL_LOCATION|>", 0xFF);
+	}'''
 						}
 						Transition tr11: receiveSecond7 -> receiveSecond7 {
 							triggers {
 								<pongInt64: PingPongPort>
 							}
-							action {
-								"counter++;"
-								"if (transitionData==11470816){"
-								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 13);"
-								"}else{"
-								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 0xFF);"
-								"}"
-							}
+							action '''
+	counter++;
+	if (transitionData==11470816){
+		EXPECT_ORDER(caseId,"<|MODEL_LOCATION|>", 13);
+	}else{
+		EXPECT_ORDER(caseId,"<|MODEL_LOCATION|>", 0xFF);
+	}'''
 						}
 						Transition tr12: receiveSecond7 -> receiveSecond7 {
 							triggers {
 								<pongFloat32: PingPongPort>
 							}
-							action {
-								"counter++;"
-								"if ((transitionData>13)&&(transitionData<14)){"
-								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 14);"
-								"}else{"
-								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 0xFF);"
-								"}"
-							}
+							action '''
+	counter++;
+	if ((transitionData>13)&&(transitionData<14)){
+		EXPECT_ORDER(caseId,"<|MODEL_LOCATION|>", 14);
+	}else{
+		EXPECT_ORDER(caseId,"<|MODEL_LOCATION|>", 0xFF);
+	}'''
 						}
 						Transition tr13: receiveSecond7 -> receiveSecond7 {
 							triggers {
 								<pongFloat64: PingPongPort>
 							}
-							action {
-								"counter++;"
-								"if ((transitionData>28)&&(transitionData<29)){"
-								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 15);"
-								"}else{"
-								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 0xFF);"
-								"}"
-							}
+							action '''
+	counter++;
+	if ((transitionData>28)&&(transitionData<29)){
+		EXPECT_ORDER(caseId,"<|MODEL_LOCATION|>", 15);
+	}else{
+		EXPECT_ORDER(caseId,"<|MODEL_LOCATION|>", 0xFF);
+	}'''
 						}
 						Transition tr14: receiveSecond7 -> my tp1 {
 							triggers {
-								<pongInt32: PingPongPort guard {
-									"counter==7"
-								}>
+								<pongInt32: PingPongPort guard '''counter==7'''>
 							}
-							action {
-								"if (transitionData==4712){\t"
-								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 17);"
-								"}else{"
-								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 0xFF);"
-								"}"
-							}
+							action '''
+	if (transitionData==4712){	
+		EXPECT_ORDER(caseId,"<|MODEL_LOCATION|>", 17);
+	}else{
+		EXPECT_ORDER(caseId,"<|MODEL_LOCATION|>", 0xFF);
+	}'''
 						}
 						Transition tr15: receiveFirst7 -> receiveFirst7 {
 							triggers {
-								<pongInt16: PingPongPort guard {
-									"counter==6"
-								}>
+								<pongInt16: PingPongPort guard '''counter==6'''>
 							}
-							action {
-								"counter++;"
-								"if (lang == 1){"
-								"// Java cannot send references of primitive types"
-								"\tif (transitionData==19){\t"
-								"\t\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 8);"
-								"\t}else{"
-								"\t\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 0xFF);"
-								"\t}"
-								"} "
-								"if (lang == 2){"
-								"// C"
-								"\tif (transitionData==20){\t"
-								"\t\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 8);"
-								"\t}else{"
-								"\t\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 0xFF);"
-								"\t}"
-								"}"
-							}
+							action '''
+	counter++;
+	if (lang == 1){
+	// Java cannot send references of primitive types
+		if (transitionData==19){	
+			EXPECT_ORDER(caseId,"<|MODEL_LOCATION|>", 8);
+		}else{
+			EXPECT_ORDER(caseId,"<|MODEL_LOCATION|>", 0xFF);
+		}
+	} 
+	if (lang == 2){
+	// C
+		if (transitionData==20){	
+			EXPECT_ORDER(caseId,"<|MODEL_LOCATION|>", 8);
+		}else{
+			EXPECT_ORDER(caseId,"<|MODEL_LOCATION|>", 0xFF);
+		}
+	}'''
 						}
 						Transition tr16: receiveSecond7 -> receiveSecond7 {
 							triggers {
-								<pongInt16: PingPongPort guard {
-									"counter==6"
-								}>
+								<pongInt16: PingPongPort guard '''counter==6'''>
 							}
-							action {
-								"counter++;"
-								"if (transitionData==20){\t"
-								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 16);"
-								"}else{"
-								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 0xFF);"
-								"}"
-							}
+							action '''
+	counter++;
+	if (transitionData==20){	
+		EXPECT_ORDER(caseId,"<|MODEL_LOCATION|>", 16);
+	}else{
+		EXPECT_ORDER(caseId,"<|MODEL_LOCATION|>", 0xFF);
+	}'''
 						}
 						EntryPoint tp0
 						ExitPoint tp1
@@ -460,76 +400,69 @@ RoomModel SendingDataTest {
 					}
 				}
 				State test_finished {
-					entry {
-						"EXPECT_ORDER_END(caseId,\"<|MODEL_LOCATION|>\", 23);"
-						"etUnit_closeAll(caseId);"
-						"etUnit_testFinished(caseId);"
-					}
+					entry '''
+	EXPECT_ORDER_END(caseId,"<|MODEL_LOCATION|>", 23);
+	etUnit_closeAll(caseId);
+	etUnit_testFinished(caseId);'''
 				}
 				State state1 {
 					subgraph {
 						Transition tr0: my tp0 -> state0 {
-							action {
-								"counter=0;"
-								"// send default values"
-								"PingPongPort.pingComplex(data);"
-								"PingPongPort.pingComplexRef(data);"
-							}
+							action '''
+	counter=0;
+	// send default values
+	PingPongPort.pingComplex(data);
+	PingPongPort.pingComplexRef(data);'''
 						}
 						Transition tr1: state0 -> state1 {
 							triggers {
-								<pongComplex: PingPongPort guard {
-									"counter==1"
-								}>
+								<pongComplex: PingPongPort guard '''counter==1'''>
 							}
-							action {
-								"counter=0;"
-								"if (transitionData.i8Val==10){"
-								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 19);"
-								"}else{"
-								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 0xFF);"
-								"}"
-								""
-								"if (transitionData.complexVal.i32Val2==80){"
-								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 20);"
-								"}else{"
-								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 0xFF);"
-								"}"
-								""
-								"dataD.i8Val=11;"
-								"PingPongPort.pingComplexDerived(dataD);"
-							}
+							action '''
+	counter=0;
+	if (transitionData.i8Val==10){
+		EXPECT_ORDER(caseId,"<|MODEL_LOCATION|>", 19);
+	}else{
+		EXPECT_ORDER(caseId,"<|MODEL_LOCATION|>", 0xFF);
+	}
+	
+	if (transitionData.complexVal.i32Val2==80){
+		EXPECT_ORDER(caseId,"<|MODEL_LOCATION|>", 20);
+	}else{
+		EXPECT_ORDER(caseId,"<|MODEL_LOCATION|>", 0xFF);
+	}
+	
+	dataD.i8Val=11;
+	PingPongPort.pingComplexDerived(dataD);'''
 						}
 						Transition tr2: state0 -> state0 {
 							triggers {
 								<pongComplex: PingPongPort>
 							}
-							action {
-								"counter++;"
-								"if (transitionData.i8Val==10){"
-								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 18);"
-								"}else{"
-								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 0xFF);"
-								"}"
-							}
+							action '''
+	counter++;
+	if (transitionData.i8Val==10){
+		EXPECT_ORDER(caseId,"<|MODEL_LOCATION|>", 18);
+	}else{
+		EXPECT_ORDER(caseId,"<|MODEL_LOCATION|>", 0xFF);
+	}'''
 						}
 						Transition tr3: state1 -> my tp1 {
 							triggers {
 								<pongComplexDerived: PingPongPort>
 							}
-							action {
-								"if (transitionData.i8Val==11){"
-								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 21);"
-								"}else{"
-								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 0xFF);"
-								"}"
-								""
-								"if (transitionData.i32Val3==150){"
-								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 22);"
-								"}else{"
-								"\tEXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", 0xFF);"
-								"}"
-							}
+							action '''
+	if (transitionData.i8Val==11){
+		EXPECT_ORDER(caseId,"<|MODEL_LOCATION|>", 21);
+	}else{
+		EXPECT_ORDER(caseId,"<|MODEL_LOCATION|>", 0xFF);
+	}
+	
+	if (transitionData.i32Val3==150){
+		EXPECT_ORDER(caseId,"<|MODEL_LOCATION|>", 22);
+	}else{
+		EXPECT_ORDER(caseId,"<|MODEL_LOCATION|>", 0xFF);
+	}'''
 						}
 						EntryPoint tp0
 						ExitPoint tp1
@@ -543,27 +476,27 @@ RoomModel SendingDataTest {
 
 	ProtocolClass PingPongProtocol {
 		incoming {
-			Message pingInt8(d: int8)
-			Message pingInt16(d: int16)
-			Message pingInt32(d: int32)
-			Message pingInt64(d: int64)
-			Message pingFloat32(d: float32)
-			Message pingFloat64(d: float64)
-			Message pingInt16Ref(d: int16 ref)
-			Message pingInt32Ref(d: int32 ref)
-			Message pingComplex(d: PingPongData)
-			Message pingComplexRef(d: PingPongData ref)
-			Message pingComplexDerived(d:PingPongDataDerived)
+			Message pingInt8(int8)
+			Message pingInt16(int16)
+			Message pingInt32(int32)
+			Message pingInt64(int64)
+			Message pingFloat32(float32)
+			Message pingFloat64(float64)
+			Message pingInt16Ref(int16 ref)
+			Message pingInt32Ref(int32 ref)
+			Message pingComplex(PingPongData)
+			Message pingComplexRef(PingPongData ref)
+			Message pingComplexDerived(PingPongDataDerived)
 		}
 		outgoing {
-			Message pongInt8(d: int8)
-			Message pongInt16(d: int16)
-			Message pongInt32(d: int32)
-			Message pongInt64(d:int64)
-			Message pongFloat32(d: float32)
-			Message pongFloat64(d: float64)
-			Message pongComplex(d: PingPongData)
-			Message pongComplexDerived(d: PingPongDataDerived)
+			Message pongInt8(int8)
+			Message pongInt16(int16)
+			Message pongInt32(int32)
+			Message pongInt64(int64)
+			Message pongFloat32(float32)
+			Message pongFloat64(float64)
+			Message pongComplex(PingPongData)
+			Message pongComplexDerived(PingPongDataDerived)
 		}
 	}
 

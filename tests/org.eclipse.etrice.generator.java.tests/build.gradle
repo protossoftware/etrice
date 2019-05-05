@@ -2,6 +2,11 @@ apply plugin: 'java-base'
 
 apply from: "$rootDir/gradle/etTest.gradle"
 
+dependencies {
+	modelpath_java project(path: ':runtime:org.eclipse.etrice.modellib.java', configuration: 'modelpath_java')
+	modelpath_java files('models')
+}
+
 def genericPhysical = '../org.eclipse.etrice.generator.common.tests/models/GenericPhysical.etphys'
 
 createTest('java', 'sendingDataTest', ['models/SendingDataTest.room', genericPhysical])

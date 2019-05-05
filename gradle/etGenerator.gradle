@@ -2,6 +2,10 @@ configurations {
 	etrice_c
 	etrice_cpp
 	etrice_java
+	
+	modelpath_c
+	modelpath_cpp
+	modelpath_java
 }
 
 dependencies {
@@ -22,11 +26,13 @@ ext.createGeneratorTask = { name, lang, models, genDir = 'src-gen', options = []
 	return tasks.create(name: name, type: JavaExec) {
 		main = "org.eclipse.etrice.generator.${lang}.Main"
 		classpath = configurations."etrice_$lang"
-		args '-clean', '-msc_instr', '-genDir', genDir
+		args '-clean', '-msc_instr'
+		args '-genDir', genDir
 		args options
+		def modelpath = configurations."modelpath_$lang"
+		if(!modelpath.isEmpty()) {
+			args '-modelpath', modelpath.asPath
+		}
 		args models
-		// not incremental (modellib input files missing)
-		// inputs.files models
-		// outputs.dir genDir
 	}
 }

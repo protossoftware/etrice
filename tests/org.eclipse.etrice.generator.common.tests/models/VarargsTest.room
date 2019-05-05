@@ -1,7 +1,9 @@
 RoomModel VarargsTest {
 
-	import room.basic.types.* from "../../../runtime/${etModellib}/model/Types.room"
-	import room.basic.test.* from "../../../runtime/${etModellib}/model/Tests.room"
+	import room.basic.types.boolean
+	import room.basic.types.int32
+	import room.basic.types.string
+	import room.basic.test.TestInstance
 
 	ActorClass AVarargs {
 		@TestInstance

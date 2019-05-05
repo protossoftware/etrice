@@ -1,6 +1,7 @@
 MappingModel DynamicActorTest1 {
-	import DynamicActorTest7.* from "DynamicActorTest7.room"
-	import room.generic.physical.* from "../../org.eclipse.etrice.generator.common.tests/models/GenericPhysical.etphys"
+	
+	import DynamicActorTest7.JavaGenTests
+	import room.generic.physical.GenericPhysicalSystem
 
 	Mapping JavaGenTests -> GenericPhysicalSystem {
 		SubSystemMapping da7Test -> node {

@@ -34,10 +34,7 @@ def etuFileEtUnitTest = 'log/TestEtUnitSpecial.etu'
 clean.delete 'log'
 
 task run(type: Exec, dependsOn: assemble, group: 'verification') {
-	commandLine exeFile
-	inputs.file exeFile
-	outputs.files etuFileRuntimeTest, etuFileEtUnitTest
-	
+	executable exeFile
 	doFirst { file('log').mkdirs() }
 }
 

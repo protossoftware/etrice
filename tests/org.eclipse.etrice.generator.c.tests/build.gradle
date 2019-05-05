@@ -2,6 +2,11 @@ apply plugin: 'c'
 
 apply from: "$rootDir/gradle/etTest.gradle"
 
+dependencies {
+	modelpath_c project(path: ':runtime:org.eclipse.etrice.modellib.c', configuration: 'modelpath_c')
+	modelpath_c files('models')
+}
+
 def genericPhysical = '../org.eclipse.etrice.generator.common.tests/models/GenericPhysical.etphys'
 
 createTest('c', 'sendingDataTest', ['models/SendingDataTest.room', genericPhysical])

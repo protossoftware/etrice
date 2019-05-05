@@ -7,7 +7,6 @@ def outputDir = 'log'
 def srcGenDir = 'src-gen'
 
 clean.delete srcGenDir, outputDir
-//clean.delete outputDir
 
 def getMainClass(String genDir) {
 	// search for SubSystemRunner java file
@@ -40,8 +39,6 @@ ext.createTest = { lang, name, models, options = [] ->
 	def etuFile = "$workingDir/log/${nameCap}.etu"
 	
 	def generateTask = createGeneratorTask("generate$testNameCap", lang, models, genDir, options)
-	generateTask.environment 'etModellib', "org.eclipse.etrice.modellib.$lang"
-	// generateTask.enabled = false
 		
 	def runTask
 	
@@ -74,10 +71,9 @@ ext.createTest = { lang, name, models, options = [] ->
 		def exeFile = "$buildDir/exe/$testName/$testName"
 		runTask = tasks.create(name: "run$testNameCap", type: Exec) {
 			dependsOn "${testName}Executable"
-			commandLine exeFile, '-run_as_test'
+			executable = exeFile
+			args '-run_as_test'
 			it.workingDir = workingDir
-			// inputs.file exeFile
-			// outputs.file etuFile
 		}
 	}
 	
@@ -98,7 +94,6 @@ ext.createTest = { lang, name, models, options = [] ->
 			classpath = testSourceSet.runtimeClasspath
 			args '-run_as_test'
 			it.workingDir = workingDir
-			// outputs.file etuFile
 			
 			doFirst { main = getMainClass(genDir) }
 		}

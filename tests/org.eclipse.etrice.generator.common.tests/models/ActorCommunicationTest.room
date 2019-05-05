@@ -1,26 +1,27 @@
 RoomModel ActorCommunicationTest {
 
-	import room.basic.types.* from "../../../runtime/${etModellib}/model/Types.room"
-	import room.basic.test.* from "../../../runtime/${etModellib}/model/Tests.room"
-	import room.basic.service.timing.* from "../../../runtime/${etModellib}/model/TimingService.room"
+	import room.basic.types.boolean
+	import room.basic.types.int8
+	import room.basic.types.int16
+	import room.basic.types.int32
+	import room.basic.test.TestInstance
+	import room.basic.service.timing.PTimer
+	import room.basic.service.timing.ATimingService
 
-	SubSystemClass SubSystem_ActorCommunicationTest {
+	ActorClass ActorCommunicationTest_Top {
 		@TestInstance
-		ActorRef singleThread_Appl: Appl
-		ActorRef timing: ATimingService
-		LayerConnection ref singleThread_Appl satisfied_by timing.timer
-
-		// all unmapped instances are mapped to the default *physical* thread
-		//LogicalThread dflt_thread
-		//ActorInstanceMapping timing -> dflt_thread
-		//ActorInstanceMapping singleThread_Appl -> dflt_thread
+		Structure {
+			ActorRef singleThread_Appl: Appl
+			ActorRef timing: ATimingService
+			LayerConnection ref singleThread_Appl satisfied_by timing.timer
+		}
 	}
 
 	/*
- 	 * On each timing event Tester sends a message with a counter to all Testees
- 	 * From counter=1-9: each Testee does an expect order
- 	 * On counter=10: each Testee sends finish message to Tester, that does last expect order
- 	 */
+	 * On each timing event Tester sends a message with a counter to all Testees
+	 * From counter=1-9: each Testee does an expect order
+	 * On counter=10: each Testee sends finish message to Tester, that does last expect order
+	 */
 	ActorClass Appl {
 		Structure {
 			ActorRef tester: Tester
@@ -33,7 +34,8 @@ RoomModel ActorCommunicationTest {
 			Binding tester.async_counter1 and async_Testee.event_counter
 			Binding tester.async_counter2 and async_Testee.data_counter
 		}
-		Behavior { }
+		Behavior {
+		}
 	}
 
 	async ActorClass Tester {
@@ -57,96 +59,76 @@ RoomModel ActorCommunicationTest {
 			Attribute counter: int32
 			Attribute finish_counter: int32
 			Attribute data_finish_flag: boolean
-			Attribute data_result [ 10 ]: int16 = "{1,2,3,4,5,6,7,8,9,10}"
-			Attribute event_result [ 10 ]: int16 = "{101,102,103,104,105,106,107,108,109,110}"
-			Attribute async_result [ 10 ]: int16 = "{1051,1002,1053,1004,1055,1006,1057,1008,1059,1010}"
+			Attribute data_result [10]: int16 = "{1,2,3,4,5,6,7,8,9,10}"
+			Attribute event_result [10]: int16 = "{101,102,103,104,105,106,107,108,109,110}"
+			Attribute async_result [10]: int16 = "{1051,1002,1053,1004,1055,1006,1057,1008,1059,1010}"
 		}
 		Behavior {
-			ctor {
-				"etUnit_open(\"log\", \"ActorCommunicationTest\");"
-				"etUnit_openTestSuite(\"org.eclipse.etrice.generator.common.tests.ActorCommunicationTest\");"
-			}
-			dtor {
-				"etUnit_closeTestSuite();"
-				"etUnit_close();"
-			}
+			ctor '''
+				etUnit_open("log", "ActorCommunicationTest");
+				etUnit_openTestSuite("org.eclipse.etrice.generator.common.tests.ActorCommunicationTest");'''
+			dtor '''
+				etUnit_closeTestSuite();
+				etUnit_close();'''
 			StateMachine {
 				Transition init: initial -> tester_run {
-					action {
-						"data_caseId = etUnit_openTestCase(\"Datadriven ActorCommunicationTest\");"
-						"event_caseId = etUnit_openTestCase(\"Eventdriven ActorCommunicationTest\");"
-						"async_caseId = etUnit_openTestCase(\"Async ActorCommunicationTest\");"
-						""
-						"event_counter.caseId(event_caseId);"
-						"data_counter.caseId(data_caseId);"
-						"async_counter2.caseId(async_caseId);"
-						""
-						"counter = 0;"
-						"finish_counter = 0;"
-						"data_finish_flag = false;"
-						"EXPECT_ORDER_START(data_caseId, data_result, 10);"
-						"EXPECT_ORDER_START(event_caseId, event_result, 10);"
-						"EXPECT_ORDER_START(async_caseId, async_result, 10);"
-						"timer.startTimer(400);"
-					}
+					action '''
+						data_caseId = etUnit_openTestCase("Datadriven ActorCommunicationTest");
+						event_caseId = etUnit_openTestCase("Eventdriven ActorCommunicationTest");
+						async_caseId = etUnit_openTestCase("Async ActorCommunicationTest");
+						
+						event_counter.caseId(event_caseId);
+						data_counter.caseId(data_caseId);
+						async_counter2.caseId(async_caseId);
+						
+						counter = 0;
+						finish_counter = 0;
+						data_finish_flag = false;
+						EXPECT_ORDER_START(data_caseId, data_result, 10);
+						EXPECT_ORDER_START(event_caseId, event_result, 10);
+						EXPECT_ORDER_START(async_caseId, async_result, 10);
+						timer.startTimer(400);'''
 				}
 				Transition tr0: tester_run -> tester_run {
 					triggers {
-						<timeout: timer guard {
-							"counter < 10"
-						}>
+						<timeout: timer guard '''counter < 10'''>
 					}
-					action {
-						"counter++;"
-						// "System.out.println(\"Timer: \"+counter);"
-						"event_counter.in1(counter);"
-						"data_counter.in1(counter);"
-						"async_counter1.in1(counter);"
-						"async_counter2.in1(counter);"
-					}
+					action '''
+						counter++;
+						event_counter.in1(counter);
+						data_counter.in1(counter);
+						async_counter1.in1(counter);
+						async_counter2.in1(counter);'''
 				}
 				Transition tr1: tester_run -> tester_run {
 					triggers {
 						<finish: event_counter>
 					}
-					action {
-						// "System.out.println(\"Finish event\");"
-						"EXPECT_ORDER_END(event_caseId,\"<|MODEL_LOCATION|>\", 110);"
-						"etUnit_closeTestCase(event_caseId);"
-						"finish_counter++;"
-					}
+					action '''
+						EXPECT_ORDER_END(event_caseId,"<|MODEL_LOCATION|>", 110);
+						etUnit_closeTestCase(event_caseId);
+						finish_counter++;'''
 				}
 				Transition tr2: tester_run -> tester_run {
-					guard {
-						"data_counter_finish.finish == true && data_finish_flag == false"
-					}
-					action {
-
-					//"System.out.println(\"Finish transitionData\");"
-						"data_finish_flag = true;"
-						"EXPECT_ORDER_END(data_caseId,\"<|MODEL_LOCATION|>\", 10);"
-						"etUnit_closeTestCase(data_caseId);"
-						"finish_counter++;"
-					}
+					guard '''data_counter_finish.finish == true && data_finish_flag == false'''
+					action '''
+						data_finish_flag = true;
+						EXPECT_ORDER_END(data_caseId,"<|MODEL_LOCATION|>", 10);
+						etUnit_closeTestCase(data_caseId);
+						finish_counter++;'''
 				}
 				Transition tr3: tester_run -> tester_run {
 					triggers {
 						<finish: async_counter1>
 					}
-					action {
-					//"System.out.println(\"Finish async\");"
-						"EXPECT_ORDER_END(async_caseId,\"<|MODEL_LOCATION|>\", 1010);"
-						"etUnit_closeTestCase(async_caseId);"
-						"finish_counter++;"
-					}
+					action '''
+						EXPECT_ORDER_END(async_caseId,"<|MODEL_LOCATION|>", 1010);
+						etUnit_closeTestCase(async_caseId);
+						finish_counter++;'''
 				}
 				Transition terminate: my tp0 -> my tp0 {
-					guard {
-						"finish_counter == 3"
-					}
-					action {
-						"etUnit_testFinished(event_caseId);"
-					}
+					guard '''finish_counter == 3'''
+					action '''etUnit_testFinished(event_caseId);'''
 				}
 				TransitionPoint tp0
 				State tester_run
@@ -167,43 +149,27 @@ RoomModel ActorCommunicationTest {
 		Behavior {
 			StateMachine {
 				Transition init: initial -> Idle {
-					action {
-						"counter = 0;"
-					}
+					action '''counter = 0;'''
 				}
 				Transition tr0: Idle -> Idle {
-					guard {
-						"data_counter.in1 != counter && data_counter.in1 % 2 == 1"
-					}
-					action {
-						"counter = data_counter.in1;"
-
-						//"System.out.println(\"Async transitionData \"+counter);"
-						"EXPECT_ORDER(data_counter.caseId,\"<|MODEL_LOCATION|>\", counter + 1050);"
-					}
+					guard '''data_counter.in1 != counter && data_counter.in1 % 2 == 1'''
+					action '''
+						counter = data_counter.in1;
+						EXPECT_ORDER(data_counter.caseId,"<|MODEL_LOCATION|>", counter + 1050);'''
 				}
 				Transition tr1: Idle -> Idle {
 					triggers {
-						<in1: event_counter guard {
-							"transitionData % 2 == 0 && transitionData < 10"
-						}>
+						<in1: event_counter guard '''transitionData % 2 == 0 && transitionData < 10'''>
 					}
-					action {
-						"counter = transitionData;"
-
-						//"System.out.println(\"Async event \"+counter);"
-						"EXPECT_ORDER(data_counter.caseId,\"<|MODEL_LOCATION|>\", counter + 1000);"
-					}
+					action '''
+						counter = transitionData;
+						EXPECT_ORDER(data_counter.caseId,"<|MODEL_LOCATION|>", counter + 1000);'''
 				}
 				Transition tr2: Idle -> state0 {
 					triggers {
-						<in1: event_counter guard {
-							"transitionData == 10"
-						}>
+						<in1: event_counter guard '''transitionData == 10'''>
 					}
-					action {
-						"event_counter.finish();"
-					}
+					action '''event_counter.finish();'''
 				}
 				State Idle
 				State state0
@@ -223,39 +189,25 @@ RoomModel ActorCommunicationTest {
 		Behavior {
 			StateMachine {
 				Transition init: initial -> state0 {
-					action {
-						"counter = 0;"
-					}
+					action '''counter = 0;'''
 				}
 				Transition tr0: state0 -> state0 {
 					triggers {
-						<in1: event_counter guard {
-							"transitionData < 10"
-						}>
+						<in1: event_counter guard '''transitionData < 10'''>
 					}
-					action {
-
-					//"System.out.println(\"event \"+transitionData);"
-						"EXPECT_ORDER(caseId, \"<|MODEL_LOCATION|>\", transitionData+100);"
-					}
+					action '''EXPECT_ORDER(caseId, "<|MODEL_LOCATION|>", transitionData+100);'''
 				}
 				Transition tr1: state0 -> state1 {
 					triggers {
-						<in1: event_counter guard {
-							"transitionData == 10"
-						}>
+						<in1: event_counter guard '''transitionData == 10'''>
 					}
-					action {
-						"event_counter.finish();"
-					}
+					action '''event_counter.finish();'''
 				}
 				Transition tr2: state0 -> state0 {
 					triggers {
 						<caseId: event_counter>
 					}
-					action {
-						"caseId = transitionData;"
-					}
+					action '''caseId = transitionData;'''
 				}
 				State state0
 				State state1
@@ -276,29 +228,19 @@ RoomModel ActorCommunicationTest {
 		Behavior {
 			StateMachine {
 				Transition init: initial -> state0 {
-					action {
-						"counter = 0;"
-						"counter_finish.finish(false);"
-					}
+					action '''
+						counter = 0;
+						counter_finish.finish(false);'''
 				}
 				Transition tr0: state0 -> state1 {
-					guard {
-						"data_counter.in1 == 10"
-					}
-					action {
-						"counter_finish.finish(true);"
-					}
+					guard '''data_counter.in1 == 10'''
+					action '''counter_finish.finish(true);'''
 				}
 				Transition tr1: state0 -> state0 {
-					guard {
-						"data_counter.in1 != counter && counter < 10"
-					}
-					action {
-						"counter = data_counter.in1;"
-
-						//"System.out.println(\"transitionData \"+counter);"
-						"EXPECT_ORDER(data_counter.caseId, \"<|MODEL_LOCATION|>\", counter);"
-					}
+					guard '''data_counter.in1 != counter && counter < 10'''
+					action '''
+						counter = data_counter.in1;
+						EXPECT_ORDER(data_counter.caseId, "<|MODEL_LOCATION|>", counter);'''
 				}
 				State state0
 				State state1
@@ -308,20 +250,19 @@ RoomModel ActorCommunicationTest {
 
 	datadriven ProtocolClass Datadriven_PC {
 		incoming {
-			Message caseId(data: int32)
-			Message in1(data: int32)
-			Message finish(data: boolean)
+			Message caseId(int32)
+			Message in1(int32)
+			Message finish(boolean)
 		}
 	}
 
 	ProtocolClass Eventdriven_PC {
 		incoming {
-			Message caseId(data: int32)
-			Message in1(data: int32)
+			Message caseId(int32)
+			Message in1(int32)
 		}
 		outgoing {
 			Message finish()
 		}
 	}
-
 }

@@ -1,19 +1,20 @@
 RoomModel DataDrivenTest {
-	
-	import room.basic.types.* from "../../../runtime/${etModellib}/model/Types.room"
-	import room.basic.test.* from "../../../runtime/${etModellib}/model/Tests.room"
-	import room.basic.service.timing.* from "../../../runtime/${etModellib}/model/TimingService.room"
-	
-	SubSystemClass SubSystem_DataDrivenTest {
+
+	import room.basic.types.float32
+	import room.basic.types.int8
+	import room.basic.types.int16
+	import room.basic.types.int32
+	import room.basic.service.timing.PTimer
+	import room.basic.service.timing.ATimingService
+	import room.basic.test.TestInstance
+
+	ActorClass DataDrivenTest_Top {
 		@TestInstance
-		ActorRef appl: Appl
-		ActorRef timing: ATimingService
-		LayerConnection ref appl satisfied_by timing.timer
-		
-		// all unmapped instances are mapped to the default *physical* thread
-		//LogicalThread dflt_thread
-		//ActorInstanceMapping appl -> dflt_thread
-		//ActorInstanceMapping timing -> dflt_thread
+		Structure {
+			ActorRef appl: Appl
+			ActorRef timing: ATimingService
+			LayerConnection ref appl satisfied_by timing.timer
+		}
 	}
 
 	ActorClass Appl {
@@ -22,8 +23,10 @@ RoomModel DataDrivenTest {
 			ActorRef cli: Testee
 			Binding srv.p0 and cli.p0
 		}
-		Behavior { }
-	}	
+		Behavior {
+		}
+	}
+
 	async ActorClass Tester {
 		Interface {
 			conjugated Port p0: PC
@@ -31,16 +34,15 @@ RoomModel DataDrivenTest {
 		Structure {
 			external Port p0
 			SAP timer: PTimer
-			
+
 			Attribute counter: int32
 		}
 		Behavior {
 			StateMachine {
 				Transition init: initial -> Idle {
-					action {
-						"timer.startTimer(300);"
-						"counter = 0;"
-					}
+					action '''
+						timer.startTimer(300);
+						counter = 0;'''
 				}
 				Transition tr0: Idle -> Idle {
 					triggers {
@@ -48,66 +50,56 @@ RoomModel DataDrivenTest {
 					}
 				}
 				State Idle {
-					entry {
-						"p0.in1(counter++);"
-					}
+					entry '''p0.in1(counter++);'''
 				}
 			}
 		}
 	}
+
 	async ActorClass Testee {
 		Interface {
 			Port p0: PC
 		}
 		Structure {
 			external Port p0
-			
+
 			Attribute caseId: int32
 			Attribute counter: int32
-			Attribute resultlist[10]: int16 = "{1,2,3,4,5,6,7,8,9,10}"
+			Attribute resultlist [10]: int16 = "{1,2,3,4,5,6,7,8,9,10}"
 		}
 		Behavior {
-			ctor {
-				"caseId = etUnit_openAll(\"log\", \"DataDrivenTest\", \"org.eclipse.etrice.generator.common.tests.DataDrivenTest\", \"DataDrivenTest_case\");"
-			}
-			dtor {
-				"etUnit_closeAll(caseId);"
-			}
+			ctor '''caseId = etUnit_openAll("log", "DataDrivenTest", "org.eclipse.etrice.generator.common.tests.DataDrivenTest", "DataDrivenTest_case");'''
+			dtor '''etUnit_closeAll(caseId);'''
 			StateMachine {
 				Transition init: initial -> Idle {
-					action {
-						"counter = 0;"
-					}
+					action '''counter = 0;'''
 				}
 				Transition tr0: Idle -> Idle {
-					guard {
-						"p0.in1==counter"
-					}
-					action {
-						"if (p0.in1==1)"
-						"	EXPECT_ORDER_START(caseId, resultlist, 10);"
-						"if (p0.in1<10)"
-						"	EXPECT_ORDER(caseId,\"<|MODEL_LOCATION|>\", p0.in1);"
-						"else if (counter==10) {"
-						"	EXPECT_ORDER_END(caseId,\"<|MODEL_LOCATION|>\", 10);"
-						"	etUnit_testFinished(caseId);"
-						"}"
-						"++counter;"
-					}
+					guard '''p0.in1==counter'''
+					action '''
+						if (p0.in1==1)
+							EXPECT_ORDER_START(caseId, resultlist, 10);
+						if (p0.in1<10)
+							EXPECT_ORDER(caseId,"<|MODEL_LOCATION|>", p0.in1);
+						else if (counter==10) {
+							EXPECT_ORDER_END(caseId,"<|MODEL_LOCATION|>", 10);
+							etUnit_testFinished(caseId);
+						}
+						++counter;'''
 				}
 				State Idle
 			}
 		}
 	}
-	
+
 	datadriven ProtocolClass PC {
 		incoming {
-			Message in1(data: int32)
-			Message in2(data: int8)
-			Message in3(data: DC)
+			Message in1(int32)
+			Message in2(int8)
+			Message in3(DC)
 		}
 	}
-	
+
 	DataClass DC {
 		Attribute x: float32
 		Attribute i: int32

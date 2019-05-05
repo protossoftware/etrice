@@ -1,8 +1,10 @@
-RoomModel DetailExpressionTestModel {
+RoomModel DetailExpressionTest {
 
-	import room.basic.types.* from "../../../runtime/${etModellib}/model/Types.room"
-	import room.basic.test.* from "../../../runtime/${etModellib}/model/Tests.room"
-	import DetailExpressionEnum.* from "DetailExpressionEnum.room"
+	import room.basic.types.boolean
+	import room.basic.types.int32
+	import room.basic.types.string
+	import room.basic.test.TestInstance
+	import DetailExpressionEnum.PEnumProtocol
 	
 	ActorClass DetailExpressionCompileTest {
 		@TestInstance
@@ -201,7 +203,7 @@ RoomModel DetailExpressionTestModel {
 
 	ProtocolClass PEventdriven extends  PEventdrivenBase {
 		outgoing {
-			Message out1(accessibleMessageData: boolean)
+			Message out1(boolean)
 		}
 		regular PortClass
 		{
@@ -231,7 +233,7 @@ RoomModel DetailExpressionTestModel {
 
 	datadriven ProtocolClass PDatadriven {
 		incoming {
-			Message in1(data: int32)
+			Message in1(int32)
 		}
 	/* not supported yet
 	 * regular PortClass

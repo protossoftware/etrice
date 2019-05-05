@@ -1,6 +1,6 @@
-RoomModel StatemachineInterfaceTestModel {
+RoomModel StatemachineInterfaceTest {
 
-	import room.basic.types.* from "../../../runtime/${etModellib}/model/Types.room"
+	import room.basic.types.boolean
 
 	ActorClass StatemachineInterfaceTest {
 		Structure {
@@ -117,7 +117,7 @@ RoomModel StatemachineInterfaceTestModel {
 
 	datadriven ProtocolClass DataProtocol {
 		incoming {
-			Message in1(data: boolean)
+			Message in1(boolean)
 		}
 	}
 

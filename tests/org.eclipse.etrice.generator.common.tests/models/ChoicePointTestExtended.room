@@ -1,215 +1,188 @@
 RoomModel ChoicePointTestExtended {
 
-	import room.basic.types.* from "../../../runtime/${etModellib}/model/Types.room"
-	import room.basic.test.* from "../../../runtime/${etModellib}/model/Tests.room"
+	import room.basic.types.int16
+	import room.basic.types.int32
+	import room.basic.test.TestInstance
 
-	SubSystemClass SubSystem_ChoicePointTestExtended {
+	ActorClass ChoicePointTestExtended_Top {
 		@TestInstance
-		ActorRef tester_event: Tester_event
+		Structure {
+			ActorRef tester_event: Tester_event
+		}
 	}
 
 	abstract ActorClass Testee_event {
 		Interface {
-			Port navPort : NavigationProtocol_event
-			Port testPort0 : CPTestProtocol_event
-			Port testPort1 : CPTestProtocol_inherited_event
+			Port navPort: NavigationProtocol_event
+			Port testPort0: CPTestProtocol_event
+			Port testPort1: CPTestProtocol_inherited_event
 		}
 		Structure {
 			external Port navPort
 			external Port testPort0
 			external Port testPort1
-			Attribute caseId : int32
-			Attribute testValue : int32
+			Attribute caseId: int32
+			Attribute testValue: int32
 		}
 		Behavior {
 			StateMachine {
-				Transition init: initial -> waiting { }
+				Transition init: initial -> waiting {
+				}
 				Transition tr0: waiting -> testSubState {
 					triggers {
 						<testInitialCP0: testPort0>
 					}
-					action {
-						"testValue = transitionData;"
-					}
+					action '''testValue = transitionData;'''
 				}
 				Transition tr1: waiting -> waiting {
 					triggers {
 						<setCaseId: navPort>
 					}
-					action {
-						"caseId = transitionData;"
-					}
+					action '''caseId = transitionData;'''
 				}
 				State testSubState {
 					subgraph {
-						Transition init: initial -> cp cp0 { }
+						Transition init: initial -> cp cp0 {
+						}
 						Transition tr0: cp cp0 -> state2
 						Transition tr1: cp cp0 -> state0 {
-							cond {
-								"testValue == 0"
-							}
+							cond '''testValue == 0'''
 						}
 						Transition tr2: cp cp0 -> state1 {
-							cond {
-								"testValue == 1"
-							}
+							cond '''testValue == 1'''
 						}
 						Transition tr3: my tp0 -> cp cp0 {
 							triggers {
 								<testTrCP0: testPort0>
 							}
-							action {
-								"testValue = transitionData;"
-							}
+							action '''testValue = transitionData;'''
 						}
-						
+
 						Transition tr6: my tp0 -> cp cp0 {
 							triggers {
 								<testTrCP0: testPort1>
 							}
-							action {
-								"testValue = transitionData;"
-							}
+							action '''testValue = transitionData;'''
 						}
 						Transition tr7: my tp0 -> cp cp0 {
 							triggers {
 								<testTrCP1: testPort1>
 							}
-							action {
-								"testValue = transitionData;"
-							}
+							action '''testValue = transitionData;'''
 						}
-						
-						
+
 						ChoicePoint cp0
 						TransitionPoint tp0
-						
+
 						State state0 {
-							entry {
-								"navPort.resultCP(1000);"
-								"testValue = -1;"
-							}
+							entry '''
+								navPort.resultCP(1000);
+								testValue = -1;'''
 						}
 						State state1 {
-							entry {
-								"navPort.resultCP(1001);"
-								"testValue = -1;"
-							}
+							entry '''
+								navPort.resultCP(1001);
+								testValue = -1;'''
 						}
 						State state2 {
-							entry {
-								"EXPECT_TRUE(caseId, \"testValue error\", testValue > 0);"
-								"navPort.resultCP(1002);"
-								"testValue = -1;"
-							}
+							entry '''
+								EXPECT_TRUE(caseId, "testValue error", testValue > 0);
+								navPort.resultCP(1002);
+								testValue = -1;'''
 						}
-						
 					}
 				}
 				State waiting
 			}
 		}
 	}
-	
-	ActorClass Testee_inherited_event extends Testee_event{
-		Structure { }
+
+	ActorClass Testee_inherited_event extends Testee_event {
+		Structure {
+		}
 		Behavior {
 			StateMachine {
 				RefinedState testSubState {
 					subgraph {
 						Transition tr4: my tp1 -> simpleState {
 							triggers {
-								<toNode: navPort guard {
-									"transitionData == 1"
-								}>
+								<toNode: navPort guard '''transitionData == 1'''>
 							}
 						}
 						Transition tr5: simpleState -> cp cp0 {
 							triggers {
 								<testCP0: testPort0>
 							}
-							action {
-								"testValue = transitionData;"
-								""
-								"navPort.onProtocol(10);"
-								"navPort.onMessage(100);"
-							}
+							action '''
+								testValue = transitionData;
+								
+								navPort.onProtocol(10);
+								navPort.onMessage(100);'''
 						}
 						Transition tr8: simpleState -> cp cp0 {
 							triggers {
 								<testCP0: testPort1>
 							}
-							action {
-								"testValue = transitionData;"
-								""
-								"navPort.onProtocol(11);"
-								"navPort.onMessage(100);"
-							}
+							action '''
+								testValue = transitionData;
+								
+								navPort.onProtocol(11);
+								navPort.onMessage(100);'''
 						}
 						Transition tr9: simpleState -> cp cp0 {
 							triggers {
 								<testCP1: testPort1>
 							}
-							action {
-								"testValue = transitionData;"
-								""
-								"navPort.onProtocol(11);"
-								"navPort.onMessage(101);"
-							}
+							action '''
+								testValue = transitionData;
+								
+								navPort.onProtocol(11);
+								navPort.onMessage(101);'''
 						}
 						Transition tr10: subState -> cp cp0 {
 							triggers {
 								<testCP0: testPort0>
 							}
-							action {
-								"testValue = transitionData;"
-								""
-								"navPort.onProtocol(10);"
-								"navPort.onMessage(100);"
-							}
+							action '''
+								testValue = transitionData;
+								
+								navPort.onProtocol(10);
+								navPort.onMessage(100);'''
 						}
 						Transition tr11: subState -> cp cp0 {
 							triggers {
 								<testCP0: testPort1>
 							}
-							action {
-								"testValue = transitionData;"
-								""
-								"navPort.onProtocol(11);"
-								"navPort.onMessage(100);"
-							}
+							action '''
+								testValue = transitionData;
+								
+								navPort.onProtocol(11);
+								navPort.onMessage(100);'''
 						}
 						Transition tr12: subState -> cp cp0 {
 							triggers {
 								<testCP1: testPort1>
 							}
-							action {
-								"testValue = transitionData;"
-								""
-								"navPort.onProtocol(11);"
-								"navPort.onMessage(101);"
-							}
+							action '''
+								testValue = transitionData;
+								
+								navPort.onProtocol(11);
+								navPort.onMessage(101);'''
 						}
 						Transition tr13: my tp1 -> subState {
 							triggers {
-								<toNode: navPort guard {
-									"transitionData == 2"
-								}>
+								<toNode: navPort guard '''transitionData == 2'''>
 							}
 						}
 						Transition tr14: my tp1 -> tp1 of exitPoints {
 							triggers {
-								<toNode: navPort guard {
-									"transitionData == 3"
-								}>
+								<toNode: navPort guard '''transitionData == 3'''>
 							}
 						}
 						Transition tr15: tp0 of exitPoints -> cp cp0
 						Transition tr16: my tp1 -> choicePoint {
 							triggers {
-								<toNode: navPort guard {
-									"transitionData == 4"
-								}>
+								<toNode: navPort guard '''transitionData == 4'''>
 							}
 						}
 						Transition tr17: cp cp1 -> cp cp0
@@ -217,58 +190,48 @@ RoomModel ChoicePointTestExtended {
 							triggers {
 								<testCP0: testPort0>
 							}
-							action {
-								"testValue = transitionData;"
-								""
-								"navPort.onProtocol(10);"
-								"navPort.onMessage(100);"
-							}
+							action '''
+								testValue = transitionData;
+								
+								navPort.onProtocol(10);
+								navPort.onMessage(100);'''
 						}
 						Transition tr19: cp cp1 -> wrong {
-							cond {
-								"1 == 0"
-							}
+							cond '''1 == 0'''
 						}
 						Transition tr20: cp cp0 -> wrong {
-							cond {
-								"1 == 0"
-							}
+							cond '''1 == 0'''
 						}
 						Transition tr21: choicePoint -> cp cp1 {
 							triggers {
 								<testCP0: testPort1>
 							}
-							action {
-								"testValue = transitionData;"
-								""
-								"navPort.onProtocol(11);"
-								"navPort.onMessage(100);"
-							}
+							action '''
+								testValue = transitionData;
+								
+								navPort.onProtocol(11);
+								navPort.onMessage(100);'''
 						}
 						Transition tr22: choicePoint -> cp cp1 {
 							triggers {
 								<testCP1: testPort1>
 							}
-							action {
-								"testValue = transitionData;"
-								""
-								"navPort.onProtocol(11);"
-								"navPort.onMessage(101);"
-							}
+							action '''
+								testValue = transitionData;
+								
+								navPort.onProtocol(11);
+								navPort.onMessage(101);'''
 						}
 						ChoicePoint cp1
 						TransitionPoint tp1
 						State simpleState {
-							entry {
-								"navPort.onNode(1);"
-							}
+							entry '''navPort.onNode(1);'''
 						}
 						State subState {
-							entry {
-								"navPort.onNode(2);"
-							}
+							entry '''navPort.onNode(2);'''
 							subgraph {
-								Transition init: initial -> state0 { }
+								Transition init: initial -> state0 {
+								}
 								State state0
 							}
 						}
@@ -279,48 +242,41 @@ RoomModel ChoicePointTestExtended {
 									triggers {
 										<testCP0: testPort0>
 									}
-									action {
-										"testValue = transitionData;"
-										""
-										"navPort.onProtocol(10);"
-										"navPort.onMessage(100);"
-									}
+									action '''
+										testValue = transitionData;
+										
+										navPort.onProtocol(10);
+										navPort.onMessage(100);'''
 								}
 								Transition tr2: state0 -> my tp0 {
 									triggers {
 										<testCP0: testPort1>
 									}
-									action {
-										"testValue = transitionData;"
-										""
-										"navPort.onProtocol(11);"
-										"navPort.onMessage(100);"
-									}
+									action '''
+										testValue = transitionData;
+										
+										navPort.onProtocol(11);
+										navPort.onMessage(100);'''
 								}
 								Transition tr3: state0 -> my tp0 {
 									triggers {
 										<testCP1: testPort1>
 									}
-									action {
-										"testValue = transitionData;"
-										""
-										"navPort.onProtocol(11);"
-										"navPort.onMessage(101);"
-									}
+									action '''
+										testValue = transitionData;
+										
+										navPort.onProtocol(11);
+										navPort.onMessage(101);'''
 								}
 								ExitPoint tp0
 								EntryPoint tp1
 								State state0 {
-									entry {
-										"navPort.onNode(3);"
-									}
+									entry '''navPort.onNode(3);'''
 								}
 							}
 						}
 						State choicePoint {
-							entry {
-								"navPort.onNode(4);"
-							}
+							entry '''navPort.onNode(4);'''
 						}
 						State wrong
 					}
@@ -331,32 +287,28 @@ RoomModel ChoicePointTestExtended {
 
 	ActorClass Tester_event {
 		Structure {
-			conjugated Port navPort : NavigationProtocol_event
-			conjugated Port testPort0 : CPTestProtocol_event
-			conjugated Port testPort1 : CPTestProtocol_inherited_event
+			conjugated Port navPort: NavigationProtocol_event
+			conjugated Port testPort0: CPTestProtocol_event
+			conjugated Port testPort1: CPTestProtocol_inherited_event
 			ActorRef testee: Testee_inherited_event
 			Binding navPort and testee.navPort
 			Binding testPort0 and testee.testPort0
 			Binding testPort1 and testee.testPort1
-			Attribute caseId : int32
-			Attribute nodeId : int32 = "1"
-			Attribute protocolId : int32 = "0"
-			Attribute messageId : int32 = "0"
-			Attribute testValue : int32=  "0"
-			
-			Attribute testOrder[148] : int16 = "{ 1001, 1000, 1002, 1, 10, 100, 1000, 1, 10, 100, 1001, 1, 10, 100, 1002, 1, 11, 100, 1000, 1, 11, 100, 1001, 1, 11, 100, 1002, 1, 11, 101, 1000, 1, 11, 101, 1001, 1, 11, 101, 1002, 2, 10, 100, 1000, 2, 10, 100, 1001, 2, 10, 100, 1002, 2, 11, 100, 1000, 2, 11, 100, 1001, 2, 11, 100, 1002, 2, 11, 101, 1000, 2, 11, 101, 1001, 2, 11, 101, 1002, 3, 10, 100, 1000, 3, 10, 100, 1001, 3, 10, 100, 1002, 3, 11, 100, 1000, 3, 11, 100, 1001, 3, 11, 100, 1002, 3, 11, 101, 1000, 3, 11, 101, 1001, 3, 11, 101, 1002, 4, 10, 100, 1000, 4, 10, 100, 1001, 4, 10, 100, 1002, 4, 11, 100, 1000, 4, 11, 100, 1001, 4, 11, 100, 1002, 4, 11, 101, 1000, 4, 11, 101, 1001, 4, 11, 101, 1002, 99 }"
-			Attribute testOrderSize : int32 = "148"
-			Attribute testNodes : int32 = "4"
+			Attribute caseId: int32
+			Attribute nodeId: int32 = "1"
+			Attribute protocolId: int32 = "0"
+			Attribute messageId: int32 = "0"
+			Attribute testValue: int32 = "0"
+
+			Attribute testOrder [148]: int16 = "{ 1001, 1000, 1002, 1, 10, 100, 1000, 1, 10, 100, 1001, 1, 10, 100, 1002, 1, 11, 100, 1000, 1, 11, 100, 1001, 1, 11, 100, 1002, 1, 11, 101, 1000, 1, 11, 101, 1001, 1, 11, 101, 1002, 2, 10, 100, 1000, 2, 10, 100, 1001, 2, 10, 100, 1002, 2, 11, 100, 1000, 2, 11, 100, 1001, 2, 11, 100, 1002, 2, 11, 101, 1000, 2, 11, 101, 1001, 2, 11, 101, 1002, 3, 10, 100, 1000, 3, 10, 100, 1001, 3, 10, 100, 1002, 3, 11, 100, 1000, 3, 11, 100, 1001, 3, 11, 100, 1002, 3, 11, 101, 1000, 3, 11, 101, 1001, 3, 11, 101, 1002, 4, 10, 100, 1000, 4, 10, 100, 1001, 4, 10, 100, 1002, 4, 11, 100, 1000, 4, 11, 100, 1001, 4, 11, 100, 1002, 4, 11, 101, 1000, 4, 11, 101, 1001, 4, 11, 101, 1002, 99 }"
+			Attribute testOrderSize: int32 = "148"
+			Attribute testNodes: int32 = "4"
 		}
 		Behavior {
-			ctor {
-				"caseId = etUnit_openAll(\"log\", \"ChoicePointTestExtended\", \"org.eclipse.etrice.generator.common.tests.ChoicePointTestExtended\", \"ChoicePointTest_case\");"
-			}
-			dtor {
-				"etUnit_closeAll(caseId);"
-			}
-			Operation test(){
-				"
+			ctor '''caseId = etUnit_openAll("log", "ChoicePointTestExtended", "org.eclipse.etrice.generator.common.tests.ChoicePointTestExtended", "ChoicePointTest_case");'''
+			dtor '''etUnit_closeAll(caseId);'''
+			Operation test() '''
+				
 				if(protocolId == 0)
 					testPort0.testCP0(testValue);
 				else if(protocolId == 1){
@@ -366,10 +318,9 @@ RoomModel ChoicePointTestExtended {
 						testPort1.testCP1(testValue);
 				}
 				testValue++;
-				"
-			}
-			Operation next(){
-				"
+			'''
+			Operation next() '''
+				
 				if(testValue > 2){
 					testValue = 0;
 					messageId++;
@@ -386,148 +337,113 @@ RoomModel ChoicePointTestExtended {
 				if(nodeId <= testNodes)
 					navPort.toNode(nodeId);
 				else {
-					EXPECT_ORDER_END(caseId, \"<|MODEL_LOCATION|>\", 99);
+					EXPECT_ORDER_END(caseId, "<|MODEL_LOCATION|>", 99);
 					etUnit_testFinished(caseId);
 				}
-				"
-			}
-			Operation check(value : int32){
-				"EXPECT_ORDER(caseId, \"<|MODEL_LOCATION|>\", value);"
-			}
+			'''
+			Operation check(value: int32) '''EXPECT_ORDER(caseId, "<|MODEL_LOCATION|>", value);'''
 			StateMachine {
 				Transition init: initial -> testInitial {
-					action {
-						"navPort.setCaseId(caseId);"
-						"EXPECT_ORDER_START(caseId, testOrder, testOrderSize);"
-					}
+					action '''
+						navPort.setCaseId(caseId);
+						EXPECT_ORDER_START(caseId, testOrder, testOrderSize);'''
 				}
 				Transition tr0: testInitial -> testTr {
 					triggers {
 						<resultCP: navPort>
 					}
-					action {
-						"check(transitionData);"
-					}
+					action '''check(transitionData);'''
 				}
 				Transition tr7: testTr -> testTr1 {
 					triggers {
 						<resultCP: navPort>
 					}
-					action {
-						"check(transitionData);"
-					}
+					action '''check(transitionData);'''
 				}
 				Transition tr8: testTr1 -> testTr2 {
 					triggers {
 						<resultCP: navPort>
 					}
-					action {
-						"check(transitionData);"
-					}
+					action '''check(transitionData);'''
 				}
 				Transition tr1: testTr2 -> triggerTest {
 					triggers {
 						<onNode: navPort>
 					}
-					action {
-						"check(transitionData);"
-					}
+					action '''check(transitionData);'''
 				}
 				Transition tr4: testPath -> testPath {
 					triggers {
 						<onMessage: navPort>
 					}
-					action {
-						"check(transitionData);"
-					}
+					action '''check(transitionData);'''
 				}
 				Transition tr5: testPath -> onCP {
 					triggers {
 						<resultCP: navPort>
 					}
-					action {
-						"check(transitionData);"
-					}
+					action '''check(transitionData);'''
 				}
 				Transition tr9: onCP -> triggerTest {
 					triggers {
 						<onNode: navPort>
 					}
-					action {
-						"check(transitionData);"
-					}
+					action '''check(transitionData);'''
 				}
 				Transition tr10: triggerTest -> testPath {
 					triggers {
 						<onProtocol: navPort>
 					}
-					action {
-						"check(transitionData);"
-					}
+					action '''check(transitionData);'''
 				}
 				State testInitial {
-					entry {
-						"testPort0.testInitialCP0(1);"
-					}
+					entry '''testPort0.testInitialCP0(1);'''
 				}
 				State testTr {
-					entry {
-						"testPort0.testTrCP0(0);"
-					}
+					entry '''testPort0.testTrCP0(0);'''
 				}
 				State triggerTest {
-					entry {
-						"test();"
-					}
+					entry '''test();'''
 				}
 				State testTr1 {
-					entry {
-						"testPort1.testTrCP0(2);"
-					}
+					entry '''testPort1.testTrCP0(2);'''
 				}
 				State testTr2 {
-					entry {
-						"next();"
-					}
+					entry '''next();'''
 				}
 				State testPath
 				State onCP {
-					entry {
-						"next();"
-					}
+					entry '''next();'''
 				}
 			}
 		}
 	}
-	
+
 	ProtocolClass NavigationProtocol_event {
 		incoming {
-			Message toNode(id: int32)
-			Message setCaseId(id : int32)
+			Message toNode(int32)
+			Message setCaseId(int32)
 		}
 		outgoing {
-			Message onNode(id: int32)
-			Message onProtocol(id : int32)
-			Message onMessage(id : int32)
-			Message resultCP(value: int32)
+			Message onNode(int32)
+			Message onProtocol(int32)
+			Message onMessage(int32)
+			Message resultCP(int32)
 		}
 	}
 
 	ProtocolClass CPTestProtocol_event {
 		incoming {
-			Message testCP0(value: int32)
-			Message testTrCP0(value : int32)
-			Message testInitialCP0(value : int32)	
-		}
-		
-	}
-	
-	ProtocolClass CPTestProtocol_inherited_event extends CPTestProtocol_event{
-		incoming{
-			Message testCP1(value: int32)
-			Message testTrCP1(value : int32)
+			Message testCP0(int32)
+			Message testTrCP0(int32)
+			Message testInitialCP0(int32)
 		}
 	}
-	
-	
+
+	ProtocolClass CPTestProtocol_inherited_event extends CPTestProtocol_event {
+		incoming {
+			Message testCP1(int32)
+			Message testTrCP1(int32)
+		}
+	}
 }

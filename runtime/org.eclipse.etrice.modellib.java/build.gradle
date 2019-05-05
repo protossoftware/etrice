@@ -3,6 +3,10 @@ apply plugin: 'java'
 apply from: "$rootDir/gradle/publish.gradle"
 apply from: "$rootDir/gradle/etGenerator.gradle"
 
+dependencies {
+	modelpath_java files('model')
+}
+
 def models = [
 	'model/ALogService.room',
 	'model/TcpService.room',
