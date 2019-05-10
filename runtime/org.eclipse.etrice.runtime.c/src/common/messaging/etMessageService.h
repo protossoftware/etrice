@@ -62,7 +62,18 @@ struct etHighPrioFunc{
 	etHighPrioFunc *next;
 };
 
+/**
+ * a data structure for the performance statistics
+ */
+typedef struct etMessageServiceStatistics {
+	etTimeDiff highWaterMark;					/** high water mark */
+	etQueueStatistics* queueStatistics;			/** a pointer to the queue statistics */
+}
+etMessageServiceStatistics;
+
 typedef struct etMessageService {
+	const char* name;							/** (unique) name */
+	struct etMessageService* next;				/** linked list */
 	etMessageQueue messageQueue;				/** message queue that holds all used messages */
 	etMessageQueue messagePool;					/** message pool that holds all free messages */
 	etBuffer messageBuffer;						/** information about the message buffer that holds information about the actual memory position and size for the message pool */
@@ -74,7 +85,35 @@ typedef struct etMessageService {
 	etTimer timer;								/** timer for cyclic calls */
 	etMessageService_execmode execmode;			/** execution mode*/
 	etHighPrioFunc *highPrioFuncRoot;
+	etMessageServiceStatistics statistics;		/** statistical data */
+	etBool resetStatistics;						/** flag that tells the message service to reset all statistics values */
 } etMessageService;
+
+/**
+ * initialization (construction)
+ *
+ * \param self the this pointer
+ * \param name the name of the message service
+ * \param buffer the buffer for the message pool
+ * \param maxBlocks the number of (equal sized) message blocks in the buffer
+ * \param blockSize the size of each message block
+ * \param stackSize the stack size for the thread in which this service will run
+ * \param priority the thread priority
+ * \param interval the polling interval
+ * \param msgDispatcher the dispatcher method
+ * \param execmdoe the execution mode for this message service
+ */
+void etMessageService_initx(
+		etMessageService* self,
+		const char* name,
+		etUInt8* buffer,
+		etUInt16 maxBlocks,
+		etUInt16 blockSize,
+		etStacksize stacksize,
+		etPriority priority,
+		etTime interval,
+		etDispatcherReceiveMessage msgDispatcher,
+		etMessageService_execmode execmode);
 
 /**
  * initialization (construction)

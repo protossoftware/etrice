@@ -76,5 +76,5 @@ void etLogger_fprintf(etFileHandle file, const char* format, ... ){
 	va_start( arglist, format );
 	vfprintf(file, format, arglist );
 	va_end( arglist );
-	fflush(stdout);
+	fflush(file);
 }
