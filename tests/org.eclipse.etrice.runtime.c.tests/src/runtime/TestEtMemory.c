@@ -39,7 +39,7 @@
 
 
 static void TestEtMemory_testVariableSize(etInt16 id) {
-	etUInt8 buffer[BUF_SIZE];
+	etUInt8* buffer = malloc(BUF_SIZE);
 	const etUInt16 blockSize = 2 * KBYTE;
 	const int nBlocks = BUF_SIZE / blockSize;
 	etMemory* mem = etMemory_VariableSize_init(buffer, BUF_SIZE);
@@ -48,7 +48,7 @@ static void TestEtMemory_testVariableSize(etInt16 id) {
 
 	EXPECT_TRUE(id, "mem!=NULL", mem!=NULL);
 
-	/* nBlocks-1 onjects can be allocated */
+	/* nBlocks-1 objects can be allocated */
 	for (i=1; i<nBlocks; ++i) {
 		obj = mem->alloc(mem, blockSize);
 		if (obj==NULL) {
@@ -64,7 +64,7 @@ static void TestEtMemory_testVariableSize(etInt16 id) {
 }
 
 static void TestEtMemory_testFixedSize(etInt16 id) {
-	etUInt8 buffer[BUF_SIZE];
+	etUInt8* buffer = malloc(BUF_SIZE);
 	etUInt8* objects[TEST_BLOCKS];
 	int i;
 	etMemory* mem = etMemory_FixedSize_init(buffer, BUF_SIZE, BLOCK_SIZE);
@@ -160,7 +160,7 @@ static void checkState(etInt16 id, etMemory* mem, const char* text, etUInt32 act
 }
 
 static void TestEtMemory_testFreeList(etInt16 id) {
-	static etUInt8 buffer[BUF_SIZE];
+	etUInt8* buffer = malloc(BUF_SIZE);
 	static etUInt8 sizes[NSIZES] = { SIZE0, SIZE1, SIZE2, SIZE3, SIZE4, SIZE5, SIZE6 };
 	etUInt8* objects[NSIZES][NOBJ];
 	etMemory* mem = etMemory_FreeList_init(buffer, BUF_SIZE, NSLOTS);
@@ -202,7 +202,7 @@ static void TestEtMemory_testFreeList(etInt16 id) {
 }
 
 static void TestEtMemory_testFreeListOverflow(etInt16 id) {
-	static etUInt8 buffer[BUF_SIZE_SMALL];
+	etUInt8* buffer = malloc(BUF_SIZE_SMALL);
 	etMemory* mem = etMemory_FreeList_init(buffer, BUF_SIZE_SMALL, NSLOTS);
 	void* obj;
 
@@ -212,12 +212,52 @@ static void TestEtMemory_testFreeListOverflow(etInt16 id) {
 	EXPECT_TRUE(id, "insufficient space, expect NULL", NULL==obj);
 }
 
+static void TestEtMemory_testStatistics(etInt16 id) {
+	etMemoryStatistics* stat;
+	int n;
+
+	EXPECT_EQUAL_INT32(id, "tests created some memory managements", 4, etRuntime_getMemoryManagementCount());
+
+	n = 0;
+	stat = etRuntime_getMemoryManagementStatistics(n);
+	EXPECT_TRUE(id, "stat!=NULL", stat!=NULL);
+	printf("checking memory management %d, %s, max %d, fail %d\n", n, etRuntime_getMemoryManagementName(n), stat->maxUsed, stat->nFailingRequests);
+	fflush(stdout);
+	EXPECT_EQUAL_INT32(id, "maxUsed", 0, stat->maxUsed);
+	EXPECT_EQUAL_INT32(id, "nFailingRequests", 1, stat->nFailingRequests);
+
+	n = 1;
+	stat = etRuntime_getMemoryManagementStatistics(n);
+	EXPECT_TRUE(id, "stat!=NULL", stat!=NULL);
+	printf("checking memory management %d, %s, max %d, fail %d\n", n, etRuntime_getMemoryManagementName(n), stat->maxUsed, stat->nFailingRequests);
+	fflush(stdout);
+	EXPECT_EQUAL_INT32(id, "maxUsed", 261784, stat->maxUsed);
+	EXPECT_EQUAL_INT32(id, "nFailingRequests", 0, stat->nFailingRequests);
+
+	n = 2;
+	stat = etRuntime_getMemoryManagementStatistics(n);
+	EXPECT_TRUE(id, "stat!=NULL", stat!=NULL);
+	printf("checking memory management %d, %s, max %d, fail %d\n", n, etRuntime_getMemoryManagementName(n), stat->maxUsed, stat->nFailingRequests);
+	fflush(stdout);
+	EXPECT_EQUAL_INT32(id, "maxUsed", 131144, stat->maxUsed);
+	EXPECT_EQUAL_INT32(id, "nFailingRequests", 0, stat->nFailingRequests);
+
+	n = 3;
+	stat = etRuntime_getMemoryManagementStatistics(n);
+	EXPECT_TRUE(id, "stat!=NULL", stat!=NULL);
+	printf("checking memory management %d, %s, max %d, fail %d\n", n, etRuntime_getMemoryManagementName(n), stat->maxUsed, stat->nFailingRequests);
+	fflush(stdout);
+	EXPECT_EQUAL_INT32(id, "maxUsed", 260016, stat->maxUsed);
+	EXPECT_EQUAL_INT32(id, "nFailingRequests", 1, stat->nFailingRequests);
+}
+
 void TestEtMemory_runSuite(void){
 	etUnit_openTestSuite("org.eclipse.etrice.runtime.c.tests.TestMemory");
 	ADD_TESTCASE(TestEtMemory_testVariableSize);
 	ADD_TESTCASE(TestEtMemory_testFixedSize);
 	ADD_TESTCASE(TestEtMemory_testFreeList);
 	ADD_TESTCASE(TestEtMemory_testFreeListOverflow);
+	/*ADD_TESTCASE(TestEtMemory_testStatistics);*/
 	etUnit_closeTestSuite();
 }
 

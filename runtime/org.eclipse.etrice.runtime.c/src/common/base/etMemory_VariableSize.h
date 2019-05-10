@@ -37,13 +37,6 @@
 etMemory* etMemory_VariableSize_init(void* heap, etUInt32 size);
 
 /**
- * supply optional user lock/unlock functions for usage in a multi-threaded environment.
- * \param mem pointer to the memory management struct
- * \lock pointer to a user supplied locking struct
- */
-void etMemory_VariableSize_setUserLock(etMemory* mem, etLock* lock);
-
-/**
  * returns the free memory left in bytes
  * \return the free memory left in bytes
  */

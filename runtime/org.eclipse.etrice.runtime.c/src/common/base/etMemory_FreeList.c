@@ -19,13 +19,13 @@
 #define OBJ_OFFSET			etALIGNMENT
 
 #define DO_LOCK	\
-	if (self->lock!=NULL) {								\
-		self->lock->lockFct(self->lock->lockData);		\
+	if (self->base.lock!=NULL) {								\
+		self->base.lock->lockFct(self->base.lock->lockData);	\
 	}
 
 #define DO_UNLOCK	\
-	if (self->lock!=NULL) {								\
-		self->lock->unlockFct(self->lock->lockData);	\
+	if (self->base.lock!=NULL) {								\
+		self->base.lock->unlockFct(self->base.lock->lockData);	\
 	}
 
 typedef struct etFreeListObj {
@@ -46,7 +46,6 @@ typedef struct etFreeListMemory {
 	etMemory base;					/** the "base class" */
 	etUInt8* current;				/**< next free position on the heap */
 	etUInt16 nslots;				/**< number of free lists */
-	etLock* lock;					/**< user supplied lock functions */
 	roundUpSize* roundUp;			/**< rounding method (identity by default) */
 	etFreeListInfo freelists[1];	/**< array of free list infos (array used with size nslots) */
 } etFreeListMemory;
@@ -199,17 +198,16 @@ etUInt16 etMemory_FreeList_power2(etUInt16 v) {
 etMemory* etMemory_FreeList_init(void* heap, etUInt32 size, etUInt16 nslots) {
 	etFreeListMemory* self = (etFreeListMemory*) heap;
 	ET_MSC_LOGGER_SYNC_ENTRY("etMemory_FreeList_init", "init")
-	int data_size = MEM_CEIL(sizeof(etFreeListMemory)+(nslots-1)*sizeof(etFreeListInfo));
+	etUInt32 data_size = MEM_CEIL(sizeof(etFreeListMemory)+(nslots-1)*sizeof(etFreeListInfo));
+	etUInt32 actual_size = size - data_size;
 	etMemory* result = NULL;
 
-	if (size > data_size) {
-		self->base.size = size;
-		self->base.statistics.maxUsed = 0;
-		self->base.statistics.nFailingRequests = 0;
-		self->base.alloc = etMemory_FreeList_alloc;
-		self->base.free = etMemory_FreeList_free;
+	if (heap!=NULL & size > data_size) {
+		result = &self->base;
+
+		etMemory_init(result, actual_size, etMemory_FreeList_alloc, etMemory_FreeList_free);
+
 		self->roundUp = etMemory_FreeList_identity;
-		self->lock = NULL;
 		self->nslots = nslots;
 		self->current = ((etUInt8*) self) + data_size;
 
@@ -219,19 +217,10 @@ etMemory* etMemory_FreeList_init(void* heap, etUInt32 size, etUInt16 nslots) {
 			for (i=0; i<self->nslots; ++i)
 				self->freelists[i].objsize = UNUSED_LIST;
 		}
-
-		result = &self->base;
 	}
 
 	ET_MSC_LOGGER_SYNC_EXIT
 	return result;
-}
-
-void etMemory_FreeList_setUserLock(etMemory* mem, etLock* lock) {
-	etFreeListMemory* self = (etFreeListMemory*) mem;
-	ET_MSC_LOGGER_SYNC_ENTRY("etMemory_FreeList_init", "setUserLock")
-	self->lock = lock;
-	ET_MSC_LOGGER_SYNC_EXIT
 }
 
 void etMemory_FreeList_setUserRounding(etMemory* mem, roundUpSize* roundup) {

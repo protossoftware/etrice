@@ -17,20 +17,19 @@
 
 
 #define DO_LOCK	\
-	if (self->lock!=NULL) {								\
-		self->lock->lockFct(self->lock->lockData);		\
+	if (self->base.lock!=NULL) {								\
+		self->base.lock->lockFct(self->base.lock->lockData);	\
 	}
 
 #define DO_UNLOCK	\
-	if (self->lock!=NULL) {								\
-		self->lock->unlockFct(self->lock->lockData);	\
+	if (self->base.lock!=NULL) {								\
+		self->base.lock->unlockFct(self->base.lock->lockData);	\
 	}
 
 typedef struct etVariableSizeMemory {
 	etMemory base;					/** the "base class" */
 
 	etUInt8* current;				/**< next free position on the heap */
-	etLock* lock;					/**< user supplied lock functions */
 } etVariableSizeMemory;
 
 
@@ -71,20 +70,18 @@ void etMemory_VariableSize_free(etMemory* heap, void* obj) {
  */
 etMemory* etMemory_VariableSize_init(void* heap, etUInt32 size) {
 	etVariableSizeMemory* self = (etVariableSizeMemory*) heap;
-	size_t data_size = MEM_CEIL(sizeof(etVariableSizeMemory));
+	etUInt32 data_size = MEM_CEIL(sizeof(etVariableSizeMemory));
+	etUInt32 actual_size = size - data_size;
 	etMemory* result = NULL;
 
 	ET_MSC_LOGGER_SYNC_ENTRY("etMemory", "init")
 
-	if (size > data_size) {
-		self->base.size = size;
-		self->base.statistics.maxUsed = 0;
-		self->base.statistics.nFailingRequests = 0;
-		self->base.alloc = etMemory_VariableSize_alloc;
-		self->base.free = etMemory_VariableSize_free;
+	if (heap!=NULL & size > data_size) {
+		result = &self->base;
+
+		etMemory_init(result, actual_size, etMemory_VariableSize_alloc, etMemory_VariableSize_free);
 
 		self->current = ((etUInt8*)self)+data_size;
-		result = &self->base;
 	}
 
 	ET_MSC_LOGGER_SYNC_EXIT
@@ -94,11 +91,4 @@ etMemory* etMemory_VariableSize_init(void* heap, etUInt32 size) {
 etUInt8 etMemory_VariableSize_freeHeapMem(etMemory* mem) {
 	etVariableSizeMemory* self = (etVariableSizeMemory*) mem;
 	return ((etUInt8*) self) + self->base.size - self->current;
-}
-
-void etMemory_VariableSize_setUserLock(etMemory* mem, etLock* lock) {
-	etVariableSizeMemory* self = (etVariableSizeMemory*) mem;
-	ET_MSC_LOGGER_SYNC_ENTRY("etMemory_VariableSize", "setUserLock")
-	self->lock = lock;
-	ET_MSC_LOGGER_SYNC_EXIT
 }
