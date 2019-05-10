@@ -15,6 +15,7 @@
 #include <stddef.h>
 #include <string.h>
 #include "etUnit/etUnit.h"
+#include "base/etMemory_VariableSize.h"
 #include "base/etMemory_FixedSize.h"
 #include "base/etMemory_FreeList.h"
 
@@ -37,6 +38,31 @@
 #define SIZE6			96
 
 
+static void TestEtMemory_testVariableSize(etInt16 id) {
+	etUInt8 buffer[BUF_SIZE];
+	const etUInt16 blockSize = 2 * KBYTE;
+	const int nBlocks = BUF_SIZE / blockSize;
+	etMemory* mem = etMemory_VariableSize_init(buffer, BUF_SIZE);
+	int i;
+	void* obj;
+
+	EXPECT_TRUE(id, "mem!=NULL", mem!=NULL);
+
+	/* nBlocks-1 onjects can be allocated */
+	for (i=1; i<nBlocks; ++i) {
+		obj = mem->alloc(mem, blockSize);
+		if (obj==NULL) {
+			EXPECT_TRUE(id, "obj==NULL", ET_FALSE);
+		}
+	}
+
+	/* another block should fail */
+	obj = mem->alloc(mem, blockSize);
+	if (obj!=NULL) {
+		EXPECT_TRUE(id, "obj!=NULL", ET_FALSE);
+	}
+}
+
 static void TestEtMemory_testFixedSize(etInt16 id) {
 	etUInt8 buffer[BUF_SIZE];
 	etUInt8* objects[TEST_BLOCKS];
@@ -52,7 +78,7 @@ static void TestEtMemory_testFixedSize(etInt16 id) {
 		memset(objects[i], i%4, TEST_BLOCK_SIZE);
 	}
 	for (i=0; i<TEST_BLOCKS/2; ++i) {
-		mem->free(mem, objects[i*2], TEST_BLOCK_SIZE);
+		mem->free(mem, objects[i*2]);
 	}
 	for (i=0; i<TEST_BLOCKS/2; ++i) {
 		objects[i*2] = mem->alloc(mem, TEST_BLOCK_SIZE);
@@ -103,9 +129,34 @@ static void local_free(etInt16 id, etMemory* mem, etUInt8* objects[NSIZES][NOBJ]
 
 	for (kind=0; kind<NSIZES; ++kind) {
 		for (i=0; i<NOBJ; ++i) {
-			mem->free(mem, objects[kind][i], sizes[kind]);
+			mem->free(mem, objects[kind][i]);
 		}
 	}
+}
+
+static void checkSlot(etInt16 id, etMemory* mem, int slot, etUInt16 size, etUInt16 nObj) {
+	char text[32];
+	sprintf(text, "slot %d size", size);
+	EXPECT_EQUAL_UINT16(id, text, size, etMemory_FreeList_sizeObjects(mem, slot));
+	sprintf(text, "slot %d nobj", nObj);
+	EXPECT_EQUAL_UINT16(id, text, nObj, etMemory_FreeList_nObjects(mem, slot));
+}
+
+static void checkState(etInt16 id, etMemory* mem, const char* text, etUInt32 actual, etUInt32 expected) {
+	int slot;
+
+	EXPECT_EQUAL_UINT32(id, text, actual, expected);
+	EXPECT_EQUAL_UINT16(id, "free slots", NSLOTS-NSIZES, etMemory_FreeList_freeSlots(mem));
+
+	slot = 0;
+	checkSlot(id, mem, slot++, SIZE5, NOBJ);
+	checkSlot(id, mem, slot++, SIZE0, NOBJ);
+	checkSlot(id, mem, slot++, SIZE4, NOBJ);
+	checkSlot(id, mem, slot++, SIZE1, NOBJ);
+	slot++;
+	checkSlot(id, mem, slot++, SIZE2, NOBJ);
+	checkSlot(id, mem, slot++, SIZE6, NOBJ);
+	checkSlot(id, mem, slot++, SIZE3, NOBJ);
 }
 
 static void TestEtMemory_testFreeList(etInt16 id) {
@@ -113,8 +164,9 @@ static void TestEtMemory_testFreeList(etInt16 id) {
 	static etUInt8 sizes[NSIZES] = { SIZE0, SIZE1, SIZE2, SIZE3, SIZE4, SIZE5, SIZE6 };
 	etUInt8* objects[NSIZES][NOBJ];
 	etMemory* mem = etMemory_FreeList_init(buffer, BUF_SIZE, NSLOTS);
-	etUInt32 free = etMemory_FreeList_freeHeapMem(mem);
+	etUInt32 free = etMemory_FreeList_getFreeHeapMem(mem);
 	etUInt32 diff, total;
+	int slot;
 
 	printf("initial free heap is %ld\n", free);
 
@@ -129,48 +181,24 @@ static void TestEtMemory_testFreeList(etInt16 id) {
 	local_dump_statistics(mem, NSLOTS);
 
 	diff = free;
-	free = etMemory_FreeList_freeHeapMem(mem);
+	free = etMemory_FreeList_getFreeHeapMem(mem);
 	diff -= free;
 
+	/* correction by management data */
+	diff -= NSIZES*NOBJ*etMemory_FreeList_MgmtDataPerObject();
+
 	printf("free heap is %ld\n", free);
-	EXPECT_EQUAL_UINT32(id, "allocated total", total, diff);
-	EXPECT_EQUAL_UINT16(id, "free slots", NSLOTS-NSIZES, etMemory_FreeList_freeSlots(mem));
+	fflush(stdout);
 
-	EXPECT_EQUAL_UINT16(id, "slot 0 size", SIZE0, etMemory_FreeList_sizeObjects(mem, 0));
-	EXPECT_EQUAL_UINT16(id, "slot 0 nobj", NOBJ, etMemory_FreeList_nObjects(mem, 0));
-	EXPECT_EQUAL_UINT16(id, "slot 2 size", SIZE4, etMemory_FreeList_sizeObjects(mem, 1));
-	EXPECT_EQUAL_UINT16(id, "slot 2 nobj", NOBJ, etMemory_FreeList_nObjects(mem, 1));
-	EXPECT_EQUAL_UINT16(id, "slot 4 size", SIZE1, etMemory_FreeList_sizeObjects(mem, 2));
-	EXPECT_EQUAL_UINT16(id, "slot 4 nobj", NOBJ, etMemory_FreeList_nObjects(mem, 2));
-	EXPECT_EQUAL_UINT16(id, "slot 1 size", SIZE2, etMemory_FreeList_sizeObjects(mem, 4));
-	EXPECT_EQUAL_UINT16(id, "slot 1 nobj", NOBJ, etMemory_FreeList_nObjects(mem, 4));
-	EXPECT_EQUAL_UINT16(id, "slot 3 size", SIZE6, etMemory_FreeList_sizeObjects(mem, 5));
-	EXPECT_EQUAL_UINT16(id, "slot 3 nobj", NOBJ, etMemory_FreeList_nObjects(mem, 5));
-	EXPECT_EQUAL_UINT16(id, "slot 5 size", SIZE3, etMemory_FreeList_sizeObjects(mem, 6));
-	EXPECT_EQUAL_UINT16(id, "slot 5 nobj", NOBJ, etMemory_FreeList_nObjects(mem, 6));
-	EXPECT_EQUAL_UINT16(id, "slot 6 size", SIZE5, etMemory_FreeList_sizeObjects(mem, 7));
-	EXPECT_EQUAL_UINT16(id, "slot 6 nobj", NOBJ, etMemory_FreeList_nObjects(mem, 7));
+	/* do checks */
+	checkState(id, mem, "allocated total", total, diff);
 
+	/* allocate and free again */
 	local_alloc(id, mem, objects, sizes);
 	local_free(id, mem, objects, sizes);
 
-	EXPECT_EQUAL_UINT32(id, "free unchanged", free, etMemory_FreeList_freeHeapMem(mem));
-	EXPECT_EQUAL_UINT16(id, "free slots", NSLOTS-NSIZES, etMemory_FreeList_freeSlots(mem));
-
-	EXPECT_EQUAL_UINT16(id, "slot 0 size", SIZE0, etMemory_FreeList_sizeObjects(mem, 0));
-	EXPECT_EQUAL_UINT16(id, "slot 0 nobj", NOBJ, etMemory_FreeList_nObjects(mem, 0));
-	EXPECT_EQUAL_UINT16(id, "slot 2 size", SIZE4, etMemory_FreeList_sizeObjects(mem, 1));
-	EXPECT_EQUAL_UINT16(id, "slot 2 nobj", NOBJ, etMemory_FreeList_nObjects(mem, 1));
-	EXPECT_EQUAL_UINT16(id, "slot 4 size", SIZE1, etMemory_FreeList_sizeObjects(mem, 2));
-	EXPECT_EQUAL_UINT16(id, "slot 4 nobj", NOBJ, etMemory_FreeList_nObjects(mem, 2));
-	EXPECT_EQUAL_UINT16(id, "slot 1 size", SIZE2, etMemory_FreeList_sizeObjects(mem, 4));
-	EXPECT_EQUAL_UINT16(id, "slot 1 nobj", NOBJ, etMemory_FreeList_nObjects(mem, 4));
-	EXPECT_EQUAL_UINT16(id, "slot 3 size", SIZE6, etMemory_FreeList_sizeObjects(mem, 5));
-	EXPECT_EQUAL_UINT16(id, "slot 3 nobj", NOBJ, etMemory_FreeList_nObjects(mem, 5));
-	EXPECT_EQUAL_UINT16(id, "slot 5 size", SIZE3, etMemory_FreeList_sizeObjects(mem, 6));
-	EXPECT_EQUAL_UINT16(id, "slot 5 nobj", NOBJ, etMemory_FreeList_nObjects(mem, 6));
-	EXPECT_EQUAL_UINT16(id, "slot 6 size", SIZE5, etMemory_FreeList_sizeObjects(mem, 7));
-	EXPECT_EQUAL_UINT16(id, "slot 6 nobj", NOBJ, etMemory_FreeList_nObjects(mem, 7));
+	/* expect same results as before */
+	checkState(id, mem, "free unchanged", free, etMemory_FreeList_getFreeHeapMem(mem));
 }
 
 static void TestEtMemory_testFreeListOverflow(etInt16 id) {
@@ -186,6 +214,7 @@ static void TestEtMemory_testFreeListOverflow(etInt16 id) {
 
 void TestEtMemory_runSuite(void){
 	etUnit_openTestSuite("org.eclipse.etrice.runtime.c.tests.TestMemory");
+	ADD_TESTCASE(TestEtMemory_testVariableSize);
 	ADD_TESTCASE(TestEtMemory_testFixedSize);
 	ADD_TESTCASE(TestEtMemory_testFreeList);
 	ADD_TESTCASE(TestEtMemory_testFreeListOverflow);

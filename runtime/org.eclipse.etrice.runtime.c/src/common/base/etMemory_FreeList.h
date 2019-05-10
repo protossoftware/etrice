@@ -21,6 +21,14 @@
  * \author Henrik Rentz-Reichert
  */
 #include "base/etMemory.h"
+#include "osal/etLock.h"
+
+typedef etUInt16 roundUpSize(etUInt16 size);
+
+/**
+ * this function rounds up to the next highest power of 2
+ */
+etUInt16 etMemory_FreeList_power2(etUInt16 v);
 
 /**
  * initializes the free list memory management on the given heap
@@ -34,42 +42,63 @@
 etMemory* etMemory_FreeList_init(void* heap, etUInt32 size, etUInt16 nslots);
 
 /**
+ * supply optional user lock/unlock functions for usage in a multi-threaded environment.
+ * \param mem pointer to the memory management struct
+ * \lock pointer to a user supplied locking struct
+ */
+void etMemory_FreeList_setUserLock(etMemory* mem, etLock* lock);
+
+/**
+ * by default the requested size is just rounded up to the next alignment boundary.
+ * In this case for every new size a slot is used. To use less slots at the cost of some 'wasted' memory
+ * the user can supply an optional round-up method to create less equivalence classes of object sized
+ * and thus reduce the number of slots needed.
+ * An alternative is to use etMemory_FreeList_power2().
+ */
+void etMemory_FreeList_setUserRounding(etMemory* mem, roundUpSize* roundup);
+
+/**
  * determines and returns the free memory of the heap
  *
- * \param heap pointer to the heap to be managed
+ * \param mem pointer to the heap to be managed
  *
  * \return the free memory of the heap
  */
-etUInt32 etMemory_FreeList_freeHeapMem(void* heap);
+etUInt32 etMemory_FreeList_getFreeHeapMem(etMemory* mem);
 
 /**
  * returns the number of objects in a given slot
  *
- * \param heap pointer to the heap to be managed
+ * \param mem pointer to the heap to be managed
  * \param slot the slot number
  *
  * \return the number of objects in a given slot or <code>0</code> if invalid slot
  * or <code>DEBUG_FREE_LISTS</code> isn't <code>true</code>
  */
-etUInt16 etMemory_FreeList_nObjects(void* heap, etUInt16 slot);
+etUInt16 etMemory_FreeList_nObjects(etMemory* mem, etUInt16 slot);
 
 /**
  * returns the size of the objects in a given slot
  *
- * \param heap pointer to the heap to be managed
+ * \param mem pointer to the heap to be managed
  * \param slot the slot number
  *
  * \return the size of the objects in a given slot
  */
-etUInt16 etMemory_FreeList_sizeObjects(void* heap, etUInt16 slot);
+etUInt16 etMemory_FreeList_sizeObjects(etMemory* mem, etUInt16 slot);
 
 /**
  * returns the number of free slots
  *
- * \param heap pointer to the heap to be managed
+ * \param mem pointer to the heap to be managed
  *
  * \return the number of free slots
  */
-etUInt16 etMemory_FreeList_freeSlots(void* heap);
+etUInt16 etMemory_FreeList_freeSlots(etMemory* mem);
+
+/**
+ * the size of the management data per allocated object
+ */
+etUInt16 etMemory_FreeList_MgmtDataPerObject();
 
 #endif /* _ETMEMORY_FREE_LIST_H_ */
