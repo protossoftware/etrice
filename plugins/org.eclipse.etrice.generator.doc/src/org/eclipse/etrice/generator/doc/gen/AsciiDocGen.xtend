@@ -388,7 +388,7 @@ class AsciiDocGen {
 			| «at.type»
 			| «at.kind»
 			| «at.multAsText»
-			| «at.docText»
+			a| «at.docText»
 		«ENDFOR»
 		|===
 	'''
@@ -401,7 +401,7 @@ class AsciiDocGen {
 			
 			| «at.name»
 			| «at.type.type.name»
-			| «at.docText»
+			a| «at.docText»
 		«ENDFOR»	
 		|===
 	'''
@@ -415,7 +415,7 @@ class AsciiDocGen {
 			|«op.name»
 			| «IF op.returnType !== null»«op.returnType.type.name»«ELSE»void«ENDIF»
 			| «FOR pa : op.arguments SEPARATOR ", "»«pa.name»: «pa.refType.type.name»«ENDFOR»
-			| «op.docText»
+			a| «op.docText»
 		«ENDFOR»
 		|===
 	'''
@@ -497,8 +497,8 @@ class AsciiDocGen {
 		if(raw === null)
 			return null;
 		
-		switch getMarkupType(raw) {
-			case MARKUP_HTML: '''
+		switch type : getMarkupType(raw) {
+			case type == MARKUP_HTML && raw.contains("<"): '''
 				++++
 				<div class="paragraph"><p>«trimMarkupTag(raw)»</p></div>
 				++++
