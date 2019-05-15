@@ -23,7 +23,6 @@
 
 #include "base/etMemory.h"
 #include "base/etQueue.h"
-#include "osal/etLock.h"
 
 /**
  * initializes the heap with a simple block management
@@ -35,13 +34,6 @@
  * \return the pointer to the initialized etMemory struct
  */
 etMemory* etMemory_FixedSize_init(void* heap, etUInt32 size, etUInt16 blockSize);
-
-/**
- * supply optional user lock/unlock functions for usage in a multi-threaded environment.
- * \param mem pointer to the memory management struct
- * \lock pointer to a user supplied locking struct
- */
-void etMemory_FixedSize_setUserLock(etMemory* mem, etLock* lock);
 
 /**
  * determines and returns the free memory of the heap

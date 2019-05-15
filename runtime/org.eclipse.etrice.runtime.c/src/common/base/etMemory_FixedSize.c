@@ -17,16 +17,16 @@
 
 
 #define DO_LOCK	\
-	if (self->lock!=NULL) {								\
-		self->lock->lockFct(self->lock->lockData);		\
+	if (self->base.lock!=NULL) {								\
+		self->base.lock->lockFct(self->base.lock->lockData);	\
 	}
 
 #define DO_UNLOCK	\
-	if (self->lock!=NULL) {								\
-		self->lock->unlockFct(self->lock->lockData);	\
+	if (self->base.lock!=NULL) {								\
+		self->base.lock->unlockFct(self->base.lock->lockData);	\
 	}
 
-#define GET_USED 	(etQueue_getSize(&self->blockPool) * self->blockSize)
+#define GET_FREE 	(etQueue_getSize(&self->blockPool) * self->blockSize)
 
 typedef struct etFixedSizeMemory {
 	etMemory base;
@@ -35,7 +35,6 @@ typedef struct etFixedSizeMemory {
 	etUInt16 maxBlocks;				/**< the maximum number of blocks */
 	etUInt16 blockSize;				/**< block size */
 	etQueue blockPool;				/**< pool of free blocks */
-	etLock* lock;					/**< user supplied lock functions */
 } etFixedSizeMemory;
 
 
@@ -51,7 +50,7 @@ void* etMemory_FixedSize_alloc(etMemory* heap, etUInt16 size) {
 		if (self->blockPool.size>0) {
 			etUInt32 used;
 			mem = etQueue_pop(&self->blockPool);
-			used = GET_USED;
+			used = self->base.size - GET_FREE;
 			if (used > self->base.statistics.maxUsed) {
 				self->base.statistics.maxUsed = used;
 			}
@@ -83,40 +82,31 @@ void etMemory_FixedSize_free(etMemory* heap, void* obj) {
  */
 etMemory* etMemory_FixedSize_init(void* heap, etUInt32 size, etUInt16 blockSize) {
 	etFixedSizeMemory* self = (etFixedSizeMemory*) heap;
-	size_t data_size = MEM_CEIL(sizeof(etFixedSizeMemory));
+	etUInt32 data_size = MEM_CEIL(sizeof(etFixedSizeMemory));
+	etUInt32 actual_size = size - data_size;
+	etMemory* result = NULL;
 	int i;
 
 	ET_MSC_LOGGER_SYNC_ENTRY("etMemory_FixedSize", "init")
 
-	self->base.size = size;
-	self->base.statistics.maxUsed = 0;
-	self->base.statistics.nFailingRequests = 0;
-	self->base.alloc = etMemory_FixedSize_alloc;
-	self->base.free = etMemory_FixedSize_free;
+	if (heap!=NULL && size > data_size) {
+		result = &self->base;
 
-	if (size > data_size) {
+		etMemory_init(result, actual_size, etMemory_FixedSize_alloc, etMemory_FixedSize_free);
+
 		self->buffer = ((etUInt8*) self) + data_size;
 		self->blockSize = blockSize;
 		self->maxBlocks = (size - data_size) / self->blockSize;
+		etQueue_init(&self->blockPool);
 		for (i=0; i<self->maxBlocks; i++){
 			void* block = &(self->buffer[i*self->blockSize]);
 			etQueue_push(&self->blockPool, block);
 		}
 	}
-	else {
-		self->blockSize = 0;
-	}
 
 	ET_MSC_LOGGER_SYNC_EXIT
 
-	return &self->base;
-}
-
-void etMemory_FixedSize_setUserLock(etMemory* mem, etLock* lock) {
-	etFixedSizeMemory* self = (etFixedSizeMemory*) mem;
-	ET_MSC_LOGGER_SYNC_ENTRY("etMemory_FixedSize", "setUserLock")
-	self->lock = lock;
-	ET_MSC_LOGGER_SYNC_EXIT
+	return result;
 }
 
 etUInt32 etMemory_FixedSize_getFreeHeapMem(etMemory* mem) {
@@ -125,7 +115,7 @@ etUInt32 etMemory_FixedSize_getFreeHeapMem(etMemory* mem) {
 	ET_MSC_LOGGER_SYNC_ENTRY("etMemory_FixedSize", "getFreeHeapMem")
 
 	DO_LOCK
-	result = GET_USED;
+	result = GET_FREE;
 	DO_UNLOCK
 
 	ET_MSC_LOGGER_SYNC_EXIT

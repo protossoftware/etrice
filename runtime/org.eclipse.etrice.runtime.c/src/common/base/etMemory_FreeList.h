@@ -42,13 +42,6 @@ etUInt16 etMemory_FreeList_power2(etUInt16 v);
 etMemory* etMemory_FreeList_init(void* heap, etUInt32 size, etUInt16 nslots);
 
 /**
- * supply optional user lock/unlock functions for usage in a multi-threaded environment.
- * \param mem pointer to the memory management struct
- * \lock pointer to a user supplied locking struct
- */
-void etMemory_FreeList_setUserLock(etMemory* mem, etLock* lock);
-
-/**
  * by default the requested size is just rounded up to the next alignment boundary.
  * In this case for every new size a slot is used. To use less slots at the cost of some 'wasted' memory
  * the user can supply an optional round-up method to create less equivalence classes of object sized
