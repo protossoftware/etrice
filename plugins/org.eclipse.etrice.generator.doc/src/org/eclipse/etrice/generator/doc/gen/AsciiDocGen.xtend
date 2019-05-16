@@ -41,12 +41,15 @@ import org.eclipse.etrice.generator.fsm.base.CodegenHelpers
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider
 
 import static org.eclipse.etrice.core.common.documentation.DocumentationMarkup.*
+import org.eclipse.etrice.generator.doc.Main
+import org.eclipse.etrice.generator.base.AbstractGeneratorOptionsHelper
 
 @Singleton
 class AsciiDocGen {
 
 	@Inject extension RoomHelpers
 	@Inject extension CodegenHelpers
+	@Inject protected extension AbstractGeneratorOptionsHelper
 	@Inject IEObjectDocumentationProvider eObjDocuProvider
 	
 	def doGenerate(Root root, IGeneratorFileIO fileIO, boolean includeImages) {
@@ -262,7 +265,7 @@ class AsciiDocGen {
 				
 				| «ims.name»
 				| «IF ims.data !== null»«ims.data.refType.type.name»«ELSE»void«ENDIF»
-				| «ims.docText»
+				a| «ims.docText»
 			«ENDFOR»
 			|===
 			
@@ -276,7 +279,7 @@ class AsciiDocGen {
 				
 				| «oms.name»
 				| «IF oms.data !== null»«oms.data.refType.type.name»«ELSE»void«ENDIF»
-				| «oms.docText»
+				a| «oms.docText»
 			«ENDFOR»
 			|===
 			
@@ -323,33 +326,41 @@ class AsciiDocGen {
 		«ac.docText»
 		
 		[discrete]
-		==== Structure
-		«IF includeImages»
-			
-			«includeImage(ac.name + "_structure.jpg")»
-		«ENDIF»
-		«IF !ac.allPorts.empty»
-			
-			«generatePortDoc(ac)»
-		«ENDIF»
-		«IF !ac.attributes.empty»
-			
-			«ac.attributes.generateAttributesDoc»
-		«ENDIF»
-		«IF ac.hasNonEmptyStateMachine || !ac.operations.empty || ac.isBehaviorAnnotationPresent("BehaviorManual")»
-			
-			[discrete]
-			==== Behavior
-			«IF !ac.operations.empty»
-				
-				«ac.operations.generateOperationsDoc»
+		«IF Main::settings.generateAsLibrary»
+			==== Interface
+			«IF !ac.allInterfacePorts.empty»	
+
+				«generatePortInterfaceDoc(ac)»
 			«ENDIF»
-			«IF ac.isBehaviorAnnotationPresent("BehaviorManual")»
+		«ELSE»
+			==== Structure
+			«IF includeImages»
 				
-				The behavior for ActorClass «ac.name» is implemented manually.
-			«ELSEIF ac.hasNonEmptyStateMachine»
+				«includeImage(ac.name + "_structure.jpg")»
+			«ENDIF»
+			«IF !ac.allPorts.empty»		
 				
-				«generateFsmDoc(ac, includeImages)»
+				«generatePortDoc(ac)»
+			«ENDIF»
+			«IF !ac.attributes.empty»
+				
+				«ac.attributes.generateAttributesDoc»
+			«ENDIF»
+			«IF ac.hasNonEmptyStateMachine || !ac.operations.empty || ac.isBehaviorAnnotationPresent("BehaviorManual")»
+				
+				[discrete]
+				==== Behavior
+				«IF !ac.operations.empty»
+					
+					«ac.operations.generateOperationsDoc»
+				«ENDIF»
+				«IF ac.isBehaviorAnnotationPresent("BehaviorManual")»
+					
+					The behavior for ActorClass «ac.name» is implemented manually.
+				«ELSEIF ac.hasNonEmptyStateMachine»
+					
+					«generateFsmDoc(ac, includeImages)»
+				«ENDIF»
 			«ENDIF»
 		«ENDIF»
 		«tagEnd(ac)»
@@ -376,6 +387,21 @@ class AsciiDocGen {
 			«ENDFOR»
 		'''
 	}
+	
+	def private String generatePortInterfaceDoc(ActorClass ac) '''
+		.Ports
+		|===
+		| Name | Protocol | Type | Multiplicity | Description
+		«FOR at : ac.allInterfacePorts»
+			
+			| «at.name»
+			| «at.protocol.name»
+			| «at.type»
+			| «at.multAsText»
+			a| «at.docText»
+		«ENDFOR»
+		|===
+	'''
 	
 	def private String generatePortDoc(ActorClass ac) '''
 		.Ports
