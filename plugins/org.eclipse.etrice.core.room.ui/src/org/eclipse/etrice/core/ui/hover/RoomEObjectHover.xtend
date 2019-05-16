@@ -26,7 +26,7 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.util.Tuples
 
-class RoomHoverProvider extends KeywordEObjectTextHover {
+class RoomEObjectHover extends KeywordEObjectTextHover {
 	
 	@Inject
 	RoomGrammarAccess grammar

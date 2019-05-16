@@ -349,12 +349,6 @@ public class RoomLabelProvider extends FSMLabelProvider {
 		return lt.getName();
 	}
 
-	StyledString text(EnumerationType et) {
-		StyledString txt = new StyledString("enum "+et.getName());
-		txt.setStyle(0, 4, getKeywordStyler());
-		return txt;
-	}
-
 	String text (EnumLiteral lit) {
 		return lit.getName()+" = "+lit.getLiteralValue();
 	}

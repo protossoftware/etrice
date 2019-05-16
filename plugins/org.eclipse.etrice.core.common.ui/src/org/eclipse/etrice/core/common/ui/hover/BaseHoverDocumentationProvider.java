@@ -16,6 +16,7 @@ package org.eclipse.etrice.core.common.ui.hover;
 
 import static org.eclipse.etrice.core.common.documentation.DocumentationMarkup.MARKUP_ASCIIDOC;
 import static org.eclipse.etrice.core.common.documentation.DocumentationMarkup.getMarkupType;
+import static org.eclipse.etrice.core.common.documentation.DocumentationMarkup.trimMarkupTag;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.ui.editor.hover.html.DefaultHoverDocumentationProvider;
@@ -31,7 +32,7 @@ public class BaseHoverDocumentationProvider extends DefaultHoverDocumentationPro
 	
 	protected String processMarkup(String text) {
 		String markup = getMarkupType(text);
-		String normText = text.replace("\r\n", "\n");
+		String normText = text.replace("\r\n", "\n").trim();
 		
 		// return eclipse hover output html
 		if(MARKUP_ASCIIDOC.equals(markup)) {
@@ -39,7 +40,7 @@ public class BaseHoverDocumentationProvider extends DefaultHoverDocumentationPro
 			// simulate asciidoctor line break behavior
 			// 1. asciidoc new paragraph
 			// 2. asciidoc new line
-			return normText
+			return trimMarkupTag(normText).trim()
 					.replaceAll("\\n\\n", "<br><br>")
 					.replaceAll(" \\+\\n", "<br>");
 		} 

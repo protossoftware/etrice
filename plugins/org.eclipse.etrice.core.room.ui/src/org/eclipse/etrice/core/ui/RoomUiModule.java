@@ -19,10 +19,10 @@ import org.eclipse.etrice.core.common.ui.editor.BaseDoubleClickStrategyProvider;
 import org.eclipse.etrice.core.common.ui.editor.model.BaseTokenTypeToPartitionMapper;
 import org.eclipse.etrice.core.common.ui.hover.BaseHoverDocumentationProvider;
 import org.eclipse.etrice.core.common.ui.hover.IKeywordHoverContentProvider;
-import org.eclipse.etrice.core.common.ui.hover.KeywordHoverProvider;
 import org.eclipse.etrice.core.common.ui.linking.GlobalNonPlatformURIEditorOpener;
 import org.eclipse.etrice.core.ui.highlight.RoomHighlightingConfiguration;
 import org.eclipse.etrice.core.ui.highlight.RoomSemanticHighlightingCalculator;
+import org.eclipse.etrice.core.ui.hover.RoomEObjectHover;
 import org.eclipse.etrice.core.ui.hover.RoomHoverProvider;
 import org.eclipse.etrice.core.ui.internal.RoomActivator;
 import org.eclipse.etrice.core.ui.linking.RoomHyperlinkHelper;
@@ -58,7 +58,7 @@ public class RoomUiModule extends org.eclipse.etrice.core.ui.AbstractRoomUiModul
 			
 		// keyword hover stuff
 		binder.bind(IKeywordHoverContentProvider.class).to(KeywordHoverContentProvider.class);
-		binder.bind(IEObjectHoverProvider.class).to(KeywordHoverProvider.class);	
+		binder.bind(IEObjectHoverProvider.class).to(RoomHoverProvider.class);	
 		
 		binder.bind(IEObjectHoverDocumentationProvider.class).to(BaseHoverDocumentationProvider.class);
 	}
@@ -95,7 +95,7 @@ public class RoomUiModule extends org.eclipse.etrice.core.ui.AbstractRoomUiModul
 
 	@Override
 	public Class<? extends IEObjectHover> bindIEObjectHover() {
-		return RoomHoverProvider.class;
+		return RoomEObjectHover.class;
 	}
 
 	public Class<? extends AbstractEditStrategyProvider> bindAbstractEditStrategyProvider() {
