@@ -21,14 +21,32 @@ ext.publishRepos = {
 	}
 }
 
-// default for java projects
-if (project.plugins.hasPlugin('java')) { 
-	publishing {
-		publications {
-			etrice(MavenPublication) {
-				from components.java
+afterEvaluate {
+	// default for java projects
+	if (project.plugins.hasPlugin('java')) { 
+		publishing {
+			publications {
+				etrice(MavenPublication) {
+					from components.java
+					pom {
+						if (project.hasProperty('title')) {
+							name = project.title
+							description = project.description
+						}
+						url = 'https://www.eclipse.org/etrice'
+						licenses {
+							license {
+								name = 'Eclipse Public License, Version 2.0'
+								url = 'http://www.eclipse.org/legal/epl-v20.html'
+							}
+						}
+						scm {
+							url = "git://git.eclipse.org/gitroot/etrice/org.eclipse.etrice.git"
+						}
+					}
+				}
 			}
+			repositories publishRepos
 		}
-		repositories publishRepos
 	}
 }
