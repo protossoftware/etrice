@@ -5,6 +5,24 @@ plugins {
 apply from: "$rootDir/gradle/scmVersion.gradle"
 apply from: "$rootDir/gradle/versions.gradle"
 
+/**
+ * Requires property 'additionalPropertiesFile'
+ */
+def loadAdditionalPropertiesFile() {
+	if(project.hasProperty('additionalPropertiesFile')) {
+		def props = new Properties()
+		file(additionalPropertiesFile).withInputStream {
+			stream -> props.load(stream)
+		}
+		props.each { entry ->
+			project.ext[entry.key] = entry.value
+		}
+		println "Loaded properties from ${additionalPropertiesFile}: ${props.keySet()}"
+	}
+}
+
+loadAdditionalPropertiesFile()
+
 allprojects {
 	apply plugin: 'base'
 
@@ -15,22 +33,6 @@ allprojects {
 		maven {
 			url 'https://repo.eclipse.org/content/repositories/maven_central/'
 		}
-	}
-}
-
-/**
- * Requires property 'additionalPropertiesFile'
- */
-task loadAdditionalPropertiesFile() {
-	doFirst {
-		def props = new Properties()
-		file(additionalPropertiesFile).withInputStream {
-			stream -> props.load(stream)
-		}
-		props.each { entry ->
-			project.ext[entry.key] = entry.value
-		}
-		println "Loaded properties from ${additionalPropertiesFile}: ${props.keySet()}"
 	}
 }
 
