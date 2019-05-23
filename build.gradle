@@ -17,3 +17,20 @@ allprojects {
 		}
 	}
 }
+
+/**
+ * Requires property 'additionalPropertiesFile'
+ */
+task loadAdditionalPropertiesFile() {
+	doFirst {
+		def props = new Properties()
+		file(additionalPropertiesFile).withInputStream {
+			stream -> props.load(stream)
+		}
+		props.each { entry ->
+			project.ext[entry.key] = entry.value
+		}
+		println "Loaded properties from ${additionalPropertiesFile}: ${props.keySet()}"
+	}
+}
+
