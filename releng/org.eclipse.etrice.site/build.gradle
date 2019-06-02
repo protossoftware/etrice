@@ -3,6 +3,6 @@ configurations {
 }
 
 artifacts {
-	archive fileTree(dir: 'target', include: 'org.eclipse.etrice.site-*.zip').singleFile
+	archive fileTree(dir: 'target', include: 'org.eclipse.etrice.site-*.zip').files
 }
 

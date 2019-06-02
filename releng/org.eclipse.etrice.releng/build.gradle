@@ -41,8 +41,14 @@ task assembleArtifacts(type: Sync) {
 	from([configurations.archives, configurations.updates]) {
 		into 'archives'
 	}
-	from(zipTree(configurations.updates.singleFile)) {
-		into 'updates'
+	if(!configurations.updates.empty) {
+		from(zipTree(configurations.updates.singleFile)) {
+			into 'updates'
+		}
+	} else {
+		doFirst {
+			throw new GradleException("etrice update site is missing - execute tycho/maven 'package' first")
+		}
 	}
 	into assembleDir
 }
