@@ -10,7 +10,7 @@ Require-Bundle: org.eclipse.etrice.core.fsm;bundle-version="2.0.0",
  org.eclipse.etrice.core.room.ui;bundle-version="2.0.0",
  org.eclipse.etrice.core.common.ui;bundle-version="2.0.0",
  org.eclipse.etrice.ui.common.base;bundle-version="2.0.0",
- org.eclipse.emf.transaction;bundle-version="1.4.0",
+ org.eclipse.emf.transaction,
  org.eclipse.graphiti;bundle-version="0.8.0",
  org.eclipse.ui.ide;bundle-version="3.6.0",
  org.eclipse.graphiti.ui;bundle-version="0.7.0",
@@ -22,7 +22,7 @@ Require-Bundle: org.eclipse.etrice.core.fsm;bundle-version="2.0.0",
  org.eclipse.jface.databinding,
  org.eclipse.core.databinding.property;bundle-version="1.4.200",
  org.eclipse.jdt.core;bundle-version="3.9.0",
- org.eclipse.emf.workspace;bundle-version="1.5.0"
+ org.eclipse.emf.workspace
 Export-Package: org.eclipse.etrice.ui.common,
  org.eclipse.etrice.ui.common.commands,
  org.eclipse.etrice.ui.common.preferences
