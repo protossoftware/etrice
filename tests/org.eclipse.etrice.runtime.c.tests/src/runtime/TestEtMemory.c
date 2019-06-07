@@ -18,6 +18,7 @@
 #include "base/etMemory_VariableSize.h"
 #include "base/etMemory_FixedSize.h"
 #include "base/etMemory_FreeList.h"
+#include "runtime/etRuntime.h"
 
 #define KBYTE			1024
 #define BUF_SIZE		(256*KBYTE)
@@ -213,7 +214,7 @@ static void TestEtMemory_testFreeListOverflow(etInt16 id) {
 }
 
 static void TestEtMemory_testStatistics(etInt16 id) {
-	etMemoryStatistics* stat;
+	const etMemoryStatistics* stat;
 	int n;
 
 	EXPECT_EQUAL_INT32(id, "tests created some memory managements", 4, etRuntime_getMemoryManagementCount());
@@ -231,7 +232,11 @@ static void TestEtMemory_testStatistics(etInt16 id) {
 	EXPECT_TRUE(id, "stat!=NULL", stat!=NULL);
 	printf("checking memory management %d, %s, max %d, fail %d\n", n, etRuntime_getMemoryManagementName(n), stat->maxUsed, stat->nFailingRequests);
 	fflush(stdout);
-	EXPECT_EQUAL_INT32(id, "maxUsed", 261784, stat->maxUsed);
+	/*
+	 * the computation is too architecture dependent, we have a detailed check in TestEtMemory_testFreeList
+	 *
+	 * EXPECT_EQUAL_INT32(id, "maxUsed", 261784, stat->maxUsed);
+	 */
 	EXPECT_EQUAL_INT32(id, "nFailingRequests", 0, stat->nFailingRequests);
 
 	n = 2;
@@ -239,7 +244,11 @@ static void TestEtMemory_testStatistics(etInt16 id) {
 	EXPECT_TRUE(id, "stat!=NULL", stat!=NULL);
 	printf("checking memory management %d, %s, max %d, fail %d\n", n, etRuntime_getMemoryManagementName(n), stat->maxUsed, stat->nFailingRequests);
 	fflush(stdout);
-	EXPECT_EQUAL_INT32(id, "maxUsed", 131144, stat->maxUsed);
+	/*
+	 * the computation is too architecture dependent, we have a detailed check in TestEtMemory_testFixedSize
+	 *
+	 * EXPECT_EQUAL_INT32(id, "maxUsed", 131144, stat->maxUsed);
+	 */
 	EXPECT_EQUAL_INT32(id, "nFailingRequests", 0, stat->nFailingRequests);
 
 	n = 3;
@@ -247,7 +256,11 @@ static void TestEtMemory_testStatistics(etInt16 id) {
 	EXPECT_TRUE(id, "stat!=NULL", stat!=NULL);
 	printf("checking memory management %d, %s, max %d, fail %d\n", n, etRuntime_getMemoryManagementName(n), stat->maxUsed, stat->nFailingRequests);
 	fflush(stdout);
-	EXPECT_EQUAL_INT32(id, "maxUsed", 260016, stat->maxUsed);
+	/*
+	 * the computation is too architecture dependent, we have a detailed check in TestEtMemory_testVariableSize
+	 *
+	 * EXPECT_EQUAL_INT32(id, "maxUsed", 260016, stat->maxUsed);
+	 */
 	EXPECT_EQUAL_INT32(id, "nFailingRequests", 1, stat->nFailingRequests);
 }
 
@@ -257,7 +270,7 @@ void TestEtMemory_runSuite(void){
 	ADD_TESTCASE(TestEtMemory_testFixedSize);
 	ADD_TESTCASE(TestEtMemory_testFreeList);
 	ADD_TESTCASE(TestEtMemory_testFreeListOverflow);
-	/*ADD_TESTCASE(TestEtMemory_testStatistics);*/
+	ADD_TESTCASE(TestEtMemory_testStatistics);
 	etUnit_closeTestSuite();
 }
 

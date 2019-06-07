@@ -252,9 +252,9 @@ void expect_equal_void_ptr(etInt16 id, const char* message, const void* expected
 	if (expected != actual) {
 		char testresult[ETUNIT_FAILURE_TEXT_LEN];
 		char exp[16], act[16];
-		snprintf(testresult,  sizeof(testresult), "%s: expected=%ld, actual=%ld", message, (etUInt32) expected, (etUInt32) actual);
-		sprintf(exp, "%ld", (etUInt32) expected);
-		sprintf(act, "%ld", (etUInt32) actual);
+		snprintf(testresult,  sizeof(testresult), "%s: expected=%p, actual=%p", message, expected, actual);
+		sprintf(exp, "%p", expected);
+		sprintf(act, "%p", actual);
 		etUnit_handleExpect(id, ET_FALSE, testresult, exp, act, file, line);
 	} else {
 		etUnit_handleExpect(id, ET_TRUE, "", NULL, NULL, file, line);
@@ -348,9 +348,9 @@ static void expect_equal_int(etInt16 id, const char* message, etInt32 expected, 
 	if (expected != actual) {
 		char testresult[ETUNIT_FAILURE_TEXT_LEN];
 		char exp[16], act[16];
-		snprintf(testresult, sizeof(testresult), "%s: expected=%ld, actual=%ld", message, expected, actual);
-		sprintf(exp, "%ld", expected);
-		sprintf(act, "%ld", actual);
+		snprintf(testresult, sizeof(testresult), "%s: expected=%d, actual=%d", message, expected, actual);
+		sprintf(exp, "%d", expected);
+		sprintf(act, "%d", actual);
 		etUnit_handleExpect(id, ET_FALSE, testresult, exp, act, file, line);
 	} else {
 		etUnit_handleExpect(id, ET_TRUE, "", NULL, NULL, file, line);
@@ -381,9 +381,9 @@ static void expect_equal_uint(etInt16 id, const char* message, etUInt32 expected
 	if (expected != actual) {
 		char testresult[ETUNIT_FAILURE_TEXT_LEN];
 		char exp[16], act[16];
-		snprintf(testresult, sizeof(testresult), "%s: expected=%lu, actual=%lu", message, expected, actual);
-		sprintf(exp, "%lu", expected);
-		sprintf(act, "%lu", actual);
+		snprintf(testresult, sizeof(testresult), "%s: expected=%u, actual=%u", message, expected, actual);
+		sprintf(exp, "%u", expected);
+		sprintf(act, "%u", actual);
 		etUnit_handleExpect(id, ET_FALSE, testresult, exp, act, file, line);
 	} else {
 		etUnit_handleExpect(id, ET_TRUE, "", NULL, NULL, file, line);

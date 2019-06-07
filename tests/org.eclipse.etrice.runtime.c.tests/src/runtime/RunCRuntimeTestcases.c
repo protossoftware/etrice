@@ -29,6 +29,7 @@
 #include "TestEtQueue.h"
 #include "TestEtTimer.h"
 #include "TestEtDatatypes.h"
+#include "TestEtConsoleLogger.h"
 #include "helpers/TestEtTimeHelpers.h"
 #include "util/TestUtil.h"
 
@@ -53,6 +54,7 @@ void RunCRuntimeTestcases(void){
 	TestEtDatatypes_runSuite();
 	TestEtTimeHelpers_runSuite();
 	TestUtil_runSuite();
+	TestEtConsoleLogger_runSuite();
 
 	TestEtStaticDeque_runSuite();
 

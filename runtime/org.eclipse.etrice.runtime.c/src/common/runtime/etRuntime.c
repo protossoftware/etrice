@@ -50,7 +50,7 @@ int etRuntime_getMessageServiceCount() {
 	etRuntime_initInternal();
 	{
 		etMessageService* p = etRuntime_msgsvc_head;
-		while (p!=null) {
+		while (p!=NULL) {
 			++count;
 			p = p->next;
 		}
@@ -67,7 +67,7 @@ int etRuntime_getMessageServiceByName(const char* name) {
 	{
 		etMessageService* p = etRuntime_msgsvc_head;
 		int idx = 0;
-		while (p!=null) {
+		while (p!=NULL) {
 			if (strcmp(p->name, name)==0) {
 				ET_MSC_LOGGER_SYNC_EXIT
 				return idx;
@@ -88,7 +88,7 @@ const etMessageServiceStatistics* etRuntime_getMessageServiceStatistics(unsigned
 	{
 		etMessageService* p = etRuntime_msgsvc_head;
 		int count = 0;
-		while (p!=null) {
+		while (p!=NULL) {
 			if (count==i) {
 				ET_MSC_LOGGER_SYNC_EXIT
 				return &p->statistics;
@@ -109,7 +109,7 @@ const char* etRuntime_getMessageServiceName(unsigned int i) {
 	{
 		etMessageService* p = etRuntime_msgsvc_head;
 		int count = 0;
-		while (p!=null) {
+		while (p!=NULL) {
 			if (count==i) {
 				ET_MSC_LOGGER_SYNC_EXIT
 				return p->name;
@@ -129,7 +129,7 @@ void etRuntime_resetAllMessageServiceStatistics() {
 
 	{
 		etMessageService* p = etRuntime_msgsvc_head;
-		while (p!=null) {
+		while (p!=NULL) {
 			p->resetStatistics = ET_TRUE;
 			p = p->next;
 		}
@@ -162,7 +162,7 @@ void etRuntime_unregisterMessageService(etMessageService* msgService) {
 	{
 		etMessageService* p = etRuntime_msgsvc_head;
 		etMessageService* last = NULL;
-		while (p!=null) {
+		while (p!=NULL) {
 			if (p==msgService) {
 				if (last==NULL) {
 					/* remove the first one */
@@ -205,7 +205,7 @@ void etRuntime_unregisterMemoryManagement(etMemory* mem) {
 	{
 		etMemory* p = etRuntime_memmgmt_head;
 		etMemory* last = NULL;
-		while (p!=null) {
+		while (p!=NULL) {
 			if (p==mem) {
 				if (last==NULL) {
 					/* remove the first one */
@@ -231,7 +231,7 @@ int etRuntime_getMemoryManagementCount() {
 
 	{
 		etMemory* p = etRuntime_memmgmt_head;
-		while (p!=null) {
+		while (p!=NULL) {
 			++count;
 			p = p->next;
 		}
@@ -248,7 +248,7 @@ int etRuntime_getMemoryManagementByName(const char* name) {
 	{
 		etMemory* p = etRuntime_memmgmt_head;
 		int idx = 0;
-		while (p!=null) {
+		while (p!=NULL) {
 			if (strcmp(p->name, name)==0) {
 				ET_MSC_LOGGER_SYNC_EXIT
 				return idx;
@@ -269,7 +269,7 @@ const etMemoryStatistics* etRuntime_getMemoryManagementStatistics(unsigned int i
 	{
 		etMemory* p = etRuntime_memmgmt_head;
 		int count = 0;
-		while (p!=null) {
+		while (p!=NULL) {
 			if (count==i) {
 				ET_MSC_LOGGER_SYNC_EXIT
 				return &p->statistics;
@@ -290,7 +290,7 @@ const char* etRuntime_getMemoryManagementName(unsigned int i) {
 	{
 		etMemory* p = etRuntime_memmgmt_head;
 		int count = 0;
-		while (p!=null) {
+		while (p!=NULL) {
 			if (count==i) {
 				ET_MSC_LOGGER_SYNC_EXIT
 				return p->name;
@@ -310,7 +310,7 @@ void etRuntime_resetAllMemoryManagementStatistics() {
 
 	{
 		etMemory* p = etRuntime_memmgmt_head;
-		while (p!=null) {
+		while (p!=NULL) {
 			etMemory_resetStatistics(p);
 			p = p->next;
 		}
