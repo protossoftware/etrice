@@ -542,7 +542,7 @@ public class RoomScopeProvider extends FSMScopeProvider {
 	 * @param ref - not used
 	 * @return a list of scopes
 	 */
-	public IScope scope_ExternalPort_ifport(ExternalPort ep, EReference ref) {
+	public IScope scope_ExternalPort_interfacePort(ExternalPort ep, EReference ref) {
 		final List<IEObjectDescription> scopes = new ArrayList<IEObjectDescription>();
 
 		ActorClass ac = getActorClass(ep);
