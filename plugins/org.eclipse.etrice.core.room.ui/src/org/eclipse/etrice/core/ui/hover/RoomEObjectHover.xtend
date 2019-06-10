@@ -32,11 +32,12 @@ class RoomEObjectHover extends KeywordEObjectTextHover {
 	RoomGrammarAccess grammar
 	
 	override protected getXtextElementAt(XtextResource resource, int offset) {
-		// lookup expression
+		
 		val parseResult = resource.parseResult
 		if(parseResult !== null) {
 			val leafNode = NodeModelUtils.findLeafNodeAtOffset(parseResult.rootNode, offset)
 			if(leafNode?.grammarElement instanceof RuleCall) {
+				// lookup model element in DetailCode
 				if((leafNode.grammarElement as RuleCall).rule == grammar.CC_STRINGRule && leafNode.semanticElement instanceof DetailCode){
 					val exprFeature = UIExpressionUtil.findAtOffset(leafNode, offset)
 					if(exprFeature?.data instanceof EObject)

@@ -16,6 +16,7 @@ package org.eclipse.etrice.core.ui;
 
 import org.eclipse.etrice.core.common.ui.autoedit.BaseAutoEditStrategyProvider;
 import org.eclipse.etrice.core.common.ui.editor.BaseDoubleClickStrategyProvider;
+import org.eclipse.etrice.core.common.ui.editor.folding.FoldingRegionProvider;
 import org.eclipse.etrice.core.common.ui.editor.model.BaseTokenTypeToPartitionMapper;
 import org.eclipse.etrice.core.common.ui.hover.BaseHoverDocumentationProvider;
 import org.eclipse.etrice.core.common.ui.hover.IKeywordHoverContentProvider;
@@ -34,6 +35,7 @@ import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategyProvider;
 import org.eclipse.xtext.ui.editor.doubleClicking.DoubleClickStrategyProvider;
+import org.eclipse.xtext.ui.editor.folding.IFoldingRegionProvider;
 import org.eclipse.xtext.ui.editor.hover.IEObjectHover;
 import org.eclipse.xtext.ui.editor.hover.IEObjectHoverProvider;
 import org.eclipse.xtext.ui.editor.hover.html.IEObjectHoverDocumentationProvider;
@@ -59,8 +61,6 @@ public class RoomUiModule extends org.eclipse.etrice.core.ui.AbstractRoomUiModul
 		// keyword hover stuff
 		binder.bind(IKeywordHoverContentProvider.class).to(KeywordHoverContentProvider.class);
 		binder.bind(IEObjectHoverProvider.class).to(RoomHoverProvider.class);	
-		
-		binder.bind(IEObjectHoverDocumentationProvider.class).to(BaseHoverDocumentationProvider.class);
 	}
 
 	@Override
@@ -108,6 +108,14 @@ public class RoomUiModule extends org.eclipse.etrice.core.ui.AbstractRoomUiModul
 	
 	public Class<? extends DoubleClickStrategyProvider> bindDoubleClickStrategyProvider() {
 		return BaseDoubleClickStrategyProvider.class;
+	}
+	
+	public Class<? extends IFoldingRegionProvider> bindIFoldingRegionProvider() {
+		return FoldingRegionProvider.class;
+	}
+	
+	public Class<? extends IEObjectHoverDocumentationProvider> bindIEObjectHoverDocumentationProvider() {
+		return BaseHoverDocumentationProvider.class;
 	}
 	
 	@Override

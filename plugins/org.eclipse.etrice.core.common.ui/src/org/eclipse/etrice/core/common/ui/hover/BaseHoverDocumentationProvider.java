@@ -19,15 +19,25 @@ import static org.eclipse.etrice.core.common.documentation.DocumentationMarkup.g
 import static org.eclipse.etrice.core.common.documentation.DocumentationMarkup.trimMarkupTag;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.ui.editor.hover.html.DefaultHoverDocumentationProvider;
 
 public class BaseHoverDocumentationProvider extends DefaultHoverDocumentationProvider {
 	
 	@Override
-	public String getDocumentation(EObject object) {
+	public String getDocumentation(EObject object) { 
 		String text = super.getDocumentation(object);
-		
-		return (text != null) ? processMarkup(text) : null;
+		if (text != null) {
+			// hide copyright header
+			int totalOffset = NodeModelUtils.getNode(object).getTotalOffset();
+			if (totalOffset == 0 && text.trim().toLowerCase().startsWith("copyright")) {
+				return null;
+			} else {
+				return processMarkup(text);
+			}
+		}
+
+		return null;
 	}
 	
 	protected String processMarkup(String text) {
