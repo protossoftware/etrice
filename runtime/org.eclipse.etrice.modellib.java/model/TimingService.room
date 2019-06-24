@@ -15,10 +15,13 @@ RoomModel room.basic.service.timing {
 			ServiceImplementation of timer
 		}
 		Behavior {
-			Operation stop() '''
+			Operation stopUser() '''
 				System.out.println(toString() + "::stop()");
+				if(timerService != null) {
 				timerService.cancel();
-				timerService = null;'''
+				timerService = null;
+			}
+			'''
 			StateMachine {
 				Transition tr0: initial -> Operational {
 					action '''timerService = new Timer();'''
