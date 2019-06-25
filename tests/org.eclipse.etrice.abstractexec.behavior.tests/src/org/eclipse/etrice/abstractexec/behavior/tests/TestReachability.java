@@ -63,19 +63,21 @@ public class TestReachability extends TestBase {
 		}
 
 		List<AbstractValidationDiagnostic> diagnostics = getIssueCode2diagnostic().get(ReachabilityValidator.DIAG_CODE_UNREACHABLE);
-		for (AbstractValidationDiagnostic d : diagnostics) {
-			if (d instanceof FeatureBasedDiagnostic) {
-				FeatureBasedDiagnostic dx = (FeatureBasedDiagnostic) d;
-				StateGraph graph = (StateGraph) dx.getSourceEObject();
-				Object feature = graph.eGet(dx.getFeature());
-				if (feature instanceof EList) {
-					EList<?> list = (EList<?>) feature;
-					Object source = list.get(dx.getIndex());
-					if (source instanceof StateGraphItem) {
-						checkUnreachable((StateGraphItem) source);
-						items.remove(source);
-					} else
-						Assert.fail("unexpected test item:" + source);
+		if (diagnostics!=null) {
+			for (AbstractValidationDiagnostic d : diagnostics) {
+				if (d instanceof FeatureBasedDiagnostic) {
+					FeatureBasedDiagnostic dx = (FeatureBasedDiagnostic) d;
+					StateGraph graph = (StateGraph) dx.getSourceEObject();
+					Object feature = graph.eGet(dx.getFeature());
+					if (feature instanceof EList) {
+						EList<?> list = (EList<?>) feature;
+						Object source = list.get(dx.getIndex());
+						if (source instanceof StateGraphItem) {
+							checkUnreachable((StateGraphItem) source);
+							items.remove(source);
+						} else
+							Assert.fail("unexpected test item:" + source);
+					}
 				}
 			}
 		}

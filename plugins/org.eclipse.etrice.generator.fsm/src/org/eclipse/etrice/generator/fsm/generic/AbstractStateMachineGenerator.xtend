@@ -405,10 +405,14 @@ abstract class AbstractStateMachineGenerator {
 		«IF generateImplementation»
 			«publicIf»void «opScope»executeInitTransition(«selfOnly») {
 				«var initt = gc.graph.initialTransition»
-				int chain__et = «chainIDScope»«initt.genChainId»;
-				«stateType» next__et = «opScopePriv»executeTransitionChain(«langExt.selfPointer(true)»chain__et«IF handleEvents», «langExt.nullPointer», «langExt.nullPointer»«ENDIF»);
-				next__et = «opScopePriv»enterHistory(«langExt.selfPointer(true)»next__et«IF usesHdlr», «langExt.booleanConstant(false)»«ENDIF»);
-				setState(«langExt.selfPointer(true)»next__et);
+				«IF initt===null»
+					/* no initial transition allowed for abstract actor class */
+				«ELSE»
+					int chain__et = «chainIDScope»«initt.genChainId»;
+					«stateType» next__et = «opScopePriv»executeTransitionChain(«langExt.selfPointer(true)»chain__et«IF handleEvents», «langExt.nullPointer», «langExt.nullPointer»«ENDIF»);
+					next__et = «opScopePriv»enterHistory(«langExt.selfPointer(true)»next__et«IF usesHdlr», «langExt.booleanConstant(false)»«ENDIF»);
+					setState(«langExt.selfPointer(true)»next__et);
+				«ENDIF»
 			}
 		«ELSE»
 			void «opScope»executeInitTransition(«selfOnly»);

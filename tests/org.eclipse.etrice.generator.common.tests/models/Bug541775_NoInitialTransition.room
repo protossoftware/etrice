@@ -1,0 +1,24 @@
+RoomModel Bug541775_NoInitialTransition {
+
+	ProtocolClass PDummy {
+		incoming {
+			Message in1
+		}
+	}
+
+	abstract ActorClass ANoInitialTransition {
+		Structure {
+			Port p1: PDummy
+		}
+		Behavior {
+			StateMachine {
+				handler TransitionPoint tr0
+				Transition tr1: my tr0 -> my tr0 {
+					triggers {
+						<in1: p1>
+					}
+				}
+			}
+		}
+	}
+}

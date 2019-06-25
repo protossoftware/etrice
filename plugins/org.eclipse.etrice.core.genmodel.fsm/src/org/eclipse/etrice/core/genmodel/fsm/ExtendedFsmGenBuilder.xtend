@@ -32,6 +32,8 @@ import org.eclipse.etrice.core.genmodel.fsm.fsmgen.Node
 
 import static extension org.eclipse.etrice.core.genmodel.fsm.FsmGenExtensions.*
 import org.eclipse.etrice.core.fsm.util.FSMHelpers
+import org.eclipse.etrice.core.fsm.fSM.ModelComponent
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.Graph
 
 class ExtendedFsmGenBuilder extends BasicFsmGenBuilder {
 
@@ -47,6 +49,10 @@ class ExtendedFsmGenBuilder extends BasicFsmGenBuilder {
 		this.commonDataCalculator = commonDataCalculator
 		this.triggerExtensions = triggerExtensions
 		this.validator = if(validator === null) new NullDiagnostician else validator
+	}
+	
+	override GraphContainer createTransformedModel(ModelComponent mc) {
+		super.createTransformedModel(mc).check(mc)
 	}
 	
 	/**
@@ -229,6 +235,32 @@ class ExtendedFsmGenBuilder extends BasicFsmGenBuilder {
 		return it
 	}
 
+	def protected check(GraphContainer gc, ModelComponent mc) {
+		if (!mc.isAbstract) {
+			gc.eAllContents.toIterable.filter(Graph).forEach[checkInitialTransition(mc)]
+		}
+		return gc
+	}
+	
+	def protected checkInitialTransition(Graph graph, ModelComponent mc) {
+		if (graph.initialTransition!==null) {
+			// graph has an initial transition
+			return
+		}
+		
+		if (graph.eContainer instanceof GraphContainer) {
+			validationError("Top level state graph must have an initial transition", mc, FSMPackage.Literals.MODEL_COMPONENT__STATE_MACHINE);
+			return;
+		}
+		
+		// in the super state graph search for a transition which points to our parent state
+		val parentState = graph.eContainer as Node
+		val parentGraph = parentState.eContainer as Graph
+		if (!parentGraph.links.filter[target==parentState].empty) {
+			validationError("The state graph has transitions to history in its parent graph, thus it must have an initial transition", parentState.stateGraphNode, FSMPackage.Literals.STATE__SUBGRAPH);
+		}
+	}
+	
 	protected def void validationError(String msg, EObject obj, EStructuralFeature feature) {
 		validationError(msg, obj, feature, IDiagnostician.INSIGNIFICANT_INDEX)
 	}

@@ -24,7 +24,7 @@ def tests = [
 	choicePointTestExtended: 	['models/ChoicePointTestExtended.room', genericPhysical],
 	dataDrivenTest:				['models/DataDrivenTest.room', genericPhysical],
 	/* enumTest:				['models/EnumTest.room', genericPhysical],		not supported in c++	*/
-	compileTest:				['models/CompileTest.room', genericPhysical, 'models/StatemachineInterfaceTest.room', 'models/StatemachineInterfaceInheritedTest.room', 'models/StatemachineInterfaceTest.room', 'models/ContinuationTransitionTest.room'],
+	compileTest:				['models/CompileTest.room', genericPhysical, 'models/StatemachineInterfaceTest.room', 'models/StatemachineInterfaceInheritedTest.room', 'models/StatemachineInterfaceTest.room', 'models/ContinuationTransitionTest.room', 'models/Bug541775_NoInitialTransition.room'],
 	
 	handlerTest:				['models/HandlerTest.room', genericPhysical],
 	operationInheritanceTest:	['models/OperationInheritanceTest.room', genericPhysical],

@@ -9,7 +9,6 @@ RoomModel Reachability {
 		ActorRef testee2: Testee_ac
 		LogicalThread dflt_thread
 	}
-
 	ActorClass Testee_Super_ac {
 		Structure {
 			Port p: ReachabilityProtocol
@@ -173,6 +172,7 @@ RoomModel Reachability {
 												<in2: p>
 											}
 										}
+										Transition init: initial -> state0_1
 										ChoicePoint cp0_1
 										EntryPoint tp0_1
 										ExitPoint tp1_1
