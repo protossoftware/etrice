@@ -15,9 +15,6 @@
 /*
  *  Generic version for most platforms based on std.
  */
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 #ifndef _ETSTDDATATYPES_H_
 #define _ETSTDDATATYPES_H_
@@ -25,6 +22,8 @@ extern "C" {
 #ifndef _ETDATATYPES_H_
 #error etStdDatatypes must not be included before etDatatypes (include etDatatypes instead).
 #endif
+
+#include "etStdMacros.h"
 
 /*
  Define switches for additional data types:
@@ -37,6 +36,8 @@ extern "C" {
 #include <stdint.h>
 #include <inttypes.h>
 #include <stdbool.h>
+
+ET_EXTERN_C_BEGIN
 
 /* --- Data types for room.basic.types */
 
@@ -123,9 +124,6 @@ typedef etInt16 etAddressId;
  */
 
 /*-----------------------------------------------------------*/
+ET_EXTERN_C_END
 
 #endif /* _ETSTDDATATYPES_H_ */
-
-#ifdef __cplusplus
-}
-#endif

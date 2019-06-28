@@ -11,6 +11,8 @@
 #include "etDatatypes.h"
 #include "modelbase/etPort.h"
 
+ET_EXTERN_C_BEGIN
+
 /* message IDs */
 enum etSystemProtocol_msg_ids {
 	etSystemProtocol_MSG_MIN = 0,
@@ -46,6 +48,7 @@ etInt32 etSystemProtocolConjReplPort_getReplication(const etSystemProtocolConjRe
 /* get message string for message id */
 const char* etSystemProtocol_getMessageString(int msg_id);
 
+ET_EXTERN_C_END
 
 #endif /* _ETSYSTEMPROTOCOL_H_ */
 

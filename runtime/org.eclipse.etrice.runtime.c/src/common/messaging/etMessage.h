@@ -25,6 +25,8 @@
 
 #include "etDatatypes.h"
 
+ET_EXTERN_C_BEGIN
+
 /**
  * the message structure
  */
@@ -40,5 +42,7 @@ typedef struct etMessage {
  * \param self the this pointer
  */
 void etMessage_init(etMessage* self);
+
+ET_EXTERN_C_END
 
 #endif /* _ETMESSAGE_H_ */

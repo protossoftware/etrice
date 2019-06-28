@@ -25,6 +25,8 @@
 #include "base/etMemory.h"
 #include "osal/etLock.h"
 
+ET_EXTERN_C_BEGIN
+
 typedef etUInt16 roundUpSize(etUInt16 size);
 
 /**
@@ -95,5 +97,7 @@ etUInt16 etMemory_FreeList_freeSlots(etMemory* mem);
  * the size of the management data per allocated object
  */
 etUInt16 etMemory_FreeList_MgmtDataPerObject();
+
+ET_EXTERN_C_END
 
 #endif /* _ETMEMORY_FREE_LIST_H_ */

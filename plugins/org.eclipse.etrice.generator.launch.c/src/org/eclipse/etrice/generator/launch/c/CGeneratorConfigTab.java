@@ -14,14 +14,56 @@
 
 package org.eclipse.etrice.generator.launch.c;
 
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.debug.core.ILaunchConfiguration;
+import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.etrice.generator.launch.GeneratorConfigTab;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Composite;
 
 /**
  * @author Henrik Rentz-Reichert
  *
  */
 public class CGeneratorConfigTab extends GeneratorConfigTab {
+	
+	public static final String GEN_CPP_FILE_EXTENSIONS = "cppFileExtensions";
+	
+	private Button generateCppFileExtensions;
 
+	@Override
+	protected void addFurtherControls(Composite mainComposite) {
+		super.addFurtherControls(mainComposite);
+		
+
+		createSeparator(mainComposite, 2);
+		
+		generateCppFileExtensions = createCheckButton(mainComposite, "generate with C++ file extensions");
+		generateCppFileExtensions.setToolTipText("this options generates C source and header files with *.cpp and *.hpp extensions");
+		generateCppFileExtensions.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 2, 1));
+		generateCppFileExtensions.addSelectionListener(new UpdateConfig());
+	}
+	
+	@Override
+	public void initializeFrom(ILaunchConfiguration configuration) {
+		super.initializeFrom(configuration);
+		
+		try {
+			generateCppFileExtensions.setSelection(configuration.getAttribute(GEN_CPP_FILE_EXTENSIONS, false));
+		} catch (CoreException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Override
+	public void performApply(ILaunchConfigurationWorkingCopy configuration) {
+		super.performApply(configuration);
+		
+		configuration.setAttribute(GEN_CPP_FILE_EXTENSIONS, generateCppFileExtensions.getSelection());
+	}
+	
 	/* (non-Javadoc)
 	 * @see org.eclipse.debug.ui.ILaunchConfigurationTab#getName()
 	 */

@@ -16,7 +16,12 @@
 package org.eclipse.etrice.generator.c.setup;
 
 import org.eclipse.etrice.generator.base.AbstractGeneratorOptionsHelper;
+import org.eclipse.etrice.generator.base.args.Arguments;
 
 public class GeneratorOptionsHelper extends AbstractGeneratorOptionsHelper {
+	
+	public boolean isCppFileExtensions(Arguments args) {
+		return args.get(GeneratorOptions.CPP_FILE_EXTENSIONS);
+	}
 
 }

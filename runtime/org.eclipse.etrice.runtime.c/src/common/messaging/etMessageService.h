@@ -33,6 +33,8 @@
 #include "osal/etSema.h"
 #include "osal/etTimer.h"
 
+ET_EXTERN_C_BEGIN
+
 /** the address of the message service */
 #define MESSAGESERVICE_ADDRESS		1
 /** the base address for other receivers */
@@ -220,5 +222,7 @@ etInt16 etMessageService_getMessagePoolLowWaterMark(etMessageService* self);
 /* functions to register and unregister high prio functions */
 void etMessageService_registerHighPrioFunc(etMessageService* self, etHighPrioFunc* func);
 void etMessageService_unregisterHighPrioFunc(etMessageService* self, etHighPrioFunc*  func);
+
+ET_EXTERN_C_END
 
 #endif /* RMESSAGESERVICE_H_ */

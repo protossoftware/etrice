@@ -76,7 +76,7 @@ class StateMachineGen extends GenericStateMachineGenerator {
 		'''
 			«IF Main::settings.generateMSCInstrumentation»
 				/* state names */
-				static char* stateStrings[] = {"<no state>","<top>",«FOR state : states SEPARATOR ","»"«state.genStatePathName»"
+				static const char* stateStrings[] = {"<no state>","<top>",«FOR state : states SEPARATOR ","»"«state.genStatePathName»"
 				«ENDFOR»};
 			«ENDIF»
 

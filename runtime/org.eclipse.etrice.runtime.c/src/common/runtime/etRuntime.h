@@ -12,15 +12,12 @@
  *
  *******************************************************************************/
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #ifndef _ETRUNTIME_H_
 #define _ETRUNTIME_H_
 
 #include "messaging/etMessageService.h"
 #include "base/etMemory.h"
+#include "osal/etSema.h"
 
 /**
  * \file etRuntime.h
@@ -30,7 +27,7 @@ extern "C" {
  * \author Thomas Schuetz
  */
 
-#include "osal/etSema.h"
+ET_EXTERN_C_BEGIN
 
 /**
  * returns the number of message services in this process
@@ -135,8 +132,6 @@ void etRuntime_resetAllMemoryManagementStatistics();
  */
 etSema* etRuntime_getTerminateSemaphore();
 
-#endif /* _ETRUNTIME_H_ */
+ET_EXTERN_C_END
 
-#ifdef __cplusplus
-}
-#endif
+#endif /* _ETRUNTIME_H_ */

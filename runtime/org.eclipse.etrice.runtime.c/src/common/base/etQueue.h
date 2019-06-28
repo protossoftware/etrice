@@ -18,6 +18,8 @@
 #include <stddef.h>
 #include "etDatatypes.h"
 
+ET_EXTERN_C_BEGIN
+
 typedef struct etQueueObj {
 	struct etQueueObj* next;
 } etQueueObj;
@@ -46,6 +48,6 @@ etInt16 etQueue_getHighWaterMark(etQueue* self);
 
 etInt16 etQueue_getSize(etQueue* self);
 
-
+ET_EXTERN_C_END
 
 #endif /* _ETQUEUE_H_ */

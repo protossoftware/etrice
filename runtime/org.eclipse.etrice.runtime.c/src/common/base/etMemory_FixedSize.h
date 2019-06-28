@@ -26,6 +26,8 @@
 #include "base/etMemory.h"
 #include "base/etQueue.h"
 
+ET_EXTERN_C_BEGIN
+
 /**
  * initializes the heap with a simple block management
  *
@@ -45,5 +47,7 @@ etMemory* etMemory_FixedSize_init(void* heap, etUInt32 size, etUInt16 blockSize)
  * \return the free memory of the heap
  */
 etUInt32 etMemory_FixedSize_getFreeHeapMem(etMemory* mem);
+
+ET_EXTERN_C_END
 
 #endif /* _ETMEMORY_FIXED_SIZE_H_ */

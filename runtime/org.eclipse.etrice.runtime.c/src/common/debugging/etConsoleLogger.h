@@ -19,15 +19,14 @@
  *
  * \author: hrentzreichert
  */
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 #ifndef _ETCONSOLELOGGER_H_
 #define _ETCONSOLELOGGER_H_
 
 #include <debugging/etBufferSender.h>
 #include "etLogger.h"
+
+ET_EXTERN_C_BEGIN
 
 extern etLogger theConsoleLogger;
 
@@ -37,8 +36,6 @@ extern etLogger theConsoleLogger;
  */
 void etConsoleLogger_init();
 
-#endif /* _ETCONSOLELOGGER_H_ */
+ET_EXTERN_C_END
 
-#ifdef __cplusplus
-}
-#endif
+#endif /* _ETCONSOLELOGGER_H_ */

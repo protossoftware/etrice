@@ -19,15 +19,14 @@
  *
  * \author: hrentzreichert
  */
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 #ifndef _ETBUFFERSENDER_H_
 #define _ETBUFFERSENDER_H_
 
 #include <stddef.h>
 #include "etDatatypes.h"
+
+ET_EXTERN_C_BEGIN
 
 struct etBufferSender;
 
@@ -40,8 +39,6 @@ typedef struct etBufferSender {
 }
 etBufferSender;
 
-#endif /* _ETBUFFERSENDER_H_ */
+ET_EXTERN_C_END
 
-#ifdef __cplusplus
-}
-#endif
+#endif /* _ETBUFFERSENDER_H_ */

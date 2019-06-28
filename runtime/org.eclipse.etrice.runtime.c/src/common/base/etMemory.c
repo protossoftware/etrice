@@ -14,6 +14,7 @@
 
 #include "base/etMemory.h"
 #include "debugging/etMSCLogger.h"
+#include "runtime/etRuntime.h"
 
 
 #define DO_LOCK	\

@@ -16,6 +16,9 @@
 #define SRC_COMMON_CONTAINERS_ETSTATICDEQUE_H_
 
 #include <stdint.h>
+#include "etDatatypes.h"
+
+ET_EXTERN_C_BEGIN
 
 /**
  * etStaticDeque (static double ended queue) is a data structure for storing objects of equal size in order.
@@ -102,5 +105,7 @@ void* etStaticDeque_front(const etStaticDeque* self);
  * \return The object at the end of the queue
  */
 void* etStaticDeque_back(const etStaticDeque* self);
+
+ET_EXTERN_C_END
 
 #endif /* SRC_COMMON_CONTAINERS_ETSTATICDEQUE_H_ */

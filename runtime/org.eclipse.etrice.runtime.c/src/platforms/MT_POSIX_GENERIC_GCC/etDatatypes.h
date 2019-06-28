@@ -36,6 +36,8 @@
 #include <pthread.h>
 #include <semaphore.h>
 
+ET_EXTERN_C_BEGIN
+
 /*--- Data types for room.basic.types */
 
 /*-----------------------------------------------------------*/
@@ -60,5 +62,7 @@ typedef struct {
 typedef timer_t etOSTimerId;
 
 /*-----------------------------------------------------------*/
+
+ET_EXTERN_C_END
 
 #endif /* _DATATYPES_H_ */

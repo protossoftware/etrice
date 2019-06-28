@@ -19,9 +19,6 @@
  *
  * \author Thomas Jung
  */
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 #ifndef _ETTIMER_H_
 #define _ETTIMER_H_
@@ -29,6 +26,7 @@ extern "C" {
 #include "etDatatypes.h"
 #include "etTime.h"
 
+ET_EXTERN_C_BEGIN
 
 /**
  * the prototype for the time callback function
@@ -74,9 +72,6 @@ void etTimer_stop(etTimer* self);
  */
 void etTimer_destruct(etTimer* self);
 
+ET_EXTERN_C_END
 
 #endif /* __ETTIMER_H__ */
-
-#ifdef __cplusplus
-}
-#endif

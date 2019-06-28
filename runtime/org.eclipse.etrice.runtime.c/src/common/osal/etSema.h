@@ -11,9 +11,6 @@
  * 		Thomas Schuetz (initial contribution)
  *
  *******************************************************************************/
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 #ifndef _ETSEMA_H_
 #define _ETSEMA_H_
@@ -27,6 +24,8 @@ extern "C" {
  */
 
 #include "etDatatypes.h"
+
+ET_EXTERN_C_BEGIN
 
 /**
  * etSema holds the object data for a semaphore (for self pointer)
@@ -60,9 +59,6 @@ void etSema_wakeupFromISR(etSema* self);
  */
 void etSema_waitForWakeup(etSema* self);
 
+ET_EXTERN_C_END
 
 #endif /* _ETSEMA_H_ */
-
-#ifdef __cplusplus
-}
-#endif

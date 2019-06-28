@@ -380,7 +380,7 @@ class NodeGen {
 
 		/* forward declaration of variable actor structs */
 		«FOR ai : ssi.allContainedInstances»
-			static «ai.actorClass.name» «ai.path.getPathName()»;
+			ET_FOWARD_DECLARATION_OF_INST_VAR «ai.actorClass.name» «ai.path.getPathName()»;
 		«ENDFOR»
 
 		/* forward declaration of variable port structs */
@@ -390,7 +390,7 @@ class NodeGen {
 			«ELSE»
 				«FOR pi:ai.orderedIfItemInstances»
 					«IF pi.portClassAttributesSize > 0»
-						static «pi.protocol.getPortClassName(pi.conjugated)»_var «pi.path.pathName»_var«IF pi.replicated»[«pi.peers.size»]«ENDIF»={
+						ET_FOWARD_DECLARATION_OF_INST_VAR «pi.protocol.getPortClassName(pi.conjugated)»_var «pi.path.pathName»_var«IF pi.replicated»[«pi.peers.size»]«ENDIF»={
 							«FOR Integer i:1.. if(pi.peers.size==0)1 else pi.peers.size SEPARATOR ', '»
 								«attrInitGenAddon.generateAttributeInit(pi, pi.interfaceItem.portClass.attributes)»
 							«ENDFOR»};
@@ -467,7 +467,7 @@ class NodeGen {
 			«genPeerPortArrays(root, ai)»
 		«ENDIF»
 		«IF haveReplSubItems»
-			static const etReplSubPort «replSubPortsArray»[«offset»] = {
+			ET_INITIALIZATION_OF_INST_VAR const etReplSubPort «replSubPortsArray»[«offset»] = {
 				/* Replicated Sub Ports: {varData, msgService, peerAddress, localId, index} */
 				«FOR pi : replEventItems.filter(e|!e.peers.empty) SEPARATOR ","»
 					«genReplSubPortInitializers(root, ai, pi)»
@@ -475,7 +475,7 @@ class NodeGen {
 			};
 		«ENDIF»
 		«IF haveConstData»
-			static «const» «ai.actorClass.name»_const «instName»_const = {
+			ET_INITIALIZATION_OF_INST_VAR «const» «ai.actorClass.name»_const «instName»_const = {
 				«IF Main::settings.generateMSCInstrumentation»
 					«sep»"«ai.path»"
 
@@ -507,7 +507,7 @@ class NodeGen {
 				«ENDFOR»
 			};
 		«ENDIF»
-		static «ai.actorClass.name» «instName» = {
+		ET_INITIALIZATION_OF_INST_VAR «ai.actorClass.name» «instName» = {
 			«IF haveConstData»
 				&«instName»_const,
 
@@ -682,7 +682,7 @@ class NodeGen {
 				static void MsgDispatcher_«thread.name»_poll(void){
 					ET_MSC_LOGGER_SYNC_ENTRY("MsgDispatcher_«thread.name»", "execute")
 					«FOR ai : executedInstances»
-						«ai.actorClass.name»_execute((void*)&«ai.path.pathName»);
+						«ai.actorClass.name»_execute((«ai.actorClass.name»*)&«ai.path.pathName»);
 					«ENDFOR»
 					ET_MSC_LOGGER_SYNC_EXIT
 				}

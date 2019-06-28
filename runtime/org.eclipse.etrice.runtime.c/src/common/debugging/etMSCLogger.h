@@ -25,6 +25,9 @@
 #define _ETMSCLOGGER_H_
 
 #include "etRuntimeConfig.h"
+#include "etDatatypes.h"
+
+ET_EXTERN_C_BEGIN
 
 /**
  * opens a log file for the MSC. Only one at a time can be open.
@@ -191,5 +194,6 @@ void etMSCLogger_setState(const char* objectName, const char* stateName);
 #define ET_MSC_LOGGER_CHANGE_STATE(objectName, stateName)
 #endif
 
+ET_EXTERN_C_END
 
 #endif /* _ETMSCLOGGER_H_ */

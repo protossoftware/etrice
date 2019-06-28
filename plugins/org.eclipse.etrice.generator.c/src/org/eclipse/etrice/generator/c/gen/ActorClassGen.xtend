@@ -153,7 +153,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 		«IF hasVarData»
 			struct «ac.name» {
 				«IF hasConstData»
-					const «ac.name»_const* const constData;
+					const «ac.name»_const* ET_CONST_MEMBER constData;
 
 				«ENDIF»
 				/* data send ports */
@@ -377,9 +377,9 @@ class ActorClassGen extends GenericActorClassGenerator {
 			ET_MSC_LOGGER_SYNC_ENTRY("«ac.name»", "_receiveMessage")
 			«IF !isEmptyStateGraph»
 				«IF handleEvents»
-					«langExt.operationScope(ac.name, false)»receiveEvent(self, (etPort*)ifitem, msg->evtID, (void*)(((char*)msg)+MEM_CEIL(sizeof(etMessage))));
+					«langExt.operationScope(ac.name, false)»receiveEvent((«ac.name»*) self, (etPort*)ifitem, msg->evtID, (void*)(((char*)msg)+MEM_CEIL(sizeof(etMessage))));
 				«ELSE»
-					«langExt.operationScope(ac.name, false)»receiveEventInternal(self);
+					«langExt.operationScope(ac.name, false)»receiveEventInternal((«ac.name»*) self);
 				«ENDIF»
 			«ENDIF»
 

@@ -37,15 +37,15 @@ import org.eclipse.etrice.core.room.ExternalType
 import org.eclipse.etrice.core.room.Message
 import org.eclipse.etrice.core.room.MessageData
 import org.eclipse.etrice.core.room.PrimitiveType
+import org.eclipse.etrice.core.room.RefableType
 import org.eclipse.etrice.core.room.RoomClass
 import org.eclipse.etrice.core.room.RoomModel
+import org.eclipse.etrice.core.room.VarDecl
 import org.eclipse.etrice.core.room.util.RoomHelpers
 import org.eclipse.etrice.generator.c.Main
 import org.eclipse.etrice.generator.c.setup.GeneratorOptionsHelper
 import org.eclipse.etrice.generator.generic.ILanguageExtension
 import org.eclipse.xtext.util.Pair
-import org.eclipse.etrice.core.room.VarDecl
-import org.eclipse.etrice.core.room.RefableType
 
 @Singleton
 class CExtensions implements ILanguageExtension {
@@ -96,42 +96,60 @@ class CExtensions implements ILanguageExtension {
 	/* TODO: move specific code elsewhere */
 	// used
 	def String getCHeaderFileName(RoomClass rc) {
-		return rc.name+".h";
+		return rc.name+headerExtension;
 	}
 
 	// used
 	def String getCSourceFileName(RoomClass rc) {
-		return rc.name+".c";
+		return rc.name + sourceExtension;
 	}
 
 	// used
 	def String getCUtilsFileName(RoomClass rc) {
-		return rc.name+"_Utils.h";
+		return rc.name+"_Utils" + headerExtension;
 	}
 
 	def String getInstSourceFileName(RoomClass rc) {
-		return rc.name+"_Inst.h";
+		return rc.name+"_Inst" + headerExtension;
 	}
 
 	def String getDispSourceFileName(RoomClass rc) {
-		return rc.name+"_Disp.h";
+		return rc.name+"_Disp" + headerExtension;
 	}
 
 	// used
 	def String getCHeaderFileName(NodeRef nr, SubSystemInstance ssi) {
-		return nr.name+"_"+ssi.name+".h";
+		return nr.name+"_"+ssi.name + headerExtension;
 	}
 
 	def String getCSourceFileName(NodeRef nr, SubSystemInstance ssi) {
-		return nr.name+"_"+ssi.name+".c";
+		return nr.name+"_"+ssi.name + sourceExtension;
 	}
 
 	def String getInstSourceFileName(NodeRef nr, SubSystemInstance ssi) {
-		return nr.name+"_"+ssi.name+"_Inst.h";
+		return nr.name+"_"+ssi.name+"_Inst" + headerExtension;
 	}
 
 	def String getDispSourceFileName(NodeRef nr, SubSystemInstance ssi) {
-		return nr.name+"_"+ssi.name+"_Disp.h";
+		return nr.name+"_"+ssi.name+"_Disp" + headerExtension;
+	}
+	
+	def String headerExtension() {
+		if (Main.settings.isCppFileExtensions) {
+			".hpp";
+		}
+		else {
+			".h";
+		}
+	}
+	
+	def String sourceExtension() {
+		if (Main.settings.isCppFileExtensions) {
+			".cpp";
+		}
+		else {
+			".c";
+		}
 	}
 
 	def getIncludeGuardString(String filename){
@@ -158,6 +176,22 @@ class CExtensions implements ILanguageExtension {
 	def generateIncludeGuardEnd(String filename) {
 		'''
 		#endif /* «filename.getIncludeGuardString» */
+		'''
+	}
+
+	def generateCppExternCBegin() {
+		'''
+			#ifdef __cplusplus
+			extern „C“ {
+			#endif // __cplusplus
+		'''
+	}
+
+	def generateCppExternCEnd() {
+		'''
+			#ifdef __cplusplus
+			}
+			#endif // __cplusplus
 		'''
 	}
 

@@ -25,6 +25,8 @@
 
 #include "messaging/etMessage.h"
 
+ET_EXTERN_C_BEGIN
+
 /**
  * method prototype that receives a message
  *
@@ -47,5 +49,7 @@ typedef etBool (*etDispatcherReceiveMessage)(const etMessage* msg);
  * prototype for the periodic call to the <code>execute()</code> method of the dispatcher
  */
 typedef void (*etDispatcherExecute)(void);
+
+ET_EXTERN_C_END
 
 #endif /* _ETMESSAGERECEIVER_H_ */

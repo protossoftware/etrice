@@ -20,14 +20,13 @@
  * \author Thomas Schuetz, Thomas Jung
  *
  */
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 #ifndef _ETTHREAD_H_
 #define _ETTHREAD_H_
 
 #include "etDatatypes.h"
+
+ET_EXTERN_C_BEGIN
 
 /*
  * typedefs for etThread
@@ -101,9 +100,6 @@ etOSThreadData etThread_self(void);
  */
 etOSThreadId etThread_self_id(void);
 
+ET_EXTERN_C_END
 
 #endif /* _ETTHREAD_H_ */
-
-#ifdef __cplusplus
-}
-#endif

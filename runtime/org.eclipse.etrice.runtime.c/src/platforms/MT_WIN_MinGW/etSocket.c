@@ -49,7 +49,7 @@ int etSocket_destruct(etSocket* self) {
 }
 
 int etSocket_recv(etSocket* self, uint8* buffer, size_t length) {
-	int result = recv(self->socket, buffer, length, 0);
+	int result = recv(self->socket, (char*) buffer, length, 0);
 	if(result < 0) {
 		printf("Error: socket could not receive data\n");
 		printLastError();
@@ -58,7 +58,7 @@ int etSocket_recv(etSocket* self, uint8* buffer, size_t length) {
 }
 
 int etSocket_send(etSocket* self, uint8* buffer, size_t length) {
-	int result = send(self->socket, buffer, length, 0);
+	int result = send(self->socket, (const char*) buffer, length, 0);
 	if(result < 0) {
 		printf("Error: socket could not send data\n");
 		printLastError();
@@ -162,6 +162,6 @@ void printLastError() {
 	               NULL, WSAGetLastError(),
 	               MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
 	               (LPWSTR)&s, 0, NULL);
-	printf("%S\n", s);
+	wprintf(L"%S\n", s);
 	LocalFree(s);
 }

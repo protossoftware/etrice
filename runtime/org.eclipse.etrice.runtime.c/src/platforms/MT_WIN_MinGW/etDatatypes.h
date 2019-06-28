@@ -12,10 +12,6 @@
  *
  *******************************************************************************/
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #ifndef _ETDATATYPES_H_
 #define _ETDATATYPES_H_
 
@@ -35,6 +31,8 @@ extern "C" {
 #undef WINVER
 #define WINVER 0x0500
 #include <windows.h>
+
+ET_EXTERN_C_BEGIN
 
 /*--- Data types for room.basic.types */
 
@@ -57,8 +55,6 @@ typedef SOCKET etOSSocketData;
 
 /*-----------------------------------------------------------*/
 
-#endif /* _DATATYPES_H_ */
+ET_EXTERN_C_END
 
-#ifdef __cplusplus
-}
-#endif
+#endif /* _DATATYPES_H_ */

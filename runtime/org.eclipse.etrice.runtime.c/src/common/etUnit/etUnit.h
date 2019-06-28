@@ -21,15 +21,14 @@
  *
  * \author Thomas Schuetz
  */
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 #ifndef _ETUNIT_H_
 #define _ETUNIT_H_
 
 #include "etDatatypes.h"
 #include <string.h>
+
+ET_EXTERN_C_BEGIN
 
 // compile time evaluated
 #define ETUNIT_FILENAME (strrchr(__FILE__, '\\') ? strrchr(__FILE__, '\\') + 1 : (strrchr(__FILE__, '/') ? strrchr(__FILE__, '/') + 1 : __FILE__))
@@ -422,9 +421,7 @@ void expectOrder(etInt16 id, const char* msg, etInt16 identifier, const char* fi
  */
 void expectOrderEnd(etInt16 id, const char* msg, etInt16 identifier, const char* file, int line);
 
-#endif /* _ETUNIT_H_ */
+ET_EXTERN_C_END
 
-#ifdef __cplusplus
-}
-#endif
+#endif /* _ETUNIT_H_ */
 

@@ -14,8 +14,12 @@
 
 package org.eclipse.etrice.generator.launch.c;
 
-import org.eclipse.etrice.generator.c.Main;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.etrice.generator.base.io.ILineOutput;
+import org.eclipse.etrice.generator.c.Main;
+import org.eclipse.etrice.generator.c.setup.GeneratorOptions;
 import org.eclipse.etrice.generator.launch.GeneratorLaunchConfigurationDelegate;
 
 /**
@@ -31,6 +35,15 @@ public class CGeneratorLaunchConfigurationDelegate extends GeneratorLaunchConfig
 	protected void runGenerator(String[] args, ILineOutput out) {
 		Main.setOutput(out);
 		Main.run(args);
+	}
+	
+	@Override
+	protected void addArguments(ILaunchConfiguration configuration, IProject project, StringBuffer argString) throws CoreException {
+		super.addArguments(configuration, project, argString);
+		
+		if (configuration.getAttribute(CGeneratorConfigTab.GEN_CPP_FILE_EXTENSIONS, false)) {
+			argString.append(" -"+GeneratorOptions.CPP_FILE_EXTENSIONS.getName());
+		}
 	}
 
 	/* (non-Javadoc)

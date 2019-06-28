@@ -20,12 +20,11 @@
  *
  * \author Henrik Rentz-Reichert
  */
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 #ifndef _ETLOCK_H_
 #define _ETLOCK_H_
+
+ET_EXTERN_C_BEGIN
 
 typedef void etLock_lock(void* lockData);
 typedef void etLock_unlock(void* lockData);
@@ -37,8 +36,6 @@ typedef struct etLock {
 }
 etLock;
 
-#endif /* _ETLOCK_H_ */
+ET_EXTERN_C_END
 
-#ifdef __cplusplus
-}
-#endif
+#endif /* _ETLOCK_H_ */

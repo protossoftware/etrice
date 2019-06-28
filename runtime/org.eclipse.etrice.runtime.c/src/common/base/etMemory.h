@@ -18,6 +18,8 @@
 #include "etDatatypes.h"
 #include "osal/etLock.h"
 
+ET_EXTERN_C_BEGIN
+
 /**
  * this macro computes the memory aligned value for a given size. It uses the ALIGNMENT
  * defined in etDatatypes.h
@@ -103,5 +105,7 @@ void etMemory_setUserLock(etMemory* mem, etLock* lock);
  * \param mem pointer to the memory management struct
  */
 void etMemory_destroy(etMemory* mem);
+
+ET_EXTERN_C_END
 
 #endif /* _ETMEMORY_H_ */

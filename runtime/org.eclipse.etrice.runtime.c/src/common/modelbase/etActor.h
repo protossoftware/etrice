@@ -24,6 +24,8 @@
 #include "etDatatypes.h"
 #include "modelbase/etPort.h"
 
+ET_EXTERN_C_BEGIN
+
 /** transition chain ID indicating that no chain fired */
 #define NOT_CAUGHT 0
 
@@ -44,5 +46,7 @@
  * 	\return <code>true</code> if the event was a system event and thus was already handled
  */
 etBool handleSystemEvent(InterfaceItemBase* ifitem, int evt, void* generic_data);
+
+ET_EXTERN_C_END
 
 #endif /* _ETACTOR_H_ */

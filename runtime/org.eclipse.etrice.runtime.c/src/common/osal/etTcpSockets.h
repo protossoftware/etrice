@@ -19,14 +19,13 @@
  *
  * \author Henrik Rentz-Reichert
  */
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 #ifndef _ETTCPSOCKETS_H_
 #define _ETTCPSOCKETS_H_
 
 #include "etDatatypes.h"
+
+ET_EXTERN_C_BEGIN
 
 /** the maximum number of connections per server */
 #define MAX_CONNECTIONS		32
@@ -177,8 +176,6 @@ etSocketError etWriteSocket(etSocketConnectionData* self, int size, const int8* 
  */
 etSocketError etCloseSocket(etSocketConnectionData* self);
 
-#endif /* _ETTCPSOCKETS_H_ */
+ET_EXTERN_C_END
 
-#ifdef __cplusplus
-}
-#endif
+#endif /* _ETTCPSOCKETS_H_ */

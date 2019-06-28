@@ -27,6 +27,7 @@
 
 #include "etDatatypes.h"
 
+ET_EXTERN_C_BEGIN
 
 /**
  * Platform specific code, called at the start of the system startup of the main function
@@ -47,5 +48,7 @@ void etUserPostRun(void);
  * Platform specific code, called at the end of the system shutdown of the main function
  */
 void etUserExit(void);
+
+ET_EXTERN_C_END
 
 #endif /* _ETPLATFORMLIFECYCLE_H_ */

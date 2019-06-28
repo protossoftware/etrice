@@ -19,15 +19,14 @@
  *
  * \author: tschuetz
  */
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 #ifndef _ETLOGGER_H_
 #define _ETLOGGER_H_
 
 #include <stdio.h>
 #include "etDatatypes.h"
+
+ET_EXTERN_C_BEGIN
 
 /**
  * open a log file
@@ -183,9 +182,6 @@ void etLogger_log(etLogger* self, LogSeverity severity, const char* msg);
  */
 void etLogger_logF(etLogger* self, LogSeverity severity, const char* format, ... );
 
+ET_EXTERN_C_END
 
 #endif /* _ETLOGGER_H_ */
-
-#ifdef __cplusplus
-}
-#endif

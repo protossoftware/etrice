@@ -27,6 +27,8 @@
 #include "base/etQueue.h"
 #include "osal/etLock.h"
 
+ET_EXTERN_C_BEGIN
+
 /**
  * initializes the heap with a simple block management
  *
@@ -44,5 +46,6 @@ etMemory* etMemory_VariableSize_init(void* heap, etUInt32 size);
  */
 etUInt8 etMemory_VariableSize_freeHeapMem(etMemory* mem);
 
+ET_EXTERN_C_END
 
 #endif /* _ETMEMORY_VARIABLE_SIZE_H_ */

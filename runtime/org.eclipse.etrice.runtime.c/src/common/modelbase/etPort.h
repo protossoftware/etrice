@@ -28,6 +28,8 @@
 #include "messaging/etMessageService.h"
 #include "etRuntimeConfig.h"
 
+ET_EXTERN_C_BEGIN
+
 /**
  * the data structure of a port that holds the constant data
  */
@@ -77,6 +79,6 @@ typedef etPort InterfaceItemBase;
  */
 void etPort_sendMessage(const etPort* self, etInt16 evtId, int size, void* data);
 
-
+ET_EXTERN_C_END
 
 #endif /* _ETPORT_H_ */

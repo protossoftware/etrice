@@ -20,14 +20,13 @@
  *
  * \author Thomas Schuetz, Thomas Jung
  */
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 #ifndef _ETMUTEX_H_
 #define _ETMUTEX_H_
 
 #include "etDatatypes.h"
+
+ET_EXTERN_C_BEGIN
 
 /**
  * etMutex holds the object data for a mutex (for self pointer)
@@ -60,8 +59,6 @@ void etMutex_enter(etMutex* self);
  */
 void etMutex_leave(etMutex* self);
 
-#endif /* _ETMUTEX_H_ */
+ET_EXTERN_C_END
 
-#ifdef __cplusplus
-}
-#endif
+#endif /* _ETMUTEX_H_ */

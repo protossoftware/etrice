@@ -26,6 +26,8 @@
 #include "messaging/etMessage.h"
 #include <stddef.h>
 
+ET_EXTERN_C_BEGIN
+
 /**
  * a data structure for the queue statistics
  */
@@ -131,5 +133,6 @@ etInt16 etMessageQueue_getLowWaterMark(etMessageQueue* self);
  */
 void etMessageQueue_resetLowWaterMark(etMessageQueue* self);
 
+ET_EXTERN_C_END
 
 #endif /* _RMESSAGEQUEUE_H_ */

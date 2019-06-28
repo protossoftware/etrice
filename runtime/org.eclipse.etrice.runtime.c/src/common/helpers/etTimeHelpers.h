@@ -25,6 +25,8 @@
 
 #include "osal/etTime.h"
 
+ET_EXTERN_C_BEGIN
+
 /**
  * normalizes the time value to ensure that part is always 0 <= nSec < 1E9
  *
@@ -95,5 +97,7 @@ etBool etTimeHelpers_isGreater(etTime* t1, etTime* t2);
  * \param t2 second time
  */
 etBool etTimeHelpers_isGreaterOrEqual(etTime* t1, etTime* t2);
+
+ET_EXTERN_C_END
 
 #endif /* _ETTIMEHELPERS_H_ */

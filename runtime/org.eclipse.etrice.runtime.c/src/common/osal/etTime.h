@@ -20,14 +20,12 @@
  * \author Thomas Schuetz
  */
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #ifndef _ETTIME_H_
 #define _ETTIME_H_
 
 #include "etDatatypes.h"
+
+ET_EXTERN_C_BEGIN
 
 /**
  * time definition composed by the number of seconds and the number of nano seconds
@@ -54,8 +52,6 @@ typedef etInt32 etTimeDiff;
  */
 void getTimeFromTarget(etTime *t);
 
-#endif /* _ETTIME_H_ */
+ET_EXTERN_C_END
 
-#ifdef __cplusplus
-}
-#endif
+#endif /* _ETTIME_H_ */

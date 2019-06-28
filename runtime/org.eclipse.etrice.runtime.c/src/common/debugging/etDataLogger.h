@@ -26,6 +26,9 @@
 #define ETDATALOGGER_H_
 
 #include "etRuntimeConfig.h"
+#include "etDatatypes.h"
+
+ET_EXTERN_C_BEGIN
 
 /**
  * opens a file for data logging
@@ -126,5 +129,7 @@ void etDataLogger_newRow();
 	 */
 	#define ET_DATA_LOGGER_NEW_ROW
 #endif
+
+ET_EXTERN_C_END
 
 #endif /* ETDATALOGGER_H_ */

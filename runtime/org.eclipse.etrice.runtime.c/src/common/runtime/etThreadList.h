@@ -26,6 +26,8 @@
 
 #include "osal/etThread.h"
 
+ET_EXTERN_C_BEGIN
+
 typedef struct etThreadController{
 	etThread* threadList;	/**< list of all thread data (as array) **/
 	int32 size;				/**< size of the list **/
@@ -35,5 +37,7 @@ int32 etThreadController_getNumberOfThreads(etThreadController* self);
 void etThreadController_startAll(etThreadController* self);
 void etThreadController_stopAll(etThreadController* self);
 void etThreadController_getCurrentThreadId(void);
+
+ET_EXTERN_C_END
 
 #endif /* _etThreadController_H_ */
