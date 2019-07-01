@@ -41,7 +41,7 @@ public class BaseHelpers {
 	 */
 	public boolean isAnnotationPresent(List<Annotation> annotations, String name) {
 		for (Annotation annotation : annotations) {
-			if (annotation.getType().getName().equals(name))
+			if (annotation.getType() != null && name.equals(annotation.getType().getName()))
 				return true;
 		}
 		return false;
@@ -95,7 +95,7 @@ public class BaseHelpers {
 	public String getAttribute(List<Annotation> annotations, String name, String key) {
 		List<KeyValue> attributes = getAttributes(annotations, name);
 		for (KeyValue attrib : attributes) {
-			if (attrib.getKey().equals(key))
+			if (key.equals(attrib.getKey()))
 				return literalToString(attrib.getValue());
 		}
 		return "";

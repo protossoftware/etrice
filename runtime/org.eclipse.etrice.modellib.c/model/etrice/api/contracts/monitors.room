@@ -1,0 +1,54 @@
+/** work in progress */
+RoomModel etrice.api.contracts.monitors {
+
+	import room.basic.types.*
+	
+	ProtocolClass MonitorControl {
+		incoming {
+			Message requestAndResetStatus()
+			Message setForwardInvalidMessages(boolean)
+		}
+		outgoing {
+			Message violationStatus(boolean)
+			Message violationOccured()
+		}
+	}
+	
+	// not working due Bug 541775
+	// https://bugs.eclipse.org/bugs/show_bug.cgi?id=541775
+	abstract ActorClass ContractMonitorBase {
+		Interface {
+			Port monitor_ctrl: MonitorControl
+		}
+		Structure {
+			external Port monitor_ctrl
+			Attribute _violation: boolean
+			Attribute _forwardInvalidMessages: boolean
+		}
+		Behavior {
+			Operation _onViolation(comment: string) '''
+				_violation = value;
+				ET_MSC_LOGGER_VISIBLE_COMMENT(comment);
+				monitor_ctrl.onViolation();
+			'''
+			StateMachine {
+				handler TransitionPoint _trBase
+				Transition _trStatus: my _trBase -> my _trBase {
+					triggers {
+						<requestAndResetStatus: monitor_ctrl>
+					}
+					action '''
+						monitor_ctrl.violationStatus(_violation);
+						_violation = false;
+					'''
+				}
+				Transition _trForward: my _trBase -> my _trBase {
+					triggers {
+						<setForwardInvalidMessages: monitor_ctrl>
+					}
+					action '''_forwardInvalidMessages = transitionData;'''
+				}
+			}
+		}
+	}
+}

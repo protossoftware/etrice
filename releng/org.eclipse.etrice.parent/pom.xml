@@ -21,7 +21,7 @@
 	<packaging>pom</packaging>
 
 	<properties>
-		<project.build.sourceEncoding>Cp1252</project.build.sourceEncoding>
+		
 		<xtext.version>2.15.0</xtext.version>
 		<tycho.version>1.4.0</tycho.version>
 		<cbi.version>1.1.4</cbi.version>

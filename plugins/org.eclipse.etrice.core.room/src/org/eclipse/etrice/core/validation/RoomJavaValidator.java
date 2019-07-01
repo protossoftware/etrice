@@ -34,6 +34,7 @@ import org.eclipse.etrice.core.common.base.Annotation;
 import org.eclipse.etrice.core.common.base.BasePackage;
 import org.eclipse.etrice.core.common.base.BooleanLiteral;
 import org.eclipse.etrice.core.common.base.Import;
+import org.eclipse.etrice.core.common.base.KeyValue;
 import org.eclipse.etrice.core.common.base.LiteralType;
 import org.eclipse.etrice.core.common.base.util.ImportHelpers;
 import org.eclipse.etrice.core.common.validation.ValidationHelpers;
@@ -77,6 +78,7 @@ import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.core.room.SubSystemClass;
+import org.eclipse.etrice.core.room.util.InterfaceContractHelpers;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.base.io.IModelPath;
 import org.eclipse.etrice.generator.base.io.IModelPathProvider;
@@ -110,6 +112,8 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	@Inject ImportUriResolver importUriResolver;
 	
 	@Inject private IModelPathProvider modelPathProvider;
+	
+	@Inject InterfaceContractHelpers contractMonitorHelpers;
 
 	/* message strings */
 	public static final String OPTIONAL_REFS_HAVE_TO_HAVE_MULTIPLICITY_ANY = "optional refs have to have multiplicity any [*]";
@@ -902,5 +906,18 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 				}
 			}
 		});
+	}
+	
+	@Check
+	public void checkProtocolContract(ProtocolClass pc) {
+		if(contractMonitorHelpers.hasContract(pc)) {
+			ActorClass monitor = contractMonitorHelpers.getInterfaceContractActorClass(pc);
+			if(monitor == null || monitor.eIsProxy()) {
+				Optional<KeyValue> monitorAttr = pc.getAnnotations().stream().map((anno) -> anno.getAttributes()).flatMap(Collection::stream).filter((anno) -> InterfaceContractHelpers.MonitorClass_KEY.equals(anno.getKey())).findFirst();
+				if(monitorAttr.isPresent()) {
+					error("Couldn't resolve ActorClass - try with fully qualified name", monitorAttr.get(), null);
+				}
+			}
+		}
 	}
 }

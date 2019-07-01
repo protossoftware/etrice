@@ -1,0 +1,19 @@
+RoomModel etrice.api.contracts.definitions {
+	
+	AnnotationType InterfaceContract {
+		target = ProtocolClass
+		mandatory attribute definingActorClassName: ptCharacter
+	}
+
+	AnnotationType ValueRangeContract {
+		target = {
+			Transition, Message
+		}
+		mandatory attribute range: ptCharacter
+	}
+
+	AnnotationType TimingContract {
+		target = State
+		mandatory attribute durationInMS: ptInteger
+	}
+}

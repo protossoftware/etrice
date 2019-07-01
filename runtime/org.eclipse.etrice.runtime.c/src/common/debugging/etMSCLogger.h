@@ -95,6 +95,13 @@ void etMSCLogger_asyncIn(const char* sourceName, const char* messageName, const 
  */
 void etMSCLogger_setState(const char* objectName, const char* stateName);
 
+/**
+ * logs a comment
+ *
+ * \param comment
+ */
+void etMSCLogger_addVisibleComment(const char* comment);
+
 #ifdef ET_MSC_LOGGER_ACTIVATE
 	#define ET_MSC_LOGGER_OPEN(object) \
 		etMSCLogger_open("log", "msc"); \
@@ -104,6 +111,9 @@ void etMSCLogger_setState(const char* objectName, const char* stateName);
 
 	#define ET_MSC_LOGGER_CHANGE_STATE(objectName, stateName) \
 		etMSCLogger_setState(objectName, stateName);
+
+	#define ET_MSC_LOGGER_VISIBLE_COMMENT(comment) \
+		etMSCLogger_addVisibleComment(comment);
 
 	#ifdef ET_SYNC_MSC_LOGGER_ACTIVATE
 		#define ET_MSC_LOGGER_SYNC_ENTRY(object, message) 			\

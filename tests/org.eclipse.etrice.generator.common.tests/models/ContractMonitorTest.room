@@ -1,0 +1,145 @@
+RoomModel ContractMonitorTest {
+
+	import room.basic.service.timing.PTimer
+	import room.basic.types.*
+	import room.basic.test.TestInstance
+	import ContractMonitor.*
+	import room.basic.service.timing.ATimingService
+
+	ActorClass ContractMonitor_Top {
+		@TestInstance
+		Structure {
+			ActorRef appl: Appl
+			ActorRef timing: ATimingService
+			LayerConnection ref appl satisfied_by timing.timer
+		}
+	}
+
+	ActorClass Appl {
+		Structure {
+			ActorRef client: Client
+			ActorRef provider: Provider
+			ActorRef monitor: ContractMonitor_monitors.LoginProtocolContract_GeneratedMonitor
+
+			Binding provider.fct and monitor.toUnconjugated
+			Binding monitor.toConjugated and client.loginPort
+		}
+		Behavior {
+			ctor '''
+				etUnit_open("log", "ContractMonitorTest");
+				etUnit_openTestSuite("org.eclipse.etrice.generator.common.tests.ContractMonitorTest");
+			'''
+			dtor '''
+				etUnit_closeTestSuite();
+				etUnit_close();
+			'''
+		}
+	}
+
+	ActorClass Client {
+
+		Interface {
+			conjugated Port loginPort: LoginProtocol
+		}
+		Structure {
+			external Port loginPort
+			SAP toTimer: PTimer
+			Attribute counter: int32 = "0"
+		}
+		Behavior {
+			StateMachine {
+				State connecting {
+					entry '''counter += 1;'''
+				}
+				Transition init0: initial -> connecting {
+					action '''						
+						loginPort.hello();
+					'''
+				}
+				State request1Sent
+				State request2Sent
+				State testDone {
+					entry '''etUnit_testFinished(0);'''
+				}
+				Transition tr0: connecting -> request1Sent {
+					triggers {
+						<hello: loginPort>
+					}
+					action '''loginPort.login((short)0);'''
+				}
+				Transition tr1: request1Sent -> request2Sent {
+					triggers {
+						<wrong: loginPort>
+					}
+					action '''loginPort.login((short)1);'''
+				}
+				Transition tr2: request4Sent -> connecting {
+					triggers {
+						<ok: loginPort guard '''counter < 1'''>
+					}
+					action '''loginPort.hello();'''
+				}
+				Transition tr3: request4Sent -> testDone {
+					triggers {
+						<wrong: loginPort guard '''counter >= 1'''>
+					}
+				}
+				State request3Sent
+				State request4Sent
+				Transition tr4: request2Sent -> request3Sent {
+					triggers {
+						<wrong: loginPort>
+					}
+					action '''loginPort.login((short)5);'''
+				}
+				Transition tr5: request3Sent -> request4Sent {
+					triggers {
+						<wrong: loginPort>
+					}
+					action '''loginPort.login((short)7);'''
+				}
+			}
+		}
+	}
+
+	ActorClass Provider {
+
+		Interface {
+			Port fct: LoginProtocol
+		}
+		Structure {
+			external Port fct
+			SAP toTimer: PTimer
+		}
+		Behavior {
+			StateMachine {
+				State idle
+				State connected
+				Transition init0: initial -> idle
+				Transition tr0: idle -> connected {
+					triggers {
+						<hello: fct>
+					}
+					action '''fct.hello();'''
+				}
+				Transition tr1: connected -> idle {
+					triggers {
+						<login: fct guard '''transitionData == 1234'''>
+					}
+					action '''fct.ok();'''
+				}
+				Transition tr2: connected -> connected {
+					triggers {
+						<login: fct guard '''transitionData != 1234'''>
+					}
+					action '''fct.wrong();'''
+				}
+				Transition tr3: connected -> idle {
+					triggers {
+						<cancel: fct>
+					}
+				}
+			}
+		}
+	}
+}

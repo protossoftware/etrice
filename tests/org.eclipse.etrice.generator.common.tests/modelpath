@@ -1,2 +1,3 @@
 srcDir models
+srcDir model-gen
 project org.eclipse.etrice.modellib.c

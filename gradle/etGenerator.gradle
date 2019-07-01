@@ -12,6 +12,10 @@ dependencies {
 	etrice_c project(':plugins:org.eclipse.etrice.generator.c')
 	etrice_cpp project(':plugins:org.eclipse.etrice.generator.cpp')
 	etrice_java project(':plugins:org.eclipse.etrice.generator.java')
+	
+	etrice_c project(':plugins:org.eclipse.etrice.generator.contractmonitor')
+	etrice_cpp project(':plugins:org.eclipse.etrice.generator.contractmonitor')
+	etrice_java project(':plugins:org.eclipse.etrice.generator.contractmonitor')
 }
 
 /**
@@ -24,12 +28,15 @@ dependencies {
  */
 ext.createGeneratorTask = { name, lang, models, genDir = 'src-gen', options = [] ->
 	return tasks.create(name: name, type: JavaExec) {
+		// accessible for later use
+		ext.lang = lang
+		ext.modelpath = configurations."modelpath_$lang"
+		
 		main = "org.eclipse.etrice.generator.${lang}.Main"
 		classpath = configurations."etrice_$lang"
 		args '-clean', '-msc_instr'
 		args '-genDir', genDir
-		args options
-		def modelpath = configurations."modelpath_$lang"
+		args options	
 		if(!modelpath.isEmpty()) {
 			args '-modelpath', modelpath.asPath
 		}

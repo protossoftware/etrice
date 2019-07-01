@@ -54,11 +54,13 @@
 		<module>plugins/org.eclipse.etrice.generator.fsmtest.ui</module>
 		<module>plugins/org.eclipse.etrice.generator.gnuplot</module>
 		<module>plugins/org.eclipse.etrice.generator.java</module>
+		<module>plugins/org.eclipse.etrice.generator.contractmonitor</module>
 		<module>plugins/org.eclipse.etrice.generator.launch</module>
 		<module>plugins/org.eclipse.etrice.generator.launch.c</module>
 		<module>plugins/org.eclipse.etrice.generator.launch.cpp</module>
 		<module>plugins/org.eclipse.etrice.generator.launch.java</module>
 		<module>plugins/org.eclipse.etrice.generator.launch.doc</module>
+		<module>plugins/org.eclipse.etrice.generator.launch.contractmonitor</module>
 		<module>plugins/org.eclipse.etrice.generator.ui</module>
 		<module>plugins/org.eclipse.etrice.generator.ui.cdt</module>
 		<module>plugins/org.eclipse.etrice.logging</module>

@@ -76,3 +76,10 @@ void etMSCLogger_setState(const char* objectName, const char* stateName){
 		fflush(etMSCLogger_fileHandle);
 	}
 }
+
+void etMSCLogger_addVisibleComment(const char* comment){
+	if (etMSCLogger_fileHandle != NULL) {
+		etLogger_fprintf(etMSCLogger_fileHandle, "# %s\n", comment);
+		fflush(etMSCLogger_fileHandle);
+	}
+}

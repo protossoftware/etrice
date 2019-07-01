@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.debug.core.launchConfigurationTypes">
+      <launchConfigurationType
+            delegate="org.eclipse.etrice.generator.launch.contractmonitor.ContractMonitorGeneratorLaunchConfigurationDelegate"
+            id="org.eclipse.etrice.generator.launch.contractmonitor.launchConfigurationType"
+            modes="run,debug"
+            name="eTrice Contract Monitor Generator">
+      </launchConfigurationType>
+   </extension>
+   <extension
+         point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+      <launchConfigurationTabGroup
+            class="org.eclipse.etrice.generator.launch.contractmonitor.ContractMonitorGeneratorLaunchConfigurationTabGroup"
+            id="org.eclipse.etrice.generator.launch.contractmonitor.launchConfigurationTabGroup1"
+            type="org.eclipse.etrice.generator.launch.contractmonitor.launchConfigurationType">
+      </launchConfigurationTabGroup>
+   </extension>
+
+</plugin>

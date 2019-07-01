@@ -16,9 +16,9 @@ package org.eclipse.etrice.core;
 
 import org.eclipse.etrice.core.common.scoping.CompoundGlobalScopeProvider;
 import org.eclipse.etrice.core.common.scoping.ModelLocatorUriResolver;
-import org.eclipse.etrice.core.common.scoping.ModelPathFileExtensionFilter;
 import org.eclipse.etrice.core.common.scoping.ModelPathGlobalScopeProvider.IModelPathFileFilter;
 import org.eclipse.etrice.core.converter.ConfigValueConverterService;
+import org.eclipse.etrice.core.scoping.RoomModelPathFileExtensionFilter;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.impl.ImportUriResolver;
@@ -36,7 +36,7 @@ public class ConfigRuntimeModule extends
 	}
 	
 	public IModelPathFileFilter bindIModelPathFileFilter() {
-		return new ModelPathFileExtensionFilter("room");
+		return new RoomModelPathFileExtensionFilter();
 	}
 
 	// HOWTO: use URI imports - need special URI resolver

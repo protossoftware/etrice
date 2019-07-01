@@ -1,0 +1,81 @@
+RoomModel ContractMonitor {
+
+	import room.basic.types.*
+	import etrice.api.contracts.definitions.*
+
+	ProtocolClass LoginProtocol {
+		@InterfaceContract(definingActorClassName = "LoginProtocolContract")
+		incoming {
+			Message hello()
+			Message login(int16) @ValueRangeContract(range = "[0,9999]")
+			Message cancel()
+		}
+		outgoing {
+			Message hello()
+			Message wrong()
+			Message attemptsLimitReached()
+			Message ok()
+		}
+	}
+
+	ActorClass LoginProtocolContract {
+
+		Interface {
+			conjugated Port toUnconjugated: LoginProtocol
+			Port toConjugated: LoginProtocol
+		}
+		Structure {
+			external Port toUnconjugated
+			external Port toConjugated
+			Attribute attempts: int16
+		}
+		Behavior {
+			StateMachine {
+				State idle {
+					entry '''attempts = 0;'''
+				}
+				State connecting
+				State connected
+				State checking {
+					entry '''attempts += 1;'''
+				}
+				Transition init0: initial -> idle
+				Transition tr0: idle -> connecting {
+					triggers {
+						<hello: toConjugated>
+					}
+				}
+				Transition tr1: connecting -> connected {
+					triggers {
+						<hello: toUnconjugated>
+					}
+				}
+				Transition tr2: connected -> idle {
+					triggers {
+						<cancel: toConjugated>
+					}
+				}
+				Transition tr3: connected -> checking {
+					triggers {
+						<login: toConjugated>
+					}
+				}
+				Transition tr4: checking -> idle {
+					triggers {
+						<ok: toUnconjugated>
+					}
+				}
+				Transition tr5: checking -> connected {
+					triggers {
+						<wrong: toUnconjugated guard '''attempts <= 3'''>
+					}
+				}
+				Transition tr6: checking -> idle {
+					triggers {
+						<attemptsLimitReached: toUnconjugated guard '''attempts > 3'''>
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,282 @@
+/** generated */
+
+RoomModel ContractMonitor_monitors {
+
+	import room.basic.types.*
+	import etrice.api.contracts.definitions.*
+	import ContractMonitor.*
+
+	ActorClass LoginProtocolContract_GeneratedMonitor {
+		Interface {
+			conjugated Port toUnconjugated: LoginProtocol
+			Port toConjugated: LoginProtocol
+		}
+		Structure {
+			Attribute attempts: int16
+			external Port toUnconjugated
+			external Port toConjugated
+		}
+		Behavior {
+			StateMachine {
+				State idle {
+					entry '''attempts = 0;'''
+				}
+				State connecting
+				State connected
+				State checking {
+					entry '''attempts += 1;'''
+				}
+				Transition init0: initial -> idle
+				Transition tr0: idle -> connecting {
+					triggers {
+						<hello: toConjugated>
+					}
+					action '''toUnconjugated.hello();'''
+				}
+				Transition tr1: connecting -> connected {
+					triggers {
+						<hello: toUnconjugated>
+					}
+					action '''toConjugated.hello();'''
+				}
+				Transition tr2: connected -> idle {
+					triggers {
+						<cancel: toConjugated>
+					}
+					action '''toUnconjugated.cancel();'''
+				}
+				Transition tr3: connected -> checking {
+					triggers {
+						<login: toConjugated>
+					}
+					action '''toUnconjugated.login(transitionData);'''
+				}
+				Transition tr4: checking -> idle {
+					triggers {
+						<ok: toUnconjugated>
+					}
+					action '''toConjugated.ok();'''
+				}
+				Transition tr5: checking -> connected {
+					triggers {
+						<wrong: toUnconjugated guard '''attempts <= 3'''>
+					}
+					action '''toConjugated.wrong();'''
+				}
+				Transition tr6: checking -> idle {
+					triggers {
+						<attemptsLimitReached: toUnconjugated guard '''attempts > 3'''>
+					}
+					action '''toConjugated.attemptsLimitReached();'''
+				}
+				Transition idle_catch_from_toConjugated_login: idle -> idle {
+					triggers {
+						<login: toConjugated>
+					}
+					action '''
+						ET_MSC_LOGGER_VISIBLE_COMMENT("[Protocol ERROR] In protocol LoginProtocol message login from port toConjugated is not allowed in state idle");
+						toUnconjugated.login(transitionData);
+					'''
+				}
+				Transition idle_catch_from_toConjugated_cancel: idle -> idle {
+					triggers {
+						<cancel: toConjugated>
+					}
+					action '''
+						ET_MSC_LOGGER_VISIBLE_COMMENT("[Protocol ERROR] In protocol LoginProtocol message cancel from port toConjugated is not allowed in state idle");
+						toUnconjugated.cancel();
+					'''
+				}
+				Transition idle_catch_from_toUnconjugated_hello: idle -> idle {
+					triggers {
+						<hello: toUnconjugated>
+					}
+					action '''
+						ET_MSC_LOGGER_VISIBLE_COMMENT("[Protocol ERROR] In protocol LoginProtocol message hello from port toUnconjugated is not allowed in state idle");
+						toConjugated.hello();
+					'''
+				}
+				Transition idle_catch_from_toUnconjugated_wrong: idle -> idle {
+					triggers {
+						<wrong: toUnconjugated>
+					}
+					action '''
+						ET_MSC_LOGGER_VISIBLE_COMMENT("[Protocol ERROR] In protocol LoginProtocol message wrong from port toUnconjugated is not allowed in state idle");
+						toConjugated.wrong();
+					'''
+				}
+				Transition idle_catch_from_toUnconjugated_attemptsLimitReached: idle -> idle {
+					triggers {
+						<attemptsLimitReached: toUnconjugated>
+					}
+					action '''
+						ET_MSC_LOGGER_VISIBLE_COMMENT("[Protocol ERROR] In protocol LoginProtocol message attemptsLimitReached from port toUnconjugated is not allowed in state idle");
+						toConjugated.attemptsLimitReached();
+					'''
+				}
+				Transition idle_catch_from_toUnconjugated_ok: idle -> idle {
+					triggers {
+						<ok: toUnconjugated>
+					}
+					action '''
+						ET_MSC_LOGGER_VISIBLE_COMMENT("[Protocol ERROR] In protocol LoginProtocol message ok from port toUnconjugated is not allowed in state idle");
+						toConjugated.ok();
+					'''
+				}
+				Transition connecting_catch_from_toConjugated_hello: connecting -> connecting {
+					triggers {
+						<hello: toConjugated>
+					}
+					action '''
+						ET_MSC_LOGGER_VISIBLE_COMMENT("[Protocol ERROR] In protocol LoginProtocol message hello from port toConjugated is not allowed in state connecting");
+						toUnconjugated.hello();
+					'''
+				}
+				Transition connecting_catch_from_toConjugated_login: connecting -> connecting {
+					triggers {
+						<login: toConjugated>
+					}
+					action '''
+						ET_MSC_LOGGER_VISIBLE_COMMENT("[Protocol ERROR] In protocol LoginProtocol message login from port toConjugated is not allowed in state connecting");
+						toUnconjugated.login(transitionData);
+					'''
+				}
+				Transition connecting_catch_from_toConjugated_cancel: connecting -> connecting {
+					triggers {
+						<cancel: toConjugated>
+					}
+					action '''
+						ET_MSC_LOGGER_VISIBLE_COMMENT("[Protocol ERROR] In protocol LoginProtocol message cancel from port toConjugated is not allowed in state connecting");
+						toUnconjugated.cancel();
+					'''
+				}
+				Transition connecting_catch_from_toUnconjugated_wrong: connecting -> connecting {
+					triggers {
+						<wrong: toUnconjugated>
+					}
+					action '''
+						ET_MSC_LOGGER_VISIBLE_COMMENT("[Protocol ERROR] In protocol LoginProtocol message wrong from port toUnconjugated is not allowed in state connecting");
+						toConjugated.wrong();
+					'''
+				}
+				Transition connecting_catch_from_toUnconjugated_attemptsLimitReached: connecting -> connecting {
+					triggers {
+						<attemptsLimitReached: toUnconjugated>
+					}
+					action '''
+						ET_MSC_LOGGER_VISIBLE_COMMENT("[Protocol ERROR] In protocol LoginProtocol message attemptsLimitReached from port toUnconjugated is not allowed in state connecting");
+						toConjugated.attemptsLimitReached();
+					'''
+				}
+				Transition connecting_catch_from_toUnconjugated_ok: connecting -> connecting {
+					triggers {
+						<ok: toUnconjugated>
+					}
+					action '''
+						ET_MSC_LOGGER_VISIBLE_COMMENT("[Protocol ERROR] In protocol LoginProtocol message ok from port toUnconjugated is not allowed in state connecting");
+						toConjugated.ok();
+					'''
+				}
+				Transition connected_catch_from_toConjugated_hello: connected -> connected {
+					triggers {
+						<hello: toConjugated>
+					}
+					action '''
+						ET_MSC_LOGGER_VISIBLE_COMMENT("[Protocol ERROR] In protocol LoginProtocol message hello from port toConjugated is not allowed in state connected");
+						toUnconjugated.hello();
+					'''
+				}
+				Transition connected_catch_from_toUnconjugated_hello: connected -> connected {
+					triggers {
+						<hello: toUnconjugated>
+					}
+					action '''
+						ET_MSC_LOGGER_VISIBLE_COMMENT("[Protocol ERROR] In protocol LoginProtocol message hello from port toUnconjugated is not allowed in state connected");
+						toConjugated.hello();
+					'''
+				}
+				Transition connected_catch_from_toUnconjugated_wrong: connected -> connected {
+					triggers {
+						<wrong: toUnconjugated>
+					}
+					action '''
+						ET_MSC_LOGGER_VISIBLE_COMMENT("[Protocol ERROR] In protocol LoginProtocol message wrong from port toUnconjugated is not allowed in state connected");
+						toConjugated.wrong();
+					'''
+				}
+				Transition connected_catch_from_toUnconjugated_attemptsLimitReached: connected -> connected {
+					triggers {
+						<attemptsLimitReached: toUnconjugated>
+					}
+					action '''
+						ET_MSC_LOGGER_VISIBLE_COMMENT("[Protocol ERROR] In protocol LoginProtocol message attemptsLimitReached from port toUnconjugated is not allowed in state connected");
+						toConjugated.attemptsLimitReached();
+					'''
+				}
+				Transition connected_catch_from_toUnconjugated_ok: connected -> connected {
+					triggers {
+						<ok: toUnconjugated>
+					}
+					action '''
+						ET_MSC_LOGGER_VISIBLE_COMMENT("[Protocol ERROR] In protocol LoginProtocol message ok from port toUnconjugated is not allowed in state connected");
+						toConjugated.ok();
+					'''
+				}
+				Transition checking_catch_from_toConjugated_hello: checking -> checking {
+					triggers {
+						<hello: toConjugated>
+					}
+					action '''
+						ET_MSC_LOGGER_VISIBLE_COMMENT("[Protocol ERROR] In protocol LoginProtocol message hello from port toConjugated is not allowed in state checking");
+						toUnconjugated.hello();
+					'''
+				}
+				Transition checking_catch_from_toConjugated_login: checking -> checking {
+					triggers {
+						<login: toConjugated>
+					}
+					action '''
+						ET_MSC_LOGGER_VISIBLE_COMMENT("[Protocol ERROR] In protocol LoginProtocol message login from port toConjugated is not allowed in state checking");
+						toUnconjugated.login(transitionData);
+					'''
+				}
+				Transition checking_catch_from_toConjugated_cancel: checking -> checking {
+					triggers {
+						<cancel: toConjugated>
+					}
+					action '''
+						ET_MSC_LOGGER_VISIBLE_COMMENT("[Protocol ERROR] In protocol LoginProtocol message cancel from port toConjugated is not allowed in state checking");
+						toUnconjugated.cancel();
+					'''
+				}
+				Transition checking_catch_from_toUnconjugated_hello: checking -> checking {
+					triggers {
+						<hello: toUnconjugated>
+					}
+					action '''
+						ET_MSC_LOGGER_VISIBLE_COMMENT("[Protocol ERROR] In protocol LoginProtocol message hello from port toUnconjugated is not allowed in state checking");
+						toConjugated.hello();
+					'''
+				}
+				Transition checking_catch_from_toUnconjugated_wrong: checking -> checking {
+					triggers {
+						<wrong: toUnconjugated>
+					}
+					action '''
+						ET_MSC_LOGGER_VISIBLE_COMMENT("[Protocol ERROR] In protocol LoginProtocol message wrong from port toUnconjugated is not allowed in state checking");
+						toConjugated.wrong();
+					'''
+				}
+				Transition checking_catch_from_toUnconjugated_attemptsLimitReached: checking -> checking {
+					triggers {
+						<attemptsLimitReached: toUnconjugated>
+					}
+					action '''
+						ET_MSC_LOGGER_VISIBLE_COMMENT("[Protocol ERROR] In protocol LoginProtocol message attemptsLimitReached from port toUnconjugated is not allowed in state checking");
+						toConjugated.attemptsLimitReached();
+					'''
+				}
+			}
+		}
+	}
+}

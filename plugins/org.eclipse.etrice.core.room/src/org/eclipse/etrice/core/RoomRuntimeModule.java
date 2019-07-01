@@ -16,7 +16,6 @@ package org.eclipse.etrice.core;
 
 import org.eclipse.etrice.core.common.scoping.CompoundGlobalScopeProvider;
 import org.eclipse.etrice.core.common.scoping.ModelLocatorUriResolver;
-import org.eclipse.etrice.core.common.scoping.ModelPathFileExtensionFilter;
 import org.eclipse.etrice.core.common.scoping.ModelPathGlobalScopeProvider.IModelPathFileFilter;
 import org.eclipse.etrice.core.common.validation.CustomValidatorManager.StandaloneValidatorExtension;
 import org.eclipse.etrice.core.converter.RoomValueConverterService;
@@ -25,6 +24,7 @@ import org.eclipse.etrice.core.linking.RoomConvertingLazyLinker;
 import org.eclipse.etrice.core.naming.RoomFragmentProvider;
 import org.eclipse.etrice.core.naming.RoomQualifiedNameProvider;
 import org.eclipse.etrice.core.room.util.CommonDataCalculator;
+import org.eclipse.etrice.core.scoping.RoomModelPathFileExtensionFilter;
 import org.eclipse.etrice.core.validation.FQNAreUniqueValidationHelper;
 import org.eclipse.etrice.core.validation.ValidatorExtensionManager;
 import org.eclipse.xtext.conversion.IValueConverterService;
@@ -88,7 +88,7 @@ public class RoomRuntimeModule extends org.eclipse.etrice.core.AbstractRoomRunti
 	}
 	
 	public IModelPathFileFilter bindIModelPathFileFilter() {
-		return new ModelPathFileExtensionFilter("room", "cage", "actortest");
+		return new RoomModelPathFileExtensionFilter();
 	}
 
 	// HOWTO: add a value converter

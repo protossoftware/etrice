@@ -15,6 +15,7 @@ include	'plugins:org.eclipse.etrice.core.common',
 	'plugins:org.eclipse.etrice.generator.c',
 	'plugins:org.eclipse.etrice.generator.cpp',
 	'plugins:org.eclipse.etrice.generator.java',
+	'plugins:org.eclipse.etrice.generator.contractmonitor',
 	'plugins:org.eclipse.etrice.abstractexec.behavior',
 	'plugins:org.eclipse.etrice.etunit.converter',
 	
