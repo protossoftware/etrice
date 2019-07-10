@@ -19,28 +19,71 @@ import java.util.List;
 import java.util.Optional;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EcoreFactory;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.etrice.core.common.base.Import;
+import org.eclipse.etrice.core.common.scoping.ModelLocatorUriResolver;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
-import org.eclipse.xtext.scoping.impl.ImportUriResolver;
+import org.eclipse.xtext.scoping.IGlobalScopeProvider;
+import org.eclipse.xtext.scoping.IScope;
 
 import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
+import com.google.inject.Inject;
 
 public class ImportHelpers {
 	
+	private final static EClass EOBJECT = EcorePackage.eINSTANCE.getEObject();
+	
+	@Inject IQualifiedNameConverter nameConverter;
+	@Inject ModelLocatorUriResolver importUriResolver;
+	@Inject IGlobalScopeProvider globalScope;			// visible/imported scope
+	@Inject IResourceDescriptions resourceDescriptions; // world scope
+	
+	public ModelLocatorUriResolver getUriResolver() {
+		return importUriResolver;
+	}
+
+//	/**
+//	 *  Returns elements from workspace.
+//	 */
+//	public Iterable<IEObjectDescription> findInWorskpace(QualifiedName fqn) {
+//		return resourceDescriptions.getExportedObjects(EOBJECT, fqn, false);
+//	}
+	
+	/**
+	 *  Returns current visible/imported scope of given resource.
+	 */
+	public IScope getVisibleScope(Resource context) {
+		return getVisibleScope(context, null);
+	}
+	
+	/**
+	 *  Returns current visible/imported scope of given resource.
+	 */
+	public IScope getVisibleScope(Resource context, EClass type) {
+		EReference reference = EcoreFactory.eINSTANCE.createEReference();
+		reference.setEType((type != null) ? type : EOBJECT);	
+		
+		return globalScope.getScope(context, reference, Predicates.alwaysTrue());
+	}
+	
 	/**
 	 * Returns a list of imported target eObjects for an import or absent if import is not computable.
-	 * The list contains either a single exact match (name and quickFixCandidateMatcher) or candidates (name
-	 * or quickFixCandidateMatcher) or empty.
+	 * The list contains either a single exact match (imported namespace && quickFixCandidateMatcher) 
+	 * or candidates only (imported namespace || quickFixCandidateMatcher) or is optional empty.
 	 */
-	public static Optional<List<IEObjectDescription>> getImportedObjectsFor(Import imp, ImportUriResolver importUriResolver,
-			Predicate<IEObjectDescription> quickFixCandidateMatcher) {
+	public Optional<List<IEObjectDescription>> getImportedObjectsFor(Import imp, Predicate<IEObjectDescription> quickFixCandidateMatcher) {
 
 		QualifiedName importedFQN = toFQN(imp);
 		if (importedFQN == null)
@@ -89,16 +132,19 @@ public class ImportHelpers {
 
 		return Optional.of(candidates);
 	}
-
-	public static QualifiedName toFQN(Import imp) {
-		IQualifiedNameConverter nameConverter = new IQualifiedNameConverter.DefaultImpl();
+	
+	public QualifiedName toFQN(String fqn) {
 		boolean isWildcard = false;
 		try {
-			QualifiedName orig = nameConverter.toQualifiedName(imp.getImportedNamespace());
+			QualifiedName orig = nameConverter.toQualifiedName(fqn);
 			isWildcard = orig.getLastSegment().equals("*");
 			return (isWildcard) ? orig.skipLast(1) : orig;
 		} catch(IllegalArgumentException e){
 			return null;
-		}
+		}	
+	}
+
+	public QualifiedName toFQN(Import imp) {
+		return toFQN(imp.getImportedNamespace());
 	}
 }

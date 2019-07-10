@@ -52,7 +52,6 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.scoping.impl.ImportUriResolver;
 import org.eclipse.xtext.util.CancelIndicator;
 
 import com.google.common.base.Predicate;
@@ -69,7 +68,7 @@ public class RoomSemanticHighlightingCalculator extends BaseSemanticHighlighter 
 	@Inject RoomGrammarAccess grammar;
 	@Inject RoomValueConverterService converterService;
 	@Inject RoomHelpers roomHelpers;
-	@Inject ImportUriResolver importUriResolver;
+	@Inject ImportHelpers importHelpers;
 	
 	@Override
 	public void provideHighlightingFor(XtextResource resource, IHighlightedPositionAcceptor acceptor, CancelIndicator cancelIndicator) {
@@ -139,7 +138,7 @@ public class RoomSemanticHighlightingCalculator extends BaseSemanticHighlighter 
 			Predicate<IEObjectDescription> nameMatcher = (input) -> {
 				return importElement.getImportedNamespace().equals(input.getQualifiedName().toString());
 			};
-			Optional<List<IEObjectDescription>> matches = ImportHelpers.getImportedObjectsFor(importElement, importUriResolver, nameMatcher);
+			Optional<List<IEObjectDescription>> matches = importHelpers.getImportedObjectsFor(importElement, nameMatcher);
 			if(matches.isPresent() && matches.get().size() == 1) {
 				EObject annotatedElement = matches.get().get(0).getEObjectOrProxy();
 				if(annotatedElement instanceof RoomElement) {

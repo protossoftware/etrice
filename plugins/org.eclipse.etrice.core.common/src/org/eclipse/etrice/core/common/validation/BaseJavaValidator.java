@@ -18,8 +18,6 @@ import java.util.HashSet;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.etrice.core.common.base.Annotation;
@@ -35,17 +33,13 @@ import org.eclipse.etrice.core.common.base.KeyValue;
 import org.eclipse.etrice.core.common.base.RealLiteral;
 import org.eclipse.etrice.core.common.base.SimpleAnnotationAttribute;
 import org.eclipse.etrice.core.common.base.StringLiteral;
-import org.eclipse.emf.ecore.EcoreFactory;
+import org.eclipse.etrice.core.common.base.util.ImportHelpers;
 import org.eclipse.etrice.generator.base.io.IModelPathProvider;
-import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.scoping.IGlobalScopeProvider;
-import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.ImportUriResolver;
 import org.eclipse.xtext.validation.Check;
 
-import com.google.common.base.Predicates;
 import com.google.inject.Inject;
 
 /**
@@ -65,8 +59,7 @@ public class BaseJavaValidator extends org.eclipse.etrice.core.common.validation
 	public static final String IMPORTED_NAMESPACE_MISSING = "BaseJavaValidator.ImportedNamespaceMissing";
 	
 	@Inject ImportUriResolver importUriResolver;
-	@Inject IGlobalScopeProvider globalScopeProvider;
-	@Inject IQualifiedNameConverter nameConverter;
+	@Inject ImportHelpers importHelpers;
 	@Inject IModelPathProvider modelPathProvider;
 	
 	@Check
@@ -246,30 +239,20 @@ public class BaseJavaValidator extends org.eclipse.etrice.core.common.validation
 	 */
 	@Check
 	public void checkImportedNamespace(Import imp) {
-		if(imp.getImportURI() != null) {
+		if(imp.getImportURI() != null || imp.getImportedNamespace() == null) {
 			return;
 		}
 		
-		String name = imp.getImportedNamespace();
-		if(name == null) {
-			return;
-		}
+		QualifiedName fqn = importHelpers.toFQN(imp);
+		
 		Resource resource = imp.eResource();
 		if(modelPathProvider.get(resource).isEmpty()) {
 			error("no modelpath definition present", BasePackage.Literals.IMPORT__IMPORTED_NAMESPACE, MODELPATH_DESCRIPTION_MISSING);
 			return;
-		}
-		QualifiedName importedNamespace = nameConverter.toQualifiedName(name);
-		if(importedNamespace.getLastSegment().equals("*")) {
-			return;
-		}
-		
-		EReference reference = EcoreFactory.eINSTANCE.createEReference();
-		reference.setEType(EcorePackage.eINSTANCE.getEObject());
-		IScope scope = globalScopeProvider.getScope(resource, reference, Predicates.alwaysTrue());
-		IEObjectDescription eod = scope.getSingleElement(importedNamespace);
+		}	
+		IEObjectDescription eod = importHelpers.getVisibleScope(resource).getSingleElement(fqn);
 		if(eod == null) {
-			error("could not find imported namespace " + importedNamespace, BasePackage.Literals.IMPORT__IMPORTED_NAMESPACE, IMPORTED_NAMESPACE_MISSING);
+			error("could not find imported namespace " + fqn, BasePackage.Literals.IMPORT__IMPORTED_NAMESPACE, IMPORTED_NAMESPACE_MISSING);
 		}
 	}
 }

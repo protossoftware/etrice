@@ -86,7 +86,6 @@ import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.scoping.impl.ImportUriResolver;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
 
@@ -109,11 +108,11 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	
 	@Inject protected IQualifiedNameConverter nameConverter;
 	
-	@Inject ImportUriResolver importUriResolver;
-	
 	@Inject private IModelPathProvider modelPathProvider;
 	
 	@Inject InterfaceContractHelpers contractMonitorHelpers;
+	
+	@Inject ImportHelpers importHelpers;
 
 	/* message strings */
 	public static final String OPTIONAL_REFS_HAVE_TO_HAVE_MULTIPLICITY_ANY = "optional refs have to have multiplicity any [*]";
@@ -153,7 +152,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	
 	@Check
 	public void checkRoomImportedNamespace(Import imp) {
-		QualifiedName importedFQN = ImportHelpers.toFQN(imp);
+		QualifiedName importedFQN = importHelpers.toFQN(imp);
 		if(importedFQN == null)
 			return;
 		
@@ -182,7 +181,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 			}
 			
 		};	
-		Optional<List<IEObjectDescription>> importCandidates = ImportHelpers.getImportedObjectsFor(imp, importUriResolver, candidateMatcher);
+		Optional<List<IEObjectDescription>> importCandidates = importHelpers.getImportedObjectsFor(imp, candidateMatcher);
 		if(!importCandidates.isPresent()) {
 			return;
 		}
