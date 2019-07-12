@@ -58,29 +58,29 @@ public class ImportAwareHyperlinkHelper extends HyperlinkHelper {
 			}	
 			
 			// FQN and ImportedFQN => create link on fqn
-			if (parentRule.getName().equals("FQN") || parentRule.getName().equals("ImportedFQN")) {
+			if (parentRule != null && (parentRule.getName().equals("FQN") || parentRule.getName().equals("ImportedFQN"))) {
 				QualifiedName fqn = importHelpers.toFQN(leaf.getParent().getText().trim());
 				// query global scope, that is how elements are actually resolved
 				IScope scope = importHelpers.getVisibleScope(resource, null);
 				IEObjectDescription candidate = scope.getSingleElement(fqn); // take first
-				if(candidate != null) {
+				if (candidate != null) {
 					createHyperlinksTo(resource, region, candidate.getEObjectOrProxy(), acceptor);
 				}
 			}
 			// Import-importURI => create link on uri text
-			else if(parentRule.getName().equals("Import") && leafRule.getName().equals("STRING")) {
+			else if (parentRule != null && leafRule != null && parentRule.getName().equals("Import")
+					&& leafRule.getName().equals("STRING")) {
 				String text = leaf.getText().substring(1, leaf.getText().length() - 1);
 
 				String uritext = importHelpers.getUriResolver().resolve(text, resource);
-				if(uritext != null) {
+				if (uritext != null) {
 					try {
 						XtextHyperlink result = hyperlinkProvider.get();
 						result.setHyperlinkText(uritext);
-						result.setHyperlinkRegion(region);	// ignore: deprecated since Xtext 2.18
+						result.setHyperlinkRegion(region); // ignore: deprecated since Xtext 2.18
 						result.setURI(URI.createURI(uritext));
 						acceptor.accept(result);
-					}
-					catch (IllegalArgumentException e) {
+					} catch (IllegalArgumentException e) {
 					}
 				}
 			}
