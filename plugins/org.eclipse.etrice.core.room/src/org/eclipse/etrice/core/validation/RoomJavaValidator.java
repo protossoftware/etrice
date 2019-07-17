@@ -177,6 +177,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 			@Override
 			public boolean apply(IEObjectDescription input) {
 				return input.getEClass() == RoomPackage.Literals.ROOM_MODEL || 
+						input.getEClass() == BasePackage.Literals.ANNOTATION_TYPE ||
 						RoomPackage.Literals.ROOM_CLASS.isSuperTypeOf(input.getEClass());
 			}
 			
