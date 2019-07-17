@@ -83,20 +83,18 @@ public class RoomSemanticHighlightingCalculator extends BaseSemanticHighlighter 
 			
 			super.provideHighlightingFor(node, resource, acceptor);	
 			
-			EObject obj = node.getGrammarElement();
-			if (obj instanceof RuleCall) {
-				RuleCall ruleCall = (RuleCall) obj;
-				if(ruleCall.getRule() == grammar.getAnnotationRule()){
-					acceptor.addPosition(node.getOffset(), node.getLength(), HL_ANNOTATION_ID);
-				}
-				else if(ruleCall.getRule() == grammar.getCC_STRINGRule()) {
+			EObject grammarElement = node.getGrammarElement();
+			if (grammarElement instanceof RuleCall) {
+				RuleCall ruleCall = (RuleCall) grammarElement;
+				
+				if(ruleCall.getRule() == grammar.getCC_STRINGRule()) {
 					detailCodeHighlight(node, acceptor, expressionCache);
 				}
 				else if(ruleCall.getRule() == grammar.getIDRule() || ruleCall.getRule() == grammar.getFQNRule()) {
 					highlightDeprecated(node, acceptor);
 				}
 			}
-			else if(obj instanceof CrossReference) {
+			else if(grammarElement instanceof CrossReference) {
 				highlightDeprecated(node, acceptor);
 			}
 		}

@@ -14,6 +14,10 @@
 
 package org.eclipse.etrice.core.common.ui.highlight;
 
+import static org.eclipse.etrice.core.common.ui.highlight.BaseHighlightingConfig.HL_ANNOTATION_ID;
+import static org.eclipse.etrice.core.common.ui.highlight.BaseHighlightingConfig.HL_DOCUMENTATION;
+import static org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultHighlightingConfiguration.NUMBER_ID;
+
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
@@ -23,9 +27,11 @@ import org.eclipse.etrice.core.common.converter.CCStringIndentation;
 import org.eclipse.etrice.core.common.services.BaseGrammarAccess;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.documentation.IEObjectDocumentationProviderExtension;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultHighlightingConfiguration;
 import org.eclipse.xtext.util.CancelIndicator;
@@ -35,11 +41,9 @@ import com.google.inject.Inject;
 
 public class BaseSemanticHighlighter implements	ISemanticHighlightingCalculator {
 
-	@Inject
-	BaseGrammarAccess grammar;
-	
-	@Inject
-	BaseConverterService converterService;
+	@Inject BaseGrammarAccess grammar;	
+	@Inject BaseConverterService converterService;
+	@Inject(optional = true) IEObjectDocumentationProviderExtension docuProvider;
 	
 	@Override
 	public void provideHighlightingFor(XtextResource resource, IHighlightedPositionAcceptor acceptor, CancelIndicator cancelIndicator) {
@@ -56,14 +60,26 @@ public class BaseSemanticHighlighter implements	ISemanticHighlightingCalculator 
 	}
 	
 	protected void provideHighlightingFor(INode node, XtextResource resource, IHighlightedPositionAcceptor acceptor) {
-		EObject obj = node.getGrammarElement();
-		if (obj instanceof RuleCall) {
-			AbstractRule rule = ((RuleCall) obj).getRule();
+		EObject grammarElement = node.getGrammarElement();
+		if (grammarElement instanceof RuleCall) {
+			AbstractRule rule = ((RuleCall) grammarElement).getRule();
 			if(rule == grammar.getCC_STRINGRule()) {
 				ccStringHighlight(node, acceptor, converterService.getCC_StringConverter());
 			}
 			else if(rule == grammar.getNumberLiteralRule()) {
-				acceptor.addPosition(node.getOffset(), node.getLength() , DefaultHighlightingConfiguration.NUMBER_ID);
+				acceptor.addPosition(node.getOffset(), node.getLength() , NUMBER_ID);
+			}
+		} else {		
+			if(grammarElement == grammar.getAnnotationAccess().getTypeAnnotationTypeCrossReference_1_0() 
+					|| grammarElement == grammar.getAnnotationAccess().getCommercialAtKeyword_0()) {
+				// highlight annotation @FQN
+				acceptor.addPosition(node.getOffset(), node.getLength(), HL_ANNOTATION_ID);
+			}
+			else if(docuProvider != null && grammarElement == grammar.getML_COMMENTRule()) {
+				// highlight comments that are treated as comments
+				EObject semanticObj = NodeModelUtils.findActualSemanticObjectFor(node);
+				if(semanticObj != null && docuProvider.getDocumentationNodes(semanticObj).contains(node))
+					acceptor.addPosition(node.getOffset(), node.getLength() , HL_DOCUMENTATION);
 			}
 		}
 	}

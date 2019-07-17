@@ -17,8 +17,6 @@ package org.eclipse.etrice.core.ui.highlight;
 import org.eclipse.etrice.core.common.ui.highlight.BaseHighlightingConfig;
 import org.eclipse.etrice.expressions.ui.highlight.AbstractHighlightStyles;
 import org.eclipse.jface.text.TextAttribute;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.RGB;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfigurationAcceptor;
 import org.eclipse.xtext.ui.editor.utils.TextStyle;
 
@@ -29,7 +27,6 @@ import org.eclipse.xtext.ui.editor.utils.TextStyle;
 public class RoomHighlightingConfiguration extends BaseHighlightingConfig {
 
 	// provide an id string for the highlighting calculator
-	public static final String HL_ANNOTATION_ID = "hl_annotation";
 	public static final String HL_EXPR_SPECIAL_FEATURE_ID = "hl_expr_specialfeature";
 	public static final String HL_EXPR_OPERATION_ID = "hl_expr_operation";
 	public static final String HL_EXPR_ATTRIBUTE_ID = "hl_expr_attribute";
@@ -48,7 +45,6 @@ public class RoomHighlightingConfiguration extends BaseHighlightingConfig {
 	// that will appear in the preference page and the initial text style
 	public void configure(IHighlightingConfigurationAcceptor acceptor) {
 		super.configure(acceptor);
-		acceptor.acceptDefaultHighlighting(HL_ANNOTATION_ID, "Annotation", typeAnnotationBlock());
 		acceptor.acceptDefaultHighlighting(HL_EXPR_SPECIAL_FEATURE_ID, "Expression Special Feature", expressionSpecialFeature());
 		acceptor.acceptDefaultHighlighting(HL_EXPR_OPERATION_ID, "Expression Operation", expressionOperation());
 		acceptor.acceptDefaultHighlighting(HL_EXPR_ATTRIBUTE_ID, "Expression Attribute", expressionAttribute());
@@ -58,16 +54,6 @@ public class RoomHighlightingConfiguration extends BaseHighlightingConfig {
 		acceptor.acceptDefaultHighlighting(HL_PRIMITIVE_TYPE_ID, "Expression Primitive Type", primitiveType());
 		acceptor.acceptDefaultHighlighting(HL_EXTERNAL_TYPE_ID, "Expression External Type", externalType());
 		acceptor.acceptDefaultHighlighting(HL_DEPRECATED_ID, "Deprecated", deprecated());
-	}
-
-	// method for calculating an actual text styles
-	public TextStyle typeAnnotationBlock() {
-		TextStyle textStyle = new TextStyle();
-		// textStyle.setBackgroundColor(new RGB(155, 55, 255));
-		textStyle.setColor(new RGB(160, 0, 0));
-		textStyle.setStyle(SWT.BOLD);
-		// textStyle.setFontData(defaultCommentFont);
-		return textStyle;
 	}
 	
 	public TextStyle expressionSpecialFeature() {

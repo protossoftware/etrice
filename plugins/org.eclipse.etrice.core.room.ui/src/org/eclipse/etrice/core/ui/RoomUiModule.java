@@ -32,6 +32,8 @@ import org.eclipse.etrice.core.ui.quickfix.RoomQuickFixProviderXtend;
 import org.eclipse.etrice.doc.KeywordHoverContentProvider;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
+import org.eclipse.xtext.documentation.IEObjectDocumentationProviderExtension;
+import org.eclipse.xtext.documentation.impl.MultiLineCommentDocumentationProvider;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategyProvider;
 import org.eclipse.xtext.ui.editor.doubleClicking.DoubleClickStrategyProvider;
@@ -61,6 +63,7 @@ public class RoomUiModule extends org.eclipse.etrice.core.ui.AbstractRoomUiModul
 		// keyword hover stuff
 		binder.bind(IKeywordHoverContentProvider.class).to(KeywordHoverContentProvider.class);
 		binder.bind(IEObjectHoverProvider.class).to(RoomHoverProvider.class);	
+		binder.bind(IEObjectDocumentationProviderExtension.class).to(MultiLineCommentDocumentationProvider.class);
 	}
 
 	@Override

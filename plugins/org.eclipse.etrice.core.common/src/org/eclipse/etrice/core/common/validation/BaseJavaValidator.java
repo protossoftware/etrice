@@ -84,6 +84,8 @@ public class BaseJavaValidator extends org.eclipse.etrice.core.common.validation
 	
 	@Check
 	public void checkAnnotationAttributeMandatory(Annotation a) {
+		if(a.getType().eIsProxy()) return;
+		
 		for (AnnotationAttribute att : a.getType().getAttributes()) {
 			if (!att.isOptional()) {
 				boolean isDefined = false;
@@ -106,6 +108,8 @@ public class BaseJavaValidator extends org.eclipse.etrice.core.common.validation
 	
 	@Check
 	public void checkAnnotationAttributeType(Annotation a) {
+		if(a.getType().eIsProxy()) return;
+		
 		HashSet<String> names = new HashSet<String>();
 		for (KeyValue kv : a.getAttributes()) {
 			int idx = a.getAttributes().indexOf(kv);
