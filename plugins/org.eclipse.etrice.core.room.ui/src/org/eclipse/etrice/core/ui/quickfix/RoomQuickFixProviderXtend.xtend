@@ -15,30 +15,17 @@
 package org.eclipse.etrice.core.ui.quickfix
 
 import com.google.inject.Inject
-import java.nio.file.Files
-import java.nio.file.Paths
-import org.eclipse.core.resources.ResourcesPlugin
-import org.eclipse.core.runtime.Path
-import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EClass
-import org.eclipse.etrice.core.common.base.BaseFactory
-import org.eclipse.etrice.core.common.scoping.RelativeFileURIHandler
+import org.eclipse.etrice.core.common.base.util.ImportHelpers
 import org.eclipse.etrice.core.room.RoomModel
-import org.eclipse.xtext.resource.IResourceDescriptions
+import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor
 import org.eclipse.xtext.validation.Issue
 
-import static org.eclipse.xtext.EcoreUtil2.getContainerOfType
-import static org.eclipse.etrice.core.room.RoomPackage.Literals.*
-import org.eclipse.etrice.core.common.scoping.ModelPathGlobalScopeProvider
-import org.eclipse.emf.ecore.resource.Resource
-import org.eclipse.emf.ecore.EReference
-
 class RoomQuickFixProviderXtend extends RoomQuickfixProvider {
 	
-	@Inject ModelPathGlobalScopeProvider modelPathGlobalScopeProvider
-	@Inject IResourceDescriptions resourceDescriptions
+	@Inject ImportHelpers importHelpers
 	
 	// override xtext linking issues
 	override getResolutionsForLinkingIssue(Issue issue) {			
@@ -60,76 +47,28 @@ class RoomQuickFixProviderXtend extends RoomQuickfixProvider {
 		val reference = getUnresolvedEReference(issue, target)		
 		
 		if(reference !== null) {
-			// import without uri by element
-			importQuickfixElementWithoutURI(issueString, resource, reference, issue, acceptor)
-			// import by namespace per default
-			importQuickfixNamespace(issueString, reference.EReferenceType, issue, acceptor)		
-			// import by element
-			if(reference == ACTOR_CLASS) {
-				importQuickfixElement(issueString, reference.EReferenceType, issue, acceptor)
-			}
+			createLinkingImports(issue, issueString, resource, reference.EReferenceType, false, acceptor);
 		}
 	}
 	
-	protected def void importQuickfixElementWithoutURI(String issueString, Resource resource, EReference reference, Issue issue, IssueResolutionAcceptor acceptor) {
-		modelPathGlobalScopeProvider.getScope(resource, reference, [name.lastSegment.equalsIgnoreCase(issueString)]).allElements.forEach[ eObjDesc |
-				acceptor.accept(issue, '''Import '«eObjDesc.qualifiedName»' ''', '', null) [elem, ctx |
-				val model = getContainerOfType(elem, RoomModel)
-				model.imports += BaseFactory.eINSTANCE.createImport => [
-					importedNamespace = eObjDesc.qualifiedName.toString
-				]
+	protected def void createLinkingImports(Issue issue, String issueString, XtextResource resource, EClass type, boolean wildcard, IssueResolutionAcceptor acceptor) {
+		// try first import based on model path
+		val elementImports = importHelpers.createModelPathImports(issueString, resource, type, false)
+		elementImports.forEach[imp |
+			acceptor.accept(issue, '''Import '«imp.importedNamespace»' ''', '', null) [elem, ctx |
+				val model = EcoreUtil2.getContainerOfType(elem, RoomModel)
+				model.imports += imp
 			]
 		]
-	}
-	
-	protected def void importQuickfixNamespace(String issueString, EClass type, Issue issue, IssueResolutionAcceptor acceptor) {
-		resourceDescriptions.getExportedObjectsByType(type).filter[name.lastSegment.equalsIgnoreCase(issueString)].forEach [ eObjDesc |
-			acceptor.accept(issue, '''Import namespace '«eObjDesc.qualifiedName.skipLast(1)»' from '«eObjDesc.EObjectURI.lastSegment»' ''', '', null) [elem, ctx |
-				val model = getContainerOfType(elem, RoomModel)
-				model.imports += BaseFactory.eINSTANCE.createImport => [
-					importedNamespace = eObjDesc.qualifiedName.skipLast(1) + '.*'
-					importURI = computeImportURIString(model.eResource.URI, eObjDesc.EObjectURI)
+		// fallback: old style imports with uri
+		if(elementImports.empty) {
+			importHelpers.createURIImports(issueString, type, resource.URI).forEach[imp |
+				acceptor.accept(issue, '''Import namespace '«imp.importedNamespace»' from '«imp.importURI»' ''', '', null) [elem, ctx |
+					val model = EcoreUtil2.getContainerOfType(elem, RoomModel)
+					model.imports += imp
 				]
 			]
-		]
-	}
-	
-	protected def void importQuickfixElement(String issueString, EClass type, Issue issue, IssueResolutionAcceptor acceptor) {
-		resourceDescriptions.getExportedObjectsByType(type).filter[name.lastSegment.equalsIgnoreCase(issueString)].forEach [ eObjDesc |
-			acceptor.accept(issue, '''Import '«eObjDesc.qualifiedName»' from '«eObjDesc.EObjectURI.lastSegment»' ''', '', null) [elem, ctx |
-				val model = getContainerOfType(elem, RoomModel)
-				model.imports += BaseFactory.eINSTANCE.createImport => [
-					importedNamespace = eObjDesc.qualifiedName.toString
-					importURI = computeImportURIString(model.eResource.URI, eObjDesc.EObjectURI)
-				]
-			]
-		]
-	}
-	
-	private def String computeImportURIString(URI base, URI toImport) {
-		val trimmedBase = base.trimQuery.trimFragment
-		val trimmedImport = toImport.trimQuery.trimFragment
-		
-		val fileHandler = new RelativeFileURIHandler => [baseURI = trimmedBase]
-		val resolvedRelative= fileHandler.deresolve(trimmedImport)
-		
-		// same project => relative
-		if(base.platformResource && toImport.platformResource && base.segment(1) == toImport.segment(1)) {
-			// check if exists
-			val baseLocation = ResourcesPlugin.workspace.root.getFile(new Path(base.trimSegments(1).toPlatformString(false))).location.toFile.absolutePath			
-			if(resolvedRelative.isRelative && Files.exists(Paths.get(baseLocation, resolvedRelative.toString))) {
-				return resolvedRelative.toString
-			} else {
-				return trimmedImport.toString
-			}
-		}
-		
-		// both in workspace => platform resource
-		if(base.platformResource && toImport.platformResource) {
-			trimmedImport.toString
-		} else {	
-			// else file 
-			resolvedRelative.toString	
 		}
 	}
+	
 }

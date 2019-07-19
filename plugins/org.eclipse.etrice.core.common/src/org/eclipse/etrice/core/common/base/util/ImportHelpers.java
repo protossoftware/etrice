@@ -14,10 +14,16 @@
 
 package org.eclipse.etrice.core.common.base.util;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EReference;
@@ -25,8 +31,10 @@ import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.etrice.core.common.base.BaseFactory;
 import org.eclipse.etrice.core.common.base.Import;
 import org.eclipse.etrice.core.common.scoping.ModelLocatorUriResolver;
+import org.eclipse.etrice.core.common.scoping.RelativeFileURIHandler;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -48,18 +56,25 @@ public class ImportHelpers {
 	@Inject IQualifiedNameConverter nameConverter;
 	@Inject ModelLocatorUriResolver importUriResolver;
 	@Inject IGlobalScopeProvider globalScope;			// visible/imported scope
-	@Inject IResourceDescriptions resourceDescriptions; // world scope
+	@Inject IResourceDescriptions resourceDescriptions; // world/workspace scope
 	
 	public ModelLocatorUriResolver getUriResolver() {
 		return importUriResolver;
 	}
 
-//	/**
-//	 *  Returns elements from workspace.
-//	 */
-//	public Iterable<IEObjectDescription> findInWorskpace(QualifiedName fqn) {
-//		return resourceDescriptions.getExportedObjects(EOBJECT, fqn, false);
-//	}
+	/**
+	 *  Returns elements from workspace.
+	 */
+	public Iterable<IEObjectDescription> findInWorskpace(QualifiedName fqn, boolean ignoreCase) {
+		return resourceDescriptions.getExportedObjects(EOBJECT, fqn, ignoreCase);
+	}
+	
+	/**
+	 *  Returns elements from workspace.
+	 */
+	public IResourceDescriptions getWorkspaceDescriptions() {
+		return resourceDescriptions;
+	}
 	
 	/**
 	 *  Returns current visible/imported scope of given resource.
@@ -76,6 +91,13 @@ public class ImportHelpers {
 		reference.setEType((type != null) ? type : EOBJECT);	
 		
 		return globalScope.getScope(context, reference, Predicates.alwaysTrue());
+	}
+	
+	/**
+	 *  Returns current visible/imported scope of given resource.
+	 */
+	public IGlobalScopeProvider getVisibleScopeProvider() {
+		return globalScope;
 	}
 	
 	/**
@@ -146,5 +168,64 @@ public class ImportHelpers {
 
 	public QualifiedName toFQN(Import imp) {
 		return toFQN(imp.getImportedNamespace());
+	}
+	
+	public List<Import> createModelPathImports(String issueString, Resource resource, EClass type, boolean wildcard) {
+		final List<Import> result = new ArrayList<>();
+		IScope scope = getVisibleScope(resource, type);
+		scope.getAllElements().forEach((eObjDesc) -> {
+			if(eObjDesc.getName().getLastSegment().equalsIgnoreCase(issueString)) {
+				// - Bug 549427 - hide element that cannot be resolved (why is it here?)
+				if(scope.getSingleElement(eObjDesc.getName()) == null) return;
+				// -
+				Import imp = BaseFactory.eINSTANCE.createImport();
+				imp.setImportedNamespace((wildcard) ? eObjDesc.getQualifiedName().skipLast(1) + ".*" : eObjDesc.getQualifiedName().toString());
+				result.add(imp);
+			}
+		});
+		
+		return result;
+	}
+	
+	public List<Import> createURIImports(String issueString, EClass type, URI baseURI) {
+		final List<Import> result = new ArrayList<>();
+		getWorkspaceDescriptions().getExportedObjectsByType(type).forEach((eObjDesc) -> {
+			if(eObjDesc.getName().getLastSegment().equalsIgnoreCase(issueString)) {
+				Import imp = BaseFactory.eINSTANCE.createImport();
+				imp.setImportedNamespace(eObjDesc.getQualifiedName().skipLast(1) + ".*");
+				imp.setImportURI(computeImportURIString(baseURI, eObjDesc.getEObjectURI()));
+				result.add(imp);
+			}
+		});
+		
+		return result;
+	}
+	
+	private String computeImportURIString(URI base, URI toImport) {
+		URI trimmedBase = base.trimQuery().trimFragment();
+		URI trimmedImport = toImport.trimQuery().trimFragment();
+		
+		RelativeFileURIHandler fileHandler = new RelativeFileURIHandler();
+		fileHandler.setBaseURI(trimmedBase);
+		URI resolvedRelative= fileHandler.deresolve(trimmedImport);
+		
+		// same project => relative
+		if(base.isPlatformResource() && toImport.isPlatformResource() && Objects.equals(base.segment(1), toImport.segment(1))) {
+			// check if exists
+			String baseLocation = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(base.trimSegments(1).toPlatformString(false))).getLocation().toFile().getAbsolutePath();			
+			if(resolvedRelative.isRelative() && Files.exists(Paths.get(baseLocation, resolvedRelative.toString()))) {
+				return resolvedRelative.toString();
+			} else {
+				return trimmedImport.toString();
+			}
+		}
+		
+		// both in workspace => platform resource
+		if(base.isPlatformResource() && toImport.isPlatformResource()) {
+			return trimmedImport.toString();
+		} else {	
+			// else file 
+			return resolvedRelative.toString();	
+		}
 	}
 }

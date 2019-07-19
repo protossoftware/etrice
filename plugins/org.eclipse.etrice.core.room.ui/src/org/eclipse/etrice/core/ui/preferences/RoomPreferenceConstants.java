@@ -22,4 +22,6 @@ import org.eclipse.etrice.ui.common.base.preferences.UIBasePreferenceConstants;
 public interface RoomPreferenceConstants {
 
 	public static final String SAVE_TEXT_ON_FOCUS_LOST = UIBasePreferenceConstants.SAVE_TEXT_ON_FOCUS_LOST;
+	/** Used by org.eclipse.etrice.core.common.ui.editor.folding.FoldingRegionProvider */
+	public static final String AUTO_FOLD_IMPORTS = "AUTO_FOLD_IMPORTS";
 }

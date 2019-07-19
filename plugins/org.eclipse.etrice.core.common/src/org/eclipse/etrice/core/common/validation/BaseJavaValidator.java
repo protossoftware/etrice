@@ -201,9 +201,10 @@ public class BaseJavaValidator extends org.eclipse.etrice.core.common.validation
 		}
 		
 		Resource resource = imp.eResource();
-		if(!modelPathProvider.get(resource).isEmpty()) {
-			warning("import statements using uris are deprecated", BasePackage.Literals.IMPORT__IMPORT_URI, DEPRECATED_IMPORT_URI);
-		}
+		// too many warnings for now
+//		if(!modelPathProvider.get(resource).isEmpty()) {
+//			warning("import statements using uris are deprecated", BasePackage.Literals.IMPORT__IMPORT_URI, DEPRECATED_IMPORT_URI);
+//		}
 		
 		String uriString = importUriResolver.resolve(imp);
 		if (uriString == null) {
@@ -254,9 +255,13 @@ public class BaseJavaValidator extends org.eclipse.etrice.core.common.validation
 			error("no modelpath definition present", BasePackage.Literals.IMPORT__IMPORTED_NAMESPACE, MODELPATH_DESCRIPTION_MISSING);
 			return;
 		}	
-		IEObjectDescription eod = importHelpers.getVisibleScope(resource).getSingleElement(fqn);
-		if(eod == null) {
-			error("could not find imported namespace " + fqn, BasePackage.Literals.IMPORT__IMPORTED_NAMESPACE, IMPORTED_NAMESPACE_MISSING);
+		IEObjectDescription eObjDesc = importHelpers.getVisibleScope(resource).getSingleElement(fqn);
+		if(eObjDesc == null) {
+			if(importHelpers.findInWorskpace(fqn, false).iterator().hasNext()) {
+				error("could not find namespace on modelpath '" + fqn + "'", BasePackage.Literals.IMPORT__IMPORTED_NAMESPACE, IMPORTED_NAMESPACE_MISSING);
+			} else {
+				error("could not find imported namespace '" + fqn + "'", BasePackage.Literals.IMPORT__IMPORTED_NAMESPACE, IMPORTED_NAMESPACE_MISSING);
+			}
 		}
 	}
 }

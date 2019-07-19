@@ -39,6 +39,7 @@ import org.eclipse.etrice.core.room.ReferenceType;
 import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.validation.RoomJavaValidator;
 import org.eclipse.jface.text.BadLocationException;
+import org.eclipse.xtext.conversion.impl.QualifiedNameValueConverter;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.edit.IModification;
 import org.eclipse.xtext.ui.editor.model.edit.IModificationContext;
@@ -48,6 +49,8 @@ import org.eclipse.xtext.ui.editor.quickfix.IssueResolution;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor;
 import org.eclipse.xtext.ui.editor.quickfix.ReplaceModification;
 import org.eclipse.xtext.validation.Issue;
+
+import com.google.inject.Inject;
 
 public class RoomQuickfixProvider extends FSMQuickfixProvider {
 
@@ -70,6 +73,8 @@ public class RoomQuickfixProvider extends FSMQuickfixProvider {
 			kv.setValue(sl);
 		}
 	}
+	
+	@Inject QualifiedNameValueConverter fqnConverter;
 
 	@Override
 	public List<IssueResolution> getResolutions(Issue issue) {
@@ -92,7 +97,7 @@ public class RoomQuickfixProvider extends FSMQuickfixProvider {
 	
 	@Fix(RoomJavaValidator.WRONG_MODEL_NAME)
 	public void renameModel(final Issue issue, IssueResolutionAcceptor acceptor) {
-		String replacement = issue.getData()[1];
+		String replacement = fqnConverter.toString(issue.getData()[1]);
 		acceptor.accept(issue, "Rename model", "Replace model name with its location on the modelpath \nfollowed by its file name",
 				"correction_change.gif", new ReplaceModification(issue, replacement));
 	}

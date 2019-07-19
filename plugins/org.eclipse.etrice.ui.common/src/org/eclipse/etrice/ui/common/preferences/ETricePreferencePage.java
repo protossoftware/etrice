@@ -55,6 +55,11 @@ public class ETricePreferencePage
 				"Auto-save textual model when focus changes",
 				getFieldEditorParent());
 		addField(autoSaveText);
+		BooleanFieldEditor foldImportsText = new BooleanFieldEditor(
+				RoomPreferenceConstants.AUTO_FOLD_IMPORTS,
+				"Auto-fold imports",
+				getFieldEditorParent());
+		addField(foldImportsText);
 		
 		addLabel("");
 		addLabel("Diagram Editors");

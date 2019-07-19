@@ -16,6 +16,7 @@ package org.eclipse.etrice.core.common.ui.editor.folding;
 
 import java.util.List;
 
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.etrice.core.common.base.Import;
@@ -57,7 +58,8 @@ public class FoldingRegionProvider extends DefaultFoldingRegionProvider {
 	protected void computeObjectFolding(EObject eObject, IFoldingRegionAcceptor<ITextRegion> foldingRegionAcceptor,
 			boolean initiallyFolded) {
 		
-		if(eObject instanceof Import) {
+		boolean autoFoldPref = Platform.getPreferencesService().getBoolean("org.eclipse.etrice.ui.common.base", "AUTO_FOLD_IMPORTS" /* RoomPreferenceConstants.AUTO_FOLD_IMPORTS */, false, null);		
+		if(autoFoldPref && eObject instanceof Import) {
 			// fold imports
 			EStructuralFeature importsFeature = eObject.eContainmentFeature();
 			if(importsFeature.isMany()) {

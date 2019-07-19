@@ -13,18 +13,18 @@
  *******************************************************************************/
 package org.eclipse.etrice.core.common.ui.quickfix
 
-import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider
-import org.eclipse.xtext.ui.editor.quickfix.Fix
-import org.eclipse.etrice.core.common.validation.BaseJavaValidator
-import org.eclipse.xtext.validation.Issue
-import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor
-import org.eclipse.etrice.core.common.base.Import
 import org.eclipse.core.resources.ResourcesPlugin
 import org.eclipse.core.runtime.Path
+import org.eclipse.etrice.core.common.base.Import
 import org.eclipse.etrice.core.common.ui.modelpath.ModelPathManager
+import org.eclipse.etrice.core.common.validation.BaseJavaValidator
 import org.eclipse.ui.PlatformUI
 import org.eclipse.ui.ide.IDE
+import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider
+import org.eclipse.xtext.ui.editor.quickfix.Fix
+import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor
 import org.eclipse.xtext.util.StringInputStream
+import org.eclipse.xtext.validation.Issue
 
 //import org.eclipse.xtext.ui.editor.quickfix.Fix
 //import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor
