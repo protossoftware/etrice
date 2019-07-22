@@ -109,7 +109,7 @@ public class SPPPropertyDialog extends AbstractPropertyDialog {
 		}
 		
 		Text name = createText(body, "Name:", spp, FSMPackage.eINSTANCE.getAbstractInterfaceItem_Name(), nv);
-		Combo protocol = createComboUsingDesc(body, "Protocol:", spp, ProtocolClass.class, RoomPackage.eINSTANCE.getSPP_Protocol(), protocols, RoomPackage.eINSTANCE.getRoomClass_Name(), pv);
+		Combo protocol = createComboUsingDesc(body, "Protocol:", spp, ProtocolClass.class, RoomPackage.eINSTANCE.getSPP_Protocol(), protocols, pv);
 		
 		if (!newSPP) {
 			// TODOHRR: check whether spp is used externally?

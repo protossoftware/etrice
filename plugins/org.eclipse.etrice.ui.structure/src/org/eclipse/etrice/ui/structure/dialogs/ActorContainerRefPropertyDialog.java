@@ -211,8 +211,8 @@ public class ActorContainerRefPropertyDialog extends AbstractPropertyDialog {
 		
 		Text name = createText(body, "&Name:", ref, RoomPackage.eINSTANCE.getActorContainerRef_Name(), nv);
 		Combo refClass = refIsActor?
-				createComboUsingDesc(body, "Actor &Class:", ref, ActorClass.class, RoomPackage.eINSTANCE.getActorRef_Type(), actors, RoomPackage.eINSTANCE.getRoomClass_Name(), pv)
-			:	createComboUsingDesc(body, "SubSystem &Class:", ref, SubSystemClass.class, RoomPackage.eINSTANCE.getSubSystemRef_Type(), actors, RoomPackage.eINSTANCE.getRoomClass_Name(), pv);
+				createComboUsingDesc(body, "Actor &Class:", ref, ActorClass.class, RoomPackage.eINSTANCE.getActorRef_Type(), actors, pv)
+			:	createComboUsingDesc(body, "SubSystem &Class:", ref, SubSystemClass.class, RoomPackage.eINSTANCE.getSubSystemRef_Type(), actors, pv);
 
 		createDecorator(name, "invalid name");
 		createDecorator(refClass, "no class selected");

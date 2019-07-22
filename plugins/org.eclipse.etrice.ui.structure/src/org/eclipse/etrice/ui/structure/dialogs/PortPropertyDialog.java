@@ -269,7 +269,7 @@ public class PortPropertyDialog extends AbstractPropertyDialog {
 		}
 		
 		Text name = createText(body, "&Name:", port, FSMPackage.eINSTANCE.getAbstractInterfaceItem_Name(), nv);
-		Combo protocol = createComboUsingDesc(body, "&Protocol:", port, GeneralProtocolClass.class, RoomPackage.eINSTANCE.getPort_Protocol(), protocols, RoomPackage.eINSTANCE.getRoomClass_Name(), pv);
+		Combo protocol = createComboUsingDesc(body, "&Protocol:", port, GeneralProtocolClass.class, RoomPackage.eINSTANCE.getPort_Protocol(), protocols, pv);
 		Button conj = createCheck(body, "&Conjugated:", port, RoomPackage.eINSTANCE.getPort_Conjugated());
 		if (!internal && !refitem && (acc instanceof ActorClass))
 			createRelayCheck(body, notReferenced, mform.getToolkit());

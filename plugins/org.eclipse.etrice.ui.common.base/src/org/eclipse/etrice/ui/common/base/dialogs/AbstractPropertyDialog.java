@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.Stack;
 
@@ -39,6 +40,7 @@ import org.eclipse.core.databinding.validation.IValidator;
 import org.eclipse.core.databinding.validation.ValidationStatus;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.util.Enumerator;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.databinding.EMFProperties;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
@@ -55,6 +57,7 @@ import org.eclipse.jface.fieldassist.ContentProposalAdapter;
 import org.eclipse.jface.fieldassist.ControlDecoration;
 import org.eclipse.jface.fieldassist.FieldDecoration;
 import org.eclipse.jface.fieldassist.FieldDecorationRegistry;
+import org.eclipse.jface.fieldassist.IContentProposalProvider;
 import org.eclipse.jface.fieldassist.SimpleContentProposalProvider;
 import org.eclipse.jface.fieldassist.TextContentAdapter;
 import org.eclipse.jface.preference.IPreferenceStore;
@@ -80,6 +83,7 @@ import org.eclipse.ui.forms.IManagedForm;
 import org.eclipse.ui.forms.widgets.Form;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.util.SimpleAttributeResolver;
 
 import com.google.common.collect.Sets;
 
@@ -131,19 +135,31 @@ public abstract class AbstractPropertyDialog extends FormDialog {
 
 	static class DescriptionBased_Reference2StringConverter extends Converter {
 
-		private EAttribute nameAttr;
+		private List<IEObjectDescription> candidates;
 
-		DescriptionBased_Reference2StringConverter(Object type, EAttribute nameAttr) {
+		DescriptionBased_Reference2StringConverter(Object type, List<IEObjectDescription> candidates) {
 			super(type, String.class);
-			this.nameAttr = nameAttr;
+			this.candidates = candidates;
 		}
 		
 		@Override
 		public Object convert(Object fromObject) {
-			if (fromObject instanceof IEObjectDescription)
-				return ((IEObjectDescription)fromObject).getName();
+			// IEObjectDescription describes imported object, either by simple name or fqn
+			if (fromObject instanceof IEObjectDescription) {
+				return ((IEObjectDescription)fromObject).getName(); // <- getName() returns simple name or fqn based on existing imports
+			} 
 			else if (fromObject instanceof EObject) {
-				return ((EObject)fromObject).eGet(nameAttr);
+				// lookup of IEObjectDescription
+				final URI objURI = EcoreUtil.getURI((EObject) fromObject);
+				Optional<IEObjectDescription> match = candidates.stream().filter((eObjDesc) -> eObjDesc.getEObjectURI().equals(objURI)).findFirst();
+				if(match.isPresent()) {
+					// 1. try by URI - seems to be best choice
+					return match.get().getName().toString();  // <- getName() returns simple name or fqn based on existing imports
+				} 
+				else {
+					// 2. should not happen - try simple name, does not work if namespace was not already imported
+					return SimpleAttributeResolver.NAME_RESOLVER.apply((EObject) fromObject);
+				}
 			}
 			
 			return null;
@@ -492,11 +508,11 @@ public abstract class AbstractPropertyDialog extends FormDialog {
 		return combo;
 	}
 	
-	protected Combo createComboUsingDesc(Composite parent, String label, EObject obj, Object type, EReference ref, List<IEObjectDescription> candidates, EAttribute nameAttr, IValidator validator){
-		return createComboUsingDesc(parent, label, obj, type, ref, candidates, nameAttr, validator, null);
+	protected Combo createComboUsingDesc(Composite parent, String label, EObject obj, Object type, EReference ref, List<IEObjectDescription> candidates, IValidator validator){
+		return createComboUsingDesc(parent, label, obj, type, ref, candidates, validator, null);
 	}
 	
-	protected Combo createComboUsingDesc(Composite parent, String label, EObject obj, Object type, EReference ref, List<IEObjectDescription> candidates, EAttribute nameAttr, IValidator validator, MultiValidator2 multiValidator) {
+	protected Combo createComboUsingDesc(Composite parent, String label, EObject obj, Object type, EReference ref, List<IEObjectDescription> candidates, IValidator validator, MultiValidator2 multiValidator) {
 		Label l = toolkit.createLabel(parent, label, SWT.NONE);
 		l.setLayoutData(new GridData(SWT.NONE));		
 		
@@ -505,7 +521,7 @@ public abstract class AbstractPropertyDialog extends FormDialog {
 		toolkit.adapt(comboViewer.getCombo(), true, true);
 		combo.setLayoutData(new GridData(SWT.HORIZONTAL));
 		combo.setVisibleItemCount(10);
-		DescriptionBased_Reference2StringConverter r2s = new DescriptionBased_Reference2StringConverter(type, nameAttr);
+		DescriptionBased_Reference2StringConverter r2s = new DescriptionBased_Reference2StringConverter(type, candidates);
 		for (IEObjectDescription desc : candidates) {
 			comboViewer.add(r2s.convert(desc).toString());
 		}
@@ -545,7 +561,7 @@ public abstract class AbstractPropertyDialog extends FormDialog {
 			}
 		});
 		
-		SimpleContentProposalProvider proposalProvider = null;
+		IContentProposalProvider proposalProvider = null;
 		ContentProposalAdapter proposalAdapter = null;
 		KeyStroke keyStroke = KeyStroke.getInstance(SWT.CTRL, SWT.SPACE);
 		if (control instanceof Combo) {
@@ -558,7 +574,7 @@ public abstract class AbstractPropertyDialog extends FormDialog {
 					deco.show();
 				}
 			});
-			proposalProvider = new SimpleContentProposalProvider(combo.getItems());
+			proposalProvider = new FilteredContentProposalProvider(combo.getItems());
 			proposalAdapter = new ContentProposalAdapter(combo, new ComboContentAdapter(), proposalProvider, keyStroke, null);
 		} else if (control instanceof Text) {
 			final Text text = (Text) control;
@@ -569,11 +585,10 @@ public abstract class AbstractPropertyDialog extends FormDialog {
 					deco.hide();
 				}	
 			});
-			proposalProvider = new SimpleContentProposalProvider(items);
+			proposalProvider = new FilteredContentProposalProvider(items);
 			proposalAdapter = new ContentProposalAdapter(text, new TextContentAdapter(), proposalProvider, keyStroke, null);
 		}
 		
-		proposalProvider.setFiltering(true);
 		proposalAdapter.setPropagateKeys(true);
 		proposalAdapter.setProposalAcceptanceStyle(ContentProposalAdapter.PROPOSAL_REPLACE);
 	}

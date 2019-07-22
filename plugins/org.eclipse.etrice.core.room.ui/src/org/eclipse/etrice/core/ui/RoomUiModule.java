@@ -15,6 +15,7 @@
 package org.eclipse.etrice.core.ui;
 
 import org.eclipse.etrice.core.common.ui.autoedit.BaseAutoEditStrategyProvider;
+import org.eclipse.etrice.core.common.ui.contentassist.FQNLastSegmentFinder;
 import org.eclipse.etrice.core.common.ui.editor.BaseDoubleClickStrategyProvider;
 import org.eclipse.etrice.core.common.ui.editor.folding.FoldingRegionProvider;
 import org.eclipse.etrice.core.common.ui.editor.model.BaseTokenTypeToPartitionMapper;
@@ -36,6 +37,7 @@ import org.eclipse.xtext.documentation.IEObjectDocumentationProviderExtension;
 import org.eclipse.xtext.documentation.impl.MultiLineCommentDocumentationProvider;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategyProvider;
+import org.eclipse.xtext.ui.editor.contentassist.FQNPrefixMatcher;
 import org.eclipse.xtext.ui.editor.doubleClicking.DoubleClickStrategyProvider;
 import org.eclipse.xtext.ui.editor.folding.IFoldingRegionProvider;
 import org.eclipse.xtext.ui.editor.hover.IEObjectHover;
@@ -64,6 +66,8 @@ public class RoomUiModule extends org.eclipse.etrice.core.ui.AbstractRoomUiModul
 		binder.bind(IKeywordHoverContentProvider.class).to(KeywordHoverContentProvider.class);
 		binder.bind(IEObjectHoverProvider.class).to(RoomHoverProvider.class);	
 		binder.bind(IEObjectDocumentationProviderExtension.class).to(MultiLineCommentDocumentationProvider.class);
+	
+		binder.bind(FQNPrefixMatcher.LastSegmentFinder.class).to(FQNLastSegmentFinder.class);
 	}
 
 	@Override
