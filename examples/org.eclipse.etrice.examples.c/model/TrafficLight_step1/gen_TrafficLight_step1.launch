@@ -1,13 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="org.eclipse.etrice.generator.launch.c.launchConfigurationType">
-<booleanAttribute key="MSC" value="true"/>
 <booleanAttribute key="DataLogging" value="true"/>
-<booleanAttribute key="UseTranslation" value="true"/>
+<booleanAttribute key="Debug" value="false"/>
+<stringAttribute key="GenModelPath" value=""/>
+<booleanAttribute key="GenerateDepsWithinProject" value="true"/>
+<booleanAttribute key="Lib" value="false"/>
+<booleanAttribute key="MSC" value="true"/>
+<stringAttribute key="MainMethodName" value="main"/>
 <listAttribute key="ModelFiles">
 <listEntry value="${workspace_loc:/org.eclipse.etrice.examples.c/model/TrafficLight_step1/TrafficLight_step1.etmap}"/>
+<listEntry value="${workspace_loc:/org.eclipse.etrice.examples.c/model/TrafficLight_step1/TrafficLight_step1.room}"/>
+<listEntry value="${workspace_loc:/org.eclipse.etrice.examples.c/model/TrafficLight/TrafficLight.etphys}"/>
+<listEntry value="${workspace_loc:/org.eclipse.etrice.examples.c/model/TrafficLight/TrafficLight.room}"/>
 </listAttribute>
+<booleanAttribute key="OldStyleTransitionData" value="false"/>
+<booleanAttribute key="OverrideDirectories" value="false"/>
+<booleanAttribute key="SaveGenModel" value="false"/>
+<booleanAttribute key="UseTranslation" value="true"/>
+<booleanAttribute key="Verbose" value="false"/>
+<booleanAttribute key="cppFileExtensions" value="false"/>
+<stringAttribute key="org.eclipse.debug.core.ATTR_REFRESH_SCOPE" value="${workspace}"/>
 <listAttribute key="org.eclipse.debug.ui.favoriteGroups">
 <listEntry value="org.eclipse.debug.ui.launchGroup.run"/>
 </listAttribute>
-<stringAttribute key="org.eclipse.debug.core.ATTR_REFRESH_SCOPE" value="${workspace}"/>
 </launchConfiguration>

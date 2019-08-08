@@ -1,6 +1,6 @@
 MappingModel TrafficLight {
-	import TrafficLight_step4.* from "TrafficLight_step4.room"
-	import TrafficLight.* from "../TrafficLight/TrafficLight.etphys"
+	import TrafficLight_step4.TrafficLight
+	import TrafficLight.PhysSys1
 	
 	Mapping TrafficLight -> PhysSys1 {
 		SubSystemMapping subSystem -> nodeRef1 {

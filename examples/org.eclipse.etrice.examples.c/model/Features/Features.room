@@ -1,8 +1,6 @@
 RoomModel Features {
 
-	import room.basic.service.timing.* from "platform:/resource//org.eclipse.etrice.modellib.c/model/TimingService.room"
-	import room.basic.types.* from "platform:/resource/org.eclipse.etrice.modellib.c/model/Types.room"
-	import Multiplicity.* from "Multiplicity.room"
+	import Multiplicity.ExampleMultiplicity
 	
 	LogicalSystem FeatureLogicalSystem {
 		SubSystemRef subSystem: FeatureSubSystem

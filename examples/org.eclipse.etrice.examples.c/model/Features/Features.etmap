@@ -1,6 +1,7 @@
 MappingModel Features {
-	import Features.* from "Features.room"
-	import Features.* from "Features.etphys"
+	
+	import Features.FeatureLogicalSystem
+	import Features.FeaturesPhysicalSystem
 
 	Mapping FeatureLogicalSystem -> FeaturesPhysicalSystem {
 		SubSystemMapping subSystem -> node1 {

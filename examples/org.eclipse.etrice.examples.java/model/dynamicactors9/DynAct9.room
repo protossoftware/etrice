@@ -1,6 +1,7 @@
-RoomModel org.eclipse.etrice.examples.dynamicactors9 {
+RoomModel DynAct9 {
 
-	import room.basic.service.timing.* from "../../../org.eclipse.etrice.modellib.java/model/TimingService.room"
+	import room.basic.service.timing.PTimer
+	import room.basic.service.timing.ATimingService
 
 	LogicalSystem LogSys1 {
 		SubSystemRef subSysRef1: SubSysClass1

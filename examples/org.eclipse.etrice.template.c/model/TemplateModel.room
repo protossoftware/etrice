@@ -8,8 +8,9 @@
  */
 RoomModel TemplateModel {
 
-	import room.basic.types.* from "platform:/resource/org.eclipse.etrice.modellib.c/model/Types.room"
-	import room.basic.service.timing.* from "platform:/resource/org.eclipse.etrice.modellib.c/model/TimingService.room"
+	import room.basic.types.*
+	import room.basic.service.timing.PTimer
+	import room.basic.service.timing.ATimingService
 
 	LogicalSystem LogSys {
 		SubSystemRef subSystemRef: SubSysClass

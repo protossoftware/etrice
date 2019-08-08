@@ -1,6 +1,7 @@
-RoomModel org.eclipse.etrice.examples.dynamicactors2 {
+RoomModel DynAct2 {
 	
-	import room.basic.types.* from "../../../org.eclipse.etrice.modellib.java/model/Types.room"
+	import room.basic.types.int32
+	import room.basic.types.string
 	
 	LogicalSystem LS {
 		SubSystemRef main: Main

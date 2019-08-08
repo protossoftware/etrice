@@ -1,6 +1,7 @@
 RoomModel Multiplicity {
 
-	import room.basic.types.* from "platform:/resource/org.eclipse.etrice.modellib.c/model/Types.room"
+	import room.basic.types.char
+	import room.basic.types.int16
 
 	ActorClass ExampleMultiplicity {
 		Structure {

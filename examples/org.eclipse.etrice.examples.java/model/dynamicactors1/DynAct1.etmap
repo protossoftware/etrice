@@ -1,6 +1,6 @@
-MappingModel DynTest {
-	import org.eclipse.etrice.examples.dynamicactors1.* from "DynAct1.room"
-	import org.eclipse.etrice.examples.dynamicactors1.* from "DynAct1.etphys"
+MappingModel DynAct1 {
+	import DynAct1.LS
+	import DynAct1.PhysSys1
 
 	Mapping LS -> PhysSys1 {
 		SubSystemMapping main -> nodeRef1 {

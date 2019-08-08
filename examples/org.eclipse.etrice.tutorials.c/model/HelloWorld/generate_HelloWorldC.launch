@@ -1,16 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="org.eclipse.etrice.generator.launch.c.launchConfigurationType">
+<booleanAttribute key="DataLogging" value="true"/>
 <booleanAttribute key="Debug" value="false"/>
 <booleanAttribute key="GenDocumentation" value="false"/>
 <booleanAttribute key="GenInstanceDiagram" value="false"/>
 <stringAttribute key="GenModelPath" value=""/>
+<booleanAttribute key="GenerateDepsWithinProject" value="true"/>
 <booleanAttribute key="Lib" value="false"/>
 <booleanAttribute key="MSC" value="true"/>
-<booleanAttribute key="DataLogging" value="true"/>
+<stringAttribute key="MainMethodName" value="main"/>
 <listAttribute key="ModelFiles">
+<listEntry value="${workspace_loc:/org.eclipse.etrice.tutorials.c/model/HelloWorld/Physical.etphys}"/>
 <listEntry value="${workspace_loc:/org.eclipse.etrice.tutorials.c/model/HelloWorld/Mapping.etmap}"/>
+<listEntry value="${workspace_loc:/org.eclipse.etrice.tutorials.c/model/HelloWorld/HelloWorld.room}"/>
 </listAttribute>
+<booleanAttribute key="OldStyleTransitionData" value="false"/>
+<booleanAttribute key="OverrideDirectories" value="false"/>
 <booleanAttribute key="SaveGenModel" value="false"/>
+<booleanAttribute key="UseTranslation" value="true"/>
 <booleanAttribute key="Verbose" value="false"/>
+<booleanAttribute key="cppFileExtensions" value="false"/>
 <stringAttribute key="org.eclipse.debug.core.ATTR_REFRESH_SCOPE" value="${workspace}"/>
 </launchConfiguration>

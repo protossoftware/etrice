@@ -1,4 +1,4 @@
-PhysicalModel org.eclipse.etrice.examples.dynamicactors6 {
+PhysicalModel DynAct6 {
 
 	PhysicalSystem PhysSys1 {
 		NodeRef nodeRef1 : NodeClass1

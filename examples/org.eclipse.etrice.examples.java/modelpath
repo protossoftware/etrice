@@ -1,0 +1,19 @@
+// modelpath description
+
+// HOWTO define source directory
+// srcDir <directory path>
+
+// HOWTO define project dependency
+// project <project name>
+
+srcDir model/dynamicactors1
+srcDir model/dynamicactors2
+srcDir model/dynamicactors3
+srcDir model/dynamicactors4
+srcDir model/dynamicactors5
+srcDir model/dynamicactors6
+srcDir model/dynamicactors7
+srcDir model/dynamicactors8
+srcDir model/dynamicactors9
+
+project org.eclipse.etrice.modellib.java

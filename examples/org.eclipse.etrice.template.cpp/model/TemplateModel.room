@@ -8,8 +8,9 @@
  */
 RoomModel TemplateModel {
 
-	import room.basic.types.* from "../../org.eclipse.etrice.modellib.cpp/model/Types.room"
-	import room.basic.service.timing.* from "../../org.eclipse.etrice.modellib.cpp/model/TimingService.room"
+	import room.basic.types.*
+	import room.basic.service.timing.PTimer
+	import room.basic.service.timing.ATimingService
 
 	LogicalSystem LogSys {
 		SubSystemRef subSystemRef: SubSysClass
@@ -31,9 +32,7 @@ RoomModel TemplateModel {
 			StateMachine {
 				Transition init: initial -> helloState
 				State helloState {
-					entry {
-						"printf(\"### Hello World! ###\\n\");"
-					}
+					entry '''printf("### Hello World! ###\n");'''
 				}
 			}
 		}

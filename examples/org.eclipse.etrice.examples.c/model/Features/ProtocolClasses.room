@@ -1,6 +1,7 @@
 RoomModel ProtocolClasses {
-
-	import room.basic.types.* from "platform:/resource/org.eclipse.etrice.modellib.c/model/Types.room"
+	
+	import room.basic.types.int16
+	import room.basic.types.int32
 
 	// eventdriven ProtocolClass (asynchronous message passing, bidirectional)
 	eventdriven ProtocolClass ProtocolClassEvt {

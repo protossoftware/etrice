@@ -11,6 +11,8 @@
 <booleanAttribute key="MSC" value="true"/>
 <stringAttribute key="MainMethodName" value="main"/>
 <listAttribute key="ModelFiles">
+<listEntry value="${workspace_loc:/org.eclipse.etrice.examples.java/model/dynamicactors9/DynAct9.room}"/>
+<listEntry value="${workspace_loc:/org.eclipse.etrice.examples.java/model/dynamicactors9/DynAct9.etphys}"/>
 <listEntry value="${workspace_loc:/org.eclipse.etrice.examples.java/model/dynamicactors9/DynAct9.etmap}"/>
 </listAttribute>
 <booleanAttribute key="OldStyleTransitionData" value="false"/>

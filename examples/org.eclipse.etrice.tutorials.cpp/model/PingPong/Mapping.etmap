@@ -5,8 +5,8 @@
  */
 MappingModel TemplateMapping {
 
-	import TemplatePhysical.* from "Physical.etphys"
-	import PingPongModel.* from "PingPong.room"
+	import TemplatePhysical.TemplatePhysicalSystem
+	import PingPong.LogSys
 
 	Mapping LogSys -> TemplatePhysicalSystem {
 		SubSystemMapping subSystemRef -> node {

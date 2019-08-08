@@ -1,0 +1,12 @@
+// modelpath description
+
+// HOWTO define source directory
+// srcDir <directory path>
+
+// HOWTO define project dependency
+// project <project name>
+
+srcDir model/HelloWorld
+srcDir model/PingPong
+
+project org.eclipse.etrice.modellib.c

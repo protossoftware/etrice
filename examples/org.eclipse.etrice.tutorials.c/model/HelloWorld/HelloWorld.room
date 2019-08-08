@@ -6,10 +6,10 @@
  *  Alt+B 		- open behavior diagram
  *  Alt+M 		- open textual editor (in diagrams)
  */
-RoomModel HelloWorldModel {
+RoomModel HelloWorld {
 
-	import room.basic.types.* from "platform:/resource/org.eclipse.etrice.modellib.c/model/Types.room"
-	import room.basic.service.timing.* from "platform:/resource//org.eclipse.etrice.modellib.c/model/TimingService.room"
+	import room.basic.types.*
+	import room.basic.service.timing.ATimingService
 
 	LogicalSystem LogSys {
 		SubSystemRef subSystemRef: SubSysClass

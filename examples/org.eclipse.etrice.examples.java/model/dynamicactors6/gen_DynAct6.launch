@@ -5,12 +5,14 @@
 <booleanAttribute key="Debug" value="false"/>
 <booleanAttribute key="GenDocumentation" value="false"/>
 <booleanAttribute key="GenInstanceDiagram" value="false"/>
-<stringAttribute key="GenModelPath" value="${workspace_loc:/org.eclipse.etrice.examples.java/model/dynamicactors6}/genmodel.rim"/>
+<stringAttribute key="GenModelPath" value="model/dynamicactors6/genmodel.rim"/>
 <booleanAttribute key="GenerateDepsWithinProject" value="true"/>
 <booleanAttribute key="Lib" value="false"/>
 <booleanAttribute key="MSC" value="true"/>
 <stringAttribute key="MainMethodName" value="main"/>
 <listAttribute key="ModelFiles">
+<listEntry value="${workspace_loc:/org.eclipse.etrice.examples.java/model/dynamicactors6/DynAct6.room}"/>
+<listEntry value="${workspace_loc:/org.eclipse.etrice.examples.java/model/dynamicactors6/DynAct6.etphys}"/>
 <listEntry value="${workspace_loc:/org.eclipse.etrice.examples.java/model/dynamicactors6/DynAct6.etmap}"/>
 </listAttribute>
 <booleanAttribute key="OldStyleTransitionData" value="false"/>

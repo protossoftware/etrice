@@ -1,0 +1,11 @@
+// modelpath description
+
+// HOWTO define source directory
+// srcDir <directory path>
+
+// HOWTO define project dependency
+// project <project name>
+
+srcDir model
+
+project org.eclipse.etrice.modellib.cpp

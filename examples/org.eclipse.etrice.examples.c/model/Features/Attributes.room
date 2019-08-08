@@ -1,6 +1,10 @@
 RoomModel Attributes {
 
-	import room.basic.types.* from "platform:/resource/org.eclipse.etrice.modellib.c/model/Types.room"
+	import room.basic.types.boolean
+	import room.basic.types.int16
+	import room.basic.types.int32
+	import room.basic.types.uint32
+	import room.basic.types.voidType
 
 	DataClass SimpleDataClass {
 		Attribute attribute1: int16

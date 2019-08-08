@@ -5,8 +5,8 @@
  */
 MappingModel TemplateMapping {
 	
-	import room.generic.physical.* from "../../../org.eclipse.etrice.modellib.java/model/GenericPhysical.etphys"
-	import PingPongModel.* from "PingPong.room"
+	import room.generic.physical.GenericPhysicalSystem
+	import PingPong.LogSys
 
 	Mapping LogSys -> GenericPhysicalSystem {
 		SubSystemMapping subSystemRef -> node {

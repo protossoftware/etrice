@@ -1,0 +1,16 @@
+// modelpath description
+
+// HOWTO define source directory
+// srcDir <directory path>
+
+// HOWTO define project dependency
+// project <project name>
+
+srcDir model/Features
+srcDir model/TrafficLight
+srcDir model/TrafficLight_step1
+srcDir model/TrafficLight_step2
+srcDir model/TrafficLight_step3
+srcDir model/TrafficLight_step4
+
+project org.eclipse.etrice.modellib.c

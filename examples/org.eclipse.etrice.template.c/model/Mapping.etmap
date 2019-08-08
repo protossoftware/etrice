@@ -5,8 +5,8 @@
  */
 MappingModel TemplateMapping {
 	
-	import TemplatePhysical.* from "Physical.etphys"
-	import TemplateModel.* from "TemplateModel.room"
+	import TemplatePhysical.TemplatePhysicalSystem
+	import TemplateModel.LogSys
 
 	Mapping LogSys -> TemplatePhysicalSystem {
 		SubSystemMapping subSystemRef -> node {

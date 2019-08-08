@@ -1,6 +1,8 @@
 RoomModel CommunicationAndExecutionTypes {
 
-	import room.basic.types.* from "platform:/resource/org.eclipse.etrice.modellib.c/model/Types.room"
+	import room.basic.types.int16
+	import room.basic.types.int32
+	import room.basic.types.uint32
 
 	DataClass AnotherSimpleDataClass {
 		Attribute attribute1: int16

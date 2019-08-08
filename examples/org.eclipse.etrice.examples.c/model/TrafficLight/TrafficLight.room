@@ -1,8 +1,12 @@
 RoomModel TrafficLight {
 
-	import room.basic.service.timing.* from "platform:/resource//org.eclipse.etrice.modellib.c/model/TimingService.room"
-	import room.basic.service.tcp.* from "platform:/resource/org.eclipse.etrice.modellib.c/model/TcpService.room"
-	import room.basic.types.* from "platform:/resource/org.eclipse.etrice.modellib.c/model/Types.room"
+	import room.basic.types.boolean
+	import room.basic.types.char
+	import room.basic.types.int32
+	import room.basic.service.timing.PTimer
+	import room.basic.service.tcp.PTcpPayload
+	import room.basic.service.tcp.PTcpControl
+	import room.basic.service.tcp.ATcpClient
 
 	ActorClass TestApplication ["The TestApplication contains the PedestrianTrafficLightController and its test harness."] {
 		Structure {

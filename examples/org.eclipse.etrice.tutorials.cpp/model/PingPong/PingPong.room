@@ -6,10 +6,11 @@
  *  Alt+B 		- open behavior diagram
  *  Alt+M 		- open textual editor (in diagrams)
  */
-RoomModel PingPongModel {
+RoomModel PingPong {
 
-	import room.basic.types.* from "../../../org.eclipse.etrice.modellib.cpp/model/Types.room"
-	import room.basic.service.timing.* from "../../../org.eclipse.etrice.modellib.cpp/model/TimingService.room"
+	import room.basic.types.*
+	import room.basic.service.timing.PTimer
+	import room.basic.service.timing.ATimingService
 
 	LogicalSystem LogSys {
 		SubSystemRef subSystemRef: SubSysClass
@@ -52,9 +53,7 @@ RoomModel PingPongModel {
 					}
 				}
 				State sendingPing {
-					entry {
-						"sendPort.ping();"
-					}
+					entry '''sendPort.ping();'''
 				}
 				State receivedPong
 			}
@@ -84,14 +83,10 @@ RoomModel PingPongModel {
 				}
 				State waitingForPing
 				State receivedPing {
-					entry {
-						"timingService.startTimeout(500);"
-					}
+					entry '''timingService.startTimeout(500);'''
 				}
 				State sentPong {
-					entry {
-						"recvPort.pong();"
-					}
+					entry '''recvPort.pong();'''
 				}
 			}
 		}
