@@ -103,6 +103,7 @@ Workflow {
                 // HOWTO: extension manager is added here (CAUTION: don't register with RoomPackage in the class since this makes it is called twice)
                 composedCheck = "org.eclipse.etrice.core.validation.ValidatorExtensionManager"
                 composedCheck = "org.eclipse.etrice.core.validation.RoomNamesAreUniqueValidator"
+                composedCheck = "org.eclipse.etrice.core.validation.InterfaceContractValidator"
             }
 
 			// scoping and exporting API

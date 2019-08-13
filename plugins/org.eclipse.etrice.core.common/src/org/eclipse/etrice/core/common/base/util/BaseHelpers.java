@@ -95,7 +95,7 @@ public class BaseHelpers {
 	public String getAttribute(List<Annotation> annotations, String name, String key) {
 		List<KeyValue> attributes = getAttributes(annotations, name);
 		for (KeyValue attrib : attributes) {
-			if (key.equals(attrib.getKey()))
+			if (key.equals(attrib.getKey()) && attrib.getValue() != null)
 				return literalToString(attrib.getValue());
 		}
 		return "";
@@ -150,7 +150,7 @@ public class BaseHelpers {
 		if (l instanceof StringLiteral) {
 			return ((StringLiteral)l).getValue();
 		}
-		assert(false): "unexpected sub type";
+		assert(false): "unexpected sub type: " + l;
 		return "";
 	}
 

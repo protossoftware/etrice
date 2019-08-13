@@ -55,8 +55,8 @@ public class ImportHelpers {
 	
 	@Inject IQualifiedNameConverter nameConverter;
 	@Inject ModelLocatorUriResolver importUriResolver;
-	@Inject IGlobalScopeProvider globalScope;			// visible/imported scope
-	@Inject IResourceDescriptions resourceDescriptions; // world/workspace scope
+	@Inject IGlobalScopeProvider globalScope;							// visible/imported scope
+	@Inject(optional = true) IResourceDescriptions resourceDescriptions; // world/workspace scope
 	
 	public ModelLocatorUriResolver getUriResolver() {
 		return importUriResolver;
@@ -66,14 +66,18 @@ public class ImportHelpers {
 	 *  Returns elements from workspace.
 	 */
 	public Iterable<IEObjectDescription> findInWorskpace(QualifiedName fqn, boolean ignoreCase) {
-		return resourceDescriptions.getExportedObjects(EOBJECT, fqn, ignoreCase);
+		return getWorkspaceDescriptions().getExportedObjects(EOBJECT, fqn, ignoreCase);
 	}
 	
 	/**
 	 *  Returns elements from workspace.
 	 */
 	public IResourceDescriptions getWorkspaceDescriptions() {
-		return resourceDescriptions;
+		if(resourceDescriptions != null) {
+			return resourceDescriptions;
+		}
+		
+		throw new IllegalStateException("workspace resource descriptions not set or available");
 	}
 	
 	/**

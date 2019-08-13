@@ -470,3 +470,75 @@ The PhysicalSystem is composed of NodeReferences which are instances of NodeClas
 The last model finally combines all this information by mapping logical to physical entities.
 
 The result of the mapping is also depicted in above [instance tree diagram](#room-instance-diagram) of the instances. All actor instances (the white boxes) are mapped to a node and a thread running on this node (shown as @*node* : *thread*).
+
+Interface Contracts
+------------
+
+An interface contract defines the behavioral semantics of an interface. In many languages like Java or C++ this is usually described in form of text comments. Textual descriptions are informal and have a vague expressiveness for complex behavior. Also it is difficult to leverage them for tooling or analysis.
+eTrice provides a formal description for interface protocols. This is shown by the example of `PLoginProtocol`. It is a stateful protocol that defines the login procedure of an ATM client and the ATM server back-end. 
+
+```room
+ProtocolClass PLoginProtocol {
+	incoming {
+		Message hello()
+		Message login(int16)
+		Message cancel()
+	}
+	outgoing {
+		Message hello()
+		Message wrong()
+		Message attemptsLimitReached()
+		Message ok()
+	}
+}
+```
+<img style="width: 100%;" src="images/050-InterfaceContractExample.png"/> 
+
+The implementing parties for this protocol must obey strict rules due security and compatibility reasons. For example, the client must initiate any interaction by sending the message `hello`. The server must then response in turn by `hello`. After that the client can `login` with an ID, which can be `wrong` (maximum 3 times) or `ok`. Also there are rules for `cancel` or `attemptsLimitReached` and the restart.
+In eTrice, these semantics can be expressed using a state machine. The full contract for `PLoginProtocol` is shown in the screenshot below.
+   
+<img style="width: 100%;" src="images/050-InterfaceContractFSM.png"/>
+
+### Defining Contracts
+
+The contract is defined using a regular state machine, which requires first an ActorClass. This actor must be annotated with `@InterfaceContractDefinition` including the attribute `protocol` to specify the interface protocol. Further, the actor must implement a pair of regular and conjugated ports of the protocol. These two ports represent the two implementing parties of the protocol. After that, the contract can be created as the behavior of the actor. Be reminded, that the state machine does not represent an implementation, but the valid interaction for the protocol. 
+
+```room
+ActorClass LoginProtocolContract {
+	@InterfaceContractDefinition(protocol = "PLoginProtocol")
+	Interface {
+		conjugated Port serverPort: PLoginProtocol
+		Port loginPort: PLoginProtocol
+	}
+	Structure {
+		external Port serverPort
+		external Port loginPort
+	}
+	Behavior {
+		StateMachine {
+			// the contract state machine goes here
+			// see diagram above
+		}
+	}
+```
+
+In addition the protocol can be annotated with `@InterfaceContract` to reference the contract. This is for documentation purpose or future static analysis.
+
+```room
+ProtocolClass PLoginProtocol {
+	@InterfaceContract(definedBy = "LoginProtocolContract")
+	// ...
+}
+```
+
+Both annotation can be found in the modellib under the namespace `etrice.api.contracts.definitions`.
+
+### Contract Monitor Generation
+
+It is possible to generate a monitor, that can check the contract at runtime. The generator transforms any contract to an ActorClass, which can be placed between the implementing parties to detect any violation of the contract.
+
+<img style="width: 100%;" src="images/050-InterfaceContractMonitor.png">
+
+The generator is called "eTrice Contract Monitor Generator". The usage is similar to the eTrice source code generators. By default the generated models are placed in the folder 'model-gen'. The name of the generated ActorClass can be adjusted in the contract annotation `@InterfaceContractDefinition` using the attribute `generatedMontiorName`.
+The generated monitor implements `PContractMonitorControl`, which can be used to query the violations status or to toggle the propagation of invalid messages. It can be found in the modellib under the namespace `etrice.api.contracts.monitors`.
+

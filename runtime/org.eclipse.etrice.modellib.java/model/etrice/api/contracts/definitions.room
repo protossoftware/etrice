@@ -1,10 +1,33 @@
+/**
+ * Annotations for defining interface (protocol) contracts.
+ */
 RoomModel etrice.api.contracts.definitions {
 	
+	/** 
+	 * The ActorClass state machine implements a contract for the given <em>protocol</em>.<br> 
+	 * See eTrice documentation
+	 *  <a href="https://www.eclipse.org/etrice/documentation/nightly/etrice-features.html#interface-contracts">Interface Contracts</a>.
+	 */
+	AnnotationType InterfaceContractDefinition {
+		target = ActorClass
+		/** The protocol for the contract - ports must be implemented (regular + conjugated) */
+		mandatory attribute protocol: ptCharacter
+		/** Optional custom generated name for the monitor */
+		optional attribute generatedMonitorName: ptCharacter
+	}
+	
+	/**
+	 * A marker annotation to set the contract for this ProtocolClass. 
+	 * This can used for documentation purpose or to enable future static analysis if available.
+	 * See eTrice documentation
+	 *  <a href="https://www.eclipse.org/etrice/documentation/nightly/etrice-features.html#interface-contracts">Interface Contracts</a>.
+	 */
 	AnnotationType InterfaceContract {
 		target = ProtocolClass
-		mandatory attribute definingActorClassName: ptCharacter
+		mandatory attribute definedBy: ptCharacter
 	}
 
+	/** Not implemented */
 	AnnotationType ValueRangeContract {
 		target = {
 			Transition, Message
@@ -12,6 +35,7 @@ RoomModel etrice.api.contracts.definitions {
 		mandatory attribute range: ptCharacter
 	}
 
+	/** Not implemented */
 	AnnotationType TimingContract {
 		target = State
 		mandatory attribute durationInMS: ptInteger

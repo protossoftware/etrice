@@ -15,20 +15,23 @@
 package org.eclipse.etrice.generator.contractmonitor.gen
 
 import com.google.inject.Inject
-import java.util.ArrayList
+import java.io.ByteArrayOutputStream
+import java.io.IOException
 import java.util.HashMap
 import java.util.LinkedList
 import java.util.List
 import java.util.Map
+import org.eclipse.emf.common.util.URI
+import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.etrice.core.common.base.BaseFactory
+import org.eclipse.etrice.core.common.base.util.ImportHelpers
 import org.eclipse.etrice.core.fsm.fSM.FSMFactory
 import org.eclipse.etrice.core.fsm.fSM.MessageFromIf
 import org.eclipse.etrice.core.fsm.fSM.State
 import org.eclipse.etrice.core.fsm.fSM.TriggeredTransition
 import org.eclipse.etrice.core.genmodel.fsm.ExtendedFsmGenBuilderFactory
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.CommonTrigger
-import org.eclipse.etrice.core.genmodel.fsm.fsmgen.GraphContainer
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.Node
 import org.eclipse.etrice.core.room.ActorClass
 import org.eclipse.etrice.core.room.Message
@@ -36,12 +39,21 @@ import org.eclipse.etrice.core.room.Port
 import org.eclipse.etrice.core.room.ProtocolClass
 import org.eclipse.etrice.core.room.RoomFactory
 import org.eclipse.etrice.core.room.RoomModel
-import org.eclipse.etrice.generator.contractmonitor.setup.GeneratorSettings
-import org.eclipse.etrice.generator.contractmonitor.util.ContractMonitorGeneratorHelpers
-import org.eclipse.xtext.util.Strings
 import org.eclipse.etrice.core.room.util.InterfaceContractHelpers
+import org.eclipse.etrice.core.room.util.RoomHelpers
+import org.eclipse.etrice.core.validation.InterfaceContractValidator
+import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
+import org.eclipse.xtext.naming.QualifiedName
 
+import static com.google.common.base.Verify.*
+import static org.eclipse.etrice.core.genmodel.fsm.FsmGenExtensions.*
+import static org.eclipse.etrice.core.room.RoomPackage.Literals.ACTOR_CLASS
+import static org.eclipse.xtext.util.Strings.newLine
+
+/** See validation {@link InterfaceContractValidator} */
 class MonitorActorGen {
+	
+	static val MONITOR_BASE_FQN = QualifiedName.create('etrice', 'api', 'contracts', 'monitors', 'AContractMonitorBase')
 	
 	@Inject BaseFactory baseFactory	
 	@Inject RoomFactory roomFactory	
@@ -49,137 +61,189 @@ class MonitorActorGen {
  	@Inject ExtendedFsmGenBuilderFactory fsmGenBuilderFactory
 	
 	@Inject InterfaceContractHelpers helpers
-	@Inject ContractMonitorGeneratorHelpers genHelpers	
-	@Inject GeneratorSettings generatorSettings
+	@Inject RoomHelpers roomHelpers
+	@Inject ImportHelpers importHelpers
 	
-	// requires target language options
-	public val detailCodeGen = new DetailCodeGen
+	def String serializeMonitors(RoomModel generatedMonitors, ResourceSet rs) {
+		val serializedModel = serialize(generatedMonitors, rs)
+		
+		// fallback to set contract base class with text replacement
+		// see #generateMonitor
+		serializedModel.replaceAll(
+			'''(ActorClass\s+[\w_]+)\s*\{''', 
+			'''$1 extends «MONITOR_BASE_FQN.toString» {'''
+		)
+	}
 	
-	def RoomModel generateMonitors(RoomModel model) {
-		val pc2Contract = model.protocolClasses.filter(ProtocolClass).toMap([it], [helpers.getInterfaceContractActorClass(it)])
+	private def String serialize(RoomModel model, ResourceSet rs) {
+		val oos = new ByteArrayOutputStream
+		
+		val res = rs.createResource(URI.createURI('''tmp:/«model.name».room'''));
+		res.contents.add(model);
+		try {		
+			res.save(oos, null);
+		} catch (IOException e) {
+			e.printStackTrace
+			throw e
+		} finally {
+			rs.resources.remove(res)
+		}
+		
+		'''
+			/** generated */
+			
+			«oos»
+		'''
+	}
+	
+	def RoomModel generateMonitors(RoomModel model) {	
 		roomFactory.createRoomModel => [
-			name = model.name + '_monitors'
-			imports += model.imports.map[EcoreUtil.copy(it)]
-			imports += baseFactory.createImport => [
-				importedNamespace = model.name + '.*'
+			it.name = model.name + '_monitors'
+			it.imports += model.imports.map[EcoreUtil.copy(it)]
+			it.imports += baseFactory.createImport => [
+				it.importedNamespace = model.name + '.*'
 			]
-			actorClasses += pc2Contract.values.filterNull.map[generateMonitor]
+			it.actorClasses += model.actorClasses.filter(ActorClass).filter[helpers.isContract(it)].map[contract |
+				generateMonitor(contract, verifyNotNull(helpers.getContractProtocol(contract)))
+			]
 		]
 	}
 	
-	protected def ActorClass generateMonitor(ActorClass contract) {	
-		val monitor = EcoreUtil.copy(contract) => [
-			name = name + '_GeneratedMonitor'
-		]
-		monitor.generateMessageForwardingCodeToMonitorActorClass
+	/** Generated monitor with extra information */
+	@FinalFieldsConstructor
+	protected static class MonitorDesc {	
+		public val ActorClass contract	
+		public val ProtocolClass contractProtocol
+		public val ActorClass monitor // <-- generated monitor class
+		public val Port regularPort
+		public val Port conjugatedPort
+	}
+	
+	protected def ActorClass generateMonitor(ActorClass contract, ProtocolClass contractProtocol) 
+	{	
+		// verify statements must be validated by room.InterfaceContractValidator
 		
+		// create monitor class - copy contract
+		val monitor = EcoreUtil.copy(contract) => [
+			it.name = helpers.getGeneratedMonitorName(contract)
+			
+			// remove obsolete annotation
+			it.annotations.removeIf[it.type.name == InterfaceContractHelpers.InterfaceContractDefinition_NAME]
+			
+			// set default monitor base class if no base class is present
+			// this only works if the class can be found on the model path
+			// see above #serializeMonitors for fallback
+			if(it.base === null) {				
+				it.base = importHelpers.getVisibleScope(contract.eResource, ACTOR_CLASS)
+					.getSingleElement(MONITOR_BASE_FQN)?.EObjectOrProxy as ActorClass
+			}
+		]
+		// pair of regular and conjugated ports of contract protocol	
+		val ports = helpers.getContractPorts(monitor, contractProtocol)
+		val regularPort = verifyNotNull(ports.key.head)
+		val conjugatedPort = verifyNotNull(ports.value.head)
+		
+		// transform state machine to implement monitor logic	
+		val monitorDesc = new MonitorDesc(contract, contractProtocol, monitor, regularPort, conjugatedPort)
+		verify(!monitorDesc.regularPort.conjugated)
+		verify(monitorDesc.conjugatedPort.conjugated)
+		
+		monitorDesc.transformStateMachine
+		
+		return monitor
+	}
+	
+	protected def void transformStateMachine(extension MonitorDesc monitorDesc) 
+	{
+		// forward messages from existing transitions of contract
+		monitorDesc.generateValidMessageForwarding
+		
+		// add catch transition for invalid messages
 		val fsmGenBuilder = fsmGenBuilderFactory.create
 		val graphContainer = fsmGenBuilder.createTransformedModel(monitor) => [ gc |
 			fsmGenBuilder.withCommonData(gc)
 			fsmGenBuilder.withTriggersInStates(gc)
 		]
-		generateCatchAllTranstionsToActorClass(graphContainer, monitor)
+		// currently only state supported
+		getAllNodes(graphContainer.graph).filter[it.stateGraphNode instanceof State].forEach[node | generateCatchAllTransitionToState(node, monitorDesc)]	
+	}
+	
+	protected def void generateValidMessageForwarding(extension MonitorDesc monitorDesc) 
+	{
+		val targetPorts = #{regularPort, conjugatedPort}
+		val allTransitions = roomHelpers.getAllTransitionsRecursive(roomHelpers.getActualStateMachine(monitor))
+		val filteredTransition = allTransitions.filter(TriggeredTransition).filter[tr |
+			tr.triggers.map[it.msgFromIfPairs.map[it.from]].flatten.forall[ifItem | targetPorts.contains(ifItem)]
+		]
 		
-		return monitor
+		filteredTransition.forEach[tr |
+			generateMessageForwarding(tr, true, monitorDesc)
+		]
 	}
 	
-	protected def generateMessageForwardingCodeToMonitorActorClass(ActorClass monitorActorClass)
+	protected def generateMessageForwarding(TriggeredTransition transition, boolean valid, extension MonitorDesc monitorDesc)
 	{
-		for (transition : monitorActorClass.stateMachine.transitions.filter[it instanceof TriggeredTransition])
-		{
-			generateMessageForwardingCodeToTransition(transition as TriggeredTransition)
-		}
-	}
-	
-	protected def generateMessageForwardingCodeToTransition(TriggeredTransition transition)
-	{
-		var sendMessageDetailCodeLines = new LinkedList<String>
-		for (trigger : transition.triggers)
-		{
-			for (msgFromInterface : trigger.msgFromIfPairs)
-			{
-				var sendMessageStatement = buildMessageForwardStatement(msgFromInterface)
-				if (sendMessageStatement !== null)
-				{
-					sendMessageDetailCodeLines.add(sendMessageStatement)
+		// TODO check if this is wrong - multiple forwards in single transition ???
+		val forwards = transition.triggers.map[it.msgFromIfPairs].flatten.map[
+			buildMessageForwardStatement(it, monitorDesc)
+		].join(newLine)	
+		
+		if(valid) {
+			addActionCodeToTriggeredTransition(transition, forwards)	
+		} else {
+			addActionCodeToTriggeredTransition(transition, '''
+				if(forwardInvalidMessages) {
+					«forwards»
 				}
-			}
+			''')	
+		}
+	}	
+	
+	protected def buildMessageForwardStatement(MessageFromIf msgFromInterface, extension MonitorDesc monitorDesc) 
+	{
+		val forwardPort = switch msgFromInterface.from {
+			case regularPort: conjugatedPort
+			case conjugatedPort: regularPort
+			default: throw new IllegalArgumentException('')
+		}
+		var originalMessage = msgFromInterface.message as Message
+		var messageName = originalMessage.name
+		var parameterName = ""
+		if (originalMessage.data !== null)
+		{
+			parameterName = "transitionData"
 		}
 		
-		if(generatorSettings.forwardInvalidMessages) {
-			addActionCodeToTriggeredTransition(transition, sendMessageDetailCodeLines.join(Strings.newLine))
-		}
+		return forwardPort.name + "." + messageName + "(" + parameterName + ");"
 	}
 	
-	
-	
-	protected def buildMessageForwardStatement(MessageFromIf msgFromInterface)
-	{
+	protected def generateCatchAllTransitionToState(Node state, extension MonitorDesc monitorDesc) {
+		val messageToTriggerMap = state.outgoingTriggersByMessage
 		
-		if (msgFromInterface.from instanceof Port && msgFromInterface.message instanceof Message)
-		{
-			var forwardPortName = generatorSettings.toConjugatedPortName
-			if (msgFromInterface.from.name == generatorSettings.toConjugatedPortName)
-			{
-				forwardPortName = generatorSettings.toUnconjugatedPortName
-			}
-			var originalMessage = msgFromInterface.message as Message
-			var messageName = originalMessage.name
-			var parameterName = ""
-			if (originalMessage.data !== null)
-			{
-				parameterName = "transitionData"
-			}
-			
-			return forwardPortName + "." + messageName + "(" + parameterName + ");"
-		}
-		return null
-	}
-	
-	protected def generateCatchAllTranstionsToActorClass(GraphContainer gc, ActorClass ac)
-	{
-		for (state : gc.graph.nodes)
-		{
-			state.generateCatchAllTransitionToState(gc, ac)
-		}
-	}
-	
-	protected def generateCatchAllTransitionToState(Node state, GraphContainer gc, ActorClass ac)
-	{
-		var messageToTriggerMap = state.outgoingTriggersByMessage
-		var inPort = genHelpers.getMonitorInPort(ac)
-		var outPort = genHelpers.getMonitorOutPort(ac)
-				
-		for (message : (inPort.protocol as ProtocolClass).incomingMessages)
-		{
-			message.generateCatchTransitionForMessageToState(outPort, state, messageToTriggerMap)
+		for (message : roomHelpers.getAllIncomingMessages(contractProtocol)) {
+			message.generateCatchTransitionForMessageToState(regularPort, state, messageToTriggerMap, monitorDesc)
 		}
 		
-		for (message : (inPort.protocol as ProtocolClass).outgoingMessages)
-		{
-			message.generateCatchTransitionForMessageToState(inPort, state, messageToTriggerMap)
+		for (message : roomHelpers.getAllOutgoingMessages(contractProtocol)) {
+			message.generateCatchTransitionForMessageToState(conjugatedPort, state, messageToTriggerMap, monitorDesc)
 		}
 	}
 	
-	protected def generateCatchTransitionForMessageToState(Message message, Port port, Node state, Map<Message, List<CommonTrigger>> messageToTriggerMap)
+	protected def generateCatchTransitionForMessageToState(Message message, Port port, Node state, Map<Message, 
+		List<CommonTrigger>> messageToTriggerMap, extension MonitorDesc monitorDesc
+	)
 	{
-		var triggers = messageToTriggerMap.getOrDefault(message, new ArrayList(0))
+		val triggers = messageToTriggerMap.getOrDefault(message, emptyList)
 		var noOfUnguardedTriggers = triggers.filter[!it.hasGuard].size
 		if (noOfUnguardedTriggers == 0)
 		{
-			var inOutStr = "from_" + generatorSettings.toConjugatedPortName
-			if (port.conjugated)
-			{
-				inOutStr = "from_" + generatorSettings.toUnconjugatedPortName
-			}
+			val inOutStr = "from_" + port.name
 			var transitionName = state.stateGraphNode.name + "_catch_" + inOutStr + "_" + message.name
 			var catchTransition = createTriggeredTransition(message, port, state, state, transitionName)
 			
-			// TODO status and control protocol
-//			addActionCodeToTriggeredTransition(catchTransition, "_violations++;")
-			addMSCCommentToTriggeredTransition(catchTransition, buildProtocolErrorString(port, message, state), true)
+			addActionCodeToTriggeredTransition(catchTransition, '''onViolation("«buildProtocolErrorString(port, message, state)»");''')
 			
-			generateMessageForwardingCodeToTransition(catchTransition)
+			generateMessageForwarding(catchTransition, false, monitorDesc)
 			
 			state.graph.stateGraph.transitions.add(catchTransition)
 		}
@@ -189,7 +253,8 @@ class MonitorActorGen {
 	{
 		var protocolName = fromPort.protocol.name
 		return "[Protocol ERROR] In protocol " + protocolName + " message " + message.name + " from port " + fromPort.name 
-			+ " is not allowed in state " + fromState.stateGraphNode.name }
+			+ " is not allowed in state " + fromState.stateGraphNode.name 
+	}
 	
 	protected def createTriggeredTransition(Message message, Port port, Node from, Node to, String transitionName)
 	{
@@ -213,12 +278,6 @@ class MonitorActorGen {
 		return triggeredTransition
 	}
 	
-	protected def addMSCCommentToTriggeredTransition(TriggeredTransition transition, String mscComment, boolean addLocation)
-	{
-		var mscActionCode = detailCodeGen.mscComment(mscComment, addLocation)
-		addActionCodeToTriggeredTransition(transition, mscActionCode)
-	}
-	
 	protected def addActionCodeToTriggeredTransition(TriggeredTransition transition, String actionCode)
 	{
 		if (transition.action === null)
@@ -237,9 +296,9 @@ class MonitorActorGen {
 		}
 	}
 	
-	protected def getOutgoingTriggersByMessage(Node state)
+	protected def Map<Message, List<CommonTrigger>> getOutgoingTriggersByMessage(Node state)
 	{
-		var map = new HashMap<Message, List<CommonTrigger>>
+		val map = new HashMap<Message, List<CommonTrigger>>
 		for (trigger : state.caughtTriggers)
 		{
 			if (!map.containsKey(trigger.msg))

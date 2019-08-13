@@ -22,10 +22,7 @@ public class ContractMonitorGeneratorMainTab extends GeneratorMainTab {
 	 */
 	@Override
 	protected boolean isValidModelFile(IResource resource) {
-		return resource.getName().endsWith(".room")
-				|| resource.getName().endsWith(".config")
-				|| resource.getName().endsWith(".etphys")
-				|| resource.getName().endsWith(".etmap");
+		return resource.getName().endsWith(".room") || resource.getName().endsWith(".etmap");
 	}
 
 }

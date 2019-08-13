@@ -14,54 +14,89 @@
 
 package org.eclipse.etrice.core.room.util
 
+import com.google.common.base.Strings
 import com.google.inject.Inject
+import java.util.List
+import org.eclipse.emf.ecore.EClass
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.etrice.core.common.base.util.ImportHelpers
 import org.eclipse.etrice.core.room.ActorClass
+import org.eclipse.etrice.core.room.GeneralProtocolClass
+import org.eclipse.etrice.core.room.Port
 import org.eclipse.etrice.core.room.ProtocolClass
 import org.eclipse.etrice.core.room.RoomModel
+import org.eclipse.etrice.core.room.RoomPackage
 import org.eclipse.xtext.naming.IQualifiedNameConverter
 import org.eclipse.xtext.naming.IQualifiedNameProvider
-import org.eclipse.xtext.scoping.IGlobalScopeProvider
-
-import static org.eclipse.etrice.core.room.RoomPackage.Literals.ACTOR_REF__TYPE
-import org.eclipse.etrice.core.room.GeneralProtocolClass
+import org.eclipse.etrice.core.room.RoomClass
 
 /**
- *  See room annotation 'InterfaceContract'
+ *  See modellib etrice.api.contracts.*
  */
 class InterfaceContractHelpers {
 
-	public static val InterfaceContract_ANNOTATION = "InterfaceContract"
-	public static val MonitorClass_KEY = "definingActorClassName"
+	public static val InterfaceContract_NAME= "InterfaceContract"
+	public static val ContractClass_KEY = "definedBy"
+	
+	public static val InterfaceContractDefinition_NAME = "InterfaceContractDefinition"
+	public static val Protocol_KEY = "protocol"
+	public static val GeneratedMonitorName_KEY = "generatedMonitorName"
 
 	@Inject RoomHelpers roomHelpers
-	@Inject IGlobalScopeProvider scopeProvicer
+	@Inject ImportHelpers importHelpers
 	@Inject IQualifiedNameConverter fqnConverter
 	@Inject IQualifiedNameProvider fqnProvider
 	
 	def boolean hasContract(GeneralProtocolClass pc) {
-		roomHelpers.isAnnotationPresent(pc.annotations, InterfaceContract_ANNOTATION)
+		roomHelpers.isAnnotationPresent(pc.annotations, InterfaceContract_NAME)
+	}
+	
+	def boolean isContract(ActorClass ac) {
+		roomHelpers.isAnnotationPresent(ac.annotations, InterfaceContractDefinition_NAME)
 	}
 
 	def ActorClass getInterfaceContractActorClass(ProtocolClass pc) {
-		if (pc.hasContract) {
-			val actorClassNameString = roomHelpers.getAttribute(pc.annotations, InterfaceContract_ANNOTATION, MonitorClass_KEY)
-			if(actorClassNameString !== null) {
-				return findActorClassForName(actorClassNameString, pc.eContainer as RoomModel)	
-			}
+		val name = roomHelpers.getAttribute(pc.annotations, InterfaceContract_NAME, ContractClass_KEY)
+		if(!Strings.isNullOrEmpty(name)) {
+			return findClassForName(name, RoomPackage.Literals.ACTOR_CLASS, pc.eContainer as RoomModel) as ActorClass	
 		}
 	}
+	
+	def ProtocolClass getContractProtocol(ActorClass ac) {
+		val name = roomHelpers.getAttribute(ac.annotations, InterfaceContractDefinition_NAME, Protocol_KEY)
+		if(!Strings.isNullOrEmpty(name)) {
+			return findClassForName(name, RoomPackage.Literals.PROTOCOL_CLASS, ac.eContainer as RoomModel) as ProtocolClass 	
+		}
+	}
+	
+	def String getGeneratedMonitorName(ActorClass ac) {
+		val userName = roomHelpers.getAttribute(ac.annotations, InterfaceContractDefinition_NAME, GeneratedMonitorName_KEY)
+		return if(!Strings.isNullOrEmpty(userName))
+			userName
+		else
+			ac.name + '_GeneratedMontior'
+	}
+	
+	/** returns list of regularPorts and conjugatedPorts of contract protocol */
+	def Pair<List<Port>, List<Port>> getContractPorts(ActorClass ac, ProtocolClass contractProtocol) {
+		val allPorts = roomHelpers.getAllEndPorts(ac)
+		val List<Port> regularPorts = newArrayList(allPorts.filter[it.protocol == contractProtocol && !it.conjugated])
+		val List<Port> conjugatedPorts = newArrayList(allPorts.filter[it.protocol == contractProtocol && it.conjugated])
+		
+		regularPorts -> conjugatedPorts
+	}
 
-	def private ActorClass findActorClassForName(String name, RoomModel currentModel) {	
+	def private EObject findClassForName(String name, EClass type, RoomModel currentModel) {	
 		val fqn = fqnConverter.toQualifiedName(name)
 		val modelFQN = fqnProvider.getFullyQualifiedName(currentModel)
 		
 		if(fqn.segmentCount == 1 || fqn.startsWith(modelFQN)) {
 			// search locally
-			currentModel.actorClasses.findFirst[it.name == fqn.lastSegment]
+			currentModel.eContents.filter[type.isSuperTypeOf(it.eClass)].filter(RoomClass).findFirst[it.name == fqn.lastSegment]
 		}
 		else if (currentModel.eResource !== null) {
 			// search globally		
-			scopeProvicer.getScope(currentModel.eResource, ACTOR_REF__TYPE, [true]).getSingleElement(fqn)?.EObjectOrProxy as ActorClass
+			importHelpers.getVisibleScope(currentModel.eResource, type).getSingleElement(fqn)?.EObjectOrProxy
 		}
 	}
 }
