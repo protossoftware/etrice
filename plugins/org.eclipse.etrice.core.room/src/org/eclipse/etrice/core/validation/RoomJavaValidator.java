@@ -495,7 +495,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 		//boolean synchronous = ac.getCommType() == ComponentCommunicationType.SYNCHRONOUS;
 
 		for(InterfaceItem item : items){
-			ProtocolClass pc = roomHelpers.getProtocol(item);
+			ProtocolClass pc = roomHelpers.getRoomProtocol(item);
 			if (pc!=null)
 				switch(pc.getCommType()){
 					case DATA_DRIVEN:
@@ -679,7 +679,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	@Check
 	public void checkMessageFromIf(MessageFromIf mfi){
 		if (mfi.getFrom() != null){
-			ProtocolClass protocol = roomHelpers.getProtocol((InterfaceItem)mfi.getFrom());
+			ProtocolClass protocol = roomHelpers.getRoomProtocol((InterfaceItem)mfi.getFrom());
 			if (protocol!=null && !protocol.eIsProxy()) {
 				if (protocol.getCommType() != CommunicationType.EVENT_DRIVEN)
 					error("port must have event driven protocol", mfi, FSMPackage.eINSTANCE.getMessageFromIf_From());

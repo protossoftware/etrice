@@ -165,7 +165,7 @@ class DetailExpressionProvider implements IDetailExpressionProvider {
 			// everything that contains RefableType
 			val refableContainers = switch cls {
 				ActorClass:
-					cls.allInterfaceItems.map[protocol].filterNull.toHashSet.map[classHierarchy].flatten + cls.attributes + cls.operations
+					cls.allInterfaceItems.map[roomProtocol].filterNull.toHashSet.map[classHierarchy].flatten + cls.attributes + cls.operations
 				ProtocolClass:
 					#[cls] + cls.classHierarchy
 				DataClass:
@@ -231,7 +231,7 @@ class DetailExpressionProvider implements IDetailExpressionProvider {
 		
 		switch obj : ctx.data {
 			Port case obj.multiplicity == 1/* fall through  */,
-			SAP: scope += obj.protocol.getAllOperations(!obj.conjugated).map[createExprFeature]
+			SAP: scope += obj.roomProtocol.getAllOperations(!obj.conjugated).map[createExprFeature]
 		}
 		switch obj : ctx.data {
 			InterfaceItem:
@@ -266,7 +266,7 @@ class DetailExpressionProvider implements IDetailExpressionProvider {
 			case CP_BRANCH_TRANSITION__CONDITION,
 			case GUARDED_TRANSITION__GUARD,
 			case GUARD__GUARD: {
-				val pc = ifItem.protocol
+				val pc = ifItem.roomProtocol
 				switch pc?.commType {
 					case DATA_DRIVEN:
 						if (!ifItem.conjugated) scope += pc.allIncomingMessages.map[createExprFeature]
@@ -275,7 +275,7 @@ class DetailExpressionProvider implements IDetailExpressionProvider {
 				}
 			}
 			case owner.isInContainment(StateGraphItem): {
-				val pc = ifItem.protocol
+				val pc = ifItem.roomProtocol
 				switch pc?.commType {
 					case EVENT_DRIVEN:
 						scope += pc.getAllMessages(ifItem.conjugated).map[createExprFeature]

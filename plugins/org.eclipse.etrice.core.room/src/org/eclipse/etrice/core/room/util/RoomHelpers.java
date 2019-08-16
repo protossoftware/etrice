@@ -474,8 +474,8 @@ public class RoomHelpers extends FSMHelpers {
 	 * @return a list of all incoming {@link Message}s of this item
 	 */
 	public List<Message> getIncoming(InterfaceItem item) {
-		if (getProtocol(item)!=null)
-			return getAllMessages(getProtocol(item), !isConjugated(item));
+		if (getRoomProtocol(item)!=null)
+			return getAllMessages(getRoomProtocol(item), !isConjugated(item));
 		else
 			return Collections.emptyList();
 	}
@@ -485,8 +485,8 @@ public class RoomHelpers extends FSMHelpers {
 	 * @return a list of all outgoing {@link Message}s of this item
 	 */
 	public List<Message> getOutgoing(InterfaceItem item) {
-		if (getProtocol(item)!=null)
-			return getAllMessages(getProtocol(item), isConjugated(item));
+		if (getRoomProtocol(item)!=null)
+			return getAllMessages(getRoomProtocol(item), isConjugated(item));
 		else
 			return Collections.emptyList();
 	}
@@ -989,6 +989,21 @@ public class RoomHelpers extends FSMHelpers {
 		return null;
 	}
 
+	/** 
+	 * first container of type {@link StructureClass}
+	 * @param obj
+	 * @return StructureClass container
+	 */
+	public StructureClass getStructureClass(EObject obj) {
+		EObject ctx = obj.eContainer();
+		while (!(ctx instanceof StructureClass) && ctx.eContainer() != null)
+			ctx = ctx.eContainer();
+		if (ctx instanceof StructureClass)
+			return (StructureClass) ctx;
+		else
+			return null;
+	}
+
 	/**
 	 * @param obj an {@link EObject}
 	 * @return the {@link RoomClass} containing this object or null
@@ -1334,7 +1349,7 @@ public class RoomHelpers extends FSMHelpers {
 	 *
 	 * @return the {@link ProtocolClass} of an {@link InterfaceItem}
 	 */
-	public ProtocolClass getProtocol(InterfaceItem item) {
+	public ProtocolClass getRoomProtocol(InterfaceItem item) {
 		GeneralProtocolClass pc = getGeneralProtocol(item);
 		if (pc instanceof ProtocolClass)
 			return (ProtocolClass) pc;
@@ -1349,7 +1364,7 @@ public class RoomHelpers extends FSMHelpers {
 	 * @return {@code true} if the interface item is data driven (i.e. has a data driven {@link ProtocolClass}
 	 */
 	public boolean isDataDriven(InterfaceItem item) {
-		ProtocolClass pc = getProtocol(item);
+		ProtocolClass pc = getRoomProtocol(item);
 		if (pc!=null && pc.getCommType()==CommunicationType.DATA_DRIVEN)
 			return true;
 
@@ -1505,6 +1520,21 @@ public class RoomHelpers extends FSMHelpers {
 		}
 
 		return result;
+	}
+
+	/** 
+	 * first container of type {@link ActorClass}
+	 * @param obj
+	 * @return ActorClass container
+	 */
+	public ActorContainerClass getActorContainerClass(EObject obj) {
+		EObject ctx = obj.eContainer();
+		while (!(ctx instanceof ActorContainerClass) && ctx.eContainer() != null)
+			ctx = ctx.eContainer();
+		if (ctx instanceof ActorContainerClass)
+			return (ActorContainerClass)ctx;
+		return
+			null;
 	}
 
 	/**

@@ -117,7 +117,7 @@ public class PortMessageSelectionDialog extends FormDialog implements ISelection
 							pairs.add(new MsgItemPair(item, msg, true));
 					}
 				}
-				if (roomHelpers.getProtocol(item).getCommType()==CommunicationType.DATA_DRIVEN) {
+				if (roomHelpers.getRoomProtocol(item).getCommType()==CommunicationType.DATA_DRIVEN) {
 					List<Message> in = roomHelpers.getMessageListDeep(item, false);
 					for (Message msg : in) {
 						if (!msg.isPriv())

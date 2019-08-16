@@ -128,7 +128,7 @@ public class TransitionPropertyDialog extends AbstractMemberAwarePropertyDialog 
 		
 		RoomHelpers roomHelpers = SupportUtil.getInstance().getRoomHelpers();
 		for(InterfaceItem item : roomHelpers.getAllInterfaceItems(ac)){
-			ProtocolClass pc = roomHelpers.getProtocol(item);
+			ProtocolClass pc = roomHelpers.getRoomProtocol(item);
 			if(pc != null && pc.getCommType() == CommunicationType.EVENT_DRIVEN)
 				interfaceItems.add(item);
 		}

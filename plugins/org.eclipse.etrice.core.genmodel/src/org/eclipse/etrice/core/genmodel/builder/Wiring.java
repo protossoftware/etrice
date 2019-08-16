@@ -107,7 +107,7 @@ public class Wiring {
 				rsize = ar.getMultiplicity();
 			}
 			
-			ProtocolClass pc = roomHelpers.getProtocol(port);
+			ProtocolClass pc = roomHelpers.getRoomProtocol(port);
 			boolean implicitMany = pc==null || pc.getCommType() == CommunicationType.DATA_DRIVEN;
 			if (implicitMany)
 				psize = -1;

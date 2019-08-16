@@ -102,7 +102,7 @@ class DetailExpressionProposalConfig{
 			Attribute:
 				typedInfo = data?.type?.type?.name
 			InterfaceItem:
-				typedInfo = roomHelpers.getProtocol(data)?.name
+				typedInfo = roomHelpers.getRoomProtocol(data)?.name
 //			RuntimeMethodExpressionData case feature.id == RuntimeDetailExpressionProvider.RT_METHOD_GET_REPLICATION:
 //				typedInfo = 'int'
 			VarDecl: {
