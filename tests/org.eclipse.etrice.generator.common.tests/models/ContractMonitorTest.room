@@ -5,7 +5,19 @@ RoomModel ContractMonitorTest {
 	import room.basic.test.TestInstance
 	import ContractMonitor.*
 	import room.basic.service.timing.ATimingService
+	import etrice.api.contracts.monitors.PContractMonitorControl
+	import ContractMonitor_monitors.LoginProtocolMonitor
 
+	ProtocolClass PClientTest {
+		incoming {
+			Message startCase(int16)
+		}
+		outgoing {
+			Message done()
+		}
+	}
+
+	/** Valid round-trip */
 	ActorClass ContractMonitor_Top {
 		@TestInstance
 		Structure {
@@ -17,12 +29,30 @@ RoomModel ContractMonitorTest {
 
 	ActorClass Appl {
 		Structure {
-			ActorRef client: Client
-			ActorRef provider: Provider
-			ActorRef monitor: ContractMonitor_monitors.LoginProtocolContract_GeneratedMonitor
 
-			Binding provider.fct and monitor.toUnconjugated
-			Binding monitor.toConjugated and client.loginPort
+			// valid client
+			ActorRef validTestCaseRef: AValidClientTestContainer
+			conjugated Port validClientTest: PClientTest
+			conjugated Port validClientMonitor: PContractMonitorControl
+			Binding validTestCaseRef.test_ctrl and validClientTest
+			Binding validTestCaseRef.monitor_ctrl and validClientMonitor
+
+			// bad client
+			ActorRef badTestCaseRef: ABadClientTestContainer
+			conjugated Port badClientTest: PClientTest
+			conjugated Port badClientMonitor: PContractMonitorControl
+			Binding badTestCaseRef.test_ctrl and badClientTest
+			Binding badTestCaseRef.monitor_ctrl and badClientMonitor
+
+			// bad client 2
+			ActorRef badTestCaseRef2: ABadClient2TestContainer
+			conjugated Port badClientTest2: PClientTest
+			conjugated Port badClientMonitor2: PContractMonitorControl
+			Binding badTestCaseRef2.test_ctrl and badClientTest2
+			Binding badTestCaseRef2.monitor_ctrl and badClientMonitor2
+
+			Attribute caseId: int16
+			Attribute violationCounter: int16
 		}
 		Behavior {
 			ctor '''
@@ -33,33 +63,162 @@ RoomModel ContractMonitorTest {
 				etUnit_closeTestSuite();
 				etUnit_close();
 			'''
+			StateMachine {
+				State startValidClient {
+					entry '''
+						caseId = (short) etUnit_openTestCase("ValidClient");
+						validClientTest.startCase(caseId);
+					'''
+				}
+				State requestViolations {
+				}
+				Transition init0: initial -> startValidClient {
+				}
+				Transition tr0: startValidClient -> requestViolations {
+					triggers {
+						<done: validClientTest>
+					}
+					action '''validClientMonitor.getAndResetStatus();'''
+				}
+				Transition tr1: startValidClient -> startValidClient {
+					triggers {
+						<violationOccured: validClientMonitor>
+					}
+					action '''violationCounter++;'''
+				}
+				State testDone {
+					entry '''etUnit_testFinished(caseId);'''
+				}
+				Transition tr2: requestViolations -> startBadClient {
+					triggers {
+						<violationStatus: validClientMonitor>
+					}
+					action '''
+						EXPECT_FALSE(caseId, "", transitionData);
+						EXPECT_EQUAL_INT32(caseId, "", 0, violationCounter);
+						etUnit_closeTestCase(caseId);'''
+				}
+				State startBadClient {
+					entry '''
+						violationCounter = 0;
+						caseId = (short) etUnit_openTestCase("BadClient");
+						badClientTest.startCase(caseId);
+					'''
+				}
+				State requestViolation2 {
+					entry '''badClientMonitor.getAndResetStatus();'''
+				}
+				Transition tr4: startBadClient -> requestViolation2 {
+					triggers {
+						<violationOccured: badClientMonitor>
+					}
+					action '''violationCounter++;'''
+				}
+				Transition tr5: requestViolation2 -> startBadClient2 {
+					triggers {
+						<violationStatus: badClientMonitor>
+					}
+					action '''
+						EXPECT_TRUE(caseId, "", transitionData);
+						EXPECT_EQUAL_INT32(caseId, "", 1, violationCounter);
+						etUnit_closeTestCase(caseId);'''
+				}
+				State startBadClient2 {
+					entry '''
+						violationCounter = 0;
+						caseId = (short) etUnit_openTestCase("BadClient2");
+						badClientTest2.startCase(caseId);
+					'''
+				}
+				State requestViolation3 {
+					entry '''badClientMonitor2.getAndResetStatus();'''
+				}
+				Transition tr3: startBadClient2 -> requestViolation3 {
+					triggers {
+						<violationOccured: badClientMonitor2>
+					}
+					action '''violationCounter++;'''
+				}
+				Transition tr6: requestViolation3 -> testDone {
+					triggers {
+						<violationStatus: badClientMonitor2>
+					}
+					action '''
+						EXPECT_TRUE(caseId, "", transitionData);
+						EXPECT_EQUAL_INT32(caseId, "", 1, violationCounter);
+						etUnit_closeTestCase(caseId);'''
+				}
+			}
 		}
 	}
 
-	ActorClass Client {
+	ActorClass AValidClientTestContainer {
+		Interface {
+			Port test_ctrl: PClientTest
+			Port monitor_ctrl: PContractMonitorControl
+		}
+		Structure {
+			ActorRef validClient: AValidClient
+			ActorRef provider: AProvider
+			ActorRef monitor: LoginProtocolMonitor
+			Binding provider.serverPort and monitor.serverPort
+			Binding monitor.loginPort and validClient.loginPort
+			Binding validClient.testCtrl and test_ctrl
+			Binding monitor_ctrl and monitor.monitor_ctrl
+		}
+	}
+
+	ActorClass ABadClientTestContainer {
+		Interface {
+			Port test_ctrl: PClientTest
+			Port monitor_ctrl: PContractMonitorControl
+		}
+		Structure {
+			ActorRef validClient: ABadClient
+			ActorRef provider: AProvider
+			ActorRef monitor: LoginProtocolMonitor
+			Binding provider.serverPort and monitor.serverPort
+			Binding monitor.loginPort and validClient.loginPort
+			Binding validClient.testCtrl and test_ctrl
+			Binding monitor_ctrl and monitor.monitor_ctrl
+		}
+	}
+
+	ActorClass ABadClient2TestContainer {
+		Interface {
+			Port test_ctrl: PClientTest
+			Port monitor_ctrl: PContractMonitorControl
+		}
+		Structure {
+			ActorRef validClient: ABadClient2
+			ActorRef provider: AProvider
+			ActorRef monitor: LoginProtocolMonitor
+			Binding provider.serverPort and monitor.serverPort
+			Binding monitor.loginPort and validClient.loginPort
+			Binding validClient.testCtrl and test_ctrl
+			Binding monitor_ctrl and monitor.monitor_ctrl
+		}
+	}
+
+	ActorClass AValidClient {
 
 		Interface {
-			conjugated Port loginPort: LoginProtocol
+			conjugated Port loginPort: PLoginProtocol
+			Port testCtrl: PClientTest
 		}
 		Structure {
 			external Port loginPort
-			SAP toTimer: PTimer
-			Attribute counter: int32 = "0"
+			external Port testCtrl
 		}
 		Behavior {
 			StateMachine {
-				State connecting {
-					entry '''counter += 1;'''
-				}
-				Transition init0: initial -> connecting {
-					action '''						
-						loginPort.hello();
-					'''
+				State connecting
+				Transition init0: initial -> testIdle {
 				}
 				State request1Sent
 				State request2Sent
 				State testDone {
-					entry '''etUnit_testFinished(0);'''
+					entry '''testCtrl.done();'''
 				}
 				Transition tr0: connecting -> request1Sent {
 					triggers {
@@ -73,42 +232,163 @@ RoomModel ContractMonitorTest {
 					}
 					action '''loginPort.login((short)1);'''
 				}
-				Transition tr2: request4Sent -> connecting {
-					triggers {
-						<ok: loginPort guard '''counter < 1'''>
-					}
-					action '''loginPort.hello();'''
-				}
-				Transition tr3: request4Sent -> testDone {
-					triggers {
-						<wrong: loginPort guard '''counter >= 1'''>
-					}
-				}
-				State request3Sent
-				State request4Sent
+
 				Transition tr4: request2Sent -> request3Sent {
 					triggers {
 						<wrong: loginPort>
 					}
 					action '''loginPort.login((short)5);'''
 				}
-				Transition tr5: request3Sent -> request4Sent {
+
+				Transition tr2: request3Sent -> connectingAgain {
 					triggers {
 						<wrong: loginPort>
 					}
-					action '''loginPort.login((short)7);'''
+					action '''loginPort.cancel();'''
+				}
+				State request3Sent {
+				}
+
+				State connectingAgain {
+					entry '''loginPort.hello();'''
+				}
+				Transition tr3: connectingAgain -> cancelled {
+					triggers {
+						<hello: loginPort>
+					}
+					action '''loginPort.cancel();'''
+				}
+
+				Transition tr5: cancelled -> connectingAgain2 {
+					triggers {
+						<hello: loginPort>
+					}
+					action '''loginPort.login((short) 1234);'''
+				}
+				State cancelled {
+					entry '''loginPort.hello();'''
+				}
+				State connectingAgain2
+				Transition tr6: connectingAgain2 -> testDone {
+					triggers {
+						<ok: loginPort>
+					}
+				}
+				State testIdle
+				Transition tr7: testIdle -> connecting {
+					triggers {
+						<startCase: testCtrl>
+					}
+					action '''
+						loginPort.hello();
+					'''
 				}
 			}
 		}
 	}
 
-	ActorClass Provider {
+	/** Connecting twice => violation */
+	ActorClass ABadClient {
 
 		Interface {
-			Port fct: LoginProtocol
+			conjugated Port loginPort: PLoginProtocol
+			Port testCtrl: PClientTest
 		}
 		Structure {
-			external Port fct
+			external Port loginPort
+			external Port testCtrl
+		}
+		Behavior {
+			StateMachine {
+				State connectingAgain {
+					entry '''loginPort.hello();'''
+				}
+				Transition init0: initial -> testIdle {
+				}
+
+				State testIdle
+				Transition tr7: testIdle -> connectingAgain {
+					triggers {
+						<startCase: testCtrl>
+					}
+					action '''
+						loginPort.hello();
+					'''
+				}
+			}
+		}
+	}
+
+	/** 4x wrong login => violation (actually this is a fault in AProvider) */
+	ActorClass ABadClient2 {
+
+		Interface {
+			conjugated Port loginPort: PLoginProtocol
+			Port testCtrl: PClientTest
+		}
+		Structure {
+			external Port loginPort
+			external Port testCtrl
+		}
+		Behavior {
+			StateMachine {
+				State connecting
+				Transition init0: initial -> testIdle {
+				}
+				State request1Sent
+				State request2Sent
+
+				State request3Sent {
+				}
+
+				State testIdle
+				Transition tr0: connecting -> request1Sent {
+					triggers {
+						<hello: loginPort>
+					}
+					action '''loginPort.login((short)0);'''
+				}
+				Transition tr1: request1Sent -> request2Sent {
+					triggers {
+						<wrong: loginPort>
+					}
+					action '''loginPort.login((short)1);'''
+				}
+
+				Transition tr4: request2Sent -> request3Sent {
+					triggers {
+						<wrong: loginPort>
+					}
+					action '''loginPort.login((short)5);'''
+				}
+
+				Transition tr7: testIdle -> connecting {
+					triggers {
+						<startCase: testCtrl>
+					}
+					action '''
+						loginPort.hello();
+					'''
+				}
+				State request4Sent
+
+				Transition tr2: request3Sent -> request4Sent {
+					triggers {
+						<wrong: loginPort>
+					}
+					action '''loginPort.login((short)9);'''
+				}
+			}
+		}
+	}
+
+	ActorClass AProvider {
+
+		Interface {
+			Port serverPort: PLoginProtocol
+		}
+		Structure {
+			external Port serverPort
 			SAP toTimer: PTimer
 		}
 		Behavior {
@@ -118,25 +398,25 @@ RoomModel ContractMonitorTest {
 				Transition init0: initial -> idle
 				Transition tr0: idle -> connected {
 					triggers {
-						<hello: fct>
+						<hello: serverPort>
 					}
-					action '''fct.hello();'''
+					action '''serverPort.hello();'''
 				}
 				Transition tr1: connected -> idle {
 					triggers {
-						<login: fct guard '''transitionData == 1234'''>
+						<login: serverPort guard '''transitionData == 1234'''>
 					}
-					action '''fct.ok();'''
+					action '''serverPort.ok();'''
 				}
 				Transition tr2: connected -> connected {
 					triggers {
-						<login: fct guard '''transitionData != 1234'''>
+						<login: serverPort guard '''transitionData != 1234'''>
 					}
-					action '''fct.wrong();'''
+					action '''serverPort.wrong();'''
 				}
 				Transition tr3: connected -> idle {
 					triggers {
-						<cancel: fct>
+						<cancel: serverPort>
 					}
 				}
 			}

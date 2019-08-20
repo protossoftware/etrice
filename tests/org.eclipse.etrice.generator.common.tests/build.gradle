@@ -63,7 +63,6 @@ createTest('java', 'contractMonitorTest', ['models/ContractMonitorTest.room', 'm
 		main = 'org.eclipse.etrice.generator.contractmonitor.Main'
 		classpath = genTask.classpath
 		args '-modelpath', genTask.modelpath.asPath
-		args '-targetLang', genTask.lang
 		args '-genDir', file('model-gen')
 		args file('models/ContractMonitor.room')
 	}

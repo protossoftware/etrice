@@ -343,6 +343,55 @@
 <h3><a href="#the-mapping-model" name="the-mapping-model"></a>The Mapping Model</h3>
 <p>The last model finally combines all this information by mapping logical to physical entities.</p>
 <p>The result of the mapping is also depicted in above <a href="#room-instance-diagram">instance tree diagram</a> of the instances. All actor instances (the white boxes) are mapped to a node and a thread running on this node (shown as @*node* : <em>thread</em>).</p>
+<h2><a href="#interface-contracts" name="interface-contracts"></a>Interface Contracts</h2>
+<p>An interface contract defines the behavioral semantics of an interface. In many languages like Java or C++ this is usually described in form of text comments. Textual descriptions are informal and have a vague expressiveness for complex behavior. Also it is difficult to leverage them for tooling or analysis.<br>eTrice provides a formal description for interface protocols. This is shown by the example of <code>PLoginProtocol</code>. It is a stateful protocol that defines the login procedure of an ATM client and the ATM server back-end. </p>
+<pre><code class="room customHighlighted"><span class="keyword">ProtocolClass</span> PLoginProtocol {
+	<span class="keyword">incoming</span> {
+		<span class="keyword">Message</span> hello()
+		<span class="keyword">Message</span> login(int16)
+		<span class="keyword">Message</span> cancel()
+	}
+	<span class="keyword">outgoing</span> {
+		<span class="keyword">Message</span> hello()
+		<span class="keyword">Message</span> wrong()
+		<span class="keyword">Message</span> attemptsLimitReached()
+		<span class="keyword">Message</span> ok()
+	}
+}
+</code></pre>
+<img style="width: 100%;" src="images/050-InterfaceContractExample.png">
+<p>The implementing parties for this protocol must obey strict rules due security and compatibility reasons. For example, the client must initiate any interaction by sending the message <code>hello</code>. The server must then response in turn by <code>hello</code>. After that the client can <code>login</code> with an ID, which can be <code>wrong</code> (maximum 3 times) or <code>ok</code>. Also there are rules for <code>cancel</code> or <code>attemptsLimitReached</code> and the restart.<br>In eTrice, these semantics can be expressed using a state machine. The full contract for <code>PLoginProtocol</code> is shown in the screenshot below.</p>
+<img style="width: 100%;" src="images/050-InterfaceContractFSM.png">
+<h3><a href="#defining-contracts" name="defining-contracts"></a>Defining Contracts</h3>
+<p>The contract is defined using a regular state machine, which requires first an ActorClass. This actor must be annotated with <code>@InterfaceContractDefinition</code> including the attribute <code>protocol</code> to specify the interface protocol. Further, the actor must implement a pair of regular and conjugated ports of the protocol. These two ports represent the two implementing parties of the protocol. After that, the contract can be created as the behavior of the actor. Be reminded, that the state machine does not represent an implementation, but the valid interaction for the protocol. </p>
+<pre><code class="room customHighlighted"><span class="keyword">ActorClass</span> LoginProtocolContract {
+	@InterfaceContractDefinition(protocol = <span class="string">"PLoginProtocol"</span>)
+	<span class="keyword">Interface</span> {
+		<span class="keyword">conjugated</span> <span class="keyword">Port</span> serverPort: PLoginProtocol
+		<span class="keyword">Port</span> loginPort: PLoginProtocol
+	}
+	<span class="keyword">Structure</span> {
+		<span class="keyword">external</span> <span class="keyword">Port</span> serverPort
+		<span class="keyword">external</span> <span class="keyword">Port</span> loginPort
+	}
+	<span class="keyword">Behavior</span> {
+		<span class="keyword">StateMachine</span> {
+			<span class="comment">// the contract state machine goes here
+</span>			<span class="comment">// see diagram above
+</span>		}
+	}
+</code></pre>
+<p>In addition the protocol can be annotated with <code>@InterfaceContract</code> to reference the contract. This is for documentation purpose or future static analysis.</p>
+<pre><code class="room customHighlighted"><span class="keyword">ProtocolClass</span> PLoginProtocol {
+	@InterfaceContract(definedBy = <span class="string">"LoginProtocolContract"</span>)
+	<span class="comment">// ...
+</span>}
+</code></pre>
+<p>Both annotation can be found in the modellib under the namespace <code>etrice.api.contracts.definitions</code>.</p>
+<h3><a href="#contract-monitor-generation" name="contract-monitor-generation"></a>Contract Monitor Generation</h3>
+<p>It is possible to generate a monitor, that can check the contract at runtime. The generator transforms any contract to an ActorClass, which can be placed between the implementing parties to detect any violation of the contract.</p>
+<img style="width: 100%;" src="images/050-InterfaceContractMonitor.png">
+<p>The generator is called “eTrice Contract Monitor Generator”. The usage is similar to the eTrice source code generators. By default the generated models are placed in the folder ‘model-gen’. The name of the generated ActorClass can be adjusted in the contract annotation <code>@InterfaceContractDefinition</code> using the attribute <code>generatedMontiorName</code>.<br>The generated monitor implements <code>PContractMonitorControl</code>, which can be used to query the violations status or to toggle the propagation of invalid messages. It can be found in the modellib under the namespace <code>etrice.api.contracts.monitors</code>.</p>
 
 </body>
 </html>

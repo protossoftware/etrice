@@ -9,7 +9,8 @@ dependencies {
 def models = [
 	'model/PInterrupt.room',
 	'model/TcpService.room',
-	'model/TimingService.room'
+	'model/TimingService.room',
+	'model/etrice/api/contracts/monitors.room'
 ]
 
 createGeneratorTask('generate', 'c', models, 'src-gen', '-lib')

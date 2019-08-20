@@ -3,11 +3,11 @@ RoomModel ContractMonitor {
 	import room.basic.types.*
 	import etrice.api.contracts.definitions.*
 
-	ProtocolClass LoginProtocol {
-		@InterfaceContract(definingActorClassName = "LoginProtocolContract")
+	ProtocolClass PLoginProtocol {
+		@InterfaceContract(definedBy = "LoginProtocolContract")
 		incoming {
 			Message hello()
-			Message login(int16) @ValueRangeContract(range = "[0,9999]")
+			Message login(int16)
 			Message cancel()
 		}
 		outgoing {
@@ -19,14 +19,14 @@ RoomModel ContractMonitor {
 	}
 
 	ActorClass LoginProtocolContract {
-
+		@InterfaceContractDefinition(protocol = "PLoginProtocol", generatedMonitorName = "LoginProtocolMonitor")
 		Interface {
-			conjugated Port toUnconjugated: LoginProtocol
-			Port toConjugated: LoginProtocol
+			conjugated Port serverPort: PLoginProtocol
+			Port loginPort: PLoginProtocol
 		}
 		Structure {
-			external Port toUnconjugated
-			external Port toConjugated
+			external Port serverPort
+			external Port loginPort
 			Attribute attempts: int16
 		}
 		Behavior {
@@ -42,37 +42,37 @@ RoomModel ContractMonitor {
 				Transition init0: initial -> idle
 				Transition tr0: idle -> connecting {
 					triggers {
-						<hello: toConjugated>
+						<hello: loginPort>
 					}
 				}
 				Transition tr1: connecting -> connected {
 					triggers {
-						<hello: toUnconjugated>
+						<hello: serverPort>
 					}
 				}
 				Transition tr2: connected -> idle {
 					triggers {
-						<cancel: toConjugated>
+						<cancel: loginPort>
 					}
 				}
 				Transition tr3: connected -> checking {
 					triggers {
-						<login: toConjugated>
+						<login: loginPort>
 					}
 				}
 				Transition tr4: checking -> idle {
 					triggers {
-						<ok: toUnconjugated>
+						<ok: serverPort>
 					}
 				}
 				Transition tr5: checking -> connected {
 					triggers {
-						<wrong: toUnconjugated guard '''attempts <= 3'''>
+						<wrong: serverPort guard '''attempts <= 3'''>
 					}
 				}
 				Transition tr6: checking -> idle {
 					triggers {
-						<attemptsLimitReached: toUnconjugated guard '''attempts > 3'''>
+						<attemptsLimitReached: serverPort guard '''attempts > 3'''>
 					}
 				}
 			}

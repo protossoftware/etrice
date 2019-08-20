@@ -1,41 +1,53 @@
-/** work in progress */
+/**
+ * A contract monitor validates the contract definition at runtime.
+ * Interface (protocol) contracts are defined by actors having the annotation @InterfaceContractDefinition.
+ */
 RoomModel etrice.api.contracts.monitors {
 
 	import room.basic.types.*
 	
-	ProtocolClass MonitorControl {
+	/** Protocol to get validation status and control monitor behavior. */
+	ProtocolClass PContractMonitorControl {
 		incoming {
-			Message requestAndResetStatus()
+			/** Response is violationStatus */
+			Message getAndResetStatus()
+			/** Catch invalid messages according to contract (default false). */
 			Message setForwardInvalidMessages(boolean)
 		}
 		outgoing {
+			/** Current status: true == violationOccured. */
 			Message violationStatus(boolean)
+			/** Send each time when violation occurs. */
 			Message violationOccured()
 		}
 	}
 	
-	// not working due Bug 541775
-	// https://bugs.eclipse.org/bugs/show_bug.cgi?id=541775
-	abstract ActorClass ContractMonitorBase {
+	/** 
+	 * The base class for (generated) monitors.
+	 * Generated monitors require 'forwardInvalidMessages' and 'onViolation'.
+	 */
+	abstract ActorClass AContractMonitorBase {
 		Interface {
-			Port monitor_ctrl: MonitorControl
+			Port monitor_ctrl: PContractMonitorControl
 		}
 		Structure {
 			external Port monitor_ctrl
 			Attribute _violation: boolean
-			Attribute _forwardInvalidMessages: boolean
+			/** Required by generated monitors. */
+			Attribute forwardInvalidMessages: boolean
 		}
 		Behavior {
-			Operation _onViolation(comment: string) '''
-				_violation = value;
-				DebuggingService.getInstance().addVisibleComment(comment + " location: " + this.getInstancePath() + " : " + ifitem.toString());
-				monitor_ctrl.onViolation();
+			/** Required by generated monitors. */
+			Operation onViolation(comment: string) '''
+				_violation = true;
+				DebuggingService.getInstance().addVisibleComment(comment + " location: " + this.getInstancePath()/* + " : " + ifitem.toString()*/);
+				monitor_ctrl.violationOccured();
 			'''
 			StateMachine {
 				handler TransitionPoint _trBase
 				Transition _trStatus: my _trBase -> my _trBase {
 					triggers {
-						<requestAndResetStatus: monitor_ctrl>
+						<getAndResetStatus: monitor_ctrl>
 					}
 					action '''
 						monitor_ctrl.violationStatus(_violation);
@@ -46,7 +58,7 @@ RoomModel etrice.api.contracts.monitors {
 					triggers {
 						<setForwardInvalidMessages: monitor_ctrl>
 					}
-					action '''_forwardInvalidMessages = transitionData;'''
+					action '''forwardInvalidMessages = transitionData;'''
 				}
 			}
 		}

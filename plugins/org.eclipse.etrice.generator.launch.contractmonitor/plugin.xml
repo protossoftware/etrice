@@ -11,6 +11,14 @@
       </launchConfigurationType>
    </extension>
    <extension
+         point="org.eclipse.debug.ui.launchConfigurationTypeImages">
+      <launchConfigurationTypeImage
+            configTypeID="org.eclipse.etrice.generator.launch.contractmonitor.launchConfigurationType"
+            icon="icons/eTrice-launch.gif"
+            id="org.eclipse.etrice.generator.launch.contractmonitor.launchConfigurationTypeImage">
+      </launchConfigurationTypeImage>
+   </extension>
+   <extension
          point="org.eclipse.debug.ui.launchConfigurationTabGroups">
       <launchConfigurationTabGroup
             class="org.eclipse.etrice.generator.launch.contractmonitor.ContractMonitorGeneratorLaunchConfigurationTabGroup"
