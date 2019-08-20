@@ -21,9 +21,9 @@ RoomModel OperationInheritanceTest {
 					action '''
 						baseOperation();
 						overriddenOperation();
-						// c: not supported yet
+						// c: not supported in detail code translator
 						//testDataClass.baseOperation();
-						//testDataClass.overriddenOperation(caseId);
+						//testDataClass.overriddenOperation();
 						
 						// refine ctor, override operations
 						// -- ActorClass
@@ -33,11 +33,12 @@ RoomModel OperationInheritanceTest {
 						EXPECT_EQUAL_INT32(caseId, "<|MODEL_LOCATION|>", 2, valueSub);
 						
 						// -- DataClass
-						//EXPECT_EQUAL_INT32(caseId, "<|MODEL_LOCATION|>", 1, testDataClass.ctorBase);
-						//EXPECT_EQUAL_INT32(caseId, "<|MODEL_LOCATION|>", 2, testDataClass.ctorRefine);
-						//EXPECT_EQUAL_INT32(caseId, "<|MODEL_LOCATION|>", 1, testDataClass.valueBase);
-						//EXPECT_EQUAL_INT32(caseId, "<|MODEL_LOCATION|>", 2, testDataClass.valueSub);
-						//EXPECT_EQUAL_INT32(caseId, "<|MODEL_LOCATION|>", 0, testDataClass.doNotCallOverride);
+						// cannot work due missing calls, see above
+						//EXPECT_EQUAL_INT32(caseId, "<|MODEL_LOCATION|>", 1, testDataClass.ctorBase_);
+						//EXPECT_EQUAL_INT32(caseId, "<|MODEL_LOCATION|>", 2, testDataClass.ctorRefine_);
+						//EXPECT_EQUAL_INT32(caseId, "<|MODEL_LOCATION|>", 1, testDataClass.valueBase_);
+						//EXPECT_EQUAL_INT32(caseId, "<|MODEL_LOCATION|>", 2, testDataClass.valueSub_);
+						//EXPECT_EQUAL_INT32(caseId, "<|MODEL_LOCATION|>", 0, testDataClass.doNotCallOverride_);
 						etUnit_testFinished(caseId);'''
 				}
 				State finish
@@ -63,23 +64,22 @@ RoomModel OperationInheritanceTest {
 		}
 	}
 
+	/** the suffix '_' is necessary for C due macros :( */
 	DataClass BaseDataClass {
-		Operation overriddenOperation() '''doNotCallOverride = 1;'''
-		Operation baseOperation() '''valueBase = 1;'''
+		Operation overriddenOperation() '''doNotCallOverride_ = 1;'''
+		Operation baseOperation() '''valueBase_ = 1;'''
 		ctor '''
-			ctorBase = 1;
-			ctorRefine = 1;'''
-		dtor '''// base dtor'''
-		Attribute ctorBase: int32 = "0"
-		Attribute ctorRefine: int32 = "0"
-		Attribute valueBase: int32 = "0"
-		Attribute valueSub: int32 = "0"
-		Attribute doNotCallOverride: int32 = "0"
+			ctorBase_ = 1;
+			ctorRefine_ = 1;'''
+		Attribute ctorBase_: int32 = "0"
+		Attribute ctorRefine_: int32 = "0"
+		Attribute valueBase_: int32 = "0"
+		Attribute valueSub_: int32 = "0"
+		Attribute doNotCallOverride_: int32 = "0"
 	}
 
 	DataClass SubDataClass extends BaseDataClass {
-		override Operation overriddenOperation() '''valueSub = 2;'''
-		ctor '''ctorRefine = 2;'''
-		dtor '''// sub dtor'''
+		override Operation overriddenOperation() '''valueSub_ = 2;'''
+		ctor '''ctorRefine_ = 2;'''
 	}
 }

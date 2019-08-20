@@ -685,10 +685,17 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 
 	@Check
 	public void checkDataClass(DataClass dc) {
-		if (dc.getAttributes().isEmpty() && dc.getBase()==null)
+		if (dc.getAttributes().isEmpty() && dc.getBase() == null) {
 			error("Non-derived data classes have to define at least one attribute", RoomPackage.Literals.DATA_CLASS__ATTRIBUTES);
+		}
+		dc.getStructors().stream().filter((op) -> op.isConstructor()).forEach((dtor) -> {
+			warning("Not implemented for C generation", dtor, null);
+		});
+		dc.getStructors().stream().filter((op) -> !op.isConstructor()).forEach((dtor) -> {
+			error("DataClass cannot have a destructor", dtor, null);
+		});
 	}
-
+		
 	@Check
 	public void checkReplicatedPortBindingPatterns(StructureClass sc) {
 		HashSet<String> haveReplPeer = new HashSet<String>();

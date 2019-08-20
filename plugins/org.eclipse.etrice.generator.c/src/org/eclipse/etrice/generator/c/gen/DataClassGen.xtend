@@ -87,7 +87,7 @@ class DataClassGen {
 		
 «««		TODO: do we need setters and getters for C and C++ ?
 		
-		«dc.operations.operationsDeclaration(dc.name)»
+		«dc.latestOperations.operationsDeclaration(dc.name)»
 		
 		/* deep copy */
 		void «dc.name»_deepCopy(«dc.name»* source, «dc.name»* target);
@@ -167,14 +167,13 @@ class DataClassGen {
 		
 		«dc.userCode(3)»
 		
-«««		TODO: do we need setters and getters for C and C++ ?
-		
-		«dc.operations.operationsImplementation(dc.name)»
+		«««		TODO: do we need setters and getters for C and C++ ?
+
+		«dc.latestOperations.operationsImplementation(dc.name)»
 		
 		void «dc.name»_deepCopy(«dc.name»* source, «dc.name»* target) {
 			memcpy(target, source, sizeof(«dc.name»));
 		}
-		
 		
 	'''}
 	

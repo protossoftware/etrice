@@ -374,6 +374,7 @@ class ProcedureHelpers {
 			DataClass case !inherited: structors
 			ActorClass case inherited: allStructors
 			DataClass case inherited: allStructors
+			default: emptyList
 		}
 	}
 
