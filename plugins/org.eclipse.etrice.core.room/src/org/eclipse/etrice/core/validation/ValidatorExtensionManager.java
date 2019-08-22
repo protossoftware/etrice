@@ -18,7 +18,9 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import org.eclipse.core.runtime.IConfigurationElement;
@@ -38,6 +40,7 @@ import org.eclipse.xtext.validation.CheckType;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 import org.osgi.framework.Bundle;
 
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 
@@ -200,32 +203,28 @@ public class ValidatorExtensionManager extends CustomValidatorManager {
 
 		public List<ICustomValidator> getValidatorsToExecute(EObject object, CheckMode checkMode,
 				ValidationMessageAcceptor messageAcceptor) {
-			// we initialize the set of executed validators with the excluded
-			// ones
-			HashSet<ICustomValidator> executed = new HashSet<ICustomValidator>(excluded);
+			Set<ICustomValidator> validators = new LinkedHashSet<>();
 
+			// Bug 550296
 			if (checkMode.shouldCheck(CheckType.FAST))
-				return validate(object, messageAcceptor, fastClass2Ext, executed);
+				validators.addAll(getValidators(object, messageAcceptor, fastClass2Ext));
 			if (checkMode.shouldCheck(CheckType.NORMAL))
-				return validate(object, messageAcceptor, normalClass2Ext, executed);
+				validators.addAll(getValidators(object, messageAcceptor, normalClass2Ext));
 			if (checkMode.shouldCheck(CheckType.EXPENSIVE))
-				return validate(object, messageAcceptor, expensiveClass2Ext, executed);
+				validators.addAll(getValidators(object, messageAcceptor, expensiveClass2Ext));
+			validators.removeAll(excluded);
 
-			assert (false) : "unexpected CheckType";
-			return new ArrayList<ICustomValidator>();
+			return Lists.newArrayList(validators);
 		}
 
-		private List<ICustomValidator> validate(EObject object, ValidationMessageAcceptor messageAcceptor,
-				HashMap<String, ArrayList<ICustomValidator>> map, HashSet<ICustomValidator> executed) {
+		private List<ICustomValidator> getValidators(EObject object, ValidationMessageAcceptor messageAcceptor,
+				HashMap<String, ArrayList<ICustomValidator>> map) {
 			ArrayList<ICustomValidator> result = new ArrayList<ICustomValidator>();
 
 			ArrayList<ICustomValidator> validators = map.get(object.eClass().getEPackage().getName() + "." + object.eClass().getName());
 			if (validators != null)
 				for (ICustomValidator validator : validators) {
-					if (!executed.contains(validator)) {
-						executed.add(validator);
-						result.add(validator);
-					}
+					result.add(validator);
 				}
 
 			return result;
@@ -276,19 +275,46 @@ public class ValidatorExtensionManager extends CustomValidatorManager {
 		}
 	}
 	
-	@Check
-	public void checkObject(EObject object) {
-		if (isRegistryAvailable) {
-			ICustomValidator.ValidationContext context = new ValidationContextImpl(isStandalone(), isGeneration(),
-					getCheckMode());
-			for (ICustomValidator val : Registry.getInstance().getValidatorsToExecute(object, getCheckMode(),
-					getMessageAcceptor()))
-				executeValidator(val, object, null, getMessageAcceptor(), context);
-
+	@Override
+	public void checkObjectsStandalone(EObject object) {
+		// replaced by methods below
+	}
+	
+	@Check(CheckType.FAST)
+	public void checkObjectFast(EObject object) {
+		checkObject(object, CheckType.FAST);
+	}
+	
+	@Check(CheckType.NORMAL)
+	public void checkObjectNormal(EObject object) {
+		checkObject(object, CheckType.NORMAL);
+	}
+	
+	@Check(CheckType.EXPENSIVE)
+	public void checkObjectExpensive(EObject object) {
+		checkObject(object, CheckType.EXPENSIVE);
+	}
+	
+	protected void checkObject(EObject object, CheckType checkType) {
+		// Bug 550296 - use CheckType instead of CheckMode
+		// Diagnostic markers must be associated with correct CheckType for editor sync
+		CheckMode checkMode;
+		switch(checkType) {
+			case FAST: checkMode = CheckMode.FAST_ONLY; break;
+			case NORMAL: checkMode = CheckMode.NORMAL_ONLY; break;
+			case EXPENSIVE: checkMode = CheckMode.EXPENSIVE_ONLY; break;
+			default: throw new IllegalArgumentException(Objects.toString(checkType));
 		}
-		else
+		if (isRegistryAvailable) {
+			ICustomValidator.ValidationContext context = new ValidationContextImpl(isStandalone(), isGeneration(), checkMode);
+			for (ICustomValidator val : Registry.getInstance().getValidatorsToExecute(object, checkMode, getMessageAcceptor())) {
+				executeValidator(val, object, null, getMessageAcceptor(), context);
+			}
+		}
+		else {
 			// use default registry
-			super.checkObject(object);
+			super.checkObjectsStandalone(object);
+		}
 	}
 
 }
