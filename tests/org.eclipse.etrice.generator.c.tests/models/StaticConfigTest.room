@@ -1,16 +1,16 @@
 RoomModel StaticConfigTest {
 	
-	import room.basic.types.boolean
-	import room.basic.types.char
-	import room.basic.types.int8
-	import room.basic.types.int16
-	import room.basic.types.int32
-	import room.basic.types.int64
-	import room.basic.types.float32
-	import room.basic.types.float64
-	import room.basic.types.string
-	import room.basic.service.timing.PTimer
-	import room.basic.service.timing.ATimingService
+	import etrice.api.types.boolean
+	import etrice.api.types.char
+	import etrice.api.types.int8
+	import etrice.api.types.int16
+	import etrice.api.types.int32
+	import etrice.api.types.int64
+	import etrice.api.types.float32
+	import etrice.api.types.float64
+	import etrice.api.types.string
+	import etrice.api.timer.PTimer
+	import etrice.api.timer.ATimerService
 
 	LogicalSystem System_StaticConfigTest {
 		SubSystemRef main: SubSystem_StaticConfigTest
@@ -19,7 +19,7 @@ RoomModel StaticConfigTest {
 	SubSystemClass SubSystem_StaticConfigTest {
 		LayerConnection ref top satisfied_by timer.timer
 		ActorRef top: Top_ac
-		ActorRef timer: ATimingService
+		ActorRef timer: ATimerService
 	
 		LogicalThread defaultThread
 	}

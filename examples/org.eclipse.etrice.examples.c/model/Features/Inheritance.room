@@ -1,6 +1,6 @@
 RoomModel Inheritance {
 
-	import room.basic.types.uint32
+	import etrice.api.types.uint32
 
 	ActorClass ActorSubClass extends ActorBaseClass {
 		// inherits all elements from super type hierarchy

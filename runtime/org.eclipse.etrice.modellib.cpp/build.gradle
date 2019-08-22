@@ -7,7 +7,7 @@ dependencies {
 }
 
 def models = [
-	'model/TimingService.room'
+	'model/etrice/api/timer.room'
 ]
 
 createGeneratorTask('generate', 'cpp', models, 'src-gen', '-lib')

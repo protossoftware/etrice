@@ -1,6 +1,6 @@
 RoomModel StatemachineInterfaceTest {
 
-	import room.basic.types.boolean
+	import etrice.api.types.boolean
 
 	ActorClass StatemachineInterfaceTest {
 		Structure {

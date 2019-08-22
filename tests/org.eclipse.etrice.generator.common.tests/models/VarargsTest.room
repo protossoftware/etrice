@@ -1,9 +1,9 @@
 RoomModel VarargsTest {
 
-	import room.basic.types.boolean
-	import room.basic.types.int32
-	import room.basic.types.string
-	import room.basic.test.TestInstance
+	import etrice.api.types.boolean
+	import etrice.api.types.int32
+	import etrice.api.types.string
+	import etrice.api.annotations.TestInstance
 
 	ActorClass AVarargs {
 		@TestInstance

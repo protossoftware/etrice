@@ -4,7 +4,8 @@
  */
 RoomModel etrice.api.contracts.monitors {
 
-	import room.basic.types.*
+	import etrice.api.types.boolean
+	import etrice.api.types.string
 	
 	/** Protocol to get validation status and control monitor behavior. */
 	ProtocolClass PContractMonitorControl {

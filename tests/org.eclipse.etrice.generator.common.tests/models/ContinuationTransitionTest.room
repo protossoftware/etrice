@@ -1,8 +1,8 @@
 RoomModel ContinuationTransitionTest {
 
-	import room.basic.types.boolean
-	import room.basic.types.int32
-	import room.basic.test.TestInstance
+	import etrice.api.types.boolean
+	import etrice.api.types.int32
+	import etrice.api.annotations.TestInstance
 
 	ActorClass ContinuationTransitionTest {
 		Structure {

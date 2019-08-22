@@ -1,7 +1,7 @@
 RoomModel DynAct9 {
 
-	import room.basic.service.timing.PTimer
-	import room.basic.service.timing.ATimingService
+	import etrice.api.timer.PTimer
+	import etrice.api.timer.ATimerService
 
 	LogicalSystem LogSys1 {
 		SubSystemRef subSysRef1: SubSysClass1
@@ -9,7 +9,7 @@ RoomModel DynAct9 {
 
 	SubSystemClass SubSysClass1 {
 		ActorRef actorRef1: PingPongTop
-		ActorRef timingService: ATimingService
+		ActorRef timingService: ATimerService
 		LayerConnection ref actorRef1 satisfied_by timingService.timer
 		LogicalThread defaultThread
 	}

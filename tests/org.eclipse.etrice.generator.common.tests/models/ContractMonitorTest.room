@@ -1,11 +1,11 @@
 RoomModel ContractMonitorTest {
 
-	import room.basic.service.timing.PTimer
-	import room.basic.types.*
-	import room.basic.test.TestInstance
-	import ContractMonitor.*
-	import room.basic.service.timing.ATimingService
+	import etrice.api.timer.PTimer
+	import etrice.api.types.*
+	import etrice.api.annotations.TestInstance
+	import etrice.api.timer.ATimerService
 	import etrice.api.contracts.monitors.PContractMonitorControl
+	import ContractMonitor.*
 	import ContractMonitor_monitors.LoginProtocolMonitor
 
 	ProtocolClass PClientTest {
@@ -22,7 +22,7 @@ RoomModel ContractMonitorTest {
 		@TestInstance
 		Structure {
 			ActorRef appl: Appl
-			ActorRef timing: ATimingService
+			ActorRef timing: ATimerService
 			LayerConnection ref appl satisfied_by timing.timer
 		}
 	}

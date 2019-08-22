@@ -1,9 +1,9 @@
 RoomModel PingPongThreadReplPortTest {
 
-	import room.basic.types.int16
-	import room.basic.types.int32
-	import room.basic.service.timing.PTimer
-	import room.basic.service.timing.ATimingService
+	import etrice.api.types.int16
+	import etrice.api.types.int32
+	import etrice.api.timer.PTimer
+	import etrice.api.timer.ATimerService
 	
 
 	LogicalSystem System_PingPongReplPort {
@@ -12,7 +12,7 @@ RoomModel PingPongThreadReplPortTest {
 
 	SubSystemClass SubSystem_PingPongReplPort {
 		ActorRef application: PingPongTop
-		ActorRef services: ATimingService
+		ActorRef services: ATimerService
 		LayerConnection ref application satisfied_by services.timer
 
 		LogicalThread mrPingThread

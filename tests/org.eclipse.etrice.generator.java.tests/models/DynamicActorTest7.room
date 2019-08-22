@@ -1,13 +1,13 @@
 RoomModel DynamicActorTest7 {
 
-	import room.basic.types.boolean
-	import room.basic.types.char
-	import room.basic.types.int8
-	import room.basic.types.int16
-	import room.basic.types.int32
-	import room.basic.types.float32
-	import room.basic.types.float64
-	import room.basic.types.string
+	import etrice.api.types.boolean
+	import etrice.api.types.char
+	import etrice.api.types.int8
+	import etrice.api.types.int16
+	import etrice.api.types.int32
+	import etrice.api.types.float32
+	import etrice.api.types.float64
+	import etrice.api.types.string
 
 	LogicalSystem JavaGenTests {
 		SubSystemRef da7Test: SubSystem_DynamicActorTest7

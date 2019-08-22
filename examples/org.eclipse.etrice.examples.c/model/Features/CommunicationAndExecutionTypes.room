@@ -1,8 +1,8 @@
 RoomModel CommunicationAndExecutionTypes {
 
-	import room.basic.types.int16
-	import room.basic.types.int32
-	import room.basic.types.uint32
+	import etrice.api.types.int16
+	import etrice.api.types.int32
+	import etrice.api.types.uint32
 
 	DataClass AnotherSimpleDataClass {
 		Attribute attribute1: int16

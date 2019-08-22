@@ -1,7 +1,7 @@
 RoomModel TrafficLight_step1 {
 
 	import TrafficLight.TestApplication
-	import room.basic.service.timing.ATimingService
+	import etrice.api.timer.ATimerService
 
 	LogicalSystem TrafficLight {
 		SubSystemRef subSystem: TrafficLightStep1_Test
@@ -9,7 +9,7 @@ RoomModel TrafficLight_step1 {
 
 	SubSystemClass TrafficLightStep1_Test {
 		ActorRef step1_TestApplication: TestApplication
-		ActorRef timingService: ATimingService
+		ActorRef timingService: ATimerService
 		LayerConnection ref step1_TestApplication satisfied_by timingService.timer
 		LogicalThread defaultThread
 	}

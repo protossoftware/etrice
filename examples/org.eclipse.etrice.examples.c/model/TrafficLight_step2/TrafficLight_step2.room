@@ -1,14 +1,14 @@
 RoomModel TrafficLight_step2 {
 
 	import TrafficLight.SingleTrafficLight
-	import room.basic.service.timing.ATimingService
+	import etrice.api.timer.ATimerService
 
 	LogicalSystem TrafficLight {
 		SubSystemRef subSystem: TrafficLightStep2_SingleTrafficLight
 	}
 
 	SubSystemClass TrafficLightStep2_SingleTrafficLight {
-		ActorRef timingService: ATimingService
+		ActorRef timingService: ATimerService
 		ActorRef step2_SingleTrafficLight: SingleTrafficLight
 		LayerConnection ref step2_SingleTrafficLight satisfied_by timingService.timer
 		LogicalThread defaultThread

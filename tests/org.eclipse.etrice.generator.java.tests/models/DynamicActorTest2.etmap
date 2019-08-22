@@ -1,6 +1,6 @@
 MappingModel DynamicActorTest1 {
 	import DynamicActorTest2.JavaGenTests
-	import room.generic.physical.GenericPhysicalSystem
+	import GenericPhysical.GenericPhysicalSystem
 
 	Mapping JavaGenTests -> GenericPhysicalSystem {
 		SubSystemMapping da2Test -> node {

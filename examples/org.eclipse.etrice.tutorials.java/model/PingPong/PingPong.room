@@ -8,9 +8,9 @@
  */
 RoomModel PingPong {
 
-	import room.basic.types.*
-	import room.basic.service.timing.PTimer
-	import room.basic.service.timing.ATimingService
+	import etrice.api.types.*
+	import etrice.api.timer.PTimer
+	import etrice.api.timer.ATimerService
 
 	LogicalSystem LogSys {
 		SubSystemRef subSystemRef: SubSysClass
@@ -18,7 +18,7 @@ RoomModel PingPong {
 
 	SubSystemClass SubSysClass {
 		ActorRef topActor: TopActor
-		ActorRef timingService: ATimingService
+		ActorRef timingService: ATimerService
 		LayerConnection ref topActor satisfied_by timingService.timer
 		LogicalThread defaultThread
 	}

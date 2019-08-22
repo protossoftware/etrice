@@ -1,14 +1,14 @@
 RoomModel TCPTest {
 
-	import room.basic.types.int16
-	import room.basic.types.int32
-	import room.basic.service.tcp.DTcpPayload
-	import room.basic.service.tcp.DTcpControl
-	import room.basic.service.tcp.PTcpPayload
-	import room.basic.service.tcp.PTcpControl
-	import room.basic.service.tcp.ATcpClient
-	import room.basic.service.tcp.ATcpServer
-	import room.basic.test.TestInstance
+	import etrice.api.types.int16
+	import etrice.api.types.int32
+	import etrice.api.tcp.DTcpPayload
+	import etrice.api.tcp.DTcpControl
+	import etrice.api.tcp.PTcpPayload
+	import etrice.api.tcp.PTcpControl
+	import etrice.api.tcp.ATcpClient
+	import etrice.api.tcp.ATcpServer
+	import etrice.api.annotations.TestInstance
 
 	ActorClass TCPTestTop {
 		@TestInstance

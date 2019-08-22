@@ -1,7 +1,7 @@
 RoomModel Multiplicity {
 
-	import room.basic.types.char
-	import room.basic.types.int16
+	import etrice.api.types.char
+	import etrice.api.types.int16
 
 	ActorClass ExampleMultiplicity {
 		Structure {

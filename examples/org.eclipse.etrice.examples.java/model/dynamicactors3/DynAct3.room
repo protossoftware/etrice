@@ -1,6 +1,6 @@
 RoomModel DynAct3 {
 	
-	import room.basic.types.string
+	import etrice.api.types.string
 	
 	LogicalSystem LS {
 		SubSystemRef main: Main

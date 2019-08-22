@@ -1,4 +1,4 @@
-PhysicalModel room.generic.physical {
+PhysicalModel GenericPhysical {
 	
 	PhysicalSystem GenericPhysicalSystem {
 		NodeRef node : GenericNodeClass

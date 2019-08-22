@@ -1,0 +1,93 @@
+/*******************************************************************************
+ * Copyright (c) 2019 protos software gmbh (http://www.protos.de).
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License 2.0
+ * which accompanies this distribution, and is available at
+ * https://www.eclipse.org/legal/epl-2.0/
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *
+ *******************************************************************************/
+ 
+RoomModel etrice.api.annotations {
+	
+	/**
+	  Meta information for elements that will be picked up by generators. Examples:
+	  <code><pre>
+	   	@MetaInfo(key="x", text="...")
+	   	
+	  	@MetaInfo(text="...")
+	  	
+	 	@MetaInfo(multiKeyText="
+		&#9; key1 : value
+		&#9; key2 : Some text with 
+		&#9;&#9; new line
+		")
+	  </code></pre>
+	 */
+	AnnotationType MetaInfo {
+		target = ActorClass // CaGe TestSuite and TestCase
+		optional attribute key: ptCharacter				// key=text
+		optional attribute text: ptCharacter			// text=text
+		optional attribute multiKeyText: ptCharacter	// key:text pairs separated by ':'
+	}
+	
+	/**
+	 * BehaviorManual suppresses the generation of the implementation file (.c) for an ActorClass
+	 */
+	AnnotationType BehaviorManual {
+		target = ActorBehavior
+	}
+	
+	/**
+	 * Special user code which is generated to the sub system instance.
+	 */
+	AnnotationType SubSystemUserCode {
+		target = ActorClass
+		mandatory attribute userCode: ptCharacter
+	}
+	
+	AnnotationType Deprecated {
+		target = {
+			ActorClass, DataClass, Message, Port, ProtocolClass, SubSystemClass, RoomModel
+		}
+		optional attribute error: ptBoolean
+		optional attribute noGenerate: ptBoolean
+	}
+	
+	/**
+	 * A SubSystemClass or ActorClass having this annotation is construed as an instance.<br>
+	 * During generation the necessary instantiation (LogicalSystem, SubSystemRef etc.) and mapping will be created. 
+	 * <p>
+	 * Must not have LogicalThreads. Globally only once allowed. Runtime execution on DefaultThread of given PhysicalSystem.
+	 * </p>
+	 */
+	AnnotationType TestInstance {
+		target = { SubSystemClass, ActorClass }
+	}
+	
+	AnnotationType DataLogging {
+		target = SubSystemClass
+		mandatory attribute pathlist: ptCharacter
+	}
+	
+	AnnotationType Gnuplot {
+		target = SubSystemClass
+		mandatory attribute format: ptCharacter
+		mandatory attribute outputfile: ptCharacter
+		mandatory attribute width: ptInteger
+		mandatory attribute height: ptInteger
+		optional attribute fontsize: ptInteger
+	}
+	
+	AnnotationType GnuplotGraph {
+		target = SubSystemClass
+		mandatory attribute paths: ptCharacter
+		optional attribute interval: ptInteger
+		optional attribute xtics: ptReal
+		optional attribute mxtics: ptInteger
+		optional attribute ymin: ptReal
+		optional attribute ymax: ptReal
+	}
+	
+}

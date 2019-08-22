@@ -1,19 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="org.eclipse.etrice.generator.launch.java.launchConfigurationType">
+<booleanAttribute key="DataLogging" value="false"/>
+<booleanAttribute key="DataObj" value="false"/>
 <booleanAttribute key="Debug" value="false"/>
 <booleanAttribute key="GenDocumentation" value="false"/>
 <booleanAttribute key="GenInstanceDiagram" value="false"/>
 <stringAttribute key="GenModelPath" value=""/>
+<booleanAttribute key="GenerateDepsWithinProject" value="true"/>
 <booleanAttribute key="Lib" value="true"/>
 <booleanAttribute key="MSC" value="true"/>
+<stringAttribute key="MainMethodName" value="main"/>
 <listAttribute key="ModelFiles">
-<listEntry value="${workspace_loc:/org.eclipse.etrice.modellib.java/model/TimingService.room}"/>
-<listEntry value="${workspace_loc:/org.eclipse.etrice.modellib.java/model/ALogService.room}"/>
-<listEntry value="${workspace_loc:/org.eclipse.etrice.modellib.java/model/TcpService.room}"/>
-<listEntry value="${workspace_loc:/org.eclipse.etrice.modellib.java/model/Tests.room}"/>
+<listEntry value="${workspace_loc:/org.eclipse.etrice.modellib.java/model/etrice/api/annotations.room}"/>
+<listEntry value="${workspace_loc:/org.eclipse.etrice.modellib.java/model/etrice/api/language.room}"/>
+<listEntry value="${workspace_loc:/org.eclipse.etrice.modellib.java/model/etrice/api/logger.room}"/>
+<listEntry value="${workspace_loc:/org.eclipse.etrice.modellib.java/model/etrice/api/tcp.room}"/>
+<listEntry value="${workspace_loc:/org.eclipse.etrice.modellib.java/model/etrice/api/timer.room}"/>
+<listEntry value="${workspace_loc:/org.eclipse.etrice.modellib.java/model/etrice/api/types.room}"/>
+<listEntry value="${workspace_loc:/org.eclipse.etrice.modellib.java/model/etrice/api/contracts/definitions.room}"/>
+<listEntry value="${workspace_loc:/org.eclipse.etrice.modellib.java/model/etrice/api/contracts/monitors.room}"/>
 </listAttribute>
+<booleanAttribute key="OldStyleTransitionData" value="false"/>
+<booleanAttribute key="OverrideDirectories" value="false"/>
 <booleanAttribute key="Persist" value="false"/>
 <booleanAttribute key="SaveGenModel" value="false"/>
+<booleanAttribute key="UseTranslation" value="true"/>
 <booleanAttribute key="Verbose" value="false"/>
 <stringAttribute key="org.eclipse.debug.core.ATTR_REFRESH_SCOPE" value="${workspace}"/>
 </launchConfiguration>

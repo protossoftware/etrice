@@ -8,9 +8,9 @@ dependencies {
 }
 
 def models = [
-	'model/ALogService.room',
-	'model/TcpService.room',
-	'model/TimingService.room',
+	'model/etrice/api/logger.room',
+	'model/etrice/api/tcp.room',
+	'model/etrice/api/timer.room',
 	'model/etrice/api/contracts/monitors.room'
 ]
 

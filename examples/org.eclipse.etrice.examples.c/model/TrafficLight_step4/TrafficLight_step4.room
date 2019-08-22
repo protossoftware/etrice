@@ -1,14 +1,14 @@
 RoomModel TrafficLight_step4 {
 	
 	import TrafficLight.HierarchicalReplication
-	import room.basic.service.timing.ATimingService
+	import etrice.api.timer.ATimerService
 
 	LogicalSystem TrafficLight {
 		SubSystemRef subSystem: TrafficLightStep4_MultipleTrafficLights
 	}
 
 	SubSystemClass TrafficLightStep4_MultipleTrafficLights {
-		ActorRef timingService: ATimingService
+		ActorRef timingService: ATimerService
 		ActorRef step4_HierarchicalReplication: HierarchicalReplication
 		LayerConnection ref step4_HierarchicalReplication satisfied_by timingService.timer
 

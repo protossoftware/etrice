@@ -1,8 +1,8 @@
 RoomModel DynamicActorTest3 {
 
-	import room.basic.types.int32
-	import room.basic.types.string
-	import room.basic.test.TestInstance
+	import etrice.api.types.int32
+	import etrice.api.types.string
+	import etrice.api.annotations.TestInstance
 
 	ActorClass Appl {
 		@TestInstance

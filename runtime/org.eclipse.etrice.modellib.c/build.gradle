@@ -7,9 +7,11 @@ dependencies {
 }
 
 def models = [
-	'model/PInterrupt.room',
-	'model/TcpService.room',
-	'model/TimingService.room',
+	'model/etrice/api/interrupt.room',
+	'model/etrice/api/logger.room',
+	'model/etrice/api/tcp.room',
+	'model/etrice/api/testcontrol.room',
+	'model/etrice/api/timer.room',
 	'model/etrice/api/contracts/monitors.room'
 ]
 

@@ -1,0 +1,20 @@
+RoomModel etrice.api.annotations {
+	
+	AnnotationType ImplementationSubclass {
+        target = ActorClass
+        mandatory attribute fqnClassName: ptCharacter
+        optional attribute includePath: ptCharacter
+	}
+	
+	/**
+	 * A SubSystemClass or ActorClass having this annotation is construed as an instance.<br>
+	 * During generation the necessary instantiation (LogicalSystem, SubSystemRef etc.) and mapping will be created. 
+	 * <p>
+	 * Must not have LogicalThreads. Globally only once allowed. Runtime execution on DefaultThread of given PhysicalSystem.
+	 * </p>
+	 */
+	AnnotationType TestInstance {
+		target = { SubSystemClass, ActorClass }
+	}
+	
+}

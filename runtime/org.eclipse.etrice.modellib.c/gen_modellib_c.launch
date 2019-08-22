@@ -5,18 +5,27 @@
 <booleanAttribute key="GenDocumentation" value="false"/>
 <booleanAttribute key="GenInstanceDiagram" value="false"/>
 <stringAttribute key="GenModelPath" value=""/>
+<booleanAttribute key="GenerateDepsWithinProject" value="true"/>
 <booleanAttribute key="Lib" value="true"/>
 <booleanAttribute key="MSC" value="true"/>
 <stringAttribute key="MainMethodName" value="main"/>
 <listAttribute key="ModelFiles">
-<listEntry value="${workspace_loc:/org.eclipse.etrice.modellib.c/model/TimingService.room}"/>
-<listEntry value="${workspace_loc:/org.eclipse.etrice.modellib.c/model/TcpService.room}"/>
-<listEntry value="${workspace_loc:/org.eclipse.etrice.modellib.c/model/Tests.room}"/>
-<listEntry value="${workspace_loc:/org.eclipse.etrice.modellib.c/model/PInterrupt.room}"/>
+<listEntry value="${workspace_loc:/org.eclipse.etrice.modellib.c/model/etrice/api/annotations.room}"/>
+<listEntry value="${workspace_loc:/org.eclipse.etrice.modellib.c/model/etrice/api/interrupt.room}"/>
+<listEntry value="${workspace_loc:/org.eclipse.etrice.modellib.c/model/etrice/api/language.room}"/>
+<listEntry value="${workspace_loc:/org.eclipse.etrice.modellib.c/model/etrice/api/logger.room}"/>
+<listEntry value="${workspace_loc:/org.eclipse.etrice.modellib.c/model/etrice/api/tcp.room}"/>
+<listEntry value="${workspace_loc:/org.eclipse.etrice.modellib.c/model/etrice/api/testcontrol.room}"/>
+<listEntry value="${workspace_loc:/org.eclipse.etrice.modellib.c/model/etrice/api/timer.room}"/>
+<listEntry value="${workspace_loc:/org.eclipse.etrice.modellib.c/model/etrice/api/types.room}"/>
+<listEntry value="${workspace_loc:/org.eclipse.etrice.modellib.c/model/etrice/api/contracts/definitions.room}"/>
+<listEntry value="${workspace_loc:/org.eclipse.etrice.modellib.c/model/etrice/api/contracts/monitors.room}"/>
 </listAttribute>
+<booleanAttribute key="OldStyleTransitionData" value="false"/>
 <booleanAttribute key="OverrideDirectories" value="false"/>
 <booleanAttribute key="SaveGenModel" value="false"/>
 <booleanAttribute key="UseTranslation" value="true"/>
 <booleanAttribute key="Verbose" value="false"/>
+<booleanAttribute key="cppFileExtensions" value="false"/>
 <stringAttribute key="org.eclipse.debug.core.ATTR_REFRESH_SCOPE" value="${project}"/>
 </launchConfiguration>

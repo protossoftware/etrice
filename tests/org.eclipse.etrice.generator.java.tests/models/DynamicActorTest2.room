@@ -1,7 +1,7 @@
 RoomModel DynamicActorTest2 {
 
-	import room.basic.types.int32
-	import room.basic.types.string
+	import etrice.api.types.int32
+	import etrice.api.types.string
 	
 	LogicalSystem JavaGenTests {
 		SubSystemRef da2Test: SubSystem_DynamicActorTest2

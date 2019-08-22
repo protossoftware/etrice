@@ -1,7 +1,7 @@
 RoomModel ProtocolClasses {
 	
-	import room.basic.types.int16
-	import room.basic.types.int32
+	import etrice.api.types.int16
+	import etrice.api.types.int32
 
 	// eventdriven ProtocolClass (asynchronous message passing, bidirectional)
 	eventdriven ProtocolClass ProtocolClassEvt {

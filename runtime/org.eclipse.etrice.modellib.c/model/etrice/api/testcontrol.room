@@ -1,0 +1,163 @@
+/*******************************************************************************
+ * Copyright (c) 2019 protos software gmbh (http://www.protos.de).
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License 2.0
+ * which accompanies this distribution, and is available at
+ * https://www.eclipse.org/legal/epl-2.0/
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *
+ *******************************************************************************/
+ 
+RoomModel etrice.api.testcontrol {
+
+	import etrice.api.types.boolean
+	import etrice.api.types.int16
+
+	/**
+	 * Simple protocol to start or stop tests.
+	 */
+	ProtocolClass PTestControl {
+		incoming {
+
+			/**
+			 *  Start test execution.
+			 */
+			Message start()
+
+			/**
+			 *  Abort test execution.
+			 */
+			Message abort()
+		}
+		outgoing {
+
+			/**
+			 *  Reply after test execution is done. Status is true if all tests have passed.
+			 */
+			Message done(boolean)
+		}
+//		semantics {
+//			in:start -> out:done
+//			in:abort -> out:done
+//		}
+	}
+
+	ActorClass ControllableSequentialTestExecutor {
+		Interface {
+
+			// control execution
+			Port exeControl: PTestControl
+
+			// tests
+			conjugated Port control[*]: PTestControl
+		}
+		Structure {
+			external Port exeControl
+			external Port control
+			Attribute current: int16
+			Attribute overallSuccess: boolean
+		}
+		Behavior {
+			StateMachine {
+				State execute {
+				}
+
+				Transition init0: initial -> idle
+				State idle {
+					entry '''
+						current = 0;
+						overallSuccess = true;
+					'''
+				}
+				Transition tr0: idle -> cp cp1 {
+					triggers {
+						<start: exeControl>
+					}
+				}
+				Transition tr1: execute -> aborted {
+					triggers {
+						<abort: exeControl>
+					}
+					action '''
+						control[current].abort();
+					'''
+				}
+				State aborted
+				ChoicePoint cp0
+				ChoicePoint cp1
+				Transition tr2: execute -> cp cp0 {
+					triggers {
+						<done: control>
+					}
+					action '''
+						overallSuccess &= transitionData;
+						current++;'''
+				}
+				Transition tr3: cp cp0 -> idle {
+					action '''exeControl.done(overallSuccess);'''
+				}
+				Transition tr4: cp cp0 -> execute {
+					cond '''current < self->constData->control.size'''
+					action '''control[current].start();'''
+				}
+				Transition tr5: cp cp1 -> idle {
+					action '''exeControl.done(overallSuccess);'''
+				}
+				Transition tr6: cp cp1 -> execute {
+					cond '''current < self->constData->control.size'''
+					action '''control[current].start();'''
+				}
+				Transition tr7: aborted -> idle {
+					triggers {
+						<done: control>
+					}
+					action '''
+						exeControl.done(false);
+					'''
+				}
+			}
+		}
+	}
+
+	/**
+	 * SequentialTestExecutor that starts automatically.
+	 */
+	ActorClass SequentialTestExecutor {
+		Interface {
+			conjugated Port control[*]: PTestControl
+		}
+		Structure {
+			usercode3 '''#include "etUnit/etUnit.h"'''
+			external Port control
+			Attribute current: int16
+		}
+		Behavior {
+			StateMachine {
+				State execute {
+					entry '''
+						if(current < self->constData->control.size){
+							control[current].start();
+						} else {
+							etUnit_close();
+							etUnit_testFinished(0);
+						}
+					'''
+				}
+				Transition init0: initial -> execute {
+					action '''
+						current = 0;
+						etUnit_open("log", "results");
+					'''
+				}
+				Transition tr0: execute -> execute {
+					triggers {
+						<done: control>
+					}
+					action '''current++;'''
+				}
+			}
+		}
+	}
+
+}

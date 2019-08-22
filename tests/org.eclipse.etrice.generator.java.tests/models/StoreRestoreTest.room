@@ -1,6 +1,6 @@
 RoomModel StoreRestoreTest {
 
-	import room.basic.test.TestInstance
+	import etrice.api.annotations.TestInstance
 
 	ActorClass StoreRestore_Top {
 		@TestInstance

@@ -1,7 +1,7 @@
 MappingModel DynamicConfigTest {
 
 	import DynamicConfigTest.System_DynamicConfigTest
-	import room.generic.physical.GenericPhysicalSystem
+	import GenericPhysical.GenericPhysicalSystem
 
 	Mapping System_DynamicConfigTest -> GenericPhysicalSystem {
 		SubSystemMapping main -> node {

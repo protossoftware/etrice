@@ -5,7 +5,7 @@
  */
 MappingModel TemplateMapping {
 	
-	import room.generic.physical.GenericPhysicalSystem
+	import GenericPhysical.GenericPhysicalSystem
 	import PingPong.LogSys
 
 	Mapping LogSys -> GenericPhysicalSystem {

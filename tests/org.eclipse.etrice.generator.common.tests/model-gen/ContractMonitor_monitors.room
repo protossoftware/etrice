@@ -2,7 +2,7 @@
 
 RoomModel ContractMonitor_monitors {
 
-	import room.basic.types.*
+	import etrice.api.types.*
 	import etrice.api.contracts.definitions.*
 	import ContractMonitor.*
 

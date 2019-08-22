@@ -1,7 +1,7 @@
 RoomModel SubSystemUserCodeTest {
 
-	import room.basic.annotations.SubSystemUserCode
-	import room.basic.test.TestInstance
+	import etrice.api.annotations.SubSystemUserCode
+	import etrice.api.annotations.TestInstance
 
 	ActorClass AGeneratedUserCode {
 		@TestInstance

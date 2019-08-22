@@ -1,0 +1,3 @@
+RoomModel etrice.api.language {
+	PrimitiveType languageIndicator: ptInteger -> 'int8' default '2'
+}

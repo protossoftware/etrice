@@ -1,18 +1,18 @@
 RoomModel DataDrivenTest {
 
-	import room.basic.types.float32
-	import room.basic.types.int8
-	import room.basic.types.int16
-	import room.basic.types.int32
-	import room.basic.service.timing.PTimer
-	import room.basic.service.timing.ATimingService
-	import room.basic.test.TestInstance
+	import etrice.api.types.float32
+	import etrice.api.types.int8
+	import etrice.api.types.int16
+	import etrice.api.types.int32
+	import etrice.api.timer.PTimer
+	import etrice.api.timer.ATimerService
+	import etrice.api.annotations.TestInstance
 
 	ActorClass DataDrivenTest_Top {
 		@TestInstance
 		Structure {
 			ActorRef appl: Appl
-			ActorRef timing: ATimingService
+			ActorRef timing: ATimerService
 			LayerConnection ref appl satisfied_by timing.timer
 		}
 	}

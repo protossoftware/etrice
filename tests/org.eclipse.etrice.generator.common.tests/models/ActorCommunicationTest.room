@@ -1,18 +1,18 @@
 RoomModel ActorCommunicationTest {
 
-	import room.basic.types.boolean
-	import room.basic.types.int8
-	import room.basic.types.int16
-	import room.basic.types.int32
-	import room.basic.test.TestInstance
-	import room.basic.service.timing.PTimer
-	import room.basic.service.timing.ATimingService
+	import etrice.api.types.boolean
+	import etrice.api.types.int8
+	import etrice.api.types.int16
+	import etrice.api.types.int32
+	import etrice.api.annotations.TestInstance
+	import etrice.api.timer.PTimer
+	import etrice.api.timer.ATimerService
 
 	ActorClass ActorCommunicationTest_Top {
 		@TestInstance
 		Structure {
 			ActorRef singleThread_Appl: Appl
-			ActorRef timing: ATimingService
+			ActorRef timing: ATimerService
 			LayerConnection ref singleThread_Appl satisfied_by timing.timer
 		}
 	}

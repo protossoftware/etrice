@@ -1,11 +1,11 @@
 RoomModel DataTypes {
 
 	// For PrimitiveType examples see Types.room
-	import room.basic.types.boolean
-	import room.basic.types.uint16
-	import room.basic.types.uint32
-	import room.basic.types.charPtr
-	import room.basic.types.voidType
+	import etrice.api.types.boolean
+	import etrice.api.types.uint16
+	import etrice.api.types.uint32
+	import etrice.api.types.charPtr
+	import etrice.api.types.voidType
 
 	DataClass SimpleDataClass {
 		Attribute attribute1: uint16

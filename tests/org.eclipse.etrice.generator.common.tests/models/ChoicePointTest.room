@@ -1,8 +1,8 @@
 RoomModel ChoicePointTest {
 
-	import room.basic.types.int16
-	import room.basic.types.int32
-	import room.basic.test.TestInstance
+	import etrice.api.types.int16
+	import etrice.api.types.int32
+	import etrice.api.annotations.TestInstance
 
 	ActorClass CPTest_Top {
 		@TestInstance

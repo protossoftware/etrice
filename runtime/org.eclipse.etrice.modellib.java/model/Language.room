@@ -1,3 +1,0 @@
-RoomModel room.basic.language {
-	PrimitiveType languageIndicator: ptInteger -> 'byte' (Byte) default '1'
-}

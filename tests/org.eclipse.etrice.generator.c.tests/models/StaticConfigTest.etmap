@@ -1,7 +1,7 @@
 MappingModel StaticConfigTest {
 
 	import StaticConfigTest.System_StaticConfigTest
-	import room.generic.physical.GenericPhysicalSystem
+	import GenericPhysical.GenericPhysicalSystem
 
 	Mapping System_StaticConfigTest -> GenericPhysicalSystem {
 		SubSystemMapping main -> node {

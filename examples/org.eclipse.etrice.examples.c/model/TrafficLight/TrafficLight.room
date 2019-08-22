@@ -1,12 +1,12 @@
 RoomModel TrafficLight {
 
-	import room.basic.types.boolean
-	import room.basic.types.char
-	import room.basic.types.int32
-	import room.basic.service.timing.PTimer
-	import room.basic.service.tcp.PTcpPayload
-	import room.basic.service.tcp.PTcpControl
-	import room.basic.service.tcp.ATcpClient
+	import etrice.api.types.boolean
+	import etrice.api.types.char
+	import etrice.api.types.int32
+	import etrice.api.timer.PTimer
+	import etrice.api.tcp.PTcpPayload
+	import etrice.api.tcp.PTcpControl
+	import etrice.api.tcp.ATcpClient
 
 	ActorClass TestApplication ["The TestApplication contains the PedestrianTrafficLightController and its test harness."] {
 		Structure {
