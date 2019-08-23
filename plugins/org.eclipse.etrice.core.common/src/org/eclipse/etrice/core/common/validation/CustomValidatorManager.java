@@ -134,7 +134,7 @@ public class CustomValidatorManager extends AbstractDeclarativeValidator {
 	}
 	
 	@Check
-	public void checkObject(EObject object) {
+	public void checkObjectsStandalone(EObject object) {
 		ICustomValidator.ValidationContext context = new ValidationContextImpl(isStandalone(), isGeneration(), getCheckMode());
 		Set<EClass> checkTypes = new HashSet<EClass>(object.eClass().getEAllSuperTypes());
 		checkTypes.add(object.eClass());

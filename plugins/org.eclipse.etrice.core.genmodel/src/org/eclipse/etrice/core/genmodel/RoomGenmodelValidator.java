@@ -31,7 +31,6 @@ import org.eclipse.etrice.core.genmodel.fsm.IDiagnostician;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.generator.base.logging.NullLogger;
-import org.eclipse.xtext.validation.CheckType;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 
 import com.google.inject.Inject;
@@ -110,30 +109,28 @@ public class RoomGenmodelValidator implements ICustomValidator {
 		
 		if (object instanceof RoomModel) {
 			RoomModel model = (RoomModel) object;
-			if (context.getCheckMode().shouldCheck(CheckType.NORMAL)) {
-				ArrayList<RoomModel> models = new ArrayList<RoomModel>();
-				ArrayList<RoomModel> importedModels = new ArrayList<RoomModel>();
-				
-				models.add(model);
-				
-				Resource resource = model.eResource();
-				if (resource != null) {
-					ResourceSet rs = resource.getResourceSet();
-					if (rs != null) {
-						EcoreUtil.resolveAll(rs);
-						for (Resource res : rs.getResources()) {
-							for (EObject obj : res.getContents()) {
-								if (obj instanceof RoomModel && obj!=model)
-									importedModels.add((RoomModel) obj);
-							}
+			ArrayList<RoomModel> models = new ArrayList<RoomModel>();
+			ArrayList<RoomModel> importedModels = new ArrayList<RoomModel>();
+			
+			models.add(model);
+			
+			Resource resource = model.eResource();
+			if (resource != null) {
+				ResourceSet rs = resource.getResourceSet();
+				if (rs != null) {
+					EcoreUtil.resolveAll(rs);
+					for (Resource res : rs.getResources()) {
+						for (EObject obj : res.getContents()) {
+							if (obj instanceof RoomModel && obj!=model)
+								importedModels.add((RoomModel) obj);
 						}
 					}
 				}
-				
-				Diag diagnostician = new Diag(messageAcceptor);
-				GeneratorModelBuilder builder = genModelBuilderFactory.create(new NullLogger(), diagnostician);
-				builder.createGeneratorModel(models, importedModels, model.getSystems().isEmpty());
 			}
+			
+			Diag diagnostician = new Diag(messageAcceptor);
+			GeneratorModelBuilder builder = genModelBuilderFactory.create(new NullLogger(), diagnostician);
+			builder.createGeneratorModel(models, importedModels, model.getSystems().isEmpty());
 		}
 		
 	}
