@@ -48,12 +48,12 @@ public class ModelPathResourceSetInitializer implements IResourceSetInitializer 
 		}
 		
 		@Override
-		public Stream<URI> getFiles(QualifiedName name) {
+		public Stream<ModelFile> getFiles(QualifiedName name) {
 			return ModelPathManager.INSTANCE.getModelPath(project).getFiles(name);
 		}
 
 		@Override
-		public Stream<URI> getAllFiles() {
+		public Stream<ModelFile> getAllFiles() {
 			return ModelPathManager.INSTANCE.getModelPath(project).getAllFiles();
 		}
 

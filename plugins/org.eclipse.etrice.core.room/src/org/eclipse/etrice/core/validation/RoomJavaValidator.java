@@ -139,7 +139,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 			IModelPath modelpath = modelPathProvider.get(resource);
 			modelpath.getQualifiedName(resource.getURI()).ifPresent(fileName -> {
 				if(!fileName.equals(modelName)) {
-					warning("model name doesn't match its file name and its location on the modelpath", RoomPackage.Literals.ROOM_MODEL__NAME,
+					error("model name doesn't match its file name and its location on the modelpath", RoomPackage.Literals.ROOM_MODEL__NAME,
 							WRONG_MODEL_NAME, nameConverter.toString(modelName), nameConverter.toString(fileName));
 				}
 			});

@@ -16,8 +16,8 @@ package org.eclipse.etrice.core.common.scoping;
 
 import java.util.Arrays;
 
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.etrice.core.common.scoping.ModelPathGlobalScopeProvider.IModelPathFileFilter;
+import org.eclipse.etrice.generator.base.io.IModelPath.ModelFile;
 
 /**
  * Filters the model path by file extension.
@@ -37,12 +37,8 @@ public class ModelPathFileExtensionFilter implements IModelPathFileFilter {
 	}
 	
 	@Override
-	public boolean apply(URI uri) {
-		String fileExtension = uri.fileExtension();
-		if(fileExtension != null) {
-			return Arrays.binarySearch(legalFileExtensions, fileExtension) >= 0;
-		}
-		return false;
+	public boolean apply(ModelFile file) {
+		return Arrays.binarySearch(legalFileExtensions, file.extension) >= 0;
 	}
 
 }

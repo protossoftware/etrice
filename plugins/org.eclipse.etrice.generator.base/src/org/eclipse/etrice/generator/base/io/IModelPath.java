@@ -26,19 +26,19 @@ public interface IModelPath {
 	public static final IModelPath EMPTY = new EmptyModelPath();
 	
 	/**
-	 * Returns all files that could contain the object with the specified name.
+	 * Returns all files on this modelpath with the specified name.
 	 * 
-	 * @param name the fully qualified name of the object
-	 * @return a stream of file uris
+	 * @param name the name of the desired files
+	 * @return a stream of files
 	 */
-	public Stream<URI> getFiles(QualifiedName name);
+	public Stream<ModelFile> getFiles(QualifiedName name);
 	
 	/**
 	 * Returns all files on this modelpath.
 	 * 
-	 * @return a stream of file uris
+	 * @return a stream of files
 	 */
-	public Stream<URI> getAllFiles();
+	public Stream<ModelFile> getAllFiles();
 	
 	/**
 	 * Returns a qualified name for the model objects in the file.
@@ -51,19 +51,49 @@ public interface IModelPath {
 	/**
 	 * Checks whether the modelpath is empty.
 	 * 
-	 * @return true if the modelpath is empty.
+	 * @return true if the modelpath is empty
 	 */
 	public boolean isEmpty();
 	
-	static class EmptyModelPath implements IModelPath {
+	public static final class ModelFile {
+		public final URI uri;
+		public final QualifiedName name;
+		public final String extension;
+		
+		public ModelFile(URI uri, QualifiedName name, String extension) {
+			this.uri = uri;
+			this.name = name;
+			this.extension = extension;
+		}
+
+		/**
+		 * Computes the name and extension of the new model file from package and file name. 
+		 * 
+		 * @param uri the uri of the file
+		 * @param pkg the package of the file
+		 * @param fileName the name of the file
+		 * @return a new model file
+		 */
+		public static ModelFile create(URI uri, QualifiedName pkg, String fileName) {
+			int periodIndex = fileName.lastIndexOf('.');
+			if(periodIndex != -1) {
+				String name = fileName.substring(0, periodIndex);
+				String extension = fileName.substring(periodIndex + 1);
+				return new ModelFile(uri, pkg.append(name), extension);
+			}
+			return new ModelFile(uri, pkg.append(fileName), "");
+		}
+	}
+	
+	public static class EmptyModelPath implements IModelPath {
 		
 		@Override
-		public Stream<URI> getFiles(QualifiedName name) {
+		public Stream<ModelFile> getFiles(QualifiedName name) {
 			return Stream.empty();
 		}
 
 		@Override
-		public Stream<URI> getAllFiles() {
+		public Stream<ModelFile> getAllFiles() {
 			return Stream.empty();
 		}
 

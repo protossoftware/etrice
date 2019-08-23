@@ -6,7 +6,7 @@ dependencies {
 }
 
 def models = [
-	'model/Mapping.etmap',
+	'model/TemplateMapping.etmap',
 	'model/TemplateModel.room'
 ]
 

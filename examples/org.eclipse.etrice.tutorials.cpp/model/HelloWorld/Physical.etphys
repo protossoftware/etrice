@@ -1,4 +1,4 @@
-PhysicalModel TemplatePhysical {
+PhysicalModel Physical {
 	
 	PhysicalSystem TemplatePhysicalSystem {
 		NodeRef node : DefaultNodeClass

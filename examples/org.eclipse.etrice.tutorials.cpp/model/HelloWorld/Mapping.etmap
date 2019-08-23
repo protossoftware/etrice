@@ -5,7 +5,7 @@
  */
 MappingModel TemplateMapping {
 
-	import TemplatePhysical.TemplatePhysicalSystem
+	import Physical.TemplatePhysicalSystem
 	import HelloWorld.LogSys
 
 	Mapping LogSys -> TemplatePhysicalSystem {

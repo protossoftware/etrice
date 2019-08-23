@@ -39,27 +39,25 @@ public class WorkspaceModelPath implements IModelPath {
 	/**
 	 * Constructs a new modelpath.
 	 * 
-	 * @param paths the paths to seach for model files
+	 * @param paths the paths to search for model files
 	 */
 	public WorkspaceModelPath(List<IContainer> paths) {
 		this.paths = paths;
 	}
 	
 	@Override
-	public Stream<URI> getFiles(QualifiedName name) {
-		Stream<URI> stream = Stream.empty();
-		while(!name.isEmpty()) {
-			name = name.skipLast(1);
-			stream = Stream.concat(stream, getPackage(name));
-		}
-		return stream;
+	public Stream<ModelFile> getFiles(QualifiedName name) {
+		QualifiedName pkgName = name.skipLast(1);
+		String fileName = name.getLastSegment();
+		return getPackage(pkgName)
+				.filter(mf -> mf.name.getLastSegment().equals(fileName));
 	}
 
 	@Override
-	public Stream<URI> getAllFiles() {
+	public Stream<ModelFile> getAllFiles() {
 		return paths.stream()
 				.filter(container -> container.isAccessible())
-				.flatMap(container -> getAllFiles(container));
+				.flatMap(container -> listAllFiles(container, QualifiedName.EMPTY));
 	}
 	
 	@Override
@@ -90,60 +88,64 @@ public class WorkspaceModelPath implements IModelPath {
 	}
 	
 	/**
-	 * Constructrs a stream of file contained in the specified package.
+	 * Constructs a stream of files contained in the specified package.
 	 * 
 	 * @param name the fully qualified name of the package
-	 * @return a stream of file uris
+	 * @return a stream of files
 	 */
-	private Stream<URI> getPackage(QualifiedName name) {
-		String pathStr = name.toString().replace('.', '/');
-		Path path = new Path(pathStr);
+	private Stream<ModelFile> getPackage(QualifiedName name) {
+		Path path = new Path(name.toString("/"));
 		return paths.stream()
 			.map(container -> container.getFolder(path))
 			.filter(folder -> folder.exists())
-			.flatMap(folder -> getFiles(folder));
+			.flatMap(folder -> listFiles(folder, name));
 	}
 	
 	/**
 	 * Constructs a stream of files contained in the specified container.
 	 * 
 	 * @param container the container to be searched for files
+	 * @param name the qualified name of the container
 	 * @return a stream of file uris
 	 */
-	private Stream<URI> getFiles(IContainer container) {
+	private Stream<ModelFile> listFiles(IContainer container, QualifiedName name) {
 		return getMembers(container)
 			.filter(resource -> resource.getType() == IResource.FILE)
-			.map(IFile.class::cast)
-			.map(file -> createURI(file));
+			.map(file -> createModelFile((IFile) file, name));
 	}
 	
 	/**
 	 * Constructs a stream that contains all files in the container including files of subfolders.
 	 * 
 	 * @param container the container to be searched for files
+	 * @param name the qualified name of the container
 	 * @return a stream of file uris
 	 */
-	private Stream<URI> getAllFiles(IContainer container) {
+	private Stream<ModelFile> listAllFiles(IContainer container, QualifiedName name) {
 		return getMembers(container)
 			.flatMap(resource -> {
 				if(resource.getType() == IResource.FILE) {
-					IFile file = (IFile) resource;
-					URI uri = createURI(file);
-					return Stream.of(uri);
+					return Stream.of(createModelFile((IFile) resource, name));
 				}
 				else if(resource.getType() == IResource.FOLDER) {
 					IFolder subfolder = (IFolder) resource;
-					return getAllFiles(subfolder);
+					return listAllFiles(subfolder, name.append(subfolder.getName()));
 				}
 				return Stream.empty();
 			});
 	}
 	
 	/**
-	 * Creates an uri for the passed file.
+	 * Creates a model file from an eclipse file and the name of the package.
+	 * 
+	 * @param file the eclipse file
+	 * @param pkg the qualified name of the package
+	 * @return the new model file
 	 */
-	private URI createURI(IResource resource) {
-		return URI.createPlatformResourceURI(resource.getFullPath().toString(), true);
+	private ModelFile createModelFile(IFile file, QualifiedName pkg) {
+		URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
+		String fileName = file.getName();
+		return ModelFile.create(uri, pkg, fileName);
 	}
 	
 	/**

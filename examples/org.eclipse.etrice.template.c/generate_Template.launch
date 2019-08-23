@@ -10,9 +10,9 @@
 <booleanAttribute key="MSC" value="true"/>
 <stringAttribute key="MainMethodName" value="main"/>
 <listAttribute key="ModelFiles">
+<listEntry value="${workspace_loc:/org.eclipse.etrice.template.c/model/TemplateMapping.etmap}"/>
 <listEntry value="${workspace_loc:/org.eclipse.etrice.template.c/model/TemplateModel.room}"/>
-<listEntry value="${workspace_loc:/org.eclipse.etrice.template.c/model/Physical.etphys}"/>
-<listEntry value="${workspace_loc:/org.eclipse.etrice.template.c/model/Mapping.etmap}"/>
+<listEntry value="${workspace_loc:/org.eclipse.etrice.template.c/model/TemplatePhysical.etphys}"/>
 </listAttribute>
 <booleanAttribute key="OldStyleTransitionData" value="false"/>
 <booleanAttribute key="OverrideDirectories" value="false"/>

@@ -179,9 +179,6 @@ public class ImportHelpers {
 		IScope scope = getVisibleScope(resource, type);
 		scope.getAllElements().forEach((eObjDesc) -> {
 			if(eObjDesc.getName().getLastSegment().equalsIgnoreCase(issueString)) {
-				// - Bug 549427 - hide element that cannot be resolved (why is it here?)
-				if(scope.getSingleElement(eObjDesc.getName()) == null) return;
-				// -
 				Import imp = BaseFactory.eINSTANCE.createImport();
 				imp.setImportedNamespace((wildcard) ? eObjDesc.getQualifiedName().skipLast(1) + ".*" : eObjDesc.getQualifiedName().toString());
 				result.add(imp);

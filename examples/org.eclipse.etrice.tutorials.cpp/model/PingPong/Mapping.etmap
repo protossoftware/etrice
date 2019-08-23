@@ -5,7 +5,7 @@
  */
 MappingModel TemplateMapping {
 
-	import TemplatePhysical.TemplatePhysicalSystem
+	import Physical.TemplatePhysicalSystem
 	import PingPong.LogSys
 
 	Mapping LogSys -> TemplatePhysicalSystem {

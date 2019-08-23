@@ -37,7 +37,7 @@ import org.eclipse.xtext.naming.QualifiedName;
 public class FileSystemModelPath implements IModelPath {
 	
 	private List<Path> paths;
-	private HashMap<QualifiedName, List<URI>> packages;
+	private HashMap<QualifiedName, List<ModelFile>> packages;
 	
 	/**
 	 * Creates a new modelpath that contains all files in the passed paths.
@@ -50,17 +50,15 @@ public class FileSystemModelPath implements IModelPath {
 	}
 	
 	@Override
-	public Stream<URI> getFiles(QualifiedName name) {
-		Stream<URI> stream = Stream.empty();
-		while(!name.isEmpty()) {
-			name = name.skipLast(1);
-			stream = Stream.concat(stream, getPackage(name));
-		}
-		return stream;
+	public Stream<ModelFile> getFiles(QualifiedName name) {
+		QualifiedName pkgName = name.skipLast(1);
+		String fileName = name.getLastSegment();
+		return packages.computeIfAbsent(pkgName, n -> createPackage(n)).stream()
+				.filter(mf -> mf.name.getLastSegment().equals(fileName));
 	}
 	
 	@Override
-	public Stream<URI> getAllFiles() {
+	public Stream<ModelFile> getAllFiles() {
 		throw new UnsupportedOperationException();
 	}
 	
@@ -87,27 +85,16 @@ public class FileSystemModelPath implements IModelPath {
 	}
 	
 	/**
-	 * Returns all files that are contained in the package with the specified name.
-	 * 
-	 * @param name the fully qualified name of the package
-	 * @return a stream of all file uris
-	 */
-	private Stream<URI> getPackage(QualifiedName name) {
-		List<URI> pkg = packages.computeIfAbsent(name, n -> createPackage(n));
-		return pkg.stream();
-	}
-	
-	/**
 	 * Searches for all files that are contained in the package with the specified name.
 	 * 
 	 * @param name the fully qualified name of the package
 	 * @return a list of all file uris
 	 */
-	private List<URI> createPackage(QualifiedName name) {
+	private List<ModelFile> createPackage(QualifiedName name) {
 		return paths.stream()
-			.map(path -> createPackagePath(name, path))
+			.map(path -> createPackagePath(path, name))
 			.filter(path -> Files.isDirectory(path, LinkOption.NOFOLLOW_LINKS))
-			.flatMap(dir -> collectFiles(dir))
+			.flatMap(dir -> listFiles(dir, name))
 			.collect(Collectors.toList());
 	}
 	
@@ -115,13 +102,14 @@ public class FileSystemModelPath implements IModelPath {
 	 * Lists all files of the passed directory.
 	 * 
 	 * @param dir the path of a folder
+	 * @param name the qualified name of the directory
 	 * @return a stream of file uris
 	 */
-	private Stream<URI> collectFiles(Path dir) {
+	private Stream<ModelFile> listFiles(Path dir, QualifiedName name) {
 		try {
 			return Files.list(dir)
 				.filter(path -> Files.isRegularFile(path))
-				.map(file -> createURI(file));
+				.map(file -> createModelFile(file, name));
 		}
 		catch (IOException e) {
 			throw new UncheckedIOException(e);
@@ -129,20 +117,26 @@ public class FileSystemModelPath implements IModelPath {
 	}
 	
 	/**
-	 * Creates an uri for a given path.
+	 * Creates a new model file from the path and package.
+	 * 
+	 * @param file the path of the file
+	 * @param pkg the qualified name of the package
+	 * @return the new model file
 	 */
-	private URI createURI(Path path) {
-		return URI.createURI(path.toUri().toString());
+	private ModelFile createModelFile(Path file, QualifiedName pkg) {
+		URI uri = URI.createURI(file.toUri().toString());
+		String fileName = file.getFileName().toString();
+		return ModelFile.create(uri, pkg, fileName);
 	}
 	
 	/**
 	 * Creates the path of a specific package within the passed directory.
 	 * 
-	 * @param name the fully qualified name of the package
 	 * @param dir the folder which the package path is based on
+	 * @param name the fully qualified name of the package
 	 * @return the path of the package
 	 */
-	private Path createPackagePath(QualifiedName name, Path dir) {
+	private Path createPackagePath(Path dir, QualifiedName name) {
 		if(!name.isEmpty()) {
 			String firstSegment = name.getFirstSegment();
 			String[] segments = new String[name.getSegmentCount() - 1];
