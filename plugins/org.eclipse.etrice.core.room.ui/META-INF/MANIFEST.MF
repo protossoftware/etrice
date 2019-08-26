@@ -24,7 +24,8 @@ Require-Bundle: org.eclipse.etrice.core.fsm.ui;bundle-version="2.0.0",
  org.eclipse.help,
  com.google.inject,
  org.eclipse.etrice.expressions.ui,
- org.eclipse.etrice.ui.behavior.fsm;bundle-version="2.0.0"
+ org.eclipse.etrice.ui.behavior.fsm;bundle-version="2.0.0",
+ org.eclipse.etrice.generator.base;bundle-version="2.0.0"
 Import-Package: org.apache.log4j
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.eclipse.etrice.core.ui,

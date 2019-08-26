@@ -1,11 +1,15 @@
 RoomModel Bug541775_NoInitialTransition {
 
+	import etrice.api.annotations.TestInstance
+	import etrice.api.types.int32
+
 	ProtocolClass PDummy {
 		incoming {
 			Message in1
 		}
 	}
 
+	// generate and compile this actor
 	abstract ActorClass ANoInitialTransition {
 		Structure {
 			Port p1: PDummy
@@ -17,6 +21,34 @@ RoomModel Bug541775_NoInitialTransition {
 					triggers {
 						<in1: p1>
 					}
+				}
+			}
+		}
+	}
+	
+	ActorClass AInitialTransition extends ANoInitialTransition {
+		@TestInstance
+		Structure {
+			Attribute caseId: int32
+		}
+		Behavior {
+			ctor '''
+				caseId = etUnit_openAll("log", "Bug541775Test", "org.eclipse.etrice.generator.common.tests.Bug541775", "Bug541775_case");
+			'''
+			dtor '''
+				etUnit_closeAll(caseId); 
+			'''
+			StateMachine {
+				State state0 {
+					subgraph {
+						State state0
+						Transition init: initial -> state0
+					}
+				}
+				Transition init0: initial -> state0 {
+					action '''
+						etUnit_testFinished(caseId);
+					'''
 				}
 			}
 		}

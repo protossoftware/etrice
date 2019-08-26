@@ -16,10 +16,12 @@ package org.eclipse.etrice.core.ui.contentassist;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.etrice.core.common.base.AnnotationType;
 import org.eclipse.etrice.core.common.ui.contentassist.ImportModelAssist;
 import org.eclipse.etrice.core.fsm.fSM.DetailCode;
@@ -39,12 +41,17 @@ import org.eclipse.etrice.core.services.RoomGrammarAccess;
 import org.eclipse.etrice.core.ui.util.UIExpressionUtil;
 import org.eclipse.etrice.expressions.detailcode.IDetailExpressionProvider;
 import org.eclipse.etrice.expressions.ui.contentassist.RoomExpressionProposalProvider;
+import org.eclipse.etrice.generator.base.io.IModelPath;
+import org.eclipse.etrice.generator.base.io.IModelPathProvider;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.xtext.Assignment;
-import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.formatting.IWhitespaceInformationProvider;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 
@@ -57,14 +64,36 @@ import com.google.inject.Inject;
  */
 public class RoomProposalProvider extends AbstractRoomProposalProvider {
 
-	@Inject
-	protected RoomHelpers roomHelpers;
+	@Inject protected RoomHelpers roomHelpers;	
+	@Inject protected RoomNameProvider roomNameProvider;
+	@Inject protected RoomGrammarAccess grammar;
+	@Inject protected IModelPathProvider modelPathProvider;
+	@Inject protected IWhitespaceInformationProvider whiteSpaceInfo;
 	
-	@Inject
-	protected RoomNameProvider roomNameProvider;
-	
-	@Inject
-	protected RoomGrammarAccess grammar;
+	@Override
+	public void complete_RoomModel(EObject model, RuleCall ruleCall, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		Resource resource = context.getResource();
+		if(model == null || model.eContents().isEmpty()) {
+			IModelPath modelPath = modelPathProvider.get(resource);
+			Optional<QualifiedName> modelPathFQN = modelPath.getQualifiedName(resource.getURI());
+			String modelName = modelPathFQN.map(fqn -> fqn.toString()).orElse(resource.getURI().trimFileExtension().lastSegment());
+			
+			String lineSep = whiteSpaceInfo.getLineSeparatorInformation(resource.getURI()).getLineSeparator();
+			String indent = whiteSpaceInfo.getIndentationInformation(resource.getURI()).getIndentString();
+			
+			String proposalStr = "RoomModel " + modelName + " {" + lineSep + lineSep + indent + "import etrice.api.types.*" + lineSep + lineSep + indent + lineSep + "}";
+			ICompletionProposal proposal = createCompletionProposal(proposalStr, "RoomModel - empty template", null, context);	
+			if(proposal instanceof ConfigurableCompletionProposal) {
+				ConfigurableCompletionProposal configProposal = (ConfigurableCompletionProposal) proposal;
+				configProposal.setSelectionStart(proposalStr.length() - (lineSep + "}").length());
+				configProposal.setSelectionLength(1);
+			}
+			acceptor.accept(proposal);		
+		} else {
+			super.complete_RoomModel(model, ruleCall, context, acceptor);
+		}
+	}
 	
 	@Override
 	public void completeKeyword(Keyword keyword, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {

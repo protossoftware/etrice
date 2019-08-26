@@ -23,10 +23,13 @@ import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor
 import org.eclipse.xtext.validation.Issue
 import org.eclipse.etrice.core.room.RoomPackage
+import org.eclipse.etrice.core.common.base.BasePackage
 
 class RoomQuickFixProviderXtend extends RoomQuickfixProvider {
 	
 	@Inject ImportHelpers importHelpers
+	
+	val static importQuickFixClasses = #{RoomPackage.Literals.ROOM_CLASS, BasePackage.Literals.ANNOTATION_TYPE}
 	
 	// override xtext linking issues
 	override getResolutionsForLinkingIssue(Issue issue) {			
@@ -47,7 +50,7 @@ class RoomQuickFixProviderXtend extends RoomQuickfixProvider {
 		val target = resource.getEObject(issue.uriToProblem.fragment)
 		val reference = getUnresolvedEReference(issue, target)		
 		
-		if(reference !== null && RoomPackage.Literals.ROOM_CLASS.isSuperTypeOf(reference.EReferenceType)) {
+		if(reference !== null && importQuickFixClasses.exists[it.isSuperTypeOf(reference.EReferenceType)]) {
 			createLinkingImports(issue, issueString, resource, reference.EReferenceType, false, acceptor);
 		}
 	}

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <templates>
 
-	<template autoinsert="true" context="org.eclipse.etrice.core.Room.RoomModel"
+	<!-- RoomModel template here cannot compute the namespace, use RoomProposalProvider instead -->
+	<!-->template autoinsert="true" context="org.eclipse.etrice.core.Room.RoomModel"
 		deleted="false" description="model skeleton" enabled="true" id="model"
 		name="RoomModel"
 		>RoomModel ${RoomModel1} {
@@ -17,7 +18,7 @@
 	ActorClass ${ActorClass1} {
 		
 	}
-}${cursor}</template>
+}${cursor}</template-->
 
 	<template autoinsert="true" context="org.eclipse.etrice.core.Room.ActorClass"
 		deleted="false" description="actor class skeleton" enabled="true"
