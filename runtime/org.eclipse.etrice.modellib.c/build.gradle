@@ -15,7 +15,9 @@ def models = [
 	'model/etrice/api/contracts/monitors.room'
 ]
 
-createGeneratorTask('generate', 'c', models, 'src-gen', '-lib')
+def genDir = "$buildDir/src-gen"
+
+createGeneratorTask('generate', 'c', models, genDir, '-lib')
 
 model {
 	components {
@@ -23,11 +25,11 @@ model {
 			sources.c {
 				builtBy generate
 				source {
-					srcDirs = ['src-gen']
+					srcDirs = [genDir]
 					include '**/*.c'
 				}
 				exportedHeaders {
-					srcDirs = ['src-gen']
+					srcDirs = [genDir]
 				}
 				lib project: ':runtime:org.eclipse.etrice.runtime.c', library: 'etrice_runtime_c', linkage: 'api'
 			}
@@ -39,9 +41,12 @@ model {
 	}
 }
 
-clean.delete 'src-gen'
+task syncGenDir(type: Sync, dependsOn: generate) {
+	from genDir
+	into 'src-gen'
+}
 
-task zipModellib(type: Zip, dependsOn: generate) {
+task zipModellib(type: Zip, dependsOn: syncGenDir) {
     archiveName = project.name + "-${version}.zip"
     destinationDir = buildDir
     from projectDir

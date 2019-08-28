@@ -3,7 +3,6 @@ apply plugin: 'c'
 apply from: "$rootDir/gradle/etTest.gradle"
 
 dependencies {
-	modelpath_c project(path: ':runtime:org.eclipse.etrice.modellib.c', configuration: 'modelpath_c')
 	modelpath_c files('models')
 }
 

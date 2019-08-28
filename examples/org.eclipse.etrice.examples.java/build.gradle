@@ -1,0 +1,14 @@
+apply plugin: 'java-base'
+apply from: "$rootDir/gradle/etTest.gradle"
+
+dependencies {
+	modelpath_java files((1..9).collect { i -> "model/dynamicactors${i}" })
+}
+
+1.upto(9) { i ->
+	createBuild('java', "dynamicactors${i}",
+		["model/dynamicactors${i}/DynAct${i}.etmap", "model/dynamicactors${i}/DynAct${i}.room"],
+		['-persistable', '-storeDataObj'])
+}
+
+sourceSets.dynamicactors8.java.srcDir 'src'

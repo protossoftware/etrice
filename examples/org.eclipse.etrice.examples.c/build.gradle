@@ -1,0 +1,30 @@
+apply plugin: 'c'
+apply from: "$rootDir/gradle/etTest.gradle"
+
+dependencies {
+	modelpath_c files('model/Features', 'model/TrafficLight', (1..4).collect { i -> "model/TrafficLight_step${i}" })
+}
+
+def features = [
+	'ActorClassExamples.room', 'ActorRefs.room', 'Attributes.room',
+	'CommunicationAndExecutionTypes.room', 'DataTypes.room', 'Features.etmap',
+	'Features.room', 'Inheritance.room', 'Multiplicity.room',
+	'Operations.room', 'PortRoles.room', 'ProtocolClasses.room'
+].collect { 'model/features/' + it }
+
+/* Doesn't compile due to classes with same name
+createBuild('c', 'features', [
+		'ActorClassExamples.room', 'ActorRefs.room', 'Attributes.room',
+		'CommunicationAndExecutionTypes.room', 'DataTypes.room', 'Features.etmap',
+		'Features.room', 'Inheritance.room', 'Multiplicity.room',
+		'Operations.room', 'PortRoles.room', 'ProtocolClasses.room'
+	].collect { 'model/features/' + it })
+*/
+
+1.upto(4) { i ->
+	createBuild('c', "trafficLight_step${i}", [
+			'model/TrafficLight/TrafficLight.room',
+			"model/TrafficLight_step${i}/TrafficLight_step${i}.etmap",
+			"model/TrafficLight_step${i}/TrafficLight_step${i}.room"
+		])
+}

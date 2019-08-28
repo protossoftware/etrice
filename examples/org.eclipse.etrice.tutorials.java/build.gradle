@@ -1,0 +1,9 @@
+apply plugin: 'java-base'
+apply from: "$rootDir/gradle/etTest.gradle"
+
+dependencies {
+	modelpath_java files('model/HelloWorld', 'model/PingPong')
+}
+
+createBuild('java', 'helloWorld', ['model/HelloWorld/Mapping.etmap', 'model/HelloWorld/HelloWorld.room'])
+createBuild('java', 'pingPong', ['model/PingPong/Mapping.etmap', 'model/PingPong/PingPong.room'])

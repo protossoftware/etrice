@@ -3,10 +3,14 @@ import static org.apache.tools.ant.taskdefs.condition.Os.*
 apply from: "$rootDir/gradle/etGenerator.gradle"
 apply from: "$rootDir/gradle/etUnitConverter.gradle"
 
-def outputDir = 'log'
-def srcGenDir = 'src-gen'
+dependencies {
+	modelpath_c project(path: ':runtime:org.eclipse.etrice.modellib.c', configuration: 'modelpath_c')
+	modelpath_cpp project(path: ':runtime:org.eclipse.etrice.modellib.cpp', configuration: 'modelpath_cpp')
+	modelpath_java project(path: ':runtime:org.eclipse.etrice.modellib.java', configuration: 'modelpath_java')
+}
 
-clean.delete srcGenDir, outputDir
+def outputDir = "$buildDir/log"
+def srcGenDir = "$buildDir/src-gen"
 
 def getMainClass(String genDir) {
 	// search for SubSystemRunner java file
@@ -21,31 +25,28 @@ def getMainClass(String genDir) {
 }
 
 /**
- * Creates all needed tasks for one test execution
- * @param lang: The eTrice generator type ('c', 'cpp', 'java')
- * @param name: The test name starting with a lower case letter
- * @param models: Models that are passed to the eTrice generator
- * @param options: Options that are passed to the eTrice generator
+ * Creates all needed tasks to build an etrice application
+ *
+ * @param lang the eTrice generator type ('c', 'cpp', 'java')
+ * @param name the name starting with a lower case letter
+ * @param models models that are passed to the eTrice generator
+ * @param options options that are passed to the eTrice generator
+ * @return the task to run the application
  */
-ext.createTest = { lang, name, models, options = [] ->
-
-	def nameCap = name.capitalize()
-	def langCap = lang.capitalize()
-	def testName = "$name$langCap"
-	def testNameCap = testName.capitalize()
-	def suiteName = "${project.name}.$testNameCap"
-	def genDir = "$srcGenDir/$testName"
-	def workingDir = "$outputDir/$testName"
-	def etuFile = "$workingDir/log/${nameCap}.etu"
+ext.createBuild = { lang, name, models, options = [] ->
 	
-	def generateTask = createGeneratorTask("generate$testNameCap", lang, models, genDir, options)
+	def nameCap = name.capitalize()
+	def genDir = "$srcGenDir/$name"
+	def workingDir = "$outputDir/$name"
+	
+	def generateTask = createGeneratorTask("generate$nameCap", lang, models, genDir, options)
 		
 	def runTask
 	
 	if(lang == 'c' || lang == 'cpp') {
 		model {
 			components {
-				"$testName"(NativeExecutableSpec) {
+				"$name"(NativeExecutableSpec) {
 					sources."$lang" {
 						builtBy generateTask
 						source {
@@ -63,14 +64,15 @@ ext.createTest = { lang, name, models, options = [] ->
 						cCompiler.args '-g3', '-std=c99'
 						cppCompiler.args '-g3', '-std=c99'
 						if(isFamily(FAMILY_UNIX)) { linker.args '-lpthread', '-lrt', '-lm' }
+						else if(isFamily(FAMILY_WINDOWS)) { linker.args '-lws2_32' }
 					}
 				}
 			}
 		}
 		
-		def exeFile = "$buildDir/exe/$testName/$testName"
-		runTask = tasks.create(name: "run$testNameCap", type: Exec) {
-			dependsOn "${testName}Executable"
+		def exeFile = "$buildDir/exe/$name/$name"
+		runTask = tasks.create(name: "run$nameCap", type: Exec) {
+			dependsOn "${name}Executable"
 			executable = exeFile
 			args '-run_as_test'
 			it.workingDir = workingDir
@@ -88,8 +90,9 @@ ext.createTest = { lang, name, models, options = [] ->
 		}
 		
 		tasks.getByName("compile${nameCap}Java").dependsOn generateTask
+		build.dependsOn "${name}Classes"
 		
-		runTask = tasks.create(name: "run$testNameCap", type: JavaExec) {
+		runTask = tasks.create(name: "run$nameCap", type: JavaExec) {
 			dependsOn "${name}Classes"
 			classpath = testSourceSet.runtimeClasspath
 			args '-run_as_test'
@@ -100,6 +103,29 @@ ext.createTest = { lang, name, models, options = [] ->
 	}
 	
 	runTask.doFirst { file("$workingDir/log").mkdirs() }
+	return runTask
+}
+
+/**
+ * Creates all needed tasks for one test execution
+ *
+ * @param lang the eTrice generator type ('c', 'cpp', 'java')
+ * @param name the test name starting with a lower case letter
+ * @param models models that are passed to the eTrice generator
+ * @param options options that are passed to the eTrice generator
+ */
+ext.createTest = { lang, name, models, options = [] ->
+
+	def nameCap = name.capitalize()
+	def langCap = lang.capitalize()
+	def testName = "$name$langCap"
+	def testNameCap = testName.capitalize()
+	def suiteName = "${project.name}.$testNameCap"
+	def genDir = "$srcGenDir/$testName"
+	def workingDir = "$outputDir/$testName"
+	def etuFile = "$workingDir/log/${nameCap}.etu"
+		
+	def runTask = createBuild(lang, testName, models, options)
 	
 	def convertTask = createEtUnitConverterTask("convert$testNameCap", [etuFile], ['-suite', suiteName])
 	convertTask.dependsOn runTask

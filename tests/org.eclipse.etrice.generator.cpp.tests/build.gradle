@@ -3,7 +3,6 @@ apply plugin: 'cpp'
 apply from: "$rootDir/gradle/etTest.gradle"
 
 dependencies {
-	modelpath_cpp project(path: ':runtime:org.eclipse.etrice.modellib.cpp', configuration: 'modelpath_cpp')
 	modelpath_cpp files('models')
 }
 

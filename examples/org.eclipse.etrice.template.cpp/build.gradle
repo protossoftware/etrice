@@ -1,0 +1,13 @@
+apply plugin: 'cpp'
+apply from: "$rootDir/gradle/etTest.gradle"
+
+dependencies {
+	modelpath_cpp files('model')
+}
+
+def models = [
+	'model/Mapping.etmap',
+	'model/TemplateModel.room'
+]
+
+createBuild('cpp', 'template', models)

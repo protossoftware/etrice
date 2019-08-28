@@ -5,6 +5,8 @@ apply from: "$rootDir/gradle/etGenerator.gradle"
 
 dependencies {
 	modelpath_java files('model')
+	
+	compile project(':runtime:org.eclipse.etrice.runtime.java')
 }
 
 def models = [
@@ -14,14 +16,12 @@ def models = [
 	'model/etrice/api/contracts/monitors.room'
 ]
 
-dependencies {
-	compile project(':runtime:org.eclipse.etrice.runtime.java')
-}
+def genDir = "$buildDir/src-gen"
 
 sourceSets {
 	main {
 		java {
-			srcDirs = ['src-gen']
+			srcDirs = [genDir]
 		}
 		resources {
             srcDirs = [projectDir]
@@ -30,8 +30,5 @@ sourceSets {
 	}
 }
 
-createGeneratorTask('generate', 'java', models, 'src-gen', '-lib')
-
+createGeneratorTask('generate', 'java', models, genDir, '-lib')
 compileJava.dependsOn generate
-
-clean.delete 'src-gen'

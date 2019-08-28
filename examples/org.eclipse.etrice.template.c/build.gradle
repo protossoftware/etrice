@@ -1,0 +1,13 @@
+apply plugin: 'c'
+apply from: "$rootDir/gradle/etTest.gradle"
+
+dependencies {
+	modelpath_c files('model')
+}
+
+def models = [
+	'model/Mapping.etmap',
+	'model/TemplateModel.room'
+]
+
+createBuild('c', 'template', models)

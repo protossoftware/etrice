@@ -29,13 +29,12 @@ model {
 }
 
 def exeFile = "$buildDir/exe/etrice_runtime_cpp_tests/etrice_runtime_cpp_tests"
-def etuFile = 'log/TestCppRuntime.etu'
-
-clean.delete 'log'
+def etuFile = "$buildDir/log/TestCppRuntime.etu"
 
 task run(type: Exec, dependsOn: assemble, group: 'verification') {
 	executable exeFile
-	doFirst { file('log').mkdirs() }
+	workingDir = buildDir
+	doFirst { file("$buildDir/log").mkdirs() }
 }
 
 createEtUnitConverterTask('convert', [etuFile])

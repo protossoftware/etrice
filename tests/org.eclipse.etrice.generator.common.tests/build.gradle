@@ -5,9 +5,6 @@ apply plugin: 'java-base'
 apply from: "$rootDir/gradle/etTest.gradle"
 
 dependencies {
-	modelpath_c project(path: ':runtime:org.eclipse.etrice.modellib.c', configuration: 'modelpath_c')
-	modelpath_cpp project(path: ':runtime:org.eclipse.etrice.modellib.cpp', configuration: 'modelpath_cpp')
-	modelpath_java project(path: ':runtime:org.eclipse.etrice.modellib.java', configuration: 'modelpath_java')
 	modelpath_c files('models')
 	modelpath_cpp files('models')
 	modelpath_java files('models')

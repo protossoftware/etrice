@@ -10,7 +10,9 @@ def models = [
 	'model/etrice/api/timer.room'
 ]
 
-createGeneratorTask('generate', 'cpp', models, 'src-gen', '-lib')
+def genDir = "$buildDir/src-gen"
+
+createGeneratorTask('generate', 'cpp', models, genDir, '-lib')
 
 model {
 	components {
@@ -18,11 +20,11 @@ model {
 			sources.cpp {
 				builtBy generate
 				source {
-					srcDirs = ['src-gen']
+					srcDirs = [genDir]
 					include '**/*.cpp'
 				}
 				exportedHeaders {
-					srcDirs = ['src-gen']
+					srcDirs = [genDir]
 				}
 				lib project: ':runtime:org.eclipse.etrice.runtime.cpp', library: 'etrice_runtime_cpp', linkage: 'api'
 				lib project: ':runtime:org.eclipse.etrice.runtime.c', library: 'etrice_runtime_c', linkage: 'api'
@@ -34,5 +36,3 @@ model {
 		}
 	}
 }
-
-clean.delete 'src-gen'

@@ -25,6 +25,7 @@ dependencies {
  * @param models: A list of models passed to the generator
  * @param genDir: The generation directory
  * @param options: The eTrice generator options
+ * @return the generator task
  */
 ext.createGeneratorTask = { name, lang, models, genDir = 'src-gen', options = [] ->
 	return tasks.create(name: name, type: JavaExec) {

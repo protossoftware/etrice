@@ -7,7 +7,6 @@ dependencies {
 
 sourceSets.test.java.srcDirs = ['src']
 
+test.workingDir = buildDir
+test.reports.junitXml.destination = file("$buildDir/log")
 test.reports.html.enabled = false
-test.reports.junitXml.destination = file('log')
-
-clean.delete 'log'
