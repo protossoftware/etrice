@@ -32,7 +32,6 @@ import org.eclipse.etrice.core.genmodel.etricegen.WiredSubSystemClass
 import org.eclipse.etrice.core.room.ActorClass
 import org.eclipse.etrice.core.room.CommunicationType
 import org.eclipse.etrice.core.room.SubSystemClass
-import org.eclipse.etrice.generator.fsm.base.FileSystemHelpers
 import org.eclipse.etrice.generator.base.IDataConfiguration
 import org.eclipse.etrice.generator.base.io.IGeneratorFileIO
 import org.eclipse.etrice.generator.fsm.base.IntelligentSeparator
@@ -55,7 +54,6 @@ class NodeGen {
 	@Inject IDataConfiguration dataConfigExt
 	@Inject ConfigGenAddon configGenAddon
 	@Inject extension ProcedureHelpers
-	@Inject extension FileSystemHelpers
 	@Inject protected extension GeneratorOptionsHelper
 
 	@Inject IGeneratorFileIO fileIO
@@ -68,7 +66,7 @@ class NodeGen {
 		for (nr : ETMapUtil::getNodeRefs()) {
 			for (instpath : ETMapUtil::getSubSystemInstancePaths(nr)) {
 				val ssi = root.getInstance(instpath) as SubSystemInstance
-				if (ssi!==null && ssi.subSystemClass.validGenerationLocation) {
+				if (ssi!==null) {
 					val wired = sscc2wired.get(ssi.subSystemClass)
 					val path = ssi.subSystemClass.getPath
 					val file = nr.getJavaFileName(ssi)

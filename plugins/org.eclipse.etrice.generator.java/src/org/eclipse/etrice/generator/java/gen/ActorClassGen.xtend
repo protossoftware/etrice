@@ -27,7 +27,6 @@ import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.core.room.EnumerationType
 import org.eclipse.etrice.core.room.ReferenceType
 import org.eclipse.etrice.generator.base.IDataConfiguration
-import org.eclipse.etrice.generator.fsm.base.FileSystemHelpers
 import org.eclipse.etrice.generator.base.io.IGeneratorFileIO
 import org.eclipse.etrice.generator.generic.GenericActorClassGenerator
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
@@ -51,7 +50,6 @@ class ActorClassGen extends GenericActorClassGenerator {
 	@Inject protected extension Initialization
 	@Inject protected extension StateMachineGen
 	@Inject protected extension TypeHelpers
-	@Inject protected extension FileSystemHelpers
 	@Inject protected extension GeneratorOptionsHelper
 
 	@Inject

@@ -20,7 +20,6 @@ import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance
 import org.eclipse.etrice.core.genmodel.etricegen.SystemInstance
 import org.eclipse.etrice.generator.cpp.Main
-import org.eclipse.etrice.generator.fsm.base.FileSystemHelpers
 import org.eclipse.etrice.generator.base.io.IGeneratorFileIO
 import org.eclipse.etrice.generator.generic.RoomExtensions
 import org.eclipse.etrice.generator.cpp.setup.GeneratorOptionsHelper
@@ -30,7 +29,6 @@ class NodeRunnerGen {
 
 	@Inject extension RoomExtensions roomExt
 	@Inject extension CppExtensions
-	@Inject extension FileSystemHelpers
 	@Inject extension GeneratorOptionsHelper
 
 	@Inject IGeneratorFileIO fileIO
@@ -39,7 +37,7 @@ class NodeRunnerGen {
 		for (nr : ETMapUtil::getNodeRefs()) {
 			for (instpath : ETMapUtil::getSubSystemInstancePaths(nr)) {
 				val ssi = root.getInstance(instpath) as SubSystemInstance
-				if (ssi!==null && ssi.subSystemClass.validGenerationLocation) {
+				if (ssi!==null) {
 					val filepath = ssi.subSystemClass.getPath
 					fileIO.generateFile("generating SubSystemRunner declaration", filepath + nr.getCppClassName(ssi)+"Runner.h", root.generateHeaderFile(ssi))
 					fileIO.generateFile("generating SubSystemRunner implementation", filepath + nr.getCppClassName(ssi)+"Runner.cpp", root.generateSourceFile(ssi))

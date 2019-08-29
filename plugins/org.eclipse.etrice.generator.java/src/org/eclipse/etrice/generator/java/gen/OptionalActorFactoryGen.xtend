@@ -10,7 +10,6 @@ import org.eclipse.etrice.core.room.CommunicationType
 import org.eclipse.etrice.core.room.util.RoomHelpers
 import org.eclipse.etrice.generator.base.io.IGeneratorFileIO
 import org.eclipse.etrice.generator.generic.RoomExtensions
-import org.eclipse.etrice.generator.fsm.base.FileSystemHelpers
 
 class OptionalActorFactoryGen {
 
@@ -18,12 +17,11 @@ class OptionalActorFactoryGen {
 	@Inject extension RoomHelpers
 	@Inject extension JavaExtensions
 	@Inject extension RoomExtensions
-	@Inject extension FileSystemHelpers
 	
 	def doGenerate(Root root) {
 		val HashMap<ActorClass, WiredActorClass> ac2wired = new HashMap<ActorClass, WiredActorClass>
 		root.wiredInstances.filter(w|w instanceof WiredActorClass).forEach[w|ac2wired.put((w as WiredActorClass).actorClass, w as WiredActorClass)]
-		for (oi: root.optionalInstances.filter(cl|cl.actorClass.isValidGenerationLocation)) {
+		for (oi: root.optionalInstances) {
 			val ac = oi.actorClass
 			val wired = ac2wired.get(ac)
 			val path = ac.path

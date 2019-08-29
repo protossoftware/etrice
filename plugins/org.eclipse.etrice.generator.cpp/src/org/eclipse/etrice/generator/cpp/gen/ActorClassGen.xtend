@@ -24,7 +24,6 @@ import org.eclipse.etrice.core.genmodel.etricegen.WiredActorClass
 import org.eclipse.etrice.core.genmodel.fsm.FsmGenExtensions
 import org.eclipse.etrice.core.room.ActorClass
 import org.eclipse.etrice.generator.cpp.Main
-import org.eclipse.etrice.generator.fsm.base.FileSystemHelpers
 import org.eclipse.etrice.generator.base.io.IGeneratorFileIO
 import org.eclipse.etrice.generator.generic.GenericActorClassGenerator
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
@@ -41,7 +40,6 @@ class ActorClassGen extends GenericActorClassGenerator {
 	@Inject protected extension ProcedureHelpers
 	@Inject protected Initialization initHelper
 	@Inject protected extension StateMachineGen
-	@Inject protected extension FileSystemHelpers
 	@Inject protected extension GeneratorOptionsHelper
 
 	def doGenerate(Root root) {

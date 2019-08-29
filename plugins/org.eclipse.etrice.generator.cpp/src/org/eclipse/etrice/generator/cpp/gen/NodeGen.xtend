@@ -27,7 +27,6 @@ import org.eclipse.etrice.core.genmodel.etricegen.SubSystemInstance
 import org.eclipse.etrice.core.genmodel.etricegen.WiredSubSystemClass
 import org.eclipse.etrice.core.room.SubSystemClass
 import org.eclipse.etrice.generator.cpp.Main
-import org.eclipse.etrice.generator.fsm.base.FileSystemHelpers
 import org.eclipse.etrice.generator.base.io.IGeneratorFileIO
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
@@ -41,7 +40,6 @@ class NodeGen {
 	@Inject extension CppExtensions
 	@Inject extension RoomExtensions
 	@Inject extension ProcedureHelpers
-	@Inject extension FileSystemHelpers
 	@Inject extension GeneratorOptionsHelper
 	
 	@Inject IGeneratorFileIO fileIO
@@ -54,7 +52,7 @@ class NodeGen {
 		for (nr : ETMapUtil::getNodeRefs()) {
 			for (instpath : ETMapUtil::getSubSystemInstancePaths(nr)) {
 				val ssi = root.getInstance(instpath) as SubSystemInstance
-				if (ssi!==null && ssi.subSystemClass.validGenerationLocation) {
+				if (ssi!==null) {
 					val wired = sscc2wired.get(ssi.subSystemClass)
 					val path = ssi.subSystemClass.getPath
 

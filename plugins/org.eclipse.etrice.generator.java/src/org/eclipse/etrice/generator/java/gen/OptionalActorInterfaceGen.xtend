@@ -18,7 +18,6 @@ import com.google.inject.Inject
 import com.google.inject.Singleton
 import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.etrice.core.room.ActorClass
-import org.eclipse.etrice.generator.fsm.base.FileSystemHelpers
 import org.eclipse.etrice.generator.base.io.IGeneratorFileIO
 import org.eclipse.etrice.generator.generic.GenericActorClassGenerator
 import org.eclipse.etrice.generator.generic.RoomExtensions
@@ -31,11 +30,10 @@ class OptionalActorInterfaceGen extends GenericActorClassGenerator {
 	@Inject IGeneratorFileIO fileIO
 	@Inject extension JavaExtensions
 	@Inject extension RoomExtensions
-	@Inject extension FileSystemHelpers
 	@Inject protected extension GeneratorOptionsHelper
 	
 	def doGenerate(Root root) {
-		for (ac: root.optionalActorClasses.filter(cl|cl.isValidGenerationLocation)) {
+		for (ac: root.optionalActorClasses) {
 			val path = ac.path
 			var file = ac.getJavaInterfaceFileName(false)
 			fileIO.generateFile("generating ActorClass Interface implementation", path + file, root.generate(ac, false))
