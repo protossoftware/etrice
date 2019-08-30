@@ -1,5 +1,0 @@
-bin
-doc-gen
-src-gen-info
-src-gen/*
-!src-gen/readme.txt
