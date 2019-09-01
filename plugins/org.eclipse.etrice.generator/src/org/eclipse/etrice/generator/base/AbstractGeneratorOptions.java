@@ -54,13 +54,6 @@ public class AbstractGeneratorOptions extends GeneratorOptions {
 			"generate instrumentation for MSC generation",
 			false);
 	
-	public static final BooleanOption DATA_INSTR = new BooleanOption(
-			GROUP_ETRICE,
-			"data_instr",
-			"generateDataInstrumentation",
-			"generate instrumentation for data logging",
-			false);
-	
 	public static final BooleanOption VERBOSE_RT = new BooleanOption(
 			GROUP_ETRICE,
 			"gen_as_verbose",
@@ -90,7 +83,6 @@ public class AbstractGeneratorOptions extends GeneratorOptions {
 		options.add(SAVE_GEN_MODEL);
 		options.add(MAIN_NAME);
 		options.add(MSC_INSTR);
-		options.add(DATA_INSTR);
 		options.add(VERBOSE_RT);
 		options.add(NOTRANSLATE);
 		options.add(OLD_STYLE_TRANSITION_DATA);

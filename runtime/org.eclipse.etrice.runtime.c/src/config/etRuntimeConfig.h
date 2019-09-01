@@ -42,11 +42,6 @@
 /** switches the logging of synchronous messages on,  needs \ref ET_MSC_LOGGER_ACTIVATE */
 #define ET_ASYNC_MSC_LOGGER_ACTIVATE
 
-/* data logger */
-
-/** switches the data logger on */
-#define ET_DATA_LOGGER_ACTIVATE
-
 /* timing and scheduling */
 /* #define FREQUENCY 10L */
 /* #define ET_RUNTIME_MAXLOOP 100 */

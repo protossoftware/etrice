@@ -63,7 +63,6 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 	public static final String LIB = "Lib";
 	public static final String DEBUG = "Debug";
 	public static final String MSC_INSTR = "MSC";
-	public static final String DATA_INSTR = "DataLogging";
 	public static final String VERBOSE = "Verbose";
 	public static final String USE_TRAANSLATION = "UseTranslation";
 	public static final String OLD_STYLE_TRANSITION_DATA = "OldStyleTransitionData";
@@ -81,7 +80,6 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 	private Button generateDepsWithinProject;
 	private Button overrideDirectories;
 	private Text srcgenPath;
-	protected Button dataButton;
 	private Text mainMethodName;
 	private Button useOldStyleTransitionDataButton;
 
@@ -146,10 +144,6 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 		mscButton.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 2, 1));
 		mscButton.addSelectionListener(new UpdateConfig());
 		
-		dataButton = createCheckButton(mainComposite, "generate instrumentation for data logging");
-		dataButton.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 2, 1));
-		dataButton.addSelectionListener(new UpdateConfig());
-
 		verboseButton = createCheckButton(mainComposite, "generate instrumentation for verbose output");
 		verboseButton.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 2, 1));
 		verboseButton.addSelectionListener(new UpdateConfig());
@@ -264,7 +258,6 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 			mainMethodName.setText(configuration.getAttribute(MAIN_METHOD_NAME, AbstractGeneratorOptions.MAIN_NAME.getDefaultValue()));
 			debugButton.setSelection(configuration.getAttribute(DEBUG, false));
 			mscButton.setSelection(configuration.getAttribute(MSC_INSTR, false));
-			dataButton.setSelection(configuration.getAttribute(DATA_INSTR, false));
 			verboseButton.setSelection(configuration.getAttribute(VERBOSE, false));
 			
 			ScopedPreferenceStore prefStore = new ScopedPreferenceStore(InstanceScope.INSTANCE, "org.eclipse.etrice.generator.ui");
@@ -303,7 +296,6 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 		configuration.setAttribute(MAIN_METHOD_NAME, mainMethodName.getText());
 		configuration.setAttribute(DEBUG, debugButton.getSelection());
 		configuration.setAttribute(MSC_INSTR, mscButton.getSelection());
-		configuration.setAttribute(DATA_INSTR, dataButton.getSelection());
 		configuration.setAttribute(VERBOSE, verboseButton.getSelection());
 		configuration.setAttribute(USE_TRAANSLATION, useTranslationButton.getSelection());
 		configuration.setAttribute(OLD_STYLE_TRANSITION_DATA, useOldStyleTransitionDataButton.getSelection());

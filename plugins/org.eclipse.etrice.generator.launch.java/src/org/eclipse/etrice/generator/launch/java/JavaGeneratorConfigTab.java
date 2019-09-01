@@ -58,8 +58,6 @@ public class JavaGeneratorConfigTab extends GeneratorConfigTab {
 		genDataObj = createCheckButton(mainComposite, "generate store to/from POJO data objects");
 		genDataObj.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 2, 1));
 		genDataObj.addSelectionListener(new UpdateConfig());
-		
-		dataButton.setEnabled(false);
 	}
 	
 	/* (non-Javadoc)

@@ -52,7 +52,6 @@
 		<module>plugins/org.eclipse.etrice.generator.fsm</module>
 		<module>plugins/org.eclipse.etrice.generator.fsmtest</module>
 		<module>plugins/org.eclipse.etrice.generator.fsmtest.ui</module>
-		<module>plugins/org.eclipse.etrice.generator.gnuplot</module>
 		<module>plugins/org.eclipse.etrice.generator.java</module>
 		<module>plugins/org.eclipse.etrice.generator.contractmonitor</module>
 		<module>plugins/org.eclipse.etrice.generator.launch</module>

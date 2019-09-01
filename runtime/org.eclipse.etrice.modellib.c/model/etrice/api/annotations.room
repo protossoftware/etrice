@@ -66,28 +66,4 @@ RoomModel etrice.api.annotations {
 		target = { SubSystemClass, ActorClass }
 	}
 	
-	AnnotationType DataLogging {
-		target = SubSystemClass
-		mandatory attribute pathlist: ptCharacter
-	}
-	
-	AnnotationType Gnuplot {
-		target = SubSystemClass
-		mandatory attribute format: ptCharacter
-		mandatory attribute outputfile: ptCharacter
-		mandatory attribute width: ptInteger
-		mandatory attribute height: ptInteger
-		optional attribute fontsize: ptInteger
-	}
-	
-	AnnotationType GnuplotGraph {
-		target = SubSystemClass
-		mandatory attribute paths: ptCharacter
-		optional attribute interval: ptInteger
-		optional attribute xtics: ptReal
-		optional attribute mxtics: ptInteger
-		optional attribute ymin: ptReal
-		optional attribute ymax: ptReal
-	}
-	
 }

@@ -27,10 +27,6 @@ public class AbstractGeneratorOptionsHelper {
 		return args.get(AbstractGeneratorOptions.MSC_INSTR);
 	}
 	
-	public boolean isGenerateDataInstrumentation(Arguments args) {
-		return args.get(AbstractGeneratorOptions.DATA_INSTR);
-	}
-	
 	public boolean isNoTranslation(Arguments args) {
 		return args.get(AbstractGeneratorOptions.NOTRANSLATE);
 	}
