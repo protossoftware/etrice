@@ -1,5 +1,0 @@
-Debug
-Release
-src-gen/*
-src-gen-info/*
-!src-gen/readme.txt
