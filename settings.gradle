@@ -33,6 +33,7 @@ include	'plugins:org.eclipse.etrice.core.common',
 	'examples:org.eclipse.etrice.tutorials.c',
 	'examples:org.eclipse.etrice.tutorials.cpp',
 	'examples:org.eclipse.etrice.tutorials.java',
+	'examples:org.eclipse.etrice.tutorials.simulators.trafficlight',
 	
 	'tests:org.eclipse.etrice.runtime.c.tests',
 	'tests:org.eclipse.etrice.runtime.cpp.tests',

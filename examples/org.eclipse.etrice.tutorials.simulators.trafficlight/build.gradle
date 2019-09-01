@@ -1,0 +1,7 @@
+apply plugin: 'application'
+
+sourceSets.main.java.srcDirs = ['src']
+
+mainClassName = 'org.eclipse.etrice.tutorials.simulators.trafficlight.Main'
+
+distTar.enabled = false

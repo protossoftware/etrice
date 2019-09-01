@@ -19,12 +19,12 @@ dependencies {
 }
 
 /**
- * Creates an eTrice generator task
- * @param name: The name of the new task
- * @param lang: One of the following languages 'c', 'cpp', 'java'
- * @param models: A list of models passed to the generator
- * @param genDir: The generation directory
- * @param options: The eTrice generator options
+ * Creates an eTrice generator task.
+ * @param name the name of the new task
+ * @param lang one of the following languages 'c', 'cpp', 'java'
+ * @param models a list of models passed to the generator
+ * @param genDir the generation directory
+ * @param options the eTrice generator options
  * @return the generator task
  */
 ext.createGeneratorTask = { name, lang, models, genDir = 'src-gen', options = [] ->
