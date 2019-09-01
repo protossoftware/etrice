@@ -402,18 +402,6 @@ public class ProjectCreator {
 		}
 	}
 
-	public static void createMavenPOM(URI uri, String project, String mdlName, String mainClass) {
-		writeFile(uri, ProjectFileFragments.getMavenPOM(project, mdlName, mainClass));
-	}
-
-	public static void createMavenBuilder(URI uri, String project) {
-		writeFile(uri, ProjectFileFragments.getMavenBuilder(project));
-	}
-
-	public static void createMavenLauncher(URI uri, String project, String mdlName) {
-		writeFile(uri, ProjectFileFragments.getMavenLauncher(project, mdlName));
-	}
-
 	/**
 	 * @param project
 	 * @param progressMonitor

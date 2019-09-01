@@ -33,10 +33,7 @@ import org.eclipse.emf.common.util.BasicMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.etrice.generator.base.AbstractGeneratorOptions;
 import org.eclipse.etrice.generator.ui.Activator;
-import org.eclipse.jdt.core.IAccessRule;
-import org.eclipse.jdt.core.IClasspathAttribute;
 import org.eclipse.jdt.core.IClasspathEntry;
-import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.IWizard;
 import org.eclipse.jface.wizard.Wizard;
@@ -76,7 +73,6 @@ public class EmptyProjectWizard extends Wizard implements INewWizard {
 	protected IProject runtimeProject;
 	protected IProject modellibProject;
 	protected String initialProjectName;
-	private EmptyProjectConfigPage config;
 
 	private static final String[] additionalLaunchConfigLines = new String[] { "<stringAttribute key=\"org.eclipse.debug.core.ATTR_REFRESH_SCOPE\" value=\"${workspace}\"/>" };
 
@@ -114,11 +110,6 @@ public class EmptyProjectWizard extends Wizard implements INewWizard {
 		newProjectCreationPage.setTitle("Template eTrice Project");
 		newProjectCreationPage.setDescription("Create the template Java project with eTrice dependencies");
 		addPage(newProjectCreationPage);
-
-		config = new EmptyProjectConfigPage("config");
-		config.setTitle("Project Configuration");
-		config.setDescription("Choose a build type for the project");
-		addPage(config);
 	}
 
 	@Override
@@ -129,29 +120,14 @@ public class EmptyProjectWizard extends Wizard implements INewWizard {
 			protected void execute(IProgressMonitor progressMonitor) {
 				try {
 					List<IProject> referencedProjects = new ArrayList<IProject>();
-					if (config.useJDTBuild()) {
-						if (runtimeProject != null)
-							referencedProjects.add(runtimeProject);
-						if (modellibProject != null)
-							referencedProjects.add(modellibProject);
-					}
+					if (runtimeProject != null)
+						referencedProjects.add(runtimeProject);
+					if (modellibProject != null)
+						referencedProjects.add(modellibProject);
 
 					ArrayList<String> natures = new ArrayList<String>(ProjectCreator.getCommonNatureIDs());
-					if (config.useMVNBuild())
-						natures.add("org.eclipse.m2e.core.maven2Nature");
-
 					ArrayList<String> builders = new ArrayList<String>(ProjectCreator.getCommonBuilderIDs());
-					if (config.useMVNBuild())
-						builders.add("org.eclipse.m2e.core.maven2Builder");
-
 					ArrayList<IClasspathEntry> pathEntries = new ArrayList<IClasspathEntry>();
-					if (config.useMVNBuild()) {
-						IClasspathEntry mvnContainer = JavaCore
-								.newContainerEntry(new Path("org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER"),
-										new IAccessRule[] {}, new IClasspathAttribute[] { JavaCore
-												.newClasspathAttribute("maven.pomderived", "true") }, false);
-						pathEntries.add(mvnContainer);
-					}
 
 					URI modelProjectURI = (projectLocation == null) ? null : URI.createFileURI(projectLocation
 							.toOSString());
@@ -171,12 +147,6 @@ public class EmptyProjectWizard extends Wizard implements INewWizard {
 					ProjectCreator.createLaunchJavaApplicationConfig(projectURI.appendSegment("run_Template.launch"),
 							projectName, MODEL_NAME, "Node_node_subSystemRefRunner");
 
-					if (config.useMVNBuild()) {
-						ProjectCreator.createMavenPOM(projectURI.appendSegment("pom.xml"), projectName, MODEL_NAME, "Node_node_subSystemRefRunner");
-						ProjectCreator.createMavenBuilder(projectURI.appendSegment("build_" + modelName + ".launch"), projectName);
-						ProjectCreator.createMavenLauncher(projectURI.appendSegment("runjar_" + modelName + ".launch"), projectName, MODEL_NAME);
-					}
-					
 					importContent(project, progressMonitor);
 				}
 				catch (Exception e) {
@@ -196,8 +166,7 @@ public class EmptyProjectWizard extends Wizard implements INewWizard {
 			return false;
 		}
 		
-		if (config.useJDTBuild())
-			invokeLibraryWizard();
+		invokeLibraryWizard();
 
 		IWorkbenchWindow activeWindow = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
 		IFile roomFile = project.getFile("/model/" + MODEL_NAME + ".room");
