@@ -346,21 +346,6 @@ public class ProjectCreator {
 		writeFile(uri, ProjectFileFragments.getBasicMappingModel(baseName));
 	}
 
-	public static void createBuildProperties(URI uri, String baseName) {
-		try {
-			PrintStream prop = new PrintStream(
-					URIConverter.INSTANCE.createOutputStream(uri, null), false,
-					"UTF-8");
-			prop.println("source.. = src/,\\");
-			prop.println("src-gen/");
-			prop.close();
-		} catch (UnsupportedEncodingException e) {
-			Logger.getLogger(ProjectCreator.class).error(e.getMessage(), e);
-		} catch (IOException e) {
-			Logger.getLogger(ProjectCreator.class).error(e.getMessage(), e);
-		}
-	}
-
 	public static void createLaunchGeneratorConfig(URI uri, String targetLanguage, String modelPath, String mappingName,
 			String mainMethodName, String[] addLines) {
 		writeFile(uri, ProjectFileFragments.getGeneratorLaunchConfig(targetLanguage, modelPath, mappingName, mainMethodName, addLines));
@@ -400,6 +385,10 @@ public class ProjectCreator {
 					URI.createPlatformResourceURI("/" + project.getName() + "/run_" + baseName + ".launch", true),
 					project.getName());
 		}
+	}
+	
+	public static void createModelpathDescription(URI uri, Iterable<String> srcDirs, Iterable<String> projects) {
+		writeFile(uri, ProjectFileFragments.getModelpathDescription(srcDirs, projects));
 	}
 
 	/**

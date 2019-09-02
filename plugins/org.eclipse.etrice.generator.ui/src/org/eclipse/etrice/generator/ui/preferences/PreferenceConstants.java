@@ -10,10 +10,4 @@ public class PreferenceConstants {
 	public static final String GEN_USE_TRANSLATION = "GenerateUsingTranslation";
 	public static final String GEN_OLD_STYLE_TRANSITION_DATA = "GenerateOldStyleTransitionData";
 	
-	/**
-	 * The kind of build with the two possibilities {@link #MAVEN} and {@link #JDT}
-	 */
-	public static final String BUILD_KIND = "BuildKind";
-	public static final String MAVEN = "Maven";
-	public static final String JDT = "JDT";
 }

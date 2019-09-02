@@ -18,6 +18,7 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.zip.ZipEntry;
@@ -29,17 +30,17 @@ import org.eclipse.cdt.core.settings.model.CIncludePathEntry;
 import org.eclipse.cdt.core.settings.model.ICConfigurationDescription;
 import org.eclipse.cdt.core.settings.model.ICSettingEntry;
 import org.eclipse.cdt.managedbuilder.core.IConfiguration;
-import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.etrice.generator.ui.wizard.ProjectCreator;
 import org.eclipse.etrice.generator.ui.wizard.WizardHelpers;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.ui.dialogs.IOverwriteQuery;
@@ -52,8 +53,8 @@ import org.eclipse.ui.wizards.datatransfer.ZipFileStructureProvider;
  */
 public class CProjectConfigurator extends ProjectConfigurator {
 
-	private static final String C_MODELLIB_NAME = "etrice_c_modellib";
-	private static final String C_RUNTIME_FOLDER_NAME = "etrice_c_runtime";
+	private static final String C_MODELLIB_FOLDER_NAME = "etrice_modellib";
+	private static final String C_RUNTIME_FOLDER_NAME = "etrice_runtime";
 
 	/* (non-Javadoc)
 	 * @see org.eclipse.etrice.generator.ui.cdt.ProjectConfigurator#isApplicable(org.eclipse.core.resources.IProject)
@@ -133,6 +134,22 @@ public class CProjectConfigurator extends ProjectConfigurator {
 			return IOverwriteQuery.ALL;
 		}
 	};
+	
+	@Override
+	protected void configureModelpath(IProject project, IPath path) {
+		if(!project.getFile("modelpath").exists()) {
+			List<String> srcDirs = new ArrayList<>();
+			IPath dir = path.removeFirstSegments(1);
+			if(!dir.isEmpty()) {
+				srcDirs.add(dir.toPortableString());
+			}
+			if(isCopyRuntime()) {
+				srcDirs.add(C_MODELLIB_FOLDER_NAME + "/model");
+			}
+			URI modelpathURI = URI.createPlatformResourceURI(project.getFullPath().append("modelpath").toPortableString(), false);
+			ProjectCreator.createModelpathDescription(modelpathURI,	srcDirs, Collections.emptyList());
+		}
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -262,42 +279,17 @@ public class CProjectConfigurator extends ProjectConfigurator {
 				}
 				if (current!=null) {
 					children = structureProvider.getChildren(current);
-					IPath modelFolderPath = getPath();
 					for (Object child : children) {
 						if (child instanceof ZipEntry) {
-							if (! ((ZipEntry) child).isDirectory()) {
-								ImportOperation importOperation = new ImportOperation(
-										modelFolderPath,
-										child,
-										structureProvider,
-										OVERWRITE_ALL_QUERY);
-								importOperation.setContext(null);
-								importOperation.run(SubMonitor.convert(progressMonitor, 1));
-							}
+							ImportOperation importOperation = new ImportOperation(
+									project.getFullPath().append(C_MODELLIB_FOLDER_NAME),
+									child,
+									structureProvider,
+									OVERWRITE_ALL_QUERY);
+							importOperation.setContext(null);
+							importOperation.run(SubMonitor.convert(progressMonitor, 1));
 						}
 					}
-			        IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
-			        final IContainer modelFolder = root.getFolder(modelFolderPath.append("model"));
-			        final IPath newPath = modelFolder.getFullPath().removeLastSegments(1).append(C_MODELLIB_NAME);
-			        
-			        ISchedulingRule rule = ResourcesPlugin.getWorkspace().getRuleFactory().createRule(modelFolder);
-			        WorkspaceModifyOperation operation = new WorkspaceModifyOperation(rule) {
-
-			            @Override
-			            protected void execute(IProgressMonitor monitor) throws CoreException, InvocationTargetException, InterruptedException {
-
-			                modelFolder.move(newPath, true, monitor);
-			            }
-
-			        };
-
-			        try {
-			        	operation.run(progressMonitor);
-			        } catch (InvocationTargetException e) {
-			            e.printStackTrace();
-			        } catch (InterruptedException e) {
-			            e.printStackTrace();
-			        }
 				}
 			}
 		}

@@ -137,10 +137,7 @@ public class EmptyProjectWizard extends Wizard implements INewWizard {
 
 					String projectName = project.getName();
 					URI projectURI = URI.createPlatformResourceURI(projectName, true);
-					String modelName = MODEL_NAME;
 					
-					ProjectCreator.createBuildProperties(projectURI.appendSegment("build.properties"), modelName);
-
 					ProjectCreator.createLaunchGeneratorConfig(projectURI.appendSegment("generate_Template.launch"),
 							"java", "/" + projectName + "/model", "Mapping", AbstractGeneratorOptions.MAIN_NAME.getDefaultValue(), additionalLaunchConfigLines);
 

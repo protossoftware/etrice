@@ -26,14 +26,6 @@ public class GeneratorPreferencePage
 		addLabel("");
 		
 		addField(
-				new RadioGroupFieldEditor(
-						PreferenceConstants.BUILD_KIND,
-						"Choose the build kind that is used for eTrice Java applications:",
-						1,
-						new String[][] { {	"&Maven",	PreferenceConstants.MAVEN }, {
-											"&JDT",		PreferenceConstants.JDT }
-						}, getFieldEditorParent()));
-		addField(
 				new BooleanFieldEditor(
 						PreferenceConstants.GEN_USE_TRANSLATION,
 						"Let wizard create new launchers with detail code translation on initially",

@@ -146,4 +146,14 @@ class ProjectFileFragments {
 			</launchConfiguration>
 		'''
 	}
+	
+	def static String getModelpathDescription(Iterable<String> srcDirs, Iterable<String> projects) '''
+		«FOR s : srcDirs»
+			srcDir «s»
+		«ENDFOR»
+		
+		«FOR p : projects»
+			project «p»
+		«ENDFOR»
+	'''
 }

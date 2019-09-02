@@ -59,6 +59,7 @@ public abstract class ProjectConfigurator implements IProjectConfigurator {
 	protected abstract Map<String, String> getProjectRefInfo(ICConfigurationDescription configDescription, String toolChain);
 	protected abstract void copyRuntime(IProject project, IProgressMonitor progressMonitor, String platform);
 	protected abstract void customizeBuildConfig(IProject project, IConfiguration buildConfig);
+	protected abstract void configureModelpath(IProject project, IPath path);
 	
 	@Override
 	public void configure(IProject project, IPath path, boolean copyRuntime, String platform, IProgressMonitor progressMonitor) {
@@ -71,7 +72,7 @@ public abstract class ProjectConfigurator implements IProjectConfigurator {
 				if (copyRuntime) {
 					copyRuntime(project, progressMonitor, platform);
 				}
-				
+				configureModelpath(project, path);
 				configureIncludesAndLibraries(project, progressMonitor);
 			}
 		}
@@ -186,5 +187,5 @@ public abstract class ProjectConfigurator implements IProjectConfigurator {
 			
 		setting.setSettingEntries(kind, allEntries);
 	}
-
+	
 }
