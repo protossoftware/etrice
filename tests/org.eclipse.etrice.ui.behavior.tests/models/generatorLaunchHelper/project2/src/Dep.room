@@ -1,0 +1,10 @@
+RoomModel Dep {
+	
+	LogicalSystem logicalSystem {
+		SubSystemRef subSys : SubSystem
+	}
+	
+	SubSystemClass SubSystem {
+		
+	}
+}

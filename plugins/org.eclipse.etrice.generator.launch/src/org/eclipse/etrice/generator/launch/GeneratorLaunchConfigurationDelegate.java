@@ -14,6 +14,7 @@
 
 package org.eclipse.etrice.generator.launch;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -86,7 +87,7 @@ public abstract class GeneratorLaunchConfigurationDelegate extends AbstractJavaL
 				
 				// constructing program arguments
 				StringBuffer argString = new StringBuffer();
-				addModels(configuration, entry.getValue(), argString);
+				addModels(configuration, entry.getKey(), entry.getValue(), argString);
 				addArguments(configuration, entry.getKey(), argString);
 				addModelpath(entry.getKey(), argString);
 				String[] args = splitCommandLine(argString.toString());
@@ -157,10 +158,10 @@ public abstract class GeneratorLaunchConfigurationDelegate extends AbstractJavaL
 		return new ConsoleOutput(out);
 	}
 
-	protected void addModels(ILaunchConfiguration configuration, List<String> models, StringBuffer argString) throws CoreException {
+	protected void addModels(ILaunchConfiguration configuration, IProject project, Iterable<String> models, StringBuffer argString) throws CoreException {
 		if(configuration.getAttribute(GeneratorConfigTab.GEN_DEPS_WITHIN_PROJECT, true)) {
-			// generate all dependencies within project for .etmap
-			models = Lists.newArrayList(GeneratorLaunchHelper.getAllDependenciesWithinProjects(models));
+			// generate all dependencies within project
+			models = GeneratorLaunchHelper.getAllDependenciesWithinProject(project, models);
 		}
 		for(String model : models) {
 			argString.append(" \""+model+"\"");
@@ -242,7 +243,7 @@ public abstract class GeneratorLaunchConfigurationDelegate extends AbstractJavaL
 			.toArray(size -> new String[size]);
 		
 		if(paths.length > 0) {
-			String modelpathArg = String.join(";", paths);
+			String modelpathArg = String.join(File.pathSeparator, paths);
 			argString.append(" -modelpath \"").append(modelpathArg).append('"');
 		}
 	}

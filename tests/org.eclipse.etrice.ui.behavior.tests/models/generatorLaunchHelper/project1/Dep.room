@@ -1,7 +1,7 @@
 RoomModel Dep {
+	import model "platform:/resource/project1/Dep2.room"
 	import model "../project2/ModelDep.room"
-	import model "platform:/resource/org.eclipse.etrice.ui.behavior.tests/models/generatorLaunchHelper/project2/ModelDep2.room"
-	import model "platform:/resource/org.eclipse.etrice.ui.behavior.tests/models/generatorLaunchHelper/project1/Dep2.room"
+	import model "platform:/resource/project2/ModelDep.room"
 	
 	LogicalSystem logicalSystem {
 		SubSystemRef subSys : SubSystem
@@ -9,7 +9,6 @@ RoomModel Dep {
 	
 	SubSystemClass SubSystem {
 		ActorRef ref1 : ModelDep.ModelDep
-		ActorRef ref2 : ModelDep2.ModelDep2
 		ActorRef ref3 : Dep2.Dep2
 	}
 }

@@ -19,36 +19,80 @@ import org.junit.Test
 
 import static org.eclipse.etrice.generator.launch.GeneratorLaunchHelper.*
 import static org.junit.Assert.*
+import org.eclipse.core.resources.ResourcesPlugin
+import org.eclipse.core.runtime.Path
+import org.junit.BeforeClass
+import org.junit.AfterClass
+import java.nio.file.Files
 
 class TestGeneratorLaunchHelper {
 
-	private def get(Iterable<String> list) {
-		getAllDependenciesWithinProjects(list).toList
+	static val basePath = Paths.get('models', 'generatorLaunchHelper')
+	static val projects = #['project1', 'project2']
+	
+	@BeforeClass
+	def static void createProjects() {
+		projects.forEach[ projectName |
+			val project = ResourcesPlugin.workspace.root.getProject(projectName)
+			val description = ResourcesPlugin.workspace.newProjectDescription(projectName) => [
+				location = new Path(basePath.resolve(projectName).toAbsolutePath.toString)
+			]
+			project.create(description, null)
+			project.open(null)
+		]
 	}
 
 	@Test
 	def void notExisting() {
-		#[] => [models|assertEquals(models, get(models))]
-//		#[''] => [models|assertEquals(models, get(models))]
-		#['1', '.0ß+/§`}]"°'] => [models|assertEquals(models, get(models))]
-		#['1.room', '2.etphys', '3.etmap', '4.etconfig', '5.unknown'] => [models|assertEquals(models, get(models))]
+		#[] => [models|assertEquals(models, get('project2', models))]
+		#[''] => [models|assertEquals(models, get('project2', models))]
+		#['1', '.0ß+/§`}]"°'] => [models|assertEquals(models, get('project2', models))]
+		#['1.room', '2.etphys', '3.etmap', '4.etconfig', '5.unknown'] => [models|assertEquals(models, get('project2', models))]
 	}
 
 	@Test
-	def void project() {
-		val (String) => String toAbsolutePath = [file| Paths.get('models/generatorLaunchHelper', file).toAbsolutePath.toString]
-
+	def void projectURI() {
 		assertEquals(
 			#[
 			'project1/System.etmap',
 			'project1/NotMapped.room',
 			'project1/Physical.etphys',
-			'project1/Dep.room'
-		].map[toAbsolutePath.apply(it)], get(
+			'project1/Dep.room',
+			'project1/NotMappedDep.room',
+			'project1/Dep2.room'
+		].map[toAbsolutePath], get('project1',
 			#[
 			'project1/System.etmap',
 			'project1/NotMapped.room'
-		].map[toAbsolutePath.apply(it)]))
+		].map[toAbsolutePath]))
 
+	}
+	
+	@Test
+	def void projectModelpath() {
+		assertEquals(#[
+				'project2/src/System.etmap',
+				'project2//src/Dep.room',
+				'project2/src/Physical.etphys'
+			].map[toAbsolutePath], get('project2', #[
+				'project2/src/System.etmap'
+			].map[toAbsolutePath])
+		)
+	}
+	
+	@AfterClass
+	def static void deleteProjects() {
+		projects.forEach[ projectName |
+			ResourcesPlugin.workspace.root.getProject(projectName).delete(false, false, null)
+			Files.delete(basePath.resolve(projectName + '/.project'))
+		]
+	}
+	
+	private def get(String project, Iterable<String> list) {
+		getAllDependenciesWithinProject(ResourcesPlugin.workspace.root.getProject(project), list).toList
+	}
+	
+	private def toAbsolutePath(String file) {
+		basePath.resolve(file).toAbsolutePath.toString
 	}
 }

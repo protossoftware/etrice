@@ -1,0 +1,6 @@
+MappingModel SystemMapping {
+	
+	Mapping  Dep.logicalSystem -> Physical.PhysSys1 {
+		SubSystemMapping subSys -> nodeRef1 {}
+		}
+}

@@ -15,68 +15,51 @@
 package org.eclipse.etrice.generator.launch
 
 import com.google.inject.Inject
-import com.google.inject.Provider
-import java.nio.file.Paths
 import java.util.Collection
+import org.eclipse.core.resources.IProject
 import org.eclipse.core.resources.ResourcesPlugin
 import org.eclipse.core.runtime.Path
 import org.eclipse.emf.common.util.URI
-import org.eclipse.emf.ecore.resource.ResourceSet
-import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.etrice.core.common.scoping.ModelLocator
 import org.eclipse.etrice.core.ui.RoomUiModule
-import org.eclipse.etrice.generator.fsm.base.FileSystemHelpers
+import org.eclipse.xtext.ui.resource.XtextResourceSetProvider
+import org.eclipse.emf.ecore.util.EcoreUtil
 
 class GeneratorLaunchHelper {
 
-	@Inject Provider<ResourceSet> resourceSetProvider
+	@Inject XtextResourceSetProvider resourceSetProvider
 	@Inject ModelLocator modelLocator
 	
 	/**
-	 *  @return all transitive dependencies from .etmap files within their projects
+	 *  @return all transitive dependencies from files within the project
 	 */
-	static def Collection<String> getAllDependenciesWithinProjects(Iterable<String> models) {
+	static def Iterable<String> getAllDependenciesWithinProject(IProject project, Iterable<String> models) {
 		val helper = new GeneratorLaunchHelper => [
 			RoomUiModule.injector.injectMembers(it)
 		]
 		
 		newLinkedHashSet => [
 			addAll(models)
-			addAll(models.map[helper.getAllDependencies(it)].flatten)
+			addAll(helper.getAllDependencies(project, models))
 		]
 	}
 
-	def getAllDependencies(String filePath) {				
-		val uri = URI.createURI(modelLocator.resolve(filePath, null)?:"")	
-		if(!"etmap".equalsIgnoreCase(uri?.fileExtension))
-			return emptyList
+	def getAllDependencies(IProject project, Iterable<String> models) {
+		val ws = ResourcesPlugin.workspace.root
+		val rs = resourceSetProvider.get(project)
 		
-		val rs = resourceSetProvider.get
-		val res = try { rs.getResource(uri, true) } catch(RuntimeException e) {}
-		if(res?.contents?.head === null)
-			return emptyList
-		
-		val projectURI = FileSystemHelpers::getProjectURI(res.contents.head)	
-		if(projectURI === null || !projectURI.isFile || projectURI.relative) 
-			return emptyList
-		
-		val projectPath = Paths.get(projectURI.toFileString)
+		models.map[filePath | URI.createURI(modelLocator.resolve(filePath, null)?:"")]
+			.forEach[uri | try { rs.getResource(uri, true) } catch(RuntimeException e) {}]
 			
 		EcoreUtil.resolveAll(rs)
+
 		rs.resources.map [
-			switch it : URI {
-				case isPlatformResource: {
-					val platformMember = ResourcesPlugin.workspace.root.findMember(new Path(toPlatformString(false)))
-					val location = platformMember?.location?.toOSString
-					if(location !== null && Paths.get(location).startsWith(projectPath))
-						location
-				}
-				case isFile: {
-					if(Paths.get(toFileString).startsWith(projectPath))
-						toFileString
-			 	}
-			}
-		].filterNull
+				switch it : URI {
+					case isPlatformResource: ws.findMember(new Path(toPlatformString(false)))
+					case isFile: ws.getFileForLocation(new Path(toFileString))
+				}].filterNull
+			.filter[file | file.project.equals(project)]
+			.map[location?.toOSString].filterNull
 	}
 	
 	def static groupByProject(Collection<String> files) {

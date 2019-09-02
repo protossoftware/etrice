@@ -25,7 +25,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceChangeEvent;
@@ -179,7 +178,7 @@ public class ModelPathManager implements IResourceChangeListener {
 	 * @param project a project
 	 * @return a list of source directories
 	 */
-	private List<IFolder> getSourceDirectories(IProject project) {
+	private List<IContainer> getSourceDirectories(IProject project) {
 		return getModelPathDescription(project)
 			.map(ModelPathDescription::getSourceDirectories)
 			.orElse(Collections.emptyList());

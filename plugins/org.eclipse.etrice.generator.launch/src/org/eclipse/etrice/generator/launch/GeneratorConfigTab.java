@@ -163,7 +163,7 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 
 		createSeparator(mainComposite, 2);
 		
-		generateDepsWithinProject = createCheckButton(mainComposite, "generate all .etmap dependencies within project");
+		generateDepsWithinProject = createCheckButton(mainComposite, "generate all dependencies within project");
 		generateDepsWithinProject.setToolTipText("this options automatically generates all referenced model files in this project");
 		generateDepsWithinProject.setLayoutData(new GridData(SWT.BEGINNING, SWT.BEGINNING, false, false, 2, 1));
 		generateDepsWithinProject.addSelectionListener(new UpdateConfig());

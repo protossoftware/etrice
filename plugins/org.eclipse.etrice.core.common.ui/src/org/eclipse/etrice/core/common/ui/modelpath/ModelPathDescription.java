@@ -24,8 +24,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
@@ -39,11 +39,11 @@ import org.eclipse.core.runtime.Path;
  */
 public class ModelPathDescription {
 	
-	private final List<IFolder> sourceDirectories;
+	private final List<IContainer> sourceDirectories;
 	private final List<IProject> projectDependencies;
 	private final List<IMarker> problemMarkers;
 	
-	private ModelPathDescription(List<IFolder> sourceDirectories, List<IProject> projectDependencies, List<IMarker> problemMarkers) {
+	private ModelPathDescription(List<IContainer> sourceDirectories, List<IProject> projectDependencies, List<IMarker> problemMarkers) {
 		this.sourceDirectories = sourceDirectories;
 		this.projectDependencies = projectDependencies;
 		
@@ -53,7 +53,7 @@ public class ModelPathDescription {
 	/**
 	 * @return the list of source directories
 	 */
-	public List<IFolder> getSourceDirectories() {
+	public List<IContainer> getSourceDirectories() {
 		return sourceDirectories;
 	}
 	
@@ -101,7 +101,7 @@ public class ModelPathDescription {
 		private IFile file;
 		private IProject project;
 		private IWorkspaceRoot root;
-		private List<IFolder> srcDirs;
+		private List<IContainer> srcDirs;
 		private List<IProject> projects;
 		private List<IMarker> problemMarkers;
 		private int lineNumber;
@@ -168,11 +168,16 @@ public class ModelPathDescription {
 				return;
 			}
 			
-			IFolder dir = project.getFolder(str);
-			if(!dir.exists()) {
-				addProblemMarker(IMarker.SEVERITY_WARNING, "directory " + dir.getFullPath() + " doesn't exist");
+			try {
+				IContainer dir = project.getFolder(str);
+				if(!dir.exists()) {
+					addProblemMarker(IMarker.SEVERITY_WARNING, "directory " + dir.getFullPath() + " doesn't exist");
+				}
+				srcDirs.add(dir);
 			}
-			srcDirs.add(dir);
+			catch(IllegalArgumentException e) {
+				addProblemMarker(IMarker.SEVERITY_ERROR, str + " is not a valid directory");
+			}
 		}
 		
 		private void parseProject(String str) throws CoreException {
