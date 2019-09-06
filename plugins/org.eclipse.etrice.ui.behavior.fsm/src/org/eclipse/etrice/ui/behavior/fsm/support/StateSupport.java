@@ -20,11 +20,13 @@ import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.core.fsm.fSM.FSMFactory;
+import org.eclipse.etrice.core.fsm.fSM.InitialTransition;
 import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
 import org.eclipse.etrice.core.fsm.fSM.RefinedState;
 import org.eclipse.etrice.core.fsm.fSM.SimpleState;
 import org.eclipse.etrice.core.fsm.fSM.State;
 import org.eclipse.etrice.core.fsm.fSM.StateGraph;
+import org.eclipse.etrice.core.fsm.fSM.StateTerminal;
 import org.eclipse.etrice.core.fsm.fSM.TrPoint;
 import org.eclipse.etrice.ui.behavior.fsm.dialogs.IFSMDialogFactory;
 import org.eclipse.etrice.ui.behavior.fsm.dialogs.IStatePropertyDialog;
@@ -66,6 +68,7 @@ import org.eclipse.graphiti.features.context.IUpdateContext;
 import org.eclipse.graphiti.features.context.impl.AddContext;
 import org.eclipse.graphiti.features.context.impl.CreateConnectionContext;
 import org.eclipse.graphiti.features.context.impl.RemoveContext;
+import org.eclipse.graphiti.features.context.impl.UpdateContext;
 import org.eclipse.graphiti.features.custom.AbstractCustomFeature;
 import org.eclipse.graphiti.features.custom.ICustomFeature;
 import org.eclipse.graphiti.features.impl.AbstractAddFeature;
@@ -548,6 +551,23 @@ public class StateSupport {
 					if (subGraphShape!=null) {
 						RoundedRectangle borderRect = (RoundedRectangle) container.getGraphicsAlgorithm().getGraphicsAlgorithmChildren().get(0);
 						updateHints(s, borderRect);
+						
+						// also add an initial state
+						SimpleState initialState = FSMFactory.eINSTANCE.createSimpleState();
+						initialState.setName("InitialState");
+						newSG.getStates().add(initialState);
+						
+						// add an initial transition
+						InitialTransition initialTransition = FSMFactory.eINSTANCE.createInitialTransition();
+						initialTransition.setName("init");
+						StateTerminal stateTerminal = FSMFactory.eINSTANCE.createStateTerminal();
+						stateTerminal.setState(initialState);
+						initialTransition.setTo(stateTerminal);
+						newSG.getTransitions().add(initialTransition);
+						
+						// let update create the diagram elements
+						UpdateContext ctx = new UpdateContext(getDiagram());
+						getFeatureProvider().getUpdateFeature(ctx).update(ctx);
 					}
 					
 					ContextSwitcher.switchTo(getDiagram(), s.getSubgraph());
