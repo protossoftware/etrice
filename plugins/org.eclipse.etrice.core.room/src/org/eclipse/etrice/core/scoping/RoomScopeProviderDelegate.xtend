@@ -73,7 +73,7 @@ class RoomScopeProviderDelegate {
 						}
 					]
 					if (directedProtocol.left !== null) {
-						return getAllMessages(directedProtocol.left, !directedProtocol.right).map[EObjectDescription.create(name, it)].toSimpleScope
+						return getAllMessages(directedProtocol.left, !directedProtocol.right).filter[!eIsProxy].map[EObjectDescription.create(name, it)].toSimpleScope
 					}
 				}
 			}
@@ -92,7 +92,7 @@ class RoomScopeProviderDelegate {
 			 */
 			case FSMPackage.Literals.MESSAGE_FROM_IF__FROM: {
 				// returns a flat list of InterfaceItem scopes for a {@link MessageFromIf}
-				return getAllInterfaceItems(mfi.actorClass).map[EObjectDescription.create(name, it)].toSimpleScope
+				return getAllInterfaceItems(mfi.actorClass).filter[!eIsProxy].map[EObjectDescription.create(name, it)].toSimpleScope
 			}
 		}
 		return emptyScope
@@ -105,11 +105,11 @@ class RoomScopeProviderDelegate {
 				val sc = ep.structureClass
 				switch (sc) {
 					ActorClass: 
-						return sc.classHierarchy.flatMap[actorRefs].map[EObjectDescription.create(name, it)].toSimpleScope
+						return sc.classHierarchy.flatMap[actorRefs].filter[!eIsProxy].map[EObjectDescription.create(name, it)].toSimpleScope
 					SubSystemClass:
-						return sc.actorRefs.map[EObjectDescription.create(name, it)].toSimpleScope
+						return sc.actorRefs.filter[!eIsProxy].map[EObjectDescription.create(name, it)].toSimpleScope
 					LogicalSystem:
-						return sc.subSystems.map[EObjectDescription.create(name, it)].toSimpleScope
+						return sc.subSystems.filter[!eIsProxy].map[EObjectDescription.create(name, it)].toSimpleScope
 				} 
 			}
 			case RoomPackage.Literals.BINDING_END_POINT__PORT: {
@@ -123,21 +123,21 @@ class RoomScopeProviderDelegate {
 						// interface ports not in structure (relay)
 						return sc
 							.classHierarchy
-							.map[(internalPorts + relayPorts)
-								.map[EObjectDescription.create(name, it)]
-							]
-							.flatten.toSimpleScope
+							.flatMap[internalPorts + relayPorts]
+							.filter[!eIsProxy]
+							.map[EObjectDescription.create(name, it)]
+							.toSimpleScope
 					} else if (sc instanceof SubSystemClass) {
-						return sc.relayPorts.map[EObjectDescription.create(name, it)].toSimpleScope
+						return sc.relayPorts.filter[!eIsProxy].map[EObjectDescription.create(name, it)].toSimpleScope
 					}
 				} else {
 					// all ports in the sub actor's interface
 					val epref = ep.actorRef
 					switch (epref) {
 						ActorRef:
-							return epref.type.classHierarchy.flatMap[interfacePorts].map[EObjectDescription.create(name, it)].toSimpleScope
+							return epref.type.classHierarchy.flatMap[interfacePorts].filter[!eIsProxy].map[EObjectDescription.create(name, it)].toSimpleScope
 						SubSystemRef:
-							return epref.type.relayPorts.map[EObjectDescription.create(name, it)].toSimpleScope
+							return epref.type.relayPorts.filter[!eIsProxy].map[EObjectDescription.create(name, it)].toSimpleScope
 					}
 				}
 			}
@@ -146,7 +146,7 @@ class RoomScopeProviderDelegate {
 				if (ep.port !== null) {
 					if (ep.port.protocol instanceof CompoundProtocolClass) {
 						val pc = (ep.port.protocol as CompoundProtocolClass)
-						return pc.subProtocols.map[EObjectDescription.create(name, it)].toSimpleScope
+						return pc.subProtocols.filter[!eIsProxy].map[EObjectDescription.create(name, it)].toSimpleScope
 					}
 				}
 			}
@@ -163,10 +163,10 @@ class RoomScopeProviderDelegate {
 	protected def dispatch IScope scopeFor(SemanticsRule sr, EReference ref) {
 		val pc = sr.protocolClass 
 		if (sr instanceof InSemanticsRule) {
-			return pc.classHierarchy.flatMap[incomingMessages].map[EObjectDescription.create(name, it)].toSimpleScope
+			return pc.classHierarchy.flatMap[incomingMessages].filter[!eIsProxy].map[EObjectDescription.create(name, it)].toSimpleScope
 		}
 		else if (sr instanceof OutSemanticsRule) {
-			return pc.classHierarchy.flatMap[outgoingMessages].map[EObjectDescription.create(name, it)].toSimpleScope
+			return pc.classHierarchy.flatMap[outgoingMessages].filter[!eIsProxy].map[EObjectDescription.create(name, it)].toSimpleScope
 		}
 		return emptyScope 
 	}
@@ -180,10 +180,10 @@ class RoomScopeProviderDelegate {
 	protected def dispatch IScope scopeFor(RefSAPoint pt, EReference ref) {
 		val acc = pt.actorContainerClass 
 		if (acc instanceof ActorClass) {
-			return acc.classHierarchy.flatMap[actorRefs].map[EObjectDescription.create(name, it)].toSimpleScope
+			return acc.classHierarchy.flatMap[actorRefs].filter[!eIsProxy].map[EObjectDescription.create(name, it)].toSimpleScope
 		}
 		else {
-			return acc.actorRefs.map[EObjectDescription.create(name, it)].toSimpleScope
+			return acc.actorRefs.filter[!eIsProxy].map[EObjectDescription.create(name, it)].toSimpleScope
 		}
 	}
 	
@@ -195,7 +195,7 @@ class RoomScopeProviderDelegate {
 	 */
 	protected def dispatch IScope scopeFor(RelaySAPoint pt, EReference ref) {
 		if (ref==RoomPackage.Literals.RELAY_SA_POINT__RELAY) {
-			return pt.actorClass.classHierarchy.flatMap[serviceProvisionPoints].map[EObjectDescription.create(name, it)].toSimpleScope 
+			return pt.actorClass.classHierarchy.flatMap[serviceProvisionPoints].filter[!eIsProxy].map[EObjectDescription.create(name, it)].toSimpleScope 
 		}
 		
 		return emptyScope 
@@ -207,18 +207,18 @@ class RoomScopeProviderDelegate {
 				// returns a flat list of ActorRef scopes for a {@link SPPoint}
 				val acc = pt.actorContainerClass 
 				if (acc instanceof ActorClass) {
-					return acc.classHierarchy.flatMap[actorRefs].map[EObjectDescription.create(name, it)].toSimpleScope
+					return acc.classHierarchy.flatMap[actorRefs].filter[!eIsProxy].map[EObjectDescription.create(name, it)].toSimpleScope
 				}
 				else {
-					return acc.actorRefs.map[EObjectDescription.create(name, it)].toSimpleScope
+					return acc.actorRefs.filter[!eIsProxy].map[EObjectDescription.create(name, it)].toSimpleScope
 				}
 			}
 			case RoomPackage.Literals.SP_POINT__SERVICE: {
 				val sppref = pt.ref
 				if (sppref instanceof ActorRef) {
-					return sppref.type.classHierarchy.flatMap[serviceProvisionPoints].map[EObjectDescription.create(name, it)].toSimpleScope
+					return sppref.type.classHierarchy.flatMap[serviceProvisionPoints].filter[!eIsProxy].map[EObjectDescription.create(name, it)].toSimpleScope
 				} else if (sppref instanceof SubSystemRef) {
-					return sppref.type.serviceProvisionPoints.map[EObjectDescription.create(name, it)].toSimpleScope 
+					return sppref.type.serviceProvisionPoints.filter[!eIsProxy].map[EObjectDescription.create(name, it)].toSimpleScope 
 				}
 			}
 		}
@@ -230,9 +230,9 @@ class RoomScopeProviderDelegate {
 			val pc = handler.protocolClass 
 			if (pc !== null) {
 				if (handler instanceof InMessageHandler)
-					return pc.incomingMessages.map[EObjectDescription.create(name, it)].toSimpleScope
+					return pc.incomingMessages.filter[!eIsProxy].map[EObjectDescription.create(name, it)].toSimpleScope
 				else if (handler instanceof OutMessageHandler)
-					return pc.outgoingMessages.map[EObjectDescription.create(name, it)].toSimpleScope
+					return pc.outgoingMessages.filter[!eIsProxy].map[EObjectDescription.create(name, it)].toSimpleScope
 			}
 		}
 		
@@ -244,17 +244,17 @@ class RoomScopeProviderDelegate {
 		val pc = op.protocolClass 
 		if (pc !== null) {
 			if (pcls === pc.getConjugated()) {
-				return pc.incomingMessages.map[EObjectDescription.create(name, it)].toSimpleScope
+				return pc.incomingMessages.filter[!eIsProxy].map[EObjectDescription.create(name, it)].toSimpleScope
 			}
 			else {
-				return pc.outgoingMessages.map[EObjectDescription.create(name, it)].toSimpleScope
+				return pc.outgoingMessages.filter[!eIsProxy].map[EObjectDescription.create(name, it)].toSimpleScope
 			}
 		}
 		return emptyScope 
 	}
 	
 	protected def dispatch IScope scopeFor(ExternalPort ep, EReference ref) {
-		ep.actorClass.interfacePorts.map[EObjectDescription.create(name, it)].toSimpleScope
+		ep.actorClass.interfacePorts.filter[!eIsProxy].map[EObjectDescription.create(name, it)].toSimpleScope
 	}
 
 	/*
