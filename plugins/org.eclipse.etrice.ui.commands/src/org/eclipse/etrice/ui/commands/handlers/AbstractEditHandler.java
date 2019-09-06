@@ -10,14 +10,12 @@
 
 package org.eclipse.etrice.ui.commands.handlers;
 
-import java.util.List;
-
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.etrice.core.common.ui.editor.IValidatingEditor;
 import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.core.ui.RoomUiModule;
 import org.eclipse.etrice.core.ui.editor.RoomEditor;
@@ -34,19 +32,16 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.ui.views.contentoutline.ContentOutline;
-import org.eclipse.xtext.diagnostics.Severity;
-import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.IFragmentProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.outline.impl.EObjectNode;
 import org.eclipse.xtext.ui.editor.utils.EditorUtils;
-import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
-import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
-import org.eclipse.xtext.validation.Issue;
 
 import com.google.inject.Inject;
 import com.google.inject.Injector;
@@ -64,8 +59,6 @@ public abstract class AbstractEditHandler extends AbstractHandler {
 	
 	@Inject
 	IFragmentProvider fragmentProvider;
-	
-	private EObjectAtOffsetHelper helper = new EObjectAtOffsetHelper();
 	
 	public AbstractEditHandler() {
 		super();
@@ -105,12 +98,13 @@ public abstract class AbstractEditHandler extends AbstractHandler {
 				String fragment = document.readOnly(new IUnitOfWork<String, XtextResource>() {
 					@Override
 					public String exec(XtextResource resource) throws Exception {
-						EObject obj = helper.resolveElementAt(resource, ss.getOffset());
-						while (obj!=null) {
-							if (obj instanceof StructureClass) {
-								return fragmentProvider.getFragment(obj, null);
-							}
-							obj = obj.eContainer();
+						// ascend in the node model until we hit a structure class
+						INode node = NodeModelUtils.findLeafNodeAtOffset(resource.getParseResult().getRootNode(), ss.getOffset());
+						while (node!=null && !(node.getSemanticElement() instanceof StructureClass)) {
+							node = node.getParent();
+						}
+						if (node!=null) {
+							return fragmentProvider.getFragment(node.getSemanticElement(), null);
 						}
 						return null;
 					}
@@ -159,12 +153,13 @@ public abstract class AbstractEditHandler extends AbstractHandler {
 				String fragment = document.readOnly(new IUnitOfWork<String, XtextResource>() {
 					@Override
 					public String exec(XtextResource resource) throws Exception {
-						EObject obj = helper.resolveElementAt(resource, ss.getOffset());
-						while (obj!=null) {
-							if (obj instanceof StructureClass) {
-								return fragmentProvider.getFragment(obj, null);
-							}
-							obj = obj.eContainer();
+						// ascend in the node model until we hit a structure class
+						INode node = NodeModelUtils.findLeafNodeAtOffset(resource.getParseResult().getRootNode(), ss.getOffset());
+						while (node!=null && !(node.getSemanticElement() instanceof StructureClass)) {
+							node = node.getParent();
+						}
+						if (node!=null) {
+							return fragmentProvider.getFragment(node.getSemanticElement(), null);
 						}
 						return "";
 					}
@@ -195,8 +190,8 @@ public abstract class AbstractEditHandler extends AbstractHandler {
 			IXtextDocument document, final String fragment) {
 		if (fragment==null)
 			return false;
-		if (hasIssues(document, new NullProgressMonitor())) {
-			MessageDialog.openError(xtextEditor.getSite().getShell(), "Validation Errors", "The editor has validation errors.\nCannot open diagram!");
+		if (xtextEditor instanceof IValidatingEditor && !((IValidatingEditor) xtextEditor).isValid()) {
+			MessageDialog.openError(xtextEditor.getSite().getShell(), "Validation Errors", "The editor has blocking errors.\nCannot open diagram!");
 			return false;
 		}
 		if (xtextEditor.isDirty()) {
@@ -210,26 +205,5 @@ public abstract class AbstractEditHandler extends AbstractHandler {
 			xtextEditor.doSave(new NullProgressMonitor());
 		}
 		return true;
-	}
-
-	public boolean hasIssues(IXtextDocument xtextDocument, final IProgressMonitor monitor) {
-		final boolean issues = xtextDocument
-				.readOnly(new IUnitOfWork<Boolean, XtextResource>() {
-					public Boolean exec(XtextResource resource) throws Exception {
-						if (resource == null)
-							return false;
-						List<Issue> issueList = resourceValidator.validate(resource, CheckMode.NORMAL_AND_FAST, new CancelIndicator() {
-							public boolean isCanceled() {
-								return monitor.isCanceled();
-							}
-						});
-						for (Issue issue : issueList) {
-							if (issue.getSeverity()==Severity.ERROR)
-								return true;
-						}
-						return false;
-					}
-				});
-		return issues;
 	}
 }
