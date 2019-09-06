@@ -160,7 +160,7 @@ public class RoomFragmentProvider extends FSMFragmentProvider {
 		if (path != null)
 			return path;
 
-		return fallback.getFragment(obj);
+		return fallback!=null ? fallback.getFragment(obj) : null;
 	}
 	
 	protected String getFragment(EObject obj) {
@@ -182,19 +182,21 @@ public class RoomFragmentProvider extends FSMFragmentProvider {
 	}
 
 	public static boolean isActorClass(String fragment) {
-		if (fragment.startsWith(RoomPackage.eINSTANCE.getActorClass().getName()))
+		if (fragment!=null && fragment.startsWith(RoomPackage.eINSTANCE.getActorClass().getName()))
 			return true;
 
 		return false;
 	}
 
 	public static boolean isStructureClass(String fragment) {
-		if (fragment.startsWith(RoomPackage.eINSTANCE.getActorClass().getName()))
-			return true;
-		if (fragment.startsWith(RoomPackage.eINSTANCE.getSubSystemClass().getName()))
-			return true;
-		if (fragment.startsWith(RoomPackage.eINSTANCE.getLogicalSystem().getName()))
-			return true;
+		if (fragment!=null) {
+			if (fragment.startsWith(RoomPackage.eINSTANCE.getActorClass().getName()))
+				return true;
+			if (fragment.startsWith(RoomPackage.eINSTANCE.getSubSystemClass().getName()))
+				return true;
+			if (fragment.startsWith(RoomPackage.eINSTANCE.getLogicalSystem().getName()))
+				return true;
+		}
 
 		return false;
 	}
@@ -239,6 +241,10 @@ public class RoomFragmentProvider extends FSMFragmentProvider {
 	}
 
 	protected EObject getEObject(RoomModel model, String fragment) {
+		if (fragment==null) {
+			return null;
+		}
+		
 		int begin = 0;
 		int end = fragment.indexOf(TYPE_SEP);
 		if (end<0)

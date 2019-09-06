@@ -70,6 +70,9 @@ public class FSMValidationUtil extends FSMValidationUtilXtend {
 			return result;
 
 		if (tgt instanceof TrPointTerminal) {
+			if (((TrPointTerminal) tgt).getTrPoint().eIsProxy()) {
+				return Result.error("transition target not found", tgt, FSMPackage.eINSTANCE.getTrPointTerminal_TrPoint(), 0);
+			}
 			if (((TrPointTerminal) tgt).getTrPoint() instanceof EntryPoint)
 				return Result.error("entry point can not be transition target", tgt, FSMPackage.eINSTANCE.getTrPointTerminal_TrPoint(), 0);
 
@@ -112,9 +115,17 @@ public class FSMValidationUtil extends FSMValidationUtilXtend {
 			// ExitPoint can be multiply connected inside a state
 		}
 		else if (tgt instanceof SubStateTrPointTerminal) {
+			if (((SubStateTrPointTerminal) tgt).getTrPoint().eIsProxy()) {
+				return Result.error("transition target not found", tgt, FSMPackage.eINSTANCE.getSubStateTrPointTerminal_TrPoint(), 0);
+			}
 			if (((SubStateTrPointTerminal) tgt).getTrPoint() instanceof ExitPoint)
 				return Result.error("sub state exit point can not be transition target", tgt, FSMPackage.eINSTANCE.getSubStateTrPointTerminal_TrPoint(), 0);
 			// sub state EntryPoint is valid as destination
+		}
+		else if (tgt instanceof StateTerminal) {
+			if (((StateTerminal) tgt).getState().eIsProxy()) {
+				return Result.error("transition target not found", tgt, FSMPackage.eINSTANCE.getStateTerminal_State(), 0);
+			}
 		}
 
 		return Result.ok();
@@ -136,6 +147,9 @@ public class FSMValidationUtil extends FSMValidationUtilXtend {
 		}
 		else if (src instanceof TrPointTerminal) {
 			TrPoint srcTP = ((TrPointTerminal) src).getTrPoint();
+			if (srcTP.eIsProxy()) {
+				return Result.error("transition source not found", trans, FSMPackage.eINSTANCE.getTrPointTerminal_TrPoint(), 0);
+			}
 			if (srcTP instanceof ExitPoint)
 				return Result.error("exit point can not be transition source", trans, FSMPackage.eINSTANCE.getTrPointTerminal_TrPoint(), 0);
 			// TransitionPoint and EntryPoint are valid
@@ -170,6 +184,9 @@ public class FSMValidationUtil extends FSMValidationUtilXtend {
 			}
 		}
 		else if (src instanceof SubStateTrPointTerminal) {
+			if (((SubStateTrPointTerminal) src).getTrPoint().eIsProxy()) {
+				return Result.error("transition source not found", src, FSMPackage.eINSTANCE.getSubStateTrPointTerminal_TrPoint(), 0);
+			}
 			if (((SubStateTrPointTerminal) src).getTrPoint() instanceof EntryPoint)
 				return Result.error("sub state entry point can not be transition source", src, FSMPackage.eINSTANCE.getSubStateTrPointTerminal_TrPoint(), 0);
 			// ExitPoint is valid as source
@@ -184,6 +201,11 @@ public class FSMValidationUtil extends FSMValidationUtilXtend {
 							return Result.error("source transition point already is connected", src, FSMPackage.eINSTANCE.getSubStateTrPointTerminal_TrPoint(), 0);
 					}
 				}
+			}
+		}
+		else if (src instanceof StateTerminal) {
+			if (((StateTerminal) src).getState().eIsProxy()) {
+				return Result.error("transition target not found", src, FSMPackage.eINSTANCE.getStateTerminal_State(), 0);
 			}
 		}
 

@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.etrice.core.common.converter.BaseConverterService;
 import org.eclipse.etrice.core.common.converter.CCStringIndentation;
+import org.eclipse.etrice.core.common.validation.IssueUtils;
 import org.eclipse.etrice.core.fsm.fSM.ChoicePoint;
 import org.eclipse.etrice.core.fsm.fSM.DetailCode;
 import org.eclipse.etrice.core.fsm.fSM.FSMPackage;
@@ -244,6 +245,6 @@ public class FSMJavaValidator extends org.eclipse.etrice.core.fsm.validation.Abs
     }
 
     private void error(Result result) {
-		error(result.getMsg(), result.getSource(), result.getFeature(), result.getIndex());
+		error(result.getMsg(), result.getSource(), result.getFeature(), result.getIndex(), IssueUtils.DUMMY_CODE, IssueUtils.BLOCKING_MARKER);
 	}
 }
