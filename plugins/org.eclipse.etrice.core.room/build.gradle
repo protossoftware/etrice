@@ -7,7 +7,4 @@ dependencies {
 	compile "org.eclipse.xtend:org.eclipse.xtend.lib:$versions.xtext"
 	compile "org.eclipse.platform:org.eclipse.core.runtime:$versions.core_runtime"
 	compile "org.eclipse.xtext:org.eclipse.xtext:$versions.xtext"
-	
-	// https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
-	compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.1'
 }
