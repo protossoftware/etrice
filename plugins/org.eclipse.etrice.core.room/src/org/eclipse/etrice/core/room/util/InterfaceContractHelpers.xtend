@@ -29,6 +29,7 @@ import org.eclipse.etrice.core.room.RoomPackage
 import org.eclipse.xtext.naming.IQualifiedNameConverter
 import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.eclipse.etrice.core.room.RoomClass
+import org.eclipse.emf.ecore.util.EcoreUtil
 
 /**
  *  See modellib etrice.api.contracts.*
@@ -58,14 +59,20 @@ class InterfaceContractHelpers {
 	def ActorClass getInterfaceContractActorClass(ProtocolClass pc) {
 		val name = roomHelpers.getAttribute(pc.annotations, InterfaceContract_NAME, ContractClass_KEY)
 		if(!Strings.isNullOrEmpty(name)) {
-			return findClassForName(name, RoomPackage.Literals.ACTOR_CLASS, pc.eContainer as RoomModel) as ActorClass	
+			val match = findClassForName(name, RoomPackage.Literals.ACTOR_CLASS, pc.eContainer as RoomModel)	
+			val resolved = if(match !== null && match.eIsProxy)  EcoreUtil.resolve(match, pc.eResource.resourceSet)	else match
+			if(resolved instanceof ActorClass)
+				return resolved
 		}
 	}
 	
 	def ProtocolClass getContractProtocol(ActorClass ac) {
 		val name = roomHelpers.getAttribute(ac.annotations, InterfaceContractDefinition_NAME, Protocol_KEY)
 		if(!Strings.isNullOrEmpty(name)) {
-			return findClassForName(name, RoomPackage.Literals.PROTOCOL_CLASS, ac.eContainer as RoomModel) as ProtocolClass 	
+			val match = findClassForName(name, RoomPackage.Literals.PROTOCOL_CLASS, ac.eContainer as RoomModel) as ProtocolClass 	
+			val resolved = if(match !== null && match.eIsProxy)  EcoreUtil.resolve(match, ac.eResource.resourceSet)	else match
+			if(resolved instanceof ProtocolClass)
+				return resolved
 		}
 	}
 	
