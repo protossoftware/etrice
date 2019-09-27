@@ -871,7 +871,7 @@ class DocuPostprocessor {
 		
 		cls.getAttribute("multiplicity").setDocumentation(
 			'''
-				Ports with multiplicity >1 are called relay ports. A multiplicity of {@code -1} means replicated
+				Ports with multiplicity >1 are called replicated ports. A multiplicity of {@code -1} means replicated
 				port with arbitrary multiplicity.
 			''')
 		

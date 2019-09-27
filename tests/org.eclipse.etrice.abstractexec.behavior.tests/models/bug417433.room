@@ -1,7 +1,9 @@
-/*
+/**
  * stripped down example of https://bugs.eclipse.org/417433
+ * 
+ * Generated from France IDL model org.franca.examples by Franca2ETriceTransformation.
  */
-RoomModel org.franca.examples [ "Generated from Franca IDL model org.franca.examples by Franca2ETriceTransformation." ]
+RoomModel org.franca.examples
 {
 	ActorClass RobotArmExampleClient {
 		Interface {
@@ -49,9 +51,12 @@ RoomModel org.franca.examples [ "Generated from Franca IDL model org.franca.exam
 			Message release()
 		}
 		outgoing {
-			Message replyMove(Boolean) [ "reply for move" ]
-			Message replyGrab(Boolean) [ "reply for grab" ]
-			Message replyRelease(Boolean) [ "reply for release" ]
+			/** reply for move */
+			Message replyMove(Boolean)
+			/** reply for grab */
+			Message replyGrab(Boolean)
+			/** reply for release */
+			Message replyRelease(Boolean)
 			Message operable(StructPosition)
 		}
 		semantics {

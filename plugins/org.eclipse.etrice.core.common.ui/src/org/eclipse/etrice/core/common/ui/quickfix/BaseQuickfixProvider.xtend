@@ -25,6 +25,7 @@ import org.eclipse.xtext.ui.editor.quickfix.Fix
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor
 import org.eclipse.xtext.util.StringInputStream
 import org.eclipse.xtext.validation.Issue
+import org.eclipse.etrice.core.common.base.Documentation
 
 //import org.eclipse.xtext.ui.editor.quickfix.Fix
 //import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor
@@ -73,8 +74,15 @@ class BaseQuickfixProvider extends DefaultQuickfixProvider {
 					IDE.openEditor(PlatformUI.workbench.activeWorkbenchWindow.activePage, file)
 				]
 			}
-			
 		}
+	}
+	
+	@Fix(BaseJavaValidator.DEPRECATED_DOCUMENTATION)
+	def void removeDeprecatedDocStrings(Issue issue, IssueResolutionAcceptor acceptor) {
+		acceptor.acceptMulti(issue, "Remove documentation string", "Remove deprecated documentation string", null, [Documentation doc |
+			doc.eContainer.eSet(doc.eContainingFeature, null)
+		])
+		
 	}
 
 //	@Fix(MyDslValidator::INVALID_NAME)

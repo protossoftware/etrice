@@ -57,6 +57,7 @@ public class BaseJavaValidator extends org.eclipse.etrice.core.common.validation
 	public static final String DEPRECATED_IMPORT_URI = "BaseJavaValidator.DeprecatedImportUri";
 	public static final String MODELPATH_DESCRIPTION_MISSING = "BaseJavaValidator.ModelpathDescriptionMissing";
 	public static final String IMPORTED_NAMESPACE_MISSING = "BaseJavaValidator.ImportedNamespaceMissing";
+	public static final String DEPRECATED_DOCUMENTATION = "BaseJavaValidator.DeprecatedDocumentation";
 	
 	@Inject ImportUriResolver importUriResolver;
 	@Inject ImportHelpers importHelpers;
@@ -64,6 +65,7 @@ public class BaseJavaValidator extends org.eclipse.etrice.core.common.validation
 	
 	@Check
 	public void checkDocumentation(Documentation doc) {
+		warning("Explicit documentation strings are deprecated. Use javadoc/doxy style documentation strings instead.", doc, null, DEPRECATED_DOCUMENTATION);
 		if (doc.getLines().isEmpty())
 			error("documentation must not be empty", doc, BasePackage.Literals.DOCUMENTATION__LINES);
 	}
@@ -264,4 +266,5 @@ public class BaseJavaValidator extends org.eclipse.etrice.core.common.validation
 			}
 		}
 	}
+	
 }
