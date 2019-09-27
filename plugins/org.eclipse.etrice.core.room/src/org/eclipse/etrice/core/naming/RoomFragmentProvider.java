@@ -115,10 +115,14 @@ public class RoomFragmentProvider extends FSMFragmentProvider {
 		private String caseSAPointShort(SAPoint sapt) {
 			if (sapt==null)
 				return "null";
-			if (sapt instanceof RefSAPoint)
-				return ((RefSAPoint) sapt).getRef().getName();
-			else if (sapt instanceof RelaySAPoint)
-				return ((RelaySAPoint) sapt).getRelay().getName();
+			if (sapt instanceof RefSAPoint) {
+				RefSAPoint refSAPt = (RefSAPoint) sapt;
+				return refSAPt.getRef() != null ? refSAPt.getRef().getName() : "null";
+			}
+			else if (sapt instanceof RelaySAPoint) {
+				RelaySAPoint relaySAPt = (RelaySAPoint) sapt;
+				return relaySAPt.getRelay() != null ? relaySAPt.getRelay().getName() : "null";
+			}
 
 			assert(false): "unexpectd sub type";
 			return null;
