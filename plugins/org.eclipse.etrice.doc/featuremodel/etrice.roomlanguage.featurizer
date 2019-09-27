@@ -33,7 +33,8 @@ text '''
 ''' 
 help '''
 	```room
-	AnnotationType AnnotationName ["documentation"] {
+	/** documentation */
+	AnnotationType AnnotationName {
 		target = ActorClass
 		mandatory attribute name: ptCharacter
 		optional attribute name: ptInteger
@@ -57,7 +58,7 @@ text '''
 '''
 example '''
 	```room
-	import room.basic.annotations.* from "../../org.eclipse.etrice.modellib.c/model/Annotations.room"
+	import etrice.api.annotations.BehaviorManual
 
 	ActorClass ComponentAbstraction {
 		Interface {
@@ -228,8 +229,8 @@ Feature MappingModel
 
 		```etmap
 		MappingModel PingPongMapping {
-			import PingPong_Model.* from "PingPong.room"
-			import GenericPhysicalModel.* from "GenericPhysical.etphys"
+			import PingPong_Model.LogSys
+			import GenericPhysicalModel.PhysSys1
 		
 			Mapping LogSys -> PhysSys1 {
 				SubSystemMapping subSystemRef -> nodeRef1 {
@@ -261,7 +262,7 @@ Feature ConfigModel
 
 		```etconfig
 		ConfigModel ExampleConfig {
-			import Example.* from "Example.room"
+			import Example.*
 
 			ActorClassConfig ActorClass1 {
 				Attr attribute1 = 4
@@ -305,7 +306,8 @@ Feature LogicalSystem
 	'''
 	help '''
 		```room
-		LogicalSystem systemName ["Documentation"] {
+		/** Documentation */
+		LogicalSystem systemName {
 			SubSystemRef ...
 		}
 		```
@@ -356,12 +358,14 @@ Feature ActorClass
 	help |||
 		```room
 		// prefixes: abstract and (eventdriven, datadriven, async, sync)
-		ActorClass ActorName ["An eventdriven ActorClass by default"] {
+		/** An eventdriven ActorClass by default */
+		ActorClass ActorName {
 			Interface {
 				Port port1 ...
 				SPP spp1 ...
 			}
-			Structure ["Documentation"] {
+			/** Documentation */
+			Structure {
 				usercode1 ''' '''
 				usercode2 ''' '''
 				usercode3 ''' '''
@@ -374,7 +378,8 @@ Feature ActorClass
 				Binding ...
 				LayerConnection ...
 			}
-			Behavior ["Documentation"] {
+			/** Documentation */
+			Behavior {
 				ctor ''' /* constructor */ '''
 				dtor ''' /* destructor */ '''
 				Operation ...
@@ -408,7 +413,8 @@ Feature SubSystemClass
 	'''
 	help '''
 		```room
-		SubSystemClass SubSystemName ["Documentation"]{
+		/** Documentation */
+		SubSystemClass SubSystemName {
 			ActorRef ...
 			Binding ...
 			LayerConnection ...
@@ -454,7 +460,8 @@ Feature StateMachine
 		* Outline view -> Right click on an *ActorClass* -> Edit Behavior
 		
 		```room
-		StateMachine ["Documentation"] {
+		/** Documentation */
+		StateMachine {
 			...
 		}
 		```
@@ -763,7 +770,8 @@ Feature SubSystemRef
 	'''
  	help '''
 		```room
-		SubSystemRef subSystemName: SubSystemClass1 ["Documentation"]
+		/** Documentation */
+		SubSystemRef subSystemName: SubSystemClass1
 		```
 	'''
  	isOfType SubSystemClass
@@ -838,9 +846,12 @@ Feature ActorRef
 	''' 
 	help '''
 		```room
-		ActorRef actorName: ActorClass1 ["Documentation"]
-		ActorRef actorName[4]: ActorClass1 ["A replicated actor of size 4"]
-		optional ActorRef actorName[*]: ActorClass1 ["A dynamic actor"]
+		/** Documentation */
+		ActorRef actorName: ActorClass1
+		/** A replicated actor of size 4 */
+		ActorRef actorName[4]: ActorClass1
+		/** A dynamic actor */
+		optional ActorRef actorName[*]: ActorClass1
 		```
 	'''
 	isOfType ActorClass
@@ -922,7 +933,8 @@ Feature ExecutionType
 	'''
 	example '''
 		```room
-		eventdriven ActorClass EventdrivenActor ["default is eventdriven"] {
+		/** default is eventdriven */
+		eventdriven ActorClass EventdrivenActor {
 			// only event-driven Ports and ActorRefs allowed
 		}
 		
@@ -958,22 +970,27 @@ Feature CommunicationType
 	example '''
 		```room
 		
-		import room.basic.types.* from "../../../org.eclipse.etrice.modellib.c/model/Types.room"
+		import etrice.api.types.*
 		
-		ProtocolClass EventdrivenProtocolClass1 [ "default is eventdriven" ] {
+		/** default is eventdriven */
+		ProtocolClass EventdrivenProtocolClass1 {
 			// explicit: eventdriven ProtocolClass EventdrivenProtocolClass {
 			incoming {
-				Message msg1() ["message without data"]
-				Message msg2(int32) ["message with data"]
+				/** message without data */
+				Message msg1()
+				/** message with data */
+				Message msg2(int32)
 			}
 			outgoing {
-				Message msg4()  ["eventdriven ProtocolClass can have message into two directions"]
+				/** eventdriven ProtocolClass can have message into two directions */
+				Message msg4()
 			}
 		}
 		
 		datadriven ProtocolClass DatadrivenProtocolClass {
 			incoming {
-				Message signal1 (int32) ["a datadriven message needs data"]
+				/** a datadriven message needs data */
+				Message signal1 (int32)
 			}
 			// datadriven ProtocolClass can only have incoming messages (signals)
 		}
@@ -1010,7 +1027,7 @@ Feature ProtocolClass
 	'''
 	example '''
 		```room
-		import room.basic.types.* from "../../../org.eclipse.etrice.modellib.c/model/Types.room"
+		import etrice.api.types.*
 		
 		// eventdriven ProtocolClass (asynchronous message passing, bidirectional)
 		eventdriven ProtocolClass ProtocolClassEvt {
@@ -1050,7 +1067,8 @@ Feature ProtocolClass
 	help |||
 		```room
 		// prefixes: (eventdriven, datadriven, sync)
-		ProtocolClass ProtocolName ["An eventdriven ProtocolClass by default"] {
+		/** An eventdriven ProtocolClass by default */
+		ProtocolClass ProtocolName {
 			usercode1 ''' '''
 			usercode2 ''' '''
 			usercode3 ''' '''
@@ -1097,7 +1115,7 @@ Feature PrimitiveType
 
 		```room
 		// Follow import by Open Declaration (F3)
-		import room.basic.types.* from "../../../org.eclipse.etrice.modellib.c/model/Types.room"
+		import etrice.api.types.*
 		```
 	'''
 	help '''
@@ -1110,7 +1128,8 @@ Feature PrimitiveType
 	PrimitiveType boolean: ptBoolean -> boolean default "false"
 	PrimitiveType int16: ptInteger -> int16 default "0"
 
-	PrimitiveType name: literalType -> targetName (castName) default "value" ["Documentation"]
+	/** Documentation */
+	PrimitiveType name: literalType -> targetName (castName) default "value"
 	```
 	'''
 	isA DataType
@@ -1149,7 +1168,8 @@ Feature Enumeration
 			On = 1
 		}
 		
-		Enumeration EnumName ["Documentation"] of PrimitiveType1 {
+		/** Documentation */
+		Enumeration EnumName of PrimitiveType1 {
 			// name1 = int
 			// ...
 		}
@@ -1191,14 +1211,15 @@ Feature DataClass
 	|||
 	help |||
 		```room
-		DataClass DataClassName ["Documentation"] {
+		/** Documentation */
+		DataClass DataClassName {
 			Attribute ... // nested DataClasses possible
 			ctor ''' /* constructor */ '''
 			dtor ''' /* destructor */ '''
 			Operation ...
 		}
 		
-		DataClass DataClassName extends DataSuperClassName [""] {
+		DataClass DataClassName extends DataSuperClassName {
 			// inherits all elements from super class
 			...
 		}
@@ -1238,7 +1259,8 @@ Feature ExternalType
 		```room
 		ExternalType voidType -> "void" default "NULL"
 		
-		ExternalType typeName -> "targetName" default "value" ["Documentation"]
+		/** Documentation */
+		ExternalType typeName -> "targetName" default "value"
 		```
 	'''
 	isA DataType
@@ -1258,7 +1280,7 @@ Feature Attribute
 	'''
 	example '''
 		```room
-		import room.basic.types.* from "../../../org.eclipse.etrice.modellib.c/model/Types.room"
+		import etrice.api.types.*
 		
 		DataClass SimpleDataClass {
 			Attribute attribute1: int16
@@ -1267,15 +1289,19 @@ Feature Attribute
 		
 		ActorClass ActorClassWithAttributes {
 			Structure {
-				Attribute attribute1: int32 			["attribute of a PrimitiveType" ]
-				Attribute attribute2: SimpleDataClass 	[ "attribute of a DataClass" ]
+				/** attribute of a PrimitiveType */
+				Attribute attribute1: int32
+				/** attribute of a DataClass */
+				Attribute attribute2: SimpleDataClass
 			}
 		}
 		
 		ActorClass ActorClassWithAttributes2 {
 			Structure {
-				Attribute arrayAttribute[8] : uint32 [ "attribute with multiplicity"]
-				Attribute refAttribue : voidType ref [ "attribute as a reference (void pointer)"]
+				/** attribute with multiplicity */
+				Attribute arrayAttribute[8] : uint32
+				/** attribute as a reference (void pointer) */
+				Attribute refAttribue : voidType ref
 			}
 		}
 		
@@ -1291,9 +1317,12 @@ Feature Attribute
 	'''
 	help '''
 		```room
-		Attribute attributeName: boolean                ["An boolean attribute"]
-		Attribute attributeName[8]: int32 = "0"         ["An array attribute"]
-		Attribute attributeName: voidType ref = "NULL"  ["An external type attribute as reference"]
+		/** a boolean attribute */
+		Attribute attributeName: boolean
+		/** an array attribute */
+		Attribute attributeName[8]: int32 = "0"
+		/** an external type attribute as reference */
+		Attribute attributeName: voidType ref = "NULL"
 		```
 	'''
 	isOfType DataType
@@ -1318,7 +1347,7 @@ Feature Operation
 	'''
 	example |||
 		```room
-		import room.basic.types.* from "../../../org.eclipse.etrice.modellib.c/model/Types.room"
+		import etrice.api.types.*
 		
 		DataClass DataClassWithOperation {
 			Attribute attribute1 : uint32
@@ -1357,13 +1386,14 @@ Feature Operation
 	|||
 	help |||
 		```room
-		Operation operationName() ["A void operation"] '''
+		/** A void operation */
+		Operation operationName() '''
 			user code here;
 			// don't forget the ';' at line end 
 		'''
-
-		Operation operationName(param1: int16, param2: int32) : boolean
-			["Operations can have multiple parameters and one return type"] '''
+		
+		/** Operations can habe multiple parameters and one return type */
+		Operation operationName(param1: int16, param2: int32) : boolean '''
 			return param1 == param2;
 		'''
 
@@ -1408,9 +1438,12 @@ abstract Feature Port
 	'''
 	help '''
 		```room
-		Port portName : ProtocolClass1			["generated doc"]
-		Port portName[4] : ProtocolClass1		["generated doc"]
-		Port conjugated portName : ProtocolClass1	["generated doc"]
+		/** generated doc */
+		Port portName : ProtocolClass1
+		/** generated doc */
+		Port portName[4] : ProtocolClass1
+		/** generated doc */
+		Port conjugated portName : ProtocolClass1
 		```
 	'''
 	isOfType ProtocolClass
