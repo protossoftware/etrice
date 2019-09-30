@@ -61,7 +61,7 @@ The configuration is available for actors and ports, thus ActorClasses/ActorRefs
 
 ```etconfig
 ConfigModel ExampleConfig {
-	import Example.* from "Example.room"
+	import Example.*
 
 	ActorClassConfig ActorClass1 {
 		Attr attribute1 = 4
@@ -479,19 +479,13 @@ See section Annotations for further reading.
 	 </td>
 	<td>A DataClass is a composition of Attributes</td>
 </tr>
-<tr>
-	<td rowspan="1" style="white-space: nowrap;">Is used by:</td>
-	<td>[DataLogging](#datalogging)
-	 </td>
-	<td>Runtime logger for data-driven Messages with primitive data.</td>
-</tr>
 </tbody>
 </table>
 
 **Example**:
 
 ```room
-import room.basic.annotations.* from "../../org.eclipse.etrice.modellib.c/model/Annotations.room"
+import etrice.api.annotations.BehaviorManual
 
 ActorClass ComponentAbstraction {
 	Interface {
@@ -631,7 +625,7 @@ Attributes can be defined in several ROOM classes.
 **Example**:
 
 ```room
-import room.basic.types.* from "../../../org.eclipse.etrice.modellib.c/model/Types.room"
+import etrice.api.types.*
 
 DataClass SimpleDataClass {
 	Attribute attribute1: int16
@@ -640,15 +634,19 @@ DataClass SimpleDataClass {
 
 ActorClass ActorClassWithAttributes {
 	Structure {
-		Attribute attribute1: int32 			["attribute of a PrimitiveType" ]
-		Attribute attribute2: SimpleDataClass 	[ "attribute of a DataClass" ]
+		/** attribute of a PrimitiveType */
+		Attribute attribute1: int32
+		/** attribute of a DataClass */
+		Attribute attribute2: SimpleDataClass
 	}
 }
 
 ActorClass ActorClassWithAttributes2 {
 	Structure {
-		Attribute arrayAttribute[8] : uint32 [ "attribute with multiplicity"]
-		Attribute refAttribue : voidType ref [ "attribute as a reference (void pointer)"]
+		/** attribute with multiplicity */
+		Attribute arrayAttribute[8] : uint32
+		/** attribute as a reference (void pointer) */
+		Attribute refAttribue : voidType ref
 	}
 }
 
@@ -858,22 +856,27 @@ CommunicationType relates with the [ExecutionType][] of an ActorClass, e.g. a da
 
 ```room
 
-import room.basic.types.* from "../../../org.eclipse.etrice.modellib.c/model/Types.room"
+import etrice.api.types.*
 
-ProtocolClass EventdrivenProtocolClass1 [ "default is eventdriven" ] {
+/** default is eventdriven */
+ProtocolClass EventdrivenProtocolClass1 {
 	// explicit: eventdriven ProtocolClass EventdrivenProtocolClass {
 	incoming {
-		Message msg1() ["message without data"]
-		Message msg2(int32) ["message with data"]
+		/** message without data */
+		Message msg1()
+		/** message with data */
+		Message msg2(int32)
 	}
 	outgoing {
-		Message msg4()  ["eventdriven ProtocolClass can have message into two directions"]
+		/** eventdriven ProtocolClass can have message into two directions */
+		Message msg4()
 	}
 }
 
 datadriven ProtocolClass DatadrivenProtocolClass {
 	incoming {
-		Message signal1 (int32) ["a datadriven message needs data"]
+		/** a datadriven message needs data */
+		Message signal1 (int32)
 	}
 	// datadriven ProtocolClass can only have incoming messages (signals)
 }
@@ -1220,7 +1223,8 @@ ExecutionType relates to the [CommunicationType][], e.g. if an actor uses data-d
 **Example**:
 
 ```room
-eventdriven ActorClass EventdrivenActor ["default is eventdriven"] {
+/** default is eventdriven */
+eventdriven ActorClass EventdrivenActor {
 	// only event-driven Ports and ActorRefs allowed
 }
 
@@ -1755,7 +1759,7 @@ Operations can be used to define a piece of reusable logic. The definition consi
 **Example**:
 
 ```room
-import room.basic.types.* from "../../../org.eclipse.etrice.modellib.c/model/Types.room"
+import etrice.api.types.*
 
 DataClass DataClassWithOperation {
 	Attribute attribute1 : uint32
@@ -1963,7 +1967,7 @@ The eTrice built-in types can be found in the _org.eclipse.etrice.modellib_ proj
 
 ```room
 // Follow import by Open Declaration (F3)
-import room.basic.types.* from "../../../org.eclipse.etrice.modellib.c/model/Types.room"
+import etrice.api.types.*
 ```
 
 ---
@@ -2062,7 +2066,7 @@ ProtocolClass SimpleProtocolClass {
 **Example**:
 
 ```room
-import room.basic.types.* from "../../../org.eclipse.etrice.modellib.c/model/Types.room"
+import etrice.api.types.*
 
 // eventdriven ProtocolClass (asynchronous message passing, bidirectional)
 eventdriven ProtocolClass ProtocolClassEvt {
@@ -2927,8 +2931,8 @@ In the next step, ThreadMappings provide the same action for the logical and phy
 
 ```etmap
 MappingModel PingPongMapping {
-	import PingPong_Model.* from "PingPong.room"
-	import GenericPhysicalModel.* from "GenericPhysical.etphys"
+	import PingPong_Model.LogSys
+	import GenericPhysicalModel.PhysSys1
 
 	Mapping LogSys -> PhysSys1 {
 		SubSystemMapping subSystemRef -> nodeRef1 {
@@ -3456,7 +3460,7 @@ Shows the structure of the current opened model in the textual editor. Select th
 </thead>
 <tbody>
 <tr>
-	<td rowspan="3" style="white-space: nowrap;">Contains:</td>
+	<td rowspan="2" style="white-space: nowrap;">Contains:</td>
 	<td>[GenerationOptions](#generationoptions)
 	 </td>
 	<td>Mechanism to adjust the generation.</td>
@@ -3466,122 +3470,10 @@ Shows the structure of the current opened model in the textual editor. Select th
 	 </td>
 	<td>Runtime logger for event-driven Messages, represented as a Message Sequence Chart.</td>
 </tr>
-<tr>
-	<td>[DataLogging](#datalogging)
-	 </td>
-	<td>Runtime logger for data-driven Messages with primitive data.</td>
-</tr>
 </tbody>
 </table>
 
 
-
----
-
-
-### DataLogging
-Runtime logger for data-driven Messages with primitive data.
-
-The DataLogging uses an annotation to configure the generated instrumentation:
-
-```room
-@DataLogging(pathlist = "/portInstancePath,/portInstancePath,..")
-```
-
-Where `pathlist` is a string specifying a list of port instances which should be instrumented for data logging:
-
-- the path of a port instance starts with the name of the [LogicalSystem][] and thus consists of at least 4 following segments
-`/portInstancePath` = `/LogicalSystem/SubSystemRef/ActorRef/Port`
-- multiple paths are separated through comma (`,`), but avoid any whitespace
-- the [Port][] must be conjugated and it´s [ProtocolClass][] has to be data-driven
-- only the first Message having primitive or enum typed data is considered
-
-The logging status can be verified in the generation console. It will output an overview of all accepted ports. In the [GenerationOptions][] is possible to (de)activate the data logging and thus ignoring the presence of the annotation.
-
-At runtime the data values will then be logged
-
-- into a file *log/SubSystemRef.data.csv*
-- it contains one column for each port instance
-- and a new row for every polling cycle, containing all readout data values
-- the first column is used to number the cycles
-
-Multi-Threading is not supported, the system must have not more than one polled/async physical thread.
-
-
-The built-in **Gnuplot script generator** provides a convenient way to visualize the logged data. It generates a gnuplot script that can be used to create graphs from the logged data values.
-
-* Download Gnuplot from [www.gnuplot.info](http://www.gnuplot.info/) and add it to the environment variable *PATH* (e.g. `C:\Program Files\gnuplot\bin;`)
-* Use the `@Gnuplot` and `@GnuplotGraph` to configure the script generation (see example)
-* The generated artifacts can be found in *src-gen/gnuplot*:
-	- *xxx.csv-script.plt* - the gnuplot script, the resulting images are place in folder *log/*
-	- *create_gnuplot.launch* - a launch configuration to call gnuplot executable with above script
-
-
-
-<table style="vertical-align: middle;" class="table">
-<thead>
-<tr>
-	<th colspan="3">Features</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-	<td rowspan="1" style="white-space: nowrap;">Uses:</td>
-	<td>[Annotation](#annotation)
-	 </td>
-	<td>An Annotation can be attached to a ROOM class to specify the properties of its AnnotationType</td>
-</tr>
-</tbody>
-</table>
-
-<table style="vertical-align: middle;" class="table">
-<thead>
-<tr>
-	<th colspan="3">Feature Usage</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-	<td rowspan="1" style="white-space: nowrap;">Is contained in:</td>
-	<td>[CCodeGenerator](#ccodegenerator)
-	 </td>
-	<td></td>
-</tr>
-</tbody>
-</table>
-
-**Example**:
-
-```room
-import room.basic.annotations.* from "../../org.eclipse.etrice.modellib.c/model/Annotations.room"
-
-LogicalSystem Logging {
- 	SubSystemRef main: MainSubSystem
-}
-
-SubSystemClass MainSubSystem {
- 	@DataLogging(pathlist = "/Logging/main/actorRef1/port1")
- 	@Gnuplot(format="pngcairo", outputfile="main.data.png", width=1800, height=600, fontsize=10)
-	@GnuplotGraph(
-		paths="/Logging/main/actorRef1/port1",
-		xtics=100, mxtics=4, ymin=-1.2, ymax=1.2
-	)
-```
-
-Logged data values in .csv format:
-```
- , /LogSys/subSystemRef/rootActor/serverInst/output, /LogSys/subSystemRef/rootActor/clientInst/output
-0, 0.000000											,0.000000
-1, 0.000000											,0.100000
-2, 0.099833											,0.200000
-3, 0.198669											,0.300000
-4, 0.295520											,0.400000
-5, 0.389418											,0.500000
-[...]
-```
-
-Resulting graph created from generated gnuplot script:
-![Gnuplot example](images/300-Gnuplot.png)
 
 ---
 
@@ -3722,12 +3614,6 @@ The MSCLogging is activated by default, but can be set manually in the [Generati
 
 
 
-[CCodeGenerator]: #ccodegenerator
-[JavaCodeGenerator]: #javacodegenerator
-[CPPCodeGenerator]: #cppcodegenerator
-[GenerationOptions]: #generationoptions
-[MSCLogging]: #msclogging
-[DataLogging]: #datalogging
 [AnnotationType]: #annotationtype
 [Annotation]: #annotation
 [Inheritance]: #inheritance
@@ -3784,3 +3670,8 @@ The MSCLogging is activated by default, but can be set manually in the [Generati
 [ActorRefPropertyDialog]: #actorrefpropertydialog
 [PortPropertyDialog]: #portpropertydialog
 [SPPPropertyDialog]: #spppropertydialog
+[CCodeGenerator]: #ccodegenerator
+[JavaCodeGenerator]: #javacodegenerator
+[CPPCodeGenerator]: #cppcodegenerator
+[GenerationOptions]: #generationoptions
+[MSCLogging]: #msclogging

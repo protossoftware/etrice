@@ -62,7 +62,7 @@
 </ul>
 <p>Values defined for class attributes are used for all instances unless there is an instance value configured for the same attribute.<br>The configuration is available for actors and ports, thus ActorClasses/ActorRefs and ProtocolClasses/Ports.</p>
 <pre><code class="etconfig customHighlighted"><span class="keyword">ConfigModel</span> ExampleConfig {
-	<span class="keyword">import</span> Example.* <span class="keyword">from</span> <span class="string">"Example.room"</span>
+	<span class="keyword">import</span> Example.*
 
 	<span class="keyword">ActorClassConfig</span> ActorClass1 {
 		<span class="keyword">Attr</span> attribute1 = 4
@@ -395,15 +395,10 @@
 	<td><p><a href="#dataclass">DataClass</a></p></td>
 	<td><p>A DataClass is a composition of Attributes</p></td>
 </tr>
-<tr>
-	<td rowspan="1" style="white-space: nowrap;"><p>Is used by:</p></td>
-	<td><p><a href="#datalogging">DataLogging</a></p></td>
-	<td><p>Runtime logger for data-driven Messages with primitive data.</p></td>
-</tr>
 </tbody>
 </table>
 <p><strong>Example</strong>:</p>
-<pre><code class="room customHighlighted"><span class="keyword">import</span> room.basic.annotations.* <span class="keyword">from</span> <span class="string">"../../org.eclipse.etrice.modellib.c/model/Annotations.room"</span>
+<pre><code class="room customHighlighted"><span class="keyword">import</span> etrice.api.annotations.BehaviorManual
 
 <span class="keyword">ActorClass</span> ComponentAbstraction {
 	<span class="keyword">Interface</span> {
@@ -515,7 +510,7 @@
 </tbody>
 </table>
 <p><strong>Example</strong>:</p>
-<pre><code class="room customHighlighted"><span class="keyword">import</span> room.basic.types.* <span class="keyword">from</span> <span class="string">"../../../org.eclipse.etrice.modellib.c/model/Types.room"</span>
+<pre><code class="room customHighlighted"><span class="keyword">import</span> etrice.api.types.*
 
 <span class="keyword">DataClass</span> SimpleDataClass {
 	<span class="keyword">Attribute</span> attribute1: int16
@@ -524,15 +519,19 @@
 
 <span class="keyword">ActorClass</span> ActorClassWithAttributes {
 	<span class="keyword">Structure</span> {
-		<span class="keyword">Attribute</span> attribute1: int32 			[<span class="string">"attribute of a PrimitiveType"</span> ]
-		<span class="keyword">Attribute</span> attribute2: SimpleDataClass 	[ <span class="string">"attribute of a DataClass"</span> ]
+		<span class="comment">/** attribute of a PrimitiveType */</span>
+		<span class="keyword">Attribute</span> attribute1: int32
+		<span class="comment">/** attribute of a DataClass */</span>
+		<span class="keyword">Attribute</span> attribute2: SimpleDataClass
 	}
 }
 
 <span class="keyword">ActorClass</span> ActorClassWithAttributes2 {
 	<span class="keyword">Structure</span> {
-		<span class="keyword">Attribute</span> arrayAttribute[8] : uint32 [ <span class="string">"attribute with multiplicity"</span>]
-		<span class="keyword">Attribute</span> refAttribue : voidType <span class="keyword">ref</span> [ <span class="string">"attribute as a reference (void pointer)"</span>]
+		<span class="comment">/** attribute with multiplicity */</span>
+		<span class="keyword">Attribute</span> arrayAttribute[8] : uint32
+		<span class="comment">/** attribute as a reference (void pointer) */</span>
+		<span class="keyword">Attribute</span> refAttribue : voidType <span class="keyword">ref</span>
 	}
 }
 
@@ -686,22 +685,27 @@
 </table>
 <p><strong>Example</strong>:</p>
 <pre><code class="room customHighlighted">
-<span class="keyword">import</span> room.basic.types.* <span class="keyword">from</span> <span class="string">"../../../org.eclipse.etrice.modellib.c/model/Types.room"</span>
+<span class="keyword">import</span> etrice.api.types.*
 
-<span class="keyword">ProtocolClass</span> EventdrivenProtocolClass1 [ <span class="string">"default is eventdriven"</span> ] {
+<span class="comment">/** default is eventdriven */</span>
+<span class="keyword">ProtocolClass</span> EventdrivenProtocolClass1 {
 	<span class="comment">// explicit: eventdriven ProtocolClass EventdrivenProtocolClass {
 </span>	<span class="keyword">incoming</span> {
-		<span class="keyword">Message</span> msg1() [<span class="string">"message without data"</span>]
-		<span class="keyword">Message</span> msg2(int32) [<span class="string">"message with data"</span>]
+		<span class="comment">/** message without data */</span>
+		<span class="keyword">Message</span> msg1()
+		<span class="comment">/** message with data */</span>
+		<span class="keyword">Message</span> msg2(int32)
 	}
 	<span class="keyword">outgoing</span> {
-		<span class="keyword">Message</span> msg4()  [<span class="string">"eventdriven ProtocolClass can have message into two directions"</span>]
+		<span class="comment">/** eventdriven ProtocolClass can have message into two directions */</span>
+		<span class="keyword">Message</span> msg4()
 	}
 }
 
 <span class="keyword">datadriven</span> <span class="keyword">ProtocolClass</span> DatadrivenProtocolClass {
 	<span class="keyword">incoming</span> {
-		<span class="keyword">Message</span> signal1 (int32) [<span class="string">"a datadriven message needs data"</span>]
+		<span class="comment">/** a datadriven message needs data */</span>
+		<span class="keyword">Message</span> signal1 (int32)
 	}
 	<span class="comment">// datadriven ProtocolClass can only have incoming messages (signals)
 </span>}
@@ -967,7 +971,8 @@
 </tbody>
 </table>
 <p><strong>Example</strong>:</p>
-<pre><code class="room customHighlighted"><span class="keyword">eventdriven</span> <span class="keyword">ActorClass</span> EventdrivenActor [<span class="string">"default is eventdriven"</span>] {
+<pre><code class="room customHighlighted"><span class="comment">/** default is eventdriven */</span>
+<span class="keyword">eventdriven</span> <span class="keyword">ActorClass</span> EventdrivenActor {
 	<span class="comment">// only event-driven Ports and ActorRefs allowed
 </span>}
 
@@ -1378,7 +1383,7 @@
 </tbody>
 </table>
 <p><strong>Example</strong>:</p>
-<pre><code class="room customHighlighted"><span class="keyword">import</span> room.basic.types.* <span class="keyword">from</span> <span class="string">"../../../org.eclipse.etrice.modellib.c/model/Types.room"</span>
+<pre><code class="room customHighlighted"><span class="keyword">import</span> etrice.api.types.*
 
 <span class="keyword">DataClass</span> DataClassWithOperation {
 	<span class="keyword">Attribute</span> attribute1 : uint32
@@ -1545,7 +1550,7 @@
 <p><strong>Example</strong>:</p>
 <p>The eTrice built-in types can be found in the <em>org.eclipse.etrice.modellib</em> project. In most cases the <em>Types.room</em> is already included:</p>
 <pre><code class="room customHighlighted"><span class="comment">// Follow import by Open Declaration (F3)
-</span><span class="keyword">import</span> room.basic.types.* <span class="keyword">from</span> <span class="string">"../../../org.eclipse.etrice.modellib.c/model/Types.room"</span>
+</span><span class="keyword">import</span> etrice.api.types.*
 </code></pre>
 <hr>
 <h3><a href="#protocolclass" name="protocolclass"></a>ProtocolClass</h3>
@@ -1621,7 +1626,7 @@
 </tbody>
 </table>
 <p><strong>Example</strong>:</p>
-<pre><code class="room customHighlighted"><span class="keyword">import</span> room.basic.types.* <span class="keyword">from</span> <span class="string">"../../../org.eclipse.etrice.modellib.c/model/Types.room"</span>
+<pre><code class="room customHighlighted"><span class="keyword">import</span> etrice.api.types.*
 
 <span class="comment">// eventdriven ProtocolClass (asynchronous message passing, bidirectional)
 </span><span class="keyword">eventdriven</span> <span class="keyword">ProtocolClass</span> ProtocolClassEvt {
@@ -2271,8 +2276,8 @@
 <p>It enables the complete decoupling of the LogicalModel and the PhysicalModel, thus providing a maximum flexibility and reuse for the models.</p>
 <p>The model starts with an import part, where you can import .room and .etphys models. They must contain at least one LogicalSystem and one PhysicalSystem.<br>A Mapping entry puts both in relation, meaning that all sub systems of the LogicalSystem will be distributed to the nodes of the PhysicalSystem.<br>This is carried out by a SubSystemMapping, that maps a SubSystemRef (logical node) to a NodeRef (physical node).<br>In the next step, ThreadMappings provide the same action for the logical and physical threads.</p>
 <pre><code class="etmap customHighlighted"><span class="keyword">MappingModel</span> PingPongMapping {
-	<span class="keyword">import</span> PingPong_Model.* <span class="keyword">from</span> <span class="string">"PingPong.room"</span>
-	<span class="keyword">import</span> GenericPhysicalModel.* <span class="keyword">from</span> <span class="string">"GenericPhysical.etphys"</span>
+	<span class="keyword">import</span> PingPong_Model.LogSys
+	<span class="keyword">import</span> GenericPhysicalModel.PhysSys1
 
 	<span class="keyword">Mapping</span> LogSys -&gt; PhysSys1 {
 		<span class="keyword">SubSystemMapping</span> subSystemRef -&gt; nodeRef1 {
@@ -2663,7 +2668,7 @@
 </thead>
 <tbody>
 <tr>
-	<td rowspan="3" style="white-space: nowrap;"><p>Contains:</p></td>
+	<td rowspan="2" style="white-space: nowrap;"><p>Contains:</p></td>
 	<td><p><a href="#generationoptions">GenerationOptions</a></p></td>
 	<td><p>Mechanism to adjust the generation.</p></td>
 </tr>
@@ -2671,99 +2676,8 @@
 	<td><p><a href="#msclogging">MSCLogging</a></p></td>
 	<td><p>Runtime logger for event-driven Messages, represented as a Message Sequence Chart.</p></td>
 </tr>
-<tr>
-	<td><p><a href="#datalogging">DataLogging</a></p></td>
-	<td><p>Runtime logger for data-driven Messages with primitive data.</p></td>
-</tr>
 </tbody>
 </table>
-<hr>
-<h3><a href="#datalogging" name="datalogging"></a>DataLogging</h3>
-<p>Runtime logger for data-driven Messages with primitive data.</p>
-<p>The DataLogging uses an annotation to configure the generated instrumentation:</p>
-<pre><code class="room customHighlighted">@DataLogging(pathlist = <span class="string">"/portInstancePath,/portInstancePath,.."</span>)
-</code></pre>
-<p>Where <code>pathlist</code> is a string specifying a list of port instances which should be instrumented for data logging:</p>
-<ul>
-  <li>the path of a port instance starts with the name of the <a href="#logicalsystem">LogicalSystem</a> and thus consists of at least 4 following segments<br><code>/portInstancePath</code> = <code>/LogicalSystem/SubSystemRef/ActorRef/Port</code></li>
-  <li>multiple paths are separated through comma (<code>,</code>), but avoid any whitespace</li>
-  <li>the <a href="#port">Port</a> must be conjugated and it´s <a href="#protocolclass">ProtocolClass</a> has to be data-driven</li>
-  <li>only the first Message having primitive or enum typed data is considered</li>
-</ul>
-<p>The logging status can be verified in the generation console. It will output an overview of all accepted ports. In the <a href="#generationoptions">GenerationOptions</a> is possible to (de)activate the data logging and thus ignoring the presence of the annotation.</p>
-<p>At runtime the data values will then be logged</p>
-<ul>
-  <li>into a file <em>log/SubSystemRef.data.csv</em></li>
-  <li>it contains one column for each port instance</li>
-  <li>and a new row for every polling cycle, containing all readout data values</li>
-  <li>the first column is used to number the cycles</li>
-</ul>
-<p>Multi-Threading is not supported, the system must have not more than one polled/async physical thread.</p>
-<p>The built-in <strong>Gnuplot script generator</strong> provides a convenient way to visualize the logged data. It generates a gnuplot script that can be used to create graphs from the logged data values.</p>
-<ul>
-  <li>Download Gnuplot from <a href="http://www.gnuplot.info/">www.gnuplot.info</a> and add it to the environment variable <em>PATH</em> (e.g. <code>C:\Program Files\gnuplot\bin;</code>)</li>
-  <li>Use the <code>@Gnuplot</code> and <code>@GnuplotGraph</code> to configure the script generation (see example)</li>
-  <li>The generated artifacts can be found in <em>src-gen/gnuplot</em>:
-    <ul>
-      <li><em>xxx.csv-script.plt</em> - the gnuplot script, the resulting images are place in folder <em>log/</em></li>
-      <li><em>create_gnuplot.launch</em> - a launch configuration to call gnuplot executable with above script</li>
-    </ul>
-  </li>
-</ul>
-<table style="vertical-align: middle;" class="table">
-<thead>
-<tr>
-	<th colspan="3">Features</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-	<td rowspan="1" style="white-space: nowrap;"><p>Uses:</p></td>
-	<td><p><a href="#annotation">Annotation</a></p></td>
-	<td><p>An Annotation can be attached to a ROOM class to specify the properties of its AnnotationType</p></td>
-</tr>
-</tbody>
-</table>
-<table style="vertical-align: middle;" class="table">
-<thead>
-<tr>
-	<th colspan="3">Feature Usage</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-	<td rowspan="1" style="white-space: nowrap;"><p>Is contained in:</p></td>
-	<td><p><a href="#ccodegenerator">CCodeGenerator</a></p></td>
-	<td></td>
-</tr>
-</tbody>
-</table>
-<p><strong>Example</strong>:</p>
-<pre><code class="room customHighlighted"><span class="keyword">import</span> room.basic.annotations.* <span class="keyword">from</span> <span class="string">"../../org.eclipse.etrice.modellib.c/model/Annotations.room"</span>
-
-<span class="keyword">LogicalSystem</span> Logging {
- 	<span class="keyword">SubSystemRef</span> main: MainSubSystem
-}
-
-<span class="keyword">SubSystemClass</span> MainSubSystem {
- 	@DataLogging(pathlist = <span class="string">"/Logging/main/actorRef1/port1"</span>)
- 	@Gnuplot(format=<span class="string">"pngcairo"</span>, outputfile=<span class="string">"main.data.png"</span>, width=1800, height=600, fontsize=10)
-	@GnuplotGraph(
-		paths=<span class="string">"/Logging/main/actorRef1/port1"</span>,
-		xtics=100, mxtics=4, ymin=-1.2, ymax=1.2
-	)
-</code></pre>
-<p>Logged data values in .csv format:</p>
-<pre><code> , /LogSys/subSystemRef/rootActor/serverInst/output, /LogSys/subSystemRef/rootActor/clientInst/output
-0, 0.000000											,0.000000
-1, 0.000000											,0.100000
-2, 0.099833											,0.200000
-3, 0.198669											,0.300000
-4, 0.295520											,0.400000
-5, 0.389418											,0.500000
-[...]
-</code></pre>
-<p>Resulting graph created from generated gnuplot script:<br><img src="images/300-Gnuplot.png" alt="Gnuplot example"></p>
 <hr>
 <h2><a href="#cppcodegenerator" name="cppcodegenerator"></a>CPPCodeGenerator</h2>
 <hr>

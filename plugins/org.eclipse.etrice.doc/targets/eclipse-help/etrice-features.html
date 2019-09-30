@@ -47,10 +47,9 @@
 <p>The context menu of a structure diagram (invoked in the empty space inside the bounding rectangle) contains an entry “Open Class Behavior” which opens the behavior diagram (same as Alt+B).</p>
 <p>The context menu of an actor reference contains entries: “Open Ref Structure” and “Open Ref Behavior” that allow to open the associated diagrams of the referenced actor class.</p>
 <h2><a href="#etrice-java-projects" name="etrice-java-projects"></a>eTrice Java Projects</h2>
-<p>There are two flavors of eTrice Java projects. The first one uses the Eclipse JDT build and the second one uses Maven to build and deploy an eTrice application.</p>
-<p>The kind of build can be selected in the “Empty eTrice Java project” wizard.</p>
+<p>eTrice Java projects use the Eclipse JDT build to build and deploy an eTrice application.</p>
 <h3><a href="#eclipse-jdt-build" name="eclipse-jdt-build"></a>Eclipse JDT Build</h3>
-<p>If this kind of build is chosen the eTrice new project wizard requires the <code>org.eclipse.etrice.runtime.java</code> project in the workspace and adds a dependency to it.</p>
+<p>The eTrice new project wizard requires the <code>org.eclipse.etrice.runtime.java</code> project in the workspace and adds a dependency to it.</p>
 <p>If the project uses other eTrice projects (e.g. the <code>org.eclipse.etrice.modellib.java</code>) they have to be added to the Java build path as well.</p>
 <p>The eTrice new project wizard creates the following files for the JDT build</p>
 <ul>
@@ -66,132 +65,6 @@
   <p>a launch configuration that launches the main method of the generated code</p></li>
 </ul>
 <p>If “build automatically” is chosen the newly created model can be generated and launched with just two clicks.</p>
-<h3><a href="#maven-build" name="maven-build"></a>Maven Build</h3>
-<p>The Maven integration of eTrice requires the m2eclipse plug-in installed. The dependencies are then managed by the Maven pom.xml but the m2e builder maps them as JDT visible dependencies to the project class path.</p>
-<p>The eTrice new project wizard creates the following files for the Maven build</p>
-<ul>
-  <li>
-  <p>a ROOM model file with exemplary classes</p></li>
-  <li>
-  <p>a simple physical model</p></li>
-  <li>
-  <p>a model mapping the logical entities of the ROOM model to the physical entities</p></li>
-  <li>
-  <p>a launch configuration that invokes the eTrice Java code generator for the new models</p></li>
-  <li>
-  <p>a launch configuration that builds and deploys the generated application</p></li>
-  <li>
-  <p>a launch configuration that launches the deployed jar file</p></li>
-  <li>
-  <p>a launch configuration that launches the main method of the generated code (for convenience or if the generated code should be launched in debug mode)</p></li>
-</ul>
-<p>After the new project is created the m2e builder creates the dependencies in the project class path. Therefore also JDT can compile and launch the application.</p>
-<h4><a href="#example" name="example"></a>Example</h4>
-<p>As an example we want to use the .</p>
-<p>For this example we start with an empty workspace. We create a new eTrice project using the “Empty eTrice Java Project” wizard which results in a workspace looking like:</p>
-<p><img src="images/042-after-project-creation.png" alt="image"></p>
-<p>The only difference to the first version of this example is the resolution of the <code>TimingService</code> using a classpath scheme:</p>
-<pre><code class="room customHighlighted"><span class="keyword">import</span> room.basic.service.timing.* <span class="keyword">from</span> <span class="string">"classpath:/TimingService.room"</span>
-</code></pre>
-<p>It is possible to navigate to the imported model:</p>
-<p><img src="images/042-navigate-import.png" alt="image"></p>
-<p>but the model is read-only. It is found on the class path of the project which is derived from the project pom’s dependencies:</p>
-<pre><code class="lang-xml prettyprint">&lt;dependency&gt;
-	&lt;groupId&gt;org.eclipse.etrice&lt;/groupId&gt;
-	&lt;artifactId&gt;org.eclipse.etrice.modellib.java&lt;/artifactId&gt;
-	&lt;version&gt;0.5.0-SNAPSHOT&lt;/version&gt;
-&lt;/dependency&gt;
-</code></pre>
-<p>Since during the generate-sources life cycle phase the same dependency is needed we have to add it also to our eTrice generator plug-in:</p>
-<pre><code class="lang-xml">&lt;build&gt;
-	&lt;plugins&gt;
-		&lt;plugin&gt;
-			&lt;groupId&gt;org.eclipse.etrice&lt;/groupId&gt;
-			&lt;artifactId&gt;org.eclipse.etrice.generator.java.mvn&lt;/artifactId&gt;
-			&lt;version&gt;0.5.0-SNAPSHOT&lt;/version&gt;
-			&lt;!-- [...] --&gt;
-			&lt;dependencies&gt;
-				&lt;!-- put the modellib on the class path to allow resolution of models by the generator --&gt;
-				&lt;dependency&gt;
-					&lt;groupId&gt;org.eclipse.etrice&lt;/groupId&gt;
-					&lt;artifactId&gt;org.eclipse.etrice.modellib.java&lt;/artifactId&gt;
-					&lt;version&gt;0.5.0-SNAPSHOT&lt;/version&gt;
-				&lt;/dependency&gt;
-			&lt;/dependencies&gt;
-		&lt;/plugin&gt;
-	&lt;/plugins&gt;
-&lt;/build&gt;
-</code></pre>
-<p>Now we start the build, e.g. by entering <code>mvn clean package</code> on the command line or by launching Maven using m2e. Maven will download all needed artifacts. The build should succeed and contain somewhere the generator output:</p>
-<pre><code>[INFO] Info: -- reading models
-[INFO] Info: added model model/MavenPingPong.etmap
-[INFO] Info: Loading file:/C:/eTrice-mvn-tutorial/MavenPingPong/model/MavenPingPong.etmap
-[INFO] Info: added referenced model file:/C:/eTrice-mvn-tutorial/MavenPingPong/model/MavenPingPong.room
-[INFO] Info: added referenced model file:/C:/eTrice-mvn-tutorial/MavenPingPong/model/MavenPingPong.etphys
-[INFO] Info: Loading file:/C:/eTrice-mvn-tutorial/MavenPingPong/model/MavenPingPong.room
-[INFO] Info: added referenced model classpath:/TimingService.room
-[INFO] Info: Loading jar:file:/C:/Users/hrentz/.m2/repository/org/eclipse/etrice/org.eclipse.etrice.modellib.java/0.5.0-SNAPSHOT/org.eclipse.etrice.modellib.java-0.5.0-SNAPSHOT.jar!/TimingService.room
-[INFO] Info: Loading file:/C:/eTrice-mvn-tutorial/MavenPingPong/model/MavenPingPong.etphys
-[INFO] Info: -- validating models
-[INFO] Info: validation finished with 0 errors and 0 warnings
-[INFO] Info: -- creating generator model
-[INFO] Info: GeneratorModelBuilder: creating system class from LogSys1
-[INFO] Info: GeneratorModelBuilder: creating subsystem instance from subSysRef1
-[INFO] Info: -- starting code generation
-[INFO] Info: clearing C:\eTrice-mvn-tutorial\MavenPingPong/src-gen/
-[INFO] Info: clearing /src-gen/
-[INFO] Info: generating ProtocolClass implementation 'PingPongProtocol.java' in 'C:\eTrice-mvn-tutorial\MavenPingPong/src-gen/MavenPingPong/'
-[INFO] Info: generating ActorClass implementation 'PingPongTop.java' in 'C:\eTrice-mvn-tutorial\MavenPingPong/src-gen/MavenPingPong/'
-[INFO] Info: generating ActorClass implementation 'Receiver.java' in 'C:\eTrice-mvn-tutorial\MavenPingPong/src-gen/MavenPingPong/'
-[INFO] Info: generating ActorClass implementation 'Sender.java' in 'C:\eTrice-mvn-tutorial\MavenPingPong/src-gen/MavenPingPong/'
-[INFO] Info: generating Node implementation 'Node_nodeRef1_subSysRef1.java' in 'C:\eTrice-mvn-tutorial\MavenPingPong/src-gen/MavenPingPong/'
-[INFO] Info: generating SubSystemRunner implementation 'Node_nodeRef1_subSysRef1Runner.java' in 'C:\eTrice-mvn-tutorial\MavenPingPong/src-gen/MavenPingPong/'
-[INFO] Info: -- finished code generation
-</code></pre>
-<p>When the packaging of the project succeeded two jar files have been created in the <code>target</code> folder. The larger one with “jar-with-dependencies” in its name also contains the referenced Maven components. It can be launched using the <code>runjar_</code> launch configuration.</p>
-<p>Finally we want to mention that the generator switches are passed as arguments to the plug-in. In the pom you can find the most commonly used ones in xml comments together with a comment:</p>
-<pre><code class="xml">&lt;plugin&gt;
-	&lt;groupId&gt;org.eclipse.etrice&lt;/groupId&gt;
-	&lt;artifactId&gt;org.eclipse.etrice.generator.java.mvn&lt;/artifactId&gt;
-	&lt;version&gt;0.5.0-SNAPSHOT&lt;/version&gt;
-	&lt;executions&gt;
-		&lt;execution&gt;
-			&lt;goals&gt;
-				&lt;goal&gt;eTriceJavaGenerator&lt;/goal&gt;
-			&lt;/goals&gt;
-			&lt;configuration&gt;
-				&lt;arguments&gt;
-					&lt;!-- allowed switches for the generator (not complete) --&gt;
-					&lt;!-- generate the store/restore interface using POJO data objects
-					&lt;param&gt;-storeDataObj&lt;/param&gt;
-					--&gt;
-					&lt;!-- generate MSC instrumentation
-					&lt;param&gt;-msc_instr&lt;/param&gt;
-					--&gt;
-					&lt;!-- generate the persistence interface for dynamic actors
-					&lt;param&gt;-persistable&lt;/param&gt;
-					--&gt;
-					&lt;!-- generate all ROOM classes as library
-					&lt;param&gt;-lib&lt;/param&gt;
-					--&gt;
-					&lt;!-- generate documentation
-					&lt;param&gt;-genDocu&lt;/param&gt;
-					--&gt;
-					&lt;!-- generate files incrementally (overwrite only if contents changed)
-					&lt;param&gt;-inc&lt;/param&gt;
-					--&gt;
-					&lt;param&gt;model/MavenPingPong.etmap&lt;/param&gt;
-				&lt;/arguments&gt;
-			&lt;/configuration&gt;
-		&lt;/execution&gt;
-	&lt;/executions&gt;
-	&lt;dependencies&gt;
-		&lt;!-- [...] --&gt;
-	&lt;/dependencies&gt;
-&lt;/plugin&gt;
-</code></pre>
-<p>E.g. for our example you might want to use the <code>-msc_instr</code> switch to generate MSCs.</p>
-<p>Finally for reference we show the complete ROOM model of this example:</p>
 <h2><a href="#automatic-diagram-layout-with-kieler" name="automatic-diagram-layout-with-kieler"></a>Automatic Diagram Layout with KIELER</h2>
 <h3><a href="#overview" name="overview"></a>Overview</h3>
 <p>eTrice provides as a feature the automatic layout of the ROOM diagrams in its graphical editors. This helps in improving the pragmatics of the diagrams and frees the user from the burden of manually lay-outing the diagrams on the canvas.</p>
