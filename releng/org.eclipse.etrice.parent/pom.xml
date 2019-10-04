@@ -102,33 +102,14 @@
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-packaging-plugin</artifactId>
 				<version>${tycho.version}</version>
-				<dependencies>
-					<dependency>
-						<groupId>org.eclipse.tycho.extras</groupId>
-						<artifactId>tycho-buildtimestamp-jgit</artifactId>
-						<version>${tycho.version}</version>
-					</dependency>
-				</dependencies>
 				<configuration>
 					<format>'${build.type}'yyyyMMddHHmm</format>
-					<timestampProvider>jgit</timestampProvider>
-					<jgit.dirtyWorkingTree>warning</jgit.dirtyWorkingTree>
 				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-p2-plugin</artifactId>
 				<version>${tycho.version}</version>
-				<!-- Bug 537127. This line causes tycho to package artifacts from ${etrice.url} to the built jars! 
-					 The current built artifacts are just ignored !!!!1
-				<configuration> 
-					<baselineRepositories> 
-						<repository> 
-							<url>${etrice.url}</url> 
-						</repository> 
-					</baselineRepositories>
-				 </configuration>
-				-->
 			</plugin>
 			<plugin>
 				<groupId>org.eclipse.xtend</groupId>
