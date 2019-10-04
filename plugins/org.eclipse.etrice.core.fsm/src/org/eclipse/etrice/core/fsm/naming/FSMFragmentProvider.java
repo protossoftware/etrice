@@ -24,7 +24,6 @@ import org.eclipse.etrice.core.common.base.AnnotationType;
 import org.eclipse.etrice.core.common.base.util.BaseSwitch;
 import org.eclipse.etrice.core.common.naming.BaseFragmentProvider;
 import org.eclipse.etrice.core.fsm.fSM.ChoicePoint;
-import org.eclipse.etrice.core.fsm.fSM.FSMFactory;
 import org.eclipse.etrice.core.fsm.fSM.FSMModel;
 import org.eclipse.etrice.core.fsm.fSM.FSMPackage;
 import org.eclipse.etrice.core.fsm.fSM.InitialTransition;
@@ -273,16 +272,18 @@ public class FSMFragmentProvider extends BaseFragmentProvider {
 	protected Transition getTransition(ModelComponent mc, String remainder) {
 		StateGraph sg = getStateGraph(mc, remainder);
 		
-		int begin = remainder.lastIndexOf(SEP);
-		if (begin<0)
-			begin = 0;
-		else
-			++begin;
-		
-		String name = remainder.substring(begin, remainder.length());
-		for (Transition t : sg.getTransitions()) {
-			if (t.getName().equals(name)) {
-				return t;
+		if (sg!=null) {
+			int begin = remainder.lastIndexOf(SEP);
+			if (begin<0)
+				begin = 0;
+			else
+				++begin;
+			
+			String name = remainder.substring(begin, remainder.length());
+			for (Transition t : sg.getTransitions()) {
+				if (t.getName().equals(name)) {
+					return t;
+				}
 			}
 		}
 	
@@ -292,17 +293,19 @@ public class FSMFragmentProvider extends BaseFragmentProvider {
 	protected InitialTransition getInitialTransition(ModelComponent mc, String remainder) {
 		StateGraph sg = getStateGraph(mc, remainder);
 		
-		int begin = remainder.lastIndexOf(SEP);
-		if (begin<0)
-			begin = 0;
-		else
-			++begin;
-		
-		String name = remainder.substring(begin, remainder.length());
-		if (name.equals(INIT_TRANS)) {
-			for (Transition t : sg.getTransitions()) {
-				if (t instanceof InitialTransition)
-					return (InitialTransition) t;
+		if (sg!=null) {
+			int begin = remainder.lastIndexOf(SEP);
+			if (begin<0)
+				begin = 0;
+			else
+				++begin;
+			
+			String name = remainder.substring(begin, remainder.length());
+			if (name.equals(INIT_TRANS)) {
+				for (Transition t : sg.getTransitions()) {
+					if (t instanceof InitialTransition)
+						return (InitialTransition) t;
+				}
 			}
 		}
 		
@@ -312,16 +315,18 @@ public class FSMFragmentProvider extends BaseFragmentProvider {
 	protected RefinedTransition getRefinedTransition(ModelComponent mc, String remainder) {
 		StateGraph sg = getStateGraph(mc, remainder);
 		
-		int begin = remainder.lastIndexOf(SEP);
-		if (begin<0)
-			begin = 0;
-		else
-			++begin;
-		
-		String name = remainder.substring(begin, remainder.length());
-		for (RefinedTransition t : sg.getRefinedTransitions()) {
-			if (t.getTarget().getName().equals(name))
-				return t;
+		if (sg!=null) {
+			int begin = remainder.lastIndexOf(SEP);
+			if (begin<0)
+				begin = 0;
+			else
+				++begin;
+			
+			String name = remainder.substring(begin, remainder.length());
+			for (RefinedTransition t : sg.getRefinedTransitions()) {
+				if (t.getTarget().getName().equals(name))
+					return t;
+			}
 		}
 		
 		return null;
@@ -330,16 +335,18 @@ public class FSMFragmentProvider extends BaseFragmentProvider {
 	protected ChoicePoint getChoicePoint(ModelComponent mc, String remainder) {
 		StateGraph sg = getStateGraph(mc, remainder);
 		
-		int begin = remainder.lastIndexOf(SEP);
-		if (begin<0)
-			begin = 0;
-		else
-			++begin;
-		
-		String name = remainder.substring(begin, remainder.length());
-		for (ChoicePoint cp : sg.getChPoints()) {
-			if (cp.getName().equals(name)) {
-				return cp;
+		if (sg!=null) {
+			int begin = remainder.lastIndexOf(SEP);
+			if (begin<0)
+				begin = 0;
+			else
+				++begin;
+			
+			String name = remainder.substring(begin, remainder.length());
+			for (ChoicePoint cp : sg.getChPoints()) {
+				if (cp.getName().equals(name)) {
+					return cp;
+				}
 			}
 		}
 	
@@ -349,16 +356,18 @@ public class FSMFragmentProvider extends BaseFragmentProvider {
 	protected TrPoint getTrPoint(ModelComponent mc, String remainder) {
 		StateGraph sg = getStateGraph(mc, remainder);
 		
-		int begin = remainder.lastIndexOf(SEP);
-		if (begin<0)
-			begin = 0;
-		else
-			++begin;
-		
-		String name = remainder.substring(begin, remainder.length());
-		for (TrPoint tp : sg.getTrPoints()) {
-			if (tp.getName().equals(name)) {
-				return tp;
+		if (sg!=null) {
+			int begin = remainder.lastIndexOf(SEP);
+			if (begin<0)
+				begin = 0;
+			else
+				++begin;
+			
+			String name = remainder.substring(begin, remainder.length());
+			for (TrPoint tp : sg.getTrPoints()) {
+				if (tp.getName().equals(name)) {
+					return tp;
+				}
 			}
 		}
 	
@@ -368,16 +377,18 @@ public class FSMFragmentProvider extends BaseFragmentProvider {
 	protected State getState(ModelComponent mc, String remainder) {
 		StateGraph sg = getStateGraph(mc, remainder);
 		
-		int begin = remainder.lastIndexOf(SEP);
-		if (begin<0)
-			begin = 0;
-		else
-			++begin;
-		
-		String name = remainder.substring(begin, remainder.length());
-		for (State s : sg.getStates()) {
-			if (s.getName().equals(name)) {
-				return s;
+		if (sg!=null) {
+			int begin = remainder.lastIndexOf(SEP);
+			if (begin<0)
+				begin = 0;
+			else
+				++begin;
+			
+			String name = remainder.substring(begin, remainder.length());
+			for (State s : sg.getStates()) {
+				if (s.getName().equals(name)) {
+					return s;
+				}
 			}
 		}
 	
@@ -386,27 +397,26 @@ public class FSMFragmentProvider extends BaseFragmentProvider {
 
 	protected StateGraph getStateGraph(ModelComponent mc, String remainder) {
 		StateGraph sg = mc.getStateMachine();
-		if (sg==null) {
-			mc.setStateMachine(FSMFactory.eINSTANCE.createStateGraph());
-			sg = mc.getStateMachine();
-		}
-		int begin = 0;
-		int end = remainder.indexOf(SEP);
-		while (end>=0) {
-			String name = remainder.substring(begin, end);
-			boolean found = false;
-			for (State s : sg.getStates()) {
-				if (s.getName().equals(name)) {
-					sg = s.getSubgraph();
-					found = true;
-					break;
+		
+		if (sg!=null) {
+			int begin = 0;
+			int end = remainder.indexOf(SEP);
+			while (end>=0) {
+				String name = remainder.substring(begin, end);
+				boolean found = false;
+				for (State s : sg.getStates()) {
+					if (s.getName().equals(name)) {
+						sg = s.getSubgraph();
+						found = true;
+						break;
+					}
 				}
+				if (!found)
+					return null;
+				
+				begin = end+1;
+				end = remainder.indexOf(SEP, begin);
 			}
-			if (!found)
-				return null;
-			
-			begin = end+1;
-			end = remainder.indexOf(SEP, begin);
 		}
 		
 		return sg;
