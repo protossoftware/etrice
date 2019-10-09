@@ -1,0 +1,55 @@
+/*
+ * Bug 551966 - [fsm] Allow subgraph without init transition
+ */
+RoomModel HierFSMInitTransition {
+
+	ActorClass TestActor {
+		Interface {
+			Port p0: PC
+		}
+		Structure {
+			external Port p0
+		}
+		Behavior {
+			StateMachine {
+				State state0
+
+				State state1 {
+					subgraph {
+						EntryPoint tr0
+						ExitPoint tr1
+						Transition tr2: my tr0 -> state0
+						State state0
+						Transition tr3: state0 -> my tr1 {
+							triggers {
+								<in1: p0>
+							}
+						}
+					}
+				}
+				Transition init0: initial -> state0
+				State state2
+				Transition tr0: state0 -> tr0 of state1 {
+					triggers {
+						<in1: p0>
+					}
+				}
+				Transition tr1: tr1 of state1 -> state2
+				Transition tr2: state1 -> state1 {
+					triggers {
+						<in1: p0>
+					}
+				}
+			}
+		}
+	}
+
+	ProtocolClass PC {
+		incoming {
+			Message in1()
+			Message in2()
+		}
+		outgoing {
+		}
+	}
+}
