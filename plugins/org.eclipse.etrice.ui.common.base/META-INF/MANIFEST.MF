@@ -2,29 +2,29 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Common Base for UI
 Bundle-SymbolicName: org.eclipse.etrice.ui.common.base;singleton:=true
-Bundle-Version: 2.0.0.qualifier
+Bundle-Version: 0.0.0.qualifier
 Bundle-Activator: org.eclipse.etrice.ui.common.base.UIBaseActivator
 Bundle-Vendor: eTrice
-Require-Bundle: org.eclipse.etrice.core.common.ui;bundle-version="2.0.0",
- org.eclipse.etrice.core.fsm.ui;bundle-version="2.0.0",
- org.eclipse.etrice.doc;bundle-version="2.0.0",
+Require-Bundle:  org.eclipse.etrice.core.common.ui,
+  org.eclipse.etrice.core.fsm.ui,
+  org.eclipse.etrice.doc,
  org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.emf.transaction,
- org.eclipse.graphiti;bundle-version="0.8.0",
- org.eclipse.xtext.ui;bundle-version="2.6.0",
- org.eclipse.xtext.ui.shared;bundle-version="2.6.0",
- org.eclipse.xtend.lib;bundle-version="2.6.0",
+ org.eclipse.graphiti,
+ org.eclipse.xtext.ui,
+ org.eclipse.xtext.ui.shared,
+ org.eclipse.xtend.lib,
  org.eclipse.emf.databinding,
  org.eclipse.jface.databinding,
- org.eclipse.core.databinding.property;bundle-version="1.4.200",
- org.eclipse.jdt.core;bundle-version="3.9.0",
- org.eclipse.graphiti.ui;bundle-version="0.7.0",
- org.eclipse.gef;bundle-version="3.6.1",
- org.eclipse.ui.forms;bundle-version="3.6.1",
+ org.eclipse.core.databinding.property,
+ org.eclipse.jdt.core,
+ org.eclipse.graphiti.ui,
+ org.eclipse.gef,
+ org.eclipse.ui.forms,
  org.eclipse.emf.workspace,
- org.eclipse.ui.views.properties.tabbed;bundle-version="3.5.100",
- org.eclipse.ui.ide;bundle-version="3.9.2",
+ org.eclipse.ui.views.properties.tabbed,
+ org.eclipse.ui.ide,
  org.eclipse.help
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy

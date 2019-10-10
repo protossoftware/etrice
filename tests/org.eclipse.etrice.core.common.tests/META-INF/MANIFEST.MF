@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Tests for common eTrice grammar fragments and classes
 Bundle-Vendor: Eclipse eTrice
-Bundle-Version: 2.0.0.qualifier
+Bundle-Version: 0.0.0.qualifier
 Bundle-SymbolicName: org.eclipse.etrice.core.common.tests; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.etrice.core.common,
@@ -10,15 +10,15 @@ Require-Bundle: org.eclipse.etrice.core.common,
  org.eclipse.xtext.xbase.lib,
  org.eclipse.etrice.core.common.ui,
  org.eclipse.ui.workbench;resolution:=optional,
- org.eclipse.xtext.testing;bundle-version="2.12.0",
- org.eclipse.xtext.junit4;bundle-version="2.12.0"
+ org.eclipse.xtext.testing,
+ org.eclipse.xtext.junit4
 Import-Package: org.apache.log4j,
- org.junit;version="4.5.0",
- org.junit.runner;version="4.5.0",
- org.junit.runner.manipulation;version="4.5.0",
- org.junit.runner.notification;version="4.5.0",
- org.junit.runners;version="4.5.0",
- org.junit.runners.model;version="4.5.0",
+ org.junit,
+ org.junit.runner,
+ org.junit.runner.manipulation,
+ org.junit.runner.notification,
+ org.junit.runners,
+ org.junit.runners.model,
  org.hamcrest.core
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.eclipse.etrice.core.common.tests,

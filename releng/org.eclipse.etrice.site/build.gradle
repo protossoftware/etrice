@@ -2,7 +2,63 @@ configurations {
 	archive
 }
 
-artifacts {
-	archive fileTree(dir: 'target', include: 'org.eclipse.etrice.site-*.zip').files
+task updateVersionStrings {
+	doLast {
+		def manifestVersion = "${scmVersion.undecoratedVersion}.qualifier"
+		// Replace plugin versions
+		ant.replaceregexp(
+			match: "Bundle-Version:\\s*[\\w.-]*",
+			replace: "Bundle-Version: $manifestVersion") {
+			fileset(dir: rootDir, includes: '**/MANIFEST.MF')
+		}
+		// Replace feature versions
+		ant.replaceregexp(
+			match: "(?s)<feature(.*?)version\\s*=\\s*\"[\\w.-]*\"(.*)>",
+			replace: "<feature\\1version=\"$manifestVersion\"\\2>") {
+			fileset(dir: rootDir, includes: '**/feature.xml')
+		}
+		// Replace first occurence of version tag in poms
+		ant.replaceregexp(
+			match: "(?s)(.*?)<version>[\\w.-]*</version>(.*)",
+			replace: "\\1<version>$version</version>\\2") {
+			fileset(dir: rootDir, includes: '**/pom.xml')
+		}
+	}
 }
 
+task runMaven(type: MavenExec, dependsOn: updateVersionStrings) {
+	workingDir rootDir
+	goals 'clean', 'verify'
+	options {
+		define = ['build.type' : version.endsWith('SNAPSHOT') ? 'N' : 'R']
+		if(findProperty('sign') != null) {
+			activateProfiles = ['sign']
+		}
+	}
+}
+
+def maven = findProperty('maven')
+if(maven != null) {
+	if(!maven.empty) {
+		runMaven.mavenDir = rootProject.file(maven)
+	}
+}
+else {
+	updateVersionStrings.enabled = false
+	runMaven.enabled = false
+}
+
+def siteZipName = "${project.name}-${version}.zip"
+
+task copySiteZip(type: Copy, dependsOn: runMaven) {
+	from 'target'
+	include "${project.name}-*.zip"
+	into buildDir
+	rename { siteZipName }
+}
+
+artifacts {
+	archive(layout.buildDirectory.file(siteZipName)) {
+		builtBy copySiteZip
+	}
+}

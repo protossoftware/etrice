@@ -2,7 +2,7 @@
 <feature
       id="org.eclipse.etrice.tests.feature"
       label="%featureName"
-      version="2.0.0.qualifier"
+      version="0.0.0.qualifier"
       provider-name="%providerName">
 
    <description>
@@ -22,40 +22,40 @@ http://www.eclipse.org/legal/epl-v20.html
    </license>
 
    <requires>
-      <import plugin="org.eclipse.etrice.core.room" version="2.0.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.etrice.core.common" version="2.0.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.etrice.core.fsm" version="2.0.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.etrice.core.room"/>
+      <import plugin="org.eclipse.etrice.core.common"/>
+      <import plugin="org.eclipse.etrice.core.fsm"/>
       <import plugin="org.junit" version="4.8.1" match="greaterOrEqual"/>
       <import plugin="org.eclipse.xtext.junit4" version="2.6.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.osgi" version="3.6.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.xtext" version="2.6.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.core.runtime" version="3.6.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.emf.ecore"/>
-      <import plugin="org.eclipse.etrice.generator" version="2.0.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.etrice.generator.fsm" version="2.0.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.etrice.ui.behavior" version="2.0.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.etrice.ui.behavior.fsm" version="2.0.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.etrice.ui.common" version="2.0.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.etrice.ui.common.base" version="2.0.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.etrice.generator"/>
+      <import plugin="org.eclipse.etrice.generator.fsm"/>
+      <import plugin="org.eclipse.etrice.ui.behavior"/>
+      <import plugin="org.eclipse.etrice.ui.behavior.fsm"/>
+      <import plugin="org.eclipse.etrice.ui.common"/>
+      <import plugin="org.eclipse.etrice.ui.common.base"/>
       <import plugin="org.eclipse.ui" version="3.6.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.graphiti" version="0.8.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.etrice.ui.structure" version="2.0.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.etrice.etunit.converter" version="2.0.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.etrice.ui.structure"/>
+      <import plugin="org.eclipse.etrice.etunit.converter"/>
       <import plugin="org.junit" version="4.8.2" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.etrice.core.genmodel" version="2.0.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.etrice.core.genmodel"/>
       <import plugin="org.eclipse.core.runtime" version="3.7.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.etrice.core.config" version="2.0.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.etrice.core.config.ui" version="2.0.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.etrice.core.config"/>
+      <import plugin="org.eclipse.etrice.core.config.ui"/>
       <import plugin="org.apache.log4j" version="1.2.15" match="greaterOrEqual"/>
       <import plugin="org.apache.commons.logging" version="1.0.4" match="greaterOrEqual"/>
       <import plugin="org.hamcrest.core"/>
-      <import plugin="org.eclipse.etrice.abstractexec.behavior" version="2.0.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.etrice.abstractexec.behavior"/>
       <import plugin="org.eclipse.emf.ecore" version="2.7.0" match="greaterOrEqual"/>
       <import plugin="com.google.inject" version="3.0.0" match="greaterOrEqual"/>
       <import plugin="org.junit" version="4.10.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.etrice.core.etmap" version="2.0.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.etrice.core.etmap.ui" version="2.0.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.etrice.core.etphys" version="2.0.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.etrice.core.etmap"/>
+      <import plugin="org.eclipse.etrice.core.etmap.ui"/>
+      <import plugin="org.eclipse.etrice.core.etphys"/>
       <import plugin="org.eclipse.etrice.core.etphys.ui"/>
       <import plugin="org.eclipse.core.runtime" version="3.5.0" match="compatible"/>
       <import plugin="org.eclipse.core.variables" version="3.0.0" match="compatible"/>
@@ -63,7 +63,7 @@ http://www.eclipse.org/legal/epl-v20.html
       <import plugin="org.eclipse.pde.core" version="3.5.0" match="compatible"/>
       <import plugin="org.eclipse.equinox.frameworkadmin" version="2.0.0" match="compatible"/>
       <import plugin="org.eclipse.xtext.xbase.junit"/>
-      <import plugin="org.eclipse.etrice.ui.base.tests" version="2.0.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.etrice.ui.base.tests"/>
       <import plugin="org.eclipse.xtext.xbase.lib"/>
       <import plugin="org.eclipse.etrice.core.common.ui"/>
       <import plugin="org.eclipse.oomph.util" version="1.7.0" match="compatible"/>

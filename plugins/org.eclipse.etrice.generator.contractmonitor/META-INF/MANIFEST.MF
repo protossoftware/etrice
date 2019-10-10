@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: eTrice Contract Monitor Generator
 Bundle-SymbolicName: org.eclipse.etrice.generator.contractmonitor;singleton:=true
-Bundle-Version: 2.0.0.qualifier
+Bundle-Version: 0.0.0.qualifier
 Export-Package: org.eclipse.etrice.generator.contractmonitor,
  org.eclipse.etrice.generator.contractmonitor.setup
 Bundle-Vendor: Eclipse eTrice
@@ -15,3 +15,5 @@ Require-Bundle: org.eclipse.etrice.core.genmodel,
  org.eclipse.xtend.lib,
  org.eclipse.xtend.lib.macro,
  org.eclipse.xtext
+Automatic-Module-Name: org.eclipse.etrice.generator.contractmonitor
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8

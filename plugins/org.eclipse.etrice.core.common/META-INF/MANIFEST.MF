@@ -2,19 +2,19 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Common eTrice Grammar Fragment and Utility Classes
 Bundle-Vendor: Eclipse eTrice
-Bundle-Version: 2.0.0.qualifier
+Bundle-Version: 0.0.0.qualifier
 Bundle-SymbolicName: org.eclipse.etrice.core.common; singleton:=true
 Bundle-ActivationPolicy: lazy
-Require-Bundle: org.eclipse.xtext;bundle-version="2.6.0";visibility:=reexport,
- org.eclipse.xtext.xbase;bundle-version="2.6.0";resolution:=optional;visibility:=reexport,
- org.eclipse.xtext.generator;bundle-version="2.6.0";resolution:=optional,
- org.eclipse.xtext.util;bundle-version="2.6.0",
- org.eclipse.xtext.common.types;bundle-version="2.6.0",
- org.apache.commons.logging;bundle-version="1.0.4";resolution:=optional,
+Require-Bundle: org.eclipse.xtext;visibility:=reexport,
+ org.eclipse.xtext.xbase;resolution:=optional;visibility:=reexport,
+ org.eclipse.xtext.generator;resolution:=optional,
+ org.eclipse.xtext.util,
+ org.eclipse.xtext.common.types,
+ org.apache.commons.logging;resolution:=optional,
  org.eclipse.emf.codegen.ecore;resolution:=optional,
  org.eclipse.emf.mwe.utils;resolution:=optional,
  org.eclipse.emf.mwe2.launch;resolution:=optional,
- org.objectweb.asm;bundle-version="[5.0.0,7.0.0)";resolution:=optional,
+ org.objectweb.asm;resolution:=optional,
  org.eclipse.emf.ecore,
  org.eclipse.emf.common,
  org.antlr.runtime,

@@ -1,7 +1,3 @@
-plugins {
-	id 'org.hidetake.ssh' version '2.10.1'
-}
-
 configurations {
 	archives
 	updates
@@ -16,11 +12,7 @@ dependencies {
 	updates project(path: ':releng:org.eclipse.etrice.site', configuration: 'archive')
 }
 
-def isSnapshot = version.endsWith('SNAPSHOT')
-def versionDir = version
-if(isSnapshot) {
-	versionDir = 'nightly'
-}
+def versionDir = scmVersion.version.endsWith('SNAPSHOT') ? 'nightly' : scmVersion.version
 def downloadDir = '/home/data/httpd/download.eclipse.org/etrice'
 def promoteDir = "$downloadDir/$versionDir"
 def assembleDir = "$buildDir/$versionDir"
@@ -52,6 +44,8 @@ task assembleArtifacts(type: Sync) {
 	}
 	into assembleDir
 }
+
+assemble.dependsOn assembleArtifacts
 
 task promote {
 	dependsOn assembleArtifacts

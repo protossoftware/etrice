@@ -2,20 +2,20 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: eTrice Generator Config
 Bundle-SymbolicName: org.eclipse.etrice.generator.config;singleton:=true
-Bundle-Version: 2.0.0.qualifier
+Bundle-Version: 0.0.0.qualifier
 Bundle-Vendor: Eclipse eTrice
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
-Require-Bundle: org.eclipse.etrice.core.common;bundle-version="2.0.0",
- org.eclipse.etrice.core.fsm;bundle-version="2.0.0",
- org.eclipse.etrice.core.room;bundle-version="2.0.0",
- org.eclipse.etrice.core.config;bundle-version="2.0.0",
- org.eclipse.etrice.core.genmodel;bundle-version="2.0.0",
- org.eclipse.etrice.generator;bundle-version="2.0.0",
- org.eclipse.etrice.generator.base;bundle-version="2.0.0",
- org.eclipse.xtend.lib;bundle-version="2.6.0",
- com.google.guava;bundle-version="8.0.0",
- org.eclipse.xtext.xbase.lib;bundle-version="2.6.0"
+Require-Bundle:  org.eclipse.etrice.core.common,
+  org.eclipse.etrice.core.fsm,
+  org.eclipse.etrice.core.room,
+  org.eclipse.etrice.core.config,
+  org.eclipse.etrice.core.genmodel,
+  org.eclipse.etrice.generator,
+  org.eclipse.etrice.generator.base,
+ org.eclipse.xtend.lib,
+ com.google.guava,
+ org.eclipse.xtext.xbase.lib
 Export-Package: org.eclipse.etrice.generator.config
 Automatic-Module-Name: org.eclipse.etrice.generator.config
 

@@ -1,16 +1,15 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-SymbolicName: org.eclipse.etrice.generator.base
-Bundle-Version: 2.0.0.qualifier
+Bundle-Version: 0.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: org.eclipse.emf.ecore,
- com.google.inject;bundle-version="3.0.0",
+ com.google.inject,
  org.eclipse.xtext.generator,
  org.eclipse.xtext.util,
  org.eclipse.xtext,
  org.eclipse.core.resources,
- org.eclipse.core.runtime,
- org.apache.commons.io
+ org.eclipse.core.runtime
 Export-Package: org.eclipse.etrice.generator.base,
  org.eclipse.etrice.generator.base.args,
  org.eclipse.etrice.generator.base.cli,

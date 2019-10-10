@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Detail Code Tools
 Bundle-SymbolicName: org.eclipse.etrice.dctools
-Bundle-Version: 2.0.0.qualifier
+Bundle-Version: 0.0.0.qualifier
 Bundle-Vendor: Eclipse eTrice
 Automatic-Module-Name: org.eclipse.etrice.dctools
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8

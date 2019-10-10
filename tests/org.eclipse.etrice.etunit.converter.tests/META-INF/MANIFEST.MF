@@ -2,12 +2,12 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: etUnit Converter Tests
 Bundle-SymbolicName: org.eclipse.etrice.etunit.converter.tests
-Bundle-Version: 2.0.0.qualifier
+Bundle-Version: 0.0.0.qualifier
 Bundle-Activator: org.eclipse.etrice.etunit.converter.tests.Activator
 Bundle-Vendor: Eclipse eTrice
-Require-Bundle: org.eclipse.etrice.etunit.converter;bundle-version="2.0.0",
+Require-Bundle:  org.eclipse.etrice.etunit.converter,
  org.eclipse.core.runtime,
- org.junit;bundle-version="4.8.2",
+ org.junit,
  com.google.guava
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy

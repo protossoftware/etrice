@@ -9,17 +9,11 @@ buildscript {
 
 apply plugin: pl.allegro.tech.build.axion.release.ReleasePlugin
 
-if(properties.get('build.type') == 'N') {
-	ext.set('release.forceSnapshot', true)
-}
-
 scmVersion {
  	tag {
 		prefix = 'v'
 		versionSeparator = '_'
 	}
-	versionIncrementer 'incrementPrerelease'
-    versionCreator 'versionWithBranch'
 //	localOnly = false
   	checks { 
         uncommittedChanges = false

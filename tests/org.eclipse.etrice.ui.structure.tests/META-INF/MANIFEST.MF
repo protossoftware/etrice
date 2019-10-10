@@ -2,18 +2,18 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: eTrice Structure Diagram Tests
 Bundle-SymbolicName: org.eclipse.etrice.ui.structure.tests
-Bundle-Version: 2.0.0.qualifier
-Require-Bundle: org.eclipse.etrice.core.fsm;bundle-version="2.0.0",
- org.eclipse.etrice.core.room;bundle-version="2.0.0",
- org.eclipse.etrice.ui.structure;bundle-version="2.0.0",
- org.eclipse.etrice.ui.common;bundle-version="2.0.0",
- org.eclipse.etrice.ui.common.base;bundle-version="2.0.0",
- org.eclipse.etrice.ui.base.tests;bundle-version="2.0.0",
+Bundle-Version: 0.0.0.qualifier
+Require-Bundle:  org.eclipse.etrice.core.fsm,
+  org.eclipse.etrice.core.room,
+  org.eclipse.etrice.ui.structure,
+  org.eclipse.etrice.ui.common,
+  org.eclipse.etrice.ui.common.base,
+  org.eclipse.etrice.ui.base.tests,
  org.eclipse.ui,
  org.eclipse.core.runtime,
- org.junit;bundle-version="4.8.1",
- org.eclipse.xtext;bundle-version="2.6.0",
- org.eclipse.graphiti;bundle-version="0.8.0"
+ org.junit,
+ org.eclipse.xtext,
+ org.eclipse.graphiti
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-Vendor: Eclipse eTrice
 Bundle-ActivationPolicy: lazy

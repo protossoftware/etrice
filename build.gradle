@@ -1,5 +1,7 @@
 plugins {
-	id 'org.xtext.xtend' version '2.0.7'
+	id 'org.xtext.xtend' version '2.0.7' apply false
+	id 'com.github.dkorotych.gradle-maven-exec' version '2.2.1'
+	id 'org.hidetake.ssh' version '2.10.1'
 }
 
 apply from: "$rootDir/gradle/scmVersion.gradle"
@@ -35,4 +37,3 @@ allprojects {
 		}
 	}
 }
-

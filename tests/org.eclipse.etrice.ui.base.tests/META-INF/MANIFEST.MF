@@ -2,13 +2,13 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: eTrice Diagram Test Base Classes
 Bundle-SymbolicName: org.eclipse.etrice.ui.base.tests
-Bundle-Version: 2.0.0.qualifier
-Require-Bundle: org.junit;bundle-version="4.8.1",
+Bundle-Version: 0.0.0.qualifier
+Require-Bundle: org.junit,
  org.eclipse.core.runtime,
- org.eclipse.etrice.core.room;bundle-version="2.0.0",
- org.eclipse.etrice.ui.structure;bundle-version="2.0.0",
- org.eclipse.xtext;bundle-version="2.6.0",
- org.eclipse.graphiti;bundle-version="0.8.0",
+  org.eclipse.etrice.core.room,
+  org.eclipse.etrice.ui.structure,
+ org.eclipse.xtext,
+ org.eclipse.graphiti,
  org.eclipse.etrice.ui.common.base,
  com.google.guava,
  org.eclipse.xtext.xbase.lib,
