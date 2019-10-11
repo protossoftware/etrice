@@ -16,10 +16,10 @@ import java.util.List;
 
 import org.eclipse.etrice.core.common.ui.editor.IValidatingEditor;
 import org.eclipse.etrice.core.common.ui.editor.SaveOnFocusLostListener;
+import org.eclipse.etrice.core.common.validation.IssueUtils;
 import org.eclipse.etrice.core.ui.preferences.RoomPreferenceConstants;
 import org.eclipse.help.IContextProvider;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.util.CancelIndicator;
@@ -77,8 +77,12 @@ public class RoomEditor extends XtextEditor implements IValidatingEditor {
 				});
 				if (!result.isEmpty()) {
 					for (Issue issue : result) {
-						if (issue.isSyntaxError() || issue.getSeverity()==Severity.ERROR)
+						if (issue.isSyntaxError()) {
 							return false;
+						}
+						if (IssueUtils.isBlocking(issue)) {
+							return false;
+						}
 					}
 				}
 				return true;
@@ -87,19 +91,11 @@ public class RoomEditor extends XtextEditor implements IValidatingEditor {
 	}
 	
 	@Override
-	public Object getAdapter(@SuppressWarnings("rawtypes") Class key) {
-		if (key.equals(IContextProvider.class)) {
-			return new SelectedModelHelpProvider(this);
+	public <T> T getAdapter(Class<T> adapter) {
+		if (IContextProvider.class.isAssignableFrom(adapter)) {
+			return adapter.cast(new SelectedModelHelpProvider(this));
 		}
-		return super.getAdapter(key);
+		return super.getAdapter(adapter);
 
 	}
-	// TODO: with Xtext 2.15 replace with implementation below
-//	public <T> T getAdapter(Class<T> key) {
-//	if (key.equals(IContextProvider.class)) {
-//		return key.cast(new SelectedModelHelpProvider(this));
-//	}
-//	return super.getAdapter(key);
-//
-//}
 }

@@ -36,6 +36,7 @@ import org.eclipse.etrice.core.common.base.BooleanLiteral;
 import org.eclipse.etrice.core.common.base.Import;
 import org.eclipse.etrice.core.common.base.LiteralType;
 import org.eclipse.etrice.core.common.base.util.ImportHelpers;
+import org.eclipse.etrice.core.common.validation.IssueUtils;
 import org.eclipse.etrice.core.common.validation.ValidationHelpers;
 import org.eclipse.etrice.core.common.validation.ValidationHelpers.NamedObject;
 import org.eclipse.etrice.core.common.validation.ValidationHelpers.NamedObjectList;
@@ -212,7 +213,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 			ActorClass ac = (ActorClass) ar.eContainer();
 
 			if (roomHelpers.isReferencing(ar.getType(), ac)) {
-				error("Actor reference is circular", RoomPackage.eINSTANCE.getActorRef_Type());
+				error("Actor reference is circular", RoomPackage.eINSTANCE.getActorRef_Type(), IssueUtils.DUMMY_CODE, IssueUtils.BLOCKING_MARKER);
 			}
 		}
 
@@ -814,7 +815,7 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 
 
 	private void error(Result result) {
-		error(result.getMsg(), result.getSource(), result.getFeature(), result.getIndex());
+		error(result.getMsg(), result.getSource(), result.getFeature(), result.getIndex(), IssueUtils.DUMMY_CODE, IssueUtils.BLOCKING_MARKER);
 	}
 
 	@Check
