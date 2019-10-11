@@ -20,20 +20,20 @@ import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.EStructuralFeature
 import org.eclipse.etrice.core.fsm.fSM.FSMPackage
 import org.eclipse.etrice.core.fsm.fSM.MessageFromIf
+import org.eclipse.etrice.core.fsm.fSM.ModelComponent
 import org.eclipse.etrice.core.fsm.fSM.State
 import org.eclipse.etrice.core.fsm.fSM.TransitionPoint
 import org.eclipse.etrice.core.fsm.fSM.Trigger
 import org.eclipse.etrice.core.fsm.fSM.TriggeredTransition
+import org.eclipse.etrice.core.fsm.util.FSMHelpers
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.CommonTrigger
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.FsmGenFactory
+import org.eclipse.etrice.core.genmodel.fsm.fsmgen.Graph
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.GraphContainer
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.Link
 import org.eclipse.etrice.core.genmodel.fsm.fsmgen.Node
 
 import static extension org.eclipse.etrice.core.genmodel.fsm.FsmGenExtensions.*
-import org.eclipse.etrice.core.fsm.util.FSMHelpers
-import org.eclipse.etrice.core.fsm.fSM.ModelComponent
-import org.eclipse.etrice.core.genmodel.fsm.fsmgen.Graph
 
 class ExtendedFsmGenBuilder extends BasicFsmGenBuilder {
 
@@ -256,8 +256,12 @@ class ExtendedFsmGenBuilder extends BasicFsmGenBuilder {
 		// in the super state graph search for a transition which points to our parent state
 		val parentState = graph.eContainer as Node
 		val parentGraph = parentState.eContainer as Graph
-		if (!parentGraph.links.filter[target==parentState].empty) {
-			validationError("The state graph has transitions to history in its parent graph, thus it must have an initial transition", parentState.stateGraphNode, FSMPackage.Literals.STATE__SUBGRAPH);
+		val parentHasHistoryTransitions = parentGraph.links
+			.filter[target==parentState] // parent is target
+			.filter[source!=parentState] // parent is not source (self transition is fine)
+			.empty
+		if (!parentHasHistoryTransitions) {
+			validationError("The state graph has transitions to history in its parent graph (which are no self transitions), thus it must have an initial transition", parentState.stateGraphNode, FSMPackage.Literals.STATE__SUBGRAPH);
 		}
 	}
 	
