@@ -14,6 +14,8 @@
 
 package org.eclipse.etrice.ui.common.base.editor;
 
+import static org.eclipse.ui.PlatformUI.getWorkbench;
+
 import java.util.Collection;
 import java.util.Map;
 
@@ -23,6 +25,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.etrice.core.common.ui.editor.ISaveOnFocusLostEditor;
 import org.eclipse.etrice.core.common.ui.linking.GlobalNonPlatformURIEditorOpener;
 import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
 import org.eclipse.etrice.core.fsm.ui.FSMUiModule;
@@ -45,15 +48,13 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
-import static org.eclipse.ui.PlatformUI.getWorkbench;
-
 import com.google.inject.Injector;
 
 /**
  * @author Henrik Rentz-Reichert
  *
  */
-public abstract class DiagramEditorBase extends DiagramEditor implements IInputUriHolder {
+public abstract class DiagramEditorBase extends DiagramEditor implements IInputUriHolder, ISaveOnFocusLostEditor {
 
 	private final static String CONTEXT_ID = "org.eclipse.etrice.ui.common.base.context";
 	
@@ -62,6 +63,8 @@ public abstract class DiagramEditorBase extends DiagramEditor implements IInputU
 	private Object textEditorClass;
 	
 	private SuperClassListener superClassListener;
+
+	private boolean isClosing = false;
 
 	public DiagramEditorBase(Object textEditorClass) {
 		this.textEditorClass = textEditorClass;
@@ -252,6 +255,16 @@ public abstract class DiagramEditorBase extends DiagramEditor implements IInputU
 		}
 		return super.getAdapter(key);
 
+	}
+
+	@Override
+	public int promptToSaveOnClose() {
+		isClosing  = true;
+		return DEFAULT;
+	}
+
+	public boolean isClosing() {
+		return isClosing;
 	}
 
 }

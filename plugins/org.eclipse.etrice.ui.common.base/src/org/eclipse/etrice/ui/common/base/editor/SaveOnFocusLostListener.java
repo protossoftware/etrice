@@ -15,6 +15,7 @@
 package org.eclipse.etrice.ui.common.base.editor;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.etrice.core.common.ui.editor.ISaveOnFocusLostEditor;
 import org.eclipse.etrice.ui.common.base.UIBaseActivator;
 import org.eclipse.etrice.ui.common.base.preferences.UIBasePreferenceConstants;
 import org.eclipse.jface.preference.IPreferenceStore;
@@ -26,7 +27,7 @@ import org.eclipse.ui.IWorkbenchPart;
  * @author Henrik Rentz-Reichert
  *
  */
-public class SaveOnFocusLostListener implements IPartListener/*, CommandStackListener*/ {
+public class SaveOnFocusLostListener implements IPartListener {
 
 	private final IEditorPart editor;
 	private final IPreferenceStore store;
@@ -39,7 +40,6 @@ public class SaveOnFocusLostListener implements IPartListener/*, CommandStackLis
 	public SaveOnFocusLostListener(IEditorPart editor) {
 		this.editor = editor;
 		this.store = UIBaseActivator.getDefault().getPreferenceStore();
-		//editor.getEditingDomain().getCommandStack().addCommandStackListener(this);
 		editor.getSite().getPage().addPartListener(this);
 	}
 
@@ -62,19 +62,17 @@ public class SaveOnFocusLostListener implements IPartListener/*, CommandStackLis
 
 	@Override
 	public void partDeactivated(IWorkbenchPart part) {	
-		if(part != editor)
+		if (part != editor)
 			return;
+		
+		if (part instanceof ISaveOnFocusLostEditor) {
+			if (((ISaveOnFocusLostEditor) part).isClosing()) {
+				return;
+			}
+		}
 		
 		boolean isSaveOnFocus = store.getBoolean(UIBasePreferenceConstants.SAVE_DIAG_ON_FOCUS_LOST);
 		if (isActive && isSaveOnFocus && editor.isDirty()) {
-//			if (editor.getEditingDomain() instanceof TransactionalEditingDomainImpl) {
-//				TransactionalEditingDomainImpl ted = (TransactionalEditingDomainImpl) editor.getEditingDomain();
-//				if (ted.getActiveTransaction()!=null) {
-//					// avoid to run into dead-lock
-//					saveAfterCurrentCommand = true;
-//					return;
-//				}
-//			}
 			editor.doSave(new NullProgressMonitor());
 		}
 	}
@@ -82,15 +80,6 @@ public class SaveOnFocusLostListener implements IPartListener/*, CommandStackLis
 	@Override
 	public void partOpened(IWorkbenchPart part) {
 	}
-
-//	@Override
-//	public void commandStackChanged(EventObject event) {
-//		
-//		if (saveAfterCurrentCommand) {
-//			saveAfterCurrentCommand = false;
-//			editor.doSave(new NullProgressMonitor());
-//		}
-//	}
 	
 	public void setActive(boolean isActive){
 		this.isActive = isActive;

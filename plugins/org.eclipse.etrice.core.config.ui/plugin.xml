@@ -6,7 +6,7 @@
     <extension
             point="org.eclipse.ui.editors">
         <editor
-              class="org.eclipse.etrice.core.ui.ConfigExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
+              class="org.eclipse.etrice.core.ui.ConfigExecutableExtensionFactory:org.eclipse.etrice.core.common.ui.editor.SaveOnFocusLostXtextEditor"
               contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
               default="true"
               extensions="config"

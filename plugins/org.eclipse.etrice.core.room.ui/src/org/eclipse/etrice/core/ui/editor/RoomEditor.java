@@ -16,12 +16,12 @@ import java.util.List;
 
 import org.eclipse.etrice.core.common.ui.editor.IValidatingEditor;
 import org.eclipse.etrice.core.common.ui.editor.SaveOnFocusLostListener;
+import org.eclipse.etrice.core.common.ui.editor.SaveOnFocusLostXtextEditor;
 import org.eclipse.etrice.core.common.validation.IssueUtils;
 import org.eclipse.etrice.core.ui.preferences.RoomPreferenceConstants;
 import org.eclipse.help.IContextProvider;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.CheckMode;
@@ -34,7 +34,7 @@ import com.google.inject.Inject;
  * @author Henrik Rentz-Reichert
  *
  */
-public class RoomEditor extends XtextEditor implements IValidatingEditor {
+public class RoomEditor extends SaveOnFocusLostXtextEditor implements IValidatingEditor {
 
 	@Inject
 	protected IResourceValidator resourceValidator;

@@ -15,7 +15,6 @@
 package org.eclipse.etrice.ui.behavior.fsm.editor;
 
 import java.util.ArrayList;
-import java.util.EventObject;
 import java.util.Map;
 
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -57,7 +56,6 @@ import com.google.common.base.Function;
 public abstract class AbstractFSMEditor extends DiagramEditorBase {
 
 	protected DiagnosingModelObserver diagnosingModelObserver;
-
 	/**
 	 * @param textEditorClass
 	 */
@@ -295,11 +293,5 @@ public abstract class AbstractFSMEditor extends DiagramEditorBase {
 		IUpdateContext updateCtx = new UpdateContext(diagram);
 		featureProvider.updateIfPossible(updateCtx);
 		diagramTypeProvider.getDiagramBehavior().refresh();
-	}
-	
-	@Override
-	public void commandStackChanged(EventObject event) {
-		// TODO Auto-generated method stub
-		super.commandStackChanged(event);
 	}
 }

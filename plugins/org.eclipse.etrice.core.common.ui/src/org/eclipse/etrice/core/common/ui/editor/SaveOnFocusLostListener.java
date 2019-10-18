@@ -65,6 +65,12 @@ public class SaveOnFocusLostListener implements IPartListener {
 		if (!(editor instanceof IValidatingEditor))
 			return;
 		
+		if (part instanceof ISaveOnFocusLostEditor) {
+			if (((ISaveOnFocusLostEditor) part).isClosing()) {
+				return;
+			}
+		}
+		
 		boolean save =  Platform.getPreferencesService().getBoolean(store, key, true, null);
 		
 		if (save && editor.isDirty())
