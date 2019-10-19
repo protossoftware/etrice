@@ -24,18 +24,15 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.Diagnostic;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.transaction.RunnableWithResult;
 import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.etrice.ui.common.base.UIBaseActivator;
-import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.graphiti.ui.editor.DefaultPersistencyBehavior;
 import org.eclipse.graphiti.ui.editor.DiagramBehavior;
 import org.eclipse.jface.dialogs.ErrorDialog;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.ui.IEditorPart;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.resource.SaveOptions;
 import org.eclipse.xtext.resource.XtextResource;
@@ -49,17 +46,9 @@ import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
 public class CustomPersistencyBehavior extends DefaultPersistencyBehavior {
-
-	private SaveOnFocusLostListener saveOnFocusListener;
 	
 	public CustomPersistencyBehavior(DiagramBehavior diagramBehavior) {
 		super(diagramBehavior);
-	}
-	
-	@Override
-	public Diagram loadDiagram(URI uri) {
-		saveOnFocusListener = new SaveOnFocusLostListener((IEditorPart)diagramBehavior.getDiagramContainer().getWorkbenchPart());
-		return super.loadDiagram(uri);
 	}
 	
 	@Override
@@ -83,12 +72,9 @@ public class CustomPersistencyBehavior extends DefaultPersistencyBehavior {
 	public void saveDiagram(IProgressMonitor monitor) {
 		boolean valid = validateResourcesBeforeSave(monitor);
 
-		if (valid)
+		if (valid) {
 			super.saveDiagram(monitor);
-
-		// deactivate saveOnFocus for better usability
-		// avoid retrigger loop from message box
-		saveOnFocusListener.setActive(valid);
+		}
 	}
 	
 	protected boolean validateResourcesBeforeSave(final IProgressMonitor monitor){

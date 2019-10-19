@@ -19,6 +19,7 @@ import static org.eclipse.ui.PlatformUI.getWorkbench;
 import java.util.Collection;
 import java.util.Map;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -26,6 +27,7 @@ import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.etrice.core.common.ui.editor.ISaveOnFocusLostEditor;
+import org.eclipse.etrice.core.common.ui.editor.SaveDialogEditor;
 import org.eclipse.etrice.core.common.ui.linking.GlobalNonPlatformURIEditorOpener;
 import org.eclipse.etrice.core.fsm.fSM.ModelComponent;
 import org.eclipse.etrice.core.fsm.ui.FSMUiModule;
@@ -64,7 +66,8 @@ public abstract class DiagramEditorBase extends DiagramEditor implements IInputU
 	
 	private SuperClassListener superClassListener;
 
-	private boolean isClosing = false;
+	private SaveDialogEditor saveDialog = new SaveDialogEditor();
+	private boolean lastSaveFailed = false;
 
 	public DiagramEditorBase(Object textEditorClass) {
 		this.textEditorClass = textEditorClass;
@@ -108,6 +111,7 @@ public abstract class DiagramEditorBase extends DiagramEditor implements IInputU
 	 */
 	@Override
 	public void setFocus() {
+		lastSaveFailed = false;
 		if (getGraphicalViewer() == null) {
 			return;
 		}
@@ -259,12 +263,24 @@ public abstract class DiagramEditorBase extends DiagramEditor implements IInputU
 
 	@Override
 	public int promptToSaveOnClose() {
-		isClosing  = true;
-		return DEFAULT;
+		return saveDialog.open(getGraphicalControl().getShell(), getPartName());
 	}
-
-	public boolean isClosing() {
-		return isClosing;
+	
+	@Override
+	public boolean shouldSaveOnFocusLost() {
+		// lastSaveFailed is heuristic to avoid unsuccessful re-save
+		// TODO implement IValidatingEditor
+		return saveDialog.getResult() != NO && !lastSaveFailed && isDirty();
+	}
+	
+	@Override
+	public void doSave(IProgressMonitor monitor) {
+		super.doSave(monitor);
+		
+		// avoid auto re-save 
+		lastSaveFailed = isDirty();
+		// do not quit editor if save failed but was requested by user explicitly
+		monitor.setCanceled(lastSaveFailed && saveDialog.getResult() == YES);
 	}
 
 }
