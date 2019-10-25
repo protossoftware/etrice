@@ -7,6 +7,9 @@
       <startup
             class="org.eclipse.etrice.ui.common.base.concurrency.ConcurrentModificationObserver$Initializer">
       </startup>
+      <startup
+            class="org.eclipse.etrice.ui.common.base.editor.SaveOnFocusLostListener">
+      </startup>
    </extension>
    <extension
          point="org.eclipse.ltk.core.refactoring.renameParticipants">

@@ -16,14 +16,12 @@ package org.eclipse.etrice.core.common.ui.editor;
 import org.eclipse.ui.ISaveablePart2;
 
 /**
- * @author Henrik Rentz-Reichert
- *
+ * Editor that can be saved automatically.
+ * 
+ * @see {@link SaveOnFocusLostListener}
  */
 public interface ISaveOnFocusLostEditor extends ISaveablePart2 {
 
-	/**
-	 * if this editor is currently being closed (check in {@link #promptToSaveOnClose()}) this should return true
-	 * @return
-	 */
-	boolean isClosing();
+	boolean shouldSaveOnFocusLost();
+	
 }
