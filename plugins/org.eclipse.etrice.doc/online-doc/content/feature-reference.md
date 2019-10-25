@@ -3614,6 +3614,19 @@ The MSCLogging is activated by default, but can be set manually in the [Generati
 
 
 
+[TextualROOMEditor]: #textualroomeditor
+[OutlineView]: #outlineview
+[GraphicalBehaviorEditor]: #graphicalbehavioreditor
+[GraphicalStructureEditor]: #graphicalstructureeditor
+[StructureEditorPalette]: #structureeditorpalette
+[ActorRefPropertyDialog]: #actorrefpropertydialog
+[PortPropertyDialog]: #portpropertydialog
+[SPPPropertyDialog]: #spppropertydialog
+[CCodeGenerator]: #ccodegenerator
+[JavaCodeGenerator]: #javacodegenerator
+[CPPCodeGenerator]: #cppcodegenerator
+[GenerationOptions]: #generationoptions
+[MSCLogging]: #msclogging
 [AnnotationType]: #annotationtype
 [Annotation]: #annotation
 [Inheritance]: #inheritance
@@ -3662,16 +3675,3 @@ The MSCLogging is activated by default, but can be set manually in the [Generati
 [SAP]: #sap
 [ServiceImplementation]: #serviceimplementation
 [SPP]: #spp
-[TextualROOMEditor]: #textualroomeditor
-[OutlineView]: #outlineview
-[GraphicalBehaviorEditor]: #graphicalbehavioreditor
-[GraphicalStructureEditor]: #graphicalstructureeditor
-[StructureEditorPalette]: #structureeditorpalette
-[ActorRefPropertyDialog]: #actorrefpropertydialog
-[PortPropertyDialog]: #portpropertydialog
-[SPPPropertyDialog]: #spppropertydialog
-[CCodeGenerator]: #ccodegenerator
-[JavaCodeGenerator]: #javacodegenerator
-[CPPCodeGenerator]: #cppcodegenerator
-[GenerationOptions]: #generationoptions
-[MSCLogging]: #msclogging
