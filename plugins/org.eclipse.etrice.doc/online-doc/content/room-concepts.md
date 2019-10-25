@@ -593,6 +593,32 @@ For event driven systems a finite state machine is ideal for processing the stre
 
 We distinguish flat and hierarchical state machines.
 
+### Semantics
+
+State machine execution begins at the top level by traversal of the initial transition. During traversal of a transition its (optional) action code is executed.
+
+So called triggered transitions start at a state or a transition point. The simple most trigger is a pair of port (or SAP) and message.
+
+For the following we will discuss hierarchical finite state machines, which include flat state machines as a special case.
+
+Assume the state machine is in an arbitrary leaf state (states with no nested state machines). Then when an event occurs, a transition with a matching trigger is searched. This is done level by level from the state graph of the current state to the top level state graph. First all outgoing transitions are considered, then handler transitions. If no match was found this is repeated one level higher and so on to the top level. If no match is found at all, the event is discarded.
+
+Then the transition which was triggered is traversed.
+
+For any transition it can continue in several ways:
+
+* _If it starts_ from a state or is a continuation after an entry or exit point
+    * _and ends_ at a leaf state, the state machine will assume this state
+    * _and ends_ at a state with sub graph, it is called a transition to history and the last active state inside the target state is assumed
+    * _and ends_ at a choice point, the choice point branch conditions are evaluated (in arbitrary order). The first transition whose condition is met will be traversed or else the default branch is taken
+* _if it starts_ in a transition point, then in any case the current state is left, thereby executing all exit codes until the level of the transition point
+     * _and ends_ in the same transition point then the transition is traversed and the current state is activated again, thereby executing all entry codes
+     * _else_ the transition is traversed and processing continues
+     * _eTrice specific variant (not contained in ROOM)_: the transition point can be a handler. In this case no entry and exit codes of states are executed
+* if the transition ends in an entry or exit point the traversal is continued on the other side of this point, entering or leaving the subgraph resp.
+
+All this is looped until the new leaf state is reached.
+
 ### Notation
 
 We distinguish flat finite state machines (with just one level of hierarchy) and hierarchical ones.
