@@ -203,10 +203,10 @@ public class BaseJavaValidator extends org.eclipse.etrice.core.common.validation
 		}
 		
 		Resource resource = imp.eResource();
-		// too many warnings for now
-//		if(!modelPathProvider.get(resource).isEmpty()) {
-//			warning("import statements using uris are deprecated", BasePackage.Literals.IMPORT__IMPORT_URI, DEPRECATED_IMPORT_URI);
-//		}
+		
+		if(!modelPathProvider.get(resource).isEmpty()) {
+			warning("import statements using uris are deprecated", BasePackage.Literals.IMPORT__IMPORT_URI, DEPRECATED_IMPORT_URI);
+		}
 		
 		String uriString = importUriResolver.resolve(imp);
 		if (uriString == null) {
