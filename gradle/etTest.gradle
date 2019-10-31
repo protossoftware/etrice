@@ -61,10 +61,16 @@ ext.createBuild = { lang, name, models, options = [] ->
 						lib project: ':runtime:org.eclipse.etrice.runtime.c', library: 'etrice_runtime_c', linkage: 'static'
 					}
 					binaries.all { 
-						cCompiler.args '-g3', '-std=c99'
-						cppCompiler.args '-g3', '-std=c99'
-						if(isFamily(FAMILY_UNIX)) { linker.args '-lpthread', '-lrt', '-lm' }
-						else if(isFamily(FAMILY_WINDOWS)) { linker.args '-lws2_32' }
+						if(isFamily(FAMILY_UNIX)) {
+							cCompiler.args '-g3', '-std=c99', '-lpthread'
+							cppCompiler.args '-g3', '-std=c99'
+							linker.args '-lpthread', '-lrt', '-lm'
+						}
+						else if(isFamily(FAMILY_WINDOWS)) {
+							cCompiler.args '-g3', '-std=c99'
+							cppCompiler.args '-g3', '-std=c99'
+							linker.args '-lws2_32'
+						}
 					}
 				}
 			}

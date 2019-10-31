@@ -16,6 +16,7 @@
 #include "osal/etTime.h"
 
 #include <stdarg.h>
+#include <string.h>
 
 static char* prefixes[] = {
 		"E: ",
