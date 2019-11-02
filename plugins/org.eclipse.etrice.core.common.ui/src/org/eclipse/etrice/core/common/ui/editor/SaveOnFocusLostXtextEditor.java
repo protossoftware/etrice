@@ -28,7 +28,7 @@ import org.eclipse.xtext.validation.Issue;
 
 import com.google.inject.Inject;
 
-public abstract class SaveOnFocusLostXtextEditor extends XtextEditor implements ISaveOnFocusLostEditor, IValidatingEditor {
+public class SaveOnFocusLostXtextEditor extends XtextEditor implements ISaveOnFocusLostEditor, IValidatingEditor {
 	
 	@Inject
 	protected IResourceValidator resourceValidator;
