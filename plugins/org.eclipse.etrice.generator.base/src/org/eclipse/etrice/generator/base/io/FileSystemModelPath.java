@@ -64,14 +64,13 @@ public class FileSystemModelPath implements IModelPath {
 	
 	@Override
 	public Optional<QualifiedName> getQualifiedName(URI uri) {
-		if(uri.isFile()) {
-			Path path = Paths.get(uri.toFileString());
-			return paths.stream().filter(p -> path.startsWith(p))
+		return toFilePath(uri)
+			.flatMap(path -> paths.stream()
+				.filter(p -> path.startsWith(p))
 				.map(p -> p.relativize(path))
 				.map(p -> createQualifiedName(p))
-				.findFirst();
-		}
-		return Optional.empty();
+				.findFirst()
+			);
 	}
 	
 	@Override
@@ -137,17 +136,10 @@ public class FileSystemModelPath implements IModelPath {
 	 * @return the path of the package
 	 */
 	private Path createPackagePath(Path dir, QualifiedName name) {
-		if(!name.isEmpty()) {
-			String firstSegment = name.getFirstSegment();
-			String[] segments = new String[name.getSegmentCount() - 1];
-			for(int i = 0; i < segments.length; ++i) {
-				segments[i] = name.getSegment(i + 1);
-			}
-			Path relativePackagePath = dir.getFileSystem().getPath(firstSegment, segments);
-			Path packagePath = dir.resolve(relativePackagePath);
-			return packagePath;
-		}
-		return dir;
+		String[] segments = name.getSegments().toArray(new String[name.getSegmentCount()]);
+		Path relativePackagePath = dir.getFileSystem().getPath("", segments);
+		Path packagePath = dir.resolve(relativePackagePath);
+		return packagePath;
 	}
 	
 	/**
@@ -181,4 +173,18 @@ public class FileSystemModelPath implements IModelPath {
 		return fileName;
 	}
 	
+	/**
+	 * Tries to convert a uri to a file path.
+	 */
+	private Optional<Path> toFilePath(URI uri) {
+		if(uri.isFile()) {
+			/* 
+			 * If the authority of the uri is non-empty,
+			 * URI.toFileString produces an invalid file string that can't be parsed by Paths.get.
+			 * So we create the path directly from the device and segments of the uri.
+			 */
+			return Optional.of(Paths.get(uri.hasDevice() ? uri.device() : "", uri.segments()));
+		}
+		return Optional.empty();
+	}
 }
