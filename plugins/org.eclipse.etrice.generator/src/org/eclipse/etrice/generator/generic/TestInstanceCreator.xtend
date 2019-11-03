@@ -14,6 +14,8 @@ import java.util.Collection
 import org.eclipse.emf.common.util.URI
 import org.eclipse.etrice.generator.base.logging.ILogger
 import org.eclipse.etrice.core.genmodel.fsm.IDiagnostician
+import org.eclipse.etrice.core.room.SubSystemClass
+import org.eclipse.etrice.core.room.ActorClass
 
 @FinalFieldsConstructor
 class TestInstanceCreator {
@@ -51,17 +53,16 @@ class TestInstanceCreator {
 
 		// try find annotated SubSystemClass
 		val allTestSubSystems = roomModels.fold(newArrayList, [list, model | 
-			list += model.subSystemClasses.filter[hasTestAnnotation] return list
+			list += model.roomClasses.filter(SubSystemClass).filter[hasTestAnnotation] return list
 		])
 		val List<StructureClass> allAnnotatedClasses = newArrayList(allTestSubSystems)
-		val result = newArrayList
 
 		// try find annotated ActorClasses and map them to virtual sub system
 		{
 			val derivedSubSystem = createSubSystemClass => [name = "DerivedTestSubSystem"]
 			roomModels.forEach[model|
 				// actors to actorRef into subsystem
-				derivedSubSystem.actorRefs += model.actorClasses.filter[hasTestAnnotation].map[ac|
+				derivedSubSystem.actorRefs += model.roomClasses.filter(ActorClass).filter[hasTestAnnotation].map[ac|
 					allAnnotatedClasses += ac
 					createActorRef => [
 						name = "ref_" + ac.name
@@ -72,7 +73,7 @@ class TestInstanceCreator {
 		}
 
 		if(allTestSubSystems.isEmpty) {
-			return result
+			return emptyList
 		}
 //		if (roomModels.exists[model|!model.systems.empty]) {
 //			allAnnotatedClasses.forEach[roomCls|
@@ -103,8 +104,8 @@ class TestInstanceCreator {
 		testSystem.subSystems += createSubSystemRef => [name = "ref_" + testSubSystem.name type = testSubSystem]
 		val testRoomModel = createRoomModel => [
 			name = "DerivedTestRoomModel"
-			systems += testSystem
-			if(testSubSystem.eResource === null) subSystemClasses += testSubSystem
+			roomClasses += testSystem
+			if(testSubSystem.eResource === null) roomClasses += testSubSystem
 		]
 		val testMappingModel = createMappingModel => [
 			name = "DerivedTestMappingModel"
@@ -123,14 +124,12 @@ class TestInstanceCreator {
 		// create memory resource with same uri locations as test instance
 		val Resource existingResource = if(testSubSystem.eResource !== null) testSubSystem.eResource else allAnnotatedClasses.head.eResource
 		val uriPath = existingResource.URI.trimFileExtension.trimSegments(1)
-		var res = rs.createResource(uriPath.appendSegment("DerivedTestMappingModel").appendFileExtension("etmap"))
-		res.contents += testMappingModel
-		result.add(res)
-		res = rs.createResource(uriPath.appendSegment("DerivedTestRoomModel").appendFileExtension("room"))
-		res.contents += testRoomModel
-		result.add(res)
+		val etmapRes = rs.createResource(uriPath.appendSegment("DerivedTestMappingModel").appendFileExtension("etmap"))
+		etmapRes.contents += testMappingModel
+		val roomRes = rs.createResource(uriPath.appendSegment("DerivedTestRoomModel").appendFileExtension("room"))
+		roomRes.contents += testRoomModel
 
-		return result			
+		return #[etmapRes, roomRes]			
 	}
 
 	def protected hasTestAnnotation(StructureClass cls) {

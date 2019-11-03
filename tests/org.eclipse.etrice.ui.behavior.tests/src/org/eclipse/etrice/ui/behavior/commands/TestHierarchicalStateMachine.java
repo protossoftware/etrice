@@ -57,12 +57,12 @@ public class TestHierarchicalStateMachine extends AbstractStateMachineTest {
 	@Test
 	public void checkModel() {
 		assertEquals("models read", 1, getModels().size());
-		assertEquals("actor classes in our model", 1, getModels().get(0).getActorClasses().size());
+		assertEquals("actor classes in our model", 1, getActorClasses().count());
 	}
 	
 	@Test
 	public void testActorClass() {
-		ActorClass ac = getModels().get(0).getActorClasses().get(0);
+		ActorClass ac = getActorClasses().findFirst().get();
 		Diagram diagram = new DiagramAccess().getDiagram(ac);
 		
 		// top and one sub state graph
@@ -78,7 +78,7 @@ public class TestHierarchicalStateMachine extends AbstractStateMachineTest {
 
 	@Test
 	public void testSGItems() {
-		ActorClass ac = getModels().get(0).getActorClasses().get(0);
+		ActorClass ac = getActorClasses().findFirst().get();
 		Diagram diagram = new DiagramAccess().getDiagram(ac);
 		
 		ac = (ActorClass) Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(diagram);

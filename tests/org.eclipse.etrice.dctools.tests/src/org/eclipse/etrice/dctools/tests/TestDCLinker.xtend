@@ -18,7 +18,6 @@ import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.etrice.core.TestBase
 import org.eclipse.etrice.core.room.Attribute
 import org.eclipse.etrice.core.room.MessageData
-import org.eclipse.etrice.core.room.ProtocolClass
 import org.eclipse.etrice.core.room.RoomModel
 import org.eclipse.etrice.core.room.RoomPackage
 import org.eclipse.etrice.core.room.StandardOperation
@@ -128,7 +127,7 @@ class TestDCLinker extends TestBase {
 	@Test
 	def void testDataClassOperationWithAttributesAndVarDecl() {
 		// we want to test the distance operation of data class Point
-		val dc = model.dataClasses.filter[name=="Point"].head
+		val dc = model.dataClasses.filter[name=="Point"].findFirst.get
 		val op = dc.operations.filter[name=="distance"].head
 		val code = op.detailCode.detailCode
 		
@@ -183,7 +182,7 @@ class TestDCLinker extends TestBase {
 	@Test
 	def void testDataClassOperationWithOperationCall() {
 		// we want to test the isInside operation of data class Circle
-		val dc = model.dataClasses.filter[name=="Circle"].head
+		val dc = model.dataClasses.filter[name=="Circle"].findFirst.get
 		val op = dc.operations.filter[name=="isInside"].head
 		val code = op.detailCode.detailCode
 		
@@ -240,7 +239,7 @@ class TestDCLinker extends TestBase {
 	@Test
 	def void testTransitionData() {
 		// we want to test the action code of tr0
-		val ac = model.actorClasses.filter[name=="AC"].head
+		val ac = model.actorClasses.filter[name=="AC"].findFirst.get
 		val tr = ac.stateMachine.transitions.filter[name=="tr0"].head
 		val code = tr.action.detailCode
 		
@@ -249,7 +248,7 @@ class TestDCLinker extends TestBase {
 		val ast = parser.parse(code)
 		
 		// link
-		val pc = model.protocolClasses.filter(ProtocolClass).filter[name=="PC"].head
+		val pc = model.protocolClasses.filter[name=="PC"].findFirst.get
 		val msg = pc.incomingMessages.filter[name=="circle"].head
 		val md = msg.data
 		val linker = new DCLinker(tr.action, md)
@@ -334,7 +333,7 @@ class TestDCLinker extends TestBase {
 	@Test
 	def void testPortMessage() {
 		// we want to test the entry code of state 'first'
-		val ac = model.actorClasses.filter[name=="AC"].head
+		val ac = model.actorClasses.filter[name=="AC"].findFirst.get
 		val st = ac.stateMachine.states.filter[name=="first"].head
 		val code = st.entryCode.detailCode
 		
@@ -463,7 +462,7 @@ class TestDCLinker extends TestBase {
 	@Test
 	def void testActorClassAttributes() {
 		// we want to test the entry code of state 'first'
-		val ac = model.actorClasses.filter[name=="AC"].head
+		val ac = model.actorClasses.filter[name=="AC"].findFirst.get
 		val st = ac.stateMachine.states.filter[name=="second"].head
 		val code = st.entryCode.detailCode
 		
@@ -486,7 +485,7 @@ class TestDCLinker extends TestBase {
 		assertTrue(lo instanceof StandardOperation)
 		var op = lo as StandardOperation
 		assertThat(op.name, is("diameter"))
-		var dc = model.dataClasses.filter[name=="Circle"].head
+		var dc = model.dataClasses.filter[name=="Circle"].findFirst.get
 		val circleOp = dc.operations.filter[name=="diameter"].head
 		assertThat(op, is(circleOp))
 		
@@ -499,7 +498,7 @@ class TestDCLinker extends TestBase {
 		assertTrue(lo instanceof StandardOperation)
 		op = lo as StandardOperation
 		assertThat(op.name, is("distance"))
-		dc = model.dataClasses.filter[name=="Point"].head
+		dc = model.dataClasses.filter[name=="Point"].findFirst.get
 		val pointOp = dc.operations.filter[name=="distance"].head
 		assertThat(op, is(pointOp))
 		
@@ -580,7 +579,7 @@ class TestDCLinker extends TestBase {
 	@Test
 	def void testReplPortMessage() {
 		// we want to test the exit code of state 'second'
-		val ac = model.actorClasses.filter[name=="AC"].head
+		val ac = model.actorClasses.filter[name=="AC"].findFirst.get
 		val st = ac.stateMachine.states.filter[name=="second"].head
 		val code = st.exitCode.detailCode
 		
@@ -624,7 +623,7 @@ class TestDCLinker extends TestBase {
 	@Test
 	def void testDataPortGetterAndAttributeSetter() {
 		// we want to test the action code of tr1
-		val ac = model.actorClasses.filter[name=="AC"].head
+		val ac = model.actorClasses.filter[name=="AC"].findFirst.get
 		val tr = ac.stateMachine.transitions.filter[name=="tr1"].head
 		val code = tr.action.detailCode
 		
@@ -633,7 +632,7 @@ class TestDCLinker extends TestBase {
 		val ast = parser.parse(code)
 		
 		// link
-		val pc = model.protocolClasses.filter(ProtocolClass).filter[name=="PCData"].head
+		val pc = model.protocolClasses.filter[name=="PCData"].findFirst.get
 		val msg = pc.incomingMessages.filter[name=="point"].head
 		val md = msg.data
 		val linker = new DCLinker(tr.action, md)

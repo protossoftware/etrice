@@ -183,21 +183,18 @@ public class GeneratorModelBuilder {
 			
 			checkRelayPorts(root);
 			
-			boolean hasSystem = false;
 			for (RoomModel mdl : mainModels) {
-				for (LogicalSystem sys : mdl.getSystems()) {
-					hasSystem = true;
+				roomHelpers.getRoomClasses(mdl, LogicalSystem.class).forEach(sys -> {
 					SystemInstance si = createLogicalSystemInstance(sys);
 					root.getSystemInstances().add(si);
-				}
+				});
 			}
 			
+			boolean hasSystem = !root.getSystemInstances().isEmpty();
 			if (!hasSystem) {
 				logger.logInfo("GeneratorModelBuilder: no SystemClass found, assuming SubSystemClasses as top level elements");
-				for (RoomModel mdl : mainModels) {
-					for (SubSystemClass comp : mdl.getSubSystemClasses()) {
-						root.getOwnSubSystemInstances().add(createSubSystemInstance(comp, comp.getName()));
-					}
+				for (SubSystemClass comp : root.getSubSystemClasses()) {
+					root.getOwnSubSystemInstances().add(createSubSystemInstance(comp, comp.getName()));
 				}
 			}
 			
@@ -309,12 +306,10 @@ public class GeneratorModelBuilder {
 
 	private void findOptionalActorClasses(Root root) {
 		HashSet<ActorClass> optionalActorClasses = new HashSet<ActorClass>();
-		for (RoomModel mdl : root.getModels()) {
-			for (ActorClass ac : mdl.getActorClasses()) {
-				for (ActorRef ar : ac.getActorRefs()) {
-					if (ar.getRefType()==ReferenceType.OPTIONAL)
-						optionalActorClasses.add(ar.getType());
-				}
+		for (ActorClass ac : root.getActorClasses()) {
+			for (ActorRef ar : ac.getActorRefs()) {
+				if (ar.getRefType()==ReferenceType.OPTIONAL)
+					optionalActorClasses.add(ar.getType());
 			}
 		}
 		root.getOptionalActorClasses().addAll(optionalActorClasses);
@@ -341,12 +336,10 @@ public class GeneratorModelBuilder {
 		 * all possible instance sub trees. This would require a complicated iteration
 		 * until all optional actors are found.
 		 */
-		for (RoomModel mdl : root.getModels()) {
-			for (ActorClass ac : mdl.getActorClasses()) {
-				for (ActorRef ar : ac.getActorRefs()) {
-					if (ar.getRefType()==ReferenceType.OPTIONAL) {
-						optionalActors.put(ar.getType(), null);
-					}
+		for (ActorClass ac : root.getActorClasses()) {
+			for (ActorRef ar : ac.getActorRefs()) {
+				if (ar.getRefType()==ReferenceType.OPTIONAL) {
+					optionalActors.put(ar.getType(), null);
 				}
 			}
 		}
@@ -611,26 +604,24 @@ public class GeneratorModelBuilder {
 	 * @param root - the root object
 	 */
 	private void checkRelayPorts(Root root) {
-		for (RoomModel model : root.getModels()) {
-			for (ActorClass ac : model.getActorClasses()) {
+		for (ActorClass ac : root.getActorClasses()) {
+			
+			// check own relay ports
+			for (Port port : ac.getRelayPorts()) {
 				
-				// check own relay ports
-				for (Port port : ac.getRelayPorts()) {
-					
-					if (port.getProtocol() instanceof ProtocolClass && ((ProtocolClass)port.getProtocol()).getCommType()==CommunicationType.DATA_DRIVEN) {
-						if (port.isConjugated()) {
-							// check whether relay port is multiply connected
-							int count = 0;
-							for (Binding b : ac.getBindings()) {
-								if (b.getEndpoint1().getPort()==port)
-									++count;
-								if (b.getEndpoint2().getPort()==port)
-									++count;
-							}
-							if (count>1) {
-								int idx = ac.getInterfacePorts().indexOf(port);
-								diagnostician.error("data driven conjugate relay port is multiply connected inside its actor class", ac, RoomPackage.eINSTANCE.getActorClass_InterfacePorts(), idx);
-							}
+				if (port.getProtocol() instanceof ProtocolClass && ((ProtocolClass)port.getProtocol()).getCommType()==CommunicationType.DATA_DRIVEN) {
+					if (port.isConjugated()) {
+						// check whether relay port is multiply connected
+						int count = 0;
+						for (Binding b : ac.getBindings()) {
+							if (b.getEndpoint1().getPort()==port)
+								++count;
+							if (b.getEndpoint2().getPort()==port)
+								++count;
+						}
+						if (count>1) {
+							int idx = ac.getInterfacePorts().indexOf(port);
+							diagnostician.error("data driven conjugate relay port is multiply connected inside its actor class", ac, RoomPackage.eINSTANCE.getActorClass_InterfacePorts(), idx);
 						}
 					}
 				}
@@ -1258,9 +1249,9 @@ public class GeneratorModelBuilder {
 		
 		// the C generator also needs actor classes to connect with
 		for (RoomModel model : root.getImportedModels()) {
-			for (ActorClass ac : model.getActorClasses()) {
-				root.getXpActorClasses().add(createExpandedActorClass(ac));
-			}
+			roomHelpers.getRoomClasses(model, ActorClass.class).forEach(ac ->
+				root.getXpActorClasses().add(createExpandedActorClass(ac))
+			);
 		}
 	}
 

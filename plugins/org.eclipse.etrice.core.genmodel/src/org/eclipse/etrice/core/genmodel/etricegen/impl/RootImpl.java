@@ -48,7 +48,6 @@ import org.eclipse.etrice.core.genmodel.util.RoomCrossReferencer;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.DataClass;
 import org.eclipse.etrice.core.room.EnumerationType;
-import org.eclipse.etrice.core.room.GeneralProtocolClass;
 import org.eclipse.etrice.core.room.ProtocolClass;
 import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.RoomModel;
@@ -326,8 +325,6 @@ public class RootImpl extends EObjectImpl implements Root {
 		}
 		return actorClasses;
 	}
-
-	private BasicEList<SubSystemClass> subSystemClasses = null;
 	
 	/**
 	 * <!-- begin-user-doc -->
@@ -336,7 +333,7 @@ public class RootImpl extends EObjectImpl implements Root {
 	 */
 	public EList<SubSystemClass> getSubSystemClasses() {
 		if (subSystemClasses==null) {
-			collectSubSystems();
+			computeUsedClasses();
 		}
 		return subSystemClasses;
 	}
@@ -375,16 +372,6 @@ public class RootImpl extends EObjectImpl implements Root {
 			wiredInstances = new EObjectContainmentEList<WiredStructureClass>(WiredStructureClass.class, this, ETriceGenPackage.ROOT__WIRED_INSTANCES);
 		}
 		return wiredInstances;
-	}
-
-	private void collectSubSystems() {
-		subSystemClasses = new BasicEList<SubSystemClass>();
-	
-		if (!getModels().isEmpty()) {
-			for (RoomModel mdl : getModels()) {
-				subSystemClasses.addAll(mdl.getSubSystemClasses());
-			}
-		}
 	}
 
 	/**
@@ -579,16 +566,14 @@ public class RootImpl extends EObjectImpl implements Root {
 	 * @generated NOT
 	 */
 	public void computeSubClasses() {
-		for (RoomModel mdl : getModels()) {
-			for (ActorClass ac : mdl.getActorClasses()) {
-				ActorClass base = ac.getActorBase();
-				while (base!=null) {
-					BasicEList<ActorClass> subs = subClasses.get(base);
-					if (subs==null)
-						subClasses.put(base, subs = new BasicEList<ActorClass>());
-					subs.add(ac);
-					base = base.getActorBase();
-				}
+		for (ActorClass ac : getActorClasses()) {
+			ActorClass base = ac.getActorBase();
+			while (base!=null) {
+				BasicEList<ActorClass> subs = subClasses.get(base);
+				if (subs==null)
+					subClasses.put(base, subs = new BasicEList<ActorClass>());
+				subs.add(ac);
+				base = base.getActorBase();
 			}
 		}
 	}
@@ -843,6 +828,7 @@ public class RootImpl extends EObjectImpl implements Root {
 	private BasicEList<EnumerationType> enumClasses = null;
 	private BasicEList<ProtocolClass> protocolClasses = null;
 	private BasicEList<ActorClass> actorClasses = null;
+	private BasicEList<SubSystemClass> subSystemClasses = null;
 	
 	private void computeUsedClasses() {
 		dataClasses = new BasicEList<DataClass>();
@@ -850,18 +836,16 @@ public class RootImpl extends EObjectImpl implements Root {
 		protocolClasses = new BasicEList<ProtocolClass>();
 		actorClasses = new BasicEList<ActorClass>();
 		subSystemClasses = new BasicEList<SubSystemClass>();
-		for (RoomModel mdl : getModels()) {
-			dataClasses.addAll(mdl.getDataClasses());
-			enumClasses.addAll(mdl.getEnumerationTypes());
-			
-			for (GeneralProtocolClass gpc : mdl.getProtocolClasses()) {
-				if (gpc instanceof ProtocolClass)
-					protocolClasses.add((ProtocolClass) gpc);
-			}
-			
-			actorClasses.addAll(mdl.getActorClasses());
-			subSystemClasses.addAll(mdl.getSubSystemClasses());
-		}
+		
+		getModels().stream()
+			.flatMap(model -> model.getRoomClasses().stream())
+			.forEach(rc -> {
+				if(rc instanceof DataClass) dataClasses.add((DataClass) rc);
+				else if(rc instanceof EnumerationType) enumClasses.add((EnumerationType) rc);
+				else if(rc instanceof ProtocolClass) protocolClasses.add((ProtocolClass) rc);
+				else if(rc instanceof ActorClass) actorClasses.add((ActorClass) rc);
+				else if(rc instanceof SubSystemClass) subSystemClasses.add((SubSystemClass) rc);
+			});
 	}
 
 } //RootImpl

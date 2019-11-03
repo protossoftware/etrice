@@ -18,6 +18,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Stream;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -57,6 +58,7 @@ import org.eclipse.etrice.core.room.RefableType;
 import org.eclipse.etrice.core.room.RoomClass;
 import org.eclipse.etrice.core.room.RoomElement;
 import org.eclipse.etrice.core.room.RoomFactory;
+import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.SAP;
 import org.eclipse.etrice.core.room.SPP;
@@ -1746,5 +1748,13 @@ public class RoomHelpers extends FSMHelpers {
 			return refType1.getType().equals(refType2.getType()) && refType1.isRef() == refType2.isRef();
 
 		return refType1 == null && refType2 == null;
+	}
+	
+	/**
+	 * Filter room classes of a model by type.
+	 */
+	public <T extends RoomClass> Stream<T> getRoomClasses(RoomModel model, Class<T> type) {
+		return model.getRoomClasses().stream()
+				.filter(type::isInstance).map(type::cast);
 	}
 }

@@ -62,39 +62,9 @@ class DocuPostprocessor {
 				This is a list of all imported models.
 			''')
 		
-		cls.getReference("primitiveTypes").setDocumentation(
+		cls.getReference("roomClasses").setDocumentation(
 			'''
-				This is a list of all primitive types defined by this model.
-			''')
-		
-		cls.getReference("externalTypes").setDocumentation(
-			'''
-				This is a list of all external types defined by this model.
-			''')
-		
-		cls.getReference("dataClasses").setDocumentation(
-			'''
-				This is a list of all data classes defined by this model.
-			''')
-		
-		cls.getReference("protocolClasses").setDocumentation(
-			'''
-				This is a list of all protocol classes defined by this model.
-			''')
-		
-		cls.getReference("actorClasses").setDocumentation(
-			'''
-				This is a list of all actor classes defined by this model.
-			''')
-		
-		cls.getReference("subSystemClasses").setDocumentation(
-			'''
-				This is a list of all sub system classes defined by this model.
-			''')
-		
-		cls.getReference("systems").setDocumentation(
-			'''
-				This is a list of all logical systems defined by this model.
+				This is a list of all room classes defined by this model.
 			''')
 		
 		//------------------------------------------------------------------

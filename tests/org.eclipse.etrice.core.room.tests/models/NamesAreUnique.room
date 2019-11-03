@@ -2,6 +2,12 @@ RoomModel NamesAreUnique {
 
 	import room.basic.types.* from "../../org.eclipse.etrice.modellib.java/model/Types.room"
 
+	AnnotationType ClassDuplicate1 {
+		target = {
+			ActorClass, SubSystemClass
+		}
+	}
+
 	/*
 	 * Room model duplicate names
 	 */
@@ -16,12 +22,6 @@ RoomModel NamesAreUnique {
 	}
 
 	PrimitiveType ClassDuplicate1: ptBoolean -> boolean default "false"
-
-	AnnotationType ClassDuplicate1 {
-		target = {
-			ActorClass, SubSystemClass
-		}
-	}
 
 	/*
 	 * Children unique names

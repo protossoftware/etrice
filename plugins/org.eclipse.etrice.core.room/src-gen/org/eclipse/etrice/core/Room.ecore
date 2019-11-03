@@ -26,53 +26,15 @@
         <details key="documentation" value="&lt;br>This is a list of all imported models.&#xD;&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="primitiveTypes" upperBound="-1"
-        eType="#//PrimitiveType" containment="true">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="&lt;br>This is a list of all primitive types defined by this model.&#xD;&#xA;"/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="enumerationTypes" upperBound="-1"
-        eType="#//EnumerationType" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="externalTypes" upperBound="-1"
-        eType="#//ExternalType" containment="true">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="&lt;br>This is a list of all external types defined by this model.&#xD;&#xA;"/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="dataClasses" upperBound="-1"
-        eType="#//DataClass" containment="true">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="&lt;br>This is a list of all data classes defined by this model.&#xD;&#xA;"/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="protocolClasses" upperBound="-1"
-        eType="#//GeneralProtocolClass" containment="true">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="&lt;br>This is a list of all protocol classes defined by this model.&#xD;&#xA;"/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="actorClasses" upperBound="-1"
-        eType="#//ActorClass" containment="true">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="&lt;br>This is a list of all actor classes defined by this model.&#xD;&#xA;"/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="subSystemClasses" upperBound="-1"
-        eType="#//SubSystemClass" containment="true">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="&lt;br>This is a list of all sub system classes defined by this model.&#xD;&#xA;"/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="systems" upperBound="-1"
-        eType="#//LogicalSystem" containment="true">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="&lt;br>This is a list of all logical systems defined by this model.&#xD;&#xA;"/>
-      </eAnnotations>
-    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="annotationTypes" upperBound="-1"
         eType="ecore:EClass platform:/resource/org.eclipse.etrice.core.common/src-gen/org/eclipse/etrice/core/common/Base.ecore#//AnnotationType"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="roomClasses" upperBound="-1"
+        eType="#//RoomClass" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;br>This is a list of all room classes defined by this model.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RoomClass" eSuperTypes="#//RoomElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -765,7 +727,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="multiplicity" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
         defaultValueLiteral="1">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="&lt;br>Ports with multiplicity >1 are called relay ports. A multiplicity of {@code -1} means replicated&#xD;&#xA;port with arbitrary multiplicity.&#xD;&#xA;"/>
+        <details key="documentation" value="&lt;br>Ports with multiplicity >1 are called replicated ports. A multiplicity of {@code -1} means replicated&#xD;&#xA;port with arbitrary multiplicity.&#xD;&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="protocol" eType="#//GeneralProtocolClass">

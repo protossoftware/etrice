@@ -147,16 +147,18 @@ public class ExportDiagramsHandler extends AbstractHandler {
 				
 				IBulkDiagramExporter behaviorExporter = RoomOpeningHelper.getBehaviorDiagramAccess().getDiagramExporter();
 				IBulkDiagramExporter structureExporter = RoomOpeningHelper.getStructureDiagramAccess().getDiagramExporter();
-				for (ActorClass ac : model.getActorClasses()) {
-					if (ac.getStateMachine()!=null)
-						behaviorExporter.export(ac, folderPath);
-					
-					structureExporter.export(ac, folderPath);
-				}
-				
-				for (SubSystemClass ssc : model.getSubSystemClasses()) {
-					structureExporter.export(ssc, folderPath);
-				}
+				model.getRoomClasses().forEach(rc -> {
+					if(rc instanceof ActorClass) {
+						ActorClass ac = (ActorClass) rc;
+						if (ac.getStateMachine() != null) {
+							behaviorExporter.export(ac, folderPath);
+						}
+						structureExporter.export(ac, folderPath);
+					}
+					else if(rc instanceof SubSystemClass) {
+						structureExporter.export((SubSystemClass) rc, folderPath);
+					}
+				});
 				
 				try {
 					folder.refreshLocal(IResource.DEPTH_ONE, null);

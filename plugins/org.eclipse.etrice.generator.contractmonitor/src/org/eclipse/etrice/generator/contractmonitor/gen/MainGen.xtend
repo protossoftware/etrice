@@ -20,6 +20,7 @@ import org.eclipse.etrice.core.room.RoomModel
 import org.eclipse.etrice.generator.base.args.Arguments
 import org.eclipse.etrice.generator.base.io.IGeneratorFileIO
 import org.eclipse.etrice.generator.base.logging.ILogger
+import org.eclipse.etrice.core.room.ActorClass
 
 class MainGen {
 	
@@ -29,7 +30,7 @@ class MainGen {
 		val model = resource.contents.head
 		if(model instanceof RoomModel) {
 			val generatedModel = monitorGen.generateMonitors(model)
-			if(!generatedModel.actorClasses.empty) {
+			if(!generatedModel.roomClasses.filter(ActorClass).empty) {
 				val serializedModel = monitorGen.serializeMonitors(generatedModel, resource.resourceSet)
 				val path = generatedModel.name.replace('.', '/') + '.room'
 				fileIO.generateFile("Saving generated contracts", path, serializedModel)

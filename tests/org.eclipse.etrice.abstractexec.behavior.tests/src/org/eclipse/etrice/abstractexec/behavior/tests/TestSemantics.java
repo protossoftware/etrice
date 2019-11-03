@@ -14,13 +14,10 @@
 
 package org.eclipse.etrice.abstractexec.behavior.tests;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.abstractexec.behavior.AbstractExecutionValidator;
 import org.eclipse.etrice.core.fsm.fSM.State;
 import org.eclipse.etrice.core.fsm.fSM.StateGraph;
@@ -76,18 +73,7 @@ public class TestSemantics {
 		for (TestBase test : new TestBase[] { basic, cashTerminal }) {
 			current = test;
 
-			Set<StateGraphItem> items = new HashSet<StateGraphItem>();
-			for (ActorClass ac : current.getRoomModel().getActorClasses()) {
-				if (ac.getStateMachine() == null)
-					continue;
-				TreeIterator<EObject> iter = ac.getStateMachine()
-						.eAllContents();
-				while (iter.hasNext()) {
-					EObject obj = iter.next();
-					if (obj instanceof StateGraphItem)
-						items.add((StateGraphItem) obj);
-				}
-			}
+			Set<StateGraphItem> items = current.getStateGraphItems();
 
 			for (DiagCode marker : DiagCode.values())
 				if (test.getIssueCode2diagnostic().containsKey(marker.diagCode))

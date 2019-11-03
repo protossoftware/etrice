@@ -103,7 +103,7 @@ class MonitorActorGen {
 			it.imports += baseFactory.createImport => [
 				it.importedNamespace = model.name + '.*'
 			]
-			it.actorClasses += model.actorClasses.filter(ActorClass).filter[helpers.isContract(it)].map[contract |
+			it.roomClasses += model.roomClasses.filter(ActorClass).filter[helpers.isContract(it)].map[contract |
 				generateMonitor(contract, verifyNotNull(helpers.getContractProtocol(contract)))
 			]
 		]

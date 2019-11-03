@@ -42,7 +42,7 @@ class FsmGenTestBase extends TestBase {
 	protected def getGraphContainer(String roomFile, String actorName) {
 		prepare(FSMGenModelTestsActivator.getInstance().getBundle())
 		res = getResource(roomFile)
-		actor = (res.contents.get(0) as RoomModel).actorClasses.findFirst[name.equals(actorName)]
+		actor = (res.contents.head as RoomModel).roomClasses.filter(ActorClass).findFirst[name.equals(actorName)]
 		builder.createTransformedModel(actor)
 	}
 	

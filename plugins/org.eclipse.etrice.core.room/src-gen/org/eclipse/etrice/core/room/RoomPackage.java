@@ -125,85 +125,22 @@ public interface RoomPackage extends EPackage
   int ROOM_MODEL__IMPORTS = ROOM_ELEMENT_FEATURE_COUNT + 3;
 
   /**
-   * The feature id for the '<em><b>Primitive Types</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ROOM_MODEL__PRIMITIVE_TYPES = ROOM_ELEMENT_FEATURE_COUNT + 4;
-
-  /**
-   * The feature id for the '<em><b>Enumeration Types</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ROOM_MODEL__ENUMERATION_TYPES = ROOM_ELEMENT_FEATURE_COUNT + 5;
-
-  /**
-   * The feature id for the '<em><b>External Types</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ROOM_MODEL__EXTERNAL_TYPES = ROOM_ELEMENT_FEATURE_COUNT + 6;
-
-  /**
-   * The feature id for the '<em><b>Data Classes</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ROOM_MODEL__DATA_CLASSES = ROOM_ELEMENT_FEATURE_COUNT + 7;
-
-  /**
-   * The feature id for the '<em><b>Protocol Classes</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ROOM_MODEL__PROTOCOL_CLASSES = ROOM_ELEMENT_FEATURE_COUNT + 8;
-
-  /**
-   * The feature id for the '<em><b>Actor Classes</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ROOM_MODEL__ACTOR_CLASSES = ROOM_ELEMENT_FEATURE_COUNT + 9;
-
-  /**
-   * The feature id for the '<em><b>Sub System Classes</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ROOM_MODEL__SUB_SYSTEM_CLASSES = ROOM_ELEMENT_FEATURE_COUNT + 10;
-
-  /**
-   * The feature id for the '<em><b>Systems</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ROOM_MODEL__SYSTEMS = ROOM_ELEMENT_FEATURE_COUNT + 11;
-
-  /**
    * The feature id for the '<em><b>Annotation Types</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ROOM_MODEL__ANNOTATION_TYPES = ROOM_ELEMENT_FEATURE_COUNT + 12;
+  int ROOM_MODEL__ANNOTATION_TYPES = ROOM_ELEMENT_FEATURE_COUNT + 4;
+
+  /**
+   * The feature id for the '<em><b>Room Classes</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ROOM_MODEL__ROOM_CLASSES = ROOM_ELEMENT_FEATURE_COUNT + 5;
 
   /**
    * The number of structural features of the '<em>Model</em>' class.
@@ -212,7 +149,7 @@ public interface RoomPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ROOM_MODEL_FEATURE_COUNT = ROOM_ELEMENT_FEATURE_COUNT + 13;
+  int ROOM_MODEL_FEATURE_COUNT = ROOM_ELEMENT_FEATURE_COUNT + 6;
 
   /**
    * The meta object id for the '{@link org.eclipse.etrice.core.room.impl.RoomClassImpl <em>Class</em>}' class.
@@ -3086,94 +3023,6 @@ public interface RoomPackage extends EPackage
   EReference getRoomModel_Imports();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.RoomModel#getPrimitiveTypes <em>Primitive Types</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Primitive Types</em>'.
-   * @see org.eclipse.etrice.core.room.RoomModel#getPrimitiveTypes()
-   * @see #getRoomModel()
-   * @generated
-   */
-  EReference getRoomModel_PrimitiveTypes();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.RoomModel#getEnumerationTypes <em>Enumeration Types</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Enumeration Types</em>'.
-   * @see org.eclipse.etrice.core.room.RoomModel#getEnumerationTypes()
-   * @see #getRoomModel()
-   * @generated
-   */
-  EReference getRoomModel_EnumerationTypes();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.RoomModel#getExternalTypes <em>External Types</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>External Types</em>'.
-   * @see org.eclipse.etrice.core.room.RoomModel#getExternalTypes()
-   * @see #getRoomModel()
-   * @generated
-   */
-  EReference getRoomModel_ExternalTypes();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.RoomModel#getDataClasses <em>Data Classes</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Data Classes</em>'.
-   * @see org.eclipse.etrice.core.room.RoomModel#getDataClasses()
-   * @see #getRoomModel()
-   * @generated
-   */
-  EReference getRoomModel_DataClasses();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.RoomModel#getProtocolClasses <em>Protocol Classes</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Protocol Classes</em>'.
-   * @see org.eclipse.etrice.core.room.RoomModel#getProtocolClasses()
-   * @see #getRoomModel()
-   * @generated
-   */
-  EReference getRoomModel_ProtocolClasses();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.RoomModel#getActorClasses <em>Actor Classes</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Actor Classes</em>'.
-   * @see org.eclipse.etrice.core.room.RoomModel#getActorClasses()
-   * @see #getRoomModel()
-   * @generated
-   */
-  EReference getRoomModel_ActorClasses();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.RoomModel#getSubSystemClasses <em>Sub System Classes</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Sub System Classes</em>'.
-   * @see org.eclipse.etrice.core.room.RoomModel#getSubSystemClasses()
-   * @see #getRoomModel()
-   * @generated
-   */
-  EReference getRoomModel_SubSystemClasses();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.RoomModel#getSystems <em>Systems</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Systems</em>'.
-   * @see org.eclipse.etrice.core.room.RoomModel#getSystems()
-   * @see #getRoomModel()
-   * @generated
-   */
-  EReference getRoomModel_Systems();
-
-  /**
    * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.RoomModel#getAnnotationTypes <em>Annotation Types</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -3183,6 +3032,17 @@ public interface RoomPackage extends EPackage
    * @generated
    */
   EReference getRoomModel_AnnotationTypes();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.etrice.core.room.RoomModel#getRoomClasses <em>Room Classes</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Room Classes</em>'.
+   * @see org.eclipse.etrice.core.room.RoomModel#getRoomClasses()
+   * @see #getRoomModel()
+   * @generated
+   */
+  EReference getRoomModel_RoomClasses();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.etrice.core.room.RoomClass <em>Class</em>}'.
@@ -5132,76 +4992,20 @@ public interface RoomPackage extends EPackage
     EReference ROOM_MODEL__IMPORTS = eINSTANCE.getRoomModel_Imports();
 
     /**
-     * The meta object literal for the '<em><b>Primitive Types</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference ROOM_MODEL__PRIMITIVE_TYPES = eINSTANCE.getRoomModel_PrimitiveTypes();
-
-    /**
-     * The meta object literal for the '<em><b>Enumeration Types</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference ROOM_MODEL__ENUMERATION_TYPES = eINSTANCE.getRoomModel_EnumerationTypes();
-
-    /**
-     * The meta object literal for the '<em><b>External Types</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference ROOM_MODEL__EXTERNAL_TYPES = eINSTANCE.getRoomModel_ExternalTypes();
-
-    /**
-     * The meta object literal for the '<em><b>Data Classes</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference ROOM_MODEL__DATA_CLASSES = eINSTANCE.getRoomModel_DataClasses();
-
-    /**
-     * The meta object literal for the '<em><b>Protocol Classes</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference ROOM_MODEL__PROTOCOL_CLASSES = eINSTANCE.getRoomModel_ProtocolClasses();
-
-    /**
-     * The meta object literal for the '<em><b>Actor Classes</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference ROOM_MODEL__ACTOR_CLASSES = eINSTANCE.getRoomModel_ActorClasses();
-
-    /**
-     * The meta object literal for the '<em><b>Sub System Classes</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference ROOM_MODEL__SUB_SYSTEM_CLASSES = eINSTANCE.getRoomModel_SubSystemClasses();
-
-    /**
-     * The meta object literal for the '<em><b>Systems</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference ROOM_MODEL__SYSTEMS = eINSTANCE.getRoomModel_Systems();
-
-    /**
      * The meta object literal for the '<em><b>Annotation Types</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
     EReference ROOM_MODEL__ANNOTATION_TYPES = eINSTANCE.getRoomModel_AnnotationTypes();
+
+    /**
+     * The meta object literal for the '<em><b>Room Classes</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ROOM_MODEL__ROOM_CLASSES = eINSTANCE.getRoomModel_RoomClasses();
 
     /**
      * The meta object literal for the '{@link org.eclipse.etrice.core.room.impl.RoomClassImpl <em>Class</em>}' class.

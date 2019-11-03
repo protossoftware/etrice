@@ -14,9 +14,6 @@
 
 package org.eclipse.etrice.generator.ui.wizard.deprecated;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -186,7 +183,7 @@ public class SelectRoomPage extends WizardPage implements SelectionListener {
 			roomContentTree.setInput(roomRes);
 
 			RoomModel model = (RoomModel) roomRes.getContents().iterator().next();
-			if (model.getSystems().isEmpty()) {
+			if (!model.getRoomClasses().stream().anyMatch(LogicalSystem.class::isInstance)) {
 				setErrorMessage("Room model must contain at least one logical system");
 				return;
 			}
@@ -238,15 +235,14 @@ public class SelectRoomPage extends WizardPage implements SelectionListener {
 
 		@Override
 		public Object[] getChildren(Object parentElement) {
-			List<Object> objects = new ArrayList<Object>();
 			if (parentElement instanceof RoomModel) {
-				RoomModel model = (RoomModel) parentElement;
-				objects.addAll(model.getSystems());
+				return ((RoomModel) parentElement).getRoomClasses().stream()
+					.filter(LogicalSystem.class::isInstance).toArray();
 			}
-			else if (parentElement instanceof LogicalSystem)
-				objects.addAll(((LogicalSystem) parentElement).getSubSystems());
-
-			return objects.toArray();
+			else if (parentElement instanceof LogicalSystem) {
+				return ((LogicalSystem) parentElement).getSubSystems().toArray();
+			}
+			return new Object[]{};
 		}
 
 		@Override

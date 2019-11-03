@@ -1,12 +1,5 @@
 RoomModel AnnotationExample {
-	LogicalSystem LogSys {
-		SubSystemRef subSysRef: SubSysClass
-	}
-	SubSystemClass SubSysClass {
-		ActorRef actorRef: ActorClass1
-		LogicalThread defaultThread
-	}
-	
+
 	AnnotationType AllPossibleTargets {
 		target = {
 			ActorBehavior, ActorClass, CompoundProtocolClass, DataClass, LogicalSystem, ProtocolClass, SubSystemClass
@@ -15,6 +8,15 @@ RoomModel AnnotationExample {
 	
 	AnnotationType WrongTargetTestAnnotation [ "Test validation of annotation declared in unspecified target" ] {
 		target = ActorClass
+	}
+
+	LogicalSystem LogSys {
+		SubSystemRef subSysRef: SubSysClass
+	}
+	
+	SubSystemClass SubSysClass {
+		ActorRef actorRef: ActorClass1
+		LogicalThread defaultThread
 	}
 
 	ProtocolClass WrongTargetTestProtocol {

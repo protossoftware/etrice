@@ -59,10 +59,8 @@ class DataClassGen {
 		«FOR classes : root.getReferencedDataClasses(dc)»
 			#include "«classes.path»«classes.name».h"
 		«ENDFOR»
-		«FOR model : root.getReferencedModels(dc)»
-			«FOR classes : model.dataClasses»
-				#include "«classes.path»«classes.name».h"
-			«ENDFOR»
+		«FOR classes : root.getReferencedDataClasses(dc)»
+			#include "«classes.path»«classes.name».h"
 		«ENDFOR»
 
 		«dc.userCode1.userCode»

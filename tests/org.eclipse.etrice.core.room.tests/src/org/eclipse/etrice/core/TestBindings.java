@@ -20,7 +20,6 @@ import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Binding;
-import org.eclipse.etrice.core.room.GeneralProtocolClass;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.validation.RoomJavaValidator;
 import org.junit.Before;
@@ -93,12 +92,10 @@ public class TestBindings extends TestBase {
 	@Test
 	public void testProtocolValidation() {
 		RoomModel mdl = (RoomModel) resource.getContents().get(0);
-		for (GeneralProtocolClass pc : mdl.getProtocolClasses()) {
-			if (pc.getName().equals("PCExtendInOut")) {
-				Diagnostic diag = getDiag(pc).getChildren().get(0);
-				assertEquals("a derived protocol should add either incoming or outgoing messages, not both", diag.getMessage());
-			}
-		}
+		getProtocolClasses(mdl).filter(pc -> pc.getName().equals("PCExtendInOut")).forEach(pc -> {
+			Diagnostic diag = getDiag(pc).getChildren().get(0);
+			assertEquals("a derived protocol should add either incoming or outgoing messages, not both", diag.getMessage());
+		});
 	}
 	
 	private Binding getBinding(String acname, int idx) {

@@ -31,7 +31,7 @@ public class TestActorClassWithPorts extends TestActorClass {
 
 	@Test
 	public void checkPorts() {
-		ActorClass ac = getModels().get(0).getActorClasses().get(0);
+		ActorClass ac = getActorClasses().findFirst().get();
 		Diagram diagram = new DiagramAccess().getDiagram(ac);
 		ContainerShape shape = (ContainerShape) diagram.getChildren().get(0);
 		assertEquals("actor class child shapes", 3, shape.getChildren().size());

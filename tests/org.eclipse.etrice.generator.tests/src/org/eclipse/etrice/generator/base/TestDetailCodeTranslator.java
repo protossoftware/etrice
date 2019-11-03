@@ -165,7 +165,7 @@ public class TestDetailCodeTranslator {
 		model = RoomFactory.eINSTANCE.createRoomModel();
 		
 		ProtocolClass pc = RoomFactory.eINSTANCE.createProtocolClass();
-		model.getProtocolClasses().add(pc);
+		model.getRoomClasses().add(pc);
 		pc.setName("TestProtocol");
 		Message out1 = RoomFactory.eINSTANCE.createMessage();
 		out1.setName("out1");
@@ -202,13 +202,13 @@ public class TestDetailCodeTranslator {
 		intl.setValue(3);
 		lit.setLiteral(intl);
 		et.getLiterals().add(lit);
-		model.getEnumerationTypes().add(et);
+		model.getRoomClasses().add(et);
 
 		RefableType enumType = RoomFactory.eINSTANCE.createRefableType();
 		refType.setType(et);
 		
 		ac = RoomFactory.eINSTANCE.createActorClass();
-		model.getActorClasses().add(ac);
+		model.getRoomClasses().add(ac);
 		ac.setName("TestActor");
 		
 		Port port = RoomFactory.eINSTANCE.createPort();

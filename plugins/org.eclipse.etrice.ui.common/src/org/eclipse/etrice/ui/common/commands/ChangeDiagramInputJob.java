@@ -15,8 +15,8 @@
 package org.eclipse.etrice.ui.common.commands;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
@@ -242,12 +242,9 @@ public class ChangeDiagramInputJob extends Job {
 	}
 
 	protected List<StructureClass> getElements(RoomModel model){
-		List<StructureClass> elements = new ArrayList<StructureClass>();
-		elements.addAll(model.getActorClasses());
-		elements.addAll(model.getSubSystemClasses());
-		elements.addAll(model.getSystems());
-		
-		return elements;
+		return model.getRoomClasses().stream()
+			.filter(StructureClass.class::isInstance).map(StructureClass.class::cast)
+			.collect(Collectors.toList());
 	}
 
 }

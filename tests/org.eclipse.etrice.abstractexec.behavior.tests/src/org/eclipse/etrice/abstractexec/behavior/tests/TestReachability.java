@@ -14,18 +14,14 @@
 
 package org.eclipse.etrice.abstractexec.behavior.tests;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.TreeIterator;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.abstractexec.behavior.ReachabilityValidator;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.fsm.fSM.InitialTransition;
 import org.eclipse.etrice.core.fsm.fSM.RefinedTransition;
-import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.fsm.fSM.State;
 import org.eclipse.etrice.core.fsm.fSM.StateGraph;
 import org.eclipse.etrice.core.fsm.fSM.StateGraphItem;
@@ -37,30 +33,17 @@ import org.junit.Test;
 
 public class TestReachability extends TestBase {
 
-	private RoomModel model = null;
-
 	@Before
 	public void setUp() {
 		prepare("reachability.room");
-		model = getRoomModel();
 	}
 
 	@Test
 	public void test() {
-		if (model == null)
+		if (getRoomModel() == null)
 			Assert.fail("could not find model");
 
-		Set<StateGraphItem> items = new HashSet<StateGraphItem>();
-		for (ActorClass ac : model.getActorClasses()) {
-			if (ac.getStateMachine() == null)
-				continue;
-			TreeIterator<EObject> iter = ac.getStateMachine().eAllContents();
-			while (iter.hasNext()) {
-				EObject obj = iter.next();
-				if (obj instanceof StateGraphItem)
-					items.add((StateGraphItem) obj);
-			}
-		}
+		Set<StateGraphItem> items = getStateGraphItems();
 
 		List<AbstractValidationDiagnostic> diagnostics = getIssueCode2diagnostic().get(ReachabilityValidator.DIAG_CODE_UNREACHABLE);
 		if (diagnostics!=null) {

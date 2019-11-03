@@ -49,14 +49,9 @@ public class TestActorClassWithBindings extends TestBase {
 		loadModelFile();
 
 		assertEquals("models read", 1, getModels().size());
-		assertEquals("actor classes in our model", 2, getModels().get(0).getActorClasses().size());
-
-		for (ActorClass a : getModels().get(0).getActorClasses()) {
-			if (a.getName().equals("MyActorClass")) {
-				ac = a;
-				break;
-			}
-		}
+		assertEquals("actor classes in our model", 2, getActorClasses().count());
+		
+		ac = getActorClass("MyActorClass");
 		assertNotNull("ActorClass expected", ac);
 	}
 	

@@ -86,7 +86,7 @@ public interface Port extends InterfaceItem
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * <!-- begin-model-doc -->
-   * <br>Ports with multiplicity >1 are called relay ports. A multiplicity of {@code -1} means replicated
+   * <br>Ports with multiplicity >1 are called replicated ports. A multiplicity of {@code -1} means replicated
    * port with arbitrary multiplicity.
    * 
    * <!-- end-model-doc -->

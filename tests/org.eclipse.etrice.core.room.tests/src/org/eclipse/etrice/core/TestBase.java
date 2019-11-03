@@ -17,6 +17,7 @@ package org.eclipse.etrice.core;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Map;
+import java.util.stream.Stream;
 
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.emf.common.util.Diagnostic;
@@ -24,6 +25,11 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.etrice.core.room.ActorClass;
+import org.eclipse.etrice.core.room.DataClass;
+import org.eclipse.etrice.core.room.ProtocolClass;
+import org.eclipse.etrice.core.room.RoomModel;
+import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.CancelIndicator;
@@ -43,6 +49,8 @@ import com.google.common.collect.Maps;
 public class TestBase {
 
 	private String basePath;
+	
+	protected RoomHelpers roomHelpers = new RoomHelpers();
 
 	protected void prepare(Bundle bundle) {
 		try {
@@ -79,5 +87,17 @@ public class TestBase {
 		// see EObjectValidator.getRootEValidator(Map<Object, Object>)
 		options.put(EValidator.class, CoreTestsActivator.getInstance().getDiagnostician());
 		return CoreTestsActivator.getInstance().getDiagnostician().validate(ele, options);
+	}
+	
+	protected Stream<ActorClass> getActorClasses(RoomModel model) {
+		return roomHelpers.getRoomClasses(model, ActorClass.class);
+	}
+	
+	protected Stream<ProtocolClass> getProtocolClasses(RoomModel model) {
+		return roomHelpers.getRoomClasses(model, ProtocolClass.class);
+	}
+	
+	protected Stream<DataClass> getDataClasses(RoomModel model) {
+		return roomHelpers.getRoomClasses(model, DataClass.class);
 	}
 }

@@ -57,7 +57,7 @@ public class TestInheritedStateMachine extends AbstractStateMachineTest {
 	@Test
 	public void checkModel() {
 		assertEquals("models read", 1, getModels().size());
-		assertEquals("actor classes in our model", 5, getModels().get(0).getActorClasses().size());
+		assertEquals("actor classes in our model", 5, getActorClasses().count());
 	}
 	
 	@Test
@@ -184,13 +184,5 @@ public class TestInheritedStateMachine extends AbstractStateMachineTest {
 			if (s.getSubgraph()!=null)
 				testSGItems(s.getSubgraph(), diagram);
 		}
-	}
-	
-	private ActorClass getActorClass(String name) {
-		for (ActorClass ac : getModels().get(0).getActorClasses()) {
-			if (ac.getName().equals(name))
-				return ac;
-		}
-		return null;
 	}
 }

@@ -56,12 +56,12 @@ public class TestFlatStateMachine extends AbstractStateMachineTest {
 	@Test
 	public void checkModel() {
 		assertEquals("models read", 1, getModels().size());
-		assertEquals("actor classes in our model", 1, getModels().get(0).getActorClasses().size());
+		assertEquals("actor classes in our model", 1, getActorClasses().count());
 	}
 	
 	@Test
 	public void testActorClass() {
-		ActorClass ac = getModels().get(0).getActorClasses().get(0);
+		ActorClass ac = getActorClasses().findFirst().get();
 		Diagram diagram = new DiagramAccess().getDiagram(ac);
 		
 		assertEquals("diagram children", 1, diagram.getChildren().size());
@@ -75,7 +75,7 @@ public class TestFlatStateMachine extends AbstractStateMachineTest {
 
 	@Test
 	public void testSGItems() {
-		ActorClass ac = getModels().get(0).getActorClasses().get(0);
+		ActorClass ac = getActorClasses().findFirst().get();
 		Diagram diagram = new DiagramAccess().getDiagram(ac);
 		
 		Shape shape = diagram.getChildren().get(0);

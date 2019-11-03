@@ -33,40 +33,23 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cAnnotationsAnnotationParserRuleCall_4_0 = (RuleCall)cAnnotationsAssignment_4.eContents().get(0);
 		private final Assignment cImportsAssignment_5 = (Assignment)cGroup.eContents().get(5);
 		private final RuleCall cImportsImportParserRuleCall_5_0 = (RuleCall)cImportsAssignment_5.eContents().get(0);
-		private final Alternatives cAlternatives_6 = (Alternatives)cGroup.eContents().get(6);
-		private final Assignment cPrimitiveTypesAssignment_6_0 = (Assignment)cAlternatives_6.eContents().get(0);
-		private final RuleCall cPrimitiveTypesPrimitiveTypeParserRuleCall_6_0_0 = (RuleCall)cPrimitiveTypesAssignment_6_0.eContents().get(0);
-		private final Assignment cEnumerationTypesAssignment_6_1 = (Assignment)cAlternatives_6.eContents().get(1);
-		private final RuleCall cEnumerationTypesEnumerationTypeParserRuleCall_6_1_0 = (RuleCall)cEnumerationTypesAssignment_6_1.eContents().get(0);
-		private final Assignment cExternalTypesAssignment_6_2 = (Assignment)cAlternatives_6.eContents().get(2);
-		private final RuleCall cExternalTypesExternalTypeParserRuleCall_6_2_0 = (RuleCall)cExternalTypesAssignment_6_2.eContents().get(0);
-		private final Assignment cDataClassesAssignment_6_3 = (Assignment)cAlternatives_6.eContents().get(3);
-		private final RuleCall cDataClassesDataClassParserRuleCall_6_3_0 = (RuleCall)cDataClassesAssignment_6_3.eContents().get(0);
-		private final Assignment cProtocolClassesAssignment_6_4 = (Assignment)cAlternatives_6.eContents().get(4);
-		private final RuleCall cProtocolClassesGeneralProtocolClassParserRuleCall_6_4_0 = (RuleCall)cProtocolClassesAssignment_6_4.eContents().get(0);
-		private final Assignment cActorClassesAssignment_6_5 = (Assignment)cAlternatives_6.eContents().get(5);
-		private final RuleCall cActorClassesActorClassParserRuleCall_6_5_0 = (RuleCall)cActorClassesAssignment_6_5.eContents().get(0);
-		private final Assignment cSubSystemClassesAssignment_6_6 = (Assignment)cAlternatives_6.eContents().get(6);
-		private final RuleCall cSubSystemClassesSubSystemClassParserRuleCall_6_6_0 = (RuleCall)cSubSystemClassesAssignment_6_6.eContents().get(0);
-		private final Assignment cSystemsAssignment_6_7 = (Assignment)cAlternatives_6.eContents().get(7);
-		private final RuleCall cSystemsLogicalSystemParserRuleCall_6_7_0 = (RuleCall)cSystemsAssignment_6_7.eContents().get(0);
-		private final Assignment cAnnotationTypesAssignment_6_8 = (Assignment)cAlternatives_6.eContents().get(8);
-		private final RuleCall cAnnotationTypesAnnotationTypeParserRuleCall_6_8_0 = (RuleCall)cAnnotationTypesAssignment_6_8.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_7 = (Keyword)cGroup.eContents().get(7);
+		private final Assignment cAnnotationTypesAssignment_6 = (Assignment)cGroup.eContents().get(6);
+		private final RuleCall cAnnotationTypesAnnotationTypeParserRuleCall_6_0 = (RuleCall)cAnnotationTypesAssignment_6.eContents().get(0);
+		private final Assignment cRoomClassesAssignment_7 = (Assignment)cGroup.eContents().get(7);
+		private final RuleCall cRoomClassesRoomClassParserRuleCall_7_0 = (RuleCall)cRoomClassesAssignment_7.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_8 = (Keyword)cGroup.eContents().get(8);
 		
 		//RoomModel:
 		//	'RoomModel' name=FQN docu=Documentation? '{'
 		//	annotations+=Annotation*
-		//	imports+=Import* (primitiveTypes+=PrimitiveType | enumerationTypes+=EnumerationType | externalTypes+=ExternalType |
-		//	dataClasses+=DataClass | protocolClasses+=GeneralProtocolClass | actorClasses+=ActorClass |
-		//	subSystemClasses+=SubSystemClass | systems+=LogicalSystem | annotationTypes+=AnnotationType)*
+		//	imports+=Import*
+		//	annotationTypes+=AnnotationType*
+		//	roomClasses+=RoomClass*
 		//	'}';
 		@Override public ParserRule getRule() { return rule; }
 
-		//'RoomModel' name=FQN docu=Documentation? '{' annotations+=Annotation* imports+=Import* (primitiveTypes+=PrimitiveType |
-		//enumerationTypes+=EnumerationType | externalTypes+=ExternalType | dataClasses+=DataClass |
-		//protocolClasses+=GeneralProtocolClass | actorClasses+=ActorClass | subSystemClasses+=SubSystemClass |
-		//systems+=LogicalSystem | annotationTypes+=AnnotationType)* '}'
+		//'RoomModel' name=FQN docu=Documentation? '{' annotations+=Annotation* imports+=Import* annotationTypes+=AnnotationType*
+		//roomClasses+=RoomClass* '}'
 		public Group getGroup() { return cGroup; }
 
 		//'RoomModel'
@@ -99,67 +82,20 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 		//Import
 		public RuleCall getImportsImportParserRuleCall_5_0() { return cImportsImportParserRuleCall_5_0; }
 
-		//(primitiveTypes+=PrimitiveType | enumerationTypes+=EnumerationType | externalTypes+=ExternalType |
-		//dataClasses+=DataClass | protocolClasses+=GeneralProtocolClass | actorClasses+=ActorClass |
-		//subSystemClasses+=SubSystemClass | systems+=LogicalSystem | annotationTypes+=AnnotationType)*
-		public Alternatives getAlternatives_6() { return cAlternatives_6; }
-
-		//primitiveTypes+=PrimitiveType
-		public Assignment getPrimitiveTypesAssignment_6_0() { return cPrimitiveTypesAssignment_6_0; }
-
-		//PrimitiveType
-		public RuleCall getPrimitiveTypesPrimitiveTypeParserRuleCall_6_0_0() { return cPrimitiveTypesPrimitiveTypeParserRuleCall_6_0_0; }
-
-		//enumerationTypes+=EnumerationType
-		public Assignment getEnumerationTypesAssignment_6_1() { return cEnumerationTypesAssignment_6_1; }
-
-		//EnumerationType
-		public RuleCall getEnumerationTypesEnumerationTypeParserRuleCall_6_1_0() { return cEnumerationTypesEnumerationTypeParserRuleCall_6_1_0; }
-
-		//externalTypes+=ExternalType
-		public Assignment getExternalTypesAssignment_6_2() { return cExternalTypesAssignment_6_2; }
-
-		//ExternalType
-		public RuleCall getExternalTypesExternalTypeParserRuleCall_6_2_0() { return cExternalTypesExternalTypeParserRuleCall_6_2_0; }
-
-		//dataClasses+=DataClass
-		public Assignment getDataClassesAssignment_6_3() { return cDataClassesAssignment_6_3; }
-
-		//DataClass
-		public RuleCall getDataClassesDataClassParserRuleCall_6_3_0() { return cDataClassesDataClassParserRuleCall_6_3_0; }
-
-		//protocolClasses+=GeneralProtocolClass
-		public Assignment getProtocolClassesAssignment_6_4() { return cProtocolClassesAssignment_6_4; }
-
-		//GeneralProtocolClass
-		public RuleCall getProtocolClassesGeneralProtocolClassParserRuleCall_6_4_0() { return cProtocolClassesGeneralProtocolClassParserRuleCall_6_4_0; }
-
-		//actorClasses+=ActorClass
-		public Assignment getActorClassesAssignment_6_5() { return cActorClassesAssignment_6_5; }
-
-		//ActorClass
-		public RuleCall getActorClassesActorClassParserRuleCall_6_5_0() { return cActorClassesActorClassParserRuleCall_6_5_0; }
-
-		//subSystemClasses+=SubSystemClass
-		public Assignment getSubSystemClassesAssignment_6_6() { return cSubSystemClassesAssignment_6_6; }
-
-		//SubSystemClass
-		public RuleCall getSubSystemClassesSubSystemClassParserRuleCall_6_6_0() { return cSubSystemClassesSubSystemClassParserRuleCall_6_6_0; }
-
-		//systems+=LogicalSystem
-		public Assignment getSystemsAssignment_6_7() { return cSystemsAssignment_6_7; }
-
-		//LogicalSystem
-		public RuleCall getSystemsLogicalSystemParserRuleCall_6_7_0() { return cSystemsLogicalSystemParserRuleCall_6_7_0; }
-
-		//annotationTypes+=AnnotationType
-		public Assignment getAnnotationTypesAssignment_6_8() { return cAnnotationTypesAssignment_6_8; }
+		//annotationTypes+=AnnotationType*
+		public Assignment getAnnotationTypesAssignment_6() { return cAnnotationTypesAssignment_6; }
 
 		//AnnotationType
-		public RuleCall getAnnotationTypesAnnotationTypeParserRuleCall_6_8_0() { return cAnnotationTypesAnnotationTypeParserRuleCall_6_8_0; }
+		public RuleCall getAnnotationTypesAnnotationTypeParserRuleCall_6_0() { return cAnnotationTypesAnnotationTypeParserRuleCall_6_0; }
+
+		//roomClasses+=RoomClass*
+		public Assignment getRoomClassesAssignment_7() { return cRoomClassesAssignment_7; }
+
+		//RoomClass
+		public RuleCall getRoomClassesRoomClassParserRuleCall_7_0() { return cRoomClassesRoomClassParserRuleCall_7_0; }
 
 		//'}'
-		public Keyword getRightCurlyBracketKeyword_7() { return cRightCurlyBracketKeyword_7; }
+		public Keyword getRightCurlyBracketKeyword_8() { return cRightCurlyBracketKeyword_8; }
 	}
 
 	public class RoomClassElements extends AbstractParserRuleElementFinder {
@@ -3679,9 +3615,9 @@ public class RoomGrammarAccess extends AbstractGrammarElementFinder {
 	//RoomModel:
 	//	'RoomModel' name=FQN docu=Documentation? '{'
 	//	annotations+=Annotation*
-	//	imports+=Import* (primitiveTypes+=PrimitiveType | enumerationTypes+=EnumerationType | externalTypes+=ExternalType |
-	//	dataClasses+=DataClass | protocolClasses+=GeneralProtocolClass | actorClasses+=ActorClass |
-	//	subSystemClasses+=SubSystemClass | systems+=LogicalSystem | annotationTypes+=AnnotationType)*
+	//	imports+=Import*
+	//	annotationTypes+=AnnotationType*
+	//	roomClasses+=RoomClass*
 	//	'}';
 	public RoomModelElements getRoomModelAccess() {
 		return pRoomModel;

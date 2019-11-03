@@ -548,12 +548,13 @@ class AsciiDocGen {
 		private new(String name, Iterable<RoomModel> models) {
 			this.name = name
 			
-			systems = models.map[it.systems].flatten.sortBy[name]
-			subSystemClasses = models.map[it.subSystemClasses].flatten.sortBy[name]
-			protocolClasses = models.map[it.protocolClasses].flatten.sortBy[name]
-			enumerationTypes = models.map[it.enumerationTypes].flatten.sortBy[name]
-			dataClasses = models.map[it.dataClasses].flatten.sortBy[name]
-			actorClasses = models.map[it.actorClasses].flatten.sortBy[name]
+			val roomClasses = models.flatMap[roomClasses]
+			systems = roomClasses.filter(LogicalSystem).sortBy[name]
+			subSystemClasses = roomClasses.filter(SubSystemClass).sortBy[name]
+			protocolClasses = roomClasses.filter(GeneralProtocolClass).sortBy[name]
+			enumerationTypes = roomClasses.filter(EnumerationType).sortBy[name]
+			dataClasses = roomClasses.filter(DataClass).sortBy[name]
+			actorClasses = roomClasses.filter(ActorClass).sortBy[name]
 		}
 		
 	}

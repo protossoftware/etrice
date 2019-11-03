@@ -188,9 +188,9 @@ public class Wiring {
 		
 		// the wiring model also needs actor classes to connect with
 		for (RoomModel model : root.getImportedModels()) {
-			for (ActorClass ac : model.getActorClasses()) {
-				getWiredActorClass(ac);
-			}
+			roomHelpers.getRoomClasses(model, ActorClass.class).forEach(ac ->
+				getWiredActorClass(ac)
+			);
 		}
 		
 		for (SubSystemClass ssc : root.getSubSystemClasses()) {

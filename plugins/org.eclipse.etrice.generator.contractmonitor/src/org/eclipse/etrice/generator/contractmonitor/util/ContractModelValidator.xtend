@@ -41,7 +41,7 @@ class ContractModelValidator extends ModelValidator {
 	
 	def private List<Resource> getRelevantResources(Iterable<Resource> resources) {
 		val contractProtocols = resources.map[contents].flatten.filter(RoomModel).map[model |
-			model.protocolClasses.filter(ProtocolClass).filter[!annotations.empty].filter[ pc |
+			model.roomClasses.filter(ProtocolClass).filter[!annotations.empty].filter[ pc |
 				// validate protocols with (unresolved) contract
 				helpers.hasContract(pc) || !EcoreUtil.UnresolvedProxyCrossReferencer.find(pc.annotations).empty
 			]	

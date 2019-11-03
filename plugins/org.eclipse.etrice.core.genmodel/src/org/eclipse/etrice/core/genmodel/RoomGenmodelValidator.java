@@ -28,6 +28,7 @@ import org.eclipse.etrice.core.common.validation.ICustomValidator;
 import org.eclipse.etrice.core.genmodel.builder.GeneratorModelBuilder;
 import org.eclipse.etrice.core.genmodel.builder.GeneratorModelBuilderFactory;
 import org.eclipse.etrice.core.genmodel.fsm.IDiagnostician;
+import org.eclipse.etrice.core.room.LogicalSystem;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.generator.base.logging.NullLogger;
@@ -130,7 +131,8 @@ public class RoomGenmodelValidator implements ICustomValidator {
 			
 			Diag diagnostician = new Diag(messageAcceptor);
 			GeneratorModelBuilder builder = genModelBuilderFactory.create(new NullLogger(), diagnostician);
-			builder.createGeneratorModel(models, importedModels, model.getSystems().isEmpty());
+			boolean containsSystem = model.getRoomClasses().stream().anyMatch(LogicalSystem.class::isInstance);
+			builder.createGeneratorModel(models, importedModels, containsSystem);
 		}
 		
 	}

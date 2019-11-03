@@ -20,10 +20,12 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.LinkedList;
+import java.util.stream.Stream;
 
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.graphiti.mm.algorithms.styles.Color;
 import org.eclipse.graphiti.util.IColorConstant;
@@ -87,5 +89,14 @@ public abstract class TestBase {
 		if (c.getBlue()!=cc.getBlue())
 			return false;
 		return true;
+	}
+	
+	protected Stream<ActorClass> getActorClasses() {
+		return getModels().stream().flatMap(model -> model.getRoomClasses().stream())
+			.filter(ActorClass.class::isInstance).map(ActorClass.class::cast);
+	}
+	
+	protected ActorClass getActorClass(String name) {
+		return getActorClasses().filter(ac -> name.equals(ac.getName())).findFirst().orElse(null);
 	}
 }

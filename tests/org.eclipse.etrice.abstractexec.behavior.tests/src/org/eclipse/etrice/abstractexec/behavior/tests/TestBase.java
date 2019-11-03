@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.emf.common.util.Diagnostic;
@@ -27,6 +29,8 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.etrice.core.fsm.fSM.StateGraphItem;
+import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
@@ -37,6 +41,7 @@ import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.impl.ConcreteSyntaxEValidator;
 
 import com.google.common.collect.Maps;
+import com.google.common.collect.Streams;
 
 /**
  * Base class for tests helps with getting diagnostics from a model.
@@ -127,6 +132,15 @@ public class TestBase {
 				.getDiagnostician());
 		return Activator.getInstance().getDiagnostician()
 				.validate(ele, options);
+	}
+	
+	protected Set<StateGraphItem> getStateGraphItems() {
+		return getRoomModel().getRoomClasses().stream()
+			.filter(ActorClass.class::isInstance).map(ActorClass.class::cast)
+			.filter(ac -> ac.getStateMachine() != null)
+			.flatMap(ac -> Streams.stream(ac.getStateMachine().eAllContents()))
+			.filter(StateGraphItem.class::isInstance).map(StateGraphItem.class::cast)
+			.collect(Collectors.toSet());
 	}
 
 	/**

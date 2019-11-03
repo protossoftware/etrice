@@ -18,10 +18,6 @@ RoomModel StatemachineInterfaceTest {
 		}
 	}
 
-	AnnotationType BehaviorManual { 
-   		target = ActorBehavior 
- 	} 
-
 	ActorClass EmptyEventApp {
 		Structure {
 			Port p1 : EventProtocol

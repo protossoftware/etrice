@@ -49,7 +49,7 @@ class TestDCTranslator extends TestBase {
 	@Test
 	def void testPortMessage() {
 		// we want to test the entry code of state 'first'
-		val ac = model.actorClasses.filter[name=="AC"].head
+		val ac = model.actorClasses.filter[name=="AC"].findFirst.get
 		val st = ac.stateMachine.states.filter[name=="first"].head
 		
 		val translated = translator.getTranslatedCode(st.entryCode)
@@ -71,7 +71,7 @@ class TestDCTranslator extends TestBase {
 	@Test
 	def void testReplPortMessage() {
 		// we want to test the exit code of state 'second'
-		val ac = model.actorClasses.filter[name=="AC"].head
+		val ac = model.actorClasses.filter[name=="AC"].findFirst.get
 		val st = ac.stateMachine.states.filter[name=="second"].head
 		
 		val translated = translator.getTranslatedCode(st.exitCode)
@@ -93,7 +93,7 @@ class TestDCTranslator extends TestBase {
 	@Test
 	def void testActorClassAttributes() {
 		// we want to test the entry code of state 'first'
-		val ac = model.actorClasses.filter[name=="AC"].head
+		val ac = model.actorClasses.filter[name=="AC"].findFirst.get
 		val st = ac.stateMachine.states.filter[name=="second"].head
 		
 		val translated = translator.getTranslatedCode(st.entryCode)
@@ -114,7 +114,7 @@ class TestDCTranslator extends TestBase {
 	@Test
 	def void testDataClassOperationWithAttributesAndVarDecl() {
 		// we want to test the distance operation of data class Point
-		val dc = model.dataClasses.filter[name=="Point"].head
+		val dc = model.dataClasses.filter[name=="Point"].findFirst.get
 		val op = dc.operations.filter[name=="distance"].head
 		
 		val translated = translator.getTranslatedCode(op.detailCode)
@@ -136,7 +136,7 @@ class TestDCTranslator extends TestBase {
 	@Test
 	def void testDataClassOperationWithOperationCall() {
 		// we want to test the isInside operation of data class Circle
-		val dc = model.dataClasses.filter[name=="Circle"].head
+		val dc = model.dataClasses.filter[name=="Circle"].findFirst.get
 		val op = dc.operations.filter[name=="isInside"].head
 		
 		val translated = translator.getTranslatedCode(op.detailCode)

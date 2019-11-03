@@ -32,17 +32,8 @@ RoomModel :
 'RoomModel' name=FQN (docu=Documentation)? '{'
 	(annotations+=Annotation)*
 	(imports+=Import)*
-	(
-		primitiveTypes+=PrimitiveType	|
-		enumerationTypes+=EnumerationType	|
-		externalTypes+=ExternalType	|
-		dataClasses+=DataClass	|
-		protocolClasses+=GeneralProtocolClass |
-		actorClasses+=ActorClass  |
-		subSystemClasses+=SubSystemClass |
-		systems+=LogicalSystem |
-		annotationTypes+=AnnotationType
-	)*
+	(annotationTypes+=AnnotationType)*
+	(roomClasses += RoomClass)*
 	'}'
 ;
 

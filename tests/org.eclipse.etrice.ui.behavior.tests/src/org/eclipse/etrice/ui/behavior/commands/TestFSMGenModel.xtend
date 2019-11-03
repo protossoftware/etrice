@@ -50,7 +50,7 @@ class TestFSMGenModel extends TestBase {
 	protected def createResourceSetWithGc(String roomFile, String actorName) {
 		prepare(BehaviorTestActivator.^default.getBundle())
 		val res = getResource(roomFile)
-		val actor = (res.contents.get(0) as RoomModel).actorClasses.findFirst[name.equals(actorName)]	
+		val actor = (res.contents.head as RoomModel).actorClasses.filter[name.equals(actorName)].findFirst.get	
 		
 		val gc = builder.createTransformedModel(actor) => [gc |
 			assertNotNull("graph context was created", gc)
