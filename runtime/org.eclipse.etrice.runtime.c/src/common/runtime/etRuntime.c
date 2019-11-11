@@ -12,6 +12,8 @@
  *
  *******************************************************************************/
 
+#include <stdlib.h>
+#include <string.h>
 
 #include "runtime/etRuntime.h"
 #include "debugging/etMSCLogger.h"

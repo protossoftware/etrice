@@ -31,6 +31,7 @@
 #include <unistd.h>
 #include <signal.h>
 #if __GNUC__ <= 4
+	/* in newer versions this header isn't needed explicitly */
 	#include <bits/siginfo.h>
 #endif
 #include <time.h>

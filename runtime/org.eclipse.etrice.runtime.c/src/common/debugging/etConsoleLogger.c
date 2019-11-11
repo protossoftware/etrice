@@ -35,7 +35,7 @@ static void* etConsoleSender_getBuffer(etBufferSender* self, size_t size) {
 }
 
 void etConsoleSender_sendBuffer(etBufferSender* self, void* buffer, size_t size) {
-	fprintf(stdout, buffer);
+	fprintf(stdout, "%s", (char*) buffer);
 	fflush(stdout);
 }
 

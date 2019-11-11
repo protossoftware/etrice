@@ -12,11 +12,11 @@
  *
  *******************************************************************************/
 
-#include "debugging/etLogger.h"
-#include "osal/etTime.h"
-
 #include <stdarg.h>
 #include <string.h>
+
+#include "debugging/etLogger.h"
+#include "osal/etTime.h"
 
 static char* prefixes[] = {
 		"E: ",
