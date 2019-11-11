@@ -30,7 +30,9 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <signal.h>
-#include <bits/siginfo.h>
+#if __GNUC__ <= 4
+	#include <bits/siginfo.h>
+#endif
 #include <time.h>
 #include <stdio.h>
 #include <pthread.h>
