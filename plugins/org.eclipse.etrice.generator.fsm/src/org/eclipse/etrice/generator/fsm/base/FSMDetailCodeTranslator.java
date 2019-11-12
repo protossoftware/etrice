@@ -313,20 +313,30 @@ public class FSMDetailCodeTranslator {
 	protected String getParam(String text, Position curr) {
 		int begin = curr.pos;
 		int parenthesisLevel = 0;
-		while (curr.pos<text.length()) {
-			if (text.charAt(curr.pos)=='(')
-				++parenthesisLevel;
-			else if (text.charAt(curr.pos)==')') {
-				if (parenthesisLevel==0)
-					break;
-				else
-					--parenthesisLevel;
+		boolean inStringLiteral = false;
+		boolean escaped = false;
+		for (; curr.pos<text.length(); ++curr.pos) {
+			char currentChar = text.charAt(curr.pos);
+			if (!escaped && currentChar=='"') {
+				inStringLiteral = !inStringLiteral;
 			}
-			else if (parenthesisLevel==0) {
-				if (text.charAt(curr.pos)==',')
-					break;
+			else if (currentChar=='\\') {
+				escaped = !escaped;
 			}
-			++curr.pos;
+			else if (!inStringLiteral) {
+				if (currentChar=='(')
+					++parenthesisLevel;
+				else if (currentChar==')') {
+					if (parenthesisLevel==0)
+						break;
+					else
+						--parenthesisLevel;
+				}
+				else if (parenthesisLevel==0) {
+					if (currentChar==',')
+						break;
+				}
+			}
 		}
 		String token = text.substring(begin, curr.pos).trim();
 		return token;

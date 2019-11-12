@@ -302,6 +302,8 @@ public class DetailCodeTranslator extends FSMDetailCodeTranslator {
 	}
 	
 	protected boolean argsMatching(PortOperation op, ArrayList<String> args) {
+		if (args==null)
+			return false;
 		if (op.getArguments()==null && args.isEmpty())
 			return true;
 		if (op.getArguments().size()==args.size())
