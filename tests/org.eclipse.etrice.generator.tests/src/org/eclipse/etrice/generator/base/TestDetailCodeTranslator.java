@@ -490,6 +490,16 @@ public class TestDetailCodeTranslator {
 	}
 	
 	@Test
+	public void testOperation1_bug551083() {
+		DetailCode dc = FSMFactory.eINSTANCE.createDetailCode();
+		dc.getLines().add("bar1(\"(()\");");
+		
+		String result = translator.translateDetailCode(dc);
+		
+		assertEquals("bar1(\"(()\") replacement", ">bar1(\"(()\")<;", result);
+	}
+	
+	@Test
 	public void testOperation2() {
 		DetailCode dc = FSMFactory.eINSTANCE.createDetailCode();
 		dc.getLines().add("bar2(123, 456);");
