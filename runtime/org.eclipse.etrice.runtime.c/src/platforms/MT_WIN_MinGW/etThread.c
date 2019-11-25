@@ -43,6 +43,7 @@ void etThread_construct(
 	self->threadName = threadName;
 	self->threadFunction = threadFunction;
 	self->threadFunctionData = threadFunctionData;
+	self->started = ET_FALSE;
 
 	ET_MSC_LOGGER_SYNC_EXIT
 }
@@ -56,6 +57,7 @@ void etThread_start(etThread* self) {
 
 void etThread_execute(etThread* self){
 	ET_MSC_LOGGER_SYNC_ENTRY("etThread", "execute")
+	self->started = ET_TRUE;
 	/* etThread_execute redirects the call from the thread to the execute function in the eTrice runtime to enable correct synchronous MSC logging */
 	self->threadFunction(self->threadFunctionData);
 	ET_MSC_LOGGER_SYNC_EXIT

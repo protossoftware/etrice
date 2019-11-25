@@ -48,6 +48,7 @@ typedef struct etThread{
 	etPriority priority;		/**< configuration of priority -> has to be filled in by caller of etThread_construct **/
 	etThreadname threadName;	/**< configuration of threadName -> has to be filled in by caller of etThread_construct **/
 	etThreadFunction threadFunction; /**< call back function to be called by thread -> has to be filled in by caller of etThread_construct **/
+	etBool started;				/**< flag that indicates the thread was started -> don't touch this */
 	void* threadFunctionData;	/**< data for call back function to be called by thread -> has to be filled in by caller of etThread_construct **/
 } etThread;
 
