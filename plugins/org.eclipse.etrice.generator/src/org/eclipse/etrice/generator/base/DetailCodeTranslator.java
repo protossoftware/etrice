@@ -15,9 +15,11 @@
 package org.eclipse.etrice.generator.base;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.etrice.core.fsm.fSM.AbstractInterfaceItem;
@@ -255,7 +257,6 @@ public class DetailCodeTranslator extends FSMDetailCodeTranslator {
 			return text;
 		
 		ITranslationProvider prov = (ITranslationProvider) provider;
-		
 		if (prov.translateEnums()) {
 			
 			RoomCrossReferencer crossReferencer = new RoomCrossReferencer();
@@ -270,21 +271,40 @@ public class DetailCodeTranslator extends FSMDetailCodeTranslator {
 			else if (container instanceof ProtocolClass)
 				enumClasses = crossReferencer.getReferencedEnumClasses((ProtocolClass)container);
 			
-			if (enumClasses!=null) {
-				for (EnumerationType et : enumClasses) {
-					for (EnumLiteral lit : et.getLiterals()) {
-						String pattern = et.getName()+"."+lit.getName();
-						if (text.contains(pattern)) {
-							String replacement = prov.getEnumText(lit);
-							text = text.replace(pattern, replacement);
-						}
-					}
-				}
-			}
-			return text;
+			return replaceAllEnums(text, enumClasses);
 		}
 		else
 			return text;
+	}
+	
+	private String replaceAllEnums(String text, Set<EnumerationType> enumClasses) {
+		return Arrays.stream(text.split("\n")) //
+				.map(line -> replaceEnums(line, enumClasses)) //
+				.collect(Collectors.joining("\n"));
+	}
+
+	private String replaceEnums(String line, Set<EnumerationType> enumClasses) {
+		// only do replacements before // (iff)
+		int pos = line.indexOf("//");
+		String input = pos<0 ? line : line.substring(0, pos);
+		
+		ITranslationProvider prov = (ITranslationProvider) provider;
+		
+		for (EnumerationType et : enumClasses) {
+			for (EnumLiteral lit : et.getLiterals()) {
+				String pattern = et.getName()+"."+lit.getName();
+				if (input.contains(pattern)) {
+					String replacement = prov.getEnumText(lit);
+					input = input.replace(pattern, replacement);
+				}
+			}
+		}
+		
+		if (pos>=0) {
+			input += line.substring(pos);
+		}
+		
+		return input;
 	}
 
 	@Override
