@@ -131,9 +131,11 @@ void etMessageService_destroy(etMessageService* self){
 	/* unregister from runtime */
 	etRuntime_unregisterMessageService(self);
 
+	etThread_destruct( &(self->thread) );
 	etMutex_destruct( &(self->poolMutex) );
 	etMutex_destruct( &(self->queueMutex) );
 	etSema_destruct( &(self->executionSemaphore) );
+
 	ET_MSC_LOGGER_SYNC_EXIT
 }
 

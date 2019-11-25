@@ -46,6 +46,7 @@ void etThread_construct(
 	self->threadName = threadName;
 	self->threadFunction = threadFunction;
 	self->threadFunctionData = threadFunctionData;
+	self->started = ET_FALSE;
 
 	ET_MSC_LOGGER_SYNC_EXIT
 }
@@ -79,6 +80,9 @@ void etThread_start(etThread* self) {
 
 void* etThread_execute(etThread* self){
 	ET_MSC_LOGGER_SYNC_ENTRY("etThread", "execute")
+	self->started = ET_TRUE;
+	/* set cancel state, thread must not change to PTHREAD_CANCEL_DISABLE */
+	pthread_setcancelstate(PTHREAD_CANCEL_DEFERRED, NULL);
 	/* etThread_execute redirects the call from the thread to the execute function in the eTrice runtime to enable correct synchronous MSC logging */
 	self->threadFunction(self->threadFunctionData);
 	ET_MSC_LOGGER_SYNC_EXIT
@@ -87,7 +91,12 @@ void* etThread_execute(etThread* self){
 
 void etThread_destruct(etThread* self){
 	ET_MSC_LOGGER_SYNC_ENTRY("etThread", "destruct")
-	pthread_detach(self->osData);
+	if (self->started) {
+		self->started = ET_FALSE;
+		/* Note: thread must not be in state PTHREAD_CANCEL_DISABLE */
+		pthread_cancel(self->osData);
+		pthread_join(self->osData, NULL);
+	}
 	ET_MSC_LOGGER_SYNC_EXIT
 }
 
