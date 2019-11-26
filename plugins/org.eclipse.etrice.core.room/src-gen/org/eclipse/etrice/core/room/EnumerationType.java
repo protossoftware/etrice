@@ -60,10 +60,6 @@ public interface EnumerationType extends DataType
    * Returns the value of the '<em><b>Literals</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.etrice.core.room.EnumLiteral}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Literals</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Literals</em>' containment reference list.
    * @see org.eclipse.etrice.core.room.RoomPackage#getEnumerationType_Literals()

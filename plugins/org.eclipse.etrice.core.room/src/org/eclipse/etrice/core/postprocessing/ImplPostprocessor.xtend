@@ -30,7 +30,8 @@ class ImplPostprocessor {
 		// marker interface 'RoomElement'
 		val roomElementClass = EcoreFactory::eINSTANCE.createEClass => [
 			name = 'RoomElement'
-			interface = true		
+			interface = true
+			abstract = true
 		]
 		roomPackage.EClassifiers.filter(EClass).filter[!ESuperTypes.exists[EPackage == roomPackage]].forEach [
 			ESuperTypes += roomElementClass

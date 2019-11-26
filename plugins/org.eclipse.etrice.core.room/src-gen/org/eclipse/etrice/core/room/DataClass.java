@@ -191,10 +191,6 @@ public interface DataClass extends ComplexType
    * Returns the value of the '<em><b>Structors</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.etrice.core.room.ClassStructor}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Structors</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Structors</em>' containment reference list.
    * @see org.eclipse.etrice.core.room.RoomPackage#getDataClass_Structors()

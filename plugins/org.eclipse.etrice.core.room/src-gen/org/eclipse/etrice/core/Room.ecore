@@ -1042,7 +1042,7 @@
     <eLiterals name="TRANSITION" value="10" literal="Transition"/>
     <eLiterals name="ROOM_MODEL" value="11" literal="RoomModel"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="RoomElement" interface="true">
+  <eClassifiers xsi:type="ecore:EClass" name="RoomElement" abstract="true" interface="true">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="&lt;br>The marker interface for all classes belonging to the ROOM model.&#xD;&#xA;"/>
     </eAnnotations>

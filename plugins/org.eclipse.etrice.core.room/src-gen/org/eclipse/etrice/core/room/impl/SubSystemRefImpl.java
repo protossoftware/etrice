@@ -64,6 +64,7 @@ public class SubSystemRefImpl extends ActorContainerRefImpl implements SubSystem
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public SubSystemClass getType()
   {
     if (type != null && type.eIsProxy())
@@ -94,6 +95,7 @@ public class SubSystemRefImpl extends ActorContainerRefImpl implements SubSystem
    * <!-- end-user-doc -->
    * @generated
    */
+  @Override
   public void setType(SubSystemClass newType)
   {
     SubSystemClass oldType = type;

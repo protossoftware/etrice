@@ -89,7 +89,6 @@ public interface ActorContainerRef extends RoomElement
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @model kind="operation"
-   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='if (this instanceof &lt;%org.eclipse.etrice.core.room.ActorRef%&gt;)\r\n\treturn ((ActorRef)this).getType();\r\nelse if (this instanceof &lt;%org.eclipse.etrice.core.room.SubSystemRef%&gt;)\r\n\treturn ((SubSystemRef)this).getType();\r\nelse\r\n\treturn null;\r\n'"
    * @generated
    */
   StructureClass getStructureClass();

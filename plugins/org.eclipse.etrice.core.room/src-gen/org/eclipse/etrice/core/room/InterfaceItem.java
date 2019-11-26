@@ -71,7 +71,6 @@ public interface InterfaceItem extends AbstractInterfaceItem, RoomElement
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @model kind="operation"
-   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='if (this instanceof &lt;%org.eclipse.etrice.core.room.Port%&gt;)\r\n\treturn ((Port) this).getProtocol();\r\nelse if (this instanceof &lt;%org.eclipse.etrice.core.room.SAP%&gt;)\r\n\treturn ((SAP) this).getProtocol();\r\nelse if (this instanceof &lt;%org.eclipse.etrice.core.room.SPP%&gt;)\r\n\treturn ((SPP) this).getProtocol();\r\nreturn null;\r\n'"
    * @generated
    */
   GeneralProtocolClass getGeneralProtocol();
@@ -80,7 +79,6 @@ public interface InterfaceItem extends AbstractInterfaceItem, RoomElement
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @model kind="operation"
-   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='if (getGeneralProtocol() instanceof &lt;%org.eclipse.etrice.core.room.ProtocolClass%&gt;)\r\n\treturn ((ProtocolClass)getGeneralProtocol()).getSemantics();\r\nelse\r\n\treturn null;\r\n'"
    * @generated
    */
   ProtocolSemantics getSemantics();
@@ -89,7 +87,6 @@ public interface InterfaceItem extends AbstractInterfaceItem, RoomElement
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @model kind="operation"
-   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return new &lt;%org.eclipse.emf.common.util.BasicEList%&gt;&lt;EObject&gt;(new &lt;%org.eclipse.etrice.core.room.util.RoomHelpers%&gt;().getMessageListDeep(this, false));\r\n'"
    * @generated
    */
   EList<EObject> getAllIncomingAbstractMessages();
@@ -98,7 +95,6 @@ public interface InterfaceItem extends AbstractInterfaceItem, RoomElement
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @model kind="operation"
-   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return new &lt;%org.eclipse.emf.common.util.BasicEList%&gt;&lt;EObject&gt;(new &lt;%org.eclipse.etrice.core.room.util.RoomHelpers%&gt;().getMessageListDeep(this, true));\r\n'"
    * @generated
    */
   EList<EObject> getAllOutgoingAbstractMessages();
@@ -107,7 +103,6 @@ public interface InterfaceItem extends AbstractInterfaceItem, RoomElement
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @model kind="operation"
-   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='if (getGeneralProtocol() instanceof ProtocolClass)\r\n    return ((ProtocolClass) getGeneralProtocol()).getCommType() == &lt;%org.eclipse.etrice.core.room.CommunicationType%&gt;.EVENT_DRIVEN;\r\nelse\r\n    return false;\r\n'"
    * @generated
    */
   boolean isEventDriven();

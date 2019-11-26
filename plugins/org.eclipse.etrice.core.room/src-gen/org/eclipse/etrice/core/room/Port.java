@@ -138,10 +138,6 @@ public interface Port extends InterfaceItem
    * Returns the value of the '<em><b>Annotations</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.etrice.core.common.base.Annotation}.
    * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Annotations</em>' containment reference list isn't clear,
-   * there really should be more of a description here...
-   * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Annotations</em>' containment reference list.
    * @see org.eclipse.etrice.core.room.RoomPackage#getPort_Annotations()
@@ -154,7 +150,6 @@ public interface Port extends InterfaceItem
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @model kind="operation"
-   *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return multiplicity&gt;1 || multiplicity==-1;'"
    * @generated
    */
   boolean isReplicated();

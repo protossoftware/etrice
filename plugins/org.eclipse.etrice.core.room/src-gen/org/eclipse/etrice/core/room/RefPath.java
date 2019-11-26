@@ -47,7 +47,7 @@ public interface RefPath extends RoomElement
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='StringBuilder sb = new StringBuilder();\r\nfor (RefSegment ref : getRefs()) {\r\n\tsb.append(\"/\"+ref.toString());\r\n}\r\nreturn sb.toString();\r\n'"
+   * @model
    * @generated
    */
   String toString();
