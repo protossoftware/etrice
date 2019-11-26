@@ -17,6 +17,7 @@ package org.eclipse.etrice.generator.launch.doc;
 import org.eclipse.etrice.generator.base.io.ILineOutput;
 import org.eclipse.etrice.generator.doc.Main;
 import org.eclipse.etrice.generator.launch.GeneratorLaunchConfigurationDelegate;
+import org.eclipse.etrice.generator.ui.preferences.PreferenceConstants;
 
 
 public class DocGeneratorLaunchConfigurationDelegate extends GeneratorLaunchConfigurationDelegate {
@@ -36,6 +37,10 @@ public class DocGeneratorLaunchConfigurationDelegate extends GeneratorLaunchConf
 	@Override
 	protected String getConsoleName() {
 		return "eTrice Doc Generator Console";
+	}
+	
+	protected String getSrcgenDirPreferenceConstantName() {
+		return PreferenceConstants.GEN_DOC_DIR;
 	}
 
 }

@@ -33,6 +33,16 @@ public interface IGeneratorFileIO {
 	void generateFile(String filePath, CharSequence content);
 	
 	/**
+	 * @return the configured output path
+	 */
+	String getOutputPath();
+	
+	/**
+	 * logs some introduction with the output directory that was configured
+	 */
+	void logIntro();
+	
+	/**
 	 * This method saves the contents in a file in the given path.
 	 * 
 	 * @param description a description which may be logged

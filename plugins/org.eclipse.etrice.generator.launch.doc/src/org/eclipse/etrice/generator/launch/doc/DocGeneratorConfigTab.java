@@ -15,6 +15,7 @@
 package org.eclipse.etrice.generator.launch.doc;
 
 import org.eclipse.etrice.generator.launch.GeneratorConfigTab;
+import org.eclipse.etrice.generator.ui.preferences.PreferenceConstants;
 
 public class DocGeneratorConfigTab extends GeneratorConfigTab {
 
@@ -24,5 +25,9 @@ public class DocGeneratorConfigTab extends GeneratorConfigTab {
 	@Override
 	public String getName() {
 		return "Doc Generator";
+	}
+	
+	protected String getSrcgenDirPreferenceConstantName() {
+		return PreferenceConstants.GEN_DOC_DIR;
 	}
 }

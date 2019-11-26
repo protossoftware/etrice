@@ -217,7 +217,7 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 		srcgenPath.setEnabled(override);
 		if (!override) {
 			ScopedPreferenceStore prefStore = new ScopedPreferenceStore(InstanceScope.INSTANCE, "org.eclipse.etrice.generator.ui");
-			srcgenPath.setText(prefStore.getString(PreferenceConstants.GEN_DIR));
+			srcgenPath.setText(prefStore.getString(getSrcgenDirPreferenceConstantName()));
 		}
 		validate();
 		setDirty(true);
@@ -268,7 +268,7 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 			useOldStyleTransitionDataButton.setSelection(configuration.getAttribute(OLD_STYLE_TRANSITION_DATA, useOldStyleTransitionData));
 			
 			boolean override = configuration.getAttribute(OVERRIDE_DIRECTORIES, false);
-			String srcgenDir = prefStore.getString(PreferenceConstants.GEN_DIR);
+			String srcgenDir = prefStore.getString(getSrcgenDirPreferenceConstantName());
 			overrideDirectories.setSelection(override);
 			srcgenPath.setEnabled(override);
 			if (override) {
@@ -283,6 +283,10 @@ public abstract class GeneratorConfigTab extends AbstractLaunchConfigurationTab 
 		catch (CoreException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	protected String getSrcgenDirPreferenceConstantName() {
+		return PreferenceConstants.GEN_DIR;
 	}
 
 	/* (non-Javadoc)

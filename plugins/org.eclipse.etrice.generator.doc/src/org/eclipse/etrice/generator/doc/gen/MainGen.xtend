@@ -31,6 +31,7 @@ class MainGen {
 	def void doGenerate(Root root, Arguments args, IGeneratorFileIO fileIO) {
 		val includeImages = args.get(INCLUDE_IMAGES)
 		
+		fileIO.logIntro();
 		instanceDiagramGen.doGenerate(root, fileIO);
 		docGen.doGenerate(root, fileIO, includeImages);
 	}

@@ -268,6 +268,16 @@ public class GeneratorFileIO implements IGeneratorFileIO {
 			return FileVisitResult.CONTINUE;
 		}
 
+	}
+
+	@Override
+	public String getOutputPath() {
+		return outputPath.toString();
+	}
+
+	@Override
+	public void logIntro() {
+		logger.logInfo("output directory is '" + getOutputPath() + "'.");
 	};
 
 }

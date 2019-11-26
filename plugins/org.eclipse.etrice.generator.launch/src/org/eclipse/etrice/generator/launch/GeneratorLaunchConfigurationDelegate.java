@@ -220,7 +220,7 @@ public abstract class GeneratorLaunchConfigurationDelegate extends AbstractJavaL
 		ScopedPreferenceStore prefStore = new ScopedPreferenceStore(InstanceScope.INSTANCE, "org.eclipse.etrice.generator.ui");
 		
 		boolean override = configuration.getAttribute(GeneratorConfigTab.OVERRIDE_DIRECTORIES, false);
-		String srcgenDir = prefStore.getString(PreferenceConstants.GEN_DIR);
+		String srcgenDir = prefStore.getString(getSrcgenDirPreferenceConstantName());
 		if (override) {
 			srcgenDir = configuration.getAttribute(GeneratorConfigTab.SRCGEN_PATH, srcgenDir);
 		}
@@ -229,6 +229,10 @@ public abstract class GeneratorLaunchConfigurationDelegate extends AbstractJavaL
 		argString.append(" \""+projectDir+srcgenDir+"\"");
 		
 		argString.append(" -clean");
+	}
+	
+	protected String getSrcgenDirPreferenceConstantName() {
+		return PreferenceConstants.GEN_DIR;
 	}
 	
 	/**
