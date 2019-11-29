@@ -18,7 +18,8 @@ Require-Bundle: org.eclipse.etrice.core.common;visibility:=reexport,
  org.eclipse.core.filesystem,
  org.eclipse.help,
  org.eclipse.xtext.xbase.lib,
- org.eclipse.etrice.generator.base
+ org.eclipse.etrice.generator.base,
+ org.eclipse.xtext.xbase.ui
 Import-Package: org.apache.log4j,
  org.eclipse.xtext.xbase.lib
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
@@ -31,6 +32,7 @@ Export-Package: org.eclipse.etrice.core.common.ui.autoedit,
  org.eclipse.etrice.core.common.ui.editor.model,
  org.eclipse.etrice.core.common.ui.highlight,
  org.eclipse.etrice.core.common.ui.hover,
+ org.eclipse.etrice.core.common.ui.imports,
  org.eclipse.etrice.core.common.ui.internal,
  org.eclipse.etrice.core.common.ui.labeling,
  org.eclipse.etrice.core.common.ui.linking,

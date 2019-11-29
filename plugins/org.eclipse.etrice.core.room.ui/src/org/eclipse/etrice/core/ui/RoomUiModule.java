@@ -21,11 +21,13 @@ import org.eclipse.etrice.core.common.ui.editor.folding.FoldingRegionProvider;
 import org.eclipse.etrice.core.common.ui.editor.model.BaseTokenTypeToPartitionMapper;
 import org.eclipse.etrice.core.common.ui.hover.BaseHoverDocumentationProvider;
 import org.eclipse.etrice.core.common.ui.hover.IKeywordHoverContentProvider;
+import org.eclipse.etrice.core.common.ui.imports.IOrganizeImportHelper;
 import org.eclipse.etrice.core.common.ui.linking.GlobalNonPlatformURIEditorOpener;
 import org.eclipse.etrice.core.ui.highlight.RoomHighlightingConfiguration;
 import org.eclipse.etrice.core.ui.highlight.RoomSemanticHighlightingCalculator;
 import org.eclipse.etrice.core.ui.hover.RoomEObjectHover;
 import org.eclipse.etrice.core.ui.hover.RoomHoverProvider;
+import org.eclipse.etrice.core.ui.imports.RoomOrganizeImportHelper;
 import org.eclipse.etrice.core.ui.internal.RoomActivator;
 import org.eclipse.etrice.core.ui.linking.RoomHyperlinkHelper;
 import org.eclipse.etrice.core.ui.outline.RoomOutlinePage;
@@ -68,6 +70,9 @@ public class RoomUiModule extends org.eclipse.etrice.core.ui.AbstractRoomUiModul
 		binder.bind(IEObjectDocumentationProviderExtension.class).to(MultiLineCommentDocumentationProvider.class);
 	
 		binder.bind(FQNPrefixMatcher.LastSegmentFinder.class).to(FQNLastSegmentFinder.class);
+		
+		// namespace provider for OrganizeImports
+		binder.bind(IOrganizeImportHelper.class).to(RoomOrganizeImportHelper.class);
 	}
 
 	@Override
