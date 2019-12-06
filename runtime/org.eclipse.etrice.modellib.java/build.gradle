@@ -24,8 +24,8 @@ sourceSets {
 			srcDirs = [genDir]
 		}
 		resources {
-            srcDirs = [projectDir]
-            includes = ['model/*.room']
+            srcDirs = ['model']
+            excludes = ['**/diagrams/']
         }
 	}
 }

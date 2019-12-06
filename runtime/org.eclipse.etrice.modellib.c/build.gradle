@@ -47,10 +47,14 @@ task syncGenDir(type: Sync, dependsOn: generate) {
 }
 
 task zipModellib(type: Zip, dependsOn: syncGenDir) {
-    archiveName = project.name + "-${version}.zip"
-    destinationDir = buildDir
-    from projectDir
-	include 'src-gen/**', 'model/**/*.room'
+	archiveName = project.name + "-${version}.zip"
+	destinationDir = buildDir
+	from('model') {
+		exclude '**/diagrams/'
+	}
+	from(projectDir) {
+		include 'src-gen/**'
+	}
 	includeEmptyDirs false
 }
 build.dependsOn zipModellib
