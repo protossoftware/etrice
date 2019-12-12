@@ -26,6 +26,7 @@ import org.eclipse.etrice.core.naming.RoomQualifiedNameProvider;
 import org.eclipse.etrice.core.room.RoomFactory;
 import org.eclipse.etrice.core.room.util.CommonDataCalculator;
 import org.eclipse.etrice.core.scoping.RoomModelPathFileExtensionFilter;
+import org.eclipse.etrice.generator.base.AbstractGeneratorOptions;
 import org.eclipse.etrice.generator.base.DefaultTranslationProvider;
 import org.eclipse.etrice.generator.base.EMFSetup;
 import org.eclipse.etrice.generator.base.GenerationEMFDiagnostician;
@@ -35,6 +36,7 @@ import org.eclipse.etrice.generator.base.ModelLoader;
 import org.eclipse.etrice.generator.base.io.IGeneratorEMFSetup;
 import org.eclipse.etrice.generator.base.io.IGeneratorResourceLoader;
 import org.eclipse.etrice.generator.base.setup.GeneratorName;
+import org.eclipse.etrice.generator.base.setup.GeneratorOptions;
 import org.eclipse.etrice.generator.base.validation.IGeneratorResourceValidator;
 import org.eclipse.etrice.generator.contractmonitor.Main;
 import org.eclipse.etrice.generator.contractmonitor.util.ContractModelValidator;
@@ -68,7 +70,8 @@ public class GeneratorModule implements Module {
 		binder.bind(ICommonDataCalculator.class).to(CommonDataCalculator.class);	
 		binder.bind(EValidator.Registry.class).toInstance(EValidator.Registry.INSTANCE);
 		binder.bind(org.eclipse.emf.ecore.util.Diagnostician.class).to(GenerationEMFDiagnostician.class).asEagerSingleton();
-	
+		binder.bind(GeneratorOptions.class).to(AbstractGeneratorOptions.class);
+		
 		// contract monitor generator specific
 		binder.bind(IGeneratorResourceValidator.class).to(ContractModelValidator.class);
 		binder.bind(String.class).annotatedWith(GeneratorName.class).toInstance(GENERATOR_NAME);
