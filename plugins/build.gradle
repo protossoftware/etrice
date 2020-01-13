@@ -24,6 +24,12 @@ subprojects {
 	tasks.withType(JavaCompile) {
 		options.encoding = 'cp1252'
 	}
+	
+	processResources {
+		from('META-INF') {
+			into 'META-INF'
+		}
+	}
 }
 
 configure(xtextProjects) {
