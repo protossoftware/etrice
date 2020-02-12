@@ -347,8 +347,8 @@ class NodeGen {
 		#include "messaging/etMessageService.h"
 
 		/* include all referenced room classes */
-		«FOR dc : (root.getReferencedActorClasses(ssi.subSystemClass) + root.getReferencedProtocolClasses(ssi.subSystemClass)).sortBy[name]»
-			#include «dc.includePath»
+		«FOR path : (root.getReferencedActorClasses(ssi.subSystemClass) + root.getReferencedProtocolClasses(ssi.subSystemClass)).map[includePath].sort»
+			#include «path»
 		«ENDFOR»
 
 		/* instantiation of message services and message buffers */

@@ -79,8 +79,8 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		«pc.userCode(1)»
 		
 		/* include all referenced room classes */
-		«FOR dc : (root.getReferencedProtocolClasses(pc) + root.getReferencedDataClasses(pc) + root.getReferencedEnumClasses(pc)).sortBy[name]»
-			#include «dc.includePath»
+		«FOR path : (root.getReferencedProtocolClasses(pc) + root.getReferencedDataClasses(pc) + root.getReferencedEnumClasses(pc)).map[includePath].sort»
+			#include «path»
 		«ENDFOR»
 		
 		«IF pc.commType==CommunicationType::EVENT_DRIVEN»

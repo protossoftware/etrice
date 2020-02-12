@@ -94,8 +94,8 @@ class ActorClassGen extends GenericActorClassGenerator {
 		#include "messaging/etMessage.h"
 
 		/* include all referenced room classes */
-		«FOR rc : (root.getReferencedDataClasses(ac) + root.getReferencedEnumClasses(ac) + root.getReferencedProtocolClasses(ac)).sortBy[name]»
-			#include «rc.includePath»
+		«FOR path : (root.getReferencedDataClasses(ac) + root.getReferencedEnumClasses(ac) + root.getReferencedProtocolClasses(ac)).map[includePath].sort»
+			#include «path»
 		«ENDFOR»
 
 		«ac.userCode(1, true)»
@@ -349,8 +349,8 @@ class ActorClassGen extends GenericActorClassGenerator {
 		#include "etUnit/etUnit.h"
 		#include "base/etMemory.h"
 
-		«FOR pc : root.getReferencedProtocolClasses(ac)»
-			#include «pc.includePath»
+		«FOR path : root.getReferencedProtocolClasses(ac).map[includePath].sort»
+			#include «path»
 		«ENDFOR»
 
 		#include "«ac.getCUtilsFileName»"

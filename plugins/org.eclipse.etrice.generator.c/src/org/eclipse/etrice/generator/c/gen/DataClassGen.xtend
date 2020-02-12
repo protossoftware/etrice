@@ -69,8 +69,8 @@ class DataClassGen {
 
 		/* include all referenced room classes */
 «««		TODO: includes only for used DataClasses, also for other models
-		«FOR rc : (root.getReferencedDataClasses(dc) + root.getReferencedEnumClasses(dc)).sortBy[name]»
-			#include «rc.includePath»
+		«FOR path : (root.getReferencedDataClasses(dc) + root.getReferencedEnumClasses(dc)).map[includePath].sort»
+			#include «path»
 		«ENDFOR»
 		
 		«dc.userCode(1)»
