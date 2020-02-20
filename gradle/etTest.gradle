@@ -1,16 +1,62 @@
 import static org.apache.tools.ant.taskdefs.condition.Os.*
 
-apply from: "$rootDir/gradle/etGenerator.gradle"
-apply from: "$rootDir/gradle/etUnitConverter.gradle"
+apply plugin: "de.protos.etrice-base"
+apply plugin: "de.protos.etunit-convert"
+
+configurations {
+	modelpath_c
+	modelpath_cpp
+	modelpath_java
+}
 
 dependencies {
-	modelpath_c project(path: ':runtime:org.eclipse.etrice.modellib.c', configuration: 'modelpath_c')
-	modelpath_cpp project(path: ':runtime:org.eclipse.etrice.modellib.cpp', configuration: 'modelpath_cpp')
-	modelpath_java project(path: ':runtime:org.eclipse.etrice.modellib.java', configuration: 'modelpath_java')
+	generator project(':plugins:org.eclipse.etrice.generator.c')
+	generator project(':plugins:org.eclipse.etrice.generator.cpp')
+	generator project(':plugins:org.eclipse.etrice.generator.java')
+
+	modelpath_c project(path: ':runtime:org.eclipse.etrice.modellib.c', configuration: 'modelpathDir')
+	modelpath_cpp project(path: ':runtime:org.eclipse.etrice.modellib.cpp', configuration: 'modelpathDir')
+	modelpath_java project(path: ':runtime:org.eclipse.etrice.modellib.java', configuration: 'modelpathDir')
+
+	etunitConverter project(":plugins:org.eclipse.etrice.etunit.converter")
 }
 
 def outputDir = "$buildDir/log"
 def srcGenDir = "$buildDir/src-gen"
+
+/**
+ * Creates an eTrice generator task.
+ * @param name the name of the new task
+ * @param lang one of the following languages 'c', 'cpp', 'java'
+ * @param modelDirs a list of model directories passed to the generator
+ * @param genDir the generation directory
+ * @param options the eTrice generator options
+ * @return the generator task
+ */
+ext.createGenerateTask = { name, lang, modelDirs, genDir = 'src-gen', options = [] ->
+	return modelSet.create(name) {
+		module = "etrice-$lang"
+		source.srcDir modelDirs
+		source.include '**/*.room', '**/*.etmap', '**/*.etphys', '**/*.config'
+		modelpath.from configurations."modelpath_$lang"
+		genDir = project.layout.projectDirectory.file(genDir)
+		option 'msc_instr'
+		options.each { option it }
+	}.generateTask
+}
+
+/**
+ * Creates a tasks that converts etu files to xml files
+ * @param name: The name of the new task
+ * @param etuFiles: A list of etu files
+ * @param args: The options passed to the converter
+ */
+ext.createEtUnitConverterTask = { name, etuFiles, args = [] ->
+	return etunitConvert.create(name) {
+		source etuFiles
+		options.addAll(args)
+	}
+}
 
 def getMainClass(String genDir) {
 	// search for SubSystemRunner java file
@@ -29,17 +75,17 @@ def getMainClass(String genDir) {
  *
  * @param lang the eTrice generator type ('c', 'cpp', 'java')
  * @param name the name starting with a lower case letter
- * @param models models that are passed to the eTrice generator
+ * @param modelDirs the model directories
  * @param options options that are passed to the eTrice generator
  * @return the task to run the application
  */
-ext.createBuild = { lang, name, models, options = [] ->
+ext.createBuild = { lang, name, modelDirs, options = [] ->
 	
 	def nameCap = name.capitalize()
 	def genDir = "$srcGenDir/$name"
 	def workingDir = "$outputDir/$name"
 	
-	def generateTask = createGeneratorTask("generate$nameCap", lang, models, genDir, options)
+	def generateTask = createGenerateTask(name, lang, modelDirs, genDir, options)
 		
 	def runTask
 	
@@ -91,8 +137,8 @@ ext.createBuild = { lang, name, models, options = [] ->
 		}
 		
 		dependencies {
-			add "${name}Compile", project(':runtime:org.eclipse.etrice.modellib.java')
-			add "${name}Compile", project(':runtime:org.eclipse.etrice.runtime.java')
+			add "${name}Implementation", project(':runtime:org.eclipse.etrice.modellib.java')
+			add "${name}Implementation", project(':runtime:org.eclipse.etrice.runtime.java')
 		}
 		
 		tasks.getByName("compile${nameCap}Java").dependsOn generateTask
@@ -117,10 +163,9 @@ ext.createBuild = { lang, name, models, options = [] ->
  *
  * @param lang the eTrice generator type ('c', 'cpp', 'java')
  * @param name the test name starting with a lower case letter
- * @param models models that are passed to the eTrice generator
  * @param options options that are passed to the eTrice generator
  */
-ext.createTest = { lang, name, models, options = [] ->
+ext.createTest = { lang, name, options = [] ->
 
 	def nameCap = name.capitalize()
 	def langCap = lang.capitalize()
@@ -131,7 +176,7 @@ ext.createTest = { lang, name, models, options = [] ->
 	def workingDir = "$outputDir/$testName"
 	def etuFile = "$workingDir/log/${nameCap}.etu"
 		
-	def runTask = createBuild(lang, testName, models, options)
+	def runTask = createBuild(lang, testName, "model/$name", options)
 	
 	def convertTask = createEtUnitConverterTask("convert$testNameCap", [etuFile], ['-suite', suiteName])
 	convertTask.dependsOn runTask

@@ -33,7 +33,7 @@ RoomModel Bug541775_NoInitialTransition {
 		}
 		Behavior {
 			ctor '''
-				caseId = etUnit_openAll("log", "Bug541775Test", "org.eclipse.etrice.generator.common.tests.Bug541775", "Bug541775_case");
+				caseId = etUnit_openAll("log", "noInitialTransitionTest", "org.eclipse.etrice.generator.common.tests.NoInitialTransitionTest", "NoInitialTransition_case");
 			'''
 			dtor '''
 				etUnit_closeAll(caseId); 

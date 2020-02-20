@@ -1,2 +1,3 @@
-srcDir models
+srcDir model/initializationTest
+srcDir model/sendingDataTest
 project org.eclipse.etrice.modellib.cpp

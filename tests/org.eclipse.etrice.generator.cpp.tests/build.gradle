@@ -2,11 +2,5 @@ apply plugin: 'cpp'
 
 apply from: "$rootDir/gradle/etTest.gradle"
 
-dependencies {
-	modelpath_cpp files('models')
-}
-
-def genericPhysical = '../org.eclipse.etrice.generator.common.tests/models/GenericPhysical.etphys'
-
-createTest('cpp', 'sendingDataTest', ['models/SendingDataTest.room', genericPhysical])
-createTest('cpp', 'initializationTest', ['models/InitializationTest.room', genericPhysical])
+createTest('cpp', 'sendingDataTest')
+createTest('cpp', 'initializationTest')

@@ -1,2 +1,2 @@
-srcDir models
+srcDir model
 project org.eclipse.etrice.modellib.java

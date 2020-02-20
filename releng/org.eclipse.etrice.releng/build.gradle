@@ -1,3 +1,7 @@
+plugins {
+	id "org.hidetake.ssh"
+}
+
 configurations {
 	archives
 	updates

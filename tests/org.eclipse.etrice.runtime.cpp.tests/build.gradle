@@ -1,8 +1,13 @@
 import static org.apache.tools.ant.taskdefs.condition.Os.*
 
-apply plugin: 'cpp'
+plugins {
+	id "cpp"
+	id "de.protos.etunit-convert"
+}
 
-apply from: "$rootDir/gradle/etUnitConverter.gradle"
+dependencies {
+	etunitConverter project(":plugins:org.eclipse.etrice.etunit.converter")
+}
 
 model {
 	components {
@@ -37,7 +42,11 @@ task run(type: Exec, dependsOn: assemble, group: 'verification') {
 	doFirst { file("$buildDir/log").mkdirs() }
 }
 
-createEtUnitConverterTask('convert', [etuFile])
-convert.dependsOn run
+etunitConvert {
+	convert {
+		source etuFile
+		dependsOn run
+	}
+}
 
 check.dependsOn convert

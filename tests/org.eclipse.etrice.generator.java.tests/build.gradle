@@ -2,35 +2,23 @@ apply plugin: 'java-base'
 
 apply from: "$rootDir/gradle/etTest.gradle"
 
-dependencies {
-	modelpath_java files('models')
-}
-
-def genericPhysical = '../org.eclipse.etrice.generator.common.tests/models/GenericPhysical.etphys'
-
-createTest('java', 'sendingDataTest', ['models/SendingDataTest.room', genericPhysical])
-createTest('java', 'staticConfigTest', ['models/StaticConfigTest.etmap', 'models/StaticConfigTest.room', 'models/StaticConfigTest.config'])
+createTest('java', 'sendingDataTest')
+createTest('java', 'staticConfigTest')
 sourceSets.staticConfigTestJava.java.srcDir 'src/staticConfigTest'
 
-createTest('java', 'dynamicActorTest1', ['models/DynamicActorTest1.etmap', 'models/DynamicActorTest1.room'])
-createTest('java', 'dynamicActorTest2', ['models/DynamicActorTest2.etmap', 'models/DynamicActorTest2.room'])
-createTest('java', 'dynamicActorTest3', ['models/DynamicActorTest3.room', genericPhysical])
-createTest('java', 'dynamicActorTest4', ['models/DynamicActorTest4.room', genericPhysical])
-createTest('java', 'dynamicActorTest5', ['models/DynamicActorTest5.room', genericPhysical])
-createTest('java', 'dynamicActorTest6', ['models/DynamicActorTest6.room', genericPhysical])
+createTest('java', 'dynamicActorTest1')
+createTest('java', 'dynamicActorTest2')
+createTest('java', 'dynamicActorTest3')
+createTest('java', 'dynamicActorTest4')
+createTest('java', 'dynamicActorTest5')
+createTest('java', 'dynamicActorTest6')
 
-createTest('java', 'tCPTest', ['models/TCPTest.room', genericPhysical])
+createTest('java', 'tcpTest')
 
-def genOptions = ['-persistable', '-storeDataObj']
-createTest('java', 'dynamicActorTest7', ['models/DynamicActorTest7.etmap', 'models/DynamicActorTest7.room'], genOptions)
+def genOptions = ['persistable', 'storeDataObj']
+createTest('java', 'dynamicActorTest7', genOptions)
 sourceSets.dynamicActorTest7Java.java.srcDir 'src/dynamicActorTest7'
-createTest('java', 'dynamicConfigTest', ['models/DynamicConfigTest.etmap', 'models/DynamicConfigTest.room', 'models/DynamicConfigTest.config'], genOptions)
+createTest('java', 'dynamicConfigTest', genOptions)
 sourceSets.dynamicConfigTestJava.java.srcDir 'src/dynamicConfigTest'
-createTest('java', 'storeRestoreTest', ['models/StoreRestoreTest.room', genericPhysical], genOptions)
+createTest('java', 'storeRestoreTest', genOptions)
 sourceSets.storeRestoreTestJava.java.srcDir 'src/storeRestoreTest'
-
-task copyRTConfig(type: Copy) {
-	from 'models/DynamicConfigTest.rt-config'
-	into 'log/dynamicConfigTestJava'
-}
-runDynamicConfigTestJava.dependsOn copyRTConfig

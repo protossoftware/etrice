@@ -14,7 +14,7 @@ RoomModel DetailExpressionTest {
 			Attribute caseId : int32
 		}
 		Behavior {
-			ctor '''caseId = etUnit_openAll("log", "DetailExpressionCompileTest", "org.eclipse.etrice.generator.common.tests.DetailExpressionCompileTest", "DetailExpressionCompileTest_case");'''
+			ctor '''caseId = etUnit_openAll("log", "DetailExpressionTest", "org.eclipse.etrice.generator.common.tests.DetailExpressionTest", "DetailExpressionTest_case");'''
 			dtor '''etUnit_closeAll(caseId);'''
 			StateMachine {
 				Transition init: initial -> finish

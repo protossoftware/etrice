@@ -1,35 +1,32 @@
-apply plugin: 'c'
-apply from: "$rootDir/gradle/publish.gradle"
-apply from: "$rootDir/gradle/etGenerator.gradle"
-
-dependencies {
-	modelpath_c files('model')
+plugins {
+	id "c"
+	id "de.protos.etrice-c"
+	id "de.protos.source-publish"
 }
 
-def models = [
-	'model/etrice/api/interrupt.room',
-	'model/etrice/api/logger.room',
-	'model/etrice/api/tcp.room',
-	'model/etrice/api/testcontrol.room',
-	'model/etrice/api/timer.room',
-	'model/etrice/api/contracts/monitors.room'
-]
+apply from: "$rootDir/gradle/publish.gradle"
 
-def genDir = "$buildDir/src-gen"
+dependencies {
+	generator project(':plugins:org.eclipse.etrice.generator.c')
+}
 
-createGeneratorTask('generate', 'c', models, genDir, '-lib')
+modelSet {
+	room {
+		option 'msc_instr'
+	}
+}
 
 model {
 	components {
 		etrice_modellib_c(NativeLibrarySpec) {
 			sources.c {
-				builtBy generate
+				builtBy generateRoom
 				source {
-					srcDirs = [genDir]
+					srcDirs = [modelSet.room.genDir]
 					include '**/*.c'
 				}
 				exportedHeaders {
-					srcDirs = [genDir]
+					srcDirs = [modelSet.room.genDir]
 				}
 				lib project: ':runtime:org.eclipse.etrice.runtime.c', library: 'etrice_runtime_c', linkage: 'api'
 			}
@@ -42,13 +39,14 @@ model {
 }
 
 task syncGenDir(type: Sync, dependsOn: generate) {
-	from genDir
+	from modelSet.room.genDir
 	into 'src-gen'
 }
 
 task zipModellib(type: Zip, dependsOn: syncGenDir) {
-	archiveName = project.name + "-${version}.zip"
-	destinationDir = buildDir
+	archiveBaseName = project.name
+	archiveVersion = project.version
+	destinationDirectory = layout.buildDirectory
 	from('model') {
 		exclude '**/diagrams/'
 	}
@@ -59,9 +57,16 @@ task zipModellib(type: Zip, dependsOn: syncGenDir) {
 }
 build.dependsOn zipModellib
 
+zipSource {
+	from(modelSet.room.genDir) {
+		into 'src'
+	}
+}
+
 publishing {
     publications {
         etrice(MavenPublication) {
+        	from components.adhoc
             artifact zipModellib
         }
     }

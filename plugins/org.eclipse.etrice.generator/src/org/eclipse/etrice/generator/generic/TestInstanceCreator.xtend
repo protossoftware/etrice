@@ -156,10 +156,10 @@ class TestInstanceCreator {
 				name = "DefaultPhysicalThread"
 				^default = true
 				execmode = ExecMode.MIXED
-				time = 100
+				time = 100 * 1000 * 1000 // nanoseconds
 				prio = 5
 				stacksize = 1024
-				msgblocksize = 64
+				msgblocksize = 128
 				msgpoolsize = 100
 			]
 		]

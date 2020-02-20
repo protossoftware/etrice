@@ -1,3 +1,7 @@
+plugins {
+	id "org.xtext.xtend" apply false
+}
+
 def xtextProjects = [
 	'org.eclipse.etrice.core.common',
 	'org.eclipse.etrice.core.config',

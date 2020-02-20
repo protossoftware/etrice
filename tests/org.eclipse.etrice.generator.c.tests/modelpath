@@ -1,2 +1,3 @@
-srcDir models
+srcDir model/sendingDataTest
+srcDir model/staticConfigTest
 project org.eclipse.etrice.modellib.c

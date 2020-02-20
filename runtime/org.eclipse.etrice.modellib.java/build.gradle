@@ -1,27 +1,25 @@
-apply plugin: 'java'
-
-apply from: "$rootDir/gradle/publish.gradle"
-apply from: "$rootDir/gradle/etGenerator.gradle"
-
-dependencies {
-	modelpath_java files('model')
-	
-	compile project(':runtime:org.eclipse.etrice.runtime.java')
+plugins {
+	id "java-library"
+	id "de.protos.etrice-java"
 }
 
-def models = [
-	'model/etrice/api/logger.room',
-	'model/etrice/api/tcp.room',
-	'model/etrice/api/timer.room',
-	'model/etrice/api/contracts/monitors.room'
-]
+apply from: "$rootDir/gradle/publish.gradle"
 
-def genDir = "$buildDir/src-gen"
+dependencies {
+	generator project(':plugins:org.eclipse.etrice.generator.java')
+	api project(':runtime:org.eclipse.etrice.runtime.java')
+}
+
+modelSet {
+	room {
+		option 'msc_instr'
+	}
+}
 
 sourceSets {
 	main {
 		java {
-			srcDirs = [genDir]
+			srcDirs = [modelSet.room.genDir]
 		}
 		resources {
             srcDirs = ['model']
@@ -30,5 +28,6 @@ sourceSets {
 	}
 }
 
-createGeneratorTask('generate', 'java', models, genDir, '-lib')
 compileJava.dependsOn generate
+
+components.java.addVariantsFromConfiguration(configurations.modelpathZip) {}

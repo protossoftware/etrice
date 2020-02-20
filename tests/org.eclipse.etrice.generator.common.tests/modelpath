@@ -1,3 +1,17 @@
-srcDir models
+srcDir model/actorCommunicationTest
+srcDir model/choicePointTest
+srcDir model/compileTest
+srcDir model/contractMonitorTest
+srcDir model/dataDrivenTest
+srcDir model/detailExpressionTest
+srcDir model/enumTest
+srcDir model/handlerTest
+srcDir model/noInitialTransitionTest
+srcDir model/operationInheritanceTest
+srcDir model/pingPongThreadReplPortTest
+srcDir model/pingPongThreadTest
+srcDir model/subSystemUserCodeTest
+srcDir model/varargsTest
 srcDir model-gen
+
 project org.eclipse.etrice.modellib.c

@@ -1,7 +1,7 @@
 plugins {
-	id 'org.xtext.xtend' version '2.0.7' apply false
-	id 'com.github.dkorotych.gradle-maven-exec' version '2.2.1'
-	id 'org.hidetake.ssh' version '2.10.1'
+	id "pl.allegro.tech.build.axion-release"
+	id "de.protos.etrice-base" apply false
+	id "de.protos.etunit-convert" apply false
 }
 
 apply from: "$rootDir/gradle/scmVersion.gradle"
@@ -32,8 +32,10 @@ allprojects {
 	version = scmVersion.version
 	
 	repositories {
-		maven {
-			url 'https://repo.eclipse.org/content/repositories/maven_central/'
-		}
+		jcenter()
+		// handshake failure??
+		// maven {
+		// 	url 'https://repo.eclipse.org/content/repositories/maven_central/'
+		// }
 	}
 }

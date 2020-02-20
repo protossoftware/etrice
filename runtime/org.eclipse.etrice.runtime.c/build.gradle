@@ -1,6 +1,11 @@
 import static org.apache.tools.ant.taskdefs.condition.Os.*
 
-apply plugin: 'c'
+plugins {
+	id "c"
+	id "de.protos.source-publish"
+}
+
+apply from: "$rootDir/gradle/publish.gradle"
 
 def platform = ''
 if(isFamily(FAMILY_WINDOWS)) { platform = 'MT_WIN_MinGW' }
@@ -24,4 +29,23 @@ model {
 			}
 		}
 	}
+}
+
+zipSource {
+	def srcDirs = 
+	from(['src/common', 'src/config', 'src/util']) {
+		into 'src'
+	}
+	from('src/platforms') {
+		into 'platform'
+	}
+}
+
+publishing {
+    publications {
+        etrice(MavenPublication) {
+            from components.adhoc
+        }
+    }
+	repositories publishRepos
 }

@@ -4,66 +4,57 @@ apply plugin: 'java-base'
 
 apply from: "$rootDir/gradle/etTest.gradle"
 
-dependencies {
-	modelpath_c files('models')
-	modelpath_cpp files('models')
-	modelpath_java files('models')
-	modelpath_c files('model-gen')
-	modelpath_cpp files('model-gen')
-	modelpath_java files('model-gen')
-}
-
-def genericPhysical = 'models/GenericPhysical.etphys'
-
 def tests = [
-	actorCommunicationTest: 	['models/ActorCommunicationTest.room', genericPhysical],
-	choicePointTest: 			['models/ChoicePointTest.room', genericPhysical],
-	choicePointTestExtended: 	['models/ChoicePointTestExtended.room', genericPhysical],
-	dataDrivenTest:				['models/DataDrivenTest.room', genericPhysical],
-	/* enumTest:				['models/EnumTest.room', genericPhysical],		not supported in c++	*/
-	compileTest:				['models/CompileTest.room', genericPhysical, 'models/StatemachineInterfaceTest.room', 'models/StatemachineInterfaceInheritedTest.room', 'models/StatemachineInterfaceTest.room', 'models/ContinuationTransitionTest.room'],
-	
-	handlerTest:				['models/HandlerTest.room', genericPhysical],
-	operationInheritanceTest:	['models/OperationInheritanceTest.room', genericPhysical],
-	pingPongThreadTest:			['models/PingPongThreadTest.etmap', 'models/PingPongThreadTest.room'],
-	pingPongThreadReplPortTest:	['models/PingPongThreadReplPortTest.etmap', 'models/PingPongThreadReplPortTest.room'],
-	bug541775Test:				['models/Bug541775_NoInitialTransition.room', genericPhysical],
+	'actorCommunicationTest',
+	'choicePointTest',
+	'choicePointTestExtended',
+	'dataDrivenTest',
+	/* 'enumTest',		not supported in c++	*/
+	'compileTest',
+	'handlerTest',
+	'operationInheritanceTest',
+	'pingPongThreadTest',
+	'pingPongThreadReplPortTest',
+	'noInitialTransitionTest',
 ]
 
-tests.each { name, models ->
-	createTest('c', name, models)
-	createTest('cpp', name, models)
-	createTest('java', name, models)
+tests.each { name ->
+	createTest('c', name)
+	createTest('cpp', name)
+	createTest('java', name)
 }
 
 // Enum Test
-createTest('c', 'enumTest', ['models/EnumTest.room', genericPhysical])
-createTest('java', 'enumTest', ['models/EnumTest.room', genericPhysical])
+createTest('c', 'enumTest')
+createTest('java', 'enumTest')
 
 // DetailExpressionCompile Test
-createTest('c', 'detailExpressionCompileTest', [genericPhysical, 'models/DetailExpressionTest.room', 'models/DetailExpressionEnum.room', 'models/DetailExpressionTypes.room'])
-createTest('java', 'detailExpressionCompileTest', [genericPhysical, 'models/DetailExpressionTest.room', 'models/DetailExpressionEnum.room', 'models/DetailExpressionTypes.room'])
+createTest('c', 'detailExpressionTest')
+createTest('java', 'detailExpressionTest')
 
 // VarargsTest
-createTest('c', 'varargsTest', [genericPhysical, 'models/VarargsTest.room'])
-createTest('java', 'varargsTest', [genericPhysical, 'models/VarargsTest.room'])
+createTest('c', 'varargsTest')
+createTest('java', 'varargsTest')
 
 // SubSystemUserCodeTest
-createTest('c', 'subSystemUserCodeTest', ['models/SubSystemUserCodeTest.room', genericPhysical])
+createTest('c', 'subSystemUserCodeTest')
 
 // Contract Monitor Generation
-createTest('c', 'contractMonitorTest', ['models/ContractMonitorTest.room', 'models/ContractMonitor.room', 'model-gen/ContractMonitor_monitors.room', genericPhysical])
-createTest('java', 'contractMonitorTest', ['models/ContractMonitorTest.room', 'models/ContractMonitor.room', 'model-gen/ContractMonitor_monitors.room', genericPhysical])
+createTest('c', 'contractMonitorTest')
+createTest('java', 'contractMonitorTest')
 
-[generateContractMonitorTestC, generateContractMonitorTestJava].forEach{ genTask -> 
-	def monitorGen = genTask.name + 'Monitor'
-	tasks.register(monitorGen, JavaExec) {
-		main = 'org.eclipse.etrice.generator.contractmonitor.Main'
-		classpath = genTask.classpath
-		args '-modelpath', genTask.modelpath.asPath
-		args '-genDir', file('model-gen')
-		args file('models/ContractMonitor.room')
-	}
-	genTask.dependsOn monitorGen
+dependencies {
+	generator project(':plugins:org.eclipse.etrice.generator.contractmonitor')
 }
 
+modelSet {
+	contractMonitor {
+		module = 'etrice-contractmonitor'
+		source.srcDirs = ['model/contractMonitorTest']
+		source.include '**/*.room'
+		modelpath.from configurations.modelpath_c
+		genDir = layout.projectDirectory.dir('model-gen')
+	}
+	contractMonitorTestC.source.srcDir(contractMonitor.genDir)
+	contractMonitorTestJava.source.srcDir(contractMonitor.genDir)
+}

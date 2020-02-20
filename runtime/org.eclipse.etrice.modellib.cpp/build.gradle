@@ -1,30 +1,32 @@
-apply plugin: 'cpp'
-
-apply from: "$rootDir/gradle/etGenerator.gradle"
-
-dependencies {
-	modelpath_cpp files('model')
+plugins {
+	id "cpp"
+	id "de.protos.etrice-base"
 }
 
-def models = [
-	'model/etrice/api/timer.room'
-]
+dependencies {
+	generator project(':plugins:org.eclipse.etrice.generator.cpp')
+}
 
-def genDir = "$buildDir/src-gen"
-
-createGeneratorTask('generate', 'cpp', models, genDir, '-lib')
+modelSet {
+	room {
+		module = 'etrice-cpp'
+		source.srcDirs = ["model"]
+		source.exclude '**/diagrams'
+		option 'msc_instr'
+	}
+}
 
 model {
 	components {
 		etrice_modellib_cpp(NativeLibrarySpec) {
 			sources.cpp {
-				builtBy generate
+				builtBy generateRoom
 				source {
-					srcDirs = [genDir]
+					srcDirs = [modelSet.room.genDir]
 					include '**/*.cpp'
 				}
 				exportedHeaders {
-					srcDirs = [genDir]
+					srcDirs = [modelSet.room.genDir]
 				}
 				lib project: ':runtime:org.eclipse.etrice.runtime.cpp', library: 'etrice_runtime_cpp', linkage: 'api'
 				lib project: ':runtime:org.eclipse.etrice.runtime.c', library: 'etrice_runtime_c', linkage: 'api'

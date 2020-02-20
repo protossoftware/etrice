@@ -1,3 +1,21 @@
+pluginManagement {
+	repositories {
+		// mavenLocal()
+		gradlePluginPortal()
+	}
+	plugins {
+		id "org.xtext.xtend" version "2.0.8"
+		id "pl.allegro.tech.build.axion-release" version "1.11.0"
+		id "com.github.dkorotych.gradle-maven-exec" version "2.2.1"
+		id "org.hidetake.ssh" version "2.10.1"
+		id "de.protos.etrice-base" version "2.0.0"
+		id "de.protos.etrice-c" version "2.0.0"
+		id "de.protos.etrice-java" version "2.0.0"
+		id "de.protos.source-publish" version "2.0.0"
+		id "de.protos.etunit-convert" version "2.0.0"
+	}
+}
+
 include	'plugins:org.eclipse.etrice.core.common',
 	'plugins:org.eclipse.etrice.core.fsm',
 	'plugins:org.eclipse.etrice.core.room',

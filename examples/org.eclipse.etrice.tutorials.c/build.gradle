@@ -1,9 +1,5 @@
 apply plugin: 'c'
 apply from: "$rootDir/gradle/etTest.gradle"
 
-dependencies {
-	modelpath_c files('model/HelloWorld', 'model/PingPong')
-}
-
-createBuild('c', 'helloWorld', ['model/HelloWorld/Mapping.etmap', 'model/HelloWorld/HelloWorld.room'])
-createBuild('c', 'pingPong', ['model/PingPong/Mapping.etmap', 'model/PingPong/PingPong.room'])
+createBuild('c', 'helloWorld', 'model/HelloWorld')
+createBuild('c', 'pingPong', 'model/PingPong')
