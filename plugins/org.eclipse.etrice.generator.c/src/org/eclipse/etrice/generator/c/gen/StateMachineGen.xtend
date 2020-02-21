@@ -17,7 +17,6 @@ package org.eclipse.etrice.generator.c.gen
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import org.eclipse.etrice.core.genmodel.etricegen.ExpandedActorClass
-import org.eclipse.etrice.generator.c.Main
 import org.eclipse.etrice.generator.generic.GenericStateMachineGenerator
 import org.eclipse.etrice.generator.generic.RoomExtensions
 
@@ -74,17 +73,16 @@ class StateMachineGen extends GenericStateMachineGenerator {
 		val allStates = gc.graph.allStateNodes.map[stateGraphNode].filter(typeof(State)).toList
 		val states = allStates.getLeafStatesLast
 		'''
-			«IF Main::settings.generateMSCInstrumentation»
-				/* state names */
+			/* state names */
+			#ifdef ET_MSC_LOGGER_ACTIVATE
 				static const char* stateStrings[] = {"<no state>","<top>",«FOR state : states SEPARATOR ","»"«state.genStatePathName»"
 				«ENDFOR»};
-			«ENDIF»
+			#endif
 
 			«langExt.accessLevelPrivate»void setState(«mc.componentName»* self, «stateType» new_state) {
 				self->state = new_state;
-				«IF Main::settings.generateMSCInstrumentation»
-					ET_MSC_LOGGER_CHANGE_STATE(self->constData->instName, stateStrings[new_state]);
-				«ENDIF»
+				
+				ET_MSC_LOGGER_CHANGE_STATE(self->constData->instName, stateStrings[new_state]);
 			}
 
 			«langExt.accessLevelPrivate»«stateType» getState(«mc.componentName»* self) {

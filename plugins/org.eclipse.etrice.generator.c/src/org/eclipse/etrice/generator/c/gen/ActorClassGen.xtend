@@ -23,9 +23,7 @@ import org.eclipse.etrice.core.genmodel.etricegen.Root
 import org.eclipse.etrice.core.genmodel.fsm.FsmGenExtensions
 import org.eclipse.etrice.core.room.CommunicationType
 import org.eclipse.etrice.core.room.Operation
-import org.eclipse.etrice.core.room.ProtocolClass
 import org.eclipse.etrice.core.room.RoomModel
-import org.eclipse.etrice.generator.c.Main
 import org.eclipse.etrice.generator.generic.GenericActorClassGenerator
 import org.eclipse.etrice.generator.generic.ILanguageExtension
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
@@ -70,15 +68,13 @@ class ActorClassGen extends GenericActorClassGenerator {
 
 	def protected generateHeaderFile(Root root, ExpandedActorClass xpac) {
 		val ac = xpac.actorClass
-		val eventPorts = ac.allEndPorts.filter(p|(p.protocol as ProtocolClass).commType==CommunicationType::EVENT_DRIVEN)
-		val sendPorts = ac.allEndPorts.filter(p|(p.protocol as ProtocolClass).commType==CommunicationType::DATA_DRIVEN && p.conjugated)
-		val recvPorts = ac.allEndPorts.filter(p|(p.protocol as ProtocolClass).commType==CommunicationType::DATA_DRIVEN && !p.conjugated)
+		val eventPorts = ac.allEndPorts.filter[protocol.commType==CommunicationType::EVENT_DRIVEN]
+		val sendPorts = ac.allEndPorts.filter[protocol.commType==CommunicationType::DATA_DRIVEN && conjugated]
+		val recvPorts = ac.allEndPorts.filter[protocol.commType==CommunicationType::DATA_DRIVEN && !conjugated]
 		val dataDriven = ac.commType==ComponentCommunicationType::DATA_DRIVEN
 		val async = ac.commType==ComponentCommunicationType::ASYNCHRONOUS
 		val hasConstData = !(eventPorts.empty && recvPorts.empty && ac.allSAPs.empty && ac.allServiceImplementations.empty)
-							|| Main::settings.generateMSCInstrumentation
 		val isEmptyStateGraph = FsmGenExtensions.isEmpty(xpac.graphContainer.graph)
-		val hasVarData = !(sendPorts.empty && ac.allAttributes.empty && isEmptyStateGraph && !hasConstData)
 
 	'''
 		/**
@@ -90,8 +86,7 @@ class ActorClassGen extends GenericActorClassGenerator {
 
 		«generateIncludeGuardBegin(ac)»
 
-		#include "etDatatypes.h"
-		#include "messaging/etMessage.h"
+		#include "modelbase/etActor.h"
 
 		/* include all referenced room classes */
 		«FOR path : (root.getReferencedDataClasses(ac) + root.getReferencedEnumClasses(ac) + root.getReferencedProtocolClasses(ac)).map[includePath].sort»
@@ -103,46 +98,47 @@ class ActorClassGen extends GenericActorClassGenerator {
 		typedef struct «ac.name» «ac.name»;
 
 		/* const part of ActorClass (ROM) */
-		«IF hasConstData»
-			typedef struct «ac.name»_const {
-				«IF Main::settings.generateMSCInstrumentation»
-					const char* instName;
-
+		typedef struct «ac.name»_const {
+			#ifdef ET_MSC_LOGGER_ACTIVATE
+				const char* instName;
+			«IF !hasConstData»
+				#else
+					/* This actor class has no const data. To keep this case simple we introduce this dummy variable. */
+					int dummy;
+			«ENDIF»
+			#endif
+			
+			/* simple ports */
+			«FOR ep : eventPorts»
+				«IF ep.multiplicity==1»
+					const «ep.getPortClassName()» «ep.name»;
 				«ENDIF»
-				/* simple ports */
-				«FOR ep : eventPorts»
-					«IF ep.multiplicity==1»
-						const «ep.getPortClassName()» «ep.name»;
-					«ENDIF»
-				«ENDFOR»
+			«ENDFOR»
 
-				/* data receive ports */
-				«FOR ep : recvPorts»
-					«IF ep.multiplicity==1»
-						const «ep.getPortClassName()» «ep.name»;
-					«ENDIF»
-				«ENDFOR»
+			/* data receive ports */
+			«FOR ep : recvPorts»
+				«IF ep.multiplicity==1»
+					const «ep.getPortClassName()» «ep.name»;
+				«ENDIF»
+			«ENDFOR»
 
-				/* saps */
-				«FOR sap: ac.allSAPs»
-					const «sap.getPortClassName()» «sap.name»;
-				«ENDFOR»
+			/* saps */
+			«FOR sap: ac.allSAPs»
+				const «sap.getPortClassName()» «sap.name»;
+			«ENDFOR»
 
-				/* replicated ports */
-				«FOR ep : ac.allEndPorts»
-					«IF ep.multiplicity!=1»
-						const etReplPort «ep.name»;
-					«ENDIF»
-				«ENDFOR»
+			/* replicated ports */
+			«FOR ep : ac.allEndPorts»
+				«IF ep.multiplicity!=1»
+					const etReplPort «ep.name»;
+				«ENDIF»
+			«ENDFOR»
 
-				/* services */
-				«FOR svc : ac.allServiceImplementations»
-					const etReplPort «svc.spp.name»;
-				«ENDFOR»
-			} «ac.name»_const;
-		«ELSE»
-			/* this actor class has no ports and thus no constant data */
-		«ENDIF»
+			/* services */
+			«FOR svc : ac.allServiceImplementations»
+				const etReplPort «svc.spp.name»;
+			«ENDFOR»
+		} «ac.name»_const;
 
 		«IF !isEmptyStateGraph»
 
@@ -150,35 +146,23 @@ class ActorClassGen extends GenericActorClassGenerator {
 		«ENDIF»
 
 		/* variable part of ActorClass (RAM) */
-		«IF hasVarData»
-			struct «ac.name» {
-				«IF hasConstData»
-					const «ac.name»_const* ET_CONST_MEMBER constData;
+		struct «ac.name» {
+			const «ac.name»_const* ET_CONST_MEMBER constData;
 
+			/* data send ports */
+			«FOR ep : sendPorts»
+				«IF ep.multiplicity==1»
+					«ep.getPortClassName()» «ep.name»;
 				«ENDIF»
-				/* data send ports */
-				«FOR ep : sendPorts»
-					«IF ep.multiplicity==1»
-						«ep.getPortClassName()» «ep.name»;
-					«ENDIF»
-				«ENDFOR»
+			«ENDFOR»
 
-				«ac.allAttributes.attributes»
+			«ac.allAttributes.attributes»
 
-				«IF !isEmptyStateGraph»
+			«IF !isEmptyStateGraph»
 
-					«xpac.genDataMembers»
-				«ENDIF»
-			};
-		«ELSE»
-			struct «ac.name» {
-				/* This actor class has no data at all.
-				   But the private actor instance data is passed to all life cycle functions.
-				   By introducing the dummy data we keep this case simple
-				*/
-				int dummy;
-			};
-		«ENDIF»
+				«xpac.genDataMembers»
+			«ENDIF»
+		};
 
 		void «ac.name»_init(«ac.name»* self);
 
@@ -201,10 +185,10 @@ class ActorClassGen extends GenericActorClassGenerator {
 
 	def protected generateUtilsFile(Root root, ExpandedActorClass xpac) {
 		val ac = xpac.actorClass
-		val eventPorts = ac.allEndPorts.filter(p|(p.protocol as ProtocolClass).commType==CommunicationType::EVENT_DRIVEN)
+		val eventPorts = ac.allEndPorts.filter[protocol.commType==CommunicationType::EVENT_DRIVEN]
 		val replEventPorts = eventPorts.filter[multiplicity!=1]
-		val sendPorts = ac.allEndPorts.filter(p|(p.protocol as ProtocolClass).commType==CommunicationType::DATA_DRIVEN &&  p.conjugated && p.multiplicity==1)
-		val recvPorts = ac.allEndPorts.filter(p|(p.protocol as ProtocolClass).commType==CommunicationType::DATA_DRIVEN && !p.conjugated && p.multiplicity==1)
+		val sendPorts = ac.allEndPorts.filter[protocol.commType==CommunicationType::DATA_DRIVEN &&  conjugated && multiplicity==1]
+		val recvPorts = ac.allEndPorts.filter[protocol.commType==CommunicationType::DATA_DRIVEN && !conjugated && multiplicity==1]
 		val portsWithOperations = ac.allInterfaceItems.filter(p|p.portClass!==null && p.portClass.operations.size>0)
 		val filename = (ac.eContainer as RoomModel).name.replaceAll("\\.","_")+"_"+ac.name+"_Utils"
 
@@ -343,7 +327,6 @@ class ActorClassGen extends GenericActorClassGenerator {
 
 		#include "«ac.getCHeaderFileName»"
 
-		#include "modelbase/etActor.h"
 		#include "debugging/etLogger.h"
 		#include "debugging/etMSCLogger.h"
 		#include "etUnit/etUnit.h"

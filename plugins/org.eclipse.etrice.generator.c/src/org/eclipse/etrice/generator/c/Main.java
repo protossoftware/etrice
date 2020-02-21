@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.etrice.core.etmap.util.ETMapUtil;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.generator.base.AbstractGenerator;
+import org.eclipse.etrice.generator.base.AbstractGeneratorOptions;
 import org.eclipse.etrice.generator.base.IDataConfiguration;
 import org.eclipse.etrice.generator.base.args.Arguments;
 import org.eclipse.etrice.generator.base.io.IGeneratorFileIO;
@@ -99,6 +100,9 @@ public class Main extends AbstractGenerator {
 
 	@Override
 	protected int runGenerator(List<Resource> resources, Arguments arguments, IGeneratorFileIO fileIO, ILogger logger) {
+		if(arguments.get(AbstractGeneratorOptions.MSC_INSTR)) {
+			logger.logWarning("The msc instrumentation option is deprecated for the c generator and is replaced by preprocessor macros");
+		}
 		
 		if (!dataConfig.setResources(getResourceSet(), logger)) {
 			logger.logError("configuration errors");

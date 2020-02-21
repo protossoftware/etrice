@@ -51,7 +51,7 @@ public class AbstractGeneratorOptions extends GeneratorOptions {
 			GROUP_ETRICE,
 			"msc_instr",
 			"generateMSCInstrumentation",
-			"generate instrumentation for MSC generation",
+			"generate instrumentation for MSC generation (Java and C++ generator only)",
 			false);
 	
 	public static final BooleanOption VERBOSE_RT = new BooleanOption(

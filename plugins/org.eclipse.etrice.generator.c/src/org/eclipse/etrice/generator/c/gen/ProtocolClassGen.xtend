@@ -24,7 +24,6 @@ import org.eclipse.etrice.core.room.ProtocolClass
 import org.eclipse.etrice.core.room.RoomModel
 import org.eclipse.etrice.generator.base.io.IGeneratorFileIO
 import org.eclipse.etrice.generator.base.logging.ILogger
-import org.eclipse.etrice.generator.c.Main
 import org.eclipse.etrice.generator.generic.GenericProtocolClassGenerator
 import org.eclipse.etrice.generator.generic.ProcedureHelpers
 import org.eclipse.etrice.generator.generic.RoomExtensions
@@ -98,12 +97,12 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 			#error "synchronoue protocols not implemented yet"
 		«ENDIF»
 
-		«IF Main::settings.generateMSCInstrumentation»
-			/*--------------------- debug helpers */
-			
-			/* get message string for message id */
+		/*--------------------- debug helpers */
+		
+		/* get message string for message id */
+		#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE
 			const char* «pc.name»_getMessageString(int msg_id);
-		«ENDIF»
+		#endif
 
 		«pc.userCode(2)»
 		
@@ -202,10 +201,10 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 			«portClassSource(pc, false)»
 			«portClassSource(pc, true)»
 			
-			«IF Main::settings.generateMSCInstrumentation»
-				/*--------------------- debug helpers */
+			/*--------------------- debug helpers */
+			#ifdef ET_ASYNC_MSC_LOGGER_ACTIVATE
 				«generateDebugHelpersImplementation(root, pc)»
-			«ENDIF»
+			#endif
 		«ELSEIF pc.commType==CommunicationType::DATA_DRIVEN»
 			«pc.genDataDrivenPortSources»
 		«ELSEIF pc.commType==CommunicationType::SYNCHRONOUS»
@@ -268,7 +267,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		var sentMsgs = pc.allIncomingMessages.filter(m|m.data!==null)
 		val enumMsgs = sentMsgs.filter(m|m.data.refType.type.isEnumeration)
 		val boolMsgs = sentMsgs.filter(m|m.data.refType.type.isBoolean)
-		val usesMSC = Main::settings.generateMSCInstrumentation && !(enumMsgs.empty && boolMsgs.empty)
+		val usesMSC = !(enumMsgs.empty && boolMsgs.empty)
 		/*
 		 * MSC code is generated for all enumerations and booleans of the messages of this protocol
 		 */
@@ -326,7 +325,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 		var messages = pc.allIncomingMessages.filter(m|m.data!==null)
 		val enumMsgs = messages.filter(m|m.data.refType.type.isEnumeration)
 		val boolMsgs = messages.filter(m|m.data.refType.type.isBoolean)
-		val usesMSC = Main::settings.generateMSCInstrumentation && !(enumMsgs.empty && boolMsgs.empty)
+		val usesMSC = !(enumMsgs.empty && boolMsgs.empty)
 		/*
 		 * MSC code is generated for all enumerations and all booleans of the messages of this protocol
 		 */
@@ -392,9 +391,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 					«ELSE»
 						ET_MSC_LOGGER_SYNC_ENTRY("«portClassName»", "«message.name»")
 							«sendMessageCall(hasData, "self", memberInUse(pc.name, dir+message.name), typeName+refp, refa+"data__et")»
-							«IF Main::settings.generateMSCInstrumentation»
-								ET_MSC_LOGGER_ASYNC_OUT(self->myInstName, "«message.name»", self->peerInstName)
-							«ENDIF»
+							ET_MSC_LOGGER_ASYNC_OUT(self->myInstName, "«message.name»", self->peerInstName)
 						ET_MSC_LOGGER_SYNC_EXIT
 					«ENDIF»
 				}
@@ -410,9 +407,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 						ET_MSC_LOGGER_SYNC_ENTRY("«replPortClassName»", "«message.name»")
 						for (i=0; i<((etReplPort*)self)->size; ++i) {
 							«sendMessageCall(hasData, "(&((etReplPort*)self)->ports[i].port)", memberInUse(pc.name, dir+message.name), typeName+refp, refa+"data__et")»
-							«IF Main::settings.generateMSCInstrumentation»
-								ET_MSC_LOGGER_ASYNC_OUT(((etReplPort*)self)->ports[i].port.myInstName, "«message.name»", ((etReplPort*)self)->ports[i].port.peerInstName)
-							«ENDIF»
+							ET_MSC_LOGGER_ASYNC_OUT(((etReplPort*)self)->ports[i].port.myInstName, "«message.name»", ((etReplPort*)self)->ports[i].port.peerInstName)
 						}
 						ET_MSC_LOGGER_SYNC_EXIT
 					«ENDIF»
@@ -425,9 +420,7 @@ class ProtocolClassGen extends GenericProtocolClassGenerator {
 						ET_MSC_LOGGER_SYNC_ENTRY("«replPortClassName»", "«message.name»")
 						if (0<=idx__et && idx__et<((etReplPort*)self)->size) {
 							«sendMessageCall(hasData, "(&((etReplPort*)self)->ports[idx__et].port)", memberInUse(pc.name, dir+message.name), typeName+refp, refa+"data__et")»
-							«IF Main::settings.generateMSCInstrumentation»
-								ET_MSC_LOGGER_ASYNC_OUT(((etReplPort*)self)->ports[idx__et].port.myInstName, "«message.name»", ((etReplPort*)self)->ports[idx__et].port.peerInstName)
-							«ENDIF»
+							ET_MSC_LOGGER_ASYNC_OUT(((etReplPort*)self)->ports[idx__et].port.myInstName, "«message.name»", ((etReplPort*)self)->ports[idx__et].port.peerInstName)
 						}
 						ET_MSC_LOGGER_SYNC_EXIT
 					«ENDIF»
