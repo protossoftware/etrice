@@ -16,6 +16,9 @@ import org.eclipse.etrice.generator.base.logging.ILogger
 import org.eclipse.etrice.core.genmodel.fsm.IDiagnostician
 import org.eclipse.etrice.core.room.SubSystemClass
 import org.eclipse.etrice.core.room.ActorClass
+import org.eclipse.etrice.core.etphys.eTPhys.ETPhysFactory
+import org.eclipse.etrice.core.etphys.eTPhys.ThreadModel
+import org.eclipse.etrice.core.etphys.eTPhys.ExecMode
 
 @FinalFieldsConstructor
 class TestInstanceCreator {
@@ -24,6 +27,7 @@ class TestInstanceCreator {
 
 	val extension RoomFactory = RoomFactory.eINSTANCE
 	val extension ETMapFactory = ETMapFactory.eINSTANCE
+	val extension ETPhysFactory = ETPhysFactory.eINSTANCE
 
 	// ctor
 	val ILogger logger
@@ -91,7 +95,10 @@ class TestInstanceCreator {
 
 		// get physical system
 		val List<PhysicalSystem> allPhysSystems = physModels.fold(newArrayList,[list, model|list += model.systems return list])
-		if (allPhysSystems.size != 1) {
+		if(allPhysSystems.size == 0) {	// add a default physical system if none is present
+			allPhysSystems.add(createDefaultPhysicalSystem)
+		}
+		else if (allPhysSystems.size > 1) {
 			logger.logError('''TestInstanceCreator: mapping failed, found «allPhysSystems.size» physical systems''')
 			return null
 		}
@@ -134,5 +141,34 @@ class TestInstanceCreator {
 
 	def protected hasTestAnnotation(StructureClass cls) {
 		cls.annotations.exists[type.name == ANNOTATION_TYPE_NAME]
+	}
+	
+	def private createDefaultPhysicalSystem() {
+		val runtimeClass = createRuntimeClass => [
+			name = "DefaultRuntimeClass"
+			threadModel = ThreadModel.MULTI_THREADED
+		]
+		val nodeClass = createNodeClass => [
+			runtime = runtimeClass
+			priomin = 1
+			priomax = 10
+			threads += createPhysicalThread => [
+				name = "DefaultPhysicalThread"
+				^default = true
+				execmode = ExecMode.MIXED
+				time = 100
+				prio = 5
+				stacksize = 1024
+				msgblocksize = 64
+				msgpoolsize = 100
+			]
+		]
+		createPhysicalSystem => [
+			name = "GenericPhysicalSystem"
+			nodeRefs += createNodeRef => [
+				name = "node"
+				type = nodeClass
+			]
+		]
 	}
 }
