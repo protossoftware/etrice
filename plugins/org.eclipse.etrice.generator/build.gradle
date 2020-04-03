@@ -1,14 +1,14 @@
 dependencies {
-	compile project(':plugins:org.eclipse.etrice.core.common')
-	compile project(':plugins:org.eclipse.etrice.core.config')
-	compile project(':plugins:org.eclipse.etrice.core.fsm')
-	compile project(':plugins:org.eclipse.etrice.core.genmodel')
-	compile project(':plugins:org.eclipse.etrice.core.room')
-	compile project(':plugins:org.eclipse.etrice.core.etphys')
-	compile project(':plugins:org.eclipse.etrice.core.etmap')
-	compile project(':plugins:org.eclipse.etrice.generator.base')
-	compile project(':plugins:org.eclipse.etrice.generator.fsm')
+	api project(':plugins:org.eclipse.etrice.core.common')
+	api project(':plugins:org.eclipse.etrice.core.config')
+	api project(':plugins:org.eclipse.etrice.core.fsm')
+	api project(':plugins:org.eclipse.etrice.core.genmodel')
+	api project(':plugins:org.eclipse.etrice.core.room')
+	api project(':plugins:org.eclipse.etrice.core.etphys')
+	api project(':plugins:org.eclipse.etrice.core.etmap')
+	api project(':plugins:org.eclipse.etrice.generator.base')
+	api project(':plugins:org.eclipse.etrice.generator.fsm')
 	
-	compile "org.eclipse.xtend:org.eclipse.xtend.lib:$versions.xtext"
-	compile "org.eclipse.xtext:org.eclipse.xtext:$versions.xtext"
+	api "org.eclipse.xtend:org.eclipse.xtend.lib:$versions.xtext"
+	api "org.eclipse.xtext:org.eclipse.xtext:$versions.xtext"
 }

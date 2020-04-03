@@ -1,5 +1,5 @@
 dependencies {
-	compile project(':plugins:org.eclipse.etrice.core.common')
-	compile project(':plugins:org.eclipse.etrice.core.room')
-	compile project(':plugins:org.eclipse.etrice.core.genmodel.fsm')
+	api project(':plugins:org.eclipse.etrice.core.common')
+	api project(':plugins:org.eclipse.etrice.core.room')
+	api project(':plugins:org.eclipse.etrice.core.genmodel.fsm')
 }

@@ -5,13 +5,13 @@ configurations {
 }
 
 dependencies {
-	compile project(':plugins:org.eclipse.etrice.core.etmap')
-	compile project(':plugins:org.eclipse.etrice.core.genmodel')
-	compile project(':plugins:org.eclipse.etrice.core.genmodel.fsm')
-	compile project(':plugins:org.eclipse.etrice.generator')
-	compile project(':plugins:org.eclipse.etrice.generator.fsm')
+	api project(':plugins:org.eclipse.etrice.core.etmap')
+	api project(':plugins:org.eclipse.etrice.core.genmodel')
+	api project(':plugins:org.eclipse.etrice.core.genmodel.fsm')
+	api project(':plugins:org.eclipse.etrice.generator')
+	api project(':plugins:org.eclipse.etrice.generator.fsm')
 	
-	compile "org.eclipse.xtend:org.eclipse.xtend.lib:$versions.xtext"
+	api "org.eclipse.xtend:org.eclipse.xtend.lib:$versions.xtext"
 }
 
 artifacts {

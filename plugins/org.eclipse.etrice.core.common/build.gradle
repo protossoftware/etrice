@@ -1,9 +1,9 @@
 dependencies {
-	compile "org.eclipse.xtend:org.eclipse.xtend.lib:$versions.xtext"
-	compile "org.eclipse.platform:org.eclipse.core.runtime:$versions.core_runtime"
-	compile "org.eclipse.platform:org.eclipse.core.resources:$versions.core_resources"
-	compile "org.eclipse.xtext:org.eclipse.xtext:$versions.xtext"
-	compile "com.google.guava:guava:$versions.guava"
+	api "org.eclipse.xtend:org.eclipse.xtend.lib:$versions.xtext"
+	api "org.eclipse.platform:org.eclipse.core.runtime:$versions.core_runtime"
+	api "org.eclipse.platform:org.eclipse.core.resources:$versions.core_resources"
+	api "org.eclipse.xtext:org.eclipse.xtext:$versions.xtext"
+	api "com.google.guava:guava:$versions.guava"
 	
-	compile project(':plugins:org.eclipse.etrice.generator.base')
+	api project(':plugins:org.eclipse.etrice.generator.base')
 }

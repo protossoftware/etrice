@@ -1,8 +1,8 @@
 dependencies {
-	compile project(':plugins:org.eclipse.etrice.core.fsm')
-	compile project(':plugins:org.eclipse.etrice.generator.base')
+	api project(':plugins:org.eclipse.etrice.core.fsm')
+	api project(':plugins:org.eclipse.etrice.generator.base')
 	
-	compile "org.eclipse.xtext:org.eclipse.xtext:$versions.xtext"
+	api "org.eclipse.xtext:org.eclipse.xtext:$versions.xtext"
 }
 
 sourceSets {

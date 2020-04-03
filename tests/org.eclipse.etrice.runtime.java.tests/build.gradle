@@ -3,8 +3,8 @@ plugins {
 }
 
 dependencies {
-	testCompile project(':runtime:org.eclipse.etrice.runtime.java')
-	testCompile 'junit:junit:4.12'
+	testImplementation project(':runtime:org.eclipse.etrice.runtime.java')
+	testImplementation 'junit:junit:4.12'
 }
 
 sourceSets.test.java.srcDirs = ['src']
