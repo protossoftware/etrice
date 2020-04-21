@@ -32,7 +32,6 @@ model {
 }
 
 zipSource {
-	def srcDirs = 
 	from(['src/common', 'src/config', 'src/util']) {
 		into 'src'
 	}

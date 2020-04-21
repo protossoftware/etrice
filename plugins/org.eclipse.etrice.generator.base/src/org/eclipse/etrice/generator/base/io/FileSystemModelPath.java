@@ -180,10 +180,11 @@ public class FileSystemModelPath implements IModelPath {
 		if(uri.isFile()) {
 			/* 
 			 * If the authority of the uri is non-empty,
-			 * URI.toFileString produces an invalid file string that can't be parsed by Paths.get.
-			 * So we create the path directly from the device and segments of the uri.
+			 * URI.toFileString produces a file string containing the authority that can't be parsed by Paths.get.
+			 * So we create the path directly from the device and segments of the uri and convert it to an absolute path if necessary.
 			 */
-			return Optional.of(Paths.get(uri.hasDevice() ? uri.device() : "", uri.segments()));
+			Path path = Paths.get(uri.hasDevice() ? uri.device() : "", uri.segments());
+			return Optional.of(uri.hasAbsolutePath() ? path.toAbsolutePath() : path);
 		}
 		return Optional.empty();
 	}
