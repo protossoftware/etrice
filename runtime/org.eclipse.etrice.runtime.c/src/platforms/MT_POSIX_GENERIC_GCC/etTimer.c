@@ -66,7 +66,6 @@ static void timerThreadFunction(void* data) {
 	while (ET_TRUE) {
 		etTimer* it;
 		int idx;
-		int signaled = ET_FALSE;
 
 #ifdef DEBUG_TIMER
 		printf("timerThreadFunction: waiting\n"); fflush(stdout);
@@ -85,14 +84,9 @@ static void timerThreadFunction(void* data) {
 #endif
 				it->osTimerData.signaled = ET_FALSE;
 				it->timerFunction(it->timerFunctionData);
-				signaled = ET_TRUE;
 			}
 		}
 		etMutex_leave(&timer_mutex);
-
-		if (!signaled) {
-			etLogger_logError("timerThreadFunction: signaled timer NOT found\n");
-		}
 	}
 }
 
@@ -100,9 +94,8 @@ static void timerHandler(int sig, siginfo_t *si, void *uc) {
 	etTimer* timer = si->si_value.sival_ptr;
 	int sval = 0;
 
-	etMutex_enter(&timer_mutex);
+	/* Do not acquire the timer mutex in the handler! See signal-safety in linux manual. */
 	timer->osTimerData.signaled = ET_TRUE;
-	etMutex_leave(&timer_mutex);
 
 	sem_getvalue(&(timer_sema.osData), &sval);
 	if (sval==0)
@@ -164,8 +157,7 @@ void etTimer_construct(etTimer* self, etTime* timerInterval, etTimerFunction tim
 			self->osTimerData.te.sigev_signo = TIMER_SIGNAL;
 			self->osTimerData.te.sigev_value.sival_ptr = self;
 			if (timer_create(CLOCK_REALTIME, &self->osTimerData.te, &self->osTimerData.timerid) != 0) {
-				fprintf(stderr, "etTimer_construct: failed creating a timer\n");
-				fflush(stderr);
+				etLogger_logError("etTimer_construct: failed creating a timer");
 				return;
 			}
 #ifdef DEBUG_TIMER
@@ -207,7 +199,6 @@ void etTimer_start(etTimer* self){
 					etLogger_logErrorF("etTimer_start: failed starting a timer with errno %d", errno);
 					break;
 				}
-				fflush(stderr);
 			}
 		}
 	}
