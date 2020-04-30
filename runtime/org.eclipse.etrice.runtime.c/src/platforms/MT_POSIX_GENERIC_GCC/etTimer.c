@@ -94,7 +94,13 @@ static void timerHandler(int sig, siginfo_t *si, void *uc) {
 	etTimer* timer = si->si_value.sival_ptr;
 	int sval = 0;
 
-	/* Do not acquire the timer mutex in the handler! See signal-safety in linux manual. */
+	/*
+	 * Do not acquire the timer mutex in the handler!
+	 * See signal-safety in linux manual.
+	 * Amongst other things, this can cause deadlocks
+	 * when the thread that executes the signal handler already holds the lock
+	 * and then tries to acquire it again in the signal handler.
+	 */
 	timer->osTimerData.signaled = ET_TRUE;
 
 	sem_getvalue(&(timer_sema.osData), &sval);

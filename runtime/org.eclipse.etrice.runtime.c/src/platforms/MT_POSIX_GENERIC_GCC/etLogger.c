@@ -16,6 +16,12 @@
 
 #include <stdarg.h>
 
+/*
+ * Error log messages are redirected to stdout to preserve the chronological order of the logs.
+ * Furthermore writing to stderr from threads other than the main thread sometimes causes segfaults.
+ * This seems to be related to the fact that stderr ist usually unbuffered whereas stdout is buffered.
+ * However, I could not comprehend the problem.
+ */
 
 void etLogger_logError(const char* message){
 	fprintf(stdout, "ERROR:   %s\n", message);
