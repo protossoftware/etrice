@@ -17,6 +17,7 @@ package org.eclipse.etrice.generator.doc;
 import java.util.List;
 
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.etrice.core.etmap.util.ETMapUtil;
 import org.eclipse.etrice.core.genmodel.etricegen.Root;
 import org.eclipse.etrice.generator.base.AbstractGenerator;
 import org.eclipse.etrice.generator.base.args.Arguments;
@@ -51,6 +52,8 @@ public class Main extends AbstractGenerator {
 			logger.logError("errors during build of generator model");
 			return GENERATOR_ERROR;
 		}
+		
+		ETMapUtil.processModels(genModel, getResourceSet(), diagnostician);
 		
 		mainGenerator.doGenerate(genModel, arguments, fileIO);
 		
