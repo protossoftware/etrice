@@ -43,6 +43,8 @@ public class MultiplicityConverter extends AbstractValueConverter<Integer> {
 		String val = string.substring(first, last);
 		try {
 			int intValue = Integer.parseInt(val);
+			if(intValue <= 0)
+				throw new ValueConverterException("multiplicity must be positive or any [*]", node, null);
 			return Integer.valueOf(intValue);
 		}
 		catch (NumberFormatException e) {

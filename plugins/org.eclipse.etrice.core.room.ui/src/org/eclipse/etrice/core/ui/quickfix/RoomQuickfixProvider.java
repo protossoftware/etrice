@@ -38,6 +38,7 @@ import org.eclipse.etrice.core.room.MessageData;
 import org.eclipse.etrice.core.room.ReferenceType;
 import org.eclipse.etrice.core.room.StandardOperation;
 import org.eclipse.etrice.core.validation.RoomJavaValidator;
+import org.eclipse.etrice.core.validation.WiringValidator;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.xtext.conversion.impl.QualifiedNameValueConverter;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
@@ -146,29 +147,7 @@ public class RoomQuickfixProvider extends FSMQuickfixProvider {
 		});
 	}
 	
-	@Fix(RoomJavaValidator.ACTOR_REF_CHANGE_REF_TYPE_TO_FIXED_OR_MULT_TO_ANY)
-	public void makeActorRefRefTypeFixed(final Issue issue, IssueResolutionAcceptor acceptor) {
-		acceptor.accept(issue, "Make actor reference fixed", "[fixed] ActorRef...", "add.gif", new ISemanticModification() {
-			@Override
-			public void apply(EObject element, IModificationContext context) throws Exception {
-				ActorRef ar = (ActorRef) element;
-				ar.setRefType(ReferenceType.FIXED);
-			}
-		});
-	}
-	
-	@Fix(RoomJavaValidator.ACTOR_REF_CHANGE_REF_TYPE_TO_FIXED_OR_MULT_TO_ANY)
-	public void makeMultiplicityAny(final Issue issue, IssueResolutionAcceptor acceptor) {
-		acceptor.accept(issue, "Change multiplicity to any", "ActorRef "+issue.getData()[0]+"[*]", "add.gif", new ISemanticModification() {
-			@Override
-			public void apply(EObject element, IModificationContext context) throws Exception {
-				ActorRef ar = (ActorRef) element;
-				ar.setMultiplicity(-1);
-			}
-		});
-	}
-	
-	@Fix(RoomJavaValidator.ACTOR_REF_CHANGE_REF_TYPE_TO_OPTIONAL)
+	@Fix(WiringValidator.ACTOR_REF_CHANGE_REF_TYPE_TO_OPTIONAL)
 	public void makeActorRefRefTypeOptional(final Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, "Make actor reference fixed", "optional ActorRef...", "add.gif", new ISemanticModification() {
 			@Override

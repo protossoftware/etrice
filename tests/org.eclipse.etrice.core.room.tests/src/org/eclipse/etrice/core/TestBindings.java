@@ -21,7 +21,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.Binding;
 import org.eclipse.etrice.core.room.RoomModel;
-import org.eclipse.etrice.core.validation.RoomJavaValidator;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -80,13 +79,6 @@ public class TestBindings extends TestBase {
 		bind = getBinding("Example7", 0);
 		diag = getDiag(bind).getChildren().get(0);
 		assertEquals("derived protocols not connectable (both directions extended)", diag.getMessage());
-		
-		diag = getDiag(resource.getEObject("ActorClass:Example8"));
-		assertEquals(2, diag.getChildren().size());
-		Diagnostic childDiag = diag.getChildren().get(0);
-		assertEquals(RoomJavaValidator.A_REPLICATED_PORT_MUST_HAVE_AT_MOST_ONE_REPLICATED_PEER, childDiag.getMessage());
-		childDiag = diag.getChildren().get(1);
-		assertEquals(RoomJavaValidator.A_REPLICATED_PORT_MUST_HAVE_AT_MOST_ONE_REPLICATED_PEER, childDiag.getMessage());
 	}
 	
 	@Test

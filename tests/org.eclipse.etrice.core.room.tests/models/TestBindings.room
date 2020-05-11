@@ -83,21 +83,6 @@ RoomModel TestBindings {
 		}
 	}
 	
-	ActorClass Example8 {
-		Structure {
-			ActorRef ref1: AC5a
-			ActorRef ref2: AC6a
-			ActorRef ref3: AC5a
-			ActorRef ref4: AC6a
-	
-			// a replicated port must have at most one replicated peer
-			Binding ref1.p and ref2.pc 
-			Binding ref2.pc and ref3.p 
-			Binding ref3.p and ref4.pc 
-		}
-	}
-
-
 	// helper actor classes
 		
 	ActorClass AC1 {

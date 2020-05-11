@@ -50,7 +50,6 @@ import org.eclipse.etrice.core.room.ActorInstanceMapping;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.Attribute;
 import org.eclipse.etrice.core.room.Binding;
-import org.eclipse.etrice.core.room.BindingEndPoint;
 import org.eclipse.etrice.core.room.CommunicationType;
 import org.eclipse.etrice.core.room.CompoundProtocolClass;
 import org.eclipse.etrice.core.room.DataClass;
@@ -76,7 +75,6 @@ import org.eclipse.etrice.core.room.RoomModel;
 import org.eclipse.etrice.core.room.RoomPackage;
 import org.eclipse.etrice.core.room.ServiceImplementation;
 import org.eclipse.etrice.core.room.StandardOperation;
-import org.eclipse.etrice.core.room.StructureClass;
 import org.eclipse.etrice.core.room.SubSystemClass;
 import org.eclipse.etrice.core.room.util.RoomHelpers;
 import org.eclipse.etrice.generator.base.io.IModelPath;
@@ -111,19 +109,12 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	
 	@Inject ImportHelpers importHelpers;
 
-	/* message strings */
-	public static final String OPTIONAL_REFS_HAVE_TO_HAVE_MULTIPLICITY_ANY = "optional refs have to have multiplicity any [*]";
-	public static final String MULTIPLICITY_ANY_REQUIRES_OPTIONAL = "multiplicity any [*] requires optional";
-	public static final String A_REPLICATED_PORT_MUST_HAVE_AT_MOST_ONE_REPLICATED_PEER = "a replicated port must have at most one replicated peer (with arbitrary multiplicity each)";
-
 	/* tags for quick fixes */
 	public static final String WRONG_MODEL_NAME = "RoomJavaValidator.WrongModelName";
 	public static final String THREAD_MISSING = "RoomJavaValidator.ThreadMissing";
 	public static final String DUPLICATE_ACTOR_INSTANCE_MAPPING = "RoomJavaValidator.DuplicateActorInstanceMapping";
 	public static final String WRONG_NAMESPACE = "RoomJavaValidator.WrongNamespace";
 	public static final String CIRCULAR_CONTAINMENT = "RoomJavaValidator.CircularContainment";
-	public static final String ACTOR_REF_CHANGE_REF_TYPE_TO_FIXED_OR_MULT_TO_ANY = "RoomJavaValidator.ActorRefChangeRefTypeToFixed";
-	public static final String ACTOR_REF_CHANGE_REF_TYPE_TO_OPTIONAL = "RoomJavaValidator.ActorRefChangeRefTypeToOptional";
 	public static final String CHANGE_DESTRUCTOR_NAME = "RoomJavaValidator.ChangeDestructorName";
 	public static final String CHANGE_CONSTRUCTOR_NAME = "RoomJavaValidator.ChangeConstructorName";
 	public static final String INVALID_ANNOTATION_TARGET = "RoomJavaValidator.InvalidAnnotationTarget";
@@ -221,40 +212,6 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 		if (ar.getRefType()==ReferenceType.FIXED && ar.getType().isAbstract()) {
 			error("A (fixed) actor reference must not be of an abstract type", null);
 		}
-
-		// check actor ref array upper bound
-		if (ar.getMultiplicity()<0) {
-			// multiplicity * requires optional
-			if (ar.getRefType()!=ReferenceType.OPTIONAL)
-				error(MULTIPLICITY_ANY_REQUIRES_OPTIONAL,
-						RoomPackage.eINSTANCE.getActorRef_RefType(), ACTOR_REF_CHANGE_REF_TYPE_TO_OPTIONAL);
-		}
-		else if (ar.getMultiplicity()>1) {
-			// fixed multiplicity requires fixed type
-			if (ar.getRefType()==ReferenceType.OPTIONAL)
-				error(OPTIONAL_REFS_HAVE_TO_HAVE_MULTIPLICITY_ANY,
-						RoomPackage.eINSTANCE.getActorRef_RefType(), ACTOR_REF_CHANGE_REF_TYPE_TO_FIXED_OR_MULT_TO_ANY, ar.getName());
-		}
-
-		// check actor ref array has ports with fixed multiplicity
-		if (ar!=null) {
-			ActorClass ac = ar.getType();
-			if (ar.getMultiplicity()>1) {
-				for (Port p : ac.getInterfacePorts()) {
-					if (p.getMultiplicity()<0) {
-						//int idx = ((ActorContainerClass)ar.eContainer()).getActorRefs().indexOf(ar);
-						error("replicated actor must not have replicated port with arbitrary multiplicity", null);
-					}
-				}
-			}
-		}
-	}
-
-	@Check
-	public void checkLayerConnectiontarget(LayerConnection lc) {
-		if (lc.getTo().getRef() instanceof ActorRef)
-			if (((ActorRef)lc.getTo().getRef()).getMultiplicity()>1)
-				error("layer connection must not connect to replicated actor", null);
 	}
 
 	@Check
@@ -431,38 +388,6 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 	}
 
 	@Check
-	public void checkPortCompatibility(Binding bind) {
-		// don't validate if unresolved, this is already be an error
-		if(EcoreUtil.ExternalCrossReferencer.find(bind).keySet().stream().anyMatch(eObj -> eObj.eIsProxy()))
-			return;
-		// don't validate if protocols are missing or null (NPE), this is an error at the interface item
-		if(bind.getEndpoint1().getPort().getProtocol().eIsProxy() || bind.getEndpoint2().getPort().getProtocol().eIsProxy())
-			return;
-		
-		Result result = validationUtil.isValid(bind);
-		if (!result.isOk()) {
-			error(result.getMsg(), bind, null);
-		}
-	}
-
-	@Check
-	public void checkServiceCompatibility(LayerConnection conn) {
-		// don't validate if unresolved, this is already an error
-		if(EcoreUtil.ExternalCrossReferencer.find(conn).keySet().stream().anyMatch(eObj -> eObj.eIsProxy()))
-			return;
-		// don't validate if protocols are missing or null (NPE), this is an error at the interface item
-		if(conn.getFrom() instanceof RelaySAPoint && ((RelaySAPoint) conn.getFrom()).getRelay().getProtocol().eIsProxy())
-			return;
-		if(conn.getTo().getService().getProtocol().eIsProxy()) 
-			return;
-		
-		Result result = validationUtil.isValid(conn);
-		if (!result.isOk()) {
-			error(result.getMsg(), RoomPackage.eINSTANCE.getLayerConnection_From());
-		}
-	}
-
-	@Check
 	public void checkPortCommunicationCompatibility(ActorClass ac){
 		if(ac.getCommType() == ComponentCommunicationType.SYNCHRONOUS){
 			// not supported yet
@@ -508,16 +433,41 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 				}
 		}
 	}
+	
+	@Check
+	public void checkPortCompatibility(Binding bind) {
+		// don't validate if unresolved, this is already an error
+		if (EcoreUtil.ExternalCrossReferencer.find(bind).keySet().stream().anyMatch(eObj -> eObj.eIsProxy()))
+			return;
+		// don't validate if protocols are missing or null (NPE), this is an error at
+		// the interface item
+		if (bind.getEndpoint1().getPort().getProtocol().eIsProxy()
+				|| bind.getEndpoint2().getPort().getProtocol().eIsProxy())
+			return;
+
+		Result result = validationUtil.isValid(bind);
+		if (!result.isOk()) {
+			error(result.getMsg(), bind, null);
+		}
+	}
 
 	@Check
-	public void checkPort(Port port) {
-		if (port.getMultiplicity()==0)
-			error("multiplicity must not be 0", RoomPackage.eINSTANCE.getPort_Multiplicity());
-		if (port.getMultiplicity()<-1)
-			error("multiplicity must be -1 or positive", RoomPackage.eINSTANCE.getPort_Multiplicity());
-		if (port.getProtocol() instanceof ProtocolClass)
-			if (((ProtocolClass)port.getProtocol()).getCommType()==CommunicationType.DATA_DRIVEN && port.getMultiplicity()!=1)
-			error("multiplicity must be 1 for data driven ports", RoomPackage.eINSTANCE.getPort_Multiplicity());
+	public void checkServiceCompatibility(LayerConnection conn) {
+		// don't validate if unresolved, this is already an error
+		if (EcoreUtil.ExternalCrossReferencer.find(conn).keySet().stream().anyMatch(eObj -> eObj.eIsProxy()))
+			return;
+		// don't validate if protocols are missing or null (NPE), this is an error at
+		// the interface item
+		if (conn.getFrom() instanceof RelaySAPoint
+				&& ((RelaySAPoint) conn.getFrom()).getRelay().getProtocol().eIsProxy())
+			return;
+		if (conn.getTo().getService().getProtocol().eIsProxy())
+			return;
+
+		Result result = validationUtil.isValid(conn);
+		if (!result.isOk()) {
+			error(result.getMsg(), RoomPackage.eINSTANCE.getLayerConnection_From());
+		}
 	}
 
 	@Check
@@ -697,34 +647,6 @@ public class RoomJavaValidator extends AbstractRoomJavaValidator {
 		});
 	}
 		
-	@Check
-	public void checkReplicatedPortBindingPatterns(StructureClass sc) {
-		HashSet<String> haveReplPeer = new HashSet<String>();
-		for (Binding bind : sc.getBindings()) {
-			// don't validate if unresolved, this is already be an error
-			if(EcoreUtil.ExternalCrossReferencer.find(bind).keySet().stream().anyMatch(eObj -> eObj.eIsProxy()))
-				continue;
-			
-			Port p1 = bind.getEndpoint1().getPort();
-			Port p2 = bind.getEndpoint2().getPort();
-			if (p1.getMultiplicity()<0 && p2.getMultiplicity()<0) {
-				if (!haveReplPeer.add(getEndpointKey(bind.getEndpoint1())))
-					error(A_REPLICATED_PORT_MUST_HAVE_AT_MOST_ONE_REPLICATED_PEER,
-							bind,
-							RoomPackage.Literals.BINDING__ENDPOINT1);
-				if (!haveReplPeer.add(getEndpointKey(bind.getEndpoint2())))
-					error(A_REPLICATED_PORT_MUST_HAVE_AT_MOST_ONE_REPLICATED_PEER,
-							bind,
-							RoomPackage.Literals.BINDING__ENDPOINT2);
-			}
-		}
-	}
-	
-	private String getEndpointKey(BindingEndPoint ep) {
-		String ref = ep.getActorRef()==null? "" : ep.getActorRef().getName();
-		return ref + "#" + ep.getPort().getName();
-	}
-
 	@Check
 	public void checkPortClassContents(PortClass pc) {
 		if (pc.getAttributes().isEmpty() && pc.getMsgHandlers().isEmpty() && pc.getOperations().isEmpty())

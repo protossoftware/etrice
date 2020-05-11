@@ -104,6 +104,7 @@ Workflow {
                 composedCheck = "org.eclipse.etrice.core.validation.ValidatorExtensionManager"
                 composedCheck = "org.eclipse.etrice.core.validation.RoomNamesAreUniqueValidator"
                 composedCheck = "org.eclipse.etrice.core.validation.InterfaceContractValidator"
+                composedCheck = "org.eclipse.etrice.core.validation.WiringValidator"
             }
 
 			// scoping and exporting API

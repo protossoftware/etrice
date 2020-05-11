@@ -23,7 +23,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.etrice.core.room.ActorClass;
 import org.eclipse.etrice.core.room.ActorRef;
 import org.eclipse.etrice.core.room.ReferenceType;
-import org.eclipse.etrice.core.validation.RoomJavaValidator;
+import org.eclipse.etrice.core.validation.WiringValidator;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -74,20 +74,17 @@ public class TestDynamicActors extends TestBase {
 		ar = (ActorRef) resource.getEObject("ActorRef:Test$dfltArrayAny");
 		errors = getDiag(ar).getChildren();
 		assertEquals("ActorRef dfltArrayAny has one error", 1, errors.size());
-		assertEquals("ActorRef dfltArrayAny has error: "+RoomJavaValidator.MULTIPLICITY_ANY_REQUIRES_OPTIONAL,
-				RoomJavaValidator.MULTIPLICITY_ANY_REQUIRES_OPTIONAL,
+		assertEquals("ActorRef dfltArrayAny has error: "+WiringValidator.MULTIPLICITY_ANY_REQUIRES_OPTIONAL,
+				WiringValidator.MULTIPLICITY_ANY_REQUIRES_OPTIONAL,
 				errors.get(0).getMessage());
 		ar = (ActorRef) resource.getEObject("ActorRef:Test$fixArrayAny");
 		errors = getDiag(ar).getChildren();
 		assertEquals("ActorRef fixArrayAny has one error", 1, errors.size());
-		assertEquals("ActorRef fixArrayAny has error: "+RoomJavaValidator.MULTIPLICITY_ANY_REQUIRES_OPTIONAL,
-				RoomJavaValidator.MULTIPLICITY_ANY_REQUIRES_OPTIONAL,
+		assertEquals("ActorRef fixArrayAny has error: "+WiringValidator.MULTIPLICITY_ANY_REQUIRES_OPTIONAL,
+				WiringValidator.MULTIPLICITY_ANY_REQUIRES_OPTIONAL,
 				errors.get(0).getMessage());
 		ar = (ActorRef) resource.getEObject("ActorRef:Test$optArrayFixed");
 		errors = getDiag(ar).getChildren();
-		assertEquals("ActorRef optArrayFixed has one error", 1, errors.size());
-		assertEquals("ActorRef optArrayFixed has error: "+RoomJavaValidator.OPTIONAL_REFS_HAVE_TO_HAVE_MULTIPLICITY_ANY,
-				RoomJavaValidator.OPTIONAL_REFS_HAVE_TO_HAVE_MULTIPLICITY_ANY,
-				errors.get(0).getMessage());
+		assertTrue("ActorRef optArrayFixed has no errors", errors.isEmpty());
 	}
 }
